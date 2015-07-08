@@ -58,6 +58,7 @@ GroupTreeImpl::RemoveVisitor::
 RemoveVisitor(wxTreeCtrl* treectrl, ISprite* spr)
 	: m_treectrl(treectrl)
 	, m_spr(spr)
+	, m_finish(false)
 {
 	if (m_spr) {
 		m_spr->Retain();
@@ -92,7 +93,10 @@ VisitNonleaf(wxTreeItemId id)
 
 	fout << "GroupTreeImpl::RemoveVisitor::VisitNonleaf 2" << std::endl;
 
-	group->Remove(m_spr);
+	bool finish = group->Remove(m_spr);
+	if (finish) {
+		m_finish = true;
+	}
 
 	fout << "GroupTreeImpl::RemoveVisitor::VisitNonleaf 3" << std::endl;
 

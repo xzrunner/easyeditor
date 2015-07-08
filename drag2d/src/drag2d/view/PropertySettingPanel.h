@@ -24,9 +24,10 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr, bool clear);
 	virtual void SelectMultiSprites(SpriteSelection* selection);
-	virtual void ReorderSprite(ISprite* spr, bool up) {}
-	virtual void InsertSprite(ISprite* spr) {}
-	virtual void RemoveSprite(ISprite* spr) {}
+	virtual bool ReorderSprite(ISprite* spr, bool up) { return false; }
+	virtual bool InsertSprite(ISprite* spr) { return false; }
+	virtual bool RemoveSprite(ISprite* spr) { return false; }
+	virtual bool ClearAllSprite() { return false; }
 
 	//
 	//	interface IShapeViewPanel

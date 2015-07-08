@@ -162,7 +162,7 @@ void LibraryPanel::Refresh()
 	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
 
 	// stage
-	m_stage->getSpriteSelection()->Clear();
+	m_stage->GetSpriteSelection()->Clear();
 	m_stage->getShapeSelection()->Clear();
 
 	// view list

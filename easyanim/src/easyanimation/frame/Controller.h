@@ -42,7 +42,7 @@ public:
 
 	int GetMaxFrame() const;
 
-	void ClearLayers();
+	bool ClearAllLayer();
 	void InsertLayer(Layer* layer);
 	LayersMgr& GetLayers() { return layers; }
 

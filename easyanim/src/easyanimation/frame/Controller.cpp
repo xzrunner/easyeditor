@@ -160,9 +160,9 @@ int Controller::GetMaxFrame() const
 	return layers.GetMaxFrame();
 }
 
-void Controller::ClearLayers()
+bool Controller::ClearAllLayer()
 {
-	layers.clear();
+	return layers.clear();
 }
 
 void Controller::InsertLayer(Layer* layer)

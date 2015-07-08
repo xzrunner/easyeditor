@@ -26,7 +26,7 @@ namespace eanim
 
 		int getFrameCount() const;
 
-		void clear();
+		bool clear();
 
 //		void removeSprite(d2d::ISprite* sprite);
 

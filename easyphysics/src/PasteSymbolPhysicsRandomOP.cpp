@@ -38,7 +38,7 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 		if (body) {
 			body->getBody()->SetType(m_bStatic ? b2_staticBody : b2_dynamicBody);
 		}
-		m_panelImpl->insertSprite(sprite);
+		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}
 

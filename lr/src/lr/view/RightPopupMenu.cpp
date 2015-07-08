@@ -69,7 +69,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 	if (id == MENU_OPEN_WITH_SHAPE_ID)
 	{
 		std::vector<d2d::ISprite*> selected;
-		m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+		m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 		if (!selected.empty()) {
 			std::string cmd = "easyshape_new.exe " + selected[0]->getSymbol().GetFilepath();
 			WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		

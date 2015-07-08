@@ -29,14 +29,14 @@ DeleteSpriteAOP::~DeleteSpriteAOP()
 void DeleteSpriteAOP::undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites_impl->insertSprite(m_sprites[i]);
+		m_sprites_impl->InsertSprite(m_sprites[i]);
 	}
 }
 
 void DeleteSpriteAOP::redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites_impl->removeSprite(m_sprites[i]);
+		m_sprites_impl->RemoveSprite(m_sprites[i]);
 	}
 }
 

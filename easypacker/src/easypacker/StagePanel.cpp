@@ -32,27 +32,29 @@ StagePanel::StagePanel(wxWindow* parent,
 void StagePanel::Clear()
 {
 	EditPanel::Clear();
-	SpritesPanelImpl::clearSprites();
+	SpritesPanelImpl::ClearAllSprite();
 }
 
-void StagePanel::removeSprite(d2d::ISprite* sprite)
-{
-	d2d::SpritesPanelImpl::removeSprite(sprite);
-	arrangeAllSprites(false);
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
 	fixCoords(sprite);
 
-	d2d::SpritesPanelImpl::insertSprite(sprite);
+	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
 	arrangeAllSprites(false);
+	return ret;
+}
+
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+{
+	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
+	arrangeAllSprites(false);
+	return ret;
 }
 
 void StagePanel::insertSpriteNoArrange(d2d::ISprite* sprite)
 {
 //	fixCoords(sprite);
-	d2d::SpritesPanelImpl::insertSprite(sprite);
+	d2d::SpritesPanelImpl::InsertSprite(sprite);
 }
 
 void StagePanel::arrangeAllSprites(bool bClearSelection)
@@ -62,11 +64,11 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 	}
 
 	if (bClearSelection) {
-		m_spriteSelection->Clear();
+		m_sprite_selection->Clear();
 	}
 
 	std::vector<d2d::ImageSprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ImageSprite>(sprites), d2d::DT_EDITABLE);
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ImageSprite>(sprites), d2d::DT_EDITABLE);
 	m_strategy->arrange(sprites);
 }
 
@@ -84,7 +86,7 @@ void StagePanel::loadFromLibrary()
 		else 
 		{
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			d2d::SpritesPanelImpl::insertSprite(sprite);
+			d2d::SpritesPanelImpl::InsertSprite(sprite);
 		}
 	}
 

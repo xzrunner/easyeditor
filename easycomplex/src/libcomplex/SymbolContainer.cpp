@@ -30,15 +30,14 @@ bool SymbolContainer::Remove(Object* obj)
 	return d2d::ObjectVector<d2d::ISprite>::Remove(m_symbol->m_sprites, static_cast<d2d::ISprite*>(obj));
 }
 
-void SymbolContainer::Insert(Object* obj)
+bool SymbolContainer::Insert(Object* obj)
 {
-	d2d::ObjectVector<d2d::ISprite>::Insert(m_symbol->m_sprites, 
-		static_cast<d2d::ISprite*>(obj));
+	return d2d::ObjectVector<d2d::ISprite>::Insert(m_symbol->m_sprites, static_cast<d2d::ISprite*>(obj));
 }
 
-void SymbolContainer::Clear()
+bool SymbolContainer::Clear()
 {
-	d2d::ObjectVector<d2d::ISprite>::Clear(m_symbol->m_sprites);
+	return d2d::ObjectVector<d2d::ISprite>::Clear(m_symbol->m_sprites);
 }
 
 bool SymbolContainer::ResetOrder(const Object* obj, bool up)

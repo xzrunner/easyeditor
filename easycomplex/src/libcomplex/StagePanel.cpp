@@ -54,12 +54,32 @@ void StagePanel::Clear()
 	symbol->m_clipbox = d2d::Rect(0, 0);
 }
 
-void StagePanel::removeSprite(d2d::ISprite* sprite)
+bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
+{
+	bool ret = d2d::SpritesPanelImpl::ReorderSprite(sprite, up);
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->ReorderSprite(sprite, up, this);
+	}
+
+	return ret;
+}
+
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+{
+	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->InsertSprite(sprite, this);
+	}
+	return ret;
+}
+
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
 	std::ofstream fout("del_debug.txt", std::ios::app);
 	fout << "StagePanel::removeSprite begin" << std::endl;
 
-	d2d::SpritesPanelImpl::removeSprite(sprite);
+	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->RemoveSprite(sprite, this);
 	}
@@ -68,24 +88,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 	fout.close();
 
-//	wxRemoveFile("del_debug.txt");
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
-{
-	d2d::SpritesPanelImpl::insertSprite(sprite);
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this);
-	}
-}
-
-bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
-{
-	bool ret = d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->ReorderSprite(sprite, up, this);
-	}
+	//	wxRemoveFile("del_debug.txt");
 
 	return ret;
 }

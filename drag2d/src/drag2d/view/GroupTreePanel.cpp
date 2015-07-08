@@ -42,30 +42,35 @@ void GroupTreePanel::SelectMultiSprites(SpriteSelection* selection)
 	}
 }
 
-void GroupTreePanel::ReorderSprite(ISprite* spr, bool up)
+bool GroupTreePanel::ReorderSprite(ISprite* spr, bool up)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);
 	m_grouptree->Traverse(visitor);
 	wxTreeItemId id = visitor.GetItemID();
 	if (id.IsOk()) {
-		m_grouptree->ReorderItem(id, up);
+		return m_grouptree->ReorderItem(id, up);
+	} else {
+		return false;
 	}
 }
 
-void GroupTreePanel::InsertSprite(ISprite* spr)
+bool GroupTreePanel::InsertSprite(ISprite* spr)
 {
-	m_grouptree->AddSprite(spr);
+	wxTreeItemId id = m_grouptree->AddSprite(spr);
+	return id != m_grouptree->GetRootID();
 }
 
-void GroupTreePanel::RemoveSprite(ISprite* spr)
+bool GroupTreePanel::RemoveSprite(ISprite* spr)
 {
 	std::ofstream fout("del_debug.txt", std::ios::app);
 	fout << "GroupTreePanel::RemoveSprite 0" << std::endl;
 
-	m_grouptree->Remove(spr);
+	bool finish = m_grouptree->Remove(spr);
 	fout << "GroupTreePanel::RemoveSprite 1" << std::endl;
 
 	fout.close();
+
+	return finish;
 }
 
 void GroupTreePanel::StoreToFile(Json::Value& value) const

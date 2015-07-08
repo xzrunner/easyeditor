@@ -74,7 +74,7 @@ StagePanel::~StagePanel()
 void StagePanel::Clear()
 {
 	d2d::EditPanel::Clear();
-	clearSprites();
+	ClearAllSprite();
 	clearShapes();
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
@@ -82,7 +82,82 @@ void StagePanel::Clear()
 	}
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
+bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
+{
+	bool ret = false;
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->ResetOrderSprite(sprite, up)) {
+			ret = true;
+			break;
+		}
+	}
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->ReorderSprite(sprite, up, this);
+	}
+
+	return ret;
+}
+
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+{
+	GetCurrLayer()->InsertSprite(sprite);
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->InsertSprite(sprite, this);
+	}
+
+	if (m_sindex) {
+		m_sindex->Insert(sprite);
+	}
+	if (m_pathfinding) {
+		m_pathfinding->DisableRegion(sprite, false);
+	}
+
+	std::string filepath = sprite->getSymbol().GetFilepath();
+	if (CharacterFileName::IsValidFilepath(filepath)) {
+		CharacterFileName name(filepath);
+		m_chara_dirs.BuildSymbolDirections(name);
+	}
+
+	return true;
+}
+
+void StagePanel::RemoveSprite(d2d::ISprite* sprite)
+{
+	bool ret = false;
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->RemoveSprite(sprite)) {
+			ret = true;
+			break;
+		}
+	}
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->RemoveSprite(sprite, this);
+	}
+
+	if (m_pathfinding) {
+		m_pathfinding->DisableRegion(sprite, true);
+	}
+
+	return ret;
+}
+
+bool StagePanel::ClearAllSprite()
+{
+	bool ret = !m_layers.empty();
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		m_layers[i]->ClearSprite();
+	}
+	return ret;
+}
+
+void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
@@ -105,73 +180,6 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 			}
 		}
 	}
-}
-
-void StagePanel::removeSprite(d2d::ISprite* sprite)
-{
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (layer->RemoveSprite(sprite)) {
-			break;
-		}
-	}
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->RemoveSprite(sprite, this);
-	}
-
-	if (m_pathfinding) {
-		m_pathfinding->DisableRegion(sprite, true);
-	}
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
-{
-	GetCurrLayer()->InsertSprite(sprite);
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this);
-	}
-
-	if (m_sindex) {
-		m_sindex->Insert(sprite);
-	}
-	if (m_pathfinding) {
-		m_pathfinding->DisableRegion(sprite, false);
-	}
-
-	std::string filepath = sprite->getSymbol().GetFilepath();
-	if (CharacterFileName::IsValidFilepath(filepath)) {
-		CharacterFileName name(filepath);
-		m_chara_dirs.BuildSymbolDirections(name);
-	}
-}
-
-void StagePanel::clearSprites()
-{
-	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		m_layers[i]->ClearSprite();
-	}
-}
-
-bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
-{
-	bool ret = false;
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (layer->ResetOrderSprite(sprite, up)) {
-			ret = true;
-			break;
-		}
-	}
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->ReorderSprite(sprite, up, this);
-	}
-
-	return ret;
 }
 
 void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const

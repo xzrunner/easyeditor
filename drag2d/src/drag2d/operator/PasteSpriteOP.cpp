@@ -16,7 +16,7 @@ PasteSpriteOP::PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl
 	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)
 {
-	m_selection = spritesImpl->getSpriteSelection();
+	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
 	m_pos.setInvalid();
@@ -186,7 +186,7 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 
 		ISprite* newOne = sprite->Clone();
 		newOne->setTransform(fixed + pos, newOne->getAngle());
-		spritesImpl->insertSprite(newOne);
+		spritesImpl->InsertSprite(newOne);
 		newOne->Release();
 	}
 }

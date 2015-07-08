@@ -22,12 +22,12 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void traverseSprites(d2d::IVisitor& visitor, 
+	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
+	virtual bool InsertSprite(d2d::ISprite* sprite);
+	virtual bool RemoveSprite(d2d::ISprite* sprite);
+	virtual bool ClearAllSprite();
+	virtual void TraverseSprites(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
-	virtual void removeSprite(d2d::ISprite* sprite);
-	virtual void insertSprite(d2d::ISprite* sprite);
-	virtual void clearSprites();
-	virtual bool resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
 	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;

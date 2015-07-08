@@ -93,7 +93,7 @@ namespace edb
 		d2d::ISprite* sprite = querySpriteByID(event.GetItem());
 		if (!sprite) return;
 		
-		d2d::SpriteSelection* selection = Context::Instance()->stage->getSpriteSelection();
+		d2d::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
 		selection->Clear();
 		selection->Add(sprite);
 

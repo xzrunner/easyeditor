@@ -20,7 +20,7 @@ void Love2dCode::resolve()
 	lua::TableAssign ta(m_gen, "quads");
 
 	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];

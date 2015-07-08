@@ -33,7 +33,7 @@ void LayersPanel::removeLayer()
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
 
-	m_ctrl->GetStagePanel()->removeSpriteSelection();
+	m_ctrl->GetStagePanel()->ClearSpriteSelection();
 
 	layers.removeLayer(m_ctrl->layer());
 	if (layers.size() == 0) {

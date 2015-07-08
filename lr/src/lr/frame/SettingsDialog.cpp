@@ -129,7 +129,7 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 	cfg->m_terrain2d_anim = event.IsChecked();
 
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(sprites[i])) {
 			const_cast<eterrain2d::Symbol&>(terr->getSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);

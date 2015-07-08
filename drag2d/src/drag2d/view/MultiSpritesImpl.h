@@ -23,25 +23,14 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr, bool clear);
 	virtual void SelectMultiSprites(SpriteSelection* selection);
-	virtual void ReorderSprite(ISprite* spr, bool up);
-	virtual void InsertSprite(ISprite* spr);
-	virtual void RemoveSprite(ISprite* spr);
-
-	virtual void traverseSprites(IVisitor& visitor, 
+	virtual void TraverseSprites(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;
-	virtual void removeSprite(ISprite* sprite) = 0;
-	virtual void insertSprite(ISprite* sprite) = 0;
-	virtual void clearSprites() = 0;
-	virtual bool resetSpriteOrder(ISprite* sprite, bool up) = 0;
 
-	virtual ISprite* querySpriteByPos(const Vector& pos) const;
-	virtual void querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const;		
+	virtual ISprite* QuerySpriteByPos(const Vector& pos) const;
+	virtual void QuerySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const;		
 
-	SpriteSelection* getSpriteSelection() { return m_spriteSelection; }
-	void removeSpriteSelection();
-
-protected:
-	void refresh();
+	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
+	void ClearSpriteSelection();
 
 private:
 	class PointQueryVisitor : public IVisitor
@@ -81,7 +70,7 @@ private:
 	}; // RemoveSelectionVisitor
 
 protected:
-	SpriteSelection* m_spriteSelection;
+	SpriteSelection* m_sprite_selection;
 
 private:
 	wxWindow* m_wnd;

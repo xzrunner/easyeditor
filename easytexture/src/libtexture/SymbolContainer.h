@@ -20,8 +20,8 @@ public:
 	virtual void Traverse(d2d::IVisitor& visitor, bool order = true) const;
 	virtual void Traverse(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 	virtual bool Remove(Object* obj);
-	virtual void Insert(Object* obj);
-	virtual void Clear();
+	virtual bool Insert(Object* obj);
+	virtual bool Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
 
 private:

@@ -22,7 +22,7 @@ JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name,
 
 void JointEditCmpt::updateControlValue()
 {
-	d2d::SpriteSelection* selection = static_cast<StagePanel*>(m_stage)->getSpriteSelection();
+	d2d::SpriteSelection* selection = static_cast<StagePanel*>(m_stage)->GetSpriteSelection();
 
 	if (selection->Size() != 2)
 		m_btnOK->Enable(false);
@@ -95,7 +95,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 
 	std::vector<d2d::ISprite*> sprites;
-	d2d::SpriteSelection* selection = editPanel->getSpriteSelection();
+	d2d::SpriteSelection* selection = editPanel->GetSpriteSelection();
 	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	assert(sprites.size() == 2);
 	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->GetUserData()),

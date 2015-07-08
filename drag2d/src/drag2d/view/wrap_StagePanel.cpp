@@ -37,7 +37,7 @@ namespace d2d
 		if (!MODULE_STAGE.impl)
 			return 0;
 
-		SpriteSelection* sel = MODULE_STAGE.impl->getSpriteSelection();
+		SpriteSelection* sel = MODULE_STAGE.impl->GetSpriteSelection();
 		if (!sel)
 			return 0;
 
@@ -53,7 +53,7 @@ namespace d2d
 		float x = (float)luaL_checknumber(L, 1);
 		float y = (float)luaL_checknumber(L, 2);
 		std::vector<ISprite*> sprites;
-		MODULE_STAGE.impl->traverseSprites(FetchAllVisitor<ISprite>(sprites));
+		MODULE_STAGE.impl->TraverseSprites(FetchAllVisitor<ISprite>(sprites));
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			ISprite* s = sprites[i];
@@ -70,7 +70,7 @@ namespace d2d
 
 		ISprite* t = luax_checksprite(L, 1);
 		if (t)
-			MODULE_STAGE.impl->insertSprite(t);
+			MODULE_STAGE.impl->InsertSprite(t);
 		return 0;
 	}
 

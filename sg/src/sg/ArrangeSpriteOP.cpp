@@ -27,18 +27,18 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = stage->querySpriteByPos(pos);
+	d2d::ISprite* selected = stage->QuerySpriteByPos(pos);
 	if (!selected) {
 		return false;
 	}
 
 	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = sprites[i];
 		if (&s->getSymbol() == &selected->getSymbol()) {
-			stage->getSpriteSelection()->Add(s);
+			stage->GetSpriteSelection()->Add(s);
 		}
 	}
 

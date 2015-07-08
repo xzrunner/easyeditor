@@ -37,10 +37,62 @@ StagePanel::~StagePanel()
 void StagePanel::Clear()
 {
 	EditPanel::Clear();
-	clearSprites();
+	ClearAllSprite();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, 
+bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
+{
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	return frame->Reorder(sprite, up);
+}
+
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+{
+	SpriteUserData* ud = (SpriteUserData*)sprite->GetUserData();
+ 	int old_layer = m_ctrl->layer(),
+ 		old_frame = m_ctrl->frame();
+	if (ud) {
+		ud->frame = old_frame;
+		m_ctrl->setCurrFrame(ud->layer, old_frame);
+	}
+
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	assert(frame);
+	frame->Insert(sprite);
+	Refresh();
+
+	if (ud) {
+		m_ctrl->setCurrFrame(old_layer, old_frame);
+	}
+
+	m_ctrl->Refresh();
+
+	return true;
+}
+
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+{
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	bool success = frame->Remove(sprite);
+	if (success) {
+		m_ctrl->Refresh();
+	}
+	return success;
+}
+
+bool StagePanel::ClearAllSprite()
+{
+	bool ret = m_ctrl->ClearAllLayer();
+	m_ctrl->setCurrFrame(-1, -1);
+
+// 	Context* context = Context::Instance();
+// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+// 	frame->clear();
+
+	return ret;
+}
+
+void StagePanel::TraverseSprites(d2d::IVisitor& visitor, 
 								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
@@ -76,53 +128,6 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 			}
 		}
 	}
-}
-
-void StagePanel::removeSprite(d2d::ISprite* sprite)
-{
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool success = frame->Remove(sprite);
-	if (success) {
-		m_ctrl->Refresh();
-	}
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
-{
-	SpriteUserData* ud = (SpriteUserData*)sprite->GetUserData();
- 	int old_layer = m_ctrl->layer(),
- 		old_frame = m_ctrl->frame();
-	if (ud) {
-		ud->frame = old_frame;
-		m_ctrl->setCurrFrame(ud->layer, old_frame);
-	}
-
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	assert(frame);
-	frame->Insert(sprite);
-	Refresh();
-
-	if (ud) {
-		m_ctrl->setCurrFrame(old_layer, old_frame);
-	}
-
-	m_ctrl->Refresh();
-}
-
-void StagePanel::clearSprites()
-{
-	m_ctrl->ClearLayers();
-	m_ctrl->setCurrFrame(-1, -1);
-
-// 	Context* context = Context::Instance();
-// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-// 	frame->clear();
-}
-
-bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
-{
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	return frame->Reorder(sprite, up);
 }
 
 SkeletonData& StagePanel::getSkeletonData()

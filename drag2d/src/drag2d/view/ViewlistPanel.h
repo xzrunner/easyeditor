@@ -29,14 +29,15 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr, bool clear);
 	virtual void SelectMultiSprites(SpriteSelection* selection);
-	virtual void ReorderSprite(ISprite* spr, bool up);
-	virtual void InsertSprite(ISprite* spr);
-	virtual void RemoveSprite(ISprite* spr);
+	virtual bool ReorderSprite(ISprite* spr, bool up);
+	virtual bool InsertSprite(ISprite* spr);
+	virtual bool RemoveSprite(ISprite* spr);
+	virtual bool ClearAllSprite() { return false; }
 
-	void Remove(ISprite* sprite);
-	void Insert(ISprite* sprite);
-	void Reorder(const ISprite* sprite, bool up);
-	void ReorderSelected(bool up);
+	bool Remove(ISprite* sprite);
+	bool Insert(ISprite* sprite);
+	bool Reorder(const ISprite* sprite, bool up);
+	bool ReorderSelected(bool up);
 
 	void OnSelected(int index);
 	void OnSelected(d2d::ISprite* spr);

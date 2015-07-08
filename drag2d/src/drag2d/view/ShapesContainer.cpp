@@ -26,14 +26,14 @@ bool ShapesContainer::Remove(Object* obj)
 	return m_shapes.Remove(static_cast<IShape*>(obj));
 }
 
-void ShapesContainer::Insert(Object* obj)
+bool ShapesContainer::Insert(Object* obj)
 {
-	m_shapes.Insert(static_cast<IShape*>(obj));
+	return m_shapes.Insert(static_cast<IShape*>(obj));
 }
 
-void ShapesContainer::Clear()
+bool ShapesContainer::Clear()
 {
-	m_shapes.Clear();
+	return m_shapes.Clear();
 }
 
 bool ShapesContainer::ResetOrder(const Object* obj, bool up)

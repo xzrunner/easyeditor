@@ -17,7 +17,7 @@ GroupTreeIO::GroupTreeIO(GroupTreeCtrl* tree, MultiSpritesImpl* sprites_impl)
 void GroupTreeIO::Load(const Json::Value& value)
 {
 	std::vector<ISprite*> sprites;
-	m_sprites_impl->traverseSprites(FetchAllVisitor<ISprite>(sprites));
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<ISprite>(sprites));
 
 	std::vector<Node> nodes;
 	LoadToNodes(value, nodes);

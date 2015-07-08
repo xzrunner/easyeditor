@@ -45,48 +45,54 @@ void ViewlistPanel::SelectMultiSprites(SpriteSelection* selection)
 {
 }
 
-void ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
+bool ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
 {
-	Reorder(spr, up);
+	return Reorder(spr, up);
 }
 
-void ViewlistPanel::InsertSprite(ISprite* spr)
+bool ViewlistPanel::InsertSprite(ISprite* spr)
 {
-	Insert(spr);
+	return Insert(spr);
 }
 
-void ViewlistPanel::RemoveSprite(ISprite* spr)
+bool ViewlistPanel::RemoveSprite(ISprite* spr)
 {
 	std::ofstream fout("del_debug.txt", std::ios::app);
 	fout << "ViewlistPanel::RemoveSprite 0" << std::endl;
 
-	Remove(spr);
+	bool ret = Remove(spr);
 	fout << "ViewlistPanel::RemoveSprite 1" << std::endl;
 
 	fout.close();
+
+	return ret;
 }
 
-void ViewlistPanel::Remove(ISprite* sprite)
+bool ViewlistPanel::Remove(ISprite* sprite)
 {
 	int idx = QuerySprIdx(sprite);
 	if (idx < 0) {
-		return;
+		return false;
 	}
 	m_list->remove(idx);
 	m_sprites.erase(m_sprites.begin() + idx);
+	return true;
 }
 
-void ViewlistPanel::Insert(ISprite* sprite)
+bool ViewlistPanel::Insert(ISprite* sprite)
 {
 //	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
 //  m_sprites.push_back(sprite);
 
 	m_list->insertFront(const_cast<ISymbol*>(&sprite->getSymbol()));
 	m_sprites.insert(m_sprites.begin(), sprite);
+	return true;
 }
 
-void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
+bool ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 {
+	bool ret = false;
+
 	int i = QuerySprIdx(sprite);
 	assert(i >= 0);
 
@@ -99,6 +105,7 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 			std::swap(m_sprites[i], m_sprites[pos]);
 			m_list->swap(i, pos);
 			m_list->SetSelection(pos);
+			ret = true;
 		}
 	}
 	else
@@ -109,20 +116,27 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 			std::swap(m_sprites[i], m_sprites[pos]);
 			m_list->swap(i, pos);
 			m_list->SetSelection(pos);
+			ret = true;
 		}
 	}
+
+	return ret;
 }
 
-void ViewlistPanel::ReorderSelected(bool up)
+bool ViewlistPanel::ReorderSelected(bool up)
 {
+	bool ret = false;
+
 	if (!m_selected_spr) {
-		return;
+		return ret;
 	}
 
-	Reorder(m_selected_spr, up);
+	ret = Reorder(m_selected_spr, up);
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->ReorderSprite(m_selected_spr, up, this);
 	}
+
+	return ret;
 }
 
 void ViewlistPanel::OnSelected(int index)

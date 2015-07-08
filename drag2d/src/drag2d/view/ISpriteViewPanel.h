@@ -15,9 +15,10 @@ public:
 	virtual ~ISpriteViewPanel() {}
 	virtual void SelectSprite(ISprite* spr, bool clear) = 0;
 	virtual void SelectMultiSprites(SpriteSelection* selection) = 0;
-	virtual void ReorderSprite(ISprite* spr, bool up) = 0;
-	virtual void InsertSprite(ISprite* spr) = 0;
-	virtual void RemoveSprite(ISprite* spr) = 0;
+	virtual bool ReorderSprite(ISprite* spr, bool up) = 0;
+	virtual bool InsertSprite(ISprite* spr) = 0;
+	virtual bool RemoveSprite(ISprite* spr) = 0;
+	virtual bool ClearAllSprite() = 0;
 }; // ISpriteViewPanel
 
 }

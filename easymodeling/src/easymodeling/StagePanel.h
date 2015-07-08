@@ -26,12 +26,12 @@ namespace emodeling
 		//
 		// d2d::SpritesPanelImpl interface
 		//
-		virtual void removeSprite(d2d::ISprite* sprite);
-		virtual void insertSprite(d2d::ISprite* sprite);
-		virtual void clearSprites();
+		virtual bool InsertSprite(d2d::ISprite* sprite);
+		virtual bool RemoveSprite(d2d::ISprite* sprite);
+		virtual bool ClearAllSprite();
 
-		virtual d2d::ISprite* querySpriteByPos(const d2d::Vector& pos) const;
-		virtual void querySpritesByRect(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result) const;		
+		virtual d2d::ISprite* QuerySpriteByPos(const d2d::Vector& pos) const;
+		virtual void QuerySpritesByRect(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result) const;		
 
 		libmodeling::Joint* queryJointByPos(const d2d::Vector& pos) const;
 		void queryJointsByRect(const d2d::Rect& rect, std::vector<libmodeling::Joint*>& result) const;

@@ -51,7 +51,7 @@ void StageCanvas::OnDrawSprites() const
 	drawBackground();
 
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	m_stage->traverseSprites(d2d::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
+	m_stage->TraverseSprites(d2d::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
 	shader_mgr->SetSpriteShader(0);
 	shader_mgr->sprite();

@@ -25,9 +25,10 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr, bool clear);
 	virtual void SelectMultiSprites(SpriteSelection* selection);
-	virtual void ReorderSprite(ISprite* spr, bool up);
-	virtual void InsertSprite(ISprite* spr);
-	virtual void RemoveSprite(ISprite* spr);
+	virtual bool ReorderSprite(ISprite* spr, bool up);
+	virtual bool InsertSprite(ISprite* spr);
+	virtual bool RemoveSprite(ISprite* spr);
+	virtual bool ClearAllSprite() { return false; }
 
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);

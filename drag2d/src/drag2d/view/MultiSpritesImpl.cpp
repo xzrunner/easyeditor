@@ -11,24 +11,24 @@ namespace d2d
 MultiSpritesImpl::MultiSpritesImpl(wxWindow* wnd)
 {
 	m_wnd = wnd;
-	m_spriteSelection = new SpriteSelection;
+	m_sprite_selection = new SpriteSelection;
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
-	m_spriteSelection->Release();
+	m_sprite_selection->Release();
 }
 
 void MultiSpritesImpl::SelectSprite(ISprite* spr, bool clear)
 {
 	if (clear) {
-		m_spriteSelection->Clear();
-		m_spriteSelection->Add(spr);
+		m_sprite_selection->Clear();
+		m_sprite_selection->Add(spr);
 	} else {
-		if (m_spriteSelection->IsExist(spr)) {
-			m_spriteSelection->Remove(spr);
+		if (m_sprite_selection->IsExist(spr)) {
+			m_sprite_selection->Remove(spr);
 		} else {
-			m_spriteSelection->Add(spr);
+			m_sprite_selection->Add(spr);
 		}
 	}
 
@@ -39,34 +39,13 @@ void MultiSpritesImpl::SelectMultiSprites(SpriteSelection* selection)
 {
 }
 
-void MultiSpritesImpl::ReorderSprite(ISprite* spr, bool up)
-{
-	resetSpriteOrder(spr, up);
-}
-
-void MultiSpritesImpl::InsertSprite(ISprite* spr)
-{
-	insertSprite(spr);
-}
-
-void MultiSpritesImpl::RemoveSprite(ISprite* spr)
-{
-	std::ofstream fout("del_debug.txt", std::ios::app);
-	fout << "MultiSpritesImpl::RemoveSprite 0" << std::endl;
-
-	removeSprite(spr);
-	fout << "MultiSpritesImpl::RemoveSprite 1" << std::endl;
-
-	fout.close();
-}
-
-ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
+ISprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
-	traverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
+	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
 	if (selected && !selected->editable) {
 		std::vector<ISprite*> sprites;
-		querySpritesByRect(Rect(pos, 1, 1), false, sprites);
+		QuerySpritesByRect(Rect(pos, 1, 1), false, sprites);
 		if (!sprites.empty()) {
 			selected = sprites.back();
 		} else {
@@ -76,24 +55,18 @@ ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 	return selected;
 }
 
-void MultiSpritesImpl::querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const
+void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const
 {
-	traverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
+	TraverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
 }
 
-void MultiSpritesImpl::removeSpriteSelection()
+void MultiSpritesImpl::ClearSpriteSelection()
 {
-	if (!m_spriteSelection->IsEmpty())
+	if (!m_sprite_selection->IsEmpty())
 	{
-		m_spriteSelection->Traverse(RemoveSelectionVisitor(this));
-		m_spriteSelection->Clear();
-		refresh();
+		m_sprite_selection->Traverse(RemoveSelectionVisitor(this));
+		m_sprite_selection->Clear();
 	}
-}
-
-void MultiSpritesImpl::refresh()
-{
-	m_wnd->Refresh();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -163,7 +136,7 @@ MultiSpritesImpl::RemoveSelectionVisitor::RemoveSelectionVisitor(MultiSpritesImp
 
 void MultiSpritesImpl::RemoveSelectionVisitor::Visit(Object* object, bool& bFetchNext)
 {
-	m_spritesImpl->removeSprite(static_cast<ISprite*>(object));
+	m_spritesImpl->RemoveSprite(static_cast<ISprite*>(object));
 	bFetchNext = true;
 }
 

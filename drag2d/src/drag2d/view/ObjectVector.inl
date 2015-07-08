@@ -34,15 +34,15 @@ bool ObjectVector<T>::Remove(T* obj)
 }
 
 template<class T>
-void ObjectVector<T>::Insert(T* obj)
+bool ObjectVector<T>::Insert(T* obj)
 {
-	Insert(m_objs, obj);
+	return Insert(m_objs, obj);
 }
 
 template<class T>
-void ObjectVector<T>::Clear()
+bool ObjectVector<T>::Clear()
 {
-	Clear(m_objs);
+	return Clear(m_objs);
 }
 
 template<class T>
@@ -137,19 +137,22 @@ inline bool ObjectVector<T>::Remove(std::vector<T*>& objs,
 }
 
 template<class T>
-inline void ObjectVector<T>::Insert(std::vector<T*>& objs, 
+inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, 
 									T* obj)
 {
 	obj->Retain();
 	objs.push_back(obj);
+	return true;
 }
 
 template<class T>
-inline void ObjectVector<T>::Clear(std::vector<T*>& objs)
+inline bool ObjectVector<T>::Clear(std::vector<T*>& objs)
 {
+	bool ret = !objs.empty();
 	for (size_t i = 0, n = objs.size(); i < n; ++i)
 		objs[i]->Release();
 	objs.clear();
+	return ret;
 }
 
 template<class T>

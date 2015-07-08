@@ -67,8 +67,10 @@ int LayersMgr::getFrameCount() const
 
 void LayersMgr::clear()
 {
+	bool ret = !m_layers.empty();
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
 	m_layers.clear();
+	return ret;
 }
 
 // void LayersMgr::removeSprite(d2d::ISprite* sprite)

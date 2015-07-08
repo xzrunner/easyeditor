@@ -25,7 +25,7 @@ void FileIO::load(const char* filename, StagePanel* stage)
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
 		d2d::ISprite* sprite = load(imgValue, stage, dir);
-		stage->insertSprite(sprite);
+		stage->InsertSprite(sprite);
 		imgValue = value["image"][i++];
 	}
 
@@ -39,7 +39,7 @@ void FileIO::store(const char* filename, StagePanel* stage)
 	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
 
 	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		value["image"][i] = store(sprites[i], stage, dir);
 	}

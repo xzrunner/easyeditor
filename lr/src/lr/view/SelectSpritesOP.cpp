@@ -48,7 +48,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
+	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
@@ -96,7 +96,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
 		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 		etexture::EditDialog dlg(m_stage, tex, sprites);
 		dlg.ShowModal();
@@ -108,7 +108,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 //		libshape::Symbol& symbol = const_cast<libshape::Symbol&>(shape->getSymbol());
 
 		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 		libshape::EditDialogSimple dlg(m_stage, shape, sprites);
 //		libshape::EditDialog dlg(m_stage, &symbol);
@@ -119,7 +119,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
 	{
 		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 		eterrain2d::EditDialog dlg(m_stage, terr, sprites);
 		dlg.ShowModal();
@@ -129,7 +129,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
 	{
 		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 		eshadow::EditDialog dlg(m_stage, shadow, sprites);
 		dlg.ShowModal();

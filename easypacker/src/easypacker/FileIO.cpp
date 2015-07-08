@@ -158,7 +158,7 @@ void FileIO::storeImage(const char* filename)
 	memset(dst_data, 0, channel * width * height);
 
 	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
@@ -283,7 +283,7 @@ void FileIO::storeEasypackerPosition(const char* filename)
 	value["height"] = Context::Instance()->height;
 
 	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["image"][i] = store(sprites[i]);
 
@@ -302,7 +302,7 @@ void FileIO::storeTexpackerPosition(const char* filename)
 	value["meta"] = Context::Instance()->tp_meta;
 
 	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* sprite = sprites[i];
 		if (sprite->GetUserData()) 

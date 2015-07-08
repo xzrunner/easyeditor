@@ -47,7 +47,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 void ArrangeSpriteImpl::OnDraw() const
 {
 	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
-	m_stage->traverseSprites(
+	m_stage->TraverseSprites(
 		d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1.0f, 1.0f, 0.0f)),
 		d2d::DT_VISIBLE
 		);

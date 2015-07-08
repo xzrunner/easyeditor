@@ -42,10 +42,14 @@ public:
 		virtual bool VisitNonleaf(wxTreeItemId id);
 		virtual bool VisitLeaf(wxTreeItemId id);
 
+		bool IsFinish() const { return m_finish; }
+
 	private:
 		wxTreeCtrl* m_treectrl;
 
 		ISprite* m_spr;
+
+		bool m_finish;
 
 	}; // RemoveVisitor
 

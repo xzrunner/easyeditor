@@ -27,8 +27,8 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void removeSprite(d2d::ISprite* sprite);
-	virtual void insertSprite(d2d::ISprite* sprite);
+	virtual bool InsertSprite(d2d::ISprite* sprite);
+	virtual bool RemoveSprite(d2d::ISprite* sprite);
 
 	void InitConfig();
 

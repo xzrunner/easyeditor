@@ -26,39 +26,26 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 void StagePanel::Clear()
 {
 	EditPanel::Clear();
-	clearSprites();
+	ClearAllSprite();
 }
 
-void StagePanel::removeSprite(d2d::ISprite* sprite)
-{
-	bool reset_wall = IsSymbolWall(*sprite);
-
-	ChangeSymbolRemain(sprite, true);
-	SpritesPanelImpl::removeSprite(sprite);
-	m_checkboard.RemoveSprite(sprite);
-
-	if (reset_wall) {
-		m_checkboard.ResetWall();
-	}
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
 	sprite->setTransform(FixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 
 	if (!sprite->getSymbol().GetUserData()) {
-		d2d::SpritesPanelImpl::insertSprite(sprite);
-		return;
+		d2d::SpritesPanelImpl::InsertSprite(sprite);
+		return false;
 	}
 
 	if (!sprite->getPosition().isValid()) {
-		return;
+		return false;
 	}
 
 	if (!m_checkboard.IsValid(sprite)) {
 		bool fixed = m_checkboard.SetCachedPos(sprite);
 		if (!fixed) {
-			return;
+			return false;
 		}
 	}
 
@@ -68,25 +55,48 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 		sprite->SetUserData(ext);
 	}
 
-	d2d::SpritesPanelImpl::insertSprite(sprite);
+	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
 	ChangeSymbolRemain(sprite, false);
 	m_checkboard.AddSprite(sprite);
 
 	if (IsSymbolWall(*sprite)) {
 		m_checkboard.ResetWall();
+		ret = true;
 	}
+
+	return ret;
 }
 
-void StagePanel::clearSprites()
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+{
+	bool reset_wall = IsSymbolWall(*sprite);
+
+	ChangeSymbolRemain(sprite, true);
+	bool ret = SpritesPanelImpl::RemoveSprite(sprite);
+	m_checkboard.RemoveSprite(sprite);
+
+	if (reset_wall) {
+		m_checkboard.ResetWall();
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool StagePanel::ClearAllSprite()
 {
 	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	bool ret = !sprites.empty();
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ChangeSymbolRemain(sprites[i], true);
 	}
 	m_checkboard.Clear();
 
-	SpritesPanelImpl::clearSprites();
+	if (SpritesPanelImpl::ClearAllSprite()) {
+		ret = true;
+	}
+	return ret;
 }
 
 void StagePanel::TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
@@ -138,7 +148,7 @@ void StagePanel::TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) con
 void StagePanel::UpdateAllSpritesLocation()
 {
 	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		s->setTransform(FixSpriteLocation(s->getPosition()), s->getAngle());
@@ -152,7 +162,7 @@ void StagePanel::SetPerspective(bool is_flat)
 	}
 
 	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
@@ -174,7 +184,7 @@ void StagePanel::SetPerspective(bool is_flat)
 void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
 	std::vector<d2d::ISprite*> sprites;
-	getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];

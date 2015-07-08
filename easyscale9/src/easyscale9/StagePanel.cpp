@@ -32,38 +32,10 @@ StagePanel::~StagePanel()
 void StagePanel::Clear()
 {
 	EditPanel::Clear();
-	clearSprites();
+	ClearAllSprite();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
-								 bool order/* = true*/) const
-{
-	for (size_t i = 0; i < 3; ++i)
-		for (size_t j = 0; j < 3; ++j)
-		{
-			if (!m_sprites[i][j]) continue;
-
-			bool hasNext;
-			visitor.Visit(m_sprites[i][j], hasNext);
-			if (!hasNext) return;
-		}
-}
-
-void StagePanel::removeSprite(d2d::ISprite* sprite)
-{
-	for (size_t i = 0; i < 3; ++i)
-		for (size_t j = 0; j < 3; ++j)
-		{
-			if (m_sprites[i][j] == sprite)
-			{
-				m_sprites[i][j] = NULL;
-				sprite->Release();
-				return;
-			}
-		}
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
 	const float edge = EDGE;
 	const d2d::Vector& pos = sprite->getPosition();
@@ -87,20 +59,56 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 	rebuildPatchSymbol();
 
-	Refresh();
+	return true;
 }
 
-void StagePanel::clearSprites()
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
-	for (size_t i = 0; i < 3; ++i)
+	for (size_t i = 0; i < 3; ++i) 
+	{
+		for (size_t j = 0; j < 3; ++j) 
+		{
+			if (m_sprites[i][j] == sprite)
+			{
+				m_sprites[i][j] = NULL;
+				sprite->Release();
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool StagePanel::ClearAllSprite()
+{
+	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j)
 		{
 			if (!m_sprites[i][j]) continue;
 			m_sprites[i][j]->Release();
 		}
+	}
 	memset(m_sprites, 0, sizeof(int) * 9);
 
 	delete m_symbol, m_symbol = NULL;
+
+	return true;
+}
+
+void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
+								 bool order/* = true*/) const
+{
+	for (size_t i = 0; i < 3; ++i) 
+	{
+		for (size_t j = 0; j < 3; ++j)
+		{
+			if (!m_sprites[i][j]) continue;
+
+			bool hasNext;
+			visitor.Visit(m_sprites[i][j], hasNext);
+			if (!hasNext) return;
+		}
+	}
 }
 
 void StagePanel::rebuildPatchSymbol()

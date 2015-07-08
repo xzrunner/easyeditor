@@ -33,7 +33,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		Vector pos = m_stage->TransPosScrToProj(x, y);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(pos);
-		m_panelImpl->insertSprite(sprite);
+		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}
 

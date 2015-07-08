@@ -22,9 +22,9 @@ public:
 
 	bool Remove(T* obj);
 
-	void Insert(T* obj);
+	bool Insert(T* obj);
 
-	void Clear();
+	bool Clear();
 
 	bool ResetOrder(const T* obj, bool up);
 
@@ -36,9 +36,9 @@ public:
 
 	static bool Remove(std::vector<T*>& objs, T* obj);
 
-	static void Insert(std::vector<T*>& objs, T* obj);
+	static bool Insert(std::vector<T*>& objs, T* obj);
 
-	static void Clear(std::vector<T*>& objs);
+	static bool Clear(std::vector<T*>& objs);
 
 	static bool ResetOrder(std::vector<T*>& objs, const T* obj, bool up);
 

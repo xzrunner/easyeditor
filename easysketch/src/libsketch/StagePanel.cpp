@@ -27,7 +27,41 @@ void StagePanel::Clear()
 	d2d::EditPanel::Clear();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
+bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
+{
+	return false;
+}
+
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+{
+	sprite->Retain();
+	m_sprites.push_back(sprite);
+	return true;
+}
+
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (m_sprites[i] == sprite) {
+			sprite->Release();
+			m_sprites.erase(m_sprites.begin() + i);
+			return true;
+		}
+	}
+	return false;
+}
+
+bool StagePanel::ClearAllSprite()
+{
+	bool ret = !m_sprites.empty();
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		m_sprites[i]->Release();
+	}
+	m_sprites.clear();
+	return ret;
+}
+
+void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
 								 bool order) const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -37,37 +71,6 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 			break;
 		}
 	}
-}
-
-void StagePanel::removeSprite(d2d::ISprite* sprite)
-{
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (m_sprites[i] == sprite) {
-			sprite->Release();
-			m_sprites.erase(m_sprites.begin() + i);
-		}
-	}
-}
-
-void StagePanel::insertSprite(d2d::ISprite* sprite)
-{
-	sprite->Retain();
-	m_sprites.push_back(sprite);
-
-	m_canvas->Refresh();
-}
-
-void StagePanel::clearSprites()
-{
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
-	}
-	m_sprites.clear();
-}
-
-bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
-{
-	return false;
 }
 
 ivec2 StagePanel::TransPos3ProjectToScreen(const vec3& proj) const

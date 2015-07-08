@@ -30,7 +30,7 @@ bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(m_pos);
 		sprite->rotate(m_rotate);
-		m_panelImpl->insertSprite(sprite);
+		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}
 
@@ -56,7 +56,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	Vector offset = m_cmpt->getOffset();
 	const float dis = offset.length() * 0.5f;
 	ISprite* sprite = NULL;
-	m_panelImpl->traverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
+	m_panelImpl->TraverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
 	if (!sprite) return false;
 
 	const d2d::Vector& capture = sprite->getPosition();

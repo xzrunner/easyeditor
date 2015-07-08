@@ -24,16 +24,18 @@ void StagePanel::Clear()
 {
 }
 
-void StagePanel::removeSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
-	d2d::SpritesPanelImpl::removeSprite(sprite);
-	m_anchor_mgr.Remove(sprite);
+	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
+	m_anchor_mgr.Insert(sprite);
+	return ret;
 }
 
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
-	d2d::SpritesPanelImpl::insertSprite(sprite);
-	m_anchor_mgr.Insert(sprite);
+	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
+	m_anchor_mgr.Remove(sprite);
+	return ret;
 }
 
 void StagePanel::InitConfig()

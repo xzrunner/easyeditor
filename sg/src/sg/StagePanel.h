@@ -25,9 +25,9 @@ public:
 	//
 	// d2d::SpritesPanelImpl interface
 	//
-	virtual void removeSprite(d2d::ISprite* sprite);
-	virtual void insertSprite(d2d::ISprite* sprite);
-	virtual void clearSprites();
+	virtual bool InsertSprite(d2d::ISprite* sprite);
+	virtual bool RemoveSprite(d2d::ISprite* sprite);
+	virtual bool ClearAllSprite();
 
 	void TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
 	void TransGridPosToCoords(int row, int col, d2d::Vector& pos) const;

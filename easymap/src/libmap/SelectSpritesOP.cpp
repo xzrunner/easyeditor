@@ -21,7 +21,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
+	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
@@ -69,7 +69,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
 		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 		etexture::EditDialog dlg(m_stage, tex, sprites);
 		dlg.ShowModal();

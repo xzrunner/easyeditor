@@ -18,7 +18,7 @@ void FileIO::load(const char* filename)
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
 		d2d::ISprite* sprite = loadSprite(spriteValue);
-		Context::Instance()->stage->insertSprite(sprite);
+		Context::Instance()->stage->InsertSprite(sprite);
  		spriteValue = value["sprite"][i++];
  	}
 }
@@ -28,7 +28,7 @@ void FileIO::store(const char* filename)
 	Json::Value value;
 
  	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
  
  	d2d::Rect rect;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i)

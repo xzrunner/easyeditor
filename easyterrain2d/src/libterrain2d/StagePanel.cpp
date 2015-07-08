@@ -56,7 +56,7 @@ void StagePanel::Clear()
 void StagePanel::Store(const std::string& dir, Json::Value& value) const
 {
 	std::vector<d2d::ISprite*> bg_sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(bg_sprites));
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(bg_sprites));
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
 		d2d::ISprite* bg = bg_sprites[i];
 		value["bg"][i]["filepath"] = d2d::FilenameTools::getRelativePath(
@@ -79,7 +79,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* bg = d2d::SpriteFactory::Instance()->create(symbol);
 		bg->load(bg_val);
-		insertSprite(bg);
+		InsertSprite(bg);
 		symbol->Release();
 
 		bg_val = value["bg"][i++];
@@ -162,7 +162,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		} else {
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			sprite->translate(pos);
-			m_stage->insertSprite(sprite);
+			m_stage->InsertSprite(sprite);
 		}
 		return true;
 	}

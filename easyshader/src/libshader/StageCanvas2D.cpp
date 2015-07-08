@@ -31,7 +31,7 @@ void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
 	m_start_time = clock();
 
 	Shader* shader = m_stage->GetShader();
-	d2d::ISprite* sprite = m_stage->querySpriteByPos(pos);
+	d2d::ISprite* sprite = m_stage->QuerySpriteByPos(pos);
 	if (shader && sprite) {
 		d2d::ShaderMgr::Instance()->sprite();
 
@@ -59,7 +59,7 @@ void StageCanvas2D::DrawBackground() const
 void StageCanvas2D::DrawSprites() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel2D*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];

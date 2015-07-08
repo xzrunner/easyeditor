@@ -27,7 +27,7 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	, m_bDraggable(true)
 	, m_view_panel_mgr(view_panel_mgr)
 {
-	m_selection = spritesImpl->getSpriteSelection();
+	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
 	m_firstPos.setInvalid();
@@ -46,7 +46,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		PasteToSelection();
-		m_spritesImpl->removeSpriteSelection();
+		m_spritesImpl->ClearSpriteSelection();
 		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -127,7 +127,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 	Vector end = m_stage->TransPosScrToProj(x, y);
 	Rect rect(m_firstPos, end);
 	std::vector<ISprite*> sprites;
-	m_spritesImpl->querySpritesByRect(rect, m_firstPos.x < end.x, sprites);
+	m_spritesImpl->QuerySpritesByRect(rect, m_firstPos.x < end.x, sprites);
 	if (wxGetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
@@ -177,7 +177,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 	if (m_rightFirstScrPos == Vector(x, y))
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);
-		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
+		d2d::ISprite* sprite = m_spritesImpl->QuerySpriteByPos(pos);
 		if (sprite)
 		{
 			m_selection->Clear();
@@ -236,7 +236,7 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
 	std::vector<ISprite*> sprites;
-	m_spritesImpl->getSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
+	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		if (sprites[i]->isContain(pos)) {
@@ -245,7 +245,7 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 		}
 	}
 	if (!selected) {
-		ISprite* spr = m_spritesImpl->querySpriteByPos(pos);
+		ISprite* spr = m_spritesImpl->QuerySpriteByPos(pos);
 		if (spr) {
 			selected = spr;
 		}
@@ -317,7 +317,7 @@ void SelectSpritesOP::CopyFromSelection()
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
-		m_spritesImpl->insertSprite(sprite);
+		m_spritesImpl->InsertSprite(sprite);
 		m_selection->Add(sprite);
 		last_spr = sprite;
 

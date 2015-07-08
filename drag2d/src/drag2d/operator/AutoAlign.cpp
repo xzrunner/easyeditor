@@ -22,7 +22,7 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 	m_ver[1].set(0, 0);
 
 	std::vector<ISprite*> sources;
-	m_sprites_impl->traverseSprites(FetchAllVisitor<ISprite>(sources));
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<ISprite>(sources));
 
 	// not support multi src now
 	if (sprites.size() > 1)

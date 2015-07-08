@@ -36,7 +36,7 @@ void StageCanvas::OnDrawSprites() const
 	{
 		DrawGuideLines();
 		d2d::Rect sr = m_screen.GetRegion();
-		editPanel->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		editPanel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 			d2d::DT_VISIBLE);
 	}
 	else

@@ -27,7 +27,7 @@ StagePanel::~StagePanel()
 void StagePanel::Clear()
 {
 	d2d::EditPanel::Clear();
-	d2d::SpritesPanelImpl::clearSprites();
+	d2d::SpritesPanelImpl::ClearAllSprite();
 	d2d::ShapesPanelImpl::clearShapes();
 }
 
@@ -36,7 +36,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dirpath, files);
 
-	clearSprites();
+	ClearAllSprite();
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i].ToStdString();
@@ -46,7 +46,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			symbol->Release();
-			insertSprite(sprite);
+			InsertSprite(sprite);
 		}
 	}
 
@@ -69,7 +69,7 @@ void StagePanel::initConnection()
 	m_graphics.clear();
 
 	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* from = sprites[i];
@@ -109,7 +109,7 @@ void StagePanel::initConnection()
 void StagePanel::initPosition()
 {
 	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	// 1 single random
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)

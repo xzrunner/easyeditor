@@ -33,7 +33,7 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 			sprite->setScale(m_randomValue.scale, m_randomValue.scale);
 		if (m_randomValue.angle != 0.0f) 
 			sprite->setTransform(m_pos, m_randomValue.angle);
-		m_panelImpl->insertSprite(sprite);
+		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}
 

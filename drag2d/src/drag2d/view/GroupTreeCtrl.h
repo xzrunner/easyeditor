@@ -36,11 +36,11 @@ public:
 
 	void Clear();
 
-	void Remove(ISprite* sprite);
+	bool Remove(ISprite* sprite);
 
 	wxTreeItemId GetRootID() const { return m_root; }
 
-	void ReorderItem(wxTreeItemId id, bool up);
+	bool ReorderItem(wxTreeItemId id, bool up);
 
 private:
 	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);

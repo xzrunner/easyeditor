@@ -149,7 +149,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		}
 	}
 
-	m_ctrl->ClearLayers();
+	m_ctrl->ClearAllLayer();
 	Layer* layer = new Layer(m_ctrl);
 	std::map<int, std::vector<std::string> >::iterator itr
 		= mapFrameSymbols.begin();
@@ -186,7 +186,7 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 		traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 
 	if (!symbols.empty()) {
-		m_ctrl->ClearLayers();
+		m_ctrl->ClearAllLayer();
 	} else {
 		return;
 	}

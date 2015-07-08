@@ -84,7 +84,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 	{
 	case StagePanel::Menu_AddJointNode:
 		{
-			d2d::ISprite* sprite = m_stage->querySpriteByPos(m_first_pos);
+			d2d::ISprite* sprite = m_stage->QuerySpriteByPos(m_first_pos);
 			m_stage->getSkeletonData().insertJoint(sprite, m_first_pos);
 		}
 		break;

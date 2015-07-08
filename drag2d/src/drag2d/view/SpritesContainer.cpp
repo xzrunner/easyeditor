@@ -26,14 +26,14 @@ bool SpritesContainer::Remove(Object* obj)
 	return m_sprites.Remove(static_cast<ISprite*>(obj));
 }
 
-void SpritesContainer::Insert(Object* obj)
+bool SpritesContainer::Insert(Object* obj)
 {
-	m_sprites.Insert(static_cast<ISprite*>(obj));
+	return m_sprites.Insert(static_cast<ISprite*>(obj));
 }
 
-void SpritesContainer::Clear()
+bool SpritesContainer::Clear()
 {
-	m_sprites.Clear();
+	return m_sprites.Clear();
 }
 
 bool SpritesContainer::ResetOrder(const Object* obj, bool up)

@@ -6,41 +6,43 @@
 
 namespace epacker
 {
-	class BaseStrategy;
 
-	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public ephysics::PhysicsPanelImpl
-	{
-	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+class BaseStrategy;
 
-		//
-		// d2d::EditPanel interface
-		//
-		virtual void Clear();
+class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public ephysics::PhysicsPanelImpl
+{
+public:
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
-		//
-		// d2d::SpritesPanelImpl interface
-		//
-		virtual void removeSprite(d2d::ISprite* sprite);
-		virtual void insertSprite(d2d::ISprite* sprite);
+	//
+	// d2d::EditPanel interface
+	//
+	virtual void Clear();
 
-		void insertSpriteNoArrange(d2d::ISprite* sprite);
+	//
+	// d2d::SpritesPanelImpl interface
+	//
+	virtual bool InsertSprite(d2d::ISprite* sprite);
+	virtual bool RemoveSprite(d2d::ISprite* sprite);
 
-		void arrangeAllSprites(bool bClearSelection);
-		void loadFromLibrary();
+	void insertSpriteNoArrange(d2d::ISprite* sprite);
 
-		int GetTextureAccount() const;
+	void arrangeAllSprites(bool bClearSelection);
+	void loadFromLibrary();
 
-	public:
-		static void fixCoords(d2d::ISprite* sprite);
+	int GetTextureAccount() const;
 
-	private:
-		b2Body* CreateGround();
+public:
+	static void fixCoords(d2d::ISprite* sprite);
 
-	private:
-		BaseStrategy* m_strategy;
+private:
+	b2Body* CreateGround();
 
-	}; // StagePanel
+private:
+	BaseStrategy* m_strategy;
+
+}; // StagePanel
+
 }
 
 #endif // EPACKER_STAGE_PANEL_H

@@ -25,7 +25,7 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
 		d2d::ISprite* sprite = load(spriteValue, dir);
-		stage->insertSprite(sprite);
+		stage->InsertSprite(sprite);
  		spriteValue = value["sprite"][i++];
  	}
 
@@ -47,7 +47,7 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	value["height"] = toolbar->getHeight();
 
  	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	wxString dir = d2d::FilenameTools::getFileDir(filename);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {

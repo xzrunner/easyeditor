@@ -53,7 +53,7 @@ void Task::Clear()
 
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
-	m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

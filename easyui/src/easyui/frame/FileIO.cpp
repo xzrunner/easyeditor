@@ -28,7 +28,7 @@ void FileIO::Load(const char* filename, StagePanel* stage, d2d::LibraryPanel* li
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spr_val);
 
-		stage->insertSprite(sprite);
+		stage->InsertSprite(sprite);
 		sprites.push_back(sprite);
 
 		sprite->Release();
@@ -47,7 +47,7 @@ void FileIO::Store(const char* filename, StagePanel* stage)
 	Json::Value value;
 
 	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_ALL);
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_ALL);
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
 		d2d::ISprite* spr = sprites[i];

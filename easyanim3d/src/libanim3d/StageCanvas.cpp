@@ -35,7 +35,7 @@ void StageCanvas::DrawBackground() const
 void StageCanvas::DrawSprites() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_sprites_impl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_sprites_impl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{

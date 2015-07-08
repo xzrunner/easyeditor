@@ -22,7 +22,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		return true;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
+	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
 		emesh::EditDialog dlg(m_stage, sprite);

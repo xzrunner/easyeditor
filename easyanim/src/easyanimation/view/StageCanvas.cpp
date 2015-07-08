@@ -26,7 +26,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	m_stage->DrawEditOP();

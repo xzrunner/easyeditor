@@ -28,7 +28,7 @@ void StageCanvas::OnDrawSprites() const
 	DrawBackground();
 
 	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
@@ -76,7 +76,7 @@ void StageCanvas::UpdateParticle2d()
 void StageCanvas::UpdateAnimation()
 {
 	std::vector<libanim::Sprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<libanim::Sprite>(sprites));
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<libanim::Sprite>(sprites));
 	size_t max = 0;
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());

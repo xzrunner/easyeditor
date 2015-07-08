@@ -50,7 +50,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 {
 	m_align.SetOpen(cfg.is_auto_align_open);
 
-	m_selection = spritesImpl->getSpriteSelection();
+	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
 	m_left_down_pos.setInvalid();
@@ -283,7 +283,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 	if (m_right_down_pos.isValid() && !m_selection->IsEmpty())
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);
-		d2d::ISprite* sprite = m_sprites_impl->querySpriteByPos(pos);
+		d2d::ISprite* sprite = m_sprites_impl->QuerySpriteByPos(pos);
 		if (pos == m_right_down_pos && sprite)
 		{
 			wxMenu menu;
@@ -593,7 +593,7 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites, m_sprites_impl));
 
-	m_sprites_impl->removeSpriteSelection();	
+	m_sprites_impl->ClearSpriteSelection();	
 }
 
 void ArrangeSpriteImpl::UpOneLayer()
@@ -601,7 +601,7 @@ void ArrangeSpriteImpl::UpOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		m_sprites_impl->resetSpriteOrder(selected[i], true);
+		m_sprites_impl->ReorderSprite(selected[i], true);
 	}
 }
 
@@ -610,7 +610,7 @@ void ArrangeSpriteImpl::DownOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		m_sprites_impl->resetSpriteOrder(selected[i], false);
+		m_sprites_impl->ReorderSprite(selected[i], false);
 	}
 }
 
@@ -620,7 +620,7 @@ void ArrangeSpriteImpl::UpLayerMost()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		do {
-		} while (m_sprites_impl->resetSpriteOrder(selected[i], true));
+		} while (m_sprites_impl->ReorderSprite(selected[i], true));
 	}
 }
 
@@ -630,7 +630,7 @@ void ArrangeSpriteImpl::DownLayerMost()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		do {
-		} while (m_sprites_impl->resetSpriteOrder(selected[i], false));
+		} while (m_sprites_impl->ReorderSprite(selected[i], false));
 	}
 }
 

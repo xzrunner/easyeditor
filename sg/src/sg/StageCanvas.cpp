@@ -122,7 +122,7 @@ void StageCanvas::DrawGuideLines() const
 void StageCanvas::DrawGrass() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		SymbolRender::Instance()->DrawGrass(s->getSymbol(), s->getPosition(), m_stage->GetPerspective());
@@ -132,7 +132,7 @@ void StageCanvas::DrawGrass() const
 void StageCanvas::DrawGrids() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		bool valid = m_stage->GetCheckBoard().IsValid(s);
@@ -145,7 +145,7 @@ void StageCanvas::DrawSprites() const
 	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
 
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
@@ -176,7 +176,7 @@ void StageCanvas::DrawSprites() const
 void StageCanvas::DrawArrow() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	if (sprites.size() == 1) {
 		d2d::ISprite* s = sprites[0];
 		SymbolRender::Instance()->DrawArrow(s->getSymbol(), s->getPosition());
@@ -186,7 +186,7 @@ void StageCanvas::DrawArrow() const
 void StageCanvas::DrawAttackRegion() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		SymbolRender::Instance()->DrawRegion(s->getSymbol(), s->getPosition());

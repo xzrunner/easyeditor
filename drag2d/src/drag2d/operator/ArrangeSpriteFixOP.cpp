@@ -52,9 +52,9 @@ void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<ISprite*>& sprites
 		sprites[i]->Retain();
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		m_spritesImpl->removeSprite(sprites[i]);
+		m_spritesImpl->RemoveSprite(sprites[i]);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		m_spritesImpl->insertSprite(sprites[i]);
+		m_spritesImpl->InsertSprite(sprites[i]);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		sprites[i]->Release();

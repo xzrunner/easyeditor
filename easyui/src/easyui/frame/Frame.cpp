@@ -52,7 +52,7 @@ void Frame::OnCode(wxCommandEvent& event)
 	StagePanel* stage = static_cast<StagePanel*>(
 		const_cast<d2d::EditPanel*>(m_task->GetEditPanel()));
 	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	// ui
 	{

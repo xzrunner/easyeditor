@@ -173,30 +173,34 @@ void GroupTreeCtrl::Clear()
 	CollapseAndReset(m_root);
 }
 
-void GroupTreeCtrl::Remove(ISprite* sprite)
+bool GroupTreeCtrl::Remove(ISprite* sprite)
 {
 	if (m_add_del_open) {
-		Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
+		GroupTreeImpl::RemoveVisitor visitor(this, sprite);
+		Traverse(visitor);
+		return visitor.IsFinish();
+	} else {
+		return false;
 	}
 }
 
-void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
+bool GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 {
 	if (!id.IsOk()) {
-		return;
+		return false;
 	}
 
 	wxTreeItemId insert_prev;
 	if (up) {
 		wxTreeItemId prev = GetPrevSibling(id);
 		if (!prev.IsOk()) {
-			return;
+			return false;
 		}
 		insert_prev = GetPrevSibling(prev);
 	} else {
 		wxTreeItemId next = GetNextSibling(id);
 		if (!next.IsOk()) {
-			return;
+			return false;
 		}
 		insert_prev = next;
 	}
@@ -225,6 +229,8 @@ void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 //	ReorderSprites();
 	// set selection
 	SelectItem(new_item);
+
+	return true;
 }
 
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
@@ -275,7 +281,7 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	bool add = wxGetKeyState(WXK_CONTROL);
 	m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
 
-	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
+	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
 	selection->Clear();
 	Traverse(id, GroupTreeImpl::SelectVisitor(this, selection));
 }
@@ -368,7 +374,7 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 		return;
 	}
 
-	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
+	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
 	std::vector<ISprite*> sprites;
 	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
@@ -474,8 +480,8 @@ void GroupTreeCtrl::ReorderSprites()
 	for (int i = sprites.size() - 1; i >= 0; --i) {
 		ISprite* spr = sprites[i];
 		m_add_del_open = false;
-		m_sprite_impl->removeSprite(spr);
-		m_sprite_impl->insertSprite(spr);
+		m_sprite_impl->RemoveSprite(spr);
+		m_sprite_impl->InsertSprite(spr);
 		m_add_del_open = true;
 	}
 }

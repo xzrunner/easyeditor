@@ -43,7 +43,7 @@ void Task::Load(const char* filename)
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spr_val);
 		symbol->Release();
-		m_stage->insertSprite(sprite);
+		m_stage->InsertSprite(sprite);
 		spr_val = value["sprites"][i++];
 	}
 
@@ -55,7 +55,7 @@ void Task::Load(const char* filename)
 void Task::Store(const char* filename) const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	Json::Value value;
 	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
@@ -94,7 +94,7 @@ void Task::Clear()
 
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
-	m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const
