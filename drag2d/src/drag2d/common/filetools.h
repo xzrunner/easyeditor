@@ -6,8 +6,6 @@
 namespace d2d
 {
 
-bool rm_dir(const std::string& dir);
-
 bool mk_dir(const std::string& dir, bool rm = true);
 
 }
