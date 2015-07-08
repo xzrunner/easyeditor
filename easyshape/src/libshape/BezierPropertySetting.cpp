@@ -44,7 +44,7 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		}
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void BezierPropertySetting::UpdateProperties(wxPropertyGrid* pg)

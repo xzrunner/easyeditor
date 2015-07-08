@@ -44,12 +44,12 @@ void Controller::setCurrFrame(int layer, int frame)
 		}
 	}
 
-	m_widgets->m_stage->Refresh();
+	m_widgets->m_stage->RefreshStage();
 	if (m_widgets->m_keysPanel) {
-		m_widgets->m_keysPanel->Refresh();
+		m_widgets->m_keysPanel->RefreshStage();
 	}
 	if (m_widgets->m_layersPanel) {
-		m_widgets->m_layersPanel->Refresh();
+		m_widgets->m_layersPanel->RefreshStage();
 	}
 
 	GetStagePanel()->GetEditOP()->Clear();
@@ -188,8 +188,8 @@ void Controller::Clear()
 
 void Controller::Refresh()
 {
-	m_widgets->m_stage->Refresh();
-	m_widgets->m_keysPanel->Refresh();
+	m_widgets->m_stage->RefreshStage();
+	m_widgets->m_keysPanel->RefreshStage();
 }
 
 void Controller::reloadViewList(const KeyFrame* frame)

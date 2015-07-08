@@ -14,8 +14,8 @@ class IDataContainer;
 class SpritesPanelImpl : public MultiSpritesImpl
 {
 public:
-	SpritesPanelImpl(wxWindow* parent, IDataContainer* container);
-	SpritesPanelImpl(EditPanel* editPanel, LibraryPanel* libraryPanel);
+	SpritesPanelImpl(IDataContainer* container);
+	SpritesPanelImpl(EditPanel* stage, LibraryPanel* library);
 	virtual ~SpritesPanelImpl();
 
 	//

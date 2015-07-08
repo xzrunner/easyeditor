@@ -27,23 +27,23 @@ bool SelectNodesOP::OnKeyDown(int keyCode)
 	{
 	case WXK_DELETE:
 		clearSelectedNodes();
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 'a': case 'A':
 		OnDirectionKeyDown(d2d::e_left);
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 'd': case 'D':
 		OnDirectionKeyDown(d2d::e_right);
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 's': case 'S':
 		OnDirectionKeyDown(d2d::e_down);
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 'w': case 'W':
 		OnDirectionKeyDown(d2d::e_up);
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	}
 
@@ -112,7 +112,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 		m_firstPos = pos;
 		if (!wxGetKeyState(WXK_CONTROL))
 			clearSelectedNodes();
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 
 	return false;

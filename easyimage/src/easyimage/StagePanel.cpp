@@ -45,7 +45,7 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 	sprite->translate(off);
 	m_image = sprite;
 
-	Refresh();
+	RefreshStage();
 }
 
 //////////////////////////////////////////////////////////////////////////

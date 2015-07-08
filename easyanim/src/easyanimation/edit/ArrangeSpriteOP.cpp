@@ -60,7 +60,7 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 	if (m_selected)
 	{
 		m_selected->pos = m_stage->TransPosScrToProj(x, y);
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 	else
 	{
@@ -86,7 +86,7 @@ bool ArrangeSpriteOP::OnDraw() const
 void ArrangeSpriteOP::addCross()
 {
 	m_crosses.push_back(new Cross());
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void ArrangeSpriteOP::delCross()
@@ -106,7 +106,7 @@ void ArrangeSpriteOP::delCross()
 	}
 	delete del;
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 //////////////////////////////////////////////////////////////////////////

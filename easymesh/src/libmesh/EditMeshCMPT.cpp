@@ -30,7 +30,7 @@ void EditMeshCMPT::onReset(wxCommandEvent& event)
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Reset();
 	}
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 	m_editOP->Clear();
 }
 

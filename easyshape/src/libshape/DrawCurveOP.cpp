@@ -52,7 +52,7 @@ bool DrawCurveOP::OnMouseDrag(int x, int y)
 		m_curve.pop_back();
 	}
 	m_curve.push_back(pos);
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }

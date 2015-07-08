@@ -132,7 +132,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 
 		} while (0);
 	}
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }

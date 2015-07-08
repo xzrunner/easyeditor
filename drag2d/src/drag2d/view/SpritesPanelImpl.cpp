@@ -7,17 +7,15 @@
 namespace d2d
 {
 
-SpritesPanelImpl::SpritesPanelImpl(wxWindow* parent, IDataContainer* container)
-	: MultiSpritesImpl(parent)
+SpritesPanelImpl::SpritesPanelImpl(IDataContainer* container)
 {
 	m_container = container;
 	m_container->Retain();
 }
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanel* editPanel, LibraryPanel* libraryPanel)
-	: MultiSpritesImpl(editPanel)
+SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, LibraryPanel* library)
 {
-	editPanel->SetDropTarget(new SpriteDropTarget(this, editPanel, libraryPanel));
+	stage->SetDropTarget(new SpriteDropTarget(this, stage, library));
 
 	m_container = new SpritesContainer;
 }
@@ -34,8 +32,7 @@ bool SpritesPanelImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
 
 bool SpritesPanelImpl::InsertSprite(ISprite* sprite)
 {
-	m_container->Insert(sprite);
-	return true;
+	return m_container->Insert(sprite);
 }
 
 bool SpritesPanelImpl::RemoveSprite(ISprite* sprite)

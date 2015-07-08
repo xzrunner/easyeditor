@@ -25,7 +25,7 @@ void ToolbarPanel::SetValue(int key, const d2d::UICallback::Data& data)
 			Shadow* shadow = m_stage->GetSymbol()->GetShadow();
 			shadow->SetRadius(data.val0);
 			shadow->BuildOutterLine();
-			m_stage->Refresh();
+			m_stage->RefreshStage();
 		}
 		break;
 	}
@@ -75,7 +75,7 @@ void ToolbarPanel::OnSetInnerColor(wxCommandEvent& event)
 	if (dlg.ShowModal()) {
 		shadow->SetInnerColer(dlg.GetColor());
 		shadow->BuildFace();
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 }
 
@@ -86,7 +86,7 @@ void ToolbarPanel::OnSetOuterColor(wxCommandEvent& event)
 	if (dlg.ShowModal()) {
 		shadow->SetOuterColer(dlg.GetColor());
 		shadow->BuildFace();
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 }
 

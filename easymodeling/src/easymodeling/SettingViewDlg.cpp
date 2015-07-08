@@ -18,7 +18,7 @@ SettingViewDlg::SettingViewDlg(wxWindow* parent, d2d::IStageCanvas* canvas)
 	SetSizer(sizer);
 
 	sizer->Layout();
-	Refresh();
+	RefreshStage();
 }
 
 wxSizer* SettingViewDlg::initDisplayTypePanel()
@@ -88,23 +88,23 @@ void SettingViewDlg::onChangeDisplayType(wxCommandEvent& event)
 	d2d::Settings::drawType = static_cast<d2d::Settings::DrawType>(event.GetSelection());
 
 	if (m_canvas) 
-		m_canvas->Refresh();
+		m_canvas->RefreshStage();
 }
 
 void SettingViewDlg::onChangeStyle(wxSpinEvent& event)
 {
 	d2d::Settings::ctlPosSize = m_ctlPointSize->GetValue();
-	if (m_canvas) m_canvas->Refresh();
+	if (m_canvas) m_canvas->RefreshStage();
 }
 
 void SettingViewDlg::onChangeDisplayTriangles(wxCommandEvent& event)
 {
 	d2d::Settings::bDisplayTrisEdge = event.IsChecked();
-	if (m_canvas) m_canvas->Refresh();
+	if (m_canvas) m_canvas->RefreshStage();
 }
 
 void SettingViewDlg::onChangeDisplayPolygonBound(wxCommandEvent& event)
 {
 	d2d::Settings::bDisplayPolyBound = event.IsChecked();
-	if (m_canvas) m_canvas->Refresh();
+	if (m_canvas) m_canvas->RefreshStage();
 }

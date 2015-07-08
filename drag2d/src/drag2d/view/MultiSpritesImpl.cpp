@@ -8,9 +8,8 @@
 namespace d2d
 {
 
-MultiSpritesImpl::MultiSpritesImpl(wxWindow* wnd)
+MultiSpritesImpl::MultiSpritesImpl()
 {
-	m_wnd = wnd;
 	m_sprite_selection = new SpriteSelection;
 }
 
@@ -31,8 +30,6 @@ void MultiSpritesImpl::SelectSprite(ISprite* spr, bool clear)
 			m_sprite_selection->Add(spr);
 		}
 	}
-
-	m_wnd->Refresh();
 }
 
 void MultiSpritesImpl::SelectMultiSprites(SpriteSelection* selection)
@@ -60,12 +57,15 @@ void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::v
 	TraverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
 }
 
-void MultiSpritesImpl::ClearSpriteSelection()
+bool MultiSpritesImpl::ClearSpriteSelection()
 {
 	if (!m_sprite_selection->IsEmpty())
 	{
 		m_sprite_selection->Traverse(RemoveSelectionVisitor(this));
 		m_sprite_selection->Clear();
+		return true;
+	} else {
+		return false;
 	}
 }
 

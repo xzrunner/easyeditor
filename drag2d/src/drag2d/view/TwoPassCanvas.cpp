@@ -10,14 +10,8 @@ namespace d2d
 
 TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
 	: OnePassCanvas(stage)
-	, m_dirty(true)
 {
-	stage->SetRefreshMonitor(this);
-}
-
-void TwoPassCanvas::OnRefresh()
-{
-	m_dirty = true;
+	stage->AddRefreshObserver(&m_dirty_state);
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
@@ -35,10 +29,10 @@ void TwoPassCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
-	if (m_dirty) {
+	if (m_dirty_state.IsDirty()) {
  		mgr->SetFBO(fbo.GetFboID());
 		OnePassCanvas::OnDrawWhole();
- 		m_dirty = false;
+		m_dirty_state.ResetDirty();
 	}
 
 	//////////////////////////////////////////////////////////////////////////

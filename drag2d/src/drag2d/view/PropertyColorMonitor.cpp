@@ -19,7 +19,7 @@ Colorf PropertyColorListener::GetColor() const
 
 void PropertyColorListener::OnColorChanged()
 {
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void PropertyColorListener::OnColorChanged(const Colorf& col)

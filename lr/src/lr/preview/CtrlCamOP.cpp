@@ -39,7 +39,7 @@ void CtrlCamOP::OffsetCamera(float dx, float dy)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 	m_stage->GetCamera()->Translate(d2d::Vector(dx, dy));
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 }

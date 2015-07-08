@@ -60,7 +60,7 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent, Controller* ctrl)
 
 void KeysContentWidget::onSize(wxSizeEvent& event)
 {
-	Refresh();
+	RefreshStage();
 }
 
 void KeysContentWidget::onPaint(wxPaintEvent& event)
@@ -318,14 +318,14 @@ void KeysContentWidget::onCreateClassicTween(wxCommandEvent& event)
 {
 	KeyFrame* keyFrame = queryKeyFrameByPos();
 	keyFrame->SetClassicTween(true);
-	Refresh();
+	RefreshStage();
 }
 
 void KeysContentWidget::onDeleteClassicTween(wxCommandEvent& event)
 {
 	KeyFrame* keyFrame = queryKeyFrameByPos();
 	keyFrame->SetClassicTween(false);
-	Refresh();
+	RefreshStage();
 }
 
 void KeysContentWidget::onInsertFrame(wxCommandEvent& event)
@@ -348,7 +348,7 @@ void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
 		size_t index = layers.size() - row - 1;
 		Layer* layer = layers.getLayer(index);
 		layer->InsertKeyFrame(col + 1);
-		m_ctrl->GetKeysPanel()->Refresh();
+		m_ctrl->GetKeysPanel()->RefreshStage();
 	}
 }
 
@@ -361,7 +361,7 @@ void KeysContentWidget::onDeleteKeyFrame(wxCommandEvent& event)
 	size_t index = layers.size() - row - 1;
 	Layer* layer = layers.getLayer(index);
 	layer->RemoveKeyFrame(col + 1);
-	m_ctrl->GetKeysPanel()->Refresh();
+	m_ctrl->GetKeysPanel()->RefreshStage();
 }
 
 void KeysContentWidget::onUpdateCreateClassicTween(wxUpdateUIEvent& event)
@@ -446,7 +446,7 @@ void KeysContentWidget::onInsertFrame()
 		size_t index = layers.size() - row - 1;
 		Layer* layer = layers.getLayer(index);
 		layer->InsertNullFrame(col + 1);
-		m_ctrl->GetKeysPanel()->Refresh();
+		m_ctrl->GetKeysPanel()->RefreshStage();
 	}
 }
 
@@ -460,7 +460,7 @@ void KeysContentWidget::onDeleteFrame()
 		size_t index = layers.size() - row - 1;
 		Layer* layer = layers.getLayer(index);
 		layer->RemoveNullFrame(col + 1);
-		m_ctrl->GetKeysPanel()->Refresh();
+		m_ctrl->GetKeysPanel()->RefreshStage();
 	}
 }
 

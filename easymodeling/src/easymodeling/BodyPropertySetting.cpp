@@ -35,7 +35,7 @@ void BodyPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	else if (name == wxT("GravityScale"))
 		m_body->gravityScale = wxANY_AS(value, float);
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void BodyPropertySetting::UpdateProperties(wxPropertyGrid* pg)

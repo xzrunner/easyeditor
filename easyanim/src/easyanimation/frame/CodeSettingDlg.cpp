@@ -28,7 +28,7 @@ CodeSettingDlg::CodeSettingDlg(wxWindow* parent, Controller* ctrl)
 	SetSizer(sizer);
 
 	sizer->Layout();
-	Refresh();
+	RefreshStage();
 }
 
 void CodeSettingDlg::onSelectPackerFile(wxCommandEvent& event)

@@ -15,7 +15,7 @@ bool DrawRectangleOP::OnMouseLeftDown(int x, int y)
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPos = m_stage->TransPosScrToProj(x, y);
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }
@@ -26,7 +26,7 @@ bool DrawRectangleOP::OnMouseLeftUp(int x, int y)
 
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }
@@ -38,7 +38,7 @@ bool DrawRectangleOP::OnMouseDrag(int x, int y)
 	if (m_firstPos.isValid())
 	{
 		m_currPos = m_stage->TransPosScrToProj(x, y);
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 
 	return false;

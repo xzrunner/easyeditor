@@ -45,7 +45,7 @@ bool PasteSymbolOP::OnMouseMove(int x, int y)
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }

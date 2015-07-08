@@ -97,7 +97,7 @@ void SettingDialog::InitLayout()
 	SetSizer(top_sizer);
 
 	top_sizer->Layout();
-	Refresh();
+	RefreshStage();
 }
 
 void SettingDialog::OnMapSizeChanged(wxCommandEvent& event)

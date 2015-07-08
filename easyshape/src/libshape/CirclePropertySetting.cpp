@@ -26,7 +26,7 @@ void CirclePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	else if (name == "Radius")
 		m_circle->radius = wxANY_AS(value, float);
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void CirclePropertySetting::UpdateProperties(wxPropertyGrid* pg)

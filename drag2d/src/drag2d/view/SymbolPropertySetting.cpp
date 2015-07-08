@@ -36,7 +36,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 			*m_name = wxANY_AS(value, wxString);
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)

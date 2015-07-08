@@ -62,7 +62,7 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 		stage->SetBackground(sprite);
 		sprite->Release();
 		symbol->Release();
-		stage->Refresh();
+		stage->RefreshStage();
 	}
 }
 

@@ -22,19 +22,19 @@ bool Proj2DEditOP::OnKeyDown(int keyCode)
 	{
 	case 'a': case 'A':
 		cam->Translate(d2d::Vector(-OFFSET, 0));
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 'd': case 'D':
 		cam->Translate(d2d::Vector(OFFSET, 0));
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 's': case 'S':
 		cam->Translate(d2d::Vector(0, -OFFSET));
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	case 'w': case 'W':
 		cam->Translate(d2d::Vector(0, OFFSET));
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		break;
 	}
 	return false;			

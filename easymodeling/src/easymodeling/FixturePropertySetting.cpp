@@ -34,7 +34,7 @@ void FixturePropertySetting::OnPropertyGridChange(const wxString& name, const wx
 	else if (name == wxT("groupIndex"))
 		m_fixture->groupIndex = wxANY_AS(value, int);
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void FixturePropertySetting::UpdateProperties(wxPropertyGrid* pg)

@@ -59,7 +59,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	assert(frame);
 	frame->Insert(sprite);
-	Refresh();
+	RefreshStage();
 
 	if (ud) {
 		m_ctrl->setCurrFrame(old_layer, old_frame);
@@ -139,13 +139,13 @@ SkeletonData& StagePanel::getSkeletonData()
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
 	m_edit_op->OnPopMenuSelected(Menu_AddJointNode);
-	Refresh();
+	RefreshStage();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
 	m_edit_op->OnPopMenuSelected(Menu_DelJointNode);
-	Refresh();
+	RefreshStage();
 }
 
 } // eanim

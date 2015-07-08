@@ -44,7 +44,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 		m_selection->Clear();
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }

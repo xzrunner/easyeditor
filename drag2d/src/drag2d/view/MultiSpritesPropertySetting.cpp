@@ -125,7 +125,7 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, con
 		m_impl->SetEditable(wxANY_AS(value, bool));
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)

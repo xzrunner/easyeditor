@@ -170,7 +170,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		spr->editable = wxANY_AS(value, bool);
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)

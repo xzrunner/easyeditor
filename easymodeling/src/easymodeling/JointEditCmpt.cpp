@@ -139,7 +139,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	else if (type == wxT("Motor"))
 		editPanel->insertJoint(new libmodeling::MotorJoint(body0, body1));
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void JointEditCmpt::onTypeChanged(wxCommandEvent& event)

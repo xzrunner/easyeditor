@@ -64,7 +64,7 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_center = pos;
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 		return true;
 	}
 
@@ -82,7 +82,7 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 		else
 			translasteNode(pos - m_lastPos);
 		m_lastPos = pos;
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 
 	return false;

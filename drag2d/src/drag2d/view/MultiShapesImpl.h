@@ -34,7 +34,7 @@ public:
 	void QueryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const;		
 
 	ShapeSelection* GetShapeSelection() { return m_shape_selection; }
-	void ClearShapeSelection();
+	bool ClearShapeSelection();
 
 private:
 	class PointQueryVisitor : public IVisitor

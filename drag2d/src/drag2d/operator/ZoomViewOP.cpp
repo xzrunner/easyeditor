@@ -123,7 +123,7 @@ bool ZoomViewOP::OnMouseDrag(int x, int y)
 
 			m_lastPos = currPos;
 
-			m_stage->Refresh();
+			m_stage->RefreshStage();
 		}
 		return true;
 	}
@@ -141,7 +141,7 @@ bool ZoomViewOP::OnMouseWheelRotation(int x, int y, int direction)
 // 	else
 // 		m_stage->OnMouseWheelRotation(m_stage->GetSize().GetWidth() * 0.5f, m_stage->GetSize().GetHeight() * 0.5f, direction);
 
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 
 	return false;
 }

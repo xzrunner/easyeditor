@@ -61,7 +61,7 @@ void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 {
 	m_settings.isCirculate = event.IsChecked();
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 	m_stage->SetFocus();
 }
 
@@ -69,7 +69,7 @@ void PreviewDialog::onSetStop(wxCommandEvent& event)
 {
 	m_settings.isStop = event.IsChecked();
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 	m_stage->SetFocus();
 }
 

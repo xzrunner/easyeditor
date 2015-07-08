@@ -26,7 +26,7 @@ KeysScaleWidget::KeysScaleWidget(wxWindow* parent, Controller* ctrl)
 
 void KeysScaleWidget::onSize(wxSizeEvent& event)
 {
-	Refresh();
+	RefreshStage();
 }
 
 void KeysScaleWidget::onPaint(wxPaintEvent& event)

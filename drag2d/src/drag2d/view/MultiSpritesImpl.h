@@ -15,7 +15,7 @@ namespace d2d
 class MultiSpritesImpl : public ISpriteViewPanel
 {
 public:
-	MultiSpritesImpl(wxWindow* wnd);
+	MultiSpritesImpl();
 	virtual ~MultiSpritesImpl();
 
 	//
@@ -31,7 +31,7 @@ public:
 	virtual void QuerySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const;		
 
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
-	void ClearSpriteSelection();
+	bool ClearSpriteSelection();
 
 private:
 	class PointQueryVisitor : public IVisitor
@@ -72,9 +72,6 @@ private:
 
 protected:
 	SpriteSelection* m_sprite_selection;
-
-private:
-	wxWindow* m_wnd;
 
 }; // MultiSpritesImpl
 

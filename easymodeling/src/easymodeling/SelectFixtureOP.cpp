@@ -48,7 +48,7 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 		{
 			d2d::DrawRectangleOP::OnMouseLeftDown(x, y);
 			m_firstPos = pos;
-			m_stage->Refresh();
+			m_stage->RefreshStage();
 		}
 	}
 
@@ -118,7 +118,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 		}
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 
 	return false;
 }

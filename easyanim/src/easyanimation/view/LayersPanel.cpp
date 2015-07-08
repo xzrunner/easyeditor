@@ -26,14 +26,16 @@ void LayersPanel::insertLayer()
 	m_ctrl->setCurrFrame(curr_idx, m_ctrl->frame());
 	layer->InsertKeyFrame(1);
 
-	m_parent->Refresh();
+	m_parent->RefreshStage();
 }
 
 void LayersPanel::removeLayer()
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
 
-	m_ctrl->GetStagePanel()->ClearSpriteSelection();
+	if (m_ctrl->GetStagePanel()->ClearSpriteSelection()) {
+		m_ctrl->GetStagePanel()->RefreshStage();
+	}
 
 	layers.removeLayer(m_ctrl->layer());
 	if (layers.size() == 0) {

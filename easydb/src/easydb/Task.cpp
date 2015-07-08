@@ -39,7 +39,7 @@ void Task::clear()
 	Context* context = Context::Instance();
 
 	context->stage->Clear();
-	context->stage->Refresh();
+	context->stage->RefreshStage();
 }
 
 void Task::initLayout()

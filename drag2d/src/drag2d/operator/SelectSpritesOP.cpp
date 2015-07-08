@@ -46,7 +46,9 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		PasteToSelection();
-		m_spritesImpl->ClearSpriteSelection();
+		if (m_spritesImpl->ClearSpriteSelection()) {
+			m_stage->RefreshStage();
+		}
 		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -82,6 +84,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			if (m_view_panel_mgr) {
 				m_view_panel_mgr->SelectMultiSprites(m_selection, m_spritesImpl);
 			}
+			m_stage->RefreshStage();
 		}
 		else
 		{
@@ -93,6 +96,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 					bool add = wxGetKeyState(WXK_CONTROL);
 					m_view_panel_mgr->SelectSprite(selected, !add, m_spritesImpl);
 				}
+				m_stage->RefreshStage();
 			}
 		}
 		m_firstPos.setInvalid();
@@ -104,11 +108,12 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
-		if (wxGetKeyState(WXK_CONTROL))
+		if (wxGetKeyState(WXK_CONTROL)) {
 			m_bDraggable = false;
-		else
+		} else {
 			m_selection->Clear();
-		m_stage->Refresh();
+			m_stage->RefreshStage();
+		}
 	}
 
 	return false;
@@ -128,6 +133,9 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 	Rect rect(m_firstPos, end);
 	std::vector<ISprite*> sprites;
 	m_spritesImpl->QuerySpritesByRect(rect, m_firstPos.x < end.x, sprites);
+	if (!sprites.empty()) {
+		m_stage->RefreshStage();
+	}
 	if (wxGetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
@@ -183,7 +191,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 			m_selection->Clear();
 			m_selection->Add(sprite);
 			enableRightTap(m_selection->IsEmpty());
-			m_stage->Refresh();
+			m_stage->RefreshStage();
 		}
 	}
 
@@ -317,7 +325,9 @@ void SelectSpritesOP::CopyFromSelection()
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
-		m_spritesImpl->InsertSprite(sprite);
+		if (m_spritesImpl->InsertSprite(sprite)) {
+			m_stage->RefreshStage();
+		}
 		m_selection->Add(sprite);
 		last_spr = sprite;
 

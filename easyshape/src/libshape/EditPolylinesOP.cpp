@@ -54,7 +54,7 @@ bool EditPolylinesOP::OnMouseDrag(int x, int y)
 		m_lastPos = currPos;
 
 		m_bDirty = true;
-		m_stage->Refresh();
+		m_stage->RefreshStage();
 	}
 
 	return false;
@@ -93,7 +93,7 @@ void EditPolylinesOP::simplify()
 		itr->second->Load(simplified);
 	}
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void EditPolylinesOP::updateFromSimplified()
@@ -102,7 +102,7 @@ void EditPolylinesOP::updateFromSimplified()
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 		itr->first->Load(itr->second->GetVertices());
 
-	m_stage->Refresh();
+	m_stage->RefreshStage();
 }
 
 void EditPolylinesOP::clearBuffer()
