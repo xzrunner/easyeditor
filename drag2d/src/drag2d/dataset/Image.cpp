@@ -48,10 +48,8 @@ bool Image::LoadFromFile(const std::string& filepath)
 
 	m_tex.LoadFromFile(filepath);
 
- 	if (m_tex.GetTexID() == 0)
+ 	if (m_tex.GetWidth() == 0 || m_tex.GetHeight() == 0)
  	{
-//		assert(0);
-//		m_width = m_height = 0;
  		return true;
  	}
  	else
