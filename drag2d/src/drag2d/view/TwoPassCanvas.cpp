@@ -12,10 +12,10 @@ TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
 	: OnePassCanvas(stage)
 	, m_dirty(true)
 {
-	stage->SetEditOPMonitor(this);
+	stage->SetRefreshMonitor(this);
 }
 
-void TwoPassCanvas::AddEditOP(AbstractAtomicOP* op)
+void TwoPassCanvas::OnRefresh()
 {
 	m_dirty = true;
 }
@@ -35,11 +35,11 @@ void TwoPassCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
-//	if (m_dirty) {
+	if (m_dirty) {
  		mgr->SetFBO(fbo.GetFboID());
 		OnePassCanvas::OnDrawWhole();
-// 		m_dirty = false;
-// 	}
+ 		m_dirty = false;
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen

@@ -1981,7 +1981,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\view\IEditOPMonitor.h"
+					RelativePath="..\..\..\src\drag2d\view\IRefreshMonitor.h"
 					>
 				</File>
 				<File

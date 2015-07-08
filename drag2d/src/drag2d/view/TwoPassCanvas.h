@@ -2,20 +2,20 @@
 #define _DRAG2D_TWO_PASS_CANVAS_H_
 
 #include "OnePassCanvas.h"
-#include "IEditOPMonitor.h"
+#include "IRefreshMonitor.h"
 
 namespace d2d
 {
 
-class TwoPassCanvas : public OnePassCanvas, public IEditOPMonitor
+class TwoPassCanvas : public OnePassCanvas, public IRefreshMonitor
 {
 public:
 	TwoPassCanvas(EditPanel* stage);
 
 	//
-	// interface IEditOPMonitor
+	// interface IRefreshMonitor
 	//
-	virtual void AddEditOP(AbstractAtomicOP* op);
+	virtual void OnRefresh();
 
 protected:
 	virtual void OnSize(int w, int h);

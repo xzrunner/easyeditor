@@ -13,13 +13,18 @@ class AbstractAtomicOP;
 class AbstractEditOP;
 class IStageCanvas;
 class Camera;
-class IEditOPMonitor;
+class IRefreshMonitor;
 
 class EditPanel : public wxPanel
 {
 public:
 	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~EditPanel();
+
+	//
+	// wxWindow
+	//
+	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL);
 
 	virtual void Clear();
 
@@ -63,8 +68,8 @@ public:
 
 	void OnRightPopupMenu(wxCommandEvent& event);
 
-	void SetEditOPMonitor(IEditOPMonitor* monitor) {
-		m_op_monitor = monitor;
+	void SetRefreshMonitor(IRefreshMonitor* monitor) {
+		m_refresh_monitor = monitor;
 	}
 
 protected:
@@ -86,7 +91,7 @@ protected:
 private:
 	HistoryList m_history_list;
 
-	IEditOPMonitor* m_op_monitor;
+	IRefreshMonitor* m_refresh_monitor;
 
 	DECLARE_EVENT_TABLE()
 
