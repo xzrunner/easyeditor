@@ -11,6 +11,8 @@
 #include "dataset/SpriteFactory.h"
 #include "view/SpritePropertySetting.h"
 
+#include <cmath>
+
 namespace d2d
 {
 
@@ -233,8 +235,13 @@ void ISprite::buildBounding()
 	}
 	const ISymbol& symbol = getSymbol();
 	Rect rect(symbol.GetSize(this));
-	if (m_offset.x == 0 && m_offset.y == 0)
+	if (!rect.isValid()) {
+		return;
+	}
+
+	if (m_offset.x == 0 && m_offset.y == 0) {
 		m_offset.set(rect.xCenter(), rect.yCenter());
+	}
 	rect.scale(m_scale.x, m_scale.y);
 	rect.shear(m_shear.x, m_shear.y);
 	m_bounding->initFromRect(rect);

@@ -80,11 +80,13 @@ Vector AABB::center() const
 
 void AABB::getBoundPos(std::vector<Vector>& bound) const
 {
-	bound.clear();
-	bound.push_back(Vector(m_rect.xMin, m_rect.yMin) + m_position);
-	bound.push_back(Vector(m_rect.xMax, m_rect.yMin) + m_position);
-	bound.push_back(Vector(m_rect.xMax, m_rect.yMax) + m_position);
-	bound.push_back(Vector(m_rect.xMin, m_rect.yMax) + m_position);
+	if (m_rect.isValid()) {
+		bound.clear();
+		bound.push_back(Vector(m_rect.xMin, m_rect.yMin) + m_position);
+		bound.push_back(Vector(m_rect.xMax, m_rect.yMin) + m_position);
+		bound.push_back(Vector(m_rect.xMax, m_rect.yMax) + m_position);
+		bound.push_back(Vector(m_rect.xMin, m_rect.yMax) + m_position);
+	}
 }
 
 } // d2d
