@@ -326,6 +326,7 @@ void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseDrag(pos))
 	{
+		m_stage->GetCanvas()->SetDirty();
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
