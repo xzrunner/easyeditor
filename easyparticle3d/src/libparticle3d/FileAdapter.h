@@ -59,6 +59,7 @@ public:
 	bool additive_blend;
 
 	float start_radius;
+	bool start_radius_3d;
 
 	bool orient_to_movement;
 

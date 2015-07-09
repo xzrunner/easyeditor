@@ -45,6 +45,7 @@ private:
 	void onSetBounce(wxCommandEvent& event);
 	void onSetAdditiveBlend(wxCommandEvent& event);
 	void OnSetOrientToMovement(wxCommandEvent& event);
+	void OnSetRadius3D(wxCommandEvent& event);
 
 private:
 	class ChildPanel : public wxPanel, public d2d::UICallback
@@ -108,6 +109,7 @@ private:
 	wxCheckBox* m_additiveBlend;
 	wxCheckBox* m_orient_to_movement;
 	wxCheckBox* m_orient_to_parent;
+	wxCheckBox* m_radius_3d;
 
 	wxSizer* m_compSizer;
 	std::vector<ChildPanel*> m_children;

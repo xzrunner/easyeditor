@@ -25,6 +25,7 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 	value["inertia"] = toolbar->m_inertia->GetValue();
 	value["bounce"] = toolbar->m_bounce->GetValue();
 	value["additive_blend"] = toolbar->m_additiveBlend->GetValue();
+	value["start_radius_3d"] = toolbar->m_radius_3d->GetValue();
 	value["orient_to_movement"] = toolbar->m_orient_to_movement->GetValue();
 	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
@@ -101,6 +102,7 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 	ps->setBounce(adapter.bounce);
 	toolbar->m_additiveBlend->SetValue(adapter.additive_blend);
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
+	toolbar->m_radius_3d->SetValue(adapter.start_radius_3d);
 	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 	for (size_t i = 0, n = adapter.children.size(); i < n; ++i) {
 		toolbar->add(adapter.children[i]);

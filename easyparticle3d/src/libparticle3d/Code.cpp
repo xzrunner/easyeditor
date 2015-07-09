@@ -107,6 +107,9 @@ void Code::resolve()
 	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['start_radius']", s+",");
 
+	s = m_toolbar->m_radius_3d->GetValue() ? "true" : "false";
+	lua::assign(m_gen, "['start_radius_3d']", s+",");
+
 	s = m_toolbar->m_orient_to_movement->GetValue() ? "true" : "false";
 	lua::assign(m_gen, "['orient_to_movement']", s+",");
 

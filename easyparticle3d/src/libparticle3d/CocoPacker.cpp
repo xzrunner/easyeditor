@@ -124,6 +124,9 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 	s = wxString::FromDouble(val["start_radius"].asInt());
 	lua::assign(gen, "['start_radius']", s+",");
 
+	s = val["start_radius_3d"].asBool() ? "true" : "false";
+	lua::assign(gen, "['start_radius_3d']", s+",");
+
 	s = val["orient_to_movement"].asBool() ? "true" : "false";
 	lua::assign(gen, "['orient_to_movement']", s+",");
 
@@ -253,6 +256,9 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 
 	s = wxString::FromDouble(val["start_radius"].asInt());
 	lua::assign(gen, "['start_radius']", s+",");
+
+	s = val["start_radius_3d"].asBool() ? "true" : "false";
+	lua::assign(gen, "['start_radius_3d']", s+",");
 
 	s = val["orient_to_movement"].asBool() ? "true" : "false";
 	lua::assign(gen, "['orient_to_movement']", s+",");

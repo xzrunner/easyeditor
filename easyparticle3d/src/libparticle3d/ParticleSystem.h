@@ -107,6 +107,7 @@ public:
 	void setBounce(bool open) { bounce = open; }
 	void setAdditiveBlend(bool open) { additive_blend = open; }
 	void SetOrientToMovement(bool open) { orient_to_movement = open; }
+	void SetRadius3D(bool is3d) { is_start_radius_3d = is3d; }
 
 	void addChild(ParticleChild* child) { 
 		children.push_back(child); 
@@ -127,7 +128,8 @@ protected:
 	bool isEmpty() const { return pStart == pLast; }
 
 private:
-	void transCoords(float r, float hori, float vert, float result[3]);
+	void TransCoords3D(float r, float hori, float vert, float result[3]);
+	void TransCoords2D(float r, float hori, float result[3]);
 
 private:
 	AnimRecorder* m_anim_recorder;
@@ -180,6 +182,7 @@ private:
 	bool additive_blend;
 
 	float start_radius;
+	bool is_start_radius_3d;
 
 	bool orient_to_movement;
 

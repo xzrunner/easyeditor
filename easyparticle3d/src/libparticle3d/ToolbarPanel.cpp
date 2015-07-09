@@ -291,11 +291,22 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Start Radius
-	d2d::SliderCtrlOne* s_start_radius = new d2d::SliderCtrlOne(this, "Start Radius (pixel)", "start_radius", 
-		this, PS_START_RADIUS, d2d::SliderItem("", "", START_RADIUS, 0, 1000));
-	leftSizer->Add(s_start_radius);
-	leftSizer->AddSpacer(10);
-	m_sliders.push_back(s_start_radius);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Start Radius (pixel)");
+		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+		m_radius_3d = new wxCheckBox(this, wxID_ANY, "3D");
+		Connect(m_radius_3d->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetRadius3D));
+		sizer->Add(m_radius_3d);
+
+		d2d::SliderCtrlOne* s_start_radius = new d2d::SliderCtrlOne(this, "", "start_radius", 
+			this, PS_START_RADIUS, d2d::SliderItem("", "", START_RADIUS, 0, 1000));
+		sizer->Add(s_start_radius);
+		m_sliders.push_back(s_start_radius);
+
+		leftSizer->Add(sizer);
+		leftSizer->AddSpacer(10);
+	}
 	// orient_to_movement
 	{
 		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("Orient to Movement"));	
@@ -411,6 +422,11 @@ void ToolbarPanel::onSetAdditiveBlend(wxCommandEvent& event)
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
 {
 	m_stage->m_ps->SetOrientToMovement(event.IsChecked());
+}
+
+void ToolbarPanel::OnSetRadius3D(wxCommandEvent& event)
+{
+	m_stage->m_ps->SetRadius3D(event.IsChecked());
 }
 
 //////////////////////////////////////////////////////////////////////////

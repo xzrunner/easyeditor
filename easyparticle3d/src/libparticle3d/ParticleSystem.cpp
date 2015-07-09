@@ -52,6 +52,7 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 	additive_blend = false;
 
 	start_radius = 0;
+	is_start_radius_3d = false;
 
 	orient_to_movement = false;
 }
@@ -112,6 +113,7 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	additive_blend = ps.additive_blend;
 
 	start_radius = ps.start_radius;
+	is_start_radius_3d = ps.is_start_radius_3d;
 
 	orient_to_movement = ps.orient_to_movement;
 }
@@ -481,11 +483,15 @@ void ParticleSystem::add()
 	pLast->direction[1] = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 	pLast->direction[1] *= d2d::TRANS_DEG_TO_RAD;
 
-	transCoords(start_radius, pLast->direction[0], pLast->direction[1], pLast->position);
+	if (is_start_radius_3d) {
+		TransCoords3D(start_radius, pLast->direction[0], pLast->direction[1], pLast->position);
+	} else {
+		TransCoords2D(start_radius, pLast->direction[0], pLast->position);
+	}
 
 	min = min_spd; max = max_spd;
 	float speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
-	transCoords(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
+	TransCoords3D(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
 
 	min = min_dis_region; max = max_dis_region;
 	float dis_r = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
@@ -538,13 +544,21 @@ void ParticleSystem::remove(Particle * p)
 	}
 }
 
-void ParticleSystem::transCoords(float r, float hori, float vert, float result[3])
+void ParticleSystem::TransCoords3D(float r, float hori, float vert, float result[3])
 {
 	float dxy = r * cos(vert);
 	float dz = r * sin(vert);
 	result[0] = dxy * cos(hori);
 	result[1] = dxy * sin(hori);
 	result[2] = dz;
+}
+
+void ParticleSystem::TransCoords2D(float r, float hori, float result[3])
+{
+//	float a = rand() / (float(RAND_MAX)+1) * (2 * d2d::PI);
+	result[0] = r * cos(hori);
+	result[1] = r * sin(hori);
+	result[2] = 0;
 }
 
 }

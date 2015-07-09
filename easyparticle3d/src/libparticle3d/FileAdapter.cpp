@@ -74,6 +74,8 @@ void FileAdapter::load(const char* filename, int version)
 	bounce = value["bounce"].asBool();
 	additive_blend = value["additive_blend"].asBool();
 	start_radius = value["start_radius"].asInt();
+	start_radius_3d = value["start_radius_3d"].asBool();
+	
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
 
