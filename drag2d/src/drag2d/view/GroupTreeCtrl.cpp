@@ -308,6 +308,7 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 
 	// old info
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(item_src);
+	bool is_group = data->IsGroup();
 	std::string name = GetItemText(item_src);
 	// insert
 	wxTreeItemId new_item = InsertItem(item_dst, 0, name, -1, -1, data->Clone());
@@ -321,7 +322,7 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 	// set selection
 	SelectItem(new_item);
 	// font style
-	if (data->IsGroup()) {
+	if (is_group) {
 		SetItemBold(new_item, true);
 	}
 }
