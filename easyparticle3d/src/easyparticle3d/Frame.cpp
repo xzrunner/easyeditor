@@ -36,11 +36,12 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_particle3d)) {
+			int idx = dlg.GetFilterIndex();
+			if (idx == 0) {
 				SaveAsParticle3d(filename);
-			} else if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_anim)) {
+			} else if (idx == 1) {
 				SaveAsAnim(filename);
-			} else if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_p3dinv)) {
+			} else if (idx == 2) {
 				SaveAsInvert(filename);
 			} else {
 				throw d2d::Exception("error filepath %s", filename.ToStdString().c_str());
