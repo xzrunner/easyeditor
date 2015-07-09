@@ -1,6 +1,7 @@
 #include "MoveSpriteState.h"
 
 #include "common/visitors.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {

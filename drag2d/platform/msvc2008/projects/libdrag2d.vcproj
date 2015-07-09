@@ -2008,6 +2008,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\view\ShapeSelection.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\ShapeSelection.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\view\ShapesPanelImpl.cpp"
 						>
 					</File>
@@ -2033,6 +2041,14 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\SpriteDropTarget.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\SpriteSelection.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\SpriteSelection.h"
 						>
 					</File>
 					<File

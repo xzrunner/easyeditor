@@ -2,7 +2,6 @@
 #define _DRAG2D_EDIT_PANEL_H_
 
 #include "HistoryList.h"
-#include "DirtyState.h"
 #include "common/Vector.h"
 
 #include <wx/wx.h>
@@ -15,19 +14,14 @@ class AbstractEditOP;
 class IStageCanvas;
 class Camera;
 class IRefreshMonitor;
-class DirtyState;
 
-class EditPanel : public wxPanel, public DirtyState
+class EditPanel : public wxPanel
 {
 public:
 	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~EditPanel();
 
 	virtual void Clear();
-
-//	void RefreshStage();
-	void RefreshWX();
-	virtual void SetDirty() const;
 
 	Vector TransPosScrToProj(int x, int y) const;
 	Vector TransPosProjToScr(const Vector& proj) const;
@@ -69,10 +63,6 @@ public:
 
 	void OnRightPopupMenu(wxCommandEvent& event);
 
-	void AddRefreshObserver(DirtyState* observer) {
-		m_refresh_observers.push_back(observer);
-	}
-
 protected:
 	void OnSize(wxSizeEvent& event);
 
@@ -91,8 +81,6 @@ protected:
 
 private:
 	HistoryList m_history_list;
-
-	std::vector<DirtyState*> m_refresh_observers;
 
 	DECLARE_EVENT_TABLE()
 

@@ -54,11 +54,8 @@ void Task::Clear()
 
 	m_viewlist->Clear();
 	m_grouptree->Clear();
-
 	m_library->Clear();
 	m_stage->Clear();
-	m_library->Refresh();
-	m_stage->RefreshStage();
 }
 
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const

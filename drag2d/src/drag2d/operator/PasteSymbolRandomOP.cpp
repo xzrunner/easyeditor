@@ -1,6 +1,7 @@
 #include "PasteSymbolRandomOP.h"
 
 #include "dataset/SpriteFactory.h"
+#include "dataset/ISprite.h"
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"

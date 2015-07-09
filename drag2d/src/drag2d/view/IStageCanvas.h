@@ -32,6 +32,9 @@ public:
 	Camera* GetCamera() { return m_camera; }
 	const Camera* GetCamera() const { return m_camera; }
 
+	void SetDirty() { m_dirty = true; }
+	bool IsDirty() const { return m_dirty; }
+
 protected:
 	virtual void InitGL();
 	virtual void OnSize(int w, int h) = 0;
@@ -63,6 +66,8 @@ private:
 	wxGLContext* m_context;
 
 	bool m_inited;
+
+	bool m_dirty;
 
 	DECLARE_EVENT_TABLE()
 

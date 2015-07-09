@@ -54,7 +54,7 @@ wxSizer* ResizeCMPT::initLayout()
 void ResizeCMPT::onChangeSize(wxSpinEvent& event)
 {
 	m_stage->rebuildPatchSymbol();
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 } // escale9

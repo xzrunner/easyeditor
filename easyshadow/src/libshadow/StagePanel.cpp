@@ -70,6 +70,8 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 
+	m_canvas->SetDirty();
+
 	return true;
 }
 

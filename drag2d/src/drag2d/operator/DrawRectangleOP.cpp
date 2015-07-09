@@ -1,6 +1,7 @@
 #include "DrawRectangleOP.h"
 
 #include "render/PrimitiveDraw.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
@@ -38,7 +39,7 @@ bool DrawRectangleOP::OnMouseDrag(int x, int y)
 	if (m_firstPos.isValid())
 	{
 		m_currPos = m_stage->TransPosScrToProj(x, y);
-		m_stage->RefreshStage();
+		m_stage->GetCanvas()->SetDirty();
 	}
 
 	return false;

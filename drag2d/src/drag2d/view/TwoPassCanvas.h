@@ -16,9 +16,6 @@ protected:
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawWhole() const;
 
-private:
-	DirtyState m_dirty_state;
-
 }; // TwoPassCanvas
 
 }

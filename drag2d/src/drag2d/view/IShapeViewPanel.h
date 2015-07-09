@@ -1,10 +1,11 @@
 #ifndef _DRAG2D_ISHAPE_VIEW_PANEL_H_
 #define _DRAG2D_ISHAPE_VIEW_PANEL_H_
 
-#include "dataset/ObjSelectionSet.h"
-
 namespace d2d
 {
+
+class IShape;
+class ShapeSelection;
 
 class IShapeViewPanel
 {

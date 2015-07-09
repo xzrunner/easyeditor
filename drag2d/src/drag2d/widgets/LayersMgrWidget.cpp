@@ -2,11 +2,13 @@
 
 #include "common/tools.h"
 #include "dataset/Layer.h"
+#include "view/EditPanel.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
 
-LayersMgrWidget::LayersMgrWidget(wxWindow* parent, wxWindow* stage)
+LayersMgrWidget::LayersMgrWidget(wxWindow* parent, d2d::EditPanel* stage)
 	: wxPanel(parent)
 	, m_stage(stage)
 	, m_editedLayer(NULL)
@@ -247,7 +249,7 @@ void LayersMgrWidget::onDelLayer(wxCommandEvent& event)
 	wxWindow* root = m_parent;
 	while (root->GetParent())
 		root = root->GetParent();
-	root->Refresh();
+	root->Refresh(true);
 }
 
 void LayersMgrWidget::onLayerUp(wxCommandEvent& event)
@@ -272,10 +274,10 @@ void LayersMgrWidget::onLayerUp(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->Refresh();
+	m_stage->GetCanvas()->SetDirty();
 
 	Layout();
-	Refresh();
+	Refresh(true);
 }
 
 void LayersMgrWidget::onLayerDown(wxCommandEvent& event)
@@ -303,10 +305,10 @@ void LayersMgrWidget::onLayerDown(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->Refresh();
+	m_stage->GetCanvas()->SetDirty();
 
 	Layout();
-	Refresh();
+	Refresh(true);
 }
 
 int LayersMgrWidget::getEditLayerIndex() const
@@ -363,7 +365,7 @@ onSetVisible(wxCommandEvent& event)
 	while (root->GetParent())
 		root = root->GetParent();
 
-	root->Refresh();
+	root->Refresh(true);
 }
 
 void LayersMgrWidget::LayerWidget::

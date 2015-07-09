@@ -5,17 +5,19 @@
 #include "DataTraverseType.h"
 
 #include "common/visitors.h"
-#include "dataset/ObjSelectionSet.h"
 
 #include <wx/wx.h>
 
 namespace d2d
 {
 
+class SpriteSelection;
+class Rect;
+
 class MultiSpritesImpl : public ISpriteViewPanel
 {
 public:
-	MultiSpritesImpl();
+	MultiSpritesImpl(EditPanel* stage);
 	virtual ~MultiSpritesImpl();
 
 	//

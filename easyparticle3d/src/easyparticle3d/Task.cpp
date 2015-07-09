@@ -43,7 +43,6 @@ void Task::Clear()
 {
 	m_toolbar->initParticle();
 	m_stage->Clear();
-	m_stage->RefreshStage();
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const 

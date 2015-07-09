@@ -59,6 +59,8 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 	rebuildPatchSymbol();
 
+	m_canvas->SetDirty();
+
 	return true;
 }
 
@@ -72,6 +74,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 			{
 				m_sprites[i][j] = NULL;
 				sprite->Release();
+				m_canvas->SetDirty();
 				return true;
 			}
 		}
@@ -91,6 +94,8 @@ bool StagePanel::ClearAllSprite()
 	memset(m_sprites, 0, sizeof(int) * 9);
 
 	delete m_symbol, m_symbol = NULL;
+
+	m_canvas->SetDirty();
 
 	return true;
 }

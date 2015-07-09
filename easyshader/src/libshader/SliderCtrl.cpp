@@ -132,7 +132,7 @@ void SliderCtrl::UpdateUniformValue()
 	d2d::ShaderMgr::Instance()->sprite();
 	m_uniform->Load();
 
-	m_canvas->RefreshStage();
+	m_canvas->SetDirty();
 }
 
 }

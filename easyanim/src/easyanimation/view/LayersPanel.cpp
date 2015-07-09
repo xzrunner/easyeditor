@@ -26,7 +26,7 @@ void LayersPanel::insertLayer()
 	m_ctrl->setCurrFrame(curr_idx, m_ctrl->frame());
 	layer->InsertKeyFrame(1);
 
-	m_parent->RefreshStage();
+	m_ctrl->GetStagePanel()->GetCanvas()->SetDirty();
 }
 
 void LayersPanel::removeLayer()
@@ -34,7 +34,7 @@ void LayersPanel::removeLayer()
 	LayersMgr& layers = m_ctrl->GetLayers();
 
 	if (m_ctrl->GetStagePanel()->ClearSpriteSelection()) {
-		m_ctrl->GetStagePanel()->RefreshStage();
+		m_ctrl->GetStagePanel()->GetCanvas()->SetDirty();
 	}
 
 	layers.removeLayer(m_ctrl->layer());

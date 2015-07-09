@@ -10,7 +10,7 @@ namespace libshape
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(parent)
+	, MultiShapesImpl(this)
 	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this);
@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(parent)
+	, MultiShapesImpl(this)
 	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
@@ -35,7 +35,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   Symbol* symbol/*, d2d::LibraryPanel* library*/)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(parent)
+	, MultiShapesImpl(this)
 	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this);
@@ -62,29 +62,38 @@ void StagePanel::Clear()
 
 bool StagePanel::InsertShape(d2d::IShape* shape)
 {
+	bool ret = false;
 	if (m_symbol) {
-		return m_symbol->Add(shape);
-	} else {
-		return false;
+		ret = m_symbol->Add(shape);
 	}
+	if (ret) {
+		m_canvas->SetDirty();
+	}
+	return ret;
 }
 
 bool StagePanel::RemoveShape(d2d::IShape* shape)
 {
+	bool ret = false;
 	if (m_symbol) {
-		return m_symbol->Remove(shape);
-	} else {
-		return false;
+		ret = m_symbol->Remove(shape);
 	}
+	if (ret) {
+		m_canvas->SetDirty();
+	}
+	return ret;
 }
 
 bool StagePanel::ClearAllShapes()
 {
+	bool ret = false;
 	if (m_symbol) {
-		return m_symbol->Clear();
-	} else {
-		return false;
+		ret = m_symbol->Clear();
 	}
+	if (ret) {
+		m_canvas->SetDirty();
+	}
+	return ret;
 }
 
 void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
@@ -120,7 +129,7 @@ void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 		if (m_toolbar) {
 			m_toolbar->SelectSuitableEditOP();
 		}
-		m_canvas->Refresh();
+		m_canvas->SetDirty();
 	}
 }
 

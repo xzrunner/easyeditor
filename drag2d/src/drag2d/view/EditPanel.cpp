@@ -6,7 +6,6 @@
 #include "view/Camera.h"
 #include "view/IStageCanvas.h"
 #include "view/Frame.h"
-#include "view/DirtyState.h"
 
 #include <fstream>
 
@@ -47,30 +46,6 @@ void EditPanel::Clear()
 	m_history_list.clear();
 }
 
-// void EditPanel::RefreshStage()
-// {
-// 	wxPanel::Refresh();
-// 
-// 	for (int i = 0, n = m_refresh_observers.size(); i < n; ++i) {
-// 		m_refresh_observers[i]->SetDirty();
-// 	}
-// }
-
-void EditPanel::RefreshWX()
-{
-	wxPanel::Refresh();
-}
-
-// 每帧结束检查后再调用wxPanel::Refresh();
-void EditPanel::SetDirty() const
-{
-	DirtyState::SetDirty();
-
-	for (int i = 0, n = m_refresh_observers.size(); i < n; ++i) {
-		m_refresh_observers[i]->SetDirty();
-	}
-}
-
 Vector EditPanel::TransPosScrToProj(int x, int y) const
 {
 	return m_camera->transPosScreenToProject(x, y, GetSize().GetWidth(), GetSize().GetHeight());
@@ -106,7 +81,7 @@ void EditPanel::SetEditOP(AbstractEditOP* editOP)
 	if (m_edit_op) {
 		m_edit_op->OnActive();
 	}
-	RefreshWX();
+	m_canvas->SetDirty();
 }
 
 void EditPanel::OnMouse(wxMouseEvent& event)
@@ -190,7 +165,7 @@ void EditPanel::ResetCanvas()
 	if (m_canvas)
 	{
 		m_canvas->ResetInitState();
-		RefreshWX();
+		m_canvas->SetDirty();
 	}
 }
 
@@ -309,7 +284,7 @@ void EditPanel::OnSize(wxSizeEvent& event)
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}
-	RefreshWX();	// no refresh when change window size
+	m_canvas->SetDirty();	// no refresh when change window size
 }
 
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)

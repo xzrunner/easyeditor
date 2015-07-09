@@ -1,6 +1,8 @@
 #include "wrap_SelectionSet.h"
 
 #include "common/visitors.h"
+#include "view/IStageCanvas.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {

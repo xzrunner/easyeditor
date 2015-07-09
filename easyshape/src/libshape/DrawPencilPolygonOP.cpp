@@ -44,7 +44,7 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 		NewPolygon(simplified);
 		Clear();
 
-		m_stage->RefreshStage();
+		m_stage->GetCanvas()->SetDirty();
 	}
 
 	return false;

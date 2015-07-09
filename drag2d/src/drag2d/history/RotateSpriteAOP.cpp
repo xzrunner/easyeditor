@@ -4,6 +4,8 @@
 
 #include "common/Math.h"
 #include "common/visitors.h"
+#include "dataset/ISprite.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {

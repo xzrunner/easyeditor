@@ -38,17 +38,13 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		if (m_shapeImpl->ClearShapeSelection()) {
-			m_stage->RefreshStage();
-		}
+		m_shapeImpl->ClearShapeSelection();
 		Clear();
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		PasteToSelection();
-		if (m_shapeImpl->ClearShapeSelection()) {
-			m_stage->RefreshStage();
-		}
+		m_shapeImpl->ClearShapeSelection();
 		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -82,7 +78,6 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			} else {
 				m_selection->Add(selected);
 			}
-			m_stage->RefreshStage();
 			if (m_view_panel_mgr) {
 				m_view_panel_mgr->SelectMultiShapes(m_selection, m_shapeImpl);
 			}
@@ -96,7 +91,6 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 				if (m_view_panel_mgr) {
 					m_view_panel_mgr->SelectShape(selected, m_shapeImpl);
 				}
-				m_stage->RefreshStage();
 			} else {
 				m_move_last_pos = pos;
 			}
@@ -198,9 +192,6 @@ void SelectShapesOP::PasteToSelection() const
 
 void SelectShapesOP::CopyFromSelection()
 {
-	if (!m_clipboard.empty()) {
-		m_stage->RefreshStage();
-	}
 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
 		m_shapeImpl->InsertShape(m_clipboard[i]->Clone());
 	}

@@ -37,7 +37,7 @@ void RGBColorSettingDlg::OnColorChanged()
 
 	m_color_bg->SetBackgroundColour(wxColour(m_r->GetColorValue(), 
 		m_g->GetColorValue(), m_b->GetColorValue()));
-	m_color_bg->Refresh();
+	m_color_bg->Refresh(true);
 
 	if (m_lsn) {
 		m_lsn->OnColorChanged(GetColor());

@@ -43,7 +43,7 @@ SetColor(const Colorf& begin, const Colorf& end)
 {
 	m_col_begin = begin;
 	m_col_end = end;
-	Refresh();
+	Refresh(true);
 }
 
 void RGBColorPanel::Canvas::

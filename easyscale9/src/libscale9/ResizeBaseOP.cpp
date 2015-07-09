@@ -50,8 +50,6 @@ bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 
 	m_status = e_null;
 
-	m_stage->RefreshStage();
-
 	return false;
 }
 
@@ -63,7 +61,7 @@ bool ResizeBaseOP::OnMouseDrag(int x, int y)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
-		m_stage->RefreshStage();
+		m_stage->GetCanvas()->SetDirty();
 	}
 
 	return false;

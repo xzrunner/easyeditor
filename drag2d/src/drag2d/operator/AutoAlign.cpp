@@ -2,6 +2,7 @@
 
 #include "dataset/AbstractBV.h"
 #include "dataset/ISymbol.h"
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
 #include "render/PrimitiveDraw.h"
 

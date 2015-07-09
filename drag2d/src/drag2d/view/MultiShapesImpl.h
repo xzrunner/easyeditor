@@ -4,17 +4,21 @@
 #include "IShapeViewPanel.h"
 #include "DataTraverseType.h"
 
-#include "dataset/ObjSelectionSet.h"
+#include "common/visitors.h"
 
 #include <wx/wx.h>
 
 namespace d2d
 {
 
+class IStageCanvas;
+class ShapeSelection;
+class Rect;
+
 class MultiShapesImpl : public IShapeViewPanel
 {
 public:
-	MultiShapesImpl(wxWindow* wnd);
+	MultiShapesImpl(EditPanel* stage);
 	virtual ~MultiShapesImpl();
 
 	//
@@ -74,9 +78,6 @@ private:
 
 protected:
 	ShapeSelection* m_shape_selection;
-
-private:
-	wxWindow* m_wnd;
 
 }; // MultiShapesImpl
 

@@ -22,7 +22,7 @@ bool DrawPolylineOP::OnMouseLeftDown(int x, int y)
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
 	m_polyline.push_back(pos);
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }
@@ -35,7 +35,7 @@ bool DrawPolylineOP::OnMouseRightDown(int x, int y)
 	{
 		m_polyline.pop_back();
 		if (m_polyline.empty()) m_currPos.setInvalid();
-		m_stage->RefreshStage();
+		m_stage->GetCanvas()->SetDirty();
 	}
 
 	return false;
@@ -52,7 +52,7 @@ bool DrawPolylineOP::OnMouseMove(int x, int y)
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
 	m_currPos = pos;
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }
@@ -63,7 +63,7 @@ bool DrawPolylineOP::OnMouseLeftDClick(int x, int y)
 
 	if (m_isClosed)
 		m_polyline.push_back(m_polyline.front());
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }

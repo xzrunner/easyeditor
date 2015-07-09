@@ -62,7 +62,7 @@ void Projection2DScene::InitCamera()
 	d2d::Camera* cam = m_stage->GetCamera();
 	cam->Translate(d2d::Vector(600, 0));
 	cam->SetScale(2);
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 void Projection2DScene::InitEditOP()

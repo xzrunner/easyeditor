@@ -36,11 +36,8 @@ void Task::storeToFile(const char* filename) const
 void Task::clear()
 {
 	Context* context = Context::Instance();
-
 	context->library->Clear();
 	context->stage->Clear();
-	context->library->Refresh();
-	context->stage->RefreshStage();
 }
 
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 

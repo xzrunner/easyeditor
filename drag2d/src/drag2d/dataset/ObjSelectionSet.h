@@ -22,8 +22,8 @@ public:
 
 }; // ObjSelection
 
-typedef ObjSelectionSet<ISprite> SpriteSelection;
-typedef ObjSelectionSet<IShape> ShapeSelection;
+// typedef ObjSelectionSet<ISprite> SpriteSelection;
+// typedef ObjSelectionSet<IShape> ShapeSelection;
 
 }
 

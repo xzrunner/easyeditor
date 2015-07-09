@@ -6,6 +6,7 @@
 
 #include "dataset/Group.h"
 #include "dataset/ISprite.h"
+#include "view/SpriteSelection.h"
 
 #include <sstream>
 #include <queue>

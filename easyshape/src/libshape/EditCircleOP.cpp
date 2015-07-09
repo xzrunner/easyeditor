@@ -28,7 +28,6 @@ bool EditCircleOP::OnKeyDown(int keyCode)
 	{
 		m_shapesImpl->ClearShapeSelection();
 		m_captured.clear();
-		m_stage->RefreshStage();
 
 		if (m_view_panel_mgr) {
 			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
@@ -104,8 +103,6 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 
 	Clear();
 
-	m_stage->RefreshStage();
-
 	return false;
 }
 
@@ -125,7 +122,6 @@ bool EditCircleOP::OnMouseRightDown(int x, int y)
 			m_shapesImpl->RemoveShape(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-			m_stage->RefreshStage();
 
 			if (m_view_panel_mgr) {
 				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
@@ -151,8 +147,9 @@ bool EditCircleOP::OnMouseMove(int x, int y)
 		NodeCapture capture(m_shapesImpl, tolerance);
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
-		if (old && !m_captured.shape || !old && m_captured.shape)
-			m_stage->RefreshStage();
+		if (old && !m_captured.shape || !old && m_captured.shape) {
+			m_stage->GetCanvas()->SetDirty();
+		}
 	}
 
 	return false;
@@ -181,7 +178,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 		}
 	}
 
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }

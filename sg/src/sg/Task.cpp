@@ -42,7 +42,6 @@ bool Task::IsDirty() const
 void Task::Clear()
 {
 	m_stage->Clear();
-	m_stage->RefreshStage();
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

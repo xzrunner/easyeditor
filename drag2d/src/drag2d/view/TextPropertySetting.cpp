@@ -5,6 +5,7 @@
 
 #include "dataset/TextSprite.h"
 #include "view/EditPanel.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
@@ -21,6 +22,7 @@ void TextPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == "Text")
 	{
 		wxString text = wxANY_AS(value, wxString);
@@ -35,8 +37,14 @@ void TextPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		wxColour c = wxANY_AS(value, wxColour);
 		m_sprite->setColor(d2d::Colori(c.Red(), c.Green(), c.Blue(), c.Alpha()));
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->RefreshStage();
+	if (dirty) {
+		m_stage->GetCanvas()->SetDirty();
+	}
 }
 
 void TextPropertySetting::UpdateProperties(wxPropertyGrid* pg)

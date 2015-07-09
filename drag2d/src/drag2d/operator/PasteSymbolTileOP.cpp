@@ -2,6 +2,7 @@
 
 #include "common/Math.h"
 #include "dataset/SpriteFactory.h"
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
@@ -132,7 +133,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 
 		} while (0);
 	}
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }

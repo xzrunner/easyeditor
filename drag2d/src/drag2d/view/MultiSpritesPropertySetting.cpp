@@ -4,6 +4,7 @@
 
 #include "common/Math.h"
 #include "view/EditPanel.h"
+#include "view/IStageCanvas.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -28,6 +29,8 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, con
 {
 	if (value.IsNull())
 		return;
+
+	bool dirty = true;
 
 	// info
 	if (name == wxT("Tag"))
@@ -124,8 +127,14 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, con
 	{
 		m_impl->SetEditable(wxANY_AS(value, bool));
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->RefreshStage();
+	if (dirty) {
+		m_stage->GetCanvas()->SetDirty();
+	}
 }
 
 void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)

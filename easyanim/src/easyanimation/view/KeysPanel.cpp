@@ -75,7 +75,7 @@ void KeysPanel::SetSelectPos(int row, int col)
 
 	m_ctrl->UpdateCurrFrame();
 
-	RefreshStage();
+	Refresh(true);
 }
 
 void KeysPanel::GetSelectRegion(int& row, int& col_min, int& col_max)
@@ -102,7 +102,7 @@ void KeysPanel::SetSelectRegion(int row, int col)
 	m_selected_col_max = std::min(m_selected_col_max, 
 		m_ctrl->GetLayers().getLayer(m_ctrl->layer())->GetMaxFrameTime() - 1);
 
-	RefreshStage();
+	Refresh(true);
 }
 
 void KeysPanel::UpdateSelectRegion(int col_min, int col_max)
@@ -117,7 +117,7 @@ void KeysPanel::UpdateSelectRegion(int col_min, int col_max)
 	m_selected_col_max = std::min(m_selected_col_max, 
 		m_ctrl->GetLayers().getLayer(m_ctrl->layer())->GetMaxFrameTime() - 1);
 
-	RefreshStage();
+	Refresh(true);
 }
 
 void KeysPanel::InitLayout()

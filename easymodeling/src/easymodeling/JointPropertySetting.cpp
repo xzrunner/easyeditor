@@ -52,6 +52,7 @@ void JointPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 		m_joint->m_name = wxANY_AS(value, wxString);
 	else if (name == wxT("collideConnected"))
@@ -90,7 +91,9 @@ void JointPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		break;
 	}
 
-	m_stage->RefreshStage();
+	if (dirty) {
+		m_stage->GetCanvas()->SetDirty();
+	}
 }
 
 void JointPropertySetting::UpdateProperties(wxPropertyGrid* pg)

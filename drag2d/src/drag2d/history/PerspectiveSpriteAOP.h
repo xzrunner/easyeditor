@@ -3,10 +3,12 @@
 
 #include "AbstractAtomicOP.h"
 
-#include "dataset/ObjSelectionSet.h"
+#include "common/Vector.h"
 
 namespace d2d
 {
+
+class ISprite;
 
 class PerspectiveSpriteAOP : public AbstractAtomicOP
 {

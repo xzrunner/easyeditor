@@ -2,8 +2,7 @@
 #define _D2D_SELECT_SHAPES_OP_H_
 
 #include "DrawRectangleOP.h"
-
-#include "dataset/ObjSelectionSet.h"
+#include "interfaces.h"
 
 namespace d2d
 {
@@ -14,6 +13,7 @@ class AbstractEditCMPT;
 class IPropertySetting;
 class IShape;
 class ViewPanelMgr;
+class ShapeSelection;
 
 class SelectShapesOP : public DrawRectangleOP
 {

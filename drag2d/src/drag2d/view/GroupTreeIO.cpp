@@ -1,6 +1,7 @@
 #include "GroupTreeIO.h"
 #include "GroupTreeCtrl.h"
 
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
 
 #include <queue>

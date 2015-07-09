@@ -100,8 +100,6 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		}
 		ocean_val = value["ocean"][i++];
 	}
-
-	RefreshStage();
 }
 
 // const std::vector<OceanMesh*>& StagePanel::GetOceans() const 

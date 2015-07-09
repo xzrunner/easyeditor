@@ -57,7 +57,6 @@ void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
 	setting.isCirculate = event.IsChecked();
 
-	m_stage->RefreshStage();
 	m_stage->SetFocus();
 }
 
@@ -68,7 +67,6 @@ void PreviewDialog::onSetStop(wxCommandEvent& event)
 	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
 	setting.isStop = event.IsChecked();
 
-	m_stage->RefreshStage();
 	m_stage->SetFocus();
 }
 

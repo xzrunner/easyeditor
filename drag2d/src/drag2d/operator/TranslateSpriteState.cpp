@@ -1,6 +1,7 @@
 #include "TranslateSpriteState.h"
 
 #include "history/TranslateSpriteAOP.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {

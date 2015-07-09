@@ -23,7 +23,7 @@ void Task::Load(const char* filename)
 {
 	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
 	m_stage->LoadFromShadow();
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 void Task::Store(const char* filename) const
@@ -40,8 +40,6 @@ void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->Clear();
-	m_library->RefreshStage();
-	m_stage->RefreshStage();
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

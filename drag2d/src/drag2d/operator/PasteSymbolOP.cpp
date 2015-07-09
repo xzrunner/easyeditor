@@ -1,6 +1,7 @@
 #include "PasteSymbolOP.h"
 
 #include "dataset/SpriteFactory.h"
+#include "dataset/ISprite.h"
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
@@ -45,7 +46,7 @@ bool PasteSymbolOP::OnMouseMove(int x, int y)
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }

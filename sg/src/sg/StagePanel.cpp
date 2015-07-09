@@ -265,7 +265,7 @@ void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
 	}
 	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(sprite->getSymbol());
 	symbol.SetInfo(wxString::FromDouble(info->remain).ToStdString());
-	m_library->RefreshStage();
+	m_library->Refresh(true);
 }
 
 }

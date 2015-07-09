@@ -104,6 +104,7 @@ void IStageCanvas::OnPaint(wxPaintEvent& event)
 	}
 
 	OnDrawWhole();
+	m_dirty = false;
 
 	glFlush();
 	SwapBuffers();

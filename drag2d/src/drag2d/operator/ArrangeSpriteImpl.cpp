@@ -19,6 +19,7 @@
 #include "view/PropertySettingPanel.h"
 #include "view/Camera.h"
 #include "view/IStageCanvas.h"
+#include "view/SpriteSelection.h"
 #include "history/DeleteSpriteAOP.h"
 #include "history/CombineAOP.h"
 #include "history/TranslateSpriteAOP.h"
@@ -524,7 +525,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		//sprite->setOffset(Vector(0, 0));
 	}
 	m_stage->AddOpRecord(comb);
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
@@ -594,9 +595,7 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites, m_sprites_impl));
 
-	if (m_sprites_impl->ClearSpriteSelection()) {
-		m_stage->RefreshStage();
-	}
+	m_sprites_impl->ClearSpriteSelection();
 }
 
 void ArrangeSpriteImpl::UpOneLayer()

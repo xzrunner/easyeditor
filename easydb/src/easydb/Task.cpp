@@ -37,9 +37,7 @@ void Task::storeToFile(const char* filename) const
 void Task::clear()
 {
 	Context* context = Context::Instance();
-
 	context->stage->Clear();
-	context->stage->RefreshStage();
 }
 
 void Task::initLayout()

@@ -5,6 +5,7 @@
 #include "render/GL10.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
+#include "view/SpriteSelection.h"
 #include "render/SpriteRenderer.h"
 
 namespace d2d
@@ -96,7 +97,7 @@ bool PasteSpriteOP::OnMouseMove(int x, int y)
 
 	setMousePos(x, y);
 
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }

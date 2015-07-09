@@ -2,6 +2,7 @@
 
 #include "history/RotateSpriteAOP.h"
 #include "common/Math.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {

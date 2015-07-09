@@ -80,6 +80,8 @@
 #include "view/GroupTreePanel.h"
 #include "view/ViewPanelMgr.h"
 #include "view/SpriteDialog.h"
+#include "view/SpriteSelection.h"
+#include "view/ShapeSelection.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

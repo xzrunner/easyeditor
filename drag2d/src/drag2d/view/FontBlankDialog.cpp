@@ -123,7 +123,7 @@ void FontBlankDialog::initLayout()
 	SetSizer(sizer);
 
 	sizer->Layout();
-	Refresh();
+	Refresh(true);
 }
 
 void FontBlankDialog::storeSymbol()

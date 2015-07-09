@@ -31,7 +31,7 @@ SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, OrthoCanvas* canvas
 void SelectDrawTypeWidget::onSetDrawType(wxCommandEvent& event)
 {
 	Settings::drawType = static_cast<Settings::DrawType>(event.GetSelection());
-	m_canvas->Refresh();
+	m_canvas->Refresh(true);
 }
 
 } // d2d

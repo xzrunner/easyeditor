@@ -2,8 +2,10 @@
 
 #include "common/Math.h"
 #include "dataset/SpriteFactory.h"
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
@@ -52,7 +54,7 @@ bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 			m_pos = newPos;
 		}
 	}
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 
 	return false;
 }

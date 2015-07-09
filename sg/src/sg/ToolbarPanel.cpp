@@ -96,7 +96,7 @@ void ToolbarPanel::onParamsChanged(wxSpinEvent& event)
 	stage->SetLayoutInfo(m_row->GetValue(), 
 		m_col->GetValue(), m_edge->GetValue());
 	stage->UpdateAllSpritesLocation();
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 void ToolbarPanel::onLevelChanged(wxCommandEvent& event)

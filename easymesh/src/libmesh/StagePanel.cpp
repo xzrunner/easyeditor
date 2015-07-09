@@ -10,7 +10,7 @@ namespace emesh
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(parent)
+	, d2d::MultiShapesImpl(this)
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(parent)
+	, d2d::MultiShapesImpl(this)
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -61,6 +61,9 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 		ret = static_cast<EditShape*>(_shape)->InsertShape(shape);
 		_shape->Refresh();
 	}
+	if (ret) {
+		m_canvas->SetDirty();
+	}
 	return ret;
 }
 
@@ -71,6 +74,9 @@ bool StagePanel::RemoveShape(d2d::IShape* shape)
 	if (_shape) {
 		ret = static_cast<EditShape*>(_shape)->RemoveShape(shape);
 	}
+	if (ret) {
+		m_canvas->SetDirty();
+	}
 	return ret;
 }
 
@@ -80,6 +86,9 @@ bool StagePanel::ClearAllShapes()
 	Shape* shape = m_symbol->getShape();
 	if (shape) {
 		ret = static_cast<EditShape*>(shape)->ClearShape();
+	}
+	if (ret) {
+		m_canvas->SetDirty();
 	}
 	return ret;
 }
@@ -161,8 +170,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		Symbol* symbol = new Symbol(image->getImage());
 		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
-		m_stage->RefreshStage();
-
+		m_stage->GetCanvas()->SetDirty();
 		m_stage->GetCanvas()->ResetViewport();
 
 		return true;

@@ -1,5 +1,7 @@
 #include "PerspectiveSpriteAOP.h"
 
+#include "dataset/ISprite.h"
+
 namespace d2d
 {
 

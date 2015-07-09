@@ -3,6 +3,7 @@
 #include "GroupTreeCtrl.h"
 
 #include "dataset/Group.h"
+#include "view/SpriteSelection.h"
 
 // debug
 #include <fstream>

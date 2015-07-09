@@ -100,8 +100,9 @@ void ILibraryPage::InitButtons(wxSizer* sizer)
 	sizer->Add(btnSizer, 0, wxALIGN_RIGHT);
 }
 
-void ILibraryPage::LoadFromConfig(const std::string& key)
+bool ILibraryPage::LoadFromConfig(const std::string& key)
 {
+	bool ret = false;
 	std::vector<std::string> filenames;
 	Config::Instance()->GetStrings(key, filenames);
 	for (int i = 0, n = filenames.size(); i < n; ++i)
@@ -110,7 +111,9 @@ void ILibraryPage::LoadFromConfig(const std::string& key)
 		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
 		m_list->insert(symbol);
 		symbol->Release();
+		ret = true;
 	}
+	return ret;
 }
 
 } // d2d

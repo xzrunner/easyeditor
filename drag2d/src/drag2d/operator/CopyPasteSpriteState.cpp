@@ -1,6 +1,8 @@
 #include "CopyPasteSpriteState.h"
 
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {

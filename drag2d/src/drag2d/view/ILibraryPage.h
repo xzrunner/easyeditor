@@ -22,7 +22,7 @@ public:
 
 	virtual void Clear();
 
-	virtual void LoadFromConfig() {}
+	virtual bool LoadFromConfig() { return false; }
 
 	virtual void OnActive() {}
 
@@ -53,7 +53,7 @@ protected:
 protected:
 	void InitButtons(wxSizer* sizer);
 
-	void LoadFromConfig(const std::string& key);
+	bool LoadFromConfig(const std::string& key);
 
 protected:
 	wxString m_name;

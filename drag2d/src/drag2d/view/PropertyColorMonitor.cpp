@@ -2,6 +2,7 @@
 
 #include "common/Color.h"
 #include "view/EditPanel.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
@@ -19,7 +20,7 @@ Colorf PropertyColorListener::GetColor() const
 
 void PropertyColorListener::OnColorChanged()
 {
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 void PropertyColorListener::OnColorChanged(const Colorf& col)

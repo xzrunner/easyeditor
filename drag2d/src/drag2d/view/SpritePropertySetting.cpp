@@ -36,6 +36,8 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 
 	d2d::ISprite* spr = m_impl->GetSprite();
 
+	bool dirty = true;
+
 	// base
 	if (name == wxT("Name"))
 	{
@@ -88,7 +90,6 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		int idx = wxANY_AS(value, int);
 		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
 		m_stage->GetCanvas()->ResetViewport();
-//		m_stage->Refresh();
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -169,8 +170,14 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		spr->editable = wxANY_AS(value, bool);
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->RefreshStage();
+	if (dirty) {
+		m_stage->GetCanvas()->SetDirty();
+	}
 }
 
 void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)

@@ -2,7 +2,10 @@
 #include "IPropertySetting.h"
 
 #include "common/visitors.h"
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesPropertySetting.h"
+#include "view/SpriteSelection.h"
+#include "view/ShapeSelection.h"
 
 namespace d2d
 {

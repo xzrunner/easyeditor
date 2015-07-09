@@ -18,6 +18,7 @@ void BodyPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 		m_body->name = wxANY_AS(value, wxString);
 	else if (name == wxT("Type"))
@@ -34,8 +35,12 @@ void BodyPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		m_body->active = wxANY_AS(value, bool);
 	else if (name == wxT("GravityScale"))
 		m_body->gravityScale = wxANY_AS(value, float);
+	else
+		dirty = false;
 
-	m_stage->RefreshStage();
+	if (dirty) {
+		m_stage->GetCanvas()->SetDirty();
+	}
 }
 
 void BodyPropertySetting::UpdateProperties(wxPropertyGrid* pg)

@@ -29,7 +29,7 @@ void SettingsDialog::initLayout()
 	SetSizer(sizer);
 
 	sizer->Layout();
-	Refresh();
+	Refresh(true);
 }
 
 wxSizer* SettingsDialog::initEditPanel()

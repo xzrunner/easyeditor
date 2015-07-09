@@ -11,7 +11,7 @@ namespace d2d
 
 		virtual bool IsHandleSymbol(ISymbol* symbol) const;
 
-		virtual void LoadFromConfig();
+		virtual bool LoadFromConfig();
 
 	protected:
 		virtual void InitLayout(bool draggable = true);

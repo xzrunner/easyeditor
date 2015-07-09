@@ -22,7 +22,10 @@ DynamicStageCanvas::~DynamicStageCanvas()
 void DynamicStageCanvas::OnTimer(wxTimerEvent& event)
 {
 	OnTimer();
-	Refresh();
+
+	if (IsDirty()) {
+		Refresh();
+	}
 }
 
 }

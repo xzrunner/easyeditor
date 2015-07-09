@@ -1,4 +1,5 @@
 #include "MultiSpritesImpl.h"
+#include "SpriteSelection.h"
 
 #include "dataset/AbstractBV.h"
 #include "common/Rect.h"
@@ -8,9 +9,9 @@
 namespace d2d
 {
 
-MultiSpritesImpl::MultiSpritesImpl()
+MultiSpritesImpl::MultiSpritesImpl(EditPanel* stage)
 {
-	m_sprite_selection = new SpriteSelection;
+	m_sprite_selection = new SpriteSelection(stage);
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()

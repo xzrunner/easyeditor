@@ -64,7 +64,7 @@ void UniversalArrangeCMPT::onChangeStaticType(wxCommandEvent& event)
 	d2d::SpriteSelection* selection = m_spritesImpl->GetSpriteSelection();
 	if (!selection->IsEmpty())
 		selection->Traverse(SetPhysicsStaticVisitor(event.IsChecked()));
-	m_stage->RefreshStage();
+	m_stage->GetCanvas()->SetDirty();
 }
 
 //////////////////////////////////////////////////////////////////////////

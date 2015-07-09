@@ -3,14 +3,15 @@
 
 #include <vector>
 
-#include "dataset/ObjSelectionSet.h"
-
 namespace d2d
 {
 
 class ISprite;
 class ISpriteViewPanel;
 class IShapeViewPanel;
+class SpriteSelection;
+class IShape;
+class ShapeSelection;
 
 class ViewPanelMgr
 {

@@ -1,6 +1,7 @@
 #include "ArrangeSpriteFixOP.h"
 
 #include "view/MultiSpritesImpl.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {
