@@ -16,7 +16,7 @@ void StageCanvas::Refresh()
 {
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 
-	d2d::IStageCanvas::RefreshStage();
+	d2d::IStageCanvas::Refresh();
 }
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const

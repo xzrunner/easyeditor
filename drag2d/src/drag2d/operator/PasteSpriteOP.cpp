@@ -96,7 +96,7 @@ bool PasteSpriteOP::OnMouseMove(int x, int y)
 
 	setMousePos(x, y);
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 
 	return false;
 }

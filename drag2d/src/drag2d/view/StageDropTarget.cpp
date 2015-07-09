@@ -36,9 +36,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 			if (sprite->getSymbol().GetSize().isValid()) {
 				sprite->translate(pos);
-				if (m_sprites_impl->InsertSprite(sprite)) {
-					m_edit_panel->RefreshStage();
-				}
+				m_sprites_impl->InsertSprite(sprite);
 			}
 			sprite->Release();
 		}
@@ -57,9 +55,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 			Vector pos = m_edit_panel->TransPosScrToProj(x, y);
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 			sprite->translate(pos);
-			if (m_sprites_impl->InsertSprite(sprite)) {
-				m_edit_panel->RefreshStage();
-			}
+			m_sprites_impl->InsertSprite(sprite);
 			sprite->Release();
 		}
 		symbol->Release();

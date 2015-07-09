@@ -28,7 +28,7 @@ bool EditRectOP::OnKeyDown(int keyCode)
 	{
 		m_shapesImpl->ClearShapeSelection();
 		m_captured.clear();
-		m_stage->RefreshStage();
+		m_stage->Refresh();
 
 		if (m_view_panel_mgr) {
 			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
@@ -102,7 +102,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 	Clear();
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -123,7 +123,7 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 			m_shapesImpl->RemoveShape(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-			m_stage->RefreshStage();
+			m_stage->Refresh();
 
 			if (m_view_panel_mgr) {
 				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
@@ -150,7 +150,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape)
-			m_stage->RefreshStage();
+			m_stage->Refresh();
 	}
 
 	return false;
@@ -192,7 +192,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 		}
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 
 	return false;
 }

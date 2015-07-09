@@ -87,7 +87,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 void LibraryPage::OnChangeVisible(wxCommandEvent& event)
 {
 	m_layer->SetVisible(event.IsChecked());
-	m_canvas->RefreshStage();
+	m_canvas->Refresh();
 }
 
 void LibraryPage::OnChangeEditable(wxCommandEvent& event)

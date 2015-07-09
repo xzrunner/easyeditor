@@ -1965,10 +1965,6 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\view\DirtyState.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\view\EditPanel.cpp"
 					>
 				</File>

@@ -77,7 +77,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 		s->setTransform(pos, s->getAngle());
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ArrangeSpriteOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const

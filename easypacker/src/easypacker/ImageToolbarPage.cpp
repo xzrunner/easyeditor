@@ -79,7 +79,7 @@ void ImageToolbarPage::setSize(int width, int height)
 	m_widthChoice->SetSelection(selection(width));
 	m_heightChoice->SetSelection(selection(height));
 	m_stage->arrangeAllSprites(true);
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ImageToolbarPage::initSizeSettingPanel(wxSizer* topSizer)
@@ -186,14 +186,14 @@ void ImageToolbarPage::onChangeOutputImageSize(wxCommandEvent& event)
 	Context::Instance()->width = wxVariant(m_widthChoice->GetString(m_widthChoice->GetSelection())).GetInteger();
 	Context::Instance()->height = wxVariant(m_heightChoice->GetString(m_heightChoice->GetSelection())).GetInteger();
 	m_stage->arrangeAllSprites(true);
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ImageToolbarPage::onChangePadding(wxSpinEvent& event)
 {
 	Context::Instance()->padding = event.GetValue();
 	m_stage->arrangeAllSprites(true);
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ImageToolbarPage::onChangeScale(wxSpinEvent& event)
@@ -206,7 +206,7 @@ void ImageToolbarPage::onChangeScale(wxSpinEvent& event)
 		sprites[i]->setScale(scale, scale);
 
 	m_stage->arrangeAllSprites(true);
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ImageToolbarPage::onChangeExtrude(wxSpinEvent& event)
@@ -217,13 +217,13 @@ void ImageToolbarPage::onChangeExtrude(wxSpinEvent& event)
 void ImageToolbarPage::onRearrange(wxCommandEvent& event)
 {
 	m_stage->arrangeAllSprites(true);
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ImageToolbarPage::onLoadLibraryList(wxCommandEvent& event)
 {
 	m_stage->loadFromLibrary();
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ImageToolbarPage::onChangeAutoArrange(wxCommandEvent& event)

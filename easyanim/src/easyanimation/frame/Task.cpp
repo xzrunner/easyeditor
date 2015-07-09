@@ -79,8 +79,8 @@ void Task::Clear()
 
 	m_widgets.m_layersPanel->insertLayer();
 
-	m_widgets.m_library->RefreshStage();
-	m_widgets.m_stage->RefreshStage();
+	m_widgets.m_library->Refresh();
+	m_widgets.m_stage->Refresh();
 }
 
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const

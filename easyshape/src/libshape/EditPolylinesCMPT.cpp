@@ -115,7 +115,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 
 		m_btnMerge->Enable(false);
 
-		m_stage->RefreshStage();
+		m_stage->Refresh();
 	}
 }
 
@@ -142,7 +142,7 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 		chains[i]->Translate(offset);
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 } // d2d

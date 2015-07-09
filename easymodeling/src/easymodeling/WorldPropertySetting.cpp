@@ -36,7 +36,7 @@ void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	else if (name == wxT("PositionIterations"))
 		world->positionIterations = wxANY_AS(value, float);
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void WorldPropertySetting::UpdateProperties(wxPropertyGrid* pg)

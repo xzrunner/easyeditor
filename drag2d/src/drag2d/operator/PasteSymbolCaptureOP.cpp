@@ -52,7 +52,7 @@ bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 			m_pos = newPos;
 		}
 	}
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 
 	return false;
 }

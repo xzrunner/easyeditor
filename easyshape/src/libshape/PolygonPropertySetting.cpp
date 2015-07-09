@@ -58,7 +58,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		}
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void PolygonPropertySetting::UpdateProperties(wxPropertyGrid* pg)

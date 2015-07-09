@@ -36,7 +36,7 @@ void TextPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		m_sprite->setColor(d2d::Colori(c.Red(), c.Green(), c.Blue(), c.Alpha()));
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void TextPropertySetting::UpdateProperties(wxPropertyGrid* pg)

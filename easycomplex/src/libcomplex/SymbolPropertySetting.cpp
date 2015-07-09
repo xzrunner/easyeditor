@@ -58,7 +58,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		}
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 std::string SymbolPropertySetting::GetGroupNames() const

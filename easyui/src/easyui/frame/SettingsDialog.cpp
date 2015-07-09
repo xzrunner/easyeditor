@@ -50,7 +50,7 @@ void SettingDialog::InitLayout()
 	SetSizer(top_sizer);
 
 	top_sizer->Layout();
-	RefreshStage();
+	Refresh();
 }
 
 void SettingDialog::OnViewSizeChanged(wxCommandEvent& event)

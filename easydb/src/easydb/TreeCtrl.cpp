@@ -97,7 +97,7 @@ namespace edb
 		selection->Clear();
 		selection->Add(sprite);
 
-		m_parent->RefreshStage();
+		m_parent->Refresh();
 	}
 
 	void TreeCtrl::onItemClick(wxTreeEvent& event)

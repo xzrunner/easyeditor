@@ -40,7 +40,7 @@ void Task::clear()
 	context->library->Clear();
 	context->stage->Clear();
 	context->library->Refresh();
-	context->stage->RefreshStage();
+	context->stage->Refresh();
 }
 
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 

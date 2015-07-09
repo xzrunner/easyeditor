@@ -90,7 +90,7 @@ void JointPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		break;
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void JointPropertySetting::UpdateProperties(wxPropertyGrid* pg)

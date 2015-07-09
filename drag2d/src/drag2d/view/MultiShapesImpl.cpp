@@ -36,14 +36,12 @@ void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<IShape*>& 
 	TraverseShapes(RectQueryVisitor(rect, result), DT_EDITABLE);
 }
 
-bool MultiShapesImpl::ClearShapeSelection()
+void MultiShapesImpl::ClearShapeSelection()
 {
-	if (!m_shape_selection->IsEmpty()) {
+	if (!m_shape_selection->IsEmpty())
+	{
 		m_shape_selection->Traverse(RemoveSelectionVisitor(this));
 		m_shape_selection->Clear();
-		return true;
-	} else {
-		return false;
 	}
 }
 

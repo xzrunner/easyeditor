@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   LibraryPanel* library, d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(new SymbolContainer(m_symbol = new Symbol))
+	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library,
 					   d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(new SymbolContainer(m_symbol = symbol))
+	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {

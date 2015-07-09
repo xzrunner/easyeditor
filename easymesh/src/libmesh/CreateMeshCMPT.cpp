@@ -111,7 +111,7 @@ void CreateMeshCMPT::onClear(wxCommandEvent& event)
 	}
 	m_stage->ClearAllShapes();
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 	m_editOP->Clear();
 }
 

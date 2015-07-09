@@ -96,7 +96,7 @@ wxSizer* ToolbarPanel::initLayout()
 void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 {
 	static_cast<StagePanel*>(m_stage)->ClearAllShapes();
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
@@ -125,7 +125,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 
 	setChoice(3);
 
-	stage->RefreshStage();
+	stage->Refresh();
 }
 
 void ToolbarPanel::SelectSuitableEditOP()

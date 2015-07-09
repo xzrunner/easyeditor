@@ -317,6 +317,7 @@ void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
+		m_stage->Refresh();
 	}
 }
 
@@ -328,6 +329,7 @@ void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
+		m_stage->Refresh();
 	}
 }
 
@@ -497,6 +499,7 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
+		m_stage->Refresh();
 	}
 }
 
@@ -504,10 +507,6 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 {
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	if (sprites.empty()) {
-		return;
-	}
-
 	CombineAOP* comb = new CombineAOP();
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
@@ -524,7 +523,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		//sprite->setOffset(Vector(0, 0));
 	}
 	m_stage->AddOpRecord(comb);
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
@@ -594,9 +593,7 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites, m_sprites_impl));
 
-	if (m_sprites_impl->ClearSpriteSelection()) {
-		m_stage->RefreshStage();
-	}
+	m_sprites_impl->ClearSpriteSelection();	
 }
 
 void ArrangeSpriteImpl::UpOneLayer()

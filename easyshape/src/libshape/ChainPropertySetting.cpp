@@ -58,7 +58,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		}
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void ChainPropertySetting::UpdateProperties(wxPropertyGrid* pg)

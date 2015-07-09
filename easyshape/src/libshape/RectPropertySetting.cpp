@@ -50,7 +50,7 @@ void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		m_rect->m_rect.yMax = y + hHeight;
 	}
 
-	m_stage->RefreshStage();
+	m_stage->Refresh();
 }
 
 void RectPropertySetting::UpdateProperties(wxPropertyGrid* pg)
