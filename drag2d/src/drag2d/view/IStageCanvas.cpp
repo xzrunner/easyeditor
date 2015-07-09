@@ -36,6 +36,7 @@ IStageCanvas::IStageCanvas(EditPanel* stage)
  	, m_inited(false)
  	, m_context(new wxGLContext(this))
 	, m_timer(this, TIMER_ID)
+	, m_version(0)
 {
 	m_bg_color.set(0.5f, 0.5f, 0.5f, 1);
 	m_timer.Start(1000 / FPS);
@@ -147,6 +148,12 @@ void IStageCanvas::OnKeyUp(wxKeyEvent& event)
 void IStageCanvas::OnTimer(wxTimerEvent& event)
 {
 	OnTimer();
+
+	++m_version;
+	bool dirty = m_stage->Update(m_version);
+	if (dirty) {
+		m_dirty = dirty;
+	}
 
 	if (IsDirty()) {
 		Refresh();

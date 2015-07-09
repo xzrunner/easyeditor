@@ -23,6 +23,8 @@ public:
 
 	virtual void Clear();
 
+	virtual bool Update(int version) { return false; }
+
 	Vector TransPosScrToProj(int x, int y) const;
 	Vector TransPosProjToScr(const Vector& proj) const;
 

@@ -80,6 +80,8 @@ private:
 
 	wxTimer m_timer;
 
+	int m_version;
+
 	DECLARE_EVENT_TABLE()
 
 }; // IStageCanvas

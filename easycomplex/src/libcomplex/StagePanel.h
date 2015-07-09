@@ -23,6 +23,7 @@ public:
 	// d2d::EditPanel interface
 	//
 	virtual void Clear();
+	virtual bool Update(int version);
 
 	//
 	// d2d::MultiSpritesImpl interface
