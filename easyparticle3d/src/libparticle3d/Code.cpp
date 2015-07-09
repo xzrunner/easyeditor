@@ -130,9 +130,9 @@ void Code::resolve()
 			lua::assign(m_gen, "['end_scale']", s+",");
 
 			cp->GetValue(PS_ROTATE, data);
-			s = wxString::FromDouble(data.val0 - data.val1);
+			s = wxString::FromDouble(data.val0);
 			lua::assign(m_gen, "['min_rotate']", s+",");
-			s = wxString::FromDouble(data.val0 + data.val1);
+			s = wxString::FromDouble(data.val1);
 			lua::assign(m_gen, "['max_rotate']", s+",");
 
 			s = wxString::FromDouble(cp->m_startz->GetValue());

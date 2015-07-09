@@ -35,8 +35,8 @@ static const float FADEOUT_TIME			= 300;
 static const float START_RADIUS			= 0;
 static const float SCALE_START			= 100;
 static const float SCALE_END			= 100;
-static const float ROTATE_CENTER		= 0;
-static const float ROTATE_OFFSET		= 0;
+static const float ROTATE_MIN			= 0;
+static const float ROTATE_MAX			= 0;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   StagePanel* stage)
@@ -87,8 +87,7 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 
 	cp->m_name->SetValue(child.name);
 	cp->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
-	cp->SetValue(PS_ROTATE, d2d::UICallback::Data((child.min_rotate + child.max_rotate) * 0.5f, 
-		(child.max_rotate - child.min_rotate) * 0.5f));
+	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(child.min_rotate, child.max_rotate));
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();
 	}
@@ -455,8 +454,8 @@ GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_pc->end_scale * 100;
 		break;
 	case PS_ROTATE:
-		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG * 0.5f;
+		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG * 0.5f;
 		break;
 	}
 }
@@ -482,7 +481,7 @@ InitLayout()
 	m_sliders.push_back(s_scale);
 	// Rotate
 	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, "Rotate (deg)", "rotate", this, PS_ROTATE, 
-		d2d::SliderItem("center", ITEM_ATTR_CENTER, ROTATE_CENTER, -180, 180), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, ROTATE_OFFSET, -180, 180));
+		d2d::SliderItem("min", "min", ROTATE_MIN, -180, 180), d2d::SliderItem("max", "max", ROTATE_MAX, -180, 180));
 	topSizer->Add(s_rotate);
 	topSizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);

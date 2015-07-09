@@ -290,13 +290,13 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			s = wxString::FromDouble(child_val["scale"]["end"].asDouble());
 			lua::assign(gen, "['end_scale']", s+"*s,");
 
-			center = child_val["rotate"]["center"].asDouble();
-			offset = child_val["rotate"]["offset"].asDouble();
+			float min = child_val["rotate"]["min"].asDouble(),
+				max = child_val["rotate"]["max"].asDouble();
 
-			s = wxString::FromDouble(center - offset);
+			s = wxString::FromDouble(min);
 			lua::assign(gen, "['min_rotate']", s+"*r,");
 
-			s = wxString::FromDouble(center + offset);
+			s = wxString::FromDouble(max);
 			lua::assign(gen, "['max_rotate']", s+"*r,");
 
 			s = wxString::FromDouble(child_val["start_z"].asInt());
