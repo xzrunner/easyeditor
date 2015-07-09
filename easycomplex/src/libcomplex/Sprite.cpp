@@ -19,7 +19,7 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
 	m_symbol->Retain();
-	buildBounding();	
+	BuildBounding();	
 }
 
 Sprite::~Sprite()
@@ -36,12 +36,24 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-const Symbol& Sprite::getSymbol() const
+bool Sprite::Update(int version) 
+{ 
+	bool ret = false;
+	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
+		d2d::ISprite* spr = m_symbol->m_sprites[i];
+		if (spr->Update(version)) {
+			ret = true;
+		}
+	}
+	return ret; 
+}
+
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* complex = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != symbol && complex)

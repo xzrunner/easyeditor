@@ -83,7 +83,7 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->getSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().getImage();
 
 	Json::Value value;
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
@@ -114,7 +114,7 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->getSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().getImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	m_raw = new ExtractOutlineRaw(*img);
@@ -150,7 +150,7 @@ void AutoTriCutCMPT::Trigger()
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->getSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().getImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	ExtractOutlineRaw raw(*img);
@@ -176,7 +176,7 @@ void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->getSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().getImage();
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	ExtractOutlineRaw raw(*img);

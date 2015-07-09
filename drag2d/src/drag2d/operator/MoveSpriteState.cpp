@@ -14,11 +14,11 @@ MoveSpriteState::MoveSpriteState(SpriteSelection* selection)
 	{
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			m_sprites[i]->Retain();
-			m_center += m_sprites[i]->getPosition();
+			m_center += m_sprites[i]->GetPosition();
 		}
 		m_center /= m_sprites.size();
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			m_offset.push_back(m_sprites[i]->getPosition() - m_center);
+			m_offset.push_back(m_sprites[i]->GetPosition() - m_center);
 		}
 	}
 }
@@ -39,7 +39,7 @@ bool MoveSpriteState::OnMouseMove(const Vector& pos)
 	assert(m_sprites.size() == m_offset.size());
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setTransform(pos + m_offset[i], spr->getAngle());
+		spr->SetTransform(pos + m_offset[i], spr->GetAngle());
 	}
 
 	return true;

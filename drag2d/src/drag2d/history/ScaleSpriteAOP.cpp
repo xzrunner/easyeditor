@@ -28,7 +28,7 @@ void ScaleSpriteAOP::undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* sprite = m_sprites[i];
-		sprite->setScale(m_old_scale.x, m_old_scale.y);
+		sprite->SetScale(m_old_scale.x, m_old_scale.y);
 	} 
 }
 
@@ -36,7 +36,7 @@ void ScaleSpriteAOP::redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* sprite = m_sprites[i];
-		sprite->setScale(m_new_scale.x, m_new_scale.y);
+		sprite->SetScale(m_new_scale.x, m_new_scale.y);
 	} 
 }
 

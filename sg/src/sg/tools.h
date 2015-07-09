@@ -16,7 +16,7 @@ static bool IsSymbolWall(const d2d::ISymbol& symbol)
 
 static bool IsSymbolWall(const d2d::ISprite& sprite)
 {
-	return IsSymbolWall(sprite.getSymbol());
+	return IsSymbolWall(sprite.GetSymbol());
 }
 
 }

@@ -41,7 +41,7 @@ void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites
 			d2d::ImageSprite* s = sorted[i];
 			bool success = Insert(*s);
 			if (!success) {
-				d2d::Rect r = s->getSymbol().GetSize();
+				d2d::Rect r = s->GetSymbol().GetSize();
 				float w = r.xLength() * scale + PADDING*2;
 				float h = r.yLength() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&
@@ -49,12 +49,12 @@ void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites
 					d2d::Vector pos;
 					pos.x = tot_w * INVALID_SPRITE_OFFSET_FACTOR;
 					pos.y = tot_h * INVALID_SPRITE_OFFSET_FACTOR;
-					s->setTransform(pos, 0);
+					s->SetTransform(pos, 0);
 				} else {
 					remain.push_back(s);
 				}
 			} else {
-				s->translate(d2d::Vector(x_offset, 0.0f));
+				s->Translate(d2d::Vector(x_offset, 0.0f));
 			}
 		}
 		x_offset += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
@@ -81,14 +81,14 @@ bool BinaryTreeNewArrange::
 Insert(d2d::ImageSprite& img) const
 {
 	std::map<std::string, d2d::TPNode*>::const_iterator itr 
-		= m_mapImages.find(img.getSymbol().GetFilepath());
+		= m_mapImages.find(img.GetSymbol().GetFilepath());
 	if (itr != m_mapImages.end()) {
 		return false;
 	}
 
 	d2d::TPNode* n = NULL;
-	d2d::Rect r = img.getSymbol().getImage()->GetClippedRegion();
-	d2d::Image* image = img.getSymbol().getImage();
+	d2d::Rect r = img.GetSymbol().getImage()->GetClippedRegion();
+	d2d::Image* image = img.GetSymbol().getImage();
 	int w = r.xLength();
 	int h = r.yLength();
 	float scale = 1.0f;
@@ -105,7 +105,7 @@ Insert(d2d::ImageSprite& img) const
 		pos.x = n->GetCenterX() - r.xCenter();
 		pos.y = n->GetCenterY() - r.yCenter();
 		float angle = n->IsRotated() ? d2d::PI*0.5f : 0;
-		img.setTransform(pos, angle);
+		img.SetTransform(pos, angle);
 		return true;
 	}
 

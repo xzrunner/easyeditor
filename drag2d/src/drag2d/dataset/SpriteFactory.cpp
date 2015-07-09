@@ -77,12 +77,12 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 void SpriteFactory::insert(ISprite* sprite)
 {
 	std::map<const ISymbol*, SpriteList>::iterator 
-		itr = m_map_symbol2sprites.find(&sprite->getSymbol());
+		itr = m_map_symbol2sprites.find(&sprite->GetSymbol());
 	if (itr == m_map_symbol2sprites.end())
 	{
 		SpriteList list;
 		list.push_back(sprite);
-		m_map_symbol2sprites.insert(std::make_pair(&sprite->getSymbol(), list));
+		m_map_symbol2sprites.insert(std::make_pair(&sprite->GetSymbol(), list));
 	}
 	else 
 	{
@@ -114,7 +114,7 @@ void SpriteFactory::updateBoundings(const ISymbol& symbol)
 	if (itr != m_map_symbol2sprites.end())
 	{
 		for (size_t i = 0, n = itr->second.size(); i < n; ++i)
-			itr->second[i]->buildBounding();
+			itr->second[i]->BuildBounding();
 	}
 }
 

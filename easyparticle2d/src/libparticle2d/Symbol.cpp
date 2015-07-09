@@ -53,7 +53,7 @@ void Symbol::Draw(const d2d::Matrix& mt,
 	DrawPS(mt);
 
 	if (sprite) {
-		DrawBackground(sprite->getPosition());
+		DrawBackground(sprite->GetPosition());
 	}
 }
 

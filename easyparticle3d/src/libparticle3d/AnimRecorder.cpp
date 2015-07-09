@@ -81,8 +81,8 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 			d2d::ISprite* sprite = new d2d::NullSprite(
 				new d2d::NullSymbol(item->filepath));
 
-			sprite->setTransform(d2d::Vector(item->x, item->y), item->angle);
-			sprite->setScale(item->scale, item->scale);
+			sprite->SetTransform(d2d::Vector(item->x, item->y), item->angle);
+			sprite->SetScale(item->scale, item->scale);
 			sprite->multiCol = item->col;
 
 			frame->sprites.push_back(sprite);

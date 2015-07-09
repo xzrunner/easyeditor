@@ -48,8 +48,8 @@ void RotateSpriteAOP::undo()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float angle = Math::getAngleInDirection(sprite->getPosition(), m_start, m_end);
-			sprite->rotate(-angle);
+			float angle = Math::getAngleInDirection(sprite->GetPosition(), m_start, m_end);
+			sprite->Rotate(-angle);
 		}
 	} 
 	else if (m_angle != 0) 
@@ -57,7 +57,7 @@ void RotateSpriteAOP::undo()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			sprite->rotate(-m_angle);
+			sprite->Rotate(-m_angle);
 		}
 	}
 }
@@ -69,8 +69,8 @@ void RotateSpriteAOP::redo()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float angle = Math::getAngleInDirection(sprite->getPosition(), m_start, m_end);
-			sprite->rotate(angle);
+			float angle = Math::getAngleInDirection(sprite->GetPosition(), m_start, m_end);
+			sprite->Rotate(angle);
 		}
 	} 
 	else if (m_angle != 0) 
@@ -78,7 +78,7 @@ void RotateSpriteAOP::redo()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			sprite->rotate(m_angle);
+			sprite->Rotate(m_angle);
 		}
 	}
 }

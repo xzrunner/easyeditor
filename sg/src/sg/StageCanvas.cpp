@@ -28,7 +28,7 @@ StageCanvas::~StageCanvas()
 void StageCanvas::SetBackground(d2d::ISymbol* background)
 {
 	m_background = d2d::SpriteFactory::Instance()->create(background);
-	m_background->translate(d2d::Vector(0.0f, m_background->getBounding()->height() * 0.375f));
+	m_background->Translate(d2d::Vector(0.0f, m_background->GetBounding()->height() * 0.375f));
 }
 
 d2d::Vector StageCanvas::TransToBirdView(const d2d::Vector& pos)
@@ -125,7 +125,7 @@ void StageCanvas::DrawGrass() const
 	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
-		SymbolRender::Instance()->DrawGrass(s->getSymbol(), s->getPosition(), m_stage->GetPerspective());
+		SymbolRender::Instance()->DrawGrass(s->GetSymbol(), s->GetPosition(), m_stage->GetPerspective());
 	}
 }
 
@@ -136,7 +136,7 @@ void StageCanvas::DrawGrids() const
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		bool valid = m_stage->GetCheckBoard().IsValid(s);
-		SymbolRender::Instance()->DrawGrids(s->getSymbol(), s->getPosition(), valid, m_stage->GetPerspective());
+		SymbolRender::Instance()->DrawGrids(s->GetSymbol(), s->GetPosition(), valid, m_stage->GetPerspective());
 	}
 }
 
@@ -151,20 +151,20 @@ void StageCanvas::DrawSprites() const
 	{
 		d2d::ISprite* sprite = sprites[i];
 		if (IsSymbolWall(*sprite)) {
-			SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
+			SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 			{
 				if (info->wall_type == 0) {
-					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 4);
-					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
+					d2d::Vector pos = sprite->GetPosition() + d2d::Vector(0, 4);
+					rd->Draw(&sprite->GetSymbol(), d2d::Matrix(), pos);
 				} else if (info->wall_type == 1) {
-					d2d::Vector pos = sprite->getPosition() + d2d::Vector(-10, 8);
-					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
+					d2d::Vector pos = sprite->GetPosition() + d2d::Vector(-10, 8);
+					rd->Draw(&sprite->GetSymbol(), d2d::Matrix(), pos);
 				} else if (info->wall_type == 2) {
-					d2d::Vector pos = sprite->getPosition() + d2d::Vector(10, 8);
-					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
+					d2d::Vector pos = sprite->GetPosition() + d2d::Vector(10, 8);
+					rd->Draw(&sprite->GetSymbol(), d2d::Matrix(), pos);
 				} else if (info->wall_type == 3) {
-					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 6);
-					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
+					d2d::Vector pos = sprite->GetPosition() + d2d::Vector(0, 6);
+					rd->Draw(&sprite->GetSymbol(), d2d::Matrix(), pos);
 				}
 			}
 		} else {
@@ -179,7 +179,7 @@ void StageCanvas::DrawArrow() const
 	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	if (sprites.size() == 1) {
 		d2d::ISprite* s = sprites[0];
-		SymbolRender::Instance()->DrawArrow(s->getSymbol(), s->getPosition());
+		SymbolRender::Instance()->DrawArrow(s->GetSymbol(), s->GetPosition());
 	}
 }
 
@@ -189,7 +189,7 @@ void StageCanvas::DrawAttackRegion() const
 	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
-		SymbolRender::Instance()->DrawRegion(s->getSymbol(), s->getPosition());
+		SymbolRender::Instance()->DrawRegion(s->GetSymbol(), s->GetPosition());
 	}
 }
 

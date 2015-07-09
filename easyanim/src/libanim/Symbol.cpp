@@ -29,7 +29,7 @@ void Symbol::ReloadTexture() const
 		{
 			Frame* frame = layer->frames[j];
 			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-				frame->sprites[k]->getSymbol().ReloadTexture();
+				frame->sprites[k]->GetSymbol().ReloadTexture();
 		}
 	}
 }
@@ -87,7 +87,7 @@ void Symbol::InitBounding()
 			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
 			{
 				std::vector<d2d::Vector> vertices;
-				frame->sprites[i]->getBounding()->getBoundPos(vertices);
+				frame->sprites[i]->GetBounding()->getBoundPos(vertices);
 				for (int i = 0, n = vertices.size(); i < n; ++i) {
 					m_rect.combine(vertices[i]);
 				}

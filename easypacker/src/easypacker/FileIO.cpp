@@ -52,9 +52,9 @@ void FileIO::loadFromEasypackerFile(const char* filename)
 		pos.x = tex.region.left + tex.region.width * 0.5f;
 		pos.y = tex.region.low + tex.region.height * 0.5f;
 		if (tex.bRotate)
-			sprite->setTransform(pos, d2d::PI * 0.5f);
+			sprite->SetTransform(pos, d2d::PI * 0.5f);
 		else
-			sprite->setTransform(pos, 0);
+			sprite->SetTransform(pos, 0);
 
 		context->stage->insertSpriteNoArrange(sprite);
 	}
@@ -111,7 +111,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 			pos.x = left + width * 0.5f;
 			pos.y = context->height - (top + height * 0.5f);
 		}
-		sprite->setTransform(pos, angle);
+		sprite->SetTransform(pos, angle);
 
 		sprite->editable = false;
 
@@ -162,18 +162,18 @@ void FileIO::storeImage(const char* filename)
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
-		const d2d::Vector& center = sprite->getPosition();
+		const d2d::Vector& center = sprite->GetPosition();
 
 		float sw, sh;
-		if (sprite->getAngle() == 0)
+		if (sprite->GetAngle() == 0)
 		{
-			sw = sprite->getSymbol().GetSize().xLength();
-			sh = sprite->getSymbol().GetSize().yLength();
+			sw = sprite->GetSymbol().GetSize().xLength();
+			sh = sprite->GetSymbol().GetSize().yLength();
 		}
 		else
 		{
-			sw = sprite->getSymbol().GetSize().yLength();
-			sh = sprite->getSymbol().GetSize().xLength();
+			sw = sprite->GetSymbol().GetSize().yLength();
+			sh = sprite->GetSymbol().GetSize().xLength();
 		}
 
 		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
@@ -183,9 +183,9 @@ void FileIO::storeImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().GetFilepath(), w, h, c, f);
+		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->GetSymbol().GetFilepath(), w, h, c, f);
 
-		if (sprite->getAngle() != 0)
+		if (sprite->GetAngle() != 0)
 		{
 			for (size_t iRow = 0; iRow < w; ++iRow) {
 				for (size_t iCol = 0; iCol < h; ++iCol) {
@@ -312,10 +312,10 @@ void FileIO::storeTexpackerPosition(const char* filename)
 		} 
 		else 
 		{
-			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->getSymbol()).getImage();
+			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->GetSymbol()).getImage();
 			Json::Value val;
 			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->GetFilepath()).ToStdString();
-			val["rotated"] = sprite->getAngle() == 0 ? false : true;
+			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
 			val["trimmed"] = true;
 			val["sourceSize"]["w"] = img->GetOriginWidth();
 			val["sourceSize"]["h"] = img->GetOriginHeight();
@@ -326,7 +326,7 @@ void FileIO::storeTexpackerPosition(const char* filename)
 			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->GetOriginWidth();
 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.yMax + 0.5f * img->GetOriginHeight());
 			
-			const d2d::Vector& pos = sprite->getPosition();
+			const d2d::Vector& pos = sprite->GetPosition();
 			val["frame"]["x"] = pos.x + r.xMin;
 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.yMax);
 
@@ -346,12 +346,12 @@ Json::Value FileIO::store(const d2d::ISprite* sprite)
 {
 	Json::Value value;
 
-	const d2d::ISymbol& symbol = sprite->getSymbol();
+	const d2d::ISymbol& symbol = sprite->GetSymbol();
 	const float w = symbol.GetSize().xLength(),
 		h = symbol.GetSize().yLength();
-	const d2d::Vector& pos = sprite->getPosition();
+	const d2d::Vector& pos = sprite->GetPosition();
 
-	bool bRotate = sprite->getAngle() != 0;
+	bool bRotate = sprite->GetAngle() != 0;
 	float left, low, width, height;
 	if (bRotate)
 	{

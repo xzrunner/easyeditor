@@ -83,7 +83,7 @@ namespace edb
 
 	wxString TreeCtrl::getItemName(const d2d::ISprite& sprite) const
 	{
-		wxString name = sprite.getSymbol().GetFilepath();
+		wxString name = sprite.GetSymbol().GetFilepath();
 		name = d2d::FilenameTools::getFilename(name);
 		return name;
 	}
@@ -109,7 +109,7 @@ namespace edb
 			{
 				StagePanel* stage = Context::Instance()->stage;
 
-				ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+				ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
 				ecomplex::EditDialog dlg(stage, &symbol);
 				dlg.ShowModal();
 

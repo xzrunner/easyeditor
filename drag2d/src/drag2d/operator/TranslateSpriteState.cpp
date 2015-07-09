@@ -86,7 +86,7 @@ void TranslateSpriteState::Visitor::
 Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
-	sprite->translate(m_offset);
+	sprite->Translate(m_offset);
 	bFetchNext = true;
 }
 

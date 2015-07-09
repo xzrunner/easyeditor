@@ -26,7 +26,7 @@ ImageSprite::ImageSprite(ImageSymbol* symbol)
 	: m_symbol(symbol)
 {
 	m_symbol->Retain();
-	buildBounding();
+	BuildBounding();
 }
 
 ImageSprite::~ImageSprite()
@@ -43,12 +43,12 @@ ImageSprite* ImageSprite::Clone() const
 	return sprite;
 }
 
-const ImageSymbol& ImageSprite::getSymbol() const
+const ImageSymbol& ImageSprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void ImageSprite::setSymbol(ISymbol* symbol)
+void ImageSprite::SetSymbol(ISymbol* symbol)
 {
 	ImageSymbol* image = dynamic_cast<ImageSymbol*>(symbol);
 	if (m_symbol != symbol && image)

@@ -72,8 +72,8 @@ void RectBinArrange::BeforePacking(const std::vector<d2d::ImageSprite*>& sorted,
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
 		RectSize rect;
-		rect.width = sorted[i]->getSymbol().GetSize().xLength() * s + p;
-		rect.height = sorted[i]->getSymbol().GetSize().yLength() * s + p;
+		rect.width = sorted[i]->GetSymbol().GetSize().xLength() * s + p;
+		rect.height = sorted[i]->GetSymbol().GetSize().yLength() * s + p;
 		input.push_back(rect);
 	}
 }
@@ -92,7 +92,7 @@ void RectBinArrange::AfterPacking(float xoffset,
 		d2d::ImageSprite* sprite = sprites[i];
 		if (rect.height != 0)
 		{
-			d2d::Rect r = sprite->getSymbol().GetSize();
+			d2d::Rect r = sprite->GetSymbol().GetSize();
 			d2d::Vector pos;
 			float angle = 0;
 			if (r.xLength() == rect.width && r.yLength() == rect.height)
@@ -114,7 +114,7 @@ void RectBinArrange::AfterPacking(float xoffset,
 				assert(0);
 			}
 			pos.x += xoffset;
-			sprite->setTransform(pos, angle);
+			sprite->SetTransform(pos, angle);
 		}
 		else
 		{

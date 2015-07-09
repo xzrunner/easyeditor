@@ -31,7 +31,7 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 		pos.y = s.src.y + s.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
-		sprite->setTransform(pos, sprite->getAngle());
+		sprite->SetTransform(pos, sprite->GetAngle());
 
 		m_stage->InsertSprite(sprite);
 
@@ -68,7 +68,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 		pos.y = pic.src.y + pic.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
-		spr_sprite->setTransform(pos, angle);
+		spr_sprite->SetTransform(pos, angle);
 
 		m_stage->InsertSprite(spr_sprite);
 

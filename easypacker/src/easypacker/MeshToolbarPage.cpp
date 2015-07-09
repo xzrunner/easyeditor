@@ -122,7 +122,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			pos.x = item_val["pos"]["x"].asDouble() - width * 0.5f;
 			pos.y = item_val["pos"]["y"].asDouble() - height * 0.5f;
 			float angle = item_val["angle"].asDouble();
-			sprite->setTransform(pos, angle);
+			sprite->SetTransform(pos, angle);
 			ss.DrawSprite(sprite);
 
 			sprite->Release();

@@ -26,7 +26,7 @@ void FileIO::Load(const char* filename, StagePanel* stage, d2d::LibraryPanel* li
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spr_val);
+		sprite->Load(spr_val);
 
 		stage->InsertSprite(sprite);
 		sprites.push_back(sprite);
@@ -54,8 +54,8 @@ void FileIO::Store(const char* filename, StagePanel* stage)
 
 		Json::Value spr_val;
 		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().GetFilepath()).ToStdString();
-		spr->store(spr_val);
+			spr->GetSymbol().GetFilepath()).ToStdString();
+		spr->Store(spr_val);
 
 		value["sprite"][i] = spr_val;
 	}

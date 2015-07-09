@@ -28,7 +28,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 			ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprites[i]);
 			if (!complex) continue;
 
-			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
 			ecomplex::EditDialog dlg(m_stage, &symbol);
 			dlg.ShowModal();
 
@@ -47,7 +47,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
-		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
 		ecomplex::EditDialog dlg(m_stage, &symbol);
 		dlg.ShowModal();
 

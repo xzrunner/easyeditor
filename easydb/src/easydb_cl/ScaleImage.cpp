@@ -62,7 +62,7 @@ void ScaleImage::Trigger(const std::string& dir, float scale)
 			d2d::Rect r = symbol->GetSize();
 
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			sprite->setScale(scale, scale);
+			sprite->SetScale(scale, scale);
 
 			int width = r.xLength() * scale,
 				height = r.yLength() * scale;

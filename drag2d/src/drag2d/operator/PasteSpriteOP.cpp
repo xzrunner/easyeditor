@@ -177,16 +177,16 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 	{
 		ISprite* sprite = m_selected[i];
-		Vector fixed = sprite->getPosition() - m_center;
+		Vector fixed = sprite->GetPosition() - m_center;
 		if (isHorMirror)
-			fixed.x += (m_center.x - sprite->getPosition().x) * 2;
+			fixed.x += (m_center.x - sprite->GetPosition().x) * 2;
 		if (isVerMirror)
-			fixed.y += (m_center.y - sprite->getPosition().y) * 2;
+			fixed.y += (m_center.y - sprite->GetPosition().y) * 2;
 
 //		spritesImpl->insertSprite(sprite->getSymbol(), fixed + pos);
 
 		ISprite* newOne = sprite->Clone();
-		newOne->setTransform(fixed + pos, newOne->getAngle());
+		newOne->SetTransform(fixed + pos, newOne->GetAngle());
 		spritesImpl->InsertSprite(newOne);
 		newOne->Release();
 	}
@@ -202,7 +202,7 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 
 		for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 		{
-			const Vector& pos = m_selected[i]->getPosition();
+			const Vector& pos = m_selected[i]->GetPosition();
 
 			float x = xOffset, y = yOffset;
 			if (isHorMirror)
@@ -230,7 +230,7 @@ computeCenter()
 {
 	m_center.set(0, 0);
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
-		m_center += m_selected[i]->getPosition();
+		m_center += m_selected[i]->GetPosition();
 	m_center /= m_selected.size();
 }
 

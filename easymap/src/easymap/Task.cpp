@@ -41,7 +41,7 @@ void Task::Load(const char* filename)
 		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spr_val);
+		sprite->Load(spr_val);
 		symbol->Release();
 		m_stage->InsertSprite(sprite);
 		spr_val = value["sprites"][i++];
@@ -62,8 +62,8 @@ void Task::Store(const char* filename) const
 	for (size_t i = 0; i < sprites.size(); ++i) {
 		d2d::ISprite* spr = sprites[i];
 		value["sprites"][i]["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().GetFilepath()).ToStdString();
-		spr->store(value["sprites"][i]);
+			spr->GetSymbol().GetFilepath()).ToStdString();
+		spr->Store(value["sprites"][i]);
 	}
 
 	Json::StyledStreamWriter writer;

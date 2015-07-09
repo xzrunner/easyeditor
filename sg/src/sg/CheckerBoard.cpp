@@ -17,9 +17,9 @@ CheckerBoard::CheckerBoard(StagePanel* stage)
 void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 {
 	int row, col;
-	m_stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
+	m_stage->TransCoordsToGridPos(sprite->GetPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 	if (!info) {
 		return;
 	}
@@ -31,12 +31,12 @@ void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 		}
 	}
 
-	m_mapSprite2Pos.insert(std::make_pair(sprite, sprite->getPosition()));
+	m_mapSprite2Pos.insert(std::make_pair(sprite, sprite->GetPosition()));
 }
 
 void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 {
-	if (!sprite->getSymbol().GetUserData()) {
+	if (!sprite->GetSymbol().GetUserData()) {
 		return;
 	}
 
@@ -47,7 +47,7 @@ void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 	int row, col;
 	m_stage->TransCoordsToGridPos(itr->second, row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 	if (!info) {
 		return;
 	}
@@ -71,9 +71,9 @@ void CheckerBoard::Clear()
 bool CheckerBoard::IsValid(d2d::ISprite* sprite) const
 {
 	int row, col;
-	m_stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
+	m_stage->TransCoordsToGridPos(sprite->GetPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 	if (!info) {
 		return false;
 	}
@@ -132,7 +132,7 @@ bool CheckerBoard::SetCachedPos(d2d::ISprite* sprite) const
 	std::map<d2d::ISprite*, d2d::Vector>::const_iterator itr 
 		= m_mapRemoved.find(sprite);
 	if (itr != m_mapRemoved.end()) {
-		sprite->setTransform(itr->second, sprite->getAngle());
+		sprite->SetTransform(itr->second, sprite->GetAngle());
 		return true;
 	} else {
 		return false;
@@ -152,7 +152,7 @@ void CheckerBoard::ResetWall()
 			}
 
 			d2d::ISprite* sprite = m_grid[i][j];
-			const d2d::ISymbol& symbol = sprite->getSymbol();
+			const d2d::ISymbol& symbol = sprite->GetSymbol();
 			std::string filepath = symbol.GetFilepath();
 			int s = filepath.find("lv") + 2;
 			int e = filepath.find('_', s-1);
@@ -186,7 +186,7 @@ void CheckerBoard::ResetWall()
 			
 			d2d::ISymbol* new_s = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			new_s->SetUserData(info);
-			m_grid[i][j]->setSymbol(new_s);
+			m_grid[i][j]->SetSymbol(new_s);
 		}
 	}
 }

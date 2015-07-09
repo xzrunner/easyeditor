@@ -27,7 +27,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
 
-	m_symbol = (Symbol*)(&edited->getSymbol());
+	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->Retain();
 	}

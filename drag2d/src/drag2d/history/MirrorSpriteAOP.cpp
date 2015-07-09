@@ -26,12 +26,12 @@ MirrorSpriteAOP::~MirrorSpriteAOP()
 
 void MirrorSpriteAOP::undo()
 {
-	m_sprite->setMirror(m_old_mirror_x, m_old_mirror_y);
+	m_sprite->SetMirror(m_old_mirror_x, m_old_mirror_y);
 }
 
 void MirrorSpriteAOP::redo()
 {
-	m_sprite->setMirror(m_new_mirror_x, m_new_mirror_y);
+	m_sprite->SetMirror(m_new_mirror_x, m_new_mirror_y);
 }
 
 Json::Value MirrorSpriteAOP::store(const std::vector<ISprite*>& sprites)

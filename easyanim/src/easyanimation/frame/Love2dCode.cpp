@@ -32,13 +32,13 @@ void Love2dCode::resolve()
 			if (frame->Size() != 0)
 			{
 				const d2d::ISprite* sprite = frame->GetSprite(0);
-				int index = query(sprite->getSymbol().GetFilepath());
+				int index = query(sprite->GetSymbol().GetFilepath());
 				if (index != -1)
 				{
 					std::string time = wxString::FromDouble(frame->GetTime(), 0);
 
-					std::string x = wxString::FromDouble(sprite->getPosition().x, 1),
-						y = wxString::FromDouble(sprite->getPosition().y, 1);
+					std::string x = wxString::FromDouble(sprite->GetPosition().x, 1),
+						y = wxString::FromDouble(sprite->GetPosition().y, 1);
 
 					std::string left = wxString::FromDouble(m_packerAdapter.textures[index].region.left, 1),
 						low = wxString::FromDouble(m_packerAdapter.textures[index].region.low, 1),

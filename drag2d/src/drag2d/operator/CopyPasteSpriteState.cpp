@@ -31,7 +31,7 @@ CopyPasteSpriteState::~CopyPasteSpriteState()
 
 bool CopyPasteSpriteState::OnMouseDrag(const Vector& pos)
 {
-	m_spr->setTransform(pos, m_spr->getAngle());
+	m_spr->SetTransform(pos, m_spr->GetAngle());
 	return true;
 }
 

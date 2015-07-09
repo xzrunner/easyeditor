@@ -25,7 +25,7 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 
 	// for anim file
 	m_sprite = spr;
-	std::string filepath = spr->getSymbol().GetFilepath();
+	std::string filepath = spr->GetSymbol().GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
@@ -71,17 +71,17 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		std::vector<d2d::ISprite*> selected;
 		m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 		if (!selected.empty()) {
-			std::string cmd = "easyshape_new.exe " + selected[0]->getSymbol().GetFilepath();
+			std::string cmd = "easyshape_new.exe " + selected[0]->GetSymbol().GetFilepath();
 			WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
 		}
 	}
 	else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
 	{
-		std::string filepath = m_sprite->getSymbol().GetFilepath();
+		std::string filepath = m_sprite->GetSymbol().GetFilepath();
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
-		if (m_sprite->getMirrorX()) {
+		if (m_sprite->GetMirrorX()) {
 			dir = 10 - dir;
 		}
 
@@ -92,13 +92,13 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		else if (dir == 9) { dir = 1; }
 
 		d2d::ISymbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
-		static_cast<ecomplex::Sprite*>(m_sprite)->setSymbol(symbol);
+		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 
 		
 		if (dir >= 1 && dir <= 5) {
-			m_sprite->setMirror(false, false);
+			m_sprite->SetMirror(false, false);
 		} else {
-			m_sprite->setMirror(true, false);
+			m_sprite->SetMirror(true, false);
 		}
 	}
 	else if (id - MENU_COLOR_START_ID < m_anim_files.size())
@@ -106,7 +106,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
-		static_cast<ecomplex::Sprite*>(m_sprite)->setSymbol(symbol);
+		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 	}
 }
 

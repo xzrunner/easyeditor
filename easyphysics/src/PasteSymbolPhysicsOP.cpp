@@ -26,9 +26,9 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->translate(m_pos);
+		sprite->Translate(m_pos);
 		if (m_pScale) {
-			sprite->setScale(*m_pScale, *m_pScale);
+			sprite->SetScale(*m_pScale, *m_pScale);
 		}
 
 		IBody* body = BodyManager::Instance()->LoadBody(sprite);

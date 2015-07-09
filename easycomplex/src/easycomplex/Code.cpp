@@ -63,7 +63,7 @@ void Code::ResolveUI(const Symbol& symbol)
 
 				if (Sprite* s = dynamic_cast<Sprite*>(child)) 
 				{
-					Node next(s->getSymbol(), path);
+					Node next(s->GetSymbol(), path);
 					next.name = name;
 					buffer.push(next);
 				} 

@@ -48,7 +48,7 @@ void SelectSpritesOP::OnSelected()
 		m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 		Sprite* particle = dynamic_cast<Sprite*>(sprites[0]);
 		if (particle) {
-			symbol = const_cast<Symbol*>(&particle->getSymbol());
+			symbol = const_cast<Symbol*>(&particle->GetSymbol());
 		}
 	}
 

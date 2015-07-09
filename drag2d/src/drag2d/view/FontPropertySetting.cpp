@@ -47,13 +47,13 @@ void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		SplitString2Double(value, &w, &h);
 		sprite->width = w;
 		sprite->height = h;
-		sprite->buildBounding();
+		sprite->BuildBounding();
 	} else if (name == wxT("LabelSize.Width")) {
 		sprite->width = wxANY_AS(value, float);
-		sprite->buildBounding();
+		sprite->BuildBounding();
 	} else if (name == wxT("LabelSize.Height")) {
 		sprite->height = wxANY_AS(value, float);
-		sprite->buildBounding();
+		sprite->BuildBounding();
 	} else if (name == wxT("Filename")) {
 		std::string str = wxANY_AS(value, wxString);
 		sprite->loadFont(str);

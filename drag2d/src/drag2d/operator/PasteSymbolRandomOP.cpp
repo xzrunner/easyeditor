@@ -29,11 +29,11 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-		sprite->translate(m_pos);
+		sprite->Translate(m_pos);
 		if (m_randomValue.scale != 1.0f) 
-			sprite->setScale(m_randomValue.scale, m_randomValue.scale);
+			sprite->SetScale(m_randomValue.scale, m_randomValue.scale);
 		if (m_randomValue.angle != 0.0f) 
-			sprite->setTransform(m_pos, m_randomValue.angle);
+			sprite->SetTransform(m_pos, m_randomValue.angle);
 		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}

@@ -711,11 +711,11 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 		sx = dw / 16.0f / sw;
 		sy = dh / 16.0f / sh;
 	}
-	sprite->setScale(sx, sy);
+	sprite->SetScale(sx, sy);
 
-	sprite->setMirror(xMirror, yMirror);
+	sprite->SetMirror(xMirror, yMirror);
 	angle = -angle;
-	sprite->setTransform(d2d::Vector(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
+	sprite->SetTransform(d2d::Vector(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
 }
 
 std::string ParserLuaFile::Picture::Part::dstMode(const d2d::Vector _dst[4]) const
@@ -821,11 +821,11 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 		y = -y;
 		angle = -angle;
 
-		sprite->rotate(angle);
-		sprite->translate(d2d::Vector(x, y));
-		const d2d::Vector& scale = sprite->getScale();
-		sprite->setScale(scale.x * sx, scale.y * sy);
-		sprite->setShear(kx, ky);
+		sprite->Rotate(angle);
+		sprite->Translate(d2d::Vector(x, y));
+		const d2d::Vector& scale = sprite->GetScale();
+		sprite->SetScale(scale.x * sx, scale.y * sy);
+		sprite->SetShear(kx, ky);
 	}
 }
 

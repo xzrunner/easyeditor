@@ -39,7 +39,7 @@ void FileSaver::store(Json::Value& value, Symbol::Frame* frame, const wxString& 
 
 void FileSaver::store(Json::Value& value, d2d::ISprite* sprite, const wxString& dir)
 {
-	const d2d::ISymbol& symbol = sprite->getSymbol();
+	const d2d::ISymbol& symbol = sprite->GetSymbol();
 
 	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
@@ -51,7 +51,7 @@ void FileSaver::store(Json::Value& value, d2d::ISprite* sprite, const wxString& 
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->store(value);
+	sprite->Store(value);
 }
 
 } // anim

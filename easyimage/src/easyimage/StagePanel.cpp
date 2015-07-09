@@ -40,9 +40,9 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 {
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	d2d::Vector off;
-	off.x = sprite->getSymbol().GetSize().xLength() * 0.5f;
-	off.y = sprite->getSymbol().GetSize().yLength() * 0.5f;
-	sprite->translate(off);
+	off.x = sprite->GetSymbol().GetSize().xLength() * 0.5f;
+	off.y = sprite->GetSymbol().GetSize().yLength() * 0.5f;
+	sprite->Translate(off);
 	m_image = sprite;
 
 	GetCanvas()->SetDirty();

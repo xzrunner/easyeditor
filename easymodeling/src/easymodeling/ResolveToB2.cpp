@@ -33,9 +33,9 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 	mapBody.insert(std::make_pair(const_cast<libmodeling::Body*>(&data), body));
 
 	b2Vec2 pos;
-	pos.x = data.sprite->getPosition().x / ephysics::BOX2D_SCALE_FACTOR;
-	pos.y = data.sprite->getPosition().y / ephysics::BOX2D_SCALE_FACTOR;
-	body->SetTransform(pos, data.sprite->getAngle());
+	pos.x = data.sprite->GetPosition().x / ephysics::BOX2D_SCALE_FACTOR;
+	pos.y = data.sprite->GetPosition().y / ephysics::BOX2D_SCALE_FACTOR;
+	body->SetTransform(pos, data.sprite->GetAngle());
 
 	for (size_t i = 0, n = data.fixtures.size(); i < n; ++i)
 	{

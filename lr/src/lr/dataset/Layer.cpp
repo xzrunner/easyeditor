@@ -107,15 +107,15 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 			continue;
 		}
 
-		if (!IsValidFloat(spr->getPosition().x) || 
-			!IsValidFloat(spr->getPosition().y)) {
+		if (!IsValidFloat(spr->GetPosition().x) || 
+			!IsValidFloat(spr->GetPosition().y)) {
 			continue;
 		}
 
 		Json::Value spr_val;
 		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().GetFilepath()).ToStdString();
-		spr->store(spr_val);
+			spr->GetSymbol().GetFilepath()).ToStdString();
+		spr->Store(spr_val);
 
 		val["sprite"][count++] = spr_val;
 	}
@@ -156,7 +156,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 		}
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spr_val);
+		sprite->Load(spr_val);
 		if (!base_path.empty()) {
 			UserData* ud = new UserData(base_path);
 			sprite->SetUserData(ud);

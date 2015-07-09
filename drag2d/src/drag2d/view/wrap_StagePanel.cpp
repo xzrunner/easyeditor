@@ -57,8 +57,8 @@ namespace d2d
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			ISprite* s = sprites[i];
-			Vector pos = s->getPosition() + Vector(x, y);
-			s->setTransform(pos, s->getAngle());
+			Vector pos = s->GetPosition() + Vector(x, y);
+			s->SetTransform(pos, s->GetAngle());
 		}
 		return 0;		
 	}

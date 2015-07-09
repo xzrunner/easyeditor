@@ -20,7 +20,7 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* sprite)
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sprite(sprite)
 {
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 	SetTitle(symbol.GetFilepath());
 	initLayout();
 
@@ -30,7 +30,7 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* sprite)
 
 EditDialog::~EditDialog()
 {
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 	symbol.SetPause(false);
 }
 
@@ -39,7 +39,7 @@ void EditDialog::initLayout()
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
  	StagePanel* stage = new StagePanel(splitter, this);
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 	stage->SetSymbol(&symbol);
  	m_stage = stage;
  	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
@@ -50,7 +50,7 @@ void EditDialog::initLayout()
 
 void EditDialog::onClose(wxCloseEvent& event)
 {
-	m_sprite->buildBounding();
+	m_sprite->BuildBounding();
 
 	if (!m_stage->IsEditDirty())
 	{
@@ -58,7 +58,7 @@ void EditDialog::onClose(wxCloseEvent& event)
 		return;
 	}
 
-	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 
 	d2d::ExitDlg dlg(this);
 	int val = dlg.ShowModal();

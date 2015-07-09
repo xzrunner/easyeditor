@@ -84,7 +84,7 @@ MultiSpritesImpl::PointQueryVisitor::PointQueryVisitor(const Vector& pos, ISprit
 void MultiSpritesImpl::PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
-	if (sprite->isContain(m_pos))
+	if (sprite->IsContain(m_pos))
 	{
 		*m_pResult = sprite;
 		bFetchNext = false;
@@ -113,7 +113,7 @@ void MultiSpritesImpl::RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
 // 		m_result.push_back(sprite);
 	if (sprite->editable)
 	{
-		AbstractBV* bv = sprite->getBounding();
+		AbstractBV* bv = sprite->GetBounding();
 // 		if (!m_contain && bv->isIntersect(m_rect))
 // 			m_result.push_back(sprite);
 

@@ -37,7 +37,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = sprites[i];
-		if (&s->getSymbol() == &selected->getSymbol()) {
+		if (&s->GetSymbol() == &selected->GetSymbol()) {
 			stage->GetSpriteSelection()->Add(s);
 		}
 	}
@@ -55,7 +55,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 	{
 		d2d::ISprite* s = sprites[i];
 		int row, col;
-		stage->TransCoordsToGridPos(s->getPosition(), row, col);
+		stage->TransCoordsToGridPos(s->GetPosition(), row, col);
 		switch (type)
 		{
 		case d2d::e_up:
@@ -74,7 +74,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 
 		d2d::Vector pos;
 		stage->TransGridPosToCoords(row, col, pos);
-		s->setTransform(pos, s->getAngle());
+		s->SetTransform(pos, s->GetAngle());
 	}
 
 	m_stage->GetCanvas()->SetDirty();

@@ -34,7 +34,7 @@ void FileIO::store(const char* filename)
  	for (size_t i = 0, n = sprites.size(); i < n; ++i)
  	{
  		std::vector<d2d::Vector> vertices;
- 		sprites[i]->getBounding()->getBoundPos(vertices);
+ 		sprites[i]->GetBounding()->getBoundPos(vertices);
  		for (size_t j = 0, m = vertices.size(); j < m; ++j)
  			rect.combine(vertices[j]);
  	}
@@ -59,7 +59,7 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value)
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	symbol->Release();
 
-	sprite->load(value);
+	sprite->Load(value);
 
 	return sprite;
 }
@@ -73,8 +73,8 @@ d2d::IShape* FileIO::loadShape(const Json::Value& value)
 Json::Value FileIO::store(d2d::ISprite* sprite, const d2d::Vector& offset)
 {
 	Json::Value value;
-	value["filepath"] = sprite->getSymbol().GetFilepath();
-	sprite->store(value);
+	value["filepath"] = sprite->GetSymbol().GetFilepath();
+	sprite->Store(value);
 	return value;
 }
 

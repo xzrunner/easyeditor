@@ -10,30 +10,30 @@ MotorJoint::MotorJoint(Body* b0, Body* b1)
 	, maxTorque(1.0f)
 	, correctionFactor(0.3f)
 {
-	linearOffset = b1->sprite->getPosition() - b0->sprite->getPosition();
-	angularOffset = b1->sprite->getAngle() - b0->sprite->getAngle();
+	linearOffset = b1->sprite->GetPosition() - b0->sprite->GetPosition();
+	angularOffset = b1->sprite->GetAngle() - b0->sprite->GetAngle();
 }
 
 bool MotorJoint::isContain(const d2d::Vector& pos) const
 {
-	const d2d::Vector center = (bodyA->sprite->getPosition() + bodyB->sprite->getPosition()) * 0.5f;
+	const d2d::Vector center = (bodyA->sprite->GetPosition() + bodyB->sprite->GetPosition()) * 0.5f;
 	return d2d::Math::getDistance(center, pos) < JOINT_RADIUS_OUT;
 }
 
 bool MotorJoint::isIntersect(const d2d::Rect& rect) const
 {
-	const d2d::Vector center = (bodyA->sprite->getPosition() + bodyB->sprite->getPosition()) * 0.5f;
+	const d2d::Vector center = (bodyA->sprite->GetPosition() + bodyB->sprite->GetPosition()) * 0.5f;
 	return d2d::Math::isPointInRect(center, rect);
 }
 
 void MotorJoint::draw(DrawType type) const
 {
-	const d2d::Vector center = (bodyA->sprite->getPosition() + bodyB->sprite->getPosition()) * 0.5f;
+	const d2d::Vector center = (bodyA->sprite->GetPosition() + bodyB->sprite->GetPosition()) * 0.5f;
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::drawDashLine(center, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::drawDashLine(center, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		d2d::PrimitiveDraw::drawDashLine(center, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
+		d2d::PrimitiveDraw::drawDashLine(center, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		drawBodyFlag();
 	}

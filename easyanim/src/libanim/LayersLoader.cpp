@@ -35,7 +35,7 @@ void LayersLoader::LoadLayers(const Json::Value& value,
 
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 				symbol->Release();
-				sprite->load(spr_val);
+				sprite->Load(spr_val);
 				dst_frame->sprites.push_back(sprite);
 				spr_val = frame_val["actor"][k++];
 			}

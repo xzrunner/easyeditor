@@ -22,7 +22,7 @@ namespace edb
 
 	void Graphics::move(d2d::ISprite* sprite, const d2d::Vector& offset) 
 	{
-		sprite->setTransform(sprite->getPosition() + offset, 0);
+		sprite->SetTransform(sprite->GetPosition() + offset, 0);
 		Node* node = query(sprite);
 		if (node && !node->out.empty())
 			for (size_t i = 0, n = node->out.size(); i < n; ++i)

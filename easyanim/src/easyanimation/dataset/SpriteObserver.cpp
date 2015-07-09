@@ -32,7 +32,7 @@ void SpriteObserver::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == sprite->name)
-				sprites[i]->translate(offset);
+				sprites[i]->Translate(offset);
 		}
 	}
 
@@ -60,7 +60,7 @@ void SpriteObserver::Rotate(d2d::ISprite* sprite, float delta)
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == sprite->name)
-				sprites[i]->rotate(delta);
+				sprites[i]->Rotate(delta);
 		}
 	}
 

@@ -24,8 +24,9 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual const Symbol& getSymbol() const;
-	virtual void setSymbol(d2d::ISymbol* symbol);
+	virtual bool Update(int version) { return true; }
+	virtual const Symbol& GetSymbol() const;
+	virtual void SetSymbol(d2d::ISymbol* symbol);
 
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));

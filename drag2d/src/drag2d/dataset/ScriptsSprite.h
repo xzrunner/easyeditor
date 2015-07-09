@@ -22,8 +22,9 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual const ScriptsSymbol& getSymbol() const;
-	virtual void setSymbol(ISymbol* symbol);
+	virtual bool Update(int version) { return false; }
+	virtual const ScriptsSymbol& GetSymbol() const;
+	virtual void SetSymbol(ISymbol* symbol);
 
 private:
 	ScriptsSymbol* m_symbol;

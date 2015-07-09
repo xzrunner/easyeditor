@@ -85,7 +85,7 @@ void ISprite::ClearUserData(bool deletePtr)
 	delete m_userData, m_userData = NULL;
 }
 
-void ISprite::load(const Json::Value& val)
+void ISprite::Load(const Json::Value& val)
 {
 	// info
 	name = val["name"].asString();
@@ -131,7 +131,7 @@ void ISprite::load(const Json::Value& val)
 	{
 		sx = sy = val["scale"].asDouble();
 	}
-	setScale(sx, sy);
+	SetScale(sx, sy);
 
 	// shear
 	float kx, ky;
@@ -144,12 +144,12 @@ void ISprite::load(const Json::Value& val)
 	{
 		kx = ky = 0;
 	}
-	setShear(kx, ky);
+	SetShear(kx, ky);
 
 	// mirror
 	bool mx = val["x mirror"].asBool();
 	bool my = val["y mirror"].asBool();
-	setMirror(mx, my);
+	SetMirror(mx, my);
 
 	// perspective
 	if (!val["x perspective"].isNull())
@@ -171,7 +171,7 @@ void ISprite::load(const Json::Value& val)
 	{
 		ox = oy = 0;
 	}
-	setOffset(Vector(ox, oy));
+	SetOffset(Vector(ox, oy));
 
 	// translate
 	float x = val["position"]["x"].asDouble();
@@ -182,7 +182,7 @@ void ISprite::load(const Json::Value& val)
 
 	// rotate
 	float angle = val["angle"].asDouble();
-	setTransform(Vector(x, y), angle);
+	SetTransform(Vector(x, y), angle);
 
 	// filter
 	if (!val["filter"].isNull()) {
@@ -193,7 +193,7 @@ void ISprite::load(const Json::Value& val)
 	}
 }
 
-void ISprite::store(Json::Value& val) const
+void ISprite::Store(Json::Value& val) const
 {
 	val["name"] = name;
 	val["tag"] = tag;
@@ -228,12 +228,12 @@ void ISprite::store(Json::Value& val) const
 	val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
 }
 
-void ISprite::buildBounding()
+void ISprite::BuildBounding()
 {
 	if (!m_bounding) {
 		m_bounding = BVFactory::createBV(e_obb);
 	}
-	const ISymbol& symbol = getSymbol();
+	const ISymbol& symbol = GetSymbol();
 	Rect rect(symbol.GetSize(this));
 	if (!rect.isValid()) {
 		return;
@@ -253,13 +253,13 @@ IPropertySetting* ISprite::CreatePropertySetting(EditPanel* stage)
 	return new SpritePropertySetting(stage, this);
 }
 
-void ISprite::setTransform(const Vector& position, float angle)
+void ISprite::SetTransform(const Vector& position, float angle)
 {
-	if (m_pos != position) translate(position - m_pos);
-	if (m_angle != angle) rotate(angle - m_angle);
+	if (m_pos != position) Translate(position - m_pos);
+	if (m_angle != angle) Rotate(angle - m_angle);
 }
 
-void ISprite::setScale(float xScale, float yScale)
+void ISprite::SetScale(float xScale, float yScale)
 {
 	Vector dscale;
 	dscale.x = xScale / m_scale.x;
@@ -269,7 +269,7 @@ void ISprite::setScale(float xScale, float yScale)
 	Vector new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
 	m_offset = new_offset;
 
-	translate(old_offset - new_offset);
+	Translate(old_offset - new_offset);
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -285,10 +285,10 @@ void ISprite::setScale(float xScale, float yScale)
 	//////////////////////////////////////////////////////////////////////////
 
 	m_scale.set(xScale, yScale);
-	buildBounding();
+	BuildBounding();
  }
 
-void ISprite::setShear(float xShear, float yShear)
+void ISprite::SetShear(float xShear, float yShear)
 {
 	Matrix mat_old, mat_new;
 	mat_old.shear(m_shear.x, m_shear.y);
@@ -297,23 +297,23 @@ void ISprite::setShear(float xShear, float yShear)
 	Vector offset = Math::transVector(m_offset, mat_new) - Math::transVector(m_offset, mat_old);
 
 	m_offset += offset;
-	translate(-offset);
+	Translate(-offset);
 
 	m_shear.set(xShear, yShear);
-	buildBounding();
+	BuildBounding();
 }
 
-bool ISprite::isContain(const Vector& pos) const
+bool ISprite::IsContain(const Vector& pos) const
 {
 	return m_bounding ? m_bounding->isContain(pos) : false;
 }
 
-bool ISprite::isIntersect(const Rect& rect) const
+bool ISprite::IsIntersect(const Rect& rect) const
 {
 	return m_bounding ? m_bounding->isIntersect(rect) : false;
 }
 
-void ISprite::translate(const Vector& offset)
+void ISprite::Translate(const Vector& offset)
 {
 	if (m_observer)
 		m_observer->Translate(this, offset);
@@ -324,7 +324,7 @@ void ISprite::translate(const Vector& offset)
 	}
 }
 
-void ISprite::rotate(float delta)
+void ISprite::Rotate(float delta)
 {
 	if (m_observer)
 		m_observer->Rotate(this, delta);
@@ -336,12 +336,12 @@ void ISprite::rotate(float delta)
 	}
 }
 
-void ISprite::setOffset(const Vector& offset) 
+void ISprite::SetOffset(const Vector& offset) 
 {
 	// rotate + offset -> offset + rotate	
-	Vector old_center = getCenter();
+	Vector old_center = GetCenter();
 	m_offset = offset;
-	Vector new_center = getCenter();
+	Vector new_center = GetCenter();
 	m_pos += (old_center - new_center);
 
 	if (m_bounding) {
@@ -349,7 +349,7 @@ void ISprite::setOffset(const Vector& offset)
 	}
 }
 
-void ISprite::setMirror(bool xMirror, bool yMirror) 
+void ISprite::SetMirror(bool xMirror, bool yMirror) 
 { 
 	bool x_dirty = xMirror != m_xMirror,
 		 y_dirty = yMirror != m_yMirror;
@@ -368,7 +368,7 @@ void ISprite::setMirror(bool xMirror, bool yMirror)
 	}
 }
 
-Vector ISprite::getCenter() const
+Vector ISprite::GetCenter() const
 {
 	d2d::Vector center_offset = Math::rotateVector(-m_offset, m_angle) + m_offset;
 	d2d::Vector center = m_pos + center_offset;
@@ -378,7 +378,7 @@ Vector ISprite::getCenter() const
 d2d::Rect ISprite::GetRect() const
 {
 	std::vector<Vector> bound;
-	getBounding()->getBoundPos(bound);
+	GetBounding()->getBoundPos(bound);
 	d2d::Rect rect;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
 		rect.combine(bound[i]);
@@ -391,7 +391,7 @@ void ISprite::GetTransMatrix(Matrix& mt) const
 	const float xScale = m_xMirror ? -m_scale.x : m_scale.x,
 		yScale = m_yMirror ? -m_scale.y : m_scale.y;
 
-	d2d::Vector center = getCenter();
+	d2d::Vector center = GetCenter();
 	mt.setTransformation(center.x, center.y, m_angle, 
 		xScale, yScale, 0, 0, m_shear.x, m_shear.y);
 }
@@ -420,17 +420,17 @@ bool SpriteCmp::operator() (const ISprite* s0, const ISprite* s1) const
 	switch (m_type)
 	{
 	case e_file:
-		return s0->getSymbol().GetFilepath() < s1->getSymbol().GetFilepath();
+		return s0->GetSymbol().GetFilepath() < s1->GetSymbol().GetFilepath();
 	case e_x:
-		return s0->getPosition().x < s1->getPosition().x;
+		return s0->GetPosition().x < s1->GetPosition().x;
 	case e_y:
-		return s0->getPosition().y < s1->getPosition().y;
+		return s0->GetPosition().y < s1->GetPosition().y;
 	case e_x_invert:
-		return s0->getPosition().x > s1->getPosition().x;
+		return s0->GetPosition().x > s1->GetPosition().x;
 	case e_y_invert:
-		return s0->getPosition().y > s1->getPosition().y;
+		return s0->GetPosition().y > s1->GetPosition().y;
 	default:
-		return s0->getSymbol().GetFilepath() < s1->getSymbol().GetFilepath();
+		return s0->GetSymbol().GetFilepath() < s1->GetSymbol().GetFilepath();
 	}
 }
 

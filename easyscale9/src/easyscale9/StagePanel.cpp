@@ -38,7 +38,7 @@ void StagePanel::Clear()
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
 	const float edge = EDGE;
-	const d2d::Vector& pos = sprite->getPosition();
+	const d2d::Vector& pos = sprite->GetPosition();
 
 	int i, j;
 
@@ -55,7 +55,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 	sprite->Retain();
 	m_sprites[i][j] = sprite;
 	d2d::Vector center(edge*0.5f+edge*j, edge*0.5f+edge*i);
-	sprite->setTransform(center, sprite->getAngle());
+	sprite->SetTransform(center, sprite->GetAngle());
 
 	rebuildPatchSymbol();
 
@@ -130,9 +130,9 @@ void StagePanel::rebuildPatchSymbol()
 		  height = m_toolbar->getHeight();
 
 	if (type == e_3GridHor) {
-		height = m_sprites[1][1]->getSymbol().GetSize().yLength();
+		height = m_sprites[1][1]->GetSymbol().GetSize().yLength();
 	} else if (type == e_3GridVer) {
-		width = m_sprites[1][1]->getSymbol().GetSize().xLength();
+		width = m_sprites[1][1]->GetSymbol().GetSize().xLength();
 	}
 
 	m_symbol->ComposeFromSprites(m_sprites, width, height);

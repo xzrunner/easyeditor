@@ -84,7 +84,7 @@ void RotateTrimImage::Trigger(const std::string& dir)
 			}
 
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			sprite->setTransform(center, angle);
+			sprite->SetTransform(center, angle);
 			ss.DrawSprite(sprite, true, width, height);
 
 			sprite->Release();

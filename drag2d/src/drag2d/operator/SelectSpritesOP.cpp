@@ -239,7 +239,7 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		if (sprites[i]->isContain(pos)) {
+		if (sprites[i]->IsContain(pos)) {
 			selected = sprites[i];
 			break;
 		}
@@ -255,13 +255,13 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 
 void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
 {
-	value["filename"] = spr->getSymbol().GetFilepath();
-	spr->store(value);	
+	value["filename"] = spr->GetSymbol().GetFilepath();
+	spr->Store(value);	
 }
 
 void SelectSpritesOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
 {
-	spr->load(value);
+	spr->Load(value);
 }
 
 void SelectSpritesOP::PasteToSelection() const

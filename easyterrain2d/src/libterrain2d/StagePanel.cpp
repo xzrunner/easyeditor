@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_edit_op = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
 
-	m_oceans = static_cast<Sprite*>(edited)->getSymbol().GetOceans();
+	m_oceans = static_cast<Sprite*>(edited)->GetSymbol().GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
 		ocean->Retain();
@@ -60,8 +60,8 @@ void StagePanel::Store(const std::string& dir, Json::Value& value) const
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
 		d2d::ISprite* bg = bg_sprites[i];
 		value["bg"][i]["filepath"] = d2d::FilenameTools::getRelativePath(
-			dir, bg->getSymbol().GetFilepath()).ToStdString();
-		bg->store(value["bg"][i]);
+			dir, bg->GetSymbol().GetFilepath()).ToStdString();
+		bg->Store(value["bg"][i]);
 	}
 
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -78,7 +78,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* bg = d2d::SpriteFactory::Instance()->create(symbol);
-		bg->load(bg_val);
+		bg->Load(bg_val);
 		InsertSprite(bg);
 		symbol->Release();
 
@@ -159,7 +159,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 			m_stage->AddOcean(poly, image);
 		} else {
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			sprite->translate(pos);
+			sprite->Translate(pos);
 			m_stage->InsertSprite(sprite);
 		}
 		return true;

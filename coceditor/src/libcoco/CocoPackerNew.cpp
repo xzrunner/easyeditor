@@ -57,7 +57,7 @@ void CocoPackerNew::pack(const std::vector<const d2d::ISymbol*>& symbols)
 					{
 						d2d::ISprite* sprite = frame->sprites[k];
 						if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
-							unique.insert(&image->getSymbol());
+							unique.insert(&image->GetSymbol());
 						else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 							m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 					}
@@ -161,7 +161,7 @@ void CocoPackerNew::resolvePicture(const d2d::ImageSprite* sprite)
 	// tex
 	// todo: specify only 1 texture
 	std::string assignTex = lua::assign("tex", wxString::FromDouble(1).ToStdString());
-	const d2d::Rect* pr = m_tex.query(sprite->getSymbol().getImage());
+	const d2d::Rect* pr = m_tex.query(sprite->GetSymbol().getImage());
 
 	// src
 	int x0 = pr->xMin, y0 = pr->yMax;
@@ -186,17 +186,17 @@ void CocoPackerNew::resolvePicture(const d2d::ImageSprite* sprite)
 	screen[3].set(hw, hh);
 	// 1. scale
 	for (size_t i = 0; i < 4; ++i)
-		screen[i].x *= sprite->getScale().x;
+		screen[i].x *= sprite->GetScale().x;
 	for (size_t i = 0; i < 4; ++i)
-		screen[i].y *= sprite->getScale().y;
+		screen[i].y *= sprite->GetScale().y;
 	// 2. rotate
 	for (size_t i = 0; i < 4; ++i)
 	{
-		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->getAngle());
+		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->GetAngle());
 		screen[i] = rot;
 	}
 	// 3. translate
-	d2d::Vector center = sprite->getCenter();
+	d2d::Vector center = sprite->GetCenter();
  	for (size_t i = 0; i < 4; ++i)
  		screen[i] += center;
 	//for (size_t i = 0; i < 4; ++i)
@@ -206,7 +206,7 @@ void CocoPackerNew::resolvePicture(const d2d::ImageSprite* sprite)
 	//}
 	// 4. mirror
 	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
+	sprite->GetMirror(xMirror, yMirror);
 	if (xMirror)
 	{
 		std::swap(screen[0].x, screen[3].x);
@@ -566,7 +566,7 @@ void CocoPackerNew::resolveSpriteForComponent(const d2d::ISprite* sprite, std::v
 		else
 		{
 			// libanim::Symbol's sprites store unique
-			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 			assert(itr != m_mapSymbolID.end());
 			id = itr->second;
 		}
@@ -580,7 +580,7 @@ void CocoPackerNew::resolveSpriteForComponent(const d2d::ISprite* sprite, std::v
 	}
 	else
 	{
-		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 		assert(itr != m_mapSymbolID.end());
 		id = itr->second;
 	}
@@ -652,7 +652,7 @@ void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 
 void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order)
 {
-	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 	assert(itr != m_mapSymbolID.end());
 	if (itr == m_mapSymbolID.end())
 		throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L822");
@@ -784,18 +784,18 @@ void CocoPackerNew::transToMat(const d2d::ISprite* sprite, float mat[6], bool fo
 		// | ky  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
-		float x = sprite->getCenter().x,
-			y = sprite->getCenter().y;
-		float sx = sprite->getScale().x,
-			sy = sprite->getScale().y;
+		float x = sprite->GetCenter().x,
+			y = sprite->GetCenter().y;
+		float sx = sprite->GetScale().x,
+			sy = sprite->GetScale().y;
 		bool xMirror, yMirror;
-		sprite->getMirror(xMirror, yMirror);
+		sprite->GetMirror(xMirror, yMirror);
 		if (xMirror) sx = -sx;
 		if (yMirror) sy = -sy;
-		float c = cos(-sprite->getAngle()),
-			s = sin(-sprite->getAngle());
-		float kx = sprite->getShear().x,
-			ky = sprite->getShear().y;
+		float c = cos(-sprite->GetAngle()),
+			s = sin(-sprite->GetAngle());
+		float kx = sprite->GetShear().x,
+			ky = sprite->GetShear().y;
 		mat[0] = sx*c - kx*sy*s;
 		mat[1] = sx*s + kx*sy*c;
 		mat[2] = ky*sx*c - sy*s;

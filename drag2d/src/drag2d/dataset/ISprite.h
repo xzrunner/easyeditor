@@ -38,44 +38,46 @@ public:
 	//	
 	virtual void ClearUserData(bool deletePtr);
 
-	virtual const ISymbol& getSymbol() const = 0;
-	virtual void setSymbol(ISymbol* symbol) = 0;
+	virtual bool Update(int version) = 0;
 
-	virtual void load(const Json::Value& val);
-	virtual void store(Json::Value& val) const;
+	virtual const ISymbol& GetSymbol() const = 0;
+	virtual void SetSymbol(ISymbol* symbol) = 0;
 
-	virtual void buildBounding();
+	virtual void Load(const Json::Value& val);
+	virtual void Store(Json::Value& val) const;
+
+	virtual void BuildBounding();
 
 	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
 
-	virtual void setTransform(const Vector& position, float angle);
-	void setScale(float xScale, float yScale);
-	void setShear(float xShear, float yShear);
+	virtual void SetTransform(const Vector& position, float angle);
+	void SetScale(float xScale, float yScale);
+	void SetShear(float xShear, float yShear);
 
-	bool isContain(const Vector& pos) const;
-	bool isIntersect(const Rect& rect) const;
+	bool IsContain(const Vector& pos) const;
+	bool IsIntersect(const Rect& rect) const;
 
-	void translate(const Vector& offset);
-	void rotate(float delta);
+	void Translate(const Vector& offset);
+	void Rotate(float delta);
 
-	const Vector& getPosition() const { return m_pos; }
-	const Vector& getOffset() const { return m_offset; }
-	void setOffset(const Vector& offset);
-	float getAngle() const { return m_angle; }
-	const Vector& getScale() const { return m_scale; }
-	const Vector& getShear() const { return m_shear; }
+	const Vector& GetPosition() const { return m_pos; }
+	const Vector& GetOffset() const { return m_offset; }
+	void SetOffset(const Vector& offset);
+	float GetAngle() const { return m_angle; }
+	const Vector& GetScale() const { return m_scale; }
+	const Vector& GetShear() const { return m_shear; }
 
-	void setMirror(bool xMirror, bool yMirror);
-	void getMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
-	bool getMirrorX() const { return m_xMirror; }
-	bool getMirrorY() const { return m_yMirror; }
+	void SetMirror(bool xMirror, bool yMirror);
+	void GetMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
+	bool GetMirrorX() const { return m_xMirror; }
+	bool GetMirrorY() const { return m_yMirror; }
 
 	const Vector& GetPerspective() const { return m_perspective; }
 	void SetPerspective(const Vector& perspective) { m_perspective = perspective; }
 
-	Vector getCenter() const;
+	Vector GetCenter() const;
 
-	AbstractBV* getBounding() const {
+	AbstractBV* GetBounding() const {
 		return m_bounding;
 	}
 	d2d::Rect GetRect() const;

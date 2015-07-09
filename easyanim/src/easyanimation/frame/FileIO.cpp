@@ -287,7 +287,7 @@ d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
 //	symbol->refresh();
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	sprite->load(actorValue);
+	sprite->Load(actorValue);
 	symbol->Release();
 
 	return sprite;
@@ -439,7 +439,7 @@ d2d::ISprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	wxString(sx).ToDouble(&x);
 	wxString(sy).ToDouble(&y);
 
-	sprite->setTransform(d2d::Vector(float(tx+x), float(ty+y)), 0);
+	sprite->SetTransform(d2d::Vector(float(tx+x), float(ty+y)), 0);
 
 	return sprite;
 }
@@ -487,7 +487,7 @@ Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const std::string& di
 {
 	Json::Value value;
 
-	const d2d::ISymbol& symbol = sprite->getSymbol();
+	const d2d::ISymbol& symbol = sprite->GetSymbol();
 	// filepath
 	std::string relative_path = d2d::FilenameTools::getRelativePath(dir, 
 		symbol.GetFilepath()).ToStdString();
@@ -508,7 +508,7 @@ Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const std::string& di
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->store(value);
+	sprite->Store(value);
 
 	return value;
 }

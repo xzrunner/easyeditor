@@ -29,7 +29,7 @@ void ShearSpriteAOP::undo()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
 		ISprite* sprite = m_sprites[i];
-		sprite->setShear(m_old_shear.x, m_old_shear.y);
+		sprite->SetShear(m_old_shear.x, m_old_shear.y);
 	} 
 }
 
@@ -38,7 +38,7 @@ void ShearSpriteAOP::redo()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) 
 	{
 		ISprite* sprite = m_sprites[i];
-		sprite->setShear(m_new_shear.x, m_new_shear.y);
+		sprite->SetShear(m_new_shear.x, m_new_shear.y);
 	} 
 }
 

@@ -24,8 +24,9 @@ public:
 	//
 	// d2d::ISprite interface
 	//
-	virtual const Symbol& getSymbol() const;
-	virtual void setSymbol(d2d::ISymbol* symbol);
+	virtual bool Update(int version) { return false; }
+	virtual const Symbol& GetSymbol() const;
+	virtual void SetSymbol(d2d::ISymbol* symbol);
 	virtual void loadBodyFromFile();
 
 	const vec3& GetPos3() const { return m_pos3; }

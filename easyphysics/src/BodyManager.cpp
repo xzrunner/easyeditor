@@ -65,10 +65,10 @@ void BodyManager::Update()
 		b2Body* b2body = body->getBody();
 		if (body->isAlive() && b2body->GetType() != b2_staticBody) {
 			d2d::Vector pos(b2body->GetPosition().x, b2body->GetPosition().y);
-			sprite->setTransform(pos * BOX2D_SCALE_FACTOR, b2body->GetAngle());
+			sprite->SetTransform(pos * BOX2D_SCALE_FACTOR, b2body->GetAngle());
 		} else {
-			d2d::Vector pos = sprite->getPosition() / BOX2D_SCALE_FACTOR;
-			b2body->SetTransform(b2Vec2(pos.x, pos.y), sprite->getAngle());
+			d2d::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
+			b2body->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
 		}
 	}
 }
@@ -76,11 +76,11 @@ void BodyManager::Update()
 IBody* BodyManager::CreateBody(d2d::ISprite* sprite)
 {
 	std::string filepath = d2d::FilenameTools::getFilenameAddTag(
-		sprite->getSymbol().GetFilepath(), libshape::FILE_TAG, "json");
+		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
 	if (d2d::FilenameTools::isExist(filepath)) {
-		IBody* body = BodyFactory::createBody(filepath, sprite->getScale().x);
-		d2d::Vector pos = sprite->getPosition() / BOX2D_SCALE_FACTOR;
-		body->getBody()->SetTransform(b2Vec2(pos.x, pos.y), sprite->getAngle());
+		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
+		d2d::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
+		body->getBody()->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
 		return body;
 	} else {
 		return NULL;

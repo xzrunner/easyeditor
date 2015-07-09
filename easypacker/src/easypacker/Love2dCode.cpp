@@ -25,13 +25,13 @@ void Love2dCode::resolve()
 	{
 		d2d::ISprite* sprite = sprites[i];
 
-		const d2d::ISymbol& symbol = sprite->getSymbol();
-		const d2d::Vector& pos = sprite->getPosition();
+		const d2d::ISymbol& symbol = sprite->GetSymbol();
+		const d2d::Vector& pos = sprite->GetPosition();
 
 		std::string name = d2d::FilenameTools::getFilename(symbol.GetFilepath());
 
 		std::string x, y, w, h, px, py, a;
-		if (sprite->getAngle() != 0)
+		if (sprite->GetAngle() != 0)
 		{
 			x = wxString::FromDouble(pos.x - symbol.GetSize().yLength() * 0.5f);
 			y = wxString::FromDouble(pos.y - symbol.GetSize().xLength() * 0.5f);

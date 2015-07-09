@@ -363,7 +363,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 
 				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 				for (size_t i = 0, n = selected.size(); i < n; ++i) {
-					ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+					ISymbol& s = const_cast<ISymbol&>(selected[i]->GetSymbol());
 					dtex->InsertSymbol(s);
 				}
 
@@ -379,7 +379,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 				//DynamicTexture* dtex = DynamicTexture::Instance();
 				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 				for (size_t i = 0, n = selected.size(); i < n; ++i) {
-					ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+					ISymbol& s = const_cast<ISymbol&>(selected[i]->GetSymbol());
 					dtex->Remove(s.GetFilepath());
 				}
 			}
@@ -515,14 +515,14 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 	{
 		ISprite* sprite = sprites[i];
 
-		comb->Insert(new TranslateSpriteAOP(sprite, -sprite->getPosition()));
-		comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->getScale()));
-		comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->getShear()));
+		comb->Insert(new TranslateSpriteAOP(sprite, -sprite->GetPosition()));
+		comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->GetScale()));
+		comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->GetShear()));
 		//comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
 
-		sprite->setTransform(Vector(0, 0), 0);
-		sprite->setScale(1, 1);
-		sprite->setShear(0, 0);
+		sprite->SetTransform(Vector(0, 0), 0);
+		sprite->SetScale(1, 1);
+		sprite->SetShear(0, 0);
 		//sprite->setOffset(Vector(0, 0));
 	}
 	m_stage->AddOpRecord(comb);
@@ -643,7 +643,7 @@ void ArrangeSpriteImpl::HoriMirror()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		d2d::ISprite* spr = selected[i];
-		spr->setMirror(!spr->getMirrorX(), spr->getMirrorY());
+		spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
 	}
 }
 
@@ -653,13 +653,13 @@ void ArrangeSpriteImpl::VertMirror()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		d2d::ISprite* spr = selected[i];
-		spr->setMirror(spr->getMirrorX(), !spr->getMirrorY());
+		spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
 	}
 }
 
 d2d::Vector ArrangeSpriteImpl::GetSprOffset(const ISprite* spr) const
 {
-	d2d::Vector offset = spr->getPosition() + spr->getOffset();
+	d2d::Vector offset = spr->GetPosition() + spr->GetOffset();
 	return offset;
 }
 

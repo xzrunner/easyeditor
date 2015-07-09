@@ -23,7 +23,7 @@ Sprite::Sprite(Symbol* symbol)
 	, m_process(1)
 {
 	m_symbol->Retain();
-	buildBounding();	
+	BuildBounding();	
 }
 
 Sprite::~Sprite()
@@ -40,25 +40,25 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-const Symbol& Sprite::getSymbol() const
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	d2d::obj_assign((d2d::Object*&)m_symbol, symbol);
 }
 
-void Sprite::load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val)
 {
-	ISprite::load(val);
+	ISprite::Load(val);
 	SetProcess(val["process"].asDouble());
 }
 
-void Sprite::store(Json::Value& val) const
+void Sprite::Store(Json::Value& val) const
 {
-	ISprite::store(val);
+	ISprite::Store(val);
 	val["process"] = m_process;
 }
 
@@ -70,7 +70,7 @@ d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanel* stage)
 void Sprite::SetProcess(float process)
 {
 	m_process = process;
-	buildBounding();
+	BuildBounding();
 }
 
 }

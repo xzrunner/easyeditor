@@ -84,7 +84,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->getSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().getImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -112,7 +112,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->getSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().getImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();

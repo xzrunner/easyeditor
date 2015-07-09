@@ -15,7 +15,7 @@ ShearSpriteState::ShearSpriteState(ISprite* sprite,
 	m_sprite = sprite;
 	m_sprite->Retain();
 
-	m_first_shear = m_sprite->getShear();
+	m_first_shear = m_sprite->GetShear();
 }
 
 ShearSpriteState::~ShearSpriteState()
@@ -25,7 +25,7 @@ ShearSpriteState::~ShearSpriteState()
 
 AbstractAtomicOP* ShearSpriteState::OnMouseRelease(const Vector& pos)
 {
-	return new ShearSpriteAOP(m_sprite, m_sprite->getShear(), m_first_shear);
+	return new ShearSpriteAOP(m_sprite, m_sprite->GetShear(), m_first_shear);
 }
 
 bool ShearSpriteState::OnMouseDrag(const Vector& pos)
@@ -68,17 +68,17 @@ void ShearSpriteState::Shear(const Vector& curr)
 	// kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y)
 	// ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x)
 	// ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x)
-	float c = cos(m_sprite->getAngle()), s = sin(m_sprite->getAngle());
-	float sx = m_sprite->getScale().x, sy = m_sprite->getScale().y;
-	float px = m_sprite->getPosition().x, py = m_sprite->getPosition().y;
-	float kx = m_sprite->getShear().x,
-		ky = m_sprite->getShear().y;
+	float c = cos(m_sprite->GetAngle()), s = sin(m_sprite->GetAngle());
+	float sx = m_sprite->GetScale().x, sy = m_sprite->GetScale().y;
+	float px = m_sprite->GetPosition().x, py = m_sprite->GetPosition().y;
+	float kx = m_sprite->GetShear().x,
+		ky = m_sprite->GetShear().y;
 
 	float x, y;
-	float hw = m_sprite->getSymbol().GetSize().xLength() * 0.5f,
-		hh = m_sprite->getSymbol().GetSize().yLength() * 0.5f;
+	float hw = m_sprite->GetSymbol().GetSize().xLength() * 0.5f,
+		hh = m_sprite->GetSymbol().GetSize().yLength() * 0.5f;
 
-	const d2d::Vector& offset = m_sprite->getOffset();
+	const d2d::Vector& offset = m_sprite->GetOffset();
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)
 	{
 		x = 0; y = hh - offset.y;
@@ -112,7 +112,7 @@ void ShearSpriteState::Shear(const Vector& curr)
 			ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
 	}
 
-	m_sprite->setShear(kx, ky);
+	m_sprite->SetShear(kx, ky);
 }
 
 }

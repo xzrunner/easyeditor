@@ -29,7 +29,7 @@ void StageCanvas::InitGL()
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 	for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-		m_bg_sprites[i]->getSymbol().ReloadTexture();
+		m_bg_sprites[i]->GetSymbol().ReloadTexture();
 	}
 
 	ResetViewport();

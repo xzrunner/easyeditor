@@ -46,7 +46,7 @@ void TranslateSpriteAOP::undo()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* sprite = m_sprites[i];
-		sprite->translate(-m_offset);
+		sprite->Translate(-m_offset);
 	}
 }
 
@@ -55,7 +55,7 @@ void TranslateSpriteAOP::redo()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* sprite = m_sprites[i];
-		sprite->translate(m_offset);
+		sprite->Translate(m_offset);
 	}
 }
 

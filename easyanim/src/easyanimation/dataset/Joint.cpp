@@ -17,7 +17,7 @@ namespace eanim
 		, m_parent(NULL)
 	{
 		setPosition(pos);
-		m_relativeAngle = sprite->getAngle();
+		m_relativeAngle = sprite->GetAngle();
 		createId();
 	}
 
@@ -42,7 +42,7 @@ namespace eanim
 		if (m_parent)
 		{
 			d2d::Vector s = getWorldPos();
-			d2d::Vector e = m_sprite->getPosition() * 2 - s;
+			d2d::Vector e = m_sprite->GetPosition() * 2 - s;
 
 			const float w = 0.1f;
 			d2d::Vector mid = s + (e-s)*w;
@@ -73,12 +73,12 @@ namespace eanim
 
 	d2d::Vector Joint::getWorldPos() const
 	{
-		return m_sprite->getPosition() + d2d::Math::rotateVector(m_relative, m_sprite->getAngle());
+		return m_sprite->GetPosition() + d2d::Math::rotateVector(m_relative, m_sprite->GetAngle());
 	}
 	
 	d2d::Vector Joint::getRelativePos(const d2d::Vector& pos) const
 	{
-		return d2d::Math::rotateVector(pos - m_sprite->getPosition(), -m_sprite->getAngle());
+		return d2d::Math::rotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
 	}
 
 	bool Joint::connect(Joint* joint)

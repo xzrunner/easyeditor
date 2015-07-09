@@ -128,13 +128,13 @@ void LRLayersPack::ParserPolygon(const Json::Value& src_val, const lr::Grids& gr
 		dst_val["name"] = src_spr_val["name"];
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(src_spr_val);
+		sprite->Load(src_spr_val);
 
 		libshape::Sprite* shape_spr = dynamic_cast<libshape::Sprite*>(sprite);
 		assert(shape_spr);
-		const std::vector<d2d::IShape*>& shapes = shape_spr->getSymbol().GetShapes();
+		const std::vector<d2d::IShape*>& shapes = shape_spr->GetSymbol().GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
-			ParserPolyShape(shapes[i], sprite->getPosition(), grids, dst_val);
+			ParserPolyShape(shapes[i], sprite->GetPosition(), grids, dst_val);
 		}
 
 		int sz = out_val[name].size();
@@ -183,10 +183,10 @@ void LRLayersPack::ParserPoint(const Json::Value& src_val, int layer_idx, const 
 		shape_val["name"] = spr_val["name"];
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spr_val);
+		sprite->Load(spr_val);
 
-		shape_val["x"] = sprite->getPosition().x;
-		shape_val["y"] = sprite->getPosition().y;
+		shape_val["x"] = sprite->GetPosition().x;
+		shape_val["y"] = sprite->GetPosition().y;
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = shape_val;

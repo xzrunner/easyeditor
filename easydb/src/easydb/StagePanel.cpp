@@ -75,18 +75,18 @@ void StagePanel::initConnection()
 		d2d::ISprite* from = sprites[i];
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
 		{
-			const ecomplex::Symbol& symbol = complex->getSymbol();
+			const ecomplex::Symbol& symbol = complex->GetSymbol();
 			for (size_t i = 0, n = symbol.m_sprites.size(); i < n; ++i)
 			{
 				d2d::ISprite* child = symbol.m_sprites[i];
 				for (size_t i = 0, n = sprites.size(); i < n; ++i)
-					if (&child->getSymbol() == &sprites[i]->getSymbol())
+					if (&child->GetSymbol() == &sprites[i]->GetSymbol())
 						m_graphics.connect(from, sprites[i]);
 			}
 		}
 		else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(from))
 		{
-			const libanim::Symbol& symbol = anim->getSymbol();
+			const libanim::Symbol& symbol = anim->GetSymbol();
 			for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 			{
 				libanim::Symbol::Layer* layer = symbol.m_layers[i];
@@ -97,7 +97,7 @@ void StagePanel::initConnection()
 					{
 						d2d::ISprite* child = frame->sprites[i];
 						for (size_t i = 0, n = sprites.size(); i < n; ++i)
-							if (&child->getSymbol() == &sprites[i]->getSymbol())
+							if (&child->GetSymbol() == &sprites[i]->GetSymbol())
 								m_graphics.connect(from, sprites[i]);
 					}
 				}
@@ -124,7 +124,7 @@ void StagePanel::initPosition()
 			float angle = d2d::Random::getNum(0, d2d::PI*2);
 			pos.x = cos(angle)*radius;
 			pos.y = sin(angle)*radius;
-			sprite->setTransform(pos, 0);
+			sprite->SetTransform(pos, 0);
 		}
 	}
 
@@ -143,14 +143,14 @@ void StagePanel::initPosition()
 			{
 				d2d::ISprite* to = node->out[i];
 
-				d2d::Vector pos = sprite->getPosition();
+				d2d::Vector pos = sprite->GetPosition();
 				pos.x += cos(angle*i)*radius;
 				pos.y += sin(angle*i)*radius;
 // 				if (to->getPosition().x != 0 || to->getPosition().y != 0)
 // 					pos = (pos + to->getPosition()) * 0.5f;
 
 			//	to->setTransform(pos, 0);
-				m_graphics.move(to, pos - to->getPosition());
+				m_graphics.move(to, pos - to->GetPosition());
 			}
 		}
 	}

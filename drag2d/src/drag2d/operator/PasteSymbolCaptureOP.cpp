@@ -29,7 +29,7 @@ bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 		m_lastPos = m_pos;
 
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-		sprite->translate(m_pos);
+		sprite->Translate(m_pos);
 		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}

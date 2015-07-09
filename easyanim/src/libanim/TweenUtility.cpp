@@ -52,28 +52,28 @@ bool TweenUtility::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1
 
 void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process)
 {
-	float xscale = (end->getScale().x - start->getScale().x) * process + start->getScale().x,
-		yscale = (end->getScale().y - start->getScale().y) * process + start->getScale().y;
-	tween->setScale(xscale, yscale);
+	float xscale = (end->GetScale().x - start->GetScale().x) * process + start->GetScale().x,
+		yscale = (end->GetScale().y - start->GetScale().y) * process + start->GetScale().y;
+	tween->SetScale(xscale, yscale);
 
-	d2d::Vector offset = (end->getOffset() - start->getOffset()) * process + start->getOffset();
-	tween->setOffset(offset);
+	d2d::Vector offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
+	tween->SetOffset(offset);
 
-	tween->setTransform(d2d::Vector(0, 0), 0);
+	tween->SetTransform(d2d::Vector(0, 0), 0);
 
-	d2d::Vector center_s = start->getCenter(),
-		center_e = end->getCenter();
+	d2d::Vector center_s = start->GetCenter(),
+		center_e = end->GetCenter();
 
-	float angle = (end->getAngle() - start->getAngle()) * process + start->getAngle();
-	d2d::Vector base_s = start->getPosition() + start->getOffset(),
-		base_e = end->getPosition() + end->getOffset();
+	float angle = (end->GetAngle() - start->GetAngle()) * process + start->GetAngle();
+	d2d::Vector base_s = start->GetPosition() + start->GetOffset(),
+		base_e = end->GetPosition() + end->GetOffset();
 	d2d::Vector base_t = (base_e - base_s) * process + base_s;
 	d2d::Vector pos_t = base_t -  offset;
-	tween->setTransform(pos_t, angle);
+	tween->SetTransform(pos_t, angle);
 
-	float xshear = (end->getShear().x - start->getShear().x) * process + start->getShear().x,
-		yshear = (end->getShear().y - start->getShear().y) * process + start->getShear().y;
-	tween->setShear(xshear, yshear);
+	float xshear = (end->GetShear().x - start->GetShear().x) * process + start->GetShear().x,
+		yshear = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
+	tween->SetShear(xshear, yshear);
 
 	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
 	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);

@@ -119,7 +119,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		m_impl->Scale(w/spr->getSymbol().GetSize().xLength(), h/spr->getSymbol().GetSize().yLength());
+		m_impl->Scale(w/spr->GetSymbol().GetSize().xLength(), h/spr->GetSymbol().GetSize().yLength());
 	}
 	// shear
 	else if (name == wxT("Shear"))
@@ -143,14 +143,14 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Mirror.Horizontal"))
 	{
 		bool xMirror, yMirror;
-		spr->getMirror(xMirror, yMirror);
+		spr->GetMirror(xMirror, yMirror);
 //		spr->setMirror(wxANY_AS(value, bool), yMirror);
 		m_impl->Mirror(wxANY_AS(value, bool), yMirror);
 	}
 	else if (name == wxT("Mirror.Vertical"))
 	{
 		bool xMirror, yMirror;
-		spr->getMirror(xMirror, yMirror);
+		spr->GetMirror(xMirror, yMirror);
 //		spr->setMirror(xMirror, wxANY_AS(value, bool));
 		m_impl->Mirror(xMirror, wxANY_AS(value, bool));
 	}
@@ -217,25 +217,25 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
 
-	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->getPosition().x);
-	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->getPosition().y);
+	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->GetPosition().x);
+	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->GetPosition().y);
 	pg->GetProperty(wxT("Pos"))->SetValue(pg->GetProperty(wxT("Pos"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Angle"))->SetValue(spr->getAngle() * TRANS_RAD_TO_DEG);
-	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->getScale().x);
-	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->getScale().y);
+	pg->GetProperty(wxT("Angle"))->SetValue(spr->GetAngle() * TRANS_RAD_TO_DEG);
+	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
+	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->getSymbol().GetSize().xLength() * spr->getScale().x);
-	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->getSymbol().GetSize().yLength() * spr->getScale().y);
+	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->GetSymbol().GetSize().xLength() * spr->GetScale().x);
+	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->GetSymbol().GetSize().yLength() * spr->GetScale().y);
 	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Shear.X"))->SetValue(spr->getShear().x);
-	pg->GetProperty(wxT("Shear.Y"))->SetValue(spr->getShear().y);
+	pg->GetProperty(wxT("Shear.X"))->SetValue(spr->GetShear().x);
+	pg->GetProperty(wxT("Shear.Y"))->SetValue(spr->GetShear().y);
 	pg->GetProperty(wxT("Shear"))->SetValue(pg->GetProperty(wxT("Shear"))->GenerateComposedValue());
- 	pg->GetProperty(wxT("Offset.X"))->SetValue(spr->getOffset().x);
-	pg->GetProperty(wxT("Offset.Y"))->SetValue(spr->getOffset().y);
+ 	pg->GetProperty(wxT("Offset.X"))->SetValue(spr->GetOffset().x);
+	pg->GetProperty(wxT("Offset.Y"))->SetValue(spr->GetOffset().y);
 	pg->GetProperty(wxT("Offset"))->SetValue(pg->GetProperty(wxT("Offset"))->GenerateComposedValue());
 
 	bool xMirror, yMirror;
-	spr->getMirror(xMirror, yMirror);
+	spr->GetMirror(xMirror, yMirror);
 	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(xMirror);
 	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(yMirror);
 	pg->GetProperty(wxT("Mirror"))->SetValue(pg->GetProperty(wxT("Mirror"))->GenerateComposedValue());
@@ -316,57 +316,57 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* posProp = pg->Append(new wxStringProperty(wxT("Pos"), wxPG_LABEL, wxT("<composed>")));
 	posProp->SetExpanded(false);
-	pg->AppendIn(posProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->getPosition().x));
+	pg->AppendIn(posProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->GetPosition().x));
 	pg->SetPropertyAttribute(wxT("Pos.X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Pos.X"), "Precision", 1);
-	pg->AppendIn(posProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->getPosition().y));
+	pg->AppendIn(posProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->GetPosition().y));
 	pg->SetPropertyAttribute(wxT("Pos.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Pos.Y"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, spr->getAngle() * TRANS_RAD_TO_DEG));
+	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, spr->GetAngle() * TRANS_RAD_TO_DEG));
 	pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
 	pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
 
 	wxPGProperty* scaleProp = pg->Append(new wxStringProperty(wxT("Scale"), wxPG_LABEL, wxT("<composed>")));
 	scaleProp->SetExpanded(false);
-	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->getScale().x));
+	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->GetScale().x));
 	pg->SetPropertyAttribute(wxT("Scale.X"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Scale.X"), "Precision", 2);
-	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->getScale().y));
+	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->GetScale().y));
 	pg->SetPropertyAttribute(wxT("Scale.Y"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Scale.Y"), "Precision", 2);
 
 	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("Size"), wxPG_LABEL, wxT("<composed>")));
 	sizeProp->SetExpanded(false);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, spr->getSymbol().GetSize().xLength() * spr->getScale().x));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, spr->GetSymbol().GetSize().xLength() * spr->GetScale().x));
 	pg->SetPropertyAttribute(wxT("Size.Width"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Width"), "Precision", 2);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, spr->getSymbol().GetSize().yLength() * spr->getScale().y));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, spr->GetSymbol().GetSize().yLength() * spr->GetScale().y));
 	pg->SetPropertyAttribute(wxT("Size.Height"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Height"), "Precision", 2);
 
 	wxPGProperty* shearProp = pg->Append(new wxStringProperty(wxT("Shear"), wxPG_LABEL, wxT("<composed>")));
 	shearProp->SetExpanded(false);
-	pg->AppendIn(shearProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->getShear().x));
+	pg->AppendIn(shearProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->GetShear().x));
 	pg->SetPropertyAttribute(wxT("Shear.X"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Shear.X"), "Precision", 2);
-	pg->AppendIn(shearProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->getShear().y));
+	pg->AppendIn(shearProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->GetShear().y));
 	pg->SetPropertyAttribute(wxT("Shear.Y"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Shear.Y"), "Precision", 2);
 
 	wxPGProperty* offsetProp = pg->Append(new wxStringProperty(wxT("Offset"), wxPG_LABEL, wxT("<composed>")));
 	offsetProp->SetExpanded(false);
-	pg->AppendIn(offsetProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->getOffset().x));
+	pg->AppendIn(offsetProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->GetOffset().x));
 	pg->SetPropertyAttribute(wxT("Offset.X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Offset.X"), "Precision", 1);
-	pg->AppendIn(offsetProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->getOffset().y));
+	pg->AppendIn(offsetProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->GetOffset().y));
 	pg->SetPropertyAttribute(wxT("Offset.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Offset.Y"), "Precision", 1);
 
 	wxPGProperty* mirrorProp = pg->Append(new wxStringProperty(wxT("Mirror"), wxPG_LABEL, wxT("<composed>")));
 	mirrorProp->SetExpanded(false);
 	bool xMirror, yMirror;
-	spr->getMirror(xMirror, yMirror);
+	spr->GetMirror(xMirror, yMirror);
 	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, xMirror));
 	pg->SetPropertyAttribute("Mirror.Horizontal", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, yMirror));
