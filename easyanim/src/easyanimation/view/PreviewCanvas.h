@@ -10,7 +10,7 @@ namespace eanim
 class Controller;
 struct PlaySettings;
 
-class PreviewCanvas : public d2d::DynamicStageCanvas
+class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,

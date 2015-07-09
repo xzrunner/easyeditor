@@ -8,7 +8,7 @@ namespace eparticle3d
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::DynamicStageCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel)
 	, m_stage(editPanel)
 	, m_control(0.033f)
 {

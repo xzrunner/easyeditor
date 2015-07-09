@@ -2102,14 +2102,6 @@
 							RelativePath="..\..\..\src\drag2d\view\DialogStageCanvas.h"
 							>
 						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\view\DynamicStageCanvas.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\view\DynamicStageCanvas.h"
-							>
-						</File>
 					</Filter>
 					<Filter
 						Name="camera"

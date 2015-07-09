@@ -6,7 +6,7 @@ namespace eicon
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage(stage)
 {
 }

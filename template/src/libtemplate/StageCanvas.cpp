@@ -5,7 +5,7 @@ namespace etemplate
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-//	: d2d::DynamicStageCanvas(stage)
+//	: d2d::OrthoCanvas(stage)
 	: d2d::TwoPassCanvas(stage)
 	, m_stage(stage)
 {

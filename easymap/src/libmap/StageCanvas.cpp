@@ -6,7 +6,7 @@ namespace emap
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::DynamicStageCanvas(panel)
+	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 {
 }

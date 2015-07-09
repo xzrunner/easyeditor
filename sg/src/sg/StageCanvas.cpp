@@ -11,7 +11,7 @@ namespace sg
 static const float VIEW_TRANS = 0.75f;
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage(stage)
 	, m_background(NULL)
 {

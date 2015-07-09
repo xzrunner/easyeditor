@@ -6,7 +6,7 @@ namespace eterrain2d
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::DynamicStageCanvas(panel)
+	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 	, m_edited(NULL)
 {
@@ -14,7 +14,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
 						 const std::vector<d2d::ISprite*>& bg_sprites)
-	: d2d::DynamicStageCanvas(panel)
+	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_bg_sprites(bg_sprites)
@@ -23,7 +23,7 @@ StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
 
 void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));

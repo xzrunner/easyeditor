@@ -9,7 +9,7 @@ namespace ecomplex
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::DynamicStageCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel)
 	, m_stage(editPanel)
 	, m_background(NULL)
 	, m_stat(1)
@@ -32,7 +32,7 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 
 void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 	m_stage->getSymbol()->ReloadTexture();
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();

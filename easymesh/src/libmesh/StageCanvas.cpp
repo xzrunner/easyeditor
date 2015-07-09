@@ -6,14 +6,14 @@ namespace emesh
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::DynamicStageCanvas(panel)
+	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 {
 }
 
 void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 	m_panel->GetSymbol()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();

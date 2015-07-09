@@ -31,6 +31,9 @@ void TwoPassCanvas::OnDrawWhole() const
 	if (IsDirty()) {
  		mgr->SetFBO(fbo.GetFboID());
 		OnePassCanvas::OnDrawWhole();
+		wxLogDebug("pass 22222222222222222");
+	} else {
+		wxLogDebug("pass 1");
 	}
 
 	//////////////////////////////////////////////////////////////////////////

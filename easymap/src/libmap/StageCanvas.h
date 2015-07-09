@@ -8,7 +8,7 @@ namespace emap
 
 class StagePanel;
 
-class StageCanvas : public d2d::DynamicStageCanvas
+class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* panel);

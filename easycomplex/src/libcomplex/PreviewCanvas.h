@@ -6,7 +6,7 @@
 namespace ecomplex
 {
 
-class PreviewCanvas : public d2d::DynamicStageCanvas
+class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
