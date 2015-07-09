@@ -45,13 +45,13 @@ void OrthoCanvas::OnSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	d2d::TwoPassCanvas::OnSize(w, h);
-
 	// Makes the OpenGL state that is represented by the OpenGL rendering 
 	// context context current
 	if (IsInited()) {
 		SetCurrentCanvas();
 	}
+
+	d2d::TwoPassCanvas::OnSize(w, h);
 
 	glViewport(0, 0, w, h);
 

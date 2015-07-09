@@ -68,15 +68,14 @@ void IStageCanvas::InitGL()
 	}
 
 	try {
-		ShaderMgr::Instance()->Reset();
+		if (RenderContext::SHADER_MGR) {
+			RenderContext::SHADER_MGR->reload();
+			RenderContext::SHADER_MGR->Reset();
+		}
 
 		ResetViewport();
 
 		glEnable(GL_TEXTURE_2D);
-
-		if (RenderContext::SHADER_MGR) {
-			RenderContext::SHADER_MGR->reload();
-		}
 	} catch (Exception& e) {
 		ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();	
