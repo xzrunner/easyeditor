@@ -1342,7 +1342,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 					src[1] = tri->nodes[1]->uv;
 					src[2] = tri->nodes[2]->uv;
 					src[3] = tri->nodes[2]->uv;
-					CalSrcFromUV(src, picture);
+					CalSrcFromUVFixed(src, picture);
 					std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
 					std::string sx1 = wxString::FromDouble(src[1].x), sy1 = wxString::FromDouble(src[1].y);
 					std::string sx2 = wxString::FromDouble(src[2].x), sy2 = wxString::FromDouble(src[2].y);
