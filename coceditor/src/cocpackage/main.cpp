@@ -219,6 +219,8 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	d2d::Config::Instance()->EnableRender(false);
+
 	InitSymbolCreators();
 
 	float gscale = 1.0f;
