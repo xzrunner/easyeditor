@@ -307,6 +307,13 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center, 
 							  float width, float height)
 {
+	if (width <= 0) {
+		width = 1;
+	}
+	if (height <= 0) {
+		height = 1;
+	}
+
 	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->getSymbol());
 	int w = symbol.getImage()->GetOriginWidth(),
 		h = symbol.getImage()->GetOriginHeight();
