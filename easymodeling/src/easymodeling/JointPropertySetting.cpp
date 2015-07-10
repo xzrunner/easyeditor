@@ -92,7 +92,7 @@ void JointPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	}
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

@@ -44,7 +44,7 @@ void Controller::setCurrFrame(int layer, int frame)
 		}
 	}
 
-	m_widgets->m_stage->GetCanvas()->SetDirty();
+	m_widgets->m_stage->SetCanvasDirty();
 	if (m_widgets->m_keysPanel) {
 		m_widgets->m_keysPanel->Refresh(true);
 	}
@@ -188,7 +188,7 @@ void Controller::Clear()
 
 void Controller::Refresh()
 {
-	m_widgets->m_stage->GetCanvas()->SetDirty()();
+	m_widgets->m_stage->SetCanvasDirty()();
 	m_widgets->m_keysPanel->Refresh(true);
 }
 

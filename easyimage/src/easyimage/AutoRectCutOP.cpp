@@ -29,7 +29,7 @@ bool AutoRectCutOP::OnMouseLeftUp(int x, int y)
 		m_selected->xMax = (int)(m_selected->xMax+0.5f);
 		m_selected->yMin = (int)(m_selected->yMin+0.5f);
 		m_selected->yMax = (int)(m_selected->yMax+0.5f);
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;
@@ -43,7 +43,7 @@ bool AutoRectCutOP::OnMouseRightDown(int x, int y)
 	bool removed = m_rects.remove(pos);
 	if (removed) {
 		m_selected = NULL;
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;
@@ -58,7 +58,7 @@ bool AutoRectCutOP::OnMouseDrag(int x, int y)
 		d2d::Vector curr = m_stage->TransPosScrToProj(x, y);
 		m_rects.moveRect(m_selected, m_last_pos, curr);
 		m_last_pos = curr;
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

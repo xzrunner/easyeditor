@@ -14,19 +14,19 @@ SpriteSelection::SpriteSelection(EditPanel* stage)
 void SpriteSelection::Clear()
 {
 	ObjSelectionSet<ISprite>::Clear();
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void SpriteSelection::Add(ISprite* item)
 {
 	ObjSelectionSet<ISprite>::Add(item);
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void SpriteSelection::Remove(ISprite* item)
 {
 	ObjSelectionSet<ISprite>::Remove(item);
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 }

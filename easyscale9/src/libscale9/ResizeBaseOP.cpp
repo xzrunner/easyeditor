@@ -61,7 +61,7 @@ bool ResizeBaseOP::OnMouseDrag(int x, int y)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

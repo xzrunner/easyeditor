@@ -88,7 +88,7 @@ void SettingViewDlg::onChangeDisplayType(wxCommandEvent& event)
 	d2d::Settings::drawType = static_cast<d2d::Settings::DrawType>(event.GetSelection());
 
 	if (m_canvas) 
-		m_canvas->GetCanvas()->SetDirty();
+		m_canvas->SetCanvasDirty();
 }
 
 void SettingViewDlg::onChangeStyle(wxSpinEvent& event)

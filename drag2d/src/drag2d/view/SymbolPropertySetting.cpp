@@ -43,7 +43,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

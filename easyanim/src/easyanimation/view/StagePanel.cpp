@@ -149,13 +149,13 @@ SkeletonData& StagePanel::getSkeletonData()
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
 	m_edit_op->OnPopMenuSelected(Menu_AddJointNode);
-	GetCanvas()->SetDirty();
+	SetCanvasDirty();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
 	m_edit_op->OnPopMenuSelected(Menu_DelJointNode);
-	GetCanvas()->SetDirty();
+	SetCanvasDirty();
 }
 
 } // eanim

@@ -44,8 +44,8 @@ IStageCanvas::IStageCanvas(EditPanel* stage)
 
 IStageCanvas::~IStageCanvas()
 {
-	delete m_context;
-	m_timer.Stop();
+// 	delete m_context;
+// 	m_timer.Stop();
 }
 
 void IStageCanvas::ResetInitState() 

@@ -36,7 +36,7 @@ bool DrawRectangleOP::OnMouseDrag(int x, int y)
 	if (m_firstPos.isValid())
 	{
 		m_currPos = m_stage->TransPosScrToProj(x, y);
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

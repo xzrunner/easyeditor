@@ -263,7 +263,7 @@ void RectCutCMPT::onAddRect(wxCommandEvent& event)
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
 	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 }

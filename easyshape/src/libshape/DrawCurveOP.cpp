@@ -52,7 +52,7 @@ bool DrawCurveOP::OnMouseDrag(int x, int y)
 		m_curve.pop_back();
 	}
 	m_curve.push_back(pos);
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }

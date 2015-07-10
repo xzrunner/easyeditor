@@ -81,7 +81,7 @@ void EditPanel::SetEditOP(AbstractEditOP* editOP)
 	if (m_edit_op) {
 		m_edit_op->OnActive();
 	}
-	m_canvas->SetDirty();
+	SetCanvasDirty();
 }
 
 void EditPanel::OnMouse(wxMouseEvent& event)
@@ -165,7 +165,7 @@ void EditPanel::ResetCanvas()
 	if (m_canvas)
 	{
 		m_canvas->ResetInitState();
-		m_canvas->SetDirty();
+		SetCanvasDirty();
 	}
 }
 
@@ -284,13 +284,20 @@ void EditPanel::OnSize(wxSizeEvent& event)
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}
-	m_canvas->SetDirty();	// no refresh when change window size
+	SetCanvasDirty();	// no refresh when change window size
 }
 
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
 	if (m_edit_op) {
 		m_edit_op->OnPopMenuSelected(event.GetId());
+	}
+}
+
+void EditPanel::SetCanvasDirty()
+{
+	if (m_canvas) {
+		m_canvas->SetDirty();
 	}
 }
 

@@ -274,7 +274,7 @@ void LayersMgrWidget::onLayerUp(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	Layout();
 	Refresh(true);
@@ -305,7 +305,7 @@ void LayersMgrWidget::onLayerDown(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	Layout();
 	Refresh(true);

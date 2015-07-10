@@ -43,7 +43,7 @@ void TextPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	}
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

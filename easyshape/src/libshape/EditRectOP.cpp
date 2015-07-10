@@ -146,7 +146,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
-			m_stage->GetCanvas()->SetDirty();
+			m_stage->SetCanvasDirty();
 		}
 	}
 
@@ -187,7 +187,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 			m_propertyPanel->EnablePropertyGrid(false);
 
-			m_stage->GetCanvas()->SetDirty();
+			m_stage->SetCanvasDirty();
 		}
 	}
 

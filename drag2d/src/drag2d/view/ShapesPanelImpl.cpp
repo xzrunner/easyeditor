@@ -34,7 +34,7 @@ bool ShapesPanelImpl::InsertShape(IShape* shape)
 {
 	bool ret = m_container->Insert(shape);
 	if (ret) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 	return ret;
 }
@@ -43,7 +43,7 @@ bool ShapesPanelImpl::RemoveShape(IShape* shape)
 {
 	bool ret = m_container->Remove(shape);
 	if (ret) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 	return ret;
 }
@@ -52,7 +52,7 @@ bool ShapesPanelImpl::ClearAllShapes()
 {
 	bool ret = m_container->Clear();
 	if (ret) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 	return ret;
 }

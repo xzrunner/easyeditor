@@ -14,19 +14,19 @@ ShapeSelection::ShapeSelection(EditPanel* stage)
 void ShapeSelection::Clear()
 {
 	ObjSelectionSet<IShape>::Clear();
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void ShapeSelection::Add(IShape* item)
 {
 	ObjSelectionSet<IShape>::Add(item);
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void ShapeSelection::Remove(IShape* item)
 {
 	ObjSelectionSet<IShape>::Remove(item);
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 }

@@ -97,7 +97,7 @@ bool PasteSpriteOP::OnMouseMove(int x, int y)
 
 	setMousePos(x, y);
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }

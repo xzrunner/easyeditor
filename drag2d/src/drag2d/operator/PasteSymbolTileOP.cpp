@@ -133,7 +133,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 
 		} while (0);
 	}
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }

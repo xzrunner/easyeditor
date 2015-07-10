@@ -45,7 +45,7 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 	sprite->Translate(off);
 	m_image = sprite;
 
-	GetCanvas()->SetDirty();
+	SetCanvasDirty();
 }
 
 //////////////////////////////////////////////////////////////////////////

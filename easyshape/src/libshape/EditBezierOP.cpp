@@ -143,7 +143,7 @@ bool EditBezierOP::OnMouseMove(int x, int y)
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
-			m_stage->GetCanvas()->SetDirty();
+			m_stage->SetCanvasDirty();
 		}
 	}
 
@@ -173,7 +173,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 		}
 	}
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }

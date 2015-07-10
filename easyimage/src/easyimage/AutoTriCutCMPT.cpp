@@ -127,7 +127,7 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	m_fine->CreateOutline(AREA_TOLERANCE, PERIMETER_TOLERANCE, max_step++);
 	op->m_fine_bound_line = m_fine->GetResult();
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void AutoTriCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
@@ -137,7 +137,7 @@ void AutoTriCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
 		m_fine->ReduceOutlineCount(AREA_TOLERANCE, PERIMETER_TOLERANCE);
 		AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 		op->m_fine_bound_line = m_fine->GetResult();
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 
@@ -167,7 +167,7 @@ void AutoTriCutCMPT::Trigger()
 #endif
 	op->m_fine_bound_line = fine.GetResult();
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)

@@ -21,7 +21,7 @@ void Frame::onChangePerspective(wxCommandEvent& event)
 {
 	const StagePanel* stage = static_cast<const StagePanel*>((m_task)->GetEditPanel());
 	const_cast<StagePanel*>(stage)->SetPerspective(!stage->GetPerspective());
-	const_cast<StagePanel*>(stage)->GetCanvas()->SetDirty();
+	const_cast<StagePanel*>(stage)->SetCanvasDirty();
 }
 
 void Frame::onSetBackground(wxCommandEvent& event)

@@ -30,7 +30,7 @@ void CirclePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		dirty = false;
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

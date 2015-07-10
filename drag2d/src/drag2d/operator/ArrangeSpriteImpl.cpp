@@ -326,7 +326,7 @@ void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseDrag(pos))
 	{
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
@@ -526,7 +526,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		//sprite->setOffset(Vector(0, 0));
 	}
 	m_stage->AddOpRecord(comb);
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)

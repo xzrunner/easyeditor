@@ -170,7 +170,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		Symbol* symbol = new Symbol(image->getImage());
 		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 		m_stage->GetCanvas()->ResetViewport();
 
 		return true;

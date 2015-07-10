@@ -54,7 +54,7 @@ bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 			m_pos = newPos;
 		}
 	}
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }

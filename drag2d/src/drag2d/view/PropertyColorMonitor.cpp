@@ -20,7 +20,7 @@ Colorf PropertyColorListener::GetColor() const
 
 void PropertyColorListener::OnColorChanged()
 {
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void PropertyColorListener::OnColorChanged(const Colorf& col)

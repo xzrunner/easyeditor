@@ -133,7 +133,7 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, con
 	}
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

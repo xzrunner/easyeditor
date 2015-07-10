@@ -23,7 +23,7 @@ void Task::Load(const char* filename)
 {
 	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
 	m_stage->LoadFromShadow();
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void Task::Store(const char* filename) const

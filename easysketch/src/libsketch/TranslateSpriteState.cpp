@@ -31,7 +31,7 @@ void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 	Translate(m_last_pos, pos);
 	m_last_pos = pos;
 
-	m_stage->GetCanvas()->SetDirty();
+	m_stage->SetCanvasDirty();
 }
 
 void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)

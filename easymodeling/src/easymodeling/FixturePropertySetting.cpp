@@ -38,7 +38,7 @@ void FixturePropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		dirty = false;
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

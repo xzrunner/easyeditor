@@ -39,7 +39,7 @@ void BodyPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		dirty = false;
 
 	if (dirty) {
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 

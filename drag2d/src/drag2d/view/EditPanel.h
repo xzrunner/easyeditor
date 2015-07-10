@@ -65,6 +65,8 @@ public:
 
 	void OnRightPopupMenu(wxCommandEvent& event);
 
+	void SetCanvasDirty();
+
 protected:
 	void OnSize(wxSizeEvent& event);
 

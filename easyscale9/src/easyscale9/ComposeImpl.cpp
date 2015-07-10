@@ -31,7 +31,7 @@ void ComposeImpl::OnMouseRightDown(int x, int y)
 	if (selected)
 	{
 		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + d2d::PI*0.5f);
-		m_stage->GetCanvas()->SetDirty();
+		m_stage->SetCanvasDirty();
 	}
 }
 
