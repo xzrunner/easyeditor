@@ -30,6 +30,7 @@ private:
 	void onChangeShape(wxCommandEvent& event);
 	void onChangeTextureEdge(wxCommandEvent& event);
 	void onSetBGColor(wxCommandEvent& event);
+	void onChangeUpdateSpr(wxCommandEvent& event);
 
 private:
 	SettingData& m_settings;

@@ -26,6 +26,7 @@ struct SettingData
 	bool visible_tex_edge;
 	bool particle3d_loop;
 	Colorf bg_color;
+	bool visible_spr_update;
 
 	// image filter
 	bool linear_filter;
