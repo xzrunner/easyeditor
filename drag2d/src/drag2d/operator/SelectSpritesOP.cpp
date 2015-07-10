@@ -158,6 +158,8 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		m_callback->updateControlValue();
 	}
 
+	m_stage->SetCanvasDirty();
+
 	return false;
 }
 

@@ -138,6 +138,8 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 		}
 	}
 
+	m_stage->SetCanvasDirty();
+
 	return false;
 }
 
