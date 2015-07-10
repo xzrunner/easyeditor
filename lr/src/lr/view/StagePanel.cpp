@@ -82,6 +82,23 @@ void StagePanel::Clear()
 	}
 }
 
+bool StagePanel::Update(int version)
+{
+	bool ret = false;
+
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		if (m_layers[i]->Update(version)) {
+			ret = true;
+		}
+	}
+
+	if (!d2d::Config::Instance()->GetSettings().visible_spr_update) {
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
 	bool ret = false;

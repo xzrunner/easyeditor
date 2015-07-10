@@ -132,6 +132,25 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	}
 }
 
+bool Layer::Update(int version)
+{
+	bool ret = false;
+
+	std::vector<d2d::ISprite*> sprites;
+	TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		bool dirty = sprites[i]->Update(version);
+		if (dirty) {
+			ret = true;
+		}
+	}
+
+	if (!m_visible) {
+		ret = false;
+	}
+	return ret;
+}
+
 bool Layer::IsValidFloat(float f)
 {
 	return (f == f) && (f <= FLT_MAX && f >= -FLT_MAX);
