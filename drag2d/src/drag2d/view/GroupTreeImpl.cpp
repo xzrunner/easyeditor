@@ -111,7 +111,10 @@ VisitLeaf(wxTreeItemId id)
 	std::ofstream fout("del_debug.txt", std::ios::app);
 	fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 0" << std::endl;
 
-	assert(id.IsOk());
+	if (!id.IsOk()) {
+		return false;
+	}
+
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data || data->IsGroup()) {
 		return false;
