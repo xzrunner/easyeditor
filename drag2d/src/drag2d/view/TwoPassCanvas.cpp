@@ -43,6 +43,9 @@ void TwoPassCanvas::OnDrawWhole() const
 	mgr->SetFBO(0);
 	mgr->SetTexture(0);
 
+	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	mgr->Screen();
 	mgr->DrawScreen(fbo.GetTexID());
 }
