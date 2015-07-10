@@ -177,7 +177,7 @@ d2d::Rect OceanMesh::GetRegion() const
 float OceanMesh::GetTexcoordSpdAngle() const
 {
 	if (m_texcoords_spd.y == 0) {
-		return 0;
+		return d2d::PI * 0.5f;
 	} else {
 		return atan(m_texcoords_spd.x / m_texcoords_spd.y);
 	}
