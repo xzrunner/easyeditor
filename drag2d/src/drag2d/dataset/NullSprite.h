@@ -25,8 +25,9 @@ namespace d2d
 		//
 		// ISprite interface
 		//
-		virtual const ISymbol& getSymbol() const { return *m_symbol; }
-		virtual void setSymbol(ISymbol* symbol) { m_symbol = symbol; }
+		virtual bool Update(int version) { return false; }
+		virtual const ISymbol& GetSymbol() const { return *m_symbol; }
+		virtual void SetSymbol(ISymbol* symbol) { m_symbol = symbol; }
 
 	private:
 		ISymbol* m_symbol;

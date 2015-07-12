@@ -11,7 +11,7 @@ static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage(stage)
 	, m_control(0.033f)
 {
@@ -79,7 +79,7 @@ void StageCanvas::UpdateAnimation()
 	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<libanim::Sprite>(sprites));
 	size_t max = 0;
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());
+		max = std::max(max, sprites[i]->GetSymbol().getMaxFrameIndex());
 
 	m_control.update();
 	m_currFrame = m_control.frame();

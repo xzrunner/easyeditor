@@ -44,7 +44,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 		m_selection->Clear();
 	}
 
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }
@@ -59,7 +59,7 @@ bool SelectSpriteOP::OnDraw() const
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
 		mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
 			mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
-		e3d::DrawCube(mat, s->getSymbol().GetAABB(), d2d::MID_RED);
+		e3d::DrawCube(mat, s->GetSymbol().GetAABB(), d2d::MID_RED);
 	}
 
 	return false;
@@ -82,7 +82,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
-		const Symbol& symbol = static_cast<const Symbol&>(sprite->getSymbol());
+		const Symbol& symbol = static_cast<const Symbol&>(sprite->GetSymbol());
 		
 		const e3d::AABB& aabb = symbol.GetAABB();
 		Sprite* s = static_cast<Sprite*>(sprite);

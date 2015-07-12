@@ -8,7 +8,6 @@
 #include "SpriteCtrlNode.h"
 
 #include "common/typedef.h"
-#include "dataset/ObjSelectionSet.h"
 
 namespace d2d
 {
@@ -18,6 +17,7 @@ class MultiSpritesImpl;
 class PropertySettingPanel;
 class IArrangeSpriteState;
 class Camera;
+class SpriteSelection;
 
 class ArrangeSpriteImpl
 {

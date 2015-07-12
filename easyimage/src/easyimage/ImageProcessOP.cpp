@@ -20,7 +20,7 @@ bool ImageProcessOP::OnActive()
 
 	if (const d2d::ISprite* sprite = m_stage->getImage())
 	{
-		d2d::Rect r = sprite->getSymbol().GetSize();
+		d2d::Rect r = sprite->GetSymbol().GetSize();
 
 		d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 		LanczosResamplingShader* shader = new LanczosResamplingShader;

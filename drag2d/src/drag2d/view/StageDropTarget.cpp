@@ -5,6 +5,7 @@
 
 #include "dataset/SpriteFactory.h"
 #include "dataset/SymbolMgr.h"
+#include "dataset/ISprite.h"
 
 namespace d2d
 {
@@ -34,8 +35,8 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 		bool handled = OnDropSymbol(symbol, pos);
 		if (!handled) {
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-			if (sprite->getSymbol().GetSize().isValid()) {
-				sprite->translate(pos);
+			if (sprite->GetSymbol().GetSize().isValid()) {
+				sprite->Translate(pos);
 				m_sprites_impl->InsertSprite(sprite);
 			}
 			sprite->Release();
@@ -54,7 +55,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 		if (success) {
 			Vector pos = m_edit_panel->TransPosScrToProj(x, y);
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-			sprite->translate(pos);
+			sprite->Translate(pos);
 			m_sprites_impl->InsertSprite(sprite);
 			sprite->Release();
 		}

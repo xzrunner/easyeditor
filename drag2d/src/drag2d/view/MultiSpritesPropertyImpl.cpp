@@ -73,10 +73,10 @@ Vector MultiSpritesPropertyImpl::GetPosition() const
 		return p;
 	}
 
-	Vector p = m_sprites[0]->getPosition();
+	Vector p = m_sprites[0]->GetPosition();
 	for (size_t i = 1, n = m_sprites.size(); i < n; ++i)
 	{
-		if (p != m_sprites[i]->getPosition())
+		if (p != m_sprites[i]->GetPosition())
 		{
 			p.setInvalid();
 			break;
@@ -166,9 +166,9 @@ float MultiSpritesPropertyImpl::GetAngle() const
 		return 0;
 	}
 
-	float angle = m_sprites[0]->getAngle();
+	float angle = m_sprites[0]->GetAngle();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (angle != m_sprites[i]->getAngle()) {
+		if (angle != m_sprites[i]->GetAngle()) {
 			return 0;
 		}
 	}
@@ -181,9 +181,9 @@ Vector MultiSpritesPropertyImpl::GetScale() const
 		return Vector(1, 1);
 	}
 
-	Vector scale = m_sprites[0]->getScale();
+	Vector scale = m_sprites[0]->GetScale();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (scale != m_sprites[i]->getScale()) {
+		if (scale != m_sprites[i]->GetScale()) {
 			return Vector(1, 1);
 		}
 	}
@@ -196,9 +196,9 @@ bool MultiSpritesPropertyImpl::GetMirrorX() const
 		return false;
 	}
 
-	bool mirror = m_sprites[0]->getMirrorX();
+	bool mirror = m_sprites[0]->GetMirrorX();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (mirror != m_sprites[i]->getMirrorX()) {
+		if (mirror != m_sprites[i]->GetMirrorX()) {
 			return false;
 		}
 	}
@@ -211,9 +211,9 @@ bool MultiSpritesPropertyImpl::GetMirrorY() const
 		return false;
 	}
 
-	bool mirror = m_sprites[0]->getMirrorY();
+	bool mirror = m_sprites[0]->GetMirrorY();
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (mirror != m_sprites[i]->getMirrorY()) {
+		if (mirror != m_sprites[i]->GetMirrorY()) {
 			return false;
 		}
 	}
@@ -275,7 +275,7 @@ void MultiSpritesPropertyImpl::SetPos(float x, float y)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setTransform(Vector(x, y), spr->getAngle());
+		spr->SetTransform(Vector(x, y), spr->GetAngle());
 	}	
 }
 
@@ -307,15 +307,15 @@ void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 		Vector center = GetOverallCenter();
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			ISprite* spr = m_sprites[i];
-			Vector pos = Math::rotateVector(spr->getPosition() - center, angle);
-			spr->setTransform(pos, angle);
+			Vector pos = Math::rotateVector(spr->GetPosition() - center, angle);
+			spr->SetTransform(pos, angle);
 		}
 	} 
 	else 
 	{
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			ISprite* spr = m_sprites[i];
-			spr->setTransform(spr->getPosition(), angle);
+			spr->SetTransform(spr->GetPosition(), angle);
 		}
 	}
 }
@@ -327,16 +327,16 @@ void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 		Vector center = GetOverallCenter();
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			ISprite* spr = m_sprites[i];
-			Vector pos = spr->getPosition() - center;
+			Vector pos = spr->GetPosition() - center;
 			pos.x *= sx;
 			pos.y *= sy;
-			spr->setTransform(pos + center, spr->getAngle());
+			spr->SetTransform(pos + center, spr->GetAngle());
 		}
 	}
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setScale(sx, sy);
+		spr->SetScale(sx, sy);
 	}
 }
 
@@ -347,15 +347,15 @@ void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 		Vector center = GetOverallCenter();
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			ISprite* spr = m_sprites[i];
-			Vector pos = spr->getPosition() - center;
+			Vector pos = spr->GetPosition() - center;
 			pos.x = -pos.x;
-			spr->setTransform(pos + center, -spr->getAngle());
+			spr->SetTransform(pos + center, -spr->GetAngle());
 		}
 	}
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setMirror(mirror, spr->getMirrorY());
+		spr->SetMirror(mirror, spr->GetMirrorY());
 	}
 }
 
@@ -366,15 +366,15 @@ void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 		Vector center = GetOverallCenter();
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			ISprite* spr = m_sprites[i];
-			Vector pos = spr->getPosition() - center;
+			Vector pos = spr->GetPosition() - center;
 			pos.y = -pos.y;
-			spr->setTransform(pos + center, -spr->getAngle());
+			spr->SetTransform(pos + center, -spr->GetAngle());
 		}
 	}
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setMirror(spr->getMirrorX(), mirror);
+		spr->SetMirror(spr->GetMirrorX(), mirror);
 	}
 }
 
@@ -402,15 +402,15 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float l = sprite->getPosition().x + sprite->getSymbol().GetSize().xMin;
+			float l = sprite->GetPosition().x + sprite->GetSymbol().GetSize().xMin;
 			if (l < left)
 				left = l;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = left - sprite->getSymbol().GetSize().xMin;
-			m_sprites[i]->setTransform(Vector(x, sprite->getPosition().y), sprite->getAngle());
+			float x = left - sprite->GetSymbol().GetSize().xMin;
+			m_sprites[i]->SetTransform(Vector(x, sprite->GetPosition().y), sprite->GetAngle());
 		}
 	}
 	else if (type == e_align_right)
@@ -419,15 +419,15 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float r = sprite->getPosition().x + sprite->getSymbol().GetSize().xMax;
+			float r = sprite->GetPosition().x + sprite->GetSymbol().GetSize().xMax;
 			if (r > right)
 				right = r;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = right - sprite->getSymbol().GetSize().xMax;
-			m_sprites[i]->setTransform(Vector(x, sprite->getPosition().y), sprite->getAngle());
+			float x = right - sprite->GetSymbol().GetSize().xMax;
+			m_sprites[i]->SetTransform(Vector(x, sprite->GetPosition().y), sprite->GetAngle());
 		}
 	}
 	else if (type == e_align_up)
@@ -436,15 +436,15 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float u = sprite->getPosition().y + sprite->getSymbol().GetSize().yMax;
+			float u = sprite->GetPosition().y + sprite->GetSymbol().GetSize().yMax;
 			if (u > up)
 				up = u;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = up - sprite->getSymbol().GetSize().yMax;
-			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, y), sprite->getAngle());
+			float y = up - sprite->GetSymbol().GetSize().yMax;
+			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, y), sprite->GetAngle());
 		}
 	}
 	else if (type == e_align_down)
@@ -453,15 +453,15 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float d = sprite->getPosition().y + sprite->getSymbol().GetSize().yMin;
+			float d = sprite->GetPosition().y + sprite->GetSymbol().GetSize().yMin;
 			if (d < down)
 				down = d;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = down - sprite->getSymbol().GetSize().yMin;
-			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, y), sprite->getAngle());
+			float y = down - sprite->GetSymbol().GetSize().yMin;
+			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, y), sprite->GetAngle());
 		}
 	}
 	else if (type == e_align_centerx)
@@ -469,14 +469,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		float down = FLT_MAX;
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			float y = m_sprites[i]->getPosition().y;
+			float y = m_sprites[i]->GetPosition().y;
 			if (y < down)
 				down = y;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, down), sprite->getAngle());
+			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, down), sprite->GetAngle());
 		}
 	}
 	else if (type == e_align_centery)
@@ -484,14 +484,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		float left = FLT_MAX;
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			float x = m_sprites[i]->getPosition().x;
+			float x = m_sprites[i]->GetPosition().x;
 			if (x < left)
 				left = x;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			m_sprites[i]->setTransform(Vector(left, sprite->getPosition().y), sprite->getAngle());
+			m_sprites[i]->SetTransform(Vector(left, sprite->GetPosition().y), sprite->GetAngle());
 		}
 	}
 }
@@ -506,7 +506,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = sprite->getPosition().x;
+			float x = sprite->GetPosition().x;
 			if (x < left) left = x;
 			if (x > right) right = x;
 		}
@@ -517,7 +517,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		for (size_t i = 0, n = sorted.size(); i < n; ++i)
 		{
 			ISprite* sprite = sorted[i];
-			sprite->setTransform(Vector(left + space * i, sprite->getPosition().y), sprite->getAngle());
+			sprite->SetTransform(Vector(left + space * i, sprite->GetPosition().y), sprite->GetAngle());
 		}
 	}
 	else if (type == e_center_vertical)
@@ -526,7 +526,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = sprite->getPosition().y;
+			float y = sprite->GetPosition().y;
 			if (y < down) down = y;
 			if (y > up) up = y;
 		}
@@ -537,7 +537,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		for (size_t i = 0, n = sorted.size(); i < n; ++i)
 		{
 			ISprite* sprite = sorted[i];
-			sprite->setTransform(Vector(sprite->getPosition().x, down + space * i), sprite->getAngle());
+			sprite->SetTransform(Vector(sprite->GetPosition().x, down + space * i), sprite->GetAngle());
 		}
 	}
 	else if (type == e_center_relative)
@@ -546,7 +546,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		float maxArea = 0;
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			float area = m_sprites[i]->getBounding()->area();
+			float area = m_sprites[i]->GetBounding()->area();
 			if (area > maxArea)
 			{
 				maxArea = area;
@@ -558,7 +558,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 		{
 			ISprite* sprite = m_sprites[i];
 			if (sprite != base)
-				sprite->setTransform(base->getPosition(), sprite->getAngle());
+				sprite->SetTransform(base->GetPosition(), sprite->GetAngle());
 		}
 	}
 }
@@ -568,10 +568,10 @@ void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* spr = m_sprites[i];
-		Vector pos = spr->getPosition();
+		Vector pos = spr->GetPosition();
 		pos.x += dx;
 		pos.y += dy;
-		spr->setTransform(pos, spr->getAngle());
+		spr->SetTransform(pos, spr->GetAngle());
 	}
 }
 
@@ -580,7 +580,7 @@ void MultiSpritesPropertyImpl::OnAngleChange(float angle)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* spr = m_sprites[i];
-		spr->setTransform(spr->getPosition(), spr->getAngle() + angle);
+		spr->SetTransform(spr->GetPosition(), spr->GetAngle() + angle);
 	}
 }
 
@@ -589,10 +589,10 @@ void MultiSpritesPropertyImpl::OnScaleChange(float dx, float dy)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* s = m_sprites[i];
-		Vector scale = s->getScale();
+		Vector scale = s->GetScale();
 		scale.x *= dx;
 		scale.y *= dy;
-		s->setScale(scale.x, scale.y);
+		s->SetScale(scale.x, scale.y);
 	}
 }
 
@@ -604,7 +604,7 @@ Vector MultiSpritesPropertyImpl::GetOverallCenter() const
 
 	Vector center(0, 0);
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		center += m_sprites[i]->getPosition();
+		center += m_sprites[i]->GetPosition();
 	}
 	center /= m_sprites.size();
 	return center;

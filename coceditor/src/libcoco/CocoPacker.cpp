@@ -89,7 +89,7 @@ void CocoPacker::ResolveSymbols()
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 
-					if (image->getSymbol().GetSize().xLength() == 4 && image->getSymbol().GetSize().yLength() == 4)
+					if (image->GetSymbol().GetSize().xLength() == 4 && image->GetSymbol().GetSize().yLength() == 4)
 						ParserPicture(image, e_bothfix);
 					else
 						ParserPicture(image);
@@ -106,7 +106,7 @@ void CocoPacker::ResolveSymbols()
 				{
 					// todo multi mesh!
 					std::map<const d2d::ISymbol*, std::vector<SpriteID> >::iterator itr
-						= m_map_symbol2ids.find(&mesh->getSymbol());
+						= m_map_symbol2ids.find(&mesh->GetSymbol());
 					if (itr != m_map_symbol2ids.end()) {
 						bool find = false;
 						for (int i = 0, n = itr->second.size(); i < n; ++i) {
@@ -142,7 +142,7 @@ void CocoPacker::ResolveSymbols()
 						std::vector<SpriteID> ids;
 						ids.push_back(id);
 
-						m_map_symbol2ids.insert(std::make_pair(&mesh->getSymbol(), ids));
+						m_map_symbol2ids.insert(std::make_pair(&mesh->GetSymbol(), ids));
 
 						// mesh's pictures id
 						// todo for x
@@ -160,7 +160,7 @@ void CocoPacker::ResolveSymbols()
 				else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(sprite))
 				{
 					std::map<const d2d::ISymbol*, std::vector<SpriteID> >::iterator itr
-						= m_map_symbol2ids.find(&tex->getSymbol());
+						= m_map_symbol2ids.find(&tex->GetSymbol());
 					if (itr != m_map_symbol2ids.end()) 
 					{
 						bool find = false;
@@ -192,7 +192,7 @@ void CocoPacker::ResolveSymbols()
 						std::vector<SpriteID> ids;
 						ids.push_back(id);
 
-						m_map_symbol2ids.insert(std::make_pair(&tex->getSymbol(), ids));
+						m_map_symbol2ids.insert(std::make_pair(&tex->GetSymbol(), ids));
 
 						m_mapSpriteID.insert(std::make_pair(sprite, m_id));
 						int size = ParserTexture(tex);
@@ -250,7 +250,7 @@ void CocoPacker::ResolveSymbols()
 					{
 						d2d::ISprite* sprite = frame->sprites[k];
 						if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
-							unique.insert(&image->getSymbol());
+							unique.insert(&image->GetSymbol());
 						else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 							m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 						else if (eicon::Sprite* icon = dynamic_cast<eicon::Sprite*>(sprite))
@@ -415,9 +415,9 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 {
 	tsrc = tscreen = e_null;
 
-	TPParser::Picture* picture = m_parser.FindPicture(&sprite->getSymbol());
+	TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
 	if (!picture) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -427,7 +427,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	{
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr == m_mapSpriteID.end()) {
-			std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
+			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
 			throw d2d::Exception(str.c_str());
 		}
 		std::string sid = wxString::FromDouble(itr->second);
@@ -498,7 +498,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	
 	// 1. mirror
 	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
+	sprite->GetMirror(xMirror, yMirror);
 	if (xMirror) {
 		for (size_t i = 0; i < 4; ++i)
 			screen[i].x = -screen[i].x;
@@ -508,8 +508,8 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 			screen[i].y = -screen[i].y;
 	}
 	// 2. shear
-	float sx = sprite->getShear().x,
-		sy = sprite->getShear().y;
+	float sx = sprite->GetShear().x,
+		sy = sprite->GetShear().y;
 	screen[0].x += sx * hh;
 	screen[3].x += sx * hh;
 	screen[1].x -= sx * hh;
@@ -520,21 +520,21 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	screen[0].x -= sy * hw;
  	// 3. scale
  	for (size_t i = 0; i < 4; ++i)
- 		screen[i].x *= sprite->getScale().x;
+ 		screen[i].x *= sprite->GetScale().x;
  	for (size_t i = 0; i < 4; ++i)
- 		screen[i].y *= sprite->getScale().y;
+ 		screen[i].y *= sprite->GetScale().y;
  	// 4. rotate
  	for (size_t i = 0; i < 4; ++i)
  	{
- 		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->getAngle());
+ 		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->GetAngle());
  		screen[i] = rot;
  	}
  	// 5. translate
  	d2d::Vector offset = picture->offset;
- 	offset.x *= sprite->getScale().x / picture->invscale;
- 	offset.y *= sprite->getScale().y / picture->invscale;
- 	d2d::Vector center = sprite->getCenter();
- 	center += d2d::Math::rotateVector(offset, sprite->getAngle());
+ 	offset.x *= sprite->GetScale().x / picture->invscale;
+ 	offset.y *= sprite->GetScale().y / picture->invscale;
+ 	d2d::Vector center = sprite->GetCenter();
+ 	center += d2d::Math::rotateVector(offset, sprite->GetAngle());
  	for (size_t i = 0; i < 4; ++i)
  		screen[i] += center;
 
@@ -699,7 +699,7 @@ int CocoPacker::ParserIcon(const eicon::Sprite* sprite)
 {
 	int id = -1;
 
-	const eicon::Symbol* symbol = &sprite->getSymbol();
+	const eicon::Symbol* symbol = &sprite->GetSymbol();
 	float proc = sprite->GetProcess();
 
 	std::map<const eicon::Symbol*, std::map<float, int> >::iterator itr_symbol
@@ -1069,10 +1069,10 @@ void CocoPacker::CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* pictur
 
 int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 {
-	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(sprite->getSymbol().getImage()->GetFilepath());
+	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(sprite->GetSymbol().getImage()->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1082,7 +1082,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	// id
 	std::map<const d2d::ISprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
 	if (itr_sprite == m_mapSpriteID.end()) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
 		throw d2d::Exception(str.c_str());
 	}
 	int curr_id = itr_sprite->second;
@@ -1095,7 +1095,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	}
 	std::vector<int> frame_size;
 	d2d::Vector speed = sprite->GetSpeed();
-	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->getSymbol().getShape());
+	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->GetSymbol().getShape());
 	// 打包emesh::Strip做的流水
 	if (dynamic_cast<emesh::Strip*>(shape))
 	{
@@ -1217,7 +1217,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	//////////////////////////////////////////////////////////////////////////
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const d2d::ISymbol* symbol = &sprite->getSymbol();
+	const d2d::ISymbol* symbol = &sprite->GetSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
  	// id
@@ -1261,7 +1261,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 
 int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 {
-	const d2d::ISymbol* symbol = &sprite->getSymbol();
+	const d2d::ISymbol* symbol = &sprite->GetSymbol();
 	std::map<const d2d::ISymbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
 	if (itr_mesh_symbol == m_mapSymbolID.end()) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID!";
@@ -1276,14 +1276,14 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 
 	// only use one texture in the sprite
 
-	const std::vector<eterrain2d::OceanMesh*> oceans = sprite->getSymbol().GetOceans();
+	const std::vector<eterrain2d::OceanMesh*> oceans = sprite->GetSymbol().GetOceans();
 	assert(oceans.size() == 1);
 	eterrain2d::OceanMesh* ocean = oceans[0];
 	const d2d::ImageSymbol* img = ocean->GetImage0();
 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1293,7 +1293,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 	// id
 	std::map<const d2d::ISprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
 	if (itr_sprite == m_mapSpriteID.end()) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
 		throw d2d::Exception(str.c_str());
 	}
 	int curr_id = itr_sprite->second;
@@ -1429,7 +1429,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 
 int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 {
-	const std::vector<d2d::IShape*>& shapes = sprite->getSymbol().GetAllShapes();
+	const std::vector<d2d::IShape*>& shapes = sprite->GetSymbol().GetAllShapes();
 	assert(shapes.size() == 1);
 	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
 	assert(poly);
@@ -1438,7 +1438,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	const d2d::ImageSymbol* img_symbol = material->GetImage();
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1448,7 +1448,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	// id
 	std::map<const d2d::ISprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
 	if (itr_sprite == m_mapSpriteID.end()) {
-		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
 		throw d2d::Exception(str.c_str());
 	}
 	int curr_id = itr_sprite->second;
@@ -1506,7 +1506,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	//////////////////////////////////////////////////////////////////////////
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const d2d::ISymbol* symbol = &sprite->getSymbol();
+	const d2d::ISymbol* symbol = &sprite->GetSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
 	// id
@@ -1580,9 +1580,9 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		{
 			// libanim::Symbol's sprites store unique
 
-			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 			if (itr == m_mapSymbolID.end()) {
-				std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in m_mapSymbolID!";
+				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID!";
 				throw d2d::Exception(str.c_str());
 			}
 			id = itr->second;
@@ -1593,7 +1593,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		isFont = true;
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr == m_mapSpriteID.end()) {
-			std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in m_mapSpriteID!";
+			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSpriteID!";
 			throw d2d::Exception(str.c_str());
 		}
 		id = itr->second;
@@ -1602,16 +1602,16 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 	{
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr == m_mapSpriteID.end()) {
-			std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in m_mapSpriteID!";
+			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSpriteID!";
 			throw d2d::Exception(str.c_str());
 		}
 		id = itr->second;
 	}
 	else
 	{
-		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 		if (itr == m_mapSymbolID.end()) {
- 			std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in m_mapSymbolID!";
+ 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID!";
  			throw d2d::Exception(str.c_str());
 		}
 		id = itr->second;
@@ -1736,9 +1736,9 @@ void CocoPacker::ParserSpriteForFrame(const d2d::ISprite* sprite,
 	} 
 	else 
 	{
-		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 		if (itr == m_mapSymbolID.end()) {
-			std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in m_mapSymbolID!";
+			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID!";
 			throw d2d::Exception(str.c_str());
 		}
 		int id = itr->second;
@@ -1864,31 +1864,31 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 		// | kx  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
-		d2d::Vector center = sprite->getCenter();
+		d2d::Vector center = sprite->GetCenter();
 		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
 		{
-			TPParser::Picture* picture = m_parser.FindPicture(&sprite->getSymbol());
+			TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
 			if (!picture) {
-				std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
 				throw d2d::Exception(str.c_str());
 			}
 
 			d2d::Vector offset = picture->offset;
-			offset.x *= sprite->getScale().x / picture->invscale;
-			offset.y *= sprite->getScale().y / picture->invscale;
-			center += d2d::Math::rotateVector(offset, sprite->getAngle());
+			offset.x *= sprite->GetScale().x / picture->invscale;
+			offset.y *= sprite->GetScale().y / picture->invscale;
+			center += d2d::Math::rotateVector(offset, sprite->GetAngle());
 		}
-		float sx = sprite->getScale().x,
-			  sy = sprite->getScale().y;
+		float sx = sprite->GetScale().x,
+			  sy = sprite->GetScale().y;
 		bool xMirror, yMirror;
-		sprite->getMirror(xMirror, yMirror);
+		sprite->GetMirror(xMirror, yMirror);
 		if (xMirror) sx = -sx;
 		if (yMirror) sy = -sy;
 
-		float c = cos(-sprite->getAngle()),
-			s = sin(-sprite->getAngle());
-		float kx = -sprite->getShear().x,
-			  ky = -sprite->getShear().y;
+		float c = cos(-sprite->GetAngle()),
+			s = sin(-sprite->GetAngle());
+		float kx = -sprite->GetShear().x,
+			  ky = -sprite->GetShear().y;
 		mat[0] = sx*c - ky*sy*s;
 		mat[1] = sx*s + ky*sy*c;
 		mat[2] = kx*sx*c - sy*s;
@@ -1931,7 +1931,7 @@ void CocoPacker::GetColorAssignParams(const d2d::ISprite* sprite, std::vector<st
 int CocoPacker::QueryIconID(const eicon::Sprite* icon) const
 {
 	std::map<const eicon::Symbol*, std::map<float, int> >::const_iterator itr
-		= m_map_icon2ids.find(&icon->getSymbol());
+		= m_map_icon2ids.find(&icon->GetSymbol());
 	if (itr == m_map_icon2ids.end()) {
 		return -1;
 	} else {

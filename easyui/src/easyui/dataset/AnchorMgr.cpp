@@ -26,9 +26,9 @@ void AnchorMgr::Insert(d2d::ISprite* spr)
 	for (int i = 0; i < 6; ++i)
 	{
 		Anchor& anchor = m_anchors[i];
-		if (d2d::Math::getDistance(anchor.pos, spr->getPosition()) < RADIUS) {
+		if (d2d::Math::getDistance(anchor.pos, spr->GetPosition()) < RADIUS) {
 			anchor.sprites.push_back(spr);
-			spr->setTransform(anchor.pos, 0);
+			spr->SetTransform(anchor.pos, 0);
 			break;
 		}
 	}
@@ -91,7 +91,7 @@ void AnchorMgr::LoadFromFile(const Json::Value& value,
 			}
 			if (spr) {
 				m_anchors[i].sprites.push_back(spr);
-				spr->setTransform(m_anchors[i].pos, 0);
+				spr->SetTransform(m_anchors[i].pos, 0);
 			}
 			val = value["anchor"][i][idx++];
 		}
@@ -111,7 +111,7 @@ void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const d2d::Vector& pos)
 {
 	anchor.pos = pos;
 	for (int i = 0, n = anchor.sprites.size(); i < n; ++i) {
-		anchor.sprites[i]->setTransform(pos, 0);
+		anchor.sprites[i]->SetTransform(pos, 0);
 	}
 }
 

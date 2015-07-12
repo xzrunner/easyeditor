@@ -2,10 +2,14 @@
 #define _DRAG2D_ROTATE_SPRITE_STATE_H_
 
 #include "IArrangeSpriteState.h"
-#include "dataset/ObjSelectionSet.h"
+#include "interfaces.h"
+
+#include "common/Vector.h"
 
 namespace d2d
 {
+
+class SpriteSelection;
 
 class RotateSpriteState : public IArrangeSpriteState
 {

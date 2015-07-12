@@ -5,7 +5,6 @@
 
 #include "DrawRectangleOP.h"
 
-#include "dataset/ObjSelectionSet.h"
 #include "render/ShapeStyle.h"
 
 namespace d2d
@@ -15,6 +14,7 @@ class MultiSpritesImpl;
 class AbstractEditCMPT;
 class IPropertySetting;
 class ViewPanelMgr;
+class SpriteSelection;
 
 class SelectSpritesOP : public DrawRectangleOP
 {

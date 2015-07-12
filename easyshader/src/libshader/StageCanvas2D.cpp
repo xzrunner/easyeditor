@@ -35,8 +35,8 @@ void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
 	if (shader && sprite) {
 		d2d::ShaderMgr::Instance()->sprite();
 
-		d2d::Vector center = sprite->getCenter();
-		d2d::Rect r = sprite->getSymbol().GetSize();
+		d2d::Vector center = sprite->GetCenter();
+		d2d::Rect r = sprite->GetSymbol().GetSize();
 		float x = (pos.x - center.x) / r.xLength() + 0.5f,
 			  y = (pos.y - center.y) / r.xLength() + 0.5f;
 		static_cast<Shader2D*>(shader)->SetInputUniform(x, y);
@@ -81,7 +81,7 @@ void StageCanvas2D::OnTimer(wxTimerEvent& event)
 	if (shader) {
 		d2d::ShaderMgr::Instance()->sprite();
 		static_cast<Shader2D*>(shader)->SetTimeUniform(time);
-		Refresh();
+		Refresh(true);
 	}
 }
 

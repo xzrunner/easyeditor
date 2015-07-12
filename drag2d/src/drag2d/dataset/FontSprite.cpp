@@ -71,7 +71,7 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 	filename = symbol->filename;
 	has_edge = false;
 
-	buildBounding();
+	BuildBounding();
 }
 
 FontSprite::~FontSprite()
@@ -88,12 +88,12 @@ FontSprite* FontSprite::Clone() const
 	return sprite;
 }
 
-const FontBlankSymbol& FontSprite::getSymbol() const
+const FontBlankSymbol& FontSprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void FontSprite::setSymbol(ISymbol* symbol)
+void FontSprite::SetSymbol(ISymbol* symbol)
 {
 	FontBlankSymbol* font = dynamic_cast<FontBlankSymbol*>(symbol);
 	if (m_symbol != symbol && font)
@@ -105,9 +105,9 @@ void FontSprite::setSymbol(ISymbol* symbol)
 	}
 }
 
-void FontSprite::load(const Json::Value& val)
+void FontSprite::Load(const Json::Value& val)
 {
-	ISprite::load(val);
+	ISprite::Load(val);
 
 	// test if is old version
 	if (val["font"].isNull())
@@ -143,12 +143,12 @@ void FontSprite::load(const Json::Value& val)
 		m_tid = val["tid"].asString();
 	}
 
-	buildBounding();
+	BuildBounding();
 }
 
-void FontSprite::store(Json::Value& val) const
+void FontSprite::Store(Json::Value& val) const
 {
-	ISprite::store(val);
+	ISprite::Store(val);
 
 	val["font"] = font;
 	val["color"] = transColor(color, PT_ARGB);
@@ -162,7 +162,7 @@ void FontSprite::store(Json::Value& val) const
 	val["tid"] = m_tid;
 }
 
-void FontSprite::buildBounding()
+void FontSprite::BuildBounding()
 {
 	if (!m_bounding) 
 		m_bounding = BVFactory::createBV(e_obb);

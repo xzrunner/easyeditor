@@ -32,12 +32,12 @@ ScriptsSprite* ScriptsSprite::Clone() const
 	return sprite;
 }
 
-const ScriptsSymbol& ScriptsSprite::getSymbol() const
+const ScriptsSymbol& ScriptsSprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void ScriptsSprite::setSymbol(ISymbol* symbol)
+void ScriptsSprite::SetSymbol(ISymbol* symbol)
 {
 	ScriptsSymbol* scripts = dynamic_cast<ScriptsSymbol*>(symbol);
 	if (m_symbol != symbol && scripts)

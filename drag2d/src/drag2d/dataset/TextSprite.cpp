@@ -32,7 +32,7 @@ TextSprite::TextSprite(FontSymbol* symbol)
 	, m_size(Font::DEFAULT_SIZE)
 {
 	m_symbol->Retain();
-	buildBounding();
+	BuildBounding();
 }
 
 TextSprite::~TextSprite()
@@ -49,12 +49,12 @@ TextSprite* TextSprite::Clone() const
 	return sprite;
 }
 
-const FontSymbol& TextSprite::getSymbol() const
+const FontSymbol& TextSprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void TextSprite::setSymbol(ISymbol* symbol)
+void TextSprite::SetSymbol(ISymbol* symbol)
 {
 	FontSymbol* font = dynamic_cast<FontSymbol*>(symbol);
 	if (m_symbol != symbol && font)
@@ -71,26 +71,26 @@ IPropertySetting* TextSprite::CreatePropertySetting(EditPanel* stage)
 	return new TextPropertySetting(stage, this);
 }
 
-void TextSprite::setTransform(const Vector& position, float angle)
+void TextSprite::SetTransform(const Vector& position, float angle)
 {
 	Vector fixed(position);
 	fixed.x -= m_symbol->GetSize(this).xLength() * 0.5f;
 	fixed.y -= m_symbol->GetSize(this).yLength() * 0.5f;
 
-	ISprite::setTransform(fixed, angle);
+	ISprite::SetTransform(fixed, angle);
 }
 
 void TextSprite::setText(const std::string& text)
 {
 	m_text = text;
-	buildBounding();
+	BuildBounding();
 }
 
 void TextSprite::setSize(int size)
 {
 	m_size = size;
 	float scale = (float)size / Font::DEFAULT_SIZE;
-	setScale(scale, scale);
+	SetScale(scale, scale);
 }
 
 } // d2d

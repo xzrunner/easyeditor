@@ -272,8 +272,6 @@ void LayersMgrWidget::onLayerUp(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->Refresh();
-
 	Layout();
 	Refresh();
 }
@@ -302,8 +300,6 @@ void LayersMgrWidget::onLayerDown(wxCommandEvent& event)
 		m_btnDown->Enable(true);
 		m_btnUp->Enable(true);
 	}
-
-	m_stage->Refresh();
 
 	Layout();
 	Refresh();

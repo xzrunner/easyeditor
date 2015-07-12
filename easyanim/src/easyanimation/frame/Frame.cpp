@@ -137,7 +137,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	d2d::Rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
  		std::vector<d2d::Vector> vertices;
- 		sprites[i]->getBounding()->getBoundPos(vertices);
+ 		sprites[i]->GetBounding()->getBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j) {
  			region.combine(vertices[j]);
 		}

@@ -7,7 +7,7 @@ namespace preview
 
 StageCanvas::StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 						 const std::vector<const d2d::ISprite*>& sprites)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_control(control)
 	, m_sprites(sprites)
 {
@@ -15,9 +15,9 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 
 void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->getSymbol().ReloadTexture();
+		m_sprites[i]->GetSymbol().ReloadTexture();
 	}
 }
 

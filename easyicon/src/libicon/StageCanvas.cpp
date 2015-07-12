@@ -6,7 +6,7 @@ namespace eicon
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage(stage)
 {
 }
@@ -14,7 +14,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 void StageCanvas::OnDrawSprites() const
 {
 	Sprite sprite;
-	sprite.setSymbol(&m_stage->GetSymbol());
+	sprite.SetSymbol(&m_stage->GetSymbol());
 	sprite.SetProcess(0.5f);
 
 	m_stage->GetSymbol().Draw(d2d::Matrix(), d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0),

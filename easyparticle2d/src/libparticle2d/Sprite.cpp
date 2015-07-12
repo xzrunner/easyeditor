@@ -23,7 +23,7 @@ Sprite::Sprite(Symbol* symbol)
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
-	buildBounding();
+	BuildBounding();
 
 	m_symbol->ResetPS();
 }
@@ -42,12 +42,12 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-const Symbol& Sprite::getSymbol() const
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* particle3d = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != symbol && particle3d)

@@ -7,14 +7,14 @@ namespace tdtex
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::DynamicStageCanvas(panel)
+	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 {
 }
 
 void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 
 	m_panel->Load();
 	ResetViewport();	// todo: resize -> new -> resize
@@ -22,7 +22,7 @@ void StageCanvas::InitGL()
 
 void StageCanvas::OnSize(int w, int h)
 {
-	d2d::DynamicStageCanvas::OnSize(w, h);
+	d2d::OrthoCanvas::OnSize(w, h);
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
 	if (scr) {

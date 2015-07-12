@@ -2,6 +2,7 @@
 #define _DRAG2D_INTERFACE_STAGE_CANVAS_H_
 
 #include <wx/glcanvas.h>
+#include <wx/timer.h>
 
 #include "Screen.h"
 #include "common/Color.h"
@@ -17,8 +18,6 @@ public:
 	IStageCanvas(EditPanel* stage);
 	virtual ~IStageCanvas();
 
-//	virtual void Clear() {}
-
 	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
 
 	void ResetViewport();		// On Mouse Wheel
@@ -32,12 +31,17 @@ public:
 	Camera* GetCamera() { return m_camera; }
 	const Camera* GetCamera() const { return m_camera; }
 
+	void SetDirty() { m_dirty = true; }
+	bool IsDirty() const { return m_dirty; }
+
 protected:
 	virtual void InitGL();
 	virtual void OnSize(int w, int h) = 0;
 	virtual void OnDrawWhole() const = 0;
 	virtual void OnDrawSprites() const = 0;
 	//virtual void OnDrawDC() const {}
+
+	virtual void OnTimer() {}
 
 	bool IsInited() const { return m_inited; }
 
@@ -48,6 +52,8 @@ private:
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
+
+	void OnTimer(wxTimerEvent& event);
 
 protected:
 	EditPanel* m_stage;
@@ -60,9 +66,21 @@ protected:
 	Camera* m_camera;
 
 private:
+	enum
+	{
+		TIMER_ID = 9999
+	};
+
+private:
 	wxGLContext* m_context;
 
 	bool m_inited;
+
+	bool m_dirty;
+
+	wxTimer m_timer;
+
+	int m_version;
 
 	DECLARE_EVENT_TABLE()
 

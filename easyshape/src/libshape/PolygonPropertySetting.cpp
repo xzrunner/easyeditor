@@ -17,6 +17,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 	{
 		m_poly->name = wxANY_AS(value, wxString);
@@ -57,8 +58,14 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 			m_poly->refresh();
 		}
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void PolygonPropertySetting::UpdateProperties(wxPropertyGrid* pg)

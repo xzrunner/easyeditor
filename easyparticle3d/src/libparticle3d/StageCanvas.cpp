@@ -8,7 +8,7 @@ namespace eparticle3d
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::DynamicStageCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel)
 	, m_stage(editPanel)
 	, m_control(0.033f)
 {
@@ -57,7 +57,7 @@ void StageCanvas::OnTimer()
 	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<libanim::Sprite>(sprites));
 	size_t max = 0;
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());
+		max = std::max(max, sprites[i]->GetSymbol().getMaxFrameIndex());
 
 	m_control.update();
 	m_currFrame = m_control.frame();

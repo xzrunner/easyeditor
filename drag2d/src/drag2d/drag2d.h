@@ -38,7 +38,6 @@
 #include "dataset/TPNode.h"
 #include "dataset/text_util.h"
 
-#include "view/DynamicStageCanvas.h"
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"
 #include "view/PerspectCanvas.h"
@@ -80,6 +79,8 @@
 #include "view/GroupTreePanel.h"
 #include "view/ViewPanelMgr.h"
 #include "view/SpriteDialog.h"
+#include "view/SpriteSelection.h"
+#include "view/ShapeSelection.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

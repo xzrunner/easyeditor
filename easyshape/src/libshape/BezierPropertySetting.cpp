@@ -16,6 +16,7 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 	{
 		m_bezier->name = wxANY_AS(value, wxString);
@@ -43,8 +44,14 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 			m_bezier->createCurve();
 		}
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void BezierPropertySetting::UpdateProperties(wxPropertyGrid* pg)

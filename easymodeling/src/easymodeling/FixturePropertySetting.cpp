@@ -17,6 +17,7 @@ void FixturePropertySetting::OnPropertyGridChange(const wxString& name, const wx
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 		m_fixture->name = wxANY_AS(value, wxString);
 	else if (name == wxT("density"))
@@ -33,8 +34,12 @@ void FixturePropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		m_fixture->maskBits = wxANY_AS(value, int);
 	else if (name == wxT("groupIndex"))
 		m_fixture->groupIndex = wxANY_AS(value, int);
+	else
+		dirty = false;
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void FixturePropertySetting::UpdateProperties(wxPropertyGrid* pg)

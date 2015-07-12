@@ -24,7 +24,7 @@ Sprite::Sprite(Symbol* symbol)
 //	m_speed.set(0, -0.01f);
 
 	m_symbol->Retain();
-	buildBounding();
+	BuildBounding();
 }
 
 Sprite::~Sprite()
@@ -39,12 +39,12 @@ Sprite* Sprite::Clone() const
 	return new Sprite(*this);
 }
 
-const Symbol& Sprite::getSymbol() const
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* mesh = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != mesh)
@@ -55,13 +55,13 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 		symbol->Retain();
 
 		m_symbol = mesh;
-		buildBounding();
+		BuildBounding();
 	}
 }
 
-void Sprite::load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val)
 {
-	ISprite::load(val);
+	ISprite::Load(val);
 	m_speed.x = val["speed"]["x"].asDouble();
 	m_speed.y = val["speed"]["y"].asDouble();
 
@@ -71,20 +71,20 @@ void Sprite::load(const Json::Value& val)
 // 	}
 }
 
-void Sprite::store(Json::Value& val) const
+void Sprite::Store(Json::Value& val) const
 {
-	ISprite::store(val);
+	ISprite::Store(val);
 	val["speed"]["x"] = m_speed.x;
 	val["speed"]["y"] = m_speed.y;
 
 //	m_symbol->getShape()->Store(val);
 }
 
-void Sprite::buildBounding()
+void Sprite::BuildBounding()
 {
 	if (!m_bounding) 
 		m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
-	const d2d::ISymbol& symbol = getSymbol();
+	const d2d::ISymbol& symbol = GetSymbol();
 
 	d2d::Rect rect = m_symbol->GetSize();
 	if (m_offset.x == 0 && m_offset.y == 0)

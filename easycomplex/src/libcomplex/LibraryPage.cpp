@@ -19,9 +19,9 @@ bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
-void LibraryPage::LoadFromConfig()
+bool LibraryPage::LoadFromConfig()
 {
-	ILibraryPage::LoadFromConfig("library_complex");
+	return ILibraryPage::LoadFromConfig("library_complex");
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)

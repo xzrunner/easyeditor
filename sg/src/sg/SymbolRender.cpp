@@ -58,7 +58,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 	d2d::ISprite* grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
-		d2d::Rect r = grass->getSymbol().GetSize();
+		d2d::Rect r = grass->GetSymbol().GetSize();
 
 		float half_edge = info->size * EDGE * 0.5f;
 
@@ -68,7 +68,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 	}
 	else
 	{
-		grass->setTransform(p, 0);
+		grass->SetTransform(p, 0);
 		d2d::SpriteRenderer::Instance()->Draw(grass);
 	}
 }
@@ -109,7 +109,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 			for (int j = 0; j < info->size; ++j) {
 				d2d::Vector pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
-				m_grid->setTransform(pos, m_grid->getAngle());
+				m_grid->SetTransform(pos, m_grid->GetAngle());
 				d2d::SpriteRenderer::Instance()->Draw(m_grid, d2d::Matrix(), color);
 			}
 		}

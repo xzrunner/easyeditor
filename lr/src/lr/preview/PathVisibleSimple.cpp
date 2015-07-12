@@ -83,12 +83,12 @@ void PathVisibleSimple::InsertBoundary(const d2d::ISprite* spr)
 	// get bound
 	std::vector<d2d::Vector> bound;
 	const libshape::Sprite* shape = dynamic_cast<const libshape::Sprite*>(spr);
-	if (shape && shape->getSymbol().GetShapeType() == libshape::ST_POLYGON) {
-		const std::vector<d2d::IShape*>& shapes = shape->getSymbol().GetShapes();
+	if (shape && shape->GetSymbol().GetShapeType() == libshape::ST_POLYGON) {
+		const std::vector<d2d::IShape*>& shapes = shape->GetSymbol().GetShapes();
 		const libshape::PolygonShape* poly = static_cast<const libshape::PolygonShape*>(shapes[0]);
 		bound = poly->GetVertices();
 	} else {
-		spr->getBounding()->getBoundPos(bound);
+		spr->GetBounding()->getBoundPos(bound);
 	}
 
 	// fix

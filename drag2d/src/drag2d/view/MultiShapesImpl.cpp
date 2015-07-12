@@ -1,12 +1,12 @@
 #include "MultiShapesImpl.h"
+#include "ShapeSelection.h"
 
 namespace d2d
 {
 
-MultiShapesImpl::MultiShapesImpl(wxWindow* wnd)
+MultiShapesImpl::MultiShapesImpl(EditPanel* stage)
 {
-	m_wnd = wnd;
-	m_shape_selection = new ShapeSelection;
+	m_shape_selection = new ShapeSelection(stage);
 }
 
 MultiShapesImpl::~MultiShapesImpl()

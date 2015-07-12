@@ -21,7 +21,7 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* edited,
 {
 	assert(edited);
 
-	Symbol* symbol = const_cast<Symbol*>(&edited->getSymbol());
+	Symbol* symbol = const_cast<Symbol*>(&edited->GetSymbol());
 	symbol->Retain();
 	m_symbol = symbol;
 	m_symbol->ReloadTexture();

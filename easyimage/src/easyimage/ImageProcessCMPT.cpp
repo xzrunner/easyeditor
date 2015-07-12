@@ -77,7 +77,7 @@ void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 	}
 	shader_mgr->SetSpriteShader(shader);
 	m_stage->GetCanvas()->ResetViewport();
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
@@ -92,7 +92,7 @@ void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 	}
 	shader_mgr->SetSpriteShader(m_edge_shader);
 	m_stage->GetCanvas()->ResetViewport();
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 void ImageProcessCMPT::OnSetEdgeBlend(wxScrollEvent& event)
@@ -100,7 +100,7 @@ void ImageProcessCMPT::OnSetEdgeBlend(wxScrollEvent& event)
 	if (m_edge_shader) {
 		d2d::ShaderMgr::Instance()->sprite();
 		m_edge_shader->SetBlend(event.GetInt() * 0.01f);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 }
 
@@ -116,7 +116,7 @@ void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 	}
 	shader_mgr->SetSpriteShader(shader);
 	m_stage->GetCanvas()->ResetViewport();
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
@@ -131,7 +131,7 @@ void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
 	}
 	shader_mgr->SetSpriteShader(shader);
 	m_stage->GetCanvas()->ResetViewport();
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
@@ -146,7 +146,7 @@ void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 	}
 	shader_mgr->SetSpriteShader(m_blur_shader);
 	m_stage->GetCanvas()->ResetViewport();
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 void ImageProcessCMPT::OnSetBlurRadius(wxScrollEvent& event)
@@ -154,7 +154,7 @@ void ImageProcessCMPT::OnSetBlurRadius(wxScrollEvent& event)
 	if (m_blur_shader) {
 		d2d::ShaderMgr::Instance()->sprite();
 		m_blur_shader->SetRadius(event.GetInt() * 0.1f);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 }
 

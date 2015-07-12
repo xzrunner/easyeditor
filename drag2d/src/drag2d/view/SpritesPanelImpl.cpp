@@ -3,19 +3,24 @@
 #include "EditPanel.h"
 #include "SpriteDropTarget.h"
 #include "SpritesContainer.h"
+#include "IStageCanvas.h"
+
+#include "dataset/ISprite.h"
 
 namespace d2d
 {
 
-SpritesPanelImpl::SpritesPanelImpl(wxWindow* parent, IDataContainer* container)
-	: MultiSpritesImpl(parent)
+SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, IDataContainer* container)
+	: MultiSpritesImpl(stage)
+	, m_stage(stage)
 {
 	m_container = container;
 	m_container->Retain();
 }
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanel* editPanel, LibraryPanel* libraryPanel)
-	: MultiSpritesImpl(editPanel)
+SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, LibraryPanel* library)
+	: MultiSpritesImpl(stage)
+	, m_stage(stage)
 {
 	editPanel->SetDropTarget(new SpriteDropTarget(this, editPanel, libraryPanel));
 
@@ -29,23 +34,38 @@ SpritesPanelImpl::~SpritesPanelImpl()
 
 bool SpritesPanelImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
-	return m_container->ResetOrder(sprite, up);
+	bool ret = m_container->ResetOrder(sprite, up);
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 bool SpritesPanelImpl::InsertSprite(ISprite* sprite)
 {
-	m_container->Insert(sprite);
-	return true;
+	bool ret = m_container->Insert(sprite);
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 bool SpritesPanelImpl::RemoveSprite(ISprite* sprite)
 {
-	return m_container->Remove(sprite);
+	bool ret = m_container->Remove(sprite);
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 bool SpritesPanelImpl::ClearAllSprite()
 {
-	return m_container->Clear();
+	bool ret = m_container->Clear();
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 void SpritesPanelImpl::TraverseSprites(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/,

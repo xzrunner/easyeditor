@@ -16,12 +16,12 @@ OffsetSpriteAOP::OffsetSpriteAOP(ISprite* sprite,
 
 void OffsetSpriteAOP::undo()
 {
-	m_sprite->setOffset(m_old_offset);
+	m_sprite->SetOffset(m_old_offset);
 }
 
 void OffsetSpriteAOP::redo()
 {
-	m_sprite->setOffset(m_new_offset);
+	m_sprite->SetOffset(m_new_offset);
 }
 
 // todo

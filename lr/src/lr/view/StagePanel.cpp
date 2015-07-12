@@ -82,6 +82,23 @@ void StagePanel::Clear()
 	}
 }
 
+bool StagePanel::Update(int version)
+{
+	bool ret = false;
+
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		if (m_layers[i]->Update(version)) {
+			ret = true;
+		}
+	}
+
+	if (!d2d::Config::Instance()->GetSettings().visible_spr_update) {
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
 	bool ret = false;
@@ -90,6 +107,7 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSprite(sprite, up)) {
 			ret = true;
+			m_canvas->SetDirty();
 			break;
 		}
 	}
@@ -116,10 +134,14 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 		m_pathfinding->DisableRegion(sprite, false);
 	}
 
-	std::string filepath = sprite->getSymbol().GetFilepath();
+	std::string filepath = sprite->GetSymbol().GetFilepath();
 	if (CharacterFileName::IsValidFilepath(filepath)) {
 		CharacterFileName name(filepath);
 		m_chara_dirs.BuildSymbolDirections(name);
+	}
+
+	if (ret) {
+		m_canvas->SetDirty();
 	}
 
 	return ret;
@@ -133,6 +155,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 		Layer* layer = m_layers[i];
 		if (layer->RemoveSprite(sprite)) {
 			ret = true;
+			m_canvas->SetDirty();
 			break;
 		}
 	}
@@ -154,6 +177,7 @@ bool StagePanel::ClearAllSprite()
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		if (m_layers[i]->ClearSprite()) {
 			ret = true;
+			m_canvas->SetDirty();
 		}
 	}
 	return ret;
@@ -197,6 +221,10 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 		}
 	}
 
+	if (ret) {
+		m_canvas->SetDirty();
+	}
+
 	return ret;
 }
 
@@ -211,6 +239,9 @@ bool StagePanel::RemoveShape(d2d::IShape* shape)
 			break;
 		}
 	}
+	if (ret) {
+		m_canvas->SetDirty();
+	}
 	return ret;
 }
 
@@ -221,6 +252,9 @@ bool StagePanel::ClearAllShapes()
 		if (m_layers[i]->ClearShape()) {
 			ret = true;
 		}
+	}
+	if (ret) {
+		m_canvas->SetDirty();
 	}
 	return ret;
 }

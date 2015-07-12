@@ -13,7 +13,7 @@ namespace eanim
 
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
 							 d2d::PlayControl& control, Controller* ctrl)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_control(control)
 	, m_settings(settings)
 	, m_ctrl(ctrl)
@@ -22,7 +22,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 
 void PreviewCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 	m_ctrl->GetLibraryPanel()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();

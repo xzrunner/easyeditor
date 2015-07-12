@@ -23,13 +23,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
-	, d2d::ShapesPanelImpl(this, new SymbolContainer((Symbol*)(&edited->getSymbol())))
+	, d2d::ShapesPanelImpl(this, new SymbolContainer((Symbol*)(&edited->GetSymbol())))
 {
 	m_edit_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, 
 		d2d::SelectShapesOP>(this, this, NULL, NULL, new d2d::OneFloatValueStatic(5), NULL);
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
 
-	m_symbol = (Symbol*)(&edited->getSymbol());
+	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->Retain();
 	}

@@ -3,13 +3,15 @@
 
 #include "GroupTreeVisitor.h"
 
-#include "dataset/ObjSelectionSet.h"
+#include <vector>
+#include <json/json.h>
 
 namespace d2d
 {
 
 class ISprite;
 class GroupTreeCtrl;
+class SpriteSelection;
 
 class GroupTreeImpl
 {

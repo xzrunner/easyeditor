@@ -1,20 +1,25 @@
 #include "ShapesPanelImpl.h"
 #include "IDataContainer.h"
 #include "ShapesContainer.h"
+#include "IStageCanvas.h"
+#include "EditPanel.h"
 
 #include "common/tools.h"
+#include "dataset/IShape.h"
 
 namespace d2d
 {
 
-ShapesPanelImpl::ShapesPanelImpl(wxWindow* parent)
-	: MultiShapesImpl(parent)
+ShapesPanelImpl::ShapesPanelImpl(EditPanel* stage)
+	: MultiShapesImpl(stage)
+	, m_stage(stage)
 {
 	m_container = new ShapesContainer();
 }
 
-ShapesPanelImpl::ShapesPanelImpl(wxWindow* parent, IDataContainer* container)
-	: MultiShapesImpl(parent)
+ShapesPanelImpl::ShapesPanelImpl(EditPanel* stage, IDataContainer* container)
+	: MultiShapesImpl(stage)
+	, m_stage(stage)
 {
 	m_container = container;
 	m_container->Retain();
@@ -27,17 +32,29 @@ ShapesPanelImpl::~ShapesPanelImpl()
 
 bool ShapesPanelImpl::InsertShape(IShape* shape)
 {
-	return m_container->Insert(shape);
+	bool ret = m_container->Insert(shape);
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 bool ShapesPanelImpl::RemoveShape(IShape* shape)
 {
-	return m_container->Remove(shape);
+	bool ret = m_container->Remove(shape);
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 bool ShapesPanelImpl::ClearAllShapes()
 {
-	return m_container->Clear();
+	bool ret = m_container->Clear();
+	if (ret) {
+		m_stage->SetCanvasDirty();
+	}
+	return ret;
 }
 
 void ShapesPanelImpl::TraverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const

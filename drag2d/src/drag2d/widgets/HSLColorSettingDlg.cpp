@@ -41,7 +41,7 @@ void HSLColorSettingDlg::OnColorChanged()
 	Colori rgb = hsl2rgb(m_h->GetColorValue(), 
 		m_s->GetColorValue(), m_l->GetColorValue());
 	m_color_bg->SetBackgroundColour(wxColour(rgb.r, rgb.g, rgb.b));
-	m_color_bg->Refresh();
+	m_color_bg->Refresh(true);
 
 	if (m_lsn) {
 		m_lsn->OnColorChanged(GetColor());

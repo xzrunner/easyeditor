@@ -24,9 +24,8 @@ public:
 	//
 	// wxWindow
 	//
-	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL);
-
 	virtual void Clear();
+	virtual bool Update(int version) { return false; }
 
 	Vector TransPosScrToProj(int x, int y) const;
 	Vector TransPosProjToScr(const Vector& proj) const;
@@ -68,9 +67,7 @@ public:
 
 	void OnRightPopupMenu(wxCommandEvent& event);
 
-	void SetRefreshMonitor(IRefreshMonitor* monitor) {
-		m_refresh_monitor = monitor;
-	}
+	void SetCanvasDirty();
 
 protected:
 	void OnSize(wxSizeEvent& event);
@@ -90,8 +87,6 @@ protected:
 
 private:
 	HistoryList m_history_list;
-
-	IRefreshMonitor* m_refresh_monitor;
 
 	DECLARE_EVENT_TABLE()
 

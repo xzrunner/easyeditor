@@ -1,6 +1,7 @@
 #include "ZoomViewOP.h"
 
 #include "view/Camera.h"
+#include "view/IStageCanvas.h"
 #include "common/config.h"
 #include "common/SettingData.h"
 
@@ -123,7 +124,7 @@ bool ZoomViewOP::OnMouseDrag(int x, int y)
 
 			m_lastPos = currPos;
 
-			m_stage->Refresh();
+			m_stage->SetCanvasDirty();
 		}
 		return true;
 	}
@@ -141,7 +142,7 @@ bool ZoomViewOP::OnMouseWheelRotation(int x, int y, int direction)
 // 	else
 // 		m_stage->OnMouseWheelRotation(m_stage->GetSize().GetWidth() * 0.5f, m_stage->GetSize().GetHeight() * 0.5f, direction);
 
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 
 	return false;
 }

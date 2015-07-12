@@ -128,7 +128,7 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	_b_trans.g = sprite->b_trans.r * r_trans.g + sprite->b_trans.g * g_trans.g + sprite->b_trans.b * b_trans.g;
 	_b_trans.b = sprite->b_trans.r * r_trans.b + sprite->b_trans.g * g_trans.b + sprite->b_trans.b * b_trans.b;
 
-	sprite->getSymbol().Draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
+	sprite->GetSymbol().Draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
 }
 
 void SpriteRenderer::DrawImplBlend(const ISprite* sprite) const
@@ -170,7 +170,7 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 
 	// dst
 	Vector dst[4];
-	Rect dst_rect = sprite->getSymbol().GetSize();
+	Rect dst_rect = sprite->GetSymbol().GetSize();
 	dst[0] = Vector(dst_rect.xMin, dst_rect.yMin);
 	dst[1] = Vector(dst_rect.xMax, dst_rect.yMin);
 	dst[2] = Vector(dst_rect.xMax, dst_rect.yMax);
@@ -181,7 +181,7 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 	mgr->GetModelView(offset, scale);
 
 	mgr->SetModelView(Vector(0, 0), 1);
-	Rect r = sprite->getSymbol().GetSize();
+	Rect r = sprite->GetSymbol().GetSize();
 	mgr->SetProjection(r.xLength(), r.yLength());
 	glViewport(0, 0, r.xLength(), r.yLength());
 
@@ -214,7 +214,7 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	mgr->GetModelView(offset, scale);
 
 	mgr->SetModelView(Vector(0, 0), 1);
-	Rect r = sprite->getSymbol().GetSize();
+	Rect r = sprite->GetSymbol().GetSize();
 	mgr->SetProjection(r.xLength(), r.yLength());
 	glViewport(0, 0, r.xLength(), r.yLength());
 
@@ -222,7 +222,7 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
 //	blend_shader->SetBaseTexID(m_fbo->GetTexID());
 
-	sprite->getSymbol().Draw(Matrix(), sprite->multiCol, sprite->addCol, 
+	sprite->GetSymbol().Draw(Matrix(), sprite->multiCol, sprite->addCol, 
 		sprite->r_trans, sprite->g_trans, sprite->b_trans, sprite);
 
 	mgr->Commit();
@@ -247,7 +247,7 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 	float xmin = r_dst.xMin, xmax = r_dst.xMax;
 	float ymin = r_dst.yMin, ymax = r_dst.yMax;
 
-	d2d::Rect r_src = sprite->getSymbol().GetSize();
+	d2d::Rect r_src = sprite->GetSymbol().GetSize();
 	//  		float txmin = r_src.xMin / m_fbo->GetWidth() + 0.5f,
 	//  			txmax = r_src.xMax / m_fbo->GetWidth() + 0.5f;
 	//  		float tymin = r_src.yMin / m_fbo->GetHeight() + 0.5f,

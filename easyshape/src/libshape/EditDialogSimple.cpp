@@ -47,7 +47,7 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 {
 	d2d::AbstractEditOP* op = NULL;
 
-	ShapeType type = static_cast<Sprite*>(edited)->getSymbol().GetShapeType();
+	ShapeType type = static_cast<Sprite*>(edited)->GetSymbol().GetShapeType();
 	switch (type)
 	{
 	case ST_RECT:

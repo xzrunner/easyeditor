@@ -22,7 +22,7 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
 	m_symbol->Retain();
-	buildBounding();
+	BuildBounding();
 }
 
 Sprite::~Sprite()
@@ -39,12 +39,12 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-const Symbol& Sprite::getSymbol() const
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* shape = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != symbol && shape)

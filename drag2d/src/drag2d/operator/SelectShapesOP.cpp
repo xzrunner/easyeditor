@@ -43,10 +43,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
-		clearClipboard();
-		m_selection->Traverse(FetchAllVisitor<IShape>(m_clipboard));
-		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
-			m_clipboard[i]->Retain();
+		PasteToSelection();
 		m_shapeImpl->ClearShapeSelection();
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -63,7 +60,6 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
 			m_shapeImpl->InsertShape(m_clipboard[i]->Clone());
-			m_stage->Refresh();
 		}
 	}
 
@@ -117,7 +113,6 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			m_bDraggable = false;
 		else
 			m_selection->Clear();
-		m_stage->Refresh();
 	}
 
 	return false;
@@ -147,6 +142,8 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 			m_callback->updateControlValue();
 		}
 	}
+
+	m_stage->SetCanvasDirty();
 
 	return false;
 }
@@ -189,6 +186,22 @@ void SelectShapesOP::clearClipboard()
  	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
  		m_clipboard[i]->Release();
  	m_clipboard.clear();
+}
+
+void SelectShapesOP::PasteToSelection() const
+{
+	std::vector<IShape*> shapes;
+	m_selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
+		m_clipboard.push_back(shapes[i]->Clone());
+	}
+}
+
+void SelectShapesOP::CopyFromSelection()
+{
+	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
+		m_shapeImpl->InsertShape(m_clipboard[i]->Clone());
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

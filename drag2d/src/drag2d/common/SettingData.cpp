@@ -18,6 +18,7 @@ SettingData::SettingData()
 	visible_tex_edge = true;
 	particle3d_loop = true;
 	bg_color.set(0.5f, 0.5f, 0.5f);
+	visible_spr_update = true;
 
 	linear_filter = true;
 }
@@ -55,6 +56,9 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	}
 	if (!value["particle3d_loop"].isNull()) {
 		particle3d_loop = value["particle3d_loop"].asBool();
+	}
+	if (!value["visible_spr_update"].isNull()) {
+		visible_spr_update = value["visible_spr_update"].asBool();
 	}
 
 	if (!value["linear_filter"].isNull()) {

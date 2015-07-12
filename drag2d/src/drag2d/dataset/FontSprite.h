@@ -26,13 +26,14 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual const FontBlankSymbol& getSymbol() const;
-	virtual void setSymbol(ISymbol* symbol);
+	virtual bool Update(int version) { return false; }
+	virtual const FontBlankSymbol& GetSymbol() const;
+	virtual void SetSymbol(ISymbol* symbol);
 
-	virtual void load(const Json::Value& val);
-	virtual void store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val);
+	virtual void Store(Json::Value& val) const;
 
-	virtual void buildBounding();
+	virtual void BuildBounding();
 
 	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
 

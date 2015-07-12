@@ -110,7 +110,7 @@ void LibraryPanel::LoadSymbolFromLayer()
  		page->GetLayer()->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
  		std::set<d2d::ISymbol*> symbol_set;
  		for (int i = 0, n = sprites.size(); i < n; ++i) {
- 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(&sprites[i]->getSymbol());
+ 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(&sprites[i]->GetSymbol());
  			symbol_set.insert(symbol);
  		}
  

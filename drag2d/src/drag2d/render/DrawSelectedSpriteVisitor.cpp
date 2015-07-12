@@ -22,7 +22,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	std::vector<Vector> bound;
 	ISprite* sprite = static_cast<ISprite*>(object);
-	sprite->getBounding()->getBoundPos(bound);
+	sprite->GetBounding()->getBoundPos(bound);
 
 	PrimitiveDraw::drawPolyline(bound, m_color, true);
 
@@ -34,7 +34,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& bFetchNext)
 			Matrix mt;
 			s->GetTransMatrix(mt);
 
-			Image* img = s->getSymbol().getImage();
+			Image* img = s->GetSymbol().getImage();
 			PrimitiveDraw::rect(mt, img->GetOriginWidth() * 0.5f, 
 				img->GetOriginHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
 		}

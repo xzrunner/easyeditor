@@ -69,7 +69,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);
  	// new
- 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
+ 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
  	int size = symbol_info->building->size;
  	if (size % 2) {
  		int offset = (size - 1) / 2;
@@ -91,7 +91,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 
  	//////////////////////////////////////////////////////////////////////////
 
-	sprite->translate(pos);
+	sprite->Translate(pos);
 
 	return sprite;
 }
@@ -102,12 +102,12 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 	Json::Value value;
 
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		sprite->getSymbol().GetFilepath()).ToStdString();
+		sprite->GetSymbol().GetFilepath()).ToStdString();
 
 	int row, col;
-	stage->TransCoordsToGridPosNew(sprite->getPosition(), row, col);
+	stage->TransCoordsToGridPosNew(sprite->GetPosition(), row, col);
 
-	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
+	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 	int size = symbol_info->building->size;
 	if (size % 2) {
 		int offset = (size - 1) / 2;

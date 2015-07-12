@@ -49,7 +49,7 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 		d2d::NullSymbol symbol("");
 		d2d::NullSprite sprite(&symbol);
 		Json::Value actor_val;
-		sprite.store(actor_val);
+		sprite.Store(actor_val);
 		wxString dir = d2d::FilenameTools::getFileDir(json_file);
 		actor_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, sprite_path).ToStdString();
 

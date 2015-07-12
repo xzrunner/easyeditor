@@ -36,6 +36,8 @@ public:
 	void LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
+	bool Update(int version);
+
 private:
 	static bool IsValidFloat(float f);
 

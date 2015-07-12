@@ -32,9 +32,16 @@ void LibraryPanel::OnPageChanging(wxBookCtrlEvent& event)
 
 void LibraryPanel::Clear()
 {
-	for (size_t i = 0, n = m_pages.size(); i < n; ++i)
+	bool dirty = false;
+	for (size_t i = 0, n = m_pages.size(); i < n; ++i) {
 		m_pages[i]->Clear();
+		dirty = true;
+	}
 	LoadFromConfig();
+
+	if (dirty) {
+		Refresh(true);
+	}
 }
 
 void LibraryPanel::ReloadTexture() const

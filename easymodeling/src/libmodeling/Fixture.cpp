@@ -30,7 +30,7 @@ bool Fixture::isContain(const d2d::Vector& pos) const
 {
 	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 	{
-		return d2d::Math::getDistance(circle->center + body->sprite->getPosition(), pos) 
+		return d2d::Math::getDistance(circle->center + body->sprite->GetPosition(), pos) 
 			< circle->radius;
 	}
 	else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shape))
@@ -65,7 +65,7 @@ bool Fixture::isIntersect(const d2d::Rect& rect) const
 {
 	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 	{
-		return d2d::Math::isCircleIntersectRect(circle->center + body->sprite->getPosition(), 
+		return d2d::Math::isCircleIntersectRect(circle->center + body->sprite->GetPosition(), 
 			circle->radius, rect);
 	}
 	else if (libshape::RectShape* r = dynamic_cast<libshape::RectShape*>(shape))
@@ -130,5 +130,5 @@ void Fixture::transLocalToWorld(const std::vector<d2d::Vector>& local,
 {
 	world.resize(local.size());
 	for (size_t i = 0, n = local.size(); i < n ; ++i)
-		world[i] = d2d::Math::rotateVector(local[i], body->sprite->getAngle()) + body->sprite->getPosition();
+		world[i] = d2d::Math::rotateVector(local[i], body->sprite->GetAngle()) + body->sprite->GetPosition();
 }

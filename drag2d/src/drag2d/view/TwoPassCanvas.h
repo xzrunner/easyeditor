@@ -21,9 +21,6 @@ protected:
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawWhole() const;
 
-private:
-	mutable bool m_dirty;
-
 }; // TwoPassCanvas
 
 }

@@ -44,8 +44,6 @@ void Task::clear()
 	Context* context = Context::Instance();
 	context->library->Clear();
 	context->stage->Clear();
-	context->library->Refresh();
-	context->stage->Refresh();
 }
 
 void Task::onPreview() const

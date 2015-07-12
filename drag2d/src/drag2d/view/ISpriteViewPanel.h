@@ -1,13 +1,12 @@
 #ifndef _DRAG2D_ISPRITE_VIEW_PANEL_H_
 #define _DRAG2D_ISPRITE_VIEW_PANEL_H_
 
-#include "dataset/ObjSelectionSet.h"
-
 namespace d2d
 {
 
 class ISprite;
 class IShape;
+class SpriteSelection;
 
 class ISpriteViewPanel
 {

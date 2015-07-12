@@ -47,7 +47,7 @@ public:
 	const d2d::ISprite* GetBackground() const { return m_background; }
 	void TranslateBackground(const d2d::Vector& offset) { 
 		if (m_background) {
-			m_background->translate(offset);
+			m_background->Translate(offset);
 		}
 	}
 

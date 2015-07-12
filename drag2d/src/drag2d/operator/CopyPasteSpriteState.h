@@ -2,12 +2,13 @@
 #define _DRAG2D_COPY_PASTE_SPRITE_STATE_H_
 
 #include "IArrangeSpriteState.h"
-#include "dataset/ObjSelectionSet.h"
 
 namespace d2d
 {
 
+class ISprite;
 class MultiSpritesImpl;
+class SpriteSelection;
 
 class CopyPasteSpriteState : public IArrangeSpriteState
 {

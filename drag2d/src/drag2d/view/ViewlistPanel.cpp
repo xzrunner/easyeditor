@@ -84,7 +84,7 @@ bool ViewlistPanel::Insert(ISprite* sprite)
 //	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
 //  m_sprites.push_back(sprite);
 
-	m_list->insertFront(const_cast<ISymbol*>(&sprite->getSymbol()));
+	m_list->insertFront(const_cast<ISymbol*>(&sprite->GetSymbol()));
 	m_sprites.insert(m_sprites.begin(), sprite);
 	return true;
 }

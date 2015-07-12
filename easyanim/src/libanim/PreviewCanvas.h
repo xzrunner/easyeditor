@@ -9,7 +9,7 @@
 namespace libanim
 {
 
-class PreviewCanvas : public d2d::DynamicStageCanvas
+class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	struct PlaySetting

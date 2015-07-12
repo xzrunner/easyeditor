@@ -5,6 +5,7 @@
 
 #include "dataset/Group.h"
 #include "common/visitors.h"
+#include "view/SpriteSelection.h"
 
 #include <wx/wx.h>
 

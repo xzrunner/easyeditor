@@ -17,6 +17,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 	{
 		m_chain->name = wxANY_AS(value, wxString);
@@ -57,8 +58,14 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 			m_chain->Load(vertices);
 		}
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void ChainPropertySetting::UpdateProperties(wxPropertyGrid* pg)

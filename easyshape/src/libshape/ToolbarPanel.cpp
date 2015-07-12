@@ -96,7 +96,7 @@ wxSizer* ToolbarPanel::initLayout()
 void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 {
 	static_cast<StagePanel*>(m_stage)->ClearAllShapes();
-	m_stage->Refresh();
+
 }
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
@@ -124,8 +124,6 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	stage->InsertShape(new libshape::PolygonShape(bounding));
 
 	setChoice(3);
-
-	stage->Refresh();
 }
 
 void ToolbarPanel::SelectSuitableEditOP()

@@ -7,7 +7,7 @@ namespace emodeling
 {
 class PreviewPanel;
 
-class PreviewCanvas : public d2d::DynamicStageCanvas
+class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(PreviewPanel* editPanel);

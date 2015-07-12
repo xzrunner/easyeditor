@@ -30,7 +30,7 @@ void Symbol::ReloadTexture() const
 {
 	std::set<const ISymbol*> symbols;
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		symbols.insert(&m_sprites[i]->getSymbol());
+		symbols.insert(&m_sprites[i]->GetSymbol());
 	std::set<const ISymbol*>::iterator itr = symbols.begin();
 	for ( ; itr != symbols.end(); ++itr)
 		(*itr)->ReloadTexture();
@@ -133,7 +133,7 @@ void Symbol::InitBounding()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		std::vector<d2d::Vector> vertices;
-		m_sprites[i]->getBounding()->getBoundPos(vertices);
+		m_sprites[i]->GetBounding()->getBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
 			m_rect.combine(vertices[j]);
 	}
@@ -287,7 +287,7 @@ void Symbol::LoadResources()
 
 		//		symbol->refresh();
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spriteValue);
+		sprite->Load(spriteValue);
 
 		symbol->Release();
 

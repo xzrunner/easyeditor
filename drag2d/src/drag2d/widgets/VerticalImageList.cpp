@@ -48,7 +48,7 @@ void VerticalImageList::clear()
 	}
 	m_items.clear();
 	SetItemCount(0);
-	Refresh();
+	Refresh(true);
 }
 
 void VerticalImageList::insert(ListItem* item)
@@ -57,7 +57,7 @@ void VerticalImageList::insert(ListItem* item)
 	m_items.push_back(item);
 	SetItemCount(m_items.size());
 	SetSelection(m_items.size() - 1);
-	Refresh();
+	Refresh(true);
 }
 
 void VerticalImageList::insertFront(ListItem* item)
@@ -66,7 +66,7 @@ void VerticalImageList::insertFront(ListItem* item)
 	m_items.insert(m_items.begin(), item);
 	SetItemCount(m_items.size());
 	SetSelection(0);
-	Refresh();
+	Refresh(true);
 }
 
 void VerticalImageList::remove()
@@ -82,7 +82,7 @@ void VerticalImageList::remove(int index)
 	m_items[index]->Release();
 	m_items.erase(m_items.begin() + index);
  	SetItemCount(m_items.size());
-	Refresh();
+	Refresh(true);
 }
 
 void VerticalImageList::swap(int i0, int i1)
@@ -95,7 +95,7 @@ void VerticalImageList::swap(int i0, int i1)
 	m_items[i0] = m_items[i1];
 	m_items[i1] = tmp;
 
-	Refresh();
+	Refresh(true);
 }
 
 void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const

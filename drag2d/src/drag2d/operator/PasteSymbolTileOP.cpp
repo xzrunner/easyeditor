@@ -2,6 +2,7 @@
 
 #include "common/Math.h"
 #include "dataset/SpriteFactory.h"
+#include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
@@ -28,8 +29,8 @@ bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-		sprite->translate(m_pos);
-		sprite->rotate(m_rotate);
+		sprite->Translate(m_pos);
+		sprite->Rotate(m_rotate);
 		m_panelImpl->InsertSprite(sprite);
 		sprite->Release();
 	}
@@ -59,7 +60,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	m_panelImpl->TraverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
 	if (!sprite) return false;
 
-	const d2d::Vector& capture = sprite->getPosition();
+	const d2d::Vector& capture = sprite->GetPosition();
 	if (capture.isValid())
 	{
 		Vector offset = m_cmpt->getOffset();
@@ -132,7 +133,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 
 		} while (0);
 	}
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }
@@ -172,7 +173,7 @@ Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 
-	const float dis = Math::getDistance(sprite->getPosition(), m_pos);
+	const float dis = Math::getDistance(sprite->GetPosition(), m_pos);
 	if (dis < m_dis)
 	{
 		*m_result = sprite;

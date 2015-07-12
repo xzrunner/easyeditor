@@ -11,6 +11,7 @@ namespace d2d
 {
 
 class IPropertySetting;
+class EditPanel;
 
 class PropertySettingPanel : public wxPanel, public ISpriteViewPanel, 
 	public IShapeViewPanel

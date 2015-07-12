@@ -19,7 +19,7 @@ namespace d2d
 	int w_Sprite_getPosition(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		const Vector& pos = t->getPosition();
+		const Vector& pos = t->GetPosition();
 		lua_pushnumber(L, pos.x);
 		lua_pushnumber(L, pos.y);
 		return 2;
@@ -30,7 +30,7 @@ namespace d2d
 		ISprite* t = luax_checksprite(L, 1);
 		float x = (float)luaL_checknumber(L, 2);
 		float y = (float)luaL_checknumber(L, 3);
-		t->setTransform(Vector(x, y), t->getAngle());
+		t->SetTransform(Vector(x, y), t->GetAngle());
 		return 0;
 	}
 
@@ -39,21 +39,21 @@ namespace d2d
 		ISprite* t = luax_checksprite(L, 1);
 		float x = (float)luaL_checknumber(L, 2);
 		float y = (float)luaL_checknumber(L, 3);
-		t->setTransform(t->getPosition() + Vector(x, y), t->getAngle());
+		t->SetTransform(t->GetPosition() + Vector(x, y), t->GetAngle());
 		return 0;
 	}
 
 	int w_Sprite_width(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		lua_pushnumber(L, t->getSymbol().GetSize().xLength());
+		lua_pushnumber(L, t->GetSymbol().GetSize().xLength());
 		return 1;
 	}
 
 	int w_Sprite_height(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		lua_pushnumber(L, t->getSymbol().GetSize().yLength());
+		lua_pushnumber(L, t->GetSymbol().GetSize().yLength());
 		return 1;
 	}
 

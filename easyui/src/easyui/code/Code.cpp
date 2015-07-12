@@ -68,8 +68,8 @@ void Code::ResolveUI(const std::vector<d2d::ISprite*>& sprites)
 			}
 			else if (const ecomplex::Sprite* e_spr = dynamic_cast<const ecomplex::Sprite*>(spr)) 
 			{
-				for (int i = 0, n = e_spr->getSymbol().m_sprites.size(); i < n; ++i) {
-					Node node(e_spr->getSymbol().m_sprites[i], "");
+				for (int i = 0, n = e_spr->GetSymbol().m_sprites.size(); i < n; ++i) {
+					Node node(e_spr->GetSymbol().m_sprites[i], "");
 					buffer.push(node);
 				}
 			}
@@ -123,8 +123,8 @@ void Code::ResolveText(const std::vector<d2d::ISprite*>& sprites)
 		}
 		else if (ecomplex::Sprite* e_spr = dynamic_cast<ecomplex::Sprite*>(spr)) 
 		{
-			for (int i = 0, n = e_spr->getSymbol().m_sprites.size(); i < n; ++i) {
-				buffer.push(e_spr->getSymbol().m_sprites[i]);
+			for (int i = 0, n = e_spr->GetSymbol().m_sprites.size(); i < n; ++i) {
+				buffer.push(e_spr->GetSymbol().m_sprites[i]);
 			}
 		}
  	}

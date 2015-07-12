@@ -68,7 +68,7 @@ void SkeletonImpl::OnMouseDrag(int x, int y)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_selected_joint->setPosition(pos);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 	else
 	{

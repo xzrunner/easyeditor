@@ -40,8 +40,7 @@ void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->Clear();
-	m_library->Refresh();
-	m_stage->Refresh();
+
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

@@ -5,7 +5,7 @@ namespace libanim
 
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
 							 const Symbol* symbol)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->getFPS())
 {
@@ -18,7 +18,7 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 
 void PreviewCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 	d2d::SymbolMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
 }
 

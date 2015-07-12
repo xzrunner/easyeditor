@@ -2,6 +2,7 @@
 
 #include "history/RotateSpriteAOP.h"
 #include "common/Math.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {
@@ -52,9 +53,9 @@ void RotateSpriteState::Visitor::
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 
-	Vector center = sprite->getPosition() + sprite->getOffset();
+	Vector center = sprite->GetPosition() + sprite->GetOffset();
 	float angle = Math::getAngleInDirection(center, m_start, m_end);
-	sprite->rotate(angle);
+	sprite->Rotate(angle);
 
 	bFetchNext = false;
 }

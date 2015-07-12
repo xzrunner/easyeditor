@@ -20,7 +20,7 @@ void StageCanvas2D::InitGL()
 	m_scene->Load(NULL);
 
 	// for Camera reset when init
-	Refresh();
+	Refresh(true);
 }
 
 void StageCanvas2D::OnDrawSprites() const

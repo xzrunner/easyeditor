@@ -19,7 +19,7 @@ Sprite::Sprite(Symbol* symbol)
 {
 //	rotate(-m_symbol->GetOceanAngle());
 	m_symbol->Retain();
-	buildBounding();
+	BuildBounding();
 }
 
 Sprite::~Sprite()
@@ -34,12 +34,12 @@ Sprite* Sprite::Clone() const
 	return new Sprite(*this);
 }
 
-const Symbol& Sprite::getSymbol() const
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* mesh = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != mesh)
@@ -50,17 +50,17 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 		symbol->Retain();
 
 		m_symbol = mesh;
-		buildBounding();
+		BuildBounding();
 	}
 }
 
-void Sprite::load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val)
 {
 	d2d::ISprite::load(val);
 //	rotate(-m_symbol->GetOceanAngle());
 }
 
-void Sprite::buildBounding()
+void Sprite::BuildBounding()
 {
 	if (!m_bounding) 
 		m_bounding = d2d::BVFactory::createBV(d2d::e_obb);

@@ -12,12 +12,6 @@ TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
 	: OnePassCanvas(stage)
 	, m_dirty(true)
 {
-	stage->SetRefreshMonitor(this);
-}
-
-void TwoPassCanvas::OnRefresh()
-{
-	m_dirty = true;
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
@@ -35,11 +29,13 @@ void TwoPassCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
-//	if (m_dirty) {
+	if (IsDirty()) {
  		mgr->SetFBO(fbo.GetFboID());
 		OnePassCanvas::OnDrawWhole();
-//  		m_dirty = false;
-// 	}
+		wxLogDebug("pass 22222222222222222");
+	} else {
+		wxLogDebug("pass 1");
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen
@@ -47,6 +43,9 @@ void TwoPassCanvas::OnDrawWhole() const
 
 	mgr->SetFBO(0);
 	mgr->SetTexture(0);
+
+	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	mgr->Screen();
 	mgr->DrawScreen(fbo.GetTexID());

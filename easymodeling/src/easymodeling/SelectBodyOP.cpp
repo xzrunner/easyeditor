@@ -38,7 +38,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 	if (selected)
 		m_mouseOn = static_cast<libmodeling::Body*>(selected->GetUserData());
 
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }

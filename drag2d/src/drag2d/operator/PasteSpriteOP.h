@@ -4,8 +4,6 @@
 
 #include "SelectSpritesOP.h"
 
-#include "dataset/ObjSelectionSet.h"
-
 namespace d2d
 {
 	class ISprite;

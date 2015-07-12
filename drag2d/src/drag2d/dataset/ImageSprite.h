@@ -24,8 +24,9 @@ namespace d2d
 		//
 		// ISprite interface
 		//
-		virtual const ImageSymbol& getSymbol() const;
-		virtual void setSymbol(ISymbol* symbol);
+		virtual bool Update(int version) { return false; }
+		virtual const ImageSymbol& GetSymbol() const;
+		virtual void SetSymbol(ISymbol* symbol);
 
 		// todo: should auto resize through its symbol and shapes
 		void buildBoundingFromTexCoords(float* texCoords);

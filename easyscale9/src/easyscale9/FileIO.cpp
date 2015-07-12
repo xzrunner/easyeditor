@@ -89,7 +89,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, value);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	sprite->load(value);
+	sprite->Load(value);
 	symbol->Release();
 
 	return sprite;
@@ -98,7 +98,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::ISymbol& symbol = sprite->getSymbol();
+	const d2d::ISymbol& symbol = sprite->GetSymbol();
 
 	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
@@ -110,7 +110,7 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->store(value);
+	sprite->Store(value);
 
 	return value;
 }
@@ -118,7 +118,7 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 Json::Value FileIO::StoreNew(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::ISymbol& symbol = sprite->getSymbol();
+	const d2d::ISymbol& symbol = sprite->GetSymbol();
 
 	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
@@ -130,7 +130,7 @@ Json::Value FileIO::StoreNew(d2d::ISprite* sprite, const wxString& dir)
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->store(value);
+	sprite->Store(value);
 
 	return value;
 }

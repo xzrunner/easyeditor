@@ -51,7 +51,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
- 		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+ 		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
  		ecomplex::EditDialog dlg(m_stage, &symbol);
  		dlg.ShowModal();
  
@@ -65,7 +65,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	{
- 		libanim::PreviewDialog dlg(m_stage, &anim->getSymbol());
+ 		libanim::PreviewDialog dlg(m_stage, &anim->GetSymbol());
  		dlg.ShowModal();
 
 // 		m_stage->resetCanvas();
@@ -73,7 +73,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
-		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->getSymbol());
+		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
   		escale9::EditDialog dlg(m_stage, &symbol);
   		dlg.ShowModal();
   

@@ -53,7 +53,7 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 	pos.y = bodyValue["position"]["y"].asDouble();
 	float angle = bodyValue["angle"].asDouble();
 
-	sprite->setTransform(pos, angle);
+	sprite->SetTransform(pos, angle);
 
 	Body* body = new Body;
 	body->name = bodyValue["name"].asString();

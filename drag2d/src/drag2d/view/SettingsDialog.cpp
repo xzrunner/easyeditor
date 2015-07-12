@@ -29,7 +29,7 @@ void SettingsDialog::initLayout()
 	SetSizer(sizer);
 
 	sizer->Layout();
-	Refresh();
+	Refresh(true);
 }
 
 wxSizer* SettingsDialog::initEditPanel()
@@ -122,6 +122,13 @@ wxSizer* SettingsDialog::initViewPanel()
 				wxCommandEventHandler(SettingsDialog::onSetBGColor));
 			sizer->Add(btn);
 		}
+		{
+			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("¶¯Ì¬sprite"));
+			check->SetValue(m_settings.visible_spr_update);
+			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+				wxCommandEventHandler(SettingsDialog::onChangeUpdateSpr));
+			sizer->Add(check, 0);
+		}
 	}
 	return sizer;
 }
@@ -184,6 +191,11 @@ void SettingsDialog::onSetBGColor(wxCommandEvent& event)
 	if (dlg.ShowModal()) {
 		m_settings.bg_color = dlg.GetColor();
 	}
+}
+
+void SettingsDialog::onChangeUpdateSpr(wxCommandEvent& event)
+{
+	m_settings.visible_spr_update = event.IsChecked();
 }
 
 }

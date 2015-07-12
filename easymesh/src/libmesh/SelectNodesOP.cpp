@@ -58,7 +58,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 			m_bDraggable = false;
 		else
 			m_selection.Clear();
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

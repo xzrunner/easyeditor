@@ -228,7 +228,7 @@ namespace eanim
 			Joint* j = itr->second[i];
 			if (j->m_parent)
 			{
-				sprite->translate(j->m_parent->getWorldPos() - j->getWorldPos());
+				sprite->Translate(j->m_parent->getWorldPos() - j->getWorldPos());
 				break;
 			}
 		}
@@ -249,9 +249,9 @@ namespace eanim
 			{
 				Joint* c = *itr_joint;
 				d2d::Vector cp = c->getWorldPos();
-				c->m_sprite->translate(pp - cp);
+				c->m_sprite->Translate(pp - cp);
 				if (dAngle != 0)
-					c->m_sprite->rotate(dAngle);
+					c->m_sprite->Rotate(dAngle);
 				updateJoint(c->m_sprite, dAngle);
 			}
 		}
@@ -288,8 +288,8 @@ namespace eanim
 					}
 					assert(sprite);
 
- 					float delta = (e->getAngle() - s->getAngle()) * process;
- 					sprite->rotate(delta);
+ 					float delta = (e->GetAngle() - s->GetAngle()) * process;
+ 					sprite->Rotate(delta);
 					mid.fixJoint(sprite);
 
 					break;

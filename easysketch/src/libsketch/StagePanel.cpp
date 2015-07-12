@@ -8,7 +8,7 @@ namespace libsketch
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(parent)
+	, d2d::MultiSpritesImpl(this)
 {
 	m_canvas = new StageCanvas(this, this, library);
 	library->SetCanvas(m_canvas);
@@ -36,6 +36,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
 	sprite->Retain();
 	m_sprites.push_back(sprite);
+	m_canvas->SetDirty();
 	return true;
 }
 
@@ -45,6 +46,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 		if (m_sprites[i] == sprite) {
 			sprite->Release();
 			m_sprites.erase(m_sprites.begin() + i);
+			m_canvas->SetDirty();
 			return true;
 		}
 	}
@@ -58,6 +60,9 @@ bool StagePanel::ClearAllSprite()
 		m_sprites[i]->Release();
 	}
 	m_sprites.clear();
+	if (ret) {
+		m_canvas->SetDirty();
+	}
 	return ret;
 }
 

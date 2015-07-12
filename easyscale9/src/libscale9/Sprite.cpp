@@ -23,7 +23,7 @@ Sprite::Sprite(Symbol* symbol)
 {
 	m_symbol->Retain();
 
-	buildBounding();
+	BuildBounding();
 }
 
 Sprite::~Sprite()
@@ -40,12 +40,12 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-const Symbol& Sprite::getSymbol() const
+const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
 }
 
-void Sprite::setSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* scale9 = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != symbol && scale9)
@@ -57,9 +57,9 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 	}
 }
 
-void Sprite::load(const Json::Value& val)
+void Sprite::Load(const Json::Value& val)
 {
-	ISprite::load(val);
+	ISprite::Load(val);
 
 	if (val["scale9"].isNull()) {
 		return;
@@ -79,9 +79,9 @@ void Sprite::load(const Json::Value& val)
 	SetSize(w, h);
 }
 
-void Sprite::store(Json::Value& val) const
+void Sprite::Store(Json::Value& val) const
 {
-	ISprite::store(val);
+	ISprite::Store(val);
 
 	float w, h;
 	m_data.GetSize(w, h);
@@ -102,7 +102,7 @@ void Sprite::GetSize(float& w, float& h) const
 void Sprite::SetSize(float w, float h)
 {
 	m_data.Resize(w, h);
-	buildBounding();
+	BuildBounding();
 }
 
 void Sprite::Draw(const d2d::Matrix& mt,

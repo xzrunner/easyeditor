@@ -17,6 +17,7 @@ void CirclePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 		m_circle->name = wxANY_AS(value, wxString);
 	if (name == wxT("X"))
@@ -25,8 +26,12 @@ void CirclePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		m_circle->center.y = wxANY_AS(value, float);
 	else if (name == "Radius")
 		m_circle->radius = wxANY_AS(value, float);
+	else
+		dirty = false;
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void CirclePropertySetting::UpdateProperties(wxPropertyGrid* pg)

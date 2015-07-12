@@ -26,12 +26,13 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual const FontSymbol& getSymbol() const;
-	virtual void setSymbol(ISymbol* symbol);
+	virtual bool Update(int version) { return false; }
+	virtual const FontSymbol& GetSymbol() const;
+	virtual void SetSymbol(ISymbol* symbol);
 
 	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
 
-	virtual void setTransform(const Vector& position, float angle);
+	virtual void SetTransform(const Vector& position, float angle);
 
 	void setText(const std::string& text);
 	const std::string& getText() const {

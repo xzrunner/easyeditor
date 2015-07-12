@@ -17,6 +17,7 @@ void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 	{
 		m_rect->name = wxANY_AS(value, wxString);
@@ -49,8 +50,14 @@ void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		m_rect->m_rect.yMin = y - hHeight;
 		m_rect->m_rect.yMax = y + hHeight;
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void RectPropertySetting::UpdateProperties(wxPropertyGrid* pg)

@@ -2,10 +2,16 @@
 #define _DRAG2D_MOVE_SPRITE_STATE_H_
 
 #include "IArrangeSpriteState.h"
-#include "dataset/ObjSelectionSet.h"
+
+#include "common/Vector.h"
+
+#include <vector>
 
 namespace d2d
 {
+
+class ISprite;
+class SpriteSelection;
 
 class MoveSpriteState : public IArrangeSpriteState
 {

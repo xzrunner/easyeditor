@@ -24,13 +24,14 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual const Symbol& getSymbol() const;
-	virtual void setSymbol(d2d::ISymbol* symbol);
+	virtual bool Update(int version) { return true; }
+	virtual const Symbol& GetSymbol() const;
+	virtual void SetSymbol(d2d::ISymbol* symbol);
 
-	virtual void load(const Json::Value& val);
-	virtual void store(Json::Value& val) const;
+	virtual void Load(const Json::Value& val);
+	virtual void Store(Json::Value& val) const;
 
-	virtual void buildBounding();
+	virtual void BuildBounding();
 
 	Shape* getShape() {
 		return m_symbol ? m_symbol->getShape() : NULL; 

@@ -30,8 +30,8 @@ void ComposeImpl::OnMouseRightDown(int x, int y)
 	d2d::ISprite* selected = m_stage->getSprite(row, col);
 	if (selected)
 	{
-		selected->setTransform(selected->getPosition(), selected->getAngle() + d2d::PI*0.5f);
-		m_stage->Refresh();
+		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + d2d::PI*0.5f);
+		m_stage->SetCanvasDirty();
 	}
 }
 

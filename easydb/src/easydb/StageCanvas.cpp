@@ -37,7 +37,7 @@ void StageCanvas::drawConnection() const
 		for (size_t i = 0, n = itr->second->out.size(); i < n; ++i)
 		{
 			d2d::ISprite* to = itr->second->out[i];
-			d2d::PrimitiveDraw::drawLine(from->getPosition(), to->getPosition(), 
+			d2d::PrimitiveDraw::drawLine(from->GetPosition(), to->GetPosition(), 
 				d2d::Colorf(0.8f, 0.8f, 0.8f));
 		}
 	}

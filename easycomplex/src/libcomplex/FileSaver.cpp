@@ -70,7 +70,7 @@ void FileSaver::centerSymbol(Symbol* symbol)
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = symbol->m_sprites[i];
-		sprite->translate(-offset);
+		sprite->Translate(-offset);
 	}
 	symbol->m_rect.translate(-offset);
 }
@@ -78,7 +78,7 @@ void FileSaver::centerSymbol(Symbol* symbol)
 Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::ISymbol& symbol = sprite->getSymbol();
+	const d2d::ISymbol& symbol = sprite->GetSymbol();
 
 	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
@@ -90,7 +90,7 @@ Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
 		value["filepaths"][i] = *itr;
 	}
 	// other
-	sprite->store(value);
+	sprite->Store(value);
 
 	return value;
 }

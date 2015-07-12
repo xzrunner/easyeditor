@@ -66,7 +66,7 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 		}
 		m_lastPos = currPos;
 
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

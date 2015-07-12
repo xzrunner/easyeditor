@@ -41,7 +41,7 @@ bool CreateStripOP::OnMouseLeftUp(int x, int y)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		shape->InsertNode(pos);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;
@@ -56,7 +56,7 @@ bool CreateStripOP::OnMouseRightDown(int x, int y)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		shape->RemoveNode(pos);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 
 		m_last_right = pos;
 	}
@@ -97,7 +97,7 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
 		shape->MoveNode(m_selected, pos);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

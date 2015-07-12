@@ -44,15 +44,6 @@ void EditPanel::Refresh(bool eraseBackground, const wxRect* rect)
 		m_refresh_monitor->OnRefresh();
 	}
 
-	wxPanel::Refresh(eraseBackground, rect);
-}
-
-void EditPanel::Clear()
-{
-	if (m_edit_op) {
-		m_edit_op->Clear();
-	}
-
 	m_history_list.clear();
 }
 
@@ -91,7 +82,7 @@ void EditPanel::SetEditOP(AbstractEditOP* editOP)
 	if (m_edit_op) {
 		m_edit_op->OnActive();
 	}
-	Refresh();
+	SetCanvasDirty();
 }
 
 void EditPanel::OnMouse(wxMouseEvent& event)
@@ -168,7 +159,6 @@ void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 	const float cx = static_cast<float>(x),
 		cy = static_cast<float>(GetSize().GetHeight() - y);
 	m_camera->Scale(scale, cx, cy, GetSize().GetWidth(), GetSize().GetHeight());
-	Refresh();
 }
 
 void EditPanel::ResetCanvas()
@@ -176,7 +166,7 @@ void EditPanel::ResetCanvas()
 	if (m_canvas)
 	{
 		m_canvas->ResetInitState();
-		Refresh();
+		SetCanvasDirty();
 	}
 }
 
@@ -193,7 +183,7 @@ void EditPanel::Undo()
 {
 	HistoryList::Type type = m_history_list.undo();
 	if (type != HistoryList::NO_CHANGE) {
-		Refresh();
+		SetCanvasDirty();
 		if (type == HistoryList::DIRTY)
 			SetTitleStatus(true);
 		else
@@ -205,7 +195,7 @@ void EditPanel::Redo()
 {
 	HistoryList::Type type = m_history_list.redo();
 	if (type != HistoryList::NO_CHANGE) {
-		Refresh();
+		SetCanvasDirty();
 		if (type == HistoryList::DIRTY)
 			SetTitleStatus(true);
 		else
@@ -295,14 +285,20 @@ void EditPanel::OnSize(wxSizeEvent& event)
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}
-	Refresh();	// no refresh when change window size
+	SetCanvasDirty();	// no refresh when change window size
 }
 
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
 	if (m_edit_op) {
 		m_edit_op->OnPopMenuSelected(event.GetId());
-		Refresh();
+	}
+}
+
+void EditPanel::SetCanvasDirty()
+{
+	if (m_canvas) {
+		m_canvas->SetDirty();
 	}
 }
 

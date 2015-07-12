@@ -34,7 +34,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 	d2d::SpritesPanelImpl::InsertSprite(sprite);
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
-		sprite->getSymbol().GetFilepath(), libshape::FILE_TAG, "json");
+		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
 	if (!d2d::FilenameTools::isExist(filepath)) {
 		return false;
 	}
@@ -199,8 +199,8 @@ void StagePanel::loadBody(d2d::ISprite* sprite, libmodeling::Body& body)
 	libmodeling::Fixture* fixture = new libmodeling::Fixture;
 	fixture->body = &body;
 
-	const float width = sprite->getSymbol().GetSize().xLength(),
-		height = sprite->getSymbol().GetSize().yLength();
+	const float width = sprite->GetSymbol().GetSize().xLength(),
+		height = sprite->GetSymbol().GetSize().yLength();
 	fixture->shape = new libshape::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 	body.fixtures.push_back(fixture);

@@ -43,7 +43,7 @@ wxOrientation LayersContentWidget::GetOrientation() const
 
 void LayersContentWidget::onSize(wxSizeEvent& event)
 {
-	Refresh();
+	Refresh(true);
 }
 
 void LayersContentWidget::onPaint(wxPaintEvent& event)
@@ -150,11 +150,11 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
 			if (x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->SetEditable(!layer->IsEditable());
-				Refresh();
+				Refresh(true);
 				m_ctrl->Refresh();
 			} else if (x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
 				layer->SetVisible(!layer->IsVisible());
-				Refresh();
+				Refresh(true);
 				m_ctrl->Refresh();
 			}
 		}
@@ -172,7 +172,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 				m_ctrl->GetLayers().changeLayerOrder(from, to);
 				m_ctrl->Refresh();
 			}
-			Refresh();
+			Refresh(true);
 		}
 		m_dragFlagLine = -1;
 	}
@@ -188,7 +188,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			if (newDragLine != m_dragFlagLine) 
 			{
 				m_dragFlagLine = newDragLine;
-				Refresh();
+				Refresh(true);
 			}
 		}
 	}
@@ -205,7 +205,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			if (dlg.ShowModal() == wxID_OK)
 			{
 				layer->SetName(dlg.getText().ToStdString());
-				Refresh();
+				Refresh(true);
 			}
 		}
 	}

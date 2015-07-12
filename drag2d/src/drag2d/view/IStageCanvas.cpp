@@ -18,11 +18,14 @@ BEGIN_EVENT_TABLE(IStageCanvas, wxGLCanvas)
  	EVT_MOUSE_EVENTS(IStageCanvas::OnMouse)
  	EVT_KEY_DOWN(IStageCanvas::OnKeyDown)
 	EVT_KEY_UP(IStageCanvas::OnKeyUp)
+	EVT_TIMER(TIMER_ID, IStageCanvas::OnTimer)
 END_EVENT_TABLE()
 
 static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN, 1,
 								  WX_GL_MIN_BLUE, 1, WX_GL_DEPTH_SIZE, 1,
 								  WX_GL_DOUBLEBUFFER,WX_GL_STENCIL_SIZE, 8, 0};
+
+static const float FPS = 30;
 
 IStageCanvas::IStageCanvas(EditPanel* stage)
 	: wxGLCanvas(stage, wxID_ANY, GL_ATTRIB)
@@ -32,13 +35,17 @@ IStageCanvas::IStageCanvas(EditPanel* stage)
  	, m_width(0), m_height(0)
  	, m_inited(false)
  	, m_context(new wxGLContext(this))
+	, m_timer(this, TIMER_ID)
+	, m_version(0)
 {
 	m_bg_color.set(0.5f, 0.5f, 0.5f, 1);
+	m_timer.Start(1000 / FPS);
 }
 
 IStageCanvas::~IStageCanvas()
 {
-	delete m_context;
+// 	delete m_context;
+// 	m_timer.Stop();
 }
 
 void IStageCanvas::ResetInitState() 
@@ -103,6 +110,7 @@ void IStageCanvas::OnPaint(wxPaintEvent& event)
 	}
 
 	OnDrawWhole();
+	m_dirty = false;
 
 	glFlush();
 	SwapBuffers();
@@ -134,6 +142,21 @@ void IStageCanvas::OnKeyDown(wxKeyEvent& event)
 void IStageCanvas::OnKeyUp(wxKeyEvent& event)
 {
 	m_stage->OnKeyUp(event);
+}
+
+void IStageCanvas::OnTimer(wxTimerEvent& event)
+{
+	OnTimer();
+
+	++m_version;
+	bool dirty = m_stage->Update(m_version);
+	if (dirty) {
+		m_dirty = dirty;
+	}
+
+	if (IsDirty()) {
+		Refresh();
+	}
 }
 
 }

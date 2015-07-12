@@ -41,7 +41,7 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 		if (moved)
 		{
 			m_nodeSelected.pos = m_currPos;
-			m_stage->Refresh();
+			m_stage->SetCanvasDirty();
 		}
 		m_nodeSelected.rect = NULL;
 	}
@@ -52,7 +52,7 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 		m_rectSelected->xMax = ceil(m_rectSelected->xMax);
 		m_rectSelected->yMin = ceil(m_rectSelected->yMin);
 		m_rectSelected->yMax = ceil(m_rectSelected->yMax);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;
@@ -92,7 +92,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 			m_firstPos.setInvalid();
 			m_currPos.setInvalid();
-			m_stage->Refresh();
+			m_stage->SetCanvasDirty();
 		}
 	}
 	// insert rect
@@ -105,7 +105,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 			m_firstPos.setInvalid();
 			m_currPos.setInvalid();
-			m_stage->Refresh();
+			m_stage->SetCanvasDirty();
 		}
 	}
 
@@ -121,7 +121,7 @@ bool RectCutOP::OnMouseMove(int x, int y)
 	m_currPos = m_stage->TransPosScrToProj(x, y);
 	m_rectSelected = m_rects.queryRect(m_currPos);
 	m_captured = m_rects.queryNearestAxis(m_currPos);
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 
 	return false;
 }
@@ -138,7 +138,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 		m_currPos = m_stage->TransPosScrToProj(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos);
 
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 	// move rect's node
 	else if (m_nodeSelected.rect)
@@ -150,7 +150,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 		m_rects.moveNode(m_nodeSelected, pos);
 		m_nodeSelected.pos = pos;
 
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 	// move rect
 	else if (m_rectSelected)
@@ -159,7 +159,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 		m_rects.moveRect(m_rectSelected, m_currPos, curr);
 		m_currPos = curr;
 
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;
@@ -209,7 +209,7 @@ bool RectCutOP::Clear()
 std::string RectCutOP::getImageFilepath() const
 {
 	if (const d2d::ISprite* s = m_stage->getImage()) {
-		return s->getSymbol().GetFilepath();
+		return s->GetSymbol().GetFilepath();
 	} else {
 		return "";
 	}
@@ -262,8 +262,8 @@ void RectCutOP::fixedPos(d2d::Vector& pos) const
 	pos.y = std::ceil(pos.y);
 
 	// to image
-	float w = m_stage->getImage()->getSymbol().GetSize().xLength();
-	float h = m_stage->getImage()->getSymbol().GetSize().yLength();
+	float w = m_stage->getImage()->GetSymbol().GetSize().xLength();
+	float h = m_stage->getImage()->GetSymbol().GetSize().yLength();
 	if (pos.x < 0) {
 		pos.x = 0;
 	}

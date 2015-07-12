@@ -25,9 +25,9 @@ bool LibraryFontBlankPage::IsHandleSymbol(ISymbol* symbol) const
 	return dynamic_cast<FontBlankSymbol*>(symbol) != NULL;
 }
 
-void LibraryFontBlankPage::LoadFromConfig()
+bool LibraryFontBlankPage::LoadFromConfig()
 {
-	ILibraryPage::LoadFromConfig("library_label");
+	return ILibraryPage::LoadFromConfig("library_label");
 }
 
 void LibraryFontBlankPage::InitLayout(bool draggable /*= true*/)

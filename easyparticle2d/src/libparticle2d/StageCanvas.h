@@ -9,7 +9,7 @@ namespace eparticle2d
 
 class StagePanel;
 
-class StageCanvas : public d2d::DynamicStageCanvas
+class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

@@ -7,13 +7,14 @@ namespace d2d
 {
 	class Layer;
 	class IVisitor;
+	class EditPanel;
 
 	class LayersMgrWidget : public wxPanel
 	{
 		class LayerWidget;
 
 	public:
-		LayersMgrWidget(wxWindow* parent, wxWindow* stage);
+		LayersMgrWidget(wxWindow* parent, EditPanel* stage);
 		virtual ~LayersMgrWidget();
 
 		void traverseEditableLayers(IVisitor& visitor);
@@ -80,7 +81,7 @@ namespace d2d
 		int getEditLayerIndex() const;
 
 	private:
-		wxWindow* m_stage;
+		d2d::EditPanel* m_stage;
 
 		std::vector<LayerWidget*> m_layers;
 

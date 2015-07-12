@@ -25,7 +25,7 @@ bool EditPointOP::OnKeyDown(int keyCode)
 	{
 		m_shapes_impl->ClearShapeSelection();
 		m_captured.clear();
-		m_stage->Refresh();
+
 	}
 
 	return false;
@@ -73,7 +73,6 @@ bool EditPointOP::OnMouseLeftUp(int x, int y)
 
 	Clear();
 
-	m_stage->Refresh();
 
 	return false;
 }
@@ -94,7 +93,7 @@ bool EditPointOP::OnMouseRightDown(int x, int y)
 		m_shapes_impl->RemoveShape(m_captured.shape);
 		m_shapes_impl->GetShapeSelection()->Clear();
 		m_captured.clear();
-		m_stage->Refresh();
+
 	}
 
 	return false;
@@ -113,8 +112,9 @@ bool EditPointOP::OnMouseMove(int x, int y)
 	NodeCapture capture(m_shapes_impl, tolerance);
 	d2d::IShape* old = m_captured.shape;
 	capture.captureEditable(pos, m_captured);
-	if (old && !m_captured.shape || !old && m_captured.shape)
-		m_stage->Refresh();
+	if (old && !m_captured.shape || !old && m_captured.shape) {
+		m_stage->SetCanvasDirty();
+	}
 
 	return false;
 }
@@ -128,7 +128,7 @@ bool EditPointOP::OnMouseDrag(int x, int y)
 		get_shape_type(m_captured.shape->GetShapeDesc()) == ST_POINT) {		
 		PointShape* point = static_cast<PointShape*>(m_captured.shape);
 		point->SetPos(m_pos);
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

@@ -20,20 +20,20 @@ Joint::Joint(Body* b0, Body* b1, Type type)
 
 void Joint::drawBodyFlag() const
 {
-	drawBodyFlag(bodyA->sprite->getPosition());
-	drawBodyFlag(bodyB->sprite->getPosition());
+	drawBodyFlag(bodyA->sprite->GetPosition());
+	drawBodyFlag(bodyB->sprite->GetPosition());
 }
 
 d2d::Vector Joint::transWorldToLocal(const d2d::Vector& world, 
 									const d2d::ISprite* sprite)
 {
-	return d2d::Math::rotateVector(world - sprite->getPosition(), -sprite->getAngle());
+	return d2d::Math::rotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
 }
 
 d2d::Vector Joint::transLocalToWorld(const d2d::Vector& local, 
 									const d2d::ISprite* sprite)
 {
-	return d2d::Math::rotateVector(local, sprite->getAngle()) + sprite->getPosition();
+	return d2d::Math::rotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
 }
 
 void Joint::drawBodyFlag(const d2d::Vector& pos) const

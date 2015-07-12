@@ -27,7 +27,7 @@ bool SelectJointOP::OnKeyDown(int keyCode)
 		if (m_mouseOn == m_selected) m_mouseOn = NULL;
 		static_cast<StagePanel*>(m_stage)->removeJoint(m_selected);
 		m_selected = NULL;
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;
@@ -38,7 +38,7 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	libmodeling::Joint* selected = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
 	if (selected && !m_selected || !selected && m_selected)
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	if (selected)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
@@ -109,7 +109,7 @@ bool SelectJointOP::OnMouseMove(int x, int y)
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	libmodeling::Joint* joint = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
 	if (joint && !m_mouseOn || !joint && m_mouseOn)
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 
 	m_mouseOn = joint;
 
@@ -232,7 +232,7 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 			break;
 		}
 
-		m_stage->Refresh();
+		m_stage->SetCanvasDirty();
 	}
 
 	return false;

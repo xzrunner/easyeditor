@@ -41,8 +41,6 @@ void Task::clear()
 {
 	m_library->clear();
 	m_stage->clear();
-	m_library->Refresh();
-	m_stage->Refresh();
 }
 
 const d2d::EditPanel* Task::getEditPanel() const

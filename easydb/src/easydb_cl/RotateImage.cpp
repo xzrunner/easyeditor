@@ -64,7 +64,7 @@ void RotateImage::Trigger(const std::string& src_dir, const std::string& dst_dir
 			d2d::Rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * d2d::TRANS_DEG_TO_RAD;
-				sprite->setTransform(sprite->getPosition(), rad);
+				sprite->SetTransform(sprite->GetPosition(), rad);
 				int width = d2d::Math::rotateVector(d2d::Vector(r.xMax, r.yMax), -rad).x * 2;
 				int height = d2d::Math::rotateVector(d2d::Vector(r.xMin, r.yMax), -rad).y * 2;
 				ss.DrawSprite(sprite, true, width, height);

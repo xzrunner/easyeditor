@@ -97,7 +97,7 @@ void SettingDialog::InitLayout()
 	SetSizer(top_sizer);
 
 	top_sizer->Layout();
-	Refresh();
+	Refresh(true);
 }
 
 void SettingDialog::OnMapSizeChanged(wxCommandEvent& event)
@@ -132,7 +132,7 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(sprites[i])) {
-			const_cast<eterrain2d::Symbol&>(terr->getSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);
+			const_cast<eterrain2d::Symbol&>(terr->GetSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);
 		}
 	}
 }

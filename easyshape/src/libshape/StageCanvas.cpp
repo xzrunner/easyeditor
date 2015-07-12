@@ -5,7 +5,7 @@ namespace libshape
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage_impl(stage)
 	, m_edited(NULL)
 {
@@ -14,7 +14,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 StageCanvas::StageCanvas(StagePanel* stage, 
 						 d2d::ISprite* edited,
 						 const std::vector<d2d::ISprite*>& bg_sprites)
-	: d2d::DynamicStageCanvas(stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage_impl(stage)
 	, m_edited(edited)
 	, m_bg_sprites(bg_sprites)
@@ -31,7 +31,7 @@ void StageCanvas::DrawGuideLines() const
 
 void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));

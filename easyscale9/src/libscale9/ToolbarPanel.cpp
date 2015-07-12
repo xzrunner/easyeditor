@@ -43,7 +43,7 @@ void ToolbarPanel::onChangeSize(wxSpinEvent& event)
 	const float w = m_wSpin->GetValue(),
 		h = m_hSpin->GetValue();
 	m_symbol->ResizeScale9(w, h);
-	m_parent->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 }

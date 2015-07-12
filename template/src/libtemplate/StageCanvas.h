@@ -8,7 +8,7 @@ namespace etemplate
 
 class StagePanel;
 
-//class StageCanvas : public d2d::DynamicStageCanvas
+//class StageCanvas : public d2d::OrthoCanvas
 class StageCanvas : public d2d::TwoPassCanvas
 {
 public:

@@ -38,7 +38,7 @@ EditDialog::~EditDialog()
 void EditDialog::onSize(wxSizeEvent& event)
 {
 	Layout();
-	Refresh();
+	Refresh(true);
 }
 
 void EditDialog::InitLayout(Symbol* symbol)

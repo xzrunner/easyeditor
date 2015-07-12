@@ -3,6 +3,7 @@
 
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
@@ -28,6 +29,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Name"))
 	{
 		if (m_symbol)
@@ -35,8 +37,14 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		else
 			*m_name = wxANY_AS(value, wxString);
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)

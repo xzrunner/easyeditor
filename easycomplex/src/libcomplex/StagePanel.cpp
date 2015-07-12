@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   LibraryPanel* library, d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new Symbol))
+	, d2d::SpritesPanelImpl(this, new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library,
 					   d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = symbol))
+	, d2d::SpritesPanelImpl(this, new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
@@ -52,6 +52,18 @@ void StagePanel::Clear()
 	symbol->m_sprites.clear();
 
 	symbol->m_clipbox = d2d::Rect(0, 0);
+}
+
+bool StagePanel::Update(int version)
+{
+	bool ret = false;
+	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
+		d2d::ISprite* spr = m_symbol->m_sprites[i];
+		if (spr->Update(version)) {
+			ret = true;
+		}
+	}
+	return ret;
 }
 
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)

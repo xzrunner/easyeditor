@@ -18,6 +18,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (value.IsNull())
 		return;
 
+	bool dirty = true;
 	if (name == wxT("Groups"))
 	{
 		if (m_symbol) {
@@ -57,8 +58,14 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 			}
 		}
 	}
+	else
+	{
+		dirty = false;
+	}
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 std::string SymbolPropertySetting::GetGroupNames() const

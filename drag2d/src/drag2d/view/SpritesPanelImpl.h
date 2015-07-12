@@ -14,8 +14,8 @@ class IDataContainer;
 class SpritesPanelImpl : public MultiSpritesImpl
 {
 public:
-	SpritesPanelImpl(wxWindow* parent, IDataContainer* container);
-	SpritesPanelImpl(EditPanel* editPanel, LibraryPanel* libraryPanel);
+	SpritesPanelImpl(EditPanel* stage, IDataContainer* container);
+	SpritesPanelImpl(EditPanel* stage, LibraryPanel* library);
 	virtual ~SpritesPanelImpl();
 
 	//
@@ -29,6 +29,8 @@ public:
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
 private:
+	EditPanel* m_stage;
+
 	IDataContainer* m_container;
 
 }; // SpritesPanelImpl

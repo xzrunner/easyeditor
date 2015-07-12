@@ -6,7 +6,7 @@ namespace emodeling
 {
 
 PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
-	: d2d::DynamicStageCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel)
 {
 	SetBgColor(d2d::Colorf(0, 0, 0));
 }
@@ -17,7 +17,7 @@ PreviewCanvas::~PreviewCanvas()
 
 void PreviewCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::InitGL();
+	d2d::OrthoCanvas::InitGL();
 	Context::Instance()->library->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();

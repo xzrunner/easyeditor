@@ -16,7 +16,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::ViewPanelMgr* view_panel_mgr,
 					   Controller* ctrl)
 	: EditPanel(parent, frame)
-	, MultiSpritesImpl(parent)
+	, MultiSpritesImpl(this)
 	, m_ctrl(ctrl)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
@@ -43,7 +43,11 @@ void StagePanel::Clear()
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
 	KeyFrame* frame = m_ctrl->getCurrFrame();
-	return frame->Reorder(sprite, up);
+	bool ret = frame->Reorder(sprite, up);
+	if (ret) {
+		m_canvas->SetDirty();
+	}
+	return ret;
 }
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
@@ -59,13 +63,14 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	assert(frame);
 	frame->Insert(sprite);
-	Refresh();
 
 	if (ud) {
 		m_ctrl->setCurrFrame(old_layer, old_frame);
 	}
 
 	m_ctrl->Refresh();
+
+	m_canvas->SetDirty();
 
 	return true;
 }
@@ -76,6 +81,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 	bool success = frame->Remove(sprite);
 	if (success) {
 		m_ctrl->Refresh();
+		m_canvas->SetDirty();
 	}
 	return success;
 }
@@ -84,6 +90,10 @@ bool StagePanel::ClearAllSprite()
 {
 	bool ret = m_ctrl->ClearAllLayer();
 	m_ctrl->setCurrFrame(-1, -1);
+
+	if (ret) {
+		m_canvas->SetDirty();
+	}
 
 // 	Context* context = Context::Instance();
 // 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
@@ -139,13 +149,13 @@ SkeletonData& StagePanel::getSkeletonData()
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
 	m_edit_op->OnPopMenuSelected(Menu_AddJointNode);
-	Refresh();
+	SetCanvasDirty();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
 	m_edit_op->OnPopMenuSelected(Menu_DelJointNode);
-	Refresh();
+	SetCanvasDirty();
 }
 
 } // eanim

@@ -30,7 +30,7 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 	if (index < -1 || index >= m_next)
 		return -1;
 
-	const ImageSymbol& symbol = sprite->getSymbol();
+	const ImageSymbol& symbol = sprite->GetSymbol();
 
 	if ((index == -1 && m_next >= m_size)
 		|| (m_next != 0 && m_textureID != symbol.GetTexID()))
@@ -53,8 +53,8 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 // 		m_node[5] = hh;
 	}
 
-	const float hw = symbol.GetSize().xLength() * sprite->getScale().x * 0.5f,
-		hh = symbol.GetSize().yLength() * sprite->getScale().y * 0.5f;
+	const float hw = symbol.GetSize().xLength() * sprite->GetScale().x * 0.5f,
+		hh = symbol.GetSize().yLength() * sprite->GetScale().y * 0.5f;
 	float x0 = -hw;
 	float y0 = -hh;
 	float x1 = -hw;
@@ -62,10 +62,10 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 	float x2 = hw;
 	float y2 = hh;
 
-	const float sine = sin(sprite->getAngle()),
-		cosine = cos(sprite->getAngle());
-	const float x = sprite->getPosition().x,
-		y = sprite->getPosition().y;
+	const float sine = sin(sprite->GetAngle()),
+		cosine = cos(sprite->GetAngle());
+	const float x = sprite->GetPosition().x,
+		y = sprite->GetPosition().y;
 
 	m_sprite[0].x = cosine * x0 - sine * y0 + x;
 	m_sprite[0].y = sine * x0 + cosine * y0 + y;
@@ -80,7 +80,7 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 	m_sprite[3].y = m_sprite[2].y - (m_sprite[1].y - m_sprite[0].y);
 
 	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
+	sprite->GetMirror(xMirror, yMirror);
 	if (xMirror)
 	{
 		m_sprite[0].u = 1;

@@ -19,6 +19,7 @@ void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 
 	libmodeling::World* world = Context::Instance()->world;
 
+	bool dirty = true;
 	if (name == wxT("Gravity X"))
 		world->gravity.x = wxANY_AS(value, float);
 	else if (name == wxT("Gravity Y"))
@@ -35,8 +36,12 @@ void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		world->velocityIterations = wxANY_AS(value, float);
 	else if (name == wxT("PositionIterations"))
 		world->positionIterations = wxANY_AS(value, float);
+	else
+		dirty = false;
 
-	m_stage->Refresh();
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
 }
 
 void WorldPropertySetting::UpdateProperties(wxPropertyGrid* pg)

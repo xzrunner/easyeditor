@@ -12,8 +12,8 @@ class IDataContainer;
 class ShapesPanelImpl : public MultiShapesImpl
 {
 public:
-	ShapesPanelImpl(wxWindow* parent);
-	ShapesPanelImpl(wxWindow* parent, IDataContainer* container);
+	ShapesPanelImpl(EditPanel* stage);
+	ShapesPanelImpl(EditPanel* stage, IDataContainer* container);
 	virtual ~ShapesPanelImpl();
 
 	//
@@ -26,6 +26,8 @@ public:
 		DataTraverseType type = DT_ALL) const;
 
 private:
+	EditPanel* m_stage;
+
 	IDataContainer* m_container;
 
 }; // ShapesPanelImpl

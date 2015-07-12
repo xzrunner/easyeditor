@@ -100,20 +100,20 @@ int StagePanel::GetTextureAccount() const
 
 void StagePanel::fixCoords(d2d::ISprite* sprite)
 {
-	const d2d::Vector& pos = sprite->getPosition();
+	const d2d::Vector& pos = sprite->GetPosition();
 
 	const float s = Context::Instance()->scale;
 
 	float width, height;
-	if (sprite->getAngle() == 0)
+	if (sprite->GetAngle() == 0)
 	{
-		width = sprite->getSymbol().GetSize().xLength() * s;
-		height = sprite->getSymbol().GetSize().yLength() * s;
+		width = sprite->GetSymbol().GetSize().xLength() * s;
+		height = sprite->GetSymbol().GetSize().yLength() * s;
 	}
 	else
 	{
-		width = sprite->getSymbol().GetSize().yLength() * s;
-		height = sprite->getSymbol().GetSize().xLength() * s;
+		width = sprite->GetSymbol().GetSize().yLength() * s;
+		height = sprite->GetSymbol().GetSize().xLength() * s;
 	}
 
 	d2d::Vector leftTop;
@@ -129,7 +129,7 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 		fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
 		fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
-		sprite->setTransform(fixedCenter, sprite->getAngle());
+		sprite->SetTransform(fixedCenter, sprite->GetAngle());
 	}
 }
 

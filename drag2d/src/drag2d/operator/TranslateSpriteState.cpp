@@ -1,6 +1,7 @@
 #include "TranslateSpriteState.h"
 
 #include "history/TranslateSpriteAOP.h"
+#include "view/SpriteSelection.h"
 
 namespace d2d
 {
@@ -85,7 +86,7 @@ void TranslateSpriteState::Visitor::
 Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
-	sprite->translate(m_offset);
+	sprite->Translate(m_offset);
 	bFetchNext = true;
 }
 

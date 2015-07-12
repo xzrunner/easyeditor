@@ -217,7 +217,7 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		return;
 	}
 
-	d2d::Image* image = imgSprite->getSymbol().getImage();
+	d2d::Image* image = imgSprite->GetSymbol().getImage();
 
 	wxString imageDir = m_imagePath->GetValue();
 	wxString jsonDir = m_jsonPath->GetValue();
@@ -241,7 +241,7 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		d2d::Vector off;
 		off.x = r.xCenter() - image->GetClippedWidth() * 0.5f;
 		off.y = r.yCenter() - image->GetClippedHeight() * 0.5f;
-		sprite->translate(off);
+		sprite->Translate(off);
 		complex->m_sprites.push_back(sprite);
 	}
 
@@ -263,7 +263,7 @@ void RectCutCMPT::onAddRect(wxCommandEvent& event)
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
 	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
 
-	m_stage->Refresh();
+	m_stage->SetCanvasDirty();
 }
 
 }

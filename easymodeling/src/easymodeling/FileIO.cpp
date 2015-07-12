@@ -133,7 +133,7 @@ Json::Value FileIO::b2j(const libmodeling::Body* body, const std::string& dlg)
 	value["name"] = body->name.ToStdString();
 
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dlg, 
-		body->sprite->getSymbol().GetFilepath()).ToStdString();
+		body->sprite->GetSymbol().GetFilepath()).ToStdString();
 
 	value["type"] = body->type;
 	switch (body->type)
@@ -161,10 +161,10 @@ Json::Value FileIO::b2j(const libmodeling::Body* body, const std::string& dlg)
 
 	value["gravityScale"] = body->gravityScale;
 
-	value["position"]["x"] = body->sprite->getPosition().x;
-	value["position"]["y"] = body->sprite->getPosition().y;
+	value["position"]["x"] = body->sprite->GetPosition().x;
+	value["position"]["y"] = body->sprite->GetPosition().y;
 
-	value["angle"] = body->sprite->getAngle();
+	value["angle"] = body->sprite->GetAngle();
 
 	for (size_t i = 0, n = body->fixtures.size(); i < n; ++i)
 		value["fixture"][i] = b2j(body->fixtures[i]);

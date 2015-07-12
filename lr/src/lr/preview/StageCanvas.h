@@ -8,7 +8,7 @@ namespace lr
 namespace preview
 {
 
-class StageCanvas : public d2d::DynamicStageCanvas
+class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
