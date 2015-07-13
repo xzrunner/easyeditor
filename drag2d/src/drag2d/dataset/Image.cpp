@@ -23,10 +23,9 @@
 namespace d2d
 {
 
-Image::Image(const uint8_t* pixel, int width, int height)
-	: m_tex(pixel, width, height)
+Image::Image(const uint8_t* pixel, int width, int height, int channels)
 {
-	ResetClippedRegion();
+	m_tex.LoadFromMemory(pixel, width, height, channels, GL_RGBA);
 }
 
 Image::~Image()
@@ -41,50 +40,37 @@ bool Image::LoadFromFile(const std::string& filepath)
 	}
 
 #ifdef NOT_LOAD_IMAGE
-	// todo
-	m_clipped_region.xMin = m_clipped_region.xMax = m_clipped_region.yMin = m_clipped_region.yMax = 0;
 	return true;
 #endif
 
-	m_tex.LoadFromFile(filepath);
+	//////////////////////////////////////////////////////////////////////////
+	if (Config::Instance()->GetSettings().open_image_edge_clip) {
+		LoadWithClip(filepath);
+	} else {
+		m_tex.LoadFromFile(filepath);
+		m_ori_w = m_tex.GetWidth();
+		m_ori_h = m_tex.GetHeight();
+	}
 
- 	if (m_tex.GetWidth() == 0 || m_tex.GetHeight() == 0)
- 	{
- 		return true;
- 	}
- 	else
- 	{
-		if (Config::Instance()->GetSettings().open_image_edge_clip) 
-		{
-			eimage::ImageTrim trim(this);
-			d2d::Rect r = trim.Trim();
-			if (r.isValid()) {
-				r.translate(d2d::Vector(-m_tex.GetWidth()*0.5f, -m_tex.GetHeight()*0.5f));
-				m_clipped_region = r;
-			}
-		} 
-		else 
-		{
-			ResetClippedRegion();
-		}
+	if (m_tex.GetWidth() == 0 || m_tex.GetHeight() == 0) {
+		return true;
+	}
 
-// 		// todo
-// 		DynamicTexture::Instance()->Insert(this);
-		if (Config::Instance()->IsUseDTex()) {
-			DynamicTexAndFont::Instance()->AddImage(this);
-		}
+	// 		// todo
+	// 		DynamicTexture::Instance()->Insert(this);
+	if (Config::Instance()->IsUseDTex()) {
+		DynamicTexAndFont::Instance()->AddImage(this);
+	}
 
- 		return true;
- 	}
+	return true;
 }
 
 void Image::Reload()
 {
 	m_tex.Reload();
-	ResetClippedRegion();
 }
 
-void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
+void Image::Draw(const Matrix& mt, const ISprite* spr) const
 {
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画
@@ -156,6 +142,9 @@ void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 	//////////////////////////////////////////////////////////////////////////
 	// 用dtex
 
+	float hw = m_tex.GetWidth() * 0.5f,
+		hh = m_tex.GetHeight() * 0.5f;
+
 	float px = 0, py = 0;
 	if (spr) {
 		px = spr->GetPerspective().x;
@@ -163,10 +152,13 @@ void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 	}
 
  	d2d::Vector vertices[4];
- 	vertices[0] = Math::transVector(Vector(r.xMin - px, r.yMin - py), mt);
- 	vertices[1] = Math::transVector(Vector(r.xMax + px, r.yMin + py), mt);
- 	vertices[2] = Math::transVector(Vector(r.xMax - px, r.yMax - py), mt);
- 	vertices[3] = Math::transVector(Vector(r.xMin + px, r.yMax + py), mt);
+	vertices[0] = Vector(-hw - px, -hh - py);
+	vertices[1] = Vector(hw + px, -hh + py);
+	vertices[2] = Vector(hw - px, hh - py);
+	vertices[3] = Vector(-hw + px, hh + py);
+	for (int i = 0; i < 4; ++i) {
+		vertices[i] = Math::transVector(vertices[i] + m_offset, mt);
+	}
 
 	int texid;
 	d2d::Vector texcoords[4];
@@ -206,14 +198,8 @@ void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 		//wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
 
 		texid = m_tex.GetTexID();
-		float w = m_tex.GetWidth(),
-			h = m_tex.GetHeight();
-		float hw = 0.5f * w,
-			hh = 0.5f * h;
-	 	txmin = (r.xMin + hw) / w;
-	 	txmax = (r.xMax + hw) / w;
-	 	tymin = (r.yMin + hh) / h;
-	 	tymax = (r.yMax + hh) / h;
+	 	txmin = tymin = 0;
+	 	txmax = tymax = 1;
 	}
  	texcoords[0].set(txmin, tymin);
  	texcoords[1].set(txmax, tymin);
@@ -280,12 +266,39 @@ void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 	}
 }
 
-void Image::ResetClippedRegion()
+void Image::LoadWithClip(const std::string& filepath)
 {
-	m_clipped_region.xMax = m_tex.GetWidth() * 0.5f;
-	m_clipped_region.xMin = -m_clipped_region.xMax;
-	m_clipped_region.yMax = m_tex.GetHeight() * 0.5f;
-	m_clipped_region.yMin = -m_clipped_region.yMax;
+	m_tex.SetFilepath(filepath);
+
+	int w, h, c, f;
+	const uint8_t* pixels = ImageLoader::loadData(filepath, w, h, c, f);
+
+	m_ori_w = w;
+	m_ori_h = h;
+
+	if (c != 4) 
+	{
+		m_tex.LoadFromMemory(pixels, w, h, c, f);
+	} 
+	else 
+	{
+		eimage::ImageTrimRaw trim(pixels, w, h);
+		Rect r = trim.Trim();
+
+		eimage::ImageClipRaw clip(pixels, w, h, c);
+		const uint8_t* c_pixels = clip.Clip(r);
+
+		eimage::ImageVeritalFlip yflip(c_pixels, r.xLength(), r.yLength());
+		const uint8_t* flip_pixels = yflip.Revert();
+
+		m_tex.LoadFromMemory(flip_pixels, r.xLength(), r.yLength(), c, f);
+
+		delete[] c_pixels;
+		delete[] pixels;
+
+		m_offset.x = r.xCenter() - w * 0.5f;
+		m_offset.y = r.yCenter() - h * 0.5f;
+	}
 }
 
 } // d2d

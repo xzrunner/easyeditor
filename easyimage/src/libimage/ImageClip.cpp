@@ -19,6 +19,11 @@ ImageClip::~ImageClip()
 	delete[] m_check;
 }
 
+const uint8_t* ImageClip::Clip(const d2d::Rect& r) const
+{
+	return Clip(r.xMin, r.xMax, r.yMin, r.yMax);
+}
+
 const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 {
 	if (!m_image) {

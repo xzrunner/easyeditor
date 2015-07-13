@@ -362,9 +362,8 @@ void DynamicTexAndFont::InsertImage(const Image* img)
 		return;
 	}
 
-	d2d::Rect r = img->GetClippedRegion();
-	int w = r.xLength();
-	int h = r.yLength();
+	int w = img->GetClippedWidth();
+	int h = img->GetClippedHeight();
 	int extend = GetExtend() * 2;
 	d2d::TPNode* n = m_root->Insert(w+extend, h+extend);
 	if (!n) {
@@ -378,8 +377,6 @@ void DynamicTexAndFont::InsertImage(const Image* img)
 
 void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
 {
-	d2d::Rect r = img->GetClippedRegion();
-
 	Rect r_vertex, r_texcoords;
 
 	int extend = GetExtend();
@@ -389,12 +386,9 @@ void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
  	r_vertex.yMax = n->GetMaxY() - extend;
 	r_vertex.translate(Vector(-m_width*0.5f, -m_height*0.5f));
 
-	int ori_width = img->GetOriginWidth(),
-		ori_height = img->GetOriginHeight();
-	r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-	r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-	r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
+	r_texcoords.xMin = r_texcoords.yMin = 0;
+	r_texcoords.xMax = r_texcoords.yMax = 1;
+
 	DrawRegion(r_vertex, r_texcoords, img->GetTexID(), n->IsRotated());
 
 	if (m_extrude > 0) {
@@ -441,7 +435,6 @@ void DynamicTexAndFont::DrawRegion(const Rect& vertex, const Rect& texcoords, in
 
 void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 {
-	d2d::Rect r = img->GetClippedRegion();
 	int ori_width = img->GetOriginWidth(),
 		ori_height = img->GetOriginHeight();
 	Rect r_vertex, r_texcoords;
@@ -451,10 +444,8 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 	rv.xMax = n->GetMaxX() - m_width * 0.5f;
 	rv.yMin = n->GetMinY() - m_height * 0.5f;
 	rv.yMax = n->GetMaxY() - m_height * 0.5f;
-	rt.xMin = r.xMin + ori_width * 0.5f;
-	rt.xMax = r.xMax + ori_width * 0.5f;
-	rt.yMin = r.yMin + ori_height * 0.5f;
-	rt.yMax = r.yMax + ori_height * 0.5f;
+	rt.xMin = rt.yMin = 0;
+	rt.xMax = rt.yMax = 1;
 	float extend = GetExtend();
 	if (n->IsRotated())
 	{

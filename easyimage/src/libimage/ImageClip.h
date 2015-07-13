@@ -12,6 +12,7 @@ public:
 	ImageClip(const d2d::Image* image, bool check_duplicate = false);
 	~ImageClip();
 
+	const uint8_t* Clip(const d2d::Rect& r) const;
 	const uint8_t* Clip(int xmin, int xmax, int ymin, int ymax) const;
 
 private:

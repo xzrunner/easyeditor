@@ -357,6 +357,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libimage\ImageClipRaw.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageClipRaw.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libimage\ImagePack.cpp"
 				>
 			</File>
@@ -370,6 +378,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libimage\ImageTrim.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageTrimRaw.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageTrimRaw.h"
 				>
 			</File>
 			<File

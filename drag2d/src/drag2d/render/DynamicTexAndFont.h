@@ -118,13 +118,10 @@ private:
 
 	private:
 		void GetEdgeLimit(const Image* img, float& max, float& min) const {
-			Rect r = img->GetClippedRegion();
-			if (r.xLength() > r.yLength()) {
-				min = r.xLength();
-				max = r.yLength();
-			} else {
-				min = r.yLength();
-				max = r.xLength();
+			min = img->GetClippedWidth();
+			max = img->GetClippedHeight();
+			if (min > max) {
+				std::swap(min, max);
 			}
 		}
 	}; // ImageSizeCmp

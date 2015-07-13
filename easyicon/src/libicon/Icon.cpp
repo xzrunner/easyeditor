@@ -46,11 +46,12 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 	}
 
 	d2d::Vector vertices[4];
-	d2d::Rect clip_r = m_img->GetClippedRegion();
+	float w = m_img->GetClippedWidth(),
+		h = m_img->GetClippedHeight();
 	for (int i = 0; i < 4; ++i)
 	{
-		float x = clip_r.xMin + r[i].x * clip_r.xLength();
-		float y = clip_r.yMin + r[i].y * clip_r.yLength();
+		float x = r[i].x * w;
+		float y = r[i].y * h;
 		vertices[i] = d2d::Math::transVector(d2d::Vector(x, y), mt);
 	}
 
@@ -61,8 +62,8 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 		ori_h = m_img->GetOriginHeight();
 	for (int i = 0; i < 4; ++i)
 	{
-		float x = (clip_r.xMin + r[i].x * clip_r.xLength()) / ori_w + 0.5f;
-		float y = (clip_r.yMin + r[i].y * clip_r.yLength()) / ori_h + 0.5f;
+		float x = r[i].x * w / ori_w + 0.5f;
+		float y = r[i].y * h / ori_h + 0.5f;
 		texcoords[i].set(x, y);
 	}
 

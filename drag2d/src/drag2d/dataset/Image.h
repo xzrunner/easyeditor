@@ -17,7 +17,7 @@ class Image : public Object
 {
 public:
 	Image() {}
-	Image(const uint8_t* pixel, int width, int height);
+	Image(const uint8_t* pixel, int width, int height, int channels);
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);
@@ -26,23 +26,25 @@ public:
 	const std::string& GetFilepath() const { return m_tex.GetFilepath(); }
 	unsigned int GetTexID() const { return m_tex.GetTexID(); }
 	int GetChannels() const { return m_tex.GetChannels(); }
-	int GetOriginWidth() const { return m_tex.GetWidth(); }
-	int GetOriginHeight() const { return m_tex.GetHeight(); }
-	int GetClippedWidth() const { return m_clipped_region.xLength(); }
-	int GetClippedHeight() const { return m_clipped_region.yLength(); }
+	int GetOriginWidth() const { return m_ori_w; }
+	int GetOriginHeight() const { return m_ori_h; }
+	int GetClippedWidth() const { return m_tex.GetWidth(); }
+	int GetClippedHeight() const { return m_tex.GetHeight(); }
 	const uint8_t* GetPixelData() const { return m_tex.GetPixelData(); }
 
-	void Draw(const Matrix& mt, const Rect& r, const ISprite* spr = NULL) const;
+	void Draw(const Matrix& mt, const ISprite* spr = NULL) const;
 
-	Rect GetClippedRegion() const { return m_clipped_region; }
+	const Vector& GetOffset() const { return m_offset; }
 
 private:
-	void ResetClippedRegion();
+	void LoadWithClip(const std::string& filepath);
 
 private:
 	Texture m_tex;
 
-	Rect m_clipped_region;
+	float m_ori_w, m_ori_h;
+
+	Vector m_offset;
 
 }; // Image
 

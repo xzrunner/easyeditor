@@ -16,9 +16,6 @@ public:
 	d2d::Rect Trim() const;
 
 private:
-	bool IsTransparent(int x, int y) const;
-
-private:
 	const d2d::Image* m_image;
 
 }; // ImageTrim

@@ -1,50 +1,57 @@
-#pragma once
+#ifndef _DRAG2D_IMAGE_SYMBOL_H_
+#define _DRAG2D_IMAGE_SYMBOL_H_
 
 #include "ISymbol.h"
 
 namespace d2d
 {
-	class Image;
 
-	class ImageSymbol : public ISymbol
-	{
-	public:
-		ImageSymbol();
-		ImageSymbol(Image* image, const std::string& filename);
-		virtual ~ImageSymbol();
+class Image;
 
-		//
-		// ICloneable interface
-		//	
-		virtual ImageSymbol* Clone() const;
+class ImageSymbol : public ISymbol
+{
+public:
+	ImageSymbol();
+	ImageSymbol(Image* image, const std::string& filename);
+	virtual ~ImageSymbol();
 
-		//
-		// ISymbol interface
-		//
-		virtual void ReloadTexture() const;
-		virtual void Draw(const Matrix& mt,
-			const Colorf& mul = Colorf(1, 1, 1, 1), 
-			const Colorf& add = Colorf(0, 0, 0, 0),
-			const Colorf& r_trans = Colorf(1, 0, 0, 0),
-			const Colorf& g_trans = Colorf(0, 1, 0, 0),
-			const Colorf& b_trans = Colorf(0, 0, 1, 0),
-			const ISprite* sprite = NULL) const;
-		virtual Rect GetSize(const ISprite* sprite = NULL) const;
+	//
+	// ICloneable interface
+	//	
+	virtual ImageSymbol* Clone() const;
 
-		unsigned int GetTexID() const;
+	//
+	// ISymbol interface
+	//
+	virtual void ReloadTexture() const;
+	virtual void Draw(const Matrix& mt,
+		const Colorf& mul = Colorf(1, 1, 1, 1), 
+		const Colorf& add = Colorf(0, 0, 0, 0),
+		const Colorf& r_trans = Colorf(1, 0, 0, 0),
+		const Colorf& g_trans = Colorf(0, 1, 0, 0),
+		const Colorf& b_trans = Colorf(0, 0, 1, 0),
+		const ISprite* sprite = NULL) const;
+	virtual Rect GetSize(const ISprite* sprite = NULL) const;
 
-		Image* getImage() const { return m_image; }
+	unsigned int GetTexID() const;
 
-		void setRegion(const Rect& region) { m_region = region; }
+	Image* getImage() const { return m_image; }
 
-	protected:
-		virtual void LoadResources();
+	void setRegion(const Rect& region) { m_region = region; }
 
-	protected:
-		Image* m_image;
+protected:
+	virtual void LoadResources();
 
-		Rect m_region;
+private:
+	void InitRegion();
 
-	}; // ImageSymbol
+protected:
+	Image* m_image;
+
+	Rect m_region;
+
+}; // ImageSymbol
+
 }
 
+#endif // _DRAG2D_IMAGE_SYMBOL_H_

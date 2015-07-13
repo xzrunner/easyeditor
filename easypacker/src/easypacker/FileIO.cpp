@@ -312,25 +312,26 @@ void FileIO::storeTexpackerPosition(const char* filename)
 		} 
 		else 
 		{
-			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->GetSymbol()).getImage();
-			Json::Value val;
-			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->GetFilepath()).ToStdString();
-			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
-			val["trimmed"] = true;
-			val["sourceSize"]["w"] = img->GetOriginWidth();
-			val["sourceSize"]["h"] = img->GetOriginHeight();
-
-			d2d::Rect r = img->GetClippedRegion();
-			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
-			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
-			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->GetOriginWidth();
-			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.yMax + 0.5f * img->GetOriginHeight());
-			
-			const d2d::Vector& pos = sprite->GetPosition();
-			val["frame"]["x"] = pos.x + r.xMin;
-			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.yMax);
-
-			value["frames"][i] = val;
+			// todo
+// 			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->GetSymbol()).getImage();
+// 			Json::Value val;
+// 			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->GetFilepath()).ToStdString();
+// 			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
+// 			val["trimmed"] = true;
+// 			val["sourceSize"]["w"] = img->GetOriginWidth();
+// 			val["sourceSize"]["h"] = img->GetOriginHeight();
+// 
+// 			d2d::Rect r = img->GetClippedRegion();
+// 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
+// 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
+// 			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->GetOriginWidth();
+// 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.yMax + 0.5f * img->GetOriginHeight());
+// 			
+// 			const d2d::Vector& pos = sprite->GetPosition();
+// 			val["frame"]["x"] = pos.x + r.xMin;
+// 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.yMax);
+// 
+// 			value["frames"][i] = val;
 		}
 	}
 

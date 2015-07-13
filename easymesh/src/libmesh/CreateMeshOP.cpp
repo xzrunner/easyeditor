@@ -94,7 +94,7 @@ bool CreateMeshOP::OnDraw() const
 	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
  	{
 		d2d::Matrix mt;
-		image->Draw(mt, image->GetClippedRegion());
+		image->Draw(mt);
  	}
 
 	if (Shape* shape = m_stage->GetShape())

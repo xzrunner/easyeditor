@@ -12,7 +12,7 @@ class Texture
 {
 public:
 	Texture();
-	Texture(const uint8_t* pixel, int width, int height);
+//	Texture(const uint8_t* pixel, int width, int height);
 	~Texture();
 	
 	const std::string& GetFilepath() const { return m_filepath; }
@@ -23,7 +23,13 @@ public:
 	const uint8_t* GetPixelData() const { return m_pixels; }
 
 	void LoadFromFile(const std::string& filepath);
+	void LoadFromMemory(const uint8_t* pixels, int w, int h, int c, int f);
 	void Reload();
+
+	// todo for key
+	void SetFilepath(const std::string& filepath) {
+		m_filepath = filepath;
+	}
 
 private:
 	std::string m_filepath;

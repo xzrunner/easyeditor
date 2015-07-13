@@ -87,12 +87,11 @@ Insert(d2d::ImageSprite& img) const
 	}
 
 	d2d::TPNode* n = NULL;
-	d2d::Rect r = img.GetSymbol().getImage()->GetClippedRegion();
 	d2d::Image* image = img.GetSymbol().getImage();
-	int w = r.xLength();
-	int h = r.yLength();
+	int w = image->GetClippedWidth(),
+		h = image->GetClippedHeight();
 	float scale = 1.0f;
-	if (m_root->IsRoomEnough(r.xLength(), r.yLength())) {
+	if (m_root->IsRoomEnough(w, h)) {
 		n = m_root->Insert(w*scale+PADDING*2, h*scale+PADDING*2);		
 	} else {
 		n = m_root->Insert(h*scale+PADDING*2, w*scale+PADDING*2);
@@ -102,8 +101,8 @@ Insert(d2d::ImageSprite& img) const
 		return false;
 	} else {
 		d2d::Vector pos;
-		pos.x = n->GetCenterX() - r.xCenter();
-		pos.y = n->GetCenterY() - r.yCenter();
+		pos.x = n->GetCenterX();
+		pos.y = n->GetCenterY();
 		float angle = n->IsRotated() ? d2d::PI*0.5f : 0;
 		img.SetTransform(pos, angle);
 		return true;

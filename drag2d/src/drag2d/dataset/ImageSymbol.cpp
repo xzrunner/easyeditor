@@ -21,7 +21,7 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 	m_image->Retain();
 
 	m_filepath = filename;
-	m_region = image->GetClippedRegion();
+	InitRegion();
 }
 
 ImageSymbol::~ImageSymbol()
@@ -51,7 +51,7 @@ void ImageSymbol::Draw(const Matrix& mt,
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
 	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);	
-	m_image->Draw(mt, m_region, sprite);
+	m_image->Draw(mt, sprite);
 }
 
 Rect ImageSymbol::GetSize(const ISprite* sprite/* = NULL*/) const
@@ -69,7 +69,20 @@ void ImageSymbol::LoadResources()
 	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
 
-	m_region = m_image->GetClippedRegion();
+	InitRegion();
+}
+
+void ImageSymbol::InitRegion()
+{
+	float hw = m_image->GetClippedWidth() * 0.5f,
+		hh = m_image->GetClippedHeight() * 0.5f;
+	float dx = m_image->GetOffset().x,
+		dy = m_image->GetOffset().y;
+
+	m_region.xMin = -hw + dx;
+	m_region.xMax =  hw + dx;
+	m_region.yMin = -hh + dy;
+	m_region.yMax =  hh + dy;
 }
 
 } // d2d

@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "ISymbol.h"
 #include "SymbolMgr.h"
+#include "ImageLoader.h"
 
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
@@ -10,6 +11,8 @@
 
 #include <gl/gl.h>
 #include <wx/filename.h>
+
+#include <easyimage.h>
 
 namespace d2d
 {
@@ -99,29 +102,24 @@ unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
 	return rgb;
 }
 
-void Bitmap::GetImage(const std::string& filepath, wxImage& image)
+void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 {
-	wxImage totimg;
-	totimg.LoadFile(filepath);
+	int w, h, c, f;
+	const uint8_t* pixels = ImageLoader::loadData(filepath, w, h, c, f);
+	eimage::ImageTrimRaw trim(pixels, w, h);
+	Rect trim_r = trim.Trim();
+	delete[] pixels;
 
-	Image* pImage = ImageMgr::Instance()->GetItem(filepath);
-	Rect rect = pImage->GetClippedRegion();
-	// not cache
-	pImage->Release();
-
-	float w = totimg.GetWidth();
-	float h = totimg.GetHeight();
-	// invert y
-	float offset = rect.yCenter() * 2;
-	rect.translate(Vector(w*0.5f, h*0.5f));
+	wxImage wx_img;
+	wx_img.LoadFile(filepath);
 
 	wxRect wx_rect;
-	wx_rect.SetLeft(rect.xMin);
-	wx_rect.SetRight(rect.xMax - 1);
-	wx_rect.SetTop(rect.yMin - offset);
-	wx_rect.SetBottom(rect.yMax - offset - 1);
+	wx_rect.SetLeft(trim_r.xMin);
+	wx_rect.SetRight(trim_r.xMax - 1);
+	wx_rect.SetTop(h - trim_r.yMax);
+	wx_rect.SetBottom(h - trim_r.yMin);
 
-	image = totimg.GetSubImage(wx_rect);
+	dst_img = wx_img.GetSubImage(wx_rect);
 }
 
 wxBitmap* Bitmap::GetBitmap(const wxImage& image)
