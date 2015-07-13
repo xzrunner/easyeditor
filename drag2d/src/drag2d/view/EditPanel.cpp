@@ -5,6 +5,7 @@
 #include "view/Camera.h"
 #include "view/IStageCanvas.h"
 #include "view/Frame.h"
+#include "view/ExceptionDlg.h"
 
 #include <fstream>
 
@@ -23,6 +24,8 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_canvas = NULL;
 	m_camera = new Camera;
 	SetFocus();		// For OnMouseWheelRotation
+
+	memset(&m_keys_state[0], 0, sizeof(m_keys_state));
 }
 
 EditPanel::~EditPanel()
@@ -119,12 +122,18 @@ void EditPanel::OnMouse(wxMouseEvent& event)
 
 void EditPanel::OnKeyDown(wxKeyEvent& event)
 {
+	int key_code = event.GetKeyCode();
+	if (key_code >= 512) {
+		ExceptionDlg dlg(this, "EditPanel::OnKeyDown key over 512");
+		dlg.ShowModal();
+	}
+	m_keys_state[key_code] = !m_keys_state[key_code];
+
 	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL))
 		Undo();
 	else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL))
 		Redo();
 
-	int key_code = event.GetKeyCode();
 	switch (key_code) {
 	case WXK_F5:
 		{
@@ -146,8 +155,11 @@ void EditPanel::OnKeyDown(wxKeyEvent& event)
 
 void EditPanel::OnKeyUp(wxKeyEvent& event)
 {
+	int key_code = event.GetKeyCode();
+	m_keys_state[key_code] = !m_keys_state[key_code];
+
 	if (m_edit_op) {
-		m_edit_op->OnKeyUp(event.GetKeyCode());
+		m_edit_op->OnKeyUp(key_code);
 	}
 }
 

@@ -12,6 +12,7 @@ class ExceptionDlg : public BaseDialog
 {
 public:
 	ExceptionDlg(wxWindow* parent, const Exception& exp);
+	ExceptionDlg(wxWindow* parent, const std::string& msg);
 
 private:
 	void InitLayout(const char* msg);

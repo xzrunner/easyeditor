@@ -68,6 +68,8 @@ public:
 
 	void SetCanvasDirty();
 
+	bool GetKeyState(int key) const { return m_keys_state[key]; }
+
 protected:
 	void OnSize(wxSizeEvent& event);
 
@@ -86,6 +88,8 @@ protected:
 
 private:
 	HistoryList m_history_list;
+
+	bool m_keys_state[512];
 
 	DECLARE_EVENT_TABLE()
 

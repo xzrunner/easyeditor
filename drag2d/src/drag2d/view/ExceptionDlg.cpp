@@ -11,6 +11,12 @@ ExceptionDlg::ExceptionDlg(wxWindow* parent, const Exception& exp)
 	InitLayout(exp.what());
 }
 
+ExceptionDlg::ExceptionDlg(wxWindow* parent, const std::string& msg)
+	: BaseDialog(parent, "Exception", wxDefaultPosition, wxSize(600, 480))
+{
+	InitLayout(msg.c_str());	
+}
+
 void ExceptionDlg::InitLayout(const char* msg)
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
