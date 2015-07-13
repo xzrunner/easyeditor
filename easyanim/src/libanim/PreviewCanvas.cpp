@@ -29,10 +29,11 @@ void PreviewCanvas::OnDrawSprites() const
 
 void PreviewCanvas::OnTimer()
 {
-	if (m_control.frame() < m_symbol->getMaxFrameIndex()) {
-		return;
-	}
+// 	if (m_control.frame() < m_symbol->getMaxFrameIndex()) {
+// 		return;
+// 	}
 
+	m_stage->SetCanvasDirty();
 	if (m_setting.isCirculate) {
 		m_control.reset();
 	}
