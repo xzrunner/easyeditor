@@ -53,7 +53,7 @@ void MeshToolbarPage::InitLayout()
 void MeshToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 {
  	d2d::ZoomViewOP* op = static_cast<d2d::ZoomViewOP*>(m_stage->GetEditOP());
- 	op->setMouseMoveFocus(false);
+ 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Src Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK) {
@@ -62,7 +62,7 @@ void MeshToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 		m_src_dir->SetValue(dir);
 	}
 
-	op->setMouseMoveFocus(true);
+	op->SetMouseMoveFocus(true);
 }
 
 void MeshToolbarPage::OnSaveToFile(wxCommandEvent& event)

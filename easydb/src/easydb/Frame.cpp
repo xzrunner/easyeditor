@@ -75,7 +75,7 @@ void Frame::onConnect(wxCommandEvent& event)
 	d2d::ZoomViewOP* op = dynamic_cast<d2d::ZoomViewOP*>
 		(Context::Instance()->stage->GetEditOP());
 	if (op) {
-		op->setMouseMoveFocus(false);
+		op->SetMouseMoveFocus(false);
 	}
 
 	wxDirDialog dlg(NULL, "Choose directory", wxEmptyString,
@@ -92,7 +92,7 @@ void Frame::onConnect(wxCommandEvent& event)
 	}
 
 	if (op) {
-		op->setMouseMoveFocus(true);
+		op->SetMouseMoveFocus(true);
 	}
 }
 

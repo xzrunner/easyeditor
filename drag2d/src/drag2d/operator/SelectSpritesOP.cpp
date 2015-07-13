@@ -166,7 +166,7 @@ bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 {
 	m_rightFirstScrPos.set(x, y);
 
-	enableRightTap(m_selection->IsEmpty());
+	SetRightPan(m_selection->IsEmpty());
 
 	if (DrawRectangleOP::OnMouseRightDown(x, y)) return true;
 
@@ -184,7 +184,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 		{
 			m_selection->Clear();
 			m_selection->Add(sprite);
-			enableRightTap(m_selection->IsEmpty());
+			SetRightPan(m_selection->IsEmpty());
 
 		}
 	}

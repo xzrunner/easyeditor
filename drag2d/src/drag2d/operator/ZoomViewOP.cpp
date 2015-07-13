@@ -1,34 +1,53 @@
 #include "ZoomViewOP.h"
+#include "ZoomViewState.h"
+#include "PanViewState.h"
 
 #include "view/Camera.h"
-#include "view/IStageCanvas.h"
 #include "common/config.h"
 #include "common/SettingData.h"
 
 namespace d2d
 {
 
-ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
-					   bool bOpenRightTap, bool bOpenLeftTap) 
-	: AbstractEditOP(editPanel)
-	, m_bMouseMoveFocus(bMouseMoveFocus)
-	, m_openRightTap(bOpenRightTap)
-	, m_openLeftTap(bOpenLeftTap)
-	, m_onRightBtnPan(false)
+ZoomViewOP::ZoomViewOP(EditPanel* stage, bool mouse_move_focus,
+					   bool right_tap, bool left_tap) 
+	: AbstractEditOP(stage)
+	, m_mouse_move_focus(mouse_move_focus)
+	, m_open_right_pan(right_tap)
+	, m_open_left_pan(left_tap)
 {
 	const SettingData& setting = Config::Instance()->GetSettings();
-	m_bMouseMoveFocus = setting.auto_get_focus;
+	m_mouse_move_focus = setting.auto_get_focus;
 
-	m_lastPos.setInvalid();
+	m_view_state = new ZoomViewState(stage);
+	m_left_pan_state = new PanViewState(stage);
+	m_right_pan_state = new PanViewState(stage);
+
+	m_op_state = m_view_state;
+}
+
+ZoomViewOP::~ZoomViewOP()
+{
+	delete m_view_state;
+	delete m_left_pan_state;
+	delete m_right_pan_state;
 }
 
 bool ZoomViewOP::OnKeyDown(int keyCode)
 {
-	if (m_openLeftTap && keyCode == WXK_SPACE) {
-		m_stage->SetCursor(wxCURSOR_HAND);
-	} else if (keyCode == WXK_ESCAPE) {
-		Camera* cam = m_stage->GetCamera();
-		cam->Reset();
+	switch (keyCode)
+	{
+	case WXK_SPACE:
+		if (m_open_left_pan) {
+			SwitchState(m_left_pan_state);
+		}
+		break;
+	case WXK_ESCAPE:
+		{
+			Camera* cam = m_stage->GetCamera();
+			cam->Reset();
+		}
+		break;
 	}
 
 	return false;
@@ -36,131 +55,69 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 
 bool ZoomViewOP::OnKeyUp(int keyCode)
 {
-	if (m_openLeftTap && keyCode == WXK_SPACE)
-		m_stage->SetCursor(wxCURSOR_ARROW);
+	if (m_open_left_pan && keyCode == WXK_SPACE) {
+		SwitchState(m_view_state);
+	}
 	return false;
 }
 
 bool ZoomViewOP::OnMouseLeftDown(int x, int y)
 {
-	if (m_openLeftTap)
-		m_lastPos.setInvalid();
-
-	if (m_openLeftTap && wxGetKeyState(WXK_SPACE))
-	{
-		m_lastPos.set(x, y);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return m_op_state->OnMousePress(x, y);
 }
 
 bool ZoomViewOP::OnMouseLeftUp(int x, int y)
 {
-	if (m_openLeftTap && wxGetKeyState(WXK_SPACE))
-	{
-		m_lastPos.setInvalid();
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return m_op_state->OnMouseRelease(x, y);
 }
 
 bool ZoomViewOP::OnMouseRightDown(int x, int y) 
 { 
-	if (m_openRightTap)
-	{
-		m_onRightBtnPan = true;
-		m_lastPos.set(x, y);
-		return true;
+	if (m_open_right_pan) {
+		SwitchState(m_right_pan_state);
 	}
-	else
-	{
-		return false;
-	}
+	return m_op_state->OnMousePress(x, y);
 }
 
 bool ZoomViewOP::OnMouseRightUp(int x, int y) 
 { 
-	if (m_openRightTap)
-	{
-		m_onRightBtnPan = false;
-		m_lastPos.setInvalid();
-		return true;
+	if (m_open_right_pan) {
+		SwitchState(m_view_state);
 	}
-	else
-	{
-		return false;
-	}
+	return m_op_state->OnMouseRelease(x, y);
 }
 
 bool ZoomViewOP::OnMouseMove(int x, int y) 
 {
-	if (m_bMouseMoveFocus) 
+	if (m_mouse_move_focus) {
 		m_stage->SetFocus();
+	}
 
 	return false;
 }
 
 bool ZoomViewOP::OnMouseDrag(int x, int y)
 {
-	if (!m_openLeftTap) return false;
-
-	if (wxGetKeyState(WXK_SPACE) || m_onRightBtnPan)
-	{
-		if (!m_lastPos.isValid())
-			m_lastPos.set(x, y);
-		else
-		{
-			Vector currPos(x, y);
-
-			Vector offset = m_lastPos - currPos;
-			offset.y = -offset.y;
-			m_stage->GetCamera()->Translate(offset);
-
-			m_lastPos = currPos;
-
-			m_stage->SetCanvasDirty();
-		}
-		return true;
-	}
-	else
-	{
-		m_lastPos.setInvalid();
-		return false;
-	}
+	return m_op_state->OnMouseDrag(x, y);
 }
 
 bool ZoomViewOP::OnMouseWheelRotation(int x, int y, int direction) 
 {
-//	if (Settings::bZoomOnlyUseMouseWheel)
-		m_stage->OnMouseWheelRotation(x, y, direction);
-// 	else
-// 		m_stage->OnMouseWheelRotation(m_stage->GetSize().GetWidth() * 0.5f, m_stage->GetSize().GetHeight() * 0.5f, direction);
-
-		m_stage->SetCanvasDirty();
-
-	return false;
+	return m_op_state->OnMouseWheelRotation(x, y, direction);
 }
 
-void ZoomViewOP::enableRightTap(bool enable)
+void ZoomViewOP::SwitchState(IEditOPState* state)
 {
-	if (m_openRightTap == enable)
+	if (state == m_op_state) {
 		return;
-
-	m_openRightTap = enable;
-	if (enable)
-	{
-		m_onRightBtnPan = true;
 	}
-	else
-	{
-		m_onRightBtnPan = false;
-		m_lastPos.setInvalid();
+
+	if (m_op_state) {
+		m_op_state->UnBind();
+	}
+	m_op_state = state;
+	if (m_op_state) {
+		m_op_state->Bind();
 	}
 }
 

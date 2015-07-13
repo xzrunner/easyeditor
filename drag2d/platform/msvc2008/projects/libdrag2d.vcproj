@@ -304,18 +304,6 @@
 					RelativePath="..\..\..\src\drag2d\operator\MousePositionOP.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\NullEditOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\ZoomViewOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\ZoomViewOP.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="paste"
@@ -388,6 +376,50 @@
 					RelativePath="..\..\..\src\drag2d\operator\SelectSpritesOP.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="base"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\IEditOPState.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\NullEditOP.h"
+					>
+				</File>
+				<Filter
+					Name="zoom view"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ZoomViewOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ZoomViewOP.h"
+						>
+					</File>
+					<Filter
+						Name="state"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\operator\PanViewState.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\operator\PanViewState.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\operator\ZoomViewState.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\operator\ZoomViewState.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

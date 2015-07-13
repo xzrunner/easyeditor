@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_ZOOM_VIWE_OP_H_
+#define _DRAG2D_ZOOM_VIWE_OP_H_
 
 #include "AbstractEditOP.h"
 
@@ -6,38 +7,52 @@
 
 namespace d2d
 {
-	class ZoomViewOP : public AbstractEditOP
-	{
-	public:
-		ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
-			bool bOpenRightTap = false, bool bOpenLeftTap = true);
 
-		virtual bool OnKeyDown(int keyCode);
-		virtual bool OnKeyUp(int keyCode);
-		virtual bool OnMouseLeftDown(int x, int y);
-		virtual bool OnMouseLeftUp(int x, int y);
-		virtual bool OnMouseRightDown(int x, int y);
-		virtual bool OnMouseRightUp(int x, int y);
-		virtual bool OnMouseMove(int x, int y);
-		virtual bool OnMouseDrag(int x, int y);
-		virtual bool OnMouseWheelRotation(int x, int y, int direction);
+class IEditOPState;
 
-		void setMouseMoveFocus(bool enable) {
-			m_bMouseMoveFocus = enable;
-		}
+class ZoomViewOP : public AbstractEditOP
+{
+public:
+	ZoomViewOP(EditPanel* stage, bool mouse_move_focus,
+		bool right_tap = false, bool left_tap = true);
+	virtual ~ZoomViewOP();
 
-	protected:
-		void enableRightTap(bool enable);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyUp(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseWheelRotation(int x, int y, int direction);
 
-	private:
-		bool m_bMouseMoveFocus;
-		bool m_onRightBtnPan;
+	void SetMouseMoveFocus(bool enable) {
+		m_mouse_move_focus = enable;
+	}
 
-		Vector m_lastPos;
+protected:
+	void SetRightPan(bool enable) { 
+		m_open_right_pan = enable;
+	}
 
-		bool m_openRightTap;
-		bool m_openLeftTap;
+private:
+	void SwitchState(IEditOPState* state);
 
-	}; // ZoomViewOP
+private:
+	bool m_mouse_move_focus;
+
+	bool m_open_right_pan;
+	bool m_open_left_pan;
+
+	IEditOPState* m_op_state;
+
+	IEditOPState* m_view_state;
+	IEditOPState* m_left_pan_state;
+	IEditOPState* m_right_pan_state;
+
+}; // ZoomViewOP
+
 }
 
+#endif // _DRAG2D_ZOOM_VIWE_OP_H_

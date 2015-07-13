@@ -106,7 +106,7 @@ void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 {
 	d2d::ZoomViewOP* op = static_cast<d2d::ZoomViewOP*>(m_stage->GetEditOP());
-	op->setMouseMoveFocus(false);
+	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Template Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK) {
@@ -115,7 +115,7 @@ void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 		m_ctrl->GetAnimTemplate().SetTemplateDir(dir.ToStdString());
 	}
 
-	op->setMouseMoveFocus(true);
+	op->SetMouseMoveFocus(true);
 }
 
 } // eanim

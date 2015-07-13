@@ -174,7 +174,7 @@ wxSizer* RectCutCMPT::initAddRectLayout()
 void RectCutCMPT::onSetImagesPath(wxCommandEvent& event)
 {
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	op->setMouseMoveFocus(false);
+	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Images Path", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK)
@@ -182,13 +182,13 @@ void RectCutCMPT::onSetImagesPath(wxCommandEvent& event)
 		m_imagePath->SetValue(dlg.GetPath());
 	}
 
-	op->setMouseMoveFocus(true);
+	op->SetMouseMoveFocus(true);
 }
 
 void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
 {
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	op->setMouseMoveFocus(false);
+	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Json Path", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK)
@@ -196,7 +196,7 @@ void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
 		m_jsonPath->SetValue(dlg.GetPath());
 	}
 
-	op->setMouseMoveFocus(true);
+	op->SetMouseMoveFocus(true);
 }
 
 void RectCutCMPT::onOutputData(wxCommandEvent& event)
