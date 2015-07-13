@@ -53,7 +53,7 @@ Symbol* Symbol::Clone() const
 void Symbol::ReloadTexture() const
 {
 	if (m_image) {
-		m_image->Reload();
+		m_image->ReloadTexture();
 	}
 }
 

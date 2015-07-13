@@ -16,16 +16,6 @@ Texture::Texture()
 {
 }
 
-// Texture::Texture(const uint8_t* pixel, int width, int height)
-// 	: m_texid(0)
-// 	, m_channels(0)
-// 	, m_width(width)
-// 	, m_height(height)
-// 	, m_pixels(pixel)
-// {
-// 	ImageLoader::loadTexture(m_texid, m_pixels, m_width, m_height, m_channels, GL_RGBA);
-// }
-
 Texture::~Texture()
 {
 	glDeleteTextures(1, &m_texid);
@@ -36,7 +26,8 @@ Texture::~Texture()
 void Texture::LoadFromFile(const std::string& filepath)
 {
 	m_filepath = filepath;
-	Reload();
+	m_pixels = ImageLoader::loadTexture(m_filepath, m_width, m_height, m_texid, m_channels);
+	m_format = GL_RGBA;
 }
 
 void Texture::LoadFromMemory(const uint8_t* pixels, int w, int h, int c, int f)
@@ -46,13 +37,15 @@ void Texture::LoadFromMemory(const uint8_t* pixels, int w, int h, int c, int f)
 	m_width = w;
 	m_height = h;
 	m_channels = c;
+	m_format = f;
 
-	ImageLoader::loadTexture(m_texid, m_pixels, m_width, m_height, m_channels, f);
+//	ImageLoader::loadTexture(m_texid, m_pixels, m_width, m_height, m_channels, m_format);
+	Reload();
 }
 
 void Texture::Reload()
 {
-	m_pixels = ImageLoader::loadTexture(m_filepath, m_width, m_height, m_texid, m_channels);
+	ImageLoader::loadTexture(m_texid, m_pixels, m_width, m_height, m_channels, m_format);
 }
 
 }

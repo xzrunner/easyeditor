@@ -26,7 +26,7 @@ Icon::~Icon()
 void Icon::ReloadTexture() const
 {
 	if (m_img) {
-		m_img->Reload();
+		m_img->ReloadTexture();
 	}
 }
 

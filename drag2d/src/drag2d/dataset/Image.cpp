@@ -65,7 +65,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 	return true;
 }
 
-void Image::Reload()
+void Image::ReloadTexture()
 {
 	m_tex.Reload();
 }

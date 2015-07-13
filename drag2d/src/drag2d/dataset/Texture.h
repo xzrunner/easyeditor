@@ -36,10 +36,10 @@ private:
 
 	unsigned int m_texid;
 
-	int m_channels;
-	int m_width, m_height;
-
 	const uint8_t* m_pixels;
+	int m_width, m_height;
+	int m_channels;
+	int m_format;
 
 }; // Texture
 

@@ -21,7 +21,7 @@ public:
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);
-	void Reload();
+	void ReloadTexture();
 
 	const std::string& GetFilepath() const { return m_tex.GetFilepath(); }
 	unsigned int GetTexID() const { return m_tex.GetTexID(); }

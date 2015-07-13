@@ -37,7 +37,7 @@ ImageSymbol* ImageSymbol::Clone() const
 
 void ImageSymbol::ReloadTexture() const
 {
-	m_image->Reload();
+	m_image->ReloadTexture();
 }
 
 void ImageSymbol::Draw(const Matrix& mt,
