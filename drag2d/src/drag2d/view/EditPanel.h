@@ -13,7 +13,6 @@ class AbstractAtomicOP;
 class AbstractEditOP;
 class IStageCanvas;
 class Camera;
-class IRefreshMonitor;
 
 class EditPanel : public wxPanel
 {

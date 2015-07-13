@@ -33,6 +33,9 @@ public:
 private:
 	void clearClipboard();
 
+	void PasteToSelection() const;
+	void CopyFromSelection();
+
 protected:
 	Vector m_firstPos;
 
@@ -53,7 +56,7 @@ private:
 
 	MultiShapesImpl* m_shapeImpl;
 
-	std::vector<IShape*> m_clipboard;
+	mutable std::vector<IShape*> m_clipboard;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;

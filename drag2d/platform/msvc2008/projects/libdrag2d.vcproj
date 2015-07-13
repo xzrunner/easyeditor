@@ -1981,10 +1981,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\view\IRefreshMonitor.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.cpp"
 					>
 				</File>

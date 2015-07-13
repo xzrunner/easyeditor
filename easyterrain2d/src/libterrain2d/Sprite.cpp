@@ -56,7 +56,7 @@ void Sprite::SetSymbol(d2d::ISymbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	d2d::ISprite::load(val);
+	d2d::ISprite::Load(val);
 //	rotate(-m_symbol->GetOceanAngle());
 }
 

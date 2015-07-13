@@ -1,6 +1,5 @@
 #include "EditPanel.h"
 #include "HistoryList.h"
-#include "IRefreshMonitor.h"
 
 #include "operator/AbstractEditOP.h"
 #include "view/Camera.h"
@@ -19,7 +18,6 @@ END_EVENT_TABLE()
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
 	, m_frame(frame)
-	, m_refresh_monitor(NULL)
 {
 	m_edit_op = NULL;
 	m_canvas = NULL;
@@ -38,10 +36,10 @@ EditPanel::~EditPanel()
 	}
 }
 
-void EditPanel::Refresh(bool eraseBackground, const wxRect* rect)
+void EditPanel::Clear()
 {
-	if (m_refresh_monitor) {
-		m_refresh_monitor->OnRefresh();
+	if (m_edit_op) {
+		m_edit_op->Clear();
 	}
 
 	m_history_list.clear();

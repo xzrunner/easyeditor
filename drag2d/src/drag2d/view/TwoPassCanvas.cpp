@@ -10,7 +10,6 @@ namespace d2d
 
 TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
 	: OnePassCanvas(stage)
-	, m_dirty(true)
 {
 }
 

@@ -22,7 +22,7 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, LibraryPanel* library)
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
-	editPanel->SetDropTarget(new SpriteDropTarget(this, editPanel, libraryPanel));
+	m_stage->SetDropTarget(new SpriteDropTarget(this, stage, library));
 
 	m_container = new SpritesContainer;
 }

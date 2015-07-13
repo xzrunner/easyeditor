@@ -314,7 +314,7 @@ void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center,
 		height = 1;
 	}
 
-	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->getSymbol());
+	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->GetSymbol());
 	int w = symbol.getImage()->GetOriginWidth(),
 		h = symbol.getImage()->GetOriginHeight();
 	assert(w != 0 && h != 0);
