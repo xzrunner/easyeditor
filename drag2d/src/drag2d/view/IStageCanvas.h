@@ -34,6 +34,8 @@ public:
 	void SetDirty() { m_dirty = true; }
 	bool IsDirty() const { return m_dirty; }
 
+	void SetCamDirty() { m_cam_dirty = true; }
+
 protected:
 	virtual void InitGL();
 	virtual void OnSize(int w, int h) = 0;
@@ -77,6 +79,7 @@ private:
 	bool m_inited;
 
 	bool m_dirty;
+	bool m_cam_dirty;
 
 	wxTimer m_timer;
 

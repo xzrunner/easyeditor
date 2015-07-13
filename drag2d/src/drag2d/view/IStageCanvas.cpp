@@ -34,6 +34,8 @@ IStageCanvas::IStageCanvas(EditPanel* stage)
 	, m_screen(stage->GetCamera())
  	, m_width(0), m_height(0)
  	, m_inited(false)
+	, m_dirty(false)
+	, m_cam_dirty(false)
  	, m_context(new wxGLContext(this))
 	, m_timer(this, TIMER_ID)
 	, m_version(0)
@@ -111,6 +113,7 @@ void IStageCanvas::OnPaint(wxPaintEvent& event)
 
 	OnDrawWhole();
 	m_dirty = false;
+	m_cam_dirty = false;
 
 	glFlush();
 	SwapBuffers();
@@ -154,7 +157,7 @@ void IStageCanvas::OnTimer(wxTimerEvent& event)
 		m_dirty = dirty;
 	}
 
-	if (IsDirty()) {
+	if (m_dirty || m_cam_dirty) {
 		Refresh();
 	}
 }
