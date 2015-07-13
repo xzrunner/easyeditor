@@ -56,7 +56,9 @@ void SpriteShader::Load()
 
 	InitBuffers();
 
-	m_vb = new float[m_vertex_size * m_max_commbine];
+	if (!m_vb) {
+		m_vb = new float[m_vertex_size * m_max_commbine];
+	}
 }
 
 void SpriteShader::Unload()
