@@ -44,18 +44,18 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 {
 	if (DrawRectangleOP::OnKeyDown(keyCode)) return true;
 
-	if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
+	if (m_stage->GetKeyState(WXK_CONTROL) && m_stage->GetKeyState(WXK_CONTROL_X))
 	{
 		PasteToSelection();
 		m_spritesImpl->ClearSpriteSelection();
 		return true;
 	}
-	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		PasteToSelection();
 		return true;
 	}
-	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'v' || keyCode == 'V'))
 	{
 		CopyFromSelection();
 		return true;
