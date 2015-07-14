@@ -22,12 +22,12 @@ ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name,
 
 void ILibraryPage::Clear()
 {
-	m_list->clear();
+	m_list->Clear();
 }
 
 void ILibraryPage::Traverse(IVisitor& visitor) const
 {
-	m_list->traverse(visitor);
+	m_list->Traverse(visitor);
 }
 
 ListItem* ILibraryPage::GetItem(int index/* = -1*/) const
@@ -47,7 +47,7 @@ void ILibraryPage::ReloadTexture() const
 
 void ILibraryPage::AddItem(ListItem* item)
 {
-	m_list->insert(item);
+	m_list->Insert(item);
 	if (m_canvas) {
 		m_canvas->ResetViewport();
 	}
@@ -80,7 +80,9 @@ void ILibraryPage::OnAddPress(wxCommandEvent& event)
 
 void ILibraryPage::OnDelPress(wxCommandEvent& event)
 {
-	m_list->remove();
+	const ListItem* item = m_list->GetSelected();
+	m_list->Remove();
+	item->Release();
 }
 
 void ILibraryPage::InitButtons(wxSizer* sizer)
@@ -109,7 +111,7 @@ bool ILibraryPage::LoadFromConfig(const std::string& key)
 	{
 		std::string filename = filenames[i];
 		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
-		m_list->insert(symbol);
+		m_list->Insert(symbol);
 		symbol->Release();
 		ret = true;
 	}

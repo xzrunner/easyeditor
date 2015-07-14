@@ -9,7 +9,7 @@ namespace d2d
 	public:
 		LibraryFontBlankList(ILibraryPage* page);
 
-		virtual void onListDoubleClicked(wxCommandEvent& event);
+		virtual void OnListDoubleClicked(wxCommandEvent& event);
 
 	}; // LibraryFontBlankList
 }

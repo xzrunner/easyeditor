@@ -7,11 +7,11 @@ namespace d2d
 {
 
 LibraryFontBlankList::LibraryFontBlankList(ILibraryPage* page)
-	: LibraryList(page, wxT("fontblank"))
+	: LibraryList(page, "fontblank")
 {
 }
 
-void LibraryFontBlankList::onListDoubleClicked(wxCommandEvent& event)
+void LibraryFontBlankList::OnListDoubleClicked(wxCommandEvent& event)
 {
 	FontBlankDialog dlg(this, static_cast<FontBlankSymbol*>(m_items[event.GetInt()]));
 	dlg.ShowModal();

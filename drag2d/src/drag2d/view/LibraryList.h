@@ -12,8 +12,8 @@ class ILibraryPage;
 class LibraryList : public VerticalImageList
 {
 public:
-	LibraryList(ILibraryPage* page, const wxString& filter = wxT("symbol"),
-		bool draggable = true);
+	LibraryList(ILibraryPage* page, const std::string& filter 
+		= std::string("symbol"), bool draggable = true);
 
 	ListItem* getItem(int index = -1) const;
 	ISymbol* getSymbol(int index = -1) const;

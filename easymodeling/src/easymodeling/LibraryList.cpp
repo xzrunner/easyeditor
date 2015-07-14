@@ -11,7 +11,7 @@ LibraryList::LibraryList(d2d::ILibraryPage* page)
 {
 }
 
-void LibraryList::onListDoubleClicked(wxCommandEvent& event)
+void LibraryList::OnListDoubleClicked(wxCommandEvent& event)
 {
 	// todo
 

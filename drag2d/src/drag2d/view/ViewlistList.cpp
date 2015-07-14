@@ -14,12 +14,12 @@ ViewlistList::ViewlistList(ViewlistPanel* panel)
 {
 }
 
-void ViewlistList::onListSelected(wxCommandEvent& event)
+void ViewlistList::OnListSelected(wxCommandEvent& event)
 {
 	m_panel->OnSelected(event.GetInt());
 }
 
-void ViewlistList::onListDoubleClicked(wxCommandEvent& event)
+void ViewlistList::OnListDoubleClicked(wxCommandEvent& event)
 {
 	m_panel->OnSelected(event.GetInt());
 }

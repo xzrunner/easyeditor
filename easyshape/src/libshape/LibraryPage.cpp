@@ -9,7 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ILibraryPage(parent, wxT("Shape"))
 {
 	InitLayout();
-	m_list->setFileter(FILE_TAG);
+	m_list->SetFileter(FILE_TAG);
 }
 
 bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
@@ -32,7 +32,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			try {
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(filepath);
-				m_list->insert(symbol);
+				m_list->Insert(symbol);
 				symbol->Release();
 			} catch (d2d::Exception& e) {
 				d2d::ExceptionDlg dlg(m_parent, e);

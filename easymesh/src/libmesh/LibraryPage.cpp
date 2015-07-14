@@ -9,7 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Mesh"))
 {
 	InitLayout();
-	m_list->setFileter(emesh::FILE_TAG);
+	m_list->SetFileter(emesh::FILE_TAG);
 }
 
 bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const

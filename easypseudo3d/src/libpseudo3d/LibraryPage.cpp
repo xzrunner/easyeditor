@@ -8,7 +8,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Template"))
 {
 	InitLayout();
-	m_list->setFileter(FILE_TAG);
+	m_list->SetFileter(FILE_TAG);
 }
 
 bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const

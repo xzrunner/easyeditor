@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_VERTICAL_IMAGE_LIST_H_
+#define _DRAG2D_VERTICAL_IMAGE_LIST_H_
 
 #include <wx/wx.h>
 #include <wx/vlbox.h>
@@ -6,54 +7,54 @@
 
 namespace d2d
 {
-	class ListItem;
-	class IVisitor;
 
-	class VerticalImageList : public wxVListBox
-	{
-	public:
-		VerticalImageList(wxWindow* parent, const wxString& name = wxEmptyString,
-			bool draggable = true);
-		virtual ~VerticalImageList();
+class ListItem;
+class IVisitor;
 
-		// VerticalImageList
-		virtual void onListSelected(wxCommandEvent& event) {}
-		virtual void onListDoubleClicked(wxCommandEvent& event) {}
+class VerticalImageList : public wxVListBox
+{
+public:
+	VerticalImageList(wxWindow* parent, const std::string& name,
+		bool draggable = true);
+	virtual ~VerticalImageList();
 
-		void traverse(IVisitor& visitor) const;
+	// VerticalImageList
+	virtual void OnListSelected(wxCommandEvent& event) {}
+	virtual void OnListDoubleClicked(wxCommandEvent& event) {}
 
-		void clear();
-		void insert(ListItem* item);
-		void insertFront(ListItem* item);
-		void remove();
-		void remove(int index);
+	void Traverse(IVisitor& visitor) const;
 
-		void swap(int i0, int i1);
+	void Clear();
+	void Insert(ListItem* item);
+	void InsertFront(ListItem* item);
+	void Remove();
+	void Remove(int index);
+	void Swap(int i0, int i1);
 
-		void setFileter(const std::string& filter) {
-			m_name = filter;
-		}
+	void SetFileter(const std::string& filter) {
+		m_name = filter;
+	}
 
-	protected:
-		// wxVListBox
-		virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
+	const ListItem* GetSelected() const;
+
+protected:
+	// wxVListBox
+	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
 //		virtual void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const;
-		virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const;
-		virtual wxCoord OnMeasureItem(size_t n) const;
+	virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const;
+	virtual wxCoord OnMeasureItem(size_t n) const;
 
-	private:
-		void onDragInit(wxMouseEvent& event);
+private:
+	void OnDragInit(wxMouseEvent& event);
 
-	private:
-		static const int SPACE_UP = 5;
-		static const int SPACE_DOWN = 25;
+protected:
+	std::vector<ListItem*> m_items;
 
-	protected:
-		std::vector<ListItem*> m_items;
+private:
+	std::string m_name;
 
-	private:
-		wxString m_name;
+}; // VerticalImageList
 
-	}; // VerticalImageList
 }
 
+#endif // _DRAG2D_VERTICAL_IMAGE_LIST_H_

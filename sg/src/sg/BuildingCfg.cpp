@@ -217,7 +217,7 @@ void BuildingCfg::InitBuildings(const Json::Value& value,
 
 void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Building*>& buildings)
 {
-	library->GetList()->clear();
+	library->GetList()->Clear();
 
 	int lv = m_stage->GetBaseLevel();
 
@@ -246,7 +246,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 			info->level = level;
 			s->RefreshThumbnail(filepath);
  			s->SetInfo(wxString::FromDouble(info->remain).ToStdString());
-			library->GetList()->insert(s);
+			library->GetList()->Insert(s);
 			s->Release();
 		}
 	}

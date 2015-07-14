@@ -55,7 +55,7 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			try {
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(symbol->GetFilepath());
-				list->insert(symbol);
+				list->Insert(symbol);
 				symbol->Release();
 			} catch (d2d::Exception& e) {
 				throw d2d::Exception("Create symbol %s fail!", item_path.c_str());
@@ -118,7 +118,7 @@ void LibraryPanel::LoadSymbolFromLayer()
  		for ( ; itr != symbol_set.end(); ++itr) {
  			d2d::ISymbol* symbol = *itr;
  			symbol->RefreshThumbnail(symbol->GetFilepath());
- 			page->GetList()->insert(symbol);
+ 			page->GetList()->Insert(symbol);
  		}
 	}
 }

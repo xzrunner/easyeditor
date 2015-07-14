@@ -74,7 +74,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			std::string filepath = filenames[i].ToStdString();
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
-			m_list->insert(symbol);
+			m_list->Insert(symbol);
 			symbol->Release();
 		}
 

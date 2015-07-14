@@ -11,7 +11,7 @@ namespace emodeling
 	public:
 		LibraryList(d2d::ILibraryPage* page);
 
-		virtual void onListDoubleClicked(wxCommandEvent& event);
+		virtual void OnListDoubleClicked(wxCommandEvent& event);
 
 	}; // LibraryPage
 }

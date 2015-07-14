@@ -7,7 +7,11 @@
 namespace d2d
 {
 
-VerticalImageList::VerticalImageList(wxWindow* parent, const wxString& name/* = wxEmptyString*/,
+static const int SPACE_UP = 5;
+static const int SPACE_DOWN = 25;
+
+VerticalImageList::VerticalImageList(wxWindow* parent, 
+									 const std::string& name,
 									 bool draggable /*= true*/)
 	: wxVListBox(parent)
 	, m_name(name)
@@ -15,22 +19,22 @@ VerticalImageList::VerticalImageList(wxWindow* parent, const wxString& name/* = 
 	SetBackgroundColour(wxColour(229, 229, 229));
 	SetSelectionBackground(wxColour(128, 128, 128));
 
-	Connect(GetId(), wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler(VerticalImageList::onListSelected));
-	Connect(GetId(), wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(VerticalImageList::onListDoubleClicked));
+	Connect(GetId(), wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler(VerticalImageList::OnListSelected));
+	Connect(GetId(), wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(VerticalImageList::OnListDoubleClicked));
 
 	if (draggable)
 	{
 		SetDropTarget(new DragTargetNull);
-		Connect(GetId(), wxEVT_MOTION, wxMouseEventHandler(VerticalImageList::onDragInit));
+		Connect(GetId(), wxEVT_MOTION, wxMouseEventHandler(VerticalImageList::OnDragInit));
 	}
 }
 
 VerticalImageList::~VerticalImageList()
 {
-	clear();
+	Clear();
 }
 
-void VerticalImageList::traverse(IVisitor& visitor) const
+void VerticalImageList::Traverse(IVisitor& visitor) const
 {
 	std::vector<ListItem*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)
@@ -41,7 +45,7 @@ void VerticalImageList::traverse(IVisitor& visitor) const
 	}
 }
 
-void VerticalImageList::clear()
+void VerticalImageList::Clear()
 {
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		m_items[i]->Release();
@@ -51,7 +55,7 @@ void VerticalImageList::clear()
 	Refresh(true);
 }
 
-void VerticalImageList::insert(ListItem* item)
+void VerticalImageList::Insert(ListItem* item)
 {
 	item->Retain();
 	m_items.push_back(item);
@@ -60,7 +64,7 @@ void VerticalImageList::insert(ListItem* item)
 	Refresh(true);
 }
 
-void VerticalImageList::insertFront(ListItem* item)
+void VerticalImageList::InsertFront(ListItem* item)
 {
 	item->Retain();
 	m_items.insert(m_items.begin(), item);
@@ -69,12 +73,12 @@ void VerticalImageList::insertFront(ListItem* item)
 	Refresh(true);
 }
 
-void VerticalImageList::remove()
+void VerticalImageList::Remove()
 {
-	remove(GetSelection());
+	Remove(GetSelection());
 }
 
-void VerticalImageList::remove(int index)
+void VerticalImageList::Remove(int index)
 {
 	if (index < 0 || index >= m_items.size())
 		return;
@@ -85,17 +89,24 @@ void VerticalImageList::remove(int index)
 	Refresh(true);
 }
 
-void VerticalImageList::swap(int i0, int i1)
+void VerticalImageList::Swap(int i0, int i1)
 {
 	if (i0 < 0 || i0 >= m_items.size() ||
 		i1 < 0 || i1 >= m_items.size())
 		return;
 
-	ListItem* tmp = m_items[i0];
-	m_items[i0] = m_items[i1];
-	m_items[i1] = tmp;
-
+	std::swap(m_items[i0], m_items[i1]);
 	Refresh(true);
+}
+
+const ListItem* VerticalImageList::GetSelected() const
+{
+	int idx = GetSelection();
+	if (idx >= 0 && idx < m_items.size()) {
+		return m_items[idx];
+	} else {
+		return NULL;
+	}
 }
 
 void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
@@ -158,7 +169,7 @@ wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 	return size;
 }
 
-void VerticalImageList::onDragInit(wxMouseEvent& event)
+void VerticalImageList::OnDragInit(wxMouseEvent& event)
 {
 	if (event.Dragging())
 	{

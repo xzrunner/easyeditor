@@ -74,7 +74,7 @@ bool ViewlistPanel::Remove(ISprite* sprite)
 	if (idx < 0) {
 		return false;
 	}
-	m_list->remove(idx);
+	m_list->Remove(idx);
 	m_sprites.erase(m_sprites.begin() + idx);
 	return true;
 }
@@ -84,7 +84,7 @@ bool ViewlistPanel::Insert(ISprite* sprite)
 //	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
 //  m_sprites.push_back(sprite);
 
-	m_list->insertFront(const_cast<ISymbol*>(&sprite->GetSymbol()));
+	m_list->InsertFront(const_cast<ISymbol*>(&sprite->GetSymbol()));
 	m_sprites.insert(m_sprites.begin(), sprite);
 	return true;
 }
@@ -103,7 +103,7 @@ bool ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 		if (pos >= 0)
 		{
 			std::swap(m_sprites[i], m_sprites[pos]);
-			m_list->swap(i, pos);
+			m_list->Swap(i, pos);
 			m_list->SetSelection(pos);
 			ret = true;
 		}
@@ -114,7 +114,7 @@ bool ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 		if (pos < n)
 		{
 			std::swap(m_sprites[i], m_sprites[pos]);
-			m_list->swap(i, pos);
+			m_list->Swap(i, pos);
 			m_list->SetSelection(pos);
 			ret = true;
 		}
@@ -163,7 +163,7 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 
 void ViewlistPanel::Clear()
 {
-	m_list->clear();
+	m_list->Clear();
 	m_sprites.clear();
 }
 

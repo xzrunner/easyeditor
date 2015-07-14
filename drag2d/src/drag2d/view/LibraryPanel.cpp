@@ -88,7 +88,7 @@ void LibraryPanel::LoadSymbol(d2d::ISymbol* symbol)
 		if (page->IsHandleSymbol(symbol))
 		{
 			symbol->RefreshThumbnail(symbol->GetFilepath());
-			page->GetList()->insert(symbol);
+			page->GetList()->Insert(symbol);
 			break;
 		}
 	}

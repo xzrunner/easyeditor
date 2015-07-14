@@ -183,7 +183,7 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 {
 	std::vector<d2d::ISymbol*> symbols;
 	m_ctrl->GetImagePage()->GetList()->
-		traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
+		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 
 	if (!symbols.empty()) {
 		m_ctrl->ClearAllLayer();

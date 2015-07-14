@@ -11,7 +11,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Complex"))
 {
 	InitLayout();
-	m_list->setFileter(FILE_TAG);
+	m_list->SetFileter(FILE_TAG);
 }
 
 bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
@@ -63,7 +63,7 @@ void LibraryPage::loadFromJsonFile(const std::string& filename)
 {
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
-	m_list->insert(symbol);
+	m_list->Insert(symbol);
 	symbol->Release();
 }
 
@@ -81,7 +81,7 @@ void LibraryPage::loadFromLuaFile(const std::string& filename)
 	parser.getAllSymbols(symbols);
 	for (int i = 0, n = symbols.size(); i < n; ++i)
 		if (IsHandleSymbol(symbols[i]))
-			m_list->insert(symbols[i]);
+			m_list->Insert(symbols[i]);
 }
 
 }

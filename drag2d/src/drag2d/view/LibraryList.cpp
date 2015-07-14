@@ -8,7 +8,7 @@ namespace d2d
 {
 
 LibraryList::LibraryList(ILibraryPage* page,
-						 const wxString& filter/* = wxT("symbol")*/,
+						 const std::string& filter/* = wxT("symbol")*/,
 						 bool draggable /*= true*/)
 	: VerticalImageList(page, filter, draggable)
 {

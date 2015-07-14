@@ -14,7 +14,7 @@ namespace d2d
 		: ILibraryPage(parent, wxT("Scripts"))
 	{
 		InitLayout();
-		m_list->setFileter("scripts");
+		m_list->SetFileter("scripts");
 	}
 
 	bool LibraryScriptsPage::IsHandleSymbol(d2d::ISymbol* symbol) const
@@ -38,7 +38,7 @@ namespace d2d
 					std::string filepath = filenames[i].ToStdString();
 					ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 					symbol->RefreshThumbnail(filepath);
-					m_list->insert(symbol);
+					m_list->Insert(symbol);
 					symbol->Release();
 				} catch (Exception& e) {
 					ExceptionDlg dlg(m_parent, e);

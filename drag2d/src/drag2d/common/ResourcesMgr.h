@@ -62,7 +62,6 @@ inline T* ResourcesMgr<T>::GetItem(const std::string& filename)
 		if (loaded)
 		{
 			m_items.insert(std::make_pair(filename, item));
-			item->Retain();
 			return item;
 		}
 		else

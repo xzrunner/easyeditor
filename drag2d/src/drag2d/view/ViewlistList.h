@@ -13,8 +13,8 @@ class ViewlistList : public VerticalImageList
 public:
 	ViewlistList(ViewlistPanel* panel);
 
-	virtual void onListSelected(wxCommandEvent& event);
-	virtual void onListDoubleClicked(wxCommandEvent& event);
+	virtual void OnListSelected(wxCommandEvent& event);
+	virtual void OnListDoubleClicked(wxCommandEvent& event);
 
 private:
 	void OnKeyDown(wxKeyEvent& event);
