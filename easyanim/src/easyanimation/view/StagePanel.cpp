@@ -42,6 +42,8 @@ void StagePanel::Clear()
 
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
+	MultiSpritesImpl::ReorderSprite(sprite, up);
+
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool ret = frame->Reorder(sprite, up);
 	if (ret) {
@@ -52,6 +54,8 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
+	MultiSpritesImpl::InsertSprite(sprite);
+
 	SpriteUserData* ud = (SpriteUserData*)sprite->GetUserData();
  	int old_layer = m_ctrl->layer(),
  		old_frame = m_ctrl->frame();
@@ -77,6 +81,8 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
+	MultiSpritesImpl::RemoveSprite(sprite);
+
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool success = frame->Remove(sprite);
 	if (success) {
@@ -88,6 +94,8 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 
 bool StagePanel::ClearAllSprite()
 {
+	MultiSpritesImpl::ClearAllSprite();
+
 	bool ret = m_ctrl->ClearAllLayer();
 	m_ctrl->setCurrFrame(-1, -1);
 

@@ -41,6 +41,9 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 		m_panel->OnSelected(curr_idx);
 		m_panel->ReorderSelected(false);
 		break;
+	case WXK_DELETE:
+		m_panel->RemoveSelected();
+		break;
 	}
 }
 

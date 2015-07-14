@@ -37,6 +37,29 @@ void MultiSpritesImpl::SelectMultiSprites(SpriteSelection* selection)
 {
 }
 
+bool MultiSpritesImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
+{
+	return false;
+}
+
+bool MultiSpritesImpl::InsertSprite(ISprite* sprite)
+{
+	m_sprite_selection->Clear();
+	return false;
+}
+
+bool MultiSpritesImpl::RemoveSprite(ISprite* sprite)
+{
+	m_sprite_selection->Clear();
+	return false;
+}
+
+bool MultiSpritesImpl::ClearAllSprite()
+{
+	m_sprite_selection->Clear();
+	return false;
+}
+
 ISprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;

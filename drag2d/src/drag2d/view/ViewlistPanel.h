@@ -34,6 +34,7 @@ public:
 	virtual bool RemoveSprite(ISprite* spr);
 	virtual bool ClearAllSprite() { return false; }
 
+	bool RemoveSelected();
 	bool Remove(ISprite* sprite);
 	bool Insert(ISprite* sprite);
 	bool Reorder(const ISprite* sprite, bool up);

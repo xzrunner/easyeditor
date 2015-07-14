@@ -37,6 +37,8 @@ void StagePanel::Clear()
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
+	d2d::MultiSpritesImpl::InsertSprite(sprite);
+
 	const float edge = EDGE;
 	const d2d::Vector& pos = sprite->GetPosition();
 
@@ -66,6 +68,8 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
+	d2d::MultiSpritesImpl::RemoveSprite(sprite);
+
 	for (size_t i = 0; i < 3; ++i) 
 	{
 		for (size_t j = 0; j < 3; ++j) 
@@ -84,6 +88,8 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 
 bool StagePanel::ClearAllSprite()
 {
+	d2d::MultiSpritesImpl::ClearAllSprite();
+
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j)
 		{

@@ -21,7 +21,6 @@ namespace escale9
 		//
 		// d2d::MultiSpritesImpl interface
 		//
-		virtual bool ReorderSprite(d2d::ISprite* sprite, bool up) { return false; }
 		virtual bool InsertSprite(d2d::ISprite* sprite);
 		virtual bool RemoveSprite(d2d::ISprite* sprite);
 		virtual bool ClearAllSprite();

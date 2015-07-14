@@ -101,6 +101,8 @@ bool StagePanel::Update(int version)
 
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
+	d2d::MultiSpritesImpl::ReorderSprite(sprite, up);
+
 	bool ret = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -121,6 +123,8 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
+	d2d::MultiSpritesImpl::InsertSprite(sprite);
+
 	bool ret = GetCurrLayer()->InsertSprite(sprite);
 
 	if (m_view_panel_mgr) {
@@ -149,6 +153,8 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
+	d2d::MultiSpritesImpl::RemoveSprite(sprite);
+
 	bool ret = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -173,6 +179,8 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 
 bool StagePanel::ClearAllSprite()
 {
+	d2d::MultiSpritesImpl::ClearAllSprite();
+
 	bool ret = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		if (m_layers[i]->ClearSprite()) {

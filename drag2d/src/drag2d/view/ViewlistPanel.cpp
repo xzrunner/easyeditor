@@ -60,6 +60,17 @@ bool ViewlistPanel::RemoveSprite(ISprite* spr)
 	return Remove(spr);
 }
 
+bool ViewlistPanel::RemoveSelected()
+{
+	int idx = m_list->GetSelection();
+	m_list->Remove(idx);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->RemoveSprite(m_sprites[idx], this);
+	}
+	m_sprites.erase(m_sprites.begin() + idx);
+	return true;
+}
+
 bool ViewlistPanel::Remove(ISprite* sprite)
 {
 	int idx = QuerySprIdx(sprite);

@@ -27,13 +27,10 @@ void StagePanel::Clear()
 	d2d::EditPanel::Clear();
 }
 
-bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
-{
-	return false;
-}
-
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
+	d2d::MultiSpritesImpl::InsertSprite(sprite);
+
 	sprite->Retain();
 	m_sprites.push_back(sprite);
 	m_canvas->SetDirty();
@@ -42,6 +39,8 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
+	d2d::MultiSpritesImpl::RemoveSprite(sprite);
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (m_sprites[i] == sprite) {
 			sprite->Release();
@@ -55,6 +54,8 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 
 bool StagePanel::ClearAllSprite()
 {
+	d2d::MultiSpritesImpl::ClearAllSprite();
+
 	bool ret = !m_sprites.empty();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->Release();

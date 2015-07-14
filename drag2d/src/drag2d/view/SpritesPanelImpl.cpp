@@ -34,6 +34,8 @@ SpritesPanelImpl::~SpritesPanelImpl()
 
 bool SpritesPanelImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
+	MultiSpritesImpl::ReorderSprite(sprite, up);
+
 	bool ret = m_container->ResetOrder(sprite, up);
 	if (ret) {
 		m_stage->SetCanvasDirty();
@@ -43,6 +45,8 @@ bool SpritesPanelImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
 
 bool SpritesPanelImpl::InsertSprite(ISprite* sprite)
 {
+	MultiSpritesImpl::InsertSprite(sprite);
+
 	bool ret = m_container->Insert(sprite);
 	if (ret) {
 		m_stage->SetCanvasDirty();
@@ -52,6 +56,8 @@ bool SpritesPanelImpl::InsertSprite(ISprite* sprite)
 
 bool SpritesPanelImpl::RemoveSprite(ISprite* sprite)
 {
+	MultiSpritesImpl::RemoveSprite(sprite);
+
 	bool ret = m_container->Remove(sprite);
 	if (ret) {
 		m_stage->SetCanvasDirty();
@@ -61,6 +67,8 @@ bool SpritesPanelImpl::RemoveSprite(ISprite* sprite)
 
 bool SpritesPanelImpl::ClearAllSprite()
 {
+	MultiSpritesImpl::ClearAllSprite();
+
 	bool ret = m_container->Clear();
 	if (ret) {
 		m_stage->SetCanvasDirty();
