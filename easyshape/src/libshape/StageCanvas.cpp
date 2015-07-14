@@ -38,6 +38,9 @@ void StageCanvas::InitGL()
 	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		symbols[i]->ReloadTexture();
 	}
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 }
 
 void StageCanvas::OnDrawSprites() const

@@ -14,8 +14,12 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->GetSymbol().ReloadTexture();
+	}
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 }
 

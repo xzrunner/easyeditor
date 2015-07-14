@@ -19,7 +19,11 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
+
 	d2d::SymbolMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 }
 
 void PreviewCanvas::OnDrawSprites() const

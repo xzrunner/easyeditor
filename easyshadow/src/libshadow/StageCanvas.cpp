@@ -25,16 +25,13 @@ void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
 
+	m_stage->GetSymbol()->ReloadTexture();
+	for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
+		m_bg_sprites[i]->GetSymbol().ReloadTexture();
+	}
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
-	} else {
-		m_stage->GetSymbol()->ReloadTexture();
-		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-			m_bg_sprites[i]->GetSymbol().ReloadTexture();
-		}
 	}
-
-	ResetViewport();
 }
 
 void StageCanvas::OnDrawSprites() const

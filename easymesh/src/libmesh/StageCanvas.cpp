@@ -14,11 +14,11 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
+
 	m_panel->GetSymbol()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
-	ResetViewport();
 }
 
 void StageCanvas::OnDrawSprites() const

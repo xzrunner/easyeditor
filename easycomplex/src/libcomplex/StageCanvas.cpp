@@ -33,15 +33,11 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
-	m_stage->getSymbol()->ReloadTexture();
-// 		d2d::DynamicTexture::Instance()->ReloadTexture();
-// 		d2d::DynamicFont::Instance()->ReloadTexture();
 
+	m_stage->getSymbol()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
-
-	ResetViewport();
 }
 
 void StageCanvas::OnDrawSprites() const

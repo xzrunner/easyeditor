@@ -24,15 +24,14 @@ StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
 void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
+
 	m_panel->GetSymbol()->ReloadTexture();
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
-	}
 	for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
 		m_bg_sprites[i]->GetSymbol().ReloadTexture();
 	}
-
-	ResetViewport();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 }
 
 void StageCanvas::OnDrawSprites() const

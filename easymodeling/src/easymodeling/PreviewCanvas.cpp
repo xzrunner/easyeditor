@@ -18,11 +18,11 @@ PreviewCanvas::~PreviewCanvas()
 void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
+
 	Context::Instance()->library->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
-	ResetViewport();
 }
 
 void PreviewCanvas::OnDrawSprites() const
