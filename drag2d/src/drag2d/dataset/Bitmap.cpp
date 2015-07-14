@@ -104,22 +104,26 @@ unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
 
 void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 {
-	int w, h, c, f;
-	const uint8_t* pixels = ImageLoader::loadData(filepath, w, h, c, f);
-	eimage::ImageTrimRaw trim(pixels, w, h);
+	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
+	int h = img_data->GetHeight();
+	eimage::ImageTrim trim(*img_data);
 	Rect trim_r = trim.Trim();
-	delete[] pixels;
+	img_data->Release();
 
-	wxImage wx_img;
-	wx_img.LoadFile(filepath);
+	if (trim_r.isValid()) {
+		wxImage wx_img;
+		wx_img.LoadFile(filepath);
 
-	wxRect wx_rect;
-	wx_rect.SetLeft(trim_r.xMin);
-	wx_rect.SetRight(trim_r.xMax - 1);
-	wx_rect.SetTop(h - trim_r.yMax);
-	wx_rect.SetBottom(h - trim_r.yMin);
+		wxRect wx_rect;
+		wx_rect.SetLeft(trim_r.xMin);
+		wx_rect.SetRight(trim_r.xMax - 1);
+		wx_rect.SetTop(h - trim_r.yMax);
+		wx_rect.SetBottom(h - trim_r.yMin);
 
-	dst_img = wx_img.GetSubImage(wx_rect);
+		dst_img = wx_img.GetSubImage(wx_rect);
+	} else {
+		dst_img.LoadFile(filepath);
+	}
 }
 
 wxBitmap* Bitmap::GetBitmap(const wxImage& image)
