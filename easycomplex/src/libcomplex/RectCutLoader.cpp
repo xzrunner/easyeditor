@@ -53,7 +53,9 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	{		
 		const Picture& pic = pictures[i];
 		const uint8_t* pixels = clip.Clip(pic.dst.x, pic.dst.x + pic.dst.w, 1024 - pic.dst.y - pic.dst.h, 1024 - pic.dst.y);
-		d2d::Image* spr_img = new d2d::Image(pixels, pic.dst.w, pic.dst.h, 4);
+
+		d2d::ImageData* img_data = new d2d::ImageData(pixels, pic.dst.w, pic.dst.h, 4);
+		d2d::Image* spr_img = new d2d::Image(img_data);
 		d2d::ImageSymbol* spr_symbol = new d2d::ImageSymbol(spr_img, "test");
 		d2d::ImageSprite* spr_sprite = new d2d::ImageSprite(spr_symbol);
 
@@ -72,6 +74,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 
 		m_stage->InsertSprite(spr_sprite);
 
+		img_data->Release();
 		spr_sprite->Release();
 		spr_symbol->Release();
 		spr_img->Release();

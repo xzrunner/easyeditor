@@ -2,6 +2,7 @@
 #include "Bitmap.h"
 #include "Image.h"
 #include "ISprite.h"
+#include "ImageData.h"
 
 #include "render/Shader.h"
 #include "render/ShaderMgr.h"
@@ -66,8 +67,10 @@ unsigned int ImageSymbol::GetTexID() const
 
 void ImageSymbol::LoadResources()
 {
+	ImageData* img_data = ImageDataMgr::Instance()->GetItem(m_filepath);
 	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
 	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
+	img_data->Release();
 
 	InitRegion();
 }

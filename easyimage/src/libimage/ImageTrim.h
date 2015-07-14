@@ -9,14 +9,17 @@ namespace eimage
 class ImageTrim
 {
 public:
-	ImageTrim(const d2d::Image* image);
+	ImageTrim(const d2d::ImageData& img_data);
 
 	// remove transparent border
 	// return: make to center
 	d2d::Rect Trim() const;
 
 private:
-	const d2d::Image* m_image;
+	bool IsTransparent(int x, int y) const;
+
+private:
+	const d2d::ImageData& m_img_data;
 
 }; // ImageTrim
 

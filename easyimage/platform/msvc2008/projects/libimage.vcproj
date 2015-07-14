@@ -381,14 +381,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libimage\ImageTrimRaw.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageTrimRaw.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libimage\ImageVeritalFlip.cpp"
 				>
 			</File>

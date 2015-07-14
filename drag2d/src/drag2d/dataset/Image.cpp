@@ -1,31 +1,19 @@
 #include "Image.h"
 
-#include "dataset/TPNode.h"
-#include "render/GL10.h"
-#include "render/Shader.h"
-#include "render/ShaderMgr.h"
-//#include "render/DynamicTexture.h"
-#include "render/DynamicTexAndFont.h"
-#include "render/RenderList.h"
 #include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
-#include "common/tools.h"
 #include "common/Exception.h"
-#include "common/Math.h"
 #include "common/Config.h"
-#include "common/SettingData.h"
-#include "common/TodoConfig.h"
 
-#include <fstream>
 #include <easyimage.h>
 #include <wx/filename.h>
 
 namespace d2d
 {
 
-Image::Image(const uint8_t* pixel, int width, int height, int channels)
+Image::Image(ImageData* img_data)
 {
-	m_tex.LoadFromMemory(pixel, width, height, channels, GL_RGBA);
+	m_tex.LoadFromMemory(img_data);
 }
 
 Image::~Image()
@@ -268,37 +256,42 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 
 void Image::LoadWithClip(const std::string& filepath)
 {
-	m_tex.SetFilepath(filepath);
+	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 
-	int w, h, c, f;
-	const uint8_t* pixels = ImageLoader::loadData(filepath, w, h, c, f);
+	m_ori_w = img_data->GetWidth();
+	m_ori_h = img_data->GetHeight();
 
-	m_ori_w = w;
-	m_ori_h = h;
-
-	if (c != 4) 
+	if (img_data->GetChannels() != 4) 
 	{
-		m_tex.LoadFromMemory(pixels, w, h, c, f);
+		m_tex.LoadFromMemory(img_data);
 	} 
 	else 
 	{
-		eimage::ImageTrimRaw trim(pixels, w, h);
+		eimage::ImageTrim trim(*img_data);
 		Rect r = trim.Trim();
+		if (r.xLength() >= img_data->GetWidth() && r.yLength() >= img_data->GetHeight()) {
+			m_tex.LoadFromMemory(img_data);
+		} else {
+			int w = img_data->GetWidth(),
+				h = img_data->GetHeight();
 
-		eimage::ImageClipRaw clip(pixels, w, h, c);
-		const uint8_t* c_pixels = clip.Clip(r);
+			eimage::ImageClipRaw clip(*img_data);
+			const uint8_t* c_pixels = clip.Clip(r);
 
-		eimage::ImageVeritalFlip yflip(c_pixels, r.xLength(), r.yLength());
-		const uint8_t* flip_pixels = yflip.Revert();
+			eimage::ImageVeritalFlip yflip(c_pixels, r.xLength(), r.yLength());
+			const uint8_t* flip_pixels = yflip.Revert();
 
-		m_tex.LoadFromMemory(flip_pixels, r.xLength(), r.yLength(), c, f);
+			img_data->SetContent(flip_pixels, r.xLength(), r.yLength());
+			m_tex.LoadFromMemory(img_data);
 
-		delete[] c_pixels;
-		delete[] pixels;
+			delete[] c_pixels;
 
-		m_offset.x = r.xCenter() - w * 0.5f;
-		m_offset.y = r.yCenter() - h * 0.5f;
+			m_offset.x = r.xCenter() - w * 0.5f;
+			m_offset.y = r.yCenter() - h * 0.5f;
+		}
 	}
+
+	img_data->Release();
 }
 
 } // d2d

@@ -9,17 +9,14 @@ namespace eimage
 class ImageClipRaw
 {
 public:
-	ImageClipRaw(const uint8_t* pixels, int w, int h, int c,
-		bool check_duplicate = false);
+	ImageClipRaw(const d2d::ImageData& img_data, bool check_duplicate = false);
 	~ImageClipRaw();
 
 	const uint8_t* Clip(const d2d::Rect& r) const;
 	const uint8_t* Clip(int xmin, int xmax, int ymin, int ymax) const;
 
 private:
-	const uint8_t* m_pixels;
-	int m_width, m_height;
-	int m_channels;
+	const d2d::ImageData& m_img_data;
 
 	bool* m_check;
 

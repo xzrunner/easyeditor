@@ -50,9 +50,9 @@ void TrimImage::Trigger(const std::string& dir)
 		{
 			std::cout << i << " / " << n << " : " << filepath << "\n";
 
-			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);		
+			d2d::ImageData* img = d2d::ImageMgr::Instance()->GetItem(filepath);		
 
-			eimage::ImageTrim trim(img);
+			eimage::ImageTrim trim(*img);
 			d2d::Rect r = trim.Trim();
 
 			// save info

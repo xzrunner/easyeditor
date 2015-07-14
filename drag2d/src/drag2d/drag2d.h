@@ -37,6 +37,7 @@
 #include "dataset/AbstractBV.h"
 #include "dataset/TPNode.h"
 #include "dataset/text_util.h"
+#include "dataset/ImageData.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"

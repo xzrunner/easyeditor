@@ -8,38 +8,31 @@ typedef unsigned char uint8_t;
 namespace d2d
 {
 
+class ImageData;
+
 class Texture
 {
 public:
 	Texture();
-//	Texture(const uint8_t* pixel, int width, int height);
 	~Texture();
 	
-	const std::string& GetFilepath() const { return m_filepath; }
 	unsigned int GetTexID() const { return m_texid; }
-	int GetChannels() const { return m_channels; }
-	int GetWidth() const { return m_width; }
-	int GetHeight() const { return m_height; }
-	const uint8_t* GetPixelData() const { return m_pixels; }
+
+	const std::string& GetFilepath() const;
+
+	const uint8_t* GetPixelData() const;
+	int GetWidth() const;
+	int GetHeight() const;
+	int GetChannels() const;
 
 	void LoadFromFile(const std::string& filepath);
-	void LoadFromMemory(const uint8_t* pixels, int w, int h, int c, int f);
+	void LoadFromMemory(ImageData* img_data);
 	void Reload();
 
-	// todo for key
-	void SetFilepath(const std::string& filepath) {
-		m_filepath = filepath;
-	}
-
 private:
-	std::string m_filepath;
-
 	unsigned int m_texid;
 
-	const uint8_t* m_pixels;
-	int m_width, m_height;
-	int m_channels;
-	int m_format;
+	ImageData* m_img_data;
 
 }; // Texture
 

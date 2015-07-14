@@ -4,7 +4,7 @@
 #include "Texture.h"
 
 #include "common/ResourcesMgr.h"
-#include "common/Rect.h"
+#include "common/Vector.h"
 #include "common/Object.h"
 
 namespace d2d
@@ -17,7 +17,7 @@ class Image : public Object
 {
 public:
 	Image() {}
-	Image(const uint8_t* pixel, int width, int height, int channels);
+	Image(ImageData* img_data);
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);

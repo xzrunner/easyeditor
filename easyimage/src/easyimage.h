@@ -10,7 +10,7 @@
 #include "libimage/ImageClip.h"
 #include "libimage/ImageClipRaw.h"
 #include "libimage/ImageTrim.h"
-#include "libimage/ImageTrimRaw.h"
+#include "libimage/ImageTrim.h"
 #include "libimage/ImagePack.h"
 #include "libimage/ImageVeritalFlip.h"
 
