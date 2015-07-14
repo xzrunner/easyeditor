@@ -94,13 +94,13 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->GetCanvas();
+		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
 	else
 	{
-		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->GetCanvas();
+		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
 	}
 }
@@ -150,7 +150,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	ss.SaveToFile(filepath);
 
-	m_task->GetEditPanel()->GetCanvas()->ResetInitState();
+	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsSingle(const std::string& filepath) const

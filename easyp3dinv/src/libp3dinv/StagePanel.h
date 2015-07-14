@@ -12,7 +12,7 @@ class ParticleSystem;
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//

@@ -50,7 +50,7 @@ const d2d::EditPanel* Task::GetEditPanel() const
 
 void Task::InitLayout()
 {
-	m_stage = new StagePanel(m_parent, m_parent);
+	m_stage = new StagePanel(m_parent, m_parent, NULL);
 	m_root = m_stage;
 }
 

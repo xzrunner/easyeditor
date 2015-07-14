@@ -50,7 +50,7 @@ void StageCanvas::OnDrawSprites() const
 	DrawBackground();
  	DrawSprites();
  
-  	m_stage->drawEditTemp();
+  	m_stage->DrawEditOP();
 }
 
 void StageCanvas::InitDefaultSymbol()

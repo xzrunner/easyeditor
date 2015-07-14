@@ -33,8 +33,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		const StagePanel* stage = static_cast<const StagePanel*>((m_task)->GetEditPanel());
-		d2d::IStageCanvas* canvas = stage->GetCanvas();
+		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}

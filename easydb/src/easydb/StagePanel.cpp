@@ -10,9 +10,10 @@
 
 using namespace edb;
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
+					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, NULL)
+	, d2d::SpritesPanelImpl(this, library)
 	, d2d::ShapesPanelImpl(this)
 {
 	m_edit_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this);

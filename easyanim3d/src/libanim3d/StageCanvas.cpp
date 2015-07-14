@@ -22,7 +22,7 @@ void StageCanvas::OnDrawSprites() const
 	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
 	DrawBackground();
 	DrawSprites();
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 void StageCanvas::DrawBackground() const

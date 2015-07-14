@@ -65,7 +65,7 @@ int LayersMgr::getFrameCount() const
 	return count;
 }
 
-void LayersMgr::clear()
+bool LayersMgr::clear()
 {
 	bool ret = !m_layers.empty();
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());

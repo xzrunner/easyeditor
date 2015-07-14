@@ -11,7 +11,7 @@ namespace edb
 		public d2d::ShapesPanelImpl
 	{
 	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+		StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 		virtual ~StagePanel();
 
 		//

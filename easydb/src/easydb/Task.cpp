@@ -46,7 +46,7 @@ void Task::initLayout()
 
 	Context* context = Context::Instance();
 
-	StagePanel* stage = context->stage = new StagePanel(splitter, m_parent);
+	StagePanel* stage = context->stage = new StagePanel(splitter, m_parent, NULL);
 	TreeCtrl* tree = context->tree = new TreeCtrl(splitter);
 
 	splitter->SetSashGravity(0.2f);

@@ -188,7 +188,7 @@ void Controller::Clear()
 
 void Controller::Refresh()
 {
-	m_widgets->m_stage->SetCanvasDirty()();
+	m_widgets->m_stage->SetCanvasDirty();
 	m_widgets->m_keysPanel->Refresh(true);
 }
 

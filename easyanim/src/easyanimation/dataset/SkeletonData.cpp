@@ -341,7 +341,7 @@ namespace eanim
 
 		std::set<d2d::ISprite*>::iterator itr = sprites.begin();
 		for ( ; itr != sprites.end(); ++itr)
-			(*itr)->translate(offset);
+			(*itr)->Translate(offset);
 	}
 
 	d2d::ISprite* SkeletonData::getSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name)
