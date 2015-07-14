@@ -118,9 +118,17 @@ wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent
 void GroupTreeCtrl::DelNode()
 {
 	wxTreeItemId id = GetFocusedItem();
-	if (id.IsOk()) {
-		Delete(id);
+	if (!id.IsOk()) {
+		return;
 	}
+
+	std::vector<ISprite*> sprites;
+	Traverse(id, GroupTreeImpl::GetSpritesVisitor(this, sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		m_view_panel_mgr->RemoveSprite(sprites[i], m_parent_panel);
+	}
+
+	Delete(id);
 }
 
 wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
@@ -351,6 +359,9 @@ void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
 		break;
 	case WXK_PAGEDOWN:
 		ReorderItem(m_selected_item, false);
+		break;
+	case WXK_DELETE:
+		DelNode();
 		break;
 	}
 }
