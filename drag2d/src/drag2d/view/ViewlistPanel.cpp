@@ -57,15 +57,7 @@ bool ViewlistPanel::InsertSprite(ISprite* spr)
 
 bool ViewlistPanel::RemoveSprite(ISprite* spr)
 {
-	std::ofstream fout("del_debug.txt", std::ios::app);
-	fout << "ViewlistPanel::RemoveSprite 0" << std::endl;
-
-	bool ret = Remove(spr);
-	fout << "ViewlistPanel::RemoveSprite 1" << std::endl;
-
-	fout.close();
-
-	return ret;
+	return Remove(spr);
 }
 
 bool ViewlistPanel::Remove(ISprite* sprite)

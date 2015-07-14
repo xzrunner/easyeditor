@@ -77,9 +77,6 @@ GroupTreeImpl::RemoveVisitor::
 bool GroupTreeImpl::RemoveVisitor::
 VisitNonleaf(wxTreeItemId id)
 {
-	std::ofstream fout("del_debug.txt", std::ios::app);
-	fout << "GroupTreeImpl::RemoveVisitor::VisitNonleaf 0" << std::endl;
-
 	assert(id.IsOk());
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
@@ -87,21 +84,11 @@ VisitNonleaf(wxTreeItemId id)
 		return false;
 	}
 
-	fout << "GroupTreeImpl::RemoveVisitor::VisitNonleaf 1" << std::endl;
-
-
 	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
-
-	fout << "GroupTreeImpl::RemoveVisitor::VisitNonleaf 2" << std::endl;
-
 	bool finish = group->Remove(m_spr);
 	if (finish) {
 		m_finish = true;
 	}
-
-	fout << "GroupTreeImpl::RemoveVisitor::VisitNonleaf 3" << std::endl;
-
-	fout.close();
 
 	return false;
 }
@@ -109,9 +96,6 @@ VisitNonleaf(wxTreeItemId id)
 bool GroupTreeImpl::RemoveVisitor::
 VisitLeaf(wxTreeItemId id)
 {
-	std::ofstream fout("del_debug.txt", std::ios::app);
-	fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 0" << std::endl;
-
 	if (!id.IsOk()) {
 		return false;
 	}
@@ -121,25 +105,12 @@ VisitLeaf(wxTreeItemId id)
 		return false;
 	}
 
-	fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 1" << std::endl;
-
 	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-
-	fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 2" << std::endl;
-
 	if (spr == m_spr) {
-		delete data;
-		fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 3" << std::endl;
-
 		m_treectrl->Delete(id);
-		fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 4" << std::endl;
-
 		return true;
 	}
 
-	fout << "GroupTreeImpl::RemoveVisitor::VisitLeaf 5" << std::endl;
-
-	fout.close();
 	return false;
 }
 

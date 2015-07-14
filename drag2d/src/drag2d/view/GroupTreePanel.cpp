@@ -63,15 +63,7 @@ bool GroupTreePanel::InsertSprite(ISprite* spr)
 
 bool GroupTreePanel::RemoveSprite(ISprite* spr)
 {
-	std::ofstream fout("del_debug.txt", std::ios::app);
-	fout << "GroupTreePanel::RemoveSprite 0" << std::endl;
-
-	bool finish = m_grouptree->Remove(spr);
-	fout << "GroupTreePanel::RemoveSprite 1" << std::endl;
-
-	fout.close();
-
-	return finish;
+	return m_grouptree->Remove(spr);
 }
 
 void GroupTreePanel::StoreToFile(Json::Value& value) const
