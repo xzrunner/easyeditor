@@ -52,7 +52,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	m_shapeImpl->TraverseShapes(PosQueryVisitor(pos, &selected), d2d::DT_VISIBLE);
 	if (selected)
 	{
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 		{
 			bool isExist = false;
 			for (size_t i = 0, n = m_nodeSelection.size(); i < n && !isExist; ++i)
@@ -105,7 +105,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
-		if (!wxGetKeyState(WXK_CONTROL))
+		if (!m_stage->GetKeyState(WXK_CONTROL))
 			clearSelectedNodes();
 
 	}

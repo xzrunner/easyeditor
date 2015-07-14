@@ -13,12 +13,13 @@ class GroupTreeCtrl;
 class MultiSpritesImpl;
 class ViewPanelMgr;
 class ISprite;
+class KeysState;
 
 class GroupTreePanel : public wxPanel, public ISpriteViewPanel
 {
 public:
 	GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
-		ViewPanelMgr* view_panel_mgr);
+		ViewPanelMgr* view_panel_mgr, const KeysState& key_state);
 
 	//
 	//	interface ISpriteViewPanel

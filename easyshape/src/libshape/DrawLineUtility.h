@@ -10,7 +10,7 @@ class DrawLineUtility
 {
 public:
 
-	static bool IsStraightOpen(const std::vector<d2d::Vector>& lines);
+	static bool IsStraightOpen(const std::vector<d2d::Vector>& lines, const d2d::KeysState& key_state);
 
 	static d2d::Vector FixPosTo8DirStraight(const d2d::Vector& last, const d2d::Vector& curr);
 

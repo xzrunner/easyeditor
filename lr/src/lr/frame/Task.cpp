@@ -114,7 +114,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 	m_library->SetViewlist(m_viewlist);
 	m_view_panel_mgr.AddSpritePanel(m_viewlist);
 
-	m_grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr);
+	m_grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr, m_stage->GetKeyState());
 	m_library->SetGroupTree(m_grouptree);
 	m_view_panel_mgr.AddSpritePanel(m_grouptree);
 

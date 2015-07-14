@@ -41,7 +41,7 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 		m_stage->SetCanvasDirty();
 	if (selected)
 	{
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 		{
 			if (jointSelection.IsExist(selected))
 				jointSelection.Remove(selected);

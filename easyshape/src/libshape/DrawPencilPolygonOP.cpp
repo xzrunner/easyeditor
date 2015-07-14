@@ -22,12 +22,17 @@ bool DrawPencilPolygonOP::OnKeyDown(int keyCode)
 		return true;
 	}
 
-	if (wxGetKeyState(WXK_SHIFT)) {
+	switch (keyCode)
+	{
+	case WXK_SHIFT:
 		m_cmpt->SetSelection("union");
-	} else if (wxGetKeyState(WXK_ALT)) {
+		break;
+	case WXK_ALT:
 		m_cmpt->SetSelection("difference");
-	} else if (wxGetKeyState(WXK_ESCAPE)) {
+		break;
+	case WXK_ESCAPE:
 		m_cmpt->SetSelection("normal");
+		break;
 	}
 
 	return false;

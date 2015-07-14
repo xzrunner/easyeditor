@@ -98,16 +98,18 @@ void KeysContentWidget::onMouse(wxMouseEvent& event)
 
 void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 {
+	d2d::EditPanel* stage = m_ctrl->GetStagePanel();
+
 	int key_code = event.GetKeyCode();
-	if (wxGetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
+	if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
 		m_editop.CopySelection();
-	} else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V)) {
+	} else if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'v' || key_code == 'V')) {
 		m_editop.PasteSelection();
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
-	} else 	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL)) {
+	} else if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
 		m_ctrl->GetStagePanel()->Undo();
-	} else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL)) {
+	} else if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
 		m_ctrl->GetStagePanel()->Redo();
 	}
 }

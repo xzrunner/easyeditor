@@ -156,7 +156,7 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 	m_selected_spr->Retain();
 
 	if (m_view_panel_mgr) {
-		bool add = wxGetKeyState(WXK_CONTROL);
+		bool add = m_stage->GetKeyState(WXK_CONTROL);
 		m_view_panel_mgr->SelectSprite(spr, !add, this);
 	}
 }

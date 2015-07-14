@@ -73,7 +73,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 	if (selected)
 	{
 		assert(selected->editable);
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 		{
 			if (m_selection->IsExist(selected)) {
 				m_selection->Remove(selected);
@@ -86,12 +86,12 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		}
 		else
 		{
-			if (!m_selection->IsExist(selected) && !wxGetKeyState(WXK_SPACE))
+			if (!m_selection->IsExist(selected) && !m_stage->GetKeyState(WXK_SPACE))
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
 				if (m_view_panel_mgr) {
-					bool add = wxGetKeyState(WXK_CONTROL);
+					bool add = m_stage->GetKeyState(WXK_CONTROL);
 					m_view_panel_mgr->SelectSprite(selected, !add, m_spritesImpl);
 				}
 			}
@@ -105,7 +105,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
 			m_selection->Clear();
@@ -128,7 +128,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 	Rect rect(m_firstPos, end);
 	std::vector<ISprite*> sprites;
 	m_spritesImpl->QuerySpritesByRect(rect, m_firstPos.x < end.x, sprites);
-	if (wxGetKeyState(WXK_CONTROL))
+	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 		{
@@ -326,7 +326,7 @@ void SelectSpritesOP::CopyFromSelection()
 		sval = value["sprite"][i++];
 	}
 
-	bool add = wxGetKeyState(WXK_CONTROL);
+	bool add = m_stage->GetKeyState(WXK_CONTROL);
 	m_view_panel_mgr->SelectSprite(last_spr, !add, m_spritesImpl);
 
 	m_stage->GetCanvas()->ResetViewport();

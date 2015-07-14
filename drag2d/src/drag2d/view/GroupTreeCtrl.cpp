@@ -7,6 +7,7 @@
 #include "dataset/Group.h"
 #include "dataset/ISprite.h"
 #include "view/SpriteSelection.h"
+#include "view/KeysState.h"
 
 #include <sstream>
 #include <queue>
@@ -26,13 +27,14 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
-							 ViewPanelMgr* view_panel_mgr)
+							 ViewPanelMgr* view_panel_mgr, const KeysState& key_state)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
 	wxTR_EDIT_LABELS/* | wxTR_MULTIPLE*/ | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
 	, m_parent_panel(parent)
 	, m_sprite_impl(sprite_impl)
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_add_del_open(true)
+	, m_key_state(key_state)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 
@@ -279,7 +281,7 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	Traverse(id, visitor);
 	ISprite* spr = visitor.GetFirstSprite();
 
-	bool add = wxGetKeyState(WXK_CONTROL);
+	bool add = m_key_state.GetKeyState(WXK_CONTROL);
 	m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
@@ -360,7 +362,7 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && !data->IsGroup()) {
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		bool add = wxGetKeyState(WXK_CONTROL);
+		bool add = m_key_state.GetKeyState(WXK_CONTROL);
 		m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
 	}
 }

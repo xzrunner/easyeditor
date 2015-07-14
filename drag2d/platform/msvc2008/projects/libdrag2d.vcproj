@@ -2013,6 +2013,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\KeysState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\KeysState.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.cpp"
 					>
 				</File>

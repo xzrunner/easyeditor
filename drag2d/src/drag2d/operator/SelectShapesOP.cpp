@@ -41,12 +41,12 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		m_shapeImpl->ClearShapeSelection();
 		Clear();
 	}
-	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'x' || keyCode == 'X'))
 	{
 		PasteToSelection();
 		m_shapeImpl->ClearShapeSelection();
 	}
-	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		clearClipboard();
 
@@ -55,7 +55,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_clipboard.push_back(shapes[i]->Clone());
 	}
-	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
+	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'v' || keyCode == 'V'))
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
@@ -76,7 +76,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 	IShape* selected = m_shapeImpl->QueryShapeByPos(pos);
 	if (selected)
 	{
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 		{
 			if (m_selection->IsExist(selected)) {
 				m_selection->Remove(selected);
@@ -109,7 +109,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
 			m_selection->Clear();

@@ -3,9 +3,10 @@
 namespace libshape
 {
 
-bool DrawLineUtility::IsStraightOpen(const std::vector<d2d::Vector>& lines)
+bool DrawLineUtility::IsStraightOpen(const std::vector<d2d::Vector>& lines, 
+									 const d2d::KeysState& key_state)
 {
-	return !lines.empty() && wxGetKeyState(WXK_SHIFT);
+	return !lines.empty() && key_state.GetKeyState(WXK_SHIFT);
 }
 
 d2d::Vector DrawLineUtility::FixPosTo8DirStraight(const d2d::Vector& last, 

@@ -107,7 +107,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(split, m_stage, m_stage, &m_view_panel_mgr);
 	m_view_panel_mgr.AddSpritePanel(viewlist);
 	
-	d2d::GroupTreePanel* grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr);
+	d2d::GroupTreePanel* grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr, m_stage->GetKeyState());
 	m_view_panel_mgr.AddSpritePanel(grouptree);
 
 	split->SetSashGravity(0.5f);

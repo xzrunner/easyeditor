@@ -127,7 +127,7 @@ bool PasteSpriteOP::Clear()
 void PasteSpriteOP::setMousePos(int x, int y)
 {
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	if (wxGetKeyState(WXK_SHIFT))
+	if (m_stage->GetKeyState(WXK_SHIFT))
 		fixPosOrthogonal();
 }
 

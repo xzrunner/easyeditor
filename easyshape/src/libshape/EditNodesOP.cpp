@@ -32,7 +32,7 @@ bool EditNodesOP::OnMouseLeftDown(int x, int y)
 {
 	if (SelectNodesOP::OnMouseLeftDown(x, y)) return true;
 
-	if (wxGetKeyState(WXK_CONTROL)) return false;
+	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
 	if (m_nodeSelection.empty())
 		m_lastPos.setInvalid();
@@ -46,7 +46,7 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 {
 	if (SelectNodesOP::OnMouseDrag(x, y)) return true;
 
-	if (wxGetKeyState(WXK_CONTROL)) return false;
+	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
 	if (m_lastPos.isValid())
 	{

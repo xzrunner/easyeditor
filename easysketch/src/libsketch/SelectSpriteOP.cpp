@@ -22,7 +22,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 	d2d::ISprite* selected = SelectByPos(ivec2(x, y));
 	if (selected && selected->editable)
 	{
-		if (wxGetKeyState(WXK_CONTROL)) 
+		if (m_stage->GetKeyState(WXK_CONTROL)) 
 		{
 			if (m_selection->IsExist(selected)) {
 				m_selection->Remove(selected);

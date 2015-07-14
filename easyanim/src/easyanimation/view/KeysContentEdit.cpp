@@ -25,7 +25,7 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 
 	m_last_col = col;
 	m_last_row = row;
-	if (wxGetKeyState(WXK_SHIFT)) {
+	if (m_ctrl->GetStagePanel->GetKeyState(WXK_SHIFT)) {
 		m_ctrl->GetKeysPanel()->SetSelectRegion(row, col);
 	} else {
 		m_ctrl->GetKeysPanel()->SetSelectPos(row, col);

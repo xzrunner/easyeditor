@@ -104,13 +104,13 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 		OnSpaceKeyDown();
 		break;
 
-		// for debug
-	case 'O':
-		ShaderMgr::Instance()->SetBufferData(true);
-		break;
-	case 'C':
-		ShaderMgr::Instance()->SetBufferData(false);
-		break;
+// 		// for debug
+// 	case 'O':
+// 		ShaderMgr::Instance()->SetBufferData(true);
+// 		break;
+// 	case 'C':
+// 		ShaderMgr::Instance()->SetBufferData(false);
+// 		break;
 	}
 }
 
@@ -145,7 +145,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	}
 
 	// copy & paste
-	if (wxGetKeyState(WXK_ALT))
+	if (m_stage->GetKeyState(WXK_ALT))
 	{
 		m_op_state = new CopyPasteSpriteState(m_sprites_impl, m_selection, selected);
 	}
@@ -162,7 +162,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	}
 
 	// scale
-	if (m_cfg.is_deform_open && !wxGetKeyState(WXK_SHIFT))
+	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
 	{
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
@@ -181,7 +181,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	}
 
 	// perspective
-	if (m_cfg.is_deform_open && wxGetKeyState(WXK_SHIFT))
+	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
 	{
 		Vector ctrl_node[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
@@ -409,7 +409,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 			return;
 		}
 
-		if (wxGetKeyState(WXK_SHIFT)) 
+		if (m_stage->GetKeyState(WXK_SHIFT)) 
 		{
 			Vector ctrl_nodes[4];
 			SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
@@ -459,7 +459,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 		}
 	}
 
-	if (m_cfg.is_deform_open && !wxGetKeyState(WXK_SHIFT))
+	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
 	{
 		Vector ctrl_nodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
@@ -470,7 +470,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 		}
 	}
 
-	if (m_cfg.is_deform_open && wxGetKeyState(WXK_SHIFT))
+	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
 	{
 		Vector ctrl_nodes[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);

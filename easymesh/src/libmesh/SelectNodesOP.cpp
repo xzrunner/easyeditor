@@ -37,7 +37,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 		for (int i = 0, n = nodes.size(); i < n; ++i)
 		{
 			Node* node = nodes[i];
-			if (wxGetKeyState(WXK_CONTROL)) {
+			if (m_stage->GetKeyState(WXK_CONTROL)) {
 				if (m_selection.IsExist(node))
 					m_selection.Remove(node);
 				else
@@ -54,7 +54,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
-		if (wxGetKeyState(WXK_CONTROL))
+		if (m_stage->GetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
 			m_selection.Clear();

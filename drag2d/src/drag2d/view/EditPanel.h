@@ -2,6 +2,8 @@
 #define _DRAG2D_EDIT_PANEL_H_
 
 #include "HistoryList.h"
+#include "KeysState.h"
+
 #include "common/Vector.h"
 
 #include <wx/wx.h>
@@ -68,7 +70,8 @@ public:
 
 	void SetCanvasDirty();
 
-	bool GetKeyState(int key) const { return m_keys_state[key]; }
+	bool GetKeyState(int key) const;
+	const KeysState& GetKeyState() const { return m_keys_state; }
 
 protected:
 	void OnSize(wxSizeEvent& event);
@@ -89,7 +92,7 @@ protected:
 private:
 	HistoryList m_history_list;
 
-	bool m_keys_state[512];
+	KeysState m_keys_state;
 
 	DECLARE_EVENT_TABLE()
 

@@ -15,12 +15,13 @@ class ISprite;
 class Group;
 class MultiSpritesImpl;
 class ViewPanelMgr;
+class KeysState;
 
 class GroupTreeCtrl : public wxTreeCtrl
 {
 public:
 	GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
-		ViewPanelMgr* view_panel_mgr);
+		ViewPanelMgr* view_panel_mgr, const KeysState& key_state);
 
 	void Traverse(IGroupTreeVisitor& visitor) const;
 	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
@@ -96,6 +97,8 @@ private:
 	wxTreeItemId m_selected_item;
 
 	bool m_add_del_open;
+
+	const KeysState& m_key_state;
 
 	DECLARE_EVENT_TABLE()
 

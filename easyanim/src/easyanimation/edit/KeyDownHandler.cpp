@@ -14,7 +14,8 @@ KeyDownHandler::KeyDownHandler(d2d::AbstractEditOP* editop,
 
 void KeyDownHandler::process(int keyCode) const
 {
-	if (wxGetKeyState(WXK_CONTROL) || wxGetKeyState(WXK_SHIFT)) {
+	if (m_ctrl->GetStagePanel->GetKeyState(WXK_CONTROL) || 
+		m_ctrl->GetStagePanel->GetKeyState(WXK_SHIFT)) {
 		return;
 	}
 

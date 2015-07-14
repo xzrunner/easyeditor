@@ -15,11 +15,11 @@ namespace d2d
 {
 
 GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
-							   ViewPanelMgr* view_panel_mgr)
+							   ViewPanelMgr* view_panel_mgr, const KeysState& key_state)
 	: wxPanel(parent, wxID_ANY)
 	, m_sprite_impl(sprites_impl)
 {
-	m_grouptree = new GroupTreeCtrl(this, sprites_impl, view_panel_mgr);
+	m_grouptree = new GroupTreeCtrl(this, sprites_impl, view_panel_mgr, key_state);
 
 	InitLayout();
 }
