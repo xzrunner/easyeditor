@@ -633,35 +633,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Bitmap.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Bitmap.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\Font.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\Font.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Image.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Image.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageData.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageData.h"
 					>
 				</File>
 				<File
@@ -686,14 +662,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\RawPixels.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Texture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Texture.h"
 					>
 				</File>
 				<File
@@ -729,6 +697,42 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="image"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\Bitmap.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\Bitmap.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\Image.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\Image.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ImageData.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ImageData.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\Texture.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\Texture.h"
 						>
 					</File>
 				</Filter>
