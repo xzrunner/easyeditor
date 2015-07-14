@@ -80,9 +80,7 @@ void ILibraryPage::OnAddPress(wxCommandEvent& event)
 
 void ILibraryPage::OnDelPress(wxCommandEvent& event)
 {
-	const ListItem* item = m_list->GetSelected();
 	m_list->Remove();
-	item->Release();
 }
 
 void ILibraryPage::InitButtons(wxSizer* sizer)

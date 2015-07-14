@@ -21,7 +21,10 @@ public:
 	void ReloadTexture() const;
 
 private:
-	ILibraryPage* m_page;
+	void OnKeyDown(wxKeyEvent& event);
+
+private:
+	DECLARE_EVENT_TABLE()
 
 }; // LibraryList
 
