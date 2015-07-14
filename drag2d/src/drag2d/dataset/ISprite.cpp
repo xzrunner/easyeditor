@@ -225,7 +225,9 @@ void ISprite::Store(Json::Value& val) const
 	val["x perspective"] = m_perspective.x;
 	val["y perspective"] = m_perspective.y;
 
-	val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
+	if (Config::Instance()->IsRenderOpen()) {
+		val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
+	}
 }
 
 void ISprite::BuildBounding()
