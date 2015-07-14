@@ -38,11 +38,17 @@ void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<IShape*>& 
 
 void MultiShapesImpl::ClearShapeSelection()
 {
-	if (!m_shape_selection->IsEmpty())
-	{
-		m_shape_selection->Traverse(RemoveSelectionVisitor(this));
-		m_shape_selection->Clear();
+	if (m_shape_selection->IsEmpty()) {
+		return;
 	}
+
+	std::vector<IShape*> shapes;
+	m_shape_selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		RemoveShape(shapes[i]);
+	}
+
+	m_shape_selection->Clear();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -84,21 +90,6 @@ void MultiShapesImpl::RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
 	IShape* shape = static_cast<IShape*>(object);
 	if (shape->isIntersect(m_rect))
 		m_result.push_back(shape);
-	bFetchNext = true;
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class MultiShapesImpl::RemoveSelectionVisitor
-//////////////////////////////////////////////////////////////////////////
-
-MultiShapesImpl::RemoveSelectionVisitor::RemoveSelectionVisitor(MultiShapesImpl* shapesImpl)
-{
-	m_shapesImpl = shapesImpl;
-}
-
-void MultiShapesImpl::RemoveSelectionVisitor::Visit(Object* object, bool& bFetchNext)
-{
-	m_shapesImpl->RemoveShape(static_cast<IShape*>(object));
 	bFetchNext = true;
 }
 

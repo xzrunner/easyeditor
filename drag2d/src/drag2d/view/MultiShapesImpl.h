@@ -65,17 +65,6 @@ private:
 
 	}; // RectQueryVisitor
 
-	class RemoveSelectionVisitor : public IVisitor
-	{
-	public:
-		RemoveSelectionVisitor(MultiShapesImpl* shapesImpl);
-		virtual void Visit(Object* object, bool& bFetchNext);
-
-	private:
-		MultiShapesImpl* m_shapesImpl;
-
-	}; // RemoveSelectionVisitor
-
 protected:
 	ShapeSelection* m_shape_selection;
 

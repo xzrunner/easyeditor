@@ -83,11 +83,17 @@ void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::v
 
 void MultiSpritesImpl::ClearSpriteSelection()
 {
-	if (!m_sprite_selection->IsEmpty())
-	{
-		m_sprite_selection->Traverse(RemoveSelectionVisitor(this));
-		m_sprite_selection->Clear();
+	if (m_sprite_selection->IsEmpty()) {
+		return;
 	}
+
+	std::vector<ISprite*> sprites;
+	m_sprite_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		RemoveSprite(sprites[i]);
+	}
+
+	m_sprite_selection->Clear();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -143,21 +149,6 @@ void MultiSpritesImpl::RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
 			m_result.push_back(sprite);
 		}
 	}
-	bFetchNext = true;
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class MultiSpritesImpl::RemoveSelectionVisitor
-//////////////////////////////////////////////////////////////////////////
-
-MultiSpritesImpl::RemoveSelectionVisitor::RemoveSelectionVisitor(MultiSpritesImpl* spritesImpl)
-{
-	m_spritesImpl = spritesImpl;
-}
-
-void MultiSpritesImpl::RemoveSelectionVisitor::Visit(Object* object, bool& bFetchNext)
-{
-	m_spritesImpl->RemoveSprite(static_cast<ISprite*>(object));
 	bFetchNext = true;
 }
 
