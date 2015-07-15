@@ -64,8 +64,12 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 			}
 
 			if (find) {
-				symbol = s;
-				break;
+				if (m_map_symbol2picture.find(s) == m_map_symbol2picture.end()) {
+					symbol = s;
+					break;
+				} else {
+					find = false;
+				}
 			}
 		}
 		if (!symbol) continue;
