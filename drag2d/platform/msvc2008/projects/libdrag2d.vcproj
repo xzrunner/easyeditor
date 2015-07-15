@@ -728,11 +728,23 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\dataset\Texture.cpp"
+						RelativePath="..\..\..\src\drag2d\dataset\ITexture.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\dataset\Texture.h"
+						RelativePath="..\..\..\src\drag2d\dataset\TextureFBO.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TextureFBO.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TextureImgData.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TextureImgData.h"
 						>
 					</File>
 				</Filter>
@@ -1450,6 +1462,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\FBO.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\render_utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\render_utility.h"
 					>
 				</File>
 				<File

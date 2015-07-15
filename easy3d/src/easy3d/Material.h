@@ -20,7 +20,7 @@ struct Material
 	vec3 diffuse;
 	vec3 specular;
 
-	d2d::Texture m_diffuse_tex;
+	d2d::TextureImgData m_diffuse_tex;
 };
 
 }

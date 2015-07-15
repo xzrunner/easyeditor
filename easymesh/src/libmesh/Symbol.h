@@ -42,7 +42,7 @@ public:
 	const d2d::Image* getImage() const { return m_image; }
 	d2d::Image* getImage() { return m_image; }
 
-	const std::string& GetImagePath() const;
+	std::string GetImagePath() const;
 	void LoadImage(const std::string& filepath);
 
 	void SetPause(bool pause) { m_pause = pause; }

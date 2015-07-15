@@ -1,4 +1,6 @@
 #include "Image.h"
+#include "TextureImgData.h"
+#include "TextureFBO.h"
 
 #include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
@@ -11,14 +13,26 @@
 namespace d2d
 {
 
+Image::Image()
+{
+	m_tex = new TextureImgData;
+}
+
 Image::Image(ImageData* img_data)
 {
-	m_tex.LoadFromMemory(img_data);
+	m_tex = new TextureImgData;
+	m_tex->LoadFromMemory(img_data);
+}
+
+Image::Image(const FBO* fbo)
+{
+	m_tex = new TextureFBO(fbo);
 }
 
 Image::~Image()
 {
-	ImageMgr::Instance()->RemoveItem(m_tex.GetFilepath());
+	ImageMgr::Instance()->RemoveItem(m_tex->GetFilepath());
+	delete m_tex;
 }
 
 bool Image::LoadFromFile(const std::string& filepath)
@@ -35,12 +49,12 @@ bool Image::LoadFromFile(const std::string& filepath)
 	if (Config::Instance()->GetSettings().open_image_edge_clip) {
 		LoadWithClip(filepath);
 	} else {
-		m_tex.LoadFromFile(filepath);
-		m_ori_w = m_tex.GetWidth();
-		m_ori_h = m_tex.GetHeight();
+		m_tex->LoadFromFile(filepath);
+		m_ori_w = m_tex->GetWidth();
+		m_ori_h = m_tex->GetHeight();
 	}
 
-	if (m_tex.GetWidth() == 0 || m_tex.GetHeight() == 0) {
+	if (m_tex->GetWidth() == 0 || m_tex->GetHeight() == 0) {
 		return true;
 	}
 
@@ -55,7 +69,47 @@ bool Image::LoadFromFile(const std::string& filepath)
 
 void Image::ReloadTexture()
 {
-	m_tex.Reload();
+	m_tex->Reload();
+}
+
+std::string Image::GetFilepath() const 
+{ 
+	return m_tex->GetFilepath(); 
+}
+
+unsigned int Image::GetTexID() const 
+{ 
+	return m_tex->GetTexID(); 
+}
+
+int Image::GetChannels() const 
+{ 
+	return m_tex->GetChannels(); 
+}
+
+int Image::GetOriginWidth() const 
+{ 
+	return m_ori_w; 
+}
+
+int Image::GetOriginHeight() const 
+{ 
+	return m_ori_h; 
+}
+
+int Image::GetClippedWidth() const 
+{ 
+	return m_tex->GetWidth(); 
+}
+
+int Image::GetClippedHeight() const 
+{ 
+	return m_tex->GetHeight(); 
+}
+
+const uint8_t* Image::GetPixelData() const 
+{ 
+	return m_tex->GetPixelData(); 
 }
 
 void Image::Draw(const Matrix& mt, const ISprite* spr) const
@@ -63,7 +117,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画
  //   	ShaderMgr* shader = ShaderMgr::Instance();
- //   	shader->sprite();
+ //  s 	shader->sprite();
  //   
  //   	float tot_hw = m_width * 0.5f,
  //   		  tot_hh = m_height * 0.5f;
@@ -130,8 +184,8 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	//////////////////////////////////////////////////////////////////////////
 	// 用dtex
 
-	float hw = m_tex.GetWidth() * 0.5f,
-		hh = m_tex.GetHeight() * 0.5f;
+	float hw = m_tex->GetWidth() * 0.5f,
+		hh = m_tex->GetHeight() * 0.5f;
 
 	float px = 0, py = 0;
 	if (spr) {
@@ -155,7 +209,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	const TPNode* n = NULL;
 	if (Config::Instance()->IsUseDTex()) {
 		dt = DynamicTexAndFont::Instance();
-		n = dt->Query(m_tex.GetFilepath());
+		n = dt->Query(m_tex->GetFilepath());
 	}
  	if (n)
  	{
@@ -185,7 +239,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	{
 		//wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
 
-		texid = m_tex.GetTexID();
+		texid = m_tex->GetTexID();
 	 	txmin = tymin = 0;
 	 	txmax = tymax = 1;
 	}
@@ -254,6 +308,11 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	}
 }
 
+const ImageData* Image::GetImageData() const 
+{ 
+	return m_tex->GetImageData(); 
+}
+
 void Image::LoadWithClip(const std::string& filepath)
 {
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
@@ -263,14 +322,14 @@ void Image::LoadWithClip(const std::string& filepath)
 
 	if (img_data->GetChannels() != 4) 
 	{
-		m_tex.LoadFromMemory(img_data);
+		m_tex->LoadFromMemory(img_data);
 	} 
 	else 
 	{
 		eimage::ImageTrim trim(*img_data);
 		Rect r = trim.Trim();
 		if (r.xLength() >= img_data->GetWidth() && r.yLength() >= img_data->GetHeight()) {
-			m_tex.LoadFromMemory(img_data);
+			m_tex->LoadFromMemory(img_data);
 		} else {
 			int w = img_data->GetWidth(),
 				h = img_data->GetHeight();
@@ -282,7 +341,7 @@ void Image::LoadWithClip(const std::string& filepath)
 			const uint8_t* flip_pixels = yflip.Revert();
 
 			img_data->SetContent(flip_pixels, r.xLength(), r.yLength());
-			m_tex.LoadFromMemory(img_data);
+			m_tex->LoadFromMemory(img_data);
 
 			delete[] c_pixels;
 

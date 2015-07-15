@@ -1,48 +1,52 @@
 #ifndef _DRAG2D_IMAGE_H_
 #define _DRAG2D_IMAGE_H_
 
-#include "Texture.h"
-
 #include "common/ResourcesMgr.h"
 #include "common/Vector.h"
 #include "common/Object.h"
+
+#include <stdint.h>
 
 namespace d2d
 {
 
 class Matrix;
 class ISprite;
+class ITexture;
+class ImageData;
+class FBO;
 
 class Image : public Object
 {
 public:
-	Image() {}
+	Image();
 	Image(ImageData* img_data);
+	Image(const FBO* fbo);
 	~Image();
 	
 	bool LoadFromFile(const std::string& filepath);
 	void ReloadTexture();
 
-	const std::string& GetFilepath() const { return m_tex.GetFilepath(); }
-	unsigned int GetTexID() const { return m_tex.GetTexID(); }
-	int GetChannels() const { return m_tex.GetChannels(); }
-	int GetOriginWidth() const { return m_ori_w; }
-	int GetOriginHeight() const { return m_ori_h; }
-	int GetClippedWidth() const { return m_tex.GetWidth(); }
-	int GetClippedHeight() const { return m_tex.GetHeight(); }
-	const uint8_t* GetPixelData() const { return m_tex.GetPixelData(); }
+	std::string GetFilepath() const;
+	unsigned int GetTexID() const;
+	int GetChannels() const;
+	int GetOriginWidth() const;
+	int GetOriginHeight() const;
+	int GetClippedWidth() const;
+	int GetClippedHeight() const;
+	const uint8_t* GetPixelData() const;
 
 	void Draw(const Matrix& mt, const ISprite* spr = NULL) const;
 
 	const Vector& GetOffset() const { return m_offset; }
 
-	const ImageData* GetImageData() const { return m_tex.GetImageData(); }
+	const ImageData* GetImageData() const;
 
 private:
 	void LoadWithClip(const std::string& filepath);
 
 private:
-	Texture m_tex;
+	ITexture* m_tex;
 
 	float m_ori_w, m_ori_h;
 

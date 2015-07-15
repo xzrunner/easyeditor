@@ -97,7 +97,7 @@ void Symbol::SetShape(Shape* shape)
 	m_shape = shape;
 }
 
-const std::string& Symbol::GetImagePath() const
+std::string Symbol::GetImagePath() const
 {
 	return m_image->GetFilepath();
 }

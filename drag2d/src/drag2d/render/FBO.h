@@ -1,6 +1,8 @@
 #ifndef _DRAG2D_FBO_H_
 #define _DRAG2D_FBO_H_
 
+#include "common/Object.h"
+
 #include <string>
 
 typedef unsigned int GLuint;
@@ -12,7 +14,7 @@ class ISprite;
 class IShape;
 class ISymbol;
 
-class FBO
+class FBO : public Object
 {
 public:
 	FBO();
