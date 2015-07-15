@@ -470,8 +470,8 @@ GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_pc->end_scale * 100;
 		break;
 	case PS_ROTATE:
-		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG * 0.5f;
-		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG * 0.5f;
+		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG;
 		break;
 	}
 }

@@ -100,10 +100,15 @@ void FileAdapter::load(const char* filename, int version)
 		} else {
 			child.start_scale = childValue["scale"]["start"].asInt();
 			child.end_scale = childValue["scale"]["end"].asInt();
-			int c_rotate = childValue["rotate"]["center"].asInt(),
-				d_rotate = childValue["rotate"]["offset"].asInt();
-			child.min_rotate = c_rotate - d_rotate;
-			child.max_rotate = c_rotate + d_rotate;
+			if (!childValue["rotate"]["max"].isNull()) {
+				child.min_rotate = childValue["rotate"]["min"].asInt();
+				child.max_rotate = childValue["rotate"]["max"].asInt();
+			} else {
+				int c_rotate = childValue["rotate"]["center"].asInt(),
+					d_rotate = childValue["rotate"]["offset"].asInt();
+				child.min_rotate = c_rotate - d_rotate;
+				child.max_rotate = c_rotate + d_rotate;
+			}
 		}
 		child.start_z = childValue["start_z"].asInt();
 
