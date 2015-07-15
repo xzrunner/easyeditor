@@ -26,7 +26,7 @@ public:
 	const Entry* GetTexture(int idx) const;
 
 private:
-	static const int MAX_NUM = 10;
+	static const int MAX_NUM = 100;
 
 private:
 	Entry* m_textures[MAX_NUM];
