@@ -496,6 +496,7 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 	bool dirty = m_op_state->OnDirectionKeyDown(type);
 	if (dirty)
 	{
+		m_stage->SetCanvasDirty();
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
