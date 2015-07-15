@@ -18,18 +18,8 @@ public:
 protected:
 	virtual void OnDrawSprites() const;
 
-	virtual void OnTimer();
-
-private:
-	static const int FRAME_RATE = 60;
-
 private:
 	StagePanel* m_stage;
-
-	int m_currFrame;
-	clock_t m_last;
-
-	d2d::PlayControl m_control;
 
 }; // StageCanvas
 

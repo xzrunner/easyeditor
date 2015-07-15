@@ -16,10 +16,18 @@ public:
 		LibraryPanel* library);
 	virtual ~StagePanel();
 
+	virtual bool Update(int version);
+
+private:
+	void UpdateControl();
+
 public:
 	ParticleSystem* m_ps;
 
 	float xRot, yRot;
+
+private:
+	clock_t m_last_time;
 
 }; // StagePanel
 

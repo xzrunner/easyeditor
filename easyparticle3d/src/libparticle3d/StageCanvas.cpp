@@ -10,10 +10,7 @@ namespace eparticle3d
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: d2d::OrthoCanvas(editPanel)
 	, m_stage(editPanel)
-	, m_control(0.033f)
 {
-	m_currFrame = 1;
-	m_last = -1;
 }
 
 StageCanvas::~StageCanvas()
@@ -37,34 +34,6 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	m_stage->DrawEditOP();
-}
-
-void StageCanvas::OnTimer()
-{
-	if (m_last == -1) {
-		m_last = clock();
-	} else {
-		clock_t curr = clock();
-		int dt = curr - m_last;
-		m_last = curr;
-
-		if (m_stage->m_ps) {
-			m_stage->m_ps->update((float)dt / CLOCKS_PER_SEC);
-		}
-	}
-
-	std::vector<libanim::Sprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<libanim::Sprite>(sprites));
-	size_t max = 0;
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		max = std::max(max, sprites[i]->GetSymbol().getMaxFrameIndex());
-
-	m_control.update();
-	m_currFrame = m_control.frame();
-	if (m_currFrame >= max) {
-		m_currFrame = 1;
-		m_control.reset();
-	}
 }
 
 }
