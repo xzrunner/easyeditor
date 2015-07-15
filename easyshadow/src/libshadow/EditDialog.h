@@ -13,11 +13,12 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, Sprite* edited, 
-		const std::vector<d2d::ISprite*>& bg_sprites);
+		const d2d::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites);
+	void InitLayout(d2d::ISprite* edited, 
+		const d2d::MultiSpritesImpl* sprite_impl);
 
 	void OnClose(wxCloseEvent& event);
 

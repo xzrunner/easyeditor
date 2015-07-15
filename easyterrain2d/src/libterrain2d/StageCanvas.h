@@ -13,7 +13,7 @@ class StageCanvas : public d2d::OrthoCanvas
 public:
 	StageCanvas(StagePanel* panel);
 	StageCanvas(StagePanel* panel, d2d::ISprite* edited,
-		const std::vector<d2d::ISprite*>& bg_sprites);
+		const d2d::MultiSpritesImpl* bg_sprites);
 
 protected:
 	virtual void InitGL();
@@ -30,7 +30,9 @@ private:
 	StagePanel* m_panel;
 
 	d2d::ISprite* m_edited;
-	std::vector<d2d::ISprite*> m_bg_sprites;
+	const d2d::MultiSpritesImpl* m_sprite_impl;
+
+	d2d::ISprite* m_bg;
 
 }; // StageCanvas
 

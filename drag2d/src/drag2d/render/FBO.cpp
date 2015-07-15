@@ -96,7 +96,7 @@ void FBO::CreateFBO(int w, int h)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)w, (GLsizei)h, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	unsigned char* empty_data = new unsigned char[w*h*4];
 	if(!empty_data) return;
-	memset(empty_data, 0xaa, w*h*4);
+	memset(empty_data, 0x00, w*h*4);
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)w, (GLsizei)h, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
 	delete[] empty_data;
 

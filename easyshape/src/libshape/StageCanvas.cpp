@@ -6,18 +6,21 @@ namespace libshape
 
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::OrthoCanvas(stage)
-	, m_stage_impl(stage)
+	, m_shape_impl(stage)
 	, m_edited(NULL)
+	, m_sprite_impl(NULL)
+	, m_bg(NULL)
 {
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, 
 						 d2d::ISprite* edited,
-						 const std::vector<d2d::ISprite*>& bg_sprites)
+						 const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::OrthoCanvas(stage)
-	, m_stage_impl(stage)
+	, m_shape_impl(stage)
 	, m_edited(edited)
-	, m_bg_sprites(bg_sprites)
+	, m_sprite_impl(bg_sprites)
+	, m_bg(NULL)
 {
 }
 
@@ -33,11 +36,10 @@ void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
 
-	std::vector<d2d::ISymbol*> symbols;
-	d2d::SymbolMgr::Instance()->Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
-	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
-		symbols[i]->ReloadTexture();
-	}
+	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
+	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	ResetViewport();
+
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
@@ -45,15 +47,13 @@ void StageCanvas::InitGL()
 
 void StageCanvas::OnDrawSprites() const
 {
-	if (m_edited) 
+	if (m_edited && m_bg) 
 	{
 		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-			d2d::SpriteRenderer::Instance()->Draw(m_bg_sprites[i], mat);
-		}
+		d2d::SpriteRenderer::Instance()->Draw(m_bg, mat);
 	}
 
-	m_stage_impl->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
+	m_shape_impl->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 
 	libshape::StageCanvas::DrawGuideLines();
 

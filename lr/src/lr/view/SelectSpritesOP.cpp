@@ -54,8 +54,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
  		ecomplex::EditDialog dlg(m_stage, &symbol);
  		dlg.ShowModal();
- 
-  		//m_stage->resetCanvas();
 		m_stage->ResetViewport();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -67,8 +65,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
  		libanim::PreviewDialog dlg(m_stage, &anim->GetSymbol());
  		dlg.ShowModal();
-
-// 		m_stage->resetCanvas();
 		m_stage->ResetViewport();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
@@ -76,16 +72,12 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
   		escale9::EditDialog dlg(m_stage, &symbol);
   		dlg.ShowModal();
-  
-// 		m_stage->resetCanvas();
 		m_stage->ResetViewport();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
 		emesh::EditDialog dlg(m_stage, sprite);
 		dlg.ShowModal();
-
-//		m_stage->resetCanvas();
 		m_stage->ResetViewport();
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
@@ -95,45 +87,26 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
-		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-
-		etexture::EditDialog dlg(m_stage, tex, sprites);
+		etexture::EditDialog dlg(m_stage, tex, m_spritesImpl);
 		dlg.ShowModal();
-
 		m_stage->ResetViewport();
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
-//		libshape::Symbol& symbol = const_cast<libshape::Symbol&>(shape->getSymbol());
-
-		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-
-		libshape::EditDialogSimple dlg(m_stage, shape, sprites);
-//		libshape::EditDialog dlg(m_stage, &symbol);
+		libshape::EditDialogSimple dlg(m_stage, shape, m_spritesImpl);
 		dlg.ShowModal();
-
 		m_stage->ResetViewport();		
 	}
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
 	{
-		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-
-		eterrain2d::EditDialog dlg(m_stage, terr, sprites);
+		eterrain2d::EditDialog dlg(m_stage, terr, m_spritesImpl);
 		dlg.ShowModal();
-
 		m_stage->ResetViewport();
 	} 
 	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
 	{
-		std::vector<d2d::ISprite*> sprites;
-		m_spritesImpl->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-
-		eshadow::EditDialog dlg(m_stage, shadow, sprites);
+		eshadow::EditDialog dlg(m_stage, shadow, m_spritesImpl);
 		dlg.ShowModal();
-
 		m_stage->ResetViewport();
 	}
 	else if (selected)

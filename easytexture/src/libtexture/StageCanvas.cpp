@@ -9,15 +9,18 @@ StageCanvas::StageCanvas(StagePanel* panel)
 	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 	, m_edited(NULL)
+	, m_sprite_impl(NULL)
+	, m_bg(NULL)
 {
 }
 
 StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited, 
-						 const std::vector<d2d::ISprite*>& bg_sprites)
+						 const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 	, m_edited(edited)
-	, m_bg_sprites(bg_sprites)
+	, m_sprite_impl(bg_sprites)
+	, m_bg(NULL)
 {
 }
 
@@ -25,10 +28,10 @@ void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
 
-	m_panel->GetSymbol()->ReloadTexture();
-	for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-		m_bg_sprites[i]->GetSymbol().ReloadTexture();
-	}
+	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
+	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	ResetViewport();
+
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
@@ -36,12 +39,10 @@ void StageCanvas::InitGL()
 
 void StageCanvas::OnDrawSprites() const
 {
-	if (m_edited) 
+	if (m_edited && m_bg) 
 	{
 		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-			d2d::SpriteRenderer::Instance()->Draw(m_bg_sprites[i], mat);
-		}
+		d2d::SpriteRenderer::Instance()->Draw(m_bg, mat);
 	}
 
 	d2d::Rect sr = m_screen.GetRegion();

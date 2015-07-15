@@ -14,7 +14,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Sprite* edited, 
-					   const std::vector<d2d::ISprite*>& bg_sprites)
+					   const d2d::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Shadow", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_symbol(NULL)
 	, m_stage(NULL)
@@ -27,7 +27,7 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* edited,
 	m_symbol->ReloadTexture();
 	SetTitle(symbol->GetFilepath());
 
-	InitLayout(edited, bg_sprites);
+	InitLayout(edited, sprite_impl);
 
 	m_stage->SetTitleStatus(true);
 }
@@ -39,11 +39,12 @@ EditDialog::~EditDialog()
 	}
 }
 
-void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
+void EditDialog::InitLayout(d2d::ISprite* edited, 
+							const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(this);
 
-	StagePanel* stage = new StagePanel(split, this, edited, bg_sprites);
+	StagePanel* stage = new StagePanel(split, this, edited, sprite_impl);
 	m_stage = stage;
 
 	ToolbarPanel* toolbar = new ToolbarPanel(split, stage);

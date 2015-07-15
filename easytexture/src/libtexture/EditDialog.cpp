@@ -16,7 +16,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Sprite* edited, 
-					   const std::vector<d2d::ISprite*>& bg_sprites)
+					   const d2d::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Texture", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_symbol(NULL)
 	, m_stage(NULL)
@@ -29,7 +29,7 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* edited,
 	m_symbol->ReloadTexture();
 	SetTitle(symbol->GetFilepath());
 
-	InitLayout(edited, bg_sprites);
+	InitLayout(edited, sprite_impl);
 
 	m_stage->SetTitleStatus(true);
 }
@@ -53,13 +53,13 @@ EditDialog::~EditDialog()
 // 	vert_splitter->SplitVertically(library, stage);
 // }
 
-void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
+void EditDialog::InitLayout(d2d::ISprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(this);
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
 
 	LibraryPanel* library = new LibraryPanel(left_splitter);
-	StagePanel* stage = new StagePanel(left_splitter, this, edited, bg_sprites, library);
+	StagePanel* stage = new StagePanel(left_splitter, this, edited, sprite_impl, library);
 	m_stage = stage;
 
 	left_splitter->SetSashGravity(0.15f);
