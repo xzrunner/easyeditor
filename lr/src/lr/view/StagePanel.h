@@ -64,6 +64,10 @@ public:
 
 	d2d::AbstractEditOP* GetBaseOP() { return m_arrange_op; }
 
+	void SetUpdateState(bool enable) {
+		m_enable_update = enable;
+	}
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
@@ -87,6 +91,8 @@ private:
 	std::vector<Layer*> m_layers;
 
 	CharacterAllDirections m_chara_dirs;
+
+	bool m_enable_update;
 
 }; // StagePanel
 

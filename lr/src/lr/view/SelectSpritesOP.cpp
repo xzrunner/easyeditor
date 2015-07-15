@@ -47,6 +47,9 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
+	stage->SetUpdateState(false);
+
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
@@ -117,6 +120,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 			selected->tag = dlg.GetTagStr();
 		}
 	}
+
+	stage->SetUpdateState(true);
 
 	return false;
 }

@@ -30,6 +30,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_grids(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
+	, m_enable_update(true)
 {
 	SetDropTarget(new d2d::SpriteDropTarget(this, this, library));
 
@@ -84,6 +85,10 @@ void StagePanel::Clear()
 
 bool StagePanel::Update(int version)
 {
+	if (!m_enable_update) {
+		return false;
+	}
+
 	bool ret = false;
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
