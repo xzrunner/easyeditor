@@ -309,6 +309,8 @@ void SelectSpritesOP::CopyFromSelection()
 
 	ISprite* last_spr = NULL;
 
+	std::vector<ISprite*> sprites;
+
 	int i = 0;
 	Json::Value sval = value["sprite"][i++];
 	while (!sval.isNull()) {
@@ -317,13 +319,17 @@ void SelectSpritesOP::CopyFromSelection()
 		// for snapshoot
 		symbol->RefreshThumbnail(filepath);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		sprites.push_back(sprite);
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
 		m_spritesImpl->InsertSprite(sprite);
-		m_selection->Add(sprite);
 		last_spr = sprite;
 
 		sval = value["sprite"][i++];
+	}
+
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		m_selection->Add(sprites[i]);
 	}
 
 	bool add = m_stage->GetKeyState(WXK_CONTROL);
