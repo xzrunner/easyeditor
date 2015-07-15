@@ -29,7 +29,9 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	int curr_idx = this->GetSelection();
 	VerticalImageList::OnKeyDown(event);
 
-	switch (event.GetKeyCode())
+	int key_code = event.GetKeyCode();
+	m_keys_state.OnKeyDown(key_code);
+	switch (key_code)
 	{
 	case WXK_PAGEUP:
 		SetSelection(curr_idx);
@@ -45,6 +47,14 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 		m_panel->RemoveSelected();
 		break;
 	}
+}
+
+void ViewlistList::OnKeyUp(wxKeyEvent& event)
+{
+//	VerticalImageList::OnKeyUp(event);
+	
+	int key_code = event.GetKeyCode();
+	m_keys_state.OnKeyUp(key_code);
 }
 
 } // d2d
