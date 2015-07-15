@@ -101,8 +101,11 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 	toolbar->m_bounce->SetValue(adapter.bounce);
 	ps->setBounce(adapter.bounce);
 	toolbar->m_additiveBlend->SetValue(adapter.additive_blend);
+	ps->setAdditiveBlend(adapter.additive_blend);
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
+	ps->SetOrientToMovement(adapter.orient_to_movement);
 	toolbar->m_radius_3d->SetValue(adapter.start_radius_3d);
+	ps->SetRadius3D(adapter.start_radius_3d);
 	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 	for (size_t i = 0, n = adapter.children.size(); i < n; ++i) {
 		toolbar->add(adapter.children[i]);
@@ -142,6 +145,10 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	ps->setHori(adapter.min_hori, adapter.max_hori);
 	ps->setVert(adapter.min_vert, adapter.max_vert);
 	ps->setBounce(adapter.bounce);
+	ps->setAdditiveBlend(adapter.additive_blend);
+	ps->SetRadius3D(adapter.start_radius_3d);
+	ps->SetOrientToMovement(adapter.orient_to_movement);
+
 	for (size_t i = 0, n = adapter.children.size(); i < n; ++i)
 	{
 		const FileAdapter::Child& child = adapter.children[i];
