@@ -48,6 +48,24 @@ void PropertySettingPanel::SelectMultiSprites(SpriteSelection* selection)
 	}
 }
 
+bool PropertySettingPanel::InsertSprite(ISprite* spr) 
+{ 
+	SetPropertySetting(CreateDefaultProperty());
+	return false; 
+}
+
+bool PropertySettingPanel::RemoveSprite(ISprite* spr) 
+{ 
+	SetPropertySetting(CreateDefaultProperty());
+	return false; 
+}
+
+bool PropertySettingPanel::ClearAllSprite() 
+{ 
+	SetPropertySetting(CreateDefaultProperty());
+	return false; 
+}
+
 void PropertySettingPanel::SelectShape(IShape* shape)
 {
 	assert(m_stage);
