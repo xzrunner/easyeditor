@@ -23,9 +23,7 @@ void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->GetSymbol().ReloadTexture();
-	}
+	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
