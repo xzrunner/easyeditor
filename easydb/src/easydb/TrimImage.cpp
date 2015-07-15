@@ -50,7 +50,7 @@ void TrimImage::Trigger(const std::string& dir)
 		{
 			std::cout << i << " / " << n << " : " << filepath << "\n";
 
-			d2d::ImageData* img = d2d::ImageMgr::Instance()->GetItem(filepath);		
+			d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);		
 
 			eimage::ImageTrim trim(*img);
 			d2d::Rect r = trim.Trim();
@@ -58,15 +58,15 @@ void TrimImage::Trigger(const std::string& dir)
 			// save info
 			Json::Value spr_val;
 			spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
-			spr_val["source size"]["w"] = img->GetOriginWidth();
-			spr_val["source size"]["h"] = img->GetOriginHeight();
+			spr_val["source size"]["w"] = img->GetWidth();
+			spr_val["source size"]["h"] = img->GetHeight();
 			spr_val["position"]["x"] = r.xMin;
-			spr_val["position"]["y"] = img->GetOriginHeight() - r.yMax;
+			spr_val["position"]["y"] = img->GetHeight() - r.yMax;
 			spr_val["position"]["w"] = r.xLength();
 			spr_val["position"]["h"] = r.yLength();
 			value[idx++] = spr_val;
 
-			eimage::ImageClip clip(img);
+			eimage::ImageClip clip(*img);
 			const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
 			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
 				filepath, d2d::ImageSaver::e_png);
