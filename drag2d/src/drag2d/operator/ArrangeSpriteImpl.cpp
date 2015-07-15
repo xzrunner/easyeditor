@@ -507,6 +507,10 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 {
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	if (sprites.empty()) {
+		return;
+	}
+
 	CombineAOP* comb = new CombineAOP();
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
