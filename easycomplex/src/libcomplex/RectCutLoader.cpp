@@ -46,9 +46,9 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	LoadJsonFile(pack_file, img_name, pictures);
 
 	std::string dir = d2d::FilenameTools::getFileDir(pack_file);
-	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
+	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
 
-	eimage::ImageClip clip(img);
+	eimage::ImageClip clip(*img);
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{		
 		const Picture& pic = pictures[i];
@@ -92,7 +92,7 @@ void RectCutLoader::LoadToDtex(const wxString& pack_file, const wxString& img_na
 	std::string dir = d2d::FilenameTools::getFileDir(pack_file);
 	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
 
-	eimage::ImageClip clip(img);
+//	eimage::ImageClip clip(*img_data);
 	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{

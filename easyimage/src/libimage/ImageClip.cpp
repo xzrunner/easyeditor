@@ -3,12 +3,12 @@
 namespace eimage
 {
 
-ImageClip::ImageClip(const d2d::Image* image, bool check_duplicate)
-	: m_image(image)
+ImageClip::ImageClip(const d2d::ImageData& img_data, bool check_duplicate)
+	: m_img_data(img_data)
 	, m_check(NULL)
 {
 	if (check_duplicate) {
-		int sz = image->GetOriginWidth() * image->GetOriginHeight();
+		int sz = m_img_data.GetWidth() * m_img_data.GetHeight();
 		m_check = new bool[sz];
 		memset(m_check, 0, sizeof(bool) * sz);
 	}
@@ -26,14 +26,14 @@ const uint8_t* ImageClip::Clip(const d2d::Rect& r) const
 
 const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 {
-	if (!m_image) {
+	const uint8_t* pixels = m_img_data.GetPixelData();
+	int width = m_img_data.GetWidth(),
+		height = m_img_data.GetHeight();
+	int channels = m_img_data.GetChannels();
+
+	if (!pixels || width <= 0 || height <= 0) {
 		return NULL;
 	}
-
-	int width = m_image->GetOriginWidth(),
-		height = m_image->GetOriginHeight();
-	int channels = m_image->GetChannels();
-	const unsigned char* pixels = m_image->GetPixelData();
 
 	if (xmin >= xmax || ymin >= ymax) {
 		return NULL;

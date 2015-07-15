@@ -63,7 +63,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			filename.Replace("\\", "%");
 
 			const std::vector<eimage::Rect>& result = cut.GetResult();
-			eimage::ImageClip img_cut(image, true);
+			eimage::ImageClip img_cut(*image->GetImageData(), true);
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::Rect& r = result[i];

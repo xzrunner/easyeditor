@@ -36,6 +36,8 @@ public:
 
 	const Vector& GetOffset() const { return m_offset; }
 
+	const ImageData* GetImageData() const { return m_tex.GetImageData(); }
+
 private:
 	void LoadWithClip(const std::string& filepath);
 

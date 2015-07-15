@@ -8,7 +8,6 @@
 #include "libimage/config.h"
 #include "libimage/ImageIO.h"
 #include "libimage/ImageClip.h"
-#include "libimage/ImageClipRaw.h"
 #include "libimage/ImageTrim.h"
 #include "libimage/ImageTrim.h"
 #include "libimage/ImagePack.h"

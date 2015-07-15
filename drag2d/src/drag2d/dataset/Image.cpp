@@ -275,7 +275,7 @@ void Image::LoadWithClip(const std::string& filepath)
 			int w = img_data->GetWidth(),
 				h = img_data->GetHeight();
 
-			eimage::ImageClipRaw clip(*img_data);
+			eimage::ImageClip clip(*img_data);
 			const uint8_t* c_pixels = clip.Clip(r);
 
 			eimage::ImageVeritalFlip yflip(c_pixels, r.xLength(), r.yLength());

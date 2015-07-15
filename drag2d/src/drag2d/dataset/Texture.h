@@ -29,6 +29,8 @@ public:
 	void LoadFromMemory(ImageData* img_data);
 	void Reload();
 
+	const ImageData* GetImageData() const { return m_img_data; }
+
 private:
 	unsigned int m_texid;
 

@@ -9,14 +9,14 @@ namespace eimage
 class ImageClip
 {
 public:
-	ImageClip(const d2d::Image* image, bool check_duplicate = false);
+	ImageClip(const d2d::ImageData& img_data, bool check_duplicate = false);
 	~ImageClip();
 
 	const uint8_t* Clip(const d2d::Rect& r) const;
 	const uint8_t* Clip(int xmin, int xmax, int ymin, int ymax) const;
 
 private:
-	const d2d::Image* m_image;
+	const d2d::ImageData& m_img_data;
 
 	bool* m_check;
 
