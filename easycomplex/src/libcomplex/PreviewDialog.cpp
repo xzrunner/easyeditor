@@ -1,4 +1,5 @@
 #include "PreviewDialog.h"
+#include "PreviewStage.h"
 #include "PreviewCanvas.h"
 #include "PreviewEditOP.h"
 
@@ -32,9 +33,9 @@ void PreviewDialog::InitLayout()
 
 void PreviewDialog::BuildEditPanel(wxSizer* sizer)
 {
-	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
+	PreviewStage* stage = new PreviewStage(this, this, m_control);
 	stage->SetEditOP(new PreviewEditOP(stage, m_sprites));
-	stage->SetCanvas(new PreviewCanvas(stage, m_control, m_sprites));
+	stage->SetCanvas(new PreviewCanvas(stage, m_sprites));
 	sizer->Add(stage, 1, wxEXPAND);
 }
 

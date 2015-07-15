@@ -5,10 +5,8 @@
 namespace ecomplex
 {
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
-							 const std::vector<const d2d::ISprite*>& sprites)
+PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const std::vector<const d2d::ISprite*>& sprites)
 	: d2d::OrthoCanvas(stage)
-	, m_control(control)
 	, m_sprites(sprites)
 {
 }
@@ -34,11 +32,6 @@ void PreviewCanvas::OnDrawSprites() const
 // 			continue;
 		d2d::SpriteRenderer::Instance()->Draw(sprite, d2d::Matrix(), sprite->multiCol, sprite->addCol);
 	}
-}
-
-void PreviewCanvas::OnTimer()
-{
-	m_control.update();
 }
 
 }

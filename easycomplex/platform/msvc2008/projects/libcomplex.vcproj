@@ -344,6 +344,14 @@
 				RelativePath="..\..\..\src\libcomplex\PreviewEditOP.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewStage.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewStage.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libcomplex\config.h"
