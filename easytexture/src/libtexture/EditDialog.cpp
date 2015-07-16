@@ -12,7 +12,7 @@ namespace etexture
 {
 
 BEGIN_EVENT_TABLE(EditDialog, wxDialog)
-	EVT_CLOSE(EditDialog::OnClose)
+	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Sprite* edited, 
@@ -71,33 +71,26 @@ void EditDialog::InitLayout(d2d::ISprite* edited, const d2d::MultiSpritesImpl* s
 	right_splitter->SplitVertically(left_splitter, toolbar);
 }
 
-void EditDialog::OnClose(wxCloseEvent& event)
+void EditDialog::OnCloseEvent(wxCloseEvent& event)
 {
-	if (m_stage->IsEditDirty())
+	if (!m_stage->IsEditDirty()) {
+		Destroy();
+		return;
+	}
+
+	d2d::ConfirmDialog dlg(this);
+	int val = dlg.ShowModal();
+	if (val == wxID_YES)
 	{
-		d2d::ExitDlg dlg(this);
-		int val = dlg.ShowModal();
-		if (val == wxID_OK)
-		{
-			const std::string& filepath = m_symbol->GetFilepath();
-			FileSaver::Store(filepath.c_str(), m_symbol);
-			m_symbol->RefreshThumbnail(filepath);
-			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
-		}
-		else if (val == wxID_CANCEL)
-		{
-			m_symbol->LoadFromFile(m_symbol->GetFilepath());
-		}
+		const std::string& filepath = m_symbol->GetFilepath();
+		FileSaver::Store(filepath.c_str(), m_symbol);
+		m_symbol->RefreshThumbnail(filepath);
+		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		Destroy();
 	}
-
-	if(IsModal()) {
-		EndModal(wxID_CANCEL);
-	} else {
-		SetReturnCode(wxID_CANCEL);
-		Hide();
-	}
-
-	if (!event.CanVeto()) {
+	else if (val == wxID_NO)
+	{
+		m_symbol->LoadFromFile(m_symbol->GetFilepath());
 		Destroy();
 	}
 }

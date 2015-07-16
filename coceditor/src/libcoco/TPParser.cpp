@@ -43,12 +43,21 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 	{
 		const TPAdapter::Entry& entry = frames[i];
 
+		bool log = false;
+		if (entry.filename.find("shadow") != std::string::npos) {
+			log = true;
+			std::ofstream fout("d:/cocopack_debug.txt", std::ios::app);
+			fout << "TPParser::ParserTexture shadow:" << entry.filename << std::endl;
+			fout.close();
+		}
+
 		// find symbol
 		const d2d::ISymbol* symbol = NULL;
 		for (size_t j = 0, m = symbols.size(); j < m; ++j)
 		{
 			const d2d::ISymbol* s = symbols[j];
 			std::string filepath = s->GetFilepath();
+
 			d2d::StringTools::ToLower(filepath);
 			d2d::FilenameTools::formatSeparators(filepath);
 
@@ -68,11 +77,25 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 					symbol = s;
 					break;
 				} else {
+					if (log) {
+						std::ofstream fout("d:/cocopack_debug.txt", std::ios::app);
+						fout << "TPParser::ParserTexture find = false\n";
+						fout.close();
+					}
 					find = false;
 				}
 			}
 		}
-		if (!symbol) continue;
+		if (!symbol) {
+
+			if (log) {
+				std::ofstream fout("d:/cocopack_debug.txt", std::ios::app);
+				fout << "TPParser::ParserTexture !symbol\n\n";
+				fout.close();
+			}
+
+			continue;
+		}
 
 		Picture* picture = new Picture;
 

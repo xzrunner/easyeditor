@@ -60,6 +60,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
  		EditDialog dlg(m_stage, &symbol);
  		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -71,12 +73,16 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
  		libanim::PreviewDialog dlg(m_stage, &anim->GetSymbol());
  		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
   		escale9::EditDialog dlg(m_stage, &symbol);
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
   		dlg.ShowModal();
 		m_stage->ResetViewport();
  	}
@@ -84,6 +90,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
 		emesh::EditDialog dlg(m_stage, sprite);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
@@ -95,11 +103,9 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
 		etexture::EditDialog dlg(m_stage, tex, m_spritesImpl);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
-	}
-	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
-	{
-		
 	}
 
 	return false;

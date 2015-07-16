@@ -13,7 +13,7 @@ namespace libshape
 {
 
 BEGIN_EVENT_TABLE(EditDialogSimple, wxDialog)
-	EVT_CLOSE(EditDialogSimple::OnClose)
+	EVT_CLOSE(EditDialogSimple::OnCloseEvent)
 END_EVENT_TABLE()
 
 EditDialogSimple::EditDialogSimple(wxWindow* parent, d2d::ISprite* edited,
@@ -68,10 +68,9 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 	m_stage->SetEditOP(op);
 }
 
-void EditDialogSimple::OnClose(wxCloseEvent& event)
+void EditDialogSimple::OnCloseEvent(wxCloseEvent& event)
 {
-	if (!m_stage->IsEditDirty())
-	{
+	if (!m_stage->IsEditDirty()) {
 		Destroy();
 		return;
 	}
@@ -79,20 +78,20 @@ void EditDialogSimple::OnClose(wxCloseEvent& event)
 	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(m_stage->GetSymbol());
 	const std::string& filepath = symbol.GetFilepath();
 
-	d2d::ExitDlg dlg(this);
+	d2d::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
-	if (val == wxID_OK)
+	if (val == wxID_YES)
 	{
 		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
 		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
+		Destroy();
 	}
-	else if (val == wxID_CANCEL)
+	else if (val == wxID_NO)
 	{
 		symbol.LoadFromFile(filepath);
+		Destroy();
 	}
-
-	Destroy();
 }
 
 }

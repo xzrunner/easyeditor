@@ -57,6 +57,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
  		ecomplex::EditDialog dlg(m_stage, &symbol);
  		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -68,6 +70,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
  		libanim::PreviewDialog dlg(m_stage, &anim->GetSymbol());
  		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
@@ -75,12 +79,16 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
   		escale9::EditDialog dlg(m_stage, &symbol);
   		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
 		emesh::EditDialog dlg(m_stage, sprite);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
@@ -92,24 +100,32 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
 		etexture::EditDialog dlg(m_stage, tex, m_spritesImpl);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
 		libshape::EditDialogSimple dlg(m_stage, shape, m_spritesImpl);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();		
 	}
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
 	{
 		eterrain2d::EditDialog dlg(m_stage, terr, m_spritesImpl);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	} 
 	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
 	{
 		eshadow::EditDialog dlg(m_stage, shadow, m_spritesImpl);
 		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
 	else if (selected)

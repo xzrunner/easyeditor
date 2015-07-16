@@ -2273,19 +2273,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\ConfirmDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\ConfirmDialog.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\ExceptionDlg.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\ExceptionDlg.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\ExitDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\ExitDlg.h"
 					>
 				</File>
 				<File

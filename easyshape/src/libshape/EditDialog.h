@@ -23,7 +23,7 @@ private:
 
 	void InitLayout(Symbol* symbol);
 
-	void OnClose(wxCloseEvent& event);
+	void OnCloseEvent(wxCloseEvent& event);
 
 private:
 	StagePanel* m_stage;

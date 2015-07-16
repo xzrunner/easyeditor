@@ -74,40 +74,25 @@ wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 
 void EditDialog::OnCloseEvent(wxCloseEvent& event)
 {
-	OnClose(!event.CanVeto(), wxID_CANCEL);
-}
-
-void EditDialog::OnClose(bool force, int returncode)
-{
-	if (m_stage->IsEditDirty())
-	{
-	 	d2d::ExitDlg dlg(this);
-	 	int val = dlg.ShowModal();
-	 	if (val == wxID_OK)
-	 	{
-			const std::string& filepath = m_symbol->GetFilepath();
-	 		FileSaver::store(filepath.c_str(), m_symbol);
-	 		m_symbol->RefreshThumbnail(filepath);
-	 		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
-	 	}
-	 	else if (val == wxID_CANCEL)
-	 	{
-	 		m_symbol->LoadFromFile(m_symbol->GetFilepath());
-	 	}
+	if (!m_stage->IsEditDirty()) {
+		Destroy();
+		return;
 	}
 
-	if(IsModal())
+	d2d::ConfirmDialog dlg(this);
+	int val = dlg.ShowModal();
+	if (val == wxID_YES) 
 	{
-		EndModal(returncode);
-	}
-	else
+		m_symbol->InitBounding();
+		const std::string& filepath = m_symbol->GetFilepath();
+		FileSaver::store(filepath.c_str(), m_symbol);
+		m_symbol->RefreshThumbnail(filepath, true);
+		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		Destroy();
+	} 
+	else if (val == wxID_NO) 
 	{
-		SetReturnCode(returncode);
-		Hide();
-	}
-
-	if(force)
-	{
+		m_symbol->LoadFromFile(m_symbol->GetFilepath());
 		Destroy();
 	}
 }

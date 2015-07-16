@@ -17,7 +17,7 @@ public:
 private:
 	void initLayout();
 
-	void onClose(wxCloseEvent& event);
+	void OnCloseEvent(wxCloseEvent& event);
 
 private:
 	d2d::EditPanel* m_stage;

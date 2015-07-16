@@ -10,7 +10,7 @@ namespace libshape
 {
 
 BEGIN_EVENT_TABLE(EditDialog, wxDialog)
-	EVT_CLOSE(EditDialog::OnClose)
+	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
@@ -58,10 +58,9 @@ void EditDialog::InitLayout(Symbol* symbol)
 	vertical->SplitVertically(horizontal, m_stage);
 }
 
-void EditDialog::OnClose(wxCloseEvent& event)
+void EditDialog::OnCloseEvent(wxCloseEvent& event)
 {
-	if (!m_stage->IsEditDirty())
-	{
+	if (!m_stage->IsEditDirty()) {
 		Destroy();
 		return;
 	}
@@ -69,20 +68,20 @@ void EditDialog::OnClose(wxCloseEvent& event)
 	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(m_stage->GetSymbol());
 	const std::string& filepath = symbol.GetFilepath();
 
-	d2d::ExitDlg dlg(this);
+	d2d::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
-	if (val == wxID_OK)
+	if (val == wxID_YES)
 	{
 		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
 		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
+		Destroy();
 	}
-	else if (val == wxID_CANCEL)
+	else if (val == wxID_NO)
 	{
 		symbol.LoadFromFile(filepath);
+		Destroy();
 	}
-
-	Destroy();
 }
 
 }

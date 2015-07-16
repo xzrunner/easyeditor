@@ -12,7 +12,7 @@ namespace emesh
 {
 
 BEGIN_EVENT_TABLE(EditDialog, wxDialog)
-	EVT_CLOSE(EditDialog::onClose)
+	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Sprite* sprite)
@@ -48,34 +48,33 @@ void EditDialog::initLayout()
  	splitter->SplitVertically(stage, toolbar);
 }
 
-void EditDialog::onClose(wxCloseEvent& event)
+void EditDialog::OnCloseEvent(wxCloseEvent& event)
 {
 	m_sprite->BuildBounding();
 
-	if (!m_stage->IsEditDirty())
-	{
+	if (!m_stage->IsEditDirty()) {
 		Destroy();
 		return;
 	}
 
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 
-	d2d::ExitDlg dlg(this);
+	d2d::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
-	if (val == wxID_OK)
+	if (val == wxID_YES)
 	{
 		const std::string& filepath = symbol.GetFilepath();
 		FileIO::store(symbol.GetFilepath().c_str(), &symbol);
 		symbol.RefreshThumbnail(filepath);
 
 		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
+		Destroy();
 	}
-	else if (val == wxID_CANCEL)
+	else if (val == wxID_NO)
 	{
 		symbol.LoadFromFile(symbol.GetFilepath());
+		Destroy();
 	}
-
-	Destroy();
 }
 
 }

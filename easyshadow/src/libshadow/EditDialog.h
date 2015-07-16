@@ -20,7 +20,7 @@ private:
 	void InitLayout(d2d::ISprite* edited, 
 		const d2d::MultiSpritesImpl* sprite_impl);
 
-	void OnClose(wxCloseEvent& event);
+	void OnCloseEvent(wxCloseEvent& event);
 
 private:
 	Symbol* m_symbol;

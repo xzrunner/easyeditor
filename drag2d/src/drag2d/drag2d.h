@@ -63,7 +63,7 @@
 #include "view/ToolbarPanel.h"
 #include "view/ViewlistPanel.h"
 #include "view/ExceptionDlg.h"
-#include "view/ExitDlg.h"
+#include "view/ConfirmDialog.h"
 #include "view/Frame.h"
 #include "view/ObjectVector.h"
 #include "view/SettingsDialog.h"

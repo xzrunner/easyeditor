@@ -21,7 +21,7 @@ private:
 		const d2d::MultiSpritesImpl* sprite_impl);
 	void InitEditOP(d2d::ISprite* edited);
 
-	void OnClose(wxCloseEvent& event);
+	void OnCloseEvent(wxCloseEvent& event);
 
 private:
 	StagePanel* m_stage;

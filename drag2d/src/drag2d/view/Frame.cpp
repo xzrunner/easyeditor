@@ -8,7 +8,7 @@
 #include "common/SettingData.h"
 #include "common/StackTrace.h"
 #include "view/ExceptionDlg.h"
-#include "view/ExitDlg.h"
+#include "view/ConfirmDialog.h"
 #include "view/FrameDropTarget.h"
 #include "view/EditPanel.h"
 #include "view/IStageCanvas.h"
@@ -270,21 +270,18 @@ void Frame::onQuit(wxCommandEvent& event)
 
 void Frame::onClose(wxCloseEvent& event)
 {
-	if (!m_task->IsDirty())
-	{
-		Destroy();
-		return;
-	}
-
-	if (!m_curr_filename.empty()) {
-		ExitDlg dlg(this);
-		int val = dlg.ShowModal();
-		if (val == wxID_OK) {
+	ConfirmDialog dlg(this);
+	int val = dlg.ShowModal();
+	if (val == wxID_YES) {
+		if (!m_curr_filename.empty()) {
 			m_task->Store(m_curr_filename.c_str());
+		} else {
+			onSaveAs(wxCommandEvent());
 		}
+		Destroy();
+	} else if (val == wxID_NO) {
+		Destroy();
 	}
-
-	Destroy();
 }
 
 void Frame::initMenuBar()

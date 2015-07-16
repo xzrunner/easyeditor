@@ -4,16 +4,16 @@ namespace d2d
 {
 
 BEGIN_EVENT_TABLE(BaseDialog, wxDialog)
-	EVT_CLOSE(BaseDialog::onCloseEvent)
+	EVT_CLOSE(BaseDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
 BaseDialog::BaseDialog(wxWindow* parent, wxString title, const wxPoint& pos, const wxSize& size)
 	: wxDialog(parent, wxID_ANY, title, pos, size)
 {
-	toCenter();
+	MoveToCenter();
 }
 
-void BaseDialog::toCenter()
+void BaseDialog::MoveToCenter()
 {
 	wxRect rect;
 	wxWindow* top = m_parent;
@@ -28,12 +28,12 @@ void BaseDialog::toCenter()
  	SetPosition(wxPoint(x, y));
 }
 
-void BaseDialog::onCloseEvent(wxCloseEvent& event)
+void BaseDialog::OnCloseEvent(wxCloseEvent& event)
 {
-	onClose(!event.CanVeto(), wxID_CANCEL);
+	OnClose(!event.CanVeto(), wxID_CANCEL);
 }
 
-void BaseDialog::onClose(bool force, int returncode)
+void BaseDialog::OnClose(bool force, int returncode)
 {
 	if(IsModal())
 	{

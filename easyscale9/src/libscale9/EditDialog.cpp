@@ -9,7 +9,7 @@
 namespace escale9
 {
 	BEGIN_EVENT_TABLE(EditDialog, wxDialog)
-		EVT_CLOSE(EditDialog::onClose)
+		EVT_CLOSE(EditDialog::OnCloseEvent)
 	END_EVENT_TABLE()
 
 	EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
@@ -35,28 +35,27 @@ namespace escale9
 		splitter->SplitVertically(m_stage, toolbar);
 	}
 
-	void EditDialog::onClose(wxCloseEvent& event)
+	void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	{
-		if (!m_stage->IsEditDirty())
-		{
+		if (!m_stage->IsEditDirty()) {
 			Destroy();
 			return;
 		}
 
-		d2d::ExitDlg dlg(this);
+		d2d::ConfirmDialog dlg(this);
 		int val = dlg.ShowModal();
-		if (val == wxID_OK)
+		if (val == wxID_YES)
 		{
 			const std::string& filepath = m_symbol->GetFilepath();
 			FileSaver::store(filepath.c_str(), *m_symbol);
 			m_symbol->RefreshThumbnail(filepath);
 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+			Destroy();
 		}
-		else if (val == wxID_CANCEL)
+		else if (val == wxID_NO)
 		{
 			m_symbol->LoadFromFile(m_symbol->GetFilepath());
+			Destroy();
 		}
-
-		Destroy();
 	}
 }

@@ -302,6 +302,11 @@ bool EditPanel::GetKeyState(int key) const
 	return m_keys_state.GetKeyState(key);
 }
 
+void EditPanel::RefreshFrame()
+{
+	m_frame->Refresh();
+}
+
 void EditPanel::OnSize(wxSizeEvent& event)
 {
 	OnSizeDebug(event);

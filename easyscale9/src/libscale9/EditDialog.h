@@ -16,7 +16,7 @@ namespace escale9
 
 		void storeSymbol();
 
-		void onClose(wxCloseEvent& event);
+		void OnCloseEvent(wxCloseEvent& event);
 
 	private:
 		Symbol* m_symbol;

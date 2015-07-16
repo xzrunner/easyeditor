@@ -22,7 +22,6 @@ private:
 	wxWindow* InitLayoutRight(wxWindow* parent);
 
 	void OnCloseEvent(wxCloseEvent& event);
-	void OnClose(bool force, int returncode);
 
 	void LoadSymbolInfo();
 

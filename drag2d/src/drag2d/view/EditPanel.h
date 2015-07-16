@@ -19,7 +19,7 @@ class Camera;
 class EditPanel : public wxPanel
 {
 public:
-	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
+	EditPanel(wxWindow* parent, wxTopLevelWindow* m_frame);
 	virtual ~EditPanel();
 
 	//
@@ -73,6 +73,8 @@ public:
 	bool GetKeyState(int key) const;
 	const KeysState& GetKeyState() const { return m_keys_state; }
 	KeysState& GetKeyState() { return m_keys_state; }
+
+	void RefreshFrame();
 
 protected:
 	void OnSize(wxSizeEvent& event);

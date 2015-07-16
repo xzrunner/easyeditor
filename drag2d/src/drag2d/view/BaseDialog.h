@@ -13,11 +13,12 @@ public:
 		const wxSize& size = wxDefaultSize);
 
 private:
-	void toCenter();
+	void MoveToCenter();
 
-	void onCloseEvent(wxCloseEvent& event);
-	void onClose(bool force, int returncode);
+	void OnCloseEvent(wxCloseEvent& event);
+	void OnClose(bool force, int returncode);
 
+private:
 	DECLARE_EVENT_TABLE()
 
 }; // BaseDialog
