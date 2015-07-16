@@ -65,8 +65,6 @@ void StageCanvas::OnDrawSprites() const
 	m_stat.End();
 
 #ifdef _DEBUG 
-//		d2d::DynamicTexture::Instance()->DebugDraw();
-//		d2d::DynamicFont::Instance()->DebugDraw();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->DebugDraw();
 	}

@@ -80,7 +80,6 @@ void DynamicPacker::DebugDraw() const
 	vertices[3].set(EDGE, 0);
 
 	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->SetFBO(0);
 	shader->sprite();
 	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
 
