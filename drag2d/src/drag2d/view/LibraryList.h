@@ -3,6 +3,8 @@
 
 #include "widgets/VerticalImageList.h"
 
+#include <set>
+
 namespace d2d
 {
 
@@ -15,13 +17,30 @@ public:
 	LibraryList(ILibraryPage* page, const std::string& filter 
 		= std::string("symbol"), bool draggable = true);
 
-	ListItem* getItem(int index = -1) const;
-	ISymbol* getSymbol(int index = -1) const;
+	//
+	//	interface VerticalImageList
+	//
+	virtual void OnListSelected(wxCommandEvent& event);
+	virtual void Clear();
+	virtual void Insert(ListItem* item);
+	virtual void InsertFront(ListItem* item);
+	virtual void Remove();
+	virtual void Remove(int index);
+	virtual void Swap(int i0, int i1);
+
+	ListItem* GetItem(int index = -1) const;
 
 	void ReloadTexture() const;
 
 private:
 	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnKillFocus(wxFocusEvent& event);
+	virtual void OnMouseEvent(wxMouseEvent& event);
+
+	void OnDragInit(wxMouseEvent& event);
+
+private:
+	std::set<int> m_selection_set;
 
 }; // LibraryList
 

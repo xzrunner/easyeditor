@@ -8,11 +8,11 @@ void StringTools::Split(const std::string& src, const std::string& mid,
 {
 	char* cstr = new char [src.length()+1];
 	std::strcpy(cstr, src.c_str());
-	char* p = std::strtok(cstr,";");
+	char* p = std::strtok(cstr, mid.c_str());
 	while (p!=0)
 	{
 		dst.push_back(std::string(p));
-		p = strtok(NULL,";");
+		p = strtok(NULL, mid.c_str());
 	}
 	delete[] cstr;
 }

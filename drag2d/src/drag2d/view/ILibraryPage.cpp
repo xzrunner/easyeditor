@@ -32,12 +32,17 @@ void ILibraryPage::Traverse(IVisitor& visitor) const
 
 ListItem* ILibraryPage::GetItem(int index/* = -1*/) const
 {
-	return m_list->getItem(index);
+	return m_list->GetItem(index);
 }
 
 ISymbol* ILibraryPage::GetSymbol(int index/* = -1*/) const
 {
-	return m_list->getSymbol(index);
+	ListItem* item = GetItem(index);
+	if (item) {
+		return static_cast<ISymbol*>(item);
+	} else {
+		return NULL;
+	}
 }
 
 void ILibraryPage::ReloadTexture() const

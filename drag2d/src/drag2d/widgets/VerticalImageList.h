@@ -20,18 +20,17 @@ public:
 		bool draggable = true);
 	virtual ~VerticalImageList();
 
-	// VerticalImageList
 	virtual void OnListSelected(wxCommandEvent& event) {}
 	virtual void OnListDoubleClicked(wxCommandEvent& event) {}
 
-	void Traverse(IVisitor& visitor) const;
+	virtual void Clear();
+	virtual void Insert(ListItem* item);
+	virtual void InsertFront(ListItem* item);
+	virtual void Remove();
+	virtual void Remove(int index);
+	virtual void Swap(int i0, int i1);
 
-	void Clear();
-	void Insert(ListItem* item);
-	void InsertFront(ListItem* item);
-	void Remove();
-	void Remove(int index);
-	void Swap(int i0, int i1);
+	void Traverse(IVisitor& visitor) const;
 
 	void SetFileter(const std::string& filter) {
 		m_name = filter;
@@ -53,16 +52,14 @@ protected:
 	virtual void OnKeyDown(wxKeyEvent& event);
 	virtual void OnKeyUp(wxKeyEvent& event);
 	virtual void OnKillFocus(wxFocusEvent& event);
-
-private:
-	void OnDragInit(wxMouseEvent& event);
+	virtual void OnMouseEvent(wxMouseEvent& event);
 
 protected:
 	std::vector<ListItem*> m_items;
 
-private:
 	std::string m_name;
 
+private:
 	KeysState m_keys_state;
 
 	DECLARE_EVENT_TABLE()

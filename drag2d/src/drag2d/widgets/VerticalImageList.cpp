@@ -14,6 +14,7 @@ BEGIN_EVENT_TABLE(VerticalImageList, wxVListBox)
 	EVT_KEY_DOWN(VerticalImageList::OnKeyDown)
 	EVT_KEY_UP(VerticalImageList::OnKeyUp)
 	EVT_KILL_FOCUS(VerticalImageList::OnKillFocus)
+	EVT_MOTION(VerticalImageList::OnMouseEvent)
 END_EVENT_TABLE()
 
 VerticalImageList::VerticalImageList(wxWindow* parent, 
@@ -28,27 +29,14 @@ VerticalImageList::VerticalImageList(wxWindow* parent,
 	Connect(GetId(), wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler(VerticalImageList::OnListSelected));
 	Connect(GetId(), wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(VerticalImageList::OnListDoubleClicked));
 
-	if (draggable)
-	{
+	if (draggable) {
 		SetDropTarget(new DragTargetNull);
-		Connect(GetId(), wxEVT_MOTION, wxMouseEventHandler(VerticalImageList::OnDragInit));
 	}
 }
 
 VerticalImageList::~VerticalImageList()
 {
 	Clear();
-}
-
-void VerticalImageList::Traverse(IVisitor& visitor) const
-{
-	std::vector<ListItem*>::const_iterator itr = m_items.begin();
-	for ( ; itr != m_items.end(); ++itr)
-	{
-		bool hasNext;
-		visitor.Visit(*itr, hasNext);
-		if (!hasNext) break;
-	}
 }
 
 void VerticalImageList::Clear()
@@ -103,6 +91,17 @@ void VerticalImageList::Swap(int i0, int i1)
 
 	std::swap(m_items[i0], m_items[i1]);
 	Refresh(true);
+}
+
+void VerticalImageList::Traverse(IVisitor& visitor) const
+{
+	std::vector<ListItem*>::const_iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr)
+	{
+		bool hasNext;
+		visitor.Visit(*itr, hasNext);
+		if (!hasNext) break;
+	}
 }
 
 const ListItem* VerticalImageList::GetSelected() const
@@ -196,15 +195,8 @@ void VerticalImageList::OnKillFocus(wxFocusEvent& event)
 	m_keys_state.Reset();
 }
 
-void VerticalImageList::OnDragInit(wxMouseEvent& event)
+void VerticalImageList::OnMouseEvent(wxMouseEvent& event)
 {
-	if (!event.Dragging()) {
-		return;
-	}
-
-	wxTextDataObject tdo(m_name + "," + wxString::FromDouble(GetSelection()));
-	wxDropSource ds(tdo);
-	ds.DoDragDrop(wxDrag_CopyOnly);
 }
 
 } // d2d

@@ -3,6 +3,7 @@
 #include "MultiSpritesImpl.h"
 #include "LibraryPanel.h"
 
+#include "common/StringTools.h"
 #include "dataset/SpriteFactory.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/ISprite.h"
@@ -22,25 +23,33 @@ StageDropTarget::StageDropTarget(EditPanel* edit_panel,
 
 void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 {
-	wxString sType = text.substr(0, text.find(","));
-	wxString sIndex = text.substr(text.find(",") + 1);
+	std::vector<std::string> keys;
+	StringTools::Split(text.ToStdString(), ",", keys);
 
-	long index;
-	sIndex.ToLong(&index);
+	if (keys.size() <= 1) {
+		return;
+	}
 
-	ISymbol* symbol = m_library->GetSymbol(index);
-	if (symbol)
+	for (int i = 1, n = keys.size(); i < n; ++i)
 	{
+		int idx = StringTools::StringToInt(keys[i]);
+		ISymbol* symbol = m_library->GetSymbol(idx);
+		if (!symbol) {
+			continue;
+		}
+
 		Vector pos = m_edit_panel->TransPosScrToProj(x, y);
 		bool handled = OnDropSymbol(symbol, pos);
-		if (!handled) {
-			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-			if (sprite->GetSymbol().GetSize().isValid()) {
-				sprite->Translate(pos);
-				m_sprites_impl->InsertSprite(sprite);
-			}
-			sprite->Release();
+		if (handled) {
+			continue;
 		}
+
+		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		if (sprite->GetSymbol().GetSize().isValid()) {
+			sprite->Translate(pos);
+			m_sprites_impl->InsertSprite(sprite);
+		}
+		sprite->Release();
 	}
 }
 

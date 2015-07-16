@@ -2,6 +2,7 @@
 #include "ILibraryPage.h"
 #include "LibraryPageDropTarget.h"
 
+#include "common/StringTools.h"
 #include "dataset/ISymbol.h"
 
 namespace d2d
@@ -15,7 +16,49 @@ LibraryList::LibraryList(ILibraryPage* page,
 	SetDropTarget(new LibraryPageDropTarget(page));
 }
 
-ListItem* LibraryList::getItem(int index/* = -1*/) const
+void LibraryList::OnListSelected(wxCommandEvent& event)
+{
+	int idx = event.GetInt();
+	m_selection_set.insert(idx);
+}
+
+void LibraryList::Clear()
+{
+	VerticalImageList::Clear();
+	m_selection_set.clear();
+}
+
+void LibraryList::Insert(ListItem* item)
+{
+	VerticalImageList::Insert(item);
+	m_selection_set.clear();
+}
+
+void LibraryList::InsertFront(ListItem* item)
+{
+	VerticalImageList::InsertFront(item);
+	m_selection_set.clear();
+}
+
+void LibraryList::Remove()
+{
+	VerticalImageList::Remove();
+	m_selection_set.clear();
+}
+
+void LibraryList::Remove(int index)
+{
+	VerticalImageList::Remove(index);
+	m_selection_set.clear();
+}
+
+void LibraryList::Swap(int i0, int i1)
+{
+	VerticalImageList::Swap(i0, i1);
+	m_selection_set.clear();
+}
+
+ListItem* LibraryList::GetItem(int index/* = -1*/) const
 {
 	if (index == -1)
 		index = GetSelection();
@@ -24,15 +67,6 @@ ListItem* LibraryList::getItem(int index/* = -1*/) const
 		return NULL;
 	else 
 		return m_items[index];
-}
-
-ISymbol* LibraryList::getSymbol(int index/* = -1*/) const
-{
-	ListItem* item = getItem(index);
-	if (item)
-		return static_cast<ISymbol*>(item);
-	else
-		return NULL;
 }
 
 void LibraryList::ReloadTexture() const
@@ -51,6 +85,33 @@ void LibraryList::OnKeyDown(wxKeyEvent& event)
 		Remove();
 		break;
 	}
+}
+
+void LibraryList::OnKillFocus(wxFocusEvent& event)
+{
+	VerticalImageList::OnKillFocus(event);
+	m_selection_set.clear();
+}
+
+void LibraryList::OnMouseEvent(wxMouseEvent& event)
+{
+	VerticalImageList::OnMouseEvent(event);
+
+	if (!event.Dragging()) {
+		return;
+	}
+
+	m_selection_set.insert(GetSelection());
+
+	std::string text = m_name + ",";
+	std::set<int>::iterator itr = m_selection_set.begin();
+	for ( ; itr != m_selection_set.end(); ++itr) {
+		text += StringTools::IntToString(*itr) + ",";
+	}
+
+	wxTextDataObject tdo(text);
+	wxDropSource ds(tdo);
+	ds.DoDragDrop(wxDrag_CopyOnly);
 }
 
 } // d2d
