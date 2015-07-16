@@ -134,10 +134,12 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 
 		unsigned int screenIndex = event.GetY() / FRAME_GRID_HEIGHT;
 		int layer = size - screenIndex - 1;
-		m_ctrl->setCurrFrame(layer, m_ctrl->frame());
-		m_ctrl->Refresh();
-		if (screenIndex < size) 
-			isDragOpen = true;
+		if (layer >= 0) {
+			m_ctrl->setCurrFrame(layer, m_ctrl->frame());
+			m_ctrl->Refresh();
+			if (screenIndex < size) 
+				isDragOpen = true;
+		}
 	}
 	else if (event.LeftUp())
 	{
@@ -148,11 +150,11 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 	
 			int x = event.GetX();
 			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
-			if (x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
+			if (layer && x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->SetEditable(!layer->IsEditable());
 				Refresh(true);
 				m_ctrl->Refresh();
-			} else if (x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
+			} else if (layer && x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
 				layer->SetVisible(!layer->IsVisible());
 				Refresh(true);
 				m_ctrl->Refresh();

@@ -48,6 +48,8 @@ void PreviewCanvas::OnDrawSprites() const
 void PreviewCanvas::OnTimer()
 {
 	m_control.update();
+	SetDirty();
+
 	if (m_control.frame() <= m_ctrl->GetLayers().getFrameCount()) {
 		return;
 	}
