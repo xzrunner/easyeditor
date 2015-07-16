@@ -73,10 +73,10 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 	{
 		d2d::LibraryList* list = m_pages[i]->GetList();
 		int j = 0;
-		d2d::ISymbol* symbol = list->getSymbol(j++);
+		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(list->GetItem(j++));
 		while (symbol) {
 			value[i][j-1] = d2d::FilenameTools::getRelativePath(dir, symbol->GetFilepath()).ToStdString();
-			symbol = list->getSymbol(j++);
+			symbol = static_cast<d2d::ISymbol*>(list->GetItem(j++));
 		}
 	}
 }
