@@ -25,7 +25,7 @@ bool TextureMgr::Add(const std::string& filepath, int index)
 		}
 	}
 
-	Entry* entry = new Entry;
+	Entry* entry = new Entry(m_src_data_dir);
 	entry->filepath = filepath;
 	entry->adapter.Load(filepath.c_str());
 	delete m_textures[index];

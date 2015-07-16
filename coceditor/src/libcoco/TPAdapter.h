@@ -30,6 +30,8 @@ public:
 	};
 
 public:
+	TPAdapter(const std::string& src_data_dir) 
+		: m_src_data_dir(src_data_dir) {}
 
 	void Load(const char* filename);
 
@@ -46,6 +48,8 @@ private:
 	void Load(const Json::Value& value, Region& region);
 
 private:
+	std::string m_src_data_dir;
+
 	int m_width, m_height;
 
 	float m_invscale;

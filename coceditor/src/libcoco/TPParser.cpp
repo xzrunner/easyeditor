@@ -34,8 +34,6 @@ TPParser::Picture* TPParser::FindPicture(const d2d::ISymbol* symbol) const
 
 void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 {
-	const std::vector<const d2d::ISymbol*>& symbols = m_symbol_sorter.GetAllSymbols();
-
 	const TPAdapter& adapter = tex->adapter;
 	const std::vector<TPAdapter::Entry>& frames = adapter.GetFrames();
 	bool flip_y = adapter.IsEasyDBData();
@@ -43,57 +41,9 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 	{
 		const TPAdapter::Entry& entry = frames[i];
 
-		bool log = false;
-		if (entry.filename.find("shadow") != std::string::npos) {
-			log = true;
-			std::ofstream fout("d:/cocopack_debug.txt", std::ios::app);
-			fout << "TPParser::ParserTexture shadow:" << entry.filename << std::endl;
-			fout.close();
-		}
-
 		// find symbol
-		const d2d::ISymbol* symbol = NULL;
-		for (size_t j = 0, m = symbols.size(); j < m; ++j)
-		{
-			const d2d::ISymbol* s = symbols[j];
-			std::string filepath = s->GetFilepath();
-
-			d2d::StringTools::ToLower(filepath);
-			d2d::FilenameTools::formatSeparators(filepath);
-
-			bool find = false;
-			if (entry.filename.find("/") == std::string::npos) {
-				if (filepath.find("/"+entry.filename) != std::string::npos) {
-					find = true;
-				}
-			} else {
-				if (filepath.find(entry.filename) != std::string::npos) {
-					find = true;
-				}
-			}
-
-			if (find) {
-				if (m_map_symbol2picture.find(s) == m_map_symbol2picture.end()) {
-					symbol = s;
-					break;
-				} else {
-					if (log) {
-						std::ofstream fout("d:/cocopack_debug.txt", std::ios::app);
-						fout << "TPParser::ParserTexture find = false\n";
-						fout.close();
-					}
-					find = false;
-				}
-			}
-		}
+		const d2d::ISymbol* symbol = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
 		if (!symbol) {
-
-			if (log) {
-				std::ofstream fout("d:/cocopack_debug.txt", std::ios::app);
-				fout << "TPParser::ParserTexture !symbol\n\n";
-				fout.close();
-			}
-
 			continue;
 		}
 

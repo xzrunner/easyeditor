@@ -65,7 +65,7 @@ void CocoPacker::ResolveSymbols()
 {
 	m_gen->line("texture("+wxString::FromDouble(m_parser.GetTexSize()).ToStdString()+")");
 
-	const std::vector<const d2d::ISymbol*>& symbols = m_parser.GetAllSymbols();
+	const std::vector<const d2d::ISymbol*>& symbols = m_parser.GetSymbolSet().GetOrdered();
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
 		const d2d::ISymbol* symbol = symbols[i];

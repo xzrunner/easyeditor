@@ -230,6 +230,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\libcoco\SymbolSet.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\SymbolSet.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libcoco\Utility.cpp"
 			>
 		</File>

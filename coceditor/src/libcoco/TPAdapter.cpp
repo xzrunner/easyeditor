@@ -38,9 +38,17 @@ void TPAdapter::Load(const char* filename)
 
 void TPAdapter::Load(const Json::Value& value, Entry& entry)
 {
-	entry.filename = value["filename"].asString();
-	d2d::StringTools::ToLower(entry.filename);
-	d2d::FilenameTools::formatSeparators(entry.filename);
+	std::string filepath = value["filename"].asString();
+
+	wxFileName filename(filepath);
+	filename.MakeAbsolute(m_src_data_dir);
+	filename.Normalize();
+	filepath = filename.GetFullPath();
+
+	d2d::StringTools::ToLower(filepath);
+	d2d::FilenameTools::formatSeparators(filepath);
+
+	entry.filename = filepath;
 
 	Load(value["frame"], entry.frame);
 	entry.rotated = value["rotated"].asBool();

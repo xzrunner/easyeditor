@@ -38,8 +38,8 @@ public:
 
 	int GetTexSize() const { return m_tex_size; }
 
-	const std::vector<const d2d::ISymbol*>& GetAllSymbols() const {
-		return m_symbol_sorter.GetAllSymbols();
+	const SymbolSet& GetSymbolSet() const {
+		return m_symbol_sorter.GetSymbolSet();
 	}
 
 	TPParser::Picture* FindPicture(const d2d::ISymbol* symbol) const;

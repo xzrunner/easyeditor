@@ -24,7 +24,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	// get all symbols
 	SymbolDependanceSorter preprocess;
 	preprocess.prepare(sprites);
-	std::vector<const d2d::ISymbol*> symbols = preprocess.GetAllSymbols();
+	std::vector<const d2d::ISymbol*> symbols = preprocess.GetSymbolSet().GetOrdered();
 	symbols.push_back(&root);
 
 	// pack images

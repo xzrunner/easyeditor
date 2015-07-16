@@ -179,13 +179,13 @@ void SymbolDependanceSorter::sort()
 			if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 			{
 				std::string path = symbol->GetFilepath();
-				m_result.push_back(image);
+				m_symbol_set.Insert(image);
 				m_unique.erase(itr);
 				break;
 			}
 			else if (d2d::FontBlankSymbol* font = dynamic_cast<d2d::FontBlankSymbol*>(symbol))
 			{
-				m_result.push_back(font);
+				m_symbol_set.Insert(font);
 				m_unique.erase(itr);
 				break;
 			}
@@ -199,7 +199,7 @@ void SymbolDependanceSorter::sort()
 				}
 				if (prepared)
 				{
-					m_result.push_back(complex);
+					m_symbol_set.Insert(complex);
 					m_unique.erase(itr);
 					break;
 				}
@@ -220,7 +220,7 @@ void SymbolDependanceSorter::sort()
 				}
 				if (prepared)
 				{
-					m_result.push_back(anim);
+					m_symbol_set.Insert(anim);
 					m_unique.erase(itr);
 					break;
 				}
@@ -265,7 +265,7 @@ void SymbolDependanceSorter::sort()
  				}
  				if (prepared)
  				{
- 					m_result.push_back(patch9);
+ 					m_symbol_set.Insert(patch9);
  					m_unique.erase(itr);
  					break;
  				}
@@ -274,12 +274,8 @@ void SymbolDependanceSorter::sort()
 			{
  				std::string path = mesh->GetImagePath();
  				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-				std::vector<const d2d::ISymbol*>::iterator itr_find 
-					= std::find(m_result.begin(), m_result.end(), image);
-				if (itr_find == m_result.end()) {
-					m_result.push_back(image);
-				}
-				m_result.push_back(mesh);
+				m_symbol_set.Insert(image);
+				m_symbol_set.Insert(mesh);
 				m_unique.erase(itr);
 				break;
 			}
@@ -290,14 +286,9 @@ void SymbolDependanceSorter::sort()
 				eterrain2d::OceanMesh* ocean = oceans[0];
 				const d2d::ImageSymbol* img = ocean->GetImage0();
 				std::string path = img->GetFilepath();
-
 				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-				std::vector<const d2d::ISymbol*>::iterator itr_find 
-					= std::find(m_result.begin(), m_result.end(), image);
-				if (itr_find == m_result.end()) {
-					m_result.push_back(image);
-				}
-				m_result.push_back(ocean_symbol);
+				m_symbol_set.Insert(image);
+				m_symbol_set.Insert(ocean_symbol);
 				m_unique.erase(itr);
 				break;
 			}
@@ -312,14 +303,10 @@ void SymbolDependanceSorter::sort()
 					assert(poly);
 					const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
 					assert(material);
-					const d2d::ImageSymbol* image = material->GetImage();
-					std::vector<const d2d::ISymbol*>::iterator itr_find 
-						= std::find(m_result.begin(), m_result.end(), image);
-					if (itr_find == m_result.end()) {
-						m_result.push_back(image);
-					}
+					d2d::ImageSymbol* image = const_cast<d2d::ImageSymbol*>(material->GetImage());
+					m_symbol_set.Insert(image);
 				}
-				m_result.push_back(tex);
+				m_symbol_set.Insert(tex);
 				m_unique.erase(itr);
 				break;
 			}
@@ -328,14 +315,10 @@ void SymbolDependanceSorter::sort()
 				const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (IsSymbolPrepared(symbol)) {
- 					m_result.push_back(icon);
+ 					m_symbol_set.Insert(icon);
  					m_unique.erase(itr);
  					break;
 				}
-
-// 				m_result.push_back(icon);
-// 				m_unique.erase(itr);
-// 				break;
 			}
 		}
 	}
@@ -348,12 +331,7 @@ bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISprite* sprite) const
 
 bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISymbol* symbol) const
 {
-	for (size_t i = 0, n = m_result.size(); i < n; ++i) {
-		if (symbol == m_result[i]) {
-			return true;
-		}
-	}
-	return false;	
+	return m_symbol_set.Query(symbol);
 }
 
 void SymbolDependanceSorter::PrepareScale9(std::queue<const d2d::ISymbol*>& buffer,

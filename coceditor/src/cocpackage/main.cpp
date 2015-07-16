@@ -178,7 +178,7 @@ void DetectIgnoreFile(int idx, char *argv[], std::string& ignore_file)
 
 void ParamsDetection(int argc, char *argv[], float& scale, std::string& ignore_file)
 {
-	for (int i = 4; i < argc; i += 2)
+	for (int i = 5; i < argc; i += 2)
 	{
 		DetectScale(i, argv, scale);
 		DetectIgnoreFile(i, argv, ignore_file);
@@ -214,8 +214,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	if (argc < 4) {
-		std::cerr << "Need Resource Dir & Texture Packer Filepath & Output filepath !" << std::endl;
+	if (argc < 5) {
+		std::cerr << "Need Resource Dir & Texture Packer Filepath & TP dir & Output filepath !" << std::endl;
 		return 1;
 	}
 
@@ -226,15 +226,15 @@ int main(int argc, char *argv[])
 
 	float gscale = 1.0f;
 	std::string ignore_file;
-	if (argc > 4) {
+	if (argc > 5) {
 		ParamsDetection(argc, argv, gscale, ignore_file);
 	}
 	if (!ignore_file.empty()) {
 		LoadIgnoreList(ignore_file);
 	}
 
-	std::string texpackerpath = argv[2];
-	d2d::SearcherPathMgr::Instance()->ResetPackRes(texpackerpath);
+	std::string tp_path = argv[2];
+	d2d::SearcherPathMgr::Instance()->ResetPackRes(tp_path);
 
 	std::string path = argv[1];
 	bool is_dir = false;
@@ -253,7 +253,10 @@ int main(int argc, char *argv[])
 
 	std::cout << "Load tp data \n";
 
-	LoadTexturePacker(texpackerpath);
+	std::string tp_dir = argv[3];
+	TEX_MGR.SetSrcDataDir(tp_dir);
+
+	LoadTexturePacker(tp_path);
 
 	try {
 		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR);
