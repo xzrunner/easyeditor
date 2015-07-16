@@ -50,11 +50,7 @@ Config* Config::Instance()
 
 bool Config::IsUseDTex() const 
 {
-#ifdef COC_PACKAGE
-	return false;
-#else
 	return m_use_dtex; 
-#endif
 }
 
 void Config::GetStrings(const std::string& key, 

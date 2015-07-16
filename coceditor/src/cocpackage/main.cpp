@@ -219,6 +219,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	d2d::Config::Instance()->EnableUseDTex(false);
 	d2d::Config::Instance()->EnableRender(false);
 
 	InitSymbolCreators();
