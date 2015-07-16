@@ -38,6 +38,7 @@
 #include "dataset/TPNode.h"
 #include "dataset/text_util.h"
 #include "dataset/ImageData.h"
+#include "dataset/TextureImgData.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"
