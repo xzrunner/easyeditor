@@ -19,11 +19,16 @@ ISprite* draw_all_to_one_spr(const MultiSpritesImpl* sprites_impl, ISprite* exce
 			break;
 		}
 	}
+
 	return draw_all_to_one_spr(sprites);
 }
 
 ISprite* draw_all_to_one_spr(const std::vector<ISprite*>& sprites)
 {
+	if (sprites.empty()) {
+		return NULL;
+	}
+
 	Rect r;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		std::vector<Vector> bound;
