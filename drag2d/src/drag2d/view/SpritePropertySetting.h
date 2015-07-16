@@ -24,9 +24,10 @@ protected:
 
 	ISprite* GetSprite();
 
-private:
+protected:
 	d2d::EditPanel* m_stage;
 
+private:
 	SpritePropertyImpl* m_impl;
 
 }; // SpritePropertySetting
