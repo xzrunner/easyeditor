@@ -7,10 +7,6 @@
 namespace d2d
 {
 
-BEGIN_EVENT_TABLE(LibraryList, VerticalImageList)
-	EVT_KEY_DOWN(LibraryList::OnKeyDown)
-END_EVENT_TABLE()
-
 LibraryList::LibraryList(ILibraryPage* page,
 						 const std::string& filter/* = wxT("symbol")*/,
 						 bool draggable /*= true*/)
@@ -47,7 +43,6 @@ void LibraryList::ReloadTexture() const
 
 void LibraryList::OnKeyDown(wxKeyEvent& event)
 {
-	int curr_idx = this->GetSelection();
 	VerticalImageList::OnKeyDown(event);
 
 	switch (event.GetKeyCode())

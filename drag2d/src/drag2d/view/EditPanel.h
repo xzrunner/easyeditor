@@ -72,6 +72,7 @@ public:
 
 	bool GetKeyState(int key) const;
 	const KeysState& GetKeyState() const { return m_keys_state; }
+	KeysState& GetKeyState() { return m_keys_state; }
 
 protected:
 	void OnSize(wxSizeEvent& event);

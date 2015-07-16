@@ -10,6 +10,12 @@ namespace d2d
 static const int SPACE_UP = 5;
 static const int SPACE_DOWN = 25;
 
+BEGIN_EVENT_TABLE(VerticalImageList, wxVListBox)
+	EVT_KEY_DOWN(VerticalImageList::OnKeyDown)
+	EVT_KEY_UP(VerticalImageList::OnKeyUp)
+	EVT_KILL_FOCUS(VerticalImageList::OnKillFocus)
+END_EVENT_TABLE()
+
 VerticalImageList::VerticalImageList(wxWindow* parent, 
 									 const std::string& name,
 									 bool draggable /*= true*/)
@@ -169,13 +175,36 @@ wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 	return size;
 }
 
+void VerticalImageList::OnKeyDown(wxKeyEvent& event)
+{
+	wxVListBox::OnKeyDown(event);
+
+	int key_code = event.GetKeyCode();
+	m_keys_state.OnKeyDown(key_code);
+}
+
+void VerticalImageList::OnKeyUp(wxKeyEvent& event)
+{
+//	wxVListBox::OnKeyUp(event);
+
+	int key_code = event.GetKeyCode();
+	m_keys_state.OnKeyUp(key_code);
+}
+
+void VerticalImageList::OnKillFocus(wxFocusEvent& event)
+{
+	m_keys_state.Reset();
+}
+
 void VerticalImageList::OnDragInit(wxMouseEvent& event)
 {
-	if (event.Dragging())
-	{
-		wxTextDataObject tdo(m_name + "," + wxString::FromDouble(GetSelection()));
-		wxDropSource ds(tdo);
-		ds.DoDragDrop(wxDrag_CopyOnly);
+	if (!event.Dragging()) {
+		return;
 	}
+
+	wxTextDataObject tdo(m_name + "," + wxString::FromDouble(GetSelection()));
+	wxDropSource ds(tdo);
+	ds.DoDragDrop(wxDrag_CopyOnly);
 }
+
 } // d2d

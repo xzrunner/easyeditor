@@ -57,6 +57,8 @@ private:
 
 	void OnTimer(wxTimerEvent& event);
 
+	void OnKillFocus(wxFocusEvent& event);
+
 protected:
 	EditPanel* m_stage;
 

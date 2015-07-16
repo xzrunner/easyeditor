@@ -21,10 +21,7 @@ public:
 	void ReloadTexture() const;
 
 private:
-	void OnKeyDown(wxKeyEvent& event);
-
-private:
-	DECLARE_EVENT_TABLE()
+	virtual void OnKeyDown(wxKeyEvent& event);
 
 }; // LibraryList
 

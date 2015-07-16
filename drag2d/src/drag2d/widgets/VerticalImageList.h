@@ -5,6 +5,8 @@
 #include <wx/vlbox.h>
 #include <vector>
 
+#include "view/KeysState.h"
+
 namespace d2d
 {
 
@@ -37,12 +39,20 @@ public:
 
 	const ListItem* GetSelected() const;
 
+	bool GetKeyState(int key) const {
+		return m_keys_state.GetKeyState(key);
+	}
+
 protected:
 	// wxVListBox
 	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
 //		virtual void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const;
 	virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const;
 	virtual wxCoord OnMeasureItem(size_t n) const;
+
+	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnKeyUp(wxKeyEvent& event);
+	virtual void OnKillFocus(wxFocusEvent& event);
 
 private:
 	void OnDragInit(wxMouseEvent& event);
@@ -52,6 +62,10 @@ protected:
 
 private:
 	std::string m_name;
+
+	KeysState m_keys_state;
+
+	DECLARE_EVENT_TABLE()
 
 }; // VerticalImageList
 

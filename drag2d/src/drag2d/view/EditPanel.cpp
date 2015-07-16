@@ -283,16 +283,6 @@ void EditPanel::SetTitleStatus(bool dirty)
 	}
 }
 
-void EditPanel::OnSize(wxSizeEvent& event)
-{
-	OnSizeDebug(event);
-
-	if (m_canvas) {
-		m_canvas->SetSize(event.GetSize());
-	}
-	SetCanvasDirty();	// no refresh when change window size
-}
-
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
 	if (m_edit_op) {
@@ -310,6 +300,16 @@ void EditPanel::SetCanvasDirty()
 bool EditPanel::GetKeyState(int key) const 
 { 
 	return m_keys_state.GetKeyState(key);
+}
+
+void EditPanel::OnSize(wxSizeEvent& event)
+{
+	OnSizeDebug(event);
+
+	if (m_canvas) {
+		m_canvas->SetSize(event.GetSize());
+	}
+	SetCanvasDirty();	// no refresh when change window size
 }
 
 } // d2d

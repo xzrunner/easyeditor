@@ -19,6 +19,7 @@ BEGIN_EVENT_TABLE(IStageCanvas, wxGLCanvas)
  	EVT_KEY_DOWN(IStageCanvas::OnKeyDown)
 	EVT_KEY_UP(IStageCanvas::OnKeyUp)
 	EVT_TIMER(TIMER_ID, IStageCanvas::OnTimer)
+	EVT_KILL_FOCUS(IStageCanvas::OnKillFocus)
 END_EVENT_TABLE()
 
 static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN, 1,
@@ -160,6 +161,11 @@ void IStageCanvas::OnTimer(wxTimerEvent& event)
 	if (m_dirty || m_cam_dirty) {
 		Refresh();
 	}
+}
+
+void IStageCanvas::OnKillFocus(wxFocusEvent& event)
+{
+	m_stage->GetKeyState().Reset();
 }
 
 }

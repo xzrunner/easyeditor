@@ -4,10 +4,6 @@
 namespace d2d
 {
 
-BEGIN_EVENT_TABLE(ViewlistList, VerticalImageList)
-	EVT_KEY_DOWN(ViewlistList::OnKeyDown)
-END_EVENT_TABLE()
-
 ViewlistList::ViewlistList(ViewlistPanel* panel)
 	: VerticalImageList(panel, "viewlist", false)
 	, m_panel(panel)
@@ -29,9 +25,7 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	int curr_idx = this->GetSelection();
 	VerticalImageList::OnKeyDown(event);
 
-	int key_code = event.GetKeyCode();
-	m_keys_state.OnKeyDown(key_code);
-	switch (key_code)
+	switch (event.GetKeyCode())
 	{
 	case WXK_PAGEUP:
 		SetSelection(curr_idx);
@@ -47,14 +41,6 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 		m_panel->RemoveSelected();
 		break;
 	}
-}
-
-void ViewlistList::OnKeyUp(wxKeyEvent& event)
-{
-//	VerticalImageList::OnKeyUp(event);
-	
-	int key_code = event.GetKeyCode();
-	m_keys_state.OnKeyUp(key_code);
 }
 
 } // d2d
