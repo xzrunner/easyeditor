@@ -85,11 +85,11 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config
 
 	libpacker::NormalPack tex_packer(images);
 	tex_packer.Pack();
-	std::string json_path = dst_name + "1.json";
+	std::string json_path = dst_name + ".json";
 	tex_packer.OutputInfo(config_dir, trim, json_path);
 
 	if (pkg_val["rrp"].isNull()) {
-		std::string img_path = dst_name + "1.png";
+		std::string img_path = dst_name + ".png";
 		tex_packer.OutputImage(img_path);
 
 		CompressTexture(img_path, tex_type);

@@ -178,20 +178,25 @@ void MaxRectsBinaryPack2::PackSquareMulti(const std::vector<Sprite>& sprites, in
 {
 	static const float AREA_SCALE_LIMIT = 0.8f;
 //	static const float AREA_LIMIT = 64 * 64;
-	static const int EDGE_LIMIT = 64;
+	static const int EDGE_LIMIT = 256;
+	static const int LEFT_AREA_LIMIT = 25000;
 
 	int edge = next_p2((int)ceil(sqrt((float)area)));
 
 	std::vector<Sprite> curr_list = sprites;
 	
-	while (!curr_list.empty()) {
+	int curr_tex = 0;
+	while (!curr_list.empty()) 
+	{
 		std::vector<Sprite> success_list, fail_list;
 
 		d2d::TPNode* root = NewRoot(edge, edge);
-		for (int i = 0, n = curr_list.size(); i < n; ++i) {
+		for (int i = 0, n = curr_list.size(); i < n; ++i) 
+		{
 			const Sprite& spr = curr_list[i];
 			bool success = Insert(root, &spr, m_roots.size());
 			if (success) {
+				spr.pos->tex_id = curr_tex;
 				success_list.push_back(spr);
 			} else {
 				fail_list.push_back(spr);
@@ -199,13 +204,18 @@ void MaxRectsBinaryPack2::PackSquareMulti(const std::vector<Sprite>& sprites, in
 		}
 
 		int used_area = CalArea(success_list);
-		if ((float)used_area / (edge*edge) > AREA_SCALE_LIMIT ||
-			edge <= EDGE_LIMIT) {
+		float used_area_rate = (float)used_area / (edge*edge);
+		int left_area = edge*edge - used_area;
+		if (used_area_rate > AREA_SCALE_LIMIT || edge <= EDGE_LIMIT/* || left_area < LEFT_AREA_LIMIT*/) 
+		{
 			curr_list = fail_list;
 			area = area - used_area;
 			edge = next_p2((int)ceil(sqrt((float)area)));
 			m_roots.push_back(root);
-		} else {
+			++curr_tex;
+		} 
+		else 
+		{
 			edge = edge / 2;
 			delete root;
 		}
