@@ -59,10 +59,11 @@ void LabelNew::Print(const char* text, const Vector& pos,
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)
 {
-// 	// 默认已经是utf8的
-// 	std::string utf8 = text;
+ 	// 默认已经是utf8的
+ 	std::string utf8 = text;
 
-	std::string utf8 = string2utf8(text);
+//	std::string utf8 = string2utf8(text);
+
 	utf8_to_unicode(utf8.c_str(), unicodes, utf8s);
 }
 
