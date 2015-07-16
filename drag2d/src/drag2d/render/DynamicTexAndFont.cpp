@@ -445,7 +445,9 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 	rv.yMin = n->GetMinY() - m_height * 0.5f;
 	rv.yMax = n->GetMaxY() - m_height * 0.5f;
 	rt.xMin = rt.yMin = 0;
-	rt.xMax = rt.yMax = 1;
+//	rt.xMax = rt.yMax = 1;
+	rt.xMax = ori_width;
+	rt.yMax = ori_height;
 	float extend = GetExtend();
 	if (n->IsRotated())
 	{
@@ -518,6 +520,7 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.xMax = rv.xMax-extend;
 		r_vertex.yMin = rv.yMax-extend;
 		r_vertex.yMax = rv.yMax-m_padding;
+
 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// down
