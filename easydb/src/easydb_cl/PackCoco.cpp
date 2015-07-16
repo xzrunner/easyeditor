@@ -190,7 +190,7 @@ void PackCoco::GetAllDataFiles(const std::string& src_folder, const std::string&
 		wxFileName filename(all_files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (!filter.empty() && !filepath.find(filter) == std::string::npos) {
+		if (!filter.empty() && filepath.find(filter) == std::string::npos) {
 			continue;
 		}
 
