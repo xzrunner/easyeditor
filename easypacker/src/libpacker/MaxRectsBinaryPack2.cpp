@@ -178,7 +178,7 @@ void MaxRectsBinaryPack2::PackSquareMulti(const std::vector<Sprite>& sprites, in
 {
 	static const float AREA_SCALE_LIMIT = 0.8f;
 //	static const float AREA_LIMIT = 64 * 64;
-	static const int EDGE_LIMIT = 256;
+	static const int EDGE_LIMIT = 128;
 	static const int LEFT_AREA_LIMIT = 25000;
 
 	int edge = next_p2((int)ceil(sqrt((float)area)));
@@ -211,7 +211,7 @@ void MaxRectsBinaryPack2::PackSquareMulti(const std::vector<Sprite>& sprites, in
 			edge = edge * 2;
 			delete root;
 		}
-		else if (used_area_rate > AREA_SCALE_LIMIT || edge <= EDGE_LIMIT/* || left_area < LEFT_AREA_LIMIT*/) 
+		else if (used_area_rate > AREA_SCALE_LIMIT || edge < EDGE_LIMIT/* || left_area < LEFT_AREA_LIMIT*/) 
 		{
 			curr_list = fail_list;
 			area = area - used_area;
