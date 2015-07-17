@@ -22,6 +22,9 @@ public:
 	virtual void Draw() const;
 
 private:
+	void LoadSprite(const std::string& pkg, const std::string& anim);
+
+private:
 	std::vector<ej_package*> m_ej_pkgs;
 
 	std::vector<eejoy2d::EJSprite*> m_sprites;

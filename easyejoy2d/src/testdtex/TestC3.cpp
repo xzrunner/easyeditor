@@ -27,60 +27,32 @@ TestC3::~TestC3()
 
 void TestC3::Load()
 {
-	{
-		ej_package* pkg = dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epd", 1);
-		m_ej_pkgs.push_back(pkg);
+	LoadSprite("2001dashi", "2001dashi1_build2_3");
+	LoadSprite("2002jumin", "2002jumin1_run_3");
+	LoadSprite("2003daoke", "2003daoke5_attack2_2");
+	LoadSprite("2004shenshe", "2004shenshe5_attack1_2");
+	LoadSprite("2005mojin", "2005mojin3_run_1");
+	LoadSprite("2006jiabing", "2006jiabing5_attack1_3");
+	LoadSprite("2007sishi", "2007sishi5_attack1_3");
+	LoadSprite("2008tianzai", "2008tianzai6_attack1_3");
+	LoadSprite("2009daoshi", "2009daoshi3_run_3");
+	LoadSprite("2010shennv", "2010shennv4_attack1_2");
+	LoadSprite("2011dapeng", "2011dapeng1_circlestyle_attack_1");
+	LoadSprite("2012fujia", "2012fujia3_bomb_1");
+	LoadSprite("2013baji", "2013baji1_attack2_3");
+	LoadSprite("2014yingyan", "2014yingyan1_run_3");
+	LoadSprite("2022xueying", "xueying_ghosttype_attack_1");
+	LoadSprite("2201yini", "2201yini1_attack1_1");
+	LoadSprite("2202xiyu", "2202xiyu1_run_3");
+	LoadSprite("2203langqi", "2203langqi2_cheer_1");
+	LoadSprite("2204wuzhu", "2204wuzhu1_cheer1_1");
+	LoadSprite("2205huoyuansu", "2205huoyuansu_summon_1");
+	LoadSprite("2206jijian", "2206jijian1_attack5_1");
+	LoadSprite("2208tieta", "2208tieta2_attack1_1");
+	LoadSprite("2209cunminnv", "cunminnv_run_1");
+	LoadSprite("2210cunminnan", "cunminnan_run_1");
+	LoadSprite("2212huojuren", "2212huojuren_attack1_3");
 
-		eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "2002jumin1_run_1");
-		m_sprites.push_back(spr);
-
-		dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epp", 1);
-	}
-	{
-		ej_package* pkg = dtexf_c3_load_pkg("2003daoke", "test-dtex/2003daoke.epd", 1);
-		m_ej_pkgs.push_back(pkg);
-
-		eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "2003daoke6_attack1_1");
-		m_sprites.push_back(spr);
-
-		dtexf_c3_load_pkg("2003daoke", "test-dtex/2003daoke.epp", 1);
-	}
-	{
-		ej_package* pkg = dtexf_c3_load_pkg("2004shenshe", "test-dtex/2004shenshe.epd", 1);
-		m_ej_pkgs.push_back(pkg);
-
-		eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "2004shenshe1_attack1_1");
-		m_sprites.push_back(spr);
-
-		dtexf_c3_load_pkg("2004shenshe", "test-dtex/2004shenshe.epp", 1);	
-	}
-	{
-		ej_package* pkg = dtexf_c3_load_pkg("2005mojin", "test-dtex/2005mojin.epd", 1);
-		m_ej_pkgs.push_back(pkg);
-
-		eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "2005mojin1_attack1_1");
-		m_sprites.push_back(spr);
-
-		dtexf_c3_load_pkg("2005mojin", "test-dtex/2005mojin.epp", 1);	
-	}
-	{
-		ej_package* pkg = dtexf_c3_load_pkg("2006jiabing", "test-dtex/2006jiabing.epd", 1);
-		m_ej_pkgs.push_back(pkg);
-
-		eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "2006jiabing6_attack1_1");
-		m_sprites.push_back(spr);
-
-		dtexf_c3_load_pkg("2006jiabing", "test-dtex/2006jiabing.epp", 1);	
-	}
-	{
-		ej_package* pkg = dtexf_c3_load_pkg("2007sishi", "test-dtex/2007sishi.epd", 1);
-		m_ej_pkgs.push_back(pkg);
-
-		eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "2007sishi6_attack1_3");
-		m_sprites.push_back(spr);
-
-		dtexf_c3_load_pkg("2007sishi", "test-dtex/2007sishi.epp", 1);	
-	}
 	dtexf_c3_load_pkg_finish();
 }
 
@@ -102,12 +74,23 @@ void TestC3::Draw() const
 	scr->Bind();
 	scr->Clear();
 
-	static const int COL = 9;
+	static const int COL = 5;
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Draw((i%COL+1)*100, (std::floor((float)i/COL)+1)*100);
+		m_sprites[i]->Draw((i%COL+1)*200, (std::floor((float)i/COL)+1)*200);
 	}
 
 	scr->UnBind();
+}
+
+void TestC3::LoadSprite(const std::string& pkg_name, const std::string& anim_name)
+{
+	ej_package* pkg = dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epd").c_str(), 1);
+	m_ej_pkgs.push_back(pkg);
+
+	eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, anim_name.c_str());
+	m_sprites.push_back(spr);
+
+	dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epp").c_str(), 1);	
 }
 
 }
