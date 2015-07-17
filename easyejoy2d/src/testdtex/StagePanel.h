@@ -19,6 +19,7 @@ public:
 	// d2d::EditPanel interface
 	//
 	virtual void Clear();
+	virtual bool Update(int version) { return true; }
 
 	void Load();
 	void UnLoad();

@@ -8,7 +8,7 @@ namespace tdtex
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::OnePassCanvas
 {
 public:
 	StageCanvas(StagePanel* panel);

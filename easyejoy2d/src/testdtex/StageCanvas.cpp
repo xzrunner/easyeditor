@@ -7,14 +7,14 @@ namespace tdtex
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
+	: d2d::OnePassCanvas(panel)
 	, m_panel(panel)
 {
 }
 
 void StageCanvas::InitGL()
 {
-	d2d::OrthoCanvas::InitGL();
+	d2d::OnePassCanvas::InitGL();
 
 	m_panel->Load();
 	ResetViewport();	// todo: resize -> new -> resize
@@ -22,7 +22,24 @@ void StageCanvas::InitGL()
 
 void StageCanvas::OnSize(int w, int h)
 {
-	d2d::OrthoCanvas::OnSize(w, h);
+	//////////////////////////////////////////////////////////////////////////
+	// copy from OnePassCanvas
+	//////////////////////////////////////////////////////////////////////////
+	// Makes the OpenGL state that is represented by the OpenGL rendering 
+	// context context current
+	if (IsInited()) {
+		SetCurrentCanvas();
+	}
+
+	glViewport(0, 0, w, h);
+
+	m_screen.SetSize(w, h);
+	m_screen.SetCamera();
+
+	m_camera->UpdateModelView();
+
+	d2d::ShaderMgr::Instance()->SetProjection(w, h);
+	//////////////////////////////////////////////////////////////////////////
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
 	if (scr) {
@@ -48,8 +65,8 @@ void StageCanvas::OnDrawSprites() const
 
 		m_panel->Draw();
 
-		assert(eejoy2d::EJScreen::Instance());
-		eejoy2d::EJScreen::Instance()->DebugDraw();
+ 		assert(eejoy2d::EJScreen::Instance());
+ 		eejoy2d::EJScreen::Instance()->DebugDraw();
 	}
 	// turn to easy2d shader
 	{
