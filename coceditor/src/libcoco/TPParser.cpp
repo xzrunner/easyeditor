@@ -32,6 +32,20 @@ TPParser::Picture* TPParser::FindPicture(const d2d::ISymbol* symbol) const
 	}
 }
 
+void TPParser::DebugInfo() const
+{
+	std::ofstream fout("d:/zz_debug.txt");
+
+	std::map<const d2d::ISymbol*, Picture*>::const_iterator itr 
+		= m_map_symbol2picture.begin();
+	for ( ; itr != m_map_symbol2picture.end(); ++itr) {
+		fout << itr->first->GetFilepath() << "\n";
+		fout << itr->first << "\n\n";
+	}
+
+	fout.close();
+}
+
 void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 {
 	const TPAdapter& adapter = tex->adapter;

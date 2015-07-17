@@ -37,19 +37,18 @@ PackageMgr::~PackageMgr()
 
 ej_package* PackageMgr::Fetch(const std::string& filepath)
 {
-	wxString epd_path = d2d::FilenameTools::getExistFilepath(filepath + ".epd");
+	std::string epd_path = d2d::FilenameTools::getExistFilepath(filepath + ".epd");
 	epd_path = d2d::FilenameTools::FormatFilepathAbsolute(epd_path);
 
-	wxString epp_path = d2d::FilenameTools::getExistFilepath(filepath + ".epp");
+	std::string epp_path = d2d::FilenameTools::getExistFilepath(filepath + ".epp");
 	epp_path = d2d::FilenameTools::FormatFilepathAbsolute(epp_path);
 
-	std::map<std::string, ej_package*>::iterator itr 
-		= m_pkgs.find(epd_path.ToStdString());
+	std::map<std::string, ej_package*>::iterator itr = m_pkgs.find(epd_path);
 	if (itr == m_pkgs.end()) {
 		std::string name = d2d::FilenameTools::getFilename(filepath);
-		ej_package* pkg = dtexf_c3_load_pkg(name.c_str(), epd_path, 1);
+		ej_package* pkg = dtexf_c3_load_pkg(name.c_str(), epd_path.c_str(), 1);
 		m_pkgs.insert(std::make_pair(epd_path, pkg));
-		dtexf_c3_load_pkg(name.c_str(), epp_path, 1);
+		dtexf_c3_load_pkg(name.c_str(), epp_path.c_str(), 1);
 		dtexf_c3_load_pkg_finish();
 		return pkg;
 	} else {
@@ -59,10 +58,9 @@ ej_package* PackageMgr::Fetch(const std::string& filepath)
 
 void PackageMgr::Remove(const std::string& filepath)
 {
-	wxString lowerpath = filepath;
-	lowerpath = lowerpath.Lower();
-	std::map<std::string, ej_package*>::iterator itr 
-		= m_pkgs.find(lowerpath.ToStdString());
+	std::string lowerpath = filepath;
+	d2d::StringTools::ToLower(lowerpath);
+	std::map<std::string, ej_package*>::iterator itr = m_pkgs.find(lowerpath);
 	if (itr != m_pkgs.end()) {
 		m_pkgs.erase(itr);
 	}

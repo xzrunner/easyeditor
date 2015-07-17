@@ -76,10 +76,10 @@ void TrimImage::Trigger(const std::string& dir)
 		}
 	}
 
-	wxString output_file = dir + "\\" + OUTPUT_FILE + ".json";
+	std::string output_file = dir + "\\" + OUTPUT_FILE + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(output_file.mb_str());
+	std::ofstream fout(output_file.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();

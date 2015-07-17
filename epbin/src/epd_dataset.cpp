@@ -593,14 +593,13 @@ void Action::Store(uint8_t** ptr)
 // class Animation
 //////////////////////////////////////////////////////////////////////////
 
-std::set<std::string> Animation::m_set_export;
-
 Animation::Animation(lua_State* L, int id)
 	: m_clipbox(NULL)
 	, m_id(id)
 	, m_type(ANIMATION)
 {
 	// export
+	std::set<std::string> Animation::m_set_export;
 	lua_getfield(L, -1, "export");
 	if (lua_type(L, -1) != LUA_TNIL) {
 		std::string name = lua_tostring(L, -1);

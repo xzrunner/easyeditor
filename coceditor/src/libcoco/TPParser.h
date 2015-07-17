@@ -44,6 +44,8 @@ public:
 
 	TPParser::Picture* FindPicture(const d2d::ISymbol* symbol) const;
 
+	void DebugInfo() const;
+
 private:
 	void ParserTexture(const TextureMgr::Entry* tex, int idx);
 

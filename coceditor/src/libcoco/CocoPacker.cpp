@@ -417,7 +417,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 
 	TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
 	if (!picture) {
-		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 0!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -594,7 +594,11 @@ void CocoPacker::ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc)
 
 	TPParser::Picture* picture = m_parser.FindPicture(symbol);
 	if (!picture) {
-		std::string str = "\""+symbol->GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+symbol->GetFilepath()+"\""+" not in the texpacker file 1!";
+
+// 		printf("symbol pointer: %p \n", symbol);
+// 		m_parser.DebugInfo();
+
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -737,7 +741,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+symbol->GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+symbol->GetFilepath()+"\""+" not in the texpacker file 2!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1072,7 +1076,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(sprite->GetSymbol().getImage()->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 3!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1283,7 +1287,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 4!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1438,7 +1442,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	const d2d::ImageSymbol* img_symbol = material->GetImage();
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
-		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 5!";
 		throw d2d::Exception(str.c_str());
 	}
 
@@ -1869,7 +1873,7 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 		{
 			TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
 			if (!picture) {
-				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file!";
+				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 6!";
 				throw d2d::Exception(str.c_str());
 			}
 

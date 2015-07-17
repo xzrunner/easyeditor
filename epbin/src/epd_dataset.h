@@ -222,9 +222,6 @@ private:
 
 	std::vector<Action*> m_actions;
 
-private:
-	static std::set<std::string> m_set_export;
-
 }; // Animation
 
 }
