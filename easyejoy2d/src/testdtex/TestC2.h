@@ -20,6 +20,10 @@ public:
 	virtual void Draw() const;
 
 private:
+	void LoadSprite(const std::string& pkg_name, 
+		const std::string& anim0, const std::string& anim1);
+
+private:
 	std::vector<eejoy2d::EJSprite*> m_sprites;
 
 }; // TestC2
