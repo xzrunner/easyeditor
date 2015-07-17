@@ -26,18 +26,19 @@ TestSprite::~TestSprite()
 void TestSprite::Load()
 {
 	{
-		ej_package* pkg = dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epd", 1);
-		m_spr = new eejoy2d::EJSprite(pkg, "2002jumin1_run_1");
-		dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epp", 1);
+		ej_package* pkg = dtexf_c3_load_pkg("2005mojin", "2005mojin.epd", 1);
+		m_spr = new eejoy2d::EJSprite(pkg, "2005mojin1_attack1_1");
+		dtexf_c3_load_pkg("2005mojin", "2005mojin.epp", 1);
 	}
 	dtexf_c3_load_pkg_finish();
 
-	m_spr2 = new eejoy2d::EJSprite(dtexf_create_sprite("test-dtex/360.png"));
+	m_spr2 = new eejoy2d::EJSprite(dtexf_create_sprite("360.png"));
 	m_spr2->Translate(300, 0);
 }
 
 void TestSprite::Update()
 {
+	m_spr->Update();
 }
 
 void TestSprite::Draw() const
