@@ -1,4 +1,5 @@
 #include "FilenameTools.h"
+#include "StringTools.h"
 
 #include "common/tools.h"
 #include "common/Exception.h"
@@ -90,8 +91,8 @@ wxString FilenameTools::getAbsolutePath(const wxString& dir, const wxString& rel
 
 wxString FilenameTools::getAbsolutePathFromFile(const wxString& base, const wxString& relative)
 {
-	wxString dir = d2d::FilenameTools::getFileDir(base);
-	return d2d::FilenameTools::getAbsolutePath(dir, relative);
+	wxString dir = FilenameTools::getFileDir(base);
+	return FilenameTools::getAbsolutePath(dir, relative);
 }
 
 wxString FilenameTools::getFilePathExceptExtension(const wxString& filepath)
@@ -162,9 +163,9 @@ wxString FilenameTools::getExistFilepath(const wxString& filepath, const wxStrin
 	}
 }
 
-void FilenameTools::formatSeparators(std::string& filepath)
+void FilenameTools::FormatSeparators(std::string& filepath)
 {
-	const std::string oldVal = "\\", newVal = "/";
+	const std::string oldVal = "/", newVal = "\\";
 	for(std::string::size_type pos(0); pos != std::string::npos; pos += oldVal.length())   
 	{   
 		if((pos = filepath.find(oldVal, pos)) != std::string::npos)
@@ -267,11 +268,19 @@ void FilenameTools::FetchCurrDirs(const std::string& dirpath, wxArrayString& dir
 	dir.Traverse(traverser);
 }
 
-wxString FilenameTools::FormatFilepath(const wxString& filepath)
+std::string FilenameTools::FormatFilepath(const std::string& filepath)
 {
- 	wxFileName filename(filepath);
+	std::string ret = filepath;
+	StringTools::ToLower(ret);
+	FormatSeparators(ret);
+	return ret;
+}
+
+std::string FilenameTools::FormatFilepathAbsolute(const std::string& filepath)
+{
+ 	wxFileName filename(FormatFilepath(filepath));
  	filename.Normalize();
-	return filename.GetFullPath().Lower();
+	return filename.GetFullPath().Lower().ToStdString();
 }
 
 } // d2d

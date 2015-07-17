@@ -49,12 +49,13 @@ void NormalPack::OutputInfo(const std::string& src_folder, const ImageTrimData& 
 			int idx = m_dst_img_idx[i][j];
 
 			Json::Value frame_val;
-			std::string filepath = d2d::FilenameTools::FormatFilepath(m_filepaths[idx]);	
-			const ImageTrimData::Trim* t = trim.Query(filepath);
+			const ImageTrimData::Trim* t = trim.Query(m_filepaths[idx]);
 			if (!t) {
-				throw d2d::Exception("NormalPack::OutputInfo didn't find trim info: %s\n", filepath);
+				throw d2d::Exception("NormalPack::OutputInfo didn't find trim info: %s\n", m_filepaths[idx]);
 			}
 
+			//std::string filepath = d2d::FilenameTools::FormatFilepath(m_filepaths[idx]);	
+			std::string filepath = d2d::FilenameTools::getRelativePath(src_folder, m_filepaths[idx]);	
 			frame_val["filename"] = filepath;
 
 			const RectSize& src_sz = m_src_sizes[idx];

@@ -5,7 +5,7 @@ namespace libcoco
 
 void SymbolSet::Insert(const d2d::ISymbol* symbol)
 {
-	std::string filepath = FormatFilepath(symbol->GetFilepath());
+	std::string filepath = d2d::FilenameTools::FormatFilepath(symbol->GetFilepath());
 	std::map<std::string, const d2d::ISymbol*>::const_iterator itr = 
 		m_symbol_map.find(filepath);
 	if (itr == m_symbol_map.end()) {
@@ -27,18 +27,10 @@ const d2d::ISymbol* SymbolSet::Query(const std::string& filepath) const
 
 bool SymbolSet::Query(const d2d::ISymbol* symbol) const
 {
-	std::string filepath = FormatFilepath(symbol->GetFilepath());
+	std::string filepath = d2d::FilenameTools::FormatFilepath(symbol->GetFilepath());
 	std::map<std::string, const d2d::ISymbol*>::const_iterator itr = 
 		m_symbol_map.find(filepath);
 	return itr != m_symbol_map.end();
-}
-
-std::string SymbolSet::FormatFilepath(const std::string& filepath)
-{
-	std::string ret = filepath;
-	d2d::StringTools::ToLower(ret);
-	d2d::FilenameTools::formatSeparators(ret);	
-	return ret;
 }
 
 }

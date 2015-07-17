@@ -169,7 +169,7 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
 		d2d::ImageSymbol* symbol = static_cast<d2d::ImageSymbol*>(
-			d2d::SymbolMgr::Instance()->FetchSymbol(dirpath + "/" + path));
+			d2d::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
 		m_material = new TextureMaterial(m_vertices, symbol);
 		symbol->Release();
 	}

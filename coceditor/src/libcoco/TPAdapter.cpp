@@ -43,10 +43,7 @@ void TPAdapter::Load(const Json::Value& value, Entry& entry)
 	wxFileName filename(filepath);
 	filename.MakeAbsolute(m_src_data_dir);
 	filename.Normalize();
-	filepath = filename.GetFullPath();
-
-	d2d::StringTools::ToLower(filepath);
-	d2d::FilenameTools::formatSeparators(filepath);
+	filepath = d2d::FilenameTools::FormatFilepath(filename.GetFullPath().ToStdString());
 
 	entry.filename = filepath;
 

@@ -272,7 +272,7 @@ d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string
 
 		std::string res_path = absolute_path;
 		if (!ctrl->GetAnimTemplate().Empty())
-			res_path = ctrl->GetAnimTemplate().Dir() + "/" + filepath;
+			res_path = ctrl->GetAnimTemplate().Dir() + "\\" + filepath;
 		if (!d2d::FilenameTools::isExist(res_path))
 			absolute_path = d2d::FilenameTools::getAbsolutePath(dir, res_path);
 		if (!d2d::FilenameTools::isExist(absolute_path)) {

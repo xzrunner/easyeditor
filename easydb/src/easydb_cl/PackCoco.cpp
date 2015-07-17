@@ -57,7 +57,7 @@ void PackCoco::Trigger(const std::string& config_path)
 	while (!pkg_val.isNull()) {
 		Prepare(pkg_val, config_dir);
 		PackTexture(pkg_val, config_dir, trim);
-		PackLuaFile(pkg_val, config_dir);
+ 		PackLuaFile(pkg_val, config_dir);
 		PackBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
@@ -66,7 +66,7 @@ void PackCoco::Trigger(const std::string& config_path)
 
 void PackCoco::Prepare(const Json::Value& pkg_val, const std::string& config_dir) 
 {
-	std::string dst_folder = config_dir + "/" + pkg_val["dst folder"].asString();
+	std::string dst_folder = config_dir + "\\" + pkg_val["dst folder"].asString();
  	d2d::mk_dir(dst_folder);
 }
 
@@ -86,7 +86,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config
 	libpacker::NormalPack tex_packer(images);
 	tex_packer.Pack();
 	std::string json_path = dst_name + ".json";
-	tex_packer.OutputInfo(config_dir, trim, json_path);
+	tex_packer.OutputInfo(src_folder, trim, json_path);
 
 	if (pkg_val["rrp"].isNull()) {
 		std::string img_path = dst_name + ".png";
@@ -130,12 +130,12 @@ void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const std::string& c
 			d2d::FilenameTools::fetchAllFiles(path_full, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
-					images.push_back(files[i].ToStdString());
+					images.push_back(d2d::FilenameTools::FormatFilepath(files[i].ToStdString()));
 				}
 			}
 		} else if (wxFileName::FileExists(path_full)) {
 			if (d2d::FileNameParser::isType(path_full, d2d::FileNameParser::e_image)) {
-				images.push_back(path_full);
+				images.push_back(d2d::FilenameTools::FormatFilepath(path_full));
 			}
 		}
 		src_val = pkg_val["src image list"][i++];
@@ -148,7 +148,6 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config
 	std::string src_folder = pkg_val["src folder"].asString();
 	std::string dst_folder = pkg_val["dst folder"].asString();
 	std::string dst_name = config_dir + "\\" + dst_folder + "\\" + name;
-	std::string json_path = dst_name + "1.json";
 	std::string src_folder_path = config_dir + "\\" + src_folder;
 	std::string data_filter = pkg_val["src data filter"].asString();
 
@@ -160,7 +159,17 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config
  	}
 
 	libcoco::TextureMgr tex_mgr;
-	tex_mgr.Add(json_path, 0);
+	tex_mgr.SetSrcDataDir(src_folder);
+	int i = 1;
+	while (true) {
+		std::string path = dst_name + d2d::StringTools::IntToString(i) + ".json";
+		if (d2d::FilenameTools::isExist(path)) {
+			tex_mgr.Add(path, i - 1);
+		} else {
+			break;
+		}
+		++i;
+	}
 
 	libcoco::CocoPacker* data_packer = NULL;
 	if (!pkg_val["rrp"].isNull() || !pkg_val["rrr"].isNull() || !pkg_val["b4r"].isNull()) {

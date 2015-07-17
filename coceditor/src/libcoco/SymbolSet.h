@@ -18,9 +18,6 @@ public:
 	const std::vector<const d2d::ISymbol*>& GetOrdered() const { return m_symbol_ordered; }
 
 private:
-	static std::string FormatFilepath(const std::string& filepath);
-
-private:
 	std::map<std::string, const d2d::ISymbol*> m_symbol_map;
 
 	std::vector<const d2d::ISymbol*> m_symbol_ordered;

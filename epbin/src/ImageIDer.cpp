@@ -15,7 +15,7 @@ ImageIDer::ImageIDer(const std::string& filepath)
 int ImageIDer::Query(const std::string& path) const
 {
 	std::string path_fixed = path.substr(0, path.find_last_of('.'));
-	str_replace(path_fixed, "\\", "/");
+	str_replace(path_fixed, "/", "\\");
 
 	std::map<std::string, int>::const_iterator itr = m_ids.find(path_fixed);
 	if (itr == m_ids.end()) {
@@ -38,11 +38,11 @@ void ImageIDer::Load(const std::string& filepath)
 	std::string line;
 	int id = 1;
 	while (std::getline(fin, line)) {
-		std::string path = dir + "/" + line;
+		std::string path = dir + "\\" + line;
 		std::string key = path.substr(0, path.find_last_of('.'));
 
-		str_replace(key, "\\", "/");
-//		str_replace(key, "/", "\\");
+//		str_replace(key, "\\", "/");
+		str_replace(key, "/", "\\");
 
 		m_ids.insert(std::make_pair(key, id++));
 	}

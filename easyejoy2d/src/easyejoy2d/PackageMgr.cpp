@@ -38,10 +38,10 @@ PackageMgr::~PackageMgr()
 ej_package* PackageMgr::Fetch(const std::string& filepath)
 {
 	wxString epd_path = d2d::FilenameTools::getExistFilepath(filepath + ".epd");
-	epd_path = d2d::FilenameTools::FormatFilepath(epd_path);
+	epd_path = d2d::FilenameTools::FormatFilepathAbsolute(epd_path);
 
 	wxString epp_path = d2d::FilenameTools::getExistFilepath(filepath + ".epp");
-	epp_path = d2d::FilenameTools::FormatFilepath(epp_path);
+	epp_path = d2d::FilenameTools::FormatFilepathAbsolute(epp_path);
 
 	std::map<std::string, ej_package*>::iterator itr 
 		= m_pkgs.find(epd_path.ToStdString());

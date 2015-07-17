@@ -95,7 +95,7 @@ GetSymbolPath(const std::string& dir, const Json::Value& json_val) const
 			break;
 		}
 
-		std::string res_path = m_dirpath + "/" + filepath;
+		std::string res_path = m_dirpath + "\\" + filepath;
 		if (!d2d::FilenameTools::isExist(res_path)) {
 			absolute_path = d2d::FilenameTools::getAbsolutePath(dir, res_path);
 		}
