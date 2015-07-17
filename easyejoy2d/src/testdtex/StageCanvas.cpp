@@ -66,7 +66,12 @@ void StageCanvas::OnDrawSprites() const
 		m_panel->Draw();
 
  		assert(eejoy2d::EJScreen::Instance());
+
+		eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+		assert(scr);
+		scr->Bind();
  		eejoy2d::EJScreen::Instance()->DebugDraw();
+		scr->UnBind();
 	}
 	// turn to easy2d shader
 	{
