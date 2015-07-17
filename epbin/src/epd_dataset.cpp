@@ -599,15 +599,15 @@ Animation::Animation(lua_State* L, int id)
 	, m_type(ANIMATION)
 {
 	// export
-	std::set<std::string> Animation::m_set_export;
+	std::set<std::string> set_export;
 	lua_getfield(L, -1, "export");
 	if (lua_type(L, -1) != LUA_TNIL) {
 		std::string name = lua_tostring(L, -1);
-		std::set<std::string>::iterator itr = m_set_export.find(name);
-		if (itr != m_set_export.end()) {
+		std::set<std::string>::iterator itr = set_export.find(name);
+		if (itr != set_export.end()) {
 			throw Exception("BinaryEPD::BinAni rename:%s\n", name);
 		} else {
-			m_set_export.insert(name);
+			set_export.insert(name);
 		}
 		m_export_name.SetString(name);
 	}
