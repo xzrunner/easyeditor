@@ -269,6 +269,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\testdtex\TestC2C3.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC2C3.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\testdtex\TestC3.cpp"
 					>
 				</File>
@@ -368,7 +376,7 @@
 					Name="VCResourceCompilerTool"
 					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
 				/>
-			</FileConfiguration>			
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>
