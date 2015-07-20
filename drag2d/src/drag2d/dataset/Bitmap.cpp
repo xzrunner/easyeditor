@@ -118,7 +118,7 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 		wx_rect.SetLeft(trim_r.xMin);
 		wx_rect.SetRight(trim_r.xMax - 1);
 		wx_rect.SetTop(h - trim_r.yMax);
-		wx_rect.SetBottom(h - trim_r.yMin);
+		wx_rect.SetBottom(h - trim_r.yMin - 1);
 
 		dst_img = wx_img.GetSubImage(wx_rect);
 	} else {
