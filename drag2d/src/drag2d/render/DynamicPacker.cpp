@@ -82,6 +82,7 @@ void DynamicPacker::DebugDraw() const
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->sprite();
 	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
+	shader->SetSpriteColorTrans(Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0));	
 
 	float vb[16];
 
@@ -97,7 +98,7 @@ void DynamicPacker::DebugDraw() const
 	vb[12] = vertices[3].x, vb[13] = vertices[3].y;
 	vb[14] = 1, vb[15] = 0;
 
-	ShaderMgr::Instance()->Draw(vb, m_tex);
+	shader->Draw(vb, m_tex);
 
 	PrimitiveDraw::rect(Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }

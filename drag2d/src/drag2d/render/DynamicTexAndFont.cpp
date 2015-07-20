@@ -430,7 +430,11 @@ void DynamicTexAndFont::DrawRegion(const Rect& vertex, const Rect& texcoords, in
 		vb[14] = texcoords.xMin;
 		vb[15] = texcoords.yMax;
 	}
-	ShaderMgr::Instance()->Draw(vb, texid);
+
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
+	shader->SetSpriteColorTrans(Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0));	
+	shader->Draw(vb, texid);
 }
 
 void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
