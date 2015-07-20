@@ -164,6 +164,10 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	while (!spr_val.isNull()) 
 	{
 		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		if (filepath.empty()) {
+			std::string filepath = spr_val["filepath"].asString();
+			throw d2d::Exception("filepath err: %s", filepath.c_str());
+		}
 		d2d::ISymbol* symbol = NULL;
 
 		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
