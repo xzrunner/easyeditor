@@ -49,8 +49,6 @@ void StageCanvas::OnSize(int w, int h)
 
 void StageCanvas::OnDrawSprites() const
 {
-	m_panel->Update();
-
 	d2d::Rect sr = m_screen.GetRegion();
   	m_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
@@ -62,6 +60,7 @@ void StageCanvas::OnDrawSprites() const
 	{
 		// reset
 		eejoy2d::EJShader::Reset();
+		m_panel->Update();	// after EJShader::Reset()
 
 		m_panel->Draw();
 

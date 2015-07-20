@@ -261,6 +261,14 @@
 				Name="normal"
 				>
 				<File
+					RelativePath="..\..\..\src\testdtex\TestAsync.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestAsync.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\testdtex\TestC2.cpp"
 					>
 				</File>
