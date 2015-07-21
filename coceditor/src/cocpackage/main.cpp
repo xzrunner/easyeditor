@@ -261,9 +261,10 @@ int main(int argc, char *argv[])
 	try {
 		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR);
 		packer.Parser();
-		packer.Output(argv[3]);
+		packer.Output(argv[4]);
 	} catch (d2d::Exception& e) {
 		std::cerr << e.what() << std::endl;
+		return 1;
 	}
 
 	return 0;
