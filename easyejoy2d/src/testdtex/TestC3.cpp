@@ -27,6 +27,15 @@ TestC3::~TestC3()
 
 void TestC3::Load()
 {
+// 	{
+// 		ej_package* pkg = LoadPackage("2003daoke");
+// 		dtexf_c3_load_pkg_finish();
+// 
+// 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "2003daoke5_attack2_2"));
+// 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "2003daoke3_cheer_1"));
+// 	}
+
+
 	LoadSprite("2001dashi", "2001dashi1_build2_3");
 	LoadSprite("2002jumin", "2002jumin1_run_3");
 	LoadSprite("2003daoke", "2003daoke5_attack2_2");
@@ -84,13 +93,23 @@ void TestC3::Draw() const
 
 void TestC3::LoadSprite(const std::string& pkg_name, const std::string& anim_name)
 {
-	ej_package* pkg = dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epd").c_str(), 1);
+	ej_package* pkg = dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epd").c_str(), 0.25f);
 	m_ej_pkgs.push_back(pkg);
 
 	eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, anim_name.c_str());
 	m_sprites.push_back(spr);
 
-	dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epp").c_str(), 1);	
+	dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epp").c_str(), 0.25f);	
+}
+
+ej_package* TestC3::LoadPackage(const std::string& pkg_name)
+{
+	ej_package* pkg = dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epd").c_str(), 0.25f);
+	m_ej_pkgs.push_back(pkg);
+
+	dtexf_c3_load_pkg(pkg_name.c_str(), (pkg_name + ".epp").c_str(), 0.25f);	
+
+	return pkg;
 }
 
 }

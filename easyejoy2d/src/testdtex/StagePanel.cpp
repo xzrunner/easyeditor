@@ -3,6 +3,7 @@
 
 #include "TestC3.h"
 #include "TestC2.h"
+#include "TestC1.h"
 #include "TestC2C3.h"
 #include "TestAsync.h"
 #include "TestSprite.h"
@@ -42,10 +43,11 @@ void StagePanel::Load()
 {
 	eejoy2d::EJScreen::Create();
 
-//	m_test = new TestC3();
+	m_test = new TestC3();
 //	m_test = new TestC2();
 //	m_test = new TestC2C3();
-	m_test = new TestAsync();
+//	m_test = new TestC1();
+//	m_test = new TestAsync();
 
 //	m_test = new TestSprite();
 

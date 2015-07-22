@@ -28,6 +28,8 @@ public:
 
 	void SetFrame(int frame);
 
+	ej_sprite* GetEjSpr() { return m_spr; }
+
 private:
 	void LoadSprite(ej_package* pkg, const char* name);
 

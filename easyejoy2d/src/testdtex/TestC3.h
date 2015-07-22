@@ -23,6 +23,7 @@ public:
 
 private:
 	void LoadSprite(const std::string& pkg, const std::string& anim);
+	ej_package* LoadPackage(const std::string& pkg);
 
 private:
 	std::vector<ej_package*> m_ej_pkgs;
