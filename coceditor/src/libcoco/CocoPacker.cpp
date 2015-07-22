@@ -1630,6 +1630,8 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		{
 			const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(sprite);
 			bool isNullNode = font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+
+
 			if (isNullNode)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1657,15 +1659,27 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		}
 		else
 		{
-			std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
-			if (!sprite->name.empty() && sprite->name[0] != '_')
-			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-				lua::tableassign(*m_gen, "", 2, aName.c_str(), aID.c_str());
+			bool is_null_node = false;
+			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
+			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
+				const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+				is_null_node = font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
 			}
-			else
-			{
-				lua::tableassign(*m_gen, "", 1, aID.c_str());
+
+			if (is_null_node) {
+				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+				lua::tableassign(*m_gen, "", 1, aName.c_str());
+			} else {
+				std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
+				if (!sprite->name.empty() && sprite->name[0] != '_')
+				{
+					std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+					lua::tableassign(*m_gen, "", 2, aName.c_str(), aID.c_str());
+				}
+				else
+				{
+					lua::tableassign(*m_gen, "", 1, aID.c_str());
+				}
 			}
 		}
 		std::vector<std::string> names;
