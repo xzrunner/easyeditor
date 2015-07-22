@@ -10,7 +10,8 @@ extern "C"
 
 struct picture_part {
   int32_t texid;
-  int16_t src[8];
+//  int16_t src[8];
+  float src[8];
   int32_t screen[8];
 };
 
