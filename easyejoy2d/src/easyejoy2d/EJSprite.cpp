@@ -67,6 +67,21 @@ void EJSprite::Draw(int x, int y) const
 	Draw(m_spr, NULL, 0, x, y, m_spr->color_trans, m_spr->color_additive, mat, extra, &screen);
 }
 
+void EJSprite::Translate(int dx, int dy)
+{
+	if (m_spr) {
+		m_spr->mat[4] += dx * 16;
+		m_spr->mat[5] += dy * 16;
+	}
+}
+
+void EJSprite::SetFrame(int frame)
+{
+	if (m_spr) {
+		m_spr->frame = frame;
+	}
+}
+
 void EJSprite::LoadSprite(ej_package* pkg, const char* name)
 {
 	int id = sprite_id(pkg, name);
@@ -210,14 +225,6 @@ _continue:
 		if (c->flag) {
 			screen_clip_pop(0);
 		}
-	}
-}
-
-void EJSprite::Translate(int dx, int dy)
-{
-	if (m_spr) {
-		m_spr->mat[4] += dx * 16;
-		m_spr->mat[5] += dy * 16;
 	}
 }
 

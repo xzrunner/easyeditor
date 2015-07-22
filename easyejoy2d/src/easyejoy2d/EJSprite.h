@@ -26,6 +26,8 @@ public:
 
 	void Translate(int dx, int dy);
 
+	void SetFrame(int frame);
+
 private:
 	void LoadSprite(ej_package* pkg, const char* name);
 
