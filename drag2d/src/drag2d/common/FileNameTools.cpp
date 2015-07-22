@@ -74,7 +74,7 @@ wxString FilenameTools::getRelativePath(const wxString& dir, const wxString& abs
 {
 	wxFileName filename(absolute);
 	filename.MakeRelativeTo(dir);
-	return filename.GetFullPath().ToStdString();
+	return filename.GetFullPath().Lower().ToStdString();
 }
 
 wxString FilenameTools::getAbsolutePath(const wxString& dir, const wxString& relative)
