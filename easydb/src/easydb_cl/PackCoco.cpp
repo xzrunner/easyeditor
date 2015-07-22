@@ -49,7 +49,10 @@ void PackCoco::Trigger(const std::string& config_path)
 
 	std::string config_dir = d2d::FilenameTools::getFileDir(config_path);
 
- 	std::string trim_file = config_dir + "\\" + value["trim file"].asString();
+ 	std::string trim_file = value["trim file"].asString();
+	if (config_dir != ".") {
+		trim_file = config_dir + "\\" + trim_file;
+	}
  	libpacker::ImageTrimData trim(trim_file);
 
 	int i = 0;
@@ -57,8 +60,8 @@ void PackCoco::Trigger(const std::string& config_path)
 	while (!pkg_val.isNull()) {
 //		Prepare(pkg_val, config_dir);
 		PackTexture(pkg_val, config_dir, trim);
- 		PackLuaFile(pkg_val, config_dir);
-		PackBinFiles(pkg_val, config_dir);
+//  		PackLuaFile(pkg_val, config_dir);
+// 		PackBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
 	}
@@ -81,7 +84,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config
 	std::string tex_type = pkg_val["texture type"].asString();
 
 	std::vector<std::string> images;
-	GetAllImageFiles(pkg_val, config_dir, src_folder, images);
+	GetAllImages(pkg_val, config_dir, src_folder, images);
 
 	libpacker::NormalPack tex_packer(images);
 	tex_packer.Pack();
@@ -117,7 +120,98 @@ void PackCoco::CompressTexture(const std::string& filepath, const std::string& t
 	delete[] pixels;
 }
 
-void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const std::string& config_dir,
+void PackCoco::GetAllImages(const Json::Value& pkg_val, const std::string& config_dir, const std::string& src_folder, 
+							std::vector<std::string>& images) const
+{
+	if (pkg_val["src image list"].isNull()) {
+		GetImagesFromJson(config_dir, src_folder, images);
+	} else {
+		GetImagesFromCfg(pkg_val, config_dir, src_folder, images);
+	}
+}
+
+static void _handle_sprite(const std::string& src_dir, const std::string& spr_dir, 
+						   const Json::Value& spr_val, std::set<std::string>& images)
+{
+	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(spr_dir, spr_val);
+	filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		filepath = d2d::FilenameTools::getRelativePath(".", filepath);
+		images.insert(filepath);
+	} else {
+		if (filepath.find(src_dir) == std::string::npos) {
+			throw d2d::Exception("_handle_sprite: file %s not in %s", filepath.c_str(), src_dir.c_str());
+		}
+	}
+}
+
+void PackCoco::GetImagesFromJson(const std::string& config_dir, const std::string& src_folder, 
+								 std::vector<std::string>& images) const
+{
+	std::set<std::string> img_set;
+
+	wxArrayString files;
+	d2d::FilenameTools::fetchAllFiles(src_folder, files);
+	for (int i = 0, n = files.size(); i < n; ++i)
+	{
+		wxFileName filename(files[i]);
+		std::string filepath = filename.GetFullPath();
+		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) 
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
+
+			int j = 0;
+			Json::Value spr_val = value["sprite"][j++];
+			while (!spr_val.isNull()) {
+				std::string spr_dir = d2d::FilenameTools::getFileDir(filepath);
+				_handle_sprite(src_folder, spr_dir, spr_val, img_set);
+				spr_val = value["sprite"][j++];
+			}	
+		} 
+		else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) 
+		{
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(filepath.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
+
+			int j = 0;
+			Json::Value layer_val = value["layer"][j++];
+			while (!layer_val.isNull()) {
+				int k = 0;
+				Json::Value frame_val = layer_val["frame"][k++];
+				while (!frame_val.isNull()) {
+					int m = 0;
+					Json::Value spr_val = frame_val["actor"][m++];
+					while (!spr_val.isNull()) {
+						std::string spr_dir = d2d::FilenameTools::getFileDir(filepath);
+						_handle_sprite(src_folder, spr_dir, spr_val, img_set);
+						spr_val = frame_val["actor"][m++];
+					}
+					frame_val = layer_val["frame"][k++];
+				}
+				layer_val = value["layer"][j++];
+			}	
+		} 
+		else 
+		{
+			throw d2d::Exception("unknown file type: %s", filepath.c_str());
+		}
+	}
+
+	std::copy(img_set.begin(), img_set.end(), back_inserter(images));
+}
+
+void PackCoco::GetImagesFromCfg(const Json::Value& pkg_val, const std::string& config_dir,
 								const std::string& src_folder, std::vector<std::string>& images) const
 {
 	int i = 0;
@@ -264,7 +358,7 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const std::string& confi
 	if (!rrr_val.isNull()) {
 		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
 		std::vector<std::string> img_files;
-		GetAllImageFiles(pkg_val, config_dir, src_folder, img_files);
+		GetAllImages(pkg_val, config_dir, src_folder, img_files);
 		
 		epbin::BinaryRRR bin(img_files, id_filepath, tex_type == epbin::TT_PVR);
 		bin.Pack(dst_name + ".rrr", true);
@@ -274,7 +368,7 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const std::string& confi
 	if (!b4r_val.isNull()) {
 		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
 		std::vector<std::string> img_files;
-		GetAllImageFiles(pkg_val, config_dir, src_folder, img_files);
+		GetAllImages(pkg_val, config_dir, src_folder, img_files);
 
 		epbin::BinaryB4R bin(img_files, id_filepath, tex_type == epbin::TT_PVR);
 		bin.Pack(dst_name + ".b4r", true);

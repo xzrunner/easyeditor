@@ -35,8 +35,12 @@ private:
 	void PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
 		const libpacker::ImageTrimData& trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
-	void GetAllImageFiles(const Json::Value& pkg_val, const std::string& config_dir,
+	void GetAllImages(const Json::Value& pkg_val, const std::string& config_dir,
 		const std::string& src_folder, std::vector<std::string>& images) const;
+	void GetImagesFromCfg(const Json::Value& pkg_val, const std::string& config_dir,
+		const std::string& src_folder, std::vector<std::string>& images) const;
+	void GetImagesFromJson(const std::string& config_dir, const std::string& src_folder, 
+		std::vector<std::string>& images) const;
 
 	void PackLuaFile(const Json::Value& pkg_val, const std::string& config_dir) const;
 	void GetAllDataFiles(const std::string& src_folder, const std::string& filter, 
