@@ -19,7 +19,7 @@ public:
 
 	void Pack();
 
-	void OutputInfo(const std::string& src_folder, const ImageTrimData& trim,
+	void OutputInfo(const std::string& dir, const ImageTrimData& trim,
 		const std::string& dst_file) const;
 	void OutputImage(const std::string& filepath) const;
 

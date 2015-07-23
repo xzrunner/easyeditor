@@ -5,6 +5,7 @@
 
 #include <json/json.h>
 #include <wx/string.h>
+#include <set>
 
 namespace libpacker { class ImageTrimData; }
 
@@ -36,19 +37,25 @@ private:
 		const libpacker::ImageTrimData& trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
 	void GetAllImages(const Json::Value& pkg_val, const std::string& config_dir,
-		const std::string& src_folder, std::vector<std::string>& images) const;
-	void GetImagesFromCfg(const Json::Value& pkg_val, const std::string& config_dir,
-		const std::string& src_folder, std::vector<std::string>& images) const;
-	void GetImagesFromJson(const std::string& config_dir, const std::string& src_folder, 
 		std::vector<std::string>& images) const;
+	void GetImagesFromCfg(const Json::Value& pkg_val, const std::string& config_dir,
+		std::vector<std::string>& images) const;
+	void GetImagesFromJson(const Json::Value& pkg_val, const std::string& config_dir, 
+		std::vector<std::string>& images) const;
+	void GetImagesFromJson(const std::vector<std::string>& src_dirs, const std::string& filepath, 
+		std::set<std::string>& img_set) const;
+	void GetImagesFromSprite(const std::vector<std::string>& src_dirs, const std::string& spr_dir, 
+		const Json::Value& spr_val, std::set<std::string>& images) const;
 
 	void PackLuaFile(const Json::Value& pkg_val, const std::string& config_dir) const;
-	void GetAllDataFiles(const std::string& src_folder, const std::string& filter, 
-		std::vector<std::string>& files) const;
+	void GetAllDataFiles(const Json::Value& pkg_val, const std::string& config_dir, std::vector<std::string>& files) const;
+	void AddJsonFile(const std::string& filepath, const std::string& filter, std::set<std::string>& json_set) const;
 
 	void PackBinFiles(const Json::Value& pkg_val, const std::string& config_dir) const;
 	void GetAllPTSFiles(const Json::Value& pkg_val, const std::string& config_dir,
-		const std::string& src_folder, std::vector<std::string>& pts_files) const;
+		std::vector<std::string>& pts_files) const;
+
+	std::string ConnectCfgDir(const std::string& cfg_dir, const std::string& path) const;
 
 }; // PackCoco
 

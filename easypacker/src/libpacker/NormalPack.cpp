@@ -36,7 +36,7 @@ void NormalPack::Pack()
 	}
 }
 
-void NormalPack::OutputInfo(const std::string& src_folder, const ImageTrimData& trim,
+void NormalPack::OutputInfo(const std::string& dir, const ImageTrimData& trim,
 							const std::string& dst_file) const
 {
 	assert(m_filepaths.size() == m_src_sizes.size() && m_filepaths.size() == m_dst_pos.size());
@@ -55,7 +55,7 @@ void NormalPack::OutputInfo(const std::string& src_folder, const ImageTrimData& 
 			}
 
 			//std::string filepath = d2d::FilenameTools::FormatFilepath(m_filepaths[idx]);	
-			std::string filepath = d2d::FilenameTools::getRelativePath(src_folder, m_filepaths[idx]);	
+			std::string filepath = d2d::FilenameTools::getRelativePath(dir, m_filepaths[idx]);	
 			frame_val["filename"] = filepath;
 
 			const RectSize& src_sz = m_src_sizes[idx];
