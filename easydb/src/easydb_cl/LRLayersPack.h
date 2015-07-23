@@ -25,9 +25,9 @@ public:
 
 	static ICommand* Create() { return new LRLayersPack(); }
 
-private:
 	void Run(const std::string& filepath);
 
+private:
 	void ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
 		Json::Value& out_val);
 	void ParserPolygon(const Json::Value& src_val, const lr::Grids& grids, 

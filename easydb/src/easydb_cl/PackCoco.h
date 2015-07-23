@@ -27,7 +27,6 @@ public:
 
 	static ICommand* Create() { return new PackCoco(); }
 
-private:
 	void Trigger(const std::string& config_path);
 
 private:

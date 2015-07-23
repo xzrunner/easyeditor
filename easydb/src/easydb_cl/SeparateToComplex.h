@@ -21,6 +21,9 @@ public:
 	virtual std::string Usage() const;
 	virtual void Run(int argc, char *argv[]);
 
+	void Run(const std::string& lr_file, const std::string& point_dir,
+		const std::string& tmp_dir);
+
 	static ICommand* Create() { return new SeparateToComplex(); }
 
 private:

@@ -38,6 +38,18 @@ void SeparateToComplex::Run(int argc, char *argv[])
 	Run(argv[2]);
 }
 
+void SeparateToComplex::Run(const std::string& lr_file, const std::string& point_dir, 
+							const std::string& tmp_dir)
+{
+	m_point_dir = point_dir;
+	
+	wxStandardPathsBase& stdp = wxStandardPaths::Get();
+	wxString exe_path = stdp.GetExecutablePath();
+	m_tmp_dir = d2d::FilenameTools::getFileDir(exe_path) + "\\" + tmp_dir;
+
+	Run(lr_file);
+}
+
 void SeparateToComplex::Run(const std::string& filepath)
 {
 	Json::Value lr_val;

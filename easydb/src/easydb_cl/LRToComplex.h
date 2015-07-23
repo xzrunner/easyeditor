@@ -23,9 +23,9 @@ public:
 
 	static ICommand* Create() { return new LRToComplex(); }
 
-private:
 	void Run(const std::string& filepath);
 
+private:
 	void LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_val);
 
 }; // LRToComplex

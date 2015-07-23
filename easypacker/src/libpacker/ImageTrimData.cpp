@@ -48,7 +48,7 @@ void ImageTrimData::Load(const std::string& filepath)
 		trim.ori_h = spr_val["source size"]["h"].asInt();
 
 		std::string file_path = dir + "\\" + spr_val["filepath"].asString();
-		file_path = d2d::FilenameTools::FormatFilepath(file_path);
+		file_path = d2d::FilenameTools::FormatFilepathAbsolute(file_path);
 
 		m_trim_info.insert(std::make_pair(file_path, trim));
 

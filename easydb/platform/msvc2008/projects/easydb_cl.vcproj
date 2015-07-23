@@ -560,6 +560,14 @@
 				<Filter
 					Name="lr"
 					>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRPacker.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRPacker.h"
+						>
+					</File>
 					<Filter
 						Name="extern"
 						>

@@ -44,6 +44,7 @@
 #include "LRLayersPack.h"
 #include "TransOldShapeFile.h"
 #include "SeparateToComplex.h"
+#include "LRPacker.h"
 
 namespace edb
 {
@@ -93,6 +94,7 @@ void CommandLoader::Init()
 	fc->Register(LRLayersPack::Create());
 	fc->Register(TransOldShapeFile::Create());
 	fc->Register(SeparateToComplex::Create());
+	fc->Register(LRPacker::Create());
 }
 
 }

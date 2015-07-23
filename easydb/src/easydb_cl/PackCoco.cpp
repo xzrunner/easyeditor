@@ -56,9 +56,9 @@ void PackCoco::Trigger(const std::string& config_path)
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
-//		Prepare(pkg_val, config_dir);
-		PackTexture(pkg_val, config_dir, trim);
-	 	PackLuaFile(pkg_val, config_dir);
+		Prepare(pkg_val, config_dir);
+ 		PackTexture(pkg_val, config_dir, trim);
+ 	 	PackLuaFile(pkg_val, config_dir);
 		PackBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
@@ -424,6 +424,7 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const std::string& confi
 	std::string dst_folder_path = ConnectCfgDir(config_dir, dst_folder);
 
  	std::string epd_path = dst_name + ".epd";
+
  	epbin::BinaryEPD epd(lua_file);
  	epd.Pack(epd_path, true);
 
