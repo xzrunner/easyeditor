@@ -18,7 +18,9 @@ BinaryEPP::BinaryEPP(const std::string& filename, TextureType type)
 
 void BinaryEPP::Pack(const std::string& outfile) const
 {
+	std::locale::global(std::locale(""));
 	std::ofstream fout(outfile.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 
 	std::string ext;
 	switch (m_type) 
@@ -40,7 +42,9 @@ void BinaryEPP::Pack(const std::string& outfile) const
 		std::stringstream ss;
 		ss << m_filename << i++ << ext;
 
+		std::locale::global(std::locale(""));
 		std::ifstream fin(ss.str().c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));
 		if (fin.fail()) {
 			break;
 		}
