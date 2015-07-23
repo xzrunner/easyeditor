@@ -47,7 +47,8 @@ void PackCoco::Trigger(const std::string& config_path)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string config_dir = d2d::FilenameTools::getFileDir(config_path);
+	std::string config_dir = d2d::FilenameTools::getFileDir(
+		d2d::FilenameTools::FormatFilepathAbsolute(config_path));
 
  	std::string trim_file = ConnectCfgDir(config_dir, value["trim file"].asString());
  	libpacker::ImageTrimData trim(trim_file);
@@ -55,9 +56,9 @@ void PackCoco::Trigger(const std::string& config_path)
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
-		Prepare(pkg_val, config_dir);
+//		Prepare(pkg_val, config_dir);
 		PackTexture(pkg_val, config_dir, trim);
- 		PackLuaFile(pkg_val, config_dir);
+	 	PackLuaFile(pkg_val, config_dir);
 		PackBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
@@ -136,6 +137,7 @@ void PackCoco::GetImagesFromJson(const Json::Value& pkg_val, const std::string& 
 		while (!src_val.isNull()) {
 			std::string path = ConnectCfgDir(config_dir, src_val.asString());
 			if (wxFileName::DirExists(path)) {
+				d2d::StringTools::ToLower(path);
 				src_dirs.push_back(path);
 			}
 			src_val = pkg_val["json list"][i++];
@@ -235,19 +237,22 @@ void PackCoco::GetImagesFromSprite(const std::vector<std::string>& src_dirs, con
 	} 
 	else 
 	{
-		bool find = false;
-		for (int i = 0, n = src_dirs.size(); i < n; ++i) {
-			if (filepath.find(src_dirs[i]) != std::string::npos) {
-				find = true;
-				break;
-			}
-		}
-		if (!find) {
-			std::string dirs_path;
+		if (!src_dirs.empty())
+		{
+			bool find = false;
 			for (int i = 0, n = src_dirs.size(); i < n; ++i) {
-				dirs_path += src_dirs[i] + ";";
+				if (filepath.find(src_dirs[i]) != std::string::npos) {
+					find = true;
+					break;
+				}
 			}
-			throw d2d::Exception("_handle_sprite: file %s not in %s", filepath.c_str(), dirs_path.c_str());
+			if (!find) {
+				std::string dirs_path;
+				for (int i = 0, n = src_dirs.size(); i < n; ++i) {
+					dirs_path += src_dirs[i] + ";";
+				}
+				throw d2d::Exception("_handle_sprite: file %s not in %s", filepath.c_str(), dirs_path.c_str());
+			}
 		}
 
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex) ||

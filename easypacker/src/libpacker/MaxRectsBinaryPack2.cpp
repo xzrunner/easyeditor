@@ -188,7 +188,7 @@ int CalArea(const std::vector<Sprite>& list) {
 	return area;
 }
 
-void MaxRectsBinaryPack2::PackSquareMulti(const std::vector<Sprite>& sprites, int area)
+void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int area)
 {
 	static const float AREA_SCALE_LIMIT = 0.8f;
 	static const float AREA_SCALE_LIMIT_STEP = 0.05f;
@@ -253,7 +253,7 @@ void MaxRectsBinaryPack2::PackSquareMulti(const std::vector<Sprite>& sprites, in
 	MergeSquareMulti(sprites);
 }
 
-bool MaxRectsBinaryPack2::MergeSquareMulti(const std::vector<Sprite>& sprites)
+bool MaxRectsBinaryPack2::MergeSquareMulti(std::vector<Sprite>& sprites)
 {
 	std::vector<int> ids;
 	int count = 0;
@@ -276,6 +276,8 @@ bool MaxRectsBinaryPack2::MergeSquareMulti(const std::vector<Sprite>& sprites)
 		return false;
 	}
 
+	std::vector<d2d::TPNode*> remove_nodes;
+
 	std::vector<int> map_id;
 	d2d::TPNode* new_root = NewRoot(m_roots[ids[0]]->GetWidth() * 2, m_roots[ids[0]]->GetHeight() * 2);
 	std::vector<d2d::TPNode*> new_roots;
@@ -284,23 +286,36 @@ bool MaxRectsBinaryPack2::MergeSquareMulti(const std::vector<Sprite>& sprites)
 			map_id.push_back(new_roots.size());
 			new_roots.push_back(m_roots[i]);
 		} else {
-			delete m_roots[i];
+			remove_nodes.push_back(m_roots[i]);
 			map_id.push_back(m_roots.size() - 4);
 		}
 	}
 	new_roots.push_back(new_root);
 
+	std::vector<Rect> tmp_rects;
+	tmp_rects.reserve(sprites.size());
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite& spr = sprites[i];
+		tmp_rects.push_back(*spr.pos);
 		if (spr.pos->tex_id == ids[0] || spr.pos->tex_id == ids[1] ||
 			spr.pos->tex_id == ids[2] || spr.pos->tex_id == ids[3]) {
 			bool success = Insert(new_root, &spr, m_roots.size() - 4);
-			assert(success);
+			if (!success) {
+				// todo
+				for (int i = 0, n = tmp_rects.size(); i < n; ++i) {
+					*sprites[i].pos = tmp_rects[i];
+				}
+				delete new_root;
+				return false;
+			}
 		}
 		spr.pos->tex_id = map_id[spr.pos->tex_id];
 	}
 
 	m_roots = new_roots;
+	for (int i = 0, n = remove_nodes.size(); i < n; ++i) {
+		delete remove_nodes[i];
+	}
 	
 	MergeSquareMulti(sprites);
 	return true;

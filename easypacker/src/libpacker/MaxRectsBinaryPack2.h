@@ -31,8 +31,8 @@ private:
 	void PackAuto(const std::vector<Sprite>& sprites, int area);
 	void PackSquare(const std::vector<Sprite>& sprites, int area);
 
-	void PackSquareMulti(const std::vector<Sprite>& sprites, int area);
-	bool MergeSquareMulti(const std::vector<Sprite>& sprites);
+	void PackSquareMulti(std::vector<Sprite>& sprites, int area);
+	bool MergeSquareMulti(std::vector<Sprite>& sprites);
 	void SortRoots(const std::vector<Sprite>& sprites);
 
 private:
