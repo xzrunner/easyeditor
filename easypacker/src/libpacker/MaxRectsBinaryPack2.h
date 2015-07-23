@@ -28,12 +28,19 @@ private:
 
 	bool Insert(d2d::TPNode* root, const libpacker::Sprite* sprite, int tex_id = 0) const;
 
-	void PackAuto(const std::vector<Sprite>& sprites, int area,
-		std::vector<Rect>& output);
-	void PackSquare(const std::vector<Sprite>& sprites, int area,
-		std::vector<Rect>& output);
-	void PackSquareMulti(const std::vector<Sprite>& sprites, int area,
-		std::vector<Rect>& output);
+	void PackAuto(const std::vector<Sprite>& sprites, int area);
+	void PackSquare(const std::vector<Sprite>& sprites, int area);
+
+	void PackSquareMulti(const std::vector<Sprite>& sprites, int area);
+	bool MergeSquareMulti(const std::vector<Sprite>& sprites);
+	void SortRoots(const std::vector<Sprite>& sprites);
+
+private:
+	class NodeCmp
+	{
+	public:
+		bool operator() (const d2d::TPNode* n0, d2d::TPNode* n1) const;
+	}; // NodeCmp
 
 private:
 	std::vector<d2d::TPNode*> m_roots;
