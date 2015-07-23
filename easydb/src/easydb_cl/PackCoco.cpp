@@ -170,6 +170,8 @@ void PackCoco::GetImagesFromJson(const Json::Value& pkg_val, const std::string& 
 void PackCoco::GetImagesFromJson(const std::vector<std::string>& src_dirs, const std::string& filepath, 
 								 std::set<std::string>& img_set) const
 {
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) 
 	{
 		Json::Value value;
@@ -183,8 +185,7 @@ void PackCoco::GetImagesFromJson(const std::vector<std::string>& src_dirs, const
 		int j = 0;
 		Json::Value spr_val = value["sprite"][j++];
 		while (!spr_val.isNull()) {
-			std::string spr_dir = d2d::FilenameTools::getFileDir(filepath);
-			GetImagesFromSprite(src_dirs, spr_dir, spr_val, img_set);
+			GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
 			spr_val = value["sprite"][j++];
 		}	
 	} 
@@ -207,8 +208,7 @@ void PackCoco::GetImagesFromJson(const std::vector<std::string>& src_dirs, const
 				int m = 0;
 				Json::Value spr_val = frame_val["actor"][m++];
 				while (!spr_val.isNull()) {
-					std::string spr_dir = d2d::FilenameTools::getFileDir(filepath);
-					GetImagesFromSprite(src_dirs, spr_dir, spr_val, img_set);
+					GetImagesFromSprite(src_dirs, dir, spr_val, img_set);
 					spr_val = frame_val["actor"][m++];
 				}
 				frame_val = layer_val["frame"][k++];
@@ -216,6 +216,49 @@ void PackCoco::GetImagesFromJson(const std::vector<std::string>& src_dirs, const
 			layer_val = value["layer"][j++];
 		}	
 	} 
+	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_texture))
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		int i = 0;
+		Json::Value shape_val = value["shapes"][i++];
+		while (!shape_val.isNull()) {
+			std::string type = shape_val["material"]["type"].asString();
+			if (type == "texture") {
+				std::string filepath = shape_val["material"]["texture path"].asString();
+				filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+				filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+				img_set.insert(filepath);
+			}
+			shape_val = value["shapes"][i++];
+		}
+	}
+	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_terrain2d))
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		int i = 0;
+		Json::Value ocean_val = value["ocean"][i++];
+		while (!ocean_val.isNull()) {
+			std::string filepath = ocean_val["tex0"].asString();
+			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+			filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+			img_set.insert(filepath);
+			ocean_val = value["ocean"][i++];
+		}
+	}
 	else if (filepath.find("_history.json")) 
 	{
 	}
@@ -232,7 +275,7 @@ void PackCoco::GetImagesFromSprite(const std::vector<std::string>& src_dirs, con
 	filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) 
 	{
-		filepath = d2d::FilenameTools::getRelativePath(".", filepath);
+//		filepath = d2d::FilenameTools::getRelativePath(".", filepath);
 		images.insert(filepath);
 	} 
 	else 
@@ -255,10 +298,7 @@ void PackCoco::GetImagesFromSprite(const std::vector<std::string>& src_dirs, con
 			}
 		}
 
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex) ||
-			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
-			GetImagesFromJson(src_dirs, filepath, images);
-		}
+		GetImagesFromJson(src_dirs, filepath, images);
 	}
 }
 
