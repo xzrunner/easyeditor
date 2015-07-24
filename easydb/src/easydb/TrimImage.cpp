@@ -54,6 +54,11 @@ void TrimImage::Trigger(const std::string& dir)
 
 			eimage::ImageTrim trim(*img);
 			d2d::Rect r = trim.Trim();
+			if (!r.isValid()) {
+				r.xMin = r.yMin = 0;
+				r.xMax = img->GetWidth();
+				r.yMax = img->GetHeight();
+			}
 
 			// save info
 			Json::Value spr_val;
