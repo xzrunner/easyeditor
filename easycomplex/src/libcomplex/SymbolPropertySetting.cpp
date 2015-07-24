@@ -25,6 +25,18 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 			SetGroupByNames(wxANY_AS(value, wxString));
 		}
 	}
+	else if (name == wxT("Clipbox") && m_symbol) 
+	{
+		std::vector<std::string> str;
+		d2d::StringTools::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
+		if (str.size() == 4) {
+			Symbol* c = static_cast<Symbol*>(m_symbol);
+			c->m_clipbox.xMin = d2d::StringTools::StringToInt(str[0]);
+			c->m_clipbox.yMin = d2d::StringTools::StringToInt(str[1]);
+			c->m_clipbox.xMax = d2d::StringTools::StringToInt(str[2]);
+			c->m_clipbox.yMax = d2d::StringTools::StringToInt(str[3]);
+		}
+	}
 	else if (name == wxT("Clipbox.xmin") && m_symbol)
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
