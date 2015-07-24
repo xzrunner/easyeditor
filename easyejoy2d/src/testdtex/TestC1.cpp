@@ -50,16 +50,20 @@ void TestC1::Draw() const
  	scr->Clear();
  
 	draw_params params;
-	params.x = params.y = 200;
+	params.x = params.y = 2000;
 	params.color = 0xffffffff;
 	params.additive = 0x00000000;
+	screen_coord screen;
+	sprite_default_coord(&screen);
+	params.screen = &screen;
+	params.mat = NULL;
 
   	static const int COL = 5;
   	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-  		m_sprites[i]->Draw((i%COL+1)*200, (std::floor((float)i/COL)+1)*200);
+//		m_sprites[i]->Draw((i%COL+1)*200, (std::floor((float)i/COL)+1)*200);
 
-// 		ej_sprite* ej_spr = m_sprites[i]->GetEjSpr();
-// 		dtexf_c1_draw_anim(ej_spr->pack, ej_spr->ani, ej_spr->action, ej_spr->frame, &params);
+		ej_sprite* ej_spr = m_sprites[i]->GetEjSpr();
+		dtexf_c1_draw_anim(ej_spr->pack, ej_spr->ani, ej_spr->action, ej_spr->frame, &params);
   	}
  
  	scr->UnBind();
