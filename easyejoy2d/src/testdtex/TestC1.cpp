@@ -60,12 +60,17 @@ void TestC1::Draw() const
 
   	static const int COL = 5;
   	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-//		m_sprites[i]->Draw((i%COL+1)*200, (std::floor((float)i/COL)+1)*200);
 
-		ej_sprite* ej_spr = m_sprites[i]->GetEjSpr();
-		dtexf_c1_draw_anim(ej_spr->pack, ej_spr->ani, ej_spr->action, ej_spr->frame, &params);
+		for (int x = 0; x < 100; ++x) {
+			for (int y = 0; y < 100; ++y) {
+				ej_sprite* ej_spr = m_sprites[i]->GetEjSpr();
+				params.x = 2000 + x * 50;
+				params.y = 2000 + y * 50;
+				dtexf_c1_draw_anim(ej_spr->pack, ej_spr->ani, ej_spr->action, ej_spr->frame, &params);
+			}
+		}
   	}
- 
+
  	scr->UnBind();
 }
 

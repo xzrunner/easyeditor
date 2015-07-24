@@ -71,8 +71,8 @@ void TestC2C3::LoadSprite(const char* test_data[][3], int count)
 		const char* pkg_name = test_data[i][0];
 		std::string epd = std::string(pkg_name) + ".epd",
 			epp = std::string(pkg_name) + ".epp";
-		pkgs[i] = dtexf_c3_load_pkg(pkg_name, epd.c_str(), 1);
-		dtexf_c3_load_pkg(pkg_name, epp.c_str(), 1);
+		pkgs[i] = dtexf_c3_load_pkg(pkg_name, epd.c_str(), 0.25);
+		dtexf_c3_load_pkg(pkg_name, epp.c_str(), 0.25);
 	}
 	dtexf_c3_load_pkg_finish();
 
@@ -80,11 +80,12 @@ void TestC2C3::LoadSprite(const char* test_data[][3], int count)
 	dtexf_c2_load_begin();
 	for (int i = 0; i < count; ++i) 
 	{
-		dtexf_c2_load_sprite(pkgs[i], test_data[i][0]);
-		m_sprites.push_back(new eejoy2d::EJSprite(pkgs[i], test_data[i][0]));
 		dtexf_c2_load_sprite(pkgs[i], test_data[i][1]);
 		m_sprites.push_back(new eejoy2d::EJSprite(pkgs[i], test_data[i][1]));
+		dtexf_c2_load_sprite(pkgs[i], test_data[i][2]);
+		m_sprites.push_back(new eejoy2d::EJSprite(pkgs[i], test_data[i][2]));
 	}
+	dtexf_c2_load_end();
 }
 
 }
