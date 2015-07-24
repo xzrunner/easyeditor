@@ -305,6 +305,10 @@ void SelectSpritesOP::CopyFromSelection()
 	std::string test = data.GetText().ToStdString();
 	reader.parse(data.GetText().ToStdString(), value);
 
+	if (value.isNull()) {
+		return;
+	}
+
 	m_selection->Clear();
 
 	ISprite* last_spr = NULL;
