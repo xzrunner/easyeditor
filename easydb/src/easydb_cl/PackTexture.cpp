@@ -60,11 +60,11 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	libpacker::NormalPack tex_packer(images);
-	tex_packer.Pack(value["static size"].asInt());
-
 	libpacker::ImageTrimData trim(value["trim file"].asString());
-	tex_packer.OutputInfo(src_dir, trim, dst_file + ".json");
+
+	libpacker::NormalPack tex_packer(images, trim);
+	tex_packer.Pack(value["static size"].asInt());
+	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");
 
 	sd.open_image_edge_clip = ori_cfg;

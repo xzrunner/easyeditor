@@ -8,8 +8,9 @@
 namespace libpacker
 {
 
-NormalPack::NormalPack(const std::vector<std::string>& files)
+NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData& trim_info)
 	: m_filepaths(files)
+	, m_trim_info(trim_info)
 {
 }
 
@@ -23,8 +24,7 @@ void NormalPack::Pack(int static_size)
 	Pack(PACK_SQUARE_MULTI, static_size);
 }
 
-void NormalPack::OutputInfo(const std::string& dir, const ImageTrimData& trim_info,
-							const std::string& dst_file) const
+void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file) const
 {
 	assert(m_filepaths.size() == m_src_sizes.size() && m_filepaths.size() == m_dst_pos.size());
 
@@ -43,13 +43,18 @@ void NormalPack::OutputInfo(const std::string& dir, const ImageTrimData& trim_in
 
 			const RectSize& src_sz = m_src_sizes[idx];
 
-			int extrude = src_sz.extrude;
+			const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[idx]);
+			if (!t) {
+				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
+			}
+			int e_left, e_right, e_bottom, e_up;
+			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
 
 			const Rect& pos = m_dst_pos[idx];
-			frame_val["frame"]["x"] = pos.x + extrude;
-			frame_val["frame"]["y"] = pos.y + extrude;
-			frame_val["frame"]["w"] = src_sz.width - extrude * 2;
-			frame_val["frame"]["h"] = src_sz.height - extrude * 2;
+			frame_val["frame"]["x"] = pos.x + e_left;
+			frame_val["frame"]["y"] = pos.y + e_up;
+			frame_val["frame"]["w"] = src_sz.width - e_left - e_right;
+			frame_val["frame"]["h"] = src_sz.height - e_bottom - e_up;
 
 			assert(src_sz.width == pos.width && src_sz.height == pos.height
 				|| src_sz.width == pos.height && src_sz.height == pos.width);
@@ -60,11 +65,6 @@ void NormalPack::OutputInfo(const std::string& dir, const ImageTrimData& trim_in
 			}
 
 			frame_val["trimmed"] = false;
-
-			const ImageTrimData::Trim* t = trim_info.Query(m_filepaths[idx]);
-			if (!t) {
-				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
-			}
 			frame_val["spriteSourceSize"]["x"] = t->x;
 			frame_val["spriteSourceSize"]["y"] = t->y;
 			frame_val["spriteSourceSize"]["w"] = t->w;
@@ -72,18 +72,6 @@ void NormalPack::OutputInfo(const std::string& dir, const ImageTrimData& trim_in
 
 			frame_val["sourceSize"]["w"] = t->ori_w;
 			frame_val["sourceSize"]["h"] = t->ori_h;
-
-// 			if (trim_info) {
-// 
-// 			} else {
-// 				frame_val["spriteSourceSize"]["x"] = 0;
-// 				frame_val["spriteSourceSize"]["y"] = 0;
-// 				frame_val["spriteSourceSize"]["w"] = src_sz.width - extrude * 2;
-// 				frame_val["spriteSourceSize"]["h"] = src_sz.height - extrude * 2;
-// 
-// 				frame_val["sourceSize"]["w"] = src_sz.width - extrude * 2;
-// 				frame_val["sourceSize"]["h"] = src_sz.height - extrude * 2;
-// 			}
 
 			value["frames"][j] = frame_val;
 		}
@@ -120,11 +108,39 @@ void NormalPack::OutputImage(const std::string& filepath) const
 		{
 			int idx = m_dst_img_idx[i][j];
 			const Rect& pos = m_dst_pos[idx];
+			const RectSize& src_sz = m_src_sizes[idx];
+
+			bool rot;
+			assert(src_sz.width == pos.width && src_sz.height == pos.height
+				|| src_sz.width == pos.height && src_sz.height == pos.width);
+			if (src_sz.width == pos.width && src_sz.height == pos.height) {
+				rot = false;
+			} else {
+				rot = true;
+			}
+
 			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(m_filepaths[idx]);
-			int extruce = GetExtrude(img->GetOriginWidth(), img->GetOriginHeight());
-			//		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height, true, img->channels() == 4);
-			pack.AddImage(img, pos.x + extruce, pos.y + extruce, 
-				pos.width - extruce * 2, pos.height - extruce * 2, true, img->GetChannels() == 4, extruce);
+
+			const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[idx]);
+			if (!t) {
+				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
+			}
+			int e_left, e_right, e_bottom, e_up;
+			assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
+			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
+			const bool clockwise = true;
+			if (rot) {
+				if (clockwise) {
+					pack.AddImage(img, pos.x + e_up, pos.y + e_left, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
+						rot, clockwise, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+				} else {
+					pack.AddImage(img, pos.x + e_bottom, pos.y + e_right, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
+						rot, clockwise, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+				}
+			} else {
+				pack.AddImage(img, pos.x + e_left, pos.y + e_bottom, pos.width - e_left - e_right, pos.height - e_bottom - e_up, 
+					rot, clockwise, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+			}
 			img->Release();
 		}
 
@@ -139,12 +155,21 @@ void NormalPack::OutputImage(const std::string& filepath) const
 void NormalPack::Pack(PACK_STRATEGY strategy, int static_size)
 {
 	for (int i = 0, n = m_filepaths.size(); i < n; ++i) {
-		const wxString& path = m_filepaths[i];		
+		const std::string& path = m_filepaths[i];		
+
 		RectSize sz;
-		eimage::ImageIO::ReadHeader(path.mb_str(), sz.width, sz.height);
-		sz.extrude = GetExtrude(sz.width, sz.height);
-		sz.width += sz.extrude * 2;
-		sz.height += sz.extrude * 2;
+		eimage::ImageIO::ReadHeader(path.c_str(), sz.width, sz.height);
+
+		const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[i]);
+		if (!t) {
+			throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[i]);
+		}
+		int e_left, e_right, e_bottom, e_up;
+		assert(t->w == sz.width && t->h == sz.height);
+		GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
+		
+		sz.width += e_left + e_right;
+		sz.height += e_bottom + e_up;
 		m_src_sizes.push_back(sz);
 	}
 
@@ -159,14 +184,23 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size)
 	}
 }
 
-int NormalPack::GetExtrude(int w, int h) const
+void NormalPack::GetExtrude(const int bound[], int w, int h, int& left, int& right, int& bottom, int& up) const
 {
-// 	if (w <= 4 || h <= 4) {
-// 		return 4;
-// 	} else {
-// 		return 1;
-// 	}
-	return 4;
+	left = GetExtrude(bound[0], bound[1], w);
+	up = GetExtrude(bound[2], bound[3], h);
+	right = GetExtrude(bound[4], bound[5], w);
+	bottom = GetExtrude(bound[6], bound[7], h);
+}
+
+int NormalPack::GetExtrude(int max, int tot, int edge) const
+{
+	const float MAX_LIMIT = 25;
+	const float TOT_LIMIT = 0.5f;
+	if (max > MAX_LIMIT || (float)tot/edge > TOT_LIMIT) {
+		return 4;
+	} else {
+		return 1;
+	}
 }
 
 }

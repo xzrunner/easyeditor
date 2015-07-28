@@ -22,7 +22,7 @@ ImagePack::~ImagePack()
 }
 
 void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x, int dst_y, 
-						 PackType type, bool bpp4, int extrude)
+						 PackType type, bool bpp4, int extrude_left, int extrude_bottom, int extrude_right, int extrude_up)
 {
 	assert(dst_x >= 0 && dst_y >= 0);
 	if (type == PT_NORMAL) {
@@ -32,54 +32,55 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 				CopyPixel(src_buf, src_w, src_h, bpp4, ix, iy, dst_x + ix, dst_y + iy);
 			}
 		}
-		// extrude
-		for (int i = 0; i < extrude; ++i)
-		{
+		// left
+		for (int i = 0; i < extrude_left; ++i) {
 			for (int y = 0; y < src_h; ++y) {
-				CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x - i - 1, dst_y + y);					// left
-				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, y, dst_x + src_w + i, dst_y + y);		// right
-			}
-			for (int x = 0; x < src_w; ++x) {
-				CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x + x, dst_y - i - 1);					// bottom
-				CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x + x, dst_y + src_h + i);		// up
+				CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x - i - 1, dst_y + y);
 			}
 		}
-		for (int x = 0; x < extrude; ++x) {
-			for (int y = 0; y < extrude; ++y) {
-				CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x - x - 1, dst_y - y - 1);							// left-bottom
-				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x + src_w + x, dst_y - y - 1);				// right-bottom
-				CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x - x - 1, dst_y + src_h + y);				// left-up
-				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x + src_w + x, dst_y + src_h + y);	// right-up
+		// right
+		for (int i = 0; i < extrude_right; ++i) {
+			for (int y = 0; y < src_h; ++y) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, y, dst_x + src_w + i, dst_y + y);
+			}
+		}
+		// bottom
+		for (int i = 0; i < extrude_bottom; ++i) {
+			for (int x = 0; x < src_w; ++x) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x + x, dst_y - i - 1);
+			}
+		}
+		// up
+		for (int i = 0; i < extrude_up; ++i) {
+			for (int x = 0; x < src_w; ++x) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x + x, dst_y + src_h + i);
+			}
+		}
+		// left-bottom
+		for (int x = 0; x < extrude_left; ++x) {
+			for (int y = 0; y < extrude_bottom; ++y) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x - x - 1, dst_y - y - 1);
+			}
+		}
+		// right-bottom
+		for (int x = 0; x < extrude_right; ++x) {
+			for (int y = 0; y < extrude_bottom; ++y) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x + src_w + x, dst_y - y - 1);
+			}
+		}
+		// left-up
+		for (int x = 0; x < extrude_left; ++x) {
+			for (int y = 0; y < extrude_up; ++y) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x - x - 1, dst_y + src_h + y);
+			}
+		}
+		// right-up
+		for (int x = 0; x < extrude_right; ++x) {
+			for (int y = 0; y < extrude_up; ++y) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x + src_w + x, dst_y + src_h + y);
 			}
 		}
 	} else {
-// 		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
-// 		if (type == PT_CLOCKWISE) {
-// 			for (int iy = 0; iy < src_w; ++iy) {
-// 				for (int ix = 0; ix < src_h; ++ix) {
-// 					int ptr_src = ((src_w - 1 - iy) * src_h + ix) * BYTES_PER_PIXEL,
-// 						ptr_dst = ((dst_y + ix) * m_width + (dst_x + src_w - 1 - iy)) * BYTES_PER_PIXEL;
-// 					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
-// 						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
-// 						m_pixels[ptr_dst++] = src_buf[ptr_src++];
-// 					}
-// 				}
-// 			}
-// 		} else if (type == PT_ANTICLOCKWISE) {
-// 			for (int iy = 0; iy < src_w; ++iy) {
-// 				for (int ix = 0; ix < src_h; ++ix) {
-// 					int ptr_src = ((src_w - 1 - iy) * src_h + ix) * BYTES_PER_PIXEL,
-// 						ptr_dst = ((dst_y + src_h - 1 - ix) * m_width + (dst_x + iy)) * BYTES_PER_PIXEL;
-// 					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
-// 						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
-// 						m_pixels[ptr_dst++] = src_buf[ptr_src++];
-// 					}
-// 				}
-// 			}
-// 		}
-
-		//////////////////////////////////////////////////////////////////////////
-
 		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
 		if (type == PT_CLOCKWISE) {
 			for (int iy = 0; iy < src_h; ++iy) {
@@ -87,23 +88,51 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 					CopyPixelClockwise(src_buf, src_w, src_h, bpp4, ix, iy, dst_x + src_h - 1 - iy, dst_y + ix);
 				}
 			}
-			// extrude
-			for (int i = 0; i < extrude; ++i)
-			{
+			// left
+			for (int i = 0; i < extrude_left; ++i) {
 				for (int y = 0; y < src_h; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x + src_h - 1 - y, dst_y - i - 1);
+				}
+			}
+			// right
+			for (int i = 0; i < extrude_right; ++i) {
+				for (int y = 0; y < src_h; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, y, dst_x + src_h - 1 - y, dst_y + src_w + i);
 				}
+			}
+			// bottom
+ 			for (int i = 0; i < extrude_bottom; ++i) {
+ 				for (int x = 0; x < src_w; ++x) {
+ 					CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x + src_h + i, dst_y + x);
+ 				}
+ 			}
+			// up
+			for (int i = 0; i < extrude_up; ++i) {
 				for (int x = 0; x < src_w; ++x) {
-					CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x + src_h + i, dst_y + x);
 					CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x - i - 1, dst_y + x);
 				}
 			}
-			for (int x = 0; x < extrude; ++x) {
-				for (int y = 0; y < extrude; ++y) {
+			// left-bottom
+			for (int x = 0; x < extrude_bottom; ++x) {
+				for (int y = 0; y < extrude_left; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x + src_h + x, dst_y - y - 1);
+				}
+			}
+			// right-bottom
+			for (int x = 0; x < extrude_bottom; ++x) {
+				for (int y = 0; y < extrude_right; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x + src_h + x, dst_y + src_w + y);
+				}
+			}
+			// left-up
+			for (int x = 0; x < extrude_up; ++x) {
+				for (int y = 0; y < extrude_left; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x - x - 1, dst_y - y - 1);
+				}
+			}
+			// right-up
+			for (int x = 0; x < extrude_up; ++x) {
+				for (int y = 0; y < extrude_right; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x - x - 1, dst_y + src_w + y);
 				}
 			}
@@ -113,23 +142,51 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 					CopyPixelAntiClockwise(src_buf, src_w, src_h, bpp4, ix, iy, dst_x + iy, dst_y + src_w - 1 - ix);
 				}
 			}
-			// extrude
-			for (int i = 0; i < extrude; ++i)
-			{
+			// left
+			for (int i = 0; i < extrude_left; ++i) {
 				for (int y = 0; y < src_h; ++y) {
-					CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x + y, dst_y + src_w + i);
+					CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x + y, dst_y + src_w + i);					
+				}
+			}
+			// right
+			for (int i = 0; i < extrude_right; ++i) {
+				for (int y = 0; y < src_h; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, y, dst_x + y, dst_y - i - 1);
 				}
+			}
+			// bottom
+ 			for (int i = 0; i < extrude_bottom; ++i) {
+ 				for (int x = 0; x < src_w; ++x) {
+ 					CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x - i - 1, dst_y + src_w - 1 - x);
+ 				}
+ 			}
+			// up
+			for (int i = 0; i < extrude_up; ++i) {
 				for (int x = 0; x < src_w; ++x) {
-					CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x - i - 1, dst_y + src_w - 1 - x);
 					CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x + src_h + i, dst_y + src_w - 1 - x);
 				}
 			}
-			for (int x = 0; x < extrude; ++x) {
-				for (int y = 0; y < extrude; ++y) {
+			// left-bottom
+			for (int x = 0; x < extrude_bottom; ++x) {
+				for (int y = 0; y < extrude_left; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x - x - 1, dst_y + src_w + y);
+				}
+			}
+			// right-bottom
+			for (int x = 0; x < extrude_bottom; ++x) {
+				for (int y = 0; y < extrude_right; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x - x - 1, dst_y - y - 1);
+				}
+			}
+			// left-up
+			for (int x = 0; x < extrude_up; ++x) {
+				for (int y = 0; y < extrude_left; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x + src_h + x, dst_y + src_w + y);
+				}
+			}
+			// right-up
+			for (int x = 0; x < extrude_up; ++x) {
+				for (int y = 0; y < extrude_right; ++y) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x + src_h + x, dst_y - y - 1);
 				}
 			}
@@ -137,20 +194,16 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 	}
 }
 
-void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise, 
-						 bool bpp4, int extrude)
+void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool rotate, bool clockwise, 
+						 bool bpp4, int extrude_left, int extrude_bottom, int extrude_right, int extrude_up)
 {
 	int sw = img->GetOriginWidth(),
 		sh = img->GetOriginHeight();
 	PackType type = PT_NORMAL;
-	if (sw == w && sh == h) {
-		type = PT_NORMAL;
-	} else if (sw == h && sh == w) {
+	if (rotate) {
 		type = clockwise ? PT_CLOCKWISE : PT_ANTICLOCKWISE;
-	} else {
-		assert(0);
 	}
-	AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude);
+	AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude_left, extrude_bottom, extrude_right, extrude_up);
 }
 
 void ImagePack::PreMuiltiAlpha()

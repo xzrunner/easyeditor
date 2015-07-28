@@ -42,7 +42,10 @@ void GenRegularRectImage::CreateSingle(const wxString& filepath)
 			h = spr_val["dst"]["h"].asInt();
 		std::string filepath = spr_val["filepath"].asString();
 		d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
-		pack.AddImage(img, x ,y, w, h, true);
+		assert(img->GetOriginWidth() == w && img->GetOriginHeight() == h 
+			|| img->GetOriginWidth() == h && img->GetOriginHeight() == w);
+		bool rot = img->GetOriginWidth() != w && img->GetOriginHeight() != h;
+		pack.AddImage(img, x ,y, w, h, rot, true);
 		img->Release();
 
 		spr_val = value["parts"][i++];

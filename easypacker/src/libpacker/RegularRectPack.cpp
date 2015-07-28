@@ -265,7 +265,7 @@ void RegularRectPack::PackWithMaxRectAlg()
 
 	// pack
 	MaxRectsBinaryPack2 packer;
-	packer.Pack(libpacker::PACK_SQUARE_MULTI, rects, output);
+	packer.Pack(libpacker::PACK_SQUARE_MULTI_AUTO, 0, rects, output);
 	packer.GetSize(m_sizes);
 
 	// parser result

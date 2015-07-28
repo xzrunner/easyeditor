@@ -14,6 +14,8 @@ public:
 	{
 		int x, y, w, h;
 		int ori_w, ori_h;
+
+		int bound[8];
 	};
 
 public:

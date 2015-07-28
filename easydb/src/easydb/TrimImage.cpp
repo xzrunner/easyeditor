@@ -1,7 +1,6 @@
 #include "TrimImage.h"
 #include "check_params.h"
 
-#include <drag2d.h>
 #include <easyimage.h>
 
 namespace edb
@@ -69,6 +68,7 @@ void TrimImage::Trigger(const std::string& dir)
 			spr_val["position"]["y"] = img->GetHeight() - r.yMax;
 			spr_val["position"]["w"] = r.xLength();
 			spr_val["position"]["h"] = r.yLength();
+			StoreBoundInfo(*img, r, spr_val);
 			value[idx++] = spr_val;
 
 			eimage::ImageClip clip(*img);
@@ -88,6 +88,92 @@ void TrimImage::Trigger(const std::string& dir)
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
+}
+
+void TrimImage::StoreBoundInfo(const d2d::ImageData& img, const d2d::Rect& r, 
+							   Json::Value& val) const
+{
+	// left
+	{
+		int tot = 0, max = 0;
+		int curr = 0;
+		for (int y = 0; y < img.GetHeight(); ++y) {
+			if (!IsTransparent(img, r.xMin, y)) {
+				++curr;
+				++tot;
+				if (curr > max) {
+					max = curr;
+				} else {
+					curr = 0;
+				}
+			}
+		}
+		val["bound"]["left"]["tot"] = tot;
+		val["bound"]["left"]["max"] = max;
+	}
+	// right
+	{
+		int tot = 0, max = 0;
+		int curr = 0;
+		for (int y = 0; y < img.GetHeight(); ++y) {
+			if (!IsTransparent(img, r.xMax - 1, y)) {
+				++curr;
+				++tot;
+				if (curr > max) {
+					max = curr;
+				} else {
+					curr = 0;
+				}
+			}
+		}
+		val["bound"]["right"]["tot"] = tot;
+		val["bound"]["right"]["max"] = max;
+	}
+	// bottom
+	{
+		int tot = 0, max = 0;
+		int curr = 0;
+		for (int x = 0; x < img.GetWidth(); ++x) {
+			if (!IsTransparent(img, x, r.yMin)) {
+				++curr;
+				++tot;
+				if (curr > max) {
+					max = curr;
+				} else {
+					curr = 0;
+				}
+			}
+		}
+		val["bound"]["bottom"]["tot"] = tot;
+		val["bound"]["bottom"]["max"] = max;
+	}
+	// up
+	{
+		int tot = 0, max = 0;
+		int curr = 0;
+		for (int x = 0; x < img.GetWidth(); ++x) {
+			if (!IsTransparent(img, x, r.yMax - 1)) {
+				++curr;
+				++tot;
+				if (curr > max) {
+					max = curr;
+				} else {
+					curr = 0;
+				}
+			}
+		}
+		val["bound"]["up"]["tot"] = tot;
+		val["bound"]["up"]["max"] = max;
+	}
+}
+
+bool TrimImage::IsTransparent(const d2d::ImageData& img, int x, int y) const
+{
+	if (img.GetChannels() != 4) {
+		return false;
+	} else {
+		return img.GetPixelData()[(img.GetWidth() * y + x) * 4 + 3] == 0;
+	}
 }
 
 }

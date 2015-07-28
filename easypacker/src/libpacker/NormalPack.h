@@ -16,22 +16,24 @@ class ImageTrimData;
 class NormalPack
 {
 public:
-	NormalPack(const std::vector<std::string>& files);
+	NormalPack(const std::vector<std::string>& files, const ImageTrimData& trim_info);
 
 	void Pack();
 	void Pack(int static_size);
 
-	void OutputInfo(const std::string& dir, const ImageTrimData& trim_info,
-		const std::string& dst_file) const;
+	void OutputInfo(const std::string& dir, const std::string& dst_file) const;
 	void OutputImage(const std::string& filepath) const;
 
 private:
 	void Pack(PACK_STRATEGY strategy, int static_size);
 
-	int GetExtrude(int w, int h) const;
+	void GetExtrude(const int bound[], int w, int h, int& left, int& right, int& bottom, int& up) const;
+	int GetExtrude(int max, int tot, int edge) const;
 
 private:
 	const std::vector<std::string>& m_filepaths;
+
+	const ImageTrimData& m_trim_info;
 
 	std::vector<RectSize> m_src_sizes;
 

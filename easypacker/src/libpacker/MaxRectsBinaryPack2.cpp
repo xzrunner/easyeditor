@@ -88,8 +88,6 @@ bool MaxRectsBinaryPack2::Insert(d2d::TPNode* root, const libpacker::Sprite* spr
 		rot = true ;
 	}
 
-//	rot = true;
-
 	if (rot)
 	{
 		if (root->IsRoomEnough(h, w)) {
