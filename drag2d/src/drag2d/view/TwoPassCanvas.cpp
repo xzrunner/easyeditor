@@ -4,12 +4,13 @@
 #include "render/ShaderMgr.h"
 #include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
+#include "render/RenderContext.h"
 
 namespace d2d
 {
 
 TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
-	: OnePassCanvas(stage)
+	: IStageCanvas(stage)
 {
 }
 
@@ -30,10 +31,19 @@ void TwoPassCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	if (IsDirty()) {
  		mgr->SetFBO(fbo.GetFboID());
-		OnePassCanvas::OnDrawWhole();
-		wxLogDebug("pass 22222222222222222");
+		
+		glClearColor(0, 0, 0, 0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		OnDrawSprites();
+
+		if (RenderContext::SHADER_MGR) {
+			RenderContext::SHADER_MGR->Flush();
+		}
+
+//		wxLogDebug("pass 22222222222222222");
 	} else {
-		wxLogDebug("pass 1");
+//		wxLogDebug("pass 1");
 	}
 
 	//////////////////////////////////////////////////////////////////////////
