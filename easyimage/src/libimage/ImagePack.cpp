@@ -36,12 +36,20 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 		for (int i = 0; i < extrude; ++i)
 		{
 			for (int y = 0; y < src_h; ++y) {
-				CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x - i - 1, dst_y + y);		// left
+				CopyPixel(src_buf, src_w, src_h, bpp4, 0, y, dst_x - i - 1, dst_y + y);					// left
 				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, y, dst_x + src_w + i, dst_y + y);		// right
 			}
 			for (int x = 0; x < src_w; ++x) {
-				CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x + x, dst_y - i - 1);		// bottom
+				CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x + x, dst_y - i - 1);					// bottom
 				CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x + x, dst_y + src_h + i);		// up
+			}
+		}
+		for (int x = 0; x < extrude; ++x) {
+			for (int y = 0; y < extrude; ++y) {
+				CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x - x - 1, dst_y - y - 1);							// left-bottom
+				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x + src_w + x, dst_y - y - 1);				// right-bottom
+				CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x - x - 1, dst_y + src_h + y);				// left-up
+				CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x + src_w + x, dst_y + src_h + y);	// right-up
 			}
 		}
 	} else {
@@ -91,6 +99,14 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 					CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x - i - 1, dst_y + x);
 				}
 			}
+			for (int x = 0; x < extrude; ++x) {
+				for (int y = 0; y < extrude; ++y) {
+					CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x + src_h + x, dst_y - y - 1);
+					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x + src_h + x, dst_y + src_w + y);
+					CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x - x - 1, dst_y - y - 1);
+					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x - x - 1, dst_y + src_w + y);
+				}
+			}
 		} else if (type == PT_ANTICLOCKWISE) {
 			for (int iy = 0; iy < src_h; ++iy) {
 				for (int ix = 0; ix < src_w; ++ix) {
@@ -107,6 +123,14 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 				for (int x = 0; x < src_w; ++x) {
 					CopyPixel(src_buf, src_w, src_h, bpp4, x, 0, dst_x - i - 1, dst_y + src_w - 1 - x);
 					CopyPixel(src_buf, src_w, src_h, bpp4, x, src_h - 1, dst_x + src_h + i, dst_y + src_w - 1 - x);
+				}
+			}
+			for (int x = 0; x < extrude; ++x) {
+				for (int y = 0; y < extrude; ++y) {
+					CopyPixel(src_buf, src_w, src_h, bpp4, 0, 0, dst_x - x - 1, dst_y + src_w + y);
+					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, 0, dst_x - x - 1, dst_y - y - 1);
+					CopyPixel(src_buf, src_w, src_h, bpp4, 0, src_h - 1, dst_x + src_h + x, dst_y + src_w + y);
+					CopyPixel(src_buf, src_w, src_h, bpp4, src_w - 1, src_h - 1, dst_x + src_h + x, dst_y - y - 1);
 				}
 			}
 		}
