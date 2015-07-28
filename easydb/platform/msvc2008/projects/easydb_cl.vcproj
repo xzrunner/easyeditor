@@ -253,6 +253,14 @@
 			<Filter
 				Name="pack"
 				>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\PackTexture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\PackTexture.h"
+					>
+				</File>
 				<Filter
 					Name="particle"
 					>

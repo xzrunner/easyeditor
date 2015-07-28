@@ -45,6 +45,7 @@
 #include "TransOldShapeFile.h"
 #include "SeparateToComplex.h"
 #include "LRPacker.h"
+#include "PackTexture.h"
 
 namespace edb
 {
@@ -95,6 +96,7 @@ void CommandLoader::Init()
 	fc->Register(TransOldShapeFile::Create());
 	fc->Register(SeparateToComplex::Create());
 	fc->Register(LRPacker::Create());
+	fc->Register(PackTexture::Create());
 }
 
 }
