@@ -24,7 +24,7 @@ std::string BinEP::Usage() const
 
 void BinEP::Run(int argc, char *argv[])
 {
-	// epbin E:\debug\sg_ui\ui2 png E:\debug\sg_ui\ui2.epp
+	// epbin E:\debug\sg_ui\ui2 png E:\debug\sg_ui\ui2
 
 	if (!check_number(this, argc, 5)) return;
 
@@ -34,6 +34,9 @@ void BinEP::Run(int argc, char *argv[])
 void BinEP::Trigger(const std::string& filename, const std::string& type, 
 					const std::string& output)
 {
+	epbin::BinaryEPD epd(filename + ".lua");
+	epd.Pack(output + ".epd", true);
+
 	epbin::TextureType t;
 	if (type == "png4") {
 		t = epbin::TT_PNG4;
@@ -46,9 +49,8 @@ void BinEP::Trigger(const std::string& filename, const std::string& type,
 	} else {
 		throw d2d::Exception("BinEP::Trigger unknown type: %s\n", type);
 	}
-
 	epbin::BinaryEPP epp(filename, t);
-	epp.Pack(output);
+	epp.Pack(output + ".epp");
 }
 
 }
