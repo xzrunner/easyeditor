@@ -24,8 +24,8 @@ void MaxRectsBinaryPack2::GetSize(std::vector<RectSize>& sizes) const
 	}
 }
 
-void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, const std::vector<RectSize>& rects, 
-							   std::vector<Rect>& output)
+void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, int static_size,
+							   const std::vector<RectSize>& rects, std::vector<Rect>& output)
 {
 	if (rects.empty()) {
 		return;
@@ -58,7 +58,10 @@ void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, const std::vector<RectSiz
 		PackSquare(sprites, area);
 		break;
 	case PACK_SQUARE_MULTI:
-		PackSquareMulti(sprites, area);
+		PackSquareMulti(sprites, static_size);
+		break;
+	case PACK_SQUARE_MULTI_AUTO:
+		PackSquareMultiAuto(sprites, area);
 		break;
 	default:
 		output.clear();
@@ -84,6 +87,8 @@ bool MaxRectsBinaryPack2::Insert(d2d::TPNode* root, const libpacker::Sprite* spr
 	if (h > w) {
 		rot = true ;
 	}
+
+//	rot = true;
 
 	if (rot)
 	{
@@ -188,7 +193,35 @@ int CalArea(const std::vector<Sprite>& list) {
 	return area;
 }
 
-void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int area)
+void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int static_size)
+{
+	std::vector<Sprite> curr_list = sprites;
+
+	int curr_tex = 0;
+	while (!curr_list.empty()) 
+	{
+		std::vector<Sprite> success_list, fail_list;
+
+		d2d::TPNode* root = NewRoot(static_size, static_size);
+		for (int i = 0, n = curr_list.size(); i < n; ++i) 
+		{
+			const Sprite& spr = curr_list[i];
+			bool success = Insert(root, &spr, m_roots.size());
+			if (success) {
+				spr.pos->tex_id = curr_tex;
+				success_list.push_back(spr);
+			} else {
+				fail_list.push_back(spr);
+			}
+		}
+
+		curr_list = fail_list;
+		m_roots.push_back(root);
+		++curr_tex;
+	}
+}
+
+void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int area)
 {
 	static const float AREA_SCALE_LIMIT = 0.8f;
 	static const float AREA_SCALE_LIMIT_STEP = 0.05f;
@@ -250,10 +283,10 @@ void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int area
 		}
 	}
 
-	MergeSquareMulti(sprites);
+	MergeSquareMultiAuto(sprites);
 }
 
-bool MaxRectsBinaryPack2::MergeSquareMulti(std::vector<Sprite>& sprites)
+bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites)
 {
 	std::vector<int> ids;
 	int count = 0;
@@ -317,7 +350,7 @@ bool MaxRectsBinaryPack2::MergeSquareMulti(std::vector<Sprite>& sprites)
 		delete remove_nodes[i];
 	}
 	
-	MergeSquareMulti(sprites);
+	MergeSquareMultiAuto(sprites);
 	return true;
 }
 

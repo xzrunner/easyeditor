@@ -84,7 +84,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config
 	GetAllImages(pkg_val, config_dir, images);
 
 	libpacker::NormalPack tex_packer(images);
-	tex_packer.Pack();
+	tex_packer.Pack(0);
 	std::string json_path = dst_name + ".json";
 	tex_packer.OutputInfo(config_dir, trim, json_path);
 

@@ -6,6 +6,7 @@
 #include <wx/string.h>
 
 #include "Rect.h"
+#include "typedef.h"
 
 namespace libpacker
 {
@@ -18,10 +19,16 @@ public:
 	NormalPack(const std::vector<std::string>& files);
 
 	void Pack();
+	void Pack(int static_size);
 
-	void OutputInfo(const std::string& dir, const ImageTrimData& trim,
+	void OutputInfo(const std::string& dir, const ImageTrimData& trim_info,
 		const std::string& dst_file) const;
 	void OutputImage(const std::string& filepath) const;
+
+private:
+	void Pack(PACK_STRATEGY strategy, int static_size);
+
+	int GetExtrude(int w, int h) const;
 
 private:
 	const std::vector<std::string>& m_filepaths;
@@ -33,8 +40,6 @@ private:
 	std::vector<libpacker::RectSize> m_dst_img_sz;
 
 	std::vector<std::vector<int> > m_dst_img_idx;
-
-	int m_extrude;
 
 }; // NormalPack
 
