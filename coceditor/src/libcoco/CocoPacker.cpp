@@ -496,7 +496,18 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
 	
-	// 1. mirror
+	// 1. shear
+	float sx = sprite->GetShear().x,
+		sy = sprite->GetShear().y;
+	screen[0].x += sx * hh;
+	screen[3].x += sx * hh;
+	screen[1].x -= sx * hh;
+	screen[2].x -= sx * hh;
+	screen[2].y += sy * hw;
+	screen[3].y += sy * hw;
+	screen[1].y -= sy * hw;
+	screen[0].y -= sy * hw;
+	// 2. mirror
 	bool xMirror, yMirror;
 	sprite->GetMirror(xMirror, yMirror);
 	if (xMirror) {
@@ -507,17 +518,6 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 		for (size_t i = 0; i < 4; ++i)
 			screen[i].y = -screen[i].y;
 	}
-	// 2. shear
-	float sx = sprite->GetShear().x,
-		sy = sprite->GetShear().y;
-	screen[0].x += sx * hh;
-	screen[3].x += sx * hh;
-	screen[1].x -= sx * hh;
-	screen[2].x -= sx * hh;
-	screen[2].x += sy * hw;
-	screen[3].x += sy * hw;
-	screen[1].x -= sy * hw;
-	screen[0].x -= sy * hw;
  	// 3. scale
  	for (size_t i = 0; i < 4; ++i)
  		screen[i].x *= sprite->GetScale().x;
