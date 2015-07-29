@@ -25,7 +25,7 @@ PolygonShape::PolygonShape(const std::vector<d2d::Vector>& vertices)
 	: ChainShape(vertices, true)
 	, m_material(NULL)
 {
-	SetMaterialColor(d2d::LIGHT_GREY_ALPHA);
+	SetMaterialColor(d2d::LIGHT_GREEN);
 }
 
 PolygonShape::~PolygonShape()
