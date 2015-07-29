@@ -15,10 +15,10 @@ const wxChar* MultiSpritesPropertyImpl::BOOL_3TYPE_LABELS[]
 	= { wxT("[?]"), wxT("True"), wxT("False"), NULL };		
 
 const wxChar* MultiSpritesPropertyImpl::ALIGN_LABELS[] 
-	= { wxT("none"), wxT("left"), wxT("right"), wxT("up"), wxT("down"), wxT("center x"), wxT("center y"), NULL };
+	= { wxT("无"), wxT("左"), wxT("右"), wxT("上"), wxT("下"), wxT("中心左"), wxT("中心右"), wxT("中心上"), wxT("中心下"), NULL };
 
 const wxChar* MultiSpritesPropertyImpl::CENTER_LABELS[] 
-	= { wxT("none"), wxT("horizontal"), wxT("vertical"), wxT("relative"), NULL };
+	= { wxT("无"), wxT("水平"), wxT("竖直"), wxT("相对"), NULL };
 
 MultiSpritesPropertyImpl::MultiSpritesPropertyImpl(const std::vector<ISprite*>& sprites)
 {
@@ -402,14 +402,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float l = sprite->GetPosition().x + sprite->GetSymbol().GetSize().xMin;
+			float l = GetSprLeft(sprite);
 			if (l < left)
 				left = l;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = left - sprite->GetSymbol().GetSize().xMin;
+			float x = sprite->GetPosition().x + left - GetSprLeft(sprite);
 			m_sprites[i]->SetTransform(Vector(x, sprite->GetPosition().y), sprite->GetAngle());
 		}
 	}
@@ -419,14 +419,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float r = sprite->GetPosition().x + sprite->GetSymbol().GetSize().xMax;
+			float r = GetSprRight(sprite);
 			if (r > right)
 				right = r;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = right - sprite->GetSymbol().GetSize().xMax;
+			float x = sprite->GetPosition().x + right - GetSprRight(sprite);
 			m_sprites[i]->SetTransform(Vector(x, sprite->GetPosition().y), sprite->GetAngle());
 		}
 	}
@@ -436,14 +436,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float u = sprite->GetPosition().y + sprite->GetSymbol().GetSize().yMax;
+			float u = GetSprUp(sprite);
 			if (u > up)
 				up = u;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = up - sprite->GetSymbol().GetSize().yMax;
+			float y = sprite->GetPosition().y + up - GetSprUp(sprite);
 			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, y), sprite->GetAngle());
 		}
 	}
@@ -453,33 +453,18 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float d = sprite->GetPosition().y + sprite->GetSymbol().GetSize().yMin;
+			float d = GetSprDown(sprite);
 			if (d < down)
 				down = d;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = down - sprite->GetSymbol().GetSize().yMin;
+			float y = sprite->GetPosition().y + down - GetSprDown(sprite);
 			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, y), sprite->GetAngle());
 		}
 	}
-	else if (type == e_align_centerx)
-	{
-		float down = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			float y = m_sprites[i]->GetPosition().y;
-			if (y < down)
-				down = y;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, down), sprite->GetAngle());
-		}
-	}
-	else if (type == e_align_centery)
+	else if (type == e_align_center_left)
 	{
 		float left = FLT_MAX;
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
@@ -492,6 +477,51 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		{
 			ISprite* sprite = m_sprites[i];
 			m_sprites[i]->SetTransform(Vector(left, sprite->GetPosition().y), sprite->GetAngle());
+		}
+	}
+	else if (type == e_align_center_right)
+	{
+		float right = -FLT_MAX;
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			float x = m_sprites[i]->GetPosition().x;
+			if (x > right)
+				right = x;
+		}
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* sprite = m_sprites[i];
+			m_sprites[i]->SetTransform(Vector(right, sprite->GetPosition().y), sprite->GetAngle());
+		}
+	}
+	else if (type == e_align_center_up)
+	{
+		float up = -FLT_MAX;
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			float y = m_sprites[i]->GetPosition().y;
+			if (y > up)
+				up = y;
+		}
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* sprite = m_sprites[i];
+			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, up), sprite->GetAngle());
+		}
+	}
+	else if (type == e_align_center_down)
+	{
+		float down = FLT_MAX;
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			float y = m_sprites[i]->GetPosition().y;
+			if (y < down)
+				down = y;
+		}
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* sprite = m_sprites[i];
+			m_sprites[i]->SetTransform(Vector(sprite->GetPosition().x, down), sprite->GetAngle());
 		}
 	}
 }
@@ -608,6 +638,58 @@ Vector MultiSpritesPropertyImpl::GetOverallCenter() const
 	}
 	center /= m_sprites.size();
 	return center;
+}
+
+float MultiSpritesPropertyImpl::GetSprLeft(const d2d::ISprite* spr) const
+{
+	std::vector<Vector> bound;
+	spr->GetBounding()->getBoundPos(bound);
+	float ret = FLT_MAX;
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		if (bound[i].x < ret) {
+			ret = bound[i].x;
+		}
+	}
+	return ret;
+}
+
+float MultiSpritesPropertyImpl::GetSprRight(const d2d::ISprite* spr) const
+{
+	std::vector<Vector> bound;
+	spr->GetBounding()->getBoundPos(bound);
+	float ret = -FLT_MAX;
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		if (bound[i].x > ret) {
+			ret = bound[i].x;
+		}
+	}
+	return ret;
+}
+
+float MultiSpritesPropertyImpl::GetSprDown(const d2d::ISprite* spr) const
+{
+	std::vector<Vector> bound;
+	spr->GetBounding()->getBoundPos(bound);
+	float ret = FLT_MAX;
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		if (bound[i].y < ret) {
+			ret = bound[i].y;
+		}
+	}
+	return ret;
+}
+
+float MultiSpritesPropertyImpl::GetSprUp(const d2d::ISprite* spr) const
+{
+	std::vector<Vector> bound;
+	spr->GetBounding()->getBoundPos(bound);
+	float ret = -FLT_MAX;
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		if (bound[i].y > ret) {
+			ret = bound[i].y;
+		}
+	}
+	return ret;
 }
 
 }

@@ -62,11 +62,11 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, con
 		
 	}
 	// position
-	else if (name == wxT("Align"))
+	else if (name == wxT("对齐"))
 	{
 		m_impl->OnAlign(wxANY_AS(value, int));
 	}
-	else if (name == wxT("Center"))
+	else if (name == wxT("居中"))
 	{
 		m_impl->OnCenter(wxANY_AS(value, int));
 	}
@@ -150,8 +150,8 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->SetPropertyValueString(wxT("Color.Add"), wx_add_col.GetAsString());
 	pg->GetProperty(wxT("Color.Alpha"))->SetValue((int)(mul_col.a*255));
 
-	pg->GetProperty(wxT("Align"))->SetValue(wxT("none"));
-	pg->GetProperty(wxT("Center"))->SetValue(wxT("none"));
+	pg->GetProperty(wxT("对齐"))->SetValue(wxT("无"));
+	pg->GetProperty(wxT("居中"))->SetValue(wxT("无"));
 	Vector pos = m_impl->GetPosition();
 	pg->GetProperty(wxT("All Pos.X"))->SetValue(pos.x);
 	pg->GetProperty(wxT("All Pos.Y"))->SetValue(pos.y);
@@ -224,9 +224,9 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("POSITION", wxPG_LABEL));
 
-	pg->Append(new wxEnumProperty(wxT("Align"), wxPG_LABEL, MultiSpritesPropertyImpl::ALIGN_LABELS));
+	pg->Append(new wxEnumProperty(wxT("对齐"), wxPG_LABEL, MultiSpritesPropertyImpl::ALIGN_LABELS));
 
-	pg->Append(new wxEnumProperty(wxT("Center"), wxPG_LABEL, MultiSpritesPropertyImpl::CENTER_LABELS));
+	pg->Append(new wxEnumProperty(wxT("居中"), wxPG_LABEL, MultiSpritesPropertyImpl::CENTER_LABELS));
 
 	Vector pos = m_impl->GetPosition();
 	wxPGProperty* all_pos_prop = pg->Append(new wxStringProperty(wxT("All Pos"), wxPG_LABEL, wxT("<composed>")));

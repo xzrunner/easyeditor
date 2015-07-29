@@ -62,6 +62,12 @@ public:
 	Vector GetOverallCenter() const;
 
 private:
+	float GetSprLeft(const d2d::ISprite* spr) const;
+	float GetSprRight(const d2d::ISprite* spr) const;
+	float GetSprDown(const d2d::ISprite* spr) const;
+	float GetSprUp(const d2d::ISprite* spr) const;
+
+private:
 	enum Bool3Type
 	{
 		e_bool_different = 0,
@@ -76,8 +82,10 @@ private:
 		e_align_right,
 		e_align_up,
 		e_align_down,
-		e_align_centerx,
-		e_align_centery
+		e_align_center_left,
+		e_align_center_right,
+		e_align_center_up,
+		e_align_center_down
 	};
 
 	enum CenterType
