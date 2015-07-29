@@ -241,8 +241,9 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		if (sprites[i]->IsContain(pos)) {
-			selected = sprites[i];
+		ISprite* spr = sprites[i];
+		if (spr->editable && spr->IsContain(pos)) {
+			selected = spr;
 			break;
 		}
 	}
