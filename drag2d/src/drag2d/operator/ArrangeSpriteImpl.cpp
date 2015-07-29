@@ -642,9 +642,14 @@ void ArrangeSpriteImpl::HoriMirror()
 {
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	bool dirty = false;
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		d2d::ISprite* spr = selected[i];
 		spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
+		dirty = true;
+	}
+	if (dirty) {
+		m_stage->SetCanvasDirty();
 	}
 }
 
@@ -652,9 +657,14 @@ void ArrangeSpriteImpl::VertMirror()
 {
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	bool dirty = false;
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		d2d::ISprite* spr = selected[i];
 		spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
+		dirty = true;
+	}
+	if (dirty) {
+		m_stage->SetCanvasDirty();
 	}
 }
 
