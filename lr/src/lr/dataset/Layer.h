@@ -38,6 +38,9 @@ public:
 
 	bool Update(int version);
 
+	void AddEditOP(d2d::AbstractEditOP* editop);
+	d2d::AbstractEditOP* GetNextEditOP();
+
 private:
 	static bool IsValidFloat(float f);
 
@@ -70,6 +73,9 @@ private:
 
 	int m_next_id;
 	std::set<std::string> m_name_set;
+
+	int m_curr_op_idx;
+	std::vector<d2d::AbstractEditOP*> m_editops;
 
 }; // Layer
 

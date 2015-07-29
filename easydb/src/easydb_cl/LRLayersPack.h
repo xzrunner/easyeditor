@@ -28,9 +28,9 @@ public:
 	void Run(const std::string& filepath);
 
 private:
-	void ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
-		Json::Value& out_val);
-	void ParserPolygon(const Json::Value& src_val, const lr::Grids& grids, 
+	void ParserShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
+		bool force_grids, Json::Value& out_val);
+	void ParserShapeLayer(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
 		int layer_idx, const char* name, Json::Value& out_val);
 	void ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
 	void ParserCamera(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);

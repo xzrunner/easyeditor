@@ -9,11 +9,13 @@ Layer::Layer()
 	: m_editable(true)
 	, m_visible(true)
 	, m_next_id(0)
-{	
+	, m_curr_op_idx(-1)
+{
 }
 
 Layer::~Layer()
 {
+	for_each(m_editops.begin(), m_editops.end(), d2d::ReleaseObjectFunctor<d2d::AbstractEditOP>());
 }
 
 void Layer::TraverseSprite(d2d::IVisitor& visitor, bool order/* = true*/) const
@@ -149,6 +151,28 @@ bool Layer::Update(int version)
 		ret = false;
 	}
 	return ret;
+}
+
+void Layer::AddEditOP(d2d::AbstractEditOP* editop)
+{
+	editop->Retain();
+	m_editops.push_back(editop);
+	if (m_curr_op_idx < 0) {
+		m_curr_op_idx = 0;
+	}
+}
+
+d2d::AbstractEditOP* Layer::GetNextEditOP()
+{
+	if (m_editops.empty()) {
+		return NULL;
+	}
+
+	++m_curr_op_idx;
+	if (m_curr_op_idx >= m_editops.size()) {
+		m_curr_op_idx = 0;
+	}
+	return m_editops[m_curr_op_idx];
 }
 
 bool Layer::IsValidFloat(float f)

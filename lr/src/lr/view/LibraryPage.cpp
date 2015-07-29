@@ -6,19 +6,15 @@
 namespace lr
 {
 
-LibraryPage::LibraryPage(wxWindow* parent, const std::string& name,
-						 d2d::AbstractEditOP* editop)
+LibraryPage::LibraryPage(wxWindow* parent, const std::string& name)
 	: d2d::ILibraryPage(parent, name)
 	, m_layer(new Layer)
-	, m_exten_op(editop)
 {
-	m_exten_op->Retain();
 	InitLayout();
 }
 
 LibraryPage::~LibraryPage()
 {
-	m_exten_op->Release();
 	m_layer->Release();
 }
 

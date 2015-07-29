@@ -24,7 +24,7 @@ std::string LRPacker::Description() const
 std::string LRPacker::Usage() const
 {
 	// lr-packer e:/test2/test_lr.json tmp_dir out_dir only_json
-	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json]";
+	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [trim file]";
 	return usage;
 }
 

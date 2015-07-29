@@ -12,8 +12,7 @@ class Layer;
 class LibraryPage : public d2d::ILibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const std::string& name, 
-		d2d::AbstractEditOP* editop);
+	LibraryPage(wxWindow* parent, const std::string& name);
 	virtual ~LibraryPage();
 
 	//
@@ -25,8 +24,6 @@ public:
 
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
-
-	d2d::AbstractEditOP* GetExtenOP() { return m_exten_op; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
@@ -45,8 +42,6 @@ private:
 
 	wxCheckBox* m_visible_ctrl;
 	wxCheckBox* m_editable_ctrl;
-
-	d2d::AbstractEditOP* m_exten_op;
 
 }; // LibraryPage 
 

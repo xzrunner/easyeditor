@@ -66,9 +66,9 @@ void LRLayersPack::Run(const std::string& filepath)
 	ParserDecorate(lr_val, 1, "decorate", out_val);
 	ParserCharacter(lr_val, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
-	ParserPolygon(lr_val, grids, 4, "path", out_val);
-	ParserPolygon(lr_val, grids, 5, "region", out_val);
-	ParserPolygon(lr_val, grids, 6, "collision region", out_val);
+	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
+	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
+	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
 
 	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
@@ -81,8 +81,8 @@ void LRLayersPack::Run(const std::string& filepath)
 	fout.close();
 }
 
-void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset, 
-								   const lr::Grids& grids, Json::Value& out_val)
+void LRLayersPack::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
+								   bool force_grids, Json::Value& out_val)
 {
 	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
@@ -105,7 +105,18 @@ void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] += offset;
 		}
-		d2d::JsonIO::Store(bound, out_val["pos"]);
+
+		if (force_grids) {
+			std::vector<int> grid_idx;
+			grid_idx = grids.IntersectPolyline(bound);
+
+			for (int i = 0, n = grid_idx.size(); i < n; ++i) {
+				int sz = out_val["grid"].size();
+				out_val["grid"][sz] = grid_idx[i];
+			}
+		} else {
+			d2d::JsonIO::Store(bound, out_val["pos"]);
+		}
 	}
 	else
 	{
@@ -113,7 +124,7 @@ void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset
 	}
 }
 
-void LRLayersPack::ParserPolygon(const Json::Value& src_val, const lr::Grids& grids, 
+void LRLayersPack::ParserShapeLayer(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
 								 int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
@@ -134,7 +145,7 @@ void LRLayersPack::ParserPolygon(const Json::Value& src_val, const lr::Grids& gr
 		assert(shape_spr);
 		const std::vector<d2d::IShape*>& shapes = shape_spr->GetSymbol().GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
-			ParserPolyShape(shapes[i], sprite->GetPosition(), grids, dst_val);
+			ParserShape(shapes[i], sprite->GetPosition(), grids, force_grids, dst_val);
 		}
 
 		int sz = out_val[name].size();
@@ -154,7 +165,7 @@ void LRLayersPack::ParserPolygon(const Json::Value& src_val, const lr::Grids& gr
 		
 		Json::Value dst_val;
 		dst_val["name"] = src_shape_val["name"];
-		ParserPolyShape(shape, d2d::Vector(0, 0), grids, dst_val);
+		ParserShape(shape, d2d::Vector(0, 0), grids, force_grids, dst_val);
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
