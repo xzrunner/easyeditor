@@ -8,6 +8,8 @@
 namespace libpacker
 {
 
+static const bool CLOCKWISE_ROT = true;
+
 NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData& trim_info)
 	: m_filepaths(files)
 	, m_trim_info(trim_info)
@@ -43,25 +45,34 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 
 			const RectSize& src_sz = m_src_sizes[idx];
 
+			const Rect& pos = m_dst_pos[idx];
+
+			assert(src_sz.width == pos.width && src_sz.height == pos.height
+				|| src_sz.width == pos.height && src_sz.height == pos.width);
+			bool rot = (src_sz.width != pos.width || src_sz.height != pos.height);
+			frame_val["rotated"] = rot;
+
 			const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[idx]);
 			if (!t) {
 				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
 			}
+
 			int e_left, e_right, e_bottom, e_up;
 			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
 
-			const Rect& pos = m_dst_pos[idx];
-			frame_val["frame"]["x"] = pos.x + e_left;
-			frame_val["frame"]["y"] = pos.y + e_up;
 			frame_val["frame"]["w"] = src_sz.width - e_left - e_right;
 			frame_val["frame"]["h"] = src_sz.height - e_bottom - e_up;
-
-			assert(src_sz.width == pos.width && src_sz.height == pos.height
-				|| src_sz.width == pos.height && src_sz.height == pos.width);
-			if (src_sz.width == pos.width && src_sz.height == pos.height) {
-				frame_val["rotated"] = false;
+			if (!rot) {
+				frame_val["frame"]["x"] = pos.x + e_left;
+				frame_val["frame"]["y"] = pos.y + e_bottom;
 			} else {
-				frame_val["rotated"] = true;
+				if (CLOCKWISE_ROT) {
+					frame_val["frame"]["x"] = pos.x + e_up;
+					frame_val["frame"]["y"] = pos.y + e_left;
+				} else {
+					frame_val["frame"]["x"] = pos.x + e_bottom;
+					frame_val["frame"]["y"] = pos.y + e_right;
+				}
 			}
 
 			frame_val["trimmed"] = false;
@@ -128,18 +139,18 @@ void NormalPack::OutputImage(const std::string& filepath) const
 			int e_left, e_right, e_bottom, e_up;
 			assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
 			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
-			const bool clockwise = true;
+			
 			if (rot) {
-				if (clockwise) {
+				if (CLOCKWISE_ROT) {
 					pack.AddImage(img, pos.x + e_up, pos.y + e_left, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
-						rot, clockwise, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+						rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
 				} else {
 					pack.AddImage(img, pos.x + e_bottom, pos.y + e_right, pos.width - e_bottom - e_up, pos.height - e_left - e_right, 
-						rot, clockwise, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+						rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
 				}
 			} else {
 				pack.AddImage(img, pos.x + e_left, pos.y + e_bottom, pos.width - e_left - e_right, pos.height - e_bottom - e_up, 
-					rot, clockwise, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
+					rot, CLOCKWISE_ROT, img->GetChannels() == 4, e_left, e_bottom, e_right, e_up);
 			}
 			img->Release();
 		}
@@ -186,10 +197,10 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size)
 
 void NormalPack::GetExtrude(const int bound[], int w, int h, int& left, int& right, int& bottom, int& up) const
 {
-	left = GetExtrude(bound[0], bound[1], w);
-	up = GetExtrude(bound[2], bound[3], h);
-	right = GetExtrude(bound[4], bound[5], w);
-	bottom = GetExtrude(bound[6], bound[7], h);
+	left = GetExtrude(bound[0], bound[1], h);
+	up = GetExtrude(bound[2], bound[3], w);
+	right = GetExtrude(bound[4], bound[5], h);
+	bottom = GetExtrude(bound[6], bound[7], w);	
 }
 
 int NormalPack::GetExtrude(int max, int tot, int edge) const
