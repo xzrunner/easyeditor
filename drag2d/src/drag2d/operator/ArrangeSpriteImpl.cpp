@@ -403,8 +403,8 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		selected = sprites[0];
 
 		Rect r = selected->GetRect();
-		float min_e = std::min(r.xLength(), r.yLength());
-		if (m_ctrl_node_radius > min_e * 0.1f) {
+		float max_e = std::max(r.xLength(), r.yLength());
+		if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
 			return;
 		}
