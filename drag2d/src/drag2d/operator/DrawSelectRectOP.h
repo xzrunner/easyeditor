@@ -1,5 +1,5 @@
-#ifndef _DRAG2D_DRAW_RECTANGLE_OP_
-#define _DRAG2D_DRAW_RECTANGLE_OP_
+#ifndef _DRAG2D_DRAW_SELECT_RECT_OP_
+#define _DRAG2D_DRAW_SELECT_RECT_OP_
 
 #include "ZoomViewOP.h"
 
@@ -8,10 +8,10 @@
 namespace d2d
 {
 
-class DrawRectangleOP : public ZoomViewOP
+class DrawSelectRectOP : public ZoomViewOP
 {
 public:
-	DrawRectangleOP(EditPanel* editPanel, bool bOpenRightTap = true);
+	DrawSelectRectOP(EditPanel* editPanel, bool bOpenRightTap = true);
 	
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -25,8 +25,8 @@ protected:
 
 	ShapeStyle m_style;
 
-}; // DrawRectangleOP
+}; // DrawSelectRectOP
 
 }
 
-#endif // _DRAG2D_DRAW_RECTANGLE_OP_
+#endif // _DRAG2D_DRAW_SELECT_RECT_OP_

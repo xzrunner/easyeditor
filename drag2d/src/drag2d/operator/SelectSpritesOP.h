@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "DrawRectangleOP.h"
+#include "DrawSelectRectOP.h"
 
 #include "render/ShapeStyle.h"
 
@@ -16,7 +16,7 @@ class IPropertySetting;
 class ViewPanelMgr;
 class SpriteSelection;
 
-class SelectSpritesOP : public DrawRectangleOP
+class SelectSpritesOP : public DrawSelectRectOP
 {
 public:
 	SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
@@ -51,7 +51,7 @@ protected:
 	AbstractEditCMPT* m_callback;
 
 private:
-	Vector m_firstPos;
+	Vector m_first_pos;
 	Vector m_rightFirstScrPos;
 
 	// To disable mouse able when press ctrl and window query

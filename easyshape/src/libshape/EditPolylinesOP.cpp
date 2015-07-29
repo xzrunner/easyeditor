@@ -21,7 +21,7 @@ bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
-	if (!m_firstPos.isValid())
+	if (!m_first_pos.isValid())
 		m_lastPos = m_stage->TransPosScrToProj(x, y);
 	else
 		m_lastPos.setInvalid();

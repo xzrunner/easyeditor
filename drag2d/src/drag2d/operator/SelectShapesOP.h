@@ -37,7 +37,7 @@ private:
 	void CopyFromSelection();
 
 protected:
-	Vector m_firstPos;
+	Vector m_first_pos;
 
 	ShapeSelection* m_selection;
 

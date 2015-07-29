@@ -1,19 +1,20 @@
-#include "DrawRectangleOP.h"
+#include "DrawSelectRectOP.h"
 
 #include "render/PrimitiveDraw.h"
 #include "view/IStageCanvas.h"
+#include "render/style_config.h"
 
 namespace d2d
 {
 
-DrawRectangleOP::DrawRectangleOP(EditPanel* editPanel, bool bOpenRightTap)
+DrawSelectRectOP::DrawSelectRectOP(EditPanel* editPanel, bool bOpenRightTap)
 	: ZoomViewOP(editPanel, true, bOpenRightTap)
 {
 	m_first_pos.setInvalid();
 	m_last_pos.setInvalid();
 }
 
-bool DrawRectangleOP::OnMouseLeftDown(int x, int y)
+bool DrawSelectRectOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
@@ -22,7 +23,7 @@ bool DrawRectangleOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::OnMouseLeftUp(int x, int y)
+bool DrawSelectRectOP::OnMouseLeftUp(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
@@ -32,7 +33,7 @@ bool DrawRectangleOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::OnMouseDrag(int x, int y)
+bool DrawSelectRectOP::OnMouseDrag(int x, int y)
 {
 	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
@@ -45,18 +46,29 @@ bool DrawRectangleOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::OnDraw() const
+bool DrawSelectRectOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	if (m_first_pos.isValid() && m_last_pos.isValid()) {
-		PrimitiveDraw::rect(m_first_pos, m_last_pos, m_style);
+	if (!m_first_pos.isValid() || !m_last_pos.isValid()) {
+		return false;
+	}
+
+	if (m_last_pos.x > m_first_pos.x)
+	{
+		PrimitiveDraw::rect(m_first_pos, m_last_pos, SELECT_ALL);
+		PrimitiveDraw::rect(m_first_pos, m_last_pos, SELECT_BOUND);
+	}
+	else
+	{
+		PrimitiveDraw::rect(m_first_pos, m_last_pos, SELECT_PART);
+		PrimitiveDraw::rect(m_first_pos, m_last_pos, SELECT_BOUND);
 	}
 
 	return false;
 }
 
-bool DrawRectangleOP::Clear()
+bool DrawSelectRectOP::Clear()
 {
 	if (ZoomViewOP::Clear()) return true;
 

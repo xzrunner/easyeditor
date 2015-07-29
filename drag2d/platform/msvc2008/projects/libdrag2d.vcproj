@@ -292,6 +292,14 @@
 					RelativePath="..\..\..\src\drag2d\operator\DrawRectangleOP.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\DrawSelectRectOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\DrawSelectRectOP.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="other"

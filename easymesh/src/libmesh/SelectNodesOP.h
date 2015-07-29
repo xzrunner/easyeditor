@@ -28,7 +28,7 @@ protected:
 private:
 	StagePanel* m_stage;
 
-	d2d::Vector m_firstPos;
+	d2d::Vector m_first_pos;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;

@@ -78,7 +78,7 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 		SelectBodyOP::OnMouseLeftDown(x, y);
 	}
 
-	m_firstPos = pos;
+	m_first_pos = pos;
 
 	return false;
 }

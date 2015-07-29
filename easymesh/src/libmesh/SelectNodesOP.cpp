@@ -12,7 +12,7 @@ SelectNodesOP::SelectNodesOP(StagePanel* stage)
 {
 	m_style.color = d2d::Colorf(0.8f, 0.2f, 0.2f);
 
-	m_firstPos.setInvalid();
+	m_first_pos.setInvalid();
 }
 
 SelectNodesOP::~SelectNodesOP()
@@ -47,13 +47,13 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 					m_selection.Add(node);
 				}
 			}
-			m_firstPos.setInvalid();
+			m_first_pos.setInvalid();
 		}
 	}
 	else
 	{
 		DrawRectangleOP::OnMouseLeftDown(x, y);
-		m_firstPos = pos;
+		m_first_pos = pos;
 		if (m_stage->GetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
@@ -71,16 +71,16 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	m_bDraggable = true;
 
 	Shape* shape = m_stage->GetShape();
-	if (m_firstPos.isValid() && shape)
+	if (m_first_pos.isValid() && shape)
 	{
 		d2d::Vector end = m_stage->TransPosScrToProj(x, y);
-		d2d::Rect rect(m_firstPos, end);
+		d2d::Rect rect(m_first_pos, end);
 		std::vector<Node*> nodes;
 		shape->QueryNode(rect, nodes);
 		for (size_t i = 0, n = nodes.size(); i < n; ++i)
 			m_selection.Add(nodes[i]);
 
-		m_firstPos.setInvalid();
+		m_first_pos.setInvalid();
 	}
 
 	//	enableRightTap(m_selection->empty());
@@ -97,7 +97,7 @@ bool SelectNodesOP::OnMouseDrag(int x, int y)
 
 bool SelectNodesOP::OnDraw() const
 {
-	if (m_firstPos.isValid())
+	if (m_first_pos.isValid())
 	{
 		if (d2d::DrawRectangleOP::OnDraw())
 			return true;
@@ -123,7 +123,7 @@ bool SelectNodesOP::Clear()
 	if (d2d::DrawRectangleOP::Clear()) return true;
 
 	m_selection.Clear();
-	m_firstPos.setInvalid();
+	m_first_pos.setInvalid();
 
 	return false;
 }

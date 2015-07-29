@@ -12,7 +12,6 @@
 #include "view/SpriteSelection.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
-#include "render/style_config.h"
 
 #include <wx/clipbrd.h>
 #include <sstream>
@@ -22,7 +21,7 @@ namespace d2d
 
 SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 								 ViewPanelMgr* view_panel_mgr, AbstractEditCMPT* callback)
-	: DrawRectangleOP(editPanel)
+	: DrawSelectRectOP(editPanel)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
 	, m_bDraggable(true)
@@ -31,7 +30,7 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_firstPos.setInvalid();
+	m_first_pos.setInvalid();
 }
 
 SelectSpritesOP::~SelectSpritesOP()
@@ -42,7 +41,7 @@ SelectSpritesOP::~SelectSpritesOP()
 
 bool SelectSpritesOP::OnKeyDown(int keyCode)
 {
-	if (DrawRectangleOP::OnKeyDown(keyCode)) return true;
+	if (DrawSelectRectOP::OnKeyDown(keyCode)) return true;
 
 	if (m_stage->GetKeyState(WXK_CONTROL) && m_stage->GetKeyState(WXK_CONTROL_X))
 	{
@@ -96,19 +95,26 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				}
 			}
 		}
-		m_firstPos.setInvalid();
+		m_first_pos.setInvalid();
 
 		if (m_callback)
 			m_callback->updateControlValue();
 	}
 	else
 	{
-		DrawRectangleOP::OnMouseLeftDown(x, y);
-		m_firstPos = pos;
-		if (m_stage->GetKeyState(WXK_CONTROL))
+		DrawSelectRectOP::OnMouseLeftDown(x, y);
+
+		if (m_stage->GetKeyState(WXK_SPACE)) {
+			m_first_pos.setInvalid();
+		} else {
+			m_first_pos = pos;
+		}
+
+		if (m_stage->GetKeyState(WXK_CONTROL)) {
 			m_bDraggable = false;
-		else
+		} else {
 			m_selection->Clear();
+		}
 	}
 
 	return false;
@@ -116,18 +122,18 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 
 bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
+	if (DrawSelectRectOP::OnMouseLeftUp(x, y)) return true;
 
 	m_bDraggable = true;
 
-	if (!m_firstPos.isValid()) {
+	if (!m_first_pos.isValid()) {
 		return false;
 	}
 
 	Vector end = m_stage->TransPosScrToProj(x, y);
-	Rect rect(m_firstPos, end);
+	Rect rect(m_first_pos, end);
 	std::vector<ISprite*> sprites;
-	m_spritesImpl->QuerySpritesByRect(rect, m_firstPos.x < end.x, sprites);
+	m_spritesImpl->QuerySpritesByRect(rect, m_first_pos.x < end.x, sprites);
 	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
@@ -151,7 +157,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		m_view_panel_mgr->SelectMultiSprites(m_selection, m_spritesImpl);
 	}
 
-	m_firstPos.setInvalid();
+	m_first_pos.setInvalid();
 
 	if (m_callback) {
 		m_callback->updateControlValue();
@@ -168,7 +174,7 @@ bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 
 	SetRightPan(m_selection->IsEmpty());
 
-	if (DrawRectangleOP::OnMouseRightDown(x, y)) return true;
+	if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;
 
 	return false;
 }
@@ -189,53 +195,45 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 		}
 	}
 
-	if (DrawRectangleOP::OnMouseRightUp(x, y)) return true;
+	if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;
 
 	return false;
 }
 
 bool SelectSpritesOP::OnMouseDrag(int x, int y)
 {
-	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
+	if (DrawSelectRectOP::OnMouseDrag(x, y)) return true;
 
 	return !m_bDraggable;
 }
 
 bool SelectSpritesOP::OnDraw() const
 {
-	m_selection->Traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
-
-	if (m_firstPos.isValid() && m_currPos.isValid())
-	{
-		if (m_currPos.x > m_firstPos.x)
-		{
-			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_ALL);
-			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
-		}
-		else
-		{
-			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_PART);
-			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
-		}
+	if (DrawSelectRectOP::OnDraw()) {
+		return true;
 	}
 
-// 	if (DrawRectangleOP::OnDraw()) return true;
+	m_selection->Traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
 
 	return false;
 }
 
 bool SelectSpritesOP::Clear()
 {
-	if (DrawRectangleOP::Clear()) return true;
+	if (DrawSelectRectOP::Clear()) return true;
 
 	m_selection->Clear();
-	m_firstPos.setInvalid();
+	m_first_pos.setInvalid();
 
 	return false;
 }
 
 ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 {
+	if (m_stage->GetKeyState(WXK_SPACE)) {
+		return NULL;
+	}
+
 	ISprite* selected = NULL;
 	std::vector<ISprite*> sprites;
 	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
@@ -309,7 +307,7 @@ void SelectSpritesOP::CopyFromSelection()
 	if (value.isNull()) {
 		return;
 	}
-
+ 
 	m_selection->Clear();
 
 	ISprite* last_spr = NULL;

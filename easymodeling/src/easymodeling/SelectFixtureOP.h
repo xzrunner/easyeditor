@@ -28,7 +28,7 @@ namespace emodeling
 
 		d2d::PropertySettingPanel* m_propertyPanel;
 
-		d2d::Vector m_firstPos;
+		d2d::Vector m_first_pos;
 
 		libmodeling::Fixture* m_selected;
 		libmodeling::Fixture* m_mouseOn;

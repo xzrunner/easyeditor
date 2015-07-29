@@ -44,7 +44,7 @@ private:
 	libmodeling::Joint* m_selected;
 	libmodeling::Joint* m_mouseOn;
 
-	d2d::Vector m_firstPos;
+	d2d::Vector m_first_pos;
 
 public:
 	d2d::SelectionSet<libmodeling::Joint> jointSelection;
