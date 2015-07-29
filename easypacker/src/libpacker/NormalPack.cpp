@@ -18,7 +18,7 @@ NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimDat
 
 void NormalPack::Pack()
 {
-	Pack(PACK_SQUARE_MULTI_AUTO);
+	Pack(PACK_SQUARE_MULTI_AUTO, -1);
 }
 
 void NormalPack::Pack(int static_size)
