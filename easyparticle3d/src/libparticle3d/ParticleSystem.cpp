@@ -324,7 +324,27 @@ void ParticleSystem::update(float dt)
 			}
 
 			// update disturbance
-			// todo
+			if (p->speed[2] != 0 && p->position[2] > 0) {
+				float dis_dir3[3];
+				dis_dir3[0] = p->dis_direction[0];
+				dis_dir3[1] = p->dis_direction[1];
+				dis_dir3[2] = - (p->speed[0] * dis_dir3[0] + p->speed[1] * dis_dir3[1]) / p->speed[2];
+				float len = dis_dir3[0] * dis_dir3[0] + dis_dir3[1] * dis_dir3[1] + dis_dir3[2] * dis_dir3[2];
+				len = sqrt(len);
+				for (int i = 0; i < 3; ++i) {
+					dis_dir3[i] /= len;
+				}
+				for (int i = 0; i < 3; ++i) {
+					p->speed[i] += dis_dir3[i] * p->dis_speed;
+				}
+
+				p->dis_curr_len += p->dis_speed * dt;
+				if (p->dis_curr_len > p->dis_region) {
+					p->dis_direction[0] = -p->dis_direction[0];
+					p->dis_direction[1] = -p->dis_direction[1];
+					p->dis_curr_len = 0;
+				}
+			}
 
 			// update angle
 			if (orient_to_movement) 
@@ -494,13 +514,15 @@ void ParticleSystem::add()
 	TransCoords3D(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
 
 	min = min_dis_region; max = max_dis_region;
-	float dis_r = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+	pLast->dis_region = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+	pLast->dis_curr_len = 0;
+
 	float dis_angle = rand() / (float(RAND_MAX)+1) * (d2d::PI * 2);
-	pLast->disturbance_region[0] = cos(dis_angle) * dis_r;
-	pLast->disturbance_region[1] = sin(dis_angle) * dis_r;
+	pLast->dis_direction[0] = cos(dis_angle);
+	pLast->dis_direction[1] = sin(dis_angle);
 
 	min = min_dis_spd; max = max_dis_spd;
-	pLast->disturbance_speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+	pLast->dis_speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 
 	min = min_linear_acc; max = max_linear_acc;
 	float linear_acc = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;

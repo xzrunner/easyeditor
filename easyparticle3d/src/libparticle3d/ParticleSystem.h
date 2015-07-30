@@ -47,8 +47,10 @@ struct Particle
 
 	float speed[3];
 
-	float disturbance_region[2];
-	float disturbance_speed;
+	float dis_direction[2];
+	float dis_speed;
+	float dis_region;
+	float dis_curr_len;
 
 	float linear_acc;
 
