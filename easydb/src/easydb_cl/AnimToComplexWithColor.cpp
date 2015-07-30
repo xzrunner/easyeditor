@@ -40,6 +40,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 	std::locale::global(std::locale("C"));
 
 	std::string line;
+	std::string last_type;
 	d2d::Colori last_col;
 	std::string last_ext;
 	while (std::getline(fin, line)) 
@@ -47,9 +48,15 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		std::stringstream ss(line);
 
 		std::string filepath;
+		std::string type;
 		d2d::Colori col;
 		std::string ext;
-		ss >> filepath >> col.r >> col.g >> col.b >> ext;
+		ss >> filepath >> type >> col.r >> col.g >> col.b >> ext;
+		if (type.empty()) {
+			type = last_type;
+		} else {
+			last_type = type;
+		}
 		if (col.r == 0 && col.g == 0 && col.b == 0) {
 			col = last_col;
 		} else {
@@ -65,7 +72,18 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(dir + "\\" + filepath + ".json"));
 
 		d2d::Colori rgb = d2d::hsl2rgb(col.r, col.g, col.b);
-		sprite->g_trans = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
+		rgb.r /= 255.0f;
+		rgb.g /= 255.0f;
+		rgb.b /= 255.0f;
+		if (type == "r") {
+			sprite->r_trans = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+		} else if (type == "g") {
+			sprite->g_trans = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+		} else if (type == "b") {
+			sprite->b_trans = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+		} else {
+			throw d2d::Exception("AnimToComplexWithColor::Run: Unknown color type %s", type);
+		}
 		symbol->m_sprites.push_back(sprite);
 
 		std::string output = filepath.substr(0, filepath.find_last_of('_'));
