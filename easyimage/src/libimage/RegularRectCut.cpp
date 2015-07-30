@@ -14,7 +14,8 @@ static const float AREA_LIMIT_TIMES = 2.1f;
 
 static const float TRY_MAX_COUNT = 3;
 static const float TRY_FACTOR = 0.8f;
-static const int TRY_MIN_EDGE = 4;
+//static const int TRY_MIN_EDGE = 4;
+static const int TRY_MIN_EDGE = 16;
 static const int TRY_MIN_LIMIT = 2;
 
 RegularRectCut::RegularRectCut(const d2d::Image& image)
@@ -116,6 +117,10 @@ void RegularRectCut::AutoCutWithLimit(float limit)
 				w = hw;
 			}
 
+			if (w < TRY_MIN_EDGE || h < TRY_MIN_EDGE) {
+				continue;
+			}
+
 			int area_limit = (int)(w*h*limit);
 			int area_limit_min = (int)(hw*hh*min_limit);
 
@@ -181,9 +186,18 @@ int RegularRectCut::CalBestRectPos(int w, int h, int& ret_x, int& ret_y)
 void RegularRectCut::PoseProcessResult()
 {
  	RectPostProcessor processor(m_result, m_width, m_height, m_pixels);
+
  	processor.MoveToNoCover();
-	processor.RemoveUnnecessary();
-	processor.Merge();
+ 	processor.RemoveUnnecessary();
+	while (true) {
+		bool dirty = processor.Merge();
+		if (!dirty) {
+			break;
+		} else {
+			processor.Align();
+		}
+	}
+
  	std::vector<Rect> result;
  	processor.LoadResult(result);
 	m_result = result;

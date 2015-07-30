@@ -29,46 +29,34 @@ RectPostProcessor::~RectPostProcessor()
 void RectPostProcessor::MoveToNoCover()
 {
 	std::multiset<Item*, ItemCmp>::const_iterator itr;
-	for (itr = m_items.begin(); itr != m_items.end(); ++itr) {
+	for (itr = m_items.begin(); itr != m_items.end(); ++itr) 
+	{
 		Item* item = *itr;
 
-// 		bool move;
-// 		do 
-// 		{
-// 			move = false;
-// 			SetFreedom(item);
-// 			if (item->to_right && MoveItem(item, e_right)) {
-// 				move = true;
-// 				continue;
-// 			}
-// 			if (item->to_left && MoveItem(item, e_left)) {
-// 				move = true;
-// 				continue;
-// 			}
-// 			if (item->to_up && MoveItem(item, e_up)) {
-// 				move = true;
-// 				continue;
-// 			}
-// 			if (item->to_down && MoveItem(item, e_down)) {
-// 				move = true;
-// 				continue;
-// 			}
-// 		} while (move);
+		UpdateFreedom(item);
 
-		//////////////////////////////////////////////////////////////////////////
+		bool left_empty = IsNoCoverdSide(item, e_left);
+		bool right_empty = IsNoCoverdSide(item, e_right);
+		if (left_empty && !right_empty) {
+			while (item->to_left && MoveItem(item, e_left)) {
+				UpdateFreedom(item);
+			}
+		} else {
+			while (item->to_right && MoveItem(item, e_right)) {
+				UpdateFreedom(item);
+			}
+		}
 
-		SetFreedom(item);
-		while (item->to_right && MoveItem(item, e_right)) {
-			SetFreedom(item);
-		}
-		while (item->to_left && MoveItem(item, e_left)) {
-			SetFreedom(item);
-		}
-		while (item->to_up && MoveItem(item, e_up)) {
-			SetFreedom(item);
-		}
-		while (item->to_down && MoveItem(item, e_down)) {
-			SetFreedom(item);
+		bool down_empty = IsNoCoverdSide(item, e_down);
+		bool up_empty = IsNoCoverdSide(item, e_up);
+		if (down_empty && !up_empty) {
+			while (item->to_down && MoveItem(item, e_down)) {
+				UpdateFreedom(item);
+			}
+		} else {
+			while (item->to_up && MoveItem(item, e_up)) {
+				UpdateFreedom(item);
+			}
 		}
 	}
 }
@@ -85,8 +73,7 @@ void RectPostProcessor::RemoveUnnecessary()
 			r.y < m_height && r.y+r.h > 0) {
 			for (int y = r.y, up = r.y + r.h; y < up && remove; ++y) {
 				for (int x = r.x, right = r.x + r.w; x < right && remove; ++x) {
-					if (x >= 0 && x < m_width && y >= 0 && y < m_height &&
-						m_pixels[y*m_width+x]->HasData() && !m_pixels[y*m_width+x]->IsCoverd()) {
+					if (IsPixelImmoveable(x, y)) {
 						remove = false;
 					}
 				}
@@ -101,66 +88,152 @@ void RectPostProcessor::RemoveUnnecessary()
 	}
 }
 
-void RectPostProcessor::Merge()
+bool RectPostProcessor::Merge()
 {
-	bool merge = true;
-	do
+	bool dirty = false;
+
+	std::multiset<Item*, ItemCmp>::const_iterator itr;
+	for (itr = m_items.begin(); itr != m_items.end(); ) 
 	{
-		merge = false;
-
-		std::multiset<Item*, ItemCmp>::const_iterator itr;
-		for (itr = m_items.begin(); itr != m_items.end(); ) {
-			Item* item = *itr;
-			const Rect& r = item->r;
-			// left
-			assert(r.x < m_width);
-			if (r.x > 0) {
-				bool find = false;
-				for (int y = r.y, up = r.y + r.h; y < up; ++y) {
-					if (y < 0 || y >= m_height) {
-						continue;
-					}
-					Pixel* p = m_pixels[y*m_width+r.x-1];
-					Item* new_item = p->FindSpecialRect(-1, r.y, -1, r.h);
-					if (new_item) {
-						find = true;
-						MergeRect(item, new_item);
-						itr = m_items.erase(itr);
-					}
-					break;
-				}
-				if (find) {
-					merge = true;
+		Item* item = *itr;
+		const Rect& r = item->r;
+		// left
+		assert(r.x < m_width);
+		if (r.x > 0) {
+			bool find = false;
+			for (int y = r.y, up = r.y + r.h; y < up; ++y) {
+				if (y < 0 || y >= m_height) {
 					continue;
 				}
-			}
-			// down
-			assert(r.y < m_height);
-			if (r.y > 0) {
-				bool find = false;
-				for (int x = r.x, right = r.x + r.w; x < right; ++x) {
-					if (x < 0 || x >= m_width) {
-						continue;
-					}
-					Pixel* p = m_pixels[(r.y-1)*m_width+x];
-					Item* new_item = p->FindSpecialRect(r.x, -1, r.w, -1);
-					if (new_item) {
-						find = true;
-						MergeRect(item, new_item);
-						itr = m_items.erase(itr);
-					}
-					break;
+				Pixel* p = m_pixels[y*m_width+r.x-1];
+				Item* new_item = p->FindSpecialRect(-1, r.y, -1, r.h);
+				if (new_item) {
+					find = true;
+					MergeRect(item, new_item);
+					itr = m_items.erase(itr);
 				}
-				if (find) {
-					merge = true;
+				break;
+			}
+			if (find) {
+				dirty = true;
+				continue;
+			}
+		}
+		// down
+		assert(r.y < m_height);
+		if (r.y > 0) {
+			bool find = false;
+			for (int x = r.x, right = r.x + r.w; x < right; ++x) {
+				if (x < 0 || x >= m_width) {
 					continue;
 				}
+				Pixel* p = m_pixels[(r.y-1)*m_width+x];
+				Item* new_item = p->FindSpecialRect(r.x, -1, r.w, -1);
+				if (new_item) {
+					find = true;
+					MergeRect(item, new_item);
+					itr = m_items.erase(itr);
+				}
+				break;
 			}
-
-			++itr;
+			if (find) {
+				dirty = true;
+				continue;
+			}
 		}
 
-	} while (merge);
+		++itr;
+	}
+
+	return dirty;
+}
+
+void RectPostProcessor::Align()
+{
+	std::multiset<Item*, ItemCmp>::const_iterator itr;
+	for (itr = m_items.begin(); itr != m_items.end(); ++itr) 
+	{
+		Item* item = *itr;
+
+		if (item->r.x == 204 && item->r.y == 165) {
+			int zz = 0;
+		}
+
+		UpdateFreedom(item);
+
+		while (true) {
+			if (IsAlignBetter(item, e_left) && MoveItem(item, e_left)) {
+				UpdateFreedom(item);
+			} else {
+				break;
+			}
+		}
+		while (true) {
+			if (IsAlignBetter(item, e_right) && MoveItem(item, e_right)) {
+				UpdateFreedom(item);
+			} else {
+				break;
+			}
+		}
+		while (true) {
+			if (IsAlignBetter(item, e_down) && MoveItem(item, e_down)) {
+				UpdateFreedom(item);
+			} else {
+				break;
+			}
+		}
+		while (true) {
+			if (IsAlignBetter(item, e_up) && MoveItem(item, e_up)) {
+				UpdateFreedom(item);
+			} else {
+				break;
+			}
+		}
+	}
+}
+
+void RectPostProcessor::Reduce()
+{
+	const int LIMIT_AREA = 4;
+
+	std::multiset<Item*, ItemCmp>::const_iterator itr;
+	for (itr = m_items.begin(); itr != m_items.end(); ) 
+	{
+		Item* item = *itr;
+		int area = GetItemDataSize(item);
+		if (area >= LIMIT_AREA) {
+			++itr;
+			continue;
+		}
+
+		int enlarge_min = INT_MAX;
+		Item* enlarge_item = NULL;
+
+		std::multiset<Item*, ItemCmp>::const_iterator itr2;
+		for (itr2 = m_items.begin(); itr2 != m_items.end(); ++itr2) 
+		{
+			if (itr == itr2) {
+				continue;
+			}
+			Item* item2 = *itr2;
+			int left = std::min(item->r.x, item2->r.x),
+				right = std::max(item->r.x + item->r.w, item2->r.x + item2->r.w);
+			int down = std::min(item->r.y, item2->r.y),
+				up = std::max(item->r.y + item->r.h, item2->r.y + item2->r.h);
+			int enlarge = (right - left) * (up - down) - item2->r.w * item2->r.h;
+			if (enlarge < enlarge_min) {
+				enlarge_min = enlarge;
+				enlarge_item = item2;
+			}
+		}
+
+		if (enlarge_item) {
+			
+			itr = m_items.erase(itr);
+		} else {
+			++itr;
+		}
+	}
 }
 
 void RectPostProcessor::LoadResult(std::vector<Rect>& rects) const
@@ -197,14 +270,12 @@ void RectPostProcessor::LoadPixels(const std::vector<Rect>& rects, bool* ori_pix
 	}
 }
 
-void RectPostProcessor::SetFreedom(Item* item)
+void RectPostProcessor::UpdateFreedom(Item* item)
 {
 	const Rect& r = item->r;
 
 	int left = r.x, right = r.x+r.w-1;
 	int down = r.y, up = r.y+r.h-1;
-	int left_next = left-1, right_next = right+1;
-	int down_next = down-1, up_next = up+1;
 
 	// left
 	item->to_left = true;
@@ -212,8 +283,7 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_left = false;
 	} else if (right < m_width) {
 		for (int y = down; y <= up; ++y) {
-			if (y >= 0 && y < m_height && 
-				m_pixels[y*m_width+right]->HasData() && !m_pixels[y*m_width+right]->IsCoverd()) {
+			if (IsPixelImmoveable(right, y)) {
 				item->to_left = false;
 				break;
 			}
@@ -225,8 +295,7 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_right = false;
 	} else if (left >= 0) {
 		for (int y = down; y <= up; ++y) {
-			if (y >= 0 && y < m_height && 
-				m_pixels[y*m_width+left]->HasData() && !m_pixels[y*m_width+left]->IsCoverd()) {
+			if (IsPixelImmoveable(left, y)) {
 				item->to_right = false;
 				break;
 			}
@@ -238,8 +307,7 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_down = false;
 	} else if (up < m_height) {
 		for (int x = left; x <= right; ++x) {
-			if (x >= 0 && x < m_width && 
-				m_pixels[up*m_width+x]->HasData() && !m_pixels[up*m_width+x]->IsCoverd()) {
+			if (IsPixelImmoveable(x, up)) {
 				item->to_down = false;
 				break;
 			}
@@ -251,13 +319,194 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_up = false;
 	} else if (down >= 0) {
 		for (int x = left; x <= right; ++x) {
-			if (x >= 0 && x < m_width && 
-				m_pixels[down*m_width+x]->HasData() && !m_pixels[down*m_width+x]->IsCoverd()) {
+			if (IsPixelImmoveable(x, down)) {
 				item->to_up = false;
 				break;
 			}
 		}
 	}
+}
+
+bool RectPostProcessor::IsNoCoverdSide(Item* item, Direction dir) const
+{
+	const Rect& r = item->r;
+
+	int left = r.x, right = r.x+r.w-1;
+	int down = r.y, up = r.y+r.h-1;
+	int left_next = left-1, right_next = right+1;
+	int down_next = down-1, up_next = up+1;
+
+	bool ret = true;
+	if (dir == e_left) {
+		if (left_next >= 0 && left_next < m_width) {
+			for (int y = down; y <= up; ++y) {
+				if (IsPixelCovered(left_next, y)) {
+					ret = false;
+					break;
+				}
+			}
+		}
+	} else if (dir == e_right) {
+		if (right_next >= 0 && right_next < m_width) {
+			for (int y = down; y <= up; ++y) {
+				if (IsPixelCovered(right_next, y)) {
+					ret = false;
+					break;
+				}
+			}
+		}
+	} else if (dir == e_down) {
+		if (down_next >= 0 && down_next < m_height) {
+			for (int x = left; x <= right; ++x) {
+				if (IsPixelCovered(x, down_next)) {
+					ret = false;
+					break;
+				}
+			}
+		}
+	} else if (dir == e_up) {
+		if (up_next >= 0 && up_next < m_height) {
+			for (int x = left; x <= right; ++x) {
+				if (IsPixelCovered(x, up_next)) {
+					ret = false;
+					break;
+				}
+			}
+		}
+	}
+	return ret;
+}
+
+bool RectPostProcessor::IsAlignBetter(Item* item, Direction dir) const
+{
+	if (!IsNoCoverdSide(item, dir)) {
+		return false;
+	}
+
+	bool ret = false;
+
+	const Rect& r = item->r;
+
+	int left = r.x, right = r.x+r.w-1;
+	int down = r.y, up = r.y+r.h-1;
+	int left_next = left-1, right_next = right+1;
+	int down_next = down-1, up_next = up+1;
+	
+	if (dir == e_left && item->to_left) {
+		int count = 0;
+		for (int y = down; y <= up; ++y) {
+			if (IsPixelCovered(left_next - 1, y)) {
+				++count;
+			}
+		}
+		if (IsPixelCovered(left_next, up_next)) {
+			++count;
+		}
+		if (IsPixelCovered(left_next, down_next)) {
+			++count;
+		}
+
+		for (int y = down; y <= up; ++y) {
+			if (IsPixelCovered(right_next, y)) {
+				--count;
+			}
+		}
+		if (IsPixelCovered(right, up_next)) {
+			--count;
+		}
+		if (IsPixelCovered(right, down_next)) {
+			--count;
+		}
+		if (count > 0) {
+			ret = true;
+		}
+	} else if (dir == e_right && item->to_right) {
+		int count = 0;
+		for (int y = down; y <= up; ++y) {
+			if (IsPixelCovered(right_next + 1, y)) {
+				++count;
+			}
+		}
+		if (IsPixelCovered(right_next, up_next)) {
+			++count;
+		}
+		if (IsPixelCovered(right_next, down_next)) {
+			++count;
+		}
+
+		for (int y = down; y <= up; ++y) {
+			if (IsPixelCovered(left_next, y)) {
+				--count;
+			}
+		}
+		if (IsPixelCovered(left, up_next)) {
+			--count;
+		}
+		if (IsPixelCovered(left, down_next)) {
+			--count;
+		}
+		if (count > 0) {
+			ret = true;
+		}
+	} else if (dir == e_down && item->to_down) {
+		int count = 0;
+		for (int x = left; x <= right; ++x) {
+			if (IsPixelCovered(x, down_next - 1)) {
+				++count;
+			}
+		}
+		if (IsPixelCovered(left_next, down_next)) {
+			++count;
+		}
+		if (IsPixelCovered(right_next, down_next)) {
+			++count;
+		}
+
+		for (int x = left; x <= right; ++x) {
+			if (IsPixelCovered(x, up_next)) {
+				--count;
+			}
+		}
+		if (IsPixelCovered(left_next, up)) {
+			--count;
+		}
+		if (IsPixelCovered(right_next, up)) {
+			--count;
+		}
+		if (count > 0) {
+			ret = true;
+		}
+	} else if (dir == e_up && item->to_up) {
+		int count = 0;
+		for (int x = left; x <= right; ++x) {
+			if (IsPixelCovered(x, up_next + 1)) {
+				++count;
+			}
+		}
+		if (IsPixelCovered(left_next, up_next)) {
+			++count;
+		}
+		if (IsPixelCovered(right_next, up_next)) {
+			++count;
+		}
+
+		for (int x = left; x <= right; ++x) {
+			if (IsPixelCovered(x, down_next)) {
+				--count;
+			}
+		}
+		if (IsPixelCovered(left_next, down)) {
+			--count;
+		}
+		if (IsPixelCovered(right_next, down)) {
+			--count;
+		}
+		if (count > 0) {
+			ret = true;
+		}
+	}
+
+	return ret;
 }
 
 bool RectPostProcessor::MoveItem(Item* item, Direction dir)
@@ -439,6 +688,60 @@ void RectPostProcessor::MergeRect(Item* remove, Item* newone)
 		}
 		newr.y = y;
 	}
+}
+
+// bool RectPostProcessor::PixelHasData(int x, int y) const
+// {
+// 	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
+// 		return false;
+// 	} else {
+// 		return m_pixels[y * m_width + x]->HasData();
+// 	}
+// }
+
+bool RectPostProcessor::IsPixelCovered(int x, int y) const
+{
+	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
+		return false;
+	} else {
+		return !m_pixels[y * m_width + x]->IsEmpty();
+	}
+}
+
+bool RectPostProcessor::IsPixelImmoveable(int x, int y) const
+{
+	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
+		return false;
+	} else {
+		Pixel* p = m_pixels[y * m_width + x];
+		return p->HasData() && !p->IsCoverd();
+	}
+}
+
+int RectPostProcessor::GetItemDataSize(Item* item) const
+{
+	int size = 0;
+	const Rect& r = item->r;
+	for (int x = r.x; x < r.x + r.w; ++x) {
+		if (x < 0) {
+			continue;
+		}
+		if (x >= m_width) {
+			break;
+		}
+		for (int y = r.y; y < r.y + r.h; ++y) {
+			if (y < 0) {
+				continue;
+			}
+			if (y >= m_height) {
+				break;
+			}
+			if (m_pixels[y * m_width + x]->HasData()) {
+				++size;
+			}
+		}
+	}
+	return size;
 }
 
 //////////////////////////////////////////////////////////////////////////

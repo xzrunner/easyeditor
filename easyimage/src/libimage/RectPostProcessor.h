@@ -19,17 +19,16 @@ public:
 
 	void RemoveUnnecessary();
 
-	void Merge();
+	bool Merge();
+
+	void Align();
+
+	void Reduce();
 
 	void LoadResult(std::vector<Rect>& rects) const;
 
 private:
 	struct Item;
-
-	void LoadPixels(const std::vector<Rect>& rects, bool* ori_pixels);
-
-	void SetFreedom(Item* item);
-
 	enum Direction
 	{
 		e_left,
@@ -37,9 +36,23 @@ private:
 		e_down,
 		e_up
 	};
+
+	void LoadPixels(const std::vector<Rect>& rects, bool* ori_pixels);
+
+	void UpdateFreedom(Item* item);
+	bool IsNoCoverdSide(Item* item, Direction dir) const;
+	
+	bool IsAlignBetter(Item* item, Direction dir) const;
+
 	bool MoveItem(Item* item, Direction dir);
 
 	void MergeRect(Item* remove, Item* newone);
+
+//	bool PixelHasData(int x, int y) const;
+	bool IsPixelCovered(int x, int y) const;
+	bool IsPixelImmoveable(int x, int y) const;
+
+	int GetItemDataSize(Item* item) const;
 
 private:
 	struct Item
