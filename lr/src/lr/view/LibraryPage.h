@@ -25,6 +25,9 @@ public:
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
 
+	void AddEditOP(d2d::AbstractEditOP* editop);
+	d2d::AbstractEditOP* GetNextEditOP();
+
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
 
@@ -42,6 +45,9 @@ private:
 
 	wxCheckBox* m_visible_ctrl;
 	wxCheckBox* m_editable_ctrl;
+
+	int m_curr_op_idx;
+	std::vector<d2d::AbstractEditOP*> m_editops;
 
 }; // LibraryPage 
 

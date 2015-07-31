@@ -385,7 +385,7 @@ void StagePanel::OnKeyHook(int key_code)
 
 	m_edit_op->Release();
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetLayer()->GetNextEditOP();
+	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
 	m_edit_op->OnActive();
 	m_edit_op->Retain();	
 }

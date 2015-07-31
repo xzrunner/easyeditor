@@ -135,58 +135,58 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "地形");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(paste_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "装饰");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(paste_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "单位");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(paste_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "点");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(paste_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "路径");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(draw_line_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(draw_line_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "区域");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(draw_poly_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(draw_poly_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "碰撞区域");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(draw_poly_op);
-		layer->AddEditOP(draw_line_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(draw_poly_op);
+		page->AddEditOP(draw_line_op);
 		AddPage(page);
 	}
 	{
 		LibraryPage* page = new LibraryPage(m_notebook, "摄像机");
 		Layer* layer = page->GetLayer();
-		layer->AddEditOP(m_stage->GetBaseOP());
-		layer->AddEditOP(paste_op);
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 

@@ -10,7 +10,6 @@ class Layer : public d2d::Object
 {
 public:
 	Layer();
-	virtual ~Layer();
 	
 	virtual void TraverseSprite(d2d::IVisitor& visitor, bool order = true) const;
 	virtual void TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
@@ -37,9 +36,6 @@ public:
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
 	bool Update(int version);
-
-	void AddEditOP(d2d::AbstractEditOP* editop);
-	d2d::AbstractEditOP* GetNextEditOP();
 
 private:
 	static bool IsValidFloat(float f);
@@ -73,9 +69,6 @@ private:
 
 	int m_next_id;
 	std::set<std::string> m_name_set;
-
-	int m_curr_op_idx;
-	std::vector<d2d::AbstractEditOP*> m_editops;
 
 }; // Layer
 

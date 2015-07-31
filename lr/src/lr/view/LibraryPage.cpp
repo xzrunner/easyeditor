@@ -9,6 +9,7 @@ namespace lr
 LibraryPage::LibraryPage(wxWindow* parent, const std::string& name)
 	: d2d::ILibraryPage(parent, name)
 	, m_layer(new Layer)
+	, m_curr_op_idx(-1)
 {
 	InitLayout();
 }
@@ -16,6 +17,8 @@ LibraryPage::LibraryPage(wxWindow* parent, const std::string& name)
 LibraryPage::~LibraryPage()
 {
 	m_layer->Release();
+
+	for_each(m_editops.begin(), m_editops.end(), d2d::ReleaseObjectFunctor<d2d::AbstractEditOP>());
 }
 
 bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
@@ -36,6 +39,28 @@ void LibraryPage::SetLayer(Layer* layer)
 		layer->Retain();
 		m_layer = layer;
 	}
+}
+
+void LibraryPage::AddEditOP(d2d::AbstractEditOP* editop)
+{
+	editop->Retain();
+	m_editops.push_back(editop);
+	if (m_curr_op_idx < 0) {
+		m_curr_op_idx = 0;
+	}
+}
+
+d2d::AbstractEditOP* LibraryPage::GetNextEditOP()
+{
+	if (m_editops.empty()) {
+		return NULL;
+	}
+
+	++m_curr_op_idx;
+	if (m_curr_op_idx >= m_editops.size()) {
+		m_curr_op_idx = 0;
+	}
+	return m_editops[m_curr_op_idx];
 }
 
 void LibraryPage::InitLayoutExtend(wxSizer* sizer)
