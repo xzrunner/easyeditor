@@ -8,7 +8,7 @@
 namespace eimage
 {
 
-class PixelAreaArray;
+class PixelAreaLUT;
 
 class RegularRectCut
 {
@@ -18,7 +18,7 @@ public:
 	~RegularRectCut();
 
 	void AutoCut();
-
+	
 	const std::vector<Rect>& GetResult() { return m_result; }
 
 	// statics
@@ -40,7 +40,7 @@ private:
 
 	float m_density;
 
-	PixelAreaArray* m_area_array;
+	PixelAreaLUT* m_area_array;	// real data
 
 	std::vector<Rect> m_result;
 

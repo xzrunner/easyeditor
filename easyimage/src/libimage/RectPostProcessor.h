@@ -8,12 +8,24 @@
 namespace eimage
 {
 
+class PixelCoveredLUT;
+
 class RectPostProcessor
 {
 public:
 	RectPostProcessor(const std::vector<Rect>& rects, 
 		int width, int height, bool* ori_pixels);
 	~RectPostProcessor();
+	
+	//////////////////////////////////////////////////////////////////////////
+
+	void Condense();
+	void Condense(const Rect& r, PixelCoveredLUT* covered = NULL);
+
+	void RemoveItem(const Rect& r);
+	void InsertItem(const Rect& r);
+
+	//////////////////////////////////////////////////////////////////////////
 
 	void MoveToNoCover();
 
@@ -48,11 +60,21 @@ private:
 
 	void MergeRect(Item* remove, Item* newone);
 
-//	bool PixelHasData(int x, int y) const;
+	bool PixelHasData(int x, int y) const;
 	bool IsPixelCovered(int x, int y) const;
 	bool IsPixelImmoveable(int x, int y) const;
 
 	int GetItemDataSize(Item* item) const;
+
+	void CondenseEmpty();
+	void CondenseEmpty(const Rect& r, PixelCoveredLUT* covered = NULL);
+	Rect GetRealDataRect(const Rect& src) const;
+
+	void CondenseCovered(const Rect& r, PixelCoveredLUT* covered = NULL);
+	bool CondenseCovered(Item* s, Item* l);
+
+	void RemovePixelItem(Item* item, const Rect& r);
+	void InsertPixelItem(Item* item, const Rect& r);
 
 private:
 	struct Item
@@ -100,9 +122,10 @@ private:
 			return m_has_data;
 		}
 
-		Item* FindSpecialRect(int x, int y, int w, int h) const;
+		Item* FindSameEdgeRect(int x, int y, int w, int h) const;
+		Item* FindRect(const Rect& r) const;
 
-	private:
+	public:
 		std::set<Item*> m_items;
 
 		bool m_has_data;

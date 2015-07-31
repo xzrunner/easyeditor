@@ -1,9 +1,9 @@
-#include "PixelAreaArray.h"
+#include "PixelAreaLUT.h"
 
 namespace eimage
 {
 
-PixelAreaArray::PixelAreaArray(const bool* pixels, int width, int height, bool to_block4)
+PixelAreaLUT::PixelAreaLUT(const bool* pixels, int width, int height, bool to_block4)
 	: m_width(width)
 	, m_height(height)
 {
@@ -18,13 +18,13 @@ PixelAreaArray::PixelAreaArray(const bool* pixels, int width, int height, bool t
 	LoadFromPixels();
 }
 
-PixelAreaArray::~PixelAreaArray()
+PixelAreaLUT::~PixelAreaLUT()
 {
 	delete[] m_pixels;
 	delete[] m_area;
 }
 
-int PixelAreaArray::GetRectArea(int x, int y, int w, int h) const
+int PixelAreaLUT::GetRectArea(int x, int y, int w, int h) const
 {
 	assert(w >= 1 && h >= 1
 		&& x >= 0 && x + w <= m_width
@@ -39,7 +39,7 @@ int PixelAreaArray::GetRectArea(int x, int y, int w, int h) const
 	return area;
 }
 
-void PixelAreaArray::CutByRect(int _x, int _y, int _w, int _h, int& left_area)
+void PixelAreaLUT::CutByRect(int _x, int _y, int _w, int _h, int& left_area)
 {
 	int old = m_area[m_width*m_height-1];
 
@@ -67,7 +67,7 @@ void PixelAreaArray::CutByRect(int _x, int _y, int _w, int _h, int& left_area)
 	left_area = m_area[m_width*m_height-1];
 }
 
-void PixelAreaArray::FixPixelsToBlock4()
+void PixelAreaLUT::FixPixelsToBlock4()
 {
 	int bw = std::ceil(m_width / 4.0f),
 		bh = std::ceil(m_height / 4.0f);
@@ -102,7 +102,7 @@ void PixelAreaArray::FixPixelsToBlock4()
 	delete[] bpixels;
 }
 
-void PixelAreaArray::LoadFromPixels()
+void PixelAreaLUT::LoadFromPixels()
 {
 	int sz = m_width * m_height;
 	m_area = new int[sz];

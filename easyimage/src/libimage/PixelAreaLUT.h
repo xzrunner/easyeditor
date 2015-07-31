@@ -1,16 +1,16 @@
-#ifndef _EASYIMAGE_PIXEL_AREA_ARRAY_H_
-#define _EASYIMAGE_PIXEL_AREA_ARRAY_H_
+#ifndef _EASYIMAGE_PIXEL_AREA_LUT_H_
+#define _EASYIMAGE_PIXEL_AREA_LUT_H_
 
 #include <drag2d.h>
 
 namespace eimage
 {
 
-class PixelAreaArray
+class PixelAreaLUT
 {
 public:
-	PixelAreaArray(const bool* pixels, int width, int height, bool to_block4);
-	~PixelAreaArray();
+	PixelAreaLUT(const bool* pixels, int width, int height, bool to_block4);
+	~PixelAreaLUT();
 
 	int GetRectArea(int x, int y, int w, int h) const;
 	void CutByRect(int x, int y, int w, int h, int& left_area);
@@ -27,8 +27,8 @@ private:
 
 	int m_width, m_height;
 
-}; // PixelAreaArray
+}; // PixelAreaLUT
 
 }
 
-#endif // _EASYIMAGE_PIXEL_AREA_ARRAY_H_
+#endif // _EASYIMAGE_PIXEL_AREA_LUT_H_

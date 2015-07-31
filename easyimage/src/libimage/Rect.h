@@ -9,6 +9,16 @@ struct Rect
 	Rect(int x, int y, int w, int h) 
 		: x(x), y(y), w(w), h(h) {}
 
+	bool operator != (const Rect& r) const {
+// 		return r.x != x || r.y != y 
+// 			|| r.w != w || r.h != h;
+		return !this->operator ==(r);
+	}
+	bool operator == (const Rect& r) const {
+		return r.x == x && r.y == y 
+			&& r.w == w && r.h == h;
+	}
+
 	int x, y;
 	int w, h;
 };

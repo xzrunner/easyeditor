@@ -180,11 +180,19 @@
 				Name="dataset"
 				>
 				<File
-					RelativePath="..\..\..\src\libimage\PixelAreaArray.cpp"
+					RelativePath="..\..\..\src\libimage\PixelAreaLUT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libimage\PixelAreaArray.h"
+					RelativePath="..\..\..\src\libimage\PixelAreaLUT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\PixelCoveredLUT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\PixelCoveredLUT.h"
 					>
 				</File>
 				<File
@@ -217,6 +225,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libimage\RegularRectCut.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RegularRectMerge.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RegularRectMerge.h"
 					>
 				</File>
 			</Filter>

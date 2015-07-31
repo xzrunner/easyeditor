@@ -1,4 +1,5 @@
 #include "RectPostProcessor.h"
+#include "PixelCoveredLUT.h"
 
 namespace eimage
 {
@@ -24,6 +25,55 @@ RectPostProcessor::~RectPostProcessor()
 		delete m_pixels[i];
 	}
 	delete[] m_pixels;
+}
+
+void RectPostProcessor::Condense()
+{
+	CondenseEmpty();
+	CondenseCovered(Rect(0, 0, m_width, m_height));
+}
+
+void RectPostProcessor::Condense(const Rect& r, PixelCoveredLUT* covered)
+{
+	CondenseEmpty(r, covered);
+	CondenseCovered(r, covered);
+}
+
+void RectPostProcessor::RemoveItem(const Rect& r)
+{
+	Item *item = m_pixels[r.y * m_width + r.x]->FindRect(r);
+
+	RemovePixelItem(item, item->r);
+
+// 	bool find = false;
+// 	std::multiset<Item*, ItemCmp>::iterator itr_begin = m_items.lower_bound(item);
+// 	std::multiset<Item*, ItemCmp>::iterator itr_end = m_items.upper_bound(item);
+// 	std::multiset<Item*, ItemCmp>::iterator itr = itr_begin;
+// 	for ( ; itr != itr_end; ++itr) {
+// 		if ((*itr) == item) {
+// 			m_items.erase(itr);
+// 			find = true;
+// 			break;
+// 		}
+// 	}
+// 	assert(find);
+
+	std::multiset<Item*, ItemCmp>::iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr) {
+		if ((*itr) == item) {
+			m_items.erase(itr);
+			break;
+		}
+	}
+
+	delete item;
+}
+
+void RectPostProcessor::InsertItem(const Rect& r)
+{
+	Item* item = new Item(r);
+	m_items.insert(item);
+	InsertPixelItem(item, r);
 }
 
 void RectPostProcessor::MoveToNoCover()
@@ -106,7 +156,7 @@ bool RectPostProcessor::Merge()
 					continue;
 				}
 				Pixel* p = m_pixels[y*m_width+r.x-1];
-				Item* new_item = p->FindSpecialRect(-1, r.y, -1, r.h);
+				Item* new_item = p->FindSameEdgeRect(-1, r.y, -1, r.h);
 				if (new_item) {
 					find = true;
 					MergeRect(item, new_item);
@@ -128,7 +178,7 @@ bool RectPostProcessor::Merge()
 					continue;
 				}
 				Pixel* p = m_pixels[(r.y-1)*m_width+x];
-				Item* new_item = p->FindSpecialRect(r.x, -1, r.w, -1);
+				Item* new_item = p->FindSameEdgeRect(r.x, -1, r.w, -1);
 				if (new_item) {
 					find = true;
 					MergeRect(item, new_item);
@@ -239,6 +289,7 @@ void RectPostProcessor::Reduce()
 void RectPostProcessor::LoadResult(std::vector<Rect>& rects) const
 {
 	rects.clear();
+	rects.reserve(m_items.size());
 	std::multiset<Item*, ItemCmp>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr) {
 		rects.push_back((*itr)->r);
@@ -690,14 +741,14 @@ void RectPostProcessor::MergeRect(Item* remove, Item* newone)
 	}
 }
 
-// bool RectPostProcessor::PixelHasData(int x, int y) const
-// {
-// 	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
-// 		return false;
-// 	} else {
-// 		return m_pixels[y * m_width + x]->HasData();
-// 	}
-// }
+bool RectPostProcessor::PixelHasData(int x, int y) const
+{
+	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
+		return false;
+	} else {
+		return m_pixels[y * m_width + x]->HasData();
+	}
+}
 
 bool RectPostProcessor::IsPixelCovered(int x, int y) const
 {
@@ -744,12 +795,255 @@ int RectPostProcessor::GetItemDataSize(Item* item) const
 	return size;
 }
 
+void RectPostProcessor::CondenseEmpty()
+{
+	std::multiset<Item*, ItemCmp>::iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr) {
+		Item* item = *itr;
+		Rect new_r = GetRealDataRect(item->r);
+		if (new_r != item->r) {
+			RemovePixelItem(item, item->r);
+			InsertPixelItem(item, new_r);
+			item->r = new_r;
+		}
+	}
+}
+
+void RectPostProcessor::CondenseEmpty(const Rect& r, PixelCoveredLUT* covered)
+{
+	std::set<Item*> items;
+	for (int x = r.x; x < r.x + r.w; ++x) {
+		for (int y = r.y; y < r.y + r.h; ++y) {
+			Pixel* p = m_pixels[y * m_width + x];
+			if (!p) {
+				continue;
+			}
+			std::set<Item*>::iterator itr = p->m_items.begin();
+			for ( ; itr != p->m_items.end(); ++itr) {
+				items.insert(*itr);
+			}
+		}
+	}
+
+	std::set<Item*>::iterator itr = items.begin();
+	for ( ; itr != items.end(); ++itr) {
+		Item* item = *itr;
+		Rect new_r = GetRealDataRect(item->r);
+		if (new_r != item->r) {
+			RemovePixelItem(item, item->r);
+			InsertPixelItem(item, new_r);
+			if (covered) {
+				covered->Remove(item->r);
+				covered->Insert(new_r);
+			}
+			item->r = new_r;
+		}
+	}
+}
+
+Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
+{
+	Rect ret = src;
+	// left
+	while (true) {
+		int x = ret.x;
+		bool find_data = false;
+		for (int y = ret.y; y < ret.y + ret.h; ++y) {
+			if (PixelHasData(x, y)) {
+				find_data = true;
+				break;
+			}
+		}
+		if (find_data) {
+			break;
+		} else {
+			++ret.x;
+		}
+	}
+	// right
+	while (true) {
+		int x = ret.x + ret.w - 1;
+		bool find_data = false;
+		for (int y = ret.y; y < ret.y + ret.h; ++y) {
+			if (PixelHasData(x, y)) {
+				find_data = true;
+				break;
+			}
+		}
+		if (find_data) {
+			break;
+		} else {
+			--ret.w;
+		}
+	}
+	// down
+	while (true) {
+		int y = ret.y;
+		bool find_data = false;
+		for (int x = ret.x; x < ret.x + ret.w; ++x) {
+			if (PixelHasData(x, y)) {
+				find_data = true;
+				break;
+			}
+		}
+		if (find_data) {
+			break;
+		} else {
+			++ret.y;
+		}
+	}
+	// up
+	while (true) {
+		int y = ret.y + ret.h - 1;
+		bool find_data = false;
+		for (int x = ret.x; x < ret.x + ret.w; ++x) {
+			if (PixelHasData(x, y)) {
+				find_data = true;
+				break;
+			}
+		}
+		if (find_data) {
+			break;
+		} else {
+			--ret.h;
+		}
+	}
+	return ret;
+}
+
+void RectPostProcessor::CondenseCovered(const Rect& r, PixelCoveredLUT* covered)
+{
+	while (true) 
+	{
+		bool find = false;
+		for (int x = r.x; x < r.x + r.w; ++x) {
+			for (int y = r.y; y < r.y + r.h; ++y) {
+				Pixel* p = m_pixels[y * m_width + x];
+				if (p->m_items.size() <= 1) {
+					continue;
+				}
+
+				std::vector<Item*> items;
+				std::copy(p->m_items.begin(), p->m_items.end(), back_inserter(items));
+				for (int i = 0; i < items.size(); ++i) {
+					for (int j = 0; j < items.size(); ++j) {
+						if (i == j) {
+							continue;
+						}
+						Rect old = items[i]->r;
+						if (CondenseCovered(items[i], items[j])) {
+							find = true;
+							if (covered) {
+								covered->Remove(old);
+								covered->Insert(items[i]->r);
+							}
+						}
+						if (p->m_items.size() <= 1) {
+							break;
+						}
+					}
+					if (p->m_items.size() <= 1) {
+						break;
+					}
+				}
+			}
+		}
+		if (!find) {
+			break;
+		}
+	}
+}
+
+bool RectPostProcessor::CondenseCovered(Item* s, Item* l)
+{
+	bool ret = false;
+
+	const Rect& sr = s->r;
+	const Rect& lr = l->r;
+
+	// left
+	if ((sr.x < lr.x + lr.w) && (sr.x >= lr.x) &&
+		(sr.y >= lr.y) && (sr.y + sr.h <= lr.y + lr.h)) {
+		Rect rm = sr;
+		rm.w = lr.x + lr.w - sr.x;
+		RemovePixelItem(s, rm);
+		s->r.w = (sr.x + sr.w) - (lr.x + lr.w);
+		s->r.x = lr.x + lr.w;
+		ret = true;
+	}
+	// right
+	if ((sr.x + sr.w - 1 >= lr.x) && (sr.x + sr.w - 1 < lr.x + lr.w) &&
+		(sr.y >= lr.y) && (sr.y + sr.h <= lr.y + lr.h)) {
+		Rect rm = sr;
+		rm.x = lr.x;
+		rm.w = sr.x + sr.w - lr.x;
+		RemovePixelItem(s, rm);
+		s->r.w = lr.x - s->r.x;
+		ret = true;
+	}
+	// down
+	if ((sr.y < lr.y + lr.h) && (sr.y >= lr.y) &&
+		(sr.x >= lr.x) && (sr.x + sr.w <= lr.x + lr.w)) {
+		Rect rm = sr;
+		rm.h = lr.y + lr.h - sr.y;
+		RemovePixelItem(s, rm);
+		s->r.h = (sr.y + sr.h) - (lr.y + lr.h);
+		s->r.y = lr.y + lr.h;
+		ret = true;
+	}
+	// up
+	if ((sr.y + sr.h - 1 >= lr.y) && (sr.y + sr.h - 1 < lr.y + lr.h) &&
+		(sr.x >= lr.x) && (sr.x + sr.w <= lr.x + lr.w)) {
+		Rect rm = sr;
+		rm.y = lr.y;
+		rm.h = sr.y + sr.h - lr.y;
+		RemovePixelItem(s, rm);
+		s->r.h = lr.y - s->r.y;
+		ret = true;
+	}
+	return ret;
+}
+
+void RectPostProcessor::RemovePixelItem(Item* item, const Rect& r)
+{
+	for (int x = r.x; x < r.x + r.w; ++x) {
+		for (int y = r.y; y < r.y + r.h; ++y) {
+
+			if (x == 20 && y == 92) {
+				int zz = 0;
+			}
+
+			if (x >= 0 && x < m_width && y >= 0 && y < m_height) {
+				Pixel* p = m_pixels[y * m_width + x];
+				p->Remove(item);
+			}
+		}
+	}
+}
+
+void RectPostProcessor::InsertPixelItem(Item* item, const Rect& r)
+{
+	for (int x = r.x; x < r.x + r.w; ++x) {
+		for (int y = r.y; y < r.y + r.h; ++y) {
+
+			if (x == 20 && y == 92) {
+				int zz = 0;
+			}
+
+			if (x >= 0 && x < m_width && y >= 0 && y < m_height) {
+				Pixel* p = m_pixels[y * m_width + x];
+				p->Add(item);
+			}
+		}
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class RectPostProcessor::Pixel
 //////////////////////////////////////////////////////////////////////////
 
 RectPostProcessor::Item* RectPostProcessor::Pixel::
-FindSpecialRect(int x, int y, int w, int h) const
+FindSameEdgeRect(int x, int y, int w, int h) const
 {
 	std::set<Item*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr) {
@@ -757,6 +1051,18 @@ FindSpecialRect(int x, int y, int w, int h) const
 		if (r.y == y && r.h == h ||
 			r.x == x && r.w == w) {
 			return (*itr);
+		}
+	}
+	return NULL;
+}
+
+RectPostProcessor::Item* RectPostProcessor::Pixel::
+FindRect(const Rect& r) const
+{
+	std::set<Item*>::const_iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr) {
+		if ((*itr)->r == r) {
+			return *itr;
 		}
 	}
 	return NULL;

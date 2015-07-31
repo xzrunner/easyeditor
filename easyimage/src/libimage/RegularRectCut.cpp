@@ -1,11 +1,13 @@
 #include "RegularRectCut.h"
-#include "PixelAreaArray.h"
+#include "PixelAreaLUT.h"
 #include "RectPostProcessor.h"
+
+#include "RegularRectMerge.h"
 
 namespace eimage
 {
 
-static const int EDGE_LIST[] = {512, 256, 128, 64, 32, 16, 8};
+static const int EDGE_LIST[] = {512, 256, 128, 64, 32, 16, 8, 4, 2};
 static const int EDGE_COUNT = 7;
 
 //static const float AREA_LIMIT_TIMES = 1.7f;
@@ -13,23 +15,23 @@ static const int EDGE_COUNT = 7;
 static const float AREA_LIMIT_TIMES = 2.1f;
 
 static const float TRY_MAX_COUNT = 3;
-static const float TRY_FACTOR = 0.8f;
+static const float TRY_FACTOR = 0.95f;
 //static const int TRY_MIN_EDGE = 4;
-static const int TRY_MIN_EDGE = 16;
+static const int TRY_MIN_EDGE = 1;
 static const int TRY_MIN_LIMIT = 2;
 
 RegularRectCut::RegularRectCut(const d2d::Image& image)
 {
 	LoadPixels(image.GetPixelData(), image.GetOriginWidth(), image.GetOriginHeight());
 
-	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height, true);
+	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
 }
 
 RegularRectCut::RegularRectCut(const uint8_t* pixels, int width, int height)
 {
 	LoadPixels(pixels, width, height);
 
-	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height, true);
+	m_area_array = new PixelAreaLUT(m_pixels, m_width, m_height, true);
 }
 
 RegularRectCut::~RegularRectCut()
@@ -42,23 +44,23 @@ void RegularRectCut::AutoCut()
 {
 	float limit = m_density * AREA_LIMIT_TIMES;
 	int count = 0;
-	while (m_left_area > 0 && count < TRY_MAX_COUNT) {
+	while (m_left_area > 0 /*&& count < TRY_MAX_COUNT*/) {
 		AutoCutWithLimit(limit);
 		limit *= TRY_FACTOR;
 		++count;
 	}
 
-	// cut others by the smaller one
-	while (m_left_area > 0) {
-		int x, y;
-		int area = CalBestRectPos(TRY_MIN_EDGE, TRY_MIN_EDGE, x, y);
-		if (area <= TRY_MIN_LIMIT) {
-			break;
-		}
-		m_area_array->CutByRect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE, m_left_area);
-
-		m_result.push_back(Rect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE));
-	}
+// 	// cut others by the smaller one
+// 	while (m_left_area > 0) {
+// 		int x, y;
+// 		int area = CalBestRectPos(TRY_MIN_EDGE, TRY_MIN_EDGE, x, y);
+// 		if (area <= TRY_MIN_LIMIT) {
+// 			break;
+// 		}
+// 		m_area_array->CutByRect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE, m_left_area);
+// 
+// 		m_result.push_back(Rect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE));
+// 	}
 
 	PoseProcessResult();
 }
@@ -187,19 +189,26 @@ void RegularRectCut::PoseProcessResult()
 {
  	RectPostProcessor processor(m_result, m_width, m_height, m_pixels);
 
- 	processor.MoveToNoCover();
- 	processor.RemoveUnnecessary();
-	while (true) {
-		bool dirty = processor.Merge();
-		if (!dirty) {
-			break;
-		} else {
-			processor.Align();
-		}
-	}
+	processor.Condense();
+
+//  	processor.MoveToNoCover();
+//  	processor.RemoveUnnecessary();
+// 	while (true) {
+// 		bool dirty = processor.Merge();
+// 		if (!dirty) {
+// 			break;
+// 		} else {
+// 			processor.Align();
+// 		}
+// 	}
 
  	std::vector<Rect> result;
+
  	processor.LoadResult(result);
+	RegularRectMerge merge(m_width, m_height, result, processor);
+	merge.Merge();
+
+	processor.LoadResult(result);
 	m_result = result;
 }
 
