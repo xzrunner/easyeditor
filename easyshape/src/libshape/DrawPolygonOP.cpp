@@ -9,7 +9,7 @@ DrawPolygonOP::DrawPolygonOP(d2d::EditPanel* editPanel,
 	: DrawPolylineOP(editPanel, false)
 	, m_shapesImpl(shapesImpl)
 {
-	m_cursor = wxCursor(wxCURSOR_PAINT_BRUSH);
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
 }
 
 bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)

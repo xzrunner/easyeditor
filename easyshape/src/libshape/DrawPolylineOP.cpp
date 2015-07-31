@@ -7,7 +7,7 @@ namespace libshape
 DrawPolylineOP::DrawPolylineOP(d2d::EditPanel* editPanel, bool isClosed)
 	: d2d::ZoomViewOP(editPanel, true, false)
 {
-	m_cursor = wxCursor(wxCURSOR_PENCIL);
+	m_cursor = wxCursor(wxCURSOR_RIGHT_ARROW);
 
 	m_isClosed = isClosed;
 	m_currPos.setInvalid();
