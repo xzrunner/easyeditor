@@ -1628,11 +1628,9 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 	{
 		if (isFont)
 		{
-			const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(sprite);
-			bool isNullNode = font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
-
-
-			if (isNullNode)
+			const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite);
+			bool is_mount_node = font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+			if (is_mount_node)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				lua::tableassign(*m_gen, "", 1, aName.c_str());
@@ -1659,14 +1657,13 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		}
 		else
 		{
-			bool is_null_node = false;
+			bool is_mount_node = false;
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
-				const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_null_node = font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+				const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+				is_mount_node = font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
 			}
-
-			if (is_null_node) {
+			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				lua::tableassign(*m_gen, "", 1, aName.c_str());
 			} else {
@@ -1695,14 +1692,13 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 				break;
 		if (i == itr->second.size() && !isFont)
 		{
-			bool is_null_node = false;
+			bool is_mount_node = false;
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
-				const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_null_node = font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+				const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+				is_mount_node = font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
 			}
-
-			if (is_null_node) {
+			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				lua::tableassign(*m_gen, "", 1, aName.c_str());
 			} else {
