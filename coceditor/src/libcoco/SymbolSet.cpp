@@ -6,9 +6,13 @@ namespace libcoco
 void SymbolSet::Insert(const d2d::ISymbol* symbol)
 {
 	std::string filepath = d2d::FilenameTools::FormatFilepath(symbol->GetFilepath());
-	std::map<std::string, const d2d::ISymbol*>::const_iterator itr = 
-		m_symbol_map.find(filepath);
-	if (itr == m_symbol_map.end()) {
+
+	if (filepath.find("img_guide_scale9") != std::string::npos) 
+	{
+		int zz  =0;
+	}
+
+	if (!Query(symbol) || d2d::FileNameParser::isType(symbol->GetFilepath(), d2d::FileNameParser::e_scale9)) {
 		m_symbol_map.insert(std::make_pair(filepath, symbol));
 		m_symbol_ordered.push_back(symbol);
 	}
@@ -16,8 +20,8 @@ void SymbolSet::Insert(const d2d::ISymbol* symbol)
 
 const d2d::ISymbol* SymbolSet::Query(const std::string& filepath) const
 {
-	std::map<std::string, const d2d::ISymbol*>::const_iterator itr = 
-		m_symbol_map.find(filepath);
+	std::multimap<std::string, const d2d::ISymbol*>::const_iterator itr 
+		= m_symbol_map.lower_bound(filepath);
 	if (itr != m_symbol_map.end()) {
 		return itr->second;
 	} else {
@@ -27,10 +31,22 @@ const d2d::ISymbol* SymbolSet::Query(const std::string& filepath) const
 
 bool SymbolSet::Query(const d2d::ISymbol* symbol) const
 {
+	if (d2d::FileNameParser::isType(symbol->GetFilepath(), d2d::FileNameParser::e_image)) {
+		int zz = 0;
+	}
+
 	std::string filepath = d2d::FilenameTools::FormatFilepath(symbol->GetFilepath());
-	std::map<std::string, const d2d::ISymbol*>::const_iterator itr = 
-		m_symbol_map.find(filepath);
-	return itr != m_symbol_map.end();
+	std::multimap<std::string, const d2d::ISymbol*>::const_iterator 
+		itr_begin = m_symbol_map.lower_bound(filepath),
+		itr_end = m_symbol_map.upper_bound(filepath);
+	std::multimap<std::string, const d2d::ISymbol*>::const_iterator itr = itr_begin;
+	for ( ; itr != itr_end; ++itr) {
+		if (itr->second == symbol) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 }
