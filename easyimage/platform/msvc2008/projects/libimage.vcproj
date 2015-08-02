@@ -204,6 +204,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libimage\PixelUncoveredLUT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\PixelUncoveredLUT.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libimage\Rect.h"
 					>
 				</File>
@@ -217,6 +225,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libimage\RectPostProcessor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RegularRectCondense.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RegularRectCondense.h"
 					>
 				</File>
 				<File

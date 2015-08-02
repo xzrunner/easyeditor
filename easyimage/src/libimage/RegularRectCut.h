@@ -31,8 +31,6 @@ private:
 	void AutoCutWithLimit(float limit);
 	int CalBestRectPos(int w, int h, int& ret_x, int& ret_y);
 
-	void PoseProcessResult();
-
 private:
 	bool* m_pixels;
 	int m_width, m_height;

@@ -8,36 +8,29 @@
 namespace eimage
 {
 
-class PixelCoveredLUT;
-class RectPostProcessor;
+class PixelUncoveredLUT;
+class RegularRectCondense;
 
 class RegularRectMerge
 {
 public:
-	RegularRectMerge(int width, int height, const std::vector<Rect>& rects,
-		RectPostProcessor& proc);
+	RegularRectMerge(const std::vector<Rect>& rects, int width, 
+		int height, bool* ori_pixels);
 	~RegularRectMerge();
 
 	void Merge();
 
-private:
-	int ComputeCost(const Rect& r) const;
+	void GetResult(std::vector<Rect>& result) const;
 
 private:
-	class RectCmp
-	{
-	public:
-		bool operator () (const Rect& lhs, const Rect& rhs) const {
-			return lhs.h * lhs.w < rhs.h * rhs.w;
-		}
-	}; // RectCmp
+	int ComputeCost(const Rect& r, const std::vector<Rect>& rects) const;
 
 private:
-	PixelCoveredLUT* m_covered_area;
+	int m_width, m_height;
 
-	RectPostProcessor& m_proc;
+	PixelUncoveredLUT* m_uncovered_lut;
 
-	std::vector<Rect> m_rects;
+	RegularRectCondense* m_condense;
 
 }; // RegularRectMerge
 

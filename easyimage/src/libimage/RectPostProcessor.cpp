@@ -741,14 +741,14 @@ void RectPostProcessor::MergeRect(Item* remove, Item* newone)
 	}
 }
 
-bool RectPostProcessor::PixelHasData(int x, int y) const
-{
-	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
-		return false;
-	} else {
-		return m_pixels[y * m_width + x]->HasData();
-	}
-}
+// bool RectPostProcessor::PixelHasData(int x, int y) const
+// {
+// 	if (x < 0 || x >= m_width || y < 0 || y >= m_height) {
+// 		return false;
+// 	} else {
+// 		return m_pixels[y * m_width + x]->HasData();
+// 	}
+// }
 
 bool RectPostProcessor::IsPixelCovered(int x, int y) const
 {
@@ -765,7 +765,7 @@ bool RectPostProcessor::IsPixelImmoveable(int x, int y) const
 		return false;
 	} else {
 		Pixel* p = m_pixels[y * m_width + x];
-		return p->HasData() && !p->IsCoverd();
+		return p->HasData() && p->IsSingleCoverd();
 	}
 }
 
@@ -798,13 +798,20 @@ int RectPostProcessor::GetItemDataSize(Item* item) const
 void RectPostProcessor::CondenseEmpty()
 {
 	std::multiset<Item*, ItemCmp>::iterator itr = m_items.begin();
-	for ( ; itr != m_items.end(); ++itr) {
+	for ( ; itr != m_items.end(); ) {
 		Item* item = *itr;
 		Rect new_r = GetRealDataRect(item->r);
-		if (new_r != item->r) {
-			RemovePixelItem(item, item->r);
+		if (new_r == item->r) {
+			++itr;
+			continue;
+		}
+		RemovePixelItem(item, item->r);
+		if (new_r.w > 0 && new_r.h > 0) {
 			InsertPixelItem(item, new_r);
 			item->r = new_r;
+			++itr;
+		} else {
+			itr = m_items.erase(itr);
 		}
 	}
 }
@@ -829,14 +836,25 @@ void RectPostProcessor::CondenseEmpty(const Rect& r, PixelCoveredLUT* covered)
 	for ( ; itr != items.end(); ++itr) {
 		Item* item = *itr;
 		Rect new_r = GetRealDataRect(item->r);
-		if (new_r != item->r) {
-			RemovePixelItem(item, item->r);
+		if (new_r == item->r) {
+			continue;
+		}
+
+		RemovePixelItem(item, item->r);
+		if (covered) {
+			covered->Remove(item->r);
+		}
+
+		if (new_r.w > 0 && new_r.h > 0) {
 			InsertPixelItem(item, new_r);
 			if (covered) {
-				covered->Remove(item->r);
 				covered->Insert(new_r);
 			}
+
 			item->r = new_r;
+		} else {
+//			itr = m_items.erase(itr);
+
 		}
 	}
 }
@@ -849,7 +867,7 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 		int x = ret.x;
 		bool find_data = false;
 		for (int y = ret.y; y < ret.y + ret.h; ++y) {
-			if (PixelHasData(x, y)) {
+			if (IsPixelImmoveable(x, y)) {
 				find_data = true;
 				break;
 			}
@@ -858,6 +876,9 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 			break;
 		} else {
 			++ret.x;
+			if (ret.x == src.x + src.w) {
+				break;
+			}
 		}
 	}
 	// right
@@ -865,7 +886,7 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 		int x = ret.x + ret.w - 1;
 		bool find_data = false;
 		for (int y = ret.y; y < ret.y + ret.h; ++y) {
-			if (PixelHasData(x, y)) {
+			if (IsPixelImmoveable(x, y)) {
 				find_data = true;
 				break;
 			}
@@ -874,6 +895,9 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 			break;
 		} else {
 			--ret.w;
+			if (ret.w == 0) {
+				break;
+			}
 		}
 	}
 	// down
@@ -881,7 +905,7 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 		int y = ret.y;
 		bool find_data = false;
 		for (int x = ret.x; x < ret.x + ret.w; ++x) {
-			if (PixelHasData(x, y)) {
+			if (IsPixelImmoveable(x, y)) {
 				find_data = true;
 				break;
 			}
@@ -890,6 +914,9 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 			break;
 		} else {
 			++ret.y;
+			if (ret.y == src.y + src.h) {
+				break;
+			}
 		}
 	}
 	// up
@@ -897,7 +924,7 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 		int y = ret.y + ret.h - 1;
 		bool find_data = false;
 		for (int x = ret.x; x < ret.x + ret.w; ++x) {
-			if (PixelHasData(x, y)) {
+			if (IsPixelImmoveable(x, y)) {
 				find_data = true;
 				break;
 			}
@@ -906,6 +933,9 @@ Rect RectPostProcessor::GetRealDataRect(const Rect& src) const
 			break;
 		} else {
 			--ret.h;
+			if (ret.h == 0) {
+				break;
+			}
 		}
 	}
 	return ret;

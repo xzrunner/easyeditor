@@ -60,7 +60,7 @@ private:
 
 	void MergeRect(Item* remove, Item* newone);
 
-	bool PixelHasData(int x, int y) const;
+//	bool PixelHasData(int x, int y) const;
 	bool IsPixelCovered(int x, int y) const;
 	bool IsPixelImmoveable(int x, int y) const;
 
@@ -111,8 +111,11 @@ private:
 		bool Find(Item* item) const {
 			return m_items.find(item) != m_items.end();
 		}
-		bool IsCoverd() const {
+		bool IsMultiCoverd() const {
 			return m_items.size() > 1;
+		}
+		bool IsSingleCoverd() const {
+			return m_items.size() == 1;
 		}
 		bool IsEmpty() const {
 			return m_items.empty();

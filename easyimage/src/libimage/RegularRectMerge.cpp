@@ -1,51 +1,52 @@
 #include "RegularRectMerge.h"
-#include "PixelCoveredLUT.h"
-#include "RectPostProcessor.h"
+#include "PixelUncoveredLUT.h"
+#include "RegularRectCondense.h"
 
 namespace eimage
 {
 
-RegularRectMerge::RegularRectMerge(int width, int height, 
-								   const std::vector<Rect>& rects,
-								   RectPostProcessor& proc)
-	: m_proc(proc)
-	, m_rects(rects)
+RegularRectMerge::RegularRectMerge(const std::vector<Rect>& rects, int width, 
+								   int height, bool* ori_pixels)
+	: m_width(width)
+	, m_height(height)
 {
-	m_covered_area = new PixelCoveredLUT(width, height, rects);
+	m_uncovered_lut = new PixelUncoveredLUT(width, height);
+	m_condense = new RegularRectCondense(rects, width, height, ori_pixels);
 }
 
 RegularRectMerge::~RegularRectMerge()
 {
-	delete m_covered_area;
+	delete m_condense;
+	delete m_uncovered_lut;
 }
 
 void RegularRectMerge::Merge()
 {
 	static const int COUNT_MIN = 6;
 	static const int AREA_MIN = 16 * 16;
-	static const int ENLARGE_MAX = 16 * 16 * 4;
+	static const int ENLARGE_MAX = 16 * 16 * 2;
 
 	int debug_count = 0;
 
-	bool need_sort = true;
-	while (true) {
-		if (m_rects.size() < COUNT_MIN) {
+	m_condense->Condense(Rect(0, 0, m_width, m_height));
+
+	while (true) 
+	{
+		std::vector<Rect> rects;
+		m_condense->GetSortedRects(rects);
+
+		const Rect& r0 = rects[0];
+		assert(r0.w > 0 && r0.h > 0);
+		if (r0.w * r0.h > AREA_MIN && rects.size() < COUNT_MIN) {
 			break;
 		}
 
-		if (need_sort) {
-			std::sort(m_rects.begin(), m_rects.end(), RectCmp());
-		}
-
-		const Rect& r0 = m_rects[0];
-		if (r0.w * r0.h > AREA_MIN) {
-			break;
-		}
+		m_uncovered_lut->LoadRects(rects);
 
 		int cost_min = INT_MAX;
 		int r_min = -1;
-		for (int i = 1, n = m_rects.size(); i < n; ++i) {
-			const Rect& r1 = m_rects[i];
+		for (int i = 1, n = rects.size(); i < n; ++i) {
+			const Rect& r1 = rects[i];
 
 			int left = std::min(r0.x, r1.x),
 				right = std::max(r0.x + r0.w, r1.x + r1.w);
@@ -53,7 +54,7 @@ void RegularRectMerge::Merge()
 				up = std::max(r0.y + r0.h, r1.y + r1.h);
 			Rect mr(left, down, right - left, up - down);
 
-			int cost = ComputeCost(mr);
+			int cost = ComputeCost(mr, rects);
 			if (cost == 0) {
 				cost_min = 0;
 				r_min = i;
@@ -68,52 +69,42 @@ void RegularRectMerge::Merge()
 			break;
 		}
 
-		if (r_min != -1) {
-			const Rect& r1 = m_rects[r_min];
+		assert(r_min != -1);
 
-			int left = std::min(r0.x, r1.x),
-				right = std::max(r0.x + r0.w, r1.x + r1.w);
-			int down = std::min(r0.y, r1.y),
-				up = std::max(r0.y + r0.h, r1.y + r1.h);
-			Rect mr(left, down, right - left, up - down);
+		const Rect& r1 = rects[r_min];
 
-			if (debug_count == 18) {
-				int zz = 0;
-			}
+		int left = std::min(r0.x, r1.x),
+			right = std::max(r0.x + r0.w, r1.x + r1.w);
+		int down = std::min(r0.y, r1.y),
+			up = std::max(r0.y + r0.h, r1.y + r1.h);
+		Rect mr(left, down, right - left, up - down);
 
-			// LUT
-			m_covered_area->Remove(m_rects[0]);
-			m_covered_area->Remove(m_rects[r_min]);
-			m_covered_area->Insert(mr);
+// 		if (debug_count == 11) {
+// 			int zz = 0;
+// 		}
 
-			// proc
-			m_proc.RemoveItem(m_rects[0]);
-			m_proc.RemoveItem(m_rects[r_min]);
-			m_proc.InsertItem(mr);
-			m_proc.Condense(mr, m_covered_area);
+		m_condense->Remove(rects[0]);
+		m_condense->Remove(rects[r_min]);
+		m_condense->Insert(mr);
+		m_condense->Condense(mr);
 
-			// self
-// 			m_rects.erase(m_rects.begin() + r_min);
-// 			m_rects.erase(m_rects.begin());
-// 			m_rects.push_back(mr);
-			m_proc.LoadResult(m_rects);
-			need_sort = true;
-
-			++debug_count;
-			if (debug_count == 20) {
-				break;
-			}
-
-		} else {
-			need_sort = false;
-		}
+		++debug_count;
+// 		if (debug_count == 12) {
+// 			break;
+// 		}
 	}
 }
 
-int RegularRectMerge::ComputeCost(const Rect& r) const
+void RegularRectMerge::GetResult(std::vector<Rect>& result) const
 {
-	for (int i = 0, n = m_rects.size(); i < n; ++i) {
-		const Rect& b = m_rects[i];
+	m_condense->GetSortedRects(result);
+}
+
+int RegularRectMerge::ComputeCost(const Rect& r, const std::vector<Rect>& rects) const
+{
+	for (int i = 0, n = rects.size(); i < n; ++i) 
+	{
+		const Rect& b = rects[i];
 
 		if (r.x > b.x && (r.x + r.w < b.x + b.w) &&
 			r.y < b.y && (r.y + r.h > b.y + b.h)) {
@@ -142,7 +133,7 @@ int RegularRectMerge::ComputeCost(const Rect& r) const
 		}
 	}
 
-	int cost = r.w * r.h - m_covered_area->GetCoveredArea(r.x, r.y, r.w, r.h);
+	int cost = m_uncovered_lut->GetUncoveredArea(r.x, r.y, r.w, r.h);
 	return cost;
 }
 

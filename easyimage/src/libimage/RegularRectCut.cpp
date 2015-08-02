@@ -1,6 +1,6 @@
 #include "RegularRectCut.h"
 #include "PixelAreaLUT.h"
-#include "RectPostProcessor.h"
+#include "RegularRectCondense.h"
 
 #include "RegularRectMerge.h"
 
@@ -62,7 +62,9 @@ void RegularRectCut::AutoCut()
 // 		m_result.push_back(Rect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE));
 // 	}
 
-	PoseProcessResult();
+	RegularRectMerge merge(m_result, m_width, m_height, m_pixels);
+	merge.Merge();
+	merge.GetResult(m_result);
 }
 
 int RegularRectCut::GetUseArea() const
@@ -183,33 +185,6 @@ int RegularRectCut::CalBestRectPos(int w, int h, int& ret_x, int& ret_y)
 		ret_y = max_y;
 		return max_area;
 	}
-}
-
-void RegularRectCut::PoseProcessResult()
-{
- 	RectPostProcessor processor(m_result, m_width, m_height, m_pixels);
-
-	processor.Condense();
-
-//  	processor.MoveToNoCover();
-//  	processor.RemoveUnnecessary();
-// 	while (true) {
-// 		bool dirty = processor.Merge();
-// 		if (!dirty) {
-// 			break;
-// 		} else {
-// 			processor.Align();
-// 		}
-// 	}
-
- 	std::vector<Rect> result;
-
- 	processor.LoadResult(result);
-	RegularRectMerge merge(m_width, m_height, result, processor);
-	merge.Merge();
-
-	processor.LoadResult(result);
-	m_result = result;
 }
 
 }
