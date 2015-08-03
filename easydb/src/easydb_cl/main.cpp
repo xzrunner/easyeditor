@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
 				cmd->Run(argc, argv);
 			} catch (d2d::Exception& e) {
 				std::cout << e.what() << std::endl;
+				return -1;
 			}
 		}
 	}

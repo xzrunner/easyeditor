@@ -46,6 +46,8 @@
 #include "SeparateToComplex.h"
 #include "LRPacker.h"
 #include "PackTexture.h"
+#include "CalculateImageArea.h"
+#include "RectCutWithJson.h"
 
 namespace edb
 {
@@ -97,6 +99,8 @@ void CommandLoader::Init()
 	fc->Register(SeparateToComplex::Create());
 	fc->Register(LRPacker::Create());
 	fc->Register(PackTexture::Create());
+	fc->Register(CalImageArea::Create());
+	fc->Register(RectCutWithJson::Create());
 }
 
 }

@@ -42,13 +42,8 @@ void LRPacker::Run(int argc, char *argv[])
 
 	int id = d2d::StringTools::StringToInt(argv[5]);
 
-	if (id == 1) {
-	 	// 3
-	 	LRLayersPack json_pack;
-	 	json_pack.Run(tmp_lr_file);
-
-		return;
-	}
+	d2d::mk_dir(tmp_dir, true);
+	d2d::mk_dir(out_dir, true);
 
 	// 1
 	SeparateToComplex sep;
@@ -61,6 +56,10 @@ void LRPacker::Run(int argc, char *argv[])
 	// 3
 	LRLayersPack json_pack;
 	json_pack.Run(tmp_lr_file);
+
+	if (id == 1) {
+		return;
+	}
 
 	// 4
 	{

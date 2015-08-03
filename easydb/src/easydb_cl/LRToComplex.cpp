@@ -31,6 +31,8 @@ void LRToComplex::Run(int argc, char *argv[])
 
 void LRToComplex::Run(const std::string& filepath)
 {
+	std::cout << "LRToComplex::Run	filepath: " << filepath << std::endl;
+
 	Json::Value lr_val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -56,9 +58,11 @@ void LRToComplex::Run(const std::string& filepath)
 	complex_val["ymax"] = 0;
 	complex_val["ymin"] = 0;
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of("_"));
+	std::string outfile = filepath.substr(0, filepath.find_last_of("_") + 1);
 	wxString tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
-	outfile = d2d::FilenameTools::getFilenameAddTag(outfile, tag, "json");
+	outfile += tag + ".json";
+
+	std::cout << "LRToComplex::Run	outfile: " << outfile << std::endl;
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

@@ -449,6 +449,14 @@
 					Name="cut"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\RectCutWithJson.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RectCutWithJson.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\RegularRectCut.cpp"
 						>
 					</File>
@@ -486,6 +494,18 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\BlockCompress.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="statistics"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\CalculateImageArea.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\CalculateImageArea.h"
 						>
 					</File>
 				</Filter>
