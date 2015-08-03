@@ -109,7 +109,7 @@ d2d::Rect ImageTrim::Trim() const
 
 bool ImageTrim::IsTransparent(int x, int y) const
 {
-	return m_img_data.GetPixelData()[(m_img_data.GetWidth() * y + x) * 4 + 3] == 0;
+	return m_img_data.GetPixelData()[(y * m_img_data.GetWidth() + x) * 4 + 3] == 0;
 }
 
 }

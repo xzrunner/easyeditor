@@ -278,8 +278,7 @@ uint8_t* ImageLoader::loadImageByLibpng(const std::string& filename, int& width,
 		if (!lImageBuffer) break;
 		lRowPtrs = new png_bytep[lHeight];
 		if (!lRowPtrs) break;
-		for (unsigned int i = 0; i < lHeight; ++i) 
-		{
+		for (unsigned int i = 0; i < lHeight; ++i) {
 			lRowPtrs[lHeight - (i + 1)] = lImageBuffer + i * lRowSize;
 		}
 		png_read_image(lPngPtr, lRowPtrs);

@@ -53,7 +53,7 @@ const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 			for (int x = xmin; x < xmax; ++x) {
 				if (x >= 0 && x < width &&
 					y >= 0 && y < height) {
-					int to = ((h - (y - ymin) - 1) * w + x-xmin) * channels;
+					int to = ((y - ymin) * w + x-xmin) * channels;
 					if (m_check[width * y + x]) {
 						memset(&sub[to], 0, sizeof(uint8_t) * 4);
 					} else {
@@ -71,7 +71,7 @@ const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 				if (x >= 0 && x < width &&
 					y >= 0 && y < height) {
 						int from = (y * width + x) * channels,
-							to = ((h - (y - ymin) - 1) * w + x-xmin) * channels;
+							to = ((y - ymin) * w + x-xmin) * channels;
 						memcpy(&sub[to], &pixels[from], channels);
 				}
 			}

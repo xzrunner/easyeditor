@@ -337,10 +337,7 @@ void Image::LoadWithClip(const std::string& filepath)
 			eimage::ImageClip clip(*img_data);
 			const uint8_t* c_pixels = clip.Clip(r);
 
-			eimage::ImageVeritalFlip yflip(c_pixels, r.xLength(), r.yLength());
-			const uint8_t* flip_pixels = yflip.Revert();
-
-			img_data->SetContent(flip_pixels, r.xLength(), r.yLength());
+			img_data->SetContent(c_pixels, r.xLength(), r.yLength());
 			m_tex->LoadFromMemory(img_data);
 
 			delete[] c_pixels;

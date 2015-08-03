@@ -20,7 +20,7 @@ public:
 		int channels, const std::string& filename, Type type);
 
 private:
-	static void storePNG(const uint8_t* pixels, int width, int height,
+	static int storePNG(const uint8_t* pixels, int width, int height,
 		int channels, const std::string& filename);
 	static void storePPM(const uint8_t* pixels, int width, int height,
 		int channels, const std::string& filename);

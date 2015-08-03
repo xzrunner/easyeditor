@@ -39,9 +39,9 @@ void RegularRectMerge::Merge()
 		}
 
 		assert(rects[0].w > 0 && rects[0].h > 0);
-		if (rects[0].w * rects[0].h > AREA_MIN && rects.size() < COUNT_MIN) {
-			break;
-		}
+		//if (rects[0].w * rects[0].h > AREA_MIN && rects.size() < COUNT_MIN) {
+		//	break;
+		//}
 
 		m_uncovered_lut->LoadRects(rects);
 
@@ -69,7 +69,7 @@ void RegularRectMerge::Merge()
 // 			}
 // 		}
 
-		if (debug_count == 3) {
+		if (debug_count == 15) {
 			int zz = 0;
 		}
 
@@ -154,19 +154,19 @@ int RegularRectMerge::ComputeCost(const Rect& r, const std::vector<Rect>& rects)
 			return INT_MAX;
 		}
 
-		if (r.x >= b.x && (r.x < b.x + b.w) && r.y >= b.y && (r.y < b.y + b.h) &&
+		if (r.x > b.x && (r.x < b.x + b.w) && r.y > b.y && (r.y < b.y + b.h) &&
 			(r.x + r.w > b.x + b.w) && (r.y + r.h > b.y + b.h)) {
 			cost += (b.x + b.w - r.x) * (b.y + b.h - r.y);
 		} 
-		if (r.x >= b.x && (r.x < b.x + b.w) && (r.y + r.h - 1 >= b.y) && (r.y + r.h - 1 < b.y + b.h) &&
+		if (r.x > b.x && (r.x < b.x + b.w) && (r.y + r.h > b.y) && (r.y + r.h < b.y + b.h) &&
 			(r.x + r.w > b.x + b.w) && (r.y < b.y)) {
 			cost += (b.x + b.w - r.x) * (r.y + r.h - 1 - b.y);
 		}
-		if ((r.x + r.w - 1 >= b.x) && (r.x + r.w - 1 < b.x + b.w) && (r.y + r.h - 1 >= b.y) && (r.y + r.h - 1 < b.y + b.h) &&
+		if ((r.x + r.w > b.x) && (r.x + r.w < b.x + b.w) && (r.y + r.h > b.y) && (r.y + r.h < b.y + b.h) &&
 			r.x < b.x && r.y < b.y) {
 			cost += (r.x + r.w - 1 - b.x) * (r.y + r.h - 1 - b.y);
 		}
-		if ((r.x + r.w - 1 >= b.x) && (r.x + r.w - 1 < b.x + b.w) && (r.y >= b.y) && (r.y < b.y + b.h) &&
+		if ((r.x + r.w > b.x) && (r.x + r.w < b.x + b.w) && (r.y > b.y) && (r.y < b.y + b.h) &&
 			r.x < b.x && (r.y + r.h > b.y + b.h)) {
 			cost += (r.x + r.w - 1 - b.x) * (b.y + b.h - r.y);
 		}
