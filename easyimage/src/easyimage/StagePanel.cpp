@@ -46,6 +46,8 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 	m_image = sprite;
 
 	SetCanvasDirty();
+
+	m_edit_op->Clear();
 }
 
 //////////////////////////////////////////////////////////////////////////

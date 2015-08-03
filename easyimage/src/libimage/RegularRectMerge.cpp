@@ -34,34 +34,71 @@ void RegularRectMerge::Merge()
 	{
 		std::vector<Rect> rects;
 		m_condense->GetSortedRects(rects);
+		if (rects.size() <= 1) {
+			break;
+		}
 
-		const Rect& r0 = rects[0];
-		assert(r0.w > 0 && r0.h > 0);
-		if (r0.w * r0.h > AREA_MIN && rects.size() < COUNT_MIN) {
+		assert(rects[0].w > 0 && rects[0].h > 0);
+		if (rects[0].w * rects[0].h > AREA_MIN && rects.size() < COUNT_MIN) {
 			break;
 		}
 
 		m_uncovered_lut->LoadRects(rects);
 
 		int cost_min = INT_MAX;
-		int r_min = -1;
-		for (int i = 1, n = rects.size(); i < n; ++i) {
-			const Rect& r1 = rects[i];
+		int r0_min = -1, r1_min = -1;
 
-			int left = std::min(r0.x, r1.x),
-				right = std::max(r0.x + r0.w, r1.x + r1.w);
-			int down = std::min(r0.y, r1.y),
-				up = std::max(r0.y + r0.h, r1.y + r1.h);
-			Rect mr(left, down, right - left, up - down);
+		//int r_min = -1;
+// 		for (int i = 1, n = rects.size(); i < n; ++i) {
+// 			const Rect& r1 = rects[i];
+// 
+// 			int left = std::min(r0.x, r1.x),
+// 				right = std::max(r0.x + r0.w, r1.x + r1.w);
+// 			int down = std::min(r0.y, r1.y),
+// 				up = std::max(r0.y + r0.h, r1.y + r1.h);
+// 			Rect mr(left, down, right - left, up - down);
+// 
+// 			int cost = ComputeCost(mr, rects);
+// 			if (cost == 0) {
+// 				cost_min = 0;
+// 				r_min = i;
+// 				break;
+// 			} else if (cost < cost_min) {
+// 				cost_min = cost;
+// 				r_min = i;
+// 			}
+// 		}
 
-			int cost = ComputeCost(mr, rects);
-			if (cost == 0) {
-				cost_min = 0;
-				r_min = i;
-				break;
-			} else if (cost < cost_min) {
-				cost_min = cost;
-				r_min = i;
+		if (debug_count == 3) {
+			int zz = 0;
+		}
+
+		for (int i = 0, n = rects.size(); i < n - 1 && cost_min > 0; ++i) {
+			const Rect& r0 = rects[i];
+			for (int j = i + 1; j < n && cost_min > 0; ++j) {
+				const Rect& r1 = rects[j];
+	 			int left = std::min(r0.x, r1.x),
+	 				right = std::max(r0.x + r0.w, r1.x + r1.w);
+	 			int down = std::min(r0.y, r1.y),
+	 				up = std::max(r0.y + r0.h, r1.y + r1.h);
+	 			Rect mr(left, down, right - left, up - down);
+	
+
+				if (mr.x == 40 && mr.y == 11) {
+					int zz = 0;
+				}
+	 			int cost = ComputeCost(mr, rects);
+	 			if (cost == 0) {
+	 				cost_min = 0;
+	 				r0_min = i;
+					r1_min = j;
+	 				break;
+	 			} else if (cost < cost_min) {
+	 				cost_min = cost;
+					r0_min = i;
+					r1_min = j;
+
+	 			}
 			}
 		}
 
@@ -69,9 +106,10 @@ void RegularRectMerge::Merge()
 			break;
 		}
 
-		assert(r_min != -1);
+		assert(r0_min != -1 && r1_min != -1);
 
-		const Rect& r1 = rects[r_min];
+		const Rect& r0 = rects[r0_min];
+		const Rect& r1 = rects[r1_min];
 
 		int left = std::min(r0.x, r1.x),
 			right = std::max(r0.x + r0.w, r1.x + r1.w);
@@ -79,17 +117,17 @@ void RegularRectMerge::Merge()
 			up = std::max(r0.y + r0.h, r1.y + r1.h);
 		Rect mr(left, down, right - left, up - down);
 
-// 		if (debug_count == 11) {
-// 			int zz = 0;
+// 		if (debug_count == 1) {
+// 			break;
 // 		}
 
-		m_condense->Remove(rects[0]);
-		m_condense->Remove(rects[r_min]);
+		m_condense->Remove(r0);
+		m_condense->Remove(r1);
 		m_condense->Insert(mr);
 		m_condense->Condense(mr);
 
 		++debug_count;
-// 		if (debug_count == 12) {
+// 		if (debug_count == 3) {
 // 			break;
 // 		}
 	}
@@ -102,6 +140,7 @@ void RegularRectMerge::GetResult(std::vector<Rect>& result) const
 
 int RegularRectMerge::ComputeCost(const Rect& r, const std::vector<Rect>& rects) const
 {
+	int cost = 0;
 	for (int i = 0, n = rects.size(); i < n; ++i) 
 	{
 		const Rect& b = rects[i];
@@ -115,25 +154,25 @@ int RegularRectMerge::ComputeCost(const Rect& r, const std::vector<Rect>& rects)
 			return INT_MAX;
 		}
 
-		if (r.x >= b.x + 1 && (r.x < b.x + b.w) && r.y >= b.y + 1 && (r.y < b.y + b.h) &&
+		if (r.x >= b.x && (r.x < b.x + b.w) && r.y >= b.y && (r.y < b.y + b.h) &&
 			(r.x + r.w > b.x + b.w) && (r.y + r.h > b.y + b.h)) {
-			return INT_MAX;
+			cost += (b.x + b.w - r.x) * (b.y + b.h - r.y);
 		} 
-		if (r.x >= b.x + 1 && (r.x < b.x + b.w) && (r.y + r.h - 1 >= b.y) && (r.y + r.h - 1 < b.y + b.h) &&
+		if (r.x >= b.x && (r.x < b.x + b.w) && (r.y + r.h - 1 >= b.y) && (r.y + r.h - 1 < b.y + b.h) &&
 			(r.x + r.w > b.x + b.w) && (r.y < b.y)) {
-			return INT_MAX;
+			cost += (b.x + b.w - r.x) * (r.y + r.h - 1 - b.y);
 		}
 		if ((r.x + r.w - 1 >= b.x) && (r.x + r.w - 1 < b.x + b.w) && (r.y + r.h - 1 >= b.y) && (r.y + r.h - 1 < b.y + b.h) &&
 			r.x < b.x && r.y < b.y) {
-			return INT_MAX;
+			cost += (r.x + r.w - 1 - b.x) * (r.y + r.h - 1 - b.y);
 		}
-		if ((r.x + r.w - 1 >= b.x) && (r.x + r.w - 1 < b.x + b.w) && (r.y >= b.y + 1) && (r.y < b.y + b.h) &&
+		if ((r.x + r.w - 1 >= b.x) && (r.x + r.w - 1 < b.x + b.w) && (r.y >= b.y) && (r.y < b.y + b.h) &&
 			r.x < b.x && (r.y + r.h > b.y + b.h)) {
-			return INT_MAX;
+			cost += (r.x + r.w - 1 - b.x) * (b.y + b.h - r.y);
 		}
 	}
 
-	int cost = m_uncovered_lut->GetUncoveredArea(r.x, r.y, r.w, r.h);
+	cost += m_uncovered_lut->GetUncoveredArea(r.x, r.y, r.w, r.h);
 	return cost;
 }
 
