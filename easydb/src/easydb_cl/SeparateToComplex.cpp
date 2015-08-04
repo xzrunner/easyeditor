@@ -30,10 +30,7 @@ void SeparateToComplex::Run(int argc, char *argv[])
 	if (!check_file(argv[2])) return;
 
 	m_point_dir = argv[3];
-
-	wxStandardPathsBase& stdp = wxStandardPaths::Get();
-	wxString exe_path = stdp.GetExecutablePath();
-	m_tmp_dir = d2d::FilenameTools::getFileDir(exe_path) + "\\" + argv[4];
+	m_tmp_dir = argv[4];
 
 	Run(argv[2]);
 }
@@ -41,11 +38,8 @@ void SeparateToComplex::Run(int argc, char *argv[])
 void SeparateToComplex::Run(const std::string& lr_file, const std::string& point_dir, 
 							const std::string& tmp_dir)
 {
-	m_point_dir = point_dir;
-	
-	wxStandardPathsBase& stdp = wxStandardPaths::Get();
-	wxString exe_path = stdp.GetExecutablePath();
-	m_tmp_dir = d2d::FilenameTools::getFileDir(exe_path) + "\\" + tmp_dir;
+	m_point_dir = point_dir;	
+	m_tmp_dir = tmp_dir;
 
 	Run(lr_file);
 }

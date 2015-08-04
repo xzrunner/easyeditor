@@ -34,10 +34,8 @@ void LRPacker::Run(int argc, char *argv[])
 	if (!check_file(argv[2])) return;
 	if (!check_file(argv[6])) return;
 
-	wxStandardPathsBase& stdp = wxStandardPaths::Get();
-	std::string exe_dir = d2d::FilenameTools::getFileDir(stdp.GetExecutablePath());
-	std::string tmp_dir = exe_dir + "\\" + argv[3];
-	std::string out_dir = exe_dir + "\\" + argv[4];
+	std::string tmp_dir = argv[3];
+	std::string out_dir = argv[4];
 	std::string tmp_lr_file = tmp_dir + "\\" + d2d::FilenameTools::getFilenameWithExtension(argv[2]);
 
 	int id = d2d::StringTools::StringToInt(argv[5]);
