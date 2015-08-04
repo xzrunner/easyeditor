@@ -30,10 +30,11 @@ void DrawSpritesVisitor::Visit(Object* object, bool& bFetchNext)
 
 	rd->Draw(spr);
 
-	if (Config::Instance()->GetSettings().visible_node_name) {
+	SettingData& cfg = Config::Instance()->GetSettings();
+	if (cfg.visible_node_name) {
 		Matrix t;
 		spr->GetTransMatrix(t);
-		rd->DrawName(spr->name, std::max(1.0f, m_cam_scale), t);
+		rd->DrawName(spr->name, std::max(1.0f, m_cam_scale) * cfg.node_name_scale, t);
 	}
 }
 

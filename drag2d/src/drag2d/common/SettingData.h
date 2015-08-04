@@ -22,6 +22,7 @@ struct SettingData
 	bool visible_label_bg;
 	bool visible_label_text;
 	bool visible_node_name;
+	float node_name_scale;
 	bool visible_shape;
 	bool visible_tex_edge;
 	bool particle3d_loop;

@@ -14,6 +14,8 @@ SettingData::SettingData()
 	visible_label_bg = true;
 	visible_label_text = true;
 	visible_node_name = false;
+	node_name_scale = 1.0f;
+	
 	visible_shape = true;
 	visible_tex_edge = true;
 	particle3d_loop = true;
@@ -44,6 +46,9 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	}
 	if (!value["visible_label_text"].isNull()) {
 		visible_label_text = value["visible_label_text"].asBool();
+	}
+	if (!value["node_name_scale"].isNull()) {
+		node_name_scale = value["node_name_scale"].asDouble();
 	}
 	if (!value["visible_node_name"].isNull()) {
 		visible_node_name = value["visible_node_name"].asBool();
