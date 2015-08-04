@@ -37,12 +37,12 @@ void StageCanvas::InitGL()
 	d2d::OrthoCanvas::InitGL();
 
 	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
-	ResetViewport();
-
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
+
+	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	ResetViewport();
 }
 
 void StageCanvas::OnDrawSprites() const
