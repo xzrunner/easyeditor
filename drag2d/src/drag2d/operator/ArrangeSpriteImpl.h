@@ -93,12 +93,14 @@ private:
 		MENU_REMOVE_FROM_DTEX
 	};
 
+protected:
+	EditPanel* m_stage;
+
 private:
 	const ArrangeSpriteConfig m_cfg;
 
 	AutoAlign m_align;
 
-	EditPanel* m_stage;
 	MultiSpritesImpl* m_sprites_impl;
 	PropertySettingPanel* m_property_panel;
 

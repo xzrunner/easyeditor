@@ -1,7 +1,10 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
+#include <easyscale9.h>
+
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace eparticle3d
 {
@@ -25,8 +28,8 @@ struct ParticleChild
 
 	float min_rotate, max_rotate;
 
-	ParticleChild() 
-		: symbol(NULL), bind_ps(NULL)
+	ParticleChild(d2d::ISymbol* symbol) 
+		: symbol(symbol), bind_ps(NULL)
 	{}
 };
 
@@ -89,11 +92,16 @@ public:
 
 	void update(float dt);
 
+	void SetDirection(float x, float y, float z);
+	void SetDirection(const Quaternion& dir);
+
 	void start();
 	void stop();
 	void reset();
 	void pause();
 	void SetLoop(bool loop);
+
+	void Clear();
 
 	bool IsEmpty() const;
 
@@ -115,12 +123,17 @@ public:
 	void addChild(ParticleChild* child) { 
 		children.push_back(child); 
 	}
-	void delChild() { 
-		if (!children.empty()) 
-		{
-			delete children[children.size() - 1];
-			children.pop_back(); 
+	void delChild(int idx) { 
+		if (idx >= 0 && idx < children.size()) {
+			delete children[idx];
+			children.erase(children.begin() + idx);
 		}
+	}
+	void delAllChild() { 
+		for (int i = 0, n = children.size(); i < n; ++i) {
+			delete children[i];
+		}
+		children.clear();
 	}
 
 protected:
@@ -161,6 +174,8 @@ private:
 
 	float emission_time;
 	int count;
+
+	mat4 direction;	
 
 	float min_life, max_life;
 

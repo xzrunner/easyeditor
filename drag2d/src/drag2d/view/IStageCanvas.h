@@ -36,6 +36,9 @@ public:
 
 	void SetCamDirty() { m_cam_dirty = true; }
 
+	int GetWidth() const { return m_width; }
+	int GetHeight() const { return m_height; }
+
 protected:
 	virtual void InitGL();
 	virtual void OnSize(int w, int h) = 0;

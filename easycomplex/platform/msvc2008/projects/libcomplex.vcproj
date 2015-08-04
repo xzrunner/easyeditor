@@ -309,11 +309,27 @@
 			Name="editop"
 			>
 			<File
+				RelativePath="..\..\..\src\libcomplex\ArrangeSpriteImpl.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\ArrangeSpriteImpl.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\SphereRotateState.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\SphereRotateState.h"
 				>
 			</File>
 		</Filter>

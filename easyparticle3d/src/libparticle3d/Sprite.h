@@ -3,6 +3,8 @@
 
 #include "Symbol.h"
 
+#include <easy3d.h>
+
 namespace eparticle3d
 {
 
@@ -30,8 +32,13 @@ public:
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
+	Quaternion& GetDir() { return m_dir; }
+
 protected:
 	Symbol* m_symbol;
+
+private:
+	Quaternion m_dir;
 
 }; // Sprite
 

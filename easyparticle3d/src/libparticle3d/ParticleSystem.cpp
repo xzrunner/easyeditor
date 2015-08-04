@@ -84,6 +84,8 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	emission_time = ps.emission_time;
 	count = ps.count;
 
+	direction = ps.direction;
+
 	min_life = ps.min_life;
 	max_life = ps.max_life;
 
@@ -246,7 +248,7 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 			multi.set(1, 1, 1, a/255.0f);
 		}
 
-		d2d::Vector pos = TransCoords3To2(p->position);
+		d2d::Vector pos = TransCoords3To2(p->position, direction);
 		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
 
 		d2d::Matrix _mt(mt);
@@ -411,6 +413,18 @@ void ParticleSystem::update(float dt)
 	}
 }
 
+void ParticleSystem::SetDirection(float x, float y, float z)
+{
+	vec3 start(0, 0, 1), end(x, y, z);
+	end.Normalize();
+	SetDirection(Quaternion::CreateFromVectors(start, end));
+}
+
+void ParticleSystem::SetDirection(const Quaternion& dir)
+{
+	direction = dir.ToMatrix();
+}
+
 void ParticleSystem::start()
 {
 	active = true;
@@ -421,6 +435,17 @@ void ParticleSystem::stop()
 	active = false;
 	life = lifetime;
 	emitCounter = 0;
+}
+
+void ParticleSystem::Clear()
+{
+	Particle* p = pStart;
+	while (p != pLast)
+	{
+		remove(p);
+		if (p >= pLast)
+			return;
+	}	
 }
 
 void ParticleSystem::reset()

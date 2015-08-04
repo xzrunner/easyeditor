@@ -36,6 +36,12 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
+bool Sprite::Update(int version) 
+{
+	m_symbol->
+	return true; 
+}
+
 const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
