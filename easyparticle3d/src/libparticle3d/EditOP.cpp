@@ -19,6 +19,17 @@ bool EditOP::OnMouseLeftDown(int x, int y)
 	ps->origin = m_stage->TransPosScrToProj(x, y);
 	ps->start();
 	ps->reset();
+	ps->SetLoop(true);
+
+	return false;
+}
+
+bool EditOP::OnMouseLeftUp(int x, int y)
+{
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+
+	ParticleSystem* ps = m_stage->m_ps;
+	ps->SetLoop(false);
 
 	return false;
 }
@@ -29,7 +40,6 @@ bool EditOP::OnMouseDrag(int x, int y)
 
 	ParticleSystem* ps = m_stage->m_ps;
 	ps->origin = m_stage->TransPosScrToProj(x, y);
-	ps->start();
 
 	return false;
 }

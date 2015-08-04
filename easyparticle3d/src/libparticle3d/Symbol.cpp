@@ -61,9 +61,7 @@ void Symbol::Draw(const d2d::Matrix& mt,
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
-	if (m_ps->IsEmpty() && loop) {
-		Start();
-	}
+	m_ps->SetLoop(loop);
 	m_ps->update(dt);
 	m_ps->draw(mt);
 

@@ -23,6 +23,9 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 	pLast = pStart = new Particle[buffer];
 	pEnd = pStart + buffer;
 
+	active = false;
+	m_loop = false;
+
 	emitCounter = 0;
 
 	emission_time = 0;
@@ -72,6 +75,7 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	children = ps.children;
 
 	active = ps.active;
+	m_loop = ps.m_loop;
 	lifetime = ps.lifetime;
 	life = ps.life;
 
@@ -279,9 +283,11 @@ void ParticleSystem::update(float dt)
 			emitCounter -= rate;
 		}
 
-		life -= dt;
-		if (lifetime != -1 && life < 0) {
-			stop();
+		if (!m_loop) {
+ 			life -= dt;
+ 			if (lifetime != -1 && life < 0) {
+ 				stop();
+ 			}
 		}
 	}
 
@@ -445,6 +451,20 @@ void ParticleSystem::reset()
 void ParticleSystem::pause()
 {
 	active = false;
+}
+
+void ParticleSystem::SetLoop(bool loop)
+{
+	if (loop == m_loop) {
+		return;
+	}
+
+	life = lifetime = emission_time;
+	m_loop = loop;
+
+	if (m_loop) {
+		start();
+	}
 }
 
 bool ParticleSystem::IsEmpty() const

@@ -93,6 +93,7 @@ public:
 	void stop();
 	void reset();
 	void pause();
+	void SetLoop(bool loop);
 
 	bool IsEmpty() const;
 
@@ -149,6 +150,7 @@ private:
 	Particle *pStart, *pLast, *pEnd;
 
 	bool active;
+	bool m_loop;
 	float lifetime;
 	float life;
 
