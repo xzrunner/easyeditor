@@ -2685,6 +2685,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="panel"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ImagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ImagePanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="algorithms"

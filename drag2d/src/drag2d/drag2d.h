@@ -128,6 +128,7 @@
 #include "widgets/UICallback.h"
 #include "widgets/SliderCtrlOne.h"
 #include "widgets/SliderCtrlTwo.h"
+#include "widgets/ImagePanel.h"
 
 #include "common/LibJpeg.h"
 #include "common/log.h"
