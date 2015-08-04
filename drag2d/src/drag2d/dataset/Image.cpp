@@ -222,9 +222,9 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 		tymin = (n->GetMinY()+extend) / height;
 		tymax = (n->GetMaxY()-extend) / height;
 
-		if (texid != 1) {
-			wxLogDebug(_T("img dt's tex = %d"), texid);
-		}
+// 		if (texid != 1) {
+// 			wxLogDebug(_T("img dt's tex = %d"), texid);
+// 		}
 
  		if (n->IsRotated())
  		{

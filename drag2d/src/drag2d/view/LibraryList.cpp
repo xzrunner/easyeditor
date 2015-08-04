@@ -19,6 +19,10 @@ LibraryList::LibraryList(ILibraryPage* page,
 void LibraryList::OnListSelected(wxCommandEvent& event)
 {
 	int idx = event.GetInt();
+
+	if (!GetKeyState(WXK_CONTROL)) {
+		m_selection_set.clear();
+	}
 	m_selection_set.insert(idx);
 }
 
@@ -101,6 +105,9 @@ void LibraryList::OnMouseEvent(wxMouseEvent& event)
 		return;
 	}
 
+	if (!GetKeyState(WXK_CONTROL)) {
+		m_selection_set.clear();
+	}
 	m_selection_set.insert(GetSelection());
 
 	std::string text = m_name + ",";
