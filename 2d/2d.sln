@@ -357,6 +357,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libp3dinv", "..\easyp3dinv\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanis", "..\easyanim\platform\msvc2008\projects\libanis.vcproj", "{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeasy3d", "..\easy3d\platform\msvc2008\projects\easy3d.vcproj", "{C4799E05-825C-4633-A3E7-8BA05B45A666}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -563,12 +565,16 @@ Global
 		{B80A41C3-5168-43A8-AC9D-C110C6140C86}.Debug|Win32.Build.0 = Debug|Win32
 		{B80A41C3-5168-43A8-AC9D-C110C6140C86}.Release|Win32.ActiveCfg = Release|Win32
 		{B80A41C3-5168-43A8-AC9D-C110C6140C86}.Release|Win32.Build.0 = Release|Win32
-		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
 		{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}.Debug|Win32.Build.0 = Debug|Win32
 		{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}.Release|Win32.ActiveCfg = Release|Win32
 		{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}.Release|Win32.Build.0 = Release|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Debug|Win32.Build.0 = Debug|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Release|Win32.ActiveCfg = Release|Win32
+		{C4799E05-825C-4633-A3E7-8BA05B45A666}.Release|Win32.Build.0 = Release|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

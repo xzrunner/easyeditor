@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easyanimation;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyicon\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\easyanimation;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyicon\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easyanimation;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyicon\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\easyanimation;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyanim\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyicon\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
