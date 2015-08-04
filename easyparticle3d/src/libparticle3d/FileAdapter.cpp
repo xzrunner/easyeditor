@@ -49,13 +49,13 @@ void FileAdapter::load(const char* filename, int version)
 	min_linear_acc = c - o;
 	max_linear_acc = c + o;
 
-	c = value["dis_region"]["center"].asInt();
-	o = value["dis_region"]["offset"].asInt();
+	c = value["disturbance_radius"]["center"].asInt();
+	o = value["disturbance_radius"]["offset"].asInt();
 	min_dis_region = c - o;
 	max_dis_region = c + o;
 
-	c = value["dis_spd"]["center"].asInt();
-	o = value["dis_spd"]["offset"].asInt();
+	c = value["disturbance_spd"]["center"].asInt();
+	o = value["disturbance_spd"]["offset"].asInt();
 	min_dis_spd = c - o;
 	max_dis_spd = c + o;
 
