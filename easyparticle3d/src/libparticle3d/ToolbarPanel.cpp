@@ -367,9 +367,10 @@ void ToolbarPanel::clear()
 	this->Layout();
 }
 
-void ToolbarPanel::onAddChild(wxCommandEvent& event)
+void ToolbarPanel::onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 {
 	ParticleChild* pc = new ParticleChild;
+	pc->symbol = symbol;
 	ChildPanel* cp = new ChildPanel(this, pc);
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
@@ -489,6 +490,12 @@ InitLayout()
 		topSizer->Add(sizer);
 	}
 	topSizer->AddSpacer(10);
+	// Icon
+	{
+		d2d::ImagePanel* panel = new d2d::ImagePanel(this, m_pc->symbol->GetFilepath(), 100, 100);
+		topSizer->Add(panel);
+	}
+	topSizer->AddSpacer(10);
 	// Scale
 	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, "Scale (%)", "scale", this, PS_SCALE, 
 		d2d::SliderItem("start", "start", SCALE_START, 0, 500), d2d::SliderItem("end", "end", SCALE_END, 0, 500));
@@ -560,10 +567,8 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	d2d::ISymbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
-		m_toolbar->onAddChild(wxCommandEvent());
+		m_toolbar->onAddChild(wxCommandEvent(), symbol);
 
-		ToolbarPanel::ChildPanel* child = m_toolbar->m_children.back();
-		child->m_pc->symbol = m_library->GetSymbol(index);
 		m_stage->m_ps->start();
 		m_stage->ResetViewport();
 	}

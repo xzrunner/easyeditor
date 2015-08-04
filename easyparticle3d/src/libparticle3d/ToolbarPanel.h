@@ -36,7 +36,7 @@ protected:
 private:
 	void clear();
 
-	void onAddChild(wxCommandEvent& event);
+	void onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
 	void onDelChild(wxCommandEvent& event);
 
 	void onSetHori(wxSpinEvent& event);
