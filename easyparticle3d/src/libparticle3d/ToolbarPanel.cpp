@@ -82,8 +82,9 @@ void ToolbarPanel::Store(Json::Value& val) const
 
 void ToolbarPanel::add(const FileAdapter::Child& child)
 {
-	ParticleChild* pc = new ParticleChild;
-	ChildPanel* cp = new ChildPanel(this, pc);
+	// todo Release symbol
+	ParticleChild* pc = new ParticleChild(d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath));
+	ChildPanel* cp = new ChildPanel(this, pc, this);
 
 	cp->m_name->SetValue(child.name);
 	cp->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
@@ -93,8 +94,6 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	}
 	cp->m_startz->SetValue(child.start_z);
 
-	// todo Release symbol
-	pc->symbol = d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath);
 	if (!child.bind_filepath.empty()) {
 		pc->bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
 	}
@@ -325,8 +324,8 @@ wxSizer* ToolbarPanel::initLayout()
  	// components
  	{
 		// Open
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Remove"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelChild));
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Remove All"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelAllChild));
 		rightSizer->Add(btn);
 		rightSizer->AddSpacer(10);
 
@@ -355,23 +354,40 @@ void ToolbarPanel::initParticle()
 	ps->setInertia(m_inertia->GetValue());
 }
 
+void ToolbarPanel::OnDelChild(ToolbarPanel::ChildPanel* child)
+{
+	if (m_children.empty()) return;
+
+	m_stage->m_ps->Clear();
+
+	int idx = -1;
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		if (m_children[i] == child) {
+			idx = i;
+			break;
+		}
+	}
+	if (idx == -1) {
+		return;
+	}
+
+	m_compSizer->Detach(idx);
+	delete m_children[idx];
+	m_children.erase(m_children.begin() + idx);
+	m_stage->m_ps->delChild(idx);
+
+	this->Layout();	
+}
+
 void ToolbarPanel::clear()
 {
-	while (!m_children.empty())
-	{
-		m_compSizer->Detach(m_children.size()-1);
-		delete m_children[m_children.size()-1];
-		m_children.pop_back();
-		m_stage->m_ps->delChild();
-	}
-	this->Layout();
+	onDelAllChild(wxCommandEvent());
 }
 
 void ToolbarPanel::onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 {
-	ParticleChild* pc = new ParticleChild;
-	pc->symbol = symbol;
-	ChildPanel* cp = new ChildPanel(this, pc);
+	ParticleChild* pc = new ParticleChild(symbol);
+	ChildPanel* cp = new ChildPanel(this, pc, this);
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
 	m_stage->m_ps->addChild(pc);
@@ -383,14 +399,23 @@ void ToolbarPanel::onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 //	m_parent->Refresh();
 }
 
-void ToolbarPanel::onDelChild(wxCommandEvent& event)
+void ToolbarPanel::onDelAllChild(wxCommandEvent& event)
 {
-	if (m_children.empty()) return;
+	if (m_children.empty()) {
+		return;
+	}
 
-	m_compSizer->Detach(m_children.size()-1);
-	delete m_children[m_children.size()-1];
-	m_children.pop_back();
-	m_stage->m_ps->delChild();
+	m_stage->m_ps->Clear();
+
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		m_compSizer->Detach(m_children[i]);
+		delete m_children[i];
+	}
+	m_children.clear();
+
+	if (m_stage->m_ps) {
+		m_stage->m_ps->delAllChild();
+	}
 
 	this->Layout();
 }
@@ -435,9 +460,10 @@ void ToolbarPanel::OnSetRadius3D(wxCommandEvent& event)
 //////////////////////////////////////////////////////////////////////////
 
 ToolbarPanel::ChildPanel::
-ChildPanel(wxWindow* parent, ParticleChild* pc)
+ChildPanel(wxWindow* parent, ParticleChild* pc, ToolbarPanel* toolbar)
 	: wxPanel(parent)
 	, m_pc(pc)
+	, m_toolbar(toolbar)
 {
 	InitLayout();
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
@@ -482,6 +508,12 @@ InitLayout()
 {
 	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	topSizer->AddSpacer(10);
+	// Del
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, "Del");
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnDelete));
+		topSizer->Add(btn);
+	}
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -524,6 +556,12 @@ InitLayout()
 	}
 	//
 	SetSizer(topSizer);
+}
+
+void ToolbarPanel::ChildPanel::
+OnDelete(wxCommandEvent& event)
+{
+	m_toolbar->OnDelChild(this);
 }
 
 void ToolbarPanel::ChildPanel::

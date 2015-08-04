@@ -30,6 +30,9 @@ public:
 
 	void initParticle();
 
+	class ChildPanel;
+	void OnDelChild(ChildPanel* child);
+
 protected:
 	virtual wxSizer* initLayout();
 
@@ -37,7 +40,7 @@ private:
 	void clear();
 
 	void onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
-	void onDelChild(wxCommandEvent& event);
+	void onDelAllChild(wxCommandEvent& event);
 
 	void onSetHori(wxSpinEvent& event);
 	void onSetVert(wxSpinEvent& event);
@@ -51,7 +54,7 @@ private:
 	class ChildPanel : public wxPanel, public d2d::UICallback
 	{
 	public:
-		ChildPanel(wxWindow* parent, ParticleChild* pc);
+		ChildPanel(wxWindow* parent, ParticleChild* pc, ToolbarPanel* toolbar);
 
 		//
 		// UICallback interface
@@ -62,11 +65,15 @@ private:
 	private:
 		void InitLayout();
 
+		void OnDelete(wxCommandEvent& event);
+
 		void OnBindPS(wxCommandEvent& event);
 
 	private:
 		ParticleChild* m_pc;
 
+		ToolbarPanel* m_toolbar;
+		
 		std::vector<d2d::ISliderCtrl*> m_sliders;
 
 		wxTextCtrl* m_name;

@@ -153,10 +153,8 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	{
 		const FileAdapter::Child& child = adapter.children[i];
 
-		ParticleChild* pc = new ParticleChild;
-
 		// todo Release symbol
-		pc->symbol = d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath);
+		ParticleChild* pc = new ParticleChild(d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath));
 
 		pc->start_scale = child.start_scale * 0.01f;
 		pc->end_scale = child.end_scale * 0.01f;
