@@ -138,7 +138,7 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	ps->SetValue(PS_DISTURBANCE_RADIUS, d2d::UICallback::Data((adapter.min_dis_region + adapter.max_dis_region) * 0.5f, (adapter.max_dis_region - adapter.min_dis_region) * 0.5f));
 	ps->SetValue(PS_DISTURBANCE_SPD, d2d::UICallback::Data((adapter.min_dis_spd + adapter.max_dis_spd) * 0.5f, (adapter.max_dis_spd - adapter.min_dis_spd) * 0.5f));
 	ps->SetValue(PS_GRAVITY, d2d::UICallback::Data(adapter.gravity));
-	ps->SetValue(PS_LINEAR_ACC, d2d::UICallback::Data((adapter.min_linear_acc + adapter.max_angular_spd) * 0.5f, (adapter.max_angular_spd - adapter.max_linear_acc) * 0.5f));
+	ps->SetValue(PS_LINEAR_ACC, d2d::UICallback::Data((adapter.min_linear_acc + adapter.max_linear_acc) * 0.5f, (adapter.max_linear_acc - adapter.min_linear_acc) * 0.5f));
 	ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(adapter.fadeout_time));
 	ps->SetValue(PS_START_RADIUS, d2d::UICallback::Data(adapter.start_radius));
 
