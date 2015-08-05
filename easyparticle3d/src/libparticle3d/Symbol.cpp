@@ -1,4 +1,5 @@
 #include "Symbol.h"
+#include "Sprite.h"
 #include "ParticleSystem.h"
 #include "FileIO.h"
 
@@ -53,6 +54,11 @@ void Symbol::Draw(const d2d::Matrix& mt,
 	if (m_time == 0) {
 		m_time = curr;
 		return;
+	}
+
+	if (sprite) {
+		const Sprite* spr = static_cast<const Sprite*>(sprite);
+		m_ps->SetDirection(spr->GetDir());
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();

@@ -24,7 +24,7 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual bool Update(int version);
+	virtual bool Update(int version) { return true; }
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 	virtual void Load(const Json::Value& val);
@@ -35,6 +35,7 @@ public:
 	}
 
 	Quaternion& GetDir() { return m_dir; }
+	const Quaternion& GetDir() const { return m_dir; }
 
 protected:
 	Symbol* m_symbol;

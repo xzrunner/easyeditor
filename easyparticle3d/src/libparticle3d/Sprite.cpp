@@ -37,12 +37,6 @@ Sprite* Sprite::Clone() const
 	return sprite;
 }
 
-bool Sprite::Update(int version) 
-{
-	m_symbol->GetPS()->SetDirection(m_dir);
-	return true; 
-}
-
 const Symbol& Sprite::GetSymbol() const
 {
 	return *m_symbol;
@@ -64,7 +58,12 @@ void Sprite::Load(const Json::Value& val)
 {
 	ISprite::Load(val);
 
-//	m_dir.CreateFromVectors()
+	const Json::Value& vdir = val["particle3d"]["dir"];
+	float x = vdir["x"].asDouble(),
+		y = vdir["y"].asDouble(),
+		z = vdir["z"].asDouble(),
+		w = vdir["w"].asDouble();
+	m_dir = Quaternion(x, y, z, w);
 }
 
 void Sprite::Store(Json::Value& val) const
