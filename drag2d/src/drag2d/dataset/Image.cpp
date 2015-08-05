@@ -340,8 +340,6 @@ void Image::LoadWithClip(const std::string& filepath)
 			img_data->SetContent(c_pixels, r.xLength(), r.yLength());
 			m_tex->LoadFromMemory(img_data);
 
-			delete[] c_pixels;
-
 			m_offset.x = r.xCenter() - w * 0.5f;
 			m_offset.y = r.yCenter() - h * 0.5f;
 		}
