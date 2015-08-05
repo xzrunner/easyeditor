@@ -10,9 +10,9 @@ namespace ecomplex
 class SphereRotateState : public d2d::IArrangeSpriteState
 {
 public:
-	SphereRotateState(d2d::EditPanel* stage, Quaternion& dir);
+	SphereRotateState(d2d::EditPanel* stage, const d2d::Vector& first_pos,
+		Quaternion& dir);
 
-	virtual void OnMousePress(const d2d::Vector& pos);
 	virtual d2d::AbstractAtomicOP* OnMouseRelease(const d2d::Vector& pos);
 	virtual bool OnMouseDrag(const d2d::Vector& pos);
 

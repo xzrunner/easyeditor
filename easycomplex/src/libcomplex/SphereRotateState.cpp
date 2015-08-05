@@ -3,16 +3,12 @@
 namespace ecomplex
 {
 
-SphereRotateState::SphereRotateState(d2d::EditPanel* stage, Quaternion& dir)
+SphereRotateState::SphereRotateState(d2d::EditPanel* stage, const d2d::Vector& first_pos,
+									 Quaternion& dir)
 	: m_stage(stage)
 	, m_dir(dir)
 {
-	m_last_pos.x = m_last_pos.y = INT_MAX;
-}
-
-void SphereRotateState::OnMousePress(const d2d::Vector& pos)
-{
-	d2d::Vector p = m_stage->TransPosProjToScr(pos);
+	d2d::Vector p = m_stage->TransPosProjToScr(first_pos);
 	m_last_pos.x = p.x;
 	m_last_pos.y = p.y;
 }

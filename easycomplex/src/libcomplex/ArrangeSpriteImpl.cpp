@@ -17,8 +17,8 @@ d2d::IArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(d2d::SpriteSelect
 {
 	std::vector<d2d::ISprite*> sprites;
 	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	if (sprites.size() == 0 && dynamic_cast<eparticle3d::Sprite*>(sprites[0])) {
-		return new SphereRotateState(m_stage, static_cast<eparticle3d::Sprite*>(sprites[0])->GetDir());
+	if (sprites.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprites[0])) {
+		return new SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprites[0])->GetDir());
 	} else {
 		return d2d::ArrangeSpriteImpl::CreateRotateState(selection, first_pos);
 	}

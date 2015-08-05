@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "ParticleSystem.h"
 
 namespace eparticle3d
 {
@@ -38,7 +39,7 @@ Sprite* Sprite::Clone() const
 
 bool Sprite::Update(int version) 
 {
-	m_symbol->
+	m_symbol->GetPS()->SetDirection(m_dir);
 	return true; 
 }
 
@@ -57,6 +58,26 @@ void Sprite::SetSymbol(d2d::ISymbol* symbol)
 
 		m_symbol = particle3d;
 	}
+}
+
+void Sprite::Load(const Json::Value& val)
+{
+	ISprite::Load(val);
+
+//	m_dir.CreateFromVectors()
+}
+
+void Sprite::Store(Json::Value& val) const
+{
+	ISprite::Store(val);
+
+	vec4 dir = m_dir.ToVector();
+	Json::Value vdir;
+	vdir["x"] = dir.x;
+	vdir["y"] = dir.y;
+	vdir["z"] = dir.z;
+	vdir["w"] = dir.w;
+	val["particle3d"]["dir"] = vdir;
 }
 
 }

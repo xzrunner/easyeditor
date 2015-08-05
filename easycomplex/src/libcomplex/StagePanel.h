@@ -8,6 +8,7 @@ namespace ecomplex
 
 class LibraryPanel;
 class Symbol;
+class ArrangeSpriteImpl;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
@@ -18,6 +19,7 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* symbol, 
 		d2d::PropertySettingPanel* property, LibraryPanel* library,
 		d2d::ViewPanelMgr* view_panel_mgr);
+	virtual ~StagePanel();
 
 	//
 	// d2d::EditPanel interface
@@ -40,6 +42,8 @@ private:
 	LibraryPanel* m_library;
 
 	d2d::ViewPanelMgr* m_view_panel_mgr;
+
+	ArrangeSpriteImpl* m_arrange_impl;
 
 }; // StagePanel
 

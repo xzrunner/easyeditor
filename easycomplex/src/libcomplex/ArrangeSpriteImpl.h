@@ -8,7 +8,7 @@ namespace ecomplex
 
 class StagePanel;
 
-class ArrangeSpriteImpl : d2d::ArrangeSpriteImpl
+class ArrangeSpriteImpl : public d2d::ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property);
