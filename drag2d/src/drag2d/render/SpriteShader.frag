@@ -36,7 +36,7 @@ void main()
 	gl_FragColor.xyz = tmp.xyz * tmp.w * v_fragmentColor.xyz; 
 	gl_FragColor.w = tmp.w;   
 	gl_FragColor *= v_fragmentColor.w; 
-	gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w; 
+	gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w * v_fragmentColor.w; 
 } 
 
 );
