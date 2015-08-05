@@ -2,6 +2,7 @@
 #define _LIBSKETCH_LIBRARY_PAGE_H_
 
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace libsketch
 {
@@ -13,8 +14,13 @@ public:
 
 	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
 
+	virtual void LoadDefaultSymbol();
+
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);
+
+private:
+	void LoadSymbol(e3d::ISurface* surface, const char* name);
 
 }; // LibraryPage
 

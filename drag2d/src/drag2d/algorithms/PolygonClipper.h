@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace ClipperLib
+namespace ClipperLib620
 {
 	struct IntPoint;
 
@@ -34,11 +34,11 @@ public:
 		Xor(const std::vector<std::vector<d2d::Vector> >& subject, const std::vector<d2d::Vector>& clip);
 
 private:
-	static ClipperLib::Path CreatePath(const std::vector<d2d::Vector>& points);
-	static std::vector<d2d::Vector> ParserPath(const ClipperLib::Path& path);
+	static ClipperLib620::Path CreatePath(const std::vector<d2d::Vector>& points);
+	static std::vector<d2d::Vector> ParserPath(const ClipperLib620::Path& path);
 
 	static std::vector<std::vector<d2d::Vector> >
-		Implement(const std::vector<std::vector<d2d::Vector> >& subject, const std::vector<d2d::Vector>& clip, ClipperLib::ClipType type);
+		Implement(const std::vector<std::vector<d2d::Vector> >& subject, const std::vector<d2d::Vector>& clip, ClipperLib620::ClipType type);
 
 private:
 	static const float SCALE;

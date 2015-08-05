@@ -34,7 +34,7 @@ vec3 StageCanvas::TransPos3ScreenToDir(const ivec2& screen) const
 void StageCanvas::InitGL()
 {
 	e3d::StageCanvas::InitGL();
-	InitDefaultSymbol();
+	m_library->LoadDefaultSymbol();
 }
 
 void StageCanvas::OnSize(int w, int h)
@@ -51,46 +51,6 @@ void StageCanvas::OnDrawSprites() const
  	DrawSprites();
  
   	m_stage->DrawEditOP();
-}
-
-void StageCanvas::InitDefaultSymbol()
-{
-	e3d::ISurface* surface;
-
-	surface = new e3d::Cone(2, 1);
-	LoadSymbolToLib(surface, "Cone");
-
-	surface = new e3d::Sphere(1);
-	LoadSymbolToLib(surface, "Sphere");
-
-	surface = new e3d::Torus(0.5f, 0.2f);
-	LoadSymbolToLib(surface, "Torus");
-
-	surface = new e3d::TrefoilKnot(1);
-	LoadSymbolToLib(surface, "TrefoilKnot");
-
-	surface = new e3d::MobiusStrip(0.2f);
-	LoadSymbolToLib(surface, "MobiusStrip");
-
-	surface = new e3d::KleinBottle(0.1f);
-	LoadSymbolToLib(surface, "KleinBottle");
-}
-
-void StageCanvas::LoadSymbolToLib(e3d::ISurface* surface, const char* name)
-{
-	e3d::AABB aabb;
-	e3d::ModelParametric* model = new e3d::ModelParametric(surface, aabb);
-
-	libsketch::Symbol* symbol = new libsketch::Symbol();
-	symbol->SetAABB(aabb);
-	symbol->SetName(name);
-	symbol->SetModel(model);
-
-	std::string filepath = FILE_TAG;
-	filepath += ".json";
-	symbol->SetFilepath(filepath);
-
-	m_library->AddSymbol(symbol);
 }
 
 void StageCanvas::DrawBackground() const

@@ -50,9 +50,7 @@ void StageCanvas::InitGL()
 		glShadeModel(GL_SMOOTH);
 		glEnable(GL_TEXTURE_2D);
 
-		if (d2d::RenderContext::SHADER_MGR) {
-			d2d::RenderContext::SHADER_MGR->reload();
-		}	
+		d2d::RenderContext::Reload();
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();	

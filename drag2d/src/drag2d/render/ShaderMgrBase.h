@@ -14,6 +14,9 @@ public:
 	ShaderMgrBase();
 	~ShaderMgrBase();
 
+	void Bind();
+	void UnBind();
+
 	void Release();
 	void reload();
 

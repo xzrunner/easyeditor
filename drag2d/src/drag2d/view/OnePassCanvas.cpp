@@ -18,9 +18,7 @@ void OnePassCanvas::OnDrawWhole() const
  
  	OnDrawSprites();
  
- 	if (RenderContext::SHADER_MGR) {
- 		RenderContext::SHADER_MGR->Flush();
- 	}
+	RenderContext::Flush();
 }
 
 }

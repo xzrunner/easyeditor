@@ -13,6 +13,21 @@ ShaderMgrBase::~ShaderMgrBase()
 {
 }
 
+void ShaderMgrBase::Bind()
+{
+	if (m_curr_shader) {
+		m_curr_shader->Bind();
+	}
+}
+
+void ShaderMgrBase::UnBind()
+{
+	if (m_curr_shader) {
+		m_curr_shader->Commit();
+		m_curr_shader->Unbind();
+	}
+}
+
 void ShaderMgrBase::Release()
 {
 	for (int i = 0, n = m_shaders.size(); i < n; ++i) {

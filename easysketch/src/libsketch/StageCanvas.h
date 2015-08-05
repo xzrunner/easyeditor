@@ -24,10 +24,6 @@ protected:
 	virtual void OnDrawSprites() const;
 
 private:
-	void InitDefaultSymbol();
-
-	void LoadSymbolToLib(e3d::ISurface* surface, const char* name);
-
 	void DrawBackground() const;
 	void DrawSprites() const;
 

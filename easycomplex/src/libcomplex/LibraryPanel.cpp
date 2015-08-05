@@ -13,6 +13,7 @@
 #include <easytexture.h>
 #include <easyicon.h>
 #include <easyshadow.h>
+#include <easysketch.h>
 
 namespace ecomplex
 {
@@ -36,6 +37,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new etexture::LibraryPage(nb));
 	AddPage(new eicon::LibraryPage(nb));
 	AddPage(new eshadow::LibraryPage(nb));
+	AddPage(new libsketch::LibraryPage(nb));
 }
 
 } // ecomplex

@@ -13,7 +13,7 @@ ShaderMgr* ShaderMgr::Instance()
 	if (!m_instance)
 	{
 		m_instance = new ShaderMgr();
-		d2d::RenderContext::SHADER_MGR = m_instance;
+		d2d::RenderContext::SetShader3DMgr(m_instance);
 	}
 	return m_instance;
 }
@@ -39,21 +39,25 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::Null()
 {
+	d2d::RenderContext::Bind3d();
 	Switch(NULL);
 }
 
 void ShaderMgr::Model()
 {
+	d2d::RenderContext::Bind3d();
 	Switch(m_model_shader);
 }
 
 void ShaderMgr::Shape()
 {
+	d2d::RenderContext::Bind3d();
 	Switch(m_shape_shader);
 }
 
 void ShaderMgr::Sprite()
 {
+	d2d::RenderContext::Bind3d();
 	Switch(m_sprite_shader);	
 }
 

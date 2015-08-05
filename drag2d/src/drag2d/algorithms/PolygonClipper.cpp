@@ -11,34 +11,34 @@ std::vector<std::vector<d2d::Vector> >
 PolygonClipper::Intersection(const std::vector<std::vector<d2d::Vector> >& subject, 
 							 const std::vector<d2d::Vector>& clip)
 {
-	return Implement(subject, clip, ClipperLib::ctIntersection);
+	return Implement(subject, clip, ClipperLib620::ctIntersection);
 }
 
 std::vector<std::vector<d2d::Vector> > 
 PolygonClipper::Union(const std::vector<std::vector<d2d::Vector> >& subject, 
 					  const std::vector<d2d::Vector>& clip)
 {
-	return Implement(subject, clip, ClipperLib::ctUnion);
+	return Implement(subject, clip, ClipperLib620::ctUnion);
 }
 
 std::vector<std::vector<d2d::Vector> > 
 PolygonClipper::Difference(const std::vector<std::vector<d2d::Vector> >& subject, 
 						   const std::vector<d2d::Vector>& clip)
 {
-	return Implement(subject, clip, ClipperLib::ctDifference);
+	return Implement(subject, clip, ClipperLib620::ctDifference);
 }
 
 std::vector<std::vector<d2d::Vector> > 
 PolygonClipper::Xor(const std::vector<std::vector<d2d::Vector> >& subject, 
 					const std::vector<d2d::Vector>& clip)
 {
-	return Implement(subject, clip, ClipperLib::ctXor);
+	return Implement(subject, clip, ClipperLib620::ctXor);
 }
 
-ClipperLib::Path 
+ClipperLib620::Path 
 PolygonClipper::CreatePath(const std::vector<d2d::Vector>& points)
 {
-	ClipperLib::Path path;
+	ClipperLib620::Path path;
 	path.resize(points.size());
 	for (int i = 0, n = points.size(); i < n; ++i) {
 		path[i].X = (int)(points[i].x * SCALE);
@@ -48,7 +48,7 @@ PolygonClipper::CreatePath(const std::vector<d2d::Vector>& points)
 }
 
 std::vector<d2d::Vector> 
-PolygonClipper::ParserPath(const ClipperLib::Path& path)
+PolygonClipper::ParserPath(const ClipperLib620::Path& path)
 {
 	std::vector<d2d::Vector> points;
 	points.resize(path.size());
@@ -62,10 +62,10 @@ PolygonClipper::ParserPath(const ClipperLib::Path& path)
 std::vector<std::vector<d2d::Vector> >
 PolygonClipper::Implement(const std::vector<std::vector<d2d::Vector> >& subject, 
 						  const std::vector<d2d::Vector>& clip, 
-						  ClipperLib::ClipType type)
+						  ClipperLib620::ClipType type)
 {
-	ClipperLib::Paths sub_paths, clp_paths;
-	ClipperLib::Paths sol;
+	ClipperLib620::Paths sub_paths, clp_paths;
+	ClipperLib620::Paths sol;
 
 	sub_paths.resize(subject.size());
 	for (int i = 0, n = subject.size(); i < n; ++i) {
@@ -74,12 +74,12 @@ PolygonClipper::Implement(const std::vector<std::vector<d2d::Vector> >& subject,
 
 	clp_paths.push_back(CreatePath(clip));
 
-	ClipperLib::Clipper clipper;
+	ClipperLib620::Clipper clipper;
 
-	clipper.AddPaths(sub_paths, ClipperLib::ptSubject, true);
-	clipper.AddPaths(clp_paths, ClipperLib::ptClip, true);
+	clipper.AddPaths(sub_paths, ClipperLib620::ptSubject, true);
+	clipper.AddPaths(clp_paths, ClipperLib620::ptClip, true);
 
-	clipper.Execute(type, sol, ClipperLib::pftEvenOdd);	
+	clipper.Execute(type, sol, ClipperLib620::pftEvenOdd);	
 
 	std::vector<std::vector<d2d::Vector> > result;
 	result.resize(sol.size());

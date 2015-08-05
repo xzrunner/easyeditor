@@ -37,9 +37,7 @@ void TwoPassCanvas::OnDrawWhole() const
 
 		OnDrawSprites();
 
-		if (RenderContext::SHADER_MGR) {
-			RenderContext::SHADER_MGR->Flush();
-		}
+		RenderContext::Flush();
 
 //		wxLogDebug("pass 22222222222222222");
 	} else {

@@ -23,6 +23,7 @@ public:
 	virtual void Clear();
 
 	virtual bool LoadFromConfig() { return false; }
+	virtual void LoadDefaultSymbol() {}
 
 	virtual void OnActive() {}
 

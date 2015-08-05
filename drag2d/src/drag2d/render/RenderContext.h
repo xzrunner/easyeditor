@@ -9,7 +9,27 @@ class ShaderMgrBase;
 class RenderContext
 {
 public:
-	static ShaderMgrBase* SHADER_MGR;
+	static void SetShader2DMgr(ShaderMgrBase* mgr) {
+		m_mgr2 = mgr;
+	}
+	static void SetShader3DMgr(ShaderMgrBase* mgr) {
+		m_mgr3 = mgr;
+	}
+
+	static void Reload();
+	static void Flush();
+	static void Reset();
+
+	static void Bind2d();
+	static void Bind3d();
+
+private:
+	static void Bind(ShaderMgrBase* mgr);
+
+private:
+	static ShaderMgrBase* m_curr;
+	static ShaderMgrBase* m_mgr2;
+	static ShaderMgrBase* m_mgr3;
 
 }; // RenderContext
 

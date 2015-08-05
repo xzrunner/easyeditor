@@ -8,9 +8,11 @@
 namespace ecomplex
 {
 
-StageCanvas::StageCanvas(StagePanel* editPanel)
+StageCanvas::StageCanvas(StagePanel* editPanel,
+						 d2d::LibraryPanel* library)
 	: d2d::OrthoCanvas(editPanel)
 	, m_stage(editPanel)
+	, m_library(library)
 	, m_background(NULL)
 	, m_stat(1)
 {
@@ -34,10 +36,27 @@ void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
 
+	m_library->LoadDefaultSymbol();
+
+	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
+	shader_mgr->Null();
+	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
+
 	m_stage->getSymbol()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
+}
+
+void StageCanvas::OnSize(int w, int h)
+{
+	d2d::OrthoCanvas::OnSize(w, h);
+
+	m_camera3.SetScreenSize(w, h);
+
+	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
+	shader_mgr->SetProjection(w, h);
+	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
 }
 
 void StageCanvas::OnDrawSprites() const

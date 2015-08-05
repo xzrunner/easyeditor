@@ -14,6 +14,7 @@
 #include <easyshape.h>
 #include <easyicon.h>
 #include <easyshadow.h>
+#include <easysketch.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -54,6 +55,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eshadow::FILE_TAG, &eshadow::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eshadow::FILE_TAG, &eshadow::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(libsketch::FILE_TAG, &libsketch::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(libsketch::FILE_TAG, &libsketch::Sprite::Create);
 }
 
 bool MyApp::OnInit()

@@ -2,6 +2,7 @@
 #define _DRAG2D_STAGE_CANVAS_H_
 
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace ecomplex
 {
@@ -11,13 +12,14 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* editPanel);
+	StageCanvas(StagePanel* editPanel, d2d::LibraryPanel* library);
 	virtual ~StageCanvas();
 
 	void SetBackground(d2d::ISymbol* symbol);
 
 protected:
 	virtual void InitGL();
+	virtual void OnSize(int w, int h);
 	virtual void OnDrawSprites() const;
 
 protected:
@@ -30,11 +32,15 @@ private:
 	void UpdateParticle2d(float dt);
 
 private:
+	d2d::LibraryPanel* m_library;
+
 	d2d::ShapeStyle m_bgStyle, m_clipboxStyle;
 
 	d2d::ISymbol* m_background;
 
 	mutable d2d::FpsStat m_stat;
+
+	e3d::Camera m_camera3;
 
 }; // StageCanvas
 

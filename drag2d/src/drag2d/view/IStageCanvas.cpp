@@ -78,10 +78,8 @@ void IStageCanvas::InitGL()
 	}
 
 	try {
-		if (RenderContext::SHADER_MGR) {
-			RenderContext::SHADER_MGR->reload();
-			RenderContext::SHADER_MGR->Reset();
-		}
+		RenderContext::Reload();
+		RenderContext::Reset();
 
 		ResetViewport();
 

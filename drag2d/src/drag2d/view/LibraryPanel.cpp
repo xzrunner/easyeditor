@@ -127,6 +127,13 @@ void LibraryPanel::LoadFromConfig()
 	}
 }
 
+void LibraryPanel::LoadDefaultSymbol()
+{
+	for (int i = 0, n = m_pages.size(); i < n; ++i) {
+		m_pages[i]->LoadDefaultSymbol();
+	}
+}
+
 void LibraryPanel::SetCurrPage(int idx)
 {
 	if (idx >= 0 && idx < m_pages.size()) {

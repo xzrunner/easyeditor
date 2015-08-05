@@ -46,6 +46,7 @@ public:
 	bool AddSymbol(ISymbol* symbol);
 
 	void LoadFromConfig();
+	void LoadDefaultSymbol();
 
 	ILibraryPage* GetCurrPage() { return m_selected; }
 	void SetCurrPage(int idx);

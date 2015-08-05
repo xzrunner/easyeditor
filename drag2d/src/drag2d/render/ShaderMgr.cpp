@@ -19,7 +19,7 @@ ShaderMgr* ShaderMgr::Instance()
 	if (!m_instance)
 	{
 		m_instance = new ShaderMgr();
-		RenderContext::SHADER_MGR = m_instance;
+		RenderContext::SetShader2DMgr(m_instance);
 	}
 	return m_instance;
 }
@@ -76,21 +76,25 @@ void ShaderMgr::SetBlendMode(BlendMode mode)
 
 void ShaderMgr::sprite()
 {
+	RenderContext::Bind2d();
 	Switch(m_sprite_shader);
 }
 
 void ShaderMgr::shape()
 {
+	RenderContext::Bind2d();
 	Switch(m_shape_shader);
 }
 
 void ShaderMgr::Screen()
 {
+	RenderContext::Bind2d();
 	Switch(m_screen_shader);
 }
 
 void ShaderMgr::null()
 {
+	RenderContext::Bind2d();
 	Switch(NULL);
 }
 
