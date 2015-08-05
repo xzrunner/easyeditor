@@ -1,6 +1,7 @@
 #include "LRPacker.h"
 #include "check_params.h"
 
+#include "LRExpansion.h"
 #include "SeparateToComplex.h"
 #include "LRToComplex.h"
 #include "LRLayersPack.h"
@@ -43,9 +44,13 @@ void LRPacker::Run(int argc, char *argv[])
 	d2d::mk_dir(tmp_dir, true);
 	d2d::mk_dir(out_dir, true);
 
+	// 0
+	LRExpansion exp;
+//	exp.Run(argv[2]);
+
 	// 1
 	SeparateToComplex sep;
-	sep.Run(argv[2], "", argv[3]);
+	sep.Run(exp.GetOutputFilepath(argv[2]), "", tmp_lr_file);
 
 	// 2
 	LRToComplex tocomplex;
@@ -69,7 +74,7 @@ void LRPacker::Run(int argc, char *argv[])
 
 		Json::Value pkg_val;
 
-		std::string lr_name = d2d::FilenameTools::getFilename(argv[2]);
+		std::string lr_name = d2d::FilenameTools::getFilename(tmp_lr_file);
 		lr_name = lr_name.substr(0, lr_name.find("_lr"));
 
 		pkg_val["name"] = "scene_" + lr_name;
@@ -95,6 +100,9 @@ void LRPacker::Run(int argc, char *argv[])
 		PackCoco pack;
 		pack.Trigger(cfg_file);
 	}
+
+	// end
+	wxRemoveFile(exp.GetOutputFilepath(argv[2]));
 }
 
 }

@@ -22,7 +22,7 @@ public:
 	virtual void Run(int argc, char *argv[]);
 
 	void Run(const std::string& lr_file, const std::string& point_dir,
-		const std::string& tmp_dir);
+		const std::string& dst_file);
 
 	static ICommand* Create() { return new SeparateToComplex(); }
 
@@ -48,7 +48,7 @@ private:
 	std::string m_dir;
 
 	std::string m_point_dir;
-	std::string m_tmp_dir;
+	std::string m_output_dir, m_output_name;
 
 }; // SeparateToComplex
 

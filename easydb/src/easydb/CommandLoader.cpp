@@ -48,6 +48,7 @@
 #include "PackTexture.h"
 #include "CalculateImageArea.h"
 #include "RectCutWithJson.h"
+#include "LRExpansion.h"
 
 namespace edb
 {
@@ -101,6 +102,7 @@ void CommandLoader::Init()
 	fc->Register(PackTexture::Create());
 	fc->Register(CalImageArea::Create());
 	fc->Register(RectCutWithJson::Create());
+	fc->Register(LRExpansion::Create());
 }
 
 }

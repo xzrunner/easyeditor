@@ -620,6 +620,14 @@
 						Name="base"
 						>
 						<File
+							RelativePath="..\..\..\src\easydb_cl\LRExpansion.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRExpansion.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
 							>
 						</File>
