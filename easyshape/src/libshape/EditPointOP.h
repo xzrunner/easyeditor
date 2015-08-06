@@ -11,8 +11,8 @@ namespace libshape
 class EditPointOP : public d2d::ZoomViewOP
 {
 public:
-	EditPointOP(d2d::EditPanel* editpanel, d2d::MultiShapesImpl* shapes_impl,
-		d2d::OneFloatValue* node_capture);
+	EditPointOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiShapesImpl* shapes_impl, d2d::OneFloatValue* node_capture);
 	
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);

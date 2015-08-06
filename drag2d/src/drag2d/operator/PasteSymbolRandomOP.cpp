@@ -5,14 +5,15 @@
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
 
 namespace d2d
 {
 
-PasteSymbolRandomOP::PasteSymbolRandomOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+PasteSymbolRandomOP::PasteSymbolRandomOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 										 LibraryPanel* libraryPanel, PasteSymbolRandomWidget* randomWidget)
-	: PasteSymbolOP(editPanel, spritesImpl, libraryPanel)
+	: PasteSymbolOP(wnd, stage, spritesImpl, libraryPanel)
 	, m_randomWidget(randomWidget)
 {
 	changeRandomValue();

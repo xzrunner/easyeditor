@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-DrawPenLineOP::DrawPenLineOP(d2d::EditPanel* editPanel, 
+DrawPenLineOP::DrawPenLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 							 d2d::MultiShapesImpl* shapesImpl)
-	: DrawPolylineOP(editPanel, false)
+	: DrawPolylineOP(wnd, stage, false)
 	, m_shapesImpl(shapesImpl)
 {
 }

@@ -11,7 +11,8 @@ namespace libshape
 class MousePositionOP : public d2d::MousePositionOP 
 {
 public:
-	MousePositionOP(d2d::EditPanel* editPanel, d2d::MousePositionCMPT* cmpt);
+	MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MousePositionCMPT* cmpt);
 	virtual ~MousePositionOP();
 
 	virtual bool OnMouseLeftDown(int x, int y);

@@ -11,14 +11,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 
 	d2d::ArrangeSpriteConfig cfg;
 	cfg.is_auto_align_open = false;
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_edit_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, NULL, NULL, NULL, cfg);
+
+	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, NULL, NULL, NULL, cfg));
 }
 
 void StagePanel::SetSelectedSymbol(Symbol* symbol)

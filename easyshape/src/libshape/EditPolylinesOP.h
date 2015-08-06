@@ -12,7 +12,7 @@ class EditPolylinesCMPT;
 class EditPolylinesOP : public d2d::SelectShapesOP
 {
 public:
-	EditPolylinesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
+	EditPolylinesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
 		d2d::ViewPanelMgr* view_panel_mgr, EditPolylinesCMPT* cmpt);
 
 	virtual bool OnMouseLeftDown(int x, int y);

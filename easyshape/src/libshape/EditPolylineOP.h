@@ -15,7 +15,8 @@ template <typename TBase, typename TSelected>
 class EditPolylineOP : public TBase, public IOperaterBase
 {
 public:
-	EditPolylineOP(d2d::EditPanel* editPanel, 
+	EditPolylineOP(wxWindow* wnd, 
+		d2d::EditPanelImpl* stage, 
 		d2d::MultiShapesImpl* shapesImpl, 
 		d2d::PropertySettingPanel* propertyPanel,
 		d2d::ViewPanelMgr* view_panel_mgr,

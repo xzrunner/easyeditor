@@ -1,11 +1,12 @@
 #ifndef _DRAG2D_SELECT_SPRITES_OP_H_
 #define _DRAG2D_SELECT_SPRITES_OP_H_
 
-#include <vector>
-
 #include "DrawSelectRectOP.h"
 
 #include "render/ShapeStyle.h"
+
+#include <vector>
+#include <json/json.h>
 
 namespace d2d
 {
@@ -15,11 +16,12 @@ class AbstractEditCMPT;
 class IPropertySetting;
 class ViewPanelMgr;
 class SpriteSelection;
+class ISprite;
 
 class SelectSpritesOP : public DrawSelectRectOP
 {
 public:
-	SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 		ViewPanelMgr* view_panel_mgr = NULL, AbstractEditCMPT* callback = NULL);
 	virtual ~SelectSpritesOP();
 

@@ -5,8 +5,9 @@
 namespace ephysics
 {
 
-DragPhysicsOP::DragPhysicsOP(d2d::EditPanel* editPanel, b2World* world, b2Body* ground)
-	: d2d::ZoomViewOP(editPanel, true)
+DragPhysicsOP::DragPhysicsOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+							 b2World* world, b2Body* ground)
+	: d2d::ZoomViewOP(wnd, stage, true)
 	, m_world(world)
 	, m_ground(ground)
 	, m_mouseJoint(NULL)

@@ -6,7 +6,7 @@ namespace eterrain2d
 {
 
 WaveVerticesOP::WaveVerticesOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, true, false)
+	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true, false)
 	, m_stage(stage)
 	, m_draw_tris(false)
 {

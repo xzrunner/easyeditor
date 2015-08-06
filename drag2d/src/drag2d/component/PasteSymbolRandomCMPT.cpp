@@ -2,6 +2,7 @@
 
 #include "operator/PasteSymbolRandomOP.h"
 #include "widgets/PasteSymbolRandomWidget.h"
+#include "view/EditPanel.h"
 
 namespace d2d
 {
@@ -12,7 +13,7 @@ PasteSymbolRandomCMPT::PasteSymbolRandomCMPT(wxWindow* parent, const wxString& n
 	: AbstractEditCMPT(parent, name, editPanel)
 {
 	m_randomWidget = new PasteSymbolRandomWidget(this, libraryPanel);
-	m_editOP = new PasteSymbolRandomOP(editPanel, spritesImpl, libraryPanel, m_randomWidget);
+	m_editOP = new PasteSymbolRandomOP(editPanel, editPanel->GetStageImpl(), spritesImpl, libraryPanel, m_randomWidget);
 }
 
 wxSizer* PasteSymbolRandomCMPT::initLayout()

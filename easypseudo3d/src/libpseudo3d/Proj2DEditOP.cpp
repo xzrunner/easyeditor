@@ -3,8 +3,8 @@
 namespace epseudo3d
 {
 
-Proj2DEditOP::Proj2DEditOP(d2d::EditPanel* stage)
-	: d2d::AbstractEditOP(stage)
+Proj2DEditOP::Proj2DEditOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::AbstractEditOP(wnd, stage)
 	, m_player(NULL)
 {
 }

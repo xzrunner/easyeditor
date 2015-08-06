@@ -14,7 +14,7 @@ namespace d2d
 	class PasteSymbolTileOP : public PasteSymbolOP
 	{
 	public:
-		PasteSymbolTileOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+		PasteSymbolTileOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 			LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt);
 
 		virtual bool OnMouseLeftDown(int x, int y);

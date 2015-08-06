@@ -3,7 +3,7 @@
 namespace ecomplex
 {
 
-SphereRotateState::SphereRotateState(d2d::EditPanel* stage, const d2d::Vector& first_pos,
+SphereRotateState::SphereRotateState(d2d::EditPanelImpl* stage, const d2d::Vector& first_pos,
 									 Quaternion& dir)
 	: m_stage(stage)
 	, m_dir(dir)

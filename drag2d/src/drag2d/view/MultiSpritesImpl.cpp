@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-MultiSpritesImpl::MultiSpritesImpl(EditPanel* stage)
+MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 {
 	m_sprite_selection = new SpriteSelection(stage);
 }

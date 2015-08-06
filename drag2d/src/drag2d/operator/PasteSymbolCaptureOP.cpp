@@ -6,13 +6,14 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-PasteSymbolCaptureOP::PasteSymbolCaptureOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
+PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
 										   LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt)
-	: PasteSymbolOP(editPanel, spritesImpl, libraryPanel)
+	: PasteSymbolOP(wnd, stage, spritesImpl, libraryPanel)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 {

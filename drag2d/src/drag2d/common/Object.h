@@ -18,7 +18,21 @@ private:
 
 }; // Object
 
-inline void obj_assign(Object*& left, Object* right);
+template<class T>
+inline void obj_assign(T*& left, T*& right)
+{
+	if (left == right) {
+		return;
+	}
+
+	if (left) {
+		left->Release();
+	}
+	left = right;
+	if (right) {
+		right->Retain();
+	}
+}
 
 template<class T>
 struct ReleaseObjectFunctor

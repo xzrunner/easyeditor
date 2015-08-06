@@ -5,6 +5,7 @@ namespace d2d
 {
 
 class ShaderMgrBase;
+class Vector;
 
 class RenderContext
 {
@@ -22,6 +23,8 @@ public:
 
 	static void Bind2d();
 	static void Bind3d();
+
+	static void SetModelView(const Vector& offset, float scale);
 
 private:
 	static void Bind(ShaderMgrBase* mgr);

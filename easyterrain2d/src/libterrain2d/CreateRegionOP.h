@@ -11,7 +11,7 @@ class StagePanel;
 class CreateRegionOP : public libshape::DrawPolygonOP
 {
 public:
-	CreateRegionOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+	CreateRegionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnDraw() const;
 

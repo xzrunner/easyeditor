@@ -6,14 +6,15 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
 
 namespace d2d
 {
 
-PasteSymbolTileOP::PasteSymbolTileOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
+PasteSymbolTileOP::PasteSymbolTileOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
 									 LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt)
-	: PasteSymbolOP(editPanel, spritesImpl, libraryPanel)
+	: PasteSymbolOP(wnd, stage, spritesImpl, libraryPanel)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 	, m_rotate(0)

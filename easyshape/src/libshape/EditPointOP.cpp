@@ -5,10 +5,10 @@
 namespace libshape
 {
 
-EditPointOP::EditPointOP(d2d::EditPanel* editpanel,
+EditPointOP::EditPointOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 						 d2d::MultiShapesImpl* shapes_impl,
 						 d2d::OneFloatValue* node_capture)
-	: d2d::ZoomViewOP(editpanel, true)
+	: d2d::ZoomViewOP(wnd, stage, true)
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
 {

@@ -1,14 +1,16 @@
 #include "DrawSelectRectOP.h"
 
 #include "render/PrimitiveDraw.h"
-#include "view/IStageCanvas.h"
 #include "render/style_config.h"
+#include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-DrawSelectRectOP::DrawSelectRectOP(EditPanel* editPanel, bool bOpenRightTap)
-	: ZoomViewOP(editPanel, true, bOpenRightTap)
+DrawSelectRectOP::DrawSelectRectOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+								   bool bOpenRightTap)
+	: ZoomViewOP(wnd, stage, true, bOpenRightTap)
 {
 	m_first_pos.setInvalid();
 	m_last_pos.setInvalid();

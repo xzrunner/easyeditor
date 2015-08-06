@@ -8,7 +8,7 @@ namespace libsketch
 {
 
 SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
-	: d2d::AbstractEditOP(stage)
+	: d2d::AbstractEditOP(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_selection = stage->GetSpriteSelection();

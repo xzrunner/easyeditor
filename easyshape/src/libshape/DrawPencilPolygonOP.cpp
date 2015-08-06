@@ -5,11 +5,11 @@
 namespace libshape
 {
 
-DrawPencilPolygonOP::DrawPencilPolygonOP(d2d::EditPanel* editPanel, 
+DrawPencilPolygonOP::DrawPencilPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 										 d2d::MultiShapesImpl* shapesImpl,
 										 d2d::OneFloatValue* simplify,
 										 DrawPencilPolygonCMPT* cmpt)
-	: DrawCurveOP(editPanel)
+	: DrawCurveOP(wnd, stage)
 	, m_shapesImpl(shapesImpl)
 	, m_simplify(simplify)
 	, m_cmpt(cmpt)

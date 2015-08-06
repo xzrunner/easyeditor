@@ -10,7 +10,7 @@
 #include "common/Math.h"
 #include "common/visitors.h"
 #include "common/Matrix.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
 #include "history/ArrangeSpriteAtomicOP.h" 
@@ -22,15 +22,15 @@ namespace d2d
 {
 
 template <typename TBase>
-ArrangeSpriteOP<TBase>::ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+ArrangeSpriteOP<TBase>::ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 	PropertySettingPanel* propertyPanel/* = NULL*/, ViewPanelMgr* view_panel_mgr /*= NULL*/, 
 	AbstractEditCMPT* callback/* = NULL*/, const ArrangeSpriteConfig& cfg, ArrangeSpriteImpl* impl /*= NULL*/)
-	: TBase(editPanel, spritesImpl, view_panel_mgr, callback)
+	: TBase(wnd, stage, spritesImpl, view_panel_mgr, callback)
 {
 	if (impl) {
 		m_impl = impl;
 	} else {
-		m_impl = new ArrangeSpriteImpl(editPanel, spritesImpl, propertyPanel, cfg);
+		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, propertyPanel, cfg);
 	}
 }
 

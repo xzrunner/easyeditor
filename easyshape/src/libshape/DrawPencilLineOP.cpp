@@ -4,10 +4,10 @@
 namespace libshape
 {
 
-DrawPencilLineOP::DrawPencilLineOP(d2d::EditPanel* editPanel, 
+DrawPencilLineOP::DrawPencilLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 								   d2d::MultiShapesImpl* shapesImpl,
 								   d2d::OneFloatValue* simplify)
-	: DrawCurveOP(editPanel)
+	: DrawCurveOP(wnd, stage)
 	, m_shapesImpl(shapesImpl)
 	, m_simplify(simplify)
 {

@@ -30,7 +30,7 @@ public:
 	int layer() const;
 	int frame() const;
 
-	d2d::ViewlistPanel* GetViewlist();
+//	d2d::ViewlistPanel* GetViewlist();
 	d2d::LibraryPanel* GetLibraryPanel();
 	StagePanel* GetStagePanel();
 	LayersPanel* GetLayersPanel();

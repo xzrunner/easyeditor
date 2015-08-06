@@ -1,21 +1,26 @@
-#pragma once
+#ifndef _DRAG2D_MOUSE_POSITION_OP_H_
+#define _DRAG2D_MOUSE_POSITION_OP_H_
 
 #include "ZoomViewOP.h"
 
 namespace d2d
 {
-	class MousePositionCMPT;
 
-	class MousePositionOP : public ZoomViewOP
-	{
-	public:
-		MousePositionOP(EditPanel* editPanel, MousePositionCMPT* cmpt);
+class MousePositionCMPT;
 
-		virtual bool OnMouseMove(int x, int y);
+class MousePositionOP : public ZoomViewOP
+{
+public:
+	MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		MousePositionCMPT* cmpt);
 
-	private:
-		MousePositionCMPT* m_cmpt;
+	virtual bool OnMouseMove(int x, int y);
 
-	}; // MousePositionOP
+private:
+	MousePositionCMPT* m_cmpt;
+
+}; // MousePositionOP
+
 }
 
+#endif // _DRAG2D_MOUSE_POSITION_OP_H_

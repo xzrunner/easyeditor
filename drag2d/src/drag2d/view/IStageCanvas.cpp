@@ -5,6 +5,7 @@
 #include "common/Exception.h"
 #include "view/ExceptionDlg.h"
 #include "view/EditPanel.h"
+#include "view/KeysState.h"
 #include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
 

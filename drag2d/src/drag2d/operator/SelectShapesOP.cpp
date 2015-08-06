@@ -9,10 +9,10 @@
 namespace d2d
 {
 
-SelectShapesOP::SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl,
+SelectShapesOP::SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiShapesImpl* shapesImpl,
 							   ViewPanelMgr* view_panel_mgr /*= NULL*/,
 							   AbstractEditCMPT* callback/* = NULL*/)
-	: DrawRectangleOP(editPanel)
+	: DrawRectangleOP(wnd, stage)
 	, m_callback(callback)
 	, m_shapeImpl(shapesImpl)
 	, m_bDraggable(true)

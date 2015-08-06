@@ -5,10 +5,11 @@
 namespace libshape
 {
 
-SelectNodesOP::SelectNodesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
+SelectNodesOP::SelectNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+							 d2d::MultiShapesImpl* shapesImpl,
 							 d2d::ViewPanelMgr* view_panel_mgr,
 							 d2d::AbstractEditCMPT* callback /*= NULL*/)
-	: DrawRectangleOP(editPanel)
+	: DrawRectangleOP(wnd, stage)
 	, m_shapeImpl(shapesImpl)
 {
 	m_firstPos.setInvalid();

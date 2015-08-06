@@ -7,7 +7,7 @@ namespace eimage
 {
 
 ImageProcessOP::ImageProcessOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, true, false, false)
+	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true, false, false)
 	, m_stage(stage)
 {
 }

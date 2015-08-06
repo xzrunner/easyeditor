@@ -9,8 +9,8 @@ namespace libshape
 class DrawPencilLineOP : public DrawCurveOP
 {
 public:
-	DrawPencilLineOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::OneFloatValue* simplify);
+	DrawPencilLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiShapesImpl* shapesImpl, d2d::OneFloatValue* simplify);
 
 	virtual bool OnMouseLeftUp(int x, int y);
 

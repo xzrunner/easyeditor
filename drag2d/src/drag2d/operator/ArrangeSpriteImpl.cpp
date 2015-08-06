@@ -14,7 +14,7 @@
 #include "common/SettingData.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/ISymbol.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
 #include "view/Camera.h"
@@ -38,17 +38,22 @@ namespace d2d
 const float ArrangeSpriteImpl::CTRL_NODE_RADIUS = 10.0f;
 const float ArrangeSpriteImpl::MAX_CTRL_NODE_RADIUS = 10.0f;
 
-ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
+ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 									 MultiSpritesImpl* spritesImpl,
 									 PropertySettingPanel* propertyPanel,
 									 const ArrangeSpriteConfig& cfg) 
-	: m_stage(editPanel)
+	: m_wnd(wnd)
 	, m_sprites_impl(spritesImpl)
 	, m_property_panel(propertyPanel)
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)
 {
+	if (stage) {
+		stage->Retain();
+	}
+	m_stage = stage;
+
 	m_align.SetOpen(cfg.is_auto_align_open);
 
 	m_selection = spritesImpl->GetSpriteSelection();
@@ -62,6 +67,9 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
 {
+	if (m_stage) {
+		m_stage->Release();
+	}
 	m_selection->Release();
 	delete m_op_state;
 }
@@ -532,30 +540,30 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
 {
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_UP_ONE_LAYER);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_UP_ONE_LAYER);
 	menu.Append(MENU_UP_ONE_LAYER, "上移一层");
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_DOWN_ONE_LAYER);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_DOWN_ONE_LAYER);
 	menu.Append(MENU_DOWN_ONE_LAYER, "下移一层");
 
 	menu.AppendSeparator();
 
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_UP_MOST);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_UP_MOST);
 	menu.Append(MENU_UP_MOST, "移到顶");
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_DOWN_MOST);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_DOWN_MOST);
 	menu.Append(MENU_DOWN_MOST, "移到底");
 
 	menu.AppendSeparator();
 
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_HORI_MIRROR);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_HORI_MIRROR);
 	menu.Append(MENU_HORI_MIRROR, "水平镜像");
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_VERT_MIRROR);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_VERT_MIRROR);
 	menu.Append(MENU_VERT_MIRROR, "竖直镜像");	
 
 #ifdef _DEBUG
 	menu.AppendSeparator();
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_INSERT_TO_DTEX);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_INSERT_TO_DTEX);
 	menu.Append(MENU_INSERT_TO_DTEX, "Insert To DTex");
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_REMOVE_FROM_DTEX);
+	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_REMOVE_FROM_DTEX);
 	menu.Append(MENU_REMOVE_FROM_DTEX, "Remove From DTex");
 #endif
 }

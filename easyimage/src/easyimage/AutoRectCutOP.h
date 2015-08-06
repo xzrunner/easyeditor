@@ -12,7 +12,7 @@ namespace eimage
 class AutoRectCutOP : public d2d::ZoomViewOP
 {
 public:
-	AutoRectCutOP(d2d::EditPanel* editpanel);
+	AutoRectCutOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-DrawLoopOP::DrawLoopOP(d2d::EditPanel* editPanel, 
+DrawLoopOP::DrawLoopOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 					   d2d::MultiShapesImpl* shapesImpl)
-	: DrawPolylineOP(editPanel, false)
+	: DrawPolylineOP(wnd, stage, false)
 	, m_shapesImpl(shapesImpl)
 {
 }

@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiShapesImpl(this)
 	, m_loop(NULL)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 
 	m_symbol = new Symbol;
 }
@@ -25,7 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiShapesImpl(this)
 	, m_loop(NULL)
 {
-	m_canvas = new StageCanvas(this, edited, bg_sprites);
+	SetCanvas(new StageCanvas(this, edited, bg_sprites));
 
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
@@ -70,7 +70,7 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 
-	m_canvas->SetDirty();
+	GetCanvas()->SetDirty();
 
 	return true;
 }

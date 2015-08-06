@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "ShaderMgrBase.h"
+#include "ShaderMgr.h"
 
 namespace d2d
 {
@@ -70,6 +71,20 @@ void RenderContext::Bind(ShaderMgrBase* mgr)
 	if (m_curr) {
 		m_curr->Bind();
 	}
+}
+
+void RenderContext::SetModelView(const Vector& offset, float scale)
+{
+	if (m_mgr2) {
+		static_cast<ShaderMgr*>(m_mgr2)->SetModelView(offset, scale);
+	}
+// 	if (m_mgr3) {
+// 		mat4 scale = mat4::Scale(scale);
+// 		mat4 trasn
+// 
+// 		mat4 mat;
+// 		
+// 	}
 }
 
 }

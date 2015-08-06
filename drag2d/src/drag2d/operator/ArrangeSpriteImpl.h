@@ -12,7 +12,7 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class IArrangeSpriteState;
@@ -22,7 +22,7 @@ class SpriteSelection;
 class ArrangeSpriteImpl
 {
 public:
-	ArrangeSpriteImpl(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+	ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 		PropertySettingPanel* propertyPanel, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 	~ArrangeSpriteImpl();
 
@@ -94,9 +94,11 @@ private:
 	};
 
 protected:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 private:
+	wxWindow* m_wnd;
+
 	const ArrangeSpriteConfig m_cfg;
 
 	AutoAlign m_align;

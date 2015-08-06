@@ -3,6 +3,7 @@
 
 #include "ZoomViewOP.h"
 
+#include "common/Vector.h"
 #include "render/ShapeStyle.h"
 
 namespace d2d
@@ -11,7 +12,7 @@ namespace d2d
 class DrawRectangleOP : public ZoomViewOP
 {
 public:
-	DrawRectangleOP(EditPanel* editPanel, bool bOpenRightTap = true);
+	DrawRectangleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool bOpenRightTap = true);
 	
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

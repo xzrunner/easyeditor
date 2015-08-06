@@ -25,7 +25,7 @@ IBody* BodyManager::LoadBody(d2d::ISprite* sprite)
 			m_map_body.insert(std::make_pair(sprite, body));
 		}
 	} else {
-		d2d::obj_assign((d2d::Object*&)itr->second, body);
+		d2d::obj_assign<IBody>(itr->second, body);
 	}
 	return body;
 }

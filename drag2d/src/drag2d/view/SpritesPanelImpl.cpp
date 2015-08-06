@@ -11,7 +11,7 @@ namespace d2d
 {
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, IDataContainer* container)
-	: MultiSpritesImpl(stage)
+	: MultiSpritesImpl(stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_container = container;
@@ -19,7 +19,7 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, IDataContainer* container)
 }
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, LibraryPanel* library)
-	: MultiSpritesImpl(stage)
+	: MultiSpritesImpl(stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_stage->SetDropTarget(new SpriteDropTarget(this, stage, library));

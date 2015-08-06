@@ -5,7 +5,7 @@ namespace eimage
 {
 
 RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
-	: d2d::ZoomViewOP(stage, true)
+	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_cmpt(cmpt)
 	, m_stage(stage)
 	, m_rectSelected(NULL)

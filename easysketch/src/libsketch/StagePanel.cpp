@@ -10,10 +10,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
 {
-	m_canvas = new StageCanvas(this, this, library);
-	library->SetCanvas(m_canvas);
+	StageCanvas* canvas = new StageCanvas(this, this, library);
+	SetCanvas(canvas);
+	library->SetCanvas(canvas);
 
-	m_edit_op = new ArrangeSpriteOP(this);
+	SetEditOP(new ArrangeSpriteOP(this));
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, library));
 }
@@ -33,7 +34,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 	sprite->Retain();
 	m_sprites.push_back(sprite);
-	m_canvas->SetDirty();
+	GetCanvas()->SetDirty();
 	return true;
 }
 
@@ -45,7 +46,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 		if (m_sprites[i] == sprite) {
 			sprite->Release();
 			m_sprites.erase(m_sprites.begin() + i);
-			m_canvas->SetDirty();
+			GetCanvas()->SetDirty();
 			return true;
 		}
 	}
@@ -62,7 +63,7 @@ bool StagePanel::ClearAllSprite()
 	}
 	m_sprites.clear();
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -81,13 +82,13 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 
 ivec2 StagePanel::TransPos3ProjectToScreen(const vec3& proj) const
 {
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_canvas);
+	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ProjectToScreen(proj);
 }
 
 vec3 StagePanel::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
 {
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_canvas);
+	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ScreenToProject(scr, proj_z);	
 }
 

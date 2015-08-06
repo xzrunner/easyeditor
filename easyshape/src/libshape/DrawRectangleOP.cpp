@@ -3,8 +3,8 @@
 namespace libshape
 {
 
-DrawRectangleOP::DrawRectangleOP(d2d::EditPanel* editPanel, bool bOpenRightTap)
-	: d2d::ZoomViewOP(editPanel, true, bOpenRightTap)
+DrawRectangleOP::DrawRectangleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool bOpenRightTap)
+	: d2d::ZoomViewOP(wnd, stage, true, bOpenRightTap)
 {
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();

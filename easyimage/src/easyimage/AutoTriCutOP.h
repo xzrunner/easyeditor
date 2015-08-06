@@ -9,7 +9,7 @@ namespace eimage
 class AutoTriCutOP : public d2d::ZoomViewOP
 {
 public:
-	AutoTriCutOP(d2d::EditPanel* stage);
+	AutoTriCutOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 
 	virtual bool OnActive();
 

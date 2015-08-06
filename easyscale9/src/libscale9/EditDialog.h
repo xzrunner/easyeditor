@@ -1,30 +1,34 @@
-#pragma once
+#ifndef _EASYSCALE9_EDIT_DIALOG_H_
+#define _EASYSCALE9_EDIT_DIALOG_H_
 
 #include <drag2d.h>
 
 namespace escale9
 {
-	class Symbol;
 
-	class EditDialog : public wxDialog
-	{
-	public:
-		EditDialog(wxWindow* parent, Symbol* symbol);
+class Symbol;
 
-	private:
-		void initLayout();
+class EditDialog : public wxDialog
+{
+public:
+	EditDialog(wxWindow* parent, Symbol* symbol);
 
-		void storeSymbol();
+private:
+	void initLayout();
 
-		void OnCloseEvent(wxCloseEvent& event);
+	void storeSymbol();
 
-	private:
-		Symbol* m_symbol;
+	void OnCloseEvent(wxCloseEvent& event);
 
-		d2d::EditPanel* m_stage;
+private:
+	Symbol* m_symbol;
 
-		DECLARE_EVENT_TABLE()
+	d2d::EditPanel* m_stage;
 
-	}; // EditDialog
+	DECLARE_EVENT_TABLE()
+
+}; // EditDialog
+
 }
 
+#endif // _EASYSCALE9_EDIT_DIALOG_H_

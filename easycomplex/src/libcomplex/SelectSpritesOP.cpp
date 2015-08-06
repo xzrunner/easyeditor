@@ -18,9 +18,9 @@
 namespace ecomplex
 {
 
-SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 								 d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr, callback)
+	: d2d::SelectSpritesOP(wnd, stage, spritesImpl, view_panel_mgr, callback)
 {
 }
 
@@ -58,7 +58,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
- 		EditDialog dlg(m_stage, &symbol);
+ 		EditDialog dlg(m_wnd, &symbol);
  		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -71,7 +71,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	{
- 		libanim::PreviewDialog dlg(m_stage, &anim->GetSymbol());
+ 		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol());
  		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -80,7 +80,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
-  		escale9::EditDialog dlg(m_stage, &symbol);
+  		escale9::EditDialog dlg(m_wnd, &symbol);
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
   		dlg.ShowModal();
@@ -88,7 +88,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::EditDialog dlg(m_stage, sprite);
+		emesh::EditDialog dlg(m_wnd, sprite);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -96,12 +96,12 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
 	{
-		d2d::TextDialog dlg(m_stage, font);
+		d2d::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
-		etexture::EditDialog dlg(m_stage, tex, m_spritesImpl);
+		etexture::EditDialog dlg(m_wnd, tex, m_spritesImpl);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();

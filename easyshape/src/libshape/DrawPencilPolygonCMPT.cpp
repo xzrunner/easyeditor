@@ -9,7 +9,7 @@ DrawPencilPolygonCMPT::DrawPencilPolygonCMPT(wxWindow* parent, const wxString& n
 									   d2d::MultiShapesImpl* shapesImpl)
 	: d2d::OneFloatValueCMPT(parent, name, editPanel, "Simplify", 0, 100, 30, 0.1f)
 {
-	m_editOP = new DrawPencilPolygonOP(editPanel, shapesImpl, this, this); 
+	m_editOP = new DrawPencilPolygonOP(editPanel, editPanel->GetStageImpl(), shapesImpl, this, this); 
 }
 
 int DrawPencilPolygonCMPT::GetSelected() const

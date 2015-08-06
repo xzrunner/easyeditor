@@ -53,6 +53,8 @@ public:
 private:
 	Controller* m_ctrl;
 
+	d2d::ViewPanelMgr* m_view_panel_mgr;
+
 }; // StagePanel
 
 }

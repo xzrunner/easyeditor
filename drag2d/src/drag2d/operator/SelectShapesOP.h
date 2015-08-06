@@ -18,7 +18,7 @@ class ShapeSelection;
 class SelectShapesOP : public DrawRectangleOP
 {
 public:
-	SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl, 
+	SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiShapesImpl* shapesImpl, 
 		ViewPanelMgr* view_panel_mgr = NULL, AbstractEditCMPT* callback = NULL);
 	virtual ~SelectShapesOP();
 

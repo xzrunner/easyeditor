@@ -14,7 +14,7 @@ EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const wxString& name,
 	, m_simplifySpin(NULL)
 	, m_btnMerge(NULL)
 {
-	m_editOP = new EditPolylinesOP(editPanel, shapesImpl, view_panel_mgr, this);
+	m_editOP = new EditPolylinesOP(editPanel, editPanel->GetStageImpl(), shapesImpl, view_panel_mgr, this);
 }
 
 void EditPolylinesCMPT::updateControlValue()

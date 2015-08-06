@@ -5,10 +5,11 @@
 namespace libshape
 {
 
-EditPolylinesOP::EditPolylinesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
+EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+								 d2d::MultiShapesImpl* shapesImpl,
 								 d2d::ViewPanelMgr* view_panel_mgr,
 								 EditPolylinesCMPT* cmpt)
-	: d2d::SelectShapesOP(editPanel, shapesImpl, view_panel_mgr, cmpt)
+	: d2d::SelectShapesOP(wnd, stage, shapesImpl, view_panel_mgr, cmpt)
 	, m_cmpt(cmpt)
 	, m_bDirty(false)
 {

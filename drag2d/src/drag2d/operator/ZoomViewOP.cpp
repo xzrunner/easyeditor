@@ -3,15 +3,16 @@
 #include "PanViewState.h"
 
 #include "view/Camera.h"
+#include "view/EditPanelImpl.h"
 #include "common/config.h"
 #include "common/SettingData.h"
 
 namespace d2d
 {
 
-ZoomViewOP::ZoomViewOP(EditPanel* stage, bool mouse_move_focus,
-					   bool right_tap, bool left_tap) 
-	: AbstractEditOP(stage)
+ZoomViewOP::ZoomViewOP(wxWindow* wnd, EditPanelImpl* stage, 
+					   bool mouse_move_focus, bool right_tap, bool left_tap) 
+	: AbstractEditOP(wnd, stage)
 	, m_mouse_move_focus(mouse_move_focus)
 	, m_open_right_pan(right_tap)
 	, m_open_left_pan(left_tap)

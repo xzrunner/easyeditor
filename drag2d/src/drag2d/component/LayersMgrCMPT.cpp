@@ -3,6 +3,7 @@
 #include "operator/SelectShapesOP.h"
 #include "operator/SelectSpritesOP.h"
 #include "widgets/LayersMgrWidget.h"
+#include "view/EditPanel.h"
 
 namespace d2d
 {
@@ -13,7 +14,7 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name,
 	: AbstractEditCMPT(parent, name, editPanel)
 	, m_layersMgr(NULL)
 {
-	m_editOP = new SelectShapesOP(editPanel, shapesImpl, view_panel_mgr);
+	m_editOP = new SelectShapesOP(editPanel, editPanel->GetStageImpl(), shapesImpl, view_panel_mgr);
 
 	m_layersMgr = new LayersMgrWidget(this, editPanel);
 	m_sizer = new wxBoxSizer(wxVERTICAL);
@@ -26,7 +27,7 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name,
 	 : AbstractEditCMPT(parent, name, editPanel)
 	 , m_layersMgr(NULL)
 {
-	m_editOP = new SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr);
+	m_editOP = new SelectSpritesOP(editPanel, editPanel->GetStageImpl(), spritesImpl, view_panel_mgr);
 
 	m_layersMgr = new LayersMgrWidget(this, editPanel);
 	m_sizer = new wxBoxSizer(wxVERTICAL);

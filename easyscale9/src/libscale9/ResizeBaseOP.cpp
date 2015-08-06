@@ -5,8 +5,8 @@
 namespace escale9
 {
 
-ResizeBaseOP::ResizeBaseOP(d2d::EditPanel* editPanel, Symbol* symbol)
-	: d2d::ZoomViewOP(editPanel, true)
+ResizeBaseOP::ResizeBaseOP(wxWindow* wnd, d2d::EditPanelImpl* stage, Symbol* symbol)
+	: d2d::ZoomViewOP(wnd, stage, true)
 	, m_symbol(symbol)
 	, m_status(e_null)
 {

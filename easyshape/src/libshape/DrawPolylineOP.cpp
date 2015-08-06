@@ -4,8 +4,8 @@
 namespace libshape
 {
 
-DrawPolylineOP::DrawPolylineOP(d2d::EditPanel* editPanel, bool isClosed)
-	: d2d::ZoomViewOP(editPanel, true, false)
+DrawPolylineOP::DrawPolylineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool isClosed)
+	: d2d::ZoomViewOP(wnd, stage, true, false)
 {
 	m_cursor = wxCursor(wxCURSOR_RIGHT_ARROW);
 

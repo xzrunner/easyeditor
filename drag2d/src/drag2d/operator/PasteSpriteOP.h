@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_PASTE_SPRITE_OP_H_
+#define _DRAG2D_PASTE_SPRITE_OP_H_
 
 #include <vector>
 
@@ -6,69 +7,73 @@
 
 namespace d2d
 {
-	class ISprite;
-	class MultiSpritesImpl;
-	class PasteSpriteCMPT;
 
-	class PasteSpriteOP : public SelectSpritesOP
+class ISprite;
+class MultiSpritesImpl;
+class PasteSpriteCMPT;
+
+class PasteSpriteOP : public SelectSpritesOP
+{
+public:
+	PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr, 
+		PasteSpriteCMPT* cmpt = NULL);
+	virtual ~PasteSpriteOP();
+
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
+
+	virtual bool OnDraw() const;
+	virtual bool Clear();
+
+private:
+	void setMousePos(int x, int y);
+	void fixPosOrthogonal();
+
+private:
+	class SpriteBatch
 	{
 	public:
-		PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-			ViewPanelMgr* view_panel_mgr, PasteSpriteCMPT* cmpt = NULL);
-		virtual ~PasteSpriteOP();
+		SpriteBatch();
+		~SpriteBatch();
 
-		virtual bool OnKeyDown(int keyCode);
-		virtual bool OnMouseLeftDown(int x, int y);
-		virtual bool OnMouseLeftUp(int x, int y);
-		virtual bool OnMouseRightDown(int x, int y);
-		virtual bool OnMouseMove(int x, int y);
+		void loadFromSelection(const SpriteSelection& selection);
 
-		virtual bool OnDraw() const;
-		virtual bool Clear();
+		void insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
+			bool isHorMirror, bool isVerMirror);
+		void draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const;
 
-	private:
-		void setMousePos(int x, int y);
-		void fixPosOrthogonal();
+		const Vector& getCenter() const { return m_center; }
+
+		void clear();
+
+		bool empty() const { return m_selected.empty(); }
 
 	private:
-		class SpriteBatch
-		{
-		public:
-			SpriteBatch();
-			~SpriteBatch();
-
-			void loadFromSelection(const SpriteSelection& selection);
-
-			void insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
-				bool isHorMirror, bool isVerMirror);
-			void draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const;
-
-			const Vector& getCenter() const { return m_center; }
-
-			void clear();
-
-			bool empty() const { return m_selected.empty(); }
-
-		private:
-			void computeCenter();
-
-		private:
-			std::vector<ISprite*> m_selected;
-			Vector m_center;
-
-		}; // SpriteBatch
+		void computeCenter();
 
 	private:
-		MultiSpritesImpl* m_spritesImpl;
+		std::vector<ISprite*> m_selected;
+		Vector m_center;
 
-		PasteSpriteCMPT* m_cmpt;
+	}; // SpriteBatch
 
-		SpriteSelection* m_selection;
+private:
+	MultiSpritesImpl* m_spritesImpl;
 
-		Vector m_pos;
+	PasteSpriteCMPT* m_cmpt;
 
-		SpriteBatch m_batch;
+	SpriteSelection* m_selection;
 
-	}; // PasteSpriteOP
+	Vector m_pos;
+
+	SpriteBatch m_batch;
+
+}; // PasteSpriteOP
+
 }
 
+#endif // _DRAG2D_PASTE_SPRITE_OP_H_

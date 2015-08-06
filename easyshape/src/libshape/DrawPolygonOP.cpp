@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-DrawPolygonOP::DrawPolygonOP(d2d::EditPanel* editPanel, 
-									 d2d::MultiShapesImpl* shapesImpl)
-	: DrawPolylineOP(editPanel, false)
+DrawPolygonOP::DrawPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+							 d2d::MultiShapesImpl* shapesImpl)
+	: DrawPolylineOP(wnd, stage, false)
 	, m_shapesImpl(shapesImpl)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);

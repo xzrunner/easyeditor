@@ -10,6 +10,7 @@
 #include "view/IStageCanvas.h"
 #include "view/ViewPanelMgr.h"
 #include "view/SpriteSelection.h"
+#include "view/EditPanelImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
 
@@ -19,9 +20,9 @@
 namespace d2d
 {
 
-SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 								 ViewPanelMgr* view_panel_mgr, AbstractEditCMPT* callback)
-	: DrawSelectRectOP(editPanel)
+	: DrawSelectRectOP(wnd, stage)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
 	, m_bDraggable(true)

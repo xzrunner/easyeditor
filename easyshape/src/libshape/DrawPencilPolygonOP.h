@@ -11,7 +11,7 @@ class DrawPencilPolygonCMPT;
 class DrawPencilPolygonOP : public DrawCurveOP
 {
 public:
-	DrawPencilPolygonOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
+	DrawPencilPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
 		d2d::OneFloatValue* simplify, DrawPencilPolygonCMPT* cmpt);
 
 	virtual bool OnKeyDown(int keyCode);

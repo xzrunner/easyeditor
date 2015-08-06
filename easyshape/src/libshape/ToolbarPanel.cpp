@@ -28,21 +28,21 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	// point
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "点", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditPointOP(stage, stage, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditPointOP(stage, stage->GetStageImpl(), stage, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
 	// rect
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "矩形", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditRectOP(stage, stage, property, m_view_panel_mgr, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditRectOP(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
 	// circle
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "圆形", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditCircleOP(stage, stage, property, m_view_panel_mgr, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditCircleOP(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
@@ -56,7 +56,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 //		d2d::AbstractEditOP* op = new DrawComplexPolygonOP(stage, stage, property, capture_cmpt);
 
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawComplexPolygonOP, d2d::SelectShapesOP>
-			(stage, stage, property, m_view_panel_mgr, capture_cmpt, capture_cmpt);
+			(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt, capture_cmpt);
 
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
@@ -64,7 +64,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	// bezier
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "贝塞尔曲线", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditBezierOP(stage, stage, property, m_view_panel_mgr, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditBezierOP(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}

@@ -6,7 +6,7 @@ namespace eicon
 {
 
 EditRectOP::EditRectOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, true)
+	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_stage(stage)
 {
 }

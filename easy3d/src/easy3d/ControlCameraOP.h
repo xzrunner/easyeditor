@@ -13,7 +13,7 @@ class StageCanvas;
 class ControlCameraOP : public d2d::AbstractEditOP
 {
 public:
-	ControlCameraOP(d2d::EditPanel* stage);
+	ControlCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);

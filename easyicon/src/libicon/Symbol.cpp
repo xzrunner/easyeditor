@@ -63,7 +63,7 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 
 void Symbol::SetIcon(Icon* icon)
 {
-	d2d::obj_assign((d2d::Object*&)m_icon, icon);
+	d2d::obj_assign<Icon>(m_icon, icon);
 }
 
 void Symbol::SetImage(d2d::Image* img)

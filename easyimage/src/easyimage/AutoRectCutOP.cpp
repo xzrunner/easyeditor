@@ -4,8 +4,8 @@
 namespace eimage
 {
 
-AutoRectCutOP::AutoRectCutOP(d2d::EditPanel* editpanel)
-	: d2d::ZoomViewOP(editpanel, true, false, false)
+AutoRectCutOP::AutoRectCutOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::ZoomViewOP(wnd, stage, true, false, false)
 	, m_selected(NULL)
 {
 }

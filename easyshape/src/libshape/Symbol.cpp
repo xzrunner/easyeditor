@@ -150,7 +150,7 @@ void Symbol::SetBG(d2d::ISymbol* bg)
 		LoadBGOutline(bg);
 		LoadBGTriStrip(bg);
 	}
-	d2d::obj_assign((d2d::Object*&)m_bg, bg);
+	d2d::obj_assign<d2d::ISymbol>(m_bg, bg);
 }
 
 void Symbol::StoreToFile(const char* filename) const

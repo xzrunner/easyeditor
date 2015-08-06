@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-DrawComplexPolygonOP::DrawComplexPolygonOP(d2d::EditPanel* editPanel, 
-									 d2d::MultiShapesImpl* shapesImpl)
-	: DrawPolylineOP(editPanel, false)
+DrawComplexPolygonOP::DrawComplexPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+										   d2d::MultiShapesImpl* shapesImpl)
+	: DrawPolylineOP(wnd, stage, false)
 	, m_shapesImpl(shapesImpl)
 {
 }

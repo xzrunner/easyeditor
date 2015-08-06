@@ -83,6 +83,7 @@
 #include "view/SpriteDialog.h"
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
+#include "view/EditPanel.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

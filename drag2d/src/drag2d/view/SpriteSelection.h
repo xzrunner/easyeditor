@@ -7,12 +7,13 @@
 namespace d2d
 {
 
-class IStageCanvas;
+class EditPanelImpl;
 
 class SpriteSelection : public ObjSelectionSet<ISprite>
 {
 public:
-	SpriteSelection(EditPanel* stage);
+	SpriteSelection(EditPanelImpl* stage);
+	virtual ~SpriteSelection();
 
 	virtual void Clear();
 
@@ -20,7 +21,7 @@ public:
 	virtual void Remove(ISprite* item);
 
 private:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 }; // SpriteSelection
 

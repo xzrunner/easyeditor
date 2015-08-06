@@ -7,8 +7,8 @@ namespace lr
 namespace preview
 {
 
-CtrlCamOP::CtrlCamOP(d2d::EditPanel* editPanel)
-	: d2d::AbstractEditOP(editPanel)
+CtrlCamOP::CtrlCamOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::AbstractEditOP(wnd, stage)
 {	
 }
 

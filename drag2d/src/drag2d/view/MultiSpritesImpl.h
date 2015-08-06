@@ -11,13 +11,14 @@
 namespace d2d
 {
 
+class EditPanelImpl;
 class SpriteSelection;
 class Rect;
 
 class MultiSpritesImpl : public ISpriteViewPanel
 {
 public:
-	MultiSpritesImpl(EditPanel* stage);
+	MultiSpritesImpl(EditPanelImpl* stage);
 	virtual ~MultiSpritesImpl();
 
 	//

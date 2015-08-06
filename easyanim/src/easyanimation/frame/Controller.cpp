@@ -114,10 +114,10 @@ int Controller::frame() const
 	return m_curr_frame; 
 }
 
-d2d::ViewlistPanel* Controller::GetViewlist()
-{
-	return m_widgets->m_viewlist;
-}
+// d2d::ViewlistPanel* Controller::GetViewlist()
+// {
+// 	return m_widgets->m_viewlist;
+// }
 
 d2d::LibraryPanel* Controller::GetLibraryPanel()
 {

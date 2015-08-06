@@ -1,13 +1,5 @@
 #include "EditPanel.h"
-#include "HistoryList.h"
-
-#include "operator/AbstractEditOP.h"
-#include "view/Camera.h"
-#include "view/IStageCanvas.h"
-#include "view/Frame.h"
-#include "view/ExceptionDlg.h"
-
-#include <fstream>
+#include "EditPanelImpl.h"
 
 namespace d2d
 {
@@ -18,303 +10,176 @@ END_EVENT_TABLE()
 
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
-	, m_frame(frame)
 {
-	m_edit_op = NULL;
-	m_canvas = NULL;
-	m_camera = new Camera;
+	m_impl = new EditPanelImpl(frame, this);
+
 	SetFocus();		// For OnMouseWheelRotation
 }
 
 EditPanel::~EditPanel()
 {
-	Clear();
-
-	delete m_camera;
-	delete m_canvas;
-	if (m_edit_op) {
-		m_edit_op->Release();
-	}
+	m_impl->SetEditPanelNull();
+	m_impl->Release();
 }
 
 void EditPanel::Clear()
 {
-	if (m_edit_op) {
-		m_edit_op->Clear();
-	}
-
-	m_history_list.clear();
+	m_impl->Clear();	
 }
 
 Vector EditPanel::TransPosScrToProj(int x, int y) const
 {
-	return m_camera->transPosScreenToProject(x, y, GetSize().GetWidth(), GetSize().GetHeight());
+	return m_impl->TransPosScrToProj(x, y);
 }
 
 Vector EditPanel::TransPosProjToScr(const Vector& proj) const
 {
-	return m_camera->transPosProjectToScreen(proj, GetSize().GetWidth(), GetSize().GetHeight());
+	return m_impl->TransPosProjToScr(proj);
 }
 
 void EditPanel::DrawEditOP() const
 {
-	if (m_edit_op) {
-		m_edit_op->OnDraw();
-	}
+	m_impl->DrawEditOP();
+}
+
+const AbstractEditOP* EditPanel::GetEditOP() const 
+{ 
+	return m_impl->GetEditOP();
+}
+
+AbstractEditOP* EditPanel::GetEditOP() 
+{
+	return m_impl->GetEditOP();
 }
 
 void EditPanel::SetEditOP(AbstractEditOP* editOP)
 {
-	if (m_edit_op == editOP) {
-		return;
-	}
+	m_impl->SetEditOP(editOP);
+}
 
-	if (editOP) {
-		editOP->Retain();
-	}
-	if (m_edit_op)
-	{
-		m_edit_op->Clear();
-		m_edit_op->Release();
-	}
-	m_edit_op = editOP;
-	if (m_edit_op) {
-		m_edit_op->OnActive();
-	}
-	SetCanvasDirty();
+const IStageCanvas* EditPanel::GetCanvas() const 
+{ 
+	return m_impl->GetCanvas(); 
+}
+
+IStageCanvas* EditPanel::GetCanvas() 
+{ 
+	return m_impl->GetCanvas(); 
+}
+
+void EditPanel::SetCanvas(IStageCanvas* canvas) 
+{ 
+	m_impl->SetCanvas(canvas);
+}
+
+Camera* EditPanel::GetCamera() const 
+{ 
+	return m_impl->GetCamera();
 }
 
 void EditPanel::OnMouse(wxMouseEvent& event)
 {
-#ifdef _DEBUG
-	if (wxFrame* frame = dynamic_cast<wxFrame*>(m_frame)) 
-	{
-		Vector pos = TransPosScrToProj(event.GetX(), event.GetY());
-		wxString msg;
-		msg.Printf("Mouse: %.1f, %.1f", pos.x, pos.y);
-		static_cast<wxFrame*>(m_frame)->SetStatusText(msg);
-	}
-#endif
-
-	if (!m_edit_op) return;
-
-	if (event.LeftDown())
-		m_edit_op->OnMouseLeftDown(event.GetX(), event.GetY());
-	else if (event.LeftUp())
-		m_edit_op->OnMouseLeftUp(event.GetX(), event.GetY());
-	else if (event.RightDown())
-		m_edit_op->OnMouseRightDown(event.GetX(), event.GetY());
-	else if (event.RightUp())
-		m_edit_op->OnMouseRightUp(event.GetX(), event.GetY());
-	else if (event.Moving())
-		m_edit_op->OnMouseMove(event.GetX(), event.GetY());
-	else if (event.Dragging())
-		m_edit_op->OnMouseDrag(event.GetX(), event.GetY());
-	else if (event.LeftDClick())
-		m_edit_op->OnMouseLeftDClick(event.GetX(), event.GetY());
-	else if (event.GetWheelRotation())
-		m_edit_op->OnMouseWheelRotation(event.GetX(), event.GetY(), event.GetWheelRotation());
-
-	OnMouseHook(event);
+	m_impl->OnMouse(event);
 }
 
 void EditPanel::OnKeyDown(wxKeyEvent& event)
 {
-	int key_code = event.GetKeyCode();
-	m_keys_state.OnKeyDown(key_code);
-
-	if (GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
-		Undo();
-	} else if (GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
-		Redo();
-	}
-
-	switch (key_code) {
-	case WXK_F5:
-		{
-			d2d::Frame* frame = dynamic_cast<Frame*>(m_frame);
-			if (frame) {
-				Clear();
-				frame->RefreshWithCurrFile();
-			}
-		}
-		break;
-	}
-	
-	if (m_edit_op) {
-		m_edit_op->OnKeyDown(key_code);
-	}
-
-	OnKeyHook(key_code);
+	m_impl->OnKeyDown(event);
 }
 
 void EditPanel::OnKeyUp(wxKeyEvent& event)
 {
-	int key_code = event.GetKeyCode();
-	m_keys_state.OnKeyUp(key_code);
-
-	if (m_edit_op) {
-		m_edit_op->OnKeyUp(key_code);
-	}
+	m_impl->OnKeyUp(event);
 }
 
 void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 {
-	const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
-	const float cx = static_cast<float>(x),
-		cy = static_cast<float>(GetSize().GetHeight() - y);
-	m_camera->Scale(scale, cx, cy, GetSize().GetWidth(), GetSize().GetHeight());
+	m_impl->OnMouseWheelRotation(x, y, direction);
 }
 
 void EditPanel::ResetCanvas()
 {
-	if (m_canvas)
-	{
-		m_canvas->ResetInitState();
-		SetCanvasDirty();
-	}
+	m_impl->ResetCanvas();
 }
 
 void EditPanel::ResetViewport()
 {
-	if (m_canvas)
-	{
-		m_canvas->ResetViewport();
-//		Refresh();
-	}
+	m_impl->ResetViewport();
 }
 
 void EditPanel::Undo()
 {
-	HistoryList::Type type = m_history_list.undo();
-	if (type != HistoryList::NO_CHANGE) {
-		SetCanvasDirty();
-		if (type == HistoryList::DIRTY)
-			SetTitleStatus(true);
-		else
-			SetTitleStatus(false);
-	}
+	m_impl->Undo();
 }
 
 void EditPanel::Redo()
 {
-	HistoryList::Type type = m_history_list.redo();
-	if (type != HistoryList::NO_CHANGE) {
-		SetCanvasDirty();
-		if (type == HistoryList::DIRTY)
-			SetTitleStatus(true);
-		else
-			SetTitleStatus(false);
-	}
+	m_impl->Redo();
 }
 
 void EditPanel::AddOpRecord(AbstractAtomicOP* op)
 {
-	m_history_list.insert(op);
-	SetTitleStatus(true);
+	m_impl->AddOpRecord(op);
 }
 
 void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
-	Json::Value value;
-	m_history_list.store(value, sprites);
-
-	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(path.c_str());
-	std::locale::global(std::locale("C"));	
-	writer.write(fout, value);
-	fout.close();
+	m_impl->SaveOpRecordList(filepath, sprites);
 }
 
 void EditPanel::LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
-	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
-
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(path.c_str());
-	std::locale::global(std::locale("C"));
-	if (fin.fail()) {
-		return;
-	}
-	reader.parse(fin, value);
-	fin.close();
-
-	m_history_list.load(value, sprites);
+	m_impl->LoadOpRecordList(filepath, sprites);
 }
 
 void EditPanel::OnSave()
 {
-	m_history_list.onSave();
-	SetTitleStatus(false);
+	m_impl->OnSave();
 }
 
 bool EditPanel::IsEditDirty() const
 {
-	if (!m_frame) {
-		return false;
-	}
-
-	wxString title = m_frame->GetTitle();
-	if (title.IsEmpty()) {
-		return false;
-	}
-	return title[title.Len()-1] == '*';
+	return m_impl->IsEditDirty();
 }
 
 void EditPanel::SetTitleStatus(bool dirty)
 {
-	if (!m_frame) return;
-
-	wxString title = m_frame->GetTitle();
-	if (title.IsNull()) return;
-	if (dirty && title[title.Len()-1] != '*')
-	{
-		title.Append('*');
-		m_frame->SetTitle(title);
-	}
-	else if (!dirty && title[title.Len()-1] == '*')
-	{
-		title = title.SubString(0, title.Len()-2);
-		m_frame->SetTitle(title);
-	}
+	m_impl->SetTitleStatus(dirty);
 }
 
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
-	if (m_edit_op) {
-		m_edit_op->OnPopMenuSelected(event.GetId());
-	}
+	m_impl->OnRightPopupMenu(event);
 }
 
 void EditPanel::SetCanvasDirty()
 {
-	if (m_canvas) {
-		m_canvas->SetDirty();
-	}
+	m_impl->SetCanvasDirty();
 }
 
 bool EditPanel::GetKeyState(int key) const 
 { 
-	return m_keys_state.GetKeyState(key);
+	return m_impl->GetKeyState(key);
+}
+
+const KeysState& EditPanel::GetKeyState() const 
+{ 
+	return m_impl->GetKeyState();
+}
+
+KeysState& EditPanel::GetKeyState() 
+{ 
+	return m_impl->GetKeyState(); 
 }
 
 void EditPanel::RefreshFrame()
 {
-	m_frame->Refresh();
+	m_impl->RefreshFrame();
 }
 
 void EditPanel::OnSize(wxSizeEvent& event)
 {
-	OnSizeDebug(event);
-
-	if (m_canvas) {
-		m_canvas->SetSize(event.GetSize());
-	}
-	SetCanvasDirty();	// no refresh when change window size
+	m_impl->OnSize(event);
 }
 
 } // d2d

@@ -6,14 +6,15 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
 #include "view/SpriteSelection.h"
+#include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
 
 namespace d2d
 {
 
-PasteSpriteOP::PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
+PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
 							 ViewPanelMgr* view_panel_mgr, PasteSpriteCMPT* cmpt)
-	: SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr)
+	: SelectSpritesOP(wnd, stage, spritesImpl, view_panel_mgr)
 	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)
 {

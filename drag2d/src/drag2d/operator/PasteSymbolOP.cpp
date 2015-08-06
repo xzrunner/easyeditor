@@ -5,14 +5,15 @@
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
 
 namespace d2d
 {
 
-PasteSymbolOP::PasteSymbolOP(EditPanel* editPanel, MultiSpritesImpl* panelImpl, 
+PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* panelImpl, 
 							 LibraryPanel* libraryPanel, float* pScale/* = NULL*/)
-	: ZoomViewOP(editPanel, true)
+	: ZoomViewOP(wnd, stage, true)
 	, m_panelImpl(panelImpl)
 	, m_libraryPanel(libraryPanel)
 	, m_pScale(pScale)

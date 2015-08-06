@@ -1,12 +1,12 @@
 #include "PanViewState.h"
 
 #include "view/Camera.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-PanViewState::PanViewState(EditPanel* stage)
+PanViewState::PanViewState(EditPanelImpl* stage)
 	: m_stage(stage)
 {
 	m_last_pos.setInvalid();

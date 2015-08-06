@@ -5,11 +5,11 @@
 namespace ephysics
 {
 
-UniversalArrangeOP::UniversalArrangeOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl,
+UniversalArrangeOP::UniversalArrangeOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
 									   d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::ZoomViewOP(editPanel, true)
+	: d2d::ZoomViewOP(wnd, stage, true)
 {
-	m_noPhysics = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(editPanel, spritesImpl, propertyPanel, NULL, callback);
+	m_noPhysics = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(wnd, stage, spritesImpl, propertyPanel, NULL, callback);
 	m_editOP = m_noPhysics;
 }
 

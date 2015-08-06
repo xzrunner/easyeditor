@@ -1,12 +1,14 @@
 #include "MousePositionOP.h"
 
 #include "component/MousePositionCMPT.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-MousePositionOP::MousePositionOP(EditPanel* editPanel, MousePositionCMPT* cmpt)
-	: ZoomViewOP(editPanel, true)
+MousePositionOP::MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+								 MousePositionCMPT* cmpt)
+	: ZoomViewOP(wnd, stage, true)
 	, m_cmpt(cmpt)
 {
 }

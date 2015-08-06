@@ -6,8 +6,8 @@ namespace e3d
 
 static const float MOUSE_SENSITIVITY = 0.3f;
 
-ControlCameraOP::ControlCameraOP(d2d::EditPanel* stage)
-	: d2d::AbstractEditOP(stage)
+ControlCameraOP::ControlCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::AbstractEditOP(wnd, stage)
 {
 	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());
 }

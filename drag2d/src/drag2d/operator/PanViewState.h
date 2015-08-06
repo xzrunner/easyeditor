@@ -8,12 +8,12 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 
 class PanViewState : public IEditOPState
 {
 public:
-	PanViewState(EditPanel* stage);
+	PanViewState(EditPanelImpl* stage);
 
 	virtual void Bind();
 	virtual void UnBind();
@@ -23,7 +23,7 @@ public:
 	virtual bool OnMouseDrag(int x, int y);
 
 private:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 	Vector m_last_pos;
 

@@ -6,13 +6,13 @@
 namespace d2d
 {
 
-ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel, 
+ArrangeSpriteFixOP::ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage, 
 									   MultiSpritesImpl* spritesImpl,
 									   PropertySettingPanel* propertyPanel/* = NULL*/, 
 									   ViewPanelMgr* view_panel_mgr/* = NULL*/,
 									   AbstractEditCMPT* callback/* = NULL*/, 
 									   const ArrangeSpriteConfig& cfg/* = NULL*/)
-	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, NULL, callback, cfg)
+	: ArrangeSpriteOP(wnd, stage, spritesImpl, propertyPanel, NULL, callback, cfg)
 	, m_spritesImpl(spritesImpl)
 {
 }

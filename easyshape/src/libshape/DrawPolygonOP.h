@@ -9,7 +9,8 @@ namespace libshape
 class DrawPolygonOP : public DrawPolylineOP
 {
 public:
-	DrawPolygonOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+	DrawPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
 

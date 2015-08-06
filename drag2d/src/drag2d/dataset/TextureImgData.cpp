@@ -64,7 +64,7 @@ void TextureImgData::LoadFromMemory(ImageData* img_data)
 		return;
 	}
 
-	obj_assign((d2d::Object*&)m_img_data, img_data);
+	obj_assign<ImageData>(m_img_data, img_data);
 	Reload();
 }
 

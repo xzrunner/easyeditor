@@ -62,7 +62,7 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 		_shape->Refresh();
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -75,7 +75,7 @@ bool StagePanel::RemoveShape(d2d::IShape* shape)
 		ret = static_cast<EditShape*>(_shape)->RemoveShape(shape);
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -88,7 +88,7 @@ bool StagePanel::ClearAllShapes()
 		ret = static_cast<EditShape*>(shape)->ClearShape();
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -143,8 +143,8 @@ void StagePanel::CreateShape()
 
 void StagePanel::init(d2d::LibraryPanel* library)
 {
-	m_edit_op = new d2d::ZoomViewOP(this, true);
-	m_canvas = new StageCanvas(this);
+	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
+	SetCanvas(new StageCanvas(this));
 
 	if (library) {
 		SetDropTarget(new StageDropTarget(this, library));

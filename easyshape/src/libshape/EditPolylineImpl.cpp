@@ -11,7 +11,7 @@
 namespace libshape
 {
 
-EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
+EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, d2d::EditPanelImpl* stage,
 								   d2d::MultiShapesImpl* shapesImpl,
 								   d2d::PropertySettingPanel* propertyPanel, 
 								   d2d::ViewPanelMgr* view_panel_mgr,
@@ -20,8 +20,6 @@ EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
 								   d2d::AbstractEditOP* select_op,
 								   IOperaterBase* base_op)
 {
-	m_stage = editPanel;
-
 	m_shapesImpl = shapesImpl;
 
 	m_propertyPanel = propertyPanel;

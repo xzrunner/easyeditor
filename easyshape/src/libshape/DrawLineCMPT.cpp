@@ -14,7 +14,7 @@ DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, d2d::EditPane
  	// draw polyline with pen, node capture
 	{
 		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPenLineOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, view_panel_mgr, cmpt, cmpt);
+		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPenLineOP, d2d::SelectShapesOP>(editPanel, editPanel->GetStageImpl(), shapesImpl, propertyPanel, view_panel_mgr, cmpt, cmpt);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
 	}

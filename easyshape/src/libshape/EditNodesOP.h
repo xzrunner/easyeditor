@@ -9,7 +9,8 @@ namespace libshape
 class EditNodesOP : public SelectNodesOP
 {
 public:
-	EditNodesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+	EditNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);

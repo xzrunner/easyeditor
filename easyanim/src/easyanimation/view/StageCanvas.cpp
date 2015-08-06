@@ -19,7 +19,7 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 {
-	d2d::obj_assign((d2d::Object*&)m_background, symbol);
+	d2d::obj_assign<d2d::ISymbol>(m_background, symbol);
 }
 
 void StageCanvas::OnDrawSprites() const

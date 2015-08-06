@@ -9,7 +9,8 @@ namespace libshape
 class DrawCosineCurveOP : public DrawPolylineOP
 {
 public:
-	DrawCosineCurveOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+	DrawCosineCurveOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
 

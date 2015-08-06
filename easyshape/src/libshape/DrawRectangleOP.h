@@ -9,7 +9,7 @@ namespace libshape
 class DrawRectangleOP : public d2d::ZoomViewOP
 {
 public:
-	DrawRectangleOP(d2d::EditPanel* editPanel, bool bOpenRightTap = true);
+	DrawRectangleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool bOpenRightTap = true);
 	
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

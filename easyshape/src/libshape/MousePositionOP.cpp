@@ -3,10 +3,11 @@
 namespace libshape
 {
 
-MousePositionOP::MousePositionOP(d2d::EditPanel* editPanel, d2d::MousePositionCMPT* cmpt)
-	: d2d::MousePositionOP(editPanel, cmpt)
+MousePositionOP::MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+								 d2d::MousePositionCMPT* cmpt)
+	: d2d::MousePositionOP(wnd, stage, cmpt)
 {
-	m_draw_impl = new DrawPolylineOP(editPanel, false);
+	m_draw_impl = new DrawPolylineOP(wnd, stage, false);
 }
 
 MousePositionOP::~MousePositionOP()

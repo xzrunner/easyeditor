@@ -3,8 +3,6 @@
 
 #include "AbstractEditOP.h"
 
-#include "view/EditPanel.h"
-
 namespace d2d
 {
 
@@ -13,7 +11,7 @@ class IEditOPState;
 class ZoomViewOP : public AbstractEditOP
 {
 public:
-	ZoomViewOP(EditPanel* stage, bool mouse_move_focus,
+	ZoomViewOP(wxWindow* wnd, EditPanelImpl* stage, bool mouse_move_focus,
 		bool right_tap = false, bool left_tap = true);
 	virtual ~ZoomViewOP();
 

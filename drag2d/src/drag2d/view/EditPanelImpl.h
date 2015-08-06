@@ -1,58 +1,48 @@
-#ifndef _DRAG2D_EDIT_PANEL_H_
-#define _DRAG2D_EDIT_PANEL_H_
+#ifndef _DRAG2D_EDIT_PANEL_IMPL_H_
+#define _DRAG2D_EDIT_PANEL_IMPL_H_
 
+#include "HistoryList.h"
+#include "KeysState.h"
+
+#include "common/Object.h"
 #include "common/Vector.h"
 
 #include <wx/wx.h>
-#include <vector>
 
 namespace d2d
 {
 
-class ISprite;
+class EditPanel;
 class AbstractAtomicOP;
 class AbstractEditOP;
 class IStageCanvas;
 class Camera;
-class KeysState;
-class EditPanelImpl;
 
-class EditPanel : public wxPanel
+class EditPanelImpl : public Object
 {
 public:
-	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
-	virtual ~EditPanel();
+	EditPanelImpl(wxTopLevelWindow* frame, EditPanel* stage);
+	~EditPanelImpl();
 
-	//
-	// wxWindow
-	//
-	virtual void Clear();
-	virtual bool Update(int version) { return false; }
-
- 	virtual void OnSizeDebug(wxSizeEvent& event) {}
- 	virtual void OnMouseHook(wxMouseEvent& event) {}
- 	virtual void OnKeyHook(int key_code) {}
-
-	EditPanelImpl* GetStageImpl() { return m_impl; }
+	void SetEditPanelNull();
+	
+	void Clear();
 
 	Vector TransPosScrToProj(int x, int y) const;
 	Vector TransPosProjToScr(const Vector& proj) const;
 
 	void DrawEditOP() const;
 
-	const AbstractEditOP* GetEditOP() const;
-	AbstractEditOP* GetEditOP();
+	const AbstractEditOP* GetEditOP() const { return m_edit_op; }
+	AbstractEditOP* GetEditOP() { return m_edit_op; }
 	void SetEditOP(AbstractEditOP* editOP);
 
-	const IStageCanvas* GetCanvas() const;
-	IStageCanvas* GetCanvas();
+	const IStageCanvas* GetCanvas() const { return m_canvas; }
+	IStageCanvas* GetCanvas() { return m_canvas; }
 	void SetCanvas(IStageCanvas* canvas);
 
-	Camera* GetCamera() const;
+	Camera* GetCamera() const { return m_camera; }
 
-	// In Stage, class StagePanel can't get focus, only its class IStageCanvas has the focus, so 
-	// these two func should be called by IStageCanvas.
-	// While in SymbolEdit, class SymbolEditPanel can get focus.
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
@@ -78,21 +68,35 @@ public:
 	void SetCanvasDirty();
 
 	bool GetKeyState(int key) const;
-	const KeysState& GetKeyState() const;
-	KeysState& GetKeyState();
+	const KeysState& GetKeyState() const { return m_keys_state; }
+	KeysState& GetKeyState() { return m_keys_state; }
 
 	void RefreshFrame();
 
-protected:
 	void OnSize(wxSizeEvent& event);
 
+	void SetCursor(wxCursor cursor);
+	void SetFocus();
+
+	void PopupMenu(wxMenu* menu, int x, int y);
+
+protected:
+	AbstractEditOP* m_edit_op;
+
+	IStageCanvas* m_canvas;
+	Camera* m_camera;
+
+	wxTopLevelWindow* m_frame;
+
 private:
-	EditPanelImpl* m_impl;
+	EditPanel* m_stage;
 
-	DECLARE_EVENT_TABLE()
+	HistoryList m_history_list;
 
-}; // EditPanel
+	KeysState m_keys_state;
+
+}; // EditPanelImpl
 
 }
 
-#endif // _DRAG2D_EDIT_PANEL_H_
+#endif // _DRAG2D_EDIT_PANEL_IMPL_H_

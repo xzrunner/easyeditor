@@ -6,13 +6,14 @@
 
 #include "Screen.h"
 #include "common/Color.h"
+#include "common/Object.h"
 
 namespace d2d
 {
 
 class EditPanel;
 
-class IStageCanvas : public wxGLCanvas
+class IStageCanvas : public wxGLCanvas, public Object
 {
 public:
 	IStageCanvas(EditPanel* stage);

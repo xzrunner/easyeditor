@@ -11,7 +11,7 @@ namespace preview
 class CtrlCamOP : public d2d::AbstractEditOP
 {
 public:
-	CtrlCamOP(d2d::EditPanel* editPanel);
+	CtrlCamOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 
 	virtual bool OnKeyDown(int keyCode);
 

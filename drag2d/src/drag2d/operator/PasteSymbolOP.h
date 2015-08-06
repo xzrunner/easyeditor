@@ -1,33 +1,39 @@
-#pragma once
+#ifndef _DRAG2D_PASTE_SYMBOL_H_
+#define _DRAG2D_PASTE_SYMBOL_H_
 
 #include "ZoomViewOP.h"
 
+#include "common/Vector.h"
+
 namespace d2d
 {
-	class MultiSpritesImpl;
-	class LibraryPanel;
 
-	class PasteSymbolOP : public ZoomViewOP
-	{
-	public:
-		PasteSymbolOP(EditPanel* editPanel, MultiSpritesImpl* panelImpl, 
-			LibraryPanel* libraryPanel, float* pScale = NULL);
+class MultiSpritesImpl;
+class LibraryPanel;
 
-		virtual bool OnMouseLeftDown(int x, int y);
-		virtual bool OnMouseMove(int x, int y);
+class PasteSymbolOP : public ZoomViewOP
+{
+public:
+	PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* panelImpl, 
+		LibraryPanel* libraryPanel, float* pScale = NULL);
 
-		virtual bool OnDraw() const;
-		virtual bool Clear();
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
 
-	protected:
-		MultiSpritesImpl* m_panelImpl;
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
-		LibraryPanel* m_libraryPanel;
+protected:
+	MultiSpritesImpl* m_panelImpl;
 
-		float* m_pScale;
+	LibraryPanel* m_libraryPanel;
 
-		Vector m_pos;
+	float* m_pScale;
 
-	}; // PasteSymbolOP
+	Vector m_pos;
+
+}; // PasteSymbolOP
+
 }
 
+#endif // _DRAG2D_PASTE_SYMBOL_H_

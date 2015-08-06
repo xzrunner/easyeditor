@@ -5,9 +5,9 @@
 namespace ecomplex
 {
 
-PreviewEditOP::PreviewEditOP(d2d::EditPanel* stage, 
+PreviewEditOP::PreviewEditOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 							 const std::vector<const d2d::ISprite*>& sprites)
-	: d2d::ZoomViewOP(stage, true)
+	: d2d::ZoomViewOP(wnd, stage, true)
 	, m_sprites(sprites)
 {
 }

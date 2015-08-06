@@ -9,7 +9,7 @@ namespace epseudo3d
 class Proj2DEditOP : public d2d::AbstractEditOP
 {
 public:
-	Proj2DEditOP(d2d::EditPanel* stage);
+	Proj2DEditOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 	virtual ~Proj2DEditOP();
 
 	virtual bool OnKeyDown(int keyCode);

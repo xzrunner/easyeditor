@@ -10,7 +10,8 @@ namespace ephysics
 class DragPhysicsOP : public d2d::ZoomViewOP
 {
 public:
-	DragPhysicsOP(d2d::EditPanel* editPanel, b2World* world, b2Body* ground);
+	DragPhysicsOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		b2World* world, b2Body* ground);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

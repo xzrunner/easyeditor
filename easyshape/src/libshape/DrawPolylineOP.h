@@ -9,7 +9,7 @@ namespace libshape
 class DrawPolylineOP : public d2d::ZoomViewOP
 {
 public:
-	DrawPolylineOP(d2d::EditPanel* editPanel, bool isClosed);
+	DrawPolylineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool isClosed);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);

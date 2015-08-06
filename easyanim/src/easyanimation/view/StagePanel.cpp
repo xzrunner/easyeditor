@@ -16,12 +16,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::ViewPanelMgr* view_panel_mgr,
 					   Controller* ctrl)
 	: EditPanel(parent, frame)
-	, MultiSpritesImpl(this)
+	, MultiSpritesImpl(GetStageImpl())
 	, m_ctrl(ctrl)
+	, m_view_panel_mgr(view_panel_mgr)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	m_edit_op = new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl);
-	m_canvas = new StageCanvas(this);
+	SetEditOP(new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl));
+	SetCanvas(new StageCanvas(this));
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, m_ctrl->GetLibraryPanel()));
 
@@ -44,10 +45,14 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
 	MultiSpritesImpl::ReorderSprite(sprite, up);
 
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->ReorderSprite(sprite, up, this);
+	}
+
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool ret = frame->Reorder(sprite, up);
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -68,13 +73,16 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 	assert(frame);
 	frame->Insert(sprite);
 
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->InsertSprite(sprite, this);
+	}
 	if (ud) {
 		m_ctrl->setCurrFrame(old_layer, old_frame);
 	}
 
 	m_ctrl->Refresh();
 
-	m_canvas->SetDirty();
+	GetCanvas()->SetDirty();
 
 	return true;
 }
@@ -83,11 +91,15 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
 	MultiSpritesImpl::RemoveSprite(sprite);
 
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->RemoveSprite(sprite, this);
+	}
+
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool success = frame->Remove(sprite);
 	if (success) {
 		m_ctrl->Refresh();
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return success;
 }
@@ -100,7 +112,7 @@ bool StagePanel::ClearAllSprite()
 	m_ctrl->setCurrFrame(-1, -1);
 
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 
 // 	Context* context = Context::Instance();
@@ -156,13 +168,13 @@ SkeletonData& StagePanel::getSkeletonData()
 
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
-	m_edit_op->OnPopMenuSelected(Menu_AddJointNode);
+	GetEditOP()->OnPopMenuSelected(Menu_AddJointNode);
 	SetCanvasDirty();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
-	m_edit_op->OnPopMenuSelected(Menu_DelJointNode);
+	GetEditOP()->OnPopMenuSelected(Menu_DelJointNode);
 	SetCanvasDirty();
 }
 

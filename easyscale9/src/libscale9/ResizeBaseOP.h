@@ -9,7 +9,7 @@ namespace escale9
 	class ResizeBaseOP : public d2d::ZoomViewOP
 	{
 	public:
-		ResizeBaseOP(d2d::EditPanel* editPanel, Symbol* symbol);
+		ResizeBaseOP(wxWindow* wnd, d2d::EditPanelImpl* stage, Symbol* symbol);
 
 		virtual bool OnMouseLeftDown(int x, int y);
 		virtual bool OnMouseLeftUp(int x, int y);

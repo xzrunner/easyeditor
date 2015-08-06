@@ -15,7 +15,7 @@ DrawPolygon2CMPT::DrawPolygon2CMPT(wxWindow* parent, const wxString& name, d2d::
 	{
 		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>
-			(editPanel, shapesImpl, property, view_panel_mgr, cmpt, cmpt);
+			(editPanel, editPanel->GetStageImpl(), shapesImpl, property, view_panel_mgr, cmpt, cmpt);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
 	}

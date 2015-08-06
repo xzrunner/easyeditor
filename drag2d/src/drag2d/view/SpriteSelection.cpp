@@ -1,14 +1,25 @@
 #include "SpriteSelection.h"
 #include "IStageCanvas.h"
 
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-SpriteSelection::SpriteSelection(EditPanel* stage)
+SpriteSelection::SpriteSelection(EditPanelImpl* stage)
 	: m_stage(stage)
 {
+	if (stage) {
+		stage->Retain();
+	}
+	m_stage = stage;
+}
+
+SpriteSelection::~SpriteSelection()
+{
+	if (m_stage) {
+		m_stage->Release();
+	}
 }
 
 void SpriteSelection::Clear()

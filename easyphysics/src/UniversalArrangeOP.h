@@ -15,7 +15,7 @@ class AbstractEditCMPT;
 class UniversalArrangeOP : public d2d::ZoomViewOP
 {
 public:
-	UniversalArrangeOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl,
+	UniversalArrangeOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
 		d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback = NULL);
 	virtual ~UniversalArrangeOP();
 

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_PASTE_SYMBOL_CAPTURE_OP_H_
+#define _DRAG2D_PASTE_SYMBOL_CAPTURE_OP_H_
 
 #include "PasteSymbolOP.h"
 
@@ -6,27 +7,30 @@
 
 namespace d2d
 {
-	class PasteSymbolCaptureOP;
-	class MultiSpritesImpl;
-	class LibraryPanel;
 
-	class PasteSymbolCaptureOP : public PasteSymbolOP
-	{
-	public:
-		PasteSymbolCaptureOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-			LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
+class PasteSymbolCaptureOP;
+class MultiSpritesImpl;
+class LibraryPanel;
 
-		virtual bool OnMouseLeftDown(int x, int y);
-		virtual bool OnMouseMove(int x, int y);
+class PasteSymbolCaptureOP : public PasteSymbolOP
+{
+public:
+	PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
+		LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
 
-		virtual bool Clear();
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
 
-	private:
-		PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* m_cmpt;
+	virtual bool Clear();
 
-		bool m_bCaptured;
-		Vector m_lastPos;
+private:
+	PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* m_cmpt;
 
-	}; // PasteSymbolCaptureOP
+	bool m_bCaptured;
+	Vector m_lastPos;
+
+}; // PasteSymbolCaptureOP
+
 }
 
+#endif // _DRAG2D_PASTE_SYMBOL_CAPTURE_OP_H_

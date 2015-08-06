@@ -1,30 +1,34 @@
-#pragma once
+#ifndef _DRAG2D_ARRANGE_SPRITE_FIX_OP_H_
+#define _DRAG2D_ARRANGE_SPRITE_FIX_OP_H_
 
 #include "ArrangeSpriteOP.h"
 #include "SelectSpritesOP.h"
 
 namespace d2d
 {
-	class ArrangeSpriteFixOP : public ArrangeSpriteOP<SelectSpritesOP>
-	{
-	public:
-		ArrangeSpriteFixOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-			PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
-			AbstractEditCMPT* callback = NULL, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 
-		virtual bool OnMouseLeftUp(int x, int y);
-		//virtual bool OnMouseRightDown(int x, int y);
-		virtual bool OnMouseRightUp(int x, int y);
+class ArrangeSpriteFixOP : public ArrangeSpriteOP<SelectSpritesOP>
+{
+public:
+	ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
+		PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
+		AbstractEditCMPT* callback = NULL, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 
-	private:
-		// todo cost!
-		void fixSpritesLocation(const std::vector<ISprite*>& sprites);
+	virtual bool OnMouseLeftUp(int x, int y);
+	//virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
 
-		void FixSpritesLocation();
+private:
+	// todo cost!
+	void fixSpritesLocation(const std::vector<ISprite*>& sprites);
 
-	private:
-		MultiSpritesImpl* m_spritesImpl;
+	void FixSpritesLocation();
 
-	}; // ArrangeSpriteFixOP
+private:
+	MultiSpritesImpl* m_spritesImpl;
+
+}; // ArrangeSpriteFixOP
+
 }
 
+#endif // _DRAG2D_ARRANGE_SPRITE_FIX_OP_H_

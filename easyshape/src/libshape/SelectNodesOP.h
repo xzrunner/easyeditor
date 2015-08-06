@@ -11,7 +11,7 @@ class ChainShape;
 class SelectNodesOP : public DrawRectangleOP
 {
 public:
-	SelectNodesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl, 
+	SelectNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl, 
 		d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback = NULL);
 	virtual ~SelectNodesOP();
 

@@ -1,6 +1,7 @@
 #include "MousePositionCMPT.h"
 
 #include "operator/MousePositionOP.h"
+#include "view/EditPanel.h"
 
 namespace d2d
 {
@@ -10,7 +11,7 @@ MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const wxString& name,
 	: AbstractEditCMPT(parent, name, editPanel)
 {
 	if (create_op) {
-		m_editOP = new MousePositionOP(editPanel, this);
+		m_editOP = new MousePositionOP(editPanel, editPanel->GetStageImpl(), this);
 	}
 }
 

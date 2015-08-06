@@ -12,7 +12,7 @@ class IEditState;
 class EditCameraOP : public d2d::AbstractEditOP
 {
 public:
-	EditCameraOP(d2d::EditPanel* stage);
+	EditCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 	virtual ~EditCameraOP();
 
 	virtual bool OnKeyDown(int keyCode);

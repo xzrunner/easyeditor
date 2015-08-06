@@ -24,21 +24,21 @@ Object::Release() const
 	}
 }
 
-inline void 
-obj_assign(Object*& left, Object* right)
-{
-	if (left == right) {
-		return;
-	}
-
-	if (left) {
-		left->Release();
-	}
-	left = right;
-	if (right) {
-		right->Retain();
-	}
-}
+// inline void 
+// obj_assign(Object*& left, Object*& right)
+// {
+// 	if (left == right) {
+// 		return;
+// 	}
+// 
+// 	if (left) {
+// 		left->Release();
+// 	}
+// 	left = right;
+// 	if (right) {
+// 		right->Retain();
+// 	}
+// }
 
 } // d2d
 

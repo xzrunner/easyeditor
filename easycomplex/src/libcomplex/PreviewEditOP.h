@@ -9,7 +9,8 @@ namespace ecomplex
 class PreviewEditOP : public d2d::ZoomViewOP
 {
 public:
-	PreviewEditOP(d2d::EditPanel* stage, const std::vector<const d2d::ISprite*>& sprites);
+	PreviewEditOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		const std::vector<const d2d::ISprite*>& sprites);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 

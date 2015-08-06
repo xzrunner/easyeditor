@@ -4,8 +4,8 @@
 namespace libshape
 {
 
-DrawCurveOP::DrawCurveOP(d2d::EditPanel* editPanel)
-	: d2d::ZoomViewOP(editPanel, true)
+DrawCurveOP::DrawCurveOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::ZoomViewOP(wnd, stage, true)
 	, m_startDraw(false)
 	, m_straight_mode(false)
 {

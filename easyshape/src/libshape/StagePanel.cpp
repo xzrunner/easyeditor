@@ -13,7 +13,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, MultiShapesImpl(this)
 	, m_toolbar(NULL)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 	m_symbol = new Symbol;
 
 	SetDropTarget(new DropTarget(this, library));
@@ -25,7 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, MultiShapesImpl(this)
 	, m_toolbar(NULL)
 {
-	m_canvas = new StageCanvas(this, edited, bg_sprites);
+	SetCanvas(new StageCanvas(this, edited, bg_sprites));
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->Retain();
@@ -38,7 +38,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, MultiShapesImpl(this)
 	, m_toolbar(NULL)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 	m_symbol = symbol;
 	if (m_symbol) {
 		m_symbol->Retain();
@@ -67,7 +67,7 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 		ret = m_symbol->Add(shape);
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -79,7 +79,7 @@ bool StagePanel::RemoveShape(d2d::IShape* shape)
 		ret = m_symbol->Remove(shape);
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -91,7 +91,7 @@ bool StagePanel::ClearAllShapes()
 		ret = m_symbol->Clear();
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 	return ret;
 }
@@ -129,7 +129,7 @@ void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 		if (m_toolbar) {
 			m_toolbar->SelectSuitableEditOP();
 		}
-		m_canvas->SetDirty();
+		GetCanvas()->SetDirty();
 	}
 }
 

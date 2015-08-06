@@ -9,7 +9,7 @@ namespace libshape
 class DrawCurveOP : public d2d::ZoomViewOP
 {
 public:
-	DrawCurveOP(d2d::EditPanel* editPanel);
+	DrawCurveOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

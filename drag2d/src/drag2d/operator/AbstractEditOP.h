@@ -8,13 +8,13 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 
 class AbstractEditOP : public Object
 {
 public:
-	AbstractEditOP(EditPanel* editPanel);
-	virtual ~AbstractEditOP() {}
+	AbstractEditOP(wxWindow* wnd, EditPanelImpl* stage);
+	virtual ~AbstractEditOP();
 
 	virtual bool OnKeyDown(int keyCode) { return false; }
 	virtual bool OnKeyUp(int keyCode) { return false; }
@@ -37,7 +37,9 @@ public:
 	virtual bool IsEmpty() const { return true; }
 
 protected:
-	EditPanel* m_stage;
+	wxWindow* m_wnd;
+
+	EditPanelImpl* m_stage;
 
 	wxCursor m_cursor;
 

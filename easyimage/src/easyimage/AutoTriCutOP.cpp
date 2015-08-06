@@ -3,8 +3,8 @@
 namespace eimage
 {
 
-AutoTriCutOP::AutoTriCutOP(d2d::EditPanel* stage)
-	: d2d::ZoomViewOP(stage, true)
+AutoTriCutOP::AutoTriCutOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::ZoomViewOP(wnd, stage, true)
 {
 }
 

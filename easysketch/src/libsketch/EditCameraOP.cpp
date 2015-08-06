@@ -7,8 +7,8 @@
 namespace libsketch
 {
 
-EditCameraOP::EditCameraOP(d2d::EditPanel* stage)
-	: d2d::AbstractEditOP(stage)
+EditCameraOP::EditCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
+	: d2d::AbstractEditOP(wnd, stage)
 	, m_curr(NULL)
 {
 	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());

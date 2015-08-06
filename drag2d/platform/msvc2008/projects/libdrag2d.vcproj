@@ -2045,6 +2045,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\EditPanelImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\EditPanelImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\HistoryList.cpp"
 					>
 				</File>

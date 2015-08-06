@@ -11,8 +11,8 @@ struct PlaySettings;
 class PreviewOP : public d2d::ZoomViewOP
 {
 public:
-	PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
-		d2d::PlayControl& control);
+	PreviewOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		PlaySettings& settings, d2d::PlayControl& control);
 
 	virtual bool OnKeyDown(int keyCode);
 

@@ -10,9 +10,9 @@
 namespace eanim
 {
 
-SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 								 d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr, callback)
+	: d2d::SelectSpritesOP(wnd, stage, spritesImpl, view_panel_mgr, callback)
 {
 }
 
@@ -25,7 +25,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::EditDialog dlg(m_stage, sprite);
+		emesh::EditDialog dlg(m_wnd, sprite);
 		dlg.ShowModal();
 
 		m_stage->ResetCanvas();

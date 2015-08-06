@@ -5,11 +5,12 @@
 namespace libshape
 {
 
-EditCircleOP::EditCircleOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl, 
+EditCircleOP::EditCircleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+						   d2d::MultiShapesImpl* shapesImpl, 
 						   d2d::PropertySettingPanel* propertyPanel, 
 						   d2d::ViewPanelMgr* view_panel_mgr,
 						   d2d::OneFloatValue* node_capture)
-	: ZoomViewOP(editPanel, true)
+	: ZoomViewOP(wnd, stage, true)
 	, m_propertyPanel(propertyPanel)
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_shapesImpl(shapesImpl)
