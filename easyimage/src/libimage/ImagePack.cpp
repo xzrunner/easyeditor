@@ -206,20 +206,6 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool
 	AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude_left, extrude_bottom, extrude_right, extrude_up);
 }
 
-void ImagePack::PreMuiltiAlpha()
-{
-	int pos = 0;
-	for (int y = 0; y < m_height; ++y) {
-		for (int x = 0; x < m_width; ++x) {
-			float alpha = m_pixels[pos + 3] / 255.0f;
-			for (int i = 0; i < 3; ++i) {
-				m_pixels[pos + i] = m_pixels[pos + i] * alpha;
-			}
-			pos += 4;
-		}
-	}
-}
-
 void ImagePack::OutputToFile(const wxString& filepath) const
 {
 	ImageIO::Write(m_pixels, m_width, m_height, filepath.mb_str());

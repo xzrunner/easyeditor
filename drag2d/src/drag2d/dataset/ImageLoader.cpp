@@ -58,6 +58,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 
 	if (channels == 4) {
 		FormatPixelsAlpha(data, width, height, 0);
+		PreMuiltiAlpha(data, width, height);
 	}
 
 	if (format == 0)
@@ -448,6 +449,20 @@ uint8_t* ImageLoader::loadPGM(const std::string& filename, int& width, int& heig
 	fin.close();
 
 	return pixels;
+}
+
+void ImageLoader::PreMuiltiAlpha(uint8_t* pixels, int width, int height)
+{
+	int pos = 0;
+	for (int y = 0; y < height; ++y) {
+		for (int x = 0; x < width; ++x) {
+			float alpha = pixels[pos + 3] / 255.0f;
+			for (int i = 0; i < 3; ++i) {
+				pixels[pos + i] = pixels[pos + i] * alpha;
+			}
+			pos += 4;
+		}
+	}
 }
 
 }

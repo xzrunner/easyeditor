@@ -155,8 +155,6 @@ void NormalPack::OutputImage(const std::string& filepath) const
 			img->Release();
 		}
 
-		pack.PreMuiltiAlpha();
-
 		std::string out_filepath = filepath;
 		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::IntToString(i + 1));
 		pack.OutputToFile(out_filepath);

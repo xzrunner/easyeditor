@@ -27,6 +27,8 @@ private:
 	static uint8_t* loadPPM(const std::string& filename, int& width, int& height);
 	static uint8_t* loadPGM(const std::string& filename, int& width, int& height);
 
+	static void PreMuiltiAlpha(uint8_t* pixels, int width, int height);
+
 }; // ImageLoader
 
 }

@@ -24,8 +24,6 @@ public:
 	void AddImage(const d2d::Image* img, int x, int y, int w, int h, bool rotate, bool clockwise, 
 		bool bpp4 = true, int extrude_left = 0, int extrude_bottom = 0, int extrude_right = 0, int extrude_up = 0);
 
-	void PreMuiltiAlpha();
-
 	void OutputToFile(const wxString& filepath) const;
 
 	uint8_t* GetPixels() const { return m_pixels; }
