@@ -46,7 +46,7 @@ void LRPacker::Run(int argc, char *argv[])
 
 	// 0
 	LRExpansion exp;
-//	exp.Run(argv[2]);
+	exp.Run(argv[2]);
 
 	// 1
 	SeparateToComplex sep;
