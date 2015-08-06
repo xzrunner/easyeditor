@@ -39,13 +39,15 @@ void LRExpansion::Run(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+
 	Json::Value new_lr_val = lr_val;
 
 	int idx = 0;
 	Json::Value layer_val = lr_val["layer"][idx++];
 	while (!layer_val.isNull()) {
 		if (!layer_val["base filepath"].isNull()) {
-			ExtendLayer(layer_val["base filepath"].asString(), idx-1, new_lr_val);
+			ExtendLayer(dir, layer_val["base filepath"].asString(), idx-1, new_lr_val);
 		}
 		layer_val = lr_val["layer"][idx++];
 	}
@@ -66,19 +68,21 @@ std::string LRExpansion::GetOutputFilepath(const std::string& filepath) const
 	return out_path;
 }
 
-void LRExpansion::ExtendLayer(const std::string& filepath, int layer_idx, Json::Value& dst_val)
+void LRExpansion::ExtendLayer(const std::string& dir, const std::string& filepath, 
+							  int layer_idx, Json::Value& dst_val)
 {
 	Json::Value lr_val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
+	std::string full_path = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+	std::ifstream fin(full_path.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, lr_val);
 	fin.close();
 
 	const Json::Value& src_layer_val = lr_val["layer"][layer_idx];
 	if (!src_layer_val["base filepath"].isNull()) {
-		ExtendLayer(src_layer_val["base filepath"].asString(), layer_idx, dst_val);
+		ExtendLayer(dir, src_layer_val["base filepath"].asString(), layer_idx, dst_val);
 	}
 
 	Json::Value& dst_layer_val = dst_val["layer"][layer_idx];

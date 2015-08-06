@@ -28,7 +28,7 @@ public:
 	std::string GetOutputFilepath(const std::string& filepath) const;
 
 private:
-	void ExtendLayer(const std::string& filepath, int layer_idx, Json::Value& dst_val);
+	void ExtendLayer(const std::string& dir, const std::string& filepath, int layer_idx, Json::Value& dst_val);
 
 }; // LRExpansion
 
