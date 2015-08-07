@@ -138,6 +138,12 @@ void Code::resolve()
 			s = wxString::FromDouble(data.val1);
 			lua::assign(m_gen, "['max_rotate']", s+",");
 
+			cp->GetValue(PS_ALPHA, data);
+			s = wxString::FromDouble(data.val0);
+			lua::assign(m_gen, "['start_alpha']", s+",");
+			s = wxString::FromDouble(data.val1);
+			lua::assign(m_gen, "['end_alpha']", s+",");
+
 			s = wxString::FromDouble(cp->m_startz->GetValue());
 			lua::assign(m_gen, "['start_z']", s+",");
 		}

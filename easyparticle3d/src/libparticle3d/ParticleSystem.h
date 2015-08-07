@@ -1,8 +1,6 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
-#include <easyscale9.h>
-
 #include <drag2d.h>
 #include <easy3d.h>
 
@@ -27,6 +25,8 @@ struct ParticleChild
 	float start_scale, end_scale;
 
 	float min_rotate, max_rotate;
+
+	float start_alpha, end_alpha;
 
 	ParticleChild(d2d::ISymbol* symbol) 
 		: symbol(symbol), bind_ps(NULL)

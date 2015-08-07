@@ -89,6 +89,7 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	cp->m_name->SetValue(child.name);
 	cp->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
 	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(child.min_rotate, child.max_rotate));
+	cp->SetValue(PS_ALPHA, d2d::UICallback::Data(child.start_alpha, child.end_alpha));
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();
 	}
@@ -484,6 +485,10 @@ SetValue(int key, const d2d::UICallback::Data& data)
 		m_pc->min_rotate = data.val0 * d2d::TRANS_DEG_TO_RAD;
 		m_pc->max_rotate = data.val1 * d2d::TRANS_DEG_TO_RAD;
 		break;
+	case PS_ALPHA:
+		m_pc->start_alpha = data.val0 * 0.01f;
+		m_pc->end_alpha = data.val1 * 0.01f;
+		break;
 	}
 }
 
@@ -499,6 +504,10 @@ GetValue(int key, d2d::UICallback::Data& data)
 	case PS_ROTATE:
 		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG;
 		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG;
+		break;
+	case PS_ALPHA:
+		data.val0 = m_pc->start_alpha * 100;
+		data.val1 = m_pc->end_alpha * 100;
 		break;
 	}
 }
@@ -540,6 +549,12 @@ InitLayout()
 	topSizer->Add(s_rotate);
 	topSizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);
+	// Alpha
+	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, "Alpha", "alpha", this, PS_ALPHA, 
+		d2d::SliderItem("start", "start", 100, 0, 100), d2d::SliderItem("end", "end", 100, 0, 100));
+	topSizer->Add(s_alpha);
+	topSizer->AddSpacer(10);
+	m_sliders.push_back(s_alpha);
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);

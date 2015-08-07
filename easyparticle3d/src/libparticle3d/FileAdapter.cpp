@@ -110,6 +110,14 @@ void FileAdapter::load(const char* filename, int version)
 				child.max_rotate = c_rotate + d_rotate;
 			}
 		}
+
+		if (!childValue["alpha"].isNull()) {
+			child.start_alpha = childValue["alpha"]["start"].asInt();
+			child.end_alpha = childValue["alpha"]["end"].asInt();
+		} else {
+			child.start_alpha = child.end_alpha = 1;
+		}
+
 		child.start_z = childValue["start_z"].asInt();
 
 		children.push_back(child);

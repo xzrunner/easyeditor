@@ -41,6 +41,7 @@ private:
 
 		std::string symbol;
 		float start_scale, end_scale; 
+		float start_alpha, end_alpha;
 
 	}; // Item
 

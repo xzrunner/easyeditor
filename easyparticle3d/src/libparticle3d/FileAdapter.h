@@ -24,6 +24,8 @@ public:
 
 		float min_rotate, max_rotate;
 
+		float start_alpha, end_alpha;
+
 		float start_z;
 	};
 

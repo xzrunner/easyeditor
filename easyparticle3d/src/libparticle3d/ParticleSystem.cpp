@@ -249,7 +249,11 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 		}
 
 		d2d::Vector pos = TransCoords3To2(p->position, direction);
-		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
+		
+		float proc = (p->lifetime - p->life) / p->lifetime;
+		float s = proc * (p->pc->end_scale - p->pc->start_scale) + p->pc->start_scale;
+		float alpha = proc * (p->pc->end_alpha - p->pc->start_alpha) + p->pc->start_alpha;
+		multi.a *= alpha;
 
 		d2d::Matrix _mt(mt);
 		_mt.translate(p->pos.x, p->pos.y);

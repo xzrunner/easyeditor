@@ -160,6 +160,8 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 		pc->end_scale = child.end_scale * 0.01f;
 		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
 		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
+		pc->start_alpha = child.start_alpha * 0.01f;
+		pc->end_alpha = child.end_alpha * 0.01f;
 
 		ps->addChild(pc);
 	}

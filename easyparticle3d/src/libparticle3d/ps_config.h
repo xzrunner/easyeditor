@@ -20,6 +20,7 @@ enum PS_PROPERTY
 
 	PS_SCALE,
 	PS_ROTATE,
+	PS_ALPHA,
 };
 
 }

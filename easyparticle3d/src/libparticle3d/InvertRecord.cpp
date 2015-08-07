@@ -67,8 +67,12 @@ Item(Particle* p)
 	angle = p->angle;
 
 	symbol = p->pc->symbol->GetFilepath();
+
 	start_scale = p->pc->start_scale;
 	end_scale = p->pc->end_scale;
+
+	start_alpha = p->pc->start_alpha;
+	end_alpha = p->pc->end_alpha;
 }
 
 void InvertRecord::Item::
@@ -93,6 +97,8 @@ StoreToFile(Json::Value& val) const
 	val["symbol"] = symbol;
 	val["start_scale"] = start_scale;
 	val["end_scale"] = end_scale;
+	val["start_alpha"] = start_alpha;
+	val["end_alpha"] = end_alpha;
 }
 
 }
