@@ -101,7 +101,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_library->SetStagePanel(m_stage);
 	m_library->InitPages(m_stage, m_property, &m_view_panel_mgr);
 	m_library->SetCanvas(m_stage->GetCanvas());
-	m_property->SetEditPanel(m_stage);
+	m_property->SetEditPanel(m_stage->GetStageImpl());
 
 	return m_stage;
 }
@@ -110,7 +110,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_viewlist = new d2d::ViewlistPanel(split, m_stage, m_stage, &m_view_panel_mgr);
+	m_viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage, &m_view_panel_mgr);
 	m_library->SetViewlist(m_viewlist);
 	m_view_panel_mgr.AddSpritePanel(m_viewlist);
 

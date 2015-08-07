@@ -11,9 +11,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, m_ps(NULL)
 {
-	m_edit_op = new EditOP(this);
-
-	m_canvas = new StageCanvas(this);
+	SetEditOP(new EditOP(this));
+	SetCanvas(new StageCanvas(this));
 }
 
 StagePanel::~StagePanel()
@@ -28,7 +27,7 @@ void StagePanel::Clear()
 
 void StagePanel::OnSizeDebug(wxSizeEvent& event)
 {
-	m_canvas->SetSize(event.GetSize()); 
+	GetCanvas()->SetSize(event.GetSize()); 
 }
 
 }

@@ -29,8 +29,8 @@ void MainDialog::InitLayout()
 	cam->SetScale(old_scale / PREVIEW_SCALE);
 	stage->SetCanvasDirty();
 
-	stage->SetCanvas(new StageCanvas(stage, m_control, m_sprites));
-	stage->SetEditOP(new CtrlCamOP(stage));
+	stage->SetCanvas(new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites));
+	stage->SetEditOP(new CtrlCamOP(stage, stage->GetStageImpl()));
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);

@@ -7,7 +7,7 @@ namespace emap
 
 PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library,
 							 d2d::PropertySettingPanel* property)
-	: d2d::PasteSymbolOP(stage, stage, library)
+	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), stage, library)
 	, m_property(property)
 {
 }
@@ -21,8 +21,8 @@ PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library,
 
 void PasteSymbolOP::ChangeCurrOP()
 {
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
-	d2d::AbstractEditOP* editop = new d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, m_property);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	d2d::AbstractEditOP* editop = new d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, m_property);
 
 	m_stage->SetEditOP(editop);	
 }

@@ -13,11 +13,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, d2d::ShapesPanelImpl(GetStageImpl())
 {
-	m_paste_op = new d2d::PasteSymbolOP(this, this, library);
+	m_paste_op = new d2d::PasteSymbolOP(this, GetStageImpl(), this, library);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
 
-	m_edit_op = m_paste_op;
-	m_canvas = new StageCanvas(this);
+	SetEditOP(m_paste_op);
+	SetCanvas(new StageCanvas(this));
 }
 
 StagePanel::~StagePanel()
@@ -37,14 +37,14 @@ void StagePanel::OnMouseHook(wxMouseEvent& event)
 
 void StagePanel::ChangeEditOP()
 {
-	if (!m_edit_op->IsEmpty()) {
+	if (!GetEditOP()->IsEmpty()) {
 		return;
 	}
 
-	if (m_edit_op == m_arrange_op) {
-		m_edit_op = m_paste_op;
+	if (GetEditOP() == m_arrange_op) {
+		SetEditOP(m_paste_op);
 	} else {
-		m_edit_op = m_arrange_op;
+		SetEditOP(m_arrange_op);
 	}
 }
 

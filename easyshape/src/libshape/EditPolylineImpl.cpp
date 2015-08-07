@@ -20,6 +20,8 @@ EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, d2d::EditPanelImpl* stage,
 								   d2d::AbstractEditOP* select_op,
 								   IOperaterBase* base_op)
 {
+	m_stage = stage;
+
 	m_shapesImpl = shapesImpl;
 
 	m_propertyPanel = propertyPanel;

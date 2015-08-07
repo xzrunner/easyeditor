@@ -81,7 +81,7 @@ void UniversalArrangeOP::addPhysicsEditOP(b2World* world, b2Body* ground)
 {
 	PhysicsOP physics;
 	physics.world = world;
-	physics.editOP = new DragPhysicsOP(m_stage, world, ground);
+	physics.editOP = new DragPhysicsOP(m_wnd, m_stage, world, ground);
 	m_physics.push_back(physics);
 }
 

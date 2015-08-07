@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library,
 					   d2d::ViewPanelMgr* view_panel_mgr)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(this)
+	, d2d::MultiSpritesImpl(GetStageImpl())
 	, d2d::MultiShapesImpl(GetStageImpl())
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_library(library)
@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_pathfinding(NULL)
 	, m_enable_update(true)
 {
-	SetDropTarget(new d2d::SpriteDropTarget(this, this, library));
+	SetDropTarget(new d2d::SpriteDropTarget(this, GetStageImpl(), library));
 
 	if (OPEN_GRIDS) {
 		m_grids = new Grids;
@@ -50,13 +50,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 
 	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_chara_dirs);
-	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, 
+	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
 		m_view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
 
-	m_edit_op = m_arrange_op;
-	m_edit_op->Retain();
-
-	m_canvas = new StageCanvas(this);
+	SetEditOP(m_arrange_op);
+	SetCanvas(new StageCanvas(this));
 }
 
 StagePanel::~StagePanel()
@@ -114,7 +112,7 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSprite(sprite, up)) {
 			ret = true;
-			m_canvas->SetDirty();
+			SetCanvasDirty();
 			break;
 		}
 	}
@@ -150,7 +148,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 	}
 
 	if (ret) {
-		m_canvas->SetDirty();
+		SetCanvasDirty();
 	}
 
 	return ret;
@@ -166,7 +164,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 		Layer* layer = m_layers[i];
 		if (layer->RemoveSprite(sprite)) {
 			ret = true;
-			m_canvas->SetDirty();
+			SetCanvasDirty();
 			break;
 		}
 	}
@@ -190,7 +188,7 @@ bool StagePanel::ClearAllSprite()
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		if (m_layers[i]->ClearSprite()) {
 			ret = true;
-			m_canvas->SetDirty();
+			SetCanvasDirty();
 		}
 	}
 	return ret;
@@ -235,7 +233,7 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 	}
 
 	if (ret) {
-		m_canvas->SetDirty();
+		SetCanvasDirty();
 	}
 
 	return ret;
@@ -253,7 +251,7 @@ bool StagePanel::RemoveShape(d2d::IShape* shape)
 		}
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		SetCanvasDirty();
 	}
 	return ret;
 }
@@ -267,7 +265,7 @@ bool StagePanel::ClearAllShapes()
 		}
 	}
 	if (ret) {
-		m_canvas->SetDirty();
+		SetCanvasDirty();
 	}
 	return ret;
 }
@@ -379,15 +377,19 @@ void StagePanel::OnKeyHook(int key_code)
 		return;
 	}
 
-	if (!m_edit_op->IsEmpty()) {
+	if (!GetEditOP()->IsEmpty()) {
 		return;
 	}
 
-	m_edit_op->Release();
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
-	m_edit_op->OnActive();
-	m_edit_op->Retain();	
+	SetEditOP(static_cast<LibraryPage*>(curr_page)->GetNextEditOP());
+	GetEditOP()->OnActive();
+
+// 	m_edit_op->Release();
+// 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+// 	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
+// 	m_edit_op->OnActive();
+// 	m_edit_op->Retain();	
 }
 
 }

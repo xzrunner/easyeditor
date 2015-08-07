@@ -5,7 +5,7 @@ namespace emap
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 {
 }
 
