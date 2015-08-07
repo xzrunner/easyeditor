@@ -114,7 +114,7 @@ void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage,
 	int idx = 0;
 	Json::Value layer_val = value[idx++];
 	while (!layer_val.isNull()) {
-		Layer* layer = new Layer;
+		Layer* layer = new Layer(library);
 		layer->LoadFromFile(layer_val, dir, idx-1);
 		layers.push_back(layer);
 

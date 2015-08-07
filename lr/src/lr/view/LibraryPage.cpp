@@ -1,5 +1,5 @@
 #include "LibraryPage.h"
-#include "StagePanel.h"
+#include "LibraryPanel.h"
 
 #include "dataset/Layer.h"
 #include "dataset/ShapeLayer.h"
@@ -7,15 +7,15 @@
 namespace lr
 {
 
-LibraryPage::LibraryPage(wxWindow* parent, const std::string& name, 
-						 LayerType type, StagePanel* stage)
-	: d2d::ILibraryPage(parent, name)
+LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
+						 LayerType type)
+	: d2d::ILibraryPage(library->GetNotebook(), name)
 	, m_curr_op_idx(-1)
 {
 	if (type == LT_DEFAULT) {
-		m_layer = new Layer(stage);
+		m_layer = new Layer(library);
 	} else if (type == LT_SHAPE) {
-		m_layer = new ShapeLayer(stage);
+		m_layer = new ShapeLayer(library);
 	} else {
 		assert(0);
 	}

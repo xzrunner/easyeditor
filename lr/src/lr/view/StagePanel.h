@@ -58,9 +58,6 @@ public:
 	void BuildGrids(int w, int h);
 	const Grids* GetGrids() const { return m_grids; }
 
-	Layer* GetCurrLayer() const;
-	Layer* GetTerrainLayer() const;
-
 	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
 
 	d2d::AbstractEditOP* GetBaseOP() { return m_arrange_op; }

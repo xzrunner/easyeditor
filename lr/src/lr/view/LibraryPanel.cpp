@@ -25,7 +25,7 @@ void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 {
 	d2d::LibraryPanel::OnPageChanged(event);
 
-	Layer* curr = m_stage->GetCurrLayer();
+	Layer* curr = static_cast<LibraryPage*>(GetCurrPage())->GetLayer();
 	curr->SetEditable(true);
 	static_cast<LibraryPage*>(m_pages[event.GetSelection()])->UpdateStatusFromLayer();
 
@@ -36,7 +36,7 @@ void LibraryPanel::OnPageChanging(wxBookCtrlEvent& event)
 {
 	d2d::LibraryPanel::OnPageChanging(event);
 
-	Layer* curr = m_stage->GetCurrLayer();
+	Layer* curr = static_cast<LibraryPage*>(GetCurrPage())->GetLayer();
 	curr->SetEditable(false);
 	static_cast<LibraryPage*>(m_pages[event.GetSelection()])->UpdateStatusFromLayer();
 }
@@ -133,49 +133,50 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, capture_val, NULL);
 
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "地形", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "地形", LT_DEFAULT);
+		Layer* layer = page->GetLayer();
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
+		AddPage(page);
+		m_terrain_page = page;
+	}
+	{
+		LibraryPage* page = new LibraryPage(this, "装饰", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "装饰", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "单位", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "单位", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "点", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "点", LT_DEFAULT);
-		Layer* layer = page->GetLayer();
-		page->AddEditOP(m_stage->GetBaseOP());
-		page->AddEditOP(paste_op);
-		AddPage(page);
-	}
-	{
-		LibraryPage* page = new LibraryPage(m_notebook, "路径", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "路径", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_line_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "区域", LT_SHAPE);
+		LibraryPage* page = new LibraryPage(this, "区域", LT_SHAPE);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "碰撞区域", LT_SHAPE);
+		LibraryPage* page = new LibraryPage(this, "碰撞区域", LT_SHAPE);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
@@ -183,7 +184,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "摄像机", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "摄像机", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
@@ -225,6 +226,11 @@ void LibraryPanel::Refresh()
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		m_grouptree->InsertSprite(sprites[i]);
 	}
+}
+
+Layer* LibraryPanel::GetTerrainLayer()
+{
+	return m_terrain_page->GetLayer();
 }
 
 void LibraryPanel::CharHook(wxKeyEvent& event)

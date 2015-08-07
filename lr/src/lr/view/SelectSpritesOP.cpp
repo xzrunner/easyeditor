@@ -1,6 +1,9 @@
 #include "SelectSpritesOP.h"
 #include "StagePanel.h"
 
+#include "dataset/ShapesUD.h"
+#include "dataset/Layer.h"
+#include "dataset/data_utility.h"
 #include "frame/config.h"
 
 #include <easyscale9.h>
@@ -100,6 +103,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
 		etexture::EditDialog dlg(m_wnd, tex, m_spritesImpl);
 		dlg.ShowModal();
+		UpdateShapeFromETexture(tex);
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
@@ -142,5 +146,24 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	return false;
 }
 
+void SelectSpritesOP::UpdateShapeFromETexture(etexture::Sprite* spr)
+{
+	if (!spr->GetUserData()) {
+		return;
+	}
+
+	ShapesUD* ud = static_cast<ShapesUD*>(spr->GetUserData());
+	for (int i = 0, n = ud->shapes.size(); i < n; ++i) {
+		ud->layer->RemoveShape(ud->shapes[i]);
+	}
+
+	std::vector<d2d::IShape*> shapes;
+	create_shapes_from_etxture(spr, shapes);
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		ud->layer->InsertShape(shapes[i]);
+	}
+
+	ud->shapes = shapes;
+}
 
 }

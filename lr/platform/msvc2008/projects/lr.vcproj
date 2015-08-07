@@ -346,6 +346,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\lr\dataset\data_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\data_utility.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\dataset\Grids.cpp"
 				>
 			</File>
@@ -390,6 +398,10 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\lr\dataset\ShapeLayer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\ShapesUD.h"
 					>
 				</File>
 			</Filter>

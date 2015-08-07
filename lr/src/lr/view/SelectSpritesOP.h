@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+namespace etexture { class Sprite; }
+
 namespace lr
 {
 
@@ -14,6 +16,9 @@ public:
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftDClick(int x, int y);
+
+private:
+	void UpdateShapeFromETexture(etexture::Sprite* spr);
 
 private:
 	d2d::Vector m_first_press;

@@ -5,8 +5,9 @@
 namespace lr
 {
 
-Layer::Layer(StagePanel* stage)
-	: m_editable(true)
+Layer::Layer(LibraryPanel* library)
+	: m_library(library)
+	, m_editable(true)
 	, m_visible(true)
 	, m_next_id(0)
 {
@@ -147,6 +148,13 @@ bool Layer::Update(int version)
 	return ret;
 }
 
+d2d::ISprite* Layer::QuerySprite(const std::string& name) const
+{
+	QuerySpriteVisitor visitor(name);
+	m_sprites.Traverse(visitor, true);
+	return visitor.GetSpr();
+}
+
 bool Layer::IsValidFloat(float f)
 {
 	return (f == f) && (f <= FLT_MAX && f >= -FLT_MAX);
@@ -251,6 +259,29 @@ void Layer::CheckSpriteName(d2d::ISprite* spr)
 		}
 	}
 	m_name_set.insert(spr->name);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class Layer::QuerySpriteVisitor
+//////////////////////////////////////////////////////////////////////////
+
+Layer::QuerySpriteVisitor::
+QuerySpriteVisitor(const std::string& name)
+	: m_name(name)
+	, m_spr(NULL)
+{
+}
+
+void Layer::QuerySpriteVisitor::
+Visit(Object* object, bool& bFetchNext)
+{
+	d2d::ISprite* spr = static_cast<d2d::ISprite*>(object);
+	if (spr->name == m_name) {
+		m_spr = spr;
+		bFetchNext = false;
+	} else {
+		bFetchNext = true;
+	}
 }
 
 }

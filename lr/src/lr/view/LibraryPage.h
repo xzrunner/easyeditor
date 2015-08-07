@@ -8,14 +8,14 @@
 namespace lr
 {
 
-class StagePanel;
+class LibraryPanel;
 class Layer;
 
 class LibraryPage : public d2d::ILibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const std::string& name, 
-		LayerType type, StagePanel* stage);
+	LibraryPage(LibraryPanel* library, const std::string& name, 
+		LayerType type);
 	virtual ~LibraryPage();
 
 	//

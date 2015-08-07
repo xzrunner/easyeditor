@@ -88,11 +88,12 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 void EditDialog::InitCamera(d2d::Camera* cam, d2d::ISprite* spr) const
 {
 	d2d::Rect r = spr->GetRect();
-	cam->SetPosition(d2d::Vector(r.xCenter(), r.yCenter()));
 
 	wxSize sz = GetSize();
 	float scale = std::min(sz.GetWidth() / r.xLength(), sz.GetHeight() / r.yLength());
 	cam->SetScale(1 / scale);
+
+	cam->SetPosition(d2d::Vector(0, 0));
 }
 
 }

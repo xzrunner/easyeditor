@@ -8,6 +8,7 @@ namespace lr
 
 class Layer;
 class StagePanel;
+class LibraryPage;
 
 class LibraryPanel : public d2d::LibraryPanel
 {
@@ -37,6 +38,8 @@ public:
 
 	void Refresh();
 
+	Layer* GetTerrainLayer();
+
 private:
 	void CharHook(wxKeyEvent& event);
 
@@ -45,6 +48,8 @@ private:
 	d2d::GroupTreePanel* m_grouptree;
 
 	StagePanel* m_stage;
+
+	LibraryPage* m_terrain_page;
 
 	DECLARE_EVENT_TABLE()
 

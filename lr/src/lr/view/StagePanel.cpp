@@ -128,7 +128,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
 	d2d::MultiSpritesImpl::InsertSprite(sprite);
 
-	bool ret = GetCurrLayer()->InsertSprite(sprite);
+	bool ret = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer()->InsertSprite(sprite);
 
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->InsertSprite(sprite, this);
@@ -334,17 +334,6 @@ void StagePanel::BuildGrids(int w, int h)
 	if (m_grids) {
 		m_grids->Build(w, h);
 	}
-}
-
-Layer* StagePanel::GetCurrLayer() const
-{
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	return static_cast<LibraryPage*>(curr_page)->GetLayer();
-}
-
-Layer* StagePanel::GetTerrainLayer() const
-{
-	m_library->get
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

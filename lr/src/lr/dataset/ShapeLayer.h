@@ -9,7 +9,7 @@ namespace lr
 class ShapeLayer : public Layer
 {
 public:
-	ShapeLayer(StagePanel* stage);
+	ShapeLayer(LibraryPanel* library);
 
 	virtual bool InsertSprite(Object* obj);
 
