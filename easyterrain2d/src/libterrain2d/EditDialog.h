@@ -22,6 +22,8 @@ private:
 
 	void OnCloseEvent(wxCloseEvent& event);
 
+	void InitCamera(d2d::Camera* cam, d2d::ISprite* spr) const;
+
 private:
 	Symbol* m_symbol;
 

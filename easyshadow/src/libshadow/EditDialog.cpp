@@ -47,6 +47,8 @@ void EditDialog::InitLayout(d2d::ISprite* edited,
 	StagePanel* stage = new StagePanel(split, this, edited, sprite_impl);
 	m_stage = stage;
 
+	InitCamera(m_stage->GetCamera(), edited);
+
 	ToolbarPanel* toolbar = new ToolbarPanel(split, stage);
 
 	split->SetSashGravity(0.85f);
@@ -75,6 +77,16 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		m_symbol->LoadFromFile(m_symbol->GetFilepath());
 		Destroy();
 	}
+}
+
+void EditDialog::InitCamera(d2d::Camera* cam, d2d::ISprite* spr) const
+{
+	d2d::Rect r = spr->GetRect();
+	cam->SetPosition(d2d::Vector(r.xCenter(), r.yCenter()));
+
+	wxSize sz = GetSize();
+	float scale = std::min(sz.GetWidth() / r.xLength(), sz.GetHeight() / r.yLength());
+	cam->SetScale(1 / scale);
 }
 
 }

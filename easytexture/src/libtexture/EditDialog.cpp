@@ -41,18 +41,6 @@ EditDialog::~EditDialog()
 	}
 }
 
-// void EditDialog::InitLayout()
-// {
-// 	wxSplitterWindow* vert_splitter = new wxSplitterWindow(this);
-// //	wxSplitterWindow* hori_splitter = new wxSplitterWindow(vert_splitter);
-// 
-// 	LibraryPanel* library = new LibraryPanel(vert_splitter);
-// 	StagePanel* stage = new StagePanel(vert_splitter, this, m_symbol, library);
-// 	m_stage = stage;
-// 	vert_splitter->SetSashGravity(0.15f);
-// 	vert_splitter->SplitVertically(library, stage);
-// }
-
 void EditDialog::InitLayout(d2d::ISprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(this);
@@ -61,6 +49,8 @@ void EditDialog::InitLayout(d2d::ISprite* edited, const d2d::MultiSpritesImpl* s
 	LibraryPanel* library = new LibraryPanel(left_splitter);
 	StagePanel* stage = new StagePanel(left_splitter, this, edited, sprite_impl, library);
 	m_stage = stage;
+
+	InitCamera(m_stage->GetCamera(), edited);
 
 	left_splitter->SetSashGravity(0.15f);
 	left_splitter->SplitVertically(library, stage);
@@ -93,6 +83,16 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		m_symbol->LoadFromFile(m_symbol->GetFilepath());
 		Destroy();
 	}
+}
+
+void EditDialog::InitCamera(d2d::Camera* cam, d2d::ISprite* spr) const
+{
+	d2d::Rect r = spr->GetRect();
+	cam->SetPosition(d2d::Vector(r.xCenter(), r.yCenter()));
+
+	wxSize sz = GetSize();
+	float scale = std::min(sz.GetWidth() / r.xLength(), sz.GetHeight() / r.yLength());
+	cam->SetScale(1 / scale);
 }
 
 }
