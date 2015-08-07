@@ -73,6 +73,9 @@ Item(Particle* p)
 
 	start_alpha = p->pc->start_alpha;
 	end_alpha = p->pc->end_alpha;
+
+	mul_col = p->pc->mul_col;
+	add_col = p->pc->add_col;
 }
 
 void InvertRecord::Item::
@@ -99,6 +102,18 @@ StoreToFile(Json::Value& val) const
 	val["end_scale"] = end_scale;
 	val["start_alpha"] = start_alpha;
 	val["end_alpha"] = end_alpha;
+
+	Json::Value mul_col_val;
+	mul_col_val["r"] = mul_col.r;
+	mul_col_val["g"] = mul_col.g;
+	mul_col_val["b"] = mul_col.b;
+	val["mul_col"] = mul_col_val;
+
+	Json::Value add_col_val;
+	add_col_val["r"] = add_col.r;
+	add_col_val["g"] = add_col.g;
+	add_col_val["b"] = add_col.b;
+	val["add_col"] = add_col_val;
 }
 
 }

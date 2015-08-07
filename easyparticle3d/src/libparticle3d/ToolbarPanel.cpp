@@ -89,6 +89,8 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	cp->m_name->SetValue(child.name);
 	cp->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
 	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(child.min_rotate, child.max_rotate));
+	pc->mul_col = child.mul_col;
+	pc->add_col = child.add_col;
 	cp->SetValue(PS_ALPHA, d2d::UICallback::Data(child.start_alpha, child.end_alpha));
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();
@@ -512,6 +514,18 @@ GetValue(int key, d2d::UICallback::Data& data)
 	}
 }
 
+const d2d::Colorf& ToolbarPanel::ChildPanel::
+GetMulColor() const
+{
+	return m_pc->mul_col;
+}
+
+const d2d::Colorf& ToolbarPanel::ChildPanel::
+GetAddColor() const
+{
+	return m_pc->add_col;
+}
+
 void ToolbarPanel::ChildPanel::
 InitLayout()
 {
@@ -549,6 +563,14 @@ InitLayout()
 	topSizer->Add(s_rotate);
 	topSizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);
+	// Multi Color
+	wxButton* mul_btn = new wxButton(this, wxID_ANY, "Mul Col");
+	Connect(mul_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnSetMultiCol));
+	topSizer->Add(mul_btn);
+	// Add Color
+	wxButton* add_btn = new wxButton(this, wxID_ANY, "Add Col");
+	Connect(add_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnSetAddCol));
+	topSizer->Add(add_btn);
 	// Alpha
 	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, "Alpha", "alpha", this, PS_ALPHA, 
 		d2d::SliderItem("start", "start", 100, 0, 100), d2d::SliderItem("end", "end", 100, 0, 100));
@@ -593,6 +615,34 @@ OnBindPS(wxCommandEvent& event)
 // 			m_canvas->ResetViewport();
 // 		}
 	}
+}
+
+void ToolbarPanel::ChildPanel::
+OnSetMultiCol(wxCommandEvent& event)
+{
+	d2d::RGBColorSettingDlg dlg(this, NULL, m_pc->mul_col);
+	if (!dlg.ShowModal()) {
+		return;
+	}
+	
+	m_pc->mul_col = dlg.GetColor();
+
+	//wxSize sz = m_multi_col_btn->GetSize();
+	//wxImage img(sz.GetWidth(), sz.GetHeight());
+	//img.SetRGB(sz, col.r * 255, col.g * 255, col.b * 255);
+	//wxBitmap bitmap(img);
+	//m_multi_col_btn->SetBitmap(bitmap);
+}
+
+void ToolbarPanel::ChildPanel::
+OnSetAddCol(wxCommandEvent& event)
+{
+	d2d::RGBColorSettingDlg dlg(this, NULL, m_pc->add_col);
+	if (!dlg.ShowModal()) {
+		return;
+	}
+
+	m_pc->add_col = dlg.GetColor();
 }
 
 //////////////////////////////////////////////////////////////////////////

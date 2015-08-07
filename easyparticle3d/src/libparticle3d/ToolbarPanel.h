@@ -62,12 +62,18 @@ private:
 		virtual void SetValue(int key, const d2d::UICallback::Data& data);
 		virtual void GetValue(int key, d2d::UICallback::Data& data);
 
+		const d2d::Colorf& GetMulColor() const;
+		const d2d::Colorf& GetAddColor() const;
+
 	private:
 		void InitLayout();
 
 		void OnDelete(wxCommandEvent& event);
 
 		void OnBindPS(wxCommandEvent& event);
+
+		void OnSetMultiCol(wxCommandEvent& event);
+		void OnSetAddCol(wxCommandEvent& event);
 
 	private:
 		ParticleChild* m_pc;

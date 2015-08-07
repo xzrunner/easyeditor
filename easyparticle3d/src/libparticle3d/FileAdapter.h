@@ -1,8 +1,7 @@
 #ifndef _EASYPARTICLE3D_FILE_ADAPTER_H_
 #define _EASYPARTICLE3D_FILE_ADAPTER_H_
 
-#include <string>
-#include <vector>
+#include <drag2d.h>
 
 namespace eparticle3d
 {
@@ -24,6 +23,7 @@ public:
 
 		float min_rotate, max_rotate;
 
+		d2d::Colorf mul_col, add_col;
 		float start_alpha, end_alpha;
 
 		float start_z;

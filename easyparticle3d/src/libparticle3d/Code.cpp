@@ -138,6 +138,22 @@ void Code::resolve()
 			s = wxString::FromDouble(data.val1);
 			lua::assign(m_gen, "['max_rotate']", s+",");
 
+			const d2d::Colorf& mul_col = cp->GetMulColor();
+			s = wxString::FromDouble(mul_col.r);
+			lua::assign(m_gen, "['mul_col_r']", s+",");
+			s = wxString::FromDouble(mul_col.g);
+			lua::assign(m_gen, "['mul_col_g']", s+",");
+			s = wxString::FromDouble(mul_col.b);
+			lua::assign(m_gen, "['mul_col_b']", s+",");
+
+			const d2d::Colorf& add_col = cp->GetAddColor();
+			s = wxString::FromDouble(add_col.r);
+			lua::assign(m_gen, "['add_col_r']", s+",");
+			s = wxString::FromDouble(add_col.g);
+			lua::assign(m_gen, "['add_col_g']", s+",");
+			s = wxString::FromDouble(add_col.b);
+			lua::assign(m_gen, "['add_col_b']", s+",");
+
 			cp->GetValue(PS_ALPHA, data);
 			s = wxString::FromDouble(data.val0);
 			lua::assign(m_gen, "['start_alpha']", s+",");

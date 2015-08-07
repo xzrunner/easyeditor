@@ -111,6 +111,22 @@ void FileAdapter::load(const char* filename, int version)
 			}
 		}
 
+		if (!childValue["mul_col"].isNull()) {
+			child.mul_col.r = childValue["mul_col"]["r"].asDouble();
+			child.mul_col.g = childValue["mul_col"]["g"].asDouble();
+			child.mul_col.b = childValue["mul_col"]["b"].asDouble();
+		} else {
+			child.mul_col.r = child.mul_col.g = child.mul_col.b = 1;
+		}
+
+		if (!childValue["add_col"].isNull()) {
+			child.add_col.r = childValue["add_col"]["r"].asDouble();
+			child.add_col.g = childValue["add_col"]["g"].asDouble();
+			child.add_col.b = childValue["add_col"]["b"].asDouble();
+		} else {
+			child.add_col.r = child.add_col.g = child.add_col.b = 0;
+		}
+
 		if (!childValue["alpha"].isNull()) {
 			child.start_alpha = childValue["alpha"]["start"].asInt();
 			child.end_alpha = childValue["alpha"]["end"].asInt();

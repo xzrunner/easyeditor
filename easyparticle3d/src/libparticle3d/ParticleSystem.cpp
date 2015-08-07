@@ -240,12 +240,13 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 	{
 		//glPushAttrib(GL_CURRENT_BIT);
 
-		d2d::Colorf multi(1, 1, 1, 1);
+		d2d::Colorf mul_col = p->pc->mul_col,
+			add_col = p->pc->add_col;
 		if (p->life < fadeout_time)
 		{
 			unsigned char a = 255 * p->life / fadeout_time;
 			vertices[0].a = vertices[1].a = vertices[2].a = vertices[3].a = a;
-			multi.set(1, 1, 1, a/255.0f);
+			mul_col.a = a / 255.0f;
 		}
 
 		d2d::Vector pos = TransCoords3To2(p->position, direction);
@@ -253,11 +254,11 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 		float proc = (p->lifetime - p->life) / p->lifetime;
 		float s = proc * (p->pc->end_scale - p->pc->start_scale) + p->pc->start_scale;
 		float alpha = proc * (p->pc->end_alpha - p->pc->start_alpha) + p->pc->start_alpha;
-		multi.a *= alpha;
+		mul_col.a *= alpha;
 
 		d2d::Matrix _mt(mt);
 		_mt.translate(p->pos.x, p->pos.y);
-		d2d::SpriteRenderer::Instance()->Draw(p->pc->symbol, _mt, pos, p->angle, s, s, 0, 0, multi);
+		d2d::SpriteRenderer::Instance()->Draw(p->pc->symbol, _mt, pos, p->angle, s, s, 0, 0, mul_col, add_col);
 
 		if (p->m_bind_ps) {
 			d2d::Matrix _mt;
@@ -268,7 +269,7 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 		AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 		if (curr_record) {
 			d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
-			curr_record->AddItem(p->pc->symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, multi);
+			curr_record->AddItem(p->pc->symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
 		}
 
 		//glPopAttrib();

@@ -26,11 +26,16 @@ struct ParticleChild
 
 	float min_rotate, max_rotate;
 
+	d2d::Colorf mul_col, add_col;
 	float start_alpha, end_alpha;
 
 	ParticleChild(d2d::ISymbol* symbol) 
-		: symbol(symbol), bind_ps(NULL)
-	{}
+		: symbol(symbol)
+		, bind_ps(NULL)
+	{
+		mul_col.r = mul_col.g = mul_col.b = 1;
+		add_col.r = add_col.g = add_col.b = 0;
+	}
 };
 
 class AnimRecorder;

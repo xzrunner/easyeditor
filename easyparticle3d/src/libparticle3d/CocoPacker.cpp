@@ -169,6 +169,20 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			s = wxString::FromDouble(child_val["max_rotate"].asInt());
 			lua::assign(gen, "['max_rotate']", s+"*r,");
 
+			s = wxString::FromDouble(child_val["mul_col"]["r"].asDouble());
+			lua::assign(gen, "['mul_col_r']", s+",");
+			s = wxString::FromDouble(child_val["mul_col"]["g"].asDouble());
+			lua::assign(gen, "['mul_col_g']", s+",");
+			s = wxString::FromDouble(child_val["mul_col"]["b"].asDouble());
+			lua::assign(gen, "['mul_col_b']", s+",");
+
+			s = wxString::FromDouble(child_val["add_col"]["r"].asDouble());
+			lua::assign(gen, "['add_col_r']", s+",");
+			s = wxString::FromDouble(child_val["add_col"]["g"].asDouble());
+			lua::assign(gen, "['add_col_g']", s+",");
+			s = wxString::FromDouble(child_val["add_col"]["b"].asDouble());
+			lua::assign(gen, "['add_col_b']", s+",");
+
 			s = wxString::FromDouble(child_val["start_alpha"].asDouble());
 			lua::assign(gen, "['start_alpha']", s+",");
 
@@ -301,6 +315,20 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 
 			s = wxString::FromDouble(child_val["scale"]["end"].asDouble());
 			lua::assign(gen, "['end_scale']", s+"*s,");
+
+			s = wxString::FromDouble(child_val["mul_col"]["r"].asDouble());
+			lua::assign(gen, "['mul_col_r']", s+",");
+			s = wxString::FromDouble(child_val["mul_col"]["g"].asDouble());
+			lua::assign(gen, "['mul_col_g']", s+",");
+			s = wxString::FromDouble(child_val["mul_col"]["b"].asDouble());
+			lua::assign(gen, "['mul_col_b']", s+",");
+
+			s = wxString::FromDouble(child_val["add_col"]["r"].asDouble());
+			lua::assign(gen, "['add_col_r']", s+",");
+			s = wxString::FromDouble(child_val["add_col"]["g"].asDouble());
+			lua::assign(gen, "['add_col_g']", s+",");
+			s = wxString::FromDouble(child_val["add_col"]["b"].asDouble());
+			lua::assign(gen, "['add_col_b']", s+",");
 
 			s = wxString::FromDouble(child_val["alpha"]["start"].asDouble());
 			lua::assign(gen, "['start_alpha']", s+",");

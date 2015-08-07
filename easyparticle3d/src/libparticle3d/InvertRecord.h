@@ -42,6 +42,7 @@ private:
 		std::string symbol;
 		float start_scale, end_scale; 
 		float start_alpha, end_alpha;
+		d2d::Colorf mul_col, add_col;
 
 	}; // Item
 

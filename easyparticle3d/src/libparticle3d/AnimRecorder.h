@@ -12,8 +12,8 @@ public:
 	AnimRecorder(int max_per_frame);
 	~AnimRecorder();
 
-	void AddItem(const std::string& filepath, float x, float y, 
-		float angle, float scale, const d2d::Colorf& col);
+	void AddItem(const std::string& filepath, float x, float y, float angle, 
+		float scale, const d2d::Colorf& mul_col, const d2d::Colorf& add_col);
 	void FinishFrame();
 
 	void Clear();
@@ -27,7 +27,7 @@ private:
 		float x, y;
 		float angle;
 		float scale;
-		d2d::Colorf col;
+		d2d::Colorf mul_col, add_col;
 	};
 
 	struct Frame

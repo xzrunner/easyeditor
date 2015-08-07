@@ -45,6 +45,17 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(value["components"][i]);
 		}
+
+		Json::Value col_val;
+		col_val["r"] = pc->mul_col.r;
+		col_val["g"] = pc->mul_col.g;
+		col_val["b"] = pc->mul_col.b;
+		value["components"][i]["mul_col"] = col_val;
+
+		col_val["r"] = pc->add_col.r;
+		col_val["g"] = pc->add_col.g;
+		col_val["b"] = pc->add_col.b;
+		value["components"][i]["add_col"] = col_val;
 	}
 
 	Json::StyledStreamWriter writer;
@@ -160,6 +171,8 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 		pc->end_scale = child.end_scale * 0.01f;
 		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
 		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
+		pc->mul_col = child.mul_col;
+		pc->add_col = child.add_col;
 		pc->start_alpha = child.start_alpha * 0.01f;
 		pc->end_alpha = child.end_alpha * 0.01f;
 
