@@ -5,12 +5,12 @@
 namespace lr
 {
 
-Layer* LayerFactory::Create(LibraryPanel* library, LayerType type)
+Layer* LayerFactory::Create(int id, LibraryPanel* library, LayerType type)
 {
 	if (type == LT_DEFAULT) {
-		return new Layer(library);
+		return new Layer(id, library);
 	} else if (type == LT_SHAPE) {
-		return new ShapeLayer(library);
+		return new ShapeLayer(id, library);
 	} else {
 		assert(0);
 		return NULL;

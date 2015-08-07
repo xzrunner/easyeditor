@@ -4,6 +4,7 @@
 #include "dataset/ShapesUD.h"
 #include "dataset/Layer.h"
 #include "dataset/data_utility.h"
+#include "view/LibraryPanel.h"
 #include "frame/config.h"
 
 #include <easyscale9.h>
@@ -152,18 +153,26 @@ void SelectSpritesOP::UpdateShapeFromETexture(etexture::Sprite* spr)
 		return;
 	}
 
-	ShapesUD* ud = static_cast<ShapesUD*>(spr->GetUserData());
-	for (int i = 0, n = ud->shapes.size(); i < n; ++i) {
-		ud->layer->RemoveShape(ud->shapes[i]);
+	UserData* ud = static_cast<UserData*>(spr->GetUserData());
+	if (ud->type == UT_BASE_FILE) {
+		return;
 	}
 
+	ShapesUD* sud = static_cast<ShapesUD*>(ud);
+	LibraryPanel* library = static_cast<LibraryPanel*>(static_cast<StagePanel*>(m_wnd)->GetLibrary());
+	Layer* layer = library->GetLayer(sud->layer_id);
+	for (int i = 0, n = sud->shape_names.size(); i < n; ++i) {
+		d2d::IShape* shape = layer->QueryShape(sud->shape_names[i]);
+		layer->RemoveShape(shape);
+	}
+
+	sud->shape_names.clear();
 	std::vector<d2d::IShape*> shapes;
 	create_shapes_from_etxture(spr, shapes);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		ud->layer->InsertShape(shapes[i]);
+		layer->InsertShape(shapes[i]);
+		sud->shape_names.push_back(shapes[i]->name);
 	}
-
-	ud->shapes = shapes;
 }
 
 }

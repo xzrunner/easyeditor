@@ -132,8 +132,9 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, capture_val, NULL);
 	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, capture_val, NULL);
 
+	int id = 0;
 	{
-		LibraryPage* page = new LibraryPage(this, "地形", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "地形", LT_DEFAULT, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
@@ -141,42 +142,42 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		m_terrain_page = page;
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "装饰", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "装饰", LT_DEFAULT, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "单位", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "单位", LT_DEFAULT, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "点", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "点", LT_DEFAULT, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "路径", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "路径", LT_DEFAULT, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_line_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "区域", LT_SHAPE);
+		LibraryPage* page = new LibraryPage(this, "区域", LT_SHAPE, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "碰撞区域", LT_SHAPE);
+		LibraryPage* page = new LibraryPage(this, "碰撞区域", LT_SHAPE, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
@@ -184,7 +185,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "摄像机", LT_DEFAULT);
+		LibraryPage* page = new LibraryPage(this, "摄像机", LT_DEFAULT, id++);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
@@ -239,6 +240,15 @@ LayerType LibraryPanel::GetLayerType(int idx) const
 		return LT_DEFAULT;
 	} else {
 		return static_cast<LibraryPage*>(m_pages[idx])->GetLayerType();
+	}
+}
+
+Layer* LibraryPanel::GetLayer(int idx)
+{
+	if (idx < 0 || idx >= m_pages.size()) {
+		return NULL;
+	} else {
+		return static_cast<LibraryPage*>(m_pages[idx])->GetLayer();
 	}
 }
 

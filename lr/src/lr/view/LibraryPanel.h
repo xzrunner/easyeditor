@@ -43,6 +43,7 @@ public:
 	Layer* GetTerrainLayer();
 
 	LayerType GetLayerType(int idx) const;
+	Layer* GetLayer(int idx);
 
 private:
 	void CharHook(wxKeyEvent& event);

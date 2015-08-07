@@ -15,7 +15,7 @@ class LibraryPage : public d2d::ILibraryPage
 {
 public:
 	LibraryPage(LibraryPanel* library, const std::string& name, 
-		LayerType type);
+		LayerType type, int id);
 	virtual ~LibraryPage();
 
 	//

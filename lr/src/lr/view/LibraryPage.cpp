@@ -8,12 +8,12 @@ namespace lr
 {
 
 LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
-						 LayerType type)
+						 LayerType type, int id)
 	: d2d::ILibraryPage(library->GetNotebook(), name)
 	, m_layer_type(type)
 	, m_curr_op_idx(-1)
 {
-	m_layer = LayerFactory::Create(library, type);
+	m_layer = LayerFactory::Create(id, library, type);
 	InitLayout();
 }
 

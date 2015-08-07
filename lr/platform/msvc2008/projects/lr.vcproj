@@ -408,8 +408,24 @@
 					RelativePath="..\..\..\src\lr\dataset\ShapeLayer.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="ud"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\BaseFileUD.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\lr\dataset\ShapesUD.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\ud_type.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UserData.h"
 					>
 				</File>
 			</Filter>

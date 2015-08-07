@@ -1,13 +1,22 @@
 #ifndef _LR_SHAPES_UD_H_
 #define _LR_SHAPES_UD_H_
 
+#include "UserData.h"
+
 namespace lr
 {
 
-struct ShapesUD
+class ShapesUD : public UserData
 {
-	Layer* layer;
-	std::vector<d2d::IShape*> shapes;
+public:
+	ShapesUD()
+		: UserData(UT_SHAPES)
+	{}
+
+public:
+	int layer_id;
+	std::vector<std::string> shape_names;
+
 }; // ShapesUD
 
 }

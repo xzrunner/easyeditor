@@ -9,8 +9,8 @@
 namespace lr
 {
 
-ShapeLayer::ShapeLayer(LibraryPanel* library)
-	: Layer(library)
+ShapeLayer::ShapeLayer(int id, LibraryPanel* library)
+	: Layer(id, library)
 {
 }
 
@@ -29,8 +29,10 @@ bool ShapeLayer::InsertSprite(Object* obj)
 	}
 
 	ShapesUD* ud = new ShapesUD;
-	ud->layer = this;
-	ud->shapes = shapes;
+	ud->layer_id = GetID();
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		ud->shape_names.push_back(shapes[i]->name);
+	}
 
 	d2d::ISprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(spr->name);
 	base_spr->SetUserData(ud);	

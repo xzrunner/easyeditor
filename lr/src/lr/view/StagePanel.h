@@ -66,6 +66,8 @@ public:
 		m_enable_update = enable;
 	}
 
+	d2d::LibraryPanel* GetLibrary() { return m_library; }
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
