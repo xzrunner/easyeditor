@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "dataset/layer_type.h"
+
 namespace lr
 {
 
@@ -12,7 +14,8 @@ class Layer;
 class LibraryPage : public d2d::ILibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const std::string& name);
+	LibraryPage(wxWindow* parent, const std::string& name, 
+		LayerType type, StagePanel* stage);
 	virtual ~LibraryPage();
 
 	//

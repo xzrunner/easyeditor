@@ -342,6 +342,11 @@ Layer* StagePanel::GetCurrLayer() const
 	return static_cast<LibraryPage*>(curr_page)->GetLayer();
 }
 
+Layer* StagePanel::GetTerrainLayer() const
+{
+	m_library->get
+}
+
 void StagePanel::OnMouseHook(wxMouseEvent& event)
 {
 	if (event.RightDown()) {

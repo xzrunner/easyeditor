@@ -133,49 +133,49 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, capture_val, NULL);
 
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "地形");
+		LibraryPage* page = new LibraryPage(m_notebook, "地形", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "装饰");
+		LibraryPage* page = new LibraryPage(m_notebook, "装饰", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "单位");
+		LibraryPage* page = new LibraryPage(m_notebook, "单位", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "点");
+		LibraryPage* page = new LibraryPage(m_notebook, "点", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "路径");
+		LibraryPage* page = new LibraryPage(m_notebook, "路径", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_line_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "区域");
+		LibraryPage* page = new LibraryPage(m_notebook, "区域", LT_SHAPE);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "碰撞区域");
+		LibraryPage* page = new LibraryPage(m_notebook, "碰撞区域", LT_SHAPE);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
@@ -183,7 +183,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(m_notebook, "摄像机");
+		LibraryPage* page = new LibraryPage(m_notebook, "摄像机", LT_DEFAULT);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);

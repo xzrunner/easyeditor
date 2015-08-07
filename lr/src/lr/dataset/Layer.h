@@ -6,10 +6,12 @@
 namespace lr
 {
 
+class StagePanel;
+
 class Layer : public d2d::Object
 {
 public:
-	Layer();
+	Layer(StagePanel* stage);
 	
 	virtual void TraverseSprite(d2d::IVisitor& visitor, bool order = true) const;
 	virtual void TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
@@ -56,6 +58,9 @@ private:
 
 		UserData(const std::string& path) : base_path(path) {}
 	};
+
+protected:
+	StagePanel* m_stage;
 
 private:
 	std::string m_name;

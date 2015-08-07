@@ -5,7 +5,7 @@
 namespace lr
 {
 
-Layer::Layer()
+Layer::Layer(StagePanel* stage)
 	: m_editable(true)
 	, m_visible(true)
 	, m_next_id(0)

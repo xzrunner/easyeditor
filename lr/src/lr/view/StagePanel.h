@@ -59,6 +59,7 @@ public:
 	const Grids* GetGrids() const { return m_grids; }
 
 	Layer* GetCurrLayer() const;
+	Layer* GetTerrainLayer() const;
 
 	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
 

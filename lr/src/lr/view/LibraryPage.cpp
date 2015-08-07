@@ -2,15 +2,24 @@
 #include "StagePanel.h"
 
 #include "dataset/Layer.h"
+#include "dataset/ShapeLayer.h"
 
 namespace lr
 {
 
-LibraryPage::LibraryPage(wxWindow* parent, const std::string& name)
+LibraryPage::LibraryPage(wxWindow* parent, const std::string& name, 
+						 LayerType type, StagePanel* stage)
 	: d2d::ILibraryPage(parent, name)
-	, m_layer(new Layer)
 	, m_curr_op_idx(-1)
 {
+	if (type == LT_DEFAULT) {
+		m_layer = new Layer(stage);
+	} else if (type == LT_SHAPE) {
+		m_layer = new ShapeLayer(stage);
+	} else {
+		assert(0);
+	}
+
 	InitLayout();
 }
 
