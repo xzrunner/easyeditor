@@ -3,7 +3,7 @@
 namespace emodeling
 {
 
-JointPropertySetting::JointPropertySetting(d2d::EditPanel* stage, libmodeling::Joint* joint)
+JointPropertySetting::JointPropertySetting(d2d::EditPanelImpl* stage, libmodeling::Joint* joint)
 	: d2d::IPropertySetting("Joint")
 	, m_stage(stage)
 {

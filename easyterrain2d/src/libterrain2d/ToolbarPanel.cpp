@@ -9,7 +9,7 @@ namespace eterrain2d
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 {
 	addChild(new CreateRegionCMPT(this, wxT("创建区域"), stage));
 	addChild(m_wave_cmpt = new WaveVerticesCMPT(this, wxT("顶点波动"), stage));

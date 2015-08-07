@@ -5,10 +5,10 @@
 namespace ephysics
 {
 
-PasteSymbolPhysicsRandomOP::PasteSymbolPhysicsRandomOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
+PasteSymbolPhysicsRandomOP::PasteSymbolPhysicsRandomOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 													   d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
 													   d2d::PasteSymbolRandomWidget* randomWidget)
-	: PasteSymbolPhysicsOP(editPanel, spritesImpl, libraryPanel, physicsImpl)
+	: PasteSymbolPhysicsOP(stage_wnd, stage, spritesImpl, libraryPanel, physicsImpl)
 	, m_randomWidget(randomWidget)
 {
 	changeRandomValue();

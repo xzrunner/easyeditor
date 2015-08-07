@@ -6,7 +6,7 @@ namespace eterrain2d
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
+	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -16,7 +16,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
 						 const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(panel)
+	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
@@ -78,8 +78,7 @@ void StageCanvas::Update()
 	float dt = (float)(curr - last) / CLOCKS_PER_SEC;
 	last = curr;
 
-	std::vector<OceanMesh*>& oceans 
-		= static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->Update(dt);
 	}

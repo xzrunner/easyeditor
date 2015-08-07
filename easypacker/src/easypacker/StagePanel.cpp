@@ -13,7 +13,7 @@ using namespace epacker;
 StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
-	, SpritesPanelImpl(this, Context::Instance()->library)
+	, SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
 //	m_editOP = new ArrangeSpriteOP(this, Context::Instance()->property);
 	b2Body* ground = CreateGround();

@@ -11,7 +11,7 @@ class CircleShape;
 class CirclePropertySetting : public d2d::IPropertySetting
 {
 public:
-	CirclePropertySetting(d2d::EditPanel* stage, CircleShape* circle);
+	CirclePropertySetting(d2d::EditPanelImpl* stage, CircleShape* circle);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -20,7 +20,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanel* m_stage;
+	d2d::EditPanelImpl* m_stage;
 
 	CircleShape* m_circle;
 

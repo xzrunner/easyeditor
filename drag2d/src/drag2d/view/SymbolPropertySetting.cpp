@@ -2,13 +2,13 @@
 #include "PropertySettingPanel.h"
 
 #include "dataset/ISymbol.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 
 namespace d2d
 {
 
-SymbolPropertySetting::SymbolPropertySetting(EditPanel* stage, ISymbol* symbol)
+SymbolPropertySetting::SymbolPropertySetting(EditPanelImpl* stage, ISymbol* symbol)
 	: IPropertySetting("Symbol")
 	, m_stage(stage)
 	, m_symbol(symbol)
@@ -16,7 +16,7 @@ SymbolPropertySetting::SymbolPropertySetting(EditPanel* stage, ISymbol* symbol)
 {
 }
 
-SymbolPropertySetting::SymbolPropertySetting(EditPanel* stage, std::string* name)
+SymbolPropertySetting::SymbolPropertySetting(EditPanelImpl* stage, std::string* name)
 	: IPropertySetting("Symbol")
 	, m_stage(stage)
 	, m_symbol(NULL)

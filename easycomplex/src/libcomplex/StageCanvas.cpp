@@ -10,7 +10,7 @@ namespace ecomplex
 
 StageCanvas::StageCanvas(StagePanel* editPanel,
 						 d2d::LibraryPanel* library)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)

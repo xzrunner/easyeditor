@@ -11,7 +11,7 @@ namespace d2d
 {
 
 class IPropertySetting;
-class EditPanel;
+class EditPanelImpl;
 
 class PropertySettingPanel : public wxPanel, public ISpriteViewPanel, 
 	public IShapeViewPanel
@@ -46,7 +46,7 @@ public:
 
 	const std::string& GetType() const { return m_type; }
 
-	void SetEditPanel(EditPanel* stage) { m_stage = stage; }
+	void SetEditPanel(EditPanelImpl* stage) { m_stage = stage; }
 
 protected:
 	virtual IPropertySetting* CreateDefaultProperty() const { return NULL; }
@@ -62,7 +62,7 @@ protected:
 	IPropertySetting* m_setting;
 
 	// todo
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 }; // PropertySettingPanel
 

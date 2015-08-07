@@ -1,5 +1,4 @@
 #include "StageDropTarget.h"
-#include "EditPanel.h"
 #include "MultiSpritesImpl.h"
 #include "LibraryPanel.h"
 
@@ -7,15 +6,16 @@
 #include "dataset/SpriteFactory.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/ISprite.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-StageDropTarget::StageDropTarget(EditPanel* edit_panel, 
+StageDropTarget::StageDropTarget(wxWindow* stage_wnd, EditPanelImpl* stage, 
 								 MultiSpritesImpl* sprites_impl, 
 								 LibraryPanel* library)
-	: CombinedDropTarget(edit_panel)
-	, m_edit_panel(edit_panel)
+	: CombinedDropTarget(stage_wnd)
+	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
@@ -38,7 +38,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		Vector pos = m_edit_panel->TransPosScrToProj(x, y);
+		Vector pos = m_stage->TransPosScrToProj(x, y);
 		bool handled = OnDropSymbol(symbol, pos);
 		if (handled) {
 			continue;
@@ -62,7 +62,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 		symbol->RefreshThumbnail(filename);
 		bool success = m_library->AddSymbol(symbol);
 		if (success) {
-			Vector pos = m_edit_panel->TransPosScrToProj(x, y);
+			Vector pos = m_stage->TransPosScrToProj(x, y);
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 			sprite->Translate(pos);
 			m_sprites_impl->InsertSprite(sprite);

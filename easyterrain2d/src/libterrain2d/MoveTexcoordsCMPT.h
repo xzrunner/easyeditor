@@ -25,6 +25,8 @@ private:
 	void OnChangeUVSpeed(wxSpinEvent& event);
 
 private:
+	StagePanel* m_stage_panel;
+
 	wxCheckBox* m_switch;
 
 	wxSpinCtrl *m_speed_x, *m_speed_y;

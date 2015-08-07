@@ -4,7 +4,8 @@
 namespace libshape
 {
 
-BezierPropertySetting::BezierPropertySetting(d2d::EditPanel* stage, BezierShape* bezier)
+BezierPropertySetting::BezierPropertySetting(d2d::EditPanelImpl* stage, 
+											 BezierShape* bezier)
 	: d2d::IPropertySetting("Bezier")
 	, m_stage(stage)
 	, m_bezier(bezier)

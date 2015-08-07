@@ -13,7 +13,8 @@ class StagePanel;
 class SelectJointOP : public SelectBodyOP
 {
 public:
-	SelectJointOP(d2d::EditPanel* editPanel, 
+	SelectJointOP(wxWindow* stage_wnd,
+		d2d::EditPanelImpl* stage, 
 		d2d::MultiSpritesImpl* spritesImpl, 
 		d2d::ViewPanelMgr* view_panel_mgr = NULL,
 		d2d::AbstractEditCMPT* callback = NULL);

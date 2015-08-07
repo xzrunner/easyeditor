@@ -11,7 +11,7 @@ static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_control(0.033f)
 {

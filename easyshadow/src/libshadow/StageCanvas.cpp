@@ -6,7 +6,7 @@ namespace eshadow
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -16,7 +16,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 StageCanvas::StageCanvas(StagePanel* stage, d2d::ISprite* edited, 
 						 const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)

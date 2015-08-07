@@ -10,8 +10,7 @@ namespace ecomplex
 	{
 	public:
 		static void store(const char* filepath, const Symbol* symbol);
-		static void storeWithHistory(const char* filepath, const Symbol* symbol,
-			d2d::EditPanel* editpanel);
+		static void storeWithHistory(const char* filepath, const Symbol* symbol);
 
 	private:
 		static void centerSymbol(Symbol* symbol);

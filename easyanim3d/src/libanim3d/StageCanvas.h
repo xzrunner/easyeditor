@@ -12,7 +12,8 @@ class StagePanel;
 class StageCanvas : public e3d::StageCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl);
+	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiSpritesImpl* sprites_impl);
 
 protected:
 	virtual void OnSize(int w, int h);

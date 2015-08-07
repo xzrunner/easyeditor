@@ -1,28 +1,32 @@
-#pragma once
+#ifndef _DRAG2D_PASTE_SYMBOL_SCALE_CMPT_H_
+#define _DRAG2D_PASTE_SYMBOL_SCALE_CMPT_H_
 
 #include "AbstractEditCMPT.h"
 
 namespace d2d
 {
-	class MultiSpritesImpl;
-	class LibraryPanel;
 
-	class PasteSymbolScaleCMPT : public AbstractEditCMPT
-	{
-	public:
-		PasteSymbolScaleCMPT(wxWindow* parent, const wxString& name,
-			EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-			LibraryPanel* libraryPanel);
+class MultiSpritesImpl;
+class LibraryPanel;
 
-	protected:
-		virtual wxSizer* initLayout();
+class PasteSymbolScaleCMPT : public AbstractEditCMPT
+{
+public:
+	PasteSymbolScaleCMPT(wxWindow* parent, const wxString& name,
+		wxWindow* stage_wnd, EditPanelImpl* stage, 
+		MultiSpritesImpl* spritesImpl, LibraryPanel* libraryPanel);
 
-	private:
-		void onChangeScale(wxSpinEvent& event);
+protected:
+	virtual wxSizer* initLayout();
 
-	private:
-		float m_scaleVal;
+private:
+	void onChangeScale(wxSpinEvent& event);
 
-	}; // PasteSymbolScaleCMPT
+private:
+	float m_scaleVal;
+
+}; // PasteSymbolScaleCMPT
+
 }
 
+#endif // _DRAG2D_PASTE_SYMBOL_SCALE_CMPT_H_

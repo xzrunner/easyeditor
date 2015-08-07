@@ -6,8 +6,8 @@
 namespace d2d
 {
 
-OnePassCanvas::OnePassCanvas(EditPanel* stage)
-	: IStageCanvas(stage)
+OnePassCanvas::OnePassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
+	: IStageCanvas(stage_wnd, stage)
 {
 }
 

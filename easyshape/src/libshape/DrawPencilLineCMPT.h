@@ -9,8 +9,8 @@ namespace libshape
 class DrawPencilLineCMPT : public d2d::OneFloatValueCMPT
 {
 public:
-	DrawPencilLineCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+	DrawPencilLineCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl);
 
 }; // DrawPencilLineCMPT
 	

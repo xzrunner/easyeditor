@@ -4,7 +4,7 @@
 
 #include "common/Exception.h"
 #include "view/ExceptionDlg.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/KeysState.h"
 #include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
@@ -29,8 +29,8 @@ static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN,
 
 static const float FPS = 30;
 
-IStageCanvas::IStageCanvas(EditPanel* stage)
-	: wxGLCanvas(stage, wxID_ANY, GL_ATTRIB)
+IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
+	: wxGLCanvas(stage_wnd, wxID_ANY, GL_ATTRIB)
 	, m_stage(stage)
  	, m_camera(stage->GetCamera())
 	, m_screen(stage->GetCamera())

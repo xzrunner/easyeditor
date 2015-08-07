@@ -7,8 +7,6 @@
 namespace d2d
 {
 
-class EditPanel;
-
 class ScaleSpriteState : public IArrangeSpriteState
 {
 public:

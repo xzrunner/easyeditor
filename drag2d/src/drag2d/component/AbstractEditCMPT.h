@@ -1,63 +1,67 @@
-#pragma once
+#ifndef _DRAG2D_ABSTRACT_EDIT_CMPT_H_
+#define _DRAG2D_ABSTRACT_EDIT_CMPT_H_
 
 #include <wx/wx.h>
 #include <vector>
 
 namespace d2d
 {
-	class EditPanel;
-	class AbstractEditOP;
 
-	class AbstractEditCMPT : public wxScrolledWindow
-	{
-	public:
-		AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel,
-			const wxString& childrenName = wxEmptyString, bool vertical = true);
-		virtual ~AbstractEditCMPT();
+class EditPanelImpl;
+class AbstractEditOP;
 
-		virtual void updateControlValue() {}
+class AbstractEditCMPT : public wxScrolledWindow
+{
+public:
+	AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanelImpl* stage, 
+		const wxString& childrenName = wxEmptyString, bool vertical = true);
+	virtual ~AbstractEditCMPT();
 
-		void SetEditOP(AbstractEditOP* op);
+	virtual void updateControlValue() {}
 
-	protected:
-		virtual wxSizer* initLayout() = 0;
+	void SetEditOP(AbstractEditOP* op);
 
-		virtual void show(bool show) {}
+protected:
+	virtual wxSizer* initLayout() = 0;
 
-		void addChild(AbstractEditCMPT* child) { m_children.push_back(child); }
+	virtual void show(bool show) {}
 
-		wxSizer* initChildrenLayout();
+	void addChild(AbstractEditCMPT* child) { m_children.push_back(child); }
 
-		void setChoice(size_t index);
+	wxSizer* initChildrenLayout();
 
-		void loadEditOP(AbstractEditOP* op);
+	void setChoice(size_t index);
 
-	private:
-		void loadEditOP();
-		void loadEditOP(AbstractEditCMPT* cmpt);
+	void loadEditOP(AbstractEditOP* op);
 
-		void onChangeEditType(wxCommandEvent& event);
+private:
+	void loadEditOP();
+	void loadEditOP(AbstractEditCMPT* cmpt);
 
-	private:
-		// wxRadioBox + Spacer
-		static const int CMPT_SIZER_INDEX_OFFSET = 2;
+	void onChangeEditType(wxCommandEvent& event);
 
-	protected:
-		EditPanel* m_stage;
+private:
+	// wxRadioBox + Spacer
+	static const int CMPT_SIZER_INDEX_OFFSET = 2;
 
-		AbstractEditOP* m_editOP;
+protected:
+	EditPanelImpl* m_stage;
 
-	private:
-		wxString m_name;
+	AbstractEditOP* m_editOP;
 
-		bool m_vertical;
+private:
+	wxString m_name;
 
-		wxString m_childrenName;
-		std::vector<AbstractEditCMPT*> m_children;
-		wxSizer* m_childrenSizer;
+	bool m_vertical;
 
-		wxRadioBox* m_editChoice;
+	wxString m_childrenName;
+	std::vector<AbstractEditCMPT*> m_children;
+	wxSizer* m_childrenSizer;
 
-	}; // AbstractEditCMPT
+	wxRadioBox* m_editChoice;
+
+}; // AbstractEditCMPT
+
 }
 
+#endif // _DRAG2D_ABSTRACT_EDIT_CMPT_H_

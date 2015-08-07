@@ -25,7 +25,7 @@ public:
 	};
 
 public:
-	PreviewCanvas(d2d::EditPanel* stage, const Symbol* symbol);
+	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, const Symbol* symbol);
 
 	PlaySetting& getPlaySetting();
 

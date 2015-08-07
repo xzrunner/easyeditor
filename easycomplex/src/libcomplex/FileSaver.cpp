@@ -31,8 +31,7 @@ void FileSaver::store(const char* filepath, const Symbol* symbol)
 	fout.close();
 }
 
-void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
-								 d2d::EditPanel* editpanel)
+void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol)
 {
 	Json::Value value;
 

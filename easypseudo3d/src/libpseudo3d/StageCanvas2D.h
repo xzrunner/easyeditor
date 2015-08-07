@@ -11,7 +11,7 @@ class IScene;
 class StageCanvas2D : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas2D(d2d::EditPanel* stage);
+	StageCanvas2D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 
 protected:
 	virtual void InitGL();

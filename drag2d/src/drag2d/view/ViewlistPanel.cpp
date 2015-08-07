@@ -4,7 +4,6 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "widgets/VerticalImageList.h"
-#include "view/EditPanel.h"
 #include "view/SpritePropertySetting.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/ViewPanelMgr.h"
@@ -14,7 +13,7 @@
 namespace d2d
 {
 
-ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* stage,
+ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
 							 MultiSpritesImpl* sprites_impl /*= NULL*/, 
 							 ViewPanelMgr* view_panel_mgr /*= NULL*/)
 	: wxPanel(parent, wxID_ANY)

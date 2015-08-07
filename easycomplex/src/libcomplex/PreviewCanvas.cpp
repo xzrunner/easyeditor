@@ -5,8 +5,9 @@
 namespace ecomplex
 {
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const std::vector<const d2d::ISprite*>& sprites)
-	: d2d::OrthoCanvas(stage)
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+							 const std::vector<const d2d::ISprite*>& sprites)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_sprites(sprites)
 {
 }

@@ -1,13 +1,13 @@
 #include "PropertyColorMonitor.h"
 
 #include "common/Color.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 
 namespace d2d
 {
 
-PropertyColorListener::PropertyColorListener(EditPanel* stage, Colorf* col)
+PropertyColorListener::PropertyColorListener(EditPanelImpl* stage, Colorf* col)
 	: m_stage(stage)
 	, m_col(col)
 {

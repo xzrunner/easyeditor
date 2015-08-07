@@ -10,8 +10,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   d2d::ViewPanelMgr* view_panel_mgr)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
-	, d2d::ShapesPanelImpl(this)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+	, d2d::ShapesPanelImpl(GetStageImpl())
 {
 	m_paste_op = new d2d::PasteSymbolOP(this, this, library);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);

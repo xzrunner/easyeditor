@@ -11,7 +11,7 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* stage);
+	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 	virtual ~StageCanvas();
 
 	void SetBackground(d2d::ISymbol* symbol);

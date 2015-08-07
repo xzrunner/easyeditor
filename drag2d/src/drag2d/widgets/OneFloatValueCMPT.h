@@ -12,7 +12,7 @@ class OneFloatValueCMPT : public AbstractEditCMPT, public OneFloatValue
 {
 public:
 	OneFloatValueCMPT(wxWindow* parent, const wxString& name,
-		EditPanel* editPanel, const std::string& title, 
+		EditPanelImpl* stage, const std::string& title, 
 		int min = 0, int max = 100, int value = 0, float scale = 1);
 
 	//

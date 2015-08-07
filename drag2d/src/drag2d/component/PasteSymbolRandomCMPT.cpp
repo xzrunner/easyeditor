@@ -2,18 +2,18 @@
 
 #include "operator/PasteSymbolRandomOP.h"
 #include "widgets/PasteSymbolRandomWidget.h"
-#include "view/EditPanel.h"
 
 namespace d2d
 {
 
 PasteSymbolRandomCMPT::PasteSymbolRandomCMPT(wxWindow* parent, const wxString& name, 
-											 EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+											 wxWindow* stage_wnd, EditPanelImpl* stage, 
+											 MultiSpritesImpl* spritesImpl, 
 											 LibraryPanel* libraryPanel)
-	: AbstractEditCMPT(parent, name, editPanel)
+	: AbstractEditCMPT(parent, name, stage)
 {
 	m_randomWidget = new PasteSymbolRandomWidget(this, libraryPanel);
-	m_editOP = new PasteSymbolRandomOP(editPanel, editPanel->GetStageImpl(), spritesImpl, libraryPanel, m_randomWidget);
+	m_editOP = new PasteSymbolRandomOP(stage_wnd, stage, spritesImpl, libraryPanel, m_randomWidget);
 }
 
 wxSizer* PasteSymbolRandomCMPT::initLayout()

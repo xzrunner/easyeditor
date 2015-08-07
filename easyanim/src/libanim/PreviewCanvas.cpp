@@ -3,9 +3,9 @@
 namespace libanim
 {
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage,
 							 const Symbol* symbol)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->getFPS())
 {

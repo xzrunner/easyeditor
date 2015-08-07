@@ -9,7 +9,8 @@ namespace ecomplex
 class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
-	PreviewCanvas(d2d::EditPanel* stage, const std::vector<const d2d::ISprite*>& sprites);
+	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		const std::vector<const d2d::ISprite*>& sprites);
 
 protected:
 	virtual void InitGL();

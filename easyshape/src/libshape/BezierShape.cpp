@@ -74,9 +74,9 @@ void BezierShape::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::IPropertySetting* BezierShape::createPropertySetting(d2d::EditPanel* editPanel)
+d2d::IPropertySetting* BezierShape::createPropertySetting(d2d::EditPanelImpl* stage)
 {
-	return new BezierPropertySetting(editPanel, this);
+	return new BezierPropertySetting(stage, this);
 }
 
 void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)

@@ -8,12 +8,13 @@
 namespace libshape
 {
 
-DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
-								 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
+DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+								 d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
 								 d2d::PropertySettingPanel* property,
 								 d2d::ViewPanelMgr* view_panel_mgr
 								 /*, wxColourData& colorData*/)
-	: d2d::OneFloatValueCMPT(parent, name, editPanel, "node capture", 5, 30, 10)
+	: d2d::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)
+	, m_stage_wnd(stage_wnd)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
 //	, m_colorData(colorData)
@@ -28,15 +29,15 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 
 	// draw polygon with pen, node capture
 	{
-		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
+		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>
-			(editPanel, editPanel->GetStageImpl(), shapesImpl, property, view_panel_mgr, cmpt, /*cmpt*/this);
+			(stage_wnd, stage, shapesImpl, property, view_panel_mgr, cmpt, /*cmpt*/this);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
 	}
 	// draw polygon with pencil, simplify threshold
 	{
-		addChild(new DrawPencilPolygonCMPT(this, wxT("pencil"), editPanel, shapesImpl));
+		addChild(new DrawPencilPolygonCMPT(this, wxT("pencil"), stage_wnd, stage, shapesImpl));
 	}
 }
 
@@ -111,7 +112,7 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			col.r = m_color.Red() / 255.0f;
 			col.g = m_color.Green() / 255.0f;
 			col.b = m_color.Blue() / 255.0f;
-			d2d::HSLColorSettingDlg dlg(m_stage, NULL, col);
+			d2d::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
 			if (dlg.ShowModal()) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);

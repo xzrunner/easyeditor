@@ -4,7 +4,7 @@
 namespace libshape
 {
 
-PolygonPropertySetting::PolygonPropertySetting(d2d::EditPanel* stage, 
+PolygonPropertySetting::PolygonPropertySetting(d2d::EditPanelImpl* stage, 
 											   PolygonShape* poly)
 	: IPropertySetting("Polygon")
 	, m_stage(stage)

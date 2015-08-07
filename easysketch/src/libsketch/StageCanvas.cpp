@@ -6,9 +6,9 @@
 namespace libsketch
 {
 
-StageCanvas::StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl, 
-						 d2d::LibraryPanel* library)
-	: e3d::StageCanvas(edit_panel)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+						 d2d::MultiSpritesImpl* sprites_impl, d2d::LibraryPanel* library)
+	: e3d::StageCanvas(stage_wnd, stage)
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {

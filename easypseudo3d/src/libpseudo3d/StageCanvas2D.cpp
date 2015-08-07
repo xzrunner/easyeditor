@@ -5,8 +5,8 @@
 namespace epseudo3d
 {
 
-StageCanvas2D::StageCanvas2D(d2d::EditPanel* stage)
-	: d2d::OrthoCanvas(stage)
+StageCanvas2D::StageCanvas2D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 {
 	SetBgColor(d2d::BLACK);
 

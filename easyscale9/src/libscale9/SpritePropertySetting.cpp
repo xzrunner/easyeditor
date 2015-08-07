@@ -4,8 +4,8 @@
 namespace escale9
 {
 
-SpritePropertySetting::SpritePropertySetting(d2d::EditPanel* editPanel, Sprite* sprite)
-	: d2d::SpritePropertySetting(editPanel, sprite)
+SpritePropertySetting::SpritePropertySetting(d2d::EditPanelImpl* stage, Sprite* sprite)
+	: d2d::SpritePropertySetting(stage, sprite)
 {
 	m_type = "Scale9Sprite";
 }

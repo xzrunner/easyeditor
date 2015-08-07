@@ -10,8 +10,8 @@ namespace ephysics
 class UniversalArrangeCMPT : public d2d::AbstractEditCMPT
 {
 public:
-	UniversalArrangeCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl,
+	UniversalArrangeCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
+		d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
 		d2d::PropertySettingPanel* propertyPanel);
 
 	virtual void updateControlValue();

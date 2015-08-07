@@ -7,7 +7,6 @@
 namespace d2d
 {
 
-class EditPanel;
 class MultiShapesImpl;
 class AbstractEditCMPT;
 class IPropertySetting;

@@ -11,7 +11,7 @@ namespace eparticle3d
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, m_ps(NULL)
 	, m_last_time(-1)
 {

@@ -37,7 +37,7 @@ void StagePanel::SetImage(d2d::Image* img)
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, NULL, library)
+	: d2d::StageDropTarget(stage, stage->GetStageImpl(), NULL, library)
 	, m_stage(stage)
 {
 }

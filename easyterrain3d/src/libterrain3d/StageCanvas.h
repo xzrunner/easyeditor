@@ -12,7 +12,7 @@ class IDemo;
 class StageCanvas : public e3d::StageCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* stage);
+	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 
 protected:
 	virtual void InitGL();

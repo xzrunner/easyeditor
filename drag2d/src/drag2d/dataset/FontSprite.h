@@ -35,7 +35,7 @@ public:
 
 	virtual void BuildBounding();
 
-	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
+	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	void loadFont(const std::string& filename);
 

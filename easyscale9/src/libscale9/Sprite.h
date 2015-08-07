@@ -27,7 +27,7 @@ public:
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanel* stage);	
+	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);	
 
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);

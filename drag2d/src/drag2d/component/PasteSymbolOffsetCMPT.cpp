@@ -8,11 +8,12 @@
 template <typename TOperation>
 d2d::PasteSymbolOffsetCMPT<TOperation>::
 PasteSymbolOffsetCMPT(wxWindow* parent, const wxString& name,
-					  EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+					  wxWindow* stage_wnd, EditPanelImpl* stage, 
+					  MultiSpritesImpl* spritesImpl, 
 					  LibraryPanel* libraryPanel)
 	: AbstractEditCMPT(parent, name, editPanel)
 {
-	m_editOP = new TOperation(editPanel, spritesImpl, libraryPanel, this);
+	m_editOP = new TOperation(stage_wnd, stage, spritesImpl, libraryPanel, this);
 }
 
 template <typename TOperation>

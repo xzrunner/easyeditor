@@ -5,16 +5,17 @@
 #include "dataset/ISprite.h"
 #include "dataset/SpriteFactory.h"
 #include "view/LibraryPanel.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/MultiSpritesImpl.h"
 
 namespace d2d
 {
 
 SpriteDropTarget::SpriteDropTarget(MultiSpritesImpl* panelImpl, 
-	EditPanel* editPanel, LibraryPanel* libraryPanel)
+								   EditPanelImpl* stage, 
+								   LibraryPanel* libraryPanel)
 	: m_panelImpl(panelImpl)
-	, m_stage(editPanel)
+	, m_stage(stage)
 	, m_libraryPanel(libraryPanel)
 {
 }

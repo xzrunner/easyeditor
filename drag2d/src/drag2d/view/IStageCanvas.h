@@ -11,12 +11,12 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 
 class IStageCanvas : public wxGLCanvas, public Object
 {
 public:
-	IStageCanvas(EditPanel* stage);
+	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 	virtual ~IStageCanvas();
 
 	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
@@ -64,7 +64,7 @@ private:
 	void OnKillFocus(wxFocusEvent& event);
 
 protected:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 	Colorf m_bg_color;
 

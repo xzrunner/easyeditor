@@ -8,7 +8,8 @@ namespace eterrain2d
 {
 
 BlendTextureCMPT::BlendTextureCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	, m_stage_panel(stage)
 {
 	m_editOP = new WaveVerticesOP(stage);
 }
@@ -49,7 +50,7 @@ wxSizer* BlendTextureCMPT::initLayout()
 
 void BlendTextureCMPT::OnOpenBlendChanged(wxCommandEvent& event)
 {
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->OpenBlend(event.IsChecked());
 	}
@@ -58,7 +59,7 @@ void BlendTextureCMPT::OnOpenBlendChanged(wxCommandEvent& event)
 void BlendTextureCMPT::OnChangeSpeed(wxSpinEvent& event)
 {
 	float speed = m_speed->GetValue() * 0.01f;
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetBlendSpeed(speed);
 	}

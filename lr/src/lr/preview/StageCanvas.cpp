@@ -5,9 +5,9 @@ namespace lr
 namespace preview
 {
 
-StageCanvas::StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
+StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::PlayControl& control,
 						 const std::vector<const d2d::ISprite*>& sprites)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_control(control)
 	, m_sprites(sprites)
 {

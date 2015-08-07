@@ -11,7 +11,7 @@ static const float SPEED_Y = -0.05f;
 
 EditUVCMPT::EditUVCMPT(wxWindow* parent, const wxString& name, 
 					   StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_editOP = new EditUVOP(stage);

@@ -1,7 +1,6 @@
 #include "OrthoCanvas.h"
 #include "Camera.h"
 
-#include "view/EditPanel.h"
 #include "render/ShaderMgr.h"
 
 #include <gl/glu.h>
@@ -9,8 +8,8 @@
 namespace d2d
 {
 
-OrthoCanvas::OrthoCanvas(EditPanel* editPanel)
-	: TwoPassCanvas(editPanel)
+OrthoCanvas::OrthoCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
+	: TwoPassCanvas(stage_wnd, stage)
 {
 }
 

@@ -4,8 +4,8 @@ namespace d2d
 {
 
 UniversalCMPT::UniversalCMPT(wxWindow* parent, const wxString& name,
-							 EditPanel* editPanel, AbstractEditOP* editOP)
-	: AbstractEditCMPT(parent, name, editPanel)
+							 EditPanelImpl* stage, AbstractEditOP* editOP)
+	: AbstractEditCMPT(parent, name, stage)
 {
 	m_editOP = editOP;
 }

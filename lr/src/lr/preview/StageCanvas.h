@@ -11,7 +11,7 @@ namespace preview
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
+	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::PlayControl& control,
 		const std::vector<const d2d::ISprite*>& sprites);
 
 protected:

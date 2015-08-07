@@ -1,17 +1,17 @@
 #include "PasteSpriteCMPT.h"
 
 #include "operator/PasteSpriteOP.h"
-#include "view/EditPanel.h"
 
 namespace d2d
 {
 
 PasteSpriteCMPT::PasteSpriteCMPT(wxWindow* parent, const wxString& name, 
-								 EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
+								 wxWindow* stage_wnd, EditPanelImpl* stage, 
+								 MultiSpritesImpl* spritesImpl,
 								 ViewPanelMgr* view_panel_mgr)
-	: AbstractEditCMPT(parent, name, editPanel)
+	: AbstractEditCMPT(parent, name, stage)
 {
-	m_editOP = new PasteSpriteOP(editPanel, editPanel->GetStageImpl(), spritesImpl, view_panel_mgr, this);
+	m_editOP = new PasteSpriteOP(stage_wnd, stage, spritesImpl, view_panel_mgr, this);
 }
 
 wxSizer* PasteSpriteCMPT::initLayout()

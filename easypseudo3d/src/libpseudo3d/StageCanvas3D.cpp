@@ -12,8 +12,8 @@ BEGIN_EVENT_TABLE(StageCanvas3D, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas3D::OnTimer)
 END_EVENT_TABLE()
 
-StageCanvas3D::StageCanvas3D(d2d::EditPanel* stage)
-	: e3d::StageCanvas(stage)
+StageCanvas3D::StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
+	: e3d::StageCanvas(stage_wnd, stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);

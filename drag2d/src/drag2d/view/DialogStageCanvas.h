@@ -6,13 +6,12 @@
 namespace d2d
 {
 
-class EditPanel;
 class ISymbol;
 
 class DialogStageCanvas : public OrthoCanvas
 {
 public:
-	DialogStageCanvas(EditPanel* editPanel, ISymbol* symbol);
+	DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, ISymbol* symbol);
 
 protected:
 	virtual void InitGL();

@@ -7,8 +7,8 @@ BEGIN_EVENT_TABLE(StageCanvas3D, libsketch::StageCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas3D::OnTimer)
 END_EVENT_TABLE()
 
-StageCanvas3D::StageCanvas3D(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* stage, 
-							 d2d::LibraryPanel* library)
+StageCanvas3D::StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+							 d2d::MultiSpritesImpl* stage, d2d::LibraryPanel* library)
 	: libsketch::StageCanvas(edit_panel, stage, library)
 	, m_timer(this, TIMER_ID)
 {

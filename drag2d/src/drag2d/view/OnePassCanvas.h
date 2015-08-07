@@ -9,7 +9,7 @@ namespace d2d
 class OnePassCanvas : public IStageCanvas
 {
 public:
-	OnePassCanvas(EditPanel* stage);
+	OnePassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 
 protected:
 	virtual void OnDrawWhole() const;

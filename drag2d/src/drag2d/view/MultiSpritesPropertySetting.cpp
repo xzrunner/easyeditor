@@ -1,9 +1,9 @@
 #include "MultiSpritesPropertySetting.h"
 #include "PropertySettingPanel.h"
 #include "MultiSpritesPropertyImpl.h"
+#include "EditPanelImpl.h"
 
 #include "common/Math.h"
-#include "view/EditPanel.h"
 #include "view/IStageCanvas.h"
 
 #include <wx/propgrid/advprops.h>
@@ -11,8 +11,7 @@
 namespace d2d
 {
 
-MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanel* stage, 
-														 const std::vector<ISprite*>& sprites)
+MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanelImpl* stage, const std::vector<ISprite*>& sprites)
 	: IPropertySetting("MultiSprites")
 	, m_stage(stage)
 	, m_impl(new MultiSpritesPropertyImpl(sprites))

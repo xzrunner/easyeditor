@@ -2,7 +2,7 @@
 #include "PropertySettingPanel.h"
 
 #include "dataset/FontSprite.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -14,8 +14,8 @@ const wxChar* FontPropertySetting::HORI_ALIGN_LABELS[] = {
 const wxChar* FontPropertySetting::VERT_ALIGN_LABELS[] = { 
 	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), NULL };
 
-FontPropertySetting::FontPropertySetting(EditPanel* editPanel, FontSprite* sprite)
-	: SpritePropertySetting(editPanel, sprite)
+FontPropertySetting::FontPropertySetting(EditPanelImpl* stage, FontSprite* sprite)
+	: SpritePropertySetting(stage, sprite)
 {
 	m_type = "Font";
 }

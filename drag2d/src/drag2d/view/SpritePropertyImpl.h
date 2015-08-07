@@ -4,13 +4,13 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 class ISprite;
 
 class SpritePropertyImpl
 {
 public:
-	SpritePropertyImpl(EditPanel* editpanel, ISprite* sprite);
+	SpritePropertyImpl(EditPanelImpl* stage, ISprite* sprite);
 	~SpritePropertyImpl();
 
 	void Translate(float x, float y);
@@ -24,7 +24,7 @@ public:
 	ISprite* GetSprite() { return m_sprite; }
 
 private:
-	EditPanel* m_editpanel;
+	EditPanelImpl* m_stage;
 
 	ISprite* m_sprite;
 

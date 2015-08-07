@@ -96,9 +96,9 @@ void ChainShape::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::IPropertySetting* ChainShape::createPropertySetting(d2d::EditPanel* editPanel)
+d2d::IPropertySetting* ChainShape::createPropertySetting(d2d::EditPanelImpl* stage)
 {
-	return new ChainPropertySetting(editPanel, this);
+	return new ChainPropertySetting(stage, this);
 }
 
 void ChainShape::LoadFromFile(const Json::Value& value, const std::string& dir)

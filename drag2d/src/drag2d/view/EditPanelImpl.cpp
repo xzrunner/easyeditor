@@ -49,6 +49,15 @@ void EditPanelImpl::Clear()
 	m_history_list.clear();
 }
 
+bool EditPanelImpl::Update(int version)
+{
+	if (m_stage) {
+		return m_stage->Update(version);
+	} else {
+		return false;
+	}
+}
+
 Vector EditPanelImpl::TransPosScrToProj(int x, int y) const
 {
 	if (!m_stage) {
@@ -365,6 +374,13 @@ void EditPanelImpl::PopupMenu(wxMenu* menu, int x, int y)
 {
 	if (m_stage) {
 		m_stage->PopupMenu(menu, x, y);
+	}
+}
+
+void EditPanelImpl::SetDropTarget(wxDropTarget* target)
+{
+	if (m_stage) {
+		m_stage->SetDropTarget(target);
 	}
 }
 

@@ -3,7 +3,6 @@
 #include "operator/PasteSymbolOP.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
-#include "view/EditPanel.h"
 
 #include <wx/spinctrl.h>
 
@@ -11,12 +10,13 @@ namespace d2d
 {
 
 PasteSymbolScaleCMPT::PasteSymbolScaleCMPT(wxWindow* parent, const wxString& name, 
-										   EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+										   wxWindow* stage_wnd, EditPanelImpl* stage, 
+										   MultiSpritesImpl* spritesImpl, 
 										   LibraryPanel* libraryPanel)
-	: AbstractEditCMPT(parent, name, editPanel)
+	: AbstractEditCMPT(parent, name, stage)
 	, m_scaleVal(1.0f)
 {
-	m_editOP = new PasteSymbolOP(editPanel, editPanel->GetStageImpl(), spritesImpl, libraryPanel, &m_scaleVal);
+	m_editOP = new PasteSymbolOP(stage_wnd, stage, spritesImpl, libraryPanel, &m_scaleVal);
 }
 
 wxSizer* PasteSymbolScaleCMPT::initLayout()

@@ -4,8 +4,8 @@
 namespace eanim
 {
 
-StageCanvas::StageCanvas(d2d::EditPanel* stage)
-	: d2d::OrthoCanvas(stage)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_background(NULL)
 {
 }

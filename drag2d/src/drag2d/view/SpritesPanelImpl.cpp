@@ -1,6 +1,6 @@
 #include "SpritesPanelImpl.h"
 #include "IDataContainer.h"
-#include "EditPanel.h"
+#include "EditPanelImpl.h"
 #include "SpriteDropTarget.h"
 #include "SpritesContainer.h"
 #include "IStageCanvas.h"
@@ -10,16 +10,16 @@
 namespace d2d
 {
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, IDataContainer* container)
-	: MultiSpritesImpl(stage->GetStageImpl())
+SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* container)
+	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
 	m_container = container;
 	m_container->Retain();
 }
 
-SpritesPanelImpl::SpritesPanelImpl(EditPanel* stage, LibraryPanel* library)
-	: MultiSpritesImpl(stage->GetStageImpl())
+SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
+	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
 	m_stage->SetDropTarget(new SpriteDropTarget(this, stage, library));

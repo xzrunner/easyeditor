@@ -1,14 +1,24 @@
 #include "ShapeSelection.h"
 #include "IStageCanvas.h"
 
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-ShapeSelection::ShapeSelection(EditPanel* stage)
-	: m_stage(stage)
+ShapeSelection::ShapeSelection(EditPanelImpl* stage)
 {
+	if (stage) {
+		stage->Retain();
+	}	
+	m_stage = stage;
+}
+
+ShapeSelection::~ShapeSelection()
+{
+	if (m_stage) {
+		m_stage->Release();
+	}
 }
 
 void ShapeSelection::Clear()

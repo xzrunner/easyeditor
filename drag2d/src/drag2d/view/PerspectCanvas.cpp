@@ -7,8 +7,8 @@ namespace d2d
 
 static const GLfloat CAM_POS[] = {0, -400.0f, 400.0f, 1.0f};
 
-PerspectCanvas::PerspectCanvas(EditPanel* editPanel)
-	: OnePassCanvas(editPanel)
+PerspectCanvas::PerspectCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
+	: OnePassCanvas(stage_wnd, stage)
 {
 }
 

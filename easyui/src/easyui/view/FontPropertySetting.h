@@ -9,7 +9,7 @@ namespace eui
 class FontPropertySetting : public d2d::FontPropertySetting
 {
 public:
-	FontPropertySetting(d2d::EditPanel* editPanel, d2d::FontSprite* sprite);
+	FontPropertySetting(d2d::EditPanelImpl* stage, d2d::FontSprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 

@@ -1,25 +1,29 @@
-#pragma once
+#ifndef _DRAG2D_MOUSE_POSITION_CMPT_H_
+#define _DRAG2D_MOUSE_POSITION_CMPT_H_
 
 #include "AbstractEditCMPT.h"
 
 namespace d2d
 {
-	class Vector;
 
-	class MousePositionCMPT : public AbstractEditCMPT
-	{
-	public:
-		MousePositionCMPT(wxWindow* parent, const wxString& name, 
-			EditPanel* editPanel, bool create_op = true);
+class Vector;
 
-		void updatePosition(const Vector& pos);
+class MousePositionCMPT : public AbstractEditCMPT
+{
+public:
+	MousePositionCMPT(wxWindow* parent, const wxString& name, 
+		wxWindow* stage_wnd, EditPanelImpl* stage, bool create_op = true);
 
-	protected:
-		virtual wxSizer* initLayout();
+	void updatePosition(const Vector& pos);
 
-	private:
-		wxTextCtrl *m_xText, *m_yText;
+protected:
+	virtual wxSizer* initLayout();
 
-	}; // MousePositionCMPT
+private:
+	wxTextCtrl *m_xText, *m_yText;
+
+}; // MousePositionCMPT
+
 }
 
+#endif // _DRAG2D_MOUSE_POSITION_CMPT_H_

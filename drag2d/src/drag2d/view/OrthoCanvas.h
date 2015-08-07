@@ -6,12 +6,10 @@
 namespace d2d
 {
 
-class EditPanel;
-
 class OrthoCanvas : public TwoPassCanvas
 {
 public:
-	OrthoCanvas(EditPanel* editPanel);
+	OrthoCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 
 protected:
 	virtual void OnSize(int w, int h);

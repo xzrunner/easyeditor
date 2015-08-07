@@ -23,9 +23,6 @@ public:
 	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~EditPanel();
 
-	//
-	// wxWindow
-	//
 	virtual void Clear();
 	virtual bool Update(int version) { return false; }
 

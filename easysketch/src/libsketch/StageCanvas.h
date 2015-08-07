@@ -10,8 +10,8 @@ namespace libsketch
 class StageCanvas : public e3d::StageCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl, 
-		d2d::LibraryPanel* library);
+	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiSpritesImpl* sprites_impl, d2d::LibraryPanel* library);
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
 	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;

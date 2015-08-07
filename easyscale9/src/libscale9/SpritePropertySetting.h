@@ -11,7 +11,7 @@ class Sprite;
 class SpritePropertySetting : public d2d::SpritePropertySetting
 {
 public:
-	SpritePropertySetting(d2d::EditPanel* editPanel, Sprite* sprite);
+	SpritePropertySetting(d2d::EditPanelImpl* stage, Sprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 

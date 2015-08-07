@@ -13,8 +13,8 @@ namespace eterrain2d
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
-	, d2d::ShapesPanelImpl(this)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+	, d2d::ShapesPanelImpl(GetStageImpl())
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
@@ -26,8 +26,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
-	, d2d::ShapesPanelImpl(this)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+	, d2d::ShapesPanelImpl(GetStageImpl())
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this, edited, bg_sprites));
@@ -143,7 +143,7 @@ void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageS
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, NULL, library)
+	: d2d::StageDropTarget(stage, stage->GetStageImpl(), NULL, library)
 	, m_stage(stage)
 {
 }

@@ -10,7 +10,7 @@ namespace libshape
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(this)
+	, MultiShapesImpl(GetStageImpl())
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));
@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(this)
+	, MultiShapesImpl(GetStageImpl())
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this, edited, bg_sprites));
@@ -35,7 +35,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   Symbol* symbol/*, d2d::LibraryPanel* library*/)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(this)
+	, MultiShapesImpl(GetStageImpl())
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));

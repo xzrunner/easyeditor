@@ -29,6 +29,8 @@ private:
 	void OnChangeBoundLock(wxCommandEvent& event);
 
 private:
+	StagePanel* m_stage_panel;
+
 	wxCheckBox* m_switch;
 
 	wxSpinCtrl *m_row_spin, *m_col_spin;

@@ -4,13 +4,13 @@
 #include <wx/propgrid/advprops.h>
 
 #include "dataset/TextSprite.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 
 namespace d2d
 {
 
-TextPropertySetting::TextPropertySetting(EditPanel* stage, TextSprite* sprite)
+TextPropertySetting::TextPropertySetting(EditPanelImpl* stage, TextSprite* sprite)
 	: IPropertySetting("TextSprite")
 	, m_stage(stage)
 	, m_sprite(sprite)

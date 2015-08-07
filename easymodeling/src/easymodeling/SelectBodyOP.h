@@ -10,7 +10,8 @@ namespace emodeling
 	class SelectBodyOP : public d2d::SelectSpritesOP
 	{
 	public:
-		SelectBodyOP(d2d::EditPanel* editPanel, 
+		SelectBodyOP(wxWindow* stage_wnd,
+			d2d::EditPanelImpl* stage, 
 			d2d::MultiSpritesImpl* spritesImpl, 
 			d2d::ViewPanelMgr* view_panel_mgr = NULL,
 			d2d::AbstractEditCMPT* callback = NULL);

@@ -89,7 +89,7 @@ void Sprite::Store(Json::Value& val) const
 	val["scale9"]["height"] = h;
 }
 
-d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanel* stage)
+d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
 }

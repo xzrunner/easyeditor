@@ -1,8 +1,6 @@
 #include "RGBColorSettingDlg.h"
 #include "ColorSlider.h"
 
-#include "view/EditPanel.h"
-
 namespace d2d
 {
 

@@ -60,14 +60,14 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent)
 	m_stage = new StagePanel(parent, this, m_symbol, m_property, 
 		static_cast<ecomplex::LibraryPanel*>(m_library), &m_view_panel_mgr);
 	m_view_panel_mgr.AddSpritePanel(m_stage);
-	m_property->SetEditPanel(m_stage);
+	m_property->SetEditPanel(m_stage->GetStageImpl());
 	m_property->SelectSprite(NULL, true);
 	return m_stage;
 }
 
 wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 {
-	m_viewlist = new d2d::ViewlistPanel(parent, m_stage, m_stage, &m_view_panel_mgr);
+	m_viewlist = new d2d::ViewlistPanel(parent, m_stage->GetStageImpl(), m_stage, &m_view_panel_mgr);
 	m_view_panel_mgr.AddSpritePanel(m_viewlist);
 	return m_viewlist;
 }

@@ -10,7 +10,7 @@ namespace emesh
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, 
 						   bool full, Sprite* sprite)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_sprite(sprite)
 {
 	if (full)

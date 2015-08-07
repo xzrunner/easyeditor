@@ -45,7 +45,7 @@ void PointShape::draw(const d2d::Matrix& mt, const d2d::Colorf& color) const
 	d2d::PrimitiveDraw::drawCircle(mt, m_pos, RADIUS, true, 2, color);
 }
 
-d2d::IPropertySetting* PointShape::createPropertySetting(d2d::EditPanel* editPanel)
+d2d::IPropertySetting* PointShape::createPropertySetting(d2d::EditPanelImpl* stage)
 {
 	return NULL;
 }

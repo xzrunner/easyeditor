@@ -11,7 +11,7 @@ namespace emodeling
 class FixturePropertySetting : public d2d::IPropertySetting
 {
 public:
-	FixturePropertySetting(d2d::EditPanel* stage, libmodeling::Fixture* fixture);
+	FixturePropertySetting(d2d::EditPanelImpl* stage, libmodeling::Fixture* fixture);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -20,7 +20,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanel* m_stage;
+	d2d::EditPanelImpl* m_stage;
 
 	libmodeling::Fixture* m_fixture;
 

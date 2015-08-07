@@ -11,7 +11,7 @@ namespace eshadow
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(this)
+	, d2d::MultiShapesImpl(GetStageImpl())
 	, m_loop(NULL)
 {
 	SetCanvas(new StageCanvas(this));
@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(this)
+	, d2d::MultiShapesImpl(GetStageImpl())
 	, m_loop(NULL)
 {
 	SetCanvas(new StageCanvas(this, edited, bg_sprites));

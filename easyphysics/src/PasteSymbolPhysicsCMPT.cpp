@@ -6,18 +6,18 @@
 namespace ephysics
 {
  
-PasteSymbolPhysicsCMPT::PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString& name,
-											   d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel,
+PasteSymbolPhysicsCMPT::PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+											   d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel,
 											   PhysicsPanelImpl* physicsImpl, b2World* world, b2World* worldReverse,
 											   float* pScale /*= NULL*/, d2d::PasteSymbolRandomWidget* randomWidget/* = NULL*/)
-	: AbstractEditCMPT(parent, name, editPanel)
+	: AbstractEditCMPT(parent, name, stage)
 	, m_world(world)
 	, m_worldReverse(worldReverse)
 {
 	if (!randomWidget)
-		m_editOP = new PasteSymbolPhysicsOP(editPanel, spritesImpl, libraryPanel, physicsImpl, pScale);
+		m_editOP = new PasteSymbolPhysicsOP(stage_wnd, stage, spritesImpl, libraryPanel, physicsImpl, pScale);
 	else
-		m_editOP = new PasteSymbolPhysicsRandomOP(editPanel, spritesImpl, libraryPanel, physicsImpl, randomWidget);
+		m_editOP = new PasteSymbolPhysicsRandomOP(stage_wnd, stage, spritesImpl, libraryPanel, physicsImpl, randomWidget);
 }
 
 wxSizer* PasteSymbolPhysicsCMPT::initLayout()

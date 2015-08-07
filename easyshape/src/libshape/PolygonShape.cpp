@@ -74,9 +74,9 @@ void PolygonShape::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::IPropertySetting* PolygonShape::createPropertySetting(d2d::EditPanel* editPanel)
+d2d::IPropertySetting* PolygonShape::createPropertySetting(d2d::EditPanelImpl* stage)
 {
-	return new PolygonPropertySetting(editPanel, this);
+	return new PolygonPropertySetting(stage, this);
 }
 
 void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir)

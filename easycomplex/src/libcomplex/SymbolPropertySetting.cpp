@@ -4,7 +4,7 @@
 namespace ecomplex
 {
 
-SymbolPropertySetting::SymbolPropertySetting(d2d::EditPanel* stage, Symbol* symbol)
+SymbolPropertySetting::SymbolPropertySetting(d2d::EditPanelImpl* stage, Symbol* symbol)
 	: d2d::SymbolPropertySetting(stage, symbol)
 	, m_stage(stage)
 {

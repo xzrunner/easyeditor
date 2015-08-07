@@ -10,7 +10,7 @@ class FontSprite;
 class FontPropertySetting : public SpritePropertySetting
 {
 public:
-	FontPropertySetting(EditPanel* editPanel, FontSprite* sprite);
+	FontPropertySetting(EditPanelImpl* stage, FontSprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 

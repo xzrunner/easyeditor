@@ -2,7 +2,7 @@
 #include "IDataContainer.h"
 #include "ShapesContainer.h"
 #include "IStageCanvas.h"
-#include "EditPanel.h"
+#include "EditPanelImpl.h"
 
 #include "common/tools.h"
 #include "dataset/IShape.h"
@@ -10,14 +10,14 @@
 namespace d2d
 {
 
-ShapesPanelImpl::ShapesPanelImpl(EditPanel* stage)
+ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage)
 	: MultiShapesImpl(stage)
 	, m_stage(stage)
 {
 	m_container = new ShapesContainer();
 }
 
-ShapesPanelImpl::ShapesPanelImpl(EditPanel* stage, IDataContainer* container)
+ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage, IDataContainer* container)
 	: MultiShapesImpl(stage)
 	, m_stage(stage)
 {

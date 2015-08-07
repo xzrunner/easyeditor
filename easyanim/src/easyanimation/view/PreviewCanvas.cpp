@@ -11,9 +11,9 @@
 namespace eanim
 {
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, const PlaySettings& settings,
 							 d2d::PlayControl& control, Controller* ctrl)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_control(control)
 	, m_settings(settings)
 	, m_ctrl(ctrl)

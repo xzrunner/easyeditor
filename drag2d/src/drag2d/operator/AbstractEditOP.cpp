@@ -1,6 +1,5 @@
 #include "AbstractEditOP.h"
 
-#include "view/EditPanel.h"
 #include "view/EditPanelImpl.h"
 
 namespace d2d

@@ -2,15 +2,15 @@
 
 #include "common/tools.h"
 #include "operator/AbstractEditOP.h"
-#include "view/EditPanel.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-AbstractEditCMPT::AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel,
+AbstractEditCMPT::AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanelImpl* stage, 
 								   const wxString& childrenName/* = wxEmptyString*/, bool vertical)
 	: wxScrolledWindow(parent)
-	, m_stage(editPanel)
+	, m_stage(stage)
 	, m_editOP(NULL)
 	, m_name(name)
 	, m_childrenName(childrenName)

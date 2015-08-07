@@ -8,11 +8,12 @@
 
 using namespace emodeling;
 
-SelectBodyOP::SelectBodyOP(d2d::EditPanel* editPanel, 
+SelectBodyOP::SelectBodyOP(wxWindow* stage_wnd,
+						   d2d::EditPanelImpl* stage, 
 						   d2d::MultiSpritesImpl* spritesImpl, 
 						   d2d::ViewPanelMgr* view_panel_mgr, 
 						   d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr, callback)
+	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, view_panel_mgr, callback)
 	, m_mouseOn(NULL)
 {
 }
@@ -65,7 +66,7 @@ bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 
 bool SelectBodyOP::OnDraw() const
 {
-	if (d2d::DrawRectangleOP::OnDraw()) return true;
+	if (d2d::SelectSpritesOP::OnDraw()) return true;
 
 	m_selection->Traverse(DrawSelectedVisitor());
 

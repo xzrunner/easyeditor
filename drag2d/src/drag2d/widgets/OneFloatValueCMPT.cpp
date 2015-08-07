@@ -4,9 +4,9 @@ namespace d2d
 {
 
 OneFloatValueCMPT::OneFloatValueCMPT(wxWindow* parent, const wxString& name, 
-									 EditPanel* editPanel, const std::string& title, 
+									 EditPanelImpl* stage, const std::string& title, 
 									 int min, int max, int value, float scale)
-	: AbstractEditCMPT(parent, name, editPanel)
+	: AbstractEditCMPT(parent, name, stage)
 	, m_title(title)
 	, m_min(min)
 	, m_max(max)

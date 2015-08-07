@@ -2,16 +2,15 @@
 
 #include "common/config.h"
 #include "dataset/ISymbol.h"
-#include "view/EditPanel.h"
 //#include "render/DynamicTexture.h"
 #include "render/DynamicTexAndFont.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-DialogStageCanvas::DialogStageCanvas(EditPanel* editPanel, 
-									 ISymbol* symbol)
-	: OrthoCanvas(editPanel)
+DialogStageCanvas::DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, ISymbol* symbol)
+	: OrthoCanvas(stage_wnd, stage)
 	, m_symbol(symbol)
 {
 }

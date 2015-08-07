@@ -12,10 +12,9 @@ namespace libshape
 class DrawPolygonCMPT : public d2d::OneFloatValueCMPT
 {
 public:
-	DrawPolygonCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* property,
-		d2d::ViewPanelMgr* view_panel_mgr
+	DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
+		d2d::PropertySettingPanel* property,d2d::ViewPanelMgr* view_panel_mgr
 		/*, wxColourData& colorData*/);
 
 	virtual void updateControlValue();
@@ -33,6 +32,8 @@ private:
 	void fillingButton();
 
 private:
+	wxWindow* m_stage_wnd;
+
 	d2d::MultiShapesImpl* m_shapesImpl;
 
 	wxColour m_color;

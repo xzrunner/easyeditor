@@ -23,6 +23,8 @@ protected:
 	virtual void OnDrawSprites() const;
 
 private:
+	StagePanel* m_stage;
+
 	const d2d::MultiShapesImpl* m_shape_impl;
 
 	d2d::ISprite* m_edited;

@@ -7,8 +7,8 @@
 #include "common/color_trans.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
-#include "view/EditPanel.h"
 #include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 #include "render/BlendModes.h"
 #include "widgets/ColorProperty.h"
 
@@ -17,7 +17,7 @@
 namespace d2d
 {
 
-SpritePropertySetting::SpritePropertySetting(EditPanel* stage, ISprite* sprite)
+SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, ISprite* sprite)
 	: IPropertySetting("Sprite")
 	, m_stage(stage)
 	, m_impl(new SpritePropertyImpl(stage, sprite))

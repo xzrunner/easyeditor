@@ -55,7 +55,7 @@ void CosineShape::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::IPropertySetting* CosineShape::createPropertySetting(d2d::EditPanel* editPanel)
+d2d::IPropertySetting* CosineShape::createPropertySetting(d2d::EditPanelImpl* stage)
 {
 	return NULL;
 }

@@ -5,7 +5,8 @@ namespace libshape
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	, m_stage(stage)
 	, m_shape_impl(stage)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -16,7 +17,8 @@ StageCanvas::StageCanvas(StagePanel* stage)
 StageCanvas::StageCanvas(StagePanel* stage, 
 						 d2d::ISprite* edited,
 						 const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	, m_stage(stage)
 	, m_shape_impl(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
@@ -58,7 +60,7 @@ void StageCanvas::OnDrawSprites() const
 	libshape::StageCanvas::DrawGuideLines();
 
 	if (!m_edited) {
-		const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_stage)->GetSymbol();
+		const d2d::ISymbol& symbol = m_stage->GetSymbol();
 		symbol.Draw(d2d::Matrix());
 	}
 

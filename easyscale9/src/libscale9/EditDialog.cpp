@@ -28,7 +28,7 @@ void EditDialog::initLayout()
 	
 	m_stage = new d2d::EditPanel(splitter, this);
 	m_stage->SetEditOP(new ResizeBaseOP(m_stage, m_stage->GetStageImpl(), m_symbol));
-	m_stage->SetCanvas(new d2d::DialogStageCanvas(m_stage, m_symbol));
+	m_stage->SetCanvas(new d2d::DialogStageCanvas(m_stage, m_stage->GetStageImpl(), m_symbol));
 
 	ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_stage, m_symbol);
 	

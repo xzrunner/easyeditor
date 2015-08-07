@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 class LibraryPanel;
 class ISprite;
 class IDataContainer;
@@ -14,8 +14,8 @@ class IDataContainer;
 class SpritesPanelImpl : public MultiSpritesImpl
 {
 public:
-	SpritesPanelImpl(EditPanel* stage, IDataContainer* container);
-	SpritesPanelImpl(EditPanel* stage, LibraryPanel* library);
+	SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* container);
+	SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library);
 	virtual ~SpritesPanelImpl();
 
 	//
@@ -29,7 +29,7 @@ public:
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
 private:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 	IDataContainer* m_container;
 

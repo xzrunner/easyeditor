@@ -1,5 +1,4 @@
 #include "TwoPassCanvas.h"
-#include "EditPanel.h"
 
 #include "render/ShaderMgr.h"
 #include "render/ScreenFBO.h"
@@ -9,8 +8,8 @@
 namespace d2d
 {
 
-TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
-	: IStageCanvas(stage)
+TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
+	: IStageCanvas(stage_wnd, stage)
 {
 }
 

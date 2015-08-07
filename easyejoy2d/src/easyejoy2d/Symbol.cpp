@@ -15,7 +15,8 @@ Symbol::Symbol()
 Symbol::Symbol(const Symbol& s)
 	: d2d::ISymbol(s)
 {
-	d2d::obj_assign<EJSprite>(m_spr, s.m_spr);
+	EJSprite* spr = s.m_spr;
+	d2d::obj_assign<EJSprite>(m_spr, spr);
 }
 
 Symbol::~Symbol()

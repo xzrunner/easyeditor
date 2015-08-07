@@ -50,9 +50,9 @@ void RectShape::draw(const d2d::Matrix& mt,
 	d2d::PrimitiveDraw::rect(mt, m_rect, m_style);
 }
 
-d2d::IPropertySetting* RectShape::createPropertySetting(d2d::EditPanel* editPanel)
+d2d::IPropertySetting* RectShape::createPropertySetting(d2d::EditPanelImpl* stage)
 {
-	return new RectPropertySetting(editPanel, this);
+	return new RectPropertySetting(stage, this);
 }
 
 void RectShape::LoadFromFile(const Json::Value& value, const std::string& dir)

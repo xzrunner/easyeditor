@@ -9,7 +9,8 @@ namespace libshape
 class MousePositionCMPT : public d2d::MousePositionCMPT
 {
 public:
-	MousePositionCMPT(wxWindow* parent, const wxString& name, d2d::EditPanel* editPanel);
+	MousePositionCMPT(wxWindow* parent, const wxString& name, 
+		wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 
 }; // MousePositionCMPT
 

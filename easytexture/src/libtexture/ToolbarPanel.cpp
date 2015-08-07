@@ -7,9 +7,9 @@ namespace etexture
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 {
-	addChild(new libshape::DrawPolygonCMPT(this, wxT("polygon"), stage, stage, NULL, NULL));
+	addChild(new libshape::DrawPolygonCMPT(this, wxT("polygon"), stage, stage->GetStageImpl(), stage, NULL, NULL));
 	SetSizer(initLayout());	
 }
 

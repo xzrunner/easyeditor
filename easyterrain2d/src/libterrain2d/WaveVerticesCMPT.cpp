@@ -8,7 +8,8 @@ namespace eterrain2d
 {
 
 WaveVerticesCMPT::WaveVerticesCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	, m_stage_panel(stage)
 {
 	m_editOP = new WaveVerticesOP(stage);
 }
@@ -111,7 +112,7 @@ wxSizer* WaveVerticesCMPT::initLayout()
 
 void WaveVerticesCMPT::OnOpenWaveChanged(wxCommandEvent& event)
 {
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->OpenWave(event.IsChecked());
 	}
@@ -119,7 +120,7 @@ void WaveVerticesCMPT::OnOpenWaveChanged(wxCommandEvent& event)
 
 void WaveVerticesCMPT::OnReflushPress(wxCommandEvent& event)
 {
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->Build();
 	}
@@ -127,7 +128,7 @@ void WaveVerticesCMPT::OnReflushPress(wxCommandEvent& event)
 
 void WaveVerticesCMPT::OnChangeGridSize(wxSpinEvent& event)
 {
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetSmallGridSize(m_row_spin->GetValue(), m_col_spin->GetValue());
 	}
@@ -135,7 +136,7 @@ void WaveVerticesCMPT::OnChangeGridSize(wxSpinEvent& event)
 
 void WaveVerticesCMPT::OnChangeWaveParams(wxSpinEvent& event)
 {
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetWaveInfo(m_wave_speed->GetValue() * 0.1f, m_wave_height->GetValue());
 	}
@@ -150,7 +151,7 @@ void WaveVerticesCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 void WaveVerticesCMPT::OnChangeBoundLock(wxCommandEvent& event)
 {
 	bool lock = event.IsChecked();
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
+	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetBoundLock(lock);
 	}

@@ -13,7 +13,7 @@ namespace emodeling
 StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, Context::Instance()->library)
+	, d2d::SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
 	m_canvas = new StageCanvas(this);
 }

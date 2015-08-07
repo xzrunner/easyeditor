@@ -25,6 +25,8 @@ private:
 	void OnChangeSpeed(wxSpinEvent& event);
 
 private:
+	StagePanel* m_stage_panel;
+
 	wxCheckBox* m_switch;
 
 	wxSpinCtrl* m_speed;

@@ -2,13 +2,13 @@
 
 #include "common/tools.h"
 #include "dataset/Layer.h"
-#include "view/EditPanel.h"
 #include "view/IStageCanvas.h"
+#include "view/EditPanelImpl.h"
 
 namespace d2d
 {
 
-LayersMgrWidget::LayersMgrWidget(wxWindow* parent, d2d::EditPanel* stage)
+LayersMgrWidget::LayersMgrWidget(wxWindow* parent, EditPanelImpl* stage)
 	: wxPanel(parent)
 	, m_stage(stage)
 	, m_editedLayer(NULL)

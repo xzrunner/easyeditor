@@ -5,8 +5,8 @@
 namespace eui
 {
 
-FontPropertySetting::FontPropertySetting(d2d::EditPanel* editPanel, d2d::FontSprite* sprite)
-	: d2d::FontPropertySetting(editPanel, sprite)
+FontPropertySetting::FontPropertySetting(d2d::EditPanelImpl* stage, d2d::FontSprite* sprite)
+	: d2d::FontPropertySetting(stage, sprite)
 {
 }
 

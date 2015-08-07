@@ -13,7 +13,7 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 d2d::IPropertySetting* PropertySettingPanel::CreateDefaultProperty() const
 {
 	return new SymbolPropertySetting(m_stage, 
-		static_cast<StagePanel*>(m_stage)->getSymbol());
+		static_cast<StagePanel*>(m_stage->GetEditPanel())->getSymbol());
 }
 
 }

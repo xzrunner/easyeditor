@@ -8,15 +8,15 @@ namespace libsketch
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(this)
+	, d2d::MultiSpritesImpl(GetStageImpl())
 {
-	StageCanvas* canvas = new StageCanvas(this, this, library);
+	StageCanvas* canvas = new StageCanvas(this, GetStageImpl(), this, library);
 	SetCanvas(canvas);
 	library->SetCanvas(canvas);
 
 	SetEditOP(new ArrangeSpriteOP(this));
 
-	SetDropTarget(new d2d::StageDropTarget(this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
 }
 
 StagePanel::~StagePanel()

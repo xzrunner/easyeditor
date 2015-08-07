@@ -6,13 +6,13 @@
 namespace ephysics
 {
 
-UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const wxString& name, 
-										   d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl,
+UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
+										   d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
 										   d2d::PropertySettingPanel* propertyPanel)
-	: AbstractEditCMPT(parent, name, editPanel)
+	: AbstractEditCMPT(parent, name, stage)
 	, m_spritesImpl(spritesImpl)
 {
-	m_editOP = new UniversalArrangeOP(editPanel, spritesImpl, propertyPanel, this);
+	m_editOP = new UniversalArrangeOP(stage_wnd, stage, spritesImpl, propertyPanel, this);
 }
 
 void UniversalArrangeCMPT::updateControlValue()

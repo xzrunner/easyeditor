@@ -6,14 +6,14 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 class ISymbol;
 
 class SymbolPropertySetting : public IPropertySetting
 {
 public:
-	SymbolPropertySetting(EditPanel* stage, ISymbol* symbol);
-	SymbolPropertySetting(EditPanel* stage, std::string* name);
+	SymbolPropertySetting(EditPanelImpl* stage, ISymbol* symbol);
+	SymbolPropertySetting(EditPanelImpl* stage, std::string* name);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -22,7 +22,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 protected:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 
 	ISymbol* m_symbol;
 

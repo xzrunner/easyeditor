@@ -10,7 +10,7 @@ namespace eshader
 StagePanel2D::StagePanel2D(wxWindow* parent, wxTopLevelWindow* frame, 
 						   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, m_shader(NULL)
 {
 	m_canvas = new StageCanvas2D(this);

@@ -6,7 +6,7 @@ namespace etexture
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
+	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -16,7 +16,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited, 
 						 const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(panel)
+	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)

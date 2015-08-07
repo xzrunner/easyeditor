@@ -250,7 +250,7 @@ void ISprite::BuildBounding()
 	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
-IPropertySetting* ISprite::CreatePropertySetting(EditPanel* stage)
+IPropertySetting* ISprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
 }

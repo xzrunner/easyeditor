@@ -27,7 +27,7 @@ void FileIO::store(const Task* task, const char* filename)
 //		ecomplex::FileSaver::store(filename, Context::Instance()->stage->getSymbol());
 
 	ecomplex::Symbol* root = task->m_stage->getSymbol();
-	ecomplex::FileSaver::storeWithHistory(filename, root, task->m_stage);
+	ecomplex::FileSaver::storeWithHistory(filename, root);
 	std::queue<const ecomplex::Symbol*> buffer;
 	for (size_t i = 0, n = root->m_sprites.size(); i < n ;++i)
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(root->m_sprites[i]))

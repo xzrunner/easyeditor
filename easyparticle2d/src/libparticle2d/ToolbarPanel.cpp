@@ -8,7 +8,7 @@ namespace eparticle2d
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   d2d::EditPanel* stage, StageData* stage_data)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage_data(stage_data)
 {
 	m_stage_data->SetToolbar(this);

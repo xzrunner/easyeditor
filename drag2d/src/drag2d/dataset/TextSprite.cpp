@@ -66,7 +66,7 @@ void TextSprite::SetSymbol(ISymbol* symbol)
 	}
 }
 
-IPropertySetting* TextSprite::CreatePropertySetting(EditPanel* stage)
+IPropertySetting* TextSprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new TextPropertySetting(stage, this);
 }

@@ -24,7 +24,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::ViewPanelMgr* view_panel_mgr)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
-	, d2d::MultiShapesImpl(this)
+	, d2d::MultiShapesImpl(GetStageImpl())
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_library(library)
 	, m_grids(NULL)

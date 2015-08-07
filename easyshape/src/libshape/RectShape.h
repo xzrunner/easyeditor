@@ -28,7 +28,7 @@ public:
 	virtual void Translate(const d2d::Vector& offset);
 	virtual const d2d::Rect& getRect() const { return m_rect; }
 	virtual void draw(const d2d::Matrix& mt, const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;
-	virtual d2d::IPropertySetting* createPropertySetting(d2d::EditPanel* editPanel);
+	virtual d2d::IPropertySetting* createPropertySetting(d2d::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 

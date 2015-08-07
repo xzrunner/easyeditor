@@ -12,8 +12,8 @@ class ViewPanelMgr;
 class PasteSpriteCMPT : public AbstractEditCMPT
 {
 public:
-	PasteSpriteCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel, 
-		MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr = NULL);
+	PasteSpriteCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
+		EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr = NULL);
 
 	bool isHorMirror() const { return m_xMirror->IsChecked(); }
 	bool isVerMirror() const { return m_yMirror->IsChecked(); }

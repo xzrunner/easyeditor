@@ -14,8 +14,8 @@ namespace d2d
 	{
 	public:
 		PasteSymbolOffsetCMPT(wxWindow* parent, const wxString& name,
-			EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-			LibraryPanel* libraryPanel);
+			wxWindow* stage_wnd, EditPanelImpl* stage, 
+			MultiSpritesImpl* spritesImpl, LibraryPanel* libraryPanel);
 
 		Vector getOffset() const;
 

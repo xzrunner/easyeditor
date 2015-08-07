@@ -6,22 +6,22 @@
 namespace libshape
 {
 
-DrawPolygon2CMPT::DrawPolygon2CMPT(wxWindow* parent, const wxString& name, d2d::EditPanel* editPanel, 
-								   d2d::MultiShapesImpl* shapesImpl, d2d::PropertySettingPanel* property,
-								   d2d::ViewPanelMgr* view_panel_mgr)
-	: d2d::AbstractEditCMPT(parent, name, editPanel, wxT("Tools"))
+DrawPolygon2CMPT::DrawPolygon2CMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+								   d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl, 
+								   d2d::PropertySettingPanel* property, d2d::ViewPanelMgr* view_panel_mgr)
+	: d2d::AbstractEditCMPT(parent, name, stage, wxT("Tools"))
 {
  	// draw polygon with pen, node capture
 	{
-		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
+		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>
-			(editPanel, editPanel->GetStageImpl(), shapesImpl, property, view_panel_mgr, cmpt, cmpt);
+			(stage_wnd, stage, shapesImpl, property, view_panel_mgr, cmpt, cmpt);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
 	}
  	// draw polygon with pencil, simplify threshold
 	{
-		addChild(new DrawPencilPolygonCMPT(this, wxT("pencil"), editPanel, shapesImpl));
+		addChild(new DrawPencilPolygonCMPT(this, wxT("pencil"), stage_wnd, stage, shapesImpl));
 	}
 }
 

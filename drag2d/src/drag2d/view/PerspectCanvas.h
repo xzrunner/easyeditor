@@ -6,12 +6,10 @@
 namespace d2d
 {
 
-class EditPanel;
-
 class PerspectCanvas : public OnePassCanvas
 {
 public:
-	PerspectCanvas(EditPanel* editPanel);
+	PerspectCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 
 private:
 	virtual void OnSize(int w, int h);

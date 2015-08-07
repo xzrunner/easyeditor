@@ -15,11 +15,11 @@
 namespace lr
 {
 
-SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 								 d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr, callback)
+	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, view_panel_mgr, callback)
 {
-	editPanel->SetCursor(wxCursor(wxCURSOR_PENCIL));
+	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
 
 	m_first_press.setInvalid();
 }
@@ -30,7 +30,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	stage->PointQuery(pos);
 
 	if (m_first_press.isValid()) {
@@ -47,7 +47,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	stage->SetUpdateState(false);
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
@@ -55,7 +55,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
- 		ecomplex::EditDialog dlg(m_stage, &symbol);
+ 		ecomplex::EditDialog dlg(m_wnd, &symbol);
  		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -68,7 +68,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	{
- 		libanim::PreviewDialog dlg(m_stage, &anim->GetSymbol());
+ 		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol());
  		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -77,7 +77,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
-  		escale9::EditDialog dlg(m_stage, &symbol);
+  		escale9::EditDialog dlg(m_wnd, &symbol);
   		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -85,7 +85,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::EditDialog dlg(m_stage, sprite);
+		emesh::EditDialog dlg(m_wnd, sprite);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -93,12 +93,12 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
 	{
-		d2d::TextDialog dlg(m_stage, font);
+		d2d::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
-		etexture::EditDialog dlg(m_stage, tex, m_spritesImpl);
+		etexture::EditDialog dlg(m_wnd, tex, m_spritesImpl);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -106,7 +106,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
-		libshape::EditDialogSimple dlg(m_stage, shape, m_spritesImpl);
+		libshape::EditDialogSimple dlg(m_wnd, shape, m_spritesImpl);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -114,7 +114,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
 	{
-		eterrain2d::EditDialog dlg(m_stage, terr, m_spritesImpl);
+		eterrain2d::EditDialog dlg(m_wnd, terr, m_spritesImpl);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -122,7 +122,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	} 
 	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
 	{
-		eshadow::EditDialog dlg(m_stage, shadow, m_spritesImpl);
+		eshadow::EditDialog dlg(m_wnd, shadow, m_spritesImpl);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
@@ -130,7 +130,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (selected)
 	{
-		d2d::SpriteDialog dlg(m_stage, selected);
+		d2d::SpriteDialog dlg(m_wnd, selected);
 		if (dlg.ShowModal() == wxID_OK) {
 			selected->name = dlg.GetNameStr();
 			selected->tag = dlg.GetTagStr();

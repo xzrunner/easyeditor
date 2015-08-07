@@ -8,9 +8,9 @@ namespace eui
 const float PreviewCanvas::VIEW_WIDTH = 1024;
 const float PreviewCanvas::VIEW_HEIGHT = 768;
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::PlayControl& control,
 							 const std::vector<const d2d::ISprite*>& sprites)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_control(control)
 	, m_sprites(sprites)
 {

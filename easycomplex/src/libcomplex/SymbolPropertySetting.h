@@ -11,7 +11,7 @@ class Symbol;
 class SymbolPropertySetting : public d2d::SymbolPropertySetting
 {
 public:
-	SymbolPropertySetting(d2d::EditPanel* stage, Symbol* symbol);
+	SymbolPropertySetting(d2d::EditPanelImpl* stage, Symbol* symbol);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -26,7 +26,7 @@ private:
 	void InitEachGroup(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanel* m_stage;
+	d2d::EditPanelImpl* m_stage;
 
 }; // SymbolPropertySetting	
 

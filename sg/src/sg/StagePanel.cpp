@@ -11,7 +11,7 @@ namespace sg
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, m_library(library)
 	, m_is_flat(false)
 	, m_building_cfg(this, library)

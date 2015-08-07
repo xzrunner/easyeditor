@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-class EditPanel;
+class EditPanelImpl;
 class MultiSpritesImpl;
 class VerticalImageList;
 class ISprite;
@@ -19,7 +19,7 @@ class ViewPanelMgr;
 class ViewlistPanel : public wxPanel, public ISpriteViewPanel
 {
 public:
-	ViewlistPanel(wxWindow* parent, EditPanel* stage,
+	ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
 		MultiSpritesImpl* sprites_impl = NULL, 
 		ViewPanelMgr* view_panel_mgr = NULL);
 	virtual ~ViewlistPanel();
@@ -51,7 +51,7 @@ private:
 	int QuerySprIdx(const ISprite* spr) const;
 
 private:
-	EditPanel* m_stage;
+	EditPanelImpl* m_stage;
 	MultiSpritesImpl* m_sprites_impl;
 
 	ViewPanelMgr* m_view_panel_mgr;

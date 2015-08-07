@@ -30,7 +30,7 @@ public:
 	virtual const FontSymbol& GetSymbol() const;
 	virtual void SetSymbol(ISymbol* symbol);
 
-	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
+	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	virtual void SetTransform(const Vector& position, float angle);
 

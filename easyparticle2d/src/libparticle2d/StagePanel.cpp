@@ -9,7 +9,7 @@ namespace eparticle2d
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 {
 	SetCanvas(new StageCanvas(this));
 

@@ -9,7 +9,7 @@ namespace d2d
 class TwoPassCanvas : public IStageCanvas
 {
 public:
-	TwoPassCanvas(EditPanel* stage);
+	TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 
 protected:
 	virtual void OnSize(int w, int h);

@@ -15,11 +15,11 @@ class LayersMgrCMPT : public AbstractEditCMPT
 {
 public:
 	LayersMgrCMPT(wxWindow* parent, const wxString& name,
-		EditPanel* editPanel, MultiShapesImpl* shapesImpl,
-		ViewPanelMgr* view_panel_mgr);
+		wxWindow* stage_wnd, EditPanelImpl* stage, 
+		MultiShapesImpl* shapesImpl, ViewPanelMgr* view_panel_mgr);
 	LayersMgrCMPT(wxWindow* parent, const wxString& name,
-		EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-		ViewPanelMgr* view_panel_mgr);
+		wxWindow* stage_wnd, EditPanelImpl* stage, 
+		MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr);
 
 	LayersMgrWidget* getLayersMgr() { return m_layersMgr; }
 

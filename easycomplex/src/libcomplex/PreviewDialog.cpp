@@ -35,7 +35,7 @@ void PreviewDialog::BuildEditPanel(wxSizer* sizer)
 {
 	PreviewStage* stage = new PreviewStage(this, this, m_control);
 	stage->SetEditOP(new PreviewEditOP(stage, stage->GetStageImpl(), m_sprites));
-	stage->SetCanvas(new PreviewCanvas(stage, m_sprites));
+	stage->SetCanvas(new PreviewCanvas(stage, stage->GetStageImpl(), m_sprites));
 	sizer->Add(stage, 1, wxEXPAND);
 }
 

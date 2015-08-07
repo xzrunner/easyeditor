@@ -4,7 +4,7 @@
 namespace d2d
 {
 
-MultiShapesImpl::MultiShapesImpl(EditPanel* stage)
+MultiShapesImpl::MultiShapesImpl(EditPanelImpl* stage)
 {
 	m_shape_selection = new ShapeSelection(stage);
 }

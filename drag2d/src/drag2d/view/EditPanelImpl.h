@@ -27,6 +27,7 @@ public:
 	void SetEditPanelNull();
 	
 	void Clear();
+	bool Update(int version);
 
 	Vector TransPosScrToProj(int x, int y) const;
 	Vector TransPosProjToScr(const Vector& proj) const;
@@ -79,6 +80,10 @@ public:
 	void SetFocus();
 
 	void PopupMenu(wxMenu* menu, int x, int y);
+
+	void SetDropTarget(wxDropTarget* target);
+
+	EditPanel* GetEditPanel() { return m_stage; }
 
 protected:
 	AbstractEditOP* m_edit_op;

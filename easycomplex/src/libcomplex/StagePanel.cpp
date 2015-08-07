@@ -15,7 +15,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   LibraryPanel* library, d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, new SymbolContainer(m_symbol = new Symbol))
+	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 	SetCanvas(new StageCanvas(this, library));
 
-	SetDropTarget(new d2d::StageDropTarget(this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
 
 	MODULE_STAGE.impl = this;
 }
@@ -34,7 +34,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library,
 					   d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, new SymbolContainer(m_symbol = symbol))
+	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
@@ -42,7 +42,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 	SetCanvas(new StageCanvas(this, library));
 
-	SetDropTarget(new d2d::StageDropTarget(this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
 }
 
 void StagePanel::Clear()

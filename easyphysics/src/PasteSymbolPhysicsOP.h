@@ -12,7 +12,7 @@ class PhysicsPanelImpl;
 class PasteSymbolPhysicsOP : public d2d::PasteSymbolOP
 {
 public:
-	PasteSymbolPhysicsOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
+	PasteSymbolPhysicsOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 		d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, float* pScale = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);

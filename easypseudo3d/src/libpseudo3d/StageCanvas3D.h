@@ -12,7 +12,7 @@ class IScene;
 class StageCanvas3D : public e3d::StageCanvas
 {
 public:
-	StageCanvas3D(d2d::EditPanel* stage);
+	StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 
 	void StoreScene(const char* filename) const;
 	void LoadScene(const char* filename);

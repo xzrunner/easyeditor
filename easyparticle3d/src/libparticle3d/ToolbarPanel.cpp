@@ -40,7 +40,7 @@ static const float ROTATE_MAX			= 0;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_image(NULL)
 {

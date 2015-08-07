@@ -9,8 +9,8 @@ namespace libshape
 class DrawPencilPolygonCMPT : public d2d::OneFloatValueCMPT
 {
 public:
-	DrawPencilPolygonCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+	DrawPencilPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl);
 
 	int GetSelected() const;
 	void SetSelection(const std::string& type);

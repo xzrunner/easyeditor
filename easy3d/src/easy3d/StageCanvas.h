@@ -12,7 +12,7 @@ namespace e3d
 class StageCanvas : public d2d::OnePassCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* editPanel);
+	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 
 	virtual void Refresh();
 

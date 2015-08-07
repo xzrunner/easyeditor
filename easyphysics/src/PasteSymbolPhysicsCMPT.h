@@ -12,8 +12,8 @@ class PhysicsPanelImpl;
 class PasteSymbolPhysicsCMPT : public d2d::AbstractEditCMPT
 {
 public:
-	PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel,
+	PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel,
 		PhysicsPanelImpl* physicsImpl, b2World* world, b2World* worldReverse,
 		float* pScale = NULL, d2d::PasteSymbolRandomWidget* randomWidget = NULL);
 

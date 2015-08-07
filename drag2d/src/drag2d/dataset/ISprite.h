@@ -20,6 +20,7 @@ class ISymbol;
 class AbstractBV;
 class Matrix;
 class IPropertySetting;
+class EditPanelImpl;
 
 class ISprite : public ICloneable, public UserDataImpl, public Object
 {
@@ -48,7 +49,7 @@ public:
 
 	virtual void BuildBounding();
 
-	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
+	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	virtual void SetTransform(const Vector& position, float angle);
 	void SetScale(float xScale, float yScale);

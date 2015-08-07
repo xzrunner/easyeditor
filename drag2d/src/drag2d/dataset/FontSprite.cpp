@@ -175,7 +175,7 @@ void FontSprite::BuildBounding()
 	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
-IPropertySetting* FontSprite::CreatePropertySetting(EditPanel* stage)
+IPropertySetting* FontSprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new FontPropertySetting(stage, this);
 }

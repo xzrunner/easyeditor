@@ -10,7 +10,7 @@ namespace emesh
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(this)
+	, d2d::MultiShapesImpl(GetStageImpl())
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(this)
+	, d2d::MultiShapesImpl(GetStageImpl())
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -157,7 +157,7 @@ void StagePanel::init(d2d::LibraryPanel* library)
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, NULL, library)
+	: d2d::StageDropTarget(stage, stage->GetStageImpl(), NULL, library)
 	, m_stage(stage)
 {
 }

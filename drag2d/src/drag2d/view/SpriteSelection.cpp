@@ -7,7 +7,6 @@ namespace d2d
 {
 
 SpriteSelection::SpriteSelection(EditPanelImpl* stage)
-	: m_stage(stage)
 {
 	if (stage) {
 		stage->Retain();

@@ -6,10 +6,10 @@
 namespace ephysics
 {
 
-PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-										   d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl,
-										   float* pScale /*= NULL*/)
-	: d2d::PasteSymbolOP(editPanel, spritesImpl, libraryPanel, pScale)
+PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+										   d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel, 
+										   PhysicsPanelImpl* physicsImpl, float* pScale /*= NULL*/)
+	: d2d::PasteSymbolOP(stage_wnd, stage, spritesImpl, libraryPanel, pScale)
 	, m_pScale(pScale)
 	, m_bStatic(false)
 {

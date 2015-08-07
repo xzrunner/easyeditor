@@ -11,7 +11,7 @@ namespace emodeling
 class JointPropertySetting : public d2d::IPropertySetting
 {
 public:
-	JointPropertySetting(d2d::EditPanel* stage, libmodeling::Joint* joint);
+	JointPropertySetting(d2d::EditPanelImpl* stage, libmodeling::Joint* joint);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -71,7 +71,7 @@ private:
 		const wxString& name, const wxAny& value);
 
 private:
-	d2d::EditPanel* m_stage;
+	d2d::EditPanelImpl* m_stage;
 
 	libmodeling::Joint* m_joint;
 

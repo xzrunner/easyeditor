@@ -13,8 +13,8 @@ struct PlaySettings;
 class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
-	PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
-		d2d::PlayControl& control, Controller* ctrl);
+	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		const PlaySettings& settings, d2d::PlayControl& control, Controller* ctrl);
 
 protected:
 	virtual void InitGL();

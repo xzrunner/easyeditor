@@ -2,8 +2,6 @@
 #include "IColorMonitor.h"
 #include "HSLColorSettingDlg.h"
 
-#include "view/EditPanel.h"
-
 namespace d2d
 {
 

@@ -8,7 +8,7 @@ namespace eparticle3d
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage(editPanel)
 {
 }

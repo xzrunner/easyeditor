@@ -7,8 +7,8 @@
 namespace e3d
 {
 
-StageCanvas::StageCanvas(d2d::EditPanel* editPanel)
-	: d2d::OnePassCanvas(editPanel)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
+	: d2d::OnePassCanvas(stage_wnd, stage)
 {
 }
 
