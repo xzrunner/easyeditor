@@ -11,7 +11,7 @@ namespace epseudo3d
 class Projection2DScene : public IScene
 {
 public:
-	Projection2DScene(d2d::EditPanel* stage);
+	Projection2DScene(d2d::EditPanelImpl* stage);
 	virtual ~Projection2DScene();
 
 	virtual void Store(const char* filename) const {}
@@ -27,7 +27,7 @@ private:
 	void CalProjInfo(const d2d::Vector& src_pos, d2d::Vector* dst_pos, float* dst_scale) const;
 
 private:
-	d2d::EditPanel* m_stage;
+	d2d::EditPanelImpl* m_stage;
 
 	std::vector<d2d::ISymbol*> m_buildings;
 	std::vector<d2d::Vector> m_positions;

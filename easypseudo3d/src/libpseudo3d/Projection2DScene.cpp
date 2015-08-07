@@ -5,7 +5,7 @@
 namespace epseudo3d
 {
 
-Projection2DScene::Projection2DScene(d2d::EditPanel* stage)
+Projection2DScene::Projection2DScene(d2d::EditPanelImpl* stage)
 	: m_stage(stage)
 {
 }

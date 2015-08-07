@@ -7,7 +7,7 @@ namespace escale9
 
 ResizeCMPT::ResizeCMPT(wxWindow* parent, const wxString& name, 
 					   StagePanel* stage, ToolbarPanel* toolbar)
-	: AbstractEditCMPT(parent, name, stage)
+	: AbstractEditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_editOP = new ResizeOP(stage, toolbar, this);

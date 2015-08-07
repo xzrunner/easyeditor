@@ -17,7 +17,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_building_cfg(this, library)
 	, m_checkboard(this)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 	m_row = m_col = m_edge = 0;
 
 	m_base_level = 1;

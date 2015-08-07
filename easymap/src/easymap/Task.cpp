@@ -119,14 +119,14 @@ void Task::InitLayout()
 	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property, &m_view_panel_mgr);
 	m_view_panel_mgr.AddSpritePanel(m_stage);
 	m_view_panel_mgr.AddShapePanel(m_stage);
-	m_property->SetEditPanel(m_stage);
+	m_property->SetEditPanel(m_stage->GetStageImpl());
 	m_library->SetCanvas(m_stage->GetCanvas());
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 //	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
-	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, stage, &m_view_panel_mgr);
+	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage->GetStageImpl(), stage, &m_view_panel_mgr);
 	m_view_panel_mgr.AddSpritePanel(m_viewlist);
 
 	right_splitter->SetSashGravity(0.85f);

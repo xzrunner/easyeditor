@@ -8,8 +8,8 @@ BEGIN_EVENT_TABLE(StageCanvas3D, libsketch::StageCanvas)
 END_EVENT_TABLE()
 
 StageCanvas3D::StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-							 d2d::MultiSpritesImpl* stage, d2d::LibraryPanel* library)
-	: libsketch::StageCanvas(edit_panel, stage, library)
+							 d2d::MultiSpritesImpl* sprite_impl, d2d::LibraryPanel* library)
+	: libsketch::StageCanvas(stage_wnd, stage, sprite_impl, library)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);

@@ -13,7 +13,7 @@ BEGIN_EVENT_TABLE(StageCanvas2D, d2d::OrthoCanvas)
 END_EVENT_TABLE()
 
 StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_timer(this, TIMER_ID)
 	, m_stage(stage)
 	, m_start_time(0)

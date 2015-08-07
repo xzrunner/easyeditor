@@ -13,7 +13,7 @@ static const int WIDTH = 800;
 static const int HEIGHT = 480;
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_toolbar(NULL)
 {
 	m_bgStyle.color = LIGHT_GRAY;
@@ -31,7 +31,7 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
+	StagePanel* editPanel = static_cast<StagePanel*>(m_wnd);
 	if (m_toolbar->isComposeOP())
 	{
 		DrawGuideLines();

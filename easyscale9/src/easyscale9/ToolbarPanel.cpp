@@ -9,9 +9,9 @@ namespace escale9
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 						   d2d::PropertySettingPanel* property,
 						   d2d::ViewPanelMgr* view_panel_mgr)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 {
- 	addChild(new d2d::UniversalCMPT(this, wxT("compose"), stage, new ComposeOP(this, stage, property, view_panel_mgr)));
+ 	addChild(new d2d::UniversalCMPT(this, wxT("compose"), stage->GetStageImpl(), new ComposeOP(this, stage, property, view_panel_mgr)));
 	addChild(m_resizeCmpt = new ResizeCMPT(this, wxT("resize"), stage, this));
 
 	SetSizer(initLayout());	

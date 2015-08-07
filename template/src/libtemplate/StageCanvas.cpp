@@ -6,7 +6,7 @@ namespace etemplate
 
 StageCanvas::StageCanvas(StagePanel* stage)
 //	: d2d::OrthoCanvas(stage)
-	: d2d::TwoPassCanvas(stage)
+	: d2d::TwoPassCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 }

@@ -6,7 +6,7 @@ namespace eui
 {
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteImpl(stage, stage, property)
+	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
 	, m_stage(stage)
 {
 }

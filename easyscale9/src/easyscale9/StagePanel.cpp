@@ -12,16 +12,16 @@ namespace escale9
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(this)
+	, d2d::MultiSpritesImpl(GetStageImpl())
 	, m_symbol(NULL)
 	, m_library(library)
 	, m_toolbar(NULL)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	SetDropTarget(new d2d::StageDropTarget(this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
 }
 
 StagePanel::~StagePanel()
@@ -61,7 +61,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 	rebuildPatchSymbol();
 
-	m_canvas->SetDirty();
+	SetCanvasDirty();
 
 	return true;
 }
@@ -78,7 +78,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 			{
 				m_sprites[i][j] = NULL;
 				sprite->Release();
-				m_canvas->SetDirty();
+				SetCanvasDirty();
 				return true;
 			}
 		}
@@ -101,7 +101,7 @@ bool StagePanel::ClearAllSprite()
 
 	delete m_symbol, m_symbol = NULL;
 
-	m_canvas->SetDirty();
+	SetCanvasDirty();
 
 	return true;
 }
@@ -149,7 +149,7 @@ void StagePanel::rebuildPatchSymbol()
 void StagePanel::setToolbarPanel(ToolbarPanel* toolbar)
 {
 	m_toolbar = toolbar;
-	static_cast<StageCanvas*>(m_canvas)->setToolbarPanel(toolbar);
+	static_cast<StageCanvas*>(GetCanvas())->setToolbarPanel(toolbar);
 }
 
 } // escale9
