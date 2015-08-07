@@ -2,7 +2,7 @@
 #include "LibraryPanel.h"
 
 #include "dataset/Layer.h"
-#include "dataset/ShapeLayer.h"
+#include "dataset/LayerFactory.h"
 
 namespace lr
 {
@@ -10,16 +10,10 @@ namespace lr
 LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
 						 LayerType type)
 	: d2d::ILibraryPage(library->GetNotebook(), name)
+	, m_layer_type(type)
 	, m_curr_op_idx(-1)
 {
-	if (type == LT_DEFAULT) {
-		m_layer = new Layer(library);
-	} else if (type == LT_SHAPE) {
-		m_layer = new ShapeLayer(library);
-	} else {
-		assert(0);
-	}
-
+	m_layer = LayerFactory::Create(library, type);
 	InitLayout();
 }
 

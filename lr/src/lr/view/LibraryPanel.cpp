@@ -233,6 +233,15 @@ Layer* LibraryPanel::GetTerrainLayer()
 	return m_terrain_page->GetLayer();
 }
 
+LayerType LibraryPanel::GetLayerType(int idx) const
+{
+	if (idx < 0 || idx >= m_pages.size()) {
+		return LT_DEFAULT;
+	} else {
+		return static_cast<LibraryPage*>(m_pages[idx])->GetLayerType();
+	}
+}
+
 void LibraryPanel::CharHook(wxKeyEvent& event)
 {
 	int key_code = event.GetKeyCode();

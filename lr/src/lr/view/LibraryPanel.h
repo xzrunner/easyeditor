@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "dataset/layer_type.h"
+
 namespace lr
 {
 
@@ -39,6 +41,8 @@ public:
 	void Refresh();
 
 	Layer* GetTerrainLayer();
+
+	LayerType GetLayerType(int idx) const;
 
 private:
 	void CharHook(wxKeyEvent& event);

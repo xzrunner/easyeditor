@@ -393,6 +393,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\lr\dataset\LayerFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\LayerFactory.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\lr\dataset\ShapeLayer.cpp"
 					>
 				</File>

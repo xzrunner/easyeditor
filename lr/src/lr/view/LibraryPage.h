@@ -31,6 +31,8 @@ public:
 	void AddEditOP(d2d::AbstractEditOP* editop);
 	d2d::AbstractEditOP* GetNextEditOP();
 
+	LayerType GetLayerType() const { return m_layer_type; }
+
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
 
@@ -44,6 +46,8 @@ private:
 	void EditableAllSprites(bool visible);
 
 private:
+	LayerType m_layer_type;
+
 	Layer* m_layer;
 
 	wxCheckBox* m_visible_ctrl;

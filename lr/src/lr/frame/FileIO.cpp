@@ -1,6 +1,7 @@
 #include "FileIO.h"
 
 #include "dataset/Layer.h"
+#include "dataset/LayerFactory.h"
 #include "frame/SettingCfg.h"
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
@@ -114,7 +115,8 @@ void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage,
 	int idx = 0;
 	Json::Value layer_val = value[idx++];
 	while (!layer_val.isNull()) {
-		Layer* layer = new Layer(library);
+		LayerType type = library->GetLayerType(idx-1);
+		Layer* layer = LayerFactory::Create(library, type);
 		layer->LoadFromFile(layer_val, dir, idx-1);
 		layers.push_back(layer);
 
