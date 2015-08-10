@@ -11,7 +11,7 @@
 #include "libimage/ImageTrim.h"
 #include "libimage/ImageTrim.h"
 #include "libimage/ImagePack.h"
-#include "libimage/ImageVeritalFlip.h"
+#include "libimage/ImageVerticalFlip.h"
 
 #include "libimage/TransToPVR.h"
 #include "libimage/TransToETC1.h"

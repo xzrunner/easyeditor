@@ -509,6 +509,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="process"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\ImageVerticalFlip.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\ImageVerticalFlip.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="json"

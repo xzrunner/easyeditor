@@ -405,11 +405,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libimage\ImageVeritalFlip.cpp"
+				RelativePath="..\..\..\src\libimage\ImageVerticalFlip.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libimage\ImageVeritalFlip.h"
+				RelativePath="..\..\..\src\libimage\ImageVerticalFlip.h"
 				>
 			</File>
 		</Filter>

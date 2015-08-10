@@ -6,10 +6,10 @@
 namespace eimage
 {
 
-class ImageVeritalFlip
+class ImageVerticalFlip
 {
 public:
-	ImageVeritalFlip(const uint8_t* pixels, int width, int height);
+	ImageVerticalFlip(const uint8_t* pixels, int width, int height);
 
 	uint8_t* Revert();
 
@@ -18,7 +18,7 @@ private:
 
 	int m_width, m_height;
 
-}; // ImageVeritalFlip
+}; // ImageVerticalFlip
 
 }
 

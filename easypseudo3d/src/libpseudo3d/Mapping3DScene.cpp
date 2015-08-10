@@ -56,7 +56,7 @@ void Mapping3DScene::Store(const char* filename) const
 	m_canvas->GetScreenSize(&sw, &sh);
 	glReadPixels(min.x, sh - max.y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-	eimage::ImageVeritalFlip revert(pixels, w, h);
+	eimage::ImageVerticalFlip revert(pixels, w, h);
 	uint8_t* pixels_revert = revert.Revert();
 	delete[] pixels;
 
