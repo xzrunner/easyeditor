@@ -347,11 +347,12 @@ void ParticleSystem::update(float dt)
 				for (int i = 0; i < 3; ++i) {
 					dis_dir3[i] /= len;
 				}
-				for (int i = 0; i < 3; ++i) {
-					p->speed[i] += dis_dir3[i] * p->dis_speed;
-				}
 
-				p->dis_curr_len += p->dis_speed * dt;
+				float s = p->dis_speed * dt;
+				for (int i = 0; i < 3; ++i) {
+					p->speed[i] += dis_dir3[i] * s;
+				}
+				p->dis_curr_len += s;
 				if (p->dis_curr_len > p->dis_region) {
 					p->dis_direction[0] = -p->dis_direction[0];
 					p->dis_direction[1] = -p->dis_direction[1];
