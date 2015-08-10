@@ -131,7 +131,7 @@ void FileAdapter::load(const char* filename, int version)
 			child.start_alpha = childValue["alpha"]["start"].asInt();
 			child.end_alpha = childValue["alpha"]["end"].asInt();
 		} else {
-			child.start_alpha = child.end_alpha = 1;
+			child.start_alpha = child.end_alpha = 100;
 		}
 
 		child.start_z = childValue["start_z"].asInt();
