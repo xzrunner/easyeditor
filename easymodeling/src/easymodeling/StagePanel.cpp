@@ -35,7 +35,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
 		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
-	if (!d2d::FilenameTools::isExist(filepath)) {
+	if (!d2d::FilenameTools::IsFileExist(filepath)) {
 		return false;
 	}
 

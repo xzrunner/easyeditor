@@ -20,7 +20,7 @@ SpecialConfig::~SpecialConfig()
 void SpecialConfig::Load()
 {
 	m_exist = true;
-	if (!d2d::FilenameTools::isExist(m_filename)) {
+	if (!d2d::FilenameTools::IsFileExist(m_filename)) {
 		m_exist = false;
 		return;
 	}

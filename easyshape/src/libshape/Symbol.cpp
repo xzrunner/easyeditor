@@ -179,7 +179,7 @@ void Symbol::LoadBGOutline(d2d::ISymbol* bg)
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
 		bg->GetFilepath(), eimage::OUTLINE_FILE_TAG, "json");
-	if (!d2d::FilenameTools::isExist(filepath)) {
+	if (!d2d::FilenameTools::IsFileExist(filepath)) {
 		return;
 	}
 
@@ -205,7 +205,7 @@ void Symbol::LoadBGTriStrip(d2d::ISymbol* bg)
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
 		bg->GetFilepath(), eimage::TRI_STRIP_FILE_TAG, "json");
-	if (!d2d::FilenameTools::isExist(filepath)) {
+	if (!d2d::FilenameTools::IsFileExist(filepath)) {
 		return;
 	}
 	

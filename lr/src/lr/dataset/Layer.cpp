@@ -195,7 +195,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 
 		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
 		std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
-		if (d2d::FilenameTools::isExist(shape_filepath)) {
+		if (d2d::FilenameTools::IsFileExist(shape_filepath)) {
 			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
 		} else {
 			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);

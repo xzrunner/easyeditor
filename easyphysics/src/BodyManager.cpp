@@ -77,7 +77,7 @@ IBody* BodyManager::CreateBody(d2d::ISprite* sprite)
 {
 	std::string filepath = d2d::FilenameTools::getFilenameAddTag(
 		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
-	if (d2d::FilenameTools::isExist(filepath)) {
+	if (d2d::FilenameTools::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
 		d2d::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
 		body->getBody()->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());

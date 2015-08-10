@@ -22,7 +22,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
 		symbol->GetFilepath(), libshape::FILE_TAG, "json");
-	if (d2d::FilenameTools::isExist(filepath)) {
+	if (d2d::FilenameTools::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.mb_str());
 		m_toolbar->SelectSuitableEditOP();
 	}

@@ -47,7 +47,8 @@ public:
 
 	//////////////////////////////////////////////////////////////////////////
 
-	static bool isExist(const wxString& filepath);
+	static bool IsFileExist(const wxString& filepath);
+	static bool IsDirExist(const wxString& filepath);
 
 	static wxString getExistFilepath(const wxString& filepath, const wxString& dir = wxEmptyString);
 

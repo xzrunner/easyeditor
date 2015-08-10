@@ -47,7 +47,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 
 		wxString outline_path = d2d::FilenameTools::getFilenameAddTag(
 			filepath, eimage::OUTLINE_FILE_TAG, "json");
-		if (!d2d::FilenameTools::isExist(filepath)) {
+		if (!d2d::FilenameTools::IsFileExist(filepath)) {
 			continue;
 		}
 

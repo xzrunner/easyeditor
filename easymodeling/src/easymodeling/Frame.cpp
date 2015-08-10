@@ -224,7 +224,7 @@ void Frame::setCurrFilename()
 			FILE_TAG + 
 			wxT(".json");
 
-		if (!d2d::FilenameTools::isExist(str))
+		if (!d2d::FilenameTools::IsFileExist(str))
 		{
 			m_currFilename = str;
 			break;

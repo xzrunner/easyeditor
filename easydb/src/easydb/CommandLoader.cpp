@@ -49,6 +49,7 @@
 #include "CalculateImageArea.h"
 #include "RectCutWithJson.h"
 #include "LRExpansion.h"
+#include "ImageVerticalFlip.h"
 
 namespace edb
 {
@@ -103,6 +104,7 @@ void CommandLoader::Init()
 	fc->Register(CalImageArea::Create());
 	fc->Register(RectCutWithJson::Create());
 	fc->Register(LRExpansion::Create());
+	fc->Register(ImageVerticalFlip::Create());
 }
 
 }

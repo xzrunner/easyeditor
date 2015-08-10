@@ -84,7 +84,7 @@ bool FontBlankSymbol::loadFont(const std::string& _filename)
 
 	std::string filename = FilenameTools::getAbsolutePath(m_filepath, _filename);
 	if (!FileNameParser::isType(filename, FileNameParser::e_freetype) 
-		|| !FilenameTools::isExist(filename))
+		|| !FilenameTools::IsFileExist(filename))
 		return false;
 
 	delete m_font, m_font = NULL;

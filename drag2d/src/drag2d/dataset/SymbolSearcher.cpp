@@ -34,14 +34,14 @@ wxString SymbolSearcher::GetSymbolPath(const wxString& dir,
 		}
 	}
 	// find from exist files
-	if (!FilenameTools::isExist(real_path)) {
+	if (!FilenameTools::IsFileExist(real_path)) {
 		const Json::Value& filepaths_val = sprite_val["filepaths"];
 		if (!filepaths_val.isNull()) {
 			int i = 0;
 			Json::Value filepath_val = filepaths_val[i++];
 			while (!filepath_val.isNull()) {
 				wxString filepath = FilenameTools::getAbsolutePath(dir, filepath_val.asString());
-				if (FilenameTools::isExist(filepath)) {
+				if (FilenameTools::IsFileExist(filepath)) {
 					real_path = filepath;
 					break;
 				}

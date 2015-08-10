@@ -92,7 +92,7 @@ void LRToComplex::LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_v
 		int pos = filepath.find(suffix);
 		if (pos!= std::string::npos) {
 			std::string fix_filepath = filepath.substr(0, pos) + ".png";
-			if (d2d::FilenameTools::isExist(fix_filepath)) {
+			if (d2d::FilenameTools::IsFileExist(fix_filepath)) {
 				spr_val_fix["filepath"] = fix_filepath;
 			}
 		}

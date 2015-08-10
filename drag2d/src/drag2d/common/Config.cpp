@@ -33,13 +33,13 @@ Config* Config::Instance()
 	}
 
 	if (!m_loaded) {
-		if (FilenameTools::isExist(FILENAME)) {
+		if (FilenameTools::IsFileExist(FILENAME)) {
 			m_instance->LoadFromFile(FILENAME);
 		} else {
 			wxStandardPathsBase& stdp = wxStandardPaths::Get();
 			wxString exe_path = stdp.GetExecutablePath();
 			wxString cfg_path = FilenameTools::getFileDir(exe_path) + "\\" + FILENAME;
-			if (FilenameTools::isExist(cfg_path)) {
+			if (FilenameTools::IsFileExist(cfg_path)) {
 				m_instance->LoadFromFile(cfg_path);
 			}
 		}

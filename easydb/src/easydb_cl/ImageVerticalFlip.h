@@ -22,7 +22,10 @@ public:
 	static ICommand* Create() { return new ImageVerticalFlip(); }
 
 private:
-	void Trigger(const std::string& dir) const;
+	void Trigger(const std::string& path) const;
+
+private:
+	void VerticalFlip(const std::string& filepath) const;
 
 }; // ImageVerticalFlip
 

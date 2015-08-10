@@ -111,18 +111,23 @@ wxString FilenameTools::getFileDir(const wxString& filepath)
 	}
 }
 
-bool FilenameTools::isExist(const wxString& filepath)
+bool FilenameTools::IsFileExist(const wxString& filepath)
 {
 	return wxFileName::FileExists(filepath);
+}
+
+bool FilenameTools::IsDirExist(const wxString& filepath)
+{
+	return wxFileName::DirExists(filepath);
 }
 
 wxString FilenameTools::getExistFilepath(const wxString& filepath, const wxString& dir /*= wxEmptyString*/)
 {
 	wxString filepathFixed = filepath;
-	if (!isExist(filepathFixed))
+	if (!IsFileExist(filepathFixed))
 	{
 		wxString filename = filepathFixed = getFilenameWithExtension(filepathFixed);
-		if (!isExist(filepathFixed))
+		if (!IsFileExist(filepathFixed))
 		{
 			wxString cwd = wxFileName::GetCwd();
 
@@ -132,17 +137,17 @@ wxString FilenameTools::getExistFilepath(const wxString& filepath, const wxStrin
 			for ( ; itr != cfg->GetResPathes().end(); ++itr)
 			{
 				filepathFixed = *itr + filename;
-				if (isExist(filepathFixed))
+				if (IsFileExist(filepathFixed))
 					return filepathFixed;
 
 				filepathFixed = cwd + *itr + filename;
-				if (isExist(filepathFixed))
+				if (IsFileExist(filepathFixed))
 					return filepathFixed;
 			}
 			if (dir != wxEmptyString)
 			{
 				filepathFixed = dir + filename;
-				if (isExist(filepathFixed))
+				if (IsFileExist(filepathFixed))
 					return filepathFixed;
 			}
 // 			throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());

@@ -182,7 +182,7 @@ void SeparateToComplex::FixPosWithShape(d2d::Vector& pos, const std::string& fil
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_shape.json";
 	std::string shape_path = m_dir + "\\" + m_point_dir + "\\" + path;
-	if (!d2d::FilenameTools::isExist(shape_path)) {
+	if (!d2d::FilenameTools::IsFileExist(shape_path)) {
 		return;
 	}
 

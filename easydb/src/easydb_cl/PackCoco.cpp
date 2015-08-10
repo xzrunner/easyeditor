@@ -346,7 +346,7 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config
 	int i = 1;
 	while (true) {
 		std::string path = dst_name + d2d::StringTools::IntToString(i) + ".json";
-		if (d2d::FilenameTools::isExist(path)) {
+		if (d2d::FilenameTools::IsFileExist(path)) {
 			tex_mgr.Add(path, i - 1);
 		} else {
 			break;
@@ -496,7 +496,7 @@ void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& con
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
 					std::string pts_path = files[i].substr(0, files[i].find(".png")) + "_strip.json";
-					if (d2d::FilenameTools::isExist(pts_path)) {
+					if (d2d::FilenameTools::IsFileExist(pts_path)) {
 						pts_files.push_back(pts_path);
 					}
 				}
@@ -504,7 +504,7 @@ void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& con
 		} else if (wxFileName::FileExists(path)) {
 			if (d2d::FileNameParser::isType(path, d2d::FileNameParser::e_image)) {
 				std::string pts_path = path.substr(0, path.find(".png")) + "_strip.json";
-				if (d2d::FilenameTools::isExist(pts_path)) {
+				if (d2d::FilenameTools::IsFileExist(pts_path)) {
 					pts_files.push_back(pts_path);
 				}
 			}

@@ -24,7 +24,7 @@ DynamicTexAndFont* DynamicTexAndFont::Instance()
 	if (!m_instance) {
 		m_instance = new DynamicTexAndFont();
 		const std::string& filepath = Config::Instance()->GetFontFilepath();
-		if (FilenameTools::isExist(filepath)) {
+		if (FilenameTools::IsFileExist(filepath)) {
 			m_instance->LoadFontFile(filepath.c_str());
 		}
 	}

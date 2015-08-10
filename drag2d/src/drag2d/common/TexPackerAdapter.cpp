@@ -35,7 +35,7 @@ void TexPackerAdapter::load(const Json::Value& value, const std::string& dir)
 	Texture texture;
 
 	texture.filepath = value["filepath"].asString();
-	if (!d2d::FilenameTools::isExist(texture.filepath))
+	if (!d2d::FilenameTools::IsFileExist(texture.filepath))
 		texture.filepath = d2d::FilenameTools::getAbsolutePath(dir, texture.filepath);
 
 	texture.region.left = value["left"].asInt();

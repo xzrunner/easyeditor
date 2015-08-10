@@ -85,21 +85,21 @@ GetSymbolPath(const std::string& dir, const Json::Value& json_val) const
 	std::string filepath = json_val["filepath"].asString();
 	while (true)
 	{
-		if (d2d::FilenameTools::isExist(filepath))
+		if (d2d::FilenameTools::IsFileExist(filepath))
 			break;
 
 		std::string absolute_path = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-		if (d2d::FilenameTools::isExist(absolute_path))
+		if (d2d::FilenameTools::IsFileExist(absolute_path))
 		{
 			filepath = absolute_path;
 			break;
 		}
 
 		std::string res_path = m_dirpath + "\\" + filepath;
-		if (!d2d::FilenameTools::isExist(res_path)) {
+		if (!d2d::FilenameTools::IsFileExist(res_path)) {
 			absolute_path = d2d::FilenameTools::getAbsolutePath(dir, res_path);
 		}
-		if (!d2d::FilenameTools::isExist(absolute_path)) {
+		if (!d2d::FilenameTools::IsFileExist(absolute_path)) {
 			throw d2d::Exception("File: %s don't exist!", res_path.c_str());
 		}
 

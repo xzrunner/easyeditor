@@ -85,7 +85,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 	Json::Value frame_val = value["frames"][i++];
 	while (!frame_val.isNull()) {
 		std::string filepath = frame_val["filename"].asString();
-		if (!d2d::FilenameTools::isExist(filepath))
+		if (!d2d::FilenameTools::IsFileExist(filepath))
 			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
