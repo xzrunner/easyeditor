@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
 	SetEditOP(new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl));
-	SetCanvas(new StageCanvas(this, GetStageImpl()));
+	SetCanvas(new StageCanvas(this));
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, m_ctrl->GetLibraryPanel()));
 

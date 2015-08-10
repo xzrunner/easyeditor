@@ -6,6 +6,7 @@ namespace eanim
 
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	, m_stage_panel(stage)
 	, m_background(NULL)
 {
 }
