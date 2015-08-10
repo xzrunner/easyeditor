@@ -37,10 +37,12 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	std::ifstream fin(cfg_file.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
-	fin.close();	
+	fin.close();
 
-	std::string src_dir = value["src"].asString();
-	std::string dst_file = value["dst"].asString();
+	std::string dir = d2d::FilenameTools::getFileDir(cfg_file);
+
+	std::string src_dir = d2d::FilenameTools::getAbsolutePath(dir, value["src"].asString());
+	std::string dst_file = d2d::FilenameTools::getAbsolutePath(dir, value["dst"].asString());
 
 	std::vector<std::string> images;
 
@@ -60,7 +62,8 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	libpacker::ImageTrimData trim(value["trim file"].asString());
+	std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
+	libpacker::ImageTrimData trim(trim_file);
 
 	libpacker::NormalPack tex_packer(images, trim);
 	tex_packer.Pack(value["static size"].asInt());
