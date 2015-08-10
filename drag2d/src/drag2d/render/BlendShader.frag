@@ -131,7 +131,7 @@ void main()
 		result = BlendNormal(base.rgb, blend.rgb);
 	}
 	
-	gl_FragColor.xyz = result * v_fragmentColor.xyz * blend.a; 
+	gl_FragColor.xyz = result * v_fragmentColor.xyz; 
 	gl_FragColor.w = blend.w;   
 	gl_FragColor *= v_fragmentColor.w; 
 	gl_FragColor.xyz += v_fragmentAddi.xyz * blend.w; 
