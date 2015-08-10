@@ -47,7 +47,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	int zz = 0;
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

@@ -408,20 +408,6 @@ Matrix ISprite::GetTransInvMatrix() const
 	return mat;
 }
 
-template<typename T>
-void ISprite::SetSymbol(T** dst, d2d::ISymbol* src)
-{
-	if (src == dst) {
-		return;
-	}
-	T* sym = dynamic_cast<T*>(src);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<T>(*dst, sym);
-	BuildBounding();
-}
-
 //////////////////////////////////////////////////////////////////////////
 // class SpriteCmp
 //////////////////////////////////////////////////////////////////////////

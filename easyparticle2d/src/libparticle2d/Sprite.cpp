@@ -49,11 +49,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	eparticle2d::Symbol* sym = dynamic_cast<eparticle2d::Symbol*>(symbol);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<eparticle2d::Symbol>(m_symbol, sym);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

@@ -56,14 +56,7 @@ const FontSymbol& TextSprite::GetSymbol() const
 
 void TextSprite::SetSymbol(ISymbol* symbol)
 {
-	FontSymbol* font = dynamic_cast<FontSymbol*>(symbol);
-	if (m_symbol != symbol && font)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = font;
-	}
+	ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 IPropertySetting* TextSprite::CreatePropertySetting(EditPanelImpl* stage)

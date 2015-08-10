@@ -48,14 +48,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	Symbol* shadow = dynamic_cast<Symbol*>(symbol);
-	if (m_symbol != symbol && shadow)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = shadow;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

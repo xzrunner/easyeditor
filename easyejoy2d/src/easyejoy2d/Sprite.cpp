@@ -46,14 +46,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	Symbol* ejoy2d = dynamic_cast<Symbol*>(symbol);
-	if (m_symbol != symbol && ejoy2d)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = ejoy2d;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

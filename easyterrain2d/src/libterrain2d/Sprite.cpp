@@ -41,7 +41,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	`		¡¤¡¤                 65SetSymbol<Symbol>(&m_symbol, symbol);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)

@@ -50,14 +50,7 @@ const ImageSymbol& ImageSprite::GetSymbol() const
 
 void ImageSprite::SetSymbol(ISymbol* symbol)
 {
-	ImageSymbol* image = dynamic_cast<ImageSymbol*>(symbol);
-	if (m_symbol != symbol && image)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = image;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void ImageSprite::buildBoundingFromTexCoords(float* texCoords)

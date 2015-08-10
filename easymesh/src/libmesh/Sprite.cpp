@@ -46,17 +46,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	Symbol* mesh = dynamic_cast<Symbol*>(symbol);
-	if (m_symbol != mesh)
-	{
-		if (m_symbol) {
-			m_symbol->Release();
-		}
-		symbol->Retain();
-
-		m_symbol = mesh;
-		BuildBounding();
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)

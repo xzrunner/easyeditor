@@ -43,11 +43,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	etemplate::Symbol* sym = dynamic_cast<etemplate::Symbol*>(symbol);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<etemplate::Symbol>(m_symbol, sym);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

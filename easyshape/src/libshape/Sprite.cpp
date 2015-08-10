@@ -46,11 +46,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	libshape::Symbol* sym = dynamic_cast<libshape::Symbol*>(symbol);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<libshape::Symbol>(m_symbol, sym);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

@@ -43,14 +43,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	Symbol* anim = dynamic_cast<Symbol*>(symbol);
-	if (m_symbol != symbol && anim)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = anim;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

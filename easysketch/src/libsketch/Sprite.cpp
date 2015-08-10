@@ -43,14 +43,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	Symbol* shape = dynamic_cast<Symbol*>(symbol);
-	if (m_symbol != symbol && shape)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = shape;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::loadBodyFromFile()

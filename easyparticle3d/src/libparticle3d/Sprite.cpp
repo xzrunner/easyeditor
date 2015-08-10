@@ -44,11 +44,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	eparticle3d::Symbol* sym = dynamic_cast<eparticle3d::Symbol*>(symbol);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<eparticle3d::Symbol>(m_symbol, sym);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)

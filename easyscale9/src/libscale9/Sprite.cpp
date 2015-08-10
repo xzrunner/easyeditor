@@ -47,11 +47,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	escale9::Symbol* sym = dynamic_cast<escale9::Symbol*>(symbol);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<escale9::Symbol>(m_symbol, sym);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)

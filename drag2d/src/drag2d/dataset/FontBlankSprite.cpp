@@ -48,14 +48,7 @@ const FontBlankSymbol& FontBlankSprite::GetSymbol() const
 
 void FontBlankSprite::SetSymbol(ISymbol* symbol)
 {
-	FontBlankSymbol* font = dynamic_cast<FontBlankSymbol*>(symbol);
-	if (m_symbol != symbol && font)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = font;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 } // d2d

@@ -39,14 +39,7 @@ const ScriptsSymbol& ScriptsSprite::GetSymbol() const
 
 void ScriptsSprite::SetSymbol(ISymbol* symbol)
 {
-	ScriptsSymbol* scripts = dynamic_cast<ScriptsSymbol*>(symbol);
-	if (m_symbol != symbol && scripts)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = scripts;
-	}
+	ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

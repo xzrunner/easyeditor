@@ -43,14 +43,7 @@ const Symbol& Sprite::GetSymbol() const
 
 void Sprite::SetSymbol(d2d::ISymbol* symbol)
 {
-	if (symbol == m_symbol) {
-		return;
-	}
-	libanim::Symbol* sym = dynamic_cast<libanim::Symbol*>(symbol);
-	if (!sym) {
-		return;
-	}
-	d2d::obj_assign<libanim::Symbol>(m_symbol, sym);
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

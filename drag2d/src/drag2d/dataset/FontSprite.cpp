@@ -95,14 +95,7 @@ const FontBlankSymbol& FontSprite::GetSymbol() const
 
 void FontSprite::SetSymbol(ISymbol* symbol)
 {
-	FontBlankSymbol* font = dynamic_cast<FontBlankSymbol*>(symbol);
-	if (m_symbol != symbol && font)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = font;
-	}
+	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
 void FontSprite::Load(const Json::Value& val)
