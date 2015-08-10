@@ -17,7 +17,7 @@ void MaxRectsBinaryArrange::arrange(const std::vector<d2d::ImageSprite*>& sprite
 	std::vector<libpacker::Rect> output;
 
 	libpacker::MaxRectsBinaryPack2 pack;
-	pack.Pack(libpacker::PACK_AUTO, rects, output);
+	pack.Pack(libpacker::PACK_AUTO, 2048, rects, output);
 
 	assert(sprites.size() == output.size());
 	for (int i = 0; i < sz; ++i) {

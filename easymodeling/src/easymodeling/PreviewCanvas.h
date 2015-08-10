@@ -20,6 +20,9 @@ protected:
 private:
 	static const int FRAME_RATE = 60;
 
+private:
+	PreviewPanel* m_stage_panel;
+
 }; // PreviewCanvas
 
 }

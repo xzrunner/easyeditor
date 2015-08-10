@@ -14,6 +14,7 @@ static const int HEIGHT = 480;
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	, m_stage_panel(editPanel)
 	, m_toolbar(NULL)
 {
 	m_bgStyle.color = LIGHT_GRAY;
@@ -31,23 +32,22 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_wnd);
 	if (m_toolbar->isComposeOP())
 	{
 		DrawGuideLines();
 		d2d::Rect sr = m_screen.GetRegion();
-		editPanel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		m_stage_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 			d2d::DT_VISIBLE);
 	}
 	else
 	{
 		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 
-		d2d::ISymbol* symbol = editPanel->getPatchSymbol();
+		d2d::ISymbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)
 			symbol->Draw(d2d::Matrix());
 	}
-	editPanel->DrawEditOP();
+	m_stage_panel->DrawEditOP();
 }
 
 void StageCanvas::DrawGuideLines() const

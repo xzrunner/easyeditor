@@ -23,6 +23,9 @@ private:
 	void onUpLevelPress(wxCommandEvent& event);
 	void onDownLevelPress(wxCommandEvent& event);
 
+private:
+	StagePanel* m_stage_panel;
+
 }; // ArrangeSpriteCMPT 
 
 }

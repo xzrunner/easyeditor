@@ -74,11 +74,11 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	property = context->property = new PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
-	context->property->SetEditPanel(context->stage);
+	context->property->SetEditPanel(context->stage->GetStageImpl());
 
 	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
 
-	context->property->SetPropertySetting(new WorldPropertySetting(context->stage));
+	context->property->SetPropertySetting(new WorldPropertySetting(context->stage->GetStageImpl()));
 }
 
 void Task::initLayout()

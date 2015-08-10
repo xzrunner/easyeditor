@@ -8,7 +8,7 @@ namespace sg
 {
 
 PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::PasteSymbolOP(stage, stage, library)
+	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), stage, library)
 {
 }
 
@@ -41,7 +41,7 @@ bool PasteSymbolOP::OnDraw() const
 	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	bool is_flat = stage->GetPerspective();
 
 	render->DrawGrass(*symbol, m_pos, is_flat);

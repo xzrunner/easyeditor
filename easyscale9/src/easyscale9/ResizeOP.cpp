@@ -7,7 +7,7 @@ namespace escale9
 {
 
 ResizeOP::ResizeOP(StagePanel* stage, ToolbarPanel* toolbar, ResizeCMPT* resizeCmpt)
-	: escale9::ResizeBaseOP(stage, NULL)
+	: escale9::ResizeBaseOP(stage, stage->GetStageImpl(), NULL)
 	, m_stage(stage)
 	, m_toolbar(toolbar)
 	, m_resizeCmpt(resizeCmpt)

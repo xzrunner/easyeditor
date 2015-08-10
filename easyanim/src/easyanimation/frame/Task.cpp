@@ -140,7 +140,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, 
 		&m_widgets.m_view_panel_mgr, &m_controller);
 	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_stage);
-	m_widgets.m_property->SetEditPanel(m_widgets.m_stage);
+	m_widgets.m_property->SetEditPanel(m_widgets.m_stage->GetStageImpl());
 	m_widgets.m_library->SetCanvas(m_widgets.m_stage->GetCanvas());	// ?
 
 	// toolbar
@@ -162,7 +162,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	// viewlist
-	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage, m_widgets.m_stage, &m_widgets.m_view_panel_mgr);
+	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage->GetStageImpl(), m_widgets.m_stage, &m_widgets.m_view_panel_mgr);
 	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_viewlist);
 
 	return m_widgets.m_viewlist;

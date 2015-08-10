@@ -6,7 +6,8 @@ namespace emodeling
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	, m_stage_panel(editPanel)
 {
 	m_bg_color.set(0, 0, 0, 1);
 }
@@ -20,7 +21,7 @@ void StageCanvas::OnDrawSprites() const
 	DrawGuideLines();
 
 	DrawSprites();
-	static_cast<StagePanel*>(m_stage)->traverseJoints(DrawJointVisitor());
+	m_stage_panel->traverseJoints(DrawJointVisitor());
 	m_stage->DrawEditOP();
 }
 
@@ -31,9 +32,8 @@ void StageCanvas::DrawGuideLines() const
 
 void StageCanvas::DrawSprites() const
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	std::vector<d2d::ISprite*> sprites;
-	editPanel->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage_panel->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);

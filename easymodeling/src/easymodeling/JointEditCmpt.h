@@ -44,6 +44,8 @@ namespace emodeling
 		}; // SelectWheelDialog
 
 	private:
+		StagePanel* m_stage_panel;
+
 		wxChoice* m_typeChoice;
 
 		wxButton* m_btnOK;

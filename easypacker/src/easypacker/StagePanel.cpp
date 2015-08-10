@@ -17,9 +17,9 @@ StagePanel::StagePanel(wxWindow* parent,
 {
 //	m_editOP = new ArrangeSpriteOP(this, Context::Instance()->property);
 	b2Body* ground = CreateGround();
-	m_edit_op = new ephysics::DragPhysicsOP(this, m_world, ground);
+	SetEditOP(new ephysics::DragPhysicsOP(this, GetStageImpl(), m_world, ground));
 
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 
 //	m_strategy = new BinaryTreeArrange();
 //	m_strategy = new BinaryTreeNewArrange();

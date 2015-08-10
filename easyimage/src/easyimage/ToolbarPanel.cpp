@@ -13,7 +13,7 @@ namespace eimage
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
 						   StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 {
 	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));
 	addChild(new AutoTriCutCMPT(this, wxT("Auto Tri Cut"), stage));

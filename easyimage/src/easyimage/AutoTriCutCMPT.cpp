@@ -14,12 +14,12 @@ static const float PERIMETER_TOLERANCE = 0.2f;
 
 AutoTriCutCMPT::AutoTriCutCMPT(wxWindow* parent, const wxString& name, 
 						 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_raw(NULL)
 	, m_fine(NULL)
 {
-	m_editOP = new AutoTriCutOP(stage);
+	m_editOP = new AutoTriCutOP(stage, stage->GetStageImpl());
 }
 
 wxSizer* AutoTriCutCMPT::initLayout()

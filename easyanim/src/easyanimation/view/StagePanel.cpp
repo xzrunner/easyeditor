@@ -22,9 +22,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
 	SetEditOP(new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl));
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(new StageCanvas(this, GetStageImpl()));
 
-	SetDropTarget(new d2d::StageDropTarget(this, this, m_ctrl->GetLibraryPanel()));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, m_ctrl->GetLibraryPanel()));
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);

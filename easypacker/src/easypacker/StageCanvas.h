@@ -20,6 +20,8 @@ private:
 	void DrawRegion() const;
 
 private:
+	StagePanel* m_stage_panel;
+
 	d2d::MultiSpritesImpl* m_stage_impl;
 
 }; // StageCanvas

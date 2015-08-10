@@ -11,8 +11,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	m_left = m_right = NULL;
 
-	m_canvas = new StageCanvas(this);
-
+	SetCanvas(new StageCanvas(this));
 	SetDropTarget(new StageDropTarget(this, library));
 }
 
@@ -47,7 +46,7 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 
 	SetCanvasDirty();
 
-	m_edit_op->Clear();
+	GetEditOP()->Clear();
 }
 
 //////////////////////////////////////////////////////////////////////////

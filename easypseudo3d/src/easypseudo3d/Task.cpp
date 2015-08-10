@@ -73,8 +73,8 @@ void Task::InitLayout()
 //	m_stage->SetCanvas(new epseudo3d::StageCanvas3D(m_stage));
 //	m_stage->setEditOP(new e3d::ControlCameraOP(m_stage));
 
-	m_stage->SetCanvas(new epseudo3d::StageCanvas2D(m_stage));
-	m_stage->SetEditOP(new epseudo3d::Proj2DEditOP(m_stage));
+	m_stage->SetCanvas(new epseudo3d::StageCanvas2D(m_stage, m_stage->GetStageImpl()));
+	m_stage->SetEditOP(new epseudo3d::Proj2DEditOP(m_stage, m_stage->GetStageImpl()));
 }
 
 }

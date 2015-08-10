@@ -7,7 +7,7 @@ namespace eimage
 
 PixelDiffCMPT::PixelDiffCMPT(wxWindow* parent, const wxString& name, 
 							 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
 {
 	m_editOP = new PixelDiffOP(stage);	
 }

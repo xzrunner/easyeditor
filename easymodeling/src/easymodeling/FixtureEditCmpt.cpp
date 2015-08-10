@@ -7,7 +7,7 @@ using namespace emodeling;
 
 FixtureEditCmpt::FixtureEditCmpt(wxWindow* parent, const wxString& name, 
 								 StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel)
+	: d2d::AbstractEditCMPT(parent, name, editPanel->GetStageImpl())
 {
 	m_editOP = new SelectFixtureOP(editPanel, propertyPanel);
 }

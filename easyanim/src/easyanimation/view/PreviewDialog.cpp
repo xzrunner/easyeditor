@@ -53,23 +53,19 @@ void PreviewDialog::buildEditPanel(wxSizer* topSizer)
 {
 	m_stage = new d2d::EditPanel(this, this);
 	m_stage->SetEditOP(new PreviewOP(m_stage, m_stage->GetStageImpl(), m_settings, m_control));
-	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_settings, m_control, m_ctrl));
+	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_settings, m_control, m_ctrl));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 
 void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 {
 	m_settings.isCirculate = event.IsChecked();
-
-
 	m_stage->SetFocus();
 }
 
 void PreviewDialog::onSetStop(wxCommandEvent& event)
 {
 	m_settings.isStop = event.IsChecked();
-
-
 	m_stage->SetFocus();
 }
 

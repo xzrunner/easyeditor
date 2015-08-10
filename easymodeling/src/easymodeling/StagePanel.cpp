@@ -15,7 +15,7 @@ StagePanel::StagePanel(wxWindow* parent,
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
-	m_canvas = new StageCanvas(this);
+	SetCanvas(new StageCanvas(this));
 }
 
 StagePanel::~StagePanel()

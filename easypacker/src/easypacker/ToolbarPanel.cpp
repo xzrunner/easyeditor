@@ -8,7 +8,7 @@ namespace epacker
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	SetSizer(initLayout());

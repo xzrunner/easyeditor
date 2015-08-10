@@ -7,7 +7,8 @@ namespace epacker
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	, m_stage_panel(stage)
 	, m_stage_impl(stage)
 {
 }
@@ -26,8 +27,6 @@ void StageCanvas::DrawRegion() const
 	const float width = Context::Instance()->width,
 		height = Context::Instance()->height;
 
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
-
 	// bg
 	d2d::PrimitiveDraw::rect(
 		d2d::Vector(0, 0), 
@@ -35,7 +34,7 @@ void StageCanvas::DrawRegion() const
 		d2d::LIGHT_RED_LINE);
 
 	int x = 0, y = 0;
-	int count = stage->GetTextureAccount();
+	int count = m_stage_panel->GetTextureAccount();
 	for (int i = 0; i < count; ++i)
 	{
 		d2d::PrimitiveDraw::rect(d2d::Vector(x, y), 
@@ -45,7 +44,7 @@ void StageCanvas::DrawRegion() const
 	}
 
 	// physics
-	stage->drawPhysics();
+	m_stage_panel->drawPhysics();
 }
 
 }

@@ -6,7 +6,8 @@ namespace emodeling
 {
 
 PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	, m_stage_panel(editPanel)
 {
 	SetBgColor(d2d::Colorf(0, 0, 0));
 }
@@ -27,7 +28,7 @@ void PreviewCanvas::InitGL()
 
 void PreviewCanvas::OnDrawSprites() const
 {
- 	static_cast<PreviewPanel*>(m_stage)->drawPhysics();
+ 	m_stage_panel->drawPhysics();
  
  	ephysics::DragPhysicsOP* op = static_cast<ephysics::DragPhysicsOP*>(m_stage->GetEditOP());
  	if (op->m_mouseJoint)

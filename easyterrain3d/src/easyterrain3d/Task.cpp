@@ -47,8 +47,8 @@ const d2d::EditPanel* Task::GetEditPanel() const
 void Task::initLayout()
 {
 	d2d::EditPanel* stage = new d2d::EditPanel(m_parent, m_parent);
-	stage->SetCanvas(new libterrain3d::StageCanvas(stage));
-	stage->SetEditOP(new e3d::ControlCameraOP(stage));
+	stage->SetCanvas(new libterrain3d::StageCanvas(stage, stage->GetStageImpl()));
+	stage->SetEditOP(new e3d::ControlCameraOP(stage, stage->GetStageImpl()));
 }
 
 }

@@ -56,7 +56,7 @@ void Task::initLayout()
 	m_property = new d2d::PropertySettingPanel(leftHorSplitter);
 
 	m_stage = new StagePanel(leftVerSplitter, m_parent, m_library);
-	m_property->SetEditPanel(m_stage);
+	m_property->SetEditPanel(m_stage->GetStageImpl());
 
 	m_toolbar = new ToolbarPanel(rightVerSplitter, m_library, m_stage);
 

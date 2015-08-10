@@ -9,10 +9,10 @@ namespace eimage
 
 AutoRectCutCMPT::AutoRectCutCMPT(wxWindow* parent, const wxString& name, 
 								 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editOP = new AutoRectCutOP(stage);
+	m_editOP = new AutoRectCutOP(stage, stage->GetStageImpl());
 }
 
 wxSizer* AutoRectCutCMPT::initLayout()

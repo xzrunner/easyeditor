@@ -9,7 +9,8 @@ ArrangeSpriteCMPT::ArrangeSpriteCMPT(wxWindow* parent, const wxString& name,
 									 d2d::PropertySettingPanel* property, 
 									 d2d::ViewPanelMgr* view_panel_mgr,
 									 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	, m_stage_panel(stage)
 {
 	m_editOP = new ArrangeSpriteOP(property, view_panel_mgr, stage);
 }
@@ -34,12 +35,12 @@ wxSizer* ArrangeSpriteCMPT::initLayout()
 
 void ArrangeSpriteCMPT::onUpLevelPress(wxCommandEvent& event)
 {
-	static_cast<StagePanel*>(m_stage)->ChangeSelectedSpritesLevel(true);
+	m_stage_panel->ChangeSelectedSpritesLevel(true);
 }
 
 void ArrangeSpriteCMPT::onDownLevelPress(wxCommandEvent& event)
 {
-	static_cast<StagePanel*>(m_stage)->ChangeSelectedSpritesLevel(false);	
+	m_stage_panel->ChangeSelectedSpritesLevel(false);	
 }
 
 }

@@ -9,12 +9,12 @@ namespace eimage
 
 ImageProcessCMPT::ImageProcessCMPT(wxWindow* parent, const wxString& name, 
 								   StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
 	, m_edge_shader(NULL)
 {
 //	m_editOP = new ImageProcessOP(stage);
 
-	m_editOP = new d2d::ZoomViewOP(stage, true);
+	m_editOP = new d2d::ZoomViewOP(stage, stage->GetStageImpl(), true);
 }
 
 wxSizer* ImageProcessCMPT::initLayout()

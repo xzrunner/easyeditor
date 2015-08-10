@@ -7,7 +7,7 @@ namespace tdtex
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OnePassCanvas(panel)
+	: d2d::OnePassCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 {
 }

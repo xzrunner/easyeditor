@@ -31,6 +31,9 @@ private:
 		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 	};
 
+private:
+	StagePanel* m_stage_panel;
+
 }; // StageCanvas
 
 }

@@ -26,8 +26,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, m_test(NULL)
 {
-	m_edit_op = new d2d::ZoomViewOP(this, true);
-	m_canvas = new StageCanvas(this);
+	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
+	SetCanvas(new StageCanvas(this));
 }
 
 StagePanel::~StagePanel()

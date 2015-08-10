@@ -8,7 +8,7 @@
 using namespace emodeling;
 
 SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::DrawRectangleOP(editPanel, true)
+	: d2d::DrawRectangleOP(editPanel, editPanel->GetStageImpl(), true)
 	, m_selected(NULL)
 	, m_mouseOn(NULL)
 	, m_stagePanel(editPanel)
@@ -101,7 +101,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 	m_mouseOn = NULL;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* sprite = static_cast<StagePanel*>(m_stage)->QuerySpriteByPos(pos);
+	d2d::ISprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
 	if (sprite)
 	{
 		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());

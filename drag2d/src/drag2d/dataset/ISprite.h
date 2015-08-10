@@ -96,6 +96,10 @@ public:
 	void GetTransMatrix(Matrix& mt) const;
 	Matrix GetTransInvMatrix() const;
 
+protected:
+	template<typename T>
+	void SetSymbol(T** dst, d2d::ISymbol* src);
+
 public:
 	// info
 	std::string name;		

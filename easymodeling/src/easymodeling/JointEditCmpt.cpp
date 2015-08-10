@@ -9,20 +9,21 @@ using namespace emodeling;
 
 JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name, 
 							 StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel)
+	: d2d::AbstractEditCMPT(parent, name, editPanel->GetStageImpl())
+	, m_stage_panel(editPanel)
 {
 	d2d::ArrangeSpriteConfig cfg;
 	cfg.is_auto_align_open = false;
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new d2d::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel, propertyPanel, NULL, this, cfg);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, this, cfg);
 	static_cast<SelectJointOP*>(m_editOP)->SetPropertyPanel(propertyPanel);
 }
 
 void JointEditCmpt::updateControlValue()
 {
-	d2d::SpriteSelection* selection = static_cast<StagePanel*>(m_stage)->GetSpriteSelection();
+	d2d::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
 
 	if (selection->Size() != 2)
 		m_btnOK->Enable(false);
@@ -92,10 +93,8 @@ wxSizer* JointEditCmpt::initLayout()
 
 void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
-
 	std::vector<d2d::ISprite*> sprites;
-	d2d::SpriteSelection* selection = editPanel->GetSpriteSelection();
+	d2d::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
 	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	assert(sprites.size() == 2);
 	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->GetUserData()),
@@ -104,20 +103,20 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	libmodeling::Joint* joint = NULL;
 	wxString type = m_typeChoice->GetString(m_typeChoice->GetSelection());
 	if (type == wxT("Revolute"))
-		editPanel->insertJoint(new libmodeling::RevoluteJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::RevoluteJoint(body0, body1));
 	else if (type == wxT("Prismatic"))
-		editPanel->insertJoint(new libmodeling::PrismaticJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::PrismaticJoint(body0, body1));
 	else if (type == wxT("Distance"))
-		editPanel->insertJoint(new libmodeling::DistanceJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::DistanceJoint(body0, body1));
 	else if (type == wxT("Pulley"))
-		editPanel->insertJoint(new libmodeling::PulleyJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::PulleyJoint(body0, body1));
 	else if (type == wxT("Gear"))
 	{
 		SelectJointOP* op = static_cast<SelectJointOP*>(m_editOP);
 		assert(op->jointSelection.Size() == 2);
 		std::vector<libmodeling::Joint*> joints;
 		op->jointSelection.Traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
-		editPanel->insertJoint(new libmodeling::GearJoint(body0, body1, joints[0], joints[1]));
+		m_stage_panel->insertJoint(new libmodeling::GearJoint(body0, body1, joints[0], joints[1]));
 	}	
 	else if (type == wxT("Wheel"))
 	{
@@ -125,19 +124,19 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			if (dlg.getChoice() == 0)
-				editPanel->insertJoint(new libmodeling::WheelJoint(body1, body0));
+				m_stage_panel->insertJoint(new libmodeling::WheelJoint(body1, body0));
 			else
-				editPanel->insertJoint(new libmodeling::WheelJoint(body0, body1));
+				m_stage_panel->insertJoint(new libmodeling::WheelJoint(body0, body1));
 		}
 	}
 	else if (type == wxT("Weld"))
-		editPanel->insertJoint(new libmodeling::WeldJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::WeldJoint(body0, body1));
 	else if (type == wxT("Friction"))
-		editPanel->insertJoint(new libmodeling::FrictionJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::FrictionJoint(body0, body1));
 	else if (type == wxT("Rope"))
-		editPanel->insertJoint(new libmodeling::RopeJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::RopeJoint(body0, body1));
 	else if (type == wxT("Motor"))
-		editPanel->insertJoint(new libmodeling::MotorJoint(body0, body1));
+		m_stage_panel->insertJoint(new libmodeling::MotorJoint(body0, body1));
 
 	m_stage->SetCanvasDirty();
 }

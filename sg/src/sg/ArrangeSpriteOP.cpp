@@ -8,13 +8,13 @@ namespace sg
 ArrangeSpriteOP::ArrangeSpriteOP(d2d::PropertySettingPanel* property, 
 								 d2d::ViewPanelMgr* view_panel_mgr,
 								 StagePanel* stage)
-	: d2d::ArrangeSpriteFixOP(stage, stage, property, view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(false, false, false, false))
+	: d2d::ArrangeSpriteFixOP(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(false, false, false, false))
 {
 }
 
 bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 {
-	static_cast<StagePanel*>(m_stage)->GetCheckBoard().ClearRemovedCache();
+	static_cast<StagePanel*>(m_wnd)->GetCheckBoard().ClearRemovedCache();
 	return d2d::ArrangeSpriteFixOP::OnMouseLeftUp(x, y);
 }
 
@@ -24,7 +24,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 		return true;
 	}
 
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = stage->QuerySpriteByPos(pos);
@@ -47,7 +47,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 
 void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 {
-	StagePanel* stage = static_cast<StagePanel*>(m_stage);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
 	std::vector<d2d::ISprite*> sprites;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));

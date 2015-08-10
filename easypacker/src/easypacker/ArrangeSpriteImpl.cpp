@@ -7,7 +7,7 @@ namespace epacker
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel, 
 									 d2d::PropertySettingPanel* propertyPanel)
-	: d2d::ArrangeSpriteImpl(editPanel, editPanel, propertyPanel, 
+	: d2d::ArrangeSpriteImpl(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, 
 	d2d::ArrangeSpriteConfig(false, false, false, false))
 	, m_stage(editPanel)
 {

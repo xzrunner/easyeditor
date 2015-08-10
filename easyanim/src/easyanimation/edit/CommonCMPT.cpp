@@ -15,7 +15,7 @@ CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name,
 	StagePanel* stage, d2d::PropertySettingPanel* property, 
 	d2d::ViewPanelMgr* view_panel_mgr,
 	bool vertical, Controller* ctrl)
-	: d2d::AbstractEditCMPT(parent, name, stage)
+	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
 	, m_vertical(vertical)
 	, m_ctrl(ctrl)
 {
