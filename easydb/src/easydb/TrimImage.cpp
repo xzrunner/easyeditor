@@ -39,18 +39,18 @@ void TrimImage::Run(int argc, char *argv[])
 
 void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 {
+	JsonConfig json_cfg;
+
 	d2d::mk_dir(dst_dir, false);
 	std::string out_json_filepath = dst_dir + "\\" + OUTPUT_FILE + ".json";
 	wxDateTime json_time;
 	json_time.Set(0.0f);
 	if (d2d::FilenameTools::IsFileExist(out_json_filepath)) {
+		json_cfg.LoadFromFile(out_json_filepath);
 		wxStructStat strucStat;
 		wxStat(out_json_filepath, &strucStat);
 		json_time = strucStat.st_mtime;
 	}
-
-	Json::Value value;
-	int idx = 0;
 
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
@@ -91,7 +91,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 			spr_val["position"]["w"] = r.xLength();
 			spr_val["position"]["h"] = r.yLength();
 			StoreBoundInfo(*img, r, spr_val);
-			value[idx++] = spr_val;
+			json_cfg.Insert(relative_path, spr_val);
 
 			std::string out_filepath = dst_dir + "\\" + relative_path,
 				out_dir = d2d::FilenameTools::getFileDir(out_filepath);
@@ -107,12 +107,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 		}
 	}
 
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(out_json_filepath.c_str());
-	std::locale::global(std::locale("C"));	
-	writer.write(fout, value);
-	fout.close();
+	json_cfg.OutputToFile(out_json_filepath);
 }
 
 void TrimImage::StoreBoundInfo(const d2d::ImageData& img, const d2d::Rect& r, 
@@ -199,6 +194,59 @@ bool TrimImage::IsTransparent(const d2d::ImageData& img, int x, int y) const
 	} else {
 		return img.GetPixelData()[(img.GetWidth() * y + x) * 4 + 3] == 0;
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class TrimImage::JsonConfig
+//////////////////////////////////////////////////////////////////////////
+
+void TrimImage::JsonConfig::
+LoadFromFile(const std::string& filepath)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	int idx = 0;
+	Json::Value val = value[idx++];
+	while (!val.isNull()) {
+		std::string filepath = val["filepath"].asString();
+		m_map.insert(std::make_pair(filepath, val));
+		val = value[idx++];
+	}
+}
+
+void TrimImage::JsonConfig::
+Insert(const std::string& filepath, const Json::Value& val)
+{
+	std::map<std::string, Json::Value>::iterator itr
+		= m_map.find(filepath);
+	if (itr != m_map.end()) {
+		m_map.erase(itr);
+	}
+	m_map.insert(std::make_pair(filepath, val));
+}
+
+void TrimImage::JsonConfig::
+OutputToFile(const std::string& filepath) const
+{
+	Json::Value value;
+	std::map<std::string, Json::Value>::const_iterator itr 
+		= m_map.begin();
+	for (int i = 0; itr != m_map.end(); ++itr, ++i) {
+		value[i] = itr->second;
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
 }
