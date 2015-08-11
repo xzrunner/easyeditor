@@ -67,31 +67,11 @@ private:
 	void UpOneLayer();
 	void DownOneLayer();
 
-	void UpLayerMost();
-	void DownLayerMost();
-
-	void HoriMirror();
-	void VertMirror();
-
 	d2d::Vector GetSprOffset(const ISprite* spr) const;
 
 private:
 	static const float CTRL_NODE_RADIUS;
 	static const float MAX_CTRL_NODE_RADIUS;
-
-private:
-	enum
-	{
-		MENU_UP_ONE_LAYER = 10000,
-		MENU_DOWN_ONE_LAYER,
-		MENU_UP_MOST,
-		MENU_DOWN_MOST,
-		MENU_HORI_MIRROR,
-		MENU_VERT_MIRROR,
-
-		MENU_INSERT_TO_DTEX,
-		MENU_REMOVE_FROM_DTEX
-	};
 
 protected:
 	EditPanelImpl* m_stage;
@@ -111,6 +91,8 @@ private:
 	Vector m_left_down_pos, m_right_down_pos;
 
 	mutable float m_ctrl_node_radius;
+
+	RightPopupMenu m_popup;
 
 }; // ArrangeSpriteImpl
 

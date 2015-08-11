@@ -17,9 +17,9 @@ public:
 	void OnRightPopupMenu(int id);
 
 private:
-	void CreateShapeMenu(wxMenu& menu, d2d::ISprite* spr);
-	void CreateAnimMenu(wxMenu& menu, d2d::ISprite* spr);
-	void CreateLayerTagMenu(wxMenu& menu, d2d::ISprite* spr);
+	void CreateShapeMenu(wxMenu& menu);
+	void CreateAnimMenu(wxMenu& menu);
+	void CreateLayerTagMenu(wxMenu& menu);
 
 	void HandleShapeMenu(int id);
 	void HandleAnimMenu(int id);

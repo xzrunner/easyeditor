@@ -200,6 +200,14 @@
 					RelativePath="..\..\..\src\drag2d\operator\AutoAlign.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\RightPopupMenu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\RightPopupMenu.h"
+					>
+				</File>
 				<Filter
 					Name="sprite"
 					>

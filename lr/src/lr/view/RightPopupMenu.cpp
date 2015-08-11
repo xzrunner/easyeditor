@@ -16,9 +16,10 @@ RightPopupMenu::RightPopupMenu(StagePanel* stage)
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 {
-	CreateShapeMenu(menu, spr);
-	CreateAnimMenu(menu, spr);
-	CreateLayerTagMenu(menu, spr);
+	m_sprite = spr;
+	CreateShapeMenu(menu);
+	CreateAnimMenu(menu);
+	CreateLayerTagMenu(menu);
 }
 
 void RightPopupMenu::OnRightPopupMenu(int id)
@@ -32,17 +33,16 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 	}
 }
 
-void RightPopupMenu::CreateShapeMenu(wxMenu& menu, d2d::ISprite* spr)
+void RightPopupMenu::CreateShapeMenu(wxMenu& menu)
 {
 	menu.AppendSeparator();
 	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_OPEN_WITH_SHAPE_ID);
 	menu.Append(MENU_OPEN_WITH_SHAPE_ID, "Open With EasyShape");
 }
 
-void RightPopupMenu::CreateAnimMenu(wxMenu& menu, d2d::ISprite* spr)
+void RightPopupMenu::CreateAnimMenu(wxMenu& menu)
 {
-	m_sprite = spr;
-	std::string filepath = spr->GetSymbol().GetFilepath();
+	std::string filepath = m_sprite->GetSymbol().GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
@@ -75,7 +75,7 @@ void RightPopupMenu::CreateAnimMenu(wxMenu& menu, d2d::ISprite* spr)
 	}
 }
 
-void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu, d2d::ISprite* spr)
+void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 {
 	menu.AppendSeparator();
 	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_COVER_LAYER_TAG_ID);

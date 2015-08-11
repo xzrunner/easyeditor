@@ -351,57 +351,7 @@ void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 
 void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 {
-	switch (type)
-	{
-	case MENU_UP_ONE_LAYER:
-		UpOneLayer();
-		break;
-	case MENU_DOWN_ONE_LAYER:
-		DownOneLayer();
-		break;
-	case MENU_UP_MOST:
-		UpLayerMost();
-		break;
-	case MENU_DOWN_MOST:
-		DownLayerMost();
-		break;
-	case MENU_HORI_MIRROR:
-		HoriMirror();
-		break;
-	case MENU_VERT_MIRROR:
-		VertMirror();
-		break;
-	case MENU_INSERT_TO_DTEX:
-		{
-			if (Config::Instance()->IsUseDTex()) {
-				std::vector<d2d::ISprite*> selected;
-				m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-
-				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
-				for (size_t i = 0, n = selected.size(); i < n; ++i) {
-					ISymbol& s = const_cast<ISymbol&>(selected[i]->GetSymbol());
-					dtex->InsertSymbol(s);
-				}
-
-				m_stage->GetCanvas()->ResetViewport();
-			}
-		}
-		break;
-	case MENU_REMOVE_FROM_DTEX:
-		{
-			if (Config::Instance()->IsUseDTex()) {
-				std::vector<d2d::ISprite*> selected;
-				m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-				//DynamicTexture* dtex = DynamicTexture::Instance();
-				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
-				for (size_t i = 0, n = selected.size(); i < n; ++i) {
-					ISymbol& s = const_cast<ISymbol&>(selected[i]->GetSymbol());
-					dtex->Remove(s.GetFilepath());
-				}
-			}
-		}
-		break;
-	}
+	m_popup.OnRightPopupMenu(type);
 }
 
 void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
@@ -567,6 +517,8 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
 	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_VERT_MIRROR);
 	menu.Append(MENU_VERT_MIRROR, "ÊúÖ±¾µÏñ");	
 
+	
+
 #ifdef _DEBUG
 	menu.AppendSeparator();
 	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_INSERT_TO_DTEX);
@@ -631,56 +583,6 @@ void ArrangeSpriteImpl::DownOneLayer()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		m_sprites_impl->ReorderSprite(selected[i], false);
-	}
-}
-
-void ArrangeSpriteImpl::UpLayerMost()
-{
-	std::vector<d2d::ISprite*> selected;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		do {
-		} while (m_sprites_impl->ReorderSprite(selected[i], true));
-	}
-}
-
-void ArrangeSpriteImpl::DownLayerMost()
-{
-	std::vector<d2d::ISprite*> selected;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		do {
-		} while (m_sprites_impl->ReorderSprite(selected[i], false));
-	}
-}
-
-void ArrangeSpriteImpl::HoriMirror()
-{
-	std::vector<d2d::ISprite*> selected;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-	bool dirty = false;
-	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		d2d::ISprite* spr = selected[i];
-		spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
-		dirty = true;
-	}
-	if (dirty) {
-		m_stage->SetCanvasDirty();
-	}
-}
-
-void ArrangeSpriteImpl::VertMirror()
-{
-	std::vector<d2d::ISprite*> selected;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-	bool dirty = false;
-	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		d2d::ISprite* spr = selected[i];
-		spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
-		dirty = true;
-	}
-	if (dirty) {
-		m_stage->SetCanvasDirty();
 	}
 }
 
