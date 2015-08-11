@@ -16,21 +16,36 @@ RightPopupMenu::RightPopupMenu(StagePanel* stage)
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 {
-	wxLogDebug("SetRightPopupMenu 0");
+	CreateShapeMenu(menu, spr);
+	CreateAnimMenu(menu, spr);
+	CreateLayerTagMenu(menu, spr);
+}
 
-	// open with shape
+void RightPopupMenu::OnRightPopupMenu(int id)
+{
+	if (id == MENU_OPEN_WITH_SHAPE_ID) {
+		HandleShapeMenu(id);
+	} else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID || id - MENU_COLOR_START_ID < m_anim_files.size()) {
+		HandleAnimMenu(id);
+	} else if (id >= MENU_COVER_LAYER_TAG_ID && id <= MENU_TOP_LAYER_TAG_ID) {
+		HandleLayerTagMenu(id);
+	}
+}
+
+void RightPopupMenu::CreateShapeMenu(wxMenu& menu, d2d::ISprite* spr)
+{
 	menu.AppendSeparator();
 	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_OPEN_WITH_SHAPE_ID);
 	menu.Append(MENU_OPEN_WITH_SHAPE_ID, "Open With EasyShape");
+}
 
-	// for anim file
+void RightPopupMenu::CreateAnimMenu(wxMenu& menu, d2d::ISprite* spr)
+{
 	m_sprite = spr;
 	std::string filepath = spr->GetSymbol().GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
-
-	wxLogDebug("SetRightPopupMenu 1");
 
 	// rotate
 	menu.AppendSeparator();
@@ -41,19 +56,15 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 
 	// color
 
-// 	Layer* layer = m_stage->GetCurrLayer();
-// 	if (layer->GetName() != "单位") {
-// 		return;
-// 	}
-
-	wxLogDebug("SetRightPopupMenu 2");
+	// 	Layer* layer = m_stage->GetCurrLayer();
+	// 	if (layer->GetName() != "单位") {
+	// 		return;
+	// 	}
 
 	FetchCandidateAnimFiles(filepath);
 	if (m_anim_files.empty()) {
 		return;
 	}
-
-	wxLogDebug("SetRightPopupMenu 3");
 
 	menu.AppendSeparator();
 
@@ -64,18 +75,28 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 	}
 }
 
-void RightPopupMenu::OnRightPopupMenu(int id)
+void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu, d2d::ISprite* spr)
 {
-	if (id == MENU_OPEN_WITH_SHAPE_ID)
-	{
-		std::vector<d2d::ISprite*> selected;
-		m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-		if (!selected.empty()) {
-			std::string cmd = "easyshape_new.exe " + selected[0]->GetSymbol().GetFilepath();
-			WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
-		}
+	menu.AppendSeparator();
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_COVER_LAYER_TAG_ID);
+	menu.Append(MENU_COVER_LAYER_TAG_ID, "遮挡层");
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_TOP_LAYER_TAG_ID);
+	menu.Append(MENU_TOP_LAYER_TAG_ID, "顶层");	
+}
+
+void RightPopupMenu::HandleShapeMenu(int id)
+{
+	std::vector<d2d::ISprite*> selected;
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	if (!selected.empty()) {
+		std::string cmd = "easyshape_new.exe " + selected[0]->GetSymbol().GetFilepath();
+		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
 	}
-	else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
+}
+
+void RightPopupMenu::HandleAnimMenu(int id)
+{
+	if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
 	{
 		std::string filepath = m_sprite->GetSymbol().GetFilepath();
 		assert(CharacterFileName::IsValidFilepath(filepath));
@@ -94,7 +115,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		d2d::ISymbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
 		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 
-		
+
 		if (dir >= 1 && dir <= 5) {
 			m_sprite->SetMirror(false, false);
 		} else {
@@ -107,6 +128,15 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
 		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
+	}
+}
+
+void RightPopupMenu::HandleLayerTagMenu(int id)
+{
+	if (id == MENU_COVER_LAYER_TAG_ID) {
+		m_sprite->tag += "layer=cover;";
+	} else if (id == MENU_TOP_LAYER_TAG_ID) {
+		m_sprite->tag += "layer=top;";
 	}
 }
 

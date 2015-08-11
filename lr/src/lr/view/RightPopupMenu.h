@@ -17,14 +17,25 @@ public:
 	void OnRightPopupMenu(int id);
 
 private:
+	void CreateShapeMenu(wxMenu& menu, d2d::ISprite* spr);
+	void CreateAnimMenu(wxMenu& menu, d2d::ISprite* spr);
+	void CreateLayerTagMenu(wxMenu& menu, d2d::ISprite* spr);
+
+	void HandleShapeMenu(int id);
+	void HandleAnimMenu(int id);
+	void HandleLayerTagMenu(int id);
+
 	void FetchCandidateAnimFiles(const std::string& filepath);
 
 private:
-	static const int MENU_OPEN_WITH_SHAPE_ID = 200;
-	static const int MENU_ROTATE_LEFT_ID = 201;
-	static const int MENU_ROTATE_RIGHT_ID = 202;
+	static const int MENU_OPEN_WITH_SHAPE_ID	= 200;
+	static const int MENU_ROTATE_LEFT_ID		= 201;
+	static const int MENU_ROTATE_RIGHT_ID		= 202;
 
-	static const int MENU_COLOR_START_ID = 210;
+	static const int MENU_COLOR_START_ID		= 210;
+
+	static const int MENU_COVER_LAYER_TAG_ID	= 250;
+	static const int MENU_TOP_LAYER_TAG_ID		= 251;
 
 private:
 	StagePanel* m_stage;
