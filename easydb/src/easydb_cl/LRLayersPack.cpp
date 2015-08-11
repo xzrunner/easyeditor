@@ -236,6 +236,12 @@ void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx,
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!spr_val.isNull()) 
 	{
+		std::string filename = d2d::FilenameTools::getFilename(spr_val["filepath"].asString());
+		if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_particle3d)) {
+			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+			continue;
+		}
+
 		Json::Value char_val;
 		char_val["name"] = spr_val["name"];
 		char_val["x"] = spr_val["position"]["x"];
@@ -261,7 +267,6 @@ void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx,
 		}
 
 		// filename
-		std::string filename = d2d::FilenameTools::getFilename(spr_val["filepath"].asString());
 		lr::CharacterFileName out_name(filename);
 		char_val["filename"] = out_name.GetOutputName();
 

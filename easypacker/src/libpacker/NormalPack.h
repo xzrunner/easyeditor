@@ -16,7 +16,7 @@ class ImageTrimData;
 class NormalPack
 {
 public:
-	NormalPack(const std::vector<std::string>& files, const ImageTrimData& trim_info);
+	NormalPack(const std::vector<std::string>& files, const ImageTrimData* trim_info);
 
 	void Pack();
 	void Pack(int static_size);
@@ -33,7 +33,7 @@ private:
 private:
 	const std::vector<std::string>& m_filepaths;
 
-	const ImageTrimData& m_trim_info;
+	const ImageTrimData* m_trim_info;
 
 	std::vector<RectSize> m_src_sizes;
 

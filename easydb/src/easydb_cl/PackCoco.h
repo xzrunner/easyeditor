@@ -33,7 +33,7 @@ private:
 	void Prepare(const Json::Value& pkg_val, const std::string& config_dir);
 
 	void PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
-		const libpacker::ImageTrimData& trim) const;
+		const libpacker::ImageTrimData* trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
 	void GetAllImages(const Json::Value& pkg_val, const std::string& config_dir,
 		std::vector<std::string>& images) const;

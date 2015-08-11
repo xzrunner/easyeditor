@@ -31,9 +31,9 @@ std::string LRPacker::Usage() const
 
 void LRPacker::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 6)) return;
+	if (!check_number(this, argc, 5)) return;
 	if (!check_file(argv[2])) return;
-	if (!check_file(argv[6])) return;
+//	if (!check_file(argv[6])) return;
 
 	std::string tmp_dir = argv[3];
 	std::string out_dir = argv[4];
@@ -68,9 +68,9 @@ void LRPacker::Run(int argc, char *argv[])
 	{
 		Json::Value val;
 
-		std::string trim_file = argv[6];
-		trim_file = d2d::FilenameTools::getRelativePath(tmp_dir, trim_file);
-		val["trim file"] = trim_file;
+// 		std::string trim_file = argv[6];
+// 		trim_file = d2d::FilenameTools::getRelativePath(tmp_dir, trim_file);
+// 		val["trim file"] = trim_file;
 
 		Json::Value pkg_val;
 

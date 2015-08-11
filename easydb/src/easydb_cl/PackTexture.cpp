@@ -62,8 +62,11 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
-	libpacker::ImageTrimData trim(trim_file);
+	libpacker::ImageTrimData* trim = NULL;
+	if (!value["trim file"].isNull()) {
+		std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
+		trim = new libpacker::ImageTrimData(trim_file);
+	}
 
 	libpacker::NormalPack tex_packer(images, trim);
 	tex_packer.Pack(value["static size"].asInt());
@@ -71,6 +74,8 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	tex_packer.OutputImage(dst_file + ".png");
 
 	sd.open_image_edge_clip = ori_cfg;
+
+	delete trim;
 }
 
 }

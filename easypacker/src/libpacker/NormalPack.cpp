@@ -10,7 +10,7 @@ namespace libpacker
 
 static const bool CLOCKWISE_ROT = true;
 
-NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData& trim_info)
+NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData* trim_info)
 	: m_filepaths(files)
 	, m_trim_info(trim_info)
 {
@@ -52,37 +52,71 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 			bool rot = (src_sz.width != pos.width || src_sz.height != pos.height);
 			frame_val["rotated"] = rot;
 
-			const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[idx]);
-			if (!t) {
-				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
-			}
-
-			int e_left, e_right, e_bottom, e_up;
-			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
-
-			frame_val["frame"]["w"] = src_sz.width - e_left - e_right;
-			frame_val["frame"]["h"] = src_sz.height - e_bottom - e_up;
-			if (!rot) {
-				frame_val["frame"]["x"] = pos.x + e_left;
-				frame_val["frame"]["y"] = pos.y + e_bottom;
-			} else {
-				if (CLOCKWISE_ROT) {
-					frame_val["frame"]["x"] = pos.x + e_up;
-					frame_val["frame"]["y"] = pos.y + e_left;
-				} else {
-					frame_val["frame"]["x"] = pos.x + e_bottom;
-					frame_val["frame"]["y"] = pos.y + e_right;
+			if (m_trim_info) 
+			{
+				const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[idx]);
+				if (!t) {
+					throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
 				}
+
+				int e_left, e_right, e_bottom, e_up;
+				GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
+
+				frame_val["frame"]["w"] = src_sz.width - e_left - e_right;
+				frame_val["frame"]["h"] = src_sz.height - e_bottom - e_up;
+				if (!rot) {
+					frame_val["frame"]["x"] = pos.x + e_left;
+					frame_val["frame"]["y"] = pos.y + e_bottom;
+				} else {
+					if (CLOCKWISE_ROT) {
+						frame_val["frame"]["x"] = pos.x + e_up;
+						frame_val["frame"]["y"] = pos.y + e_left;
+					} else {
+						frame_val["frame"]["x"] = pos.x + e_bottom;
+						frame_val["frame"]["y"] = pos.y + e_right;
+					}
+				}
+
+				frame_val["trimmed"] = false;
+				frame_val["spriteSourceSize"]["x"] = t->x;
+				frame_val["spriteSourceSize"]["y"] = t->y;
+				frame_val["spriteSourceSize"]["w"] = t->w;
+				frame_val["spriteSourceSize"]["h"] = t->h;
+
+				frame_val["sourceSize"]["w"] = t->ori_w;
+				frame_val["sourceSize"]["h"] = t->ori_h;
+			} 
+			else 
+			{	
+				int w = src_sz.width, 
+					h = src_sz.height;
+
+				int e_left = 1, e_right = 1, e_bottom = 1, e_up = 1;
+
+				frame_val["frame"]["w"] = src_sz.width - e_left - e_right;
+				frame_val["frame"]["h"] = src_sz.height - e_bottom - e_up;
+				if (!rot) {
+					frame_val["frame"]["x"] = pos.x + e_left;
+					frame_val["frame"]["y"] = pos.y + e_bottom;
+				} else {
+					if (CLOCKWISE_ROT) {
+						frame_val["frame"]["x"] = pos.x + e_up;
+						frame_val["frame"]["y"] = pos.y + e_left;
+					} else {
+						frame_val["frame"]["x"] = pos.x + e_bottom;
+						frame_val["frame"]["y"] = pos.y + e_right;
+					}
+				}
+
+				frame_val["trimmed"] = false;
+				frame_val["spriteSourceSize"]["x"] = 0;
+				frame_val["spriteSourceSize"]["y"] = 0;
+				frame_val["spriteSourceSize"]["w"] = w;
+				frame_val["spriteSourceSize"]["h"] = h;
+
+				frame_val["sourceSize"]["w"] = w;
+				frame_val["sourceSize"]["h"] = h;
 			}
-
-			frame_val["trimmed"] = false;
-			frame_val["spriteSourceSize"]["x"] = t->x;
-			frame_val["spriteSourceSize"]["y"] = t->y;
-			frame_val["spriteSourceSize"]["w"] = t->w;
-			frame_val["spriteSourceSize"]["h"] = t->h;
-
-			frame_val["sourceSize"]["w"] = t->ori_w;
-			frame_val["sourceSize"]["h"] = t->ori_h;
 
 			value["frames"][j] = frame_val;
 		}
@@ -132,13 +166,18 @@ void NormalPack::OutputImage(const std::string& filepath) const
 
 			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(m_filepaths[idx]);
 
-			const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[idx]);
-			if (!t) {
-				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
-			}
 			int e_left, e_right, e_bottom, e_up;
-			assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
-			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
+			if (m_trim_info) {
+				const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[idx]);
+				if (!t) {
+					throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
+				}
+
+				assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
+				GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
+			} else {
+				e_left = e_right = e_bottom = e_up = 1;
+			}
 			
 			if (rot) {
 				if (CLOCKWISE_ROT) {
@@ -169,16 +208,22 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size)
 		RectSize sz;
 		eimage::ImageIO::ReadHeader(path.c_str(), sz.width, sz.height);
 
-		const ImageTrimData::Trim* t = m_trim_info.Query(m_filepaths[i]);
-		if (!t) {
-			throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[i]);
+		if (m_trim_info) {
+			const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[i]);
+			if (!t) {
+				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[i]);
+			}
+			int e_left, e_right, e_bottom, e_up;
+			assert(t->w == sz.width && t->h == sz.height);
+			GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
+
+			sz.width += e_left + e_right;
+			sz.height += e_bottom + e_up;
+		} else {
+			sz.width += 2;
+			sz.height += 2;
 		}
-		int e_left, e_right, e_bottom, e_up;
-		assert(t->w == sz.width && t->h == sz.height);
-		GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
-		
-		sz.width += e_left + e_right;
-		sz.height += e_bottom + e_up;
+
 		m_src_sizes.push_back(sz);
 	}
 
