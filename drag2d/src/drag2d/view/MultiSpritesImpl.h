@@ -28,7 +28,6 @@ public:
 	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
 	virtual bool InsertSprite(ISprite* sprite);
-	virtual bool InsertSprite(ISprite* sprite, int idx);
 	virtual bool RemoveSprite(ISprite* sprite);
 	virtual bool ClearAllSprite();
 
