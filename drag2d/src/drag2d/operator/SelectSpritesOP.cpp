@@ -1,6 +1,7 @@
 #include "SelectSpritesOP.h"
 
 #include "common/Rect.h"
+#include "common/sprite_visitors.h"
 #include "dataset/TextSprite.h"
 #include "dataset/FontSprite.h"
 #include "dataset/SymbolMgr.h"
@@ -186,11 +187,17 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 	if (m_rightFirstScrPos == Vector(x, y))
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);
-		d2d::ISprite* sprite = m_spritesImpl->QuerySpriteByPos(pos);
-		if (sprite)
+
+		ISprite* selected = NULL;
+		m_selection->Traverse(PointQueryVisitor(pos, &selected));
+		if (!selected) {
+			selected = m_spritesImpl->QuerySpriteByPos(pos);
+		}
+
+		if (selected)
 		{
 			m_selection->Clear();
-			m_selection->Add(sprite);
+			m_selection->Add(selected);
 			SetRightPan(m_selection->IsEmpty());
 
 		}

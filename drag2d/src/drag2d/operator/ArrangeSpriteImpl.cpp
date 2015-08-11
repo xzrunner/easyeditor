@@ -299,7 +299,6 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 	ISprite* selected = NULL;
 	m_selection->Traverse(PointQueryVisitor(pos, &selected));
 	if (!selected) {
-//		selected = m_sprites_impl->QuerySpriteByPos(pos);
 		return;
 	}
 	
