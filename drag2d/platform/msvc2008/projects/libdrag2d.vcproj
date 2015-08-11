@@ -1581,10 +1581,6 @@
 				RelativePath="..\..\..\src\drag2d\common\UserDataImpl.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\visitors.h"
-				>
-			</File>
 			<Filter
 				Name="fileadapter"
 				>
@@ -1814,6 +1810,22 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\types.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="visitor"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\sprite_visitors.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\sprite_visitors.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\visitors.h"
 					>
 				</File>
 			</Filter>

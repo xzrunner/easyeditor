@@ -12,6 +12,7 @@
 #include "common/Math.h"
 #include "common/Config.h"
 #include "common/SettingData.h"
+#include "common/sprite_visitors.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanelImpl.h"
@@ -289,32 +290,40 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
-	if (m_right_down_pos.isValid() && !m_selection->IsEmpty())
+	if (!m_right_down_pos.isValid() || m_selection->IsEmpty()) {
+		return;
+	}
+
+	Vector pos = m_stage->TransPosScrToProj(x, y);
+
+	ISprite* selected = NULL;
+	m_selection->Traverse(PointQueryVisitor(pos, &selected));
+	if (!selected) {
+//		selected = m_sprites_impl->QuerySpriteByPos(pos);
+		return;
+	}
+	
+	if (pos == m_right_down_pos && selected)
 	{
-		Vector pos = m_stage->TransPosScrToProj(x, y);
-		d2d::ISprite* sprite = m_sprites_impl->QuerySpriteByPos(pos);
-		if (pos == m_right_down_pos && sprite)
-		{
-			wxMenu menu;
-			SetRightPopupMenu(menu, sprite);
-			m_stage->PopupMenu(&menu, x, y);
-		}
-		else if (m_op_state)
-		{
-			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-			if (history) {
-				m_stage->AddOpRecord(history);
-			}
-
-			delete m_op_state;
-			m_op_state = NULL;
+		wxMenu menu;
+		SetRightPopupMenu(menu, selected);
+		m_stage->PopupMenu(&menu, x, y);
+	}
+	else if (m_op_state)
+	{
+		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
+		if (history) {
+			m_stage->AddOpRecord(history);
 		}
 
-		if (m_property_panel)
-		{
-			m_property_panel->EnablePropertyGrid(true);
-			m_property_panel->UpdatePropertyGrid();
-		}
+		delete m_op_state;
+		m_op_state = NULL;
+	}
+
+	if (m_property_panel)
+	{
+		m_property_panel->EnablePropertyGrid(true);
+		m_property_panel->UpdatePropertyGrid();
 	}
 }
 

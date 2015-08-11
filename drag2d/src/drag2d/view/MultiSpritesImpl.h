@@ -40,32 +40,6 @@ public:
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
 	void ClearSpriteSelection();
 
-private:
-	class PointQueryVisitor : public IVisitor
-	{
-	public:
-		PointQueryVisitor(const Vector& pos, ISprite** pResult);
-		virtual void Visit(Object* object, bool& bFetchNext);
-
-	private:
-		const Vector& m_pos;
-		ISprite** m_pResult;
-
-	}; // PointQueryVisitor
-
-	class RectQueryVisitor : public IVisitor
-	{
-	public:
-		RectQueryVisitor(const Rect& rect, bool contain, std::vector<ISprite*>& result);
-		virtual void Visit(Object* object, bool& bFetchNext);
-
-	private:
-		const Rect& m_rect;
-		bool m_contain;
-		std::vector<ISprite*>& m_result;
-
-	}; // RectQueryVisitor
-
 protected:
 	SpriteSelection* m_sprite_selection;
 
