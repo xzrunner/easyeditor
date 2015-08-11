@@ -63,7 +63,7 @@ void LRLayersPack::Run(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
-	ParserDecorate(lr_val, 1, "decorate", out_val);
+	ParserSpecial(lr_val, out_val);
 	ParserCharacter(lr_val, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
@@ -280,49 +280,91 @@ void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx,
 	}
 }
 
-void LRLayersPack::ParserDecorate(const Json::Value& src_val, int layer_idx, 
-								  const char* name, Json::Value& out_val)
+void LRLayersPack::ParserSpecial(const Json::Value& src_val, Json::Value& out_val)
 {
-	int idx = 0;
-	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
-	while (!spr_val.isNull()) 
+	for (int layer_idx = 0; layer_idx < 3; ++layer_idx)
 	{
-		Json::Value dec_val;
-
-		float px = spr_val["position"]["x"].asDouble(),
-			py = spr_val["position"]["y"].asDouble();
-
-		std::string export_name = "";
-		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		if (spr_path.Contains(".json")) 
+		int idx = 0;
+		Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+		while (!spr_val.isNull()) 
 		{
-			Json::Value val;
-			Json::Reader reader;
-			std::locale::global(std::locale(""));
-			std::ifstream fin(spr_path.fn_str());
-			std::locale::global(std::locale("C"));
-			reader.parse(fin, val);
-			fin.close();
-
-			export_name = val["name"].asString();
-
-			int idx = 0;
-			const Json::Value& spr_val = val["sprite"][idx];
-			float cx = spr_val["position"]["x"].asDouble(),
-				cy = spr_val["position"]["y"].asDouble(); 
-			px += cx;
-			py += cy;
+			std::string filepath = spr_val["filepath"].asString();
+			std::string tag = spr_val["tag"].asString();
+			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
+				ParserParticleLayer(spr_val, out_val);
+			} else if (tag.find("layer=cover") != std::string::npos) {
+				ParserSpecialLayer(spr_val, "cover", out_val);
+			} else if (tag.find("layer=top") != std::string::npos) {
+				ParserSpecialLayer(spr_val, "top", out_val);
+			}
+			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 		}
-		dec_val["export"] = export_name;
-		
-		dec_val["x"] = px;
-		dec_val["y"] = py;
-
-		int sz = out_val[name].size();
-		out_val[name][sz] = dec_val;
-
-		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	}
+}
+
+void LRLayersPack::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
+{
+	Json::Value dec_val;
+
+	float px = spr_val["position"]["x"].asDouble(),
+		py = spr_val["position"]["y"].asDouble();
+
+	std::string export_name = "";
+	wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
+	if (spr_path.Contains(".json")) 
+	{
+		Json::Value val;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(spr_path.fn_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, val);
+		fin.close();
+
+		export_name = val["name"].asString();
+
+		int idx = 0;
+		const Json::Value& spr_val = val["sprite"][idx];
+		float cx = spr_val["position"]["x"].asDouble(),
+			cy = spr_val["position"]["y"].asDouble(); 
+		px += cx;
+		py += cy;
+	}
+	dec_val["export"] = export_name;
+
+	dec_val["x"] = px;
+	dec_val["y"] = py;
+
+	int sz = out_val[name].size();
+	out_val[name][sz] = dec_val;
+}
+
+void LRLayersPack::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val)
+{
+	Json::Value dec_val;
+
+	dec_val["x"] = spr_val["position"]["x"].asDouble();
+	dec_val["y"] = spr_val["position"]["y"].asDouble();
+
+	std::string sym_path = spr_val["filepath"].asString();
+	Json::Value sym_val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(sym_path.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, sym_val);
+	fin.close();
+
+	dec_val["export"] = sym_val["name"].asString();
+
+	Json::Value dir_val;
+	dir_val["x"] = 0;
+	dir_val["y"] = 0;
+	dir_val["z"] = 1;
+	dec_val["dir"] = dir_val;
+
+	int sz = out_val["particle"].size();
+	out_val["particle"][sz] = dec_val;
 }
 
 }

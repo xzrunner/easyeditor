@@ -77,27 +77,28 @@ void LRToComplex::LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_v
 	int idx = 0;
 	Json::Value spr_val = src_val[idx++];
 	while (!spr_val.isNull()) {
-		// test character
-		std::string tag = spr_val["tag"].asString();
-		if (!tag.empty()) {
-			spr_val = src_val[idx++];
-			continue;
-		}
+// 		// test character
+// 		std::string tag = spr_val["tag"].asString();
+// 		if (!tag.empty()) {
+// 			spr_val = src_val[idx++];
+// 			continue;
+// 		}
 
 		std::string filepath = spr_val["filepath"].asString();
-
-		Json::Value spr_val_fix = spr_val;
-
-		std::string suffix = "_shape.json";
-		int pos = filepath.find(suffix);
-		if (pos!= std::string::npos) {
-			std::string fix_filepath = filepath.substr(0, pos) + ".png";
-			if (d2d::FilenameTools::IsFileExist(fix_filepath)) {
-				spr_val_fix["filepath"] = fix_filepath;
-			}
+		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
+			;
+		} else {
+			Json::Value spr_val_fix = spr_val;
+			std::string suffix = "_shape.json";
+			int pos = filepath.find(suffix);
+			if (pos!= std::string::npos) {
+				std::string fix_filepath = filepath.substr(0, pos) + ".png";
+				if (d2d::FilenameTools::IsFileExist(fix_filepath)) {
+					spr_val_fix["filepath"] = fix_filepath;
+				}
+			}	
+			dst_val[dst_val.size()] = spr_val_fix;
 		}
-
-		dst_val[dst_val.size()] = spr_val_fix;
 
 		spr_val = src_val[idx++];
 	}

@@ -38,7 +38,7 @@ private:
 	std::string SeparateSprite(const Json::Value& value);
 
 	std::string CreateNewComplexFile(const Json::Value& value) const;
-	void ResetOldSpriteVal(Json::Value& val, const std::string& name) const;
+	void ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const;
 
 	void FixPosWithShape(d2d::Vector& pos, const std::string& filepath) const;
 

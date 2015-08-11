@@ -65,25 +65,27 @@ void SeparateToComplex::Run(const std::string& filepath)
 
 	for (int layer_idx = 0; layer_idx < 8; ++layer_idx)
 	{
-		if (layer_idx == 1)
-		{
-			int idx = 0;
-			Json::Value src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
-			while (!src_val.isNull()) {
-				Json::Value& dst_val = 	new_lr_val["layer"][layer_idx]["sprite"][idx-1];
-				SeparateSprite(src_val, dst_val);
-				src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
-			}
+		// shape layer
+		if (layer_idx == 4 || layer_idx == 5 || layer_idx == 6) {
+			continue;
 		}
-		else if (layer_idx == 0 || layer_idx == 2 || layer_idx == 3 || layer_idx == 7)
-		{
-			int idx = 0;
-			Json::Value src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
-			while (!src_val.isNull()) {
+
+		int idx = 0;
+		Json::Value src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
+		while (!src_val.isNull()) {
+			std::string filepath = src_val["filepath"].asString();
+// 			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
+// 				;
+// 			} else {
 				Json::Value& dst_val = 	new_lr_val["layer"][layer_idx]["sprite"][idx-1];
-				FixSpriteName(src_val, dst_val);
-				src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
-			}
+				std::string tag = src_val["tag"].asString();
+				if (tag.find("layer") != std::string::npos) {
+					SeparateSprite(src_val, dst_val);
+				} else {
+					FixSpriteName(src_val, dst_val);
+				}
+//			}
+			src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
 		}
 	}
 
@@ -100,7 +102,7 @@ void SeparateToComplex::Run(const std::string& filepath)
 void SeparateToComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 {
 	std::string name = CreateNewComplexFile(src);
-	ResetOldSpriteVal(dst, name);
+	ResetOldSpriteVal(dst, name, src["tag"].asString());
 }
 
 void SeparateToComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
@@ -112,7 +114,7 @@ void SeparateToComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
 
 std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) const
 {
-	std::string name = wxString::Format("lr_decorate_%d", m_count++).ToStdString();
+	std::string name = wxString::Format("name_%d", m_count++).ToStdString();
 
 	Json::Value out_val;
 
@@ -151,7 +153,7 @@ std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) co
 	return name;
 }
 
-void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name) const
+void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const
 {
 	val["filepath"] = name + "_complex.json";
 	val["position"]["x"] = 0;
@@ -168,7 +170,7 @@ void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& n
 	val["y mirror"] = false;
 
 	val["name"] = name;
-	val["tag"] = "";
+	val["tag"] = tag;
 	val["clip"] = false;
 
 	val["multi color"] = "0xffffffff";
