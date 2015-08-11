@@ -23,6 +23,8 @@ SettingData::SettingData()
 	visible_spr_update = true;
 
 	linear_filter = true;
+
+	pre_multi_alpha = true;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)

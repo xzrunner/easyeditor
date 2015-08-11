@@ -12,6 +12,8 @@
 
 #include "common/tools.h"
 #include "common/StringTools.h"
+#include "common/config.h"
+#include "common/SettingData.h"
 #include "render/ShaderMgr.h"
 
 //#define USE_SOIL
@@ -58,7 +60,9 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 
 	if (channels == 4) {
 		FormatPixelsAlpha(data, width, height, 0);
-		PreMuiltiAlpha(data, width, height);
+		if (Config::Instance()->GetSettings().pre_multi_alpha) {
+			PreMuiltiAlpha(data, width, height);
+		}
 	}
 
 	if (format == 0)

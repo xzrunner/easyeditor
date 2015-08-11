@@ -20,26 +20,30 @@ std::string TrimImage::Description() const
 
 std::string TrimImage::Usage() const
 {
-	return Command() + " [dir path]";
+	return Command() + " [src dir] [dst dir]";
 }
 
 void TrimImage::Run(int argc, char *argv[])
 {
-	// trim-image e:/test2/1001
+	// trim-image e:/test2/1001 e:/test2/output
 
-	if (!check_number(this, argc, 3)) return;
+	if (!check_number(this, argc, 4)) return;
 	if (!check_folder(argv[2])) return;
 
-	Trigger(argv[2]);
+	d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
+	bool old = setting.pre_multi_alpha;
+	setting.pre_multi_alpha = false;
+	Trigger(argv[2], argv[3]);
+	setting.pre_multi_alpha = old;
 }
 
-void TrimImage::Trigger(const std::string& dir)
+void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 {
 	Json::Value value;
 	int idx = 0;
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FilenameTools::fetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
@@ -61,7 +65,8 @@ void TrimImage::Trigger(const std::string& dir)
 
 			// save info
 			Json::Value spr_val;
-			spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
+			std::string relative_path = d2d::FilenameTools::getRelativePath(src_dir, filepath);
+			spr_val["filepath"] = relative_path;
 			spr_val["source size"]["w"] = img->GetWidth();
 			spr_val["source size"]["h"] = img->GetHeight();
 			spr_val["position"]["x"] = r.xMin;
@@ -71,17 +76,22 @@ void TrimImage::Trigger(const std::string& dir)
 			StoreBoundInfo(*img, r, spr_val);
 			value[idx++] = spr_val;
 
+			std::string out_filepath = dst_dir + "\\" + relative_path,
+				out_dir = d2d::FilenameTools::getFileDir(out_filepath);
+			d2d::mk_dir(out_dir, false);
+
 			eimage::ImageClip clip(*img);
 			const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
 			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
-				filepath, d2d::ImageSaver::e_png);
+				out_filepath, d2d::ImageSaver::e_png);
 			delete[] pixels;
 
 			img->Release();
 		}
 	}
 
-	std::string output_file = dir + "\\" + OUTPUT_FILE + ".json";
+	d2d::mk_dir(dst_dir, false);
+	std::string output_file = dst_dir + "\\" + OUTPUT_FILE + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(output_file.c_str());

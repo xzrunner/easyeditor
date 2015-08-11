@@ -32,6 +32,9 @@ struct SettingData
 	// image filter
 	bool linear_filter;
 
+	// image loading
+	bool pre_multi_alpha;
+
 	SettingData();
 
 	void LoadFromFile(const Json::Value& value);

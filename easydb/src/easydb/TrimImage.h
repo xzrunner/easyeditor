@@ -24,7 +24,7 @@ public:
 	static ICommand* Create() { return new TrimImage(); }
 
 private:
-	void Trigger(const std::string& dir);
+	void Trigger(const std::string& src_dir, const std::string& dst_dir);
 
 	void StoreBoundInfo(const d2d::ImageData& img, const d2d::Rect& r, Json::Value& val) const;
 	bool IsTransparent(const d2d::ImageData& img, int x, int y) const;
