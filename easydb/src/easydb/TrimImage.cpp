@@ -39,6 +39,16 @@ void TrimImage::Run(int argc, char *argv[])
 
 void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 {
+	d2d::mk_dir(dst_dir, false);
+	std::string out_json_filepath = dst_dir + "\\" + OUTPUT_FILE + ".json";
+	wxDateTime json_time;
+	json_time.Set(0.0f);
+	if (d2d::FilenameTools::IsFileExist(out_json_filepath)) {
+		wxStructStat strucStat;
+		wxStat(out_json_filepath, &strucStat);
+		json_time = strucStat.st_mtime;
+	}
+
 	Json::Value value;
 	int idx = 0;
 
@@ -52,6 +62,13 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			std::cout << i << " / " << n << " : " << filepath << "\n";
+
+			wxStructStat strucStat;
+			wxStat(filepath, &strucStat);
+			wxDateTime img_time = strucStat.st_mtime;
+			if (img_time < json_time) {
+				continue;
+			}
 
 			d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);		
 
@@ -90,11 +107,9 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 		}
 	}
 
-	d2d::mk_dir(dst_dir, false);
-	std::string output_file = dst_dir + "\\" + OUTPUT_FILE + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(output_file.c_str());
+	std::ofstream fout(out_json_filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
