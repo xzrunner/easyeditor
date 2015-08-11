@@ -163,6 +163,11 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 	}
 }
 
+int ViewlistPanel::GetSelectedIndex() const
+{
+	return m_list->GetSelection();
+}
+
 void ViewlistPanel::Clear()
 {
 	m_list->Clear();

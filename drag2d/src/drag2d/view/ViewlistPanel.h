@@ -43,6 +43,8 @@ public:
 	void OnSelected(int index);
 	void OnSelected(d2d::ISprite* spr);
 
+	int GetSelectedIndex() const;
+
 	void Clear();
 
 private:

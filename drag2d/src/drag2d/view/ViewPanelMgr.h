@@ -12,11 +12,12 @@ class IShapeViewPanel;
 class SpriteSelection;
 class IShape;
 class ShapeSelection;
+class ViewlistPanel;
 
 class ViewPanelMgr
 {
 public:
-	ViewPanelMgr() : m_locked(false) {}
+	ViewPanelMgr();
 
 	void AddSpritePanel(ISpriteViewPanel* panel);
 	void AddShapePanel(IShapeViewPanel* panel);
@@ -30,9 +31,15 @@ public:
 	void SelectShape(IShape* shape, IShapeViewPanel* expect);
 	void SelectMultiShapes(ShapeSelection* selection, IShapeViewPanel* expect);
 
+	int GetSelection() const;
+	void SetViewlistPanel(ViewlistPanel* viewlist);
+
 private:
 	std::vector<ISpriteViewPanel*> m_spr_panels;
 	std::vector<IShapeViewPanel*> m_shape_panels;
+
+	// todo 抽象出GetSelection()的接口
+	ViewlistPanel* m_viewlist;
 
 	bool m_locked;
 

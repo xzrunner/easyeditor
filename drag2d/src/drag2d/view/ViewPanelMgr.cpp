@@ -1,9 +1,16 @@
 #include "ViewPanelMgr.h"
 #include "ISpriteViewPanel.h"
 #include "IShapeViewPanel.h"
+#include "ViewlistPanel.h"
 
 namespace d2d
 {
+
+ViewPanelMgr::ViewPanelMgr() 
+	: m_locked(false) 
+	, m_viewlist(NULL)
+{
+}
 
 void ViewPanelMgr::AddSpritePanel(ISpriteViewPanel* panel)
 {
@@ -139,6 +146,20 @@ void ViewPanelMgr::SelectMultiShapes(ShapeSelection* selection, IShapeViewPanel*
 	}
 
 	m_locked = false;
+}
+
+int ViewPanelMgr::GetSelection() const
+{
+	if (m_viewlist) {
+		return m_viewlist->GetSelectedIndex();
+	} else {
+		return INT_MAX;
+	}
+}
+
+void ViewPanelMgr::SetViewlistPanel(ViewlistPanel* viewlist)
+{
+	m_viewlist = viewlist;
 }
 
 }

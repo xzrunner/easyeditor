@@ -23,6 +23,7 @@ public:
 	bool Remove(T* obj);
 
 	bool Insert(T* obj);
+	bool Insert(T* obj, int idx);
 
 	bool Clear();
 
@@ -37,6 +38,7 @@ public:
 	static bool Remove(std::vector<T*>& objs, T* obj);
 
 	static bool Insert(std::vector<T*>& objs, T* obj);
+	static bool Insert(std::vector<T*>& objs, T* obj, int idx);
 
 	static bool Clear(std::vector<T*>& objs);
 

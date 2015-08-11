@@ -40,6 +40,12 @@ bool ObjectVector<T>::Insert(T* obj)
 }
 
 template<class T>
+bool ObjectVector<T>::Insert(T* obj, int idx)
+{
+	return Insert(m_objs, obj, idx);
+}
+
+template<class T>
 bool ObjectVector<T>::Clear()
 {
 	return Clear(m_objs);
@@ -142,6 +148,20 @@ inline bool ObjectVector<T>::Insert(std::vector<T*>& objs,
 {
 	obj->Retain();
 	objs.push_back(obj);
+	return true;
+}
+
+template<class T>
+inline bool ObjectVector<T>::Insert(std::vector<T*>& objs, T* obj, int idx)
+{
+	obj->Retain();
+	if (objs.empty() || idx >= (int)objs.size()) {
+		objs.push_back(obj);
+	} else if (idx < 0) {
+		objs.insert(objs.begin(), obj);
+	} else {
+		objs.insert(objs.begin() + idx, obj);
+	}
 	return true;
 }
 

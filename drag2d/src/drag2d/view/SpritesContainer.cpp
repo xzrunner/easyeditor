@@ -31,6 +31,11 @@ bool SpritesContainer::Insert(Object* obj)
 	return m_sprites.Insert(static_cast<ISprite*>(obj));
 }
 
+bool SpritesContainer::Insert(Object* obj, int idx)
+{
+	return m_sprites.Insert(static_cast<ISprite*>(obj), idx);
+}
+
 bool SpritesContainer::Clear()
 {
 	return m_sprites.Clear();

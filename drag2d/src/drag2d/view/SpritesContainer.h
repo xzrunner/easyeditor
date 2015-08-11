@@ -21,6 +21,7 @@ public:
 	virtual void Traverse(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 	virtual bool Remove(Object* obj);
 	virtual bool Insert(Object* obj);
+	virtual bool Insert(Object* obj, int idx);
 	virtual bool Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
 

@@ -31,6 +31,11 @@ bool ShapesContainer::Insert(Object* obj)
 	return m_shapes.Insert(static_cast<IShape*>(obj));
 }
 
+bool ShapesContainer::Insert(Object* obj, int idx)
+{
+	return m_shapes.Insert(static_cast<IShape*>(obj), idx);	
+}
+
 bool ShapesContainer::Clear()
 {
 	return m_shapes.Clear();

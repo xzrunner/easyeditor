@@ -35,6 +35,11 @@ bool SymbolContainer::Insert(Object* obj)
 	return d2d::ObjectVector<d2d::IShape>::Insert(m_symbol->m_shapes, static_cast<d2d::IShape*>(obj));
 }
 
+bool SymbolContainer::Insert(Object* obj, int idx)
+{
+	return d2d::ObjectVector<d2d::IShape>::Insert(m_symbol->m_shapes, static_cast<d2d::IShape*>(obj), idx);
+}
+
 bool SymbolContainer::Clear()
 {
 	return d2d::ObjectVector<d2d::IShape>::Clear(m_symbol->m_shapes);

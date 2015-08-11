@@ -82,6 +82,8 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
+// 	int idx = m_view_panel_mgr->GetSelection();
+// 	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite, idx);
 	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->InsertSprite(sprite, this);
