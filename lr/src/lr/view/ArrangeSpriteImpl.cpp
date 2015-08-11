@@ -5,6 +5,7 @@
 #include "dataset/CharacterAllDirections.h"
 
 #include <easycomplex.h>
+#include <easyparticle3d.h>
 
 namespace lr
 {
@@ -33,7 +34,13 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 d2d::IArrangeSpriteState* ArrangeSpriteImpl::
 CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
 {
-	return new RotateSpriteState(selection, first_pos, m_dirs);
+	std::vector<d2d::ISprite*> sprites;
+	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	if (sprites.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprites[0])) {
+		return new ecomplex::SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprites[0])->GetDir());
+	} else {
+		return new RotateSpriteState(selection, first_pos, m_dirs);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
