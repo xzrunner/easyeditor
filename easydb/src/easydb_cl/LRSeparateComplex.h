@@ -1,5 +1,5 @@
-#ifndef _EASYDB_SEPARATE_TO_COMPLEX_H_
-#define _EASYDB_SEPARATE_TO_COMPLEX_H_
+#ifndef _EASYDB_LR_SEPARATE_COMPLEX_H_
+#define _EASYDB_LR_SEPARATE_COMPLEX_H_
 
 #include "ICommand.h"
 
@@ -8,10 +8,10 @@
 namespace edb
 {
 
-class SeparateToComplex : public ICommand
+class LRSeparateComplex : public ICommand
 {
 public:
-	SeparateToComplex() : m_count(0) {}
+	LRSeparateComplex() : m_count(0) {}
 
 	//
 	// interface ITask
@@ -24,7 +24,7 @@ public:
 	void Run(const std::string& lr_file, const std::string& point_dir,
 		const std::string& dst_file);
 
-	static ICommand* Create() { return new SeparateToComplex(); }
+	static ICommand* Create() { return new LRSeparateComplex(); }
 
 private:
 	void Run(const std::string& filepath);
@@ -50,8 +50,8 @@ private:
 	std::string m_point_dir;
 	std::string m_output_dir, m_output_name;
 
-}; // SeparateToComplex
+}; // LRSeparateComplex
 
 }
 
-#endif // _EASYDB_SEPARATE_TO_COMPLEX_H_
+#endif // _EASYDB_LR_SEPARATE_COMPLEX_H_

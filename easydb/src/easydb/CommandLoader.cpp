@@ -41,9 +41,9 @@
 #include "CommandLoader.h"
 #include "LRToComplex.h"
 #include "TransOldLRFile.h"
-#include "LRLayersPack.h"
+#include "LRJsonPacker.h"
 #include "TransOldShapeFile.h"
-#include "SeparateToComplex.h"
+#include "LRSeparateComplex.h"
 #include "LRPacker.h"
 #include "PackTexture.h"
 #include "CalculateImageArea.h"
@@ -96,9 +96,9 @@ void CommandLoader::Init()
 	fc->Register(RemoveDuplicateSprite::Create());
 	fc->Register(LRToComplex::Create());
 	fc->Register(TransOldLRFile::Create());
-	fc->Register(LRLayersPack::Create());
+	fc->Register(LRJsonPacker::Create());
 	fc->Register(TransOldShapeFile::Create());
-	fc->Register(SeparateToComplex::Create());
+	fc->Register(LRSeparateComplex::Create());
 	fc->Register(LRPacker::Create());
 	fc->Register(PackTexture::Create());
 	fc->Register(CalImageArea::Create());

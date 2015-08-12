@@ -1,5 +1,5 @@
-#ifndef _EASYDB_LR_LAYERS_PACK_H_
-#define _EASYDB_LR_LAYERS_PACK_H_
+#ifndef _EASYDB_LR_JSON_PACKER_H_
+#define _EASYDB_LR_JSON_PACKER_H_
 
 #include "ICommand.h"
 
@@ -10,10 +10,10 @@ namespace lr { class Grids; }
 namespace edb
 {
 
-class LRLayersPack : public ICommand
+class LRJsonPacker : public ICommand
 {
 public:
-	LRLayersPack() {}
+	LRJsonPacker() {}
 
 	//
 	// interface ITask
@@ -23,7 +23,7 @@ public:
 	virtual std::string Usage() const;
 	virtual void Run(int argc, char *argv[]);
 
-	static ICommand* Create() { return new LRLayersPack(); }
+	static ICommand* Create() { return new LRJsonPacker(); }
 
 	void Run(const std::string& filepath);
 
@@ -43,8 +43,8 @@ private:
 private:
 	std::string m_dir;
 
-}; // LRLayersPack
+}; // LRJsonPacker
 
 }
 
-#endif // _EASYDB_LR_LAYERS_PACK_H_
+#endif // _EASYDB_LR_JSON_PACKER_H_

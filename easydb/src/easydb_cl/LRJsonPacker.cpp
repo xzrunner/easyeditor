@@ -1,4 +1,4 @@
-#include "LRLayersPack.h"
+#include "LRJsonPacker.h"
 #include "check_params.h"
 #include "lr_typedef.h"
 
@@ -10,24 +10,24 @@
 namespace edb
 {
 
-std::string LRLayersPack::Command() const
+std::string LRJsonPacker::Command() const
 {
 	return "lr-pack";
 }
 
-std::string LRLayersPack::Description() const
+std::string LRJsonPacker::Description() const
 {
 	return "create shape table from lr file";
 }
 
-std::string LRLayersPack::Usage() const
+std::string LRJsonPacker::Usage() const
 {
 	// lr-pack e:/test2/test_lr.json
 	std::string usage = Command() + " [filepath]";
 	return usage;
 }
 
-void LRLayersPack::Run(int argc, char *argv[])
+void LRJsonPacker::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 3)) return;
 	if (!check_file(argv[2])) return;
@@ -35,7 +35,7 @@ void LRLayersPack::Run(int argc, char *argv[])
 	Run(argv[2]);
 }
 
-void LRLayersPack::Run(const std::string& filepath)
+void LRJsonPacker::Run(const std::string& filepath)
 {
 	Json::Value lr_val;
 	Json::Reader reader;
@@ -82,7 +82,7 @@ void LRLayersPack::Run(const std::string& filepath)
 	fout.close();
 }
 
-void LRLayersPack::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
+void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
 								   bool force_grids, Json::Value& out_val)
 {
 	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
@@ -121,11 +121,11 @@ void LRLayersPack::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, co
 	}
 	else
 	{
-		throw d2d::Exception("LRLayersPack::ParserPolyLayer error shape type");
+		throw d2d::Exception("LRJsonPacker::ParserPolyLayer error shape type");
 	}
 }
 
-void LRLayersPack::ParserShapeLayer(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
+void LRJsonPacker::ParserShapeLayer(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
 								 int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
@@ -177,7 +177,7 @@ void LRLayersPack::ParserShapeLayer(const Json::Value& src_val, const lr::Grids&
 	}
 }
 
-void LRLayersPack::ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val)
+void LRJsonPacker::ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
@@ -210,7 +210,7 @@ void LRLayersPack::ParserPoint(const Json::Value& src_val, int layer_idx, const 
 	}
 }
 
-void LRLayersPack::ParserCamera(const Json::Value& src_val, int layer_idx, 
+void LRJsonPacker::ParserCamera(const Json::Value& src_val, int layer_idx, 
 									 const char* name, Json::Value& out_val)
 {
 	int idx = 0;
@@ -230,7 +230,7 @@ void LRLayersPack::ParserCamera(const Json::Value& src_val, int layer_idx,
 	}
 }
 
-void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx, 
+void LRJsonPacker::ParserCharacter(const Json::Value& src_val, int layer_idx, 
 								   const char* name, Json::Value& out_val)
 {
 	int idx = 0;
@@ -287,7 +287,7 @@ void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx,
 	}
 }
 
-void LRLayersPack::ParserSpecial(const Json::Value& src_val, Json::Value& out_val)
+void LRJsonPacker::ParserSpecial(const Json::Value& src_val, Json::Value& out_val)
 {
 	for (int layer_idx = 0; layer_idx < 3; ++layer_idx)
 	{
@@ -310,7 +310,7 @@ void LRLayersPack::ParserSpecial(const Json::Value& src_val, Json::Value& out_va
 	}
 }
 
-void LRLayersPack::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
+void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val)
 {
 	Json::Value dec_val;
 
@@ -347,7 +347,7 @@ void LRLayersPack::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 	out_val[name][sz] = dec_val;
 }
 
-void LRLayersPack::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val,
+void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val,
 									   int layer_idx)
 {
 	Json::Value dec_val;

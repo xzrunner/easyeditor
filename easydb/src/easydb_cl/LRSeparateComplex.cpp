@@ -1,4 +1,4 @@
-#include "SeparateToComplex.h"
+#include "LRSeparateComplex.h"
 #include "check_params.h"
 #include "lr_typedef.h"
 
@@ -8,24 +8,24 @@
 namespace edb
 {
 
-std::string SeparateToComplex::Command() const
+std::string LRSeparateComplex::Command() const
 {
 	return "separate2complex";
 }
 
-std::string SeparateToComplex::Description() const
+std::string LRSeparateComplex::Description() const
 {
 	return "separate lr's sprites to easycompex file";
 }
 
-std::string SeparateToComplex::Usage() const
+std::string LRSeparateComplex::Usage() const
 {
 	// separate2complex e:/test2/test_lr.json point _output
 	std::string usage = Command() + " [filepath] [point dir] [tmp dir]";
 	return usage;
 }
 
-void SeparateToComplex::Run(int argc, char *argv[])
+void LRSeparateComplex::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 4)) return;
 	if (!check_file(argv[2])) return;
@@ -37,7 +37,7 @@ void SeparateToComplex::Run(int argc, char *argv[])
 	Run(argv[2]);
 }
 
-void SeparateToComplex::Run(const std::string& lr_file, const std::string& point_dir, 
+void LRSeparateComplex::Run(const std::string& lr_file, const std::string& point_dir, 
 							const std::string& dst_file)
 {
 	m_point_dir = point_dir;	
@@ -47,7 +47,7 @@ void SeparateToComplex::Run(const std::string& lr_file, const std::string& point
 	Run(lr_file);
 }
 
-void SeparateToComplex::Run(const std::string& filepath)
+void LRSeparateComplex::Run(const std::string& filepath)
 {
 	Json::Value lr_val;
 	Json::Reader reader;
@@ -100,20 +100,20 @@ void SeparateToComplex::Run(const std::string& filepath)
 	fout.close();
 }
 
-void SeparateToComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
+void LRSeparateComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 {
 	std::string name = CreateNewComplexFile(src);
 	ResetOldSpriteVal(dst, name, src["tag"].asString());
 }
 
-void SeparateToComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
+void LRSeparateComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
 {
 	wxString relative_path = d2d::FilenameTools::getRelativePath(m_output_dir, 
 		m_dir + "\\" + dst["filepath"].asString());
 	dst["filepath"] = relative_path.ToStdString();
 }
 
-std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) const
+std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) const
 {
 	std::string name = wxString::Format("name_%d", m_count++).ToStdString();
 
@@ -154,7 +154,7 @@ std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) co
 	return name;
 }
 
-void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const
+void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const
 {
 	val["filepath"] = name + "_complex.json";
 	val["position"]["x"] = 0;
@@ -181,7 +181,7 @@ void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& n
 	val["b trans"] = "0x0000ffff";
 }
 
-void SeparateToComplex::FixPosWithShape(d2d::Vector& pos, const std::string& filepath) const
+void LRSeparateComplex::FixPosWithShape(d2d::Vector& pos, const std::string& filepath) const
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_shape.json";
 	std::string shape_path = m_dir + "\\" + m_point_dir + "\\" + path;

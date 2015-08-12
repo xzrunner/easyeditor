@@ -2,9 +2,9 @@
 #include "check_params.h"
 
 #include "LRExpansion.h"
-#include "SeparateToComplex.h"
+#include "LRSeparateComplex.h"
 #include "LRToComplex.h"
-#include "LRLayersPack.h"
+#include "LRJsonPacker.h"
 #include "PackCoco.h"
 
 #include <wx/stdpaths.h>
@@ -49,7 +49,7 @@ void LRPacker::Run(int argc, char *argv[])
 	exp.Run(argv[2]);
 
 	// 1
-	SeparateToComplex sep;
+	LRSeparateComplex sep;
 	sep.Run(exp.GetOutputFilepath(argv[2]), "", tmp_lr_file);
 
 	// 2
@@ -57,7 +57,7 @@ void LRPacker::Run(int argc, char *argv[])
 	tocomplex.Run(tmp_lr_file);	
 
 	// 3
-	LRLayersPack json_pack;
+	LRJsonPacker json_pack;
 	json_pack.Run(tmp_lr_file);
 
 	if (id == 1) {

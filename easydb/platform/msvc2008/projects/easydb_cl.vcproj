@@ -644,11 +644,19 @@
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
+							RelativePath="..\..\..\src\easydb_cl\LRJsonPacker.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\easydb_cl\LRLayersPack.h"
+							RelativePath="..\..\..\src\easydb_cl\LRJsonPacker.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRSeparateComplex.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRSeparateComplex.h"
 							>
 						</File>
 						<File
@@ -657,14 +665,6 @@
 						</File>
 						<File
 							RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\easydb_cl\SeparateToComplex.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\easydb_cl\SeparateToComplex.h"
 							>
 						</File>
 					</Filter>
