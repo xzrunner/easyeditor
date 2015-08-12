@@ -355,6 +355,10 @@ void LRLayersPack::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 	dec_val["x"] = spr_val["position"]["x"].asDouble();
 	dec_val["y"] = spr_val["position"]["y"].asDouble();
 
+	float sx = spr_val["x scale"].asDouble(),
+		sy = spr_val["y scale"].asDouble();
+	dec_val["scale"] = std::max(sx, sy);
+
 	std::string sym_path = spr_val["filepath"].asString();
 	std::string name = d2d::FilenameTools::getFilename(sym_path);
 	name = name.substr(0, name.find("_particle"));
