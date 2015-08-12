@@ -35,11 +35,11 @@ bool Layer::RemoveSprite(Object* obj)
 	return m_sprites.Remove(spr);
 }
 
-bool Layer::InsertSprite(Object* obj)
+bool Layer::InsertSprite(Object* obj, int idx)
 {
 	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
 	CheckSpriteName(spr);
-	return m_sprites.Insert(spr);
+	return m_sprites.Insert(spr, idx);
 }
 
 bool Layer::ClearSprite()

@@ -35,7 +35,7 @@ void StagePanel::Clear()
 	SpritesPanelImpl::ClearAllSprite();
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	fixCoords(sprite);
 

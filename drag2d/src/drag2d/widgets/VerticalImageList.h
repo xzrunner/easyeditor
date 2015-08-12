@@ -24,8 +24,7 @@ public:
 	virtual void OnListDoubleClicked(wxCommandEvent& event) {}
 
 	virtual void Clear();
-	virtual void Insert(ListItem* item);
-	virtual void InsertFront(ListItem* item);
+	virtual void Insert(ListItem* item, int idx = -1);
 	virtual void Remove();
 	virtual void Remove(int index);
 	virtual void Swap(int i0, int i1);

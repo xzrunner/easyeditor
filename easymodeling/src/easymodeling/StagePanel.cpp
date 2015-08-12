@@ -29,7 +29,7 @@ void StagePanel::Clear()
 	ClearAllSprite();
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	d2d::SpritesPanelImpl::InsertSprite(sprite);
 

@@ -30,7 +30,7 @@ public:
 	// d2d::MultiSpritesImpl interface
 	//
 	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(d2d::ISprite* sprite);
+	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
 	virtual bool RemoveSprite(d2d::ISprite* sprite);
 
 	Symbol* getSymbol() { return m_symbol; }

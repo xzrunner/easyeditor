@@ -43,11 +43,11 @@ bool SpritesPanelImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
 	return ret;
 }
 
-bool SpritesPanelImpl::InsertSprite(ISprite* sprite)
+bool SpritesPanelImpl::InsertSprite(ISprite* sprite, int idx)
 {
-	MultiSpritesImpl::InsertSprite(sprite);
+	MultiSpritesImpl::InsertSprite(sprite, idx);
 
-	bool ret = m_container->Insert(sprite);
+	bool ret = m_container->Insert(sprite, idx);
 	if (ret) {
 		m_stage->SetCanvasDirty();
 	}

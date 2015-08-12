@@ -19,7 +19,7 @@ bool ShapeLayer::InsertSprite(Object* obj)
 	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
 	etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr);
 	if (!tex) {
-		return Layer::InsertSprite(obj);
+		return Layer::InsertSprite(obj, -1);
 	}
 
 	std::vector<d2d::IShape*> shapes;

@@ -80,13 +80,12 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 	return ret;
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
-// 	int idx = m_view_panel_mgr->GetSelection();
-// 	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite, idx);
-	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
+	idx = m_view_panel_mgr->GetSelection() + 1;
+	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite, idx);
 	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this);
+		m_view_panel_mgr->InsertSprite(sprite, this, idx);
 	}
 	return ret;
 }

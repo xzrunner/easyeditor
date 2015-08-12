@@ -43,7 +43,7 @@ bool MultiSpritesImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
 	return false;
 }
 
-bool MultiSpritesImpl::InsertSprite(ISprite* sprite)
+bool MultiSpritesImpl::InsertSprite(ISprite* sprite, int idx)
 {
 	m_sprite_selection->Clear();
 	return false;

@@ -26,7 +26,7 @@ namespace emodeling
 		//
 		// d2d::SpritesPanelImpl interface
 		//
-		virtual bool InsertSprite(d2d::ISprite* sprite);
+		virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
 		virtual bool RemoveSprite(d2d::ISprite* sprite);
 		virtual bool ClearAllSprite();
 

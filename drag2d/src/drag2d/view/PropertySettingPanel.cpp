@@ -48,7 +48,7 @@ void PropertySettingPanel::SelectMultiSprites(SpriteSelection* selection)
 	}
 }
 
-bool PropertySettingPanel::InsertSprite(ISprite* spr) 
+bool PropertySettingPanel::InsertSprite(ISprite* spr, int idx) 
 { 
 	SetPropertySetting(CreateDefaultProperty());
 	return false; 

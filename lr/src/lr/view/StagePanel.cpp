@@ -124,14 +124,16 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 	return ret;
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
-	d2d::MultiSpritesImpl::InsertSprite(sprite);
+	idx = m_view_panel_mgr->GetSelection() + 1;
+	d2d::MultiSpritesImpl::InsertSprite(sprite, idx);
 
-	bool ret = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer()->InsertSprite(sprite);
+	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
+	bool ret = layer->InsertSprite(sprite, idx);
 
 	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this);
+		m_view_panel_mgr->InsertSprite(sprite, this, idx);
 	}
 
 	if (m_sindex) {

@@ -24,7 +24,7 @@ void StagePanel::Clear()
 {
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
 	m_anchor_mgr.Insert(sprite);

@@ -76,7 +76,7 @@ void ViewPanelMgr::ReorderSprite(ISprite* spr, bool up, ISpriteViewPanel* expect
 	m_locked = false;
 }
 
-void ViewPanelMgr::InsertSprite(ISprite* spr, ISpriteViewPanel* expect)
+void ViewPanelMgr::InsertSprite(ISprite* spr, ISpriteViewPanel* expect, int idx)
 {
 	if (m_locked) {
 		return;
@@ -88,7 +88,7 @@ void ViewPanelMgr::InsertSprite(ISprite* spr, ISpriteViewPanel* expect)
 		if (m_spr_panels[i] == expect) {
 			continue;
 		}
-		m_spr_panels[i]->InsertSprite(spr);
+		m_spr_panels[i]->InsertSprite(spr, idx);
 	}
 
 	m_locked = false;

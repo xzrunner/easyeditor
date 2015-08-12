@@ -49,9 +49,9 @@ bool ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
 	return Reorder(spr, up);
 }
 
-bool ViewlistPanel::InsertSprite(ISprite* spr)
+bool ViewlistPanel::InsertSprite(ISprite* spr, int idx)
 {
-	return Insert(spr);
+	return Insert(spr, idx);
 }
 
 bool ViewlistPanel::RemoveSprite(ISprite* spr)
@@ -81,13 +81,17 @@ bool ViewlistPanel::Remove(ISprite* sprite)
 	return true;
 }
 
-bool ViewlistPanel::Insert(ISprite* sprite)
+bool ViewlistPanel::Insert(ISprite* sprite, int idx)
 {
-//	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
-//  m_sprites.push_back(sprite);
-
-	m_list->InsertFront(const_cast<ISymbol*>(&sprite->GetSymbol()));
-	m_sprites.insert(m_sprites.begin(), sprite);
+	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
+	if (idx < 0 || idx >= m_sprites.size()) {
+		m_list->Insert(item, 0);
+		m_sprites.insert(m_sprites.begin(), sprite);
+	} else {
+		int order = m_sprites.size() - idx;
+		m_list->Insert(item, order);
+		m_sprites.insert(m_sprites.begin() + order, sprite);
+	}
 	return true;
 }
 
@@ -165,7 +169,7 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 
 int ViewlistPanel::GetSelectedIndex() const
 {
-	return m_list->GetSelection();
+	return m_list->GetItemCount() - 1 - m_list->GetSelection();
 }
 
 void ViewlistPanel::Clear()

@@ -32,15 +32,9 @@ void LibraryList::Clear()
 	m_selection_set.clear();
 }
 
-void LibraryList::Insert(ListItem* item)
+void LibraryList::Insert(ListItem* item, int idx)
 {
-	VerticalImageList::Insert(item);
-	m_selection_set.clear();
-}
-
-void LibraryList::InsertFront(ListItem* item)
-{
-	VerticalImageList::InsertFront(item);
+	VerticalImageList::Insert(item, idx);
 	m_selection_set.clear();
 }
 

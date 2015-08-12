@@ -22,7 +22,7 @@ public:
 	// MultiSpritesImpl interface
 	//
 	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(ISprite* sprite);
+	virtual bool InsertSprite(ISprite* sprite, int idx = -1);
 	virtual bool RemoveSprite(ISprite* sprite);
 	virtual bool ClearAllSprite();
 	virtual void TraverseSprites(IVisitor& visitor, 

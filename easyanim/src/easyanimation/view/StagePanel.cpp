@@ -57,7 +57,7 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 	return ret;
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite)
+bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	MultiSpritesImpl::InsertSprite(sprite);
 

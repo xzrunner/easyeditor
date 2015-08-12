@@ -55,7 +55,7 @@ bool GroupTreePanel::ReorderSprite(ISprite* spr, bool up)
 	}
 }
 
-bool GroupTreePanel::InsertSprite(ISprite* spr)
+bool GroupTreePanel::InsertSprite(ISprite* spr, int idx)
 {
 	wxTreeItemId id = m_grouptree->AddSprite(spr);
 	return id != m_grouptree->GetRootID();

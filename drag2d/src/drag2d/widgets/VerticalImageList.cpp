@@ -49,21 +49,18 @@ void VerticalImageList::Clear()
 	Refresh(true);
 }
 
-void VerticalImageList::Insert(ListItem* item)
+void VerticalImageList::Insert(ListItem* item, int idx)
 {
 	item->Retain();
-	m_items.push_back(item);
-	SetItemCount(m_items.size());
-	SetSelection(m_items.size() - 1);
-	Refresh(true);
-}
-
-void VerticalImageList::InsertFront(ListItem* item)
-{
-	item->Retain();
-	m_items.insert(m_items.begin(), item);
-	SetItemCount(m_items.size());
-	SetSelection(0);
+	if (idx < 0 || idx >= m_items.size()) {
+		m_items.push_back(item);
+		SetItemCount(m_items.size());
+		SetSelection(m_items.size() - 1);
+	} else {
+		m_items.insert(m_items.begin() + idx, item);
+		SetItemCount(m_items.size());
+		SetSelection(idx);
+	}
 	Refresh(true);
 }
 
