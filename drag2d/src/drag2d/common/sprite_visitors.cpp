@@ -32,6 +32,27 @@ void PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// class PointMultiQueryVisitor
+//////////////////////////////////////////////////////////////////////////
+
+PointMultiQueryVisitor::PointMultiQueryVisitor(const Vector& pos)
+	: m_pos(pos)
+{
+}
+
+void PointMultiQueryVisitor::Visit(Object* object, bool& bFetchNext)
+{
+	ISprite* sprite = static_cast<ISprite*>(object);
+	if (sprite->IsContain(m_pos))
+	{
+		m_sprites.push_back(sprite);
+		bFetchNext = false;
+	}
+
+	bFetchNext = true;
+}
+
+//////////////////////////////////////////////////////////////////////////
 // class RectQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 

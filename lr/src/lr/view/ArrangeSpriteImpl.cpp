@@ -25,10 +25,10 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 	m_popup.OnRightPopupMenu(type);
 }
 
-void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
+void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
-	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, spr);
-	m_popup.SetRightPopupMenu(menu, spr);
+	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, x, y);
+	m_popup.SetRightPopupMenu(menu, x, y);
 }
 
 d2d::IArrangeSpriteState* ArrangeSpriteImpl::

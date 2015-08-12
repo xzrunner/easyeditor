@@ -6,6 +6,7 @@
 #include "ArrangeSpriteConfig.h"
 #include "AutoAlign.h"
 #include "SpriteCtrlNode.h"
+#include "RightPopupMenu.h"
 
 #include "common/typedef.h"
 
@@ -49,7 +50,7 @@ protected:
 	virtual void OnDirectionKeyDown(DirectionType type);
 	virtual void OnSpaceKeyDown();
 
-	virtual void SetRightPopupMenu(wxMenu& menu, ISprite* spr);
+	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
 	virtual IArrangeSpriteState* CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const;
 	virtual IArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const;

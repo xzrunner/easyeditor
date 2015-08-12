@@ -20,6 +20,20 @@ private:
 
 }; // PointQueryVisitor
 
+class PointMultiQueryVisitor : public IVisitor
+{
+public:
+	PointMultiQueryVisitor(const Vector& pos);
+	virtual void Visit(Object* object, bool& bFetchNext);
+
+	const std::vector<ISprite*>& GetResult() const { return m_sprites; }
+
+private:
+	const Vector& m_pos;
+	std::vector<ISprite*> m_sprites;
+
+}; // PointMultiQueryVisitor
+
 class RectQueryVisitor : public IVisitor
 {
 public:

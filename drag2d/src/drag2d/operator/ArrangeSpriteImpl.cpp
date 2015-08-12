@@ -13,25 +13,17 @@
 #include "common/Config.h"
 #include "common/SettingData.h"
 #include "common/sprite_visitors.h"
-#include "dataset/AbstractBV.h"
-#include "dataset/ISymbol.h"
 #include "view/EditPanelImpl.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
 #include "view/Camera.h"
-#include "view/IStageCanvas.h"
 #include "view/SpriteSelection.h"
 #include "history/DeleteSpriteAOP.h"
 #include "history/CombineAOP.h"
 #include "history/TranslateSpriteAOP.h"
 #include "history/ScaleSpriteAOP.h"
 #include "history/ShearSpriteAOP.h"
-#include "history/OffsetSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
-#include "render/DynamicTexAndFont.h"
-
-// for debug
-#include "render/ShaderMgr.h"
 
 namespace d2d
 {
@@ -49,6 +41,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)
+	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection())
 {
 	if (stage) {
 		stage->Retain();
@@ -295,18 +288,10 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 	}
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-
-	ISprite* selected = NULL;
-	m_selection->Traverse(PointQueryVisitor(pos, &selected));
-	if (!selected) {
-		return;
-	}
-	
-	if (pos == m_right_down_pos && selected)
+	if (pos == m_right_down_pos)
 	{
 		wxMenu menu;
-		SetRightPopupMenu(menu, selected);
-		m_stage->PopupMenu(&menu, x, y);
+		SetRightPopupMenu(menu, x, y);
 	}
 	else if (m_op_state)
 	{
@@ -496,36 +481,9 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 	m_stage->SetCanvasDirty();
 }
 
-void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
+void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_UP_ONE_LAYER);
-	menu.Append(MENU_UP_ONE_LAYER, "上移一层");
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_DOWN_ONE_LAYER);
-	menu.Append(MENU_DOWN_ONE_LAYER, "下移一层");
-
-	menu.AppendSeparator();
-
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_UP_MOST);
-	menu.Append(MENU_UP_MOST, "移到顶");
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_DOWN_MOST);
-	menu.Append(MENU_DOWN_MOST, "移到底");
-
-	menu.AppendSeparator();
-
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_HORI_MIRROR);
-	menu.Append(MENU_HORI_MIRROR, "水平镜像");
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_VERT_MIRROR);
-	menu.Append(MENU_VERT_MIRROR, "竖直镜像");	
-
-	
-
-#ifdef _DEBUG
-	menu.AppendSeparator();
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_INSERT_TO_DTEX);
-	menu.Append(MENU_INSERT_TO_DTEX, "Insert To DTex");
-	m_wnd->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanelImpl::OnRightPopupMenu, m_stage, MENU_REMOVE_FROM_DTEX);
-	menu.Append(MENU_REMOVE_FROM_DTEX, "Remove From DTex");
-#endif
+	m_popup.SetRightPopupMenu(menu, x, y);
 }
 
 IArrangeSpriteState* ArrangeSpriteImpl::CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const

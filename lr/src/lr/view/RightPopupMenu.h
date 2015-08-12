@@ -13,7 +13,7 @@ class RightPopupMenu
 public:
 	RightPopupMenu(StagePanel* stage);
 
-	void SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr);
+	void SetRightPopupMenu(wxMenu& menu, int x, int y);
 	void OnRightPopupMenu(int id);
 
 private:

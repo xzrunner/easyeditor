@@ -160,6 +160,7 @@
 #include "common/StringTools.h"
 #include "common/StackTrace.h"
 #include "common/Timer.h"
+#include "common/sprite_visitors.h"
 
 #include "render/PrimitiveDraw.h"
 #include "render/DrawSelectedShapeVisitor.h"

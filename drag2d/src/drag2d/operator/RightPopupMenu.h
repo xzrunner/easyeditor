@@ -9,7 +9,6 @@ namespace d2d
 class EditPanelImpl;
 class MultiSpritesImpl;
 class SpriteSelection;
-class ISprite;
 
 class RightPopupMenu
 {
@@ -17,12 +16,12 @@ public:
 	RightPopupMenu(wxWindow* parent, EditPanelImpl* stage,
 		MultiSpritesImpl* sprite_impl, SpriteSelection* selection);
 
-	void SetRightPopupMenu(wxMenu& menu, ISprite* spr);
+	void SetRightPopupMenu(wxMenu& menu, int x, int y);
 	void OnRightPopupMenu(int id);
 
 private:
 	void CreateCommonMenu(wxMenu& menu);
-	void CreateSelectMenu(wxMenu& menu);
+	void CreateSelectMenu(wxMenu& menu, int x, int y);
 	void CreateDebugMenu(wxMenu& menu);
 
 	void HandleCommonMenu(int id);
@@ -38,14 +37,15 @@ private:
 private:
 	enum
 	{
-		MENU_UP_MOST		= 10000,
+		MENU_UP_MOST			= 10000,
 		MENU_DOWN_MOST,
 		MENU_HORI_MIRROR,
 		MENU_VERT_MIRROR,
 
-		MENU_MULTI_SELECTED = 10100,
+		MENU_MULTI_SELECTED		= 10100,
+		MENU_MULTI_SELECTED_END	= 10199,
 
-		MENU_INSERT_TO_DTEX = 10200,
+		MENU_INSERT_TO_DTEX		= 10200,
 		MENU_REMOVE_FROM_DTEX
 	};
 
@@ -57,8 +57,6 @@ private:
 	MultiSpritesImpl* m_sprites_impl;
 
 	SpriteSelection* m_selection;
-
-	ISprite* m_sprite;
 
 }; // RightPopupMenu
 

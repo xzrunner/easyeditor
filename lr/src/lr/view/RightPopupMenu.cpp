@@ -14,9 +14,10 @@ RightPopupMenu::RightPopupMenu(StagePanel* stage)
 {
 }
 
-void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
+void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
-	m_sprite = spr;
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	m_stage->GetSpriteSelection()->Traverse(d2d::PointQueryVisitor(pos, &m_sprite));
 	CreateShapeMenu(menu);
 	CreateAnimMenu(menu);
 	CreateLayerTagMenu(menu);
