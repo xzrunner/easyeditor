@@ -20,7 +20,10 @@ void StageCanvas::OnDrawSprites() const
 	d2d::Rect sr = m_screen.GetRegion();
 
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	m_stage->TraverseSprites(DrawSpritesVisitor(sr, m_camera->GetScale()), d2d::DT_VISIBLE);
+
+	DrawSpritesVisitor visitor(sr, m_camera->GetScale());
+	m_stage->TraverseSprites(visitor, d2d::DT_VISIBLE);
+	visitor.DrawSorted();
 	shader_mgr->SetSpriteShader(0);
 	shader_mgr->sprite();
 
