@@ -249,9 +249,21 @@
 		<Filter
 			Name="view"
 			>
+			<File
+				RelativePath="..\..\..\src\lr\view\typedef.h"
+				>
+			</File>
 			<Filter
 				Name="stage"
 				>
+				<File
+					RelativePath="..\..\..\src\lr\view\DrawSpritesVisitor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\DrawSpritesVisitor.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\lr\view\StageCanvas.cpp"
 					>

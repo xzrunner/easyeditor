@@ -92,6 +92,13 @@ void SettingDialog::InitLayout()
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeAllLayersVisibleEditable));
 		right_sizer->Add(check);
 	}
+	// Open Layer Draw Flag
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("ÌØÊâ²ã±êÊ¶"));
+		check->SetValue(cfg->m_special_layer_flag);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeSpecialLayerFlag));
+		right_sizer->Add(check);
+	}
 	top_sizer->Add(right_sizer);
 
 	SetSizer(top_sizer);
@@ -141,6 +148,13 @@ void SettingDialog::OnChangeAllLayersVisibleEditable(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_all_layers_visible_editable = event.IsChecked();
+}
+
+void SettingDialog::OnChangeSpecialLayerFlag(wxCommandEvent& event)
+{
+	SettingCfg* cfg = SettingCfg::Instance();
+	cfg->m_special_layer_flag = event.IsChecked();	
+	m_stage->SetCanvasDirty();
 }
 
 }

@@ -1,5 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "DrawSpritesVisitor.h"
 
 #include "dataset/Grids.h"
 #include "frame/config.h"
@@ -19,8 +20,7 @@ void StageCanvas::OnDrawSprites() const
 	d2d::Rect sr = m_screen.GetRegion();
 
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	m_stage->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
+	m_stage->TraverseSprites(DrawSpritesVisitor(sr, m_camera->GetScale()), d2d::DT_VISIBLE);
 	shader_mgr->SetSpriteShader(0);
 	shader_mgr->sprite();
 

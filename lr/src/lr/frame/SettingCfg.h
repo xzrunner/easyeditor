@@ -16,6 +16,8 @@ public:
 
 	bool m_all_layers_visible_editable;
 
+	bool m_special_layer_flag;
+
 private:
 	SettingCfg();
 

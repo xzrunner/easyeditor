@@ -20,6 +20,8 @@ SettingCfg::SettingCfg()
 	m_terrain2d_anim = false;
 
 	m_all_layers_visible_editable = false;
+
+	m_special_layer_flag = false;
 }
 
 SettingCfg* SettingCfg::Instance()

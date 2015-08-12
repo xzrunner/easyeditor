@@ -20,6 +20,7 @@ private:
 	void OnViewSizeChanged(wxCommandEvent& event);
 	void OnChangeTerrain2DAnim(wxCommandEvent& event);
 	void OnChangeAllLayersVisibleEditable(wxCommandEvent& event);
+	void OnChangeSpecialLayerFlag(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;

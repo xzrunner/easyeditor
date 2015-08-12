@@ -28,7 +28,7 @@ void DrawSpritesVisitor::Visit(Object* object, bool& bFetchNext)
 	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->GetFilterMode());
 	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
-	rd->Draw(spr);
+	DrawSprite(rd, spr);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
 	if (cfg.visible_node_name) {
@@ -36,6 +36,11 @@ void DrawSpritesVisitor::Visit(Object* object, bool& bFetchNext)
 		spr->GetTransMatrix(t);
 		rd->DrawName(spr->name, std::max(1.0f, m_cam_scale) * cfg.node_name_scale, t);
 	}
+}
+
+void DrawSpritesVisitor::DrawSprite(SpriteRenderer* rd, ISprite* spr) const
+{
+	rd->Draw(spr);
 }
 
 } // d2d
