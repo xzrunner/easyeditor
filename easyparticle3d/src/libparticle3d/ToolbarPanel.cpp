@@ -241,7 +241,7 @@ wxSizer* ToolbarPanel::initLayout()
 		m_sliders.push_back(s_dis_r);
 
 		d2d::SliderCtrlTwo* s_dis_spd = new d2d::SliderCtrlTwo(this, "Speed (pixel)", "disturbance_spd", this, PS_DISTURBANCE_SPD, 
-			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_SPD_CENTER, 0, 2000), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_SPD_OFFSET, 0, 50));
+			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_SPD_CENTER, 0, 9999), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_SPD_OFFSET, 0, 1000));
 		sizer->Add(s_dis_spd);
 		m_sliders.push_back(s_dis_spd);
 
