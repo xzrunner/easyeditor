@@ -1,5 +1,6 @@
 #include "LRLayersPack.h"
 #include "check_params.h"
+#include "lr_typedef.h"
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
@@ -297,11 +298,12 @@ void LRLayersPack::ParserSpecial(const Json::Value& src_val, Json::Value& out_va
 			std::string filepath = spr_val["filepath"].asString();
 			std::string tag = spr_val["tag"].asString();
 			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
-				ParserParticleLayer(spr_val, out_val);
-			} else if (tag.find("layer=cover") != std::string::npos) {
+				ParserParticleLayer(spr_val, out_val, layer_idx);
+			} else if (tag.find(COVER_LAYER_STR) != std::string::npos) {
 				ParserSpecialLayer(spr_val, "cover", out_val);
-			} else if (tag.find("layer=top") != std::string::npos) {
-				ParserSpecialLayer(spr_val, "top", out_val);
+			} else if (tag.find(TOP_LAYER_STR) != std::string::npos) {
+//				ParserSpecialLayer(spr_val, "top", out_val);
+				out_val["top"] = "top";
 			}
 			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 		}
@@ -345,7 +347,8 @@ void LRLayersPack::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 	out_val[name][sz] = dec_val;
 }
 
-void LRLayersPack::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val)
+void LRLayersPack::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val,
+									   int layer_idx)
 {
 	Json::Value dec_val;
 
@@ -353,15 +356,15 @@ void LRLayersPack::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 	dec_val["y"] = spr_val["position"]["y"].asDouble();
 
 	std::string sym_path = spr_val["filepath"].asString();
-	Json::Value sym_val;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(sym_path.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, sym_val);
-	fin.close();
+	std::string name = d2d::FilenameTools::getFilename(sym_path);
+	name = name.substr(0, name.find("_particle"));
+	d2d::StringTools::ToLower(name);
 
-	dec_val["export"] = sym_val["name"].asString();
+	dec_val["export"] = name;
+
+	if (layer_idx == 2) {
+		dec_val["layer"] = "top";
+	}
 
 	Json::Value dir_val;
 	dir_val["x"] = 0;

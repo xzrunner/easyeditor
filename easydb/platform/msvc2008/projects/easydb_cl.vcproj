@@ -601,6 +601,10 @@
 					Name="lr"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\lr_typedef.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\LRPacker.cpp"
 						>
 					</File>

@@ -26,7 +26,14 @@ public:
 	void Run(const std::string& filepath);
 
 private:
-	void LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_val);
+	void SeparateBottomLayer(const Json::Value& lr_val, const std::string& filepath);
+	void SeparateTopLayer(const Json::Value& lr_val, const std::string& filepath);
+
+	void LoadAllSpriteValue(const Json::Value& src_val, Json::Value& dst_val, bool bottom_layer);
+	void LoadSpriteValue(const Json::Value& spr_val, Json::Value& dst_val);
+
+	void OutputComplexFile(Json::Value& complex_val, const std::string& filepath,
+		const std::string& tag);
 
 }; // LRToComplex
 

@@ -79,15 +79,18 @@ void LRPacker::Run(int argc, char *argv[])
 
 		pkg_val["name"] = "scene_" + lr_name;
 
-		int idx0 = 0;
-		pkg_val["json list"][idx0] = lr_name + "_complex.json";
+		int idx = 0;
+		pkg_val["json list"][idx] = lr_name + "_scene_complex.json";
+		idx = 1;
+		pkg_val["json list"][idx] = lr_name + "_top_complex.json";
 
 		std::string _out_dir = d2d::FilenameTools::getRelativePath(tmp_dir, out_dir);
 		pkg_val["output dir"] = _out_dir;
 
 		pkg_val["texture type"] = "png";
 
-		val["packages"][idx0] = pkg_val;
+		idx = 0;
+		val["packages"][idx] = pkg_val;
 
 		std::string cfg_file = tmp_dir + "\\config.json";
 		Json::StyledStreamWriter writer;

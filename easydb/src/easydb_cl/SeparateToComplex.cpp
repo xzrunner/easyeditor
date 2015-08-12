@@ -1,5 +1,6 @@
 #include "SeparateToComplex.h"
 #include "check_params.h"
+#include "lr_typedef.h"
 
 #include <easyshape.h>
 #include <wx/stdpaths.h>
@@ -79,7 +80,7 @@ void SeparateToComplex::Run(const std::string& filepath)
 // 			} else {
 				Json::Value& dst_val = 	new_lr_val["layer"][layer_idx]["sprite"][idx-1];
 				std::string tag = src_val["tag"].asString();
-				if (tag.find("layer") != std::string::npos) {
+				if (tag.find(COVER_LAYER_STR) != std::string::npos) {
 					SeparateSprite(src_val, dst_val);
 				} else {
 					FixSpriteName(src_val, dst_val);
