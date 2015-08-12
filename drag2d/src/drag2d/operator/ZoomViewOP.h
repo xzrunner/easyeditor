@@ -30,9 +30,7 @@ public:
 	}
 
 protected:
-	void SetRightPan(bool enable) { 
-		m_open_right_pan = enable;
-	}
+	void SetRightPan(bool enable);
 
 private:
 	void SwitchState(IEditOPState* state);

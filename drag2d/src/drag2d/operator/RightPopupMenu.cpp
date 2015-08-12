@@ -8,6 +8,7 @@
 #include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/ViewPanelMgr.h"
 #include "dataset/ISymbol.h"
 #include "render/DynamicTexAndFont.h"
 
@@ -17,11 +18,13 @@ namespace d2d
 RightPopupMenu::RightPopupMenu(wxWindow* parent,
 							   EditPanelImpl* stage,
 							   MultiSpritesImpl* sprite_impl,
-							   SpriteSelection* selection)
+							   SpriteSelection* selection,
+							   ViewPanelMgr* view_panel_mgr)
 	: m_parent(parent)
 	, m_stage(stage)
 	, m_sprites_impl(sprite_impl)
 	, m_selection(selection)
+	, m_view_panel_mgr(view_panel_mgr)
 {
 }
 
@@ -30,8 +33,6 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 	CreateCommonMenu(menu);
 	CreateSelectMenu(menu, x, y);
 	CreateDebugMenu(menu);
-
-	m_stage->PopupMenu(&menu, x, y);
 }
 
 void RightPopupMenu::OnRightPopupMenu(int id)
@@ -136,6 +137,10 @@ void RightPopupMenu::HandleSelectMenu(int id)
 	ISprite* selected = sprites[idx];
 	m_selection->Clear();
 	m_selection->Add(selected);
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->SelectSprite(selected, true, m_sprites_impl);
+	}
 }
 
 void RightPopupMenu::HandleDebugTagMenu(int id)

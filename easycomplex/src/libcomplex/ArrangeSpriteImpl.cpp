@@ -7,8 +7,9 @@
 namespace ecomplex
 {
 
-ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
+ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
+									 d2d::ViewPanelMgr* view_panel_mgr)
+	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, view_panel_mgr)
 {
 }
 

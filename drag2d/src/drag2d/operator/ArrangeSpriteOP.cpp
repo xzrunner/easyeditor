@@ -30,7 +30,7 @@ ArrangeSpriteOP<TBase>::ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, Mul
 	if (impl) {
 		m_impl = impl;
 	} else {
-		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, propertyPanel, cfg);
+		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, propertyPanel, view_panel_mgr, cfg);
 	}
 }
 

@@ -107,6 +107,14 @@ bool ZoomViewOP::OnMouseWheelRotation(int x, int y, int direction)
 	return m_op_state->OnMouseWheelRotation(x, y, direction);
 }
 
+void ZoomViewOP::SetRightPan(bool enable) 
+{ 
+	m_open_right_pan = enable;
+	if (m_op_state == m_right_pan_state) {
+		SwitchState(m_view_state);
+	}
+}
+
 void ZoomViewOP::SwitchState(IEditOPState* state)
 {
 	if (state == m_op_state) {

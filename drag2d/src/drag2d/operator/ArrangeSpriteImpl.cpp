@@ -34,6 +34,7 @@ const float ArrangeSpriteImpl::MAX_CTRL_NODE_RADIUS = 10.0f;
 ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 									 MultiSpritesImpl* spritesImpl,
 									 PropertySettingPanel* propertyPanel,
+									 ViewPanelMgr* view_panel_mgr,
 									 const ArrangeSpriteConfig& cfg) 
 	: m_wnd(wnd)
 	, m_sprites_impl(spritesImpl)
@@ -41,7 +42,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)
-	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection())
+	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection(), view_panel_mgr)
 {
 	if (stage) {
 		stage->Retain();
@@ -292,6 +293,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 	{
 		wxMenu menu;
 		SetRightPopupMenu(menu, x, y);
+		m_stage->PopupMenu(&menu, x, y);
 	}
 	else if (m_op_state)
 	{

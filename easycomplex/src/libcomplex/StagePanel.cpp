@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_view_panel_mgr(view_panel_mgr)
 {
 	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
+		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property, view_panel_mgr)));
 	SetCanvas(new StageCanvas(this, library));
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
@@ -39,7 +39,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_view_panel_mgr(view_panel_mgr)
 {
 	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
+		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property, view_panel_mgr)));
 	SetCanvas(new StageCanvas(this, library));
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));

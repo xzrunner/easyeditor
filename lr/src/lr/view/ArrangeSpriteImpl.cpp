@@ -12,8 +12,9 @@ namespace lr
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, 
 									 d2d::PropertySettingPanel* property,
-									 CharacterAllDirections* dirs)
-	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
+									 CharacterAllDirections* dirs,
+									 d2d::ViewPanelMgr* view_panel_mgr)
+	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, view_panel_mgr)
 	, m_popup(stage)
 	, m_dirs(dirs)
 {

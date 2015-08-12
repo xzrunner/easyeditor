@@ -175,7 +175,6 @@ bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 	m_rightFirstScrPos.set(x, y);
 
 	SetRightPan(m_selection->IsEmpty());
-
 	if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;
 
 	return false;
