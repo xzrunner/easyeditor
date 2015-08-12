@@ -80,7 +80,7 @@ void LRPacker::Run(int argc, char *argv[])
 		pkg_val["name"] = "scene_" + lr_name;
 
 		int idx = 0;
-		pkg_val["json list"][idx] = lr_name + "_scene_complex.json";
+		pkg_val["json list"][idx] = lr_name + "_base_complex.json";
 		idx = 1;
 		pkg_val["json list"][idx] = lr_name + "_top_complex.json";
 

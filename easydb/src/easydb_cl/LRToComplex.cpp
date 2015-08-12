@@ -50,7 +50,7 @@ void LRToComplex::SeparateBottomLayer(const Json::Value& lr_val, const std::stri
 	for (int layer_idx = 0; layer_idx < 2; ++layer_idx) {
 		LoadAllSpriteValue(lr_val["layer"][layer_idx]["sprite"], complex_val["sprite"], true);
 	}
-	OutputComplexFile(complex_val, filepath, "scene");
+	OutputComplexFile(complex_val, filepath, "base");
 }
 
 void LRToComplex::SeparateTopLayer(const Json::Value& lr_val, const std::string& filepath)

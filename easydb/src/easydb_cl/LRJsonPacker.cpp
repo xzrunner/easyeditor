@@ -12,7 +12,7 @@ namespace edb
 
 std::string LRJsonPacker::Command() const
 {
-	return "lr-pack";
+	return "lr-json-pack";
 }
 
 std::string LRJsonPacker::Description() const
@@ -22,7 +22,7 @@ std::string LRJsonPacker::Description() const
 
 std::string LRJsonPacker::Usage() const
 {
-	// lr-pack e:/test2/test_lr.json
+	// lr-json-pack e:/test2/test_lr.json
 	std::string usage = Command() + " [filepath]";
 	return usage;
 }
@@ -64,7 +64,10 @@ void LRJsonPacker::Run(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
-	ParserSpecial(lr_val, out_val);
+	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
+	std::string name = d2d::FilenameTools::getFilename(outfile);
+
+	ParserSpecial(lr_val, name, out_val);
 	ParserCharacter(lr_val, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
@@ -72,8 +75,10 @@ void LRJsonPacker::Run(const std::string& filepath)
 	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
+	out_val["package"] = "scene_" + name;
 
+	out_val["base"] = "base_" + name;
+	
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(outfile.c_str());
@@ -287,7 +292,8 @@ void LRJsonPacker::ParserCharacter(const Json::Value& src_val, int layer_idx,
 	}
 }
 
-void LRJsonPacker::ParserSpecial(const Json::Value& src_val, Json::Value& out_val)
+void LRJsonPacker::ParserSpecial(const Json::Value& src_val, const std::string& name,
+								 Json::Value& out_val)
 {
 	for (int layer_idx = 0; layer_idx < 3; ++layer_idx)
 	{
@@ -303,7 +309,7 @@ void LRJsonPacker::ParserSpecial(const Json::Value& src_val, Json::Value& out_va
 				ParserSpecialLayer(spr_val, "cover", out_val);
 			} else if (tag.find(TOP_LAYER_STR) != std::string::npos) {
 //				ParserSpecialLayer(spr_val, "top", out_val);
-				out_val["top"] = "top";
+				out_val["base"] = "top_" + name;
 			}
 			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 		}

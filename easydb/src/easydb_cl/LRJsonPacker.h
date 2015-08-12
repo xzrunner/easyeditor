@@ -36,7 +36,7 @@ private:
 	void ParserCamera(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
 	void ParserCharacter(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
 
-	void ParserSpecial(const Json::Value& src_val, Json::Value& out_val);
+	void ParserSpecial(const Json::Value& src_val, const std::string& name, Json::Value& out_val);
 	void ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val);
 	void ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val, int layer_idx);
 
