@@ -77,7 +77,7 @@ void RightPopupMenu::CreateSelectMenu(wxMenu& menu, int x, int y)
 	}
 
 	PointMultiQueryVisitor visitor1(pos);
-	m_sprites_impl->TraverseSprites(visitor1);
+	m_sprites_impl->TraverseSprites(visitor1, DT_EDITABLE);
 
 	const std::vector<ISprite*>& sprites1 = visitor1.GetResult();
 	if (sprites1.empty()) {

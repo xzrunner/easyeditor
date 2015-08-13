@@ -191,7 +191,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 		m_selection->Traverse(PointQueryVisitor(pos, &selected));
 		if (!selected) {
 			PointMultiQueryVisitor visitor(pos);
-			m_spritesImpl->TraverseSprites(visitor);
+			m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
 			const std::vector<ISprite*>& sprites = visitor.GetResult();
 			m_selection->Clear();
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
