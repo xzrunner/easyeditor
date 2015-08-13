@@ -112,14 +112,18 @@ int ShaderMgr::GetFboID() const
 
 void ShaderMgr::SetTexture(int tex)
 {
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	shader->SetTexID(tex);
+	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
+	 	SpriteShader* shader = static_cast<SpriteShader*>(m_all_sprite_shader[i]);
+	 	shader->SetTexID(tex);
+	}
 }
 
 void ShaderMgr::SetFBO(int fbo)
 {
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	shader->SetFboID(fbo);
+	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
+		SpriteShader* shader = static_cast<SpriteShader*>(m_all_sprite_shader[i]);
+		shader->SetFboID(fbo);
+	}
 }
 
 void ShaderMgr::Draw(const float vb[16], int texid)
