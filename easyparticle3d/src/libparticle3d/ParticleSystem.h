@@ -54,6 +54,7 @@ struct Particle
 	float direction[2]; // hori angle and vert angle
 
 	float speed[3];
+	float speed_dir[3];
 
 	float dis_direction[2];
 	float dis_speed;

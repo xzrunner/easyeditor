@@ -341,7 +341,7 @@ void ParticleSystem::update(float dt)
 				float dis_dir3[3];
 				dis_dir3[0] = p->dis_direction[0];
 				dis_dir3[1] = p->dis_direction[1];
-				dis_dir3[2] = - (p->speed[0] * dis_dir3[0] + p->speed[1] * dis_dir3[1]) / p->speed[2];
+				dis_dir3[2] = - (p->speed_dir[0] * dis_dir3[0] + p->speed_dir[1] * dis_dir3[1]) / p->speed_dir[2];
 				float len = dis_dir3[0] * dis_dir3[0] + dis_dir3[1] * dis_dir3[1] + dis_dir3[2] * dis_dir3[2];
 				len = sqrt(len);
 				for (int i = 0; i < 3; ++i) {
@@ -356,7 +356,7 @@ void ParticleSystem::update(float dt)
 				if (p->dis_curr_len > p->dis_region) {
 					p->dis_direction[0] = -p->dis_direction[0];
 					p->dis_direction[1] = -p->dis_direction[1];
-					p->dis_curr_len = 0;
+					p->dis_curr_len = -p->dis_region;
 				}
 			}
 
@@ -563,6 +563,7 @@ void ParticleSystem::add()
 	min = min_spd; max = max_spd;
 	float speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 	TransCoords3D(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
+	memcpy(pLast->speed_dir, pLast->speed, sizeof(pLast->speed));
 
 	min = min_dis_region; max = max_dis_region;
 	pLast->dis_region = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;

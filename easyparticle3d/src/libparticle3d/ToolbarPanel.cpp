@@ -236,7 +236,7 @@ wxSizer* ToolbarPanel::initLayout()
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
 		d2d::SliderCtrlTwo* s_dis_r = new d2d::SliderCtrlTwo(this, "Radius (pixel)", "disturbance_radius", this, PS_DISTURBANCE_RADIUS, 
-			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_RADIUS_CENTER, 0, 400), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_RADIUS_OFFSET, 0, 50));
+			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_RADIUS_CENTER, 0, 9999), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_RADIUS_OFFSET, 0, 1000));
 		sizer->Add(s_dis_r);
 		m_sliders.push_back(s_dis_r);
 
