@@ -201,6 +201,10 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
 
+		if (!symbol) {
+			throw d2d::Exception("create symbol err: %s", filepath.c_str()); 
+		}
+
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->Load(spr_val);
 		if (!base_path.empty()) {
