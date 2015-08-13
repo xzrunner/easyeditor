@@ -30,7 +30,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		HandleShapeMenu(id);
 	} else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID || id - MENU_COLOR_START_ID < m_anim_files.size()) {
 		HandleAnimMenu(id);
-	} else if (id >= MENU_COVER_LAYER_TAG_ID && id <= MENU_TOP_LAYER_TAG_ID) {
+	} else if (id >= MENU_LAYER_CLEAR_TAG_ID && id <= MENU_TOP_LAYER_TAG_ID) {
 		HandleLayerTagMenu(id);
 	}
 }
@@ -79,11 +79,25 @@ void RightPopupMenu::CreateAnimMenu(wxMenu& menu)
 
 void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 {
+	if (!m_sprite) {
+		return;
+	}
+
 	menu.AppendSeparator();
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_COVER_LAYER_TAG_ID);
-	menu.Append(MENU_COVER_LAYER_TAG_ID, "ÕÚµ²²ã");
-	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_TOP_LAYER_TAG_ID);
-	menu.Append(MENU_TOP_LAYER_TAG_ID, "¶¥²ã");	
+
+	const std::string& tag = m_sprite->tag;
+	if (tag.find(std::string(COVER_LAYER_TAG)) == std::string::npos) {
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_COVER_LAYER_TAG_ID);
+		menu.Append(MENU_COVER_LAYER_TAG_ID, "ÕÚµ²²ã");		
+	} 
+	if (tag.find(std::string(TOP_LAYER_TAG)) == std::string::npos) {
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_TOP_LAYER_TAG_ID);
+		menu.Append(MENU_TOP_LAYER_TAG_ID, "¶¥²ã");	
+	}
+	if (tag.find("layer=") != std::string::npos) {
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_LAYER_CLEAR_TAG_ID);
+		menu.Append(MENU_LAYER_CLEAR_TAG_ID, "Çå³ý²ãÐÅÏ¢");	
+	}
 }
 
 void RightPopupMenu::HandleShapeMenu(int id)
@@ -135,6 +149,14 @@ void RightPopupMenu::HandleAnimMenu(int id)
 
 void RightPopupMenu::HandleLayerTagMenu(int id)
 {
+	std::string& tag = m_sprite->tag;
+
+	size_t p_begin = tag.find("layer=");
+	if (p_begin != std::string::npos) {
+		size_t p_end = tag.find(";", p_begin) + 1;
+		tag.erase(tag.begin() + p_begin, tag.begin() + p_end);
+	}
+
 	if (id == MENU_COVER_LAYER_TAG_ID) {
 		m_sprite->tag += std::string(COVER_LAYER_TAG) + ";";
 		m_stage->SetCanvasDirty();

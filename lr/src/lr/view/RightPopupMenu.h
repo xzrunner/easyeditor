@@ -34,8 +34,9 @@ private:
 
 	static const int MENU_COLOR_START_ID		= 210;
 
-	static const int MENU_COVER_LAYER_TAG_ID	= 250;
-	static const int MENU_TOP_LAYER_TAG_ID		= 251;
+	static const int MENU_LAYER_CLEAR_TAG_ID	= 250;
+	static const int MENU_COVER_LAYER_TAG_ID	= 251;
+	static const int MENU_TOP_LAYER_TAG_ID		= 252;
 
 private:
 	StagePanel* m_stage;
