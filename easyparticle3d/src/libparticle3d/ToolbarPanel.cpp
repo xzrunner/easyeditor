@@ -152,7 +152,7 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Emission Time
 	d2d::SliderCtrlOne* s_emission_time = new d2d::SliderCtrlOne(this, "Emission Time (ms)", "emission_time",
-		this, PS_EMISSION_TIME, d2d::SliderItem("", "", EMISSION_TIME, 10, 1000));
+		this, PS_EMISSION_TIME, d2d::SliderItem("", "", EMISSION_TIME, 10, 5000));
 	leftSizer->Add(s_emission_time);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_emission_time);
