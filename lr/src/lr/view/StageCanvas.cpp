@@ -1,10 +1,12 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "DrawSpritesVisitor.h"
+#include "typedef.h"
 
 #include "dataset/Grids.h"
 #include "frame/config.h"
 #include "frame/SettingCfg.h"
+
+#include <easyparticle3d.h>
 
 namespace lr
 {
@@ -19,13 +21,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	d2d::Rect sr = m_screen.GetRegion();
 
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-
-	DrawSpritesVisitor visitor(sr, m_camera->GetScale());
-	m_stage->TraverseSprites(visitor, d2d::DT_VISIBLE);
-	visitor.DrawSorted();
-	shader_mgr->SetSpriteShader(0);
-	shader_mgr->sprite();
+	DrawSprites();
 
 	m_stage->TraverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
 
@@ -42,6 +38,65 @@ void StageCanvas::OnDrawSprites() const
 		d2d::DynamicTexAndFont::Instance()->DebugDraw();
 	}
 #endif
+}
+
+void StageCanvas::DrawSprites() const
+{
+	std::vector<d2d::ISprite*> cover_layer, top_layer;
+
+	std::vector<d2d::ISprite*> all_sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(all_sprites));
+	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
+		d2d::ISprite* spr = all_sprites[i];
+
+		const std::string& tag = spr->tag;
+		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
+			top_layer.push_back(spr);
+		} else if (tag.find(COVER_LAYER_TAG) != std::string::npos
+			|| dynamic_cast<eparticle3d::Sprite*>(spr)) {
+			cover_layer.push_back(spr);
+		} else {
+			DrawSprite(spr, false);
+		}
+	}
+
+	bool draw_flag = SettingCfg::Instance()->m_special_layer_flag;
+	std::sort(cover_layer.begin(), cover_layer.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
+	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
+		d2d::ISprite* spr = cover_layer[i];
+		DrawSprite(spr, draw_flag);
+	}
+
+	for (int i = 0, n = top_layer.size(); i < n; ++i) {
+		d2d::ISprite* spr = top_layer[i];
+		DrawSprite(spr, false);
+	}
+}
+
+void StageCanvas::DrawSprite(d2d::ISprite* spr, bool draw_edge) const
+{
+	d2d::Rect screen_region = m_screen.GetRegion();
+	if (screen_region.isValid() &&
+		!d2d::Math::isRectIntersectRect(spr->GetRect(), screen_region)) {
+			return;
+	}
+
+	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
+
+	int filter_mode_idx = 0;
+	if (draw_edge) {
+		filter_mode_idx = d2d::FilterModes::Instance()->QueryShaderIdx(d2d::FilterMode::FM_EDGE_DETECTION);
+	}
+	d2d::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
+
+	rd->Draw(spr);
+
+	d2d::SettingData& cfg = d2d::Config::Instance()->GetSettings();
+	if (cfg.visible_node_name) {
+		d2d::Matrix t;
+		spr->GetTransMatrix(t);
+		rd->DrawName(spr->name, std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale, t);
+	}
 }
 
 void StageCanvas::DrawRegion() const

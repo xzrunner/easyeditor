@@ -68,8 +68,6 @@ void StageCanvas::OnDrawSprites() const
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	m_stage->TraverseSprites(d2d::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
-	shader_mgr->SetSpriteShader(0);
-	shader_mgr->sprite();
 
 	d2d::PrimitiveDraw::rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 

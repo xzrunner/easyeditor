@@ -19,8 +19,10 @@ protected:
 	virtual void OnDrawSprites() const;
 
 private:
+	void DrawSprites() const;
+	void DrawSprite(d2d::ISprite* spr, bool draw_edge) const;
+
 	void DrawRegion() const;
-	void DrawGrids() const;
 
 private:
 	StagePanel* m_stage;
