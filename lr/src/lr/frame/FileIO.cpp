@@ -123,6 +123,11 @@ void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage,
 		layer_val = value[idx++];
 	}
 
+	for (int i = 1, n = layers.size(); i < n; ++i) {
+		Layer* layer = layers[i];
+		layer->SetEditable(false);
+	}
+
 	stage->SetLayers(layers);
 	library->InitFromLayers(layers);
 }
