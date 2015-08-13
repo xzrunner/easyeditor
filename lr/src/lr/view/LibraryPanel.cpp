@@ -223,10 +223,12 @@ void LibraryPanel::Refresh()
 	}
 
 	// group tree
+	m_grouptree->EnableExpand(false);
 	m_grouptree->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		m_grouptree->InsertSprite(sprites[i]);
 	}
+	m_grouptree->EnableExpand(true);
 }
 
 Layer* LibraryPanel::GetTerrainLayer()

@@ -43,8 +43,11 @@ public:
 
 	bool ReorderItem(wxTreeItemId id, bool up);
 
+	void EnableExpand(bool enable) { m_expand_enable = enable; }
+
 private:
-	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
+	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, 
+		GroupTreeItem* data);
 
 private:
 	void InitRoot();
@@ -99,6 +102,8 @@ private:
 	bool m_add_del_open;
 
 	const KeysState& m_key_state;
+
+	bool m_expand_enable;
 
 	DECLARE_EVENT_TABLE()
 

@@ -113,6 +113,11 @@ void GroupTreePanel::Clear()
 	m_grouptree->Clear();
 }
 
+void GroupTreePanel::EnableExpand(bool enable)
+{
+	m_grouptree->EnableExpand(enable);
+}
+
 void GroupTreePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);

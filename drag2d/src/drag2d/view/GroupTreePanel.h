@@ -40,6 +40,8 @@ public:
 
 	void Clear();
 
+	void EnableExpand(bool enable);
+
 private:
 	void InitLayout();
 	

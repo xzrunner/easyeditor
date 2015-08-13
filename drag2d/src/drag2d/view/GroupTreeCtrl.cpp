@@ -35,6 +35,7 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_add_del_open(true)
 	, m_key_state(key_state)
+	, m_expand_enable(true)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 
@@ -244,10 +245,13 @@ bool GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 	return true;
 }
 
-wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
+wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, 
+									GroupTreeItem* data)
 {
 	wxTreeItemId id = InsertItem(parent, 0, name, -1, -1, data);
-	ExpandAll();
+	if (m_expand_enable) {
+		ExpandAll();
+	}
 	return id;
 }
 
