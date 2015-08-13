@@ -100,7 +100,9 @@ bool ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 	bool ret = false;
 
 	int i = QuerySprIdx(sprite);
-	assert(i >= 0);
+	if (i < 0) {
+		return false;
+	}
 
 	int n = m_sprites.size();
 	if (up)
