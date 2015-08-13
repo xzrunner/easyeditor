@@ -601,6 +601,14 @@
 					Name="lr"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\lr_tools.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\lr_tools.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\lr_typedef.h"
 						>
 					</File>

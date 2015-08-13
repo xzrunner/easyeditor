@@ -1,6 +1,7 @@
 #include "LRJsonPacker.h"
 #include "check_params.h"
 #include "lr_typedef.h"
+#include "lr_tools.h"
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
@@ -64,10 +65,9 @@ void LRJsonPacker::Run(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
-	std::string name = d2d::FilenameTools::getFilename(outfile);
+	std::string lr_name = get_lr_name_from_file(filepath);
 
-	ParserSpecial(lr_val, name, out_val);
+	ParserSpecial(lr_val, lr_name, out_val);
 	ParserCharacter(lr_val, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
@@ -75,10 +75,11 @@ void LRJsonPacker::Run(const std::string& filepath)
 	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
 
-	out_val["package"] = "scene_" + name;
+	out_val["package"] = lr_name + "_scene";
 
-	out_val["base"] = "base_" + name;
+	out_val["base"] = lr_name + "_base";
 	
+	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(outfile.c_str());
@@ -309,7 +310,7 @@ void LRJsonPacker::ParserSpecial(const Json::Value& src_val, const std::string& 
 				ParserSpecialLayer(spr_val, "cover", out_val);
 			} else if (tag.find(TOP_LAYER_STR) != std::string::npos) {
 //				ParserSpecialLayer(spr_val, "top", out_val);
-				out_val["base"] = "top_" + name;
+				out_val["top"] = name + "_top";
 			}
 			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 		}

@@ -1,5 +1,6 @@
 #include "LRPacker.h"
 #include "check_params.h"
+#include "lr_tools.h"
 
 #include "LRExpansion.h"
 #include "LRSeparateComplex.h"
@@ -74,15 +75,28 @@ void LRPacker::Run(int argc, char *argv[])
 
 		Json::Value pkg_val;
 
-		std::string lr_name = d2d::FilenameTools::getFilename(tmp_lr_file);
-		lr_name = lr_name.substr(0, lr_name.find("_lr"));
+		std::string lr_name = get_lr_name_from_file(tmp_lr_file);
 
-		pkg_val["name"] = "scene_" + lr_name;
+		pkg_val["name"] = lr_name + "_scene";
 
 		int idx = 0;
 		pkg_val["json list"][idx] = lr_name + "_base_complex.json";
-		idx = 1;
+		++idx;
 		pkg_val["json list"][idx] = lr_name + "_top_complex.json";
+		++idx;
+		{
+			int i = 0;
+			std::string filename = "name_" + d2d::StringTools::IntToString(i) + "_complex.json";
+			std::string dir = d2d::FilenameTools::getFileDir(tmp_lr_file);
+			while (d2d::FilenameTools::IsFileExist(dir + "\\" + filename)) {
+				pkg_val["json list"][idx++] = filename;
+				++i;
+				filename = "name_" + d2d::StringTools::IntToString(i) + "_complex.json";
+			}
+		}
+
+// 		int idx = 0;
+// 		pkg_val["json list"][idx] = ".";
 
 		std::string _out_dir = d2d::FilenameTools::getRelativePath(tmp_dir, out_dir);
 		pkg_val["output dir"] = _out_dir;
