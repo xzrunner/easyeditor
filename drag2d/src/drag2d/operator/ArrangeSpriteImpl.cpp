@@ -284,7 +284,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
-	if (!m_right_down_pos.isValid() || m_selection->IsEmpty()) {
+	if (!m_right_down_pos.isValid()) {
 		return;
 	}
 

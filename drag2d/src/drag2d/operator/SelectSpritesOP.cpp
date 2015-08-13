@@ -186,22 +186,10 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 	if (m_rightFirstScrPos == Vector(x, y))
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);
-
-		ISprite* selected = NULL;
-		m_selection->Traverse(PointQueryVisitor(pos, &selected));
-		if (!selected) {
-			PointMultiQueryVisitor visitor(pos);
-			m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
-			const std::vector<ISprite*>& sprites = visitor.GetResult();
-			m_selection->Clear();
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				m_selection->Add(sprites[i]);
-			}
-		} else {
-			m_selection->Clear();
-			m_selection->Add(selected);
-		}
-		SetRightPan(m_selection->IsEmpty());
+		PointMultiQueryVisitor visitor(pos);
+		m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
+		const std::vector<ISprite*>& sprites = visitor.GetResult();
+		SetRightPan(sprites.empty());
 	}
 
 	if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;

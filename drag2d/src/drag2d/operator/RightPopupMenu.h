@@ -2,6 +2,7 @@
 #define _DRAG2D_RIGHT_POPUP_MENU_H_
 
 #include <wx/wx.h>
+#include <vector>
 
 namespace d2d
 {
@@ -10,6 +11,7 @@ class EditPanelImpl;
 class MultiSpritesImpl;
 class SpriteSelection;
 class ViewPanelMgr;
+class ISprite;
 
 class RightPopupMenu
 {
@@ -23,7 +25,7 @@ public:
 
 private:
 	void CreateCommonMenu(wxMenu& menu);
-	void CreateSelectMenu(wxMenu& menu, int x, int y);
+	void CreateSelectMenu(wxMenu& menu);
 	void CreateDebugMenu(wxMenu& menu);
 
 	void HandleCommonMenu(int id);
@@ -35,6 +37,8 @@ private:
 
 	void HoriMirror();
 	void VertMirror();
+
+	void OnSelected(int x, int y);
 
 private:
 	enum
@@ -61,6 +65,8 @@ private:
 	SpriteSelection* m_selection;
 
 	ViewPanelMgr* m_view_panel_mgr;
+
+	std::vector<ISprite*> m_edited_sprs, m_selected_sprs;
 
 }; // RightPopupMenu
 
