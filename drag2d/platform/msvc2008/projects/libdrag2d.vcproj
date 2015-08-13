@@ -657,22 +657,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\RawPixels.cpp"
 					>
 				</File>
@@ -741,6 +725,22 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\dataset\ImageData.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.h"
 						>
 					</File>
 					<File
