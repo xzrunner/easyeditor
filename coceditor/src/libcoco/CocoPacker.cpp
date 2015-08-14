@@ -1890,6 +1890,10 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 		// | kx  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
+
+		bool xMirror, yMirror;
+		sprite->GetMirror(xMirror, yMirror);
+
 		d2d::Vector center = sprite->GetCenter();
 		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
 		{
@@ -1900,14 +1904,18 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 			}
 
 			d2d::Vector offset = picture->offset;
+			if (xMirror) {
+				offset.x = -offset.x;
+			}
+			if (yMirror) {
+				offset.y = -offset.y;
+			}
 			offset.x *= sprite->GetScale().x / picture->invscale;
 			offset.y *= sprite->GetScale().y / picture->invscale;
 			center += d2d::Math::rotateVector(offset, sprite->GetAngle());
 		}
 		float sx = sprite->GetScale().x,
 			  sy = sprite->GetScale().y;
-		bool xMirror, yMirror;
-		sprite->GetMirror(xMirror, yMirror);
 		if (xMirror) sx = -sx;
 		if (yMirror) sy = -sy;
 
