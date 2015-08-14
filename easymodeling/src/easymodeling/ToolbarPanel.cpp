@@ -9,7 +9,7 @@
 using namespace emodeling;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+	: d2d::ToolbarPanel(parent, Context::Instance()->stage->GetStageImpl())
 {
 	Context* context = Context::Instance();
 

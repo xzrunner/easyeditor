@@ -5,7 +5,8 @@
 using namespace edb;
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	, m_stage_panel(editPanel)
 	, m_batch(100, d2d::SpriteBatch::USAGE_STATIC)
 {
 }
@@ -16,14 +17,13 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
-	editPanel->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
+	m_stage_panel->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 
 	// fixme
 //	editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_batch), d2d::DT_VISIBLE);
 
 	drawConnection();
-	editPanel->DrawEditOP();
+	m_stage_panel->DrawEditOP();
 }
 
 void StageCanvas::drawConnection() const

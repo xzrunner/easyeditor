@@ -20,6 +20,8 @@ namespace edb
 		void drawConnection() const;
 
 	private:
+		StagePanel* m_stage_panel;
+
 		d2d::SpriteBatch m_batch;
 
 	}; // StageCanvas
