@@ -68,10 +68,12 @@ void PackTexture::Trigger(const std::string& cfg_file)
 		trim = new libpacker::ImageTrimData(trim_file);
 	}
 
-	libpacker::NormalPack tex_packer(images, trim);
 	int static_size = value["static size"].asInt(),
 		max_size = value["max size"].asInt(),
 		min_size = value["min size"].asInt();
+	int extrude_min = value["extrude min"].asInt(),
+		extrude_max = value["extrude max"].asInt();
+	libpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max);
 	tex_packer.Pack(static_size, max_size, min_size);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");

@@ -10,9 +10,12 @@ namespace libpacker
 
 static const bool CLOCKWISE_ROT = true;
 
-NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData* trim_info)
+NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData* trim_info,
+					   int extrude_min, int extrude_max)
 	: m_filepaths(files)
 	, m_trim_info(trim_info)
+	, m_extrude_min(extrude_min)
+	, m_extrude_max(extrude_max)
 {
 }
 
@@ -250,9 +253,9 @@ int NormalPack::GetExtrude(int max, int tot, int edge) const
 	const float MAX_LIMIT = 25;
 	const float TOT_LIMIT = 0.5f;
 	if (max > MAX_LIMIT || (float)tot/edge > TOT_LIMIT) {
-		return 4;
+		return m_extrude_max;
 	} else {
-		return 1;
+		return m_extrude_min;
 	}
 }
 
