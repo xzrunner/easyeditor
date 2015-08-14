@@ -3,6 +3,7 @@
 #include "dataset/AbstractBV.h"
 #include "dataset/ISymbol.h"
 #include "dataset/ISprite.h"
+#include "dataset/sprite_utility.h"
 #include "view/MultiSpritesImpl.h"
 #include "render/PrimitiveDraw.h"
 
@@ -31,8 +32,8 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 
 	const float DIS = 5;
 
-	ISprite *horNearest = NULL, *verNearest = NULL;
-	float disHor = DIS, disVer = DIS;
+	ISprite *hor_nearest = NULL, *ver_nearest = NULL;
+	float dis_hor = DIS, dis_ver = DIS;
 	// hor
 	for (size_t i = 0, n = sources.size(); i < n; ++i)
 	{
@@ -40,38 +41,35 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 
 		if (src == dst) continue;
 
-		const float srcHalfHeight = src->GetBounding()->height() * 0.5f;
-		const float dstHalfHeight = dst->GetBounding()->height() * 0.5f;
+		float src_cy = get_spr_center_y(src);
+		float src_down = get_spr_down(src);
+		float src_up = get_spr_up(src);
 
-		float src_cy = src->GetPosition().y + src->GetSymbol().GetSize().yCenter();
-		float srcDown = src_cy - srcHalfHeight;
-		float srcUp = src_cy + srcHalfHeight;
-
-		float dst_cy = dst->GetPosition().y + dst->GetSymbol().GetSize().yCenter();
-		float dstDown = dst_cy - dstHalfHeight;
-		float dstUp = dst_cy + dstHalfHeight;
+		float dst_cy = get_spr_center_y(dst);
+		float dst_down = get_spr_down(dst);
+		float dst_up = get_spr_up(dst);
 
 		// up
-		if (float dis = fabs(dstUp - srcUp) < disHor)
+		if (float dis = fabs(dst_up - src_up) < dis_hor)
 		{
-			disHor = dis;
-			horNearest = src;
+			dis_hor = dis;
+			hor_nearest = src;
 		}
-		else if (float dis = fabs(dstUp - srcDown) < disHor)
+		else if (float dis = fabs(dst_up - src_down) < dis_hor)
 		{
-			disHor = dis;
-			horNearest = src;
+			dis_hor = dis;
+			hor_nearest = src;
 		}
 		// down
-		if (float dis = fabs(dstDown - srcUp) < disHor)
+		if (float dis = fabs(dst_down - src_up) < dis_hor)
 		{
-			disHor = dis;
-			horNearest = src;
+			dis_hor = dis;
+			hor_nearest = src;
 		}
-		else if (float dis = fabs(dstDown - srcDown) < disHor)
+		else if (float dis = fabs(dst_down - src_down) < dis_hor)
 		{
-			disHor = dis;
-			horNearest = src;
+			dis_hor = dis;
+			hor_nearest = src;
 		}	
 	}
 	// ver
@@ -81,58 +79,42 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 
 		if (src == dst) continue;
 
-		const float srcHalfWidth = src->GetBounding()->width() * 0.5f;
-		const float dstHalfWidth = dst->GetBounding()->width() * 0.5f;
+		float src_cx = get_spr_center_x(src);
+		float src_left = get_spr_left(src);
+		float src_right = get_spr_right(src);
 
-		float src_cx = src->GetPosition().x + src->GetSymbol().GetSize().xCenter();
-		float srcLeft = src_cx - srcHalfWidth;
-		float srcRight = src_cx + srcHalfWidth;
-
-		float dst_cx = dst->GetPosition().x + dst->GetSymbol().GetSize().xCenter();
-		float dstLeft = dst_cx - dstHalfWidth;
-		float dstRight = dst_cx + dstHalfWidth;
+		float dst_cx = get_spr_center_x(dst);
+		float dst_left = get_spr_left(dst);
+		float dst_right = get_spr_right(dst);
 
 		// left
-		if (float dis = fabs(dstLeft - srcLeft) < disVer)
+		if (float dis = fabs(dst_left - src_left) < dis_ver)
 		{
-			disVer = dis;
-			verNearest = src;
+			dis_ver = dis;
+			ver_nearest = src;
 		}
-		else if (float dis = fabs(dstLeft - srcRight) < disVer)
+		else if (float dis = fabs(dst_left - src_right) < dis_ver)
 		{
-			disVer = dis;
-			verNearest = src;
+			dis_ver = dis;
+			ver_nearest = src;
 		}
 		// right
-		if (float dis = fabs(dstRight - srcLeft) < disVer)
+		if (float dis = fabs(dst_right - src_left) < dis_ver)
 		{
-			disVer = dis;
-			verNearest = src;
+			dis_ver = dis;
+			ver_nearest = src;
 		}
-		else if (float dis = fabs(dstRight - srcRight) < disVer)
+		else if (float dis = fabs(dst_right - src_right) < dis_ver)
 		{
-			disVer = dis;
-			verNearest = src;
+			dis_ver = dis;
+			ver_nearest = src;
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-
-	if (horNearest)
-		Align(horNearest, sprites[0]);
-	if (verNearest && verNearest != horNearest)
-		Align(verNearest, sprites[0]);
-
-	//////////////////////////////////////////////////////////////////////////
-
-	// 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
-	// 		{
-	// 			for (size_t j = 0, m = sources.size(); j < m; ++j)
-	// 			{
-	// 				if (sprites[i] != sources[j])
-	// 					AutoAlign(sources[j], sprites[i]);
-	// 			}
-	// 		}
+	if (hor_nearest)
+		Align(hor_nearest, sprites[0]);
+	if (ver_nearest && ver_nearest != hor_nearest)
+		Align(ver_nearest, sprites[0]);
 }
 
 void AutoAlign::Align(const ISprite* src, ISprite* dst)
@@ -140,89 +122,78 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	const float DIS = 5;
 	const float LEN = 400;
 
-	Rect sr = src->GetSymbol().GetSize();
-	Rect dr = dst->GetSymbol().GetSize();
-
-	const float srcHalfWidth = sr.xLength() * src->GetScale().x * 0.5f,
-		srcHalfHeight = sr.yLength() * src->GetScale().y * 0.5f;
-	const float dstHalfWidth = dr.xLength() * dst->GetScale().x * 0.5f,
-		dstHalfHeight = dr.yLength() * dst->GetScale().y * 0.5f;
-
-	float src_dx = sr.xCenter();
-	float src_dy = sr.yCenter();
-	float dst_dx = dr.xCenter();
-	float dst_dy = dr.yCenter();
-
-	float srcLeft = src->GetPosition().x + src_dx - srcHalfWidth;
-	float srcRight = src->GetPosition().x + src_dx + srcHalfWidth;
-	float srcDown = src->GetPosition().y + src_dy - srcHalfHeight;
-	float srcUp = src->GetPosition().y + src_dy + srcHalfHeight;
+	float src_left = get_spr_left(src),
+		src_right = get_spr_right(src),
+		src_down = get_spr_down(src),
+		src_up = get_spr_up(src);
+	float src_cx = get_spr_center_x(src),
+		src_cy = get_spr_center_y(src);
 
 	// up
 	float nearest = DIS;
-	float dstUp = dst->GetPosition().y + dst_dy + dstHalfHeight;
-	if (float dis = fabs(dstUp - srcUp) < nearest)
+	float dst_up = get_spr_up(dst);
+	if (float dis = fabs(dst_up - src_up) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, srcUp - dstHalfHeight - dst_dy), dst->GetAngle());
-		m_hor[0].set(dst->GetPosition().x + dst_dx - LEN, srcUp);
-		m_hor[1].set(dst->GetPosition().x + dst_dx + LEN, srcUp);
+		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_up), dst->GetAngle());
+		m_hor[0].set(src_cx - LEN, src_up);
+		m_hor[1].set(src_cx + LEN, src_up);
 	}
-	else if (float dis = fabs(dstUp - srcDown) < nearest)
+	else if (float dis = fabs(dst_up - src_down) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, srcDown - dstHalfHeight - dst_dy), dst->GetAngle());
-		m_hor[0].set(dst->GetPosition().x + dst_dx - LEN, srcDown);
-		m_hor[1].set(dst->GetPosition().x + dst_dx + LEN, srcDown);
+		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_up), dst->GetAngle());
+		m_hor[0].set(src_cx - LEN, src_down);
+		m_hor[1].set(src_cx + LEN, src_down);
 	}		
 	// down
-	float dstDown = dst->GetPosition().y + dst_dy - dstHalfHeight;
-	if (float dis = fabs(dstDown - srcUp) < nearest)
+	float dst_down = get_spr_down(dst);;
+	if (float dis = fabs(dst_down - src_up) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, srcUp + dstHalfHeight - dst_dy), dst->GetAngle());
-		m_hor[0].set(dst->GetPosition().x + dst_dx - LEN, srcUp);
-		m_hor[1].set(dst->GetPosition().x + dst_dx + LEN, srcUp);
+		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_down), dst->GetAngle());
+		m_hor[0].set(src_cx - LEN, src_up);
+		m_hor[1].set(src_cx + LEN, src_up);
 	}
-	else if (float dis = fabs(dstDown - srcDown) < nearest)
+	else if (float dis = fabs(dst_down - src_down) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(dst->GetPosition().x, srcDown + dstHalfHeight - dst_dy), dst->GetAngle());
-		m_hor[0].set(dst->GetPosition().x + dst_dx - LEN, srcDown);
-		m_hor[1].set(dst->GetPosition().x + dst_dx + LEN, srcDown);
+		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_down), dst->GetAngle());
+		m_hor[0].set(src_cx - LEN, src_down);
+		m_hor[1].set(src_cx + LEN, src_down);
 	}	
 	// left
 	nearest = DIS;
-	float dstLeft = dst->GetPosition().x + dst_dx - dstHalfWidth;
-	if (float dis = fabs(dstLeft - srcLeft) < nearest)
+	float dst_left = get_spr_left(dst);
+	if (float dis = fabs(dst_left - src_left) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(srcLeft + dstHalfWidth - dst_dx, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(srcLeft, dst->GetPosition().y + dst_dy - LEN);
-		m_ver[1].set(srcLeft, dst->GetPosition().y + dst_dy + LEN);
+		dst->SetTransform(Vector(dst->GetPosition().x + src_left - dst_left, dst->GetPosition().y), dst->GetAngle());
+		m_ver[0].set(src_left, src_cy - LEN);
+		m_ver[1].set(src_left, src_cy + LEN);
 	}
-	else if (float dis = fabs(dstLeft - srcRight) < nearest)
+	else if (float dis = fabs(dst_left - src_right) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(srcRight + dstHalfWidth - dst_dx, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(srcRight, dst->GetPosition().y + dst_dy - LEN);
-		m_ver[1].set(srcRight, dst->GetPosition().y + dst_dy + LEN);
+		dst->SetTransform(Vector(dst->GetPosition().x + src_right - dst_left, dst->GetPosition().y), dst->GetAngle());
+		m_ver[0].set(src_right, src_cy - LEN);
+		m_ver[1].set(src_right, src_cy + LEN);
 	}
 	// right
-	float dstRight = dst->GetPosition().x + dst_dx + dstHalfWidth;
-	if (float dis = fabs(dstRight - srcLeft) < nearest)
+	float dst_right = get_spr_right(dst);
+	if (float dis = fabs(dst_right - src_left) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(srcLeft - dstHalfWidth - dst_dx, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(srcLeft, dst->GetPosition().y + dst_dy - LEN);
-		m_ver[1].set(srcLeft, dst->GetPosition().y + dst_dy + LEN);
+		dst->SetTransform(Vector(dst->GetPosition().x + src_left - dst_right, dst->GetPosition().y), dst->GetAngle());
+		m_ver[0].set(src_left, src_cy - LEN);
+		m_ver[1].set(src_left, src_cy + LEN);
 	}
-	else if (float dis = fabs(dstRight - srcRight) < nearest)
+	else if (float dis = fabs(dst_right - src_right) < nearest)
 	{
 		nearest = dis;
-		dst->SetTransform(Vector(srcRight - dstHalfWidth - dst_dx, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(srcRight, dst->GetPosition().y + dst_dy - LEN);
-		m_ver[1].set(srcRight, dst->GetPosition().y + dst_dy + LEN);
+		dst->SetTransform(Vector(dst->GetPosition().x + src_right - dst_right, dst->GetPosition().y), dst->GetAngle());
+		m_ver[0].set(src_right, src_cy - LEN);
+		m_ver[1].set(src_right, src_cy + LEN);
 	}
 }
 

@@ -62,12 +62,6 @@ public:
 	Vector GetOverallCenter() const;
 
 private:
-	float GetSprLeft(const d2d::ISprite* spr) const;
-	float GetSprRight(const d2d::ISprite* spr) const;
-	float GetSprDown(const d2d::ISprite* spr) const;
-	float GetSprUp(const d2d::ISprite* spr) const;
-
-private:
 	enum Bool3Type
 	{
 		e_bool_different = 0,

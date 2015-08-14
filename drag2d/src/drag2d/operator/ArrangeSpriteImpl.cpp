@@ -234,6 +234,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 		std::vector<ISprite*> sprites;
 		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		m_align.Align(sprites);
+		m_stage->SetCanvasDirty();
 	}
 
 	if (m_property_panel)
@@ -359,30 +360,29 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 		float max_e = std::max(r.xLength(), r.yLength());
 		if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
-			return;
-		}
+		} else {
+			if (m_stage->GetKeyState(WXK_SHIFT)) 
+			{
+				Vector ctrl_nodes[4];
+				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
+				for (int i = 0; i < 4; ++i)
+					PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			}
+			else
+			{
+				Vector ctrl_nodes[8];
+				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
+				for (int i = 0; i < 4; ++i)
+					PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+				for (int i = 4; i < 8; ++i)
+					PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			}
 
-		if (m_stage->GetKeyState(WXK_SHIFT)) 
-		{
-			Vector ctrl_nodes[4];
-			SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
-			for (int i = 0; i < 4; ++i)
-				PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
-		}
-		else
-		{
-			Vector ctrl_nodes[8];
-			SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
-			for (int i = 0; i < 4; ++i)
-				PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
-			for (int i = 4; i < 8; ++i)
-				PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
-		}
-
-		if (m_cfg.is_offset_open)
-		{
-			d2d::Vector offset = GetSprOffset(selected);
-			PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			if (m_cfg.is_offset_open)
+			{
+				d2d::Vector offset = GetSprOffset(selected);
+				PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			}
 		}
 	}
 
