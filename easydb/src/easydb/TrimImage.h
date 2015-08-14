@@ -29,20 +29,44 @@ private:
 	void StoreBoundInfo(const d2d::ImageData& img, const d2d::Rect& r, Json::Value& val) const;
 	bool IsTransparent(const d2d::ImageData& img, int x, int y) const;
 
+	void Trim(const std::string& filepath);
+
+	static int64_t GetFileModifyTime(const std::string& filepath);
+
 private:
 	class JsonConfig
 	{
-	public:		
+	public:	
+		~JsonConfig();
+
 		void LoadFromFile(const std::string& filepath);
 
-		void Insert(const std::string& filepath, const Json::Value& val);
+		void Insert(const std::string& filepath, const Json::Value& val, int64_t time);
 
-		void OutputToFile(const std::string& filepath) const;
+		void OutputToFile(const std::string& filepath, const std::string& dst_dir) const;
+
+		int64_t QueryTime(const std::string& filepath) const;
 
 	private:
-		std::map<std::string, Json::Value> m_map;
+		struct Item
+		{
+			Item() : time(0), used(false) {}
+
+			Json::Value val;
+			int64_t time;
+
+			mutable bool used;
+		};
+
+	private:
+		std::map<std::string, Item*> m_map_items;
 
 	}; // JsonConfig
+
+private:
+	std::string m_src_dir, m_dst_dir;
+
+	JsonConfig m_json_cfg;
 
 }; // TrimImage
 

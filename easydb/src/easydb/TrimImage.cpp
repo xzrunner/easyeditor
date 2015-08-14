@@ -39,75 +39,38 @@ void TrimImage::Run(int argc, char *argv[])
 
 void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 {
-	JsonConfig json_cfg;
+	m_src_dir = src_dir;
+	m_dst_dir = dst_dir;
 
-	d2d::mk_dir(dst_dir, false);
-	std::string out_json_filepath = dst_dir + "\\" + OUTPUT_FILE + ".json";
-	wxDateTime json_time;
-	json_time.Set(0.0f);
+	d2d::mk_dir(m_dst_dir, false);
+	std::string out_json_filepath = m_dst_dir + "\\" + OUTPUT_FILE + ".json";
 	if (d2d::FilenameTools::IsFileExist(out_json_filepath)) {
-		json_cfg.LoadFromFile(out_json_filepath);
-		wxStructStat strucStat;
-		wxStat(out_json_filepath, &strucStat);
-		json_time = strucStat.st_mtime;
+		m_json_cfg.LoadFromFile(out_json_filepath);
 	}
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FilenameTools::fetchAllFiles(m_src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
-		{
-			std::cout << i << " / " << n << " : " << filepath << "\n";
 
-			wxStructStat strucStat;
-			wxStat(filepath, &strucStat);
-			wxDateTime img_time = strucStat.st_mtime;
-			if (img_time < json_time) {
-				continue;
-			}
+		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+			continue;
+		}
 
-			d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);		
+		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-			eimage::ImageTrim trim(*img);
-			d2d::Rect r = trim.Trim();
-			if (!r.isValid()) {
-				r.xMin = r.yMin = 0;
-				r.xMax = img->GetWidth();
-				r.yMax = img->GetHeight();
-			}
+		int64_t img_ori_time = m_json_cfg.QueryTime(d2d::FilenameTools::getRelativePath(m_src_dir, filepath).ToStdString()),
+			img_new_time = GetFileModifyTime(filepath);
 
-			// save info
-			Json::Value spr_val;
-			std::string relative_path = d2d::FilenameTools::getRelativePath(src_dir, filepath);
-			spr_val["filepath"] = relative_path;
-			spr_val["source size"]["w"] = img->GetWidth();
-			spr_val["source size"]["h"] = img->GetHeight();
-			spr_val["position"]["x"] = r.xMin;
-			spr_val["position"]["y"] = img->GetHeight() - r.yMax;
-			spr_val["position"]["w"] = r.xLength();
-			spr_val["position"]["h"] = r.yLength();
-			StoreBoundInfo(*img, r, spr_val);
-			json_cfg.Insert(relative_path, spr_val);
-
-			std::string out_filepath = dst_dir + "\\" + relative_path,
-				out_dir = d2d::FilenameTools::getFileDir(out_filepath);
-			d2d::mk_dir(out_dir, false);
-
-			eimage::ImageClip clip(*img);
-			const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
-			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
-				out_filepath, d2d::ImageSaver::e_png);
-			delete[] pixels;
-
-			img->Release();
+		if (img_new_time != img_ori_time) {
+			Trim(filepath);
 		}
 	}
 
-	json_cfg.OutputToFile(out_json_filepath);
+	m_json_cfg.OutputToFile(out_json_filepath, m_dst_dir);
 }
 
 void TrimImage::StoreBoundInfo(const d2d::ImageData& img, const d2d::Rect& r, 
@@ -196,9 +159,65 @@ bool TrimImage::IsTransparent(const d2d::ImageData& img, int x, int y) const
 	}
 }
 
+void TrimImage::Trim(const std::string& filepath)
+{
+	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);		
+
+	eimage::ImageTrim trim(*img);
+	d2d::Rect r = trim.Trim();
+	if (!r.isValid()) {
+		r.xMin = r.yMin = 0;
+		r.xMax = img->GetWidth();
+		r.yMax = img->GetHeight();
+	}
+
+	// save info
+	Json::Value spr_val;
+	std::string relative_path = d2d::FilenameTools::getRelativePath(m_src_dir, filepath);
+	spr_val["filepath"] = relative_path;
+	spr_val["source size"]["w"] = img->GetWidth();
+	spr_val["source size"]["h"] = img->GetHeight();
+	spr_val["position"]["x"] = r.xMin;
+	spr_val["position"]["y"] = img->GetHeight() - r.yMax;
+	spr_val["position"]["w"] = r.xLength();
+	spr_val["position"]["h"] = r.yLength();
+	int64_t time = GetFileModifyTime(filepath);
+	spr_val["time"] = d2d::StringTools::Int64ToString(time);
+	StoreBoundInfo(*img, r, spr_val);
+	m_json_cfg.Insert(relative_path, spr_val, time);
+
+	std::string out_filepath = m_dst_dir + "\\" + relative_path,
+		out_dir = d2d::FilenameTools::getFileDir(out_filepath);
+	d2d::mk_dir(out_dir, false);
+
+	eimage::ImageClip clip(*img);
+	const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
+	d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
+		out_filepath, d2d::ImageSaver::e_png);
+	delete[] pixels;
+
+	img->Release();
+}
+
+int64_t TrimImage::GetFileModifyTime(const std::string& filepath)
+{
+	wxStructStat strucStat;
+	wxStat(filepath, &strucStat);
+	return strucStat.st_mtime;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class TrimImage::JsonConfig
 //////////////////////////////////////////////////////////////////////////
+
+TrimImage::JsonConfig::
+~JsonConfig()
+{
+	std::map<std::string, Item*>::iterator itr = m_map_items.begin();
+	for ( ; itr != m_map_items.end(); ++itr) {
+		delete itr->second;
+	}
+}
 
 void TrimImage::JsonConfig::
 LoadFromFile(const std::string& filepath)
@@ -215,30 +234,44 @@ LoadFromFile(const std::string& filepath)
 	Json::Value val = value[idx++];
 	while (!val.isNull()) {
 		std::string filepath = val["filepath"].asString();
-		m_map.insert(std::make_pair(filepath, val));
+		Item* item = new Item;
+		item->val = val;
+		item->time = d2d::StringTools::StringToInt64(val["time"].asString());
+		m_map_items.insert(std::make_pair(filepath, item));
 		val = value[idx++];
 	}
 }
 
 void TrimImage::JsonConfig::
-Insert(const std::string& filepath, const Json::Value& val)
+Insert(const std::string& filepath, const Json::Value& val, int64_t time)
 {
-	std::map<std::string, Json::Value>::iterator itr
-		= m_map.find(filepath);
-	if (itr != m_map.end()) {
-		m_map.erase(itr);
+	std::map<std::string, Item*>::iterator itr
+		= m_map_items.find(filepath);
+	if (itr != m_map_items.end()) {
+		assert(itr->second->time != time);
+		itr->second->time = time;
+		itr->second->val = val;
+	} else {
+		Item* item = new Item;
+		item->val = val;
+		item->time = time;
+		item->used = true;
+		m_map_items.insert(std::make_pair(filepath, item));
 	}
-	m_map.insert(std::make_pair(filepath, val));
 }
 
 void TrimImage::JsonConfig::
-OutputToFile(const std::string& filepath) const
+OutputToFile(const std::string& filepath, const std::string& dst_dir) const
 {
 	Json::Value value;
-	std::map<std::string, Json::Value>::const_iterator itr 
-		= m_map.begin();
-	for (int i = 0; itr != m_map.end(); ++itr, ++i) {
-		value[i] = itr->second;
+	std::map<std::string, Item*>::const_iterator itr 
+		= m_map_items.begin();
+	for (int i = 0; itr != m_map_items.end(); ++itr) {
+		if (itr->second->used) {
+			value[i++] = itr->second->val;
+		} else {
+			wxRemoveFile(dst_dir + "\\" + itr->first);
+		}
 	}
 
 	Json::StyledStreamWriter writer;
@@ -247,6 +280,19 @@ OutputToFile(const std::string& filepath) const
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
+}
+
+int64_t TrimImage::JsonConfig::
+QueryTime(const std::string& filepath) const
+{
+	std::map<std::string, Item*>::const_iterator itr
+		= m_map_items.find(filepath);
+	if (itr != m_map_items.end()) {
+		itr->second->used = true;
+		return itr->second->time;
+	} else {
+		return 0;
+	}
 }
 
 }

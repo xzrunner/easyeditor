@@ -7,6 +7,7 @@
 #include <string>
 #include <cctype>
 #include <fstream>
+#include <stdint.h>
 
 namespace d2d
 {
@@ -21,10 +22,25 @@ public:
 		return ss.str();
 	}
 
+	static std::string Int64ToString(int64_t i)
+	{
+		std::stringstream ss;
+		ss << i;
+		return ss.str();
+	}
+
 	static int StringToInt(const std::string& str)
 	{
 		std::stringstream ss(str);
 		int ret;
+		ss >> ret;
+		return ret;
+	}
+
+	static int64_t StringToInt64(const std::string& str)
+	{
+		std::stringstream ss(str);
+		int64_t ret;
 		ss >> ret;
 		return ret;
 	}
