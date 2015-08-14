@@ -16,14 +16,13 @@ NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimDat
 {
 }
 
-void NormalPack::Pack()
+void NormalPack::Pack(int static_size, int max_size, int min_size)
 {
-	Pack(PACK_SQUARE_MULTI_AUTO, -1);
-}
-
-void NormalPack::Pack(int static_size)
-{
-	Pack(PACK_SQUARE_MULTI, static_size);
+	if (static_size <= 0) {
+		Pack(PACK_SQUARE_MULTI_AUTO, -1, max_size, min_size);
+	} else {
+		Pack(PACK_SQUARE_MULTI, static_size);
+	}
 }
 
 void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file) const
@@ -200,7 +199,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 	}
 }
 
-void NormalPack::Pack(PACK_STRATEGY strategy, int static_size)
+void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int min_size)
 {
 	for (int i = 0, n = m_filepaths.size(); i < n; ++i) {
 		const std::string& path = m_filepaths[i];		
@@ -228,7 +227,7 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size)
 	}
 
 	MaxRectsBinaryPack2 packer;
-	packer.Pack(strategy, static_size, m_src_sizes, m_dst_pos);
+	packer.Pack(strategy, static_size, max_size, min_size, m_src_sizes, m_dst_pos);
 	packer.GetSize(m_dst_img_sz);
 
 	m_dst_img_idx.resize(m_dst_img_sz.size());

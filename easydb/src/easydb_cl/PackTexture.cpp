@@ -69,7 +69,10 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	}
 
 	libpacker::NormalPack tex_packer(images, trim);
-	tex_packer.Pack(value["static size"].asInt());
+	int static_size = value["static size"].asInt(),
+		max_size = value["max size"].asInt(),
+		min_size = value["min size"].asInt();
+	tex_packer.Pack(static_size, max_size, min_size);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");
 

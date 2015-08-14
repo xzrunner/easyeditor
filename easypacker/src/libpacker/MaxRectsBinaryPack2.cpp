@@ -24,8 +24,8 @@ void MaxRectsBinaryPack2::GetSize(std::vector<RectSize>& sizes) const
 	}
 }
 
-void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, int static_size,
-							   const std::vector<RectSize>& rects, std::vector<Rect>& output)
+void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, int static_size, int max_size,
+							   int min_size, const std::vector<RectSize>& rects, std::vector<Rect>& output)
 {
 	if (rects.empty()) {
 		return;
@@ -61,7 +61,7 @@ void MaxRectsBinaryPack2::Pack(PACK_STRATEGY strategy, int static_size,
 		PackSquareMulti(sprites, static_size);
 		break;
 	case PACK_SQUARE_MULTI_AUTO:
-		PackSquareMultiAuto(sprites, area);
+		PackSquareMultiAuto(sprites, area, max_size, min_size);
 		break;
 	default:
 		output.clear();
@@ -219,7 +219,8 @@ void MaxRectsBinaryPack2::PackSquareMulti(std::vector<Sprite>& sprites, int stat
 	}
 }
 
-void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int area)
+void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int area,
+											  int max_size, int min_size)
 {
 	static const float AREA_SCALE_LIMIT = 0.8f;
 	static const float AREA_SCALE_LIMIT_STEP = 0.05f;
@@ -230,7 +231,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 
 	float area_scale_limit = AREA_SCALE_LIMIT;
 
-	int edge = next_p2((int)ceil(sqrt((float)area)));
+	int edge = std::max(std::min(next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 
 	std::vector<Sprite> curr_list = sprites;
 
@@ -259,7 +260,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 		int left_area = edge*edge - used_area;
 		if (success_list.empty() || used_area_rate < fail_scale)
 		{
-			edge = edge * 2;
+			edge = std::max(edge * 2, max_size);
 			delete root;
 		}
 		else if (used_area_rate > area_scale_limit || edge < EDGE_LIMIT/* || left_area < LEFT_AREA_LIMIT*/) 
@@ -268,7 +269,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 			area_scale_limit = std::min(area_scale_limit * (1 + AREA_SCALE_LIMIT_STEP), AREA_SCALE_LIMIT);
 			curr_list = fail_list;
 			area = area - used_area;
-			edge = next_p2((int)ceil(sqrt((float)area)));
+			edge = std::max(std::min(next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 			m_roots.push_back(root);
 			++curr_tex;
 		} 
@@ -276,23 +277,29 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 		{
 			fail_scale = used_area_rate;
 			area_scale_limit *= (1 - AREA_SCALE_LIMIT_STEP);
-			edge = edge / 2;
+			edge = std::max(edge / 2, min_size);
 			delete root;
 		}
 	}
 
-	MergeSquareMultiAuto(sprites);
+	MergeSquareMultiAuto(sprites, max_size);
 }
 
-bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites)
+bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites, int max_size)
 {
 	std::vector<int> ids;
 	int count = 0;
 	for (int i = 0, n = m_roots.size(); i < n; ++i) {
 		d2d::TPNode* n0 = m_roots[i];
+		if (n0->GetWidth() * 2 >= max_size || n0->GetHeight() * 2 >= max_size) {
+			continue;
+		}
 		ids.push_back(i);
 		for (int j = 0, m = m_roots.size(); j < m; ++j) {
 			d2d::TPNode* n1 = m_roots[j];
+			if (n1->GetWidth() * 2 >= max_size || n1->GetHeight() * 2 >= max_size) {
+				continue;
+			}
 			if (j != i && n0->GetWidth() == n1->GetWidth() && n0->GetHeight() == n1->GetHeight()) {
 				ids.push_back(j);
 			}
@@ -348,7 +355,7 @@ bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites)
 		delete remove_nodes[i];
 	}
 	
-	MergeSquareMultiAuto(sprites);
+	MergeSquareMultiAuto(sprites, max_size);
 	return true;
 }
 

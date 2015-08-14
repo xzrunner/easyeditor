@@ -18,7 +18,7 @@ public:
 
 	void GetSize(std::vector<RectSize>& sizes) const;
 
-	void Pack(PACK_STRATEGY strategy, int static_size, 
+	void Pack(PACK_STRATEGY strategy, int static_size, int max_size, int min_size, 
 		const std::vector<RectSize>& rects, std::vector<Rect>& output);
 
 private:
@@ -33,8 +33,8 @@ private:
 
 	void PackSquareMulti(std::vector<Sprite>& sprites, int static_size);
 
-	void PackSquareMultiAuto(std::vector<Sprite>& sprites, int area);
-	bool MergeSquareMultiAuto(std::vector<Sprite>& sprites);
+	void PackSquareMultiAuto(std::vector<Sprite>& sprites, int area, int max_size, int min_size);
+	bool MergeSquareMultiAuto(std::vector<Sprite>& sprites, int max_size);
 	void SortRoots(const std::vector<Sprite>& sprites);
 
 private:
