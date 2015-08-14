@@ -50,6 +50,7 @@
 #include "RectCutWithJson.h"
 #include "LRExpansion.h"
 #include "ImageVerticalFlip.h"
+#include "PackLuaDescFile.h"
 
 namespace edb
 {
@@ -105,6 +106,7 @@ void CommandLoader::Init()
 	fc->Register(RectCutWithJson::Create());
 	fc->Register(LRExpansion::Create());
 	fc->Register(ImageVerticalFlip::Create());
+	fc->Register(PackLuaDescFile::Create());
 }
 
 }
