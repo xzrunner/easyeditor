@@ -60,20 +60,16 @@ void LoadFromDir(const std::string& dir)
 	std::set<std::string> files_sorted;
 	LoadAllFilesSorted(dir, files_sorted);
 
-	try {
-		std::set<std::string>::iterator itr = files_sorted.begin();
-		for ( ; itr != files_sorted.end(); ++itr) 
+	std::set<std::string>::iterator itr = files_sorted.begin();
+	for ( ; itr != files_sorted.end(); ++itr) 
+	{
+		if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
+			|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
 		{
-			if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
-				|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
-			{
-				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
-				SYMBOLS.push_back(symbol);
-			}
+			// todo release symbol
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
+			SYMBOLS.push_back(symbol);
 		}
-	} catch (d2d::Exception& e) {
-		std::cerr << e.what() << std::endl;
 	}
 }
 
@@ -124,25 +120,21 @@ void LoadFromList(const std::string& list)
 	std::set<std::string> files_sorted;
 	LoadAllFilesSorted(dir.ToStdString(), files_sorted);
 
-	try {
-		std::set<std::string>::iterator itr = files_sorted.begin();
-		for ( ; itr != files_sorted.end(); ++itr) 
+	std::set<std::string>::iterator itr = files_sorted.begin();
+	for ( ; itr != files_sorted.end(); ++itr) 
+	{
+		if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
+			|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
 		{
-			if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
-				|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
-			{
-				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
-				std::set<std::string>::iterator itr = names.find(symbol->name);
-				if (itr == names.end()) {
+			// todo release symbol
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
+			std::set<std::string>::iterator itr = names.find(symbol->name);
+			if (itr == names.end()) {
 //					symbol->release();
-				} else {
-					SYMBOLS.push_back(symbol);
-				}
+			} else {
+				SYMBOLS.push_back(symbol);
 			}
 		}
-	} catch (d2d::Exception& e) {
-		std::cerr << e.what() << std::endl;
 	}
 }
 
@@ -244,21 +236,20 @@ int main(int argc, char *argv[])
 		is_dir = true;
 	}
 
-	std::cout << "Load json data \n";
-	if (is_dir) {
-		LoadFromDir(path);
-	} else {
-		LoadFromList(path);
-	}
-
-	std::cout << "Load tp data \n";
-
-	std::string tp_dir = argv[3];
-	TEX_MGR.SetSrcDataDir(tp_dir);
-
-	LoadTexturePacker(tp_path);
-
 	try {
+		std::cout << "Load json data \n";
+		if (is_dir) {
+			LoadFromDir(path);
+		} else {
+			LoadFromList(path);
+		}
+
+		std::cout << "Load tp data \n";
+
+		std::string tp_dir = argv[3];
+		TEX_MGR.SetSrcDataDir(tp_dir);
+
+		LoadTexturePacker(tp_path);
 		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR);
 		packer.Parser();
 		packer.Output(argv[4]);
