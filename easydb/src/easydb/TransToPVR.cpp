@@ -20,7 +20,7 @@ std::string TransToPVR::Description() const
 
 std::string TransToPVR::Usage() const
 {
-	return Command() + " [dir path]";
+	return Command() + " [path]";
 }
 
 void TransToPVR::Run(int argc, char *argv[])
@@ -28,24 +28,33 @@ void TransToPVR::Run(int argc, char *argv[])
 	// trans2pvr e:/test2/1001
 
 	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
 
 	Trigger(argv[2]);
 }
 
-void TransToPVR::Trigger(const std::string& dir)
+void TransToPVR::Trigger(const std::string& path)
 {
-	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
-	for (int i = 0, n = files.size(); i < n; ++i)
+	if (d2d::FilenameTools::IsDirExist(path)) 
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+		wxArrayString files;
+		d2d::FilenameTools::fetchAllFiles(path, files);
+		for (int i = 0, n = files.size(); i < n; ++i)
 		{
-			std::cout << i << " / " << n << " : " << filepath << "\n";
-			EncodeByPvrTexTool(filepath);
+			wxFileName filename(files[i]);
+			filename.Normalize();
+			std::string filepath = filename.GetFullPath();
+			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+			{
+				std::cout << i << " / " << n << " : " << filepath << "\n";
+				EncodeByPvrTexTool(filepath);
+			}
+		}
+
+	} 
+	else if (d2d::FilenameTools::IsFileExist(path))
+	{
+		if (d2d::FileNameParser::isType(path, d2d::FileNameParser::e_image)) {
+			EncodeByPvrTexTool(path);
 		}
 	}
 }

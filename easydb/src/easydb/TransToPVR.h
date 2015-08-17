@@ -22,7 +22,7 @@ public:
 	static ICommand* Create() { return new TransToPVR(); }
 
 private:
-	void Trigger(const std::string& dir);
+	void Trigger(const std::string& path);
 
 	void EncodeByDtexPvr(const std::string& filepath) const;
 	void EncodeByPvrTexTool(const std::string& filepath) const;
