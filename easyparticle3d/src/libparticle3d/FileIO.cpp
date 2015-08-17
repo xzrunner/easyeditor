@@ -8,7 +8,7 @@
 namespace eparticle3d
 {
 
-void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
+void FileIO::Store(const char* filepath, ToolbarPanel* toolbar)
 {
 	Json::Value value;
 
@@ -33,12 +33,13 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ToolbarPanel::ChildPanel* cp = toolbar->m_children[i];
-		ParticleChild* pc = cp->m_pc;
+		particle_symbol* pc = cp->m_pc;
+
 		value["components"][i]["filepath"] = 
 			d2d::FilenameTools::getRelativePath(dir, pc->symbol->GetFilepath()).ToStdString();
 		if (pc->bind_ps) {
 			value["components"][i]["bind ps filepath"] = 
-				d2d::FilenameTools::getRelativePath(dir, pc->bind_ps->filepath).ToStdString();
+				d2d::FilenameTools::getRelativePath(dir, pc->bind_ps->m_filepath).ToStdString();
 		}
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		value["components"][i]["start_z"] = cp->m_startz->GetValue();
@@ -47,14 +48,14 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 		}
 
 		Json::Value col_val;
-		col_val["r"] = pc->mul_col.r;
-		col_val["g"] = pc->mul_col.g;
-		col_val["b"] = pc->mul_col.b;
+		col_val["r"] = pc->col_mul.r;
+		col_val["g"] = pc->col_mul.g;
+		col_val["b"] = pc->col_mul.b;
 		value["components"][i]["mul_col"] = col_val;
 
-		col_val["r"] = pc->add_col.r;
-		col_val["g"] = pc->add_col.g;
-		col_val["b"] = pc->add_col.b;
+		col_val["r"] = pc->col_add.r;
+		col_val["g"] = pc->col_add.g;
+		col_val["b"] = pc->col_add.b;
 		value["components"][i]["add_col"] = col_val;
 	}
 
@@ -66,7 +67,7 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 	fout.close();
 }
 
-void FileIO::load(const char* filepath, ParticleSystem* ps,
+void FileIO::Load(const char* filepath, ParticleSystem* ps,
 				  ToolbarPanel* toolbar)
 {
 	Json::Value value;
@@ -104,22 +105,22 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 	toolbar->m_layer->SetValue(adapter.layer);
 	toolbar->m_min_hori->SetValue(adapter.min_hori);
 	toolbar->m_max_hori->SetValue(adapter.max_hori);
-	ps->setHori(adapter.min_hori, adapter.max_hori);
+	ps->SetHori(adapter.min_hori, adapter.max_hori);
 	toolbar->m_min_vert->SetValue(adapter.min_vert);
 	toolbar->m_max_vert->SetValue(adapter.max_vert);
-	ps->setVert(adapter.min_vert, adapter.max_vert);
+	ps->SetVert(adapter.min_vert, adapter.max_vert);
 	toolbar->m_inertia->SetValue(adapter.inertia);
 	toolbar->m_bounce->SetValue(adapter.bounce);
-	ps->setBounce(adapter.bounce);
+	ps->SetBounce(adapter.bounce);
 	toolbar->m_additiveBlend->SetValue(adapter.additive_blend);
-	ps->setAdditiveBlend(adapter.additive_blend);
+	ps->SetAdditiveBlend(adapter.additive_blend);
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	ps->SetOrientToMovement(adapter.orient_to_movement);
 	toolbar->m_radius_3d->SetValue(adapter.start_radius_3d);
 	ps->SetRadius3D(adapter.start_radius_3d);
 	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 	for (size_t i = 0, n = adapter.children.size(); i < n; ++i) {
-		toolbar->add(adapter.children[i]);
+		toolbar->Add(adapter.children[i]);
 	}
 }
 
@@ -140,7 +141,7 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
 
-	ps->filepath = filepath;
+	ps->m_filepath = filepath;
 	ps->SetValue(PS_COUNT, d2d::UICallback::Data(adapter.count));
 	ps->SetValue(PS_EMISSION_TIME, d2d::UICallback::Data(adapter.emission_time));
 	ps->SetValue(PS_LIFE_TIME, d2d::UICallback::Data((adapter.min_life + adapter.max_life) * 0.5f, (adapter.max_life - adapter.min_life) * 0.5f));
@@ -153,10 +154,10 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(adapter.fadeout_time));
 	ps->SetValue(PS_START_RADIUS, d2d::UICallback::Data(adapter.start_radius));
 
-	ps->setHori(adapter.min_hori, adapter.max_hori);
-	ps->setVert(adapter.min_vert, adapter.max_vert);
-	ps->setBounce(adapter.bounce);
-	ps->setAdditiveBlend(adapter.additive_blend);
+	ps->SetHori(adapter.min_hori, adapter.max_hori);
+	ps->SetVert(adapter.min_vert, adapter.max_vert);
+	ps->SetBounce(adapter.bounce);
+	ps->SetAdditiveBlend(adapter.additive_blend);
 	ps->SetRadius3D(adapter.start_radius_3d);
 	ps->SetOrientToMovement(adapter.orient_to_movement);
 
@@ -165,21 +166,28 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 		const FileAdapter::Child& child = adapter.children[i];
 
 		// todo Release symbol
-		ParticleChild* pc = new ParticleChild(d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath));
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath);
 
-		pc->start_scale = child.start_scale * 0.01f;
-		pc->end_scale = child.end_scale * 0.01f;
-		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
-		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
-		pc->mul_col = child.mul_col;
-		pc->add_col = child.add_col;
-		pc->start_alpha = child.start_alpha * 0.01f;
-		pc->end_alpha = child.end_alpha * 0.01f;
+		particle_symbol* pc = new particle_symbol;
 
-		ps->addChild(pc);
+		pc->scale_start = child.start_scale * 0.01f;
+		pc->scale_end = child.end_scale * 0.01f;
+		pc->angle = (child.min_rotate + child.max_rotate) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		pc->angle_var = (child.max_rotate - child.min_rotate) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		memcpy(&pc->col_mul.r, &child.mul_col.r, sizeof(pc->col_mul));
+		memcpy(&pc->col_add.r, &child.add_col.r, sizeof(pc->col_add));
+		pc->alpha_start = child.start_alpha * 0.01f;
+		pc->alpha_end = child.end_alpha * 0.01f;
+
+		ps->m_ps->cfg.symbols[ps->m_ps->cfg++] = pc;
 	}
 
 	return ps;
+}
+
+ps_cfg_3d* FileIO::LoadPSConfig(const char* filepath)
+{
+
 }
 
 }

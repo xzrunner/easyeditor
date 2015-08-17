@@ -1,15 +1,17 @@
 #ifndef _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 #define _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 
-#include "FileAdapter.h"
+#include "FileAdapterNew.h"
 
 #include <drag2d.h>
+
+struct ps_color4f;
+struct particle_symbol;
 
 namespace eparticle3d
 {
 
 class StagePanel;
-struct ParticleChild;
 
 class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback
 {
@@ -26,9 +28,9 @@ public:
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void add(const FileAdapter::Child& child);
+	void Add(const FileAdapterNew::Component& comp);
 
-	void initParticle();
+	void InitParticle();
 
 	class ChildPanel;
 	void OnDelChild(ChildPanel* child);
@@ -39,14 +41,14 @@ protected:
 private:
 	void clear();
 
-	void onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
-	void onDelAllChild(wxCommandEvent& event);
+	void OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
+	void OnDelAllChild(wxCommandEvent& event);
 
-	void onSetHori(wxSpinEvent& event);
-	void onSetVert(wxSpinEvent& event);
-	void onSetInertia(wxSpinEvent& event);
-	void onSetBounce(wxCommandEvent& event);
-	void onSetAdditiveBlend(wxCommandEvent& event);
+	void OnSetHori(wxSpinEvent& event);
+	void OnSetVert(wxSpinEvent& event);
+	void OnSetInertia(wxSpinEvent& event);
+	void OnSetBounce(wxCommandEvent& event);
+	void OnSetAdditiveBlend(wxCommandEvent& event);
 	void OnSetOrientToMovement(wxCommandEvent& event);
 	void OnSetRadius3D(wxCommandEvent& event);
 
@@ -54,7 +56,7 @@ private:
 	class ChildPanel : public wxPanel, public d2d::UICallback
 	{
 	public:
-		ChildPanel(wxWindow* parent, ParticleChild* pc, ToolbarPanel* toolbar);
+		ChildPanel(wxWindow* parent, particle_symbol* pc, ToolbarPanel* toolbar);
 
 		//
 		// UICallback interface
@@ -62,8 +64,8 @@ private:
 		virtual void SetValue(int key, const d2d::UICallback::Data& data);
 		virtual void GetValue(int key, d2d::UICallback::Data& data);
 
-		const d2d::Colorf& GetMulColor() const;
-		const d2d::Colorf& GetAddColor() const;
+		const ps_color4f& GetMulColor() const;
+		const ps_color4f& GetAddColor() const;
 
 	private:
 		void InitLayout();
@@ -76,7 +78,7 @@ private:
 		void OnSetAddCol(wxCommandEvent& event);
 
 	private:
-		ParticleChild* m_pc;
+		particle_symbol* m_pc;
 
 		ToolbarPanel* m_toolbar;
 		

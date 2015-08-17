@@ -68,8 +68,8 @@ void Symbol::Draw(const d2d::Matrix& mt,
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
 	m_ps->SetLoop(loop);
-	m_ps->update(dt);
-	m_ps->draw(mt);
+	m_ps->Update(dt);
+	m_ps->Draw(mt);
 
 	m_time = curr;
 }
@@ -82,7 +82,7 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 
 void Symbol::Start() const
 {
-	m_ps->start();
+	m_ps->Start();
 }
 
 void Symbol::LoadResources()

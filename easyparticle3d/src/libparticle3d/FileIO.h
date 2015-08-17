@@ -10,11 +10,13 @@ class ParticleSystem;
 class FileIO
 {
 public:
-	static void store(const char* filepath, ToolbarPanel* toolbar);
-	static void load(const char* filepath, ParticleSystem* ps,
+	static void Store(const char* filepath, ToolbarPanel* toolbar);
+	static void Load(const char* filepath, ParticleSystem* ps,
 		ToolbarPanel* toolbar);
 
 	static ParticleSystem* LoadPS(const char* filepath);
+
+	static ps_cfg_3d* LoadPSConfig(const char* filepath);
 
 }; // FileIO
 

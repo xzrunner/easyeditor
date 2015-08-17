@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\external;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -51,6 +51,7 @@
 				ProgramDataBaseFileName="..\libparticle3d\x86\Debug\libparticle3d.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
+				CompileAs="0"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -107,7 +108,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\external;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\..\easyscale9\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -217,6 +218,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libparticle3d\FileAdapterNew.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libparticle3d\FileIO.cpp"
 				>
 			</File>
@@ -321,8 +326,32 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="external"
+			>
+			<File
+				RelativePath="..\..\..\external\ps\particle3d.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\ps\particle3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\ps\utility.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\ps\utility.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libparticle3d\config.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libparticle3d\FileAdapterNew.cpp"
 			>
 		</File>
 	</Files>

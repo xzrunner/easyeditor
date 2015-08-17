@@ -6,6 +6,8 @@
 #include "ps_config.h"
 #include "item_string.h"
 
+#include <ps/particle3d.h>
+
 #include <easyanim.h>
 
 namespace eparticle3d
@@ -46,7 +48,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 {
 	SetScrollbars(1,1, 200, 100, 0, 0);
 	SetSizer(initLayout());	
-	initParticle();
+	InitParticle();
 
 	SetDropTarget(new DropTarget(library, stage, this));
 }
@@ -80,22 +82,23 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-void ToolbarPanel::add(const FileAdapter::Child& child)
+void ToolbarPanel::Add(const FileAdapterNew::Component& comp)
 {
 	// todo Release symbol
-	ParticleChild* pc = new ParticleChild(d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath));
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
+	particle_symbol* pc = new particle_symbol;
 	ChildPanel* cp = new ChildPanel(this, pc, this);
 
-	cp->m_name->SetValue(child.name);
-	cp->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
-	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(child.min_rotate, child.max_rotate));
-	pc->mul_col = child.mul_col;
-	pc->add_col = child.add_col;
-	cp->SetValue(PS_ALPHA, d2d::UICallback::Data(child.start_alpha, child.end_alpha));
+	cp->m_name->SetValue(comp.name);
+	cp->SetValue(PS_SCALE, d2d::UICallback::Data(comp.scale_start, comp.scale_end));
+	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(comp.angle, comp.angle_var));
+	memcpy(&pc->col_mul.r, &comp.col_mul.r, sizeof(pc->col_mul));
+	memcpy(&pc->col_add.r, &comp.col_add.r, sizeof(pc->col_add));
+	cp->SetValue(PS_ALPHA, d2d::UICallback::Data(comp.alpha_start, comp.alpha_end));
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();
 	}
-	cp->m_startz->SetValue(child.start_z);
+	cp->m_startz->SetValue(comp.start_z);
 
 	if (!child.bind_filepath.empty()) {
 		pc->bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
@@ -171,7 +174,7 @@ wxSizer* ToolbarPanel::initLayout()
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));	
 
 			m_min_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MIN_HORI);
-			Connect(m_min_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetHori));
+			Connect(m_min_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetHori));
 			sizer->Add(m_min_hori);
 
 			horiSizer->Add(sizer);
@@ -182,7 +185,7 @@ wxSizer* ToolbarPanel::initLayout()
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));	
 
 			m_max_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MAX_HORI);
-			Connect(m_max_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetHori));
+			Connect(m_max_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetHori));
 			sizer->Add(m_max_hori);
 
 			horiSizer->Add(sizer);
@@ -199,7 +202,7 @@ wxSizer* ToolbarPanel::initLayout()
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
 			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MIN_VERT);
-			Connect(m_min_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetVert));
+			Connect(m_min_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
 			sizer->Add(m_min_vert);
 
 			vertSizer->Add(sizer);
@@ -210,7 +213,7 @@ wxSizer* ToolbarPanel::initLayout()
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));	
 
 			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MAX_VERT);
-			Connect(m_max_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetVert));
+			Connect(m_max_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
 			sizer->Add(m_max_vert);
 
 			vertSizer->Add(sizer);
@@ -266,7 +269,7 @@ wxSizer* ToolbarPanel::initLayout()
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Inertia ")));
 
 		m_inertia = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 1000, INERTIA);
-		Connect(m_inertia->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetInertia));
+		Connect(m_inertia->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetInertia));
 		sizer->Add(m_inertia);
 
 		leftSizer->Add(sizer);
@@ -281,14 +284,14 @@ wxSizer* ToolbarPanel::initLayout()
 	// Bounce
 	{
 		m_bounce = new wxCheckBox(this, wxID_ANY, wxT("Bounce"));
-		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetBounce));
+		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetBounce));
 		leftSizer->Add(m_bounce);
 	}
 	leftSizer->AddSpacer(10);
 	// AdditiveBlend
 	{
 		m_additiveBlend = new wxCheckBox(this, wxID_ANY, wxT("Additive Blend"));
-		Connect(m_additiveBlend->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetAdditiveBlend));
+		Connect(m_additiveBlend->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetAdditiveBlend));
 		leftSizer->Add(m_additiveBlend);
 	}
 	leftSizer->AddSpacer(10);
@@ -328,7 +331,7 @@ wxSizer* ToolbarPanel::initLayout()
  	{
 		// Open
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Remove All"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelAllChild));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::OnDelAllChild));
 		rightSizer->Add(btn);
 		rightSizer->AddSpacer(10);
 
@@ -340,21 +343,21 @@ wxSizer* ToolbarPanel::initLayout()
 	return topSizer;
 }
 
-void ToolbarPanel::initParticle()
+void ToolbarPanel::InitParticle()
 {
 	clear();
 
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
-	ps->start();
+	ps->Start();
 	m_stage->m_ps = ps;
 
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}
 
-	ps->setHori(m_min_hori->GetValue(), m_max_hori->GetValue());
-	ps->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
-	ps->setInertia(m_inertia->GetValue());
+	ps->SetHori(m_min_hori->GetValue(), m_max_hori->GetValue());
+	ps->SetVert(m_min_vert->GetValue(), m_max_vert->GetValue());
+	ps->SetInertia(m_inertia->GetValue());
 }
 
 void ToolbarPanel::OnDelChild(ToolbarPanel::ChildPanel* child)
@@ -384,10 +387,10 @@ void ToolbarPanel::OnDelChild(ToolbarPanel::ChildPanel* child)
 
 void ToolbarPanel::clear()
 {
-	onDelAllChild(wxCommandEvent());
+	OnDelAllChild(wxCommandEvent());
 }
 
-void ToolbarPanel::onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
+void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 {
 	ParticleChild* pc = new ParticleChild(symbol);
 	ChildPanel* cp = new ChildPanel(this, pc, this);
@@ -402,7 +405,7 @@ void ToolbarPanel::onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 //	m_parent->Refresh();
 }
 
-void ToolbarPanel::onDelAllChild(wxCommandEvent& event)
+void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
 {
 	if (m_children.empty()) {
 		return;
@@ -423,29 +426,29 @@ void ToolbarPanel::onDelAllChild(wxCommandEvent& event)
 	this->Layout();
 }
 
-void ToolbarPanel::onSetHori(wxSpinEvent& event)
+void ToolbarPanel::OnSetHori(wxSpinEvent& event)
 {
-	m_stage->m_ps->setHori(m_min_hori->GetValue(), m_max_hori->GetValue());
+	m_stage->m_ps->SetHori(m_min_hori->GetValue(), m_max_hori->GetValue());
 }
 
-void ToolbarPanel::onSetVert(wxSpinEvent& event)
+void ToolbarPanel::OnSetVert(wxSpinEvent& event)
 {
-	m_stage->m_ps->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
+	m_stage->m_ps->SetVert(m_min_vert->GetValue(), m_max_vert->GetValue());
 }
 
-void ToolbarPanel::onSetInertia(wxSpinEvent& event)
+void ToolbarPanel::OnSetInertia(wxSpinEvent& event)
 {
-	m_stage->m_ps->setInertia(m_inertia->GetValue());
+	m_stage->m_ps->SetInertia(m_inertia->GetValue());
 }
 
-void ToolbarPanel::onSetBounce(wxCommandEvent& event)
+void ToolbarPanel::OnSetBounce(wxCommandEvent& event)
 {
-	m_stage->m_ps->setBounce(event.IsChecked());
+	m_stage->m_ps->SetBounce(event.IsChecked());
 }
 
-void ToolbarPanel::onSetAdditiveBlend(wxCommandEvent& event)
+void ToolbarPanel::OnSetAdditiveBlend(wxCommandEvent& event)
 {
-	m_stage->m_ps->setAdditiveBlend(event.IsChecked());
+	m_stage->m_ps->SetAdditiveBlend(event.IsChecked());
 }
 
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
@@ -463,7 +466,7 @@ void ToolbarPanel::OnSetRadius3D(wxCommandEvent& event)
 //////////////////////////////////////////////////////////////////////////
 
 ToolbarPanel::ChildPanel::
-ChildPanel(wxWindow* parent, ParticleChild* pc, ToolbarPanel* toolbar)
+ChildPanel(wxWindow* parent, particle_symbol* pc, ToolbarPanel* toolbar)
 	: wxPanel(parent)
 	, m_pc(pc)
 	, m_toolbar(toolbar)
@@ -480,16 +483,16 @@ SetValue(int key, const d2d::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_SCALE:
-		m_pc->start_scale = data.val0 * 0.01f;
-		m_pc->end_scale = data.val1 * 0.01f;
+		m_pc->scale_start = data.val0 * 0.01f;
+		m_pc->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ROTATE:
-		m_pc->min_rotate = data.val0 * d2d::TRANS_DEG_TO_RAD;
-		m_pc->max_rotate = data.val1 * d2d::TRANS_DEG_TO_RAD;
+		m_pc->angle = data.val0 * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		m_pc->angle_var = data.val1 * 0.5f * d2d::TRANS_DEG_TO_RAD;
 		break;
 	case PS_ALPHA:
-		m_pc->start_alpha = data.val0 * 0.01f;
-		m_pc->end_alpha = data.val1 * 0.01f;
+		m_pc->alpha_start = data.val0 * 0.01f;
+		m_pc->alpha_end = data.val1 * 0.01f;
 		break;
 	}
 }
@@ -500,30 +503,30 @@ GetValue(int key, d2d::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_SCALE:
-		data.val0 = m_pc->start_scale * 100;
-		data.val1 = m_pc->end_scale * 100;
+		data.val0 = m_pc->scale_start * 100;
+		data.val1 = m_pc->scale_end * 100;
 		break;
 	case PS_ROTATE:
-		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = (m_pc->angle - m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = (m_pc->angle + m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
 		break;
 	case PS_ALPHA:
-		data.val0 = m_pc->start_alpha * 100;
-		data.val1 = m_pc->end_alpha * 100;
+		data.val0 = m_pc->alpha_start * 100;
+		data.val1 = m_pc->alpha_end * 100;
 		break;
 	}
 }
 
-const d2d::Colorf& ToolbarPanel::ChildPanel::
+const ps_color4f& ToolbarPanel::ChildPanel::
 GetMulColor() const
 {
-	return m_pc->mul_col;
+	return m_pc->col_mul;
 }
 
-const d2d::Colorf& ToolbarPanel::ChildPanel::
+const ps_color4f& ToolbarPanel::ChildPanel::
 GetAddColor() const
 {
-	return m_pc->add_col;
+	return m_pc->col_add;
 }
 
 void ToolbarPanel::ChildPanel::
@@ -670,9 +673,9 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	d2d::ISymbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
-		m_toolbar->onAddChild(wxCommandEvent(), symbol);
+		m_toolbar->OnAddChild(wxCommandEvent(), symbol);
 
-		m_stage->m_ps->start();
+		m_stage->m_ps->Start();
 		m_stage->ResetViewport();
 	}
 

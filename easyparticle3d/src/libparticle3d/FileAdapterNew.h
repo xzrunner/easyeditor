@@ -1,0 +1,77 @@
+#ifndef _EASYPARTICLE3D_FILE_ADAPTER_NEW_H_
+#define _EASYPARTICLE3D_FILE_ADAPTER_NEW_H_
+
+#include <drag2d.h>
+
+namespace eparticle3d
+{
+
+class FileAdapterNew
+{
+public:
+	void Load(const std::string& filepath);
+
+private:
+	void LoadComponent(const std::string& dir, const Json::Value& comp_val);
+
+public:
+	struct Component
+	{
+		std::string filepath;
+		std::string bind_filepath;
+
+		std::string name;
+
+		float scale_start, scale_end;
+
+		float angle, angle_var;
+
+		d2d::Colorf col_mul, col_add;
+		float alpha_start, alpha_end;
+
+		float start_z;
+	};
+
+public:
+	std::string name;
+	std::string package;
+
+	int count;
+	int layer;
+	float emission_time;
+
+	float life, life_var;
+
+	float min_hori, max_hori;
+	float min_vert, max_vert;
+
+	float spd, spd_var;
+	float angular_spd, angular_spd_var;
+
+	float dis_region, dis_region_var;
+	float dis_spd, dis_spd_var;
+
+	float gravity;
+
+	float linear_acc, linear_acc_var;
+
+	float inertia;
+
+	float fadeout_time;
+
+	bool bounce;
+
+	bool additive_blend;
+
+	float start_radius;
+	bool start_radius_3d;
+
+	bool orient_to_movement;
+	bool orient_to_parent;
+
+	std::vector<Component> components;
+};
+
+}
+
+#endif // _EASYPARTICLE3D_FILE_ADAPTER_NEW_H_

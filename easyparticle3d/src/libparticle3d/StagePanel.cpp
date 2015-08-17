@@ -37,7 +37,7 @@ bool StagePanel::Update(int version)
 		m_last_time = curr;
 
 		if (m_ps) {
-			m_ps->update((float)dt / CLOCKS_PER_SEC);
+			m_ps->Update((float)dt / CLOCKS_PER_SEC);
 			ret = true;
 		}
 	}
