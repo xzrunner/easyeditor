@@ -49,9 +49,9 @@ ISymbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 		ISymbol* symbol = SymbolFactory::create(fixed_path);
 		if (!symbol) 
 		{
-// 			const char* path = filepath.c_str();
-// 			throw Exception("Create symbol %s fail!", path);
-			return NULL;
+			const char* path = filepath.c_str();
+			throw Exception("Create symbol %s fail!", path);
+//			return NULL;
 		}
 		bool isLoaded = symbol->LoadFromFile(fixed_path);
 		if (isLoaded)
