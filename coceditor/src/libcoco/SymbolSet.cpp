@@ -20,10 +20,11 @@ void SymbolSet::Insert(const d2d::ISymbol* symbol)
 
 const d2d::ISymbol* SymbolSet::Query(const std::string& filepath) const
 {
-	std::multimap<std::string, const d2d::ISymbol*>::const_iterator itr 
-		= m_symbol_map.lower_bound(filepath);
-	if (itr != m_symbol_map.end()) {
-		return itr->second;
+	std::multimap<std::string, const d2d::ISymbol*>::const_iterator 
+		itr_begin = m_symbol_map.lower_bound(filepath),
+		itr_end = m_symbol_map.upper_bound(filepath);
+	if (itr_begin != itr_end) {
+		return itr_begin->second;
 	} else {
 		return NULL;
 	}
@@ -31,10 +32,6 @@ const d2d::ISymbol* SymbolSet::Query(const std::string& filepath) const
 
 bool SymbolSet::Query(const d2d::ISymbol* symbol) const
 {
-	if (d2d::FileNameParser::isType(symbol->GetFilepath(), d2d::FileNameParser::e_image)) {
-		int zz = 0;
-	}
-
 	std::string filepath = d2d::FilenameTools::FormatFilepath(symbol->GetFilepath());
 	std::multimap<std::string, const d2d::ISymbol*>::const_iterator 
 		itr_begin = m_symbol_map.lower_bound(filepath),
