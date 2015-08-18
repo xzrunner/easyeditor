@@ -139,7 +139,8 @@ void TransToETC1::EncodeETC1ByRgEtc1()
 	m_etc1_alpha_pixels = new uint8_t[m_etc1_size];
 
 	rg_etc1::etc1_pack_params params;
-	params.m_quality = rg_etc1::cLowQuality;	
+//	params.m_quality = rg_etc1::cLowQuality;	
+	params.m_quality = rg_etc1::cHighQuality;
 	params.m_dithering = false;
 	// rgb
 	for (int y = 0; y < bh; ++y) {
