@@ -18,7 +18,7 @@ std::string TransToETC1::Description() const
 
 std::string TransToETC1::Usage() const
 {
-	return Command() + " [dir path]";
+	return Command() + " [path]";
 }
 
 void TransToETC1::Run(int argc, char *argv[])
@@ -26,32 +26,41 @@ void TransToETC1::Run(int argc, char *argv[])
 	// trans2etc1 e:/test2/1001
 
 	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
 
 	Trigger(argv[2]);
 }
 
-void TransToETC1::Trigger(const std::string& dir)
+void TransToETC1::Trigger(const std::string& path)
 {
-	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
-	for (int i = 0, n = files.size(); i < n; ++i)
-	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
-		{
+	if (d2d::FilenameTools::IsDirExist(path)) {
+		wxArrayString files;
+		d2d::FilenameTools::fetchAllFiles(path, files);
+		for (int i = 0, n = files.size(); i < n; ++i) {
+			wxFileName filename(files[i]);
+			filename.Normalize();
+			std::string filepath = filename.GetFullPath();
+
 			std::cout << i << " / " << n << " : " << filepath << "\n";
 
-			int w, h, c, f;
-			uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
-			eimage::TransToETC1 trans(pixels, w, h, c);
-//			std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pkm";
-			std::string out_file = filepath.substr(0, filepath.find_last_of('.'));
-			trans.OutputFile(out_file);
+			Format(files[i].ToStdString());
 		}
+	} else if (d2d::FilenameTools::IsFileExist(path)) {
+		Format(path);
 	}
+}
+
+void TransToETC1::Format(const std::string& filepath)
+{
+	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		return;		
+	}
+
+	int w, h, c, f;
+	uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
+	eimage::TransToETC1 trans(pixels, w, h, c);
+	//std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pkm";
+	std::string out_file = filepath.substr(0, filepath.find_last_of('.'));
+	trans.OutputFile(out_file);
 }
 
 }

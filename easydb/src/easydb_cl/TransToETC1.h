@@ -24,7 +24,9 @@ public:
 	static ICommand* Create() { return new TransToETC1(); }
 
 private:
-	void Trigger(const std::string& dir);
+	void Trigger(const std::string& path);
+
+	void Format(const std::string& filepath);
 
 }; // TransToETC1
 
