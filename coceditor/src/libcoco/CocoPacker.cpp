@@ -758,10 +758,26 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 
 	// src
 	d2d::Vector node[4];
-	symbol->GetIcon()->GetTexcoords4(node, process);
-	int left = picture->scr[1].x, bottom = picture->scr[1].y;
-	int width = picture->scr[2].x - left,
-		height = picture->scr[0].y - bottom;
+	symbol->GetIcon()->GetTexcoords4(node, process);	
+	int left = INT_MAX, right = -INT_MAX, bottom = -INT_MAX, top = INT_MAX;
+	for (int i = 0; i < 4; ++i) {
+		int x = picture->scr[i].x,
+			y = picture->scr[i].y;
+		if (x < left) {
+			left = x;
+		}
+		if (x > right) {
+			right = x;
+		}
+		if (y > bottom) {
+			bottom = y;
+		}
+		if (y < top) {
+			top = y;
+		}
+	}
+	int width = right - left,
+		height = top - bottom;
 	std::string sx[4], sy[4];
 	for (int i = 0; i < 4; ++i) {
 		double x = left + width * node[i].x,
