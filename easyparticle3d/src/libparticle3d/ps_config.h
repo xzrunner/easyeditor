@@ -23,6 +23,10 @@ enum PS_PROPERTY
 	PS_ALPHA,
 };
 
+static const int PARTICLE_CAP = 1000;
+
+static const int MAX_COMPONENTS = 256;
+
 }
 
 #endif // _EASYPARTICLE3D_PS_CONFIG_H_

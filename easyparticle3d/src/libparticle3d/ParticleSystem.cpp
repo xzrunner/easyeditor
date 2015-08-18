@@ -23,8 +23,6 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	, m_inv_record(NULL)
 {
 	m_origin = ps.m_origin;
-	m_filepath = ps.m_filepath;
-//	children = ps.children;
 	m_ps = ps_create(PARTICLE_CAP, ps.m_ps->cfg);
 }
 
@@ -220,11 +218,10 @@ bool ParticleSystem::IsEmpty() const
 
 void ParticleSystem::ReloadTexture() const
 {
-// 	for (int i = 0, n = children.size(); i < n; ++i)
-// 	{
-// 		ParticleChild* child = children[i];
-// 		child->symbol->ReloadTexture();
-// 	}
+	for (int i = 0; i < m_ps->cfg->symbol_count; ++i) {
+		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(m_ps->cfg->symbols[i].ud);
+		symbol->ReloadTexture();
+	}
 }
 
 void ParticleSystem::StoreAnimRecord(const std::string& filepath) const
@@ -242,15 +239,15 @@ void ParticleSystem::StoreInvertRecord(const std::string& filepath) const
 }
 
 void ParticleSystem::SetHori(int min, int max) 
-{ 
-	m_ps->cfg->hori = (min + max) * 0.5f;
-	m_ps->cfg->hori_var = (max - min) * 0.5f;
+{
+	m_ps->cfg->hori = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+	m_ps->cfg->hori_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetVert(int min, int max) 
 { 
-	m_ps->cfg->vert = (min + max) * 0.5f;
-	m_ps->cfg->vert_var = (max - min) * 0.5f;
+	m_ps->cfg->vert = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+	m_ps->cfg->vert_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetInertia(int val) 
@@ -276,6 +273,43 @@ void ParticleSystem::SetOrientToMovement(bool open)
 void ParticleSystem::SetRadius3D(bool is3d) 
 { 
 	m_ps->cfg->is_start_radius_3d = is3d;
+}
+
+particle_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
+{
+	assert(m_ps->cfg->count < MAX_COMPONENTS);
+
+	particle_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
+	memset(&comp, 0, sizeof(particle_symbol));
+
+	comp.scale_start = comp.scale_end = 1;
+
+	comp.col_mul.r = comp.col_mul.g = comp.col_mul.b = comp.col_mul.a = 1;
+	comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
+
+	comp.alpha_start = comp.alpha_end = 1;
+
+	comp.ud = symbol;
+
+	return &comp;
+}
+
+void ParticleSystem::DelSymbol(int idx)
+{
+	if (idx < 0 || idx >= m_ps->cfg->count) {
+		return;
+	}
+
+	if (m_ps->cfg->count == 1) {
+		m_ps->cfg->count = 0;
+	} else {
+		m_ps->cfg->symbols[idx] = m_ps->cfg->symbols[--m_ps->cfg->count];
+	}
+}
+
+void ParticleSystem::DelAllSymbol()
+{
+	m_ps->cfg->symbol_count = 0;
 }
 
 void ParticleSystem::Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder) const

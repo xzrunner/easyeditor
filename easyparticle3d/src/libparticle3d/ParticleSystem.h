@@ -6,6 +6,7 @@
 
 struct particle_system_3d;
 struct ps_cfg_3d;
+struct particle_symbol;
 
 namespace eparticle3d
 {
@@ -63,21 +64,9 @@ public:
 	void SetOrientToMovement(bool open);
 	void SetRadius3D(bool is3d);
 
-// 	void addChild(ParticleChild* child) { 
-// 		children.push_back(child); 
-// 	}
-// 	void delChild(int idx) { 
-// 		if (idx >= 0 && idx < children.size()) {
-// 			delete children[idx];
-// 			children.erase(children.begin() + idx);
-// 		}
-// 	}
-// 	void delAllChild() { 
-// 		for (int i = 0, n = children.size(); i < n; ++i) {
-// 			delete children[i];
-// 		}
-// 		children.clear();
-// 	}
+	particle_symbol* AddSymbol(d2d::ISymbol* symbol);
+	void DelSymbol(int idx);
+	void DelAllSymbol();
 
 private:
 	void Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
@@ -90,11 +79,6 @@ public:
 	d2d::Vector m_origin;
 
 private:
-	// todo
-	std::string m_filepath;
-
-//	std::vector<ParticleChild*> children;
-
 	particle_system_3d* m_ps;
 
 }; // ParticleSystem

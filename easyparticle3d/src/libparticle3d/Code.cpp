@@ -2,6 +2,8 @@
 #include "ToolBarPanel.h"
 #include "ps_config.h"
 
+#include <ps/particle3d.h>
+
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;

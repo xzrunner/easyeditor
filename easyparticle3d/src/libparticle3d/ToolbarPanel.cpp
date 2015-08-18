@@ -5,6 +5,7 @@
 #include "config.h"
 #include "ps_config.h"
 #include "item_string.h"
+#include "PSConfigMgr.h"
 
 #include <ps/particle3d.h>
 
@@ -82,7 +83,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-void ToolbarPanel::Add(const FileAdapterNew::Component& comp)
+void ToolbarPanel::Add(const FileAdapter::Component& comp)
 {
 	// todo Release symbol
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
@@ -90,23 +91,26 @@ void ToolbarPanel::Add(const FileAdapterNew::Component& comp)
 	ChildPanel* cp = new ChildPanel(this, pc, this);
 
 	cp->m_name->SetValue(comp.name);
+
 	cp->SetValue(PS_SCALE, d2d::UICallback::Data(comp.scale_start, comp.scale_end));
+
 	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(comp.angle, comp.angle_var));
+
 	memcpy(&pc->col_mul.r, &comp.col_mul.r, sizeof(pc->col_mul));
 	memcpy(&pc->col_add.r, &comp.col_add.r, sizeof(pc->col_add));
 	cp->SetValue(PS_ALPHA, d2d::UICallback::Data(comp.alpha_start, comp.alpha_end));
+
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();
 	}
 	cp->m_startz->SetValue(comp.start_z);
 
-	if (!child.bind_filepath.empty()) {
-		pc->bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
+	if (!comp.bind_filepath.empty()) {
+		pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);
 	}
 
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
-	m_stage->m_ps->addChild(pc);
 
 	this->Layout();
 }
@@ -347,10 +351,10 @@ void ToolbarPanel::InitParticle()
 {
 	clear();
 
-	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
-	ps->Start();
+	ps_cfg_3d* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
+	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP, cfg);
+//	ps->Start();
 	m_stage->m_ps = ps;
-
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}
@@ -380,7 +384,8 @@ void ToolbarPanel::OnDelChild(ToolbarPanel::ChildPanel* child)
 	m_compSizer->Detach(idx);
 	delete m_children[idx];
 	m_children.erase(m_children.begin() + idx);
-	m_stage->m_ps->delChild(idx);
+
+	m_stage->m_ps->DelSymbol(idx);
 
 	this->Layout();	
 }
@@ -392,17 +397,11 @@ void ToolbarPanel::clear()
 
 void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 {
-	ParticleChild* pc = new ParticleChild(symbol);
-	ChildPanel* cp = new ChildPanel(this, pc, this);
+	particle_symbol* ps = m_stage->m_ps->AddSymbol(symbol);
+	ChildPanel* cp = new ChildPanel(this, ps, this);
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
-	m_stage->m_ps->addChild(pc);
-
-// 	this->Fit();
-//	m_parent->Fit();
 	this->Layout();
-//	m_parent->Layout();
-//	m_parent->Refresh();
 }
 
 void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
@@ -420,7 +419,7 @@ void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
 	m_children.clear();
 
 	if (m_stage->m_ps) {
-		m_stage->m_ps->delAllChild();
+		m_stage->m_ps->DelAllSymbol();
 	}
 
 	this->Layout();
@@ -550,7 +549,8 @@ InitLayout()
 	topSizer->AddSpacer(10);
 	// Icon
 	{
-		d2d::ImagePanel* panel = new d2d::ImagePanel(this, m_pc->symbol->GetFilepath(), 100, 100);
+		std::string filepath = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
+		d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100, 100);
 		topSizer->Add(panel);
 	}
 	topSizer->AddSpacer(10);
@@ -612,7 +612,7 @@ OnBindPS(wxCommandEvent& event)
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_pc->bind_ps = FileIO::LoadPS(dlg.GetPath());
+		m_pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(dlg.GetPath().ToStdString());
 
 // 		if (m_canvas) {
 // 			m_canvas->ResetViewport();
@@ -623,29 +623,31 @@ OnBindPS(wxCommandEvent& event)
 void ToolbarPanel::ChildPanel::
 OnSetMultiCol(wxCommandEvent& event)
 {
-	d2d::RGBColorSettingDlg dlg(this, NULL, m_pc->mul_col);
+	d2d::Colorf col;
+	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
+
+	d2d::RGBColorSettingDlg dlg(this, NULL, col);
 	if (!dlg.ShowModal()) {
 		return;
 	}
 	
-	m_pc->mul_col = dlg.GetColor();
-
-	//wxSize sz = m_multi_col_btn->GetSize();
-	//wxImage img(sz.GetWidth(), sz.GetHeight());
-	//img.SetRGB(sz, col.r * 255, col.g * 255, col.b * 255);
-	//wxBitmap bitmap(img);
-	//m_multi_col_btn->SetBitmap(bitmap);
+	col = dlg.GetColor();
+	memcpy(&m_pc->col_mul.r, &col.r, sizeof(m_pc->col_mul));
 }
 
 void ToolbarPanel::ChildPanel::
 OnSetAddCol(wxCommandEvent& event)
 {
-	d2d::RGBColorSettingDlg dlg(this, NULL, m_pc->add_col);
+	d2d::Colorf col;
+	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
+
+	d2d::RGBColorSettingDlg dlg(this, NULL, col);
 	if (!dlg.ShowModal()) {
 		return;
 	}
 
-	m_pc->add_col = dlg.GetColor();
+	col = dlg.GetColor();
+	memcpy(&m_pc->col_add.r, &col.r, sizeof(m_pc->col_add));
 }
 
 //////////////////////////////////////////////////////////////////////////

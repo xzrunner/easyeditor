@@ -19,12 +19,12 @@ SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* nam
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, item_a.title, wxDefaultPosition, wxSize(40, -1)));
 
-		m_item_a.slider = new wxSlider(this, wxID_ANY, item_a.default, item_a.min, item_a.max, 
+		m_item_a.slider = new wxSlider(this, wxID_ANY, item_a.val, item_a.min, item_a.max, 
 			wxDefaultPosition, wxSize(160, -1));
 		Connect(m_item_a.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_a.slider);
 
-		m_item_a.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item_a.default), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+		m_item_a.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item_a.val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 		Connect(m_item_a.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_a.text);
 
@@ -36,12 +36,12 @@ SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* nam
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, item_b.title, wxDefaultPosition, wxSize(40, -1)));
 
-		m_item_b.slider = new wxSlider(this, wxID_ANY, item_b.default, item_b.min, item_b.max, 
+		m_item_b.slider = new wxSlider(this, wxID_ANY, item_b.val, item_b.min, item_b.max, 
 			wxDefaultPosition, wxSize(160, -1));
 		Connect(m_item_b.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_b.slider);
 
-		m_item_b.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item_b.default), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+		m_item_b.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item_b.val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 		Connect(m_item_b.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlTwo::OnSetValue));
 		sizer->Add(m_item_b.text);
 
@@ -56,7 +56,7 @@ void SliderCtrlTwo::Update()
 {
 	OnSetValue(wxScrollEvent());
 }
-
+	
 void SliderCtrlTwo::Load(const Json::Value& val, int version)
 {
 	int ivala, ivalb;
@@ -97,6 +97,7 @@ void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
 {
 	int ivala = m_item_a.slider->GetValue(),
 		ivalb = m_item_b.slider->GetValue();
+
 	float fvala = ivala * m_scale_slider2text,
 		  fvalb = ivalb * m_scale_slider2text;
 	m_item_a.text->SetValue(wxString::FromDouble(fvala));

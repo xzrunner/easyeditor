@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 #define _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 
-#include "FileAdapterNew.h"
+#include "FileAdapter.h"
 
 #include <drag2d.h>
 
@@ -28,7 +28,7 @@ public:
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void Add(const FileAdapterNew::Component& comp);
+	void Add(const FileAdapter::Component& comp);
 
 	void InitParticle();
 
