@@ -23,6 +23,8 @@ public:
 
 		int tex;
 
+		bool rotated;
+
 		// 0 3
 		// 1 2
 		d2d::Vector scr[4];

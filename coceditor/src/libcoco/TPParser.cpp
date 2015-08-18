@@ -68,6 +68,8 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		picture->invscale = adapter.GetInvScale();
 		picture->tex = idx;
 
+		picture->rotated = entry.rotated;
+
 		float left, right, up, down;
 		if (entry.rotated)
 		{

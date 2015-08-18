@@ -758,30 +758,29 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 
 	// src
 	d2d::Vector node[4];
-	symbol->GetIcon()->GetTexcoords4(node, process);	
-	int left = INT_MAX, right = -INT_MAX, bottom = -INT_MAX, top = INT_MAX;
-	for (int i = 0; i < 4; ++i) {
-		int x = picture->scr[i].x,
-			y = picture->scr[i].y;
-		if (x < left) {
-			left = x;
-		}
-		if (x > right) {
-			right = x;
-		}
-		if (y > bottom) {
-			bottom = y;
-		}
-		if (y < top) {
-			top = y;
-		}
+	symbol->GetIcon()->GetTexcoords4(node, process);
+
+	int left, bottom, width, height;
+	left = picture->scr[1].x;
+	bottom = picture->scr[1].y;
+	if (picture->rotated) {
+		width = picture->scr[2].y - picture->scr[1].y;
+		height = picture->scr[0].x - picture->scr[1].x;
+	} else {
+		width = picture->scr[3].x - picture->scr[1].x;
+		height = picture->scr[0].y - picture->scr[1].y;
 	}
-	int width = right - left,
-		height = top - bottom;
+
 	std::string sx[4], sy[4];
 	for (int i = 0; i < 4; ++i) {
-		double x = left + width * node[i].x,
+		double x, y;
+		if (picture->rotated) {
+			x = left + height * node[i].y;
+			y = bottom + width * node[i].x;
+		} else {
+			x = left + width * node[i].x;
 			y = bottom + height * node[i].y;
+		}
 		sx[i] = wxString::FromDouble(x);
 		sy[i] = wxString::FromDouble(y);
 	}

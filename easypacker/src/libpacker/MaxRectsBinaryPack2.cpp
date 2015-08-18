@@ -260,7 +260,11 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 		int left_area = edge*edge - used_area;
 		if (success_list.empty() || used_area_rate < fail_scale)
 		{
-			edge = std::max(edge * 2, max_size);
+			if (edge * 2 <= max_size) {
+				edge *= 2;
+			} else {
+				edge = max_size;
+			}
 			delete root;
 		}
 		else if (used_area_rate > area_scale_limit || edge < EDGE_LIMIT/* || left_area < LEFT_AREA_LIMIT*/) 
@@ -346,8 +350,9 @@ bool MaxRectsBinaryPack2::MergeSquareMultiAuto(std::vector<Sprite>& sprites, int
 				delete new_root;
 				return false;
 			}
+		} else {
+			spr.pos->tex_id = map_id[spr.pos->tex_id];
 		}
-		spr.pos->tex_id = map_id[spr.pos->tex_id];
 	}
 
 	m_roots = new_roots;
