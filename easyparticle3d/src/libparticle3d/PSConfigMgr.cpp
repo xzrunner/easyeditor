@@ -22,6 +22,8 @@ ps_cfg_3d* PSConfigMgr::GetDefaultConfig()
 	if (itr == m_map2cfg.end()) {
 		cfg = (ps_cfg_3d*) operator new(sz);
 		m_map2cfg.insert(std::make_pair(KEY, cfg));
+	} else {
+		cfg = itr->second;
 	}
 	memset(cfg, 0, sz);
 	cfg->symbols = (particle_symbol*)(cfg+1);

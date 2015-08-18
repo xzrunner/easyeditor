@@ -87,7 +87,7 @@ void ToolbarPanel::Add(const FileAdapter::Component& comp)
 {
 	// todo Release symbol
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
-	particle_symbol* pc = new particle_symbol;
+	particle_symbol* pc = m_stage->m_ps->AddSymbol(symbol);
 	ChildPanel* cp = new ChildPanel(this, pc, this);
 
 	cp->m_name->SetValue(comp.name);
@@ -354,7 +354,7 @@ void ToolbarPanel::InitParticle()
 	ps_cfg_3d* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP, cfg);
 //	ps->Start();
-	m_stage->m_ps = ps;
+	d2d::obj_assign<ParticleSystem>(m_stage->m_ps, ps);
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}

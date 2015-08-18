@@ -111,15 +111,16 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 	toolbar->m_layer->SetValue(adapter.layer);
 
-	toolbar->m_min_hori->SetValue(adapter.hori - adapter.hori_var);
-	toolbar->m_max_hori->SetValue(adapter.hori + adapter.hori_var);
-	ps->SetHori(adapter.hori - adapter.hori_var, adapter.hori + adapter.hori_var);
+	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
+	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
+	ps->SetHori(toolbar->m_min_hori->GetValue(), toolbar->m_max_hori->GetValue());
 
-	toolbar->m_min_vert->SetValue(adapter.vert - adapter.vert_var);
-	toolbar->m_max_vert->SetValue(adapter.vert + adapter.vert_var);
-	ps->SetVert(adapter.vert - adapter.vert_var, adapter.vert + adapter.vert_var);
+	toolbar->m_min_vert->SetValue((adapter.vert - adapter.vert_var) * d2d::TRANS_RAD_TO_DEG);
+	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * d2d::TRANS_RAD_TO_DEG);
+	ps->SetVert(toolbar->m_min_vert->GetValue(), toolbar->m_max_vert->GetValue());
 
 	toolbar->m_inertia->SetValue(adapter.inertia);
+	ps->SetInertia(toolbar->m_inertia->GetValue());
 
 	toolbar->m_bounce->SetValue(adapter.bounce);
 	ps->SetBounce(adapter.bounce);
