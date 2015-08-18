@@ -51,13 +51,12 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	else if (name == "Color.Multi")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
-		spr->multiCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
-
+		spr->multiCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, spr->multiCol.a);
 	}
 	else if (name == "Color.Add")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
-		spr->addCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+		spr->addCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, spr->addCol.a);
 	}
 	else if (name == "Color.Alpha")
 	{
@@ -270,9 +269,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	wxColour add_col = wxColour(spr->addCol.r*255, spr->addCol.g*255, spr->addCol.b*255, spr->addCol.a*255);
 	colProp->SetExpanded(false);
 	pg->AppendIn(colProp, new wxColourProperty(wxT("Multi"), wxPG_LABEL, mul_col));
-	pg->SetPropertyAttribute(wxT("Color.Multi"), "HasAlpha", true);
 	pg->AppendIn(colProp, new wxColourProperty(wxT("Add"), wxPG_LABEL, add_col));
-	pg->SetPropertyAttribute(wxT("Color.Add"), "HasAlpha", true);
 	pg->AppendIn(colProp, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, spr->multiCol.a*255));
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
