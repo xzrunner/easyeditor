@@ -62,8 +62,8 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 		ori_h = m_img->GetOriginHeight();
 	for (int i = 0; i < 4; ++i)
 	{
-		float x = r[i].x * w / ori_w + 0.5f;
-		float y = r[i].y * h / ori_h + 0.5f;
+		float x = r[i].x * w / ori_w;
+		float y = r[i].y * h / ori_h;
 		texcoords[i].set(x, y);
 	}
 
