@@ -8,6 +8,7 @@
 #include <easyshape.h>
 #include <easytexture.h>
 #include <easyterrain2d.h>
+#include <easyicon.h>
 
 static void InitSymbolCreators() 
 {
@@ -31,6 +32,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 }
 
 static void Help()
