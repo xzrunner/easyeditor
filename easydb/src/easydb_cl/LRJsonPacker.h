@@ -38,7 +38,7 @@ private:
 
 	void ParserSpecial(const Json::Value& src_val, const std::string& name, Json::Value& out_val);
 	void ParserSpecialLayer(const Json::Value& spr_val, const std::string& name, Json::Value& out_val);
-	void ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val, int layer_idx);
+	void ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val, bool top_layer);
 
 private:
 	std::string m_dir;

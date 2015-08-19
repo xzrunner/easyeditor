@@ -305,7 +305,11 @@ void LRJsonPacker::ParserSpecial(const Json::Value& src_val, const std::string& 
 			std::string filepath = spr_val["filepath"].asString();
 			std::string tag = spr_val["tag"].asString();
 			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
-				ParserParticleLayer(spr_val, out_val, layer_idx);
+				bool top_layer = false;
+				if (layer_idx == 2 || tag.find(TOP_LAYER_STR) != std::string::npos) {
+					top_layer = true;
+				}
+				ParserParticleLayer(spr_val, out_val, top_layer);
 			} else if (tag.find(COVER_LAYER_STR) != std::string::npos) {
 				ParserSpecialLayer(spr_val, "cover", out_val);
 			} else if (tag.find(TOP_LAYER_STR) != std::string::npos) {
@@ -355,7 +359,7 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 }
 
 void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val,
-									   int layer_idx)
+									   bool top_layer)
 {
 	Json::Value dec_val;
 
@@ -373,7 +377,7 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 
 	dec_val["export"] = name;
 
-	if (layer_idx == 2) {
+	if (top_layer) {
 		dec_val["layer"] = "top";
 	}
 
