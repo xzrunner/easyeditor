@@ -7,6 +7,7 @@
 struct particle_system_3d;
 struct ps_cfg_3d;
 struct particle_symbol;
+struct particle_3d;
 
 namespace eparticle3d
 {
@@ -64,6 +65,8 @@ public:
 	void SetOrientToMovement(bool open);
 	void SetRadius3D(bool is3d);
 
+	void SetPosition(const d2d::Vector& pos) { m_pos = pos; }
+
 	particle_symbol* AddSymbol(d2d::ISymbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
@@ -71,15 +74,19 @@ public:
 private:
 	void Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
 
+	static void AddFunc(particle_3d* p);
+	static void RemoveFunc(particle_3d* p);
+
 private:
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;
 
-public:
-	d2d::Vector m_origin;
-
 private:
+	d2d::Vector m_pos;
+
 	particle_system_3d* m_ps;
+
+	static ParticleSystem* PS;
 
 }; // ParticleSystem
 

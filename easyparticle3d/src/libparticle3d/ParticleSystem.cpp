@@ -11,19 +11,32 @@
 namespace eparticle3d
 {
 
+
+ParticleSystem* ParticleSystem::PS = NULL;
+
 ParticleSystem::ParticleSystem(unsigned int buffer, ps_cfg_3d* cfg)
 	: m_anim_recorder(new AnimRecorder(buffer))
 	, m_inv_record(new InvertRecord)
 {
+	PS = this;
+
 	m_ps = ps_create(buffer, cfg);
+
+	m_ps->add_func = &AddFunc;
+	m_ps->remove_func = &RemoveFunc;
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	m_origin = ps.m_origin;
+	PS = this;
+
+	m_pos = ps.m_pos;
 	m_ps = ps_create(PARTICLE_CAP, ps.m_ps->cfg);
+
+	m_ps->add_func = &AddFunc;
+	m_ps->remove_func = &RemoveFunc;
 }
 
 ParticleSystem::~ParticleSystem()
@@ -134,6 +147,7 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 
 void ParticleSystem::Update(float dt)
 {
+	dt = 0.03f;
 	ps_update(m_ps, dt);
 }
 
@@ -339,7 +353,7 @@ void ParticleSystem::Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRec
 		mul_col.a *= alpha;
 
 		d2d::Matrix _mt(mt);
-		_mt.translate(p->pos.x, p->pos.y);
+		_mt.translate(p->init_pos.x, p->init_pos.y);
 		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p->cfg.symbol->ud);
 		d2d::SpriteRenderer::Instance()->Draw(symbol, _mt, pos, p->angle, s, s, 0, 0, mul_col, add_col);
 
@@ -358,6 +372,19 @@ void ParticleSystem::Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRec
 		//glPopAttrib();
 
 		++p;
+	}
+}
+
+void ParticleSystem::AddFunc(particle_3d* p)
+{
+	p->init_pos.x = PS->m_pos.x;
+	p->init_pos.y = PS->m_pos.y;
+}
+
+void ParticleSystem::RemoveFunc(particle_3d* p)
+{
+	if (PS->m_inv_record) {
+		PS->m_inv_record->AddItem(p);
 	}
 }
 
