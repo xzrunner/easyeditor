@@ -38,6 +38,16 @@ void LRJsonPacker::Run(int argc, char *argv[])
 
 void LRJsonPacker::Run(const std::string& filepath)
 {
+	std::string str = filepath.substr(0, filepath.find("_lr.json"));
+	if (str.find(".") != std::string::npos) {
+		PackLogic(filepath);
+	} else {
+		PackGraphics(filepath);
+	}
+}
+
+void LRJsonPacker::PackAll(const std::string& filepath)
+{
 	Json::Value lr_val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -78,6 +88,82 @@ void LRJsonPacker::Run(const std::string& filepath)
 	out_val["package"] = lr_name + "_scene";
 
 	out_val["base"] = lr_name + "_base";
+
+	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(outfile.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, out_val);
+	fout.close();
+}
+
+void LRJsonPacker::PackGraphics(const std::string& filepath)
+{
+	Json::Value lr_val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, lr_val);
+	fin.close();
+
+	m_dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+
+	Json::Value out_val;
+
+	out_val["width"] = lr_val["size"]["width"];
+	out_val["height"] = lr_val["size"]["height"];
+	out_val["view width"] = lr_val["size"]["view width"];
+	out_val["view height"] = lr_val["size"]["view height"];
+
+	std::string lr_name = get_lr_name_from_file(filepath);
+
+	ParserSpecial(lr_val, lr_name, out_val);
+	ParserCharacter(lr_val, 2, "character", out_val);
+
+	out_val["package"] = lr_name + "_scene";
+
+	out_val["base"] = lr_name + "_base";
+
+	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(outfile.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, out_val);
+	fout.close();
+}
+
+void LRJsonPacker::PackLogic(const std::string& filepath)
+{
+	Json::Value lr_val;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, lr_val);
+	fin.close();
+
+	m_dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+
+	Json::Value out_val;
+
+	lr::Grids grids;
+	int w = lr_val["size"]["width"].asUInt(),
+		h = lr_val["size"]["height"].asUInt();
+	grids.Build(w, h);
+
+	int col, row;
+	grids.GetGridSize(col, row);
+	out_val["col"] = col;
+	out_val["row"] = row;
+
+	ParserPoint(lr_val, 3, "point", out_val);
+	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
+	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
+	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
+	ParserCamera(lr_val, 7, "camera", out_val);
 	
 	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
 	Json::StyledStreamWriter writer;

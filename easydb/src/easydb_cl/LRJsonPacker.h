@@ -28,6 +28,10 @@ public:
 	void Run(const std::string& filepath);
 
 private:
+	void PackAll(const std::string& filepath);
+	void PackGraphics(const std::string& filepath);
+	void PackLogic(const std::string& filepath);
+
 	void ParserShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
 		bool force_grids, Json::Value& out_val);
 	void ParserShapeLayer(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
