@@ -283,14 +283,18 @@ void MultiSpritesPropertyImpl::SetPos(float x, float y)
 void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		float alpha = m_sprites[i]->multiCol.a;
 		m_sprites[i]->multiCol = col;
+		m_sprites[i]->multiCol.a = alpha;
 	}
 }
 
 void MultiSpritesPropertyImpl::SetColorAdd(const Colorf& col)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		float alpha = m_sprites[i]->addCol.a;
 		m_sprites[i]->addCol = col;
+		m_sprites[i]->addCol.a = alpha;
 	}
 }
 
