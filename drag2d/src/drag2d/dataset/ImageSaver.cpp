@@ -50,7 +50,7 @@ int ImageSaver::storePNG(const uint8_t* data, int width, int height, int channel
 	png_structp png;
 	png_infop info;
 	int bytes = channels;
-	int colortype = PNG_COLOR_TYPE_RGB_ALPHA;
+	int colortype = (channels == 4 ? PNG_COLOR_TYPE_RGB_ALPHA : PNG_COLOR_TYPE_RGB);
 	int y;
 	const uint8_t* row;
 

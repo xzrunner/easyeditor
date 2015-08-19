@@ -161,10 +161,11 @@ bool TrimImage::IsTransparent(const d2d::ImageData& img, int x, int y) const
 
 void TrimImage::Trim(const std::string& filepath)
 {
-	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);		
+	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);
 
 	eimage::ImageTrim trim(*img);
 	d2d::Rect r = trim.Trim();
+	bool trimed = r.isValid();
 	if (!r.isValid()) {
 		r.xMin = r.yMin = 0;
 		r.xMax = img->GetWidth();
@@ -190,11 +191,16 @@ void TrimImage::Trim(const std::string& filepath)
 		out_dir = d2d::FilenameTools::getFileDir(out_filepath);
 	d2d::mk_dir(out_dir, false);
 
-	eimage::ImageClip clip(*img);
-	const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
-	d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
-		out_filepath, d2d::ImageSaver::e_png);
-	delete[] pixels;
+	if (trimed) {
+		eimage::ImageClip clip(*img);
+		const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
+		d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
+			out_filepath, d2d::ImageSaver::e_png);
+		delete[] pixels;
+	} else {
+		d2d::ImageSaver::storeToFile(img->GetPixelData(), r.xLength(), r.yLength(), img->GetChannels(), 
+			out_filepath, d2d::ImageSaver::e_png);
+	}
 
 	img->Release();
 }
