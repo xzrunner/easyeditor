@@ -5,13 +5,14 @@
 
 #include <drag2d.h>
 
-struct ps_color4f;
-struct particle_symbol;
+// struct ps_color4f;
+// struct particle_symbol;
 
 namespace eparticle3d
 {
 
 class StagePanel;
+class ComponentPanel;
 
 class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback
 {
@@ -32,8 +33,7 @@ public:
 
 	void InitParticle();
 
-	class ChildPanel;
-	void OnDelChild(ChildPanel* child);
+	void OnDelChild(ComponentPanel* child);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -53,45 +53,6 @@ private:
 	void OnSetRadius3D(wxCommandEvent& event);
 
 private:
-	class ChildPanel : public wxPanel, public d2d::UICallback
-	{
-	public:
-		ChildPanel(wxWindow* parent, particle_symbol* pc, ToolbarPanel* toolbar);
-
-		//
-		// UICallback interface
-		//
-		virtual void SetValue(int key, const d2d::UICallback::Data& data);
-		virtual void GetValue(int key, d2d::UICallback::Data& data);
-
-		const ps_color4f& GetMulColor() const;
-		const ps_color4f& GetAddColor() const;
-
-	private:
-		void InitLayout();
-
-		void OnDelete(wxCommandEvent& event);
-
-		void OnBindPS(wxCommandEvent& event);
-
-		void OnSetMultiCol(wxCommandEvent& event);
-		void OnSetAddCol(wxCommandEvent& event);
-
-	private:
-		particle_symbol* m_pc;
-
-		ToolbarPanel* m_toolbar;
-		
-		std::vector<d2d::ISliderCtrl*> m_sliders;
-
-		wxTextCtrl* m_name;
-		wxSpinCtrl* m_startz;
-
-		friend class ToolbarPanel;
-		friend class Code;
-		friend class FileIO;
-	};
-
 	class DropTarget : public wxTextDropTarget
 	{
 	public:
@@ -127,9 +88,8 @@ private:
 	wxCheckBox* m_radius_3d;
 
 	wxSizer* m_compSizer;
-	std::vector<ChildPanel*> m_children;
+	std::vector<ComponentPanel*> m_children;
 
-	friend class Code;
 	friend class FileIO;
 
 }; // ToolbarPanel

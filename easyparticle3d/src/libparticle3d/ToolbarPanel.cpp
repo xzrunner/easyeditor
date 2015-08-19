@@ -6,6 +6,7 @@
 #include "ps_config.h"
 #include "item_string.h"
 #include "PSConfigMgr.h"
+#include "ComponentPanel.h"
 
 #include <ps/particle3d.h>
 
@@ -36,10 +37,6 @@ static const float LINEAR_ACC_OFFSET	= 0;
 static const float INERTIA				= 4;
 static const float FADEOUT_TIME			= 300;
 static const float START_RADIUS			= 0;
-static const float SCALE_START			= 100;
-static const float SCALE_END			= 100;
-static const float ROTATE_MIN			= 0;
-static const float ROTATE_MAX			= 0;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   StagePanel* stage)
@@ -88,7 +85,7 @@ void ToolbarPanel::Add(const FileAdapter::Component& comp)
 	// todo Release symbol
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
 	particle_symbol* pc = m_stage->m_ps->AddSymbol(symbol);
-	ChildPanel* cp = new ChildPanel(this, pc, this);
+	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->m_name->SetValue(comp.name);
 
@@ -364,7 +361,7 @@ void ToolbarPanel::InitParticle()
 	ps->SetInertia(m_inertia->GetValue());
 }
 
-void ToolbarPanel::OnDelChild(ToolbarPanel::ChildPanel* child)
+void ToolbarPanel::OnDelChild(ComponentPanel* child)
 {
 	if (m_children.empty()) return;
 
@@ -398,7 +395,7 @@ void ToolbarPanel::clear()
 void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 {
 	particle_symbol* ps = m_stage->m_ps->AddSymbol(symbol);
-	ChildPanel* cp = new ChildPanel(this, ps, this);
+	ComponentPanel* cp = new ComponentPanel(this, ps, this);
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
 	this->Layout();
@@ -458,196 +455,6 @@ void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
 void ToolbarPanel::OnSetRadius3D(wxCommandEvent& event)
 {
 	m_stage->m_ps->SetRadius3D(event.IsChecked());
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class ToolbarPanel::ChildPanel
-//////////////////////////////////////////////////////////////////////////
-
-ToolbarPanel::ChildPanel::
-ChildPanel(wxWindow* parent, particle_symbol* pc, ToolbarPanel* toolbar)
-	: wxPanel(parent)
-	, m_pc(pc)
-	, m_toolbar(toolbar)
-{
-	InitLayout();
-	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
-		m_sliders[i]->Update();
-	}
-}
-
-void ToolbarPanel::ChildPanel::
-SetValue(int key, const d2d::UICallback::Data& data)
-{
-	switch (key)
-	{
-	case PS_SCALE:
-		m_pc->scale_start = data.val0 * 0.01f;
-		m_pc->scale_end = data.val1 * 0.01f;
-		break;
-	case PS_ROTATE:
-		m_pc->angle = data.val0 * 0.5f * d2d::TRANS_DEG_TO_RAD;
-		m_pc->angle_var = data.val1 * 0.5f * d2d::TRANS_DEG_TO_RAD;
-		break;
-	case PS_ALPHA:
-		m_pc->alpha_start = data.val0 * 0.01f;
-		m_pc->alpha_end = data.val1 * 0.01f;
-		break;
-	}
-}
-
-void ToolbarPanel::ChildPanel::
-GetValue(int key, d2d::UICallback::Data& data)
-{
-	switch (key)
-	{
-	case PS_SCALE:
-		data.val0 = m_pc->scale_start * 100;
-		data.val1 = m_pc->scale_end * 100;
-		break;
-	case PS_ROTATE:
-		data.val0 = (m_pc->angle - m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = (m_pc->angle + m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
-		break;
-	case PS_ALPHA:
-		data.val0 = m_pc->alpha_start * 100;
-		data.val1 = m_pc->alpha_end * 100;
-		break;
-	}
-}
-
-const ps_color4f& ToolbarPanel::ChildPanel::
-GetMulColor() const
-{
-	return m_pc->col_mul;
-}
-
-const ps_color4f& ToolbarPanel::ChildPanel::
-GetAddColor() const
-{
-	return m_pc->col_add;
-}
-
-void ToolbarPanel::ChildPanel::
-InitLayout()
-{
-	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
-	topSizer->AddSpacer(10);
-	// Del
-	{
-		wxButton* btn = new wxButton(this, wxID_ANY, "Del");
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnDelete));
-		topSizer->Add(btn);
-	}
-	// Name
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Name")));
-		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
-	// Icon
-	{
-		std::string filepath = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
-		d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100, 100);
-		topSizer->Add(panel);
-	}
-	topSizer->AddSpacer(10);
-	// Scale
-	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, "Scale (%)", "scale", this, PS_SCALE, 
-		d2d::SliderItem("start", "start", SCALE_START, 0, 500), d2d::SliderItem("end", "end", SCALE_END, 0, 500));
-	topSizer->Add(s_scale);
-	topSizer->AddSpacer(10);
-	m_sliders.push_back(s_scale);
-	// Rotate
-	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, "Rotate (deg)", "rotate", this, PS_ROTATE, 
-		d2d::SliderItem("min", "min", ROTATE_MIN, -180, 180), d2d::SliderItem("max", "max", ROTATE_MAX, -180, 180));
-	topSizer->Add(s_rotate);
-	topSizer->AddSpacer(10);
-	m_sliders.push_back(s_rotate);
-	// Multi Color
-	wxButton* mul_btn = new wxButton(this, wxID_ANY, "Mul Col");
-	Connect(mul_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnSetMultiCol));
-	topSizer->Add(mul_btn);
-	// Add Color
-	wxButton* add_btn = new wxButton(this, wxID_ANY, "Add Col");
-	Connect(add_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnSetAddCol));
-	topSizer->Add(add_btn);
-	// Alpha
-	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, "Alpha", "alpha", this, PS_ALPHA, 
-		d2d::SliderItem("start", "start", 100, 0, 100), d2d::SliderItem("end", "end", 100, 0, 100));
-	topSizer->Add(s_alpha);
-	topSizer->AddSpacer(10);
-	m_sliders.push_back(s_alpha);
-	// Name
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Startz ")));
-		sizer->Add(m_startz = new wxSpinCtrl(this));
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
-	// Bind PS
-	{
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Bind PS"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnBindPS));
-		topSizer->Add(btn);
-	}
-	//
-	SetSizer(topSizer);
-}
-
-void ToolbarPanel::ChildPanel::
-OnDelete(wxCommandEvent& event)
-{
-	m_toolbar->OnDelChild(this);
-}
-
-void ToolbarPanel::ChildPanel::
-OnBindPS(wxCommandEvent& event)
-{
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
-	filter = wxT("*_") + filter + wxT(".json");
-	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		m_pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(dlg.GetPath().ToStdString());
-
-// 		if (m_canvas) {
-// 			m_canvas->ResetViewport();
-// 		}
-	}
-}
-
-void ToolbarPanel::ChildPanel::
-OnSetMultiCol(wxCommandEvent& event)
-{
-	d2d::Colorf col;
-	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
-
-	d2d::RGBColorSettingDlg dlg(this, NULL, col);
-	if (!dlg.ShowModal()) {
-		return;
-	}
-	
-	col = dlg.GetColor();
-	memcpy(&m_pc->col_mul.r, &col.r, sizeof(m_pc->col_mul));
-}
-
-void ToolbarPanel::ChildPanel::
-OnSetAddCol(wxCommandEvent& event)
-{
-	d2d::Colorf col;
-	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
-
-	d2d::RGBColorSettingDlg dlg(this, NULL, col);
-	if (!dlg.ShowModal()) {
-		return;
-	}
-
-	col = dlg.GetColor();
-	memcpy(&m_pc->col_add.r, &col.r, sizeof(m_pc->col_add));
 }
 
 //////////////////////////////////////////////////////////////////////////

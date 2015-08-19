@@ -210,14 +210,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libparticle3d\Code.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle3d\Code.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libparticle3d\FileAdapter.cpp"
 				>
 			</File>
@@ -260,6 +252,14 @@
 			<Filter
 				Name="toolbar"
 				>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ComponentPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ComponentPanel.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\libparticle3d\ToolbarPanel.cpp"
 					>

@@ -3,6 +3,7 @@
 #include "ParticleSystem.h"
 #include "PSConfigMgr.h"
 #include "ToolBarPanel.h"
+#include "ComponentPanel.h"
 #include "ps_config.h"
 #include "config.h"
 
@@ -43,7 +44,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
-		ToolbarPanel::ChildPanel* cp = toolbar->m_children[i];
+		ComponentPanel* cp = toolbar->m_children[i];
 		particle_symbol* pc = cp->m_pc;
 
 		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(pc->ud);
