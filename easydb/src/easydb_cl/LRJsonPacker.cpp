@@ -112,15 +112,21 @@ void LRJsonPacker::PackGraphics(const std::string& filepath)
 
 	Json::Value out_val;
 
-	out_val["width"] = lr_val["size"]["width"];
-	out_val["height"] = lr_val["size"]["height"];
-	out_val["view width"] = lr_val["size"]["view width"];
-	out_val["view height"] = lr_val["size"]["view height"];
+	lr::Grids grids;
+	int w = lr_val["size"]["width"].asUInt(),
+		h = lr_val["size"]["height"].asUInt();
+	grids.Build(w, h);
+
+	int col, row;
+	grids.GetGridSize(col, row);
+	out_val["col"] = col;
+	out_val["row"] = row;
 
 	std::string lr_name = get_lr_name_from_file(filepath);
 
 	ParserSpecial(lr_val, lr_name, out_val);
 	ParserCharacter(lr_val, 2, "character", out_val);
+	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 
 	out_val["package"] = lr_name + "_scene";
 
@@ -149,6 +155,13 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 
 	Json::Value out_val;
 
+	out_val["width"] = lr_val["size"]["width"];
+	out_val["height"] = lr_val["size"]["height"];
+	out_val["view width"] = lr_val["size"]["view width"];
+	out_val["view height"] = lr_val["size"]["view height"];
+	out_val["view offset x"] = lr_val["size"]["view offset x"];
+	out_val["view offset y"] = lr_val["size"]["view offset y"];
+
 	lr::Grids grids;
 	int w = lr_val["size"]["width"].asUInt(),
 		h = lr_val["size"]["height"].asUInt();
@@ -162,7 +175,6 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
 	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
-	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
 	
 	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
