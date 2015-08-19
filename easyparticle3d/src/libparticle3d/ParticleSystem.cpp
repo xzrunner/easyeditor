@@ -317,7 +317,9 @@ void ParticleSystem::DelSymbol(int idx)
 	if (m_ps->cfg->count == 1) {
 		m_ps->cfg->count = 0;
 	} else {
-		m_ps->cfg->symbols[idx] = m_ps->cfg->symbols[--m_ps->cfg->count];
+		const particle_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
+		particle_symbol& dst = m_ps->cfg->symbols[idx];
+		memcpy(&dst, &src, sizeof(particle_symbol));
 	}
 }
 
