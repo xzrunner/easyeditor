@@ -115,7 +115,7 @@ void FileAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 
 	if (!comp_val["scale"].isNull()) {
 		comp.scale_start = comp_val["scale"]["start"].asInt();
-		comp.scale_end = comp_val["scale"]["start"].asInt();
+		comp.scale_end = comp_val["scale"]["end"].asInt();
 	} else {
 		comp.scale_start = comp_val["start_scale"].asInt();
 		comp.scale_end = comp_val["end_scale"].asInt();
