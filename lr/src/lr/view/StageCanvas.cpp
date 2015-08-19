@@ -108,7 +108,8 @@ void StageCanvas::DrawRegion() const
 		cfg->m_map_height * 0.5f,
 		d2d::LIGHT_GREY_LINE);
 
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
+	d2d::PrimitiveDraw::rect(
+		d2d::Vector(cfg->m_view_dx, cfg->m_view_dy), 
 		cfg->m_view_width * 0.5f,
 		cfg->m_view_height * 0.5f,
 		d2d::LIGHT_RED_LINE);

@@ -10,7 +10,9 @@ public:
 	static SettingCfg* Instance();
 
 	int m_map_width, m_map_height;
-	int m_view_width, m_view_height;
+
+	int m_view_dx, m_view_dy,
+		m_view_width, m_view_height;
 
 	bool m_terrain2d_anim;
 

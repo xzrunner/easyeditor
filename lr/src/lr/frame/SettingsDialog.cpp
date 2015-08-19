@@ -73,6 +73,28 @@ void SettingDialog::InitLayout()
 
 			sizer->Add(sz);
 		}
+		sizer->AddSpacer(5);
+		{
+			wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
+			sz->Add(new wxStaticText(this, wxID_ANY, "offset x"));
+
+			m_view_offset_x = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_view_dx), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+			Connect(m_view_offset_x->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
+			sz->Add(m_view_offset_x);
+
+			sizer->Add(sz);
+		}
+		sizer->AddSpacer(5);
+		{
+			wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
+			sz->Add(new wxStaticText(this, wxID_ANY, "offset y"));
+
+			m_view_offset_y = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_view_dy), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+			Connect(m_view_offset_y->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
+			sz->Add(m_view_offset_y);
+
+			sizer->Add(sz);
+		}
 		top_sizer->Add(sizer);
 	}
 	top_sizer->AddSpacer(10);
@@ -125,9 +147,15 @@ void SettingDialog::OnViewSizeChanged(wxCommandEvent& event)
 	m_view_width_ctrl->GetValue().ToDouble(&width);
 	m_view_height_ctrl->GetValue().ToDouble(&height);
 
+	double dx, dy;
+	m_view_offset_x->GetValue().ToDouble(&dx);
+	m_view_offset_y->GetValue().ToDouble(&dy);
+
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_view_width = width;
 	cfg->m_view_height = height;
+	cfg->m_view_dx = dx;
+	cfg->m_view_dy = dy;
 }
 
 void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)

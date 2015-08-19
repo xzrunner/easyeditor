@@ -25,8 +25,9 @@ private:
 private:
 	StagePanel* m_stage;
 
-	wxTextCtrl *m_map_width_ctrl, *m_map_height_ctrl,
-		*m_view_width_ctrl, *m_view_height_ctrl;
+	wxTextCtrl *m_map_width_ctrl, *m_map_height_ctrl;
+	wxTextCtrl *m_view_width_ctrl, *m_view_height_ctrl,
+		*m_view_offset_x, *m_view_offset_y;
 
 }; // SettingDialog
 

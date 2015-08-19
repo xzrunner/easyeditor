@@ -37,6 +37,8 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 		cfg->m_view_width = cfg->m_map_width;
 		cfg->m_view_height = cfg->m_map_height;
 	} else {
+		cfg->m_view_dx = value["size"]["view offset x"].asInt();
+		cfg->m_view_dy = value["size"]["view offset y"].asInt();
 		cfg->m_view_width = value["size"]["view width"].asInt();
 		cfg->m_view_height = value["size"]["view height"].asInt();
 	}
@@ -82,6 +84,8 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["size"]["height"] = cfg->m_map_height;
 	value["size"]["view width"] = cfg->m_view_width;
 	value["size"]["view height"] = cfg->m_view_height;
+	value["size"]["view offset x"] = cfg->m_view_dx;
+	value["size"]["view offset y"] = cfg->m_view_dy;
 
 	// camera
 	d2d::Camera* cam = stage->GetCamera();
