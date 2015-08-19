@@ -11,6 +11,8 @@ enum {
 	LK_MAX,
 	LK_RANGE,
 	LK_SPEED,
+	LK_START,
+	LK_END,
 
 	LK_NAME,
 	LK_PACKAGE,
@@ -29,6 +31,20 @@ enum {
 	LK_FADEOUT_TIME,
 	LK_BOUNCE,
 	LK_ADDITIVE_BLAND,
+	LK_START_RADIUS,
+	LK_ORIENT_MOVEMENT,
+	LK_ORIENT_PARENT,
+
+	LK_REMOVE,
+	LK_REMOVE_ALL,
+	LK_COMPONENTS,
+
+	LK_SCALE,
+	LK_ROTATE,
+	LK_COL_MUL,
+	LK_COL_ADD,
+	LK_ALPHA,
+	LK_BIND_PS,
 };
 
 static const char* EN[] = {
@@ -38,6 +54,8 @@ static const char* EN[] = {
 	"max",
 	"range (pixel)",
 	"speed (pixel)",
+	"start",
+	"end",
 
 	"Name",
 	"Package",	
@@ -56,6 +74,20 @@ static const char* EN[] = {
 	"Fadeout Time (ms)",
 	"Bounce",
 	"Additive Blend",
+	"Start Radius (pixel)",
+	"Orient to Movement",
+	"Orient to Parent",
+
+	"Remove",
+	"Remove All",
+	"Components",
+
+	"Scale (%)",
+	"Rotate (deg)",
+	"Col Mul",
+	"Col Add",
+	"Alpha",
+	"Bind PS",
 };
 
 static const char* CN[] = {
@@ -65,13 +97,15 @@ static const char* CN[] = {
 	"最大",
 	"幅度",
 	"速度",
+	"起始",
+	"结束",
 
 	"名字",
 	"包名",
 	"数量",
 	"层",
-	"发射周期（毫秒）",
-	"生命周期（毫秒）",
+	"发射周期(毫秒)",
+	"生命周期(毫秒)",
 	"水平发射角度",
 	"竖直发射角度",
 	"线速度",
@@ -82,10 +116,24 @@ static const char* CN[] = {
 	"转动惯量",
 	"消逝时间",
 	"弹跳",
-	"叠加渲染"
+	"叠加渲染",
+	"起始半径",
+	"朝向运动方向",
+	"朝向父节点方向",
+
+	"删除",
+	"删除全部",
+	"组件",
+
+	"缩放(%)",
+	"旋转",
+	"乘色",
+	"加色",
+	"透明度",
+	"绑定发射器",
 };
 
-const char** LANG = CN;
+static const char** LANG = CN;
 
 }
 

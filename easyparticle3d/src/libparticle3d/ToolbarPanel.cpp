@@ -237,7 +237,7 @@ wxSizer* ToolbarPanel::initLayout()
 	m_sliders.push_back(s_aspd);
 	// Disturbance 
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Disturbance"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_DISTURBANCE]);
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
 		d2d::SliderCtrlTwo* s_dis_r = new d2d::SliderCtrlTwo(this, LANG[LK_RANGE], "disturbance_radius", this, PS_DISTURBANCE_RADIUS, 
@@ -299,7 +299,7 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Start Radius
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Start Radius (pixel)");
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_START_RADIUS]);
 		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
 		m_radius_3d = new wxCheckBox(this, wxID_ANY, "3D");
@@ -316,14 +316,14 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	// orient_to_movement
 	{
-		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("Orient to Movement"));	
+		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, LANG[LK_ORIENT_MOVEMENT]);	
 		Connect(m_orient_to_movement->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetOrientToMovement));
 		leftSizer->Add(m_orient_to_movement);
 	}
 	leftSizer->AddSpacer(10);
 	// orient_to_parent
 	{
-		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, wxT("Orient to Parent"));
+		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, LANG[LK_ORIENT_PARENT]);
 		leftSizer->Add(m_orient_to_parent);
 	}
 	leftSizer->AddSpacer(10);
@@ -332,12 +332,12 @@ wxSizer* ToolbarPanel::initLayout()
  	// components
  	{
 		// Open
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Remove All"));
+		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE_ALL]);
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::OnDelAllChild));
 		rightSizer->Add(btn);
 		rightSizer->AddSpacer(10);
 
- 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Components"));
+ 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_COMPONENTS]);
  		m_compSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		m_compSizer->AddSpacer(10);
  		rightSizer->Add(m_compSizer);
@@ -398,6 +398,7 @@ void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 	particle_symbol* ps = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, ps, this);
 	m_compSizer->Insert(m_children.size(), cp);
+	m_compSizer->AddSpacer(10);
 	m_children.push_back(cp);
 	this->Layout();
 }

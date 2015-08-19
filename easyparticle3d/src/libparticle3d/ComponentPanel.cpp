@@ -2,6 +2,7 @@
 #include "ToolBarPanel.h"
 #include "ps_config.h"
 #include "PSConfigMgr.h"
+#include "language.h"
 
 #include <ps/particle3d.h>
 
@@ -78,14 +79,14 @@ void ComponentPanel::InitLayout()
 	topSizer->AddSpacer(10);
 	// Del
 	{
-		wxButton* btn = new wxButton(this, wxID_ANY, "Del");
+		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE]);
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
 		topSizer->Add(btn);
 	}
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Name")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
 		topSizer->Add(sizer);
 	}
@@ -98,42 +99,34 @@ void ComponentPanel::InitLayout()
 	}
 	topSizer->AddSpacer(10);
 	// Scale
-	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, "Scale (%)", "scale", this, PS_SCALE, 
-		d2d::SliderItem("start", "start", SCALE_START, 0, 500), d2d::SliderItem("end", "end", SCALE_END, 0, 500));
+	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
+		d2d::SliderItem(LANG[LK_START], "start", SCALE_START, 0, 500), d2d::SliderItem(LANG[LK_END], "end", SCALE_END, 0, 500));
 	topSizer->Add(s_scale);
 	topSizer->AddSpacer(10);
 	m_sliders.push_back(s_scale);
 	// Rotate
-	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, "Rotate (deg)", "rotate", this, PS_ROTATE, 
-		d2d::SliderItem("min", "min", ROTATE_MIN, -180, 180), d2d::SliderItem("max", "max", ROTATE_MAX, -180, 180));
+	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, LANG[LK_ROTATE], "rotate", this, PS_ROTATE, 
+		d2d::SliderItem(LANG[LK_MIN], "min", ROTATE_MIN, -180, 180), d2d::SliderItem(LANG[LK_MAX], "max", ROTATE_MAX, -180, 180));
 	topSizer->Add(s_rotate);
 	topSizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);
 	// Multi Color
-	wxButton* mul_btn = new wxButton(this, wxID_ANY, "Mul Col");
+	wxButton* mul_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_MUL]);
 	Connect(mul_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetMultiCol));
 	topSizer->Add(mul_btn);
 	// Add Color
-	wxButton* add_btn = new wxButton(this, wxID_ANY, "Add Col");
+	wxButton* add_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_ADD]);
 	Connect(add_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetAddCol));
 	topSizer->Add(add_btn);
 	// Alpha
-	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, "Alpha", "alpha", this, PS_ALPHA, 
-		d2d::SliderItem("start", "start", 100, 0, 100), d2d::SliderItem("end", "end", 100, 0, 100));
+	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
+		d2d::SliderItem(LANG[LK_START], "start", 100, 0, 100), d2d::SliderItem(LANG[LK_END], "end", 100, 0, 100));
 	topSizer->Add(s_alpha);
 	topSizer->AddSpacer(10);
 	m_sliders.push_back(s_alpha);
-	// Name
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Startz ")));
-		sizer->Add(m_startz = new wxSpinCtrl(this));
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
 	// Bind PS
 	{
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Bind PS"));
+		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_BIND_PS]);
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnBindPS));
 		topSizer->Add(btn);
 	}
