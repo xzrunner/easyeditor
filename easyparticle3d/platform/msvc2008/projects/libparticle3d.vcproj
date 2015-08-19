@@ -261,6 +261,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libparticle3d\language.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\language.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libparticle3d\ToolbarPanel.cpp"
 					>
 				</File>

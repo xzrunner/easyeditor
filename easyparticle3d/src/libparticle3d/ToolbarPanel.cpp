@@ -7,6 +7,7 @@
 #include "item_string.h"
 #include "PSConfigMgr.h"
 #include "ComponentPanel.h"
+#include "language.h"
 
 #include <ps/particle3d.h>
 
@@ -127,7 +128,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Name ")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
 		leftSizer->Add(sizer);
 	}
@@ -135,44 +136,44 @@ wxSizer* ToolbarPanel::initLayout()
 	// Package
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Package ")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_PACKAGE]));
 		sizer->Add(m_package = new wxTextCtrl(this, wxID_ANY));
 		leftSizer->Add(sizer);
 	}
 	leftSizer->AddSpacer(10);
 	// Count
-	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, "Count", "count", 
-		this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));
+	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, LANG[LK_COUNT], 
+		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));
 	leftSizer->Add(s_count);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_count);
 	// Layer
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Layer ")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_LAYER]));
 		sizer->Add(m_layer = new wxSpinCtrl(this));
 		leftSizer->Add(sizer);
 	}
 	leftSizer->AddSpacer(10);
 	// Emission Time
-	d2d::SliderCtrlOne* s_emission_time = new d2d::SliderCtrlOne(this, "Emission Time (ms)", "emission_time",
-		this, PS_EMISSION_TIME, d2d::SliderItem("", "", EMISSION_TIME, 10, 5000));
+	d2d::SliderCtrlOne* s_emission_time = new d2d::SliderCtrlOne(this, LANG[LK_EMISSION_TIME], 
+		"emission_time", this, PS_EMISSION_TIME, d2d::SliderItem("", "", EMISSION_TIME, 10, 5000));
 	leftSizer->Add(s_emission_time);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_emission_time);
 	// Life
-	d2d::SliderCtrlTwo* s_life = new d2d::SliderCtrlTwo(this, "Life (ms)", "life", this, PS_LIFE_TIME, 
-		d2d::SliderItem("center", ITEM_ATTR_CENTER, LIFE_CENTER, 0, 5000), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, LIFE_OFFSET, 0, 2500));
+	d2d::SliderCtrlTwo* s_life = new d2d::SliderCtrlTwo(this, LANG[LK_LIFE], "life", this, PS_LIFE_TIME, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, LIFE_CENTER, 0, 5000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, LIFE_OFFSET, 0, 2500));
 	leftSizer->Add(s_life);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_life);
 	// Hori
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Horizontal (deg)"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_HORI]);
 		wxSizer* horiSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MIN]));	
 
 			m_min_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MIN_HORI);
 			Connect(m_min_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetHori));
@@ -183,7 +184,7 @@ wxSizer* ToolbarPanel::initLayout()
 		horiSizer->AddSpacer(10);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MAX]));	
 
 			m_max_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MAX_HORI);
 			Connect(m_max_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetHori));
@@ -196,11 +197,11 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Vert
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Vertical (deg)"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_VERT]);
 		wxSizer* vertSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
+			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MIN]));
 
 			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MIN_VERT);
 			Connect(m_min_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
@@ -211,7 +212,7 @@ wxSizer* ToolbarPanel::initLayout()
 		vertSizer->AddSpacer(10);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MAX]));	
 
 			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MAX_VERT);
 			Connect(m_max_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
@@ -223,14 +224,14 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Speed
-	d2d::SliderCtrlTwo* s_spd = new d2d::SliderCtrlTwo(this, "Speed (pixel)", "speed", this, PS_SPEED, 
-		d2d::SliderItem("center", ITEM_ATTR_CENTER, SPEED_CENTER, 0, 9000), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, SPEED_OFFSET, 0, 4000));
+	d2d::SliderCtrlTwo* s_spd = new d2d::SliderCtrlTwo(this, LANG[LK_LINEAR_SPEED], "speed", this, PS_SPEED, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, SPEED_CENTER, 0, 9000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, SPEED_OFFSET, 0, 4000));
 	leftSizer->Add(s_spd);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_spd);
 	// Angular Speed
-	d2d::SliderCtrlTwo* s_aspd = new d2d::SliderCtrlTwo(this, "Angular Speed (degree)", "angular_speed", this, PS_ANGULAR_SPEED, 
-		d2d::SliderItem("center", ITEM_ATTR_CENTER, ANGULAR_SPEED_CENTER, -3600, 3600), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, ANGULAR_SPEED_OFFSET, 0, 360));
+	d2d::SliderCtrlTwo* s_aspd = new d2d::SliderCtrlTwo(this, LANG[LK_ANGULAR_SPEED], "angular_speed", this, PS_ANGULAR_SPEED, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, ANGULAR_SPEED_CENTER, -3600, 3600), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, ANGULAR_SPEED_OFFSET, 0, 360));
 	leftSizer->Add(s_aspd);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_aspd);
@@ -239,13 +240,13 @@ wxSizer* ToolbarPanel::initLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Disturbance"));
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		d2d::SliderCtrlTwo* s_dis_r = new d2d::SliderCtrlTwo(this, "Radius (pixel)", "disturbance_radius", this, PS_DISTURBANCE_RADIUS, 
-			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_RADIUS_CENTER, 0, 9999), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_RADIUS_OFFSET, 0, 1000));
+		d2d::SliderCtrlTwo* s_dis_r = new d2d::SliderCtrlTwo(this, LANG[LK_RANGE], "disturbance_radius", this, PS_DISTURBANCE_RADIUS, 
+			d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, DISTURBANCE_RADIUS_CENTER, 0, 9999), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, DISTURBANCE_RADIUS_OFFSET, 0, 1000));
 		sizer->Add(s_dis_r);
 		m_sliders.push_back(s_dis_r);
 
-		d2d::SliderCtrlTwo* s_dis_spd = new d2d::SliderCtrlTwo(this, "Speed (pixel)", "disturbance_spd", this, PS_DISTURBANCE_SPD, 
-			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_SPD_CENTER, 0, 9999), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_SPD_OFFSET, 0, 1000));
+		d2d::SliderCtrlTwo* s_dis_spd = new d2d::SliderCtrlTwo(this, LANG[LK_SPEED], "disturbance_spd", this, PS_DISTURBANCE_SPD, 
+			d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, DISTURBANCE_SPD_CENTER, 0, 9999), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, DISTURBANCE_SPD_OFFSET, 0, 1000));
 		sizer->Add(s_dis_spd);
 		m_sliders.push_back(s_dis_spd);
 
@@ -253,21 +254,21 @@ wxSizer* ToolbarPanel::initLayout()
 		leftSizer->AddSpacer(10);
 	}
 	// Gravity
-	d2d::SliderCtrlOne* s_gravity = new d2d::SliderCtrlOne(this, "Gravity (pixel)", "gravity", 
+	d2d::SliderCtrlOne* s_gravity = new d2d::SliderCtrlOne(this, LANG[LK_GRAVITY], "gravity", 
 		this, PS_GRAVITY, d2d::SliderItem("", "", GRAVITY, -5000, 25000));
 	leftSizer->Add(s_gravity);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_gravity);
 	// Linear Acc
-	d2d::SliderCtrlTwo* s_lacc = new d2d::SliderCtrlTwo(this, "Linear Acc (pixel)", "linear_acc", this, PS_LINEAR_ACC, 
-		d2d::SliderItem("center", ITEM_ATTR_CENTER, LINEAR_ACC_CENTER, -200, 500), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, LINEAR_ACC_OFFSET, 0, 500));
+	d2d::SliderCtrlTwo* s_lacc = new d2d::SliderCtrlTwo(this, LANG[LK_LINEAR_ACC], "linear_acc", this, PS_LINEAR_ACC, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, LINEAR_ACC_CENTER, -200, 500), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, LINEAR_ACC_OFFSET, 0, 500));
 	leftSizer->Add(s_lacc);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_lacc);	
 	// Inertia
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Inertia ")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_INERTIA]));
 
 		m_inertia = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 1000, INERTIA);
 		Connect(m_inertia->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetInertia));
@@ -277,21 +278,21 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Fadeout Time
-	d2d::SliderCtrlOne* s_fadeout = new d2d::SliderCtrlOne(this, "Fadeout Time (ms)", "fadeout_time", 
-		this, PS_FADEOUT_TIME, d2d::SliderItem("", "", FADEOUT_TIME, 10, 2500));
+	d2d::SliderCtrlOne* s_fadeout = new d2d::SliderCtrlOne(this, LANG[LK_FADEOUT_TIME], 
+		"fadeout_time", this, PS_FADEOUT_TIME, d2d::SliderItem("", "", FADEOUT_TIME, 10, 2500));
 	leftSizer->Add(s_fadeout);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_fadeout);
 	// Bounce
 	{
-		m_bounce = new wxCheckBox(this, wxID_ANY, wxT("Bounce"));
+		m_bounce = new wxCheckBox(this, wxID_ANY, LANG[LK_BOUNCE]);
 		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetBounce));
 		leftSizer->Add(m_bounce);
 	}
 	leftSizer->AddSpacer(10);
 	// AdditiveBlend
 	{
-		m_additiveBlend = new wxCheckBox(this, wxID_ANY, wxT("Additive Blend"));
+		m_additiveBlend = new wxCheckBox(this, wxID_ANY, LANG[LK_ADDITIVE_BLAND]);
 		Connect(m_additiveBlend->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetAdditiveBlend));
 		leftSizer->Add(m_additiveBlend);
 	}
