@@ -56,14 +56,14 @@ void FileAdapter::Load(const std::string& filepath)
 	spd_var *= 0.25f;
 
 	if (!value["angular_speed"].isNull()) {
-		angular_spd = value["angular_speed"]["center"].asInt();
-		angular_spd_var = value["angular_speed"]["offset"].asInt();
+		angular_spd = value["angular_speed"]["center"].asInt() * d2d::TRANS_DEG_TO_RAD;
+		angular_spd_var = value["angular_speed"]["offset"].asInt() * d2d::TRANS_DEG_TO_RAD;
 	} else {
 		int min, max;
 		min = value["min_angular_spd"].asInt();
 		max = value["max_angular_spd"].asInt();
-		angular_spd = (min + max) * 0.5f;
-		angular_spd_var = (max - min) * 0.5f;
+		angular_spd = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		angular_spd_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 	}
 
 	dis_region = value["disturbance_radius"]["center"].asInt();

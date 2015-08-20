@@ -66,8 +66,8 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_ps->cfg->spd_var = data.val1 * 0.25f;
 		break;
 	case PS_ANGULAR_SPEED:
-		m_ps->cfg->angular_spd = data.val0;
-		m_ps->cfg->angular_spd_var = data.val1;
+		m_ps->cfg->angular_spd = data.val0 * d2d::TRANS_DEG_TO_RAD;
+		m_ps->cfg->angular_spd_var = data.val1 * d2d::TRANS_DEG_TO_RAD;
 		break;
 	case PS_DISTURBANCE_RADIUS:
 		m_ps->cfg->dis_region = data.val0;
@@ -113,8 +113,8 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_ps->cfg->spd_var * 4;
 		break;
 	case PS_ANGULAR_SPEED:
-		data.val0 = m_ps->cfg->angular_spd;
-		data.val1 = m_ps->cfg->angular_spd_var;
+		data.val0 = m_ps->cfg->angular_spd * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = m_ps->cfg->angular_spd_var * d2d::TRANS_RAD_TO_DEG;
 		break;
 	case PS_DISTURBANCE_RADIUS:
 		data.val0 = m_ps->cfg->dis_region;
