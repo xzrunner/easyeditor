@@ -101,7 +101,6 @@ void ToolbarPanel::Add(const FileAdapter::Component& comp)
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();
 	}
-	cp->m_startz->SetValue(comp.start_z);
 
 	if (!comp.bind_filepath.empty()) {
 		pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);

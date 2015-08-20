@@ -58,7 +58,6 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 		}
 
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
-		value["components"][i]["start_z"] = cp->m_startz->GetValue();
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(value["components"][i]);
 		}

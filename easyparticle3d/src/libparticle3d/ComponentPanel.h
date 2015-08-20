@@ -43,7 +43,6 @@ private:
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 
 	wxTextCtrl* m_name;
-	wxSpinCtrl* m_startz;
 
 	friend class FileIO;
 	friend class ToolbarPanel;
