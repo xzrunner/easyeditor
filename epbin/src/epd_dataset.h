@@ -1,7 +1,8 @@
 #ifndef _EPBIN_EPD_DATASET_H_
 #define _EPBIN_EPD_DATASET_H_
 
-#include "typedef.h"
+#include "INode.h"
+#include "common_dataset.h"
 
 #include <vector>
 #include <set>
@@ -10,25 +11,8 @@ struct lua_State;
 
 namespace epbin
 {
-
-class String
+namespace epd
 {
-public:
-	String();
-	String(const std::string& str);
-
-	void SetString(const std::string& str);
-
-	size_t Size() const;
-
-	void Store(uint8_t** ptr);
-
-private:
-	bool m_is_empty;
-
-	std::string m_str;
-
-}; // String
 
 class Picture
 {
@@ -58,21 +42,7 @@ private:
 
 }; // Picture
 
-class IComponent
-{
-public:
-	IComponent(uint8_t type) : m_type(type) {}
-
-	virtual size_t Size() const;
-
-	virtual void Store(uint8_t** ptr);
-
-protected:
-	uint8_t m_type;
-
-}; // IComponent
-
-class Component : public IComponent
+class Component : public INode
 {
 public:
 	Component(lua_State* L);
@@ -86,7 +56,7 @@ private:
 
 }; // Component
 
-class Switch : public IComponent
+class Switch : public INode
 {
 public:
 	Switch(lua_State* L);
@@ -101,7 +71,7 @@ private:
 
 }; // Switch
 
-class Label : public IComponent
+class Label : public INode
 {
 public:
 	Label(lua_State* L);
@@ -120,7 +90,7 @@ private:
 
 }; // Label
 
-class Mount : public IComponent
+class Mount : public INode
 {
 public:
 	Mount(lua_State* L);
@@ -218,12 +188,13 @@ private:
 
 	String m_export_name;
 
-	std::vector<IComponent*> m_components;
+	std::vector<INode*> m_components;
 
 	std::vector<Action*> m_actions;
 
 }; // Animation
 
+}
 }
 
 #endif // _EPBIN_EPD_DATASET_H_

@@ -36,11 +36,67 @@ BinaryEPD::BinaryEPD(const std::string& infile)
 
 BinaryEPD::~BinaryEPD()
 {
-	for_each(m_pictures.begin(), m_pictures.end(), DeletePointerFunctor<Picture>());
-	for_each(m_animations.begin(), m_animations.end(), DeletePointerFunctor<Animation>());
+	for_each(m_pictures.begin(), m_pictures.end(), DeletePointerFunctor<epd::Picture>());
+	for_each(m_animations.begin(), m_animations.end(), DeletePointerFunctor<epd::Animation>());
 }
 
 void BinaryEPD::Pack(const std::string& outfile, bool compress)
+{
+	try {
+		PackImpl(outfile, compress);
+	} catch (Exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void BinaryEPD::Load(const std::string& infile)
+{
+	lua_State* L = luaL_newstate();
+	luaL_openlibs(L);
+	lua_settop(L,0);
+
+	int err = luaL_dostring(L, trans_old_ejoy2d_data);
+	if (err) {
+		const char *msg = lua_tostring(L,-1);
+		std::cout << msg << std::endl;
+	}
+	lua_getglobal(L, "trans2table");
+	lua_pushstring(L, infile.c_str());
+	err = lua_pcall(L, 1, 1, 0);
+	if (err) {
+		const char *msg = lua_tostring(L,-1);
+		std::cout << msg << std::endl;
+	}
+
+	if (lua_gettop(L) != 1 || !lua_istable(L, 1)) {
+		return;
+	}
+
+	int len = lua_rawlen(L, 1);
+	for(int i = 1; i <= len; i++)
+	{
+		lua_pushinteger(L, i);
+		lua_gettable(L, 1);
+
+		if (lua_istable(L, -1))
+		{
+			std::string type = LuaDataHelper::GetStringField(L, "type");
+			int id = LuaDataHelper::GetIntField(L, "id");
+			CheckID(id);
+			CheckExport(L);
+			if (type == "picture") {
+				m_pictures.push_back(new epd::Picture(L, id));
+			} else if (type == "animation") {
+				m_animations.push_back(new epd::Animation(L, id));
+			} else {
+				assert(0);
+			}
+		}
+		lua_pop(L,1);
+	}
+}
+
+void BinaryEPD::PackImpl(const std::string& outfile, bool compress)
 {
 	// compute ejoypic size
 	size_t ep_sz = 0;
@@ -102,53 +158,6 @@ void BinaryEPD::Pack(const std::string& outfile, bool compress)
 	}
 	delete[] buf;
 	fout.close();
-}
-
-void BinaryEPD::Load(const std::string& infile)
-{
-	lua_State* L = luaL_newstate();
-	luaL_openlibs(L);
-	lua_settop(L,0);
-
-	int err = luaL_dostring(L, trans_old_ejoy2d_data);
-	if (err) {
-		const char *msg = lua_tostring(L,-1);
-		std::cout << msg << std::endl;
-	}
-	lua_getglobal(L, "trans2table");
-	lua_pushstring(L, infile.c_str());
-	err = lua_pcall(L, 1, 1, 0);
-	if (err) {
-		const char *msg = lua_tostring(L,-1);
-		std::cout << msg << std::endl;
-	}
-
-	if (lua_gettop(L) != 1 || !lua_istable(L, 1)) {
-		return;
-	}
-
-	int len = lua_rawlen(L, 1);
-	for(int i = 1; i <= len; i++)
-	{
-		lua_pushinteger(L, i);
-		lua_gettable(L, 1);
-
-		if (lua_istable(L, -1))
-		{
-			std::string type = LuaDataHelper::GetStringField(L, "type");
-			int id = LuaDataHelper::GetIntField(L, "id");
-			CheckID(id);
-			CheckExport(L);
-			if (type == "picture") {
-				m_pictures.push_back(new Picture(L, id));
-			} else if (type == "animation") {
-				m_animations.push_back(new Animation(L, id));
-			} else {
-				assert(0);
-			}
-		}
-		lua_pop(L,1);
-	}
 }
 
 void BinaryEPD::CheckID(int id)

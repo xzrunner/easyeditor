@@ -15,6 +15,8 @@ extern "C" {
 
 namespace epbin
 {
+namespace epd
+{
 
 static const int ANIMATION	= 0;
 static const int PICTURE	= 1;
@@ -29,56 +31,6 @@ static const int FID		= 0;
 static const int FCOLOR		= 1;
 static const int FMAT		= 2;
 static const int FCLIP		= 4;
-
-//////////////////////////////////////////////////////////////////////////
-// class String
-//////////////////////////////////////////////////////////////////////////
-
-String::String()
-	: m_is_empty(true)
-{
-}
-
-String::String(const std::string& str)
-	: m_str(str)
-	, m_is_empty(false)
-{
-}
-
-void String::SetString(const std::string& str)
-{
-	m_str = str;
-	m_is_empty = false;
-}
-
-size_t String::Size() const
-{
-	if (m_is_empty) {
-		return sizeof(uint8_t);
-	} else {
-		assert(m_str.size() < 255);
-		return sizeof(uint8_t) + m_str.size();
-	}
-}
-
-void String::Store(uint8_t** ptr)
-{
-	if (m_is_empty) {
-		uint8_t c = 255;
-		memcpy(*ptr, &c, sizeof(uint8_t));
-		*ptr += sizeof(uint8_t);
-	} else {
-		assert(m_str.size() < 255);
-		uint8_t sz = m_str.size();
-		memcpy(*ptr, &sz, sizeof(uint8_t));
-		*ptr += sizeof(uint8_t);
-		for (int i = 0; i < sz; ++i) {
-			uint8_t c = m_str[i];
-			memcpy(*ptr, &c, sizeof(uint8_t));
-			*ptr += sizeof(uint8_t);
-		}
-	}
-}
 
 //////////////////////////////////////////////////////////////////////////
 // class Picture
@@ -192,40 +144,25 @@ void Picture::Part::Store(uint8_t** ptr)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class IComponent
-//////////////////////////////////////////////////////////////////////////
-
-size_t IComponent::Size() const
-{
-	return sizeof(m_type);
-}
-
-void IComponent::Store(uint8_t** ptr)
-{
-	memcpy(*ptr, &m_type, sizeof(m_type));
-	*ptr += sizeof(m_type);
-}
-
-//////////////////////////////////////////////////////////////////////////
 // class Component
 //////////////////////////////////////////////////////////////////////////
 
 Component::Component(lua_State* L)
-	: IComponent(COMPONENT)
+	: INode(COMPONENT)
 {
 	m_id = LuaDataHelper::GetIntField(L, "id");
 }
 
 size_t Component::Size() const
 {
-	size_t sz = IComponent::Size();
+	size_t sz = INode::Size();
 	sz += sizeof(m_id);
 	return sz;
 }
 
 void Component::Store(uint8_t** ptr)
 {
-	IComponent::Store(ptr);
+	INode::Store(ptr);
 	memcpy(*ptr, &m_id, sizeof(m_id));
 	*ptr += sizeof(m_id);
 }
@@ -235,7 +172,7 @@ void Component::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Switch::Switch(lua_State* L)
-	: IComponent(SWITCH)
+	: INode(SWITCH)
 {
 	lua_getfield(L, -1, "name");
 	if (lua_type(L, -1) != LUA_TNIL) {
@@ -248,7 +185,7 @@ Switch::Switch(lua_State* L)
 
 size_t Switch::Size() const
 {
-	size_t sz = IComponent::Size();
+	size_t sz = INode::Size();
 	sz += sizeof(m_id);
 	sz += m_name.Size();
 	return sz;
@@ -256,7 +193,7 @@ size_t Switch::Size() const
 
 void Switch::Store(uint8_t** ptr)
 {
-	IComponent::Store(ptr);
+	INode::Store(ptr);
 	memcpy(*ptr, &m_id, sizeof(m_id));
 	*ptr += sizeof(m_id);
 	m_name.Store(ptr);
@@ -267,7 +204,7 @@ void Switch::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Label::Label(lua_State* L)
-	: IComponent(LABEL)
+	: INode(LABEL)
 {
 	lua_getfield(L, -1, "name");
 	if (lua_type(L, -1) != LUA_TNIL) {
@@ -281,7 +218,7 @@ Label::Label(lua_State* L)
 	}
 	lua_pop(L, 1);
 
-	m_color = LuaDataHelper::GetDoubleField(L, "color");
+	m_color = (uint32_t)LuaDataHelper::GetDoubleField(L, "color");
 	m_size = LuaDataHelper::GetIntField(L, "size");
 	m_align = LuaDataHelper::GetIntField(L, "align");
 	m_width = LuaDataHelper::GetIntField(L, "width");
@@ -290,7 +227,7 @@ Label::Label(lua_State* L)
 
 size_t Label::Size() const
 {
-	size_t sz = IComponent::Size();
+	size_t sz = INode::Size();
 	sz += m_name.Size();
 	sz += m_font.Size();
 	sz += sizeof(m_color);
@@ -303,7 +240,7 @@ size_t Label::Size() const
 
 void Label::Store(uint8_t** ptr)
 {
-	IComponent::Store(ptr);
+	INode::Store(ptr);
 
 	m_name.Store(ptr);
 	m_font.Store(ptr);
@@ -329,7 +266,7 @@ void Label::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Mount::Mount(lua_State* L)
-: IComponent(MOUNT)
+: INode(MOUNT)
 {
 	lua_getfield(L, -1, "name");
 	if (lua_type(L, -1) != LUA_TNIL) {
@@ -340,14 +277,14 @@ Mount::Mount(lua_State* L)
 
 size_t Mount::Size() const
 {
-	size_t sz = IComponent::Size();
+	size_t sz = INode::Size();
 	sz += m_name.Size();
 	return sz;
 }
 
 void Mount::Store(uint8_t** ptr)
 {
-	IComponent::Store(ptr);
+	INode::Store(ptr);
 	m_name.Store(ptr);
 }
 
@@ -407,12 +344,12 @@ Sprite::Sprite(lua_State* L, int max_idx)
 				double sy = lua_tonumber(L, -1);
 				lua_pop(L, 1);
 
-				m_mat->m[0] *= sx;
-				m_mat->m[1] *= sy;
-				m_mat->m[2] *= sx;
-				m_mat->m[3] *= sy;
-				m_mat->m[4] *= sx;
-				m_mat->m[5] *= sy;
+				m_mat->m[0] *= (int)sx;
+				m_mat->m[1] *= (int)sy;
+				m_mat->m[2] *= (int)sx;
+				m_mat->m[3] *= (int)sy;
+				m_mat->m[4] *= (int)sx;
+				m_mat->m[5] *= (int)sy;
 
 				lua_pop(L, 1);
 			}
@@ -441,9 +378,9 @@ Sprite::Sprite(lua_State* L, int max_idx)
 
 		if (LuaDataHelper::HasField(L, "color")) {
 			m_color = new uint32_t;
-			*m_color = LuaDataHelper::GetDoubleField(L, "color");
+			*m_color = (uint32_t)LuaDataHelper::GetDoubleField(L, "color");
 			m_add = new uint32_t;
-			*m_add = LuaDataHelper::GetDoubleField(L, "add");
+			*m_add = (uint32_t)LuaDataHelper::GetDoubleField(L, "add");
 		}
 
 		m_type = FID;
@@ -702,7 +639,7 @@ Animation::Animation(lua_State* L, int id)
 
 Animation::~Animation()
 {
-	for_each(m_components.begin(), m_components.end(), DeletePointerFunctor<IComponent>());
+	for_each(m_components.begin(), m_components.end(), DeletePointerFunctor<INode>());
 	for_each(m_actions.begin(), m_actions.end(), DeletePointerFunctor<Action>());
 	delete m_clipbox;
 }
@@ -762,4 +699,5 @@ void Animation::Store(uint8_t** ptr)
 	}
 }
 
+}
 }

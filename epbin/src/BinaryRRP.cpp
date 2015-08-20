@@ -1,6 +1,5 @@
 #include "BinaryRRP.h"
 #include "Exception.h"
-#include "typedef.h"
 #include "tools.h"
 #include "Lzma.h"
 #include "ImageIDer.h"

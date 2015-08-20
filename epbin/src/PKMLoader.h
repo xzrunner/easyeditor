@@ -2,7 +2,6 @@
 #define _EPBIN_PKM_LOADER_H_
 
 #include "TexLoader.h"
-#include "typedef.h"
 
 namespace epbin
 {

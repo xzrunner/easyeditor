@@ -224,38 +224,86 @@
 				RelativePath="..\..\..\src\trans_old_ejoy2d_data.lua"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\typedef.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="normal"
 			>
 			<File
-				RelativePath="..\..\..\src\BinaryEPD.cpp"
+				RelativePath="..\..\..\src\INode.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\BinaryEPD.h"
+			<Filter
+				Name="tex"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\BinaryEPP.cpp"
+				<File
+					RelativePath="..\..\..\src\BinaryEPP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="desc"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\BinaryEPP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\epd_dataset.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\epd_dataset.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPD.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPD.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPE.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPE.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common_dataset.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common_dataset.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\INode.h"
+					>
+				</File>
+				<Filter
+					Name="new"
+					>
+					<File
+						RelativePath="..\..\..\src\epe\Picture.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\Picture.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\type.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="old"
+					>
+					<File
+						RelativePath="..\..\..\src\epd_dataset.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epd_dataset.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="extend"

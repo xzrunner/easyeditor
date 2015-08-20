@@ -2,7 +2,8 @@
 #define _EPBIN_PVR_LOADER_H_
 
 #include "TexLoader.h"
-#include "typedef.h"
+
+#include <stdint.h>
 
 namespace epbin
 {
