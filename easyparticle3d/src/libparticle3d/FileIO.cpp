@@ -29,17 +29,13 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	value["min_vert"] = toolbar->m_min_vert->GetValue();
 	value["max_vert"] = toolbar->m_max_vert->GetValue();
 
-	value["inertia"] = toolbar->m_inertia->GetValue();
-
 	value["bounce"] = toolbar->m_bounce->GetValue();
-
-	value["additive_blend"] = toolbar->m_additiveBlend->GetValue();
 
 	value["start_radius_3d"] = toolbar->m_radius_3d->GetValue();
 
 	value["orient_to_movement"] = toolbar->m_orient_to_movement->GetValue();
 
-	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
+//	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
@@ -119,21 +115,16 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * d2d::TRANS_RAD_TO_DEG);
 	ps->SetVert(toolbar->m_min_vert->GetValue(), toolbar->m_max_vert->GetValue());
 
-	toolbar->m_inertia->SetValue(adapter.inertia);
-	ps->SetInertia(toolbar->m_inertia->GetValue());
-
 	toolbar->m_bounce->SetValue(adapter.bounce);
 	ps->SetBounce(adapter.bounce);
-
-	toolbar->m_additiveBlend->SetValue(adapter.additive_blend);
-	ps->SetAdditiveBlend(adapter.additive_blend);
 
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	ps->SetOrientToMovement(adapter.orient_to_movement);
 
 	toolbar->m_radius_3d->SetValue(adapter.is_start_radius_3d);
 	ps->SetRadius3D(adapter.is_start_radius_3d);
-	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
+
+//	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 
 	for (size_t i = 0, n = adapter.components.size(); i < n; ++i) {
 		toolbar->Add(adapter.components[i]);

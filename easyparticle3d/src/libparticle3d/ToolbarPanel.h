@@ -46,9 +46,7 @@ private:
 
 	void OnSetHori(wxSpinEvent& event);
 	void OnSetVert(wxSpinEvent& event);
-	void OnSetInertia(wxSpinEvent& event);
 	void OnSetBounce(wxCommandEvent& event);
-	void OnSetAdditiveBlend(wxCommandEvent& event);
 	void OnSetOrientToMovement(wxCommandEvent& event);
 	void OnSetRadius3D(wxCommandEvent& event);
 
@@ -80,11 +78,9 @@ private:
 	wxSpinCtrl* m_layer;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
-	wxSpinCtrl* m_inertia;
 	wxCheckBox* m_bounce;
-	wxCheckBox* m_additiveBlend;
 	wxCheckBox* m_orient_to_movement;
-	wxCheckBox* m_orient_to_parent;
+//	wxCheckBox* m_orient_to_parent;
 	wxCheckBox* m_radius_3d;
 
 	wxSizer* m_compSizer;

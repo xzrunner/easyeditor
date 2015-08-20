@@ -264,19 +264,9 @@ void ParticleSystem::SetVert(int min, int max)
 	m_ps->cfg->vert_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 }
 
-void ParticleSystem::SetInertia(int val) 
-{ 
-//	inertia = val * d2d::TRANS_DEG_TO_RAD; 
-}
-
 void ParticleSystem::SetBounce(bool open) 
 { 
 	m_ps->cfg->bounce = open; 
-}
-
-void ParticleSystem::SetAdditiveBlend(bool open) 
-{ 
-//	additive_blend = open; 
 }
 
 void ParticleSystem::SetOrientToMovement(bool open) 

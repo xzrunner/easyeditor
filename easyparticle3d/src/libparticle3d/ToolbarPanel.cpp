@@ -260,22 +260,10 @@ wxSizer* ToolbarPanel::initLayout()
 	m_sliders.push_back(s_gravity);
 	// Linear Acc
 	d2d::SliderCtrlTwo* s_lacc = new d2d::SliderCtrlTwo(this, LANG[LK_LINEAR_ACC], "linear_acc", this, PS_LINEAR_ACC, 
-		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, LINEAR_ACC_CENTER, -200, 500), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, LINEAR_ACC_OFFSET, 0, 500));
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, LINEAR_ACC_CENTER, -9999, 9999), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, LINEAR_ACC_OFFSET, 0, 999));
 	leftSizer->Add(s_lacc);
 	leftSizer->AddSpacer(10);
-	m_sliders.push_back(s_lacc);	
-	// Inertia
-	{
-		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_INERTIA]));
-
-		m_inertia = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 1000, INERTIA);
-		Connect(m_inertia->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetInertia));
-		sizer->Add(m_inertia);
-
-		leftSizer->Add(sizer);
-	}
-	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_lacc);
 	// Fadeout Time
 	d2d::SliderCtrlOne* s_fadeout = new d2d::SliderCtrlOne(this, LANG[LK_FADEOUT_TIME], 
 		"fadeout_time", this, PS_FADEOUT_TIME, d2d::SliderItem("", "", FADEOUT_TIME, 10, 2500));
@@ -287,13 +275,6 @@ wxSizer* ToolbarPanel::initLayout()
 		m_bounce = new wxCheckBox(this, wxID_ANY, LANG[LK_BOUNCE]);
 		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetBounce));
 		leftSizer->Add(m_bounce);
-	}
-	leftSizer->AddSpacer(10);
-	// AdditiveBlend
-	{
-		m_additiveBlend = new wxCheckBox(this, wxID_ANY, LANG[LK_ADDITIVE_BLAND]);
-		Connect(m_additiveBlend->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetAdditiveBlend));
-		leftSizer->Add(m_additiveBlend);
 	}
 	leftSizer->AddSpacer(10);
 	// Start Radius
@@ -320,12 +301,12 @@ wxSizer* ToolbarPanel::initLayout()
 		leftSizer->Add(m_orient_to_movement);
 	}
 	leftSizer->AddSpacer(10);
-	// orient_to_parent
-	{
-		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, LANG[LK_ORIENT_PARENT]);
-		leftSizer->Add(m_orient_to_parent);
-	}
-	leftSizer->AddSpacer(10);
+// 	// orient_to_parent
+// 	{
+// 		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, LANG[LK_ORIENT_PARENT]);
+// 		leftSizer->Add(m_orient_to_parent);
+// 	}
+// 	leftSizer->AddSpacer(10);
 
 	rightSizer->AddSpacer(10);
  	// components
@@ -358,7 +339,6 @@ void ToolbarPanel::InitParticle()
 
 	ps->SetHori(m_min_hori->GetValue(), m_max_hori->GetValue());
 	ps->SetVert(m_min_vert->GetValue(), m_max_vert->GetValue());
-	ps->SetInertia(m_inertia->GetValue());
 }
 
 void ToolbarPanel::OnDelChild(ComponentPanel* child)
@@ -433,19 +413,9 @@ void ToolbarPanel::OnSetVert(wxSpinEvent& event)
 	m_stage->m_ps->SetVert(m_min_vert->GetValue(), m_max_vert->GetValue());
 }
 
-void ToolbarPanel::OnSetInertia(wxSpinEvent& event)
-{
-	m_stage->m_ps->SetInertia(m_inertia->GetValue());
-}
-
 void ToolbarPanel::OnSetBounce(wxCommandEvent& event)
 {
 	m_stage->m_ps->SetBounce(event.IsChecked());
-}
-
-void ToolbarPanel::OnSetAdditiveBlend(wxCommandEvent& event)
-{
-	m_stage->m_ps->SetAdditiveBlend(event.IsChecked());
 }
 
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
