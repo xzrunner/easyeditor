@@ -3,6 +3,8 @@
 
 #include "TexLoader.h"
 
+#include <stdint.h>
+
 namespace epbin
 {
 

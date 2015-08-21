@@ -1,5 +1,8 @@
-#include "Picture.h"
+#include "PackPicture.h"
 #include "type.h"
+#include "spritepack.h"
+
+#include "../tools.h"
 
 extern "C" {
 #include <lua.h>
@@ -14,47 +17,36 @@ namespace epbin
 namespace epe
 {
 
-Picture::Picture(lua_State* L)
-	: INode(TYPE_PICTURE)
+PackPicture::PackPicture(lua_State* L, uint32_t id)
+	: IPackNode(TYPE_PICTURE, id)
 {
 	Load(L);
 }
 
-size_t Picture::Size() const
+size_t PackPicture::Size() const
 {
-	size_t sz = INode::Size();
-	sz += sizeof(uint16_t);		// size
-	sz += sizeof(Quad) * m_quads.size();
-	return sz;
+	return SIZEOF_PICTURE + m_quads.size() * SIZEOF_QUAD;
 }
 
-void Picture::Store(uint8_t** ptr)
+void PackPicture::Store(std::ofstream& fout) const
 {
-	INode::Store(ptr);
-
 	uint16_t sz = m_quads.size();
-	memcpy(*ptr, &sz, sizeof(sz));
-	*ptr += sizeof(sz);
+	pack2file(sz, fout);
 
 	for (int i = 0, n = m_quads.size(); i < n; ++i) {
 		const Quad& q = m_quads[i];
-		
-		memcpy(*ptr, &q.texid, sizeof(q.texid));
-		*ptr += sizeof(q.texid);
 
+		pack2file(q.texid, fout);
 		for (int i = 0; i < 8; ++i) {
-			memcpy(*ptr, &q.texture_coord[i], sizeof(q.texture_coord[i]));
-			*ptr += sizeof(q.texture_coord[i]);
+			pack2file(q.texture_coord[i], fout);
 		}
-
 		for (int i = 0; i < 8; ++i) {
-			memcpy(*ptr, &q.screen_coord[i], sizeof(q.screen_coord[i]));
-			*ptr += sizeof(q.screen_coord[i]);
+			pack2file(q.screen_coord[i], fout);
 		}
 	}
 }
 
-void Picture::Load(lua_State* L)
+void PackPicture::Load(lua_State* L)
 {
 	int len = lua_rawlen(L, -1);
 	m_quads.reserve(len);
@@ -64,12 +56,16 @@ void Picture::Load(lua_State* L)
 		lua_gettable(L, -2);
 		assert(lua_istable(L, -1));
 
-		Picture::Quad quad;
+		PackPicture::Quad quad;
+
 		// texid
 		lua_getfield(L, -1, "tex");
-		const char* type = lua_typename(L, lua_type(L, -1));
 		quad.texid = (uint8_t)lua_tointeger(L, -1);
 		lua_pop(L, 1);
+		if (quad.texid > m_maxid) {
+			m_maxid = quad.texid;
+		}
+
 		// texture_coord
 		lua_getfield(L, -1, "src");
 		int len = lua_rawlen(L, -1);
@@ -83,6 +79,7 @@ void Picture::Load(lua_State* L)
 			lua_pop(L, 1);
 		}
 		lua_pop(L, 1);
+
 		// screen_coord
 		lua_getfield(L, -1, "screen");
 		len = lua_rawlen(L, -1);

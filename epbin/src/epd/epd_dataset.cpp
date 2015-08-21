@@ -1,7 +1,8 @@
 #include "epd_dataset.h"
-#include "tools.h"
-#include "LuaDataHelper.h"
-#include "Exception.h"
+
+#include "../tools.h"
+#include "../LuaDataHelper.h"
+#include "../Exception.h"
 
 #include <algorithm>
 #include <assert.h>
@@ -109,12 +110,10 @@ void Picture::Store(uint8_t** ptr)
 	memcpy(*ptr, &PICTURE, sizeof(uint8_t));
 	*ptr += sizeof(uint8_t);
 
-	memcpy(*ptr, &m_id, sizeof(m_id));
-	*ptr += sizeof(m_id);
+	pack2mem(m_id, ptr);
 
 	uint16_t sz = m_parts.size();
-	memcpy(*ptr, &sz, sizeof(sz));
-	*ptr += sizeof(sz);
+	pack2mem(sz, ptr);
 	for (size_t i = 0; i < sz; ++i) {
 		m_parts[i].Store(ptr);
 	}
@@ -131,15 +130,12 @@ size_t Picture::Part::Size() const
 
 void Picture::Part::Store(uint8_t** ptr)
 {
-	memcpy(*ptr, &tex, sizeof(tex));
-	*ptr += sizeof(tex);
+	pack2mem(tex, ptr);
 	for (int i = 0; i < 8; ++i) {
-		memcpy(*ptr, &src[i], sizeof(uint16_t));
-		*ptr += sizeof(uint16_t);
+		pack2mem(src[i], ptr);
 	}
 	for (int i = 0; i < 8; ++i) {
-		memcpy(*ptr, &screen[i], sizeof(int32_t));
-		*ptr += sizeof(int32_t);
+		pack2mem(screen[i], ptr);
 	}
 }
 
@@ -148,23 +144,20 @@ void Picture::Part::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Component::Component(lua_State* L)
-	: INode(COMPONENT)
+	: IPackNode(COMPONENT)
 {
 	m_id = LuaDataHelper::GetIntField(L, "id");
 }
 
 size_t Component::Size() const
 {
-	size_t sz = INode::Size();
-	sz += sizeof(m_id);
-	return sz;
+	return sizeof(uint8_t) + sizeof(m_id);
 }
 
-void Component::Store(uint8_t** ptr)
+void Component::Store(uint8_t** ptr) const
 {
-	INode::Store(ptr);
-	memcpy(*ptr, &m_id, sizeof(m_id));
-	*ptr += sizeof(m_id);
+	pack2mem(GetType(), ptr);
+	pack2mem(m_id, ptr);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -172,7 +165,7 @@ void Component::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Switch::Switch(lua_State* L)
-	: INode(SWITCH)
+	: IPackNode(SWITCH)
 {
 	lua_getfield(L, -1, "name");
 	if (lua_type(L, -1) != LUA_TNIL) {
@@ -185,17 +178,16 @@ Switch::Switch(lua_State* L)
 
 size_t Switch::Size() const
 {
-	size_t sz = INode::Size();
+	size_t sz = sizeof(uint8_t);
 	sz += sizeof(m_id);
 	sz += m_name.Size();
 	return sz;
 }
 
-void Switch::Store(uint8_t** ptr)
+void Switch::Store(uint8_t** ptr) const
 {
-	INode::Store(ptr);
-	memcpy(*ptr, &m_id, sizeof(m_id));
-	*ptr += sizeof(m_id);
+	pack2mem(GetType(), ptr);
+	pack2mem(m_id, ptr);
 	m_name.Store(ptr);
 }
 
@@ -204,7 +196,7 @@ void Switch::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Label::Label(lua_State* L)
-	: INode(LABEL)
+	: IPackNode(LABEL)
 {
 	lua_getfield(L, -1, "name");
 	if (lua_type(L, -1) != LUA_TNIL) {
@@ -227,7 +219,7 @@ Label::Label(lua_State* L)
 
 size_t Label::Size() const
 {
-	size_t sz = INode::Size();
+	size_t sz = sizeof(uint8_t);
 	sz += m_name.Size();
 	sz += m_font.Size();
 	sz += sizeof(m_color);
@@ -238,27 +230,18 @@ size_t Label::Size() const
 	return sz;
 }
 
-void Label::Store(uint8_t** ptr)
+void Label::Store(uint8_t** ptr) const
 {
-	INode::Store(ptr);
+	pack2mem(GetType(), ptr);
 
 	m_name.Store(ptr);
 	m_font.Store(ptr);
 
-	memcpy(*ptr, &m_color, sizeof(m_color));
-	*ptr += sizeof(m_color);
-
-	memcpy(*ptr, &m_size, sizeof(m_size));
-	*ptr += sizeof(m_size);
-
-	memcpy(*ptr, &m_align, sizeof(m_align));
-	*ptr += sizeof(m_align);
-
-	memcpy(*ptr, &m_width, sizeof(m_width));
-	*ptr += sizeof(m_width);
-
-	memcpy(*ptr, &m_height, sizeof(m_height));
-	*ptr += sizeof(m_height);
+	pack2mem(m_color, ptr);
+	pack2mem(m_size, ptr);
+	pack2mem(m_align, ptr);
+	pack2mem(m_width, ptr);
+	pack2mem(m_height, ptr);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -266,7 +249,7 @@ void Label::Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 Mount::Mount(lua_State* L)
-: INode(MOUNT)
+: IPackNode(MOUNT)
 {
 	lua_getfield(L, -1, "name");
 	if (lua_type(L, -1) != LUA_TNIL) {
@@ -277,14 +260,14 @@ Mount::Mount(lua_State* L)
 
 size_t Mount::Size() const
 {
-	size_t sz = INode::Size();
+	size_t sz = sizeof(uint8_t);
 	sz += m_name.Size();
 	return sz;
 }
 
-void Mount::Store(uint8_t** ptr)
+void Mount::Store(uint8_t** ptr) const
 {
-	INode::Store(ptr);
+	pack2mem(GetType(), ptr);
 	m_name.Store(ptr);
 }
 
@@ -425,29 +408,22 @@ size_t Sprite::Size() const
 	return sz;
 }
 
-void Sprite::Store(uint8_t** ptr)
+void Sprite::Store(uint8_t** ptr) const
 {
-	memcpy(*ptr, &m_type, sizeof(m_type));
-	*ptr += sizeof(m_type);
-
-	memcpy(*ptr, &m_id, sizeof(m_id));
-	*ptr += sizeof(m_id);
+	pack2mem(m_type, ptr);
+	pack2mem(m_id, ptr);
 
 	if (m_type == FID) {
 		return;
 	}
 
 	if (m_color) {
-		memcpy(*ptr, m_color, sizeof(*m_color));
-		*ptr += sizeof(*m_color);
-
-		memcpy(*ptr, m_add, sizeof(*m_add));
-		*ptr += sizeof(*m_add);
+		pack2mem(m_color, ptr);
+		pack2mem(m_add, ptr);
 	}
 	if (m_mat) {
 		for (int i = 0; i < 6; ++i) {
-			memcpy(*ptr, &m_mat->m[i], sizeof(int32_t));
-			*ptr += sizeof(int32_t);
+			pack2mem(m_mat->m[i], ptr);
 		}
 	}
 }
@@ -485,9 +461,7 @@ size_t Frame::Size() const
 void Frame::Store(uint8_t** ptr)
 {
 	uint16_t sz = sprites.size();
-	memcpy(*ptr, &sz, sizeof(sz));
-	*ptr += sizeof(sz);
-
+	pack2mem(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
 		sprites[i]->Store(ptr);
 	}
@@ -518,9 +492,7 @@ void Action::Store(uint8_t** ptr)
 	action.Store(ptr);
 
 	uint16_t sz = frames.size();
-	memcpy(*ptr, &sz, sizeof(sz));
-	*ptr += sizeof(sz);
-
+	pack2mem(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
 		frames[i]->Store(ptr);
 	}
@@ -639,7 +611,7 @@ Animation::Animation(lua_State* L, int id)
 
 Animation::~Animation()
 {
-	for_each(m_components.begin(), m_components.end(), DeletePointerFunctor<INode>());
+	for_each(m_components.begin(), m_components.end(), DeletePointerFunctor<IPackNode>());
 	for_each(m_actions.begin(), m_actions.end(), DeletePointerFunctor<Action>());
 	delete m_clipbox;
 }
@@ -670,16 +642,12 @@ size_t Animation::Size() const
 
 void Animation::Store(uint8_t** ptr)
 {
-	memcpy(*ptr, &m_type, sizeof(m_type));
-	*ptr += sizeof(m_type);
-
-	memcpy(*ptr, &m_id, sizeof(m_id));
-	*ptr += sizeof(m_id);
+	pack2mem(m_type, ptr);
+	pack2mem(m_id, ptr);
 
 	if (m_clipbox) {
 		for  (int i = 0; i < 4; ++i) {
-			memcpy(*ptr, &m_clipbox->cb[i], sizeof(int32_t));
-			*ptr += sizeof(int32_t);
+			pack2mem(m_clipbox->cb[i], ptr);
 		}
 	}
 	m_export_name.Store(ptr);

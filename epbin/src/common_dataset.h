@@ -17,7 +17,8 @@ public:
 
 	size_t Size() const;
 
-	void Store(uint8_t** ptr);
+	void Store(uint8_t** ptr) const;
+	void Store(std::ofstream& fout) const;
 
 private:
 	bool m_is_empty;

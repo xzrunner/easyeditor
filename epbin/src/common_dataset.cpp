@@ -1,5 +1,6 @@
 #include "common_dataset.h"
 #include "Exception.h"
+#include "tools.h"
 
 #include <assert.h>
 
@@ -39,21 +40,34 @@ size_t String::Size() const
 	}
 }
 
-void String::Store(uint8_t** ptr)
+void String::Store(uint8_t** ptr) const
 {
 	if (m_is_empty) {
 		uint8_t c = 255;
-		memcpy(*ptr, &c, sizeof(uint8_t));
-		*ptr += sizeof(uint8_t);
+		pack2mem(c, ptr);
 	} else {
 		assert(m_str.size() < 255);
 		uint8_t sz = m_str.size();
-		memcpy(*ptr, &sz, sizeof(uint8_t));
-		*ptr += sizeof(uint8_t);
+		pack2mem(sz, ptr);
 		for (int i = 0; i < sz; ++i) {
 			uint8_t c = m_str[i];
-			memcpy(*ptr, &c, sizeof(uint8_t));
-			*ptr += sizeof(uint8_t);
+			pack2mem(c, ptr);
+		}
+	}
+}
+
+void String::Store(std::ofstream& fout) const
+{
+	if (m_is_empty) {
+		uint8_t c = 255;
+		pack2file(c, fout);
+	} else {
+		assert(m_str.size() < 255);
+		uint8_t sz = m_str.size();
+		pack2file(sz, fout);
+		for (int i = 0; i < sz; ++i) {
+			uint8_t c = m_str[i];
+			pack2file(c, fout);
 		}
 	}
 }

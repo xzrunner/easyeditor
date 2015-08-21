@@ -232,10 +232,6 @@
 		<Filter
 			Name="normal"
 			>
-			<File
-				RelativePath="..\..\..\src\INode.cpp"
-				>
-			</File>
 			<Filter
 				Name="tex"
 				>
@@ -276,26 +272,54 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\INode.h"
+					RelativePath="..\..\..\src\IPackNode.h"
 					>
 				</File>
 				<Filter
 					Name="new"
 					>
 					<File
-						RelativePath="..\..\..\src\epe\Animation.cpp"
+						RelativePath="..\..\..\src\epe\PackAnimation.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\epe\Animation.h"
+						RelativePath="..\..\..\src\epe\PackAnimation.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\epe\Picture.cpp"
+						RelativePath="..\..\..\src\epe\PackLabel.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\epe\Picture.h"
+						RelativePath="..\..\..\src\epe\PackLabel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPannel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPannel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPicture.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPicture.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPolygon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPolygon.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\spritepack.h"
 						>
 					</File>
 					<File
@@ -307,11 +331,11 @@
 					Name="old"
 					>
 					<File
-						RelativePath="..\..\..\src\epd_dataset.cpp"
+						RelativePath="..\..\..\src\epd\epd_dataset.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\epd_dataset.h"
+						RelativePath="..\..\..\src\epd\epd_dataset.h"
 						>
 					</File>
 				</Filter>

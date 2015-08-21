@@ -401,26 +401,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="ps"
-			>
-			<File
-				RelativePath="..\..\..\external\ps\particle3d.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\ps\particle3d.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\ps\utility.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\ps\utility.h"
-				>
-			</File>
-		</Filter>
 		<File
 			RelativePath="..\..\..\src\ejoy2d.c"
 			>

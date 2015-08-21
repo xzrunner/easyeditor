@@ -1,8 +1,7 @@
 #ifndef _EPBIN_EPD_DATASET_H_
 #define _EPBIN_EPD_DATASET_H_
 
-#include "INode.h"
-#include "common_dataset.h"
+#include "../common_dataset.h"
 
 #include <vector>
 #include <set>
@@ -42,28 +41,41 @@ private:
 
 }; // Picture
 
-class Component : public INode
+class IPackNode
+{
+public:
+	IPackNode(uint8_t type) : m_type(type) {}
+
+	virtual size_t Size() const = 0;
+	virtual void Store(uint8_t** ptr) const = 0;
+
+	uint8_t GetType() const { return m_type; }
+
+private:
+	uint8_t m_type;
+
+}; // IPackNode
+
+class Component : public IPackNode
 {
 public:
 	Component(lua_State* L);
 
 	virtual size_t Size() const;
-
-	virtual void Store(uint8_t** ptr);
+	virtual void Store(uint8_t** ptr) const;
 
 private:
 	uint16_t m_id;
 
 }; // Component
 
-class Switch : public INode
+class Switch : public IPackNode
 {
 public:
 	Switch(lua_State* L);
 
 	virtual size_t Size() const;
-
-	virtual void Store(uint8_t** ptr);
+	virtual void Store(uint8_t** ptr) const;
 
 private:
 	uint16_t m_id;
@@ -71,14 +83,13 @@ private:
 
 }; // Switch
 
-class Label : public INode
+class Label : public IPackNode
 {
 public:
 	Label(lua_State* L);
 
 	virtual size_t Size() const;
-
-	virtual void Store(uint8_t** ptr);
+	virtual void Store(uint8_t** ptr) const;
 
 private:
 	String m_name;
@@ -90,14 +101,13 @@ private:
 
 }; // Label
 
-class Mount : public INode
+class Mount : public IPackNode
 {
 public:
 	Mount(lua_State* L);
 
 	virtual size_t Size() const;
-
-	virtual void Store(uint8_t** ptr);
+	virtual void Store(uint8_t** ptr) const;
 
 private:
 	String m_name;
@@ -111,8 +121,7 @@ public:
 	~Sprite();
 
 	virtual size_t Size() const;
-
-	void Store(uint8_t** ptr);
+	void Store(uint8_t** ptr) const;
 
 private:
 	struct Matrix
@@ -188,7 +197,7 @@ private:
 
 	String m_export_name;
 
-	std::vector<INode*> m_components;
+	std::vector<IPackNode*> m_components;
 
 	std::vector<Action*> m_actions;
 

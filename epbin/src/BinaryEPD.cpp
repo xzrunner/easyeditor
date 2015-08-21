@@ -1,9 +1,10 @@
 #include "BinaryEPD.h"
 #include "LuaDataHelper.h"
-#include "epd_dataset.h"
 #include "tools.h"
 #include "Exception.h"
 #include "Lzma.h"
+
+#include "epd/epd_dataset.h"
 
 #define STRINGIFY(A)  #A
 #include "trans_old_ejoy2d_data.lua"
@@ -119,21 +120,17 @@ void BinaryEPD::PackImpl(const std::string& outfile, bool compress)
 	for (int i = 0, n = m_animations.size(); i < n; ++i) {
 		m_animations[i]->Store(&ptr_ep);
 	}
-	memcpy(ptr_ep, &m_max_id, sizeof(m_max_id));
-	ptr_ep += sizeof(m_max_id);
-	memcpy(ptr_ep, &m_export, sizeof(m_export));
-	ptr_ep += sizeof(m_export);
+	pack2mem(m_max_id, &ptr_ep);
+	pack2mem(m_export, &ptr_ep);
 	assert(ptr_ep - ep_buf == ep_sz);
 
 	// final
 	size_t sz = ep_sz + sizeof(uint8_t) + sizeof(uint32_t);
 	uint8_t* buf = new uint8_t[sz];
 	uint8_t* ptr = buf;
-	memcpy(ptr, &TYPE, sizeof(uint8_t));
-	ptr += sizeof(uint8_t);
+	pack2mem(TYPE, &ptr);
 	int cap = ejoypic_capacity(ep_buf, ep_sz);
-	memcpy(ptr, &cap, sizeof(uint32_t));
-	ptr += sizeof(uint32_t);
+	pack2mem(cap, &ptr);
 	memcpy(ptr, ep_buf, ep_sz);
 	delete[] ep_buf;
 

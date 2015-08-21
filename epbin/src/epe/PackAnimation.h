@@ -1,8 +1,8 @@
-#ifndef _EPBIN_EPE_ANIMATION_H_
-#define _EPBIN_EPE_ANIMATION_H_
+#ifndef _EPBIN_EPE_PACK_ANIMATION_H_
+#define _EPBIN_EPE_PACK_ANIMATION_H_
 
 #include "../common_dataset.h"
-#include "../INode.h"
+#include "../IPackNode.h"
 
 #include <vector>
 
@@ -13,15 +13,14 @@ namespace epbin
 namespace epe
 {
 
-class Animation : public INode
+class PackAnimation : public IPackNode
 {
 public:
-	Animation(lua_State* L);
-	virtual ~Animation();
+	PackAnimation(lua_State* L, uint16_t id);
+	virtual ~PackAnimation();
 
 	virtual size_t Size() const;
-
-	virtual void Store(uint8_t** ptr);
+	virtual void Store(std::ofstream& fout) const;
 
 private:
 	struct Clipbox
@@ -49,18 +48,25 @@ private:
 
 	struct SpriteTrans 
 	{
-		Matrix* mat;
+		int matref;
+		Matrix mat;
+
 		uint32_t color;
 		uint32_t additive;
 		uint32_t rmap, gmap, bmap;
+
 		int program;
 	};
 
 	struct PackPart
 	{
+		bool only_number;
+
+		uint8_t type;
+
 		SpriteTrans t;
-		int component_id;
-		int touchable;
+		uint16_t component_id;
+		int8_t touchable;
 	};
 
 	struct PackFrame 
@@ -70,7 +76,12 @@ private:
 
 private:
 	void Load(lua_State* L);
-	void LoadFrame(lua_State* L);
+	void LoadFrame(lua_State* L, PackFrame& frame);
+
+	size_t FrameSize(const PackFrame& frame) const;
+	void StoreFrame(const PackFrame& frame, std::ofstream& fout) const;
+
+	static bool IsMatrixIdentity(lua_State* L);
 
 private:
 	String m_export_name;
@@ -83,9 +94,9 @@ private:
 
 	std::vector<PackFrame> m_frames;
 
-}; // Animation
+}; // PackAnimation
 
 }
 }
 
-#endif // _EPBIN_EPE_ANIMATION_H_
+#endif // _EPBIN_EPE_PACK_ANIMATION_H_
