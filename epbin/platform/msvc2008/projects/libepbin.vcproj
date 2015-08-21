@@ -224,6 +224,10 @@
 				RelativePath="..\..\..\src\trans_old_ejoy2d_data.lua"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\trans_old_ejoy2d_data2.lua"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="normal"
@@ -278,6 +282,14 @@
 				<Filter
 					Name="new"
 					>
+					<File
+						RelativePath="..\..\..\src\epe\Animation.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\Animation.h"
+						>
+					</File>
 					<File
 						RelativePath="..\..\..\src\epe\Picture.cpp"
 						>
