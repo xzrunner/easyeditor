@@ -30,8 +30,8 @@ bool Group::Insert(ISprite* sprite)
 	if (m_sprites.IsExist(sprite)) {
 		return false;
 	} else {
-		sprite->visiable = m_visible;
-		sprite->editable = m_editable;
+// 		sprite->visiable = m_visible;
+// 		sprite->editable = m_editable;
 		m_sprites.Insert(sprite);
 		return true;
 	}

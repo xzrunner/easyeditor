@@ -210,6 +210,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 		if (!base_path.empty()) {
 			BaseFileUD* ud = new BaseFileUD(base_path);
 			sprite->SetUserData(ud);
+			sprite->editable = false;
 		}
 		CheckSpriteName(sprite);
 		m_sprites.Insert(sprite);

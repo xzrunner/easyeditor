@@ -204,7 +204,7 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 		type == d2d::DT_SELECTABLE) 
 	{
 		for (int i = 0, n = m_layers.size(); i < n; ++i) {
-			m_layers[i]->TraverseSprite(visitor, order);
+			m_layers[i]->TraverseSprite(visitor, type, order);
 		}
 	}
 	else
@@ -215,7 +215,7 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 			if (type == d2d::DT_EDITABLE && layer->IsEditable() ||
 				type == d2d::DT_VISIBLE && layer->IsVisible())
 			{
-				layer->TraverseSprite(visitor, order);
+				layer->TraverseSprite(visitor, type, order);
 			}
 		}
 	}
