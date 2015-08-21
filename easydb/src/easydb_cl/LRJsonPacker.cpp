@@ -125,7 +125,6 @@ void LRJsonPacker::PackGraphics(const std::string& filepath)
 	std::string lr_name = get_lr_name_from_file(filepath);
 
 	ParserSpecial(lr_val, lr_name, out_val);
-	ParserCharacter(lr_val, 2, "character", out_val);
 	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 
 	out_val["package"] = lr_name + "_scene";
@@ -172,6 +171,7 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
+	ParserCharacter(lr_val, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
 	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
