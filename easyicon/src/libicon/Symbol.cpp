@@ -51,13 +51,22 @@ void Symbol::Draw(const d2d::Matrix& mt,
 d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
 	d2d::Rect r;
-	if (m_icon) {
-		float process = 1;
-		if (sprite) {
-			process = static_cast<const Sprite*>(sprite)->GetProcess();
-		}
-		m_icon->GetRegion(process, r);
+	if (!m_icon) {
+		return r;
 	}
+
+	float process = 1;
+	if (sprite) {
+		process = static_cast<const Sprite*>(sprite)->GetProcess();
+	}
+	m_icon->GetRegion(process, r);
+
+	const d2d::Image* img = m_icon->GetImage();
+	r.xMin = (r.xMin - 0.5f) * img->GetOriginWidth();
+	r.xMax = (r.xMax - 0.5f) * img->GetOriginWidth();
+	r.yMin = (r.yMin - 0.5f) * img->GetOriginHeight();
+	r.yMax = (r.yMax - 0.5f) * img->GetOriginHeight();
+
 	return r;
 }
 

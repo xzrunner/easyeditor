@@ -50,8 +50,8 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 		h = m_img->GetClippedHeight();
 	for (int i = 0; i < 4; ++i)
 	{
-		float x = r[i].x * w;
-		float y = r[i].y * h;
+		float x = (r[i].x - 0.5f) * w,
+			y = (r[i].y - 0.5f) * h;
 		vertices[i] = d2d::Math::transVector(d2d::Vector(x, y), mt);
 	}
 
