@@ -195,8 +195,13 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 
 		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
 		std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
+		std::string spr_tag;
 		if (d2d::FilenameTools::IsFileExist(shape_filepath)) {
 			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+			const std::vector<d2d::IShape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
+			if (!shapes.empty()) {
+				spr_tag = shapes[0]->name;
+			}
 		} else {
 			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		}
@@ -207,6 +212,12 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->Load(spr_val);
+
+		if (!sprite->tag.empty() && sprite->tag[sprite->tag.size()-1] != ';') {
+			sprite->tag += ";";
+		}
+		sprite->tag += spr_tag;
+
 		if (!base_path.empty()) {
 			BaseFileUD* ud = new BaseFileUD(base_path);
 			sprite->SetUserData(ud);
