@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _COCO_COCO_PACKER_H_
+#define _COCO_COCO_PACKER_H_
 
 #include <drag2d.h>
 #include <easybuilder.h>
@@ -9,12 +10,14 @@ namespace escale9 { class Symbol; }
 
 namespace libcoco
 {
+namespace epe
+{
 
 class TexturePacker;
-class CocoPackerNew
+class CocoPacker
 {
 public:
-	CocoPackerNew(const TexturePacker& tex);
+	CocoPacker(const TexturePacker& tex);
 	
 	void pack(const std::vector<const d2d::ISymbol*>& symbols);
 
@@ -52,6 +55,9 @@ private:
 	std::map<const d2d::ISprite*, int> m_mapSpriteID;
 	std::map<const d2d::ISymbol*, int> m_mapSymbolID;
 
-}; // CocoPackerNew
+}; // CocoPacker
 
 }
+}
+
+#endif // _COCO_COCO_PACKER_H_

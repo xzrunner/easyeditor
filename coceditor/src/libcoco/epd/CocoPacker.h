@@ -17,6 +17,8 @@ namespace epbin { class ImageIDer; }
 
 namespace libcoco
 {
+namespace epd
+{
 
 class CocoPacker
 {
@@ -104,6 +106,7 @@ private:
 
 }; // COCCode
 
+}
 }
 
 #endif // _LIBCOCO_COCO_PACKER_H_

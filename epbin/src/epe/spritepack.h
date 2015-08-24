@@ -12,6 +12,8 @@
 #define TYPE_PANNEL 5
 #define TYPE_ANCHOR 6
 #define TYPE_MATRIX 7
+#define TYPE_PARTICLE3D 8
+#define TYPE_PARTICLE2D 9
 
 #define ANCHOR_ID 0xffff
 #define SCREEN_SCALE 16

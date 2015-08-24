@@ -7,6 +7,8 @@
 
 namespace libcoco
 {
+namespace epd
+{
 
 class TextureMgr
 {
@@ -41,6 +43,7 @@ private:
 
 }; // TexturesMgr
 
+}
 }
 
 #endif // _LIBCOCO_TEXTURE_MANAGER_H_

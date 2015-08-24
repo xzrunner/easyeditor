@@ -1,11 +1,13 @@
 #include "PackLuaFile.h"
 #include "TexturePacker.h"
-#include "CocoPackerNew.h"
+#include "CocoPacker.h"
 #include "SymbolDependanceSorter.h"
 
 #include <easycomplex.h>
 
 namespace libcoco
+{
+namespace epe
 {
 
 void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites, 
@@ -41,9 +43,10 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	textures.storeToFile(outfloder, "tmp.1", d2d::ImageSaver::e_ppm);
 
 	// pack lua file
-	CocoPackerNew code(textures);
+	CocoPacker code(textures);
 	code.pack(symbols);
 	code.storeToFile(outfloder + "\\tmp.lua");
 }
 
+}
 }

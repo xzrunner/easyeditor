@@ -41,6 +41,8 @@ public:
 
 	Scale9Type GetScale9Type() const { return m_data.GetType(); }
 
+	const Scale9Data& GetScale9Data() const { return m_data; }
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}

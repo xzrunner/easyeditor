@@ -5,6 +5,8 @@
 
 namespace libcoco
 {
+namespace epd
+{
 
 class TPAdapter
 {
@@ -60,6 +62,7 @@ private:
 
 }; // TPAdapter
 
+}
 }
 
 #endif // _LIBCOCO_TEXTURE_PACKER_ADAPTER_H_

@@ -9,6 +9,8 @@
 
 namespace libcoco
 {
+namespace epd
+{
 
 class TPParser
 {
@@ -60,6 +62,7 @@ private:
 
 }; // TPParser
 
+}
 }
 
 #endif // _LIBCOCO_TP_PARSER_H_

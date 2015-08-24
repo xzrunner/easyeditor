@@ -150,74 +150,106 @@
 	</References>
 	<Files>
 		<Filter
-			Name="new"
+			Name="epe"
 			>
 			<File
-				RelativePath="..\..\..\src\libcoco\CocoPackerNew.cpp"
+				RelativePath="..\..\..\src\libcoco\epe\CocoPacker.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\CocoPackerNew.h"
+				RelativePath="..\..\..\src\libcoco\epe\CocoPacker.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\PackLuaFile.cpp"
+				RelativePath="..\..\..\src\libcoco\epe\PackLuaFile.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\PackLuaFile.h"
+				RelativePath="..\..\..\src\libcoco\epe\PackLuaFile.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\ParserLuaFile.cpp"
+				RelativePath="..\..\..\src\libcoco\epe\ParserLuaFile.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\ParserLuaFile.h"
+				RelativePath="..\..\..\src\libcoco\epe\ParserLuaFile.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TexturePacker.cpp"
+				RelativePath="..\..\..\src\libcoco\epe\TexturePacker.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TexturePacker.h"
+				RelativePath="..\..\..\src\libcoco\epe\TexturePacker.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="old"
+			Name="epd"
 			>
 			<File
-				RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
+				RelativePath="..\..\..\src\libcoco\epd\CocoPacker.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\CocoPacker.h"
+				RelativePath="..\..\..\src\libcoco\epd\CocoPacker.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TextureMgr.cpp"
+				RelativePath="..\..\..\src\libcoco\epd\TextureMgr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TextureMgr.h"
+				RelativePath="..\..\..\src\libcoco\epd\TextureMgr.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TPAdapter.cpp"
+				RelativePath="..\..\..\src\libcoco\epd\TPAdapter.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TPAdapter.h"
+				RelativePath="..\..\..\src\libcoco\epd\TPAdapter.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TPParser.cpp"
+				RelativePath="..\..\..\src\libcoco\epd\TPParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TPParser.h"
+				RelativePath="..\..\..\src\libcoco\epd\TPParser.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="new"
+			>
+			<File
+				RelativePath="..\..\..\src\libcoco\IPackNode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\PackAnimation.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\PackAnimation.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\PackLabel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\PackLabel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\PackPicture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\PackPicture.h"
 				>
 			</File>
 		</Filter>

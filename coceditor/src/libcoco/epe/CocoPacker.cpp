@@ -1,4 +1,4 @@
-#include "CocoPackerNew.h"
+#include "CocoPacker.h"
 #include "TexturePacker.h"
 #include "Utility.h"
 
@@ -11,13 +11,13 @@ namespace libcoco
 
 namespace lua = ebuilder::lua;
 
-CocoPackerNew::CocoPackerNew(const TexturePacker& tex)
+CocoPacker::CocoPacker(const TexturePacker& tex)
 	: m_tex(tex)
 	, m_id(0)
 {
 }
 
-void CocoPackerNew::pack(const std::vector<const d2d::ISymbol*>& symbols)
+void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 {
 	lua::TableAssign ta(m_gen, "return", false, false);
 
@@ -133,7 +133,7 @@ void CocoPackerNew::pack(const std::vector<const d2d::ISymbol*>& symbols)
 	}
 }
 
-void CocoPackerNew::storeToFile(const std::string& filename)
+void CocoPacker::storeToFile(const std::string& filename)
 {
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename.c_str());
@@ -143,7 +143,7 @@ void CocoPackerNew::storeToFile(const std::string& filename)
 	fout.close();
 }
 
-void CocoPackerNew::resolvePicture(const d2d::ImageSprite* sprite)
+void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -239,7 +239,7 @@ void CocoPackerNew::resolvePicture(const d2d::ImageSprite* sprite)
 	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
 }
 
-void CocoPackerNew::resolvePicture(const d2d::ImageSymbol* symbol)
+void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -303,7 +303,7 @@ void CocoPackerNew::resolvePicture(const d2d::ImageSymbol* symbol)
 	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
 }
 
-void CocoPackerNew::resolveFont(const d2d::FontSprite* sprite)
+void CocoPacker::resolveFont(const d2d::FontSprite* sprite)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -330,7 +330,7 @@ void CocoPackerNew::resolveFont(const d2d::FontSprite* sprite)
 	m_gen.line(aFont + ", " + aColor + ", " + aAlign + ", " + aSize + ", " + aWidth + ", " + aHeight + ", " + aEdge);
 }
 
-void CocoPackerNew::resolveAnimation(const ecomplex::Symbol* symbol)
+void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -411,7 +411,7 @@ void CocoPackerNew::resolveAnimation(const ecomplex::Symbol* symbol)
 	}
 }
 
-void CocoPackerNew::resolveAnimation(const libanim::Symbol* symbol)
+void CocoPacker::resolveAnimation(const libanim::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -465,7 +465,7 @@ void CocoPackerNew::resolveAnimation(const libanim::Symbol* symbol)
 	}
 }
 
-void CocoPackerNew::resolveAnimation(const escale9::Symbol* symbol)
+void CocoPacker::resolveAnimation(const escale9::Symbol* symbol)
 {
  	lua::TableAssign ta(m_gen, "", true, false);
  
@@ -548,7 +548,7 @@ void CocoPackerNew::resolveAnimation(const escale9::Symbol* symbol)
  	}
 }
 
-void CocoPackerNew::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<int>& ids, 
+void CocoPacker::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<int>& ids, 
 										   std::map<int, std::vector<std::string> >& unique, 
 										   std::vector<std::pair<int, std::string> >& order)
 {
@@ -631,7 +631,7 @@ void CocoPackerNew::resolveSpriteForComponent(const d2d::ISprite* sprite, std::v
 	}
 }
 
-void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
+void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 									   const std::vector<int>& ids, const std::vector<std::pair<int, std::string> >& order)
 {
 	int id = ids[index];
@@ -650,7 +650,7 @@ void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 		resolveSpriteForFrameImage(sprite, cindex);
 }
 
-void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order)
+void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order)
 {
 	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 	assert(itr != m_mapSymbolID.end());
@@ -683,7 +683,7 @@ void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, const std:
 		resolveSpriteForFrame(sprite, cindex, true);
 }
 
-void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat)
+void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat)
 {
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
 
@@ -707,7 +707,7 @@ void CocoPackerNew::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bo
 		lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
 }
 
-void CocoPackerNew::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
+void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 {
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
 
@@ -739,7 +739,7 @@ void CocoPackerNew::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int i
 	}
 }
 
-void CocoPackerNew::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)
+void CocoPacker::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)
 {
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
 
@@ -768,7 +768,7 @@ void CocoPackerNew::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int
 	lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
 }
 
-void CocoPackerNew::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/)
+void CocoPacker::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/)
 {
 	mat[1] = mat[2] = mat[4] = mat[5] = 0;
 	mat[0] = mat[3] = 1;

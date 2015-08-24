@@ -7,6 +7,8 @@ struct lua_State;
 
 namespace libcoco
 {
+namespace epe
+{
 
 class ParserLuaFile
 {
@@ -109,4 +111,5 @@ private:
 
 }; // ParserLuaFile
 
+}
 }

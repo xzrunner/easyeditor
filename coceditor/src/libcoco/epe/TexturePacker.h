@@ -4,6 +4,8 @@
 
 namespace libcoco
 {
+namespace epe
+{
 
 class TexturePacker
 {
@@ -71,4 +73,5 @@ private:
 
 }; // ImageCmp
 
+}
 }
