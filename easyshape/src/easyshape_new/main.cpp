@@ -30,8 +30,12 @@ bool MyApp::OnInit()
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
+		d2d::Config::Instance()->EnableUseDTex(false);
+		d2d::Config::Instance()->EnableRender(false);
 		wxString path(wxGetApp().argv[1]);
 		frame->initWithFile(path);
+		d2d::Config::Instance()->EnableUseDTex(true);
+		d2d::Config::Instance()->EnableRender(true);
 	}
 
 	return true;

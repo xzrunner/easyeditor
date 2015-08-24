@@ -86,7 +86,7 @@ void Task::InitLayout(wxFrame* parent)
 
 	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
 	m_view_panel_mgr.AddShapePanel(m_stage);
-	property->SetEditPanel(m_stage);
+	property->SetEditPanel(m_stage->GetStageImpl());
 	m_library->SetCanvas(m_stage->GetCanvas());
 
 	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, &m_view_panel_mgr, m_stage);

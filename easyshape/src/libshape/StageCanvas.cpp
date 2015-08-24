@@ -43,7 +43,9 @@ void StageCanvas::InitGL()
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 
-	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	if (m_sprite_impl) {
+		m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	}
 	ResetViewport();
 }
 
