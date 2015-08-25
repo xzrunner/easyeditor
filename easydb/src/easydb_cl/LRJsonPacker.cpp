@@ -78,7 +78,7 @@ void LRJsonPacker::PackAll(const std::string& filepath)
 	std::string lr_name = get_lr_name_from_file(filepath);
 
 	ParserSpecial(lr_val, lr_name, out_val);
-	ParserCharacter(lr_val, 2, "character", out_val);
+	ParserCharacter(lr_val, grids, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
 	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
@@ -171,7 +171,7 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
-	ParserCharacter(lr_val, 2, "character", out_val);
+	ParserCharacter(lr_val, grids, 2, "character", out_val);
 	ParserPoint(lr_val, 3, "point", out_val);
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
 	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
@@ -186,8 +186,8 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 	fout.close();
 }
 
-void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
-								   bool force_grids, Json::Value& out_val)
+void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, float angle,
+							   const lr::Grids& grids, bool force_grids, Json::Value& out_val)
 {
 	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
@@ -195,7 +195,7 @@ void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, co
 
 		std::vector<d2d::Vector> bound = poly->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] += offset;
+			bound[i] = d2d::Math::rotateVector(bound[i], angle) + offset;
 		}
 		grid_idx = grids.IntersectPolygon(bound);
 
@@ -208,7 +208,7 @@ void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, co
 	{
 		std::vector<d2d::Vector> bound = chain->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] += offset;
+			bound[i] = d2d::Math::rotateVector(bound[i], angle) + offset;
 		}
 
 		if (force_grids) {
@@ -250,7 +250,7 @@ void LRJsonPacker::ParserShapeLayer(const Json::Value& src_val, const lr::Grids&
 		assert(shape_spr);
 		const std::vector<d2d::IShape*>& shapes = shape_spr->GetSymbol().GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
-			ParserShape(shapes[i], sprite->GetPosition(), grids, force_grids, dst_val);
+			ParserShape(shapes[i], sprite->GetPosition(), sprite->GetAngle(), grids, force_grids, dst_val);
 		}
 
 		int sz = out_val[name].size();
@@ -270,7 +270,7 @@ void LRJsonPacker::ParserShapeLayer(const Json::Value& src_val, const lr::Grids&
 		
 		Json::Value dst_val;
 		dst_val["name"] = src_shape_val["name"];
-		ParserShape(shape, d2d::Vector(0, 0), grids, force_grids, dst_val);
+		ParserShape(shape, d2d::Vector(0, 0), 0, grids, force_grids, dst_val);
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = dst_val;
@@ -334,8 +334,8 @@ void LRJsonPacker::ParserCamera(const Json::Value& src_val, int layer_idx,
 	}
 }
 
-void LRJsonPacker::ParserCharacter(const Json::Value& src_val, int layer_idx, 
-								   const char* name, Json::Value& out_val)
+void LRJsonPacker::ParserCharacter(const Json::Value& src_val, const lr::Grids& grids,
+								   int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
@@ -345,15 +345,38 @@ void LRJsonPacker::ParserCharacter(const Json::Value& src_val, int layer_idx,
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
 			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 			continue;
-		}
+		}				
 
 		Json::Value char_val;
 		char_val["name"] = spr_val["name"];
 		char_val["x"] = spr_val["position"]["x"];
 		char_val["y"] = spr_val["position"]["y"];
 
+		// region
+		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
+		std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
+		std::string tag_ext;
+		if (d2d::FilenameTools::IsFileExist(shape_filepath)) {
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+			const std::vector<d2d::IShape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
+			if (!shapes.empty()) {
+				tag_ext = shapes[0]->name;
+
+				if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0])) {
+					float x = spr_val["position"]["x"].asDouble(),
+						y = spr_val["position"]["y"].asDouble();
+					float ang = spr_val["angle"].asDouble();					
+					ParserShape(poly, d2d::Vector(x, y), ang, grids, true, char_val["grids"]);
+				}
+			}
+		}
+
 		// tags
 		std::string tag = spr_val["tag"].asString();
+		if (!tag.empty() && tag[tag.size()-1] != ';') {
+			tag += ";";
+		}
+		tag += tag_ext;
 		std::vector<std::string> tags;
 		int pos = tag.find_first_of(';');
 		tags.push_back(tag.substr(0, pos));
