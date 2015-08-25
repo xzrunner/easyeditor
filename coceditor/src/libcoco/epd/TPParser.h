@@ -5,7 +5,7 @@
 
 #include "TPAdapter.h"
 #include "TextureMgr.h"
-#include "SymbolDependanceSorter.h"
+#include "../SymbolDependanceSorter.h"
 
 namespace libcoco
 {

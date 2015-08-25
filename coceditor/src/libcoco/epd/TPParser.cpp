@@ -2,6 +2,8 @@
 
 namespace libcoco
 {
+namespace epd
+{
 
 TPParser::TPParser(const std::vector<const d2d::ISymbol*>& symbols,
 				   const TextureMgr& tex_mgr)
@@ -111,4 +113,5 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 	}
 }
 
-} // coceditor
+}
+}

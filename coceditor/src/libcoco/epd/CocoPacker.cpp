@@ -1,5 +1,5 @@
 #include "CocoPacker.h"
-#include "Utility.h"
+#include "../Utility.h"
 
 #include <queue>
 
@@ -14,6 +14,8 @@
 #include <epbin.h>
 
 namespace libcoco
+{
+namespace epd
 {
 
 namespace lua = ebuilder::lua;
@@ -1979,4 +1981,5 @@ int CocoPacker::QueryIconID(const eicon::Sprite* icon) const
 	}
 }
 
-} // coceditor
+}
+}

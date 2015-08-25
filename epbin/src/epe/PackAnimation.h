@@ -84,7 +84,7 @@ private:
 	static bool IsMatrixIdentity(lua_State* L);
 
 private:
-	String m_export_name;
+//	String m_export_name;
 
 	Clipbox* m_clipbox;
 

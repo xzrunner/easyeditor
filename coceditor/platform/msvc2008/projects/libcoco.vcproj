@@ -225,33 +225,53 @@
 			Name="new"
 			>
 			<File
+				RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\CocoPacker.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libcoco\IPackNode.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\PackAnimation.cpp"
+				RelativePath="..\..\..\src\libcoco\PackNodeMgr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\PackAnimation.h"
+				RelativePath="..\..\..\src\libcoco\PackNodeMgr.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\PackLabel.cpp"
+			<Filter
+				Name="nodes"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\PackLabel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\PackPicture.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\PackPicture.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackAnimation.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackAnimation.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackLabel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackLabel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackPicture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackPicture.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libcoco\SymbolDependanceSorter.cpp"
