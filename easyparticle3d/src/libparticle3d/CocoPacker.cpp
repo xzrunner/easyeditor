@@ -108,6 +108,22 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 	s = wxString::FromDouble(val["max_linear_acc"].asInt());
 	lua::assign(gen, "['max_linear_acc']", s+",");
 
+	float center, offset;
+
+	center = val["disturbance_radius"]["center"].asDouble();
+	offset = val["disturbance_radius"]["offset"].asDouble();
+	s = wxString::FromDouble(center - offset);
+	lua::assign(gen, "['min_disturbance_radius']", s+"*k,");
+	s = wxString::FromDouble(center + offset);
+	lua::assign(gen, "['max_disturbance_radius']", s+"*k,");
+
+	center = val["disturbance_spd"]["center"].asDouble();
+	offset = val["disturbance_spd"]["offset"].asDouble();
+	s = wxString::FromDouble(center - offset);
+	lua::assign(gen, "['min_disturbance_spd']", s+"*k,");
+	s = wxString::FromDouble(center + offset);
+	lua::assign(gen, "['max_disturbance_spd']", s+"*k,");
+
 	//	s = wxString::FromDouble(val["inertia"].asInt());
 	s = wxString::FromDouble(10);
 	lua::assign(gen, "['inertia']", s+",");
