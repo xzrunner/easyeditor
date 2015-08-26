@@ -6,6 +6,8 @@
 
 namespace libcoco
 {
+namespace epd
+{
 
 void TPAdapter::Load(const char* filename)
 {
@@ -64,3 +66,4 @@ void TPAdapter::Load(const Json::Value& value, Region& region)
 }
 
 } // d2d
+}

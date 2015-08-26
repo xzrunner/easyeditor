@@ -2,6 +2,8 @@
 
 namespace libcoco
 {
+namespace epd
+{
 
 TextureMgr::TextureMgr()
 {
@@ -42,4 +44,5 @@ const TextureMgr::Entry* TextureMgr::GetTexture(int idx) const
 	}
 }
 
+}
 }

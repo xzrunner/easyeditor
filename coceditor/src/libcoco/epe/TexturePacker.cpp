@@ -2,6 +2,8 @@
 
 namespace libcoco
 {
+namespace epe
+{
 
 TexturePacker::TexturePacker(int padding, int extrude)
 	: m_edge(768)
@@ -108,4 +110,5 @@ const d2d::Rect* TexturePacker::query(d2d::Image* image) const
 		return NULL;
 }
 
+}
 }

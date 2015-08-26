@@ -1,12 +1,15 @@
 #include "CocoPacker.h"
 #include "TexturePacker.h"
-#include "Utility.h"
+
+#include "../Utility.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
 
 namespace libcoco
+{
+namespace epe
 {
 
 namespace lua = ebuilder::lua;
@@ -812,4 +815,5 @@ void CocoPacker::transToMat(const d2d::ISprite* sprite, float mat[6], bool force
 	mat[5] = -mat[5];
 }
 
+}
 }

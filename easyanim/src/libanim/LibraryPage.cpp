@@ -65,7 +65,7 @@ void LibraryPage::loadFromLuaFile(const std::string& filename)
  	std::string name = filename.substr(0, filename.find_last_of("."));
  	texfilenames.push_back(name + ".1.ppm");
  
- 	libcoco::ParserLuaFile parser;
+	libcoco::epe::ParserLuaFile parser;
  	parser.parser(filename);
  	parser.transToMemory(texfilenames);
  

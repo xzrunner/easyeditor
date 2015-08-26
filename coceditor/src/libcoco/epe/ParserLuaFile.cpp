@@ -14,6 +14,8 @@ extern "C" {
 
 namespace libcoco
 {
+namespace epe
+{
 
 ParserLuaFile::~ParserLuaFile()
 {
@@ -829,4 +831,5 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 	}
 }
 
+}
 }

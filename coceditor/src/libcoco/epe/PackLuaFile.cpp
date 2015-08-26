@@ -1,7 +1,8 @@
 #include "PackLuaFile.h"
 #include "TexturePacker.h"
 #include "CocoPacker.h"
-#include "SymbolDependanceSorter.h"
+
+#include "../SymbolDependanceSorter.h"
 
 #include <easycomplex.h>
 
