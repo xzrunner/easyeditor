@@ -108,8 +108,10 @@ void FileAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	comp.filepath = comp_val["filepath"].asString();
 	comp.filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.filepath);
 
-	comp.bind_filepath = comp_val["bind ps filepath"].asString();
-	comp.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.bind_filepath);
+	if (!comp_val["bind ps filepath"].isNull()) {
+		comp.bind_filepath = comp_val["bind ps filepath"].asString();
+		comp.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.bind_filepath);
+	}
 
 	comp.name = comp_val["name"].asString();
 
@@ -131,18 +133,18 @@ void FileAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 		comp.angle_var = (max - min) * 0.5f;
 	}
 
-	if (!comp_val["col_mul"].isNull()) {
-		comp.col_mul.r = comp_val["col_mul"]["r"].asDouble();
-		comp.col_mul.g = comp_val["col_mul"]["g"].asDouble();
-		comp.col_mul.b = comp_val["col_mul"]["b"].asDouble();
+	if (!comp_val["mul_col"].isNull()) {
+		comp.col_mul.r = comp_val["mul_col"]["r"].asDouble();
+		comp.col_mul.g = comp_val["mul_col"]["g"].asDouble();
+		comp.col_mul.b = comp_val["mul_col"]["b"].asDouble();
 	} else {
 		comp.col_mul.r = comp.col_mul.g = comp.col_mul.b = 1;
 	}
 
-	if (!comp_val["col_add"].isNull()) {
-		comp.col_add.r = comp_val["col_add"]["r"].asDouble();
-		comp.col_add.g = comp_val["col_add"]["g"].asDouble();
-		comp.col_add.b = comp_val["col_add"]["b"].asDouble();
+	if (!comp_val["add_col"].isNull()) {
+		comp.col_add.r = comp_val["add_col"]["r"].asDouble();
+		comp.col_add.g = comp_val["add_col"]["g"].asDouble();
+		comp.col_add.b = comp_val["add_col"]["b"].asDouble();
 	} else {
 		comp.col_add.r = comp.col_add.g = comp.col_add.b = 0;
 	}

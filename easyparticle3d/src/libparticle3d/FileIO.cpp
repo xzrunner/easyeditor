@@ -156,11 +156,11 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 
 	cfg->lifetime = adapter.emission_time;
 	
-	cfg->emission_time = adapter.emission_time;
+	cfg->emission_time = cfg->lifetime;
 	cfg->count = adapter.count;
 
-	cfg->life = adapter.life;
-	cfg->life_var = adapter.life_var;
+	cfg->life = adapter.life * 0.001f;
+	cfg->life_var = adapter.life_var * 0.001f;
 
 	cfg->hori = adapter.hori;
 	cfg->hori_var = adapter.hori_var;
@@ -202,8 +202,8 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 		const FileAdapter::Component& comp = adapter.components[i];
 		particle_symbol& symbol = cfg->symbols[i];
 
-		symbol.scale_start = comp.scale_start;
-		symbol.scale_end = comp.scale_end;
+		symbol.scale_start = comp.scale_start * 0.01f;
+		symbol.scale_end = comp.scale_end * 0.01f;
 
 		symbol.angle = comp.angle;
 		symbol.angle_var = comp.angle_var;
@@ -213,7 +213,9 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 		symbol.alpha_start = comp.alpha_start;
 		symbol.alpha_end = comp.alpha_end;
 
-		symbol.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);
+		if (d2d::FilenameTools::IsFileExist(comp.bind_filepath)) {
+			symbol.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);
+		}
 
 		symbol.ud = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
 	}
