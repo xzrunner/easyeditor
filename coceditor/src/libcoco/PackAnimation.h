@@ -11,7 +11,7 @@ namespace libanim { class Symbol; }
 namespace libcoco
 {
 
-class PackAnimation
+class PackAnimation : public IPackNode
 {
 public:
 	PackAnimation(const ecomplex::Symbol* complex);

@@ -20,7 +20,8 @@ private:
 	std::string m_name;
 	std::string m_font;
 
-	bool m_align_hori, m_align_vert;
+	d2d::HoriAlignType m_align_hori;
+	d2d::VertAlignType m_align_vert;
 
 	d2d::Colorf m_color;	// PT_ARGB
 

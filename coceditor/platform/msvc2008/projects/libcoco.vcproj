@@ -155,6 +155,24 @@
 			<File
 				RelativePath="..\..\..\src\libcoco\epe\CocoPacker.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AssemblerListingLocation="..\libcoco\x86\Debug"
+						ObjectFile="..\libcoco\x86\Debug\epe"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AssemblerListingLocation="..\libcoco\x86\Release"
+						ObjectFile="..\libcoco\x86\Release\epe"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcoco\epe\CocoPacker.h"
@@ -191,6 +209,24 @@
 			<File
 				RelativePath="..\..\..\src\libcoco\epd\CocoPacker.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AssemblerListingLocation="..\libcoco\x86\Debug"
+						ObjectFile="..\libcoco\x86\Debug\epd"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AssemblerListingLocation="..\libcoco\x86\Release"
+						ObjectFile="..\libcoco\x86\Release\epd"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcoco\epd\CocoPacker.h"
