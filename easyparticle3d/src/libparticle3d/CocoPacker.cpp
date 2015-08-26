@@ -185,25 +185,7 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			s = wxString::FromDouble(child_val["max_rotate"].asInt());
 			lua::assign(gen, "['max_rotate']", s+"*r,");
 
-			s = wxString::FromDouble(child_val["mul_col"]["r"].asDouble());
-			lua::assign(gen, "['mul_col_r']", s+",");
-			s = wxString::FromDouble(child_val["mul_col"]["g"].asDouble());
-			lua::assign(gen, "['mul_col_g']", s+",");
-			s = wxString::FromDouble(child_val["mul_col"]["b"].asDouble());
-			lua::assign(gen, "['mul_col_b']", s+",");
-
-			s = wxString::FromDouble(child_val["add_col"]["r"].asDouble());
-			lua::assign(gen, "['add_col_r']", s+",");
-			s = wxString::FromDouble(child_val["add_col"]["g"].asDouble());
-			lua::assign(gen, "['add_col_g']", s+",");
-			s = wxString::FromDouble(child_val["add_col"]["b"].asDouble());
-			lua::assign(gen, "['add_col_b']", s+",");
-
-			s = wxString::FromDouble(child_val["start_alpha"].asDouble());
-			lua::assign(gen, "['start_alpha']", s+",");
-
-			s = wxString::FromDouble(child_val["end_alpha"].asInt());
-			lua::assign(gen, "['end_alpha']", s+",");
+			PackCompColor(child_val, gen);
 
 			s = wxString::FromDouble(child_val["start_z"].asInt());
 			lua::assign(gen, "['start_z']", s+",");
@@ -346,25 +328,7 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			s = wxString::FromDouble(child_val["scale"]["end"].asDouble());
 			lua::assign(gen, "['end_scale']", s+"*s,");
 
-			s = wxString::FromDouble(child_val["mul_col"]["r"].asDouble());
-			lua::assign(gen, "['mul_col_r']", s+",");
-			s = wxString::FromDouble(child_val["mul_col"]["g"].asDouble());
-			lua::assign(gen, "['mul_col_g']", s+",");
-			s = wxString::FromDouble(child_val["mul_col"]["b"].asDouble());
-			lua::assign(gen, "['mul_col_b']", s+",");
-
-			s = wxString::FromDouble(child_val["add_col"]["r"].asDouble());
-			lua::assign(gen, "['add_col_r']", s+",");
-			s = wxString::FromDouble(child_val["add_col"]["g"].asDouble());
-			lua::assign(gen, "['add_col_g']", s+",");
-			s = wxString::FromDouble(child_val["add_col"]["b"].asDouble());
-			lua::assign(gen, "['add_col_b']", s+",");
-
-			s = wxString::FromDouble(child_val["alpha"]["start"].asDouble());
-			lua::assign(gen, "['start_alpha']", s+",");
-
-			s = wxString::FromDouble(child_val["alpha"]["end"].asDouble());
-			lua::assign(gen, "['end_alpha']", s+",");
+			PackCompColor(child_val, gen);
 
 			float min = child_val["rotate"]["min"].asDouble(),
 				max = child_val["rotate"]["max"].asDouble();
@@ -381,6 +345,48 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			child_val = val["components"][i++];
 		}
 	}	
+}
+
+void CocoPacker::PackCompColor(Json::Value& child_val, ebuilder::CodeGenerator& gen)
+{
+	std::string s;
+
+	if (child_val["mul_col"].isNull()) {
+		lua::assign(gen, "['mul_col_r']", "1,");
+		lua::assign(gen, "['mul_col_g']", "1,");
+		lua::assign(gen, "['mul_col_b']", "1,");
+	} else {
+		s = wxString::FromDouble(child_val["mul_col"]["r"].asDouble());
+		lua::assign(gen, "['mul_col_r']", s+",");
+		s = wxString::FromDouble(child_val["mul_col"]["g"].asDouble());
+		lua::assign(gen, "['mul_col_g']", s+",");
+		s = wxString::FromDouble(child_val["mul_col"]["b"].asDouble());
+		lua::assign(gen, "['mul_col_b']", s+",");
+	}
+
+	if (child_val["add_col"].isNull()) {
+		lua::assign(gen, "['add_col_r']", "0,");
+		lua::assign(gen, "['add_col_g']", "0,");
+		lua::assign(gen, "['add_col_b']", "0,");
+	} else {
+		s = wxString::FromDouble(child_val["add_col"]["r"].asDouble());
+		lua::assign(gen, "['add_col_r']", s+",");
+		s = wxString::FromDouble(child_val["add_col"]["g"].asDouble());
+		lua::assign(gen, "['add_col_g']", s+",");
+		s = wxString::FromDouble(child_val["add_col"]["b"].asDouble());
+		lua::assign(gen, "['add_col_b']", s+",");
+	}
+
+	if (child_val["alpha"].isNull()) {
+		lua::assign(gen, "['start_alpha']", "100,");
+		lua::assign(gen, "['end_alpha']", "100,");
+	} else {
+		s = wxString::FromDouble(child_val["alpha"]["start"].asDouble());
+		lua::assign(gen, "['start_alpha']", s+",");
+
+		s = wxString::FromDouble(child_val["alpha"]["end"].asDouble());
+		lua::assign(gen, "['end_alpha']", s+",");
+	}
 }
 
 }

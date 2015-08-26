@@ -20,6 +20,8 @@ private:
 	static void PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator& gen, const std::string& dir);
 	static void PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator& gen, const std::string& dir);
 
+	static void PackCompColor(Json::Value& child_val, ebuilder::CodeGenerator& gen);
+
 }; // CocoPacker
 
 }
