@@ -15,6 +15,7 @@ public:
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
 	virtual bool OnMouseDrag(int x, int y);
 
 private:

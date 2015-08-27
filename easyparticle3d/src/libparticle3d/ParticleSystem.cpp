@@ -55,7 +55,7 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_ps->cfg->count = data.val0;
 		break;
 	case PS_EMISSION_TIME:
-		m_ps->cfg->lifetime = m_ps->cfg->emission_time = data.val0 * 0.001f; 
+		m_ps->cfg->emission_time = data.val0 * 0.001f; 
 		break;
 	case PS_LIFE_TIME:
 		m_ps->cfg->life = data.val0 * 0.001f;
@@ -147,7 +147,6 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 
 void ParticleSystem::Update(float dt)
 {
-	dt = 0.03f;
 	ps_update(m_ps, dt);
 }
 
@@ -172,7 +171,6 @@ void ParticleSystem::Start()
 void ParticleSystem::Stop()
 {
 	m_ps->active = false;
-	m_ps->life = m_ps->cfg->lifetime;
 	m_ps->emit_counter = 0;
 }
 
@@ -195,7 +193,6 @@ void ParticleSystem::Reset()
 //  	}
 
 	m_ps->last = m_ps->start;
-	m_ps->life = m_ps->cfg->lifetime = m_ps->cfg->emission_time; // m_ps->cfg->lifetime = m_ps->cfg->emission_time?
 	m_ps->emit_counter = 0;
 
 	if (m_anim_recorder) {
@@ -217,7 +214,6 @@ void ParticleSystem::SetLoop(bool loop)
 		return;
 	}
 
-	m_ps->life = m_ps->cfg->lifetime = m_ps->cfg->emission_time;
 	m_ps->loop = loop;
 
 	if (m_ps->loop) {

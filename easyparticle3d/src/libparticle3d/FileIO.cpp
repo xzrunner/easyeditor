@@ -153,10 +153,8 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 	int sz = sizeof(ps_cfg_3d) + sizeof(particle_symbol) * MAX_COMPONENTS;
 	ps_cfg_3d* cfg = (ps_cfg_3d*) operator new(sz);
 	memset(cfg, 0, sz);
-
-	cfg->lifetime = adapter.emission_time;
 	
-	cfg->emission_time = cfg->lifetime;
+	cfg->emission_time = adapter.emission_time;
 	cfg->count = adapter.count;
 
 	cfg->life = adapter.life * 0.001f;
