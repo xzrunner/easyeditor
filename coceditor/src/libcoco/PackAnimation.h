@@ -3,10 +3,11 @@
 
 #include "IPackNode.h"
 
-#include <drag2d.h>
+//#include <drag2d.h>
 
-namespace ecomplex { class Symbol; }
-namespace libanim { class Symbol; }
+#include <string>
+#include <stdint.h>
+#include <vector>
 
 namespace libcoco
 {
@@ -14,14 +15,9 @@ namespace libcoco
 class PackAnimation : public IPackNode
 {
 public:
-	PackAnimation(const ecomplex::Symbol* complex);
-	PackAnimation(const libanim::Symbol* anim);
-	
-private:
-	void LoadComplex(const ecomplex::Symbol* complex);
-	void LoadAnim(const libanim::Symbol* anim);
+	int AddComponent(const IPackNode* node);
 
-private:
+public:
 	struct Action
 	{
 		std::string name;
@@ -59,8 +55,8 @@ private:
 		Frame() : comp_idx(-1), touchable(true) {}
 	};
 
-private:
-	std::vector<IPackNode*> m_components;
+public:
+	std::vector<const IPackNode*> m_components;
 
 	std::vector<Action> m_actions;
 

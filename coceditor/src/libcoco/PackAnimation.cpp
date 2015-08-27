@@ -3,24 +3,15 @@
 namespace libcoco
 {
 
-PackAnimation::PackAnimation(const ecomplex::Symbol* complex)
+int PackAnimation::AddComponent(const IPackNode* node)
 {
-	LoadComplex(complex);
-}
-
-PackAnimation::PackAnimation(const libanim::Symbol* anim)
-{
-	LoadAnim(anim);
-}
-
-void PackAnimation::LoadComplex(const ecomplex::Symbol* complex)
-{
-	
-}
-
-void PackAnimation::LoadAnim(const libanim::Symbol* anim)
-{
-	
+	for (int i = 0, n = m_components.size(); i < n; ++i) {
+		if (m_components[i] == node) {
+			return i;
+		}
+	}
+	m_components.push_back(node);
+	return m_components.size() - 1;
 }
 
 }

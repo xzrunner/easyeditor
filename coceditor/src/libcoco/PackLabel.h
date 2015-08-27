@@ -11,24 +11,18 @@ namespace libcoco
 class PackLabel : public IPackNode
 {
 public:
-	PackLabel(const d2d::FontSprite* font);
+	std::string name;
+	std::string font;
 
-private:
-	void Load(const d2d::FontSprite* font);
-	
-private:
-	std::string m_name;
-	std::string m_font;
+	d2d::HoriAlignType align_hori;
+	d2d::VertAlignType align_vert;
 
-	d2d::HoriAlignType m_align_hori;
-	d2d::VertAlignType m_align_vert;
+	d2d::Colorf color;	// PT_ARGB
 
-	d2d::Colorf m_color;	// PT_ARGB
+	int size;
+	int width, height;
 
-	int m_size;
-	int m_width, m_height;
-
-	bool m_edge;
+	bool has_edge;
 
 }; // PackLabel
 
