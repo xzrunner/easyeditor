@@ -16,7 +16,7 @@ namespace epe
 class PackAnimation : public IPackNode
 {
 public:
-	PackAnimation(lua_State* L, uint16_t id);
+	PackAnimation(lua_State* L, uint32_t id);
 	virtual ~PackAnimation();
 
 	virtual size_t Size() const;

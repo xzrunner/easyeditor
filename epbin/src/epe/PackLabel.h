@@ -15,7 +15,7 @@ namespace epe
 class PackLabel : public IPackNode
 {
 public:
-	PackLabel(lua_State* L, uint16_t id);
+	PackLabel(lua_State* L, uint32_t id);
 
 	virtual size_t Size() const;
 	virtual void Store(std::ofstream& fout) const;

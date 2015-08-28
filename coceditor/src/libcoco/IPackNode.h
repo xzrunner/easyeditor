@@ -1,6 +1,8 @@
 #ifndef _LIBCOCO_IPACK_NODE_H_
 #define _LIBCOCO_IPACK_NODE_H_
 
+#include <string>
+
 namespace libcoco
 {
 
@@ -13,7 +15,11 @@ public:
 	}
 	virtual ~IPackNode() {}
 
-private:
+	virtual std::string ToString() const = 0;
+
+	int GetID() const { return m_id; }
+
+protected:
 	int m_id;
 
 }; // IPackNode

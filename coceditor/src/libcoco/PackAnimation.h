@@ -3,11 +3,7 @@
 
 #include "IPackNode.h"
 
-//#include <drag2d.h>
-
-#include <string>
-#include <stdint.h>
-#include <vector>
+#include <drag2d.h>
 
 namespace libcoco
 {
@@ -15,9 +11,16 @@ namespace libcoco
 class PackAnimation : public IPackNode
 {
 public:
-	int AddComponent(const IPackNode* node);
+	// component
 
-public:
+	struct Component
+	{
+		const IPackNode* node;
+		std::string name;
+	};
+
+	// action
+
 	struct Action
 	{
 		std::string name;
@@ -25,6 +28,8 @@ public:
 
 		Action() : size(0) {}
 	};
+
+	// frame
 
 	struct SpriteTrans
 	{
@@ -42,25 +47,43 @@ public:
 			, rmap(0xffff0000)
 			, gmap(0xff00ff00) 
 			, bmap(0xff0000ff) {
-			memset(mat, 0, sizeof(mat));	
+			mat[1] = mat[2] = mat[4] = mat[5] = 0;
+			mat[0] = mat[3] = 1024;
 		}
 	};
 
-	struct Frame
+	struct Part
 	{
 		SpriteTrans t;
 		int comp_idx;
 		bool touchable;
 
-		Frame() : comp_idx(-1), touchable(true) {}
+		Part() : comp_idx(-1), touchable(true) {}
+	};
+
+	struct Frame
+	{
+		std::vector<Part> parts;
 	};
 
 public:
-	std::vector<const IPackNode*> m_components;
+	virtual std::string ToString() const;
 
-	std::vector<Action> m_actions;
+	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 
-	std::vector<Frame> m_frames;
+private:
+	int AddComponent(const IPackNode* node, const std::string& name);	
+
+	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
+
+public:
+	std::string export_name;
+
+	std::vector<Component> components;
+
+	std::vector<Action> actions;
+
+	std::vector<Frame> frames;
 
 }; // PackAnimation
 

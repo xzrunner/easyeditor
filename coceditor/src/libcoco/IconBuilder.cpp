@@ -1,4 +1,10 @@
 #include "IconBuilder.h"
+#include "PackAnimation.h"
+
+#include "Scale9Builder.h"
+#include "ImageBuilder.h"
+#include "IPackNode.h"
+#include "PackPicture.h"
 
 namespace libcoco
 {
@@ -9,7 +15,7 @@ IconBuilder::IconBuilder()
 
 IconBuilder::~IconBuilder()
 {
-	std::map<const eicon::Symbol*, Value>::iterator 
+	std::multimap<const eicon::Symbol*, Value>::iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second.node;
@@ -22,7 +28,7 @@ const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)
 		return node;
 	}
 
-	PackAnimation* node = new PackAnimation;
+	PackPicture* node = new PackPicture;
 	Load(spr, node);
 
 	Value val;
@@ -50,9 +56,27 @@ const IPackNode* IconBuilder::Query(const eicon::Sprite* spr) const
 	return NULL;
 }
 
-void IconBuilder::Load(const eicon::Sprite* spr, PackAnimation* anim)
+void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 {
+	float proc = spr->GetProcess();
+
+	PackPicture::Quad quad;
+
+	const eicon::Icon* icon = spr->GetSymbol().GetIcon();
 	
+	icon->GetTexcoords4(quad.texture_coord, proc);
+
+	const d2d::Image* img = icon->GetImage();
+	float w = img->GetClippedWidth(), h = img->GetClippedHeight();
+	float hw = w * 0.5f, hh = h * 0.5f;
+	float dx = img->GetOffset().x, dy = img->GetOffset().y;
+	float xmin = -hw + dx, ymin = -hh + dy;
+	for (int i = 0; i < 4; ++i) {
+		quad.screen_coord[i].x = -hw + w * quad.texture_coord[i].x;
+		quad.screen_coord[i].y = -hh + h * quad.texture_coord[i].y;
+	}
+
+	pic->quads.push_back(quad);
 }
 
 }

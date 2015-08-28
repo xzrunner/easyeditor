@@ -7,7 +7,7 @@ namespace libcoco
 {
 
 class IPackNode;
-class PackAnimation;
+class PackPicture;
 
 class IconBuilder
 {
@@ -20,7 +20,7 @@ public:
 private:
 	const IPackNode* Query(const eicon::Sprite* spr) const;
 
-	void Load(const eicon::Sprite* spr, PackAnimation* anim);
+	void Load(const eicon::Sprite* spr, PackPicture* pic);
 
 private:
 	struct Value
@@ -30,7 +30,7 @@ private:
 	};
 
 private:
-	std::map<const eicon::Symbol*, Value> m_map_data;
+	std::multimap<const eicon::Symbol*, Value> m_map_data;
 
 }; // IconBuilder
 

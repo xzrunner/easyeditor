@@ -13,13 +13,16 @@ class PackPicture : public IPackNode
 public:
 	struct Quad
 	{
-		const d2d::ImageSymbol* img_symbol;
-		
+		const d2d::Image* img;
+
 		d2d::Vector texture_coord[4];
 		d2d::Vector screen_coord[4];
 	};
 
 	std::vector<Quad> quads;
+
+public:
+	virtual std::string ToString() const;
 
 }; // PackPicture  
 

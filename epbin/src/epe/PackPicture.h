@@ -15,7 +15,7 @@ namespace epe
 class PackPicture : public IPackNode
 {
 public:
-	PackPicture(lua_State* L, uint16_t id);
+	PackPicture(lua_State* L, uint32_t id);
 
 	virtual size_t Size() const;
 	virtual void Store(std::ofstream& fout) const;

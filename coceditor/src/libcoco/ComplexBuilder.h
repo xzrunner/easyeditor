@@ -3,18 +3,19 @@
 
 #include <map>
 
-namespace ecomplex { class Symbol; }
+#include <easycomplex.h>
 
 namespace libcoco
 {
 
 class IPackNode;
 class PackAnimation;
+class ExportNameSet;
 
 class ComplexBuilder
 {
 public:
-	ComplexBuilder();
+	ComplexBuilder(ExportNameSet& export_set);
 	~ComplexBuilder();
 
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
@@ -23,7 +24,9 @@ private:
 	void Load(const ecomplex::Symbol* symbol, PackAnimation* anim);
 
 private:
-	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_complex;
+	ExportNameSet& m_export_set;
+
+	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
 
 }; // ComplexBuilder
 

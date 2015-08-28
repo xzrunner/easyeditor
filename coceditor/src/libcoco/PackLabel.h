@@ -24,6 +24,9 @@ public:
 
 	bool has_edge;
 
+public:
+	virtual std::string ToString() const;
+
 }; // PackLabel
 
 }

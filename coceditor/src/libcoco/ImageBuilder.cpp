@@ -25,7 +25,7 @@ const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 
 void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
 {
-	quad.img_symbol = &img->GetSymbol();
+	quad.img = img->GetSymbol().getImage();
 
 	quad.texture_coord[0].set(0, 0);
 	quad.texture_coord[1].set(0, 1);
@@ -42,11 +42,9 @@ void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Qua
 
 void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
 {
-	d2d::Rect r = quad.img_symbol->GetSize();	
-	float hw = r.xLength() * 0.5f,
-		hh = r.yLength() * 0.5f;
-
 	// 1. shear
+	float hw = quad.img->GetClippedWidth() * 0.5f,
+		hh = quad.img->GetClippedHeight() * 0.5f;
 	float sx = spr->GetShear().x,
 		sy = spr->GetShear().y;
 	quad.screen_coord[1].x += sx * hh;
@@ -87,14 +85,14 @@ void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
 	for (size_t i = 0; i < 4; ++i)
 		quad.screen_coord[i] += center;
 
-	// flip y
-	for (size_t i = 0; i < 4; ++i)
-		quad.screen_coord[i].y = -quad.screen_coord[i].y;
-
-	// final scale
-	const float SCALE = 16;
-	for (size_t i = 0; i < 4; ++i)
-		quad.screen_coord[i] *= SCALE;
+// 	// flip y
+// 	for (size_t i = 0; i < 4; ++i)
+// 		quad.screen_coord[i].y = -quad.screen_coord[i].y;
+// 
+// 	// final scale
+// 	const float SCALE = 16;
+// 	for (size_t i = 0; i < 4; ++i)
+// 		quad.screen_coord[i] *= SCALE;
 }
 
 }

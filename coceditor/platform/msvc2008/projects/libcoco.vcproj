@@ -284,7 +284,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libcoco\PackLabel.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libcoco\PackLabel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackPicture.cpp"
 					>
 				</File>
 				<File
@@ -306,6 +314,14 @@
 						Name="picture"
 						>
 						<File
+							RelativePath="..\..\..\src\libcoco\IconBuilder.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\IconBuilder.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\libcoco\ImageBuilder.cpp"
 							>
 						</File>
@@ -319,6 +335,14 @@
 						</File>
 						<File
 							RelativePath="..\..\..\src\libcoco\Scale9Builder.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\TextureBuilder.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\TextureBuilder.h"
 							>
 						</File>
 					</Filter>
@@ -354,11 +378,23 @@
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\libcoco\IconBuilder.cpp"
+							RelativePath="..\..\..\src\libcoco\Terrain2DBuilder.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\libcoco\IconBuilder.h"
+							RelativePath="..\..\..\src\libcoco\Terrain2DBuilder.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="tools"
+						>
+						<File
+							RelativePath="..\..\..\src\libcoco\ExportNameSet.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\ExportNameSet.h"
 							>
 						</File>
 					</Filter>
