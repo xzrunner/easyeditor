@@ -260,6 +260,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libicon\QuadIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\QuadIcon.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libicon\RectIcon.cpp"
 					>
 				</File>
