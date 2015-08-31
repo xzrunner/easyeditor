@@ -7,5 +7,6 @@
 
 #include "libcoco/SymbolDependanceSorter.h"
 #include "libcoco/CocoPacker.h"
+#include "libcoco/CocoLoader.h"
 #include "libcoco/Utility.h"
 

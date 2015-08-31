@@ -153,6 +153,14 @@
 			Name="new"
 			>
 			<File
+				RelativePath="..\..\..\src\libcoco\CocoLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\CocoLoader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
 				>
 			</File>
@@ -170,6 +178,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcoco\TexturePacker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\trans_ejoy2d_data.lua"
 				>
 			</File>
 			<Filter

@@ -1,6 +1,7 @@
 #include "Symbol.h"
 #include "Sprite.h"
 #include "config.h"
+#include "FileLoader.h"
 
 #include <queue>
 
@@ -23,7 +24,7 @@ Symbol::Symbol()
 
 Symbol::~Symbol()
 {
-	clear();
+	Clear();
 }
 
 void Symbol::ReloadTexture() const
@@ -147,165 +148,12 @@ void Symbol::InitBounding()
 	//m_rect.translate(d2d::Vector(-x, -y));
 }
 
-//void Symbol::loadResources()
-//{
-//	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
-//	d2d::DynamicTexAndFont* dtex = NULL;
-//	if (use_dtex) {
-//		dtex = d2d::DynamicTexAndFont::Instance();
-//		dtex->BeginImage();
-//	}
-//
-//	clear();
-//
-//	Json::Value value;
-//	Json::Reader reader;
-//	std::locale::global(std::locale(""));
-//	std::ifstream fin(m_filepath.fn_str());
-//	std::locale::global(std::locale("C"));
-//	reader.parse(fin, value);
-//	fin.close();
-//
-//	name = value["name"].asString();
-//
-//	m_clipbox.xMin = value["xmin"].asInt();
-//	m_clipbox.xMax = value["xmax"].asInt();
-//	m_clipbox.yMin = value["ymin"].asInt();
-//	m_clipbox.yMax = value["ymax"].asInt();
-//
-//	m_use_render_cache = value["use_render_cache"].asBool();
-//
-// 	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
-//	int i = 0;
-//	Json::Value spriteValue = value["sprite"][i++];
-//	while (!spriteValue.isNull()) {
-//		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
-//		ISymbol* symbol = NULL;
-//		std::string real_filepath = path;
-//		try {
-//			symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
-//		} catch (d2d::Exception& e) {
-// 			symbol = NULL;
-// 			Json::Value filepaths_val = spriteValue["filepaths"];
-// 			if (!filepaths_val.isNull()) 
-// 			{
-// 				int j = 0;
-// 				Json::Value filepath_val = filepaths_val[j++];
-// 				while (!filepath_val.isNull() && !symbol) {
-//					real_filepath = filepath_val.asString();
-// 					wxString filepath = d2d::FilenameTools::getAbsolutePath(dir, real_filepath);
-//					filepath_val = filepaths_val[j++];
-// 					try {
-// 						symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-// 					} catch (d2d::Exception& e) {
-// 						symbol = NULL;
-// 					}
-// 				}
-// 			}
-//
-//			if (!symbol) {
-//				throw e;
-//			}
-//		}
-//
-// 		// load symbol filepaths
-// 		Json::Value filepaths_val = spriteValue["filepaths"];
-// 		if (!filepaths_val.isNull()) {
-// 			std::vector<std::string> filepaths;
-// 			int i = 0;
-// 			Json::Value filepath_val = filepaths_val[i++];
-// 			while (!filepath_val.isNull()) {
-//				std::string p = filepath_val.asString();
-//				if (p != real_filepath) {
-//					filepaths.push_back(p);
-//				}
-// 				filepath_val = filepaths_val[i++];
-// 			}
-//			filepaths.push_back(spriteValue["filepath"].asString());
-// 			symbol->SetFilepaths(filepaths);
-// 		}
-//
-////		symbol->refresh();
-//		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-//		sprite->load(spriteValue);
-//
-//		symbol->Release();
-//
-//		m_sprites.push_back(sprite);
-//		spriteValue = value["sprite"][i++];
-//	}	
-//
-//	initBounding();
-//
-//	if (use_dtex) {
-//		dtex->EndImage();
-//		if (m_use_render_cache) {
-//			dtex->InsertSymbol(*this);
-//		}
-//	}
-//}
-
 void Symbol::LoadResources()
 {
-	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
-	d2d::DynamicTexAndFont* dtex = NULL;
-	if (use_dtex) {
-		dtex = d2d::DynamicTexAndFont::Instance();
-		dtex->BeginImage();
-	}
-
-	clear();
-
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	name = value["name"].asString();
-
-	m_clipbox.xMin = value["xmin"].asInt();
-	m_clipbox.xMax = value["xmax"].asInt();
-	m_clipbox.yMin = value["ymin"].asInt();
-	m_clipbox.yMax = value["ymax"].asInt();
-
-	m_use_render_cache = value["use_render_cache"].asBool();
-
-	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
-	int i = 0;
-	Json::Value spriteValue = value["sprite"][i++];
-	while (!spriteValue.isNull()) {
-		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spriteValue);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		if (!symbol) {
-			std::string filepath = spriteValue["filepath"].asString();
-			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.ToStdString().c_str(), filepath.c_str());
-		}
-		d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spriteValue);
-
-		//		symbol->refresh();
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->Load(spriteValue);
-
-		symbol->Release();
-
-		m_sprites.push_back(sprite);
-		spriteValue = value["sprite"][i++];
-	}	
-
-	InitBounding();
-
-	if (use_dtex) {
-		dtex->EndImage();
-		if (m_use_render_cache) {
-			dtex->InsertSymbol(*this);
-		}
-	}
+	FileLoader::Load(m_filepath, this);
 }
 
-void Symbol::clear()
+void Symbol::Clear()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		m_sprites[i]->Release();

@@ -153,6 +153,14 @@
 			Name="fileio"
 			>
 			<File
+				RelativePath="..\..\..\src\libcomplex\FileLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\FileLoader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libcomplex\FileSaver.cpp"
 				>
 			</File>
