@@ -20,6 +20,16 @@ ComplexBuilder::~ComplexBuilder()
 	}
 }
 
+void ComplexBuilder::ToString(ebuilder::CodeGenerator& gen,
+							  const TexturePacker& tp) const
+{
+	std::map<const ecomplex::Symbol*, const PackAnimation*>::const_iterator 
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
+		itr->second->ToString(gen, tp);
+	}
+}
+
 const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator 
@@ -30,6 +40,7 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 
 	PackAnimation* node = new PackAnimation;
 	Load(symbol, node);
+	m_map_data.insert(std::make_pair(symbol, node));
 	return node;
 }
 
@@ -44,7 +55,7 @@ void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
   	// todo: only one action
 
 	PackAnimation::Action action;
-  	action.size = symbol->m_sprites.size();
+  	action.size = 1;
 	anim->actions.push_back(action);
 
 	PackAnimation::Frame frame;

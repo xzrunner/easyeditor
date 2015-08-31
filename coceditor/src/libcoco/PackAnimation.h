@@ -5,6 +5,8 @@
 
 #include <drag2d.h>
 
+namespace ebuilder { class CodeGenerator; }
+
 namespace libcoco
 {
 
@@ -67,12 +69,15 @@ public:
 	};
 
 public:
-	virtual std::string ToString() const;
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 
 private:
 	int AddComponent(const IPackNode* node, const std::string& name);	
+
+	static void FrameToString(const Frame& frame, ebuilder::CodeGenerator& gen);
 
 	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
 

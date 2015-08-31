@@ -1,6 +1,8 @@
 #ifndef _LIBCOCO_TERRAIN_BUILDER_H_
 #define _LIBCOCO_TERRAIN_BUILDER_H_
 
+#include "INodeBuilder.h"
+
 #include <easyterrain2d.h>
 
 namespace libcoco
@@ -9,11 +11,14 @@ namespace libcoco
 class IPackNode;
 class PackAnimation;
 
-class Terrain2DBuilder
+class Terrain2DBuilder : public INodeBuilder
 {
 public:
 	Terrain2DBuilder();
-	~Terrain2DBuilder();
+	virtual ~Terrain2DBuilder();
+
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const eterrain2d::Symbol* symbol);
 

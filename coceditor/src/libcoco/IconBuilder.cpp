@@ -22,6 +22,16 @@ IconBuilder::~IconBuilder()
 	}
 }
 
+void IconBuilder::ToString(ebuilder::CodeGenerator& gen,
+						   const TexturePacker& tp) const
+{
+	std::multimap<const eicon::Symbol*, Value>::const_iterator
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
+		itr->second.node->ToString(gen, tp);
+	}
+}
+
 const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)
 {
 	if (const IPackNode* node = Query(spr)) {

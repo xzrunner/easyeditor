@@ -13,6 +13,14 @@ ImageBuilder::~ImageBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
+void ImageBuilder::ToString(ebuilder::CodeGenerator& gen,
+							const TexturePacker& tp) const
+{
+	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
+		m_nodes[i]->ToString(gen, tp);
+	}
+}
+
 const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 {
 	PackPicture* node = new PackPicture;

@@ -3,20 +3,27 @@
 
 #include <drag2d.h>
 
+#include "TexturePacker.h"
+
 namespace libcoco
 {
 
 class CocoPacker
 {
 public:
+	CocoPacker(const std::string& json_dir, const std::string& tp_name, 
+		const std::string& tp_dir, const std::string& outfile);
 	
 private:
-	void LoadData(const std::string& dir);
+	void LoadJsonData(const std::string& dir);
+	void LoadTPData(const std::string& tp_name);
 
-	void Pack() const;
+	void Pack(const std::string& outfile) const;
 
 private:
 	std::vector<const d2d::ISymbol*> m_symbols;
+
+	TexturePacker m_tp;
 
 }; // CocoPacker
 

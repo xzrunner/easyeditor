@@ -1,5 +1,5 @@
-#ifndef _LIBCOCO_TP_PARSER_H_
-#define _LIBCOCO_TP_PARSER_H_
+#ifndef _LIBCOCO_EPD_TP_PARSER_H_
+#define _LIBCOCO_EPD_TP_PARSER_H_
 
 #include <drag2d.h>
 
@@ -65,4 +65,4 @@ private:
 }
 }
 
-#endif // _LIBCOCO_TP_PARSER_H_
+#endif // _LIBCOCO_EPD_TP_PARSER_H_

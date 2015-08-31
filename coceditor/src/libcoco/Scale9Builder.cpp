@@ -19,6 +19,16 @@ Scale9Builder::~Scale9Builder()
 	}
 }
 
+void Scale9Builder::ToString(ebuilder::CodeGenerator& gen,
+							 const TexturePacker& tp) const
+{
+	std::multimap<const escale9::Symbol*, Value>::const_iterator 
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
+		itr->second.node->ToString(gen, tp);
+	}
+}
+
 const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 {
 	if (const IPackNode* node = Query(spr)) {

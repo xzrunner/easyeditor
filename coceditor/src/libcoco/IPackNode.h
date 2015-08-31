@@ -3,8 +3,12 @@
 
 #include <string>
 
+namespace ebuilder { class CodeGenerator; }
+
 namespace libcoco
 {
+
+class TexturePacker;
 
 class IPackNode
 {
@@ -15,7 +19,8 @@ public:
 	}
 	virtual ~IPackNode() {}
 
-	virtual std::string ToString() const = 0;
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const = 0;
 
 	int GetID() const { return m_id; }
 

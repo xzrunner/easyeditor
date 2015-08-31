@@ -1,6 +1,8 @@
 #ifndef _LIBCOCO_TEXTURE_BUILDER_H_
 #define _LIBCOCO_TEXTURE_BUILDER_H_
 
+#include "INodeBuilder.h"
+
 #include <easytexture.h>
 
 namespace libcoco
@@ -9,11 +11,14 @@ namespace libcoco
 class IPackNode;
 class PackPicture;
 
-class TextureBuilder
+class TextureBuilder : public INodeBuilder
 {
 public:
 	TextureBuilder();
-	~TextureBuilder();
+	virtual ~TextureBuilder();
+
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const etexture::Symbol* symbol);
 

@@ -1,6 +1,8 @@
 #ifndef _LIBCOCO_ICON_BUILDER_H_
 #define _LIBCOCO_ICON_BUILDER_H_
 
+#include "INodeBuilder.h"
+
 #include <easyicon.h>
 
 namespace libcoco
@@ -9,11 +11,14 @@ namespace libcoco
 class IPackNode;
 class PackPicture;
 
-class IconBuilder
+class IconBuilder : public INodeBuilder
 {
 public:
 	IconBuilder();
-	~IconBuilder();
+	virtual ~IconBuilder();
+
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const eicon::Sprite* spr);
 

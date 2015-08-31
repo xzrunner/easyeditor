@@ -1,5 +1,5 @@
-#ifndef _LIBCOCO_COCO_PACKER_H_
-#define _LIBCOCO_COCO_PACKER_H_
+#ifndef _LIBCOCO_EPD_COCO_PACKER_H_
+#define _LIBCOCO_EPD_COCO_PACKER_H_
 
 #include <drag2d.h>
 
@@ -109,4 +109,4 @@ private:
 }
 }
 
-#endif // _LIBCOCO_COCO_PACKER_H_
+#endif // _LIBCOCO_EPD_COCO_PACKER_H_

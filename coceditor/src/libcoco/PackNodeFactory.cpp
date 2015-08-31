@@ -3,6 +3,7 @@
 #include "ImageBuilder.h"
 #include "Scale9Builder.h"
 #include "IconBuilder.h"
+#include "TextureBuilder.h"
 
 #include "LabelBuilder.h"
 
@@ -16,14 +17,15 @@ PackNodeFactory* PackNodeFactory::m_instance = NULL;
 
 PackNodeFactory::PackNodeFactory()
 {
-	m_img_builder = new ImageBuilder;
-	m_scale9_builder = new Scale9Builder;
-	m_icon_builder = new IconBuilder;
+	m_builders.push_back(m_img_builder = new ImageBuilder);
+	m_builders.push_back(m_scale9_builder = new Scale9Builder);
+	m_builders.push_back(m_icon_builder = new IconBuilder);
+	m_builders.push_back(m_tex_builder = new TextureBuilder);
 
-	m_label_builder = new LabelBuilder;
+	m_builders.push_back(m_label_builder = new LabelBuilder);
 
-	m_complex_builder = new ComplexBuilder;
-	m_anim_builder = new AnimBuilder;
+	m_builders.push_back(m_complex_builder = new ComplexBuilder(m_export_set));
+	m_builders.push_back(m_anim_builder = new AnimBuilder(m_export_set));
 }
 
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
@@ -36,6 +38,8 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		node = m_scale9_builder->Create(scale9);
 	} else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(spr)) {
 		node = m_icon_builder->Create(icon);
+	} else if (const etexture::Sprite* tex = dynamic_cast<const etexture::Sprite*>(spr)) {
+		node = m_tex_builder->Create(&tex->GetSymbol());
 	}
 
 	else if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(spr)) {
@@ -59,6 +63,14 @@ void PackNodeFactory::CreateComplex(const ecomplex::Symbol* complex)
 void PackNodeFactory::CreateAnim(const libanim::Symbol* anim)
 {
 	m_anim_builder->Create(anim);
+}
+
+void PackNodeFactory::ToString(ebuilder::CodeGenerator& gen,
+							   const TexturePacker& tp) const
+{
+	for (int i = 0, n = m_builders.size(); i < n; ++i) {
+		m_builders[i]->ToString(gen, tp);
+	}
 }
 
 PackNodeFactory* PackNodeFactory::Instance()

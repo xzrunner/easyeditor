@@ -1,6 +1,8 @@
 #ifndef _LIBCOCO_SCALE9_BUILDER_H_
 #define _LIBCOCO_SCALE9_BUILDER_H_
 
+#include "INodeBuilder.h"
+
 #include <easyscale9.h>
 
 namespace libcoco
@@ -9,11 +11,14 @@ namespace libcoco
 class IPackNode;
 class PackPicture;
 
-class Scale9Builder
+class Scale9Builder : public INodeBuilder
 {
 public:
 	Scale9Builder();
-	~Scale9Builder();
+	virtual ~Scale9Builder();
+
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const escale9::Sprite* spr);
 

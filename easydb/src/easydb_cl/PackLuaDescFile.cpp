@@ -42,7 +42,7 @@ void PackLuaDescFile::Trigger(const std::string& json_dir, const std::string& tp
 	LoadJsonFiles(json_dir);
 	LoadTexPacker(tp_json, tp_dir);
 	
-	libcoco::CocoPacker packer(m_symbols, m_tex_mgr);
+	libcoco::epd::CocoPacker packer(m_symbols, m_tex_mgr);
 	packer.Parser();
 	packer.Output(out_file.c_str());
 }

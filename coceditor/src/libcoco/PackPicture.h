@@ -22,7 +22,13 @@ public:
 	std::vector<Quad> quads;
 
 public:
-	virtual std::string ToString() const;
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
+
+private:
+	static void QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp);
+	static void GetImgSrcPos(const TexturePacker& tp, const d2d::Image* img, int* src);
 
 }; // PackPicture  
 

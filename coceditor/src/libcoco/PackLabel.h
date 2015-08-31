@@ -25,7 +25,8 @@ public:
 	bool has_edge;
 
 public:
-	virtual std::string ToString() const;
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 }; // PackLabel
 

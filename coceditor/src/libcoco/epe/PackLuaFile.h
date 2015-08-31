@@ -1,5 +1,5 @@
-#ifndef _COCO_PACK_LUA_FILE_H_
-#define _COCO_PACK_LUA_FILE_H_
+#ifndef _COCO_EPE_PACK_LUA_FILE_H_
+#define _COCO_EPE_PACK_LUA_FILE_H_
 
 #include <drag2d.h>
 
@@ -22,4 +22,4 @@ private:
 }
 }
 
-#endif // _COCO_PACK_LUA_FILE_H_
+#endif // _COCO_EPE_PACK_LUA_FILE_H_

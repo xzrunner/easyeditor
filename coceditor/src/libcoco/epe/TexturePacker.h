@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _COCO_EPE_TEXTURE_PACKER_H_
+#define _COCO_EPE_TEXTURE_PACKER_H_
 
 #include <drag2d.h>
 
@@ -75,3 +76,5 @@ private:
 
 }
 }
+
+#endif // _COCO_EPE_TEXTURE_PACKER_H_

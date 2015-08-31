@@ -18,6 +18,16 @@ Terrain2DBuilder::~Terrain2DBuilder()
 	}
 }
 
+void Terrain2DBuilder::ToString(ebuilder::CodeGenerator& gen,
+								const TexturePacker& tp) const
+{
+	std::map<const eterrain2d::Symbol*, const PackAnimation*>::const_iterator 
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
+		itr->second->ToString(gen, tp);
+	}
+}
+
 const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* symbol)
 {
 	std::map<const eterrain2d::Symbol*, const PackAnimation*>::iterator 
@@ -28,6 +38,7 @@ const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* symbol)
 
 	PackAnimation* node = new PackAnimation;
 	Load(symbol, node);
+	m_map_data.insert(std::make_pair(symbol, node));
 	return node;
 }
 
@@ -86,7 +97,9 @@ void Terrain2DBuilder::Load(const eterrain2d::Symbol* symbol, PackAnimation* ani
 		}
 
 		int comp_idx = anim->components.size();
-		anim->components.push_back(pic);
+		PackAnimation::Component comp;
+		comp.node = pic;
+		anim->components.push_back(comp);
 
 		PackAnimation::Part part;
 		part.comp_idx = comp_idx;

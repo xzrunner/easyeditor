@@ -5,6 +5,8 @@
 
 #include <easycomplex.h>
 
+#include "INodeBuilder.h"
+
 namespace libcoco
 {
 
@@ -12,11 +14,14 @@ class IPackNode;
 class PackAnimation;
 class ExportNameSet;
 
-class ComplexBuilder
+class ComplexBuilder : public INodeBuilder
 {
 public:
 	ComplexBuilder(ExportNameSet& export_set);
-	~ComplexBuilder();
+	virtual ~ComplexBuilder();
+
+	virtual void ToString(ebuilder::CodeGenerator& gen,
+		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
 

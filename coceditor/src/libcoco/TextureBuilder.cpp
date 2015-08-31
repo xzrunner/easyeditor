@@ -19,6 +19,16 @@ TextureBuilder::~TextureBuilder()
 	}
 }
 
+void TextureBuilder::ToString(ebuilder::CodeGenerator& gen,
+							  const TexturePacker& tp) const
+{
+	std::map<const etexture::Symbol*, const PackPicture*>::const_iterator 
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
+		itr->second->ToString(gen, tp);
+	}
+}
+
 const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::iterator 
@@ -29,6 +39,7 @@ const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
 
 	PackPicture* node = new PackPicture;
 	Load(symbol, node);
+	m_map_data.insert(std::make_pair(symbol, node));
 	return node;
 }
 

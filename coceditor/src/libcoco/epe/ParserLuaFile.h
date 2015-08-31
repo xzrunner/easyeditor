@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _COCO_EPE_PARSER_LUA_FILE_H_
+#define _COCO_EPE_PARSER_LUA_FILE_H_
 
 #include <string>
 #include <drag2d.h>
@@ -113,3 +114,5 @@ private:
 
 }
 }
+
+#endif // _COCO_EPE_PARSER_LUA_FILE_H_

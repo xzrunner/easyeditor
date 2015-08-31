@@ -1,5 +1,5 @@
-#ifndef _COCO_COCO_PACKER_H_
-#define _COCO_COCO_PACKER_H_
+#ifndef _COCO_EPE_COCO_PACKER_H_
+#define _COCO_EPE_COCO_PACKER_H_
 
 #include <drag2d.h>
 #include <easybuilder.h>
@@ -60,4 +60,4 @@ private:
 }
 }
 
-#endif // _COCO_COCO_PACKER_H_
+#endif // _COCO_EPE_COCO_PACKER_H_

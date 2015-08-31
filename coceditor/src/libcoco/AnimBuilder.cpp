@@ -15,22 +15,33 @@ AnimBuilder::AnimBuilder(ExportNameSet& export_set)
 AnimBuilder::~AnimBuilder()
 {
 	std::map<const libanim::Symbol*, const PackAnimation*>::iterator
-		itr = m_map_anim.begin();
-	for ( ; itr != m_map_anim.end(); ++itr) {
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
+	}
+}
+
+void AnimBuilder::ToString(ebuilder::CodeGenerator& gen,
+						   const TexturePacker& tp) const
+{
+	std::map<const libanim::Symbol*, const PackAnimation*>::const_iterator 
+		itr = m_map_data.begin();
+	for ( ; itr != m_map_data.end(); ++itr) {
+		itr->second->ToString(gen, tp);
 	}
 }
 
 const IPackNode* AnimBuilder::Create(const libanim::Symbol* symbol)
 {
 	std::map<const libanim::Symbol*, const PackAnimation*>::iterator 
-		itr = m_map_anim.find(symbol);
-	if (itr != m_map_anim.end()) {
+		itr = m_map_data.find(symbol);
+	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
 	PackAnimation* node = new PackAnimation;
 	Load(symbol, node);
+	m_map_data.insert(std::make_pair(symbol, node));
 	return node;
 }
 

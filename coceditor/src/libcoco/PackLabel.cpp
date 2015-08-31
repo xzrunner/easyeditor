@@ -7,10 +7,9 @@ namespace lua = ebuilder::lua;
 namespace libcoco
 {
 
-std::string PackLabel::ToString() const
+void PackLabel::ToString(ebuilder::CodeGenerator& gen,
+						 const TexturePacker& tp) const
 {
-	ebuilder::CodeGenerator gen;
-
 	gen.line("{");
 	gen.tab();
 
@@ -35,8 +34,6 @@ std::string PackLabel::ToString() const
 
 	gen.line("},");
 	gen.detab();
-
-	return gen.toText();
 }
 
 }
