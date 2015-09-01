@@ -10,7 +10,8 @@ class QuadIcon : public Icon
 {
 public:
 	QuadIcon();
-	QuadIcon(const d2d::Vector* src, const d2d::Vector* screen);
+	QuadIcon(d2d::Image* img, const d2d::Vector* src, 
+		const d2d::Vector* screen);
 
 	virtual const char* GetIconDesc() const { return "quad"; }
 

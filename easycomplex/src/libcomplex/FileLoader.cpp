@@ -1,5 +1,8 @@
 #include "FileLoader.h"
 #include "Symbol.h"
+#include "Sprite.h"
+
+#include <easyicon.h>
 
 namespace ecomplex
 {
@@ -102,7 +105,7 @@ namespace ecomplex
 //	}
 //}
 
-void FileLoader::Load(const std::string& filepath, Symbol* symbol)
+void FileLoader::Load(const std::string& filepath, Symbol* complex)
 {
 	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
 	d2d::DynamicTexAndFont* dtex = NULL;
@@ -111,7 +114,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* symbol)
 		dtex->BeginImage();
 	}
 
-	symbol->Clear();
+	complex->Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -121,16 +124,34 @@ void FileLoader::Load(const std::string& filepath, Symbol* symbol)
 	reader.parse(fin, value);
 	fin.close();
 
-	symbol->name = value["name"].asString();
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	if (value["lua desc"].isNull()) {
+		LoadJson(value, dir, complex);
+	} else {
+		LoadLua(value, dir, complex);
+	}
 
-	symbol->m_clipbox.xMin = value["xmin"].asInt();
-	symbol->m_clipbox.xMax = value["xmax"].asInt();
-	symbol->m_clipbox.yMin = value["ymin"].asInt();
-	symbol->m_clipbox.yMax = value["ymax"].asInt();
+	complex->InitBounding();
 
-	symbol->m_use_render_cache = value["use_render_cache"].asBool();
+	if (use_dtex) {
+		dtex->EndImage();
+		if (complex->m_use_render_cache) {
+			dtex->InsertSymbol(*complex);
+		}
+	}
+}
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath);
+void FileLoader::LoadJson(const Json::Value& value, const std::string& dir, Symbol* complex)
+{
+	complex->name = value["name"].asString();
+
+	complex->m_clipbox.xMin = value["xmin"].asInt();
+	complex->m_clipbox.xMax = value["xmax"].asInt();
+	complex->m_clipbox.yMin = value["ymin"].asInt();
+	complex->m_clipbox.yMax = value["ymax"].asInt();
+
+	complex->m_use_render_cache = value["use_render_cache"].asBool();
+
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
@@ -138,7 +159,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* symbol)
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		if (!symbol) {
 			std::string filepath = spriteValue["filepath"].asString();
-			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.ToStdString().c_str(), filepath.c_str());
+			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
 		}
 		d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spriteValue);
 
@@ -148,18 +169,133 @@ void FileLoader::Load(const std::string& filepath, Symbol* symbol)
 
 		symbol->Release();
 
-		static_cast<Symbol*>(symbol)->m_sprites.push_back(sprite);
+		static_cast<Symbol*>(complex)->m_sprites.push_back(sprite);
 		spriteValue = value["sprite"][i++];
 	}	
+}
 
-	symbol->InitBounding();
+void FileLoader::LoadLua(const Json::Value& value, const std::string& dir, Symbol* symbol)
+{
+	std::vector<d2d::Image*> images;
+	std::string img_name = d2d::FilenameTools::getAbsolutePath(dir, value["image name"].asString());
+	LoadImages(img_name, images);
 
-	if (use_dtex) {
-		dtex->EndImage();
-		if (symbol->m_use_render_cache) {
-			dtex->InsertSymbol(*symbol);
+	std::string lua_file = d2d::FilenameTools::getAbsolutePath(dir, value["lua desc"].asString());
+	libcoco::CocoUnpacker unpacker(lua_file, images);
+
+	std::string export_name = value["export name"].asString();
+	
+	libcoco::IPackNode* node = libcoco::UnpackNodeFactory::Instance()->Query(export_name);
+	LoadFromNode(node, symbol);	
+}
+
+void FileLoader::LoadImages(const std::string& name, std::vector<d2d::Image*>& images)
+{
+	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	bool old_cfg = data.open_image_edge_clip;
+	data.open_image_edge_clip = false;
+
+	int idx = 1;
+	while (true)
+	{
+		std::string filepath = name + d2d::StringTools::IntToString(idx++) + ".png";
+		if (d2d::FilenameTools::IsFileExist(filepath)) {
+			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
+			images.push_back(img);
+		} else {	
+			break;
 		}
 	}
+
+	data.open_image_edge_clip = old_cfg;
+}
+
+void FileLoader::LoadFromNode(const libcoco::IPackNode* node, Symbol* symbol)
+{
+	symbol->m_sprites.push_back(Node2Sprite(node));
+}
+
+d2d::ISprite* FileLoader::Node2Sprite(const libcoco::IPackNode* node)
+{
+	if (const libcoco::PackPicture* pic = dynamic_cast<const libcoco::PackPicture*>(node)) {
+		return Pic2Sprite(pic);
+	} else if (const libcoco::PackLabel* label = dynamic_cast<const libcoco::PackLabel*>(node)) {
+		return Label2Sprite(label);
+	} else if (const libcoco::PackAnimation* anim = dynamic_cast<const libcoco::PackAnimation*>(node)) {
+		return Anim2Sprite(anim);
+	} else {
+		throw d2d::Exception("FileLoader::Node2Sprite unknown type.");
+	}
+}
+
+d2d::ISprite* FileLoader::Quad2Sprite(const libcoco::PackPicture::Quad* quad)
+{
+	float w = quad->img->GetOriginWidth(),
+		h = quad->img->GetOriginHeight();
+
+	d2d::Vector src[4], screen[4];
+	for (int i = 0; i < 4; ++i) {
+		src[i].x = quad->texture_coord[i].x / w;
+		src[i].y = quad->texture_coord[i].y / h;
+
+		screen[i] = quad->screen_coord[i] / 16;
+	}
+
+	eicon::QuadIcon* icon = new eicon::QuadIcon(
+		const_cast<d2d::Image*>(quad->img), src, screen);
+
+	eicon::Symbol* symbol = new eicon::Symbol;
+	symbol->SetIcon(icon);
+	d2d::ISprite* ret = new eicon::Sprite(symbol);
+	ret->BuildBounding();
+	return ret;
+}
+
+d2d::ISprite* FileLoader::Pic2Sprite(const libcoco::PackPicture* pic)
+{
+	if (pic->quads.size() == 1) {
+		return Quad2Sprite(&pic->quads[0]);
+	} else if (pic->quads.size() > 1) {
+		ecomplex::Symbol* complex = new ecomplex::Symbol;
+		for (int i = 0, n = pic->quads.size(); i < n; ++i) {
+			complex->m_sprites.push_back(Quad2Sprite(&pic->quads[i]));
+		}
+		complex->InitBounding();
+		d2d::ISprite* ret = new Sprite(complex);
+		ret->BuildBounding();
+		return ret;
+	} else {
+		return NULL;
+	}
+}
+
+d2d::ISprite* FileLoader::Label2Sprite(const libcoco::PackLabel* label)
+{
+	return NULL;
+}
+
+d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
+{
+	assert(!anim->actions.empty());
+	// 0 frame
+	ecomplex::Symbol* complex = new ecomplex::Symbol;
+	for (int i = 0; i < anim->actions[0].size; ++i) {
+		const libcoco::PackAnimation::Frame& src = anim->frames[i];
+		ecomplex::Symbol* dst = new ecomplex::Symbol;
+		for (int j = 0; j < src.parts.size(); ++j) {
+			const libcoco::PackAnimation::Part& part = src.parts[i];
+			d2d::ISprite* spr = Node2Sprite(anim->components[part.comp_idx].node);
+			dst->m_sprites.push_back(spr);
+		}
+		dst->InitBounding();
+		d2d::ISprite* spr = new Sprite(dst);
+		spr->BuildBounding();
+		complex->m_sprites.push_back(spr);
+	}
+	complex->InitBounding();
+	d2d::ISprite* ret = new Sprite(complex);
+	ret->BuildBounding();
+	return ret;
 }
 
 }

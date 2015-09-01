@@ -26,6 +26,9 @@ public:
 
 	void Trigger(const std::string& lua_file, const std::string& img_name);
 
+private:
+	static void LoadAllImages(const std::string& img_name, std::vector<d2d::Image*>& images);
+
 }; // UnpackLuaDescFile
 
 }

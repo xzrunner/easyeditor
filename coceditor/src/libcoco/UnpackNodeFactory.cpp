@@ -55,15 +55,31 @@ void UnpackNodeFactory::Unpack(lua_State* L, const std::vector<d2d::Image*>& ima
 	}
 }
 
-void UnpackNodeFactory::Query(int id, const IPackNode** ret) const
+IPackNode* UnpackNodeFactory::Query(int id) const
 {
 	std::map<int, IPackNode*>::const_iterator itr 
 		= m_map_id.find(id);
 	if (itr != m_map_id.end()) {
-		*ret = itr->second;
+		return itr->second;
 	} else {
-		m_unassigned.push_back(std::make_pair(id, ret));
+		return NULL;
 	}
+}
+
+IPackNode* UnpackNodeFactory::Query(const std::string& name) const
+{
+	std::map<std::string, IPackNode*>::const_iterator itr 
+		= m_map_name.find(name);
+	if (itr != m_map_name.end()) {
+		return itr->second;
+	} else {
+		return NULL;
+	}
+}
+
+void UnpackNodeFactory::AddUnassigned(int id, const IPackNode** ret)
+{
+	m_unassigned.push_back(std::make_pair(id, ret));
 }
 
 void UnpackNodeFactory::AfterUnpack()

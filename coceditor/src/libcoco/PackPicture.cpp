@@ -101,8 +101,8 @@ void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
 
 	int screen[8];
 	for (int j = 0; j < 4; ++j) {
-		screen[j*2] = (int)(quad.texture_coord[j].x * SCALE + 0.5f);
-		screen[j*2+1] = -(int)(quad.texture_coord[j].y * SCALE + 0.5f);
+		screen[j*2] = (int)(quad.screen_coord[j].x * SCALE + 0.5f);
+		screen[j*2+1] = -(int)(quad.screen_coord[j].y * SCALE + 0.5f);
 	}
 	sprintf(buff, "screen = { %d, %d, %d, %d, %d, %d, %d, %d }", 
 		screen[0], screen[1], screen[2], screen[3], screen[4], screen[5], screen[6], screen[7]);

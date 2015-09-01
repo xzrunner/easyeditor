@@ -128,7 +128,10 @@ void PackAnimation::UnpackComponentsFromLua(lua_State* L)
 		components.push_back(Component());
 		Component& comp = components[components.size() - 1];
 		int id = epbin::LuaDataHelper::GetIntField(L, "id");
-		factory->Query(id, &comp.node);
+		comp.node = factory->Query(id);
+		if (!comp.node) {
+			factory->AddUnassigned(id, &comp.node);
+		}
 		if (epbin::LuaDataHelper::HasField(L, "name")) {
 			comp.name = epbin::LuaDataHelper::GetStringField(L, "name");
 		}

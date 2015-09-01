@@ -18,7 +18,10 @@ class UnpackNodeFactory
 public:
 	void Unpack(lua_State* L, const std::vector<d2d::Image*>& images);
 
-	void Query(int id, const IPackNode** ret) const;
+	IPackNode* Query(int id) const;
+	IPackNode* Query(const std::string& name) const;
+
+	void AddUnassigned(int id, const IPackNode** ret);
 
 	void AfterUnpack();
 	

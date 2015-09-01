@@ -175,6 +175,22 @@
 			<File
 				RelativePath="..\..\..\src\libcoco\TexturePacker.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="..\libcoco\x86\Debug\new\"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="..\libcoco\x86\Debug\new\"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcoco\TexturePacker.h"
@@ -368,7 +384,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							AssemblerListingLocation="..\libcoco\x86\Debug"
-							ObjectFile="..\libcoco\x86\Debug\epd"
+							ObjectFile="..\libcoco\x86\Debug\epd\"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -377,7 +393,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							AssemblerListingLocation="..\libcoco\x86\Release"
-							ObjectFile="..\libcoco\x86\Release\epd"
+							ObjectFile="..\libcoco\x86\Release\epd\"
 						/>
 					</FileConfiguration>
 				</File>
@@ -422,7 +438,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							AssemblerListingLocation="..\libcoco\x86\Debug"
-							ObjectFile="..\libcoco\x86\Debug\epe"
+							ObjectFile="..\libcoco\x86\Debug\epe\"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -431,7 +447,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							AssemblerListingLocation="..\libcoco\x86\Release"
-							ObjectFile="..\libcoco\x86\Release\epe"
+							ObjectFile="..\libcoco\x86\Release\epe\"
 						/>
 					</FileConfiguration>
 				</File>
@@ -463,7 +479,8 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
-							ObjectFile="..\libcoco\x86\Debug\epe"
+							AssemblerListingLocation="..\libcoco\x86\Debug\"
+							ObjectFile="..\libcoco\x86\Debug\epe\"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -471,7 +488,8 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
-							ObjectFile="..\libcoco\x86\Release\epe"
+							AssemblerListingLocation="..\libcoco\x86\Release\"
+							ObjectFile="..\libcoco\x86\Debug\epe\"
 						/>
 					</FileConfiguration>
 				</File>

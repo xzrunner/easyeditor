@@ -7,7 +7,9 @@ QuadIcon::QuadIcon()
 {
 }
 
-QuadIcon::QuadIcon(const d2d::Vector* src, const d2d::Vector* screen)
+QuadIcon::QuadIcon(d2d::Image* img, const d2d::Vector* src, 
+				   const d2d::Vector* screen)
+	: Icon(img)
 {
 	memcpy(m_src, src, sizeof(d2d::Vector) * 4);
 	memcpy(m_screen, screen, sizeof(d2d::Vector) * 4);
@@ -19,23 +21,15 @@ void QuadIcon::Draw(const d2d::Matrix& mt, float process) const
 		return;
 	}
 
-	float w = m_img->GetOriginWidth(),
-		h = m_img->GetOriginHeight();
-
-	d2d::Vector vertices[4];
-	for (int i = 0; i < 4; ++i)
-	{
-		float x = m_src[i].x * w,
-			y = m_src[i].y * h;
-		vertices[i] = d2d::Math::transVector(d2d::Vector(x, y), mt);
+	d2d::Vector texcoords[4];
+	for (int i = 0; i < 4; ++i) {
+		texcoords[i] = m_src[i];
+		texcoords[i].y = 1 - texcoords[i].y;
 	}
 
-	d2d::Vector texcoords[4];
-	for (int i = 0; i < 4; ++i)
-	{
-		float x = m_screen[i].x * w / w + 0.5f,
-			y = m_screen[i].y * h / h + 0.5f;
-		texcoords[i].set(x, y);
+	d2d::Vector vertices[4];
+	for (int i = 0; i < 4; ++i) {
+		vertices[i] = d2d::Math::transVector(m_screen[i], mt);
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
@@ -53,6 +47,13 @@ void QuadIcon::StoreToFile(Json::Value& value) const
 
 void QuadIcon::GetRegion(float process, d2d::Rect& region) const
 {
+	for (int i = 0; i < 4; ++i) {
+		const d2d::Vector& p = m_screen[i];
+		if (p.x < region.xMin) region.xMin = p.x;
+		if (p.x > region.xMax) region.xMax = p.x;
+		if (p.y < region.yMin) region.yMin = p.y;
+		if (p.y > region.yMax) region.yMax = p.y;
+	}
 }
 
 void QuadIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
