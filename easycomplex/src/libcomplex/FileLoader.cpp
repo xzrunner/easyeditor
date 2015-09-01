@@ -283,8 +283,9 @@ d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
 		const libcoco::PackAnimation::Frame& src = anim->frames[i];
 		ecomplex::Symbol* dst = new ecomplex::Symbol;
 		for (int j = 0; j < src.parts.size(); ++j) {
-			const libcoco::PackAnimation::Part& part = src.parts[i];
+			const libcoco::PackAnimation::Part& part = src.parts[j];
 			d2d::ISprite* spr = Node2Sprite(anim->components[part.comp_idx].node);
+			TransSprite(spr, part.t);
 			dst->m_sprites.push_back(spr);
 		}
 		dst->InitBounding();
@@ -296,6 +297,41 @@ d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
 	d2d::ISprite* ret = new Sprite(complex);
 	ret->BuildBounding();
 	return ret;
+}
+
+void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+{
+	float dx = t.mat[4] / 16.0f,
+		dy = t.mat[5] / 16.0f;
+
+	// no shear
+// 	mat[0] = sx*c;
+// 	mat[1] = sx*s;
+// 	mat[2] = -sy*s;
+// 	mat[3] = sy*c;	
+	float angle = atan2(-(float)t.mat[2], (float)t.mat[3]);
+	float c = cos(angle), s = sin(angle);
+	float sx, sy;
+	if (c != 0) {
+		sx = t.mat[0] / c / 1024.0f;
+		sy = t.mat[3] / c / 1024.0f;
+		if (s != 0) {
+			assert(sx == t.mat[1] / s / 1024.0f
+				&& sy == -t.mat[2] / s / 1024.0f);
+		}
+	} else {
+		sx = t.mat[1] / s / 1024.0f;
+		sy = -t.mat[2] / s / 1024.0f;
+	}
+	
+	// no scale
+// 	mat[0] = c - ky*s;
+// 	mat[1] = s + ky*c;
+// 	mat[2] = kx*c - s;
+// 	mat[3] = kx*s + c;
+
+	spr->SetTransform(d2d::Vector(dx, dy), angle);
+	spr->SetScale(sx, sy);
 }
 
 }
