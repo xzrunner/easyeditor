@@ -107,7 +107,7 @@ void LibraryList::OnMouseEvent(wxMouseEvent& event)
 	std::string text = m_name + ",";
 	std::set<int>::iterator itr = m_selection_set.begin();
 	for ( ; itr != m_selection_set.end(); ++itr) {
-		text += StringTools::IntToString(*itr) + ",";
+		text += StringTools::ToString(*itr) + ",";
 	}
 
 	wxTextDataObject tdo(text);

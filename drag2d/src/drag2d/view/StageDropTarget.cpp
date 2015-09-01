@@ -32,7 +32,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 
 	for (int i = 1, n = keys.size(); i < n; ++i)
 	{
-		int idx = StringTools::StringToInt(keys[i]);
+		int idx = StringTools::FromString<int>(keys[i]);
 		ISymbol* symbol = m_library->GetSymbol(idx);
 		if (!symbol) {
 			continue;

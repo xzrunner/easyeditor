@@ -17,7 +17,7 @@ void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen,
 	gen.tab();
 
 	lua::assign_with_end(gen, "type", "\"picture\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::IntToString(m_id));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(m_id));
 
 	for (int i = 0, n = quads.size(); i < n; ++i) {
 		QuadToString(quads[i], gen, tp);
@@ -89,7 +89,7 @@ void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& im
 void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen, 
 							   const TexturePacker& tp)
 {
-	std::string tex_str = lua::assign("tex", d2d::StringTools::IntToString(0));
+	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(0));
 
 	char buff[256];
 

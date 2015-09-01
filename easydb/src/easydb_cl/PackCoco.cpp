@@ -351,7 +351,7 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config
 	tex_mgr.SetSrcDataDir(config_dir);
 	int i = 1;
 	while (true) {
-		std::string path = dst_name + d2d::StringTools::IntToString(i) + ".json";
+		std::string path = dst_name + d2d::StringTools::ToString(i) + ".json";
 		if (d2d::FilenameTools::IsFileExist(path)) {
 			tex_mgr.Add(path, i - 1);
 		} else {

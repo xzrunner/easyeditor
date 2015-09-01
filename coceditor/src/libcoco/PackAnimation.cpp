@@ -16,7 +16,7 @@ void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const TextureP
 	gen.tab();
 
 	lua::assign_with_end(gen, "type", "\"animation\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::IntToString(m_id));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(m_id));
 	if (!export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + export_name + "\"");
 	}
@@ -27,7 +27,7 @@ void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const TextureP
 		for (int i = 0, n = components.size(); i < n; ++i) {
 			const Component& comp = components[i];
 
-			std::string id_str = lua::assign("id", d2d::StringTools::IntToString(comp.node->GetID()));
+			std::string id_str = lua::assign("id", d2d::StringTools::ToString(comp.node->GetID()));
 			if (comp.name.empty()) {
 				lua::tableassign(gen, "", 1, id_str.c_str());
 			} else {
@@ -242,7 +242,7 @@ void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGener
 		std::vector<std::string> params;
 
 		// index
-		std::string index_str = lua::assign("index", d2d::StringTools::IntToString(part.comp_idx));
+		std::string index_str = lua::assign("index", d2d::StringTools::ToString(part.comp_idx));
 		params.push_back(index_str);
 
 		// mat
@@ -256,15 +256,15 @@ void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGener
 
 		// color
 		if (t.color != 0xffffffff) {
-			params.push_back(d2d::StringTools::IntToString(t.color));
+			params.push_back(lua::assign("color", d2d::StringTools::ToString(t.color)));
 		}
 		if (t.additive != 0) {
-			params.push_back(d2d::StringTools::IntToString(t.additive));
+			params.push_back(lua::assign("add", d2d::StringTools::ToString(t.additive)));
 		}
 		if (t.rmap != 0xffff0000 || t.gmap != 0xff00ff00 || t.bmap != 0xff0000ff) {
-			params.push_back(d2d::StringTools::IntToString(t.rmap));
-			params.push_back(d2d::StringTools::IntToString(t.gmap));
-			params.push_back(d2d::StringTools::IntToString(t.bmap));
+			params.push_back(lua::assign("rmap", d2d::StringTools::ToString(t.rmap)));
+			params.push_back(lua::assign("gmap", d2d::StringTools::ToString(t.gmap)));
+			params.push_back(lua::assign("bmap", d2d::StringTools::ToString(t.bmap)));
 		}
 
 		lua::tableassign(gen, "", params);

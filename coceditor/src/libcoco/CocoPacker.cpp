@@ -42,7 +42,7 @@ void CocoPacker::LoadTPData(const std::string& tp_name)
 {
 	int i = 1;
 	while (true) {
-		std::string tp_path = tp_name + d2d::StringTools::IntToString(i) + ".json";
+		std::string tp_path = tp_name + d2d::StringTools::ToString(i) + ".json";
 		if (d2d::FilenameTools::IsFileExist(tp_path)) {
 			m_tp.Add(tp_path);
 		} else {

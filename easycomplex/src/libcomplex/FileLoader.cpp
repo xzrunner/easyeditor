@@ -198,7 +198,7 @@ void FileLoader::LoadImages(const std::string& name, std::vector<d2d::Image*>& i
 	int idx = 1;
 	while (true)
 	{
-		std::string filepath = name + d2d::StringTools::IntToString(idx++) + ".png";
+		std::string filepath = name + d2d::StringTools::ToString(idx++) + ".png";
 		if (d2d::FilenameTools::IsFileExist(filepath)) {
 			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);

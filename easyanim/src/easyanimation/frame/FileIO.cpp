@@ -400,7 +400,7 @@ KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath,
 							Controller* ctrl)
 {
-	int time = d2d::StringTools::StringToInt(frameNode->first_attribute("index")->value()) + 1;
+	int time = d2d::StringTools::FromString<int>(frameNode->first_attribute("index")->value()) + 1;
 
 	KeyFrame* frame = new KeyFrame(ctrl, time);
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")

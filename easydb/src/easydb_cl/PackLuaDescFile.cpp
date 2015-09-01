@@ -74,7 +74,7 @@ void PackLuaDescFile::LoadTexPacker(const std::string& tp_json,
 	int i = 1;
 	while (true)
 	{
-		std::string path = tp_json + d2d::StringTools::IntToString(i) + ".json";
+		std::string path = tp_json + d2d::StringTools::ToString(i) + ".json";
 		if (wxFileName::FileExists(path)) {
 			m_tex_mgr.Add(path, i-1);
 		} else {

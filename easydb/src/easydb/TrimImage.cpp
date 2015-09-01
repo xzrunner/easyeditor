@@ -236,7 +236,7 @@ LoadFromFile(const std::string& filepath)
 		std::string filepath = val["filepath"].asString();
 		Item* item = new Item;
 		item->val = val;
-		item->time = d2d::StringTools::StringToInt64(val["time"].asString());
+		d2d::StringTools::FromString(val["time"].asString(), item->time);
 		m_map_items.insert(std::make_pair(filepath, item));
 		val = value[idx++];
 	}

@@ -15,7 +15,7 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen,
 	gen.tab();
 
 	lua::assign_with_end(gen, "type", "\"label\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::IntToString(m_id));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(m_id));
 
 	std::ostringstream ss;
 	ss << "font = \"" << font << "\", ";
@@ -33,8 +33,8 @@ void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen,
 
 	gen.line(ss.str());
 
-	gen.line("},");
 	gen.detab();
+	gen.line("},");
 }
 
 void PackLabel::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
