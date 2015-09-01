@@ -309,9 +309,9 @@ void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans)
 	mat[5] = center.y/* * m_scale*/;
 
 	for (size_t i = 0; i < 4; ++i)
-		trans.mat[i] = (int)(mat[i] * 1024 + 0.5f);
+		trans.mat[i] = floor(mat[i] * 1024 + 0.5f);
 	for (size_t i = 4; i < 6; ++i)
-		trans.mat[i] = (int)(mat[i] * 16 + 0.5f);
+		trans.mat[i] = floor(mat[i] * 16 + 0.5f);
 	// flip y
 	trans.mat[5] = -trans.mat[5];
 

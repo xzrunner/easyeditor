@@ -754,11 +754,11 @@ void CocoPacker::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id
 	{
 		// flip y
  		// move to left-top
-  		mat[4] -= (int)(sprite->width * 0.5f * 16 + 0.5f);
-  		mat[5] -= (int)(sprite->height * 0.5f * 16 + 0.5f);
+  		mat[4] -= floor(sprite->width * 0.5f * 16 + 0.5f);
+  		mat[5] -= floor(sprite->height * 0.5f * 16 + 0.5f);
 
-		//mat[4] -= (int)(sprite->getBounding()->width() * 0.5f * 16 + 0.5f);
-		//mat[5] -= (int)(sprite->getBounding()->height() * 0.5f * 16 + 0.5f);
+		//mat[4] -= floor(sprite->getBounding()->width() * 0.5f * 16 + 0.5f);
+		//mat[5] -= floor(sprite->getBounding()->height() * 0.5f * 16 + 0.5f);
 	}
 
 	std::string m[6];
@@ -808,9 +808,9 @@ void CocoPacker::transToMat(const d2d::ISprite* sprite, float mat[6], bool force
 	}
 
 	for (size_t i = 0; i < 4; ++i)
-		mat[i] = (int)(mat[i] * 1024 + 0.5f);
+		mat[i] = floor(mat[i] * 1024 + 0.5f);
 	for (size_t i = 4; i < 6; ++i)
-		mat[i] = (int)(mat[i] * 16 + 0.5f);
+		mat[i] = floor(mat[i] * 16 + 0.5f);
 	// flip y
 	mat[5] = -mat[5];
 }

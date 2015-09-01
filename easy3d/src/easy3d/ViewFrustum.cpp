@@ -9,8 +9,8 @@ ivec2 ViewFrustum::TransPos3ProjectToScreen(const vec3& proj, float screen_width
 	float x = Camera::CAM_NEAR * proj.x / proj.z * screen_width * 0.5f ,
 		  y = Camera::CAM_NEAR * proj.y / proj.z * screen_height * 0.5f;
 	ivec2 pos;
-	pos.x = (int)(screen_width * 0.5f - x + 0.5f);
-	pos.y = (int)(screen_height * 0.5f + y + 0.5f);
+	pos.x = floor(screen_width * 0.5f - x + 0.5f);
+	pos.y = floor(screen_height * 0.5f + y + 0.5f);
 	return pos;
 }
 
