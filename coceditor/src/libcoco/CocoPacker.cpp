@@ -69,7 +69,7 @@ void CocoPacker::Pack(const std::string& outfile) const
 
 	ebuilder::CodeGenerator gen;
 	gen.line("return {");
-	factory->ToString(gen, m_tp);
+	factory->PackToLuaString(gen, m_tp);
 	gen.line("}");
 
 	std::locale::global(std::locale(""));

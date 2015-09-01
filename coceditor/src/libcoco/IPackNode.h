@@ -2,8 +2,12 @@
 #define _LIBCOCO_IPACK_NODE_H_
 
 #include <string>
+#include <vector>
+
+struct lua_State;
 
 namespace ebuilder { class CodeGenerator; }
+namespace d2d { class Image; }
 
 namespace libcoco
 {
@@ -19,8 +23,11 @@ public:
 	}
 	virtual ~IPackNode() {}
 
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const = 0;
+
+	virtual void UnpackFromLua(lua_State* L,
+		const std::vector<d2d::Image*>& images) = 0;
 
 	int GetID() const { return m_id; }
 

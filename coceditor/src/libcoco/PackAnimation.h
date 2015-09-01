@@ -69,15 +69,25 @@ public:
 	};
 
 public:
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
+
+	virtual void UnpackFromLua(lua_State* L,
+		const std::vector<d2d::Image*>& images);
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 
 private:
 	int AddComponent(const IPackNode* node, const std::string& name);	
 
-	static void FrameToString(const Frame& frame, ebuilder::CodeGenerator& gen);
+	void Clear();
+
+	void UnpackComponentsFromLua(lua_State* L);
+	void UnpackFramesFromLua(lua_State* L);
+	static void UppackFrameFromLua(lua_State* L, Frame& frame);
+	static void UppackPartFromLua(lua_State* L, Part& part);
+
+	static void PackFrameToLuaString(const Frame& frame, ebuilder::CodeGenerator& gen);
 
 	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
 

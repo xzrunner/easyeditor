@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_TEXTURE_BUILDER_H_
-#define _LIBCOCO_TEXTURE_BUILDER_H_
+#ifndef _LIBCOCO_ETEXTURE_PACKER_H_
+#define _LIBCOCO_ETEXTURE_PACKER_H_
 
-#include "INodeBuilder.h"
+#include "INodePacker.h"
 
 #include <easytexture.h>
 
@@ -11,13 +11,13 @@ namespace libcoco
 class IPackNode;
 class PackPicture;
 
-class TextureBuilder : public INodeBuilder
+class ETexturePacker : public INodePacker
 {
 public:
-	TextureBuilder();
-	virtual ~TextureBuilder();
+	ETexturePacker();
+	virtual ~ETexturePacker();
 
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const etexture::Symbol* symbol);
@@ -28,8 +28,8 @@ private:
 private:
 	std::map<const etexture::Symbol*, const PackPicture*> m_map_data;
 
-}; // TextureBuilder
+}; // ETexturePacker
 
 }
 
-#endif // _LIBCOCO_TEXTURE_BUILDER_H_
+#endif // _LIBCOCO_ETEXTURE_PACKER_H_

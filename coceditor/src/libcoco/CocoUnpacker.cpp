@@ -1,5 +1,5 @@
-#include "CocoLoader.h"
-#include "LuaDataHelper.h"
+#include "CocoUnpacker.h"
+#include "UnpackNodeFactory.h"
 
 #define STRINGIFY(A)  #A
 #include "trans_ejoy2d_data.lua"
@@ -15,7 +15,8 @@ extern "C" {
 namespace libcoco
 {
 
-void CocoLoader::Load(const std::string& filepath)
+CocoUnpacker::CocoUnpacker(const std::string& filepath,
+						   const std::vector<d2d::Image*>& images)
 {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
@@ -38,28 +39,21 @@ void CocoLoader::Load(const std::string& filepath)
 		return;
 	}
 
+	UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
+
 	int len = lua_rawlen(L, 1);
 	for(int i = 1; i <= len; i++)
 	{
 		lua_pushinteger(L, i);
 		lua_gettable(L, 1);
 
-		if (lua_istable(L, -1))
-		{
-// 			std::string type = LuaDataHelper::GetStringField(L, "type");
-// 			int id = LuaDataHelper::GetIntField(L, "id");
-// 			CheckID(id);
-// 			CheckExport(L);
-// 			if (type == "picture") {
-// 				m_pictures.push_back(new epd::Picture(L, id));
-// 			} else if (type == "animation") {
-// 				m_animations.push_back(new epd::Animation(L, id));
-// 			} else {
-// 				assert(0);
-// 			}
+		if (lua_istable(L, -1)) {
+			factory->Unpack(L, images);
 		}
 		lua_pop(L,1);
 	}
+
+	factory->AfterUnpack();
 }
 
 }

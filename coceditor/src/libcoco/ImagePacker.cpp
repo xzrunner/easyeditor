@@ -1,27 +1,27 @@
-#include "ImageBuilder.h"
+#include "ImagePacker.h"
 #include "IPackNode.h"
 
 namespace libcoco
 {
 
-ImageBuilder::ImageBuilder()
+ImagePacker::ImagePacker()
 {
 }
 
-ImageBuilder::~ImageBuilder()
+ImagePacker::~ImagePacker()
 {
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
-void ImageBuilder::ToString(ebuilder::CodeGenerator& gen,
+void ImagePacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 							const TexturePacker& tp) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
-		m_nodes[i]->ToString(gen, tp);
+		m_nodes[i]->PackToLuaString(gen, tp);
 	}
 }
 
-const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
+const IPackNode* ImagePacker::Create(const d2d::ImageSprite* spr)
 {
 	PackPicture* node = new PackPicture;
 	PackPicture::Quad quad;
@@ -31,7 +31,7 @@ const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 	return node;
 }
 
-void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
+void ImagePacker::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
 {
 	quad.img = img->GetSymbol().getImage();
 
@@ -48,7 +48,7 @@ void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Qua
 	TransScreen(quad, img);
 }
 
-void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
+void ImagePacker::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
 {
 	// 1. shear
 	float hw = quad.img->GetClippedWidth() * 0.5f,

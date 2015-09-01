@@ -153,19 +153,19 @@
 			Name="new"
 			>
 			<File
-				RelativePath="..\..\..\src\libcoco\CocoLoader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\CocoLoader.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcoco\CocoPacker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\CocoUnpacker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\CocoUnpacker.h"
 				>
 			</File>
 			<File
@@ -211,110 +211,122 @@
 					RelativePath="..\..\..\src\libcoco\PackPicture.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="packer"
+				>
+				<File
+					RelativePath="..\..\..\src\libcoco\INodePacker.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackNodeFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackNodeFactory.h"
+					>
+				</File>
 				<Filter
-					Name="builders"
+					Name="picture"
 					>
 					<File
-						RelativePath="..\..\..\src\libcoco\INodeBuilder.h"
+						RelativePath="..\..\..\src\libcoco\ETexturePacker.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libcoco\PackNodeFactory.cpp"
+						RelativePath="..\..\..\src\libcoco\ETexturePacker.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libcoco\PackNodeFactory.h"
+						RelativePath="..\..\..\src\libcoco\IconPacker.cpp"
 						>
 					</File>
-					<Filter
-						Name="picture"
+					<File
+						RelativePath="..\..\..\src\libcoco\IconPacker.h"
 						>
-						<File
-							RelativePath="..\..\..\src\libcoco\IconBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\IconBuilder.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\ImageBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\ImageBuilder.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\Scale9Builder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\Scale9Builder.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\TextureBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\TextureBuilder.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="label"
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\ImagePacker.cpp"
 						>
-						<File
-							RelativePath="..\..\..\src\libcoco\LabelBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\LabelBuilder.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="animation"
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\ImagePacker.h"
 						>
-						<File
-							RelativePath="..\..\..\src\libcoco\AnimBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\AnimBuilder.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\ComplexBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\ComplexBuilder.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\Terrain2DBuilder.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\Terrain2DBuilder.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="tools"
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\Scale9Packer.cpp"
 						>
-						<File
-							RelativePath="..\..\..\src\libcoco\ExportNameSet.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\libcoco\ExportNameSet.h"
-							>
-						</File>
-					</Filter>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\Scale9Packer.h"
+						>
+					</File>
 				</Filter>
+				<Filter
+					Name="label"
+					>
+					<File
+						RelativePath="..\..\..\src\libcoco\LabelPacker.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\LabePacker.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="animation"
+					>
+					<File
+						RelativePath="..\..\..\src\libcoco\AnimPacker.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\AnimPacker.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\ComplexPacker.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\ComplexPacker.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\Terrain2DPacker.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\Terrain2DPacker.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="tools"
+					>
+					<File
+						RelativePath="..\..\..\src\libcoco\ExportNameSet.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\ExportNameSet.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="unpacker"
+				>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

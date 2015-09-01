@@ -1,4 +1,4 @@
-#include "ComplexBuilder.h"
+#include "ComplexPacker.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "ExportNameSet.h"
@@ -6,12 +6,12 @@
 namespace libcoco
 {
 
-ComplexBuilder::ComplexBuilder(ExportNameSet& export_set)
+ComplexPacker::ComplexPacker(ExportNameSet& export_set)
 	: m_export_set(export_set)
 {
 }
 
-ComplexBuilder::~ComplexBuilder()
+ComplexPacker::~ComplexPacker()
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator
 		itr = m_map_data.begin();
@@ -20,17 +20,17 @@ ComplexBuilder::~ComplexBuilder()
 	}
 }
 
-void ComplexBuilder::ToString(ebuilder::CodeGenerator& gen,
+void ComplexPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 							  const TexturePacker& tp) const
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		itr->second->ToString(gen, tp);
+		itr->second->PackToLuaString(gen, tp);
 	}
 }
 
-const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
+const IPackNode* ComplexPacker::Create(const ecomplex::Symbol* symbol)
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(symbol);
@@ -44,7 +44,7 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 	return node;
 }
 
-void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
+void ComplexPacker::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
 {
 	m_export_set.LoadExport(symbol, anim);
 

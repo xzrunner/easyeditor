@@ -1,15 +1,16 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "UnpackNodeFactory.h"
 
 #include <easybuilder.h>
+#include <epbin.h>
 
 namespace lua = ebuilder::lua;
 
 namespace libcoco
 {
 
-void PackAnimation::ToString(ebuilder::CodeGenerator& gen,
-							 const TexturePacker& tp) const
+void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -53,7 +54,7 @@ void PackAnimation::ToString(ebuilder::CodeGenerator& gen,
 		for (int j = s_frame; j < e_frame; ++j) {
 			const Frame& frame = frames[j];
 			lua::TableAssign ta(gen, "", true);
-			FrameToString(frame, gen);
+			PackFrameToLuaString(frame, gen);
 		}
 	}
 
@@ -61,11 +62,21 @@ void PackAnimation::ToString(ebuilder::CodeGenerator& gen,
 	gen.line("},");
 }
 
-void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
+void PackAnimation::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
 {
-	PackNodeFactory* factory = PackNodeFactory::Instance();
-	
-	const IPackNode* node = factory->Create(spr);
+	Clear();
+
+	if (epbin::LuaDataHelper::HasField(L, "export")) {
+		export_name = epbin::LuaDataHelper::GetStringField(L, "export");
+	}
+
+	UnpackComponentsFromLua(L);
+	UnpackFramesFromLua(L);
+}
+
+void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
+{	
+	const IPackNode* node = PackNodeFactory::Instance()->Create(spr);
 
 	PackAnimation::Part part;
 	std::string name = "";
@@ -93,7 +104,132 @@ int PackAnimation::AddComponent(const IPackNode* node, const std::string& name)
 	return components.size() - 1;
 }
 
-void PackAnimation::FrameToString(const Frame& frame, ebuilder::CodeGenerator& gen)
+void PackAnimation::Clear()
+{
+	export_name.clear();
+	components.clear();
+	actions.clear();
+	frames.clear();
+}
+
+void PackAnimation::UnpackComponentsFromLua(lua_State* L)
+{
+	UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
+
+	lua_getfield(L, -1, "component");
+	int comp_sz = lua_rawlen(L, -1);
+	components.reserve(comp_sz);
+	for (int i = 1; i <= comp_sz; ++i)
+	{
+		lua_pushinteger(L, i);
+		lua_gettable(L, -2);
+		assert(lua_istable(L, -1));
+
+		components.push_back(Component());
+		Component& comp = components[components.size() - 1];
+		int id = epbin::LuaDataHelper::GetIntField(L, "id");
+		factory->Query(id, &comp.node);
+		if (epbin::LuaDataHelper::HasField(L, "name")) {
+			comp.name = epbin::LuaDataHelper::GetStringField(L, "name");
+		}
+
+		lua_pop(L, 1);
+	}
+	lua_pop(L, 1);	
+}
+
+void PackAnimation::UnpackFramesFromLua(lua_State* L)
+{
+	int action_sz = lua_rawlen(L, -1);
+	for (int i = 1; i <= action_sz; ++i)
+	{
+		Action action;
+
+		if (epbin::LuaDataHelper::HasField(L, "name")) {
+			action.name = epbin::LuaDataHelper::GetStringField(L, "action");
+		}
+
+		lua_pushinteger(L, i);
+		lua_gettable(L, -2);
+		assert(lua_istable(L, -1));
+		int frame_sz = lua_rawlen(L, -1);
+		action.size = frame_sz;
+		for (int j = 1; j <= frame_sz; ++j) {
+			lua_pushinteger(L, j);
+			lua_gettable(L, -2);
+			assert(lua_istable(L, -1));
+
+			Frame frame;
+			UppackFrameFromLua(L, frame);
+			frames.push_back(frame);
+
+			lua_pop(L, 1);
+		}
+		lua_pop(L, 1);
+		actions.push_back(action);
+	}
+}
+
+void PackAnimation::UppackFrameFromLua(lua_State* L, Frame& frame)
+{
+	int spr_sz = lua_rawlen(L, -1);
+	for (int i = 1; i <= spr_sz; ++i) 
+	{
+		lua_pushinteger(L, i);
+		lua_gettable(L, -2);
+
+		Part part;
+		UppackPartFromLua(L, part);
+		frame.parts.push_back(part);
+
+		lua_pop(L, 1);
+	}
+}
+
+void PackAnimation::UppackPartFromLua(lua_State* L, Part& part)
+{
+	if (lua_isnumber(L, -1)) {
+		lua_pushinteger(L, -1);
+		lua_gettable(L, -2);
+		part.comp_idx = lua_tointeger(L, -1);
+		lua_pop(L, 1);
+	} else if (lua_istable(L, -1)) {
+		part.comp_idx = epbin::LuaDataHelper::GetIntField(L, "index");
+		if (epbin::LuaDataHelper::HasField(L, "mat")) {
+			lua_getfield(L, -1, "mat");
+			assert(lua_type(L, -1) != LUA_TNIL);
+			int len = lua_rawlen(L, -1);
+			assert(len == 6);
+			for (int i = 1; i <= len; ++i)
+			{
+				lua_pushinteger(L, i);
+				lua_gettable(L, -2);
+				part.t.mat[i - 1] = lua_tointeger(L, -1);
+				lua_pop(L, 1);
+			}
+			lua_pop(L, 1);
+		}
+		if (epbin::LuaDataHelper::HasField(L, "color")) {
+			part.t.color = (uint32_t)epbin::LuaDataHelper::GetDoubleField(L, "color");
+		}
+		if (epbin::LuaDataHelper::HasField(L, "add")) {
+			part.t.additive = (uint32_t)epbin::LuaDataHelper::GetDoubleField(L, "add");
+		}
+		if (epbin::LuaDataHelper::HasField(L, "rmap")) {
+			part.t.rmap = (uint32_t)epbin::LuaDataHelper::GetDoubleField(L, "rmap");
+		}
+		if (epbin::LuaDataHelper::HasField(L, "gmap")) {
+			part.t.gmap = (uint32_t)epbin::LuaDataHelper::GetDoubleField(L, "gmap");
+		}
+		if (epbin::LuaDataHelper::HasField(L, "bmap")) {
+			part.t.bmap = (uint32_t)epbin::LuaDataHelper::GetDoubleField(L, "bmap");
+		}
+	} else {
+		throw d2d::Exception("PackAnimation::UnpackFromLua unknown item type.");
+	}
+}
+
+void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGenerator& gen)
 {
 	for (int i = 0, n = frame.parts.size(); i < n; ++i) 
 	{

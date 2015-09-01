@@ -33,6 +33,14 @@ double LuaDataHelper::GetDoubleField(lua_State* L, const char* name)
 	return id;	
 }
 
+bool LuaDataHelper::GetBoolField(lua_State* L, const char* name)
+{
+	lua_getfield(L, -1, name);
+	bool ret = (bool)lua_toboolean(L, -1);
+	lua_pop(L, 1);
+	return ret;
+}
+
 bool LuaDataHelper::HasField(lua_State* L, const char* field)
 {
 	lua_getfield(L, -1, field);

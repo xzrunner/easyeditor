@@ -14,17 +14,17 @@ class TexturePacker;
 
 class IPackNode;
 
-class INodeBuilder;
+class INodePacker;
 
-class ImageBuilder;
-class Scale9Builder;
-class IconBuilder;
-class TextureBuilder;
+class ImagePacker;
+class Scale9Packer;
+class IconPacker;
+class ETexturePacker;
 
-class LabelBuilder;
+class LabelPacker;
 
-class ComplexBuilder;
-class AnimBuilder;
+class ComplexPacker;
+class AnimPacker;
 
 class PackNodeFactory
 {
@@ -34,7 +34,7 @@ public:
 	void CreateComplex(const ecomplex::Symbol* complex);
 	void CreateAnim(const libanim::Symbol* anim);
 
-	void ToString(ebuilder::CodeGenerator& gen,
+	void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
 	static PackNodeFactory* Instance();
@@ -46,19 +46,19 @@ private:
 	ExportNameSet m_export_set;
 
 	// picture
-	ImageBuilder* m_img_builder;
-	Scale9Builder* m_scale9_builder;
-	IconBuilder* m_icon_builder;
-	TextureBuilder* m_tex_builder;
+	ImagePacker* m_img_packer;
+	Scale9Packer* m_scale9_packer;
+	IconPacker* m_icon_packer;
+	ETexturePacker* m_tex_packer;
 
 	// label
-	LabelBuilder* m_label_builder;
+	LabelPacker* m_label_packer;
 
 	// animation
-	ComplexBuilder* m_complex_builder;
-	AnimBuilder* m_anim_builder;
+	ComplexPacker* m_complex_packer;
+	AnimPacker* m_anim_packer;
 
-	std::vector<INodeBuilder*> m_builders;
+	std::vector<INodePacker*> m_packers;
 
 private:
 	static PackNodeFactory* m_instance;

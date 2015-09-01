@@ -1,16 +1,16 @@
-#include "Scale9Builder.h"
-#include "ImageBuilder.h"
+#include "Scale9Packer.h"
+#include "ImagePacker.h"
 #include "IPackNode.h"
 #include "PackPicture.h"
 
 namespace libcoco
 {
 
-Scale9Builder::Scale9Builder()
+Scale9Packer::Scale9Packer()
 {
 }
 
-Scale9Builder::~Scale9Builder()
+Scale9Packer::~Scale9Packer()
 {
 	std::multimap<const escale9::Symbol*, Value>::iterator 
 		itr = m_map_data.begin();
@@ -19,17 +19,17 @@ Scale9Builder::~Scale9Builder()
 	}
 }
 
-void Scale9Builder::ToString(ebuilder::CodeGenerator& gen,
+void Scale9Packer::PackToLuaString(ebuilder::CodeGenerator& gen,
 							 const TexturePacker& tp) const
 {
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		itr->second.node->ToString(gen, tp);
+		itr->second.node->PackToLuaString(gen, tp);
 	}
 }
 
-const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
+const IPackNode* Scale9Packer::Create(const escale9::Sprite* spr)
 {
 	if (const IPackNode* node = Query(spr)) {
 		return node;
@@ -48,7 +48,7 @@ const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 	return node;
 }
 
-const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
+const IPackNode* Scale9Packer::Query(const escale9::Sprite* spr) const
 {
 	float w, h;
 	spr->GetSize(w, h);
@@ -68,7 +68,7 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 	return NULL;
 }
 
-void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
+void Scale9Packer::Load(const escale9::Sprite* spr, PackPicture* pic)
 {
 	std::vector<d2d::ISprite*> sprites;
 	const escale9::Scale9Data& data = spr->GetScale9Data();
@@ -107,7 +107,7 @@ void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 		d2d::ISprite* sprite = sprites[i];
 		if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite)) {
 			PackPicture::Quad quad;
-			ImageBuilder::LoadPictureQuad(image, quad);
+			ImagePacker::LoadPictureQuad(image, quad);
 			pic->quads.push_back(quad);
 		} else {
 			throw d2d::Exception("PackPicture::LoadScale9 unknown spr type.");

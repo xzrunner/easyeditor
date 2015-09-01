@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_SCALE9_BUILDER_H_
-#define _LIBCOCO_SCALE9_BUILDER_H_
+#ifndef _LIBCOCO_SCALE9_PACKER_H_
+#define _LIBCOCO_SCALE9_PACKER_H_
 
-#include "INodeBuilder.h"
+#include "INodePacker.h"
 
 #include <easyscale9.h>
 
@@ -11,13 +11,13 @@ namespace libcoco
 class IPackNode;
 class PackPicture;
 
-class Scale9Builder : public INodeBuilder
+class Scale9Packer : public INodePacker
 {
 public:
-	Scale9Builder();
-	virtual ~Scale9Builder();
+	Scale9Packer();
+	virtual ~Scale9Packer();
 
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const escale9::Sprite* spr);
@@ -37,8 +37,8 @@ private:
 private:
 	std::multimap<const escale9::Symbol*, Value> m_map_data;
 
-}; // Scale9Builder
+}; // Scale9Packer
 
 }
 
-#endif // _LIBCOCO_SCALE9_BUILDER_H_
+#endif // _LIBCOCO_SCALE9_PACKER_H_

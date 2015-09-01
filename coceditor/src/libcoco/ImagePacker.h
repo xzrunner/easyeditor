@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_IMAGE_BUILDER_H_
-#define _LIBCOCO_IMAGE_BUILDER_H_
+#ifndef _LIBCOCO_IMAGE_PACKER_H_
+#define _LIBCOCO_IMAGE_PACKER_H_
 
-#include "INodeBuilder.h"
+#include "INodePacker.h"
 #include "PackPicture.h"
 
 #include <drag2d.h>
@@ -11,13 +11,13 @@ namespace libcoco
 
 class IPackNode;
 
-class ImageBuilder : public INodeBuilder
+class ImagePacker : public INodePacker
 {
 public:
-	ImageBuilder();
-	virtual ~ImageBuilder();
+	ImagePacker();
+	virtual ~ImagePacker();
 
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const d2d::ImageSprite* spr);
@@ -29,8 +29,8 @@ public:
 private:
 	std::vector<IPackNode*> m_nodes;
 
-}; // ImageBuilder
+}; // ImagePacker
 
 }
 
-#endif // _LIBCOCO_IMAGE_BUILDER_H_
+#endif // _LIBCOCO_IMAGE_PACKER_H_

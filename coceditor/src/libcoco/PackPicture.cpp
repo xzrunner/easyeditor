@@ -10,7 +10,7 @@ namespace libcoco
 
 static const float SCALE = 16;
 
-void PackPicture::ToString(ebuilder::CodeGenerator& gen,
+void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen,
 						   const TexturePacker& tp) const
 {
 	gen.line("{");
@@ -25,6 +25,65 @@ void PackPicture::ToString(ebuilder::CodeGenerator& gen,
 
 	gen.detab();
 	gen.line("},");
+}
+
+void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+{
+	int len = lua_rawlen(L, -1);
+	quads.reserve(len);
+	for (int i = 1; i <= len; ++i)
+	{
+		lua_pushinteger(L, i);
+		lua_gettable(L, -2);
+		assert(lua_istable(L, -1));
+
+		Quad quad;
+		// tex
+		lua_getfield(L, -1, "tex");
+		const char* type = lua_typename(L, lua_type(L, -1));
+		int tex_idx = (uint8_t)lua_tointeger(L, -1);
+		assert(tex_idx < images.size());
+		quad.img = images[tex_idx];
+		lua_pop(L, 1);
+		// src
+		lua_getfield(L, -1, "src");
+		int len = lua_rawlen(L, -1);
+		assert(len == 8);
+		for (int i = 1; i <= len; ++i)
+		{
+			lua_pushinteger(L, i);
+			lua_gettable(L, -2);
+			int src = lua_tonumber(L, -1);
+			if (i % 2) {
+				quad.texture_coord[(i - 1) / 2].x = src;
+			} else {
+				quad.texture_coord[(i - 1) / 2].y = src;
+			}
+			lua_pop(L, 1);
+		}
+		lua_pop(L, 1);
+		// screen
+		lua_getfield(L, -1, "screen");
+		len = lua_rawlen(L, -1);
+		assert(len == 8);
+		for (int i = 1; i <= len; ++i)
+		{
+			lua_pushinteger(L, i);
+			lua_gettable(L, -2);
+			int screen = lua_tonumber(L, -1);
+			if (i % 2) {
+				quad.screen_coord[(i - 1) / 2].x = screen;
+			} else {
+				quad.screen_coord[(i - 1) / 2].y = screen;
+			}
+			lua_pop(L, 1);
+		}
+		lua_pop(L, 1);
+
+		quads.push_back(quad);
+
+		lua_pop(L, 1);
+	}
 }
 
 void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen, 

@@ -1,27 +1,27 @@
-#include "LabelBuilder.h"
+#include "LabelPacker.h"
 #include "PackLabel.h"
 
 namespace libcoco
 {
 
-LabelBuilder::LabelBuilder()
+LabelPacker::LabelPacker()
 {
 }
 
-LabelBuilder::~LabelBuilder()
+LabelPacker::~LabelPacker()
 {
 	for_each(m_labels.begin(), m_labels.end(), DeletePointerFunctor<const PackLabel>());
 }
 
-void LabelBuilder::ToString(ebuilder::CodeGenerator& gen,
+void LabelPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 							const TexturePacker& tp) const
 {
 	for (int i = 0, n = m_labels.size(); i < n; ++i) {
-		m_labels[i]->ToString(gen, tp);
+		m_labels[i]->PackToLuaString(gen, tp);
 	}
 }
 
-const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
+const IPackNode* LabelPacker::Create(const d2d::FontSprite* spr)
 {
 	for (int i = 0, n = m_labels.size(); i < n; ++i) 
 	{

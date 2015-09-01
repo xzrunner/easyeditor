@@ -372,6 +372,14 @@
 						RelativePath="..\..\..\src\easydb_cl\PackLuaDescFileNew.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\UnpackLuaDescFile.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\UnpackLuaDescFile.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter

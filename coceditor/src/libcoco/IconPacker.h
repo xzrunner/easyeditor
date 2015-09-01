@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_ICON_BUILDER_H_
-#define _LIBCOCO_ICON_BUILDER_H_
+#ifndef _LIBCOCO_ICON_PACKER_H_
+#define _LIBCOCO_ICON_PACKER_H_
 
-#include "INodeBuilder.h"
+#include "INodePacker.h"
 
 #include <easyicon.h>
 
@@ -11,13 +11,13 @@ namespace libcoco
 class IPackNode;
 class PackPicture;
 
-class IconBuilder : public INodeBuilder
+class IconPacker : public INodePacker
 {
 public:
-	IconBuilder();
-	virtual ~IconBuilder();
+	IconPacker();
+	virtual ~IconPacker();
 
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const eicon::Sprite* spr);
@@ -37,8 +37,8 @@ private:
 private:
 	std::multimap<const eicon::Symbol*, Value> m_map_data;
 
-}; // IconBuilder
+}; // IconPacker
 
 }
 
-#endif // _LIBCOCO_ICON_BUILDER_H_
+#endif // _LIBCOCO_ICON_PACKER_H_

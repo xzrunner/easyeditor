@@ -10,4 +10,6 @@
 #include "ImageIDer.h"
 #include "Exception.h"
 
+#include "LuaDataHelper.h"
+
 #endif // _EPBIN_H_

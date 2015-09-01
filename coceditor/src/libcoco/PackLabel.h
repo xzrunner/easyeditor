@@ -25,8 +25,11 @@ public:
 	bool has_edge;
 
 public:
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
+
+	virtual void UnpackFromLua(lua_State* L,
+		const std::vector<d2d::Image*>& images);
 
 }; // PackLabel
 

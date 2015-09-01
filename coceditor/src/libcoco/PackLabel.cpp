@@ -1,13 +1,14 @@
 #include "PackLabel.h"
 
 #include <easybuilder.h>
+#include <epbin.h>
 
 namespace lua = ebuilder::lua;
 
 namespace libcoco
 {
 
-void PackLabel::ToString(ebuilder::CodeGenerator& gen,
+void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen,
 						 const TexturePacker& tp) const
 {
 	gen.line("{");
@@ -34,6 +35,19 @@ void PackLabel::ToString(ebuilder::CodeGenerator& gen,
 
 	gen.line("},");
 	gen.detab();
+}
+
+void PackLabel::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+{
+	font = epbin::LuaDataHelper::GetStringField(L, "font");
+	color = d2d::transColor((uint32_t)epbin::LuaDataHelper::GetDoubleField(L, "color"), d2d::PT_ABGR);
+	int align = epbin::LuaDataHelper::GetIntField(L, "align");
+	align_hori = (d2d::HoriAlignType)(align & 0xff);
+	align_vert = (d2d::VertAlignType)((align & 0xff00) >> 4);
+	size = epbin::LuaDataHelper::GetIntField(L, "size");
+	width = epbin::LuaDataHelper::GetIntField(L, "width");
+	height = epbin::LuaDataHelper::GetIntField(L, "height");
+	has_edge = epbin::LuaDataHelper::GetBoolField(L, "noedge");
 }
 
 }

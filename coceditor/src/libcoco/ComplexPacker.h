@@ -1,11 +1,11 @@
-#ifndef _LIBCOCO_COMPLEX_BUILDER_H_
-#define _LIBCOCO_COMPLEX_BUILDER_H_
+#ifndef _LIBCOCO_COMPLEX_PACKER_H_
+#define _LIBCOCO_COMPLEX_PACKER_H_
 
 #include <map>
 
 #include <easycomplex.h>
 
-#include "INodeBuilder.h"
+#include "INodePacker.h"
 
 namespace libcoco
 {
@@ -14,13 +14,13 @@ class IPackNode;
 class PackAnimation;
 class ExportNameSet;
 
-class ComplexBuilder : public INodeBuilder
+class ComplexPacker : public INodePacker
 {
 public:
-	ComplexBuilder(ExportNameSet& export_set);
-	virtual ~ComplexBuilder();
+	ComplexPacker(ExportNameSet& export_set);
+	virtual ~ComplexPacker();
 
-	virtual void ToString(ebuilder::CodeGenerator& gen,
+	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
@@ -33,8 +33,8 @@ private:
 
 	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
 
-}; // ComplexBuilder
+}; // ComplexPacker
 
 }
 
-#endif // _LIBCOCO_COMPLEX_BUILDER_H_
+#endif // _LIBCOCO_COMPLEX_PACKER_H_
