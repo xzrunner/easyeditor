@@ -273,6 +273,16 @@ void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGener
 
 void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans)
 {
+	LoadSprMat(spr, trans);
+	LoadSprColor(spr, trans);
+}
+
+void PackAnimation::LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans)
+{
+	if (dynamic_cast<const d2d::ImageSprite*>(spr)) {
+		return;
+	}
+
 	float mat[6];
 
 	// | 1  ky    | | sx       | |  c  s    | | 1       |
@@ -314,8 +324,10 @@ void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans)
 		trans.mat[i] = floor(mat[i] * 16 + 0.5f);
 	// flip y
 	trans.mat[5] = -trans.mat[5];
+}
 
-	// color
+void PackAnimation::LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans)
+{
 	trans.color = d2d::trans_color2int(spr->multiCol, d2d::PT_BGRA);
 	trans.additive = d2d::trans_color2int(spr->addCol, d2d::PT_BGRA);
 	trans.rmap = d2d::trans_color2int(spr->r_trans, d2d::PT_BGRA);

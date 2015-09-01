@@ -90,6 +90,8 @@ private:
 	static void PackFrameToLuaString(const Frame& frame, ebuilder::CodeGenerator& gen);
 
 	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
+	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans);
+	static void LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans);
 
 public:
 	std::string export_name;
