@@ -280,6 +280,8 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 
 void ParticleSystem::update(float dt)
 {
+//	dt = 1.0f / 60;
+
 	if (active)
 	{
 		float rate = emission_time / count;
@@ -495,6 +497,8 @@ void ParticleSystem::SetLoop(bool loop)
 
 	if (m_loop) {
 		start();
+	} else {
+		active = false;
 	}
 }
 
