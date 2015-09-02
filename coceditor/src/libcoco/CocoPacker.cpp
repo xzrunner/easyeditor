@@ -17,7 +17,7 @@ CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name,
 
 	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
 	bool old_cfg = data.load_image;
-	data.load_image = true;
+	data.load_image = false;
 
 	PackNodeFactory::Instance()->SetFilesDir(json_dir);
 
