@@ -13,12 +13,20 @@ CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name,
 					   const std::string& tp_dir, const std::string& outfile)
 	: m_tp(tp_dir)
 {
+	d2d::TextureFactory::Instance()->InitTexturePacker(tp_dir);
+
+	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	bool old_cfg = data.load_image;
+	data.load_image = false;
+
 	PackNodeFactory::Instance()->SetFilesDir(json_dir);
 
-	LoadJsonData(json_dir);
 	LoadTPData(tp_name);
+	LoadJsonData(json_dir);
 
 	Pack(outfile);
+
+	data.load_image = old_cfg;
 }
 
 void CocoPacker::LoadJsonData(const std::string& dir)
@@ -47,6 +55,7 @@ void CocoPacker::LoadTPData(const std::string& tp_name)
 		std::string tp_path = tp_name + d2d::StringTools::ToString(i) + ".json";
 		if (d2d::FilenameTools::IsFileExist(tp_path)) {
 			m_tp.Add(tp_path);
+			d2d::TextureFactory::Instance()->AddTextureFromConfig(tp_path);
 		} else {
 			break;
 		}

@@ -748,6 +748,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TextureFactory.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TextureFactory.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\dataset\TextureFBO.cpp"
 						>
 					</File>
@@ -761,6 +769,14 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\dataset\TextureImgData.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TexturePacker.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\TexturePacker.h"
 						>
 					</File>
 				</Filter>
@@ -1818,10 +1834,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\SpecialConfig.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\TodoConfig.h"
 					>
 				</File>
 				<File

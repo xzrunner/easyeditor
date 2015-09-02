@@ -2,7 +2,6 @@
 #include "SettingData.h"
 
 #include "common/FileNameTools.h"
-#include "common/TodoConfig.h"
 
 #include <fstream>
 #include <wx/stdpaths.h>

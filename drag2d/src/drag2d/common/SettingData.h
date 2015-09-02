@@ -34,6 +34,7 @@ struct SettingData
 
 	// image loading
 	bool pre_multi_alpha;
+	bool load_image;
 
 	SettingData();
 

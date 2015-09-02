@@ -37,13 +37,15 @@ Image::~Image()
 
 bool Image::LoadFromFile(const std::string& filepath)
 {
+	if (!Config::Instance()->GetSettings().load_image) {
+		m_tex->LoadFromMemory(ImageDataMgr::Instance()->GetItem(filepath));
+		TextureFactory::Instance()->Load(filepath, m_ori_w, m_ori_h, m_offset);
+		return true;
+	}
+
 	if (!wxFileName::FileExists(filepath)) {
 		throw Exception("Image File: %s don't exist!", filepath.c_str());
 	}
-
-#ifdef NOT_LOAD_IMAGE
-	return true;
-#endif
 
 	//////////////////////////////////////////////////////////////////////////
 	if (Config::Instance()->GetSettings().open_image_edge_clip) {

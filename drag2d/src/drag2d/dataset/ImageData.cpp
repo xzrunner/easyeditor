@@ -1,5 +1,9 @@
 #include "ImageData.h"
+#include "TextureFactory.h"
 #include "ImageLoader.h"
+
+#include "common/Config.h"
+#include "common/SettingData.h"
 
 #include <string>
 #include <gl/glew.h>	// for GL_RGBA
@@ -39,8 +43,9 @@ ImageData::~ImageData()
 bool ImageData::LoadFromFile(const std::string& filepath)
 {
 	m_filepath = filepath;
-	m_pixels = ImageLoader::loadData(filepath, m_width, m_height, m_channels, m_format);
-	return m_pixels != NULL;
+	m_pixels = TextureFactory::Instance()->Load(filepath, m_width, m_height, m_channels, m_format);
+//	m_pixels = ImageLoader::loadData(filepath, m_width, m_height, m_channels, m_format);
+	return true;
 }
 
 void ImageData::SetContent(const uint8_t* pixels, int width, int height)

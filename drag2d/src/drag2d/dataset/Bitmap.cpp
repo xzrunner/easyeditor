@@ -2,11 +2,9 @@
 #include "Image.h"
 #include "ISymbol.h"
 #include "SymbolMgr.h"
-#include "ImageLoader.h"
 
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
-#include "common/TodoConfig.h"
 #include "render/Snapshoot.h"
 
 #include <gl/gl.h>
@@ -30,11 +28,14 @@ Bitmap::~Bitmap()
 
 bool Bitmap::LoadFromFile(const std::string& filepath)
 {
+	if (!Config::Instance()->GetSettings().load_image) {
+		return true;
+	}
+
 	if (!wxFileName::FileExists(filepath)) {
 		throw Exception("File: %s don't exist!", filepath.c_str());
 	}
 
-#ifndef NOT_LOAD_IMAGE
 	m_filename = filepath;
 	const GLubyte* test = glGetString(GL_VERSION);
 	if (!test) {
@@ -84,7 +85,6 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		delete[] rgb;
 		symbol->Release();
 	}
-#endif
 
 	return true;
 }

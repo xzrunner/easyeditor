@@ -39,6 +39,7 @@
 #include "dataset/text_util.h"
 #include "dataset/ImageData.h"
 #include "dataset/TextureImgData.h"
+#include "dataset/TextureFactory.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"

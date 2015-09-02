@@ -25,6 +25,7 @@ SettingData::SettingData()
 	linear_filter = true;
 
 	pre_multi_alpha = true;
+	load_image = true;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)
