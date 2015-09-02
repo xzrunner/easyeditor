@@ -182,7 +182,7 @@ void TrimImage::Trim(const std::string& filepath)
 	spr_val["position"]["w"] = r.xLength();
 	spr_val["position"]["h"] = r.yLength();
 	int64_t time = GetFileModifyTime(filepath);
-	spr_val["time"] = d2d::StringTools::Int64ToString(time);
+	spr_val["time"] = d2d::StringTools::ToString(time);
 	StoreBoundInfo(*img, r, spr_val);
 	m_json_cfg.Insert(relative_path, spr_val, time);
 
