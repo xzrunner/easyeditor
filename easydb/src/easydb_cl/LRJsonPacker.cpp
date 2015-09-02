@@ -7,6 +7,7 @@
 #include <lr/dataset/CharacterFileName.h>
 
 #include <easyshape.h>
+#include <easy3d.h>
 
 namespace edb
 {
@@ -334,14 +335,16 @@ void LRJsonPacker::ParserCamera(const Json::Value& src_val, int layer_idx,
 	}
 }
 
-void LRJsonPacker::ParserCharacter(const Json::Value& src_val, const lr::Grids& grids,
-								   int layer_idx, const char* name, Json::Value& out_val)
+void LRJsonPacker::ParserCharacter(const Json::Value& src_val, 
+								   const lr::Grids& grids, int layer_idx, 
+								   const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!spr_val.isNull()) 
 	{
 		std::string filepath = spr_val["filepath"].asString();
+		filepath = d2d::FilenameTools::getAbsolutePath(m_dir, filepath);
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
 			spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 			continue;
@@ -389,6 +392,9 @@ void LRJsonPacker::ParserCharacter(const Json::Value& src_val, const lr::Grids& 
 		for (int i = 0, n = tags.size(); i < n; ++i) {
 			const std::string& str = tags[i];
 			int pos = str.find_first_of('=');
+			if (pos == std::string::npos) {
+				continue;
+			}
 			std::string key = str.substr(0, pos);
 			std::string val = str.substr(pos+1);
 			char_val["tag"][key] = val;
@@ -496,16 +502,31 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 	name = name.substr(0, name.find("_particle"));
 	d2d::StringTools::ToLower(name);
 
-	dec_val["export"] = name;
+//	dec_val["export"] = name;
+	dec_val["export"] = spr_val["name"];
 
 	if (top_layer) {
 		dec_val["layer"] = "top";
 	}
 
+// 	float qx = spr_val["particle3d"]["dir"]["x"].asDouble(),
+// 		qy = spr_val["particle3d"]["dir"]["y"].asDouble(),
+// 		qz = spr_val["particle3d"]["dir"]["z"].asDouble(),
+// 		qw = spr_val["particle3d"]["dir"]["w"].asDouble();
+// 	Quaternion quat(qx, qy, qz, qw);
+// 	mat4 mat = quat.ToMatrix();
+// 	vec3 dir = mat * vec3(0, 0, 1);
+
 	Json::Value dir_val;
+
+// 	dir_val["x"] = dir.x;
+// 	dir_val["y"] = dir.y;
+// 	dir_val["z"] = dir.z;
+
 	dir_val["x"] = 0;
 	dir_val["y"] = 0;
 	dir_val["z"] = 1;
+
 	dec_val["dir"] = dir_val;
 
 	int sz = out_val["particle"].size();
