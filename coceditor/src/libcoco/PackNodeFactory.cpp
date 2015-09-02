@@ -52,6 +52,10 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		node = m_anim_packer->Create(&anim->GetSymbol());
 	}
 
+	std::string filepath = spr->GetSymbol().GetFilepath();
+	filepath = d2d::FilenameTools::getRelativePath(m_files_dir, filepath);
+	node->SetFilepath(filepath);
+
 	return node;
 }
 

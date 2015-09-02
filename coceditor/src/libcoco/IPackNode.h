@@ -30,9 +30,16 @@ public:
 		const std::vector<d2d::Image*>& images) = 0;
 
 	int GetID() const { return m_id; }
+	void SetID(int id) { m_id = id; }
+
+	void SetFilepath(const std::string& filepath) const {
+		m_filepath = filepath;
+	}
 
 protected:
 	int m_id;
+
+	mutable std::string m_filepath;
 
 }; // IPackNode
 

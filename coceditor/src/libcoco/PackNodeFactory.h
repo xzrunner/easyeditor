@@ -37,12 +37,18 @@ public:
 	void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 
+	void SetFilesDir(const std::string& files_dir) {
+		m_files_dir = files_dir;
+	}
+
 	static PackNodeFactory* Instance();
 
 private:
 	PackNodeFactory();
 
 private:
+	std::string m_files_dir;
+
 	ExportNameSet m_export_set;
 
 	// picture

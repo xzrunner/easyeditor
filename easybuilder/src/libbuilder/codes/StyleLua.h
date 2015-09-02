@@ -9,6 +9,11 @@ namespace ebuilder
 {
 namespace lua
 {
+	static void comments(CodeGenerator& gen, const std::string& str)
+	{
+		gen.line("-- " + str);
+	}
+
 	static void require(CodeGenerator& gen, const std::string& name)
 	{
 		gen.line("require(\""+name+"\")");

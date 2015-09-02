@@ -16,6 +16,8 @@ void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen,
 	gen.line("{");
 	gen.tab();
 
+	lua::comments(gen, "file: " + m_filepath);
+
 	lua::assign_with_end(gen, "type", "\"picture\"");
 	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(m_id));
 

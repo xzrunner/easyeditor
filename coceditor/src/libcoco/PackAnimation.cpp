@@ -15,6 +15,8 @@ void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const TextureP
 	gen.line("{");
 	gen.tab();
 
+	lua::comments(gen, "file: " + m_filepath);
+
 	lua::assign_with_end(gen, "type", "\"animation\"");
 	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(m_id));
 	if (!export_name.empty()) {

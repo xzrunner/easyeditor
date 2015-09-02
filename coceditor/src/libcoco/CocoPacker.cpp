@@ -13,6 +13,8 @@ CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name,
 					   const std::string& tp_dir, const std::string& outfile)
 	: m_tp(tp_dir)
 {
+	PackNodeFactory::Instance()->SetFilesDir(json_dir);
+
 	LoadJsonData(json_dir);
 	LoadTPData(tp_name);
 
