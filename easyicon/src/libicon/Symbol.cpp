@@ -59,15 +59,7 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 	if (sprite) {
 		process = static_cast<const Sprite*>(sprite)->GetProcess();
 	}
-	m_icon->GetRegion(process, r);
-
-	const d2d::Image* img = m_icon->GetImage();
-	r.xMin = (r.xMin - 0.5f) * img->GetOriginWidth();
-	r.xMax = (r.xMax - 0.5f) * img->GetOriginWidth();
-	r.yMin = (r.yMin - 0.5f) * img->GetOriginHeight();
-	r.yMax = (r.yMax - 0.5f) * img->GetOriginHeight();
-
-	return r;
+	return m_icon->GetRegion(process);
 }
 
 void Symbol::SetIcon(Icon* icon)

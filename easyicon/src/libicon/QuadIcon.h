@@ -15,13 +15,10 @@ public:
 
 	virtual const char* GetIconDesc() const { return "quad"; }
 
-	virtual void Draw(const d2d::Matrix& mt, float process) const;
-
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
-	virtual void GetRegion(float process, d2d::Rect& region) const;
-	virtual void GetTexcoords4(d2d::Vector tex4[4], float process) const;
+	virtual void GetBound(float process, d2d::Vector bound[4]) const;
 
 private:
 	d2d::Vector m_src[4], m_screen[4];

@@ -9,18 +9,6 @@ ChangedSectorIcon::ChangedSectorIcon()
 {
 }
 
-void ChangedSectorIcon::Draw(const d2d::Matrix& mt, float process) const
-{
-	if (!m_img) {
-		return;
-	}
-
- 	d2d::Vector region[4];
-	GetTexcoords4(region, process);
-
-	Icon::Draw(mt, region);
-}
-
 void ChangedSectorIcon::LoadFromFile(const Json::Value& value)
 {
 }
@@ -29,20 +17,10 @@ void ChangedSectorIcon::StoreToFile(Json::Value& value) const
 {
 }
 
-void ChangedSectorIcon::GetRegion(float process, d2d::Rect& region) const
+void ChangedSectorIcon::GetBound(float process, d2d::Vector bound[4]) const
 {
-	if (!m_img) {
-		return;
-	}
-
-	region.xMin = region.yMin = 0;
-	region.xMax = region.yMax = 1;
-}
-
-void ChangedSectorIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
-{
-	tex4[0].set(0, 0);
-	tex4[1].set(0, 1);
+	bound[0].set(0, 0);
+	bound[1].set(0, 1);
 
 	float angle = m_min + (m_max - m_min) * process;
 	float tan_val = std::tan(angle);
@@ -51,18 +29,14 @@ void ChangedSectorIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
 		h = m_img->GetClippedHeight();
 	float x = h / tan_val;
 	if (x < w) {
-		tex4[2].set(x / w, 1.0f);
-		tex4[3] = tex4[2];
+		bound[2].set(x / w, 1.0f);
+		bound[3] = bound[2];
 	} else {
 		float y = w * tan_val;
 		assert(y <= h);
-		tex4[2].set(1, 1);
-		tex4[3].set(1, y / h);
+		bound[2].set(1, 1);
+		bound[3].set(1, y / h);
 	}
-}
-
-void ChangedSectorIcon::SetRegion(float angle_min, float angle_max)
-{	
 }
 
 }

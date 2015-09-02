@@ -12,23 +12,6 @@ ChangedRectIcon::ChangedRectIcon()
 	m_end.yMax = 1;
 }
 
-void ChangedRectIcon::Draw(const d2d::Matrix& mt, float process) const
-{
-	d2d::Rect curr;
-	curr.xMin = m_begin.xMin + (m_end.xMin - m_begin.xMin) * process;
-	curr.xMax = m_begin.xMax + (m_end.xMax - m_begin.xMax) * process;
-	curr.yMin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * process;
-	curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
-
-	d2d::Vector region[4];
-	region[0].set(curr.xMin, curr.yMin);
-	region[1].set(curr.xMin, curr.yMax);
-	region[2].set(curr.xMax, curr.yMax);
-	region[3].set(curr.xMax, curr.yMin);
-
-	Icon::Draw(mt, region);
-}
-
 void ChangedRectIcon::LoadFromFile(const Json::Value& value)
 {
 	d2d::JsonIO::Load(value["begin"], m_begin);
@@ -41,39 +24,16 @@ void ChangedRectIcon::StoreToFile(Json::Value& value) const
 	d2d::JsonIO::Store(m_end, value["end"]);
 }
 
-void ChangedRectIcon::GetRegion(float process, d2d::Rect& region) const
+void ChangedRectIcon::GetBound(float process, d2d::Vector bound[4]) const
 {
-	if (!m_img) {
-		return;
-	}
-
- 	d2d::Rect curr = GetCurrRect(process);
-	float w = m_img->GetClippedWidth(),
-		h = m_img->GetClippedHeight();
-
-	region.xMin = curr.xMin * w;
-	region.xMax = curr.xMax * w;
-	region.yMin = curr.yMin * h;
-	region.yMax = curr.yMax * h;
-}
-
-d2d::Rect ChangedRectIcon::GetCurrRect(float process) const
-{
-	d2d::Rect curr;
-	curr.xMin = m_begin.xMin + (m_end.xMin - m_begin.xMin) * process;
-	curr.xMax = m_begin.xMax + (m_end.xMax - m_begin.xMax) * process;
-	curr.yMin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * process;
-	curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
-	return curr;	
-}
-
-void ChangedRectIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
-{
-	d2d::Rect curr = GetCurrRect(process);
-	tex4[0].set(curr.xMin, curr.yMin);
-	tex4[1].set(curr.xMin, curr.yMax);
-	tex4[2].set(curr.xMax, curr.yMax);
-	tex4[3].set(curr.xMax, curr.yMin);
+	float xmin = m_begin.xMin + (m_end.xMin - m_begin.xMin) * process,
+		xmax = m_begin.xMax + (m_end.xMax - m_begin.xMax) * process,
+		ymin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * process,
+		ymax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
+	bound[0].set(xmin, ymin);
+	bound[1].set(xmin, ymax);
+	bound[2].set(xmax, ymax);
+	bound[3].set(xmax, ymin);
 }
 
 }

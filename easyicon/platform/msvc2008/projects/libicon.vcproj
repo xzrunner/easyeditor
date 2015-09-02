@@ -236,22 +236,6 @@
 				Name="icon"
 				>
 				<File
-					RelativePath="..\..\..\src\libicon\ChangedRectIcon.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libicon\ChangedRectIcon.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libicon\ChangedSectorIcon.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libicon\ChangedSectorIcon.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libicon\Icon.cpp"
 					>
 				</File>
@@ -260,38 +244,58 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libicon\QuadIcon.cpp"
+					RelativePath="..\..\..\src\libicon\IconFactory.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libicon\QuadIcon.h"
+					RelativePath="..\..\..\src\libicon\IconFactory.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libicon\RectIcon.cpp"
+					RelativePath="..\..\..\src\libicon\IconType.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libicon\RectIcon.h"
+					RelativePath="..\..\..\src\libicon\IconType.h"
 					>
 				</File>
 				<Filter
-					Name="tools"
+					Name="static"
 					>
 					<File
-						RelativePath="..\..\..\src\libicon\IconFactory.cpp"
+						RelativePath="..\..\..\src\libicon\QuadIcon.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libicon\IconFactory.h"
+						RelativePath="..\..\..\src\libicon\QuadIcon.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libicon\IconType.cpp"
+						RelativePath="..\..\..\src\libicon\RectIcon.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libicon\IconType.h"
+						RelativePath="..\..\..\src\libicon\RectIcon.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="dynamic"
+					>
+					<File
+						RelativePath="..\..\..\src\libicon\ChangedRectIcon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libicon\ChangedRectIcon.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libicon\ChangedSectorIcon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libicon\ChangedSectorIcon.h"
 						>
 					</File>
 				</Filter>

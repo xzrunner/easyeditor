@@ -9,11 +9,6 @@ RectIcon::RectIcon()
 {
 }
 
-void RectIcon::Draw(const d2d::Matrix& mt, float process) const
-{
-//	Icon::Draw(mt, d2d::Rect(m_min, m_max));
-}
-
 void RectIcon::LoadFromFile(const Json::Value& value)
 {
 
@@ -27,23 +22,12 @@ void RectIcon::StoreToFile(Json::Value& value) const
 	value["ymax"] = m_max.y;
 }
 
-void RectIcon::GetRegion(float process, d2d::Rect& region) const
+void RectIcon::GetBound(float process, d2d::Vector bound[4]) const
 {
-	if (!m_img) {
-		return;
-	}
-
-	float xlen = m_img->GetOriginWidth();
-	region.xMin = xlen * (m_min.x - 0.5f);
-	region.xMax = xlen * (m_max.x - 0.5f);
-
-	float ylen = m_img->GetOriginHeight();
-	region.yMin = ylen * (m_min.y - 0.5f);
-	region.yMax = ylen * (m_max.y - 0.5f);	
-}
-
-void RectIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
-{
+	bound[0].set(m_min.x, m_min.y);
+	bound[1].set(m_min.x, m_max.y);
+	bound[2].set(m_max.x, m_max.y);
+	bound[3].set(m_max.x, m_min.y);
 }
 
 void RectIcon::SetHoriRegion(float xmin, float xmax)
