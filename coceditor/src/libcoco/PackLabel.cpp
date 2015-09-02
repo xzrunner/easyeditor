@@ -8,6 +8,11 @@ namespace lua = ebuilder::lua;
 namespace libcoco
 {
 
+PackLabel::PackLabel(int id)
+	: IPackNode(id)
+{
+}
+
 void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen,
 						 const TexturePacker& tp) const
 {

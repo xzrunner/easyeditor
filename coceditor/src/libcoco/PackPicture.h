@@ -22,6 +22,9 @@ public:
 	std::vector<Quad> quads;
 
 public:
+	PackPicture() {}
+	PackPicture(int id);
+
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 

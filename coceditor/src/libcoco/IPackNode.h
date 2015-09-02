@@ -21,6 +21,9 @@ public:
 		static int ID = 0;
 		m_id = ID++;
 	}
+	IPackNode(int id) {
+		m_id = id;
+	}
 	virtual ~IPackNode() {}
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
@@ -30,7 +33,6 @@ public:
 		const std::vector<d2d::Image*>& images) = 0;
 
 	int GetID() const { return m_id; }
-	void SetID(int id) { m_id = id; }
 
 	void SetFilepath(const std::string& filepath) const {
 		m_filepath = filepath;

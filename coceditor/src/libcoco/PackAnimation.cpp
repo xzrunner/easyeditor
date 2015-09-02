@@ -10,6 +10,11 @@ namespace lua = ebuilder::lua;
 namespace libcoco
 {
 
+PackAnimation::PackAnimation(int id)
+	: IPackNode(id)
+{
+}
+
 void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const TexturePacker& tp) const
 {
 	gen.line("{");

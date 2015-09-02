@@ -25,6 +25,9 @@ public:
 	bool has_edge;
 
 public:
+	PackLabel() {}
+	PackLabel(int id);
+
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 

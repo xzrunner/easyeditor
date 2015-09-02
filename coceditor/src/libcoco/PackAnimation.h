@@ -69,6 +69,9 @@ public:
 	};
 
 public:
+	PackAnimation() {}
+	PackAnimation(int id);
+
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
 

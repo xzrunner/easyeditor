@@ -28,18 +28,17 @@ void UnpackNodeFactory::Unpack(lua_State* L, const std::vector<d2d::Image*>& ima
 
 	IPackNode* node = NULL;
 	if (type == "picture") {
-		node = new PackPicture;
+		node = new PackPicture(id);
 	} else if (type == "label") {
-		node = new PackLabel;
+		node = new PackLabel(id);
 	} else if (type == "animation") {
-		node = new PackAnimation;
+		node = new PackAnimation(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::Unpack unknown type %s", type.c_str());
 	}
 
 	node->UnpackFromLua(L, images);
 
-	node->SetID(id);
 	m_map_id.insert(std::make_pair(id, node));
 
 	if (type == "animation") {

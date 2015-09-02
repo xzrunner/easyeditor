@@ -10,6 +10,11 @@ namespace libcoco
 
 static const float SCALE = 16;
 
+PackPicture::PackPicture(int id)
+	: IPackNode(id)
+{
+}
+
 void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen,
 						   const TexturePacker& tp) const
 {
