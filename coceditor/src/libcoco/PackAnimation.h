@@ -93,6 +93,8 @@ private:
 	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans);
 	static void LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans);
 
+	static bool IsMatrixIdentity(const int* mat);
+
 public:
 	std::string export_name;
 

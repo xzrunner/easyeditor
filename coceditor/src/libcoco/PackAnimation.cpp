@@ -192,10 +192,7 @@ void PackAnimation::UppackFrameFromLua(lua_State* L, Frame& frame)
 void PackAnimation::UppackPartFromLua(lua_State* L, Part& part)
 {
 	if (lua_isnumber(L, -1)) {
-		lua_pushinteger(L, -1);
-		lua_gettable(L, -2);
 		part.comp_idx = lua_tointeger(L, -1);
-		lua_pop(L, 1);
 	} else if (lua_istable(L, -1)) {
 		part.comp_idx = epbin::LuaDataHelper::GetIntField(L, "index");
 		if (epbin::LuaDataHelper::HasField(L, "mat")) {
@@ -242,17 +239,20 @@ void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGener
 		std::vector<std::string> params;
 
 		// index
-		std::string index_str = lua::assign("index", d2d::StringTools::ToString(part.comp_idx));
-		params.push_back(index_str);
+		std::string idx_str = d2d::StringTools::ToString(part.comp_idx);
+		std::string idx_assign = lua::assign("index", idx_str);
+		params.push_back(idx_assign);
 
 		// mat
-		std::string m[6];
-		for (int i = 0; i < 6; ++i) {
-			m[i] = wxString::FromDouble(t.mat[i]);
+		if (!IsMatrixIdentity(t.mat)) {
+			std::string m[6];
+			for (int i = 0; i < 6; ++i) {
+				m[i] = d2d::StringTools::ToString(t.mat[i]);
+			}
+			std::string mat_str = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
+				m[3].c_str(), m[4].c_str(), m[5].c_str());
+			params.push_back(lua::assign("mat", mat_str));
 		}
-		std::string mat_str = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
-			m[3].c_str(), m[4].c_str(), m[5].c_str());
-		params.push_back(lua::assign("mat", mat_str));
 
 		// color
 		if (t.color != 0xffffffff) {
@@ -267,7 +267,11 @@ void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGener
 			params.push_back(lua::assign("bmap", d2d::StringTools::ToString(t.bmap)));
 		}
 
-		lua::tableassign(gen, "", params);
+		if (params.size() > 1) {
+			lua::tableassign(gen, "", params);
+		} else {
+			gen.line(idx_str + ",");
+		}
 	}
 }
 
@@ -333,6 +337,12 @@ void PackAnimation::LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans)
 	trans.rmap = d2d::trans_color2int(spr->r_trans, d2d::PT_BGRA);
 	trans.gmap = d2d::trans_color2int(spr->g_trans, d2d::PT_BGRA);
 	trans.bmap = d2d::trans_color2int(spr->b_trans, d2d::PT_BGRA);	
+}
+
+bool PackAnimation::IsMatrixIdentity(const int* mat)
+{
+	return mat[0] == 1024 && mat[3] == 1024 
+		&& mat[1] == 0 && mat[2] == 0 && mat[4] == 0 && mat[5] == 0;
 }
 
 }

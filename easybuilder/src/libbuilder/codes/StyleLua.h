@@ -58,9 +58,9 @@ namespace lua
 			str += " = ";
 		}
 
-		str += "{";
+		str += "{ ";
 		PARSER_PARAMS(n, str);
-		str += "},";
+		str += " },";
 
 		gen.line(str);
 	}
@@ -92,14 +92,14 @@ namespace lua
 			str += " = ";
 		}
 
-		str += "{";
+		str += "{ ";
 		for (int i = 0, n = params.size(); i < n; ++i) {
 			str += params[i];
 			if (i != params.size() - 1) {
 				str += ", ";
 			}
 		}
-		str += "},";
+		str += " },";
 
 		return str;
 	}
