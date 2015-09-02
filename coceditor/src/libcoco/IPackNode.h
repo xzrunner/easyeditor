@@ -43,6 +43,14 @@ protected:
 
 }; // IPackNode
 
+class PackNodeCmp
+{
+public:
+	bool operator () (const IPackNode* lhs, const IPackNode* rhs) const {
+		return lhs->GetID() < rhs->GetID();
+	}
+}; // PackNodeCmp
+
 }
 
 #endif // _LIBCOCO_IPACK_NODE_H_

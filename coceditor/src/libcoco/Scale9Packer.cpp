@@ -22,10 +22,19 @@ Scale9Packer::~Scale9Packer()
 void Scale9Packer::PackToLuaString(ebuilder::CodeGenerator& gen,
 							 const TexturePacker& tp) const
 {
+	std::vector<const IPackNode*> nodes;
+	nodes.reserve(m_map_data.size());
+
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		itr->second.node->PackToLuaString(gen, tp);
+//		itr->second.node->PackToLuaString(gen, tp);
+		nodes.push_back(itr->second.node);
+	}
+
+	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
+	for (int i = 0, n = nodes.size(); i < n; ++i) {
+		nodes[i]->PackToLuaString(gen, tp);
 	}
 }
 

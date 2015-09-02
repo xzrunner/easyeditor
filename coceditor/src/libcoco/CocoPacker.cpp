@@ -17,7 +17,7 @@ CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name,
 
 	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
 	bool old_cfg = data.load_image;
-	data.load_image = false;
+	data.load_image = true;
 
 	PackNodeFactory::Instance()->SetFilesDir(json_dir);
 
@@ -34,17 +34,22 @@ void CocoPacker::LoadJsonData(const std::string& dir)
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
 
+	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex) || 
-			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
-		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-			m_symbols.push_back(symbol);
+			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+			filepaths.push_back(filepath);
 		}
+	}
+
+	std::sort(filepaths.begin(), filepaths.end());
+	for (int i = 0, n = filepaths.size(); i < n; ++i) {
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		m_symbols.push_back(symbol);
 	}
 }
 

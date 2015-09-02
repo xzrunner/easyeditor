@@ -24,10 +24,18 @@ AnimPacker::~AnimPacker()
 void AnimPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 						   const TexturePacker& tp) const
 {
+	std::vector<const IPackNode*> nodes;
+	nodes.reserve(m_map_data.size());
+
 	std::map<const libanim::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		itr->second->PackToLuaString(gen, tp);
+		nodes.push_back(itr->second);
+	}
+
+	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
+	for (int i = 0, n = nodes.size(); i < n; ++i) {
+		nodes[i]->PackToLuaString(gen, tp);
 	}
 }
 

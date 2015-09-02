@@ -23,6 +23,10 @@ void ImagePacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 
 const IPackNode* ImagePacker::Create(const d2d::ImageSprite* spr)
 {
+	if (spr->GetSymbol().GetFilepath().find("bg_guide_line_01.png") != std::string::npos) {
+		int zz = 0;
+	}
+
 	PackPicture* node = new PackPicture;
 	PackPicture::Quad quad;
 	LoadPictureQuad(spr, quad);
