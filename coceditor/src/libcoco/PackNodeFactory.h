@@ -14,17 +14,17 @@ class TexturePacker;
 
 class IPackNode;
 
-class INodePacker;
+class INodeBuilder;
 
-class ImagePacker;
-class Scale9Packer;
-class IconPacker;
-class ETexturePacker;
+class ImageBuilder;
+class Scale9Builder;
+class IconBuilder;
+class TextureBuilder;
 
-class LabelPacker;
+class LabelBuilder;
 
-class ComplexPacker;
-class AnimPacker;
+class ComplexBuilder;
+class AnimBuilder;
 
 class PackNodeFactory
 {
@@ -52,19 +52,19 @@ private:
 	ExportNameSet m_export_set;
 
 	// picture
-	ImagePacker* m_img_packer;
-	Scale9Packer* m_scale9_packer;
-	IconPacker* m_icon_packer;
-	ETexturePacker* m_tex_packer;
+	ImageBuilder* m_img_packer;
+	Scale9Builder* m_scale9_packer;
+	IconBuilder* m_icon_packer;
+	TextureBuilder* m_tex_packer;
 
 	// label
-	LabelPacker* m_label_packer;
+	LabelBuilder* m_label_packer;
 
 	// animation
-	ComplexPacker* m_complex_packer;
-	AnimPacker* m_anim_packer;
+	ComplexBuilder* m_complex_packer;
+	AnimBuilder* m_anim_packer;
 
-	std::vector<INodePacker*> m_packers;
+	std::vector<INodeBuilder*> m_packers;
 
 private:
 	static PackNodeFactory* m_instance;

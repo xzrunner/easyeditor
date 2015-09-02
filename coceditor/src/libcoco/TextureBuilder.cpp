@@ -1,4 +1,4 @@
-#include "ETexturePacker.h"
+#include "TextureBuilder.h"
 #include "PackPicture.h"
 
 #include <easyshape.h>
@@ -6,11 +6,11 @@
 namespace libcoco
 {
 
-ETexturePacker::ETexturePacker()
+TextureBuilder::TextureBuilder()
 {
 }
 
-ETexturePacker::~ETexturePacker()
+TextureBuilder::~TextureBuilder()
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::iterator
 		itr = m_map_data.begin();
@@ -19,7 +19,7 @@ ETexturePacker::~ETexturePacker()
 	}
 }
 
-void ETexturePacker::PackToLuaString(ebuilder::CodeGenerator& gen,
+void TextureBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
 							  const TexturePacker& tp) const
 {
 	std::vector<const IPackNode*> nodes;
@@ -37,7 +37,7 @@ void ETexturePacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 	}
 }
 
-const IPackNode* ETexturePacker::Create(const etexture::Symbol* symbol)
+const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::iterator 
 		itr = m_map_data.find(symbol);
@@ -51,25 +51,25 @@ const IPackNode* ETexturePacker::Create(const etexture::Symbol* symbol)
 	return node;
 }
 
-void ETexturePacker::Load(const etexture::Symbol* symbol, PackPicture* pic)
+void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 {
 	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
-		throw d2d::Exception("ETexturePacker::Load shapes.size(): %d", shapes.size());
+		throw d2d::Exception("TextureBuilder::Load shapes.size(): %d", shapes.size());
 	}
 	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
-		throw d2d::Exception("ETexturePacker::Load !poly");
+		throw d2d::Exception("TextureBuilder::Load !poly");
 	}
 	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
 	if (!material) {
-		throw d2d::Exception("ETexturePacker::Load !material");
+		throw d2d::Exception("TextureBuilder::Load !material");
 	}
 
 	const std::vector<d2d::Vector>& vertices = material->GetTriangles();
 	const std::vector<d2d::Vector>& texcoords = material->GetTexcoords();
 	if ((vertices.size() != texcoords.size()) || (vertices.size() % 3 != 0)) {
-		throw d2d::Exception("ETexturePacker::Load err meaterial");
+		throw d2d::Exception("TextureBuilder::Load err meaterial");
 	}
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
 	{

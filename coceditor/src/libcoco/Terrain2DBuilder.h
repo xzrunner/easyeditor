@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_TERRAIN_PACKER_H_
-#define _LIBCOCO_TERRAIN_PACKER_H_
+#ifndef _LIBCOCO_TERRAIN_BUILDER_H_
+#define _LIBCOCO_TERRAIN_BUILDER_H_
 
-#include "INodePacker.h"
+#include "INodeBuilder.h"
 
 #include <easyterrain2d.h>
 
@@ -11,11 +11,11 @@ namespace libcoco
 class IPackNode;
 class PackAnimation;
 
-class Terrain2DPacker : public INodePacker
+class Terrain2DBuilder : public INodeBuilder
 {
 public:
-	Terrain2DPacker();
-	virtual ~Terrain2DPacker();
+	Terrain2DBuilder();
+	virtual ~Terrain2DBuilder();
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
@@ -28,8 +28,8 @@ private:
 private:
 	std::map<const eterrain2d::Symbol*, const PackAnimation*> m_map_data;
 
-}; // Terrain2DPacker
+}; // Terrain2DBuilder
 
 }
 
-#endif // _LIBCOCO_TERRAIN_PACKER_H_
+#endif // _LIBCOCO_TERRAIN_BUILDER_H_

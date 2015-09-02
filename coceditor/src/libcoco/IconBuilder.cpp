@@ -1,19 +1,19 @@
-#include "IconPacker.h"
+#include "IconBuilder.h"
 #include "PackAnimation.h"
 
-#include "Scale9Packer.h"
-#include "ImagePacker.h"
+#include "Scale9Builder.h"
+#include "ImageBuilder.h"
 #include "IPackNode.h"
 #include "PackPicture.h"
 
 namespace libcoco
 {
 
-IconPacker::IconPacker()
+IconBuilder::IconBuilder()
 {
 }
 
-IconPacker::~IconPacker()
+IconBuilder::~IconBuilder()
 {
 	std::multimap<const eicon::Symbol*, Value>::iterator 
 		itr = m_map_data.begin();
@@ -22,7 +22,7 @@ IconPacker::~IconPacker()
 	}
 }
 
-void IconPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
+void IconBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
 						   const TexturePacker& tp) const
 {
 	std::vector<const IPackNode*> nodes;
@@ -40,7 +40,7 @@ void IconPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 	}
 }
 
-const IPackNode* IconPacker::Create(const eicon::Sprite* spr)
+const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)
 {
 	if (const IPackNode* node = Query(spr)) {
 		return node;
@@ -56,7 +56,7 @@ const IPackNode* IconPacker::Create(const eicon::Sprite* spr)
 	return node;
 }
 
-const IPackNode* IconPacker::Query(const eicon::Sprite* spr) const
+const IPackNode* IconBuilder::Query(const eicon::Sprite* spr) const
 {
 	float proc = spr->GetProcess();
 	const eicon::Symbol* key = &spr->GetSymbol();
@@ -74,7 +74,7 @@ const IPackNode* IconPacker::Query(const eicon::Sprite* spr) const
 	return NULL;
 }
 
-void IconPacker::Load(const eicon::Sprite* spr, PackPicture* pic)
+void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 {
 	float proc = spr->GetProcess();
 

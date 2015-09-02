@@ -1,14 +1,14 @@
 #include "PackNodeFactory.h"
 
-#include "ImagePacker.h"
-#include "Scale9Packer.h"
-#include "IconPacker.h"
-#include "ETexturePacker.h"
+#include "ImageBuilder.h"
+#include "Scale9Builder.h"
+#include "IconBuilder.h"
+#include "TextureBuilder.h"
 
-#include "LabelPacker.h"
+#include "LabelBuilder.h"
 
-#include "ComplexPacker.h"
-#include "AnimPacker.h"
+#include "ComplexBuilder.h"
+#include "AnimBuilder.h"
 
 namespace libcoco
 {
@@ -17,15 +17,15 @@ PackNodeFactory* PackNodeFactory::m_instance = NULL;
 
 PackNodeFactory::PackNodeFactory()
 {
-	m_packers.push_back(m_img_packer = new ImagePacker);
-	m_packers.push_back(m_scale9_packer = new Scale9Packer);
-	m_packers.push_back(m_icon_packer = new IconPacker);
-	m_packers.push_back(m_tex_packer = new ETexturePacker);
+	m_packers.push_back(m_img_packer = new ImageBuilder);
+	m_packers.push_back(m_scale9_packer = new Scale9Builder);
+	m_packers.push_back(m_icon_packer = new IconBuilder);
+	m_packers.push_back(m_tex_packer = new TextureBuilder);
 
-	m_packers.push_back(m_label_packer = new LabelPacker);
+	m_packers.push_back(m_label_packer = new LabelBuilder);
 
-	m_packers.push_back(m_complex_packer = new ComplexPacker(m_export_set));
-	m_packers.push_back(m_anim_packer = new AnimPacker(m_export_set));
+	m_packers.push_back(m_complex_packer = new ComplexBuilder(m_export_set));
+	m_packers.push_back(m_anim_packer = new AnimBuilder(m_export_set));
 }
 
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)

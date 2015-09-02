@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_LABEL_PACKER_H_
-#define _LIBCOCO_LABEL_PACKER_H_
+#ifndef _LIBCOCO_LABEL_BUILDER_H_
+#define _LIBCOCO_LABEL_BUILDER_H_
 
-#include "INodePacker.h"
+#include "INodeBuilder.h"
 
 #include <drag2d.h>
 
@@ -11,11 +11,11 @@ namespace libcoco
 class IPackNode;
 class PackLabel;
 
-class LabelPacker : public INodePacker
+class LabelBuilder : public INodeBuilder
 {
 public:
-	LabelPacker();
-	virtual ~LabelPacker();
+	LabelBuilder();
+	virtual ~LabelBuilder();
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const TexturePacker& tp) const;
@@ -25,8 +25,8 @@ public:
 private:
 	std::vector<const PackLabel*> m_labels;
 
-}; // LabelPacker
+}; // LabelBuilder
 
 }
 
-#endif // _LIBCOCO_LABEL_PACKER_H_
+#endif // _LIBCOCO_LABEL_BUILDER_H_

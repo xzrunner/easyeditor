@@ -1,4 +1,4 @@
-#include "AnimPacker.h"
+#include "AnimBuilder.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 
@@ -7,12 +7,12 @@
 namespace libcoco
 {
 
-AnimPacker::AnimPacker(ExportNameSet& export_set)
+AnimBuilder::AnimBuilder(ExportNameSet& export_set)
 	: m_export_set(export_set)
 {
 }
 
-AnimPacker::~AnimPacker()
+AnimBuilder::~AnimBuilder()
 {
 	std::map<const libanim::Symbol*, const PackAnimation*>::iterator
 		itr = m_map_data.begin();
@@ -21,7 +21,7 @@ AnimPacker::~AnimPacker()
 	}
 }
 
-void AnimPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
+void AnimBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
 						   const TexturePacker& tp) const
 {
 	std::vector<const IPackNode*> nodes;
@@ -39,7 +39,7 @@ void AnimPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 	}
 }
 
-const IPackNode* AnimPacker::Create(const libanim::Symbol* symbol)
+const IPackNode* AnimBuilder::Create(const libanim::Symbol* symbol)
 {
 	std::map<const libanim::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(symbol);
@@ -53,7 +53,7 @@ const IPackNode* AnimPacker::Create(const libanim::Symbol* symbol)
 	return node;
 }
 
-void AnimPacker::Load(const libanim::Symbol* symbol, PackAnimation* anim)
+void AnimBuilder::Load(const libanim::Symbol* symbol, PackAnimation* anim)
 {
 	m_export_set.LoadExport(symbol, anim);
 

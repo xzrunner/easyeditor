@@ -1,7 +1,7 @@
-#ifndef _LIBCOCO_ANIM_PACKER_H_
-#define _LIBCOCO_ANIM_PACKER_H_
+#ifndef _LIBCOCO_ANIM_BUILDER_H_
+#define _LIBCOCO_ANIM_BUILDER_H_
 
-#include "INodePacker.h"
+#include "INodeBuilder.h"
 
 #include <easyanim.h>
 
@@ -12,11 +12,11 @@ class IPackNode;
 class PackAnimation;
 class ExportNameSet;
 
-class AnimPacker : public INodePacker
+class AnimBuilder : public INodeBuilder
 {
 public:
-	AnimPacker(ExportNameSet& export_set);
-	virtual ~AnimPacker();
+	AnimBuilder(ExportNameSet& export_set);
+	virtual ~AnimBuilder();
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen, 
 		const TexturePacker& tp) const;
@@ -31,8 +31,8 @@ private:
 
 	std::map<const libanim::Symbol*, const PackAnimation*> m_map_data;
 
-}; // AnimPacker
+}; // AnimBuilder
 
 }
 
-#endif // _LIBCOCO_ANIM_PACKER_H_
+#endif // _LIBCOCO_ANIM_BUILDER_H_

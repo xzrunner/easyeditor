@@ -1,15 +1,15 @@
-#include "Terrain2DPacker.h"
+#include "Terrain2DBuilder.h"
 #include "PackAnimation.h"
 #include "PackPicture.h"
 
 namespace libcoco
 {
 
-Terrain2DPacker::Terrain2DPacker()
+Terrain2DBuilder::Terrain2DBuilder()
 {
 }
 
-Terrain2DPacker::~Terrain2DPacker()
+Terrain2DBuilder::~Terrain2DBuilder()
 {
 	std::map<const eterrain2d::Symbol*, const PackAnimation*>::iterator
 		itr = m_map_data.begin();
@@ -18,7 +18,7 @@ Terrain2DPacker::~Terrain2DPacker()
 	}
 }
 
-void Terrain2DPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
+void Terrain2DBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
 								const TexturePacker& tp) const
 {
 	std::vector<const IPackNode*> nodes;
@@ -36,7 +36,7 @@ void Terrain2DPacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 	}
 }
 
-const IPackNode* Terrain2DPacker::Create(const eterrain2d::Symbol* symbol)
+const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* symbol)
 {
 	std::map<const eterrain2d::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(symbol);
@@ -50,12 +50,12 @@ const IPackNode* Terrain2DPacker::Create(const eterrain2d::Symbol* symbol)
 	return node;
 }
 
-void Terrain2DPacker::Load(const eterrain2d::Symbol* symbol, PackAnimation* anim)
+void Terrain2DBuilder::Load(const eterrain2d::Symbol* symbol, PackAnimation* anim)
 {
 	const std::vector<eterrain2d::OceanMesh*> oceans = symbol->GetOceans();
 	// todo
 	if (oceans.size() != 1) {
-		throw d2d::Exception("Terrain2DPacker::Load oceans.size() != 1");
+		throw d2d::Exception("Terrain2DBuilder::Load oceans.size() != 1");
 	}
 
 	eterrain2d::OceanMesh* ocean = oceans[0];
@@ -66,7 +66,7 @@ void Terrain2DPacker::Load(const eterrain2d::Symbol* symbol, PackAnimation* anim
 
 	static const float FPS = 30;
 	if (ocean->GetUVMoveSpeed().y == 0) {
-		throw d2d::Exception("Terrain2DPacker::Load ocean speed 0.");
+		throw d2d::Exception("Terrain2DBuilder::Load ocean speed 0.");
 	}
 	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
 

@@ -1,5 +1,5 @@
-#ifndef _LIBCOCO_INODE_PACKER_H_
-#define _LIBCOCO_INODE_PACKER_H_
+#ifndef _LIBCOCO_INODE_BUILDER_H_
+#define _LIBCOCO_INODE_BUILDER_H_
 
 namespace ebuilder { class CodeGenerator; }
 
@@ -8,14 +8,14 @@ namespace libcoco
 
 class TexturePacker;
 
-class INodePacker
+class INodeBuilder
 {
 public:
-	virtual ~INodePacker() {}
+	virtual ~INodeBuilder() {}
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen, 
 		const TexturePacker& tp) const = 0;
-}; // INodePacker
+}; // INodeBuilder
 
 }
 
-#endif // _LIBCOCO_INODE_PACKER_H_
+#endif // _LIBCOCO_INODE_BUILDER_H_

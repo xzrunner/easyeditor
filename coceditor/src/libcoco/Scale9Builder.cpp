@@ -1,16 +1,16 @@
-#include "Scale9Packer.h"
-#include "ImagePacker.h"
+#include "Scale9Builder.h"
+#include "ImageBuilder.h"
 #include "IPackNode.h"
 #include "PackPicture.h"
 
 namespace libcoco
 {
 
-Scale9Packer::Scale9Packer()
+Scale9Builder::Scale9Builder()
 {
 }
 
-Scale9Packer::~Scale9Packer()
+Scale9Builder::~Scale9Builder()
 {
 	std::multimap<const escale9::Symbol*, Value>::iterator 
 		itr = m_map_data.begin();
@@ -19,7 +19,7 @@ Scale9Packer::~Scale9Packer()
 	}
 }
 
-void Scale9Packer::PackToLuaString(ebuilder::CodeGenerator& gen,
+void Scale9Builder::PackToLuaString(ebuilder::CodeGenerator& gen,
 							 const TexturePacker& tp) const
 {
 	std::vector<const IPackNode*> nodes;
@@ -38,7 +38,7 @@ void Scale9Packer::PackToLuaString(ebuilder::CodeGenerator& gen,
 	}
 }
 
-const IPackNode* Scale9Packer::Create(const escale9::Sprite* spr)
+const IPackNode* Scale9Builder::Create(const escale9::Sprite* spr)
 {
 	if (const IPackNode* node = Query(spr)) {
 		return node;
@@ -57,7 +57,7 @@ const IPackNode* Scale9Packer::Create(const escale9::Sprite* spr)
 	return node;
 }
 
-const IPackNode* Scale9Packer::Query(const escale9::Sprite* spr) const
+const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 {
 	float w, h;
 	spr->GetSize(w, h);
@@ -77,7 +77,7 @@ const IPackNode* Scale9Packer::Query(const escale9::Sprite* spr) const
 	return NULL;
 }
 
-void Scale9Packer::Load(const escale9::Sprite* spr, PackPicture* pic)
+void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 {
 	std::vector<d2d::ISprite*> sprites;
 	const escale9::Scale9Data& data = spr->GetScale9Data();
@@ -116,7 +116,7 @@ void Scale9Packer::Load(const escale9::Sprite* spr, PackPicture* pic)
 		d2d::ISprite* sprite = sprites[i];
 		if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite)) {
 			PackPicture::Quad quad;
-			ImagePacker::LoadPictureQuad(image, quad);
+			ImageBuilder::LoadPictureQuad(image, quad);
 			pic->quads.push_back(quad);
 		} else {
 			throw d2d::Exception("PackPicture::LoadScale9 unknown spr type.");

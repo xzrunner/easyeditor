@@ -1,19 +1,19 @@
-#include "ImagePacker.h"
+#include "ImageBuilder.h"
 #include "IPackNode.h"
 
 namespace libcoco
 {
 
-ImagePacker::ImagePacker()
+ImageBuilder::ImageBuilder()
 {
 }
 
-ImagePacker::~ImagePacker()
+ImageBuilder::~ImageBuilder()
 {
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
-void ImagePacker::PackToLuaString(ebuilder::CodeGenerator& gen,
+void ImageBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
 							const TexturePacker& tp) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
@@ -21,7 +21,7 @@ void ImagePacker::PackToLuaString(ebuilder::CodeGenerator& gen,
 	}
 }
 
-const IPackNode* ImagePacker::Create(const d2d::ImageSprite* spr)
+const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 {
 	if (spr->GetSymbol().GetFilepath().find("bg_guide_line_01.png") != std::string::npos) {
 		int zz = 0;
@@ -35,7 +35,7 @@ const IPackNode* ImagePacker::Create(const d2d::ImageSprite* spr)
 	return node;
 }
 
-void ImagePacker::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
+void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
 {
 	quad.img = img->GetSymbol().getImage();
 
@@ -52,7 +52,7 @@ void ImagePacker::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad
 	TransScreen(quad, img);
 }
 
-void ImagePacker::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
+void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
 {
 	// 1. shear
 	float hw = quad.img->GetClippedWidth() * 0.5f,
