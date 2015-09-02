@@ -236,9 +236,8 @@ d2d::ISprite* FileLoader::Quad2Sprite(const libcoco::PackPicture::Quad* quad)
 	d2d::Vector src[4], screen[4];
 	for (int i = 0; i < 4; ++i) {
 		src[i].x = quad->texture_coord[i].x / w;
-		src[i].y = quad->texture_coord[i].y / h;
-
-		screen[i] = quad->screen_coord[i] / 16;
+		src[i].y = 1 - quad->texture_coord[i].y / h;
+		screen[i] = quad->screen_coord[i];
 	}
 
 	eicon::QuadIcon* icon = new eicon::QuadIcon(
@@ -261,9 +260,7 @@ d2d::ISprite* FileLoader::Pic2Sprite(const libcoco::PackPicture* pic)
 			complex->m_sprites.push_back(Quad2Sprite(&pic->quads[i]));
 		}
 		complex->InitBounding();
-		d2d::ISprite* ret = new Sprite(complex);
-		ret->BuildBounding();
-		return ret;
+		return new Sprite(complex);
 	} else {
 		return NULL;
 	}
@@ -300,20 +297,16 @@ d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
 			dst->m_sprites.push_back(spr);
 		}
 		dst->InitBounding();
-		d2d::ISprite* spr = new Sprite(dst);
-		spr->BuildBounding();
-		complex->m_sprites.push_back(spr);
+		complex->m_sprites.push_back(new Sprite(dst));
 	}
 	complex->InitBounding();
-	d2d::ISprite* ret = new Sprite(complex);
-	ret->BuildBounding();
-	return ret;
+	return new Sprite(complex);
 }
 
 void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
 {
 	float dx = t.mat[4] / 16.0f,
-		dy = t.mat[5] / 16.0f;
+		dy = -t.mat[5] / 16.0f;
 
 	// no shear
 // 	mat[0] = sx*c;
@@ -341,8 +334,8 @@ void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::Sp
 // 	mat[2] = kx*c - s;
 // 	mat[3] = kx*s + c;
 
-	spr->SetTransform(d2d::Vector(dx, dy), angle);
 	spr->SetScale(sx, sy);
+	spr->SetTransform(d2d::Vector(dx, dy), angle);
 }
 
 }

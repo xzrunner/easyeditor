@@ -92,10 +92,10 @@ Load(const FrameSrcData& src, const Texture* tex)
 			down = src.frame.y + src.frame.w;
 		}
 
-		tex_coords[0].set(right, up);
-		tex_coords[1].set(left, up);
-		tex_coords[2].set(left, down);
-		tex_coords[3].set(right, down);
+		tex_coords[0].set(left, up);
+		tex_coords[1].set(right, up);
+		tex_coords[2].set(right, down);
+		tex_coords[3].set(left, down);
 	}
 	else
 	{
@@ -109,10 +109,10 @@ Load(const FrameSrcData& src, const Texture* tex)
 			down = src.frame.y + src.frame.h;
 		}
 
-		tex_coords[0].set(left, up);
-		tex_coords[1].set(left, down);
-		tex_coords[2].set(right, down);
-		tex_coords[3].set(right, up);
+		tex_coords[0].set(left, down);
+		tex_coords[1].set(left, up);
+		tex_coords[2].set(right, up);
+		tex_coords[3].set(right, down);
 	}
 
 	offset.x = (src.sprite_source_size.x + src.sprite_source_size.w * 0.5f) - src.src_width * 0.5f;

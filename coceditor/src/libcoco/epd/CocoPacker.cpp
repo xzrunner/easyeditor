@@ -760,7 +760,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 
 	// src
 	d2d::Vector node[4];
-	symbol->GetIcon()->GetTexcoords4(node, process);
+	symbol->GetIcon()->GetTexCoords(process, node);
 	int left = picture->scr[1].x, bottom = picture->scr[1].y;
 	int width = picture->scr[2].x - left,
 		height = picture->scr[0].y - bottom;

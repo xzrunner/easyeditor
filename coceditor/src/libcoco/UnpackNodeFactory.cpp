@@ -39,6 +39,7 @@ void UnpackNodeFactory::Unpack(lua_State* L, const std::vector<d2d::Image*>& ima
 
 	node->UnpackFromLua(L, images);
 
+	node->SetID(id);
 	m_map_id.insert(std::make_pair(id, node));
 
 	if (type == "animation") {

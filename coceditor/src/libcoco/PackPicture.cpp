@@ -74,9 +74,9 @@ void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& im
 			lua_gettable(L, -2);
 			int screen = lua_tonumber(L, -1);
 			if (i % 2) {
-				quad.screen_coord[(i - 1) / 2].x = screen;
+				quad.screen_coord[(i - 1) / 2].x = screen / SCALE;
 			} else {
-				quad.screen_coord[(i - 1) / 2].y = -screen;
+				quad.screen_coord[(i - 1) / 2].y = -screen / SCALE;
 			}
 			lua_pop(L, 1);
 		}

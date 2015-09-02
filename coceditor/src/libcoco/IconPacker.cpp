@@ -73,18 +73,8 @@ void IconPacker::Load(const eicon::Sprite* spr, PackPicture* pic)
 	PackPicture::Quad quad;
 
 	const eicon::Icon* icon = spr->GetSymbol().GetIcon();
-	
-	icon->GetTexcoords4(quad.texture_coord, proc);
-
-	const d2d::Image* img = icon->GetImage();
-	float w = img->GetClippedWidth(), h = img->GetClippedHeight();
-	float hw = w * 0.5f, hh = h * 0.5f;
-	float dx = img->GetOffset().x, dy = img->GetOffset().y;
-	float xmin = -hw + dx, ymin = -hh + dy;
-	for (int i = 0; i < 4; ++i) {
-		quad.screen_coord[i].x = -hw + w * quad.texture_coord[i].x;
-		quad.screen_coord[i].y = -hh + h * quad.texture_coord[i].y;
-	}
+	icon->GetTexCoords(proc, quad.texture_coord);
+	icon->GetScreenCoords(proc, quad.texture_coord, quad.screen_coord);
 
 	pic->quads.push_back(quad);
 }
