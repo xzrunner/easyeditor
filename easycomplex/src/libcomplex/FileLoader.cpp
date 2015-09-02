@@ -271,7 +271,18 @@ d2d::ISprite* FileLoader::Pic2Sprite(const libcoco::PackPicture* pic)
 
 d2d::ISprite* FileLoader::Label2Sprite(const libcoco::PackLabel* label)
 {
-	return NULL;
+	d2d::FontBlankSymbol* symbol = new d2d::FontBlankSymbol();
+
+	d2d::FontSprite* spr = new d2d::FontSprite(symbol);
+	spr->font = label->font;
+	spr->has_edge = label->has_edge;
+	spr->color = label->color;
+	spr->align_hori = label->align_hori;
+	spr->align_vert = label->align_vert;
+	spr->size = label->size;
+	spr->width = label->width;
+	spr->height = label->height;
+	return spr;
 }
 
 d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
