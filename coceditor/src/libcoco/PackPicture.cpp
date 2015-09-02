@@ -74,7 +74,7 @@ void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& im
 			if (i % 2) {
 				quad.screen_coord[(i - 1) / 2].x = screen;
 			} else {
-				quad.screen_coord[(i - 1) / 2].y = screen;
+				quad.screen_coord[(i - 1) / 2].y = -screen;
 			}
 			lua_pop(L, 1);
 		}
