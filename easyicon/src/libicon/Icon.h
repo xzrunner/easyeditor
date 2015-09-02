@@ -21,9 +21,9 @@ public:
 	// return [0, 1]
 	virtual void GetBound(float process, d2d::Vector bound[4]) const = 0;
 
-	void Draw(const d2d::Matrix& mt, float process) const;
+	virtual void Draw(const d2d::Matrix& mt, float process) const;
 
-	d2d::Rect GetRegion(float process) const;
+	virtual d2d::Rect GetRegion(float process) const;
 
 	void GetTexCoords(float process, d2d::Vector* tex_coords) const;
 	void GetScreenCoords(float process, const d2d::Vector* tex_coords,

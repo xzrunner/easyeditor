@@ -20,6 +20,10 @@ public:
 
 	virtual void GetBound(float process, d2d::Vector bound[4]) const;
 
+	virtual void Draw(const d2d::Matrix& mt, float process) const;
+
+	virtual d2d::Rect GetRegion(float process) const;
+
 private:
 	d2d::Vector m_src[4], m_screen[4];
 
