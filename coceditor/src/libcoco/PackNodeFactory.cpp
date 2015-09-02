@@ -52,25 +52,25 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		node = m_anim_packer->Create(&anim->GetSymbol());
 	}
 
-	std::string filepath = spr->GetSymbol().GetFilepath();
-	filepath = d2d::FilenameTools::getRelativePath(m_files_dir, filepath);
-	node->SetFilepath(filepath);
+	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
 
 	return node;
 }
 
 void PackNodeFactory::CreateComplex(const ecomplex::Symbol* complex)
 {
-	m_complex_packer->Create(complex);
+	const IPackNode* node = m_complex_packer->Create(complex);
+	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, complex->GetFilepath()).ToStdString());
 }
 
 void PackNodeFactory::CreateAnim(const libanim::Symbol* anim)
 {
-	m_anim_packer->Create(anim);
+	const IPackNode* node = m_anim_packer->Create(anim);
+	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, anim->GetFilepath()).ToStdString());
 }
 
 void PackNodeFactory::PackToLuaString(ebuilder::CodeGenerator& gen,
-							   const TexturePacker& tp) const
+									  const TexturePacker& tp) const
 {
 	for (int i = 0, n = m_packers.size(); i < n; ++i) {
 		m_packers[i]->PackToLuaString(gen, tp);
