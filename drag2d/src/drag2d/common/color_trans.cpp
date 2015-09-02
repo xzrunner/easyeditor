@@ -173,9 +173,9 @@ char transHex(int v)
 	}
 }
 
-int trans_color2int(const Colorf& col, PixelType type)
+uint32_t trans_color2int(const Colorf& col, PixelType type)
 {
-	int ret = 0;
+	uint32_t ret = 0;
 	if (type == PT_RGBA) {
 		ret = (trans_color2int(col.a)) << 24 
 			| (trans_color2int(col.b)) << 16
@@ -200,11 +200,11 @@ int trans_color2int(const Colorf& col, PixelType type)
 	return ret;
 }
 
-int trans_color2int(float col)
+uint32_t trans_color2int(float col)
 {
 	assert(col >= 0 && col <= 1.0f);
 
-	int c = (int)(col * 255 + 0.5f);
+	uint32_t c = ((uint32_t)(col * 255 + 0.5f) & 0xff);
 	return c;
 }
 
