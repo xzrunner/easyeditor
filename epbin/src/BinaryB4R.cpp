@@ -43,12 +43,10 @@ void BinaryB4R::Pack(const std::string& outfile, bool compress) const
 	uint8_t* data_buf = new uint8_t[data_sz];
 	uint8_t* ptr_data = data_buf;
 	// store pic_sz
-	memcpy(ptr_data, &pic_sz, sizeof(pic_sz));
-	ptr_data += sizeof(pic_sz);
+	pack2mem(pic_sz, &ptr_data);
 	// store tex type
 	uint16_t type = m_is_pvr ? TEX_PVR : TEX_ETC1;
-	memcpy(ptr_data, &type, sizeof(type));
-	ptr_data += sizeof(type);
+	pack2mem(type, &ptr_data);
 	// store pictures
 	for (int i = 0; i < pic_sz; ++i) {
 		m_pics[i]->Store(m_is_pvr, &ptr_data);
@@ -59,11 +57,11 @@ void BinaryB4R::Pack(const std::string& outfile, bool compress) const
 	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
 	uint8_t* buf = new uint8_t[sz];
 	uint8_t* ptr = buf;
-	memcpy(ptr, &TYPE, sizeof(uint8_t));
-	ptr += sizeof(uint8_t);
+	pack2mem(TYPE, &ptr);
+
 	int cap = dtex_b4r_size(data_buf, data_sz);
-	memcpy(ptr, &cap, sizeof(uint32_t));
-	ptr += sizeof(uint32_t);
+	pack2mem(cap, &ptr);
+
 	memcpy(ptr, data_buf, data_sz);
 	delete[] data_buf;
 
@@ -218,13 +216,10 @@ Size(bool is_pvr) const
 void BinaryB4R::Picture::
 Store(bool is_pvr, uint8_t** ptr)
 {
-	memcpy(*ptr, &id, sizeof(id));
-	*ptr += sizeof(id);
+	pack2mem(id, ptr);
 
-	memcpy(*ptr, &bmp_w, sizeof(bmp_w));
-	*ptr += sizeof(bmp_w);
-	memcpy(*ptr, &bmp_h, sizeof(bmp_h));
-	*ptr += sizeof(bmp_h);
+	pack2mem(bmp_w, ptr);
+	pack2mem(bmp_h, ptr);
 
 	memcpy(*ptr, flag, flag_sz);
 	*ptr += flag_sz;
@@ -238,8 +233,7 @@ Store(bool is_pvr, uint8_t** ptr)
 					assert(flag[i / 8] & (1 << (i % 8)));
 					int idx = dtex_pvr_get_morton_number(x, y);
 					int64_t* ptr_src = (int64_t*)compressed_pixels + idx;
-					memcpy(*ptr, ptr_src, sizeof(int64_t));
-					*ptr += sizeof(int64_t);
+					pack2mem(*ptr_src, ptr);
 				}
 				++i;
 			}
@@ -256,12 +250,10 @@ Store(bool is_pvr, uint8_t** ptr)
 					int idx = y * bw + x;
 
 					int64_t* rgb_data = (int64_t*)compressed_pixels + idx;
-					memcpy(*ptr, rgb_data, sizeof(int64_t));
-					*ptr += sizeof(int64_t);
+					pack2mem(*rgb_data, ptr);
 
 					int64_t* alpha_data = (int64_t*)compressed_pixels + block_count + idx;
-					memcpy(*ptr, alpha_data, sizeof(int64_t));
-					*ptr += sizeof(int64_t);
+					pack2mem(*alpha_data, ptr);
 				}
 				++i;
 			}

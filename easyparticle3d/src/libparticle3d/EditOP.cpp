@@ -16,9 +16,9 @@ bool EditOP::OnMouseLeftDown(int x, int y)
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ParticleSystem* ps = m_stage->m_ps;
-	ps->origin = m_stage->TransPosScrToProj(x, y);
-	ps->start();
-	ps->reset();
+	ps->SetPosition(m_stage->TransPosScrToProj(x, y));
+	ps->Start();
+	ps->Reset();
 	ps->SetLoop(true);
 
 	return false;
@@ -34,12 +34,25 @@ bool EditOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
+bool EditOP::OnMouseRightDown(int x, int y)
+{
+	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) return true;
+
+	ParticleSystem* ps = m_stage->m_ps;
+	ps->SetPosition(m_stage->TransPosScrToProj(x, y));
+	ps->Start();
+	ps->Reset();
+	ps->SetLoop(false);
+
+	return false;
+}
+
 bool EditOP::OnMouseDrag(int x, int y)
 {
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ParticleSystem* ps = m_stage->m_ps;
-	ps->origin = m_stage->TransPosScrToProj(x, y);
+	ps->SetPosition(m_stage->TransPosScrToProj(x, y));
 
 	return false;
 }

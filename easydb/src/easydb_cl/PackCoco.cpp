@@ -347,11 +347,11 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config
 	std::string dst_folder = pkg_val["output dir"].asString();
 	std::string dst_name = ConnectCfgDir(config_dir, dst_folder + "\\" + name);
 
-	libcoco::TextureMgr tex_mgr;
+	libcoco::epd::TextureMgr tex_mgr;
 	tex_mgr.SetSrcDataDir(config_dir);
 	int i = 1;
 	while (true) {
-		std::string path = dst_name + d2d::StringTools::IntToString(i) + ".json";
+		std::string path = dst_name + d2d::StringTools::ToString(i) + ".json";
 		if (d2d::FilenameTools::IsFileExist(path)) {
 			tex_mgr.Add(path, i - 1);
 		} else {
@@ -360,12 +360,12 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config
 		++i;
 	}
 
-	libcoco::CocoPacker* data_packer = NULL;
+	libcoco::epd::CocoPacker* data_packer = NULL;
 	if (!pkg_val["rrp"].isNull() || !pkg_val["rrr"].isNull() || !pkg_val["b4r"].isNull()) {
 		std::string id_filepath = ConnectCfgDir(config_dir, pkg_val["id file"].asString());
-		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);	
+		data_packer = new libcoco::epd::CocoPacker(symbols, tex_mgr, id_filepath);	
 	} else {
-		data_packer = new libcoco::CocoPacker(symbols, tex_mgr);
+		data_packer = new libcoco::epd::CocoPacker(symbols, tex_mgr);
 	}
 
 	data_packer->Parser();

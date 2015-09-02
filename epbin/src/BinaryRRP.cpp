@@ -1,6 +1,5 @@
 #include "BinaryRRP.h"
 #include "Exception.h"
-#include "typedef.h"
 #include "tools.h"
 #include "Lzma.h"
 #include "ImageIDer.h"
@@ -48,8 +47,7 @@ void BinaryRRP::Pack(const std::string& outfile, bool compress) const
 	// fill buffer
 	uint8_t* data_buf = new uint8_t[data_sz];
 	uint8_t* ptr_data = data_buf;
-	memcpy(ptr_data, &pic_sz, sizeof(pic_sz));
-	ptr_data += sizeof(pic_sz);
+	pack2mem(pic_sz, &ptr_data);
 	for (int i = 0; i < pic_sz; ++i) {
 		m_pics[i]->Store(&ptr_data);
 	}
@@ -59,11 +57,11 @@ void BinaryRRP::Pack(const std::string& outfile, bool compress) const
 	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
 	uint8_t* buf = new uint8_t[sz];
 	uint8_t* ptr = buf;
-	memcpy(ptr, &TYPE, sizeof(uint8_t));
-	ptr += sizeof(uint8_t);
+	pack2mem(TYPE, &ptr);
+
 	int cap = dtex_rrp_size(data_buf, data_sz);
-	memcpy(ptr, &cap, sizeof(uint32_t));
-	ptr += sizeof(uint32_t);
+	pack2mem(cap, &ptr);
+
 	memcpy(ptr, data_buf, data_sz);
 	delete[] data_buf;
 
@@ -207,28 +205,21 @@ size_t BinaryRRP::Part::Size() const
 
 void BinaryRRP::Part::Store(uint8_t** ptr)
 {
-	memcpy(*ptr, &src.x, sizeof(src.x));
-	*ptr += sizeof(src.x);
-	memcpy(*ptr, &src.y, sizeof(src.y));
-	*ptr += sizeof(src.y);
+	pack2mem(src.x, ptr);
+	pack2mem(src.y, ptr);
 
-	memcpy(*ptr, &dst.x, sizeof(dst.x));
-	*ptr += sizeof(dst.x);
-	memcpy(*ptr, &dst.y, sizeof(dst.y));
-	*ptr += sizeof(dst.y);
+	pack2mem(dst.x, ptr);
+	pack2mem(dst.y, ptr);
 
 	int16_t w = src.w, h = src.h;
 	if (src.w != dst.w) {
 		assert(src.w == dst.h);
 		w = -w; h = -h;
 	}
-	memcpy(*ptr, &w, sizeof(w));
-	*ptr += sizeof(w);
-	memcpy(*ptr, &h, sizeof(h));
-	*ptr += sizeof(h);
+	pack2mem(w, ptr);
+	pack2mem(h, ptr);
 
-	memcpy(*ptr, &idx, sizeof(idx));
-	*ptr += sizeof(idx);
+	pack2mem(idx, ptr);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -247,17 +238,13 @@ size_t BinaryRRP::Picture::Size() const
 
 void BinaryRRP::Picture::Store(uint8_t** ptr)
 {
-	memcpy(*ptr, &id, sizeof(id));
-	*ptr += sizeof(id);
+	pack2mem(id, ptr);
 
-	memcpy(*ptr, &w, sizeof(w));
-	*ptr += sizeof(w);
-	memcpy(*ptr, &h, sizeof(h));
-	*ptr += sizeof(h);
+	pack2mem(w, ptr);
+	pack2mem(h, ptr);
 
 	int16_t sz = parts.size();
-	memcpy(*ptr, &sz, sizeof(sz));
-	*ptr += sizeof(sz);
+	pack2mem(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
 		parts[i]->Store(ptr);
 	}

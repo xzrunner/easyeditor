@@ -9,22 +9,25 @@ namespace eparticle3d
 class FileAdapter
 {
 public:
-	virtual void load(const char* filename, int version);
+	void Load(const std::string& filepath);
+
+private:
+	void LoadComponent(const std::string& dir, const Json::Value& comp_val);
 
 public:
-	struct Child
+	struct Component
 	{
 		std::string filepath;
 		std::string bind_filepath;
 
 		std::string name;
 
-		float start_scale, end_scale;
+		float scale_start, scale_end;
 
-		float min_rotate, max_rotate;
+		float angle, angle_var;
 
-		d2d::Colorf mul_col, add_col;
-		float start_alpha, end_alpha;
+		d2d::Colorf col_mul, col_add;
+		float alpha_start, alpha_end;
 
 		float start_z;
 	};
@@ -37,20 +40,20 @@ public:
 	int layer;
 	float emission_time;
 
-	float min_life, max_life;
+	float life, life_var;
 
-	float min_hori, max_hori;
-	float min_vert, max_vert;
+	float hori, hori_var;
+	float vert, vert_var;
 
-	float min_spd, max_spd;
-	float min_angular_spd, max_angular_spd;
+	float spd, spd_var;
+	float angular_spd, angular_spd_var;
 
-	float min_dis_region, max_dis_region;
-	float min_dis_spd, max_dis_spd;
+	float dis_region, dis_region_var;
+	float dis_spd, dis_spd_var;
 
 	float gravity;
 
-	float min_linear_acc, max_linear_acc;
+	float linear_acc, linear_acc_var;
 
 	float inertia;
 
@@ -61,13 +64,12 @@ public:
 	bool additive_blend;
 
 	float start_radius;
-	bool start_radius_3d;
+	bool is_start_radius_3d;
 
 	bool orient_to_movement;
-
 	bool orient_to_parent;
 
-	std::vector<Child> children;
+	std::vector<Component> components;
 
 }; // FileAdapter
 

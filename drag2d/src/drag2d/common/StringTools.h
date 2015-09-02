@@ -15,32 +15,23 @@ namespace d2d
 class StringTools
 {
 public:
-	static std::string IntToString(int i)
-	{
+	template<typename T>
+	static std::string ToString(const T& d) {
 		std::stringstream ss;
-		ss << i;
+		ss << d;
 		return ss.str();
 	}
 
-	static std::string Int64ToString(int64_t i)
-	{
-		std::stringstream ss;
-		ss << i;
-		return ss.str();
-	}
-
-	static int StringToInt(const std::string& str)
-	{
+	template<typename T>
+	static void FromString(const std::string& str, T& ret) {
 		std::stringstream ss(str);
-		int ret;
 		ss >> ret;
-		return ret;
 	}
 
-	static int64_t StringToInt64(const std::string& str)
-	{
+	template<typename T>
+	static T FromString(const std::string& str) {
 		std::stringstream ss(str);
-		int64_t ret;
+		T ret;
 		ss >> ret;
 		return ret;
 	}

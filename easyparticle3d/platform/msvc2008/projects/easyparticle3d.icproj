@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="easyparticle3d"
+	ProjectGUID="{6C542826-BC32-4028-9DA5-EFDBB986D608}"
+	VCNestedProjectGUID="{9BEDF205-2842-42B4-9B95-7C0C4D5A34D7}"
+	VCNestedProjectFileName="easyparticle3d.vcproj">
+	<Configurations/>
+	<Files/>
+</VisualStudioProject>

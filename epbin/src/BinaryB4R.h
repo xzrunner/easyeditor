@@ -1,8 +1,7 @@
 #ifndef _EPBIN_BINARARY_B4R_H_
 #define _EPBIN_BINARARY_B4R_H_
 
-#include "typedef.h"
-
+#include <stdint.h>
 #include <string>
 #include <vector>
 

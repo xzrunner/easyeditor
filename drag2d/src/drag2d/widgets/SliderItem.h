@@ -9,12 +9,12 @@ struct SliderItem
 	std::string title;
 	std::string name;
 
-	int default;
+	int val;
 	int min;
 	int max;
 
-	SliderItem(const char* title, const char* name, int default, int min, int max) 
-		: title(title), name(name), default(default), min(min), max(max) {}
+	SliderItem(const char* title, const char* name, int val , int min, int max) 
+		: title(title), name(name), val(val), min(min), max(max) {}
 
 }; // SliderItem
 

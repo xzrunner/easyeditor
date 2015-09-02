@@ -132,7 +132,7 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 		value["meta"] = meta_val;
 
 		std::string out_filepath = dst_file;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::IntToString(i + 1));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(i + 1));
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
@@ -197,7 +197,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 		}
 
 		std::string out_filepath = filepath;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::IntToString(i + 1));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(i + 1));
 		pack.OutputToFile(out_filepath);
 	}
 }

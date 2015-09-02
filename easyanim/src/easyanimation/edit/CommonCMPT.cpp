@@ -133,8 +133,8 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		if (mid == std::string::npos)
 			continue;
 
-		int item = d2d::StringTools::StringToInt(name.substr(0, mid)),
-			frame = d2d::StringTools::StringToInt(name.substr(mid+1));		
+		int item = d2d::StringTools::FromString<int>(name.substr(0, mid)),
+			frame = d2d::StringTools::FromString<int>(name.substr(mid+1));		
 		std::map<int, std::vector<std::string> >::iterator itr 
 			= mapFrameSymbols.find(frame);
 		if (itr == mapFrameSymbols.end())

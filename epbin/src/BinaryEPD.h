@@ -1,8 +1,7 @@
 #ifndef _EPBIN_BINARY_EPD_H_
 #define _EPBIN_BINARY_EPD_H_
 
-#include "typedef.h"
-
+#include <stdint.h>
 #include <vector>
 
 struct lua_State;
@@ -10,8 +9,11 @@ struct lua_State;
 namespace epbin
 {
 
-class Picture;
-class Animation;
+namespace epd
+{
+	class Picture;
+	class Animation;
+}
 
 class BinaryEPD
 {
@@ -24,6 +26,8 @@ public:
 private:
 	void Load(const std::string& infile);
 
+	void PackImpl(const std::string& outfile, bool compress);
+
 	void CheckID(int id);
 	void CheckExport(lua_State* L);
 
@@ -31,8 +35,8 @@ private:
 	uint16_t m_max_id;
 	uint16_t m_export;
 
-	std::vector<Picture*> m_pictures;
-	std::vector<Animation*> m_animations;
+	std::vector<epd::Picture*> m_pictures;
+	std::vector<epd::Animation*> m_animations;
 
 }; // BinaryEPD
 

@@ -1,8 +1,7 @@
 #ifndef _EPBIN_BINARARY_PTS_H_
 #define _EPBIN_BINARARY_PTS_H_
 
-#include "typedef.h"
-
+#include <stdint.h>
 #include <vector>
 
 namespace epbin

@@ -2,6 +2,8 @@
 #define _EPBIN_TOOLS_H_
 
 #include <string.h>
+#include <stdint.h>
+#include <fstream>
 
 namespace epbin
 {
@@ -14,6 +16,17 @@ struct DeletePointerFunctor
 		delete pT, pT = NULL;
 	}
 };
+
+template<typename T>
+inline void pack2mem(const T& d, uint8_t** ptr) {
+	memcpy(*ptr, &d, sizeof(d));
+	*ptr += sizeof(d);
+}
+
+template<typename T>
+inline void pack2file(const T& d, std::ofstream& fout) {
+	fout.write(reinterpret_cast<const char*>(&d), sizeof(d));
+}
 
 inline void str_replace(std::string& str, const std::string& old_value, const std::string& new_value)   
 {

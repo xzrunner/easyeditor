@@ -44,8 +44,7 @@ void BinaryPTS::Pack(const std::string& outfile, bool compress) const
 	// fill buffer
 	uint8_t* data_buf = new uint8_t[data_sz];
 	uint8_t* ptr_data = data_buf;
-	memcpy(ptr_data, &pts_sz, sizeof(pts_sz));
-	ptr_data += sizeof(pts_sz);
+	pack2mem(pts_sz, &ptr_data);
 	for (int i = 0; i < pts_sz; ++i) {
 		m_pts[i]->Store(&ptr_data);
 	}
@@ -55,11 +54,11 @@ void BinaryPTS::Pack(const std::string& outfile, bool compress) const
 	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
 	uint8_t* buf = new uint8_t[sz];
 	uint8_t* ptr = buf;
-	memcpy(ptr, &TYPE, sizeof(uint8_t));
-	ptr += sizeof(uint8_t);
+	pack2mem(TYPE, &ptr);
+
  	int cap = dtex_pts_size(data_buf, data_sz);
- 	memcpy(ptr, &cap, sizeof(uint32_t));
-	ptr += sizeof(uint32_t);
+	pack2mem(cap, &ptr);
+
 	memcpy(ptr, data_buf, data_sz);
 	delete[] data_buf;
 
@@ -159,26 +158,19 @@ size_t BinaryPTS::PTS::Size() const
 
 void BinaryPTS::PTS::Store(uint8_t** ptr)
 {
-	memcpy(*ptr, &id, sizeof(id));
-	*ptr += sizeof(id);
+	pack2mem(id, ptr);
 
 	int16_t strips_sz = strips.size();
-	memcpy(*ptr, &strips_sz, sizeof(strips_sz));
-	*ptr += sizeof(strips_sz);
-
+	pack2mem(strips_sz, ptr);
 	for (int i = 0; i < strips_sz; ++i) {
 		const std::vector<Point>& strip = strips[i];
 
 		int16_t strip_sz = strip.size();
-		memcpy(*ptr, &strip_sz, sizeof(strip_sz));
-		*ptr += sizeof(strip_sz);
-
+		pack2mem(strip_sz, ptr);
 		for (int j = 0; j < strip_sz; ++j) {
 			const Point& p = strip[j];
-			memcpy(*ptr, &p.x, sizeof(p.x));
-			*ptr += sizeof(p.x);
-			memcpy(*ptr, &p.y, sizeof(p.y));
-			*ptr += sizeof(p.y);
+			pack2mem(p.x, ptr);
+			pack2mem(p.y, ptr);
 		}
 	}
 }

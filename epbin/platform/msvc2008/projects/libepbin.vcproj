@@ -225,37 +225,121 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\typedef.h"
+				RelativePath="..\..\..\src\trans_old_ejoy2d_data2.lua"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="normal"
 			>
-			<File
-				RelativePath="..\..\..\src\BinaryEPD.cpp"
+			<Filter
+				Name="tex"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\BinaryEPD.h"
+				<File
+					RelativePath="..\..\..\src\BinaryEPP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="desc"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\BinaryEPP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\BinaryEPP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\epd_dataset.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\epd_dataset.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPD.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPD.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPE.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\BinaryEPE.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common_dataset.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common_dataset.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\IPackNode.h"
+					>
+				</File>
+				<Filter
+					Name="new"
+					>
+					<File
+						RelativePath="..\..\..\src\epe\PackAnimation.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackAnimation.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackLabel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackLabel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPannel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPannel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPicture.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPicture.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPolygon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\PackPolygon.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\spritepack.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epe\type.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="old"
+					>
+					<File
+						RelativePath="..\..\..\src\epd\epd_dataset.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\epd\epd_dataset.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="extend"

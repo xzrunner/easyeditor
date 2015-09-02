@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _LIBCOCO_TEXTURE_PACKER_H_
+#define _LIBCOCO_TEXTURE_PACKER_H_
 
 #include <drag2d.h>
 
@@ -8,67 +9,84 @@ namespace libcoco
 class TexturePacker
 {
 public:
-	enum Type
+	TexturePacker(const std::string& src_data_dir);
+	~TexturePacker();
+	
+	void Add(const std::string& filepath);
+
+	struct Frame;
+	const Frame* Query(const std::string& filepath) const;
+	
+public:
+	struct Region
 	{
-		e_png,
-		e_ppm
+		int x, y;
+		int w, h;
+
+		void Load(const Json::Value& value);
 	};
 
-public:
-	TexturePacker(int padding = 1, int extrude = 1);
+	struct FrameSrcData
+	{
+		std::string filename;
 
-	void pack(const std::set<d2d::Image*>& images);
+		Region frame;
 
-	void storeToMemory();
-	void storeToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type);
+		bool rotated;
 
-	const d2d::Rect* query(d2d::Image* image) const;
+		bool trimmed;
+		Region sprite_source_size;
+
+		int src_width, src_height;
+
+		void Load(const Json::Value& value, const std::string& src_data_dir);
+	};
+
+	struct Texture;
+	struct FrameDstData
+	{
+		// 0 3
+		// 1 2
+		d2d::Vector tex_coords[4];
+
+		d2d::Vector offset;
+
+		void Load(const FrameSrcData& src, const Texture* tex);
+	};
+
+	struct Frame
+	{
+		FrameSrcData src;
+		FrameDstData dst;
+
+		int tex_idx;
+
+		void Load(const Json::Value& value, const std::string& src_data_dir,
+			const Texture* tex);
+	};
+
+	struct Texture
+	{
+		int idx;
+
+		int width, height;
+
+		std::map<std::string, Frame> frames;
+
+		bool is_easydb;
+
+		void Load(const Json::Value& value, const std::string& src_data_dir);
+
+		const Frame* Query(const std::string& filepath) const;
+	};
 
 private:
-	std::map<d2d::Image*, d2d::Rect> m_mapImg2Rect;
-	
-	int m_edge;
+	std::string m_src_data_dir;
 
-	int m_xCurr, m_yCurr, m_width;
-
-	uint8_t* m_pixels;
-
-	int m_padding;
-	int m_extrude;
+	std::vector<Texture*> m_textures;
 
 }; // TexturePacker
 
-class ImageCmp
-{
-public:
-	enum Type
-	{
-		e_width = 0,
-		e_height,
-		e_area
-	};
-
-public:
-	ImageCmp(Type type = e_width) : m_type(type) {}
-
-	bool operator() (const d2d::Image* t0, const d2d::Image* t1) const 
-	{
-		switch (m_type)
-		{
-		case e_width:
-			return t0->GetClippedWidth() > t1->GetClippedWidth();
-		case e_height:
-			return t0->GetClippedHeight() > t1->GetClippedHeight();
-		case e_area:
-			return t0->GetClippedWidth() * t0->GetClippedHeight() > t1->GetClippedWidth() * t1->GetClippedHeight();
-		default:
-			return t0->GetClippedWidth() > t1->GetClippedWidth();
-		}
-	}
-
-private:
-	Type m_type;
-
-}; // ImageCmp
-
 }
+
+#endif // _LIBCOCO_TEXTURE_PACKER_H_

@@ -6,8 +6,6 @@ namespace eparticle3d
 
 static const char* FILE_TAG = "particle";
 
-static const int PARTICLE_CAP = 1000;
-
 static const int VERSION = 1;
 
 }

@@ -183,7 +183,7 @@ void TrimImage::Trim(const std::string& filepath)
 	spr_val["position"]["w"] = r.xLength();
 	spr_val["position"]["h"] = r.yLength();
 	int64_t time = GetFileModifyTime(filepath);
-	spr_val["time"] = d2d::StringTools::Int64ToString(time);
+	spr_val["time"] = d2d::StringTools::ToString(time);
 	StoreBoundInfo(*img, r, spr_val);
 	m_json_cfg.Insert(relative_path, spr_val, time);
 
@@ -242,7 +242,7 @@ LoadFromFile(const std::string& filepath)
 		std::string filepath = val["filepath"].asString();
 		Item* item = new Item;
 		item->val = val;
-		item->time = d2d::StringTools::StringToInt64(val["time"].asString());
+		d2d::StringTools::FromString(val["time"].asString(), item->time);
 		m_map_items.insert(std::make_pair(filepath, item));
 		val = value[idx++];
 	}

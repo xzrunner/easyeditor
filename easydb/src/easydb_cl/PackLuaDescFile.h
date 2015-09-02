@@ -36,7 +36,7 @@ private:
 private:
 	std::vector<const d2d::ISymbol*> m_symbols;
 
-	libcoco::TextureMgr m_tex_mgr;
+	libcoco::epd::TextureMgr m_tex_mgr;
 
 }; // PackLuaDescFile
 

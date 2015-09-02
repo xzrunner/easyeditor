@@ -1,6 +1,8 @@
 #include "InvertRecord.h"
 #include "ParticleSystem.h"
 
+#include <ps/particle3d.h>
+
 namespace eparticle3d
 {
 
@@ -14,7 +16,7 @@ InvertRecord::~InvertRecord()
 	Clear();
 }
 
-void InvertRecord::AddItem(Particle* p)
+void InvertRecord::AddItem(particle_3d* p)
 {
 	m_items.push_back(new Item(p));
 }
@@ -48,34 +50,34 @@ void InvertRecord::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 InvertRecord::Item::
-Item(Particle* p)
+Item(particle_3d* p)
 {
 	dead_time = clock();
 
-	life = p->lifetime;
+	life = p->cfg.lifetime;
 	for (int i = 0; i < 2; ++i) {
-		direction[i] = p->direction[i];
+		direction[i] = p->cfg.dir.xy[i];
 	}
 	for (int i = 0; i < 3; ++i) {
-		position[i] = p->position[i];
+		position[i] = p->pos.xyz[i];
 	}
 	for (int i = 0; i < 3; ++i) {
-		speed[i] = p->speed[i];
+		speed[i] = p->spd.xyz[i];
 	}	
-	linear_acc = p->linear_acc;
-	rotate = p->rotate;
+	linear_acc = p->cfg.linear_acc;
+	rotate = p->cfg.angular_spd;
 	angle = p->angle;
 
-	symbol = p->pc->symbol->GetFilepath();
+	symbol = static_cast<d2d::ISymbol*>(p->cfg.symbol->ud)->GetFilepath();
 
-	start_scale = p->pc->start_scale;
-	end_scale = p->pc->end_scale;
+	start_scale = p->cfg.symbol->scale_start;
+	end_scale = p->cfg.symbol->scale_end;
 
-	start_alpha = p->pc->start_alpha;
-	end_alpha = p->pc->end_alpha;
+	start_alpha = p->cfg.symbol->alpha_start;
+	end_alpha = p->cfg.symbol->alpha_end;
 
-	mul_col = p->pc->mul_col;
-	add_col = p->pc->add_col;
+	memcpy(&mul_col.r, &p->cfg.symbol->col_mul.r, sizeof(p->cfg.symbol->col_mul));
+	memcpy(&add_col.r, &p->cfg.symbol->col_add.r, sizeof(p->cfg.symbol->col_add));
 }
 
 void InvertRecord::Item::

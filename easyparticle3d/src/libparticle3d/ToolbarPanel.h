@@ -5,11 +5,14 @@
 
 #include <drag2d.h>
 
+// struct ps_color4f;
+// struct particle_symbol;
+
 namespace eparticle3d
 {
 
 class StagePanel;
-struct ParticleChild;
+class ComponentPanel;
 
 class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback
 {
@@ -26,12 +29,11 @@ public:
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void add(const FileAdapter::Child& child);
+	void Add(const FileAdapter::Component& comp);
 
-	void initParticle();
+	void InitParticle();
 
-	class ChildPanel;
-	void OnDelChild(ChildPanel* child);
+	void OnDelChild(ComponentPanel* child);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -39,57 +41,16 @@ protected:
 private:
 	void clear();
 
-	void onAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
-	void onDelAllChild(wxCommandEvent& event);
+	void OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
+	void OnDelAllChild(wxCommandEvent& event);
 
-	void onSetHori(wxSpinEvent& event);
-	void onSetVert(wxSpinEvent& event);
-	void onSetInertia(wxSpinEvent& event);
-	void onSetBounce(wxCommandEvent& event);
-	void onSetAdditiveBlend(wxCommandEvent& event);
+	void OnSetHori(wxSpinEvent& event);
+	void OnSetVert(wxSpinEvent& event);
+	void OnSetBounce(wxCommandEvent& event);
 	void OnSetOrientToMovement(wxCommandEvent& event);
 	void OnSetRadius3D(wxCommandEvent& event);
 
 private:
-	class ChildPanel : public wxPanel, public d2d::UICallback
-	{
-	public:
-		ChildPanel(wxWindow* parent, ParticleChild* pc, ToolbarPanel* toolbar);
-
-		//
-		// UICallback interface
-		//
-		virtual void SetValue(int key, const d2d::UICallback::Data& data);
-		virtual void GetValue(int key, d2d::UICallback::Data& data);
-
-		const d2d::Colorf& GetMulColor() const;
-		const d2d::Colorf& GetAddColor() const;
-
-	private:
-		void InitLayout();
-
-		void OnDelete(wxCommandEvent& event);
-
-		void OnBindPS(wxCommandEvent& event);
-
-		void OnSetMultiCol(wxCommandEvent& event);
-		void OnSetAddCol(wxCommandEvent& event);
-
-	private:
-		ParticleChild* m_pc;
-
-		ToolbarPanel* m_toolbar;
-		
-		std::vector<d2d::ISliderCtrl*> m_sliders;
-
-		wxTextCtrl* m_name;
-		wxSpinCtrl* m_startz;
-
-		friend class ToolbarPanel;
-		friend class Code;
-		friend class FileIO;
-	};
-
 	class DropTarget : public wxTextDropTarget
 	{
 	public:
@@ -117,17 +78,14 @@ private:
 	wxSpinCtrl* m_layer;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
-	wxSpinCtrl* m_inertia;
 	wxCheckBox* m_bounce;
-	wxCheckBox* m_additiveBlend;
 	wxCheckBox* m_orient_to_movement;
-	wxCheckBox* m_orient_to_parent;
+//	wxCheckBox* m_orient_to_parent;
 	wxCheckBox* m_radius_3d;
 
 	wxSizer* m_compSizer;
-	std::vector<ChildPanel*> m_children;
+	std::vector<ComponentPanel*> m_children;
 
-	friend class Code;
 	friend class FileIO;
 
 }; // ToolbarPanel

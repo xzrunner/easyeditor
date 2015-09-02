@@ -1,6 +1,7 @@
 #include "BinaryRRR.h"
 #include "ImageIDer.h"
 #include "Lzma.h"
+#include "tools.h"
 
 #include <easyimage.h>
 #include <dtex_pvr.h>
@@ -42,12 +43,10 @@ void BinaryRRR::Pack(const std::string& outfile, bool compress) const
 	uint8_t* data_buf = new uint8_t[data_sz];
 	uint8_t* ptr_data = data_buf;
 	// store pic_sz
-	memcpy(ptr_data, &pic_sz, sizeof(pic_sz));
-	ptr_data += sizeof(pic_sz);
+	pack2mem(pic_sz, &ptr_data);
 	// store tex type
 	uint16_t type = m_is_pvr ? TEX_PVR : TEX_ETC1;
-	memcpy(ptr_data, &type, sizeof(type));
-	ptr_data += sizeof(type);	
+	pack2mem(type, &ptr_data);
 	// store pictures
 	for (int i = 0; i < pic_sz; ++i) {
 		m_pics[i]->Store(m_is_pvr, &ptr_data);
@@ -58,11 +57,11 @@ void BinaryRRR::Pack(const std::string& outfile, bool compress) const
 	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
 	uint8_t* buf = new uint8_t[sz];
 	uint8_t* ptr = buf;
-	memcpy(ptr, &TYPE, sizeof(uint8_t));
-	ptr += sizeof(uint8_t);
+	pack2mem(TYPE, &ptr);
+
 	int cap = dtex_rrr_size(data_buf, data_sz);
-	memcpy(ptr, &cap, sizeof(uint32_t));
-	ptr += sizeof(uint32_t);
+	pack2mem(cap, &ptr);
+
 	memcpy(ptr, data_buf, data_sz);
 	delete[] data_buf;
 
@@ -186,17 +185,10 @@ Size(bool is_pvr) const
 void BinaryRRR::Part::
 Store(bool is_pvr, uint8_t** ptr)
 {
-	memcpy(*ptr, &x, sizeof(x));
-	*ptr += sizeof(x);
-
-	memcpy(*ptr, &y, sizeof(y));
-	*ptr += sizeof(y);
-
-	memcpy(*ptr, &w, sizeof(w));
-	*ptr += sizeof(w);
-
-	memcpy(*ptr, &h, sizeof(h));
-	*ptr += sizeof(h);
+	pack2mem(x, ptr);
+	pack2mem(y, ptr);
+	pack2mem(w, ptr);
+	pack2mem(h, ptr);
 
 	size_t block_sz = BlockSize(is_pvr);
 	int bw = pic->w >> 2,
@@ -217,12 +209,10 @@ Store(bool is_pvr, uint8_t** ptr)
 				int idx = iy * bw + ix;
 
 				int64_t* rgb_data = (int64_t*)pic->pixels + idx;
-				memcpy(*ptr, rgb_data, sizeof(int64_t));
-				*ptr += sizeof(int64_t);
+				pack2mem(*rgb_data, ptr);
 
 				int64_t* alpha_data = (int64_t*)pic->pixels + (block_count + idx);
-				memcpy(*ptr, alpha_data, sizeof(int64_t));
-				*ptr += sizeof(int64_t);
+				pack2mem(*alpha_data, ptr);
 			}
 		}
 	}
@@ -250,17 +240,13 @@ Size(bool is_pvr) const
 void BinaryRRR::Picture::
 Store(bool is_pvr, uint8_t** ptr)
 {
-	memcpy(*ptr, &id, sizeof(id));
-	*ptr += sizeof(id);
+	pack2mem(id, ptr);
 
-	memcpy(*ptr, &bmp_w, sizeof(bmp_w));
-	*ptr += sizeof(bmp_w);
-	memcpy(*ptr, &bmp_h, sizeof(bmp_h));
-	*ptr += sizeof(bmp_h);
+	pack2mem(bmp_w, ptr);
+	pack2mem(bmp_h, ptr);
 
 	int16_t sz = parts.size();
-	memcpy(*ptr, &sz, sizeof(sz));
-	*ptr += sizeof(sz);
+	pack2mem(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
 		parts[i].Store(is_pvr, ptr);
 	}

@@ -18,12 +18,12 @@ SliderCtrlOne::SliderCtrlOne(wxPanel* parent, const char* title, const char* nam
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	sizer->Add(new wxStaticText(this, wxID_ANY, item.title));
 
-	m_slider = new wxSlider(this, wxID_ANY, item.default, item.min, item.max, 
+	m_slider = new wxSlider(this, wxID_ANY, item.val, item.min, item.max, 
 		wxDefaultPosition, wxSize(200, -1));
 	Connect(m_slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlOne::OnSetValue));
 	sizer->Add(m_slider);
 
-	m_text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item.default), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+	m_text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item.val), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 	Connect(m_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlOne::OnSetValue));
 	sizer->Add(m_text);
 

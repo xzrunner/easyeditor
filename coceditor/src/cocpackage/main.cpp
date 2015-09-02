@@ -13,7 +13,7 @@
 
 std::vector<const d2d::ISymbol*> SYMBOLS;
 
-libcoco::TextureMgr TEX_MGR;
+libcoco::epd::TextureMgr TEX_MGR;
 
 std::set<std::string> IGNORE_LIST;
 
@@ -250,7 +250,7 @@ int main(int argc, char *argv[])
 		TEX_MGR.SetSrcDataDir(tp_dir);
 
 		LoadTexturePacker(tp_path);
-		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR);
+		libcoco::epd::CocoPacker packer(SYMBOLS, TEX_MGR);
 		packer.Parser();
 		packer.Output(argv[4]);
 	} catch (d2d::Exception& e) {

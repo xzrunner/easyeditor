@@ -1,7 +1,7 @@
 #ifndef _EPBIN_LZMA_H_
 #define _EPBIN_LZMA_H_
 
-#include "typedef.h"
+#include <stdint.h>
 
 namespace epbin
 {

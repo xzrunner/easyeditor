@@ -54,12 +54,12 @@ void SliderCtrl::InitLayout(const std::string& title,
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, src.title, wxDefaultPosition, wxSize(40, -1)));
 
-		dst.slider = new wxSlider(this, wxID_ANY, src.default / m_slider_accuracy, src.min / m_slider_accuracy, 
+		dst.slider = new wxSlider(this, wxID_ANY, src.val / m_slider_accuracy, src.min / m_slider_accuracy, 
 			src.max / m_slider_accuracy, wxDefaultPosition, wxSize(160, -1));
 		Connect(dst.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrl::OnSetValue));
 		sizer->Add(dst.slider);
 
-		dst.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(src.default), 
+		dst.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(src.val), 
 			wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 		Connect(dst.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrl::OnSetValue));
 		sizer->Add(dst.text);

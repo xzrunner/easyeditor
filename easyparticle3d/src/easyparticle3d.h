@@ -11,7 +11,6 @@
 #include "libparticle3d/ToolbarPanel.h"
 #include "libparticle3d/FileAdapter.h"
 #include "libparticle3d/FileIO.h"
-#include "libparticle3d/Code.h"
 #include "libparticle3d/CocoPacker.h"
 #include "libparticle3d/utility.h"
 

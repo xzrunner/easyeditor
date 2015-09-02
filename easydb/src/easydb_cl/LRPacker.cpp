@@ -40,7 +40,7 @@ void LRPacker::Run(int argc, char *argv[])
 	std::string out_dir = argv[4];
 	std::string tmp_lr_file = tmp_dir + "\\" + d2d::FilenameTools::getFilenameWithExtension(argv[2]);
 
-	int id = d2d::StringTools::StringToInt(argv[5]);
+	int id = d2d::StringTools::FromString<int>(argv[5]);
 
 	d2d::mk_dir(tmp_dir, true);
 	d2d::mk_dir(out_dir, true);
@@ -86,12 +86,12 @@ void LRPacker::Run(int argc, char *argv[])
 		++idx;
 		{
 			int i = 0;
-			std::string filename = "name_" + d2d::StringTools::IntToString(i) + "_complex.json";
+			std::string filename = "name_" + d2d::StringTools::ToString(i) + "_complex.json";
 			std::string dir = d2d::FilenameTools::getFileDir(tmp_lr_file);
 			while (d2d::FilenameTools::IsFileExist(dir + "\\" + filename)) {
 				pkg_val["json list"][idx++] = filename;
 				++i;
-				filename = "name_" + d2d::StringTools::IntToString(i) + "_complex.json";
+				filename = "name_" + d2d::StringTools::ToString(i) + "_complex.json";
 			}
 		}
 

@@ -10,7 +10,7 @@ class SliderCtrl : public wxPanel
 {
 public:
 	SliderCtrl(wxPanel* parent, const char* title, const char* name, 
-		int default, int min, int max, float scale_slider2text = 1);
+		int val, int min, int max, float scale_slider2text = 1);
 
 private:
 	void OnSetValue(wxScrollEvent& event);

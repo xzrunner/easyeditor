@@ -42,7 +42,7 @@ void PackLuaDescFile::Trigger(const std::string& json_dir, const std::string& tp
 	LoadJsonFiles(json_dir);
 	LoadTexPacker(tp_json, tp_dir);
 	
-	libcoco::CocoPacker packer(m_symbols, m_tex_mgr);
+	libcoco::epd::CocoPacker packer(m_symbols, m_tex_mgr);
 	packer.Parser();
 	packer.Output(out_file.c_str());
 }
@@ -74,7 +74,7 @@ void PackLuaDescFile::LoadTexPacker(const std::string& tp_json,
 	int i = 1;
 	while (true)
 	{
-		std::string path = tp_json + d2d::StringTools::IntToString(i) + ".json";
+		std::string path = tp_json + d2d::StringTools::ToString(i) + ".json";
 		if (wxFileName::FileExists(path)) {
 			m_tex_mgr.Add(path, i-1);
 		} else {

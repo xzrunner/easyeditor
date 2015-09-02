@@ -26,12 +26,12 @@ void Task::Load(const char* filepath)
 	if (!wxFileName::FileExists(filepath)) {
 		throw d2d::Exception("File: %s don't exist!", filepath);
 	}
-	FileIO::load(filepath, m_stage->m_ps, m_toolbar);
+	FileIO::Load(filepath, m_stage->m_ps, m_toolbar);
 }
 
 void Task::Store(const char* filepath) const
 {
-	FileIO::store(filepath, m_toolbar);
+	FileIO::Store(filepath, m_toolbar);
 }
 
 bool Task::IsDirty() const
@@ -41,7 +41,7 @@ bool Task::IsDirty() const
 
 void Task::Clear()
 {
-	m_toolbar->initParticle();
+	m_toolbar->InitParticle();
 	m_stage->Clear();
 
 }
