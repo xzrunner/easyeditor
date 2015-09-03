@@ -13,20 +13,19 @@ ImageBuilder::~ImageBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
-void ImageBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
-							const TexturePacker& tp) const
+void ImageBuilder::Traverse(d2d::IVisitor& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
-		m_nodes[i]->PackToLuaString(gen, tp);
+		bool has_next;
+		visitor.Visit(m_nodes[i], has_next);
+		if (!has_next) {
+			break;
+		}
 	}
 }
 
 const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 {
-	if (spr->GetSymbol().GetFilepath().find("bg_guide_line_01.png") != std::string::npos) {
-		int zz = 0;
-	}
-
 	PackPicture* node = new PackPicture;
 	PackPicture::Quad quad;
 	LoadPictureQuad(spr, quad);

@@ -52,19 +52,19 @@ private:
 	ExportNameSet m_export_set;
 
 	// picture
-	ImageBuilder* m_img_packer;
-	Scale9Builder* m_scale9_packer;
-	IconBuilder* m_icon_packer;
-	TextureBuilder* m_tex_packer;
+	ImageBuilder* m_img_builder;
+	Scale9Builder* m_scale9_builder;
+	IconBuilder* m_icon_builder;
+	TextureBuilder* m_tex_builder;
 
 	// label
-	LabelBuilder* m_label_packer;
+	LabelBuilder* m_label_builder;
 
 	// animation
-	ComplexBuilder* m_complex_packer;
-	AnimBuilder* m_anim_packer;
+	ComplexBuilder* m_complex_builder;
+	AnimBuilder* m_anim_builder;
 
-	std::vector<INodeBuilder*> m_packers;
+	std::vector<INodeBuilder*> m_builders;
 
 private:
 	static PackNodeFactory* m_instance;

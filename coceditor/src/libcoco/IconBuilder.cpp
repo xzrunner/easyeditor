@@ -22,22 +22,18 @@ IconBuilder::~IconBuilder()
 	}
 }
 
-void IconBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
-						   const TexturePacker& tp) const
+void IconBuilder::Traverse(d2d::IVisitor& visitor) const
 {
-	std::vector<const IPackNode*> nodes;
-	nodes.reserve(m_map_data.size());
-
 	std::multimap<const eicon::Symbol*, Value>::const_iterator
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		nodes.push_back(itr->second.node);
+		bool has_next;
+		visitor.Visit(const_cast<IPackNode*>(itr->second.node), has_next);
+		if (!has_next) {
+			break;
+		}
 	}
 
-	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
-	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		nodes[i]->PackToLuaString(gen, tp);
-	}
 }
 
 const IPackNode* IconBuilder::Create(const eicon::Sprite* spr)

@@ -17,8 +17,7 @@ public:
 	Scale9Builder();
 	virtual ~Scale9Builder();
 
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const escale9::Sprite* spr);
 

@@ -17,8 +17,7 @@ public:
 	TextureBuilder();
 	virtual ~TextureBuilder();
 
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const etexture::Symbol* symbol);
 

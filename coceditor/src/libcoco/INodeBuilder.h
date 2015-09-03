@@ -1,7 +1,7 @@
 #ifndef _LIBCOCO_INODE_BUILDER_H_
 #define _LIBCOCO_INODE_BUILDER_H_
 
-namespace ebuilder { class CodeGenerator; }
+namespace d2d { class IVisitor;}
 
 namespace libcoco
 {
@@ -12,8 +12,7 @@ class INodeBuilder
 {
 public:
 	virtual ~INodeBuilder() {}
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen, 
-		const TexturePacker& tp) const = 0;
+	virtual void Traverse(d2d::IVisitor& visitor) const = 0;
 }; // INodeBuilder
 
 }

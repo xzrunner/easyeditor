@@ -19,22 +19,16 @@ Scale9Builder::~Scale9Builder()
 	}
 }
 
-void Scale9Builder::PackToLuaString(ebuilder::CodeGenerator& gen,
-							 const TexturePacker& tp) const
+void Scale9Builder::Traverse(d2d::IVisitor& visitor) const
 {
-	std::vector<const IPackNode*> nodes;
-	nodes.reserve(m_map_data.size());
-
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-//		itr->second.node->PackToLuaString(gen, tp);
-		nodes.push_back(itr->second.node);
-	}
-
-	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
-	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		nodes[i]->PackToLuaString(gen, tp);
+		bool has_next;
+		visitor.Visit(const_cast<IPackNode*>(itr->second.node), has_next);
+		if (!has_next) {
+			break;
+		}
 	}
 }
 

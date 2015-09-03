@@ -20,21 +20,16 @@ ComplexBuilder::~ComplexBuilder()
 	}
 }
 
-void ComplexBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
-							  const TexturePacker& tp) const
+void ComplexBuilder::Traverse(d2d::IVisitor& visitor) const
 {
-	std::vector<const IPackNode*> nodes;
-	nodes.reserve(m_map_data.size());
-
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
-		nodes.push_back(itr->second);
-	}
-
-	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
-	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		nodes[i]->PackToLuaString(gen, tp);
+		bool has_next;
+		visitor.Visit(const_cast<PackAnimation*>(itr->second), has_next);
+		if (!has_next) {
+			break;
+		}
 	}
 }
 

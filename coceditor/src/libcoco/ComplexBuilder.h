@@ -20,8 +20,7 @@ public:
 	ComplexBuilder(ExportNameSet& export_set);
 	virtual ~ComplexBuilder();
 
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
 

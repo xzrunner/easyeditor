@@ -17,8 +17,7 @@ public:
 	ImageBuilder();
 	virtual ~ImageBuilder();
 
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const d2d::ImageSprite* spr);
 

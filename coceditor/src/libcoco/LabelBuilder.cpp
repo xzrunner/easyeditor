@@ -13,12 +13,15 @@ LabelBuilder::~LabelBuilder()
 	for_each(m_labels.begin(), m_labels.end(), DeletePointerFunctor<const PackLabel>());
 }
 
-void LabelBuilder::PackToLuaString(ebuilder::CodeGenerator& gen,
-							const TexturePacker& tp) const
+void LabelBuilder::Traverse(d2d::IVisitor& visitor) const
 {
-	for (int i = 0, n = m_labels.size(); i < n; ++i) {
-		m_labels[i]->PackToLuaString(gen, tp);
-	}
+ 	for (int i = 0, n = m_labels.size(); i < n; ++i) {
+		bool has_next;
+		visitor.Visit(const_cast<PackLabel*>(m_labels[i]), has_next);
+		if (!has_next) {
+			break;
+		}
+ 	}
 }
 
 const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)

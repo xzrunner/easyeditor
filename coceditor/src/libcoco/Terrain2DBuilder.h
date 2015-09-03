@@ -17,8 +17,7 @@ public:
 	Terrain2DBuilder();
 	virtual ~Terrain2DBuilder();
 
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const eterrain2d::Symbol* symbol);
 

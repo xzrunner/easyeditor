@@ -1,20 +1,21 @@
 #ifndef _LIBCOCO_IPACK_NODE_H_
 #define _LIBCOCO_IPACK_NODE_H_
 
-#include <string>
-#include <vector>
+// #include <string>
+// #include <vector>
+// 
+// struct lua_State;
 
-struct lua_State;
+#include <drag2d.h>
 
 namespace ebuilder { class CodeGenerator; }
-namespace d2d { class Image; }
 
 namespace libcoco
 {
 
 class TexturePacker;
 
-class IPackNode
+class IPackNode : public d2d::Object
 {
 public:
 	IPackNode() {

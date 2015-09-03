@@ -17,8 +17,7 @@ public:
 	LabelBuilder();
 	virtual ~LabelBuilder();
 
-	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const d2d::FontSprite* spr);
 
