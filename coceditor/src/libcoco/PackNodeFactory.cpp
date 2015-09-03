@@ -70,7 +70,7 @@ void PackNodeFactory::CreateAnim(const libanim::Symbol* anim)
 }
 
 void PackNodeFactory::PackToLuaString(ebuilder::CodeGenerator& gen,
-									  const TexturePacker& tp) const
+									  const d2d::TexturePacker& tp) const
 {
 	std::vector<IPackNode*> nodes;
 	for (int i = 0, n = m_builders.size(); i < n; ++i) {

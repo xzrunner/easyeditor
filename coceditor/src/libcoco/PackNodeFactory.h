@@ -10,8 +10,6 @@ namespace ebuilder { class CodeGenerator; }
 namespace libcoco
 {
 
-class TexturePacker;
-
 class IPackNode;
 
 class INodeBuilder;
@@ -35,7 +33,7 @@ public:
 	void CreateAnim(const libanim::Symbol* anim);
 
 	void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+		const d2d::TexturePacker& tp) const;
 
 	void SetFilesDir(const std::string& files_dir) {
 		m_files_dir = files_dir;

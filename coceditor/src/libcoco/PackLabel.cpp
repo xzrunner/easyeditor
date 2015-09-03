@@ -13,8 +13,7 @@ PackLabel::PackLabel(int id)
 {
 }
 
-void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen,
-						 const TexturePacker& tp) const
+void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const d2d::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();

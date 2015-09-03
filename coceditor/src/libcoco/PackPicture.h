@@ -26,15 +26,15 @@ public:
 	PackPicture(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const;
+		const d2d::TexturePacker& tp) const;
 
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images);
 
 private:
 	static void QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp);
-	static void GetImgSrcPos(const TexturePacker& tp, const d2d::Image* img, int* src);
+		const d2d::TexturePacker& tp);
+	static void GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, int* src);
 
 }; // PackPicture  
 

@@ -1,19 +1,12 @@
 #ifndef _LIBCOCO_IPACK_NODE_H_
 #define _LIBCOCO_IPACK_NODE_H_
 
-// #include <string>
-// #include <vector>
-// 
-// struct lua_State;
-
 #include <drag2d.h>
 
 namespace ebuilder { class CodeGenerator; }
 
 namespace libcoco
 {
-
-class TexturePacker;
 
 class IPackNode : public d2d::Object
 {
@@ -28,7 +21,7 @@ public:
 	virtual ~IPackNode() {}
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const TexturePacker& tp) const = 0;
+		const d2d::TexturePacker& tp) const = 0;
 
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images) = 0;

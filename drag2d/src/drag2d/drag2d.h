@@ -40,6 +40,7 @@
 #include "dataset/ImageData.h"
 #include "dataset/TextureImgData.h"
 #include "dataset/TextureFactory.h"
+#include "dataset/TexturePacker.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"

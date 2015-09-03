@@ -1,5 +1,4 @@
 #include "PackPicture.h"
-#include "TexturePacker.h"
 
 #include <easybuilder.h>
 
@@ -15,8 +14,8 @@ PackPicture::PackPicture(int id)
 {
 }
 
-void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen,
-						   const TexturePacker& tp) const
+void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen, 
+								  const d2d::TexturePacker& tp) const
 {
 	gen.line("{");
 	gen.tab();
@@ -94,7 +93,7 @@ void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& im
 }
 
 void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen, 
-							   const TexturePacker& tp)
+							   const d2d::TexturePacker& tp)
 {
 	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(0));
 
@@ -118,9 +117,9 @@ void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
 	lua::tableassign(gen, "", 3, tex_str.c_str(), src_str.c_str(), screen_str.c_str());
 }
 
-void PackPicture::GetImgSrcPos(const TexturePacker& tp, const d2d::Image* img, int* src)
+void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, int* src)
 {
-	const TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
+	const d2d::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
 	assert(tp_frame);
 	for (int i = 0; i < 4; ++i) {
 		src[i*2] = floor(tp_frame->dst.tex_coords[i].x + 0.5f);

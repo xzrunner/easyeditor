@@ -173,30 +173,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcoco\TexturePacker.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="..\libcoco\x86\Debug\new\"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="..\libcoco\x86\Debug\new\"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\TexturePacker.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcoco\trans_ejoy2d_data.lua"
 				>
 			</File>

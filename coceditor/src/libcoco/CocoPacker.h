@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "TexturePacker.h"
-
 namespace libcoco
 {
 
@@ -23,7 +21,7 @@ private:
 private:
 	std::vector<const d2d::ISymbol*> m_symbols;
 
-	TexturePacker m_tp;
+	d2d::TexturePacker m_tp;
 
 }; // CocoPacker
 

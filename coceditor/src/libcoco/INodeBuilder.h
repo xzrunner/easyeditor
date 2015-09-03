@@ -6,8 +6,6 @@ namespace d2d { class IVisitor;}
 namespace libcoco
 {
 
-class TexturePacker;
-
 class INodeBuilder
 {
 public:
