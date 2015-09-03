@@ -322,7 +322,7 @@ void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::Sp
 	if (c != 0) {
 		sx = t.mat[0] / c / 1024.0f;
 		sy = t.mat[3] / c / 1024.0f;
-		if (s != 0) {
+		if (fabs(s) > FLT_EPSILON) {
 			assert(sx == t.mat[1] / s / 1024.0f
 				&& sy == -t.mat[2] / s / 1024.0f);
 		}
