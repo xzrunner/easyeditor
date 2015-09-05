@@ -296,7 +296,10 @@ d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
 		for (int j = 0; j < src.parts.size(); ++j) {
 			const libcoco::PackAnimation::Part& part = src.parts[j];
 			d2d::ISprite* spr = Node2Sprite(anim->components[part.comp_idx].node);
-			TransSprite(spr, part.t);
+			if (!libcoco::PackAnimation::IsMatrixIdentity(part.t.mat)) {
+				TransSpriteMat(spr, part.t);
+			}
+			TransSpriteCol(spr, part.t);
 			dst->m_sprites.push_back(spr);
 		}
 		dst->InitBounding();
@@ -306,7 +309,7 @@ d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
 	return new Sprite(complex);
 }
 
-void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+void FileLoader::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
 {
 	float dx = t.mat[4] / 16.0f,
 		dy = -t.mat[5] / 16.0f;
@@ -316,7 +319,13 @@ void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::Sp
 // 	mat[1] = sx*s;
 // 	mat[2] = -sy*s;
 // 	mat[3] = sy*c;	
-	float angle = atan2(-(float)t.mat[2], (float)t.mat[3]);
+
+	float angle = atan2((float)t.mat[1], (float)t.mat[0]);
+#ifdef _DEBUG
+	if (t.mat[2] != 0) {
+		assert(atan2(-(float)t.mat[2], (float)t.mat[3]) == angle);
+	}
+#endif
 	float c = cos(angle), s = sin(angle);
 	float sx, sy;
 	if (c != 0) {
@@ -337,8 +346,29 @@ void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::Sp
 // 	mat[2] = kx*c - s;
 // 	mat[3] = kx*s + c;
 
+	bool xmirror = false, ymirror = false;
+	if (sx < 0) {
+		xmirror = true;
+		sx = -sx;
+	}
+	if (sy < 0) {
+		ymirror = true;
+		sy = -sy;
+	}
+	spr->SetMirror(xmirror, ymirror);
+
 	spr->SetScale(sx, sy);
 	spr->SetTransform(d2d::Vector(dx, dy), angle);
+}
+
+void FileLoader::TransSpriteCol(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+{
+	spr->multiCol = d2d::transColor(t.color, d2d::PT_ARGB);
+	spr->addCol = d2d::transColor(t.additive, d2d::PT_ARGB);
+
+	spr->r_trans = d2d::transColor(t.rmap, d2d::PT_ARGB);
+	spr->g_trans = d2d::transColor(t.gmap, d2d::PT_ARGB);
+	spr->b_trans = d2d::transColor(t.bmap, d2d::PT_ARGB);
 }
 
 }

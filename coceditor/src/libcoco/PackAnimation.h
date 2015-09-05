@@ -80,6 +80,8 @@ public:
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 
+	static bool IsMatrixIdentity(const int* mat);
+
 private:
 	int AddComponent(const IPackNode* node, const std::string& name);	
 
@@ -95,8 +97,6 @@ private:
 	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
 	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans);
 	static void LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans);
-
-	static bool IsMatrixIdentity(const int* mat);
 
 public:
 	std::string export_name;
