@@ -334,6 +334,7 @@ d2d::ISprite* FileLoader::Anim2AnimSprite(const libcoco::PackAnimation* anim)
 		}
 		layer->frames.push_back(frame);
 	}
+	anim_symbol->setFPS(30);
 	anim_symbol->m_layers.push_back(layer);
 	anim_symbol->InitBounding();
 	return new libanim::Sprite(anim_symbol);
