@@ -10,7 +10,7 @@ namespace libcoco
 {
 
 CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name, 
-					   const std::string& tp_dir, const std::string& outfile)
+					   const std::string& tp_dir)
 	: m_tp(tp_dir)
 {
 	d2d::TextureFactory::Instance()->InitTexturePacker(tp_dir);
@@ -24,9 +24,28 @@ CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name,
 	LoadTPData(tp_name);
 	LoadJsonData(json_dir);
 
-	Pack(outfile);
+	Pack();
 
 	data.load_image = old_cfg;
+}
+
+void CocoPacker::OutputLua(const std::string& outfile) const
+{
+	ebuilder::CodeGenerator gen;
+	gen.line("return {");
+	PackNodeFactory::Instance()->PackToLuaString(gen, m_tp);
+	gen.line("}");
+
+	std::locale::global(std::locale(""));
+	std::ofstream fout(outfile.c_str());
+	std::locale::global(std::locale("C"));
+	fout << gen.toText() << std::endl;
+	fout.close();
+}
+
+void CocoPacker::OutputBin(const std::string& outfile) const
+{
+	
 }
 
 void CocoPacker::LoadJsonData(const std::string& dir)
@@ -68,7 +87,7 @@ void CocoPacker::LoadTPData(const std::string& tp_name)
 	}
 }
 
-void CocoPacker::Pack(const std::string& outfile) const
+void CocoPacker::Pack() const
 {
 	PackNodeFactory* factory = PackNodeFactory::Instance();
 	for (int i = 0, n = m_symbols.size(); i < n; ++i) 
@@ -82,17 +101,6 @@ void CocoPacker::Pack(const std::string& outfile) const
 			throw d2d::Exception("CocoPacker::Pack unhandled type.");
 		}
 	}
-
-	ebuilder::CodeGenerator gen;
-	gen.line("return {");
-	factory->PackToLuaString(gen, m_tp);
-	gen.line("}");
-
-	std::locale::global(std::locale(""));
-	std::ofstream fout(outfile.c_str());
-	std::locale::global(std::locale("C"));
-	fout << gen.toText() << std::endl;
-	fout.close();
 }
 
 }

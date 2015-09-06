@@ -27,13 +27,21 @@ public:
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp) const;
-
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images);
 
+	virtual int SizeOfPackToBin() const;
+	virtual void PackToBin(uint8_t** ptr,
+		const d2d::TexturePacker& tp) const;
+//	virtual void UnpackFromBin();
+
 private:
-	static void QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
+	static void QuadToLuaString(const Quad& quad, ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp);
+	
+	static int SizeOfQuadBin();
+	static void QuadToBin(const Quad& quad, uint8_t** ptr, const d2d::TexturePacker& tp);
+
 	static void GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 
 		const d2d::Vector* texture_coord, int* src);
 

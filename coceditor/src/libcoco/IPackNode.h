@@ -22,9 +22,13 @@ public:
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp) const = 0;
-
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images) = 0;
+
+	virtual int SizeOfPackToBin() const = 0;
+	virtual void PackToBin(uint8_t** ptr,
+		const d2d::TexturePacker& tp) const = 0;
+	//	virtual void UnpackFromBin();
 
 	int GetID() const { return m_id; }
 

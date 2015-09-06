@@ -74,9 +74,12 @@ public:
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp) const;
-
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images);
+
+	virtual int SizeOfPackToBin() const;
+	virtual void PackToBin(uint8_t** ptr,
+		const d2d::TexturePacker& tp) const;
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 
@@ -93,6 +96,9 @@ private:
 	static void UppackPartFromLua(lua_State* L, Part& part);
 
 	static void PackFrameToLuaString(const Frame& frame, ebuilder::CodeGenerator& gen);
+
+	static int SizeofFrameBin(const Frame& frame);
+	static void PackFrameToBin(const Frame& frame, uint8_t** ptr);
 
 	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
 	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans);

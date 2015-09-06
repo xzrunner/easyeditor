@@ -1,6 +1,7 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "UnpackNodeFactory.h"
+#include "tools.h"
 
 #include <easybuilder.h>
 #include <epbin.h>
@@ -9,6 +10,14 @@ namespace lua = ebuilder::lua;
 
 namespace libcoco
 {
+
+static const uint8_t TAG_ID			= 1;
+static const uint8_t TAG_COLOR		= 2;
+static const uint8_t TAG_ADDITIVE	= 4;
+static const uint8_t TAG_MATRIX		= 8;
+static const uint8_t TAG_TOUCH		= 16;
+static const uint8_t TAG_MATRIXREF	= 32;
+static const uint8_t TAG_COLMAP		= 64;
 
 PackAnimation::PackAnimation(int id)
 	: IPackNode(id)
@@ -79,6 +88,58 @@ void PackAnimation::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& 
 
 	UnpackComponentsFromLua(L);
 	UnpackFramesFromLua(L);
+}
+
+int PackAnimation::SizeOfPackToBin() const
+{
+	int sz = 0;
+
+	sz += sizeof(uint16_t);		// components size
+	for (int i = 0; i < sz; ++i) {
+		sz += sizeof(uint16_t);						// id
+		sz += sizeof_pack_str(components[i].name);	// name
+	}
+	
+	sz += sizeof(uint16_t);		// actions size
+	for (int i = 0; i < sz; ++i) {
+		sz += sizeof_pack_str(actions[i].name);		// name
+		sz += sizeof(uint16_t);						// sz
+	}
+
+	sz += sizeof(uint16_t);		// frames size
+	for (int i = 0; i < sz; ++i) {
+		sz += SizeofFrameBin(frames[i]);
+	}
+
+	return sz;
+}
+
+void PackAnimation::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
+{
+	// components
+	uint16_t sz = components.size();
+	pack2mem(sz, ptr);
+	for (int i = 0; i < sz; ++i) {
+		uint16_t id = components[i].node->GetID();
+		pack2mem(id, ptr);
+		pack_str2mem(components[i].name, ptr);
+	}
+
+	// actions
+	sz = actions.size();
+	pack2mem(sz, ptr);
+	for (int i = 0; i < sz; ++i) {
+		pack_str2mem(actions[i].name, ptr);
+		uint16_t sz = actions[i].size;
+		pack2mem(sz, ptr);
+	}
+
+	// frames
+	sz = frames.size();
+	pack2mem(sz, ptr);
+	for (int i = 0; i < sz; ++i) {
+		PackFrameToBin(frames[i], ptr);
+	}
 }
 
 void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
@@ -278,6 +339,89 @@ void PackAnimation::PackFrameToLuaString(const Frame& frame, ebuilder::CodeGener
 			lua::tableassign(gen, "", params);
 		} else {
 			gen.line(idx_str + ",");
+		}
+	}
+}
+
+int PackAnimation::SizeofFrameBin(const Frame& frame)
+{
+	int ret = 0;
+	ret += sizeof(uint16_t);		// parts size
+	for (int i = 0, n = frame.parts.size(); i < n; ++i) {
+		const Part& part = frame.parts[i];
+
+		ret += sizeof(uint8_t);		// type
+		ret += sizeof(uint16_t);	// comp_idx
+
+		const SpriteTrans& t = part.t;
+		if (!IsMatrixIdentity(t.mat)) {
+			ret += sizeof(int) * 6;
+		}
+		if (t.color != 0xffffffff) {
+			ret += sizeof(uint32_t);
+		}
+		if (t.additive != 0) {
+			ret += sizeof(uint32_t);
+		}
+		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
+			ret += sizeof(uint32_t) * 3;
+		}
+	}
+	return ret;
+}
+
+void PackAnimation::PackFrameToBin(const Frame& frame, uint8_t** ptr)
+{
+	uint16_t sz = frame.parts.size();
+	pack2mem(sz, ptr);
+
+	for (int i = 0; i < sz; ++i) 
+	{
+		const Part& part = frame.parts[i];
+		const SpriteTrans& t = part.t;
+
+		uint8_t type = TAG_ID;
+		if (!IsMatrixIdentity(t.mat)) {
+			type |= TAG_MATRIX;
+			// todo TAG_MATRIXREF
+		}
+		if (t.color != 0xffffffff) {
+			type |= TAG_COLOR;
+		}		
+		if (t.additive != 0) {
+			type |= TAG_ADDITIVE;
+		}
+		// todo TAG_TOUCH
+		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
+			type |= TAG_COLMAP;
+		}
+
+		pack2mem(type, ptr);
+
+		uint16_t comp_idx = part.comp_idx;
+		pack2mem(comp_idx, ptr);
+
+		if (type & TAG_MATRIX) {
+			for (int i = 0; i < 6; ++i) {
+				int m = t.mat[i];
+				pack2mem(m, ptr);
+			}
+		}
+		if (type & TAG_COLOR) {
+			uint32_t col = t.color;
+			pack2mem(col, ptr);
+		}
+		if (type & TAG_ADDITIVE) {
+			uint32_t add = t.additive;
+			pack2mem(add, ptr);
+		}
+		if (type & TAG_COLMAP) {
+			uint32_t c = t.rmap;
+			pack2mem(c, ptr);
+			c = t.gmap;
+			pack2mem(c, ptr);
+			c = t.bmap;
+			pack2mem(c, ptr);
 		}
 	}
 }

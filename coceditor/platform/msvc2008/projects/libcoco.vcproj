@@ -475,6 +475,10 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\libcoco\tools.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
