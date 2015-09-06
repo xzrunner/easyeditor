@@ -418,8 +418,8 @@ void Sprite::Store(uint8_t** ptr) const
 	}
 
 	if (m_color) {
-		pack2mem(m_color, ptr);
-		pack2mem(m_add, ptr);
+		pack2mem(*m_color, ptr);
+		pack2mem(*m_add, ptr);
 	}
 	if (m_mat) {
 		for (int i = 0; i < 6; ++i) {
