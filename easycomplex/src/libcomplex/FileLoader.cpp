@@ -370,14 +370,20 @@ void FileLoader::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation:
 	if (c != 0) {
 		sx = t.mat[0] / c / 1024.0f;
 		sy = t.mat[3] / c / 1024.0f;
-		if (fabs(s) > FLT_EPSILON) {
-			assert(sx == t.mat[1] / s / 1024.0f
-				&& sy == -t.mat[2] / s / 1024.0f);
-		}
+// 		if (fabs(s) > FLT_EPSILON) {
+// 			assert(sx == t.mat[1] / s / 1024.0f
+// 				&& sy == -t.mat[2] / s / 1024.0f);
+// 		}
 	} else {
 		sx = t.mat[1] / s / 1024.0f;
 		sy = -t.mat[2] / s / 1024.0f;
 	}
+#ifdef _DEBUG	
+	assert(fabs(t.mat[0] - sx * c * 1024) < d2d::LARGE_EPSILON
+		&& fabs(t.mat[1] - sx * s * 1024) < d2d::LARGE_EPSILON
+		&& fabs(t.mat[2] - -sy * s * 1024) < d2d::LARGE_EPSILON
+		&& fabs(t.mat[3] - sy * c * 1024) < d2d::LARGE_EPSILON);
+#endif
 	
 	// no scale
 // 	mat[0] = c - ky*s;
