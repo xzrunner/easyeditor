@@ -44,6 +44,16 @@ const TexturePacker::Frame* TexturePacker::Query(const std::string& filepath) co
 	return NULL;
 }
 
+int TexturePacker::QueryIdx(const std::string& filepath) const
+{
+	for (int i = 0, n = m_textures.size(); i < n; ++i) {
+		if (m_textures[i]->Query(filepath)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // struct TexturePacker::Region
 //////////////////////////////////////////////////////////////////////////

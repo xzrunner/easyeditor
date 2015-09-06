@@ -19,7 +19,9 @@ public:
 
 	struct Frame;
 	const Frame* Query(const std::string& filepath) const;
-	
+
+	int QueryIdx(const std::string& filepath) const;
+
 public:
 	struct Region
 	{

@@ -95,7 +95,8 @@ void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& im
 void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen, 
 							   const d2d::TexturePacker& tp)
 {
-	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(0));
+	int idx = tp.QueryIdx(quad.img->GetFilepath());
+	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(idx));
 
 	char buff[256];
 
