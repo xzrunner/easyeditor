@@ -35,6 +35,9 @@ public:
 	void SetFilepath(const std::string& filepath) const {
 		m_filepath = filepath;
 	}
+	const std::string& GetFilepath() const {
+		return m_filepath;
+	}
 
 protected:
 	int m_id;

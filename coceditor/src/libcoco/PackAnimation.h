@@ -83,22 +83,12 @@ public:
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 
+	void Clear();
+
 	static bool IsMatrixIdentity(const int* mat);
 
 private:
 	int AddComponent(const IPackNode* node, const std::string& name);	
-
-	void Clear();
-
-	void UnpackComponentsFromLua(lua_State* L);
-	void UnpackFramesFromLua(lua_State* L);
-	static void UppackFrameFromLua(lua_State* L, Frame& frame);
-	static void UppackPartFromLua(lua_State* L, Part& part);
-
-	static void PackFrameToLuaString(const Frame& frame, ebuilder::CodeGenerator& gen);
-
-	static int SizeofFrameBin(const Frame& frame);
-	static void PackFrameToBin(const Frame& frame, uint8_t** ptr);
 
 	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
 	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans);

@@ -1,14 +1,12 @@
 #include "PackPicture.h"
-#include "tools.h"
 
-#include <easybuilder.h>
+#include "PictureToLuaString.h"
+#include "PictureFromLua.h"
 
-namespace lua = ebuilder::lua;
+#include "PictureToBin.h"
 
 namespace libcoco
 {
-
-static const float SCALE = 16;
 
 PackPicture::PackPicture(int id)
 	: IPackNode(id)
@@ -18,162 +16,23 @@ PackPicture::PackPicture(int id)
 void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen, 
 								  const d2d::TexturePacker& tp) const
 {
-	gen.line("{");
-	gen.tab();
-
-	lua::comments(gen, "file: " + m_filepath);
-
-	lua::assign_with_end(gen, "type", "\"picture\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(m_id));
-
-	for (int i = 0, n = quads.size(); i < n; ++i) {
-		QuadToLuaString(quads[i], gen, tp);
-	}
-
-	gen.detab();
-	gen.line("},");
+	PictureToLuaString::Pack(this, gen, tp);
 }
 
 void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
 {
-	int len = lua_rawlen(L, -1);
-	quads.reserve(len);
-	for (int i = 1; i <= len; ++i)
-	{
-		lua_pushinteger(L, i);
-		lua_gettable(L, -2);
-		assert(lua_istable(L, -1));
-
-		Quad quad;
-		// tex
-		lua_getfield(L, -1, "tex");
-		const char* type = lua_typename(L, lua_type(L, -1));
-		int tex_idx = (uint8_t)lua_tointeger(L, -1);
-		assert(tex_idx < images.size());
-		quad.img = images[tex_idx];
-		lua_pop(L, 1);
-		// src
-		lua_getfield(L, -1, "src");
-		int len = lua_rawlen(L, -1);
-		assert(len == 8);
-		for (int i = 1; i <= len; ++i)
-		{
-			lua_pushinteger(L, i);
-			lua_gettable(L, -2);
-			int src = lua_tonumber(L, -1);
-			if (i % 2) {
-				quad.texture_coord[(i - 1) / 2].x = src;
-			} else {
-				quad.texture_coord[(i - 1) / 2].y = src;
-			}
-			lua_pop(L, 1);
-		}
-		lua_pop(L, 1);
-		// screen
-		lua_getfield(L, -1, "screen");
-		len = lua_rawlen(L, -1);
-		assert(len == 8);
-		for (int i = 1; i <= len; ++i)
-		{
-			lua_pushinteger(L, i);
-			lua_gettable(L, -2);
-			int screen = lua_tonumber(L, -1);
-			if (i % 2) {
-				quad.screen_coord[(i - 1) / 2].x = screen / SCALE;
-			} else {
-				quad.screen_coord[(i - 1) / 2].y = -screen / SCALE;
-			}
-			lua_pop(L, 1);
-		}
-		lua_pop(L, 1);
-
-		quads.push_back(quad);
-
-		lua_pop(L, 1);
-	}
+	PictureFromLua::Unpack(L, images, this);
 }
 
 int PackPicture::SizeOfPackToBin() const
 {
-	int sz = 0;
-
-	// type
-
-	// id
-
-	sz += sizeof(uint16_t);		// quads.size();
-	sz += SizeOfQuadBin() * quads.size();
-
-	return sz;
+	return PictureToBin::Size(this);
 }
 
 void PackPicture::PackToBin(uint8_t** ptr,
 							const d2d::TexturePacker& tp) const
 {
-	// type
-
-	// id
-
-	uint16_t sz = quads.size();
-	pack2mem(sz, ptr);	
-	for (int i = 0, n = quads.size(); i < n; ++i) {
-		QuadToBin(quads[i], ptr, tp);
-	}
-}
-
-void PackPicture::QuadToLuaString(const Quad& quad, ebuilder::CodeGenerator& gen, 
-								  const d2d::TexturePacker& tp)
-{
-	int idx = tp.QueryIdx(quad.img->GetFilepath());
-	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(idx));
-
-	char buff[256];
-
-	int src[8];
-	GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
-	sprintf(buff, "src = { %d, %d, %d, %d, %d, %d, %d, %d }", 
-		src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
-	std::string src_str = buff;
-
-	int screen[8];
-	for (int j = 0; j < 4; ++j) {
-		screen[j*2] = floor(quad.screen_coord[j].x * SCALE + 0.5f);
-		screen[j*2+1] = -floor(quad.screen_coord[j].y * SCALE + 0.5f);
-	}
-	sprintf(buff, "screen = { %d, %d, %d, %d, %d, %d, %d, %d }", 
-		screen[0], screen[1], screen[2], screen[3], screen[4], screen[5], screen[6], screen[7]);
-	std::string screen_str = buff;
-
-	lua::tableassign(gen, "", 3, tex_str.c_str(), src_str.c_str(), screen_str.c_str());
-}
-
-int PackPicture::SizeOfQuadBin()
-{
-	int ret = 0;
-	ret += sizeof(uint8_t);		// texid
-	ret += (sizeof(uint16_t) + sizeof(int32_t)) * 8;
-	return ret;
-}
-
-void PackPicture::QuadToBin(const Quad& quad, uint8_t** ptr,
-							const d2d::TexturePacker& tp)
-{
-	uint8_t idx = tp.QueryIdx(quad.img->GetFilepath());
-	pack2mem(idx, ptr);
-
-	for (int i = 0; i < 4; ++i) {
-		uint16_t x = quad.texture_coord[i].x,
-			y = quad.texture_coord[i].y;
-		pack2mem(x, ptr);
-		pack2mem(y, ptr);
-	}
-
-	for (int i = 0; i < 4; ++i) {
-		int32_t x = quad.screen_coord[i].x,
-			y = quad.screen_coord[i].y;
-		pack2mem(x, ptr);
-		pack2mem(y, ptr);
-	}
+	PictureToBin::Pack(this, ptr, tp);
 }
 
 void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 

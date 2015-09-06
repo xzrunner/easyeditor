@@ -6,6 +6,8 @@
 namespace libcoco
 {
 
+static const float SCALE = 16;
+
 template<typename T>
 inline void pack2mem(const T& d, uint8_t** ptr) {
 	memcpy(*ptr, &d, sizeof(d));
