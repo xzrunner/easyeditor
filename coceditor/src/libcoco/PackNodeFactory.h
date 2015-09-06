@@ -23,6 +23,7 @@ class LabelBuilder;
 
 class ComplexBuilder;
 class AnimBuilder;
+class Terrain2DBuilder;
 
 class PackNodeFactory
 {
@@ -61,6 +62,7 @@ private:
 	// animation
 	ComplexBuilder* m_complex_builder;
 	AnimBuilder* m_anim_builder;
+	Terrain2DBuilder* m_terrain2d_builder;
 
 	std::vector<INodeBuilder*> m_builders;
 

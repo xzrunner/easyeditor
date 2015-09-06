@@ -10,6 +10,7 @@ namespace libcoco
 
 class IPackNode;
 class PackAnimation;
+class PackPicture;
 
 class Terrain2DBuilder : public INodeBuilder
 {
@@ -26,6 +27,8 @@ private:
 
 private:
 	std::map<const eterrain2d::Symbol*, const PackAnimation*> m_map_data;
+
+	std::vector<const PackPicture*> m_pics;
 
 }; // Terrain2DBuilder
 

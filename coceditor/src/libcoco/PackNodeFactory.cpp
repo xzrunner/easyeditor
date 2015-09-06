@@ -9,6 +9,7 @@
 
 #include "ComplexBuilder.h"
 #include "AnimBuilder.h"
+#include "Terrain2DBuilder.h"
 
 namespace libcoco
 {
@@ -26,6 +27,7 @@ PackNodeFactory::PackNodeFactory()
 
 	m_builders.push_back(m_complex_builder = new ComplexBuilder(m_export_set));
 	m_builders.push_back(m_anim_builder = new AnimBuilder(m_export_set));
+	m_builders.push_back(m_terrain2d_builder = new Terrain2DBuilder);
 }
 
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
@@ -50,8 +52,14 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		node = m_complex_builder->Create(&complex->GetSymbol());
 	} else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
 		node = m_anim_builder->Create(&anim->GetSymbol());
+	} else if (const eterrain2d::Sprite* terr2d = dynamic_cast<const eterrain2d::Sprite*>(spr)) {
+		node = m_terrain2d_builder->Create(&terr2d->GetSymbol());
 	}
 
+	else {
+		throw d2d::Exception("PackNodeFactory::Create unknown sprite type.");
+	}
+	
 	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
 
 	return node;

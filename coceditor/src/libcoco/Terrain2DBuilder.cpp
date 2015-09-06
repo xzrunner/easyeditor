@@ -29,6 +29,14 @@ void Terrain2DBuilder::Traverse(d2d::IVisitor& visitor) const
 			break;
 		}
 	}
+
+	for (int i = 0, n = m_pics.size(); i < n; ++i) {
+		bool has_next;
+		visitor.Visit(const_cast<PackPicture*>(m_pics[i]), has_next);
+		if (!has_next) {
+			break;
+		}
+	}
 }
 
 const IPackNode* Terrain2DBuilder::Create(const eterrain2d::Symbol* symbol)
@@ -98,6 +106,7 @@ void Terrain2DBuilder::Load(const eterrain2d::Symbol* symbol, PackAnimation* ani
 				pic->quads.push_back(quad);
 			}
 		}
+		m_pics.push_back(pic);
 
 		int comp_idx = anim->components.size();
 		PackAnimation::Component comp;
