@@ -403,7 +403,7 @@ void LRJsonPacker::ParserCharacter(const Json::Value& src_val,
 		// filename
 		std::string filename = d2d::FilenameTools::getFilename(filepath);
 		lr::CharacterFileName out_name(filename);
-		char_val["filename"] = out_name.GetOutputName();
+//		char_val["filename"] = out_name.GetOutputName();
 
 		// angle
 		int dir = 1 + (out_name.GetField(lr::CharacterFileName::FT_DIRECTION)[0] - '1');
