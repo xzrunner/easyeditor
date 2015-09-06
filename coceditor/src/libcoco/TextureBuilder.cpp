@@ -70,6 +70,8 @@ void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 	{
 		PackPicture::Quad quad;
 
+		quad.img = material->GetImage()->getImage();
+
 		for (int j = 0; j < 3; ++j) {
 			quad.texture_coord[j] = texcoords[i+j];
 		}
