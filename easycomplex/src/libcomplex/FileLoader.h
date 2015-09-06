@@ -21,11 +21,16 @@ private:
 	static void LoadImages(const std::string& name, std::vector<d2d::Image*>& images);
 
 	static void LoadFromNode(const libcoco::IPackNode* node, Symbol* symbol);
+
 	static d2d::ISprite* Node2Sprite(const libcoco::IPackNode* node);
 	static d2d::ISprite* Quad2Sprite(const libcoco::PackPicture::Quad* quad);
 	static d2d::ISprite* Pic2Sprite(const libcoco::PackPicture* pic);
 	static d2d::ISprite* Label2Sprite(const libcoco::PackLabel* label);
 	static d2d::ISprite* Anim2Sprite(const libcoco::PackAnimation* anim);
+	static d2d::ISprite* Anim2ComplexSprite(const libcoco::PackAnimation* anim);
+	static d2d::ISprite* Anim2AnimSprite(const libcoco::PackAnimation* anim);
+
+	static void TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t);
 	static void TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t);
 	static void TransSpriteCol(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t);
 

@@ -3,6 +3,7 @@
 #include "Sprite.h"
 
 #include <easyicon.h>
+#include <easyanim.h>
 
 namespace ecomplex
 {
@@ -287,26 +288,63 @@ d2d::ISprite* FileLoader::Label2Sprite(const libcoco::PackLabel* label)
 
 d2d::ISprite* FileLoader::Anim2Sprite(const libcoco::PackAnimation* anim)
 {
-	assert(!anim->actions.empty());
-	// 0 frame
+	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
+	if (anim->actions[0].size == 1) {
+		return Anim2ComplexSprite(anim);
+	} else {
+		return Anim2AnimSprite(anim);
+	}
+}
+
+d2d::ISprite* FileLoader::Anim2ComplexSprite(const libcoco::PackAnimation* anim)
+{
+	assert(!anim->actions.empty() && anim->actions[0].size == 1);
+
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
+	const libcoco::PackAnimation::Frame& src = anim->frames[0];
+	ecomplex::Symbol* dst = new ecomplex::Symbol;
+	for (int i = 0; i < src.parts.size(); ++i) {
+		const libcoco::PackAnimation::Part& part = src.parts[i];
+		d2d::ISprite* spr = Node2Sprite(anim->components[part.comp_idx].node);
+		TransSprite(spr, part.t);
+		dst->m_sprites.push_back(spr);
+	}
+	dst->InitBounding();
+	complex->m_sprites.push_back(new Sprite(dst));
+	complex->InitBounding();
+	return new Sprite(complex);
+}
+
+d2d::ISprite* FileLoader::Anim2AnimSprite(const libcoco::PackAnimation* anim)
+{
+	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
+
+	libanim::Symbol* anim_symbol = new libanim::Symbol;
+	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
 	for (int i = 0; i < anim->actions[0].size; ++i) {
 		const libcoco::PackAnimation::Frame& src = anim->frames[i];
-		ecomplex::Symbol* dst = new ecomplex::Symbol;
+		libanim::Symbol::Frame* frame = new libanim::Symbol::Frame;
+		frame->index = i;
+		frame->bClassicTween = false;
 		for (int j = 0; j < src.parts.size(); ++j) {
 			const libcoco::PackAnimation::Part& part = src.parts[j];
 			d2d::ISprite* spr = Node2Sprite(anim->components[part.comp_idx].node);
-			if (!libcoco::PackAnimation::IsMatrixIdentity(part.t.mat)) {
-				TransSpriteMat(spr, part.t);
-			}
-			TransSpriteCol(spr, part.t);
-			dst->m_sprites.push_back(spr);
+			TransSprite(spr, part.t);
+			frame->sprites.push_back(spr);
 		}
-		dst->InitBounding();
-		complex->m_sprites.push_back(new Sprite(dst));
+		layer->frames.push_back(frame);
 	}
-	complex->InitBounding();
-	return new Sprite(complex);
+	anim_symbol->m_layers.push_back(layer);
+	anim_symbol->InitBounding();
+	return new libanim::Sprite(anim_symbol);
+}
+
+void FileLoader::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+{
+	if (!libcoco::PackAnimation::IsMatrixIdentity(t.mat)) {
+		TransSpriteMat(spr, t);
+	}
+	TransSpriteCol(spr, t);
 }
 
 void FileLoader::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
