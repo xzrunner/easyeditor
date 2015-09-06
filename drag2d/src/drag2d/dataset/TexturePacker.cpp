@@ -87,20 +87,20 @@ Load(const FrameSrcData& src, const Texture* tex)
 	float left, right, up, down;
 	if (src.rotated)
 	{
-		left = src.frame.x;
-		right = src.frame.x + src.frame.h;
+		down = src.frame.x;
+		up = src.frame.x + src.frame.h;
 		if (flip_y) {
-			up = tex->height - src.frame.y;
-			down = tex->height - (src.frame.y + src.frame.w);
+			left = tex->height - src.frame.y;
+			right = tex->height - (src.frame.y + src.frame.w);
 		} else {
-			up = src.frame.y;
-			down = src.frame.y + src.frame.w;
+			left = src.frame.y;
+			right = src.frame.y + src.frame.w;
 		}
 
-		tex_coords[0].set(left, up);
-		tex_coords[1].set(right, up);
-		tex_coords[2].set(right, down);
-		tex_coords[3].set(left, down);
+		tex_coords[0].set(down, left);
+		tex_coords[1].set(up, left);
+		tex_coords[2].set(up, right);
+		tex_coords[3].set(down, right);
 	}
 	else
 	{
@@ -150,8 +150,9 @@ Load(const Json::Value& value, const std::string& src_data_dir)
 // 	std::string scale = value["meta"]["scale"].asString();
 // 	m_invscale = atof(scale.c_str());
 
-	std::string app = value["meta"]["app"].asString();
-	is_easydb = app.compare("easydb") == 0;
+// 	std::string app = value["meta"]["app"].asString();
+// 	is_easydb = app.compare("easydb") == 0;
+	is_easydb = false;
 
 	int i = 0;
 	Json::Value frame_val = value["frames"][i++];

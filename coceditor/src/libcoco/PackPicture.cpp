@@ -100,7 +100,7 @@ void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
 	char buff[256];
 
 	int src[8];
-	GetImgSrcPos(tp, quad.img, src);
+	GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
 	sprintf(buff, "src = { %d, %d, %d, %d, %d, %d, %d, %d }", 
 		src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
 	std::string src_str = buff;
@@ -117,13 +117,27 @@ void PackPicture::QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
 	lua::tableassign(gen, "", 3, tex_str.c_str(), src_str.c_str(), screen_str.c_str());
 }
 
-void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, int* src)
+void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 
+							   const d2d::Vector* texture_coord, int* src)
 {
 	const d2d::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
 	assert(tp_frame);
-	for (int i = 0; i < 4; ++i) {
-		src[i*2] = floor(tp_frame->dst.tex_coords[i].x + 0.5f);
-		src[i*2+1] = floor(tp_frame->dst.tex_coords[i].y + 0.5f);
+	if (!tp_frame->src.rotated) {
+		int left = tp_frame->dst.tex_coords[0].x, bottom = tp_frame->dst.tex_coords[0].y;
+		int width = tp_frame->dst.tex_coords[3].x - left,
+			height = tp_frame->dst.tex_coords[1].y - bottom;
+		for (int i = 0; i < 4; ++i) {
+			src[i*2] = floor(left + width * texture_coord[i].x + 0.5f);
+			src[i*2+1] = floor(bottom + height * texture_coord[i].y + 0.5f);
+		}
+	} else {
+		int left = tp_frame->dst.tex_coords[0].y, bottom = tp_frame->dst.tex_coords[0].x;
+		int width = tp_frame->dst.tex_coords[3].y - left,
+			height = tp_frame->dst.tex_coords[1].x - bottom;
+		for (int i = 0; i < 4; ++i) {
+			src[i*2] = floor(bottom + height * texture_coord[i].y + 0.5f);
+			src[i*2+1] = floor(left + width * texture_coord[i].x + 0.5f);
+		}
 	}
 }
 

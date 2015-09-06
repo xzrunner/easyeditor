@@ -34,7 +34,8 @@ public:
 private:
 	static void QuadToString(const Quad& quad, ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp);
-	static void GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, int* src);
+	static void GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 
+		const d2d::Vector* texture_coord, int* src);
 
 }; // PackPicture  
 

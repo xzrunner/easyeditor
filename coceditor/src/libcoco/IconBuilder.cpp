@@ -77,6 +77,7 @@ void IconBuilder::Load(const eicon::Sprite* spr, PackPicture* pic)
 	PackPicture::Quad quad;
 
 	const eicon::Icon* icon = spr->GetSymbol().GetIcon();
+	quad.img = icon->GetImage();
 	icon->GetTexCoords(proc, quad.texture_coord);
 	icon->GetScreenCoords(proc, quad.texture_coord, quad.screen_coord);
 
