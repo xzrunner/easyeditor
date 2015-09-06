@@ -360,30 +360,30 @@ void FileLoader::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation:
 // 	mat[3] = sy*c;	
 
 	float angle = atan2((float)t.mat[1], (float)t.mat[0]);
-#ifdef _DEBUG
-	if (t.mat[2] != 0) {
-		assert(atan2(-(float)t.mat[2], (float)t.mat[3]) == angle);
-	}
-#endif
+// #ifdef _DEBUG
+// 	if (t.mat[2] != 0) {
+// 		assert(atan2(-(float)t.mat[2], (float)t.mat[3]) == angle);
+// 	}
+// #endif
 	float c = cos(angle), s = sin(angle);
 	float sx, sy;
 	if (c != 0) {
 		sx = t.mat[0] / c / 1024.0f;
 		sy = t.mat[3] / c / 1024.0f;
-// 		if (fabs(s) > FLT_EPSILON) {
-// 			assert(sx == t.mat[1] / s / 1024.0f
-// 				&& sy == -t.mat[2] / s / 1024.0f);
-// 		}
 	} else {
 		sx = t.mat[1] / s / 1024.0f;
 		sy = -t.mat[2] / s / 1024.0f;
 	}
-#ifdef _DEBUG	
-	assert(fabs(t.mat[0] - sx * c * 1024) < d2d::LARGE_EPSILON
-		&& fabs(t.mat[1] - sx * s * 1024) < d2d::LARGE_EPSILON
-		&& fabs(t.mat[2] - -sy * s * 1024) < d2d::LARGE_EPSILON
-		&& fabs(t.mat[3] - sy * c * 1024) < d2d::LARGE_EPSILON);
-#endif
+
+	if (fabs(t.mat[0] - sx * c * 1024) >= 1 ||
+		fabs(t.mat[1] - sx * s * 1024) >= 1 ||
+		fabs(t.mat[2] - -sy * s * 1024) >= 1 ||
+		fabs(t.mat[3] - sy * c * 1024) >= 1) {
+		// todo use mat for sprite
+
+		sx = sy = 1;
+		angle = 0;
+	}
 	
 	// no scale
 // 	mat[0] = c - ky*s;
