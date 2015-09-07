@@ -4,7 +4,7 @@
 #include "libcomplex/config.h"
 #include "libcomplex/Sprite.h"
 #include "libcomplex/Symbol.h"
-#include "libcomplex/FileSaver.h"
+#include "libcomplex/FileStorer.h"
 #include "libcomplex/EditDialog.h"
 #include "libcomplex/SettingsDialog.h"
 #include "libcomplex/SymbolPropertySetting.h"

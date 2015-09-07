@@ -338,7 +338,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		}
 		std::string filename = outfloder + "\\" + ss.str() 
 			+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
-		ecomplex::FileSaver::store(filename.c_str(), symbol);
+		ecomplex::FileStorer::Store(filename.c_str(), symbol);
 
 		pic->filename = filename;
 		pic->width = symbol->GetSize().xLength();
@@ -454,7 +454,7 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
-	ecomplex::FileSaver::store(filename.c_str(), symbol);
+	ecomplex::FileStorer::Store(filename.c_str(), symbol);
 
 	ani->filename = filename;
 

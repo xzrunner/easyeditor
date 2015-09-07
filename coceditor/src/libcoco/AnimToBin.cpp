@@ -1,5 +1,6 @@
 #include "AnimToBin.h"
 #include "tools.h"
+#include "spritepack.h"
 
 namespace libcoco
 {
@@ -7,6 +8,9 @@ namespace libcoco
 int AnimToBin::Size(const PackAnimation* anim)
 {
 	int sz = 0;
+
+	sz += sizeof(uint16_t);				// id
+	sz += sizeof(uint16_t);				// type
 
 	sz += sizeof(uint16_t);				// components size
 	for (int i = 0, n = anim->components.size(); i < n; ++i) {
@@ -30,6 +34,12 @@ int AnimToBin::Size(const PackAnimation* anim)
 
 void AnimToBin::Pack(const PackAnimation* anim, uint8_t** ptr)
 {
+	uint16_t id = anim->GetID();
+	pack(id, ptr);
+
+	uint16_t type = TYPE_ANIMATION;
+	pack(type, ptr);
+
 	// components
 	uint16_t sz = anim->components.size();
 	pack(sz, ptr);

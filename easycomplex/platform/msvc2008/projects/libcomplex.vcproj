@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easymesh\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\easyejoy2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easymesh\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\easyejoy2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\epbin\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easymesh\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\easyejoy2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easymesh\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyimage\src;..\..\..\..\easyshape\src;..\..\..\..\easyejoy2d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyshadow\src;..\..\..\..\easysketch\src;..\..\..\..\epbin\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -152,22 +152,62 @@
 		<Filter
 			Name="fileio"
 			>
-			<File
-				RelativePath="..\..\..\src\libcomplex\FileLoader.cpp"
+			<Filter
+				Name="load"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\FileLoader.h"
+				<File
+					RelativePath="..\..\..\src\libcomplex\FileLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\FileLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromBin.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromBin.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromJson.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromJson.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromLua.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LoadFromLua.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\NodeToSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\NodeToSprite.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="store"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\FileSaver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\FileSaver.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\FileStorer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\FileStorer.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"

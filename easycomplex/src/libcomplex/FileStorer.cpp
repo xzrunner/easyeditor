@@ -1,10 +1,10 @@
-#include "FileSaver.h"
+#include "FileStorer.h"
 #include "Symbol.h"
 
 namespace ecomplex
 {
 
-void FileSaver::store(const char* filepath, const Symbol* symbol)
+void FileStorer::Store(const char* filepath, const Symbol* symbol)
 {
 	Json::Value value;
 
@@ -21,7 +21,7 @@ void FileSaver::store(const char* filepath, const Symbol* symbol)
 
 	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		value["sprite"][i] = store(symbol->m_sprites[i], dir);
+		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -31,7 +31,7 @@ void FileSaver::store(const char* filepath, const Symbol* symbol)
 	fout.close();
 }
 
-void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol)
+void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 {
 	Json::Value value;
 
@@ -46,7 +46,7 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol)
 
 	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		value["sprite"][i] = store(symbol->m_sprites[i], dir);
+		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -61,7 +61,7 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol)
 //	editpanel->saveHistoryList(filepath, symbol->m_sprites);
 }
 
-void FileSaver::centerSymbol(Symbol* symbol)
+void FileStorer::CenterSymbol(Symbol* symbol)
 {
 	d2d::Vector offset;
 	offset.x = symbol->m_rect.xCenter();
@@ -74,7 +74,7 @@ void FileSaver::centerSymbol(Symbol* symbol)
 	symbol->m_rect.translate(-offset);
 }
 
-Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
+Json::Value FileStorer::Store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
 	const d2d::ISymbol& symbol = sprite->GetSymbol();

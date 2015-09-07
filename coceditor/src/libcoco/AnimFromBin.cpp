@@ -68,7 +68,8 @@ void AnimFromBin::UnpackComponents(uint8_t** ptr, PackAnimation* anim)
 	unpack(sz, ptr);
 	anim->components.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		PackAnimation::Component comp;
+		anim->components.push_back(PackAnimation::Component());
+		PackAnimation::Component& comp = anim->components[anim->components.size() - 1];
 
 		uint16_t id;
 		unpack(id, ptr);
@@ -94,6 +95,8 @@ void AnimFromBin::UnpackActions(uint8_t** ptr, PackAnimation* anim)
 		uint16_t size;
 		unpack(size, ptr);
 		action.size = size;
+
+		anim->actions.push_back(action);
 	}
 }
 

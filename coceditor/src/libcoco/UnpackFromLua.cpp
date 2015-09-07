@@ -48,7 +48,7 @@ void UnpackFromLua::Unpack(const std::string& filepath,
 		lua_gettable(L, 1);
 
 		if (lua_istable(L, -1)) {
-			factory->Unpack(L, images);
+			factory->UnpackFromLua(L, images);
 		}
 		lua_pop(L,1);
 	}

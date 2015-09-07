@@ -1,7 +1,7 @@
 #include "EditDialog.h"
 #include "PropertySettingPanel.h"
 #include "StagePanel.h"
-#include "FileSaver.h"
+#include "FileStorer.h"
 #include "LibraryPanel.h"
 #include "Symbol.h"
 
@@ -85,7 +85,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	{
 		m_symbol->InitBounding();
 		const std::string& filepath = m_symbol->GetFilepath();
-		FileSaver::store(filepath.c_str(), m_symbol);
+		FileStorer::Store(filepath.c_str(), m_symbol);
 		m_symbol->RefreshThumbnail(filepath, true);
 		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
 		Destroy();

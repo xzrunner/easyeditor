@@ -22,6 +22,10 @@ Image::Image(ImageData* img_data)
 {
 	m_tex = new TextureImgData;
 	m_tex->LoadFromMemory(img_data);
+
+	m_ori_w = m_tex->GetWidth();
+	m_ori_h = m_tex->GetHeight();
+	m_offset.set(0, 0);
 }
 
 Image::Image(const FBO* fbo)

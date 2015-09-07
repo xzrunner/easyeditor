@@ -44,9 +44,9 @@ void PictureToLuaString::PackQuad(const PackPicture::Quad& quad,
 	std::string src_str = buff;
 
 	int screen[8];
-	for (int j = 0; j < 4; ++j) {
-		screen[j*2] = floor(quad.screen_coord[j].x * SCALE + 0.5f);
-		screen[j*2+1] = -floor(quad.screen_coord[j].y * SCALE + 0.5f);
+	for (int i = 0; i < 4; ++i) {
+		screen[i*2] = floor(quad.screen_coord[i].x * SCALE + 0.5f);
+		screen[i*2+1] = -floor(quad.screen_coord[i].y * SCALE + 0.5f);
 	}
 	sprintf(buff, "screen = { %d, %d, %d, %d, %d, %d, %d, %d }", 
 		screen[0], screen[1], screen[2], screen[3], screen[4], screen[5], screen[6], screen[7]);

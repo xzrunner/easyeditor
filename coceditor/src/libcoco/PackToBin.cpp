@@ -42,9 +42,9 @@ void PackToBin::PackEPE(const std::string& filepath,
 	}
 
 	// body
-	uint32_t body_sz;
+	uint32_t body_sz = nodes.size();
 
-	// filling data
+	// cal size
 	int32_t out_sz = 0;
 	out_sz += sizeof(export_n) + sizeof(maxid) + sizeof(tex) + sizeof(unpack_sz);
 	out_sz += sizeof(body_sz);
@@ -57,6 +57,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 		out_sz += nodes[i]->SizeOfPackToBin();
 	}
 
+	// filling data
 	uint8_t* buf = new uint8_t[out_sz];
 	uint8_t* ptr = buf;
 	pack(export_n, &ptr);

@@ -36,6 +36,11 @@ inline void unpack(T& d, uint8_t** ptr) {
 	*ptr += sizeof(d);
 }
 
+template<typename T>
+inline void unpack(T& d, std::ifstream& fin) {
+	fin.read(reinterpret_cast<char*>(&d), sizeof(d));
+}
+
 inline int sizeof_pack_str(const std::string& str) {
 	if (str.empty()) {
 		return sizeof(uint8_t);

@@ -92,7 +92,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		output = output.substr(0, pos);
 
 		output = dir + "\\" + output + "_" + ext + "_" + angle + "_complex.json";
-		ecomplex::FileSaver::store(output.c_str(), symbol);
+		ecomplex::FileStorer::Store(output.c_str(), symbol);
 
 		delete symbol;
 		//////////////////////////////////////////////////////////////////////////

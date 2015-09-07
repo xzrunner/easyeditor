@@ -113,7 +113,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 	}
 
 	std::string json_out_path = out_json_dir + "\\" + filename + "_complex.json";
-	ecomplex::FileSaver::store(json_out_path.c_str(), &complex);
+	ecomplex::FileStorer::Store(json_out_path.c_str(), &complex);
 
 	img->Release();
 	img_trimed->Release();

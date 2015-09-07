@@ -51,7 +51,10 @@ void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* i
 							   const d2d::Vector* texture_coord, int* src)
 {
 	const d2d::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
-	assert(tp_frame);
+	if (!tp_frame) {
+		std::string str = img->GetFilepath();
+		throw d2d::Exception("Image can't find in tp, %s", str.c_str());
+	}
 	if (!tp_frame->src.rotated) {
 		int left = tp_frame->dst.tex_coords[0].x, bottom = tp_frame->dst.tex_coords[0].y;
 		int width = tp_frame->dst.tex_coords[3].x - left,

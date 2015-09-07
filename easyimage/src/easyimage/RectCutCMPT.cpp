@@ -247,7 +247,7 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 
 	wxString tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
 	wxString json_filename = jsonDir + "\\" + imageName + "_" + tag + ".json";
-	ecomplex::FileSaver::store(json_filename.c_str(), complex);
+	ecomplex::FileStorer::Store(json_filename.c_str(), complex);
 	delete complex;
 
 	d2d::FinishDialog dlg(this);

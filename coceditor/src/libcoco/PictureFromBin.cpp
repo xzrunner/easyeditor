@@ -16,7 +16,9 @@ void PictureFromBin::Unpack(uint8_t** ptr, const std::vector<d2d::Image*>& image
 	uint16_t sz;
 	unpack(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
-		UnpackQuad(ptr, images, pic->quads[i]);
+		PackPicture::Quad quad;
+		UnpackQuad(ptr, images, quad);
+		pic->quads.push_back(quad);
 	}
 }
 
@@ -40,8 +42,8 @@ void PictureFromBin::UnpackQuad(uint8_t** ptr, const std::vector<d2d::Image*>& i
 		int32_t x, y;
 		unpack(x, ptr);
 		unpack(y, ptr);
-		quad.screen_coord[i].x = x;
-		quad.screen_coord[i].y = y;
+		quad.screen_coord[i].x = (float)x / SCALE;
+		quad.screen_coord[i].y = -(float)y / SCALE;
 	}
 }
 

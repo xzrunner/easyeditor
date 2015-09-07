@@ -16,7 +16,9 @@ class IPackNode;
 class UnpackNodeFactory
 {
 public:
-	void Unpack(lua_State* L, const std::vector<d2d::Image*>& images);
+	void UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images);
+	void UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+		const std::map<int, std::string>& map_export);
 
 	IPackNode* Query(int id) const;
 	IPackNode* Query(const std::string& name) const;
@@ -29,6 +31,8 @@ public:
 
 private:
 	UnpackNodeFactory();
+
+	void UpdateMapName(IPackNode* node);
 
 private:
 	std::map<int, IPackNode*> m_map_id;

@@ -1,4 +1,6 @@
 #include "UnpackNodeFactory.h"
+#include "tools.h"
+#include "spritepack.h"
 
 #include "PackPicture.h"
 #include "PackLabel.h"
@@ -21,7 +23,7 @@ UnpackNodeFactory::UnpackNodeFactory()
 {
 }
 
-void UnpackNodeFactory::Unpack(lua_State* L, const std::vector<d2d::Image*>& images)
+void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
 {
 	std::string type = epbin::LuaDataHelper::GetStringField(L, "type");
 	int id = epbin::LuaDataHelper::GetIntField(L, "id");
@@ -34,24 +36,47 @@ void UnpackNodeFactory::Unpack(lua_State* L, const std::vector<d2d::Image*>& ima
 	} else if (type == "animation") {
 		node = new PackAnimation(id);
 	} else {
-		throw d2d::Exception("UnpackNodeFactory::Unpack unknown type %s", type.c_str());
+		throw d2d::Exception("UnpackNodeFactory::UnpackFromLua unknown type %s", type.c_str());
 	}
 
 	node->UnpackFromLua(L, images);
 
 	m_map_id.insert(std::make_pair(id, node));
-
 	if (type == "animation") {
-		PackAnimation* anim = static_cast<PackAnimation*>(node);
-		if (!anim->export_name.empty()) {
-			std::map<std::string, IPackNode*>::iterator itr
-				= m_map_name.find(anim->export_name);
-			if (itr != m_map_name.end()) {
-				throw d2d::Exception("duplicate export name %s", anim->export_name);
-			} else {
-				m_map_name.insert(std::make_pair(anim->export_name, node));
-			}
+		UpdateMapName(node);
+	}
+}
+
+void UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+									  const std::map<int, std::string>& map_export)
+{
+	uint16_t id;
+	unpack(id, ptr);
+
+	uint16_t type;
+	unpack(type, ptr);
+
+	IPackNode* node = NULL;
+	if (type == TYPE_PICTURE) {
+		node = new PackPicture(id);
+	} else if (type == TYPE_LABEL) {
+		node = new PackLabel(id);
+	} else if (type == TYPE_ANIMATION) {
+		node = new PackAnimation(id);
+	} else {
+		throw d2d::Exception("UnpackNodeFactory::UnpackFromBin unknown type %d", type);
+	}
+
+	node->UnpackFromBin(ptr, images);
+
+	m_map_id.insert(std::make_pair(id, node));
+	if (type == TYPE_ANIMATION) {
+		std::map<int, std::string>::const_iterator itr = map_export.find(id);
+		if (itr != map_export.end()) {
+			static_cast<PackAnimation*>(node)->export_name = itr->second;
 		}
+
+		UpdateMapName(node);
 	}
 }
 
@@ -91,6 +116,20 @@ void UnpackNodeFactory::AfterUnpack()
 		*(m_unassigned[i].second) = itr->second;
 	}
 	m_unassigned.clear();
+}
+
+void UnpackNodeFactory::UpdateMapName(IPackNode* node)
+{
+	PackAnimation* anim = static_cast<PackAnimation*>(node);
+	if (!anim->export_name.empty()) {
+		std::map<std::string, IPackNode*>::iterator itr
+			= m_map_name.find(anim->export_name);
+		if (itr != m_map_name.end()) {
+			throw d2d::Exception("duplicate export name %s", anim->export_name);
+		} else {
+			m_map_name.insert(std::make_pair(anim->export_name, node));
+		}
+	}
 }
 
 UnpackNodeFactory* UnpackNodeFactory::Instance()
