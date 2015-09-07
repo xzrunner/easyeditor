@@ -22,6 +22,8 @@ public:
 
 	int QueryIdx(const std::string& filepath) const;
 
+	void GetAllTextureFilename(std::vector<std::string>& filenames) const;
+
 public:
 	struct Region
 	{
@@ -72,6 +74,8 @@ public:
 
 	struct Texture
 	{
+		const std::string filepath;
+
 		int idx;
 
 		int width, height;
@@ -79,6 +83,8 @@ public:
 		std::map<std::string, Frame> frames;
 
 		bool is_easydb;
+
+		Texture(const std::string& filepath) : filepath(filepath) {}
 
 		void Load(const Json::Value& value, const std::string& src_data_dir);
 

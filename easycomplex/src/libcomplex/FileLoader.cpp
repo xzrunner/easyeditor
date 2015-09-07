@@ -182,7 +182,8 @@ void FileLoader::LoadLua(const Json::Value& value, const std::string& dir, Symbo
 	LoadImages(img_name, images);
 
 	std::string lua_file = d2d::FilenameTools::getAbsolutePath(dir, value["lua desc"].asString());
-	libcoco::CocoUnpacker unpacker(lua_file, images);
+	libcoco::CocoUnpacker unpacker;
+	unpacker.UnpackLua(lua_file, images);
 
 	std::string export_name = value["export name"].asString();
 	

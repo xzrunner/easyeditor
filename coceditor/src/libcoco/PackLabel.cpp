@@ -4,6 +4,7 @@
 #include "LabelFromLua.h"
 
 #include "LabelToBin.h"
+#include "LabelFromBin.h"
 
 namespace libcoco
 {
@@ -31,6 +32,16 @@ int PackLabel::SizeOfPackToBin() const
 void PackLabel::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
 {
 	LabelToBin::Pack(this, ptr);
+}
+
+int PackLabel::SizeOfUnpackFromBin() const
+{
+	return LabelFromBin::Size();
+}
+
+void PackLabel::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+{
+	LabelFromBin::Unpack(ptr, this);
 }
 
 }

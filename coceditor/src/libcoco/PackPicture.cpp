@@ -1,9 +1,11 @@
 #include "PackPicture.h"
+#include "spritepack.h"
 
 #include "PictureToLuaString.h"
 #include "PictureFromLua.h"
 
 #include "PictureToBin.h"
+#include "PictureFromBin.h"
 
 namespace libcoco
 {
@@ -33,6 +35,16 @@ void PackPicture::PackToBin(uint8_t** ptr,
 							const d2d::TexturePacker& tp) const
 {
 	PictureToBin::Pack(this, ptr, tp);
+}
+
+int PackPicture::SizeOfUnpackFromBin() const
+{
+	return PictureFromBin::Size(this);
+}
+
+void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+{
+	PictureFromBin::Unpack(ptr, images, this);
 }
 
 void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 

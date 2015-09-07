@@ -9,6 +9,8 @@ namespace libcoco
 class LabelFromBin
 {
 public:
+	static int Size();
+
 	static void Unpack(uint8_t** ptr, PackLabel* label);
 
 }; // LabelFromBin

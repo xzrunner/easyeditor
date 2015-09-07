@@ -1,8 +1,14 @@
 #include "LabelFromBin.h"
+#include "spritepack.h"
 #include "tools.h"
 
 namespace libcoco
 {
+
+int LabelFromBin::Size()
+{
+	return SIZEOF_LABEL;
+}
 
 void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 {
@@ -27,7 +33,7 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 
 	uint8_t edge;
 	unpack(edge, ptr);
-	label->has_edge = (bool)edge;
+	label->has_edge = edge == 0 ? false : true;
 
 	// todo
 	uint8_t space_h, space_w;

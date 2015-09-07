@@ -11,14 +11,14 @@ void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, PackAnimation* anim)
 		return;
 	}
 
-	std::set<std::string>::iterator itr = m_set.find(export_name);
-	if (itr != m_set.end()) {
+	std::map<std::string, int>::iterator itr = m_map.find(export_name);
+	if (itr != m_map.end()) {
 		throw d2d::Exception("Duplicate export name %s, file %s", 
 			export_name.c_str(), symbol->GetFilepath().c_str());
 	}
 
 	anim->export_name = export_name;
-	m_set.insert(export_name);
+	m_map.insert(std::make_pair(export_name, anim->GetID()));
 }
 
 }

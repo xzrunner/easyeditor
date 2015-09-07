@@ -9,7 +9,11 @@ namespace libcoco
 class CocoUnpacker
 {
 public:
-	CocoUnpacker(const std::string& filepath, 
+
+	void UnpackLua(const std::string& filepath, 
+		const std::vector<d2d::Image*>& images);
+
+	void UnpackBin(const std::string& filepath, 
 		const std::vector<d2d::Image*>& images);
 
 }; // CocoUnpacker

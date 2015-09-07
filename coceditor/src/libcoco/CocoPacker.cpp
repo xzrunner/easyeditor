@@ -1,10 +1,13 @@
 #include "CocoPacker.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "tools.h"
+
+#include "PackToLuaString.h"
+#include "PackToBin.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
-#include <easybuilder.h>
 
 namespace libcoco
 {
@@ -31,21 +34,12 @@ CocoPacker::CocoPacker(const std::string& json_dir, const std::string& tp_name,
 
 void CocoPacker::OutputLua(const std::string& outfile) const
 {
-	ebuilder::CodeGenerator gen;
-	gen.line("return {");
-	PackNodeFactory::Instance()->PackToLuaString(gen, m_tp);
-	gen.line("}");
-
-	std::locale::global(std::locale(""));
-	std::ofstream fout(outfile.c_str());
-	std::locale::global(std::locale("C"));
-	fout << gen.toText() << std::endl;
-	fout.close();
+	PackToLuaString::Pack(outfile, m_tp);
 }
 
-void CocoPacker::OutputBin(const std::string& outfile) const
+void CocoPacker::OutputBin(const std::string& outfile, bool compress, TextureType type) const
 {
-	
+	PackToBin::Pack(outfile, m_tp, compress, type);
 }
 
 void CocoPacker::LoadJsonData(const std::string& dir)

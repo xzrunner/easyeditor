@@ -14,8 +14,10 @@ public:
 	
 	void LoadExport(const d2d::ISymbol* symbol, PackAnimation* anim);
 
+	const std::map<std::string, int>& GetData() const { return m_map; }
+
 private:
-	std::set<std::string> m_set;
+	std::map<std::string, int> m_map;
 
 }; // ExportNameSet
 

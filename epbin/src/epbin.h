@@ -11,5 +11,10 @@
 #include "Exception.h"
 
 #include "LuaDataHelper.h"
+#include "Lzma.h"
+#include "TexLoader.h"
+#include "PngLoader.h"
+#include "PvrLoader.h"
+#include "PKMLoader.h"
 
 #endif // _EPBIN_H_

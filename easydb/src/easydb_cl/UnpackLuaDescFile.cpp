@@ -35,7 +35,8 @@ void UnpackLuaDescFile::Trigger(const std::string& lua_file, const std::string& 
 	std::vector<d2d::Image*> images;
 	LoadAllImages(img_name, images);
 
-	libcoco::CocoUnpacker unpacker(lua_file, images);
+	libcoco::CocoUnpacker unpacker;
+	unpacker.UnpackLua(lua_file, images);
 }
 
 void UnpackLuaDescFile::LoadAllImages(const std::string& img_name, std::vector<d2d::Image*>& images)

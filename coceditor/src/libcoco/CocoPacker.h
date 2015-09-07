@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "tools.h"
+
 namespace libcoco
 {
 
@@ -13,7 +15,7 @@ public:
 		const std::string& tp_dir);
 	
 	void OutputLua(const std::string& outfile) const;
-	void OutputBin(const std::string& outfile) const;
+	void OutputBin(const std::string& outfile, bool compress, TextureType type) const;
 
 private:
 	void LoadJsonData(const std::string& dir);

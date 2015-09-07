@@ -1,8 +1,14 @@
 #include "PictureFromBin.h"
 #include "tools.h"
+#include "spritepack.h"
 
 namespace libcoco
 {
+
+int PictureFromBin::Size(const PackPicture* pic)
+{
+	return SIZEOF_PICTURE + pic->quads.size() * SIZEOF_QUAD;
+}
 
 void PictureFromBin::Unpack(uint8_t** ptr, const std::vector<d2d::Image*>& images,
 							PackPicture* pic)

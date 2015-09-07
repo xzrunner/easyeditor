@@ -80,6 +80,9 @@ public:
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
 		const d2d::TexturePacker& tp) const;
+	virtual int SizeOfUnpackFromBin() const;
+	virtual void UnpackFromBin(uint8_t** ptr, 
+		const std::vector<d2d::Image*>& images);
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
 

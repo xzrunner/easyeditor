@@ -33,11 +33,14 @@ public:
 	void CreateComplex(const ecomplex::Symbol* complex);
 	void CreateAnim(const libanim::Symbol* anim);
 
-	void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp) const;
+	void GetAllNodes(std::vector<IPackNode*>& nodes) const;
 
 	void SetFilesDir(const std::string& files_dir) {
 		m_files_dir = files_dir;
+	}
+
+	const std::map<std::string, int>& GetExportSet() const { 
+		return m_export_set.GetData(); 
 	}
 
 	static PackNodeFactory* Instance();
@@ -50,6 +53,9 @@ private:
 
 	ExportNameSet m_export_set;
 
+	std::vector<INodeBuilder*> m_builders;
+
+private:
 	// picture
 	ImageBuilder* m_img_builder;
 	Scale9Builder* m_scale9_builder;
@@ -63,8 +69,6 @@ private:
 	ComplexBuilder* m_complex_builder;
 	AnimBuilder* m_anim_builder;
 	Terrain2DBuilder* m_terrain2d_builder;
-
-	std::vector<INodeBuilder*> m_builders;
 
 private:
 	static PackNodeFactory* m_instance;

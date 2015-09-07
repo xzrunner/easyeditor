@@ -37,7 +37,7 @@ void PackLuaDescFileNew::Trigger(const std::string& json_dir, const std::string&
 	libcoco::CocoPacker packer(json_dir, tp_json, tp_dir);
 
 	packer.OutputLua(out_file + ".lua");
-	packer.OutputBin(out_file);
+	packer.OutputBin(out_file, true, libcoco::TT_PNG8);
 }
 
 }

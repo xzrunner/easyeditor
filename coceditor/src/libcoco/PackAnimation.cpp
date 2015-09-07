@@ -5,6 +5,7 @@
 #include "AnimFromLua.h"
 
 #include "AnimToBin.h"
+#include "AnimFromBin.h"
 
 namespace libcoco
 {
@@ -32,6 +33,16 @@ int PackAnimation::SizeOfPackToBin() const
 void PackAnimation::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
 {
 	AnimToBin::Pack(this, ptr);
+}
+
+int PackAnimation::SizeOfUnpackFromBin() const
+{
+	return AnimFromBin::Size(this);
+}
+
+void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+{
+	AnimFromBin::Unpack(ptr, this);
 }
 
 void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)

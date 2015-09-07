@@ -28,7 +28,7 @@ void TexturePacker::Add(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	Texture* tex = new Texture;
+	Texture* tex = new Texture(filepath);
 	tex->idx = m_textures.size();
 	tex->Load(value, m_src_data_dir);
 	m_textures.push_back(tex);
@@ -52,6 +52,14 @@ int TexturePacker::QueryIdx(const std::string& filepath) const
 		}
 	}
 	return -1;
+}
+
+void TexturePacker::GetAllTextureFilename(std::vector<std::string>& filenames) const
+{
+	filenames.clear();
+	for (int i = 0, n = m_textures.size(); i < n; ++i) {
+		filenames.push_back(m_textures[i]->filepath);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

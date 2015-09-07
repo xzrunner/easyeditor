@@ -4,32 +4,24 @@
 namespace libcoco
 {
 
-static const uint8_t TAG_ID			= 1;
-static const uint8_t TAG_COLOR		= 2;
-static const uint8_t TAG_ADDITIVE	= 4;
-static const uint8_t TAG_MATRIX		= 8;
-static const uint8_t TAG_TOUCH		= 16;
-static const uint8_t TAG_MATRIXREF	= 32;
-static const uint8_t TAG_COLMAP		= 64;
-
 int AnimToBin::Size(const PackAnimation* anim)
 {
 	int sz = 0;
 
 	sz += sizeof(uint16_t);				// components size
-	for (int i = 0; i < sz; ++i) {
+	for (int i = 0, n = anim->components.size(); i < n; ++i) {
 		sz += sizeof(uint16_t);								// id
 		sz += sizeof_pack_str(anim->components[i].name);	// name
 	}
 
 	sz += sizeof(uint16_t);				// actions size
-	for (int i = 0; i < sz; ++i) {
+	for (int i = 0, n = anim->actions.size(); i < n; ++i) {
 		sz += sizeof_pack_str(anim->actions[i].name);		// name
 		sz += sizeof(uint16_t);								// sz
 	}
 
 	sz += sizeof(uint16_t);				// frames size
-	for (int i = 0; i < sz; ++i) {
+	for (int i = 0, n = anim->frames.size(); i < n; ++i) {
 		sz += FrameSize(anim->frames[i]);
 	}
 

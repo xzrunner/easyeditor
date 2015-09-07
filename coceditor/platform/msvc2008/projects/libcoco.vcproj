@@ -172,13 +172,13 @@
 				RelativePath="..\..\..\src\libcoco\IPackNode.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libcoco\trans_ejoy2d_data.lua"
-				>
-			</File>
 			<Filter
 				Name="nodes"
 				>
+				<File
+					RelativePath="..\..\..\src\libcoco\spritepack.h"
+					>
+				</File>
 				<Filter
 					Name="picture"
 					>
@@ -318,6 +318,14 @@
 						Name="bin"
 						>
 						<File
+							RelativePath="..\..\..\src\libcoco\AnimFromBin.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\AnimFromBin.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\libcoco\AnimToBin.cpp"
 							>
 						</File>
@@ -441,6 +449,50 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="pack"
+				>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackToBin.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackToBin.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackToLuaString.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackToLuaString.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="unpack"
+				>
+				<File
+					RelativePath="..\..\..\src\libcoco\trans_ejoy2d_data.lua"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackFromBin.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackFromBin.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackFromLua.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackFromLua.h"
 					>
 				</File>
 			</Filter>

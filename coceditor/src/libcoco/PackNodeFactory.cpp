@@ -77,18 +77,12 @@ void PackNodeFactory::CreateAnim(const libanim::Symbol* anim)
 	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, anim->GetFilepath()).ToStdString());
 }
 
-void PackNodeFactory::PackToLuaString(ebuilder::CodeGenerator& gen,
-									  const d2d::TexturePacker& tp) const
+void PackNodeFactory::GetAllNodes(std::vector<IPackNode*>& nodes) const
 {
-	std::vector<IPackNode*> nodes;
+	nodes.clear();
 	for (int i = 0, n = m_builders.size(); i < n; ++i) {
 		m_builders[i]->Traverse(d2d::FetchAllVisitor<IPackNode>(nodes));
 	}
-
-	std::sort(nodes.begin(), nodes.end(), PackNodeCmp());
- 	for (int i = 0, n = nodes.size(); i < n; ++i) {
- 		nodes[i]->PackToLuaString(gen, tp);
- 	}
 }
 
 PackNodeFactory* PackNodeFactory::Instance()
