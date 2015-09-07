@@ -35,14 +35,17 @@ void PackToBin::PackEPE(const std::string& filepath,
 	// header
 	uint16_t export_n = export_set.size();
 	uint16_t maxid = nodes[nodes.size() - 1]->GetID();
-	uint16_t tex = textures.size() + 1;
+	uint16_t tex = textures.size();
 	uint32_t unpack_sz = 0;
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
 		unpack_sz += nodes[i]->SizeOfUnpackFromBin();
 	}
 
 	// body
-	uint32_t body_sz = nodes.size();
+	uint32_t body_sz = 0;
+	for (int i = 0, n = nodes.size(); i < n; ++i) {
+		body_sz += nodes[i]->SizeOfPackToBin();
+	}
 
 	// cal size
 	int32_t out_sz = 0;
@@ -53,9 +56,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 		out_sz += sizeof(uint16_t);		// id
 		out_sz += sizeof_pack_str(itr->first);
 	}
-	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		out_sz += nodes[i]->SizeOfPackToBin();
-	}
+	out_sz += body_sz;
 
 	// filling data
 	uint8_t* buf = new uint8_t[out_sz];
