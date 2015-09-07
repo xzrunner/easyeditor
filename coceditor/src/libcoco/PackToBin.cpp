@@ -12,7 +12,7 @@ void PackToBin::Pack(const std::string& filepath, const d2d::TexturePacker& tp,
 					 bool compress, TextureType type)
 {
 	PackEPE(filepath + ".epe", tp, compress);
-	PackEPT(filepath + ".ept", tp, type);
+	PackEPT(filepath, tp, type);
 }
 
 void PackToBin::PackEPE(const std::string& filepath, 
@@ -97,10 +97,6 @@ void PackToBin::PackEPE(const std::string& filepath,
 void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& tp, 
 						TextureType type)
 {
-	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.c_str(), std::ios::binary);
-	std::locale::global(std::locale("C"));
-
 	std::string ext;
 	switch (type) 
 	{
@@ -117,7 +113,13 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 
 	std::vector<std::string> filenames;
 	tp.GetAllTextureFilename(filenames);
-	for (int i = 0, n = filenames.size(); i < n; ++i) {
+	for (int i = 0, n = filenames.size(); i < n; ++i) 
+	{
+		std::locale::global(std::locale(""));
+		std::string _filepath = filepath + "." + d2d::StringTools::ToString(i + 1) + ".ept";
+		std::ofstream fout(_filepath.c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));
+
 		std::string str = filenames[i];
 		str = str.substr(0, str.find_last_of('.')) + ext;
 
@@ -142,9 +144,9 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		loader->Load(str);
 		loader->Store(fout);
 		delete loader;
-	}
 
-	fout.close();
+		fout.close();
+	}
 }
 
 }

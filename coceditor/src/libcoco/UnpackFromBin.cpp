@@ -18,18 +18,21 @@ struct block {
 void UnpackFromBin::Unpack(const std::string& filepath, 
 						   const std::vector<d2d::Image*>& images)
 {
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str(), std::ios::binary);
-	std::locale::global(std::locale("C"));
-	assert(!fin.fail());
-
-	do {
-		int32_t sz;
-		unpack(sz, fin);
-
-		if (fin.fail()) {
+	int idx = 1;
+	while (true) 
+	{
+		std::string _filepath = filepath + "." + d2d::StringTools::ToString(idx++);
+		if (!d2d::FilenameTools::IsFileExist(_filepath)) {
 			break;
 		}
+
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));
+		assert(!fin.fail());
+
+		int32_t sz;
+		unpack(sz, fin);
 
 		if (sz < 0)
 		{
@@ -56,7 +59,7 @@ void UnpackFromBin::Unpack(const std::string& filepath,
 
 			delete[] uc_buf;
 		}
-	} while (!fin.fail());
+	}
 
 	UnpackNodeFactory::Instance()->AfterUnpack();
 }

@@ -17,7 +17,7 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 	std::vector<d2d::Image*> images;
 	LoadImages(ept_path, images);
 
-	std::string epe_path = filename + ".epe";
+	std::string epe_path = filename;
 	libcoco::CocoUnpacker unpacker;
 	unpacker.UnpackBin(epe_path, images);
 
