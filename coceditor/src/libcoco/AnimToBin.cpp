@@ -40,25 +40,25 @@ void AnimToBin::Pack(const PackAnimation* anim, uint8_t** ptr)
 {
 	// components
 	uint16_t sz = anim->components.size();
-	pack2mem(sz, ptr);
+	pack(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
 		uint16_t id = anim->components[i].node->GetID();
-		pack2mem(id, ptr);
-		pack_str2mem(anim->components[i].name, ptr);
+		pack(id, ptr);
+		pack_str(anim->components[i].name, ptr);
 	}
 
 	// actions
 	sz = anim->actions.size();
-	pack2mem(sz, ptr);
+	pack(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
-		pack_str2mem(anim->actions[i].name, ptr);
+		pack_str(anim->actions[i].name, ptr);
 		uint16_t sz = anim->actions[i].size;
-		pack2mem(sz, ptr);
+		pack(sz, ptr);
 	}
 
 	// frames
 	sz = anim->frames.size();
-	pack2mem(sz, ptr);
+	pack(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
 		PackFrame(anim->frames[i], ptr);
 	}
@@ -94,7 +94,7 @@ int AnimToBin::FrameSize(const PackAnimation::Frame& frame)
 void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 {
 	uint16_t sz = frame.parts.size();
-	pack2mem(sz, ptr);
+	pack(sz, ptr);
 
 	for (int i = 0; i < sz; ++i) 
 	{
@@ -117,32 +117,32 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 			type |= TAG_COLMAP;
 		}
 
-		pack2mem(type, ptr);
+		pack(type, ptr);
 
 		uint16_t comp_idx = part.comp_idx;
-		pack2mem(comp_idx, ptr);
+		pack(comp_idx, ptr);
 
 		if (type & TAG_MATRIX) {
 			for (int i = 0; i < 6; ++i) {
 				int m = t.mat[i];
-				pack2mem(m, ptr);
+				pack(m, ptr);
 			}
 		}
 		if (type & TAG_COLOR) {
 			uint32_t col = t.color;
-			pack2mem(col, ptr);
+			pack(col, ptr);
 		}
 		if (type & TAG_ADDITIVE) {
 			uint32_t add = t.additive;
-			pack2mem(add, ptr);
+			pack(add, ptr);
 		}
 		if (type & TAG_COLMAP) {
 			uint32_t c = t.rmap;
-			pack2mem(c, ptr);
+			pack(c, ptr);
 			c = t.gmap;
-			pack2mem(c, ptr);
+			pack(c, ptr);
 			c = t.bmap;
-			pack2mem(c, ptr);
+			pack(c, ptr);
 		}
 	}
 }

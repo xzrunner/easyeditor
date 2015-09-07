@@ -25,7 +25,7 @@ void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, const d2d::Textur
 	// id
 
 	uint16_t sz = pic->quads.size();
-	pack2mem(sz, ptr);	
+	pack(sz, ptr);	
 	for (int i = 0, n = pic->quads.size(); i < n; ++i) {
 		PackQuad(pic->quads[i], ptr, tp);
 	}
@@ -43,20 +43,20 @@ void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
 							 const d2d::TexturePacker& tp)
 {
 	uint8_t idx = tp.QueryIdx(quad.img->GetFilepath());
-	pack2mem(idx, ptr);
+	pack(idx, ptr);
 
 	for (int i = 0; i < 4; ++i) {
 		uint16_t x = quad.texture_coord[i].x,
 			y = quad.texture_coord[i].y;
-		pack2mem(x, ptr);
-		pack2mem(y, ptr);
+		pack(x, ptr);
+		pack(y, ptr);
 	}
 
 	for (int i = 0; i < 4; ++i) {
 		int32_t x = quad.screen_coord[i].x,
 			y = quad.screen_coord[i].y;
-		pack2mem(x, ptr);
-		pack2mem(y, ptr);
+		pack(x, ptr);
+		pack(y, ptr);
 	}
 }
 

@@ -214,6 +214,14 @@
 						Name="bin"
 						>
 						<File
+							RelativePath="..\..\..\src\libcoco\PictureFromBin.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\PictureFromBin.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\libcoco\PictureToBin.cpp"
 							>
 						</File>
@@ -257,6 +265,14 @@
 					<Filter
 						Name="bin"
 						>
+						<File
+							RelativePath="..\..\..\src\libcoco\LabelFromBin.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\LabelFromBin.h"
+							>
+						</File>
 						<File
 							RelativePath="..\..\..\src\libcoco\LabelToBin.cpp"
 							>

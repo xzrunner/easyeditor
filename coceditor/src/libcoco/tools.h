@@ -9,12 +9,18 @@ namespace libcoco
 static const float SCALE = 16;
 
 template<typename T>
-inline void pack2mem(const T& d, uint8_t** ptr) {
+inline void pack(const T& d, uint8_t** ptr) {
 	memcpy(*ptr, &d, sizeof(d));
 	*ptr += sizeof(d);
 }
 
-int sizeof_pack_str(const std::string& str) {
+template<typename T>
+inline void unpack(T& d, uint8_t** ptr) {
+	memcpy(&d, *ptr, sizeof(d));
+	*ptr += sizeof(d);
+}
+
+inline int sizeof_pack_str(const std::string& str) {
 	if (str.empty()) {
 		return sizeof(uint8_t);
 	} else {
@@ -25,17 +31,31 @@ int sizeof_pack_str(const std::string& str) {
 	}
 }
 
-void pack_str2mem(const std::string& str, uint8_t** ptr) {
+inline void pack_str(const std::string& str, uint8_t** ptr) {
 	if (str.empty()) {
 		uint8_t c = 255;
-		pack2mem(c, ptr);
+		pack(c, ptr);
 	} else {
 		assert(str.size() < 255);
 		uint8_t sz = str.size();
-		pack2mem(sz, ptr);
+		pack(sz, ptr);
 		for (int i = 0; i < sz; ++i) {
 			uint8_t c = str[i];
-			pack2mem(c, ptr);
+			pack(c, ptr);
+		}
+	}
+}
+
+inline void unpack_str(std::string& str, uint8_t** ptr) {
+	uint8_t sz;
+	unpack(sz, ptr);
+	if (sz == 255) {
+		;
+	} else {
+		for (int i = 0; i < sz; ++i) {
+			uint8_t c;
+			unpack(c, ptr);
+			str.push_back((char)c);
 		}
 	}
 }
