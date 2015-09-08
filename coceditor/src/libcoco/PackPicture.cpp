@@ -72,6 +72,11 @@ void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* i
 			src[i*2+1] = floor(left + width * texture_coord[i].x + 0.5f);
 		}
 	}
+
+	int h = tp.GetTextureHeight(tp.QueryIdx(img->GetFilepath()));
+	for (int i = 0; i < 4; ++i) {
+		src[i*2+1] = h - src[i*2+1];
+	}
 }
 
 }

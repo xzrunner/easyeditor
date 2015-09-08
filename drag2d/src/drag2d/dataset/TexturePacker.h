@@ -20,6 +20,8 @@ public:
 	struct Frame;
 	const Frame* Query(const std::string& filepath) const;
 
+	int GetTextureHeight(int idx) const;
+
 	int QueryIdx(const std::string& filepath) const;
 
 	void GetAllTextureFilename(std::vector<std::string>& filenames) const;

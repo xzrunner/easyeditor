@@ -44,6 +44,15 @@ const TexturePacker::Frame* TexturePacker::Query(const std::string& filepath) co
 	return NULL;
 }
 
+int TexturePacker::GetTextureHeight(int idx) const
+{
+	if (idx < 0 || idx >= m_textures.size()) {
+		return -1;
+	} else {
+		return m_textures[idx]->height;
+	}
+}
+
 int TexturePacker::QueryIdx(const std::string& filepath) const
 {
 	for (int i = 0, n = m_textures.size(); i < n; ++i) {
