@@ -335,10 +335,30 @@
 						</File>
 					</Filter>
 				</Filter>
+				<Filter
+					Name="particle3d"
+					>
+					<File
+						RelativePath="..\..\..\src\libcoco\PackParticle3D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\PackParticle3D.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="packer"
 				>
+				<File
+					RelativePath="..\..\..\src\libcoco\ExportNameSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\ExportNameSet.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\libcoco\INodeBuilder.h"
 					>
@@ -428,16 +448,8 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="tools"
+					Name="particle3d"
 					>
-					<File
-						RelativePath="..\..\..\src\libcoco\ExportNameSet.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libcoco\ExportNameSet.h"
-						>
-					</File>
 				</Filter>
 			</Filter>
 			<Filter
