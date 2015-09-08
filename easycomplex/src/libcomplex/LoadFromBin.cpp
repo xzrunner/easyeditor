@@ -68,9 +68,13 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 			fin.read(reinterpret_cast<char*>(block), sz);
 
 			size_t uc_sz = sz * 10;		// FIXME
+			size_t guess_sz = uc_sz;
 			uint8_t* uc_buf = new uint8_t[uc_sz];
 			size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
 			epbin::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
+			if (guess_sz == uc_sz) {
+				throw d2d::Exception("libcoco::UnpackFromBin::Unpack no enough space.");
+			}
 			delete[] c_buf;
 
 			uint8_t* ptr = uc_buf;
