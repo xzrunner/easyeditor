@@ -13,11 +13,11 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 {
 	std::string filename = d2d::FilenameTools::getAbsolutePath(dir, value["bin file"].asString());
 
-	std::string ept_path = filename + ".ept";
+	std::string ept_path = filename;
 	std::vector<d2d::Image*> images;
 	LoadImages(ept_path, images);
 
-	std::string epe_path = filename;
+	std::string epe_path = filename + ".epe";
 	libcoco::CocoUnpacker unpacker;
 	unpacker.UnpackBin(epe_path, images);
 
@@ -35,20 +35,23 @@ struct block {
 	uint8_t data[119];
 };
 
-void LoadFromBin::LoadImages(const std::string& filename, std::vector<d2d::Image*>& images)
+void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image*>& images)
 {
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filename.c_str(), std::ios::binary);
-	std::locale::global(std::locale("C"));
-	assert(!fin.fail());
-
-	do {
-		int32_t sz;
-		libcoco::unpack(sz, fin);
-
-		if (fin.fail()) {
+	int idx = 1;
+	while (true) 
+	{
+		std::string _filepath = filepath + "." + d2d::StringTools::ToString(idx++) + ".ept";
+		if (!d2d::FilenameTools::IsFileExist(_filepath)) {
 			break;
 		}
+
+		std::locale::global(std::locale(""));
+		std::ifstream fin(_filepath.c_str(), std::ios::binary);
+		std::locale::global(std::locale("C"));
+		assert(!fin.fail());
+
+		int32_t sz;
+		libcoco::unpack(sz, fin);
 
 		if (sz < 0) 
 		{
@@ -70,12 +73,12 @@ void LoadFromBin::LoadImages(const std::string& filename, std::vector<d2d::Image
 			epbin::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
 			delete[] c_buf;
 
- 			uint8_t* ptr = uc_buf;
+			uint8_t* ptr = uc_buf;
 			LoadImage(&ptr, images);
 
 			delete[] uc_buf;
 		}
-	} while (!fin.fail());
+	}
 }
 
 void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<d2d::Image*>& images)

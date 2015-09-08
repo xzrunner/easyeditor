@@ -47,8 +47,8 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 	}
 }
 
-void UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images,
-									  const std::map<int, std::string>& map_export)
+const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+												  const std::map<int, std::string>& map_export)
 {
 	uint16_t id;
 	unpack(id, ptr);
@@ -78,6 +78,8 @@ void UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Imag
 
 		UpdateMapName(node);
 	}
+
+	return node;
 }
 
 IPackNode* UnpackNodeFactory::Query(int id) const

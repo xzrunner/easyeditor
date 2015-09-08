@@ -1,6 +1,7 @@
 #include "UnpackFromBin.h"
 #include "UnpackNodeFactory.h"
 #include "tools.h"
+#include "IPackNode.h"
 
 #include <epbin.h>
 
@@ -18,47 +19,38 @@ struct block {
 void UnpackFromBin::Unpack(const std::string& filepath, 
 						   const std::vector<d2d::Image*>& images)
 {
-	int idx = 1;
-	while (true) 
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
+	assert(!fin.fail());
+
+	int32_t sz;
+	unpack(sz, fin);
+
+	if (sz < 0)
 	{
-		std::string _filepath = filepath + "." + d2d::StringTools::ToString(idx++);
-		if (!d2d::FilenameTools::IsFileExist(_filepath)) {
-			break;
-		}
+		sz = -sz;
+		uint8_t* buf = new uint8_t[sz];
+		fin.read(reinterpret_cast<char*>(buf), sz);
+		Unpack(&buf, images);
+		delete[] buf;
+	}
+	else
+	{
+		uint8_t* c_buf = new uint8_t[sz];
+		struct block* block = (struct block*)c_buf;
+		fin.read(reinterpret_cast<char*>(block), sz);
 
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.c_str(), std::ios::binary);
-		std::locale::global(std::locale("C"));
-		assert(!fin.fail());
+		size_t uc_sz = sz * 10;		// FIXME
+		uint8_t* uc_buf = new uint8_t[uc_sz];
+		size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
+		epbin::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
+		delete[] c_buf;
 
-		int32_t sz;
-		unpack(sz, fin);
+		uint8_t* ptr = uc_buf;
+		Unpack(&ptr, images);
 
-		if (sz < 0)
-		{
-			sz = -sz;
-			uint8_t* buf = new uint8_t[sz];
-			fin.read(reinterpret_cast<char*>(buf), sz);
-			Unpack(&buf, images);
-			delete[] buf;
-		}
-		else
-		{
-			uint8_t* c_buf = new uint8_t[sz];
-			struct block* block = (struct block*)c_buf;
-			fin.read(reinterpret_cast<char*>(block), sz);
-
-			size_t uc_sz = sz * 10;		// FIXME
-			uint8_t* uc_buf = new uint8_t[uc_sz];
-			size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
-			epbin::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
-			delete[] c_buf;
-
-			uint8_t* ptr = uc_buf;
-			Unpack(&ptr, images);
-
-			delete[] uc_buf;
-		}
+		delete[] uc_buf;
 	}
 
 	UnpackNodeFactory::Instance()->AfterUnpack();
@@ -94,8 +86,9 @@ void UnpackFromBin::Unpack(uint8_t** ptr, const std::vector<d2d::Image*>& images
 		map_export.insert(std::make_pair(id, name));
 	}
 
-	for (int i = 0; i < body_sz; ++i) {
-		factory->UnpackFromBin(ptr, images, map_export);
+	for (int i = 0; i < body_sz; ) {
+		const IPackNode* node = factory->UnpackFromBin(ptr, images, map_export);
+		i += node->SizeOfPackToBin();
 	}
 }
 
