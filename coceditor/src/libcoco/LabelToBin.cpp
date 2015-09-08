@@ -9,7 +9,7 @@ int LabelToBin::Size()
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);		// id
-	sz += sizeof(uint16_t);		// type
+	sz += sizeof(uint8_t);		// type
 	sz += sizeof(uint8_t);		// align
 	sz += sizeof(uint32_t);		// color
 	sz += sizeof(uint16_t);		// size
@@ -25,7 +25,7 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	uint16_t id = label->GetID();
 	pack(id, ptr);
 
-	uint16_t type = TYPE_LABEL;
+	uint8_t type = TYPE_LABEL;
 	pack(type, ptr);
 
 	uint8_t align = (label->align_hori | (label->align_vert << 4));

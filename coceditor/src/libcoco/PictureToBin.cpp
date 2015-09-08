@@ -9,7 +9,7 @@ int PictureToBin::Size(const PackPicture* pic)
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);		// id
-	sz += sizeof(uint16_t);		// type
+	sz += sizeof(uint8_t);		// type
 	sz += sizeof(uint16_t);		// quads.size();
 	sz += SizeQuad() * pic->quads.size();
 	return sz;
@@ -20,7 +20,7 @@ void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, const d2d::Textur
 	uint16_t id = pic->GetID();
 	pack(id, ptr);
 
-	uint16_t type = TYPE_PICTURE;
+	uint8_t type = TYPE_PICTURE;
 	pack(type, ptr);
 
 	uint16_t sz = pic->quads.size();

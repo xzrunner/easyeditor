@@ -53,7 +53,7 @@ void UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Imag
 	uint16_t id;
 	unpack(id, ptr);
 
-	uint16_t type;
+	uint8_t type;
 	unpack(type, ptr);
 
 	IPackNode* node = NULL;

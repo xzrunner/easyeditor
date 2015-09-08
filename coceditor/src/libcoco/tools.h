@@ -24,26 +24,23 @@ enum TextureType
 	TT_PKM
 };
 
-template <class T>
-void endswap(T* objp)
-{
-	unsigned char* memp = reinterpret_cast<unsigned char*>(objp);
-	std::reverse(memp, memp + sizeof(T));
-}
+// template <class T>
+// void endswap(T* objp)
+// {
+// 	unsigned char* memp = reinterpret_cast<unsigned char*>(objp);
+// 	std::reverse(memp, memp + sizeof(T));
+// }
 
 template<typename T>
 inline void pack(const T& d, uint8_t** ptr) {
-	T tmp = d;
-	endswap(&tmp);
-	memcpy(*ptr, &tmp, sizeof(tmp));
-	*ptr += sizeof(tmp);
+	memcpy(*ptr, &d, sizeof(d));
+	*ptr += sizeof(d);
 }
 
 template<typename T>
 inline void unpack(T& d, uint8_t** ptr) {
 	memcpy(&d, *ptr, sizeof(d));
 	*ptr += sizeof(d);
-	endswap(&d);
 }
 
 template<typename T>
