@@ -51,7 +51,7 @@
 #include "LRExpansion.h"
 #include "ImageVerticalFlip.h"
 #include "PackLuaDescFile.h"
-#include "PackLuaDescFileNew.h"
+#include "PackEP.h"
 #include "UnpackLuaDescFile.h"
 
 namespace edb
@@ -109,7 +109,7 @@ void CommandLoader::Init()
 	fc->Register(LRExpansion::Create());
 	fc->Register(ImageVerticalFlip::Create());
 	fc->Register(PackLuaDescFile::Create());
-	fc->Register(PackLuaDescFileNew::Create());
+	fc->Register(PackEP::Create());
 	fc->Register(UnpackLuaDescFile::Create());
 }
 

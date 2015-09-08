@@ -58,8 +58,13 @@ void PackCoco::Trigger(const std::string& config_path)
 	while (!pkg_val.isNull()) {
 		Prepare(pkg_val, config_dir);
  		PackTexture(pkg_val, config_dir, /*trim*/NULL);
- 	 	PackLuaFile(pkg_val, config_dir);
-		PackBinFiles(pkg_val, config_dir);
+
+// 		// old
+//  	PackLuaFile(pkg_val, config_dir);
+// 		PackBinFiles(pkg_val, config_dir);
+
+		// new 
+		PackLuaAndBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
 	}
@@ -487,6 +492,16 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const std::string& confi
 		epbin::BinaryB4R bin(img_files, id_filepath, tex_type == epbin::TT_PVR);
 		bin.Pack(dst_name + ".b4r", true);
 	}
+}
+
+void PackCoco::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& config_dir) const
+{
+	std::string name = pkg_val["name"].asString();
+	std::string output_dir = ConnectCfgDir(config_dir, pkg_val["output dir"].asString());
+	std::string output_name = output_dir + "\\" + name;
+
+	libcoco::CocoPacker packer(config_dir, output_name, output_dir);
+	packer.OutputBin(output_name, true, libcoco::TT_PNG8);
 }
 
 void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& config_dir, 

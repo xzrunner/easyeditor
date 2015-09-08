@@ -1,5 +1,5 @@
-#ifndef _EASYDB_PACK_LUA_DESC_FILE_NEW_H_
-#define _EASYDB_PACK_LUA_DESC_FILE_NEW_H_
+#ifndef _EASYDB_PACK_EP_H_
+#define _EASYDB_PACK_EP_H_
 
 #include "ICommand.h"
 
@@ -9,10 +9,10 @@
 namespace edb
 {
 
-class PackLuaDescFileNew : public ICommand
+class PackEP : public ICommand
 {
 public:
-	PackLuaDescFileNew() {}
+	PackEP() {}
 
 	//
 	// interface ITask
@@ -22,13 +22,13 @@ public:
 	virtual std::string Usage() const;
 	virtual void Run(int argc, char *argv[]);
 
-	static ICommand* Create() { return new PackLuaDescFileNew(); }
+	static ICommand* Create() { return new PackEP(); }
 
 	void Trigger(const std::string& json_dir, const std::string& tp_json,
-		const std::string& tp_dir, const std::string& out_file);
+		const std::string& tp_dir, const std::string& out_file, const std::string& type);
 
-}; // PackLuaDescFileNew
+}; // PackEP
 
 }
 
-#endif // _EASYDB_PACK_LUA_DESC_FILE_NEW_H_
+#endif // _EASYDB_PACK_EP_H_

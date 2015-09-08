@@ -357,19 +357,19 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\PackEP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\PackEP.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\PackLuaDescFile.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\PackLuaDescFile.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\PackLuaDescFileNew.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\PackLuaDescFileNew.h"
 						>
 					</File>
 					<File

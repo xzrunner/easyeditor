@@ -24,7 +24,8 @@ public:
 	static ICommand* Create() { return new LRPacker(); }
 
 private:
-	void Run(const std::string& filepath);
+	void PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
+		const std::string& out_dir);
 
 }; // LRPacker
 
