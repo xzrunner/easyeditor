@@ -3,6 +3,8 @@
 #include "PackNodeFactory.h"
 #include "ExportNameSet.h"
 
+#include <easycomplex.h>
+
 namespace libcoco
 {
 

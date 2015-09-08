@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\external;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyparticle3d\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\external;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;..\..\..\..\easyimage\src;..\..\..\..\epbin\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easyshape\src;..\..\..\..\easytexture\src;..\..\..\..\easyicon\src;..\..\..\..\easyparticle3d\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -346,10 +346,50 @@
 						RelativePath="..\..\..\src\libcoco\PackParticle3D.h"
 						>
 					</File>
+					<Filter
+						Name="lua"
+						>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DFromLua.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DFromLua.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DToLuaString.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DToLuaString.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="bin"
+						>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DFromBin.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DFromBin.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DToBin.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libcoco\Particle3DToBin.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
-				Name="packer"
+				Name="builder"
 				>
 				<File
 					RelativePath="..\..\..\src\libcoco\ExportNameSet.cpp"
@@ -361,14 +401,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libcoco\INodeBuilder.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcoco\PackNodeFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcoco\PackNodeFactory.h"
 					>
 				</File>
 				<Filter
@@ -450,23 +482,27 @@
 				<Filter
 					Name="particle3d"
 					>
+					<File
+						RelativePath="..\..\..\src\libcoco\Particle3DBuilder.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcoco\Particle3DBuilder.h"
+						>
+					</File>
 				</Filter>
-			</Filter>
-			<Filter
-				Name="unpacker"
-				>
-				<File
-					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="pack"
 				>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackNodeFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\PackNodeFactory.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\libcoco\PackToBin.cpp"
 					>
@@ -505,6 +541,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libcoco\UnpackFromLua.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcoco\UnpackNodeFactory.h"
 					>
 				</File>
 			</Filter>

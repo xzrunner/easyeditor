@@ -316,6 +316,11 @@ void ParticleSystem::DelAllSymbol()
 	m_ps->cfg->symbol_count = 0;
 }
 
+const ps_cfg_3d* ParticleSystem::GetConfig() const
+{
+	return m_ps->cfg;
+}
+
 void ParticleSystem::Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder) const
 {
 	if (m_anim_recorder) {

@@ -69,6 +69,8 @@ public:
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 
+	const ps_cfg_3d* GetConfig() const;
+
 private:
 	void Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
 

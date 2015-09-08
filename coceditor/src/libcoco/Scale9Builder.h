@@ -3,7 +3,9 @@
 
 #include "INodeBuilder.h"
 
-#include <easyscale9.h>
+#include <map>
+
+namespace escale9 { class Sprite; class Symbol; }
 
 namespace libcoco
 {

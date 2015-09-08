@@ -3,10 +3,6 @@
 
 #include "ExportNameSet.h"
 
-namespace ecomplex { class Symbol; }
-namespace libanim { class Symbol; }
-namespace ebuilder { class CodeGenerator; }
-
 namespace libcoco
 {
 
@@ -14,24 +10,28 @@ class IPackNode;
 
 class INodeBuilder;
 
+// picture
 class ImageBuilder;
 class Scale9Builder;
 class IconBuilder;
 class TextureBuilder;
 
+// label
 class LabelBuilder;
 
+// animation
 class ComplexBuilder;
 class AnimBuilder;
 class Terrain2DBuilder;
+
+// particle3d
+class Particle3DBuilder;
 
 class PackNodeFactory
 {
 public:
 	const IPackNode* Create(const d2d::ISprite* spr);	
-
-	void CreateComplex(const ecomplex::Symbol* complex);
-	void CreateAnim(const libanim::Symbol* anim);
+	const IPackNode* Create(const d2d::ISymbol* symbol);	
 
 	void GetAllNodes(std::vector<IPackNode*>& nodes) const;
 
@@ -69,6 +69,9 @@ private:
 	ComplexBuilder* m_complex_builder;
 	AnimBuilder* m_anim_builder;
 	Terrain2DBuilder* m_terrain2d_builder;
+
+	// particle3d
+	Particle3DBuilder* m_particle3d_builder;
 
 private:
 	static PackNodeFactory* m_instance;

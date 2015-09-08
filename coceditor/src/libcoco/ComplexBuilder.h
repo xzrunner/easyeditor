@@ -1,11 +1,11 @@
 #ifndef _LIBCOCO_COMPLEX_BUILDER_H_
 #define _LIBCOCO_COMPLEX_BUILDER_H_
 
+#include "INodeBuilder.h"
+
 #include <map>
 
-#include <easycomplex.h>
-
-#include "INodeBuilder.h"
+namespace ecomplex { class Symbol; }
 
 namespace libcoco
 {

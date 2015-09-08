@@ -2,6 +2,8 @@
 #include "PackAnimation.h"
 #include "PackPicture.h"
 
+#include <easyterrain2d.h>
+
 namespace libcoco
 {
 

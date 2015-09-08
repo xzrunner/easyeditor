@@ -2,6 +2,7 @@
 #include "PackPicture.h"
 
 #include <easyshape.h>
+#include <easytexture.h>
 
 namespace libcoco
 {

@@ -52,7 +52,6 @@ void AnimBuilder::Load(const libanim::Symbol* symbol, PackAnimation* anim)
 {
 	m_export_set.LoadExport(symbol, anim);
 
-	PackNodeFactory* factory = PackNodeFactory::Instance();
 	for (int i = 1, n = symbol->getMaxFrameIndex(); i <= n; ++i)
 	{
 		PackAnimation::Frame frame;

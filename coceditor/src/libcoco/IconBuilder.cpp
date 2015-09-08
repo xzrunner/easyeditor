@@ -6,6 +6,8 @@
 #include "IPackNode.h"
 #include "PackPicture.h"
 
+#include <easyicon.h>
+
 namespace libcoco
 {
 

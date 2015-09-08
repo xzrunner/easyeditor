@@ -3,7 +3,9 @@
 
 #include "INodeBuilder.h"
 
-#include <easyicon.h>
+#include <map>
+
+namespace eicon { class Sprite; class Symbol; }
 
 namespace libcoco
 {

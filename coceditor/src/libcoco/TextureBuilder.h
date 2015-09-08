@@ -3,7 +3,9 @@
 
 #include "INodeBuilder.h"
 
-#include <easytexture.h>
+#include <map>
+
+namespace etexture { class Symbol; }
 
 namespace libcoco
 {

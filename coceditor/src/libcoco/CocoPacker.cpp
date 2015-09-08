@@ -88,9 +88,9 @@ void CocoPacker::Pack() const
 	{
 		const d2d::ISymbol* symbol = m_symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
-			factory->CreateComplex(complex);
+			factory->Create(complex);
 		} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol)) {
-			factory->CreateAnim(anim);
+			factory->Create(anim);
 		} else {
 			throw d2d::Exception("CocoPacker::Pack unhandled type.");
 		}

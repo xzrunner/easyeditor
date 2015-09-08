@@ -3,7 +3,9 @@
 
 #include "INodeBuilder.h"
 
-#include <easyanim.h>
+#include <map>
+
+namespace libanim { class Symbol; }
 
 namespace libcoco
 {

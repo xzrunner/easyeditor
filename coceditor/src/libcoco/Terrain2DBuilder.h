@@ -3,7 +3,10 @@
 
 #include "INodeBuilder.h"
 
-#include <easyterrain2d.h>
+#include <map>
+#include <vector>
+
+namespace eterrain2d { class Symbol; }
 
 namespace libcoco
 {

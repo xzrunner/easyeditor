@@ -36,6 +36,7 @@ public:
 	void Start() const;
 
 	ParticleSystem* GetPS() { return m_ps; }
+	const ParticleSystem* GetPS() const { return m_ps; }
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 

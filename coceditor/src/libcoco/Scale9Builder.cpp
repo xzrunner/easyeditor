@@ -3,6 +3,8 @@
 #include "IPackNode.h"
 #include "PackPicture.h"
 
+#include <easyscale9.h>
+
 namespace libcoco
 {
 
