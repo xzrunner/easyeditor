@@ -8,28 +8,22 @@ namespace libcoco
 
 int AnimFromBin::Size(const PackAnimation* anim)
 {
-	size_t sz = 0;
+	int sz = SIZEOF_ANIMATION;
 
 	// components
-	sz += sizeof(uint16_t);
+	sz += anim->components.size() * SIZEOF_COMPONENT;
 	for (int i = 0, n = anim->components.size(); i < n; ++i) {
-		sz += sizeof(uint16_t);		// id
-		sz += sizeof_pack_str(anim->components[i].name);
+		sz += sizeof_unpack_str(anim->components[i].name);
 	}
 
 	// actions
-	sz += sizeof(uint16_t);
+	sz += anim->actions.size() * SIZEOF_ACTION;
 	for (int i = 0, n = anim->actions.size(); i < n; ++i) {
-		sz += sizeof_pack_str(anim->actions[i].name);
-		sz += sizeof(uint16_t);		// size
+		sz += sizeof_unpack_str(anim->actions[i].name);
 	}
 
 	// frames
-	sz += sizeof(uint16_t);
-	sz += SIZEOF_ANIMATION 
-		+ anim->frames.size() * SIZEOF_FRAME
-		+ anim->actions.size() * SIZEOF_ACTION
-		+ anim->components.size() * SIZEOF_COMPONENT;
+	sz += anim->frames.size() * SIZEOF_FRAME;
 	for (int i = 0, n = anim->frames.size(); i < n; ++i) {
 		sz += FrameSize(anim->frames[i]);
 	}
@@ -47,15 +41,13 @@ void AnimFromBin::Unpack(uint8_t** ptr, PackAnimation* anim)
 int AnimFromBin::FrameSize(const PackAnimation::Frame& frame)
 {
 	size_t sz = 0;
-	sz += sizeof(uint16_t);
+	sz += frame.parts.size() * SIZEOF_PART;
 	for (int i = 0, n = frame.parts.size(); i < n; ++i) {
 		const PackAnimation::Part& part = frame.parts[i];
-// 		if (part.only_number) {
-// 			sz += SIZEOF_PART;
-// 		} else {
-			sz += SIZEOF_PART;
-			sz += sizeof(int) * 6;	// matrix
-//		}
+		if (!PackAnimation::IsMatrixIdentity(part.t.mat)) {
+//			sz += SIZEOF_MATRIX;
+			sz += sizeof(int) * 6;
+		}
 	}
 	return sz;
 }

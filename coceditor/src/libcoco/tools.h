@@ -59,6 +59,15 @@ inline int sizeof_pack_str(const std::string& str) {
 	}
 }
 
+inline int sizeof_unpack_str(const std::string& str) {
+	if (str.empty()) {
+		return 0;
+	}
+	int sz = sizeof_pack_str(str);
+	sz = (sz+1+3) & ~3;
+	return sz;
+}
+
 inline void pack_str(const std::string& str, uint8_t** ptr) {
 	if (str.empty()) {
 		uint8_t c = 255;

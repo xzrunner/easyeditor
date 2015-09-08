@@ -2,6 +2,7 @@
 #include "PackNodeFactory.h"
 #include "IPackNode.h"
 #include "tools.h"
+#include "spritepack.h"
 
 #include <epbin.h>
 
@@ -37,6 +38,10 @@ void PackToBin::PackEPE(const std::string& filepath,
 	uint16_t maxid = nodes[nodes.size() - 1]->GetID();
 	uint16_t tex = textures.size();
 	uint32_t unpack_sz = 0;
+	unpack_sz += SIZEOF_PACK + tex * sizeof(int);
+	int align_n = (maxid + 1 + 3) & ~3;
+	unpack_sz += align_n * sizeof(uint8_t);
+	unpack_sz += (maxid + 1) * SIZEOF_POINTER;
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
 		unpack_sz += nodes[i]->SizeOfUnpackFromBin();
 	}
@@ -71,6 +76,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 		pack(id, &ptr);
 		pack_str(itr->first, &ptr);
 	}
+
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
 		nodes[i]->PackToBin(&ptr, tp);
 	}
