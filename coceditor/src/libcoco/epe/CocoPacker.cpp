@@ -158,7 +158,7 @@ void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		assert(itr != m_mapSpriteID.end());
 		std::string sid = wxString::FromDouble(itr->second);
-		m_gen.line(lua::assign("id", sid.c_str()) + ",");
+		m_gen.line(lua::assign("id", sid) + ",");
 	}
 
 	// tex
@@ -176,8 +176,8 @@ void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
 	std::string sx2 = wxString::FromDouble(x2), sy2 = wxString::FromDouble(y2);
 	std::string sx3 = wxString::FromDouble(x3), sy3 = wxString::FromDouble(y3);
-	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
-		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
+	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0, sy0, 
+		sx1, sy1, sx2, sy2, sx3, sy3));
 
 	// screen
 	const float hw = pr->xLength() * 0.5f,
@@ -236,10 +236,10 @@ void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 	sy2 = wxString::FromDouble(screen[2].y);
 	sx3 = wxString::FromDouble(screen[3].x);
 	sy3 = wxString::FromDouble(screen[3].y);
-	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
-		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
+	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0, sy0, 
+		sx1, sy1, sx2, sy2, sx3, sy3));
 
-	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
+	lua::tableassign(m_gen, "", 3, assignTex, assignSrc, assignScreen);
 }
 
 void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
@@ -254,7 +254,7 @@ void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
 		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 		assert(itr != m_mapSymbolID.end());
 		std::string sid = wxString::FromDouble(itr->second);
-		m_gen.line(lua::assign("id", sid.c_str()) + ",");
+		m_gen.line(lua::assign("id", sid) + ",");
 	}
 
 	// tex
@@ -272,8 +272,8 @@ void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
 	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
 	std::string sx2 = wxString::FromDouble(x2), sy2 = wxString::FromDouble(y2);
 	std::string sx3 = wxString::FromDouble(x3), sy3 = wxString::FromDouble(y3);
-	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
-		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
+	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0, sy0, 
+		sx1, sy1, sx2, sy2, sx3, sy3));
 
 	// screen
 	const float hw = pr->xLength() * 0.5f,
@@ -300,10 +300,10 @@ void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
 	sy2 = wxString::FromDouble(screen[2].y);
 	sx3 = wxString::FromDouble(screen[3].x);
 	sy3 = wxString::FromDouble(screen[3].y);
-	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
-		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
+	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0, sy0, 
+		sx1, sy1, sx2, sy2, sx3, sy3));
 
-	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
+	lua::tableassign(m_gen, "", 3, assignTex, assignSrc, assignScreen);
 }
 
 void CocoPacker::resolveFont(const d2d::FontSprite* sprite)
@@ -318,7 +318,7 @@ void CocoPacker::resolveFont(const d2d::FontSprite* sprite)
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		assert(itr != m_mapSpriteID.end());
 		std::string sid = wxString::FromDouble(itr->second);
-		m_gen.line(lua::assign("id", sid.c_str()) + ",");
+		m_gen.line(lua::assign("id", sid) + ",");
 	}
 
 	std::string aFont = lua::assign("font", "\""+sprite->font+"\"");
@@ -348,7 +348,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 	assert(itr != m_mapSymbolID.end());
 	std::string sid = wxString::FromDouble(itr->second);
-	m_gen.line(lua::assign("id", sid.c_str()) + ",");
+	m_gen.line(lua::assign("id", sid) + ",");
 
 	// clipbox
 	const d2d::Rect& cb = symbol->m_clipbox;
@@ -358,7 +358,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 		std::string height = wxString::FromDouble(cb.yMax - cb.yMin);
 		std::string left = wxString::FromDouble(cb.xMin);
 		std::string top = wxString::FromDouble(-cb.yMax);
-		lua::tableassign(m_gen, "clipbox", 4, width.c_str(), height.c_str(), left.c_str(), top.c_str());
+		lua::tableassign(m_gen, "clipbox", 4, width, height, left, top);
 	}
 
 	// component
@@ -429,7 +429,7 @@ void CocoPacker::resolveAnimation(const libanim::Symbol* symbol)
 	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 	assert(itr != m_mapSymbolID.end());
 	std::string sid = wxString::FromDouble(itr->second);
-	m_gen.line(lua::assign("id", sid.c_str()) + ",");
+	m_gen.line(lua::assign("id", sid) + ",");
 
 	// component
 	std::vector<int> ids;
@@ -486,7 +486,7 @@ void CocoPacker::resolveAnimation(const escale9::Symbol* symbol)
  	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
  	assert(itr != m_mapSymbolID.end());
  	std::string sid = wxString::FromDouble(itr->second);
- 	m_gen.line(lua::assign("id", sid.c_str()) + ",");
+ 	m_gen.line(lua::assign("id", sid) + ",");
  
  	// component
  	std::vector<int> ids;
@@ -597,11 +597,11 @@ void CocoPacker::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vect
 		if (!sprite->name.empty() && sprite->name[0] != '_')
 		{
 			std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-			lua::tableassign(m_gen, "", 2, aName.c_str(), aID.c_str());
+			lua::tableassign(m_gen, "", 2, aName, aID);
 		}
 		else
 		{
-			lua::tableassign(m_gen, "", 1, aID.c_str());
+			lua::tableassign(m_gen, "", 1, aID);
 		}
 
 		std::vector<std::string> names;
@@ -621,11 +621,11 @@ void CocoPacker::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vect
 			if (!sprite->name.empty() && sprite->name[0] != '_')
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-				lua::tableassign(m_gen, "", 2, aName.c_str(), aID.c_str());
+				lua::tableassign(m_gen, "", 2, aName, aID);
 			}
 			else
 			{
-				lua::tableassign(m_gen, "", 1, aID.c_str());
+				lua::tableassign(m_gen, "", 1, aID);
 			}
 
 			order.push_back(std::make_pair(id, sprite->name));
@@ -696,18 +696,18 @@ void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool 
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
 		m[i] = wxString::FromDouble(mat[i]);
-	std::string smat = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
-		m[3].c_str(), m[4].c_str(), m[5].c_str());
+	std::string smat = lua::tableassign("", 6, m[0], m[1], m[2], 
+		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
 	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
 		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
-		lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
+		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
-		lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
+		lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
 }
 
 void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
@@ -720,8 +720,8 @@ void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
 		m[i] = wxString::FromDouble(mat[i]);
-	std::string smat = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
-		m[3].c_str(), m[4].c_str(), m[5].c_str());
+	std::string smat = lua::tableassign("", 6, m[0], m[1], m[2], 
+		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
 	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
@@ -729,16 +729,16 @@ void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
 		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
 		if (sprite->clip)
-			lua::tableassign(m_gen, "", 5, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str(), "clip=true");
+			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else
-			lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
+			lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
 	{
 		if (sprite->clip)
-			lua::tableassign(m_gen, "", 3, assignIndex.c_str(), assignMat.c_str(), "clip=true");
+			lua::tableassign(m_gen, "", 3, assignIndex, assignMat, "clip=true");
 		else
-			lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
+			lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
 	}
 }
 
@@ -764,11 +764,11 @@ void CocoPacker::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
 		m[i] = wxString::FromDouble(mat[i]);
-	std::string smat = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
-		m[3].c_str(), m[4].c_str(), m[5].c_str());
+	std::string smat = lua::tableassign("", 6, m[0], m[1], m[2], 
+		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
+	lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
 }
 
 void CocoPacker::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/)

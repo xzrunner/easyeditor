@@ -28,10 +28,10 @@ void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& g
 
 			std::string id_str = lua::assign("id", d2d::StringTools::ToString(comp.node->GetID()));
 			if (comp.name.empty()) {
-				lua::tableassign(gen, "", 1, id_str.c_str());
+				lua::tableassign(gen, "", 1, id_str);
 			} else {
 				std::string name_str = lua::assign("name", "\""+comp.name+"\"");
-				lua::tableassign(gen, "", 2, id_str.c_str(), name_str.c_str());
+				lua::tableassign(gen, "", 2, id_str, name_str);
 			}
 		}
 	}
@@ -81,8 +81,7 @@ void AnimToLuaString::PackFrame(const PackAnimation::Frame& frame, ebuilder::Cod
 			for (int i = 0; i < 6; ++i) {
 				m[i] = d2d::StringTools::ToString(t.mat[i]);
 			}
-			std::string mat_str = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
-				m[3].c_str(), m[4].c_str(), m[5].c_str());
+			std::string mat_str = lua::tableassign("", 6, m[0], m[1], m[2], m[3], m[4], m[5]);
 			params.push_back(lua::assign("mat", mat_str));
 		}
 

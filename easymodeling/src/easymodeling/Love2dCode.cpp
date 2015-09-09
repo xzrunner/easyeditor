@@ -85,7 +85,7 @@ void Love2dCode::resolveLoadImages()
 		// "path"
 		std::string path = "\""+d2d::FilenameTools::getFilenameWithExtension(itr->second)+"\"";
 		// love.graphics.newImage("path"),
-		std::string str = lua::call("", "love.graphics.newImage", 1, path.c_str()) + ",";
+		std::string str = lua::call("", "love.graphics.newImage", 1, path) + ",";
 		// name = love.graphics.newImage("path"),
 		lua::assign(gen, "", itr->first, str);
 	}
@@ -105,7 +105,7 @@ void Love2dCode::resolveLoadWorld()
 	// world = love.physics.newWorld(x, y)
 	std::string x = wxString::FromDouble(world->gravity.x, 1);
 	std::string y = wxString::FromDouble(-world->gravity.y, 1); // love2d's origin is left-top
-	lua::assign(gen, "", "world", lua::call("", "love.physics.newWorld", 2, x.c_str(), y.c_str()));
+	lua::assign(gen, "", "world", lua::call("", "love.physics.newWorld", 2, x, y));
 	// world:setAllowSleeping()
 	lua::call("world", "setAllowSleeping", 1, world->allowSleep ? "true" : "false");
 }
@@ -149,14 +149,14 @@ void Love2dCode::resolveLoadBodies()
 			type = "\"kinematic\"";
 			break;
 		}
-		std::string newBody = lua::call("", "love.physics.newBody", 4, "world", x.c_str(), y.c_str(), type.c_str());
+		std::string newBody = lua::call("", "love.physics.newBody", 4, "world", x, y, type);
 		lua::assign(gen, "", name+".body", newBody);
 
 		if (body->sprite->GetAngle() != 0)
 		{
 			// actor.body:setAngle(angle)
 			std::string angle = wxString::FromDouble(body->sprite->GetAngle(), 2);
-			lua::call(gen, name+".body", "setAngle", 1, angle.c_str());
+			lua::call(gen, name+".body", "setAngle", 1, angle);
 		}
 
 		// actor.image = image
@@ -167,14 +167,14 @@ void Love2dCode::resolveLoadBodies()
 		{
 			// actor.body:setLinearDamping(damping)
 			std::string damping = wxString::FromDouble(body->linearDamping, 1);
-			lua::call(gen, name+".body", "setLinearDamping", 1, damping.c_str());
+			lua::call(gen, name+".body", "setLinearDamping", 1, damping);
 		}
 
 		if (body->angularDamping != 0)
 		{
 			// actor.body:setAngularDamping(damping)
 			std::string damping = wxString::FromDouble(body->angularDamping, 1);
-			lua::call(gen, name+".body", "setAngularDamping", 1, damping.c_str());
+			lua::call(gen, name+".body", "setAngularDamping", 1, damping);
 		}
 
 		if (!body->allowSleep)
@@ -199,14 +199,14 @@ void Love2dCode::resolveLoadBodies()
 		{
 			// actor.body:setGravityScale(scale)
 			std::string scale = wxString::FromDouble(body->gravityScale);
-			lua::call(gen, name+".body", "setGravityScale", 1, scale.c_str());
+			lua::call(gen, name+".body", "setGravityScale", 1, scale);
 		}
 
 		// resolve fixtures
 		resolveLoadFixtures(body);
 
 		// table.insert(actors, actor)
-		lua::call(gen, "", "table.insert", 2, "actors", name.c_str());
+		lua::call(gen, "", "table.insert", 2, "actors", name);
 	}
 }
 
@@ -225,14 +225,14 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 			if (circle->center.x == 0 && circle->center.y == 0)
 			{
 				// love.physics.newCircleShape(radius)
-				newShape = lua::call("", "love.physics.newCircleShape", 1, radius.c_str());
+				newShape = lua::call("", "love.physics.newCircleShape", 1, radius);
 			}
 			else
 			{
 				// love.physics.newCircleShape(x, y, radius)
 				std::string x = wxString::FromDouble(circle->center.x, 1);
 				std::string y = wxString::FromDouble(-circle->center.y, 1);
-				newShape = lua::call("", "love.physics.newCircleShape", 3, x.c_str(), y.c_str(), radius.c_str());
+				newShape = lua::call("", "love.physics.newCircleShape", 3, x, y, radius);
 			}
 		}
 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
@@ -242,7 +242,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				y = wxString::FromDouble(-(rect->m_rect.yMax + rect->m_rect.yMin) * 0.5f, 1);
 			std::string w = wxString::FromDouble(rect->m_rect.xMax - rect->m_rect.xMin, 1),
 				h = wxString::FromDouble(rect->m_rect.yMax - rect->m_rect.yMin, 1);
-			newShape = lua::call("", "love.physics.newRectangleShape", 4, x.c_str(), y.c_str(), w.c_str(), h.c_str());
+			newShape = lua::call("", "love.physics.newRectangleShape", 4, x, y, w, h);
 		}
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
@@ -258,7 +258,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				else
 					strParams += ", "+x+", "+y;
 			}
-			newShape = lua::call("", "love.physics.newPolygonShape", 1, strParams.c_str());
+			newShape = lua::call("", "love.physics.newPolygonShape", 1, strParams);
 		}
 		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
@@ -273,7 +273,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				std::string y = wxString::FromDouble(-vertices[i].y);
 				strParams += ", "+x+", "+y;
 			}
-			newShape = lua::call("", "love.physics.newChainShape", 1, strParams.c_str());
+			newShape = lua::call("", "love.physics.newChainShape", 1, strParams);
 		}
 
 
@@ -281,25 +281,25 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		lua::assign(gen, "", "shape", newShape);
 		// local fixture = love.physics.newFixture(body, shape)
 		std::string sBody = d2d::FilenameTools::getFilename(body->sprite->GetSymbol().GetFilepath())+".body";
-		lua::assign(gen, "", "fixture", lua::call("", "love.physics.newFixture", 2, sBody.c_str(), "shape"));
+		lua::assign(gen, "", "fixture", lua::call("", "love.physics.newFixture", 2, sBody, "shape"));
 
 		if (fData->density != 1)
 		{
 			// fixture:setDensity(density)
 			std::string density = wxString::FromDouble(fData->density, 1);
-			lua::call(gen, "fixture", "setDensity", 1, density.c_str());
+			lua::call(gen, "fixture", "setDensity", 1, density);
 		}
 		if (fData->friction != 0.2f)
 		{
 			// fixture:setFriction(friction)
 			std::string friction = wxString::FromDouble(fData->friction, 1);
-			lua::call(gen, "fixture", "setFriction", 1, friction.c_str());
+			lua::call(gen, "fixture", "setFriction", 1, friction);
 		}
 		if (fData->restitution != 0)
 		{
 			// fixture:setRestitution(restitution)
 			std::string restitution = wxString::FromDouble(fData->restitution, 1);
-			lua::call(gen, "fixture", "setRestitution", 1, restitution.c_str());
+			lua::call(gen, "fixture", "setRestitution", 1, restitution);
 		}
 		if (fData->isSensor)
 		{
@@ -312,7 +312,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 			std::string categoryBits = wxString::FromDouble(fData->categoryBits);
 			std::string maskBits = wxString::FromDouble(fData->maskBits);
 			std::string groupIndex = wxString::FromDouble(fData->groupIndex);
-			lua::call(gen, "fixture", "setFilterData", 3, categoryBits.c_str(), maskBits.c_str(), groupIndex.c_str());
+			lua::call(gen, "fixture", "setFilterData", 3, categoryBits, maskBits, groupIndex);
 		}
 	}
 }
@@ -383,7 +383,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newRevoluteJoint(body1, body2, x, y, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newRevoluteJoint", 5, 
-				body1.c_str(), body2.c_str(), x.c_str(), y.c_str(), collideConnected.c_str());
+				body1, body2, x, y, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 			if (joint->enableLimit)
@@ -396,7 +396,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 				// joint:setLimits(lowerAngle, upperAngle)
 				std::string lowerAngle = wxString::FromDouble(joint->lowerAngle, 2),
 					upperAngle = wxString::FromDouble(joint->upperAngle, 2);
-				lua::call(gen, name, "setLimits", 2, lowerAngle.c_str(), upperAngle.c_str());
+				lua::call(gen, name, "setLimits", 2, lowerAngle, upperAngle);
 			}
 			if (joint->enableMotor)
 			{
@@ -407,13 +407,13 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 			{
 				// joint:setMaxMotorTorque(maxMotorTorque)
 				std::string maxMotorTorque = wxString::FromDouble(joint->maxMotorTorque, 1);
-				lua::call(gen, name, "setMaxMotorTorque", 1, maxMotorTorque.c_str());
+				lua::call(gen, name, "setMaxMotorTorque", 1, maxMotorTorque);
 			}
 			if (joint->motorSpeed != 0)
 			{
 				// joint:setMotorSpeed(motorSpeed)
 				std::string motorSpeed = wxString::FromDouble(joint->motorSpeed, 1);
-				lua::call(gen, name, "setMotorSpeed", 1, motorSpeed.c_str());
+				lua::call(gen, name, "setMotorSpeed", 1, motorSpeed);
 			}
 		}
 		break;
@@ -433,7 +433,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newPrismaticJoint(body1, body2, xA, yA, xB, yB, ax, ay, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newPrismaticJoint", 9, 
-				body1.c_str(), body2.c_str(), xA.c_str(), yA.c_str(), xB.c_str(), yB.c_str(), ax.c_str(), ay.c_str(), collideConnected.c_str());
+				body1, body2, xA, yA, xB, yB, ax, ay, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 			if (joint->enableLimit)
@@ -446,7 +446,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 				// joint:setLimits(lowerAngle, upperAngle)
 				std::string lowerTranslation = wxString::FromDouble(joint->lowerTranslation, 2),
 					upperTranslation = wxString::FromDouble(joint->upperTranslation, 2);
-				lua::call(gen, name, "setLimits", 2, lowerTranslation.c_str(), upperTranslation.c_str());
+				lua::call(gen, name, "setLimits", 2, lowerTranslation, upperTranslation);
 			}
 			if (joint->enableMotor)
 			{
@@ -457,13 +457,13 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 			{
 				// joint:setMaxMotorForce(maxMotorForce)
 				std::string maxMotorForce = wxString::FromDouble(joint->maxMotorForce, 1);
-				lua::call(gen, name, "setMaxMotorForce", 1, maxMotorForce.c_str());
+				lua::call(gen, name, "setMaxMotorForce", 1, maxMotorForce);
 			}
 			if (joint->motorSpeed != 0)
 			{
 				// joint:setMotorSpeed(motorSpeed)
 				std::string motorSpeed = wxString::FromDouble(joint->motorSpeed, 1);
-				lua::call(gen, name, "setMotorSpeed", 1, motorSpeed.c_str());
+				lua::call(gen, name, "setMotorSpeed", 1, motorSpeed);
 			}
 		}
 		break;
@@ -480,20 +480,20 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newDistanceJoint(body1, body2, xA, yA, xB, yB, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newPrismaticJoint", 7, 
-				body1.c_str(), body2.c_str(), xA.c_str(), yA.c_str(), xB.c_str(), yB.c_str(), collideConnected.c_str());
+				body1, body2, xA, yA, xB, yB, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 			if (joint->frequencyHz != 0)
 			{
 				// joint:setFrequency(frequencyHz)
 				std::string frequencyHz = wxString::FromDouble(joint->frequencyHz, 1);
-				lua::call(gen, name, "setFrequency", 1, frequencyHz.c_str());
+				lua::call(gen, name, "setFrequency", 1, frequencyHz);
 			}
 			if (joint->dampingRatio != 0)
 			{
 				// joint:setDampingRatio(dampingRatio)
 				std::string dampingRatio = wxString::FromDouble(joint->dampingRatio, 1);
-				lua::call(gen, name, "setDampingRatio", 1, dampingRatio.c_str());
+				lua::call(gen, name, "setDampingRatio", 1, dampingRatio);
 			}
 		}
 		break;
@@ -517,7 +517,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newPulleyJoint(body1, body2, gxA, gyA, gxB, gyB, xA, yA, xB, yB, ratio, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newPulleyJoint", 12, 
-				body1.c_str(), body2.c_str(), gxA.c_str(), gyA.c_str(), gxB.c_str(), gyB.c_str(), xA.c_str(), yA.c_str(), xB.c_str(), yB.c_str(), ratio.c_str(), collideConnected.c_str());
+				body1, body2, gxA, gyA, gxB, gyB, xA, yA, xB, yB, ratio, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 		}
 		break;
@@ -540,7 +540,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newGearJoint(joint1, joint2, ratio, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newGearJoint", 4, 
-				joint1.c_str(), joint2.c_str(), ratio.c_str(), collideConnected.c_str());
+				joint1, joint2, ratio, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 		}
 		break;
@@ -555,7 +555,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newWheelJoint(body1, body2, xA, yA, ax, ay, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newWheelJoint", 7, 
-				body1.c_str(), body2.c_str(), xA.c_str(), yA.c_str(), ax.c_str(), ay.c_str(), collideConnected.c_str());
+				body1, body2, xA, yA, ax, ay, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 			if (joint->enableMotor)
@@ -567,25 +567,25 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 			{
 				// joint:setMaxMotorTorque(maxMotorForce)
 				std::string maxMotorTorque = wxString::FromDouble(joint->maxMotorTorque, 1);
-				lua::call(gen, name, "setMaxMotorTorque", 1, maxMotorTorque.c_str());
+				lua::call(gen, name, "setMaxMotorTorque", 1, maxMotorTorque);
 			}
 			if (joint->motorSpeed != 0)
 			{
 				// joint:setMotorSpeed(motorSpeed)
 				std::string motorSpeed = wxString::FromDouble(joint->motorSpeed, 1);
-				lua::call(gen, name, "setMotorSpeed", 1, motorSpeed.c_str());
+				lua::call(gen, name, "setMotorSpeed", 1, motorSpeed);
 			}
 			if (joint->frequencyHz != 2.0f)
 			{
 				// joint:setSpringFrequency(frequencyHz)
 				std::string frequencyHz = wxString::FromDouble(joint->frequencyHz, 1);
-				lua::call(gen, name, "setSpringFrequency", 1, frequencyHz.c_str());
+				lua::call(gen, name, "setSpringFrequency", 1, frequencyHz);
 			}
 			if (joint->dampingRatio != 0.7f)
 			{
 				// joint:setSpringDampingRatio(dampingRatio)
 				std::string dampingRatio = wxString::FromDouble(joint->dampingRatio, 1);
-				lua::call(gen, name, "setSpringDampingRatio", 1, dampingRatio.c_str());
+				lua::call(gen, name, "setSpringDampingRatio", 1, dampingRatio);
 			}
 		}
 		break;
@@ -602,20 +602,20 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newWeldJoint(body1, body2, xA, yA, xB, yB, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newWeldJoint", 7, 
-				body1.c_str(), body2.c_str(), xA.c_str(), yA.c_str(), xB.c_str(), yB.c_str(), collideConnected.c_str());
+				body1, body2, xA, yA, xB, yB, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 			if (joint->frequencyHz != 0)
 			{
 				// joint:setFrequency(frequencyHz)
 				std::string frequencyHz = wxString::FromDouble(joint->frequencyHz, 1);
-				lua::call(gen, name, "setFrequency", 1, frequencyHz.c_str());
+				lua::call(gen, name, "setFrequency", 1, frequencyHz);
 			}
 			if (joint->dampingRatio != 0)
 			{
 				// joint:setDampingRatio(dampingRatio)
 				std::string dampingRatio = wxString::FromDouble(joint->dampingRatio, 1);
-				lua::call(gen, name, "setDampingRatio", 1, dampingRatio.c_str());
+				lua::call(gen, name, "setDampingRatio", 1, dampingRatio);
 			}
 		}
 		break;
@@ -632,20 +632,20 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newFrictionJoint(body1, body2, xA, yA, xB, yB, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newFrictionJoint", 7, 
-				body1.c_str(), body2.c_str(), xA.c_str(), yA.c_str(), xB.c_str(), yB.c_str(), collideConnected.c_str());
+				body1, body2, xA, yA, xB, yB, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 			if (joint->maxForce != 0)
 			{
 				// joint:setMaxForce(maxForce)
 				std::string maxForce = wxString::FromDouble(joint->maxForce, 1);
-				lua::call(gen, name, "setMaxForce", 1, maxForce.c_str());
+				lua::call(gen, name, "setMaxForce", 1, maxForce);
 			}
 			if (joint->maxTorque != 0)
 			{
 				// joint:setMaxTorque(maxTorque)
 				std::string maxTorque = wxString::FromDouble(joint->maxTorque, 1);
-				lua::call(gen, name, "setMaxTorque", 1, maxTorque.c_str());
+				lua::call(gen, name, "setMaxTorque", 1, maxTorque);
 			}
 		}
 		break;
@@ -664,7 +664,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 
 			// local joint = love.physics.newRopeJoint(body1, body2, xA, yA, xB, yB, maxLength, collideConnected)
 			std::string newJoint = lua::call("", "love.physics.newFrictionJoint", 8, 
-				body1.c_str(), body2.c_str(), xA.c_str(), yA.c_str(), xB.c_str(), yB.c_str(), maxLength.c_str(), collideConnected.c_str());
+				body1, body2, xA, yA, xB, yB, maxLength, collideConnected);
 			lua::assign(gen, "local", name, newJoint);
 
 		}
@@ -708,7 +708,7 @@ void Love2dCode::resolveDraw()
 		std::string ox = "v.image:getWidth() * 0.5",
 			oy = "v.image:getHeight() * 0.5";
 		lua::call(gen, "", "love.graphics.draw", 8, "v.image", 
-			"v.body:getX()", "v.body:getY()", "v.body:getAngle()", "1", "1", ox.c_str(), oy.c_str());
+			"v.body:getX()", "v.body:getY()", "v.body:getAngle()", "1", "1", ox, oy);
 	}
 
 	// love.graphics.pop()

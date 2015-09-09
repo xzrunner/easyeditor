@@ -45,7 +45,7 @@ void Love2dCode::resolve()
 						width = wxString::FromDouble(m_packerAdapter.textures[index].region.width, 1),
 						height = wxString::FromDouble(m_packerAdapter.textures[index].region.height, 1);
 
-					lua::call(m_gen, "", "Frame", 7, time.c_str(), x.c_str(), y.c_str(), left.c_str(), low.c_str(), width.c_str(), height.c_str());
+					lua::call(m_gen, "", "Frame", 7, time, x, y, left, low, width, height);
 				}
 			}
 		}

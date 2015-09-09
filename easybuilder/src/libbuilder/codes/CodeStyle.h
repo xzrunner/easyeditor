@@ -6,12 +6,12 @@ namespace ebuilder
 {
 
 #define PARSER_PARAMS(n, str)			\
-	char* val;							\
+	std::string val;					\
 	va_list vl;							\
 	va_start(vl, (n));					\
 	for (size_t i = 0; i < (n); ++i)	\
 	{									\
-		val = va_arg(vl, char*);		\
+		val = va_arg(vl, std::string);	\
 		(str) += val;					\
 		if (i != (n) - 1)				\
 			(str) += ", ";				\

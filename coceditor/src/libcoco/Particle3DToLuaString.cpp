@@ -17,10 +17,13 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 	lua::assign_with_end(gen, "type", "\"particle3d\"");
 	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p3d->GetID()));
 
-	PackPS(p3d, gen);
-	for (int i = 0, n = p3d->components.size(); i < n; ++i) {
-		PackComponent(p3d->components[i], gen);
+	{
+		lua::TableAssign ta(gen, "component", true);
+		for (int i = 0, n = p3d->components.size(); i < n; ++i) {
+			PackComponent(p3d->components[i], gen);
+		}
 	}
+	PackPS(p3d, gen);
 
 	gen.detab();
 	gen.line("},");
@@ -28,65 +31,74 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 
 void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGenerator& gen)
 {
-	std::ostringstream ss;
+	lua::connect(gen, 2, 
+		lua::assign("emission_time", TransTime(p3d->emission_time)), 
+		lua::assign("count", p3d->count));
 
-	ss << "emission_time = \"" << TransTime(p3d->emission_time) << "\", ";
-	ss << "count = \"" << p3d->count << "\", ";
+	lua::connect(gen, 2, 
+		lua::assign("life", TransTime(p3d->life)), 
+		lua::assign("life_var", TransTime(p3d->life_var)));
 
-	ss << "life = \"" << TransTime(p3d->life) << "\", ";
-	ss << "life_var = \"" << TransTime(p3d->life_var) << "\", ";
+	lua::connect(gen, 4, 
+		lua::assign("hori", TransRadian(p3d->hori)), 
+		lua::assign("hori_var", TransRadian(p3d->hori_var)),
+		lua::assign("vert", TransRadian(p3d->vert)), 
+		lua::assign("vert_var", TransRadian(p3d->vert_var)));
 
-	ss << "hori = \"" << TransRadian(p3d->hori) << "\", ";
-	ss << "hori_var = \"" << TransRadian(p3d->hori_var) << "\", ";
-	ss << "vert = \"" << TransRadian(p3d->vert) << "\", ";
-	ss << "vert_var = \"" << TransRadian(p3d->vert_var) << "\", ";
+	lua::connect(gen, 4, 
+		lua::assign("spd", TransSpeed(p3d->spd)), 
+		lua::assign("spd_var", TransSpeed(p3d->spd_var)),
+		lua::assign("angular_spd", TransFloat(p3d->angular_spd)), 
+		lua::assign("angular_spd_var", TransFloat(p3d->angular_spd_var)));
 
-	ss << "spd = \"" << TransSpeed(p3d->spd) << "\", ";
-	ss << "spd_var = \"" << TransSpeed(p3d->spd_var) << "\", ";
-	ss << "angular_spd = \"" << TransFloat(p3d->angular_spd) << "\", ";
-	ss << "angular_spd_var = \"" << TransFloat(p3d->angular_spd_var) << "\", ";
+	lua::connect(gen, 4, 
+		lua::assign("dis_region", TransFloat(p3d->dis_region)), 
+		lua::assign("dis_region_var", TransFloat(p3d->dis_region_var)),
+		lua::assign("dis_spd", TransFloat(p3d->dis_spd)), 
+		lua::assign("dis_spd_var", TransFloat(p3d->dis_spd_var)));
 
-	ss << "dis_region = \"" << TransFloat(p3d->dis_region) << "\", ";
-	ss << "dis_region_var = \"" << TransFloat(p3d->dis_region_var) << "\", ";
-	ss << "dis_spd = \"" << TransFloat(p3d->dis_spd) << "\", ";
-	ss << "dis_spd_var = \"" << TransFloat(p3d->dis_spd_var) << "\", ";
+	lua::connect(gen, 1, 
+		lua::assign("gravity", TransGravity(p3d->gravity)));
 
-	ss << "gravity = \"" << TransGravity(p3d->gravity) << "\", ";
+	lua::connect(gen, 2, 
+		lua::assign("linear_acc", TransFloat(p3d->linear_acc)), 
+		lua::assign("linear_acc_var", TransFloat(p3d->linear_acc_var)));
 
-	ss << "linear_acc = \"" << TransFloat(p3d->linear_acc) << "\", ";
-	ss << "linear_acc_var = \"" << TransFloat(p3d->linear_acc_var) << "\", ";
+	lua::connect(gen, 1, 
+		lua::assign("fadeout_time", TransTime(p3d->fadeout_time)));
 
-	ss << "fadeout_time = \"" << TransTime(p3d->fadeout_time) << "\", ";
+	lua::connect(gen, 1, 
+		lua::assign("bounce", TransBool(p3d->bounce)));
 
-	ss << "bounce = \"" << TransBool(p3d->bounce) << "\", ";
+	lua::connect(gen, 2, 
+		lua::assign("start_radius", TransFloat(p3d->start_radius)), 
+		lua::assign("is_start_radius_3d", TransBool(p3d->is_start_radius_3d)));
 
-	ss << "start_radius = \"" << TransFloat(p3d->start_radius) << "\", ";
-	ss << "is_start_radius_3d = \"" << TransBool(p3d->is_start_radius_3d) << "\", ";
-
-	ss << "orient_to_movement = \"" << TransBool(p3d->orient_to_movement) << "\", ";
-
-	gen.line(ss.str());
+	lua::connect(gen, 1, 
+		lua::assign("orient_to_movement", TransBool(p3d->orient_to_movement)));
 }
 
 void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp, 
 										  ebuilder::CodeGenerator& gen)
 {
-	std::ostringstream ss;
+	lua::TableAssign ta(gen, "", true);
 
-	ss << "scale_start = \"" << TransFloat(comp.scale_start) << "\", ";
-	ss << "scale_end = \"" << TransFloat(comp.scale_end) << "\", ";
+	lua::connect(gen, 1, 
+		lua::assign("id", comp.node->GetID()));
 
-	ss << "angle = \"" << TransFloat(comp.angle) << "\", ";
-	ss << "angle_var = \"" << TransFloat(comp.angle_var) << "\", ";
+	lua::connect(gen, 2, 
+		lua::assign("scale_start", TransFloat(comp.scale_start)), 
+		lua::assign("scale_end", TransFloat(comp.scale_end)));
 
-	ss << "col_mul = \"" << comp.col_mul << "\", ";
-	ss << "col_add = \"" << comp.col_add << "\", ";
-	ss << "alpha_start = \"" << TransFloat(comp.alpha_start) << "\", ";
-	ss << "alpha_end = \"" << TransFloat(comp.alpha_end) << "\", ";
+	lua::connect(gen, 2, 
+		lua::assign("angle", TransFloat(comp.angle)), 
+		lua::assign("angle_var", TransFloat(comp.angle_var)));
 
-	ss << "id = \"" << comp.node->GetID() << "\", ";	
-
-	gen.line(ss.str());
+	lua::connect(gen, 4, 
+		lua::assign("col_mul", comp.col_mul), 
+		lua::assign("col_add", comp.col_add),
+		lua::assign("alpha_start", TransFloat(comp.alpha_start)), 
+		lua::assign("alpha_end", TransFloat(comp.alpha_end)));
 }
 
 int Particle3DToLuaString::TransTime(float time)

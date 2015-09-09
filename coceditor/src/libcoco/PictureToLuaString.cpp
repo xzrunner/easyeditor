@@ -52,7 +52,7 @@ void PictureToLuaString::PackQuad(const PackPicture::Quad& quad,
 		screen[0], screen[1], screen[2], screen[3], screen[4], screen[5], screen[6], screen[7]);
 	std::string screen_str = buff;
 
-	lua::tableassign(gen, "", 3, tex_str.c_str(), src_str.c_str(), screen_str.c_str());
+	lua::tableassign(gen, "", 3, tex_str, src_str, screen_str);
 }
 
 }

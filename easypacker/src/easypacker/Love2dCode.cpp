@@ -51,10 +51,10 @@ void Love2dCode::resolve()
 		py = wxString::FromDouble(480 - symbol.GetSize().yLength() * 0.5f);
 
 		// q = love.graphics.newQuad(x, y, w, h, sw, sh)
-		std::string aq = lua::assign("q", lua::call("", "love.graphics.newQuad", 6, x.c_str(), y.c_str(), w.c_str(), h.c_str(), sw.c_str(), sh.c_str()));
-		std::string ax = lua::assign("x", px.c_str());
-		std::string ay = lua::assign("y", py.c_str());
-		std::string aa = lua::assign("a", a.c_str());
+		std::string aq = lua::assign("q", lua::call("", "love.graphics.newQuad", 6, x, y, w, h, sw, sh));
+		std::string ax = lua::assign("x", px);
+		std::string ay = lua::assign("y", py);
+		std::string aa = lua::assign("a", a);
 
 		// name = { q = love.graphics.newQuad(x, y, w, h, sw, sh), 	x = px, y = py, a = a },
 		m_gen.line(lua::assign(name, "{ " + aq + ", " + ax + ", " + ay + ", " + aa + " }") + ",");		

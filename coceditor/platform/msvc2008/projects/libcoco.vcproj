@@ -180,7 +180,7 @@
 					>
 				</File>
 				<Filter
-					Name="picture"
+					Name="1. picture"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\PackPicture.cpp"
@@ -232,7 +232,7 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="label"
+					Name="2. label"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\PackLabel.cpp"
@@ -284,7 +284,7 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="anim"
+					Name="3. anim"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\PackAnimation.cpp"
@@ -336,7 +336,7 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="particle3d"
+					Name="4. particle3d"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\PackParticle3D.cpp"
@@ -404,7 +404,7 @@
 					>
 				</File>
 				<Filter
-					Name="picture"
+					Name="1. picture"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\IconBuilder.cpp"
@@ -440,7 +440,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="label"
+					Name="2. label"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\LabelBuilder.cpp"
@@ -452,7 +452,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="animation"
+					Name="3. animation"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\AnimBuilder.cpp"
@@ -480,7 +480,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="particle3d"
+					Name="4. particle3d"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\Particle3DBuilder.cpp"
