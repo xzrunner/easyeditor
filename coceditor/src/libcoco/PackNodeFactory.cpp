@@ -97,7 +97,11 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 	const IPackNode* node = NULL;
 
 	// picture
-	if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(symbol)) {
+	if (const d2d::ImageSymbol* img_symbol = dynamic_cast<const d2d::ImageSymbol*>(symbol)) {
+		d2d::ImageSprite* img_spr = new d2d::ImageSprite(const_cast<d2d::ImageSymbol*>(img_symbol));
+		node = m_img_builder->Create(img_spr);
+		img_spr->Release();
+	} else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(symbol)) {
 		node = m_tex_builder->Create(tex);
 	}
 
