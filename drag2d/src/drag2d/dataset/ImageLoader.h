@@ -2,6 +2,8 @@
 
 #include <stdint.h>
 
+//#define USE_SOIL
+
 namespace d2d
 {
 
@@ -21,7 +23,9 @@ public:
 
 private:
 	static uint8_t* loadImageByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format);
+#ifdef USE_SOIL
 	static uint8_t* loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels);
+#endif // USE_SOIL
 
 	static uint8_t* loadPNM(const std::string& filename, int& width, int& height);
 	static uint8_t* loadPPM(const std::string& filename, int& width, int& height);

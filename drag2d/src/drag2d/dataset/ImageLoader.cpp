@@ -16,8 +16,6 @@
 #include "common/SettingData.h"
 #include "render/ShaderMgr.h"
 
-//#define USE_SOIL
-
 namespace d2d
 {
 
@@ -55,7 +53,9 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	}
 	else
 	{
+#ifdef USE_SOIL
 		data = loadImageBySOIL(filepath, width, height, channels);
+#endif // USE_SOIL
 	}
 
 	if (channels == 4) {
@@ -309,6 +309,8 @@ uint8_t* ImageLoader::loadImageByLibpng(const std::string& filename, int& width,
 	return NULL;
 }
 
+#ifdef USE_SOIL
+
 uint8_t* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels)
 {
 	uint8_t* pixels = SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
@@ -327,6 +329,8 @@ uint8_t* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, i
 	delete[] pixels;
 	return inverted;
 }
+
+#endif // USE_SOIL
 
 uint8_t* ImageLoader::loadPNM(const std::string& filename, int& width, int& height)
 {
