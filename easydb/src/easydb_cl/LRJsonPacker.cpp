@@ -502,8 +502,8 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 	name = name.substr(0, name.find("_particle"));
 	d2d::StringTools::ToLower(name);
 
-//	dec_val["export"] = name;
-	dec_val["export"] = spr_val["name"];
+	dec_val["export"] = name;
+//	dec_val["export"] = spr_val["name"];
 
 	if (top_layer) {
 		dec_val["layer"] = "top";
