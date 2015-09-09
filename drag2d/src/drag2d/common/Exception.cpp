@@ -22,7 +22,13 @@
 
 #include <cstdarg>
 
-using namespace d2d;
+namespace d2d
+{
+
+Exception::Exception(const std::string& msg)
+	: m_message(msg)
+{
+}
 
 Exception::Exception(const char* fmt, ...)
 {
@@ -56,4 +62,6 @@ Exception::Exception(const char* fmt, ...)
 	}
 	m_message = std::string(buffer);
 	delete[] buffer;
+}
+
 }

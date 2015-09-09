@@ -26,20 +26,23 @@
 
 namespace d2d
 {
-	class Exception : public std::exception
-	{
-	public:
-		Exception(const char* fmt, ...);
-		virtual ~Exception() throw() {}
 
-		inline virtual const char* what() const throw() { 
-			return m_message.c_str(); 
-		}
+class Exception : public std::exception
+{
+public:
+	Exception(const std::string& msg);
+	Exception(const char* fmt, ...);
+	virtual ~Exception() throw() {}
 
-	private:
-		std::string m_message;
+	inline virtual const char* what() const throw() { 
+		return m_message.c_str(); 
+	}
 
-	}; // Exception 
+private:
+	std::string m_message;
+
+}; // Exception 
+
 }
 
 #endif // D2D_EXCEPTION_H
