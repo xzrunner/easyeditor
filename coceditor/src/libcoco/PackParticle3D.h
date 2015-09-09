@@ -53,6 +53,9 @@ public:
 	std::vector<Component> components;
 
 public:
+	PackParticle3D() {}
+	PackParticle3D(int id);
+
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp) const;
 	virtual void UnpackFromLua(lua_State* L,

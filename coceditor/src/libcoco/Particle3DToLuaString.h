@@ -18,9 +18,8 @@ private:
 
 	static int TransTime(float time);
 	static int TransRadian(float r);
-	static int TransSpeed(float spd);
 	static int TransFloat(float f);
-	static int TransGravity(float g);
+	static int TransFloatX100(float f);
 	static std::string TransBool(bool b);
 
 }; // Particle3DToLuaString

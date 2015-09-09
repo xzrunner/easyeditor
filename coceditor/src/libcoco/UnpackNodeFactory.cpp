@@ -5,6 +5,7 @@
 #include "PackPicture.h"
 #include "PackLabel.h"
 #include "PackAnimation.h"
+#include "PackParticle3D.h"
 
 #include <epbin.h>
 
@@ -35,6 +36,8 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 		node = new PackLabel(id);
 	} else if (type == "animation") {
 		node = new PackAnimation(id);
+	} else if (type == "particle3d") {
+		node = new PackParticle3D(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::UnpackFromLua unknown type %s", type.c_str());
 	}

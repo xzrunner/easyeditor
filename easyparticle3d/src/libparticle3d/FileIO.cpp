@@ -208,8 +208,8 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 
 		memcpy(&symbol.col_mul.r, &comp.col_mul.r, sizeof(comp.col_mul));
 		memcpy(&symbol.col_add.r, &comp.col_add.r, sizeof(comp.col_add));
-		symbol.alpha_start = comp.alpha_start;
-		symbol.alpha_end = comp.alpha_end;
+		symbol.alpha_start = comp.alpha_start * 0.01f;
+		symbol.alpha_end = comp.alpha_end * 0.01f;
 
 		if (d2d::FilenameTools::IsFileExist(comp.bind_filepath)) {
 			symbol.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);

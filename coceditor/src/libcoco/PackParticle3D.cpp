@@ -9,6 +9,11 @@
 namespace libcoco
 {
 
+PackParticle3D::PackParticle3D(int id)
+	: IPackNode(id)
+{
+}
+
 void PackParticle3D::PackToLuaString(ebuilder::CodeGenerator& gen, const d2d::TexturePacker& tp) const
 {
 	return Particle3DToLuaString::Pack(this, gen);
@@ -16,6 +21,7 @@ void PackParticle3D::PackToLuaString(ebuilder::CodeGenerator& gen, const d2d::Te
 
 void PackParticle3D::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
 {
+	Particle3DFromLua::Unpack(L, this);
 }
 
 int PackParticle3D::SizeOfPackToBin() const

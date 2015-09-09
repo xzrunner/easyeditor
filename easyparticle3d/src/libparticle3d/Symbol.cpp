@@ -85,6 +85,11 @@ void Symbol::Start() const
 	m_ps->Start();
 }
 
+void Symbol::SetPS(ParticleSystem* ps)
+{
+	d2d::obj_assign<ParticleSystem>(m_ps, ps);
+}
+
 void Symbol::LoadResources()
 {
 	m_ps = FileIO::LoadPS(m_filepath.c_str());	

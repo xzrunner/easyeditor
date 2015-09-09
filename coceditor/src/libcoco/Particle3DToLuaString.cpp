@@ -46,10 +46,10 @@ void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGene
 		lua::assign("vert_var", TransRadian(p3d->vert_var)));
 
 	lua::connect(gen, 4, 
-		lua::assign("spd", TransSpeed(p3d->spd)), 
-		lua::assign("spd_var", TransSpeed(p3d->spd_var)),
-		lua::assign("angular_spd", TransFloat(p3d->angular_spd)), 
-		lua::assign("angular_spd_var", TransFloat(p3d->angular_spd_var)));
+		lua::assign("spd", TransFloat(p3d->spd)), 
+		lua::assign("spd_var", TransFloat(p3d->spd_var)),
+		lua::assign("angular_spd", TransRadian(p3d->angular_spd)), 
+		lua::assign("angular_spd_var", TransRadian(p3d->angular_spd_var)));
 
 	lua::connect(gen, 4, 
 		lua::assign("dis_region", TransFloat(p3d->dis_region)), 
@@ -58,7 +58,7 @@ void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGene
 		lua::assign("dis_spd_var", TransFloat(p3d->dis_spd_var)));
 
 	lua::connect(gen, 1, 
-		lua::assign("gravity", TransGravity(p3d->gravity)));
+		lua::assign("gravity", TransFloat(p3d->gravity)));
 
 	lua::connect(gen, 2, 
 		lua::assign("linear_acc", TransFloat(p3d->linear_acc)), 
@@ -87,8 +87,8 @@ void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp,
 		lua::assign("id", comp.node->GetID()));
 
 	lua::connect(gen, 2, 
-		lua::assign("scale_start", TransFloat(comp.scale_start)), 
-		lua::assign("scale_end", TransFloat(comp.scale_end)));
+		lua::assign("scale_start", TransFloatX100(comp.scale_start)), 
+		lua::assign("scale_end", TransFloatX100(comp.scale_end)));
 
 	lua::connect(gen, 2, 
 		lua::assign("angle", TransFloat(comp.angle)), 
@@ -111,19 +111,14 @@ int Particle3DToLuaString::TransRadian(float r)
 	return floor(r * d2d::TRANS_RAD_TO_DEG + 0.5f);
 }
 
-int Particle3DToLuaString::TransSpeed(float spd)
-{
-	return floor(spd * 0.25f + 0.5f);
-}
-
 int Particle3DToLuaString::TransFloat(float f)
 {
 	return floor(f + 0.5f);
 }
 
-int Particle3DToLuaString::TransGravity(float g)
+int Particle3DToLuaString::TransFloatX100(float f)
 {
-	return floor(g * 0.3f + 0.5f);	
+	return TransFloat(100 * f);
 }
 
 std::string Particle3DToLuaString::TransBool(bool b)

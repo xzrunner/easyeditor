@@ -124,13 +124,12 @@ void FileAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	}
 
 	if (!comp_val["rotate"].isNull()) {
-		comp.angle = comp_val["rotate"]["center"].asInt();
-		comp.angle_var = comp_val["rotate"]["offset"].asInt();
-	} else {
 		int min = comp_val["rotate"]["min"].asInt(),
 			max = comp_val["rotate"]["max"].asInt();
 		comp.angle = (min + max) * 0.5f;
 		comp.angle_var = (max - min) * 0.5f;
+	} else {
+		comp.angle = comp.angle_var = 0;
 	}
 
 	if (!comp_val["mul_col"].isNull()) {

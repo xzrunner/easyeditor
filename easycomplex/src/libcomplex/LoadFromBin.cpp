@@ -24,7 +24,7 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 	std::string export_name = value["export name"].asString();
 
 	libcoco::IPackNode* node = libcoco::UnpackNodeFactory::Instance()->Query(export_name);
-	symbol->m_sprites.push_back(NodeToSprite::ToSprite(node));
+	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
 }
 
 #define LZMA_PROPS_SIZE 5
