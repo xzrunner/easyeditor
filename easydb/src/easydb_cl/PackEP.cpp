@@ -36,11 +36,10 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& type)
 {
 	libcoco::CocoPacker packer(json_dir, tp_json, tp_dir);
-
-	packer.OutputBin(out_file, true, libcoco::TT_PNG8);
-
-	if (type == "debug") {
+	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua");
+	} else if (type == "ep") {
+		packer.OutputBin(out_file, true, libcoco::TT_PNG8);
 	}
 }
 
