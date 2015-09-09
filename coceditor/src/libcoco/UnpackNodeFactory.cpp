@@ -66,6 +66,8 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 		node = new PackLabel(id);
 	} else if (type == TYPE_ANIMATION) {
 		node = new PackAnimation(id);
+	} else if (type == TYPE_PARTICLE3D) {
+		node = new PackParticle3D(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::UnpackFromBin unknown type %d", type);
 	}

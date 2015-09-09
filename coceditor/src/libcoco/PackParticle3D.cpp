@@ -26,22 +26,22 @@ void PackParticle3D::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>&
 
 int PackParticle3D::SizeOfPackToBin() const
 {
-	return 0;
+	return Particle3DToBin::Size(this);
 }
 
 void PackParticle3D::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
 {
-
+	Particle3DToBin::Pack(this, ptr);
 }
 
 int PackParticle3D::SizeOfUnpackFromBin() const
 {
-	return 0;
+	return Particle3DFromBin::Size(this);
 }
 
 void PackParticle3D::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
 {
-
+	Particle3DFromBin::Unpack(ptr, this);
 }
 
 }
