@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5d.lib opengl32.lib glew32s.lib lua.lib libgifd.lib zlibd.lib lzmad.lib libpngd.lib glfwd.lib PVRTexLib.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib comctl32.lib rpcrt4.lib jsond.lib freetype250_D.lib glfwd.lib md5d.lib libgifd.lib libpngd.lib glew32sd.lib luad.lib lzmad.lib zlibd.lib PVRTexLib.lib"
 				OutputFile="..\easydb_cl\x86\Debug\easydb_cl.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\glfw\lib&quot;;&quot;..\..\..\..\editor-external\pvrtextool\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\glfw\lib&quot;;&quot;..\..\..\..\editor-external\pvrtextool\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -145,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib glew32s.lib lua.lib libgif.lib zlib.lib lzma.lib libpng.lib glfw.lib PVRTexLib.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib comctl32.lib rpcrt4.lib json.lib freetype250.lib md5.lib glew32s.lib lua.lib libgif.lib zlib.lib lzma.lib libpng.lib glfw.lib PVRTexLib.lib"
 				OutputFile="..\easydb_cl\x86\Release\easydb_cl.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\glfw\lib&quot;;&quot;..\..\..\..\editor-external\pvrtextool\lib&quot;"

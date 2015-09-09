@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libpngd.lib lua.lib zlibd.lib lzmad.lib"
+				AdditionalDependencies="libpngd.lib luad.lib zlibd.lib lzmad.lib"
 				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
@@ -185,7 +185,7 @@
 					Name="VCResourceCompilerTool"
 					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
 				/>
-			</FileConfiguration>			
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>
