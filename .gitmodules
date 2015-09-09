@@ -10,3 +10,6 @@
 [submodule "coceditor/external/ps"]
 	path = coceditor/external/ps
 	url = ssh://git@oa.ejoy.com/users/zz/ps.git
+[submodule "particle/src"]
+	path = particle/src
+	url = ssh://git@oa.ejoy.com/users/zz/ps.git
