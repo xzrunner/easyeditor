@@ -92,7 +92,7 @@ void ToolbarPanel::Add(const FileAdapter::Component& comp)
 
 	cp->SetValue(PS_SCALE, d2d::UICallback::Data(comp.scale_start, comp.scale_end));
 
-	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(comp.angle, comp.angle_var));
+	cp->SetValue(PS_ROTATE, d2d::UICallback::Data(comp.angle - comp.angle_var, comp.angle + comp.angle_var));
 
 	memcpy(&pc->col_mul.r, &comp.col_mul.r, sizeof(pc->col_mul));
 	memcpy(&pc->col_add.r, &comp.col_add.r, sizeof(pc->col_add));

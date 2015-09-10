@@ -34,8 +34,8 @@ void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
 		m_pc->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ROTATE:
-		m_pc->angle = data.val0 * 0.5f * d2d::TRANS_DEG_TO_RAD;
-		m_pc->angle_var = data.val1 * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		m_pc->angle = (data.val0 + data.val1) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		m_pc->angle_var = (data.val1 - data.val0) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 		break;
 	case PS_ALPHA:
 		m_pc->alpha_start = data.val0 * 0.01f;
@@ -53,8 +53,8 @@ void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_pc->scale_end * 100;
 		break;
 	case PS_ROTATE:
-		data.val0 = (m_pc->angle - m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = (m_pc->angle + m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = (m_pc->angle + m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = (m_pc->angle - m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
 		break;
 	case PS_ALPHA:
 		data.val0 = m_pc->alpha_start * 100;
