@@ -22,6 +22,16 @@
 #define PTR_SIZE_DIFF (8 - sizeof(void *))
 #define SIZEOF_POINTER 8
 
+struct pack_particle3d {
+	void* ps;
+	int last_frame;
+
+	int component_number;
+	int component[1];
+};
+
+#define SIZEOF_PARTICLE3D (sizeof(struct pack_particle3d))
+
 struct matrix;
 
 #define SIZEOF_MATRIX (sizeof(struct matrix))

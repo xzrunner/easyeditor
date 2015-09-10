@@ -8,7 +8,7 @@ namespace libcoco
 
 int Particle3DFromBin::Size(const PackParticle3D* p3d)
 {
-	return 0;
+	return SIZEOF_PARTICLE3D + p3d->components.size() * sizeof(int);
 }
 
 void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
