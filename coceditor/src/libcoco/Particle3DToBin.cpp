@@ -66,7 +66,7 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	pack(spd, ptr);
 	uint16_t spd_var = TransFloat(p3d->spd_var);
 	pack(spd_var, ptr);
-	uint16_t angular_spd = TransRadian(p3d->angular_spd);
+	int16_t angular_spd = TransRadian(p3d->angular_spd);
 	pack(angular_spd, ptr);
 	uint16_t angular_spd_var = TransRadian(p3d->angular_spd_var);
 	pack(angular_spd_var, ptr);
@@ -80,10 +80,10 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	uint16_t dis_spd_var = TransFloat(p3d->dis_spd_var);
 	pack(dis_spd_var, ptr);
 
-	uint16_t gravity = TransFloat(p3d->gravity);
+	int16_t gravity = TransFloat(p3d->gravity);
 	pack(gravity, ptr);
 
-	uint16_t linear_acc = TransFloat(p3d->linear_acc);
+	int16_t linear_acc = TransFloat(p3d->linear_acc);
 	pack(linear_acc, ptr);
 	uint16_t linear_acc_var = TransFloat(p3d->linear_acc_var);
 	pack(linear_acc_var, ptr);
@@ -125,7 +125,7 @@ void Particle3DToBin::PackComponent(const PackParticle3D::Component& comp,
 	uint16_t scale_end = TransFloatX100(comp.scale_end);
 	pack(scale_end, ptr);
 
-	uint16_t angle = TransFloat(comp.angle);
+	int16_t angle = TransFloat(comp.angle);
 	pack(angle, ptr);
 	uint16_t angle_var = TransFloat(comp.angle_var);
 	pack(angle_var, ptr);

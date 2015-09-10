@@ -46,7 +46,8 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	p3d->vert = TransDegree(vert);
 	p3d->vert_var = TransDegree(vert_var);
 
-	uint16_t spd, spd_var, angular_spd, angular_spd_var;
+	uint16_t spd, spd_var, angular_spd_var;
+	int16_t angular_spd;
 	unpack(spd, ptr);
 	unpack(spd_var, ptr);
 	unpack(angular_spd, ptr);
@@ -66,11 +67,12 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	p3d->dis_spd = dis_spd;
 	p3d->dis_spd_var = dis_spd_var;
 
-	uint16_t gravity;
+	int16_t gravity;
 	unpack(gravity, ptr);
 	p3d->gravity = gravity;
 
-	uint16_t linear_acc, linear_acc_var;
+	int16_t linear_acc;
+	uint16_t linear_acc_var;
 	unpack(linear_acc, ptr);
 	unpack(linear_acc_var, ptr);
 	p3d->linear_acc = linear_acc;
@@ -117,11 +119,12 @@ void Particle3DFromBin::UnpackComponent(uint8_t** ptr, PackParticle3D* p3d)
 	comp.scale_start = TransFloatX100(scale_start);
 	comp.scale_end = TransFloatX100(scale_end);
 
-	uint16_t angle, angle_var;
+	int16_t angle;
+	uint16_t angle_var;
 	unpack(angle, ptr);
 	unpack(angle_var, ptr);
-	comp.angle = angle;
-	comp.angle_var = angle_var;
+	comp.angle = TransDegree(angle);
+	comp.angle_var = TransDegree(angle_var);
 
 	uint32_t col_mul, col_add;
 	unpack(col_mul, ptr);
