@@ -18,25 +18,11 @@ public:
 protected:
 	virtual void OnDrawSprites() const;
 
-	virtual void OnTimer();
-
 private:
 	void DrawBackground() const;
 
 private:
-	static const int FRAME_RATE = 60;
-
-private:
-	// todo rm, only UpdateSymbol
-	void UpdateParticle2d();
-	void UpdateAnimation();
-
-private:
 	StagePanel* m_stage;
-
-	int m_currFrame;
-
-	d2d::PlayControl m_control;
 
 }; // StageCanvas
 

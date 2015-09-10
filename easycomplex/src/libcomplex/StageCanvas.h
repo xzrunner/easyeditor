@@ -28,9 +28,6 @@ protected:
 private:
 	void drawBackground() const;
 
-	// todo rm, only UpdateSymbol
-	void UpdateParticle2d(float dt);
-
 private:
 	d2d::LibraryPanel* m_library;
 

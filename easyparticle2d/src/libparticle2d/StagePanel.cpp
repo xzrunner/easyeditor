@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "SelectSpritesOP.h"
 #include "LibraryPanel.h"
+#include "ParticleSystem.h"
 
 namespace eparticle2d
 {
@@ -10,6 +11,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+	, m_last_time(-1)
 {
 	SetCanvas(new StageCanvas(this));
 
@@ -20,6 +22,31 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	cfg.is_rotate_open = false;
 
 	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, NULL, NULL, NULL, cfg));
+}
+
+bool StagePanel::Update(int version)
+{
+	bool ret = false;
+
+	ParticleSystem* ps = m_data.GetPS();
+	if (!ps) {
+		return ret;
+	}
+
+	if (m_last_time == -1) {
+		m_last_time = clock();
+	} else {
+		clock_t curr = clock();
+		int dt = curr - m_last_time;
+		m_last_time = curr;
+
+		if (ps) {
+			ps->Update((float)dt / CLOCKS_PER_SEC);
+			ret = true;
+		}
+	}
+
+	return ret;
 }
 
 void StagePanel::SetSelectedSymbol(Symbol* symbol)

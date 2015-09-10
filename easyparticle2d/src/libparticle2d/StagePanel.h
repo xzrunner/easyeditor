@@ -18,6 +18,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		LibraryPanel* library);
 
+	virtual bool Update(int version);
+
 	void SetSelectedSymbol(Symbol* symbol);
 	void SetToolbar(ToolbarPanel* toolbar);
 
@@ -25,6 +27,8 @@ public:
 
 private:
 	StageData m_data;
+
+	clock_t m_last_time;
 
 }; // StagePanel
 
