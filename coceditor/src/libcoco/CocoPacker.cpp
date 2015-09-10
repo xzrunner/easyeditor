@@ -37,9 +37,14 @@ void CocoPacker::OutputLua(const std::string& outfile) const
 	PackToLuaString::Pack(outfile, m_tp);
 }
 
-void CocoPacker::OutputBin(const std::string& outfile, bool compress, TextureType type) const
+void CocoPacker::OutputEpe(const std::string& outfile, bool compress) const
 {
-	PackToBin::Pack(outfile, m_tp, compress, type);
+	PackToBin::PackEPE(outfile + ".epe", m_tp, compress);
+}
+
+void CocoPacker::OutputEpt(const std::string& outfile, TextureType type) const
+{
+	PackToBin::PackEPT(outfile, m_tp, type);
 }
 
 void CocoPacker::LoadJsonData(const std::string& dir)

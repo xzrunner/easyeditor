@@ -39,7 +39,19 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua");
 	} else if (type == "ep") {
-		packer.OutputBin(out_file, true, libcoco::TT_PNG8);
+		packer.OutputEpe(out_file, true);
+		packer.OutputEpt(out_file, libcoco::TT_PNG8);
+	} else if (type == "epe") {
+		packer.OutputEpe(out_file, true);
+	} else if (type == "ept") {
+		packer.OutputEpt(out_file, libcoco::TT_PNG8);
+	} else if (type == "debug") {
+		packer.OutputLua(out_file + ".lua");
+		packer.OutputEpe(out_file, true);
+	} else if (type == "all") {
+		packer.OutputLua(out_file + ".lua");
+		packer.OutputEpe(out_file, true);
+		packer.OutputEpt(out_file, libcoco::TT_PNG8);
 	}
 }
 

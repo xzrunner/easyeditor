@@ -9,13 +9,6 @@
 namespace libcoco
 {
 
-void PackToBin::Pack(const std::string& filepath, const d2d::TexturePacker& tp,
-					 bool compress, TextureType type)
-{
-	PackEPE(filepath + ".epe", tp, compress);
-	PackEPT(filepath, tp, type);
-}
-
 void PackToBin::PackEPE(const std::string& filepath, 
 						const d2d::TexturePacker& tp, 
 						bool compress)

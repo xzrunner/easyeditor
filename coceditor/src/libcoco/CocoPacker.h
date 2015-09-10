@@ -15,7 +15,9 @@ public:
 		const std::string& tp_dir);
 	
 	void OutputLua(const std::string& outfile) const;
-	void OutputBin(const std::string& outfile, bool compress, TextureType type) const;
+
+	void OutputEpe(const std::string& outfile, bool compress) const;
+	void OutputEpt(const std::string& outfile, TextureType type) const;
 
 private:
 	void LoadJsonData(const std::string& dir);

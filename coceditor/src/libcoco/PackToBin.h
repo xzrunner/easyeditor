@@ -11,10 +11,6 @@ namespace libcoco
 class PackToBin
 {
 public:
-	static void Pack(const std::string& filepath, const d2d::TexturePacker& tp,
-		bool compress, TextureType type);
-
-private:
 	static void PackEPE(const std::string& filepath, const d2d::TexturePacker& tp,
 		bool compress);	
 

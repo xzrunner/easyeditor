@@ -501,7 +501,8 @@ void PackCoco::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string&
 	std::string output_name = output_dir + "\\" + name;
 
 	libcoco::CocoPacker packer(config_dir, output_name, output_dir);
-	packer.OutputBin(output_name, true, libcoco::TT_PNG8);
+	packer.OutputEpe(output_name, true);
+	packer.OutputEpt(output_name, libcoco::TT_PNG8);
 }
 
 void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& config_dir, 
