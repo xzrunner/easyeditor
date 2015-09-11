@@ -62,10 +62,13 @@ inline int sizeof_pack_str(const std::string& str) {
 inline int sizeof_unpack_str(const std::string& str) {
 	if (str.empty()) {
 		return 0;
+	} else {
+		if (str.size() >= 255) {
+			throw d2d::Exception("%s is too long", str.c_str());
+		}
+		int n = str.size();
+		return (n+1+3) & ~3;
 	}
-	int sz = sizeof_pack_str(str);
-	sz = (sz+1+3) & ~3;
-	return sz;
 }
 
 inline void pack_str(const std::string& str, uint8_t** ptr) {
