@@ -13,9 +13,10 @@ Particle::Particle()
 	gravity = 0;
 	radial_acceleration = tangential_acceleration = 0;
 
-	rotation = 0;
-
 	cos_amplitude = cos_frequency = 0;
+
+	angle = delta_angle = 0;
+	radius = delta_radius = 0;
 }
 
 }

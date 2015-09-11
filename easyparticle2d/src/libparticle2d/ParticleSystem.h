@@ -87,9 +87,14 @@ private:
 	ValueRegion<float> m_radial_acc_region;
 	ValueRegion<float> m_tangential_acc_region;
 
-	// special
+	// hori cos
 	ValueRegion<float> m_cos_amplitude_region;
 	ValueRegion<float> m_cos_frequency_region;
+
+	// circular movement
+	ValueRegion<float> m_start_radius;
+	ValueRegion<float> m_end_radius;
+	ValueRegion<float> m_rotate_per_second;
 
 }; // ParticleSystem
 

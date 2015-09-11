@@ -27,16 +27,15 @@ public:
 	float radial_acceleration;
 	float tangential_acceleration;
 
-	// зда§
-	float rotation;
-// 	float spin_start;
-// 	float spin_end;
-
 	d2d::Colorf color;
 
-	// special
+	// hori cos
 	float cos_amplitude;
 	float cos_frequency;
+
+	// circular movement
+	float angle, delta_angle;
+	float radius, delta_radius;
 
 public:
 	Particle();

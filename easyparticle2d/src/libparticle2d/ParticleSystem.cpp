@@ -77,11 +77,22 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_posx_region.Set(-data.val0, data.val0);
 		m_posy_region.Set(-data.val1, data.val1);
 		break;
+
 	case PS_COS_AMPLITUDE:
 		m_cos_amplitude_region.Set(data.val0 - data.val1, data.val0 + data.val1);
 		break;
 	case PS_COS_FREQUENCY:
 		m_cos_frequency_region.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+
+	case PS_START_RADIUS:
+		m_start_radius.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_END_RADIUS:
+		m_end_radius.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_ROTATE_PER_SECOND:
+		m_rotate_per_second.Set(data.val0 - data.val1, data.val0 + data.val1);
 		break;
 	}
 }
@@ -159,6 +170,7 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		data.val0 = m_posx_region.End();
 		data.val1 = m_posy_region.End();
 		break;
+
 	case PS_COS_AMPLITUDE:
 		{
 			float sub = m_cos_amplitude_region.Begin(),
@@ -171,6 +183,31 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		{
 			float sub = m_cos_frequency_region.Begin(),
 				add = m_cos_frequency_region.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
+		break;
+
+	case PS_START_RADIUS:
+		{
+			float sub = m_start_radius.Begin(),
+				add = m_start_radius.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
+		break;
+	case PS_END_RADIUS:
+		{
+			float sub = m_end_radius.Begin(),
+				add = m_end_radius.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
+		break;
+	case PS_ROTATE_PER_SECOND:
+		{
+			float sub = m_rotate_per_second.Begin(),
+				add = m_rotate_per_second.End();
 			data.val0 = (sub + add) * 0.5f;
 			data.val1 = (add - sub) * 0.5f;
 		}
@@ -188,7 +225,7 @@ void ParticleSystem::Draw(const d2d::Matrix& mt)
 	while (p != m_last) 
 	{
 		d2d::SpriteRenderer::Instance()->Draw(m_symbol, mt, p->position, 
-			p->rotation, p->scale, p->scale, 0, 0, p->color);
+			p->angle, p->scale, p->scale, 0, 0, p->color);
 		++p;
 	}
 }
@@ -238,6 +275,13 @@ void ParticleSystem::Update(float dt)
 			// 水平速度cos效果器
 			if (p->cos_amplitude != 0) {
 				p->speed.x = p->cos_amplitude * cos(p->cos_frequency * (p->lifetime - p->life));
+			}
+
+			if (p->delta_angle != 0 || p->delta_radius != 0) {
+				p->angle += p->delta_angle * dt;
+				p->radius += p->delta_radius * dt;
+				p->position.x = - cos(p->angle) * p->radius;
+				p->position.y = - sin(p->angle) * p->radius;
 			}
 
 			p->position += p->speed * dt;
@@ -324,7 +368,14 @@ void ParticleSystem::Add()
 	p->cos_amplitude = m_cos_amplitude_region.Random();
 	p->cos_frequency = m_cos_frequency_region.Random();
 
-	p->rotation = 0;
+	float start_radius = m_start_radius.Random(),
+		end_radius = m_end_radius.Random();
+	p->radius = start_radius;
+	p->delta_radius = (end_radius - start_radius) / p->lifetime;
+
+	// todo 
+	p->angle = 0;
+	p->delta_angle = m_rotate_per_second.Random() * d2d::TRANS_DEG_TO_RAD;
 
 	p->color = d2d::WHITE;
 

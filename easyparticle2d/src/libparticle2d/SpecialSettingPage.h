@@ -16,6 +16,9 @@ public:
 private:
 	void InitLayout();
 
+	void InitHoriCosLayout(wxSizer* sizer);
+	void InitCircularLayout(wxSizer* sizer);
+
 private:
 	StageData* m_stage_data;
 
