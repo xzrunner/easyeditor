@@ -18,6 +18,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	, m_viewlist(NULL) 
 	, m_grouptree(NULL)
 	, m_stage(NULL)
+	, m_terrain_page(NULL)
+	, m_unit_page(NULL)
 {
 }
 
@@ -154,6 +156,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
+		m_unit_page = page;
 	}
 	{
 		LibraryPage* page = new LibraryPage(this, "µã", LT_DEFAULT, id++);
@@ -168,6 +171,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_line_op);
 		AddPage(page);
+		m_path_page = page;
 	}
 	{
 		LibraryPage* page = new LibraryPage(this, "ÇøÓò", LT_SHAPE, id++);
@@ -251,6 +255,21 @@ Layer* LibraryPanel::GetLayer(int idx)
 		return NULL;
 	} else {
 		return static_cast<LibraryPage*>(m_pages[idx])->GetLayer();
+	}
+}
+
+bool LibraryPanel::IsCurrUnitLayer()
+{
+	return m_unit_page == static_cast<LibraryPage*>(GetCurrPage());
+}
+
+void LibraryPanel::GetAllPathName(std::vector<std::string>& names) const
+{
+	Layer* layer = static_cast<LibraryPage*>(m_path_page)->GetLayer();
+	std::vector<d2d::IShape*> shapes;
+	layer->TraverseShape(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		names.push_back(shapes[i]->name);
 	}
 }
 

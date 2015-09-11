@@ -1,0 +1,111 @@
+{
+	"type" :
+	[
+		{
+			"key" : "SaleEllickMember",
+			"title" : "艾利克小兵"
+		},
+		{
+			"key" : "SaleHenry",
+			"title" : "亨利"
+		},
+		{
+			"key" : "SaleHenryMember",
+			"title" : "亨利小兵"
+		},
+		{
+			"key" : "SaleDelia",
+			"title" : "德利娅1"
+		},
+		{
+			"key" : "SaleDelia2",
+			"title" : "德利娅4"
+		},
+		{
+			"key" : "SaleDeliaMember",
+			"title" : "德利娅小兵"
+		},
+		{
+			"key" : "SaleDeliaMember2",
+			"title" : "德利娅小兵2"
+		},
+		{
+			"key" : "SaleMader",
+			"title" : "马德尔"
+		},
+		{
+			"key" : "SaleMaderMember",
+			"title" : "马德尔小兵"
+		},
+		{
+			"key" : "SaleBerserkerSoldier",
+			"title" : "狂战小兵"
+		},
+
+		{
+			"key" : "SaleVillagerMale1",
+			"title" : "村民-男"
+		},
+		{
+			"key" : "SaleVillagerMale2",
+			"title" : "村民-光头男"
+		}
+	],
+	"camp" :
+	[
+		{
+			"key" : "enemy",
+			"title" : "敌对"
+		},
+		{
+			"key" : "neutral",
+			"title" : "中立"
+		},
+		{
+			"key" : "ally",
+			"title" : "盟友"
+		}				
+	],
+	"dir" :
+	[
+		{
+			"key" : "n",
+			"title" : "北"
+		},	
+		{
+			"key" : "ne",
+			"title" : "东北"
+		},	
+		{
+			"key" : "e",
+			"title" : "东"
+		},	
+		{
+			"key" : "se",
+			"title" : "东南"
+		},	
+		{
+			"key" : "s",
+			"title" : "南"
+		},	
+		{
+			"key" : "sw",
+			"title" : "西南"
+		},	
+		{
+			"key" : "w",
+			"title" : "西"
+		},
+		{
+			"key" : "nw",
+			"title" : "西北"
+		}
+	],
+	"squad" :
+	[
+		{
+			"key" : "squad1",
+			"title" : "队伍1"
+		}				
+	]	
+}

@@ -13,7 +13,7 @@ Config* Config::m_instance = NULL;
 
 bool Config::m_loaded = false;
 
-const char* FILENAME = "config.json";
+static const char* FILENAME = "config.json";
 
 Config::Config()
 {

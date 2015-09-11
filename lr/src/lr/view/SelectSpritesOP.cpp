@@ -5,6 +5,7 @@
 #include "dataset/Layer.h"
 #include "dataset/data_utility.h"
 #include "view/LibraryPanel.h"
+#include "view/UnitEditDlg.h"
 #include "frame/config.h"
 
 #include <easyscale9.h>
@@ -51,12 +52,24 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	stage->SetUpdateState(false);
-
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
-	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
+	if (!selected) {
+		return false;
+	}
+
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	stage->SetUpdateState(false);
+	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
+	{
+		std::vector<std::string> path_names;
+		static_cast<LibraryPanel*>(stage->GetLibrary())->GetAllPathName(path_names);
+		UnitEditDlg dlg(m_wnd, selected, path_names);
+		if (dlg.ShowModal() == wxID_OK) {
+			selected->tag = dlg.ToString();
+		}
+	} 
+	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
  		ecomplex::EditDialog dlg(m_wnd, &symbol);

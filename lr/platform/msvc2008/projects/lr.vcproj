@@ -329,26 +329,22 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="dialog"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\view\UnitEditDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\UnitEditDlg.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\lr\dataset\CharacterAllDirections.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\lr\dataset\CharacterAllDirections.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\lr\dataset\CharacterFileName.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\lr\dataset\CharacterFileName.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\lr\dataset\data_utility.cpp"
 				>
@@ -430,6 +426,42 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\lr\dataset\UserData.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="character"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\CharacterAllDirections.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\CharacterAllDirections.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\CharacterFileName.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\CharacterFileName.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UnitCfg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UnitCfg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UnitInfo.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UnitInfo.h"
 					>
 				</File>
 			</Filter>
