@@ -45,7 +45,7 @@ void StageCanvas::DrawSprites() const
 	std::vector<d2d::ISprite*> cover_layer, top_layer;
 
 	std::vector<d2d::ISprite*> all_sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(all_sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(all_sprites), d2d::DT_VISIBLE);
 	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
 		d2d::ISprite* spr = all_sprites[i];
 
