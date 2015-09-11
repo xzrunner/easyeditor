@@ -59,7 +59,7 @@ void TextureFactory::Load(const std::string& filepath, float& ori_w,
 		ori_h = src.src_height;
 
 		offset.x = src.sprite_source_size.x + src.sprite_source_size.w * 0.5f - ori_w * 0.5f;
-		offset.y = src.sprite_source_size.y + src.sprite_source_size.h * 0.5f - ori_h * 0.5f;
+		offset.y = -(src.sprite_source_size.y + src.sprite_source_size.h * 0.5f - ori_h * 0.5f);
 	}
 }
 
