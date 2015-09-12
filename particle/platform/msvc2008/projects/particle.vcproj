@@ -146,6 +146,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\particle2d.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\particle2d.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\particle3d.c"
 			>
 		</File>

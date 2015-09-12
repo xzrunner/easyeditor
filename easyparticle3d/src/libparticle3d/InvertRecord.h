@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-struct particle_3d;
+struct p3d_particle;
 
 namespace eparticle3d
 {
@@ -14,7 +14,7 @@ public:
 	InvertRecord();
 	~InvertRecord();
 
-	void AddItem(particle_3d* p);
+	void AddItem(p3d_particle* p);
 
 	void StoreToFile(const std::string& filepath) const;
 
@@ -25,7 +25,7 @@ public:
 private:
 	struct Item
 	{
-		Item(particle_3d* p);
+		Item(p3d_particle* p);
 
 		void StoreToFile(Json::Value& val) const;
 

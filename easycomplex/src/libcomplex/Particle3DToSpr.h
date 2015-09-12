@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <easycoco.h>
 
-struct ps_cfg_3d;
+struct p3d_ps_config;
 
 namespace ecomplex
 {
@@ -15,7 +15,7 @@ public:
 	static d2d::ISprite* Trans(const libcoco::PackParticle3D* p3d);
 
 private:
-	static ps_cfg_3d* LoadConfig(const libcoco::PackParticle3D* p3d);
+	static p3d_ps_config* LoadConfig(const libcoco::PackParticle3D* p3d);
 
 }; // Particle3DToSpr
 

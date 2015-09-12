@@ -3,7 +3,7 @@
 #include "PackNodeFactory.h"
 
 #include <easyparticle3d.h>
-#include <ps/particle3d.h>
+#include <particle3d.h>
 
 namespace libcoco
 {
@@ -50,7 +50,7 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* symbol)
 
 void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* ps)
 {
-	const ps_cfg_3d* cfg = symbol->GetPS()->GetConfig();
+	const p3d_ps_config* cfg = symbol->GetPS()->GetConfig();
 
 	ps->emission_time = cfg->emission_time;
 	ps->count = cfg->count;
@@ -89,7 +89,7 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 
 	ps->components.reserve(cfg->symbol_count);
 	for (int i = 0; i < cfg->symbol_count; ++i) {
-		const particle_symbol& p_symbol = cfg->symbols[i];
+		const p3d_symbol& p_symbol = cfg->symbols[i];
 
 		PackParticle3D::Component comp;
 

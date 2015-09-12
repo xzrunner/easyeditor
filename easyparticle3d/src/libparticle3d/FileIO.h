@@ -3,7 +3,7 @@
 
 #include <string>
 
-struct ps_cfg_3d;
+struct p3d_ps_config;
 class ParticleSystem;
 
 namespace eparticle3d
@@ -20,7 +20,7 @@ public:
 		ToolbarPanel* toolbar);
 
 	static ParticleSystem* LoadPS(const std::string& filepath);
-	static ps_cfg_3d* LoadPSConfig(const std::string& filepath);
+	static p3d_ps_config* LoadPSConfig(const std::string& filepath);
 
 }; // FileIO
 

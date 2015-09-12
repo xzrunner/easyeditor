@@ -9,7 +9,7 @@
 #include "ComponentPanel.h"
 #include "language.h"
 
-#include <ps/particle3d.h>
+#include <particle3d.h>
 
 #include <easyanim.h>
 
@@ -85,7 +85,7 @@ void ToolbarPanel::Add(const FileAdapter::Component& comp)
 {
 	// todo Release symbol
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
-	particle_symbol* pc = m_stage->m_ps->AddSymbol(symbol);
+	p3d_symbol* pc = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
 	cp->m_name->SetValue(comp.name);
@@ -329,7 +329,7 @@ void ToolbarPanel::InitParticle()
 {
 	clear();
 
-	ps_cfg_3d* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
+	p3d_ps_config* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP, cfg);
 //	ps->Start();
 	d2d::obj_assign<ParticleSystem>(m_stage->m_ps, ps);
@@ -374,7 +374,7 @@ void ToolbarPanel::clear()
 
 void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 {
-	particle_symbol* ps = m_stage->m_ps->AddSymbol(symbol);
+	p3d_symbol* ps = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, ps, this);
 	m_compSizer->Insert(m_children.size(), cp);
 	m_compSizer->AddSpacer(10);

@@ -4,7 +4,7 @@
 #include "PSConfigMgr.h"
 #include "language.h"
 
-#include <ps/particle3d.h>
+#include <particle3d.h>
 
 namespace eparticle3d
 {
@@ -14,7 +14,7 @@ static const float SCALE_END			= 100;
 static const float ROTATE_MIN			= 0;
 static const float ROTATE_MAX			= 0;
 
-ComponentPanel::ComponentPanel(wxWindow* parent, particle_symbol* pc, ToolbarPanel* toolbar)
+ComponentPanel::ComponentPanel(wxWindow* parent, p3d_symbol* pc, ToolbarPanel* toolbar)
 	: wxPanel(parent)
 	, m_pc(pc)
 	, m_toolbar(toolbar)

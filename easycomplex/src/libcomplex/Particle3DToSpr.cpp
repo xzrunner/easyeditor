@@ -9,7 +9,7 @@ namespace ecomplex
 
 d2d::ISprite* Particle3DToSpr::Trans(const libcoco::PackParticle3D* p3d)
 {
-	ps_cfg_3d* cfg = LoadConfig(p3d);
+	p3d_ps_config* cfg = LoadConfig(p3d);
 
 	eparticle3d::ParticleSystem* ps = new eparticle3d::ParticleSystem(eparticle3d::PARTICLE_CAP, cfg);
 
@@ -18,10 +18,10 @@ d2d::ISprite* Particle3DToSpr::Trans(const libcoco::PackParticle3D* p3d)
 	return new eparticle3d::Sprite(symbol);
 }
 
-ps_cfg_3d* Particle3DToSpr::LoadConfig(const libcoco::PackParticle3D* p3d)
+p3d_ps_config* Particle3DToSpr::LoadConfig(const libcoco::PackParticle3D* p3d)
 {
-	int sz = sizeof(ps_cfg_3d) + sizeof(particle_symbol) * eparticle3d::MAX_COMPONENTS;
-	ps_cfg_3d* cfg = (ps_cfg_3d*) operator new(sz);
+	int sz = sizeof(p3d_ps_config) + sizeof(p3d_symbol) * eparticle3d::MAX_COMPONENTS;
+	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
 	memset(cfg, 0, sz);
 
 	cfg->emission_time = p3d->emission_time;
@@ -65,11 +65,11 @@ ps_cfg_3d* Particle3DToSpr::LoadConfig(const libcoco::PackParticle3D* p3d)
 	cfg->dir.z = 1;
 
 	cfg->symbol_count = p3d->components.size();
-	cfg->symbols = (particle_symbol*)(cfg+1);
+	cfg->symbols = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = p3d->components.size(); i < n; ++i)
 	{
 		const libcoco::PackParticle3D::Component& src = p3d->components[i];
-		particle_symbol& dst = cfg->symbols[i];
+		p3d_symbol& dst = cfg->symbols[i];
 
 		dst.scale_start = src.scale_start;
 		dst.scale_end = src.scale_end;

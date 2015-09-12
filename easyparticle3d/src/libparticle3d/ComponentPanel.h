@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-struct particle_symbol;
+struct p3d_symbol;
 struct ps_color4f;
 
 namespace eparticle3d
@@ -14,7 +14,7 @@ class ToolbarPanel;
 class ComponentPanel : public wxPanel, public d2d::UICallback
 {
 public:
-	ComponentPanel(wxWindow* parent, particle_symbol* pc, ToolbarPanel* toolbar);
+	ComponentPanel(wxWindow* parent, p3d_symbol* pc, ToolbarPanel* toolbar);
 
 	//
 	// UICallback interface
@@ -36,7 +36,7 @@ private:
 	void OnSetAddCol(wxCommandEvent& event);
 
 private:
-	particle_symbol* m_pc;
+	p3d_symbol* m_pc;
 
 	ToolbarPanel* m_toolbar;
 

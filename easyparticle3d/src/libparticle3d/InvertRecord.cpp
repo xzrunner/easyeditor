@@ -1,7 +1,7 @@
 #include "InvertRecord.h"
 #include "ParticleSystem.h"
 
-#include <ps/particle3d.h>
+#include <particle3d.h>
 
 namespace eparticle3d
 {
@@ -16,7 +16,7 @@ InvertRecord::~InvertRecord()
 	Clear();
 }
 
-void InvertRecord::AddItem(particle_3d* p)
+void InvertRecord::AddItem(p3d_particle* p)
 {
 	m_items.push_back(new Item(p));
 }
@@ -50,7 +50,7 @@ void InvertRecord::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 InvertRecord::Item::
-Item(particle_3d* p)
+Item(p3d_particle* p)
 {
 	dead_time = clock();
 

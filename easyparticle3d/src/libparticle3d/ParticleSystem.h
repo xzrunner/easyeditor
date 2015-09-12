@@ -4,10 +4,10 @@
 #include <drag2d.h>
 #include <easy3d.h>
 
-struct particle_system_3d;
-struct ps_cfg_3d;
-struct particle_symbol;
-struct particle_3d;
+struct p3d_particle_system;
+struct p3d_ps_config;
+struct p3d_symbol;
+struct p3d_particle;
 
 namespace eparticle3d
 {
@@ -18,7 +18,7 @@ class InvertRecord;
 class ParticleSystem : public d2d::Object, public d2d::ICloneable, public d2d::UICallback
 {
 public:
-	ParticleSystem(unsigned int buffer, ps_cfg_3d* cfg);
+	ParticleSystem(unsigned int buffer, p3d_ps_config* cfg);
 	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
@@ -65,17 +65,17 @@ public:
 
 	void SetPosition(const d2d::Vector& pos) { m_pos = pos; }
 
-	particle_symbol* AddSymbol(d2d::ISymbol* symbol);
+	p3d_symbol* AddSymbol(d2d::ISymbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 
-	const ps_cfg_3d* GetConfig() const;
+	const p3d_ps_config* GetConfig() const;
 
 private:
-	void Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
+	void Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
 
-	static void AddFunc(particle_3d* p);
-	static void RemoveFunc(particle_3d* p);
+	static void AddFunc(p3d_particle* p);
+	static void RemoveFunc(p3d_particle* p);
 
 private:
 	AnimRecorder* m_anim_recorder;
@@ -84,7 +84,7 @@ private:
 private:
 	d2d::Vector m_pos;
 
-	particle_system_3d* m_ps;
+	p3d_particle_system* m_ps;
 
 	static ParticleSystem* PS;
 

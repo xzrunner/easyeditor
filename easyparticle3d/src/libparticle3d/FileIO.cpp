@@ -7,7 +7,7 @@
 #include "ps_config.h"
 #include "config.h"
 
-#include <ps/particle3d.h>
+#include <particle3d.h>
 
 namespace eparticle3d
 {
@@ -41,7 +41,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
-		particle_symbol* pc = cp->m_pc;
+		p3d_symbol* pc = cp->m_pc;
 
 		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(pc->ud);
 		value["components"][i]["filepath"] = 
@@ -133,11 +133,11 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 {
-	ps_cfg_3d* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
+	p3d_ps_config* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
 	return new ParticleSystem(PARTICLE_CAP, cfg);
 }
 
-ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
+p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -150,8 +150,8 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 	FileAdapter adapter;
 	adapter.Load(filepath);
 	
-	int sz = sizeof(ps_cfg_3d) + sizeof(particle_symbol) * MAX_COMPONENTS;
-	ps_cfg_3d* cfg = (ps_cfg_3d*) operator new(sz);
+	int sz = sizeof(p3d_ps_config) + sizeof(p3d_symbol) * MAX_COMPONENTS;
+	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
 	memset(cfg, 0, sz);
 	
 	cfg->emission_time = adapter.emission_time;
@@ -195,10 +195,10 @@ ps_cfg_3d* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->dir.z = 1;
 
 	cfg->symbol_count = adapter.components.size();
-	cfg->symbols = (particle_symbol*)(cfg+1);
+	cfg->symbols = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = adapter.components.size(); i < n; ++i) {
 		const FileAdapter::Component& comp = adapter.components[i];
-		particle_symbol& symbol = cfg->symbols[i];
+		p3d_symbol& symbol = cfg->symbols[i];
 
 		symbol.scale_start = comp.scale_start * 0.01f;
 		symbol.scale_end = comp.scale_end * 0.01f;

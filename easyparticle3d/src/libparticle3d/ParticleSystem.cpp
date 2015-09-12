@@ -6,7 +6,7 @@
 #include "ps_config.h"
 #include "utility.h"
 
-#include <ps/particle3d.h>
+#include <particle3d.h>
 
 namespace eparticle3d
 {
@@ -14,13 +14,13 @@ namespace eparticle3d
 
 ParticleSystem* ParticleSystem::PS = NULL;
 
-ParticleSystem::ParticleSystem(unsigned int buffer, ps_cfg_3d* cfg)
+ParticleSystem::ParticleSystem(unsigned int buffer, p3d_ps_config* cfg)
 	: m_anim_recorder(new AnimRecorder(buffer))
 	, m_inv_record(new InvertRecord)
 {
 	PS = this;
 
-	m_ps = ps_create(buffer, cfg);
+	m_ps = p3d_create(buffer, cfg);
 
 	m_ps->add_func = &AddFunc;
 	m_ps->remove_func = &RemoveFunc;
@@ -33,7 +33,7 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	PS = this;
 
 	m_pos = ps.m_pos;
-	m_ps = ps_create(PARTICLE_CAP, ps.m_ps->cfg);
+	m_ps = p3d_create(PARTICLE_CAP, ps.m_ps->cfg);
 
 	m_ps->add_func = &AddFunc;
 	m_ps->remove_func = &RemoveFunc;
@@ -147,7 +147,7 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 
 void ParticleSystem::Update(float dt)
 {
-	ps_update(m_ps, dt);
+	p3d_update(m_ps, dt);
 }
 
 void ParticleSystem::SetDirection(float x, float y, float z)
@@ -277,12 +277,12 @@ void ParticleSystem::SetRadius3D(bool is3d)
 	m_ps->cfg->is_start_radius_3d = is3d;
 }
 
-particle_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
+p3d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
 {
 	assert(m_ps->cfg->count < MAX_COMPONENTS);
 
-	particle_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
-	memset(&comp, 0, sizeof(particle_symbol));
+	p3d_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
+	memset(&comp, 0, sizeof(p3d_symbol));
 
 	comp.scale_start = comp.scale_end = 1;
 
@@ -305,9 +305,9 @@ void ParticleSystem::DelSymbol(int idx)
 	if (m_ps->cfg->count == 1) {
 		m_ps->cfg->count = 0;
 	} else {
-		const particle_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
-		particle_symbol& dst = m_ps->cfg->symbols[idx];
-		memcpy(&dst, &src, sizeof(particle_symbol));
+		const p3d_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
+		p3d_symbol& dst = m_ps->cfg->symbols[idx];
+		memcpy(&dst, &src, sizeof(p3d_symbol));
 	}
 }
 
@@ -316,18 +316,18 @@ void ParticleSystem::DelAllSymbol()
 	m_ps->cfg->symbol_count = 0;
 }
 
-const ps_cfg_3d* ParticleSystem::GetConfig() const
+const p3d_ps_config* ParticleSystem::GetConfig() const
 {
 	return m_ps->cfg;
 }
 
-void ParticleSystem::Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRecorder* recorder) const
+void ParticleSystem::Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRecorder* recorder) const
 {
 	if (m_anim_recorder) {
 		m_anim_recorder->FinishFrame();
 	}
 
-	particle_3d* p = ps->start;
+	p3d_particle* p = ps->start;
 	while (p != ps->last)
 	{
 		//glPushAttrib(GL_CURRENT_BIT);
@@ -370,13 +370,13 @@ void ParticleSystem::Draw(particle_system_3d* ps, const d2d::Matrix& mt, AnimRec
 	}
 }
 
-void ParticleSystem::AddFunc(particle_3d* p)
+void ParticleSystem::AddFunc(p3d_particle* p)
 {
 	p->init_pos.x = PS->m_pos.x;
 	p->init_pos.y = PS->m_pos.y;
 }
 
-void ParticleSystem::RemoveFunc(particle_3d* p)
+void ParticleSystem::RemoveFunc(p3d_particle* p)
 {
 	if (PS->m_inv_record) {
 		PS->m_inv_record->AddItem(p);
