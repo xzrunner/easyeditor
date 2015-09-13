@@ -169,34 +169,6 @@
 				RelativePath="..\..\..\src\libparticle3d\Symbol.h"
 				>
 			</File>
-			<Filter
-				Name="ps"
-				>
-				<File
-					RelativePath="..\..\..\src\libparticle3d\item_string.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle3d\ParticleSystem.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle3d\ParticleSystem.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle3d\ps_config.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle3d\PSConfigMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle3d\PSConfigMgr.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="file"
@@ -331,6 +303,34 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libparticle3d\utility.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="ps"
+			>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\item_string.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\ParticleSystem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\ParticleSystem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\ps_config.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\PSConfigMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\PSConfigMgr.h"
 				>
 			</File>
 		</Filter>

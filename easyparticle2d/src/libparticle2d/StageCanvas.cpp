@@ -1,6 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "ParticleSystem.h"
+#include "ParticleSystem2.h"
 
 namespace eparticle2d
 {
@@ -31,12 +31,11 @@ void StageCanvas::OnDrawSprites() const
 			continue;
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
-	
-	ParticleSystem* ps = m_stage->GetStageData()->GetPS();
-	if (ps) {
-		ps->Draw(d2d::Matrix());
-	}
 
+	if (m_stage->m_ps) {
+		m_stage->m_ps->Draw(d2d::Matrix());
+	}
+	
 	m_stage->DrawEditOP();
 }
 

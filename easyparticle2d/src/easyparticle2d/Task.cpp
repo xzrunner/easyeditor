@@ -34,7 +34,7 @@ void Task::Load(const char* filename)
 
 	int version = value["version"].asInt();
 	LoadPSSymbol(filename, value);
-	m_toolbar->Load(value, version);
+//	m_toolbar->Load(value, version);
 }
 
 void Task::Store(const char* filename) const
@@ -42,7 +42,7 @@ void Task::Store(const char* filename) const
 	Json::Value value;
 
 	StorePSSymbol(filename, value);
-	m_toolbar->Store(value);
+//	m_toolbar->Store(value);
 	value["version"] = VERSION;
 
 	Json::StyledStreamWriter writer;
@@ -93,7 +93,8 @@ void Task::initLayout()
 		= new d2d::PropertySettingPanel(left_hori_splitter);
 	property->SetEditPanel(m_stage->GetStageImpl());
 
-	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, m_stage->GetStageData());
+//	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, m_stage->GetStageData());
+	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage);
 
 	left_hori_splitter->SetSashGravity(0.6f);
 	left_hori_splitter->SplitHorizontally(m_library, property);
@@ -101,7 +102,7 @@ void Task::initLayout()
 	leftSplitter->SetSashGravity(0.2f);
 	leftSplitter->SplitVertically(left_hori_splitter, m_stage);
 
-	rightSplitter->SetSashGravity(0.85f);
+	rightSplitter->SetSashGravity(0.7f);
 	rightSplitter->SplitVertically(leftSplitter, m_toolbar);
 
 	m_root = rightSplitter;
@@ -109,23 +110,23 @@ void Task::initLayout()
 
 void Task::StorePSSymbol(const char* filename, Json::Value& val) const
 {
-	ParticleSystem* ps = m_stage->GetStageData()->GetCurrPS();
-	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
-	val["symbol_path"] = d2d::FilenameTools::getRelativePath(dir,
-		ps->GetSymbolFilePath()).ToStdString();
-	val["name"] = m_ps_name;
+// 	ParticleSystem* ps = m_stage->GetStageData()->GetCurrPS();
+// 	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+// 	val["symbol_path"] = d2d::FilenameTools::getRelativePath(dir,
+// 		ps->GetSymbolFilePath()).ToStdString();
+// 	val["name"] = m_ps_name;
 }
 
 void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 {
-	StageData* sd = m_stage->GetStageData();
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
-	std::string path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-	sd->ChangePSSymbol(symbol);
-	symbol->Release();
-
-	m_ps_name = val["name"].asString();
+// 	StageData* sd = m_stage->GetStageData();
+// 	std::string dir = d2d::FilenameTools::getFileDir(filename);
+// 	std::string path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
+// 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
+// 	sd->ChangePSSymbol(symbol);
+// 	symbol->Release();
+// 
+// 	m_ps_name = val["name"].asString();
 }
 
 }

@@ -279,7 +279,7 @@ void ParticleSystem::SetRadius3D(bool is3d)
 
 p3d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
 {
-	assert(m_ps->cfg->count < MAX_COMPONENTS);
+	assert(m_ps->cfg->symbol_count < MAX_COMPONENTS);
 
 	p3d_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
 	memset(&comp, 0, sizeof(p3d_symbol));
@@ -298,12 +298,12 @@ p3d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
 
 void ParticleSystem::DelSymbol(int idx)
 {
-	if (idx < 0 || idx >= m_ps->cfg->count) {
+	if (idx < 0 || idx >= m_ps->cfg->symbol_count) {
 		return;
 	}
 
-	if (m_ps->cfg->count == 1) {
-		m_ps->cfg->count = 0;
+	if (m_ps->cfg->symbol_count == 1) {
+		m_ps->cfg->symbol_count = 0;
 	} else {
 		const p3d_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
 		p3d_symbol& dst = m_ps->cfg->symbols[idx];

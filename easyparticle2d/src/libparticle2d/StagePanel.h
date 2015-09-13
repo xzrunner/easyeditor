@@ -3,14 +3,13 @@
 
 #include <drag2d.h>
 
-#include "StageData.h"
-
 namespace eparticle2d
 {
 
 class LibraryPanel;
 class ToolbarPanel;
 class Symbol;
+class ParticleSystem;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
@@ -23,11 +22,10 @@ public:
 	void SetSelectedSymbol(Symbol* symbol);
 	void SetToolbar(ToolbarPanel* toolbar);
 
-	StageData* GetStageData() { return &m_data; }
+public:
+	ParticleSystem* m_ps;
 
 private:
-	StageData m_data;
-
 	clock_t m_last_time;
 
 }; // StagePanel

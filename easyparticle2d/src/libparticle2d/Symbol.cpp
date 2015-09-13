@@ -1,5 +1,5 @@
 #include "Symbol.h"
-#include "ParticleSystem.h"
+#include "ParticleSystem2.h"
 #include "item_string.h"
 #include "ps_config.h"
 
@@ -70,44 +70,44 @@ void Symbol::ResetPS()
 
 void Symbol::LoadResources()
 {
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	int version = value["version"].asInt();
-
- 	m_ps = new ParticleSystem(1000);
-	if (version == 0) {
-		m_ps->SetValue(PS_EMISSION_TIME, d2d::UICallback::Data(value[ITEM_EMISSION_TIME].asDouble() * 0.001f));
-		m_ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble() * 0.001f));
-		m_ps->SetValue(PS_LIFE, d2d::UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble() * 0.001f, value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble() * 0.001f));
-		m_ps->SetValue(PS_SCALE, d2d::UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble() * 0.01f, value[ITEM_SCALE][ITEM_ATTR_END].asDouble() * 0.01f));
-		m_ps->SetValue(PS_COS_FREQUENCY, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble() * 0.01f, value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble() * 0.01f));
-	} else {
-		m_ps->SetValue(PS_EMISSION_TIME, d2d::UICallback::Data(value[ITEM_EMISSION_TIME].asDouble()));
-		m_ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble()));
-		m_ps->SetValue(PS_LIFE, d2d::UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble(), value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble()));
-		m_ps->SetValue(PS_SCALE, d2d::UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble(), value[ITEM_SCALE][ITEM_ATTR_END].asDouble()));
-		m_ps->SetValue(PS_COS_FREQUENCY, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble(), value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble()));
-	}
-	m_ps->SetValue(PS_COUNT, d2d::UICallback::Data(value[ITEM_COUNT].asInt()));
-	m_ps->SetValue(PS_POSITION, d2d::UICallback::Data(value[ITEM_POSITION][ITEM_ATTR_X].asInt(), value[ITEM_POSITION][ITEM_ATTR_Y].asInt()));
-	m_ps->SetValue(PS_DIRECTION, d2d::UICallback::Data(value[ITEM_DIRECTION][ITEM_ATTR_CENTER].asInt(), value[ITEM_DIRECTION][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_SPEED, d2d::UICallback::Data(value[ITEM_SPEED][ITEM_ATTR_CENTER].asInt(), value[ITEM_SPEED][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_GRAVITY, d2d::UICallback::Data(value[ITEM_GRAVITY][ITEM_ATTR_CENTER].asInt(), value[ITEM_GRAVITY][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_RADIAL_ACC, d2d::UICallback::Data(value[ITEM_RADIAL_ACC][ITEM_ATTR_CENTER].asInt(), value[ITEM_RADIAL_ACC][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_TANGENTIAL_ACC, d2d::UICallback::Data(value[ITEM_TANGENTIAL_ACC][ITEM_ATTR_CENTER].asInt(), value[ITEM_TANGENTIAL_ACC][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_COS_AMPLITUDE, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_CENTER].asInt(), value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_OFFSET].asInt()));
-
-	wxString dir = d2d::FilenameTools::getFileDir(m_filepath) + "\\";
-	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["symbol_path"].asString());
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-	m_ps->SetSymbol(symbol);
-	symbol->Release();
+// 	Json::Value value;
+// 	Json::Reader reader;
+// 	std::locale::global(std::locale(""));
+// 	std::ifstream fin(m_filepath.c_str());
+// 	std::locale::global(std::locale("C"));
+// 	reader.parse(fin, value);
+// 	fin.close();
+// 
+// 	int version = value["version"].asInt();
+// 
+//  	m_ps = new ParticleSystem(1000);
+// 	if (version == 0) {
+// 		m_ps->SetValue(PS_EMISSION_TIME, d2d::UICallback::Data(value[ITEM_EMISSION_TIME].asDouble() * 0.001f));
+// 		m_ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble() * 0.001f));
+// 		m_ps->SetValue(PS_LIFE, d2d::UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble() * 0.001f, value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble() * 0.001f));
+// 		m_ps->SetValue(PS_SCALE, d2d::UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble() * 0.01f, value[ITEM_SCALE][ITEM_ATTR_END].asDouble() * 0.01f));
+// 		m_ps->SetValue(PS_COS_FREQUENCY, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble() * 0.01f, value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble() * 0.01f));
+// 	} else {
+// 		m_ps->SetValue(PS_EMISSION_TIME, d2d::UICallback::Data(value[ITEM_EMISSION_TIME].asDouble()));
+// 		m_ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble()));
+// 		m_ps->SetValue(PS_LIFE, d2d::UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble(), value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble()));
+// 		m_ps->SetValue(PS_SCALE, d2d::UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble(), value[ITEM_SCALE][ITEM_ATTR_END].asDouble()));
+// 		m_ps->SetValue(PS_COS_FREQUENCY, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble(), value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble()));
+// 	}
+// 	m_ps->SetValue(PS_COUNT, d2d::UICallback::Data(value[ITEM_COUNT].asInt()));
+// 	m_ps->SetValue(PS_POSITION, d2d::UICallback::Data(value[ITEM_POSITION][ITEM_ATTR_X].asInt(), value[ITEM_POSITION][ITEM_ATTR_Y].asInt()));
+// 	m_ps->SetValue(PS_DIRECTION, d2d::UICallback::Data(value[ITEM_DIRECTION][ITEM_ATTR_CENTER].asInt(), value[ITEM_DIRECTION][ITEM_ATTR_OFFSET].asInt()));
+// 	m_ps->SetValue(PS_SPEED, d2d::UICallback::Data(value[ITEM_SPEED][ITEM_ATTR_CENTER].asInt(), value[ITEM_SPEED][ITEM_ATTR_OFFSET].asInt()));
+// 	m_ps->SetValue(PS_GRAVITY, d2d::UICallback::Data(value[ITEM_GRAVITY][ITEM_ATTR_CENTER].asInt(), value[ITEM_GRAVITY][ITEM_ATTR_OFFSET].asInt()));
+// 	m_ps->SetValue(PS_RADIAL_ACC, d2d::UICallback::Data(value[ITEM_RADIAL_ACC][ITEM_ATTR_CENTER].asInt(), value[ITEM_RADIAL_ACC][ITEM_ATTR_OFFSET].asInt()));
+// 	m_ps->SetValue(PS_TANGENTIAL_ACC, d2d::UICallback::Data(value[ITEM_TANGENTIAL_ACC][ITEM_ATTR_CENTER].asInt(), value[ITEM_TANGENTIAL_ACC][ITEM_ATTR_OFFSET].asInt()));
+// 	m_ps->SetValue(PS_COS_AMPLITUDE, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_CENTER].asInt(), value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_OFFSET].asInt()));
+// 
+// 	wxString dir = d2d::FilenameTools::getFileDir(m_filepath) + "\\";
+// 	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["symbol_path"].asString());
+// 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
+// 	m_ps->SetSymbol(symbol);
+// 	symbol->Release();
 }
 
 void Symbol::DrawPS(const d2d::Matrix& mt) const
