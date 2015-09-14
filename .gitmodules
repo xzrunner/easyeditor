@@ -4,6 +4,9 @@
 [submodule "ejoy2d/external/dtex"]
 	path = ejoy2d/external/dtex
 	url = ssh://git@oa.ejoy.com/users/zz/dtex.git
+[submodule "epbin/external/dtex"]
+	path = epbin/external/dtex
+	url = ssh://git@oa.ejoy.com/users/zz/dtex.git
 [submodule "particle/src"]
 	path = particle/src
 	url = ssh://git@oa.ejoy.com/users/zz/ps.git
