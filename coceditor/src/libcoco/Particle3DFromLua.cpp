@@ -54,6 +54,8 @@ void Particle3DFromLua::UnpackComponents(lua_State* L, PackParticle3D* p3d)
 
 void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 {
+	p3d->capacity = epbin::LuaDataHelper::GetIntField(L, "capacity");
+
 	p3d->emission_time = TransTime(epbin::LuaDataHelper::GetIntField(L, "emission_time"));
 	p3d->count = epbin::LuaDataHelper::GetIntField(L, "count");
 

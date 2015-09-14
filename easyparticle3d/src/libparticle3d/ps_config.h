@@ -6,7 +6,8 @@ namespace eparticle3d
 
 enum PS_PROPERTY
 {
-	PS_COUNT = 0,
+	PS_CAPACITY = 0,
+	PS_COUNT,
 	PS_EMISSION_TIME,
 	PS_LIFE_TIME,
 	PS_SPEED,
@@ -23,7 +24,7 @@ enum PS_PROPERTY
 	PS_ALPHA,
 };
 
-static const int PARTICLE_CAP = 1000;
+static const int PARTICLE_CAP = 100;
 
 static const int MAX_COMPONENTS = 256;
 

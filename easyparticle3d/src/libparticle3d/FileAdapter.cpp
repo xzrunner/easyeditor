@@ -14,10 +14,8 @@ void FileAdapter::Load(const std::string& filepath)
 	fin.close();
 
 	name = value["name"].asString();
-	package = value["package"].asString();
 
 	count = value["count"].asInt();
-	layer = value["layer"].asInt();
 	emission_time = value["emission_time"].asInt() * 0.001f;
 
 	if (!value["life"].isNull()) {

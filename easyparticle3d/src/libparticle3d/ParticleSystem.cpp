@@ -33,7 +33,7 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	PS = this;
 
 	m_pos = ps.m_pos;
-	m_ps = p3d_create(PARTICLE_CAP, ps.m_ps->cfg);
+	m_ps = p3d_create(ps.GetPSCapacity(), ps.m_ps->cfg);
 
 	m_ps->add_func = &AddFunc;
 	m_ps->remove_func = &RemoveFunc;
@@ -51,6 +51,9 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 {
 	switch (key)
 	{
+	case PS_CAPACITY:
+		SetPSCapacity(data.val0);
+		break;
 	case PS_COUNT:
 		m_ps->cfg->count = data.val0;
 		break;
@@ -98,6 +101,9 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 {
 	switch (key)
 	{
+	case PS_CAPACITY:
+		data.val0 = GetPSCapacity();
+		break;
 	case PS_COUNT:
 		data.val0 = m_ps->cfg->count;
 		break;
@@ -174,11 +180,6 @@ void ParticleSystem::Stop()
 	m_ps->emit_counter = 0;
 }
 
-void ParticleSystem::Clear()
-{
-	m_ps->last = m_ps->start;
-}
-
 void ParticleSystem::Reset()
 {
 //  	// todo clear child's ps
@@ -221,6 +222,11 @@ void ParticleSystem::SetLoop(bool loop)
 	} else {
 		Pause();
 	}
+}
+
+void ParticleSystem::Clear()
+{
+	m_ps->last = m_ps->start;
 }
 
 bool ParticleSystem::IsEmpty() const
@@ -321,6 +327,11 @@ const p3d_ps_config* ParticleSystem::GetConfig() const
 	return m_ps->cfg;
 }
 
+int ParticleSystem::GetPSCapacity() const
+{
+	return m_ps->end - m_ps->start;
+}
+
 void ParticleSystem::Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRecorder* recorder) const
 {
 	if (m_anim_recorder) {
@@ -367,6 +378,35 @@ void ParticleSystem::Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRe
 		//glPopAttrib();
 
 		++p;
+	}
+}
+
+void ParticleSystem::SetPSCapacity(int cap)
+{	
+	if (cap <= 0) {
+		return;
+	}
+
+	int curr_cap = GetPSCapacity();
+	if (cap == curr_cap) {
+		return;
+	} else {
+		Reset();
+	}
+
+	if (cap < curr_cap) {
+		m_ps->end = m_ps->start + cap;
+	} else if (cap > curr_cap) {
+		int real_cap = curr_cap;
+		while (real_cap < cap) {
+			real_cap *= 2;
+		}
+		p3d_particle_system* new_ps = p3d_create(real_cap, m_ps->cfg);
+		p3d_release(m_ps);
+		m_ps = new_ps;
+
+		m_ps->add_func = &AddFunc;
+		m_ps->remove_func = &RemoveFunc;
 	}
 }
 

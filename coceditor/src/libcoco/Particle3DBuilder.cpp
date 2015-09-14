@@ -52,6 +52,8 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 {
 	const p3d_ps_config* cfg = symbol->GetPS()->GetConfig();
 
+	ps->capacity = symbol->GetPS()->GetPSCapacity();
+
 	ps->emission_time = cfg->emission_time;
 	ps->count = cfg->count;
 

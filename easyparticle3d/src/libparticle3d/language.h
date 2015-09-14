@@ -15,9 +15,8 @@ enum {
 	LK_END,
 
 	LK_NAME,
-	LK_PACKAGE,
+	LK_CAPACITY,
 	LK_COUNT,
-	LK_LAYER,
 	LK_EMISSION_TIME,
 	LK_LIFE,
 	LK_HORI,
@@ -58,9 +57,8 @@ static const char* EN[] = {
 	"end",
 
 	"Name",
-	"Package",	
+	"Capacity",
 	"Count",
-	"Layer",
 	"Emission Time (ms)",
 	"Life (ms)",
 	"Horizontal (deg)",
@@ -101,9 +99,8 @@ static const char* CN[] = {
 	"结束",
 
 	"名字",
-	"包名",
+	"容量",
 	"数量",
-	"层",
 	"发射周期(毫秒)",
 	"生命周期(毫秒)",
 	"水平发射角度",

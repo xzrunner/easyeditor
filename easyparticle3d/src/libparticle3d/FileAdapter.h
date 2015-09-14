@@ -34,10 +34,8 @@ public:
 
 public:
 	std::string name;
-	std::string package;
 
 	int count;
-	int layer;
 	float emission_time;
 
 	float life, life_var;

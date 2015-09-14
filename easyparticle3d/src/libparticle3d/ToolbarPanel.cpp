@@ -16,6 +16,7 @@
 namespace eparticle3d
 {
 
+static const float CAPACITY				= 100;
 static const float COUNT				= 20;
 static const float EMISSION_TIME		= 150;
 static const float LIFE_CENTER			= 800;
@@ -132,28 +133,17 @@ wxSizer* ToolbarPanel::initLayout()
 		leftSizer->Add(sizer);
 	}
 	leftSizer->AddSpacer(10);
-	// Package
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_PACKAGE]));
-		sizer->Add(m_package = new wxTextCtrl(this, wxID_ANY));
-		leftSizer->Add(sizer);
-	}
+	// Capacity
+	d2d::SliderCtrlOne* s_capacity = new d2d::SliderCtrlOne(this, LANG[LK_CAPACITY], 
+		"capacity", this, PS_CAPACITY, d2d::SliderItem("", "", CAPACITY, 1, 1000));
+	leftSizer->Add(s_capacity);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_capacity);
 	// Count
 	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, LANG[LK_COUNT], 
 		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));
 	leftSizer->Add(s_count);
-	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_count);
-	// Layer
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_LAYER]));
-		sizer->Add(m_layer = new wxSpinCtrl(this));
-		leftSizer->Add(sizer);
-	}
-	leftSizer->AddSpacer(10);
 	// Emission Time
 	d2d::SliderCtrlOne* s_emission_time = new d2d::SliderCtrlOne(this, LANG[LK_EMISSION_TIME], 
 		"emission_time", this, PS_EMISSION_TIME, d2d::SliderItem("", "", EMISSION_TIME, 10, 5000));
@@ -180,7 +170,6 @@ wxSizer* ToolbarPanel::initLayout()
 
 			horiSizer->Add(sizer);
 		}
-		horiSizer->AddSpacer(10);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MAX]));	

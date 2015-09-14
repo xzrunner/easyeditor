@@ -71,8 +71,12 @@ public:
 
 	const p3d_ps_config* GetConfig() const;
 
+	int GetPSCapacity() const;
+
 private:
 	void Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
+
+	void SetPSCapacity(int cap);
 
 	static void AddFunc(p3d_particle* p);
 	static void RemoveFunc(p3d_particle* p);

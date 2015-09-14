@@ -20,9 +20,6 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	value["version"] = VERSION;
 
 	value["name"] = toolbar->m_name->GetValue().ToStdString();
-	value["package"] = toolbar->m_package->GetValue().ToStdString();
-
-	value["layer"] = toolbar->m_layer->GetValue();
 
 	value["min_hori"] = toolbar->m_min_hori->GetValue();
 	value["max_hori"] = toolbar->m_max_hori->GetValue();
@@ -100,12 +97,13 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 		value["speed"]["offset"] = adapter.spd_var;
 	}
 
+	if (value["capacity"].isNull()) {
+		value["capacity"] = PARTICLE_CAP;
+	}
+
 	toolbar->Load(value, version);
 
 	toolbar->m_name->SetValue(adapter.name);
-	toolbar->m_package->SetValue(adapter.package);
-
-	toolbar->m_layer->SetValue(adapter.layer);
 
 	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
 	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
@@ -134,7 +132,22 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 {
 	p3d_ps_config* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
-	return new ParticleSystem(PARTICLE_CAP, cfg);
+
+	int cap = PARTICLE_CAP;
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	if (!value["capacity"].isNull()) {
+		cap = value["capacity"].asInt();
+	}
+
+	return new ParticleSystem(cap, cfg);
 }
 
 p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)

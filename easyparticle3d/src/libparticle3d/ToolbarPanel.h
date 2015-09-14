@@ -74,8 +74,6 @@ private:
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 
 	wxTextCtrl* m_name;
-	wxTextCtrl* m_package;
-	wxSpinCtrl* m_layer;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
 	wxCheckBox* m_bounce;

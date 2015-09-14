@@ -11,7 +11,7 @@ d2d::ISprite* Particle3DToSpr::Trans(const libcoco::PackParticle3D* p3d)
 {
 	p3d_ps_config* cfg = LoadConfig(p3d);
 
-	eparticle3d::ParticleSystem* ps = new eparticle3d::ParticleSystem(eparticle3d::PARTICLE_CAP, cfg);
+	eparticle3d::ParticleSystem* ps = new eparticle3d::ParticleSystem(p3d->capacity, cfg);
 
 	eparticle3d::Symbol* symbol = new eparticle3d::Symbol;
 	symbol->SetPS(ps);
