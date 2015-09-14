@@ -1,5 +1,7 @@
-#ifndef _LIBCOCO_SPRITE_PACK_H_
-#define _LIBCOCO_SPRITE_PACK_H_
+#ifndef EJOY_2D_SPRITE_PACK_H
+#define EJOY_2D_SPRITE_PACK_H
+
+#include "particle3d.h"
 
 #include <lua.h>
 #include <stdint.h>
@@ -22,12 +24,16 @@
 #define PTR_SIZE_DIFF (8 - sizeof(void *))
 #define SIZEOF_POINTER 8
 
-struct pack_particle3d {
-	void* ps;
+struct p3d_particle_system;
+struct ps3d_sprite
+{
+	struct p3d_particle_system* ps;
 	int last_frame;
+};
 
-	int component_number;
-	int component[1];
+struct pack_particle3d {
+	struct ps3d_sprite spr;
+	struct p3d_ps_config cfg;
 };
 
 #define SIZEOF_PARTICLE3D (sizeof(struct pack_particle3d))
@@ -157,4 +163,4 @@ struct sprite_pack {
 int ejoy2d_spritepack(lua_State *L);
 void dump_pack(struct sprite_pack *pack);
 
-#endif // _LIBCOCO_SPRITE_PACK_H_
+#endif
