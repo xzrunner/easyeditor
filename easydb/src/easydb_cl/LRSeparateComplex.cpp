@@ -74,18 +74,28 @@ void LRSeparateComplex::Run(const std::string& filepath)
 		int idx = 0;
 		Json::Value src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
 		while (!src_val.isNull()) {
+			bool is_cover = false;
+
+			std::string tag = src_val["tag"].asString();
+			if (tag.find(COVER_LAYER_STR) != std::string::npos) {
+				is_cover = true;
+			}
+
 			std::string filepath = src_val["filepath"].asString();
-// 			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
-// 				;
-// 			} else {
-				Json::Value& dst_val = 	new_lr_val["layer"][layer_idx]["sprite"][idx-1];
-				std::string tag = src_val["tag"].asString();
-				if (tag.find(COVER_LAYER_STR) != std::string::npos) {
-					SeparateSprite(src_val, dst_val);
-				} else {
-					FixSpriteName(src_val, dst_val);
-				}
-//			}
+			if (!is_cover &&
+				d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d) &&
+				tag.find(TOP_LAYER_STR) == std::string::npos) {
+				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
+				is_cover = true;
+			} 
+						
+			Json::Value& dst_val = 	new_lr_val["layer"][layer_idx]["sprite"][idx-1];
+			if (is_cover) {
+				SeparateSprite(src_val, dst_val);
+			} else {
+				FixSpriteName(src_val, dst_val);
+			}
+
 			src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
 		}
 	}

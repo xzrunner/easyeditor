@@ -91,20 +91,16 @@ void LRToComplex::LoadAllSpriteValue(const Json::Value& src_val, Json::Value& ds
 void LRToComplex::LoadSpriteValue(const Json::Value& spr_val, Json::Value& dst_val)
 {
 	std::string filepath = spr_val["filepath"].asString();
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
-		;
-	} else {
-		Json::Value spr_val_fix = spr_val;
-		std::string suffix = "_shape.json";
-		int pos = filepath.find(suffix);
-		if (pos!= std::string::npos) {
-			std::string fix_filepath = filepath.substr(0, pos) + ".png";
-			if (d2d::FilenameTools::IsFileExist(fix_filepath)) {
-				spr_val_fix["filepath"] = fix_filepath;
-			}
-		}	
-		dst_val[dst_val.size()] = spr_val_fix;
+	Json::Value spr_val_fix = spr_val;
+	std::string suffix = "_shape.json";
+	int pos = filepath.find(suffix);
+	if (pos!= std::string::npos) {
+		std::string fix_filepath = filepath.substr(0, pos) + ".png";
+		if (d2d::FilenameTools::IsFileExist(fix_filepath)) {
+			spr_val_fix["filepath"] = fix_filepath;
+		}
 	}	
+	dst_val[dst_val.size()] = spr_val_fix;
 }
 
 void LRToComplex::OutputComplexFile(Json::Value& complex_val, const std::string& filepath,

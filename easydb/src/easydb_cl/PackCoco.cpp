@@ -270,6 +270,26 @@ void PackCoco::GetImagesFromJson(const std::vector<std::string>& src_dirs, const
 			ocean_val = value["ocean"][i++];
 		}
 	}
+	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) 
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		int i = 0;
+		Json::Value comp_val = value["components"][i++];
+		while (!comp_val.isNull()) {
+			std::string filepath = comp_val["filepath"].asString();
+			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+			filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+			img_set.insert(filepath);
+			comp_val = value["components"][i++];
+		}
+	}
 	else if (filepath.find("_history.json")) 
 	{
 	}
@@ -503,6 +523,9 @@ void PackCoco::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string&
 	libcoco::CocoPacker packer(config_dir, output_name, output_dir);
 	packer.OutputEpe(output_name, true);
 	packer.OutputEpt(output_name, libcoco::TT_PNG8);
+
+	// debug
+	packer.OutputLua(output_name + ".lua");
 }
 
 void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& config_dir, 
