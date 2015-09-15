@@ -535,6 +535,12 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
  	d2d::Vector offset = picture->offset;
  	offset.x *= sprite->GetScale().x / picture->invscale;
  	offset.y *= sprite->GetScale().y / picture->invscale;
+	if (xMirror) {
+		offset.x = -offset.x;
+	}
+	if (yMirror) {
+		offset.y = -offset.y;
+	}
  	d2d::Vector center = sprite->GetCenter();
  	center += d2d::Math::rotateVector(offset, sprite->GetAngle());
  	for (size_t i = 0; i < 4; ++i)
