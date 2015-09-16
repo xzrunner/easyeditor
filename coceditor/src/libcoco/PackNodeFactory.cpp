@@ -46,7 +46,7 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_terrain2d_builder = new Terrain2DBuilder);
 
 	// particle3d
-	m_builders.push_back(m_particle3d_builder = new Particle3DBuilder);
+	m_builders.push_back(m_particle3d_builder = new Particle3DBuilder(m_export_set));
 }
 
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)

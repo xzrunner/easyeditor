@@ -45,7 +45,7 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 	node->UnpackFromLua(L, images);
 
 	m_map_id.insert(std::make_pair(id, node));
-	if (type == "animation") {
+	if (type == "animation" || type == "particle3d") {
 		UpdateMapName(node);
 	}
 }
@@ -75,12 +75,12 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 	node->UnpackFromBin(ptr, images);
 
 	m_map_id.insert(std::make_pair(id, node));
-	if (type == TYPE_ANIMATION) {
+	if (type == TYPE_ANIMATION || type == TYPE_PARTICLE3D) 
+	{
 		std::map<int, std::string>::const_iterator itr = map_export.find(id);
 		if (itr != map_export.end()) {
-			static_cast<PackAnimation*>(node)->export_name = itr->second;
+			node->export_name = itr->second;
 		}
-
 		UpdateMapName(node);
 	}
 
@@ -127,14 +127,13 @@ void UnpackNodeFactory::AfterUnpack()
 
 void UnpackNodeFactory::UpdateMapName(IPackNode* node)
 {
-	PackAnimation* anim = static_cast<PackAnimation*>(node);
-	if (!anim->export_name.empty()) {
+	if (!node->export_name.empty()) {
 		std::map<std::string, IPackNode*>::iterator itr
-			= m_map_name.find(anim->export_name);
+			= m_map_name.find(node->export_name);
 		if (itr != m_map_name.end()) {
-			throw d2d::Exception("duplicate export name %s", anim->export_name);
+			throw d2d::Exception("duplicate export name %s", node->export_name);
 		} else {
-			m_map_name.insert(std::make_pair(anim->export_name, node));
+			m_map_name.insert(std::make_pair(node->export_name, node));
 		}
 	}
 }

@@ -1,10 +1,10 @@
 #include "ExportNameSet.h"
-#include "PackAnimation.h"
+#include "IPackNode.h"
 
 namespace libcoco
 {
 
-void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, PackAnimation* anim)
+void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, IPackNode* node)
 {
 	std::string export_name = symbol->name;
 	if (export_name.empty() || export_name[0] == '_') {
@@ -17,8 +17,8 @@ void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, PackAnimation* anim)
 			export_name.c_str(), symbol->GetFilepath().c_str());
 	}
 
-	anim->export_name = export_name;
-	m_map.insert(std::make_pair(export_name, anim->GetID()));
+	node->export_name = export_name;
+	m_map.insert(std::make_pair(export_name, node->GetID()));
 }
 
 }

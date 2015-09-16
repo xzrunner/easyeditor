@@ -43,6 +43,9 @@ public:
 		return m_filepath;
 	}
 
+public:
+	std::string export_name;
+
 protected:
 	int m_id;
 

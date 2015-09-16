@@ -6,13 +6,13 @@
 namespace libcoco
 {
 
-class PackAnimation;
+class IPackNode;
 
 class ExportNameSet
 {
 public:
 	
-	void LoadExport(const d2d::ISymbol* symbol, PackAnimation* anim);
+	void LoadExport(const d2d::ISymbol* symbol, IPackNode* node);
 
 	const std::map<std::string, int>& GetData() const { return m_map; }
 

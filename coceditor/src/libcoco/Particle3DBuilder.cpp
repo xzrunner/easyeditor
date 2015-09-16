@@ -8,7 +8,8 @@
 namespace libcoco
 {
 
-Particle3DBuilder::Particle3DBuilder()
+Particle3DBuilder::Particle3DBuilder(ExportNameSet& export_set)
+	: m_export_set(export_set)
 {
 }
 
@@ -50,6 +51,8 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* symbol)
 
 void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* ps)
 {
+	m_export_set.LoadExport(symbol, ps);
+
 	const p3d_ps_config* cfg = symbol->GetPS()->GetConfig();
 
 	ps->capacity = symbol->GetPS()->GetPSCapacity();

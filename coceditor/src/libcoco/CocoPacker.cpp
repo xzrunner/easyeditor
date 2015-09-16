@@ -8,6 +8,7 @@
 
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyparticle3d.h>
 
 namespace libcoco
 {
@@ -59,7 +60,8 @@ void CocoPacker::LoadJsonData(const std::string& dir)
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex) || 
-			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim) ||
+			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
 			filepaths.push_back(filepath);
 		}
 	}
@@ -96,6 +98,8 @@ void CocoPacker::Pack() const
 			factory->Create(complex);
 		} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol)) {
 			factory->Create(anim);
+		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
+			factory->Create(p3d);
 		} else {
 			throw d2d::Exception("CocoPacker::Pack unhandled type.");
 		}

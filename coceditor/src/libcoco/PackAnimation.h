@@ -98,8 +98,6 @@ private:
 	static void LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans);
 
 public:
-	std::string export_name;
-
 	std::vector<Component> components;
 
 	std::vector<Action> actions;

@@ -10,6 +10,10 @@ void Particle3DFromLua::Unpack(lua_State* L, PackParticle3D* p3d)
 {
 	p3d->components.clear();
 
+	if (epbin::LuaDataHelper::HasField(L, "export")) {
+		p3d->export_name = epbin::LuaDataHelper::GetStringField(L, "export");
+	}
+
 	UnpackComponents(L, p3d);
 	UnpackBody(L, p3d);
 }

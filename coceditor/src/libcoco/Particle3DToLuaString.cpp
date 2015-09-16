@@ -16,6 +16,9 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 
 	lua::assign_with_end(gen, "type", "\"particle3d\"");
 	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p3d->GetID()));
+	if (!p3d->export_name.empty()) {
+		lua::assign_with_end(gen, "export", "\"" + p3d->export_name + "\"");
+	}
 
 	{
 		lua::TableAssign ta(gen, "component", true);
