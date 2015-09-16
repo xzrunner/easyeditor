@@ -464,6 +464,14 @@
 					RelativePath="..\..\..\src\lr\dataset\UnitInfo.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UnitWidget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\UnitWidget.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

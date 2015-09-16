@@ -1,111 +1,157 @@
 {
-	"type" :
+	"widget" :
 	[
 		{
-			"key" : "SaleEllickMember",
-			"title" : "艾利克小兵"
+			"type" : "text",
+			"title" : "名字",
+			"key" : "name"
 		},
 		{
-			"key" : "SaleHenry",
-			"title" : "亨利"
+			"type" : "choice",
+			"title" : "阵营",
+			"key" : "camp",
+			"choices" :
+			[
+				{
+					"value" : "enemy",
+					"title" : "敌对"
+				},
+				{
+					"value" : "neutral",
+					"title" : "中立"
+				},
+				{
+					"value" : "ally",
+					"title" : "盟友"
+				}				
+			]
 		},
 		{
-			"key" : "SaleHenryMember",
-			"title" : "亨利小兵"
-		},
-		{
-			"key" : "SaleDelia",
-			"title" : "德利娅1"
-		},
-		{
-			"key" : "SaleDelia2",
-			"title" : "德利娅4"
-		},
-		{
-			"key" : "SaleDeliaMember",
-			"title" : "德利娅小兵"
-		},
-		{
-			"key" : "SaleDeliaMember2",
-			"title" : "德利娅小兵2"
-		},
-		{
-			"key" : "SaleMader",
-			"title" : "马德尔"
-		},
-		{
-			"key" : "SaleMaderMember",
-			"title" : "马德尔小兵"
-		},
-		{
-			"key" : "SaleBerserkerSoldier",
-			"title" : "狂战小兵"
-		},
+			"type" : "choice",
+			"title" : "类型",
+			"key" : "type",
+			"choices" :
+			[
+				{
+					"value" : "SaleEllickMember",
+					"title" : "艾利克小兵"
+				},
+				{
+					"value" : "SaleHenry",
+					"title" : "亨利"
+				},
+				{
+					"value" : "SaleHenryMember",
+					"title" : "亨利小兵"
+				},
+				{
+					"value" : "SaleDelia",
+					"title" : "德利娅1"
+				},
+				{
+					"value" : "SaleDelia2",
+					"title" : "德利娅4"
+				},
+				{
+					"value" : "SaleDeliaMember",
+					"title" : "德利娅小兵"
+				},
+				{
+					"value" : "SaleDeliaMember2",
+					"title" : "德利娅小兵2"
+				},
+				{
+					"value" : "SaleMader",
+					"title" : "马德尔"
+				},
+				{
+					"value" : "SaleMaderMember",
+					"title" : "马德尔小兵"
+				},
+				{
+					"value" : "SaleBerserkerSoldier",
+					"title" : "狂战小兵"
+				},
 
-		{
-			"key" : "SaleVillagerMale1",
-			"title" : "村民-男"
+				{
+					"value" : "SaleVillagerMale1",
+					"title" : "村民-男"
+				},
+				{
+					"value" : "SaleVillagerMale2",
+					"title" : "村民-光头男"
+				}			
+			]
 		},
 		{
-			"key" : "SaleVillagerMale2",
-			"title" : "村民-光头男"
+			"type" : "choice",
+			"title" : "队伍",
+			"key" : "squad",
+			"choices" :
+			[
+				{
+					"value" : "squad1",
+					"title" : "队伍1"
+				}
+			]
+		},
+		{
+			"type" : "check box",
+			"title" : "队长",
+			"key" : "leader",
+			"default" : false
+		},
+		{
+			"type" : "choice",
+			"title" : "朝向",
+			"key" : "dir",
+			"choices" :
+			[
+				{
+					"value" : "n",
+					"title" : "北"
+				},	
+				{
+					"value" : "ne",
+					"title" : "东北"
+				},	
+				{
+					"value" : "e",
+					"title" : "东"
+				},	
+				{
+					"value" : "se",
+					"title" : "东南"
+				},	
+				{
+					"value" : "s",
+					"title" : "南"
+				},	
+				{
+					"value" : "sw",
+					"title" : "西南"
+				},	
+				{
+					"value" : "w",
+					"title" : "西"
+				},
+				{
+					"value" : "nw",
+					"title" : "西北"
+				}
+			]
+		},
+		{
+			"type" : "check box",
+			"title" : "场景AI",
+			"key" : "scene_ai",
+			"default" : false
+		},
+		{
+			"type" : "check box",
+			"title" : "上帝视角",
+			"key" : "god_sight",
+			"default" : false
 		}
-	],
-	"camp" :
-	[
-		{
-			"key" : "enemy",
-			"title" : "敌对"
-		},
-		{
-			"key" : "neutral",
-			"title" : "中立"
-		},
-		{
-			"key" : "ally",
-			"title" : "盟友"
-		}				
-	],
-	"dir" :
-	[
-		{
-			"key" : "n",
-			"title" : "北"
-		},	
-		{
-			"key" : "ne",
-			"title" : "东北"
-		},	
-		{
-			"key" : "e",
-			"title" : "东"
-		},	
-		{
-			"key" : "se",
-			"title" : "东南"
-		},	
-		{
-			"key" : "s",
-			"title" : "南"
-		},	
-		{
-			"key" : "sw",
-			"title" : "西南"
-		},	
-		{
-			"key" : "w",
-			"title" : "西"
-		},
-		{
-			"key" : "nw",
-			"title" : "西北"
-		}
-	],
-	"squad" :
-	[
-		{
-			"key" : "squad1",
-			"title" : "队伍1"
-		}				
-	]	
+	]
 }

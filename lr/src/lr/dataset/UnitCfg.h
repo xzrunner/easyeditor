@@ -2,33 +2,24 @@
 #define _LR_UNIT_CFG_H_
 
 #include <vector>
-#include <string>
-#include <json/json.h>
 
 namespace lr
 {
+
+class UnitWidget;
 
 class UnitCfg
 {
 public:
 	static UnitCfg* Instance();
 
-public:
-	struct Item
-	{
-		std::string key;
-		std::string title;
-	};
-
-	std::vector<Item> type_list, camp_list, squad_list, dir_list;
-
 private:
 	UnitCfg() {}
 
 	void LoadFromFile(const char* filename);
 
-	static void LoadList(const Json::Value& val, const std::string& type, 
-		std::vector<Item>& list);
+public:
+	std::vector<UnitWidget*> widgets;
 
 private:
 	static bool m_loaded;

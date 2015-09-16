@@ -1,4 +1,5 @@
 #include "UnitCfg.h"
+#include "UnitWidget.h"
 
 #include <drag2d.h>
 #include <wx/stdpaths.h>
@@ -45,30 +46,26 @@ void UnitCfg::LoadFromFile(const char* filename)
 	reader.parse(fin, val);
 	fin.close();
 
-	LoadList(val, "type", type_list);
-	LoadList(val, "camp", camp_list);
-	LoadList(val, "dir", dir_list);
-	LoadList(val, "squad", squad_list);
-
-	m_loaded = true;
-}
-
-void UnitCfg::LoadList(const Json::Value& val, const std::string& type, 
-					   std::vector<Item>& list)
-{
-	list.clear();
-
 	int idx = 0;
-	Json::Value v = val[type][idx++];
-	while (!v.isNull()) {
-		Item item;
-		item.key = v["key"].asString();
-		item.title = v["title"].asString();
-		list.push_back(item);
-
-		v = val[type][idx++];
+	Json::Value w_val = val["widget"][idx++];
+	while (!w_val.isNull()) {
+		std::string type = w_val["type"].asString();
+		UnitWidget* widget = NULL;
+		if (type == "text") {
+			widget = new UnitTextWidget;
+		} else if (type == "choice") {
+			widget = new UnitChoiceWidget;
+		} else if (type == "check box") {
+			widget = new UnitCheckBoxWidget;
+		} else {
+			throw d2d::Exception("UnitCfg::LoadFromFile unknown type %s", type.c_str());
+		}
+		widget->LoadFromFile(w_val);
+		widgets.push_back(widget);
+		w_val = val["widget"][idx++];
 	}
 
+	m_loaded = true;
 }
 
 }
