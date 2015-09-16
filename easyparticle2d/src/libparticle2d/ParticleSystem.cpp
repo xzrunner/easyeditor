@@ -222,6 +222,11 @@ void ParticleSystem::SetLoop(bool loop)
 	}
 }
 
+void ParticleSystem::SetMode(int mode)
+{
+	m_ps->cfg->mode_type = mode;
+}
+
 void ParticleSystem::Clear()
 {
 	m_ps->last = m_ps->start;

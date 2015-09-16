@@ -271,6 +271,10 @@ void ToolbarPanel::OnChangeMode(wxCommandEvent& event)
 	}
 
 	Layout();
+	
+	if (m_stage->m_ps) {
+		m_stage->m_ps->SetMode(idx);
+	}
 }
 
 void ToolbarPanel::OnSetRotationIsDir(wxCommandEvent& event)

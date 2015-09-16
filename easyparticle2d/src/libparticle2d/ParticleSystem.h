@@ -34,6 +34,8 @@ public:
 	void Pause();
 	void SetLoop(bool loop);
 
+	void SetMode(int mode);
+
 	void Clear();
 
 	bool IsEmpty() const;
