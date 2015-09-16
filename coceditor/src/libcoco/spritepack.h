@@ -29,14 +29,17 @@ struct ps3d_sprite
 {
 	struct p3d_particle_system* ps;
 	int last_frame;
+	int _dummy;		// unused: dummy for align to 64bit
 };
+
+#define SIZEOF_PS3D_SPRITE (sizeof(struct ps3d_sprite) + PTR_SIZE_DIFF)
 
 struct pack_particle3d {
 	struct ps3d_sprite spr;
 	struct p3d_ps_config cfg;
 };
 
-#define SIZEOF_PARTICLE3D (sizeof(struct pack_particle3d))
+#define SIZEOF_PARTICLE3D (SIZEOF_PS3D_SPRITE + SIZEOF_P3D_PS_CONFIG)
 
 struct matrix;
 
@@ -57,9 +60,9 @@ struct pack_label {
 	int align;
 	int size;
 	int edge;
-    int space_h;
-    int space_w;
-    int auto_scale;
+	int space_h;
+	int space_w;
+	int auto_scale;
 };
 
 #define SIZEOF_LABEL (sizeof(struct pack_label))
