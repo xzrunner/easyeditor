@@ -1,7 +1,7 @@
 #include "ComponentPanel.h"
-#include "ToolBarPanel2.h"
+#include "ToolBarPanel.h"
 #include "language.h"
-#include "ps_config2.h"
+#include "ps_config.h"
 
 namespace eparticle2d
 {

@@ -1,6 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "ParticleSystem2.h"
+#include "ParticleSystem.h"
 
 namespace eparticle2d
 {

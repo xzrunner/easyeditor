@@ -2,7 +2,7 @@
 #include "StageCanvas.h"
 #include "SelectSpritesOP.h"
 #include "LibraryPanel.h"
-#include "ParticleSystem2.h"
+#include "ParticleSystem.h"
 
 namespace eparticle2d
 {

@@ -1,402 +1,289 @@
-//#include "ParticleSystem.h"
-//#include "Particle.h"
-//#include "config.h"
-//#include "ps_config.h"
-//
-//namespace eparticle2d
-//{
-//
-//ParticleSystem::ParticleSystem(int buffer)
-//{
-//	m_active = false;
-//
-//	m_last = m_start = new Particle[buffer];
-//	m_end = m_start + buffer;
-//
-//	m_emit_counter = 0;
-//
-//	m_emission_time = 0;
-//	m_count = 0;
-//
-//	m_lifetime = DURATION_INFINITY;
-//	m_life = 0;
-//	m_fadeout_time = 0;
-//
-//	m_symbol = NULL;
-//}
-//
-//ParticleSystem::~ParticleSystem()
-//{
-//	delete[] m_start;
-//
-//	if (m_symbol) {
-//		m_symbol->Release();
-//	}
-//}
-//
-//void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
-//{
-//	switch (key)
-//	{
-//	case PS_DURATION:
-//		m_lifetime = data.val0;
-//		break;
-//	case PS_COUNT:
-//		m_count = data.val0;
-//		break;
-//	case PS_EMISSION_TIME:
-//		m_emission_time = data.val0;
-//		break;
-//	case PS_FADEOUT_TIME:
-//		m_fadeout_time = data.val0; 
-//		break;
-//
-//	case PS_LIFE:
-//		m_life_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_DIRECTION:
-//		m_direction_region.Set((data.val0 - data.val1) * d2d::TRANS_DEG_TO_RAD, (data.val0 + data.val1) * d2d::TRANS_DEG_TO_RAD);
-//		break;
-//	case PS_SCALE:
-//		m_scale_start = data.val0;
-//		m_scale_end = data.val1;
-//		break;
-//	case PS_SPEED:
-//		m_speed_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_GRAVITY:
-//		m_gravity_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_RADIAL_ACC:
-//		m_radial_acc_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_TANGENTIAL_ACC:
-//		m_tangential_acc_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_POSITION:
-//		m_posx_region.Set(-data.val0, data.val0);
-//		m_posy_region.Set(-data.val1, data.val1);
-//		break;
-//
-//	case PS_COS_AMPLITUDE:
-//		m_cos_amplitude_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_COS_FREQUENCY:
-//		m_cos_frequency_region.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//
-//	case PS_START_RADIUS:
-//		m_start_radius.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_END_RADIUS:
-//		m_end_radius.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	case PS_ROTATE_PER_SECOND:
-//		m_rotate_per_second.Set(data.val0 - data.val1, data.val0 + data.val1);
-//		break;
-//	}
-//}
-//
-//void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
-//{
-//	switch (key)
-//	{
-//	case PS_DURATION:
-//		data.val0 = m_lifetime;
-//		break;
-//	case PS_COUNT:
-//		data.val0 = m_count;
-//		break;
-//	case PS_EMISSION_TIME:
-//		data.val0 = m_emission_time;
-//		break;
-//	case PS_FADEOUT_TIME:
-//		data.val0 = m_fadeout_time;
-//		break;
-//
-//	case PS_LIFE:
-//		{
-//			float sub = m_life_region.Begin(),
-//				add = m_life_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_DIRECTION:
-//		{
-//			float sub = m_direction_region.Begin() * d2d::TRANS_RAD_TO_DEG,
-//				add = m_direction_region.End() * d2d::TRANS_RAD_TO_DEG;
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_SCALE:
-//		data.val0 = m_scale_start;
-//		data.val1 = m_scale_end;
-//		break;
-//	case PS_SPEED:
-//		{
-//			float sub = m_speed_region.Begin(),
-//				add = m_speed_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_GRAVITY:
-//		{
-//			float sub = m_gravity_region.Begin(),
-//				add = m_gravity_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_RADIAL_ACC:
-//		{
-//			float sub = m_radial_acc_region.Begin(),
-//				add = m_radial_acc_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_TANGENTIAL_ACC:
-//		{
-//			float sub = m_tangential_acc_region.Begin(),
-//				add = m_tangential_acc_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_POSITION:
-//		data.val0 = m_posx_region.End();
-//		data.val1 = m_posy_region.End();
-//		break;
-//
-//	case PS_COS_AMPLITUDE:
-//		{
-//			float sub = m_cos_amplitude_region.Begin(),
-//				add = m_cos_amplitude_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_COS_FREQUENCY:
-//		{
-//			float sub = m_cos_frequency_region.Begin(),
-//				add = m_cos_frequency_region.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//
-//	case PS_START_RADIUS:
-//		{
-//			float sub = m_start_radius.Begin(),
-//				add = m_start_radius.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_END_RADIUS:
-//		{
-//			float sub = m_end_radius.Begin(),
-//				add = m_end_radius.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	case PS_ROTATE_PER_SECOND:
-//		{
-//			float sub = m_rotate_per_second.Begin(),
-//				add = m_rotate_per_second.End();
-//			data.val0 = (sub + add) * 0.5f;
-//			data.val1 = (add - sub) * 0.5f;
-//		}
-//		break;
-//	}
-//}
-//
-//void ParticleSystem::Draw(const d2d::Matrix& mt)
-//{
-//	if (!m_symbol) {
-//		return;
-//	}
-//
-//	Particle* p = m_start;
-//	while (p != m_last) 
-//	{
-//		d2d::SpriteRenderer::Instance()->Draw(m_symbol, mt, p->position, 
-//			p->angle, p->scale, p->scale, 0, 0, p->color);
-//		++p;
-//	}
-//}
-//
-//void ParticleSystem::Update(float dt)
-//{
-//	if (m_active) 
-//	{
-//		float rate = m_emission_time / m_count;
-//		m_emit_counter += dt;
-//		while (m_emit_counter > rate)
-//		{
-//			Add();
-//			m_emit_counter -= rate;
-//		}
-//
-//		m_life -= dt;
-//		if (m_lifetime != DURATION_INFINITY && m_life < 0) {
-//			Stop();
-//		}
-//	}
-//
-// 	Particle* p = m_start;
-//	while (p != m_last)
-//	{
-//		if (p->life > 0)
-//		{
-//			p->life -= dt;
-//
-//			p->scale = (p->life / p->lifetime) * (m_scale_start - m_scale_end) + m_scale_end;
-//
-//			if (p->life < m_fadeout_time) {
-//				p->color.a = p->life / m_fadeout_time;
-//			}
-//
-//			d2d::Vector radial = p->position - p->origin;
-//			radial.normalize();
-//			d2d::Vector tangential = d2d::Math::rotateVectorRightAngle(radial, true);
-//
-//			radial *= p->radial_acceleration;			
-//			tangential *= p->tangential_acceleration;
-//
-//			d2d::Vector gravity(0.0f, -p->gravity);
-//
-//			p->speed += (radial + tangential + gravity) * dt;
-//
-//			// 水平速度cos效果器
-//			if (p->cos_amplitude != 0) {
-//				p->speed.x = p->cos_amplitude * cos(p->cos_frequency * (p->lifetime - p->life));
-//			}
-//
-//			if (p->delta_angle != 0 || p->delta_radius != 0) {
-//				p->angle += p->delta_angle * dt;
-//				p->radius += p->delta_radius * dt;
-//				p->position.x = - cos(p->angle) * p->radius;
-//				p->position.y = - sin(p->angle) * p->radius;
-//			}
-//
-//			p->position += p->speed * dt;
-//
-//			++p;
-//		}
-//		else
-//		{
-//			Remove(p);
-//			if (p > m_last) {
-//				return;
-//			}
-//		}
-//	}
-//}
-//
-//void ParticleSystem::Start()
-//{
-//	m_active = true;
-//}
-//
-//void ParticleSystem::Stop()
-//{
-//	m_active = false;
-//	m_life = m_lifetime;
-//	m_emit_counter = 0;
-//}
-//
-//void ParticleSystem::Reset()
-//{
-//	m_last = m_start;
-//	m_life = m_lifetime;
-//	m_emit_counter = 0;
-//}
-//
-//void ParticleSystem::Pause()
-//{
-//	m_active = false;
-//}
-//
-//void ParticleSystem::ReloadTexture() const
-//{
-//	if (m_symbol) {
-//		m_symbol->ReloadTexture();
-//	}
-//}
-//
-//void ParticleSystem::SetSymbol(d2d::ISymbol* symbol)
-//{
-//	if (m_symbol != symbol)
-//	{
-//		if (m_symbol) {
-//			m_symbol->Release();
-//		}
-//		m_symbol = symbol;
-//		if (m_symbol) {
-//			m_symbol->Retain();
-//		}
-//	}
-//}
-//
-//void ParticleSystem::Add()
-//{
-//	if (IsFull()) {
-//		return;
-//	}
-//
-//	Particle* p = m_last;
-//
-//	p->lifetime = m_life_region.Random();
-//	p->life = p->lifetime;
-//
-//	p->position.x = m_posx_region.Random();
-//	p->position.y = m_posy_region.Random();
-//	p->origin = p->position;
-//	p->direction = m_direction_region.Random();
-//
-//	float speed = m_speed_region.Random();
-//	p->speed = d2d::Vector(cos(p->direction), sin(p->direction)) * speed;
-//	p->gravity = m_gravity_region.Random();
-//	p->radial_acceleration = m_radial_acc_region.Random();
-//	p->tangential_acceleration = m_tangential_acc_region.Random();
-//
-//	p->cos_amplitude = m_cos_amplitude_region.Random();
-//	p->cos_frequency = m_cos_frequency_region.Random();
-//
-//	float start_radius = m_start_radius.Random(),
-//		end_radius = m_end_radius.Random();
-//	p->radius = start_radius;
-//	p->delta_radius = (end_radius - start_radius) / p->lifetime;
-//
-//	// todo 
-//	p->angle = 0;
-//	p->delta_angle = m_rotate_per_second.Random() * d2d::TRANS_DEG_TO_RAD;
-//
-//	p->color = d2d::WHITE;
-//
-//	m_last++;
-//}
-//
-//void ParticleSystem::Remove(Particle * p)
-//{
-//	if (!IsEmpty()) {
-//		*p = *(--m_last);
-//	}
-//}
-//
-//bool ParticleSystem::IsFull() const
-//{
-//	return m_last == m_end;
-//}
-//
-//bool ParticleSystem::IsEmpty() const
-//{
-//	return m_start == m_last;
-//}
-//
-//}
+#include "ParticleSystem.h"
+#include "ps_config.h"
+
+#include <particle2d.h>
+
+namespace eparticle2d
+{
+
+ParticleSystem::ParticleSystem(unsigned int buffer, p2d_ps_config* cfg)
+{
+	m_ps = p2d_create(buffer, cfg);
+}
+
+ParticleSystem::ParticleSystem(const ParticleSystem& ps)
+{
+	m_pos = ps.m_pos;
+	m_ps = p2d_create(PARTICLE_CAP, ps.m_ps->cfg);
+}
+
+ParticleSystem::~ParticleSystem()
+{
+	free(m_ps);
+}
+
+void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case PS_COUNT:
+		m_ps->cfg->count = data.val0;
+		break;
+	case PS_EMISSION_TIME:
+		m_ps->cfg->emission_time = data.val0 * 0.001f;
+		break;
+	case PS_LIFE_TIME:
+		m_ps->cfg->life = data.val0 * 0.001f;
+		m_ps->cfg->life_var = data.val1 * 0.001f;
+		break;
+	case PS_POSITION_X:
+		m_ps->cfg->position.x = data.val0;
+		m_ps->cfg->position_var.x = data.val1;
+		break;
+	case PS_POSITION_Y:
+		m_ps->cfg->position.y = data.val0;
+		m_ps->cfg->position_var.y = data.val1;
+		break;
+	case PS_DIRECTION:
+		m_ps->cfg->direction = data.val0 * d2d::TRANS_DEG_TO_RAD;
+		m_ps->cfg->direction_var = data.val1 * d2d::TRANS_DEG_TO_RAD;
+		break;
+
+	case PS_GRAVITY:
+		m_ps->cfg->mode.A.gravity.x = data.val0;
+		m_ps->cfg->mode.A.gravity.y = data.val1;
+		break;
+	case PS_SPEED:
+		m_ps->cfg->mode.A.speed = data.val0;
+		m_ps->cfg->mode.A.speed_var = data.val1;
+		break;
+	case PS_TANGENTIAL_ACCEL:
+		m_ps->cfg->mode.A.tangential_accel = data.val0;
+		m_ps->cfg->mode.A.tangential_accel_var = data.val1;
+		break;
+	case PS_RADIAL_ACCEL:
+		m_ps->cfg->mode.A.radial_accel = data.val0;
+		m_ps->cfg->mode.A.radial_accel_var = data.val1;
+		break;
+
+	case PS_START_RADIUS:
+		m_ps->cfg->mode.B.start_radius = data.val0;
+		m_ps->cfg->mode.B.start_radius_var = data.val1;
+		break;
+	case PS_END_RADIUS:
+		m_ps->cfg->mode.B.end_radius = data.val0;
+		m_ps->cfg->mode.B.end_radius_var = data.val1;
+		break;
+	case PS_DIRECTION_SPEED:
+		m_ps->cfg->mode.B.direction_delta = data.val0;
+		m_ps->cfg->mode.B.direction_delta_var = data.val1;
+		break;
+
+	case PS_COS_AMPLITUDE:
+		m_ps->cfg->mode.C.cos_amplitude = data.val0;
+		m_ps->cfg->mode.C.cos_amplitude_var = data.val1;
+		break;
+	case PS_COS_FREQUENCY:
+		m_ps->cfg->mode.C.cos_frequency = data.val0;
+		m_ps->cfg->mode.C.cos_frequency_var = data.val1;
+		break;	
+	}
+}
+
+void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case PS_COUNT:
+		data.val0 = m_ps->cfg->count;
+		break;
+	case PS_EMISSION_TIME:
+		data.val0 = m_ps->cfg->emission_time * 1000;
+		break;
+	case PS_LIFE_TIME:
+		data.val0 = m_ps->cfg->life * 1000;
+		data.val1 = m_ps->cfg->life_var * 1000;
+		break;
+	case PS_POSITION_X:
+		data.val0 = m_ps->cfg->position.x;
+		data.val1 = m_ps->cfg->position_var.x;
+		break;
+	case PS_POSITION_Y:
+		m_ps->cfg->position.y = data.val0;
+		m_ps->cfg->position_var.y = data.val1;
+		break;
+	case PS_DIRECTION:
+		data.val0 = m_ps->cfg->direction * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = m_ps->cfg->direction_var * d2d::TRANS_RAD_TO_DEG;
+		break;
+
+	case PS_GRAVITY:
+		data.val0 = m_ps->cfg->mode.A.gravity.x;
+		data.val1 = m_ps->cfg->mode.A.gravity.y;
+		break;
+	case PS_SPEED:
+		data.val0 = m_ps->cfg->mode.A.speed;
+		data.val1 = m_ps->cfg->mode.A.speed_var;
+		break;
+	case PS_TANGENTIAL_ACCEL:
+		data.val0 = m_ps->cfg->mode.A.tangential_accel;
+		data.val1 = m_ps->cfg->mode.A.tangential_accel_var;
+		break;
+	case PS_RADIAL_ACCEL:
+		data.val0 = m_ps->cfg->mode.A.radial_accel;
+		data.val1 = m_ps->cfg->mode.A.radial_accel_var;
+		break;
+
+	case PS_START_RADIUS:
+		data.val0 = m_ps->cfg->mode.B.start_radius;
+		data.val1 = m_ps->cfg->mode.B.start_radius_var;
+		break;
+	case PS_END_RADIUS:
+		data.val0 = m_ps->cfg->mode.B.end_radius;
+		data.val1 = m_ps->cfg->mode.B.end_radius_var;
+		break;
+	case PS_DIRECTION_SPEED:
+		data.val0 = m_ps->cfg->mode.B.direction_delta;
+		data.val1 = m_ps->cfg->mode.B.direction_delta_var;
+		break;
+
+	case PS_COS_AMPLITUDE:
+		data.val0 = m_ps->cfg->mode.C.cos_amplitude;
+		data.val1 = m_ps->cfg->mode.C.cos_amplitude_var;
+		break;
+	case PS_COS_FREQUENCY:
+		data.val0 = m_ps->cfg->mode.C.cos_frequency;
+		data.val1 = m_ps->cfg->mode.C.cos_frequency_var;
+		break;	
+	}
+}
+
+void ParticleSystem::Draw(const d2d::Matrix& mt) const
+{
+	p2d_particle* p = m_ps->start;
+	while (p != m_ps->last)
+	{
+		d2d::Colorf mul_col, add_col;
+		memcpy(&mul_col.r, &p->col_mul.r, sizeof(float) * 4);
+		memcpy(&add_col.r, &p->col_add.r, sizeof(float) * 4);
+
+		d2d::Vector pos;
+		pos.x = p->position.x;
+		pos.y = p->position.y;
+
+		float s = p->scale;
+
+		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p->symbol->ud);
+		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), pos, p->angle, s, s, 0, 0, mul_col, add_col);
+
+		++p;
+	}
+}
+
+void ParticleSystem::Update(float dt)
+{
+	p2d_update(m_ps, dt);
+}
+
+void ParticleSystem::Start()
+{
+	m_ps->is_active = true;
+}
+
+void ParticleSystem::Stop()
+{
+	m_ps->is_active = false;
+	m_ps->emit_counter = 0;
+}
+
+void ParticleSystem::Reset()
+{
+	m_ps->last = m_ps->start;
+	m_ps->emit_counter = 0;
+}
+
+void ParticleSystem::Pause()
+{
+	m_ps->is_active = false;
+}
+
+void ParticleSystem::SetLoop(bool loop)
+{
+	if (loop == m_ps->is_loop) {
+		return;
+	}
+
+	m_ps->is_loop = loop;
+
+	if (m_ps->is_loop) {
+		Start();
+	} else {
+		Pause();
+	}
+}
+
+void ParticleSystem::Clear()
+{
+	m_ps->last = m_ps->start;
+}
+
+bool ParticleSystem::IsEmpty() const
+{
+	return m_ps->start == m_ps->last;
+}
+
+void ParticleSystem::ReloadTexture() const
+{
+	for (int i = 0; i < m_ps->cfg->symbol_count; ++i) {
+		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(m_ps->cfg->symbols[i].ud);
+		symbol->ReloadTexture();
+	}
+}
+
+p2d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
+{
+	assert(m_ps->cfg->symbol_count < MAX_COMPONENTS);
+
+	p2d_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
+	memset(&comp, 0, sizeof(p2d_symbol));
+
+	comp.angle_start = comp.angle_end = 0;
+
+	comp.scale_start = comp.scale_end = 0;
+
+	comp.col_mul_start.r = comp.col_mul_start.g = comp.col_mul_start.b = comp.col_mul_start.a = 1;
+	comp.col_mul_end = comp.col_mul_start;
+	memset(&comp.col_add_start, 0, sizeof(comp.col_add_start));
+	memset(&comp.col_add_end, 0, sizeof(comp.col_add_end));
+
+	comp.ud = symbol;
+
+	return &comp;
+}
+
+void ParticleSystem::DelSymbol(int idx)
+{
+	if (idx < 0 || idx >= m_ps->cfg->symbol_count) {
+		return;
+	}
+
+	if (m_ps->cfg->symbol_count == 1) {
+		m_ps->cfg->symbol_count = 0;
+	} else {
+		const p2d_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
+		p2d_symbol& dst = m_ps->cfg->symbols[idx];
+		memcpy(&dst, &src, sizeof(p2d_symbol));
+	}
+}
+
+void ParticleSystem::DelAllSymbol()
+{
+	m_ps->cfg->symbol_count = 0;
+}
+
+const p2d_ps_config* ParticleSystem::GetConfig() const
+{
+	return m_ps->cfg;
+}
+
+}

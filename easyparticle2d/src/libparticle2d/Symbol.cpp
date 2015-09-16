@@ -1,5 +1,5 @@
 #include "Symbol.h"
-#include "ParticleSystem2.h"
+#include "ParticleSystem.h"
 #include "item_string.h"
 #include "ps_config.h"
 

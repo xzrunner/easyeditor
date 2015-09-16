@@ -1,5 +1,5 @@
 #include "PSConfigMgr.h"
-#include "ps_config2.h"
+#include "ps_config.h"
 
 #include <particle2d.h>
 

@@ -196,27 +196,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libparticle2d\SettingPageBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\SettingPageBase.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel2.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel2.h"
 					>
 				</File>
 				<Filter
@@ -228,26 +212,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="pages"
-					>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\EmitterSettingPage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\EmitterSettingPage.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SpecialSettingPage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SpecialSettingPage.h"
 						>
 					</File>
 				</Filter>
@@ -305,27 +269,11 @@
 			Name="particle"
 			>
 			<File
-				RelativePath="..\..\..\src\libparticle2d\Particle.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle2d\Particle.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libparticle2d\ParticleSystem.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libparticle2d\ParticleSystem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle2d\ParticleSystem2.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle2d\ParticleSystem2.h"
 				>
 			</File>
 			<File
@@ -362,15 +310,7 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libparticle2d\item_string2.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\libparticle2d\ps_config.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle2d\ps_config2.h"
 			>
 		</File>
 	</Files>
