@@ -30,11 +30,11 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_ps->cfg->count = data.val0;
 		break;
 	case PS_EMISSION_TIME:
-		m_ps->cfg->emission_time = data.val0;
+		m_ps->cfg->emission_time = data.val0 * 0.001f;
 		break;
 	case PS_LIFE_TIME:
-		m_ps->cfg->life = data.val0;
-		m_ps->cfg->life_var = data.val1;
+		m_ps->cfg->life = data.val0 * 0.001f;
+		m_ps->cfg->life_var = data.val1 * 0.001f;
 		break;
 	case PS_POSITION_X:
 		m_ps->cfg->position.x = data.val0;
@@ -45,8 +45,8 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_ps->cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		m_ps->cfg->direction = data.val0;
-		m_ps->cfg->direction_var = data.val1;
+		m_ps->cfg->direction = data.val0 * d2d::TRANS_DEG_TO_RAD;
+		m_ps->cfg->direction_var = data.val1 * d2d::TRANS_DEG_TO_RAD;
 		break;
 
 	case PS_GRAVITY:
@@ -98,11 +98,11 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		data.val0 = m_ps->cfg->count;
 		break;
 	case PS_EMISSION_TIME:
-		data.val0 = m_ps->cfg->emission_time;
+		data.val0 = m_ps->cfg->emission_time * 1000;
 		break;
 	case PS_LIFE_TIME:
-		data.val0 = m_ps->cfg->life;
-		data.val1 = m_ps->cfg->life_var;
+		data.val0 = m_ps->cfg->life * 1000;
+		data.val1 = m_ps->cfg->life_var * 1000;
 		break;
 	case PS_POSITION_X:
 		data.val0 = m_ps->cfg->position.x;
@@ -113,8 +113,8 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		m_ps->cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		data.val0 = m_ps->cfg->direction;
-		data.val1 = m_ps->cfg->direction_var;
+		data.val0 = m_ps->cfg->direction * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = m_ps->cfg->direction_var * d2d::TRANS_RAD_TO_DEG;
 		break;
 
 	case PS_GRAVITY:

@@ -23,12 +23,12 @@ void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_ANGLE:
-		m_component->angle_start = data.val0;
-		m_component->angle_end = data.val1;
+		m_component->angle_start = data.val0 * d2d::TRANS_DEG_TO_RAD;
+		m_component->angle_end = data.val1 * d2d::TRANS_DEG_TO_RAD;
 		break;
 	case PS_SCALE:
-		m_component->scale_start = data.val0;
-		m_component->scale_end = data.val1;
+		m_component->scale_start = data.val0 * 0.01f;
+		m_component->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ALPHA:
 		m_component->col_mul_start.a = data.val0;
@@ -42,12 +42,12 @@ void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_ANGLE:
-		data.val0 = m_component->angle_start;
-		data.val1 = m_component->angle_end;
+		data.val0 = m_component->angle_start * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = m_component->angle_end * d2d::TRANS_RAD_TO_DEG;
 		break;
 	case PS_SCALE:
-		data.val0 = m_component->scale_start;
-		data.val1 = m_component->scale_end;
+		data.val0 = m_component->scale_start * 100;
+		data.val1 = m_component->scale_end * 100;
 		break;
 	case PS_ALPHA:
 		data.val0 = m_component->col_mul_start.a;
