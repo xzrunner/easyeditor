@@ -29,7 +29,7 @@ private:
 
 	const std::vector<std::string>& m_path_names;
 
-	std::vector<UnitWidget*> m_special_widgets;
+//	std::vector<UnitWidget*> m_special_widgets;
 
 }; // UnitEditDlg
 

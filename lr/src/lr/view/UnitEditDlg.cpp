@@ -18,7 +18,7 @@ UnitEditDlg::UnitEditDlg(wxWindow* parent, d2d::ISprite* spr,
 
 UnitEditDlg::~UnitEditDlg()
 {
-	for_each(m_special_widgets.begin(), m_special_widgets.end(), DeletePointerFunctor<UnitWidget>());
+//	for_each(m_special_widgets.begin(), m_special_widgets.end(), DeletePointerFunctor<UnitWidget>());
 }
 
 std::string UnitEditDlg::ToString()
@@ -28,10 +28,10 @@ std::string UnitEditDlg::ToString()
 		UnitWidget* widget = cfg->widgets[i];
 		m_info.SetValue(widget->GetKey(), widget->GetValue());
 	}
-	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
-		UnitWidget* widget = m_special_widgets[i];
-		m_info.SetValue(widget->GetKey(), widget->GetValue());
-	}
+// 	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
+// 		UnitWidget* widget = m_special_widgets[i];
+// 		m_info.SetValue(widget->GetKey(), widget->GetValue());
+// 	}
 
 	m_spr->name = m_info.QueryValue("name");
 	 
@@ -44,10 +44,10 @@ void UnitEditDlg::InitDefault()
 		m_info.SetValue("name", m_spr->name);
 	}
 
-	// patrol
-	UnitChoiceWidget* patrol = new UnitChoiceWidget;
-	patrol->SpecialLoad("Ñ²Âß", "patrol", m_path_names, m_info.QueryValue("patrol"));
-	m_special_widgets.push_back(patrol);
+// 	// patrol
+// 	UnitChoiceWidget* patrol = new UnitChoiceWidget;
+// 	patrol->SpecialLoad("Ñ²Âß", "patrol", m_path_names, m_info.QueryValue("patrol"));
+// 	m_special_widgets.push_back(patrol);
 }
 
 void UnitEditDlg::InitLayout()
@@ -60,16 +60,16 @@ void UnitEditDlg::InitLayout()
 
 	wxSizer *left_sizer = new wxBoxSizer(wxVERTICAL),
 		*right_sizer = new wxBoxSizer(wxVERTICAL);
-	int half_count = (cfg->widgets.size() + m_special_widgets.size()) / 2;
+	int half_count = (cfg->widgets.size()/* + m_special_widgets.size()*/) / 2;
 	
 	for (int i = 0, n = cfg->widgets.size(); i < n; ++i) {
 		wxSizer* sz = i < half_count ? left_sizer : right_sizer;
 		cfg->widgets[i]->InitLayout(this, sz, m_info);
 	}
-	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
-		wxSizer* sz = i + cfg->widgets.size() < half_count ? left_sizer : right_sizer;
-		m_special_widgets[i]->InitLayout(this, sz, m_info);		
-	}
+// 	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
+// 		wxSizer* sz = i + cfg->widgets.size() < half_count ? left_sizer : right_sizer;
+// 		m_special_widgets[i]->InitLayout(this, sz, m_info);		
+// 	}
 
 	main_sizer->Add(left_sizer);
 	main_sizer->Add(right_sizer);
