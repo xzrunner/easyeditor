@@ -182,19 +182,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libparticle3d\FileAdapter.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle3d\FileAdapter.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libparticle3d\FileIO.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libparticle3d\FileIO.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\LoadAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\LoadAdapter.h"
 				>
 			</File>
 			<Filter

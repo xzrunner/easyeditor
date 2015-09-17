@@ -1,12 +1,12 @@
-#ifndef _EASYPARTICLE3D_FILE_ADAPTER_H_
-#define _EASYPARTICLE3D_FILE_ADAPTER_H_
+#ifndef _EASYPARTICLE3D_LOAD_ADAPTER_H_
+#define _EASYPARTICLE3D_LOAD_ADAPTER_H_
 
 #include <drag2d.h>
 
 namespace eparticle3d
 {
 
-class FileAdapter
+class LoadAdapter
 {
 public:
 	void Load(const std::string& filepath);
@@ -69,8 +69,8 @@ public:
 
 	std::vector<Component> components;
 
-}; // FileAdapter
+}; // LoadAdapter
 
 }
 
-#endif // _EASYPARTICLE3D_FILE_ADAPTER_H_
+#endif // _EASYPARTICLE3D_LOAD_ADAPTER_H_

@@ -82,7 +82,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-void ToolbarPanel::Add(const FileAdapter::Component& comp)
+void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 {
 	// todo Release symbol
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);

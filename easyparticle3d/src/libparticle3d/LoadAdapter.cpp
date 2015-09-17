@@ -1,9 +1,9 @@
-#include "FileAdapter.h"
+#include "LoadAdapter.h"
 
 namespace eparticle3d
 {
 
-void FileAdapter::Load(const std::string& filepath)
+void LoadAdapter::Load(const std::string& filepath)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -99,7 +99,7 @@ void FileAdapter::Load(const std::string& filepath)
 	}
 }
 
-void FileAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_val)
+void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_val)
 {
 	Component comp;
 

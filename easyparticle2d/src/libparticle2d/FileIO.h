@@ -1,11 +1,11 @@
-#ifndef _EASYPARTICLE3D_FILE_IO_H_
-#define _EASYPARTICLE3D_FILE_IO_H_
+#ifndef _EASYPARTICLE2D_FILE_IO_H_
+#define _EASYPARTICLE2D_FILE_IO_H_
 
 #include <string>
 
-struct p3d_ps_config;
+struct p2d_ps_config;
 
-namespace eparticle3d
+namespace eparticle2d
 {
 
 class ParticleSystem;
@@ -19,10 +19,10 @@ public:
 		ToolbarPanel* toolbar);
 
 	static ParticleSystem* LoadPS(const std::string& filepath);
-	static p3d_ps_config* LoadPSConfig(const std::string& filepath);
+	static p2d_ps_config* LoadPSConfig(const std::string& filepath);
 
 }; // FileIO
 
 }
 
-#endif // _EASYPARTICLE3D_FILE_IO_H_
+#endif // _EASYPARTICLE2D_FILE_IO_H_

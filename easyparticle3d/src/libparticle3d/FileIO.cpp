@@ -1,5 +1,5 @@
 #include "FileIO.h"
-#include "FileAdapter.h"
+#include "LoadAdapter.h"
 #include "ParticleSystem.h"
 #include "PSConfigMgr.h"
 #include "ToolBarPanel.h"
@@ -86,7 +86,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	reader.parse(fin, value);
 	fin.close();
 
-	FileAdapter adapter;
+	LoadAdapter adapter;
 	adapter.Load(filepath);
 
 	int version = value["version"].asInt();
@@ -160,7 +160,7 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	FileAdapter adapter;
+	LoadAdapter adapter;
 	adapter.Load(filepath);
 	
 	int sz = sizeof(p3d_ps_config) + sizeof(p3d_symbol) * MAX_COMPONENTS;
@@ -210,7 +210,7 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->symbol_count = adapter.components.size();
 	cfg->symbols = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = adapter.components.size(); i < n; ++i) {
-		const FileAdapter::Component& comp = adapter.components[i];
+		const LoadAdapter::Component& comp = adapter.components[i];
 		p3d_symbol& symbol = cfg->symbols[i];
 
 		symbol.scale_start = comp.scale_start * 0.01f;
