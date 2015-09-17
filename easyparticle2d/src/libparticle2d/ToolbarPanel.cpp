@@ -245,9 +245,7 @@ wxSizer* ToolbarPanel::CreateComponentLayout()
 	top_sizer->AddSpacer(20);
 	// Components
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_COMPONENTS]);
-		m_comp_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		m_comp_sizer->AddSpacer(10);
+		m_comp_sizer = new wxBoxSizer(wxVERTICAL);
 		top_sizer->Add(m_comp_sizer);
 	}
 	return top_sizer;

@@ -59,22 +59,42 @@ void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
 void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
-	top_sizer->AddSpacer(10);
-	// Del
+
+	std::string name = static_cast<d2d::ISymbol*>(m_component->ud)->GetFilepath();
+	name = d2d::FilenameTools::getFilename(name);
+
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	InitLayout(sizer);
+	top_sizer->Add(sizer);
+
+	top_sizer->AddSpacer(20);
+
+	SetSizer(top_sizer);
+}
+
+void ComponentPanel::InitLayout(wxSizer* top_sizer)
+{
+	// top
 	{
-		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE]);
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
-		top_sizer->Add(btn);
-	}
-	// Icon
-	{
-		
-		std::string filepath = static_cast<d2d::ISymbol*>(m_component->ud)->GetFilepath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
-			d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
-			top_sizer->Add(panel);
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		// Del
+		{
+			wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE], wxDefaultPosition, wxSize(50, 50));
+			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
+			sizer->Add(btn);
 		}
-		top_sizer->AddSpacer(10);
+		sizer->AddSpacer(50);
+		// Icon
+		{
+			std::string filepath = static_cast<d2d::ISymbol*>(m_component->ud)->GetFilepath();
+			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+				d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
+				sizer->Add(panel);
+			}
+			sizer->AddSpacer(10);
+		}		
+		top_sizer->Add(sizer);
 	}
 	// Angle
 	{
@@ -128,7 +148,6 @@ void ComponentPanel::InitLayout()
 		top_sizer->AddSpacer(10);
 		m_sliders.push_back(s_alpha);
 	}
-	SetSizer(top_sizer);
 }
 
 void ComponentPanel::OnDelete(wxCommandEvent& event)
