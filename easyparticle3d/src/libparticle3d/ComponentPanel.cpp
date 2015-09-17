@@ -95,7 +95,7 @@ void ComponentPanel::InitLayout()
 	{
 		std::string filepath = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
-			d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100, 100);
+			d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
 			topSizer->Add(panel);
 		}
 	}

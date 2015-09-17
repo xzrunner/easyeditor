@@ -9,8 +9,7 @@ namespace d2d
 class ImagePanel : public wxPanel
 {
 public:
-	ImagePanel(wxWindow* parent, const std::string& filepath, 
-		int width, int height);
+	ImagePanel(wxWindow* parent, const std::string& filepath, float max_len);
 
 private:
 	void OnSize(wxSizeEvent& event);
@@ -18,13 +17,11 @@ private:
 
 	void Draw(wxDC& dc) const;
 
+	void Resize(float max_len);
+
 private:
 	wxImage m_image;
 	wxBitmap m_resized;
-
-// 	mutable wxBitmap m_resized;
-// 
-// 	mutable int m_width, m_height;
 	
 	DECLARE_EVENT_TABLE()
 

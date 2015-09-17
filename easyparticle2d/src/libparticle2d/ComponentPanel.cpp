@@ -66,6 +66,16 @@ void ComponentPanel::InitLayout()
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
 		top_sizer->Add(btn);
 	}
+	// Icon
+	{
+		
+		std::string filepath = static_cast<d2d::ISymbol*>(m_component->ud)->GetFilepath();
+		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+			d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
+			top_sizer->Add(panel);
+		}
+		top_sizer->AddSpacer(10);
+	}
 	// Angle
 	{
 		d2d::SliderCtrlTwo* s_angle = new d2d::SliderCtrlTwo(this, LANG[LK_ANGLE], "angle", this, PS_ANGLE, 
