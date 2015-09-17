@@ -26,7 +26,7 @@ std::string UnitEditDlg::ToString()
 	UnitCfg* cfg = UnitCfg::Instance();
 	for (int i = 0, n = cfg->widgets.size(); i < n; ++i) {
 		UnitWidget* widget = cfg->widgets[i];
-		m_info.SetValue(widget->GetKey(), widget->GetValue());
+		m_info.SetValue(widget->GetKey(), widget->GetValue(), widget->GetValue() == DEFAULT_VAL);
 	}
 // 	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
 // 		UnitWidget* widget = m_special_widgets[i];

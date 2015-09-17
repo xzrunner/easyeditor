@@ -26,7 +26,12 @@ void UnitWidget::LoadFromFile(const Json::Value& value)
 
 std::string UnitTextWidget::GetValue() const
 {
-	return m_ctrl->GetValue().ToStdString();
+	std::string str = m_ctrl->GetValue().ToStdString();
+	if (str == m_default) {
+		return DEFAULT_VAL;
+	} else {
+		return str;
+	}
 }
 
 void UnitTextWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
@@ -36,11 +41,12 @@ void UnitTextWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
 
 	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
 
+	std::string default_str = m_default;
 	std::string value = info.QueryValue(GetKey());
 	if (!value.empty()) {
-		m_default = value;
+		default_str = value;
 	}
-	m_ctrl = new wxTextCtrl(parent, wxID_ANY, m_default, wxDefaultPosition, wxSize(200, -1));
+	m_ctrl = new wxTextCtrl(parent, wxID_ANY, default_str, wxDefaultPosition, wxSize(200, -1));
 	sizer->Add(m_ctrl, 0, wxLEFT | wxRIGHT, 5);
 
 	top_sizer->Add(sizer);
@@ -60,10 +66,15 @@ void UnitTextWidget::Load(const Json::Value& value)
 
 std::string UnitChoiceWidget::GetValue() const
 {
-	if (m_ctrl->GetSelection() < m_choices.size()) {
-		return m_choices[m_ctrl->GetSelection()].value;
+	int sel = m_ctrl->GetSelection();
+	if (sel == m_default) {
+		return DEFAULT_VAL;
 	} else {
-		return "";
+		if (sel < m_choices.size()) {
+			return m_choices[sel].value;
+		} else {
+			return "";
+		}
 	}
 }
 
@@ -74,18 +85,18 @@ void UnitChoiceWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
 
 	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
 
+	int default_sel = m_default;
 	std::string value = info.QueryValue(GetKey());
-
 	wxString choices[MAX_ITEMS];
 	for (int i = 0, n = m_choices.size(); i < n; ++i) {
 		if (m_choices[i].value == value) {
-			m_default = i;
+			default_sel = i;
 		}
 		choices[i] = m_choices[i].title;
 	}
 
 	m_ctrl = new wxChoice(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choices.size(), choices); 
-	m_ctrl->SetSelection(m_default);
+	m_ctrl->SetSelection(default_sel);
 	sizer->Add(m_ctrl);
 
 	top_sizer->Add(sizer);
@@ -117,7 +128,11 @@ void UnitChoiceWidget::Load(const Json::Value& value)
 {
 	m_choices.clear();
 
-	m_default = value["default"].asInt();
+	if (!value["default"].isNull()) {
+		m_default = value["default"].asInt();		
+	} else {
+		m_default = -1;
+	}
 
 	int idx = 0;
 	Json::Value v = value["choices"][idx++];
@@ -137,7 +152,14 @@ void UnitChoiceWidget::Load(const Json::Value& value)
 
 std::string UnitComboBoxWidget::GetValue() const
 {
-	return m_ctrl->GetValue().ToStdString();
+	std::string str = m_ctrl->GetValue().ToStdString();
+	if (m_default >= 0 && 
+		m_default < m_choices.size() &&
+		m_choices[m_default].value == str) {
+		return DEFAULT_VAL;
+	} else {
+		return str;
+	}
 }
 
 void UnitComboBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const UnitInfo& info)
@@ -146,18 +168,18 @@ void UnitComboBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const 
 
 	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
 
+	int default_sel = m_default;
 	std::string value = info.QueryValue(GetKey());
-
 	wxString choices[MAX_ITEMS];
 	for (int i = 0, n = m_choices.size(); i < n; ++i) {
 		if (m_choices[i].value == value) {
-			m_default = i;
+			default_sel = i;
 		}
 		choices[i] = m_choices[i].title;
 	}
 
 	m_ctrl = new wxComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_choices.size(), choices); 
-	m_ctrl->SetSelection(m_default);
+	m_ctrl->SetSelection(default_sel);
 	sizer->Add(m_ctrl);
 
 	top_sizer->Add(sizer);
@@ -168,7 +190,11 @@ void UnitComboBoxWidget::Load(const Json::Value& value)
 {
 	m_choices.clear();
 
-	m_default = value["default"].asInt();
+	if (!value["default"].isNull()) {
+		m_default = value["default"].asInt();		
+	} else {
+		m_default = -1;
+	}
 
 	int idx = 0;
 	Json::Value v = value["choices"][idx++];
@@ -188,25 +214,26 @@ void UnitComboBoxWidget::Load(const Json::Value& value)
 
 std::string UnitCheckBoxWidget::GetValue() const
 {
-	if (m_ctrl->IsChecked()) {
-		return "true";
+	if (m_has_default && m_default == m_ctrl->IsChecked()) {
+		return DEFAULT_VAL;
 	} else {
-		return "false";
+		return m_ctrl->IsChecked() ? "true" : "false";
 	}
 }
 
 void UnitCheckBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
 									const UnitInfo& info)
 {
+	bool default_bool = m_default;
 	std::string value = info.QueryValue(GetKey());
 	if (value == "true") {
-		m_default = true;
+		default_bool = true;
 	} else if (value == "false") {
-		m_default = false;
+		default_bool = false;
 	}
 
 	m_ctrl = new wxCheckBox(parent, wxID_ANY, GetTitle());
-	m_ctrl->SetValue(m_default);
+	m_ctrl->SetValue(default_bool);
 
 	top_sizer->Add(m_ctrl);
 	top_sizer->AddSpacer(10);
@@ -214,6 +241,7 @@ void UnitCheckBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
 
 void UnitCheckBoxWidget::Load(const Json::Value& value)
 {
+	m_has_default = !value["default"].isNull();
 	m_default = value["default"].asBool();
 }
 

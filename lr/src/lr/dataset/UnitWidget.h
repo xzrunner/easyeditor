@@ -19,6 +19,7 @@ public:
 	const std::string& GetTitle() const { return m_title; }
 
 	const std::string& GetKey() const { return m_key; }
+
 	virtual std::string GetValue() const = 0;
 
 	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
@@ -130,6 +131,7 @@ protected:
 	
 private:
 	bool m_default;	
+	bool m_has_default;
 
 	wxCheckBox* m_ctrl;
 

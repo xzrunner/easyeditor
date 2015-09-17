@@ -6,6 +6,8 @@
 
 namespace lr
 {
+
+static const std::string DEFAULT_VAL = "_DEFAULT_";;
 	
 class UnitInfo
 {
@@ -14,12 +16,19 @@ public:
 
 	std::string QueryValue(const std::string& key) const;
 
-	void SetValue(const std::string& key, const std::string& val);
+	void SetValue(const std::string& key, const std::string& val,
+		bool is_default = false);
 
 	std::string ToString() const;
 
-public:
-	std::map<std::string, std::string> map_val;
+private:
+	struct Item
+	{
+		std::string val;
+		bool is_default;
+	};
+
+	std::map<std::string, Item> m_map_val;
 
 }; // UnitInfo
 
