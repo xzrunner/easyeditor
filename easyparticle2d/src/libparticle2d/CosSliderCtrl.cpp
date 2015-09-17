@@ -12,13 +12,13 @@ CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, d2d::UICallback
  	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
  	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
- 	m_amplitude_ctrl = new d2d::SliderCtrlTwo(this, "Õñ·ù", ITEM_COS_AMPLITUDE, this, PS_COS_AMPLITUDE, 
+ 	m_amplitude_ctrl = new d2d::SliderCtrlTwo(this, "Õñ·ù", "amplitude", this, PS_COS_AMPLITUDE, 
 		d2d::SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 200), d2d::SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 100));
 	top_sizer->Add(m_amplitude_ctrl);
 
 	top_sizer->AddSpacer(5);
 
-	m_frequency_ctrl = new d2d::SliderCtrlTwo(this, "ÆµÂÊ", ITEM_COS_FREQUENCY, this, PS_COS_FREQUENCY, 
+	m_frequency_ctrl = new d2d::SliderCtrlTwo(this, "ÆµÂÊ", "frequency", this, PS_COS_FREQUENCY, 
 		d2d::SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 500), d2d::SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 500), 0.01f);
 	top_sizer->Add(m_frequency_ctrl);
 
@@ -33,14 +33,14 @@ void CosSliderCtrl::Update()
 
 void CosSliderCtrl::Load(const Json::Value& val, int version)
 {
-	m_amplitude_ctrl->Load(val[ITEM_COS], version);
-	m_frequency_ctrl->Load(val[ITEM_COS], version);
+	m_amplitude_ctrl->Load(val["cos"], version);
+	m_frequency_ctrl->Load(val["cos"], version);
 }
 
 void CosSliderCtrl::Store(Json::Value& val)
 {
-	m_amplitude_ctrl->Store(val[ITEM_COS]);
-	m_frequency_ctrl->Store(val[ITEM_COS]);
+	m_amplitude_ctrl->Store(val["cos"]);
+	m_frequency_ctrl->Store(val["cos"]);
 }
 
 void CosSliderCtrl::Load()
