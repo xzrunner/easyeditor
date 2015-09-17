@@ -39,6 +39,9 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
+	wxSizer* CreateMainLayout();
+	wxSizer* CreateComponentLayout();
+
 	void clear();
 
 	void OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
@@ -81,7 +84,7 @@ private:
 //	wxCheckBox* m_orient_to_parent;
 	wxCheckBox* m_radius_3d;
 
-	wxSizer* m_compSizer;
+	wxSizer* m_comp_sizer;
 	std::vector<ComponentPanel*> m_children;
 
 	friend class FileIO;

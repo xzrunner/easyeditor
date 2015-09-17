@@ -236,6 +236,7 @@ wxSizer* ToolbarPanel::CreateModeSpdCosLayout()
 wxSizer* ToolbarPanel::CreateComponentLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+	top_sizer->AddSpacer(10);
 	// Remove All
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE_ALL]);

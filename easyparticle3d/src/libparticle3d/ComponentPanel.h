@@ -27,6 +27,7 @@ public:
 
 private:
 	void InitLayout();
+	void InitLayout(wxSizer* sizer);
 
 	void OnDelete(wxCommandEvent& event);
 

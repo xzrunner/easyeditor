@@ -75,65 +75,88 @@ const ps_color4f& ComponentPanel::GetAddColor() const
 
 void ComponentPanel::InitLayout()
 {
-	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
-	topSizer->AddSpacer(10);
-	// Del
+	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+
+	std::string name = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
+	name = d2d::FilenameTools::getFilename(name);
+
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	InitLayout(sizer);
+	top_sizer->Add(sizer);
+
+	top_sizer->AddSpacer(20);
+
+	SetSizer(top_sizer);
+}
+
+void ComponentPanel::InitLayout(wxSizer* top_sizer)
+{
+	// top
 	{
-		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE]);
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
-		topSizer->Add(btn);
-	}
-	// Name
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
-		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
-	// Icon
-	{
-		std::string filepath = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
-			d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
-			topSizer->Add(panel);
+		wxSizer* hori_sizer = new wxBoxSizer(wxHORIZONTAL);
+		// Left
+		{
+			wxSizer* vert_sizer = new wxBoxSizer(wxVERTICAL);
+			// Del
+			{
+				wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE], wxDefaultPosition, wxSize(50, 50));
+				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
+				vert_sizer->Add(btn);
+			}
+			vert_sizer->AddSpacer(20);
+			// Name
+			{
+				wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
+				sz->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
+				sz->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+				vert_sizer->Add(sz);
+			}
+			hori_sizer->Add(vert_sizer);
 		}
+		hori_sizer->AddSpacer(20);
+		// Right Icon
+		{
+			std::string filepath = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
+			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+				d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
+				hori_sizer->Add(panel);
+			}
+		}	
+		top_sizer->Add(hori_sizer);
 	}
-	topSizer->AddSpacer(10);
 	// Scale
 	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
 		d2d::SliderItem(LANG[LK_START], "start", SCALE_START, 0, 500), d2d::SliderItem(LANG[LK_END], "end", SCALE_END, 0, 500));
-	topSizer->Add(s_scale);
-	topSizer->AddSpacer(10);
+	top_sizer->Add(s_scale);
+	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_scale);
 	// Rotate
 	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, LANG[LK_ROTATE], "rotate", this, PS_ROTATE, 
 		d2d::SliderItem(LANG[LK_MIN], "min", ROTATE_MIN, -180, 180), d2d::SliderItem(LANG[LK_MAX], "max", ROTATE_MAX, -180, 180));
-	topSizer->Add(s_rotate);
-	topSizer->AddSpacer(10);
+	top_sizer->Add(s_rotate);
+	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);
 	// Multi Color
 	wxButton* mul_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_MUL]);
 	Connect(mul_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetMultiCol));
-	topSizer->Add(mul_btn);
+	top_sizer->Add(mul_btn);
 	// Add Color
 	wxButton* add_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_ADD]);
 	Connect(add_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetAddCol));
-	topSizer->Add(add_btn);
+	top_sizer->Add(add_btn);
 	// Alpha
 	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
 		d2d::SliderItem(LANG[LK_START], "start", 100, 0, 100), d2d::SliderItem(LANG[LK_END], "end", 100, 0, 100));
-	topSizer->Add(s_alpha);
-	topSizer->AddSpacer(10);
+	top_sizer->Add(s_alpha);
+	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_alpha);
 	// Bind PS
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_BIND_PS]);
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnBindPS));
-		topSizer->Add(btn);
+		top_sizer->Add(btn);
 	}
-	//
-	SetSizer(topSizer);
 }
 
 void ComponentPanel::OnDelete(wxCommandEvent& event)
