@@ -11,7 +11,7 @@ UnitEditDlg::UnitEditDlg(wxWindow* parent, d2d::ISprite* spr,
 	, m_spr(spr)
 	, m_info(spr->tag)
 	, m_path_names(path_names)
-{
+{	
 	InitDefault();
 	InitLayout();
 }
@@ -52,27 +52,50 @@ void UnitEditDlg::InitDefault()
 
 void UnitEditDlg::InitLayout()
 {
-	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-
 	UnitCfg* cfg = UnitCfg::Instance();
+
+	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+
+	wxSizer* main_sizer = new wxBoxSizer(wxHORIZONTAL);
+
+	wxSizer *left_sizer = new wxBoxSizer(wxVERTICAL),
+		*right_sizer = new wxBoxSizer(wxVERTICAL);
+	int half_count = (cfg->widgets.size() + m_special_widgets.size()) / 2;
+	
 	for (int i = 0, n = cfg->widgets.size(); i < n; ++i) {
-		cfg->widgets[i]->InitLayout(this, sizer, m_info);
+		wxSizer* sz = i < half_count ? left_sizer : right_sizer;
+		cfg->widgets[i]->InitLayout(this, sz, m_info);
 	}
 	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
-		m_special_widgets[i]->InitLayout(this, sizer, m_info);		
+		wxSizer* sz = i + cfg->widgets.size() < half_count ? left_sizer : right_sizer;
+		m_special_widgets[i]->InitLayout(this, sz, m_info);		
 	}
 
-	sizer->AddSpacer(20);
+	main_sizer->Add(left_sizer);
+	main_sizer->Add(right_sizer);
+
+	top_sizer->Add(main_sizer);
+
+	top_sizer->AddSpacer(20);
 	{
 		wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 		sz->Add(new wxButton(this, wxID_OK), 0, wxALL, 5);
 		sz->Add(new wxButton(this, wxID_CANCEL), 0, wxALL, 5);
-		sizer->Add(sz, 0, wxCENTER);
+		top_sizer->Add(sz, 0, wxCENTER);
 	}
-	sizer->AddSpacer(20);
+	top_sizer->AddSpacer(20);
 
-	SetSizer(sizer);
-	sizer->Fit(this);
+	SetSizer(top_sizer);
+	top_sizer->Fit(this);
+
+	wxWindow* parent = m_parent->GetParent()->GetParent()->GetParent();
+	wxPoint p_pos = parent->GetPosition();
+	wxSize p_size = parent->GetSize();
+	wxSize c_size = top_sizer->GetSize();
+	wxPoint c_pos;
+	c_pos.x = p_pos.x + (p_size.GetWidth() - c_size.GetWidth()) * 0.5f;
+	c_pos.y = p_pos.y + (p_size.GetHeight() - c_size.GetHeight()) * 0.5f;
+	SetPosition(c_pos);
 }
 
 }
