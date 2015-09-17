@@ -55,6 +55,8 @@ void UnitCfg::LoadFromFile(const char* filename)
 			widget = new UnitTextWidget;
 		} else if (type == "choice") {
 			widget = new UnitChoiceWidget;
+		} else if (type == "combo box") {
+			widget = new UnitComboBoxWidget;
 		} else if (type == "check box") {
 			widget = new UnitCheckBoxWidget;
 		} else {

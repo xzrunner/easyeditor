@@ -85,6 +85,38 @@ private:
 
 }; // UnitChoiceWidget
 
+class UnitComboBoxWidget : public UnitWidget
+{
+public:
+	virtual std::string GetValue() const;
+
+	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
+		const UnitInfo& info);
+
+protected:
+	virtual void Load(const Json::Value& value);
+
+private:
+	void OnText(wxCommandEvent& event);
+
+private:
+	struct Item
+	{
+		std::string value;
+		std::string title;
+	};
+
+	static const int MAX_ITEMS = 100;
+
+private:
+	int m_default;
+
+	std::vector<Item> m_choices;
+
+	wxComboBox* m_ctrl;
+
+}; // UnitComboBoxWidget
+
 class UnitCheckBoxWidget : public UnitWidget
 {
 public:

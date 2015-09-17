@@ -132,6 +132,57 @@ void UnitChoiceWidget::Load(const Json::Value& value)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// class UnitComboBoxWidget
+//////////////////////////////////////////////////////////////////////////
+
+std::string UnitComboBoxWidget::GetValue() const
+{
+	return m_ctrl->GetValue().ToStdString();
+}
+
+void UnitComboBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const UnitInfo& info)
+{
+	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+
+	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
+
+	std::string value = info.QueryValue(GetKey());
+
+	wxString choices[MAX_ITEMS];
+	for (int i = 0, n = m_choices.size(); i < n; ++i) {
+		if (m_choices[i].value == value) {
+			m_default = i;
+		}
+		choices[i] = m_choices[i].title;
+	}
+
+	m_ctrl = new wxComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_choices.size(), choices); 
+	m_ctrl->SetSelection(m_default);
+	sizer->Add(m_ctrl);
+
+	top_sizer->Add(sizer);
+	top_sizer->AddSpacer(10);
+}
+
+void UnitComboBoxWidget::Load(const Json::Value& value)
+{
+	m_choices.clear();
+
+	m_default = value["default"].asInt();
+
+	int idx = 0;
+	Json::Value v = value["choices"][idx++];
+	while (!v.isNull()) {
+		Item item;
+		item.value = v["value"].asString();
+		item.title = v["title"].asString();
+		m_choices.push_back(item);
+
+		v = value["choices"][idx++];
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
 // class UnitCheckBoxWidget
 //////////////////////////////////////////////////////////////////////////
 
