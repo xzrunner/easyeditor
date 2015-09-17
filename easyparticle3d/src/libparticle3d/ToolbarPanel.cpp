@@ -397,7 +397,7 @@ void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
 		m_stage->m_ps->DelAllSymbol();
 	}
 
-	this->Layout();
+	Layout();
 }
 
 void ToolbarPanel::OnSetHori(wxSpinEvent& event)

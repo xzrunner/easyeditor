@@ -299,6 +299,23 @@ void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
 
 void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
 {
+	if (m_children.empty()) {
+		return;
+	}
+
+	m_stage->m_ps->Clear();
+
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		m_comp_sizer->Detach(m_children[i]);
+		delete m_children[i];
+	}
+	m_children.clear();
+
+	if (m_stage->m_ps) {
+		m_stage->m_ps->DelAllSymbol();
+	}
+
+	Layout();
 }
 
 //////////////////////////////////////////////////////////////////////////
