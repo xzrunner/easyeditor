@@ -215,6 +215,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libcomplex\Particle2DToSpr.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcomplex\Particle2DToSpr.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libcomplex\Particle3DToSpr.cpp"
 						>
 					</File>

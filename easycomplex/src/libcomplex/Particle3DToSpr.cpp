@@ -20,7 +20,7 @@ d2d::ISprite* Particle3DToSpr::Trans(const libcoco::PackParticle3D* p3d)
 
 p3d_ps_config* Particle3DToSpr::LoadConfig(const libcoco::PackParticle3D* p3d)
 {
-	int sz = sizeof(p3d_ps_config) + sizeof(p3d_symbol) * eparticle3d::MAX_COMPONENTS;
+	int sz = SIZEOF_P3D_PS_CONFIG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
 	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
 	memset(cfg, 0, sz);
 

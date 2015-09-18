@@ -33,12 +33,14 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect GetSize(const d2d::ISprite* sprite = NULL) const;
 
-	static d2d::ISymbol* Create() { return new Symbol(); }
-
 	void ResetPS();
 
-	// todo
 	ParticleSystem* GetPS() { return m_ps; }
+	const ParticleSystem* GetPS() const { return m_ps; }
+
+	void SetPS(ParticleSystem* ps);
+
+	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();
