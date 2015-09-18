@@ -24,6 +24,12 @@ public:
 
 	virtual d2d::Rect GetRegion(float process) const;
 
+	const d2d::Vector* GetScreen() const { return m_screen; }
+	void SetScreen(const d2d::Vector* screen);
+
+protected:
+	virtual void AfterSetImage();
+
 private:
 	d2d::Vector m_src[4], m_screen[4];
 

@@ -35,6 +35,9 @@ public:
 	const d2d::Image* GetImage() const { return m_img; }
 
 protected:
+	virtual void AfterSetImage() {}
+
+protected:
 	d2d::Image* m_img;
 
 }; // Icon

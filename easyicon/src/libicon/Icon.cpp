@@ -101,6 +101,7 @@ void Icon::ReloadTexture() const
 void Icon::SetImage(d2d::Image* img)
 {
 	d2d::obj_assign<d2d::Image>(m_img, img);
+	AfterSetImage();
 }
 
 }

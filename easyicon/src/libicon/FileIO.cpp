@@ -42,8 +42,8 @@ Icon* FileIO::LoadFromFile(const char* filename)
 	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(path);
 
 	Icon* icon = IconFactory::CreateIconFromFile(value);
-	icon->LoadFromFile(value);
 	icon->SetImage(img);
+	icon->LoadFromFile(value);
 	img->Release();
 
 	return icon;

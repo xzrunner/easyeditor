@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 
 #include "EditRectOP.h"
+#include "EditQuadOP.h"
 #include "EditChangedRectOP.h"
 #include "EditChangedSectorOP.h"
 
@@ -15,6 +16,12 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	{
 		d2d::AbstractEditOP* op = new EditRectOP(stage);
 		addChild(new d2d::UniversalCMPT(this, "¾ØÐÎ", stage->GetStageImpl(), op));
+		stage->SetEditOP(op);
+	}
+	// Quad
+	{
+		d2d::AbstractEditOP* op = new EditQuadOP(stage);
+		addChild(new d2d::UniversalCMPT(this, "ËÄ±ßÐÎ", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}
  	// Changed Rect
@@ -40,11 +47,14 @@ void ToolbarPanel::ChangeIconType(IconType type)
 	case IT_RECT:
 		setChoice(0);
 		break;
-	case IT_CHANGED_RECT:
+	case IT_QUAD:
 		setChoice(1);
 		break;
-	case IT_CHANGED_SECTOR:
+	case IT_CHANGED_RECT:
 		setChoice(2);
+		break;
+	case IT_CHANGED_SECTOR:
+		setChoice(3);
 		break;
 	}
 }

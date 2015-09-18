@@ -74,4 +74,30 @@ d2d::Rect QuadIcon::GetRegion(float process) const
 	return ret;
 }
 
+void QuadIcon::SetScreen(const d2d::Vector* screen)
+{
+	float w = m_img->GetClippedWidth(),
+		h = m_img->GetClippedHeight();
+	memcpy(m_screen, screen, sizeof(m_screen));
+	for (int i = 0; i < 4; ++i) {
+		m_src[i].x = m_screen[i].x / w + 0.5f;
+		m_src[i].y = m_screen[i].y / h + 0.5f;
+	}
+}
+
+void QuadIcon::AfterSetImage()
+{
+	m_src[0].set(0, 0);
+	m_src[1].set(0, 1);
+	m_src[2].set(1, 1);
+	m_src[3].set(1, 0);
+
+	float hw = m_img->GetClippedWidth() * 0.5f,
+		hh = m_img->GetClippedHeight() * 0.5f;
+	m_screen[0].set(-hw, -hh);
+	m_screen[1].set(-hw,  hh);
+	m_screen[2].set( hw,  hh);
+	m_screen[3].set( hw, -hh);	
+}
+
 }

@@ -25,7 +25,7 @@ private:
 	static const float CTRL_NODE_RADIUS;
 
 private:
-	
+	int m_selected;
 
 }; // EditQuadOP
 
