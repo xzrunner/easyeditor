@@ -192,11 +192,11 @@ p2d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 		const LoadAdapter::Component& src = adapter.components[i];
 		p2d_symbol& dst = cfg->symbols[i];
 
-		dst.angle_start = src.angle_start;
-		dst.angle_end = src.angle_end;
+		dst.angle_start = src.angle_start * d2d::TRANS_DEG_TO_RAD;
+		dst.angle_end = src.angle_end * d2d::TRANS_DEG_TO_RAD;
 
-		dst.scale_start = src.scale_start;
-		dst.scale_end = src.scale_end;
+		dst.scale_start = src.scale_start * 0.01f;
+		dst.scale_end = src.scale_end * 0.01f;
 
 		memcpy(&dst.col_mul_start.r, &src.col_mul_start.r, sizeof(src.col_mul_start));
 		memcpy(&dst.col_mul_end.r, &src.col_mul_end.r, sizeof(src.col_mul_end));

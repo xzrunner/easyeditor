@@ -1,5 +1,6 @@
 #include "PSConfigMgr.h"
 #include "ps_config.h"
+#include "FileIO.h"
 
 #include <particle2d.h>
 
@@ -35,11 +36,9 @@ p2d_ps_config* PSConfigMgr::GetConfig(const std::string& filepath)
 	if (itr != m_map2cfg.end()) {
 		return itr->second;
 	} else {
-// 		p2d_ps_config* cfg = FileIO::LoadPSConfig(filepath);
-// 		m_map2cfg.insert(std::make_pair(filepath, cfg));
-// 		return cfg;
-
-		return NULL;
+		p2d_ps_config* cfg = FileIO::LoadPSConfig(filepath);
+		m_map2cfg.insert(std::make_pair(filepath, cfg));
+		return cfg;
 	}
 }
 
