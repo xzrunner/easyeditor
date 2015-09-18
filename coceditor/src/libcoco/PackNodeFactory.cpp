@@ -24,6 +24,10 @@
 #include "Particle3DBuilder.h"
 #include <easyparticle3d.h>
 
+// particle2d
+#include "Particle2DBuilder.h"
+#include <easyparticle2d.h>
+
 namespace libcoco
 {
 
@@ -47,6 +51,9 @@ PackNodeFactory::PackNodeFactory()
 
 	// particle3d
 	m_builders.push_back(m_particle3d_builder = new Particle3DBuilder(m_export_set));
+
+	// particle2d
+	m_builders.push_back(m_particle2d_builder = new Particle2DBuilder(m_export_set));
 }
 
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
@@ -83,6 +90,11 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		node = m_particle3d_builder->Create(&p3d->GetSymbol());
 	}
 
+	// particle2d
+	else if (const eparticle2d::Sprite* p2d = dynamic_cast<const eparticle2d::Sprite*>(spr)) {
+		node = m_particle2d_builder->Create(&p2d->GetSymbol());
+	}
+
 	else {
 		throw d2d::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
@@ -117,6 +129,11 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 	// particle3d
 	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
 		node = m_particle3d_builder->Create(p3d);
+	}
+
+	// particle2d
+	else if (const eparticle2d::Symbol* p2d = dynamic_cast<const eparticle2d::Symbol*>(symbol)) {
+		node = m_particle2d_builder->Create(p2d);
 	}
 
 	else {

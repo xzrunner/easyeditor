@@ -6,6 +6,7 @@
 #include "PackLabel.h"
 #include "PackAnimation.h"
 #include "PackParticle3D.h"
+#include "PackParticle2D.h"
 
 #include <epbin.h>
 
@@ -38,6 +39,8 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 		node = new PackAnimation(id);
 	} else if (type == "particle3d") {
 		node = new PackParticle3D(id);
+	} else if (type == "particle2d") {
+		node = new PackParticle2D(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::UnpackFromLua unknown type %s", type.c_str());
 	}
@@ -68,6 +71,8 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 		node = new PackAnimation(id);
 	} else if (type == TYPE_PARTICLE3D) {
 		node = new PackParticle3D(id);
+	} else if (type == TYPE_PARTICLE2D) {
+		node = new PackParticle2D(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::UnpackFromBin unknown type %d", type);
 	}
@@ -75,7 +80,7 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 	node->UnpackFromBin(ptr, images);
 
 	m_map_id.insert(std::make_pair(id, node));
-	if (type == TYPE_ANIMATION || type == TYPE_PARTICLE3D) 
+	if (type == TYPE_ANIMATION || type == TYPE_PARTICLE3D || type == TYPE_PARTICLE2D) 
 	{
 		std::map<int, std::string>::const_iterator itr = map_export.find(id);
 		if (itr != map_export.end()) {

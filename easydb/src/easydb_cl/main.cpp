@@ -10,6 +10,7 @@
 #include <easyterrain2d.h>
 #include <easyicon.h>
 #include <easyparticle3d.h>
+#include <easyparticle2d.h>
 
 static void InitSymbolCreators() 
 {
@@ -39,6 +40,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eparticle2d::FILE_TAG, &eparticle2d::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eparticle2d::FILE_TAG, &eparticle2d::Sprite::Create);
 }
 
 static void Help()

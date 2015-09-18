@@ -27,6 +27,9 @@ class Terrain2DBuilder;
 // particle3d
 class Particle3DBuilder;
 
+// particle2d
+class Particle2DBuilder;
+
 class PackNodeFactory
 {
 public:
@@ -72,6 +75,9 @@ private:
 
 	// particle3d
 	Particle3DBuilder* m_particle3d_builder;
+
+	// particle2d
+	Particle2DBuilder* m_particle2d_builder;
 
 private:
 	static PackNodeFactory* m_instance;
