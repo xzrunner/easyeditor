@@ -10,7 +10,7 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
@@ -22,35 +22,17 @@ Task::~Task()
 	m_parent->SetTitle("EasyParticle");
 }
 
-void Task::Load(const char* filename)
+void Task::Load(const char* filepath)
 {
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filename);
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	int version = value["version"].asInt();
-	LoadPSSymbol(filename, value);
-//	m_toolbar->Load(value, version);
+	if (!wxFileName::FileExists(filepath)) {
+		throw d2d::Exception("File: %s don't exist!", filepath);
+	}
+	FileIO::Load(filepath, m_stage->m_ps, m_toolbar);
 }
 
-void Task::Store(const char* filename) const
+void Task::Store(const char* filepath) const
 {
-	Json::Value value;
-
-	StorePSSymbol(filename, value);
-//	m_toolbar->Store(value);
-	value["version"] = VERSION;
-
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(filename);
-	std::locale::global(std::locale("C"));	
-	writer.write(fout, value);
-	fout.close();
+	FileIO::Store(filepath, m_toolbar);
 }
 
 bool Task::IsDirty() const
@@ -79,7 +61,7 @@ const d2d::EditPanel* Task::GetEditPanel() const
 // 	return m_stage->getCanvas();
 // }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
 	wxSplitterWindow* rightSplitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* leftSplitter = new wxSplitterWindow(rightSplitter);
@@ -106,27 +88,6 @@ void Task::initLayout()
 	rightSplitter->SplitVertically(leftSplitter, m_toolbar);
 
 	m_root = rightSplitter;
-}
-
-void Task::StorePSSymbol(const char* filename, Json::Value& val) const
-{
-// 	ParticleSystem* ps = m_stage->GetStageData()->GetCurrPS();
-// 	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
-// 	val["symbol_path"] = d2d::FilenameTools::getRelativePath(dir,
-// 		ps->GetSymbolFilePath()).ToStdString();
-// 	val["name"] = m_ps_name;
-}
-
-void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
-{
-// 	StageData* sd = m_stage->GetStageData();
-// 	std::string dir = d2d::FilenameTools::getFileDir(filename);
-// 	std::string path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
-// 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-// 	sd->ChangePSSymbol(symbol);
-// 	symbol->Release();
-// 
-// 	m_ps_name = val["name"].asString();
 }
 
 }

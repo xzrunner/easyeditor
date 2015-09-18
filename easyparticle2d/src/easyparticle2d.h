@@ -9,6 +9,7 @@
 #include "libparticle2d/LibraryPanel.h"
 #include "libparticle2d/StagePanel.h"
 #include "libparticle2d/ToolbarPanel.h"
+#include "libparticle2d/FileIO.h"
 
 #include "libparticle2d/CocoPacker.h"
 

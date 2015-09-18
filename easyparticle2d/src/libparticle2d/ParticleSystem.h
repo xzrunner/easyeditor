@@ -36,6 +36,8 @@ public:
 
 	void SetMode(int mode);
 
+	void SetRotationIsDir(bool is_dir);
+
 	void Clear();
 
 	bool IsEmpty() const;

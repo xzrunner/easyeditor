@@ -210,25 +210,25 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->symbol_count = adapter.components.size();
 	cfg->symbols = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = adapter.components.size(); i < n; ++i) {
-		const LoadAdapter::Component& comp = adapter.components[i];
-		p3d_symbol& symbol = cfg->symbols[i];
+		const LoadAdapter::Component& src = adapter.components[i];
+		p3d_symbol& dst = cfg->symbols[i];
 
-		symbol.scale_start = comp.scale_start * 0.01f;
-		symbol.scale_end = comp.scale_end * 0.01f;
+		dst.scale_start = src.scale_start * 0.01f;
+		dst.scale_end = src.scale_end * 0.01f;
 
-		symbol.angle = comp.angle;
-		symbol.angle_var = comp.angle_var;
+		dst.angle = src.angle;
+		dst.angle_var = src.angle_var;
 
-		memcpy(&symbol.col_mul.r, &comp.col_mul.r, sizeof(comp.col_mul));
-		memcpy(&symbol.col_add.r, &comp.col_add.r, sizeof(comp.col_add));
-		symbol.alpha_start = comp.alpha_start * 0.01f;
-		symbol.alpha_end = comp.alpha_end * 0.01f;
+		memcpy(&dst.col_mul.r, &src.col_mul.r, sizeof(src.col_mul));
+		memcpy(&dst.col_add.r, &src.col_add.r, sizeof(src.col_add));
+		dst.alpha_start = src.alpha_start * 0.01f;
+		dst.alpha_end = src.alpha_end * 0.01f;
 
-		if (d2d::FilenameTools::IsFileExist(comp.bind_filepath)) {
-			symbol.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(comp.bind_filepath);
+		if (d2d::FilenameTools::IsFileExist(src.bind_filepath)) {
+			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);
 		}
 
-		symbol.ud = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
+		dst.ud = d2d::SymbolMgr::Instance()->FetchSymbol(src.filepath);
 	}
 
 	return cfg;

@@ -1,6 +1,8 @@
 #ifndef _EASYPARTICLE2D_TOOLBAR_PANEL_H_
 #define _EASYPARTICLE2D_TOOLBAR_PANEL_H_
 
+#include "LoadAdapter.h"
+
 #include <drag2d.h>
 
 namespace eparticle2d
@@ -21,9 +23,12 @@ public:
 	virtual void SetValue(int key, const d2d::UICallback::Data& data);
 	virtual void GetValue(int key, d2d::UICallback::Data& data);
 
-	void InitParticle();
+	void Load(const Json::Value& val);
+	void Store(Json::Value& val) const;
 
-//	void Add(const FileAdapter::Component& comp);
+	void Add(const LoadAdapter::Component& comp);
+
+	void InitParticle();
 
 	void OnDelChild(ComponentPanel* child);
 
@@ -69,6 +74,7 @@ private:
 	StagePanel* m_stage;
 
 	std::vector<d2d::ISliderCtrl*> m_sliders;
+	std::vector<std::vector<d2d::ISliderCtrl*> > m_mode_sliders;
 
 	wxChoice* m_mode_choice;
 
@@ -78,6 +84,8 @@ private:
 
 	wxSizer* m_comp_sizer;
 	std::vector<ComponentPanel*> m_children;
+
+	friend class FileIO;
 
 }; // ToolbarPanel
 

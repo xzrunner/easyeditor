@@ -5,9 +5,6 @@
 
 #include <drag2d.h>
 
-// struct ps_color4f;
-// struct particle_symbol;
-
 namespace eparticle3d
 {
 

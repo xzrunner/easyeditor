@@ -30,10 +30,7 @@ public:
 // 	d2d::IStageCanvas* getCanvas() const;
 
 private:
-	void initLayout();
-
-	void StorePSSymbol(const char* filename, Json::Value& val) const;
-	void LoadPSSymbol(const char* filename, const Json::Value& val);
+	void InitLayout();
 
 private:
 	wxWindow* m_root;

@@ -41,6 +41,8 @@ private:
 
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 
+	friend class FileIO;
+
 }; // ComponentPanel 
 
 }

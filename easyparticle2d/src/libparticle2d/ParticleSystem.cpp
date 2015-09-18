@@ -227,6 +227,11 @@ void ParticleSystem::SetMode(int mode)
 	m_ps->cfg->mode_type = mode;
 }
 
+void ParticleSystem::SetRotationIsDir(bool is_dir)
+{
+	m_ps->cfg->mode.A.rotation_is_dir = is_dir;
+}
+
 void ParticleSystem::Clear()
 {
 	m_ps->last = m_ps->start;

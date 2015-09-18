@@ -31,8 +31,8 @@ void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
 		m_component->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ALPHA:
-		m_component->col_mul_start.a = data.val0;
-		m_component->col_mul_end.a = data.val1;
+		m_component->col_mul_start.a = data.val0 / 100;
+		m_component->col_mul_end.a = data.val1 / 100;
 		break;
 	}
 }
@@ -50,8 +50,8 @@ void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_component->scale_end * 100;
 		break;
 	case PS_ALPHA:
-		data.val0 = m_component->col_mul_start.a;
-		data.val1 = m_component->col_mul_end.a;
+		data.val0 = m_component->col_mul_start.a * 100;
+		data.val1 = m_component->col_mul_end.a * 100;
 		break;
 	}
 }
