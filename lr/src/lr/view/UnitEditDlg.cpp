@@ -32,18 +32,12 @@ std::string UnitEditDlg::ToString()
 // 		UnitWidget* widget = m_special_widgets[i];
 // 		m_info.SetValue(widget->GetKey(), widget->GetValue());
 // 	}
-
-	m_spr->name = m_info.QueryValue("name");
 	 
 	return m_info.ToString();
 }
 
 void UnitEditDlg::InitDefault()
 {
-	if (!m_spr->name.empty()) {
-		m_info.SetValue("name", m_spr->name);
-	}
-
 // 	// patrol
 // 	UnitChoiceWidget* patrol = new UnitChoiceWidget;
 // 	patrol->SpecialLoad("Ñ²Âß", "patrol", m_path_names, m_info.QueryValue("patrol"));
