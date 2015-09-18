@@ -21,6 +21,8 @@ public:
 	virtual void Clear();
 
 	void SetIcon(Icon* icon);
+	Icon* GetIcon();
+
 	void SetImage(d2d::Image* img);
 
 	const Symbol& GetSymbol() const { return m_symbol; }

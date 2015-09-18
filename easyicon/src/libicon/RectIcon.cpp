@@ -11,7 +11,10 @@ RectIcon::RectIcon()
 
 void RectIcon::LoadFromFile(const Json::Value& value)
 {
-
+	m_min.x = value["xmin"].asDouble();
+	m_min.y = value["ymin"].asDouble();
+	m_max.x = value["xmax"].asDouble();
+	m_max.y = value["ymax"].asDouble();
 }
 
 void RectIcon::StoreToFile(Json::Value& value) const
@@ -30,28 +33,19 @@ void RectIcon::GetBound(float process, d2d::Vector bound[4]) const
 	bound[3].set(m_max.x, m_min.y);
 }
 
-void RectIcon::SetHoriRegion(float xmin, float xmax)
+void RectIcon::SetRegion(const d2d::Rect& r)
 {
-	m_min.x = xmin;
-	m_max.x = xmax;
+	float w = m_img->GetClippedWidth(),
+		h = m_img->GetClippedHeight();
+	m_min.x = r.xMin / w + 0.5f;
+	m_min.y = r.yMin / h + 0.5f;
+	m_max.x = r.xMax / w + 0.5f;
+	m_max.y = r.yMax / h + 0.5f;
 
-// 	if (m_img) {
-// 		float xlen = m_img->GetOriginWidth();
-// 		m_region.xMin = xlen * (m_min.x - 0.5f);
-// 		m_region.xMax = xlen * (m_max.x - 0.5f);
-// 	}
-}
-
-void RectIcon::SetVertRegion(float ymin, float ymax)
-{
-	m_min.y = ymin;
-	m_max.y = ymax;
-
-// 	if (m_img) {
-// 		float ylen = m_img->GetOriginHeight();
-// 		m_region.yMin = ylen * (m_min.y - 0.5f);
-// 		m_region.yMax = ylen * (m_max.y - 0.5f);	
-// 	}
+	m_min.x = std::min(1.0f, std::max(0.0f, m_min.x));
+	m_min.y = std::min(1.0f, std::max(0.0f, m_min.y));
+	m_max.x = std::max(0.0f, std::min(1.0f, m_max.x));
+	m_max.y = std::max(0.0f, std::min(1.0f, m_max.y));
 }
 
 }

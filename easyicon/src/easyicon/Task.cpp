@@ -22,7 +22,9 @@ Task::~Task()
 void Task::Load(const char* filename)
 {
 	Icon* icon = FileIO::LoadFromFile(filename);
+	m_toolbar->ChangeIconType(get_icon_type(icon->GetIconDesc()));
 	m_stage->GetSymbol().SetIcon(icon);
+	m_stage->SetCanvasDirty();
 }
 
 void Task::Store(const char* filename) const
@@ -60,9 +62,9 @@ void Task::InitLayout()
 	left_splitter->SetSashGravity(0.2f);
 	left_splitter->SplitVertically(m_library, m_stage);
 
-	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
+	m_toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
 	right_splitter->SetSashGravity(0.85f);
-	right_splitter->SplitVertically(left_splitter, toolbar);
+	right_splitter->SplitVertically(left_splitter, m_toolbar);
 
 	m_root = right_splitter;
 }

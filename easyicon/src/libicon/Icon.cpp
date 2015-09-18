@@ -6,27 +6,11 @@ namespace eicon
 Icon::Icon()
 	: m_img(NULL)
 {
-	m_canvas_region.xMin = m_canvas_region.yMin = 0;
-	m_canvas_region.xMax = m_canvas_region.yMax = 1;
 }
 
 Icon::Icon(d2d::Image* img)
-	: m_img(img)
 {
-	if (m_img) {
-		m_img->Retain();
-
-		d2d::Vector offset = img->GetOffset();
-		float ow = img->GetOriginWidth(),
-			oh = img->GetOriginHeight();
-		float cw = img->GetClippedWidth(),
-			ch = img->GetClippedHeight();
-
-		m_canvas_region.xMin = ((ow - cw) * 0.5f + offset.x) / ow;
-		m_canvas_region.xMax = (ow - (ow - cw) * 0.5f + offset.x) / ow;
-		m_canvas_region.yMin = ((oh - ch) * 0.5f + offset.y) / oh;
-		m_canvas_region.yMax = (oh - (oh - ch) * 0.5f + offset.y) / oh;
-	}
+	SetImage(img);
 }
 
 Icon::~Icon()
@@ -91,21 +75,19 @@ void Icon::GetTexCoords(float process, d2d::Vector* tex_coords) const
 	d2d::Vector bound[4];
 	GetBound(process, bound);
 	for (int i = 0; i < 4; ++i) {
-		tex_coords[i].x = m_canvas_region.xMin + (m_canvas_region.xMax - m_canvas_region.xMin) * bound[i].x;
-		tex_coords[i].y = m_canvas_region.yMin + (m_canvas_region.yMax - m_canvas_region.yMin) * bound[i].y;
+		tex_coords[i].x = bound[i].x;
+		tex_coords[i].y = bound[i].y;
 	}
 }
 
 void Icon::GetScreenCoords(float process, const d2d::Vector* tex_coords, 
 						   d2d::Vector* screen_coords) const
 {
-	float w = m_img->GetOriginWidth(),
-		h = m_img->GetOriginHeight();	
-	float dx = m_canvas_region.xCenter(),
-		dy = m_canvas_region.yCenter();
+	float w = m_img->GetClippedWidth(),
+		h = m_img->GetClippedHeight();	
 	for (int i = 0; i < 4; ++i) {
-		screen_coords[i].x = (tex_coords[i].x - dx) * w;
-		screen_coords[i].y = (tex_coords[i].y - dy) * h;
+		screen_coords[i].x = (tex_coords[i].x - 0.5f) * w;
+		screen_coords[i].y = (tex_coords[i].y - 0.5f) * h;
 	}
 }
 

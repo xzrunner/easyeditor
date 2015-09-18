@@ -37,8 +37,6 @@ public:
 protected:
 	d2d::Image* m_img;
 
-	d2d::Rect m_canvas_region;	// [0, 1]
-
 }; // Icon
 
 }

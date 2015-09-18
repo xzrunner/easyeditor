@@ -33,6 +33,22 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	SetSizer(initLayout());	
 }
 
+void ToolbarPanel::ChangeIconType(IconType type)
+{
+	switch (type) 
+	{
+	case IT_RECT:
+		setChoice(0);
+		break;
+	case IT_CHANGED_RECT:
+		setChoice(1);
+		break;
+	case IT_CHANGED_SECTOR:
+		setChoice(2);
+		break;
+	}
+}
+
 wxSizer* ToolbarPanel::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);

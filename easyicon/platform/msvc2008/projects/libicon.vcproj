@@ -304,30 +304,38 @@
 		<Filter
 			Name="editop"
 			>
-			<File
-				RelativePath="..\..\..\src\libicon\EditChangedRectOP.cpp"
+			<Filter
+				Name="static"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libicon\EditChangedRectOP.h"
+				<File
+					RelativePath="..\..\..\src\libicon\EditRectOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\EditRectOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="dynamic"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libicon\EditChangedSectorOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libicon\EditChangedSectorOP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libicon\EditRectOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libicon\EditRectOP.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libicon\EditChangedRectOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\EditChangedRectOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\EditChangedSectorOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\EditChangedSectorOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"

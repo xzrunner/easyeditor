@@ -36,6 +36,7 @@ public:
 
 	void SetIcon(Icon* icon);
 	const Icon* GetIcon() const { return m_icon; }
+	Icon* GetIcon() { return m_icon; }
 
 	void SetImage(d2d::Image* img);
 

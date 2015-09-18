@@ -13,9 +13,6 @@ QuadIcon::QuadIcon(d2d::Image* img, const d2d::Vector* src,
 {
 	memcpy(m_src, src, sizeof(d2d::Vector) * 4);
 	memcpy(m_screen, screen, sizeof(d2d::Vector) * 4);
-
-	m_canvas_region.xMin = m_canvas_region.yMin = 0;
-	m_canvas_region.xMax = m_canvas_region.yMax = 1;
 }
 
 void QuadIcon::LoadFromFile(const Json::Value& value)

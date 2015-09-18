@@ -8,6 +8,7 @@ namespace eicon
 {
 
 class StagePanel;
+class ToolbarPanel;
 
 class Task : public d2d::ITask
 {
@@ -36,6 +37,7 @@ private:
 
  	d2d::LibraryPanel* m_library;
  	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
 
 }; // Task
 

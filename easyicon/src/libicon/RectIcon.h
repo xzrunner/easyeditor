@@ -18,8 +18,7 @@ public:
 
 	virtual void GetBound(float process, d2d::Vector bound[4]) const;
 
-	void SetHoriRegion(float xmin, float xmax);
-	void SetVertRegion(float ymin, float ymax);
+	void SetRegion(const d2d::Rect& r);
 
 private:
 	d2d::Vector m_min, m_max;

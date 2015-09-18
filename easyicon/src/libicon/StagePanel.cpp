@@ -26,6 +26,11 @@ void StagePanel::SetIcon(Icon* icon)
 	m_symbol.SetIcon(icon);	
 }
 
+Icon* StagePanel::GetIcon()
+{
+	return m_symbol.GetIcon();
+}
+
 void StagePanel::SetImage(d2d::Image* img)
 {
 	m_symbol.SetImage(img);
