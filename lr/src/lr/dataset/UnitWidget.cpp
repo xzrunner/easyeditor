@@ -152,13 +152,19 @@ void UnitChoiceWidget::Load(const Json::Value& value)
 
 std::string UnitComboBoxWidget::GetValue() const
 {
-	std::string str = m_ctrl->GetValue().ToStdString();
-	if (m_default >= 0 && 
-		m_default < m_choices.size() &&
-		m_choices[m_default].value == str) {
-		return DEFAULT_VAL;
+	int sel = m_ctrl->GetSelection();
+	if (sel >= 0 && sel < m_choices.size()) {
+	 	if (sel == m_default) {
+	 		return DEFAULT_VAL;
+	 	} else {
+	 		if (sel < m_choices.size()) {
+	 			return m_choices[sel].value;
+	 		} else {
+	 			return "";
+	 		}
+	 	}
 	} else {
-		return str;
+		return m_ctrl->GetValue().ToStdString();
 	}
 }
 
@@ -171,15 +177,21 @@ void UnitComboBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const 
 	int default_sel = m_default;
 	std::string value = info.QueryValue(GetKey());
 	wxString choices[MAX_ITEMS];
+	bool find = false;
 	for (int i = 0, n = m_choices.size(); i < n; ++i) {
 		if (m_choices[i].value == value) {
+			find = true;
 			default_sel = i;
 		}
 		choices[i] = m_choices[i].title;
 	}
 
 	m_ctrl = new wxComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_choices.size(), choices); 
-	m_ctrl->SetSelection(default_sel);
+	if (find) {
+		m_ctrl->SetSelection(default_sel);
+	} else {
+		m_ctrl->SetValue(value);
+	}
 	sizer->Add(m_ctrl);
 
 	top_sizer->Add(sizer);
