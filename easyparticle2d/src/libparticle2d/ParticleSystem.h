@@ -50,6 +50,11 @@ public:
 
 	const p2d_ps_config* GetConfig() const;
 
+	int GetPSCapacity() const;
+
+private:
+	void SetPSCapacity(int cap);
+
 private:
 	d2d::Vector m_pos;
 

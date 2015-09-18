@@ -12,6 +12,7 @@
 namespace eparticle2d
 {
 
+static const float CAPACITY				= 100;
 static const float COUNT				= 20;
 static const float EMISSION_TIME		= 150;
 static const float LIFE_CENTER			= 800;
@@ -163,11 +164,24 @@ wxSizer* ToolbarPanel::CreateMainCommonLayout()
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(10);
 
+	// Name
+	{
+		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
+		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+		top_sizer->Add(sizer);
+	}
+	top_sizer->AddSpacer(10);
+	// Capacity
+	d2d::SliderCtrlOne* s_capacity = new d2d::SliderCtrlOne(this, LANG[LK_CAPACITY], 
+		"capacity", this, PS_CAPACITY, d2d::SliderItem("", "", CAPACITY, 1, 1000));
+	top_sizer->Add(s_capacity);
+	top_sizer->AddSpacer(10);
+	m_sliders.push_back(s_capacity);
 	// Count
 	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, LANG[LK_COUNT], 
 		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));
 	top_sizer->Add(s_count);
-	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_count); 
 	// Emission Time
 	d2d::SliderCtrlOne* s_emission_time = new d2d::SliderCtrlOne(this, LANG[LK_EMISSION_TIME], 

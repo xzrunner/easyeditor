@@ -12,6 +12,8 @@ enum {
 	LK_START,
 	LK_END,
 
+	LK_NAME,
+	LK_CAPACITY,
 	LK_COUNT,
 	LK_EMISSION_TIME,
 	LK_LIFE,
@@ -54,6 +56,8 @@ static const char* EN[] = {
 	"Start",
 	"End",
 
+	"Name",
+	"Capacity",
 	"Count",
 	"Emission Time (ms)",
 	"Life (ms)",
@@ -96,6 +100,8 @@ static const char* CN[] = {
 	"起始",
 	"结束",
 
+	"名字",
+	"容量",
 	"数量",
 	"发射周期(毫秒)",
 	"生命周期(毫秒)",

@@ -6,7 +6,8 @@ namespace eparticle2d
 
 enum PS_PROPERTY
 {
-	PS_COUNT = 0,
+	PS_CAPACITY = 0,
+	PS_COUNT,
 	PS_EMISSION_TIME,
 	PS_LIFE_TIME,
 	PS_POSITION_X,

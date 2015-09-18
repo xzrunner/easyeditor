@@ -26,6 +26,9 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 {
 	switch (key)
 	{
+	case PS_CAPACITY:
+		SetPSCapacity(data.val0);
+		break;
 	case PS_COUNT:
 		m_ps->cfg->count = data.val0;
 		break;
@@ -94,6 +97,9 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 {
 	switch (key)
 	{
+	case PS_CAPACITY:
+		data.val0 = GetPSCapacity();
+		break;
 	case PS_COUNT:
 		data.val0 = m_ps->cfg->count;
 		break;
@@ -294,6 +300,37 @@ void ParticleSystem::DelAllSymbol()
 const p2d_ps_config* ParticleSystem::GetConfig() const
 {
 	return m_ps->cfg;
+}
+
+int ParticleSystem::GetPSCapacity() const
+{
+	return m_ps->end - m_ps->start;
+}
+
+void ParticleSystem::SetPSCapacity(int cap)
+{	
+	if (cap <= 0) {
+		return;
+	}
+
+	int curr_cap = GetPSCapacity();
+	if (cap == curr_cap) {
+		return;
+	} else {
+		Reset();
+	}
+
+	if (cap < curr_cap) {
+		m_ps->end = m_ps->start + cap;
+	} else if (cap > curr_cap) {
+		int real_cap = curr_cap;
+		while (real_cap < cap) {
+			real_cap *= 2;
+		}
+		p2d_particle_system* new_ps = p2d_create(real_cap, m_ps->cfg);
+		p2d_release(m_ps);
+		m_ps = new_ps;
+	}
 }
 
 }

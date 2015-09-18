@@ -15,6 +15,8 @@ void LoadAdapter::Load(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
+	name = value["name"].asString();
+
 	mode_type = value["mode_type"].asInt();
 
 	if (mode_type == P2D_MODE_GRAVITY) 

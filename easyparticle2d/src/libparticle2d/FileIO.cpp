@@ -17,6 +17,8 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 	toolbar->Store(value);
 
+	value["name"] = toolbar->m_name->GetValue().ToStdString();
+
 	value["mode_type"] = toolbar->m_mode_choice->GetSelection();
 
 	value["rotation_is_dir"] = toolbar->m_rotation_is_dir_ctrl->GetValue();
@@ -85,6 +87,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 
 	LoadAdapter adapter;
 	adapter.Load(filepath);
+
+	toolbar->m_name->SetValue(adapter.name);
 
 	toolbar->m_mode_choice->SetSelection(adapter.mode_type);
 	ps->SetMode(adapter.mode_type);

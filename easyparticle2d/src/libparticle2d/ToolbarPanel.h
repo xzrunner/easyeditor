@@ -73,6 +73,8 @@ private:
 private:
 	StagePanel* m_stage;
 
+	wxTextCtrl* m_name;
+
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 	std::vector<std::vector<d2d::ISliderCtrl*> > m_mode_sliders;
 
