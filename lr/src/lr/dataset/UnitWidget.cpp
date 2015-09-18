@@ -190,8 +190,13 @@ void UnitComboBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const 
 	if (find) {
 		m_ctrl->SetSelection(default_sel);
 	} else {
-		m_ctrl->SetValue(value);
+		if (!value.empty()) {
+			m_ctrl->SetValue(value);
+		} else {
+			m_ctrl->SetSelection(default_sel);
+		}
 	}
+
 	sizer->Add(m_ctrl);
 
 	top_sizer->Add(sizer);
