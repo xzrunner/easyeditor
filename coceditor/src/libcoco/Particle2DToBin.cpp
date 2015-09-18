@@ -95,61 +95,61 @@ void Particle2DToBin::Pack(const PackParticle2D* p2d, uint8_t** ptr)
 
 	if (p2d->mode_type == P2D_MODE_GRAVITY) 
 	{
-		uint16_t gravity_x = TransFloat(p2d->a_gravity.x);
+		uint16_t gravity_x = TransFloat(p2d->A.gravity.x);
 		pack(gravity_x, ptr);
-		uint16_t gravity_y = TransFloat(p2d->a_gravity.y);
+		uint16_t gravity_y = TransFloat(p2d->A.gravity.y);
 		pack(gravity_y, ptr);
 
-		uint16_t speed = TransFloat(p2d->a_speed);
+		uint16_t speed = TransFloat(p2d->A.speed);
 		pack(speed, ptr);
-		uint16_t speed_var = TransFloat(p2d->a_speed_var);
+		uint16_t speed_var = TransFloat(p2d->A.speed_var);
 		pack(speed_var, ptr);
 		
-		uint16_t tangential_accel = TransFloat(p2d->a_tangential_accel);
+		uint16_t tangential_accel = TransFloat(p2d->A.tangential_accel);
 		pack(tangential_accel, ptr);
-		uint16_t tangential_accel_var = TransFloat(p2d->a_tangential_accel_var);
+		uint16_t tangential_accel_var = TransFloat(p2d->A.tangential_accel_var);
 		pack(tangential_accel_var, ptr);
 
-		uint16_t radial_accel = TransFloat(p2d->a_radial_accel);
+		uint16_t radial_accel = TransFloat(p2d->A.radial_accel);
 		pack(radial_accel, ptr);
-		uint16_t radial_accel_var = TransFloat(p2d->a_radial_accel_var);
+		uint16_t radial_accel_var = TransFloat(p2d->A.radial_accel_var);
 		pack(radial_accel_var, ptr);
 
-		uint8_t rotation_is_dir = TransBool(p2d->a_rotation_is_dir);
+		uint8_t rotation_is_dir = TransBool(p2d->A.rotation_is_dir);
 		pack(rotation_is_dir, ptr);
 	}
 	else if (p2d->mode_type == P2D_MODE_RADIUS)
 	{
-		uint16_t start_radius = TransFloat(p2d->b_start_radius);
+		uint16_t start_radius = TransFloat(p2d->B.start_radius);
 		pack(start_radius, ptr);
-		uint16_t start_radius_var = TransFloat(p2d->b_start_radius_var);
+		uint16_t start_radius_var = TransFloat(p2d->B.start_radius_var);
 		pack(start_radius_var, ptr);
 
-		uint16_t end_radius = TransFloat(p2d->b_end_radius);
+		uint16_t end_radius = TransFloat(p2d->B.end_radius);
 		pack(end_radius, ptr);
-		uint16_t end_radius_var = TransFloat(p2d->b_end_radius_var);
+		uint16_t end_radius_var = TransFloat(p2d->B.end_radius_var);
 		pack(end_radius_var, ptr);
 
-		uint16_t direction_delta = TransFloat(p2d->b_direction_delta);
+		uint16_t direction_delta = TransFloat(p2d->B.direction_delta);
 		pack(direction_delta, ptr);
-		uint16_t direction_delta_var = TransFloat(p2d->b_direction_delta_var);
+		uint16_t direction_delta_var = TransFloat(p2d->B.direction_delta_var);
 		pack(direction_delta_var, ptr);
 	}
 	else if (p2d->mode_type == P2D_MODE_SPD_COS)
 	{
-		uint16_t speed = TransFloat(p2d->c_speed);
+		uint16_t speed = TransFloat(p2d->C.speed);
 		pack(speed, ptr);
-		uint16_t speed_var = TransFloat(p2d->c_speed_var);
+		uint16_t speed_var = TransFloat(p2d->C.speed_var);
 		pack(speed_var, ptr);
 
-		uint16_t cos_amplitude = TransFloat(p2d->c_cos_amplitude);
+		uint16_t cos_amplitude = TransFloat(p2d->C.cos_amplitude);
 		pack(cos_amplitude, ptr);
-		uint16_t cos_amplitude_var = TransFloat(p2d->c_cos_amplitude_var);
+		uint16_t cos_amplitude_var = TransFloat(p2d->C.cos_amplitude_var);
 		pack(cos_amplitude_var, ptr);
 
-		uint16_t cos_frequency = TransFloat(p2d->c_cos_frequency);
+		uint16_t cos_frequency = TransFloat(p2d->C.cos_frequency);
 		pack(cos_frequency, ptr);
-		uint16_t cos_frequency_var = TransFloat(p2d->c_cos_frequency_var);
+		uint16_t cos_frequency_var = TransFloat(p2d->C.cos_frequency_var);
 		pack(cos_frequency_var, ptr);
 	}
 	else

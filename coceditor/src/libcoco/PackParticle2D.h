@@ -41,33 +41,43 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 	// A: gravity + tangential + radial
 	//////////////////////////////////////////////////////////////////////////
+	struct A
+	{
+		d2d::Vector gravity;
 
-	d2d::Vector a_gravity;
+		float speed, speed_var;
 
-	float a_speed, a_speed_var;
+		float tangential_accel, tangential_accel_var;
+		float radial_accel, radial_accel_var;
 
-	float a_tangential_accel, a_tangential_accel_var;
-	float a_radial_accel, a_radial_accel_var;
-
-	bool a_rotation_is_dir;
+		bool rotation_is_dir;
+	};
 
 	//////////////////////////////////////////////////////////////////////////
 	// B: radius + rotate
 	//////////////////////////////////////////////////////////////////////////
+	struct B
+	{
+		float start_radius, start_radius_var;
+		float end_radius, end_radius_var;
 
-	float b_start_radius, b_start_radius_var;
-	float b_end_radius, b_end_radius_var;
-
-	float b_direction_delta, b_direction_delta_var;
+		float direction_delta, direction_delta_var;
+	};
 
 	//////////////////////////////////////////////////////////////////////////
 	// C: tangential spd cos
 	//////////////////////////////////////////////////////////////////////////
+	struct C
+	{
+		float speed, speed_var;
 
-	float c_speed, c_speed_var;
+		float cos_amplitude, cos_amplitude_var;
+		float cos_frequency, cos_frequency_var;
+	};
 
-	float c_cos_amplitude, c_cos_amplitude_var;
-	float c_cos_frequency, c_cos_frequency_var;
+	A A;
+	B B;
+	C C;
 
 public:
 	PackParticle2D() {}

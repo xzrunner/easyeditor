@@ -72,70 +72,70 @@ void Particle2DFromBin::Unpack(uint8_t** ptr, PackParticle2D* p2d)
 		uint16_t gravity_x, gravity_y;
 		unpack(gravity_x, ptr);
 		unpack(gravity_y, ptr);
-		p2d->a_gravity.x = gravity_x;
-		p2d->a_gravity.y = gravity_y;
+		p2d->A.gravity.x = gravity_x;
+		p2d->A.gravity.y = gravity_y;
 
 		uint16_t speed, speed_var;
 		unpack(speed, ptr);
 		unpack(speed_var, ptr);
-		p2d->a_speed = speed;
-		p2d->a_speed_var = speed_var;
+		p2d->A.speed = speed;
+		p2d->A.speed_var = speed_var;
 
 		uint16_t tangential_accel, tangential_accel_var;
 		unpack(tangential_accel, ptr);
 		unpack(tangential_accel_var, ptr);
-		p2d->a_tangential_accel = tangential_accel;
-		p2d->a_tangential_accel_var = tangential_accel_var;
+		p2d->A.tangential_accel = tangential_accel;
+		p2d->A.tangential_accel_var = tangential_accel_var;
 
 		uint16_t radial_accel, radial_accel_var;
 		unpack(radial_accel, ptr);
 		unpack(radial_accel_var, ptr);
-		p2d->a_radial_accel = radial_accel;
-		p2d->a_radial_accel_var = radial_accel_var;
+		p2d->A.radial_accel = radial_accel;
+		p2d->A.radial_accel_var = radial_accel_var;
 
 		uint8_t rotation_is_dir;
 		unpack(rotation_is_dir, ptr);
-		p2d->a_rotation_is_dir = TransBool(rotation_is_dir);
+		p2d->A.rotation_is_dir = TransBool(rotation_is_dir);
 	}
 	else if (p2d->mode_type == P2D_MODE_RADIUS)
 	{
 		uint16_t start_radius, start_radius_var;
 		unpack(start_radius, ptr);
 		unpack(start_radius_var, ptr);
-		p2d->b_start_radius = start_radius;
-		p2d->b_start_radius_var = start_radius_var;
+		p2d->B.start_radius = start_radius;
+		p2d->B.start_radius_var = start_radius_var;
 
 		uint16_t end_radius, end_radius_var;
 		unpack(end_radius, ptr);
 		unpack(end_radius_var, ptr);
-		p2d->b_end_radius = end_radius;
-		p2d->b_end_radius_var = end_radius_var;
+		p2d->B.end_radius = end_radius;
+		p2d->B.end_radius_var = end_radius_var;
 
 		uint16_t direction_delta, direction_delta_var;
 		unpack(direction_delta, ptr);
 		unpack(direction_delta_var, ptr);
-		p2d->b_direction_delta = direction_delta;
-		p2d->b_direction_delta_var = direction_delta_var;
+		p2d->B.direction_delta = direction_delta;
+		p2d->B.direction_delta_var = direction_delta_var;
 	}
 	else if (p2d->mode_type == P2D_MODE_SPD_COS)
 	{
 		uint16_t speed, speed_var;
 		unpack(speed, ptr);
 		unpack(speed_var, ptr);
-		p2d->c_speed = speed;
-		p2d->c_speed_var = speed_var;
+		p2d->C.speed = speed;
+		p2d->C.speed_var = speed_var;
 
 		uint16_t cos_amplitude, cos_amplitude_var;
 		unpack(cos_amplitude, ptr);
 		unpack(cos_amplitude_var, ptr);
-		p2d->c_cos_amplitude = cos_amplitude;
-		p2d->c_cos_amplitude_var = cos_amplitude_var;
+		p2d->C.cos_amplitude = cos_amplitude;
+		p2d->C.cos_amplitude_var = cos_amplitude_var;
 
 		uint16_t cos_frequency, cos_frequency_var;
 		unpack(cos_frequency, ptr);
 		unpack(cos_frequency_var, ptr);
-		p2d->c_cos_frequency = cos_frequency;
-		p2d->c_cos_frequency_var = cos_frequency_var;
+		p2d->C.cos_frequency = cos_frequency;
+		p2d->C.cos_frequency_var = cos_frequency_var;
 	}
 	else
 	{

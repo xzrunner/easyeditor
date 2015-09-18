@@ -93,8 +93,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps, ToolbarPanel*
 	toolbar->m_mode_choice->SetSelection(adapter.mode_type);
 	ps->SetMode(adapter.mode_type);
 
-	toolbar->m_rotation_is_dir_ctrl->SetValue(adapter.a_rotation_is_dir);
-	ps->SetRotationIsDir(adapter.a_rotation_is_dir);
+	toolbar->m_rotation_is_dir_ctrl->SetValue(adapter.A.rotation_is_dir);
+	ps->SetRotationIsDir(adapter.A.rotation_is_dir);
 
 	for (size_t i = 0, n = adapter.components.size(); i < n; ++i) {
 		toolbar->Add(adapter.components[i]);
@@ -137,38 +137,38 @@ p2d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 
 	if (cfg->mode_type == P2D_MODE_GRAVITY)
 	{
-		cfg->mode.A.gravity.x = adapter.a_gravity.x;
-		cfg->mode.A.gravity.y = adapter.a_gravity.y;
+		cfg->mode.A.gravity.x = adapter.A.gravity.x;
+		cfg->mode.A.gravity.y = adapter.A.gravity.y;
 
-		cfg->mode.A.speed = adapter.a_speed;
-		cfg->mode.A.speed_var = adapter.a_speed_var;
+		cfg->mode.A.speed = adapter.A.speed;
+		cfg->mode.A.speed_var = adapter.A.speed_var;
 
-		cfg->mode.A.tangential_accel = adapter.a_tangential_accel;
-		cfg->mode.A.tangential_accel_var = adapter.a_tangential_accel_var;
-		cfg->mode.A.radial_accel = adapter.a_radial_accel;
-		cfg->mode.A.radial_accel_var = adapter.a_radial_accel_var;
+		cfg->mode.A.tangential_accel = adapter.A.tangential_accel;
+		cfg->mode.A.tangential_accel_var = adapter.A.tangential_accel_var;
+		cfg->mode.A.radial_accel = adapter.A.radial_accel;
+		cfg->mode.A.radial_accel_var = adapter.A.radial_accel_var;
 
-		cfg->mode.A.rotation_is_dir = adapter.a_rotation_is_dir;
+		cfg->mode.A.rotation_is_dir = adapter.A.rotation_is_dir;
 	} 
 	else if (cfg->mode_type == P2D_MODE_RADIUS)
 	{
-		cfg->mode.B.start_radius = adapter.b_start_radius;
-		cfg->mode.B.start_radius_var = adapter.b_start_radius_var;
-		cfg->mode.B.end_radius = adapter.b_end_radius;
-		cfg->mode.B.end_radius_var = adapter.b_end_radius_var;
+		cfg->mode.B.start_radius = adapter.B.start_radius;
+		cfg->mode.B.start_radius_var = adapter.B.start_radius_var;
+		cfg->mode.B.end_radius = adapter.B.end_radius;
+		cfg->mode.B.end_radius_var = adapter.B.end_radius_var;
 
-		cfg->mode.B.direction_delta = adapter.b_direction_delta;
-		cfg->mode.B.direction_delta_var = adapter.b_direction_delta_var;
+		cfg->mode.B.direction_delta = adapter.B.direction_delta;
+		cfg->mode.B.direction_delta_var = adapter.B.direction_delta_var;
 	}
 	else if (cfg->mode_type == P2D_MODE_SPD_COS)
 	{
-		cfg->mode.C.speed = adapter.c_speed;
-		cfg->mode.C.speed_var = adapter.c_speed_var;
+		cfg->mode.C.speed = adapter.C.speed;
+		cfg->mode.C.speed_var = adapter.C.speed_var;
 
-		cfg->mode.C.cos_amplitude = adapter.c_cos_amplitude;
-		cfg->mode.C.cos_amplitude_var = adapter.c_cos_amplitude_var;
-		cfg->mode.C.cos_frequency = adapter.c_cos_frequency;
-		cfg->mode.C.cos_frequency_var = adapter.c_cos_frequency_var;
+		cfg->mode.C.cos_amplitude = adapter.C.cos_amplitude;
+		cfg->mode.C.cos_amplitude_var = adapter.C.cos_amplitude_var;
+		cfg->mode.C.cos_frequency = adapter.C.cos_frequency;
+		cfg->mode.C.cos_frequency_var = adapter.C.cos_frequency_var;
 	}
 
 	cfg->emission_time = adapter.emission_time;

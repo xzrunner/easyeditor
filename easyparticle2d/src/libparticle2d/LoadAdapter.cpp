@@ -21,41 +21,41 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	if (mode_type == P2D_MODE_GRAVITY) 
 	{
-		a_gravity.x				= value["gravity"]["x"].asDouble();
-		a_gravity.y				= value["gravity"]["y"].asDouble();
+		A.gravity.x				= value["gravity"]["x"].asDouble();
+		A.gravity.y				= value["gravity"]["y"].asDouble();
 
-		a_speed					= value["speed"]["center"].asDouble();
-		a_speed_var				= value["speed"]["offset"].asDouble();
+		A.speed					= value["speed"]["center"].asDouble();
+		A.speed_var				= value["speed"]["offset"].asDouble();
 
-		a_tangential_accel		= value["tangential_accel"]["center"].asDouble();
-		a_tangential_accel_var	= value["tangential_accel"]["offset"].asDouble();
+		A.tangential_accel		= value["tangential_accel"]["center"].asDouble();
+		A.tangential_accel_var	= value["tangential_accel"]["offset"].asDouble();
 
-		a_radial_accel			= value["radial_accel"]["center"].asDouble();
-		a_radial_accel_var		= value["radial_accel"]["offset"].asDouble();
+		A.radial_accel			= value["radial_accel"]["center"].asDouble();
+		A.radial_accel_var		= value["radial_accel"]["offset"].asDouble();
 
-		a_rotation_is_dir		= value["rotation_is_dir"].asBool();
+		A.rotation_is_dir		= value["rotation_is_dir"].asBool();
 	}
 	else if (mode_type == P2D_MODE_RADIUS) 
 	{
-		b_start_radius			= value["start_radius"]["center"].asDouble();
-		b_start_radius_var		= value["start_radius"]["offset"].asDouble();
+		B.start_radius			= value["start_radius"]["center"].asDouble();
+		B.start_radius_var		= value["start_radius"]["offset"].asDouble();
 
-		b_end_radius			= value["end_radius"]["center"].asDouble();
-		b_end_radius_var		= value["end_radius"]["offset"].asDouble();
+		B.end_radius			= value["end_radius"]["center"].asDouble();
+		B.end_radius_var		= value["end_radius"]["offset"].asDouble();
 
-		b_direction_delta		= value["direction_delta"]["center"].asDouble();
-		b_direction_delta_var	= value["direction_delta"]["offset"].asDouble();		
+		B.direction_delta		= value["direction_delta"]["center"].asDouble();
+		B.direction_delta_var	= value["direction_delta"]["offset"].asDouble();		
 	}
 	else if (mode_type == P2D_MODE_SPD_COS) 
 	{
-		c_speed					= value["speed"]["center"].asDouble();
-		c_speed_var				= value["speed"]["offset"].asDouble();
+		C.speed					= value["speed"]["center"].asDouble();
+		C.speed_var				= value["speed"]["offset"].asDouble();
 
-		c_cos_amplitude			= value["cos_amplitude"]["center"].asDouble();
-		c_cos_amplitude_var		= value["cos_amplitude"]["offset"].asDouble();
+		C.cos_amplitude			= value["cos_amplitude"]["center"].asDouble();
+		C.cos_amplitude_var		= value["cos_amplitude"]["offset"].asDouble();
 
-		c_cos_frequency			= value["cos_frequency"]["center"].asDouble();
-		c_cos_frequency_var		= value["cos_frequency"]["offset"].asDouble();
+		C.cos_frequency			= value["cos_frequency"]["center"].asDouble();
+		C.cos_frequency_var		= value["cos_frequency"]["offset"].asDouble();
 	} 
 	else 
 	{

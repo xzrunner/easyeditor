@@ -62,48 +62,48 @@ void Particle2DToLuaString::PackPS(const PackParticle2D* p2d, ebuilder::CodeGene
 	if (p2d->mode_type == P2D_MODE_GRAVITY) 
 	{
 		lua::connect(gen, 2, 
-			lua::assign("gravity_x", TransFloat(p2d->a_gravity.x)), 
-			lua::assign("gravity_y", TransFloat(p2d->a_gravity.y)));
+			lua::assign("gravity_x", TransFloat(p2d->A.gravity.x)), 
+			lua::assign("gravity_y", TransFloat(p2d->A.gravity.y)));
 
 		lua::connect(gen, 2, 
-			lua::assign("speed", TransFloat(p2d->a_speed)), 
-			lua::assign("speed_var", TransFloat(p2d->a_speed_var)));
+			lua::assign("speed", TransFloat(p2d->A.speed)), 
+			lua::assign("speed_var", TransFloat(p2d->A.speed_var)));
 		
 		lua::connect(gen, 2, 
-			lua::assign("tangential_accel", TransFloat(p2d->a_tangential_accel)), 
-			lua::assign("tangential_accel_var", TransFloat(p2d->a_tangential_accel_var)));
+			lua::assign("tangential_accel", TransFloat(p2d->A.tangential_accel)), 
+			lua::assign("tangential_accel_var", TransFloat(p2d->A.tangential_accel_var)));
 		lua::connect(gen, 2, 
-			lua::assign("radial_accel", TransFloat(p2d->a_radial_accel)), 
-			lua::assign("radial_accel_var", TransFloat(p2d->a_radial_accel_var)));
+			lua::assign("radial_accel", TransFloat(p2d->A.radial_accel)), 
+			lua::assign("radial_accel_var", TransFloat(p2d->A.radial_accel_var)));
 
 		lua::connect(gen, 1, 
-			lua::assign("rotation_is_dir", TransBool(p2d->a_rotation_is_dir)));
+			lua::assign("rotation_is_dir", TransBool(p2d->A.rotation_is_dir)));
 	}
 	else if (p2d->mode_type == P2D_MODE_RADIUS)
 	{
 		lua::connect(gen, 2, 
-			lua::assign("start_radius", TransFloat(p2d->b_start_radius)), 
-			lua::assign("start_radius_var", TransFloat(p2d->b_start_radius_var)));
+			lua::assign("start_radius", TransFloat(p2d->B.start_radius)), 
+			lua::assign("start_radius_var", TransFloat(p2d->B.start_radius_var)));
 		lua::connect(gen, 2, 
-			lua::assign("end_radius", TransFloat(p2d->b_end_radius)), 
-			lua::assign("end_radius_var", TransFloat(p2d->b_end_radius_var)));
+			lua::assign("end_radius", TransFloat(p2d->B.end_radius)), 
+			lua::assign("end_radius_var", TransFloat(p2d->B.end_radius_var)));
 
 		lua::connect(gen, 2, 
-			lua::assign("direction_delta", TransFloat(p2d->b_direction_delta)), 
-			lua::assign("direction_delta_var", TransFloat(p2d->b_direction_delta_var)));
+			lua::assign("direction_delta", TransFloat(p2d->B.direction_delta)), 
+			lua::assign("direction_delta_var", TransFloat(p2d->B.direction_delta_var)));
 	}
 	else if (p2d->mode_type == P2D_MODE_SPD_COS)
 	{
 		lua::connect(gen, 2, 
-			lua::assign("speed", TransFloat(p2d->c_speed)), 
-			lua::assign("speed_var", TransFloat(p2d->c_speed_var)));
+			lua::assign("speed", TransFloat(p2d->C.speed)), 
+			lua::assign("speed_var", TransFloat(p2d->C.speed_var)));
 
 		lua::connect(gen, 2, 
-			lua::assign("cos_amplitude", TransFloat(p2d->c_cos_amplitude)), 
-			lua::assign("cos_amplitude_var", TransFloat(p2d->c_cos_amplitude_var)));
+			lua::assign("cos_amplitude", TransFloat(p2d->C.cos_amplitude)), 
+			lua::assign("cos_amplitude_var", TransFloat(p2d->C.cos_amplitude_var)));
 		lua::connect(gen, 2, 
-			lua::assign("cos_frequency", TransFloat(p2d->c_cos_frequency)), 
-			lua::assign("cos_frequency_var", TransFloat(p2d->c_cos_frequency_var)));
+			lua::assign("cos_frequency", TransFloat(p2d->C.cos_frequency)), 
+			lua::assign("cos_frequency_var", TransFloat(p2d->C.cos_frequency_var)));
 	}
 	else
 	{

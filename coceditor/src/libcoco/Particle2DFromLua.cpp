@@ -79,38 +79,38 @@ void Particle2DFromLua::UnpackBody(lua_State* L, PackParticle2D* p2d)
 
 	if (p2d->mode_type == P2D_MODE_GRAVITY) 
 	{
-		p2d->a_gravity.x = epbin::LuaDataHelper::GetIntField(L, "gravity_x");
-		p2d->a_gravity.y = epbin::LuaDataHelper::GetIntField(L, "gravity_y");
+		p2d->A.gravity.x = epbin::LuaDataHelper::GetIntField(L, "gravity_x");
+		p2d->A.gravity.y = epbin::LuaDataHelper::GetIntField(L, "gravity_y");
 
-		p2d->a_speed = epbin::LuaDataHelper::GetIntField(L, "speed");
-		p2d->a_speed_var = epbin::LuaDataHelper::GetIntField(L, "speed_var");
+		p2d->A.speed = epbin::LuaDataHelper::GetIntField(L, "speed");
+		p2d->A.speed_var = epbin::LuaDataHelper::GetIntField(L, "speed_var");
 
-		p2d->a_tangential_accel = epbin::LuaDataHelper::GetIntField(L, "tangential_accel");
-		p2d->a_tangential_accel_var = epbin::LuaDataHelper::GetIntField(L, "tangential_accel_var");
-		p2d->a_radial_accel = epbin::LuaDataHelper::GetIntField(L, "radial_accel");
-		p2d->a_radial_accel_var = epbin::LuaDataHelper::GetIntField(L, "radial_accel_var");
+		p2d->A.tangential_accel = epbin::LuaDataHelper::GetIntField(L, "tangential_accel");
+		p2d->A.tangential_accel_var = epbin::LuaDataHelper::GetIntField(L, "tangential_accel_var");
+		p2d->A.radial_accel = epbin::LuaDataHelper::GetIntField(L, "radial_accel");
+		p2d->A.radial_accel_var = epbin::LuaDataHelper::GetIntField(L, "radial_accel_var");
 
-		p2d->a_rotation_is_dir = epbin::LuaDataHelper::GetBoolField(L, "rotation_is_dir");
+		p2d->A.rotation_is_dir = epbin::LuaDataHelper::GetBoolField(L, "rotation_is_dir");
 	}
 	else if (p2d->mode_type == P2D_MODE_RADIUS)
 	{
-		p2d->b_start_radius = epbin::LuaDataHelper::GetIntField(L, "start_radius");
-		p2d->b_start_radius_var = epbin::LuaDataHelper::GetIntField(L, "start_radius_var");
-		p2d->b_end_radius = epbin::LuaDataHelper::GetIntField(L, "end_radius");
-		p2d->b_end_radius_var = epbin::LuaDataHelper::GetIntField(L, "end_radius_var");
+		p2d->B.start_radius = epbin::LuaDataHelper::GetIntField(L, "start_radius");
+		p2d->B.start_radius_var = epbin::LuaDataHelper::GetIntField(L, "start_radius_var");
+		p2d->B.end_radius = epbin::LuaDataHelper::GetIntField(L, "end_radius");
+		p2d->B.end_radius_var = epbin::LuaDataHelper::GetIntField(L, "end_radius_var");
 
-		p2d->b_direction_delta = epbin::LuaDataHelper::GetIntField(L, "direction_delta");
-		p2d->b_direction_delta_var = epbin::LuaDataHelper::GetIntField(L, "direction_delta_var");
+		p2d->B.direction_delta = epbin::LuaDataHelper::GetIntField(L, "direction_delta");
+		p2d->B.direction_delta_var = epbin::LuaDataHelper::GetIntField(L, "direction_delta_var");
 	}
 	else if (p2d->mode_type == P2D_MODE_SPD_COS)
 	{
-		p2d->c_speed = epbin::LuaDataHelper::GetIntField(L, "speed");
-		p2d->c_speed_var = epbin::LuaDataHelper::GetIntField(L, "speed_var");
+		p2d->C.speed = epbin::LuaDataHelper::GetIntField(L, "speed");
+		p2d->C.speed_var = epbin::LuaDataHelper::GetIntField(L, "speed_var");
 
-		p2d->c_cos_amplitude = epbin::LuaDataHelper::GetIntField(L, "cos_amplitude");
-		p2d->c_cos_amplitude_var = epbin::LuaDataHelper::GetIntField(L, "cos_amplitude_var");
-		p2d->c_cos_frequency = epbin::LuaDataHelper::GetIntField(L, "cos_frequency");
-		p2d->c_cos_frequency_var = epbin::LuaDataHelper::GetIntField(L, "cos_frequency_var");
+		p2d->C.cos_amplitude = epbin::LuaDataHelper::GetIntField(L, "cos_amplitude");
+		p2d->C.cos_amplitude_var = epbin::LuaDataHelper::GetIntField(L, "cos_amplitude_var");
+		p2d->C.cos_frequency = epbin::LuaDataHelper::GetIntField(L, "cos_frequency");
+		p2d->C.cos_frequency_var = epbin::LuaDataHelper::GetIntField(L, "cos_frequency_var");
 	}
 	else 
 	{

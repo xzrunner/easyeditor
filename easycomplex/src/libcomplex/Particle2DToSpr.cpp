@@ -28,38 +28,38 @@ p2d_ps_config* Particle2DToSpr::LoadConfig(const libcoco::PackParticle2D* p2d)
 
 	if (cfg->mode_type == P2D_MODE_GRAVITY)
 	{
-		cfg->mode.A.gravity.x = p2d->a_gravity.x;
-		cfg->mode.A.gravity.y = p2d->a_gravity.y;
+		cfg->mode.A.gravity.x = p2d->A.gravity.x;
+		cfg->mode.A.gravity.y = p2d->A.gravity.y;
 
-		cfg->mode.A.speed = p2d->a_speed;
-		cfg->mode.A.speed_var = p2d->a_speed_var;
+		cfg->mode.A.speed = p2d->A.speed;
+		cfg->mode.A.speed_var = p2d->A.speed_var;
 
-		cfg->mode.A.tangential_accel = p2d->a_tangential_accel;
-		cfg->mode.A.tangential_accel_var = p2d->a_tangential_accel_var;
-		cfg->mode.A.radial_accel = p2d->a_radial_accel;
-		cfg->mode.A.radial_accel_var = p2d->a_radial_accel_var;
+		cfg->mode.A.tangential_accel = p2d->A.tangential_accel;
+		cfg->mode.A.tangential_accel_var = p2d->A.tangential_accel_var;
+		cfg->mode.A.radial_accel = p2d->A.radial_accel;
+		cfg->mode.A.radial_accel_var = p2d->A.radial_accel_var;
 
-		cfg->mode.A.rotation_is_dir = p2d->a_rotation_is_dir;
+		cfg->mode.A.rotation_is_dir = p2d->A.rotation_is_dir;
 	}
 	else if (cfg->mode_type == P2D_MODE_RADIUS)
 	{
-		cfg->mode.B.start_radius = p2d->b_start_radius;
-		cfg->mode.B.start_radius_var = p2d->b_start_radius_var;
-		cfg->mode.B.end_radius = p2d->b_end_radius;
-		cfg->mode.B.end_radius_var = p2d->b_end_radius_var;
+		cfg->mode.B.start_radius = p2d->B.start_radius;
+		cfg->mode.B.start_radius_var = p2d->B.start_radius_var;
+		cfg->mode.B.end_radius = p2d->B.end_radius;
+		cfg->mode.B.end_radius_var = p2d->B.end_radius_var;
 
-		cfg->mode.B.direction_delta = p2d->b_direction_delta;
-		cfg->mode.B.direction_delta_var = p2d->b_direction_delta_var;
+		cfg->mode.B.direction_delta = p2d->B.direction_delta;
+		cfg->mode.B.direction_delta_var = p2d->B.direction_delta_var;
 	}
 	else if (cfg->mode_type == P2D_MODE_SPD_COS)
 	{
-		cfg->mode.C.speed = p2d->c_speed;
-		cfg->mode.C.speed_var = p2d->c_speed_var;
+		cfg->mode.C.speed = p2d->C.speed;
+		cfg->mode.C.speed_var = p2d->C.speed_var;
 
-		cfg->mode.C.cos_amplitude = p2d->c_cos_amplitude;
-		cfg->mode.C.cos_amplitude_var = p2d->c_cos_amplitude_var;
-		cfg->mode.C.cos_frequency = p2d->c_cos_frequency;
-		cfg->mode.C.cos_frequency_var = p2d->c_cos_frequency_var;
+		cfg->mode.C.cos_amplitude = p2d->C.cos_amplitude;
+		cfg->mode.C.cos_amplitude_var = p2d->C.cos_amplitude_var;
+		cfg->mode.C.cos_frequency = p2d->C.cos_frequency;
+		cfg->mode.C.cos_frequency_var = p2d->C.cos_frequency_var;
 	}
 	else
 	{
