@@ -2,6 +2,7 @@
 #define EJOY_2D_SPRITE_PACK_H
 
 #include "particle3d.h"
+#include "particle2d.h"
 
 #include <lua.h>
 #include <stdint.h>
@@ -23,6 +24,23 @@
 // binary package should reserve more bytes for 64bit platform
 #define PTR_SIZE_DIFF (8 - sizeof(void *))
 #define SIZEOF_POINTER 8
+
+struct p2d_particle_system;
+struct ps2d_sprite
+{
+	struct p2d_particle_system* ps;
+	int last_frame;
+	int _dummy;		// unused: dummy for align to 64bit
+};
+
+#define SIZEOF_PS2D_SPRITE (sizeof(struct ps2d_sprite) + PTR_SIZE_DIFF)
+
+struct pack_particle2d {
+	struct ps2d_sprite spr;
+	struct p2d_ps_config cfg;
+};
+
+#define SIZEOF_PARTICLE2D (SIZEOF_PS2D_SPRITE + SIZEOF_P2D_PS_CONFIG)
 
 struct p3d_particle_system;
 struct ps3d_sprite

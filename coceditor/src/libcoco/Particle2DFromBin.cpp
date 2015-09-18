@@ -11,7 +11,7 @@ namespace libcoco
 int Particle2DFromBin::Size(const PackParticle2D* p2d)
 {
 	int sz = 0;
-	sz += SIZEOF_P2D_PARTICLE;
+	sz += SIZEOF_PARTICLE2D;
 	sz += p2d->components.size() * SIZEOF_P2D_SYMBOL;
 	sz += SIZEOF_P2D_PARTICLE_SYSTEM;
 	sz += p2d->capacity * SIZEOF_P2D_PARTICLE;
