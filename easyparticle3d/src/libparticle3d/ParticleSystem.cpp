@@ -288,7 +288,7 @@ p3d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
 	assert(m_ps->cfg->symbol_count < MAX_COMPONENTS);
 
 	p3d_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
-	memset(&comp, 0, sizeof(p3d_symbol));
+	memset(&comp, 0, SIZEOF_P3D_SYMBOL);
 
 	comp.scale_start = comp.scale_end = 1;
 
@@ -313,7 +313,7 @@ void ParticleSystem::DelSymbol(int idx)
 	} else {
 		const p3d_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
 		p3d_symbol& dst = m_ps->cfg->symbols[idx];
-		memcpy(&dst, &src, sizeof(p3d_symbol));
+		memcpy(&dst, &src, SIZEOF_P3D_SYMBOL);
 	}
 }
 

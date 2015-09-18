@@ -17,7 +17,7 @@ p2d_ps_config* PSConfigMgr::GetDefaultConfig()
 	const char* KEY = "default";
 	p2d_ps_config* cfg = NULL;
 	std::map<std::string, p2d_ps_config*>::iterator itr = m_map2cfg.find(KEY);
-	int sz = sizeof(p2d_ps_config) + sizeof(p2d_symbol) * MAX_COMPONENTS;
+	int sz = SIZEOF_P2D_PS_CONFIG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;
 	if (itr == m_map2cfg.end()) {
 		cfg = (p2d_ps_config*) operator new(sz);
 		m_map2cfg.insert(std::make_pair(KEY, cfg));

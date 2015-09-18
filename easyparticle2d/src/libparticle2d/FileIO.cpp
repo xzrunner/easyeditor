@@ -129,7 +129,7 @@ p2d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	LoadAdapter adapter;
 	adapter.Load(filepath);
 
-	int sz = sizeof(p2d_ps_config) + sizeof(p2d_symbol) * MAX_COMPONENTS;
+	int sz = SIZEOF_P2D_PS_CONFIG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;
 	p2d_ps_config* cfg = (p2d_ps_config*) operator new(sz);
 	memset(cfg, 0, sz);
 

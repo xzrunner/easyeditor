@@ -261,7 +261,7 @@ p2d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
 	assert(m_ps->cfg->symbol_count < MAX_COMPONENTS);
 
 	p2d_symbol& comp = m_ps->cfg->symbols[m_ps->cfg->symbol_count++];
-	memset(&comp, 0, sizeof(p2d_symbol));
+	memset(&comp, 0, SIZEOF_P2D_SYMBOL);
 
 	comp.angle_start = comp.angle_end = 0;
 
@@ -288,7 +288,7 @@ void ParticleSystem::DelSymbol(int idx)
 	} else {
 		const p2d_symbol& src = m_ps->cfg->symbols[--m_ps->cfg->symbol_count];
 		p2d_symbol& dst = m_ps->cfg->symbols[idx];
-		memcpy(&dst, &src, sizeof(p2d_symbol));
+		memcpy(&dst, &src, SIZEOF_P2D_SYMBOL);
 	}
 }
 

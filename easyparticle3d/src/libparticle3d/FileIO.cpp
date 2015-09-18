@@ -163,7 +163,7 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	LoadAdapter adapter;
 	adapter.Load(filepath);
 	
-	int sz = sizeof(p3d_ps_config) + sizeof(p3d_symbol) * MAX_COMPONENTS;
+	int sz = SIZEOF_P3D_PS_CONFIG + SIZEOF_P3D_SYMBOL * MAX_COMPONENTS;
 	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
 	memset(cfg, 0, sz);
 	
