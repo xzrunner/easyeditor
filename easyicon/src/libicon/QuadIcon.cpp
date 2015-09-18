@@ -5,22 +5,36 @@ namespace eicon
 
 QuadIcon::QuadIcon()
 {
+	memset(m_src, 0, sizeof(m_src));
+	memset(m_screen, 0, sizeof(m_screen));
 }
 
 QuadIcon::QuadIcon(d2d::Image* img, const d2d::Vector* src, 
 				   const d2d::Vector* screen)
 	: Icon(img)
 {
-	memcpy(m_src, src, sizeof(d2d::Vector) * 4);
-	memcpy(m_screen, screen, sizeof(d2d::Vector) * 4);
+	memcpy(m_src, src, sizeof(m_src));
+	memcpy(m_screen, screen, sizeof(m_screen));
 }
 
 void QuadIcon::LoadFromFile(const Json::Value& value)
 {	
+	for (int i = 0; i < 4; ++i) {
+		m_src[i].x = value["src"][i]["x"].asDouble();
+		m_src[i].y = value["src"][i]["y"].asDouble();
+		m_screen[i].x = value["screen"][i]["x"].asDouble();
+		m_screen[i].y = value["screen"][i]["y"].asDouble();
+	}
 }
 
 void QuadIcon::StoreToFile(Json::Value& value) const
 {
+	for (int i = 0; i < 4; ++i) {
+		value["src"][i]["x"] = m_src[i].x;
+		value["src"][i]["y"] = m_src[i].y;
+		value["screen"][i]["x"] = m_screen[i].x;
+		value["screen"][i]["y"] = m_screen[i].y;
+	}
 }
 
 void QuadIcon::GetBound(float process, d2d::Vector bound[4]) const

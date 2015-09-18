@@ -9,7 +9,6 @@ const float EditRectOP::CTRL_NODE_RADIUS = 5.0f;
 
 EditRectOP::EditRectOP(StagePanel* stage)
 	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
-	, m_stage(stage)
 	, m_selected(PT_NULL)
 {
 }
@@ -20,7 +19,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	Icon* icon = m_stage->GetIcon();
+	Icon* icon = static_cast<StagePanel*>(m_wnd)->GetIcon();
 	if (!icon) {
 		return false;
 	}
@@ -60,7 +59,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 		return true;
 	}
 
-	Icon* icon = m_stage->GetIcon();
+	Icon* icon = static_cast<StagePanel*>(m_wnd)->GetIcon();
 	if (m_selected == PT_NULL || !icon) {
 		return false;
 	}
@@ -96,7 +95,7 @@ bool EditRectOP::OnActive()
 	}
 
 	RectIcon* icon = new RectIcon;
-	m_stage->SetIcon(icon);
+	static_cast<StagePanel*>(m_wnd)->SetIcon(icon);
 	icon->Release();	
 
 	return false;
@@ -108,7 +107,7 @@ bool EditRectOP::OnDraw() const
 		return true;
 	}
 
-	Icon* icon = m_stage->GetIcon();
+	Icon* icon = static_cast<StagePanel*>(m_wnd)->GetIcon();
 	if (!icon) {
 		return false;
 	}

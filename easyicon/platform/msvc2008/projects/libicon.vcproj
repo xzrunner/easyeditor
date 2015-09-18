@@ -308,6 +308,14 @@
 				Name="static"
 				>
 				<File
+					RelativePath="..\..\..\src\libicon\EditQuadOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\EditQuadOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libicon\EditRectOP.cpp"
 					>
 				</File>

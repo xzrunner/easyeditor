@@ -6,8 +6,8 @@
 namespace eicon
 {
 
-class StagePanel;
 class RectIcon;
+class StagePanel;
 
 class EditRectOP : public d2d::ZoomViewOP
 {
@@ -35,8 +35,6 @@ private:
 	};
 
 private:
-	StagePanel* m_stage;
-
 	PosType m_selected;
 
 }; // EditRectOP
