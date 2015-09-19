@@ -44,12 +44,14 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-		if (sprite->GetSymbol().GetSize().isValid()) {
-			sprite->Translate(pos);
-			m_sprites_impl->InsertSprite(sprite);
+		if (m_sprites_impl) {
+			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+			if (sprite->GetSymbol().GetSize().isValid()) {
+				sprite->Translate(pos);
+				m_sprites_impl->InsertSprite(sprite);
+			}
+			sprite->Release();
 		}
-		sprite->Release();
 	}
 }
 
@@ -63,10 +65,17 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 		bool success = m_library->AddSymbol(symbol);
 		if (success) {
 			Vector pos = m_stage->TransPosScrToProj(x, y);
-			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-			sprite->Translate(pos);
-			m_sprites_impl->InsertSprite(sprite);
-			sprite->Release();
+			bool handled = OnDropSymbol(symbol, pos);
+			if (handled) {
+				continue;
+			}
+
+			if (m_sprites_impl) {
+				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+				sprite->Translate(pos);
+				m_sprites_impl->InsertSprite(sprite);
+				sprite->Release();
+			}
 		}
 		symbol->Release();
 	}
