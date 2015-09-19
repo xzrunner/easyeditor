@@ -1,6 +1,7 @@
 #include "EditQuadOP.h"
 #include "StagePanel.h"
 #include "QuadIcon.h"
+#include "IconType.h"
 
 namespace eicon
 {
@@ -79,8 +80,14 @@ bool EditQuadOP::OnActive()
 		return true;
 	}
 
-	QuadIcon* icon = new QuadIcon;
-	static_cast<StagePanel*>(m_wnd)->SetIcon(icon);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	Icon* icon = stage->GetIcon();
+	if (icon && get_icon_type(icon->GetIconDesc()) == IT_QUAD) {
+		return false;
+	}
+
+	icon = new QuadIcon;
+	stage->SetIcon(icon);
 	icon->Release();	
 
 	return false;

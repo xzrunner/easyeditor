@@ -12,5 +12,6 @@
 #include "libicon/StagePanel.h"
 #include "libicon/ToolbarPanel.h"
 #include "libicon/FileIO.h"
+#include "libicon/EditDialog.h"
 
 #endif // _EASYTEMPLATE_H_

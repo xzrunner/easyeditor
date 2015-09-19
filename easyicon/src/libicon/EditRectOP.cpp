@@ -1,6 +1,7 @@
 #include "EditRectOP.h"
 #include "StagePanel.h"
 #include "RectIcon.h"
+#include "IconType.h"
 
 namespace eicon
 {
@@ -94,8 +95,14 @@ bool EditRectOP::OnActive()
 		return true;
 	}
 
-	RectIcon* icon = new RectIcon;
-	static_cast<StagePanel*>(m_wnd)->SetIcon(icon);
+	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	Icon* icon = stage->GetIcon();
+	if (icon && get_icon_type(icon->GetIconDesc()) == IT_RECT) {
+		return false;
+	}
+
+	icon = new RectIcon;
+	stage->SetIcon(icon);
 	icon->Release();	
 
 	return false;

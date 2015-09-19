@@ -107,6 +107,14 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
+	else if (eicon::Sprite* icon = dynamic_cast<eicon::Sprite*>(selected))
+	{
+		eicon::EditDialog dlg(m_wnd, selected, m_spritesImpl);
+		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
+		m_stage->ResetViewport();
+	}
 
 	return false;
 }

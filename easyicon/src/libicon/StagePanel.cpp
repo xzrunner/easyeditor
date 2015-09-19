@@ -1,5 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "Symbol.h"
 
 namespace eicon
 {
@@ -9,31 +10,55 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 {
 	SetCanvas(new StageCanvas(this));
+	m_symbol = new Symbol;
 
 	SetDropTarget(new StageDropTarget(this, library));
 }
 
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
+	: d2d::EditPanel(parent, frame)
+{
+	SetCanvas(new StageCanvas(this, edited, bg_sprites));
+	m_symbol = (Symbol*)(&edited->GetSymbol());
+	if (m_symbol) {
+		m_symbol->Retain();
+	}
+}
+
 StagePanel::~StagePanel()
 {
+	if (m_symbol) {
+		m_symbol->Release();
+	}
 }
 
 void StagePanel::Clear()
 {
+	EditPanel::Clear();
 }
 
 void StagePanel::SetIcon(Icon* icon)
 {
-	m_symbol.SetIcon(icon);	
+	if (m_symbol) {
+		m_symbol->SetIcon(icon);	
+	}
 }
 
 Icon* StagePanel::GetIcon()
 {
-	return m_symbol.GetIcon();
+	if (m_symbol) {
+		return m_symbol->GetIcon();
+	} else {
+		return NULL;
+	}
 }
 
 void StagePanel::SetImage(d2d::Image* img)
 {
-	m_symbol.SetImage(img);
+	if (m_symbol) {
+		m_symbol->SetImage(img);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
