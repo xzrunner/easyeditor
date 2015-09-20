@@ -161,6 +161,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libscale9\FileSaver.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libscale9\ToolbarPanel.cpp"
 				>
 			</File>
@@ -168,18 +176,6 @@
 				RelativePath="..\..\..\src\libscale9\ToolbarPanel.h"
 				>
 			</File>
-			<Filter
-				Name="file"
-				>
-				<File
-					RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libscale9\FileSaver.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="stage"

@@ -6,7 +6,8 @@ namespace escale9
 {
 
 ComposeImpl::ComposeImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, NULL, d2d::ArrangeSpriteConfig())
+	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, NULL, 
+	d2d::ArrangeSpriteConfig(false, false, false, false))
 	, m_stage(stage)
 {
 }
