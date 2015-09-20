@@ -31,7 +31,7 @@ private:
 private:
 	struct Value
 	{
-		int w, h;
+		float w, h;
 		const IPackNode* node;
 	};
 
