@@ -9,18 +9,26 @@ namespace escale9
 class StagePanel;
 class ToolbarPanel;
 
-class ComposeOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>
+class ComposeOP : public d2d::ZoomViewOP
 {
 public:
-	ComposeOP(ToolbarPanel* toolbar, StagePanel* stage, d2d::PropertySettingPanel* property, 
+	ComposeOP(StagePanel* stage, ToolbarPanel* toolbar,
 		d2d::ViewPanelMgr* view_panel_mgr);
 
 	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
 
 	virtual bool OnActive();
 
+	virtual bool OnDraw() const;
+
+private:
+	d2d::ISprite* SelectByPos(int x, int y);
+
 private:
 	ToolbarPanel* m_toolbar;
+
+	d2d::ViewPanelMgr* m_view_panel_mgr;
 
 }; // ComposeOP
 

@@ -8,6 +8,9 @@
 namespace escale9
 {
 
+static const int OFFSET_VERSION = 2;
+static const int VERSION = OFFSET_VERSION;
+
 void FileIO::load(const char* filename, d2d::LibraryPanel* library, 
 				  d2d::MultiSpritesImpl* stage, ToolbarPanel* toolbar)
 {
@@ -21,10 +24,18 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
 
 	wxString dir = d2d::FilenameTools::getFileDir(filename);
 
+	bool need_offset = true;
+	if (!value["version"].isNull() && value["version"].asInt() >= OFFSET_VERSION) {
+		need_offset = false;
+	}
+
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
 		d2d::ISprite* sprite = load(spriteValue, dir);
+		if (need_offset) {
+			sprite->Translate(d2d::Vector(-150, -150));
+		}
 		stage->InsertSprite(sprite);
  		spriteValue = value["sprite"][i++];
  	}
@@ -40,6 +51,8 @@ void FileIO::store(const char* filename, StagePanel* stage,
 				   ToolbarPanel* toolbar)
 {
 	Json::Value value;
+
+	value["version"] = VERSION;
 
 	value["type"] = stage->getPatchSymbol()->GetScale9Data().GetType();
 
