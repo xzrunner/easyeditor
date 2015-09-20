@@ -5,6 +5,7 @@
 #include "PackPicture.h"
 #include "PackLabel.h"
 #include "PackAnimation.h"
+#include "PackAnchor.h"
 #include "PackParticle3D.h"
 #include "PackParticle2D.h"
 
@@ -94,6 +95,10 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 
 IPackNode* UnpackNodeFactory::Query(int id) const
 {
+	if (id == ANCHOR_ID) {
+		return new PackAnchor;
+	}
+
 	std::map<int, IPackNode*>::const_iterator itr 
 		= m_map_id.find(id);
 	if (itr != m_map_id.end()) {

@@ -1,5 +1,6 @@
 #include "AnimFromLua.h"
 #include "UnpackNodeFactory.h"
+#include "spritepack.h"
 
 #include <epbin.h>
 
@@ -33,7 +34,12 @@ void AnimFromLua::UnpackComponents(lua_State* L, PackAnimation* anim)
 
 		anim->components.push_back(PackAnimation::Component());
 		PackAnimation::Component& comp = anim->components[anim->components.size() - 1];
-		int id = epbin::LuaDataHelper::GetIntField(L, "id");
+		int id;
+		if (epbin::LuaDataHelper::HasField(L, "id")) {
+			id = epbin::LuaDataHelper::GetIntField(L, "id");
+		} else {
+			id = ANCHOR_ID;
+		}
 		comp.node = factory->Query(id);
 		if (!comp.node) {
 			factory->AddUnassigned(id, &comp.node);

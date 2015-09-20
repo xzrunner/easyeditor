@@ -336,7 +336,7 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="4. particle3d"
+					Name="5. particle3d"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\PackParticle3D.cpp"
@@ -388,7 +388,7 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="5. particle2d"
+					Name="6. particle2d"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\PackParticle2D.cpp"
@@ -438,6 +438,14 @@
 							>
 						</File>
 					</Filter>
+				</Filter>
+				<Filter
+					Name="4. anchor"
+					>
+					<File
+						RelativePath="..\..\..\src\libcoco\PackAnchor.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -532,7 +540,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="4. particle3d"
+					Name="5. particle3d"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\Particle3DBuilder.cpp"
@@ -544,7 +552,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="5. particle2d"
+					Name="6. particle2d"
 					>
 					<File
 						RelativePath="..\..\..\src\libcoco\Particle2DBuilder.cpp"

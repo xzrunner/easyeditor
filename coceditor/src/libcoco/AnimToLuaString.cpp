@@ -1,4 +1,5 @@
 #include "AnimToLuaString.h"
+#include "spritepack.h"
 
 #include <easybuilder.h>
 
@@ -26,12 +27,21 @@ void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& g
 		for (int i = 0, n = anim->components.size(); i < n; ++i) {
 			const PackAnimation::Component& comp = anim->components[i];
 
-			std::string id_str = lua::assign("id", d2d::StringTools::ToString(comp.node->GetID()));
-			if (comp.name.empty()) {
-				lua::tableassign(gen, "", 1, id_str);
-			} else {
+			int node_id = comp.node->GetID();
+			if (node_id == ANCHOR_ID) {
+				if (comp.name.empty()) {
+					throw d2d::Exception("AnimToLuaString::Pack Anchor need a name.");
+				}
 				std::string name_str = lua::assign("name", "\""+comp.name+"\"");
-				lua::tableassign(gen, "", 2, id_str, name_str);
+				lua::tableassign(gen, "", 1, name_str);
+			} else {
+				std::string id_str = lua::assign("id", d2d::StringTools::ToString(node_id));
+				if (comp.name.empty()) {
+					lua::tableassign(gen, "", 1, id_str);
+				} else {
+					std::string name_str = lua::assign("name", "\""+comp.name+"\"");
+					lua::tableassign(gen, "", 2, id_str, name_str);
+				}
 			}
 		}
 	}

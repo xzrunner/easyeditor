@@ -55,8 +55,6 @@ void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
 
 	// todo: clipbox
 
-	// todo: mount node
-
   	// todo: only one action
 
 	PackAnimation::Action action;
