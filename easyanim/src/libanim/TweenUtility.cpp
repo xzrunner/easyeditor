@@ -1,5 +1,6 @@
 #include "TweenUtility.h"
 
+#include <easyscale9.h>
 #include <easyicon.h>
 
 namespace libanim
@@ -78,7 +79,19 @@ void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::I
 	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
 	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
 
-	if (eicon::Sprite* icon_s = dynamic_cast<eicon::Sprite*>(start))
+	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
+	{
+		escale9::Sprite* s9_e = dynamic_cast<escale9::Sprite*>(end);
+		escale9::Sprite* s9_t = dynamic_cast<escale9::Sprite*>(tween);
+		assert(s9_e && s9_t);
+		float s_w, s_h, e_w, e_h;
+		s9_s->GetSize(s_w, s_h);
+		s9_e->GetSize(e_w, e_h);
+		float t_w = (e_w - s_w) * process + s_w,
+			t_h = (e_h - s_h) * process + s_h;
+		s9_t->SetSize(t_w, t_h);
+	}
+	else if (eicon::Sprite* icon_s = dynamic_cast<eicon::Sprite*>(start))
 	{
 		eicon::Sprite* icon_e = dynamic_cast<eicon::Sprite*>(end);
 		eicon::Sprite* icon_t = dynamic_cast<eicon::Sprite*>(tween);
