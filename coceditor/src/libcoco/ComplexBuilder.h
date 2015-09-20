@@ -3,7 +3,7 @@
 
 #include "INodeBuilder.h"
 
-#include <map>
+#include <drag2d.h>
 
 namespace ecomplex { class Symbol; }
 
@@ -26,6 +26,10 @@ public:
 
 private:
 	void Load(const ecomplex::Symbol* symbol, PackAnimation* anim);
+
+	static void GroupFromTag(const std::vector<d2d::ISprite*>& src, 
+		std::map<std::string, std::vector<d2d::ISprite*> >& dst,
+		std::vector<d2d::ISprite*>& others);
 
 private:
 	ExportNameSet& m_export_set;

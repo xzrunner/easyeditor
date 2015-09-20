@@ -55,17 +55,88 @@ void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
 
 	// todo: clipbox
 
-  	// todo: only one action
+	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
+	std::vector<d2d::ISprite*> others;
+	GroupFromTag(symbol->m_sprites, map_actions, others);
+	
+	if (map_actions.empty()) 
+	{
+		PackAnimation::Action action;
+		action.size = 1;
+		anim->actions.push_back(action);
 
-	PackAnimation::Action action;
-  	action.size = 1;
-	anim->actions.push_back(action);
-
-	PackAnimation::Frame frame;
-	for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i) {
-		anim->CreateFramePart(symbol->m_sprites[i], frame);
+		PackAnimation::Frame frame;
+		for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i) {
+			anim->CreateFramePart(symbol->m_sprites[i], frame);
+		}
+		anim->frames.push_back(frame);
 	}
-	anim->frames.push_back(frame);
+	else
+	{
+		std::map<std::string, std::vector<d2d::ISprite*> >::iterator 
+			itr = map_actions.begin();
+		for ( ; itr != map_actions.end(); ++itr)
+		{
+			PackAnimation::Action action;
+			action.size = 1;
+			action.name = itr->first;
+			anim->actions.push_back(action);
+
+			PackAnimation::Frame frame;
+			for (int i = 0, n = itr->second.size(); i < n; ++i) {
+				anim->CreateFramePart(itr->second[i], frame);
+			}
+			for (int i = 0, n = others.size(); i < n; ++i) {
+				anim->CreateFramePart(others[i], frame);
+			}
+			anim->frames.push_back(frame);
+		}
+	}
+}
+
+void ComplexBuilder::GroupFromTag(const std::vector<d2d::ISprite*>& src, 
+								  std::map<std::string, std::vector<d2d::ISprite*> >& dst, 
+								  std::vector<d2d::ISprite*>& others)
+{
+	for (int i = 0, n = src.size(); i < n; ++i)
+	{
+		d2d::ISprite* sprite = src[i];
+		if (sprite->tag.empty())
+		{
+			others.push_back(sprite);
+		}
+		else
+		{
+			std::vector<std::string> tags;
+			d2d::StringTools::Split(sprite->tag, ";", tags);
+			bool is_action = false;
+			for (int i = 0, n = tags.size(); i < n; ++i)
+			{
+// 				if (tags[i].find("=") != std::string::npos) {
+// 					continue;
+// 				}
+
+				is_action = true;
+
+				std::map<std::string, std::vector<d2d::ISprite*> >::iterator 
+					itr = dst.find(tags[i]);
+				if (itr == dst.end())
+				{
+					std::vector<d2d::ISprite*> sprites;
+					sprites.push_back(sprite);
+					dst.insert(std::make_pair(tags[i], sprites));
+				}
+				else
+				{
+					itr->second.push_back(sprite);
+				}
+			}
+
+			if (!is_action) {
+				others.push_back(sprite);
+			}
+		}
+	}
 }
 
 }

@@ -65,6 +65,7 @@ void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& g
 			lua::TableAssign ta(gen, "", true);
 			PackFrame(frame, gen);
 		}
+		s_frame = e_frame;
 	}
 
 	gen.detab();
