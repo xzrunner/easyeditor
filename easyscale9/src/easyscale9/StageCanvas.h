@@ -28,8 +28,6 @@ private:
 private:
 	StagePanel* m_stage_panel;
 
-	d2d::ShapeStyle m_bgStyle, m_nodeStyle;
-
 	ToolbarPanel* m_toolbar;
 
 }; // StageCanvas

@@ -16,8 +16,6 @@ namespace escale9
 		StagePanel* stage;
 		ToolbarPanel* toolbar;
 
-		static const int EDGE = 100;
-
 		bool isComposeOP;
 
 		ResizeCMPT* resizeCMPT;

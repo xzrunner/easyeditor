@@ -1,6 +1,6 @@
 #include "ComposeImpl.h"
 #include "StagePanel.h"
-#include "config.h"
+#include "ComposeGrids.h"
 
 namespace escale9
 {
@@ -26,8 +26,12 @@ void ComposeImpl::OnMouseRightDown(int x, int y)
 	//////////////////////////////////////////////////////////////////////////
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	const int col = pos.x / EDGE,
-		row = pos.y / EDGE;
+	int col, row;
+	ComposeGrids::Query(pos, &col, &row);
+	if (col == -1 || row == -1) {
+		return;
+	}
+
 	d2d::ISprite* selected = m_stage->getSprite(row, col);
 	if (selected)
 	{

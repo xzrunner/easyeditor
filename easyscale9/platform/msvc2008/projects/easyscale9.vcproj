@@ -212,6 +212,46 @@
 				RelativePath="..\..\..\src\easyscale9\ToolBarPanel.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\easyscale9\Context.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\Context.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\FileIO.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\main.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\Task.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyscale9\Task.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="editop"
+			>
 			<Filter
 				Name="compose"
 				>
@@ -254,42 +294,14 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="frame"
+			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\easyscale9\config.h"
+				RelativePath="..\..\..\src\easyscale9\ComposeGrids.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyscale9\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\Context.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\FileIO.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\main.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\Task.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyscale9\Task.h"
+				RelativePath="..\..\..\src\easyscale9\ComposeGrids.h"
 				>
 			</File>
 		</Filter>

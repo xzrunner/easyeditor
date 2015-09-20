@@ -2,7 +2,7 @@
 #include "StageCanvas.h"
 #include "ResizeCMPT.h"
 #include "ToolbarPanel.h"
-#include "config.h"
+#include "ComposeGrids.h"
 
 #include <easyscale9.h>
 
@@ -39,25 +39,21 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	d2d::MultiSpritesImpl::InsertSprite(sprite);
 
-	const float edge = EDGE;
 	const d2d::Vector& pos = sprite->GetPosition();
+	int col, row;
+	ComposeGrids::Query(pos, &col, &row);
+	if (col == -1 || row == -1) {
+		return false;
+	}
 
-	int i, j;
-
-	if (pos.y < edge) i = 0;
-	else if (pos.y >= edge && pos.y < edge * 2) i = 1;
-	else if (pos.y > edge * 2) i = 2;
-
-	if (pos.x < edge) j = 0;
-	else if (pos.x >= edge && pos.x < edge * 2) j = 1;
-	else if (pos.x > edge * 2) j = 2;
-
-	if (m_sprites[i][j] && m_sprites[i][j] != sprite)
-		m_sprites[i][j]->Release();
+	if (m_sprites[row][col] && m_sprites[row][col] != sprite) {
+		m_sprites[row][col]->Release();
+	}
 	sprite->Retain();
-	m_sprites[i][j] = sprite;
-	d2d::Vector center(edge*0.5f+edge*j, edge*0.5f+edge*i);
-	sprite->SetTransform(center, sprite->GetAngle());
+	m_sprites[row][col] = sprite;
+
+	sprite->SetTransform(ComposeGrids::GetGridCenter(col, row), 
+		sprite->GetAngle());
 
 	rebuildPatchSymbol();
 
