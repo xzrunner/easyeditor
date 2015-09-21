@@ -210,6 +210,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "epbin", "..\epbin\platform\
 	EndProjectSection
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "ejoy2d", "..\ejoy2d\platform\msvc2008\projects\ejoy2d.icproj", "{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8833502D-52B5-4C5C-BE5B-6C611E6F9848} = {8833502D-52B5-4C5C-BE5B-6C611E6F9848}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyterrain2d", "..\easyterrain2d\platform\msvc2008\projects\easyterrain2d.vcproj", "{97438907-CD84-4E01-BF7F-3614A6F0C231}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -437,6 +440,9 @@ EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libparticle", "..\particle\platform\msvc2008\projects\particle.icproj", "{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libdtex", "..\dtex\platform\msvc2008\projects\dtex.icproj", "{17BC84E5-4CEC-4E1E-B09D-858B89643592}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D5A1565C-C421-46E9-853D-B9BE4C56F708} = {D5A1565C-C421-46E9-853D-B9BE4C56F708}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

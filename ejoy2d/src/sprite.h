@@ -1,129 +1,90 @@
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#ifndef EJOY_2D_SPRITE_H
+#define EJOY_2D_SPRITE_H
 
-#ifndef ejoy_sprite_h
-#define ejoy_sprite_h
+#include "spritepack.h"
+#include "matrix.h"
 
+#include <lua.h>
 #include <stdint.h>
+#include <stdbool.h>
 
-#define EJ_INVISIBLE 0x1
-#define EJ_MIRROR 0x2
-#define EJ_MESSAGE 0x4
-#define EJ_MATRIX 0x8
-#define EJ_ADDITIVEMODE 0x10
-#define EJ_GRAY 0x20
-#define EJ_EXT_CLICK_AREA 0x40
+#define SPRFLAG_INVISIBLE               (0x00000001)
+#define SPRFLAG_MESSAGE                 (0x00000002)
+#define SPRFLAG_MULTIMOUNT              (0x00000004)
+#define SPRFLAG_FORCE_INHERIT_FRAME     (0x00000008)
+#define SPRFLAG_RANDOM_CHILD_BASE_FRAME (0x00000010)
 
-struct picture;
+struct material;
 
-struct screen_coord {
-  float wscale;
-  float hscale;
-  int xoffset;
-  int yoffset;
-  float inv_scale;
+struct anchor_data {
+	struct particle_system *ps;
+	struct pack_picture *pic;
+	struct matrix mat;
+	struct ej_trail_t *trail;
 };
 
-struct ej_cursor {
-  int x;
-  int y;
+struct sprite {
+	struct sprite * parent;
+	uint16_t type;
+	uint16_t id;
+	struct sprite_trans t;
+	union {
+		struct pack_animation *ani;
+		struct pack_picture *pic;
+		struct pack_polygon *poly;
+		struct pack_label *label;
+		struct pack_pannel *pannel;
+		struct matrix *mat;
+		struct pack_particle3d *p3d;
+		struct pack_particle2d *p2d;
+	} s;
+	struct matrix mat;
+	int start_frame;
+	int total_frame;
+	int frame;
+	int flags;
+	const char *name;	// name for parent
+	struct material *material;
+	union {
+		struct sprite * children[1];
+		struct rich_text * rich_text;
+		int scissor;
+		struct anchor_data *anchor;
+	} data;
 };
 
-struct ej_rect {
-  int xmin, ymin;
-  int xmax, ymax;
-};
+struct sprite_trans * sprite_trans_mul(struct sprite_trans *a, struct sprite_trans *b, struct sprite_trans *t, struct matrix *tmp_matrix);
+void sprite_drawquad(struct pack_picture *picture, const struct srt *srt, const struct sprite_trans *arg);
+void sprite_drawpolygon(struct pack_polygon *poly, const struct srt *srt, const struct sprite_trans *arg);
 
-struct ej_sprite {
-  struct ej_package * pack;
-  struct animation * ani;
-  int frame;
-  int extra;
-  short action;
-  short flag;
-  int mat[6];
-  uint32_t color_trans;
-  uint32_t color_additive;
-  struct ej_sprite * c[0];
-};
+// sprite_size must be call before sprite_init
+int sprite_size(struct sprite_pack *pack, int id);
+void sprite_init(struct sprite *, struct sprite_pack * pack, int id, int sz);
 
-static inline void
-matrix_mul(int m[6], const int m1[6], const int m2[6]) {
-  m[0] = (m1[0] * m2[0] + m1[1] * m2[2]) /1024;
-  m[1] = (m1[0] * m2[1] + m1[1] * m2[3]) /1024;
-  m[2] = (m1[2] * m2[0] + m1[3] * m2[2]) /1024;
-  m[3] = (m1[2] * m2[1] + m1[3] * m2[3]) /1024;
-  m[4] = (m1[4] * m2[0] + m1[5] * m2[2]) /1024 + m2[4];
-  m[5] = (m1[4] * m2[1] + m1[5] * m2[3]) /1024 + m2[5];
-}
+// return action frame number, -1 means action is not exist
+int sprite_action(struct sprite *, const char * action);
 
-static inline int
-_inverse_scale(int m[6],int o[6]) {
-  if(m[0] == 0 || m[3] == 0) {
-    return 1;
-  }
-  o[0] = (1024 * 1024) / m[0];
-  o[1] = 0;
-  o[2] = 0;
-  o[3] = (1024 * 1024) / m[3];
-  o[4] = - (m[4] * o[0]) / 1024;
-  o[5] = - (m[5] * o[3]) / 1024;
-  return 0;
-}
+void sprite_draw(struct sprite *, struct srt *srt);
+void sprite_draw_as_child(struct sprite *, struct srt *srt, struct matrix *mat, uint32_t color);
+struct sprite * sprite_test(struct sprite *, struct srt *srt, int x, int y);
 
-static inline int
-_inverse_rot(int m[6], int o[6]) {
-  if(m[1] == 0 || m[2] == 0) {
-    return 1;
-  }
-  o[0] = 0;
-  o[1] = (1024 * 1024) / m[2];
-  o[2] = (1024 * 1024) / m[1];
-  o[3] = 0;
-  o[4] = - (m[5] * o[2]) / 1024;
-  o[5] = - (m[4] * o[1]) / 1024;
-  return 0;
-}
+// return child index, -1 means not found
+int sprite_child(struct sprite *, const char * childname);
+int sprite_child_ptr(struct sprite *, struct sprite *child);
+// return sprite id in pack, -1 for end
+int sprite_component(struct sprite *, int index);
+const char * sprite_childname(struct sprite *, int index);
+int sprite_setframe(struct sprite *, int frame, bool force_child);
+void sprite_mount(struct sprite *, int index, struct sprite *);
 
-static inline int
-matrix_inverse(int m[6], int o[6]) {
-  if (m[1] == 0 && m[2] == 0) {
-    return _inverse_scale(m,o);
-  }
-  if (m[0] == 0 && m[3] == 0) {
-    return _inverse_rot(m,o);
-  }
-  int t = m[0] * m[3] - m[1] * m[2] ;
-  if (t == 0) {
-    return 1;
-  }
-  o[0] = (int64_t)m[3] * (1024 * 1024) / t;
-  o[1] = - (int64_t)m[1] * (1024 * 1024) / t;
-  o[2] = - (int64_t)m[2] * (1024 * 1024) / t;
-  o[3] = (int64_t)m[0] * (1024 * 1024) / t;
-  o[4] = - (m[4] * o[0] + m[5] * o[2]) / 1024;
-  o[5] = - (m[4] * o[1] + m[5] * o[3]) / 1024;
-  return 0;
-}
+void sprite_aabb(struct sprite *s, struct srt *srt, bool world_aabb, int aabb[4]);
+int sprite_pos(struct sprite *s, struct srt *srt, struct matrix *m, int pos[2]);	// todo: maybe unused, use sprite_matrix instead
+// calc the sprite's world matrix
+void sprite_matrix(struct sprite *s, struct matrix *mat);
 
-struct screen_coord * sprite_default_coord(struct screen_coord * screen);
-struct screen_coord * sprite_coord(struct screen_coord * screen, int x, int y, float scale); 
-void screen_clip_push(int *mat, int x, int y, int *clipbox, float scale, int test);
-void screen_clip_pop(int test);
-int screen_clip_test(int x, int y);
-int screen_clip_test_rect(int x1, int y1, int x2, int y2);
-int sprite_id(struct ej_package *pack, const char *name);
-int sprite_size(struct ej_package *pack, int id);
-int sprite_create(struct ej_sprite * spr, struct ej_package *pack, int id);
-void sprite_draw(struct ej_package * pack, struct picture * pic, int x, int y, int *mat, unsigned int color, unsigned int additive, int mirror, int shader,struct screen_coord *screen);
-int sprite_find(struct ej_sprite *spr, struct ej_sprite *node, char *buf, int cap);
-int sprite_test(struct ej_package * pack, struct picture * pic, int x, int y, int *mat, struct ej_cursor *c, int offx, int offy, float scale, int mirror, int extend);
-void sprite_region(struct ej_package* pack, struct picture* pic, int x, int y, int *mat, int offx, int offy, float scale, int mirror, struct ej_rect* rect);
+bool sprite_child_visible(struct sprite *s, const char * childname);
+int sprite_material_size(struct sprite *s);
 
-#endif
+int ejoy2d_sprite(lua_State *L);
 
-#ifdef __cplusplus
-}
 #endif

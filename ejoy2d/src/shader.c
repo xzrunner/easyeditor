@@ -1,609 +1,511 @@
 #include "shader.h"
+#include "material.h"
 #include "fault.h"
-#include "dtex_facade.h"
+#include "array.h"
+#include "renderbuffer.h"
+#include "texture.h"
+#include "matrix.h"
+#include "spritepack.h"
+#include "screen.h"
+#include "label.h"
 
-#include "opengl.h"
+#include "render.h"
+#include "blendmode.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdbool.h>
 
-#include "platform.h"
+#define MAX_PROGRAM 16
 
-// #define DRAWCALL_STAT
+#define BUFFER_OFFSET(f) ((intptr_t)&(((struct vertex *)NULL)->f))
 
-#define MAX_COMMBINE 1024
-// #define MAX_COMMBINE 1
-#define ATTRIB_VERTEX 0
-#define ATTRIB_TEXTCOORD 1
-#define ATTRIB_COLOR 2
-#define ATTRIB_ADDITIVE 3
+#define MAX_UNIFORM 16
+#define MAX_TEXTURE_CHANNEL 8
 
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
-
-//#define TEST_LOG
-
-#define DTEX_WIDTH 2048
-#define DTEX_HEIGHT 2048
-
-#ifdef USE_DTEX
-struct dtex* Dtex = NULL;
-#endif
-
-static GLuint VertexBuffer = 0;
-static GLuint IndexBuffer = 0;
-
-#ifdef DRAWCALL_STAT
-static int drawcall = 0;
-#endif
-
-struct program {
-  GLuint prog;
-  GLint sampler0, sampler1;
+struct uniform {
+	int loc;
+	int offset;
+	enum UNIFORM_FORMAT type;
 };
 
-static struct program Prog[7];
-#define PROGRAM_TOTAL (sizeof(Prog)/sizeof(Prog[0]))
+struct program {
+	RID prog;
+	struct material * material;
+	int texture_number;
+	int uniform_number;
+	struct uniform uniform[MAX_UNIFORM];
+	bool reset_uniform;
+	bool uniform_change[MAX_UNIFORM];
+	float uniform_value[MAX_UNIFORM * 16];
+};
 
 struct render_state {
-  int edge;
-  unsigned int color;
-  unsigned int additive;
-  int blend;
-  int activeprog;
-  int tex;
-  int fbo;
-  int object;
-  float vb[24 * MAX_COMMBINE];
+	struct render * R;
+	int current_program;
+	struct program program[MAX_PROGRAM];
+	RID tex[MAX_TEXTURE_CHANNEL];
+	int blendchange;
+	int drawcall;
+	RID vertex_buffer;
+	RID index_buffer;
+	RID layout;
+	struct render_buffer vb;
 };
 
 static struct render_state *RS = NULL;
 
+void lsprite_initrender(struct render *r);
+
+void
+shader_init() {
+	if (RS) return;
+
+	struct render_state * rs = (struct render_state *) malloc(sizeof(*rs));
+	memset(rs, 0 , sizeof(*rs));
+
+	struct render_init_args RA;
+	// todo: config these args
+	RA.max_buffer = 128;
+	RA.max_layout = 4;
+	RA.max_target = 128;
+	RA.max_texture = 256;
+	RA.max_shader = MAX_PROGRAM;
+
+	int rsz = render_size(&RA);
+	rs->R = (struct render *)malloc(rsz);
+	rs->R = render_init(&RA, rs->R, rsz);
+	texture_initrender(rs->R);
+	screen_initrender(rs->R);
+	label_initrender(rs->R);
+	lsprite_initrender(rs->R);
+	renderbuffer_initrender(rs->R);
+
+	rs->current_program = -1;
+	rs->blendchange = 0;
+	render_setblend(rs->R, BLEND_ONE, BLEND_ONE_MINUS_SRC_ALPHA);
+
+	uint16_t idxs[6 * MAX_COMMBINE];
+	int i;
+	for (i=0;i<MAX_COMMBINE;i++) {
+		idxs[i*6] = i*4;
+		idxs[i*6+1] = i*4+1;
+		idxs[i*6+2] = i*4+2;
+		idxs[i*6+3] = i*4;
+		idxs[i*6+4] = i*4+2;
+		idxs[i*6+5] = i*4+3;
+	}
+	
+	rs->index_buffer = render_buffer_create(rs->R, INDEXBUFFER, idxs, 6 * MAX_COMMBINE, sizeof(uint16_t));
+	rs->vertex_buffer = render_buffer_create(rs->R, VERTEXBUFFER, NULL,  4 * MAX_COMMBINE, sizeof(struct vertex));
+
+	struct vertex_attrib va[7] = {
+		{ "position", 0, 2, sizeof(float), BUFFER_OFFSET(vp.vx) },
+		{ "texcoord", 0, 2, sizeof(uint16_t), BUFFER_OFFSET(vp.tx) },
+		{ "color", 0, 4, sizeof(uint8_t), BUFFER_OFFSET(rgba) },
+		{ "additive", 0, 4, sizeof(uint8_t), BUFFER_OFFSET(add) },
+		{ "rmap", 0, 4, sizeof(uint8_t), BUFFER_OFFSET(rmap) },
+		{ "gmap", 0, 4, sizeof(uint8_t), BUFFER_OFFSET(gmap) },
+		{ "bmap", 0, 4, sizeof(uint8_t), BUFFER_OFFSET(bmap) },
+	};
+	rs->layout = render_register_vertexlayout(rs->R, sizeof(va)/sizeof(va[0]), va);
+	render_set(rs->R, VERTEXLAYOUT, rs->layout, 0);
+	render_set(rs->R, INDEXBUFFER, rs->index_buffer, 0);
+	render_set(rs->R, VERTEXBUFFER, rs->vertex_buffer, 0);
+
+	RS = rs;
+}
+
+void
+shader_reset() {
+	struct render_state *rs = RS;
+	render_state_reset(rs->R);
+	render_setblend(rs->R, BLEND_ONE, BLEND_ONE_MINUS_SRC_ALPHA);
+	if (RS->current_program != -1) {
+		render_shader_bind(rs->R, RS->program[RS->current_program].prog);
+	}
+	render_set(rs->R, VERTEXLAYOUT, rs->layout, 0);
+	render_set(rs->R, TEXTURE, RS->tex[0], 0);
+	render_set(rs->R, INDEXBUFFER, RS->index_buffer,0);
+	render_set(rs->R, VERTEXBUFFER, RS->vertex_buffer,0);
+}
+
 static void
-rs_init() {
-  struct render_state * rs = malloc(sizeof(*rs));
-  rs->edge = 0;
-  rs->color = 0xffffffff;
-  rs->additive = 0;
-  rs->blend = GL_ONE_MINUS_SRC_ALPHA;
-  rs->activeprog = -1;
-  rs->tex = 0;
-  rs->fbo = 0;
-  rs->object = 0;
+program_init(struct program * p, const char *FS, const char *VS, int texture, const char ** texture_uniform_name) {
+	struct render *R = RS->R;
+	memset(p, 0, sizeof(*p));
+	struct shader_init_args args;
+	args.vs = VS;
+	args.fs = FS;
+	args.texture = texture;
+	args.texture_uniform = texture_uniform_name;
+	p->prog = render_shader_create(R, &args);
+	render_shader_bind(R, p->prog);
+	render_shader_bind(R, 0);
+}
 
-  glBlendFunc(GL_ONE, rs->blend);
+void 
+shader_load(int prog, const char *fs, const char *vs, int texture, const char ** texture_uniform_name) {
+	struct render_state *rs = RS;
+	assert(prog >=0 && prog < MAX_PROGRAM);
+	struct program * p = &rs->program[prog];
+	if (p->prog) {
+		render_release(RS->R, SHADER, p->prog);
+		p->prog = 0;
+	}
+	program_init(p, fs, vs, texture, texture_uniform_name);
+	p->texture_number = texture;
+	RS->current_program = -1;
+}
 
-  glGenBuffers(1, &IndexBuffer);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
+void 
+shader_unload() {
+	if (RS == NULL) {
+		return;
+	}
+	struct render *R = RS->R;
+	texture_initrender(NULL);
+	screen_initrender(NULL);
+	label_initrender(NULL);
+	lsprite_initrender(NULL);
+	renderbuffer_initrender(NULL);
 
-  size_t size = MAX_COMMBINE * 6 * sizeof(GLushort);
-  GLushort* idxs = malloc(size);
-  int i;
-  for (i=0;i<MAX_COMMBINE;i++) {
-    idxs[i*6] = i*4;
-    idxs[i*6+1] = i*4+1;
-    idxs[i*6+2] = i*4+2;
-    idxs[i*6+3] = i*4;
-    idxs[i*6+4] = i*4+2;
-    idxs[i*6+5] = i*4+3;
-  }
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, idxs, GL_STATIC_DRAW);
-  free(idxs);
+	render_exit(R);
+	free(R);
+	free(RS);
+	RS = NULL;
+}
 
-  RS = rs;
+void
+reset_drawcall_count() {
+	if (RS) {
+		RS->drawcall = 0;
+	}
+}
+
+int
+drawcall_count() {
+	if (RS) {
+		return RS->drawcall;
+	} else {
+		return 0;
+	}
+}
+
+static void 
+renderbuffer_commit(struct render_buffer * rb) {
+	struct render *R = RS->R;
+	render_draw(R, DRAW_TRIANGLE, 0, 6 * rb->object);
 }
 
 static void
 rs_commit() {
-  if (RS == NULL || RS->object == 0)
-    return;
-
-  glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
-  glBufferData(GL_ARRAY_BUFFER, 24 * RS->object * sizeof(float), RS->vb, GL_DYNAMIC_DRAW);
-
-  glEnableVertexAttribArray(ATTRIB_VERTEX);
-  glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
-  glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-  glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(8));
-  glEnableVertexAttribArray(ATTRIB_COLOR);
-  glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(16));
-  glEnableVertexAttribArray(ATTRIB_ADDITIVE);
-  glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
-  glDrawElements(GL_TRIANGLES, 6 * RS->object, GL_UNSIGNED_SHORT, 0);
-
-  RS->object = 0;
-#ifdef DRAWCALL_STAT
-  drawcall++;
-#endif
-}
-
-static GLuint
-compile(const char * source, int type) {
-  GLint status;
-
-  GLuint shader = glCreateShader(type);
-  glShaderSource(shader, 1, &source, NULL);
-  glCompileShader(shader);
-
-  glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-
-  if (status == 0) {
-    glDeleteShader(shader);
-    return 0;
-  }
-  return shader;
-}
-
-static void
-link(struct program *p) {
-  GLint status;
-  glLinkProgram(p->prog);
-
-  glGetProgramiv(p->prog, GL_LINK_STATUS, &status);
-  if (status == 0) {
-    fault("Can't link program");
-  }
-}
-
-static void
-program_init(struct program * p, const char *FS, const char *VS) {
-  // Create shader program.
-  p->prog = glCreateProgram();
-
-  GLuint fs = compile(FS, GL_FRAGMENT_SHADER);
-  if (fs == 0) {
-    fault("Can't compile fragment shader");
-  } else {
-    glAttachShader(p->prog, fs);
-  }
-
-  GLuint vs = compile(VS, GL_VERTEX_SHADER);
-  if (vs == 0) {
-    fault("Can't compile vertex shader");
-  } else {
-    glAttachShader(p->prog, vs);
-  }
-
-  glBindAttribLocation(p->prog, ATTRIB_VERTEX, "position");
-  glBindAttribLocation(p->prog, ATTRIB_TEXTCOORD, "texcoord");
-  glBindAttribLocation(p->prog, ATTRIB_COLOR, "color");
-  glBindAttribLocation(p->prog, ATTRIB_ADDITIVE, "additive");
-
-  link(p);
-
-  p->sampler0 = glGetUniformLocation(p->prog, "texture0");
-  if (p == &Prog[PROGRAM_SPRITE_PKM] || p == &Prog[PROGRAM_GRAY_PKM])
-    p->sampler1 = glGetUniformLocation(p->prog, "texture1");
-  else
-    p->sampler1 = 0;
-
-  glDetachShader(p->prog, fs);
-  glDeleteShader(fs);
-  glDetachShader(p->prog, vs);
-  glDeleteShader(vs);
-}
-
-void
-shader_load() {
-  if (RS)
-    return;
-
-#if 0
-#define FLOAT_PRECISION \
-  "#ifdef GL_FRAGMENT_PRECISION_HIGH  \n" \
-  "precision highp float;  \n" \
-  "#else  \n" \
-  "precision lowp float;  \n" \
-  "#endif  \n"
-#else
-#define FLOAT_PRECISION \
-  "precision lowp float;  \n"
-#endif
-
-  static const char * sprite_fs =
-  FLOAT_PRECISION
-
-  "varying vec4 v_fragmentColor; \n"
-  "varying vec4 v_fragmentAddi; \n"
-  "varying vec2 v_texcoord;  \n"
-  "uniform sampler2D texture0;  \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"
-  "  gl_FragColor = texture2D(texture0, v_texcoord);  \n"  
-  // "  gl_FragColor = vec4(1, 1, 1, 1);  \n"  
-
-  "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-  "  gl_FragColor.w = tmp.w;    \n"
-  "  gl_FragColor *= v_fragmentColor.w;  \n"
-  "  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-  "}  \n"
-  ;
-
-  static const char* sprite_ktx_fs =
-  "precision mediump float;  \n"
-
-  "varying vec4 v_fragmentColor; \n"
-  "varying vec4 v_fragmentAddi; \n"
-  "varying vec2 v_texcoord;  \n"
-  "uniform sampler2D texture0;  \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"  
-  "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-  "  gl_FragColor.w = texture2D(texture0, vec2(v_texcoord.x, v_texcoord.y + 0.5)).r;    \n"
-  "  gl_FragColor *= v_fragmentColor.w;  \n"
-  "  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-  "}  \n"
-  ;
-
-  static const char * sprite_pkm_fs =
-  FLOAT_PRECISION
-
-  "varying vec4 v_fragmentColor; \n"
-  "varying vec4 v_fragmentAddi; \n"
-  "varying vec2 v_texcoord;  \n"
-  "uniform sampler2D texture0;  \n"
-  "uniform sampler2D texture1;  \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"  
-
-  // todo
-  "  v_texcoord.y = 1 - v_texcoord.y;  \n"
-
-  "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  tmp.w = texture2D(texture1, v_texcoord).r;  \n"
-  "  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-  "  gl_FragColor.w = tmp.w;    \n"
-  "  gl_FragColor *= v_fragmentColor.w;  \n"
-  "  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-  "}  \n"
-  ;
-
-  static const char * sprite_vs =
-  FLOAT_PRECISION
-  "\n"
-  "attribute vec4 position;  \n"
-  "attribute vec2 texcoord;  \n"
-  "attribute vec4 color;     \n"
-  "attribute vec4 additive;     \n"
-  "\n"
-  "varying vec2 v_texcoord;  \n"
-  "varying vec4 v_fragmentColor;  \n"
-  "varying vec4 v_fragmentAddi; \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"
-  "  gl_Position = position;  \n"
-  "  v_fragmentColor = color / 255.0; \n"
-  "  v_fragmentAddi = additive / 255.0; \n"
-  "  v_texcoord = texcoord;  \n"
-  "}  \n"
-  ;
-
-  static const char * gray_fs =
-  FLOAT_PRECISION
-
-  "varying vec4 v_fragmentColor; \n"  
-  "varying vec4 v_fragmentAddi; \n"
-  "varying vec2 v_texcoord;  \n"
-  "uniform sampler2D texture0;  \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"
-  "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  vec4 c;  \n"
-  "  c.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-  "  c.w = tmp.w;    \n"
-  "  c *= v_fragmentColor.w;  \n"
-  "  c.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-  "  float g = dot(c.rgb , vec3(0.299, 0.587, 0.114));  \n"
-  "  gl_FragColor = vec4(g,g,g,c.a);  \n"
-  "}  \n"
-  ;
-
-  static const char * gray_ktx_fs =
-  FLOAT_PRECISION
-
-  "varying vec4 v_fragmentColor; \n"  
-  "varying vec4 v_fragmentAddi; \n"
-  "varying vec2 v_texcoord;  \n"
-  "uniform sampler2D texture0;  \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"
-  "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  vec4 c;  \n"
-  "  c.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-  "  c.w = texture2D(texture0, vec2(v_texcoord.x, v_texcoord.y + 0.5)).r;    \n"
-  "  c *= v_fragmentColor.w;  \n"
-  "  c.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-  "  float g = dot(c.rgb , vec3(0.299, 0.587, 0.114));  \n"
-  "  gl_FragColor = vec4(g,g,g,c.a);  \n"
-  "}  \n"
-  ;
-
-  static const char * gray_pkm_fs =
-  FLOAT_PRECISION
-
-  "varying vec4 v_fragmentColor; \n"  
-  "varying vec4 v_fragmentAddi; \n"
-  "varying vec2 v_texcoord;  \n"
-  "uniform sampler2D texture0;  \n"
-  "uniform sampler2D texture1;  \n"
-  "\n"
-  "void main()  \n"
-  "{  \n"
-  "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  tmp.w = texture2D(texture1, v_texcoord).r;  \n"
-  "  vec4 c;  \n"
-  "  c.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-  "  c.w = tmp.w;    \n"
-  "  c *= v_fragmentColor.w;  \n"
-  "  c.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-  "  float g = dot(c.rgb , vec3(0.299, 0.587, 0.114));  \n"
-  "  gl_FragColor = vec4(g,g,g,c.a);  \n"
-  "}  \n"
-  ;
-
-  rs_init();
-
-  program_init(&Prog[PROGRAM_SPRITE], sprite_fs, sprite_vs);
-  program_init(&Prog[PROGRAM_GRAY], gray_fs, sprite_vs);
-  program_init(&Prog[PROGRAM_SPRITE_KTX], sprite_ktx_fs, sprite_vs);
-  program_init(&Prog[PROGRAM_GRAY_KTX], gray_ktx_fs, sprite_vs);
-  program_init(&Prog[PROGRAM_SPRITE_PKM], sprite_pkm_fs, sprite_vs);
-  program_init(&Prog[PROGRAM_GRAY_PKM], gray_pkm_fs, sprite_vs);
-
-  shader_program(PROGRAM_SPRITE);
-
-  glGenBuffers(1, &VertexBuffer);
-  glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
-
-  glEnable(GL_BLEND);
-
-#ifdef USE_DTEX
-  assert(Dtex == NULL);
-  Dtex = dtex_create(DTEX_WIDTH, DTEX_HEIGHT);
-#endif
-}
-
-void
-shader_unload() {
-  if (RS == NULL) {
-    return;
-  }
-//  shader_texture(0);
-  glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D, 0);        
-  if (Prog[RS->activeprog].sampler1) {
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, 0);     
-  }
-
-  int i;
-  for (i=0;i<PROGRAM_TOTAL;i++) {
-    glDeleteProgram(Prog[i].prog);
-  }
-
-  glDeleteBuffers(1,&VertexBuffer);
-  glDeleteBuffers(1,&IndexBuffer);
-  free(RS);
-  RS = NULL;
-
-#ifdef USE_DTEX
-  dtex_release(Dtex);
-  Dtex = NULL;
-#endif
-}
-
-void
-shader_color(unsigned int color, unsigned int addi){
-  if (color == 0xffffffff) {
-    RS->color = 0xffffffff;
-  } else {
-    unsigned char c[4];
-    c[0] = ((color >> 24) & 0xff);
-    c[1] = ((color >> 16) & 0xff);
-    c[2] = ((color >> 8) & 0xff);
-    c[3] = (color & 0xff );
-    RS->color = (c[3] << 24 | c[0] << 16 | c[1] << 8 | c[2]);
-  }
-  if (addi == 0) {
-    RS->additive = 0;
-  } else {
-    unsigned char c[3];
-    c[0] = ((addi >> 16) & 0xff);
-    c[1] = ((addi >> 8) & 0xff);
-    c[2] = (addi & 0xff);
-    RS->additive = (0xff << 24 | c[0] << 16 | c[1] << 8 | c[2]);
-  }
-}
-
-void
-shader_program(int n) {
-  if (RS->activeprog != n) {
-#ifdef TEST_LOG
-    pf_log("shader_program");
-#endif
-    rs_commit();
-    RS->activeprog = n;
-
-	if (n == -1) {
-		glUseProgram(0);
+	struct render_buffer * rb = &(RS->vb);
+	if (rb->object == 0)
 		return;
-	}
+	RS->drawcall++;
+	struct render *R = RS->R;
+	render_buffer_update(R, RS->vertex_buffer, rb->vb, 4 * rb->object);
+	renderbuffer_commit(rb);
 
-    glUseProgram(Prog[n].prog);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    RS->tex = 0;
-
-    if (n == PROGRAM_SPRITE_PKM || n == PROGRAM_GRAY_PKM) {
-      glUniform1i(Prog[n].sampler0, 0);
-      glUniform1i(Prog[n].sampler1, 1);
-    } else {
-      glUniform1i(Prog[n].sampler0, 0);
-    }
-  }
-}
-
-void
-shader_texture(int id) {
-  if (RS->tex != id) {
-#ifdef TEST_LOG
-    pf_log("RS->tex != id, id %d", id);
-#endif
-    rs_commit();
-    RS->tex = (GLuint)id;
-    glBindTexture(GL_TEXTURE_2D, RS->tex);
-  }
+	rb->object = 0;
 }
 
 void 
-shader_fbo(int id) {
-  if (RS->fbo != id) {
-#ifdef TEST_LOG
-    pf_log("RS->fbo != id, id %d", id);
-#endif    
-    rs_commit();
-    RS->fbo = (GLuint)id;
-    glBindFramebuffer(GL_FRAMEBUFFER, RS->fbo); 
-  }
+shader_drawbuffer(struct render_buffer * rb, float tx, float ty, float scale) {
+	rs_commit();
+
+	RID glid = texture_glid(rb->texid);
+	if (glid == 0)
+		return;
+	shader_texture(glid, 0);
+	render_set(RS->R, VERTEXBUFFER, rb->vbid, 0);
+
+	float sx = scale;
+	float sy = scale;
+	screen_trans(&sx, &sy);
+	screen_trans(&tx, &ty);
+	float v[4] = { sx, sy, tx, ty };
+
+	// we should call shader_adduniform to add "st" uniform first
+	shader_setuniform(PROGRAM_RENDERBUFFER, 0, UNIFORM_FLOAT4, v);
+
+	shader_program(PROGRAM_RENDERBUFFER, NULL);
+	RS->drawcall++;
+
+	renderbuffer_commit(rb);
+
+	render_set(RS->R, VERTEXBUFFER, RS->vertex_buffer, 0);
+}
+
+void
+shader_texture(int id, int channel) {
+	assert(channel < MAX_TEXTURE_CHANNEL);
+	if (RS->tex[channel] != id) {
+		rs_commit();
+		RS->tex[channel] = id;
+		render_set(RS->R, TEXTURE, id, channel);
+	}
+}
+
+static void
+apply_uniform(struct program *p) {
+	struct render *R = RS->R;
+	int i;
+	for (i=0;i<p->uniform_number;i++) {
+		if (p->uniform_change[i]) {
+			struct uniform * u = &p->uniform[i];
+			if (u->loc >=0) 
+				render_shader_setuniform(R, u->loc, u->type, p->uniform_value + u->offset);
+		}
+	}
+	p->reset_uniform = false;
+}
+
+void
+shader_program(int n, struct material *m) {
+	struct program *p = &RS->program[n];
+	if (RS->current_program != n || p->reset_uniform || m) {
+		rs_commit();
+	}
+	if (RS->current_program != n) {
+		RS->current_program = n;
+		render_shader_bind(RS->R, p->prog);
+		p->material = NULL;
+		apply_uniform(p);
+	} else if (p->reset_uniform) {
+		apply_uniform(p);
+	}
+	if (m) {
+		material_apply(n, m);
+	}
+}
+
+void
+shader_draw(const struct vertex_pack vb[4], uint32_t color, uint32_t additive, uint32_t rmap, uint32_t gmap, uint32_t bmap) {
+	if (renderbuffer_add(&RS->vb, vb, color, additive, rmap, gmap, bmap)) {
+		rs_commit();
+	}
+}
+
+static void
+draw_quad(const struct vertex_pack *vbp, uint32_t color, uint32_t additive, 
+		  uint32_t rmap, uint32_t gmap, uint32_t bmap, int max, int index) {
+	struct vertex_pack vb[4];
+	int i;
+	vb[0] = vbp[0];	// first point
+	for (i=1;i<4;i++) {
+		int j = i + index;
+		int n = (j <= max) ? j : max;
+		vb[i] = vbp[n];
+	}
+	shader_draw(vb, color, additive, rmap, gmap, bmap);
+}
+
+void
+shader_drawpolygon(int n, const struct vertex_pack *vb, uint32_t color, uint32_t additive,
+				   uint32_t rmap, uint32_t gmap, uint32_t bmap) {
+	int i = 0;
+	--n;
+	do {
+		draw_quad(vb, color, additive, rmap, gmap, bmap, n, i);
+		i+=2;
+	} while (i<n-1);
+}
+
+void 
+shader_flush() {
+	rs_commit();
+}
+
+void
+shader_defaultblend() {
+	if (RS->blendchange) {
+		rs_commit();
+		RS->blendchange = 0;
+		render_setblend(RS->R, BLEND_ONE, BLEND_ONE_MINUS_SRC_ALPHA);
+	}
+}
+
+void
+shader_blend(int m1, int m2) {
+	if (m1 != BLEND_GL_ONE || m2 != BLEND_GL_ONE_MINUS_SRC_ALPHA) {
+		rs_commit();
+		RS->blendchange = 1;
+		enum BLEND_FORMAT src = blend_mode(m1);
+		enum BLEND_FORMAT dst = blend_mode(m2);
+		render_setblend(RS->R, src, dst);
+	}
+}
+
+void 
+shader_clear(unsigned long argb) {
+	render_clear(RS->R, MASKC, argb);
 }
 
 int 
-shader_get_fbo() {
-  return RS->fbo;
-}
-
-static void
-_copy_vertex(const float vb[16]) {
-  float* ptr = RS->vb + 24 * RS->object;
-  memcpy(ptr, vb, 4 * sizeof(float));
-  ptr += 4;
-  memcpy(ptr, &RS->color, sizeof(int));
-  ptr += 1;
-  memcpy(ptr, &RS->additive, sizeof(int));
-  ptr += 1;  
-  memcpy(ptr, &vb[4], 4 * sizeof(float));
-  ptr += 4;
-  memcpy(ptr, &RS->color, sizeof(int));
-  ptr += 1;
-  memcpy(ptr, &RS->additive, sizeof(int));
-  ptr += 1;    
-  memcpy(ptr, &vb[8], 4 * sizeof(float));
-  ptr += 4;
-  memcpy(ptr, &RS->color, sizeof(int));
-  ptr += 1;
-  memcpy(ptr, &RS->additive, sizeof(int));
-  ptr += 1;    
-  memcpy(ptr, &vb[12], 4 * sizeof(float));
-  ptr += 4;
-  memcpy(ptr, &RS->color, sizeof(int));
-  ptr += 1; 
-  memcpy(ptr, &RS->additive, sizeof(int));
-}
-
-void
-shader_draw(const float vb[16], int texid) {
-  shader_texture(texid);
-
-  _copy_vertex(vb);
-  if (++RS->object >= MAX_COMMBINE) {
-#ifdef TEST_LOG
-    pf_log("RS->object >= MAX_COMMBINE");
-#endif
-    rs_commit();
-  }
+shader_version() {
+	return render_version(RS->R);
 }
 
 void 
-shader_draw_separate(const float vb[16], int id_rgb, int id_alpha) {
-  if (RS->tex != id_rgb) {
-#ifdef TEST_LOG
-    pf_log("RS->tex != id, id %d", id_rgb);
-#endif
-    rs_commit();
-    RS->tex = (GLuint)id_rgb;
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, id_rgb);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, id_alpha);
-    glActiveTexture(GL_TEXTURE0);
-  }  
-
-  _copy_vertex(vb);
-  if (++RS->object >= MAX_COMMBINE) {
-#ifdef TEST_LOG
-    pf_log("RS->object >= MAX_COMMBINE");
-#endif
-    rs_commit();
-  }  
+shader_scissortest(int enable) {
+	render_enablescissor(RS->R, enable);
 }
 
-void
-shader_blend(int mode) {
-  if (mode != RS->blend) {
-#ifdef TEST_LOG
-    pf_log("shader_blend");
-#endif
-    rs_commit();
-    RS->blend = mode;
-    glBlendFunc(GL_ONE, mode);
-  }
+int 
+shader_uniformsize(enum UNIFORM_FORMAT t) {
+	int n = 0;
+	switch(t) {
+	case UNIFORM_INVALID:
+		n = 0;
+		break;
+	case UNIFORM_FLOAT1:
+		n = 1;
+		break;
+	case UNIFORM_FLOAT2:
+		n = 2;
+		break;
+	case UNIFORM_FLOAT3:
+		n = 3;
+		break;
+	case UNIFORM_FLOAT4:
+		n = 4;
+		break;
+	case UNIFORM_FLOAT33:
+		n = 9;
+		break;
+	case UNIFORM_FLOAT44:
+		n = 16;
+		break;
+	}
+	return n;
 }
 
-void
-shader_flush() {
-  // GLenum err = glGetError();
-  // if (err != GL_NO_ERROR){
-  //   pf_log("shader_flush glError: 0x%04X \n", err);
-  //   return;
-  // }  
-
-#ifdef DRAWCALL_STAT
-  static int last = 0;
-  pf_log("draw times: %d \n", drawcall - last);
-  last = drawcall;
-#endif
-      
-#ifdef TEST_LOG
-    pf_log("shader_flush");
-#endif
-//#ifdef DTEX_DEBUG
-//  debug_draw(Dtex);
-//  dtexf_debug_draw();
-//#endif
-  rs_commit();
+void 
+shader_setuniform(int prog, int index, enum UNIFORM_FORMAT t, float *v) {
+	rs_commit();
+	struct program * p = &RS->program[prog];
+	assert(index >= 0 && index < p->uniform_number);
+	struct uniform *u = &p->uniform[index];
+	assert(t == u->type);
+	int n = shader_uniformsize(t);
+	memcpy(p->uniform_value + u->offset, v, n * sizeof(float));
+	p->reset_uniform = true;
+	p->uniform_change[index] = true;
 }
 
-void
-shader_scissor(int x, int y, int width, int height, int enable) {
-// #ifdef  TEST_LOG
-//   pf_log("shader_scissor");
-// #endif
-//   rs_commit();
-//   if (enable) {
-//     struct ej_screen scr;
-//     ejoy_get_screen(&scr);
-//     float s = scr.scale;
-//     glEnable(GL_SCISSOR_TEST);
-//     glScissor(x*s, (scr.h-height-y)*s, width*s, height*s);
-//   } else {
-//     glDisable(GL_SCISSOR_TEST);
-//   }
+int 
+shader_adduniform(int prog, const char * name, enum UNIFORM_FORMAT t) {
+	// reset current_program
+	assert(prog >=0 && prog < MAX_PROGRAM);
+	shader_program(prog, NULL);
+	struct program * p = &RS->program[prog];
+	assert(p->uniform_number < MAX_UNIFORM);
+	int loc = render_shader_locuniform(RS->R, name);
+	int index = p->uniform_number++;
+	struct uniform * u = &p->uniform[index];
+	u->loc = loc;
+	u->type = t;
+	if (index == 0) {
+		u->offset = 0;
+	} else {
+		struct uniform * lu = &p->uniform[index-1];
+		u->offset = lu->offset + shader_uniformsize(lu->type);
+	}
+	if (loc < 0)
+		return -1;
+	return index;
 }
 
-// void
-// shader_viewport(int x, int y, int w, int h) {
-//   struct ej_screen scr;
-//   rs_commit();
-//   ejoy_get_screen(&scr);
-//   glViewport(x * scr.scale, y * scr.scale, w * scr.scale, h * scr.scale);
-// }
+// material system
+
+struct material {
+	struct program *p;
+	int texture[MAX_TEXTURE_CHANNEL];
+	bool uniform_enable[MAX_UNIFORM];
+	float uniform[1];
+};
+
+int 
+material_size(int prog) {
+	if (prog < 0 || prog >= MAX_PROGRAM)
+		return 0;
+	struct program *p = &RS->program[prog];
+	if (p->uniform_number == 0 && p->texture_number == 0) {
+		return 0;
+	}
+	struct uniform * lu = &p->uniform[p->uniform_number-1];
+	int total = lu->offset + shader_uniformsize(lu->type);
+	return sizeof(struct material) + (total-1) * sizeof(float);
+}
+
+struct material * 
+material_init(void *self, int size, int prog) {
+	int rsz = material_size(prog);
+	struct program *p = &RS->program[prog];
+	assert(size >= rsz);
+	memset(self, 0, rsz);
+	struct material * m = (struct material *)self;
+	m->p = p;
+	int i;
+	for (i=0;i<MAX_TEXTURE_CHANNEL;i++) {
+		m->texture[i] = -1;
+	}
+
+	return m;
+}
+
+int 
+material_setuniform(struct material *m, int index, int n, const float *v) {
+	struct program * p = m->p;
+	assert(index >= 0 && index < p->uniform_number);
+	struct uniform * u = &p->uniform[index];
+	if (shader_uniformsize(u->type) != n) {
+		return 1;
+	}
+	memcpy(m->uniform + u->offset, v, n * sizeof(float));
+	m->uniform_enable[index] = true;
+	return 0;
+}
+
+void 
+material_apply(int prog, struct material *m) {
+	struct program * p = m->p;
+	if (p != &RS->program[prog])
+		return;
+	if (p->material == m) {
+		return;
+	}
+	p->material = m;
+	p->reset_uniform = true;
+	int i;
+	for (i=0;i<p->uniform_number;i++) {
+		if (m->uniform_enable[i]) {
+			struct uniform * u = &p->uniform[i];
+			if (u->loc >=0) {
+				render_shader_setuniform(RS->R, u->loc, u->type, m->uniform + u->offset);
+			}
+		}
+	}
+	for (i=0;i<p->texture_number;i++) {
+		int tex = m->texture[i];
+		if (tex >= 0) {
+			RID glid = texture_glid(tex);
+			if (glid) {
+				shader_texture(glid, i);
+			}
+		}
+	}
+}
+
+int
+material_settexture(struct material *m, int channel, int texture) {
+	if (channel >= MAX_TEXTURE_CHANNEL) {
+		return 1;
+	}
+	m->texture[channel] = texture;
+	return 0;
+}

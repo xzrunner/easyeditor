@@ -1,717 +1,1296 @@
 #include "sprite.h"
-#include "ejoy2d.h"
-#include "package.h"
+#include "spritepack.h"
 #include "shader.h"
-#include "fault.h"
+#include "texture.h"
+#include "screen.h"
+#include "matrix.h"
+#include "label.h"
+#include "scissor.h"
+#include "array.h"
+#include "particle.h"
+#include "material.h"
+#include "ej_trail.h"
 
-#include "dtex_facade.h"
+#include "particle3d.h"
 
-#include "platform.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
-#include <stdbool.h>
 #include <assert.h>
-#include <math.h>
+#include <stdio.h>
 #include <limits.h>
 
-#define MAX_CLIPBOX 16
+#define CC_DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) * 0.01745329252f) // PI / 180
+#define CC_RADIANS_TO_DEGREES(__ANGLE__) ((__ANGLE__) * 57.29577951f) // PI * 180
 
-//#define MAX_SCALE 1.25f
+void
+sprite_drawquad(struct pack_picture *picture, const struct srt *srt,  const struct sprite_trans *arg) {
+	struct matrix tmp;
+	struct vertex_pack vb[4];
+	int i,j;
+	if (arg->mat == NULL) {
+		matrix_identity(&tmp);
+	} else {
+		tmp = *arg->mat;
+	}
+	matrix_srt(&tmp, srt);
+	int *m = tmp.m;
+	for (i=0;i<picture->n;i++) {
+		struct pack_quad *q = &picture->rect[i];
+		int glid = texture_glid(q->texid);
+		if (glid == 0)
+			continue;
+		shader_texture(glid, 0);
+		for (j=0;j<4;j++) {
+			int xx = q->screen_coord[j*2+0];
+			int yy = q->screen_coord[j*2+1];
+			float vx = (xx * m[0] + yy * m[2]) / 1024 + m[4];
+			float vy = (xx * m[1] + yy * m[3]) / 1024 + m[5];
+			float tx = q->texture_coord[j*2+0];
+			float ty = q->texture_coord[j*2+1];
 
-struct clipbox {
-  int x;
-  int y;
-  int width;
-  int height;
-};
+			screen_trans(&vx,&vy);
+			vb[j].vx = vx;
+			vb[j].vy = vy;
+			vb[j].tx = tx;
+			vb[j].ty = ty;
+		}
 
-// todo
-struct dtex_texture;
-struct dp_pos;
-
-static struct clipbox G_CLIP[MAX_CLIPBOX];
-static int G_CLIP_COUNT = 0;
-
-#ifdef USE_DTEX
-extern struct dtex* Dtex;
-#endif
-
-struct screen_coord *
-sprite_default_coord(struct screen_coord * screen) {
-  struct ej_screen scr;
-  ejoy_get_screen(&scr);
-  screen->hscale = 2.0f / SCALE / scr.h;
-  screen->wscale = 2.0f / SCALE / scr.w;
-  screen->xoffset = 0;
-  screen->yoffset = 0;
-  screen->inv_scale = 1.0f;
-
-  return screen;
+		shader_draw(vb, arg->color, arg->additive, arg->rmap, arg->gmap, arg->bmap);
+	}
 }
 
-struct screen_coord *
-sprite_coord(struct screen_coord * screen, int x, int y, float scale) {
-  struct ej_screen scr;
-  ejoy_get_screen(&scr);
-  screen->inv_scale = 1.0f/scale;
-  scale*=SCALE;
-  x*=SCALE;
-  y*=SCALE;
-  screen->hscale = 2.0f / scale / scr.h;
-  screen->wscale = 2.0f / scale / scr.w;
-  screen->xoffset = x;
-  screen->yoffset = y;
+void
+sprite_drawpolygon(struct pack_polygon *poly, const struct srt *srt, const struct sprite_trans *arg) {
+	struct matrix tmp;
+	int i,j;
+	if (arg->mat == NULL) {
+		matrix_identity(&tmp);
+	} else {
+		tmp = *arg->mat;
+	}
+	matrix_srt(&tmp, srt);
+	int *m = tmp.m;
+	for (i=0;i<poly->n;i++) {
+		struct pack_poly *p = &poly->poly[i];
+		int glid = texture_glid(p->texid);
+		if (glid == 0)
+			continue;
+		shader_texture(glid, 0);
+		int pn = p->n;
 
-  return screen;
+		ARRAY(struct vertex_pack, vb, pn);
+
+		for (j=0;j<pn;j++) {
+			int xx = p->screen_coord[j*2+0];
+			int yy = p->screen_coord[j*2+1];
+
+
+			float vx = (xx * m[0] + yy * m[2]) / 1024 + m[4];
+			float vy = (xx * m[1] + yy * m[3]) / 1024 + m[5];
+			float tx = p->texture_coord[j*2+0];
+			float ty = p->texture_coord[j*2+1];
+
+			screen_trans(&vx,&vy);
+
+			vb[j].vx = vx;
+			vb[j].vy = vy;
+			vb[j].tx = tx;
+			vb[j].ty = ty;
+		}
+		shader_drawpolygon(pn, vb, arg->color, arg->additive, arg->rmap, arg->gmap, arg->bmap);
+	}
+}
+
+int
+sprite_size(struct sprite_pack *pack, int id) {
+	if (id < 0 || id >=	pack->n)
+		return 0;
+	int type = pack->type[id];
+	if (type == TYPE_ANIMATION) {
+		struct pack_animation * ani = (struct pack_animation *)pack->data[id];
+		return sizeof(struct sprite) + (ani->component_number - 1) * sizeof(struct sprite *);
+	} else if (type == TYPE_PARTICLE3D) {
+		struct pack_particle3d * p3d = (struct pack_particle3d *)pack->data[id];
+		return sizeof(struct sprite) + (p3d->cfg.symbol_count - 1) * sizeof(struct sprite *);
+	} else if (type == TYPE_PARTICLE2D) {
+		struct pack_particle2d * p2d = (struct pack_particle2d *)pack->data[id];
+		return sizeof(struct sprite) + (p2d->cfg.symbol_count - 1) * sizeof(struct sprite *);
+	} else {
+		return sizeof(struct sprite);
+	}
+	return 0;
+}
+
+int
+sprite_action(struct sprite *s, const char * action) {
+	if (s->type != TYPE_ANIMATION) {
+		return -1;
+	}
+	struct pack_animation *ani = s->s.ani;
+	if (action == NULL) {
+		if (ani->action == NULL) {
+			return -1;
+		}
+		s->start_frame = ani->action[0].start_frame;
+		s->total_frame = ani->action[0].number;
+		s->frame = 0;
+		return s->total_frame;
+	} else {
+		int i;
+		for (i=0;i<ani->action_number;i++) {
+			const char *name = ani->action[i].name;
+			if (name) {
+				if (strcmp(name, action)==0) {
+					s->start_frame = ani->action[i].start_frame;
+					s->total_frame = ani->action[i].number;
+					s->frame = 0;
+					return s->total_frame;
+				}
+			}
+		}
+		return -1;
+	}
+}
+
+void
+sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
+	if (id < 0 || id >=	pack->n)
+		return;
+	s->parent = NULL;
+	s->t.mat = NULL;
+	s->t.color = 0xffffffff;
+	s->t.additive = 0;
+	s->t.rmap = 0xff0000ff;
+	s->t.gmap = 0x00ff00ff;
+	s->t.bmap = 0x0000ffff;
+	s->t.program = PROGRAM_DEFAULT;
+	s->flags = 0;
+	s->name = NULL;
+	s->id = id;
+	s->type = pack->type[id];
+	s->material = NULL;
+	s->start_frame = 0;
+	s->total_frame = 0;
+	s->frame = 0;
+	if (s->type == TYPE_ANIMATION) {
+		struct pack_animation * ani = (struct pack_animation *)pack->data[id];
+		s->s.ani = ani;
+		sprite_action(s, NULL);
+		int i;
+		int n = ani->component_number;
+		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
+		for (i=0; i<n ;i++) {
+			s->data.children[i] = NULL;
+		}
+	} else if (s->type == TYPE_PARTICLE3D) {
+		struct pack_particle3d* p3d = (struct pack_particle3d*)pack->data[id];
+		s->s.p3d = p3d;
+		int i;
+		int n = p3d->cfg.symbol_count;
+		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
+		for (i=0; i<n ;i++) {
+			s->data.children[i] = NULL;
+		}
+	} else if (s->type == TYPE_PARTICLE2D) {
+		struct pack_particle2d* p2d = (struct pack_particle2d*)pack->data[id];
+		s->s.p2d = p2d;
+		int i;
+		int n = p2d->cfg.symbol_count;
+		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
+		for (i=0; i<n ;i++) {
+			s->data.children[i] = NULL;
+		}
+	} else {
+		s->s.pic = (struct pack_picture *)pack->data[id];
+		memset(&s->data, 0, sizeof(s->data));
+		assert(sz >= sizeof(struct sprite) - sizeof(struct sprite *));
+		if (s->type == TYPE_PANNEL) {
+			struct pack_pannel * pp = (struct pack_pannel *)pack->data[id];
+			s->data.scissor = pp->scissor;
+		}
+	}
+}
+
+void
+sprite_mount(struct sprite *parent, int index, struct sprite *child) {
+	assert(parent->type == TYPE_ANIMATION || parent->type == TYPE_PARTICLE3D || parent->type == TYPE_PARTICLE2D);
+
+	int num = 0;
+	if (parent->type == TYPE_ANIMATION) {
+		struct pack_animation *ani = parent->s.ani;
+		num = ani->component_number;
+	} else if (parent->type == TYPE_PARTICLE3D) {
+		struct pack_particle3d* p3d = parent->s.p3d;
+		num = p3d->cfg.symbol_count;
+	} else if (parent->type == TYPE_PARTICLE2D) {
+		struct pack_particle2d* p2d = parent->s.p2d;
+		num = p2d->cfg.symbol_count;
+	}
+	
+	assert(index >= 0 && index < num);
+	struct sprite * oldc = parent->data.children[index];
+	if (oldc) {
+		oldc->parent = NULL;
+		oldc->name = NULL;
+	}
+	parent->data.children[index] = child;
+	if (child) {
+		assert(child->parent == NULL);
+		if (parent->type == TYPE_ANIMATION &&
+			(child->flags & SPRFLAG_MULTIMOUNT) == 0) {
+			struct pack_animation *ani = parent->s.ani;
+			child->name = ani->component[index].name;
+			child->parent = parent;
+		}
+		if (oldc && oldc->type == TYPE_ANCHOR) {
+			if(oldc->flags & SPRFLAG_MESSAGE) {
+				child->flags |= SPRFLAG_MESSAGE;
+			} else {
+				child->flags &= ~SPRFLAG_MESSAGE;
+			}
+		}
+	}
+}
+
+static inline int
+get_frame(struct sprite *s) {
+	if (s->type != TYPE_ANIMATION) {
+		return s->start_frame;
+	}
+	if (s->total_frame <= 0) {
+		return -1;
+	}
+	int f = s->frame % s->total_frame;
+	if (f < 0) {
+		f += s->total_frame;
+	}
+	return f + s->start_frame;
+}
+
+int
+sprite_child(struct sprite *s, const char * childname) {
+	assert(childname);
+	if (s->type != TYPE_ANIMATION)
+		return -1;
+	struct pack_animation *ani = s->s.ani;
+	int i;
+	for (i=0;i<ani->component_number;i++) {
+		const char *name = ani->component[i].name;
+		if (name) {
+			if (strcmp(name, childname)==0) {
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+
+int
+sprite_child_ptr(struct sprite *s, struct sprite *child) {
+	if (s->type != TYPE_ANIMATION)
+		return -1;
+	struct pack_animation *ani = s->s.ani;
+	int i;
+	for (i=0;i<ani->component_number;i++) {
+		struct sprite * c = s->data.children[i];
+		if (c == child)
+			return i;
+	}
+	return -1;
+}
+
+int
+sprite_component(struct sprite *s, int index) {
+	if (s->type == TYPE_ANIMATION) {
+		struct pack_animation *ani = s->s.ani;
+		if (index < 0 || index >= ani->component_number) {
+			return -1;
+		}
+		return ani->component[index].id;
+	} else if (s->type == TYPE_PARTICLE3D) {
+		struct pack_particle3d* pp = (struct pack_particle3d*)s->s.p3d;
+		if (index < 0 || index >= pp->cfg.symbol_count) {
+			return -1;
+		}
+		uint32_t id = (uint32_t)pp->cfg.symbols[index].ud;
+		return (id >> 16) & 0xffff;
+	} else if (s->type == TYPE_PARTICLE2D) {
+		struct pack_particle2d* pp = (struct pack_particle2d*)s->s.p2d;
+		if (index < 0 || index >= pp->cfg.symbol_count) {
+			return -1;
+		}
+		uint32_t id = (uint32_t)pp->cfg.symbols[index].ud;
+		return (id >> 16) & 0xffff;		
+	} else {
+		return -1;
+	}
+}
+
+const char *
+sprite_childname(struct sprite *s, int index) {
+	if (s->type != TYPE_ANIMATION)
+		return NULL;
+	struct pack_animation *ani = s->s.ani;
+	if (index < 0 || index >= ani->component_number)
+		return NULL;
+	return ani->component[index].name;
+}
+
+// draw sprite
+
+static inline uint32_t
+color_mul(uint32_t c1, uint32_t c2) {
+	int r1 = (c1 >> 24) & 0xff;
+	int g1 = (c1 >> 16) & 0xff;
+	int b1 = (c1 >> 8) & 0xff;
+	int a1 = (c1) & 0xff;
+	int r2 = (c2 >> 24) & 0xff;
+	int g2 = (c2 >> 16) & 0xff;
+	int b2 = (c2 >> 8) & 0xff;
+	int a2 = c2 & 0xff;
+
+	return (r1 * r2 /255) << 24 |
+		(g1 * g2 /255) << 16 |
+		(b1 * b2 /255) << 8 |
+		(a1 * a2 /255) ;
+}
+
+static inline unsigned int
+clamp(unsigned int c) {
+	return ((c) > 255 ? 255 : (c));
+}
+
+static inline uint32_t
+color_add(uint32_t c1, uint32_t c2) {
+	int r1 = (c1 >> 16) & 0xff;
+	int g1 = (c1 >> 8) & 0xff;
+	int b1 = (c1) & 0xff;
+	int r2 = (c2 >> 16) & 0xff;
+	int g2 = (c2 >> 8) & 0xff;
+	int b2 = (c2) & 0xff;
+	return clamp(r1+r2) << 16 |
+		clamp(g1+g2) << 8 |
+		clamp(b1+b2);
+}
+
+struct sprite_trans *
+sprite_trans_mul(struct sprite_trans *a, struct sprite_trans *b, struct sprite_trans *t, struct matrix *tmp_matrix) {
+	if (b == NULL) {
+		return a;
+	}
+
+	*t = *a;
+	if (t->mat == NULL) {
+		t->mat = b->mat;
+	} else if (b->mat) {
+		matrix_mul(tmp_matrix, t->mat, b->mat);
+		t->mat = tmp_matrix;
+	}
+	if (t->color == 0xffffffff) {
+		t->color = b->color;
+	} else if (b->color != 0xffffffff) {
+		t->color = color_mul(t->color, b->color);
+	}
+	if (t->additive == 0) {
+		t->additive = b->additive;
+	} else if (b->additive != 0) {
+		t->additive = color_add(t->additive, b->additive);
+	}
+
+	if (t->rmap == 0xff0000ff) {
+		t->rmap = b->rmap;
+	}
+	if (t->gmap == 0x00ff00ff) {
+		t->gmap = b->gmap;
+	}
+	if (t->bmap == 0x0000ffff) {
+		t->bmap = b->bmap;
+	}
+
+	if (t->program == PROGRAM_DEFAULT) {
+		t->program = b->program;
+	}
+
+	return t;
+}
+
+static struct matrix *
+mat_mul(struct matrix *a, struct matrix *b, struct matrix *tmp) {
+	if (b == NULL)
+		return a;
+	if (a == NULL)
+		return b;
+	matrix_mul(tmp, a , b);
+	return tmp;
+}
+
+static void
+switch_program(struct sprite_trans *t, int def, struct material *m) {
+	int prog = t->program;
+	if (prog == PROGRAM_DEFAULT) {
+		prog = def;
+	}
+	shader_program(prog, m);
+}
+
+static void
+set_scissor(const struct pack_pannel *p, const struct srt *srt, const struct sprite_trans *arg) {
+	struct matrix tmp;
+	if (arg->mat == NULL) {
+		matrix_identity(&tmp);
+	} else {
+		tmp = *arg->mat;
+	}
+	matrix_srt(&tmp, srt);
+	int *m = tmp.m;
+	int x[4] = { 0, p->width * SCREEN_SCALE, p->width * SCREEN_SCALE, 0 };
+	int y[4] = { 0, 0, p->height * SCREEN_SCALE, p->height * SCREEN_SCALE };
+	int minx = (x[0] * m[0] + y[0] * m[2]) / 1024 + m[4];
+	int miny = (x[0] * m[1] + y[0] * m[3]) / 1024 + m[5];
+	int maxx = minx;
+	int maxy = miny;
+	int i;
+	for (i=1;i<4;i++) {
+		int vx = (x[i] * m[0] + y[i] * m[2]) / 1024 + m[4];
+		int vy = (x[i] * m[1] + y[i] * m[3]) / 1024 + m[5];
+		if (vx<minx) {
+			minx = vx;
+		} else if (vx > maxx) {
+			maxx = vx;
+		}
+		if (vy<miny) {
+			miny = vy;
+		} else if (vy > maxy) {
+			maxy = vy;
+		}
+	}
+	minx /= SCREEN_SCALE;
+	miny /= SCREEN_SCALE;
+	maxx /= SCREEN_SCALE;
+	maxy /= SCREEN_SCALE;
+	scissor_push(minx,miny,maxx-minx,maxy-miny);
+}
+
+static void
+anchor_update(struct sprite *s, struct srt *srt, struct sprite_trans *arg) {
+	struct matrix *r = s->s.mat;
+	if (arg->mat == NULL) {
+		matrix_identity(r);
+	} else {
+		*r = *arg->mat;
+	}
+	matrix_srt(r, srt);
+}
+
+static void
+label_pos(int m[6], struct pack_label * l, int pos[2]) {
+	float c_x = l->width * SCREEN_SCALE / 2.0;
+	float c_y = l->height * SCREEN_SCALE / 2.0;
+	pos[0] = (int)((c_x * m[0] + c_y * m[2]) / 1024 + m[4])/SCREEN_SCALE;
+	pos[1] = (int)((c_x * m[1] + c_y * m[3]) / 1024 + m[5])/SCREEN_SCALE;
+}
+
+static void
+picture_pos(int m[6], struct pack_picture *picture, int pos[2]) {
+	int max_x = INT_MIN;
+	int max_y = -INT_MAX;
+	int min_x = INT_MAX;
+	int min_y = INT_MAX;
+	int i,j;
+	for (i=0;i<picture->n;i++) {
+		struct pack_quad *q = &picture->rect[i];
+		for (j=0;j<4;j++) {
+			int xx = q->screen_coord[j*2+0];
+			int yy = q->screen_coord[j*2+1];
+
+			if (xx > max_x) max_x = xx;
+			if (yy > max_y) max_y = yy;
+			if (xx < min_x) min_x = xx;
+			if (yy < min_y) min_y = yy;
+		}
+	}
+
+	float c_x = (max_x + min_x) / 2.0;
+	float c_y = (max_y + min_y) / 2.0;
+	pos[0] = (int)((c_x * m[0] + c_y * m[2]) / 1024 + m[4])/SCREEN_SCALE;
+	pos[1] = (int)((c_x * m[1] + c_y * m[3]) / 1024 + m[5])/SCREEN_SCALE;
+}
+
+static void
+drawparticle(struct sprite *s, struct particle_system *ps, struct pack_picture *pic, const struct srt *srt) {
+	int n = ps->particleCount;
+	int i;
+	struct matrix *old_m = s->t.mat;
+	uint32_t old_c = s->t.color;
+
+	shader_blend(ps->config->srcBlend, ps->config->dstBlend);
+	for (i=0;i<n;i++) {
+		struct particle *p = &ps->particles[i];
+		struct matrix *mat = &ps->matrix[i];
+		uint32_t color = p->color_val;
+
+		s->t.mat = mat;
+		s->t.color = color;
+		sprite_drawquad(pic, NULL, &s->t);
+	}
+	shader_defaultblend();
+
+	s->t.mat = old_m;
+	s->t.color = old_c;
+}
+
+static uint32_t
+color4f(struct ps_color4f *c4f) {
+	uint8_t rr = (int)(c4f->r*255);
+	uint8_t gg = (int)(c4f->g*255);
+	uint8_t bb = (int)(c4f->b*255);
+	uint8_t aa = (int)(c4f->a*255);
+	return (uint32_t)aa << 24 | (uint32_t)rr << 16 | (uint32_t)gg << 8 | bb;
+}
+
+static int
+draw_child(struct sprite *s, struct srt *srt, struct sprite_trans * ts, struct material * material);
+
+static void
+draw_particle3d(struct sprite* spr, struct p3d_particle_system* ps, struct srt* srt, struct sprite_trans* arg) {
+	struct p3d_particle* p = ps->start;
+	while (p != ps->last) {
+		float proc = (p->cfg.lifetime - p->life) / p->cfg.lifetime;
+
+		uint32_t id = (uint32_t)p->cfg.symbol->ud;
+		int idx = id & 0xffff;
+		struct sprite* child = spr->data.children[idx];
+
+		struct ps_color4f mul_col = p->cfg.symbol->col_mul,
+			add_col = p->cfg.symbol->col_add;
+		if (p->life < ps->cfg->fadeout_time) {
+			mul_col.a = p->life / ps->cfg->fadeout_time;
+		}
+		float alpha = proc * (p->cfg.symbol->alpha_end - p->cfg.symbol->alpha_start) + p->cfg.symbol->alpha_start;
+		mul_col.a *= alpha;
+
+		child->t.color = color4f(&mul_col);
+		child->t.additive = color4f(&add_col);
+
+		float gx = p->pos.x * 0.01f,
+			gy = p->pos.y * 0.01f;
+		float x = (gx - gy) * 36,
+			y = (gx + gy) * 26 + p->pos.z * 0.5f;
+
+		float s = proc * (p->cfg.symbol->scale_end - p->cfg.symbol->scale_start) + p->cfg.symbol->scale_start;
+
+		struct srt c_srt;
+		c_srt.offx = x*SCREEN_SCALE;
+		c_srt.offy = -y*SCREEN_SCALE;
+		c_srt.scalex = s*1024;
+		c_srt.scaley = s*1024;
+
+		int deg = CC_RADIANS_TO_DEGREES(-p->angle);
+		deg = deg - floor(deg / 360.0f) * 360;
+		c_srt.rot = deg * (1024.0 / 360.0);
+
+		struct matrix mat;
+		matrix_identity(&mat);
+		matrix_srt(&mat, &c_srt);
+		child->t.mat = &mat;
+
+		draw_child(child, srt, arg, NULL);
+
+		++p;
+	}
+}
+
+static void
+draw_particle2d(struct sprite* spr, struct p2d_particle_system* ps, struct srt* srt, struct sprite_trans* arg) {
+	struct p2d_particle* p = ps->start;
+	while (p != ps->last) {
+		uint32_t id = (uint32_t)p->symbol->ud;
+		int idx = id & 0xffff;
+		struct sprite* child = spr->data.children[idx];
+
+		child->t.color = color4f(&p->col_mul);
+		child->t.additive = color4f(&p->col_add);
+
+		struct srt c_srt;
+		c_srt.offx = p->position.x * SCREEN_SCALE;
+		c_srt.offy = - p->position.y * SCREEN_SCALE;
+		c_srt.scalex = p->scale * 1024;
+		c_srt.scaley = p->scale * 1024;
+
+		int deg = CC_RADIANS_TO_DEGREES(-p->angle);
+		deg = deg - floor(deg / 360.0f) * 360;
+		c_srt.rot = deg * (1024.0 / 360.0);
+
+		struct matrix mat;
+		matrix_identity(&mat);
+		matrix_srt(&mat, &c_srt);
+		child->t.mat = &mat;
+
+		draw_child(child, srt, arg, NULL);
+
+		++p;
+	}
+}
+
+static int
+draw_child(struct sprite *s, struct srt *srt, struct sprite_trans * ts, struct material * material) {
+	struct sprite_trans temp;
+	struct matrix temp_matrix;
+	struct sprite_trans *t = sprite_trans_mul(&s->t, ts, &temp, &temp_matrix);
+	if (s->material) {
+		material = s->material;
+	} 
+
+	switch (s->type) {
+	case TYPE_PICTURE:
+		switch_program(t, PROGRAM_PICTURE, material);
+		sprite_drawquad(s->s.pic, srt, t);
+		return 0;
+	case TYPE_POLYGON:
+		switch_program(t, PROGRAM_PICTURE, material);
+		sprite_drawpolygon(s->s.poly, srt, t);
+		return 0;
+	case TYPE_LABEL:
+		if (s->data.rich_text) {
+			t->program = PROGRAM_DEFAULT;	// label never set user defined program
+			switch_program(t, s->s.label->edge ? PROGRAM_TEXT_EDGE : PROGRAM_TEXT, material);
+			label_draw(s->data.rich_text, s->s.label, srt, t);
+		}
+		return 0;
+	case TYPE_ANCHOR:
+		if (s->data.anchor->ps){
+			switch_program(t, PROGRAM_PICTURE, material);
+			drawparticle(s, s->data.anchor->ps, s->data.anchor->pic, srt);
+		} else if (s->data.anchor->trail) {
+			switch_program(t, PROGRAM_TRAIL, material);
+			drawtrail(s, s->data.anchor->trail, srt, t);
+		}
+		anchor_update(s, srt, t);
+		return 0;
+	case TYPE_ANIMATION:
+		break;
+	case TYPE_PANNEL:
+		if (s->data.scissor) {
+			// enable scissor
+			set_scissor(s->s.pannel, srt, t);
+			return 1;
+		} else {
+			return 0;
+		}
+	case TYPE_PARTICLE3D:
+		{
+			struct pack_particle3d* pp3d = s->s.p3d;
+			if (!pp3d->spr.ps) {
+				return 0;
+			}
+
+			int curr_frame = s->frame;
+			if (pp3d->spr.last_frame == -1) {
+				pp3d->spr.last_frame = curr_frame;
+			} else {
+				struct p3d_particle_system* ps = (struct p3d_particle_system*)pp3d->spr.ps;
+				if (pp3d->spr.last_frame < curr_frame) {
+					float dt = 1 / 30.0f * (curr_frame - pp3d->spr.last_frame);
+					p3d_update(ps, dt);
+					pp3d->spr.last_frame = curr_frame;
+				}
+				draw_particle3d(s, ps, srt, t);
+			}
+			return 0;
+		}
+		break;
+	case TYPE_PARTICLE2D:
+		{
+			struct pack_particle2d* pp2d = s->s.p2d;
+			if (!pp2d->spr.ps) {
+				return 0;
+			}
+
+			int curr_frame = s->frame;
+			if (pp2d->spr.last_frame == -1) {
+				pp2d->spr.last_frame = curr_frame;
+			} else {
+				struct p2d_particle_system* ps = (struct p2d_particle_system*)pp2d->spr.ps;
+				if (pp2d->spr.last_frame < curr_frame) {
+					float dt = 1 / 30.0f * (curr_frame - pp2d->spr.last_frame);
+					p2d_update(ps, dt);
+					pp2d->spr.last_frame = curr_frame;
+				}
+				draw_particle2d(s, ps, srt, t);
+			}
+			return 0;
+		}
+		break;
+	default:
+		// todo : invalid type
+		return 0;
+	}
+	// draw animation
+	int frame = get_frame(s);
+	if (frame < 0) {
+		return 0;
+	}
+	struct pack_animation *ani = s->s.ani;
+	struct pack_frame * pf = &ani->frame[frame];
+	int i;
+	int scissor = 0;
+	for (i=0;i<pf->n;i++) {
+		struct pack_part *pp = &pf->part[i];
+		int index = pp->component_id;
+		struct sprite * child = s->data.children[index];
+		if (child == NULL || (child->flags & SPRFLAG_INVISIBLE)) {
+			continue;
+		}
+		struct sprite_trans temp2;
+		struct matrix temp_matrix2;
+		struct sprite_trans *ct = sprite_trans_mul(&pp->t, t, &temp2, &temp_matrix2);
+		scissor += draw_child(child, srt, ct, material);
+	}
+	for (i=0;i<scissor;i++) {
+		scissor_pop();
+	}
+	return 0;
+}
+
+bool
+sprite_child_visible(struct sprite *s, const char * childname) {
+	struct pack_animation *ani = s->s.ani;
+	int frame = get_frame(s);
+	if (frame < 0) {
+		return false;
+	}
+	struct pack_frame * pf = &ani->frame[frame];
+	int i;
+	for (i=0;i<pf->n;i++) {
+		struct pack_part *pp = &pf->part[i];
+		int index = pp->component_id;
+		struct sprite * child = s->data.children[index];
+		if (child->name && strcmp(childname, child->name) == 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void
+sprite_draw(struct sprite *s, struct srt *srt) {
+	if ((s->flags & SPRFLAG_INVISIBLE) == 0) {
+		draw_child(s, srt, NULL, NULL);
+	}
+}
+
+void
+sprite_draw_as_child(struct sprite *s, struct srt *srt, struct matrix *mat, uint32_t color) {
+	if ((s->flags & SPRFLAG_INVISIBLE) == 0) {
+		struct sprite_trans st;
+		st.mat = mat;
+		st.color = color;
+		st.additive = 0;
+		st.rmap = 0xff0000ff;
+		st.gmap = 0x00ff00ff;
+		st.bmap = 0x0000ffff;
+		st.program = PROGRAM_DEFAULT;
+		draw_child(s, srt, &st, NULL);
+	}
+}
+
+int
+sprite_pos(struct sprite *s, struct srt *srt, struct matrix *m, int pos[2]) {
+	struct matrix temp;
+	struct matrix *t = mat_mul(s->t.mat, m, &temp);
+	matrix_srt(t, srt);
+	switch (s->type) {
+	case TYPE_PICTURE:
+		picture_pos(t->m, s->s.pic, pos);
+		return 0;
+	case TYPE_LABEL:
+		label_pos(t->m, s->s.label, pos);
+		return 0;
+	case TYPE_ANIMATION:
+	case TYPE_PANNEL:
+		pos[0] = t->m[4] / SCREEN_SCALE;
+		pos[1] = t->m[5] / SCREEN_SCALE;
+		return 0;
+	case TYPE_PARTICLE3D: case TYPE_PARTICLE2D:
+		return 0;
+	default:
+		return 1;
+	}
+
+}
+
+void
+sprite_matrix(struct sprite * self, struct matrix *mat) {
+	struct sprite * parent = self->parent;
+	if (parent) {
+		assert(parent->type == TYPE_ANIMATION);
+		sprite_matrix(parent, mat);
+		struct matrix tmp;
+		struct matrix * parent_mat = parent->t.mat;
+
+		struct matrix * child_mat = NULL;
+		struct pack_animation *ani = parent->s.ani;
+		int frame = get_frame(parent);
+		if (frame < 0) {
+			return;
+		}
+		struct pack_frame * pf = &ani->frame[frame];
+		int i;
+		for (i=0;i<pf->n;i++) {
+			struct pack_part *pp = &pf->part[i];
+			int index = pp->component_id;
+			struct sprite * child = parent->data.children[index];
+			if (child == self) {
+				child_mat = pp->t.mat;
+				break;
+			}
+		}
+
+		if (parent_mat == NULL && child_mat == NULL)
+			return;
+
+		if (parent_mat) {
+			matrix_mul(&tmp, parent_mat, mat);
+		} else {
+			tmp = *mat;
+		}
+
+		if (child_mat) {
+			matrix_mul(mat, child_mat, &tmp);
+		} else {
+			*mat = tmp;
+		}
+	} else {
+		matrix_identity(mat);
+	}
+}
+
+// aabb
+
+static void
+poly_aabb(int n, const int32_t * point, struct srt *srt, struct matrix *ts, int aabb[4]) {
+	struct matrix mat;
+	if (ts == NULL) {
+		matrix_identity(&mat);
+	} else {
+		mat = *ts;
+	}
+	matrix_srt(&mat, srt);
+	int *m = mat.m;
+
+	int i;
+	for (i=0;i<n;i++) {
+		int x = point[i*2];
+		int y = point[i*2+1];
+
+		int xx = (x * m[0] + y * m[2]) / 1024 + m[4];
+		int yy = (x * m[1] + y * m[3]) / 1024 + m[5];
+
+		if (xx < aabb[0])
+			aabb[0] = xx;
+		if (xx > aabb[2])
+			aabb[2] = xx;
+		if (yy < aabb[1])
+			aabb[1] = yy;
+		if (yy > aabb[3])
+			aabb[3] = yy;
+	}
+}
+
+static inline void
+quad_aabb(struct pack_picture * pic, struct srt *srt, struct matrix *ts, int aabb[4]) {
+	int i;
+	for (i=0;i<pic->n;i++) {
+		poly_aabb(4, pic->rect[i].screen_coord, srt, ts, aabb);
+	}
+}
+
+static inline void
+polygon_aabb(struct pack_polygon * polygon, struct srt *srt, struct matrix *ts, int aabb[4]) {
+	int i;
+	for (i=0;i<polygon->n;i++) {
+		struct pack_poly * poly = &polygon->poly[i];
+		poly_aabb(poly->n, poly->screen_coord, srt, ts, aabb);
+	}
+}
+
+static inline void
+label_aabb(struct pack_label *label, struct srt *srt, struct matrix *ts, int aabb[4]) {
+	int32_t point[] = {
+		0,0,
+		label->width * SCREEN_SCALE, 0,
+		0, label->height * SCREEN_SCALE,
+		label->width * SCREEN_SCALE, label->height * SCREEN_SCALE,
+	};
+	poly_aabb(4, point, srt, ts, aabb);
+}
+
+static inline void
+panel_aabb(struct pack_pannel *panel, struct srt *srt, struct matrix *ts, int aabb[4]) {
+	int32_t point[] = {
+		0,0,
+		panel->width * SCREEN_SCALE, 0,
+		0, panel->height * SCREEN_SCALE,
+		panel->width * SCREEN_SCALE, panel->height * SCREEN_SCALE,
+	};
+	poly_aabb(4, point, srt, ts, aabb);
+}
+
+static int
+child_aabb(struct sprite *s, struct srt *srt, struct matrix * mat, int aabb[4]) {
+	struct matrix temp;
+	struct matrix *t = mat_mul(s->t.mat, mat, &temp);
+	switch (s->type) {
+	case TYPE_PICTURE:
+		quad_aabb(s->s.pic, srt, t, aabb);
+		return 0;
+	case TYPE_POLYGON:
+		polygon_aabb(s->s.poly, srt, t, aabb);
+		return 0;
+	case TYPE_LABEL:
+		label_aabb(s->s.label, srt, t, aabb);
+		return 0;
+	case TYPE_ANIMATION:
+		break;
+	case TYPE_PANNEL:
+		panel_aabb(s->s.pannel, srt, t, aabb);
+		return s->data.scissor;
+	default:
+		// todo : invalid type
+		return 0;
+	}
+	// draw animation
+	struct pack_animation *ani = s->s.ani;
+	int frame = get_frame(s);
+	if (frame < 0) {
+		return 0;
+	}
+	struct pack_frame * pf = &ani->frame[frame];
+	int i;
+	for (i=0;i<pf->n;i++) {
+		struct pack_part *pp = &pf->part[i];
+		int index = pp->component_id;
+		struct sprite * child = s->data.children[index];
+		if (child == NULL || (child->flags & SPRFLAG_INVISIBLE)) {
+			continue;
+		}
+		struct matrix temp2;
+		struct matrix *ct = mat_mul(pp->t.mat, t, &temp2);
+		if (child_aabb(child, srt, ct, aabb))
+			break;
+	}
+	return 0;
+}
+
+void
+sprite_aabb(struct sprite *s, struct srt *srt, bool world_aabb, int aabb[4]) {
+	int i;
+	if ((s->flags & SPRFLAG_INVISIBLE) == 0) {
+		struct matrix tmp;
+		if (world_aabb) {
+			sprite_matrix(s, &tmp);
+		} else {
+			matrix_identity(&tmp);
+		}
+		aabb[0] = INT_MAX;
+		aabb[1] = INT_MAX;
+		aabb[2] = INT_MIN;
+		aabb[3] = INT_MIN;
+		child_aabb(s,srt,&tmp,aabb);
+		for (i=0;i<4;i++)
+			aabb[i] /= SCREEN_SCALE;
+	} else {
+		for (i=0;i<4;i++)
+			aabb[i] = 0;
+	}
+}
+
+// test
+
+static int
+test_quad(struct pack_picture * pic, int x, int y) {
+	int p;
+	for (p=0;p<pic->n;p++) {
+		struct pack_quad *pq = &pic->rect[p];
+		int maxx,maxy,minx,miny;
+		minx= maxx = pq->screen_coord[0];
+		miny= maxy = pq->screen_coord[1];
+		int i;
+		for (i=2;i<8;i+=2) {
+			int x = pq->screen_coord[i];
+			int y = pq->screen_coord[i+1];
+			if (x<minx)
+				minx = x;
+			else if (x>maxx)
+				maxx = x;
+			if (y<miny)
+				miny = y;
+			else if (y>maxy)
+				maxy = y;
+		}
+		if (x>=minx && x<=maxx && y>=miny && y<=maxy)
+			return 1;
+	}
+	return 0;
+}
+
+static int
+test_polygon(struct pack_polygon * poly,  int x, int y) {
+	int p;
+	for (p=0;p<poly->n;p++) {
+		struct pack_poly *pp = &poly->poly[p];
+		int maxx,maxy,minx,miny;
+		minx= maxx = pp->screen_coord[0];
+		miny= maxy = pp->screen_coord[1];
+		int i;
+		for (i=1;i<pp->n;i++) {
+			int x = pp->screen_coord[i*2+0];
+			int y = pp->screen_coord[i*2+1];
+			if (x<minx)
+				minx = x;
+			else if (x>maxx)
+				maxx = x;
+			if (y<miny)
+				miny = y;
+			else if (y>maxy)
+				maxy = y;
+		}
+		if (x>=minx && x<=maxx && y>=miny && y<=maxy) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+static int
+test_label(struct pack_label *label, int x, int y) {
+	x /= SCREEN_SCALE;
+	y /= SCREEN_SCALE;
+	return x>=0 && x<label->width && y>=0 && y<label->height;
+}
+
+static int
+test_pannel(struct pack_pannel *pannel, int x, int y) {
+	x /= SCREEN_SCALE;
+	y /= SCREEN_SCALE;
+	return x>=0 && x<pannel->width && y>=0 && y<pannel->height;
+}
+
+static int test_child(struct sprite *s, struct srt *srt, struct matrix * ts, int x, int y, struct sprite ** touch);
+
+static int
+check_child(struct sprite *s, struct srt *srt, struct matrix * t, struct pack_frame * pf, int i, int x, int y, struct sprite ** touch) {
+	struct pack_part *pp = &pf->part[i];
+	int index = pp->component_id;
+	struct sprite * child = s->data.children[index];
+	if (child == NULL || (child->flags & SPRFLAG_INVISIBLE)) {
+		return 0;
+	}
+	struct matrix temp2;
+	struct matrix *ct = mat_mul(pp->t.mat, t, &temp2);
+	struct sprite *tmp = NULL;
+	int testin = test_child(child, srt, ct, x, y, &tmp);
+	if (testin) {
+		// if child capture message, return it
+		*touch = tmp;
+		return 1;
+	}
+	if (tmp) {
+		// if child not capture message, but grandson (tmp) capture it, mark it
+		*touch = tmp;
+	}
+	return 0;
 }
 
 /*
-                         SCREEN_WIDTH
-               +-------------------------------+   -
-               |                               |   ^
-               |                               |   y
-               |                               |
-               |              width            |   v
-               |         +--------------+      |   -
-               |         |              |      |
-SCREEN_HEIGHT  |  height |              |      |
-               |         |              |      |
-               |         |              |      |
-               |         |              |      |
-               |         |              |      |
-               |         +--------------+      |
-               |                               |
-               +-------------------------------+
-               |<-- x -->|
-*/
+	return 1 : test succ
+		0 : test failed, but *touch capture the message
+ */
+static int
+test_animation(struct sprite *s, struct srt *srt, struct matrix * t, int x, int y, struct sprite ** touch) {
+	struct pack_animation *ani = s->s.ani;
+	int frame = get_frame(s);
+	if (frame < 0) {
+		return 0;
+	}
+	struct pack_frame * pf = &ani->frame[frame];
+	int start = pf->n-1;
+	do {
+		int scissor = -1;
+		int i;
+		// find scissor and check it first
+		for (i=start;i>=0;i--) {
+			struct pack_part *pp = &pf->part[i];
+			int index = pp->component_id;
+			struct sprite * c = s->data.children[index];
+			if (c == NULL || (c->flags & SPRFLAG_INVISIBLE)) {
+				continue;
+			}
+			if (c->type == TYPE_PANNEL && c->data.scissor) {
+				scissor = i;
+				break;
+			}
 
-static void
-_trans(int *xx, int *yy, int *width, int *height, int mat[6]) {
-    int x1 = -*xx;
-    int y1 = -*yy;
-    int x2 = *width + x1;
-    int y2 = *height + y1;
-    x1 *= SCALE;
-    y1 *= SCALE;
-    x2 *= SCALE;
-    y2 *= SCALE;
-    
-    assert(mat[1] == 0 && mat[2] == 0);
-    
-    int xx1 = (x1 * mat[0]) / 1024 + mat[4];
-    int yy1 = (y1 * mat[3]) / 1024 + mat[5];
-    
-    int xx2 = (x2 * mat[0]) / 1024 + mat[4];
-    int yy2 = (y2 * mat[3]) / 1024 + mat[5];
-    
-    *xx = -xx1 / SCALE;
-    *yy = -yy1 / SCALE;
-    *width = (xx2 - xx1) / SCALE;
-    *height = (yy2 - yy1) / SCALE;
-}
-
-//static void
-//_trans(int *xx, int *yy, int *width, int *height, int mat[6]) {
-//    int x1 = *xx;
-//    int y1 = -*yy;
-//    int x2 = *width + x1;
-//    int y2 = *height + y1;
-//    x1 *= SCALE;
-//    y1 *= SCALE;
-//    x2 *= SCALE;
-//    y2 *= SCALE;
-//    
-//    assert(mat[1] == 0 && mat[2] == 0);
-//    
-//    int xx1 = (x1 * mat[0]) / 1024 + mat[4];
-//    int yy1 = (y1 * mat[3]) / 1024 + mat[5];
-//    
-//    int xx2 = (x2 * mat[0]) / 1024 + mat[4];
-//    int yy2 = (y2 * mat[3]) / 1024 + mat[5];
-//    
-//    *xx = xx1 / SCALE;
-//    *yy = -yy1 / SCALE;
-//    *width = (xx2 - xx1) / SCALE;
-//    *height = (yy2 - yy1) / SCALE;
-//}
-
-void
-screen_clip_push(int *mat, int dx, int dy, int * clipbox, float scale, int test) {
-  struct ej_screen scr;
-  ejoy_get_screen(&scr);
-  assert(G_CLIP_COUNT < MAX_CLIPBOX);
-  int x = clipbox[2];
-  int y = clipbox[3];
-  int width  = clipbox[0];
-  int height = clipbox[1];
-  float inv_scale = 1.0f / scale;
-  if (mat) {
-    _trans(&x,&y,&width,&height,mat);
-  }
-  x += dx / SCALE;
-  y += dy / SCALE;
-  x *= inv_scale;
-  y *= inv_scale;
-  width *= inv_scale;
-  height *= inv_scale;
-  if (x < 0) {
-    width +=x;
-    x = 0;
-  } else if (x >= scr.w) {
-     x = scr.w;
-     width = 0;
-  }
-  if (y < 0) {
-    height +=y;
-    y = 0;
-  } else if (y >= scr.h) {
-    y = scr.h;
-    height = 0;
-  }
-  if (width < 0) {
-    width = 0;
-  } else if (x + width > scr.w) {
-    width = scr.w - x;
-  }
-  if (height < 0) {
-    height = 0;
-  } else if (y + height > scr.h) {
-    height = scr.h - y;
-  }
-
-  struct clipbox *cb = &G_CLIP[G_CLIP_COUNT++];
-  cb->x = x;
-  cb->y = y;
-  cb->width = width;
-  cb->height = height;
-
-  if (!test) {
-    shader_scissor(x,y,width,height,1);
-  }
-}
-
-void
-screen_clip_pop(int test) {
-  --G_CLIP_COUNT;
-  assert(G_CLIP_COUNT>=0);
-  if (!test) {
-    if (G_CLIP_COUNT == 0) {
-      shader_scissor(0,0,0,0,0);
-    } else {
-      struct clipbox *cb = &G_CLIP[G_CLIP_COUNT-1];
-      shader_scissor(cb->x,cb->y,cb->width,cb->height,1);
-    }
-  }
-}
-
-int
-screen_clip_test(int x, int y) {
-  x /= SCALE;
-  y /= SCALE;
-  if (G_CLIP_COUNT == 0) {
-    struct ej_screen scr;
-    ejoy_get_screen(&scr);
-    return x>=0 && x<scr.w && y>=0 && y<=scr.h;
-  }
-  struct clipbox *cb = &G_CLIP[G_CLIP_COUNT-1];
-  return x>=cb->x && x<cb->width+cb->x && y>=cb->y && y<=cb->y+cb->height;
-}
-
-int
-screen_clip_test_rect(int x1, int y1, int x2, int y2) {
-  struct rect {
-    int left, top, right, bottom;
-  } r1, r2;
-
-  x1 /= SCALE; y1 /= SCALE;
-  x2 /= SCALE; y2 /= SCALE;
-
-  if(x1 < x2) {
-    r1.left  = x1;
-    r1.right = x2;
-  } else {
-    r1.left  = x2;
-    r1.right = x1;
-  }
-
-  if(y1 < y2) {
-    r1.top = y1;
-    r1.bottom = y2;
-  } else {
-    r1.top = y2;
-    r1.bottom = y1;
-  }
-
-  if (G_CLIP_COUNT == 0) {
-    struct ej_screen scr;
-    ejoy_get_screen(&scr);
-    r2.left   = 0;
-    r2.top    = 0;
-    r2.right  = scr.w;
-    r2.bottom = scr.h;
-  }
-  else {
-    struct clipbox *cb = &G_CLIP[G_CLIP_COUNT-1];
-    r2.left   = cb->x;
-    r2.top    = cb->y;
-    r2.right  = cb->x + cb->width;
-    r2.bottom = cb->y + cb->height;
-  }
-
-  return ((r1.right >= r2.left && r1.left < r2.right)   // x轴相交
-       && (r1.bottom >= r2.top && r1.top < r2.bottom)); // 并且y轴也相交
-}
-
-int
-sprite_id(struct ej_package *pack, const char *name) {
-  struct ejoypic * ep = pack->ep;
-  int start = 0;
-  int end = ep->export_n-1;
-  while (start <= end) {
-    int mid = (start + end)/2;
-    int r = strcmp(name, ep->export[mid].name);
-    if (r == 0) {
-      return ep->export[mid].id;
-    } else if (r<0) {
-      end = mid-1;
-    } else {
-      start = mid +1;
-    }
-  }
-  return -1;
+		}
+		if (scissor >=0) {
+			struct sprite *tmp = NULL;
+			check_child(s, srt, t, pf, scissor, x, y, &tmp);
+			if (tmp == NULL) {
+				start = scissor - 1;
+				continue;
+			}
+		} else {
+			scissor = 0;
+		}
+		for (i=start;i>=scissor;i--) {
+			int hit = check_child(s, srt, t,  pf, i, x, y, touch);
+			if (hit)
+				return 1;
+		}
+		start = scissor - 1;
+	} while(start>=0);
+	return 0;
 }
 
 static int
-_sprite_size(struct ejoypic *ep, int id) {
-  if (id < 0 || ep->max_id < id)
-    return sizeof(struct ej_sprite);
-  struct animation * ani = ep->spr[id];
-  if (ani == NULL)
-    return sizeof(struct ej_sprite);
-  if (ani->part_n <= 0) {
-    return sizeof(struct ej_sprite);
-  }
-  int sz = sizeof(struct ej_sprite) + ani->part_n * sizeof(struct ej_sprite *);
-  int i;
-  for (i=0;i<ani->part_n;i++) {
-    struct animation_part * part = &ani->part[i];
-    if (part->name == NULL) {
-      continue;
-    }
-    if (part->text) {
-      sz += sizeof(struct ej_sprite);
-    } else {
-      sz += _sprite_size(ep, part->id);
-    }
-  }
-  return sz;
+test_child(struct sprite *s, struct srt *srt, struct matrix * ts, int x, int y, struct sprite ** touch) {
+	struct matrix temp;
+	struct matrix *t = mat_mul(s->t.mat, ts, &temp);
+	if (s->type == TYPE_ANIMATION) {
+		struct sprite *tmp = NULL;
+		int testin = test_animation(s , srt, t, x,y, &tmp);
+		if (testin) {
+			*touch = tmp;
+			return 1;
+		} else if (tmp) {
+			if (s->flags & SPRFLAG_MESSAGE) {
+				*touch = s;
+				return 1;
+			} else {
+				*touch = tmp;
+				return 0;
+			}
+		}
+	}
+	struct matrix mat;
+	if (t == NULL) {
+		matrix_identity(&mat);
+	} else {
+		mat = *t;
+	}
+	matrix_srt(&mat, srt);
+	struct matrix imat;
+	if (matrix_inverse(&mat, &imat)) {
+		// invalid matrix
+		*touch = NULL;
+		return 0;
+	}
+	int *m = imat.m;
+
+	int xx = (x * m[0] + y * m[2]) / 1024 + m[4];
+	int yy = (x * m[1] + y * m[3]) / 1024 + m[5];
+
+	int testin;
+	struct sprite * tmp = s;
+	switch (s->type) {
+	case TYPE_PICTURE:
+		testin = test_quad(s->s.pic, xx, yy);
+		break;
+	case TYPE_POLYGON:
+		testin = test_polygon(s->s.poly, xx, yy);
+		break;
+	case TYPE_LABEL:
+		testin = test_label(s->s.label, xx, yy);
+		break;
+	case TYPE_PANNEL:
+		testin = test_pannel(s->s.pannel, xx, yy);
+		break;
+	case TYPE_ANCHOR:
+		*touch = NULL;
+		return 0;
+	default:
+		// todo : invalid type
+		*touch = NULL;
+		return 0;
+	}
+
+	if (testin) {
+		*touch = tmp;
+		return s->flags & SPRFLAG_MESSAGE;
+	} else {
+		*touch = NULL;
+		return 0;
+	}
+}
+
+struct sprite *
+sprite_test(struct sprite *s, struct srt *srt, int x, int y) {
+	struct sprite *tmp = NULL;
+	int testin = test_child(s, srt, NULL, x, y, &tmp);
+	if (testin) {
+		return tmp;
+	}
+    /* arnan:
+     * 开源版本的根节点不受 message 标记影响
+     * LR 用的这个版本我希望根节点也受 message 标记影响
+     * 否则感觉行为不一致, 根节点上存这个信息浪费了, 不起任何作用
+     */
+	if (tmp && (s->flags & SPRFLAG_MESSAGE)) {
+		return s;
+	}
+	return NULL;
+}
+
+static inline int
+propagate_frame(struct sprite *s, int i, bool force_child) {
+	struct sprite *child = s->data.children[i];
+	if (child == NULL || 
+		(child->type != TYPE_ANIMATION && child->type != TYPE_PARTICLE3D && child->type != TYPE_PARTICLE2D)) {
+		return 0;
+	}
+	if (child->flags & SPRFLAG_FORCE_INHERIT_FRAME) {
+		return 1;
+	}
+	struct pack_animation * ani = s->s.ani;
+	if (ani->component[i].id == ANCHOR_ID) {
+		return 0;
+	}
+	if (force_child) {
+		return 1;
+	}
+	if (ani->component[i].name == NULL) {
+		return 1;
+	}
+	return 0;
 }
 
 int
-sprite_size(struct ej_package *pack, int id) {
-  struct ejoypic * ep = pack->ep;
-  return _sprite_size(ep, id);
+sprite_setframe(struct sprite *s, int frame, bool force_child) {
+	if (s == NULL || (s->type != TYPE_ANIMATION && s->type != TYPE_PARTICLE3D && s->type != TYPE_PARTICLE2D))
+		return 0;
+
+	s->frame = frame;
+
+	int total_frame = s->total_frame;
+	if (s->type == TYPE_ANIMATION) {
+		int i;
+		struct pack_animation * ani = s->s.ani;
+		for (i=0;i<ani->component_number;i++) {
+			if (propagate_frame(s, i, force_child)) {
+				if (s->flags & SPRFLAG_RANDOM_CHILD_BASE_FRAME) {
+					frame = frame + ((i * 134775813) % 307);
+				}
+				int t = sprite_setframe(s->data.children[i], frame, force_child);
+				if (t > total_frame) {
+					total_frame = t;
+				}
+			}
+		}
+	}
+	return total_frame;
 }
 
-static int
-_sprite_fill(struct ej_sprite * spr, struct ej_package *pack, int id) {
-  struct ejoypic * ep = pack->ep;
-  if (id < 0 || ep->max_id < id)
-    return 0;
-
-  struct animation * ani = ep->spr[id];
-  if (ani == NULL)
-    return 0;
-  spr->pack = pack;
-  spr->ani = ani;
-  spr->frame = 0;
-  spr->extra = 0;
-  spr->action = 0;
-  spr->flag = 0;
-  spr->color_trans = 0xffffffff;
-  spr->color_additive = 0;
-
-  if (ani->part_n <=0) {
-    return sizeof(struct ej_sprite);
-  }
-  int sz = sizeof(struct ej_sprite) + ani->part_n * sizeof(struct ej_sprite *);
-  uintptr_t ns = (uintptr_t)spr + sz;
-  int i;
-  for (i=0;i<ani->part_n;i++) {
-    struct animation_part * part = &ani->part[i];
-    if (part->name == NULL) {
-      spr->c[i] = NULL;
-      continue;
-    }
-    spr->c[i] = (struct ej_sprite *)ns;
-    int s;
-    if (part->text) {
-      struct ej_sprite * t = spr->c[i];
-      t->pack = pack;
-      t->ani = NULL;
-      t->extra = 0;
-      t->frame = 0;
-      t->action = 0;
-      t->flag = 0;
-      t->color_trans = 0xffffffff;
-      t->color_additive = 0;
-      s = sizeof(struct ej_sprite);
-    } else {
-      s = _sprite_fill(spr->c[i], pack, part->id);
-      if(s == 0) {
-        struct ej_sprite * t = spr->c[i];
-        t->pack = pack;
-        t->ani = NULL;
-        t->extra = 0;
-        t->frame = 0;
-        t->action = 0;
-        t->flag = 0;
-        t->color_trans = 0xffffffff;
-        t->color_additive = 0;
-        s = sizeof(struct ej_sprite);
-      }
-    }
-    ns += s;
-    sz += s;
-  }
-  return sz;
+int 
+sprite_material_size(struct sprite *s) {
+	return material_size(s->t.program);
 }
 
-int
-sprite_create(struct ej_sprite * spr, struct ej_package *pack, int id) {
-// #ifdef USE_DTEX      
-//   dtex_preload_id(Dtex, pack, id, 1);
-// #endif // USE_DTEX        
-  return _sprite_fill(spr, pack, id);
-}
-
-int
-sprite_find(struct ej_sprite *spr, struct ej_sprite *node, char *buf, int cap) {
-  if (cap == 0)
-    return -1;
-  struct animation * ani = spr->ani;
-  if (ani->part_n <=0) {
-    buf[0] = 0;
-    return 0;
-  }
-  int i;
-  for (i=0;i<ani->part_n;i++) {
-    struct animation_part * part = &ani->part[i];
-    if (part->name == NULL)
-      continue;
-
-    struct ej_sprite * subs = spr->c[i];
-    assert(subs != NULL);
-    if (subs->ani == NULL)
-      continue;
-
-    int len  = strlen(part->name);
-    if (len+1 >= cap)
-      return -1;
-    memcpy(buf, part->name, len);
-    if (subs == node) {
-      buf[len] = 0;
-      return len;
-    }
-    buf[len] = '.';
-    int n = sprite_find(subs, node, buf+len+1, cap-len-1);
-    if (n < 0) {
-      return -1;
-    }
-    if (n > 0) {
-      return len + n + 1;
-    }
-  }
-
-  return 0;
-}
-
-// draw
-
-static void
-draw(struct ej_package *pack, int x, int y, int m[6], struct picture_part *rect, int mirror, struct screen_coord * screen,
-  unsigned int color, unsigned int additive, int shader) {
-  assert(pack->texture_n > rect->texid);
-  struct texture * t = &pack->tex[rect->texid];
-
-  int xmin, ymin, xmax, ymax;
-  xmin = ymin = INT_MAX;
-  xmax = ymax = INT_MIN;
-  float vb[16];
-  int i;
-  if (m) {
-    for (i=0;i<4;i++) {
-      int xx = rect->screen[i*2];
-      int yy = rect->screen[i*2+1];
-      int dx = (xx * m[0] + yy * m[2]) / 1024 + m[4];
-      int dy = (xx * m[1] + yy * m[3]) / 1024 + m[5];
-      if (mirror)
-        dx = -dx;
-      int rx = x + dx - screen->xoffset ;
-      int ry = y + dy - screen->yoffset ;
-      if (rx < xmin) xmin = rx;
-      if (rx > xmax) xmax = rx;
-      if (ry < ymin) ymin = ry;
-      if (ry > ymax) ymax = ry;
-      vb[i*4+0]= screen->wscale * rx - 1.0f;
-      vb[i*4+1]= - screen->hscale * ry + 1.0f;
-      vb[i*4+2] = t->width * rect->src[i*2];
-      vb[i*4+3] = t->height * rect->src[i*2+1];
-    }
-  } else {
-    for (i=0;i<4;i++) {
-      int xx = rect->screen[i*2];
-      int yy = rect->screen[i*2+1];
-      if (mirror)
-        xx = -xx;
-      int rx = x + xx - screen->xoffset;
-      int ry = y + yy - screen->yoffset;
-      if (rx < xmin) xmin = rx;
-      if (rx > xmax) xmax = rx;
-      if (ry < ymin) ymin = ry;
-      if (ry > ymax) ymax = ry;
-      vb[i*4+0]= screen->wscale * rx - 1.0f;
-      vb[i*4+1]= - screen->hscale * ry + 1.0f;
-      vb[i*4+2] = t->width * rect->src[i*2];
-      vb[i*4+3] = t->height * rect->src[i*2+1];
-    }
-  }
-
-  if (vb[0] < -1 && vb[4] < -1 && vb[8] < -1 && vb[12] < -1)
-    return;
-  if (vb[0] > 1 && vb[4] > 1 && vb[8] > 1 && vb[12] > 1)
-    return;
-  if (vb[1] < -1 && vb[5] < -1 && vb[9] < -1 && vb[13] < -1)
-    return;
-  if (vb[1] > 1 && vb[5] > 1 && vb[9] > 1 && vb[13] > 1)
-    return;
-
-  int TOL = 4 * SCALE;
-  if (xmax - xmin < TOL && ymax - ymin < TOL)
-    return;
-
-  int texid = t->id;
-  int alphaid = t->id_alpha;
-// #ifdef USE_DTEX
-//   const struct dtex_rect* dr = dtex_lookup(Dtex,vb,texid,1/t->width,1/t->height);
-//   // if (dr && screen->inv_scale/dr->scale<dtex_max_scale(Dtex)) {
-//   if (dr) {  
-//     memcpy(vb+2, dr->vb, 2*sizeof(float));
-//     memcpy(vb+6, dr->vb+2, 2*sizeof(float));
-//     memcpy(vb+10, dr->vb+4, 2*sizeof(float));
-//     memcpy(vb+14, dr->vb+6, 2*sizeof(float));
-//     texid = dtex_texid(Dtex);
-//     alphaid = 0;
-//     if (shader == PROGRAM_SPRITE_KTX || shader == PROGRAM_SPRITE_PKM) {
-//       shader = PROGRAM_SPRITE;
-//     } else if (shader == PROGRAM_GRAY_KTX || shader == PROGRAM_GRAY_PKM) {
-//       shader = PROGRAM_GRAY;
-//     }
-//   }
-// #endif // USE_DTEX
-
-  int new_texid = 0;
-  float* tex_vb = dtexf_c2_lookup_texcoords(t, vb, &new_texid);
-  if (tex_vb != NULL) {
-    // pts
-    if (rect->src[0] < 0) {
-      struct dtex_texture* tex = NULL;
-      struct dp_pos* pos = NULL;
-      dtexf_c2_lookup_node(t, vb, &tex, &pos);
-      if (tex != NULL && pos != NULL) {
-        struct draw_params params;
-        params.x = x;
-        params.y = y;
-        params.mat = m;
-        params.screen = screen;
-        params.color = color;
-        params.additive = additive;
-        if (dtexf_draw_pts(pack, tex, -rect->src[0], pos, &params, rect->screen)) {
-            return;
-        }
-      }
-    }
-    memcpy(vb+2, tex_vb, 2*sizeof(float));
-    memcpy(vb+6, tex_vb+2, 2*sizeof(float));
-    memcpy(vb+10, tex_vb+4, 2*sizeof(float));
-    memcpy(vb+14, tex_vb+6, 2*sizeof(float));  
-    texid = new_texid;
-  } else if (rect->src[0] < 0) {
-      struct draw_params params;
-      params.x = x;
-      params.y = y;
-      params.mat = m;
-      params.screen = screen;
-      params.color = color;
-      params.additive = additive;
-      dtexf_draw_rrp(pack, t, -rect->src[0], &params, rect->screen);
-      return;
-  } else {
-    // return;
-  }
-
-  shader_program(shader);
-  shader_color(color,additive);   
-  if (shader == PROGRAM_SPRITE_PKM || shader == PROGRAM_GRAY_PKM) {
-    shader_draw_separate(vb,texid,alphaid);
-  } else {
-    shader_draw(vb,texid);
-  } 
-}
-
-void
-sprite_draw(struct ej_package * pack, struct picture * pic, int x, int y, int *mat, unsigned int color, unsigned int additive, int mirror, int shader, struct screen_coord *screen) {
-  assert(pic->n < 0);
-  int i;
-  for (i=0;i<-pic->n;i++) {
-    int texid = pic->part[i].texid;
-    assert(pack->texture_n > texid);
-    struct texture * t = &pack->tex[texid];
-    if (t->format == KTX) {
-      if (shader == PROGRAM_GRAY) {
-        shader = PROGRAM_GRAY_KTX;
-      } else {
-        shader = PROGRAM_SPRITE_KTX;
-      }
-    }
-    if (t->format == PKM) {
-      if (shader == PROGRAM_GRAY) {
-        shader = PROGRAM_GRAY_PKM;
-      } else {
-        shader = PROGRAM_SPRITE_PKM;
-      }
-    }    
-    draw(pack, x,y, mat, &pic->part[i], mirror, screen, color, additive, shader);
-  }
-}
-
-static void
-_get_region(int32_t vb[8],int x,int y,int *m,int offx,int offy,float scale,int mirror,struct ej_rect *rect)
-{
-  int i;
-  if (m) {
-    for (i=1;i<4;i++) {
-      int xx = vb[i*2];
-      int yy = vb[i*2+1];
-      int dx = (xx * m[0] + yy * m[2]) / 1024 + m[4];
-      int dy = (xx * m[1] + yy * m[3]) / 1024 + m[5];
-      if(mirror)
-        dx = -dx;
-      int rx = (x + dx - offx) / scale;
-      int ry = (y + dy - offy) / scale;
-      if(rx < rect->xmin) {
-        rect->xmin = rx;
-      }
-      if(rx > rect->xmax) {
-        rect->xmax = rx;
-      }
-      if(ry < rect->ymin) {
-        rect->ymin = ry;
-      }
-      if(ry > rect->ymax) {
-        rect->ymax = ry;
-      }
-    }
-  } else {
-    for (i=1;i<4;i++) {
-      int xx = vb[i*2];
-      int yy = vb[i*2+1];
-      if(mirror)
-        xx = -xx;
-      int rx = (x + xx - offx) / scale;
-      int ry = (y + yy - offy) / scale;
-      if(rx < rect->xmin) {
-        rect->xmin = rx;
-      }
-      if(rx > rect->xmax) {
-        rect->xmax = rx;
-      }
-      if(ry < rect->ymin) {
-        rect->ymin = ry;
-      }
-      if(ry > rect->ymax) {
-        rect->ymax = ry;
-      }
-    }
-  }
-  //// printf("x:%d (%d,%d) y:%d (%d,%d)\n",c->x,rect->xmin,rect->xmax,c->y,rect->ymin,rect->ymax);
-  //int width = rect->xmax - rect->xmin;
-  //int height = rect->ymax - rect->ymin;
-  //if(width < MIN_TEST_LENGTH * 2) {
-  //  int cx = (rect->xmin + rect->xmax) / 2;
-  //  rect->xmin = cx - MIN_TEST_LENGTH;
-  //  rect->xmax = cx + MIN_TEST_LENGTH;
-  //}
-  //if(height < MIN_TEST_LENGTH * 2) {
-  //  int cy = (rect->ymin + rect->ymax) / 2;
-  //  rect->ymin = cy - MIN_TEST_LENGTH;
-  //  rect->ymax = cy + MIN_TEST_LENGTH;
-  //}  
-}
-
-//#define MIN_TEST_LENGTH (192)
-#define CLICK_EXTEND (256)
-
-static int
-rect_in(int32_t vb[8],int x,int y,int *m,struct ej_cursor *c,int offx,int offy,float scale,int mirror,int extend) {
-  struct ej_rect rect;
-  rect.xmin = rect.ymin = INT_MAX;
-  rect.xmax = rect.ymax = INT_MIN;
-  _get_region(vb,x,y,m,offx,offy,scale,mirror,&rect);
-  if(extend) {
-    return rect.xmin <= c->x + CLICK_EXTEND && c->x - CLICK_EXTEND <= rect.xmax
-        && rect.ymin <= c->y + CLICK_EXTEND && c->y - CLICK_EXTEND <= rect.ymax;
-  }
-  //if (c->x >= rect.xmin && c->x <= rect.xmax && c->y >= rect.ymin && c->y <= rect.ymax) {
-  //  printf("x:%d (%d,%d) y:%d (%d,%d) scale:%f\n",c->x,rect.xmin,rect.xmax,c->y,rect.ymin,rect.ymax, scale);
-  //}
-  return c->x >= rect.xmin && c->x <= rect.xmax && c->y >= rect.ymin && c->y <= rect.ymax;
-}
-
-#undef CLICK_EXTEND
-//#undef MIN_TEST_LENGTH
-
-static int
-test(struct ej_package *pack, int x, int y, int *m, struct picture_part *rect, struct ej_cursor *c, int offx, int offy, float scale, int mirror, int extend) {
-  // int px = (c->x *scale) + offx - x;
-  // int py = (c->y *scale) + offy - y;
-
-  // if (m) {
-  //   int tmp[6];
-  //   matrix_inverse(m,tmp);
-  //   int xx = px;
-  //   int yy = py;
-
-  //   px = (xx * tmp[0] + yy * tmp[2]) / 1024 + tmp[4];
-  //   py = (xx * tmp[1] + yy * tmp[3]) / 1024 + tmp[5];
-  // }
-
-  // return rect_in(rect->screen,px,py,m);
-  return rect_in(rect->screen,x,y,m,c,offx,offy,scale,mirror,extend);
-}
-
-int
-sprite_test(struct ej_package * pack, struct picture * pic, int x, int y, int *mat, struct ej_cursor *c, int offx, int offy, float scale, int mirror, int extend) {
-  assert(pic->n < 0);
-  int i;
-  for (i=0;i<-pic->n;i++) {
-    int r = test(pack, x,y, mat, &pic->part[i], c, offx, offy, scale, mirror, extend);
-    if (r) {
-      return r;
-    }
-  }
-  return 0;
-}
-
-void 
-sprite_region(struct ej_package* pack, struct picture* pic, int x, int y, int *mat, int offx, int offy, float scale, int mirror, struct ej_rect* rect)
-{
-  assert(pic->n < 0);
-  int i;
-  for (i=0;i<-pic->n;i++) {
-    _get_region(pic->part[i].screen,x,y,mat,offx,offy,scale,mirror,rect);
-  }
-}
