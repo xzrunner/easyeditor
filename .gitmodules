@@ -7,3 +7,6 @@
 [submodule "particle/src"]
 	path = particle/src
 	url = ssh://git@oa.ejoy.com/users/zz/ps.git
+[submodule "dtex/src"]
+	path = dtex/src
+	url = ssh://git@oa.ejoy.com/users/zz/dtex.git
