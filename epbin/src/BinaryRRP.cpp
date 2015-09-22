@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <sstream>
 
-#include <dtex_rrp.h>
+//#include <dtex_rrp.h>
 
 namespace epbin
 {
@@ -35,55 +35,55 @@ BinaryRRP::~BinaryRRP()
 
 void BinaryRRP::Pack(const std::string& outfile, bool compress) const
 {
-	int32_t pic_sz = m_pics.size();
-
-	// data sz
-	size_t data_sz = 0;
-	data_sz += sizeof(int32_t);
-	for (int i = 0; i < pic_sz; ++i) {
-		data_sz += m_pics[i]->Size();
-	}
-
-	// fill buffer
-	uint8_t* data_buf = new uint8_t[data_sz];
-	uint8_t* ptr_data = data_buf;
-	pack2mem(pic_sz, &ptr_data);
-	for (int i = 0; i < pic_sz; ++i) {
-		m_pics[i]->Store(&ptr_data);
-	}
-	assert(ptr_data - data_buf == data_sz);
-
-	// final
-	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
-	uint8_t* buf = new uint8_t[sz];
-	uint8_t* ptr = buf;
-	pack2mem(TYPE, &ptr);
-
-	int cap = dtex_rrp_size(data_buf, data_sz);
-	pack2mem(cap, &ptr);
-
-	memcpy(ptr, data_buf, data_sz);
-	delete[] data_buf;
-
-	// write to file
-	std::ofstream fout(outfile.c_str(), std::ios::binary);
-	if (compress)
-	{
-		uint8_t* dst = NULL;
-		size_t dst_sz;
-		Lzma::Compress(&dst, &dst_sz, buf, sz);
-
-		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
-		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
-	}
-	else
-	{
-		int _sz = -(int)sz;
-		fout.write(reinterpret_cast<const char*>(&_sz), sizeof(int32_t));
-		fout.write(reinterpret_cast<const char*>(buf), sz);
-	}
-	delete[] buf;
-	fout.close();
+// 	int32_t pic_sz = m_pics.size();
+// 
+// 	// data sz
+// 	size_t data_sz = 0;
+// 	data_sz += sizeof(int32_t);
+// 	for (int i = 0; i < pic_sz; ++i) {
+// 		data_sz += m_pics[i]->Size();
+// 	}
+// 
+// 	// fill buffer
+// 	uint8_t* data_buf = new uint8_t[data_sz];
+// 	uint8_t* ptr_data = data_buf;
+// 	pack2mem(pic_sz, &ptr_data);
+// 	for (int i = 0; i < pic_sz; ++i) {
+// 		m_pics[i]->Store(&ptr_data);
+// 	}
+// 	assert(ptr_data - data_buf == data_sz);
+// 
+// 	// final
+// 	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
+// 	uint8_t* buf = new uint8_t[sz];
+// 	uint8_t* ptr = buf;
+// 	pack2mem(TYPE, &ptr);
+// 
+// 	int cap = dtex_rrp_size(data_buf, data_sz);
+// 	pack2mem(cap, &ptr);
+// 
+// 	memcpy(ptr, data_buf, data_sz);
+// 	delete[] data_buf;
+// 
+// 	// write to file
+// 	std::ofstream fout(outfile.c_str(), std::ios::binary);
+// 	if (compress)
+// 	{
+// 		uint8_t* dst = NULL;
+// 		size_t dst_sz;
+// 		Lzma::Compress(&dst, &dst_sz, buf, sz);
+// 
+// 		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+// 		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+// 	}
+// 	else
+// 	{
+// 		int _sz = -(int)sz;
+// 		fout.write(reinterpret_cast<const char*>(&_sz), sizeof(int32_t));
+// 		fout.write(reinterpret_cast<const char*>(buf), sz);
+// 	}
+// 	delete[] buf;
+// 	fout.close();
 }
 
 void BinaryRRP::LoadMulti(const std::string& json_file, const std::string& img_id_file)

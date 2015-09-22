@@ -1,9 +1,6 @@
 [submodule "editor-external"]
 	path = editor-external
 	url = ssh://git@oa.ejoy.com/users/zz/editor-external.git
-[submodule "epbin/external/dtex"]
-	path = epbin/external/dtex
-	url = ssh://git@oa.ejoy.com/users/zz/dtex.git
 [submodule "particle/src"]
 	path = particle/src
 	url = ssh://git@oa.ejoy.com/users/zz/ps.git

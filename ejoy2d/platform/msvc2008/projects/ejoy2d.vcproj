@@ -186,6 +186,14 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\..\..\src\renderbuffer.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\renderbuffer.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\sprite.c"
 			>
 		</File>

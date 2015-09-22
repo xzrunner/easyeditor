@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\tools;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\tools;..\..\..\external\rg_etc1;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\tools;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\tools;..\..\..\external\rg_etc1;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -149,6 +149,14 @@
 			Name="loader"
 			>
 			<File
+				RelativePath="..\..\..\src\dtex_async.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_async.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_desc_loader.c"
 				>
 			</File>
@@ -173,6 +181,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_loader_new.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_loader_new.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_png.c"
 				>
 			</File>
@@ -186,6 +202,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_pvr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_stream_import.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_stream_import.h"
 				>
 			</File>
 			<File
@@ -256,6 +280,14 @@
 				RelativePath="..\..\..\src\dtex_rrr.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_sprite.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_sprite.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="utility"
@@ -266,14 +298,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_alloc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_async.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_async.h"
 				>
 			</File>
 			<File
@@ -304,6 +328,30 @@
 				RelativePath="..\..\..\src\dtex_vector.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="external"
+			>
+			<Filter
+				Name="rg_etc1"
+				>
+				<File
+					RelativePath="..\..\..\external\rg_etc1\rg_etc1.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\rg_etc1\rg_etc1.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\rg_etc1\rg_etc1_for_c.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\rg_etc1\rg_etc1_for_c.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\dtex_buffer.c"
@@ -363,14 +411,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\dtex_packer_ext.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_sprite.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_sprite.h"
 			>
 		</File>
 		<File

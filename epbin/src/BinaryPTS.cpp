@@ -8,7 +8,7 @@
 #include <fstream>
 #include <assert.h>
 
-#include <dtex_pts.h>
+//#include <dtex_pts.h>
 
 namespace epbin
 {
@@ -32,55 +32,55 @@ BinaryPTS::~BinaryPTS()
 
 void BinaryPTS::Pack(const std::string& outfile, bool compress) const
 {
-	int16_t pts_sz = m_pts.size();
-
-	// data sz
-	size_t data_sz = 0;
-	data_sz += sizeof(int16_t);
-	for (int i = 0; i < pts_sz; ++i) {
-		data_sz += m_pts[i]->Size();
-	}
-
-	// fill buffer
-	uint8_t* data_buf = new uint8_t[data_sz];
-	uint8_t* ptr_data = data_buf;
-	pack2mem(pts_sz, &ptr_data);
-	for (int i = 0; i < pts_sz; ++i) {
-		m_pts[i]->Store(&ptr_data);
-	}
-	assert(ptr_data - data_buf == data_sz);
-
-	// final
-	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
-	uint8_t* buf = new uint8_t[sz];
-	uint8_t* ptr = buf;
-	pack2mem(TYPE, &ptr);
-
- 	int cap = dtex_pts_size(data_buf, data_sz);
-	pack2mem(cap, &ptr);
-
-	memcpy(ptr, data_buf, data_sz);
-	delete[] data_buf;
-
-	// write to file
-	std::ofstream fout(outfile.c_str(), std::ios::binary);
-	if (compress)
-	{
-		uint8_t* dst = NULL;
-		size_t dst_sz;
-		Lzma::Compress(&dst, &dst_sz, buf, sz);
-
-		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
-		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
-	}
-	else
-	{
-		int _sz = -(int)sz;
-		fout.write(reinterpret_cast<const char*>(&_sz), sizeof(int32_t));
-		fout.write(reinterpret_cast<const char*>(buf), sz);
-	}
-	delete[] buf;
-	fout.close();
+// 	int16_t pts_sz = m_pts.size();
+// 
+// 	// data sz
+// 	size_t data_sz = 0;
+// 	data_sz += sizeof(int16_t);
+// 	for (int i = 0; i < pts_sz; ++i) {
+// 		data_sz += m_pts[i]->Size();
+// 	}
+// 
+// 	// fill buffer
+// 	uint8_t* data_buf = new uint8_t[data_sz];
+// 	uint8_t* ptr_data = data_buf;
+// 	pack2mem(pts_sz, &ptr_data);
+// 	for (int i = 0; i < pts_sz; ++i) {
+// 		m_pts[i]->Store(&ptr_data);
+// 	}
+// 	assert(ptr_data - data_buf == data_sz);
+// 
+// 	// final
+// 	size_t sz = data_sz + sizeof(uint8_t) + sizeof(uint32_t);
+// 	uint8_t* buf = new uint8_t[sz];
+// 	uint8_t* ptr = buf;
+// 	pack2mem(TYPE, &ptr);
+// 
+//  	int cap = dtex_pts_size(data_buf, data_sz);
+// 	pack2mem(cap, &ptr);
+// 
+// 	memcpy(ptr, data_buf, data_sz);
+// 	delete[] data_buf;
+// 
+// 	// write to file
+// 	std::ofstream fout(outfile.c_str(), std::ios::binary);
+// 	if (compress)
+// 	{
+// 		uint8_t* dst = NULL;
+// 		size_t dst_sz;
+// 		Lzma::Compress(&dst, &dst_sz, buf, sz);
+// 
+// 		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+// 		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+// 	}
+// 	else
+// 	{
+// 		int _sz = -(int)sz;
+// 		fout.write(reinterpret_cast<const char*>(&_sz), sizeof(int32_t));
+// 		fout.write(reinterpret_cast<const char*>(buf), sz);
+// 	}
+// 	delete[] buf;
+// 	fout.close();
 }
 
 static double _round(double number)
