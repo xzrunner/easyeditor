@@ -257,6 +257,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_package.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_package.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_pts.c"
 				>
 			</File>
@@ -301,6 +309,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_buffer.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_buffer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_file.c"
 				>
 			</File>
@@ -309,7 +325,39 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_file_common.c"
+				RelativePath="..\..\..\src\dtex_log.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_log.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_math.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer_ext.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer_ext.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_typedef.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_typedef.h"
 				>
 			</File>
 			<File
@@ -353,92 +401,72 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\dtex_buffer.c"
+		<Filter
+			Name="render"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_buffer.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_draw.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_draw.h"
-			>
-		</File>
+			<File
+				RelativePath="..\..\..\src\dtex_draw.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_draw.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_fbo.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_fbo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_gl.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_gl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_screen.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_screen.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_shader.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_shader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_texture.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_texture.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_texture_pool.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_texture_pool.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\dtex_facade.c"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\src\dtex_facade.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_fbo.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_fbo.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_gl.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_gl.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_math.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_packer.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_packer.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_packer_ext.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_packer_ext.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_texture.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_texture.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_texture_pool.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_texture_pool.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_typedef.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\dtex_typedef.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ejoy2d.h"
 			>
 		</File>
 		<File

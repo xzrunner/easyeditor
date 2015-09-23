@@ -3,9 +3,15 @@
 
 #include "EJScreen.h"
 
-#include <shader.h>
+#define STRINGIFY(A)  #A
+#include "SpriteShader.vert"
+#include "SpriteShader.frag"
+
 #include <ejoy2d.h>
+
 #include <dtex_facade.h>
+#include <dtex_shader.h>
+#include <dtex_screen.h>
 
 struct ej_package;
 
@@ -20,8 +26,6 @@ static const int TEX_H = 320 * 8;
 
 EJScreen* EJScreen::m_instance = NULL;
 bool EJScreen::m_loaded = false;
-
-static ej_package* PKG = NULL; 
 
 EJScreen* EJScreen::Instance()
 {
@@ -48,14 +52,14 @@ void EJScreen::Load()
 
 	CreateRes();
 
-	shader_load();
+	dtex_shader_load();
 }
 
 void EJScreen::Unload()
 {
 	ReleaseRes();
 
-	shader_unload();
+	dtex_shader_unload();
 }
 
 void EJScreen::Bind()
@@ -67,12 +71,12 @@ void EJScreen::Bind()
 
 void EJScreen::UnBind()
 {
- 	shader_flush();
+ 	dtex_shader_flush();
  	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
 
-	ej_screen info;
-	ejoy_get_screen(&info);
-	glViewport(0, 0, info.w, info.h);
+	float w, h, s;
+	dtex_get_screen(&w, &h, &s);
+	glViewport(0, 0, w, h);
 }
 
 int EJScreen::GetWidth() const
@@ -92,24 +96,20 @@ GLuint EJScreen::GetTexID() const
 
 void EJScreen::OnSize(int w, int h)
 {
-	ej_screen info;
-	info.w = w;
-	info.h = h;
-	info.scale = 1;
-	ejoy_set_screen(&info);
+	dtex_set_screen(w, h, 1);
 }
 
 void EJScreen::Clear()
 {
 //	glClearColor(0, 0, 0, 0);
-	glClearColor(0.1, 0.1, 0.1, 0.1);
+	glClearColor(0.5, 0.1, 0.1, 0.1);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void EJScreen::DebugDraw() const
 {
-	dtexf_debug_draw();
-	shader_flush();
+//	dtexf_debug_draw();
+	dtex_shader_flush();
 }
 
 void EJScreen::CreateRes()

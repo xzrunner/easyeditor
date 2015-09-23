@@ -6,8 +6,6 @@
 #include <vector>
 #include <easyejoy2d.h>
 
-struct ej_package;
-
 namespace tdtex
 {
 
@@ -23,11 +21,9 @@ public:
 
 private:
 	void LoadSprite(const std::string& pkg, const std::string& anim);
-	ej_package* LoadPackage(const std::string& pkg);
+	dtex_package* LoadPackage(const std::string& pkg);
 
 private:
-	std::vector<ej_package*> m_ej_pkgs;
-
 	std::vector<eejoy2d::EJSprite*> m_sprites;
 
 }; // TestC3

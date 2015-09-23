@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\external\dtex;..\..\..\..\ejoy2d\external\tools"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\dtex\src;..\..\..\..\drag2d\src\drag2d;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -261,38 +261,6 @@
 				Name="normal"
 				>
 				<File
-					RelativePath="..\..\..\src\testdtex\TestAsync.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestAsync.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestC1.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestC1.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestC2.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestC2.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestC2C3.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestC2C3.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\testdtex\TestC3.cpp"
 					>
 				</File>
@@ -300,78 +268,14 @@
 					RelativePath="..\..\..\src\testdtex\TestC3.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestEPP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestEPP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestSprite.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="format"
 				>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestETC1.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestETC1.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestPVR.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestPVR.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="regular rect"
 				>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestB4R_C3.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestB4R_C3.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3_PVR.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3_PVR.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestRRR_C3.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\testdtex\TestRRR_C3.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<File

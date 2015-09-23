@@ -4,7 +4,6 @@
 #include "particle3d.h"
 #include "particle2d.h"
 
-#include <lua.h>
 #include <stdint.h>
 
 #define TYPE_EMPTY 0
@@ -180,9 +179,6 @@ struct sprite_pack {
 };
 
 #define SIZEOF_PACK (sizeof(struct sprite_pack) + 2 * PTR_SIZE_DIFF - 2 * sizeof(int))
-
-int ejoy2d_spritepack(lua_State *L);
-void dump_pack(struct sprite_pack *pack);
 
 struct sprite_pack* ej_pkg_import(void* data, int sz, int texture, int max_id, int cap);
 

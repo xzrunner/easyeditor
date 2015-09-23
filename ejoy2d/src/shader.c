@@ -57,7 +57,7 @@ struct render_state {
 
 static struct render_state *RS = NULL;
 
-void lsprite_initrender(struct render *r);
+//void lsprite_initrender(struct render *r);
 
 void
 shader_init() {
@@ -79,8 +79,8 @@ shader_init() {
 	rs->R = render_init(&RA, rs->R, rsz);
 	texture_initrender(rs->R);
 	screen_initrender(rs->R);
-	label_initrender(rs->R);
-	lsprite_initrender(rs->R);
+//	label_initrender(rs->R);
+//	lsprite_initrender(rs->R);
 	renderbuffer_initrender(rs->R);
 
 	rs->current_program = -1;
@@ -168,8 +168,8 @@ shader_unload() {
 	struct render *R = RS->R;
 	texture_initrender(NULL);
 	screen_initrender(NULL);
-	label_initrender(NULL);
-	lsprite_initrender(NULL);
+//	label_initrender(NULL);
+//	lsprite_initrender(NULL);
 	renderbuffer_initrender(NULL);
 
 	render_exit(R);

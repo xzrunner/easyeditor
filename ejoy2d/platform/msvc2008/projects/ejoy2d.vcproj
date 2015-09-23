@@ -186,11 +186,15 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\renderbuffer.c"
+			RelativePath="..\..\..\src\ejoy2d.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\renderbuffer.h"
+			RelativePath="..\..\..\src\matrix.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\matrix.h"
 			>
 		</File>
 		<File

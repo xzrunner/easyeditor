@@ -42,9 +42,7 @@ void StageCanvas::OnSize(int w, int h)
 	//////////////////////////////////////////////////////////////////////////
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
-	if (scr) {
-		scr->OnSize(w, h);
-	}
+	scr->OnSize(w, h);
 }
 
 void StageCanvas::OnDrawSprites() const

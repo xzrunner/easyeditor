@@ -113,5 +113,3 @@ bool screen_is_poly_invisible(const float* points,int len,int stride)
 	}
 	return invisible;
 }
-
-

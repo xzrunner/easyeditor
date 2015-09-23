@@ -21,7 +21,7 @@ public:
 	int GetHeight() const;
 	GLuint GetTexID() const;
 
-	void OnSize(int w, int h);
+	static void OnSize(int w, int h);
 
 	void Clear();
 
