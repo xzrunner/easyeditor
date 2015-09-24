@@ -17,6 +17,7 @@
 // #include "TestEPP.h"
 
 #include <easyejoy2d.h>
+#include <dtex.h>
 
 namespace tdtex
 {
@@ -44,9 +45,9 @@ void StagePanel::Load()
 {
 	eejoy2d::EJScreen::Create();
 
-//	m_test = new TestDirect();
+	m_test = new TestDirect();
 //	m_test = new TestC3();
-	m_test = new TestC2();
+//	m_test = new TestC2();
 //	m_test = new TestC2C3();
 //	m_test = new TestC1();
 //	m_test = new TestAsync();
@@ -79,6 +80,8 @@ void StagePanel::Update()
 	if (m_test) {
 		m_test->Update();
 	}
+
+	PrintLog();
 }
 
 void StagePanel::Draw() const
@@ -86,6 +89,19 @@ void StagePanel::Draw() const
 	if (m_test) {
 		m_test->Draw();
 	}
+}
+
+void StagePanel::PrintLog() const
+{
+	static int COUNT = 0;
+
+	if (COUNT < 60 * 1) {
+		++COUNT;
+		return;
+	}
+
+	COUNT = 0;
+	wxLogDebug("drawcall: %d", dtex_get_drawcall());
 }
 
 }

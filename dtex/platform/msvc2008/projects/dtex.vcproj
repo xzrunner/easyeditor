@@ -353,6 +353,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_statistics.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_statistics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_typedef.c"
 				>
 			</File>

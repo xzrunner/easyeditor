@@ -167,11 +167,10 @@ void EJSprite::DrawQuad(struct ej_pack_picture* picture, const struct ej_srt* sr
 			memcpy(vb+10, tex_vb+4, 2*sizeof(float));
 			memcpy(vb+14, tex_vb+6, 2*sizeof(float));  
 			texid = new_texid;
-
-			dtex_shader_texture(texid);
-			dtex_shader_draw(vb);
 		}
 
+		dtex_shader_texture(texid);
+		dtex_shader_draw(vb);
 	}
 }
 

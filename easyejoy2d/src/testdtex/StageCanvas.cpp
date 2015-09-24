@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 
 #include <easyejoy2d.h>
+#include <dtex.h>
 
 namespace tdtex
 {
@@ -60,7 +61,9 @@ void StageCanvas::OnDrawSprites() const
 		eejoy2d::EJShader::Reset();
 		m_panel->Update();	// after EJShader::Reset()
 
+		dtex_stat_draw_start();
 		m_panel->Draw();
+		dtex_stat_draw_end();
 
  		assert(eejoy2d::EJScreen::Instance());
 

@@ -28,6 +28,9 @@ public:
 	void Draw() const;
 
 private:
+	void PrintLog() const;
+
+private:
 	ITest* m_test;
 
 }; // StagePanel
