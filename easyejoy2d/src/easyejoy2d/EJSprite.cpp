@@ -5,6 +5,8 @@
 #include <dtex_shader.h>
 #include <dtex_texture_pool.h>
 #include <dtex_screen.h>
+#include <dtex_typedef.h>
+#include <dtex_draw.h>
 
 #include <stdlib.h>
 #include <assert.h>
@@ -13,14 +15,14 @@ namespace eejoy2d
 {
 
 EJSprite::EJSprite(dtex_package* pkg, const char* name)
-	: m_ej_pkg(pkg->ej_pkg)
+	: m_pkg(pkg)
 	, m_ej_spr(NULL)
 {
 	LoadSprite(pkg, name);
 }
 
 EJSprite::EJSprite(ej_sprite* spr)
-	: m_ej_pkg(NULL)
+	: m_pkg(NULL)
 	, m_ej_spr(spr)
 {
 }
@@ -70,14 +72,14 @@ void EJSprite::LoadSprite(dtex_package* pkg, const char* name)
 
 ej_sprite* EJSprite::CreateSprite(int id)
 {
-	int sz = ej_sprite_size(m_ej_pkg, id);
+	int sz = ej_sprite_size(m_pkg->ej_pkg, id);
 	if (sz == 0) {
 		m_ej_spr = NULL;
 		return NULL;
 	}
 
 	ej_sprite* spr = (ej_sprite*)malloc(sz);
-	ej_sprite_init(spr, m_ej_pkg, id, sz);
+	ej_sprite_init(spr, m_pkg->ej_pkg, id, sz);
 
 	for (int i = 0; ; ++i) {
 		int childid = ej_sprite_component(spr, i);
@@ -102,7 +104,7 @@ ej_sprite* EJSprite::CreateSprite(int id)
 	return spr;
 }
 
-void EJSprite::Draw(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* ts)
+void EJSprite::Draw(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* ts) const
 {
 	struct ej_sprite_trans temp;
 	struct ej_matrix temp_matrix;
@@ -120,7 +122,7 @@ void EJSprite::Draw(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_
 }
 
 void EJSprite::DrawQuad(struct ej_pack_picture* picture, const struct ej_srt* srt, 
-						const struct ej_sprite_trans* arg)
+						const struct ej_sprite_trans* arg) const
 {
 	struct matrix tmp;
 	if (arg->mat == NULL) {
@@ -133,8 +135,17 @@ void EJSprite::DrawQuad(struct ej_pack_picture* picture, const struct ej_srt* sr
 	float vb[16];
 	for (int i = 0; i < picture->n; i++) {
 		struct ej_pack_quad* q = &picture->rect[i];
-		struct dtex_raw_tex* tex = dtex_pool_query(q->texid);
+
+		struct dtex_raw_tex* tex = NULL;
+		if (q->texid < QUAD_TEXID_IN_PKG_MAX) {
+			assert(q->texid < m_pkg->tex_size);
+			tex = m_pkg->textures[q->texid];
+		} else {
+			tex = dtex_pool_query(q->texid - QUAD_TEXID_IN_PKG_MAX);
+		}
+
 		dtex_shader_texture(tex->id);
+
 		for (int j = 0; j < 4; j++) {
 			int xx = q->screen_coord[j*2+0];
 			int yy = q->screen_coord[j*2+1];
@@ -144,17 +155,20 @@ void EJSprite::DrawQuad(struct ej_pack_picture* picture, const struct ej_srt* sr
 
 			float tx = q->texture_coord[j*2+0];
 			float ty = q->texture_coord[j*2+1];
+			tx /= tex->width;
+			ty /= tex->height;
 
-			vb[i*4+0] = vx;
-			vb[i*4+1] = vy;
-			vb[i*4+2] = tx;
-			vb[i*4+3] = ty;
+			vb[j*4+0] = vx;
+			vb[j*4+1] = vy;
+			vb[j*4+2] = tx;
+			vb[j*4+3] = ty;
 		}
+
 		dtex_shader_draw(vb);
 	}
 }
 
-void EJSprite::DrawAnim(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* t)
+void EJSprite::DrawAnim(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* t) const
 {
 	int frame = GetSpriteFrame(spr);
 	if (frame < 0) {
