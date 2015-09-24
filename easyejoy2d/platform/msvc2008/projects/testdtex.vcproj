@@ -254,12 +254,24 @@
 			Name="test"
 			>
 			<File
+				RelativePath="..\..\..\src\testdtex\ITest.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\testdtex\ITest.h"
 				>
 			</File>
 			<Filter
 				Name="normal"
 				>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC2.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\testdtex\TestC3.cpp"
 					>

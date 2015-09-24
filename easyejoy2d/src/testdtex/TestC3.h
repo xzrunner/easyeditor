@@ -20,9 +20,6 @@ public:
 	virtual void Draw() const;
 
 private:
-	dtex_package* LoadPackage(const std::string& pkg);
-
-private:
 	std::vector<eejoy2d::EJSprite*> m_sprites;
 
 }; // TestC3

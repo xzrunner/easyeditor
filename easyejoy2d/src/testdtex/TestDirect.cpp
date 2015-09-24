@@ -27,9 +27,9 @@ TestDirect::~TestDirect()
 
 void TestDirect::Load()
 {
-	dtex_package* pkg = LoadPackage("ui");
-	eejoy2d::EJSprite* spr = new eejoy2d::EJSprite(pkg, "zztest");
-	m_sprites.push_back(spr);
+	m_sprites.push_back(new eejoy2d::EJSprite(LoadPackage("c00001", true), "c00001_attack_1"));
+ 	m_sprites.push_back(new eejoy2d::EJSprite(LoadPackage("c00002", true), "c00002_attack01_1"));
+ 	m_sprites.push_back(new eejoy2d::EJSprite(LoadPackage("c00003", true), "c00003_attack01_1"));
 }
 
 void TestDirect::Update()
@@ -56,28 +56,6 @@ void TestDirect::Draw() const
 	}
 
 	scr->UnBind();
-}
-
-dtex_package* TestDirect::LoadPackage(const std::string& pkg_name)
-{
-	dtex_package* pkg = dtexf_preload_pkg(pkg_name.c_str(), (pkg_name + ".epe").c_str(), FILE_EPE);
-
-	int idx = 1;
-	while (true)
-	{
-		std::string path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".ept";
-		if (!d2d::FilenameTools::IsFileExist(path)) {
-			break;
-		}
-		dtex_package* _pkg = dtexf_preload_pkg(pkg_name.c_str(), path.c_str(), FILE_EPT);
-		assert(_pkg == pkg);
-	}
-
-	for (int i = 0; i < pkg->tex_size; ++i) {
-		dtexf_load_texture(pkg, i);
-	}
-
-	return pkg;
 }
 
 }
