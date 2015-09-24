@@ -36,13 +36,32 @@ void TestC3::Load()
 // 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "2003daoke3_cheer_1"));
 // 	}
 
+// 	{
+// 		dtex_package* pkg = LoadPackage("ui");
+// 		dtexf_c3_load_pkg(pkg, 0.35f);
+// 
+// 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "btn_skill_ok"));
+// 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "fighter_mark_arrow"));
+// 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "pic_guide_girl"));
+// 	}
+
 	{
-		dtex_package* pkg = LoadPackage("ui");
+		dtex_package* pkg = LoadPackage("c00001");
 		dtexf_c3_load_pkg(pkg, 0.35f);
 
-		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "btn_skill_ok"));
-		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "fighter_mark_arrow"));
-		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "pic_guide_girl"));
+		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00001_attack_1"));
+	}
+	{
+		dtex_package* pkg = LoadPackage("c00002");
+		dtexf_c3_load_pkg(pkg, 0.35f);
+
+		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00002_attack01_1"));
+	}
+	{
+		dtex_package* pkg = LoadPackage("c00003");
+		dtexf_c3_load_pkg(pkg, 0.35f);
+
+		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00003_attack01_1"));
 	}
 
 	dtexf_c3_load_pkg_end();
