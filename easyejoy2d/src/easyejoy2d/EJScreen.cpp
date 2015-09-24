@@ -8,10 +8,7 @@
 #include "SpriteShader.frag"
 
 #include <ejoy2d.h>
-
-#include <dtex_facade.h>
-#include <dtex_shader.h>
-#include <dtex_screen.h>
+#include <dtex.h>
 
 struct ej_package;
 
@@ -108,7 +105,7 @@ void EJScreen::Clear()
 
 void EJScreen::DebugDraw() const
 {
-//	dtexf_debug_draw();
+	dtexf_debug_draw();
 	dtex_shader_flush();
 }
 

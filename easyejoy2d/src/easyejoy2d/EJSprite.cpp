@@ -1,12 +1,7 @@
 #include "EJSprite.h"
 #include "EJScreen.h"
 
-#include <dtex_package.h>
-#include <dtex_shader.h>
-#include <dtex_texture_pool.h>
-#include <dtex_screen.h>
-#include <dtex_typedef.h>
-#include <dtex_draw.h>
+#include <dtex.h>
 
 #include <stdlib.h>
 #include <assert.h>

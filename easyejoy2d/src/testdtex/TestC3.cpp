@@ -2,7 +2,7 @@
 
 #include <easyejoy2d.h>
 
-#include <dtex_facade.h>
+#include <dtex.h>
 
 namespace tdtex
 {
@@ -98,7 +98,7 @@ void TestC3::Load()
 
 	LoadSprite("ui", "zztest");	
 
-	dtexf_c3_load_pkg_finish();
+	dtexf_c3_load_pkg_end();
 }
 
 void TestC3::Update()

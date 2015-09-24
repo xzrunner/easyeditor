@@ -44,8 +44,8 @@ void StagePanel::Load()
 {
 	eejoy2d::EJScreen::Create();
 
-	m_test = new TestDirect();
-//	m_test = new TestC3();
+//	m_test = new TestDirect();
+	m_test = new TestC3();
 //	m_test = new TestC2();
 //	m_test = new TestC2C3();
 //	m_test = new TestC1();

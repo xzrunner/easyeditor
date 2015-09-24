@@ -1,9 +1,7 @@
 #include "TestDirect.h"
 
 #include <easyejoy2d.h>
-
-#include <dtex_facade.h>
-#include <dtex_package.h>
+#include <dtex.h>
 
 namespace tdtex
 {

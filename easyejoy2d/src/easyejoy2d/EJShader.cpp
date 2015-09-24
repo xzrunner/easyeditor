@@ -1,6 +1,6 @@
 #include "EJShader.h"
 
-#include <dtex_shader.h>
+#include <dtex.h>
 
 namespace eejoy2d
 {

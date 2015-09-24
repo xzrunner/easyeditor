@@ -1,7 +1,7 @@
 //#include "PackageMgr.h"
 //
 //#include <drag2d.h>
-//#include <dtex_facade.h>
+//#include <dtex.h>
 //
 //namespace eejoy2d
 //{
