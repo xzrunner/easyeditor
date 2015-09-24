@@ -400,6 +400,38 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="ejoy2d"
+				>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\ejoy2d.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\matrix.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\matrix.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\sprite.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\sprite.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\spritepack.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\spritepack.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="render"
@@ -461,6 +493,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\dtex.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\dtex_facade.c"
 			>
