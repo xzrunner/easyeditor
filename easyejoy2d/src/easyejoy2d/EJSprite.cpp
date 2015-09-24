@@ -37,10 +37,10 @@ void EJSprite::Update()
 void EJSprite::Draw(int x, int y) const
 {
 	struct ej_srt srt;
-	srt.offx = x;
-	srt.offy = y;
+	srt.offx = x * 16 - 5000;
+	srt.offy = y * 16 - 5000;
 	srt.rot = 0;
-	srt.scalex = srt.scaley = 1024;
+	srt.scalex = srt.scaley = 128;
 
 	Draw(m_ej_spr, &srt, NULL);
 }

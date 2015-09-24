@@ -20,7 +20,6 @@ public:
 	virtual void Draw() const;
 
 private:
-	void LoadSprite(const std::string& pkg, const std::string& anim);
 	dtex_package* LoadPackage(const std::string& pkg);
 
 private:
