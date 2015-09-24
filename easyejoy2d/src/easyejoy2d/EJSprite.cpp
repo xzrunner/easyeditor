@@ -139,8 +139,6 @@ void EJSprite::DrawQuad(struct ej_pack_picture* picture, const struct ej_srt* sr
 			tex = dtex_pool_query(q->texid - QUAD_TEXID_IN_PKG_MAX);
 		}
 
-		dtex_shader_texture(tex->id);
-
 		for (int j = 0; j < 4; j++) {
 			int xx = q->screen_coord[j*2+0];
 			int yy = q->screen_coord[j*2+1];
@@ -159,7 +157,21 @@ void EJSprite::DrawQuad(struct ej_pack_picture* picture, const struct ej_srt* sr
 			vb[j*4+3] = ty;
 		}
 
-		dtex_shader_draw(vb);
+		int texid = tex->id;
+
+		int new_texid = 0;
+		float* tex_vb = dtexf_c2_lookup_texcoords(tex, vb, &new_texid);
+		if (tex_vb != NULL) {
+			memcpy(vb+2, tex_vb, 2*sizeof(float));
+			memcpy(vb+6, tex_vb+2, 2*sizeof(float));
+			memcpy(vb+10, tex_vb+4, 2*sizeof(float));
+			memcpy(vb+14, tex_vb+6, 2*sizeof(float));  
+			texid = new_texid;
+
+			dtex_shader_texture(texid);
+			dtex_shader_draw(vb);
+		}
+
 	}
 }
 
