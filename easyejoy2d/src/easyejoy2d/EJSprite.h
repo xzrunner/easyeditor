@@ -30,6 +30,8 @@ public:
 private:
 	void LoadSprite(dtex_package* pkg, const char* name);
 
+	ej_sprite* CreateSprite(int id);
+
 	static void Draw(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* ts);
 	static void DrawQuad(struct ej_pack_picture* pic, const struct ej_srt* srt, const struct ej_sprite_trans* arg);
 	static void DrawAnim(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* t);

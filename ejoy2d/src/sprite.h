@@ -61,4 +61,9 @@ int sprite_setframe(struct sprite *, int frame, bool force_child);
 
 struct sprite_trans * sprite_trans_mul(struct sprite_trans *a, struct sprite_trans *b, struct sprite_trans *t, struct matrix *tmp_matrix);
 
+// return sprite id in pack, -1 for end
+int sprite_component(struct sprite *, int index);
+const char * sprite_childname(struct sprite *, int index);
+void sprite_mount(struct sprite *, int index, struct sprite *);
+
 #endif

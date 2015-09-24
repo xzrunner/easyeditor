@@ -32,6 +32,9 @@ extern "C"
 #define ej_sprite_size		sprite_size
 #define ej_sprite_init		sprite_init
 #define ej_sprite_trans_mul	sprite_trans_mul
+#define ej_sprite_component	sprite_component
+#define ej_sprite_childname	sprite_childname
+#define ej_sprite_mount		sprite_mount
 
 #endif // ejoy2d_h
 

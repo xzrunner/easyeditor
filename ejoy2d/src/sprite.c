@@ -131,47 +131,6 @@ sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
 	}
 }
 
-void
-sprite_mount(struct sprite *parent, int index, struct sprite *child) {
-	assert(parent->type == TYPE_ANIMATION || parent->type == TYPE_PARTICLE3D || parent->type == TYPE_PARTICLE2D);
-
-	int num = 0;
-	if (parent->type == TYPE_ANIMATION) {
-		struct pack_animation *ani = parent->s.ani;
-		num = ani->component_number;
-	} else if (parent->type == TYPE_PARTICLE3D) {
-		struct pack_particle3d* p3d = parent->s.p3d;
-		num = p3d->cfg.symbol_count;
-	} else if (parent->type == TYPE_PARTICLE2D) {
-		struct pack_particle2d* p2d = parent->s.p2d;
-		num = p2d->cfg.symbol_count;
-	}
-	
-	assert(index >= 0 && index < num);
-	struct sprite * oldc = parent->data.children[index];
-	if (oldc) {
-		oldc->parent = NULL;
-		oldc->name = NULL;
-	}
-	parent->data.children[index] = child;
-	if (child) {
-		assert(child->parent == NULL);
-		if (parent->type == TYPE_ANIMATION &&
-			(child->flags & SPRFLAG_MULTIMOUNT) == 0) {
-			struct pack_animation *ani = parent->s.ani;
-			child->name = ani->component[index].name;
-			child->parent = parent;
-		}
-		if (oldc && oldc->type == TYPE_ANCHOR) {
-			if(oldc->flags & SPRFLAG_MESSAGE) {
-				child->flags |= SPRFLAG_MESSAGE;
-			} else {
-				child->flags &= ~SPRFLAG_MESSAGE;
-			}
-		}
-	}
-}
-
 static inline int
 propagate_frame(struct sprite *s, int i, bool force_child) {
 	struct sprite *child = s->data.children[i];
@@ -295,4 +254,82 @@ sprite_trans_mul(struct sprite_trans *a, struct sprite_trans *b, struct sprite_t
 	}
 
 	return t;
+}
+
+int
+sprite_component(struct sprite *s, int index) {
+	if (s->type == TYPE_ANIMATION) {
+		struct pack_animation *ani = s->s.ani;
+		if (index < 0 || index >= ani->component_number) {
+			return -1;
+		}
+		return ani->component[index].id;
+	} else if (s->type == TYPE_PARTICLE3D) {
+		struct pack_particle3d* pp = (struct pack_particle3d*)s->s.p3d;
+		if (index < 0 || index >= pp->cfg.symbol_count) {
+			return -1;
+		}
+		uint32_t id = (uint32_t)pp->cfg.symbols[index].ud;
+		return (id >> 16) & 0xffff;
+	} else if (s->type == TYPE_PARTICLE2D) {
+		struct pack_particle2d* pp = (struct pack_particle2d*)s->s.p2d;
+		if (index < 0 || index >= pp->cfg.symbol_count) {
+			return -1;
+		}
+		uint32_t id = (uint32_t)pp->cfg.symbols[index].ud;
+		return (id >> 16) & 0xffff;		
+	} else {
+		return -1;
+	}
+}
+
+const char *
+sprite_childname(struct sprite *s, int index) {
+	if (s->type != TYPE_ANIMATION)
+		return NULL;
+	struct pack_animation *ani = s->s.ani;
+	if (index < 0 || index >= ani->component_number)
+		return NULL;
+	return ani->component[index].name;
+}
+
+void
+sprite_mount(struct sprite *parent, int index, struct sprite *child) {
+	assert(parent->type == TYPE_ANIMATION || parent->type == TYPE_PARTICLE3D || parent->type == TYPE_PARTICLE2D);
+
+	int num = 0;
+	if (parent->type == TYPE_ANIMATION) {
+		struct pack_animation *ani = parent->s.ani;
+		num = ani->component_number;
+	} else if (parent->type == TYPE_PARTICLE3D) {
+		struct pack_particle3d* p3d = parent->s.p3d;
+		num = p3d->cfg.symbol_count;
+	} else if (parent->type == TYPE_PARTICLE2D) {
+		struct pack_particle2d* p2d = parent->s.p2d;
+		num = p2d->cfg.symbol_count;
+	}
+
+	assert(index >= 0 && index < num);
+	struct sprite * oldc = parent->data.children[index];
+	if (oldc) {
+		oldc->parent = NULL;
+		oldc->name = NULL;
+	}
+	parent->data.children[index] = child;
+	if (child) {
+		assert(child->parent == NULL);
+		if (parent->type == TYPE_ANIMATION &&
+			(child->flags & SPRFLAG_MULTIMOUNT) == 0) {
+				struct pack_animation *ani = parent->s.ani;
+				child->name = ani->component[index].name;
+				child->parent = parent;
+		}
+		if (oldc && oldc->type == TYPE_ANCHOR) {
+			if(oldc->flags & SPRFLAG_MESSAGE) {
+				child->flags |= SPRFLAG_MESSAGE;
+			} else {
+				child->flags &= ~SPRFLAG_MESSAGE;
+			}
+		}
+	}
 }

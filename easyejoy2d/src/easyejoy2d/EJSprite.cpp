@@ -65,17 +65,41 @@ void EJSprite::LoadSprite(dtex_package* pkg, const char* name)
 {
 	int id = dtex_get_spr_id(pkg, name);
 	assert(id >= 0);
+	m_ej_spr = CreateSprite(id);
+}
 
+ej_sprite* EJSprite::CreateSprite(int id)
+{
 	int sz = ej_sprite_size(m_ej_pkg, id);
 	if (sz == 0) {
 		m_ej_spr = NULL;
-		return;
+		return NULL;
 	}
 
-	m_ej_spr = (ej_sprite*)malloc(sz);
-	ej_sprite_init(m_ej_spr, m_ej_pkg, id, sz);
+	ej_sprite* spr = (ej_sprite*)malloc(sz);
+	ej_sprite_init(spr, m_ej_pkg, id, sz);
 
-	// todo component mount
+	for (int i = 0; ; ++i) {
+		int childid = ej_sprite_component(spr, i);
+		if (childid < 0) {
+			break;
+		}
+
+		struct sprite* c = CreateSprite(childid);
+		if (c) {
+			c->name = ej_sprite_childname(spr, i);
+			sprite_mount(spr, i, c);
+// 			if (spr->type == TYPE_ANIMATION) {
+// 				update_anim_message(c, pack, id, i, spr->frame);
+// 			} else if (spr->type == TYPE_PARTICLE3D) {
+// 				update_p3d_message(c, pack, id, i);
+// 			} else if (spr->type == TYPE_PARTICLE2D) {
+// 				update_p2d_message(c, pack, id, i);
+// 			}
+		}
+	}
+
+	return spr;
 }
 
 void EJSprite::Draw(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* ts)
