@@ -501,6 +501,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="adapter"
+			>
+			<File
+				RelativePath="..\..\..\src\dtex_ej_utility.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_ej_utility.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\dtex.h"
 			>
