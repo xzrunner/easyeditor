@@ -273,6 +273,14 @@
 				Name="normal"
 				>
 				<File
+					RelativePath="..\..\..\src\testdtex\TestC1.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC1.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\testdtex\TestC2.cpp"
 					>
 				</File>
