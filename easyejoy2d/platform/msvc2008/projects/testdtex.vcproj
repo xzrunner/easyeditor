@@ -254,11 +254,19 @@
 			Name="test"
 			>
 			<File
-				RelativePath="..\..\..\src\testdtex\ITest.cpp"
+				RelativePath="..\..\..\src\testdtex\TestBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\testdtex\ITest.h"
+				RelativePath="..\..\..\src\testdtex\TestBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\Utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\Utility.h"
 				>
 			</File>
 			<Filter
@@ -281,11 +289,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\testdtex\TestDirect.cpp"
+					RelativePath="..\..\..\src\testdtex\TestLoad.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\testdtex\TestDirect.h"
+					RelativePath="..\..\..\src\testdtex\TestLoad.h"
 					>
 				</File>
 			</Filter>

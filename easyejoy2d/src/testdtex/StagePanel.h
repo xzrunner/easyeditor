@@ -1,7 +1,7 @@
 #ifndef _TEST_DTEX_STAGE_PANEL_H_
 #define _TEST_DTEX_STAGE_PANEL_H_
 
-#include "ITest.h"
+#include "TestBase.h"
 
 #include <drag2d.h>
 
@@ -31,7 +31,7 @@ private:
 	void PrintLog() const;
 
 private:
-	ITest* m_test;
+	TestBase* m_test;
 
 }; // StagePanel
 

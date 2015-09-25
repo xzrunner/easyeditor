@@ -1,7 +1,7 @@
 #ifndef _TEST_DTEX_TEST_C2_H_
 #define _TEST_DTEX_TEST_C2_H_
 
-#include "ITest.h"
+#include "TestBase.h"
 
 #include <vector>
 #include <easyejoy2d.h>
@@ -9,18 +9,13 @@
 namespace tdtex
 {
 
-class TestC2 : public ITest
+class TestC2 : public TestBase
 {
 public:
 	TestC2();
 	virtual ~TestC2();
 	
 	virtual void Load();
-	virtual void Update();
-	virtual void Draw() const;
-
-private:
-	std::vector<eejoy2d::EJSprite*> m_sprites;
 
 }; // TestC2
 

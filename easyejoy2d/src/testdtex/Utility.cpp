@@ -1,11 +1,11 @@
-#include "ITest.h"
+#include "Utility.h"
 
 #include <dtex.h>
 
 namespace tdtex
 {
 
-dtex_package* ITest::LoadPackage(const std::string& pkg_name, bool load_tex)
+dtex_package* Utility::LoadPackage(const std::string& pkg_name, bool load_tex)
 {
 	dtex_package* pkg = dtexf_preload_pkg(pkg_name.c_str(), (pkg_name + ".epe").c_str(), FILE_EPE);
 
