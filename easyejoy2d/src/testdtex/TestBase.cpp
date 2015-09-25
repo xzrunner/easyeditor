@@ -27,8 +27,14 @@ void TestBase::Draw() const
 	scr->Clear();
 
 	static const int COL = 5;
+	static const int EDGE = 200;
+	static const int OFFSET_X = -500;
+	static const int OFFSET_Y = -500;
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Draw((i%COL+1)*200, (std::floor((float)i/COL)+1)*200);
+		int x = (i % COL + 1) * EDGE + OFFSET_X;
+		int y = (std::floor((float)i / COL) + 1) * EDGE + OFFSET_Y;
+		m_sprites[i]->Draw(x, y);
 	}
 
 	scr->UnBind();
