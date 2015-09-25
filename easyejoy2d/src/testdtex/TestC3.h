@@ -12,10 +12,17 @@ namespace tdtex
 class TestC3 : public TestBase
 {
 public:
-	TestC3();
+	TestC3(bool need_preload_texture);
 	virtual ~TestC3();
 	
 	virtual void Load();
+
+private:
+	void LoadWithPreloadTex();
+	void LoadWithnotPreloadTex();
+
+private:
+	bool m_need_preload_texture;
 
 }; // TestC3
 
