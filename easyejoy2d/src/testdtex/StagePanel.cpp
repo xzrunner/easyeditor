@@ -45,9 +45,9 @@ void StagePanel::Load()
 {
 	eejoy2d::EJScreen::Create();
 
-	m_test = new TestDirect();
+//	m_test = new TestDirect();
 //	m_test = new TestC3();
-//	m_test = new TestC2();
+	m_test = new TestC2();
 //	m_test = new TestC2C3();
 //	m_test = new TestC1();
 //	m_test = new TestAsync();
@@ -101,7 +101,16 @@ void StagePanel::PrintLog() const
 	}
 
 	COUNT = 0;
-	wxLogDebug("drawcall: %d", dtex_get_drawcall());
+
+	wxLogDebug("drawcall: %d", dtex_stat_get_drawcall());
+
+	int tex_count;
+	struct stat_texture* tex_list;
+	dtex_stat_get_texture(&tex_count, &tex_list);
+	for (int i = 0; i < tex_count; ++i) {
+		struct stat_texture* tex = &tex_list[i];
+		wxLogDebug("tex %d: id[%d], width[%d], height[%d]", i, tex->id, tex->w, tex->h);
+	}
 }
 
 }
