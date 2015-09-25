@@ -9,7 +9,8 @@ namespace tdtex
 class Utility
 {
 public:
-	static dtex_package* LoadPackage(const std::string& pkg, bool load_tex = false);
+	static dtex_package* LoadPackage(const std::string& pkg, bool load_tex = false,
+		float scale = 1.0f);
 
 }; // Utility
 
