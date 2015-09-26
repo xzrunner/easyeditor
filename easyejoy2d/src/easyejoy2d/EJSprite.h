@@ -21,30 +21,18 @@ public:
 	void Update();
 	void Draw(int x, int y) const;
 
-	void Translate(int dx, int dy);
+//	void Translate(int dx, int dy);
 
 	void SetFrame(int frame);
 
 	ej_sprite* GetEjSpr() { return m_ej_spr; }
 
 private:
-	void LoadSprite(dtex_package* pkg, const char* name);
-
-	ej_sprite* CreateSprite(int id);
-
-	void Draw(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* ts) const;
-	void DrawQuad(struct ej_pack_picture* pic, const struct ej_srt* srt, const struct ej_sprite_trans* arg) const;
-	void DrawAnim(struct ej_sprite* spr, struct ej_srt* srt, struct ej_sprite_trans* t) const;
-
-	static int GetSpriteFrame(struct ej_sprite* spr);
-
-private:
-//	ej_sprite_pack* m_ej_pkg;
 	dtex_package* m_pkg;
 
 	ej_sprite* m_ej_spr;
 
-	ej_srt m_ej_srt;
+//	ej_srt m_ej_srt;
 
 }; // EJSprite
 
