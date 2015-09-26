@@ -17,6 +17,9 @@ public:
 	void Update();
 
 protected:
+	virtual void OnUpdate() {}
+
+protected:
 	std::vector<eejoy2d::EJSprite*> m_sprites;
 
 }; // TestBase

@@ -10,6 +10,8 @@ TestBase::~TestBase()
 
 void TestBase::Update()
 {
+	OnUpdate();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->Update();
 	}
