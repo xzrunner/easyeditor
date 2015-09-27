@@ -64,12 +64,15 @@ void EJScreen::Bind()
 	glViewport(0, 0, TEX_W, TEX_H);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+//	dtex_shader_target(m_fbo);
 }
 
 void EJScreen::UnBind()
 {
- 	dtex_shader_flush();
- 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
+	dtex_shader_flush();
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
+
+//	dtex_shader_target(d2d::ShaderMgr::Instance()->GetFboID());
 
 	float w, h, s;
 	dtex_get_screen(&w, &h, &s);

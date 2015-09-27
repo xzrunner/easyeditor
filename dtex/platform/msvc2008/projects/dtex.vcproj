@@ -461,14 +461,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_fbo.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_fbo.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dtex_gl.c"
 				>
 			</File>
@@ -490,6 +482,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_shader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_target.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_target.h"
 				>
 			</File>
 			<File
