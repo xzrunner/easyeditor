@@ -56,7 +56,7 @@ void TestC3::LoadWithPreloadTex()
 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00003_attack01_1"));
 	}
 
-	dtexf_c3_load_end();
+	dtexf_c3_load_end(false);
 }
 
 void TestC3::LoadWithnotPreloadTex()
@@ -80,7 +80,7 @@ void TestC3::LoadWithnotPreloadTex()
 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00003_attack01_1"));
 	}
 
-	dtexf_c3_load_end();
+	dtexf_c3_load_end(false);
 }
 
 }

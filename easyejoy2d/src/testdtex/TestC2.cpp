@@ -81,7 +81,7 @@ void TestC2::LoadFromC3()
 	dtexf_c3_load(pkg3, 0.1f);
 	m_sprites.push_back(new eejoy2d::EJSprite(pkg3, "c00003_attack01_1"));
 
-	dtexf_c3_load_end();
+	dtexf_c3_load_end(false);
 
 	// C2
 	dtexf_c2_load_begin();
