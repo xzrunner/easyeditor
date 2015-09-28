@@ -1,7 +1,7 @@
 #include "TestC1New.h"
 #include "utility.h"
 
-#include <dtex_facade.h>
+#include <dtex.h>
 
 namespace tdtex
 {

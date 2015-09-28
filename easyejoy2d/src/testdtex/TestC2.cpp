@@ -58,9 +58,9 @@ void TestC2::LoadFromPackage()
 	m_sprites.push_back(new eejoy2d::EJSprite(pkg3, "c00003_attack01_1"));
 
 	dtexf_c2_load_begin();
-	dtexf_c2_load(pkg1, "c00001_attack_1");
-	dtexf_c2_load(pkg2, "c00002_attack01_1");
-	dtexf_c2_load(pkg3, "c00003_attack01_1");
+	dtexf_c2_load(pkg1, dtex_get_spr_id(pkg1, "c00001_attack_1"));
+	dtexf_c2_load(pkg2, dtex_get_spr_id(pkg2, "c00002_attack01_1"));
+ 	dtexf_c2_load(pkg3, dtex_get_spr_id(pkg3, "c00003_attack01_1"));
 	dtexf_c2_load_end();
 }
 
@@ -85,9 +85,9 @@ void TestC2::LoadFromC3()
 
 	// C2
 	dtexf_c2_load_begin();
-	dtexf_c2_load(pkg1, "c00001_attack_1");
-	dtexf_c2_load(pkg2, "c00002_attack01_1");
-	dtexf_c2_load(pkg3, "c00003_attack01_1");
+	dtexf_c2_load(pkg1, dtex_get_spr_id(pkg1, "c00001_attack_1"));
+	dtexf_c2_load(pkg2, dtex_get_spr_id(pkg2, "c00002_attack01_1"));
+	dtexf_c2_load(pkg3, dtex_get_spr_id(pkg3, "c00003_attack01_1"));
 	dtexf_c2_load_end();
 }
 

@@ -1,7 +1,7 @@
 #include "TestAsyncLoad.h"
 #include "Utility.h"
 
-#include <dtex_facade.h>
+#include <dtex.h>
 
 namespace tdtex
 {
@@ -42,16 +42,23 @@ void TestAsyncLoad::OnUpdate()
 
 	if (frame == 100) {
 		wxLogDebug("+++++++++++ Async Load");
-		Utility::AsyncLoadTexture(m_packages[0], "c00001", 1.0f);
+		AsyncLoadTexture(m_packages[0]);
 	} else if (frame == 200) {
 		wxLogDebug("+++++++++++ Async Load");
-		Utility::AsyncLoadTexture(m_packages[1], "c00002", 0.5f);
+		AsyncLoadTexture(m_packages[1]);
 	} else if (frame == 300) {
 		wxLogDebug("+++++++++++ Async Load");
-		Utility::AsyncLoadTexture(m_packages[2], "c00003", 0.25f);
+		AsyncLoadTexture(m_packages[2]);
 	}
 
 	++frame;
+}
+
+void TestAsyncLoad::AsyncLoadTexture(dtex_package* pkg) 
+{
+	for (int i = 0; i < pkg->tex_size; ++i) {
+		dtexf_async_load_texture(pkg, i);
+	}	
 }
 
 }

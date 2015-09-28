@@ -18,6 +18,9 @@ protected:
 	virtual void OnUpdate();
 
 private:
+	static void AsyncLoadTexture(dtex_package* pkg);
+
+private:
  	std::vector<dtex_package*> m_packages;
 
 }; // TestAsyncLoad

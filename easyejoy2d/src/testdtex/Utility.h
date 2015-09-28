@@ -10,9 +10,7 @@ class Utility
 {
 public:
 	static dtex_package* LoadPackage(const std::string& pkg_name, float scale = 1.0f,
-		bool load_texture_immediately = false, bool load_texture_async = false);
-
-	static void AsyncLoadTexture(dtex_package* pkg, const std::string& pkg_name, float scale = 1.0f);
+		bool load_texture_immediately = false/*, bool load_texture_async = false*/);
 
 }; // Utility
 
