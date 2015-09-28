@@ -25,7 +25,7 @@ TestC1::~TestC1()
 
 void TestC1::Load()
 {
-	m_pkg = Utility::LoadPackage("c00001", true, 1.0f);
+	m_pkg = Utility::LoadPackage("c00001", 1.0f, true);
 	m_spr = new eejoy2d::EJSprite(m_pkg, "c00001_attack_1");
 
 //	m_sprites.push_back();

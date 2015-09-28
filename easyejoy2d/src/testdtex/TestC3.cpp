@@ -38,19 +38,19 @@ void TestC3::Load()
 void TestC3::LoadWithPreloadTex()
 {
 	{
-		dtex_package* pkg = Utility::LoadPackage("c00001", true, 0.5f);
+		dtex_package* pkg = Utility::LoadPackage("c00001", 0.5f, true);
 		dtexf_c3_load(pkg, 1);
 
 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00001_attack_1"));
 	}
 	{
-		dtex_package* pkg = Utility::LoadPackage("c00002", true, 0.25f);
+		dtex_package* pkg = Utility::LoadPackage("c00002", 0.25f, true);
 		dtexf_c3_load(pkg, 1);
 
 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00002_attack01_1"));
 	}
 	{
-		dtex_package* pkg = Utility::LoadPackage("c00003", true, 0.1f);
+		dtex_package* pkg = Utility::LoadPackage("c00003", 0.1f, true);
 		dtexf_c3_load(pkg, 1);
 
 		m_sprites.push_back(new eejoy2d::EJSprite(pkg, "c00003_attack01_1"));

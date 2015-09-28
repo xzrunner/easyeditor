@@ -157,6 +157,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_async_loader.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_async_loader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_desc_loader.c"
 				>
 			</File>
@@ -170,6 +178,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_etc1.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_job_queue.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_job_queue.h"
 				>
 			</File>
 			<File

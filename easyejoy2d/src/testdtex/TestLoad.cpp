@@ -26,9 +26,9 @@ TestLoad::~TestLoad()
 
 void TestLoad::Load()
 {
-	m_sprites.push_back(new eejoy2d::EJSprite(Utility::LoadPackage("c00001", true, 1.0f), "c00001_attack_1"));
- 	m_sprites.push_back(new eejoy2d::EJSprite(Utility::LoadPackage("c00002", true, 0.5f), "c00002_attack01_1"));
- 	m_sprites.push_back(new eejoy2d::EJSprite(Utility::LoadPackage("c00003", true, 0.25f), "c00003_attack01_1"));
+	m_sprites.push_back(new eejoy2d::EJSprite(Utility::LoadPackage("c00001", 1.0f, true), "c00001_attack_1"));
+ 	m_sprites.push_back(new eejoy2d::EJSprite(Utility::LoadPackage("c00002", 0.5f, true), "c00002_attack01_1"));
+ 	m_sprites.push_back(new eejoy2d::EJSprite(Utility::LoadPackage("c00003", 0.25f, true), "c00003_attack01_1"));
 }
 
 }

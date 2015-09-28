@@ -48,13 +48,13 @@ void TestC2::LoadFromPackage()
 {
 	dtex_package *pkg1, *pkg2, *pkg3;
 
-	pkg1 = Utility::LoadPackage("c00001", true, 1.0f);
+	pkg1 = Utility::LoadPackage("c00001", 1.0f, true);
 	m_sprites.push_back(new eejoy2d::EJSprite(pkg1, "c00001_attack_1"));
 
-	pkg2 = Utility::LoadPackage("c00002", true, 0.5f);
+	pkg2 = Utility::LoadPackage("c00002", 0.5f, true);
 	m_sprites.push_back(new eejoy2d::EJSprite(pkg2, "c00002_attack01_1"));
 
-	pkg3 = Utility::LoadPackage("c00003", true, 0.25f);
+	pkg3 = Utility::LoadPackage("c00003", 0.25f, true);
 	m_sprites.push_back(new eejoy2d::EJSprite(pkg3, "c00003_attack01_1"));
 
 	dtexf_c2_load_begin();

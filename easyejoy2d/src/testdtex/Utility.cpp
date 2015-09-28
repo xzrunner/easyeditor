@@ -5,7 +5,8 @@
 namespace tdtex
 {
 
-dtex_package* Utility::LoadPackage(const std::string& pkg_name, bool load_tex, float scale)
+dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
+								   bool load_texture_immediately, bool load_texture_async)
 {
 	dtex_package* pkg = dtexf_preload_pkg(pkg_name.c_str(), (pkg_name + ".epe").c_str(), FILE_EPE, scale);
 
@@ -20,13 +21,28 @@ dtex_package* Utility::LoadPackage(const std::string& pkg_name, bool load_tex, f
 		assert(_pkg == pkg);
 	}
 
-	if (load_tex) {
+	if (load_texture_immediately) {
 		for (int i = 0; i < pkg->tex_size; ++i) {
 			dtexf_load_texture(pkg, i, scale);
 		}
 	}
 
+	if (load_texture_async) {
+		for (int i = 0; i < pkg->tex_size; ++i) {
+			std::string filepath = pkg_name	+ "." + d2d::StringTools::ToString(i+1) + ".ept";
+			dtex_async_load_file(filepath.c_str(), FILE_EPT, pkg, i, scale);
+		}
+	} 
+
 	return pkg;
+}
+
+void Utility::AsyncLoadTexture(dtex_package* pkg, const std::string& pkg_name, float scale) 
+{
+	for (int i = 0; i < pkg->tex_size; ++i) {
+		std::string filepath = pkg_name	+ "." + d2d::StringTools::ToString(i+1) + ".ept";
+		dtex_async_load_file(filepath.c_str(), FILE_EPT, pkg, i, scale);
+	}	
 }
 
 }

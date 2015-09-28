@@ -9,8 +9,10 @@ namespace tdtex
 class Utility
 {
 public:
-	static dtex_package* LoadPackage(const std::string& pkg, bool load_tex = false,
-		float scale = 1.0f);
+	static dtex_package* LoadPackage(const std::string& pkg_name, float scale = 1.0f,
+		bool load_texture_immediately = false, bool load_texture_async = false);
+
+	static void AsyncLoadTexture(dtex_package* pkg, const std::string& pkg_name, float scale = 1.0f);
 
 }; // Utility
 

@@ -321,6 +321,26 @@
 				Name="regular rect"
 				>
 			</Filter>
+			<Filter
+				Name="async"
+				>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestAsync.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestAsync.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestAsyncLoad.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestAsyncLoad.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
