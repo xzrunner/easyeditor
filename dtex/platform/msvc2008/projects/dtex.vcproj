@@ -357,6 +357,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_array.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_array.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_buffer.c"
 				>
 			</File>
@@ -385,19 +393,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_packer.c"
+				RelativePath="..\..\..\src\dtex_relocation.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_packer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_packer_ext.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_packer_ext.h"
+				RelativePath="..\..\..\src\dtex_relocation.h"
 				>
 			</File>
 			<File
@@ -425,11 +425,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_vector.c"
+				RelativePath="..\..\..\src\dtex_utility2.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_vector.h"
+				RelativePath="..\..\..\src\dtex_utility2.h"
 				>
 			</File>
 		</Filter>
@@ -566,6 +566,26 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_ej_utility.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="packer"
+			>
+			<File
+				RelativePath="..\..\..\src\dtex_packer.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer_ext.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_packer_ext.h"
 				>
 			</File>
 		</Filter>

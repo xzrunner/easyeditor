@@ -9,8 +9,10 @@
 
 // #include "TestAsync.h"
 #include "TestAsyncLoad.h"
-#include "TestAsyncC2.h"
 #include "TestAsyncC3.h"
+#include "TestAsyncC2.h"
+#include "TestAsyncC1.h"
+#include "TestAsyncC3C2.h"
 
 // #include "TestSprite.h"
 // #include "TestPVR.h"
@@ -58,8 +60,10 @@ void StagePanel::Load()
 
 	// async
 //	m_test = new TestAsyncLoad();
+//	m_test = new TestAsyncC3();
 //	m_test = new TestAsyncC2();
-	m_test = new TestAsyncC3();
+//	m_test = new TestAsyncC1();
+	m_test = new TestAsyncC3C2();
 
 //	m_test = new TestSprite();
 
