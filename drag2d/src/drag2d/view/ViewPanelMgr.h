@@ -30,6 +30,7 @@ public:
 
 	void SelectShape(IShape* shape, IShapeViewPanel* expect);
 	void SelectMultiShapes(ShapeSelection* selection, IShapeViewPanel* expect);
+	void RemoveShape(IShape* shape, IShapeViewPanel* expect);
 
 	int GetSelection() const;
 	void SetViewlistPanel(ViewlistPanel* viewlist);

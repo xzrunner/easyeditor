@@ -35,6 +35,7 @@ public:
 	//
 	virtual void SelectShape(IShape* shape);
 	virtual void SelectMultiShapes(ShapeSelection* selection);
+	virtual void RemoveShape(IShape* shape);
 
 	void SetPropertySetting(IPropertySetting* setting);
 

@@ -60,23 +60,22 @@ void StagePanel::Clear()
 	ClearAllShapes();
 }
 
+void StagePanel::RemoveShape(d2d::IShape* shape)
+{
+	bool dirty = false;
+	if (m_symbol) {
+		dirty = m_symbol->Remove(shape);
+	}
+	if (dirty) {
+		GetCanvas()->SetDirty();
+	}
+}
+
 bool StagePanel::InsertShape(d2d::IShape* shape)
 {
 	bool ret = false;
 	if (m_symbol) {
 		ret = m_symbol->Add(shape);
-	}
-	if (ret) {
-		GetCanvas()->SetDirty();
-	}
-	return ret;
-}
-
-bool StagePanel::RemoveShape(d2d::IShape* shape)
-{
-	bool ret = false;
-	if (m_symbol) {
-		ret = m_symbol->Remove(shape);
 	}
 	if (ret) {
 		GetCanvas()->SetDirty();

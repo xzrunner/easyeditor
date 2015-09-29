@@ -148,6 +148,24 @@ void ViewPanelMgr::SelectMultiShapes(ShapeSelection* selection, IShapeViewPanel*
 	m_locked = false;
 }
 
+void ViewPanelMgr::RemoveShape(IShape* shape, IShapeViewPanel* expect)
+{
+	if (m_locked) {
+		return;
+	} else {
+		m_locked = true;
+	}
+
+	for (int i = 0, n = m_shape_panels.size(); i < n; ++i) {
+		if (m_shape_panels[i] == expect) {
+			continue;
+		}
+		m_shape_panels[i]->RemoveShape(shape);
+	}
+
+	m_locked = false;
+}
+
 int ViewPanelMgr::GetSelection() const
 {
 	if (m_viewlist) {

@@ -241,21 +241,23 @@ bool StagePanel::InsertShape(d2d::IShape* shape)
 	return ret;
 }
 
-bool StagePanel::RemoveShape(d2d::IShape* shape)
+void StagePanel::RemoveShape(d2d::IShape* shape)
 {
-	bool ret = false;
+	bool dirty = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->RemoveShape(shape)) {
-			ret = true;
+			dirty = true;
 			break;
 		}
 	}
-	if (ret) {
+	if (m_view_panel_mgr && dirty) {
+		m_view_panel_mgr->RemoveShape(shape, this);
+	}
+	if (dirty) {
 		SetCanvasDirty();
 	}
-	return ret;
 }
 
 bool StagePanel::ClearAllShapes()

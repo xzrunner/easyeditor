@@ -17,10 +17,14 @@ public:
 	virtual ~ShapesPanelImpl();
 
 	//
+	//	interface IShapeViewPanel
+	//
+	virtual void RemoveShape(IShape* shape);
+
+	//
 	// MultiShapesImpl interface
 	//
 	virtual bool InsertShape(IShape* shape);
-	virtual bool RemoveShape(IShape* shape);
 	virtual bool ClearAllShapes();
 	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const;

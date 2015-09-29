@@ -23,13 +23,13 @@ public:
 	virtual ~MultiShapesImpl();
 
 	//
-	//	interface IShapeViewPanel
+	//	IShapeViewPanel interface
 	//
 	virtual void SelectShape(IShape* shape);
 	virtual void SelectMultiShapes(ShapeSelection* selection);
+	virtual void RemoveShape(IShape* shape);
 
 	virtual bool InsertShape(IShape* shape) = 0;
-	virtual bool RemoveShape(IShape* shape) = 0;
 	virtual bool ClearAllShapes() = 0;
 
 	virtual void TraverseShapes(IVisitor& visitor, 

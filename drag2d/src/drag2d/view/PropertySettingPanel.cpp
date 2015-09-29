@@ -89,6 +89,11 @@ void PropertySettingPanel::SelectMultiShapes(ShapeSelection* selection)
 	}
 }
 
+void PropertySettingPanel::RemoveShape(IShape* shape)
+{
+	SetPropertySetting(CreateDefaultProperty());
+}
+
 void PropertySettingPanel::SetPropertySetting(IPropertySetting* setting)
 {
 	delete m_setting;

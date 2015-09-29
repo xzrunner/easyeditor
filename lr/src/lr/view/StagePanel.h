@@ -41,8 +41,8 @@ public:
 	//
 	// d2d::MultiShapesImpl interface
 	//
+	virtual void RemoveShape(d2d::IShape* shape);
 	virtual bool InsertShape(d2d::IShape* shape);
-	virtual bool RemoveShape(d2d::IShape* shape);
 	virtual bool ClearAllShapes();
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;

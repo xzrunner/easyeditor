@@ -30,18 +30,17 @@ ShapesPanelImpl::~ShapesPanelImpl()
 	m_container->Release();
 }
 
+void ShapesPanelImpl::RemoveShape(IShape* shape)
+{
+	bool dirty = m_container->Remove(shape);
+	if (dirty) {
+		m_stage->SetCanvasDirty();
+	}
+}
+
 bool ShapesPanelImpl::InsertShape(IShape* shape)
 {
 	bool ret = m_container->Insert(shape);
-	if (ret) {
-		m_stage->SetCanvasDirty();
-	}
-	return ret;
-}
-
-bool ShapesPanelImpl::RemoveShape(IShape* shape)
-{
-	bool ret = m_container->Remove(shape);
 	if (ret) {
 		m_stage->SetCanvasDirty();
 	}

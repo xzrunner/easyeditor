@@ -24,6 +24,10 @@ void MultiShapesImpl::SelectMultiShapes(ShapeSelection* selection)
 {
 }
 
+void MultiShapesImpl::RemoveShape(IShape* shape)
+{
+}
+
 IShape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
 {
 	IShape* result = NULL;
