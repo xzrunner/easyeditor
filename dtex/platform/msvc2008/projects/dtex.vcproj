@@ -540,14 +540,6 @@
 				RelativePath="..\..\..\src\dtex_texture.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_texture_pool.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_texture_pool.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="adapter"

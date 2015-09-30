@@ -12,6 +12,7 @@
 #include "TestAsyncC3.h"
 #include "TestAsyncC2.h"
 #include "TestAsyncC1.h"
+#include "TestAsyncC3Load.h"
 #include "TestAsyncC3C2.h"
 
 // #include "TestSprite.h"
@@ -55,7 +56,7 @@ void StagePanel::Load()
 	// normal
 //	m_test = new TestLoad();
 //	m_test = new TestC3(true);
-//	m_test = new TestC2(false);
+//	m_test = new TestC2(true);
 //	m_test = new TestC1();
 
 	// async
@@ -63,7 +64,8 @@ void StagePanel::Load()
 //	m_test = new TestAsyncC3();
 //	m_test = new TestAsyncC2();
 //	m_test = new TestAsyncC1();
-	m_test = new TestAsyncC3C2();
+	m_test = new TestAsyncC3Load();
+//	m_test = new TestAsyncC3C2();
 
 //	m_test = new TestSprite();
 

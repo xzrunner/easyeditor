@@ -35,7 +35,7 @@ void TestAsyncC3C2::Load()
 // 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[1], "c00002_attack01_1"));
 // 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[2], "c00003_attack01_1"));
 
-	dtexf_c3_load(m_packages[0], 0.5f);
+	dtexf_c3_load(m_packages[0], 0.25f);
 // 	dtexf_c3_load(m_packages[1], 0.25f);
 // 	dtexf_c3_load(m_packages[2], 0.1f);
 

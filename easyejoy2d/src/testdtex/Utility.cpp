@@ -22,7 +22,7 @@ dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
 	}
 
 	if (load_texture_immediately) {
-		for (int i = 0; i < pkg->tex_size; ++i) {
+		for (int i = 0; i < pkg->texture_count; ++i) {
 			dtexf_load_texture(pkg, i, scale);
 		}
 	}

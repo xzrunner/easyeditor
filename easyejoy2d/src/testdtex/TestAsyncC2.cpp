@@ -43,7 +43,7 @@ void TestAsyncC2::OnUpdate()
 // 	if (frame == 10) {
 //    		wxLogDebug("+++++++++++ Async Load");
 //    		int* sprite_ids = new int[1];
-//    		sprite_ids[0] = dtex_get_spr_id(m_packages[0], "c00002_attack01_1");
+//    		sprite_ids[0] = dtex_get_spr_id(m_packages[0], "c00001_attack_1");
 //    		dtexf_async_load_texture_with_c2(m_packages[0], sprite_ids, 1);
 // 	}
 

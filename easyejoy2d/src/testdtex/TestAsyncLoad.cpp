@@ -56,7 +56,7 @@ void TestAsyncLoad::OnUpdate()
 
 void TestAsyncLoad::AsyncLoadTexture(dtex_package* pkg) 
 {
-	for (int i = 0; i < pkg->tex_size; ++i) {
+	for (int i = 0; i < pkg->texture_count; ++i) {
 		dtexf_async_load_texture(pkg, i);
 	}	
 }

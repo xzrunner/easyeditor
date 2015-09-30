@@ -365,6 +365,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\testdtex\TestAsyncC3Load.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestAsyncC3Load.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\testdtex\TestAsyncLoad.cpp"
 					>
 				</File>
