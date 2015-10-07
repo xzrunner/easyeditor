@@ -27,6 +27,10 @@ TestAsyncC3Load::~TestAsyncC3Load()
 
 void TestAsyncC3Load::Load()
 {
+// 	m_packages.push_back(Utility::LoadPackage("c00003", 1));
+// 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[0], "c00003_attack01_1"));
+// 	dtexf_c3_load(m_packages[0], 0.1f);
+
 	m_packages.push_back(Utility::LoadPackage("c00001", 1));
 	m_packages.push_back(Utility::LoadPackage("c00002", 1));
 	m_packages.push_back(Utility::LoadPackage("c00003", 1));
@@ -48,10 +52,10 @@ void TestAsyncC3Load::OnUpdate()
 
  	static int frame = 0;
 
-// 	if (frame == 10) {
+// 	if (frame == 100) {
 // 		wxLogDebug("+++++++++++ Async Load");
 // 		int* sprite_ids = new int[1];
-// 		sprite_ids[0] = dtex_get_spr_id(m_packages[0], "c00001_attack_1");
+// 		sprite_ids[0] = dtex_get_spr_id(m_packages[0], "c00003_attack01_1");
 // 		dtexf_async_load_texture_from_c3(m_packages[0], sprite_ids, 1);
 // 	}
 

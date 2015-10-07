@@ -165,14 +165,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_loader_new.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_loader_new.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dtex_stream_import.c"
 				>
 			</File>
@@ -191,14 +183,6 @@
 			<Filter
 				Name="async"
 				>
-				<File
-					RelativePath="..\..\..\src\dtex_async.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_async.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\dtex_async_loader.c"
 					>
@@ -409,10 +393,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_typedef.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dtex_typedef.h"
 				>
 			</File>
@@ -422,14 +402,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_utility.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_utility2.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_utility2.h"
 				>
 			</File>
 		</Filter>
