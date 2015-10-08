@@ -19,17 +19,23 @@ std::string PackTexture::Description() const
 
 std::string PackTexture::Usage() const
 {
-	return Command() + " [cfg file]";
+	std::string cmd0 = Command() + " [cfg file]";
+	std::string cmd1 = Command() + " [src dir] [dst dir] [min size] [max size]";
+	return cmd0 + " or " + cmd1;
 }
 
 void PackTexture::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 3)) return;
 
-	Trigger(argv[2]);
+	if (argc == 3) {
+		RunFromConfig(argv[2]);
+	} else {
+		RunFromCmd(NULL, argv[2], argv[3], -1, atof(argv[5]), atof(argv[4]), 1, 1);
+	}
 }
 
-void PackTexture::Trigger(const std::string& cfg_file)
+void PackTexture::RunFromConfig(const std::string& cfg_file)
 {	
 	Json::Value value;
 	Json::Reader reader;
@@ -44,6 +50,26 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	std::string src_dir = d2d::FilenameTools::getAbsolutePath(dir, value["src"].asString());
 	std::string dst_file = d2d::FilenameTools::getAbsolutePath(dir, value["dst"].asString());
 
+ 	libpacker::ImageTrimData* trim = NULL;
+ 	if (!value["trim file"].isNull()) {
+ 		std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
+ 		trim = new libpacker::ImageTrimData(trim_file);
+ 	}
+
+ 	int static_size = value["static size"].asInt(),
+ 		max_size = value["max size"].asInt(),
+ 		min_size = value["min size"].asInt();
+ 	int extrude_min = value["extrude min"].asInt(),
+ 		extrude_max = value["extrude max"].asInt();
+
+	RunFromCmd(trim, src_dir, dst_file, static_size, max_size, min_size, extrude_min, extrude_max);
+
+	delete trim;
+}
+
+void PackTexture::RunFromCmd(libpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& dst_file, 
+							 int static_size, int max_size, int min_size, int extrude_min, int extrude_max) 
+{
 	std::vector<std::string> images;
 
 	wxArrayString files;
@@ -62,25 +88,12 @@ void PackTexture::Trigger(const std::string& cfg_file)
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	libpacker::ImageTrimData* trim = NULL;
-	if (!value["trim file"].isNull()) {
-		std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
-		trim = new libpacker::ImageTrimData(trim_file);
-	}
-
-	int static_size = value["static size"].asInt(),
-		max_size = value["max size"].asInt(),
-		min_size = value["min size"].asInt();
-	int extrude_min = value["extrude min"].asInt(),
-		extrude_max = value["extrude max"].asInt();
 	libpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max);
 	tex_packer.Pack(static_size, max_size, min_size);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");
 
 	sd.open_image_edge_clip = ori_cfg;
-
-	delete trim;
 }
 
 }
