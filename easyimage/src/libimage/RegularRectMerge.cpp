@@ -24,7 +24,7 @@ void RegularRectMerge::Merge()
 {
 	static const int COUNT_MIN = 6;
 	static const int AREA_MIN = 16 * 16;
-	static const int ENLARGE_MAX = 16 * 16 * 2;
+	const int ENLARGE_MAX = (int)std::max(16 * 16 * 2.0f, m_width * 0.1f * m_height * 0.1f);
 
 	int debug_count = 0;
 
