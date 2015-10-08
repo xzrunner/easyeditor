@@ -23,9 +23,6 @@ public:
 	const IPackNode* Create(const d2d::FontSprite* spr);
 
 private:
-	bool IsAnchorNode(const d2d::FontSprite* spr) const;
-
-private:
 	std::vector<const PackLabel*> m_labels;
 	std::vector<const PackAnchor*> m_anchors;
 

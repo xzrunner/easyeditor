@@ -172,6 +172,14 @@
 				RelativePath="..\..\..\src\libcoco\IPackNode.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\UtilityNew.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcoco\UtilityNew.h"
+				>
+			</File>
 			<Filter
 				Name="nodes"
 				>

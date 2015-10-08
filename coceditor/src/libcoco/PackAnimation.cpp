@@ -7,6 +7,8 @@
 #include "AnimToBin.h"
 #include "AnimFromBin.h"
 
+#include "PackAnchor.h"
+
 namespace libcoco
 {
 
@@ -70,9 +72,17 @@ void PackAnimation::Clear()
 
 int PackAnimation::AddComponent(const IPackNode* node, const std::string& name)
 {
-	for (int i = 0, n = components.size(); i < n; ++i) {
-		if (components[i].node == node && components[i].name == name) {
-			return i;
+	if (const PackAnchor* anchor = dynamic_cast<const PackAnchor*>(node)) {
+		for (int i = 0, n = components.size(); i < n; ++i) {
+			if (dynamic_cast<const PackAnchor*>(components[i].node) && components[i].name == name) {
+				return i;
+			}
+		}
+	} else {
+		for (int i = 0, n = components.size(); i < n; ++i) {
+			if (components[i].node == node && components[i].name == name) {
+				return i;
+			}
 		}
 	}
 

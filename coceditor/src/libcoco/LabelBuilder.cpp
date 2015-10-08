@@ -1,6 +1,7 @@
 #include "LabelBuilder.h"
 #include "PackLabel.h"
 #include "PackAnchor.h"
+#include "UtilityNew.h"
 
 namespace libcoco
 {
@@ -28,9 +29,8 @@ void LabelBuilder::Traverse(d2d::IVisitor& visitor) const
 
 const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
 {
-	if (IsAnchorNode(spr)) {
+	if (Utility::IsAnchor(spr)) {
 		PackAnchor* anchor = new PackAnchor;
-		anchor->name = spr->name;
 		m_anchors.push_back(anchor);
 		return anchor;
 	}
@@ -70,11 +70,6 @@ const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
 	m_labels.push_back(node);
 
 	return node;
-}
-
-bool LabelBuilder::IsAnchorNode(const d2d::FontSprite* spr) const
-{
-	return spr && spr->font.empty() && spr->color == d2d::Colorf(0, 0, 0, 0);
 }
 
 }

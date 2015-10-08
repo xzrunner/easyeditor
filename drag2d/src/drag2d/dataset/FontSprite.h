@@ -45,6 +45,8 @@ public:
 	void SetTextID(const std::string& tid) { m_tid = tid; }
 	const std::string& GetTextID() const { return m_tid; }
 
+	const std::string& GetSymbolName() const { return m_symbol->name; }
+
 protected:
 	FontBlankSymbol* m_symbol;
 

@@ -13,6 +13,7 @@ namespace libcoco
 class IPackNode;
 class PackAnimation;
 class ExportNameSet;
+class PackAnchor;
 
 class ComplexBuilder : public INodeBuilder
 {
@@ -35,6 +36,8 @@ private:
 	ExportNameSet& m_export_set;
 
 	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
+
+	std::vector<const PackAnchor*> m_anchors;
 
 }; // ComplexBuilder
 

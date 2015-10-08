@@ -2,6 +2,8 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "ExportNameSet.h"
+#include "PackAnchor.h"
+#include "UtilityNew.h"
 
 #include <easycomplex.h>
 
@@ -20,6 +22,8 @@ ComplexBuilder::~ComplexBuilder()
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
+
+	for_each(m_anchors.begin(), m_anchors.end(), DeletePointerFunctor<const PackAnchor>());
 }
 
 void ComplexBuilder::Traverse(d2d::IVisitor& visitor) const
@@ -43,10 +47,16 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 		return itr->second;
 	}
 
-	PackAnimation* node = new PackAnimation;
-	Load(symbol, node);
-	m_map_data.insert(std::make_pair(symbol, node));
-	return node;
+	if (symbol->m_sprites.size() == 1 && Utility::IsAnchor(symbol->m_sprites[0])) {
+		PackAnchor* anchor = new PackAnchor;
+		m_anchors.push_back(anchor);
+		return anchor;
+	} else {
+		PackAnimation* node = new PackAnimation;
+		Load(symbol, node);
+		m_map_data.insert(std::make_pair(symbol, node));
+		return node;
+	}
 }
 
 void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)

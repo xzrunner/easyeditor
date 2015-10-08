@@ -9,6 +9,7 @@ Icon::Icon()
 }
 
 Icon::Icon(d2d::Image* img)
+	: m_img(NULL)
 {
 	SetImage(img);
 }

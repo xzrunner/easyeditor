@@ -199,6 +199,14 @@
 					Name="nodes"
 					>
 					<File
+						RelativePath="..\..\..\src\libcomplex\AnchorToSpr.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libcomplex\AnchorToSpr.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libcomplex\AnimationToSpr.cpp"
 						>
 					</File>

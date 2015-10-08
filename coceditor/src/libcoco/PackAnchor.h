@@ -12,9 +12,6 @@ namespace libcoco
 class PackAnchor : public IPackNode
 {
 public:
-	std::string name;
-
-public:
 	PackAnchor() { m_id = ANCHOR_ID; }
 	PackAnchor(int id) { m_id = ANCHOR_ID; }
 
