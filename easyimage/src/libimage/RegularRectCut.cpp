@@ -8,7 +8,7 @@ namespace eimage
 {
 
 static const int EDGE_LIST[] = {512, 256, 128, 64, 32, 16, 8, 4, 2};
-static const int EDGE_COUNT = 7;
+static const int EDGE_COUNT = sizeof(EDGE_LIST) / sizeof(int);
 
 //static const float AREA_LIMIT_TIMES = 1.7f;
 // static const float AREA_LIMIT_TIMES = 1.8f;
