@@ -23,7 +23,11 @@ ComplexBuilder::~ComplexBuilder()
 		delete itr->second;
 	}
 
-	for_each(m_anchors.begin(), m_anchors.end(), DeletePointerFunctor<const PackAnchor>());
+	std::map<const ecomplex::Symbol*, const PackAnchor*>::iterator
+		itr2 = m_map_anchors.begin();
+	for ( ; itr2 != m_map_anchors.end(); ++itr2) {
+		delete itr2->second;
+	}
 }
 
 void ComplexBuilder::Traverse(d2d::IVisitor& visitor) const
@@ -41,6 +45,12 @@ void ComplexBuilder::Traverse(d2d::IVisitor& visitor) const
 
 const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 {
+	std::map<const ecomplex::Symbol*, const PackAnchor*>::iterator
+		itr2 = m_map_anchors.find(symbol);
+	if (itr2 != m_map_anchors.end()) {
+		return itr2->second;
+	}
+
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(symbol);
 	if (itr != m_map_data.end()) {
@@ -48,20 +58,21 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 	}
 
 	if (symbol->m_sprites.size() == 1 && Utility::IsAnchor(symbol->m_sprites[0])) {
+		LoadAnchor(symbol);
+
 		PackAnchor* anchor = new PackAnchor;
-		m_anchors.push_back(anchor);
+		m_map_anchors.insert(std::make_pair(symbol, anchor));
 		return anchor;
-	} else {
-		PackAnimation* node = new PackAnimation;
-		Load(symbol, node);
-		m_map_data.insert(std::make_pair(symbol, node));
-		return node;
+	} else {		
+		return LoadComplex(symbol);
 	}
 }
 
-void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
+IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 {
-	m_export_set.LoadExport(symbol, anim);
+	PackAnimation* node = new PackAnimation;
+
+	m_export_set.LoadExport(symbol, node);
 
 	// todo: clipbox
 
@@ -73,13 +84,13 @@ void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
 	{
 		PackAnimation::Action action;
 		action.size = 1;
-		anim->actions.push_back(action);
+		node->actions.push_back(action);
 
 		PackAnimation::Frame frame;
 		for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i) {
-			anim->CreateFramePart(symbol->m_sprites[i], frame);
+			node->CreateFramePart(symbol->m_sprites[i], frame);
 		}
-		anim->frames.push_back(frame);
+		node->frames.push_back(frame);
 	}
 	else
 	{
@@ -90,18 +101,47 @@ void ComplexBuilder::Load(const ecomplex::Symbol* symbol, PackAnimation* anim)
 			PackAnimation::Action action;
 			action.size = 1;
 			action.name = itr->first;
-			anim->actions.push_back(action);
+			node->actions.push_back(action);
 
 			PackAnimation::Frame frame;
 			for (int i = 0, n = itr->second.size(); i < n; ++i) {
-				anim->CreateFramePart(itr->second[i], frame);
+				node->CreateFramePart(itr->second[i], frame);
 			}
 			for (int i = 0, n = others.size(); i < n; ++i) {
-				anim->CreateFramePart(others[i], frame);
+				node->CreateFramePart(others[i], frame);
 			}
-			anim->frames.push_back(frame);
+			node->frames.push_back(frame);
 		}
 	}
+
+	m_map_data.insert(std::make_pair(symbol, node));
+
+	return node;
+}
+
+IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
+{
+	assert(symbol->m_sprites.size() == 1);
+
+	if (!Utility::IsNameValid(symbol->m_sprites[0]->name)) {
+		return NULL;
+	}
+
+	PackAnimation* node = new PackAnimation;		
+
+	m_export_set.LoadExport(symbol, node);
+
+	PackAnimation::Action action;
+	action.size = 1;
+	node->actions.push_back(action);
+
+	PackAnimation::Frame frame;
+	node->CreateFramePart(symbol->m_sprites[0], frame);
+	node->frames.push_back(frame);
+
+	m_map_data.insert(std::make_pair(symbol, node));
+
+	return node;
 }
 
 void ComplexBuilder::GroupFromTag(const std::vector<d2d::ISprite*>& src, 

@@ -26,7 +26,9 @@ public:
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
 
 private:
-	void Load(const ecomplex::Symbol* symbol, PackAnimation* anim);
+	IPackNode* LoadComplex(const ecomplex::Symbol* symbol);
+
+	IPackNode* LoadAnchor(const ecomplex::Symbol* symbol);
 
 	static void GroupFromTag(const std::vector<d2d::ISprite*>& src, 
 		std::map<std::string, std::vector<d2d::ISprite*> >& dst,
@@ -37,7 +39,7 @@ private:
 
 	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
 
-	std::vector<const PackAnchor*> m_anchors;
+	std::map<const ecomplex::Symbol*, const PackAnchor*> m_map_anchors;
 
 }; // ComplexBuilder
 

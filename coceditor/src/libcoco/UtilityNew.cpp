@@ -9,4 +9,9 @@ bool Utility::IsAnchor(const d2d::ISprite* spr)
 	return font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
 }
 
+bool Utility::IsNameValid(const std::string& name)
+{
+	return !name.empty() && name[0] != '_';
+}
+
 }

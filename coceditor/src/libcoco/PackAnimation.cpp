@@ -1,13 +1,13 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "PackAnchor.h"
+#include "UtilityNew.h"
 
 #include "AnimToLuaString.h"
 #include "AnimFromLua.h"
 
 #include "AnimToBin.h"
 #include "AnimFromBin.h"
-
-#include "PackAnchor.h"
 
 namespace libcoco
 {
@@ -53,9 +53,10 @@ void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
 
 	PackAnimation::Part part;
 	std::string name = "";
-	if (!spr->name.empty() && spr->name[0] != '_') {
+	if (Utility::IsNameValid(spr->name)) {
 		name = spr->name;
 	}
+
 	part.comp_idx = AddComponent(node, name);
 	PackAnimation::LoadSprTrans(spr, part.t);
 

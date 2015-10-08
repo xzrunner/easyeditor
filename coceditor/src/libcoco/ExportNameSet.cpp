@@ -1,5 +1,6 @@
 #include "ExportNameSet.h"
 #include "IPackNode.h"
+#include "UtilityNew.h"
 
 namespace libcoco
 {
@@ -7,7 +8,7 @@ namespace libcoco
 void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, IPackNode* node)
 {
 	std::string export_name = symbol->name;
-	if (export_name.empty() || export_name[0] == '_') {
+	if (!Utility::IsNameValid(export_name)) {
 		return;
 	}
 
