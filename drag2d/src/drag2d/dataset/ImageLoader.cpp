@@ -59,6 +59,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	}
 
 	if (channels == 4) {
+		RemoveGhostPixel(data, width, height);
 		FormatPixelsAlpha(data, width, height, 0);
 		if (Config::Instance()->GetSettings().pre_multi_alpha) {
 			PreMuiltiAlpha(data, width, height);
@@ -469,6 +470,33 @@ void ImageLoader::PreMuiltiAlpha(uint8_t* pixels, int width, int height)
 				pixels[pos + i] = pixels[pos + i] * alpha;
 			}
 			pos += 4;
+		}
+	}
+}
+
+void ImageLoader::RemoveGhostPixel(uint8_t* pixels, int width, int height)
+{
+	int ptr = 0;
+	for (int i = 0; i < height; ++i)
+	{
+		for (int j = 0; j < width; ++j)
+		{
+			uint8_t r = pixels[ptr],
+					g = pixels[ptr+1],
+					b = pixels[ptr+2],
+					a = pixels[ptr+3];
+
+// 			if (r <= 3 && g <= 3 && b <= 3 && a <= 3) {
+// 				r = g = b = a = 0;
+// 			}
+			if (a <= 3) {
+				a = 0;
+			}
+
+			pixels[ptr++] = r;
+			pixels[ptr++] = g;
+			pixels[ptr++] = b;
+			pixels[ptr++] = a;
 		}
 	}
 }

@@ -33,6 +33,8 @@ private:
 
 	static void PreMuiltiAlpha(uint8_t* pixels, int width, int height);
 
+	static void RemoveGhostPixel(uint8_t* pixels, int width, int height);
+
 }; // ImageLoader
 
 }
