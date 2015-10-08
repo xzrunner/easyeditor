@@ -151,11 +151,11 @@ void PackAnimation::LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans)
 
 void PackAnimation::LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans)
 {
-	trans.color = d2d::trans_color2int(spr->multiCol, d2d::PT_BGRA);
-	trans.additive = d2d::trans_color2int(spr->addCol, d2d::PT_BGRA);
-	trans.rmap = d2d::trans_color2int(spr->r_trans, d2d::PT_BGRA);
-	trans.gmap = d2d::trans_color2int(spr->g_trans, d2d::PT_BGRA);
-	trans.bmap = d2d::trans_color2int(spr->b_trans, d2d::PT_BGRA);	
+	trans.color = d2d::trans_color2int(spr->multiCol, d2d::PT_RGBA);
+	trans.additive = d2d::trans_color2int(spr->addCol, d2d::PT_RGBA);
+	trans.rmap = d2d::trans_color2int(spr->r_trans, d2d::PT_RGBA);
+	trans.gmap = d2d::trans_color2int(spr->g_trans, d2d::PT_RGBA);
+	trans.bmap = d2d::trans_color2int(spr->b_trans, d2d::PT_RGBA);	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

@@ -81,7 +81,7 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 //	DynamicFont* dfont = DynamicFont::Instance();
 	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 
-	const int color = trans_color2int(style.color, PT_RGBA);
+	const int color = trans_color2int(style.color, PT_ABGR);
 	int tot_line_height = 0;
 	Line line;
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 

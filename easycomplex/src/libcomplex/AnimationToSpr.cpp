@@ -130,12 +130,12 @@ void AnimationToSpr::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimat
 
 void AnimationToSpr::TransSpriteCol(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
 {
-	spr->multiCol = d2d::transColor(t.color, d2d::PT_ARGB);
-	spr->addCol = d2d::transColor(t.additive, d2d::PT_ARGB);
+	spr->multiCol = d2d::transColor(t.color, d2d::PT_RGBA);
+	spr->addCol = d2d::transColor(t.additive, d2d::PT_RGBA);
 
-	spr->r_trans = d2d::transColor(t.rmap, d2d::PT_ARGB);
-	spr->g_trans = d2d::transColor(t.gmap, d2d::PT_ARGB);
-	spr->b_trans = d2d::transColor(t.bmap, d2d::PT_ARGB);
+	spr->r_trans = d2d::transColor(t.rmap, d2d::PT_RGBA);
+	spr->g_trans = d2d::transColor(t.gmap, d2d::PT_RGBA);
+	spr->b_trans = d2d::transColor(t.bmap, d2d::PT_RGBA);
 }
 
 

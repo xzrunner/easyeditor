@@ -31,7 +31,7 @@ void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 	uint8_t align = (label->align_hori | (label->align_vert << 4));
 	pack(align, ptr);
 
-	uint32_t color = d2d::trans_color2int(label->color, d2d::PT_BGRA);
+	uint32_t color = d2d::trans_color2int(label->color, d2d::PT_ARGB);
 	pack(color, ptr);
 
 	uint16_t size = label->size;

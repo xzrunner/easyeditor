@@ -46,9 +46,9 @@ public:
 		SpriteTrans() 
 			: color(0xffffffff)
 			, additive(0)
-			, rmap(0xffff0000)
-			, gmap(0xff00ff00) 
-			, bmap(0xff0000ff) {
+			, rmap(0xff0000ff)
+			, gmap(0x00ff00ff) 
+			, bmap(0x0000ffff) {
 			mat[1] = mat[2] = mat[4] = mat[5] = 0;
 			mat[0] = mat[3] = 1024;
 		}

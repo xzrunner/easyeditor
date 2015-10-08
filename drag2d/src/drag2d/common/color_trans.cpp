@@ -177,25 +177,25 @@ uint32_t trans_color2int(const Colorf& col, PixelType type)
 {
 	uint32_t ret = 0;
 	if (type == PT_RGBA) {
-		ret = (trans_color2int(col.a)) << 24 
-			| (trans_color2int(col.b)) << 16
-			| (trans_color2int(col.g)) << 8
-			| (trans_color2int(col.r));
-	} else if (type == PT_ARGB) {
-		ret = (trans_color2int(col.b)) << 24 
-			| (trans_color2int(col.g)) << 16
-			| (trans_color2int(col.r)) << 8
-			| (trans_color2int(col.a));
-	} else if (type == PT_ABGR) {
 		ret = (trans_color2int(col.r)) << 24 
 			| (trans_color2int(col.g)) << 16
 			| (trans_color2int(col.b)) << 8
 			| (trans_color2int(col.a));
-	} else if (type == PT_BGRA) {
+	} else if (type == PT_ARGB) {
 		ret = (trans_color2int(col.a)) << 24 
 			| (trans_color2int(col.r)) << 16
 			| (trans_color2int(col.g)) << 8
 			| (trans_color2int(col.b));
+	} else if (type == PT_ABGR) {
+		ret = (trans_color2int(col.a)) << 24 
+			| (trans_color2int(col.b)) << 16
+			| (trans_color2int(col.g)) << 8
+			| (trans_color2int(col.r));
+	} else if (type == PT_BGRA) {
+		ret = (trans_color2int(col.b)) << 24 
+			| (trans_color2int(col.g)) << 16
+			| (trans_color2int(col.r)) << 8
+			| (trans_color2int(col.a));
 	}
 	return ret;
 }

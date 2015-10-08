@@ -126,16 +126,16 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 		comp.scale_end = p_symbol.scale_end;
 
 		d2d::Colorf col_mul_start(p_symbol.col_mul_start.r, p_symbol.col_mul_start.g, p_symbol.col_mul_start.b, p_symbol.col_mul_start.a);
-		comp.col_mul_start = d2d::trans_color2int(col_mul_start, d2d::PT_BGRA);
+		comp.col_mul_start = d2d::trans_color2int(col_mul_start, d2d::PT_ARGB);
 
 		d2d::Colorf col_mul_end(p_symbol.col_mul_end.r, p_symbol.col_mul_end.g, p_symbol.col_mul_end.b, p_symbol.col_mul_end.a);
-		comp.col_mul_end = d2d::trans_color2int(col_mul_end, d2d::PT_BGRA);
+		comp.col_mul_end = d2d::trans_color2int(col_mul_end, d2d::PT_ARGB);
 
 		d2d::Colorf col_add_start(p_symbol.col_add_start.r, p_symbol.col_add_start.g, p_symbol.col_add_start.b, p_symbol.col_add_start.a);
-		comp.col_add_start = d2d::trans_color2int(col_add_start, d2d::PT_BGRA);
+		comp.col_add_start = d2d::trans_color2int(col_add_start, d2d::PT_ARGB);
 
 		d2d::Colorf col_add_end(p_symbol.col_add_end.r, p_symbol.col_add_end.g, p_symbol.col_add_end.b, p_symbol.col_add_end.a);
-		comp.col_add_end = d2d::trans_color2int(col_add_end, d2d::PT_BGRA);
+		comp.col_add_end = d2d::trans_color2int(col_add_end, d2d::PT_ARGB);
 
 		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p_symbol.ud);
 		comp.node = PackNodeFactory::Instance()->Create(symbol);

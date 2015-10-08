@@ -103,7 +103,7 @@ void AnimToLuaString::PackFrame(const PackAnimation::Frame& frame, ebuilder::Cod
 		if (t.additive != 0) {
 			params.push_back(lua::assign("add", d2d::StringTools::ToString(t.additive)));
 		}
-		if (t.rmap != 0xffff0000 || t.gmap != 0xff00ff00 || t.bmap != 0xff0000ff) {
+		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
 			params.push_back(lua::assign("rmap", d2d::StringTools::ToString(t.rmap)));
 			params.push_back(lua::assign("gmap", d2d::StringTools::ToString(t.gmap)));
 			params.push_back(lua::assign("bmap", d2d::StringTools::ToString(t.bmap)));

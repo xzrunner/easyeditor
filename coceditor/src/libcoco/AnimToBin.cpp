@@ -86,7 +86,7 @@ int AnimToBin::FrameSize(const PackAnimation::Frame& frame)
 		if (t.additive != 0) {
 			ret += sizeof(uint32_t);
 		}
-		if (t.rmap != 0xffff0000 || t.gmap != 0xff00ff00 || t.bmap != 0xff0000ff) {
+		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
 			ret += sizeof(uint32_t) * 3;
 		}
 	}
@@ -115,7 +115,7 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 			type |= TAG_ADDITIVE;
 		}
 		// todo TAG_TOUCH
-		if (t.rmap != 0xffff0000 || t.gmap != 0xff00ff00 || t.bmap != 0xff0000ff) {
+		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
 			type |= TAG_COLMAP;
 		}
 
