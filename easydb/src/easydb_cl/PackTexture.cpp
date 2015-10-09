@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <drag2d.h>
-#include <easypacker.h>
+#include <easytexpacker.h>
 
 namespace edb
 {
@@ -50,10 +50,10 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
 	std::string src_dir = d2d::FilenameTools::getAbsolutePath(dir, value["src"].asString());
 	std::string dst_file = d2d::FilenameTools::getAbsolutePath(dir, value["dst"].asString());
 
- 	libpacker::ImageTrimData* trim = NULL;
+ 	libtp::ImageTrimData* trim = NULL;
  	if (!value["trim file"].isNull()) {
  		std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
- 		trim = new libpacker::ImageTrimData(trim_file);
+ 		trim = new libtp::ImageTrimData(trim_file);
  	}
 
  	int static_size = value["static size"].asInt(),
@@ -67,7 +67,7 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
 	delete trim;
 }
 
-void PackTexture::RunFromCmd(libpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& dst_file, 
+void PackTexture::RunFromCmd(libtp::ImageTrimData* trim, const std::string& src_dir, const std::string& dst_file, 
 							 int static_size, int max_size, int min_size, int extrude_min, int extrude_max) 
 {
 	std::vector<std::string> images;
@@ -88,7 +88,7 @@ void PackTexture::RunFromCmd(libpacker::ImageTrimData* trim, const std::string& 
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	libpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max);
+	libtp::NormalPack tex_packer(images, trim, extrude_min, extrude_max);
 	tex_packer.Pack(static_size, max_size, min_size);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");

@@ -1,7 +1,7 @@
 #include "BinRRP.h"
 #include "check_params.h"
 
-#include <easypacker.h>
+#include <easytexpacker.h>
 
 namespace edb
 {
@@ -35,7 +35,7 @@ void BinRRP::Run(int argc, char *argv[])
 void BinRRP::Trigger(const std::string& json_file, 
 					 const std::string& image_id_file)
 {
-	libpacker::GenRegularRectBinary pack(json_file, image_id_file);
+	libtp::GenRegularRectBinary pack(json_file, image_id_file);
 	pack.PackToBinary();
 }
 

@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <drag2d.h>
-#include <easypacker.h>
+#include <easytexpacker.h>
 #include <epbin.h>
 #include <easycoco.h>
 #include <easyimage.h>
@@ -51,7 +51,7 @@ void PackCoco::Trigger(const std::string& config_path)
 		d2d::FilenameTools::FormatFilepathAbsolute(config_path));
 
  	std::string trim_file = ConnectCfgDir(config_dir, value["trim file"].asString());
-// 	libpacker::ImageTrimData trim(trim_file);
+// 	libtp::ImageTrimData trim(trim_file);
 
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
@@ -77,7 +77,7 @@ void PackCoco::Prepare(const Json::Value& pkg_val, const std::string& config_dir
 }
 
 void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
-						   const libpacker::ImageTrimData* trim) const
+						   const libtp::ImageTrimData* trim) const
 {
 	d2d::SettingData& sd = d2d::Config::Instance()->GetSettings();
 	bool ori_cfg = sd.open_image_edge_clip;
@@ -92,7 +92,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config
 	std::vector<std::string> images;
 	GetAllImages(pkg_val, config_dir, images);
 
-	libpacker::NormalPack tex_packer(images, trim);
+	libtp::NormalPack tex_packer(images, trim);
 	tex_packer.Pack(0);
 	std::string json_path = dst_name + ".json";
 	tex_packer.OutputInfo(config_dir, json_path);

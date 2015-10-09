@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <drag2d.h>
-#include <easypacker.h>
+#include <easytexpacker.h>
 
 namespace edb
 {

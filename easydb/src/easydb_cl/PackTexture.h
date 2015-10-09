@@ -25,7 +25,7 @@ public:
 
 private:
 	void RunFromConfig(const std::string& cfg_file);
-	void RunFromCmd(libpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& dst_file,
+	void RunFromCmd(libtp::ImageTrimData* trim, const std::string& src_dir, const std::string& dst_file,
 		int static_size, int max_size, int min_size, int extrude_min, int extrude_max);
 
 }; // PackTexture

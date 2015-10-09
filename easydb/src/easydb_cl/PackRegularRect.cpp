@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <drag2d.h>
-#include <easypacker.h>
+#include <easytexpacker.h>
 
 namespace edb
 {
@@ -42,12 +42,12 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 	wxString filepath = dst_dir + "\\" + name;
 
   	// pack
-  	libpacker::RegularRectPack rrp(files);
+  	libtp::RegularRectPack rrp(files);
   	rrp.Pack();
   	rrp.OutputToText(filepath);
   
   	// gen image
-  	libpacker::GenRegularRectImage::CreateMulti(filepath);
+  	libtp::GenRegularRectImage::CreateMulti(filepath);
 }
 
 }
