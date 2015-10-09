@@ -1,5 +1,4 @@
 #include "ImagePack.h"
-#include "ImageIO.h"
 
 namespace eimage
 {
@@ -208,7 +207,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool
 
 void ImagePack::OutputToFile(const wxString& filepath) const
 {
-	ImageIO::Write(m_pixels, m_width, m_height, filepath.mb_str());
+	d2d::LibpngAdapter::Write(m_pixels, m_width, m_height, filepath.ToStdString());
 }
 
 void ImagePack::CopyPixel(const uint8_t* src, int sw, int sh, bool sbpp4,

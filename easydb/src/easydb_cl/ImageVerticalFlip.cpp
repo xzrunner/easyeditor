@@ -61,7 +61,7 @@ void ImageVerticalFlip::VerticalFlip(const std::string& filepath) const
 
 	eimage::ImageVerticalFlip revert(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	uint8_t* pixels_revert = revert.Revert();		
-	d2d::ImageSaver::storeToFile(pixels_revert, img->GetWidth(), img->GetHeight(), 
+	d2d::ImageSaver::StoreToFile(pixels_revert, img->GetWidth(), img->GetHeight(), 
 		img->GetChannels(), filepath, d2d::ImageSaver::e_png);
 	delete[] pixels_revert;
 

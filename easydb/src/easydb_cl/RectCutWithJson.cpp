@@ -100,7 +100,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		wxString img_name;
 		img_name.Printf("%s#%d#%d#%d#%d#.png", filename, r.x, r.y, r.w, r.h);
 		std::string img_out_path = out_img_dir + "\\" + img_name;
-		d2d::ImageSaver::storeToFile(pixels, r.w, r.h, 4, img_out_path, d2d::ImageSaver::e_png);
+		d2d::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, img_out_path, d2d::ImageSaver::e_png);
 		delete[] pixels;
 
 		std::string spr_path = std::string(out_img_dir + "\\" + img_name);

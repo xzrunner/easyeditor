@@ -41,6 +41,7 @@
 #include "dataset/TextureImgData.h"
 #include "dataset/TextureFactory.h"
 #include "dataset/TexturePacker.h"
+#include "dataset/LibpngAdapter.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"

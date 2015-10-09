@@ -183,7 +183,7 @@ void FileIO::storeImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->GetSymbol().GetFilepath(), w, h, c, f);
+		uint8_t* src_data = d2d::ImageLoader::FileToPixels(sprite->GetSymbol().GetFilepath(), w, h, c, f);
 
 		if (sprite->GetAngle() != 0)
 		{
@@ -267,7 +267,7 @@ void FileIO::storeImage(const char* filename)
 		break;
 	case e_png:
 //		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
-		d2d::ImageSaver::storeToFile(dst_data, width, height, 4, imgFile.ToStdString(), 
+		d2d::ImageSaver::StoreToFile(dst_data, width, height, 4, imgFile.ToStdString(), 
 			d2d::ImageSaver::e_png);
 		break;
 	}

@@ -7,8 +7,8 @@
 namespace d2d
 {
 
-static const int DEFAULT_WIDTH = 800;
-static const int DEFAULT_HEIGHT = 600;
+static const int DEFAULT_WIDTH = 2048;
+static const int DEFAULT_HEIGHT = 2048;
 
 Snapshoot::Snapshoot()
 	: m_width(DEFAULT_WIDTH)
@@ -52,7 +52,7 @@ void Snapshoot::OutputToImageFile(const ISymbol* symbol, const std::string& file
 	int w = symbol->GetSize().xLength() * scale,
 		h = symbol->GetSize().yLength() * scale;
 	unsigned char* pixels = OutputToMemory(symbol, false, scale);
-	ImageSaver::storeToFile(pixels, w, h, 4, filename, ImageSaver::e_png);
+	ImageSaver::StoreToFile(pixels, w, h, 4, filename, ImageSaver::e_png);
 	delete[] pixels;
 }
 
@@ -87,7 +87,9 @@ void Snapshoot::SaveToFile(const std::string& filename, int width, int height) c
 
 	m_fbo->ReadPixels(pixels, width, height);
 
-	ImageSaver::storeToFile(pixels, width, height, 4, filename, ImageSaver::e_png);
+	ImageSaver::StoreToFile(pixels, width, height, 4, filename, ImageSaver::e_png);
+
+//	ImageIO::Write(pixels, m_width, m_height, filename);
 
 	delete[] pixels;
 }

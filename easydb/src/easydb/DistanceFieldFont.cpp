@@ -184,7 +184,7 @@ void DistanceFieldFont::genChar(int unicode)
 	unsigned char* result = genDistanceFieldData(expanded_data, extracted, width, height);
 	std::string filepath = "e:/text_" + wxString::FromDouble(unicode);
 //	d2d::ImageSaver::storeToFile(extracted, width, height, filepath, d2d::ImageSaver::e_png);
-	d2d::ImageSaver::storeToFile(result, 32, 32, 4, filepath, d2d::ImageSaver::e_png);
+	d2d::ImageSaver::StoreToFile(result, 32, 32, 4, filepath, d2d::ImageSaver::e_png);
 
 	delete[] expanded_data;
 	delete[] extracted;		

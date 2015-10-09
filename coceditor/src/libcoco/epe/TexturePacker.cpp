@@ -97,7 +97,7 @@ void TexturePacker::storeToMemory()
 void TexturePacker::storeToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type)
 {
 	std::string filepath = floder + "\\" + filename;
-	d2d::ImageSaver::storeToFile(m_pixels, m_edge, m_edge, 4, filepath, type);
+	d2d::ImageSaver::StoreToFile(m_pixels, m_edge, m_edge, 4, filepath, type);
 }
 
 const d2d::Rect* TexturePacker::query(d2d::Image* image) const

@@ -56,7 +56,7 @@ void TransToETC1::Format(const std::string& filepath)
 	}
 
 	int w, h, c, f;
-	uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
+	uint8_t* pixels = d2d::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
 	eimage::TransToETC1 trans(pixels, w, h, c);
 	//std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pkm";
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.'));

@@ -194,11 +194,11 @@ void TrimImage::Trim(const std::string& filepath)
 	if (trimed) {
 		eimage::ImageClip clip(*img);
 		const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
-		d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
+		d2d::ImageSaver::StoreToFile(pixels, r.xLength(), r.yLength(), img->GetChannels(), 
 			out_filepath, d2d::ImageSaver::e_png);
 		delete[] pixels;
 	} else {
-		d2d::ImageSaver::storeToFile(img->GetPixelData(), r.xLength(), r.yLength(), img->GetChannels(), 
+		d2d::ImageSaver::StoreToFile(img->GetPixelData(), r.xLength(), r.yLength(), img->GetChannels(), 
 			out_filepath, d2d::ImageSaver::e_png);
 	}
 

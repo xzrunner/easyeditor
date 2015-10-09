@@ -115,7 +115,7 @@ void PackCoco::CompressTexture(const std::string& filepath, const std::string& t
 	}
 
 	int w, h, c, f;
-	uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
+	uint8_t* pixels = d2d::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
 	if (type == "pvr") {
 		std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pvr";
 		eimage::TransToPVR trans(pixels, w, h, c, true);

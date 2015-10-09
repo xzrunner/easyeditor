@@ -106,7 +106,7 @@ void BinaryB4R::LoadPictures(const std::vector<std::string>& src_files, const st
 BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 {
 	int sw, sh, sc, sf;
-	uint8_t* src_pixels = eimage::ImageIO::Read(filepath.c_str(), sw, sh, sc, sf);
+	uint8_t* src_pixels = d2d::LibpngAdapter::Read(filepath.c_str(), sw, sh, sc, sf);
 
 // 	// cut
 // 	eimage::RegularRectCut cut(src_pixels, sw, sh);

@@ -71,7 +71,7 @@ void TextureImgData::LoadFromMemory(ImageData* img_data)
 void TextureImgData::Reload()
 {
 	if (m_img_data->GetPixelData()) {
-		ImageLoader::loadTexture(m_texid, m_img_data->GetPixelData(), m_img_data->GetWidth(), 
+		ImageLoader::PixelsToTexture(m_texid, m_img_data->GetPixelData(), m_img_data->GetWidth(), 
 			m_img_data->GetHeight(), m_img_data->GetChannels(), m_img_data->GetFormat());
 	}
 }

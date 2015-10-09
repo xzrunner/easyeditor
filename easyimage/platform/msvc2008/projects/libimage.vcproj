@@ -254,26 +254,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="io"
-			>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageIO.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\LibpngAdapter.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\LibpngAdapter.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="render"
 			>
 			<File

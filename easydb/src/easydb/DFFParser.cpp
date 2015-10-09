@@ -8,7 +8,7 @@ namespace edb
 DFFParser::DFFParser(const char* filepath)
 {
 	int w, h, c, f;
-	uint8_t* pixels = d2d::ImageLoader::loadData(filepath, w, h, c, f);
+	uint8_t* pixels = d2d::ImageLoader::FileToPixels(filepath, w, h, c, f);
 	assert(w == EDGE && h == EDGE && c == 4);
 	m_alphas = new unsigned char[EDGE*EDGE];
 
@@ -39,7 +39,7 @@ void DFFParser::outputImage(int width, int height)
 	}
 
 	std::string filepath = m_dir + "_" + wxString::FromDouble(width) + "_" + wxString::FromDouble(height);
-	d2d::ImageSaver::storeToFile(pixels, width, height, 4, filepath, d2d::ImageSaver::e_png);
+	d2d::ImageSaver::StoreToFile(pixels, width, height, 4, filepath, d2d::ImageSaver::e_png);
 	delete[] pixels;
 }
 
@@ -143,7 +143,7 @@ void DFFParser::outputImageFast(int width, int height)
 	fillingAlphaNew(pixels, width, height);
 
 	std::string filepath = m_dir + "_" + wxString::FromDouble(width) + "_" + wxString::FromDouble(height);
-	d2d::ImageSaver::storeToFile(pixels, width, height, 4, filepath, d2d::ImageSaver::e_png);
+	d2d::ImageSaver::StoreToFile(pixels, width, height, 4, filepath, d2d::ImageSaver::e_png);
 	delete[] pixels;
 }
 

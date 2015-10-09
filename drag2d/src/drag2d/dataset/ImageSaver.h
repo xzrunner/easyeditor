@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_IMAGE_SAVER_H_
+#define _DRAG2D_IMAGE_SAVER_H_
 
 #include <stdint.h>
 #include <string>
@@ -16,15 +17,11 @@ public:
 		e_gif
 	};
 
-	static void storeToFile(const uint8_t* pixels, int width, int height,
+	static void StoreToFile(const uint8_t* pixels, int width, int height,
 		int channels, const std::string& filename, Type type);
-
-private:
-	static int storePNG(const uint8_t* pixels, int width, int height,
-		int channels, const std::string& filename);
-	static void storePPM(const uint8_t* pixels, int width, int height,
-		int channels, const std::string& filename);
 
 }; // ImageSaver
 
 }
+
+#endif // _DRAG2D_IMAGE_SAVER_H_

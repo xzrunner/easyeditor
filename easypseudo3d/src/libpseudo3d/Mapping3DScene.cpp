@@ -61,7 +61,7 @@ void Mapping3DScene::Store(const char* filename) const
 	delete[] pixels;
 
 	std::string img_path = d2d::FilenameTools::getFilePathExceptExtension(filename);
-	d2d::ImageSaver::storeToFile(pixels_revert, w, h, 4, img_path, d2d::ImageSaver::e_png);
+	d2d::ImageSaver::StoreToFile(pixels_revert, w, h, 4, img_path, d2d::ImageSaver::e_png);
 	delete[] pixels_revert;
 
 	value["texture filepath"] = img_path + ".png";

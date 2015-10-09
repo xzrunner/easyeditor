@@ -1,5 +1,6 @@
 #include "BlockCompress.h"
-#include "ImageIO.h"
+
+#include <drag2d.h>
 
 namespace eimage
 {
@@ -48,7 +49,7 @@ void BlockCompress::Uncompress(const std::string& dir) const
 void BlockCompress::Compress(const std::string& filepath)
 {
 	int w, h, c, f;
-	uint8_t* pixels = ImageIO::Read(filepath.c_str(), w, h, c, f);
+	uint8_t* pixels = d2d::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
 	m_tot_area += w * h;
 
 	Picture* pic = new Picture;
@@ -107,7 +108,7 @@ void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
 
 //	std::string filepath = dir + "//" + d2d::FilenameTools::getFilenameWithExtension(pic.filepath);
 	std::string filepath = pic.filepath;
-	ImageIO::Write(pixels, pic.w, pic.h, filepath.c_str());
+	d2d::LibpngAdapter::Write(pixels, pic.w, pic.h, filepath.c_str());
 
 	delete[] pixels;
 }

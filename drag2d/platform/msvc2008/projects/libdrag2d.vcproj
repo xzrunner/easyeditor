@@ -728,22 +728,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\drag2d\dataset\ITexture.h"
 						>
 					</File>
@@ -779,6 +763,42 @@
 						RelativePath="..\..\..\src\drag2d\dataset\TexturePacker.h"
 						>
 					</File>
+					<Filter
+						Name="io"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\LibpngAdapter.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\LibpngAdapter.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\PPMAdapter.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\dataset\PPMAdapter.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter

@@ -208,7 +208,7 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int
 		const std::string& path = m_filepaths[i];		
 
 		RectSize sz;
-		eimage::ImageIO::ReadHeader(path.c_str(), sz.width, sz.height);
+		d2d::LibpngAdapter::ReadHeader(path.c_str(), sz.width, sz.height);
 
 		if (m_trim_info) {
 			const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[i]);

@@ -19,7 +19,7 @@ void* MyThread::Entry()
 	int w, h, c;
 	unsigned int tex;
 	for (int i = 0; i < 100; ++i) {
-		d2d::ImageLoader::loadTexture(filepath, w, h, tex, c);
+		d2d::ImageLoader::FileToTexture(filepath, w, h, tex, c);
 	}
 
 	return 0;

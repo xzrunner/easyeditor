@@ -71,7 +71,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 
 				wxString out_path;
 				out_path.Printf("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);
-				d2d::ImageSaver::storeToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), d2d::ImageSaver::e_png);
+				d2d::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), d2d::ImageSaver::e_png);
 				delete[] pixels;
 			}
 

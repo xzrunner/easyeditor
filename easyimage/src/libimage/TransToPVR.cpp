@@ -1,5 +1,4 @@
 #include "TransToPVR.h"
-#include "ImageIO.h"
 #include "ImagePack.h"
 
 #include <PVRTextureUtilities.h>

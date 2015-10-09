@@ -41,7 +41,7 @@ const uint8_t* TextureFactory::Load(const std::string& filepath, int& width,
 		format = 6408;
 		return NULL;
 	} else {
-		return ImageLoader::loadData(filepath, width, height, channels, format);
+		return ImageLoader::FileToPixels(filepath, width, height, channels, format);
 	}
 }
 
