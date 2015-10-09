@@ -16,11 +16,13 @@ PackPNG::PackPNG(bool png8)
 
 PackPNG::~PackPNG()
 {
-	delete[] m_buffer;
+	Clear();
 }
 
 void PackPNG::Load(const std::string& filepath)
 {
+	Clear();
+
 	int w, h, c, f;
 	uint8_t* buf = d2d::ImageLoader::FileToPixels(filepath, w, h, c, f);
 
@@ -69,7 +71,7 @@ void PackPNG::Load(const std::string& filepath)
 // 	}
 // }
 
-void PackPNG::Store(std::ofstream& fout) const
+void PackPNG::Store(std::ofstream& fout, float scale) const
 {
 	if (m_compress)
 	{
@@ -110,6 +112,12 @@ void PackPNG::Store(std::ofstream& fout) const
 		fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
 		fout.write(reinterpret_cast<const char*>(m_buffer), m_buf_sz);
 	}
+}
+
+void PackPNG::Clear()
+{
+	delete[] m_buffer, m_buffer = NULL;
+	m_buf_sz = 0;
 }
 
 static inline int

@@ -18,6 +18,8 @@ public:
 	virtual void Store(std::ofstream& fout) const;
 
 private:
+	void Clear();
+
 	void ClearImageData();
 
 private:

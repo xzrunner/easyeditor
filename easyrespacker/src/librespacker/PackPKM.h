@@ -18,6 +18,8 @@ public:
 	virtual void Store(std::ofstream& fout) const;
 
 private:
+	void Clear();
+
 	void LoadCompressed(const std::string& filename, uint8_t*& buf, int& width, int& height);
 
 private:

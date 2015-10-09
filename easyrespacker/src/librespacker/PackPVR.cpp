@@ -115,11 +115,13 @@ PackPVR::PackPVR()
 
 PackPVR::~PackPVR()
 {
-	
+	Clear();
 }
 
 void PackPVR::Load(const std::string& filepath)
 {
+	Clear();
+
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
 	
 	PVRTexHeader header;
@@ -308,6 +310,11 @@ void PackPVR::Store(std::ofstream& fout) const
 			fout.write(reinterpret_cast<const char*>(&s.data[0]), s.size);
 		}		
 	}
+}
+
+void PackPVR::Clear()
+{
+	// todo: release buf
 }
 
 void PackPVR::ClearImageData()

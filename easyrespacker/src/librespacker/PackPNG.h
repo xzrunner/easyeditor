@@ -15,9 +15,11 @@ public:
 	virtual ~PackPNG();
 
 	virtual void Load(const std::string& filepath);
-	virtual void Store(std::ofstream& fout) const;
+	virtual void Store(std::ofstream& fout, float scale) const;
 
 private:
+	void Clear();
+
 	void GenPng4();
 
 private:

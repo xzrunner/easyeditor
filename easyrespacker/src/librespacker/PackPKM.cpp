@@ -30,12 +30,13 @@ PackPKM::PackPKM()
 
 PackPKM::~PackPKM()
 {
-	delete m_rgb_buf;
-	delete m_alpha_buf;
+	Clear();
 }
 
 void PackPKM::Load(const std::string& filepath)
 {
+	Clear();
+
 	std::string filename = filepath.substr(0, filepath.find_last_of("."));
 
 	LoadCompressed(filename+".pkm", m_rgb_buf, m_width, m_height);
@@ -94,6 +95,12 @@ void PackPKM::Store(std::ofstream& fout) const
 		fout.write(reinterpret_cast<const char*>(m_rgb_buf), img_sz);
 		fout.write(reinterpret_cast<const char*>(m_alpha_buf), img_sz);		
 	}
+}
+
+void PackPKM::Clear()
+{
+	delete m_rgb_buf, m_rgb_buf = NULL;
+	delete m_alpha_buf, m_alpha_buf = NULL;
 }
 
 void PackPKM::LoadCompressed(const std::string& filename, uint8_t*& buf, 

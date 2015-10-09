@@ -114,48 +114,50 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		break;
 	}
 
+	PackImage* packer;
+	switch (type)
+	{
+	case TT_PNG4:
+		packer = new PackPNG(false);
+		break;
+	case TT_PNG8:
+		packer = new PackPNG(true);
+		break;
+	case TT_PVR:
+		packer = new PackPVR();
+		break;
+	case TT_PKM:
+		packer = new PackPKM();
+		break;
+	default:
+		throw d2d::Exception("PackToBin::PackEPT unknown type: %d\n", type);
+	}
+
 	std::vector<std::string> filenames;
 	tp.GetAllTextureFilename(filenames);
 	for (int i = 0, n = filenames.size(); i < n; ++i) 
 	{
-		std::locale::global(std::locale(""));
-		std::string _filepath = filepath + "." + d2d::StringTools::ToString(i + 1) + ".ept";
-		std::ofstream fout(_filepath.c_str(), std::ios::binary);
-		std::locale::global(std::locale("C"));
-
 		std::string str = filenames[i];
 		str = str.substr(0, str.find_last_of('.')) + ext;
 
-		PackImage* loader;
-		switch (type)
-		{
-		case TT_PNG4:
-			loader = new PackPNG(false);
-			break;
-		case TT_PNG8:
-			loader = new PackPNG(true);
-			break;
-		case TT_PVR:
-			loader = new PackPVR();
-			break;
-		case TT_PKM:
-			loader = new PackPKM();
-			break;
-		default:
-			throw d2d::Exception("PackToBin::PackEPT unknown type: %d\n", type);
-		}
+		packer->Load(str);
 
 		float scale = 1;
-		for (int i = 0; i < LOD; ++i) {
-			loader->Load(str);
-			loader->Store(fout);
+		for (int lod = 0; lod < LOD; ++lod) 
+		{
+			std::locale::global(std::locale(""));
+			std::string _filepath = filepath + "." + d2d::StringTools::ToString(i + 1) + ".ept";
+			std::ofstream fout(_filepath.c_str(), std::ios::binary);
+			std::locale::global(std::locale("C"));
+
+			packer->Store(fout);
 			scale *= 0.5f;
+
+			fout.close();
 		}
-
-		delete loader;
-
-		fout.close();
 	}
+
+	delete packer;
 }
 
 }
