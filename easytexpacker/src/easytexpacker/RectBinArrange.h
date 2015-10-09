@@ -5,7 +5,7 @@
 
 #include <Rect.h>
 
-namespace etp
+namespace etexpacker
 {
 	class RectBinArrange : public BaseStrategy
 	{

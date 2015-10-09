@@ -8,7 +8,7 @@
 #include "Context.h"
 #include "const.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)

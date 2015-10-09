@@ -1,7 +1,7 @@
 #ifndef _LIBTEXPACKER_RECT_H_
 #define _LIBTEXPACKER_RECT_H_
 
-namespace libtp
+namespace libtexpacker
 {
 	
 struct RectSize

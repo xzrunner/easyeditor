@@ -4,7 +4,7 @@
 #include "MeshToolbarPage.h"
 #include "RegularToolbarPage.h"
 
-namespace etp
+namespace etexpacker
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)

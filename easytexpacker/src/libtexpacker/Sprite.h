@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-namespace libtp
+namespace libtexpacker
 {
 
 struct Sprite

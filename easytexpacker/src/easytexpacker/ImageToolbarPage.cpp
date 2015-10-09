@@ -2,7 +2,7 @@
 #include "Context.h"
 #include "StagePanel.h"
 
-namespace etp
+namespace etexpacker
 {
 
 static const int BASE_EDGE = 32;

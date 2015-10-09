@@ -9,7 +9,7 @@
 #include <ShelfBinPack.h>
 #include <SkylineBinPack.h>
 
-using namespace etp;
+using namespace etexpacker;
 
 void RectBinArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 {

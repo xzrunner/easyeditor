@@ -5,7 +5,7 @@
 
 #include "const.h"
 
-namespace etp
+namespace etexpacker
 {
 
 class StagePanel;

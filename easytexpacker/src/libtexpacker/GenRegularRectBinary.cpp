@@ -6,7 +6,7 @@
 #include <fstream>
 #include <algorithm>
 
-namespace libtp
+namespace libtexpacker
 {
 
 GenRegularRectBinary::GenRegularRectBinary(const wxString& json_file, 

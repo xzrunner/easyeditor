@@ -1,7 +1,7 @@
 #ifndef _LIBTEXPACKER_TYPEDEF_H_
 #define _LIBTEXPACKER_TYPEDEF_H_
 
-namespace libtp
+namespace libtexpacker
 {
 
 enum PACK_STRATEGY

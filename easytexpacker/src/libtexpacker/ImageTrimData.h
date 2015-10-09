@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-namespace libtp
+namespace libtexpacker
 {
 
 class ImageTrimData

@@ -3,7 +3,7 @@
 #include "Context.h"
 #include "config.h"
 
-namespace etp
+namespace etexpacker
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)

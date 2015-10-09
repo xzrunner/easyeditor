@@ -7,7 +7,7 @@
 
 #include <drag2d.h>
 
-namespace libtp
+namespace libtexpacker
 {
 
 class MaxRectsBinaryPack2
@@ -26,7 +26,7 @@ private:
 
 	d2d::TPNode* NewRoot(int w, int h);
 
-	bool Insert(d2d::TPNode* root, const libtp::Sprite* sprite, int tex_id = 0) const;
+	bool Insert(d2d::TPNode* root, const libtexpacker::Sprite* sprite, int tex_id = 0) const;
 
 	void PackAuto(const std::vector<Sprite>& sprites, int area);
 	void PackSquare(const std::vector<Sprite>& sprites, int area);

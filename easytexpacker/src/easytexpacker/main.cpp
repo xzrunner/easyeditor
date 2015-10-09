@@ -1,7 +1,7 @@
 #include "main.h"
 #include "Frame.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 IMPLEMENT_APP(MyApp)
 

@@ -8,7 +8,7 @@
 
 #include "Rect.h"
 
-namespace libtp
+namespace libtexpacker
 {
 
 class RegularRectPack
@@ -116,16 +116,16 @@ private:
 
 	bool ComposeTwo(CombineArray* ca, int width, int height, bool is_right_side);
 
-	void ParserPackResult(const Combine& cb, const libtp::Rect& r);
+	void ParserPackResult(const Combine& cb, const libtexpacker::Rect& r);
 
 private:
 	std::set<CombineArray*, CombineArrayCmp> m_data;
 
 	int m_ori_count;
 
-	std::vector<std::pair<Rect, libtp::Rect> > m_result;
+	std::vector<std::pair<Rect, libtexpacker::Rect> > m_result;
 
-	std::vector<libtp::RectSize> m_sizes;
+	std::vector<libtexpacker::RectSize> m_sizes;
 
 }; // RegularRectPack
 

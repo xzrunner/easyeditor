@@ -3,7 +3,7 @@
 
 #include <easytexpacker.h>
 
-namespace etp
+namespace etexpacker
 {
 
 RegularToolbarPage::RegularToolbarPage(wxWindow* parent, StagePanel* stage)
@@ -47,7 +47,7 @@ void RegularToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 
 		wxArrayString files;
 		d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
-		libtp::RegularRectPack rrp(files);
+		libtexpacker::RegularRectPack rrp(files);
 
 		m_src_dir->SetValue(dir);
 	}

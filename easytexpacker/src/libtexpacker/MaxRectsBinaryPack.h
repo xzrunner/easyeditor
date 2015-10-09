@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace libtp
+namespace libtexpacker
 {
 
 class MaxRectsBinaryPack

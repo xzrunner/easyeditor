@@ -52,7 +52,7 @@ void PackRes::Trigger(const std::string& config_path)
 		d2d::FilenameTools::FormatFilepathAbsolute(config_path));
 
  	std::string trim_file = ConnectCfgDir(config_dir, value["trim file"].asString());
-// 	libtp::ImageTrimData trim(trim_file);
+// 	libtexpacker::ImageTrimData trim(trim_file);
 
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
@@ -78,7 +78,7 @@ void PackRes::Prepare(const Json::Value& pkg_val, const std::string& config_dir)
 }
 
 void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
-						   const libtp::ImageTrimData* trim) const
+						   const libtexpacker::ImageTrimData* trim) const
 {
 	d2d::SettingData& sd = d2d::Config::Instance()->GetSettings();
 	bool ori_cfg = sd.open_image_edge_clip;
@@ -93,7 +93,7 @@ void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_
 	std::vector<std::string> images;
 	GetAllImages(pkg_val, config_dir, images);
 
-	libtp::NormalPack tex_packer(images, trim);
+	libtexpacker::NormalPack tex_packer(images, trim);
 	tex_packer.Pack(0);
 	std::string json_path = dst_name + ".json";
 	tex_packer.OutputInfo(config_dir, json_path);

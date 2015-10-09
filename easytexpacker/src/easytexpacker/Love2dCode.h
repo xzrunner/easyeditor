@@ -3,7 +3,7 @@
 
 #include <easybuilder.h>
 
-namespace etp
+namespace etexpacker
 {
 	class Love2dCode
 	{

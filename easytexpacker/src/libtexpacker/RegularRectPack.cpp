@@ -4,7 +4,7 @@
 #include <wx/tokenzr.h>
 #include <iostream>
 
-namespace libtp
+namespace libtexpacker
 {
 
 RegularRectPack::RegularRectPack(const wxArrayString& files)
@@ -40,7 +40,7 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 
 	struct Part {
 		Rect src;
-		libtp::Rect dst;
+		libtexpacker::Rect dst;
 	};
 
 	struct Picture {
@@ -56,7 +56,7 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 		pictures.push_back(pic);
 	}
 
-	std::vector<std::pair<Rect, libtp::Rect> >::const_iterator itr;
+	std::vector<std::pair<Rect, libtexpacker::Rect> >::const_iterator itr;
 	for (itr = m_result.begin(); itr != m_result.end(); ++itr) {
 		Part* p = new Part;
 		p->src = itr->first;
@@ -261,11 +261,11 @@ void RegularRectPack::PackWithMaxRectAlg()
 		}
 	}
 
-	std::vector<libtp::Rect> output;
+	std::vector<libtexpacker::Rect> output;
 
 	// pack
 	MaxRectsBinaryPack2 packer;
-	packer.Pack(libtp::PACK_SQUARE_MULTI_AUTO, 0, 2048, 0, rects, output);
+	packer.Pack(libtexpacker::PACK_SQUARE_MULTI_AUTO, 0, 2048, 0, rects, output);
 	packer.GetSize(m_sizes);
 
 	// parser result
@@ -275,7 +275,7 @@ void RegularRectPack::PackWithMaxRectAlg()
 		CombineArray* ca = *itr;
 		while (!ca->combines.empty()) {
 			Combine cb = ca->combines.front(); ca->combines.pop();
-			const libtp::Rect& r = output[idx++];
+			const libtexpacker::Rect& r = output[idx++];
 			ParserPackResult(cb, r);
 		}
 	}
@@ -386,7 +386,7 @@ bool RegularRectPack::ComposeTwo(CombineArray* ca, int width, int height, bool i
 	return true;
 }
 
-void RegularRectPack::ParserPackResult(const Combine& cb, const libtp::Rect& r)
+void RegularRectPack::ParserPackResult(const Combine& cb, const libtexpacker::Rect& r)
 {
 	assert(cb.w == r.width && cb.h == r.height
 		|| cb.h == r.width && cb.w == r.height);
@@ -397,7 +397,7 @@ void RegularRectPack::ParserPackResult(const Combine& cb, const libtp::Rect& r)
 		for (int i = 0, n = cb.children.size(); i < n; ++i) {
 			const Combine& child = cb.children[i];
 
-			libtp::Rect cr;
+			libtexpacker::Rect cr;
 			cr.tex_id = r.tex_id;
 			if (cb.w <= r.width && cb.h <= r.height) {
 				cr.x = r.x + child.x;

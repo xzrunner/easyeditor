@@ -8,7 +8,7 @@
 #include "Rect.h"
 #include "typedef.h"
 
-namespace libtp
+namespace libtexpacker
 {
 
 class ImageTrimData;
@@ -39,7 +39,7 @@ private:
 
 	std::vector<Rect> m_dst_pos;
 
-	std::vector<libtp::RectSize> m_dst_img_sz;
+	std::vector<libtexpacker::RectSize> m_dst_img_sz;
 
 	std::vector<std::vector<int> > m_dst_img_idx;
 

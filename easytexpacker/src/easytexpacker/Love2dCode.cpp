@@ -3,7 +3,7 @@
 #include "Context.h"
 #include "StagePanel.h"
 
-using namespace etp;
+using namespace etexpacker;
 using namespace ebuilder;
 
 Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen)

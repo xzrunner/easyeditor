@@ -5,7 +5,7 @@
 #include <json/json.h>
 #include <fstream>
 
-namespace libtp
+namespace libtexpacker
 {
 
 ImageTrimData::ImageTrimData(const std::string& filepath)

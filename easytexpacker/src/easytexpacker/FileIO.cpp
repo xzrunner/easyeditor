@@ -4,7 +4,7 @@
 #include "Context.h"
 #include "config.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 void FileIO::load(const char* filename)
 {

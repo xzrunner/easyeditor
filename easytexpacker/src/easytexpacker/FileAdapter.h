@@ -5,7 +5,7 @@
 
 #include <drag2d.h>
 
-namespace etp
+namespace etexpacker
 {
 	class FileAdapter
 	{

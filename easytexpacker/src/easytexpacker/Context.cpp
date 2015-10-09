@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-using namespace etp;
+using namespace etexpacker;
 
 Context* Context::m_instance = NULL;
 

@@ -3,7 +3,7 @@
 
 #include "BaseStrategy.h"
 
-namespace etp
+namespace etexpacker
 {
 	class BinaryTreeArrange : public BaseStrategy
 	{

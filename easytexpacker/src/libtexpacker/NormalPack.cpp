@@ -5,7 +5,7 @@
 #include <easyimage.h>
 #include <string>
 
-namespace libtp
+namespace libtexpacker
 {
 
 static const bool CLOCKWISE_ROT = true;

@@ -2,7 +2,7 @@
 
 #include <easyimage.h>
 
-namespace libtp
+namespace libtexpacker
 {
 
 void GenRegularRectImage::CreateMulti(const wxString& filepath)

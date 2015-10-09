@@ -1,7 +1,7 @@
 #include "DirectlyArrange.h"
 #include "Context.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 void DirectlyArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 {

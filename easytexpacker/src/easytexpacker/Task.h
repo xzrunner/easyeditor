@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <wx/splitter.h>
 
-namespace etp
+namespace etexpacker
 {
 	class Task
 	{

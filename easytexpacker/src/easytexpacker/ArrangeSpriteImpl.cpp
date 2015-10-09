@@ -2,7 +2,7 @@
 #include "StagePanel.h"
 #include "Context.h"
 
-namespace etp
+namespace etexpacker
 {
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel, 

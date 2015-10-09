@@ -42,12 +42,12 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 	wxString filepath = dst_dir + "\\" + name;
 
   	// pack
-  	libtp::RegularRectPack rrp(files);
+  	libtexpacker::RegularRectPack rrp(files);
   	rrp.Pack();
   	rrp.OutputToText(filepath);
   
   	// gen image
-  	libtp::GenRegularRectImage::CreateMulti(filepath);
+  	libtexpacker::GenRegularRectImage::CreateMulti(filepath);
 }
 
 }

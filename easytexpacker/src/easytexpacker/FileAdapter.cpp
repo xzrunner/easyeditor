@@ -1,6 +1,6 @@
 #include "FileAdapter.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 FileAdapter::FileAdapter()
 {

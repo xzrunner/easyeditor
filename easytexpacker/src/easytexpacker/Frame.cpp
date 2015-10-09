@@ -5,7 +5,7 @@
 
 #include <wx/splitter.h>
 
-using namespace etp;
+using namespace etexpacker;
 
 //static const wxString VERSION = wxT("0.13.0514");
 

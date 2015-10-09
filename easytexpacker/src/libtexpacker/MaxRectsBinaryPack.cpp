@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <math.h>
 
-namespace libtp
+namespace libtexpacker
 {
 
 static const float SCALE = 1.0f;

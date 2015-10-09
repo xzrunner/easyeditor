@@ -1,7 +1,7 @@
 #include "BaseStrategy.h"
 #include "Context.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 void BaseStrategy::sortByArea(std::vector<d2d::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {

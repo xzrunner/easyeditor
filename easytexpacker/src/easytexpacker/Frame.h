@@ -3,7 +3,7 @@
 
 #include <wx/wx.h>
 
-namespace etp
+namespace etexpacker
 {
 	class Task;
 

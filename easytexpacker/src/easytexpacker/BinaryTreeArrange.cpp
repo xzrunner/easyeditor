@@ -1,7 +1,7 @@
 #include "BinaryTreeArrange.h"
 #include "Context.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 BinaryTreeArrange::BinaryTreeArrange()
 {

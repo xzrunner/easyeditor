@@ -4,7 +4,7 @@
 #include "FileIO.h"
 #include "Context.h"
 
-using namespace etp;
+using namespace etexpacker;
 
 Task::Task(wxFrame* parent)
 	: m_root(NULL)

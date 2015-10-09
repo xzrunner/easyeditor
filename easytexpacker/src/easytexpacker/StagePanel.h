@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <easyphysics.h>
 
-namespace etp
+namespace etexpacker
 {
 
 class BaseStrategy;

@@ -1,7 +1,7 @@
 #include "MaxRectsBinaryPack2.h"
 #include "math.h"
 
-namespace libtp
+namespace libtexpacker
 {
 
 static const float SCALE = 1.0f;
@@ -76,7 +76,7 @@ d2d::TPNode* MaxRectsBinaryPack2::NewRoot(int w, int h)
 	return root;
 }
 
-bool MaxRectsBinaryPack2::Insert(d2d::TPNode* root, const libtp::Sprite* sprite, int tex_id) const
+bool MaxRectsBinaryPack2::Insert(d2d::TPNode* root, const libtexpacker::Sprite* sprite, int tex_id) const
 {
 	d2d::TPNode* n = NULL;
 	int w = sprite->size->width * SCALE + PADDING * 2,

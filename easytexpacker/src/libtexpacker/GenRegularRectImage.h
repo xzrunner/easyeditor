@@ -3,7 +3,7 @@
 
 #include <wx/wx.h>
 
-namespace libtp
+namespace libtexpacker
 {
 
 class GenRegularRectImage

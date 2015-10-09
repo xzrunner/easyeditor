@@ -4,7 +4,7 @@
 
 #include <easyshape.h>
 
-namespace etp
+namespace etexpacker
 {
 
 MeshToolbarPage::MeshToolbarPage(wxWindow* parent, StagePanel* stage)

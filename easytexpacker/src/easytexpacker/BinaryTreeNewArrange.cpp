@@ -2,7 +2,7 @@
 #include "Context.h"
 #include "config.h"
 
-namespace etp
+namespace etexpacker
 {
 
 static const float PADDING = 0;

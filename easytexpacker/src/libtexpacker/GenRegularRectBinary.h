@@ -4,7 +4,7 @@
 #include <wx/wx.h>
 #include <vector>
 
-namespace libtp
+namespace libtexpacker
 {
 
 class GenRegularRectBinary

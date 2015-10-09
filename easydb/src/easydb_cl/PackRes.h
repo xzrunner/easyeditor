@@ -7,7 +7,7 @@
 #include <wx/string.h>
 #include <set>
 
-namespace libtp { class ImageTrimData; }
+namespace libtexpacker { class ImageTrimData; }
 
 namespace edb
 {
@@ -33,7 +33,7 @@ private:
 	void Prepare(const Json::Value& pkg_val, const std::string& config_dir);
 
 	void PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
-		const libtp::ImageTrimData* trim) const;
+		const libtexpacker::ImageTrimData* trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
 	void GetAllImages(const Json::Value& pkg_val, const std::string& config_dir,
 		std::vector<std::string>& images) const;
