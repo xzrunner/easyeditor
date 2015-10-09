@@ -1,5 +1,5 @@
 #include "PictureFromLua.h"
-#include "tools.h"
+#include "typedef.h"
 
 namespace librespacker
 {

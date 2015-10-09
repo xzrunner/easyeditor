@@ -1,11 +1,11 @@
-#ifndef _EPBIN_LUA_DATA_HELPER_H_
-#define _EPBIN_LUA_DATA_HELPER_H_
+#ifndef _LIBRESPACKER_LUA_DATA_HELPER_H_
+#define _LIBRESPACKER_LUA_DATA_HELPER_H_
 
 #include <string>
 
 struct lua_State;
 
-namespace epbin
+namespace librespacker
 {
 
 class LuaDataHelper
@@ -22,4 +22,4 @@ public:
 
 }
 
-#endif // _EPBIN_LUA_DATA_HELPER_H_
+#endif // _LIBRESPACKER_LUA_DATA_HELPER_H_

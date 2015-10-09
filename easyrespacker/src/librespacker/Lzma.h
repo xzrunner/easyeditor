@@ -1,9 +1,9 @@
-#ifndef _EPBIN_LZMA_H_
-#define _EPBIN_LZMA_H_
+#ifndef _LIBRESPACKER_LZMA_H_
+#define _LIBRESPACKER_LZMA_H_
 
 #include <stdint.h>
 
-namespace epbin
+namespace librespacker
 {
 
 class Lzma
@@ -20,4 +20,4 @@ public:
 
 }
 
-#endif // _EPBIN_LZMA_H_
+#endif // _LIBRESPACKER_LZMA_H_

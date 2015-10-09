@@ -1,18 +1,18 @@
-#ifndef _EPBIN_PKM_LOADER_H_
-#define _EPBIN_PKM_LOADER_H_
+#ifndef _LIBRESPACKER_PACK_PKM_H_
+#define _LIBRESPACKER_PACK_PKM_H_
 
-#include "TexLoader.h"
+#include "PackImage.h"
 
 #include <stdint.h>
 
-namespace epbin
+namespace librespacker
 {
 
-class PKMLoader : public TexLoader
+class PackPKM : public PackImage
 {
 public:
-	PKMLoader();
-	virtual ~PKMLoader();
+	PackPKM();
+	virtual ~PackPKM();
 
 	virtual void Load(const std::string& filepath);
 	virtual void Store(std::ofstream& fout) const;
@@ -25,8 +25,8 @@ private:
 
 	uint8_t *m_rgb_buf, *m_alpha_buf;
 
-}; // PKMLoader
+}; // PackPKM
 
 }
 
-#endif // _EPBIN_PKM_LOADER_H_
+#endif // _LIBRESPACKER_PACK_PKM_H_

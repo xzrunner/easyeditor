@@ -1,10 +1,13 @@
 #include "PackToBin.h"
 #include "PackNodeFactory.h"
 #include "IPackNode.h"
-#include "tools.h"
+#include "pack_unpack.h"
 #include "spritepack.h"
+#include "Lzma.h"
 
-#include <epbin.h>
+#include "PackPNG.h"
+#include "PackPVR.h"
+#include "PackPKM.h"
 
 namespace librespacker
 {
@@ -81,7 +84,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 	if (compress) {
 		uint8_t* dst = NULL;
 		size_t dst_sz;
-		epbin::Lzma::Compress(&dst, &dst_sz, buf, out_sz);
+		Lzma::Compress(&dst, &dst_sz, buf, out_sz);
 
 		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(dst_sz));
 		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
@@ -123,20 +126,20 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		std::string str = filenames[i];
 		str = str.substr(0, str.find_last_of('.')) + ext;
 
-		epbin::TexLoader* loader;
+		PackImage* loader;
 		switch (type)
 		{
 		case TT_PNG4:
-			loader = new epbin::PNGLoader(false);
+			loader = new PackPNG(false);
 			break;
 		case TT_PNG8:
-			loader = new epbin::PNGLoader(true);
+			loader = new PackPNG(true);
 			break;
 		case TT_PVR:
-			loader = new epbin::PVRLoader();
+			loader = new PackPVR();
 			break;
 		case TT_PKM:
-			loader = new epbin::PKMLoader();
+			loader = new PackPKM();
 			break;
 		default:
 			throw d2d::Exception("PackToBin::PackEPT unknown type: %d\n", type);

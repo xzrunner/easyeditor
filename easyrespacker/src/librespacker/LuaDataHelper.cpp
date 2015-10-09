@@ -6,7 +6,7 @@ extern "C" {
 #include <lauxlib.h>
 };
 
-namespace epbin
+namespace librespacker
 {
 
 std::string LuaDataHelper::GetStringField(lua_State* L, const char* name)

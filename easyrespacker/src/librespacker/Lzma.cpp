@@ -6,7 +6,7 @@
 #include <string>
 #include <assert.h>
 
-namespace epbin
+namespace librespacker
 {
 
 static void *SzAlloc(void *p, size_t size) { p = p; return MyAlloc(size); }

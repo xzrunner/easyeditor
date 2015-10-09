@@ -1,28 +1,12 @@
-#ifndef _LIBRESPACKER_TOOLS_H_
-#define _LIBRESPACKER_TOOLS_H_
+#ifndef _LIBRESPACKER_PACK_UNPACK_H_
+#define _LIBRESPACKER_PACK_UNPACK_H_
 
-#include <drag2d.h>
+#include <stdint.h>
+#include <fstream>
+#include <string>
 
 namespace librespacker
 {
-
-static const float SCALE = 16;
-
-static const uint8_t TAG_ID			= 1;
-static const uint8_t TAG_COLOR		= 2;
-static const uint8_t TAG_ADDITIVE	= 4;
-static const uint8_t TAG_MATRIX		= 8;
-static const uint8_t TAG_TOUCH		= 16;
-static const uint8_t TAG_MATRIXREF	= 32;
-static const uint8_t TAG_COLMAP		= 64;
-
-enum TextureType
-{
-	TT_PNG4,
-	TT_PNG8,
-	TT_PVR,
-	TT_PKM
-};
 
 // template <class T>
 // void endswap(T* objp)
@@ -102,4 +86,4 @@ inline void unpack_str(std::string& str, uint8_t** ptr) {
 
 }
 
-#endif // _LIBRESPACKER_TOOLS_H_
+#endif // _LIBRESPACKER_PACK_UNPACK_H_

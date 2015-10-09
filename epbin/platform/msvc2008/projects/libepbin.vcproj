@@ -146,42 +146,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="loader"
-			>
-			<File
-				RelativePath="..\..\..\src\image_type.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\PKMLoader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\PKMLoader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\PNGLoader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\PNGLoader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\PVRLoader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\PVRLoader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\TexLoader.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="tools"
 			>
 			<File

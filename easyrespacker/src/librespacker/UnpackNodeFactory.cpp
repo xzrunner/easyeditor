@@ -1,6 +1,7 @@
 #include "UnpackNodeFactory.h"
-#include "tools.h"
+#include "pack_unpack.h"
 #include "spritepack.h"
+#include "LuaDataHelper.h"
 
 #include "PackPicture.h"
 #include "PackLabel.h"
@@ -8,8 +9,6 @@
 #include "PackAnchor.h"
 #include "PackParticle3D.h"
 #include "PackParticle2D.h"
-
-#include <epbin.h>
 
 extern "C" {
 #include <lua.h>
@@ -28,8 +27,8 @@ UnpackNodeFactory::UnpackNodeFactory()
 
 void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
 {
-	std::string type = epbin::LuaDataHelper::GetStringField(L, "type");
-	int id = epbin::LuaDataHelper::GetIntField(L, "id");
+	std::string type = LuaDataHelper::GetStringField(L, "type");
+	int id = LuaDataHelper::GetIntField(L, "id");
 
 	IPackNode* node = NULL;
 	if (type == "picture") {

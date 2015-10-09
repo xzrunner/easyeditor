@@ -1,5 +1,5 @@
 #include "Particle3DToBin.h"
-#include "tools.h"
+#include "pack_unpack.h"
 #include "spritepack.h"
 
 namespace librespacker

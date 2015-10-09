@@ -1,10 +1,10 @@
-#include "PVRLoader.h"
+#include "PackPVR.h"
 #include "Lzma.h"
-#include "image_type.h"
+#include "typedef.h"
 
 #include <assert.h>
 
-namespace epbin
+namespace librespacker
 {
 
 #define PVR_TEXTURE_FLAG_TYPE_MASK  0xff
@@ -103,9 +103,9 @@ enum EPVRTPixelFormat
 	ePVRTPF_NumCompressedPFs
 };
 
-PVRLoader::PVRLoader()
+PackPVR::PackPVR()
 {
-	m_type = TYPE_PVRTC;
+	m_type = TT_PVR;
 
 	m_tex.width = m_tex.height = 0;
 	m_tex.internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
@@ -113,12 +113,12 @@ PVRLoader::PVRLoader()
 	ClearImageData();
 }
 
-PVRLoader::~PVRLoader()
+PackPVR::~PackPVR()
 {
 	
 }
 
-void PVRLoader::Load(const std::string& filepath)
+void PackPVR::Load(const std::string& filepath)
 {
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
 	
@@ -246,7 +246,7 @@ void PVRLoader::Load(const std::string& filepath)
 	fin.close();
 }
 
-void PVRLoader::Store(std::ofstream& fout) const
+void PackPVR::Store(std::ofstream& fout) const
 {
 	if (m_compress)
 	{
@@ -310,7 +310,7 @@ void PVRLoader::Store(std::ofstream& fout) const
 	}
 }
 
-void PVRLoader::ClearImageData()
+void PackPVR::ClearImageData()
 {
 	m_tex.image_data_count = 0;
 }

@@ -1,9 +1,8 @@
 #include "UnpackFromBin.h"
 #include "UnpackNodeFactory.h"
-#include "tools.h"
+#include "pack_unpack.h"
 #include "IPackNode.h"
-
-#include <epbin.h>
+#include "Lzma.h"
 
 namespace librespacker
 {
@@ -45,7 +44,7 @@ void UnpackFromBin::Unpack(const std::string& filepath,
 		size_t guess_sz = uc_sz;
 		uint8_t* uc_buf = new uint8_t[uc_sz];
 		size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
-		epbin::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
+		Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
 		if (guess_sz == uc_sz) {
 			throw d2d::Exception("UnpackFromBin::Unpack no enough space.");
 		}

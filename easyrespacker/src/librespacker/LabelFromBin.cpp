@@ -1,6 +1,6 @@
 #include "LabelFromBin.h"
+#include "pack_unpack.h"
 #include "spritepack.h"
-#include "tools.h"
 
 namespace librespacker
 {

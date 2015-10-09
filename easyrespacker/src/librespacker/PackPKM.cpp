@@ -1,11 +1,10 @@
-#include "PKMLoader.h"
-#include "Exception.h"
+#include "PackPKM.h"
 #include "Lzma.h"
-#include "image_type.h"
+#include "typedef.h"
 
-#include <assert.h>
+#include <drag2d.h>
 
-namespace epbin
+namespace librespacker
 {
 
 struct PKMHeader
@@ -21,21 +20,21 @@ struct PKMHeader
 	unsigned char heightLSB;
 };
 
-PKMLoader::PKMLoader()
+PackPKM::PackPKM()
 {
-	m_type = TYPE_PKMC;
+	m_type = TT_PKM;
 
 	m_width = m_height = 0;
 	m_rgb_buf = m_alpha_buf = NULL;
 }
 
-PKMLoader::~PKMLoader()
+PackPKM::~PackPKM()
 {
 	delete m_rgb_buf;
 	delete m_alpha_buf;
 }
 
-void PKMLoader::Load(const std::string& filepath)
+void PackPKM::Load(const std::string& filepath)
 {
 	std::string filename = filepath.substr(0, filepath.find_last_of("."));
 
@@ -46,7 +45,7 @@ void PKMLoader::Load(const std::string& filepath)
 	assert(w == m_width && h == m_height);
 }
 
-void PKMLoader::Store(std::ofstream& fout) const
+void PackPKM::Store(std::ofstream& fout) const
 {
 	if (m_compress)
 	{
@@ -97,7 +96,7 @@ void PKMLoader::Store(std::ofstream& fout) const
 	}
 }
 
-void PKMLoader::LoadCompressed(const std::string& filename, uint8_t*& buf, 
+void PackPKM::LoadCompressed(const std::string& filename, uint8_t*& buf, 
 							   int& width, int& height)
 {
 	std::ifstream fin(filename.c_str(), std::ios::binary);
@@ -110,7 +109,7 @@ void PKMLoader::LoadCompressed(const std::string& filename, uint8_t*& buf,
 	uint32_t sz = (width * height) >> 1;
 	buf = new uint8_t[sz];
 	if (!buf) {
-		throw Exception("Out of memory: PKMLoader::LoadCompressed %s \n", filename.c_str());
+		throw d2d::Exception("Out of memory: PackPKM::LoadCompressed %s \n", filename.c_str());
 	}
 	fin.read(reinterpret_cast<char*>(buf), sz);
 

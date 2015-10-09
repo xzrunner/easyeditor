@@ -1,18 +1,18 @@
-#ifndef _EPBIN_PVR_LOADER_H_
-#define _EPBIN_PVR_LOADER_H_
+#ifndef _LIBRESPACKER_PACK_PVR_H_
+#define _LIBRESPACKER_PACK_PVR_H_
 
-#include "TexLoader.h"
+#include "PackImage.h"
 
 #include <stdint.h>
 
-namespace epbin
+namespace librespacker
 {
 
-class PVRLoader : public TexLoader
+class PackPVR : public PackImage
 {
 public:
-	PVRLoader();
-	virtual ~PVRLoader();
+	PackPVR();
+	virtual ~PackPVR();
 
 	virtual void Load(const std::string& filepath);
 	virtual void Store(std::ofstream& fout) const;
@@ -41,8 +41,8 @@ private:
 private:
 	PvrTexture m_tex;
 
-}; // PvrLoader
+}; // PackPVR
 
 }
 
-#endif // _EPBIN_PVR_LOADER_H_
+#endif // _LIBRESPACKER_PACK_PVR_H_

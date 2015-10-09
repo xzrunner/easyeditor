@@ -1,5 +1,5 @@
 #include "PictureToLuaString.h"
-#include "tools.h"
+#include "typedef.h"
 
 #include <easybuilder.h>
 

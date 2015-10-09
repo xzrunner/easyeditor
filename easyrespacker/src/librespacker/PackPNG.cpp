@@ -1,41 +1,40 @@
-#include "PNGLoader.h"
+#include "PackPNG.h"
 #include "Lzma.h"
-#include "image_type.h"
+#include "typedef.h"
 
-#include <libpng/png.h>
-#include <dtex_png.h>
+#include <drag2d.h>
 
-namespace epbin
+namespace librespacker
 {
 
-PNGLoader::PNGLoader(bool png8)
+PackPNG::PackPNG(bool png8)
 	: m_buffer(NULL)
 	, m_buf_sz(0)
 {
-	m_type = png8 ? TYPE_TEXTURE8 : TYPE_TEXTURE4;
+	m_type = png8 ? TT_PNG8 : TT_PNG4;
 }
 
-PNGLoader::~PNGLoader()
+PackPNG::~PackPNG()
 {
 	delete[] m_buffer;
 }
 
-void PNGLoader::Load(const std::string& filepath)
+void PackPNG::Load(const std::string& filepath)
 {
 	int w, h, c, f;
-	uint8_t* buf = dtex_png_read(filepath.c_str(), &w, &h, &c, &f);
+	uint8_t* buf = d2d::ImageLoader::FileToPixels(filepath, w, h, c, f);
 
 	m_width = w;
 	m_height = h;
 	m_buffer = buf;
 	m_buf_sz = w * h * c;
 
-	if (m_type == TYPE_TEXTURE4) {
+	if (m_type == TT_PNG4) {
 		GenPng4();
 	}
 }
 
-// void PNGLoader::Load(const std::string& filepath)
+// void PackPNG::Load(const std::string& filepath)
 // {
 // 	png_image image;
 // 
@@ -63,14 +62,14 @@ void PNGLoader::Load(const std::string& filepath)
 // 			m_buffer = new uint8_t[sz];
 // 			memcpy(m_buffer, buffer, sz);
 // 			m_buf_sz = sz;
-// 			if (m_type == TYPE_TEXTURE4) {
+// 			if (m_type == TT_PNG4) {
 // 				GenPng4();
 // 			}
 // 		}
 // 	}
 // }
 
-void PNGLoader::Store(std::ofstream& fout) const
+void PackPNG::Store(std::ofstream& fout) const
 {
 	if (m_compress)
 	{
@@ -120,7 +119,7 @@ _round(int c) {
 }
 
 // todo
-void PNGLoader::GenPng4()
+void PackPNG::GenPng4()
 {
 	for (int i = 0; i < m_buf_sz; i += 4)
 	{

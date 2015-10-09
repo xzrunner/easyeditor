@@ -1,7 +1,6 @@
 #include "ResPacker.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
-#include "tools.h"
 
 #include "PackToLuaString.h"
 #include "PackToBin.h"
