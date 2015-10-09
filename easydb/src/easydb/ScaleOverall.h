@@ -28,7 +28,7 @@ public:
 	static ICommand* Create() { return new ScaleOverall(); }
 
 private:
-	void Trigger(const std::string& dir, float scale) const;
+	void Scale(d2d::Snapshoot& ss, const std::string& dir, float scale) const;
 
 	void ScaleImage(const std::string& filepath, float scale, d2d::Snapshoot& ss,
 		std::map<std::string, d2d::Vector>& mapImg2Center) const;

@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "RotateTrimImage.h"
 #include "check_params.h"
 
@@ -31,20 +33,14 @@ void RotateTrimImage::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 3)) return;
 	if (!check_folder(argv[2])) return;
 
-	Trigger(argv[2]);
-}
-
-const char* RotateTrimImage::GetOutputFileName()
-{
-	return OUTPUT_FILE;
-}
-
-void RotateTrimImage::Trigger(const std::string& dir)
-{
 	glfwInit();
-	if(!glfwOpenWindow(800, 600, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
+		return;
+	}
+
+	if (glewInit() != GLEW_OK) {
 		return;
 	}
 
@@ -52,6 +48,25 @@ void RotateTrimImage::Trigger(const std::string& dir)
 
 	d2d::Snapshoot ss;
 
+	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	bool ori_clip_cfg = data.open_image_edge_clip;
+	data.open_image_edge_clip = false;
+	bool ori_alpha_cfg = data.pre_multi_alpha;
+	data.pre_multi_alpha = false;
+
+	RotateTrim(ss, argv[2]);
+
+	data.open_image_edge_clip = ori_clip_cfg;
+	data.pre_multi_alpha = ori_alpha_cfg;
+}
+
+const char* RotateTrimImage::GetOutputFileName()
+{
+	return OUTPUT_FILE;
+}
+
+void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
+{
 	std::string output_file = dir + "\\" + OUTPUT_FILE;
 	std::ofstream fout(output_file.c_str(), std::ios::binary);
 	if (fout.fail()) {

@@ -26,7 +26,7 @@ public:
 	static const char* GetOutputFileName();
 
 private:
-	void Trigger(const std::string& dir);	
+	void RotateTrim(d2d::Snapshoot& ss, const std::string& dir);	
 
 	bool GetRotateTrimInfo(const d2d::Image* image, 
 		int& width, int& height,

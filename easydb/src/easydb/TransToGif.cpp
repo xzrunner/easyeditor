@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "TransToGif.h"
 #include "check_params.h"
 
@@ -32,19 +34,26 @@ void TransToGif::Run(int argc, char *argv[])
 	if (!check_folder(argv[2])) return;
 	if (!check_folder(argv[3])) return;
 
-	Trigger(argv[2], argv[3]);
-}
-
-void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) const
-{
 	glfwInit();
-	if(!glfwOpenWindow(800, 600, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
 		return;
 	}
+
+	if (glewInit() != GLEW_OK) {
+		return;
+	}
+
+	d2d::ShaderMgr::Instance()->reload();
+
 	d2d::Snapshoot ss;
 
+	Run(ss, argv[2], argv[3]);
+}
+
+void TransToGif::Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const
+{
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(srcdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)

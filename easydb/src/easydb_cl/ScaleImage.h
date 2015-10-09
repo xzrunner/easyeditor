@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <drag2d.h>
+
 namespace edb
 {
 
@@ -22,7 +24,8 @@ public:
 	static ICommand* Create() { return new ScaleImage(); }
 
 private:
-	void Trigger(const std::string& dir, float scale);
+	void Scale(d2d::Snapshoot& ss, const std::string& dir, float scale);
+	void Scale(d2d::Snapshoot& ss, const std::string& src, const std::string& dst, float scale);
 
 }; // ScaleImage
 

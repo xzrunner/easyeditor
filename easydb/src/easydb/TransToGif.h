@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <drag2d.h>
+
 namespace edb
 {
 
@@ -22,7 +24,7 @@ public:
 	static ICommand* Create() { return new TransToGif(); }
 
 private:
-	void Trigger(const std::string& srcdir, const std::string& dstdir) const;
+	void Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const;
 
 }; // TransToGif
 

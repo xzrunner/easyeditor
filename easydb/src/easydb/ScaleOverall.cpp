@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "ScaleOverall.h"
 #include "check_params.h"
 
@@ -30,19 +32,35 @@ void ScaleOverall::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 4)) return;
 	if (!check_folder(argv[2])) return;
 
-	Trigger(argv[2], atof(argv[3]));
-}
-
-void ScaleOverall::Trigger(const std::string& dir, float scale) const
-{	
 	glfwInit();
-	if(!glfwOpenWindow(800, 600, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
 		return;
 	}
+
+	if (glewInit() != GLEW_OK) {
+		return;
+	}
+
+	d2d::ShaderMgr::Instance()->reload();
+
 	d2d::Snapshoot ss;
 
+	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	bool ori_clip_cfg = data.open_image_edge_clip;
+	data.open_image_edge_clip = false;
+	bool ori_alpha_cfg = data.pre_multi_alpha;
+	data.pre_multi_alpha = false;
+
+	Scale(ss, argv[2], atof(argv[3]));
+
+	data.open_image_edge_clip = ori_clip_cfg;
+	data.pre_multi_alpha = ori_alpha_cfg;
+}
+
+void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale) const
+{	
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
 
