@@ -15,7 +15,7 @@ public:
 		bool compress);	
 
 	static void PackEPT(const std::string& filepath, const d2d::TexturePacker& tp,
-		TextureType type);	
+		TextureType type, int LOD);	
 
 }; // PackToBin
 

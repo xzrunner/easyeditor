@@ -19,7 +19,7 @@ std::string PackEP::Description() const
 
 std::string PackEP::Usage() const
 {
-	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type]";
+	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD]";
 }
 
 void PackEP::Run(int argc, char *argv[])
@@ -28,12 +28,16 @@ void PackEP::Run(int argc, char *argv[])
 	if (!check_folder(argv[2])) return;
 	if (!check_folder(argv[4])) return;
 
-	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6]);
+	int LOD = 0;
+	if (argc == 8) {
+		LOD = atoi(argv[7]);
+	}
+	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD);
 }
 
 void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
-					 const std::string& type)
+					 const std::string& type, int LOD)
 {
 	libcoco::CocoPacker packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {

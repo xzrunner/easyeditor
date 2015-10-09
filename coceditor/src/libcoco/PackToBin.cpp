@@ -95,7 +95,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 }
 
 void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& tp, 
-						TextureType type)
+						TextureType type, int LOD)
 {
 	std::string ext;
 	switch (type) 
@@ -141,8 +141,14 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		default:
 			throw d2d::Exception("PackToBin::PackEPT unknown type: %d\n", type);
 		}
-		loader->Load(str);
-		loader->Store(fout);
+
+		float scale = 1;
+		for (int i = 0; i < LOD; ++i) {
+			loader->Load(str, scale);
+			loader->Store(fout);
+			scale *= 0.5f;
+		}
+
 		delete loader;
 
 		fout.close();

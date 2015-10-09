@@ -25,7 +25,8 @@ public:
 	static ICommand* Create() { return new PackEP(); }
 
 	void Trigger(const std::string& json_dir, const std::string& tp_json,
-		const std::string& tp_dir, const std::string& out_file, const std::string& type);
+		const std::string& tp_dir, const std::string& out_file, const std::string& type,
+		int LOD);
 
 }; // PackEP
 
