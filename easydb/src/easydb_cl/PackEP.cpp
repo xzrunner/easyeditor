@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <drag2d.h>
-#include <easycoco.h>
+#include <easyrespacker.h>
 
 namespace edb
 {
@@ -39,23 +39,23 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
 					 const std::string& type, int LOD)
 {
-	libcoco::CocoPacker packer(json_dir, tp_json, tp_dir);
+	librespacker::ResPacker packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua");
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true);
-		packer.OutputEpt(out_file, libcoco::TT_PNG8);
+		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD);
 	} else if (type == "epe") {
 		packer.OutputEpe(out_file, true);
 	} else if (type == "ept") {
-		packer.OutputEpt(out_file, libcoco::TT_PNG8);
+		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD);
 	} else if (type == "debug") {
 		packer.OutputLua(out_file + ".lua");
 		packer.OutputEpe(out_file, true);
 	} else if (type == "all") {
 		packer.OutputLua(out_file + ".lua");
 		packer.OutputEpe(out_file, true);
-		packer.OutputEpt(out_file, libcoco::TT_PNG8);
+		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD);
 	}
 }
 

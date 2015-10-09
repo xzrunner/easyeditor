@@ -2,7 +2,6 @@
 #define _LIBCOMPLEX_FILE_LOADER_H_
 
 #include <drag2d.h>
-#include <easycoco.h>
 
 namespace ecomplex
 {

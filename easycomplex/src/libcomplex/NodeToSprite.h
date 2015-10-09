@@ -2,7 +2,7 @@
 #define _LIBCOMPLEX_NODE_TO_SPRITE_H_
 
 #include <drag2d.h>
-#include <easycoco.h>
+#include <easyrespacker.h>
 
 namespace ecomplex
 {
@@ -10,7 +10,7 @@ namespace ecomplex
 class NodeToSprite
 {
 public:
-	static d2d::ISprite* Trans(const libcoco::IPackNode* node);
+	static d2d::ISprite* Trans(const librespacker::IPackNode* node);
 
 };	// NodeToSprite
 

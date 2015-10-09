@@ -8,7 +8,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* AnimationToSpr::Trans(const libcoco::PackAnimation* anim)
+d2d::ISprite* AnimationToSpr::Trans(const librespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 	if (anim->actions[0].size == 1) {
@@ -18,15 +18,15 @@ d2d::ISprite* AnimationToSpr::Trans(const libcoco::PackAnimation* anim)
 	}
 }
 
-d2d::ISprite* AnimationToSpr::TransComplex(const libcoco::PackAnimation* anim)
+d2d::ISprite* AnimationToSpr::TransComplex(const librespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size == 1);
 
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
-	const libcoco::PackAnimation::Frame& src = anim->frames[0];
+	const librespacker::PackAnimation::Frame& src = anim->frames[0];
 	ecomplex::Symbol* dst = new ecomplex::Symbol;
 	for (int i = 0; i < src.parts.size(); ++i) {
-		const libcoco::PackAnimation::Part& part = src.parts[i];
+		const librespacker::PackAnimation::Part& part = src.parts[i];
 		d2d::ISprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 		TransSprite(spr, part.t);
 		dst->m_sprites.push_back(spr);
@@ -37,19 +37,19 @@ d2d::ISprite* AnimationToSpr::TransComplex(const libcoco::PackAnimation* anim)
 	return new Sprite(complex);
 }
 
-d2d::ISprite* AnimationToSpr::TransAnim(const libcoco::PackAnimation* anim)
+d2d::ISprite* AnimationToSpr::TransAnim(const librespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
 	libanim::Symbol* anim_symbol = new libanim::Symbol;
 	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
 	for (int i = 0; i < anim->actions[0].size; ++i) {
-		const libcoco::PackAnimation::Frame& src = anim->frames[i];
+		const librespacker::PackAnimation::Frame& src = anim->frames[i];
 		libanim::Symbol::Frame* frame = new libanim::Symbol::Frame;
 		frame->index = i;
 		frame->bClassicTween = false;
 		for (int j = 0; j < src.parts.size(); ++j) {
-			const libcoco::PackAnimation::Part& part = src.parts[j];
+			const librespacker::PackAnimation::Part& part = src.parts[j];
 			d2d::ISprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 			TransSprite(spr, part.t);
 			frame->sprites.push_back(spr);
@@ -62,15 +62,15 @@ d2d::ISprite* AnimationToSpr::TransAnim(const libcoco::PackAnimation* anim)
 	return new libanim::Sprite(anim_symbol);
 }
 
-void AnimationToSpr::TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSprite(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
 {
-	if (!libcoco::PackAnimation::IsMatrixIdentity(t.mat)) {
+	if (!librespacker::PackAnimation::IsMatrixIdentity(t.mat)) {
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
 }
 
-void AnimationToSpr::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSpriteMat(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
 {
 	float dx = t.mat[4] / 16.0f,
 		dy = -t.mat[5] / 16.0f;
@@ -128,7 +128,7 @@ void AnimationToSpr::TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimat
 	spr->SetTransform(d2d::Vector(dx, dy), angle);
 }
 
-void AnimationToSpr::TransSpriteCol(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSpriteCol(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
 {
 	spr->multiCol = d2d::transColor(t.color, d2d::PT_RGBA);
 	spr->addCol = d2d::transColor(t.additive, d2d::PT_RGBA);

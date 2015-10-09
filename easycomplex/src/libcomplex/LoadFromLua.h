@@ -1,8 +1,7 @@
 #ifndef _LIBCOMPLEX_LOAD_FROM_LUA_H_
 #define _LIBCOMPLEX_LOAD_FROM_LUA_H_
 
-// #include <drag2d.h>
-#include <easycoco.h>
+#include <drag2d.h>
 
 namespace ecomplex
 {

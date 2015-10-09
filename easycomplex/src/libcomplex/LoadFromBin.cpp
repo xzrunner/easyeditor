@@ -2,7 +2,7 @@
 #include "NodeToSprite.h"
 #include "Symbol.h"
 
-#include <easycoco.h>
+#include <easyrespacker.h>
 #include <epbin.h>
 
 namespace ecomplex
@@ -18,12 +18,12 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 	LoadImages(ept_path, images);
 
 	std::string epe_path = filename + ".epe";
-	libcoco::CocoUnpacker unpacker;
+	librespacker::ResUnpacker unpacker;
 	unpacker.UnpackBin(epe_path, images);
 
 	std::string export_name = value["export name"].asString();
 
-	libcoco::IPackNode* node = libcoco::UnpackNodeFactory::Instance()->Query(export_name);
+	librespacker::IPackNode* node = librespacker::UnpackNodeFactory::Instance()->Query(export_name);
 	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
 }
 
@@ -51,7 +51,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 		assert(!fin.fail());
 
 		int32_t sz;
-		libcoco::unpack(sz, fin);
+		librespacker::unpack(sz, fin);
 
 		if (sz < 0) 
 		{
@@ -73,7 +73,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 			size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
 			epbin::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
 			if (guess_sz == uc_sz) {
-				throw d2d::Exception("libcoco::UnpackFromBin::Unpack no enough space.");
+				throw d2d::Exception("ecomplex LoadFromBin::LoadImages no enough space.");
 			}
 			delete[] c_buf;
 
@@ -88,11 +88,11 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<d2d::Image*>& images)
 {
 	int8_t type;
-	libcoco::unpack(type, ptr);
+	librespacker::unpack(type, ptr);
 
 	int16_t w, h;
-	libcoco::unpack(w, ptr);
-	libcoco::unpack(h, ptr);
+	librespacker::unpack(w, ptr);
+	librespacker::unpack(h, ptr);
 
 	const int c = 4;
 	int buf_sz = w * h * c;

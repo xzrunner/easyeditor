@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* Particle3DToSpr::Trans(const libcoco::PackParticle3D* p3d)
+d2d::ISprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
 {
 	p3d_ps_config* cfg = LoadConfig(p3d);
 
@@ -18,7 +18,7 @@ d2d::ISprite* Particle3DToSpr::Trans(const libcoco::PackParticle3D* p3d)
 	return new eparticle3d::Sprite(symbol);
 }
 
-p3d_ps_config* Particle3DToSpr::LoadConfig(const libcoco::PackParticle3D* p3d)
+p3d_ps_config* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p3d)
 {
 	int sz = SIZEOF_P3D_PS_CONFIG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
 	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
@@ -68,7 +68,7 @@ p3d_ps_config* Particle3DToSpr::LoadConfig(const libcoco::PackParticle3D* p3d)
 	cfg->symbols = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = p3d->components.size(); i < n; ++i)
 	{
-		const libcoco::PackParticle3D::Component& src = p3d->components[i];
+		const librespacker::PackParticle3D::Component& src = p3d->components[i];
 		p3d_symbol& dst = cfg->symbols[i];
 
 		dst.scale_start = src.scale_start;

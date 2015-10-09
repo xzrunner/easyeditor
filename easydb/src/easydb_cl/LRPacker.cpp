@@ -6,7 +6,7 @@
 #include "LRSeparateComplex.h"
 #include "LRToComplex.h"
 #include "LRJsonPacker.h"
-#include "PackCoco.h"
+#include "PackRes.h"
 
 #include <wx/stdpaths.h>
 
@@ -120,7 +120,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	writer.write(fout, val);
 	fout.close();
 
-	PackCoco pack;
+	PackRes pack;
 	pack.Trigger(cfg_file);
 }
 

@@ -2,7 +2,7 @@
 #define _LIBCOMPLEX_PICTURE_TO_SPR_H_
 
 #include <drag2d.h>
-#include <easycoco.h>
+#include <easyrespacker.h>
 
 namespace ecomplex
 {
@@ -10,10 +10,10 @@ namespace ecomplex
 class PictureToSpr
 {
 public:
-	static d2d::ISprite* Trans(const libcoco::PackPicture* pic);
+	static d2d::ISprite* Trans(const librespacker::PackPicture* pic);
 
 private:
-	static d2d::ISprite* TransQuad(const libcoco::PackPicture::Quad* quad);
+	static d2d::ISprite* TransQuad(const librespacker::PackPicture::Quad* quad);
 
 }; // PictureToSpr
 

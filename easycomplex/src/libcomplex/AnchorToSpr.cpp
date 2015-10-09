@@ -3,7 +3,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* AnchorToSpr::Trans(const libcoco::PackAnchor* anchor)
+d2d::ISprite* AnchorToSpr::Trans(const librespacker::PackAnchor* anchor)
 {
 	d2d::FontBlankSymbol* symbol = new d2d::FontBlankSymbol();
 

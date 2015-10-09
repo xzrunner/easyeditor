@@ -13,12 +13,12 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 	LoadImages(img_name, images);
 
 	std::string lua_file = d2d::FilenameTools::getAbsolutePath(dir, value["lua desc"].asString());
-	libcoco::CocoUnpacker unpacker;
+	librespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 
 	std::string export_name = value["export name"].asString();
 
-	libcoco::IPackNode* node = libcoco::UnpackNodeFactory::Instance()->Query(export_name);
+	librespacker::IPackNode* node = librespacker::UnpackNodeFactory::Instance()->Query(export_name);
 	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
 }
 

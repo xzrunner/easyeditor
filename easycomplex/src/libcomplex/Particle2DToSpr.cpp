@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* Particle2DToSpr::Trans(const libcoco::PackParticle2D* p2d)
+d2d::ISprite* Particle2DToSpr::Trans(const librespacker::PackParticle2D* p2d)
 {
 	p2d_ps_config* cfg = LoadConfig(p2d);
 
@@ -18,7 +18,7 @@ d2d::ISprite* Particle2DToSpr::Trans(const libcoco::PackParticle2D* p2d)
 	return new eparticle2d::Sprite(symbol);
 }
 
-p2d_ps_config* Particle2DToSpr::LoadConfig(const libcoco::PackParticle2D* p2d)
+p2d_ps_config* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D* p2d)
 {
 	int sz = SIZEOF_P2D_PS_CONFIG + SIZEOF_P2D_SYMBOL * eparticle2d::MAX_COMPONENTS;
 	p2d_ps_config* cfg = (p2d_ps_config*) operator new(sz);
@@ -84,7 +84,7 @@ p2d_ps_config* Particle2DToSpr::LoadConfig(const libcoco::PackParticle2D* p2d)
 	cfg->symbols = (p2d_symbol*)(cfg+1);
 	for (int i = 0, n = p2d->components.size(); i < n; ++i)
 	{
-		const libcoco::PackParticle2D::Component& src = p2d->components[i];
+		const librespacker::PackParticle2D::Component& src = p2d->components[i];
 		p2d_symbol& dst = cfg->symbols[i];
 
 		dst.angle_start = src.angle_start;

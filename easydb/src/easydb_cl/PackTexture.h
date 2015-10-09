@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-namespace libpacker { class ImageTrimData; }
+namespace libtp { class ImageTrimData; }
 
 namespace edb
 {

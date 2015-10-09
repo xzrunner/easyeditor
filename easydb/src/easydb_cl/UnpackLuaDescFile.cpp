@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <drag2d.h>
-#include <easycoco.h>
+#include <easyrespacker.h>
 
 namespace edb
 {
@@ -35,7 +35,7 @@ void UnpackLuaDescFile::Trigger(const std::string& lua_file, const std::string& 
 	std::vector<d2d::Image*> images;
 	LoadAllImages(img_name, images);
 
-	libcoco::CocoUnpacker unpacker;
+	librespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 }
 

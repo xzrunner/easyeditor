@@ -29,7 +29,7 @@
 #include "BinRRP.h"
 #include "NumberImages.h"
 #include "BinEP.h"
-#include "PackCoco.h"
+#include "PackRes.h"
 #include "OutlineToTriStrip.h"
 #include "TransToPVR.h"
 #include "TransToETC1.h"
@@ -88,7 +88,7 @@ void CommandLoader::Init()
 	fc->Register(BinRRP::Create());
 	fc->Register(NumberImages::Create());
 	fc->Register(BinEP::Create());
-	fc->Register(PackCoco::Create());
+	fc->Register(PackRes::Create());
 	fc->Register(OutlineToTriStrip::Create());
 	fc->Register(TransToPVR::Create());
 	fc->Register(TransToETC1::Create());

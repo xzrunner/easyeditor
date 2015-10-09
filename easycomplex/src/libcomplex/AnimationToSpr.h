@@ -2,7 +2,7 @@
 #define _LIBCOMPLEX_ANIMATION_TO_SPR_H_
 
 #include <drag2d.h>
-#include <easycoco.h>
+#include <easyrespacker.h>
 
 namespace ecomplex
 {
@@ -10,15 +10,15 @@ namespace ecomplex
 class AnimationToSpr
 {
 public:
-	static d2d::ISprite* Trans(const libcoco::PackAnimation* anim);
+	static d2d::ISprite* Trans(const librespacker::PackAnimation* anim);
 
 private:
-	static d2d::ISprite* TransComplex(const libcoco::PackAnimation* anim);
-	static d2d::ISprite* TransAnim(const libcoco::PackAnimation* anim);
+	static d2d::ISprite* TransComplex(const librespacker::PackAnimation* anim);
+	static d2d::ISprite* TransAnim(const librespacker::PackAnimation* anim);
 
-	static void TransSprite(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t);
-	static void TransSpriteMat(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t);
-	static void TransSpriteCol(d2d::ISprite* spr, const libcoco::PackAnimation::SpriteTrans& t);
+	static void TransSprite(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
+	static void TransSpriteMat(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
+	static void TransSpriteCol(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
 
 }; // AnimationToSpr
 
