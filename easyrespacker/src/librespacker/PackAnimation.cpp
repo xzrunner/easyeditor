@@ -17,7 +17,9 @@ PackAnimation::PackAnimation(int id)
 {
 }
 
-void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, const d2d::TexturePacker& tp) const
+void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, 
+									const d2d::TexturePacker& tp,
+									float scale) const
 {
 	AnimToLuaString::Pack(this, gen);
 }
@@ -32,7 +34,9 @@ int PackAnimation::SizeOfPackToBin() const
 	return AnimToBin::Size(this);
 }
 
-void PackAnimation::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
+void PackAnimation::PackToBin(uint8_t** ptr, 
+							  const d2d::TexturePacker& tp,
+							  float scale) const
 {
 	AnimToBin::Pack(this, ptr);
 }

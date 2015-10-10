@@ -32,19 +32,19 @@ ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name,
 	data.load_image = old_cfg;
 }
 
-void ResPacker::OutputLua(const std::string& outfile) const
+void ResPacker::OutputLua(const std::string& outfile, float scale) const
 {
-	PackToLuaString::Pack(outfile, m_tp);
+	PackToLuaString::Pack(outfile, m_tp, scale);
 }
 
-void ResPacker::OutputEpe(const std::string& outfile, bool compress) const
+void ResPacker::OutputEpe(const std::string& outfile, bool compress, float scale) const
 {
-	PackToBin::PackEPE(outfile + ".epe", m_tp, compress);
+	PackToBin::PackEPE(outfile + ".epe", m_tp, compress, scale);
 }
 
-void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD) const
+void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD, float scale) const
 {
-	PackToBin::PackEPT(outfile, m_tp, type, LOD);
+	PackToBin::PackEPT(outfile, m_tp, type, LOD, scale);
 }
 
 void ResPacker::LoadJsonData(const std::string& dir)

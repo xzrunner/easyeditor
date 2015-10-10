@@ -26,7 +26,7 @@ public:
 
 	void Trigger(const std::string& json_dir, const std::string& tp_json,
 		const std::string& tp_dir, const std::string& out_file, const std::string& type,
-		int LOD);
+		int LOD, float scale);
 
 }; // PackEP
 

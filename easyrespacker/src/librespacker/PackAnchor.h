@@ -16,13 +16,13 @@ public:
 	PackAnchor(int id) { m_id = ANCHOR_ID; }
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp) const {}
+		const d2d::TexturePacker& tp, float scale) const {}
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images) {}
 
 	virtual int SizeOfPackToBin() const { return 0; }
 	virtual void PackToBin(uint8_t** ptr,
-		const d2d::TexturePacker& tp) const {}
+		const d2d::TexturePacker& tp, float scale) const {}
 	virtual int SizeOfUnpackFromBin() const { return 0; }
 	virtual void UnpackFromBin(uint8_t** ptr, 
 		const std::vector<d2d::Image*>& images) {}

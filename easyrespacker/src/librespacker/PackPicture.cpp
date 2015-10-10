@@ -16,9 +16,10 @@ PackPicture::PackPicture(int id)
 }
 
 void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen, 
-								  const d2d::TexturePacker& tp) const
+								  const d2d::TexturePacker& tp,
+								  float scale) const
 {
-	PictureToLuaString::Pack(this, gen, tp);
+	PictureToLuaString::Pack(this, gen, tp, scale);
 }
 
 void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
@@ -32,9 +33,10 @@ int PackPicture::SizeOfPackToBin() const
 }
 
 void PackPicture::PackToBin(uint8_t** ptr,
-							const d2d::TexturePacker& tp) const
+							const d2d::TexturePacker& tp,
+							float scale) const
 {
-	PictureToBin::Pack(this, ptr, tp);
+	PictureToBin::Pack(this, ptr, tp, scale);
 }
 
 int PackPicture::SizeOfUnpackFromBin() const

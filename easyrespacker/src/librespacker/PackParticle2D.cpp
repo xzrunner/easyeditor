@@ -14,7 +14,9 @@ PackParticle2D::PackParticle2D(int id)
 {
 }
 
-void PackParticle2D::PackToLuaString(ebuilder::CodeGenerator& gen, const d2d::TexturePacker& tp) const
+void PackParticle2D::PackToLuaString(ebuilder::CodeGenerator& gen, 
+									 const d2d::TexturePacker& tp,
+									 float scale) const
 {
 	return Particle2DToLuaString::Pack(this, gen);
 }
@@ -29,7 +31,9 @@ int PackParticle2D::SizeOfPackToBin() const
 	return Particle2DToBin::Size(this);
 }
 
-void PackParticle2D::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
+void PackParticle2D::PackToBin(uint8_t** ptr, 
+							   const d2d::TexturePacker& tp,
+							   float scale) const
 {
 	Particle2DToBin::Pack(this, ptr);
 }

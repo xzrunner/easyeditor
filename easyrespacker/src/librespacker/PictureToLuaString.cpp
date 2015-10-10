@@ -10,7 +10,8 @@ namespace librespacker
 
 void PictureToLuaString::Pack(const PackPicture* pic, 
 							  ebuilder::CodeGenerator& gen, 
-							  const d2d::TexturePacker& tp)
+							  const d2d::TexturePacker& tp,
+							  float scale)
 {
 	gen.line("{");
 	gen.tab();
@@ -21,7 +22,7 @@ void PictureToLuaString::Pack(const PackPicture* pic,
 	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(pic->GetID()));
 
 	for (int i = 0, n = pic->quads.size(); i < n; ++i) {
-		PackQuad(pic->quads[i], gen, tp);
+		PackQuad(pic->quads[i], gen, tp, scale);
 	}
 
 	gen.detab();
@@ -30,7 +31,8 @@ void PictureToLuaString::Pack(const PackPicture* pic,
 
 void PictureToLuaString::PackQuad(const PackPicture::Quad& quad, 
 								  ebuilder::CodeGenerator& gen, 
-								  const d2d::TexturePacker& tp)
+								  const d2d::TexturePacker& tp,
+								  float scale)
 {
 	int idx = tp.QueryIdx(quad.img->GetFilepath());
 	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(idx));
@@ -39,6 +41,9 @@ void PictureToLuaString::PackQuad(const PackPicture::Quad& quad,
 
 	int src[8];
 	PackPicture::GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
+	for (int i = 0; i < 8; ++i) {
+		src[i] *= scale;
+	}
 	sprintf(buff, "src = { %d, %d, %d, %d, %d, %d, %d, %d }", 
 		src[0], src[1], src[2], src[3], src[4], src[5], src[6], src[7]);
 	std::string src_str = buff;

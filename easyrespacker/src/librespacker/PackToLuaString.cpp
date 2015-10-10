@@ -8,7 +8,8 @@ namespace librespacker
 {
 
 void PackToLuaString::Pack(const std::string& filepath,
-						   const d2d::TexturePacker& tp)
+						   const d2d::TexturePacker& tp,
+						   float scale)
 {
 	std::vector<IPackNode*> nodes;
 	PackNodeFactory::Instance()->GetAllNodes(nodes);
@@ -17,7 +18,7 @@ void PackToLuaString::Pack(const std::string& filepath,
 	ebuilder::CodeGenerator gen;
 	gen.line("return {");
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		nodes[i]->PackToLuaString(gen, tp);
+		nodes[i]->PackToLuaString(gen, tp, scale);
 	}
 	gen.line("}");
 

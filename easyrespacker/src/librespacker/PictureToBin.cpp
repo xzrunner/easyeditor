@@ -16,7 +16,8 @@ int PictureToBin::Size(const PackPicture* pic)
 	return sz;
 }
 
-void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, const d2d::TexturePacker& tp)
+void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, 
+						const d2d::TexturePacker& tp, float scale)
 {
 	uint16_t id = pic->GetID();
 	pack(id, ptr);
@@ -27,7 +28,7 @@ void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, const d2d::Textur
 	uint16_t sz = pic->quads.size();
 	pack(sz, ptr);	
 	for (int i = 0, n = pic->quads.size(); i < n; ++i) {
-		PackQuad(pic->quads[i], ptr, tp);
+		PackQuad(pic->quads[i], ptr, tp, scale);
 	}
 }
 
@@ -40,7 +41,7 @@ int PictureToBin::SizeQuad()
 }
 
 void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
-							 const d2d::TexturePacker& tp)
+							 const d2d::TexturePacker& tp, float scale)
 {
 	uint8_t idx = tp.QueryIdx(quad.img->GetFilepath());
 	pack(idx, ptr);
@@ -48,7 +49,7 @@ void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
 	int src[8];
 	PackPicture::GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
 	for (int i = 0; i < 8; ++i) {
-		uint16_t p = src[i];
+		uint16_t p = src[i] * scale;
 		pack(p, ptr);
 	}
 

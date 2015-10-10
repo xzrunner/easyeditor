@@ -73,13 +73,13 @@ public:
 	PackAnimation(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp) const;
+		const d2d::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L,
 		const std::vector<d2d::Image*>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
-		const d2d::TexturePacker& tp) const;
+		const d2d::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
 	virtual void UnpackFromBin(uint8_t** ptr, 
 		const std::vector<d2d::Image*>& images);

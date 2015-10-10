@@ -12,10 +12,10 @@ class PackToBin
 {
 public:
 	static void PackEPE(const std::string& filepath, const d2d::TexturePacker& tp,
-		bool compress);	
+		bool compress, float scale);	
 
 	static void PackEPT(const std::string& filepath, const d2d::TexturePacker& tp,
-		TextureType type, int LOD);	
+		TextureType type, int LOD, float scale);	
 
 }; // PackToBin
 

@@ -10,11 +10,11 @@ class PictureToLuaString
 {
 public:
 	static void Pack(const PackPicture* pic, ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp);
+		const d2d::TexturePacker& tp, float scale);
 
 private:
 	static void PackQuad(const PackPicture::Quad& quad, ebuilder::CodeGenerator& gen, 
-		const d2d::TexturePacker& tp);
+		const d2d::TexturePacker& tp, float scale);
 
 }; // PictureToLuaString
 

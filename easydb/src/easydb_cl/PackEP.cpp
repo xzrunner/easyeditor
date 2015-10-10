@@ -23,7 +23,7 @@ std::string PackEP::Description() const
 
 std::string PackEP::Usage() const
 {
-	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD]";
+	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD] [SCALE]";
 }
 
 void PackEP::Run(int argc, char *argv[])
@@ -37,7 +37,12 @@ void PackEP::Run(int argc, char *argv[])
 		LOD = atoi(argv[7]);
 	}
 
-	if (LOD != 0) {
+	float scale = 1;
+	if (argc == 9) {
+		scale = atof(argv[8]);
+	}
+
+	if (LOD != 0 || scale != 1) {
 		glfwInit();
 		if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 		{
@@ -52,30 +57,30 @@ void PackEP::Run(int argc, char *argv[])
 		d2d::ShaderMgr::Instance()->reload();
 	}
 
-	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD);
+	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
 }
 
 void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
-					 const std::string& type, int LOD)
+					 const std::string& type, int LOD, float scale)
 {
 	librespacker::ResPacker packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {
-		packer.OutputLua(out_file + ".lua");
+		packer.OutputLua(out_file + ".lua", scale);
 	} else if (type == "ep") {
-		packer.OutputEpe(out_file, true);
-		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD);
+		packer.OutputEpe(out_file, true, scale);
+		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
 	} else if (type == "epe") {
-		packer.OutputEpe(out_file, true);
+		packer.OutputEpe(out_file, true, scale);
 	} else if (type == "ept") {
-		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD);
+		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
 	} else if (type == "debug") {
-		packer.OutputLua(out_file + ".lua");
-		packer.OutputEpe(out_file, true);
+		packer.OutputLua(out_file + ".lua", scale);
+		packer.OutputEpe(out_file, true, scale);
 	} else if (type == "all") {
-		packer.OutputLua(out_file + ".lua");
-		packer.OutputEpe(out_file, true);
-		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD);
+		packer.OutputLua(out_file + ".lua", scale);
+		packer.OutputEpe(out_file, true, scale);
+		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
 	}
 }
 

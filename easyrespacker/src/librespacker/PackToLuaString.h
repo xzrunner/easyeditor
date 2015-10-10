@@ -9,7 +9,8 @@ namespace librespacker
 class PackToLuaString
 {
 public:
-	static void Pack(const std::string& filepath, const d2d::TexturePacker& tp);
+	static void Pack(const std::string& filepath, const d2d::TexturePacker& tp,
+		float scale);
 
 }; // PackToLuaString
 

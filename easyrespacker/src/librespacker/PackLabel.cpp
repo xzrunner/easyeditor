@@ -14,7 +14,9 @@ PackLabel::PackLabel(int id)
 {
 }
 
-void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, const d2d::TexturePacker& tp) const
+void PackLabel::PackToLuaString(ebuilder::CodeGenerator& gen, 
+								const d2d::TexturePacker& tp,
+								float scale) const
 {
 	LabelToLuaString::Pack(this, gen);
 }
@@ -29,7 +31,9 @@ int PackLabel::SizeOfPackToBin() const
 	return LabelToBin::Size();
 }
 
-void PackLabel::PackToBin(uint8_t** ptr, const d2d::TexturePacker& tp) const
+void PackLabel::PackToBin(uint8_t** ptr, 
+						  const d2d::TexturePacker& tp,
+						  float scale) const
 {
 	LabelToBin::Pack(this, ptr);
 }

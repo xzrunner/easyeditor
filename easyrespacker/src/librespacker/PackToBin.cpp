@@ -14,7 +14,7 @@ namespace librespacker
 
 void PackToBin::PackEPE(const std::string& filepath, 
 						const d2d::TexturePacker& tp, 
-						bool compress)
+						bool compress, float scale)
 {
 	PackNodeFactory* factory = PackNodeFactory::Instance();
 	const std::map<std::string, int>& export_set = factory->GetExportSet();
@@ -74,7 +74,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 	}
 
 	for (int i = 0, n = nodes.size(); i < n; ++i) {
-		nodes[i]->PackToBin(&ptr, tp);
+		nodes[i]->PackToBin(&ptr, tp, scale);
 	}
 
 	// write file
@@ -98,7 +98,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 }
 
 void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& tp, 
-						TextureType type, int LOD)
+						TextureType type, int LOD, float scale)
 {
 	std::string ext;
 	switch (type) 
@@ -142,12 +142,11 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 
 		packer->Load(str);
 
-		float scale = 1;
 		for (int lod = 0; lod <= LOD; ++lod) 
 		{
 			std::string idx_str = "." + d2d::StringTools::ToString(i + 1);
 			std::string scale_str = "";
-			if (lod != 0) {
+			if (LOD != 0 && scale != 1) {
 				scale_str = "." + d2d::StringTools::ToString((int)(scale * 100));
 			}
 			std::string fmt_str = ".ept";
