@@ -46,8 +46,12 @@ void PackPKM::Load(const std::string& filepath)
 	assert(w == m_width && h == m_height);
 }
 
-void PackPKM::Store(std::ofstream& fout) const
+void PackPKM::Store(const std::string& filepath, float scale) const
 {
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
+
 	if (m_compress)
 	{
 		size_t tex_sz = (m_width * m_height) >> 1;
@@ -95,6 +99,8 @@ void PackPKM::Store(std::ofstream& fout) const
 		fout.write(reinterpret_cast<const char*>(m_rgb_buf), img_sz);
 		fout.write(reinterpret_cast<const char*>(m_alpha_buf), img_sz);		
 	}
+
+	fout.close();
 }
 
 void PackPKM::Clear()

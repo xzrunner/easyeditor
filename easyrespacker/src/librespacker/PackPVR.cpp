@@ -248,8 +248,12 @@ void PackPVR::Load(const std::string& filepath)
 	fin.close();
 }
 
-void PackPVR::Store(std::ofstream& fout) const
+void PackPVR::Store(const std::string& filepath, float scale) const
 {
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
+
 	if (m_compress)
 	{
 		size_t sz = sizeof(int8_t) + sizeof(int8_t) + sizeof(int16_t) * 2;
@@ -310,6 +314,8 @@ void PackPVR::Store(std::ofstream& fout) const
 			fout.write(reinterpret_cast<const char*>(&s.data[0]), s.size);
 		}		
 	}
+
+	fout.close();
 }
 
 void PackPVR::Clear()

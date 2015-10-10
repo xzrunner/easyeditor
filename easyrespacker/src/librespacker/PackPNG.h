@@ -15,18 +15,20 @@ public:
 	virtual ~PackPNG();
 
 	virtual void Load(const std::string& filepath);
-	virtual void Store(std::ofstream& fout, float scale) const;
+	virtual void Store(const std::string& filepath, float scale) const;
 
 private:
 	void Clear();
 
 	void GenPng4();
 
+	void Store(std::ofstream& fout, uint8_t* buffer, 
+		int width, int height) const;
+
 private:
 	int m_width, m_height;
 
 	uint8_t* m_buffer;
-	int m_buf_sz;
 
 }; // PackPNG
 

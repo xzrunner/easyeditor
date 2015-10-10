@@ -27,8 +27,12 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 
 ImageSymbol::~ImageSymbol()
 {
-	m_bitmap->Release();
-	m_image->Release();
+	if (m_bitmap) {
+		m_bitmap->Release();
+	}
+	if (m_image) {
+		m_image->Release();
+	}
 }
 
 ImageSymbol* ImageSymbol::Clone() const

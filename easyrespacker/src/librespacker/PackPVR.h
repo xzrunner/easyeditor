@@ -15,7 +15,7 @@ public:
 	virtual ~PackPVR();
 
 	virtual void Load(const std::string& filepath);
-	virtual void Store(std::ofstream& fout) const;
+	virtual void Store(const std::string& filepath, float scale) const;
 
 private:
 	void Clear();

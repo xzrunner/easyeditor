@@ -5,3 +5,4 @@
 #include "libcoco/epd/TextureMgr.h"
 #include "libcoco/epd/CocoPacker.h"
 #include "libcoco/SymbolDependanceSorter.h"
+#include "libcoco/Utility.h"

@@ -13,7 +13,7 @@ public:
 	virtual ~PackImage() {}
 
 	virtual void Load(const std::string& filepath) = 0;
-	virtual void Store(std::ofstream& fout, float scale) const = 0;
+	virtual void Store(const std::string& filepath, float scale) const = 0;
 
 protected:
 	int m_type;
