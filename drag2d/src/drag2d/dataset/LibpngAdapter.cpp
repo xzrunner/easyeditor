@@ -36,7 +36,8 @@ int LibpngAdapter::Write(const uint8_t* pixels, int width, int height, const std
 
 	std::vector<uint8_t*> row_pointers(height);
 	for (unsigned y = 0; y < height; y++) {
-		row_pointers[y] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
+		// reverse
+		row_pointers[height - 1 - y] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
 	}
 
 	png_write_image(p_str, &row_pointers[0]);

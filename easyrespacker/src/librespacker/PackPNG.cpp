@@ -54,7 +54,7 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 	std::locale::global(std::locale("C"));
 
 	if (scale == 1) {
-		Store(fout, m_buffer, m_width, m_height);
+		RevertAndStore(fout, m_buffer, m_width, m_height);
 	} else {
 		size_t sz = m_width * m_height * 4;
 		uint8_t* buf = new uint8_t[sz];
@@ -66,19 +66,21 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 
 		int width = m_width * scale,
 			height = m_height * scale;
-
 		d2d::Snapshoot ss;
 		uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
-
-		eimage::ImageVerticalFlip revert(buffer, width, height);
-		uint8_t* buf_revert = revert.Revert();		
-		Store(fout, buf_revert, width, height);
-
-		delete[] buf_revert;
+		Store(fout, buffer, width, height);
 		delete[] buffer;
 	}
 
 	fout.close();
+}
+
+void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
+{
+	eimage::ImageVerticalFlip revert(buffer, width, height);
+	uint8_t* buf_revert = revert.Revert();		
+	Store(fout, buf_revert, width, height);
+	delete[] buf_revert;
 }
 
 void PackPNG::Clear()
