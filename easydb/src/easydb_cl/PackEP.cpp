@@ -33,12 +33,12 @@ void PackEP::Run(int argc, char *argv[])
 	if (!check_folder(argv[4])) return;
 
 	int LOD = 0;
-	if (argc == 8) {
+	if (argc >= 8) {
 		LOD = atoi(argv[7]);
 	}
 
 	float scale = 1;
-	if (argc == 9) {
+	if (argc >= 9) {
 		scale = atof(argv[8]);
 	}
 
