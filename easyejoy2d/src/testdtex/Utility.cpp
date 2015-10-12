@@ -6,14 +6,21 @@ namespace tdtex
 {
 
 dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
-								   bool load_texture_immediately/*, bool load_texture_async*/)
+								   bool load_texture_immediately, int lod/*, bool load_texture_async*/)
 {
 	dtex_package* pkg = dtexf_preload_pkg(pkg_name.c_str(), (pkg_name + ".epe").c_str(), FILE_EPE, scale);
 
 	int idx = 1;
 	while (true)
 	{
-		std::string path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".ept";
+		std::string path;
+		if (lod == 1) {
+			path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".50.ept";
+		} else if (lod == 2) {
+			path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".25.ept";
+		} else {
+			path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".ept";
+		}
 		if (!d2d::FilenameTools::IsFileExist(path)) {
 			break;
 		}

@@ -25,12 +25,25 @@ TestAsyncC3Load::~TestAsyncC3Load()
 	dtexf_release();
 }
 
+// void TestAsyncC3Load::Load()
+// {
+// 	m_packages.push_back(Utility::LoadPackage("c00001", 1, false, 2));
+// 	m_packages.push_back(Utility::LoadPackage("c00002", 1, false, 2));
+// 	m_packages.push_back(Utility::LoadPackage("c00003", 1, false, 2));
+// 
+// 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[0], "c00001_attack_1"));
+// 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[1], "c00002_attack01_1"));
+// 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[2], "c00003_attack01_1"));
+// 
+// 	dtexf_c3_load(m_packages[0], 1.0f);
+// 	dtexf_c3_load(m_packages[1], 1.0f);
+// 	dtexf_c3_load(m_packages[2], 1.0f);
+// 
+// 	dtexf_c3_load_end(true);
+// }
+
 void TestAsyncC3Load::Load()
 {
-// 	m_packages.push_back(Utility::LoadPackage("c00003", 1));
-// 	m_sprites.push_back(new eejoy2d::EJSprite(m_packages[0], "c00003_attack01_1"));
-// 	dtexf_c3_load(m_packages[0], 0.1f);
-
 	m_packages.push_back(Utility::LoadPackage("c00001", 1));
 	m_packages.push_back(Utility::LoadPackage("c00002", 1));
 	m_packages.push_back(Utility::LoadPackage("c00003", 1));

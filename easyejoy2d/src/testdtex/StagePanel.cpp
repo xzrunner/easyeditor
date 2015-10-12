@@ -64,8 +64,8 @@ void StagePanel::Load()
 //	m_test = new TestAsyncC3();
 //	m_test = new TestAsyncC2();
 //	m_test = new TestAsyncC1();
-//	m_test = new TestAsyncC3Load();
-	m_test = new TestAsyncC3C2();
+	m_test = new TestAsyncC3Load();
+//	m_test = new TestAsyncC3C2();
 
 //	m_test = new TestSprite();
 
