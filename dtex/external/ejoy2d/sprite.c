@@ -1,15 +1,8 @@
 #include "sprite.h"
 #include "spritepack.h"
 #include "shader.h"
-#include "texture.h"
-#include "screen.h"
 #include "matrix.h"
-#include "label.h"
-#include "scissor.h"
-#include "array.h"
-#include "particle.h"
-#include "material.h"
-#include "ej_trail.h"
+#include "shader.h"
 
 #include "particle3d.h"
 

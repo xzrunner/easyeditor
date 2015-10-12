@@ -1,14 +1,13 @@
 #include "spritepack.h"
 #include "matrix.h"
 #include "shader.h"
-#include "array.h"
-#include "texture.h"
 
 #include <lua.h>
 #include <lauxlib.h>
 
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define CC_DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) * 0.01745329252f) // PI / 180
 #define CC_RADIANS_TO_DEGREES(__ANGLE__) ((__ANGLE__) * 57.29577951f) // PI * 180
