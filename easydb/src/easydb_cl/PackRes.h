@@ -55,7 +55,7 @@ private:
 		std::vector<std::string>& pts_files) const;
 
 	// new packer
-	void PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& config_dir) const;
+	void PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& config_dir, int LOD) const;
 
 	std::string ConnectCfgDir(const std::string& cfg_dir, const std::string& path) const;
 

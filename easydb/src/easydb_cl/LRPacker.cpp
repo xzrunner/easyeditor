@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "LRPacker.h"
 #include "check_params.h"
 #include "lr_tools.h"
@@ -7,6 +9,8 @@
 #include "LRToComplex.h"
 #include "LRJsonPacker.h"
 #include "PackRes.h"
+
+#include <glfw.h>
 
 #include <wx/stdpaths.h>
 
@@ -25,8 +29,8 @@ std::string LRPacker::Description() const
 
 std::string LRPacker::Usage() const
 {
-	// lr-packer e:/test2/test_lr.json tmp_dir out_dir only_json
-	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [trim file]";
+	// lr-packer e:/test2/test_lr.json tmp_dir out_dir only_json lod
+	std::string usage = Command() + " [filepath] [tmp dir] [out dir] [only json] [LOD]";
 	return usage;
 }
 
@@ -40,7 +44,7 @@ void LRPacker::Run(int argc, char *argv[])
 	std::string out_dir = argv[4];
 	std::string tmp_lr_file = tmp_dir + "\\" + d2d::FilenameTools::getFilenameWithExtension(argv[2]);
 
-	int id = d2d::StringTools::FromString<int>(argv[5]);
+	bool only_json = d2d::StringTools::FromString<bool>(argv[5]);
 
 	d2d::mk_dir(tmp_dir, true);
 	d2d::mk_dir(out_dir, true);
@@ -62,8 +66,23 @@ void LRPacker::Run(int argc, char *argv[])
 	json_pack.Run(tmp_lr_file);
 
 	// 4
-	if (id != 1) {
-		PackEP(tmp_dir, tmp_lr_file, out_dir);
+	if (only_json != 1) {
+		int LOD = d2d::StringTools::FromString<int>(argv[6]);
+		if (LOD != 0) {
+			glfwInit();
+			if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+			{
+				glfwTerminate();
+				return;
+			}
+
+			if (glewInit() != GLEW_OK) {
+				return;
+			}
+
+			d2d::ShaderMgr::Instance()->reload();
+		}
+		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD);
 	}
 
 	// end
@@ -71,7 +90,7 @@ void LRPacker::Run(int argc, char *argv[])
 }
 
 void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,
-					  const std::string& out_dir)
+					  const std::string& out_dir, int LOD)
 {
 	Json::Value val;
 
@@ -108,6 +127,8 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	pkg_val["output dir"] = _out_dir;
 
 	pkg_val["texture type"] = "png";
+
+	pkg_val["LOD"] = LOD;
 
 	idx = 0;
 	val["packages"][idx] = pkg_val;

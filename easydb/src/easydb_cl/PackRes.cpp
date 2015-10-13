@@ -65,7 +65,8 @@ void PackRes::Trigger(const std::string& config_path)
 // 		PackBinFiles(pkg_val, config_dir);
 
 		// new 
-		PackLuaAndBinFiles(pkg_val, config_dir);
+		int LOD = pkg_val["LOD"].asInt();
+		PackLuaAndBinFiles(pkg_val, config_dir, LOD);
 
 		pkg_val = value["packages"][i++];
 	}
@@ -515,7 +516,7 @@ void PackRes::PackBinFiles(const Json::Value& pkg_val, const std::string& config
 	}
 }
 
-void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& config_dir) const
+void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& config_dir, int LOD) const
 {
 	std::string name = pkg_val["name"].asString();
 	std::string output_dir = ConnectCfgDir(config_dir, pkg_val["output dir"].asString());
@@ -523,7 +524,7 @@ void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& 
 
 	librespacker::ResPacker packer(config_dir, output_name, output_dir);
 	packer.OutputEpe(output_name, true);
-	packer.OutputEpt(output_name, librespacker::TT_PNG8);
+	packer.OutputEpt(output_name, librespacker::TT_PNG8, LOD);
 
 	// debug
 	packer.OutputLua(output_name + ".lua");
