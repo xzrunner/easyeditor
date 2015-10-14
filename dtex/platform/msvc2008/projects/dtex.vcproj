@@ -341,27 +341,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_array.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_array.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_buffer.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_buffer.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dtex_file.c"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_file.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_hard_res.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_hard_res.h"
 				>
 			</File>
 			<File
@@ -385,6 +377,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_res_cache.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_res_cache.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_resource.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_resource.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_statistics.c"
 				>
 			</File>
@@ -404,6 +412,26 @@
 				RelativePath="..\..\..\src\dtex_utility.h"
 				>
 			</File>
+			<Filter
+				Name="ds"
+				>
+				<File
+					RelativePath="..\..\..\src\dtex_array.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_array.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_stack.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_stack.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="external"

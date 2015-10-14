@@ -10,7 +10,7 @@ class Utility
 {
 public:
 	static dtex_package* LoadPackage(const std::string& pkg_name, float scale = 1.0f,
-		bool load_texture_immediately = false, int lod = 0/*, bool load_texture_async = false*/);
+		bool load_tex = false, int lod = 0/*, bool load_texture_async = false*/);
 
 }; // Utility
 

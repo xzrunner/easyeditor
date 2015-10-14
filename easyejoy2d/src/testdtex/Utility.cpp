@@ -6,31 +6,31 @@ namespace tdtex
 {
 
 dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
-								   bool load_texture_immediately, int lod/*, bool load_texture_async*/)
+								   bool load_tex, int lod/*, bool load_texture_async*/)
 {
-	dtex_package* pkg = dtexf_preload_pkg(pkg_name.c_str(), (pkg_name + ".epe").c_str(), FILE_EPE, scale);
+	dtex_package* pkg = dtexf_load_pkg(pkg_name.c_str(), pkg_name.c_str(), FILE_EPE, scale, lod);
 
 	int idx = 1;
 	while (true)
 	{
 		std::string path;
 		if (lod == 1) {
-			path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".50.ept";
+			path = pkg_name	+ "." + d2d::StringTools::ToString(idx) + ".50.ept";
 		} else if (lod == 2) {
-			path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".25.ept";
+			path = pkg_name	+ "." + d2d::StringTools::ToString(idx) + ".25.ept";
 		} else {
-			path = pkg_name	+ "." + d2d::StringTools::ToString(idx++) + ".ept";
+			path = pkg_name	+ "." + d2d::StringTools::ToString(idx) + ".ept";
 		}
 		if (!d2d::FilenameTools::IsFileExist(path)) {
 			break;
 		}
-		dtex_package* _pkg = dtexf_preload_pkg(pkg_name.c_str(), path.c_str(), FILE_EPT, scale);
-		assert(_pkg == pkg);
+		dtexf_preload_texture(pkg, idx - 1, scale);
+		++idx;
 	}
 
-	if (load_texture_immediately) {
+	if (load_tex) {
 		for (int i = 0; i < pkg->texture_count; ++i) {
-			dtexf_load_texture(pkg, i, scale);
+			dtexf_load_texture(pkg, i, scale, true);
 		}
 	}
 
