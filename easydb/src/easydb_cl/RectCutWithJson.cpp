@@ -58,6 +58,8 @@ void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst
 			FixComplex(src_dir, dst_dir, filepath);
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
 			FixAnim(src_dir, dst_dir, filepath);
+		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_scale9)) {
+			FixScale9(src_dir, dst_dir, filepath);
 		}
 	}
 }
@@ -132,11 +134,11 @@ void RectCutWithJson::FixComplex(const std::string& src_dir, const std::string& 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 
 	int i = 0;
-	Json::Value spriteVal = value["sprite"][i++];
-	while (!spriteVal.isNull()) {
+	Json::Value spr_val = value["sprite"][i++];
+	while (!spr_val.isNull()) {
 		Json::Value& val = value["sprite"][i-1];
 		FixSpriteValue(src_dir, dst_dir, dir, val);
-		spriteVal = value["sprite"][i++];
+		spr_val = value["sprite"][i++];
 	}		
 
 	Json::StyledStreamWriter writer;
@@ -177,6 +179,34 @@ void RectCutWithJson::FixAnim(const std::string& src_dir, const std::string& dst
 		}
 
 		layerVal = value["layer"][i++];
+	}		
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
+}
+
+void RectCutWithJson::FixScale9(const std::string& src_dir, const std::string& dst_dir, const std::string& filepath) const
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+
+	int i = 0;
+	Json::Value spr_val = value["sprite"][i++];
+	while (!spr_val.isNull()) {
+		Json::Value& val = value["sprite"][i-1];
+		FixSpriteValue(src_dir, dst_dir, dir, val);
+		spr_val = value["sprite"][i++];
 	}		
 
 	Json::StyledStreamWriter writer;
