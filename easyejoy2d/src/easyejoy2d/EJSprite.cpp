@@ -15,7 +15,7 @@ EJSprite::EJSprite(dtex_package* pkg, const char* name)
 {
 	int id = dtex_get_spr_id(pkg, name);
 	assert(id >= 0);
-	m_ej_spr = dtex_ej_sprite_create(pkg->ej_pkg, id);
+	m_ej_spr = dtex_ej_sprite_create(pkg, id);
 }
 
 EJSprite::EJSprite(ej_sprite* spr)

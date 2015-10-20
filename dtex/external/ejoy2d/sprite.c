@@ -15,18 +15,19 @@
 #define CC_RADIANS_TO_DEGREES(__ANGLE__) ((__ANGLE__) * 57.29577951f) // PI * 180
 
 int
-sprite_size(struct sprite_pack *pack, int id) {
-	if (id < 0 || id >=	pack->n)
+sprite_size(struct dtex_package* pkg, int id) {
+	struct sprite_pack* ej_pkg = pkg->ej_pkg;
+	if (id < 0 || id >=	ej_pkg->n)
 		return 0;
-	int type = pack->type[id];
+	int type = ej_pkg->type[id];
 	if (type == TYPE_ANIMATION) {
-		struct pack_animation * ani = (struct pack_animation *)pack->data[id];
+		struct pack_animation * ani = (struct pack_animation *)ej_pkg->data[id];
 		return sizeof(struct sprite) + (ani->component_number - 1) * sizeof(struct sprite *);
 	} else if (type == TYPE_PARTICLE3D) {
-		struct pack_particle3d * p3d = (struct pack_particle3d *)pack->data[id];
+		struct pack_particle3d * p3d = (struct pack_particle3d *)ej_pkg->data[id];
 		return sizeof(struct sprite) + (p3d->cfg.symbol_count - 1) * sizeof(struct sprite *);
 	} else if (type == TYPE_PARTICLE2D) {
-		struct pack_particle2d * p2d = (struct pack_particle2d *)pack->data[id];
+		struct pack_particle2d * p2d = (struct pack_particle2d *)ej_pkg->data[id];
 		return sizeof(struct sprite) + (p2d->cfg.symbol_count - 1) * sizeof(struct sprite *);
 	} else {
 		return sizeof(struct sprite);
@@ -66,9 +67,11 @@ sprite_action(struct sprite *s, const char * action) {
 }
 
 void
-sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
-	if (id < 0 || id >=	pack->n)
+sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
+	struct sprite_pack* ej_pkg = pkg->ej_pkg;
+	if (id < 0 || id >=	ej_pkg->n)
 		return;
+	s->pkg = pkg;
 	s->parent = NULL;
 	s->t.mat = NULL;
 	s->t.color = 0xffffffff;
@@ -80,13 +83,13 @@ sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
 	s->flags = 0;
 	s->name = NULL;
 	s->id = id;
-	s->type = pack->type[id];
+	s->type = ej_pkg->type[id];
 	s->material = NULL;
 	s->start_frame = 0;
 	s->total_frame = 0;
 	s->frame = 0;
 	if (s->type == TYPE_ANIMATION) {
-		struct pack_animation * ani = (struct pack_animation *)pack->data[id];
+		struct pack_animation * ani = (struct pack_animation *)ej_pkg->data[id];
 		s->s.ani = ani;
 		sprite_action(s, NULL);
 		int i;
@@ -96,7 +99,7 @@ sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
 			s->data.children[i] = NULL;
 		}
 	} else if (s->type == TYPE_PARTICLE3D) {
-		struct pack_particle3d* p3d = (struct pack_particle3d*)pack->data[id];
+		struct pack_particle3d* p3d = (struct pack_particle3d*)ej_pkg->data[id];
 		s->s.p3d = p3d;
 		int i;
 		int n = p3d->cfg.symbol_count;
@@ -105,7 +108,7 @@ sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
 			s->data.children[i] = NULL;
 		}
 	} else if (s->type == TYPE_PARTICLE2D) {
-		struct pack_particle2d* p2d = (struct pack_particle2d*)pack->data[id];
+		struct pack_particle2d* p2d = (struct pack_particle2d*)ej_pkg->data[id];
 		s->s.p2d = p2d;
 		int i;
 		int n = p2d->cfg.symbol_count;
@@ -114,11 +117,11 @@ sprite_init(struct sprite * s, struct sprite_pack * pack, int id, int sz) {
 			s->data.children[i] = NULL;
 		}
 	} else {
-		s->s.pic = (struct pack_picture *)pack->data[id];
+		s->s.pic = (struct pack_picture *)ej_pkg->data[id];
 		memset(&s->data, 0, sizeof(s->data));
 		assert(sz >= sizeof(struct sprite) - sizeof(struct sprite *));
 		if (s->type == TYPE_PANNEL) {
-			struct pack_pannel * pp = (struct pack_pannel *)pack->data[id];
+			struct pack_pannel * pp = (struct pack_pannel *)ej_pkg->data[id];
 			s->data.scissor = pp->scissor;
 		}
 	}

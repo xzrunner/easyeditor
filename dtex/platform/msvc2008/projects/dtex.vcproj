@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\rg_etc1;..\..\..\external\ejoy2d;..\..\..\external\ejoy2d\render;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\rg_etc1;..\..\..\external\ejoy2d;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\rg_etc1;..\..\..\external\ejoy2d;..\..\..\external\ejoy2d\render;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\rg_etc1;..\..\..\external\ejoy2d;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -284,6 +284,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\dtex_c2_strategy.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_c2_strategy.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\dtex_c3.c"
 					>
 				</File>
@@ -421,6 +429,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\dtex_array.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_hash.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_hash.h"
 					>
 				</File>
 				<File
@@ -566,22 +582,22 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="packer"
+			Name="tp"
 			>
 			<File
-				RelativePath="..\..\..\src\dtex_packer.c"
+				RelativePath="..\..\..\src\dtex_tp.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_packer.h"
+				RelativePath="..\..\..\src\dtex_tp.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_packer_ext.c"
+				RelativePath="..\..\..\src\dtex_tp_ext.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_packer_ext.h"
+				RelativePath="..\..\..\src\dtex_tp_ext.h"
 				>
 			</File>
 		</Filter>

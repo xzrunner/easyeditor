@@ -4,6 +4,8 @@
 #include "spritepack.h"
 #include "matrix.h"
 
+#include <dtex.h>
+
 #include <lua.h>
 #include <stdint.h>
 #include <stdbool.h>
@@ -24,6 +26,7 @@ struct anchor_data {
 };
 
 struct sprite {
+	struct dtex_package* pkg;
 	struct sprite * parent;
 	uint16_t type;
 	uint16_t id;
@@ -54,8 +57,8 @@ struct sprite {
 };
 
 // sprite_size must be call before sprite_init
-int sprite_size(struct sprite_pack *pack, int id);
-void sprite_init(struct sprite *, struct sprite_pack * pack, int id, int sz);
+int sprite_size(struct dtex_package* pkg, int id);
+void sprite_init(struct sprite *, struct dtex_package* pkg, int id, int sz);
 
 int sprite_setframe(struct sprite *, int frame, bool force_child);
 
