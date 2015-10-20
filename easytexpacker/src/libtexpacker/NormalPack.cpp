@@ -90,13 +90,13 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 			} 
 			else 
 			{	
-				int w = src_sz.width, 
-					h = src_sz.height;
-
 				int e_left = 1, e_right = 1, e_bottom = 1, e_up = 1;
 
-				frame_val["frame"]["w"] = src_sz.width - e_left - e_right;
-				frame_val["frame"]["h"] = src_sz.height - e_bottom - e_up;
+				int w = src_sz.width - e_left - e_right, 
+					h = src_sz.height - e_bottom - e_up;
+
+				frame_val["frame"]["w"] = w;
+				frame_val["frame"]["h"] = h;
 				if (!rot) {
 					frame_val["frame"]["x"] = pos.x + e_left;
 					frame_val["frame"]["y"] = pos.y + e_bottom;
