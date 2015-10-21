@@ -53,6 +53,7 @@
 #include "PackLuaDescFile.h"
 #include "PackEP.h"
 #include "UnpackLuaDescFile.h"
+#include "ChangeJsonName.h"
 
 namespace edb
 {
@@ -111,6 +112,7 @@ void CommandLoader::Init()
 	fc->Register(PackLuaDescFile::Create());
 	fc->Register(PackEP::Create());
 	fc->Register(UnpackLuaDescFile::Create());
+	fc->Register(ChangeJsonName::Create());
 }
 
 }

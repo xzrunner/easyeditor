@@ -558,6 +558,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\ChangeJsonName.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\ChangeJsonName.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\ChangeTPJsonFile.cpp"
 					>
 				</File>
