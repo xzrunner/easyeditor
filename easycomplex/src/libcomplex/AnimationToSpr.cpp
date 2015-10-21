@@ -130,8 +130,8 @@ void AnimationToSpr::TransSpriteMat(d2d::ISprite* spr, const librespacker::PackA
 
 void AnimationToSpr::TransSpriteCol(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->multiCol = d2d::transColor(t.color, d2d::PT_RGBA);
-	spr->addCol = d2d::transColor(t.additive, d2d::PT_RGBA);
+	spr->multiCol = d2d::transColor(t.color, d2d::PT_ARGB);
+	spr->addCol = d2d::transColor(t.additive, d2d::PT_ARGB);
 
 	spr->r_trans = d2d::transColor(t.rmap, d2d::PT_RGBA);
 	spr->g_trans = d2d::transColor(t.gmap, d2d::PT_RGBA);
