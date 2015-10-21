@@ -31,7 +31,7 @@ d2d::ISprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* qua
 	d2d::Vector src[4], screen[4];
 	for (int i = 0; i < 4; ++i) {
 		src[i].x = quad->texture_coord[i].x / w;
-		src[i].y = quad->texture_coord[i].y / h;
+		src[i].y = 1 - quad->texture_coord[i].y / h;
 		screen[i] = quad->screen_coord[i];
 	}
 
