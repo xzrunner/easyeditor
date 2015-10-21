@@ -32,8 +32,8 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		if (str.size() == 4) {
 			Symbol* c = static_cast<Symbol*>(m_symbol);
 			d2d::StringTools::FromString(str[0], c->m_clipbox.xMin);
-			d2d::StringTools::FromString(str[1], c->m_clipbox.yMin);
-			d2d::StringTools::FromString(str[2], c->m_clipbox.xMax);
+			d2d::StringTools::FromString(str[1], c->m_clipbox.xMax);
+			d2d::StringTools::FromString(str[2], c->m_clipbox.yMin);
 			d2d::StringTools::FromString(str[3], c->m_clipbox.yMax);
 		}
 	}
