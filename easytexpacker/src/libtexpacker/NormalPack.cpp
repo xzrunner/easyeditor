@@ -90,7 +90,10 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 			} 
 			else 
 			{	
-				int e_left = 1, e_right = 1, e_bottom = 1, e_up = 1;
+				int e_left = m_extrude_min, 
+					e_right = m_extrude_min, 
+					e_bottom = m_extrude_min, 
+					e_up = m_extrude_min;
 
 				int w = src_sz.width - e_left - e_right, 
 					h = src_sz.height - e_bottom - e_up;
@@ -178,7 +181,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 				assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
 				GetExtrude(t->bound, t->w, t->h, e_left, e_right, e_bottom, e_up);
 			} else {
-				e_left = e_right = e_bottom = e_up = 1;
+				e_left = e_right = e_bottom = e_up = m_extrude_min;
 			}
 			
 			if (rot) {
@@ -222,8 +225,8 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int
 			sz.width += e_left + e_right;
 			sz.height += e_bottom + e_up;
 		} else {
-			sz.width += 2;
-			sz.height += 2;
+			sz.width += m_extrude_min * 2;
+			sz.height += m_extrude_min * 2;
 		}
 
 		m_src_sizes.push_back(sz);

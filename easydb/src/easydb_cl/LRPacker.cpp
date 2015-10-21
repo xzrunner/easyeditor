@@ -127,6 +127,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	pkg_val["output dir"] = _out_dir;
 
 	pkg_val["texture type"] = "png";
+	pkg_val["tp extrude"] = 4;
 
 	pkg_val["LOD"] = LOD;
 

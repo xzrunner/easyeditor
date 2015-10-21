@@ -91,21 +91,33 @@ void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_
 	std::string trim_path = ConnectCfgDir(config_dir, pkg_val["trim file"].asString());
 	std::string tex_type = pkg_val["texture type"].asString();
 
+	int extrude = 0;
+	if (!pkg_val["tp extrude"].isNull()) {
+		extrude = pkg_val["tp extrude"].asInt();
+	}
+
 	std::vector<std::string> images;
 	GetAllImages(pkg_val, config_dir, images);
 
-	libtexpacker::NormalPack tex_packer(images, trim);
-	tex_packer.Pack(0);
+	libtexpacker::NormalPack* tex_packer = NULL;
+	if (extrude != 0) {
+		tex_packer = new libtexpacker::NormalPack(images, trim, extrude, extrude);
+	} else {
+		tex_packer = new libtexpacker::NormalPack(images, trim);
+	}
+	tex_packer->Pack(0);
 	std::string json_path = dst_name + ".json";
-	tex_packer.OutputInfo(config_dir, json_path);
+	tex_packer->OutputInfo(config_dir, json_path);
 
 	if (pkg_val["rrp"].isNull()) {
 		std::string img_path = dst_name + ".png";
-		tex_packer.OutputImage(img_path);
+		tex_packer->OutputImage(img_path);
 
 		CompressTexture(img_path, tex_type);
 //		wxRemoveFile(img_path);
 	}
+
+	delete tex_packer;
 
 	sd.open_image_edge_clip = ori_cfg;
 }
