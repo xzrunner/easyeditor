@@ -43,10 +43,13 @@ const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
 			label->align_hori == spr->align_hori &&
 			label->align_vert == spr->align_vert && 
 			label->color == spr->color &&
-			label->size == spr->size &&
+//			label->size == spr->size &&
+			label->size == spr->size + 8 &&
 			label->width == spr->width &&
 			label->height == spr->height &&
-			label->has_edge == spr->has_edge) {
+//			label->has_edge == spr->has_edge
+			label->has_edge == true
+			) {
 			return label;
 		}
 	} 
@@ -61,11 +64,14 @@ const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
 
 	node->color = spr->color;
 
-	node->size = spr->size;
+//	node->size = spr->size;
+	node->size = spr->size + 8;
+
 	node->width = spr->width;
 	node->height = spr->height;
 
-	node->has_edge = spr->has_edge;
+//	node->has_edge = spr->has_edge;
+	node->has_edge = true;
 
 	m_labels.push_back(node);
 
