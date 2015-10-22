@@ -61,8 +61,8 @@ void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
 		name = spr->name;
 	}
 
-	part.comp_idx = AddComponent(node, name);
-	PackAnimation::LoadSprTrans(spr, part.t);
+	bool force_mat = AddComponent(node, name, part.comp_idx);
+	PackAnimation::LoadSprTrans(spr, part.t, force_mat);
 
 	frame.parts.push_back(part);
 }
@@ -75,18 +75,35 @@ void PackAnimation::Clear()
 	frames.clear();
 }
 
-int PackAnimation::AddComponent(const IPackNode* node, const std::string& name)
+bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name, int& comp_idx)
 {
 	if (const PackAnchor* anchor = dynamic_cast<const PackAnchor*>(node)) {
 		for (int i = 0, n = components.size(); i < n; ++i) {
 			if (dynamic_cast<const PackAnchor*>(components[i].node) && components[i].name == name) {
-				return i;
+				comp_idx = i;
+				return true;
 			}
 		}
 	} else {
 		for (int i = 0, n = components.size(); i < n; ++i) {
 			if (components[i].node == node && components[i].name == name) {
-				return i;
+				comp_idx = i;
+				return true;
+			}
+		}
+
+		for (int i = 0, n = components.size(); i < n; ++i) {
+			if (components[i].node->GetFilepath() == node->GetFilepath() 
+				&& components[i].name == name
+				&& !name.empty()) 
+			{
+				d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(node->GetFilepath());
+				if (type == d2d::FileNameParser::e_image ||
+					type == d2d::FileNameParser::e_complex ||
+					type == d2d::FileNameParser::e_anim) {
+					comp_idx = i;
+					return true;
+				}
 			}
 		}
 	}
@@ -95,18 +112,20 @@ int PackAnimation::AddComponent(const IPackNode* node, const std::string& name)
 	comp.node = node;
 	comp.name = name;
 	components.push_back(comp);
-	return components.size() - 1;
+	comp_idx = components.size() - 1;
+
+	return !name.empty();
 }
 
-void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans)
+void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans, bool force_mat)
 {
-	LoadSprMat(spr, trans);
+	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
 }
 
-void PackAnimation::LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans)
+void PackAnimation::LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans, bool force)
 {
-	if (dynamic_cast<const d2d::ImageSprite*>(spr)) {
+	if (!force && dynamic_cast<const d2d::ImageSprite*>(spr)) {
 		return;
 	}
 

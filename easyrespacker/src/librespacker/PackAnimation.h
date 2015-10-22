@@ -91,10 +91,10 @@ public:
 	static bool IsMatrixIdentity(const int* mat);
 
 private:
-	int AddComponent(const IPackNode* node, const std::string& name);	
+	bool AddComponent(const IPackNode* node, const std::string& name, int& comp_idx);	
 
-	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans);
-	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans);
+	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans, bool force_mat);
+	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans, bool force);
 	static void LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans);
 
 public:
