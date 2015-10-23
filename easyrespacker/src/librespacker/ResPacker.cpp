@@ -47,6 +47,58 @@ void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD,
 	PackToBin::PackEPT(outfile, m_tp, type, LOD, scale);
 }
 
+void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_name)
+{
+	std::vector<int> images_sz;
+
+	int i = 1;
+	while (true) {
+		std::string tp_path = tp_name + d2d::StringTools::ToString(i) + ".json";
+		if (d2d::FilenameTools::IsFileExist(tp_path)) {
+			Json::Value value;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(tp_path.c_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, value);
+			fin.close();
+
+			Json::Value meta_val = value["meta"];
+			assert(!meta_val.isNull());
+			Json::Value sz_val = meta_val["size"];
+			assert(!sz_val.isNull());
+			int w = sz_val["w"].asInt();
+			int h = sz_val["h"].asInt();
+			assert(w == h);
+
+			images_sz.push_back(w);
+		} else {
+			break;
+		}
+		++i;
+	}
+
+	std::string filepath = outfile + ".ept";
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));	
+
+	int img_sz = images_sz.size();
+
+	int out_sz = 0;
+	out_sz += sizeof(int) + img_sz * sizeof(int);
+
+	out_sz = -out_sz;
+	fout.write(reinterpret_cast<const char*>(&out_sz), sizeof(out_sz));
+
+	fout.write(reinterpret_cast<const char*>(&img_sz), sizeof(img_sz));
+	for (int i = 0; i < img_sz; ++i) {
+		fout.write(reinterpret_cast<const char*>(&images_sz[i]), sizeof(images_sz[i]));
+	}
+
+	fout.close();
+}
+
 void ResPacker::LoadJsonData(const std::string& dir)
 {
 	wxArrayString files;

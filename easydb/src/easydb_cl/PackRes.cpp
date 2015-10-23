@@ -537,6 +537,7 @@ void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& 
 	librespacker::ResPacker packer(config_dir, output_name, output_dir);
 	packer.OutputEpe(output_name, true);
 	packer.OutputEpt(output_name, librespacker::TT_PNG8, LOD);
+	librespacker::ResPacker::OutputEptDesc(output_name, output_name);
 
 	// debug
 	packer.OutputLua(output_name + ".lua");

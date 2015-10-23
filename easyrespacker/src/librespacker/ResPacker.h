@@ -19,6 +19,8 @@ public:
 	void OutputEpe(const std::string& outfile, bool compress, float scale = 1) const;
 	void OutputEpt(const std::string& outfile, TextureType type, int LOD = 0, float scale = 1) const;
 
+	static void OutputEptDesc(const std::string& outfile, const std::string& tp_name);
+
 private:
 	void LoadJsonData(const std::string& dir);
 	void LoadTPData(const std::string& tp_name);

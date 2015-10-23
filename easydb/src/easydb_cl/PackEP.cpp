@@ -64,16 +64,23 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
 					 const std::string& type, int LOD, float scale)
 {
+	if (type == "ept_desc") {
+		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
+		return;
+	}
+
 	librespacker::ResPacker packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua", scale);
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true, scale);
 		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
+		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 	} else if (type == "epe") {
 		packer.OutputEpe(out_file, true, scale);
 	} else if (type == "ept") {
 		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
+		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 	} else if (type == "debug") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
@@ -81,6 +88,7 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
 		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
+		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 	}
 }
 
