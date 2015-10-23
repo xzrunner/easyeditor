@@ -192,21 +192,61 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\dtex_async_queue.c"
+					RelativePath="..\..\..\src\dtex_async_multi_tex_task.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_async_multi_tex_task.h"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\dtex_async_queue.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_async_task.c"
+				<Filter
+					Name="tasks"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_async_task.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_c2_from_c3_task.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_c2_from_c3_task.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_c2_task.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_c2_task.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_c3_task.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_c3_task.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_epe_task.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_epe_task.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_one_tex_task.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_async_one_tex_task.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="decode"
@@ -513,19 +553,19 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\dtex_draw.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_draw.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dtex_gl.c"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_gl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_render.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_render.h"
 				>
 			</File>
 			<File
