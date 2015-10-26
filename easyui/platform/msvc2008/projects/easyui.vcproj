@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src"
+				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib SOIL.lib freetype250_D.lib luad.lib libpngd.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib SOIL.lib freetype250_D.lib luad.lib libpngd.lib lzmad.lib"
 				OutputFile="..\easyui\x86\Debug\easyui.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib"
@@ -121,7 +121,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src"
+				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easy3d\src\easy3d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -142,7 +142,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib libpng.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib libpng.lib lzma.lib"
 				OutputFile="..\easyui\x86\Release\easyui.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib"
