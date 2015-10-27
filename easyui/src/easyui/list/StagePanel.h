@@ -5,7 +5,7 @@
 
 #include "UIList.h"
 
-#include "view/IStagePage.h"
+#include "view/IUIStagePage.h"
 
 namespace eui
 {
@@ -17,7 +17,7 @@ namespace list
 
 class ToolbarPanel;
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public IStagePage
+class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public IUIStagePage
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
@@ -38,9 +38,11 @@ public:
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	//
-	// IStagePage interface
+	// IUIStagePage interface
 	//
 	virtual void OnSelected();
+	virtual void LoadFromFile(const char* filename);
+	virtual void StoreToFile(const char* filename) const;
 
 	d2d::Rect& GetClipbox() { return m_list.clipbox; }
 

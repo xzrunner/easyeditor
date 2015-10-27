@@ -7,6 +7,17 @@ namespace eui
 {
 namespace list
 {
+
+class UIList;
+
+class FileIO
+{
+public:
+//	static void Load(const char* filename);
+	static void Store(const char* filename, const UIList* list);
+
+}; // FileIO
+
 }
 }
 

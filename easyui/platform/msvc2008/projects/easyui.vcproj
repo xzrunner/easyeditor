@@ -244,7 +244,7 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\IStagePage.h"
+					RelativePath="..\..\..\src\easyui\view\IUIStagePage.h"
 					>
 				</File>
 				<File

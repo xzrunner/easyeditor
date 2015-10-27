@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "ToolBarPanel.h"
 #include "EditOP.h"
+#include "FileIO.h"
 
 #include "dataset/TopPannels.h"
 #include "view/LibraryPanel.h"
@@ -111,6 +112,16 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 void StagePanel::OnSelected()
 {
 	m_top_pannels->library->EnableUILibrary(false);
+}
+
+void StagePanel::LoadFromFile(const char* filename)
+{
+
+}
+
+void StagePanel::StoreToFile(const char* filename) const
+{
+	FileIO::Store(filename, &m_list);
 }
 
 }

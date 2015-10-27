@@ -7,7 +7,7 @@ namespace eui
 {
 
 class TopPannels;
-class IStagePage;
+class IUIStagePage;
 
 class StagePanel : public wxPanel
 {
@@ -15,6 +15,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
 
 	void Clear();
+
+	IUIStagePage* GetSelectedPage();
 
 private:
 	void InitLayout();
@@ -29,7 +31,7 @@ private:
 
 	wxNotebook* m_notebook;
 
-	std::vector<IStagePage*> m_pages;
+	std::vector<IUIStagePage*> m_pages;
 
 	DECLARE_EVENT_TABLE()
 

@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "FileIO.h"
 
+#include "view/IUIStagePage.h"
 #include "view/StagePanel.h"
 #include "view/LibraryPanel.h"
 #include "view/ToolbarPanel.h"
@@ -24,12 +25,18 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-//	FileIO::Load(filename, m_stage, m_library);
+	IUIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
+	if (stage) {
+		stage->LoadFromFile(filename);
+	}
 }
 
 void Task::Store(const char* filename) const
 {
-//	FileIO::Store(filename, m_stage);
+	IUIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
+	if (stage) {
+		stage->StoreToFile(filename);
+	}
 }
 
 bool Task::IsDirty() const

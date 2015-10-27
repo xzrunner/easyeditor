@@ -24,6 +24,15 @@ void StagePanel::Clear()
 {
 }
 
+IUIStagePage* StagePanel::GetSelectedPage()
+{
+	if (m_pages.empty()) {
+		return NULL;
+	} else {
+		return m_pages[m_notebook->GetSelection()];
+	}
+}
+
 void StagePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
