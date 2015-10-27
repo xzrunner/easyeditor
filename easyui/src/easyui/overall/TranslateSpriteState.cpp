@@ -1,8 +1,9 @@
 #include "TranslateSpriteState.h"
-
-#include "dataset/AnchorMgr.h"
+#include "AnchorMgr.h"
 
 namespace eui
+{
+namespace overall
 {
 
 TranslateSpriteState::TranslateSpriteState(d2d::SpriteSelection* selection, 
@@ -34,4 +35,5 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	bFetchNext = true;
 }
 
+}
 }

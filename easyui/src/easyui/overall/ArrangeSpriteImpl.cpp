@@ -4,6 +4,8 @@
 
 namespace eui
 {
+namespace overall
+{
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
 	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, NULL)
@@ -17,4 +19,5 @@ CreateTransalteState(d2d::SpriteSelection* selection, const d2d::Vector& first_p
 	return new TranslateSpriteState(selection, first_pos, m_stage->GetAnchorMgr()); 
 }
 
+}
 }

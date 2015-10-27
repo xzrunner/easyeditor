@@ -1,46 +1,55 @@
 #include "StagePanel.h"
-#include "StageCanvas.h"
-#include "ArrangeSpriteImpl.h"
+#include "LibraryPanel.h"
 
-#include <easycomplex.h>
+#include "dataset/TopPannels.h"
+#include "overall/StagePanel.h"
+#include "list/StagePanel.h"
 
 namespace eui
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::PropertySettingPanel* property,
-					   d2d::LibraryPanel* library,
-					   d2d::ViewPanelMgr* view_panel_mgr)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, m_symbols_cfg(this, library)
+BEGIN_EVENT_TABLE(StagePanel, wxPanel)
+	EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, StagePanel::OnPageChanged)
+END_EVENT_TABLE()
+
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
+	: wxPanel(parent)
+	, m_frame(frame)
+	, m_top_pannels(top_pannels)
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
-	SetCanvas(new StageCanvas(this));
+	InitLayout();
 }
 
 void StagePanel::Clear()
 {
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
+void StagePanel::InitLayout()
 {
-	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
-	m_anchor_mgr.Insert(sprite);
-	return ret;
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	InitTabPages(sizer);
+	SetSizer(sizer);
 }
 
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+void StagePanel::InitTabPages(wxSizer* sizer)
 {
-	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
-	m_anchor_mgr.Remove(sprite);
-	return ret;
+	m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
+
+//	m_notebook->AddPage(new overall::StagePanel(m_notebook, m_frame, property, library->GetUILibrary(), view_panel_mgr), wxT("Overall"));
+
+	{
+		list::StagePanel* page = new list::StagePanel(m_notebook, m_frame, m_top_pannels);
+		m_pages.push_back(page);
+		m_notebook->AddPage(page, wxT("List"));
+	}
+
+	sizer->Add(m_notebook, 1, wxEXPAND);
 }
 
-void StagePanel::InitConfig()
+void StagePanel::OnPageChanged(wxNotebookEvent& event)
 {
-	m_symbols_cfg.LoadConfig();
+	m_pages[m_notebook->GetSelection()]->OnSelected();
+	m_top_pannels->library->Layout();
 }
 
 }

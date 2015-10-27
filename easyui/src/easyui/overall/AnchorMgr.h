@@ -1,9 +1,11 @@
-#ifndef _EASYUI_ANCHOR_MGR_H_
-#define _EASYUI_ANCHOR_MGR_H_
+#ifndef _EASYUI_OVERALL_ANCHOR_MGR_H_
+#define _EASYUI_OVERALL_ANCHOR_MGR_H_
 
 #include <drag2d.h>
 
 namespace eui
+{
+namespace overall
 {
 
 class AnchorMgr
@@ -47,5 +49,6 @@ private:
 }; // AnchorMgr
 
 }
+}
 
-#endif // _EASYUI_ANCHOR_MGR_H_
+#endif // _EASYUI_OVERALL_ANCHOR_MGR_H_

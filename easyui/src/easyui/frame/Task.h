@@ -4,11 +4,10 @@
 #include <drag2d.h>
 #include <wx/splitter.h>
 
+#include "dataset/TopPannels.h"
+
 namespace eui
 {
-
-class AnchorMgr;
-class StagePanel;
 
 class Task : public d2d::ITask
 {
@@ -27,8 +26,6 @@ public:
 
 	virtual const d2d::EditPanel* GetEditPanel() const;
 
-	AnchorMgr* GetAnchorMgr();
-
 private:
 	void InitLayout();
 	wxWindow* InitLayoutLeft(wxWindow* parent);
@@ -37,14 +34,9 @@ private:
 
 private:
 	wxWindow* m_root;
-
 	wxFrame* m_parent;
 
- 	d2d::LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
- 	StagePanel* m_stage;
-
-	d2d::ViewPanelMgr m_view_panel_mgr;
+	TopPannels m_top_pannels;
 
 }; // Task
 

@@ -1,0 +1,51 @@
+#include "LibraryPanel.h"
+
+#include <easycomplex.h>
+
+namespace eui
+{
+
+LibraryPanel::LibraryPanel(wxWindow* parent)
+	: wxPanel(parent)
+{
+	InitLayout();
+	EnableUILibrary(false);
+}
+
+void LibraryPanel::EnableUILibrary(bool enable)
+{
+	wxSizer* sizer = GetSizer();
+	if (enable) {
+		sizer->Show((size_t)0);
+		sizer->Hide((size_t)1);
+	} else {
+		sizer->Show((size_t)1);
+		sizer->Hide((size_t)0);
+	}
+}
+
+void LibraryPanel::Clear()
+{
+	m_library_ui->Clear();
+	m_library_raw->Clear();
+}
+
+void LibraryPanel::InitLayout()
+{
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+	m_library_ui = new d2d::LibraryPanel(this);
+	sizer->Add(m_library_ui, 1, wxEXPAND);
+
+	m_library_raw = new d2d::LibraryPanel(this);
+	wxWindow* nb = m_library_raw->GetNotebook();
+	m_library_raw->AddPage(new d2d::LibraryImagePage(nb));
+	m_library_raw->AddPage(new ecomplex::LibraryPage(nb));
+	sizer->Add(m_library_raw, 1, wxEXPAND);
+
+	SetSizer(sizer);
+
+	Layout();
+}
+
+}

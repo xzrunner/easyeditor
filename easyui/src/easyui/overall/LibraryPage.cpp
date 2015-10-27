@@ -4,6 +4,8 @@
 
 namespace eui
 {
+namespace overall
+{
 
 LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	: d2d::ILibraryPage(parent, name)
@@ -42,4 +44,5 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 	}
 }
 
+}
 }

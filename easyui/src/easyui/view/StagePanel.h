@@ -3,41 +3,35 @@
 
 #include <drag2d.h>
 
-#include "dataset/SymbolsCfg.h"
-#include "dataset/AnchorMgr.h"
-
 namespace eui
 {
 
-class SymbolsCfg;
+class TopPannels;
+class IStagePage;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public wxPanel
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::PropertySettingPanel* property,
-		d2d::LibraryPanel* library,
-		d2d::ViewPanelMgr* view_panel_mgr);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
 
-	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
-	//
-	// d2d::MultiSpritesImpl interface
-	//
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
-
-	void InitConfig();
-
-	AnchorMgr* GetAnchorMgr() { return &m_anchor_mgr; }
+	void Clear();
 
 private:
-	SymbolsCfg m_symbols_cfg;
+	void InitLayout();
+	void InitTabPages(wxSizer* sizer);
 
-	AnchorMgr m_anchor_mgr;
+	void OnPageChanged(wxNotebookEvent& event);
+
+private:
+	wxTopLevelWindow* m_frame;
+
+	TopPannels* m_top_pannels;
+
+	wxNotebook* m_notebook;
+
+	std::vector<IStagePage*> m_pages;
+
+	DECLARE_EVENT_TABLE()
 
 }; // StagePanel
 

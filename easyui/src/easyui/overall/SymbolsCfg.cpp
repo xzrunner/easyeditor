@@ -1,9 +1,10 @@
 #include "SymbolsCfg.h"
-
-#include "view/LibraryPage.h"
-#include "view/StagePanel.h"
+#include "LibraryPage.h"
+#include "StagePanel.h"
 
 namespace eui
+{
+namespace overall
 {
 
 SymbolsCfg::SymbolsCfg(StagePanel* stage, d2d::LibraryPanel* library)
@@ -90,4 +91,5 @@ void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol
 	}
 }
 
+}
 }

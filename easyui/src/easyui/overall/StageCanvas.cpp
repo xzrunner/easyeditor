@@ -6,6 +6,8 @@
 
 namespace eui
 {
+namespace overall
+{
 
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
@@ -49,4 +51,5 @@ void StageCanvas::DrawGuideLines() const
 		d2d::LIGHT_GREY_LINE);
 }
 
+}
 }

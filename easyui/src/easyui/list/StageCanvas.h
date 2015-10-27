@@ -1,9 +1,11 @@
-#ifndef _EASYUI_STAGE_CANVAS_H_
-#define _EASYUI_STAGE_CANVAS_H_
+#ifndef _EASYUI_LIST_STAGE_CANVAS_H_
+#define _EASYUI_LIST_STAGE_CANVAS_H_
 
 #include "drag2d.h"
 
 namespace eui
+{
+namespace list
 {
 
 class StagePanel;
@@ -25,5 +27,6 @@ private:
 }; // StageCanvas
 
 }
+}
 
-#endif // _EASYUI_STAGE_CANVAS_H_
+#endif // _EASYUI_LIST_STAGE_CANVAS_H_

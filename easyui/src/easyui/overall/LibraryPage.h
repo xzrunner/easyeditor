@@ -1,9 +1,11 @@
-#ifndef _EASYUI_LIBRARY_PAGE_H_
-#define _EASYUI_LIBRARY_PAGE_H_
+#ifndef _EASYUI_OVERALL_LIBRARY_PAGE_H_
+#define _EASYUI_OVERALL_LIBRARY_PAGE_H_
 
 #include <drag2d.h>
 
 namespace eui
+{
+namespace overall
 {
 
 class LibraryPage : public d2d::ILibraryPage
@@ -19,5 +21,6 @@ protected:
 }; // LibraryPage 
 
 }
+}
 
-#endif // _EASYUI_LIBRARY_PAGE_H_
+#endif // _EASYUI_OVERALL_LIBRARY_PAGE_H_

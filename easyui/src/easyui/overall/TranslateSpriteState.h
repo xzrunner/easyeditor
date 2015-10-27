@@ -1,9 +1,11 @@
-#ifndef _EASYUI_TRANSLATE_SPRITE_STATE_H_
-#define _EASYUI_TRANSLATE_SPRITE_STATE_H_
+#ifndef _EASYUI_OVERALL_TRANSLATE_SPRITE_STATE_H_
+#define _EASYUI_OVERALL_TRANSLATE_SPRITE_STATE_H_
 
 #include <drag2d.h>
 
 namespace eui
+{
+namespace overall
 {
 
 class AnchorMgr;
@@ -32,5 +34,6 @@ private:
 }; // TranslateSpriteState
 
 }
+}
 
-#endif // _EASYUI_TRANSLATE_SPRITE_STATE_H_
+#endif // _EASYUI_OVERALL_TRANSLATE_SPRITE_STATE_H_

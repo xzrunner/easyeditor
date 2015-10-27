@@ -4,6 +4,8 @@
 
 namespace eui
 {
+namespace overall
+{
 
 AnchorMgr::AnchorMgr()
 {
@@ -115,4 +117,5 @@ void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const d2d::Vector& pos)
 	}
 }
 
+}
 }

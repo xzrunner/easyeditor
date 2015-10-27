@@ -1,12 +1,12 @@
 #include "SettingsDialog.h"
 #include "SettingCfg.h"
 
-#include "dataset/AnchorMgr.h"
+#include "overall/AnchorMgr.h"
 
 namespace eui
 {
 
-SettingDialog::SettingDialog(wxWindow* parent, AnchorMgr* anchor_mgr)
+SettingDialog::SettingDialog(wxWindow* parent, overall::AnchorMgr* anchor_mgr)
 	: wxDialog(parent, wxID_ANY, wxT("Settings"))
 	, m_anchor_mgr(anchor_mgr)
 {

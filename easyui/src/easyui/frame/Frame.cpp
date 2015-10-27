@@ -42,45 +42,45 @@ void Frame::OnPreview(wxCommandEvent& event)
 
 void Frame::OnExtendSetting(wxCommandEvent& event)
 {
-	SettingDialog dlg(this, static_cast<Task*>(m_task)->GetAnchorMgr());
-	dlg.ShowModal();
+// 	SettingDialog dlg(this, static_cast<Task*>(m_task)->GetAnchorMgr());
+// 	dlg.ShowModal();
 }
 
 void Frame::OnCode(wxCommandEvent& event)
 {
-	ebuilder::CodeDialog dlg(this);
-	StagePanel* stage = static_cast<StagePanel*>(
-		const_cast<d2d::EditPanel*>(m_task->GetEditPanel()));
-	std::vector<d2d::ISprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	//ebuilder::CodeDialog dlg(this);
+	//StagePanel* stage = static_cast<StagePanel*>(
+	//	const_cast<d2d::EditPanel*>(m_task->GetEditPanel()));
+	//std::vector<d2d::ISprite*> sprites;
+	//stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-	// ui
-	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
+	//// ui
+	//{
+	//	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
 
-		ebuilder::CodeGenerator gen;
-		Code code(gen);
-		code.ResolveUI(sprites);
-		page->SetReadOnly(false);
-		page->SetText(gen.toText());
-		page->SetReadOnly(true);
+	//	ebuilder::CodeGenerator gen;
+	//	Code code(gen);
+	//	code.ResolveUI(sprites);
+	//	page->SetReadOnly(false);
+	//	page->SetText(gen.toText());
+	//	page->SetReadOnly(true);
 
-		dlg.notebook->AddPage(page, page->getName());
-	}
-	// tid
-	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("texts.lua"));
+	//	dlg.notebook->AddPage(page, page->getName());
+	//}
+	//// tid
+	//{
+	//	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("texts.lua"));
 
-		ebuilder::CodeGenerator gen;
-		Code code(gen);
-		code.ResolveText(sprites);
-		page->SetReadOnly(false);
-		page->SetText(gen.toText());
-		page->SetReadOnly(true);
+	//	ebuilder::CodeGenerator gen;
+	//	Code code(gen);
+	//	code.ResolveText(sprites);
+	//	page->SetReadOnly(false);
+	//	page->SetText(gen.toText());
+	//	page->SetReadOnly(true);
 
-		dlg.notebook->AddPage(page, page->getName());
-	}
-	dlg.ShowModal();
+	//	dlg.notebook->AddPage(page, page->getName());
+	//}
+	//dlg.ShowModal();
 }
 
 }

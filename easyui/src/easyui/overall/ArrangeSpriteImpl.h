@@ -1,9 +1,11 @@
-#ifndef _EASYUI_ARRANGE_SPRITE_IMPL_H_
-#define _EASYUI_ARRANGE_SPRITE_IMPL_H_
+#ifndef _EASYUI_OVERALL_ARRANGE_SPRITE_IMPL_H_
+#define _EASYUI_OVERALL_ARRANGE_SPRITE_IMPL_H_
 
 #include <drag2d.h>
 
 namespace eui
+{
+namespace overall
 {
 
 class StagePanel;
@@ -23,5 +25,6 @@ private:
 }; // ArrangeSpriteImpl
 
 }
+}
 
-#endif // _EASYUI_ARRANGE_SPRITE_IMPL_H_
+#endif // _EASYUI_OVERALL_ARRANGE_SPRITE_IMPL_H_
