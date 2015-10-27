@@ -46,4 +46,9 @@ bool SpritesContainer::ResetOrder(const Object* obj, bool up)
 	return m_sprites.ResetOrder(static_cast<const ISprite*>(obj), up);
 }
 
+int SpritesContainer::Size() const
+{
+	return m_sprites.Size();
+}
+
 }

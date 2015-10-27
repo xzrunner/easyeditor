@@ -31,6 +31,8 @@ public:
 
 	bool IsExist(T* obj) const;
 
+	int Size() const;
+
 public:
 	static void Traverse(const std::vector<T*>& objs, IVisitor& visitor, bool order = true);
 	static void Traverse(const std::vector<T*>& objs, IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true);

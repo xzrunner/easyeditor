@@ -1,47 +1,47 @@
-{
-	"button" :
-	[
-		{
-			"filepath" : "data/sg_ui/data/json/red_button_complex.json"
-		},
-		{
-			"filepath" : "data/sg_ui/data/json/blue_button_complex.json"
-		},
-		{
-			"filepath" : "data/sg_ui/data/json/yellow_button_complex.json"
-		}
-	],
-	"list" : 
-	[
-		{
-			"filepath" : "data/sg_ui/data/json/guild2_apply_list_complex.json"
-		}				
-	],
-	"textbox" :
-	[
-		{
-			"filepath" : "data/sg_ui/data/json/center_gray_14_fontblank.json"
-		},
-		{
-			"filepath" : "data/sg_ui/data/json/center_gray_16_fontblank.json"
-		},
-		{
-			"filepath" : "data/sg_ui/data/json/center_gray_18_fontblank.json"
-		}
-	],
-	"panel" :
-	[
-		{
-			"filepath" : "data/sg_ui/data/json/input_bg_scale9.json"
-		},
-		{
-			"filepath" : "data/sg_ui/data/json/pop_action_scale9.json"
-		}
-	],
-	"other" :
-	[
-		{
-			"filepath" : "data/sg_ui/data/json/313_complex.json"
-		}
-	]
-}
+// {
+// 	"button" :
+// 	[
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/red_button_complex.json"
+// 		},
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/blue_button_complex.json"
+// 		},
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/yellow_button_complex.json"
+// 		}
+// 	],
+// 	"list" : 
+// 	[
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/guild2_apply_list_complex.json"
+// 		}				
+// 	],
+// 	"textbox" :
+// 	[
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/center_gray_14_fontblank.json"
+// 		},
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/center_gray_16_fontblank.json"
+// 		},
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/center_gray_18_fontblank.json"
+// 		}
+// 	],
+// 	"panel" :
+// 	[
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/input_bg_scale9.json"
+// 		},
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/pop_action_scale9.json"
+// 		}
+// 	],
+// 	"other" :
+// 	[
+// 		{
+// 			"filepath" : "data/sg_ui/data/json/313_complex.json"
+// 		}
+// 	]
+// }

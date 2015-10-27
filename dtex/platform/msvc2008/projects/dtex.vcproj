@@ -173,6 +173,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_texture_cache.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_texture_cache.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_texture_loader.c"
 				>
 			</File>
@@ -339,6 +347,14 @@
 					RelativePath="..\..\..\src\dtex_c3.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_c3_strategy.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_c3_strategy.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="extend"
@@ -386,6 +402,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_alloc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_debug.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_debug.h"
 				>
 			</File>
 			<File

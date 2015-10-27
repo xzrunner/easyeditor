@@ -69,6 +69,12 @@ bool ObjectVector<T>::IsExist(T* obj) const
 }
 
 template<class T>
+int ObjectVector<T>::Size() const
+{
+	return m_objs.size();
+}
+
+template<class T>
 inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& visitor, bool order/* = true*/)
 {
 	if (order)

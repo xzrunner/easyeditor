@@ -69,19 +69,19 @@ void LibraryPage::loadFromJsonFile(const std::string& filename)
 
 void LibraryPage::loadFromLuaFile(const std::string& filename)
 {
-	std::vector<std::string> texfilenames;
-	std::string name = filename.substr(0, filename.find_last_of("."));
-	texfilenames.push_back(name + ".1.ppm");
-
-	libcoco::epe::ParserLuaFile parser;
-	parser.parser(filename);
-	parser.transToMemory(texfilenames);
-
-	std::vector<d2d::ISymbol*> symbols;
-	parser.getAllSymbols(symbols);
-	for (int i = 0, n = symbols.size(); i < n; ++i)
-		if (IsHandleSymbol(symbols[i]))
-			m_list->Insert(symbols[i]);
+// 	std::vector<std::string> texfilenames;
+// 	std::string name = filename.substr(0, filename.find_last_of("."));
+// 	texfilenames.push_back(name + ".1.ppm");
+// 
+// 	libcoco::epe::ParserLuaFile parser;
+// 	parser.parser(filename);
+// 	parser.transToMemory(texfilenames);
+// 
+// 	std::vector<d2d::ISymbol*> symbols;
+// 	parser.getAllSymbols(symbols);
+// 	for (int i = 0, n = symbols.size(); i < n; ++i)
+// 		if (IsHandleSymbol(symbols[i]))
+// 			m_list->Insert(symbols[i]);
 }
 
 }

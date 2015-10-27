@@ -25,6 +25,8 @@ public:
 	virtual bool Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
 
+	int Size() const;
+
 private:
 	ObjectVector<ISprite> m_sprites;
 

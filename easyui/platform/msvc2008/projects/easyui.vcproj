@@ -244,11 +244,7 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\StageCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\view\StageCanvas.h"
+					RelativePath="..\..\..\src\easyui\view\IStagePage.h"
 					>
 				</File>
 				<File
@@ -264,11 +260,11 @@
 				Name="library"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\LibraryPage.cpp"
+					RelativePath="..\..\..\src\easyui\view\LibraryPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\LibraryPage.h"
+					RelativePath="..\..\..\src\easyui\view\LibraryPanel.h"
 					>
 				</File>
 			</Filter>
@@ -305,22 +301,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="editop"
+				Name="toolbar"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\ArrangeSpriteImpl.cpp"
+					RelativePath="..\..\..\src\easyui\view\ToolbarPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\ArrangeSpriteImpl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\view\TranslateSpriteState.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\view\TranslateSpriteState.h"
+					RelativePath="..\..\..\src\easyui\view\ToolbarPanel.h"
 					>
 				</File>
 			</Filter>
@@ -329,27 +317,19 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\easyui\dataset\AnchorMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\dataset\AnchorMgr.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\dataset\SymbolsCfg.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\dataset\SymbolsCfg.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyui\dataset\TidCfg.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\easyui\dataset\TidCfg.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\dataset\TopPannels.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\dataset\TopPannels.h"
 				>
 			</File>
 		</Filter>
@@ -364,6 +344,274 @@
 				RelativePath="..\..\..\src\easyui\code\Code.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="overall"
+			>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\StageCanvas.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\StagePanel.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="dataset"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\AnchorMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\AnchorMgr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\SymbolsCfg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\SymbolsCfg.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="editop"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\ArrangeSpriteImpl.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\ArrangeSpriteImpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\TranslateSpriteState.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\TranslateSpriteState.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="library"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\LibraryPage.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\LibraryPage.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="list"
+			>
+			<File
+				RelativePath="..\..\..\src\easyui\list\EditOP.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\list\"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\list\"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\list\EditOP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\list\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\list\FileIO.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\list\UIList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\list\UIList.h"
+				>
+			</File>
+			<Filter
+				Name="view"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\list\StageCanvas.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\StagePanel.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\StagePanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\ToolbarPanel.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\ToolbarPanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
