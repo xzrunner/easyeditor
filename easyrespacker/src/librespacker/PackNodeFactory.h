@@ -30,6 +30,9 @@ class Particle3DBuilder;
 // particle2d
 class Particle2DBuilder;
 
+// clipbox
+class ClipboxBuilder;
+
 class PackNodeFactory
 {
 public:
@@ -78,6 +81,9 @@ private:
 
 	// particle2d
 	Particle2DBuilder* m_particle2d_builder;
+
+	// clipbox
+	ClipboxBuilder* m_clipbox_builder;
 
 private:
 	static PackNodeFactory* m_instance;

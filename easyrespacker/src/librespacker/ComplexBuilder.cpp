@@ -1,17 +1,20 @@
 #include "ComplexBuilder.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "PackClipbox.h"
 #include "ExportNameSet.h"
 #include "PackAnchor.h"
 #include "Utility.h"
+#include "ClipboxBuilder.h"
 
 #include <easycomplex.h>
 
 namespace librespacker
 {
 
-ComplexBuilder::ComplexBuilder(ExportNameSet& export_set)
+ComplexBuilder::ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_builder)
 	: m_export_set(export_set)
+	, m_cb_builder(cb_builder)
 {
 }
 
@@ -74,7 +77,8 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 
 	m_export_set.LoadExport(symbol, node);
 
-	// todo: clipbox
+	// clipbox
+	const PackClipbox* cb = static_cast<const PackClipbox*>(m_cb_builder->Create(symbol));
 
 	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
 	std::vector<d2d::ISprite*> others;
@@ -87,6 +91,9 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 		node->actions.push_back(action);
 
 		PackAnimation::Frame frame;
+		if (cb) {
+			node->CreateClipboxFramePart(cb, frame);
+		}
 		for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i) {
 			node->CreateFramePart(symbol->m_sprites[i], frame);
 		}
@@ -104,6 +111,9 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 			node->actions.push_back(action);
 
 			PackAnimation::Frame frame;
+			if (cb) {
+				node->CreateClipboxFramePart(cb, frame);
+			}
 			for (int i = 0, n = itr->second.size(); i < n; ++i) {
 				node->CreateFramePart(itr->second[i], frame);
 			}

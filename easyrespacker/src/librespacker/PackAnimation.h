@@ -10,6 +10,8 @@ namespace ebuilder { class CodeGenerator; }
 namespace librespacker
 {
 
+class PackClipbox;
+
 class PackAnimation : public IPackNode
 {
 public:
@@ -85,6 +87,7 @@ public:
 		const std::vector<d2d::Image*>& images);
 
 	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
+	void CreateClipboxFramePart(const PackClipbox* cb, Frame& frame);
 
 	void Clear();
 

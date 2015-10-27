@@ -264,6 +264,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="7. clipbox"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\ClipboxBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\ClipboxBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="nodes"
@@ -543,6 +555,58 @@
 					RelativePath="..\..\..\src\librespacker\PackAnchor.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="7. clipbox"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackClipbox.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackClipbox.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxToBin.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxToLuaString.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ClipboxToLuaString.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

@@ -29,6 +29,9 @@
 #include "Particle2DBuilder.h"
 #include <easyparticle2d.h>
 
+// clipbox
+#include "ClipboxBuilder.h"
+
 namespace librespacker
 {
 
@@ -36,6 +39,9 @@ PackNodeFactory* PackNodeFactory::m_instance = NULL;
 
 PackNodeFactory::PackNodeFactory()
 {
+	// clipbox
+	m_builders.push_back(m_clipbox_builder = new ClipboxBuilder);
+
 	// picture
 	m_builders.push_back(m_img_builder = new ImageBuilder);
 	m_builders.push_back(m_scale9_builder = new Scale9Builder);
@@ -46,7 +52,7 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_label_builder = new LabelBuilder);
 
 	// animation
-	m_builders.push_back(m_complex_builder = new ComplexBuilder(m_export_set));
+	m_builders.push_back(m_complex_builder = new ComplexBuilder(m_export_set, m_clipbox_builder));
 	m_builders.push_back(m_anim_builder = new AnimBuilder(m_export_set));
 	m_builders.push_back(m_terrain2d_builder = new Terrain2DBuilder);
 

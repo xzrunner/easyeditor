@@ -1,7 +1,9 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "PackAnchor.h"
+#include "PackClipbox.h"
 #include "Utility.h"
+#include "typedef.h"
 
 #include "AnimToLuaString.h"
 #include "AnimFromLua.h"
@@ -63,6 +65,20 @@ void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
 
 	bool force_mat = AddComponent(node, name, part.comp_idx);
 	PackAnimation::LoadSprTrans(spr, part.t, force_mat);
+
+	frame.parts.push_back(part);
+}
+
+void PackAnimation::CreateClipboxFramePart(const PackClipbox* cb, Frame& frame)
+{
+	PackAnimation::Part part;
+
+	AddComponent(cb, "", part.comp_idx);
+
+	part.t.mat[0] = part.t.mat[3] = 1024;
+	part.t.mat[1] = part.t.mat[2] = 0;
+	part.t.mat[4] = cb->x * SCALE;
+	part.t.mat[5] = - cb->y * SCALE;
 
 	frame.parts.push_back(part);
 }

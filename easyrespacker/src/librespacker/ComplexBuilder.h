@@ -14,11 +14,12 @@ class IPackNode;
 class PackAnimation;
 class ExportNameSet;
 class PackAnchor;
+class ClipboxBuilder;
 
 class ComplexBuilder : public INodeBuilder
 {
 public:
-	ComplexBuilder(ExportNameSet& export_set);
+	ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_builder);
 	virtual ~ComplexBuilder();
 
 	virtual void Traverse(d2d::IVisitor& visitor) const;
@@ -36,6 +37,8 @@ private:
 
 private:
 	ExportNameSet& m_export_set;
+
+	ClipboxBuilder* m_cb_builder;
 
 	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
 
