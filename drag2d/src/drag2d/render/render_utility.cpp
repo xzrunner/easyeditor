@@ -6,6 +6,8 @@
 #include "dataset/ImageSprite.h"
 #include "view/MultiSpritesImpl.h"
 
+#include <gl/glew.h>
+
 namespace d2d
 {
 
@@ -53,6 +55,22 @@ ISprite* draw_all_to_one_spr(const std::vector<ISprite*>& sprites)
 	spr->SetTransform(Vector(dx, dy), 0);
 
 	return spr;
+}
+
+void gl_debug()
+{
+	GLenum error = glGetError();
+	if (error != GL_NO_ERROR
+		//		&& error != GL_INVALID_ENUM 
+		//		&& error != GL_INVALID_VALUE
+		//		&& error != GL_INVALID_OPERATION
+		//		&& error != GL_OUT_OF_MEMORY
+		//		&& error != GL_STACK_OVERFLOW 
+		//		&& error != GL_STACK_UNDERFLOW
+		) {
+			int zz = 0;
+			exit(1);
+	}
 }
 
 }

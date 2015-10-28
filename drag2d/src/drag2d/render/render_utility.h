@@ -12,6 +12,8 @@ class MultiSpritesImpl;
 ISprite* draw_all_to_one_spr(const MultiSpritesImpl* sprites_impl, ISprite* except);
 ISprite* draw_all_to_one_spr(const std::vector<ISprite*>& sprites);
 
+void gl_debug();
+
 }
 
 #endif // _DRAG2D_RENDER_UTILITY_H_
