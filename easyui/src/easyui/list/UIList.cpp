@@ -27,19 +27,21 @@ void UIList::StoreToFile(const char* filename) const
 	// items complex
 	ecomplex::Symbol items_complex;
 	m_items.Traverse(d2d::FetchAllVisitor<d2d::ISprite>(items_complex.m_sprites), d2d::DT_ALL);
+	std::sort(items_complex.m_sprites.begin(), items_complex.m_sprites.end(), ItemsCmp());
 	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
 		d2d::ISprite* spr = items_complex.m_sprites[i];
 		spr->name = "item" + d2d::StringTools::ToString(i+1);
 		spr->Retain();
 	}
-	items_complex.m_clipbox = m_clipbox;
 	std::string items_path = name + "_items_complex.json";
 	items_complex.SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
 
 	// wrapper complex
 	ecomplex::Sprite items_sprite(&items_complex);
+	items_sprite.name = "list";
 	ecomplex::Symbol wrapper_complex;
+	wrapper_complex.m_clipbox = m_clipbox;
 	wrapper_complex.m_sprites.push_back(&items_sprite);
 	items_sprite.Retain();
 	std::string top_path = name + "_wrapper_complex.json";
@@ -156,7 +158,7 @@ void UIList::HoriFilling(const std::vector<d2d::ISprite*>& ori_sprites,
 	m_horizontal = true;
 	m_vertical = false;
 	m_hori_space = fabs(ori_sprites[0]->GetPosition().x - ori_sprites[1]->GetPosition().x);
-	m_vert_space = 0;
+	m_vert_space = 1;
 
 	float y = ori_sprites[0]->GetPosition().y;
 	float x_min, x_max;
@@ -191,7 +193,11 @@ void UIList::HoriFilling(const std::vector<d2d::ISprite*>& ori_sprites,
 			new_sprites.push_back(spr);
 			_x += dx;
 		} else {
-			delete spr;
+			// add two more
+			new_sprites.push_back(spr);
+			spr = ori_sprites[0]->Clone();
+			spr->SetTransform(d2d::Vector(_x + dx, _y), ori_sprites[0]->GetAngle());
+			new_sprites.push_back(spr);
 			break;
 		}
 	}
@@ -204,7 +210,7 @@ void UIList::VertFilling(const std::vector<d2d::ISprite*>& ori_sprites, std::vec
 {
 	m_horizontal = false;
 	m_vertical = true;
-	m_hori_space = 0;
+	m_hori_space = 1;
 	m_vert_space = fabs(ori_sprites[0]->GetPosition().y - ori_sprites[1]->GetPosition().y);
 
 	float x = ori_sprites[0]->GetPosition().x;
@@ -227,7 +233,10 @@ void UIList::VertFilling(const std::vector<d2d::ISprite*>& ori_sprites, std::vec
 			new_sprites.push_back(spr);
 			_y -= dy;
 		} else {
-			delete spr;
+			new_sprites.push_back(spr);
+			spr = ori_sprites[0]->Clone();
+			spr->SetTransform(d2d::Vector(_x, _y - dy), ori_sprites[0]->GetAngle());
+			new_sprites.push_back(spr);
 			break;
 		}
 	}
@@ -247,6 +256,15 @@ void UIList::VertFilling(const std::vector<d2d::ISprite*>& ori_sprites, std::vec
 
 	m_hori_count = 0;
 	m_vert_count = m_items.Size() + new_sprites.size();
+}
+
+bool UIList::ItemsCmp::operator() (const d2d::ISprite* item0, const d2d::ISprite* item1) const
+{
+	if (item0->GetPosition().x != item1->GetPosition().x) {
+		return item0->GetPosition().x < item1->GetPosition().x;
+	} else {
+		return item0->GetPosition().y >= item1->GetPosition().y;
+	}
 }
 
 }

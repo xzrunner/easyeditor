@@ -43,15 +43,18 @@ void StagePanel::InitLayout()
 void StagePanel::InitTabPages(wxSizer* sizer)
 {
 	m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
-
-//	m_notebook->AddPage(new overall::StagePanel(m_notebook, m_frame, property, library->GetUILibrary(), view_panel_mgr), wxT("Overall"));
-
+	// overall
+	{
+		overall::StagePanel* page = new overall::StagePanel(m_notebook, m_frame, m_top_pannels);
+		m_pages.push_back(page);
+		m_notebook->AddPage(page, wxT("Overall"));
+	}
+	// list
 	{
 		list::StagePanel* page = new list::StagePanel(m_notebook, m_frame, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("List"));
 	}
-
 	sizer->Add(m_notebook, 1, wxEXPAND);
 }
 

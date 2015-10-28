@@ -33,12 +33,6 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->GetAnchorMgr()->Draw();
 
 	m_stage->DrawEditOP();
-
-#ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->DebugDraw();
-	}
-#endif
 }
 
 void StageCanvas::DrawGuideLines() const

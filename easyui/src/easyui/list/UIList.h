@@ -33,6 +33,13 @@ private:
 		std::vector<d2d::ISprite*>& new_sprites);
 
 private:
+	class ItemsCmp
+	{
+	public:
+		bool operator() (const d2d::ISprite* item0, const d2d::ISprite* item1) const;
+	}; // ItemsCmp
+
+private:
 	d2d::Rect m_clipbox;
 
 	d2d::SpritesContainer m_items;

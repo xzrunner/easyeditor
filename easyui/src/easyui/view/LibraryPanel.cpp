@@ -9,7 +9,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	: wxPanel(parent)
 {
 	InitLayout();
-	EnableUILibrary(false);
+	EnableUILibrary(true);
 }
 
 void LibraryPanel::EnableUILibrary(bool enable)
