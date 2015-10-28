@@ -33,6 +33,7 @@ public:
 		e_terrain2d,
 		e_icon,
 		e_shadow,
+		e_ui,
 	};
 
 	static Type getFileType(const wxString& filename);

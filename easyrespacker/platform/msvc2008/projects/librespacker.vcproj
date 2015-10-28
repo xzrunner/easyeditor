@@ -668,6 +668,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="ui"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackUITask.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackUITask.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="unpack"

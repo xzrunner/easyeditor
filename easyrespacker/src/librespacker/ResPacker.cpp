@@ -1,6 +1,7 @@
 #include "ResPacker.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
+#include "PackUITask.h"
 
 #include "PackToLuaString.h"
 #include "PackToBin.h"
@@ -45,6 +46,11 @@ void ResPacker::OutputEpe(const std::string& outfile, bool compress, float scale
 void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD, float scale) const
 {
 	PackToBin::PackEPT(outfile, m_tp, type, LOD, scale);
+}
+
+void ResPacker::OutputUIDesc(const std::string& outfile) const
+{
+	PackUITask::Instance()->Output(outfile + "_ui.json");
 }
 
 void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_name)
@@ -114,6 +120,8 @@ void ResPacker::LoadJsonData(const std::string& dir)
 			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim) ||
 			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
 			filepaths.push_back(filepath);
+		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_ui)) {
+			PackUITask::Instance()->AddTask(filepath);
 		}
 	}
 
