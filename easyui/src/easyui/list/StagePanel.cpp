@@ -89,6 +89,8 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 
 void StagePanel::OnSelected()
 {
+	SetCanvasDirty();
+
 	m_top_pannels->library->EnableUILibrary(false);
 }
 

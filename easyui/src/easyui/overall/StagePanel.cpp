@@ -2,6 +2,9 @@
 #include "StageCanvas.h"
 #include "ArrangeSpriteImpl.h"
 
+#include "dataset/TopPannels.h"
+#include "view/LibraryPanel.h"
+
 #include <easycomplex.h>
 
 namespace eui
@@ -9,16 +12,16 @@ namespace eui
 namespace overall
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::PropertySettingPanel* property,
-					   d2d::LibraryPanel* library,
-					   d2d::ViewPanelMgr* view_panel_mgr)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, m_symbols_cfg(this, library)
+	, d2d::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetUILibrary())
+	, m_top_pannels(top_pannels)
+	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
+	top_pannels->view_panel_mgr.AddSpritePanel(this);
+
+	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, top_pannels->property, 
+		&top_pannels->view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property)));
 	SetCanvas(new StageCanvas(this));
 }
 
@@ -38,6 +41,22 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
 	m_anchor_mgr.Remove(sprite);
 	return ret;
+}
+
+void StagePanel::OnSelected()
+{
+	SetCanvasDirty();
+
+	m_top_pannels->library->EnableUILibrary(true);
+}
+
+void StagePanel::LoadFromFile(const char* filename)
+{
+	SetCanvasDirty();
+}
+
+void StagePanel::StoreToFile(const char* filename) const
+{
 }
 
 void StagePanel::InitConfig()

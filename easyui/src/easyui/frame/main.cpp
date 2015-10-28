@@ -43,6 +43,8 @@ static void InitSymbolCreators()
 
 bool MyApp::OnInit()
 {
+	d2d::Config::Instance()->EnableUseDTex(false);
+
 	InitSymbolCreators();
 
 	eui::Frame* frame = new eui::Frame("EasyUI", eui::FILE_TAG);
