@@ -39,7 +39,7 @@ void UIList::StoreToFile(const char* filename) const
 
 	// wrapper complex
 	ecomplex::Sprite items_sprite(&items_complex);
-	items_sprite.name = "list";
+	items_sprite.name = "anchor";
 	ecomplex::Symbol wrapper_complex;
 	wrapper_complex.m_clipbox = m_clipbox;
 	wrapper_complex.m_sprites.push_back(&items_sprite);
