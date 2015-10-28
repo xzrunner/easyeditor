@@ -15,8 +15,6 @@ class ToolbarPanel : public d2d::ToolbarPanel
 public:
 	ToolbarPanel(wxWindow* parent, UIList* list, d2d::EditPanel* editpanel);
 
-	bool IsCurrBgLayer() const;
-
 	void EnableFillingBtn(bool enable);
 
 protected:
@@ -29,8 +27,6 @@ private:
 	UIList* m_list;
 
 	d2d::EditPanel* m_editpanel;
-
-	wxRadioBox* m_choice;
 
 	wxButton* m_btn_filling;
 

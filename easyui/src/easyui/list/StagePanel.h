@@ -44,7 +44,7 @@ public:
 	virtual void LoadFromFile(const char* filename);
 	virtual void StoreToFile(const char* filename) const;
 
-	d2d::Rect& GetClipbox() { return m_list.clipbox; }
+	UIList& GetList() { return m_list; }
 
 private:
 	TopPannels* m_top_pannels;

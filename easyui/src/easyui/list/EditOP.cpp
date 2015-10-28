@@ -16,7 +16,7 @@ EditOP::EditOP(StagePanel* stage, d2d::PropertySettingPanel* property, d2d::View
 bool EditOP::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	const d2d::Rect& r = m_stage->GetClipbox();
+	const d2d::Rect& r = m_stage->GetList().GetClipbox();
 
 	m_clipbox_selected = -1;
 	if (d2d::Math::getDistance(d2d::Vector(r.xMin, r.yMin), pos) < NODE_RADIUS) {
@@ -45,7 +45,7 @@ bool EditOP::OnMouseLeftUp(int x, int y)
 bool EditOP::OnMouseDrag(int x, int y)
 {
 	if (m_clipbox_selected != -1) {
-		d2d::Rect& r = m_stage->GetClipbox();
+		d2d::Rect r = m_stage->GetList().GetClipbox();
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		if (m_clipbox_selected == 0) {
 			r.xMin = pos.x;			
@@ -60,6 +60,7 @@ bool EditOP::OnMouseDrag(int x, int y)
 			r.xMax = pos.x;
 			r.yMin = pos.y;
 		}
+		m_stage->GetList().SetClipbox(r);
 		m_stage->SetCanvasDirty();
 		return false;
 	} else {
@@ -73,7 +74,7 @@ bool EditOP::OnDraw() const
 		return true;
 	}
 
-	const d2d::Rect& r = m_stage->GetClipbox();
+	const d2d::Rect& r = m_stage->GetList().GetClipbox();
 	d2d::PrimitiveDraw::rect(r, d2d::LIGHT_GREEN_LINE);
 
 	d2d::PrimitiveDraw::drawCircle(d2d::Vector(r.xMin, r.yMin), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);

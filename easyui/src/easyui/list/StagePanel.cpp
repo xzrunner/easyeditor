@@ -2,7 +2,6 @@
 #include "StageCanvas.h"
 #include "ToolBarPanel.h"
 #include "EditOP.h"
-#include "FileIO.h"
 
 #include "dataset/TopPannels.h"
 #include "view/LibraryPanel.h"
@@ -19,9 +18,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	, m_top_pannels(top_pannels)
 {
 	top_pannels->view_panel_mgr.AddSpritePanel(this);
-
-	m_list.clipbox.xMin = m_list.clipbox.yMin = -100;
-	m_list.clipbox.xMax = m_list.clipbox.yMax =  100;
 
 	SetEditOP(new EditOP(this, top_pannels->property, &top_pannels->view_panel_mgr));
 	SetCanvas(new StageCanvas(this));
@@ -44,12 +40,7 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
 	MultiSpritesImpl::ReorderSprite(sprite, up);
 
-	bool ret;
-	if (m_toolbar->IsCurrBgLayer()) {
-		ret = m_list.bgs.ResetOrder(sprite, up);
-	} else {
-		ret = m_list.items.ResetOrder(sprite, up);
-	}
+	bool ret = m_list.GetItems().ResetOrder(sprite, up);
 	if (ret) {
 		SetCanvasDirty();
 	}
@@ -60,13 +51,8 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	MultiSpritesImpl::InsertSprite(sprite, idx);
 
-	bool ret;
-	if (m_toolbar->IsCurrBgLayer()) {
-		ret = m_list.bgs.Insert(sprite, idx);
-	} else {
-		ret = m_list.items.Insert(sprite, idx);
-		m_toolbar->Enable(m_list.items.Size() == 2);
-	}
+	bool ret = m_list.GetItems().Insert(sprite, idx);
+	m_toolbar->Enable(m_list.GetItems().Size() == 2);
 	if (ret) {
 		SetCanvasDirty();
 	}
@@ -77,13 +63,8 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
 	MultiSpritesImpl::RemoveSprite(sprite);
 
-	bool ret;
-	if (m_toolbar->IsCurrBgLayer()) {
-		ret = m_list.bgs.Remove(sprite);
-	} else {
-		ret = m_list.items.Remove(sprite);
-		m_toolbar->Enable(m_list.items.Size() == 2);
-	}
+	bool ret = m_list.GetItems().Remove(sprite);
+	m_toolbar->Enable(m_list.GetItems().Size() == 2);
 	if (ret) {
 		SetCanvasDirty();
 	}
@@ -93,9 +74,7 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 bool StagePanel::ClearAllSprite()
 {
 	MultiSpritesImpl::ClearAllSprite();
-	bool suc0 = m_list.bgs.Clear();
-	bool suc1 = m_list.items.Clear();
-	if (suc0 || suc1) {
+	if (m_list.GetItems().Clear()) {
 		SetCanvasDirty();
 		return true;
 	} else {
@@ -105,8 +84,7 @@ bool StagePanel::ClearAllSprite()
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
 {
-	m_list.bgs.Traverse(visitor, type, order);
-	m_list.items.Traverse(visitor, type, order);
+	m_list.GetItems().Traverse(visitor, type, order);
 }
 
 void StagePanel::OnSelected()
@@ -116,12 +94,13 @@ void StagePanel::OnSelected()
 
 void StagePanel::LoadFromFile(const char* filename)
 {
-
+	m_list.LoadFromFile(filename);
+	SetCanvasDirty();
 }
 
 void StagePanel::StoreToFile(const char* filename) const
 {
-	FileIO::Store(filename, &m_list);
+	m_list.StoreToFile(filename);
 }
 
 }

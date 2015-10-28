@@ -529,14 +529,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\list\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\list\FileIO.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyui\list\UIList.cpp"
 				>
 			</File>
@@ -600,6 +592,14 @@
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
