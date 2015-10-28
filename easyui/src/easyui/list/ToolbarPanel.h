@@ -8,27 +8,25 @@ namespace eui
 namespace list
 {
 
-class UIList;
+class StagePanel;
 
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, UIList* list, d2d::EditPanel* editpanel);
-
-	void EnableFillingBtn(bool enable);
+	ToolbarPanel(wxWindow* parent, StagePanel* stage_panel);
 
 protected:
 	virtual wxSizer* initLayout();
 
 private:
 	void OnItemFilling(wxCommandEvent& event);
+	void OnItemClear(wxCommandEvent& event);
+
+	void OnChangeHori(wxCommandEvent& event);
+	void OnChangeVert(wxCommandEvent& event);
 
 private:
-	UIList* m_list;
-
-	d2d::EditPanel* m_editpanel;
-
-	wxButton* m_btn_filling;
+	StagePanel* m_stage_panel;
 
 }; // ToolbarPanel
 

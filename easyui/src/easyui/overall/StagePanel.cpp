@@ -13,7 +13,7 @@ namespace overall
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
-	: d2d::EditPanel(parent, frame)
+	: IUIStagePage(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetUILibrary())
 	, m_top_pannels(top_pannels)
 	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())

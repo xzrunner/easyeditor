@@ -15,6 +15,115 @@ UIList::UIList()
 	m_vertical = m_horizontal = false;
 	m_hori_count = m_vert_count = 0;
 	m_hori_space = m_vert_space = 0;
+
+	m_base_spr = m_hori_spr = m_vert_spr = NULL;
+}
+
+void UIList::ClearExceptBase()
+{
+	d2d::ISprite* spr = m_base_spr;
+
+	ClearAllSprite();
+
+	if (!spr) {
+		return;
+	}
+
+	spr->Retain();
+	InsertSprite(spr);
+	spr->Release();
+}
+
+bool UIList::ReorderSprite(d2d::ISprite* sprite, bool up)
+{
+	return m_items.ResetOrder(sprite, up);
+}
+
+bool UIList::InsertSprite(d2d::ISprite* sprite, int idx)
+{
+	if (m_base_spr && m_hori_spr && m_vert_spr) {
+		return false;
+	}
+
+	if (!m_base_spr) {
+		m_base_spr = sprite;
+		sprite->Retain();
+		m_items.Insert(sprite);
+		return false;
+	}
+
+	if (&m_base_spr->GetSymbol() != &sprite->GetSymbol()) {
+		return false;
+	}
+
+	d2d::Vector base_pos = m_base_spr->GetPosition();
+	d2d::Vector new_pos = sprite->GetPosition();
+	if (!m_hori_spr && !m_vert_spr) {
+		if (base_pos == new_pos) {
+			return false;
+		}
+		float dx = fabs(base_pos.x - new_pos.x);
+		float dy = fabs(base_pos.y - new_pos.y);
+		if (dx > dy) {
+			m_hori_spr = sprite;
+			m_hori_spr->SetTransform(d2d::Vector(new_pos.x, base_pos.y), sprite->GetAngle());
+		} else {
+			m_vert_spr = sprite;
+			m_vert_spr->SetTransform(d2d::Vector(base_pos.x, new_pos.y), sprite->GetAngle());
+		}
+		sprite->Retain();
+		m_items.Insert(sprite);
+	} else if (!m_hori_spr) {
+		if (base_pos.y == new_pos.y) {
+			return false;
+		} 
+		m_hori_spr = sprite;
+		sprite->Retain();
+		m_items.Insert(sprite);
+		m_hori_spr->SetTransform(d2d::Vector(new_pos.x, base_pos.y), sprite->GetAngle());
+	} else {
+		assert(!m_vert_spr);
+		if (base_pos.x == new_pos.x) {
+			return false;
+		} 
+		m_vert_spr = sprite;
+		sprite->Retain();
+		m_items.Insert(sprite);
+		m_vert_spr->SetTransform(d2d::Vector(base_pos.x, new_pos.y), sprite->GetAngle());
+	}
+
+	Filling();
+
+	return true;
+}
+
+bool UIList::RemoveSprite(d2d::ISprite* sprite)
+{
+	return m_items.Remove(sprite);
+}
+
+bool UIList::ClearAllSprite()
+{
+	if (m_base_spr) {
+		m_base_spr->Release();
+		m_base_spr = NULL;
+	}
+	if (m_hori_spr) {
+		m_hori_spr->Release();
+		m_hori_spr = NULL;
+	}
+	if (m_vert_spr) {
+		m_vert_spr->Release();
+		m_vert_spr = NULL;
+	}
+
+	bool ret = m_items.Clear();
+	return ret;
+}
+
+void UIList::TraverseSprites(d2d::IVisitor& visitor) const
+{
+	m_items.Traverse(visitor, d2d::DT_ALL, true);
 }
 
 void UIList::StoreToFile(const char* filename) const
@@ -27,7 +136,7 @@ void UIList::StoreToFile(const char* filename) const
 	// items complex
 	ecomplex::Symbol items_complex;
 	m_items.Traverse(d2d::FetchAllVisitor<d2d::ISprite>(items_complex.m_sprites), d2d::DT_ALL);
-	std::sort(items_complex.m_sprites.begin(), items_complex.m_sprites.end(), ItemsCmp());
+//	std::sort(items_complex.m_sprites.begin(), items_complex.m_sprites.end(), ItemsCmp());
 	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
 		d2d::ISprite* spr = items_complex.m_sprites[i];
 		spr->name = "item" + d2d::StringTools::ToString(i+1);
@@ -115,156 +224,89 @@ void UIList::LoadFromFile(const char* filename)
 
 bool UIList::Filling()
 {
-	// not support hori & vert filling
-	if (m_items.Size() != 2) {
+	bool ret = false;
+
+	m_items.Clear();
+
+	if (!m_base_spr) {
+		return false;
+	}	
+	if (!m_hori_spr && !m_vert_spr) {
 		return false;
 	}
 
-	std::vector<d2d::ISprite*> ori_sprites;
-	m_items.Traverse(d2d::FetchAllVisitor<d2d::ISprite>(ori_sprites), d2d::DT_ALL, true);
+	d2d::Vector base = m_base_spr->GetPosition();
 
-	assert(ori_sprites.size() == 2);
-	if (&ori_sprites[0]->GetSymbol() != &ori_sprites[1]->GetSymbol()) {
-		return false;
-	}
-	if (ori_sprites[0]->GetPosition().x != ori_sprites[1]->GetPosition().x &&
-		ori_sprites[0]->GetPosition().y != ori_sprites[1]->GetPosition().y) {
-		return false;
-	}
-	if (ori_sprites[0]->GetPosition().x == ori_sprites[1]->GetPosition().x &&
-		ori_sprites[0]->GetPosition().y == ori_sprites[1]->GetPosition().y) {
-		return false;
+	float dx = 0, dy = 0;
+	if (m_hori_spr) {
+		dx = fabs(base.x - m_hori_spr->GetPosition().x);
+	} 
+	if (m_vert_spr) {
+		dy = fabs(base.y - m_vert_spr->GetPosition().y);
 	}
 
-	std::vector<d2d::ISprite*> new_sprites;
-	if (ori_sprites[0]->GetPosition().x == ori_sprites[1]->GetPosition().x) {
-		VertFilling(ori_sprites, new_sprites);
-	} else if (ori_sprites[0]->GetPosition().y == ori_sprites[1]->GetPosition().y) {
-		HoriFilling(ori_sprites, new_sprites);
-	} else {
-		return false;
-	}
+	m_hori_space = dx;
+	m_vert_space = dy;
 
-	for (int i = 0; i < new_sprites.size(); ++i) {
-		m_items.Insert(new_sprites[i]);
-	}
+	d2d::Rect item_r = m_base_spr->GetRect();
+	float hw = item_r.xLength() * 0.5f;
+	float hh = item_r.yLength() * 0.5f;
 
-	return !new_sprites.empty();
-}
+	d2d::Rect region = m_clipbox;
+	region.xMax += dx * 2;
+	region.yMin -= dy * 2;
 
-void UIList::HoriFilling(const std::vector<d2d::ISprite*>& ori_sprites, 
-						 std::vector<d2d::ISprite*>& new_sprites)
-{
-	m_horizontal = true;
-	m_vertical = false;
-	m_hori_space = fabs(ori_sprites[0]->GetPosition().x - ori_sprites[1]->GetPosition().x);
-	m_vert_space = 1;
-
-	float y = ori_sprites[0]->GetPosition().y;
-	float x_min, x_max;
-	if (ori_sprites[1]->GetPosition().x > ori_sprites[0]->GetPosition().x) {
-		x_min = ori_sprites[0]->GetPosition().x;
-		x_max = ori_sprites[1]->GetPosition().x;
-	} else {
-		x_min = ori_sprites[1]->GetPosition().x;
-		x_max = ori_sprites[0]->GetPosition().x;
-	}
-
-	float dx = x_max - x_min;
-
-	float _x = x_min - dx, _y = y;
-	while (true) {
-		d2d::ISprite* spr = ori_sprites[0]->Clone();
-		spr->SetTransform(d2d::Vector(_x, _y), ori_sprites[0]->GetAngle());
-		if (d2d::Math::isRectContainRect(m_clipbox, spr->GetRect())) {
-			new_sprites.push_back(spr);
-			_x -= dx;
-		} else {
-			delete spr;
-			break;
-		}
-	}
-
-	_x = x_max + dx;
-	while (true) {
-		d2d::ISprite* spr = ori_sprites[0]->Clone();
-		spr->SetTransform(d2d::Vector(_x, _y), ori_sprites[0]->GetAngle());
-		if (d2d::Math::isRectContainRect(m_clipbox, spr->GetRect())) {
-			new_sprites.push_back(spr);
-			_x += dx;
-		} else {
-			// add two more
-			new_sprites.push_back(spr);
-			spr = ori_sprites[0]->Clone();
-			spr->SetTransform(d2d::Vector(_x + dx, _y), ori_sprites[0]->GetAngle());
-			new_sprites.push_back(spr);
-			break;
-		}
-	}
-
-	m_hori_count = m_items.Size() + new_sprites.size();
-	m_vert_count = 0;
-}
-
-void UIList::VertFilling(const std::vector<d2d::ISprite*>& ori_sprites, std::vector<d2d::ISprite*>& new_sprites)
-{
-	m_horizontal = false;
-	m_vertical = true;
-	m_hori_space = 1;
-	m_vert_space = fabs(ori_sprites[0]->GetPosition().y - ori_sprites[1]->GetPosition().y);
-
-	float x = ori_sprites[0]->GetPosition().x;
-	float y_min, y_max;
-	if (ori_sprites[1]->GetPosition().y > ori_sprites[0]->GetPosition().y) {
-		y_min = ori_sprites[0]->GetPosition().y;
-		y_max = ori_sprites[1]->GetPosition().y;
-	} else {
-		y_min = ori_sprites[1]->GetPosition().y;
-		y_max = ori_sprites[0]->GetPosition().y;
-	}
-
-	float dy = y_max - y_min;
-
-	float _x = x, _y = y_min - dy;
-	while (true) {
-		d2d::ISprite* spr = ori_sprites[0]->Clone();
-		spr->SetTransform(d2d::Vector(_x, _y), ori_sprites[0]->GetAngle());
-		if (d2d::Math::isRectContainRect(m_clipbox, spr->GetRect())) {
-			new_sprites.push_back(spr);
-			_y -= dy;
-		} else {
-			new_sprites.push_back(spr);
-			spr = ori_sprites[0]->Clone();
-			spr->SetTransform(d2d::Vector(_x, _y - dy), ori_sprites[0]->GetAngle());
-			new_sprites.push_back(spr);
-			break;
-		}
-	}
-
-	_y = y_max + dy;
-	while (true) {
-		d2d::ISprite* spr = ori_sprites[0]->Clone();
-		spr->SetTransform(d2d::Vector(_x, _y), ori_sprites[0]->GetAngle());
-		if (d2d::Math::isRectContainRect(m_clipbox, spr->GetRect())) {
-			new_sprites.push_back(spr);
-			_y += dy;
-		} else {
-			delete spr;
-			break;
-		}
-	}
+	d2d::Vector pos = base;
 
 	m_hori_count = 0;
-	m_vert_count = m_items.Size() + new_sprites.size();
+	m_vert_count = 1;
+
+	m_base_spr->Retain();
+	m_items.Insert(m_base_spr);
+	while (true) {
+		if (pos.y - hh < region.yMin) {
+			break;
+		} else if (dx == 0) {
+			pos.y -= dy;
+			++m_vert_count;
+		}
+		int count = 0;
+		while (true) {
+			if (pos.x + hw > region.xMax) {
+				pos.x = base.x;
+				pos.y -= dy;
+				++m_vert_count;
+				break;
+			} else {
+				d2d::ISprite* spr = m_base_spr->Clone();
+				spr->SetTransform(pos, spr->GetAngle());
+				m_items.Insert(spr);
+				ret = true;
+				pos.x += dx;
+				++count;
+			}
+			if (dx == 0) {
+				break;
+			}
+		}
+		m_hori_count = count;
+		if (dy == 0) {
+			--m_vert_count;
+			break;
+		}
+	}
+
+	return ret;
 }
 
-bool UIList::ItemsCmp::operator() (const d2d::ISprite* item0, const d2d::ISprite* item1) const
+void UIList::ChangeHori()
 {
-	if (item0->GetPosition().x != item1->GetPosition().x) {
-		return item0->GetPosition().x < item1->GetPosition().x;
-	} else {
-		return item0->GetPosition().y >= item1->GetPosition().y;
-	}
+	m_horizontal = !m_horizontal;
+}
+
+void UIList::ChangeVert()
+{
+	m_vertical = !m_vertical;
 }
 
 }

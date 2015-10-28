@@ -18,7 +18,7 @@ namespace overall
 
 class SymbolsCfg;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public IUIStagePage
+class StagePanel : public IUIStagePage, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);

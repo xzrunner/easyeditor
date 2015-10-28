@@ -15,6 +15,14 @@ class UIList
 public:
 	UIList();
 
+	void ClearExceptBase();
+
+	bool ReorderSprite(d2d::ISprite* sprite, bool up);
+	bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
+	bool RemoveSprite(d2d::ISprite* sprite);
+	bool ClearAllSprite();
+	void TraverseSprites(d2d::IVisitor& visitor) const;
+
 	void StoreToFile(const char* filename) const;
 	void LoadFromFile(const char* filename);
 
@@ -23,26 +31,14 @@ public:
 	const d2d::Rect& GetClipbox() const { return m_clipbox; }
 	void SetClipbox(const d2d::Rect& cb) { m_clipbox = cb; }
 
-	d2d::SpritesContainer& GetItems() { return m_items; }
-	const d2d::SpritesContainer& GetItems() const { return m_items; }
-
-private:
-	void HoriFilling(const std::vector<d2d::ISprite*>& ori_sprites, 
-		std::vector<d2d::ISprite*>& new_sprites);
-	void VertFilling(const std::vector<d2d::ISprite*>& ori_sprites, 
-		std::vector<d2d::ISprite*>& new_sprites);
-
-private:
-	class ItemsCmp
-	{
-	public:
-		bool operator() (const d2d::ISprite* item0, const d2d::ISprite* item1) const;
-	}; // ItemsCmp
+	void ChangeHori();
+	void ChangeVert();
 
 private:
 	d2d::Rect m_clipbox;
 
 	d2d::SpritesContainer m_items;
+	d2d::ISprite *m_base_spr, *m_hori_spr, *m_vert_spr;
 
 	bool m_horizontal;
 	bool m_vertical;

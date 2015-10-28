@@ -22,6 +22,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 
 void StagePanel::Clear()
 {
+	IUIStagePage* page = GetSelectedPage();
+	if (page) {
+		page->Clear();
+	}
 }
 
 IUIStagePage* StagePanel::GetSelectedPage()

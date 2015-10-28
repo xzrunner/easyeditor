@@ -13,7 +13,7 @@ namespace list
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
-	: d2d::EditPanel(parent, frame)
+	: IUIStagePage(parent, frame)
 	, d2d::MultiSpritesImpl(GetStageImpl())
 	, m_top_pannels(top_pannels)
 {
@@ -28,19 +28,19 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 
 	top_pannels->property->SetEditPanel(GetStageImpl());
 
-	m_toolbar = new ToolbarPanel(top_pannels->toolbar, &m_list, this);
+	m_toolbar = new ToolbarPanel(top_pannels->toolbar, this);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 }
 
 void StagePanel::Clear()
 {
+	ClearAllSprite();
 }
 
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
 	MultiSpritesImpl::ReorderSprite(sprite, up);
-
-	bool ret = m_list.GetItems().ResetOrder(sprite, up);
+	bool ret = m_list.ReorderSprite(sprite, up);
 	if (ret) {
 		SetCanvasDirty();
 	}
@@ -50,9 +50,7 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 {
 	MultiSpritesImpl::InsertSprite(sprite, idx);
-
-	bool ret = m_list.GetItems().Insert(sprite, idx);
-	m_toolbar->Enable(m_list.GetItems().Size() == 2);
+	bool ret = m_list.InsertSprite(sprite, idx);
 	if (ret) {
 		SetCanvasDirty();
 	}
@@ -62,9 +60,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
 	MultiSpritesImpl::RemoveSprite(sprite);
-
-	bool ret = m_list.GetItems().Remove(sprite);
-	m_toolbar->Enable(m_list.GetItems().Size() == 2);
+	bool ret = m_list.RemoveSprite(sprite);
 	if (ret) {
 		SetCanvasDirty();
 	}
@@ -74,17 +70,16 @@ bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 bool StagePanel::ClearAllSprite()
 {
 	MultiSpritesImpl::ClearAllSprite();
-	if (m_list.GetItems().Clear()) {
+	bool ret = m_list.ClearAllSprite();
+	if (ret) {
 		SetCanvasDirty();
-		return true;
-	} else {
-		return false;
 	}
+	return ret;
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
 {
-	m_list.GetItems().Traverse(visitor, type, order);
+	m_list.TraverseSprites(visitor);
 }
 
 void StagePanel::OnSelected()

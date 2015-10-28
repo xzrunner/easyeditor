@@ -17,7 +17,7 @@ namespace list
 
 class ToolbarPanel;
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public IUIStagePage
+class StagePanel : public IUIStagePage, public d2d::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
