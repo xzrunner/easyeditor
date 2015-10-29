@@ -111,7 +111,7 @@ void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 }
 
 d2d::IArrangeSpriteState* 
-SkeletonImpl::CreateTransalteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+SkeletonImpl::CreateTranslateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
 {
 	return new TranslateSpriteState(m_stage, selection, first_pos);
 }

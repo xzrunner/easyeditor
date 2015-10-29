@@ -30,7 +30,7 @@ public:
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
-	virtual d2d::IArrangeSpriteState* CreateTransalteState(d2d::SpriteSelection* selection, 
+	virtual d2d::IArrangeSpriteState* CreateTranslateState(d2d::SpriteSelection* selection, 
 		const d2d::Vector& first_pos) const;
 	virtual d2d::IArrangeSpriteState* CreateRotateState(d2d::SpriteSelection* selection, 
 		const d2d::Vector& first_pos) const;

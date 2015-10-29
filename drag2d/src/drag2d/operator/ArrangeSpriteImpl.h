@@ -53,7 +53,7 @@ protected:
 
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
-	virtual IArrangeSpriteState* CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const;
+	virtual IArrangeSpriteState* CreateTranslateState(SpriteSelection* selection, const Vector& first_pos) const;
 	virtual IArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const;
 	virtual IArrangeSpriteState* CreateScaleState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 	virtual IArrangeSpriteState* CreateShearState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;

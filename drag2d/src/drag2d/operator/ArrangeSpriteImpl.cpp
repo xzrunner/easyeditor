@@ -201,7 +201,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	}
 
 	// translate
-	m_op_state = CreateTransalteState(m_selection, pos);
+	m_op_state = CreateTranslateState(m_selection, pos);
 
 	m_op_state->OnMousePress(pos);
 }
@@ -223,7 +223,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 	if (!m_selection->IsEmpty()) {
 		Vector p;
 		p.setInvalid();
-		m_op_state = CreateTransalteState(m_selection, p);
+		m_op_state = CreateTranslateState(m_selection, p);
 	}
 
 	if (m_cfg.is_auto_align_open &&
@@ -489,7 +489,7 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 	m_popup.SetRightPopupMenu(menu, x, y);
 }
 
-IArrangeSpriteState* ArrangeSpriteImpl::CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const
+IArrangeSpriteState* ArrangeSpriteImpl::CreateTranslateState(SpriteSelection* selection, const Vector& first_pos) const
 {
 	return new TranslateSpriteState(selection, first_pos);
 }

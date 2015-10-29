@@ -43,12 +43,12 @@ struct ReleaseObjectFunctor
 }; // ReleaseObjectFunctor
 
 template<class T>
-struct RetainbjectFunctor
+struct RetainObjectFunctor
 {
 	void operator()(const T* pt) const {
 		pt->Retain();
 	}
-}; // RetainbjectFunctor
+}; // RetainObjectFunctor
 
 }
 
