@@ -349,8 +349,32 @@
 			Name="overall"
 			>
 			<Filter
-				Name="stage"
+				Name="view"
 				>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\LibraryPage.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\overall\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\overall\LibraryPage.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\easyui\overall\StageCanvas.cpp"
 					>
@@ -472,70 +496,10 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="library"
-				>
-				<File
-					RelativePath="..\..\..\src\easyui\overall\LibraryPage.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\overall\"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\overall\"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\overall\LibraryPage.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="list"
 			>
-			<File
-				RelativePath="..\..\..\src\easyui\list\EditOP.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)\list\"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)\list\"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\list\EditOP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\list\UIList.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\list\UIList.h"
-				>
-			</File>
 			<Filter
 				Name="view"
 				>
@@ -609,6 +573,94 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyui\list\ToolbarPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="editop"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\list\ArrangeSpriteImpl.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\ArrangeSpriteImpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\EditOP.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\EditOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\TranslateSpriteState.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\list\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\TranslateSpriteState.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="dataset"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\list\UIList.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\list\UIList.h"
 					>
 				</File>
 			</Filter>

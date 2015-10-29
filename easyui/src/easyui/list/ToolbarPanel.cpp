@@ -14,6 +14,16 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage_panel)
 	SetSizer(initLayout());	
 }
 
+void ToolbarPanel::EnableHori(bool enable)
+{
+	m_hori_check->SetValue(enable);
+}
+
+void ToolbarPanel::EnableVert(bool enable)
+{
+	m_vert_check->SetValue(enable);
+}
+
 wxSizer* ToolbarPanel::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -26,50 +36,37 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	sizer->AddSpacer(10);
 	{
-		wxButton* btn = new wxButton(this, wxID_ANY, "clear");
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-			wxCommandEventHandler(ToolbarPanel::OnItemClear));
-		sizer->Add(btn);
-	}
-	sizer->AddSpacer(10);
-	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("hori"));
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_hori_check = new wxCheckBox(this, wxID_ANY, wxT("hori"));
+		Connect(m_hori_check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(ToolbarPanel::OnChangeHori));
-		sizer->Add(check);
+		sizer->Add(m_hori_check);
 	}
 	sizer->AddSpacer(5);
 	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("vert"));
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_vert_check = new wxCheckBox(this, wxID_ANY, wxT("vert"));
+		Connect(m_vert_check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(ToolbarPanel::OnChangeVert));
-		sizer->Add(check);
+		sizer->Add(m_vert_check);
 	}
 	return sizer;
 }
 
 void ToolbarPanel::OnItemFilling(wxCommandEvent& event)
 {
-	bool succ = m_stage_panel->GetList().Filling();
+	bool succ = m_stage_panel->GetList().ReFilling();
 	if (succ) {
 		m_stage_panel->SetCanvasDirty();
 	}
 }
 
-void ToolbarPanel::OnItemClear(wxCommandEvent& event)
-{
-	m_stage_panel->GetList().ClearExceptBase();
-	m_stage_panel->SetCanvasDirty();
-}
-
 void ToolbarPanel::OnChangeHori(wxCommandEvent& event)
 {
-	m_stage_panel->GetList().ChangeHori();
+	m_stage_panel->GetList().EnableHori(event.IsChecked());
 }
 
 void ToolbarPanel::OnChangeVert(wxCommandEvent& event)
 {
-	m_stage_panel->GetList().ChangeVert();
+	m_stage_panel->GetList().EnableVert(event.IsChecked());
 }
 
 }

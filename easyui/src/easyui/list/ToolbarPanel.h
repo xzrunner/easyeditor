@@ -15,18 +15,23 @@ class ToolbarPanel : public d2d::ToolbarPanel
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage_panel);
 
+	void EnableHori(bool enable);
+	void EnableVert(bool enable);
+
 protected:
 	virtual wxSizer* initLayout();
 
 private:
 	void OnItemFilling(wxCommandEvent& event);
-	void OnItemClear(wxCommandEvent& event);
 
 	void OnChangeHori(wxCommandEvent& event);
 	void OnChangeVert(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage_panel;
+
+	wxCheckBox* m_hori_check;
+	wxCheckBox* m_vert_check;
 
 }; // ToolbarPanel
 

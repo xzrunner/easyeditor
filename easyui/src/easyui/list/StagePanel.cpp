@@ -39,12 +39,7 @@ void StagePanel::Clear()
 
 bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 {
-	MultiSpritesImpl::ReorderSprite(sprite, up);
-	bool ret = m_list.ReorderSprite(sprite, up);
-	if (ret) {
-		SetCanvasDirty();
-	}
-	return ret;
+	return false;
 }
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
@@ -59,12 +54,7 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
 
 bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
-	MultiSpritesImpl::RemoveSprite(sprite);
-	bool ret = m_list.RemoveSprite(sprite);
-	if (ret) {
-		SetCanvasDirty();
-	}
-	return ret;
+	return false;
 }
 
 bool StagePanel::ClearAllSprite()
@@ -92,6 +82,10 @@ void StagePanel::OnSelected()
 void StagePanel::LoadFromFile(const char* filename)
 {
 	m_list.LoadFromFile(filename);
+
+	m_toolbar->EnableHori(m_list.IsHoriEnable());
+	m_toolbar->EnableVert(m_list.IsVertEnable());
+
 	SetCanvasDirty();
 }
 
