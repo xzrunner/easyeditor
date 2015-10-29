@@ -52,11 +52,10 @@ void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& i
 void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 
 							   const d2d::Vector* texture_coord, int* src)
 {
-	std::string img_path = img->GetFilepath();
-	d2d::StringTools::ToLower(img_path);
-	const d2d::TexturePacker::Frame* tp_frame = tp.Query(img_path);
+	const d2d::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
 	if (!tp_frame) {
-		throw d2d::Exception("Image can't find in tp, %s", img_path.c_str());
+		std::string str = img->GetFilepath();
+		throw d2d::Exception("Image can't find in tp, %s", str.c_str());
 	}
 	if (!tp_frame->src.rotated) {
 		int left = tp_frame->dst.tex_coords[0].x, bottom = tp_frame->dst.tex_coords[0].y;

@@ -2,6 +2,7 @@
 
 #include "common/tools.h"
 #include "common/FileNameTools.h"
+#include "common/StringTools.h"
 
 #include <fstream>
 
@@ -36,8 +37,10 @@ void TexturePacker::Add(const std::string& filepath)
 
 const TexturePacker::Frame* TexturePacker::Query(const std::string& filepath) const
 {
+	std::string key = filepath;
+	StringTools::ToLower(key);
 	for (int i = 0, n = m_textures.size(); i < n; ++i) {
-		if (const TexturePacker::Frame* frame = m_textures[i]->Query(filepath)) {
+		if (const TexturePacker::Frame* frame = m_textures[i]->Query(key)) {
 			return frame;
 		}
 	}
@@ -55,8 +58,10 @@ int TexturePacker::GetTextureHeight(int idx) const
 
 int TexturePacker::QueryIdx(const std::string& filepath) const
 {
+	std::string key = filepath;
+	StringTools::ToLower(key);
 	for (int i = 0, n = m_textures.size(); i < n; ++i) {
-		if (m_textures[i]->Query(filepath)) {
+		if (m_textures[i]->Query(key)) {
 			return i;
 		}
 	}
