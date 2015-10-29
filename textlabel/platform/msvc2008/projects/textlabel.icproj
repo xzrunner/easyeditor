@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="libtextlabel"
+	ProjectGUID="{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
+	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	VCNestedProjectFileName="textlabel.vcproj">
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+	</Configurations>
+	<Files/>
+</VisualStudioProject>
