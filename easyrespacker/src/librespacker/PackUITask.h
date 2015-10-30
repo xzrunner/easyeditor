@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 
+#include <json/json.h>
+
 namespace librespacker
 {
 
@@ -15,7 +17,7 @@ public:
 	
 	void OnKnownComplexID(const std::string& filepath, int id);
 
-	void Output(const std::string& filepath) const;
+	void Output(const std::string& dir, Json::Value& value) const;
 
 	static PackUITask* Instance();
 

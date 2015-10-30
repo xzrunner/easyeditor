@@ -24,6 +24,9 @@ public:
 
 	bool has_edge;
 
+	std::string content;
+	std::string tid;
+
 public:
 	PackLabel() {}
 	PackLabel(int id);

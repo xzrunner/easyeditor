@@ -49,6 +49,8 @@ public:
 		return m_export_set.GetData(); 
 	}
 
+	const LabelBuilder* GetLabelBuilder() const { return m_label_builder; }
+
 	static PackNodeFactory* Instance();
 
 private:

@@ -73,9 +73,33 @@ const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
 //	node->has_edge = spr->has_edge;
 	node->has_edge = true;
 
+	node->content = spr->GetTextContext();
+	node->tid = spr->GetTextID();
+
 	m_labels.push_back(node);
 
 	return node;
+}
+
+void LabelBuilder::OutputExtraInfo(Json::Value& value) const
+{
+	for (int i = 0, n = m_labels.size(); i < n; ++i) {
+		const PackLabel* label = m_labels[i];
+		if (label->content.empty() && label->tid.empty()) {
+			continue;
+		}
+
+		Json::Value item_val;
+		item_val["type"] = "label";
+		item_val["id"] = label->GetID();
+		if (!label->content.empty()) {
+			item_val["content"] = d2d::StringTools::ToUtf8(label->content);
+		}
+		if (!label->tid.empty()) {
+			item_val["tid"] = d2d::StringTools::ToUtf8(label->tid);
+		}
+		value[value.size()] = item_val;
+	}
 }
 
 }

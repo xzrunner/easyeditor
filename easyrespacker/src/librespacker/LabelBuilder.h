@@ -22,6 +22,8 @@ public:
 
 	const IPackNode* Create(const d2d::FontSprite* spr);
 
+	void OutputExtraInfo(Json::Value& value) const;
+
 private:
 	std::vector<const PackLabel*> m_labels;
 	std::vector<const PackAnchor*> m_anchors;

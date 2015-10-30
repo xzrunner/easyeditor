@@ -2,6 +2,7 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "PackUITask.h"
+#include "LabelBuilder.h"
 
 #include "PackToLuaString.h"
 #include "PackToBin.h"
@@ -48,9 +49,22 @@ void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD,
 	PackToBin::PackEPT(outfile, m_tp, type, LOD, scale);
 }
 
-void ResPacker::OutputUIDesc(const std::string& outfile) const
+void ResPacker::OutputUIExtra(const std::string& outfile) const
 {
-	PackUITask::Instance()->Output(outfile + "_ui.json");
+	std::string dir = d2d::FilenameTools::getFileDir(outfile);
+
+	Json::Value value;
+
+	PackUITask::Instance()->Output(dir, value);
+	PackNodeFactory::Instance()->GetLabelBuilder()->OutputExtraInfo(value);
+
+	std::string filepath = outfile + "_ui.json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();
 }
 
 void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_name)

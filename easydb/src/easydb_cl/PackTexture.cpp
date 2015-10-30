@@ -20,7 +20,7 @@ std::string PackTexture::Description() const
 std::string PackTexture::Usage() const
 {
 	std::string cmd0 = Command() + " [cfg file]";
-	std::string cmd1 = Command() + " [src dir] [dst dir] [min size] [max size] [trim file]";
+	std::string cmd1 = Command() + " [src dir] [dst dir] [min size] [max size] [trim file] [extrude]";
 	return cmd0 + " or " + cmd1;
 }
 
@@ -35,7 +35,11 @@ void PackTexture::Run(int argc, char *argv[])
 		if (argc > 6) {
 			trim = new libtexpacker::ImageTrimData(argv[6]);
 		}
-		RunFromCmd(trim, argv[2], argv[3], -1, atof(argv[5]), atof(argv[4]), 1, 1);
+		int extrude = 1;
+		if (argc > 7) {
+			extrude = atoi(argv[7]);			
+		}
+		RunFromCmd(trim, argv[2], argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude);
 	}
 }
 

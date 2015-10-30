@@ -57,6 +57,8 @@ public:
 	static void Split(const std::string& src, const std::string& mid, 
 		std::vector<std::string>& dst);
 
+	static std::string ToUtf8(const std::string& str);
+
 }; // StringTools
 
 }

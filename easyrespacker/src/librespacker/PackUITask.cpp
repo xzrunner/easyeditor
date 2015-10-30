@@ -47,26 +47,16 @@ void PackUITask::OnKnownComplexID(const std::string& filepath, int id)
 	m_results.push_back(ret);
 }
 
-void PackUITask::Output(const std::string& filepath) const
+void PackUITask::Output(const std::string& dir, Json::Value& value) const
 {
-	Json::Value value;
-
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	for (int i = 0, n = m_results.size(); i < n; ++i) {
 		const Result& r = m_results[i];
 		Json::Value item_val;
 		item_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, r.ui_filepath).ToStdString();
 		item_val["wrapper id"] = r.list_id;
 		item_val["type"] = "list";
-		value[i] = item_val;
+		value[value.size()] = item_val;
 	}
-	
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	writer.write(fout, value);
-	fout.close();
 }
 
 PackUITask* PackUITask::Instance()
