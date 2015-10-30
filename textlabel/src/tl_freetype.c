@@ -1,4 +1,5 @@
 #include "tl_freetype.h"
+#include "tl_typedef.h"
 
 #include <ft2build.h>
 #include <freetype/freetype.h>
@@ -19,10 +20,6 @@ struct freetype {
 
 struct glyph_hash_key {
 	int unicode;
-	
-};
-
-struct glyph {
 	
 };
 
@@ -48,8 +45,8 @@ tl_ft_add_font(const char* filepath) {
 	}
 }
 
-uint32_t* 
-tl_ft_gen_char(int unicode, int font, int size, color_rgba col, bool edge, struct tl_glyph_layout* layout) {
+uint8_t* 
+tl_ft_gen_char(int unicode, int font, int size, bool edge, struct tl_glyph_layout* layout) {
 	if (font < 0 || font >= FT.count) {
 		return NULL;
 	}
@@ -84,28 +81,46 @@ tl_ft_gen_char(int unicode, int font, int size, color_rgba col, bool edge, struc
 	layout->sizer.width = bitmap->width;
 	layout->advance = ft_face->glyph->metrics.horiAdvance >> 6;
 
-	int sz = sizeof(uint32_t) * bitmap->rows * bitmap->width;
-	uint32_t* buf = malloc(sz);
+// 	int sz = sizeof(uint32_t) * bitmap->rows * bitmap->width;
+// 	uint32_t* buf = malloc(sz);
+// 	if (!buf) {
+// 		FT_Done_Glyph(glyph);
+// 		return NULL;
+// 	}
+// 	memset(buf, 0, sz);
+// 
+// 	uint8_t col_r = (col >> 24) & 0xff;
+// 	uint8_t col_g = (col >> 16) & 0xff;
+// 	uint8_t col_b = (col >> 8) & 0xff;
+// 
+// 	int ptr = 0;
+// 	for (int i = 0; i < bitmap->rows; ++i) {
+// 		for (int j = 0; j < bitmap->width; ++j) {
+// 			unsigned char 
+// 				r = ((col_r * bitmap->buffer[ptr]) >> 8) + 1,
+// 				g = ((col_g * bitmap->buffer[ptr]) >> 8) + 1,
+// 				b = ((col_b * bitmap->buffer[ptr]) >> 8) + 1,
+// 				a = bitmap->buffer[ptr];
+// 			int dst_ptr = (bitmap->rows - 1 - i) * bitmap->width + j;
+// 			buf[dst_ptr] = a << 24 | b << 16 | g << 8 | r;
+// 			++ptr;
+// 		}
+// 	}
+
+	int sz = sizeof(uint8_t) * bitmap->rows * bitmap->width;
+	uint8_t* buf = malloc(sz);
 	if (!buf) {
 		FT_Done_Glyph(glyph);
 		return NULL;
 	}
 	memset(buf, 0, sz);
 
-	uint8_t col_r = (col >> 24) & 0xff;
-	uint8_t col_g = (col >> 16) & 0xff;
-	uint8_t col_b = (col >> 8) & 0xff;
-
 	int ptr = 0;
 	for (int i = 0; i < bitmap->rows; ++i) {
 		for (int j = 0; j < bitmap->width; ++j) {
-			unsigned char 
-				r = ((col_r * bitmap->buffer[ptr]) >> 8) + 1,
-				g = ((col_g * bitmap->buffer[ptr]) >> 8) + 1,
-				b = ((col_b * bitmap->buffer[ptr]) >> 8) + 1,
-				a = bitmap->buffer[ptr];
+			unsigned char a = bitmap->buffer[ptr];
 			int dst_ptr = (bitmap->rows - 1 - i) * bitmap->width + j;
-			buf[dst_ptr] = a << 24 | b << 16 | g << 8 | r;
+			buf[dst_ptr] = a;
 			++ptr;
 		}
 	}

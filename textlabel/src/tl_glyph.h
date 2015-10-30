@@ -10,23 +10,23 @@ extern "C"
 
 #include <stdbool.h>
 
-struct tl_glyph_key {
-	int unicode;
-	int font;
-	int size;
-	bool edge;
+struct tl_glyph_sizer {
+	float width;
+	float height;
 };
 
-struct tl_glyph {
-	struct tl_glyph_key key;
-
-	uint8_t* buf;
-	struct tl_glyph_layout layout; 
+struct tl_glyph_layout {
+	struct tl_glyph_sizer sizer;
+	float bearing_x, bearing_y;
+	float advance;
+	float metrics_height;
 };
 
 void tl_glyph_cache_init(int cap);
 
-struct tl_glyph* tl_glyph_gen_char(int unicode, int font, int size, bool edge);
+void tl_glyph_cache_clear();
+
+uint8_t* tl_glyph_gen_char(int unicode, int font, int size, bool edge, struct tl_glyph_layout* layout);
 
 #endif // textlabel_glyph_h
 
