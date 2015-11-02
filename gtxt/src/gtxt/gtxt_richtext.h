@@ -17,7 +17,7 @@ struct gtxt_richtext_style {
 };
 
 void gtxt_richtext_parser(const char* str, struct gtxt_label_style* style, 
-						  int (*cb)(const char* str, struct gtxt_richtext_style* style));
+						  int (*cb)(const char* str, struct gtxt_richtext_style* style, void* ud), void* ud);
 
 #endif // gametext_richtext_h
 

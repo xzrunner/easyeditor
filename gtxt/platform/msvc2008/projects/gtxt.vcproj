@@ -198,6 +198,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_render.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_render.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\gtxt\gtxt_richtext.c"
 			>
 		</File>

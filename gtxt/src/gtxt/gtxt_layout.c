@@ -1,6 +1,7 @@
 #include "gtxt_layout.h"
 #include "gtxt_glyph.h"
 #include "gtxt_label.h"
+#include "gtxt_richtext.h"
 
 #include <dtex_array.h>
 
@@ -103,10 +104,22 @@ _new_row() {
 	}
 }
 
-static inline void
-_clear() {
-	L.style = NULL;
+void 
+gtxt_layout_begin(struct gtxt_label_style* style) {
+	L.style = style;
 
+	L.row_height = 0;
+	L.tot_height = 0;
+	L.curr_width = 0;
+
+	L.curr_row = _new_row();
+	L.head = L.curr_row;
+
+	_prepare_row_freelist(16);
+}
+
+void 
+gtxt_layout_end() {
 	L.row_freelist = L.head;
 	L.glyph_freelist = L.head->head;
 
@@ -119,14 +132,6 @@ _clear() {
 		last_tail = r->tail;
 		r = r->next;
 	}
-
-	L.head = NULL;
-
-	L.row_height = 0;
-	L.tot_height = 0;
-	L.curr_width = 0;
-
-	L.curr_row = _new_row();
 }
 
 static inline struct glyph*
@@ -139,12 +144,23 @@ _new_glyph() {
 }
 
 void 
-gtxt_layout_single(int unicode, struct gtxt_label_style* lstyle, struct gtxt_richtext_style* rstyle) {
-	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, lstyle->font, lstyle->font_size, lstyle->edge);
+gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
+	int font, size;
+	bool edge;
+	if (style) {
+		font = style->font;
+		size = style->size;
+		edge = style->edge;
+	} else {
+		font = L.style->font;
+		size = L.style->font_size;
+		edge = L.style->edge;
+	}
+	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, font, size, edge);
 
-	float w = g_layout->advance * (1 + lstyle->space_h);
-	if (unicode == '\n' || L.curr_width + w > lstyle->width) {
-		float h = g_layout->metrics_height * (1 + lstyle->space_v);
+	float w = g_layout->advance * (1 + L.style->space_h);
+	if (unicode == '\n' || L.curr_width + w > L.style->width) {
+		float h = g_layout->metrics_height * (1 + L.style->space_v);
 		if (L.row_height == 0) {
 			L.row_height = g_layout->metrics_height;
 		} else {
@@ -155,7 +171,7 @@ gtxt_layout_single(int unicode, struct gtxt_label_style* lstyle, struct gtxt_ric
 		L.tot_height += h;
 		L.curr_width = 0;
 
-		if (L.tot_height > lstyle->height) {
+		if (L.tot_height > L.style->height) {
 			return;
 		}
 
@@ -184,38 +200,21 @@ gtxt_layout_single(int unicode, struct gtxt_label_style* lstyle, struct gtxt_ric
 }
 
 void 
-gtxt_layout(struct dtex_array* unicodes, struct gtxt_label_style* style) {
-	L.style = style;
-
-	_prepare_row_freelist(16);
-
+gtxt_layout_multi(struct dtex_array* unicodes) {
 	int glyph_sz = dtex_array_size(unicodes);
 	bool succ = _prepare_glyph_freelist(glyph_sz);
 	if (!succ) {
 		return;
 	}
 
-	struct row* r = _new_row();
-	if (!r) {
-		return;
-	}
-
-	L.head = r;
-
-	float curr_width = 0;
 	for (int i = 0; i < glyph_sz; ++i) {
 		int unicode = *(int*)dtex_array_fetch(unicodes, i);
-
+		gtxt_layout_single(unicode, NULL);
 	}
 }
 
 void 
-gtxt_layout_end() {
-	_clear();
-}
-
-void 
-gtxt_layout_traverse(void (*cb)(int unicode, int font, int size, bool edge, float x, float y)) {
+gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, void* ud), void* ud) {
 	float x, y;
 
 	switch (L.style->align_v) {
@@ -248,7 +247,7 @@ gtxt_layout_traverse(void (*cb)(int unicode, int font, int size, bool edge, floa
 
 		struct glyph* g = r->head;
 		while (g) {
-			cb(g->unicode, L.style->font, L.style->font_size, L.style->edge, x, y);
+			cb(g->unicode, x, y, ud);
 			x += g->width;
 			g = g->next;
 		}
