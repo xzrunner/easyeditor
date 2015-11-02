@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libtextlabel"
+	Name="libgtxt"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
-	RootNamespace="textlabel"
+	RootNamespace="gtxt"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\textlabel\x86\Debug"
-			IntermediateDirectory="..\textlabel\x86\Debug\obj"
+			OutputDirectory="..\gtxt\x86\Debug"
+			IntermediateDirectory="..\gtxt\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\textlabel\x86\Release"
-			IntermediateDirectory="..\textlabel\x86\Release\obj"
+			OutputDirectory="..\gtxt\x86\Release"
+			IntermediateDirectory="..\gtxt\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -149,6 +149,14 @@
 			Name="external"
 			>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_array.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_array.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_hash.c"
 				>
 			</File>
@@ -158,39 +166,55 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\tl_freetype.c"
+			RelativePath="..\..\..\src\gtxt\gtxt_freetype.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_freetype.h"
+			RelativePath="..\..\..\src\gtxt\gtxt_freetype.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_glyph.c"
+			RelativePath="..\..\..\src\gtxt\gtxt_glyph.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_glyph.h"
+			RelativePath="..\..\..\src\gtxt\gtxt_glyph.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_layout.c"
+			RelativePath="..\..\..\src\gtxt\gtxt_label.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_layout.h"
+			RelativePath="..\..\..\src\gtxt\gtxt_label.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_typedef.h"
+			RelativePath="..\..\..\src\gtxt\gtxt_layout.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_utility.c"
+			RelativePath="..\..\..\src\gtxt\gtxt_layout.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\tl_utility.h"
+			RelativePath="..\..\..\src\gtxt\gtxt_richtext.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_richtext.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_typedef.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_utility.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_utility.h"
 			>
 		</File>
 	</Files>

@@ -446,7 +446,12 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libdtex", "..\dtex\platform
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "librespacker", "..\easyrespacker\platform\msvc2008\projects\librespacker.vcproj", "{E5C07F5D-F889-4FC2-8DA8-194023914BBE}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libtextlabel", "..\textlabel\platform\msvc2008\projects\textlabel.icproj", "{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libgtxt", "..\gtxt\platform\msvc2008\projects\gtxt.icproj", "{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testgtxt", "..\gtxt\platform\msvc2008\projects\test.vcproj", "{0B518978-91E3-49B0-BCBF-5B91499117E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70} = {62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -718,10 +723,14 @@ Global
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.Build.0 = Debug|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.Build.0 = Release|Win32
-		{A1FC8772-F8AA-4A14-B1AD-4FBEDC04829E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A1FC8772-F8AA-4A14-B1AD-4FBEDC04829E}.Release|Win32.ActiveCfg = Release|Win32
-		{1703B987-7C5B-4AA2-88DD-8DE48410BDB8}.Debug|Win32.ActiveCfg = Debug|Win32
-		{1703B987-7C5B-4AA2-88DD-8DE48410BDB8}.Release|Win32.ActiveCfg = Release|Win32
+		{56131739-9FFA-40FF-8749-5196A5414E9A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{56131739-9FFA-40FF-8749-5196A5414E9A}.Release|Win32.ActiveCfg = Release|Win32
+		{F34B21A6-1DFE-4E3F-BE01-8D677EFD3778}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F34B21A6-1DFE-4E3F-BE01-8D677EFD3778}.Release|Win32.ActiveCfg = Release|Win32
+		{0B518978-91E3-49B0-BCBF-5B91499117E4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0B518978-91E3-49B0-BCBF-5B91499117E4}.Debug|Win32.Build.0 = Debug|Win32
+		{0B518978-91E3-49B0-BCBF-5B91499117E4}.Release|Win32.ActiveCfg = Release|Win32
+		{0B518978-91E3-49B0-BCBF-5B91499117E4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

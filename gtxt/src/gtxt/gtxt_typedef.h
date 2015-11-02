@@ -3,14 +3,14 @@ extern "C"
 {
 #endif
 
-#ifndef textlabel_typedef_h
-#define textlabel_typedef_h
+#ifndef gametext_typedef_h
+#define gametext_typedef_h
 
 #include <stdint.h>
 
 typedef uint32_t color_rgba;
 
-#endif // textlabel_typedef_h
+#endif // gametext_typedef_h
 
 #ifdef __cplusplus
 }
