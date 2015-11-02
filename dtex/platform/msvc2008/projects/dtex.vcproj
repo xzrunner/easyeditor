@@ -355,6 +355,14 @@
 					RelativePath="..\..\..\src\dtex_c3_strategy.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_cache_glyph.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_cache_glyph.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="extend"
@@ -470,6 +478,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_statistics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_timer_task.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_timer_task.h"
 				>
 			</File>
 			<File
