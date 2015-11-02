@@ -106,6 +106,11 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	uint8_t orient_to_movement;
 	unpack(orient_to_movement, ptr);
 	p3d->orient_to_movement = TransBool(orient_to_movement);
+
+	uint8_t loop;
+	unpack(loop, ptr);
+	p3d->loop = TransBool(loop);
+
 }
 
 void Particle3DFromBin::UnpackComponent(uint8_t** ptr, PackParticle3D* p3d)

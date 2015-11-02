@@ -105,6 +105,9 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 
 	uint8_t orient_to_movement = TransBool(p3d->orient_to_movement);
 	pack(orient_to_movement, ptr);
+
+	uint8_t loop = TransBool(p3d->loop);
+	pack(loop, ptr);
 }
 
 int Particle3DToBin::ComponentSize()

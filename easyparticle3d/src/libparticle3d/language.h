@@ -15,6 +15,7 @@ enum {
 	LK_END,
 
 	LK_NAME,
+	LK_LOOP,
 	LK_CAPACITY,
 	LK_COUNT,
 	LK_EMISSION_TIME,
@@ -57,6 +58,7 @@ static const char* EN[] = {
 	"end",
 
 	"Name",
+	"Loop",
 	"Capacity",
 	"Count",
 	"Emission Time (ms)",
@@ -99,6 +101,7 @@ static const char* CN[] = {
 	"结束",
 
 	"名字",
+	"连续播放",
 	"容量",
 	"数量",
 	"发射周期(毫秒)",

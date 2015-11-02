@@ -59,6 +59,8 @@ p3d_ps_config* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p
 
 	cfg->orient_to_movement = p3d->orient_to_movement;
 
+	cfg->loop = p3d->loop;
+
 	// todo dir
 	cfg->dir.x = 0;
 	cfg->dir.y = 0;

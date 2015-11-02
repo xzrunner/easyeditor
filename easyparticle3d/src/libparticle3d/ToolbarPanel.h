@@ -44,6 +44,7 @@ private:
 	void OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
 
+	void OnSetLoop(wxCommandEvent& event);
 	void OnSetHori(wxSpinEvent& event);
 	void OnSetVert(wxSpinEvent& event);
 	void OnSetBounce(wxCommandEvent& event);
@@ -74,6 +75,7 @@ private:
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 
 	wxTextCtrl* m_name;
+	wxCheckBox* m_loop;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
 	wxCheckBox* m_bounce;

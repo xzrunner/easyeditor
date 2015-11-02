@@ -134,6 +134,13 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 		top_sizer->Add(sizer);
 	}
 	top_sizer->AddSpacer(10);
+	// Loop
+	{
+		m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
+		Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
+		top_sizer->Add(m_loop);
+	}
+	top_sizer->AddSpacer(10);
 	// Capacity
 	d2d::SliderCtrlOne* s_capacity = new d2d::SliderCtrlOne(this, LANG[LK_CAPACITY], 
 		"capacity", this, PS_CAPACITY, d2d::SliderItem("", "", CAPACITY, 1, 1000));
@@ -398,6 +405,11 @@ void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
 	}
 
 	Layout();
+}
+
+void ToolbarPanel::OnSetLoop(wxCommandEvent& event)
+{
+	m_stage->m_ps->SetLoop(event.IsChecked());
 }
 
 void ToolbarPanel::OnSetHori(wxSpinEvent& event)

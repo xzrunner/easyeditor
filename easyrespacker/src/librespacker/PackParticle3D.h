@@ -52,6 +52,8 @@ public:
 
 	bool orient_to_movement;
 	
+	bool loop;
+
 	std::vector<Component> components;
 
 public:

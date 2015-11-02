@@ -398,6 +398,8 @@ import_particle3d(struct import_stream *is) {
 
 	cfg->orient_to_movement = import_byte(is);
 
+	cfg->loop = import_byte(is);
+
 	// todo dir
 	cfg->dir.x = 0;
 	cfg->dir.y = 0;
@@ -412,7 +414,6 @@ import_particle3d(struct import_stream *is) {
 	struct p3d_particle_system* ps = p3d_create_with_mem(mem, cap, cfg);
 	// todo
 	ps->active = true;
-	ps->loop = true;	
 	pp->spr.ps = ps;
 }
 
