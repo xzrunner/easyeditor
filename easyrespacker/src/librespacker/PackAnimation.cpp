@@ -130,7 +130,11 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 	components.push_back(comp);
 	comp_idx = components.size() - 1;
 
-	return !name.empty();
+	if (d2d::FileNameParser::isType(node->GetFilepath(), d2d::FileNameParser::e_image)) {
+		return false;
+	} else {
+		return !name.empty();
+	}
 }
 
 void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans, bool force_mat)
