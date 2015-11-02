@@ -58,6 +58,10 @@ void ResPacker::OutputUIExtra(const std::string& outfile) const
 	PackUITask::Instance()->Output(dir, value);
 	PackNodeFactory::Instance()->GetLabelBuilder()->OutputExtraInfo(value);
 
+	if (value.isNull()) {
+		return;
+	}
+
 	std::string filepath = outfile + "_ui.json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

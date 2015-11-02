@@ -24,6 +24,7 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint8_t);						// bounce
 	sz += sizeof(uint16_t) + sizeof(uint8_t);	// radius
 	sz += sizeof(uint8_t);						// orient_to_movement
+	sz += sizeof(uint8_t);						// loop
 	return sz;
 }
 
