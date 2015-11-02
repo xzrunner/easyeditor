@@ -24,6 +24,8 @@ d2d::ISprite* NodeToSprite::Trans(const librespacker::IPackNode* node)
 		return Particle3DToSpr::Trans(p3d);
 	} else if (const librespacker::PackParticle2D* p2d = dynamic_cast<const librespacker::PackParticle2D*>(node)) {
 		return Particle2DToSpr::Trans(p2d);
+	} else if (const librespacker::PackClipbox* cb = dynamic_cast<const librespacker::PackClipbox*>(node)) {
+		return NULL;
 	} else {
 		throw d2d::Exception("NodeToSprite::Node2Sprite unknown type.");
 	}

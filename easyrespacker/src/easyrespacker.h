@@ -7,6 +7,7 @@
 #include "librespacker/PackAnchor.h"
 #include "librespacker/PackParticle3D.h"
 #include "librespacker/PackParticle2D.h"
+#include "librespacker/PackClipbox.h"
 #include "librespacker/ResPacker.h"
 #include "librespacker/ResUnpacker.h"
 #include "librespacker/Utility.h"

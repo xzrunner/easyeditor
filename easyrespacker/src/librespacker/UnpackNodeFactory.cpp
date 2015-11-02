@@ -9,6 +9,7 @@
 #include "PackAnchor.h"
 #include "PackParticle3D.h"
 #include "PackParticle2D.h"
+#include "PackClipbox.h"
 
 extern "C" {
 #include <lua.h>
@@ -41,6 +42,8 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 		node = new PackParticle3D(id);
 	} else if (type == "particle2d") {
 		node = new PackParticle2D(id);
+	} else if (type == "pannel") {
+		node = new PackClipbox(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::UnpackFromLua unknown type %s", type.c_str());
 	}
@@ -73,6 +76,8 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 		node = new PackParticle3D(id);
 	} else if (type == TYPE_PARTICLE2D) {
 		node = new PackParticle2D(id);
+	} else if (type == TYPE_PANNEL) {
+		node = new PackClipbox(id);
 	} else {
 		throw d2d::Exception("UnpackNodeFactory::UnpackFromBin unknown type %d", type);
 	}
