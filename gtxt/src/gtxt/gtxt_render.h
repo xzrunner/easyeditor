@@ -15,6 +15,8 @@ struct gtxt_render_style {
 	bool edge;
 };
 
+void gtxt_render_init(struct dtex_cg* cg);
+
 void gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y);
 
 #endif // gametext_rendrer_h
