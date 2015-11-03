@@ -2890,6 +2890,38 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="message"
+			>
+			<File
+				RelativePath="..\..\..\src\drag2d\message\Observer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\message\Subject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\message\Subject.h"
+				>
+			</File>
+			<Filter
+				Name="subjects"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\subject_id.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\drag2d\drag2d.h"
 			>
