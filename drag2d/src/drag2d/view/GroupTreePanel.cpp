@@ -24,6 +24,11 @@ GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
 	InitLayout();
 }
 
+GroupTreePanel::~GroupTreePanel()
+{
+	delete m_grouptree;
+}
+
 void GroupTreePanel::SelectSprite(ISprite* spr, bool clear)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);

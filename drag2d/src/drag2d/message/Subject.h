@@ -17,7 +17,7 @@ public:
 	void Register(Observer* observer);
 	void UnRegister(Observer* observer);
 	
-	void Notify(void* ud);
+	void Notify(void* ud, Observer* except = NULL);
 
 private:
 	int m_id;

@@ -11,6 +11,7 @@
 #include "view/EditPanelImpl.h"
 #include "render/BlendModes.h"
 #include "widgets/ColorProperty.h"
+#include "message/SpriteNameChangeSJ.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -21,11 +22,14 @@ SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, ISprite* spri
 	: IPropertySetting("Sprite")
 	, m_stage(stage)
 	, m_impl(new SpritePropertyImpl(stage, sprite))
+	, m_pg(NULL)
 {
+	SpriteNameChangeSJ::Instance()->Register(this);
 }
 
 SpritePropertySetting::~SpritePropertySetting()
 {
+	SpriteNameChangeSJ::Instance()->UnRegister(this);
 	delete m_impl;
 }
 
@@ -42,6 +46,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (name == wxT("Name"))
 	{
 		spr->name = wxANY_AS(value, wxString);
+		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
 	}
 	else if (name == "Tag")
 	{
@@ -179,8 +184,22 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 }
 
+void SpritePropertySetting::Notify(int sj_id, void* ud)
+{
+	if (!m_pg) {
+		return;
+	}
+
+	ISprite* spr = (ISprite*)ud;
+	if (GetSprite() == spr) {
+		m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
+	}
+}
+
 void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
+	m_pg = pg;
+
 	d2d::ISprite* spr = m_impl->GetSprite();
 
 	pg->GetProperty(wxT("Name"))->SetValue(spr->name);

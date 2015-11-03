@@ -8,6 +8,8 @@
 #include "dataset/ISprite.h"
 #include "view/SpriteSelection.h"
 #include "view/KeysState.h"
+#include "message/subject_id.h"
+#include "message/SpriteNameChangeSJ.h"
 
 #include <sstream>
 #include <queue>
@@ -24,6 +26,7 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 	EVT_TREE_END_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnEndDrag)
 	EVT_KEY_DOWN(GroupTreeCtrl::OnKeyDown)
 	EVT_TREE_SEL_CHANGED(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnSelChanged)
+	EVT_TREE_END_LABEL_EDIT(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnLabelEdited)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
@@ -40,6 +43,26 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	SetBackgroundColour(wxColour(229, 229, 229));
 
 	InitRoot();
+
+	SpriteNameChangeSJ::Instance()->Register(this);
+}
+
+GroupTreeCtrl::~GroupTreeCtrl()
+{
+	SpriteNameChangeSJ::Instance()->UnRegister(this);	
+}
+
+void GroupTreeCtrl::Notify(int sj_id, void* ud)
+{
+	if (sj_id == SPRITE_NAME_CHANGE) {
+		ISprite* spr = (ISprite*)ud;
+		
+		GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
+		Traverse(visitor);
+		wxTreeItemId id = visitor.GetItemID();
+
+		SetItemText(id, spr->name);
+	}
 }
 
 void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
@@ -379,6 +402,16 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		bool add = m_key_state.GetKeyState(WXK_CONTROL);
 		m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
+	}
+}
+
+void GroupTreeCtrl::OnLabelEdited(wxTreeEvent& event)
+{
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
+	if (data && !data->IsGroup()) {
+		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		spr->name = event.GetLabel();
+		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
 	}
 }
 

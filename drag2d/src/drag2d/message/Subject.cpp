@@ -18,10 +18,13 @@ void Subject::UnRegister(Observer* observer)
 	}
 }
 
-void Subject::Notify(void* ud)
+void Subject::Notify(void* ud, Observer* except)
 {
 	std::set<Observer*>::iterator itr = m_observers.begin();
 	for ( ; itr != m_observers.end(); ++itr) {
+		if (*itr == except) {
+			continue;
+		}
 		(*itr)->Notify(m_id, ud);
 	}
 }

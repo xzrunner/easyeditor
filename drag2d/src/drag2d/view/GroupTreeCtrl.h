@@ -4,6 +4,8 @@
 #include "GroupTreeVisitor.h"
 #include "GroupTreeItem.h"
 
+#include "message/Observer.h"
+
 #include <wx/treectrl.h>
 #include <json/json.h>
 
@@ -17,11 +19,17 @@ class MultiSpritesImpl;
 class ViewPanelMgr;
 class KeysState;
 
-class GroupTreeCtrl : public wxTreeCtrl
+class GroupTreeCtrl : public wxTreeCtrl, public Observer
 {
 public:
 	GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
 		ViewPanelMgr* view_panel_mgr, const KeysState& key_state);
+	virtual ~GroupTreeCtrl();
+
+	//
+	// interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	void Traverse(IGroupTreeVisitor& visitor) const;
 	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
@@ -59,6 +67,7 @@ private:
 	void OnEndDrag(wxTreeEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnSelChanged(wxTreeEvent& event);
+	void OnLabelEdited(wxTreeEvent& event);
 
 	// menu
 	void OnMenuAddSprites(wxCommandEvent& event);
