@@ -6,6 +6,8 @@
 
 #include "ISpriteViewPanel.h"
 
+#include "message/Observer.h"
+
 namespace d2d
 {
 
@@ -16,7 +18,7 @@ class ISprite;
 class ViewlistList;
 class ViewPanelMgr;
 
-class ViewlistPanel : public wxPanel, public ISpriteViewPanel
+class ViewlistPanel : public wxPanel, public ISpriteViewPanel, public Observer
 {
 public:
 	ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
@@ -27,12 +29,15 @@ public:
 	//
 	//	interface ISpriteViewPanel
 	//
-	virtual void SelectSprite(ISprite* spr, bool clear);
-	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual bool ReorderSprite(ISprite* spr, bool up);
 	virtual bool InsertSprite(ISprite* spr, int idx = -1);
 	virtual bool RemoveSprite(ISprite* spr);
 	virtual bool ClearAllSprite() { return false; }
+
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	bool RemoveSelected();
 	bool Remove(ISprite* sprite);
@@ -51,6 +56,8 @@ private:
 	void InitLayout();
 
 	int QuerySprIdx(const ISprite* spr) const;
+
+	void OnSpriteSelected(ISprite* spr, bool clear);
 
 private:
 	EditPanelImpl* m_stage;

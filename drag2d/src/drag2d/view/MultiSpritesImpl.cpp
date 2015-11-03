@@ -4,6 +4,8 @@
 #include "dataset/AbstractBV.h"
 #include "common/Rect.h"
 #include "common/sprite_visitors.h"
+#include "message/subject_id.h"
+#include "message/SpriteSelectedSJ.h"
 
 #include <fstream>
 
@@ -13,29 +15,15 @@ namespace d2d
 MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 {
 	m_sprite_selection = new SpriteSelection(stage);
+
+	SpriteSelectedSJ::Instance()->Register(this);
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
 	m_sprite_selection->Release();
-}
 
-void MultiSpritesImpl::SelectSprite(ISprite* spr, bool clear)
-{
-	if (clear) {
-		m_sprite_selection->Clear();
-		m_sprite_selection->Add(spr);
-	} else {
-		if (m_sprite_selection->IsExist(spr)) {
-			m_sprite_selection->Remove(spr);
-		} else {
-			m_sprite_selection->Add(spr);
-		}
-	}
-}
-
-void MultiSpritesImpl::SelectMultiSprites(SpriteSelection* selection)
-{
+	SpriteSelectedSJ::Instance()->UnRegister(this);
 }
 
 bool MultiSpritesImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
@@ -59,6 +47,14 @@ bool MultiSpritesImpl::ClearAllSprite()
 {
 	m_sprite_selection->Clear();
 	return false;
+}
+
+void MultiSpritesImpl::Notify(int sj_id, void* ud)
+{
+	if (sj_id == SPRITE_SELECTED) {
+		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		OnSpriteSelected(p->spr, p->clear);
+	}
 }
 
 ISprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
@@ -95,6 +91,20 @@ void MultiSpritesImpl::ClearSpriteSelection()
 	}
 
 	m_sprite_selection->Clear();
+}
+
+void MultiSpritesImpl::OnSpriteSelected(ISprite* spr, bool clear)
+{
+	if (clear) {
+		m_sprite_selection->Clear();
+		m_sprite_selection->Add(spr);
+	} else {
+		if (m_sprite_selection->IsExist(spr)) {
+			m_sprite_selection->Remove(spr);
+		} else {
+			m_sprite_selection->Add(spr);
+		}
+	}
 }
 
 } // d2d

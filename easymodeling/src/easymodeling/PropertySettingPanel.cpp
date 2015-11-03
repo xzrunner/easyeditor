@@ -11,7 +11,7 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 {
 }
 
-void PropertySettingPanel::SelectSprite(d2d::ISprite* spr)
+void PropertySettingPanel::OnSpriteSelected(d2d::ISprite* spr, bool clear)
 {
 	assert(m_stage);
 	if (spr) {

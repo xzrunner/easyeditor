@@ -7,6 +7,8 @@
 #include "view/SpritePropertySetting.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/ViewPanelMgr.h"
+#include "message/subject_id.h"
+#include "message/SpriteSelectedSJ.h"
 
 #include <fstream>
 
@@ -23,6 +25,8 @@ ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
 	, m_selected_spr(NULL)
 {
 	InitLayout();
+
+	SpriteSelectedSJ::Instance()->Register(this);
 }
 
 ViewlistPanel::~ViewlistPanel()
@@ -30,18 +34,8 @@ ViewlistPanel::~ViewlistPanel()
 	if (m_selected_spr) {
 		m_selected_spr->Release();
 	}
-}
 
-void ViewlistPanel::SelectSprite(ISprite* spr, bool clear)
-{
-	int idx = QuerySprIdx(spr);
-	if (idx >= 0) {
-		m_list->SetSelection(idx);
-	}	
-}
-
-void ViewlistPanel::SelectMultiSprites(SpriteSelection* selection)
-{
+	SpriteSelectedSJ::Instance()->UnRegister(this);
 }
 
 bool ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
@@ -57,6 +51,14 @@ bool ViewlistPanel::InsertSprite(ISprite* spr, int idx)
 bool ViewlistPanel::RemoveSprite(ISprite* spr)
 {
 	return Remove(spr);
+}
+
+void ViewlistPanel::Notify(int sj_id, void* ud)
+{
+	if (sj_id == SPRITE_SELECTED) {
+		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		OnSpriteSelected(p->spr, p->clear);
+	}
 }
 
 bool ViewlistPanel::RemoveSelected()
@@ -165,7 +167,10 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 
 	if (m_view_panel_mgr) {
 		bool add = m_list->GetKeyState(WXK_CONTROL);
-		m_view_panel_mgr->SelectSprite(spr, !add, this);
+		SpriteSelectedSJ::Params p;
+		p.spr = spr;
+		p.clear = !add;
+		SpriteSelectedSJ::Instance()->OnSelected(p, this);
 	}
 }
 
@@ -204,6 +209,14 @@ int ViewlistPanel::QuerySprIdx(const ISprite* spr) const
 		}
 	}
 	return -1;
+}
+
+void ViewlistPanel::OnSpriteSelected(ISprite* spr, bool clear)
+{
+	int idx = QuerySprIdx(spr);
+	if (idx >= 0) {
+		m_list->SetSelection(idx);
+	}
 }
 
 } // d2d

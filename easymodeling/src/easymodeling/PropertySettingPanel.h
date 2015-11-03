@@ -11,10 +11,8 @@ class PropertySettingPanel : public d2d::PropertySettingPanel
 public:
 	PropertySettingPanel(wxWindow* parent);
 
-	//
-	//	interface ISpriteViewPanel
-	//
-	virtual void SelectSprite(d2d::ISprite* spr);
+protected:
+	virtual void OnSpriteSelected(d2d::ISprite* spr, bool clear);
 
 }; // PropertySettingPanel
  

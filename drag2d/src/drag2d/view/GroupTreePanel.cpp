@@ -29,25 +29,6 @@ GroupTreePanel::~GroupTreePanel()
 	delete m_grouptree;
 }
 
-void GroupTreePanel::SelectSprite(ISprite* spr, bool clear)
-{
-	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);
-	m_grouptree->Traverse(visitor);
-	wxTreeItemId id = visitor.GetItemID();
-	if (id.IsOk()) {
-		m_grouptree->SelectItem(id);
-	}
-}
-
-void GroupTreePanel::SelectMultiSprites(SpriteSelection* selection)
-{
-	std::vector<ISprite*> sprites;
-	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		SelectSprite(sprites[i], false);
-	}
-}
-
 bool GroupTreePanel::ReorderSprite(ISprite* spr, bool up)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);

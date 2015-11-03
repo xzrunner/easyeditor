@@ -22,42 +22,6 @@ void ViewPanelMgr::AddShapePanel(IShapeViewPanel* panel)
 	m_shape_panels.push_back(panel);
 }
 
-void ViewPanelMgr::SelectSprite(ISprite* spr, bool clear, ISpriteViewPanel* expect)
-{
-	if (m_locked) {
-		return;
-	} else {
-		m_locked = true;
-	}
-
-	for (int i = 0, n = m_spr_panels.size(); i < n; ++i) {
-		if (m_spr_panels[i] == expect) {
-			continue;
-		}
-		m_spr_panels[i]->SelectSprite(spr, clear);
-	}
-
-	m_locked = false;
-}
-
-void ViewPanelMgr::SelectMultiSprites(SpriteSelection* selection, ISpriteViewPanel* expect)
-{
-	if (m_locked) {
-		return;
-	} else {
-		m_locked = true;
-	}
-
-	for (int i = 0, n = m_spr_panels.size(); i < n; ++i) {
-		if (m_spr_panels[i] == expect) {
-			continue;
-		}
-		m_spr_panels[i]->SelectMultiSprites(selection);
-	}
-
-	m_locked = false;
-}
-
 void ViewPanelMgr::ReorderSprite(ISprite* spr, bool up, ISpriteViewPanel* expect)
 {
 	if (m_locked) {

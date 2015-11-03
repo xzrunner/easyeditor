@@ -356,11 +356,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\dtex_cache_glyph.c"
+					RelativePath="..\..\..\src\dtex_cg.c"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\dtex_cache_glyph.h"
+					RelativePath="..\..\..\src\dtex_cg.h"
 					>
 				</File>
 			</Filter>

@@ -183,3 +183,5 @@
 #include "render/ShapeShader.h"
 #include "render/Snapshoot.h"
 #include "render/render_utility.h"
+
+#include "message/SpriteSelectedSJ.h"

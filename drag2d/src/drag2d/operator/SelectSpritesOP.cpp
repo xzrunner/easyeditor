@@ -14,6 +14,8 @@
 #include "view/EditPanelImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
+#include "message/SpriteSelectedSJ.h"
+#include "message/MultiSpriteSelectedSJ.h"
 
 #include <wx/clipbrd.h>
 #include <sstream>
@@ -81,9 +83,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			} else {
 				m_selection->Add(selected);
 			}
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectMultiSprites(m_selection, m_spritesImpl);
-			}
+			MultiSpriteSelectedSJ::Instance()->OnSelected(m_selection, m_spritesImpl);
 		}
 		else
 		{
@@ -93,7 +93,10 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				m_selection->Add(selected);
 				if (m_view_panel_mgr) {
 					bool add = m_stage->GetKeyState(WXK_CONTROL);
-					m_view_panel_mgr->SelectSprite(selected, !add, m_spritesImpl);
+					SpriteSelectedSJ::Params p;
+					p.spr = selected;
+					p.clear = !add;
+					SpriteSelectedSJ::Instance()->OnSelected(p);
 				}
 			}
 		}
@@ -155,9 +158,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		}
 	}
 
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->SelectMultiSprites(m_selection, m_spritesImpl);
-	}
+	MultiSpriteSelectedSJ::Instance()->OnSelected(m_selection, m_spritesImpl);
 
 	m_first_pos.setInvalid();
 
@@ -333,7 +334,10 @@ void SelectSpritesOP::CopyFromSelection()
 	}
 
 	bool add = m_stage->GetKeyState(WXK_CONTROL);
-	m_view_panel_mgr->SelectSprite(last_spr, !add, m_spritesImpl);
+	SpriteSelectedSJ::Params p;
+	p.spr = last_spr;
+	p.clear = !add;
+	SpriteSelectedSJ::Instance()->OnSelected(p);
 
 	m_stage->GetCanvas()->ResetViewport();
 

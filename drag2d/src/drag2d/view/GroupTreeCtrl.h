@@ -18,6 +18,7 @@ class Group;
 class MultiSpritesImpl;
 class ViewPanelMgr;
 class KeysState;
+class SpriteSelection;
 
 class GroupTreeCtrl : public wxTreeCtrl, public Observer
 {
@@ -84,6 +85,10 @@ private:
 	void ReorderSprites();
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
+
+	void OnSpriteNameChanged(ISprite* spr);
+	void OnSpriteSelected(ISprite* spr, bool clear);
+	void OnMultiSpriteSelected(SpriteSelection* selection);
 
 private:
 	enum

@@ -5,6 +5,7 @@
 #include "DataTraverseType.h"
 
 #include "common/visitors.h"
+#include "message/Observer.h"
 
 #include <wx/wx.h>
 
@@ -15,7 +16,7 @@ class EditPanelImpl;
 class SpriteSelection;
 class Rect;
 
-class MultiSpritesImpl : public ISpriteViewPanel
+class MultiSpritesImpl : public ISpriteViewPanel, public Observer
 {
 public:
 	MultiSpritesImpl(EditPanelImpl* stage);
@@ -24,12 +25,15 @@ public:
 	//
 	//	interface ISpriteViewPanel
 	//
-	virtual void SelectSprite(ISprite* spr, bool clear);
-	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
 	virtual bool InsertSprite(ISprite* sprite, int idx = -1);
 	virtual bool RemoveSprite(ISprite* sprite);
 	virtual bool ClearAllSprite();
+
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	virtual void TraverseSprites(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;
@@ -39,6 +43,9 @@ public:
 
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
 	void ClearSpriteSelection();
+
+private:
+	void OnSpriteSelected(ISprite* spr, bool clear);
 
 protected:
 	SpriteSelection* m_sprite_selection;

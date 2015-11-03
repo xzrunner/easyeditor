@@ -25,8 +25,6 @@ public:
 	//
 	//	interface ISpriteViewPanel
 	//
-	virtual void SelectSprite(ISprite* spr, bool clear);
-	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual bool ReorderSprite(ISprite* spr, bool up);
 	virtual bool InsertSprite(ISprite* spr, int idx = -1);
 	virtual bool RemoveSprite(ISprite* spr);

@@ -2909,11 +2909,27 @@
 				Name="subjects"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\message\MultiSpriteSelectedSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\MultiSpriteSelectedSJ.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\SpriteSelectedSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\SpriteSelectedSJ.h"
 					>
 				</File>
 				<File

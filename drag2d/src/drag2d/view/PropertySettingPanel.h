@@ -7,14 +7,15 @@
 #include "ISpriteViewPanel.h"
 #include "IShapeViewPanel.h"
 
+#include "message/Observer.h"
+
 namespace d2d
 {
 
 class IPropertySetting;
 class EditPanelImpl;
 
-class PropertySettingPanel : public wxPanel, public ISpriteViewPanel, 
-	public IShapeViewPanel
+class PropertySettingPanel : public wxPanel, public ISpriteViewPanel, public IShapeViewPanel, public Observer
 {
 public:
 	PropertySettingPanel(wxWindow* parent);
@@ -23,8 +24,6 @@ public:
 	//
 	//	interface ISpriteViewPanel
 	//
-	virtual void SelectSprite(ISprite* spr, bool clear);
-	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual bool ReorderSprite(ISprite* spr, bool up) { return false; }
 	virtual bool InsertSprite(ISprite* spr, int idx = -1);
 	virtual bool RemoveSprite(ISprite* spr);
@@ -36,6 +35,11 @@ public:
 	virtual void SelectShape(IShape* shape);
 	virtual void SelectMultiShapes(ShapeSelection* selection);
 	virtual void RemoveShape(IShape* shape);
+
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	void SetPropertySetting(IPropertySetting* setting);
 
@@ -51,6 +55,9 @@ public:
 
 protected:
 	virtual IPropertySetting* CreateDefaultProperty() const { return NULL; }
+
+	virtual void OnSpriteSelected(d2d::ISprite* spr, bool clear);
+	virtual void OnMultiSpriteSelected(SpriteSelection* selection);
 
 private:
 	void InitLayout();

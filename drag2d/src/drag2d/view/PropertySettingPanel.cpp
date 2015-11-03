@@ -6,6 +6,9 @@
 #include "view/MultiSpritesPropertySetting.h"
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
+#include "message/subject_id.h"
+#include "message/SpriteSelectedSJ.h"
+#include "message/MultiSpriteSelectedSJ.h"
 
 namespace d2d
 {
@@ -18,34 +21,17 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 	InitLayout();
 
 	SetBackgroundColour(wxColour(229, 229, 229));
+
+	SpriteSelectedSJ::Instance()->Register(this);
+	MultiSpriteSelectedSJ::Instance()->Register(this);
 }
 
 PropertySettingPanel::~PropertySettingPanel()
 {
+	SpriteSelectedSJ::Instance()->UnRegister(this);
+	MultiSpriteSelectedSJ::Instance()->UnRegister(this);
+
 	delete m_setting;
-}
-
-void PropertySettingPanel::SelectSprite(ISprite* spr, bool clear)
-{
-	assert(m_stage);
-	if (spr) {
-		SetPropertySetting(spr->CreatePropertySetting(m_stage));
-	} else {
-		SetPropertySetting(CreateDefaultProperty());
-	}
-}
-
-void PropertySettingPanel::SelectMultiSprites(SpriteSelection* selection)
-{
-	std::vector<ISprite*> sprites;
-	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	if (sprites.empty()) {
-		SelectSprite(NULL, true);
-	} else if (sprites.size() == 1) {
-		SelectSprite(sprites[0], true);
-	} else {
-		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
-	}
 }
 
 bool PropertySettingPanel::InsertSprite(ISprite* spr, int idx) 
@@ -94,6 +80,17 @@ void PropertySettingPanel::RemoveShape(IShape* shape)
 	SetPropertySetting(CreateDefaultProperty());
 }
 
+void PropertySettingPanel::Notify(int sj_id, void* ud)
+{
+	if (sj_id == SPRITE_SELECTED) {
+		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		OnSpriteSelected(p->spr, p->clear);
+	} else if (sj_id == MULTI_SPRITE_SELECTED) {
+		SpriteSelection* selection = (SpriteSelection*)ud;
+		OnMultiSpriteSelected(selection);
+	}
+}
+
 void PropertySettingPanel::SetPropertySetting(IPropertySetting* setting)
 {
 	delete m_setting;
@@ -125,6 +122,29 @@ void PropertySettingPanel::EnablePropertyGrid(bool enable)
 {
 	if (m_setting) {
 		m_setting->EnablePropertyGrid(this, enable);
+	}
+}
+
+void PropertySettingPanel::OnSpriteSelected(d2d::ISprite* spr, bool clear)
+{
+	assert(m_stage);
+	if (spr) {
+		SetPropertySetting(spr->CreatePropertySetting(m_stage));
+	} else {
+		SetPropertySetting(CreateDefaultProperty());
+	}
+}
+
+void PropertySettingPanel::OnMultiSpriteSelected(SpriteSelection* selection)
+{
+	std::vector<ISprite*> sprites;
+	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	if (sprites.empty()) {
+		OnSpriteSelected(NULL, true);
+	} else if (sprites.size() == 1) {
+		OnSpriteSelected(sprites[0], true);
+	} else {
+		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
 	}
 }
 

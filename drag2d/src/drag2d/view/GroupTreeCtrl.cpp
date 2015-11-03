@@ -10,6 +10,8 @@
 #include "view/KeysState.h"
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
+#include "message/SpriteSelectedSJ.h"
+#include "message/MultiSpriteSelectedSJ.h"
 
 #include <sstream>
 #include <queue>
@@ -45,23 +47,28 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	InitRoot();
 
 	SpriteNameChangeSJ::Instance()->Register(this);
+	SpriteSelectedSJ::Instance()->Register(this);
+	MultiSpriteSelectedSJ::Instance()->Register(this);
 }
 
 GroupTreeCtrl::~GroupTreeCtrl()
 {
-	SpriteNameChangeSJ::Instance()->UnRegister(this);	
+	SpriteNameChangeSJ::Instance()->UnRegister(this);
+	SpriteSelectedSJ::Instance()->UnRegister(this);
+	MultiSpriteSelectedSJ::Instance()->UnRegister(this);
 }
 
 void GroupTreeCtrl::Notify(int sj_id, void* ud)
 {
 	if (sj_id == SPRITE_NAME_CHANGE) {
 		ISprite* spr = (ISprite*)ud;
-		
-		GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
-		Traverse(visitor);
-		wxTreeItemId id = visitor.GetItemID();
-
-		SetItemText(id, spr->name);
+		OnSpriteNameChanged(spr);
+	} else if (sj_id == SPRITE_SELECTED) {
+		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		OnSpriteSelected(p->spr, p->clear);	
+	} else if (sj_id == MULTI_SPRITE_SELECTED) {
+		//SpriteSelection* selection = (SpriteSelection*)ud;
+		//OnMultiSpriteSelected(selection);
 	}
 }
 
@@ -317,7 +324,10 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	ISprite* spr = visitor.GetFirstSprite();
 
 	bool add = m_key_state.GetKeyState(WXK_CONTROL);
-	m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
+	SpriteSelectedSJ::Params p;
+	p.spr = spr;
+	p.clear = !add;
+	SpriteSelectedSJ::Instance()->OnSelected(p, this);
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
 	selection->Clear();
@@ -401,7 +411,10 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	if (data && !data->IsGroup()) {
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		bool add = m_key_state.GetKeyState(WXK_CONTROL);
-		m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
+		SpriteSelectedSJ::Params p;
+		p.spr = spr;
+		p.clear = !add;
+		SpriteSelectedSJ::Instance()->OnSelected(p, this);
 	}
 }
 
@@ -559,6 +572,34 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuEditable, this, ID_MENU_EDITABLE);
 
 	PopupMenu(&menu, pt);
+}
+
+void GroupTreeCtrl::OnSpriteNameChanged(ISprite* spr)
+{
+	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
+	Traverse(visitor);
+	wxTreeItemId id = visitor.GetItemID();
+
+	SetItemText(id, spr->name);
+}
+
+void GroupTreeCtrl::OnSpriteSelected(d2d::ISprite* spr, bool clear)
+{
+	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
+	Traverse(visitor);
+	wxTreeItemId id = visitor.GetItemID();
+	if (id.IsOk()) {
+		SelectItem(id);
+	}
+}
+
+void GroupTreeCtrl::OnMultiSpriteSelected(SpriteSelection* selection)
+{
+	std::vector<ISprite*> sprites;
+	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		OnSpriteSelected(sprites[i], false);
+	}
 }
 
 }
