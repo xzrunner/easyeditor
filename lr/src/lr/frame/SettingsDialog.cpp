@@ -29,7 +29,7 @@ void SettingDialog::InitLayout()
 			sz->Add(new wxStaticText(this, wxID_ANY, "width"));
 
 			m_map_width_ctrl = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_map_width), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
-			Connect(m_map_width_ctrl->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnMapSizeChanged));
+			Connect(m_map_width_ctrl->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnMapSizeChanged));
 			sz->Add(m_map_width_ctrl);
 
 			sizer->Add(sz);
@@ -40,7 +40,7 @@ void SettingDialog::InitLayout()
 			sz->Add(new wxStaticText(this, wxID_ANY, "height"));
 
 			m_map_height_ctrl = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_map_height), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
-			Connect(m_map_height_ctrl->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnMapSizeChanged));
+			Connect(m_map_height_ctrl->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnMapSizeChanged));
 			sz->Add(m_map_height_ctrl);
 
 			sizer->Add(sz);
@@ -57,7 +57,7 @@ void SettingDialog::InitLayout()
 			sz->Add(new wxStaticText(this, wxID_ANY, "width"));
 
 			m_view_width_ctrl = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_view_width), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
-			Connect(m_view_width_ctrl->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
+			Connect(m_view_width_ctrl->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
 			sz->Add(m_view_width_ctrl);
 
 			sizer->Add(sz);
@@ -68,7 +68,7 @@ void SettingDialog::InitLayout()
 			sz->Add(new wxStaticText(this, wxID_ANY, "height"));
 
 			m_view_height_ctrl = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_view_height), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
-			Connect(m_view_height_ctrl->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
+			Connect(m_view_height_ctrl->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
 			sz->Add(m_view_height_ctrl);
 
 			sizer->Add(sz);
@@ -79,7 +79,7 @@ void SettingDialog::InitLayout()
 			sz->Add(new wxStaticText(this, wxID_ANY, "offset x"));
 
 			m_view_offset_x = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_view_dx), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
-			Connect(m_view_offset_x->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
+			Connect(m_view_offset_x->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
 			sz->Add(m_view_offset_x);
 
 			sizer->Add(sz);
@@ -90,7 +90,7 @@ void SettingDialog::InitLayout()
 			sz->Add(new wxStaticText(this, wxID_ANY, "offset y"));
 
 			m_view_offset_y = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(cfg->m_view_dy), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
-			Connect(m_view_offset_y->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
+			Connect(m_view_offset_y->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingDialog::OnViewSizeChanged));
 			sz->Add(m_view_offset_y);
 
 			sizer->Add(sz);
