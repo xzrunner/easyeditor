@@ -119,6 +119,8 @@ private:
 
 	bool m_expand_enable;
 
+	bool m_select_enable;
+
 	DECLARE_EVENT_TABLE()
 
 }; // GroupTreeCtrl

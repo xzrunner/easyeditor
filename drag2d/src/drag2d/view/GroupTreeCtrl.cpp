@@ -41,6 +41,7 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	, m_add_del_open(true)
 	, m_key_state(key_state)
 	, m_expand_enable(true)
+	, m_select_enable(true)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 
@@ -405,6 +406,11 @@ void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
 
 void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 {
+	if (!m_select_enable) {
+		m_select_enable = true;
+		return;
+	}
+
 	m_selected_item = event.GetItem();
 
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
@@ -589,6 +595,7 @@ void GroupTreeCtrl::OnSpriteSelected(d2d::ISprite* spr, bool clear)
 	Traverse(visitor);
 	wxTreeItemId id = visitor.GetItemID();
 	if (id.IsOk()) {
+		m_select_enable = false;
 		SelectItem(id);
 	}
 }
