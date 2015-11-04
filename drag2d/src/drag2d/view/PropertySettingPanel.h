@@ -3,6 +3,7 @@
 
 #include <wx/wx.h>
 #include <wx/propgrid/propgrid.h>
+#include <set>
 
 #include "ISpriteViewPanel.h"
 #include "IShapeViewPanel.h"
@@ -68,6 +69,8 @@ protected:
 	wxPropertyGrid* m_pg;
 
 	IPropertySetting* m_setting;
+
+	std::set<ISprite*> m_selection;
 
 	// todo
 	EditPanelImpl* m_stage;

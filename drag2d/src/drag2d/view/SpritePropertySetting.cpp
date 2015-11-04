@@ -11,6 +11,7 @@
 #include "view/EditPanelImpl.h"
 #include "render/BlendModes.h"
 #include "widgets/ColorProperty.h"
+#include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
 
 #include <wx/propgrid/advprops.h>
@@ -186,13 +187,11 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 
 void SpritePropertySetting::Notify(int sj_id, void* ud)
 {
-	if (!m_pg) {
-		return;
-	}
-
-	ISprite* spr = (ISprite*)ud;
-	if (GetSprite() == spr) {
-		m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
+	if (sj_id == SPRITE_NAME_CHANGE) {
+		ISprite* spr = (ISprite*)ud;
+		if (GetSprite() == spr && m_pg) {
+			m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
+		}
 	}
 }
 

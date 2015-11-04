@@ -10,6 +10,8 @@
 #include "message/SpriteSelectedSJ.h"
 #include "message/MultiSpriteSelectedSJ.h"
 
+#include <algorithm>
+
 namespace d2d
 {
 
@@ -127,11 +129,33 @@ void PropertySettingPanel::EnablePropertyGrid(bool enable)
 
 void PropertySettingPanel::OnSpriteSelected(d2d::ISprite* spr, bool clear)
 {
-	assert(m_stage);
 	if (spr) {
-		SetPropertySetting(spr->CreatePropertySetting(m_stage));
-	} else {
-		SetPropertySetting(CreateDefaultProperty());
+		std::set<ISprite*>::iterator itr = m_selection.find(spr);
+		if (itr != m_selection.end()) {
+			return;
+		}
+	}
+
+	if (clear) {
+		for_each(m_selection.begin(), m_selection.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
+		m_selection.clear();
+	}
+	if (spr) {
+		spr->Retain();
+		m_selection.insert(spr);
+	}
+
+	assert(m_stage);
+	if (m_selection.size() == 1) {
+		if (spr) {
+			SetPropertySetting(spr->CreatePropertySetting(m_stage));
+		} else {
+			SetPropertySetting(CreateDefaultProperty());
+		}
+	} else if (m_selection.size() > 1) {
+		std::vector<ISprite*> sprites;
+		std::copy(m_selection.begin(), m_selection.end(), back_inserter(sprites));
+		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
 	}
 }
 
