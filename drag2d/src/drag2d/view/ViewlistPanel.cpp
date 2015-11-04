@@ -8,7 +8,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/ViewPanelMgr.h"
 #include "message/subject_id.h"
-#include "message/SpriteSelectedSJ.h"
+#include "message/SelectSpriteSJ.h"
 
 #include <fstream>
 
@@ -26,7 +26,7 @@ ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
 {
 	InitLayout();
 
-	SpriteSelectedSJ::Instance()->Register(this);
+	SelectSpriteSJ::Instance()->Register(this);
 }
 
 ViewlistPanel::~ViewlistPanel()
@@ -35,7 +35,7 @@ ViewlistPanel::~ViewlistPanel()
 		m_selected_spr->Release();
 	}
 
-	SpriteSelectedSJ::Instance()->UnRegister(this);
+	SelectSpriteSJ::Instance()->UnRegister(this);
 }
 
 bool ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
@@ -56,7 +56,7 @@ bool ViewlistPanel::RemoveSprite(ISprite* spr)
 void ViewlistPanel::Notify(int sj_id, void* ud)
 {
 	if (sj_id == SPRITE_SELECTED) {
-		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 		OnSpriteSelected(p->spr, p->clear);
 	}
 }
@@ -167,10 +167,10 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 
 	if (m_view_panel_mgr) {
 		bool add = m_list->GetKeyState(WXK_CONTROL);
-		SpriteSelectedSJ::Params p;
+		SelectSpriteSJ::Params p;
 		p.spr = spr;
 		p.clear = !add;
-		SpriteSelectedSJ::Instance()->OnSelected(p, this);
+		SelectSpriteSJ::Instance()->OnSelected(p, this);
 	}
 }
 

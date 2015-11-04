@@ -79,10 +79,10 @@ d2d::ISprite* ComposeOP::SelectByPos(int x, int y)
 		selection->Clear();
 		selection->Add(selected);
 
-		d2d::SpriteSelectedSJ::Params p;
+		d2d::SelectSpriteSJ::Params p;
 		p.spr = selected;
 		p.clear = true;
-		d2d::SpriteSelectedSJ::Instance()->OnSelected(p);
+		d2d::SelectSpriteSJ::Instance()->OnSelected(p);
 	}
 
 	return selected;

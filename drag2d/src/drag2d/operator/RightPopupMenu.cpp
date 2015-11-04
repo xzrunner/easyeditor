@@ -11,7 +11,7 @@
 #include "view/ViewPanelMgr.h"
 #include "dataset/ISymbol.h"
 #include "render/DynamicTexAndFont.h"
-#include "message/SpriteSelectedSJ.h"
+#include "message/SelectSpriteSJ.h"
 
 namespace d2d
 {
@@ -126,10 +126,10 @@ void RightPopupMenu::HandleSelectMenu(int id)
 	m_selection->Add(selected);
 
 	if (m_view_panel_mgr) {
-		SpriteSelectedSJ::Params p;
+		SelectSpriteSJ::Params p;
 		p.spr = selected;
 		p.clear = true;
-		SpriteSelectedSJ::Instance()->OnSelected(p);
+		SelectSpriteSJ::Instance()->OnSelected(p);
 	}
 }
 

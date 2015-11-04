@@ -7,8 +7,8 @@
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
 #include "message/subject_id.h"
-#include "message/SpriteSelectedSJ.h"
-#include "message/MultiSpriteSelectedSJ.h"
+#include "message/SelectSpriteSJ.h"
+#include "message/SelectSpriteSetSJ.h"
 
 #include <algorithm>
 
@@ -24,14 +24,14 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 	SetBackgroundColour(wxColour(229, 229, 229));
 
-	SpriteSelectedSJ::Instance()->Register(this);
-	MultiSpriteSelectedSJ::Instance()->Register(this);
+	SelectSpriteSJ::Instance()->Register(this);
+	SelectSpriteSetSJ::Instance()->Register(this);
 }
 
 PropertySettingPanel::~PropertySettingPanel()
 {
-	SpriteSelectedSJ::Instance()->UnRegister(this);
-	MultiSpriteSelectedSJ::Instance()->UnRegister(this);
+	SelectSpriteSJ::Instance()->UnRegister(this);
+	SelectSpriteSetSJ::Instance()->UnRegister(this);
 
 	delete m_setting;
 }
@@ -85,7 +85,7 @@ void PropertySettingPanel::RemoveShape(IShape* shape)
 void PropertySettingPanel::Notify(int sj_id, void* ud)
 {
 	if (sj_id == SPRITE_SELECTED) {
-		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 		OnSpriteSelected(p->spr, p->clear);
 	} else if (sj_id == MULTI_SPRITE_SELECTED) {
 		SpriteSelection* selection = (SpriteSelection*)ud;

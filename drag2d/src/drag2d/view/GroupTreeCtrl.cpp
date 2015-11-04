@@ -10,8 +10,8 @@
 #include "view/KeysState.h"
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
-#include "message/SpriteSelectedSJ.h"
-#include "message/MultiSpriteSelectedSJ.h"
+#include "message/SelectSpriteSJ.h"
+#include "message/SelectSpriteSetSJ.h"
 
 #include <sstream>
 #include <queue>
@@ -48,15 +48,15 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	InitRoot();
 
 	SpriteNameChangeSJ::Instance()->Register(this);
-	SpriteSelectedSJ::Instance()->Register(this);
-	MultiSpriteSelectedSJ::Instance()->Register(this);
+	SelectSpriteSJ::Instance()->Register(this);
+	SelectSpriteSetSJ::Instance()->Register(this);
 }
 
 GroupTreeCtrl::~GroupTreeCtrl()
 {
 	SpriteNameChangeSJ::Instance()->UnRegister(this);
-	SpriteSelectedSJ::Instance()->UnRegister(this);
-	MultiSpriteSelectedSJ::Instance()->UnRegister(this);
+	SelectSpriteSJ::Instance()->UnRegister(this);
+	SelectSpriteSetSJ::Instance()->UnRegister(this);
 }
 
 void GroupTreeCtrl::Notify(int sj_id, void* ud)
@@ -65,7 +65,7 @@ void GroupTreeCtrl::Notify(int sj_id, void* ud)
 		ISprite* spr = (ISprite*)ud;
 		OnSpriteNameChanged(spr);
 	} else if (sj_id == SPRITE_SELECTED) {
-		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 		OnSpriteSelected(p->spr, p->clear);	
 	} else if (sj_id == MULTI_SPRITE_SELECTED) {
 		//SpriteSelection* selection = (SpriteSelection*)ud;
@@ -325,10 +325,10 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	ISprite* spr = visitor.GetFirstSprite();
 
 	bool add = m_key_state.GetKeyState(WXK_CONTROL);
-	SpriteSelectedSJ::Params p;
+	SelectSpriteSJ::Params p;
 	p.spr = spr;
 	p.clear = !add;
-	SpriteSelectedSJ::Instance()->OnSelected(p, this);
+	SelectSpriteSJ::Instance()->OnSelected(p, this);
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
 	selection->Clear();
@@ -417,10 +417,10 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	if (data && !data->IsGroup()) {
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		bool add = m_key_state.GetKeyState(WXK_CONTROL);
-		SpriteSelectedSJ::Params p;
+		SelectSpriteSJ::Params p;
 		p.spr = spr;
 		p.clear = !add;
-		SpriteSelectedSJ::Instance()->OnSelected(p, this);
+		SelectSpriteSJ::Instance()->OnSelected(p, this);
 	}
 }
 

@@ -5,7 +5,7 @@
 #include "common/Rect.h"
 #include "common/sprite_visitors.h"
 #include "message/subject_id.h"
-#include "message/SpriteSelectedSJ.h"
+#include "message/SelectSpriteSJ.h"
 
 #include <fstream>
 
@@ -16,14 +16,14 @@ MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 {
 	m_sprite_selection = new SpriteSelection(stage);
 
-	SpriteSelectedSJ::Instance()->Register(this);
+	SelectSpriteSJ::Instance()->Register(this);
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
 	m_sprite_selection->Release();
 
-	SpriteSelectedSJ::Instance()->UnRegister(this);
+	SelectSpriteSJ::Instance()->UnRegister(this);
 }
 
 bool MultiSpritesImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
@@ -52,7 +52,7 @@ bool MultiSpritesImpl::ClearAllSprite()
 void MultiSpritesImpl::Notify(int sj_id, void* ud)
 {
 	if (sj_id == SPRITE_SELECTED) {
-		SpriteSelectedSJ::Params* p = (SpriteSelectedSJ::Params*)ud;
+		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 		OnSpriteSelected(p->spr, p->clear);
 	}
 }
