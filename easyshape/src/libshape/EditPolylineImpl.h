@@ -17,8 +17,7 @@ class EditPolylineImpl
 {
 public:
 	EditPolylineImpl(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl, 
-		d2d::PropertySettingPanel* propertyPanel, d2d::ViewPanelMgr* view_panel_mgr,
-		d2d::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
+		d2d::PropertySettingPanel* propertyPanel, d2d::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
 		d2d::AbstractEditOP* select_op, IOperaterBase* base_op);
 
 	bool OnKeyDown(int keyCode);
@@ -83,8 +82,6 @@ private:
 	d2d::MultiShapesImpl* m_shapesImpl;
 
 	d2d::PropertySettingPanel* m_propertyPanel;
-
-	d2d::ViewPanelMgr* m_view_panel_mgr;
 
 	//		NodeAddr m_captured;
 

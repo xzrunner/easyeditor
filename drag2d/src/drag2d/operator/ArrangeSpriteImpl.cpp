@@ -24,6 +24,7 @@
 #include "history/ScaleSpriteAOP.h"
 #include "history/ShearSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
+#include "message/ReorderSpriteSJ.h"
 
 namespace d2d
 {
@@ -34,7 +35,6 @@ const float ArrangeSpriteImpl::MAX_CTRL_NODE_RADIUS = 10.0f;
 ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 									 MultiSpritesImpl* spritesImpl,
 									 PropertySettingPanel* propertyPanel,
-									 ViewPanelMgr* view_panel_mgr,
 									 const ArrangeSpriteConfig& cfg) 
 	: m_wnd(wnd)
 	, m_sprites_impl(spritesImpl)
@@ -42,7 +42,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)
-	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection(), view_panel_mgr)
+	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection())
 {
 	if (stage) {
 		stage->Retain();
@@ -534,7 +534,10 @@ void ArrangeSpriteImpl::UpOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		m_sprites_impl->ReorderSprite(selected[i], true);
+		ReorderSpriteSJ::Params p;
+		p.spr = selected[i];
+		p.up = true;
+		ReorderSpriteSJ::Instance()->Reorder(p);
 	}
 }
 
@@ -543,7 +546,11 @@ void ArrangeSpriteImpl::DownOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		m_sprites_impl->ReorderSprite(selected[i], false);
+		ReorderSpriteSJ::Params p;
+		p.spr = selected[i];
+		p.up = false;
+		ReorderSpriteSJ::Instance()->Reorder(p);
+
 	}
 }
 

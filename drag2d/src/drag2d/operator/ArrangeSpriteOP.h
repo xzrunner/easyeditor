@@ -12,7 +12,6 @@ class ArrangeSpriteImpl;
 class EditPanelImpl;
 class MultiSpritesImpl;
 class PropertySettingPanel;
-class ViewPanelMgr;
 class AbstractEditCMPT;
 struct ArrangeSpriteConfig;
 
@@ -21,8 +20,8 @@ class ArrangeSpriteOP : public TBase
 {
 public:
 	ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
-		AbstractEditCMPT* callback = NULL, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), 
+		PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL, 
+		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), 
 		ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();
 

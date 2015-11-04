@@ -17,9 +17,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	, d2d::MultiSpritesImpl(GetStageImpl())
 	, m_top_pannels(top_pannels)
 {
-	top_pannels->view_panel_mgr.AddSpritePanel(this);
-
-	SetEditOP(new EditOP(this, top_pannels->property, &top_pannels->view_panel_mgr));
+	SetEditOP(new EditOP(this, top_pannels->property));
 	SetCanvas(new StageCanvas(this));
 
 	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();

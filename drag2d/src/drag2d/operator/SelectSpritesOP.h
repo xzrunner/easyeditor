@@ -14,15 +14,14 @@ namespace d2d
 class MultiSpritesImpl;
 class AbstractEditCMPT;
 class IPropertySetting;
-class ViewPanelMgr;
 class SpriteSelection;
 class ISprite;
 
 class SelectSpritesOP : public DrawSelectRectOP
 {
 public:
-	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-		ViewPanelMgr* view_panel_mgr = NULL, AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		MultiSpritesImpl* spritesImpl, AbstractEditCMPT* callback = NULL);
 	virtual ~SelectSpritesOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -58,9 +57,6 @@ private:
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;
-
-private:
-	ViewPanelMgr* m_view_panel_mgr;
 
 }; // SelectSpritesOP
 

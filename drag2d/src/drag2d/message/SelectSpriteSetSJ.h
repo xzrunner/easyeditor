@@ -11,7 +11,7 @@ class SpriteSelection;
 class SelectSpriteSetSJ : public Subject
 {
 public:
-	void OnSelected(const SpriteSelection* selection, Observer* except = NULL);
+	void Select(const SpriteSelection* selection, Observer* except = NULL);
 
 	static SelectSpriteSetSJ* Instance();
 

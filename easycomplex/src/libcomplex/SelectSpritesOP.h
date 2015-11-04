@@ -9,8 +9,8 @@ namespace ecomplex
 class SelectSpritesOP : public d2d::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::ViewPanelMgr* view_panel_mgr,d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiSpritesImpl* spritesImpl, d2d::AbstractEditCMPT* callback = NULL);
 
 //		virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDClick(int x, int y);

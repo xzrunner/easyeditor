@@ -5,18 +5,18 @@
 #include "view/MultiShapesImpl.h"
 #include "component/AbstractEditCMPT.h"
 #include "render/DrawSelectedShapeVisitor.h"
+#include "message/SelectShapeSJ.h"
+#include "message/SelectShapeSetSJ.h"
 
 namespace d2d
 {
 
 SelectShapesOP::SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiShapesImpl* shapesImpl,
-							   ViewPanelMgr* view_panel_mgr /*= NULL*/,
 							   AbstractEditCMPT* callback/* = NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_callback(callback)
 	, m_shapeImpl(shapesImpl)
 	, m_bDraggable(true)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 	m_selection = shapesImpl->GetShapeSelection();
 	m_selection->Retain();
@@ -83,9 +83,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			} else {
 				m_selection->Add(selected);
 			}
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectMultiShapes(m_selection, m_shapeImpl);
-			}
+			SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shapeImpl);
 		}
 		else
 		{
@@ -93,9 +91,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
-				if (m_view_panel_mgr) {
-					m_view_panel_mgr->SelectShape(selected, m_shapeImpl);
-				}
+				SelectShapeSJ::Instance()->Select(selected, m_shapeImpl);
 			} else {
 				m_move_last_pos = pos;
 			}
@@ -132,9 +128,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_selection->Add(shapes[i]);
 
-		if (m_view_panel_mgr) {
-			m_view_panel_mgr->SelectMultiShapes(m_selection, m_shapeImpl);
-		}
+		SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shapeImpl);
 
 		m_first_pos.setInvalid();
 

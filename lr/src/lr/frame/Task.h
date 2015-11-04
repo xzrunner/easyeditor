@@ -44,8 +44,6 @@ private:
 	d2d::ViewlistPanel* m_viewlist;
 	d2d::GroupTreePanel* m_grouptree;
 
-	d2d::ViewPanelMgr m_view_panel_mgr;
-
 }; // Task
 
 }

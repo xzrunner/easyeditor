@@ -11,8 +11,7 @@ class StagePanel;
 class ArrangeSpriteImpl : public d2d::ArrangeSpriteImpl
 {
 public:
-	ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
-		d2d::ViewPanelMgr* view_panel_mgr);
+	ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property);
 
 protected:
 	virtual d2d::IArrangeSpriteState* CreateRotateState(d2d::SpriteSelection* selection, 

@@ -84,7 +84,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 	m_top_pannels.library = new LibraryPanel(split);
 	m_top_pannels.property = new d2d::PropertySettingPanel(split);
-	m_top_pannels.view_panel_mgr.AddSpritePanel(m_top_pannels.property);
 
 	split->SetSashGravity(0.6f);
 	split->SplitHorizontally(m_top_pannels.library, m_top_pannels.property);

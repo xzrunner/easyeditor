@@ -6,9 +6,13 @@
 #include "widgets/VerticalImageList.h"
 #include "view/SpritePropertySetting.h"
 #include "view/MultiSpritesImpl.h"
-#include "view/ViewPanelMgr.h"
+
 #include "message/subject_id.h"
 #include "message/SelectSpriteSJ.h"
+#include "message/ReorderSpriteSJ.h"
+#include "message/InsertSpriteSJ.h"
+#include "message/RemoveSpriteSJ.h"
+#include "message/ClearSJ.h"
 
 #include <fstream>
 
@@ -16,17 +20,22 @@ namespace d2d
 {
 
 ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
-							 MultiSpritesImpl* sprites_impl /*= NULL*/, 
-							 ViewPanelMgr* view_panel_mgr /*= NULL*/)
+							 MultiSpritesImpl* sprites_impl /*= NULL*/)
 	: wxPanel(parent, wxID_ANY)
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
-	, m_view_panel_mgr(view_panel_mgr)
 	, m_selected_spr(NULL)
 {
 	InitLayout();
 
-	SelectSpriteSJ::Instance()->Register(this);
+	m_subjects.push_back(SelectSpriteSJ::Instance());
+	m_subjects.push_back(ReorderSpriteSJ::Instance());
+	m_subjects.push_back(InsertSpriteSJ::Instance());
+	m_subjects.push_back(RemoveSpriteSJ::Instance());
+	m_subjects.push_back(ClearSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 ViewlistPanel::~ViewlistPanel()
@@ -35,118 +44,64 @@ ViewlistPanel::~ViewlistPanel()
 		m_selected_spr->Release();
 	}
 
-	SelectSpriteSJ::Instance()->UnRegister(this);
-}
-
-bool ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
-{
-	return Reorder(spr, up);
-}
-
-bool ViewlistPanel::InsertSprite(ISprite* spr, int idx)
-{
-	return Insert(spr, idx);
-}
-
-bool ViewlistPanel::RemoveSprite(ISprite* spr)
-{
-	return Remove(spr);
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
 void ViewlistPanel::Notify(int sj_id, void* ud)
 {
-	if (sj_id == SPRITE_SELECTED) {
-		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-		OnSpriteSelected(p->spr, p->clear);
+	switch (sj_id)
+	{
+	case SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			Select(p->spr, p->clear);
+		}
+		break;
+	case REORDER_SPRITE:
+		{
+			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
+			Reorder(p->spr, p->up);
+		}
+		break;
+	case INSERT_SPRITE:
+		{
+			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			Insert(p->spr, p->idx);
+		}
+		break;
+	case REMOVE_SPRITE:
+		Remove((ISprite*)ud);
+		break;
+	case CLEAR:
+		Clear();
+		break;
 	}
 }
 
-bool ViewlistPanel::RemoveSelected()
+void ViewlistPanel::RemoveSelected()
 {
 	int idx = m_list->GetSelection();
 	m_list->Remove(idx);
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->RemoveSprite(m_sprites[idx], this);
-	}
+
+	RemoveSpriteSJ::Instance()->Remove(m_sprites[idx], this);
+
 	m_sprites.erase(m_sprites.begin() + idx);
-	return true;
 }
 
-bool ViewlistPanel::Remove(ISprite* sprite)
+void ViewlistPanel::ReorderSelected(bool up)
 {
-	int idx = QuerySprIdx(sprite);
-	if (idx < 0) {
-		return false;
-	}
-	m_list->Remove(idx);
-	m_sprites.erase(m_sprites.begin() + idx);
-	return true;
-}
-
-bool ViewlistPanel::Insert(ISprite* sprite, int idx)
-{
-	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
-	if (idx < 0 || idx >= m_sprites.size()) {
-		m_list->Insert(item, 0);
-		m_sprites.insert(m_sprites.begin(), sprite);
-	} else {
-		int order = m_sprites.size() - idx;
-		m_list->Insert(item, order);
-		m_sprites.insert(m_sprites.begin() + order, sprite);
-	}
-	return true;
-}
-
-bool ViewlistPanel::Reorder(const ISprite* sprite, bool up)
-{
-	bool ret = false;
-
-	int i = QuerySprIdx(sprite);
-	if (i < 0) {
-		return false;
-	}
-
-	int n = m_sprites.size();
-	if (up)
-	{
-		int pos = i - 1;
-		if (pos >= 0)
-		{
-			std::swap(m_sprites[i], m_sprites[pos]);
-			m_list->Swap(i, pos);
-			m_list->SetSelection(pos);
-			ret = true;
-		}
-	}
-	else
-	{
-		int pos = i + 1;
-		if (pos < n)
-		{
-			std::swap(m_sprites[i], m_sprites[pos]);
-			m_list->Swap(i, pos);
-			m_list->SetSelection(pos);
-			ret = true;
-		}
-	}
-
-	return ret;
-}
-
-bool ViewlistPanel::ReorderSelected(bool up)
-{
-	bool ret = false;
-
 	if (!m_selected_spr) {
-		return ret;
+		return;
 	}
 
-	ret = Reorder(m_selected_spr, up);
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->ReorderSprite(m_selected_spr, up, this);
-	}
+	Reorder(m_selected_spr, up);
 
-	return ret;
+	ReorderSpriteSJ::Params p;
+	p.spr = m_selected_spr;
+	p.up = up;
+	ReorderSpriteSJ::Instance()->Reorder(p, this);
 }
 
 void ViewlistPanel::OnSelected(int index)
@@ -165,24 +120,16 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 	m_selected_spr = spr;
 	m_selected_spr->Retain();
 
-	if (m_view_panel_mgr) {
-		bool add = m_list->GetKeyState(WXK_CONTROL);
-		SelectSpriteSJ::Params p;
-		p.spr = spr;
-		p.clear = !add;
-		SelectSpriteSJ::Instance()->OnSelected(p, this);
-	}
+	bool add = m_list->GetKeyState(WXK_CONTROL);
+	SelectSpriteSJ::Params p;
+	p.spr = spr;
+	p.clear = !add;
+	SelectSpriteSJ::Instance()->Select(p, this);
 }
 
 int ViewlistPanel::GetSelectedIndex() const
 {
 	return m_list->GetItemCount() - 1 - m_list->GetSelection();
-}
-
-void ViewlistPanel::Clear()
-{
-	m_list->Clear();
-	m_sprites.clear();
 }
 
 void ViewlistPanel::InitLayout()
@@ -211,12 +158,71 @@ int ViewlistPanel::QuerySprIdx(const ISprite* spr) const
 	return -1;
 }
 
-void ViewlistPanel::OnSpriteSelected(ISprite* spr, bool clear)
+void ViewlistPanel::Select(ISprite* spr, bool clear)
 {
 	int idx = QuerySprIdx(spr);
 	if (idx >= 0) {
 		m_list->SetSelection(idx);
 	}
+}
+
+void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
+{
+	int i = QuerySprIdx(sprite);
+	if (i < 0) {
+		return;
+	}
+
+	int n = m_sprites.size();
+	if (up)
+	{
+		int pos = i - 1;
+		if (pos >= 0)
+		{
+			std::swap(m_sprites[i], m_sprites[pos]);
+			m_list->Swap(i, pos);
+			m_list->SetSelection(pos);
+		}
+	}
+	else
+	{
+		int pos = i + 1;
+		if (pos < n)
+		{
+			std::swap(m_sprites[i], m_sprites[pos]);
+			m_list->Swap(i, pos);
+			m_list->SetSelection(pos);
+		}
+	}
+}
+
+void ViewlistPanel::Insert(ISprite* sprite, int idx)
+{
+	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
+	if (idx < 0 || idx >= m_sprites.size()) {
+		m_list->Insert(item, 0);
+		m_sprites.insert(m_sprites.begin(), sprite);
+	} else {
+		int order = m_sprites.size() - idx;
+		m_list->Insert(item, order);
+		m_sprites.insert(m_sprites.begin() + order, sprite);
+	}
+}
+
+void ViewlistPanel::Remove(ISprite* sprite)
+{
+	int idx = QuerySprIdx(sprite);
+	if (idx < 0) {
+		return;
+	}
+	m_list->Remove(idx);
+	m_sprites.erase(m_sprites.begin() + idx);
+}
+
+void ViewlistPanel::Clear()
+{
+	m_list->Clear();
+	m_sprites.clear();
 }
 
 } // d2d

@@ -12,8 +12,8 @@ class EditPolylineWithCopyNodeOP : public EditPolylineOP<T, SelectNodesOP>
 {
 public:
 	EditPolylineWithCopyNodeOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapesImpl, d2d::ViewPanelMgr* view_panel_mgr)
-		: EditPolylineOP<T, SelectNodesOP>(editPanel, shapesImpl, view_panel_mgr, NULL, NULL)
+		d2d::MultiShapesImpl* shapesImpl)
+		: EditPolylineOP<T, SelectNodesOP>(editPanel, shapesImpl, NULL, NULL)
 	{}
 
 	virtual bool OnKeyDown(int keyCode)

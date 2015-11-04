@@ -19,7 +19,6 @@ public:
 		d2d::EditPanelImpl* stage, 
 		d2d::MultiShapesImpl* shapesImpl, 
 		d2d::PropertySettingPanel* propertyPanel,
-		d2d::ViewPanelMgr* view_panel_mgr,
 		d2d::OneFloatValue* node_capture,
 		d2d::AbstractEditCMPT* cmpt);
 	virtual ~EditPolylineOP();

@@ -17,6 +17,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_symbol = new Symbol;
 
 	SetDropTarget(new DropTarget(this, library));
+
+	d2d::RemoveShapeSJ::Instance()->Register(this);
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -30,6 +32,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
+
+	d2d::RemoveShapeSJ::Instance()->Register(this);
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -45,6 +49,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 
 //	SetDropTarget(new DropTarget(this, library));
+
+	d2d::RemoveShapeSJ::Instance()->Register(this);
 }
 
 StagePanel::~StagePanel()
@@ -52,6 +58,8 @@ StagePanel::~StagePanel()
 	if (m_symbol) {
 		m_symbol->Release();
 	}
+
+	d2d::RemoveShapeSJ::Instance()->UnRegister(this);
 }
 
 void StagePanel::Clear()
@@ -60,14 +68,17 @@ void StagePanel::Clear()
 	ClearAllShapes();
 }
 
-void StagePanel::RemoveShape(d2d::IShape* shape)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	bool dirty = false;
-	if (m_symbol) {
-		dirty = m_symbol->Remove(shape);
-	}
-	if (dirty) {
-		GetCanvas()->SetDirty();
+	d2d::MultiShapesImpl::Notify(sj_id, ud);
+	if (sj_id == d2d::REMOVE_SHAPE) {
+		bool dirty = false;
+		if (m_symbol) {
+			dirty = m_symbol->Remove((d2d::IShape*)ud);
+		}
+		if (dirty) {
+			GetCanvas()->SetDirty();
+		}	
 	}
 }
 

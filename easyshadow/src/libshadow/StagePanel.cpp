@@ -58,10 +58,6 @@ void StagePanel::Clear()
 {
 }
 
-void StagePanel::RemoveShape(d2d::IShape* shape)
-{	
-}
-
 bool StagePanel::InsertShape(d2d::IShape* shape)
 {
 	if (libshape::get_shape_type(shape->GetShapeDesc()) != libshape::ST_POLYGON) {

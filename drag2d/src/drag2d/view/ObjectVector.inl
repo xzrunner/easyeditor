@@ -58,6 +58,12 @@ bool ObjectVector<T>::ResetOrder(const T* obj, bool up)
 }
 
 template<class T>
+bool ObjectVector<T>::ResetOrderMost(const T* obj, bool up)
+{
+	return ResetOrderMost(m_objs, obj, up);
+}
+
+template<class T>
 bool ObjectVector<T>::IsExist(T* obj) const
 {
 	for (int i = 0, n = m_objs.size(); i < n; ++i) {
@@ -192,16 +198,29 @@ inline bool ObjectVector<T>::ResetOrder(std::vector<T*>& objs,
 		{
 			if (up && i != n - 1)
 			{
-				T* tmp = objs[i];
-				objs[i] = objs[i+1];
-				objs[i+1] = tmp;
+				std::swap(objs[i], objs[i + 1]);
 				return true;
 			}
 			else if (!up && i != 0)
 			{
-				T* tmp = objs[i];
-				objs[i] = objs[i-1];
-				objs[i-1] = tmp;
+				std::swap(objs[i], objs[i - 1]);
+				return true;
+			}
+			return false;
+		}
+	}
+	return false;
+}
+
+template<class T>
+inline bool ObjectVector<T>::ResetOrderMost(std::vector<T*>& objs, const T* obj, bool up) {
+	for (int i = 0, n = objs.size(); i < n; ++i) {
+		if (objs[i] == obj) {
+			if (up && i != n - 1) {
+				std::swap(objs[i], objs[n - 1]);
+				return true;
+			} else if (!up && i != 0) {
+				std::swap(objs[i], objs[0]);
 				return true;
 			}
 			return false;

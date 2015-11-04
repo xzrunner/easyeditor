@@ -21,8 +21,8 @@ namespace lr
 {
 
 SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, view_panel_mgr, callback)
+								 d2d::AbstractEditCMPT* callback/* = NULL*/)
+	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
 {
 	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
 

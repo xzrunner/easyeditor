@@ -9,13 +9,13 @@
 #include "component/AbstractEditCMPT.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
-#include "view/ViewPanelMgr.h"
 #include "view/SpriteSelection.h"
 #include "view/EditPanelImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
 #include "message/SelectSpriteSJ.h"
 #include "message/SelectSpriteSetSJ.h"
+#include "message/InsertSpriteSJ.h"
 
 #include <wx/clipbrd.h>
 #include <sstream>
@@ -23,13 +23,13 @@
 namespace d2d
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-								 ViewPanelMgr* view_panel_mgr, AbstractEditCMPT* callback)
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+								 MultiSpritesImpl* spritesImpl, 
+								 AbstractEditCMPT* callback)
 	: DrawSelectRectOP(wnd, stage)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
 	, m_bDraggable(true)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
@@ -83,7 +83,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			} else {
 				m_selection->Add(selected);
 			}
-			SelectSpriteSetSJ::Instance()->OnSelected(m_selection, m_spritesImpl);
+			SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 		}
 		else
 		{
@@ -91,13 +91,12 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
-				if (m_view_panel_mgr) {
-					bool add = m_stage->GetKeyState(WXK_CONTROL);
-					SelectSpriteSJ::Params p;
-					p.spr = selected;
-					p.clear = !add;
-					SelectSpriteSJ::Instance()->OnSelected(p);
-				}
+
+				bool add = m_stage->GetKeyState(WXK_CONTROL);
+				SelectSpriteSJ::Params p;
+				p.spr = selected;
+				p.clear = !add;
+				SelectSpriteSJ::Instance()->Select(p);
 			}
 		}
 		m_first_pos.setInvalid();
@@ -158,7 +157,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		}
 	}
 
-	SelectSpriteSetSJ::Instance()->OnSelected(m_selection, m_spritesImpl);
+	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 
 	m_first_pos.setInvalid();
 
@@ -323,7 +322,12 @@ void SelectSpritesOP::CopyFromSelection()
 		sprites.push_back(sprite);
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
-		m_spritesImpl->InsertSprite(sprite);
+
+		InsertSpriteSJ::Params p;
+		p.spr = sprite;
+		p.idx = -1;
+		InsertSpriteSJ::Instance()->Insert(p);
+
 		last_spr = sprite;
 
 		sval = value["sprite"][i++];
@@ -337,7 +341,7 @@ void SelectSpritesOP::CopyFromSelection()
 	SelectSpriteSJ::Params p;
 	p.spr = last_spr;
 	p.clear = !add;
-	SelectSpriteSJ::Instance()->OnSelected(p);
+	SelectSpriteSJ::Instance()->Select(p);
 
 	m_stage->GetCanvas()->ResetViewport();
 

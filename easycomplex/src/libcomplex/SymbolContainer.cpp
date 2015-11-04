@@ -51,4 +51,10 @@ bool SymbolContainer::ResetOrder(const Object* obj, bool up)
 		static_cast<const d2d::ISprite*>(obj), up);
 }
 
+bool SymbolContainer::ResetOrderMost(const Object* obj, bool up)
+{
+	return d2d::ObjectVector<d2d::ISprite>::ResetOrderMost(m_symbol->m_sprites, 
+		static_cast<const d2d::ISprite*>(obj), up);
+}
+
 }

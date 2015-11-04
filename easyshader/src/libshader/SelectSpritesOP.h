@@ -9,8 +9,8 @@ namespace eshader
 class SelectSpritesOP : public d2d::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiSpritesImpl* spritesImpl, d2d::AbstractEditCMPT* callback = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 

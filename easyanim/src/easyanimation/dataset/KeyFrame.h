@@ -30,6 +30,7 @@ public:
 	void Insert(d2d::ISprite* sprite);
 	bool Remove(d2d::ISprite* sprite);
 	bool Reorder(const d2d::ISprite* sprite, bool up);
+	bool ReorderMost(const d2d::ISprite* sprite, bool up);
 
 	int Size() const { return m_sprites.size(); }
 	const d2d::ISprite* GetSprite(int index) {

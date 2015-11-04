@@ -11,14 +11,13 @@ class MultiShapesImpl;
 class AbstractEditCMPT;
 class IPropertySetting;
 class IShape;
-class ViewPanelMgr;
 class ShapeSelection;
 
 class SelectShapesOP : public DrawRectangleOP
 {
 public:
 	SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiShapesImpl* shapesImpl, 
-		ViewPanelMgr* view_panel_mgr = NULL, AbstractEditCMPT* callback = NULL);
+		AbstractEditCMPT* callback = NULL);
 	virtual ~SelectShapesOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -59,8 +58,6 @@ private:
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;
-
-	ViewPanelMgr* m_view_panel_mgr;
 
 	d2d::Vector m_move_last_pos;
 

@@ -11,7 +11,7 @@ SelectSpriteSJ::SelectSpriteSJ(int id)
 {
 }
 
-void SelectSpriteSJ::OnSelected(const Params& p, Observer* except)
+void SelectSpriteSJ::Select(const Params& p, Observer* except)
 {
 	Notify((void*)&p, except);
 }
@@ -19,7 +19,7 @@ void SelectSpriteSJ::OnSelected(const Params& p, Observer* except)
 SelectSpriteSJ* SelectSpriteSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SelectSpriteSJ(SPRITE_SELECTED);
+		m_instance = new SelectSpriteSJ(SELECT_SPRITE);
 	}
 	return m_instance;
 }

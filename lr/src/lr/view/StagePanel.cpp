@@ -20,12 +20,10 @@ namespace lr
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::PropertySettingPanel* property,
-					   d2d::LibraryPanel* library,
-					   d2d::ViewPanelMgr* view_panel_mgr)
+					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(GetStageImpl())
 	, d2d::MultiShapesImpl(GetStageImpl())
-	, m_view_panel_mgr(view_panel_mgr)
 	, m_library(library)
 	, m_grids(NULL)
 	, m_sindex(NULL)

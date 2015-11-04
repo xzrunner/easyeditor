@@ -6,11 +6,9 @@
 namespace escale9
 {
 
-ComposeOP::ComposeOP(StagePanel* stage, ToolbarPanel* toolbar,
-					 d2d::ViewPanelMgr* view_panel_mgr)
+ComposeOP::ComposeOP(StagePanel* stage, ToolbarPanel* toolbar)
 	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_toolbar(toolbar)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 }
 
@@ -82,7 +80,7 @@ d2d::ISprite* ComposeOP::SelectByPos(int x, int y)
 		d2d::SelectSpriteSJ::Params p;
 		p.spr = selected;
 		p.clear = true;
-		d2d::SelectSpriteSJ::Instance()->OnSelected(p);
+		d2d::SelectSpriteSJ::Instance()->Select(p);
 	}
 
 	return selected;

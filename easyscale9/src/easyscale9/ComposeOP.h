@@ -12,8 +12,7 @@ class ToolbarPanel;
 class ComposeOP : public d2d::ZoomViewOP
 {
 public:
-	ComposeOP(StagePanel* stage, ToolbarPanel* toolbar,
-		d2d::ViewPanelMgr* view_panel_mgr);
+	ComposeOP(StagePanel* stage, ToolbarPanel* toolbar);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);
@@ -27,8 +26,6 @@ private:
 
 private:
 	ToolbarPanel* m_toolbar;
-
-	d2d::ViewPanelMgr* m_view_panel_mgr;
 
 }; // ComposeOP
 

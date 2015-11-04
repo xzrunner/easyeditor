@@ -14,7 +14,6 @@ class CommonCMPT : public d2d::AbstractEditCMPT
 public:
 	CommonCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage, d2d::PropertySettingPanel* property,
-		d2d::ViewPanelMgr* view_panel_mgr,
 		bool vertical, Controller* ctrl);
 
 protected:

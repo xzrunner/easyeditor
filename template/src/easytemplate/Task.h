@@ -39,8 +39,6 @@ private:
 	d2d::PropertySettingPanel* m_property;
  	d2d::EditPanel* m_stage;
 
-	d2d::ViewPanelMgr m_view_panel_mgr;
-
 }; // Task
 
 }

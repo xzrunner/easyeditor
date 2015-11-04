@@ -23,7 +23,6 @@ public:
 	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~EditPanel();
 
-	virtual void Clear();
 	virtual bool Update(int version) { return false; }
 
  	virtual void OnSizeDebug(wxSizeEvent& event) {}

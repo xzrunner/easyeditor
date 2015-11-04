@@ -13,14 +13,13 @@ namespace ecomplex
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
-					   LibraryPanel* library, d2d::ViewPanelMgr* view_panel_mgr)
+					   LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property, view_panel_mgr)));
+		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 	SetCanvas(new StageCanvas(this, library));
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
@@ -31,15 +30,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   Symbol* symbol,
 					   d2d::PropertySettingPanel* property,
-					   LibraryPanel* library,
-					   d2d::ViewPanelMgr* view_panel_mgr)
+					   LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property, view_panel_mgr)));
+		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 	SetCanvas(new StageCanvas(this, library));
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
@@ -65,36 +62,6 @@ bool StagePanel::Update(int version)
 		if (spr->Update(version)) {
 			ret = true;
 		}
-	}
-	return ret;
-}
-
-bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
-{
-	bool ret = d2d::SpritesPanelImpl::ReorderSprite(sprite, up);
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->ReorderSprite(sprite, up, this);
-	}
-
-	return ret;
-}
-
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	idx = m_view_panel_mgr->GetSelection() + 1;
-	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite, idx);
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this, idx);
-	}
-	return ret;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->RemoveSprite(sprite, this);
 	}
 	return ret;
 }

@@ -26,9 +26,9 @@ public:
 	virtual void Clear();
 
 	//
-	//	interface IShapeViewPanel
+	//	interface MultiShapesImpl
 	//
-	virtual void RemoveShape(d2d::IShape* shape);
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiShapesImpl interface

@@ -20,10 +20,9 @@ namespace libshape
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
-						   d2d::ViewPanelMgr* view_panel_mgr, StagePanel* stage)
+						   StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage_panel(stage)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 	stage->SetToolbarPanel(this);
 	// point
@@ -36,7 +35,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	// rect
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "¾ØÐÎ", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditRectOP(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditRectOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}

@@ -7,9 +7,9 @@ namespace eui
 namespace list
 {
 
-EditOP::EditOP(StagePanel* stage, d2d::PropertySettingPanel* property, d2d::ViewPanelMgr* view_panel_mgr)
+EditOP::EditOP(StagePanel* stage, d2d::PropertySettingPanel* property)
 	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(stage, stage->GetStageImpl(), stage, 
-	                                             property, view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), 
+	                                             property, NULL, d2d::ArrangeSpriteConfig(), 
 												 new ArrangeSpriteImpl(stage, property))
 	, m_stage(stage)
 	, m_clipbox_selected(-1)

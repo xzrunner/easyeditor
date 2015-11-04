@@ -7,7 +7,7 @@ namespace eparticle2d
 {
 
 SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
+								 d2d::AbstractEditCMPT* callback/* = NULL*/)
 	: d2d::SelectSpritesOP(wnd, stage, spritesImpl, NULL, callback)
 {
 }

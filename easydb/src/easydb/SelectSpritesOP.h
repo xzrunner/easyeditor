@@ -9,8 +9,8 @@ namespace edb
 class SelectSpritesOP : public d2d::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::ViewPanelMgr* view_panel_mgr = NULL, d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		d2d::MultiSpritesImpl* spritesImpl, d2d::AbstractEditCMPT* callback = NULL);
 
 	virtual bool OnKeyDown(int keyCode); 
 	virtual bool OnMouseLeftDClick(int x, int y);

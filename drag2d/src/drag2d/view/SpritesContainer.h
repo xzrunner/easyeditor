@@ -24,6 +24,7 @@ public:
 	virtual bool Insert(Object* obj, int idx);
 	virtual bool Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
+	virtual bool ResetOrderMost(const Object* obj, bool up);
 
 	int Size() const;
 

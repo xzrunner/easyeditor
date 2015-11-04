@@ -1,31 +1,46 @@
 #include "MultiShapesImpl.h"
 #include "ShapeSelection.h"
 
+#include "message/subject_id.h"
+#include "message/SelectShapeSJ.h"
+
 namespace d2d
 {
 
 MultiShapesImpl::MultiShapesImpl(EditPanelImpl* stage)
 {
 	m_shape_selection = new ShapeSelection(stage);
+
+	m_subjects.push_back(SelectShapeSJ::Instance());
+// 	m_subjects.push_back(SelectShapeSetSJ::Instance());
+// 	m_subjects.push_back(RemoveShapeSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 MultiShapesImpl::~MultiShapesImpl()
 {
 	m_shape_selection->Release();
+
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
-void MultiShapesImpl::SelectShape(IShape* shape)
+void MultiShapesImpl::Notify(int sj_id, void* ud)
 {
-	m_shape_selection->Clear();
-	m_shape_selection->Add(shape);
-}
-
-void MultiShapesImpl::SelectMultiShapes(ShapeSelection* selection)
-{
-}
-
-void MultiShapesImpl::RemoveShape(IShape* shape)
-{
+	switch (sj_id)
+	{
+	case SELECT_SHAPE:
+		m_shape_selection->Clear();
+		m_shape_selection->Add((IShape*)ud);
+		break;
+// 	case SELECT_SHAPE_SET:
+// 		break;
+// 	case REMOVE_SHAPE:
+// 		break;
+	}
 }
 
 IShape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
@@ -42,16 +57,6 @@ void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<IShape*>& 
 
 void MultiShapesImpl::ClearShapeSelection()
 {
-	if (m_shape_selection->IsEmpty()) {
-		return;
-	}
-
-	std::vector<IShape*> shapes;
-	m_shape_selection->Traverse(FetchAllVisitor<IShape>(shapes));
-	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		RemoveShape(shapes[i]);
-	}
-
 	m_shape_selection->Clear();
 }
 

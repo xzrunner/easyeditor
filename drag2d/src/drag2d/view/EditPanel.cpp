@@ -22,11 +22,6 @@ EditPanel::~EditPanel()
 	m_impl->Release();
 }
 
-void EditPanel::Clear()
-{
-	m_impl->Clear();	
-}
-
 Vector EditPanel::TransPosScrToProj(int x, int y) const
 {
 	return m_impl->TransPosScrToProj(x, y);

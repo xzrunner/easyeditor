@@ -6,9 +6,16 @@
 #include "view/MultiSpritesPropertySetting.h"
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
+
 #include "message/subject_id.h"
 #include "message/SelectSpriteSJ.h"
 #include "message/SelectSpriteSetSJ.h"
+#include "message/InsertSpriteSJ.h"
+#include "message/RemoveSpriteSJ.h"
+#include "message/ClearSJ.h"
+#include "message/SelectShapeSJ.h"
+#include "message/SelectShapeSetSJ.h"
+#include "message/RemoveShapeSJ.h"
 
 #include <algorithm>
 
@@ -24,72 +31,62 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 	SetBackgroundColour(wxColour(229, 229, 229));
 
-	SelectSpriteSJ::Instance()->Register(this);
-	SelectSpriteSetSJ::Instance()->Register(this);
+	m_subjects.push_back(SelectSpriteSJ::Instance());
+	m_subjects.push_back(SelectSpriteSetSJ::Instance());
+	m_subjects.push_back(InsertSpriteSJ::Instance());
+	m_subjects.push_back(RemoveSpriteSJ::Instance());
+	m_subjects.push_back(ClearSJ::Instance());
+
+	m_subjects.push_back(SelectShapeSJ::Instance());
+	m_subjects.push_back(SelectShapeSetSJ::Instance());
+	m_subjects.push_back(RemoveShapeSJ::Instance());
+
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 PropertySettingPanel::~PropertySettingPanel()
 {
-	SelectSpriteSJ::Instance()->UnRegister(this);
-	SelectSpriteSetSJ::Instance()->UnRegister(this);
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 
 	delete m_setting;
 }
 
-bool PropertySettingPanel::InsertSprite(ISprite* spr, int idx) 
-{ 
-	SetPropertySetting(CreateDefaultProperty());
-	return false; 
-}
-
-bool PropertySettingPanel::RemoveSprite(ISprite* spr) 
-{ 
-	SetPropertySetting(CreateDefaultProperty());
-	return false; 
-}
-
-bool PropertySettingPanel::ClearAllSprite() 
-{ 
-	SetPropertySetting(CreateDefaultProperty());
-	return false; 
-}
-
-void PropertySettingPanel::SelectShape(IShape* shape)
-{
-	assert(m_stage);
-	if (shape) {
-		SetPropertySetting(shape->createPropertySetting(m_stage));
-	} else {
-		SetPropertySetting(CreateDefaultProperty());
-	}
-}
-
-void PropertySettingPanel::SelectMultiShapes(ShapeSelection* selection)
-{
-	std::vector<IShape*> shapes;
-	selection->Traverse(FetchAllVisitor<IShape>(shapes));
-	if (shapes.empty()) {
-		SelectShape(NULL);
-	} else if (shapes.size() == 1) {
-		SelectShape(shapes[0]);
-	} else {
-		SelectShape(NULL);
-	}
-}
-
-void PropertySettingPanel::RemoveShape(IShape* shape)
-{
-	SetPropertySetting(CreateDefaultProperty());
-}
-
 void PropertySettingPanel::Notify(int sj_id, void* ud)
 {
-	if (sj_id == SPRITE_SELECTED) {
-		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-		OnSpriteSelected(p->spr, p->clear);
-	} else if (sj_id == MULTI_SPRITE_SELECTED) {
-		SpriteSelection* selection = (SpriteSelection*)ud;
-		OnMultiSpriteSelected(selection);
+	switch (SELECT_SPRITE)
+	{
+	case SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			OnSpriteSelected(p->spr, p->clear);
+		}
+		break;
+	case SELECT_SPRITE_SET:
+		OnMultiSpriteSelected((SpriteSelection*)ud);
+		break;
+	case INSERT_SPRITE:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+	case REMOVE_SPRITE:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+	case CLEAR:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+
+	case SELECT_SHAPE:
+		SelectShape((IShape*)ud);
+		break;
+	case SELECT_SHAPE_SET:
+		SelectShapeSet((ShapeSelection*)ud);
+		break;
+	case REMOVE_SHAPE:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
 	}
 }
 
@@ -127,7 +124,7 @@ void PropertySettingPanel::EnablePropertyGrid(bool enable)
 	}
 }
 
-void PropertySettingPanel::OnSpriteSelected(d2d::ISprite* spr, bool clear)
+void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 {
 	if (spr) {
 		std::set<ISprite*>::iterator itr = m_selection.find(spr);
@@ -137,7 +134,7 @@ void PropertySettingPanel::OnSpriteSelected(d2d::ISprite* spr, bool clear)
 	}
 
 	if (clear) {
-		for_each(m_selection.begin(), m_selection.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
+		for_each(m_selection.begin(), m_selection.end(), ReleaseObjectFunctor<ISprite>());
 		m_selection.clear();
 	}
 	if (spr) {
@@ -195,6 +192,29 @@ void PropertySettingPanel::InitLayout()
 	sizer->Add(m_pg);
 
 	SetSizer(sizer);
+}
+
+void PropertySettingPanel::SelectShape(IShape* shape)
+{
+	assert(m_stage);
+	if (shape) {
+		SetPropertySetting(shape->createPropertySetting(m_stage));
+	} else {
+		SetPropertySetting(CreateDefaultProperty());
+	}
+}
+
+void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
+{
+	std::vector<IShape*> shapes;
+	selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	if (shapes.empty()) {
+		SelectShape(NULL);
+	} else if (shapes.size() == 1) {
+		SelectShape(shapes[0]);
+	} else {
+		SelectShape(NULL);
+	}
 }
 
 } // d2d

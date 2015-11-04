@@ -11,7 +11,7 @@ SelectSpriteSetSJ::SelectSpriteSetSJ(int id)
 {
 }
 
-void SelectSpriteSetSJ::OnSelected(const SpriteSelection* selection, Observer* except)
+void SelectSpriteSetSJ::Select(const SpriteSelection* selection, Observer* except)
 {
 	Notify((void*)selection, except);
 }
@@ -19,7 +19,7 @@ void SelectSpriteSetSJ::OnSelected(const SpriteSelection* selection, Observer* e
 SelectSpriteSetSJ* SelectSpriteSetSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SelectSpriteSetSJ(MULTI_SPRITE_SELECTED);
+		m_instance = new SelectSpriteSetSJ(SELECT_SPRITE_SET);
 	}
 	return m_instance;
 }

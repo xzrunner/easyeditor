@@ -17,7 +17,7 @@ public:
 	};
 
 public:
-	void OnSelected(const Params& p, Observer* except = NULL);
+	void Select(const Params& p, Observer* except = NULL);
 
 	static SelectSpriteSJ* Instance();
 

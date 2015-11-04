@@ -16,8 +16,7 @@ class PasteSpriteOP : public SelectSpritesOP
 {
 public:
 	PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-		MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr, 
-		PasteSpriteCMPT* cmpt = NULL);
+		MultiSpritesImpl* spritesImpl, PasteSpriteCMPT* cmpt = NULL);
 	virtual ~PasteSpriteOP();
 
 	virtual bool OnKeyDown(int keyCode);

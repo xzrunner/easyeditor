@@ -9,14 +9,13 @@ libshape::EditPolylineOP<TBase, TSelected>::
 EditPolylineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 			   d2d::MultiShapesImpl* shapesImpl,
 			   d2d::PropertySettingPanel* propertyPanel,
-			   d2d::ViewPanelMgr* view_panel_mgr,
 			   d2d::OneFloatValue* node_capture,
 			   d2d::AbstractEditCMPT* cmpt)
 	: TBase(wnd, stage, shapesImpl)
 	, m_node_capture(node_capture)
 {
-	m_select_op = new TSelected(wnd, stage, shapesImpl, view_panel_mgr, cmpt);
-	m_impl = new EditPolylineImpl(wnd, stage, shapesImpl, propertyPanel, view_panel_mgr, m_node_capture, this, m_select_op, this);
+	m_select_op = new TSelected(wnd, stage, shapesImpl, cmpt);
+	m_impl = new EditPolylineImpl(wnd, stage, shapesImpl, propertyPanel, m_node_capture, this, m_select_op, this);
 }
 
 template <typename TBase, typename TSelected>

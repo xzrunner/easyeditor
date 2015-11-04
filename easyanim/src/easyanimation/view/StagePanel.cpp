@@ -13,15 +13,13 @@ namespace eanim
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
-					   d2d::ViewPanelMgr* view_panel_mgr,
 					   Controller* ctrl)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(GetStageImpl())
 	, m_ctrl(ctrl)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	SetEditOP(new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl));
+	SetEditOP(new ArrangeSpriteOP(this, property, ctrl));
 	SetCanvas(new StageCanvas(this));
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, m_ctrl->GetLibraryPanel()));
@@ -41,85 +39,48 @@ void StagePanel::Clear()
 	ClearAllSprite();
 }
 
-bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	MultiSpritesImpl::ReorderSprite(sprite, up);
+	MultiSpritesImpl::Notify(sj_id, ud);
+	
+	switch (sj_id)
+	{
+	case d2d::REORDER_SPRITE:
+		{
+			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
+			Reorder(p->spr, p->up);
+		}
+		break;
+	case d2d::REORDER_SPRITE_MOST:
+		{
+			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
+			ReorderMost(p->spr, p->up);
+		}
+		break;
+	case INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
+		}
+		break;
+	case REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case CLEAR:
+		{
+			bool ret = m_ctrl->ClearAllLayer();
+			m_ctrl->setCurrFrame(-1, -1);
 
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->ReorderSprite(sprite, up, this);
+			if (ret) {
+				GetCanvas()->SetDirty();
+			}
+
+			// 	Context* context = Context::Instance();
+			// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+			// 	frame->clear();
+		}
+		break;
 	}
-
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool ret = frame->Reorder(sprite, up);
-	if (ret) {
-		GetCanvas()->SetDirty();
-	}
-	return ret;
-}
-
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	MultiSpritesImpl::InsertSprite(sprite);
-
-	SpriteUserData* ud = (SpriteUserData*)sprite->GetUserData();
- 	int old_layer = m_ctrl->layer(),
- 		old_frame = m_ctrl->frame();
-	if (ud) {
-		ud->frame = old_frame;
-		m_ctrl->setCurrFrame(ud->layer, old_frame);
-	}
-
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	assert(frame);
-	frame->Insert(sprite);
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this);
-	}
-	if (ud) {
-		m_ctrl->setCurrFrame(old_layer, old_frame);
-	}
-
-	m_ctrl->Refresh();
-
-	GetCanvas()->SetDirty();
-
-	return true;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	MultiSpritesImpl::RemoveSprite(sprite);
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->RemoveSprite(sprite, this);
-	}
-
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool success = frame->Remove(sprite);
-	if (success) {
-		m_ctrl->Refresh();
-		GetCanvas()->SetDirty();
-	}
-	return success;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	MultiSpritesImpl::ClearAllSprite();
-
-	bool ret = m_ctrl->ClearAllLayer();
-	m_ctrl->setCurrFrame(-1, -1);
-
-	if (ret) {
-		GetCanvas()->SetDirty();
-	}
-
-// 	Context* context = Context::Instance();
-// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-// 	frame->clear();
-
-	return ret;
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, 
@@ -176,6 +137,57 @@ void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_DelJointNode);
 	SetCanvasDirty();
+}
+
+void StagePanel::Reorder(d2d::ISprite* spr, bool up)
+{
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	bool succ = frame->Reorder(spr, up);
+	if (succ) {
+		SetCanvasDirty();
+	}
+}
+
+void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
+{
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	bool succ = frame->ReorderMost(spr, up);
+	if (succ) {
+		SetCanvasDirty();
+	}
+}
+
+void StagePanel::Insert(d2d::ISprite* spr)
+{
+	SpriteUserData* ud = (SpriteUserData*)sprite->GetUserData();
+	int old_layer = m_ctrl->layer(),
+		old_frame = m_ctrl->frame();
+	if (ud) {
+		ud->frame = old_frame;
+		m_ctrl->setCurrFrame(ud->layer, old_frame);
+	}
+
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	assert(frame);
+	frame->Insert(sprite);
+
+	if (ud) {
+		m_ctrl->setCurrFrame(old_layer, old_frame);
+	}
+
+	m_ctrl->Refresh();
+
+	SetCanvasDirty();
+}
+
+void StagePanel::Remove(d2d::ISprite* spr)
+{
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	bool success = frame->Remove(spr);
+	if (success) {
+		m_ctrl->Refresh();
+		GetCanvas()->SetDirty();
+	}
 }
 
 } // eanim

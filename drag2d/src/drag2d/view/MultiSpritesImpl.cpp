@@ -4,8 +4,12 @@
 #include "dataset/AbstractBV.h"
 #include "common/Rect.h"
 #include "common/sprite_visitors.h"
+
 #include "message/subject_id.h"
 #include "message/SelectSpriteSJ.h"
+#include "message/InsertSpriteSJ.h"
+#include "message/RemoveSpriteSJ.h"
+#include "message/ClearSJ.h"
 
 #include <fstream>
 
@@ -16,44 +20,43 @@ MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 {
 	m_sprite_selection = new SpriteSelection(stage);
 
-	SelectSpriteSJ::Instance()->Register(this);
+	m_subjects.push_back(SelectSpriteSJ::Instance());
+	m_subjects.push_back(InsertSpriteSJ::Instance());
+	m_subjects.push_back(RemoveSpriteSJ::Instance());
+	m_subjects.push_back(ClearSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
 	m_sprite_selection->Release();
 
-	SelectSpriteSJ::Instance()->UnRegister(this);
-}
-
-bool MultiSpritesImpl::ReorderSprite(d2d::ISprite* sprite, bool up)
-{
-	return false;
-}
-
-bool MultiSpritesImpl::InsertSprite(ISprite* sprite, int idx)
-{
-	m_sprite_selection->Clear();
-	return false;
-}
-
-bool MultiSpritesImpl::RemoveSprite(ISprite* sprite)
-{
-	m_sprite_selection->Clear();
-	return false;
-}
-
-bool MultiSpritesImpl::ClearAllSprite()
-{
-	m_sprite_selection->Clear();
-	return false;
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
 void MultiSpritesImpl::Notify(int sj_id, void* ud)
 {
-	if (sj_id == SPRITE_SELECTED) {
-		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-		OnSpriteSelected(p->spr, p->clear);
+	switch (sj_id)
+	{
+	case SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			OnSpriteSelected(p->spr, p->clear);
+		}
+		break;
+	case INSERT_SPRITE:
+		m_sprite_selection->Clear();
+		break;
+	case REMOVE_SPRITE:
+		m_sprite_selection->Clear();
+		break;
+	case CLEAR:
+		m_sprite_selection->Clear();
+		break;
 	}
 }
 
@@ -80,16 +83,6 @@ void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::v
 
 void MultiSpritesImpl::ClearSpriteSelection()
 {
-	if (m_sprite_selection->IsEmpty()) {
-		return;
-	}
-
-	std::vector<ISprite*> sprites;
-	m_sprite_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		RemoveSprite(sprites[i]);
-	}
-
 	m_sprite_selection->Clear();
 }
 

@@ -125,14 +125,13 @@ void LibraryPanel::LoadSymbolFromLayer()
 	}
 }
 
-void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* property,
-							 d2d::ViewPanelMgr* view_panel_mgr) 
+void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* property) 
 {
 	d2d::AbstractEditOP* paste_op = new d2d::PasteSymbolOP(stage, stage->GetStageImpl(), stage, this);
 
 	d2d::OneFloatValue* capture_val = new d2d::OneFloatValueStatic(10);
-	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, capture_val, NULL);
-	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, capture_val, NULL);
+	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
 
 	int id = 0;
 	{

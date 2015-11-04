@@ -8,11 +8,9 @@ namespace libshape
 EditRectOP::EditRectOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 					   d2d::MultiShapesImpl* shapesImpl,
 					   d2d::PropertySettingPanel* propertyPanel,
-					   d2d::ViewPanelMgr* view_panel_mgr,
 					   d2d::OneFloatValue* node_capture)
 	: d2d::ZoomViewOP(wnd, stage, true)
 	, m_propertyPanel(propertyPanel)
-	, m_view_panel_mgr(view_panel_mgr)
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {

@@ -9,12 +9,11 @@ namespace d2d
 
 LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name, 
 							 wxWindow* stage_wnd, EditPanelImpl* stage, 
-							 MultiShapesImpl* shapesImpl,
-							 ViewPanelMgr* view_panel_mgr)
+							 MultiShapesImpl* shapesImpl)
 	: AbstractEditCMPT(parent, name, stage)
 	, m_layersMgr(NULL)
 {
-	m_editOP = new SelectShapesOP(stage_wnd, stage, shapesImpl, view_panel_mgr);
+	m_editOP = new SelectShapesOP(stage_wnd, stage, shapesImpl);
 
 	m_layersMgr = new LayersMgrWidget(this, stage);
 	m_sizer = new wxBoxSizer(wxVERTICAL);
@@ -23,12 +22,11 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name,
 
 LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name, 
 							 wxWindow* stage_wnd, EditPanelImpl* stage, 
-							 MultiSpritesImpl* spritesImpl,
-							 ViewPanelMgr* view_panel_mgr)
+							 MultiSpritesImpl* spritesImpl)
 	 : AbstractEditCMPT(parent, name, stage)
 	 , m_layersMgr(NULL)
 {
-	m_editOP = new SelectSpritesOP(stage_wnd, stage, spritesImpl, view_panel_mgr);
+	m_editOP = new SelectSpritesOP(stage_wnd, stage, spritesImpl);
 
 	m_layersMgr = new LayersMgrWidget(this, stage);
 	m_sizer = new wxBoxSizer(wxVERTICAL);

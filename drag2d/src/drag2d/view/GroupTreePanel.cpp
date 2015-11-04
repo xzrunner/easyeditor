@@ -15,11 +15,11 @@ namespace d2d
 {
 
 GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
-							   ViewPanelMgr* view_panel_mgr, const KeysState& key_state)
+							   const KeysState& key_state)
 	: wxPanel(parent, wxID_ANY)
 	, m_sprite_impl(sprites_impl)
 {
-	m_grouptree = new GroupTreeCtrl(this, sprites_impl, view_panel_mgr, key_state);
+	m_grouptree = new GroupTreeCtrl(this, sprites_impl, key_state);
 
 	InitLayout();
 }
@@ -27,29 +27,6 @@ GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
 GroupTreePanel::~GroupTreePanel()
 {
 	delete m_grouptree;
-}
-
-bool GroupTreePanel::ReorderSprite(ISprite* spr, bool up)
-{
-	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);
-	m_grouptree->Traverse(visitor);
-	wxTreeItemId id = visitor.GetItemID();
-	if (id.IsOk()) {
-		return m_grouptree->ReorderItem(id, up);
-	} else {
-		return false;
-	}
-}
-
-bool GroupTreePanel::InsertSprite(ISprite* spr, int idx)
-{
-	wxTreeItemId id = m_grouptree->AddSprite(spr);
-	return id != m_grouptree->GetRootID();
-}
-
-bool GroupTreePanel::RemoveSprite(ISprite* spr)
-{
-	return m_grouptree->Remove(spr);
 }
 
 void GroupTreePanel::StoreToFile(Json::Value& value) const
@@ -61,11 +38,6 @@ void GroupTreePanel::LoadFromFile(const Json::Value& value)
 {
 	GroupTreeIO io(m_grouptree, m_sprite_impl);
 	io.Load(value);
-}
-
-void GroupTreePanel::Remove(ISprite* sprite)
-{
-	m_grouptree->Remove(sprite);
 }
 
 void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<d2d::ISprite*> >& groups)
@@ -92,11 +64,6 @@ void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<d2d::ISp
 	}
 	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetVisibleVisitor(m_grouptree, true));
 	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetEditableVisitor(m_grouptree, true));
-}
-
-void GroupTreePanel::Clear()
-{
-	m_grouptree->Clear();
 }
 
 void GroupTreePanel::EnableExpand(bool enable)

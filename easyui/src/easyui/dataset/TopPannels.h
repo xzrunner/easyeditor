@@ -13,8 +13,6 @@ class ToolbarPanel;
 class TopPannels
 {
 public:
-	d2d::ViewPanelMgr view_panel_mgr;
-
 	LibraryPanel* library;
 
 	d2d::PropertySettingPanel* property;

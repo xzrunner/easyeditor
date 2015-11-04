@@ -4,9 +4,7 @@
 #include <wx/wx.h>
 #include <wx/propgrid/propgrid.h>
 #include <set>
-
-#include "ISpriteViewPanel.h"
-#include "IShapeViewPanel.h"
+#include <vector>
 
 #include "message/Observer.h"
 
@@ -15,27 +13,16 @@ namespace d2d
 
 class IPropertySetting;
 class EditPanelImpl;
+class ISprite;
+class SpriteSelection;
+class IShape;
+class ShapeSelection;
 
-class PropertySettingPanel : public wxPanel, public ISpriteViewPanel, public IShapeViewPanel, public Observer
+class PropertySettingPanel : public wxPanel, public Observer
 {
 public:
 	PropertySettingPanel(wxWindow* parent);
 	virtual ~PropertySettingPanel();
-
-	//
-	//	interface ISpriteViewPanel
-	//
-	virtual bool ReorderSprite(ISprite* spr, bool up) { return false; }
-	virtual bool InsertSprite(ISprite* spr, int idx = -1);
-	virtual bool RemoveSprite(ISprite* spr);
-	virtual bool ClearAllSprite();
-
-	//
-	//	interface IShapeViewPanel
-	//
-	virtual void SelectShape(IShape* shape);
-	virtual void SelectMultiShapes(ShapeSelection* selection);
-	virtual void RemoveShape(IShape* shape);
 
 	//
 	//	interface Observer
@@ -57,13 +44,18 @@ public:
 protected:
 	virtual IPropertySetting* CreateDefaultProperty() const { return NULL; }
 
-	virtual void OnSpriteSelected(d2d::ISprite* spr, bool clear);
+	virtual void OnSpriteSelected(ISprite* spr, bool clear);
 	virtual void OnMultiSpriteSelected(SpriteSelection* selection);
 
 private:
 	void InitLayout();
 
+	void SelectShape(IShape* shape);
+	void SelectShapeSet(ShapeSelection* selection);
+
 protected:
+	std::vector<Subject*> m_subjects;
+
 	std::string m_type;
 
 	wxPropertyGrid* m_pg;

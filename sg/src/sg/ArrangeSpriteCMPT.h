@@ -12,9 +12,7 @@ class ArrangeSpriteCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	ArrangeSpriteCMPT(wxWindow* parent, const wxString& name, 
-		d2d::PropertySettingPanel* property, 
-		d2d::ViewPanelMgr* view_panel_mgr,
-		StagePanel* stage);
+		d2d::PropertySettingPanel* property, StagePanel* stage);
 	
 protected:
 	virtual wxSizer* initLayout();

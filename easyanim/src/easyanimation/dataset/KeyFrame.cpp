@@ -122,6 +122,28 @@ bool KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 	return false;
 }
 
+bool KeyFrame::ReorderMost(const d2d::ISprite* sprite, bool up)
+{
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	{
+		if (m_sprites[i] != sprite) {
+			continue;
+		}
+
+		if (up && i != n - 1) {
+			std::swap(m_sprites[i], m_sprites[n - 1]);
+			return true;
+		} else if (!up && i != 0) {
+			std::swap(m_sprites[i], m_sprites[0]);
+			return true;
+		}
+
+		return false;
+	}
+
+	return false;
+}
+
 void KeyFrame::Clear()
 {
 	if (m_layer) {

@@ -13,8 +13,7 @@ class StagePanel;
 class EditOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>
 {
 public:
-	EditOP(StagePanel* stage, d2d::PropertySettingPanel* property,
-		d2d::ViewPanelMgr* view_panel_mgr);
+	EditOP(StagePanel* stage, d2d::PropertySettingPanel* property);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

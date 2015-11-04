@@ -1,7 +1,6 @@
 #ifndef _DRAG2D_MULTI_SPRITES_IMPL_H_
 #define _DRAG2D_MULTI_SPRITES_IMPL_H_
 
-#include "ISpriteViewPanel.h"
 #include "DataTraverseType.h"
 
 #include "common/visitors.h"
@@ -16,19 +15,11 @@ class EditPanelImpl;
 class SpriteSelection;
 class Rect;
 
-class MultiSpritesImpl : public ISpriteViewPanel, public Observer
+class MultiSpritesImpl : public Observer
 {
 public:
 	MultiSpritesImpl(EditPanelImpl* stage);
 	virtual ~MultiSpritesImpl();
-
-	//
-	//	interface ISpriteViewPanel
-	//
-	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(ISprite* sprite);
-	virtual bool ClearAllSprite();
 
 	//
 	//	interface Observer
@@ -49,6 +40,9 @@ private:
 
 protected:
 	SpriteSelection* m_sprite_selection;
+
+private:
+	std::vector<Subject*> m_subjects;
 
 }; // MultiSpritesImpl
 

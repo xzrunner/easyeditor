@@ -12,7 +12,7 @@ namespace eanim
 	{
 	public:
 		ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* property,
-			d2d::ViewPanelMgr* view_panel_mgr, Controller* ctrl);
+			Controller* ctrl);
 		virtual ~ArrangeSpriteOP();
 
 		virtual bool OnKeyDown(int keyCode);

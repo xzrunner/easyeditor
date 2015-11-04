@@ -13,8 +13,7 @@ class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage,
-		d2d::PropertySettingPanel* property,
-		d2d::ViewPanelMgr* view_panel_mgr);
+		d2d::PropertySettingPanel* property);
 	
 	void setComposeOP(bool use) {
 		m_isComposeOP = use;

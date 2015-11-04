@@ -23,14 +23,14 @@ namespace d2d
 
 template <typename TBase>
 ArrangeSpriteOP<TBase>::ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-	PropertySettingPanel* propertyPanel/* = NULL*/, ViewPanelMgr* view_panel_mgr /*= NULL*/, 
-	AbstractEditCMPT* callback/* = NULL*/, const ArrangeSpriteConfig& cfg, ArrangeSpriteImpl* impl /*= NULL*/)
-	: TBase(wnd, stage, spritesImpl, view_panel_mgr, callback)
+	PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, 
+	const ArrangeSpriteConfig& cfg, ArrangeSpriteImpl* impl /*= NULL*/)
+	: TBase(wnd, stage, spritesImpl, callback)
 {
 	if (impl) {
 		m_impl = impl;
 	} else {
-		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, propertyPanel, view_panel_mgr, cfg);
+		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, propertyPanel, cfg);
 	}
 }
 

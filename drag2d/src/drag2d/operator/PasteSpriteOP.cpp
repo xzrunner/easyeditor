@@ -12,9 +12,10 @@
 namespace d2d
 {
 
-PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
-							 ViewPanelMgr* view_panel_mgr, PasteSpriteCMPT* cmpt)
-	: SelectSpritesOP(wnd, stage, spritesImpl, view_panel_mgr)
+PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+							 MultiSpritesImpl* spritesImpl,
+							 PasteSpriteCMPT* cmpt)
+	: SelectSpritesOP(wnd, stage, spritesImpl)
 	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)
 {

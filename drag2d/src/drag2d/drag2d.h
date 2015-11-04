@@ -82,7 +82,6 @@
 #include "view/ShapesContainer.h"
 #include "view/SpritesContainer.h"
 #include "view/GroupTreePanel.h"
-#include "view/ViewPanelMgr.h"
 #include "view/SpriteDialog.h"
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
@@ -184,4 +183,10 @@
 #include "render/Snapshoot.h"
 #include "render/render_utility.h"
 
+#include "message/subject_id.h"
 #include "message/SelectSpriteSJ.h"
+#include "message/ReorderSpriteSJ.h"
+#include "message/ReorderSpriteMostSJ.h"
+#include "message/InsertSpriteSJ.h"
+#include "message/RemoveShapeSJ.h"
+#include "message/ClearSJ.h"

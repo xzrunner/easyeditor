@@ -43,8 +43,6 @@ private:
 	StagePanel* m_stage;
 	ToolbarPanel* m_toolbar;
 
-	d2d::ViewPanelMgr m_view_panel_mgr;
-
 }; // Task
 
 }

@@ -10,15 +10,13 @@ namespace d2d
 class EditPanelImpl;
 class MultiSpritesImpl;
 class SpriteSelection;
-class ViewPanelMgr;
 class ISprite;
 
 class RightPopupMenu
 {
 public:
 	RightPopupMenu(wxWindow* parent, EditPanelImpl* stage,
-		MultiSpritesImpl* sprite_impl, SpriteSelection* selection,
-		ViewPanelMgr* view_panel_mgr);
+		MultiSpritesImpl* sprite_impl, SpriteSelection* selection);
 
 	void SetRightPopupMenu(wxMenu& menu, int x, int y);
 	void OnRightPopupMenu(int id);
@@ -63,8 +61,6 @@ private:
 	MultiSpritesImpl* m_sprites_impl;
 
 	SpriteSelection* m_selection;
-
-	ViewPanelMgr* m_view_panel_mgr;
 
 	std::vector<ISprite*> m_edited_sprs, m_selected_sprs;
 

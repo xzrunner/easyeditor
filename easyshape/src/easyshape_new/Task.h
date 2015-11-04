@@ -32,8 +32,6 @@ private:
 
 	libshape::StagePanel* m_stage;
 
-	d2d::ViewPanelMgr m_view_panel_mgr;
-
 }; // Task
 
 }

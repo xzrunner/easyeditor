@@ -8,10 +8,10 @@
 #include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 #include "view/MultiSpritesImpl.h"
-#include "view/ViewPanelMgr.h"
 #include "dataset/ISymbol.h"
 #include "render/DynamicTexAndFont.h"
 #include "message/SelectSpriteSJ.h"
+#include "message/ReorderSpriteMostSJ.h"
 
 namespace d2d
 {
@@ -19,13 +19,11 @@ namespace d2d
 RightPopupMenu::RightPopupMenu(wxWindow* parent,
 							   EditPanelImpl* stage,
 							   MultiSpritesImpl* sprite_impl,
-							   SpriteSelection* selection,
-							   ViewPanelMgr* view_panel_mgr)
+							   SpriteSelection* selection)
 	: m_parent(parent)
 	, m_stage(stage)
 	, m_sprites_impl(sprite_impl)
 	, m_selection(selection)
-	, m_view_panel_mgr(view_panel_mgr)
 {
 }
 
@@ -125,12 +123,10 @@ void RightPopupMenu::HandleSelectMenu(int id)
 	m_selection->Clear();
 	m_selection->Add(selected);
 
-	if (m_view_panel_mgr) {
-		SelectSpriteSJ::Params p;
-		p.spr = selected;
-		p.clear = true;
-		SelectSpriteSJ::Instance()->OnSelected(p);
-	}
+	SelectSpriteSJ::Params p;
+	p.spr = selected;
+	p.clear = true;
+	SelectSpriteSJ::Instance()->Select(p);
 }
 
 void RightPopupMenu::HandleDebugTagMenu(int id)
@@ -159,17 +155,21 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 
 void RightPopupMenu::UpLayerMost()
 {
+	ReorderSpriteMostSJ::Params p;
+	p.up = true;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		do {
-		} while (m_sprites_impl->ReorderSprite(m_edited_sprs[i], true));
+		p.spr = m_edited_sprs[i];
+		ReorderSpriteMostSJ::Reorder(p);
 	}
 }
 
 void RightPopupMenu::DownLayerMost()
 {
+	ReorderSpriteMostSJ::Params p;
+	p.up = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		do {
-		} while (m_sprites_impl->ReorderSprite(m_edited_sprs[i], false));
+		p.spr = m_edited_sprs[i];
+		ReorderSpriteMostSJ::Reorder(p);
 	}
 }
 

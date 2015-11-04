@@ -5,10 +5,8 @@
 namespace sg
 {
 
-ArrangeSpriteOP::ArrangeSpriteOP(d2d::PropertySettingPanel* property, 
-								 d2d::ViewPanelMgr* view_panel_mgr,
-								 StagePanel* stage)
-	: d2d::ArrangeSpriteFixOP(stage, stage->GetStageImpl(), stage, property, view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(false, false, false, false))
+ArrangeSpriteOP::ArrangeSpriteOP(d2d::PropertySettingPanel* property, StagePanel* stage)
+	: d2d::ArrangeSpriteFixOP(stage, stage->GetStageImpl(), stage, property, NULL, d2d::ArrangeSpriteConfig(false, false, false, false))
 {
 }
 

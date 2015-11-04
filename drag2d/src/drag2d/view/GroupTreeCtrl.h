@@ -16,7 +16,6 @@ class GroupTreePanel;
 class ISprite;
 class Group;
 class MultiSpritesImpl;
-class ViewPanelMgr;
 class KeysState;
 class SpriteSelection;
 
@@ -24,7 +23,7 @@ class GroupTreeCtrl : public wxTreeCtrl, public Observer
 {
 public:
 	GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
-		ViewPanelMgr* view_panel_mgr, const KeysState& key_state);
+		const KeysState& key_state);
 	virtual ~GroupTreeCtrl();
 
 	//
@@ -43,10 +42,6 @@ public:
 
 	wxTreeItemId AddSprite(wxTreeItemId parent, d2d::ISprite* spr);
 	wxTreeItemId AddSprite(d2d::ISprite* spr);
-
-	void Clear();
-
-	bool Remove(ISprite* sprite);
 
 	wxTreeItemId GetRootID() const { return m_root; }
 
@@ -86,9 +81,12 @@ private:
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
-	void OnSpriteNameChanged(ISprite* spr);
-	void OnSpriteSelected(ISprite* spr, bool clear);
-	void OnMultiSpriteSelected(SpriteSelection* selection);
+	void ChangeName(ISprite* spr);
+	void Select(ISprite* spr, bool clear);
+	void SelectSet(SpriteSelection* selection);
+	void Reorder(ISprite* spr, bool up);
+	bool Remove(ISprite* sprite);
+	void Clear();
 
 private:
 	enum
@@ -102,11 +100,11 @@ private:
 	};
 
 private:
+	std::vector<Subject*> m_subjects;
+
 	GroupTreePanel* m_parent_panel;
 
 	MultiSpritesImpl* m_sprite_impl;
-
-	ViewPanelMgr* m_view_panel_mgr;
 
 	wxTreeItemId m_root;
 	wxTreeItemId m_on_menu_id;

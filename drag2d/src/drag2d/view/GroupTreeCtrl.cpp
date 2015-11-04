@@ -2,16 +2,20 @@
 #include "GroupTreePanel.h"
 #include "MultiSpritesImpl.h"
 #include "GroupTreeImpl.h"
-#include "ViewPanelMgr.h"
 
 #include "dataset/Group.h"
 #include "dataset/ISprite.h"
 #include "view/SpriteSelection.h"
 #include "view/KeysState.h"
+
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
 #include "message/SelectSpriteSJ.h"
 #include "message/SelectSpriteSetSJ.h"
+#include "message/ReorderSpriteSJ.h"
+#include "message/InsertSpriteSJ.h"
+#include "message/RemoveSpriteSJ.h"
+#include "message/ClearSJ.h"
 
 #include <sstream>
 #include <queue>
@@ -32,12 +36,11 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
-							 ViewPanelMgr* view_panel_mgr, const KeysState& key_state)
+							 const KeysState& key_state)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
 	wxTR_EDIT_LABELS/* | wxTR_MULTIPLE*/ | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
 	, m_parent_panel(parent)
 	, m_sprite_impl(sprite_impl)
-	, m_view_panel_mgr(view_panel_mgr)
 	, m_add_del_open(true)
 	, m_key_state(key_state)
 	, m_expand_enable(true)
@@ -47,29 +50,62 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 
 	InitRoot();
 
-	SpriteNameChangeSJ::Instance()->Register(this);
-	SelectSpriteSJ::Instance()->Register(this);
-	SelectSpriteSetSJ::Instance()->Register(this);
+	m_subjects.push_back(SpriteNameChangeSJ::Instance());
+	m_subjects.push_back(SelectSpriteSJ::Instance());
+	m_subjects.push_back(SelectSpriteSetSJ::Instance());
+	m_subjects.push_back(ReorderSpriteSJ::Instance());
+	m_subjects.push_back(InsertSpriteSJ::Instance());
+	m_subjects.push_back(RemoveSpriteSJ::Instance());
+	m_subjects.push_back(ClearSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 GroupTreeCtrl::~GroupTreeCtrl()
 {
-	SpriteNameChangeSJ::Instance()->UnRegister(this);
-	SelectSpriteSJ::Instance()->UnRegister(this);
-	SelectSpriteSetSJ::Instance()->UnRegister(this);
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
 void GroupTreeCtrl::Notify(int sj_id, void* ud)
 {
-	if (sj_id == SPRITE_NAME_CHANGE) {
-		ISprite* spr = (ISprite*)ud;
-		OnSpriteNameChanged(spr);
-	} else if (sj_id == SPRITE_SELECTED) {
-		SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-		OnSpriteSelected(p->spr, p->clear);	
-	} else if (sj_id == MULTI_SPRITE_SELECTED) {
-		//SpriteSelection* selection = (SpriteSelection*)ud;
-		//OnMultiSpriteSelected(selection);
+	switch (sj_id) 
+	{
+	case SPRITE_NAME_CHANGE:
+		ChangeName((ISprite*)ud);
+		break;
+	case SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			Select(p->spr, p->clear);	
+		}
+		break;
+	case SELECT_SPRITE_SET:
+		{
+			//SpriteSelection* selection = (SpriteSelection*)ud;
+			//OnMultiSpriteSelected(selection);
+		}
+		break;
+	case REORDER_SPRITE:
+		{
+			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
+			Reorder(p->spr, p->up);
+		}
+		break;
+	case INSERT_SPRITE:
+		{
+			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			AddSprite(p->spr);
+		}
+		break;
+	case REMOVE_SPRITE:
+		Remove((ISprite*)ud);
+		break;
+	case CLEAR:
+		Clear();
+		break;
 	}
 }
 
@@ -157,7 +193,7 @@ void GroupTreeCtrl::DelNode()
 	std::vector<ISprite*> sprites;
 	Traverse(id, GroupTreeImpl::GetSpritesVisitor(this, sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_view_panel_mgr->RemoveSprite(sprites[i], m_parent_panel);
+		RemoveSpriteSJ::Instance()->Remove(sprites[i], this);
 	}
 
 	Delete(id);
@@ -199,32 +235,6 @@ wxTreeItemId GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
 		ret = AddSprite(m_root, spr);
 	}
 	return ret;
-}
-
-void GroupTreeCtrl::Clear()
-{
-	if (IsEmpty()) {
-		return;
-	}
-
-	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_root);
-	assert(data && data->IsGroup());
-	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
-	group->Clear();
-	this->ClearFocusedItem();
-
-	CollapseAndReset(m_root);
-}
-
-bool GroupTreeCtrl::Remove(ISprite* sprite)
-{
-	if (m_add_del_open) {
-		GroupTreeImpl::RemoveVisitor visitor(this, sprite);
-		Traverse(visitor);
-		return visitor.IsFinish();
-	} else {
-		return false;
-	}
 }
 
 bool GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
@@ -328,7 +338,7 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	SelectSpriteSJ::Params p;
 	p.spr = spr;
 	p.clear = !add;
-	SelectSpriteSJ::Instance()->OnSelected(p, this);
+	SelectSpriteSJ::Instance()->Select(p, this);
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
 	selection->Clear();
@@ -420,7 +430,7 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 		SelectSpriteSJ::Params p;
 		p.spr = spr;
 		p.clear = !add;
-		SelectSpriteSJ::Instance()->OnSelected(p, this);
+		SelectSpriteSJ::Instance()->Select(p, this);
 	}
 }
 
@@ -580,7 +590,7 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	PopupMenu(&menu, pt);
 }
 
-void GroupTreeCtrl::OnSpriteNameChanged(ISprite* spr)
+void GroupTreeCtrl::ChangeName(ISprite* spr)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
 	Traverse(visitor);
@@ -589,7 +599,7 @@ void GroupTreeCtrl::OnSpriteNameChanged(ISprite* spr)
 	SetItemText(id, spr->name);
 }
 
-void GroupTreeCtrl::OnSpriteSelected(d2d::ISprite* spr, bool clear)
+void GroupTreeCtrl::Select(d2d::ISprite* spr, bool clear)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
 	Traverse(visitor);
@@ -600,13 +610,49 @@ void GroupTreeCtrl::OnSpriteSelected(d2d::ISprite* spr, bool clear)
 	}
 }
 
-void GroupTreeCtrl::OnMultiSpriteSelected(SpriteSelection* selection)
+void GroupTreeCtrl::SelectSet(SpriteSelection* selection)
 {
 	std::vector<ISprite*> sprites;
 	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		OnSpriteSelected(sprites[i], false);
+		Select(sprites[i], false);
 	}
+}
+
+void GroupTreeCtrl::Reorder(ISprite* spr, bool up)
+{
+	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
+	Traverse(visitor);
+	wxTreeItemId id = visitor.GetItemID();
+	if (id.IsOk()) {
+		ReorderItem(id, up);
+	}
+}
+
+bool GroupTreeCtrl::Remove(ISprite* sprite)
+{
+	if (m_add_del_open) {
+		GroupTreeImpl::RemoveVisitor visitor(this, sprite);
+		Traverse(visitor);
+		return visitor.IsFinish();
+	} else {
+		return false;
+	}
+}
+
+void GroupTreeCtrl::Clear()
+{
+	if (IsEmpty()) {
+		return;
+	}
+
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_root);
+	assert(data && data->IsGroup());
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
+	group->Clear();
+	this->ClearFocusedItem();
+
+	CollapseAndReset(m_root);
 }
 
 }

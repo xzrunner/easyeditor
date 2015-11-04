@@ -17,9 +17,9 @@ public:
 	virtual ~ShapesPanelImpl();
 
 	//
-	//	interface IShapeViewPanel
+	//	interface Observer
 	//
-	virtual void RemoveShape(IShape* shape);
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// MultiShapesImpl interface

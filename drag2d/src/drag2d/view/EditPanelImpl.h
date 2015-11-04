@@ -6,6 +6,7 @@
 
 #include "common/Object.h"
 #include "common/Vector.h"
+#include "message/Observer.h"
 
 #include <wx/wx.h>
 
@@ -18,15 +19,19 @@ class AbstractEditOP;
 class IStageCanvas;
 class Camera;
 
-class EditPanelImpl : public Object
+class EditPanelImpl : public Object, public Observer
 {
 public:
 	EditPanelImpl(wxTopLevelWindow* frame, EditPanel* stage);
 	~EditPanelImpl();
 
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
+
 	void SetEditPanelNull();
 	
-	void Clear();
 	bool Update(int version);
 
 	Vector TransPosScrToProj(int x, int y) const;
@@ -84,6 +89,9 @@ public:
 	void SetDropTarget(wxDropTarget* target);
 
 	EditPanel* GetEditPanel() { return m_stage; }
+
+private:
+	void Clear();
 
 protected:
 	AbstractEditOP* m_edit_op;

@@ -7,7 +7,6 @@ namespace libshape
 
 SelectNodesOP::SelectNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 							 d2d::MultiShapesImpl* shapesImpl,
-							 d2d::ViewPanelMgr* view_panel_mgr,
 							 d2d::AbstractEditCMPT* callback /*= NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_shapeImpl(shapesImpl)

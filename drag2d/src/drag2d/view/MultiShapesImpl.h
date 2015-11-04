@@ -1,10 +1,10 @@
 #ifndef _DRAG2D_MULTI_SHAPES_IMPL_H_
 #define _DRAG2D_MULTI_SHAPES_IMPL_H_
 
-#include "IShapeViewPanel.h"
 #include "DataTraverseType.h"
 
 #include "common/visitors.h"
+#include "message/Observer.h"
 
 #include <wx/wx.h>
 
@@ -15,19 +15,18 @@ class IStageCanvas;
 class ShapeSelection;
 class Rect;
 class EditPanelImpl;
+class IShape;
 
-class MultiShapesImpl : public IShapeViewPanel
+class MultiShapesImpl : public Observer
 {
 public:
 	MultiShapesImpl(EditPanelImpl* stage);
 	virtual ~MultiShapesImpl();
 
 	//
-	//	IShapeViewPanel interface
+	//	interface Observer
 	//
-	virtual void SelectShape(IShape* shape);
-	virtual void SelectMultiShapes(ShapeSelection* selection);
-	virtual void RemoveShape(IShape* shape);
+	virtual void Notify(int sj_id, void* ud);
 
 	virtual bool InsertShape(IShape* shape) = 0;
 	virtual bool ClearAllShapes() = 0;
@@ -68,6 +67,9 @@ private:
 
 protected:
 	ShapeSelection* m_shape_selection;
+
+private:
+	std::vector<Subject*> m_subjects;
 
 }; // MultiShapesImpl
 

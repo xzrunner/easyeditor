@@ -27,8 +27,6 @@ public:
 
 	d2d::ILibraryPage* m_imagePage;
 
-	d2d::ViewPanelMgr m_view_panel_mgr;
-
 }; // Widgets
 
 }

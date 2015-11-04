@@ -11,7 +11,7 @@ class DrawPolygon2CMPT : public d2d::AbstractEditCMPT
 public:
 	DrawPolygon2CMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
 		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* property, d2d::ViewPanelMgr* view_panel_mgr);
+		d2d::PropertySettingPanel* property);
 
 protected:
 	virtual wxSizer* initLayout();

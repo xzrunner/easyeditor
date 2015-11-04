@@ -19,6 +19,7 @@ public:
 	virtual bool Insert(Object* obj, int idx) = 0;
 	virtual bool Clear() = 0;
 	virtual bool ResetOrder(const Object* obj, bool up) = 0;
+	virtual bool ResetOrderMost(const Object* obj, bool up) = 0;
 	virtual ~IDataContainer() {}
 };
 

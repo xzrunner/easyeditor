@@ -14,11 +14,9 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-		d2d::PropertySettingPanel* property, LibraryPanel* library,
-		d2d::ViewPanelMgr* view_panel_mgr);
+		d2d::PropertySettingPanel* property, LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* symbol, 
-		d2d::PropertySettingPanel* property, LibraryPanel* library,
-		d2d::ViewPanelMgr* view_panel_mgr);
+		d2d::PropertySettingPanel* property, LibraryPanel* library);
 
 	//
 	// d2d::EditPanel interface
@@ -26,21 +24,12 @@ public:
 	virtual void Clear();
 	virtual bool Update(int version);
 
-	//
-	// d2d::MultiSpritesImpl interface
-	//
-	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
-
 	Symbol* getSymbol() { return m_symbol; }
 
 private:
 	Symbol* m_symbol;
 
 	LibraryPanel* m_library;
-
-	d2d::ViewPanelMgr* m_view_panel_mgr;
 
 }; // StagePanel
 

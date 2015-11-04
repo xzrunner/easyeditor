@@ -94,7 +94,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_library = new ecomplex::LibraryPanel(split);
 
 	m_property = new ecomplex::PropertySettingPanel(split);
-	m_view_panel_mgr.AddSpritePanel(m_property);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_library, m_property);
@@ -104,8 +103,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library, &m_view_panel_mgr);
-	m_view_panel_mgr.AddSpritePanel(m_stage);
+	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 	m_property->SelectShape(NULL);
 
@@ -119,12 +117,9 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage, &m_view_panel_mgr);
-	m_view_panel_mgr.AddSpritePanel(m_viewlist);
-	m_view_panel_mgr.SetViewlistPanel(m_viewlist);
+	m_viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage);
 
-	m_grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr, m_stage->GetKeyState());
-	m_view_panel_mgr.AddSpritePanel(m_grouptree);
+	m_grouptree = new d2d::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
 
 	split->SetSashGravity(0.5f);
 	split->SplitHorizontally(m_viewlist, m_grouptree);

@@ -9,17 +9,14 @@ namespace d2d
 class MultiShapesImpl;
 class MultiSpritesImpl;
 class LayersMgrWidget;
-class ViewPanelMgr;
 
 class LayersMgrCMPT : public AbstractEditCMPT
 {
 public:
-	LayersMgrCMPT(wxWindow* parent, const wxString& name,
-		wxWindow* stage_wnd, EditPanelImpl* stage, 
-		MultiShapesImpl* shapesImpl, ViewPanelMgr* view_panel_mgr);
-	LayersMgrCMPT(wxWindow* parent, const wxString& name,
-		wxWindow* stage_wnd, EditPanelImpl* stage, 
-		MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr);
+	LayersMgrCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
+		EditPanelImpl* stage, MultiShapesImpl* shapesImpl);
+	LayersMgrCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
+		EditPanelImpl* stage, MultiSpritesImpl* spritesImpl);
 
 	LayersMgrWidget* getLayersMgr() { return m_layersMgr; }
 

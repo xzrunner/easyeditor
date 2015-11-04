@@ -18,8 +18,7 @@ class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public d
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::PropertySettingPanel* property,
-		d2d::LibraryPanel* library,
-		d2d::ViewPanelMgr* view_panel_mgr);
+		d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
@@ -76,8 +75,6 @@ private:
 	void ChangeEditOP();
 
 private:
-	d2d::ViewPanelMgr* m_view_panel_mgr;
-
 	d2d::LibraryPanel* m_library;
 
 	d2d::AbstractEditOP* m_arrange_op;

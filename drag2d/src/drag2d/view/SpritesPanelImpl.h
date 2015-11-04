@@ -19,12 +19,13 @@ public:
 	virtual ~SpritesPanelImpl();
 
 	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
+
+	//
 	// MultiSpritesImpl interface
 	//
-	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(ISprite* sprite);
-	virtual bool ClearAllSprite();
 	virtual void TraverseSprites(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
@@ -32,6 +33,8 @@ private:
 	EditPanelImpl* m_stage;
 
 	IDataContainer* m_container;
+
+	std::vector<Subject*> m_subjects;
 
 }; // SpritesPanelImpl
 

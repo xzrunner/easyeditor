@@ -6,6 +6,9 @@
 #include "view/Frame.h"
 #include "view/IStageCanvas.h"
 
+#include "message/subject_id.h"
+#include "message/ClearSJ.h"
+
 #include <fstream>
 
 namespace d2d
@@ -19,6 +22,8 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 	m_edit_op = NULL;
 	m_canvas = NULL;
 	m_camera = new Camera;
+
+	ClearSJ::Instance()->Register(this);
 }
 
 EditPanelImpl::~EditPanelImpl()
@@ -33,6 +38,8 @@ EditPanelImpl::~EditPanelImpl()
 		m_canvas->Release();
 		m_canvas = NULL;
 	}
+
+	ClearSJ::Instance()->UnRegister(this);
 }
 
 void EditPanelImpl::SetEditPanelNull()
@@ -40,13 +47,11 @@ void EditPanelImpl::SetEditPanelNull()
 	m_stage = NULL;
 }
 
-void EditPanelImpl::Clear()
+void EditPanelImpl::Notify(int sj_id, void* ud)
 {
-	if (m_edit_op) {
-		m_edit_op->Clear();
+	if (sj_id == CLEAR) {
+		Clear();
 	}
-
-	m_history_list.clear();
 }
 
 bool EditPanelImpl::Update(int version)
@@ -382,6 +387,15 @@ void EditPanelImpl::SetDropTarget(wxDropTarget* target)
 	if (m_stage) {
 		m_stage->SetDropTarget(target);
 	}
+}
+
+void EditPanelImpl::Clear()
+{
+	if (m_edit_op) {
+		m_edit_op->Clear();
+	}
+
+	m_history_list.clear();
 }
 
 }
