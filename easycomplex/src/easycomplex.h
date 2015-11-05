@@ -14,6 +14,7 @@
 #include "libcomplex/PropertySettingPanel.h"
 #include "libcomplex/LibraryPanel.h"
 #include "libcomplex/LibraryPage.h"
+#include "libcomplex/ViewlistListImpl.h"
 #include "libcomplex/PreviewDialog.h"
 #include "libcomplex/SphereRotateState.h"
 

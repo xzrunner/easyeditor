@@ -4,6 +4,7 @@
 #include "FileStorer.h"
 #include "LibraryPanel.h"
 #include "Symbol.h"
+#include "ViewlistListImpl.h"
 
 #include <wx/splitter.h>
 
@@ -64,7 +65,8 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 {
-	m_viewlist = new d2d::ViewlistPanel(parent, m_stage->GetStageImpl(), m_stage);
+	m_viewlist = new d2d::ViewlistPanel(parent);
+	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 	return m_viewlist;
 }
 

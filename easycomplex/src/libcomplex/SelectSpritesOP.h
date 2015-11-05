@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "OpenSymbolDialog.h"
+
 namespace ecomplex
 {
 
@@ -14,6 +16,9 @@ public:
 
 //		virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDClick(int x, int y);
+
+private:
+	OpenSymbolDialog m_open_symbol;
 
 }; // SelectSpritesOP
 

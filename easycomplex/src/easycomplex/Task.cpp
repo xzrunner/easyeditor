@@ -105,7 +105,8 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage);
+	m_viewlist = new d2d::ViewlistPanel(split);
+	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 
 	m_grouptree = new d2d::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
 

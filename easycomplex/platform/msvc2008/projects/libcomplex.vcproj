@@ -384,6 +384,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="viewlist"
+				>
+				<File
+					RelativePath="..\..\..\src\libcomplex\ViewlistListImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\ViewlistListImpl.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="test"
@@ -466,6 +478,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcomplex\PreviewStage.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="utility"
+			>
+			<File
+				RelativePath="..\..\..\src\libcomplex\OpenSymbolDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\OpenSymbolDialog.h"
 				>
 			</File>
 		</Filter>
