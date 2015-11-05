@@ -127,7 +127,7 @@ void LibraryPanel::LoadSymbolFromLayer()
 
 void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* property) 
 {
-	d2d::AbstractEditOP* paste_op = new d2d::PasteSymbolOP(stage, stage->GetStageImpl(), stage, this);
+	d2d::AbstractEditOP* paste_op = new d2d::PasteSymbolOP(stage, stage->GetStageImpl(), this);
 
 	d2d::OneFloatValue* capture_val = new d2d::OneFloatValueStatic(10);
 	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
@@ -229,7 +229,7 @@ void LibraryPanel::Refresh()
 	m_grouptree->EnableExpand(false);
 	m_grouptree->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_grouptree->InsertSprite(sprites[i]);
+		m_grouptree->Insert(sprites[i]);
 	}
 	m_grouptree->EnableExpand(true);
 }

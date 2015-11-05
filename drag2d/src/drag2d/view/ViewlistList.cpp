@@ -12,6 +12,8 @@
 #include "message/ClearSpriteSJ.h"
 #include "message/QuerySelectedSpriteLayerSJ.h"
 
+#include <algorithm>
+
 namespace d2d
 {
 
@@ -125,8 +127,26 @@ d2d::ISprite* ViewlistList::QuerySprite(int idx)
 	return spr;
 }
 
+void ViewlistList::Clear()
+{
+	VerticalImageList::Clear();
+
+	if (m_selected_spr) {
+		m_selected_spr->Release();
+		m_selected_spr = NULL;
+	}
+
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
+	m_sprites.clear();
+}
+
 void ViewlistList::Insert(ISprite* sprite, int idx)
 {
+	if (!sprite) {
+		return;
+	}
+	sprite->Retain();
+
 	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
 	if (idx < 0 || idx >= m_sprites.size()) {
 		VerticalImageList::Insert(item, 0);
@@ -252,18 +272,6 @@ void ViewlistList::RemoveSelected()
 	RemoveSpriteSJ::Instance()->Remove(m_sprites[idx], this);
 
 	m_sprites.erase(m_sprites.begin() + idx);
-}
-
-void ViewlistList::Clear()
-{
-	VerticalImageList::Clear();
-
-	if (m_selected_spr) {
-		m_selected_spr->Release();
-		m_selected_spr = NULL;
-	}
-
-	m_sprites.clear();
 }
 
 } // d2d

@@ -26,6 +26,7 @@ public:
 
 	void SetImpl(ViewlistListImpl* impl);
 
+	void Clear();
 	void Insert(ISprite* sprite, int idx = -1);
 
 	void OnSelected(int idx);
@@ -47,7 +48,6 @@ private:
 	void Reorder(const ISprite* sprite, bool up);
 	void Remove(ISprite* sprite);
 	void RemoveSelected();
-	void Clear();
 
 private:
 	ViewlistListImpl* m_impl;

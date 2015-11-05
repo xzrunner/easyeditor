@@ -26,6 +26,9 @@ public:
 
 	void EnableExpand(bool enable);
 
+	void Clear();
+	void Insert(ISprite* sprite);
+
 private:
 	void InitLayout();
 	

@@ -11,6 +11,11 @@ ViewlistPanel::ViewlistPanel(wxWindow* parent)
 	InitLayout();
 }
 
+void ViewlistPanel::Clear()
+{
+	m_list->Clear();
+}
+
 void ViewlistPanel::Insert(ISprite* sprite, int idx)
 {
 	m_list->Insert(sprite, idx);

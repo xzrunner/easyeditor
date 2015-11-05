@@ -31,6 +31,8 @@ public:
 	//
 	virtual void Notify(int sj_id, void* ud);
 
+	void Clear();
+
 	void Traverse(IGroupTreeVisitor& visitor) const;
 	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
 
@@ -86,7 +88,6 @@ private:
 	void SelectSet(SpriteSelection* selection);
 	void Reorder(ISprite* spr, bool up);
 	bool Remove(ISprite* sprite);
-	void Clear();
 
 private:
 	enum

@@ -71,6 +71,16 @@ void GroupTreePanel::EnableExpand(bool enable)
 	m_grouptree->EnableExpand(enable);
 }
 
+void GroupTreePanel::Clear()
+{
+	m_grouptree->Clear();
+}
+
+void GroupTreePanel::Insert(ISprite* sprite)
+{
+	m_grouptree->AddSprite(sprite);
+}
+
 void GroupTreePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);

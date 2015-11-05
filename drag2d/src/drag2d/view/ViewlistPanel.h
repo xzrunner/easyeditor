@@ -15,6 +15,7 @@ class ViewlistPanel : public wxPanel
 public:
 	ViewlistPanel(wxWindow* parent);
 
+	void Clear();
 	void Insert(ISprite* sprite, int idx = -1);
 
 	void SetListImpl(ViewlistListImpl* impl);

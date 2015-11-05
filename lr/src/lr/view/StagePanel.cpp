@@ -144,7 +144,7 @@ void StagePanel::Notify(int sj_id, void* ud)
 	case d2d::MSG_INSERT_SPRITE:
 		{
 			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			InsertSprite(p->spr);
+			InsertSprite(p->spr, p->idx);
 		}
 		break;
 	case d2d::MSG_REMOVE_SPRITE:
@@ -331,36 +331,25 @@ void StagePanel::ReorderSpriteMost(d2d::ISprite* spr, bool up)
 	}
 }
 
-void StagePanel::InsertSprite(d2d::ISprite* spr)
+void StagePanel::InsertSprite(d2d::ISprite* spr, int idx)
 {
-// 	idx = m_view_panel_mgr->GetSelection() + 1;
-// 	d2d::MultiSpritesImpl::InsertSprite(sprite, idx);
-// 
-// 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
-// 	bool ret = layer->InsertSprite(sprite, idx);
-// 
-// 	if (m_view_panel_mgr) {
-// 		m_view_panel_mgr->InsertSprite(sprite, this, idx);
-// 	}
-// 
-// 	if (m_sindex) {
-// 		m_sindex->Insert(sprite);
-// 	}
-// 	if (m_pathfinding) {
-// 		m_pathfinding->DisableRegion(sprite, false);
-// 	}
-// 
-// 	std::string filepath = sprite->GetSymbol().GetFilepath();
-// 	if (CharacterFileName::IsValidFilepath(filepath)) {
-// 		CharacterFileName name(filepath);
-// 		m_chara_dirs.BuildSymbolDirections(name);
-// 	}
-// 
-// 	if (ret) {
-// 		SetCanvasDirty();
-// 	}
-// 
-// 	return ret;
+	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
+	if (layer->InsertSprite(spr, idx)) {
+		SetCanvasDirty();
+	}
+
+	if (m_sindex) {
+		m_sindex->Insert(spr);
+	}
+	if (m_pathfinding) {
+		m_pathfinding->DisableRegion(spr, false);
+	}
+
+	std::string filepath = spr->GetSymbol().GetFilepath();
+	if (CharacterFileName::IsValidFilepath(filepath)) {
+		CharacterFileName name(filepath);
+		m_chara_dirs.BuildSymbolDirections(name);
+	}
 }
 
 void StagePanel::RemoveSprite(d2d::ISprite* spr)

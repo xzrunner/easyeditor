@@ -72,7 +72,7 @@ private:
 
 	void ReorderSprite(d2d::ISprite* spr, bool up);
 	void ReorderSpriteMost(d2d::ISprite* spr, bool up);
-	void InsertSprite(d2d::ISprite* spr);
+	void InsertSprite(d2d::ISprite* spr, int idx);
 	void RemoveSprite(d2d::ISprite* spr);
 	void ClearSprite();
 

@@ -109,6 +109,21 @@ void GroupTreeCtrl::Notify(int sj_id, void* ud)
 	}
 }
 
+void GroupTreeCtrl::Clear()
+{
+	if (IsEmpty()) {
+		return;
+	}
+
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_root);
+	assert(data && data->IsGroup());
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
+	group->Clear();
+	this->ClearFocusedItem();
+
+	CollapseAndReset(m_root);
+}
+
 void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
 {
 	Traverse(m_root, visitor);
@@ -632,21 +647,6 @@ bool GroupTreeCtrl::Remove(ISprite* sprite)
 	} else {
 		return false;
 	}
-}
-
-void GroupTreeCtrl::Clear()
-{
-	if (IsEmpty()) {
-		return;
-	}
-
-	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_root);
-	assert(data && data->IsGroup());
-	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
-	group->Clear();
-	this->ClearFocusedItem();
-
-	CollapseAndReset(m_root);
 }
 
 }
