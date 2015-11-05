@@ -41,8 +41,7 @@ private:
 
 		void loadFromSelection(const SpriteSelection& selection);
 
-		void insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
-			bool isHorMirror, bool isVerMirror);
+		void insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror);
 		void draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const;
 
 		const Vector& getCenter() const { return m_center; }
@@ -61,8 +60,6 @@ private:
 	}; // SpriteBatch
 
 private:
-	MultiSpritesImpl* m_spritesImpl;
-
 	PasteSpriteCMPT* m_cmpt;
 
 	SpriteSelection* m_selection;

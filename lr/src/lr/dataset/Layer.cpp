@@ -55,6 +55,11 @@ bool Layer::ResetOrderSprite(const Object* obj, bool up)
 	return m_sprites.ResetOrder(static_cast<const d2d::ISprite*>(obj), up);
 }
 
+bool Layer::ResetOrderSpriteMost(const Object* obj, bool up)
+{
+	return m_sprites.ResetOrderMost(static_cast<const d2d::ISprite*>(obj), up);
+}
+
 void Layer::TraverseShape(d2d::IVisitor& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);

@@ -2909,14 +2909,6 @@
 				Name="subjects"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\message\ClearSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\message\ClearSJ.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.cpp"
 					>
 				</File>
@@ -2931,6 +2923,14 @@
 				<Filter
 					Name="sprite_panel"
 					>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\ClearSpriteSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\ClearSpriteSJ.h"
+						>
+					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\message\InsertSpriteSJ.cpp"
 						>
@@ -2983,6 +2983,22 @@
 				<Filter
 					Name="shape_panel"
 					>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\ClearShapeSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\ClearShapeSJ.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\InsertShapeSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\InsertShapeSJ.h"
+						>
+					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\message\RemoveShapeSJ.cpp"
 						>

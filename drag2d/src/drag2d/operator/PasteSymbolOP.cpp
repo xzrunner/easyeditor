@@ -3,18 +3,17 @@
 #include "dataset/SpriteFactory.h"
 #include "dataset/ISprite.h"
 #include "view/LibraryPanel.h"
-#include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
-PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* panelImpl, 
+PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 							 LibraryPanel* libraryPanel, float* pScale/* = NULL*/)
 	: ZoomViewOP(wnd, stage, true)
-	, m_panelImpl(panelImpl)
 	, m_libraryPanel(libraryPanel)
 	, m_pScale(pScale)
 {
@@ -35,7 +34,7 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 		sprite->Translate(m_pos);
 		if (m_pScale)
 			sprite->SetScale(*m_pScale, *m_pScale);
-		m_panelImpl->InsertSprite(sprite);
+		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();
 	}
 

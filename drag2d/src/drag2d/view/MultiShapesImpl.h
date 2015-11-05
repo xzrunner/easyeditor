@@ -28,9 +28,6 @@ public:
 	//
 	virtual void Notify(int sj_id, void* ud);
 
-	virtual bool InsertShape(IShape* shape) = 0;
-	virtual bool ClearAllShapes() = 0;
-
 	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const = 0;
 
@@ -68,7 +65,6 @@ private:
 protected:
 	ShapeSelection* m_shape_selection;
 
-private:
 	std::vector<Subject*> m_subjects;
 
 }; // MultiShapesImpl

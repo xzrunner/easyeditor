@@ -17,32 +17,28 @@ class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public d
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::PropertySettingPanel* property,
-		d2d::LibraryPanel* library);
+		d2d::PropertySettingPanel* property, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
 	// d2d::EditPanel interface
 	//
-	virtual void Clear();
 	virtual bool Update(int version);
+
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
-	virtual bool ClearAllSprite();
 	virtual void TraverseSprites(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual void RemoveShape(d2d::IShape* shape);
-	virtual bool InsertShape(d2d::IShape* shape);
-	virtual bool ClearAllShapes();
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
@@ -73,6 +69,16 @@ protected:
 
 private:
 	void ChangeEditOP();
+
+	void ReorderSprite(d2d::ISprite* spr, bool up);
+	void ReorderSpriteMost(d2d::ISprite* spr, bool up);
+	void InsertSprite(d2d::ISprite* spr);
+	void RemoveSprite(d2d::ISprite* spr);
+	void ClearSprite();
+
+	void RemoveShape(d2d::IShape* shape);
+	void InsertShape(d2d::IShape* shape);
+	void ClearShape();
 
 private:
 	d2d::LibraryPanel* m_library;

@@ -5,12 +5,13 @@
 #include "dataset/ISprite.h"
 #include "view/MultiSpritesImpl.h"
 
+#include "message/InsertSpriteSJ.h"
+#include "message/RemoveSpriteSJ.h"
+
 namespace d2d
 {
 
-DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<ISprite*>& sprites, 
-								 MultiSpritesImpl* sprites_impl)
-	: m_sprites_impl(sprites_impl)
+DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<ISprite*>& sprites)
 {
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 	{
@@ -29,14 +30,14 @@ DeleteSpriteAOP::~DeleteSpriteAOP()
 void DeleteSpriteAOP::undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites_impl->InsertSprite(m_sprites[i]);
+		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
 	}
 }
 
 void DeleteSpriteAOP::redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites_impl->RemoveSprite(m_sprites[i]);
+		RemoveSpriteSJ::Instance()->Remove(m_sprites[i]);
 	}
 }
 

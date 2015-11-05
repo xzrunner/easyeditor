@@ -8,13 +8,12 @@
 namespace d2d
 {
 
-class MultiSpritesImpl;
 class LibraryPanel;
 
 class PasteSymbolOP : public ZoomViewOP
 {
 public:
-	PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* panelImpl, 
+	PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 		LibraryPanel* libraryPanel, float* pScale = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -24,8 +23,6 @@ public:
 	virtual bool Clear();
 
 protected:
-	MultiSpritesImpl* m_panelImpl;
-
 	LibraryPanel* m_libraryPanel;
 
 	float* m_pScale;

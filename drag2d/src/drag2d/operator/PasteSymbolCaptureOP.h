@@ -9,14 +9,13 @@ namespace d2d
 {
 
 class PasteSymbolCaptureOP;
-class MultiSpritesImpl;
 class LibraryPanel;
 
 class PasteSymbolCaptureOP : public PasteSymbolOP
 {
 public:
-	PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-		LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
+	PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* libraryPanel, 
+		PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseMove(int x, int y);

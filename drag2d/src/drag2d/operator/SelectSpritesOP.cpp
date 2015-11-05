@@ -93,10 +93,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				m_selection->Add(selected);
 
 				bool add = m_stage->GetKeyState(WXK_CONTROL);
-				SelectSpriteSJ::Params p;
-				p.spr = selected;
-				p.clear = !add;
-				SelectSpriteSJ::Instance()->Select(p);
+				SelectSpriteSJ::Instance()->Select(selected, !add);
 			}
 		}
 		m_first_pos.setInvalid();
@@ -323,10 +320,7 @@ void SelectSpritesOP::CopyFromSelection()
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
 
-		InsertSpriteSJ::Params p;
-		p.spr = sprite;
-		p.idx = -1;
-		InsertSpriteSJ::Instance()->Insert(p);
+		InsertSpriteSJ::Instance()->Insert(spr);
 
 		last_spr = sprite;
 
@@ -338,10 +332,7 @@ void SelectSpritesOP::CopyFromSelection()
 	}
 
 	bool add = m_stage->GetKeyState(WXK_CONTROL);
-	SelectSpriteSJ::Params p;
-	p.spr = last_spr;
-	p.clear = !add;
-	SelectSpriteSJ::Instance()->Select(p);
+	SelectSpriteSJ::Instance()->Select(last_spr, !add);
 
 	m_stage->GetCanvas()->ResetViewport();
 

@@ -47,12 +47,28 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
-	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_chara_dirs, m_view_panel_mgr);
+	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_chara_dirs);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		m_view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
+		NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
 
 	SetEditOP(m_arrange_op);
 	SetCanvas(new StageCanvas(this));
+
+	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::ReorderSpriteSJ::Instance());
+	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::ReorderSpriteMostSJ::Instance());
+	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
+	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
+	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
+	for (int i = 0, n = d2d::MultiSpritesImpl::m_subjects.size(); i < n; ++i) {
+		d2d::MultiSpritesImpl::m_subjects[i]->Register((d2d::MultiSpritesImpl*)this);
+	}
+
+	d2d::MultiShapesImpl::m_subjects.push_back(d2d::RemoveShapeSJ::Instance());
+	d2d::MultiShapesImpl::m_subjects.push_back(d2d::InsertShapeSJ::Instance());
+	d2d::MultiShapesImpl::m_subjects.push_back(d2d::ClearShapeSJ::Instance());
+	for (int i = 0, n = d2d::MultiShapesImpl::m_subjects.size(); i < n; ++i) {
+		d2d::MultiShapesImpl::m_subjects[i]->Register((d2d::MultiShapesImpl*)this);
+	}
 }
 
 StagePanel::~StagePanel()
@@ -66,18 +82,25 @@ StagePanel::~StagePanel()
 	m_arrange_op->Release();
 
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
-}
 
-void StagePanel::Clear()
-{
-	d2d::EditPanel::Clear();
-	ClearAllSprite();
-	ClearAllShapes();
-
-	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		m_layers[i]->Release();
+	for (int i = 0, n = d2d::MultiSpritesImpl::m_subjects.size(); i < n; ++i) {
+		d2d::MultiSpritesImpl::m_subjects[i]->UnRegister((d2d::MultiSpritesImpl*)this);
+	}
+	for (int i = 0, n = d2d::MultiShapesImpl::m_subjects.size(); i < n; ++i) {
+		d2d::MultiShapesImpl::m_subjects[i]->UnRegister((d2d::MultiShapesImpl*)this);
 	}
 }
+
+// void StagePanel::Clear()
+// {
+// 	d2d::EditPanel::Clear();
+// 	ClearSprite();
+// 	ClearShape();
+// 
+// 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+// 		m_layers[i]->Release();
+// 	}
+// }
 
 bool StagePanel::Update(int version)
 {
@@ -100,98 +123,47 @@ bool StagePanel::Update(int version)
 	return ret;
 }
 
-bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	d2d::MultiSpritesImpl::ReorderSprite(sprite, up);
+	d2d::MultiSpritesImpl::Notify(sj_id, ud);
 
-	bool ret = false;
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	switch (sj_id)
 	{
-		Layer* layer = m_layers[i];
-		if (layer->ResetOrderSprite(sprite, up)) {
-			ret = true;
-			SetCanvasDirty();
-			break;
+	case d2d::MSG_REORDER_SPRITE:
+		{
+			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
+			ReorderSprite(p->spr, p->up);
 		}
-	}
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->ReorderSprite(sprite, up, this);
-	}
-
-	return ret;
-}
-
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	idx = m_view_panel_mgr->GetSelection() + 1;
-	d2d::MultiSpritesImpl::InsertSprite(sprite, idx);
-
-	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
-	bool ret = layer->InsertSprite(sprite, idx);
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->InsertSprite(sprite, this, idx);
-	}
-
-	if (m_sindex) {
-		m_sindex->Insert(sprite);
-	}
-	if (m_pathfinding) {
-		m_pathfinding->DisableRegion(sprite, false);
-	}
-
-	std::string filepath = sprite->GetSymbol().GetFilepath();
-	if (CharacterFileName::IsValidFilepath(filepath)) {
-		CharacterFileName name(filepath);
-		m_chara_dirs.BuildSymbolDirections(name);
-	}
-
-	if (ret) {
-		SetCanvasDirty();
-	}
-
-	return ret;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	d2d::MultiSpritesImpl::RemoveSprite(sprite);
-
-	bool ret = false;
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (layer->RemoveSprite(sprite)) {
-			ret = true;
-			SetCanvasDirty();
-			break;
+		break;
+	case d2d::MSG_REORDER_SPRITE_MOST:
+		{
+			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
+			ReorderSpriteMost(p->spr, p->up);
 		}
-	}
-
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->RemoveSprite(sprite, this);
-	}
-
-	if (m_pathfinding) {
-		m_pathfinding->DisableRegion(sprite, true);
-	}
-
-	return ret;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	d2d::MultiSpritesImpl::ClearAllSprite();
-
-	bool ret = false;
-	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		if (m_layers[i]->ClearSprite()) {
-			ret = true;
-			SetCanvasDirty();
+		break;
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			InsertSprite(p->spr);
 		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		RemoveSprite((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		ClearSprite();
+		break;
+
+	case d2d::MSG_REMOVE_SHAPE:
+		RemoveShape((d2d::IShape*)ud);
+		break;
+	case d2d::MSG_INSERT_SHAPE:
+		InsertShape((d2d::IShape*)ud);
+		break;
+	case d2d::MSG_CLEAR_SHAPE:
+		ClearShape();
+		break;
 	}
-	return ret;
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
@@ -217,59 +189,6 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 			}
 		}
 	}
-}
-
-bool StagePanel::InsertShape(d2d::IShape* shape)
-{
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	bool ret = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
-
-	if (m_grids) {
-		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
-			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolygon(poly->GetVertices()));
-		} else if (libshape::ChainShape* path = dynamic_cast<libshape::ChainShape*>(shape)) {
-			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolyline(path->GetVertices()));		
-		}
-	}
-
-	if (ret) {
-		SetCanvasDirty();
-	}
-
-	return ret;
-}
-
-void StagePanel::RemoveShape(d2d::IShape* shape)
-{
-	bool dirty = false;
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (layer->RemoveShape(shape)) {
-			dirty = true;
-			break;
-		}
-	}
-	if (m_view_panel_mgr && dirty) {
-		m_view_panel_mgr->RemoveShape(shape, this);
-	}
-	if (dirty) {
-		SetCanvasDirty();
-	}
-}
-
-bool StagePanel::ClearAllShapes()
-{
-	bool ret = false;
-	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		if (m_layers[i]->ClearShape()) {
-			ret = true;
-		}
-	}
-	if (ret) {
-		SetCanvasDirty();
-	}
-	return ret;
 }
 
 void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
@@ -386,6 +305,134 @@ void StagePanel::OnKeyHook(int key_code)
 // 	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
 // 	m_edit_op->OnActive();
 // 	m_edit_op->Retain();	
+}
+
+void StagePanel::ReorderSprite(d2d::ISprite* spr, bool up)
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->ResetOrderSprite(spr, up)) {
+			SetCanvasDirty();
+			break;
+		}
+	}
+}
+
+void StagePanel::ReorderSpriteMost(d2d::ISprite* spr, bool up)
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->ResetOrderSpriteMost(spr, up)) {
+			SetCanvasDirty();
+			break;
+		}
+	}
+}
+
+void StagePanel::InsertSprite(d2d::ISprite* spr)
+{
+// 	idx = m_view_panel_mgr->GetSelection() + 1;
+// 	d2d::MultiSpritesImpl::InsertSprite(sprite, idx);
+// 
+// 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
+// 	bool ret = layer->InsertSprite(sprite, idx);
+// 
+// 	if (m_view_panel_mgr) {
+// 		m_view_panel_mgr->InsertSprite(sprite, this, idx);
+// 	}
+// 
+// 	if (m_sindex) {
+// 		m_sindex->Insert(sprite);
+// 	}
+// 	if (m_pathfinding) {
+// 		m_pathfinding->DisableRegion(sprite, false);
+// 	}
+// 
+// 	std::string filepath = sprite->GetSymbol().GetFilepath();
+// 	if (CharacterFileName::IsValidFilepath(filepath)) {
+// 		CharacterFileName name(filepath);
+// 		m_chara_dirs.BuildSymbolDirections(name);
+// 	}
+// 
+// 	if (ret) {
+// 		SetCanvasDirty();
+// 	}
+// 
+// 	return ret;
+}
+
+void StagePanel::RemoveSprite(d2d::ISprite* spr)
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->RemoveSprite(spr)) {
+			SetCanvasDirty();
+			break;
+		}
+	}
+
+	if (m_pathfinding) {
+		m_pathfinding->DisableRegion(spr, true);
+	}
+}
+
+void StagePanel::ClearSprite()
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		if (m_layers[i]->ClearSprite()) {
+			SetCanvasDirty();
+		}
+	}
+}
+
+void StagePanel::RemoveShape(d2d::IShape* shape)
+{
+	bool dirty = false;
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->RemoveShape(shape)) {
+			dirty = true;
+			break;
+		}
+	}
+	if (dirty) {
+		SetCanvasDirty();
+	}
+}
+
+void StagePanel::InsertShape(d2d::IShape* shape)
+{
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	bool dirty = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
+
+	if (m_grids) {
+		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
+			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolygon(poly->GetVertices()));
+		} else if (libshape::ChainShape* path = dynamic_cast<libshape::ChainShape*>(shape)) {
+			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolyline(path->GetVertices()));		
+		}
+	}
+
+	if (dirty) {
+		SetCanvasDirty();
+	}
+}
+
+void StagePanel::ClearShape()
+{
+	bool dirty = false;
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		if (m_layers[i]->ClearShape()) {
+			dirty = true;
+		}
+	}
+	if (dirty) {
+		SetCanvasDirty();
+	}
 }
 
 }

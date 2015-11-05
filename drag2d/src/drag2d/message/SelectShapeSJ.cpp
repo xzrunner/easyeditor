@@ -19,7 +19,7 @@ void SelectShapeSJ::Select(IShape* shape, Observer* except)
 SelectShapeSJ* SelectShapeSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SelectShapeSJ(SELECT_SHAPE);
+		m_instance = new SelectShapeSJ(MSG_SELECT_SHAPE);
 	}
 	return m_instance;
 }

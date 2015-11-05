@@ -11,7 +11,7 @@ namespace d2d
 class PasteSymbolRandomOP : public PasteSymbolOP
 {
 public:
-	PasteSymbolRandomOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
+	PasteSymbolRandomOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
 		LibraryPanel* libraryPanel, PasteSymbolRandomWidget* randomWidget);
 
 	virtual bool OnMouseLeftDown(int x, int y);

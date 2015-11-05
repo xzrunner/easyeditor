@@ -15,7 +15,7 @@
 #include "message/ReorderSpriteSJ.h"
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
-#include "message/ClearSJ.h"
+#include "message/ClearSpriteSJ.h"
 
 #include <sstream>
 #include <queue>
@@ -56,7 +56,7 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	m_subjects.push_back(ReorderSpriteSJ::Instance());
 	m_subjects.push_back(InsertSpriteSJ::Instance());
 	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSJ::Instance());
+	m_subjects.push_back(ClearSpriteSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -73,37 +73,37 @@ void GroupTreeCtrl::Notify(int sj_id, void* ud)
 {
 	switch (sj_id) 
 	{
-	case SPRITE_NAME_CHANGE:
+	case MSG_SPRITE_NAME_CHANGE:
 		ChangeName((ISprite*)ud);
 		break;
-	case SELECT_SPRITE:
+	case MSG_SELECT_SPRITE:
 		{
 			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 			Select(p->spr, p->clear);	
 		}
 		break;
-	case SELECT_SPRITE_SET:
+	case MSG_SELECT_SPRITE_SET:
 		{
 			//SpriteSelection* selection = (SpriteSelection*)ud;
 			//OnMultiSpriteSelected(selection);
 		}
 		break;
-	case REORDER_SPRITE:
+	case MSG_REORDER_SPRITE:
 		{
 			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
 			Reorder(p->spr, p->up);
 		}
 		break;
-	case INSERT_SPRITE:
+	case MSG_INSERT_SPRITE:
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
 			AddSprite(p->spr);
 		}
 		break;
-	case REMOVE_SPRITE:
+	case MSG_REMOVE_SPRITE:
 		Remove((ISprite*)ud);
 		break;
-	case CLEAR:
+	case MSG_CLEAR_SPRITE:
 		Clear();
 		break;
 	}
@@ -335,10 +335,7 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	ISprite* spr = visitor.GetFirstSprite();
 
 	bool add = m_key_state.GetKeyState(WXK_CONTROL);
-	SelectSpriteSJ::Params p;
-	p.spr = spr;
-	p.clear = !add;
-	SelectSpriteSJ::Instance()->Select(p, this);
+	SelectSpriteSJ::Instance()->Select(spr, !add, this);
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
 	selection->Clear();
@@ -427,10 +424,7 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	if (data && !data->IsGroup()) {
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		bool add = m_key_state.GetKeyState(WXK_CONTROL);
-		SelectSpriteSJ::Params p;
-		p.spr = spr;
-		p.clear = !add;
-		SelectSpriteSJ::Instance()->Select(p, this);
+		SelectSpriteSJ::Instance()->Select(spr, !add, this);
 	}
 }
 

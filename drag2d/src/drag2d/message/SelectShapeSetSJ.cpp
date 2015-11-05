@@ -19,7 +19,7 @@ void SelectShapeSetSJ::Selecte(const ShapeSelection* selection, Observer* except
 SelectShapeSetSJ* SelectShapeSetSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SelectShapeSetSJ(SELECT_SHAPE_SET);
+		m_instance = new SelectShapeSetSJ(MSG_SELECT_SHAPE_SET);
 	}
 	return m_instance;
 }

@@ -11,15 +11,18 @@ InsertSpriteSJ::InsertSpriteSJ(int id)
 {
 }
 
-void InsertSpriteSJ::Insert(const Params& p, Observer* except)
+void InsertSpriteSJ::Insert(ISprite* spr, int idx = -1, Observer* except)
 {
+	Params p;
+	p.spr = spr;
+	p.idx = idx;
 	Notify((void*)&p, except);
 }
 
 InsertSpriteSJ* InsertSpriteSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new InsertSpriteSJ(INSERT_SPRITE);
+		m_instance = new InsertSpriteSJ(MSG_INSERT_SPRITE);
 	}
 	return m_instance;
 }

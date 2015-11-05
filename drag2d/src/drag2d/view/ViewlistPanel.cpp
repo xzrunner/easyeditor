@@ -12,7 +12,7 @@
 #include "message/ReorderSpriteSJ.h"
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
-#include "message/ClearSJ.h"
+#include "message/ClearSpriteSJ.h"
 
 #include <fstream>
 
@@ -32,7 +32,7 @@ ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanelImpl* stage,
 	m_subjects.push_back(ReorderSpriteSJ::Instance());
 	m_subjects.push_back(InsertSpriteSJ::Instance());
 	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSJ::Instance());
+	m_subjects.push_back(ClearSpriteSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -53,28 +53,28 @@ void ViewlistPanel::Notify(int sj_id, void* ud)
 {
 	switch (sj_id)
 	{
-	case SELECT_SPRITE:
+	case MSG_SELECT_SPRITE:
 		{
 			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 			Select(p->spr, p->clear);
 		}
 		break;
-	case REORDER_SPRITE:
+	case MSG_REORDER_SPRITE:
 		{
 			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
 			Reorder(p->spr, p->up);
 		}
 		break;
-	case INSERT_SPRITE:
+	case MSG_INSERT_SPRITE:
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
 			Insert(p->spr, p->idx);
 		}
 		break;
-	case REMOVE_SPRITE:
+	case MSG_REMOVE_SPRITE:
 		Remove((ISprite*)ud);
 		break;
-	case CLEAR:
+	case MSG_CLEAR_SPRITE:
 		Clear();
 		break;
 	}
@@ -98,10 +98,7 @@ void ViewlistPanel::ReorderSelected(bool up)
 
 	Reorder(m_selected_spr, up);
 
-	ReorderSpriteSJ::Params p;
-	p.spr = m_selected_spr;
-	p.up = up;
-	ReorderSpriteSJ::Instance()->Reorder(p, this);
+	ReorderSpriteSJ::Instance()->Reorder(m_selected_spr, up, this);
 }
 
 void ViewlistPanel::OnSelected(int index)
@@ -121,10 +118,7 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 	m_selected_spr->Retain();
 
 	bool add = m_list->GetKeyState(WXK_CONTROL);
-	SelectSpriteSJ::Params p;
-	p.spr = spr;
-	p.clear = !add;
-	SelectSpriteSJ::Instance()->Select(p, this);
+	SelectSpriteSJ::Instance()->Select(spr, !add);
 }
 
 int ViewlistPanel::GetSelectedIndex() const

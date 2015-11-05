@@ -3,17 +3,17 @@
 #include "dataset/SpriteFactory.h"
 #include "dataset/ISprite.h"
 #include "view/LibraryPanel.h"
-#include "view/MultiSpritesImpl.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
-PasteSymbolRandomOP::PasteSymbolRandomOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-										 LibraryPanel* libraryPanel, PasteSymbolRandomWidget* randomWidget)
-	: PasteSymbolOP(wnd, stage, spritesImpl, libraryPanel)
+PasteSymbolRandomOP::PasteSymbolRandomOP(wxWindow* wnd, d2d::EditPanelImpl* stage, LibraryPanel* libraryPanel, 
+										 PasteSymbolRandomWidget* randomWidget)
+	: PasteSymbolOP(wnd, stage, libraryPanel)
 	, m_randomWidget(randomWidget)
 {
 	changeRandomValue();
@@ -35,7 +35,7 @@ bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 			sprite->SetScale(m_randomValue.scale, m_randomValue.scale);
 		if (m_randomValue.angle != 0.0f) 
 			sprite->SetTransform(m_pos, m_randomValue.angle);
-		m_panelImpl->InsertSprite(sprite);
+		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();
 	}
 

@@ -9,7 +9,7 @@
 #include "message/SelectSpriteSJ.h"
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
-#include "message/ClearSJ.h"
+#include "message/ClearSpriteSJ.h"
 
 #include <fstream>
 
@@ -23,7 +23,7 @@ MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 	m_subjects.push_back(SelectSpriteSJ::Instance());
 	m_subjects.push_back(InsertSpriteSJ::Instance());
 	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSJ::Instance());
+	m_subjects.push_back(ClearSpriteSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -42,19 +42,19 @@ void MultiSpritesImpl::Notify(int sj_id, void* ud)
 {
 	switch (sj_id)
 	{
-	case SELECT_SPRITE:
+	case MSG_SELECT_SPRITE:
 		{
 			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 			OnSpriteSelected(p->spr, p->clear);
 		}
 		break;
-	case INSERT_SPRITE:
+	case MSG_INSERT_SPRITE:
 		m_sprite_selection->Clear();
 		break;
-	case REMOVE_SPRITE:
+	case MSG_REMOVE_SPRITE:
 		m_sprite_selection->Clear();
 		break;
-	case CLEAR:
+	case MSG_CLEAR_SPRITE:
 		m_sprite_selection->Clear();
 		break;
 	}

@@ -2,6 +2,8 @@
 
 #include "view/MultiSpritesImpl.h"
 #include "view/SpriteSelection.h"
+#include "message/RemoveSpriteSJ.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
@@ -11,8 +13,7 @@ ArrangeSpriteFixOP::ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage,
 									   PropertySettingPanel* propertyPanel/* = NULL*/, 
 									   AbstractEditCMPT* callback/* = NULL*/, 
 									   const ArrangeSpriteConfig& cfg/* = NULL*/)
-	: ArrangeSpriteOP(wnd, stage, spritesImpl, propertyPanel, NULL, callback, cfg)
-	, m_spritesImpl(spritesImpl)
+	: ArrangeSpriteOP(wnd, stage, spritesImpl, propertyPanel, callback, cfg)
 {
 }
 
@@ -48,16 +49,13 @@ void ArrangeSpriteFixOP::FixSpritesLocation()
 
 void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<ISprite*>& sprites)
 {
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->Retain();
-
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		m_spritesImpl->RemoveSprite(sprites[i]);
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		m_spritesImpl->InsertSprite(sprites[i]);
-
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->Release();
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		ISprite* spr = sprites[i];
+		spr->Retain();
+		RemoveSpriteSJ::Instance()->Remove(spr);
+		InsertSpriteSJ::Instance()->Insert(spr);
+		spr->Release();
+	}
 }
 
 } // d2d

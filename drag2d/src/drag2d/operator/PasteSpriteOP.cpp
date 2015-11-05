@@ -8,6 +8,7 @@
 #include "view/SpriteSelection.h"
 #include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
@@ -16,7 +17,6 @@ PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 							 MultiSpritesImpl* spritesImpl,
 							 PasteSpriteCMPT* cmpt)
 	: SelectSpritesOP(wnd, stage, spritesImpl)
-	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)
 {
 	m_selection = spritesImpl->GetSpriteSelection();
@@ -56,9 +56,9 @@ bool PasteSpriteOP::OnMouseLeftDown(int x, int y)
 	setMousePos(x, y);
 
 	if (m_cmpt)
-		m_batch.insertToSpritesImpl(m_spritesImpl, m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
+		m_batch.insertToSpritesImpl(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
 	else
-		m_batch.insertToSpritesImpl(m_spritesImpl, m_pos, false, false);
+		m_batch.insertToSpritesImpl(m_pos, false, false);
 	m_batch.loadFromSelection(*m_selection);
 
 	return false;
@@ -173,8 +173,7 @@ loadFromSelection(const SpriteSelection& selection)
 }
 
 void PasteSpriteOP::SpriteBatch::
-insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
-					bool isHorMirror, bool isVerMirror)
+insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
 {
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 	{
@@ -189,7 +188,7 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 
 		ISprite* newOne = sprite->Clone();
 		newOne->SetTransform(fixed + pos, newOne->GetAngle());
-		spritesImpl->InsertSprite(newOne);
+		InsertSpriteSJ::Instance()->Insert(newOne);
 		newOne->Release();
 	}
 }

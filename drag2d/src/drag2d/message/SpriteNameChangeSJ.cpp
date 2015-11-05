@@ -19,7 +19,7 @@ void SpriteNameChangeSJ::OnSpriteNameChanged(const ISprite* spr, Observer* excep
 SpriteNameChangeSJ* SpriteNameChangeSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SpriteNameChangeSJ(SPRITE_NAME_CHANGE);
+		m_instance = new SpriteNameChangeSJ(MSG_SPRITE_NAME_CHANGE);
 	}
 	return m_instance;
 }

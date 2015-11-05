@@ -71,7 +71,7 @@ void StagePanel::Clear()
 void StagePanel::Notify(int sj_id, void* ud)
 {
 	d2d::MultiShapesImpl::Notify(sj_id, ud);
-	if (sj_id == d2d::REMOVE_SHAPE) {
+	if (sj_id == d2d::MSG_REMOVE_SHAPE) {
 		bool dirty = false;
 		if (m_symbol) {
 			dirty = m_symbol->Remove((d2d::IShape*)ud);

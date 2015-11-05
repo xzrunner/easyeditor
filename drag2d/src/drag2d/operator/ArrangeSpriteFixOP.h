@@ -24,9 +24,6 @@ private:
 
 	void FixSpritesLocation();
 
-private:
-	MultiSpritesImpl* m_spritesImpl;
-
 }; // ArrangeSpriteFixOP
 
 }

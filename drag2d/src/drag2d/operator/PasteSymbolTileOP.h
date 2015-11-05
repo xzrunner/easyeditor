@@ -41,6 +41,8 @@ namespace d2d
 		}; // NearestQueryVisitor
 
 	private:
+		MultiSpritesImpl* m_spritesImpl;
+
 		PasteSymbolOffsetCMPT<PasteSymbolTileOP>* m_cmpt;
 
 		bool m_bCaptured;

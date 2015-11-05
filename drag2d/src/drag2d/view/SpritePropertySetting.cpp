@@ -187,7 +187,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 
 void SpritePropertySetting::Notify(int sj_id, void* ud)
 {
-	if (sj_id == SPRITE_NAME_CHANGE) {
+	if (sj_id == MSG_SPRITE_NAME_CHANGE) {
 		ISprite* spr = (ISprite*)ud;
 		if (GetSprite() == spr && m_pg) {
 			m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	

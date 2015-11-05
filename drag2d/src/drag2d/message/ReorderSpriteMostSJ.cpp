@@ -11,15 +11,18 @@ ReorderSpriteMostSJ::ReorderSpriteMostSJ(int id)
 {
 }
 
-void ReorderSpriteMostSJ::Reorder(const Params& p, Observer* except)
+void ReorderSpriteMostSJ::Reorder(ISprite* spr, bool up, Observer* except)
 {
+	Params p;
+	p.spr = spr;
+	p.up = up;
 	Notify((void*)&p, except);
 }
 
 ReorderSpriteMostSJ* ReorderSpriteMostSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new ReorderSpriteMostSJ(REORDER_SPRITE_MOST);
+		m_instance = new ReorderSpriteMostSJ(MSG_REORDER_SPRITE_MOST);
 	}
 	return m_instance;
 }

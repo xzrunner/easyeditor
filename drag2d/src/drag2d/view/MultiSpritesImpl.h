@@ -41,7 +41,6 @@ private:
 protected:
 	SpriteSelection* m_sprite_selection;
 
-private:
 	std::vector<Subject*> m_subjects;
 
 }; // MultiSpritesImpl

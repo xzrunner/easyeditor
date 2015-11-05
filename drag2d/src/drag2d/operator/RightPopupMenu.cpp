@@ -123,10 +123,7 @@ void RightPopupMenu::HandleSelectMenu(int id)
 	m_selection->Clear();
 	m_selection->Add(selected);
 
-	SelectSpriteSJ::Params p;
-	p.spr = selected;
-	p.clear = true;
-	SelectSpriteSJ::Instance()->Select(p);
+	SelectSpriteSJ::Instance()->Select(selected, true);
 }
 
 void RightPopupMenu::HandleDebugTagMenu(int id)
@@ -158,8 +155,7 @@ void RightPopupMenu::UpLayerMost()
 	ReorderSpriteMostSJ::Params p;
 	p.up = true;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		p.spr = m_edited_sprs[i];
-		ReorderSpriteMostSJ::Reorder(p);
+		ReorderSpriteMostSJ::Reorder(m_edited_sprs[i], true);
 	}
 }
 
@@ -168,8 +164,7 @@ void RightPopupMenu::DownLayerMost()
 	ReorderSpriteMostSJ::Params p;
 	p.up = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		p.spr = m_edited_sprs[i];
-		ReorderSpriteMostSJ::Reorder(p);
+		ReorderSpriteMostSJ::Reorder(m_edited_sprs[i], false);
 	}
 }
 

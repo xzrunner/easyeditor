@@ -32,7 +32,7 @@ void MultiShapesImpl::Notify(int sj_id, void* ud)
 {
 	switch (sj_id)
 	{
-	case SELECT_SHAPE:
+	case MSG_SELECT_SHAPE:
 		m_shape_selection->Clear();
 		m_shape_selection->Add((IShape*)ud);
 		break;

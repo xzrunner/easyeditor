@@ -11,7 +11,7 @@
 #include "message/ReorderSpriteMostSJ.h"
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
-#include "message/ClearSJ.h"
+#include "message/ClearSpriteSJ.h"
 
 namespace d2d
 {
@@ -54,34 +54,34 @@ void SpritesPanelImpl::Notify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
-	case REORDER_SPRITE:
+	case MSG_REORDER_SPRITE:
 		{
 			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
 			m_container->ResetOrder(p->spr, p->up);
 			m_stage->SetCanvasDirty();
 		}
 		break;
-	case REORDER_SPRITE_MOST:
+	case MSG_REORDER_SPRITE_MOST:
 		{
 			ReorderSpriteMostSJ::Params* p = (ReorderSpriteMostSJ::Params*)ud;
 			m_container->ResetOrderMost(p->spr, p->up);
 			m_stage->SetCanvasDirty();
 		}
 		break;
-	case INSERT_SPRITE:
+	case MSG_INSERT_SPRITE:
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
 			m_container->Insert(p->spr, p->idx);
 			m_stage->SetCanvasDirty();
 		}
 		break;
-	case REMOVE_SPRITE:
+	case MSG_REMOVE_SPRITE:
 		{
 			m_container->Remove((ISprite*)ud);
 			m_stage->SetCanvasDirty();
 		}
 		break;
-	case CLEAR:
+	case MSG_CLEAR_SPRITE:
 		{
 			m_container->Clear();
 			m_stage->SetCanvasDirty();

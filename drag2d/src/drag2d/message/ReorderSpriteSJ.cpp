@@ -11,15 +11,18 @@ ReorderSpriteSJ::ReorderSpriteSJ(int id)
 {
 }
 
-void ReorderSpriteSJ::Reorder(const Params& p, Observer* except)
+void ReorderSpriteSJ::Reorder(ISprite* spr, bool up, Observer* except)
 {
+	Params p;
+	p.spr = spr;
+	p.up = up;
 	Notify((void*)&p, except);
 }
 
 ReorderSpriteSJ* ReorderSpriteSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new ReorderSpriteSJ(REORDER_SPRITE);
+		m_instance = new ReorderSpriteSJ(MSG_REORDER_SPRITE);
 	}
 	return m_instance;
 }

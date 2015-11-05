@@ -19,6 +19,7 @@ public:
 	virtual bool InsertSprite(Object* obj, int idx);
 	virtual bool ClearSprite();
 	virtual bool ResetOrderSprite(const Object* obj, bool up);
+	virtual bool ResetOrderSpriteMost(const Object* obj, bool up);
 
 	virtual void TraverseShape(d2d::IVisitor& visitor, bool order = true) const;
 	virtual bool RemoveShape(Object* obj);

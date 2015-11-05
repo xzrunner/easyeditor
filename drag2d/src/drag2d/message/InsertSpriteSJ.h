@@ -17,7 +17,7 @@ public:
 	};
 
 public:
-	void Insert(const Params& p, Observer* except = NULL);
+	void Insert(ISprite* spr, int idx = -1, Observer* except = NULL);
 
 	static InsertSpriteSJ* Instance();
 

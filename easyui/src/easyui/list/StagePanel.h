@@ -21,19 +21,16 @@ class StagePanel : public IUIStagePage, public d2d::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
+	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
+	//	interface Observer
 	//
-	virtual void Clear();
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual bool ReorderSprite(d2d::ISprite* sprite, bool up);
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
-	virtual bool ClearAllSprite();
 	virtual void TraverseSprites(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 

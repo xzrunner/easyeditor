@@ -534,10 +534,7 @@ void ArrangeSpriteImpl::UpOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		ReorderSpriteSJ::Params p;
-		p.spr = selected[i];
-		p.up = true;
-		ReorderSpriteSJ::Instance()->Reorder(p);
+		ReorderSpriteSJ::Instance()->Reorder(selected[i], true);
 	}
 }
 
@@ -546,11 +543,7 @@ void ArrangeSpriteImpl::DownOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		ReorderSpriteSJ::Params p;
-		p.spr = selected[i];
-		p.up = false;
-		ReorderSpriteSJ::Instance()->Reorder(p);
-
+		ReorderSpriteSJ::Instance()->Reorder(selected[i], false);
 	}
 }
 

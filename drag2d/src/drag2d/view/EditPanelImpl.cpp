@@ -7,7 +7,7 @@
 #include "view/IStageCanvas.h"
 
 #include "message/subject_id.h"
-#include "message/ClearSJ.h"
+#include "message/ClearSpriteSJ.h"
 
 #include <fstream>
 
@@ -23,7 +23,7 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 	m_canvas = NULL;
 	m_camera = new Camera;
 
-	ClearSJ::Instance()->Register(this);
+	ClearSpriteSJ::Instance()->Register(this);
 }
 
 EditPanelImpl::~EditPanelImpl()
@@ -39,7 +39,7 @@ EditPanelImpl::~EditPanelImpl()
 		m_canvas = NULL;
 	}
 
-	ClearSJ::Instance()->UnRegister(this);
+	ClearSpriteSJ::Instance()->UnRegister(this);
 }
 
 void EditPanelImpl::SetEditPanelNull()
@@ -49,7 +49,7 @@ void EditPanelImpl::SetEditPanelNull()
 
 void EditPanelImpl::Notify(int sj_id, void* ud)
 {
-	if (sj_id == CLEAR) {
+	if (sj_id == MSG_CLEAR_SPRITE) {
 		Clear();
 	}
 }

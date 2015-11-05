@@ -17,7 +17,7 @@ public:
 	};
 
 public:
-	void Reorder(const Params& p, Observer* except = NULL);
+	void Reorder(ISprite* spr, bool up, Observer* except = NULL);
 
 	static ReorderSpriteMostSJ* Instance();
 

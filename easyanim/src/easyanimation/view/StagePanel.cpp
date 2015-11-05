@@ -45,28 +45,28 @@ void StagePanel::Notify(int sj_id, void* ud)
 	
 	switch (sj_id)
 	{
-	case d2d::REORDER_SPRITE:
+	case d2d::MSG_REORDER_SPRITE:
 		{
 			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
 			Reorder(p->spr, p->up);
 		}
 		break;
-	case d2d::REORDER_SPRITE_MOST:
+	case d2d::MSG_REORDER_SPRITE_MOST:
 		{
 			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
 			ReorderMost(p->spr, p->up);
 		}
 		break;
-	case INSERT_SPRITE:
+	case MSG_INSERT_SPRITE:
 		{
 			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
 			Insert(p->spr);
 		}
 		break;
-	case REMOVE_SPRITE:
+	case MSG_REMOVE_SPRITE:
 		Remove((d2d::ISprite*)ud);
 		break;
-	case CLEAR:
+	case MSG_CLEAR_SPRITE:
 		{
 			bool ret = m_ctrl->ClearAllLayer();
 			m_ctrl->setCurrFrame(-1, -1);

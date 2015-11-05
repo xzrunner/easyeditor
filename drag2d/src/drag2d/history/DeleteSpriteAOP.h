@@ -6,13 +6,10 @@
 namespace d2d
 {
 
-class MultiSpritesImpl;
-
 class DeleteSpriteAOP : public AbstractAtomicOP
 {
 public:
-	DeleteSpriteAOP(const std::vector<ISprite*>& sprites, 
-		MultiSpritesImpl* sprites_impl);
+	DeleteSpriteAOP(const std::vector<ISprite*>& sprites);
 	virtual ~DeleteSpriteAOP();
 
 	virtual void undo();
@@ -22,8 +19,6 @@ public:
 
 private:
 	std::vector<ISprite*> m_sprites;
-
-	MultiSpritesImpl* m_sprites_impl;
 
 }; // DeleteSpriteAOP
 

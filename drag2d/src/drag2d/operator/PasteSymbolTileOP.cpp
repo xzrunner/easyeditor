@@ -8,13 +8,15 @@
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
 PasteSymbolTileOP::PasteSymbolTileOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
 									 LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt)
-	: PasteSymbolOP(wnd, stage, spritesImpl, libraryPanel)
+	: PasteSymbolOP(wnd, stage, libraryPanel)
+	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 	, m_rotate(0)
@@ -32,7 +34,7 @@ bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->Translate(m_pos);
 		sprite->Rotate(m_rotate);
-		m_panelImpl->InsertSprite(sprite);
+		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();
 	}
 
@@ -58,7 +60,7 @@ bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 	Vector offset = m_cmpt->getOffset();
 	const float dis = offset.length() * 0.5f;
 	ISprite* sprite = NULL;
-	m_panelImpl->TraverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
+	m_spritesImpl->TraverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
 	if (!sprite) return false;
 
 	const d2d::Vector& capture = sprite->GetPosition();

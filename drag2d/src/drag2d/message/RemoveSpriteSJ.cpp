@@ -19,7 +19,7 @@ void RemoveSpriteSJ::Remove(ISprite* spr, Observer* except)
 RemoveSpriteSJ* RemoveSpriteSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new RemoveSpriteSJ(REMOVE_SPRITE);
+		m_instance = new RemoveSpriteSJ(MSG_REMOVE_SPRITE);
 	}
 	return m_instance;
 }

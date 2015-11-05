@@ -1,22 +1,19 @@
 #include "CopyPasteSpriteState.h"
 
 #include "dataset/ISprite.h"
-#include "view/MultiSpritesImpl.h"
 #include "view/SpriteSelection.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
-CopyPasteSpriteState::CopyPasteSpriteState(MultiSpritesImpl* sprites_impl,
-										   SpriteSelection* selection,
-										   ISprite* selected)
+CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection, ISprite* selected)
 	: m_selection(selection)
-	, m_sprites_impl(sprites_impl)
 	, m_spr(NULL)
 {
 	if (selected) {
 		m_spr = selected->Clone();
-		sprites_impl->InsertSprite(m_spr);
+		InsertSpriteSJ::Instance()->Insert(m_spr);
 		m_selection->Clear();
 		m_selection->Add(m_spr);
 	}

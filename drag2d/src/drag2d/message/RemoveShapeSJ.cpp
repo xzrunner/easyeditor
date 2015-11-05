@@ -19,7 +19,7 @@ void RemoveShapeSJ::Remove(IShape* spr, Observer* except)
 RemoveShapeSJ* RemoveShapeSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new RemoveShapeSJ(REMOVE_SHAPE);
+		m_instance = new RemoveShapeSJ(MSG_REMOVE_SHAPE);
 	}
 	return m_instance;
 }

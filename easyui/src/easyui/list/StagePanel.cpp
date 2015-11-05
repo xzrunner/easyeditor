@@ -28,41 +28,41 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 
 	m_toolbar = new ToolbarPanel(top_pannels->toolbar, this);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
-}
 
-void StagePanel::Clear()
-{
-	ClearAllSprite();
-}
-
-bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
-{
-	return false;
-}
-
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	MultiSpritesImpl::InsertSprite(sprite, idx);
-	bool ret = m_list.InsertSprite(sprite, idx);
-	if (ret) {
-		SetCanvasDirty();
+	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
+	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
 	}
-	return ret;
 }
 
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+StagePanel::~StagePanel()
 {
-	return false;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	MultiSpritesImpl::ClearAllSprite();
-	bool ret = m_list.ClearAllSprite();
-	if (ret) {
-		SetCanvasDirty();
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
 	}
-	return ret;
+}
+
+void StagePanel::Notify(int sj_id, void* ud)
+{
+	MultiSpritesImpl::Notify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			if (m_list.InsertSprite(p->spr, p->idx)) {
+				SetCanvasDirty();
+			}		
+		}
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		if (m_list.ClearAllSprite()) {
+			SetCanvasDirty();
+		}
+		break;
+	}
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const

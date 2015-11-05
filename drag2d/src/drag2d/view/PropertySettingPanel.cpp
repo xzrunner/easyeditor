@@ -12,7 +12,7 @@
 #include "message/SelectSpriteSetSJ.h"
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
-#include "message/ClearSJ.h"
+#include "message/ClearSpriteSJ.h"
 #include "message/SelectShapeSJ.h"
 #include "message/SelectShapeSetSJ.h"
 #include "message/RemoveShapeSJ.h"
@@ -35,7 +35,7 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 	m_subjects.push_back(SelectSpriteSetSJ::Instance());
 	m_subjects.push_back(InsertSpriteSJ::Instance());
 	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSJ::Instance());
+	m_subjects.push_back(ClearSpriteSJ::Instance());
 
 	m_subjects.push_back(SelectShapeSJ::Instance());
 	m_subjects.push_back(SelectShapeSetSJ::Instance());
@@ -57,34 +57,34 @@ PropertySettingPanel::~PropertySettingPanel()
 
 void PropertySettingPanel::Notify(int sj_id, void* ud)
 {
-	switch (SELECT_SPRITE)
+	switch (MSG_SELECT_SPRITE)
 	{
-	case SELECT_SPRITE:
+	case MSG_SELECT_SPRITE:
 		{
 			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 			OnSpriteSelected(p->spr, p->clear);
 		}
 		break;
-	case SELECT_SPRITE_SET:
+	case MSG_SELECT_SPRITE_SET:
 		OnMultiSpriteSelected((SpriteSelection*)ud);
 		break;
-	case INSERT_SPRITE:
+	case MSG_INSERT_SPRITE:
 		SetPropertySetting(CreateDefaultProperty());
 		break;
-	case REMOVE_SPRITE:
+	case MSG_REMOVE_SPRITE:
 		SetPropertySetting(CreateDefaultProperty());
 		break;
-	case CLEAR:
+	case MSG_CLEAR_SPRITE:
 		SetPropertySetting(CreateDefaultProperty());
 		break;
 
-	case SELECT_SHAPE:
+	case MSG_SELECT_SHAPE:
 		SelectShape((IShape*)ud);
 		break;
-	case SELECT_SHAPE_SET:
+	case MSG_SELECT_SHAPE_SET:
 		SelectShapeSet((ShapeSelection*)ud);
 		break;
-	case REMOVE_SHAPE:
+	case MSG_REMOVE_SHAPE:
 		SetPropertySetting(CreateDefaultProperty());
 		break;
 	}

@@ -19,7 +19,7 @@ void SelectSpriteSetSJ::Select(const SpriteSelection* selection, Observer* excep
 SelectSpriteSetSJ* SelectSpriteSetSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SelectSpriteSetSJ(SELECT_SPRITE_SET);
+		m_instance = new SelectSpriteSetSJ(MSG_SELECT_SPRITE_SET);
 	}
 	return m_instance;
 }

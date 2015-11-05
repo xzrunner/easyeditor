@@ -3,17 +3,17 @@
 #include "common/Math.h"
 #include "dataset/SpriteFactory.h"
 #include "dataset/ISprite.h"
-#include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
-PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
-										   LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt)
-	: PasteSymbolOP(wnd, stage, spritesImpl, libraryPanel)
+PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* libraryPanel, 
+										   PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt)
+	: PasteSymbolOP(wnd, stage, libraryPanel)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 {
@@ -31,7 +31,7 @@ bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->Translate(m_pos);
-		m_panelImpl->InsertSprite(sprite);
+		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();
 	}
 
