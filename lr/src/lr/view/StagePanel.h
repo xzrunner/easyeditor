@@ -97,6 +97,8 @@ private:
 
 	bool m_enable_update;
 
+	std::vector<d2d::Subject*> m_sprite_subjects, m_shape_subjects;
+
 }; // StagePanel
 
 }

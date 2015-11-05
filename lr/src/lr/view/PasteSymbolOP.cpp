@@ -7,7 +7,7 @@ namespace lr
 
 PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library,
 							 d2d::PropertySettingPanel* property)
-	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), stage, library)
+	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), library)
 	, m_property(property)
 {
 }

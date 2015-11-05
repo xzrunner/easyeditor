@@ -54,20 +54,20 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetEditOP(m_arrange_op);
 	SetCanvas(new StageCanvas(this));
 
-	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::ReorderSpriteSJ::Instance());
-	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::ReorderSpriteMostSJ::Instance());
-	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
-	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
-	d2d::MultiSpritesImpl::m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
-	for (int i = 0, n = d2d::MultiSpritesImpl::m_subjects.size(); i < n; ++i) {
-		d2d::MultiSpritesImpl::m_subjects[i]->Register((d2d::MultiSpritesImpl*)this);
+	m_sprite_subjects.push_back(d2d::ReorderSpriteSJ::Instance());
+	m_sprite_subjects.push_back(d2d::ReorderSpriteMostSJ::Instance());
+	m_sprite_subjects.push_back(d2d::InsertSpriteSJ::Instance());
+	m_sprite_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
+	m_sprite_subjects.push_back(d2d::ClearSpriteSJ::Instance());
+	for (int i = 0, n = m_sprite_subjects.size(); i < n; ++i) {
+		m_sprite_subjects[i]->Register((d2d::MultiSpritesImpl*)this);
 	}
 
-	d2d::MultiShapesImpl::m_subjects.push_back(d2d::RemoveShapeSJ::Instance());
-	d2d::MultiShapesImpl::m_subjects.push_back(d2d::InsertShapeSJ::Instance());
-	d2d::MultiShapesImpl::m_subjects.push_back(d2d::ClearShapeSJ::Instance());
-	for (int i = 0, n = d2d::MultiShapesImpl::m_subjects.size(); i < n; ++i) {
-		d2d::MultiShapesImpl::m_subjects[i]->Register((d2d::MultiShapesImpl*)this);
+	m_shape_subjects.push_back(d2d::RemoveShapeSJ::Instance());
+	m_shape_subjects.push_back(d2d::InsertShapeSJ::Instance());
+	m_shape_subjects.push_back(d2d::ClearShapeSJ::Instance());
+	for (int i = 0, n = m_shape_subjects.size(); i < n; ++i) {
+		m_shape_subjects[i]->Register((d2d::MultiShapesImpl*)this);
 	}
 }
 
@@ -83,11 +83,11 @@ StagePanel::~StagePanel()
 
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
 
-	for (int i = 0, n = d2d::MultiSpritesImpl::m_subjects.size(); i < n; ++i) {
-		d2d::MultiSpritesImpl::m_subjects[i]->UnRegister((d2d::MultiSpritesImpl*)this);
+	for (int i = 0, n = m_sprite_subjects.size(); i < n; ++i) {
+		m_sprite_subjects[i]->UnRegister((d2d::MultiSpritesImpl*)this);
 	}
-	for (int i = 0, n = d2d::MultiShapesImpl::m_subjects.size(); i < n; ++i) {
-		d2d::MultiShapesImpl::m_subjects[i]->UnRegister((d2d::MultiShapesImpl*)this);
+	for (int i = 0, n = m_shape_subjects.size(); i < n; ++i) {
+		m_shape_subjects[i]->UnRegister((d2d::MultiShapesImpl*)this);
 	}
 }
 
