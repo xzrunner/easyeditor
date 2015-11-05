@@ -10,6 +10,7 @@
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
 #include "message/ClearSpriteSJ.h"
+#include "message/QuerySelectedSpriteLayerSJ.h"
 
 namespace d2d
 {
@@ -24,6 +25,7 @@ ViewlistList::ViewlistList(wxWindow* parent)
 	m_subjects.push_back(InsertSpriteSJ::Instance());
 	m_subjects.push_back(RemoveSpriteSJ::Instance());
 	m_subjects.push_back(ClearSpriteSJ::Instance());
+	m_subjects.push_back(QuerySelectedSpriteLayerSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -72,6 +74,12 @@ void ViewlistList::Notify(int sj_id, void* ud)
 	case MSG_CLEAR_SPRITE:
 		Clear();
 		break;
+	case MAG_QUERY_SPR_LAYER:
+		{
+			int* layer = (int*)ud;
+			*layer = GetSelectedIndex();
+		}
+		break;
 	}
 }
 
@@ -99,11 +107,6 @@ void ViewlistList::SetImpl(ViewlistListImpl* impl)
 		delete m_impl;
 	}
 	m_impl = impl;
-}
-
-int ViewlistList::GetSelectedIndex() const
-{
-	return GetItemCount() - 1 - GetSelection();
 }
 
 void ViewlistList::OnSelected(int idx)
@@ -156,6 +159,11 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 		RemoveSelected();
 		break;
 	}
+}
+
+int ViewlistList::GetSelectedIndex() const
+{
+	return GetItemCount() - 1 - GetSelection();
 }
 
 void ViewlistList::OnSelected(d2d::ISprite* spr)
@@ -248,6 +256,8 @@ void ViewlistList::RemoveSelected()
 
 void ViewlistList::Clear()
 {
+	VerticalImageList::Clear();
+
 	if (m_selected_spr) {
 		m_selected_spr->Release();
 		m_selected_spr = NULL;

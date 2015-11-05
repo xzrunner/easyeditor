@@ -26,8 +26,6 @@ public:
 
 	void SetImpl(ViewlistListImpl* impl);
 
-	int GetSelectedIndex() const;
-
 	void Insert(ISprite* sprite, int idx = -1);
 
 	void OnSelected(int idx);
@@ -36,6 +34,8 @@ public:
 
 private:
 	virtual void OnKeyDown(wxKeyEvent& event);
+
+	int GetSelectedIndex() const;
 
 	void OnSelected(d2d::ISprite* spr);
 

@@ -3016,6 +3016,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="query"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\QuerySelectedSpriteLayerSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\QuerySelectedSpriteLayerSJ.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File

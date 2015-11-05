@@ -1,6 +1,8 @@
 #include "InsertSpriteSJ.h"
 #include "subject_id.h"
 
+#include "message/QuerySelectedSpriteLayerSJ.h"
+
 namespace d2d
 {
 
@@ -15,7 +17,11 @@ void InsertSpriteSJ::Insert(ISprite* spr, int idx, Observer* except)
 {
 	Params p;
 	p.spr = spr;
-	p.idx = idx;
+	if (idx == -1) {
+		p.idx = QuerySelectedSpriteLayerSJ::Instance()->Query() + 1;
+	} else {
+		p.idx = idx;
+	}
 	Notify((void*)&p, except);
 }
 
