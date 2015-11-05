@@ -11,12 +11,11 @@ namespace d2d
 
 PasteSymbolScaleCMPT::PasteSymbolScaleCMPT(wxWindow* parent, const wxString& name, 
 										   wxWindow* stage_wnd, EditPanelImpl* stage, 
-										   MultiSpritesImpl* spritesImpl, 
 										   LibraryPanel* libraryPanel)
 	: AbstractEditCMPT(parent, name, stage)
 	, m_scaleVal(1.0f)
 {
-	m_editOP = new PasteSymbolOP(stage_wnd, stage, spritesImpl, libraryPanel, &m_scaleVal);
+	m_editOP = new PasteSymbolOP(stage_wnd, stage, libraryPanel, &m_scaleVal);
 }
 
 wxSizer* PasteSymbolScaleCMPT::initLayout()

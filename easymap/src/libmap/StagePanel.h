@@ -14,11 +14,6 @@ public:
 		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
-	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 

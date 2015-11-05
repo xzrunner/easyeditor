@@ -21,7 +21,7 @@ bool DrawComplexPolygonOP::OnMouseLeftDClick(int x, int y)
 
 	ComplexPolygonShape* cpoly = CreateComplexPoly(m_polyline);
 	if (cpoly) {
-		m_shapesImpl->InsertShape(cpoly);
+		d2d::InsertShapeSJ::Instance()->Insert(cpoly);
 		cpoly->Release();
 	}
 
@@ -58,7 +58,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<d
 			new_holes.push_back(polyline);
 
 			new_cpoly = new ComplexPolygonShape(poly->GetVertices(), new_holes);
-			m_shapesImpl->RemoveShape(cpoly);
+			d2d::RemoveShapeSJ::Instance()->Remove(cpoly);
 		}
 		else
 		{
@@ -66,7 +66,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<d
 			holes.push_back(polyline);
 
 			new_cpoly = new ComplexPolygonShape(poly->GetVertices(), holes);
-			m_shapesImpl->RemoveShape(poly);
+			d2d::RemoveShapeSJ::Instance()->Remove(poly);
 		}
 
 		return new_cpoly;

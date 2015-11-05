@@ -22,17 +22,12 @@ class StagePanel : public IUIStagePage, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
+	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
+	//	interface Observer
 	//
-	virtual void Clear();
-
-	//
-	// d2d::MultiSpritesImpl interface
-	//
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// IUIStagePage interface

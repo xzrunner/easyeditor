@@ -4,8 +4,6 @@
 #include <wx/panel.h>
 #include <json/json.h>
 
-#include "message/Observer.h"
-
 namespace d2d
 {
 
@@ -14,7 +12,7 @@ class MultiSpritesImpl;
 class ISprite;
 class KeysState;
 
-class GroupTreePanel : public wxPanel, public Observer
+class GroupTreePanel : public wxPanel
 {
 public:
 	GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,

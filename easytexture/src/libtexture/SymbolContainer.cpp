@@ -50,4 +50,9 @@ bool SymbolContainer::ResetOrder(const Object* obj, bool up)
 	return d2d::ObjectVector<d2d::IShape>::ResetOrder(m_symbol->m_shapes, static_cast<const d2d::IShape*>(obj), up);
 }
 
+bool SymbolContainer::ResetOrderMost(const Object* obj, bool up)
+{
+	return d2d::ObjectVector<d2d::IShape>::ResetOrderMost(m_symbol->m_shapes, static_cast<const d2d::IShape*>(obj), up);
+}
+
 }

@@ -32,7 +32,7 @@ void FileIO::load(const char* filename)
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
 		libmodeling::Body* body = libmodeling::FileApapter::j2bBody(bodyValue, dir);
-		context->stage->InsertSprite(body->sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(body->sprite);
 		bodies.push_back(body);
 
 		bodyValue = value["body"][i++];

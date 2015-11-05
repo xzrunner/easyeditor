@@ -54,8 +54,6 @@ private:
 	void SelectShapeSet(ShapeSelection* selection);
 
 protected:
-	std::vector<Subject*> m_subjects;
-
 	std::string m_type;
 
 	wxPropertyGrid* m_pg;
@@ -66,6 +64,9 @@ protected:
 
 	// todo
 	EditPanelImpl* m_stage;
+
+private:
+	std::vector<Subject*> m_subjects;
 
 }; // PropertySettingPanel
 

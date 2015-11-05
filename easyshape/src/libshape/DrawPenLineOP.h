@@ -9,12 +9,10 @@ namespace libshape
 class DrawPenLineOP : public DrawPolylineOP
 {
 public:
-	DrawPenLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl);
+	DrawPenLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
+		d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
-
-private:
-	d2d::MultiShapesImpl* m_shapesImpl;
 
 }; // DrawPenLineOP
 

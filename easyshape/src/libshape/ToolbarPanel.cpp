@@ -42,21 +42,21 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	// circle
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "圆形", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditCircleOP(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditCircleOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
 	// chain
-	addChild(new DrawLineCMPT(this, wxT("折线"), stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr));
+	addChild(new DrawLineCMPT(this, wxT("折线"), stage, stage->GetStageImpl(), stage, property));
 	// polygon
-	addChild(new DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr));
+	addChild(new DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, property));
 	// complex polygon
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "复杂多边形", stage->GetStageImpl(), "node capture", 5, 30, 10);
 //		d2d::AbstractEditOP* op = new DrawComplexPolygonOP(stage, stage, property, capture_cmpt);
 
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawComplexPolygonOP, d2d::SelectShapesOP>
-			(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt, capture_cmpt);
+			(stage, stage->GetStageImpl(), stage, property, capture_cmpt, capture_cmpt);
 
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
@@ -64,7 +64,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	// bezier
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "贝塞尔曲线", stage->GetStageImpl(), "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditBezierOP(stage, stage->GetStageImpl(), stage, property, m_view_panel_mgr, capture_cmpt);
+		d2d::AbstractEditOP* op = new EditBezierOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
@@ -95,8 +95,7 @@ wxSizer* ToolbarPanel::initLayout()
 
 void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 {
-	m_stage_panel->ClearAllShapes();
-
+	d2d::ClearShapeSJ::Instance()->Clear();
 }
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
@@ -107,7 +106,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 		return;
 	}
 
-	m_stage_panel->ClearAllShapes();
+	d2d::ClearShapeSJ::Instance()->Clear();
 
 	d2d::Image* img = img_symbol->getImage();
 	eimage::ExtractOutlineRaw raw(*img);
@@ -120,7 +119,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
 	}
-	m_stage_panel->InsertShape(new libshape::PolygonShape(bounding));
+	d2d::InsertShapeSJ::Instance()->Insert(new libshape::PolygonShape(bounding));
 
 	setChoice(3);
 }

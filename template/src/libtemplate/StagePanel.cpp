@@ -15,13 +15,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::~StagePanel()
-{
-	
-}
-
-void StagePanel::Clear()
-{
-
+{	
 }
 
 void StagePanel::OnSizeDebug(wxSizeEvent& event)

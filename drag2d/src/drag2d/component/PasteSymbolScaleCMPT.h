@@ -6,7 +6,6 @@
 namespace d2d
 {
 
-class MultiSpritesImpl;
 class LibraryPanel;
 
 class PasteSymbolScaleCMPT : public AbstractEditCMPT
@@ -14,7 +13,7 @@ class PasteSymbolScaleCMPT : public AbstractEditCMPT
 public:
 	PasteSymbolScaleCMPT(wxWindow* parent, const wxString& name,
 		wxWindow* stage_wnd, EditPanelImpl* stage, 
-		MultiSpritesImpl* spritesImpl, LibraryPanel* libraryPanel);
+		LibraryPanel* libraryPanel);
 
 protected:
 	virtual wxSizer* initLayout();

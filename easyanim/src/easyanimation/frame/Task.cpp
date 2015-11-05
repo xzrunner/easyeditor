@@ -25,6 +25,8 @@ Task::Task(wxFrame* parent)
 	InitLayout();
 
 	m_widgets.m_library->LoadFromConfig();
+
+	d2d::ClearPanelSJ::Instance()->Register(this);
 }
 
 Task::~Task()
@@ -32,6 +34,16 @@ Task::~Task()
 	d2d::SymbolMgr::Instance()->Clear();
 	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
+
+	d2d::ClearPanelSJ::Instance()->UnRegister(this);
+}
+
+void Task::Notify(int sj_id, void* ud)
+{
+	if (sj_id == d2d::MSG_CLEAR_PANEL) {
+		m_controller.Clear();
+		m_widgets.m_layersPanel->insertLayer();
+	}
 }
 
 void Task::Load(const char* filepath)
@@ -66,18 +78,6 @@ void Task::Store(const char* filepath) const
 bool Task::IsDirty() const
 {
 	return m_widgets.m_stage->IsEditDirty();
-}
-
-void Task::Clear()
-{
-	//	d2d::SymbolMgr::Instance()->Clear();
-
-	m_controller.Clear();
-
-	m_widgets.m_toolbar->Clear();
-	m_widgets.m_viewlist->Clear();
-
-	m_widgets.m_layersPanel->insertLayer();
 }
 
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
@@ -123,7 +123,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 	// property
 	m_widgets.m_property = new PropertySettingPanel(split);
-	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_property);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_widgets.m_library, m_widgets.m_property);
@@ -138,14 +137,13 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 	// stage
 	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, 
-		&m_widgets.m_view_panel_mgr, &m_controller);
-	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_stage);
+		&m_controller);
 	m_widgets.m_property->SetEditPanel(m_widgets.m_stage->GetStageImpl());
 	m_widgets.m_library->SetCanvas(m_widgets.m_stage->GetCanvas());	// ?
 
 	// toolbar
 	m_widgets.m_toolbar = new ToolbarPanel(top_split, m_widgets.m_stage, 
-		m_widgets.m_property, &m_widgets.m_view_panel_mgr, false, &m_controller);
+		m_widgets.m_property, false, &m_controller);
 
 	// timeline
 	TimeLinePanel* timeline = new TimeLinePanel(bottom_split, &m_controller);
@@ -162,9 +160,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	// viewlist
-	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage->GetStageImpl(), m_widgets.m_stage, &m_widgets.m_view_panel_mgr);
-	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_viewlist);
-
+	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage->GetStageImpl(), m_widgets.m_stage);
 	return m_widgets.m_viewlist;
 }
 

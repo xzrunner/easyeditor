@@ -6,20 +6,17 @@
 namespace d2d
 {
 
-class MultiSpritesImpl;
 class EditPanelImpl;
 class LibraryPanel;
 
 class SpriteDropTarget : public wxTextDropTarget
 {
 public:
-	SpriteDropTarget(MultiSpritesImpl* panelImpl, EditPanelImpl* stage,
-		LibraryPanel* libraryPanel);
+	SpriteDropTarget(EditPanelImpl* stage, LibraryPanel* libraryPanel);
 
 	virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 
 private:
-	MultiSpritesImpl* m_panelImpl;
 	EditPanelImpl* m_stage;
 	LibraryPanel* m_libraryPanel;
 

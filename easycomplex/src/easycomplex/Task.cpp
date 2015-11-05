@@ -48,17 +48,6 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::Clear()
-{
-	//	d2d::SymbolMgr::Instance()->Clear();
-
-	m_viewlist->Clear();
-	m_grouptree->Clear();
-	m_library->Clear();
-	m_stage->Clear();
-
-}
-
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
@@ -105,7 +94,6 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
-	m_property->SelectShape(NULL);
 
 	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage->GetStageImpl());

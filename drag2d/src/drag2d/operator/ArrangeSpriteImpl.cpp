@@ -150,7 +150,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// copy & paste
 	if (m_stage->GetKeyState(WXK_ALT))
 	{
-		m_op_state = new CopyPasteSpriteState(m_sprites_impl, m_selection, selected);
+		m_op_state = new CopyPasteSpriteState(m_selection, selected);
 	}
 
 	// offset
@@ -524,9 +524,9 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	// add to history
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites, m_sprites_impl));
+	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites));
 
-	m_sprites_impl->ClearSpriteSelection();
+	m_sprites_impl->ClearSelectedSprite();
 }
 
 void ArrangeSpriteImpl::UpOneLayer()

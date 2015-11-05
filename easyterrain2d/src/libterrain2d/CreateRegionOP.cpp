@@ -4,8 +4,10 @@
 namespace eterrain2d
 {
 
-CreateRegionOP::CreateRegionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl)
+CreateRegionOP::CreateRegionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+							   d2d::MultiShapesImpl* shapesImpl)
 	: libshape::DrawPolygonOP(wnd, stage, shapesImpl)
+	, m_shapesImpl(shapesImpl)
 {
 }
 

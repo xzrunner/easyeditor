@@ -38,6 +38,8 @@ protected:
 	static wxString GetJsonFileFilter(const wxString& file_tag);
 
 private:
+	void Clear();
+
 	void saveTmpInfo();
 	void loadTmpInfo();
 

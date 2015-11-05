@@ -22,9 +22,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 	SetCanvas(new StageCanvas(this, library));
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
 
 	MODULE_STAGE.impl = this;
+
+	d2d::ClearSpriteSJ::Instance()->Register(this);
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -39,19 +41,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
 	SetCanvas(new StageCanvas(this, library));
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
+
+	d2d::ClearSpriteSJ::Instance()->Register(this);
 }
 
-void StagePanel::Clear()
+StagePanel::~StagePanel()
 {
-	d2d::EditPanel::Clear();
-
-	Symbol* symbol = getSymbol();
-	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		symbol->m_sprites[i]->Release();
-	symbol->m_sprites.clear();
-
-	symbol->m_clipbox = d2d::Rect(0, 0);
+	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
 }
 
 bool StagePanel::Update(int version)
@@ -64,6 +61,25 @@ bool StagePanel::Update(int version)
 		}
 	}
 	return ret;
+}
+
+void StagePanel::Notify(int sj_id, void* ud)
+{
+	d2d::SpritesPanelImpl::Notify(sj_id, ud);
+
+	if (sj_id == d2d::MSG_CLEAR_SPRITE) {
+		Clear();
+	}
+}
+
+void StagePanel::Clear()
+{
+	Symbol* symbol = getSymbol();
+	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
+		symbol->m_sprites[i]->Release();
+	symbol->m_sprites.clear();
+
+	symbol->m_clipbox = d2d::Rect(0, 0);
 }
 
 } // complex

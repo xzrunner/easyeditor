@@ -36,7 +36,7 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
 		if (need_offset) {
 			sprite->Translate(d2d::Vector(-150, -150));
 		}
-		stage->InsertSprite(sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
  		spriteValue = value["sprite"][i++];
  	}
 

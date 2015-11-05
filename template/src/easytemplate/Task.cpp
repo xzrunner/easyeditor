@@ -35,13 +35,6 @@ bool Task::IsDirty() const
 	return false;
 }
 
-void Task::Clear()
-{
-	m_library->Clear();
-	m_stage->Clear();
-
-}
-
 const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
@@ -72,7 +65,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_library = new LibraryPanel(split);
 
 	m_property = new d2d::PropertySettingPanel(split);
-	m_view_panel_mgr.AddSpritePanel(m_property);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_library, m_property);
@@ -82,8 +74,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	StagePanel* stage = new StagePanel(parent, m_parent, m_library, m_property, &m_view_panel_mgr);
-	m_view_panel_mgr.AddSpritePanel(stage);
+	StagePanel* stage = new StagePanel(parent, m_parent, m_library, m_property);
 	m_stage = stage;
 	m_library->SetCanvas(m_stage->GetCanvas());	
 	m_property->SetEditPanel(m_stage->GetStageImpl());

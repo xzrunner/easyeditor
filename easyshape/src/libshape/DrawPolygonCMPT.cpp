@@ -10,7 +10,7 @@ namespace libshape
 
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
 								 d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-								 d2d::PropertySettingPanel* property,
+								 d2d::PropertySettingPanel* property
 								 /*, wxColourData& colorData*/)
 	: d2d::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)
 	, m_stage_wnd(stage_wnd)

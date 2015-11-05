@@ -7,6 +7,7 @@
 #include "render/DrawSelectedShapeVisitor.h"
 #include "message/SelectShapeSJ.h"
 #include "message/SelectShapeSetSJ.h"
+#include "message/InsertShapeSJ.h"
 
 namespace d2d
 {
@@ -38,13 +39,13 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapeImpl->ClearShapeSelection();
+		m_shapeImpl->ClearSelectedShape();
 		Clear();
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'x' || keyCode == 'X'))
 	{
 		PasteToSelection();
-		m_shapeImpl->ClearShapeSelection();
+		m_shapeImpl->ClearSelectedShape();
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
@@ -57,9 +58,8 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'v' || keyCode == 'V'))
 	{
-		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
-		{
-			m_shapeImpl->InsertShape(m_clipboard[i]->Clone());
+		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
+			InsertShapeSJ::Instance()->Insert(m_clipboard[i]->Clone());
 		}
 	}
 
@@ -194,7 +194,7 @@ void SelectShapesOP::PasteToSelection() const
 void SelectShapesOP::CopyFromSelection()
 {
 	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i) {
-		m_shapeImpl->InsertShape(m_clipboard[i]->Clone());
+		InsertShapeSJ::Instance()->Insert(m_clipboard[i]->Clone());
 	}
 }
 

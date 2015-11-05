@@ -43,7 +43,7 @@ void Task::Load(const char* filename)
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->Load(spr_val);
 		symbol->Release();
-		m_stage->InsertSprite(sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		spr_val = value["sprites"][i++];
 	}
 
@@ -82,14 +82,6 @@ bool Task::IsDirty() const
 	return false;
 }
 
-void Task::Clear()
-{
-	m_viewlist->Clear();
-	m_library->Clear();
-	m_stage->Clear();
-
-}
-
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
@@ -109,16 +101,12 @@ void Task::InitLayout()
 	m_library = new LibraryPanel(left_hori_splitter);
 
 	m_property = new d2d::PropertySettingPanel(left_hori_splitter);
-	m_view_panel_mgr.AddSpritePanel(m_property);
-	m_view_panel_mgr.AddShapePanel(m_property);
 
 	left_hori_splitter->SetSashGravity(0.5f);
 	left_hori_splitter->SplitHorizontally(m_library, m_property);
 
 	StagePanel* stage;
-	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property, &m_view_panel_mgr);
-	m_view_panel_mgr.AddSpritePanel(m_stage);
-	m_view_panel_mgr.AddShapePanel(m_stage);
+	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 	m_library->SetCanvas(m_stage->GetCanvas());
 
@@ -126,8 +114,7 @@ void Task::InitLayout()
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 //	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
-	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage->GetStageImpl(), stage, &m_view_panel_mgr);
-	m_view_panel_mgr.AddSpritePanel(m_viewlist);
+	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage->GetStageImpl(), stage);
 
 	right_splitter->SetSashGravity(0.85f);
 	right_splitter->SplitVertically(left_vert_splitter, m_viewlist);

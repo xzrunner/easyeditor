@@ -40,12 +40,6 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::Clear()
-{
-	m_stage->Clear();
-
-}
-
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 

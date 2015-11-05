@@ -15,21 +15,23 @@ public:
 	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
+	//	interface Observer
 	//
-	virtual void Clear();
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
-	virtual bool ClearAllSprite();
 	virtual void TraverseSprites(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
 	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;
+
+private:
+	void Insert(d2d::ISprite* spr);
+	void Remove(d2d::ISprite* spr);
+	void Clear();
 
 private:
 	std::vector<d2d::ISprite*> m_sprites;

@@ -183,14 +183,12 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 				}
 				else
 				{
-					m_shapesImpl->RemoveShape(m_capturedEditable.shape);
+					d2d::RemoveShapeSJ::Instance()->Remove(m_capturedEditable.shape);
 					m_shapesImpl->GetShapeSelection()->Clear();
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
 					m_dirty = true;
-					if (m_view_panel_mgr) {
-						m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-					}
+					d2d::SelectShapeSJ::Instance()->Select(NULL);
 				}
 				m_capturedEditable.shape = NULL;
 				m_stage->SetCanvasDirty();
@@ -321,9 +319,7 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 
 void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 {
-	if (m_view_panel_mgr) {
-		m_view_panel_mgr->SelectShape(captured.shape, m_shapesImpl);
-	}
+	d2d::SelectShapeSJ::Instance()->Select(captured.shape);
 
 	d2d::ShapeSelection* selection = m_shapesImpl->GetShapeSelection();
 	selection->Clear();

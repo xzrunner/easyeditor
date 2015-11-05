@@ -16,56 +16,36 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	SetEditOP(new ArrangeSpriteOP(this));
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
+
+	d2d::InsertSpriteSJ::Instance()->Register(this);
+	d2d::RemoveSpriteSJ::Instance()->Register(this);
+	d2d::ClearSpriteSJ::Instance()->Register(this);
 }
 
 StagePanel::~StagePanel()
 {
+	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
+	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
+	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
 }
 
-void StagePanel::Clear()
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	d2d::EditPanel::Clear();
-}
+	d2d::MultiSpritesImpl::Notify(sj_id, ud);
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	d2d::MultiSpritesImpl::InsertSprite(sprite);
-
-	sprite->Retain();
-	m_sprites.push_back(sprite);
-	GetCanvas()->SetDirty();
-	return true;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	d2d::MultiSpritesImpl::RemoveSprite(sprite);
-
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		if (m_sprites[i] == sprite) {
-			sprite->Release();
-			m_sprites.erase(m_sprites.begin() + i);
-			GetCanvas()->SetDirty();
-			return true;
-		}
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
-	return false;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	d2d::MultiSpritesImpl::ClearAllSprite();
-
-	bool ret = !m_sprites.empty();
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
-	}
-	m_sprites.clear();
-	if (ret) {
-		GetCanvas()->SetDirty();
-	}
-	return ret;
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
@@ -90,6 +70,34 @@ vec3 StagePanel::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
 {
 	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ScreenToProject(scr, proj_z);	
+}
+
+void StagePanel::Insert(d2d::ISprite* spr)
+{
+	spr->Retain();
+	m_sprites.push_back(spr);
+	GetCanvas()->SetDirty();
+}
+
+void StagePanel::Remove(d2d::ISprite* spr)
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (m_sprites[i] == spr) {
+			spr->Release();
+			m_sprites.erase(m_sprites.begin() + i);
+			GetCanvas()->SetDirty();
+			return;
+		}
+	}
+}
+
+void StagePanel::Clear()
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		m_sprites[i]->Release();
+	}
+	m_sprites.clear();
+	GetCanvas()->SetDirty();
 }
 
 }

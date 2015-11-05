@@ -22,8 +22,6 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void Clear();
-
 	virtual void GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 
 	virtual const d2d::EditPanel* GetEditPanel() const;

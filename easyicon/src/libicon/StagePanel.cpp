@@ -33,11 +33,6 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::Clear()
-{
-	EditPanel::Clear();
-}
-
 void StagePanel::SetIcon(Icon* icon)
 {
 	if (m_symbol) {
@@ -67,7 +62,7 @@ void StagePanel::SetImage(d2d::Image* img)
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, stage->GetStageImpl(), NULL, library)
+	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
 	, m_stage(stage)
 {
 }

@@ -6,16 +6,14 @@
 #include "dataset/SpriteFactory.h"
 #include "view/LibraryPanel.h"
 #include "view/EditPanelImpl.h"
-#include "view/MultiSpritesImpl.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
-SpriteDropTarget::SpriteDropTarget(MultiSpritesImpl* panelImpl, 
-								   EditPanelImpl* stage, 
+SpriteDropTarget::SpriteDropTarget(EditPanelImpl* stage, 
 								   LibraryPanel* libraryPanel)
-	: m_panelImpl(panelImpl)
-	, m_stage(stage)
+	: m_stage(stage)
 	, m_libraryPanel(libraryPanel)
 {
 }
@@ -34,7 +32,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		Vector pos = m_stage->TransPosScrToProj(x, y);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->Translate(pos);
-		m_panelImpl->InsertSprite(sprite);
+		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();
 	}
 

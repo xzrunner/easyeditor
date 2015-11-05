@@ -18,7 +18,7 @@ void FileIO::load(const char* filename)
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
 		d2d::ISprite* sprite = loadSprite(spriteValue);
-		Context::Instance()->stage->InsertSprite(sprite);
+		d2d::InsertSpriteSJ::Insert(sprite);
  		spriteValue = value["sprite"][i++];
  	}
 }

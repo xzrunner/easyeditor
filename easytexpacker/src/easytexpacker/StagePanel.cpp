@@ -27,34 +27,42 @@ StagePanel::StagePanel(wxWindow* parent,
 	m_strategy = new MaxRectsBinaryArrange();
 
 //	m_strategy = new RectBinArrange();
+
+	d2d::InsertSpriteSJ::Instance()->Register(this);
+	d2d::RemoveSpriteSJ::Instance()->Register(this);
 }
 
-void StagePanel::Clear()
+StagePanel::~StagePanel()
 {
-	EditPanel::Clear();
-	SpritesPanelImpl::ClearAllSprite();
+	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
+	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	fixCoords(sprite);
+	SpritesPanelImpl::Notify(sj_id, ud);
 
-	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
-	arrangeAllSprites(false);
-	return ret;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
-	arrangeAllSprites(false);
-	return ret;
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			fixCoords(p->spr);
+			// todo
+			// SpritesPanelImpl::Notify(sj_id, ud);
+			arrangeAllSprites(false);
+		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		arrangeAllSprites(false);
+		break;
+	}
 }
 
 void StagePanel::insertSpriteNoArrange(d2d::ISprite* sprite)
 {
 //	fixCoords(sprite);
-	d2d::SpritesPanelImpl::InsertSprite(sprite);
+	d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 }
 
 void StagePanel::arrangeAllSprites(bool bClearSelection)
@@ -74,8 +82,6 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 
 void StagePanel::loadFromLibrary()
 {
-	Clear();
-
 	d2d::ISymbol* symbol = NULL;
 	int index = 0;
 	while (true)
@@ -86,7 +92,7 @@ void StagePanel::loadFromLibrary()
 		else 
 		{
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			d2d::SpritesPanelImpl::InsertSprite(sprite);
+			d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 	}
 

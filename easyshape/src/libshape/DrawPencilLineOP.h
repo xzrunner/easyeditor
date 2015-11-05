@@ -10,13 +10,11 @@ class DrawPencilLineOP : public DrawCurveOP
 {
 public:
 	DrawPencilLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapesImpl, d2d::OneFloatValue* simplify);
+		d2d::OneFloatValue* simplify);
 
 	virtual bool OnMouseLeftUp(int x, int y);
 
 private:
-	d2d::MultiShapesImpl* m_shapesImpl;
-
 	d2d::OneFloatValue* m_simplify;
 
 }; // DrawPencilLineOP

@@ -13,6 +13,9 @@
 #include "view/EditPanel.h"
 #include "view/IStageCanvas.h"
 #include "render/DynamicTexAndFont.h"
+#include "message/ClearSpriteSJ.h"
+#include "message/ClearShapeSJ.h"
+#include "message/ClearPanelSJ.h"
 
 #include <wx/filename.h>
 #include <fstream>
@@ -74,7 +77,7 @@ void Frame::setTask(ITask* task)
 
 void Frame::initWithFile(const wxString& path)
 {
-	m_task->Clear();
+	Clear();
 	m_curr_filename = path;
 //	SetTitle(path);
 	try {
@@ -95,7 +98,7 @@ void Frame::openFile(const wxString& filename)
 		DynamicTexAndFont::Instance()->Clear();
 	}
 
-	m_task->Clear();
+	Clear();
 
 	m_curr_filename = filename;
 	m_recent.insert(m_curr_filename);
@@ -113,6 +116,13 @@ void Frame::RefreshWithCurrFile()
 {
 //	m_task->clear();
 	openFile(m_curr_filename);
+}
+
+void Frame::Clear()
+{
+	ClearSpriteSJ::Instance()->Clear();
+	ClearShapeSJ::Instance()->Clear();
+	ClearPanelSJ::Instance()->Clear();
 }
 
 void Frame::saveTmpInfo()
@@ -150,7 +160,7 @@ void Frame::onNew(wxCommandEvent& event)
 	if (!m_task) return;
 
 	setCurrFilename();
-	m_task->Clear();
+	Clear();
 
 	if (Config::Instance()->IsUseDTex()) {
 		DynamicTexAndFont::Instance()->Clear();

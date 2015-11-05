@@ -24,13 +24,9 @@ bool EditBezierOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapesImpl->ClearShapeSelection();
+		m_shapesImpl->ClearSelectedShape();
 		m_captured.clear();
-
-
-		if (m_view_panel_mgr) {
-			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-		}
+		d2d::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
 	return false;
@@ -52,9 +48,7 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
 			m_shapesImpl->GetShapeSelection()->Add(bezier);
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(bezier, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(bezier);
 		}
 	}
 	else
@@ -79,20 +73,15 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 			if (dis > 1)
 			{
 				BezierShape* bezier = new BezierShape(m_firstPress, m_currPos);
-				if (m_view_panel_mgr) {
-					m_view_panel_mgr->SelectShape(bezier, m_shapesImpl);
-				}
-				m_shapesImpl->GetShapeSelection()->Add(bezier);
-				m_shapesImpl->InsertShape(bezier);
+				d2d::SelectShapeSJ::Instance()->Select(bezier);
+				d2d::InsertShapeSJ::Instance()->Insert(bezier);
 			}
 		}
 	}
 	else
 	{
  		m_propertyPanel->EnablePropertyGrid(true);
-		if (m_view_panel_mgr) {
-			m_view_panel_mgr->SelectShape(m_captured.shape, m_shapesImpl);
-		}
+		d2d::SelectShapeSJ::Instance()->Select(m_captured.shape);
 	}
 
 	Clear();
@@ -114,14 +103,10 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			m_shapesImpl->RemoveShape(m_captured.shape);
+			d2d::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-
-
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else

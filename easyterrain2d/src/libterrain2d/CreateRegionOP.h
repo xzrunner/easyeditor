@@ -18,6 +18,8 @@ public:
 private:
 	StagePanel* m_stage;
 
+	d2d::MultiShapesImpl* m_shapesImpl;
+
 }; // CreateRegionOP
 
 }

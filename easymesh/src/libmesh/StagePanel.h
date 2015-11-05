@@ -20,11 +20,6 @@ public:
 	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
-	//
 	//	interface MultiShapesImpl
 	//
 	virtual void Notify(int sj_id, void* ud);
@@ -32,8 +27,6 @@ public:
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual bool InsertShape(d2d::IShape* shape);
-	virtual bool ClearAllShapes();
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
@@ -64,6 +57,8 @@ public:
 private:
 	void init(d2d::LibraryPanel* library);
 
+	void InitSubjects();
+
 private:
 	class StageDropTarget : public d2d::StageDropTarget
 	{
@@ -81,6 +76,8 @@ private:
 	d2d::ISprite* m_background;
 
 	Symbol* m_symbol;
+
+	std::vector<d2d::Subject*> m_subjects;
 
 }; // StagePanel
 

@@ -50,7 +50,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (m_stage->GetKeyState(WXK_CONTROL) && m_stage->GetKeyState(WXK_CONTROL_X))
 	{
 		PasteToSelection();
-		m_spritesImpl->ClearSpriteSelection();
+		m_spritesImpl->ClearSelectedSprite();
 		return true;
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -319,9 +319,7 @@ void SelectSpritesOP::CopyFromSelection()
 		sprites.push_back(sprite);
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
-
-		InsertSpriteSJ::Instance()->Insert(spr);
-
+		InsertSpriteSJ::Instance()->Insert(sprite);
 		last_spr = sprite;
 
 		sval = value["sprite"][i++];

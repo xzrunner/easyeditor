@@ -32,13 +32,6 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::Clear()
-{
-	m_library->Clear();
-	m_stage->Clear();
-
-}
-
 const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;

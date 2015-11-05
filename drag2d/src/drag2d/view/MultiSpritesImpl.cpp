@@ -81,8 +81,18 @@ void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::v
 	TraverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
 }
 
-void MultiSpritesImpl::ClearSpriteSelection()
+void MultiSpritesImpl::ClearSelectedSprite()
 {
+	if (m_sprite_selection->IsEmpty()) {
+		return;
+	}
+
+	std::vector<ISprite*> sprites;
+	m_sprite_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	}
+
 	m_sprite_selection->Clear();
 }
 

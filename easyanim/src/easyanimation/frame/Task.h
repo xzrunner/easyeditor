@@ -13,18 +13,21 @@ class StagePanel;
 class KeysPanel;
 class KeyFrame;
 
-class Task : public d2d::ITask
+class Task : public d2d::ITask, public d2d::Observer
 {
 public:
 	Task(wxFrame* parent);
 	virtual ~Task();
 
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
+
 	virtual void Load(const char* filepath);
 	virtual void Store(const char* filepath) const;
 
 	virtual bool IsDirty() const;
-
-	virtual void Clear();
 
 	virtual void GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 

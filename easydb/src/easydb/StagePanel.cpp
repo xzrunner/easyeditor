@@ -22,22 +22,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {
-	Clear();
-}
-
-void StagePanel::Clear()
-{
-	d2d::EditPanel::Clear();
-	d2d::SpritesPanelImpl::ClearAllSprite();
-	d2d::ShapesPanelImpl::ClearAllShapes();
 }
 
 void StagePanel::loadFromDir(const std::string& dirpath)
 {
+	d2d::ClearSpriteSJ::Instance()->Clear();
+
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dirpath, files);
 
-	ClearAllSprite();
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i].ToStdString();
@@ -47,7 +40,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			symbol->Release();
-			InsertSprite(sprite);
+			d2d::InsertSpriteSJ::Insert(sprite);
 		}
 	}
 

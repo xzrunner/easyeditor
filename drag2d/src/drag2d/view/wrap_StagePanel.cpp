@@ -3,6 +3,7 @@
 #include "dataset/wrap_ISprite.h"
 #include "dataset/wrap_SelectionSet.h"
 #include "view/MultiSpritesImpl.h"
+#include "message/InsertSpriteSJ.h"
 
 d2d::StageModule MODULE_STAGE;
 
@@ -69,8 +70,9 @@ namespace d2d
 			return 0;
 
 		ISprite* t = luax_checksprite(L, 1);
-		if (t)
-			MODULE_STAGE.impl->InsertSprite(t);
+		if (t) {
+			InsertSpriteSJ::Instance()->Insert(t);
+		}
 		return 0;
 	}
 

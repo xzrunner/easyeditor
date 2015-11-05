@@ -18,11 +18,6 @@ public:
 		d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites);
 	virtual ~StagePanel();
 
-	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
 	void SetIcon(Icon* icon);
 	Icon* GetIcon();
 

@@ -24,8 +24,6 @@ public:
 public:
 	TopPannels();
 
-	void Clear();
-
 }; // TopPannels
 
 }

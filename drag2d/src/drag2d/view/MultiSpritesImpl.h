@@ -33,7 +33,7 @@ public:
 	virtual void QuerySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const;		
 
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
-	void ClearSpriteSelection();
+	void ClearSelectedSprite();
 
 private:
 	void OnSpriteSelected(ISprite* spr, bool clear);
@@ -41,6 +41,7 @@ private:
 protected:
 	SpriteSelection* m_sprite_selection;
 
+private:
 	std::vector<Subject*> m_subjects;
 
 }; // MultiSpritesImpl

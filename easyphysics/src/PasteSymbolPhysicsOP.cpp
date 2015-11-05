@@ -7,9 +7,9 @@ namespace ephysics
 {
 
 PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-										   d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel, 
-										   PhysicsPanelImpl* physicsImpl, float* pScale /*= NULL*/)
-	: d2d::PasteSymbolOP(stage_wnd, stage, spritesImpl, libraryPanel, pScale)
+										   d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
+										   float* pScale /*= NULL*/)
+	: d2d::PasteSymbolOP(stage_wnd, stage, libraryPanel, pScale)
 	, m_pScale(pScale)
 	, m_bStatic(false)
 {
@@ -35,7 +35,7 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 		if (body) {
 			body->getBody()->SetType(m_bStatic ? b2_staticBody : b2_dynamicBody);
 		}
-		m_panelImpl->InsertSprite(sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 
 		sprite->Release();
 	}

@@ -23,21 +23,22 @@ public:
 	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL);
 
 	//
-	// d2d::EditPanel interface
+	//	interface MultiShapesImpl
 	//
-	virtual void Clear();
+	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual bool InsertShape(d2d::IShape* shape);
-	virtual bool ClearAllShapes();
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
 	Symbol* GetSymbol() { return m_symbol; }
 
 	void LoadFromShadow();
+
+private:
+	void InsertShape(d2d::IShape* shape);
 
 private:
 	Symbol* m_symbol;

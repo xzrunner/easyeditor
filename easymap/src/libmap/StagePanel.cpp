@@ -23,10 +23,6 @@ StagePanel::~StagePanel()
 {
 }
 
-void StagePanel::Clear()
-{
-}
-
 void StagePanel::OnMouseHook(wxMouseEvent& event)
 {
 	if (event.RightDown()) {

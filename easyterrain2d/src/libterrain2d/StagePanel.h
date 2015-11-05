@@ -21,11 +21,6 @@ public:
 		d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
 	void Store(const std::string& dir, Json::Value& value) const;
 	void Load(const std::string& dir, const Json::Value& value, 
 		d2d::LibraryPanel* library, ToolbarPanel* toolbar);

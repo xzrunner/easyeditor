@@ -107,7 +107,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 
 		chain0->Load(merged);
 		chain0->refresh();
-		m_shapesImpl->RemoveShape(chain1);
+		d2d::RemoveShapeSJ::Instance()->Remove(chain1);
 		m_shapesImpl->GetShapeSelection()->Clear();
 
 		m_shapesImpl->GetShapeSelection()->Clear();

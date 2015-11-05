@@ -25,7 +25,7 @@ void FileIO::load(const char* filename, StagePanel* stage)
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
 		d2d::ISprite* sprite = load(imgValue, stage, dir);
-		stage->InsertSprite(sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		imgValue = value["image"][i++];
 	}
 

@@ -6,7 +6,7 @@ namespace libshape
 {
 
 EditNodesOP::EditNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl)
-	: SelectNodesOP(wnd, stage, shapesImpl, NULL, NULL)
+	: SelectNodesOP(wnd, stage, shapesImpl, NULL)
 {
 	m_lastPos.setInvalid();
 }

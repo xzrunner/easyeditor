@@ -19,7 +19,7 @@ DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, wxWindow* sta
 	}
  	// draw polyline with pencil, simplify threshold
 	{
-		addChild(new DrawPencilLineCMPT(this, wxT("pencil"), stage_wnd, stage, shapesImpl));
+		addChild(new DrawPencilLineCMPT(this, wxT("pencil"), stage_wnd, stage));
 	}
 }
 

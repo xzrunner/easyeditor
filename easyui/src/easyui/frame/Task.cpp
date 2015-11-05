@@ -44,11 +44,6 @@ bool Task::IsDirty() const
 	return false;
 }
 
-void Task::Clear()
-{
-	m_top_pannels.Clear();
-}
-
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 //	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));

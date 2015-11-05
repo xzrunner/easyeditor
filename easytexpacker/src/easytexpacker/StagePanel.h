@@ -13,17 +13,12 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public e
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
+	//	interface Observer
 	//
-	virtual void Clear();
-
-	//
-	// d2d::SpritesPanelImpl interface
-	//
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
+	virtual void Notify(int sj_id, void* ud);
 
 	void insertSpriteNoArrange(d2d::ISprite* sprite);
 

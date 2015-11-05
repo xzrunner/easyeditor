@@ -45,10 +45,6 @@ StagePanel::~StagePanel()
 	delete m_test;
 }
 
-void StagePanel::Clear()
-{
-}
-
 void StagePanel::Load()
 {
 	eejoy2d::EJScreen::Create();

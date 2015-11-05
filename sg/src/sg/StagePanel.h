@@ -16,18 +16,12 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
+	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
+	//	interface Observer
 	//
-	virtual void Clear();
-
-	//
-	// d2d::SpritesPanelImpl interface
-	//
-	virtual bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
-	virtual bool RemoveSprite(d2d::ISprite* sprite);
-	virtual bool ClearAllSprite();
+	virtual void Notify(int sj_id, void* ud);
 
 	void TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
 	void TransGridPosToCoords(int row, int col, d2d::Vector& pos) const;
@@ -65,6 +59,10 @@ private:
 	d2d::Vector FixSpriteLocation(const d2d::Vector& pos) const;
 
 	void ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const;
+
+	void Insert(d2d::ISprite* spr);
+	void Remove(d2d::ISprite* spr);
+	void Clear();
 
 private:
 	d2d::LibraryPanel* m_library;

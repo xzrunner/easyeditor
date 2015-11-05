@@ -4,10 +4,9 @@
 namespace libshape
 {
 
-DrawPolygonOP::DrawPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+DrawPolygonOP::DrawPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 							 d2d::MultiShapesImpl* shapesImpl)
 	: DrawPolylineOP(wnd, stage, false)
-	, m_shapesImpl(shapesImpl)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
 }
@@ -18,7 +17,7 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 
 	if (m_polyline.size() >= 3)
 	{
-		m_shapesImpl->InsertShape(new PolygonShape(m_polyline));
+		d2d::InsertShapeSJ::Instance()->Insert(new PolygonShape(m_polyline));
 		m_polyline.clear();
 		m_currPos.setInvalid();
 	}

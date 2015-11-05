@@ -2525,26 +2525,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="base"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\IShapeViewPanel.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\ISpriteViewPanel.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\ViewPanelMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\ViewPanelMgr.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="widget"
@@ -2908,6 +2888,14 @@
 			<Filter
 				Name="subjects"
 				>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\ClearPanelSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\ClearPanelSJ.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.cpp"
 					>

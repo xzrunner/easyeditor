@@ -25,13 +25,9 @@ bool EditCircleOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapesImpl->ClearShapeSelection();
+		m_shapesImpl->ClearSelectedShape();
 		m_captured.clear();
-
-
-		if (m_view_panel_mgr) {
-			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-		}
+		d2d::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
 	return false;
@@ -54,9 +50,7 @@ bool EditCircleOP::OnMouseLeftDown(int x, int y)
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
 			m_shapesImpl->GetShapeSelection()->Add(circle);
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(circle, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(circle);
 		}
 	}
 	else
@@ -81,11 +75,8 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
-				if (m_view_panel_mgr) {
-					m_view_panel_mgr->SelectShape(circle, m_shapesImpl);
-				}
-				m_shapesImpl->GetShapeSelection()->Add(circle);
-				m_shapesImpl->InsertShape(circle);
+				d2d::SelectShapeSJ::Instance()->Select(circle);
+				d2d::InsertShapeSJ::Instance()->Insert(NULL);
 			}
 		}
 	}
@@ -94,9 +85,7 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 		if (m_propertyPanel) {
 			m_propertyPanel->EnablePropertyGrid(true);
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape)) {
-				if (m_view_panel_mgr) {
-					m_view_panel_mgr->SelectShape(circle, m_shapesImpl);
-				}
+				d2d::SelectShapeSJ::Instance()->Select(circle);
 			}
 		}
 	}
@@ -120,14 +109,10 @@ bool EditCircleOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			m_shapesImpl->RemoveShape(m_captured.shape);
+			d2d::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-
-
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else

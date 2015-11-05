@@ -36,7 +36,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
 		ocean->Retain();
-		InsertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+		d2d::InsertShapeSJ::Instance()->Insert(
+			const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 	}
 
 	SetDropTarget(new StageDropTarget(this, library));
@@ -47,10 +48,6 @@ StagePanel::~StagePanel()
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		m_oceans[i]->Release();
 	}
-}
-
-void StagePanel::Clear()
-{
 }
 
 void StagePanel::Store(const std::string& dir, Json::Value& value) const
@@ -79,7 +76,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* bg = d2d::SpriteFactory::Instance()->create(symbol);
 		bg->Load(bg_val);
-		InsertSprite(bg);
+		d2d::InsertSpriteSJ::Instance()->Insert(bg);
 		symbol->Release();
 
 		bg_val = value["bg"][i++];
@@ -91,7 +88,8 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		OceanMesh* ocean = FileIO::LoadOceanMesh(dir, ocean_val);
 		if (ocean) {
 			m_oceans.push_back(ocean);
-			InsertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+			d2d::InsertShapeSJ::Instance()->Insert(
+				const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));
 			if (const d2d::ISymbol* tex1 = ocean->GetImage1()) {
 				library->AddSymbol(const_cast<d2d::ISymbol*>(tex1));
@@ -143,7 +141,7 @@ void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageS
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, stage->GetStageImpl(), NULL, library)
+	: d2d::StageDropTarget(stage, NULL, library)
 	, m_stage(stage)
 {
 }
@@ -160,7 +158,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		} else {
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			sprite->Translate(pos);
-			m_stage->InsertSprite(sprite);
+			d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 		return true;
 	}

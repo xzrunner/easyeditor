@@ -30,7 +30,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_pathfinding(NULL)
 	, m_enable_update(true)
 {
-	SetDropTarget(new d2d::SpriteDropTarget(this, GetStageImpl(), library));
+	SetDropTarget(new d2d::SpriteDropTarget(GetStageImpl(), library));
 
 	if (OPEN_GRIDS) {
 		m_grids = new Grids;

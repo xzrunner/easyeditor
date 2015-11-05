@@ -15,11 +15,6 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
 protected:
 	virtual void OnSizeDebug(wxSizeEvent& event);
 

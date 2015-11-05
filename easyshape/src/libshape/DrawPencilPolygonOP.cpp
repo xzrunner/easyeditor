@@ -59,7 +59,7 @@ void DrawPencilPolygonOP::NewPolygon(const std::vector<d2d::Vector>& poly)
 {
 	Type type = (Type)m_cmpt->GetSelected();
 	if (type == e_normal) {
-		m_shapesImpl->InsertShape(new PolygonShape(poly));
+		d2d::InsertShapeSJ::Instance()->Insert(new PolygonShape(poly));
 	} else if (type == e_union) {
 		UnionPolygon(poly);
 	} else if (type == e_difference) {
@@ -134,9 +134,9 @@ void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<d2d::Vec
 		return;
 	}
 
-	m_shapesImpl->ClearAllShapes();
+	d2d::ClearShapeSJ::Instance()->Clear();
 	for (int i = 0, n = paths.size(); i < n; ++i) {
-		m_shapesImpl->InsertShape(new PolygonShape(paths[i]));
+		d2d::InsertShapeSJ::Instance()->Insert(new PolygonShape(paths[i]));
 	}
 }
 

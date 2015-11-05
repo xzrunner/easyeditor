@@ -27,6 +27,8 @@ public:
 	//
 	virtual void Notify(int sj_id, void* ud);
 
+	void Insert(ISprite* sprite, int idx = -1);
+
 	void RemoveSelected();
 	void ReorderSelected(bool up);
 
@@ -42,7 +44,6 @@ private:
 
 	void Select(ISprite* spr, bool clear);
 	void Reorder(const ISprite* sprite, bool up);
-	void Insert(ISprite* sprite, int idx = -1);
 	void Remove(ISprite* sprite);
 	void Clear();
 

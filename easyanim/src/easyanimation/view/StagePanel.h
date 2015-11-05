@@ -19,11 +19,6 @@ public:
 	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
-	//
 	//	interface Observer
 	//
 	virtual void Notify(int sj_id, void* ud);

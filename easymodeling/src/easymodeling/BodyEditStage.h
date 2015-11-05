@@ -7,24 +7,20 @@
 
 namespace emodeling
 {
-	class BodyEditStage : public libshape::StagePanel
-	{
-	public:
-		BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
-			libshape::Symbol* symbol);
 
-		//
-		// d2d::MultiShapesImpl interface
-		//
-		virtual bool InsertShape(d2d::IShape* shape);
-		virtual bool RemoveShape(d2d::IShape* shape);
+class BodyEditStage : public libshape::StagePanel
+{
+public:
+	BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
+		libshape::Symbol* symbol);
 
-		//
-		// libshape::StagePanel interface
-		//
-		virtual void loadShapes();
+	//
+	// libshape::StagePanel interface
+	//
+	virtual void loadShapes();
 
-	}; // BodyEditStage
+}; // BodyEditStage
+
 }
 
 #endif // EMODELING_BODY_EDIT_STAGE_H

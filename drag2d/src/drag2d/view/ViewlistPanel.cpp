@@ -80,6 +80,19 @@ void ViewlistPanel::Notify(int sj_id, void* ud)
 	}
 }
 
+void ViewlistPanel::Insert(ISprite* sprite, int idx)
+{
+	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
+	if (idx < 0 || idx >= m_sprites.size()) {
+		m_list->Insert(item, 0);
+		m_sprites.insert(m_sprites.begin(), sprite);
+	} else {
+		int order = m_sprites.size() - idx;
+		m_list->Insert(item, order);
+		m_sprites.insert(m_sprites.begin() + order, sprite);
+	}
+}
+
 void ViewlistPanel::RemoveSelected()
 {
 	int idx = m_list->GetSelection();
@@ -187,19 +200,6 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 			m_list->Swap(i, pos);
 			m_list->SetSelection(pos);
 		}
-	}
-}
-
-void ViewlistPanel::Insert(ISprite* sprite, int idx)
-{
-	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
-	if (idx < 0 || idx >= m_sprites.size()) {
-		m_list->Insert(item, 0);
-		m_sprites.insert(m_sprites.begin(), sprite);
-	} else {
-		int order = m_sprites.size() - idx;
-		m_list->Insert(item, order);
-		m_sprites.insert(m_sprites.begin() + order, sprite);
 	}
 }
 

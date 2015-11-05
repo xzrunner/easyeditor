@@ -7,13 +7,9 @@
 namespace ecomplex
 {
 
-class StagePanel;
-
 class RectCutLoader
 {
-public:
-	RectCutLoader(StagePanel* stage);
-	
+public:	
 	void LoadOnlyJson(const wxString& pack_file, const wxString& img_name);
 
 	void LoadJsonAndImg(const wxString& pack_file, const wxString& img_name);
@@ -40,9 +36,6 @@ private:
 
 	void LoadRRPFile(const wxString& pack_file, int img_id,
 		std::vector<Picture>& pictures);
-
-private:
-	StagePanel* m_stage;
 
 }; // RectCutLoader
 

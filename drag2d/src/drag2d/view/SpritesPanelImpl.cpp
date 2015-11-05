@@ -25,6 +25,9 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* contain
 
 	m_subjects.push_back(ReorderSpriteSJ::Instance());
 	m_subjects.push_back(ReorderSpriteMostSJ::Instance());
+	m_subjects.push_back(InsertSpriteSJ::Instance());
+	m_subjects.push_back(RemoveSpriteSJ::Instance());
+	m_subjects.push_back(ClearSpriteSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -34,7 +37,7 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
-	m_stage->SetDropTarget(new SpriteDropTarget(this, stage, library));
+	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
 
 	m_container = new SpritesContainer;
 

@@ -46,4 +46,9 @@ bool ShapesContainer::ResetOrder(const Object* obj, bool up)
 	return m_shapes.ResetOrder(static_cast<const IShape*>(obj), up);
 }
 
+bool ShapesContainer::ResetOrderMost(const Object* obj, bool up)
+{
+	return m_shapes.ResetOrderMost(static_cast<const IShape*>(obj), up);
+}
+
 }

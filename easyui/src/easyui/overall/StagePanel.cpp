@@ -21,24 +21,30 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, top_pannels->property, 
 		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property)));
 	SetCanvas(new StageCanvas(this));
+
+	d2d::InsertSpriteSJ::Instance()->Register(this);
+	d2d::RemoveSpriteSJ::Instance()->Register(this);
 }
 
-void StagePanel::Clear()
+StagePanel::~StagePanel()
 {
+	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
+	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);	
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
-	m_anchor_mgr.Insert(sprite);
-	return ret;
-}
+	d2d::SpritesPanelImpl::Notify(sj_id, ud);
 
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	bool ret = d2d::SpritesPanelImpl::RemoveSprite(sprite);
-	m_anchor_mgr.Remove(sprite);
-	return ret;
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		m_anchor_mgr.Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		m_anchor_mgr.Remove((d2d::ISprite*)ud);
+		break;
+	}
 }
 
 void StagePanel::OnSelected()

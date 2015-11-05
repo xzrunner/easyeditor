@@ -16,82 +16,43 @@ StagePanel::StagePanel(wxWindow* parent,
 	, d2d::SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
 	SetCanvas(new StageCanvas(this));
+
+	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
+	m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
+	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
+	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 StagePanel::~StagePanel()
 {
 	Clear();
-}
 
-void StagePanel::Clear()
-{
-	d2d::EditPanel::Clear();
-	ClearAllSprite();
-}
-
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	d2d::SpritesPanelImpl::InsertSprite(sprite);
-
-	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
-		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
-	if (!d2d::FilenameTools::IsFileExist(filepath)) {
-		return false;
+	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
+		m_subjects[i]->UnRegister(this);
 	}
-
-	d2d::ISymbol* bg = NULL;
-	std::vector<d2d::IShape*> shapes;
-	libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
-	libmodeling::Body* body = new libmodeling::Body;
-	for (int i = 0, n = shapes.size(); i< n; ++i)
-	{
-		libmodeling::Fixture* fixture = new libmodeling::Fixture;
-		fixture->body = body;
-
-		fixture->shape = shapes[i];
-		body->fixtures.push_back(fixture);
-	}
-
-	body->sprite = sprite;
-	sprite->SetUserData(body);
-	m_bodies.push_back(body);
-
-	return true;
 }
 
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	bool ret = false;
-	for (size_t i = 0, n = m_bodies.size(); i < n; ++i)
+	MultiSpritesImpl::Notify(sj_id, ud);
+
+	switch (sj_id)
 	{
-		if (m_bodies[i]->sprite == sprite)
+	case d2d::MSG_INSERT_SPRITE:
 		{
-			delete m_bodies[i];
-			m_bodies.erase(m_bodies.begin() + i);
-			ret = true;
-			break;
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
 		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
-
-	if (d2d::SpritesPanelImpl::RemoveSprite(sprite)) {
-		ret = true;
-	}
-	return ret;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	bool ret = d2d::SpritesPanelImpl::ClearAllSprite();
-
-	if (!m_bodies.empty() || !m_joints.empty()) {
-		ret = true;
-	}
-	for_each(m_bodies.begin(), m_bodies.end(), DeletePointerFunctor<libmodeling::Body>());
-	m_bodies.clear();
-	for_each(m_joints.begin(), m_joints.end(), DeletePointerFunctor<libmodeling::Joint>());
-	m_joints.clear();
-
-	return ret;
 }
 
 d2d::ISprite* StagePanel::QuerySpriteByPos(const d2d::Vector& pos) const
@@ -204,6 +165,53 @@ void StagePanel::loadBody(d2d::ISprite* sprite, libmodeling::Body& body)
 	fixture->shape = new libshape::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 	body.fixtures.push_back(fixture);
+}
+
+void StagePanel::Insert(d2d::ISprite* spr)
+{
+	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
+		spr->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
+	if (!d2d::FilenameTools::IsFileExist(filepath)) {
+		return;
+	}
+
+	d2d::ISymbol* bg = NULL;
+	std::vector<d2d::IShape*> shapes;
+	libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
+	libmodeling::Body* body = new libmodeling::Body;
+	for (int i = 0, n = shapes.size(); i< n; ++i)
+	{
+		libmodeling::Fixture* fixture = new libmodeling::Fixture;
+		fixture->body = body;
+
+		fixture->shape = shapes[i];
+		body->fixtures.push_back(fixture);
+	}
+
+	body->sprite = spr;
+	spr->SetUserData(body);
+	m_bodies.push_back(body);
+}
+
+void StagePanel::Remove(d2d::ISprite* spr)
+{
+	for (size_t i = 0, n = m_bodies.size(); i < n; ++i)
+	{
+		if (m_bodies[i]->sprite == spr)
+		{
+			delete m_bodies[i];
+			m_bodies.erase(m_bodies.begin() + i);
+			break;
+		}
+	}
+}
+
+void StagePanel::Clear()
+{
+	for_each(m_bodies.begin(), m_bodies.end(), DeletePointerFunctor<libmodeling::Body>());
+	m_bodies.clear();
+	for_each(m_joints.begin(), m_joints.end(), DeletePointerFunctor<libmodeling::Joint>());
+	m_joints.clear();
 }
 
 //////////////////////////////////////////////////////////////////////////

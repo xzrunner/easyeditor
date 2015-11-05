@@ -4,10 +4,8 @@
 namespace libshape
 {
 
-DrawCosineCurveOP::DrawCosineCurveOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-									 d2d::MultiShapesImpl* shapesImpl)
+DrawCosineCurveOP::DrawCosineCurveOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
 	: DrawPolylineOP(wnd, stage, false)
-	, m_shapesImpl(shapesImpl)
 {
 }
 
@@ -18,7 +16,8 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 	CosineShape* curve = new CosineShape(m_polyline);
 	curve->setMidPoints();
 
-	m_shapesImpl->InsertShape(curve);
+	d2d::InsertShapeSJ::Instance()->Insert(curve);
+
 	m_polyline.clear();
 	m_currPos.setInvalid();
 

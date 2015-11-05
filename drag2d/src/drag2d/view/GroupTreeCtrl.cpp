@@ -555,8 +555,8 @@ void GroupTreeCtrl::ReorderSprites()
 	for (int i = sprites.size() - 1; i >= 0; --i) {
 		ISprite* spr = sprites[i];
 		m_add_del_open = false;
-		m_sprite_impl->RemoveSprite(spr);
-		m_sprite_impl->InsertSprite(spr);
+		RemoveSpriteSJ::Instance()->Remove(spr);
+		InsertSpriteSJ::Instance()->Insert(spr);
 		m_add_del_open = true;
 	}
 }

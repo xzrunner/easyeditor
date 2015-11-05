@@ -152,19 +152,15 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 
 void RightPopupMenu::UpLayerMost()
 {
-	ReorderSpriteMostSJ::Params p;
-	p.up = true;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		ReorderSpriteMostSJ::Reorder(m_edited_sprs[i], true);
+		d2d::ReorderSpriteMostSJ::Instance()->Reorder(m_edited_sprs[i], true);
 	}
 }
 
 void RightPopupMenu::DownLayerMost()
 {
-	ReorderSpriteMostSJ::Params p;
-	p.up = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		ReorderSpriteMostSJ::Reorder(m_edited_sprs[i], false);
+		d2d::ReorderSpriteMostSJ::Instance()->Reorder(m_edited_sprs[i], false);
 	}
 }
 

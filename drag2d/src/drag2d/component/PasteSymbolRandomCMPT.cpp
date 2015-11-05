@@ -13,7 +13,7 @@ PasteSymbolRandomCMPT::PasteSymbolRandomCMPT(wxWindow* parent, const wxString& n
 	: AbstractEditCMPT(parent, name, stage)
 {
 	m_randomWidget = new PasteSymbolRandomWidget(this, libraryPanel);
-	m_editOP = new PasteSymbolRandomOP(stage_wnd, stage, spritesImpl, libraryPanel, m_randomWidget);
+	m_editOP = new PasteSymbolRandomOP(stage_wnd, stage, libraryPanel, m_randomWidget);
 }
 
 wxSizer* PasteSymbolRandomCMPT::initLayout()

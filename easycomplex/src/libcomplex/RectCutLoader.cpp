@@ -1,5 +1,4 @@
 #include "RectCutLoader.h"
-#include "StagePanel.h"
 
 #include <drag2d.h>
 #include <easyimage.h>
@@ -9,11 +8,6 @@
 
 namespace ecomplex
 {
-
-RectCutLoader::RectCutLoader(StagePanel* stage)
-	: m_stage(stage)
-{
-}
 
 void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_name)
 {
@@ -33,7 +27,7 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 		pos.y += 400;
 		sprite->SetTransform(pos, sprite->GetAngle());
 
-		m_stage->InsertSprite(sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 
 		sprite->Release();
 		symbol->Release();
@@ -72,7 +66,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 		pos.y += 400;
 		spr_sprite->SetTransform(pos, angle);
 
-		m_stage->InsertSprite(spr_sprite);
+		d2d::InsertSpriteSJ::Instance()->Insert(spr_sprite);
 
 		img_data->Release();
 		spr_sprite->Release();

@@ -11,7 +11,7 @@ InsertSpriteSJ::InsertSpriteSJ(int id)
 {
 }
 
-void InsertSpriteSJ::Insert(ISprite* spr, int idx = -1, Observer* except)
+void InsertSpriteSJ::Insert(ISprite* spr, int idx, Observer* except)
 {
 	Params p;
 	p.spr = spr;

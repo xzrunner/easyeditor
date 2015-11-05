@@ -9,13 +9,10 @@ namespace libshape
 class DrawPolygonOP : public DrawPolylineOP
 {
 public:
-	DrawPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	DrawPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 		d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
-
-protected:
-	d2d::MultiShapesImpl* m_shapesImpl;
 
 }; // DrawPolygonOP
 

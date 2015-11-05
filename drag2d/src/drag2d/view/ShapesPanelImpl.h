@@ -24,15 +24,18 @@ public:
 	//
 	// MultiShapesImpl interface
 	//
-	virtual bool InsertShape(IShape* shape);
-	virtual bool ClearAllShapes();
 	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const;
+
+private:
+	void InitSubjects();
 
 private:
 	EditPanelImpl* m_stage;
 
 	IDataContainer* m_container;
+
+	std::vector<Subject*> m_subjects;
 
 }; // ShapesPanelImpl
 

@@ -57,7 +57,7 @@ PropertySettingPanel::~PropertySettingPanel()
 
 void PropertySettingPanel::Notify(int sj_id, void* ud)
 {
-	switch (MSG_SELECT_SPRITE)
+	switch (sj_id)
 	{
 	case MSG_SELECT_SPRITE:
 		{
@@ -129,7 +129,9 @@ void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 	if (spr) {
 		std::set<ISprite*>::iterator itr = m_selection.find(spr);
 		if (itr != m_selection.end()) {
-			return;
+			if (!clear) {
+				return;
+			}
 		}
 	}
 
@@ -143,7 +145,9 @@ void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 	}
 
 	assert(m_stage);
-	if (m_selection.size() == 1) {
+	if (m_selection.size() == 0) {
+		SetPropertySetting(CreateDefaultProperty());
+	} else if (m_selection.size() == 1) {
 		if (spr) {
 			SetPropertySetting(spr->CreatePropertySetting(m_stage));
 		} else {

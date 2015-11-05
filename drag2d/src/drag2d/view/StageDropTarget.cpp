@@ -1,5 +1,4 @@
 #include "StageDropTarget.h"
-#include "MultiSpritesImpl.h"
 #include "LibraryPanel.h"
 
 #include "common/StringTools.h"
@@ -7,16 +6,15 @@
 #include "dataset/SymbolMgr.h"
 #include "dataset/ISprite.h"
 #include "view/EditPanelImpl.h"
+#include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
 StageDropTarget::StageDropTarget(wxWindow* stage_wnd, EditPanelImpl* stage, 
-								 MultiSpritesImpl* sprites_impl, 
 								 LibraryPanel* library)
 	: CombinedDropTarget(stage_wnd)
 	, m_stage(stage)
-	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
 }
@@ -44,14 +42,12 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		if (m_sprites_impl) {
-			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-			if (sprite->GetSymbol().GetSize().isValid()) {
-				sprite->Translate(pos);
-				m_sprites_impl->InsertSprite(sprite);
-			}
-			sprite->Release();
+		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		if (sprite->GetSymbol().GetSize().isValid()) {
+			sprite->Translate(pos);
+			InsertSpriteSJ::Instance()->Insert(sprite);
 		}
+		sprite->Release();
 	}
 }
 
@@ -70,12 +66,10 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 				continue;
 			}
 
-			if (m_sprites_impl) {
-				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-				sprite->Translate(pos);
-				m_sprites_impl->InsertSprite(sprite);
-				sprite->Release();
-			}
+			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+			sprite->Translate(pos);
+			InsertSpriteSJ::Instance()->Insert(sprite);
+			sprite->Release();
 		}
 		symbol->Release();
 	}

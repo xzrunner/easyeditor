@@ -19,11 +19,6 @@ public:
 		d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	//
-	// d2d::EditPanel interface
-	//
-	virtual void Clear();
-
 	Symbol* GetSymbol() { return m_symbol; }
 
 private:

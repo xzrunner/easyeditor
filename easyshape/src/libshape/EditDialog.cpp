@@ -49,7 +49,7 @@ void EditDialog::InitLayout(Symbol* symbol)
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(horizontal);
 	m_stage = new StagePanel(vertical, this, symbol);
 	property->SetEditPanel(m_stage->GetStageImpl());
-	m_toolbar = new ToolbarPanel(horizontal, property, NULL, m_stage);
+	m_toolbar = new ToolbarPanel(horizontal, property, m_stage);
 
 	horizontal->SetSashGravity(0.6f);
 	horizontal->SplitHorizontally(m_toolbar, property);

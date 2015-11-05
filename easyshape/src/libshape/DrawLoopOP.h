@@ -9,13 +9,10 @@ namespace libshape
 class DrawLoopOP : public DrawPolylineOP
 {
 public:
-	DrawLoopOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	DrawLoopOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 		d2d::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
-
-private:
-	d2d::MultiShapesImpl* m_shapesImpl;
 
 }; // DrawLoopOP
 

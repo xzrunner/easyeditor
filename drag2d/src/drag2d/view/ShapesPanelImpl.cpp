@@ -9,6 +9,8 @@
 
 #include "message/subject_id.h"
 #include "message/RemoveShapeSJ.h"
+#include "message/InsertShapeSJ.h"
+#include "message/ClearShapeSJ.h"
 
 namespace d2d
 {
@@ -19,7 +21,7 @@ ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage)
 {
 	m_container = new ShapesContainer();
 
-	RemoveShapeSJ::Instance()->Register(this);
+	InitSubjects();
 }
 
 ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage, IDataContainer* container)
@@ -29,48 +31,55 @@ ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage, IDataContainer* container
 	m_container = container;
 	m_container->Retain();
 
-	RemoveShapeSJ::Instance()->Register(this);
+	InitSubjects();
 }
 
 ShapesPanelImpl::~ShapesPanelImpl()
 {
 	m_container->Release();
 
-	RemoveShapeSJ::Instance()->UnRegister(this);
+	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
 void ShapesPanelImpl::Notify(int sj_id, void* ud)
 {
 	MultiShapesImpl::Notify(sj_id, ud);
-	if (sj_id == MSG_REMOVE_SHAPE) {
-		bool dirty = m_container->Remove((IShape*)ud);
-		if (dirty) {
+
+	switch (sj_id)
+	{
+	case MSG_REMOVE_SHAPE:
+		if (m_container->Remove((IShape*)ud)) {
 			m_stage->SetCanvasDirty();
 		}
+		break;
+	case MSG_INSERT_SHAPE:
+		if (m_container->Insert((IShape*)ud)) {
+			m_stage->SetCanvasDirty();
+		}
+		break;
+	case MSG_CLEAR_SHAPE:
+		if (m_container->Clear()) {
+			m_stage->SetCanvasDirty();
+		}
+		break;
 	}
-}
-
-bool ShapesPanelImpl::InsertShape(IShape* shape)
-{
-	bool ret = m_container->Insert(shape);
-	if (ret) {
-		m_stage->SetCanvasDirty();
-	}
-	return ret;
-}
-
-bool ShapesPanelImpl::ClearAllShapes()
-{
-	bool ret = m_container->Clear();
-	if (ret) {
-		m_stage->SetCanvasDirty();
-	}
-	return ret;
 }
 
 void ShapesPanelImpl::TraverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const
 {
 	m_container->Traverse(visitor, true);
+}
+
+void ShapesPanelImpl::InitSubjects()
+{
+	m_subjects.push_back(RemoveShapeSJ::Instance());
+	m_subjects.push_back(InsertShapeSJ::Instance());
+	m_subjects.push_back(ClearShapeSJ::Instance());
+	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
+		m_subjects[i]->Register(this);
+	}
 }
 
 } // d2d

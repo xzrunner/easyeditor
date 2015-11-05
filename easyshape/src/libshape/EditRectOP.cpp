@@ -25,13 +25,9 @@ bool EditRectOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapesImpl->ClearShapeSelection();
+		m_shapesImpl->ClearSelectedShape();
 		m_captured.clear();
-
-
-		if (m_view_panel_mgr) {
-			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-		}
+		d2d::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
 	return false;
@@ -54,9 +50,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
 			m_shapesImpl->GetShapeSelection()->Add(rect);
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(rect);
 		}
 	}
 	else
@@ -81,11 +75,8 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 			if (dis > 1)
 			{
 				RectShape* rect = new RectShape(m_firstPress, m_currPos);
-				if (m_view_panel_mgr) {
-					m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
-				}
-				m_shapesImpl->GetShapeSelection()->Add(rect);
-				m_shapesImpl->InsertShape(rect);
+				d2d::SelectShapeSJ::Instance()->Select(rect);
+				d2d::InsertShapeSJ::Instance()->Insert(NULL);
 			}
 		}
 	}
@@ -93,9 +84,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 	{
 		m_propertyPanel->EnablePropertyGrid(true);
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape)) {
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(rect);
 		}
 	}
 
@@ -118,14 +107,10 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			m_shapesImpl->RemoveShape(m_captured.shape);
+			d2d::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-
-
-			if (m_view_panel_mgr) {
-				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
-			}
+			d2d::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else

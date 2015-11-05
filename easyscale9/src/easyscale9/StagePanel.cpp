@@ -21,85 +21,39 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
+
+	d2d::InsertSpriteSJ::Instance()->Register(this);
+	d2d::RemoveSpriteSJ::Instance()->Register(this);
+	d2d::ClearSpriteSJ::Instance()->Register(this);
 }
 
 StagePanel::~StagePanel()
 {
-	Clear();
+	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
+	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
+	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
 }
 
-void StagePanel::Clear()
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	EditPanel::Clear();
-	ClearAllSprite();
-}
+	d2d::MultiSpritesImpl::Notify(sj_id, ud);
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
-{
-	d2d::MultiSpritesImpl::InsertSprite(sprite);
-
-	const d2d::Vector& pos = sprite->GetPosition();
-	int col, row;
-	ComposeGrids::Query(pos, &col, &row);
-	if (col == -1 || row == -1) {
-		return false;
-	}
-
-	if (m_sprites[row][col] && m_sprites[row][col] != sprite) {
-		m_sprites[row][col]->Release();
-	}
-	sprite->Retain();
-	m_sprites[row][col] = sprite;
-
-	sprite->SetTransform(ComposeGrids::GetGridCenter(col, row), 
-		sprite->GetAngle());
-
-	rebuildPatchSymbol();
-
-	SetCanvasDirty();
-
-	return true;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	d2d::MultiSpritesImpl::RemoveSprite(sprite);
-
-	for (size_t i = 0; i < 3; ++i) 
+	switch (sj_id)
 	{
-		for (size_t j = 0; j < 3; ++j) 
+	case d2d::MSG_INSERT_SPRITE:
 		{
-			if (m_sprites[i][j] == sprite)
-			{
-				m_sprites[i][j] = NULL;
-				sprite->Release();
-				SetCanvasDirty();
-				return true;
-			}
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
 		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
-	return false;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	d2d::MultiSpritesImpl::ClearAllSprite();
-
-	for (size_t i = 0; i < 3; ++i) {
-		for (size_t j = 0; j < 3; ++j)
-		{
-			if (!m_sprites[i][j]) continue;
-			m_sprites[i][j]->Release();
-		}
-	}
-	memset(m_sprites, 0, sizeof(int) * 9);
-
-	delete m_symbol, m_symbol = NULL;
-
-	SetCanvasDirty();
-
-	return true;
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
@@ -146,6 +100,62 @@ void StagePanel::setToolbarPanel(ToolbarPanel* toolbar)
 {
 	m_toolbar = toolbar;
 	static_cast<StageCanvas*>(GetCanvas())->setToolbarPanel(toolbar);
+}
+
+void StagePanel::Insert(d2d::ISprite* spr)
+{
+	const d2d::Vector& pos = spr->GetPosition();
+	int col, row;
+	ComposeGrids::Query(pos, &col, &row);
+	if (col == -1 || row == -1) {
+		return;
+	}
+
+	if (m_sprites[row][col] && m_sprites[row][col] != spr) {
+		m_sprites[row][col]->Release();
+	}
+	spr->Retain();
+	m_sprites[row][col] = spr;
+
+	spr->SetTransform(ComposeGrids::GetGridCenter(col, row), spr->GetAngle());
+
+	rebuildPatchSymbol();
+
+	SetCanvasDirty();
+}
+
+void StagePanel::Remove(d2d::ISprite* spr)
+{
+	for (size_t i = 0; i < 3; ++i) 
+	{
+		for (size_t j = 0; j < 3; ++j) 
+		{
+			if (m_sprites[i][j] == spr)
+			{
+				m_sprites[i][j] = NULL;
+				spr->Release();
+				SetCanvasDirty();
+				return;
+			}
+		}
+	}
+}
+
+void StagePanel::Clear()
+{
+	for (size_t i = 0; i < 3; ++i) {
+		for (size_t j = 0; j < 3; ++j)
+		{
+			if (!m_sprites[i][j]) continue;
+			m_sprites[i][j]->Release();
+		}
+	}
+	memset(m_sprites, 0, sizeof(int) * 9);
+
+	delete m_symbol, m_symbol = NULL;
+
+	SetCanvasDirty();
+
 }
 
 } // escale9

@@ -21,82 +21,38 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_row = m_col = m_edge = 0;
 
 	m_base_level = 1;
+
+	d2d::InsertSpriteSJ::Instance()->Register(this);
+	d2d::RemoveSpriteSJ::Instance()->Register(this);
+	d2d::ClearSpriteSJ::Instance()->Register(this);
 }
 
-void StagePanel::Clear()
+StagePanel::~StagePanel()
 {
-	EditPanel::Clear();
-	ClearAllSprite();
+	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
+	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
+	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
 }
 
-bool StagePanel::InsertSprite(d2d::ISprite* sprite, int idx)
+void StagePanel::Notify(int sj_id, void* ud)
 {
-	sprite->SetTransform(FixSpriteLocation(sprite->GetPosition()), sprite->GetAngle());
+	d2d::MultiSpritesImpl::Notify(sj_id, ud);
 
-	if (!sprite->GetSymbol().GetUserData()) {
-		d2d::SpritesPanelImpl::InsertSprite(sprite);
-		return false;
-	}
-
-	if (!sprite->GetPosition().isValid()) {
-		return false;
-	}
-
-	if (!m_checkboard.IsValid(sprite)) {
-		bool fixed = m_checkboard.SetCachedPos(sprite);
-		if (!fixed) {
-			return false;
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
 		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
-
-	if (!sprite->GetUserData()) {
-		SpriteExt* ext = new SpriteExt;
-		ext->level = ((SymbolExt*)(sprite->GetSymbol().GetUserData()))->level;
-		sprite->SetUserData(ext);
-	}
-
-	bool ret = d2d::SpritesPanelImpl::InsertSprite(sprite);
-	ChangeSymbolRemain(sprite, false);
-	m_checkboard.AddSprite(sprite);
-
-	if (IsSymbolWall(*sprite)) {
-		m_checkboard.ResetWall();
-		ret = true;
-	}
-
-	return ret;
-}
-
-bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
-{
-	bool reset_wall = IsSymbolWall(*sprite);
-
-	ChangeSymbolRemain(sprite, true);
-	bool ret = SpritesPanelImpl::RemoveSprite(sprite);
-	m_checkboard.RemoveSprite(sprite);
-
-	if (reset_wall) {
-		m_checkboard.ResetWall();
-		ret = true;
-	}
-
-	return ret;
-}
-
-bool StagePanel::ClearAllSprite()
-{
-	std::vector<d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	bool ret = !sprites.empty();
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ChangeSymbolRemain(sprites[i], true);
-	}
-	m_checkboard.Clear();
-
-	if (SpritesPanelImpl::ClearAllSprite()) {
-		ret = true;
-	}
-	return ret;
 }
 
 void StagePanel::TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
@@ -266,6 +222,67 @@ void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
 	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(sprite->GetSymbol());
 	symbol.SetInfo(wxString::FromDouble(info->remain).ToStdString());
 	m_library->Refresh(true);
+}
+
+void StagePanel::Insert(d2d::ISprite* spr)
+{
+	spr->SetTransform(FixSpriteLocation(spr->GetPosition()), spr->GetAngle());
+
+	if (!spr->GetSymbol().GetUserData()) {
+//		d2d::SpritesPanelImpl::InsertSprite(spr);
+		return;
+	}
+
+	if (!spr->GetPosition().isValid()) {
+		return;
+	}
+
+	if (!m_checkboard.IsValid(spr)) {
+		bool fixed = m_checkboard.SetCachedPos(spr);
+		if (!fixed) {
+			return;
+		}
+	}
+
+	if (!spr->GetUserData()) {
+		SpriteExt* ext = new SpriteExt;
+		ext->level = ((SymbolExt*)(spr->GetSymbol().GetUserData()))->level;
+		spr->SetUserData(ext);
+	}
+
+//	bool ret = d2d::SpritesPanelImpl::InsertSprite(spr);
+	ChangeSymbolRemain(spr, false);
+	m_checkboard.AddSprite(spr);
+
+	if (IsSymbolWall(*spr)) {
+		m_checkboard.ResetWall();
+	}
+}
+
+void StagePanel::Remove(d2d::ISprite* spr)
+{
+	bool reset_wall = IsSymbolWall(*spr);
+
+	ChangeSymbolRemain(spr, true);
+//	bool ret = SpritesPanelImpl::RemoveSprite(spr);
+	m_checkboard.RemoveSprite(spr);
+
+	if (reset_wall) {
+		m_checkboard.ResetWall();
+	}
+}
+
+void StagePanel::Clear()
+{
+	std::vector<d2d::ISprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	bool ret = !sprites.empty();
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		ChangeSymbolRemain(sprites[i], true);
+	}
+	m_checkboard.Clear();
+
+//	SpritesPanelImpl::ClearAllSprite();
 }
 
 }

@@ -7,32 +7,29 @@
 
 namespace edb
 {
-	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
-		public d2d::ShapesPanelImpl
-	{
-	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
-		virtual ~StagePanel();
 
-		//
-		// d2d::EditPanel interface
-		//
-		virtual void Clear();
+class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
+	               public d2d::ShapesPanelImpl
+{
+public:
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
+	virtual ~StagePanel();
 
-		void loadFromDir(const std::string& dirpath);
-		void loadFromDirFast(const std::string& dirpath);
+	void loadFromDir(const std::string& dirpath);
+	void loadFromDirFast(const std::string& dirpath);
 
-	private:
-		void initConnection();
+private:
+	void initConnection();
 
-		void initPosition();
+	void initPosition();
 
-	private:
-		Graphics m_graphics;
+private:
+	Graphics m_graphics;
 
-		friend class StageCanvas;
+	friend class StageCanvas;
 
-	}; // StagePanel
+}; // StagePanel
+
 }
 
 #endif // EDB_STAGE_PANEL_H

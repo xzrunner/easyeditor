@@ -41,13 +41,6 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::Clear()
-{
-	m_viewlist->Clear();
-	m_library->Clear();
-
-}
-
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
@@ -83,8 +76,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_library = new LibraryPanel(split);
 
 	m_property = new d2d::PropertySettingPanel(split);
-	m_view_panel_mgr.AddSpritePanel(m_property);
-	m_view_panel_mgr.AddShapePanel(m_property);
 
 	split->SetSashGravity(0.75f);
 	split->SplitHorizontally(m_library, m_property);
@@ -94,12 +85,10 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new StagePanel(parent, m_parent, m_property, m_library, &m_view_panel_mgr);
-	m_view_panel_mgr.AddSpritePanel(m_stage);
-	m_view_panel_mgr.AddShapePanel(m_stage);
+	m_stage = new StagePanel(parent, m_parent, m_property, m_library);
 
 	m_library->SetStagePanel(m_stage);
-	m_library->InitPages(m_stage, m_property, &m_view_panel_mgr);
+	m_library->InitPages(m_stage, m_property);
 	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 
@@ -110,14 +99,11 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage, &m_view_panel_mgr);
+	m_viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage);
 	m_library->SetViewlist(m_viewlist);
-	m_view_panel_mgr.AddSpritePanel(m_viewlist);
-	m_view_panel_mgr.SetViewlistPanel(m_viewlist);
 
-	m_grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr, m_stage->GetKeyState());
+	m_grouptree = new d2d::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
 	m_library->SetGroupTree(m_grouptree);
-	m_view_panel_mgr.AddSpritePanel(m_grouptree);
 
 	split->SetSashGravity(0.5f);
 	split->SplitHorizontally(m_viewlist, m_grouptree);
