@@ -160,7 +160,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	// viewlist
-	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage->GetStageImpl(), m_widgets.m_stage);
+	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent);
 	return m_widgets.m_viewlist;
 }
 

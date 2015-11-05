@@ -114,7 +114,7 @@ void Task::InitLayout()
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 //	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
-	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage->GetStageImpl(), stage);
+	m_viewlist = new d2d::ViewlistPanel(right_splitter);
 
 	right_splitter->SetSashGravity(0.85f);
 	right_splitter->SplitVertically(left_vert_splitter, m_viewlist);

@@ -66,6 +66,8 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/ToolbarPanel.h"
 #include "view/ViewlistPanel.h"
+#include "view/ViewlistList.h"
+#include "view/ViewlistListImpl.h"
 #include "view/ExceptionDlg.h"
 #include "view/ConfirmDialog.h"
 #include "view/Frame.h"
