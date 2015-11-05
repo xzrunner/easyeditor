@@ -1,6 +1,5 @@
 #include "FileIO.h"
-
-#include "view/StagePanel.h"
+#include "TopStagePanel.h"
 
 namespace eui
 {

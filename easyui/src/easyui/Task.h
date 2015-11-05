@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <wx/splitter.h>
 
-#include "dataset/TopPannels.h"
+#include "TopPannels.h"
 
 namespace eui
 {

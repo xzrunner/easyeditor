@@ -1,8 +1,7 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-
-#include "frame/SettingCfg.h"
-#include "dataset/TidCfg.h"
+#include "SettingCfg.h"
+#include "TidCfg.h"
 
 namespace eui
 {

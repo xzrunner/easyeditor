@@ -5,8 +5,7 @@
 
 #include "SymbolsCfg.h"
 #include "AnchorMgr.h"
-
-#include "view/IUIStagePage.h"
+#include "UIStagePage.h"
 
 namespace eui
 {
@@ -18,7 +17,7 @@ namespace overall
 
 class SymbolsCfg;
 
-class StagePanel : public IUIStagePage, public d2d::SpritesPanelImpl
+class StagePanel : public UIStagePage, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
@@ -30,11 +29,11 @@ public:
 	virtual void Notify(int sj_id, void* ud);
 
 	//
-	// IUIStagePage interface
+	// UIStagePage interface
 	//
-	virtual void OnSelected();
 	virtual void LoadFromFile(const char* filename);
 	virtual void StoreToFile(const char* filename) const;
+	virtual void EnablePage(bool enable);
 
 	void InitConfig();
 

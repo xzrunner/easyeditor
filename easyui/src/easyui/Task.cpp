@@ -1,10 +1,9 @@
 #include "Task.h"
 #include "FileIO.h"
-
-#include "view/IUIStagePage.h"
-#include "view/StagePanel.h"
-#include "view/LibraryPanel.h"
-#include "view/ToolbarPanel.h"
+#include "UIStagePage.h"
+#include "TopStagePanel.h"
+#include "TopLibraryPanel.h"
+#include "TopToolbarPanel.h"
 
 namespace eui
 {
@@ -25,7 +24,7 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	IUIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
+	UIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
 	if (stage) {
 		stage->LoadFromFile(filename);
 	}
@@ -33,7 +32,7 @@ void Task::Load(const char* filename)
 
 void Task::Store(const char* filename) const
 {
-	IUIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
+	UIStagePage* stage = m_top_pannels.stage->GetSelectedPage();
 	if (stage) {
 		stage->StoreToFile(filename);
 	}
@@ -77,7 +76,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_top_pannels.library = new LibraryPanel(split);
+	m_top_pannels.library = new TopLibraryPanel(split);
 	m_top_pannels.property = new d2d::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.6f);
@@ -88,7 +87,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_top_pannels.stage = new StagePanel(parent, m_parent, &m_top_pannels);
+	m_top_pannels.stage = new TopStagePanel(parent, m_parent, &m_top_pannels);
 //	m_view_panel_mgr.AddSpritePanel(m_stage);
 
 //	m_library->SetCanvas(m_stage->GetCanvas());
@@ -112,7 +111,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 
 //	return split;
 
-	m_top_pannels.toolbar = new ToolbarPanel(parent);
+	m_top_pannels.toolbar = new TopToolbarPanel(parent);
 	return m_top_pannels.toolbar;
 }
 

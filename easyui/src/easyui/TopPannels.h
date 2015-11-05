@@ -6,20 +6,20 @@
 namespace eui
 {
 
-class LibraryPanel;
-class StagePanel;
-class ToolbarPanel;
+class TopLibraryPanel;
+class TopStagePanel;
+class TopToolbarPanel;
 
 class TopPannels
 {
 public:
-	LibraryPanel* library;
+	TopLibraryPanel* library;
 
 	d2d::PropertySettingPanel* property;
 
-	StagePanel* stage;
+	TopStagePanel* stage;
 
-	ToolbarPanel* toolbar;
+	TopToolbarPanel* toolbar;
 
 public:
 	TopPannels();

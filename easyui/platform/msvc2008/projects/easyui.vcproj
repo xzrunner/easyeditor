@@ -185,74 +185,78 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\config.h"
+				RelativePath="..\..\..\src\easyui\config.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\FileIO.cpp"
+				RelativePath="..\..\..\src\easyui\FileIO.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\FileIO.h"
+				RelativePath="..\..\..\src\easyui\FileIO.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\Frame.cpp"
+				RelativePath="..\..\..\src\easyui\Frame.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\Frame.h"
+				RelativePath="..\..\..\src\easyui\Frame.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\main.cpp"
+				RelativePath="..\..\..\src\easyui\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\main.h"
+				RelativePath="..\..\..\src\easyui\main.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\SettingCfg.cpp"
+				RelativePath="..\..\..\src\easyui\SettingCfg.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\SettingCfg.h"
+				RelativePath="..\..\..\src\easyui\SettingCfg.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\SettingsDialog.cpp"
+				RelativePath="..\..\..\src\easyui\SettingsDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\SettingsDialog.h"
+				RelativePath="..\..\..\src\easyui\SettingsDialog.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\Task.cpp"
+				RelativePath="..\..\..\src\easyui\Task.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\frame\Task.h"
+				RelativePath="..\..\..\src\easyui\Task.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="view"
+			Name="top_view"
 			>
 			<Filter
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\IUIStagePage.h"
+					RelativePath="..\..\..\src\easyui\TopStagePanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\StagePanel.cpp"
+					RelativePath="..\..\..\src\easyui\TopStagePanel.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\StagePanel.h"
+					RelativePath="..\..\..\src\easyui\UIStagePage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\UIStagePage.h"
 					>
 				</File>
 			</Filter>
@@ -260,11 +264,11 @@
 				Name="library"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\LibraryPanel.cpp"
+					RelativePath="..\..\..\src\easyui\TopLibraryPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\LibraryPanel.h"
+					RelativePath="..\..\..\src\easyui\TopLibraryPanel.h"
 					>
 				</File>
 			</Filter>
@@ -272,19 +276,19 @@
 				Name="preview"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\PreviewCanvas.cpp"
+					RelativePath="..\..\..\src\easyui\PreviewCanvas.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\PreviewCanvas.h"
+					RelativePath="..\..\..\src\easyui\PreviewCanvas.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\PreviewDialog.cpp"
+					RelativePath="..\..\..\src\easyui\PreviewDialog.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\PreviewDialog.h"
+					RelativePath="..\..\..\src\easyui\PreviewDialog.h"
 					>
 				</File>
 			</Filter>
@@ -292,11 +296,11 @@
 				Name="property"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\FontPropertySetting.cpp"
+					RelativePath="..\..\..\src\easyui\FontPropertySetting.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\FontPropertySetting.h"
+					RelativePath="..\..\..\src\easyui\FontPropertySetting.h"
 					>
 				</File>
 			</Filter>
@@ -304,11 +308,11 @@
 				Name="toolbar"
 				>
 				<File
-					RelativePath="..\..\..\src\easyui\view\ToolbarPanel.cpp"
+					RelativePath="..\..\..\src\easyui\TopToolbarPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\ToolbarPanel.h"
+					RelativePath="..\..\..\src\easyui\TopToolbarPanel.h"
 					>
 				</File>
 			</Filter>
@@ -317,19 +321,19 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\easyui\dataset\TidCfg.cpp"
+				RelativePath="..\..\..\src\easyui\TidCfg.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\dataset\TidCfg.h"
+				RelativePath="..\..\..\src\easyui\TidCfg.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\dataset\TopPannels.cpp"
+				RelativePath="..\..\..\src\easyui\TopPannels.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\dataset\TopPannels.h"
+				RelativePath="..\..\..\src\easyui\TopPannels.h"
 				>
 			</File>
 		</Filter>
@@ -337,11 +341,11 @@
 			Name="code"
 			>
 			<File
-				RelativePath="..\..\..\src\easyui\code\Code.cpp"
+				RelativePath="..\..\..\src\easyui\Code.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\code\Code.h"
+				RelativePath="..\..\..\src\easyui\Code.h"
 				>
 			</File>
 		</Filter>

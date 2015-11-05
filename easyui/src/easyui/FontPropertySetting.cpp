@@ -1,6 +1,5 @@
 #include "FontPropertySetting.h"
-
-#include "dataset/TidCfg.h"
+#include "TidCfg.h"
 
 namespace eui
 {

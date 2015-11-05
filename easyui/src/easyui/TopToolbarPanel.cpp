@@ -1,16 +1,16 @@
-#include "ToolbarPanel.h"
+#include "TopToolbarPanel.h"
 
 namespace eui
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent)
+TopToolbarPanel::TopToolbarPanel(wxWindow* parent)
 	: wxPanel(parent)
 {
 	InitLayout();
 	EnableToolbar(0);
 }
 
-int ToolbarPanel::AddToolbar(d2d::ToolbarPanel* toolbar)
+int TopToolbarPanel::AddToolbar(d2d::ToolbarPanel* toolbar)
 {
 	wxSizer* sizer = GetSizer();
 	sizer->Add(toolbar);
@@ -21,7 +21,7 @@ int ToolbarPanel::AddToolbar(d2d::ToolbarPanel* toolbar)
 	return idx;
 }
 
-void ToolbarPanel::EnableToolbar(int idx)
+void TopToolbarPanel::EnableToolbar(int idx)
 {
 	wxSizer* sizer = GetSizer();
 	for (int i = 0; i < m_toolbars.size(); ++i) {
@@ -30,7 +30,7 @@ void ToolbarPanel::EnableToolbar(int idx)
 	Layout();
 }
 
-void ToolbarPanel::InitLayout()
+void TopToolbarPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	SetSizer(sizer);

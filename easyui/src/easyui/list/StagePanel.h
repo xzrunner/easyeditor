@@ -4,8 +4,7 @@
 #include <drag2d.h>
 
 #include "UIList.h"
-
-#include "view/IUIStagePage.h"
+#include "UIStagePage.h"
 
 namespace eui
 {
@@ -17,7 +16,7 @@ namespace list
 
 class ToolbarPanel;
 
-class StagePanel : public IUIStagePage, public d2d::MultiSpritesImpl
+class StagePanel : public UIStagePage, public d2d::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
@@ -35,11 +34,11 @@ public:
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	//
-	// IUIStagePage interface
+	// UIStagePage interface
 	//
-	virtual void OnSelected();
 	virtual void LoadFromFile(const char* filename);
 	virtual void StoreToFile(const char* filename) const;
+	virtual void EnablePage(bool enable);
 
 	UIList& GetList() { return m_list; }
 

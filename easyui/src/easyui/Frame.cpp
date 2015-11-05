@@ -2,10 +2,9 @@
 #include "SettingsDialog.h"
 #include "SettingCfg.h"
 #include "Task.h"
-
-#include "view/PreviewDialog.h"
-#include "view/StagePanel.h"
-#include "code/Code.h"
+#include "PreviewDialog.h"
+#include "TopStagePanel.h"
+#include "Code.h"
 
 #include <easybuilder.h>
 

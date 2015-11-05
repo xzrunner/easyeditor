@@ -1,18 +1,19 @@
-#include "StagePanel.h"
-#include "LibraryPanel.h"
+#include "TopStagePanel.h"
+#include "TopLibraryPanel.h"
+#include "TopPannels.h"
 
-#include "dataset/TopPannels.h"
 #include "overall/StagePanel.h"
 #include "list/StagePanel.h"
 
 namespace eui
 {
 
-BEGIN_EVENT_TABLE(StagePanel, wxPanel)
-	EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, StagePanel::OnPageChanged)
+BEGIN_EVENT_TABLE(TopStagePanel, wxPanel)
+	EVT_NOTEBOOK_PAGE_CHANGING(wxID_ANY, TopStagePanel::OnPageChanging)
+	EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, TopStagePanel::OnPageChanged)
 END_EVENT_TABLE()
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
+TopStagePanel::TopStagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
 	: wxPanel(parent)
 	, m_frame(frame)
 	, m_top_pannels(top_pannels)
@@ -20,15 +21,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	InitLayout();
 }
 
-void StagePanel::Clear()
-{
-	IUIStagePage* page = GetSelectedPage();
-	if (page) {
-		page->Clear();
-	}
-}
-
-IUIStagePage* StagePanel::GetSelectedPage()
+UIStagePage* TopStagePanel::GetSelectedPage()
 {
 	if (m_pages.empty()) {
 		return NULL;
@@ -37,14 +30,14 @@ IUIStagePage* StagePanel::GetSelectedPage()
 	}
 }
 
-void StagePanel::InitLayout()
+void TopStagePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	InitTabPages(sizer);
 	SetSizer(sizer);
 }
 
-void StagePanel::InitTabPages(wxSizer* sizer)
+void TopStagePanel::InitTabPages(wxSizer* sizer)
 {
 	m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 	// overall
@@ -52,6 +45,7 @@ void StagePanel::InitTabPages(wxSizer* sizer)
 		overall::StagePanel* page = new overall::StagePanel(m_notebook, m_frame, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Overall"));
+		page->RegistSubjects(page);
 	}
 	// list
 	{
@@ -62,9 +56,14 @@ void StagePanel::InitTabPages(wxSizer* sizer)
 	sizer->Add(m_notebook, 1, wxEXPAND);
 }
 
-void StagePanel::OnPageChanged(wxNotebookEvent& event)
+void TopStagePanel::OnPageChanging(wxNotebookEvent& event)
 {
-	m_pages[m_notebook->GetSelection()]->OnSelected();
+	m_pages[m_notebook->GetSelection()]->Enable(false);
+}
+
+void TopStagePanel::OnPageChanged(wxNotebookEvent& event)
+{
+	m_pages[m_notebook->GetSelection()]->Enable(true);
 	m_top_pannels->library->Layout();
 }
 

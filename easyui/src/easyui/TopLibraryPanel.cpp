@@ -1,18 +1,18 @@
-#include "LibraryPanel.h"
+#include "TopLibraryPanel.h"
 
 #include <easycomplex.h>
 
 namespace eui
 {
 
-LibraryPanel::LibraryPanel(wxWindow* parent)
+TopLibraryPanel::TopLibraryPanel(wxWindow* parent)
 	: wxPanel(parent)
 {
 	InitLayout();
 	EnableUILibrary(true);
 }
 
-void LibraryPanel::EnableUILibrary(bool enable)
+void TopLibraryPanel::EnableUILibrary(bool enable)
 {
 	wxSizer* sizer = GetSizer();
 	if (enable) {
@@ -24,13 +24,13 @@ void LibraryPanel::EnableUILibrary(bool enable)
 	}
 }
 
-void LibraryPanel::Clear()
+void TopLibraryPanel::Clear()
 {
 	m_library_ui->Clear();
 	m_library_raw->Clear();
 }
 
-void LibraryPanel::InitLayout()
+void TopLibraryPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 

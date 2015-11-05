@@ -2,10 +2,9 @@
 #include "StageCanvas.h"
 #include "ToolBarPanel.h"
 #include "EditOP.h"
-
-#include "dataset/TopPannels.h"
-#include "view/LibraryPanel.h"
-#include "view/ToolbarPanel.h"
+#include "TopPannels.h"
+#include "TopLibraryPanel.h"
+#include "TopToolbarPanel.h"
 
 namespace eui
 {
@@ -13,7 +12,7 @@ namespace list
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
-	: IUIStagePage(parent, frame)
+	: UIStagePage(parent, frame)
 	, d2d::MultiSpritesImpl(GetStageImpl())
 	, m_top_pannels(top_pannels)
 {
@@ -21,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	SetCanvas(new StageCanvas(this));
 
 	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
-	SetDropTarget(new d2d::SpriteDropTarget(this, GetStageImpl(), library));
+	SetDropTarget(new d2d::SpriteDropTarget(GetStageImpl(), library));
 	library->SetCanvas(GetCanvas());
 
 	top_pannels->property->SetEditPanel(GetStageImpl());
@@ -29,18 +28,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar = new ToolbarPanel(top_pannels->toolbar, this);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
-	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
-	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	AddSubject(d2d::InsertSpriteSJ::Instance());
+	AddSubject(d2d::ClearSpriteSJ::Instance());
+	UnRegistSubjects(this);
 }
 
 StagePanel::~StagePanel()
 {
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
+	UnRegistSubjects(this);
 }
 
 void StagePanel::Notify(int sj_id, void* ud)
@@ -70,13 +65,6 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 	m_list.TraverseSprites(visitor);
 }
 
-void StagePanel::OnSelected()
-{
-	SetCanvasDirty();
-
-	m_top_pannels->library->EnableUILibrary(false);
-}
-
 void StagePanel::LoadFromFile(const char* filename)
 {
 	m_list.LoadFromFile(filename);
@@ -90,6 +78,17 @@ void StagePanel::LoadFromFile(const char* filename)
 void StagePanel::StoreToFile(const char* filename) const
 {
 	m_list.StoreToFile(filename);
+}
+
+void StagePanel::EnablePage(bool enable)
+{
+	if (enable) {
+		RegistSubjects(this);
+		SetCanvasDirty();
+		m_top_pannels->library->EnableUILibrary(false);
+	} else {
+		UnRegistSubjects(this);
+	}
 }
 
 }

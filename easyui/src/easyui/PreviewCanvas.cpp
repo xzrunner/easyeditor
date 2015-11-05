@@ -1,6 +1,5 @@
 #include "PreviewCanvas.h"
-
-#include "frame/SettingCfg.h"
+#include "SettingCfg.h"
 
 namespace eui
 {

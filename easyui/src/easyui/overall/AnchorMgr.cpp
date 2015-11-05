@@ -1,6 +1,5 @@
 #include "AnchorMgr.h"
-
-#include "frame/SettingCfg.h"
+#include "SettingCfg.h"
 
 namespace eui
 {

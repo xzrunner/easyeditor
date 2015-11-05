@@ -1,9 +1,8 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "ArrangeSpriteImpl.h"
-
-#include "dataset/TopPannels.h"
-#include "view/LibraryPanel.h"
+#include "TopPannels.h"
+#include "TopLibraryPanel.h"
 
 #include <easycomplex.h>
 
@@ -13,7 +12,7 @@ namespace overall
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
-	: IUIStagePage(parent, frame)
+	: UIStagePage(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetUILibrary())
 	, m_top_pannels(top_pannels)
 	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())
@@ -22,14 +21,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property)));
 	SetCanvas(new StageCanvas(this));
 
-	d2d::InsertSpriteSJ::Instance()->Register(this);
-	d2d::RemoveSpriteSJ::Instance()->Register(this);
+	AddSubject(d2d::InsertSpriteSJ::Instance());
+	AddSubject(d2d::RemoveSpriteSJ::Instance());
+	UnRegistSubjects(this);
 }
 
 StagePanel::~StagePanel()
 {
-	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
-	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);	
+	UnRegistSubjects(this);
 }
 
 void StagePanel::Notify(int sj_id, void* ud)
@@ -47,13 +46,6 @@ void StagePanel::Notify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::OnSelected()
-{
-	SetCanvasDirty();
-
-	m_top_pannels->library->EnableUILibrary(true);
-}
-
 void StagePanel::LoadFromFile(const char* filename)
 {
 	SetCanvasDirty();
@@ -61,6 +53,17 @@ void StagePanel::LoadFromFile(const char* filename)
 
 void StagePanel::StoreToFile(const char* filename) const
 {
+}
+
+void StagePanel::EnablePage(bool enable)
+{
+	if (enable) {
+		RegistSubjects(this);
+		SetCanvasDirty();
+		m_top_pannels->library->EnableUILibrary(true);
+	} else {
+		UnRegistSubjects(this);
+	}
 }
 
 void StagePanel::InitConfig()

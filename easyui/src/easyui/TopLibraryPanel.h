@@ -1,15 +1,15 @@
-#ifndef _EASYUI_LIBRARY_PANEL_H_
-#define _EASYUI_LIBRARY_PANEL_H_
+#ifndef _EASYUI_TOP_LIBRARY_PANEL_H_
+#define _EASYUI_TOP_LIBRARY_PANEL_H_
 
 #include <drag2d.h>
 
 namespace eui
 {
 
-class LibraryPanel : public wxPanel
+class TopLibraryPanel : public wxPanel
 {
 public:
-	LibraryPanel(wxWindow* parent);
+	TopLibraryPanel(wxWindow* parent);
 
 	d2d::LibraryPanel* GetUILibrary() { return m_library_ui; }
 	d2d::LibraryPanel* GetRawLibrary() { return m_library_raw; }
@@ -25,8 +25,8 @@ private:
 	d2d::LibraryPanel* m_library_ui;
 	d2d::LibraryPanel* m_library_raw;
 
-}; // LibraryPanel
+}; // TopLibraryPanel
 
 }
 
-#endif // _EASYUI_LIBRARY_PANEL_H_
+#endif // _EASYUI_TOP_LIBRARY_PANEL_H_

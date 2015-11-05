@@ -1,15 +1,15 @@
-#ifndef _EASYUI_TOOLBAR_PANEL_H_
-#define _EASYUI_TOOLBAR_PANEL_H_
+#ifndef _EASYUI_TOP_TOOLBAR_PANEL_H_
+#define _EASYUI_TOP_TOOLBAR_PANEL_H_
 
 #include <drag2d.h>
 
 namespace eui
 {
 
-class ToolbarPanel : public wxPanel
+class TopToolbarPanel : public wxPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent);
+	TopToolbarPanel(wxWindow* parent);
 
 	int AddToolbar(d2d::ToolbarPanel* toolbar);
 
@@ -21,8 +21,8 @@ private:
 private:
 	std::vector<d2d::ToolbarPanel*> m_toolbars;
 
-}; // ToolbarPanel
+}; // TopToolbarPanel
 
 }
 
-#endif // _EASYUI_TOOLBAR_PANEL_H_
+#endif // _EASYUI_TOP_TOOLBAR_PANEL_H_
