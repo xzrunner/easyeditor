@@ -1,10 +1,10 @@
 #include "Frame.h"
 #include "SettingsDialog.h"
-#include "SettingCfg.h"
 #include "Task.h"
 #include "PreviewDialog.h"
 #include "TopStagePanel.h"
 #include "Code.h"
+#include "QueryWindowViewSizeSJ.h"
 
 #include <easybuilder.h>
 
@@ -27,12 +27,13 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 
 void Frame::OnPreview(wxCommandEvent& event)
 {
-	SettingCfg* cfg = SettingCfg::Instance();
+	int width, height;
+	QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
 	std::vector<const d2d::ISprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
-	PreviewDialog dlg(this, cfg->m_view_width, cfg->m_view_height, sprites);
+	PreviewDialog dlg(this, width, height, sprites);
 	dlg.ShowModal();
 
 	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());

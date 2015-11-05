@@ -54,6 +54,11 @@ const d2d::EditPanel* Task::GetEditPanel() const
 	return NULL;
 }
 
+void Task::GetViewSize(int& width, int height)
+{
+	
+}
+
 void Task::InitLayout()
 {
 	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);

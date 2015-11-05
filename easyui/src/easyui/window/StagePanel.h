@@ -1,5 +1,5 @@
-#ifndef _EASYUI_OVERALL_STAGE_PANEL_H_
-#define _EASYUI_OVERALL_STAGE_PANEL_H_
+#ifndef _EASYUI_WINDOW_STAGE_PANEL_H_
+#define _EASYUI_WINDOW_STAGE_PANEL_H_
 
 #include <drag2d.h>
 
@@ -12,10 +12,11 @@ namespace eui
 
 class TopPannels;
 
-namespace overall
+namespace window
 {
 
 class SymbolsCfg;
+class ToolbarPanel;
 
 class StagePanel : public UIStagePage, public d2d::SpritesPanelImpl
 {
@@ -39,6 +40,8 @@ public:
 
 	AnchorMgr* GetAnchorMgr() { return &m_anchor_mgr; }
 
+	void SetViewSize(int width, int height);
+
 private:
 	TopPannels* m_top_pannels;
 
@@ -46,9 +49,14 @@ private:
 
 	AnchorMgr m_anchor_mgr;
 
+	int m_view_width, m_view_height;
+
+	int m_toolbar_idx;
+	ToolbarPanel* m_toolbar;
+
 }; // StagePanel
 
 }
 }
 
-#endif // _EASYUI_OVERALL_STAGE_PANEL_H_
+#endif // _EASYUI_WINDOW_STAGE_PANEL_H_

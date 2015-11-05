@@ -4,7 +4,7 @@
 
 namespace eui
 {
-namespace overall
+namespace window
 {
 
 SymbolsCfg::SymbolsCfg(StagePanel* stage, d2d::LibraryPanel* library)

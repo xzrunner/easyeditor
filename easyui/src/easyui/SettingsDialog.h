@@ -5,12 +5,12 @@
 
 namespace eui
 {
-namespace overall { class AnchorMgr; }
+namespace window { class AnchorMgr; }
 
 class SettingDialog : public wxDialog
 {
 public:
-	SettingDialog(wxWindow* parent, overall::AnchorMgr* anchor_mgr);
+	SettingDialog(wxWindow* parent, window::AnchorMgr* anchor_mgr);
 
 private:
 	void InitLayout();
@@ -18,7 +18,7 @@ private:
 	void OnViewSizeChanged(wxCommandEvent& event);
 
 private:
-	overall::AnchorMgr* m_anchor_mgr;
+	window::AnchorMgr* m_anchor_mgr;
 
 	wxTextCtrl *m_width_ctrl, *m_height_ctrl;
 

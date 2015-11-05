@@ -3,7 +3,7 @@
 
 namespace eui
 {
-namespace overall
+namespace window
 {
 
 AnchorMgr::AnchorMgr()

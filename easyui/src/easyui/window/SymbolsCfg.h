@@ -1,11 +1,11 @@
-#ifndef _EASYUI_OVERALL_SYMBOL_CFG_H_
-#define _EASYUI_OVERALL_SYMBOL_CFG_H_
+#ifndef _EASYUI_WINDOW_SYMBOL_CFG_H_
+#define _EASYUI_WINDOW_SYMBOL_CFG_H_
 
 #include <drag2d.h>
 
 namespace eui
 {
-namespace overall
+namespace window
 {
 
 class LibraryPage;
@@ -44,4 +44,4 @@ private:
 }
 }
 
-#endif // _EASYUI_OVERALL_SYMBOL_CFG_H_
+#endif // _EASYUI_WINDOW_SYMBOL_CFG_H_

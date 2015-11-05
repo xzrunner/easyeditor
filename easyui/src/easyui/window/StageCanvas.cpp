@@ -5,7 +5,7 @@
 
 namespace eui
 {
-namespace overall
+namespace window
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)

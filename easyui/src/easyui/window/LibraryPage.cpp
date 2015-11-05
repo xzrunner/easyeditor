@@ -4,7 +4,7 @@
 
 namespace eui
 {
-namespace overall
+namespace window
 {
 
 LibraryPage::LibraryPage(wxWindow* parent, const char* name)

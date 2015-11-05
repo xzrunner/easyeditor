@@ -2,7 +2,7 @@
 #include "TopLibraryPanel.h"
 #include "TopPannels.h"
 
-#include "overall/StagePanel.h"
+#include "window/StagePanel.h"
 #include "list/StagePanel.h"
 
 namespace eui
@@ -42,7 +42,7 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 	m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 	// overall
 	{
-		overall::StagePanel* page = new overall::StagePanel(m_notebook, m_frame, m_top_pannels);
+		window::StagePanel* page = new window::StagePanel(m_notebook, m_frame, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Overall"));
 		page->RegistSubjects(page);
@@ -58,12 +58,12 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 
 void TopStagePanel::OnPageChanging(wxNotebookEvent& event)
 {
-	m_pages[m_notebook->GetSelection()]->Enable(false);
+	m_pages[m_notebook->GetSelection()]->EnablePage(false);
 }
 
 void TopStagePanel::OnPageChanged(wxNotebookEvent& event)
 {
-	m_pages[m_notebook->GetSelection()]->Enable(true);
+	m_pages[m_notebook->GetSelection()]->EnablePage(true);
 	m_top_pannels->library->Layout();
 }
 

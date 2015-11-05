@@ -83,10 +83,12 @@ void StagePanel::StoreToFile(const char* filename) const
 void StagePanel::EnablePage(bool enable)
 {
 	if (enable) {
-		RegistSubjects(this);
+		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		SetCanvasDirty();
 		m_top_pannels->library->EnableUILibrary(false);
+		RegistSubjects(this);
 	} else {
+		GetSpriteSelection()->Clear();
 		UnRegistSubjects(this);
 	}
 }

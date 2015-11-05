@@ -4,7 +4,7 @@
 
 namespace eui
 {
-namespace overall
+namespace window
 {
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
