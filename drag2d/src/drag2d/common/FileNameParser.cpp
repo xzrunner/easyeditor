@@ -22,6 +22,8 @@ static const wxString TAG_ICON		= "icon";
 static const wxString TAG_SHADOW	= "shadow";
 static const wxString TAG_UI		= "ui";
 
+static const wxString TAG_GEN		= "gen";
+
 FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 {
 	if (filename.empty()) return e_unknown;
@@ -35,7 +37,10 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		const wxString jsonName = filename.substr(0, filename.find_last_of('.'));
 		if (jsonName.find('_') == -1) return e_unknown;
 
-		const wxString ext = jsonName.substr(jsonName.find_last_of('_') + 1);
+		wxString ext = jsonName.substr(jsonName.find_last_of('_') + 1);
+		if (ext.find(TAG_GEN) != wxString::npos) {
+			ext = ext.substr(0, ext.find(TAG_GEN) - 1);
+		}
 
 		if (ext == TAG_SHAPE) return e_shape;
 		else if (ext == TAG_COMPLEX) return e_complex;
@@ -138,8 +143,8 @@ wxString FileNameParser::getFileTag(Type type)
 
 bool FileNameParser::isType(const wxString& filename, Type type)
 {
-	FileNameParser::Type fileType = getFileType(filename);
-	return fileType == type;
+	FileNameParser::Type file_type = getFileType(filename);
+	return file_type == type;
 }
 
 } // d2d

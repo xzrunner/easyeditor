@@ -28,9 +28,7 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 	}
 	else if (ext == "json")
 	{
-		size_t s = filepath.find_last_of('_');
-		size_t e = filepath.find_last_of('.');
-		wxString type = filepath.substr(s+1, e-s-1);
+		wxString type = d2d::FileNameParser::getFileTag(d2d::FileNameParser::getFileType(filepath));
 		CallbackMap::iterator itr = m_creators.find(type.ToStdString());
 		if (itr != m_creators.end()) {
 			symbol = (itr->second)();

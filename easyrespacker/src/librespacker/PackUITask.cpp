@@ -7,6 +7,9 @@ namespace librespacker
 
 PackUITask* PackUITask::m_instance = NULL;
 
+static const std::string UI_WINDOW	= "window";
+static const std::string UI_LIST	= "list";
+
 PackUITask::PackUITask()
 {
 }
@@ -22,7 +25,7 @@ void PackUITask::AddTask(const std::string& filepath)
 	fin.close();
 
 	std::string type = value["type"].asString();
-	if (type != "list") {
+	if (type != UI_LIST) {
 		return;
 	}
 
@@ -54,7 +57,7 @@ void PackUITask::Output(const std::string& dir, Json::Value& value) const
 		Json::Value item_val;
 		item_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, r.ui_filepath).ToStdString();
 		item_val["wrapper id"] = r.list_id;
-		item_val["type"] = "list";
+		item_val["type"] = UI_LIST;
 		value[value.size()] = item_val;
 	}
 }

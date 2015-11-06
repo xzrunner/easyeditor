@@ -114,7 +114,7 @@ void UIList::StoreToFile(const char* filename) const
 		spr->name = "item" + d2d::StringTools::ToString(i+1);
 		spr->Retain();
 	}
-	std::string items_path = name + "_items_complex.json";
+	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
 
@@ -125,7 +125,7 @@ void UIList::StoreToFile(const char* filename) const
 	wrapper_complex.m_clipbox = m_clipbox;
 	wrapper_complex.m_sprites.push_back(&items_sprite);
 	items_sprite.Retain();
-	std::string top_path = name + "_wrapper_complex.json";
+	std::string top_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(top_path);
 	ecomplex::FileStorer::Store(top_path.c_str(), &wrapper_complex);
 
