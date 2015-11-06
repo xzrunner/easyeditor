@@ -112,6 +112,8 @@ gtxt_label_draw(const char* str, struct gtxt_label_style* style) {
 	gtxt_layout_multi(UNICODE_BUF);					// layout
 	gtxt_layout_traverse(_draw_glyph_cb, style);	// draw
 	gtxt_layout_end();
+
+	dtex_array_clear(UNICODE_BUF);
 }
 
 static inline int
@@ -158,4 +160,6 @@ gtxt_label_draw_richtext(const char* str, struct gtxt_label_style* style) {
 	// draw
 	params.idx = 0;
 	gtxt_richtext_parser(str, style, _draw_richtext_glyph_cb, &params);	// layout
+
+	dtex_array_clear(UNICODE_BUF);
 }

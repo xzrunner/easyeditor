@@ -7,6 +7,7 @@ extern "C"
 #define gametext_rendrer_h
 
 #include <stdbool.h>
+#include <stdint.h>
 
 struct gtxt_render_style {
 	uint32_t color;

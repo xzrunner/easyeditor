@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct glyph {
 	int unicode;
@@ -53,10 +54,13 @@ _prepare_glyph_freelist(int cap) {
 	if (L.glyph_freelist) {
 		free(L.head->head);
 	}
-	L.glyph_freelist = (struct glyph*)malloc(sizeof(struct glyph) * cap);
+
+	size_t sz = sizeof(struct glyph) * cap;
+	L.glyph_freelist = (struct glyph*)malloc(sz);
 	if (!L.glyph_freelist) {
 		return false;
 	}
+	memset(L.glyph_freelist, 0, sz);
 
 	for (int i = 0; i < cap - 1; ++i) {
 		L.glyph_freelist[i].next = &L.glyph_freelist[i + 1];
@@ -76,10 +80,13 @@ _prepare_row_freelist(int cap) {
 	if (L.row_freelist) {
 		free(L.head);
 	}
-	L.row_freelist = (struct row*)malloc(sizeof(struct row) * cap);
+
+	size_t sz = sizeof(struct row) * cap;
+	L.row_freelist = (struct row*)malloc(sz);
 	if (!L.row_freelist) {
 		return false;
 	}
+	memset(L.row_freelist, 0, sz);
 
 	for (int i = 0; i < cap - 1; ++i) {
 		L.row_freelist[i].next = &L.row_freelist[i + 1];
@@ -112,10 +119,10 @@ gtxt_layout_begin(struct gtxt_label_style* style) {
 	L.tot_height = 0;
 	L.curr_width = 0;
 
+	_prepare_row_freelist(16);
+
 	L.curr_row = _new_row();
 	L.head = L.curr_row;
-
-	_prepare_row_freelist(16);
 }
 
 void 

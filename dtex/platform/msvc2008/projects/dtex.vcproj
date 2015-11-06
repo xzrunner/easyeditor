@@ -421,11 +421,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_file.c"
+				RelativePath="..\..\..\src\dtex_file.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_file.h"
+				RelativePath="..\..\..\src\dtex_file_common.c"
 				>
 			</File>
 			<File
@@ -434,6 +434,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_hard_res.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_lod.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_lod.h"
 				>
 			</File>
 			<File
@@ -465,11 +473,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_resource.c"
+				RelativePath="..\..\..\src\dtex_res_path.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_resource.h"
+				RelativePath="..\..\..\src\dtex_res_path.h"
 				>
 			</File>
 			<File

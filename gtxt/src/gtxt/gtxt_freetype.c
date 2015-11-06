@@ -33,15 +33,18 @@ int
 gtxt_ft_add_font(const char* filepath) {
 	if (FT.count >= MAX_FONTS) {
 		return -1;
-	}	
+	}
 
 	struct font* f = &FT.fonts[FT.count++];
-	FT_Init_FreeType(&f->library);
-	if (FT_New_Face(f->library, filepath, 0, &f->face)) {
-		return FT.count - 1;
-	} else {
+
+	if (FT_Init_FreeType(&f->library)) {
 		return -1;
 	}
+	if (FT_New_Face(f->library, filepath, 0, &f->face)) {
+		return -1;
+	}
+
+	return FT.count - 1;
 }
 
 bool

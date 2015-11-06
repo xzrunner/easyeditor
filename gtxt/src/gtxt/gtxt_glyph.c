@@ -69,7 +69,7 @@ gtxt_glyph_cache_init(int cap_bitmap, int cap_layout) {
 	if (!C) {
 		return;
 	}
-	memset(&C, 0, sz);
+	memset(C, 0, sz);
 
 	C->hash = dtex_hash_create(cap_layout, cap_layout * 2, 0.5f, _hash_func, _equal_func);
 
@@ -161,6 +161,7 @@ gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_gl
 		g->next = NULL;
 		assert(C->glyph_tail);
 		C->glyph_tail->next = g;
+		*layout = g->layout;
 	} else {
 		g = _new_node();
 		g->bitmap->valid = false;
@@ -183,19 +184,24 @@ gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_gl
 		g->bitmap->valid = false;
 	}
 	if (!g->bitmap->valid) {
-		assert(g->bitmap->buf);
-
 		uint8_t* buf = gtxt_ft_gen_char(unicode, font, size, edge, &g->layout);
+		*layout = g->layout;
 		size_t sz = g->layout.sizer.width * g->layout.sizer.height;
 		if (sz > g->bitmap->sz) {
 			free(g->bitmap->buf);
 			g->bitmap->buf = malloc(sz);
+			g->bitmap->sz = sz;
 		}
 		memcpy(g->bitmap->buf, buf, sz);
 		g->bitmap->valid = true;
 
-		C->bitmap_tail->next = g->bitmap;
-		C->bitmap_tail = g->bitmap;
+		if (!C->bitmap_tail) {
+			assert(!C->bitmap_head);
+			C->bitmap_head = C->bitmap_tail = g->bitmap;
+		} else {
+			C->bitmap_tail->next = g->bitmap;
+			C->bitmap_tail = g->bitmap;
+		}
 		g->bitmap->next = NULL;
 	}
 

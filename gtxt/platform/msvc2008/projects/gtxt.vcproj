@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\dtex;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\ejoy2d;..\..\..\external\ejoy2d\render;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -105,8 +105,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\dtex;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\ejoy2d;..\..\..\external\ejoy2d\render;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -148,23 +148,35 @@
 		<Filter
 			Name="external"
 			>
-			<File
-				RelativePath="..\..\..\external\dtex\dtex_array.c"
+			<Filter
+				Name="ejoy2d"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\dtex\dtex_array.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\dtex\dtex_hash.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\dtex\dtex_hash.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\renderbuffer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\ejoy2d\shader.h"
+					>
+				</File>
+				<Filter
+					Name="render"
+					>
+					<File
+						RelativePath="..\..\..\external\ejoy2d\render\render.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_ejoy2d.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\gtxt\gtxt_freetype.c"
 			>
