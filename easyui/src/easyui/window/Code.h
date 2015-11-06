@@ -1,11 +1,13 @@
-#ifndef _EASYUI_CODE_H_
-#define _EASYUI_CODE_H_
+#ifndef _EASYUI_WINDOW_CODE_H_
+#define _EASYUI_WINDOW_CODE_H_
 
 #include <drag2d.h>
 
 namespace ebuilder { class CodeGenerator; }
 
 namespace eui 
+{
+namespace window
 {
 
 class Code
@@ -22,5 +24,6 @@ private:
 }; // Code
 
 }
+}
 
-#endif // _EASYUI_CODE_H_
+#endif // _EASYUI_WINDOW_CODE_H_

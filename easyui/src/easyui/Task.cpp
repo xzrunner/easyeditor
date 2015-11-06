@@ -38,25 +38,9 @@ void Task::Store(const char* filename) const
 	}
 }
 
-bool Task::IsDirty() const
+UIStagePage* Task::GetSelectedStagePage()
 {
-	return false;
-}
-
-void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
-{
-//	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
-}
-
-const d2d::EditPanel* Task::GetEditPanel() const
-{
-//	return m_stage;
-	return NULL;
-}
-
-void Task::GetViewSize(int& width, int height)
-{
-	
+	return m_top_pannels.stage->GetSelectedPage();
 }
 
 void Task::InitLayout()
@@ -93,29 +77,11 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_top_pannels.stage = new TopStagePanel(parent, m_parent, &m_top_pannels);
-//	m_view_panel_mgr.AddSpritePanel(m_stage);
-
-//	m_library->SetCanvas(m_stage->GetCanvas());
-//	m_property->SetEditPanel(m_stage->GetStageImpl());
-
 	return m_top_pannels.stage;
 }
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-//	wxSplitterWindow* split = new wxSplitterWindow(parent);
-
-// 	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(split, m_stage->GetStageImpl(), m_stage, &m_view_panel_mgr);
-// 	m_view_panel_mgr.AddSpritePanel(viewlist);
-// 	
-// 	d2d::GroupTreePanel* grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr, m_stage->GetKeyState());
-// 	m_view_panel_mgr.AddSpritePanel(grouptree);
-// 
-// 	split->SetSashGravity(0.5f);
-// 	split->SplitHorizontally(viewlist, grouptree);
-
-//	return split;
-
 	m_top_pannels.toolbar = new TopToolbarPanel(parent);
 	return m_top_pannels.toolbar;
 }

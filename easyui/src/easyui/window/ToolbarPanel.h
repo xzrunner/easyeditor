@@ -10,12 +10,16 @@ namespace window
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public d2d::ToolbarPanel, public d2d::Observer
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage_panel);
+	virtual ~ToolbarPanel();
 
-	
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 protected:
 	virtual wxSizer* initLayout();

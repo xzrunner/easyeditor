@@ -1,9 +1,11 @@
-#ifndef _EASYUI_PREVIEW_CANVAS_H_
-#define _EASYUI_PREVIEW_CANVAS_H_
+#ifndef _EASYUI_WINDOW_PREVIEW_CANVAS_H_
+#define _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 
 #include <drag2d.h>
 
 namespace eui
+{
+namespace window
 {
 
 class PreviewCanvas : public d2d::OrthoCanvas
@@ -19,10 +21,6 @@ protected:
 	virtual void OnTimer();
 
 private:
-	static const float VIEW_WIDTH;
-	static const float VIEW_HEIGHT;
-
-private:
 	d2d::Matrix m_scale_mt;
 
 	d2d::PlayControl& m_control;
@@ -32,5 +30,6 @@ private:
 }; // PreviewCanvas
 
 }
+}
 
-#endif // _EASYUI_PREVIEW_CANVAS_H_
+#endif // _EASYUI_WINDOW_PREVIEW_CANVAS_H_

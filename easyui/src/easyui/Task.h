@@ -9,6 +9,8 @@
 namespace eui
 {
 
+class UIStagePage;
+
 class Task : public d2d::ITask
 {
 public:
@@ -18,11 +20,13 @@ public:
 	virtual void Load(const char* filepath);
 	virtual void Store(const char* filepath) const;
 
-	virtual bool IsDirty() const;
+	virtual bool IsDirty() const { return false; }
 
-	virtual void GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
+	virtual void GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const {}
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const d2d::EditPanel* GetEditPanel() const { return NULL; }
+
+	UIStagePage* GetSelectedStagePage();
 
 private:
 	void InitLayout();

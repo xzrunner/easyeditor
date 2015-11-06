@@ -189,14 +189,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\FileIO.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyui\Frame.cpp"
 				>
 			</File>
@@ -213,14 +205,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\SettingsDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyui\SettingsDialog.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyui\Task.cpp"
 				>
 			</File>
@@ -232,82 +216,46 @@
 		<Filter
 			Name="topview"
 			>
-			<Filter
-				Name="stage"
+			<File
+				RelativePath="..\..\..\src\easyui\FontPropertySetting.cpp"
 				>
-				<File
-					RelativePath="..\..\..\src\easyui\TopStagePanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\TopStagePanel.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\UIStagePage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\UIStagePage.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="library"
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\FontPropertySetting.h"
 				>
-				<File
-					RelativePath="..\..\..\src\easyui\TopLibraryPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\TopLibraryPanel.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="preview"
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\TopLibraryPanel.cpp"
 				>
-				<File
-					RelativePath="..\..\..\src\easyui\PreviewCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\PreviewCanvas.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\PreviewDialog.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\PreviewDialog.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="property"
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\TopLibraryPanel.h"
 				>
-				<File
-					RelativePath="..\..\..\src\easyui\FontPropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\FontPropertySetting.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="toolbar"
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\TopStagePanel.cpp"
 				>
-				<File
-					RelativePath="..\..\..\src\easyui\TopToolbarPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\TopToolbarPanel.h"
-					>
-				</File>
-			</Filter>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\TopStagePanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\TopToolbarPanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\TopToolbarPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\UIStagePage.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\UIStagePage.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="dataset"
@@ -332,16 +280,12 @@
 				RelativePath="..\..\..\src\easyui\TopPannels.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="code"
-			>
 			<File
-				RelativePath="..\..\..\src\easyui\Code.cpp"
+				RelativePath="..\..\..\src\easyui\widget_id.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\Code.h"
+				RelativePath="..\..\..\src\easyui\widget_id.h"
 				>
 			</File>
 		</Filter>
@@ -476,6 +420,30 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyui\window\Code.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\Code.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\window\SymbolsCfg.cpp"
 					>
 					<FileConfiguration
@@ -556,6 +524,30 @@
 				Name="message"
 				>
 				<File
+					RelativePath="..\..\..\src\easyui\window\ChangeWindowViewSizeSJ.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\ChangeWindowViewSizeSJ.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\window\QueryWindowViewSizeSJ.cpp"
 					>
 					<FileConfiguration
@@ -577,6 +569,58 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyui\window\QueryWindowViewSizeSJ.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="preview"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\window\PreviewCanvas.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\PreviewCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\PreviewDialog.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\window\"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\PreviewDialog.h"
 					>
 				</File>
 			</Filter>

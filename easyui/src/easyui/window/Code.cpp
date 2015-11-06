@@ -7,6 +7,8 @@
 
 namespace eui
 {
+namespace window
+{
 
 namespace lua = ebuilder::lua;
 
@@ -130,4 +132,5 @@ void Code::ResolveText(const std::vector<d2d::ISprite*>& sprites)
  	}
 }
 
+}
 }

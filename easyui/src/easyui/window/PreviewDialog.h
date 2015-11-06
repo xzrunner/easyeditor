@@ -1,9 +1,11 @@
-#ifndef _EASYUI_PREVIEW_DIALOG_H_
-#define _EASYUI_PREVIEW_DIALOG_H_
+#ifndef _EASYUI_WINDOW_PREVIEW_DIALOG_H_
+#define _EASYUI_WINDOW_PREVIEW_DIALOG_H_
 
 #include <drag2d.h>
 
 namespace eui
+{
+namespace window
 {
 
 class PreviewDialog : public wxDialog
@@ -22,6 +24,7 @@ private:
 
 }; // PreviewDialog
 
+}
 }
 
 #endif // _EASYUI_PREVIEW_DIALOG_H_

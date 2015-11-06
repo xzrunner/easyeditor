@@ -16,7 +16,11 @@ QueryWindowViewSizeSJ::QueryWindowViewSizeSJ(int id)
 void QueryWindowViewSizeSJ::Query(int& width, int& height)
 {
 	Params p;
+	p.width = DEFAULT_VIEW_WIDTH;
+	p.height = DEFAULT_VIEW_HEIGHT;
+
 	Notify(&p);
+
 	width = p.width;
 	height = p.height;
 }

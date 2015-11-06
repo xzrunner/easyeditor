@@ -1,11 +1,10 @@
 #include "PreviewCanvas.h"
-#include "SettingCfg.h"
+#include "QueryWindowViewSizeSJ.h"
 
 namespace eui
 {
-
-const float PreviewCanvas::VIEW_WIDTH = 1024;
-const float PreviewCanvas::VIEW_HEIGHT = 768;
+namespace window
+{
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::PlayControl& control,
 							 const std::vector<const d2d::ISprite*>& sprites)
@@ -13,8 +12,10 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d
 	, m_control(control)
 	, m_sprites(sprites)
 {
-	SettingCfg* cfg = SettingCfg::Instance();
-	float scale = std::min(cfg->m_view_width / VIEW_WIDTH, cfg->m_view_height / VIEW_HEIGHT);
+	int width, height;
+	QueryWindowViewSizeSJ::Instance()->Query(width, height);
+	float scale = std::min(width / QueryWindowViewSizeSJ::DEFAULT_VIEW_WIDTH, 
+		height / QueryWindowViewSizeSJ::DEFAULT_VIEW_HEIGHT);
 	m_scale_mt.scale(scale, scale);
 }
 
@@ -52,4 +53,5 @@ void PreviewCanvas::OnTimer()
 	m_control.update();
 }
 
+}
 }

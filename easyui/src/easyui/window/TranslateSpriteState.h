@@ -8,13 +8,14 @@ namespace eui
 namespace window
 {
 
+class StagePanel;
 class AnchorMgr;
 
 class TranslateSpriteState : public d2d::TranslateSpriteState
 {
 public:
-	TranslateSpriteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos, 
-		AnchorMgr* anchor_mgr);
+	TranslateSpriteState(StagePanel* stage, d2d::SpriteSelection* selection, 
+		const d2d::Vector& first_pos, AnchorMgr* anchor_mgr);
 
 	virtual d2d::AbstractAtomicOP* OnMouseRelease(const d2d::Vector& pos);
 
@@ -29,6 +30,8 @@ private:
 	}; // Visitor
 
 private:
+	StagePanel* m_stage;
+
 	AnchorMgr* m_anchor_mgr;
 
 }; // TranslateSpriteState

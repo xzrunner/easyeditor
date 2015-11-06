@@ -17,6 +17,9 @@ public:
 		int height;
 	};
 
+	static const int DEFAULT_VIEW_WIDTH = 1126;
+	static const int DEFAULT_VIEW_HEIGHT = 630;
+
 public:
 	void Query(int& width, int& height);
 

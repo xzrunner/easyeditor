@@ -7,7 +7,6 @@ TopToolbarPanel::TopToolbarPanel(wxWindow* parent)
 	: wxPanel(parent)
 {
 	InitLayout();
-	EnableToolbar(0);
 }
 
 int TopToolbarPanel::AddToolbar(d2d::ToolbarPanel* toolbar)

@@ -1,7 +1,7 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "SettingCfg.h"
 #include "TidCfg.h"
+#include "QueryWindowViewSizeSJ.h"
 
 namespace eui
 {
@@ -36,11 +36,12 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawGuideLines() const
 {
-	SettingCfg* cfg = SettingCfg::Instance();
+	int width, height;
+	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
 	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
-		cfg->m_view_width * 0.5f,
-		cfg->m_view_height * 0.5f,
+		width * 0.5f,
+		height * 0.5f,
 		d2d::LIGHT_GREY_LINE);
 }
 

@@ -1,6 +1,7 @@
 #include "TopStagePanel.h"
 #include "TopLibraryPanel.h"
 #include "TopPannels.h"
+#include "TopToolbarPanel.h"
 
 #include "window/StagePanel.h"
 #include "list/StagePanel.h"
@@ -53,6 +54,7 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("List"));
 	}
+	m_top_pannels->toolbar->EnableToolbar(0);
 	sizer->Add(m_notebook, 1, wxEXPAND);
 }
 

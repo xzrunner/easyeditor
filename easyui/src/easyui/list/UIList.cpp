@@ -1,4 +1,5 @@
 #include "UIList.h"
+#include "widget_id.h"
 
 #include <easycomplex.h>
 
@@ -133,7 +134,7 @@ void UIList::StoreToFile(const char* filename) const
 	Json::Value value;
 	value["items filepath"] = d2d::FilenameTools::getRelativePath(dir, items_path).ToStdString();
 	value["wrapper filepath"] = d2d::FilenameTools::getRelativePath(dir, top_path).ToStdString();
-	value["type"] = "list";
+	value["type"] = get_widget_desc(ID_LIST);
 	value["horizontal"] = m_horizontal;
 	value["vertical"] = m_vertical;
 	value["clipbox"]["w"] = m_clipbox.xLength();
@@ -163,7 +164,7 @@ void UIList::LoadFromFile(const char* filename)
 	fin.close();
 
 	std::string type = value["type"].asString();
-	if (type != "list") {
+	if (!is_widget(type, ID_LIST)) {
 		return;
 	}
 
@@ -211,6 +212,8 @@ bool UIList::ReFilling()
 	m_hori_count = m_vert_count = 1;
 
 	Filling();
+
+	return true;
 }
 
 bool UIList::Arrange(const d2d::ISprite* spr)

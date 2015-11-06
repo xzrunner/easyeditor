@@ -17,6 +17,9 @@ public:
 
 	virtual void EnablePage(bool enable) = 0;
 
+	virtual void OnPreview() const = 0;
+	virtual void OnCode() const = 0;
+
 	void RegistSubjects(d2d::Observer* observer);
 	void UnRegistSubjects(d2d::Observer* observer);
 

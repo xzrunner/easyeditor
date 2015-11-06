@@ -13,7 +13,6 @@ public:
 
 private:
 	void OnPreview(wxCommandEvent& event);
-	void OnExtendSetting(wxCommandEvent& event);
 	void OnCode(wxCommandEvent& event);
 
 private:

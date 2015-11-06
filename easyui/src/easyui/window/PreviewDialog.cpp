@@ -3,6 +3,8 @@
 
 namespace eui
 {
+namespace window
+{
 
 PreviewDialog::PreviewDialog(wxWindow* parent, int width, int height,
 							 const std::vector<const d2d::ISprite*>& sprites)
@@ -24,4 +26,5 @@ void PreviewDialog::InitLayout()
 	SetSizer(sizer);
 }
 
+}
 }

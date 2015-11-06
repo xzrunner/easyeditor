@@ -16,7 +16,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPane
 d2d::IArrangeSpriteState* ArrangeSpriteImpl::
 CreateTranslateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
 {
-	return new TranslateSpriteState(selection, first_pos, m_stage->GetAnchorMgr()); 
+	return new TranslateSpriteState(m_stage, selection, first_pos, m_stage->GetAnchorMgr()); 
 }
 
 }

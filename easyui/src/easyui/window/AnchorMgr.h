@@ -8,16 +8,20 @@ namespace eui
 namespace window
 {
 
-class AnchorMgr
+class AnchorMgr : public d2d::Observer
 {
 public:
 	AnchorMgr();
 	~AnchorMgr();
 
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	void OnViewChanged(int width, int height);
+
+	void OnSprPosChanged(d2d::ISprite* spr);
 
 	void Draw() const;
 
@@ -28,7 +32,14 @@ public:
 	static int GetAnchorRadius() { return RADIUS; }
 
 private:
-	static const int RADIUS = 30;
+	void Insert(d2d::ISprite* spr);
+	void Remove(d2d::ISprite* spr);
+	void Clear();
+
+private:
+	static const int RADIUS = 50;
+
+	static const int ANCHOR_COUNT = 9;
 
 private:
 	struct Anchor
@@ -41,10 +52,16 @@ private:
 private:
 	static void ChangeAnchorPos(Anchor& anchor, const d2d::Vector& pos);
 
+	static void LoadAnchorData(const std::vector<d2d::ISprite*>& sprites,
+		const Json::Value& value, Anchor& anchor);
+
 private:
 	// 0 1 2
 	// 3 4 5
-	Anchor m_anchors[6];
+	// 6 7 8
+	Anchor m_anchors[ANCHOR_COUNT];
+
+	std::vector<d2d::Subject*> m_subjects;
 
 }; // AnchorMgr
 
