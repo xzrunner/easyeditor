@@ -21,6 +21,7 @@ static const wxString TAG_TERRAIN2D = "terrain2d";
 static const wxString TAG_ICON		= "icon";
 static const wxString TAG_SHADOW	= "shadow";
 static const wxString TAG_UI		= "ui";
+static const wxString TAG_TEXT		= "text";
 
 static const wxString TAG_GEN		= "gen";
 
@@ -58,6 +59,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		else if (ext == TAG_ICON) return e_icon;
 		else if (ext == TAG_SHADOW) return e_shadow;
 		else if (ext == TAG_UI) return e_ui;
+		else if (ext == TAG_TEXT) return e_text;
 		else return e_unknown;
 	}
 	else if (extension == ".lua")
@@ -136,6 +138,9 @@ wxString FileNameParser::getFileTag(Type type)
 		break;
 	case e_ui:
 		ext = TAG_UI;
+		break;
+	case e_text:
+		ext = TAG_TEXT;
 		break;
 	}
 	return ext;

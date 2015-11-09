@@ -15,6 +15,7 @@
 #include <easyicon.h>
 #include <easyshadow.h>
 #include <easysketch.h>
+#include <easytext.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -58,6 +59,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(libsketch::FILE_TAG, &libsketch::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(libsketch::FILE_TAG, &libsketch::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
 }
 
 bool MyApp::OnInit()

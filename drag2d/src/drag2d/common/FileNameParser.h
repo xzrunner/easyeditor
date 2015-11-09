@@ -34,6 +34,7 @@ public:
 		e_icon,
 		e_shadow,
 		e_ui,
+		e_text,
 	};
 
 	static Type getFileType(const wxString& filename);

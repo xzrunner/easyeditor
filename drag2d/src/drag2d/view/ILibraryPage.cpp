@@ -1,8 +1,10 @@
 #include "ILibraryPage.h"
 #include "LibraryList.h"
 #include "IStageCanvas.h"
+#include "ExceptionDlg.h"
 
 #include "common/Config.h"
+#include "common/Exception.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/ISymbol.h"
 
@@ -119,6 +121,29 @@ bool ILibraryPage::LoadFromConfig(const std::string& key)
 		ret = true;
 	}
 	return ret;
+}
+
+void ILibraryPage::OnAddPress(const std::string& type)
+{
+	wxString filter = wxT("*_") + type + wxT(".json");
+	wxString msg = wxT("open ") + type;
+	wxFileDialog dlg(this, msg, wxEmptyString, wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		wxArrayString filenames;
+		dlg.GetPaths(filenames);
+		for (size_t i = 0, n = filenames.size(); i < n; ++i)
+		{
+			try {
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				m_list->Insert(symbol);
+				symbol->Release();
+			} catch (d2d::Exception& e) {
+				d2d::ExceptionDlg dlg(m_parent, e);
+				dlg.ShowModal();
+			}
+		}
+	}
 }
 
 } // d2d

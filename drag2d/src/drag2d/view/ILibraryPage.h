@@ -56,6 +56,8 @@ protected:
 
 	bool LoadFromConfig(const std::string& key);
 
+	void OnAddPress(const std::string& type);
+
 protected:
 	wxString m_name;
 

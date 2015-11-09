@@ -14,6 +14,7 @@
 #include <easyicon.h>
 #include <easyshadow.h>
 #include <easysketch.h>
+#include <easytext.h>
 
 namespace ecomplex
 {
@@ -26,6 +27,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new LibraryPage(nb));
 	AddPage(new libanim::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));
+	AddPage(new etext::LibraryPage(nb));
 	AddPage(new d2d::LibraryFontBlankPage(nb));
 	AddPage(new emesh::LibraryPage(nb));
 	AddPage(new d2d::LibraryScriptsPage(nb));

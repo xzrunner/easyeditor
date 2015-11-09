@@ -12,6 +12,9 @@
 #include <gl/glew.h>
 #include <wx/wx.h>
 
+// debug
+#include <dtex.h>
+
 namespace d2d
 {
 
@@ -98,7 +101,10 @@ void DynamicPacker::DebugDraw() const
 	vb[12] = vertices[3].x, vb[13] = vertices[3].y;
 	vb[14] = 1, vb[15] = 0;
 
-	shader->Draw(vb, m_tex);
+	if (dtex_cg* cg = dtexf_get_cg()) {
+		int id = dtex_cg_get_texid(cg);
+		shader->Draw(vb, id);
+	}
 
 	PrimitiveDraw::rect(Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
