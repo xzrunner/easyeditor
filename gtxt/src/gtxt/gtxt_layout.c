@@ -12,8 +12,8 @@
 struct glyph {
 	int unicode;
 
-	float in_width;
-	float in_height;
+	float x, y;
+	float w, h;
 
 	float out_width;
 
@@ -169,15 +169,15 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 	}
 	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, font, size, edge);
 
+	if (L.row_height == 0) {
+		L.row_height = g_layout->metrics_height;
+	} else {
+		assert(L.row_height == g_layout->metrics_height);
+	}
+
 	float w = g_layout->advance * (1 + L.style->space_h);
 	if (unicode == '\n' || L.curr_width + w > L.style->width) {
 		float h = g_layout->metrics_height * (1 + L.style->space_v);
-		if (L.row_height == 0) {
-			L.row_height = g_layout->metrics_height;
-		} else {
-			assert(L.row_height == g_layout->metrics_height);
-		}
-
 		L.curr_row->width = L.curr_width;
 		L.tot_height += h;
 		L.curr_width = 0;
@@ -197,11 +197,15 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 		struct glyph* g = _new_glyph();
 		assert(g);
 		g->unicode = unicode;
-		g->in_width = g_layout->advance;
-		g->in_height = g_layout->metrics_height;
-		g->out_width = w;
-		L.curr_width += w;
 
+		g->x = g_layout->bearing_x;
+		g->y = g_layout->bearing_y;
+		g->w = g_layout->sizer.width;
+		g->h = g_layout->sizer.height;
+
+		g->out_width = w;
+
+		L.curr_width += w;
 		if (!L.curr_row->head) {
 			assert(!L.curr_row->tail);
 			L.curr_row->head = L.curr_row->tail = g;
@@ -260,7 +264,7 @@ gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, float w, float h,
 
 		struct glyph* g = r->head;
 		while (g) {
-			cb(g->unicode, x, y, g->in_width, g->in_height, ud);
+			cb(g->unicode, x + g->x + g->w * 0.5f, y + g->y - g->h * 0.5f, g->w, g->h, ud);
 			x += g->out_width;
 			g = g->next;
 		}

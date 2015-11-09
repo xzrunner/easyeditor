@@ -83,6 +83,52 @@ void Sprite::SetSymbol(d2d::ISymbol* symbol)
 	d2d::ISprite::SetSymbol(&m_symbol, symbol);
 }
 
+void Sprite::Load(const Json::Value& val)
+{
+	ISprite::Load(val);
+
+	const Json::Value& text_val = val["text"];
+
+	m_width = text_val["width"].asInt();
+	m_height = text_val["height"].asInt();
+
+	m_font = text_val["font"].asString();
+	m_font_size = text_val["size"].asInt();
+
+	m_color = transColor(text_val["color"].asString(), d2d::PT_ARGB);
+
+	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());
+	m_align_vert = VertAlignType(text_val["align_vert"].asInt());
+
+	m_text = text_val["text"].asString();
+	m_tid = text_val["tid"].asString();
+}
+
+void Sprite::Store(Json::Value& val) const
+{
+	ISprite::Store(val);
+
+	Json::Value text_val;
+
+	text_val["width"] = m_width;
+	text_val["height"] = m_height;
+
+	text_val["font"] = m_font;
+	text_val["size"] = m_font_size;
+
+	text_val["edge"] = m_has_edge;
+
+	text_val["color"] = transColor(m_color, d2d::PT_ARGB);
+
+	text_val["align_hori"] = m_align_hori;
+	text_val["align_vert"] = m_align_vert;
+
+	text_val["text"] = m_text;
+	text_val["tid"] = m_tid;
+
+	val["text"] = text_val;
+}
+
 d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return new PropertySetting(stage, this);

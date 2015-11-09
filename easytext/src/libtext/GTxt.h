@@ -6,12 +6,14 @@
 namespace etext
 {
 
+class Sprite;
+
 class GTxt
 {
 public:
 	void LoadFont(const char* filepath);
 
-	void Draw(const d2d::Matrix& mt, const char* str) const;
+	void Draw(const d2d::Matrix& mt, const Sprite* spr) const;
 
 	static GTxt* Instance();
 

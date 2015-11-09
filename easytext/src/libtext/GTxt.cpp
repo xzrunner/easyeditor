@@ -1,4 +1,5 @@
 #include "GTxt.h"
+#include "Sprite.h"
 
 #include <dtex.h>
 #include <gtxt.h>
@@ -43,29 +44,29 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, void*
 	mgr->Draw(vertices, texcoords, id);
 }
 
-void GTxt::Draw(const d2d::Matrix& mt, const char* str) const
+void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 {
-	// ͳһ״̬
 	dtex_shader_texture(0);
 	d2d::ShaderMgr::Instance()->SetTexture(0);
 
 	gtxt_label_style style;
 
 	style.font = 0;
-	style.font_size = 30;
-	style.edge = false;
+	style.font_size = spr->m_font_size;
+	style.edge = spr->m_has_edge;
 
-	style.width = 200;
-	style.height = 200;
+	style.width = spr->m_width;
+	style.height = spr->m_height;
 
-	style.color = 0x000000ff;
+	style.color = d2d::trans_color2int(spr->m_color, d2d::PT_ARGB);
 
-	style.align_h = HA_LEFT;
-	style.align_v = VA_TOP;
+	style.align_h = spr->m_align_hori;
+	style.align_v = spr->m_align_vert;
 
 	style.space_h = style.space_v = 0;
 
-	gtxt_label_draw(str, &style, render, (void*)&mt);
+	std::string utf8 = d2d::StringTools::ToUtf8(spr->m_text);
+	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);
 }
 
 GTxt* GTxt::Instance()

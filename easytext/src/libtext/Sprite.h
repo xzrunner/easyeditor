@@ -26,6 +26,9 @@ public:
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 
+	virtual void Load(const Json::Value& val);
+	virtual void Store(Json::Value& val) const;
+
 	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
 
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
@@ -55,6 +58,7 @@ private:
 
 	friend class Symbol;
 	friend class PropertySetting;
+	friend class GTxt;
 
 }; // Sprite
 
