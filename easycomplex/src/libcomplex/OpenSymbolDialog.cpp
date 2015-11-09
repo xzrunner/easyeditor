@@ -9,6 +9,7 @@
 #include <easytexture.h>
 #include <easyicon.h>
 #include <easyshadow.h>
+#include <easytext.h>
 
 namespace ecomplex
 {
@@ -78,6 +79,14 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	else if (eicon::Sprite* icon = dynamic_cast<eicon::Sprite*>(spr))
 	{
 		eicon::EditDialog dlg(m_wnd, spr, m_sprites_impl);
+		dlg.ShowModal();
+		m_stage->SetCanvasDirty();
+		m_stage->RefreshFrame();
+		m_stage->ResetViewport();
+	}
+	else if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(spr))
+	{
+		etext::EditDialog dlg(m_wnd, text, m_sprites_impl);
 		dlg.ShowModal();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();

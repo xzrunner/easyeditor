@@ -134,4 +134,28 @@ d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
 	return new PropertySetting(stage, this);
 }
 
+void Sprite::GetSize(int& width, int& height) const
+{
+	width = m_width;
+	height = m_height;
+}
+
+void Sprite::SetSize(int width, int height)
+{
+	m_width = width;
+	m_height = height;
+}
+
+void Sprite::GetAlign(int& halign, int& valign) const
+{
+	halign = m_align_hori;
+	valign = m_align_vert;
+}
+
+void Sprite::SetAlign(int halign, int valign)
+{
+	m_align_hori = HoriAlignType(halign);
+	m_align_vert = VertAlignType(valign);
+}
+
 }

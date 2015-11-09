@@ -181,6 +181,7 @@ gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_gl
 			C->bitmap_freelist = bmp;
 		}
 		g->bitmap = C->bitmap_freelist;
+		C->bitmap_freelist = C->bitmap_freelist->next;
 		g->bitmap->valid = false;
 	}
 	if (!g->bitmap->valid) {
@@ -192,6 +193,7 @@ gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_gl
 			g->bitmap->buf = malloc(sz);
 			g->bitmap->sz = sz;
 		}
+
 		memcpy(g->bitmap->buf, buf, sz);
 		g->bitmap->valid = true;
 

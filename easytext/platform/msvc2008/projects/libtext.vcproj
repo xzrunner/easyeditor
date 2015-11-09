@@ -212,6 +212,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="input"
+				>
+				<File
+					RelativePath="..\..\..\src\libtext\InputPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libtext\InputPanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
@@ -242,6 +254,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libtext\typedef.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\libtext\EditDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtext\EditDialog.h"
 				>
 			</File>
 		</Filter>

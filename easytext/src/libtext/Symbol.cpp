@@ -8,7 +8,7 @@ namespace etext
 Symbol::Symbol()
 {
 	m_bg_style.fill = true;
-	m_bg_style.color.set(0.f, 0.7f, 0.7f, 0.7f);
+	m_bg_style.color.set(0.7f, 0.7f, 0.7f, 0.7f);
 }
 
 Symbol::~Symbol()
@@ -71,9 +71,9 @@ void Symbol::DrawBackground(const d2d::ISprite* sprite, const d2d::Matrix& mt) c
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		float hw = font->m_width * 0.5f;
-		float hh = font->m_height * 0.5f;
-		d2d::PrimitiveDraw::rect(mt, hw, hh, m_bg_style);
+		int w, h;
+		font->GetSize(w, h);
+		d2d::PrimitiveDraw::rect(mt, w * 0.5f, h * 0.5f, m_bg_style);
 	}
 }
 

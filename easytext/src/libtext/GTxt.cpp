@@ -9,6 +9,16 @@ namespace etext
 
 GTxt* GTxt::m_instance = NULL;
 
+static const char* CFG =
+	"{ \n"
+	"	\"open_c1\" : false, \n"
+	"	\"open_c2\" : true, \n"
+	"	\"open_c3\" : false,	 \n"
+	"	\"open_cg\" : true,	 \n"
+	"	\"c2_tex_size\" : 512	 \n"
+	"} \n"
+	;
+
 GTxt::GTxt()
 {
 	Init();
@@ -52,21 +62,33 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	gtxt_label_style style;
 
 	style.font = 0;
-	style.font_size = spr->m_font_size;
-	style.edge = spr->m_has_edge;
+	style.font_size = spr->GetFontSize();
+	style.edge = spr->GetEdge();
 
-	style.width = spr->m_width;
-	style.height = spr->m_height;
+	spr->GetSize(style.width, style.height);
 
-	style.color = d2d::trans_color2int(spr->m_color, d2d::PT_ARGB);
-
-	style.align_h = spr->m_align_hori;
-	style.align_v = spr->m_align_vert;
+	style.color = d2d::trans_color2int(spr->GetColor(), d2d::PT_RGBA);
+	
+	spr->GetAlign(style.align_h, style.align_v);
 
 	style.space_h = style.space_v = 0;
 
-	std::string utf8 = d2d::StringTools::ToUtf8(spr->m_text);
+	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);
+}
+
+void GTxt::ReloadTexture()
+{
+	dtex_shader_load();
+
+// 	dtex_cg* old_cg = dtexf_get_cg();
+// 	dtex_cg_clear(old_cg);
+
+	dtexf_release();
+	dtexf_create(CFG);
+
+	dtex_cg* cg = dtexf_get_cg();
+	gtxt_render_init(cg);
 }
 
 GTxt* GTxt::Instance()
@@ -81,22 +103,14 @@ void GTxt::Init()
 {
 	dtex_shader_load();
 
-	const char* cfg =
-		"{ \n"
-		"	\"open_c1\" : false, \n"
-		"	\"open_c2\" : true, \n"
-		"	\"open_c3\" : false,	 \n"
-		"	\"open_cg\" : true,	 \n"
-		"	\"c2_tex_size\" : 512	 \n"
-		"} \n"
-		;
-	dtexf_create(cfg);
+	dtexf_create(CFG);
 
 	dtex_cg* cg = dtexf_get_cg();
 	gtxt_render_init(cg);
 
 	gtxt_ft_init();
-	gtxt_ft_add_font("FZCY_GBK.ttf");
+//	gtxt_ft_add_font("FZCY_GBK.ttf");
+	gtxt_ft_add_font("msyh.ttf");
 
 	gtxt_glyph_cache_init(50, 500);
 }

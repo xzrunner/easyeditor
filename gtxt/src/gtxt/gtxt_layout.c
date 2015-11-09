@@ -131,7 +131,13 @@ gtxt_layout_begin(struct gtxt_label_style* style) {
 
 void 
 gtxt_layout_end() {
+	struct row* last_row = L.head;
+	while (last_row->next) {
+		last_row = last_row->next;
+	}
+	last_row->next = L.row_freelist;
 	L.row_freelist = L.head;
+
 	L.glyph_freelist = L.head->head;
 
 	struct glyph* last_tail = NULL;
@@ -141,6 +147,10 @@ gtxt_layout_end() {
 			last_tail->next = r->head;
 		}
 		last_tail = r->tail;
+
+		r->head = NULL;
+		r->tail = NULL;
+
 		r = r->next;
 	}
 }
@@ -148,6 +158,12 @@ gtxt_layout_end() {
 static inline struct glyph*
 _new_glyph() {
 	struct glyph* g = L.glyph_freelist;
+
+	if (!g) {
+
+		int zz = 0;
+	}
+
 	assert(g);
 	L.glyph_freelist = g->next;
 	g->next = NULL;

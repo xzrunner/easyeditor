@@ -4,23 +4,27 @@
 namespace etext
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library,
-					   d2d::PropertySettingPanel* property)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
+					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, property));
+	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this));
 	SetCanvas(new StageCanvas(this));
+}
+
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites, 
+					   d2d::LibraryPanel* library)
+	: d2d::EditPanel(parent, frame)
+	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+{
+	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this));
+	SetCanvas(new StageCanvas(this, edited, bg_sprites));	
 }
 
 StagePanel::~StagePanel()
 {	
-}
-
-void StagePanel::OnSizeDebug(wxSizeEvent& event)
-{
-	m_canvas->SetSize(event.GetSize()); 
 }
 
 }

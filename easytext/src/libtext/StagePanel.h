@@ -11,12 +11,11 @@ class StageCanvas;
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
+		d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites, 
+		d2d::LibraryPanel* library);
 	virtual ~StagePanel();
-
-protected:
-	virtual void OnSizeDebug(wxSizeEvent& event);
 
 private:
 	StageCanvas* m_canvas;

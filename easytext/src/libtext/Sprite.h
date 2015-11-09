@@ -31,6 +31,27 @@ public:
 
 	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
 
+	void GetSize(int& width, int& height) const;
+	void SetSize(int width, int height);
+
+	int GetFontSize() const { return m_font_size; }
+	void SetFontSize(int size) { m_font_size = size; }
+
+	bool GetEdge() const { return m_has_edge; }
+	void SetEdge(bool edge) { m_has_edge = edge; }
+
+	const d2d::Colorf& GetColor() const { return m_color; }
+	void SetColor(const d2d::Colorf& col) { m_color = col; }
+
+	void GetAlign(int& halign, int& valign) const;
+	void SetAlign(int halign, int valign);
+
+	const std::string& GetText() const { return m_text; }
+	void SetText(const std::string& text) { m_text = text; }
+
+	const std::string& GetTID() const { return m_tid; }
+	void SetTID(const std::string& tid) { m_tid = tid; }	
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
@@ -55,10 +76,6 @@ private:
 
 private:
 	Symbol* m_symbol;
-
-	friend class Symbol;
-	friend class PropertySetting;
-	friend class GTxt;
 
 }; // Sprite
 

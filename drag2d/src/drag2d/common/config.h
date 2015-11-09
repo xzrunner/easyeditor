@@ -36,6 +36,8 @@ private:
 
 	void LoadFromFile(const char* filename);
 
+	void LoadFontCfg(const Json::Value& value);
+
 private:
 	Json::Value m_value;
 
@@ -43,6 +45,7 @@ private:
 	bool m_use_render;
 
 	std::string m_font_filepath;
+	std::vector<std::pair<std::string, std::string> > m_fonts;
 
 	std::set<wxString> m_resource_paths;
 
