@@ -18,7 +18,8 @@ struct gtxt_render_style {
 
 void gtxt_render_init(struct dtex_cg* cg);
 
-void gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y);
+void gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y, float w, float h,
+					 void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud), void* ud);
 
 #endif // gametext_rendrer_h
 

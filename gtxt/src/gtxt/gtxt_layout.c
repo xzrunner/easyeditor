@@ -11,7 +11,11 @@
 
 struct glyph {
 	int unicode;
-	float width;
+
+	float in_width;
+	float in_height;
+
+	float out_width;
 
 	struct glyph* next;
 };
@@ -193,7 +197,9 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 		struct glyph* g = _new_glyph();
 		assert(g);
 		g->unicode = unicode;
-		g->width = w;
+		g->in_width = g_layout->advance;
+		g->in_height = g_layout->metrics_height;
+		g->out_width = w;
 		L.curr_width += w;
 
 		if (!L.curr_row->head) {
@@ -221,7 +227,7 @@ gtxt_layout_multi(struct dtex_array* unicodes) {
 }
 
 void 
-gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, void* ud), void* ud) {
+gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, float w, float h, void* ud), void* ud) {
 	float x, y;
 
 	switch (L.style->align_v) {
@@ -254,8 +260,8 @@ gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, void* ud), void* 
 
 		struct glyph* g = r->head;
 		while (g) {
-			cb(g->unicode, x, y, ud);
-			x += g->width;
+			cb(g->unicode, x, y, g->in_width, g->in_height, ud);
+			x += g->out_width;
 			g = g->next;
 		}
 

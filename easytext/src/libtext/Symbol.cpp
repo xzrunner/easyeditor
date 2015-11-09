@@ -85,7 +85,7 @@ void Symbol::DrawText(const d2d::ISprite* sprite, const d2d::Matrix& mt) const
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
 		std::string utf8 = d2d::StringTools::ToUtf8(font->m_text);
-		GTxt::Instance()->Draw(utf8.c_str());
+		GTxt::Instance()->Draw(mt, utf8.c_str());
 	}
 }
 

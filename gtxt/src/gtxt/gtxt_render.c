@@ -14,7 +14,8 @@ gtxt_render_init(struct dtex_cg* cg) {
 }
 
 void
-gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y) {
+gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y, float w, float h,
+				void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud), void* ud) {
 	struct dtex_glyph glyph;
 	glyph.unicode = unicode;
 	glyph.style.color = style->color;
@@ -31,15 +32,17 @@ gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y) 
 		return;
 	}
 
-#ifndef USED_IN_EDITOR
-	struct ej_vertex_pack vb[4];
-	for (int i = 0; i < 4; ++i) {
-		vb[i].tx = texcoords[i*2] * 0xffff;
-		vb[i].ty = texcoords[i*2+1] * 0xffff;
-	}
-	ej_shader_texture(uid, 0);
-	ej_shader_draw(vb, 0xffffffff, 0, 0xff0000ff, 0x00ff00ff, 0x0000ffff);
-#else
-	dtex_ej_glyph_draw(uid, texcoords, x, y, 50, 50);
-#endif // USED_IN_EDITOR
+//#ifndef USED_IN_EDITOR
+//	struct ej_vertex_pack vb[4];
+//	for (int i = 0; i < 4; ++i) {
+//		vb[i].tx = texcoords[i*2] * 0xffff;
+//		vb[i].ty = texcoords[i*2+1] * 0xffff;
+//	}
+//	ej_shader_texture(uid, 0);
+//	ej_shader_draw(vb, 0xffffffff, 0, 0xff0000ff, 0x00ff00ff, 0x0000ffff);
+//#else
+//	dtex_ej_glyph_draw(uid, texcoords, x, y, 50, 50);
+//#endif // USED_IN_EDITOR
+
+	render(uid, texcoords, x, y, w, h, ud);
 }

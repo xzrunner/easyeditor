@@ -17,8 +17,38 @@ void GTxt::LoadFont(const char* filepath)
 {
 }
 
-void GTxt::Draw(const char* str) const
+void render(int id, float* _texcoords, float x, float y, float w, float h, void* ud) 
 {
+	d2d::Matrix* mt = (d2d::Matrix*)ud;
+
+	float hw = w * 0.5f, hh = h * 0.5f;
+
+	d2d::Vector vertices[4];
+	vertices[0] = d2d::Vector(x - hw, y + hh);
+	vertices[1] = d2d::Vector(x - hw, y - hh);
+	vertices[2] = d2d::Vector(x + hw, y - hh);
+	vertices[3] = d2d::Vector(x + hw, y + hh);
+	for (int i = 0; i < 4; ++i) {
+		vertices[i] = d2d::Math::transVector(vertices[i], *mt);
+	}
+
+	d2d::Vector texcoords[4];
+	texcoords[0].set(_texcoords[0], _texcoords[1]);
+	texcoords[1].set(_texcoords[2], _texcoords[3]);
+	texcoords[2].set(_texcoords[4], _texcoords[5]);
+	texcoords[3].set(_texcoords[6], _texcoords[7]);
+
+	d2d::ShaderMgr* mgr = d2d::ShaderMgr::Instance();
+	mgr->sprite();
+	mgr->Draw(vertices, texcoords, id);
+}
+
+void GTxt::Draw(const d2d::Matrix& mt, const char* str) const
+{
+	// ͳһ״̬
+	dtex_shader_texture(0);
+	d2d::ShaderMgr::Instance()->SetTexture(0);
+
 	gtxt_label_style style;
 
 	style.font = 0;
@@ -35,7 +65,7 @@ void GTxt::Draw(const char* str) const
 
 	style.space_h = style.space_v = 0;
 
-	gtxt_label_draw(str, &style);
+	gtxt_label_draw(str, &style, render, (void*)&mt);
 }
 
 GTxt* GTxt::Instance()

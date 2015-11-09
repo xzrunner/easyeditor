@@ -1,6 +1,8 @@
 #ifndef _EASYTEXT_GTXT_H_
 #define _EASYTEXT_GTXT_H_
 
+#include <drag2d.h>
+
 namespace etext
 {
 
@@ -9,7 +11,7 @@ class GTxt
 public:
 	void LoadFont(const char* filepath);
 
-	void Draw(const char* str) const;
+	void Draw(const d2d::Matrix& mt, const char* str) const;
 
 	static GTxt* Instance();
 

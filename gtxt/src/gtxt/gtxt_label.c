@@ -42,6 +42,13 @@ _unicode_len(const char chr) {
 //	return unicode;
 //}
 
+struct draw_params {
+	struct gtxt_label_style* style;
+
+	void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud);
+	void* ud;
+};
+
 static inline int
 _get_unicode(const char* str, int n) {
 	int unicode = str[0] & ((1 << (8 - n)) - 1);
@@ -52,31 +59,35 @@ _get_unicode(const char* str, int n) {
 }
 
 static inline void
-_draw_glyph_cb(int unicode, float x, float y, void* ud) {
-	struct gtxt_label_style* style = (struct gtxt_label_style*)ud;	
+_draw_glyph_cb(int unicode, float x, float y, float w, float h, void* ud) {
+	struct draw_params* params = (struct draw_params*)ud;
 
 	struct gtxt_render_style d_style;
-	d_style.color = style->color;
-	d_style.size = style->font_size;
-	d_style.font = style->font;
-	d_style.edge = style->edge;
+	d_style.color = params->style->color;
+	d_style.size = params->style->font_size;
+	d_style.font = params->style->font;
+	d_style.edge = params->style->edge;
 
-	gtxt_draw_glyph(unicode, &d_style, x, y);
+	gtxt_draw_glyph(unicode, &d_style, x, y, w, h, params->render, params->ud);
 }
 
 struct layout_pos {
 	int unicode;
 	float x, y;
+	float w, h;
 };
 
-struct layout_result_with_idx {
+struct draw_richtext_params {
 	struct layout_pos* result;
 	int idx;
+
+	void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud);
+	void* ud;
 };
 
 static inline int
 _draw_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, void* ud) {
-	struct layout_result_with_idx* params = (struct layout_result_with_idx*)ud;
+	struct draw_richtext_params* params = (struct draw_richtext_params*)ud;
 
 	struct gtxt_render_style d_style;
 	d_style.color = style->color;
@@ -89,13 +100,14 @@ _draw_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, void
 
 	struct layout_pos* pos = &params->result[params->idx++];
 	assert(pos->unicode == unicode);
-	gtxt_draw_glyph(unicode, &d_style, pos->x, pos->y);
+	gtxt_draw_glyph(unicode, &d_style, pos->x, pos->y, pos->w, pos->h, params->render, params->ud);
 
 	return len;
 }
 
 void 
-gtxt_label_draw(const char* str, struct gtxt_label_style* style) {
+gtxt_label_draw(const char* str, struct gtxt_label_style* style,  
+				void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud), void* ud) {
 	if (!UNICODE_BUF) {
 		UNICODE_BUF = dtex_array_create(128, sizeof(int));
 	}
@@ -108,9 +120,14 @@ gtxt_label_draw(const char* str, struct gtxt_label_style* style) {
 		i += len;
 	}
 
+	struct draw_params params;
+	params.style = style;
+	params.render = render;
+	params.ud = ud;
+
 	gtxt_layout_begin(style);
 	gtxt_layout_multi(UNICODE_BUF);					// layout
-	gtxt_layout_traverse(_draw_glyph_cb, style);	// draw
+	gtxt_layout_traverse(_draw_glyph_cb, &params);	// draw
 	gtxt_layout_end();
 
 	dtex_array_clear(UNICODE_BUF);
@@ -128,16 +145,19 @@ _layout_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, vo
 }
 
 static inline void
-_get_layout_result_cb(int unicode, float x, float y, void* ud) {
-	struct layout_result_with_idx* params = (struct layout_result_with_idx*)ud;
+_get_layout_result_cb(int unicode, float x, float y, float w, float h, void* ud) {
+	struct draw_richtext_params* params = (struct draw_richtext_params*)ud;
 	params->result[params->idx].unicode = unicode;
 	params->result[params->idx].x = x;
 	params->result[params->idx].y = y;
+	params->result[params->idx].w = w;
+	params->result[params->idx].h = h;
 	++params->idx;
 }
 
 void 
-gtxt_label_draw_richtext(const char* str, struct gtxt_label_style* style) {
+gtxt_label_draw_richtext(const char* str, struct gtxt_label_style* style, 
+						 void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud), void* ud) {
 	if (!UNICODE_BUF) {
 		UNICODE_BUF = dtex_array_create(128, sizeof(int));
 	}
@@ -150,9 +170,11 @@ gtxt_label_draw_richtext(const char* str, struct gtxt_label_style* style) {
 
 	// get layout
 	struct layout_pos pos[count];
-	struct layout_result_with_idx params;
+	struct draw_richtext_params params;
 	params.result = pos;
 	params.idx = 0;
+	params.render = render;
+	params.ud = ud;
 	gtxt_layout_traverse(_get_layout_result_cb, &params);
 
 	gtxt_layout_end();
