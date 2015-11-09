@@ -64,12 +64,15 @@ wxSizer* ToolbarPanel::initLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Font");
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
-			static const int SIZE = 2;
-			wxString choices[SIZE];
-			choices[0] = "font1";
-			choices[1] = "font2";
-			m_font = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, SIZE, choices);
+			const std::vector<std::pair<std::string, std::string> >& 
+				fonts = d2d::Config::Instance()->GetFonts();
+			wxArrayString choices;
+			for (int i = 0, n = fonts.size(); i < n; ++i) {
+				choices.push_back(fonts[i].first);
+			}
+			m_font = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 			m_font->SetSelection(0);
+			Connect(m_font->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeFont));
 			sizer->Add(m_font);
 		}
 		sizer->AddSpacer(5);
@@ -138,6 +141,12 @@ void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 	int w = d2d::StringTools::FromString<int>(m_width->GetValue().ToStdString());
 	int h = d2d::StringTools::FromString<int>(m_height->GetValue().ToStdString());
 	m_spr->SetSize(w, h);
+}
+
+void ToolbarPanel::OnChangeFont(wxCommandEvent& event)
+{
+	int font = m_font->GetSelection();
+	m_spr->SetFont(font);
 }
 
 void ToolbarPanel::OnChangeFontSize(wxCommandEvent& event)

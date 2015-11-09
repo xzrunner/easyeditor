@@ -45,7 +45,7 @@ private:
 	int m_width;
 	int m_height;
 
-	std::string m_font;
+	int m_font;
 	int m_font_size;
 
 	bool m_has_edge;

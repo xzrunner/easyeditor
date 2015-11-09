@@ -54,6 +54,7 @@ void Symbol::LoadResources()
 	m_width = value["width"].asInt();
 	m_height = value["height"].asInt();
 
+	m_font = value["font"].asInt();
 	m_font_size = value["font size"].asInt();
 
 	m_has_edge = value["edge"].asBool();

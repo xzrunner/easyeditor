@@ -10,6 +10,7 @@ Sprite::Sprite()
 	m_width = 100;
 	m_height = 20;
 
+	m_font = 0;
 	m_font_size = 16;
 
 	m_has_edge = false;
@@ -29,6 +30,7 @@ Sprite::Sprite(const Sprite& sprite)
 	m_width = sprite.m_width;
 	m_height = sprite.m_height;
 
+	m_font = sprite.m_font;
 	m_font_size = sprite.m_font_size;
 
 	m_has_edge = sprite.m_has_edge;
@@ -47,6 +49,7 @@ Sprite::Sprite(Symbol* symbol)
 	m_width = symbol->m_width;
 	m_height = symbol->m_height;
 
+	m_font = symbol->m_font;
 	m_font_size = symbol->m_font_size;
 
 	m_has_edge = symbol->m_has_edge;
@@ -92,7 +95,7 @@ void Sprite::Load(const Json::Value& val)
 	m_width = text_val["width"].asInt();
 	m_height = text_val["height"].asInt();
 
-	m_font = text_val["font"].asString();
+	m_font = text_val["font"].asInt();
 	m_font_size = text_val["size"].asInt();
 
 	m_color = transColor(text_val["color"].asString(), d2d::PT_ARGB);

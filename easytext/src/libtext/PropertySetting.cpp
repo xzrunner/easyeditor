@@ -43,7 +43,7 @@ void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& va
 		spr->BuildBounding();
 		m_stage->SetCanvasDirty();
 	} else if (name == "Font") {
-//		spr->m_font = wxANY_AS(value, wxString);
+		spr->SetFont(wxANY_AS(value, int));
 		m_stage->SetCanvasDirty();
 	} else if (name == "FontSize") {
 		spr->SetFontSize(wxANY_AS(value, int));
@@ -88,7 +88,13 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("LabelSize.Width")->SetValue(width);
 	pg->GetProperty("LabelSize.Height")->SetValue(height);
 
-//	pg->GetProperty("Font")->SetValue(spr->m_font);
+	const std::vector<std::pair<std::string, std::string> >& 
+		fonts = d2d::Config::Instance()->GetFonts();
+	wxArrayString choices;
+	for (int i = 0, n = fonts.size(); i < n; ++i) {
+		choices.push_back(fonts[i].first);
+	}
+	pg->GetProperty("Font")->SetValue(choices[spr->GetFont()]);
 	pg->GetProperty("FontSize")->SetValue(spr->GetFontSize());
 
 	pg->GetProperty("Edge")->SetValue(spr->GetEdge());
@@ -120,7 +126,13 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->AppendIn(sz_prop, new wxFloatProperty("Width", wxPG_LABEL, width));
 	pg->AppendIn(sz_prop, new wxFloatProperty("Height", wxPG_LABEL, height));
 
-//	pg->Append(new wxStringProperty("Font", wxPG_LABEL, spr->m_font));
+	const std::vector<std::pair<std::string, std::string> >& 
+		fonts = d2d::Config::Instance()->GetFonts();
+	wxArrayString choices;
+	for (int i = 0, n = fonts.size(); i < n; ++i) {
+		choices.push_back(fonts[i].first);
+	}
+	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
 	pg->Append(new wxFloatProperty("FontSize", wxPG_LABEL, spr->GetFontSize()));
 
 	pg->Append(new wxBoolProperty("Edge", wxPG_LABEL, spr->GetEdge()));

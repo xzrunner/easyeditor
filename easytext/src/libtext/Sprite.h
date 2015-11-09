@@ -34,6 +34,9 @@ public:
 	void GetSize(int& width, int& height) const;
 	void SetSize(int width, int height);
 
+	int GetFont() const { return m_font; }
+	void SetFont(int font) { m_font = font; }
+
 	int GetFontSize() const { return m_font_size; }
 	void SetFontSize(int size) { m_font_size = size; }
 
@@ -60,7 +63,7 @@ private:
 	int m_width;
 	int m_height;
 
-	std::string m_font;
+	int m_font;
 	int m_font_size;
 
 	bool m_has_edge;

@@ -61,7 +61,7 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 
 	gtxt_label_style style;
 
-	style.font = 0;
+	style.font = spr->GetFont();
 	style.font_size = spr->GetFontSize();
 	style.edge = spr->GetEdge();
 
@@ -110,7 +110,13 @@ void GTxt::Init()
 
 	gtxt_ft_init();
 //	gtxt_ft_add_font("FZCY_GBK.ttf");
-	gtxt_ft_add_font("msyh.ttf");
+//	gtxt_ft_add_font("msyh.ttf");
+
+	const std::vector<std::pair<std::string, std::string> >& 
+		fonts = d2d::Config::Instance()->GetFonts();
+	for (int i = 0, n = fonts.size(); i < n; ++i) {
+		gtxt_ft_add_font(fonts[i].second.c_str());
+	}	
 
 	gtxt_glyph_cache_init(50, 500);
 }

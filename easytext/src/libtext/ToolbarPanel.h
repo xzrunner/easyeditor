@@ -21,6 +21,7 @@ protected:
 private:
 	void OnChangeSize(wxCommandEvent& event);
 
+	void OnChangeFont(wxCommandEvent& event);
 	void OnChangeFontSize(wxCommandEvent& event);
 	void OnChangeColor(wxCommandEvent& event);
 

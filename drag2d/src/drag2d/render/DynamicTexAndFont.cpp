@@ -23,9 +23,11 @@ DynamicTexAndFont* DynamicTexAndFont::Instance()
 {
 	if (!m_instance) {
 		m_instance = new DynamicTexAndFont();
-		const std::string& filepath = Config::Instance()->GetFontFilepath();
-		if (FilenameTools::IsFileExist(filepath)) {
-			m_instance->LoadFontFile(filepath.c_str());
+
+		const std::vector<std::pair<std::string, std::string> >& 
+			fonts = Config::Instance()->GetFonts();
+		if (!fonts.empty() && FilenameTools::IsFileExist(fonts[0].second)) {
+			m_instance->LoadFontFile(fonts[0].second.c_str());
 		}
 	}
 	return m_instance;

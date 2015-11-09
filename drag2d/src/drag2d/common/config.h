@@ -21,8 +21,6 @@ public:
 	bool IsRenderOpen() const { return m_use_render; }
 	void EnableRender(bool enable) { m_use_render = enable; }
 
-	const std::string& GetFontFilepath() const { return m_font_filepath; }
-
 	const std::set<wxString>& GetResPathes() const { return m_resource_paths; }
 	std::set<wxString>& GetResPathes() { return m_resource_paths; }
 
@@ -30,6 +28,8 @@ public:
 
 	const SettingData& GetSettings() const { return *m_settings; }
 	SettingData& GetSettings() { return *m_settings; }
+
+	const std::vector<std::pair<std::string, std::string> >& GetFonts() const { return m_fonts; }
 
 private:
 	Config();
@@ -44,7 +44,6 @@ private:
 	bool m_use_dtex;
 	bool m_use_render;
 
-	std::string m_font_filepath;
 	std::vector<std::pair<std::string, std::string> > m_fonts;
 
 	std::set<wxString> m_resource_paths;

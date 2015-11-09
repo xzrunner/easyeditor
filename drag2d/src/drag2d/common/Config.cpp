@@ -78,7 +78,6 @@ void Config::LoadFromFile(const char* filename)
 
 	m_use_dtex = m_value["use_dtex"].asBool();
 
-	m_font_filepath = m_value["font_filepath"].asString();
 	LoadFontCfg(m_value["font"]);
 
 	m_settings->LoadFromFile(m_value);
