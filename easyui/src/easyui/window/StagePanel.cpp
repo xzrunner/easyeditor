@@ -144,6 +144,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	name = name.substr(0, name.find_last_of('_'));
 	std::string wrapper_path = name + "_wrapper_complex[gen].json";
 	wrapper_complex.SetFilepath(wrapper_path);
+	wrapper_complex.name = m_toolbar->GetWindowName();
 	ecomplex::FileStorer::Store(wrapper_path.c_str(), &wrapper_complex);
 
 	value["view"]["width"] = m_view_width;

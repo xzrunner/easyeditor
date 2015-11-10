@@ -1,5 +1,6 @@
 #include "PackUIWindowTask.h"
 #include "PackUI.h"
+#include "pack_ui_cfg.h"
 
 #include <drag2d.h>
 
@@ -86,6 +87,8 @@ void PackUIWindowTask::OnKnownPackID(const std::string& filepath, int id)
 void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 {
 	Json::Value val;
+
+	val["type"] = UI_WINDOW;
 
 	val["name"] = m_name;
 	val["id"] = m_wrapper_id;
