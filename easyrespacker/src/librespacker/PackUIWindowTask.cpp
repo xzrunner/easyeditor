@@ -13,6 +13,9 @@ PackUIWindowTask::PackUIWindowTask(const std::string& filepath, const Json::Valu
 {
 	m_name = value["name"].asString();
 
+	m_width = value["view"]["width"].asInt();
+	m_height = value["view"]["width"].asInt();
+
 	m_wrapper_filepath = value["wrapper filepath"].asString();
 	m_wrapper_filepath = d2d::FilenameTools::getAbsolutePathFromFile(filepath, m_wrapper_filepath);
 	m_wrapper_filepath = d2d::FilenameTools::FormatFilepathAbsolute(m_wrapper_filepath);
@@ -91,6 +94,10 @@ void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 	val["type"] = UI_WINDOW;
 
 	val["name"] = m_name;
+
+	val["width"] = m_width;
+	val["height"] = m_height;
+
 	val["id"] = m_wrapper_id;
 
 	for (int i = 0, n = m_items.size(); i < n; ++i) {

@@ -31,6 +31,8 @@ private:
 
 	std::string m_name;
 
+	int m_width, m_height;
+
 }; // PackUIWindowTask
 
 }
