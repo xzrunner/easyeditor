@@ -183,6 +183,12 @@ _new_glyph() {
 
 static inline bool
 _line_feed() {
+	float h = L.curr_row->height * (1 + L.style->space_v);
+	L.tot_height += h;
+	if (L.tot_height > L.style->height) {
+		return false;
+	}
+
 	struct row* prev = L.curr_row;
 	L.curr_row = _new_row();
 	if (!L.curr_row) {
@@ -221,11 +227,6 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, font, size, edge);
 	float w = g_layout->advance * (1 + L.style->space_h);
 	if (unicode == '\n' || L.curr_row->width + w > L.style->width) {
-		float h = g_layout->metrics_height * (1 + L.style->space_v);
-		L.tot_height += h;
-		if (L.tot_height > L.style->height) {
-			return false;
-		}
 		if (!_line_feed()) {
 			return false;
 		}
@@ -272,11 +273,6 @@ gtxt_layout_multi(struct dtex_array* unicodes) {
 bool 
 gtxt_layout_ext_sym(int width, int height) {
 	if (L.curr_row->width + width > L.style->width) {
-		float h = L.curr_row->height * (1 + L.style->space_v);
-		L.tot_height += h;
-		if (L.tot_height > L.style->height) {
-			return false;
-		}
 		if (!_line_feed()) {
 			return false;
 		}
@@ -290,6 +286,11 @@ gtxt_layout_ext_sym(int width, int height) {
 	struct glyph* g = _new_glyph();
 	assert(g);
 	g->unicode = -1;
+	g->x = 0;
+	g->y = height;
+	g->w = width;
+	g->h = height;
+	g->out_width = width;
 	_add_glyph(g);
 
 	return true;
@@ -299,15 +300,16 @@ void
 gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, float w, float h, void* ud), void* ud) {
 	float x, y;
 
+	float tot_height = L.tot_height + L.curr_row->height;
 	switch (L.style->align_v) {
 	case VA_TOP: case VA_AUTO:
-		y = L.style->height * 0.5f - L.head->height;
+		y = L.style->height * 0.5f;
 		break;
 	case VA_BOTTOM:
-		y = -L.style->height * 0.5f + L.tot_height - L.head->height;
+		y = -L.style->height * 0.5f + tot_height;
 		break;
 	case VA_CENTER:
-		y = L.tot_height * 0.5f - L.head->height;
+		y = tot_height * 0.5f;
 		break;
 	default:
 		assert(0);
@@ -329,7 +331,7 @@ gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, float w, float h,
 
 		struct glyph* g = r->head;
 		while (g) {
-			cb(g->unicode, x + g->x + g->w * 0.5f, y + g->y - g->h * 0.5f, g->w, g->h, ud);
+			cb(g->unicode, x + g->x + g->w * 0.5f, y + g->y - g->h * 0.5f - r->height, g->w, g->h, ud);
 			x += g->out_width;
 			g = g->next;
 		}

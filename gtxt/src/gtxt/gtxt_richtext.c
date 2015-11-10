@@ -28,9 +28,9 @@ static char FONTS[MAX_FONT][128];
 static int FONT_SIZE = 0;
 
 static void* (*EXT_SYM_CREATE)(const char* str);
-static void (*EXT_SYM_RELEASE)(void* ud);
-static void (*EXT_SYM_SIZE)(void* ud, int* width, int* height);
-static void (*EXT_SYM_RENDER)(void* ud, float x, float y);
+static void (*EXT_SYM_RELEASE)(void* ext_sym);
+static void (*EXT_SYM_SIZE)(void* ext_sym, int* width, int* height);
+static void (*EXT_SYM_RENDER)(void* ext_sym, float x, float y, void* ud);
 
 struct color_map {
 	char* name;
@@ -69,9 +69,9 @@ gtxt_richtext_add_font(const char* name) {
 
 void 
 gtxt_richtext_ext_sym_cb_init(void* (*create)(const char* str),
-							  void (*release)(void* ud),
-							  void (*size)(void* ud, int* width, int* height), 
-							  void (*render)(void* ud, float x, float y)) {
+							  void (*release)(void* ext_sym),
+							  void (*size)(void* ext_sym, int* width, int* height), 
+							  void (*render)(void* ext_sym, float x, float y, void* ud)) {
 	EXT_SYM_CREATE = create;
 	EXT_SYM_RELEASE = release;
 	EXT_SYM_SIZE = size;
@@ -79,13 +79,13 @@ gtxt_richtext_ext_sym_cb_init(void* (*create)(const char* str),
 }
 
 void 
-gtxt_ext_sym_get_size(void* ud, int* width, int* height) {
-	EXT_SYM_SIZE(ud, width, height);
+gtxt_ext_sym_get_size(void* ext_sym, int* width, int* height) {
+	EXT_SYM_SIZE(ext_sym, width, height);
 }
 
 void 
-gtxt_ext_sym_render(void* ud, float x, float y) {
-	EXT_SYM_RENDER(ud, x, y);
+gtxt_ext_sym_render(void* ext_sym, float x, float y, void* ud) {
+	EXT_SYM_RENDER(ext_sym, x, y, ud);
 }
 
 static inline int

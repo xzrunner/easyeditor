@@ -66,36 +66,38 @@ ext_sym_create(const char* str) {
 }
 
 void
-ext_sym_release(void* ud) {
-	if (!ud) {
+ext_sym_release(void* ext_sym) {
+	if (!ext_sym) {
 		return;
 	}
 
-	d2d::ISymbol* sym = (d2d::ISymbol*)ud;
-	sym->Release();
+// 	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
+// 	sym->Release();
 }
 
 void 
-ext_sym_get_size(void* ud, int* width, int* height) {
-	if (!ud) {
+ext_sym_get_size(void* ext_sym, int* width, int* height) {
+	if (!ext_sym) {
 		*width= *height = 0;
 		return;
 	}
 
-	d2d::ISymbol* sym = (d2d::ISymbol*)ud;
+	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
 	d2d::Rect sz = sym->GetSize();
 	*width = sz.xLength();
 	*height = sz.yLength();
 }
 
 void
-ext_sym_render(void* ud, float x, float y) {
-	if (!ud) {
+ext_sym_render(void* ext_sym, float x, float y, void* ud) {
+	if (!ext_sym) {
 		return;
 	}
 
-	d2d::ISymbol* sym = (d2d::ISymbol*)ud;
-	d2d::SpriteRenderer::Instance()->Draw(sym, d2d::Matrix(), d2d::Vector(x, y));
+	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
+	d2d::Matrix* mt = (d2d::Matrix*)ud;
+	d2d::SpriteRenderer::Instance()->Draw(sym, *mt, d2d::Vector(x, y));
+	dtex_shader_texture(0);
 }
 
 void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const

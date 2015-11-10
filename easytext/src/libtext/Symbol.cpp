@@ -38,7 +38,14 @@ void Symbol::Draw(const d2d::Matrix& mt,
 
 d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
-	return d2d::Rect(m_width, m_height);
+	if (sprite) {
+		const Sprite* font = static_cast<const Sprite*>(sprite);
+		int w, h;
+		font->GetSize(w, h);
+		return d2d::Rect(w, h);
+	} else {
+		return d2d::Rect(m_width, m_height);
+	}
 }
 
 void Symbol::LoadResources()

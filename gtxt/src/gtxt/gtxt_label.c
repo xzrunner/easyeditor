@@ -99,7 +99,7 @@ _draw_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, void
 	int unicode = _get_unicode(str, len);
 	if (style->ext_sym_ud) {
 		assert(unicode == ' ' && pos->unicode == -1);	
-		gtxt_ext_sym_render(style->ext_sym_ud, pos->x, pos->y);
+		gtxt_ext_sym_render(style->ext_sym_ud, pos->x, pos->y, params->ud);
 	} else {
 		assert(pos->unicode == unicode);
 

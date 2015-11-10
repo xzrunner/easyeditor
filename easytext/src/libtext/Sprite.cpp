@@ -105,6 +105,8 @@ void Sprite::Load(const Json::Value& val)
 
 	m_text = text_val["text"].asString();
 	m_tid = text_val["tid"].asString();
+
+	BuildBounding();
 }
 
 void Sprite::Store(Json::Value& val) const

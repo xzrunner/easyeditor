@@ -241,8 +241,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->GetSymbol().GetSize().xLength() * spr->GetScale().x);
-	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->GetSymbol().GetSize().yLength() * spr->GetScale().y);
+	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->GetSymbol().GetSize(spr).xLength() * spr->GetScale().x);
+	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->GetSymbol().GetSize(spr).yLength() * spr->GetScale().y);
 	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Shear.X"))->SetValue(spr->GetShear().x);
 	pg->GetProperty(wxT("Shear.Y"))->SetValue(spr->GetShear().y);
