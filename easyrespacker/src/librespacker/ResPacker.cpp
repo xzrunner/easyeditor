@@ -1,7 +1,7 @@
 #include "ResPacker.h"
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
-#include "PackUITask.h"
+#include "PackUI.h"
 #include "LabelBuilder.h"
 
 #include "PackToLuaString.h"
@@ -55,7 +55,7 @@ void ResPacker::OutputUIExtra(const std::string& outfile) const
 
 	Json::Value value;
 
-	PackUITask::Instance()->Output(dir, value);
+	PackUI::Instance()->Output(dir, value);
 	PackNodeFactory::Instance()->GetLabelBuilder()->OutputExtraInfo(value);
 
 	if (value.isNull()) {
@@ -139,7 +139,7 @@ void ResPacker::LoadJsonData(const std::string& dir)
 			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
 			filepaths.push_back(filepath);
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_ui)) {
-			PackUITask::Instance()->AddTask(filepath);
+			PackUI::Instance()->AddTask(filepath);
 		}
 	}
 

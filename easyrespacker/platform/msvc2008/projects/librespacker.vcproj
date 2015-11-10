@@ -672,13 +672,41 @@
 				Name="ui"
 				>
 				<File
-					RelativePath="..\..\..\src\librespacker\PackUITask.cpp"
+					RelativePath="..\..\..\src\librespacker\pack_ui_cfg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackUI.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackUI.h"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackUITask.h"
 					>
 				</File>
+				<Filter
+					Name="task"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\PackUIListTask.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\PackUIListTask.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\PackUIWindowTask.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\PackUIWindowTask.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

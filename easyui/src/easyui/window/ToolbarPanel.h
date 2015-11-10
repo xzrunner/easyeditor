@@ -21,6 +21,9 @@ public:
 	//
 	virtual void Notify(int sj_id, void* ud);
 
+	std::string GetWindowName() const;
+	void SetWindowName(const std::string& name);
+
 protected:
 	virtual wxSizer* initLayout();
 
@@ -29,6 +32,8 @@ private:
 
 private:
 	StagePanel* m_stage_panel;
+
+	wxTextCtrl* m_name_text;
 
 	wxTextCtrl* m_width_text;
 	wxTextCtrl* m_height_text;

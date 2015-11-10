@@ -32,9 +32,30 @@ void ToolbarPanel::Notify(int sj_id, void* ud)
 	}
 }
 
+std::string ToolbarPanel::GetWindowName() const
+{
+	return m_name_text->GetValue().ToStdString();
+}
+
+void ToolbarPanel::SetWindowName(const std::string& name)
+{
+	m_name_text->SetValue(name);
+}
+
 wxSizer* ToolbarPanel::initLayout()
 {
-	wxSizer* top_sizer = new wxBoxSizer(wxHORIZONTAL);
+	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+	top_sizer->AddSpacer(10);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Name"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+		m_name_text = new wxTextCtrl(this, wxID_ANY);
+		sizer->Add(m_name_text);
+
+		top_sizer->Add(sizer);
+	}
+	top_sizer->AddSpacer(10);
 	{
 		int width, height;
 		window::QueryWindowViewSizeSJ::Instance()->Query(width, height);

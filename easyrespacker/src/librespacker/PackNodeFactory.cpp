@@ -1,6 +1,6 @@
 #include "PackNodeFactory.h"
 #include "spritepack.h"
-#include "PackUITask.h"
+#include "PackUI.h"
 
 // picture
 #include "ImageBuilder.h"
@@ -132,7 +132,6 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 	// animation
 	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
 		node = m_complex_builder->Create(complex);
-		PackUITask::Instance()->OnKnownComplexID(complex->GetFilepath(), node->GetID());
 	} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol)) {
 		node = m_anim_builder->Create(anim);
 	} else if (const eterrain2d::Symbol* terr2d = dynamic_cast<const eterrain2d::Symbol*>(symbol)) {
@@ -158,6 +157,8 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 	if (node->GetID() > ANCHOR_ID) {
 		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
+
+	PackUI::Instance()->OnKnownPackID(symbol->GetFilepath(), node->GetID());
 
 	return node;
 }

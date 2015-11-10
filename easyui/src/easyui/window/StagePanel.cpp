@@ -78,6 +78,9 @@ void StagePanel::LoadFromFile(const char* filename)
 		return;
 	}
 
+	std::string name = value["name"].asString();
+	m_toolbar->SetWindowName(name);
+
 	if (!value["view"].isNull()) {
 		m_view_width = value["view"]["width"].asInt();
 		m_view_height = value["view"]["height"].asInt();
@@ -115,6 +118,8 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	value["type"] = get_widget_desc(ID_WINDOW);
 
+	value["name"] = m_toolbar->GetWindowName();
+
 	std::vector<d2d::ISprite*> sprites;
 	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_ALL);
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
@@ -131,8 +136,20 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	m_anchor_mgr.StoreToFile(value);
 
+	// wrapper complex
+	ecomplex::Symbol wrapper_complex;
+	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::ISprite>());
+	wrapper_complex.m_sprites = sprites;
+	std::string name = filename;
+	name = name.substr(0, name.find_last_of('_'));
+	std::string wrapper_path = name + "_wrapper_complex[gen].json";
+	wrapper_complex.SetFilepath(wrapper_path);
+	ecomplex::FileStorer::Store(wrapper_path.c_str(), &wrapper_complex);
+
 	value["view"]["width"] = m_view_width;
 	value["view"]["height"] = m_view_height;
+
+	value["wrapper filepath"] = d2d::FilenameTools::getRelativePath(dir, wrapper_path).ToStdString();;
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
