@@ -74,7 +74,8 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	style.space_h = style.space_v = 0;
 
 	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
-	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);
+// 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);
+	gtxt_label_draw_richtext(utf8.c_str(), &style, render, (void*)&mt);
 }
 
 void GTxt::ReloadTexture()
@@ -109,13 +110,11 @@ void GTxt::Init()
 	gtxt_render_init(cg);
 
 	gtxt_ft_init();
-//	gtxt_ft_add_font("FZCY_GBK.ttf");
-//	gtxt_ft_add_font("msyh.ttf");
 
 	const std::vector<std::pair<std::string, std::string> >& 
 		fonts = d2d::Config::Instance()->GetFonts();
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
-		gtxt_ft_add_font(fonts[i].second.c_str());
+		gtxt_ft_add_font(fonts[i].first.c_str(), fonts[i].second.c_str());
 	}	
 
 	gtxt_glyph_cache_init(50, 500);

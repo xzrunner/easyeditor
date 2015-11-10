@@ -16,6 +16,8 @@ struct gtxt_richtext_style {
 	bool edge;
 };
 
+void gtxt_richtext_add_font(const char* name);
+
 void gtxt_richtext_parser(const char* str, struct gtxt_label_style* style, 
 						  int (*cb)(const char* str, struct gtxt_richtext_style* style, void* ud), void* ud);
 

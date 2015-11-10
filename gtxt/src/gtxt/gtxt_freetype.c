@@ -1,6 +1,7 @@
 #include "gtxt_freetype.h"
 #include "gtxt_typedef.h"
 #include "gtxt_glyph.h"
+#include "gtxt_richtext.h"
 
 #include <ft2build.h>
 #include <freetype/freetype.h>
@@ -30,7 +31,7 @@ gtxt_ft_init() {
 }
 
 int 
-gtxt_ft_add_font(const char* filepath) {
+gtxt_ft_add_font(const char* name, const char* filepath) {
 	if (FT.count >= MAX_FONTS) {
 		return -1;
 	}
@@ -43,6 +44,8 @@ gtxt_ft_add_font(const char* filepath) {
 	if (FT_New_Face(f->library, filepath, 0, &f->face)) {
 		return -1;
 	}
+
+	gtxt_richtext_add_font(name);
 
 	return FT.count - 1;
 }

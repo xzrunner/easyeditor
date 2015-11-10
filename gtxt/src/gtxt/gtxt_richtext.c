@@ -5,7 +5,8 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#define MAX_LAYER 16
+#define MAX_LAYER	16
+#define MAX_FONT	16
 
 struct richtext_state {
 	uint32_t color[MAX_LAYER];
@@ -34,43 +35,90 @@ static const struct color_map COLOR[] = {
 	{ "green",		0x00ff00ff }
 };
 
+static inline uint32_t
+_parser_color(const char* token) {
+	uint32_t col = 0;
+	if (token[0] == '#') {
+		col = strtoul(&token[1], (char**)NULL, 16);
+	} else {
+		int num = sizeof(COLOR) / sizeof(struct color_map);
+		for (int i = 0; i < num; ++i) {
+			if (strcmp(&token[0], COLOR[i].name) == 0) {
+				col = COLOR[i].color;
+				break;
+			}
+		}
+	}
+	return col;
+}
+
+static char FONTS[MAX_FONT][128];
+static int FONT_SIZE = 0;
+
+void 
+gtxt_richtext_add_font(const char* name) {
+	strcpy(&FONTS[FONT_SIZE][0], name);
+	FONTS[FONT_SIZE][strlen(name) + 1] = 0;
+	++FONT_SIZE;
+}
+
+static inline int
+_parser_font(const char* token) {
+	for (int i = 0; i < MAX_FONT; ++i) {
+		if (strcmp(FONTS[i], token) == 0) {
+			return i;
+		}
+	}
+	return 0;
+}
+
+#define STATE_PUSH(buf, layer, val, ret) { \
+	if ((layer) < MAX_LAYER) { \
+	(buf)[(layer)++] = (val); \
+	(ret) = (val); \
+	} else { \
+	++(layer); \
+	} \
+}
+
+#define STATE_POP(buf, layer, ret) { \
+	--(layer); \
+	assert((layer) >= 0); \
+	if ((layer) <= MAX_LAYER) { \
+	(ret) = (buf)[(layer) - 1]; \
+	} else { \
+	(ret) = (buf)[MAX_LAYER - 1]; \
+	} \
+}
+
 static inline void
 _parser_token(const char* token, struct richtext_state* rs) {
 	// color
-	if (strncmp(token, "color", strlen("color"))) {
-		uint32_t col = 0;
-		if (token[6] == '#') {
-			col = strtol(&token[7], (char**)NULL, 16);
-		} else {
-			int num = sizeof(COLOR) / sizeof(struct color_map);
-			for (int i = 0; i < num; ++i) {
-				if (strcmp(&token[6], COLOR[i].name) == 0) {
-					col = COLOR[i].color;
-					break;
-				}
-			}
-		}
-	} else if (strncmp(token, "/color", strlen("/color"))) {
-		--rs->color_layer;
-		assert(rs->color_layer >= 0);
+	if (strncmp(token, "color", strlen("color")) == 0) {
+		uint32_t col = _parser_color(&token[strlen("color")+1]);
+		STATE_PUSH(rs->color, rs->color_layer, col, rs->style.color)
+	} else if (strncmp(token, "/color", strlen("/color")) == 0) {
+		STATE_POP(rs->color, rs->color_layer, rs->style.color);
 	}
 	// font
-	else if (strncmp(token, "font", strlen("font"))) {
-
-	} else if (strncmp(token, "/font", strlen("/font"))) {
-
+	else if (strncmp(token, "font", strlen("font")) == 0) {
+		int font = _parser_font(&token[strlen("font")+1]);
+		STATE_PUSH(rs->font, rs->font_layer, font, rs->style.font)
+	} else if (strncmp(token, "/font", strlen("/font")) == 0) {
+		STATE_POP(rs->font, rs->font_layer, rs->style.font);		
 	}	
 	// size
-	else if (strncmp(token, "size", strlen("size"))) {
-		
-	} else if (strncmp(token, "/size", strlen("/size"))) {
-
+	else if (strncmp(token, "size", strlen("size")) == 0) {
+		int size = strtol(&token[strlen("size")+1], (char**)NULL, 10);
+		STATE_PUSH(rs->size, rs->size_layer, size, rs->style.size)
+	} else if (strncmp(token, "/size", strlen("/size")) == 0) {
+		STATE_POP(rs->size, rs->size_layer, rs->style.size);				
 	}
 	// file
-	else if (strncmp(token, "file", strlen("file"))) {
+	else if (strncmp(token, "file", strlen("file")) == 0) {
 		// <file=img.png>
 		// <file=pkg,spr>
-	} else if (strncmp(token, "/file", strlen("/file"))) {
+	} else if (strncmp(token, "/file", strlen("/file")) == 0) {
 		// 
 	}
 }
@@ -78,13 +126,13 @@ _parser_token(const char* token, struct richtext_state* rs) {
 static inline void
 _init_state(struct richtext_state* rs, struct gtxt_label_style* style) {
 	rs->color[0] = style->color;
-	rs->color_layer++;
+	rs->color_layer = 1;
 	rs->size[0] = style->font_size;
-	rs->size_layer++;
+	rs->size_layer = 1;
 	rs->font[0] = style->font;
-	rs->font_layer++;
+	rs->font_layer = 1;
 	rs->edge[0] = style->edge;
-	rs->edge_layer++;
+	rs->edge_layer = 1;
 
 	rs->style.color	= style->color;
 	rs->style.size	= style->font_size;
@@ -107,7 +155,7 @@ gtxt_richtext_parser(const char* str, struct gtxt_label_style* style,
 			}
 			assert(str[j] == '>');
 			char token[j - i];
-			strncpy(token, &str[i + 1], j - i - i);
+			strncpy(token, &str[i + 1], j - i - 1);
 			token[j - i - 1] = 0;
 			_parser_token(token, &rs);
 			i = j + 1;
