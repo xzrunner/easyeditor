@@ -54,6 +54,50 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, void*
 	mgr->Draw(vertices, texcoords, id);
 }
 
+void*
+ext_sym_create(const char* str) {
+	if (strncmp(str, "path=", 5) != 0) {
+		return NULL;
+	}
+
+	std::string filepath(&str[5]);
+	d2d::ISymbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	return sym;
+}
+
+void
+ext_sym_release(void* ud) {
+	if (!ud) {
+		return;
+	}
+
+	d2d::ISymbol* sym = (d2d::ISymbol*)ud;
+	sym->Release();
+}
+
+void 
+ext_sym_get_size(void* ud, int* width, int* height) {
+	if (!ud) {
+		*width= *height = 0;
+		return;
+	}
+
+	d2d::ISymbol* sym = (d2d::ISymbol*)ud;
+	d2d::Rect sz = sym->GetSize();
+	*width = sz.xLength();
+	*height = sz.yLength();
+}
+
+void
+ext_sym_render(void* ud, float x, float y) {
+	if (!ud) {
+		return;
+	}
+
+	d2d::ISymbol* sym = (d2d::ISymbol*)ud;
+	d2d::SpriteRenderer::Instance()->Draw(sym, d2d::Matrix(), d2d::Vector(x, y));
+}
+
 void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 {
 	dtex_shader_texture(0);
@@ -118,6 +162,8 @@ void GTxt::Init()
 	}	
 
 	gtxt_glyph_cache_init(50, 500);
+
+	gtxt_richtext_ext_sym_cb_init(&ext_sym_create, &ext_sym_release, &ext_sym_get_size, &ext_sym_render);
 }
 
 }

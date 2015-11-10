@@ -181,6 +181,29 @@ _new_glyph() {
 	return g;
 }
 
+static inline bool
+_line_feed() {
+	struct row* prev = L.curr_row;
+	L.curr_row = _new_row();
+	if (!L.curr_row) {
+		return false;
+	}
+	prev->next = L.curr_row;
+	L.curr_row->next = NULL;
+	return true;
+}
+
+static inline void
+_add_glyph(struct glyph* g) {
+	if (!L.curr_row->head) {
+		assert(!L.curr_row->tail);
+		L.curr_row->head = L.curr_row->tail = g;
+	} else {
+		L.curr_row->tail->next = g;
+		L.curr_row->tail = g;
+	}
+}
+
 bool 
 gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 	int font, size;
@@ -200,19 +223,12 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 	if (unicode == '\n' || L.curr_row->width + w > L.style->width) {
 		float h = g_layout->metrics_height * (1 + L.style->space_v);
 		L.tot_height += h;
-
 		if (L.tot_height > L.style->height) {
 			return false;
 		}
-
-		struct row* prev = L.curr_row;
-		L.curr_row = _new_row();
-		if (!L.curr_row) {
+		if (!_line_feed()) {
 			return false;
 		}
-		prev->next = L.curr_row;
-		L.curr_row->next = NULL;
-
 		if (unicode == '\n') {
 			return true;
 		}
@@ -233,13 +249,8 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 		L.curr_row->height = g_layout->metrics_height;
 	}
 	L.curr_row->width += w;
-	if (!L.curr_row->head) {
-		assert(!L.curr_row->tail);
-		L.curr_row->head = L.curr_row->tail = g;
-	} else {
-		L.curr_row->tail->next = g;
-		L.curr_row->tail = g;
-	}
+
+	_add_glyph(g);
 
 	return true;
 }
@@ -256,6 +267,32 @@ gtxt_layout_multi(struct dtex_array* unicodes) {
 		int unicode = *(int*)dtex_array_fetch(unicodes, i);
 		gtxt_layout_single(unicode, NULL);
 	}
+}
+
+bool 
+gtxt_layout_ext_sym(int width, int height) {
+	if (L.curr_row->width + width > L.style->width) {
+		float h = L.curr_row->height * (1 + L.style->space_v);
+		L.tot_height += h;
+		if (L.tot_height > L.style->height) {
+			return false;
+		}
+		if (!_line_feed()) {
+			return false;
+		}
+	}
+
+	if (height > L.curr_row->height) {
+		L.curr_row->height = height;
+	}
+	L.curr_row->width += width;
+
+	struct glyph* g = _new_glyph();
+	assert(g);
+	g->unicode = -1;
+	_add_glyph(g);
+
+	return true;
 }
 
 void 
