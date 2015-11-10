@@ -79,6 +79,7 @@ struct layout_pos {
 
 struct draw_richtext_params {
 	struct layout_pos* result;
+	int sz;
 	int idx;
 
 	void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud);
@@ -89,17 +90,22 @@ static inline int
 _draw_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, void* ud) {
 	struct draw_richtext_params* params = (struct draw_richtext_params*)ud;
 
+	int len = _unicode_len(str[0]);
+	if (params->idx >= params->sz) {
+		return len;
+	}
+
+	struct layout_pos* pos = &params->result[params->idx++];
+
+	int unicode = _get_unicode(str, len);
+	assert(pos->unicode == unicode);
+
 	struct gtxt_render_style d_style;
 	d_style.color = style->color;
 	d_style.size = style->size;
 	d_style.font = style->font;
 	d_style.edge = style->edge;
 
-	int len = _unicode_len(str[0]);
-	int unicode = _get_unicode(str, len);
-
-	struct layout_pos* pos = &params->result[params->idx++];
-	assert(pos->unicode == unicode);
 	gtxt_draw_glyph(unicode, &d_style, pos->x, pos->y, pos->w, pos->h, params->render, params->ud);
 
 	return len;
@@ -135,12 +141,13 @@ gtxt_label_draw(const char* str, struct gtxt_label_style* style,
 
 static inline int
 _layout_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, void* ud) {
-	int* count = (int*)ud;
-	++*count;
-
 	int len = _unicode_len(str[0]);
 	int unicode = _get_unicode(str, len);
-	gtxt_layout_single(unicode, style);
+	bool succ = gtxt_layout_single(unicode, style);
+	if (succ) {
+		int* count = (int*)ud;
+		++*count;
+	}
 	return len;
 }
 
@@ -171,7 +178,9 @@ gtxt_label_draw_richtext(const char* str, struct gtxt_label_style* style,
 	// get layout
 	struct layout_pos pos[count];
 	struct draw_richtext_params params;
+
 	params.result = pos;
+	params.sz = count;
 	params.idx = 0;
 	params.render = render;
 	params.ud = ud;

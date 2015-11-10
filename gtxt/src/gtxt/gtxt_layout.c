@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define INIT_ROW_CAP 4
+#define INIT_GLYPH_CAP 16
+
 struct glyph {
 	int unicode;
 
@@ -99,28 +102,34 @@ _prepare_row_freelist(int cap) {
 	return true;
 }
 
+static inline void 
+_prepare_freelist(int row_cap, int glyph_cap) {
+	_prepare_row_freelist(row_cap);
+	_prepare_glyph_freelist(glyph_cap);
+}
+
 static inline struct row*
 _new_row() {
-	struct row* r = L.row_freelist;
-	if (!r) {
+	if (!L.row_freelist) {
+		assert(L.row_cap > 0);
 		_prepare_row_freelist(L.row_cap * 2);
-		return NULL;
-	} else {
-		struct row* r = L.row_freelist;
-		assert(r);
-		L.row_freelist = r->next;
-		r->next = NULL;
-		return r;
+		return _new_row();
 	}
+
+	struct row* r = L.row_freelist;
+	assert(r);
+	L.row_freelist = r->next;
+	r->next = NULL;
+	return r;
 }
 
 void 
 gtxt_layout_begin(struct gtxt_label_style* style) {
+	_prepare_freelist(INIT_ROW_CAP, INIT_GLYPH_CAP);
+
 	L.style = style;
 
 	L.tot_height = 0;
-
-	_prepare_row_freelist(16);
 
 	L.curr_row = _new_row();
 	L.head = L.curr_row;
@@ -135,39 +144,44 @@ gtxt_layout_end() {
 	last_row->next = L.row_freelist;
 	L.row_freelist = L.head;
 
+	struct glyph* freelist = L.glyph_freelist;
 	L.glyph_freelist = L.head->head;
 
 	struct glyph* last_tail = NULL;
 	struct row* r = L.head;
-	while (r) {
+	while (r && r->head) {
 		if (last_tail) {
 			last_tail->next = r->head;
 		}
 		last_tail = r->tail;
 
+		r->width = r->height = 0;
 		r->head = NULL;
 		r->tail = NULL;
 
 		r = r->next;
 	}
+	if (last_tail) {
+		last_tail->next = freelist;
+	}
 }
 
 static inline struct glyph*
 _new_glyph() {
-	struct glyph* g = L.glyph_freelist;
-
-	if (!g) {
-
-		int zz = 0;
+	if (!L.glyph_freelist) {
+		assert(L.glyph_cap > 0);
+		_prepare_glyph_freelist(L.glyph_cap * 2);
+		return _new_glyph();
 	}
 
+	struct glyph* g = L.glyph_freelist;
 	assert(g);
 	L.glyph_freelist = g->next;
 	g->next = NULL;
 	return g;
 }
 
-void 
+bool 
 gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 	int font, size;
 	bool edge;
@@ -188,40 +202,46 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 		L.tot_height += h;
 
 		if (L.tot_height > L.style->height) {
-			return;
+			return false;
 		}
 
 		struct row* prev = L.curr_row;
 		L.curr_row = _new_row();
 		if (!L.curr_row) {
-			return;
+			return false;
 		}
 		prev->next = L.curr_row;
 		L.curr_row->next = NULL;
-	} else {
-		struct glyph* g = _new_glyph();
-		assert(g);
-		g->unicode = unicode;
 
-		g->x = g_layout->bearing_x;
-		g->y = g_layout->bearing_y;
-		g->w = g_layout->sizer.width;
-		g->h = g_layout->sizer.height;
-
-		g->out_width = w;
-
-		if (g_layout->metrics_height > L.curr_row->height) {
-			L.curr_row->height = g_layout->metrics_height;
+		if (unicode == '\n') {
+			return true;
 		}
-		L.curr_row->width += w;
-		if (!L.curr_row->head) {
-			assert(!L.curr_row->tail);
-			L.curr_row->head = L.curr_row->tail = g;
-		} else {
-			L.curr_row->tail->next = g;
-			L.curr_row->tail = g;
-		}
+	} 
+	
+	struct glyph* g = _new_glyph();
+	assert(g);
+	g->unicode = unicode;
+
+	g->x = g_layout->bearing_x;
+	g->y = g_layout->bearing_y;
+	g->w = g_layout->sizer.width;
+	g->h = g_layout->sizer.height;
+
+	g->out_width = w;
+
+	if (g_layout->metrics_height > L.curr_row->height) {
+		L.curr_row->height = g_layout->metrics_height;
 	}
+	L.curr_row->width += w;
+	if (!L.curr_row->head) {
+		assert(!L.curr_row->tail);
+		L.curr_row->head = L.curr_row->tail = g;
+	} else {
+		L.curr_row->tail->next = g;
+		L.curr_row->tail = g;
+	}
+
+	return true;
 }
 
 void 
