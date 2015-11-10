@@ -54,11 +54,24 @@ _parser_token(const char* token, struct richtext_state* rs) {
 		--rs->color_layer;
 		assert(rs->color_layer >= 0);
 	}
+	// font
+	else if (strncmp(token, "font", strlen("font"))) {
+
+	} else if (strncmp(token, "/font", strlen("/font"))) {
+
+	}	
 	// size
 	else if (strncmp(token, "size", strlen("size"))) {
 		
 	} else if (strncmp(token, "/size", strlen("/size"))) {
 
+	}
+	// file
+	else if (strncmp(token, "file", strlen("file"))) {
+		// <file=img.png>
+		// <file=pkg,spr>
+	} else if (strncmp(token, "/file", strlen("/file"))) {
+		// 
 	}
 }
 
