@@ -117,7 +117,7 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	
 	spr->GetAlign(style.align_h, style.align_v);
 
-	style.space_h = style.space_v = 0;
+	spr->GetSpace(style.space_h, style.space_v);
 
 	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
 // 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);

@@ -19,6 +19,9 @@ Sprite::Sprite()
 
 	m_align_hori = HAT_LEFT;
 	m_align_vert = VAT_TOP;
+
+	m_space_hori = 1;
+	m_space_vert = 1;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -39,6 +42,9 @@ Sprite::Sprite(const Sprite& sprite)
 
 	m_align_hori = sprite.m_align_hori;
 	m_align_vert = sprite.m_align_vert;
+
+	m_space_hori = sprite.m_space_hori;
+	m_space_vert = sprite.m_space_vert;
 }
 
 Sprite::Sprite(Symbol* symbol)
@@ -58,6 +64,9 @@ Sprite::Sprite(Symbol* symbol)
 
 	m_align_hori = symbol->m_align_hori;
 	m_align_vert = symbol->m_align_vert;
+
+	m_space_hori = symbol->m_space_hori;
+	m_space_vert = symbol->m_space_vert;
 
 	BuildBounding();	
 }
@@ -103,6 +112,9 @@ void Sprite::Load(const Json::Value& val)
 	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());
 	m_align_vert = VertAlignType(text_val["align_vert"].asInt());
 
+	m_space_hori = text_val["space_hori"].asDouble();
+	m_space_vert = text_val["space_vert"].asDouble();
+
 	m_text = text_val["text"].asString();
 	m_tid = text_val["tid"].asString();
 
@@ -127,6 +139,9 @@ void Sprite::Store(Json::Value& val) const
 
 	text_val["align_hori"] = m_align_hori;
 	text_val["align_vert"] = m_align_vert;
+
+	text_val["space_hori"] = m_space_hori;
+	text_val["space_vert"] = m_space_vert;	
 
 	text_val["text"] = m_text;
 	text_val["tid"] = m_tid;
@@ -161,6 +176,18 @@ void Sprite::SetAlign(int halign, int valign)
 {
 	m_align_hori = HoriAlignType(halign);
 	m_align_vert = VertAlignType(valign);
+}
+
+void Sprite::GetSpace(float& hori, float& vert) const
+{
+	hori = m_space_hori;
+	vert = m_space_vert;
+}
+
+void Sprite::SetSpace(float hori, float vert)
+{
+	m_space_hori = hori;
+	m_space_vert = vert;
 }
 
 }

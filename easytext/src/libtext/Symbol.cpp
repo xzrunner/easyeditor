@@ -68,6 +68,9 @@ void Symbol::LoadResources()
 
 	m_color = value["color"].asString();
 
+	m_space_hori = value["space hori"].asDouble();
+	m_space_vert = value["space vert"].asDouble();
+
 	m_align_hori = (HoriAlignType)(value["align hori"].asInt());
 	m_align_vert = (VertAlignType)(value["align vert"].asInt());
 }

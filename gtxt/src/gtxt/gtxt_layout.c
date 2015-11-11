@@ -183,11 +183,11 @@ _new_glyph() {
 
 static inline bool
 _line_feed() {
-	float h = L.curr_row->height * (1 + L.style->space_v);
+	float h = L.curr_row->height * L.style->space_v;
 	L.tot_height += h;
-	if (L.tot_height > L.style->height) {
-		return false;
-	}
+// 	if (L.tot_height > L.style->height) {
+// 		return false;
+// 	}
 
 	struct row* prev = L.curr_row;
 	L.curr_row = _new_row();
@@ -225,7 +225,7 @@ gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
 	}
 
 	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, font, size, edge);
-	float w = g_layout->advance * (1 + L.style->space_h);
+	float w = g_layout->advance * L.style->space_h;
 	if (unicode == '\n' || L.curr_row->width + w > L.style->width) {
 		if (!_line_feed()) {
 			return false;
@@ -336,7 +336,7 @@ gtxt_layout_traverse(void (*cb)(int unicode, float x, float y, float w, float h,
 			g = g->next;
 		}
 
-		y -= r->height;
+		y -= r->height * L.style->space_v;
 		r = r->next;
 	}
 }

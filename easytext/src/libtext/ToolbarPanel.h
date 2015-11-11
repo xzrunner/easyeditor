@@ -26,6 +26,7 @@ private:
 	void OnChangeColor(wxCommandEvent& event);
 
 	void OnChangeAlign(wxCommandEvent& event);
+	void OnChangeSpace(wxCommandEvent& event);
 
 private:
 	Sprite* m_spr;
@@ -38,6 +39,7 @@ private:
 	wxCheckBox* m_edge;
 
 	wxChoice *m_align_hori, *m_align_vert;
+	wxTextCtrl *m_space_h, *m_space_v;
 
 	wxChoice* m_tid;
 

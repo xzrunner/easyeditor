@@ -49,6 +49,9 @@ public:
 	void GetAlign(int& halign, int& valign) const;
 	void SetAlign(int halign, int valign);
 
+	void GetSpace(float& hori, float& vert) const;
+	void SetSpace(float hori, float vert);
+
 	const std::string& GetText() const { return m_text; }
 	void SetText(const std::string& text) { m_text = text; }
 
@@ -72,6 +75,9 @@ private:
 
 	HoriAlignType m_align_hori;
 	VertAlignType m_align_vert;
+
+	float m_space_hori;
+	float m_space_vert;
 
 private:
 	std::string m_text;

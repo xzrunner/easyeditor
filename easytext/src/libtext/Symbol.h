@@ -55,6 +55,9 @@ private:
 	HoriAlignType m_align_hori;
 	VertAlignType m_align_vert;
 
+	float m_space_hori;
+	float m_space_vert;
+
 private:
 	d2d::ShapeStyle m_bg_style;
 
