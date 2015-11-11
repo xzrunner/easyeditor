@@ -11,6 +11,10 @@ extern "C"
 
 struct gtxt_glyph_layout;
 
+struct font_color {
+	uint8_t r, g, b, a;
+};
+
 void gtxt_ft_init();
 
 int gtxt_ft_add_font(const char* name, const char* filepath);
