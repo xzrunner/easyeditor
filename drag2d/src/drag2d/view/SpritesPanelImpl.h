@@ -30,6 +30,10 @@ public:
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
 private:
+	void RegistSubjects();
+	void UnRegistSubjects();
+
+private:
 	EditPanelImpl* m_stage;
 
 	IDataContainer* m_container;

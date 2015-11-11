@@ -23,14 +23,7 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* contain
 	m_container = container;
 	m_container->Retain();
 
-	m_subjects.push_back(ReorderSpriteSJ::Instance());
-	m_subjects.push_back(ReorderSpriteMostSJ::Instance());
-	m_subjects.push_back(InsertSpriteSJ::Instance());
-	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSpriteSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubjects();
 }
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
@@ -38,17 +31,16 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	, m_stage(stage)
 {
 	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
-
 	m_container = new SpritesContainer;
 
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
+	RegistSubjects();
 }
 
 SpritesPanelImpl::~SpritesPanelImpl()
 {
 	m_container->Release();
+
+	UnRegistSubjects();
 }
 
 void SpritesPanelImpl::Notify(int sj_id, void* ud)
@@ -97,6 +89,25 @@ void SpritesPanelImpl::TraverseSprites(IVisitor& visitor, DataTraverseType type/
 									   bool order/* = true*/) const
 {
 	m_container->Traverse(visitor, type, order);
+}
+
+void SpritesPanelImpl::RegistSubjects()
+{
+	m_subjects.push_back(ReorderSpriteSJ::Instance());
+	m_subjects.push_back(ReorderSpriteMostSJ::Instance());
+	m_subjects.push_back(InsertSpriteSJ::Instance());
+	m_subjects.push_back(RemoveSpriteSJ::Instance());
+	m_subjects.push_back(ClearSpriteSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
+}
+
+void SpritesPanelImpl::UnRegistSubjects()
+{
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
 }

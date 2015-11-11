@@ -1,4 +1,5 @@
 #include "LibraryPage.h"
+#include "ResetViewportSJ.h"
 
 #include <easycomplex.h>
 
@@ -38,9 +39,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			symbol->Release();
 		}
 
-		if (!filenames.empty() && m_canvas) {
-			m_canvas->ResetViewport();
-		}
+		ResetViewportSJ::Instance()->Reset();
 	}
 }
 

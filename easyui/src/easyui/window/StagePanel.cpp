@@ -8,6 +8,7 @@
 #include "message_id.h"
 #include "QueryWindowViewSizeSJ.h"
 #include "ChangeWindowViewSizeSJ.h"
+#include "ResetViewportSJ.h"
 #include "PreviewDialog.h"
 #include "Code.h"
 #include "widget_id.h"
@@ -39,12 +40,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
 	AddSubject(QueryWindowViewSizeSJ::Instance());
-	UnRegistSubjects(this);
+	AddSubject(ResetViewportSJ::Instance());
+	UIStagePage::UnRegistSubjects(this);
 }
 
 StagePanel::~StagePanel()
 {
-	UnRegistSubjects(this);
+	UIStagePage::UnRegistSubjects(this);
 }
 
 void StagePanel::Notify(int sj_id, void* ud)
@@ -59,6 +61,9 @@ void StagePanel::Notify(int sj_id, void* ud)
 			p->width = m_view_width;
 			p->height = m_view_height;
 		}
+		break;
+	case MSG_RESET_VIEWPORT:
+		GetCanvas()->ResetViewport();
 		break;
 	}
 }
@@ -166,10 +171,10 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		SetCanvasDirty();
 		m_top_pannels->library->EnableUILibrary(true);
-		RegistSubjects(this);
+		UIStagePage::RegistSubjects(this);
 	} else {
 		GetSpriteSelection()->Clear();
-		UnRegistSubjects(this);
+		UIStagePage::UnRegistSubjects(this);
 	}
 }
 
