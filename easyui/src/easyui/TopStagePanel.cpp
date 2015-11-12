@@ -5,6 +5,7 @@
 
 #include "window/StagePanel.h"
 #include "list/StagePanel.h"
+#include "wrapper/StagePanel.h"
 
 namespace eui
 {
@@ -53,6 +54,12 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 		list::StagePanel* page = new list::StagePanel(m_notebook, m_frame, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("List"));
+	}
+	// wrapper
+	{
+		wrapper::StagePanel* page = new wrapper::StagePanel(m_notebook, m_frame, m_top_pannels);
+		m_pages.push_back(page);
+		m_notebook->AddPage(page, wxT("Wrapper"));
 	}
 	m_top_pannels->toolbar->EnableToolbar(0);
 	sizer->Add(m_notebook, 1, wxEXPAND);

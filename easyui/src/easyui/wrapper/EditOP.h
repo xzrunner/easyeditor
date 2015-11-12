@@ -1,5 +1,5 @@
-#ifndef _EASYUI_LIST_EDIT_OP_H_
-#define _EASYUI_LIST_EDIT_OP_H_
+#ifndef _EASYUI_WRAPPER_EDIT_OP_H_
+#define _EASYUI_WRAPPER_EDIT_OP_H_
 
 #include <drag2d.h>
 
@@ -7,7 +7,7 @@
 
 namespace eui
 {
-namespace list
+namespace wrapper
 {
 
 class StagePanel;
@@ -38,4 +38,4 @@ private:
 }
 }
 
-#endif // _EASYUI_LIST_EDIT_OP_H_
+#endif // _EASYUI_WRAPPER_EDIT_OP_H_

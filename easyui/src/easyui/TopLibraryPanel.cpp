@@ -1,6 +1,7 @@
 #include "TopLibraryPanel.h"
 
 #include <easycomplex.h>
+#include <easytext.h>
 
 namespace eui
 {
@@ -41,6 +42,8 @@ void TopLibraryPanel::InitLayout()
 	wxWindow* nb = m_library_raw->GetNotebook();
 	m_library_raw->AddPage(new d2d::LibraryImagePage(nb));
 	m_library_raw->AddPage(new ecomplex::LibraryPage(nb));
+//	m_library_raw->AddPage(new etext::LibraryPage(nb));
+	m_library_raw->AddPage(new d2d::LibraryFontBlankPage(nb));
 	sizer->Add(m_library_raw, 1, wxEXPAND);
 
 	SetSizer(sizer);

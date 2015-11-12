@@ -25,8 +25,7 @@ public:
 	bool ReFilling();
 	bool Arrange(const d2d::ISprite* spr);
 
-	const d2d::Rect& GetClipbox() const { return m_clipbox; }
-	void SetClipbox(const d2d::Rect& cb) { m_clipbox = cb; }
+	d2d::Rect& GetClipbox() { return m_clipbox; }
 
 	bool IsHoriEnable() const { return m_horizontal; }
 	bool IsVertEnable() const { return m_vertical; }

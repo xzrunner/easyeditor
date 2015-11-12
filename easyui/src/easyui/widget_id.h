@@ -8,7 +8,8 @@ namespace eui
 
 enum WIDGET_ID {
 	ID_WINDOW = 1,
-	ID_LIST
+	ID_LIST,
+	ID_WRAPPER
 };
 
 const std::string& get_widget_desc(WIDGET_ID id);

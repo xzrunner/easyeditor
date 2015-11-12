@@ -1,17 +1,14 @@
 #include "EditOP.h"
 #include "StagePanel.h"
-#include "ArrangeSpriteImpl.h"
 
 namespace eui
 {
-namespace list
+namespace wrapper
 {
 
 EditOP::EditOP(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(stage, stage->GetStageImpl(), stage, 
-	                                             property, NULL, d2d::ArrangeSpriteConfig(), 
-												 new ArrangeSpriteImpl(stage, property))
-	, EditClipboxOP(stage, stage->GetStageImpl(), stage->GetList().GetClipbox())
+	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(stage, stage->GetStageImpl(), stage, property)
+	, EditClipboxOP(stage, stage->GetStageImpl(), stage->GetClipbox())
 	, m_stage(stage)
 	, m_clipbox_selected(-1)
 {

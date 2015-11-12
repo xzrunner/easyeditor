@@ -11,6 +11,7 @@
 #include <easyparticle2d.h>
 //#include <easyejoy2d.h>
 #include <easyterrain2d.h>
+#include <easytext.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -39,12 +40,13 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
-	d2d::Config::Instance()->EnableUseDTex(false);
-
 	InitSymbolCreators();
 
 	eui::Frame* frame = new eui::Frame("EasyUI", eui::FILE_TAG);
