@@ -215,16 +215,25 @@ inline bool ObjectVector<T>::ResetOrder(std::vector<T*>& objs,
 template<class T>
 inline bool ObjectVector<T>::ResetOrderMost(std::vector<T*>& objs, const T* obj, bool up) {
 	for (int i = 0, n = objs.size(); i < n; ++i) {
-		if (objs[i] == obj) {
-			if (up && i != n - 1) {
-				std::swap(objs[i], objs[n - 1]);
-				return true;
-			} else if (!up && i != 0) {
-				std::swap(objs[i], objs[0]);
-				return true;
-			}
-			return false;
+		if (objs[i] != obj) {
+			continue;
 		}
+		if (up && i != n - 1) {
+			T* tmp = objs[i];
+			for (int j = i + 1; j < n; ++j) {
+				objs[j-1] = objs[j];
+			}
+			objs[n - 1] = tmp;
+			return true;
+		} else if (!up && i != 0) {
+			T* tmp = objs[i];
+			for (int j = i - 1; j >= 0; --j) {
+				objs[j+1] = objs[j];
+			}
+			objs[0] = tmp;
+			return true;
+		}
+		return false;
 	}
 	return false;
 }
