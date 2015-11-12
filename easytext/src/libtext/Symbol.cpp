@@ -62,17 +62,18 @@ void Symbol::LoadResources()
 	m_height = value["height"].asInt();
 
 	m_font = value["font"].asInt();
-	m_font_size = value["font size"].asInt();
+	m_font_size = value["font_size"].asInt();
+	m_font_color = value["font_color"].asString();
 
-	m_has_edge = value["edge"].asBool();
+	m_edge = value["edge"].asBool();
+	m_edge_size = value["edge_size"].asDouble();
+	m_edge_color = value["edge_color"].asString();
 
-	m_color = value["color"].asString();
+	m_space_hori = value["space_hori"].asDouble();
+	m_space_vert = value["space_vert"].asDouble();
 
-	m_space_hori = value["space hori"].asDouble();
-	m_space_vert = value["space vert"].asDouble();
-
-	m_align_hori = (HoriAlignType)(value["align hori"].asInt());
-	m_align_vert = (VertAlignType)(value["align vert"].asInt());
+	m_align_hori = (HoriAlignType)(value["align_hori"].asInt());
+	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
 }
 
 void Symbol::DrawBackground(const d2d::ISprite* sprite, const d2d::Matrix& mt) const

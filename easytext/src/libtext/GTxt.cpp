@@ -107,17 +107,17 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 
 	gtxt_label_style style;
 
-	style.font = spr->GetFont();
-	style.font_size = spr->GetFontSize();
-	style.edge = spr->GetEdge();
-
 	spr->GetSize(style.width, style.height);
-
-	style.color.integer = d2d::trans_color2int(spr->GetColor(), d2d::PT_RGBA);
-	
 	spr->GetAlign(style.align_h, style.align_v);
-
 	spr->GetSpace(style.space_h, style.space_v);
+
+	style.gs.font = spr->GetFont();
+	style.gs.font_size = spr->GetFontSize();
+	style.gs.font_color.integer = d2d::trans_color2int(spr->GetFontColor(), d2d::PT_RGBA);
+
+	style.gs.edge = spr->GetEdge();
+	style.gs.edge_size = spr->GetEdgeSize();
+	style.gs.edge_color.integer = d2d::trans_color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
 
 	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
 // 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);

@@ -19,11 +19,19 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
+	void InitSizeLayout(wxSizer* top_sizer);
+	void InitFontLayout(wxSizer* top_sizer);
+	void InitLayoutLayout(wxSizer* top_sizer);
+
 	void OnChangeSize(wxCommandEvent& event);
 
 	void OnChangeFont(wxCommandEvent& event);
 	void OnChangeFontSize(wxCommandEvent& event);
-	void OnChangeColor(wxCommandEvent& event);
+	void OnChangeFontColor(wxCommandEvent& event);
+
+	void OnChangeEdge(wxCommandEvent& event);
+	void OnChangeEdgeSize(wxCommandEvent& event);
+	void OnChangeEdgeColor(wxCommandEvent& event);	
 
 	void OnChangeAlign(wxCommandEvent& event);
 	void OnChangeSpace(wxCommandEvent& event);
@@ -37,6 +45,7 @@ private:
 	wxTextCtrl* m_font_size;
 
 	wxCheckBox* m_edge;
+	wxTextCtrl* m_edge_size;
 
 	wxChoice *m_align_hori, *m_align_vert;
 	wxTextCtrl *m_space_h, *m_space_v;

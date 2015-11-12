@@ -47,10 +47,11 @@ private:
 
 	int m_font;
 	int m_font_size;
+	std::string m_font_color;
 
-	bool m_has_edge;
-
-	std::string m_color;
+	bool m_edge;
+	float m_edge_size;
+	std::string m_edge_color;
 
 	HoriAlignType m_align_hori;
 	VertAlignType m_align_vert;

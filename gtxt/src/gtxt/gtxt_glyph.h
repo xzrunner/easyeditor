@@ -22,12 +22,22 @@ struct gtxt_glyph_layout {
 	float metrics_height;
 };
 
+struct gtxt_glyph_style {
+	int font;
+	int font_size;
+	union gtxt_color font_color;
+
+	bool edge;
+	float edge_size;
+	union gtxt_color edge_color;
+};
+
 void gtxt_glyph_cache_init(int cap_bitmap, int cap_layout);
 //void gtxt_glyph_cache_clear();
 
-struct gtxt_glyph_layout* gtxt_glyph_get_layout(int unicode, int font, int size, bool edge);
+struct gtxt_glyph_layout* gtxt_glyph_get_layout(int unicode, struct gtxt_glyph_style*);
 
-uint32_t* gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, union gtxt_color color, struct gtxt_glyph_layout* layout);
+uint32_t* gtxt_glyph_get_bitmap(int unicode, struct gtxt_glyph_style*, struct gtxt_glyph_layout* layout);
 
 #endif // gametext_glyph_h
 

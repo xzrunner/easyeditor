@@ -28,139 +28,175 @@ wxSizer* ToolbarPanel::initLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(20);
-	{
-		int w, h;
-		m_spr->GetSize(w, h);
-
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Size");
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "宽"), 0, wxLEFT | wxRIGHT, 5);
-
-			m_width = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(w),
-				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
-			Connect(m_width->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
-			csizer->Add(m_width);
-
-			sizer->Add(csizer);
-		}
-		sizer->AddSpacer(5);
-		{
-			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "高"), 0, wxLEFT | wxRIGHT, 5);
-
-			m_height = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(h),
-				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
-			Connect(m_height->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
-			csizer->Add(m_height);
-
-			sizer->Add(csizer);
-		}
-		top_sizer->Add(sizer);
-	}
+	InitSizeLayout(top_sizer);
 	top_sizer->AddSpacer(20);
+	InitFontLayout(top_sizer);
+	top_sizer->AddSpacer(20);
+	InitLayoutLayout(top_sizer);
+	return top_sizer;
+}
+
+void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
+{
+	int w, h;
+	m_spr->GetSize(w, h);
+
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Size");
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Font");
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			const std::vector<std::pair<std::string, std::string> >& 
-				fonts = d2d::Config::Instance()->GetFonts();
-			wxArrayString choices;
-			for (int i = 0, n = fonts.size(); i < n; ++i) {
-				choices.push_back(fonts[i].first);
-			}
-			m_font = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
-			m_font->SetSelection(0);
-			Connect(m_font->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeFont));
-			sizer->Add(m_font);
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "宽"), 0, wxLEFT | wxRIGHT, 5);
+
+		m_width = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(w),
+			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+		Connect(m_width->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
+		csizer->Add(m_width);
+
+		sizer->Add(csizer);
+	}
+	sizer->AddSpacer(5);
+	{
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "高"), 0, wxLEFT | wxRIGHT, 5);
+
+		m_height = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(h),
+			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+		Connect(m_height->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
+		csizer->Add(m_height);
+
+		sizer->Add(csizer);
+	}
+	top_sizer->Add(sizer);
+}
+
+void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Font");
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	{
+		const std::vector<std::pair<std::string, std::string> >& 
+			fonts = d2d::Config::Instance()->GetFonts();
+		wxArrayString choices;
+		for (int i = 0, n = fonts.size(); i < n; ++i) {
+			choices.push_back(fonts[i].first);
 		}
-		sizer->AddSpacer(5);
+		m_font = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
+		m_font->SetSelection(0);
+		Connect(m_font->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeFont));
+		sizer->Add(m_font);
+	}
+	sizer->AddSpacer(5);
+	{
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "字号"), 0, wxLEFT | wxRIGHT, 5);
+
+		int size = m_spr->GetFontSize();
+		m_font_size = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(size),
+			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+		Connect(m_font_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeFontSize));
+		csizer->Add(m_font_size);
+
+		sizer->Add(csizer);
+	}
+	sizer->AddSpacer(5);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, "颜色");
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnChangeFontColor));
+		sizer->Add(btn);
+	}
+	sizer->AddSpacer(10);
+	{
+		m_edge = new wxCheckBox(this, wxID_ANY, "描边");
+		m_edge->SetValue(m_spr->GetEdge());
+		Connect(m_edge->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnChangeEdge));
+		sizer->Add(m_edge);
+	}
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "描边");
+		wxSizer* e_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "字号"), 0, wxLEFT | wxRIGHT, 5);
+			csizer->Add(new wxStaticText(this, wxID_ANY, "宽度"), 0, wxLEFT | wxRIGHT, 5);
 
-			int size = m_spr->GetFontSize();
-			m_font_size = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(size),
+			float size = m_spr->GetEdgeSize();
+			m_edge_size = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(size),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
-			Connect(m_font_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeFontSize));
-			csizer->Add(m_font_size);
+			Connect(m_edge_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeEdgeSize));
+			csizer->Add(m_edge_size);
 
-			sizer->Add(csizer);
+			e_sizer->Add(csizer);
 		}
-		sizer->AddSpacer(5);
-		{
-			m_edge = new wxCheckBox(this, wxID_ANY, "描边");
-			sizer->Add(m_edge);
-		}
-		sizer->AddSpacer(5);
+		e_sizer->AddSpacer(5);
 		{
 			wxButton* btn = new wxButton(this, wxID_ANY, "颜色");
 			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-				wxCommandEventHandler(ToolbarPanel::OnChangeColor));
-			sizer->Add(btn);
+				wxCommandEventHandler(ToolbarPanel::OnChangeEdgeColor));
+			e_sizer->Add(btn);
 		}
-		top_sizer->Add(sizer);
+		sizer->Add(e_sizer);
 	}
-	top_sizer->AddSpacer(20);
+	top_sizer->Add(sizer);
+}
+
+void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Layout");
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "Layout");
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "水平对齐"), 0, wxLEFT | wxRIGHT, 5);
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "水平对齐"), 0, wxLEFT | wxRIGHT, 5);
 
-			m_align_hori = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 4, HORI_ALIGN_LABELS);
-			m_align_hori->SetSelection(0);
-			Connect(m_align_hori->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-				wxCommandEventHandler(ToolbarPanel::OnChangeAlign));
-			csizer->Add(m_align_hori);
+		m_align_hori = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 4, HORI_ALIGN_LABELS);
+		m_align_hori->SetSelection(0);
+		Connect(m_align_hori->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnChangeAlign));
+		csizer->Add(m_align_hori);
 
-			sizer->Add(csizer);
-		}
-		sizer->AddSpacer(5);
-		{
-			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "竖直对齐"), 0, wxLEFT | wxRIGHT, 5);
-
-			m_align_vert = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 4, VERT_ALIGN_LABELS);
-			m_align_vert->SetSelection(0);
-			Connect(m_align_vert->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-				wxCommandEventHandler(ToolbarPanel::OnChangeAlign));
-			csizer->Add(m_align_vert);
-
-			sizer->Add(csizer);
-		}
-		sizer->AddSpacer(10);
-
-		float space_h, space_v;
-		m_spr->GetSpace(space_h, space_v);		
-		{
-			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "字间距"), 0, wxLEFT | wxRIGHT, 5);
-
-			m_space_h = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(space_h),
-				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
-			Connect(m_space_h->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
-			csizer->Add(m_space_h);
-
-			sizer->Add(csizer);
-		}
-		sizer->AddSpacer(5);
-		{
-			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
-			csizer->Add(new wxStaticText(this, wxID_ANY, "行间距"), 0, wxLEFT | wxRIGHT, 5);
-
-			m_space_v = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(space_v),
-				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
-			Connect(m_space_v->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
-			csizer->Add(m_space_v);
-
-			sizer->Add(csizer);
-		}
-		top_sizer->Add(sizer);
+		sizer->Add(csizer);
 	}
-	return top_sizer;
+	sizer->AddSpacer(5);
+	{
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "竖直对齐"), 0, wxLEFT | wxRIGHT, 5);
+
+		m_align_vert = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 4, VERT_ALIGN_LABELS);
+		m_align_vert->SetSelection(0);
+		Connect(m_align_vert->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnChangeAlign));
+		csizer->Add(m_align_vert);
+
+		sizer->Add(csizer);
+	}
+	sizer->AddSpacer(10);
+
+	float space_h, space_v;
+	m_spr->GetSpace(space_h, space_v);		
+	{
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "字间距"), 0, wxLEFT | wxRIGHT, 5);
+
+		m_space_h = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(space_h),
+			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+		Connect(m_space_h->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
+		csizer->Add(m_space_h);
+
+		sizer->Add(csizer);
+	}
+	sizer->AddSpacer(5);
+	{
+		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
+		csizer->Add(new wxStaticText(this, wxID_ANY, "行间距"), 0, wxLEFT | wxRIGHT, 5);
+
+		m_space_v = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(space_v),
+			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+		Connect(m_space_v->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
+		csizer->Add(m_space_v);
+
+		sizer->Add(csizer);
+	}
+	top_sizer->Add(sizer);
 }
 
 void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
@@ -182,11 +218,30 @@ void ToolbarPanel::OnChangeFontSize(wxCommandEvent& event)
 	m_spr->SetFontSize(sz);
 }
 
-void ToolbarPanel::OnChangeColor(wxCommandEvent& event)
+void ToolbarPanel::OnChangeFontColor(wxCommandEvent& event)
 {
-	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetColor());
+	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetFontColor());
 	if (dlg.ShowModal()) {
-		m_spr->SetColor(dlg.GetColor());
+		m_spr->SetFontColor(dlg.GetColor());
+	}
+}
+
+void ToolbarPanel::OnChangeEdge(wxCommandEvent& event)
+{
+	m_spr->SetEdge(event.IsChecked());
+}
+
+void ToolbarPanel::OnChangeEdgeSize(wxCommandEvent& event)
+{
+	int sz = d2d::StringTools::FromString<float>(m_edge_size->GetValue().ToStdString());
+	m_spr->SetEdgeSize(sz);
+}
+
+void ToolbarPanel::OnChangeEdgeColor(wxCommandEvent& event)
+{
+	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetEdgeColor());
+	if (dlg.ShowModal()) {
+		m_spr->SetEdgeColor(dlg.GetColor());
 	}
 }
 

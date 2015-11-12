@@ -1,6 +1,5 @@
 #include "gtxt_label.h"
 #include "gtxt_layout.h"
-#include "gtxt_glyph.h"
 #include "gtxt_richtext.h"
 #include "gtxt_render.h"
 
@@ -61,14 +60,7 @@ _get_unicode(const char* str, int n) {
 static inline void
 _draw_glyph_cb(int unicode, float x, float y, float w, float h, void* ud) {
 	struct draw_params* params = (struct draw_params*)ud;
-
-	struct gtxt_render_style d_style;
-	d_style.color = params->style->color;
-	d_style.size = params->style->font_size;
-	d_style.font = params->style->font;
-	d_style.edge = params->style->edge;
-
-	gtxt_draw_glyph(unicode, &d_style, x, y, w, h, params->render, params->ud);
+	gtxt_draw_glyph(unicode, &params->style->gs, x, y, w, h, params->render, params->ud);
 }
 
 struct layout_pos {
@@ -102,14 +94,7 @@ _draw_richtext_glyph_cb(const char* str, struct gtxt_richtext_style* style, void
 		gtxt_ext_sym_render(style->ext_sym_ud, pos->x, pos->y, params->ud);
 	} else {
 		assert(pos->unicode == unicode);
-
-		struct gtxt_render_style d_style;
-		d_style.color = style->color;
-		d_style.size = style->size;
-		d_style.font = style->font;
-		d_style.edge = style->edge;
-
-		gtxt_draw_glyph(unicode, &d_style, pos->x, pos->y, pos->w, pos->h, params->render, params->ud);
+		gtxt_draw_glyph(unicode, &style->gs, pos->x, pos->y, pos->w, pos->h, params->render, params->ud);
 	}
 
 	return len;

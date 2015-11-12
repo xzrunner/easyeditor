@@ -7,6 +7,7 @@ extern "C"
 #define gametext_label_h
 
 #include "gtxt_typedef.h"
+#include "gtxt_glyph.h"
 
 #include <stdbool.h>
 
@@ -25,20 +26,16 @@ enum gtxt_vert_align {
 };
 
 struct gtxt_label_style {
-	int font;
-	int font_size;
-	bool edge;
-
 	int width;
 	int height;
-
-	union gtxt_color color;
 
 	int align_h;
 	int align_v;
 	
 	float space_h;
 	float space_v;
+
+	struct gtxt_glyph_style gs;
 };
 
 void gtxt_label_draw(const char* str, struct gtxt_label_style* style,  void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud), void* ud);

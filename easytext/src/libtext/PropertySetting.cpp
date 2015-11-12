@@ -27,54 +27,49 @@ void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& va
 		SplitString2Double(value, &w, &h);
 		spr->SetSize(w, h);
 		spr->BuildBounding();
-		m_stage->SetCanvasDirty();
 	} else if (name == "LabelSize.Width") {
 		int w, h;
 		spr->GetSize(w, h);
 		w = wxANY_AS(value, int);
 		spr->SetSize(w, h);
 		spr->BuildBounding();
-		m_stage->SetCanvasDirty();
 	} else if (name == "LabelSize.Height") {
 		int w, h;
 		spr->GetSize(w, h);
 		h = wxANY_AS(value, int);
 		spr->SetSize(w, h);
 		spr->BuildBounding();
-		m_stage->SetCanvasDirty();
 	} else if (name == "Font") {
 		spr->SetFont(wxANY_AS(value, int));
-		m_stage->SetCanvasDirty();
 	} else if (name == "FontSize") {
 		spr->SetFontSize(wxANY_AS(value, int));
-		m_stage->SetCanvasDirty();
-	} else if (name == "Edge") {
-		spr->SetEdge(wxANY_AS(value, bool));
-		m_stage->SetCanvasDirty();
 	} else if (name == "FontColor") {
 		wxColour col = wxANY_AS(value, wxColour);
-		spr->SetColor(d2d::Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f));
-		m_stage->SetCanvasDirty();
+		spr->SetFontColor(d2d::Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f));
+	} else if (name == "Edge") {
+		spr->SetEdge(wxANY_AS(value, bool));
+	} else if (name == "EdgeSize") {
+		spr->SetEdgeSize(wxANY_AS(value, float));
+	} else if (name == "EdgeColor") {
+		wxColour col = wxANY_AS(value, wxColour);
+		spr->SetEdgeColor(d2d::Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f));		
 	} else if (name == "Align.Hori") {
 		int h, v;
 		spr->GetAlign(h, v);
 		h = wxANY_AS(value, int);
 		spr->SetAlign(h, v);
-		m_stage->SetCanvasDirty();
 	} else if (name == "Align.Vert") {
 		int h, v;
 		spr->GetAlign(h, v);
 		v = wxANY_AS(value, int);
 		spr->SetAlign(h, v);
-		m_stage->SetCanvasDirty();
 	} else if (name == "TextContent") {
 		spr->SetText(wxANY_AS(value, wxString).ToStdString());
-		m_stage->SetCanvasDirty();
-		m_stage->SetCanvasDirty();
 	} else if (name == "TextID") {
 		spr->SetTID(wxANY_AS(value, wxString).ToStdString());
-		m_stage->SetCanvasDirty();
 	}
+
+	m_stage->SetCanvasDirty();
 }
 
 void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
@@ -96,11 +91,13 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	}
 	pg->GetProperty("Font")->SetValue(choices[spr->GetFont()]);
 	pg->GetProperty("FontSize")->SetValue(spr->GetFontSize());
+	const d2d::Colorf& font_col = spr->GetFontColor();
+	pg->SetPropertyValueString("FontColor", wxColour(font_col.r*255, font_col.g*255, font_col.b*255, font_col.a*255).GetAsString());
 
 	pg->GetProperty("Edge")->SetValue(spr->GetEdge());
-
-	const d2d::Colorf& col = spr->GetColor();
-	pg->SetPropertyValueString("FontColor", wxColour(col.r*255, col.g*255, col.b*255, col.a*255).GetAsString());
+	pg->GetProperty("EdgeSize")->SetValue(spr->GetEdgeSize());
+	const d2d::Colorf& edge_col = spr->GetEdgeColor();
+	pg->SetPropertyValueString("EdgeColor", wxColour(edge_col.r*255, edge_col.g*255, edge_col.b*255, edge_col.a*255).GetAsString());	
 
 	int halign, valign;
 	spr->GetAlign(halign, valign);
@@ -134,13 +131,16 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	}
 	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
 	pg->Append(new wxFloatProperty("FontSize", wxPG_LABEL, spr->GetFontSize()));
+	const d2d::Colorf& font_col = spr->GetFontColor();
+	pg->Append(new wxColourProperty("FontColor", wxPG_LABEL, wxColour(font_col.r*255, font_col.g*255, font_col.b*255, font_col.a*255)));
+	pg->SetPropertyAttribute("FontColor", "HasAlpha", false);
 
 	pg->Append(new wxBoolProperty("Edge", wxPG_LABEL, spr->GetEdge()));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-	const d2d::Colorf& col = spr->GetColor();
-	pg->Append(new wxColourProperty("FontColor", wxPG_LABEL, wxColour(col.r*255, col.g*255, col.b*255, col.a*255)));
-	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
+	pg->Append(new wxFloatProperty("EdgeSize", wxPG_LABEL, spr->GetEdgeSize()));
+	const d2d::Colorf& edge_col = spr->GetEdgeColor();
+	pg->Append(new wxColourProperty("EdgeColor", wxPG_LABEL, wxColour(edge_col.r*255, edge_col.g*255, edge_col.b*255, edge_col.a*255)));
+	pg->SetPropertyAttribute("EdgeColor", "HasAlpha", false);
 
 	wxPGProperty* align_prop = pg->Append(new wxStringProperty("Align", wxPG_LABEL, "<composed>"));
 	align_prop->SetExpanded(false);

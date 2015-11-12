@@ -1,5 +1,4 @@
 #include "gtxt_freetype.h"
-#include "gtxt_typedef.h"
 #include "gtxt_glyph.h"
 #include "gtxt_richtext.h"
 
@@ -25,7 +24,6 @@ struct freetype {
 
 static struct freetype FT;
 
-//static uint32_t* BUF;
 static union gtxt_color* BUF;
 static size_t BUF_SZ;
 
@@ -134,27 +132,6 @@ struct rect {
 	float xmin, xmax, ymin, ymax;
 };
 
-#define MAX(a, b) ( ((a)>(b))?(a):(b) )
-#define MIN(a, b) ( ((a)<(b))?(a):(b) )
-
-// static inline void
-// _rect_merge_point(struct rect* r, struct point* p) {
-// 	r->xmin = MIN(r->xmin, p->x);
-// 	r->ymin = MIN(r->ymin, p->y);
-// 	r->xmax = MAX(r->xmax, p->x);
-// 	r->ymax = MAX(r->ymax, p->y);
-// }
-
-// struct pixel {
-// 	union {
-// 		uint32_t integer;
-// 
-// 		struct {
-// 			uint8_t r, g, b, a;
-// 		} rgba;
-// 	};
-// };
-
 static inline void
 _rect_merge_point(struct rect* r, float x, float y) {
 	r->xmin = MIN(r->xmin, x);
@@ -174,9 +151,9 @@ _rect_height(struct rect* r) {
 }
 
 static bool
-_draw_with_edge(struct font* font, FT_UInt gindex, union gtxt_color color, 
-				float outline_width, struct gtxt_glyph_layout* layout, 
-				void (*cb)(int img_w, int img_h, union gtxt_color color, struct rect* rect, struct spans* out_spans, struct spans* in_spans)) {
+_draw_with_edge(struct font* font, FT_UInt gindex, union gtxt_color font_color, 
+				float edge_size, union gtxt_color edge_color, struct gtxt_glyph_layout* layout, 
+				void (*cb)(int img_w, int img_h, struct rect* rect, union gtxt_color font_color, union gtxt_color edge_color, struct spans* out_spans, struct spans* in_spans)) {
 	FT_Face ft_face = font->face;
 	FT_Library ft_library = font->library;
 
@@ -201,7 +178,7 @@ _draw_with_edge(struct font* font, FT_UInt gindex, union gtxt_color color,
 	FT_Stroker stroker;
 	FT_Stroker_New(ft_library, &stroker);
 	FT_Stroker_Set(stroker,
-		(int)(outline_width * 64),
+		(int)(edge_size * 64),
 		FT_STROKER_LINECAP_ROUND,
 		FT_STROKER_LINEJOIN_ROUND,
 		0);
@@ -252,63 +229,25 @@ _draw_with_edge(struct font* font, FT_UInt gindex, union gtxt_color color,
 	layout->sizer.height = img_h;
 
 	if (cb) {
-		cb(img_w, img_h, color, &rect, &out_spans, &in_spans);
+		cb(img_w, img_h, &rect, font_color, edge_color, &out_spans, &in_spans);
 	}
-
-//	union gtxt_color pixels[img_sz];
-//	memset(pixels, 0, sizeof(union gtxt_color) * img_sz);
-//
-//// 	int sz = sizeof(struct pixel) * img_sz;
-//// 	struct pixel* pixels = (struct pixel*)malloc(sz);
-//// 	memset(pixels, 0, sz);
-//
-//	// Loop over the outline spans and just draw them into the
-//	// image.
-//	for (int i = 0; i < out_spans.sz; ++i) {
-//		struct span* out_span = &out_spans.items[i];
-//		for (int w = 0; w < out_span->width; ++w) {
-//			int index = (int)((out_span->y - rect.ymin) * img_w + out_span->x - rect.xmin + w);
-//			union gtxt_color* p = &pixels[index];
-//			p->r = 255;
-//			p->g = 0;
-//			p->b = 0;
-//			p->a = out_span->coverage;
-//		}
-//	}
-//
-//	// Then loop over the regular glyph spans and blend them into
-//	// the image.
-//	for (int i = 0; i < in_spans.sz; ++i) {
-//		struct span* s = &in_spans.items[i];
-//		for (int w = 0; w < s->width; ++w) {
-//			int index = (s->y - rect.ymin) * img_w + s->x - rect.xmin + w;
-//			union gtxt_color* dst = &pixels[index];
-//			union gtxt_color src = color;
-//			src.a = s->coverage;
-//			dst->r = (int)(dst->r + ((src.r - dst->r) * src.a) / 255.0f);
-//			dst->g = (int)(dst->g + ((src.g - dst->g) * src.a) / 255.0f);
-//			dst->b = (int)(dst->b + ((src.b - dst->b) * src.a) / 255.0f);
-//			dst->a = MIN(255, dst->a + src.a);
-//		}
-//	}
 
 	return true;
 }
 
 static bool
-_load_glyph_to_bitmap(int unicode, int font, int size, bool edge, 
-                      union gtxt_color color, struct gtxt_glyph_layout* layout, 
+_load_glyph_to_bitmap(int unicode, struct gtxt_glyph_style* style, struct gtxt_glyph_layout* layout,
 					  void (*default_cb)(FT_Bitmap* bitmap, union gtxt_color color),
-					  void (*edge_cb)(int img_w, int img_h, union gtxt_color color, struct rect* rect, struct spans* out_spans, struct spans* in_spans)) {
-	if (font < 0 || font >= FT.count) {
+					  void (*edge_cb)(int img_w, int img_h, struct rect* rect, union gtxt_color font_color, union gtxt_color edge_color, struct spans* out_spans, struct spans* in_spans)) {
+	if (style->font < 0 || style->font >= FT.count) {
 		return false;
 	}
 
-	struct font* sfont = &FT.fonts[font];
+	struct font* sfont = &FT.fonts[style->font];
 	FT_Face ft_face = sfont->face;
 	assert(ft_face);
 
-	FT_Set_Pixel_Sizes(ft_face, size, size);
+	FT_Set_Pixel_Sizes(ft_face, style->font_size, style->font_size);
 	FT_Size_Metrics s = ft_face->size->metrics;
 	layout->metrics_height = s.height >> 6;	
 
@@ -317,10 +256,10 @@ _load_glyph_to_bitmap(int unicode, int font, int size, bool edge,
 		return false;
 	}
 
-	if (edge) {
-		return _draw_with_edge(sfont, gindex, color, 1, layout, edge_cb);
+	if (style->edge) {
+		return _draw_with_edge(sfont, gindex, style->font_color, style->edge_size, style->edge_color, layout, edge_cb);
 	} else {
-		return _draw_default(sfont, gindex, color, layout, default_cb);
+		return _draw_default(sfont, gindex, style->font_color, layout, default_cb);
 	}
 }
 
@@ -358,14 +297,11 @@ _copy_glyph_default(FT_Bitmap* bitmap, union gtxt_color color) {
 }
 
 static inline void
-_copy_glyph_with_edge(int img_w, int img_h, union gtxt_color color, struct rect* rect,
+_copy_glyph_with_edge(int img_w, int img_h, struct rect* rect,
+                      union gtxt_color font_color, union gtxt_color edge_color,
                       struct spans* out_spans, struct spans* in_spans) {
 	int sz = sizeof(union gtxt_color) * img_w * img_h;
 	_prepare_buf(sz);
-
-	// 	int sz = sizeof(struct pixel) * img_sz;
-	// 	struct pixel* pixels = (struct pixel*)malloc(sz);
-	// 	memset(pixels, 0, sz);
 
 	// Loop over the outline spans and just draw them into the
 	// image.
@@ -374,9 +310,7 @@ _copy_glyph_with_edge(int img_w, int img_h, union gtxt_color color, struct rect*
 		for (int w = 0; w < out_span->width; ++w) {
 			int index = (int)((out_span->y - rect->ymin) * img_w + out_span->x - rect->xmin + w);
 			union gtxt_color* p = &BUF[index];
-			p->r = 255;
-			p->g = 0;
-			p->b = 0;
+			*p = edge_color;
 			p->a = out_span->coverage;
 		}
 	}
@@ -388,7 +322,7 @@ _copy_glyph_with_edge(int img_w, int img_h, union gtxt_color color, struct rect*
 		for (int w = 0; w < s->width; ++w) {
 			int index = (s->y - rect->ymin) * img_w + s->x - rect->xmin + w;
 			union gtxt_color* dst = &BUF[index];
-			union gtxt_color src = color;
+			union gtxt_color src = font_color;
 			src.a = s->coverage;
 			dst->r = (int)(dst->r + ((src.r - dst->r) * src.a) / 255.0f);
 			dst->g = (int)(dst->g + ((src.g - dst->g) * src.a) / 255.0f);
@@ -399,14 +333,12 @@ _copy_glyph_with_edge(int img_w, int img_h, union gtxt_color color, struct rect*
 }
 
 void 
-gtxt_ft_get_layout(int unicode, int font, int size, bool edge, struct gtxt_glyph_layout* layout) {
-	union gtxt_color color;
-	color.integer = 0;
-	_load_glyph_to_bitmap(unicode, font, size, edge, color, layout, NULL, NULL);
+gtxt_ft_get_layout(int unicode, struct gtxt_glyph_style* style, struct gtxt_glyph_layout* layout) {
+	_load_glyph_to_bitmap(unicode, style, layout, NULL, NULL);
 }
 
 uint32_t* 
-gtxt_ft_gen_char(int unicode, int font, int size, bool edge, union gtxt_color color, struct gtxt_glyph_layout* layout) {
-	bool succ = _load_glyph_to_bitmap(unicode, font, size, edge, color, layout, _copy_glyph_default, _copy_glyph_with_edge);
+gtxt_ft_gen_char(int unicode, struct gtxt_glyph_style* style, struct gtxt_glyph_layout* layout) {
+	bool succ = _load_glyph_to_bitmap(unicode, style, layout, _copy_glyph_default, _copy_glyph_with_edge);
 	return succ ? (uint32_t*)BUF : NULL;
 }

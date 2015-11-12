@@ -8,17 +8,22 @@
 #define MAX_LAYER	16
 #define MAX_FONT	16
 
+struct edge_style {
+	float size;
+	union gtxt_color color;
+};
+
 struct richtext_state {
-	union gtxt_color color[MAX_LAYER];
-	int color_layer;
+	int font[MAX_LAYER];
+	int font_layer;
 
 	int size[MAX_LAYER];
 	int size_layer;
 
-	int font[MAX_LAYER];
-	int font_layer;
+	union gtxt_color color[MAX_LAYER];
+	int color_layer;
 
-	bool edge[MAX_LAYER];
+	struct edge_style edge[MAX_LAYER];
 	int edge_layer;
 
 	struct gtxt_richtext_style style;
@@ -38,28 +43,44 @@ struct color_map {
 };
 
 static const struct color_map COLOR[] = {
+	{ "aqua",		0x00ffffff },
+	{ "black",		0x000000ff },
+	{ "blue",		0x0000ffff },
+	{ "brown",		0xa52a2aff },
+	{ "cyan",		0x00ffffff },
+	{ "darkblue",	0x0000a0ff },
+	{ "fuchsia",	0xff00ffff },
+	{ "green",		0x008000ff },
+	{ "grey",		0x808080ff },
+	{ "lightblue",	0xadd8e6ff },
+	{ "lime",		0x00ff00ff },
+	{ "magenta",	0xff00ffff },
+	{ "maroon",		0x800000ff },
+	{ "navy",		0x000080ff },
+	{ "olive",		0x808000ff },
+	{ "orange",		0xffa500ff },
+	{ "purple",		0x800080ff },
 	{ "red",		0xff0000ff },
-	{ "yellow",		0xffff00ff },
-	{ "green",		0x00ff00ff }
+	{ "silver",		0xc0c0c0ff },
+	{ "teal",		0x008080ff },
+	{ "white",		0xffffffff },
+	{ "yellow",		0xffff00ff }
 };
 
 static inline union gtxt_color
-_parser_color(const char* token) {
+_parser_color(const char* token, char** end_ptr) {
 	union gtxt_color col;
 	col.integer = 0;
 	if (token[0] == '#') {
-		col.integer = strtoul(&token[1], (char**)NULL, 16);
-
-		uint8_t r = col.r;
-		uint8_t g = col.g;
-		uint8_t b = col.b;
-		uint8_t a = col.a;
-
+		col.integer = strtoul(&token[1], end_ptr, 16);
 	} else {
 		int num = sizeof(COLOR) / sizeof(struct color_map);
 		for (int i = 0; i < num; ++i) {
-			if (strcmp(&token[0], COLOR[i].name) == 0) {
+			if (strncmp(&token[0], COLOR[i].name, strlen(COLOR[i].name)) == 0) {
 				col = COLOR[i].color;
+				if (end_ptr) {
+					*end_ptr = &token[strlen(COLOR[i].name)];
+				}
 				break;
 			}
 		}
@@ -105,6 +126,19 @@ _parser_font(const char* token) {
 	return 0;
 }
 
+static inline void 
+_parser_edge(const char* token, struct edge_style* es) {
+	char* end;
+	if (strncmp(token, "size=", strlen("size=")) == 0) {
+		es->size = strtod(&token[strlen("size=")], &end );
+	} else if (strncmp(token, "color=", strlen("color=")) == 0) {
+		es->color = _parser_color(&token[strlen("color=")], &end);
+	}
+	if (*end) {
+		_parser_edge(end + 1, es);
+	}
+}
+
 #define STATE_PUSH(buf, layer, val, ret) { \
 	if ((layer) < MAX_LAYER) { \
 	(buf)[(layer)++] = (val); \
@@ -126,26 +160,59 @@ _parser_font(const char* token) {
 
 static inline void
 _parser_token(const char* token, struct richtext_state* rs) {
-	// color
-	if (strncmp(token, "color", strlen("color")) == 0) {
-		union gtxt_color col = _parser_color(&token[strlen("color")+1]);
-		STATE_PUSH(rs->color, rs->color_layer, col, rs->style.color)
-	} else if (strncmp(token, "/color", strlen("/color")) == 0) {
-		STATE_POP(rs->color, rs->color_layer, rs->style.color);
-	}
 	// font
-	else if (strncmp(token, "font", strlen("font")) == 0) {
+	if (strncmp(token, "font", strlen("font")) == 0) {
 		int font = _parser_font(&token[strlen("font")+1]);
-		STATE_PUSH(rs->font, rs->font_layer, font, rs->style.font)
+		STATE_PUSH(rs->font, rs->font_layer, font, rs->style.gs.font)
 	} else if (strncmp(token, "/font", strlen("/font")) == 0) {
-		STATE_POP(rs->font, rs->font_layer, rs->style.font);		
+		STATE_POP(rs->font, rs->font_layer, rs->style.gs.font);		
 	}	
 	// size
 	else if (strncmp(token, "size", strlen("size")) == 0) {
 		int size = strtol(&token[strlen("size")+1], (char**)NULL, 10);
-		STATE_PUSH(rs->size, rs->size_layer, size, rs->style.size)
+		STATE_PUSH(rs->size, rs->size_layer, size, rs->style.gs.font_size)
 	} else if (strncmp(token, "/size", strlen("/size")) == 0) {
-		STATE_POP(rs->size, rs->size_layer, rs->style.size);				
+		STATE_POP(rs->size, rs->size_layer, rs->style.gs.font_size);				
+	}
+	// color
+	else if (strncmp(token, "color", strlen("color")) == 0) {
+		union gtxt_color col = _parser_color(&token[strlen("color")+1], NULL);
+		STATE_PUSH(rs->color, rs->color_layer, col, rs->style.gs.font_color)
+	} else if (strncmp(token, "/color", strlen("/color")) == 0) {
+		STATE_POP(rs->color, rs->color_layer, rs->style.gs.font_color);
+	}
+	// edge
+	else if (strncmp(token, "edge", strlen("edge")) == 0) {
+		struct edge_style es;
+		es.size = 1;
+		es.color.integer = 0x000000ff;
+		if (strlen(token) > strlen("edge")) {
+			_parser_edge(&token[strlen("edge")+1], &es);
+		}
+		if (rs->edge_layer < MAX_LAYER) {
+			rs->edge[rs->edge_layer++] = es;
+			rs->style.gs.edge = true;
+			rs->style.gs.edge_size = es.size;
+			rs->style.gs.edge_color = es.color;
+		} else {
+			++rs->edge_layer;
+		}
+	} else if (strncmp(token, "/edge", strlen("/edge")) == 0) {
+		--rs->edge_layer;
+		assert(rs->edge_layer >= 0);
+		if (rs->edge_layer == 0) {
+			rs->style.gs.edge = false;
+			rs->style.gs.edge_size = 0;
+			rs->style.gs.edge_color.integer = 0;
+		} else if (rs->edge_layer <= MAX_LAYER) {
+			rs->style.gs.edge = true;
+			rs->style.gs.edge_size = rs->edge[rs->edge_layer-1].size;
+			rs->style.gs.edge_color = rs->edge[rs->edge_layer-1].color;
+		} else {
+			rs->style.gs.edge = true;
+			rs->style.gs.edge_size = rs->edge[MAX_LAYER-1].size;
+			rs->style.gs.edge_color = rs->edge[MAX_LAYER-1].color;
+		}
 	}
 	// file
 	else if (strncmp(token, "file", strlen("file")) == 0) {
@@ -159,19 +226,24 @@ _parser_token(const char* token, struct richtext_state* rs) {
 
 static inline void
 _init_state(struct richtext_state* rs, struct gtxt_label_style* style) {
-	rs->color[0] = style->color;
-	rs->color_layer = 1;
-	rs->size[0] = style->font_size;
-	rs->size_layer = 1;
-	rs->font[0] = style->font;
+	rs->font[0] = style->gs.font;
 	rs->font_layer = 1;
-	rs->edge[0] = style->edge;
-	rs->edge_layer = 1;
+	rs->size[0] = style->gs.font_size;
+	rs->size_layer = 1;
+	rs->color[0] = style->gs.font_color;
+	rs->color_layer = 1;
 
-	rs->style.color	= style->color;
-	rs->style.size	= style->font_size;
-	rs->style.font	= style->font;
-	rs->style.edge	= style->edge;
+	if (style->gs.edge) {
+		struct edge_style es;
+		es.size = style->gs.edge_size;
+		es.color = style->gs.edge_color;
+		rs->edge[0] = es;
+		rs->edge_layer = 1;
+	} else {
+		rs->edge_layer = 0;
+	}
+
+	rs->style.gs = style->gs;
 	rs->style.ext_sym_ud = NULL;
 }
 

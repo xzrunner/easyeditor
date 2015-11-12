@@ -40,11 +40,17 @@ public:
 	int GetFontSize() const { return m_font_size; }
 	void SetFontSize(int size) { m_font_size = size; }
 
-	bool GetEdge() const { return m_has_edge; }
-	void SetEdge(bool edge) { m_has_edge = edge; }
+	const d2d::Colorf& GetFontColor() const { return m_font_color; }
+	void SetFontColor(const d2d::Colorf& col) { m_font_color = col; }
 
-	const d2d::Colorf& GetColor() const { return m_color; }
-	void SetColor(const d2d::Colorf& col) { m_color = col; }
+	bool GetEdge() const { return m_edge; }
+	void SetEdge(bool edge) { m_edge = edge; }
+
+	float GetEdgeSize() const { return m_edge_size; }
+	void SetEdgeSize(float size) { m_edge_size = size; }
+
+	const d2d::Colorf& GetEdgeColor() const { return m_edge_color; }
+	void SetEdgeColor(const d2d::Colorf& col) { m_edge_color = col; }
 
 	void GetAlign(int& halign, int& valign) const;
 	void SetAlign(int halign, int valign);
@@ -68,10 +74,11 @@ private:
 
 	int m_font;
 	int m_font_size;
+	d2d::Colorf m_font_color;
 
-	bool m_has_edge;
-
-	d2d::Colorf m_color;
+	bool m_edge;
+	float m_edge_size;
+	d2d::Colorf m_edge_color;
 
 	HoriAlignType m_align_hori;
 	VertAlignType m_align_vert;

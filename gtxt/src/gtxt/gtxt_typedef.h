@@ -8,15 +8,8 @@ extern "C"
 
 #include <stdint.h>
 
-// union gtxt_color {
-// 	union {
-// 		uint32_t one;
-// 
-// 		struct {
-// 			uint8_t r, g, b, a;
-// 		} four;
-// 	};
-// };
+#define MAX(a, b) ( ((a)>(b))?(a):(b) )
+#define MIN(a, b) ( ((a)<(b))?(a):(b) )
 
 #if (('1234' >> 24) == '1')
 #elif (('4321' >> 24) == '1')

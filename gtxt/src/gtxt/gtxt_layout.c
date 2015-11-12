@@ -212,20 +212,15 @@ _add_glyph(struct glyph* g) {
 
 bool 
 gtxt_layout_single(int unicode, struct gtxt_richtext_style* style) {
-	int font, size;
-	bool edge;
+	struct gtxt_glyph_style* gs;
 	if (style) {
-		font = style->font;
-		size = style->size;
-		edge = style->edge;
+		gs = &style->gs;
 	} else {
-		font = L.style->font;
-		size = L.style->font_size;
-		edge = L.style->edge;
+		gs = &L.style->gs;
 	}
 
-	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, font, size, edge);
-	float w = g_layout->advance * L.style->space_h;
+	struct gtxt_glyph_layout* g_layout = gtxt_glyph_get_layout(unicode, gs);
+	float w = MAX(g_layout->advance, g_layout->sizer.width) * L.style->space_h;
 	if (unicode == '\n' || L.curr_row->width + w > L.style->width) {
 		if (!_line_feed()) {
 			return false;
