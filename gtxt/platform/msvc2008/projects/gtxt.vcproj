@@ -229,14 +229,6 @@
 			RelativePath="..\..\..\src\gtxt\gtxt_typedef.h"
 			>
 		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_utility.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_utility.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

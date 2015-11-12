@@ -9,7 +9,7 @@
 #define MAX_FONT	16
 
 struct richtext_state {
-	uint32_t color[MAX_LAYER];
+	union gtxt_color color[MAX_LAYER];
 	int color_layer;
 
 	int size[MAX_LAYER];
@@ -34,7 +34,7 @@ static void (*EXT_SYM_RENDER)(void* ext_sym, float x, float y, void* ud);
 
 struct color_map {
 	char* name;
-	uint32_t color;
+	union gtxt_color color;
 };
 
 static const struct color_map COLOR[] = {
@@ -43,11 +43,18 @@ static const struct color_map COLOR[] = {
 	{ "green",		0x00ff00ff }
 };
 
-static inline uint32_t
+static inline union gtxt_color
 _parser_color(const char* token) {
-	uint32_t col = 0;
+	union gtxt_color col;
+	col.integer = 0;
 	if (token[0] == '#') {
-		col = strtoul(&token[1], (char**)NULL, 16);
+		col.integer = strtoul(&token[1], (char**)NULL, 16);
+
+		uint8_t r = col.r;
+		uint8_t g = col.g;
+		uint8_t b = col.b;
+		uint8_t a = col.a;
+
 	} else {
 		int num = sizeof(COLOR) / sizeof(struct color_map);
 		for (int i = 0; i < num; ++i) {
@@ -121,7 +128,7 @@ static inline void
 _parser_token(const char* token, struct richtext_state* rs) {
 	// color
 	if (strncmp(token, "color", strlen("color")) == 0) {
-		uint32_t col = _parser_color(&token[strlen("color")+1]);
+		union gtxt_color col = _parser_color(&token[strlen("color")+1]);
 		STATE_PUSH(rs->color, rs->color_layer, col, rs->style.color)
 	} else if (strncmp(token, "/color", strlen("/color")) == 0) {
 		STATE_POP(rs->color, rs->color_layer, rs->style.color);

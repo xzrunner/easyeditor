@@ -32,7 +32,7 @@ struct gtxt_label_style {
 	int width;
 	int height;
 
-	color_rgba color;
+	union gtxt_color color;
 
 	int align_h;
 	int align_v;

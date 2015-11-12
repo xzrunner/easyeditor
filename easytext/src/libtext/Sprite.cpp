@@ -107,6 +107,8 @@ void Sprite::Load(const Json::Value& val)
 	m_font = text_val["font"].asInt();
 	m_font_size = text_val["size"].asInt();
 
+	m_has_edge = text_val["edge"].asBool();
+
 	m_color = transColor(text_val["color"].asString(), d2d::PT_ARGB);
 
 	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());

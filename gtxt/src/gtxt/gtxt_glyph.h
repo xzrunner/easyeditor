@@ -27,7 +27,7 @@ void gtxt_glyph_cache_init(int cap_bitmap, int cap_layout);
 
 struct gtxt_glyph_layout* gtxt_glyph_get_layout(int unicode, int font, int size, bool edge);
 
-uint8_t* gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_glyph_layout* layout);
+uint32_t* gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, union gtxt_color color, struct gtxt_glyph_layout* layout);
 
 #endif // gametext_glyph_h
 

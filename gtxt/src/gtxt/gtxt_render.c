@@ -18,7 +18,7 @@ gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y, 
 				void (*render)(int id, float* texcoords, float x, float y, float w, float h, void* ud), void* ud) {
 	struct dtex_glyph glyph;
 	glyph.unicode = unicode;
-	glyph.style.color = style->color;
+	glyph.style.color = style->color.integer;
 	glyph.style.size = style->size;
 	glyph.style.font = style->font;
 	glyph.style.edge = style->edge;
@@ -27,7 +27,7 @@ gtxt_draw_glyph(int unicode, struct gtxt_render_style* style, float x, float y, 
 	float* texcoords = dtex_cg_query(CG, &glyph, &uid);
 	if (!texcoords) {
 		struct gtxt_glyph_layout layout;
-		uint8_t* buf = gtxt_glyph_get_bitmap(unicode, style->font, style->size, style->edge, &layout);
+		uint32_t* buf = gtxt_glyph_get_bitmap(unicode, style->font, style->size, style->edge, style->color, &layout);
 		dtex_cg_load(CG, buf, layout.sizer.width, layout.sizer.height, &glyph);
 		return;
 	}

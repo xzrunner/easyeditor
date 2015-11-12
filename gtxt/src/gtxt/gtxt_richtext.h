@@ -6,11 +6,13 @@ extern "C"
 #ifndef gametext_richtext_h
 #define gametext_richtext_h
 
+#include "gtxt_typedef.h"
+
 #include <stdint.h>
 #include <stdbool.h>
 
 struct gtxt_richtext_style {
-	uint32_t color;
+	union gtxt_color color;
 	int size;
 	int font;
 	bool edge;

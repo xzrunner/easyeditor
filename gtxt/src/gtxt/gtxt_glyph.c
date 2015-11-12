@@ -17,7 +17,7 @@ struct glyph_key {
 struct glyph_bitmap {
 	bool valid;
 
-	uint8_t* buf;
+	uint32_t* buf;
 	size_t sz;
 
 	struct glyph_bitmap *next;
@@ -145,8 +145,8 @@ gtxt_glyph_get_layout(int unicode, int font, int size, bool edge) {
 	}
 }
 
-uint8_t* 
-gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_glyph_layout* layout) {
+uint32_t* 
+gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, union gtxt_color color, struct gtxt_glyph_layout* layout) {
 	struct glyph_key key;
 	key.unicode = unicode;
 	key.font = font;
@@ -185,9 +185,9 @@ gtxt_glyph_get_bitmap(int unicode, int font, int size, bool edge, struct gtxt_gl
 		g->bitmap->valid = false;
 	}
 	if (!g->bitmap->valid) {
-		uint8_t* buf = gtxt_ft_gen_char(unicode, font, size, edge, &g->layout);
+		uint32_t* buf = gtxt_ft_gen_char(unicode, font, size, edge, color, &g->layout);
 		*layout = g->layout;
-		size_t sz = g->layout.sizer.width * g->layout.sizer.height;
+		size_t sz = g->layout.sizer.width * g->layout.sizer.height * sizeof(uint32_t);
 		if (sz > g->bitmap->sz) {
 			free(g->bitmap->buf);
 			g->bitmap->buf = malloc(sz);

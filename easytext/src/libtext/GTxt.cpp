@@ -113,7 +113,7 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 
 	spr->GetSize(style.width, style.height);
 
-	style.color = d2d::trans_color2int(spr->GetColor(), d2d::PT_RGBA);
+	style.color.integer = d2d::trans_color2int(spr->GetColor(), d2d::PT_RGBA);
 	
 	spr->GetAlign(style.align_h, style.align_v);
 

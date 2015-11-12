@@ -11,16 +11,12 @@ extern "C"
 
 struct gtxt_glyph_layout;
 
-struct font_color {
-	uint8_t r, g, b, a;
-};
-
 void gtxt_ft_init();
 
 int gtxt_ft_add_font(const char* name, const char* filepath);
 
 void gtxt_ft_get_layout(int unicode, int font, int size, bool edge, struct gtxt_glyph_layout*);
-uint8_t* gtxt_ft_gen_char(int unicode, int font, int size, bool edge, struct gtxt_glyph_layout*);
+uint32_t* gtxt_ft_gen_char(int unicode, int font, int size, bool edge, union gtxt_color color, struct gtxt_glyph_layout*);
 
 #endif // gametext_freetype_h
 
