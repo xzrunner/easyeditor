@@ -16,7 +16,7 @@ END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Sprite* spr,
 					   const d2d::MultiSpritesImpl* sprite_impl)
-	: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
+	: wxDialog(parent, wxID_ANY, "Edit Text", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 {
 	InitLayout(spr, sprite_impl);
