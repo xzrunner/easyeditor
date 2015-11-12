@@ -5,7 +5,8 @@ namespace librespacker
 {
 
 static const char* UI_WINDOW	= "window";
-static const char* UI_LIST	= "list";
+static const char* UI_LIST		= "list";
+static const char* UI_WRAPPER	= "wrapper";
 
 }
 

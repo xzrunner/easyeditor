@@ -1,4 +1,4 @@
-#include "PackUIListTask.h"
+#include "PackUIWrapperTask.h"
 #include "PackUI.h"
 #include "pack_ui_cfg.h"
 
@@ -7,8 +7,7 @@
 namespace librespacker
 {
 
-PackUIListTask::PackUIListTask(const std::string& filepath,
-							   const Json::Value& value)
+PackUIWrapperTask::PackUIWrapperTask(const std::string& filepath, const Json::Value& value)
 	: PackUITask(filepath)
 {
 	std::string wrapper_filepath = value["wrapper filepath"].asString();
@@ -17,21 +16,23 @@ PackUIListTask::PackUIListTask(const std::string& filepath,
 
 	m_cb_w = value["clipbox"]["w"].asInt();
 	m_cb_h = value["clipbox"]["h"].asInt();
+	
+	m_type = value["user type"].asString();
 
 	PackUI::Instance()->Instance()->AddListener(wrapper_filepath, this);
 }
 
-void PackUIListTask::OnKnownPackID(const std::string& filepath, int id)
+void PackUIWrapperTask::OnKnownPackID(const std::string& filepath, int id)
 {
 	m_id = id;
 }
 
-void PackUIListTask::Output(const std::string& dir, Json::Value& value) const
+void PackUIWrapperTask::Output(const std::string& dir, Json::Value& value) const
 {
 	Json::Value item_val;
 	item_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, m_filepath).ToStdString();
 	item_val["wrapper id"] = m_id;
-	item_val["type"] = UI_LIST;
+	item_val["type"] = m_type;
 	item_val["clipbox"]["w"] = m_cb_w;
 	item_val["clipbox"]["h"] = m_cb_h;
 	value[value.size()] = item_val;

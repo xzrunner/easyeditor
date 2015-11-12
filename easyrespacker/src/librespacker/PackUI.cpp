@@ -3,6 +3,7 @@
 
 #include "PackUIListTask.h"
 #include "PackUIWindowTask.h"
+#include "PackUIWrapperTask.h"
 
 #include <fstream>
 #include <drag2d.h>
@@ -32,6 +33,8 @@ void PackUI::AddTask(const std::string& filepath)
 		task = new PackUIListTask(filepath, value);
 	} else if (type == UI_WINDOW) {
 		task = new PackUIWindowTask(filepath, value);
+	} else if (type == UI_WRAPPER) {
+		task = new PackUIWrapperTask(filepath, value);
 	} else {
 //		throw d2d::Exception("PackUI unknown task %s", type);
 		return;

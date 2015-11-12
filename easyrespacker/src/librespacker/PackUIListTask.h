@@ -17,6 +17,8 @@ public:
 private:
  	int m_id;
 
+	int m_cb_w, m_cb_h;
+
 }; // PackUIListTask
 
 }

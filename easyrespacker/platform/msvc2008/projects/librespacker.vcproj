@@ -706,6 +706,14 @@
 						RelativePath="..\..\..\src\librespacker\PackUIWindowTask.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\PackUIWrapperTask.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\PackUIWrapperTask.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
