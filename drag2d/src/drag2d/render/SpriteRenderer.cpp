@@ -8,8 +8,11 @@
 
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
+#include "dataset/AbstractBV.h"
 #include "view/Camera.h"
 #include "render/LabelNew.h"
+#include "render/PrimitiveDraw.h"
+#include "common/color_config.h"
 
 namespace d2d
 {
@@ -129,6 +132,14 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	_b_trans.b = sprite->b_trans.r * r_trans.b + sprite->b_trans.g * g_trans.b + sprite->b_trans.b * b_trans.b;
 
 	sprite->GetSymbol().Draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
+
+	if (sprite->IsAnchor()) {
+		std::vector<Vector> bound;
+		sprite->GetBounding()->getBoundPos(bound);
+		PrimitiveDraw::drawPolyline(bound, BLACK, true, 4);
+		PrimitiveDraw::drawLine(bound[0], bound[2], BLACK, 4);
+		PrimitiveDraw::drawLine(bound[1], bound[3], BLACK, 4);
+	}
 }
 
 void SpriteRenderer::DrawImplBlend(const ISprite* sprite) const

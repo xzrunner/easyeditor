@@ -38,6 +38,8 @@ ISprite::ISprite()
 
 	m_blend_mode = BM_NORMAL;
 	m_filter_mode = FM_NORMAL;
+
+	m_is_anchor = false;
 }
 
 ISprite::ISprite(const ISprite& sprite)
@@ -67,6 +69,8 @@ ISprite::ISprite(const ISprite& sprite)
 
 	m_blend_mode = sprite.m_blend_mode;
 	m_filter_mode = sprite.m_filter_mode;
+
+	m_is_anchor = sprite.m_is_anchor;
 }
 
 ISprite::~ISprite()
@@ -191,6 +195,9 @@ void ISprite::Load(const Json::Value& val)
 			m_filter_mode = FilterModes::Instance()->GetIDFromNameEN(disc);
 		}
 	}
+
+	// anchor
+	m_is_anchor = val["anchor"].asBool();
 }
 
 void ISprite::Store(Json::Value& val) const
@@ -228,6 +235,8 @@ void ISprite::Store(Json::Value& val) const
 	if (Config::Instance()->IsRenderOpen()) {
 		val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
 	}
+
+	val["anchor"] = m_is_anchor;
 }
 
 void ISprite::BuildBounding()

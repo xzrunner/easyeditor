@@ -100,6 +100,10 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		spr->clip = wxANY_AS(value, bool);
 	}
+	else if (name == "Anchor")
+	{
+		spr->SetAnchor(wxANY_AS(value, bool));
+	}
 	// pos
 	else if (name == wxT("Pos"))
 	{
@@ -234,6 +238,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
 
+	pg->GetProperty(wxT("Anchor"))->SetValue(spr->IsAnchor());
+
 	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->GetPosition().x);
 	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->GetPosition().y);
 	pg->GetProperty(wxT("Pos"))->SetValue(pg->GetProperty(wxT("Pos"))->GenerateComposedValue());
@@ -279,6 +285,9 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->clip));
 	pg->SetPropertyAttribute("Clip", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxBoolProperty("Anchor", wxPG_LABEL, spr->IsAnchor()));
+	pg->SetPropertyAttribute("Anchor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxPropertyCategory("COLOR", wxPG_LABEL));
 

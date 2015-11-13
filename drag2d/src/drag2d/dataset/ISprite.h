@@ -96,6 +96,9 @@ public:
 	void GetTransMatrix(Matrix& mt) const;
 	Matrix GetTransInvMatrix() const;
 
+	bool IsAnchor() const { return m_is_anchor; }
+	void SetAnchor(bool anchor) { m_is_anchor = anchor; }
+
 protected:
 	template<typename T>
 	void SetSymbol(T** dst, d2d::ISymbol* src);
@@ -129,6 +132,9 @@ protected:
 	AbstractBV* m_bounding;
 
 	ISpriteObserver* m_observer;
+
+private:
+	bool m_is_anchor;
 
 }; // ISprite
 
