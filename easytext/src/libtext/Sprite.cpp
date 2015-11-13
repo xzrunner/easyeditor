@@ -59,11 +59,11 @@ Sprite::Sprite(Symbol* symbol)
 
 	m_font = symbol->m_font;
 	m_font_size = symbol->m_font_size;
-	m_font_color = d2d::transColor(symbol->m_font_color, d2d::PT_ARGB);
+	m_font_color = d2d::transColor(symbol->m_font_color, d2d::PT_RGBA);
 
 	m_edge = symbol->m_edge;
 	m_edge_size = symbol->m_edge_size;
-	m_edge_color = d2d::transColor(symbol->m_edge_color, d2d::PT_ARGB);
+	m_edge_color = d2d::transColor(symbol->m_edge_color, d2d::PT_RGBA);
 
 	m_align_hori = symbol->m_align_hori;
 	m_align_vert = symbol->m_align_vert;
@@ -109,11 +109,11 @@ void Sprite::Load(const Json::Value& val)
 
 	m_font = text_val["font"].asInt();
 	m_font_size = text_val["font_size"].asInt();
-	m_font_color = transColor(text_val["font_color"].asString(), d2d::PT_ARGB);
+	m_font_color = transColor(text_val["font_color"].asString(), d2d::PT_RGBA);
 
 	m_edge = text_val["edge"].asBool();
 	m_edge_size = text_val["edge_size"].asInt();
-	m_edge_color = transColor(text_val["edge_color"].asString(), d2d::PT_ARGB);	
+	m_edge_color = transColor(text_val["edge_color"].asString(), d2d::PT_RGBA);	
 
 	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());
 	m_align_vert = VertAlignType(text_val["align_vert"].asInt());
@@ -138,11 +138,11 @@ void Sprite::Store(Json::Value& val) const
 
 	text_val["font"] = m_font;
 	text_val["font_size"] = m_font_size;
-	text_val["font_color"] = transColor(m_font_color, d2d::PT_ARGB);
+	text_val["font_color"] = transColor(m_font_color, d2d::PT_RGBA);
 
 	text_val["edge"] = m_edge;
 	text_val["edge_size"] = m_edge_size;
-	text_val["edge_color"] = transColor(m_edge_color, d2d::PT_ARGB);
+	text_val["edge_color"] = transColor(m_edge_color, d2d::PT_RGBA);
 
 	text_val["align_hori"] = m_align_hori;
 	text_val["align_vert"] = m_align_vert;
