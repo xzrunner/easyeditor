@@ -92,7 +92,7 @@ void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 				sprites.push_back(currFrame->GetSprite(i)->Clone());
 			}
 		}
-		else if (!currFrame->HasClassicTween())
+		else if (!currFrame->HasClassicTween() || !nextFrame)
 		{
 			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
 				sprites.push_back(currFrame->GetSprite(i)->Clone());
