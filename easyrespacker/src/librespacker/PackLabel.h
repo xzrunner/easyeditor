@@ -14,8 +14,8 @@ public:
 	std::string name;
 	std::string font;
 
-	d2d::HoriAlignType align_hori;
-	d2d::VertAlignType align_vert;
+	int align_hori;
+	int align_vert;
 
 	d2d::Colorf color;	// PT_ARGB
 

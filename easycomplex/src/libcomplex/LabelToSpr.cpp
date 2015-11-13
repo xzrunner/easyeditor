@@ -11,8 +11,8 @@ d2d::ISprite* LabelToSpr::Trans(const librespacker::PackLabel* label)
 	spr->font = label->font;
 	spr->has_edge = label->has_edge;
 	spr->color = label->color;
-	spr->align_hori = label->align_hori;
-	spr->align_vert = label->align_vert;
+	spr->align_hori = (d2d::HoriAlignType)(label->align_hori);
+	spr->align_vert = (d2d::VertAlignType)(label->align_vert);
 	spr->size = label->size;
 	spr->width = label->width;
 	spr->height = label->height;

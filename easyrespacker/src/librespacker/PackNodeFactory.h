@@ -18,6 +18,7 @@ class TextureBuilder;
 
 // label
 class LabelBuilder;
+class TextBuilder;
 
 // animation
 class ComplexBuilder;
@@ -75,6 +76,7 @@ private:
 
 	// label
 	LabelBuilder* m_label_builder;
+	TextBuilder* m_text_builder;
 
 	// animation
 	ComplexBuilder* m_complex_builder;

@@ -13,6 +13,8 @@
 
 // label
 #include "LabelBuilder.h"
+#include "TextBuilder.h"
+#include <easytext.h>
 
 // animation
 #include "ComplexBuilder.h"
@@ -54,6 +56,7 @@ PackNodeFactory::PackNodeFactory()
 
 	// label
 	m_builders.push_back(m_label_builder = new LabelBuilder);
+	m_builders.push_back(m_text_builder = new TextBuilder);
 
 	// animation
 	m_builders.push_back(m_complex_builder = new ComplexBuilder(m_export_set, m_clipbox_builder));
@@ -93,7 +96,9 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 	// label
 	else if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(spr)) {
 		node = m_label_builder->Create(font);
-	} 
+	} else if (const etext::Sprite* text = dynamic_cast<const etext::Sprite*>(spr)) {
+		node = m_text_builder->Create(text);
+	}
 
 	// animation
 	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {

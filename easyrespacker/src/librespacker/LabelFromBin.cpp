@@ -14,8 +14,8 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 {
 	uint8_t align;
 	unpack(align, ptr);
-	label->align_hori = (d2d::HoriAlignType)(align & 0xff);
-	label->align_vert = (d2d::VertAlignType)((align & 0xff00) >> 4);
+	label->align_hori = align & 0xff;
+	label->align_vert = (align & 0xff00) >> 4;
 
 	uint32_t color;
 	unpack(color, ptr);

@@ -11,6 +11,7 @@
 #include <easyicon.h>
 #include <easyparticle3d.h>
 #include <easyparticle2d.h>
+#include <easytext.h>
 
 static void InitSymbolCreators() 
 {
@@ -43,6 +44,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eparticle2d::FILE_TAG, &eparticle2d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eparticle2d::FILE_TAG, &eparticle2d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
 }
 
 static void Help()
