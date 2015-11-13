@@ -12,7 +12,7 @@ namespace eanim
 
 SkeletonImpl::SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
 						   d2d::AbstractEditOP* editop)
-	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, NULL, d2d::ArrangeSpriteConfig())
+	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, d2d::ArrangeSpriteConfig())
 	, m_stage(stage)
 	, m_key_handler(editop, stage->GetController())
 	, m_selected_joint(NULL)

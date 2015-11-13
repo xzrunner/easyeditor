@@ -53,6 +53,8 @@ public:
 private:
 	Controller* m_ctrl;
 
+	std::vector<d2d::Subject*> m_subjects;
+
 }; // StagePanel
 
 }

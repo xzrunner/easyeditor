@@ -177,9 +177,6 @@ d2d::ILibraryPage* Controller::GetImagePage()
 
 void Controller::Clear()
 {
-	m_widgets->m_library->Clear();
-	m_widgets->m_stage->Clear();
-
 	m_curr_layer = 0;
 	m_curr_frame = 1;
 
