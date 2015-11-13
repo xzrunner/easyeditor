@@ -7,3 +7,6 @@
 [submodule "dtex/src"]
 	path = dtex/src
 	url = ssh://git@oa.ejoy.com/users/zz/dtex.git
+[submodule "gtxt/src/gtxt"]
+	path = gtxt/src/gtxt
+	url = ssh://tea.ejoy.com:3222/LR/gtxt.git
