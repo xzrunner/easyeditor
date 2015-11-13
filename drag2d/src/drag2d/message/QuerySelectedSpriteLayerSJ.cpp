@@ -13,7 +13,7 @@ QuerySelectedSpriteLayerSJ::QuerySelectedSpriteLayerSJ(int id)
 
 int QuerySelectedSpriteLayerSJ::Query()
 {
-	int layer = INT_MAX;
+	int layer = INT_MAX - 1;
 	Notify(&layer);
 	return layer;
 }
