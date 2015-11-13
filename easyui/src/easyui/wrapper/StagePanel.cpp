@@ -54,6 +54,9 @@ void StagePanel::LoadFromFile(const char* filename)
 	std::string user_type = value["user type"].asString();
 	m_toolbar->SetType(user_type);
 
+	std::string tag = value["tag"].asString();
+	m_toolbar->SetTag(tag);
+
 	const Json::Value& cb_val = value["clipbox"];
 	m_clipbox.xMin = cb_val["x"].asDouble();
 	m_clipbox.yMax = cb_val["y"].asDouble();
@@ -84,6 +87,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
+	items_complex.InitBounding();
 
 	// wrapper complex
 	ecomplex::Sprite items_sprite(&items_complex);
@@ -103,10 +107,14 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["items filepath"] = d2d::FilenameTools::getRelativePath(dir, items_path).ToStdString();
 	value["wrapper filepath"] = d2d::FilenameTools::getRelativePath(dir, top_path).ToStdString();
 	value["user type"] = m_toolbar->GetType();
+	value["tag"] = m_toolbar->GetTag();
 	value["clipbox"]["w"] = m_clipbox.xLength();
 	value["clipbox"]["h"] = m_clipbox.yLength();
 	value["clipbox"]["x"] = m_clipbox.xMin;
 	value["clipbox"]["y"] = m_clipbox.yMax;
+	d2d::Rect r = items_sprite.GetRect();
+	value["children"]["w"] = r.xLength();
+	value["children"]["h"] = r.yLength();
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(ui_path.c_str());
