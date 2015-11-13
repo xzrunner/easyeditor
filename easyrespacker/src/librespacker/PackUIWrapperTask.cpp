@@ -9,6 +9,7 @@ namespace librespacker
 
 PackUIWrapperTask::PackUIWrapperTask(const std::string& filepath, const Json::Value& value)
 	: PackUITask(filepath)
+	, m_id(-1)
 {
 	std::string wrapper_filepath = value["wrapper filepath"].asString();
 	wrapper_filepath = d2d::FilenameTools::getAbsolutePathFromFile(filepath, wrapper_filepath);
