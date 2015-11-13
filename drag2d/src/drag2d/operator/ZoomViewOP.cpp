@@ -47,6 +47,7 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 		{
 			Camera* cam = m_stage->GetCamera();
 			cam->Reset();
+			m_stage->SetCanvasDirty();
 		}
 		break;
 	}
