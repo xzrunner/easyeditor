@@ -1,6 +1,5 @@
 #include "LabelBuilder.h"
 #include "PackLabel.h"
-#include "PackAnchor.h"
 #include "Utility.h"
 
 namespace librespacker
@@ -13,7 +12,6 @@ LabelBuilder::LabelBuilder()
 LabelBuilder::~LabelBuilder()
 {
 	for_each(m_labels.begin(), m_labels.end(), DeletePointerFunctor<const PackLabel>());
-	for_each(m_anchors.begin(), m_anchors.end(), DeletePointerFunctor<const PackAnchor>());
 }
 
 void LabelBuilder::Traverse(d2d::IVisitor& visitor) const
@@ -29,12 +27,6 @@ void LabelBuilder::Traverse(d2d::IVisitor& visitor) const
 
 const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
 {
-	if (Utility::IsAnchor(spr)) {
-		PackAnchor* anchor = new PackAnchor;
-		m_anchors.push_back(anchor);
-		return anchor;
-	}
-
 	for (int i = 0, n = m_labels.size(); i < n; ++i) 
 	{
 		const PackLabel* label = m_labels[i];

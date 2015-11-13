@@ -3,7 +3,6 @@
 #include "PackNodeFactory.h"
 #include "PackClipbox.h"
 #include "ExportNameSet.h"
-#include "PackAnchor.h"
 #include "Utility.h"
 #include "ClipboxBuilder.h"
 
@@ -25,12 +24,6 @@ ComplexBuilder::~ComplexBuilder()
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
 	}
-
-	std::map<const ecomplex::Symbol*, const PackAnchor*>::iterator
-		itr2 = m_map_anchors.begin();
-	for ( ; itr2 != m_map_anchors.end(); ++itr2) {
-		delete itr2->second;
-	}
 }
 
 void ComplexBuilder::Traverse(d2d::IVisitor& visitor) const
@@ -48,27 +41,13 @@ void ComplexBuilder::Traverse(d2d::IVisitor& visitor) const
 
 const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 {
-	std::map<const ecomplex::Symbol*, const PackAnchor*>::iterator
-		itr2 = m_map_anchors.find(symbol);
-	if (itr2 != m_map_anchors.end()) {
-		return itr2->second;
-	}
-
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(symbol);
 	if (itr != m_map_data.end()) {
 		return itr->second;
 	}
 
-	if (symbol->m_sprites.size() == 1 && Utility::IsAnchor(symbol->m_sprites[0])) {
-		LoadAnchor(symbol);
-
-		PackAnchor* anchor = new PackAnchor;
-		m_map_anchors.insert(std::make_pair(symbol, anchor));
-		return anchor;
-	} else {		
-		return LoadComplex(symbol);
-	}
+	return LoadComplex(symbol);
 }
 
 IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)

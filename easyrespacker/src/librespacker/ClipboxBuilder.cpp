@@ -1,6 +1,5 @@
 #include "ClipboxBuilder.h"
 #include "PackClipbox.h"
-#include "PackAnchor.h"
 #include "Utility.h"
 
 namespace librespacker

@@ -22,6 +22,9 @@
 #include "Terrain2DBuilder.h"
 #include <easyterrain2d.h>
 
+// anchor
+#include "AnchorBuilder.h"
+
 // particle3d
 #include "Particle3DBuilder.h"
 #include <easyparticle3d.h>
@@ -57,6 +60,9 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_anim_builder = new AnimBuilder(m_export_set));
 	m_builders.push_back(m_terrain2d_builder = new Terrain2DBuilder);
 
+	// anchor
+	m_builders.push_back(m_anchor_builder = new AnchorBuilder);
+
 	// particle3d
 	m_builders.push_back(m_particle3d_builder = new Particle3DBuilder(m_export_set));
 
@@ -67,9 +73,14 @@ PackNodeFactory::PackNodeFactory()
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 {
 	const IPackNode* node = NULL;
+
+	// anchor
+	if (spr->IsAnchor()) {
+		node = m_anchor_builder->Create(spr);
+	}
 	
 	// picture
-	if (const d2d::ImageSprite* image = dynamic_cast<const d2d::ImageSprite*>(spr)) {
+	else if (const d2d::ImageSprite* image = dynamic_cast<const d2d::ImageSprite*>(spr)) {
 		node = m_img_builder->Create(image);
 	} else if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(spr)) {
 		node = m_scale9_builder->Create(scale9);

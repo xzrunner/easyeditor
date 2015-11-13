@@ -13,7 +13,6 @@ namespace librespacker
 class IPackNode;
 class PackAnimation;
 class ExportNameSet;
-class PackAnchor;
 class ClipboxBuilder;
 
 class ComplexBuilder : public INodeBuilder
@@ -41,8 +40,6 @@ private:
 	ClipboxBuilder* m_cb_builder;
 
 	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
-
-	std::map<const ecomplex::Symbol*, const PackAnchor*> m_map_anchors;
 
 }; // ComplexBuilder
 

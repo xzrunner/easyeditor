@@ -24,6 +24,9 @@ class ComplexBuilder;
 class AnimBuilder;
 class Terrain2DBuilder;
 
+// anchor
+class AnchorBuilder;
+
 // particle3d
 class Particle3DBuilder;
 
@@ -77,6 +80,9 @@ private:
 	ComplexBuilder* m_complex_builder;
 	AnimBuilder* m_anim_builder;
 	Terrain2DBuilder* m_terrain2d_builder;
+
+	// anchor
+	AnchorBuilder* m_anchor_builder;
 
 	// particle3d
 	Particle3DBuilder* m_particle3d_builder;

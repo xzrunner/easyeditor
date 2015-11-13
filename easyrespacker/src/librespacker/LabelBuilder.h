@@ -10,7 +10,6 @@ namespace librespacker
 
 class IPackNode;
 class PackLabel;
-class PackAnchor;
 
 class LabelBuilder : public INodeBuilder
 {
@@ -26,7 +25,6 @@ public:
 
 private:
 	std::vector<const PackLabel*> m_labels;
-	std::vector<const PackAnchor*> m_anchors;
 
 }; // LabelBuilder
 

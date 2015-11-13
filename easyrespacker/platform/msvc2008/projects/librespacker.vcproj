@@ -276,6 +276,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="4. anchor"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\AnchorBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\AnchorBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="nodes"
