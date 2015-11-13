@@ -30,6 +30,8 @@ private:
 	void HandleSelectMenu(int id);
 	void HandleDebugTagMenu(int id);
 
+	void UpOneLayer();
+	void DownOneLayer();
 	void UpLayerMost();
 	void DownLayerMost();
 
@@ -41,7 +43,9 @@ private:
 private:
 	enum
 	{
-		MENU_UP_MOST			= 10000,
+		MENU_UP_LAYER			= 10000,
+		MENU_DOWN_LAYER,
+		MENU_UP_MOST,
 		MENU_DOWN_MOST,
 		MENU_HORI_MIRROR,
 		MENU_VERT_MIRROR,

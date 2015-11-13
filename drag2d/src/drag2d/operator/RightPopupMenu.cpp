@@ -10,7 +10,9 @@
 #include "view/MultiSpritesImpl.h"
 #include "dataset/ISymbol.h"
 #include "render/DynamicTexAndFont.h"
+
 #include "message/SelectSpriteSJ.h"
+#include "message/ReorderSpriteSJ.h"
 #include "message/ReorderSpriteMostSJ.h"
 
 namespace d2d
@@ -38,7 +40,7 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 
 void RightPopupMenu::OnRightPopupMenu(int id)
 {
-	if (id >= MENU_UP_MOST && id <= MENU_VERT_MIRROR) {
+	if (id >= MENU_UP_LAYER && id <= MENU_VERT_MIRROR) {
 		HandleCommonMenu(id);
 	} else if (id == MENU_INSERT_TO_DTEX || id == MENU_REMOVE_FROM_DTEX) {
 		HandleDebugTagMenu(id);
@@ -52,6 +54,11 @@ void RightPopupMenu::CreateCommonMenu(wxMenu& menu)
 	if (m_edited_sprs.empty()) {
 		return;
 	}
+
+	m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_UP_LAYER);
+	menu.Append(MENU_UP_LAYER, "上移一层");
+	m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_DOWN_LAYER);
+	menu.Append(MENU_DOWN_LAYER, "下移一层");	
 
 	m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_UP_MOST);
 	menu.Append(MENU_UP_MOST, "移到顶");
@@ -101,7 +108,11 @@ void RightPopupMenu::CreateDebugMenu(wxMenu& menu)
 
 void RightPopupMenu::HandleCommonMenu(int id)
 {
-	if (id == MENU_UP_MOST) {
+	if (id == MENU_UP_LAYER) {
+		UpOneLayer();
+	} else if (id == MENU_DOWN_LAYER) {
+		DownOneLayer();
+	} else if (id == MENU_UP_MOST) {
 		UpLayerMost();
 	} else if (id == MENU_DOWN_MOST) {
 		DownLayerMost();
@@ -150,17 +161,31 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 	}
 }
 
+void RightPopupMenu::UpOneLayer()
+{
+	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
+		ReorderSpriteSJ::Instance()->Reorder(m_edited_sprs[i], true);
+	}
+}
+
+void RightPopupMenu::DownOneLayer()
+{
+	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
+		ReorderSpriteSJ::Instance()->Reorder(m_edited_sprs[i], false);
+	}
+}
+
 void RightPopupMenu::UpLayerMost()
 {
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		d2d::ReorderSpriteMostSJ::Instance()->Reorder(m_edited_sprs[i], true);
+		ReorderSpriteMostSJ::Instance()->Reorder(m_edited_sprs[i], true);
 	}
 }
 
 void RightPopupMenu::DownLayerMost()
 {
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		d2d::ReorderSpriteMostSJ::Instance()->Reorder(m_edited_sprs[i], false);
+		ReorderSpriteMostSJ::Instance()->Reorder(m_edited_sprs[i], false);
 	}
 }
 
