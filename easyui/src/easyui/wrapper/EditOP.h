@@ -17,6 +17,8 @@ class EditOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>, public EditCli
 public:
 	EditOP(StagePanel* stage, d2d::PropertySettingPanel* property);
 
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyUp(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
 	virtual bool OnMouseDrag(int x, int y);

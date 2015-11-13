@@ -14,6 +14,16 @@ EditOP::EditOP(StagePanel* stage, d2d::PropertySettingPanel* property)
 {
 }
 
+bool EditOP::OnKeyDown(int keyCode)
+{
+	return d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::OnKeyDown(keyCode);
+}
+
+bool EditOP::OnKeyUp(int keyCode)
+{
+	return d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::OnKeyUp(keyCode);	
+}
+
 bool EditOP::OnMouseLeftDown(int x, int y)
 {
 	if (EditClipboxOP::OnMouseLeftDown(x, y)) {
