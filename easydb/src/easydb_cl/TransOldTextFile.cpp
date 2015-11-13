@@ -114,6 +114,9 @@ bool TransOldTextFile::TransSprite(Json::Value& value) const
 		txt_val["font_color"] = value["color"];
 		value["color"] = NULL;
 	}
+	if (!value["size"].isNull()) {
+		txt_val["font_size"] = value["size"];
+	}
 	if (!value["label_width"].isNull()) {
 		txt_val["width"] = value["label_width"];
 		txt_val["height"] = value["label_height"];

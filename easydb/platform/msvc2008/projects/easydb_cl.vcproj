@@ -622,11 +622,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\TransOldAnchorFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\TransOldAnchorFile.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\TransOldShapeFile.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\easydb_cl\TransOldShapeFile.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\TransOldTextFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\TransOldTextFile.h"
 					>
 				</File>
 			</Filter>

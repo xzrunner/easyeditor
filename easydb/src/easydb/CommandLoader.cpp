@@ -55,6 +55,7 @@
 #include "UnpackLuaDescFile.h"
 #include "ChangeJsonName.h"
 #include "TransOldTextFile.h"
+#include "TransOldAnchorFile.h"
 
 namespace edb
 {
@@ -115,6 +116,7 @@ void CommandLoader::Init()
 	fc->Register(UnpackLuaDescFile::Create());
 	fc->Register(ChangeJsonName::Create());
 	fc->Register(TransOldTextFile::Create());
+	fc->Register(TransOldAnchorFile::Create());
 }
 
 }
