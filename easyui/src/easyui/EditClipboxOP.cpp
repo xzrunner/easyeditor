@@ -49,17 +49,17 @@ bool EditClipboxOP::OnMouseDrag(int x, int y)
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_clipbox_selected == 0) {
-		m_rect.xMin = pos.x;			
-		m_rect.yMin = pos.y;
+		m_rect.xMin = std::min(m_rect.xMax, pos.x);			
+		m_rect.yMin = std::min(m_rect.yMax, pos.y);
 	} else if (m_clipbox_selected == 1) {
-		m_rect.xMin = pos.x;			
-		m_rect.yMax = pos.y;
+		m_rect.xMin = std::min(m_rect.xMax, pos.x);
+		m_rect.yMax = std::max(m_rect.yMin, pos.y);
 	} else if (m_clipbox_selected == 2) {
-		m_rect.xMax = pos.x;			
-		m_rect.yMax = pos.y;
+		m_rect.xMax = std::max(m_rect.xMin, pos.x);
+		m_rect.yMax = std::max(m_rect.yMin, pos.y);
 	} else if (m_clipbox_selected == 3) {
-		m_rect.xMax = pos.x;
-		m_rect.yMin = pos.y;
+		m_rect.xMax = std::max(m_rect.xMin, pos.x);
+		m_rect.yMin = std::min(m_rect.yMax, pos.y);
 	}
 	m_stage->SetCanvasDirty();
 
