@@ -102,6 +102,10 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 
 void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 {
+	if (spr->GetText().empty()) {
+		return;
+	}
+
 	dtex_shader_texture(0);
 	d2d::ShaderMgr::Instance()->SetTexture(0);
 
