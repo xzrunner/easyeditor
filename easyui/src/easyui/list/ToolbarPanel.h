@@ -24,11 +24,16 @@ protected:
 private:
 	void OnItemFilling(wxCommandEvent& event);
 
+	void OnChangeSize(wxCommandEvent& event);
+
 	void OnChangeHori(wxCommandEvent& event);
 	void OnChangeVert(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage_panel;
+
+	wxTextCtrl* m_width_text;
+	wxTextCtrl* m_height_text;
 
 	wxCheckBox* m_hori_check;
 	wxCheckBox* m_vert_check;
