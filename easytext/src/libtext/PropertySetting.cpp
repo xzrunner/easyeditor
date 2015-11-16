@@ -120,8 +120,8 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	sz_prop->SetExpanded(false);
 	int width, height;
 	spr->GetSize(width, height);
-	pg->AppendIn(sz_prop, new wxFloatProperty("Width", wxPG_LABEL, width));
-	pg->AppendIn(sz_prop, new wxFloatProperty("Height", wxPG_LABEL, height));
+	pg->AppendIn(sz_prop, new wxIntProperty("Width", wxPG_LABEL, width));
+	pg->AppendIn(sz_prop, new wxIntProperty("Height", wxPG_LABEL, height));
 
 	const std::vector<std::pair<std::string, std::string> >& 
 		fonts = d2d::Config::Instance()->GetFonts();
@@ -130,7 +130,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 		choices.push_back(fonts[i].first);
 	}
 	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
-	pg->Append(new wxFloatProperty("FontSize", wxPG_LABEL, spr->GetFontSize()));
+	pg->Append(new wxIntProperty("FontSize", wxPG_LABEL, spr->GetFontSize()));
 	const d2d::Colorf& font_col = spr->GetFontColor();
 	pg->Append(new wxColourProperty("FontColor", wxPG_LABEL, wxColour(font_col.r*255, font_col.g*255, font_col.b*255, font_col.a*255)));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", false);
