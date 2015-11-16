@@ -1,21 +1,33 @@
 #include "LabelToSpr.h"
 
+#include <easytext.h>
+
 namespace ecomplex
 {
 
 d2d::ISprite* LabelToSpr::Trans(const librespacker::PackLabel* label)
 {
-	d2d::FontBlankSymbol* symbol = new d2d::FontBlankSymbol();
+	etext::Symbol* symbol = new etext::Symbol();
 
-	d2d::FontSprite* spr = new d2d::FontSprite(symbol);
-	spr->font = label->font;
-	spr->has_edge = label->has_edge;
-	spr->color = label->color;
-	spr->align_hori = (d2d::HoriAlignType)(label->align_hori);
-	spr->align_vert = (d2d::VertAlignType)(label->align_vert);
-	spr->size = label->size;
-	spr->width = label->width;
-	spr->height = label->height;
+	etext::Sprite* spr = new etext::Sprite(symbol);
+
+	spr->SetSize(label->width, label->height);
+
+	spr->SetFont(label->font);
+	spr->SetFontSize(label->font_size);
+	spr->SetFontColor(label->font_color);
+	
+	spr->SetEdge(label->edge);
+	spr->SetEdgeSize(label->edge_size);
+	spr->SetEdgeColor(label->edge_color);
+
+	spr->SetAlign(label->align_hori, label->align_vert);
+	
+	spr->SetSpace(label->space_hori, label->space_vert);
+
+	spr->SetText(label->text);
+	spr->SetTID(label->tid);
+
 	return spr;
 }
 

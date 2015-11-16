@@ -11,20 +11,24 @@ namespace librespacker
 class PackLabel : public IPackNode
 {
 public:
-	std::string name;
-	std::string font;
+	int width;
+	int height;
+
+	int font;
+	int font_size;
+	d2d::Colorf font_color;
+
+	bool edge;
+	float edge_size;
+	d2d::Colorf edge_color;
 
 	int align_hori;
 	int align_vert;
 
-	d2d::Colorf color;	// PT_ARGB
+	float space_hori;
+	float space_vert;
 
-	int size;
-	int width, height;
-
-	bool has_edge;
-
-	std::string content;
+	std::string text;
 	std::string tid;
 
 public:

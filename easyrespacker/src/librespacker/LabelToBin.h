@@ -9,7 +9,7 @@ namespace librespacker
 class LabelToBin
 {
 public:
-	static int Size();
+	static int Size(const PackLabel* label);
 
 	static void Pack(const PackLabel* label, uint8_t** ptr);
 

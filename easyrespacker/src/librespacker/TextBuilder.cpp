@@ -28,41 +28,62 @@ void TextBuilder::Traverse(d2d::IVisitor& visitor) const
 
 const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 {
+	int w, h;
+	spr->GetSize(w, h);
+
+	int align_h, align_v;
+	spr->GetAlign(align_h, align_v);
+
+	float space_h, space_v;
+	spr->GetSpace(space_h, space_v);
+
 	for (int i = 0, n = m_labels.size(); i < n; ++i) 
 	{
 		const PackLabel* label = m_labels[i];
-		int align_h, align_v;
-		spr->GetAlign(align_h, align_v);
-		int w, h;
-		spr->GetSize(w, h);
-		if (label->align_hori == align_h &&
-			label->align_vert == align_v && 
-			label->color == spr->GetFontColor() &&
-			label->size == spr->GetFontSize() &&
-			label->width == w &&
-			label->height == h &&
-			label->has_edge == spr->GetEdge()) {
+		if (label->width		== w &&
+			label->height		== h &&
+
+			label->font			== spr->GetFont() &&
+			label->font_size	== spr->GetFontSize() &&
+			label->font_color	== spr->GetFontColor() &&
+
+			label->edge			== spr->GetEdge() &&
+			label->edge_size	== spr->GetEdgeSize() &&
+			label->edge_color	== spr->GetEdgeColor() &&
+
+			label->align_hori	== align_h &&
+			label->align_vert	== align_v &&
+
+			label->space_hori	== space_h &&
+			label->space_vert	== space_v &&
+
+			label->text			== spr->GetText() &&
+			label->tid			== spr->GetTID()) {
 			return label;
 		}
 	} 
 
-	int align_h, align_v;
-	spr->GetAlign(align_h, align_v);
-	int w, h;
-	spr->GetSize(w, h);
-
 	PackLabel* node = new PackLabel;
+
+	node->width	= w;
+	node->height = h;
+
+	node->font = spr->GetFont();
+	node->font_size = spr->GetFontSize();
+	node->font_color = spr->GetFontColor();
+
+	node->edge = spr->GetEdge();
+	node->edge_size = spr->GetEdgeSize();
+	node->edge_color = spr->GetEdgeColor();
 
 	node->align_hori = align_h;
 	node->align_vert = align_v;
-	
-	node->color = spr->GetFontColor();
 
-	node->size = spr->GetFontSize();
-	node->width = w;
-	node->height = h;
+	node->space_hori = space_h;
+	node->space_vert = space_v;
 
-	node->has_edge = spr->GetEdge();
+	node->text = spr->GetText();
+	node->tid = spr->GetTID();
 
 	m_labels.push_back(node);
 

@@ -17,7 +17,6 @@ class IconBuilder;
 class TextureBuilder;
 
 // label
-class LabelBuilder;
 class TextBuilder;
 
 // animation
@@ -53,8 +52,6 @@ public:
 		return m_export_set.GetData(); 
 	}
 
-	const LabelBuilder* GetLabelBuilder() const { return m_label_builder; }
-
 	static PackNodeFactory* Instance();
 
 private:
@@ -75,7 +72,6 @@ private:
 	TextureBuilder* m_tex_builder;
 
 	// label
-	LabelBuilder* m_label_builder;
 	TextBuilder* m_text_builder;
 
 	// animation

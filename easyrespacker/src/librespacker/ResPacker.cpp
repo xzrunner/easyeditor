@@ -2,7 +2,6 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 #include "PackUI.h"
-#include "LabelBuilder.h"
 
 #include "PackToLuaString.h"
 #include "PackToBin.h"
@@ -56,7 +55,7 @@ void ResPacker::OutputUIExtra(const std::string& outfile) const
 	Json::Value value;
 
 	PackUI::Instance()->Output(dir, value);
-	PackNodeFactory::Instance()->GetLabelBuilder()->OutputExtraInfo(value);
+//	PackNodeFactory::Instance()->GetLabelBuilder()->OutputExtraInfo(value);
 
 	if (value.isNull()) {
 		return;

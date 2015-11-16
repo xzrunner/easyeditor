@@ -17,21 +17,31 @@ void LabelToLuaString::Pack(const PackLabel* label, ebuilder::CodeGenerator& gen
 	lua::assign_with_end(gen, "type", "\"label\"");
 	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(label->GetID()));
 
-	std::ostringstream ss;
-	ss << "font = \"" << label->font << "\", ";
-	ss << "color = " << d2d::transColor(label->color, d2d::PT_BGRA) << ", ";
-	ss << "align = " << (label->align_hori | (label->align_vert << 4)) << ", ";
-	ss << "size = " << label->size << ", ";
-	ss << "width = " << label->width << ", ";
-	ss << "height = " << label->height << ", ";
-	ss << "noedge = ";
-	if (label->has_edge) {
-		ss << "false";
-	} else {
-		ss << "true";
-	}
+	lua::connect(gen, 2, 
+		lua::assign("width", label->width), 
+		lua::assign("height", label->height));
 
-	gen.line(ss.str());
+	lua::connect(gen, 3, 
+		lua::assign("font", label->font), 
+		lua::assign("font_size", label->font_size),
+		lua::assign("font_color", d2d::transColor(label->font_color, d2d::PT_BGRA)));
+
+	lua::connect(gen, 3, 
+		lua::assign("edge", label->edge), 
+		lua::assign("edge_size", label->edge_size),
+		lua::assign("edge_color", d2d::transColor(label->edge_color, d2d::PT_BGRA)));
+
+	lua::connect(gen, 2, 
+		lua::assign("align_hori", label->align_hori), 
+		lua::assign("align_vert", label->align_vert));
+
+	lua::connect(gen, 2, 
+		lua::assign("space_hori", label->space_hori), 
+		lua::assign("space_vert", label->space_vert));
+
+	lua::connect(gen, 2, 
+		lua::assign("text", label->text), 
+		lua::assign("tid", label->tid));
 
 	gen.detab();
 	gen.line("},");

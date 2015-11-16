@@ -72,15 +72,25 @@ struct pack_pannel {
 #define SIZEOF_PANNEL (sizeof(struct pack_pannel))
 
 struct pack_label {
-	uint32_t color;
 	int width;
 	int height;
-	int align;
-	int size;
+
+	int font;
+	int font_size;
+	uint32_t font_color;
+
 	int edge;
-	int space_h;
-	int space_w;
-	int auto_scale;
+	float edge_size;
+	uint32_t edge_color;
+
+	int align_hori;
+	int align_vert;
+
+	float space_hori;
+	float space_vert;
+
+	const char* text;
+	const char* tid;
 };
 
 #define SIZEOF_LABEL (sizeof(struct pack_label))

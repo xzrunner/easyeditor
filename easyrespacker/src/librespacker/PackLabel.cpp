@@ -28,7 +28,7 @@ void PackLabel::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& imag
 
 int PackLabel::SizeOfPackToBin() const
 {
-	return LabelToBin::Size();
+	return LabelToBin::Size(this);
 }
 
 void PackLabel::PackToBin(uint8_t** ptr, 
@@ -40,7 +40,7 @@ void PackLabel::PackToBin(uint8_t** ptr,
 
 int PackLabel::SizeOfUnpackFromBin() const
 {
-	return LabelFromBin::Size();
+	return LabelFromBin::Size(this);
 }
 
 void PackLabel::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
