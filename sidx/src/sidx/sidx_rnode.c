@@ -1,0 +1,317 @@
+#include "sidx_rnode.h"
+#include "sidx_region.h"
+#include "sidx_rtree_cfg.h"
+
+#include <string.h>
+#include <assert.h>
+#include <float.h>
+#include <math.h>
+#include <stdint.h>
+
+#define MAX_NODES 1024
+#define NODE_CAPACITY 32
+#define FILL_FACTOR 0.4f
+
+struct sidx_rnode {
+	void* ud;
+
+	int level;
+
+	struct sidx_region region;
+
+	struct sidx_rnode* children[NODE_CAPACITY+1];
+	int children_size;
+
+	struct sidx_rnode* parent;
+};
+
+static struct sidx_rnode FREELIST[MAX_NODES];
+static int NEXT_NODE = 0;
+
+struct sidx_rnode* 
+sidx_rnode_new() {
+	if (NEXT_NODE < MAX_NODES) {
+		struct sidx_rnode* n = &FREELIST[NEXT_NODE++];
+		memset(n, 0,sizeof(*n));
+		REGION_INIT(n->region)
+		return n;
+	} else {
+		return NULL;
+	}
+}
+
+static struct sidx_rnode*
+_find_least_enlargement(struct sidx_rnode* node, struct sidx_region* r) {
+	assert(node->children_size > 0);
+	struct sidx_rnode* best = NULL;
+	float area_min = FLT_MAX;
+	struct sidx_region comb;
+	for (int i = 0; i < node->children_size; ++i) {
+		struct sidx_rnode* c = node->children[i];
+		REGION_COMBINE(*r, c->region, comb)
+			float area = REGION_AREA(c->region);
+		float enlarge = REGION_AREA(comb) - area;
+		if (enlarge < area_min) {
+			area_min = enlarge;
+			best = c;
+		} else if (enlarge == area_min) {
+			if (area < REGION_AREA(best->region)) {
+				best = c;
+			}
+		}
+	}
+	return best;
+}
+
+struct sidx_rnode* 
+sidx_rnode_choose_subtree(struct sidx_rnode* node, struct sidx_region* r) {
+	if (node->children_size == 0) {
+		return node;
+	} 
+	
+	struct sidx_rnode* child = NULL;
+	switch (RTREE_STRATEGY) {
+	case LINEAR:
+	case QUADRATIC:
+		child = _find_least_enlargement(node, r);
+		break;
+	}
+
+	return sidx_rnode_choose_subtree(child, r);
+}
+
+static void
+_insert_data(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
+	assert(node->children_size < NODE_CAPACITY);
+
+	struct sidx_rnode* c = sidx_rnode_new();
+	c->ud = ud;
+	c->region = *r;
+
+	node->children[node->children_size++] = c;
+	c->parent = node;
+
+	struct sidx_region comb;
+	REGION_COMBINE(node->region, *r, comb)
+	node->region = comb;
+}
+
+static void
+_adjust_tree(struct sidx_rnode* parent, struct sidx_rnode* child) {
+	if (REGION_CONTAINS(parent->region, child->region)) {
+		return;
+	}
+
+	struct sidx_region comb;
+	REGION_COMBINE(parent->region, child->region, comb)
+	parent->region = comb;
+	if (parent->parent) {
+		_adjust_tree(parent->parent, parent);
+	}
+}
+
+static void
+_peek_seed(struct sidx_rnode* node, int* seed1, int* seed2) {
+	assert(node->children_size >= 2);
+	if (node->children_size == 2) {
+		*seed1 = 0;
+		*seed2 = 1;
+		return;
+	}
+
+	switch (RTREE_STRATEGY) {
+	case LINEAR:
+	case RSTAR:
+		{
+			float xmin_max = FLT_MIN, xmax_min = FLT_MAX;
+			float ymin_max = FLT_MIN, ymax_min = FLT_MAX;
+			int xmin_max_node, xmax_min_node, ymin_max_node, ymax_min_node;
+			for (int i = 0; i < NODE_CAPACITY; ++i) {
+				struct sidx_rnode* n = node->children[i];
+				if (n->region.xmin > xmin_max) xmin_max_node = i;
+				if (n->region.xmax < xmax_min) xmax_min_node = i;
+				if (n->region.ymin > ymin_max) ymin_max_node = i;
+				if (n->region.ymax < ymax_min) ymax_min_node = i;
+			}
+
+			if (xmin_max - xmax_min > ymin_max - ymax_min) {
+				*seed1 = xmin_max_node;
+				*seed2 = xmax_min_node;
+			} else {
+				*seed1 = ymin_max_node;
+				*seed2 = ymax_min_node;
+			}
+			if (*seed1 == *seed2) {
+				*seed2 = (*seed2 == 0 ? 1 : *seed2 - 1);
+			}
+		}
+		break;
+	case QUADRATIC:
+		{
+			float max_area = FLT_MIN;
+			for (int i = 0; i < NODE_CAPACITY; ++i) {
+				for (int j = i + 1; j <= NODE_CAPACITY; ++j) {
+					struct sidx_rnode* node1 = node->children[i];
+					struct sidx_rnode* node2 = node->children[j];
+					struct sidx_region comb;
+					REGION_COMBINE(node1->region, node2->region, comb);
+					float area = REGION_AREA(comb) - REGION_AREA(node1->region) - REGION_AREA(node2->region);
+					if (area > max_area) {
+						max_area = area;
+						*seed1 = i;
+						*seed2 = j;
+					}
+				}
+			}
+		}
+		break;
+	default:
+		assert(0);
+	}
+}
+
+static void
+_rtree_split(struct sidx_rnode* node, struct sidx_region* r, void* ud,
+			 int* group1, int* group1_size,
+			 int* group2, int* group2_size) {
+	struct sidx_rnode* new_node = sidx_rnode_new();
+	new_node->ud = ud;
+	new_node->level = node->level + 1;
+	new_node->region = *r;
+
+	assert(node->children_size == NODE_CAPACITY);
+	node->children[NODE_CAPACITY] = new_node;
+	
+	uint8_t mask[NODE_CAPACITY + 1];
+	memset(mask, 0, NODE_CAPACITY + 1);
+
+	int seed1, seed2;
+	_peek_seed(node, &seed1, &seed2);
+	mask[seed1] = mask[seed2] = 1;
+
+	struct sidx_region region1 = node->children[seed1]->region;
+	struct sidx_region region2 = node->children[seed2]->region;
+
+	group1[(*group1_size)++] = seed1;
+	group2[(*group2_size)++] = seed2;
+	
+	struct sidx_region comb1, comb2;
+
+	int min_load = floor(NODE_CAPACITY * FILL_FACTOR);
+	int remain = NODE_CAPACITY + 1 - 2;
+	while (remain > 0) {
+		if (min_load - *group1_size == remain) {
+			for (int i = 0; i < NODE_CAPACITY + 1; ++i) {
+				if (mask[i]) {
+					continue;
+				}
+				group1[(*group1_size)++] = i;
+				mask[i] = 1;
+				--remain;
+			}			
+		} else if (min_load - *group2_size == remain) {
+			for (int i = 0; i < NODE_CAPACITY + 1; ++i) {
+				if (mask[i]) {
+					continue;
+				}
+				group2[(*group2_size)++] = i;
+				mask[i] = 1;
+				--remain;
+			}
+		} else {
+			float area1 = REGION_AREA(region1);
+			float area2 = REGION_AREA(region2);
+			float m = FLT_MIN;
+			float md1 = 0, md2 = 0;
+			int sel;
+			for (int i = 0; i < NODE_CAPACITY + 1; ++i) {
+				if (mask[i]) {
+					continue;
+				}
+				struct sidx_rnode* c = node->children[i];
+				REGION_COMBINE(c->region, region1, comb1);
+				float d1 = REGION_AREA(comb1) - area1;
+				REGION_COMBINE(c->region, region2, comb2);
+				float d2 = REGION_AREA(comb2) - area2;
+				float d = fabs(d1 - d2);
+				if (d > m) {
+					m = d;
+					md1 = d1;
+					md2 = d2;
+					sel = i;
+					if (RTREE_STRATEGY == LINEAR || RTREE_STRATEGY == RSTAR) {
+						break;
+					}
+				}
+			}
+			bool is_group1 = false;
+			if (md1 < md2) {
+				group1[(*group1_size)++] = sel;
+				is_group1 = true;
+			} else if (md1 > md2) {
+				group2[(*group2_size)++] = sel;
+				is_group1 = false;
+			} else if (area1 < area2) {
+				group1[(*group1_size)++] = sel;
+				is_group1 = true;
+			} else if (area1 > area2) {
+				group2[(*group2_size)++] = sel;
+				is_group1 = false;
+			} else if (group1_size < group2_size) {
+				group1[(*group1_size)++] = sel;
+				is_group1 = true;
+			} else if (group1_size > group2_size) {
+				group2[(*group2_size)++] = sel;
+				is_group1 = false;
+			} else {
+				group1[(*group1_size)++] = sel;
+				is_group1 = true;
+			}
+			mask[sel] = 1;
+			--remain;
+			if (is_group1) {
+				REGION_COMBINE(node->children[sel]->region, region1, region1);
+			} else {
+				REGION_COMBINE(node->children[sel]->region, region2, region2);
+			}
+		}
+	}
+}
+
+static void
+_split(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
+	int group1[NODE_CAPACITY];
+	int group2[NODE_CAPACITY];
+	int group1_size = 0, group2_size = 0;
+	switch (RTREE_STRATEGY) {
+	case LINEAR:
+	case QUADRATIC:
+		_rtree_split(node, r, ud, group1, &group1_size, group2, &group2_size);
+		break;
+	case RSTAR:
+		break;
+	default:
+		assert(0);
+	}
+
+	struct sidx_rnode* new_node = sidx_rnode_new();
+	for (int i = 0; i < group2_size; ++i) {
+		
+	}
+}
+
+bool 
+sidx_rnode_insert_data(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
+	if (node->children_size < NODE_CAPACITY) {
+		bool adjusted = false;
+		bool contain = REGION_CONTAINS(node->region, *r);
+		_insert_data(node, r, ud);
+		if (!contain && node->parent) {
+			_adjust_tree(node->parent, node);
+			adjusted = true;
+		}
+		return adjusted;
+	} else {
+	}
+}
+
