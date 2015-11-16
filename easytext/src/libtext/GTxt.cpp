@@ -21,6 +21,7 @@ static const char* CFG =
 
 GTxt::GTxt()
 {
+	d2d::ShaderMgr::Instance()->sprite();
 	Init();
 }
 
