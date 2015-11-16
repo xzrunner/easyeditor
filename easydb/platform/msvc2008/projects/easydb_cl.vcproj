@@ -622,6 +622,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\TransNewTextFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\TransNewTextFile.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\TransOldAnchorFile.cpp"
 					>
 				</File>

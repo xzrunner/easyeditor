@@ -56,6 +56,7 @@
 #include "ChangeJsonName.h"
 #include "TransOldTextFile.h"
 #include "TransOldAnchorFile.h"
+#include "TransNewTextFile.h"
 
 namespace edb
 {
@@ -117,6 +118,7 @@ void CommandLoader::Init()
 	fc->Register(ChangeJsonName::Create());
 	fc->Register(TransOldTextFile::Create());
 	fc->Register(TransOldAnchorFile::Create());
+	fc->Register(TransNewTextFile::Create());
 }
 
 }
