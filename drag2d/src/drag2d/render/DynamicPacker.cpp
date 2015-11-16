@@ -103,9 +103,11 @@ void DynamicPacker::DebugDraw() const
 
 	if (dtex_cg* cg = dtexf_get_cg()) {
 		int id = dtex_cg_get_texid(cg);
-//		int id = m_tex;
 		shader->Draw(vb, id);
 	}
+
+// 	int id = m_tex;
+// 	shader->Draw(vb, id);
 
 	PrimitiveDraw::rect(Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
