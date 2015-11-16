@@ -88,6 +88,7 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	{
 		etext::EditDialog dlg(m_wnd, text, m_sprites_impl);
 		dlg.ShowModal();
+		etext::GTxt::Instance()->Clear();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
 		m_stage->ResetViewport();

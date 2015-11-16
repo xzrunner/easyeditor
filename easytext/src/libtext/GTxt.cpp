@@ -143,6 +143,11 @@ void GTxt::ReloadTexture()
 	gtxt_render_init(cg);
 }
 
+void GTxt::Clear()
+{
+	dtexf_cg_clear();
+}
+
 GTxt* GTxt::Instance()
 {
 	if (!m_instance) {
