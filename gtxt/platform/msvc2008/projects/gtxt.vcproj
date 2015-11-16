@@ -145,36 +145,8 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="external"
-			>
-			<Filter
-				Name="ejoy2d"
-				>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\renderbuffer.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\shader.h"
-					>
-				</File>
-				<Filter
-					Name="render"
-					>
-					<File
-						RelativePath="..\..\..\external\ejoy2d\render\render.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-		</Filter>
 		<File
 			RelativePath="..\..\..\src\gtxt\gtxt.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_ejoy2d.h"
 			>
 		</File>
 		<File

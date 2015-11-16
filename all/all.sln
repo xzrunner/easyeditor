@@ -462,6 +462,8 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libgtxt", "..\gtxt\platform
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtext", "..\easytext\platform\msvc2008\projects\libtext.vcproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
 EndProject
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libsidx", "..\sidx\platform\msvc2008\projects\sidx.icproj", "{594D7A78-858A-4B09-AE88-68C817B6EF61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -736,10 +738,16 @@ Global
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.Build.0 = Debug|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.Build.0 = Release|Win32
-		{E02AF14F-E641-483E-9584-5656508813C3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E02AF14F-E641-483E-9584-5656508813C3}.Release|Win32.ActiveCfg = Release|Win32
-		{1E8C38C4-93F3-4559-A6C7-0DC341689379}.Debug|Win32.ActiveCfg = Debug|Win32
-		{1E8C38C4-93F3-4559-A6C7-0DC341689379}.Release|Win32.ActiveCfg = Release|Win32
+		{4CA020B2-A21C-4AB9-A80D-FC5939E18119}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4CA020B2-A21C-4AB9-A80D-FC5939E18119}.Release|Win32.ActiveCfg = Release|Win32
+		{1FED60B4-45D9-461B-92C5-2A0CE1CBC60E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1FED60B4-45D9-461B-92C5-2A0CE1CBC60E}.Release|Win32.ActiveCfg = Release|Win32
+		{594D7A78-858A-4B09-AE88-68C817B6EF61}.Debug|Win32.ActiveCfg = Debug|Win32
+		{594D7A78-858A-4B09-AE88-68C817B6EF61}.Debug|Win32.Build.0 = Debug|Win32
+		{594D7A78-858A-4B09-AE88-68C817B6EF61}.Release|Win32.ActiveCfg = Release|Win32
+		{594D7A78-858A-4B09-AE88-68C817B6EF61}.Release|Win32.Build.0 = Release|Win32
+		{D81702B2-53CA-4BE9-BF9C-5DD27084FE9C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D81702B2-53CA-4BE9-BF9C-5DD27084FE9C}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
