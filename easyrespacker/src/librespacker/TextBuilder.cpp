@@ -90,4 +90,25 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 	return node;
 }
 
+void TextBuilder::OutputExtraInfo(Json::Value& value) const
+{
+	for (int i = 0, n = m_labels.size(); i < n; ++i) {
+		const PackLabel* label = m_labels[i];
+		if (label->text.empty() && label->tid.empty()) {
+			continue;
+		}
+
+		Json::Value item_val;
+		item_val["type"] = "label";
+		item_val["id"] = label->GetID();
+		if (!label->text.empty()) {
+			item_val["content"] = d2d::StringTools::ToUtf8(label->text);
+		}
+		if (!label->tid.empty()) {
+			item_val["tid"] = d2d::StringTools::ToUtf8(label->tid);
+		}
+		value[value.size()] = item_val;
+	}
+}
+
 }

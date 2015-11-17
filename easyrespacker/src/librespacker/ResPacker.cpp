@@ -6,6 +6,8 @@
 #include "PackToLuaString.h"
 #include "PackToBin.h"
 
+#include "TextBuilder.h"
+
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyparticle3d.h>
@@ -55,7 +57,7 @@ void ResPacker::OutputUIExtra(const std::string& outfile) const
 	Json::Value value;
 
 	PackUI::Instance()->Output(dir, value);
-//	PackNodeFactory::Instance()->GetLabelBuilder()->OutputExtraInfo(value);
+	PackNodeFactory::Instance()->GetTextBuilder()->OutputExtraInfo(value);
 
 	if (value.isNull()) {
 		return;

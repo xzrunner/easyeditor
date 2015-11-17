@@ -4,6 +4,7 @@
 #include "INodeBuilder.h"
 
 #include <vector>
+#include <json/json.h>
 
 namespace etext { class Sprite; }
 
@@ -22,6 +23,8 @@ public:
 	virtual void Traverse(d2d::IVisitor& visitor) const;
 
 	const IPackNode* Create(const etext::Sprite* spr);
+
+	void OutputExtraInfo(Json::Value& value) const;
 
 private:
 	std::vector<const PackLabel*> m_labels;

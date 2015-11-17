@@ -52,6 +52,8 @@ public:
 		return m_export_set.GetData(); 
 	}
 
+	const TextBuilder* GetTextBuilder() const { return m_text_builder; }
+
 	static PackNodeFactory* Instance();
 
 private:
