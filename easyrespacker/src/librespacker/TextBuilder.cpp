@@ -37,31 +37,31 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 	float space_h, space_v;
 	spr->GetSpace(space_h, space_v);
 
-	for (int i = 0, n = m_labels.size(); i < n; ++i) 
-	{
-		const PackLabel* label = m_labels[i];
-		if (label->width		== w &&
-			label->height		== h &&
-
-			label->font			== spr->GetFont() &&
-			label->font_size	== spr->GetFontSize() &&
-			label->font_color	== spr->GetFontColor() &&
-
-			label->edge			== spr->GetEdge() &&
-			label->edge_size	== spr->GetEdgeSize() &&
-			label->edge_color	== spr->GetEdgeColor() &&
-
-			label->align_hori	== align_h &&
-			label->align_vert	== align_v &&
-
-			label->space_hori	== space_h &&
-			label->space_vert	== space_v &&
-
-			label->text			== spr->GetText() &&
-			label->tid			== spr->GetTID()) {
-			return label;
-		}
-	} 
+// 	for (int i = 0, n = m_labels.size(); i < n; ++i) 
+// 	{
+// 		const PackLabel* label = m_labels[i];
+// 		if (label->width		== w &&
+// 			label->height		== h &&
+// 
+// 			label->font			== spr->GetFont() &&
+// 			label->font_size	== spr->GetFontSize() &&
+// 			label->font_color	== spr->GetFontColor() &&
+// 
+// 			label->edge			== spr->GetEdge() &&
+// 			label->edge_size	== spr->GetEdgeSize() &&
+// 			label->edge_color	== spr->GetEdgeColor() &&
+// 
+// 			label->align_hori	== align_h &&
+// 			label->align_vert	== align_v &&
+// 
+// 			label->space_hori	== space_h &&
+// 			label->space_vert	== space_v &&
+// 
+// 			label->text			== spr->GetText() &&
+// 			label->tid			== spr->GetTID()) {
+// 			return label;
+// 		}
+// 	} 
 
 	PackLabel* node = new PackLabel;
 
