@@ -24,7 +24,7 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
 
 void OpenSymbolDialog::Open(d2d::ISprite* spr)
 {
-	if (spr->GetSymbol().GetFilepath().find("[gen].json")) {
+	if (spr->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
 	}
