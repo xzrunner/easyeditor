@@ -29,6 +29,8 @@ struct sidx_region {
 
 #define REGION_CONTAINS(a, b) ((a).xmin <= (b).xmin && (a).xmax >= (b).xmax && (a).ymin <= (b).ymin && (a).ymax >= (b).ymax)
 
+#define REGION_TOUCH(a, b) ((a).xmin == (b).xmin || (a).xmax == (b).xmax || (a).ymin == (b).ymin || (a).ymax == (b).ymax)
+
 #endif // spatial_index_region_h
 
 #ifdef __cplusplus

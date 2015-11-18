@@ -11,7 +11,8 @@ extern "C"
 struct sidx_rnode;
 struct sidx_region;
 
-struct sidx_rnode* sidx_rnode_new();
+struct sidx_rnode* sidx_rnode_create();
+void sidx_rnode_release(struct sidx_rnode* n);
 
 struct sidx_rnode* sidx_rnode_choose_subtree(struct sidx_rnode*, struct sidx_region*);
 
