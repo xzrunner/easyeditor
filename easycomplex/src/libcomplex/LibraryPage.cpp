@@ -26,8 +26,9 @@ bool LibraryPage::LoadFromConfig()
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
-	filter = "*_" + filter + ".json";
+	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
+	std::string filter = "*_" + tag + ".json";
+	filter += ";*_" + tag + "[gen].json";
 	filter += "; *.lua";
 	wxFileDialog dlg(this, wxT("导入complex文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

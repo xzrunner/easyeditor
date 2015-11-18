@@ -24,6 +24,11 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
 
 void OpenSymbolDialog::Open(d2d::ISprite* spr)
 {
+	if (spr->GetSymbol().GetFilepath().find("[gen].json")) {
+		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
+		return;
+	}
+
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
