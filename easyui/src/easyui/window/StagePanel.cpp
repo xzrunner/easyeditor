@@ -12,6 +12,7 @@
 #include "PreviewDialog.h"
 #include "Code.h"
 #include "widget_id.h"
+#include "SymbolCfg.h"
 
 #include <easycomplex.h>
 #include <easybuilder.h>
@@ -64,6 +65,15 @@ void StagePanel::Notify(int sj_id, void* ud)
 		break;
 	case MSG_RESET_VIEWPORT:
 		GetCanvas()->ResetViewport();
+		break;
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			d2d::ISprite* spr = p->spr;
+			std::string type = "unknown";
+			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
+			spr->tag += "type=" + type + ";";
+		}
 		break;
 	}
 }

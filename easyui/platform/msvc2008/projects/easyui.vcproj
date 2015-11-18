@@ -265,6 +265,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easyui\SymbolCfg.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\SymbolCfg.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easyui\TidCfg.cpp"
 				>
 			</File>
@@ -932,6 +940,10 @@
 				RelativePath="..\..\..\src\easyui\EditClipboxOP.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="config"
+			>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
