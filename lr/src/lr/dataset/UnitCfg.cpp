@@ -46,6 +46,8 @@ void UnitCfg::LoadFromFile(const char* filename)
 	reader.parse(fin, val);
 	fin.close();
 
+	col = val["layout"]["col"].asInt();
+
 	int idx = 0;
 	Json::Value w_val = val["widget"][idx++];
 	while (!w_val.isNull()) {

@@ -1,4 +1,8 @@
 {
+	"layout" :
+	{
+		"col" : 3
+	},
 	"widget" :
 	[
 		{

@@ -19,6 +19,8 @@ private:
 	void LoadFromFile(const char* filename);
 
 public:
+	int col;
+
 	std::vector<UnitWidget*> widgets;
 
 private:

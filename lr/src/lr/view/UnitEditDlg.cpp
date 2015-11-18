@@ -52,22 +52,25 @@ void UnitEditDlg::InitLayout()
 
 	wxSizer* main_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-	wxSizer *left_sizer = new wxBoxSizer(wxVERTICAL),
-		*right_sizer = new wxBoxSizer(wxVERTICAL);
-	int half_count = (cfg->widgets.size()/* + m_special_widgets.size()*/) / 2;
-	
+	int col = std::max(2, cfg->col);
+
+	std::vector<wxSizer*> col_sizers;
+	for (int i = 0; i < col; ++i) {
+		col_sizers.push_back(new wxBoxSizer(wxVERTICAL));
+	}
+
+	int count = std::ceil((float)(cfg->widgets.size()) / col);
+
 	for (int i = 0, n = cfg->widgets.size(); i < n; ++i) {
-		wxSizer* sz = i < half_count ? left_sizer : right_sizer;
+		int idx = i / count;
+		wxSizer* sz = col_sizers[idx];
 		cfg->widgets[i]->InitLayout(this, sz, m_info);
 	}
-// 	for (int i = 0, n = m_special_widgets.size(); i < n; ++i) {
-// 		wxSizer* sz = i + cfg->widgets.size() < half_count ? left_sizer : right_sizer;
-// 		m_special_widgets[i]->InitLayout(this, sz, m_info);		
-// 	}
 
-	main_sizer->Add(left_sizer);
-	main_sizer->Add(right_sizer);
-
+	for (int i = 0; i < col; ++i) {
+		main_sizer->Add(col_sizers[i]);
+		main_sizer->AddSpacer(20);
+	}
 	top_sizer->Add(main_sizer);
 
 	top_sizer->AddSpacer(20);
