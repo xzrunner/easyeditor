@@ -38,6 +38,8 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 
 	ctrl->name = value["name"].asString();
 
+	ctrl->ClearAllLayer();
+
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
