@@ -93,7 +93,7 @@ struct pack_label {
 	const char* tid;
 };
 
-#define SIZEOF_LABEL (sizeof(struct pack_label))
+#define SIZEOF_LABEL (sizeof(struct pack_label) + PTR_SIZE_DIFF * 2)
 
 struct pack_quad {
 	int texid;
