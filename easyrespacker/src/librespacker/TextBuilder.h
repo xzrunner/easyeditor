@@ -26,8 +26,17 @@ public:
 
 	void OutputExtraInfo(Json::Value& value) const;
 
+	void CacheBegin();
+	void CacheEnd();
+
+private:
+	const IPackNode* QueryCache(const etext::Sprite* spr) const;
+
 private:
 	std::vector<const PackLabel*> m_labels;
+
+	bool m_cache;
+	std::vector<const PackLabel*> m_cache_labels;
 
 }; // TextBuilder
 

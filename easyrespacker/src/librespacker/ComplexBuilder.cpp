@@ -6,6 +6,8 @@
 #include "Utility.h"
 #include "ClipboxBuilder.h"
 
+#include "TextBuilder.h"
+
 #include <easycomplex.h>
 
 namespace librespacker
@@ -47,7 +49,10 @@ const IPackNode* ComplexBuilder::Create(const ecomplex::Symbol* symbol)
 		return itr->second;
 	}
 
-	return LoadComplex(symbol);
+	PackNodeFactory::Instance()->GetTextBuilder()->CacheBegin();
+	IPackNode* node = LoadComplex(symbol);
+	PackNodeFactory::Instance()->GetTextBuilder()->CacheEnd();
+	return node;
 }
 
 IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)

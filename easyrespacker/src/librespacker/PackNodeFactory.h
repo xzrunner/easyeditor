@@ -53,6 +53,7 @@ public:
 	}
 
 	const TextBuilder* GetTextBuilder() const { return m_text_builder; }
+	TextBuilder* GetTextBuilder() { return m_text_builder; }
 
 	static PackNodeFactory* Instance();
 

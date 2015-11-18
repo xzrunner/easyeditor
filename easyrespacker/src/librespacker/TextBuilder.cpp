@@ -7,6 +7,7 @@ namespace librespacker
 {
 
 TextBuilder::TextBuilder()
+	: m_cache(false)
 {
 }
 
@@ -28,6 +29,13 @@ void TextBuilder::Traverse(d2d::IVisitor& visitor) const
 
 const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 {
+	if (m_cache) {
+		const IPackNode* node = QueryCache(spr);
+		if (node) {
+			return node;
+		}
+	}
+
 	int w, h;
 	spr->GetSize(w, h);
 
@@ -36,32 +44,6 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 
 	float space_h, space_v;
 	spr->GetSpace(space_h, space_v);
-
-// 	for (int i = 0, n = m_labels.size(); i < n; ++i) 
-// 	{
-// 		const PackLabel* label = m_labels[i];
-// 		if (label->width		== w &&
-// 			label->height		== h &&
-// 
-// 			label->font			== spr->GetFont() &&
-// 			label->font_size	== spr->GetFontSize() &&
-// 			label->font_color	== spr->GetFontColor() &&
-// 
-// 			label->edge			== spr->GetEdge() &&
-// 			label->edge_size	== spr->GetEdgeSize() &&
-// 			label->edge_color	== spr->GetEdgeColor() &&
-// 
-// 			label->align_hori	== align_h &&
-// 			label->align_vert	== align_v &&
-// 
-// 			label->space_hori	== space_h &&
-// 			label->space_vert	== space_v &&
-// 
-// 			label->text			== spr->GetText() &&
-// 			label->tid			== spr->GetTID()) {
-// 			return label;
-// 		}
-// 	} 
 
 	PackLabel* node = new PackLabel;
 
@@ -87,6 +69,10 @@ const IPackNode* TextBuilder::Create(const etext::Sprite* spr)
 
 	m_labels.push_back(node);
 
+	if (m_cache) {
+		m_cache_labels.push_back(node);
+	}
+
 	return node;
 }
 
@@ -109,6 +95,56 @@ void TextBuilder::OutputExtraInfo(Json::Value& value) const
 		}
 		value[value.size()] = item_val;
 	}
+}
+
+void TextBuilder::CacheBegin()
+{
+	m_cache = true;
+}
+
+void TextBuilder::CacheEnd()
+{
+	m_cache = false;
+	m_cache_labels.clear();
+}
+
+const IPackNode* TextBuilder::QueryCache(const etext::Sprite* spr) const
+{
+	int w, h;
+	spr->GetSize(w, h);
+
+	int align_h, align_v;
+	spr->GetAlign(align_h, align_v);
+
+	float space_h, space_v;
+	spr->GetSpace(space_h, space_v);
+
+	for (int i = 0, n = m_cache_labels.size(); i < n; ++i) {
+ 		const PackLabel* label = m_cache_labels[i];
+ 		if (label->width		== w &&
+ 			label->height		== h &&
+ 
+ 			label->font			== spr->GetFont() &&
+ 			label->font_size	== spr->GetFontSize() &&
+ 			label->font_color	== spr->GetFontColor() &&
+ 
+ 			label->edge			== spr->GetEdge() &&
+ 			label->edge_size	== spr->GetEdgeSize() &&
+ 			label->edge_color	== spr->GetEdgeColor() &&
+ 
+ 			label->align_hori	== align_h &&
+ 			label->align_vert	== align_v &&
+ 
+ 			label->space_hori	== space_h &&
+ 			label->space_vert	== space_v &&
+ 
+ 			label->text			== spr->GetText() &&
+ 			label->tid			== spr->GetTID()) {
+ 			return label;
+ 		}
+	}
+
+	return NULL;
 }
 
 }
