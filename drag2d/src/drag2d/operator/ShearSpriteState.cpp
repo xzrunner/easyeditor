@@ -74,11 +74,20 @@ void ShearSpriteState::Shear(const Vector& curr)
 	float kx = m_sprite->GetShear().x,
 		ky = m_sprite->GetShear().y;
 
-	float x, y;
-	float hw = m_sprite->GetSymbol().GetSize().xLength() * 0.5f,
-		hh = m_sprite->GetSymbol().GetSize().yLength() * 0.5f;
+	d2d::Rect r = m_sprite->GetSymbol().GetSize();
+//  	pos.x -= px;
+//  	pos.y -= py;
 
-	const d2d::Vector& offset = m_sprite->GetOffset();
+	d2d::Vector offset = m_sprite->GetOffset();
+	offset.x += px - r.xCenter();
+	offset.y += py - r.yCenter();
+
+	px = r.xCenter();
+	py = r.yCenter();
+
+	float x, y;
+	float hw = r.xLength() * 0.5f,
+		hh = r.yLength() * 0.5f;
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)
 	{
 		x = 0; y = hh - offset.y;
@@ -86,6 +95,10 @@ void ShearSpriteState::Shear(const Vector& curr)
 			kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
 		else
 			kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y);
+
+		if (fabs(kx) > 10) {
+			int zz = 0;
+		}
 	}
 	else if (m_ctrl_node.type == SpriteCtrlNode::DOWN)
 	{
