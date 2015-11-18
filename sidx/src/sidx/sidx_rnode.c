@@ -25,13 +25,34 @@ struct sidx_rnode {
 	struct sidx_rnode* parent;
 };
 
-static struct sidx_rnode FREELIST[MAX_NODES];
-static int NEXT_NODE = 0;
+// static struct sidx_rnode FREELIST[MAX_NODES];
+// static int NEXT_NODE = 0;
+
+struct node_freelist {
+	struct sidx_rnode* list[MAX_NODES];
+	int next;
+};
+
+static struct node_freelist* FREELIST;
+
+void 
+sidx_node_prepare() {
+	int sz = sizeof(struct node_freelist) + sizeof(struct sidx_rnode) * MAX_NODES;
+	FREELIST = (struct node_freelist*)malloc(sz);
+	if (!FREELIST) {
+		return;
+	}
+	memset(FREELIST, 0, sz);
+
+	for (int i = 0; i < MAX_NODES; ++i) {
+		FREELIST->list[i] = (struct sidx_rnode*)((intptr_t)FREELIST + sizeof(struct node_freelist) + sizeof(struct sidx_rnode) * i);
+	}
+}
 
 struct sidx_rnode* 
 sidx_rnode_create() {
-	if (NEXT_NODE < MAX_NODES) {
-		struct sidx_rnode* n = &FREELIST[NEXT_NODE++];
+	if (FREELIST->next < MAX_NODES) {
+		struct sidx_rnode* n = FREELIST->list[FREELIST->next++];
 		memset(n, 0,sizeof(*n));
 		REGION_INIT(n->region)
 		return n;
@@ -42,7 +63,8 @@ sidx_rnode_create() {
 
 void 
 sidx_rnode_release(struct sidx_rnode* n) {
-	
+	assert(FREELIST->next > 0);
+	FREELIST->list[FREELIST->next--] = n;
 }
 
 static struct sidx_rnode*
@@ -129,7 +151,7 @@ _adjust_tree2(struct sidx_rnode* parent, struct sidx_rnode* c1, struct sidx_rnod
 	bool touch = REGION_TOUCH(parent->region, *c1_ori_region);
 
 	if (!contain) {
-		REGION_COMBINE(parent->region, child->region, parent->region);
+		REGION_COMBINE(parent->region, c1->region, parent->region);
 	} else if (touch) {
 		REGION_INIT(parent->region);
 		for (int i = 0; i < parent->children_size; ++i) {
@@ -137,7 +159,8 @@ _adjust_tree2(struct sidx_rnode* parent, struct sidx_rnode* c1, struct sidx_rnod
 		}
 	}
 
-	bool adjust = _insert_data();
+	bool adjust = _insert_data(parent, &c2->region, c2->ud);
+	// todo	
 }
 
 static void

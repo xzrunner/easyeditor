@@ -11,6 +11,8 @@ extern "C"
 struct sidx_rnode;
 struct sidx_region;
 
+void sidx_node_prepare();
+
 struct sidx_rnode* sidx_rnode_create();
 void sidx_rnode_release(struct sidx_rnode* n);
 
