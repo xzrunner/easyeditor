@@ -29,7 +29,7 @@ static struct sidx_rnode FREELIST[MAX_NODES];
 static int NEXT_NODE = 0;
 
 struct sidx_rnode* 
-sidx_rnode_new() {
+sidx_rnode_create() {
 	if (NEXT_NODE < MAX_NODES) {
 		struct sidx_rnode* n = &FREELIST[NEXT_NODE++];
 		memset(n, 0,sizeof(*n));
@@ -38,6 +38,11 @@ sidx_rnode_new() {
 	} else {
 		return NULL;
 	}
+}
+
+void 
+sidx_rnode_release(struct sidx_rnode* n) {
+	
 }
 
 static struct sidx_rnode*
@@ -84,7 +89,7 @@ static void
 _insert_data(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
 	assert(node->children_size < NODE_CAPACITY);
 
-	struct sidx_rnode* c = sidx_rnode_new();
+	struct sidx_rnode* c = sidx_rnode_create();
 	c->ud = ud;
 	c->region = *r;
 
@@ -97,17 +102,42 @@ _insert_data(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
 }
 
 static void
-_adjust_tree(struct sidx_rnode* parent, struct sidx_rnode* child) {
-	if (REGION_CONTAINS(parent->region, child->region)) {
+_adjust_tree(struct sidx_rnode* parent, struct sidx_rnode* child, struct sidx_region* ori_region) {
+	bool contain = REGION_CONTAINS(parent->region, child->region);
+	bool touch = REGION_TOUCH(parent->region, *ori_region);
+	if (contain && !touch) {
 		return;
 	}
 
-	struct sidx_region comb;
-	REGION_COMBINE(parent->region, child->region, comb)
-	parent->region = comb;
-	if (parent->parent) {
-		_adjust_tree(parent->parent, parent);
+	if (!contain) {
+		REGION_COMBINE(parent->region, child->region, parent->region);
+	} else {
+		REGION_INIT(parent->region);
+		for (int i = 0; i < parent->children_size; ++i) {
+			REGION_COMBINE(parent->region, parent->children[i]->region, parent->region);
+		}
 	}
+
+	if (parent->parent) {
+		_adjust_tree(parent->parent, parent, ori_region);
+	}
+}
+
+static void
+_adjust_tree2(struct sidx_rnode* parent, struct sidx_rnode* c1, struct sidx_rnode* c2, struct sidx_region* c1_ori_region) {
+	bool contain = REGION_CONTAINS(parent->region, c1->region);
+	bool touch = REGION_TOUCH(parent->region, *c1_ori_region);
+
+	if (!contain) {
+		REGION_COMBINE(parent->region, child->region, parent->region);
+	} else if (touch) {
+		REGION_INIT(parent->region);
+		for (int i = 0; i < parent->children_size; ++i) {
+			REGION_COMBINE(parent->region, parent->children[i]->region, parent->region)
+		}
+	}
+
+	bool adjust = _insert_data();
 }
 
 static void
@@ -174,7 +204,7 @@ static void
 _rtree_split(struct sidx_rnode* node, struct sidx_region* r, void* ud,
 			 int* group1, int* group1_size,
 			 int* group2, int* group2_size) {
-	struct sidx_rnode* new_node = sidx_rnode_new();
+	struct sidx_rnode* new_node = sidx_rnode_create();
 	new_node->ud = ud;
 	new_node->level = node->level + 1;
 	new_node->region = *r;
@@ -278,7 +308,7 @@ _rtree_split(struct sidx_rnode* node, struct sidx_region* r, void* ud,
 	}
 }
 
-static void
+static struct sidx_rnode*
 _split(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
 	int group1[NODE_CAPACITY];
 	int group2[NODE_CAPACITY];
@@ -294,24 +324,48 @@ _split(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
 		assert(0);
 	}
 
-	struct sidx_rnode* new_node = sidx_rnode_new();
+	struct sidx_rnode* new_node = sidx_rnode_create();
+	new_node->level = node->level;
+	new_node->parent = node->parent;
 	for (int i = 0; i < group2_size; ++i) {
-		
+		struct sidx_rnode* c = node->children[group2[i]];
+		new_node->children[new_node->children_size++] = c;
+		REGION_COMBINE(c->region, new_node->region, new_node->region)
 	}
+
+	REGION_INIT(node->region)
+	struct sidx_rnode* children1[NODE_CAPACITY+1];
+	int children1_size = 0;
+	for (int i = 0; i < group1_size; ++i) {
+		struct sidx_rnode* c = node->children[group1[i]];
+		children1[children1_size++] = c;
+		REGION_COMBINE(c->region, node->region, node->region)
+	}
+	memcpy(node->children, children1, sizeof(node->children));
+	node->children_size = children1_size;
+
+	return new_node;
 }
 
 bool 
 sidx_rnode_insert_data(struct sidx_rnode* node, struct sidx_region* r, void* ud) {
+	struct sidx_region ori_region = node->region;
 	if (node->children_size < NODE_CAPACITY) {
 		bool adjusted = false;
 		bool contain = REGION_CONTAINS(node->region, *r);
 		_insert_data(node, r, ud);
 		if (!contain && node->parent) {
-			_adjust_tree(node->parent, node);
+			_adjust_tree(node->parent, node, &ori_region);
 			adjusted = true;
 		}
 		return adjusted;
 	} else {
+		struct sidx_rnode* new_node = _split(node, r, ud);
+		if (node->parent) {
+//			_adjust_tree(node->parent, );
+		} else {
+			
+		}
 	}
 }
 
