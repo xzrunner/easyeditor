@@ -131,21 +131,13 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 
 void GTxt::ReloadTexture()
 {
-	dtex_shader_load();
-
-// 	dtex_cg* old_cg = dtexf_get_cg();
-// 	dtex_cg_clear(old_cg);
-
-	dtexf_release();
-	dtexf_create(CFG);
-
-	dtex_cg* cg = dtexf_get_cg();
-	gtxt_render_init(cg);
+	dtexf_cg_reload_texture();
+	dtexf_cg_clear();
 }
 
 void GTxt::Clear()
 {
-	dtexf_cg_clear();
+//	dtexf_cg_clear();
 }
 
 GTxt* GTxt::Instance()

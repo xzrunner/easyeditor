@@ -4,6 +4,7 @@
 #include "Settings.h"
 
 #include <easyanim.h>
+#include <easytext.h>
 
 namespace ecomplex
 {
@@ -46,6 +47,10 @@ void StageCanvas::InitGL()
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
+
+	etext::GTxt::Instance()->ReloadTexture();
+
+	ResetViewport();
 }
 
 void StageCanvas::OnSize(int w, int h)
