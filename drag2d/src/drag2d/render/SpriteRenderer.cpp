@@ -136,6 +136,9 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	if (sprite->IsAnchor()) {
 		std::vector<Vector> bound;
 		sprite->GetBounding()->getBoundPos(bound);
+		for (int i = 0, n = bound.size(); i < n; ++i) {
+			bound[i] = d2d::Math::transVector(bound[i], t);
+		}
 		PrimitiveDraw::drawPolyline(bound, BLACK, true, 4);
 		PrimitiveDraw::drawLine(bound[0], bound[2], BLACK, 4);
 		PrimitiveDraw::drawLine(bound[1], bound[3], BLACK, 4);
