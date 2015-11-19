@@ -95,6 +95,7 @@ void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
 
 	try {
+		d2d::ClearSpriteSJ::Instance()->Clear();
 		FileIO::Reload(m_ctrl);
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_parent, e);
