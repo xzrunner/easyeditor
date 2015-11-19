@@ -42,6 +42,7 @@ void Task::Notify(int sj_id, void* ud)
 {
 	if (sj_id == d2d::MSG_CLEAR_PANEL) {
 		m_controller.Clear();
+		m_widgets.m_library->Clear();
 		m_widgets.m_layersPanel->insertLayer();
 	}
 }
