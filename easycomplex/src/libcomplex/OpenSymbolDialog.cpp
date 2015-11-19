@@ -24,6 +24,10 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
 
 void OpenSymbolDialog::Open(d2d::ISprite* spr)
 {
+	if (!spr) {
+		return;
+	}
+
 	if (spr->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
 		return;
@@ -93,11 +97,13 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	{
 		etext::EditDialog dlg(m_wnd, text, m_sprites_impl);
 		dlg.ShowModal();
-		etext::GTxt::Instance()->ReloadTexture();
 		m_stage->SetCanvasDirty();
 		m_stage->RefreshFrame();
 		m_stage->ResetViewport();
 	}
+
+	etext::GTxt::Instance()->ReloadTexture();
+	m_stage->ResetViewport();
 }
 
 }
