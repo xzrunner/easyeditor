@@ -28,7 +28,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	, m_top_pannels(top_pannels)
 	, m_symbols_cfg(this, top_pannels->library->GetUILibrary())
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, top_pannels->property, 
+	SetEditOP(new d2d::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(this, GetStageImpl(), this, top_pannels->property, 
 		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, top_pannels->property)));
 	SetCanvas(new StageCanvas(this));
 
