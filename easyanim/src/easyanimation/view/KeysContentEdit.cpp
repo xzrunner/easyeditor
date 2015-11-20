@@ -3,9 +3,12 @@
 
 #include "dataset/LayersMgr.h"
 #include "dataset/Layer.h"
+#include "dataset/KeyFrame.h"
 #include "view/KeysPanel.h"
 #include "view/StagePanel.h"
 #include "frame/Controller.h"
+
+#include <wx/clipbrd.h>
 
 namespace eanim
 {
@@ -73,20 +76,119 @@ void KeysContentEdit::CopySelection()
 	int row, col_min, col_max;
 	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
 
+	if (row == -1) {
+		return;
+	}
 
-// 	LayersMgr& layers = m_ctrl->GetLayers();
-// 	int index = layers.size() - row - 1;
-// 	Layer* layer = layers.getLayer(index);
-// 	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
-// 	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
-// 		itr_end = frames.upper_bound(col_max + 1);
-// 	for (std::map<int, KeyFrame*>::const_iterator itr = itr_begin; itr != itr_end; ++itr) {
-// 		m_selection.push_back(itr->second);
-// 	}
+	Json::Value value;
+
+	LayersMgr& layers = m_ctrl->GetLayers();
+	int index = layers.size() - row - 1;
+	Layer* layer = layers.getLayer(index);
+ 	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+ 	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
+ 		itr_end = frames.upper_bound(col_max + 1);
+	int last_frame = col_min + 1;
+ 	for (std::map<int, KeyFrame*>::const_iterator itr = itr_begin; itr != itr_end; ++itr) {		
+		Json::Value k_val;
+		k_val["distance"] = itr->first - last_frame;
+
+		const std::vector<d2d::ISprite*>& sprites = itr->second->GetAllSprites();
+		for (int i = 0, n = sprites.size(); i < n; ++i) {
+			d2d::ISprite* spr = sprites[i];
+			Json::Value s_val;
+			s_val["filename"] = spr->GetSymbol().GetFilepath();
+			spr->Store(s_val);	
+			k_val["sprite"][i] = s_val;
+		}
+
+		last_frame = itr->first + 1;
+
+		int sz = value["frame"].size();
+		value["frame"][sz] = k_val;
+ 	}
+	
+	//////////////////////////////////////////////////////////////////////////
+
+	Json::StyledStreamWriter writer;
+	std::stringstream ss;
+	writer.write(ss, value);
+	wxTheClipboard->SetData(new wxTextDataObject(ss.str()));
+	wxTheClipboard->Close();
 }
 
 void KeysContentEdit::PasteSelection()
 {
+	if (!wxTheClipboard->Open()) {
+		return;
+	}
+
+	if (!wxTheClipboard->IsSupported( wxDF_TEXT )) {
+		wxTheClipboard->Close();
+		return;
+	}
+
+	wxTextDataObject data;
+	wxTheClipboard->GetData( data );
+
+	Json::Value value;
+	Json::Reader reader;
+	std::string test = data.GetText().ToStdString();
+	reader.parse(data.GetText().ToStdString(), value);
+
+	if (value.isNull() || value["frame"].isNull()) {
+		wxTheClipboard->Close();
+		return;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	int row, col;
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
+	if (row == -1 || col == -1) {
+		wxTheClipboard->Close();
+		return;
+	}
+
+	LayersMgr& layers = m_ctrl->GetLayers();
+	size_t index = layers.size() - row - 1;
+	Layer* layer = layers.getLayer(index);
+
+	for (int iframe = 0, n = value["frame"].size(); iframe < n; ++iframe) 
+	{
+		const Json::Value& k_val = value["frame"][iframe];
+
+		int dis = k_val["distance"].asInt();
+		for (int i = 0; i < dis; ++i) {
+			layer->InsertNullFrame(col+1);
+		}
+		col += dis;
+
+		KeyFrame* frame = new KeyFrame(m_ctrl, col + 1);
+		++col;
+
+		for (int i_spr = 0, m = k_val["sprite"].size(); i_spr < m; ++i_spr) 
+		{
+			const Json::Value& s_val = k_val["sprite"][i_spr];
+			
+			std::string filepath = s_val["filename"].asString();
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			symbol->RefreshThumbnail(filepath);
+			d2d::ISprite* spr = d2d::SpriteFactory::Instance()->create(symbol);
+			spr->Load(s_val);
+			frame->Insert(spr);
+			spr->Release();
+			symbol->Release();
+		}
+
+		layer->InsertKeyFrame(frame);
+	}
+
+	m_ctrl->Refresh();
+
+	//////////////////////////////////////////////////////////////////////////
+
+	wxTheClipboard->Close();
 }
 
 void KeysContentEdit::DeleteSelection()

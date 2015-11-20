@@ -299,6 +299,7 @@ void SelectSpritesOP::CopyFromSelection()
 	reader.parse(data.GetText().ToStdString(), value);
 
 	if (value.isNull()) {
+		wxTheClipboard->Close();
 		return;
 	}
  

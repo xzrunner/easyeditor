@@ -17,6 +17,7 @@ BEGIN_EVENT_TABLE(KeysContentWidget, wxPanel)
 	EVT_SIZE(KeysContentWidget::onSize)
 	EVT_MOUSE_EVENTS(KeysContentWidget::onMouse)
 	EVT_KEY_DOWN(KeysContentWidget::OnKeyDown)
+	EVT_KEY_UP(KeysContentWidget::OnKeyUp)
 
 	EVT_MENU(Menu_CreateClassicTween, KeysContentWidget::onCreateClassicTween)
 	EVT_MENU(Menu_DeleteClassicTween, KeysContentWidget::onDeleteClassicTween)
@@ -98,20 +99,25 @@ void KeysContentWidget::onMouse(wxMouseEvent& event)
 
 void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 {
-	d2d::EditPanel* stage = m_ctrl->GetStagePanel();
-
 	int key_code = event.GetKeyCode();
-	if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
+	m_keys_state.OnKeyDown(key_code);
+	if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
 		m_editop.CopySelection();
-	} else if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'v' || key_code == 'V')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'v' || key_code == 'V')) {
 		m_editop.PasteSelection();
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
-	} else if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
 		m_ctrl->GetStagePanel()->Undo();
-	} else if (stage->GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
 		m_ctrl->GetStagePanel()->Redo();
 	}
+}
+
+void KeysContentWidget::OnKeyUp(wxKeyEvent& event)
+{
+	int key_code = event.GetKeyCode();
+	m_keys_state.OnKeyUp(key_code);
 }
 
 KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
