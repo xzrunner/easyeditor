@@ -8,6 +8,7 @@
 
 #include "message/subject_id.h"
 #include "message/ClearSpriteSJ.h"
+#include "message/ClearPanelSJ.h"
 
 #include <fstream>
 
@@ -24,6 +25,7 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 	m_camera = new Camera;
 
 	ClearSpriteSJ::Instance()->Register(this);
+	ClearPanelSJ::Instance()->Register(this);
 }
 
 EditPanelImpl::~EditPanelImpl()
@@ -40,6 +42,7 @@ EditPanelImpl::~EditPanelImpl()
 	}
 
 	ClearSpriteSJ::Instance()->UnRegister(this);
+	ClearPanelSJ::Instance()->UnRegister(this);
 }
 
 void EditPanelImpl::SetEditPanelNull()
@@ -49,8 +52,11 @@ void EditPanelImpl::SetEditPanelNull()
 
 void EditPanelImpl::Notify(int sj_id, void* ud)
 {
-	if (sj_id == MSG_CLEAR_SPRITE) {
+	switch (sj_id) 
+	{
+	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
+		break;
 	}
 }
 

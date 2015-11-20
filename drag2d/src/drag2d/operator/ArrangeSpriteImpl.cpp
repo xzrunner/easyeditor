@@ -101,7 +101,7 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 		UpOneLayer();
 		break;
 	case 'm' : case 'M':
-		m_op_state = new MoveSpriteState(m_selection);
+		ChangeOPState(new MoveSpriteState(m_selection));
 		break;
 	case WXK_SPACE:
 		OnSpaceKeyDown();
@@ -150,7 +150,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// copy & paste
 	if (m_stage->GetKeyState(WXK_ALT))
 	{
-		m_op_state = new CopyPasteSpriteState(m_selection, selected);
+		ChangeOPState(new CopyPasteSpriteState(m_selection, selected));
 	}
 
 	// offset
@@ -158,8 +158,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	{
 		d2d::Vector offset = GetSprOffset(selected);
 		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
-			delete m_op_state;
-			m_op_state = CreateOffsetState(selected);
+			ChangeOPState(CreateOffsetState(selected));
 			return;
 		}
 	}
@@ -176,8 +175,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
 				cn.type = SpriteCtrlNode::Type(i);
-				delete m_op_state;
-				m_op_state = CreateScaleState(selected, cn);
+				ChangeOPState(CreateScaleState(selected, cn));
 				return;
 			}
 		}
@@ -193,15 +191,14 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrl_node[i];
 				cn.type = SpriteCtrlNode::Type(i);
-				delete m_op_state;
-				m_op_state = CreatePerspectiveState(selected, cn);
+				ChangeOPState(CreatePerspectiveState(selected, cn));
 				return;
 			}
 		}
 	}
 
 	// translate
-	m_op_state = CreateTranslateState(m_selection, pos);
+	ChangeOPState(CreateTranslateState(m_selection, pos));
 
 	m_op_state->OnMousePress(pos);
 }
@@ -216,14 +213,13 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 			m_stage->AddOpRecord(history);
 		}
 
-		delete m_op_state;
-		m_op_state = NULL;
+		ChangeOPState(NULL);
 	}
 
 	if (!m_selection->IsEmpty()) {
 		Vector p;
 		p.setInvalid();
-		m_op_state = CreateTranslateState(m_selection, p);
+		ChangeOPState(CreateTranslateState(m_selection, p));
 	}
 
 	if (m_cfg.is_auto_align_open &&
@@ -271,8 +267,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
 				cn.type = SpriteCtrlNode::Type(i);
-				delete m_op_state;
-				m_op_state = CreateShearState(selected, cn);
+				ChangeOPState(CreateShearState(selected, cn));
 				return;
 			}
 		}
@@ -280,7 +275,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 
 	// rotate
 	if (m_cfg.is_rotate_open) {
-		m_op_state = CreateRotateState(m_selection, pos);
+		ChangeOPState(CreateRotateState(m_selection, pos));
 	}
 }
 
@@ -303,9 +298,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 		if (history) {
 			m_stage->AddOpRecord(history);
 		}
-
-		delete m_op_state;
-		m_op_state = NULL;
+		ChangeOPState(NULL);
 	}
 
 	if (m_property_panel)
@@ -551,6 +544,14 @@ d2d::Vector ArrangeSpriteImpl::GetSprOffset(const ISprite* spr) const
 {
 	d2d::Vector offset = spr->GetPosition() + spr->GetOffset();
 	return offset;
+}
+
+void ArrangeSpriteImpl::ChangeOPState(IArrangeSpriteState* state)
+{
+	if (m_op_state) {
+		delete m_op_state;
+	}
+	m_op_state = state;
 }
 
 }

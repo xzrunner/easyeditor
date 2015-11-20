@@ -11,6 +11,7 @@
 #include "message/RemoveSpriteSJ.h"
 #include "message/ClearSpriteSJ.h"
 #include "message/QuerySelectedSpriteLayerSJ.h"
+#include "message/ClearPanelSJ.h"
 
 #include <algorithm>
 
@@ -28,6 +29,7 @@ ViewlistList::ViewlistList(wxWindow* parent)
 	m_subjects.push_back(RemoveSpriteSJ::Instance());
 	m_subjects.push_back(ClearSpriteSJ::Instance());
 	m_subjects.push_back(QuerySelectedSpriteLayerSJ::Instance());
+	m_subjects.push_back(ClearPanelSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -39,9 +41,7 @@ ViewlistList::~ViewlistList()
 		delete m_impl;
 	}
 
-	if (m_selected_spr) {
-		m_selected_spr->Release();
-	}
+	Clear();
 
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->UnRegister(this);
@@ -73,7 +73,7 @@ void ViewlistList::Notify(int sj_id, void* ud)
 	case MSG_REMOVE_SPRITE:
 		Remove((ISprite*)ud);
 		break;
-	case MSG_CLEAR_SPRITE:
+	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
 		break;
 	case MAG_QUERY_SPR_LAYER:
@@ -261,6 +261,8 @@ void ViewlistList::Remove(ISprite* sprite)
 		return;
 	}
 	VerticalImageList::Remove(idx);
+
+	sprite->Release();
 	m_sprites.erase(m_sprites.begin() + idx);
 }
 
@@ -271,6 +273,7 @@ void ViewlistList::RemoveSelected()
 
 	RemoveSpriteSJ::Instance()->Remove(m_sprites[idx], this);
 
+	m_sprites[idx]->Release();
 	m_sprites.erase(m_sprites.begin() + idx);
 }
 

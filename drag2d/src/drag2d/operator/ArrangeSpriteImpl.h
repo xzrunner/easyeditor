@@ -70,6 +70,8 @@ private:
 
 	d2d::Vector GetSprOffset(const ISprite* spr) const;
 
+	void ChangeOPState(IArrangeSpriteState* state);
+
 private:
 	static const float CTRL_NODE_RADIUS;
 	static const float MAX_CTRL_NODE_RADIUS;

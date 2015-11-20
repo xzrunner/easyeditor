@@ -48,6 +48,8 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 PropertySettingPanel::~PropertySettingPanel()
 {
+	ClearSelection();
+
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->UnRegister(this);
 	}
@@ -75,6 +77,7 @@ void PropertySettingPanel::Notify(int sj_id, void* ud)
 		SetPropertySetting(CreateDefaultProperty());
 		break;
 	case MSG_CLEAR_SPRITE:
+		ClearSelection();
 		SetPropertySetting(CreateDefaultProperty());
 		break;
 
@@ -86,6 +89,10 @@ void PropertySettingPanel::Notify(int sj_id, void* ud)
 		break;
 	case MSG_REMOVE_SHAPE:
 		SetPropertySetting(CreateDefaultProperty());
+		break;
+
+	case MSG_CLEAR_PANEL:
+		ClearSelection();
 		break;
 	}
 }
@@ -136,8 +143,7 @@ void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 	}
 
 	if (clear) {
-		for_each(m_selection.begin(), m_selection.end(), ReleaseObjectFunctor<ISprite>());
-		m_selection.clear();
+		ClearSelection();
 	}
 	if (spr) {
 		spr->Retain();
@@ -219,6 +225,12 @@ void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 	} else {
 		SelectShape(NULL);
 	}
+}
+
+void PropertySettingPanel::ClearSelection()
+{
+	for_each(m_selection.begin(), m_selection.end(), ReleaseObjectFunctor<ISprite>());
+	m_selection.clear();
 }
 
 } // d2d

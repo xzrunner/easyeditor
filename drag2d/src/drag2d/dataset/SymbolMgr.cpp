@@ -88,9 +88,13 @@ void SymbolMgr::Remove(const ISymbol* symbol)
 
 void SymbolMgr::Clear()
 {
+	std::vector<ISymbol*> symbols;
+	symbols.reserve(m_symbols.size());
 	std::map<std::string, ISymbol*>::iterator itr = m_symbols.begin();
-	for ( ; itr != m_symbols.end(); ++itr)
-		delete itr->second;
+	for ( ; itr != m_symbols.end(); ++itr) {
+		symbols.push_back(itr->second);
+	}
+	for_each(symbols.begin(), symbols.end(), ReleaseObjectFunctor<ISymbol>());
 	m_symbols.clear();
 }
 

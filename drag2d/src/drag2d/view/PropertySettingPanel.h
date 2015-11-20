@@ -53,6 +53,8 @@ private:
 	void SelectShape(IShape* shape);
 	void SelectShapeSet(ShapeSelection* selection);
 
+	void ClearSelection();
+
 protected:
 	std::string m_type;
 
