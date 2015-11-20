@@ -16,8 +16,6 @@ namespace d2d
 void LabelNew::Print(const char* text, const Vector& pos,
 					 float scale, const LabelStyle& style)
 {
-	return;
-
 	if (strlen(text) == 0) {
 		return;
 	}
