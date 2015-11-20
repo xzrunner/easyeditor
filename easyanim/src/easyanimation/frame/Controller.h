@@ -33,7 +33,6 @@ public:
 //	d2d::ViewlistPanel* GetViewlist();
 	d2d::LibraryPanel* GetLibraryPanel();
 	StagePanel* GetStagePanel();
-	LayersPanel* GetLayersPanel();
 	ToolbarPanel* GetToolbarPanel();
 	KeysPanel* GetKeysPanel();
 	d2d::PropertySettingPanel* GetPropertyPanel();
@@ -63,8 +62,6 @@ public:
 	std::string name;
 
 	wxString packer;
-
-	unsigned int fps;
 
 private:
 	Widgets* m_widgets;

@@ -1,32 +1,35 @@
-#pragma once
+#ifndef _EASYANIM_LAYERS_PROPERTY_WIDGET_H_
+#define _EASYANIM_LAYERS_PROPERTY_WIDGET_H_
 
-#include <wx/wx.h>
+#include <drag2d.h>
 
 namespace eanim
 {
 
-	class Controller;
+class LayersPropertyWidget : public wxPanel, public d2d::Observer
+{
+public:
+	LayersPropertyWidget(wxWindow* parent);
+	virtual ~LayersPropertyWidget();
 
-	class LayersPropertyWidget : public wxPanel
-	{
-	public:
-		LayersPropertyWidget(wxWindow* parent, Controller* ctrl);
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
-		void setFPS(int fps);
+private:
+	void InitLayout();
 
-	private:
-		void initLayout();
+	void OnAddLayer(wxCommandEvent& event);
+	void OnDelLayer(wxCommandEvent& event);
+//	void onPlay(wxCommandEvent& event);
+	void OnChangeFps(wxSpinEvent& event);
 
-		void onAddLayer(wxCommandEvent& event);
-		void onDelLayer(wxCommandEvent& event);
-//		void onPlay(wxCommandEvent& event);
-		void onChangeFps(wxSpinEvent& event);
+private:
+	wxSpinCtrl* m_fps;
 
-	private:
-		Controller* m_ctrl;
+}; // LayersPropertyWidget
 
-		wxSpinCtrl* m_fps;
-
-	}; // LayersPropertyWidget
 }
 
+#endif // _EASYANIM_LAYERS_PROPERTY_WIDGET_H_

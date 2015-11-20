@@ -17,8 +17,6 @@ Controller::Controller(Widgets* widgets)
 {
 	m_curr_layer = 0;
 	m_curr_frame = 1;
-
-	fps = 30;
 }
 
 void Controller::setCurrFrame(int layer, int frame)
@@ -129,11 +127,6 @@ StagePanel* Controller::GetStagePanel()
 	return m_widgets->m_stage;
 }
 
-LayersPanel* Controller::GetLayersPanel()
-{
-	return m_widgets->m_layersPanel;
-}
-
 ToolbarPanel* Controller::GetToolbarPanel()
 {
 	return m_widgets->m_toolbar;
@@ -174,8 +167,6 @@ void Controller::Clear()
 {
 	m_curr_layer = 0;
 	m_curr_frame = 1;
-
-	fps = 30;
 }
 
 void Controller::Refresh()

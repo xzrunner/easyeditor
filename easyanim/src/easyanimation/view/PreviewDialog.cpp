@@ -3,6 +3,7 @@
 #include "PreviewOP.h"
 
 #include "frame/Controller.h"
+#include "message/GetFpsSJ.h"
 
 namespace eanim
 {
@@ -12,7 +13,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent, Controller* ctrl)
 	, m_control(0.033f)
 	, m_ctrl(ctrl)
 {
-	m_control.SetDt(1.0f / ctrl->fps);
+	int fps = GetFpsSJ::Instance()->Get();
+	m_control.SetDt(1.0f / fps);
 	initLayout();
 
 	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;

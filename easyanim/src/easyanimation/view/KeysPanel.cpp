@@ -2,7 +2,6 @@
 #include "StagePanel.h"
 #include "KeysScaleWidget.h"
 #include "KeysContentWidget.h"
-#include "LayersPanel.h"
 
 #include "frame/Controller.h"
 #include "dataset/Layer.h"

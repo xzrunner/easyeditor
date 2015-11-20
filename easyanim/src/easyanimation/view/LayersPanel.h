@@ -1,31 +1,33 @@
-#pragma once
+#ifndef _EASYANIM_LAYERS_PANEL_H_
+#define _EASYANIM_LAYERS_PANEL_H_
 
 #include <wx/wx.h>
 
 namespace eanim
 {
-	class Controller;
-	class LayersPropertyWidget;
 
-	class LayersPanel : public wxPanel
-	{
-	public:
-		LayersPanel(wxWindow* parent, Controller* ctrl);
+class Controller;
+class LayersPropertyWidget;
+
+class LayersPanel : public wxPanel
+{
+public:
+	LayersPanel(wxWindow* parent, Controller* ctrl);
 
 //		void onPlay();
 
-		void setFPS(int fps);
+private:
+	void InitLayout();
 
-	private:
-		void initLayout();
+private:
+	Controller* m_ctrl;
 
-	private:
-		Controller* m_ctrl;
+	LayersPropertyWidget* m_layersProperty;
 
-		LayersPropertyWidget* m_layersProperty;
+	wxWindow* m_contentPanel;
 
-		wxWindow* m_contentPanel;
+}; // LayersPanel
 
-	}; // LayersPanel
 }
 
+#endif // _EASYANIM_LAYERS_PANEL_H_

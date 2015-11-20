@@ -175,7 +175,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 {
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 
-	while (ud->layer >= m_ctrl->GetLayerCount()) {
+	while (ud && ud->layer >= m_ctrl->GetLayerCount()) {
 		InsertLayerSJ::Instance()->Insert();
 	}
 

@@ -5,9 +5,10 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/Joint.h"
 #include "view/ToolbarPanel.h"
-#include "view/LayersPanel.h"
 #include "view/StagePanel.h"
 #include "message/InsertLayerSJ.h"
+#include "message/SetFpsSJ.h"
+#include "message/GetFpsSJ.h"
 
 #include <rapidxml_utils.hpp>
 #include <easyanim.h>
@@ -32,8 +33,8 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 
-	ctrl->fps = value["fps"].asInt();
-	ctrl->GetLayersPanel()->setFPS(ctrl->fps);
+	int fps = value["fps"].asInt();
+	SetFpsSJ::Instance()->Set(fps);
 
 	if (value["template"].isNull()) {
 		ctrl->GetToolbarPanel()->ChangeTemplateMode(true);
@@ -65,8 +66,7 @@ void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)
 	Json::Value value;
 
 	value["name"] = ctrl->name;
-
-	value["fps"] = ctrl->fps;
+	value["fps"] = GetFpsSJ::Instance()->Get();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
@@ -91,8 +91,7 @@ void FileIO::StoreTemplate(const std::string& filepath, Controller* ctrl)
 	temp.StoreToFile(value["template"]);
 
 	value["name"] = ctrl->name;
-
-	value["fps"] = ctrl->fps;
+	value["fps"] = GetFpsSJ::Instance()->Get();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();

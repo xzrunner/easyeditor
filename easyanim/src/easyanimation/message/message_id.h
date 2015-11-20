@@ -6,7 +6,10 @@ namespace eanim
 
 enum MSG_ID {
 	MSG_INSERT_LAYER = 1000,
-	MSG_REMOVE_LAYER
+	MSG_REMOVE_LAYER,
+
+	MSG_GET_FPS,
+	MSG_SET_FPS,
 };
 
 }

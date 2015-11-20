@@ -609,25 +609,49 @@
 			Name="message"
 			>
 			<File
-				RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyanimation\message\message_id.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.cpp"
+			<Filter
+				Name="layer"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.h"
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="fps"
 				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\GetFpsSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\GetFpsSJ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\SetFpsSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\SetFpsSJ.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"

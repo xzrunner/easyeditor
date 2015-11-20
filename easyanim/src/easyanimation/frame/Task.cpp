@@ -5,7 +5,6 @@
 #include "view/StagePanel.h"
 #include "view/ToolbarPanel.h"
 #include "view/TimeLinePanel.h"
-#include "view/LayersPanel.h"
 #include "message/InsertLayerSJ.h"
 
 #include <easycomplex.h>
