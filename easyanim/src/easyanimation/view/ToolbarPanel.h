@@ -18,6 +18,8 @@ public:
 
 	void AddAnimChoice(const std::vector<std::string>& choices);
 
+	void ChangeTemplateMode(bool single);
+
 	void Clear();
 
 protected:
@@ -25,7 +27,6 @@ protected:
 
 private:
 	wxSizer* InitTemplateLayout();
-	void FillTempSizer();
 
 	void OnChangeAnim(wxCommandEvent& event);
 	void OnSetTemplateDir(wxCommandEvent& event);
@@ -33,9 +34,13 @@ private:
 private:
 	Controller* m_ctrl;
 
-	wxSizer* m_temp_sizer;
-	wxTextCtrl* m_temp_dir;
-	wxChoice* m_anim_choice;
+	wxSizer* m_tl_sizer;
+
+	wxSizer* m_tl_single_sizer;
+	wxTextCtrl* m_tl_dir_text;
+
+	wxSizer* m_tl_multi_sizer;
+	wxChoice* m_tl_anim_choice;
 
 }; // ToolbarPanel
 

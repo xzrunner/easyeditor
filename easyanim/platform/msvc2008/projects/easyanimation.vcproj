@@ -605,6 +605,22 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="message"
+			>
+			<File
+				RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\message\message_id.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"
 			>

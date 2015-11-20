@@ -34,7 +34,12 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 	ctrl->fps = value["fps"].asInt();
 	ctrl->GetLayersPanel()->setFPS(ctrl->fps);
 
-	ctrl->GetAnimTemplate().LoadFromFile(value["template"], ctrl->GetToolbarPanel());
+	if (value["template"].isNull()) {
+		ctrl->GetToolbarPanel()->ChangeTemplateMode(true);
+	} else {
+		ctrl->GetAnimTemplate().LoadFromFile(value["template"], ctrl->GetToolbarPanel());
+		ctrl->GetToolbarPanel()->ChangeTemplateMode(false);
+	}
 
 	ctrl->name = value["name"].asString();
 
