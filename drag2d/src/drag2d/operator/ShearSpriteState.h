@@ -18,6 +18,7 @@ public:
 
 private:
 	void Shear(const Vector& curr);
+	void Shear2(const Vector& curr);
 
 private:
 	ISprite* m_sprite;

@@ -2,6 +2,7 @@
 
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
+#include "dataset/AbstractBV.h"
 #include "common/Math.h"
 #include "history/ShearSpriteAOP.h"
 
@@ -30,7 +31,7 @@ AbstractAtomicOP* ShearSpriteState::OnMouseRelease(const Vector& pos)
 
 bool ShearSpriteState::OnMouseDrag(const Vector& pos)
 {
-	Shear(pos);
+	Shear2(pos);
 	return true;
 }
 
@@ -79,26 +80,22 @@ void ShearSpriteState::Shear(const Vector& curr)
 //  	pos.y -= py;
 
 	d2d::Vector offset = m_sprite->GetOffset();
-	offset.x += px - r.xCenter();
-	offset.y += py - r.yCenter();
+// 	offset.x += px - r.xCenter();
+// 	offset.y += py - r.yCenter();
 
-	px = r.xCenter();
-	py = r.yCenter();
+// 	px = r.xCenter();
+// 	py = r.yCenter();
 
 	float x, y;
 	float hw = r.xLength() * 0.5f,
 		hh = r.yLength() * 0.5f;
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)
 	{
-		x = 0; y = hh - offset.y;
+		x = 0; y = hh - offset.y;		
 		if (c != 0)
 			kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
 		else
 			kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y);
-
-		if (fabs(kx) > 10) {
-			int zz = 0;
-		}
 	}
 	else if (m_ctrl_node.type == SpriteCtrlNode::DOWN)
 	{
@@ -126,6 +123,66 @@ void ShearSpriteState::Shear(const Vector& curr)
 	}
 
 	m_sprite->SetShear(kx, ky);
+}
+
+void ShearSpriteState::Shear2(const Vector& curr)
+{
+	d2d::Rect region = m_sprite->GetSymbol().GetSize();
+
+	float hw = region.xLength() * 0.5f,
+		hh = region.yLength() * 0.5f;
+	float kx = m_sprite->GetShear().x,
+		ky = m_sprite->GetShear().y;
+	float sx = m_sprite->GetScale().x,
+		sy = m_sprite->GetScale().y;
+	Vector ctrls[8];
+	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
+
+	d2d::Vector center = (ctrls[SpriteCtrlNode::LEFT] + ctrls[SpriteCtrlNode::RIGHT]) * 0.5f;
+
+	switch (m_ctrl_node.type)
+	{
+	case SpriteCtrlNode::UP: case SpriteCtrlNode::DOWN:
+		{
+			d2d::Vector ori, now;
+			if (m_ctrl_node.type == SpriteCtrlNode::UP) {
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
+			} else {
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], center, &ori);
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &now);
+			}
+
+			float dis = d2d::Math::getDistance(ori, now);
+			kx = dis / hh;
+			if (f2Cross(center - ori, now - ori) < 0) {
+				kx = -kx;
+			}
+			kx /= sx;
+			m_sprite->SetShear(kx, ky);
+		}
+		break;
+	case SpriteCtrlNode::LEFT: case SpriteCtrlNode::RIGHT:
+		{
+			d2d::Vector ori, now;
+			if (m_ctrl_node.type == SpriteCtrlNode::LEFT) {
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], center, &ori);
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::LEFT_UP], curr, &now);
+			} else {
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], center, &ori);
+				Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_DOWN], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &now);
+			}
+
+			float dis = d2d::Math::getDistance(ori, now);
+			ky = dis / hw;
+			if (f2Cross(center - ori, now - ori) > 0) {
+				ky = -ky;
+			}
+			ky /= sy;
+			m_sprite->SetShear(kx, ky);
+		}
+		break;
+	}
 }
 
 }
