@@ -2,7 +2,9 @@
 #include "LayersPanel.h"
 #include "Utility.h"
 
-#include "../frame/Controller.h"
+#include "frame/Controller.h"
+#include "message/InsertLayerSJ.h"
+#include "message/RemoveLayerSJ.h"
 
 namespace eanim
 {
@@ -49,12 +51,12 @@ void LayersPropertyWidget::initLayout()
 
 void LayersPropertyWidget::onAddLayer(wxCommandEvent& event)
 {
-	m_ctrl->GetLayersPanel()->insertLayer();
+	InsertLayerSJ::Instance()->Insert();
 }
 
 void LayersPropertyWidget::onDelLayer(wxCommandEvent& event)
 {
-	m_ctrl->GetLayersPanel()->removeLayer();
+	RemoveLayerSJ::Instance()->Remove();
 }
 
 //void LayersPropertyWidget::onPlay(wxCommandEvent& event)

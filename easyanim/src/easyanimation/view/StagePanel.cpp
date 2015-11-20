@@ -8,6 +8,10 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/SpriteUserData.h"
 
+#include "message/message_id.h"
+#include "message/InsertLayerSJ.h"
+#include "message/RemoveLayerSJ.h"
+
 namespace eanim
 {
 
@@ -32,6 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
 	m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
 	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
+	m_subjects.push_back(RemoveLayerSJ::Instance());
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}
@@ -84,6 +89,10 @@ void StagePanel::Notify(int sj_id, void* ud)
 			// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
 			// 	frame->clear();
 		}
+		break;
+
+	case MSG_REMOVE_LAYER:
+		ClearSelectedSprite();
 		break;
 	}
 }
@@ -165,8 +174,14 @@ void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
 void StagePanel::Insert(d2d::ISprite* spr)
 {
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
+
+	while (ud->layer >= m_ctrl->GetLayerCount()) {
+		InsertLayerSJ::Instance()->Insert();
+	}
+
 	int old_layer = m_ctrl->layer(),
 		old_frame = m_ctrl->frame();
+
 	if (ud) {
 		ud->frame = old_frame;
 		m_ctrl->setCurrFrame(ud->layer, old_frame);

@@ -6,6 +6,7 @@
 #include "view/ToolbarPanel.h"
 #include "view/TimeLinePanel.h"
 #include "view/LayersPanel.h"
+#include "message/InsertLayerSJ.h"
 
 #include <easycomplex.h>
 #include <easymesh.h>
@@ -43,7 +44,7 @@ void Task::Notify(int sj_id, void* ud)
 	if (sj_id == d2d::MSG_CLEAR_PANEL) {
 		m_controller.Clear();
 		m_widgets.m_library->Clear();
-		m_widgets.m_layersPanel->insertLayer();
+		InsertLayerSJ::Instance()->Insert();
 	}
 }
 

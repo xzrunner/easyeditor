@@ -12,8 +12,6 @@ namespace eanim
 	public:
 		LayersPanel(wxWindow* parent, Controller* ctrl);
 
-		void insertLayer();
-		void removeLayer();
 //		void onPlay();
 
 		void setFPS(int fps);

@@ -620,6 +620,14 @@
 				RelativePath="..\..\..\src\easyanimation\message\message_id.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"

@@ -12,7 +12,7 @@ namespace eanim
 
 Controller::Controller(Widgets* widgets)
 	: m_widgets(widgets)
-	, layers(this)
+	, m_layers(this)
 	, m_last_keyframe(NULL)
 {
 	m_curr_layer = 0;
@@ -61,7 +61,7 @@ void Controller::UpdateCurrFrame()
 		return;
 	}
 
-	Layer* layer = layers.getLayer(m_curr_layer);
+	Layer* layer = m_layers.getLayer(m_curr_layer);
 	if (layer) {
 		m_last_keyframe = layer->GetCurrKeyFrame(m_curr_frame);
 		reloadViewList(m_last_keyframe);
@@ -78,7 +78,7 @@ KeyFrame* Controller::getCurrFrame()
 
 void Controller::setPrevKeyFrame()
 {
-	Layer* pLayer = layers.getLayer(m_curr_layer);
+	Layer* pLayer = m_layers.getLayer(m_curr_layer);
 	if (!pLayer) {
 		return;
 	}
@@ -92,7 +92,7 @@ void Controller::setPrevKeyFrame()
 
 void Controller::setNextKeyFrame()
 {
-	Layer* pLayer = layers.getLayer(m_curr_layer);
+	Layer* pLayer = m_layers.getLayer(m_curr_layer);
 	if (!pLayer) {
 		return;
 	}
@@ -157,17 +157,12 @@ void Controller::SetTimeLinePanel(LayersPanel* layers_panel, KeysPanel* keys_pan
 
 int Controller::GetMaxFrame() const 
 { 
-	return layers.GetMaxFrame();
+	return m_layers.GetMaxFrame();
 }
 
 bool Controller::ClearAllLayer()
 {
-	return layers.clear();
-}
-
-void Controller::InsertLayer(Layer* layer)
-{
-	layers.insertLayer(layer);
+	return m_layers.clear();
 }
 
 d2d::ILibraryPage* Controller::GetImagePage()

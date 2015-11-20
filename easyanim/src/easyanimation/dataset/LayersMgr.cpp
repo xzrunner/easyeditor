@@ -3,37 +3,45 @@
 
 #include "frame/Controller.h"
 
+#include "message/message_id.h"
+#include "message/InsertLayerSJ.h"
+#include "message/RemoveLayerSJ.h"
+
 namespace eanim
 {
 
 LayersMgr::LayersMgr(Controller* ctrl)
 	: m_ctrl(ctrl)
 {
+	InsertLayerSJ::Instance()->Register(this);
+	RemoveLayerSJ::Instance()->Register(this);
 }
 
 LayersMgr::~LayersMgr()
 {
 	clear();
+
+	InsertLayerSJ::Instance()->UnRegister(this);
+	RemoveLayerSJ::Instance()->UnRegister(this);
 }
 
-Layer* LayersMgr::newLayer()
+void LayersMgr::Notify(int sj_id, void* ud)
 {
-	Layer* layer = new Layer(m_ctrl);
-	m_layers.push_back(layer);
-	return layer;
-}
-
-void LayersMgr::insertLayer(Layer* layer)
-{
-	m_ctrl->setCurrFrame(m_layers.size(), 1);
-	m_layers.push_back(layer);
-}
-
-void LayersMgr::removeLayer(int index)
-{
-	if (index < 0 || index >= m_layers.size()) return;
-	delete m_layers[index];
-	m_layers.erase(m_layers.begin() + index);
+	switch (sj_id)
+	{
+	case MSG_INSERT_LAYER:
+		{
+			Layer* layer = ud ? (Layer*)ud : new Layer(m_ctrl);
+			if (!ud) {
+				layer->InsertKeyFrame(1);
+			}
+			Insert(layer);
+		}
+		break;
+	case MSG_REMOVE_LAYER:
+		Remove();
+		break;
+	}
 }
 
 void LayersMgr::changeLayerOrder(int from, int to)
@@ -89,6 +97,31 @@ int LayersMgr::GetMaxFrame() const
 		max_frame = std::max(max_frame, m_layers[i]->GetMaxFrameTime());
 	}
 	return max_frame;
+}
+
+void LayersMgr::Insert(Layer* layer)
+{
+	//int curr_idx = m_layers.size();
+	//Layer* layer = m_layers.newLayer();
+	//setCurrFrame(curr_idx, frame());
+	//layer->InsertKeyFrame(1);
+	//GetStagePanel()->SetCanvasDirty();
+
+	m_ctrl->setCurrFrame(m_layers.size(), 1);
+	m_layers.push_back(layer);
+}
+
+void LayersMgr::Remove()
+{
+	int idx = m_ctrl->layer();
+	assert(idx >= 0 && idx < m_layers.size());
+	delete m_layers[idx];
+	m_layers.erase(m_layers.begin() + idx);
+	if (m_layers.size() == 0) {
+		m_ctrl->setCurrFrame(-1, m_ctrl->frame());
+	} else if (m_ctrl->layer() > 0) {
+		m_ctrl->setCurrFrame(m_ctrl->layer() - 1, m_ctrl->frame());
+	}
 }
 
 } // eanim

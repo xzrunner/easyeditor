@@ -42,13 +42,14 @@ public:
 
 	int GetMaxFrame() const;
 
+	int GetLayerCount() const { return m_layers.size(); }
+
 	bool ClearAllLayer();
-	void InsertLayer(Layer* layer);
-	LayersMgr& GetLayers() { return layers; }
+	LayersMgr& GetLayers() { return m_layers; }
 
 	d2d::ILibraryPage* GetImagePage();
 
-	AnimTemplate& GetAnimTemplate() { return anim_template; }
+	AnimTemplate& GetAnimTemplate() { return m_anim_template; }
 
 	const std::string& GetName() const { return name; }
 
@@ -68,9 +69,9 @@ public:
 private:
 	Widgets* m_widgets;
 
-	LayersMgr layers;
+	LayersMgr m_layers;
 
-	AnimTemplate anim_template;
+	AnimTemplate m_anim_template;
 
 	//
 

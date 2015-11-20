@@ -7,6 +7,7 @@
 #include "view/ToolbarPanel.h"
 #include "view/LayersPanel.h"
 #include "view/StagePanel.h"
+#include "message/InsertLayerSJ.h"
 
 #include <rapidxml_utils.hpp>
 #include <easyanim.h>
@@ -48,8 +49,7 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		Layer* layer = LoadLayer(layerValue, dir, ctrl);
-//		ctrl->InsertLayer(layer);
+		LoadLayer(layerValue, dir, ctrl);
 		layerValue = value["layer"][i++];
 	}
 
@@ -161,7 +161,7 @@ void FileIO::LoadFlash(const std::string& filepath, Controller* ctrl)
 		->first_node("DOMTimeline")->first_node("layers")->first_node("DOMLayer");
 	while (layerNode) {
 		Layer* layer = LoadLayer(layerNode, mapNamePath, ctrl);
-		ctrl->InsertLayer(layer);
+		InsertLayerSJ::Instance()->Insert(layer);
 		layerNode = layerNode->next_sibling();
 	}
 
@@ -213,8 +213,7 @@ void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir, Controller* ctrl)
 {
 	Layer* layer = new Layer(ctrl);
-
-	ctrl->InsertLayer(layer);
+	InsertLayerSJ::Instance()->Insert(layer);
 
 	layer->SetName(layerValue["name"].asString());
 

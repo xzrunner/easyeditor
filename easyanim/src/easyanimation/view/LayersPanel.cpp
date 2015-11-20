@@ -6,6 +6,7 @@
 
 #include "dataset/Layer.h"
 #include "frame/Controller.h"
+#include "message/InsertLayerSJ.h"
 
 namespace eanim
 {
@@ -15,32 +16,8 @@ LayersPanel::LayersPanel(wxWindow* parent, Controller* ctrl)
 	, m_ctrl(ctrl)
 {
 	initLayout();
-	insertLayer();
-}
 
-void LayersPanel::insertLayer()
-{
-	LayersMgr& layers = m_ctrl->GetLayers();
-	int curr_idx = layers.size();
-	Layer* layer = layers.newLayer();
-	m_ctrl->setCurrFrame(curr_idx, m_ctrl->frame());
-	layer->InsertKeyFrame(1);
-
-	m_ctrl->GetStagePanel()->SetCanvasDirty();
-}
-
-void LayersPanel::removeLayer()
-{
-	LayersMgr& layers = m_ctrl->GetLayers();
-
-	m_ctrl->GetStagePanel()->ClearSelectedSprite();
-
-	layers.removeLayer(m_ctrl->layer());
-	if (layers.size() == 0) {
-		m_ctrl->setCurrFrame(-1, m_ctrl->frame());
-	} else if (m_ctrl->layer() > 0) {
-		m_ctrl->setCurrFrame(m_ctrl->layer() - 1, m_ctrl->frame());
-	}
+	InsertLayerSJ::Instance()->Insert();
 }
 
 //void LayersPanel::onPlay()

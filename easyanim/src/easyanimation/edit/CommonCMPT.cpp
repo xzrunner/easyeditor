@@ -7,6 +7,7 @@
 #include "frame/Controller.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
+#include "message/InsertLayerSJ.h"
 
 namespace eanim
 {
@@ -167,7 +168,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 	}
-	m_ctrl->InsertLayer(layer);
+	InsertLayerSJ::Instance()->Insert(layer);
 
 	m_ctrl->setCurrFrame(0, 1);
 
@@ -202,7 +203,7 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 		sprite->Release();
 		frame->Release();
 	}
-	m_ctrl->InsertLayer(layer);
+	InsertLayerSJ::Instance()->Insert(layer);
 
 	m_ctrl->Refresh();
 }
