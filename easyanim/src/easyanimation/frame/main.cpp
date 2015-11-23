@@ -9,6 +9,7 @@
 #include <easymesh.h>
 #include <easyparticle3d.h>
 #include <easyicon.h>
+#include <easytext.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -31,6 +32,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
 }
 
 bool MyApp::OnInit()
