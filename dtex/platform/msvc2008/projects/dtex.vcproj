@@ -661,7 +661,7 @@
 			Name="adapter"
 			>
 			<File
-				RelativePath="..\..\..\src\dtex_ej_glyph.cpp"
+				RelativePath="..\..\..\src\dtex_ej_glyph.c"
 				>
 			</File>
 			<File
