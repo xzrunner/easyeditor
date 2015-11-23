@@ -8,7 +8,7 @@ namespace tdtex
 dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
 								   bool load_tex, int lod/*, bool load_texture_async*/)
 {
-	dtex_package* pkg = dtexf_load_pkg(pkg_name.c_str(), pkg_name.c_str(), FILE_EPE, scale, lod, 0);
+	dtex_package* pkg = dtexf_load_pkg(pkg_name.c_str(), pkg_name.c_str(), scale, lod, 0);
 
 	int idx = 1;
 	while (true)

@@ -633,6 +633,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\dtex_shader_new.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dtex_shader_new.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\dtex_target.c"
 				>
 			</File>

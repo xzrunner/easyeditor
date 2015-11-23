@@ -49,14 +49,14 @@ void EJScreen::Load()
 
 	CreateRes();
 
-	dtex_shader_load();
+//	dtex_shader_load();
 }
 
 void EJScreen::Unload()
 {
 	ReleaseRes();
 
-	dtex_shader_unload();
+//	dtex_shader_unload();
 }
 
 void EJScreen::Bind()

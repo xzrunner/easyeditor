@@ -98,7 +98,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
 	d2d::Matrix* mt = (d2d::Matrix*)ud;
 	d2d::SpriteRenderer::Instance()->Draw(sym, *mt, d2d::Vector(x, y));
-	dtex_shader_texture(0);
+	dtex_shader_set_texture(0);
 }
 
 void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
@@ -107,7 +107,7 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 		return;
 	}
 
-	dtex_shader_texture(0);
+	dtex_shader_set_texture(0);
 	d2d::ShaderMgr::Instance()->SetTexture(0);
 
 	gtxt_label_style style;
@@ -150,7 +150,7 @@ GTxt* GTxt::Instance()
 
 void GTxt::Init()
 {
-	dtex_shader_load();
+//	dtex_shader_load();
 
 	dtexf_create(CFG);
 

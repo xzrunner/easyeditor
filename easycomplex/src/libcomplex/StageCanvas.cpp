@@ -3,6 +3,8 @@
 #include "Symbol.h"
 #include "Settings.h"
 
+#include <dtex_facade.h>
+
 #include <easyanim.h>
 #include <easytext.h>
 
@@ -44,11 +46,11 @@ void StageCanvas::InitGL()
 	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
 
 	m_stage->getSymbol()->ReloadTexture();
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
-	}
+// 	if (d2d::Config::Instance()->IsUseDTex()) {
+// 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+// 	}
 
-	etext::GTxt::Instance()->ReloadTexture();
+//	etext::GTxt::Instance()->ReloadTexture();
 
 	ResetViewport();
 }
@@ -87,9 +89,11 @@ void StageCanvas::OnDrawSprites() const
 	m_stat.End();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->DebugDraw();
-	}
+// 	if (d2d::Config::Instance()->IsUseDTex()) {
+// 		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+// 	}
+
+	dtexf_debug_draw();
 #endif
 
 	m_stat.DrawTime(m_screen);

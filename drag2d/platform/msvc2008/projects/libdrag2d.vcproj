@@ -1229,6 +1229,14 @@
 				Name="dynamic_packer"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\DrawCallBatching.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DrawCallBatching.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\DynamicFont.cpp"
 					>
 				</File>

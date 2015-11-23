@@ -4,6 +4,7 @@
 
 #include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
+#include "render/DrawCallBatching.h"
 #include "common/Exception.h"
 #include "common/Config.h"
 
@@ -67,7 +68,12 @@ bool Image::LoadFromFile(const std::string& filepath)
 	// 		// todo
 	// 		DynamicTexture::Instance()->Insert(this);
 	if (Config::Instance()->IsUseDTex()) {
-		DynamicTexAndFont::Instance()->AddImage(this);
+//		DynamicTexAndFont::Instance()->AddImage(this);
+
+		DrawCallBatching* dcb = DrawCallBatching::Instance();
+		dcb->Begin();
+		dcb->Add(this);
+		dcb->End();
 	}
 
 	return true;
@@ -211,35 +217,46 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	int texid;
 	d2d::Vector texcoords[4];
 	float txmin, txmax, tymin, tymax;
-	DynamicTexAndFont* dt = NULL;
-	const TPNode* n = NULL;
+//	DynamicTexAndFont* dt = NULL;
+//	const TPNode* n = NULL;
+
+	float* c2_texcoords;
 	if (Config::Instance()->IsUseDTex()) {
-		dt = DynamicTexAndFont::Instance();
-		n = dt->Query(m_tex->GetFilepath());
+//		dt = DynamicTexAndFont::Instance();
+//		n = dt->Query(m_tex->GetFilepath());
+
+		c2_texcoords = DrawCallBatching::Instance()->Query(this, &texid);
 	}
- 	if (n)
+ 	if (c2_texcoords)
  	{
- 		float extend = dt->GetExtend();
- 		int width = dt->GetWidth();
- 		int height = dt->GetHeight();
- 		texid = dt->GetTextureID();
-		txmin = (n->GetMinX()+extend) / width;
-		txmax = (n->GetMaxX()-extend) / width;
-		tymin = (n->GetMinY()+extend) / height;
-		tymax = (n->GetMaxY()-extend) / height;
+		txmin = c2_texcoords[0];
+		txmax = c2_texcoords[2];
+		tymin = c2_texcoords[1];
+		tymax = c2_texcoords[5];
 
-// 		if (texid != 1) {
-// 			wxLogDebug(_T("img dt's tex = %d"), texid);
+		//////////////////////////////////////////////////////////////////////////
+
+// 		float extend = dt->GetExtend();
+// 		int width = dt->GetWidth();
+// 		int height = dt->GetHeight();
+// 		texid = dt->GetTextureID();
+//		txmin = (n->GetMinX()+extend) / width;
+//		txmax = (n->GetMaxX()-extend) / width;
+//		tymin = (n->GetMinY()+extend) / height;
+//		tymax = (n->GetMaxY()-extend) / height;
+//
+//// 		if (texid != 1) {
+//// 			wxLogDebug(_T("img dt's tex = %d"), texid);
+//// 		}
+//
+// 		if (n->IsRotated())
+// 		{
+// 			d2d::Vector tmp = vertices[3];
+// 			vertices[3] = vertices[2];
+// 			vertices[2] = vertices[1];
+// 			vertices[1] = vertices[0];
+// 			vertices[0] = tmp;
 // 		}
-
- 		if (n->IsRotated())
- 		{
- 			d2d::Vector tmp = vertices[3];
- 			vertices[3] = vertices[2];
- 			vertices[2] = vertices[1];
- 			vertices[1] = vertices[0];
- 			vertices[0] = tmp;
- 		}
  	}
  	else
 	{
