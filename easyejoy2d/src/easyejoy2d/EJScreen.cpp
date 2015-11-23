@@ -69,7 +69,6 @@ void EJScreen::Bind()
 
 void EJScreen::UnBind()
 {
-	dtex_shader_flush();
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
 
 //	dtex_shader_target(d2d::ShaderMgr::Instance()->GetFboID());
@@ -109,7 +108,6 @@ void EJScreen::Clear()
 void EJScreen::DebugDraw() const
 {
 	dtexf_debug_draw();
-	dtex_shader_flush();
 }
 
 void EJScreen::CreateRes()

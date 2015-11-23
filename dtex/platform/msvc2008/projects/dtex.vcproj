@@ -633,14 +633,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dtex_shader_new.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_shader_new.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dtex_target.c"
 				>
 			</File>
@@ -660,14 +652,6 @@
 		<Filter
 			Name="adapter"
 			>
-			<File
-				RelativePath="..\..\..\src\dtex_ej_glyph.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dtex_ej_glyph.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\dtex_ej_sprite.c"
 				>

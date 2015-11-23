@@ -5,6 +5,8 @@
 
 #include <dtex_facade.h>
 
+#include <gl/glew.h>
+
 namespace d2d
 {
 
@@ -16,8 +18,17 @@ static int TEX_ID = 0;
 
 void program(int n) 
 {
-	assert(n == 1);
-	ShaderMgr::Instance()->sprite();
+	switch (n) 
+	{
+	case DTEX_PROGRAM_NULL:
+		ShaderMgr::Instance()->null();
+		break;
+	case DTEX_PROGRAM_NORMAL:
+		ShaderMgr::Instance()->sprite();
+		break;
+	default:
+		assert(0);
+	}
 }
 
 void blend(int mode)
@@ -47,14 +58,41 @@ int get_target()
 	return ShaderMgr::Instance()->GetFboID();
 }
 
-void draw(const float vb[16])
+static int ori_width, ori_height;
+static Vector ori_offset;
+static float ori_scale;
+
+void draw_begin() 
 {
-	ShaderMgr::Instance()->Draw(vb, TEX_ID);
+	ShaderMgr* shader = ShaderMgr::Instance();
+
+	int viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	ori_width = viewport[2];
+	ori_height = viewport[3];
+
+	shader->GetModelView(ori_offset, ori_scale);
+
+	shader->SetModelView(Vector(0, 0), 1);
+	shader->SetProjection(2, 2);
+// 	glViewport(0, 0, 2, 2);
 }
 
-void flush()
+void draw(const float vb[16])
 {
-	ShaderMgr::Instance()->Flush();
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->Draw(vb, TEX_ID);
+}
+
+void draw_end()
+{
+	ShaderMgr* shader = ShaderMgr::Instance();
+
+	shader->Flush();
+
+	shader->SetModelView(ori_offset, ori_scale);
+	shader->SetProjection(ori_width, ori_height);
+// 	glViewport(0, 0, ori_width, ori_height);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -72,7 +110,7 @@ static const char* CFG =
 DrawCallBatching::DrawCallBatching()
 {
 	dtex_shader_init(&program, &blend, &set_texture, &get_texture, &set_target, &get_target,
-		&draw, &flush);
+		&draw_begin, &draw, &draw_end);
 
 	dtexf_create(CFG);
 
