@@ -93,7 +93,7 @@ void PackUIWindowTask::Output(const std::string& dir, Json::Value& value) const
 
 	val["type"] = UI_WINDOW;
 
-	val["name"] = m_name;
+	val["name"] = d2d::StringTools::ToUtf8(m_name);
 
 	val["width"] = m_width;
 	val["height"] = m_height;
