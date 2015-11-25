@@ -1,9 +1,11 @@
 #include "TwoPassCanvas.h"
 
+#include "common/Config.h"
 #include "render/ShaderMgr.h"
 #include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
 #include "render/RenderContext.h"
+#include "render/DrawCallBatching.h"
 
 namespace d2d
 {
@@ -16,6 +18,10 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 void TwoPassCanvas::OnSize(int w, int h)
 {
 	ScreenFBO::Instance()->GetFBO().ChangeSize(w, h);
+
+	if (Config::Instance()->IsUseDTex()) {
+		DrawCallBatching::Instance()->OnSize(w, h);
+	}
 }
 
 void TwoPassCanvas::OnDrawWhole() const

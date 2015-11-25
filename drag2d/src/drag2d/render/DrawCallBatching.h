@@ -28,6 +28,8 @@ public:
 
 	dtex_cg* GetDtexCG();
 
+	void OnSize(int w, int h);
+
 	void DebugDraw() const;
 
 	static DrawCallBatching* Instance();

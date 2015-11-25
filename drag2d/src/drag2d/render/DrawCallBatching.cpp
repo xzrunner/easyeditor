@@ -300,6 +300,11 @@ dtex_cg* DrawCallBatching::GetDtexCG()
 	return dtexf_get_cg();
 }
 
+void DrawCallBatching::OnSize(int w, int h)
+{
+	dtex_set_screen(w, h, 1);
+}
+
 void DrawCallBatching::DebugDraw() const
 {
 	dtexf_debug_draw();
