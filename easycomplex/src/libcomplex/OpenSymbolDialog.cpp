@@ -33,6 +33,8 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 		return;
 	}
 
+	m_sprites_impl->EnableObserve(false);
+
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
@@ -102,8 +104,7 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 		m_stage->ResetViewport();
 	}
 
-	etext::GTxt::Instance()->ReloadTexture();
-	m_stage->ResetViewport();
+	m_sprites_impl->EnableObserve(true);
 }
 
 }

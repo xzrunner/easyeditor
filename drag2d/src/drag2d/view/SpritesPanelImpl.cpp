@@ -18,8 +18,10 @@ namespace d2d
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* container)
 	: MultiSpritesImpl(stage)
-	, m_stage(stage)
 {
+	stage->Retain();
+	m_stage = stage;
+
 	m_container = container;
 	m_container->Retain();
 
@@ -28,8 +30,10 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* contain
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	: MultiSpritesImpl(stage)
-	, m_stage(stage)
 {
+	stage->Retain();
+	m_stage = stage;
+
 	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
 	m_container = new SpritesContainer;
 
@@ -38,6 +42,8 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 
 SpritesPanelImpl::~SpritesPanelImpl()
 {
+	m_stage->Release();
+
 	m_container->Release();
 
 	UnRegistSubjects();
@@ -46,6 +52,10 @@ SpritesPanelImpl::~SpritesPanelImpl()
 void SpritesPanelImpl::Notify(int sj_id, void* ud)
 {
 	MultiSpritesImpl::Notify(sj_id, ud);
+
+	if (!IsObserveEnable()) {
+		return;
+	}
 
 	switch (sj_id)
 	{

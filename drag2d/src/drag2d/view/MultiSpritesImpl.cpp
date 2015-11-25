@@ -17,6 +17,7 @@ namespace d2d
 {
 
 MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
+	: m_observe_enable(true)
 {
 	m_sprite_selection = new SpriteSelection(stage);
 
@@ -40,6 +41,10 @@ MultiSpritesImpl::~MultiSpritesImpl()
 
 void MultiSpritesImpl::Notify(int sj_id, void* ud)
 {
+	if (!m_observe_enable) {
+		return;
+	}
+
 	switch (sj_id)
 	{
 	case MSG_SELECT_SPRITE:

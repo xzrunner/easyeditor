@@ -18,8 +18,7 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 EditPanel::~EditPanel()
 {
-	m_impl->SetEditPanelNull();
-	m_impl->Release();
+	delete m_impl;
 }
 
 Vector EditPanel::TransPosScrToProj(int x, int y) const

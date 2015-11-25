@@ -35,6 +35,11 @@ public:
 	SpriteSelection* GetSpriteSelection() { return m_sprite_selection; }
 	void ClearSelectedSprite();
 
+	void EnableObserve(bool enable) { m_observe_enable = enable; }
+
+protected:
+	bool IsObserveEnable() const { return m_observe_enable; }
+
 private:
 	void OnSpriteSelected(ISprite* spr, bool clear);
 
@@ -43,6 +48,8 @@ protected:
 
 private:
 	std::vector<Subject*> m_subjects;
+
+	bool m_observe_enable;
 
 }; // MultiSpritesImpl
 

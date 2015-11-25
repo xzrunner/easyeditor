@@ -18,9 +18,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
-	SetCanvas(new StageCanvas(this, library));
+	d2d::AbstractEditOP* editop = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
+		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
+	SetEditOP(editop);
+	editop->Release();
+
+	d2d::IStageCanvas* canvas = new StageCanvas(this, library);
+	SetCanvas(canvas);
+	canvas->Release();
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
 
@@ -37,9 +42,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property)));
-	SetCanvas(new StageCanvas(this, library));
+	d2d::AbstractEditOP* editop = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
+		NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
+	SetEditOP(editop);
+	editop->Release();
+
+	d2d::IStageCanvas* canvas = new StageCanvas(this, library);
+	SetCanvas(canvas);
+	canvas->Release();
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
 
@@ -66,6 +76,10 @@ bool StagePanel::Update(int version)
 void StagePanel::Notify(int sj_id, void* ud)
 {
 	d2d::SpritesPanelImpl::Notify(sj_id, ud);
+
+	if (!IsObserveEnable()) {
+		return;
+	}
 
 	if (sj_id == d2d::MSG_CLEAR_SPRITE) {
 		Clear();
