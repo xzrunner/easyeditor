@@ -1873,6 +1873,14 @@
 				Name="visitor"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\ReloadTextureVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\ReloadTextureVisitor.inl"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\sprite_visitors.cpp"
 					>
 				</File>

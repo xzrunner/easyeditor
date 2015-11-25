@@ -31,12 +31,6 @@ void StageCanvas::OnDrawSprites() const
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	m_stage->DrawEditOP();
-
-#ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->DebugDraw();
-	}
-#endif
 }
 
 void StageCanvas::DrawBackground() const

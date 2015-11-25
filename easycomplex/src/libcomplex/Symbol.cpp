@@ -59,60 +59,60 @@ void Symbol::Draw(const d2d::Matrix& mt,
 	if (d2d::Config::Instance()->IsUseDTex() && 
 		m_render_cache_open) 
 	{
-		d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
-		n = dtex->Query(m_filepath);
+// 		d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+// 		n = dtex->Query(m_filepath);
 	}
  	if (n) 
  	{
-		d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+		//d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
 
-		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
-		if (shader->GetVersion() != m_render_version)
-		{
-			m_render_cache_open = false;
-			dtex->RefreshSymbol(*this, *n);
-			m_render_cache_open = true;
+		//d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+		//if (shader->GetVersion() != m_render_version)
+		//{
+		//	m_render_cache_open = false;
+		//	dtex->RefreshSymbol(*this, *n);
+		//	m_render_cache_open = true;
 
-			m_render_version = shader->GetVersion();
-		}
+		//	m_render_version = shader->GetVersion();
+		//}
 
-		d2d::Vector vertices[4];
-		float hw = m_rect.xLength() * 0.5f,
-			hh = m_rect.yLength() * 0.5f;
-		vertices[0] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMin), mt);
-		vertices[1] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMin), mt);
-		vertices[2] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMax), mt);
-		vertices[3] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMax), mt);
-		if (n->IsRotated())
-		{
-			d2d::Vector tmp = vertices[3];
-			vertices[3] = vertices[2];
-			vertices[2] = vertices[1];
-			vertices[1] = vertices[0];
-			vertices[0] = tmp;
-		}
+		//d2d::Vector vertices[4];
+		//float hw = m_rect.xLength() * 0.5f,
+		//	hh = m_rect.yLength() * 0.5f;
+		//vertices[0] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMin), mt);
+		//vertices[1] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMin), mt);
+		//vertices[2] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMax), mt);
+		//vertices[3] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMax), mt);
+		//if (n->IsRotated())
+		//{
+		//	d2d::Vector tmp = vertices[3];
+		//	vertices[3] = vertices[2];
+		//	vertices[2] = vertices[1];
+		//	vertices[1] = vertices[0];
+		//	vertices[0] = tmp;
+		//}
 
-		d2d::Vector texcoords[4];
-		float txmin, txmax, tymin, tymax;
-		float extend = dtex->GetExtend();
-		int width = dtex->GetWidth();
-		int height = dtex->GetHeight();
-		int texid = dtex->GetTextureID();
-		txmin = (n->GetMinX()+extend) / width;
-		txmax = (n->GetMaxX()-extend) / width;
-		tymin = (n->GetMinY()+extend) / height;
-		tymax = (n->GetMaxY()-extend) / height;
+		//d2d::Vector texcoords[4];
+		//float txmin, txmax, tymin, tymax;
+		//float extend = dtex->GetExtend();
+		//int width = dtex->GetWidth();
+		//int height = dtex->GetHeight();
+		//int texid = dtex->GetTextureID();
+		//txmin = (n->GetMinX()+extend) / width;
+		//txmax = (n->GetMaxX()-extend) / width;
+		//tymin = (n->GetMinY()+extend) / height;
+		//tymax = (n->GetMaxY()-extend) / height;
 
-		if (texid != 1) {
-			wxLogDebug(_T("img dt's tex = %d"), texid);
-		}
-		texcoords[0].set(txmin, tymin);
-		texcoords[1].set(txmax, tymin);
-		texcoords[2].set(txmax, tymax);
-		texcoords[3].set(txmin, tymax);
+		//if (texid != 1) {
+		//	wxLogDebug(_T("img dt's tex = %d"), texid);
+		//}
+		//texcoords[0].set(txmin, tymin);
+		//texcoords[1].set(txmax, tymin);
+		//texcoords[2].set(txmax, tymax);
+		//texcoords[3].set(txmin, tymax);
 
-		shader->sprite();
-		shader->Draw(vertices, texcoords, texid);
+		//shader->sprite();
+		//shader->Draw(vertices, texcoords, texid);
  	}
  	else
 	{

@@ -15,11 +15,7 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage,
 void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
-
 	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
-	}
 }
 
 void PreviewCanvas::OnDrawSprites() const

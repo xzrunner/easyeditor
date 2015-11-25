@@ -24,7 +24,11 @@ public:
 
 	float* Query(const Image* img, int* id);
 
+	void Clear();
+
 	dtex_cg* GetDtexCG();
+
+	void DebugDraw() const;
 
 	static DrawCallBatching* Instance();
 

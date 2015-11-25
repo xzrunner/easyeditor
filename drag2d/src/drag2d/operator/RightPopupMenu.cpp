@@ -9,7 +9,6 @@
 #include "view/IStageCanvas.h"
 #include "view/MultiSpritesImpl.h"
 #include "dataset/ISymbol.h"
-#include "render/DynamicTexAndFont.h"
 
 #include "message/SelectSpriteSJ.h"
 #include "message/ReorderSpriteSJ.h"
@@ -139,26 +138,26 @@ void RightPopupMenu::HandleSelectMenu(int id)
 
 void RightPopupMenu::HandleDebugTagMenu(int id)
 {
-	if (id == MENU_INSERT_TO_DTEX) {
-		if (Config::Instance()->IsUseDTex()) {
-			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
-			for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
-				dtex->InsertSymbol(s);
-			}
-
-			m_stage->GetCanvas()->ResetViewport();
-		}
-	} else if (id == MENU_REMOVE_FROM_DTEX) {
-		if (Config::Instance()->IsUseDTex()) {
-			//DynamicTexture* dtex = DynamicTexture::Instance();
-			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
-			for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
-				dtex->Remove(s.GetFilepath());
-			}
-		}
-	}
+// 	if (id == MENU_INSERT_TO_DTEX) {
+// 		if (Config::Instance()->IsUseDTex()) {
+// 			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+// 			for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
+// 				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
+// 				dtex->InsertSymbol(s);
+// 			}
+// 
+// 			m_stage->GetCanvas()->ResetViewport();
+// 		}
+// 	} else if (id == MENU_REMOVE_FROM_DTEX) {
+// 		if (Config::Instance()->IsUseDTex()) {
+// 			//DynamicTexture* dtex = DynamicTexture::Instance();
+// 			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+// 			for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
+// 				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
+// 				dtex->Remove(s.GetFilepath());
+// 			}
+// 		}
+// 	}
 }
 
 void RightPopupMenu::UpOneLayer()

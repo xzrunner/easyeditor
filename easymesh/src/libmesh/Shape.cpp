@@ -128,12 +128,12 @@ void Shape::DrawTexture(const d2d::Matrix& mt,
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
 
-		if (d2d::Config::Instance()->IsUseDTex()) {
-			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
-				m_tex_filepath, m_texid);
-		} else {
+// 		if (d2d::Config::Instance()->IsUseDTex()) {
+// 			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
+// 				m_tex_filepath, m_texid);
+// 		} else {
 			shader->Draw(vertices, texcoords, m_texid);
-		}
+//		}
 	}
 }
 

@@ -52,12 +52,12 @@ void TextureMaterial::Draw(const d2d::Matrix& mt) const
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
 
-		if (d2d::Config::Instance()->IsUseDTex()) {
-			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
-				m_image->GetFilepath(), m_image->GetTexID());
-		} else {
+// 		if (d2d::Config::Instance()->IsUseDTex()) {
+// 			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
+// 				m_image->GetFilepath(), m_image->GetTexID());
+// 		} else {
 			shader->Draw(vertices, texcoords, m_image->GetTexID());
-		}
+//		}
 	}
 }
 

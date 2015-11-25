@@ -217,8 +217,6 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	int texid;
 	d2d::Vector texcoords[4];
 	float txmin, txmax, tymin, tymax;
-//	DynamicTexAndFont* dt = NULL;
-//	const TPNode* n = NULL;
 
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex()) {

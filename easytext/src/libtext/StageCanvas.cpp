@@ -29,13 +29,7 @@ void StageCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
  
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadBegin();
-	}
 	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadEnd();
-	}
 
 	Sprite* text = static_cast<Sprite*>(m_edited);
 	etext::GTxt::Instance()->Reload(text);
@@ -60,7 +54,7 @@ void StageCanvas::OnDrawSprites() const
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+		d2d::DrawCallBatching::Instance()->DebugDraw();
 	}
 #endif
 }

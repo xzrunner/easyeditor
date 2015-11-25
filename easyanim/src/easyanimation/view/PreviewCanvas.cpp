@@ -23,11 +23,7 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, con
 void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
-
 	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
-	}
 }
 
 void PreviewCanvas::OnDrawSprites() const
@@ -37,12 +33,6 @@ void PreviewCanvas::OnDrawSprites() const
 	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
 
 	DrawStageData();
-
-#ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DynamicTexAndFont::Instance()->DebugDraw();
-	}	
-#endif
 }
 
 void PreviewCanvas::OnTimer()

@@ -15,8 +15,6 @@
 #include "view/PropertySettingPanel.h"
 #include "history/ArrangeSpriteAtomicOP.h" 
 #include "render/PrimitiveDraw.h"
-//#include "render/DynamicTexture.h"
-#include "render/DynamicTexAndFont.h"
 
 namespace d2d
 {

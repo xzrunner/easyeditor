@@ -108,11 +108,8 @@ namespace ecomplex
 
 void FileLoader::Load(const std::string& filepath, Symbol* complex)
 {
-	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
-	d2d::DynamicTexAndFont* dtex = NULL;
-	if (use_dtex) {
-		dtex = d2d::DynamicTexAndFont::Instance();
-		dtex->BeginImage();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->LoadBegin();
 	}
 
 	complex->Clear();
@@ -136,11 +133,12 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 
 	complex->InitBounding();
 
-	if (use_dtex) {
-		dtex->EndImage();
-		if (complex->m_use_render_cache) {
-			dtex->InsertSymbol(*complex);
-		}
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->LoadEnd();
+
+// 		if (complex->m_use_render_cache) {
+// 			dtex->InsertSymbol(*complex);
+// 		}
 	}
 }
 

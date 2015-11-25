@@ -61,14 +61,14 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
 		c->m_use_render_cache = wxANY_AS(value, bool);
-		if (d2d::Config::Instance()->IsUseDTex()) {
-			d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
-			if (c->m_use_render_cache) {
-				dtex->InsertSymbol(*c);
-			} else {
-				dtex->Remove(c->GetFilepath());
-			}
-		}
+// 		if (d2d::Config::Instance()->IsUseDTex()) {
+// 			d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+// 			if (c->m_use_render_cache) {
+// 				dtex->InsertSymbol(*c);
+// 			} else {
+// 				dtex->Remove(c->GetFilepath());
+// 			}
+// 		}
 	}
 	else
 	{

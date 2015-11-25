@@ -12,10 +12,10 @@
 #include "view/FrameDropTarget.h"
 #include "view/EditPanel.h"
 #include "view/IStageCanvas.h"
-#include "render/DynamicTexAndFont.h"
 #include "message/ClearSpriteSJ.h"
 #include "message/ClearShapeSJ.h"
 #include "message/ClearPanelSJ.h"
+#include "render/DrawCallBatching.h"
 
 #include <wx/filename.h>
 #include <fstream>
@@ -95,7 +95,7 @@ void Frame::openFile(const wxString& filename)
 	}
 
 	if (Config::Instance()->IsUseDTex()) {
-		DynamicTexAndFont::Instance()->Clear();
+		DrawCallBatching::Instance()->Clear();
 	}
 
 	Clear();
@@ -163,7 +163,7 @@ void Frame::onNew(wxCommandEvent& event)
 	Clear();
 
 	if (Config::Instance()->IsUseDTex()) {
-		DynamicTexAndFont::Instance()->Clear();
+		DrawCallBatching::Instance()->Clear();
 	}
 }
 

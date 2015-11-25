@@ -77,31 +77,31 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	img->Release();
 }
 
-void RectCutLoader::LoadToDtex(const wxString& pack_file, const wxString& img_name)
-{
-	std::vector<Picture> pictures;
-//	LoadJsonFile(pack_file, img_name, pictures);
-	LoadRRPFile(pack_file, 5837, pictures);
-
-	std::string dir = d2d::FilenameTools::getFileDir(pack_file);
-	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
-
-//	eimage::ImageClip clip(*img_data);
-	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
-	for (int i = 0, n = pictures.size(); i < n; ++i)
-	{
-		const Picture& pic = pictures[i];
-		d2d::Rect r_src, r_dst;
-		r_src.combine(d2d::Vector(pic.src.x, pic.src.y));
-		r_src.combine(d2d::Vector(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
-		r_dst.combine(d2d::Vector(pic.dst.x, pic.dst.y));
-		r_dst.combine(d2d::Vector(pic.dst.x+pic.dst.w, pic.dst.y+pic.dst.h));
-		dtex->AddImageWithRegion(img, r_src, r_dst, pic.src.h != pic.dst.h);
-	}
-	dtex->EndImageWithRegion();
-
-	img->Release();
-}
+//void RectCutLoader::LoadToDtex(const wxString& pack_file, const wxString& img_name)
+//{
+//	std::vector<Picture> pictures;
+////	LoadJsonFile(pack_file, img_name, pictures);
+//	LoadRRPFile(pack_file, 5837, pictures);
+//
+//	std::string dir = d2d::FilenameTools::getFileDir(pack_file);
+//	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
+//
+////	eimage::ImageClip clip(*img_data);
+//	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+//	for (int i = 0, n = pictures.size(); i < n; ++i)
+//	{
+//		const Picture& pic = pictures[i];
+//		d2d::Rect r_src, r_dst;
+//		r_src.combine(d2d::Vector(pic.src.x, pic.src.y));
+//		r_src.combine(d2d::Vector(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
+//		r_dst.combine(d2d::Vector(pic.dst.x, pic.dst.y));
+//		r_dst.combine(d2d::Vector(pic.dst.x+pic.dst.w, pic.dst.y+pic.dst.h));
+//		dtex->AddImageWithRegion(img, r_src, r_dst, pic.src.h != pic.dst.h);
+//	}
+//	dtex->EndImageWithRegion();
+//
+//	img->Release();
+//}
 
 void RectCutLoader::LoadJsonFile(const wxString& pack_file, const wxString& img_name,
 								 std::vector<Picture>& pictures)

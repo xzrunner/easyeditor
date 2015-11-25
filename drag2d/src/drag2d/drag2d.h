@@ -165,6 +165,7 @@
 #include "common/StackTrace.h"
 #include "common/Timer.h"
 #include "common/sprite_visitors.h"
+#include "common/ReloadTextureVisitor.h"
 
 #include "render/PrimitiveDraw.h"
 #include "render/DrawSelectedShapeVisitor.h"
@@ -175,8 +176,6 @@
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
 #include "render/ShaderMgr.h"
-//#include "render/DynamicTexture.h"
-//#include "render/DynamicFont.h"
 #include "render/RenderContext.h"
 #include "render/IShader.h"
 #include "render/LabelNew.h"

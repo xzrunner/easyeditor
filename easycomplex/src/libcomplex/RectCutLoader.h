@@ -14,7 +14,7 @@ public:
 
 	void LoadJsonAndImg(const wxString& pack_file, const wxString& img_name);
 
-	void LoadToDtex(const wxString& pack_file, const wxString& img_name);
+//	void LoadToDtex(const wxString& pack_file, const wxString& img_name);
 
 private:
 	struct Rect

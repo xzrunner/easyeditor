@@ -290,9 +290,19 @@ float* DrawCallBatching::Query(const Image* img, int* id)
 	return dtexf_c2_query_tex(key, id);
 }
 
+void DrawCallBatching::Clear()
+{
+	dtexf_c2_clear();
+}
+
 dtex_cg* DrawCallBatching::GetDtexCG()
 {
 	return dtexf_get_cg();
+}
+
+void DrawCallBatching::DebugDraw() const
+{
+	dtexf_debug_draw();
 }
 
 DrawCallBatching* DrawCallBatching::Instance()

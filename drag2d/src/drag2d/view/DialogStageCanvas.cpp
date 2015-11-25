@@ -2,9 +2,8 @@
 
 #include "common/config.h"
 #include "dataset/ISymbol.h"
-//#include "render/DynamicTexture.h"
-#include "render/DynamicTexAndFont.h"
 #include "view/EditPanelImpl.h"
+#include "render/DrawCallBatching.h"
 
 namespace d2d
 {
@@ -19,9 +18,12 @@ void DialogStageCanvas::InitGL()
 {
 	OrthoCanvas::InitGL();
 
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		DrawCallBatching::Instance()->ReloadBegin();
+	}
 	m_symbol->ReloadTexture();
-	if (Config::Instance()->IsUseDTex()) {
-		DynamicTexAndFont::Instance()->ReloadTexture();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		DrawCallBatching::Instance()->ReloadEnd();
 	}
 }
 

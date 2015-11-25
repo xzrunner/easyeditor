@@ -63,8 +63,6 @@ void ShaderMgrBase::Flush()
 	// 	}
 
 	Commit();
-
-	//	DynamicTexture::Instance()->DebugDraw();
 }
 
 void ShaderMgrBase::Switch(IShader* shader)

@@ -3,8 +3,6 @@
 #include "Symbol.h"
 #include "Settings.h"
 
-#include <dtex_facade.h>
-
 #include <easyanim.h>
 #include <easytext.h>
 
@@ -90,11 +88,9 @@ void StageCanvas::OnDrawSprites() const
 	m_stat.End();
 
 #ifdef _DEBUG 
-// 	if (d2d::Config::Instance()->IsUseDTex()) {
-// 		d2d::DynamicTexAndFont::Instance()->DebugDraw();
-// 	}
-
-	dtexf_debug_draw();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->DebugDraw();
+	}
 #endif
 
 	m_stat.DrawTime(m_screen);
