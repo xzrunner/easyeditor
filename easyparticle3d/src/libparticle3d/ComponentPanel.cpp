@@ -127,7 +127,7 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 	}
 	// Scale
 	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
-		d2d::SliderItem(LANG[LK_START], "start", SCALE_START, 0, 500), d2d::SliderItem(LANG[LK_END], "end", SCALE_END, 0, 500));
+		d2d::SliderItem(LANG[LK_START], "start", SCALE_START, 0, 2000), d2d::SliderItem(LANG[LK_END], "end", SCALE_END, 0, 2000));
 	top_sizer->Add(s_scale);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_scale);

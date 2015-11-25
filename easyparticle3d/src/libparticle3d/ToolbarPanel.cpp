@@ -221,7 +221,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	top_sizer->AddSpacer(10);
 	// Speed
 	d2d::SliderCtrlTwo* s_spd = new d2d::SliderCtrlTwo(this, LANG[LK_LINEAR_SPEED], "speed", this, PS_SPEED, 
-		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, SPEED_CENTER, 0, 9000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, SPEED_OFFSET, 0, 4000));
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, SPEED_CENTER, 0, 40000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, SPEED_OFFSET, 0, 20000));
 	top_sizer->Add(s_spd);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_spd);
