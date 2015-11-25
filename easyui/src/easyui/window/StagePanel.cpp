@@ -72,7 +72,7 @@ void StagePanel::Notify(int sj_id, void* ud)
 			d2d::ISprite* spr = p->spr;
 			std::string type = "unknown";
 			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
-			spr->tag += "type=" + type + ";";
+			spr->tag = "type=" + type + ";" + spr->tag;
 		}
 		break;
 	}
