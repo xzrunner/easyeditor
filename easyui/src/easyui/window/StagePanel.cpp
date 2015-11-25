@@ -70,9 +70,11 @@ void StagePanel::Notify(int sj_id, void* ud)
 		{
 			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
 			d2d::ISprite* spr = p->spr;
-			std::string type = "unknown";
+			std::string type = "";
 			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
-			spr->tag = "type=" + type + ";" + spr->tag;
+			if (type.empty() && spr->tag.find("type=unknown") == std::string::npos) {
+				spr->tag = "type=unknown;" + spr->tag;
+			}
 		}
 		break;
 	}
