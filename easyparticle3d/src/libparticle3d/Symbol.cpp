@@ -103,6 +103,8 @@ void Symbol::LoadResources()
 	fin.close();
 
 	name = value["name"].asString();
+
+	Start();
 }
 
 }
