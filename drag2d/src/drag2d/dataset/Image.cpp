@@ -65,15 +65,11 @@ bool Image::LoadFromFile(const std::string& filepath)
 		return true;
 	}
 
-	// 		// todo
-	// 		DynamicTexture::Instance()->Insert(this);
 	if (Config::Instance()->IsUseDTex()) {
-//		DynamicTexAndFont::Instance()->AddImage(this);
-
 		DrawCallBatching* dcb = DrawCallBatching::Instance();
-		dcb->Begin();
-		dcb->Add(this);
-		dcb->End();
+		dcb->LoadBegin();
+		dcb->Load(this);
+		dcb->LoadEnd();
 	}
 
 	return true;
@@ -82,6 +78,10 @@ bool Image::LoadFromFile(const std::string& filepath)
 void Image::ReloadTexture()
 {
 	m_tex->Reload();
+
+	if (Config::Instance()->IsUseDTex()) {
+		DrawCallBatching::Instance()->Reload(this);
+	}
 }
 
 std::string Image::GetFilepath() const 
@@ -129,7 +129,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画
  //   	ShaderMgr* shader = ShaderMgr::Instance();
- //  s 	shader->sprite();
+ //   	shader->sprite();
  //   
  //   	float tot_hw = m_width * 0.5f,
  //   		  tot_hh = m_height * 0.5f;
@@ -220,11 +220,8 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 //	DynamicTexAndFont* dt = NULL;
 //	const TPNode* n = NULL;
 
-	float* c2_texcoords;
+	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex()) {
-//		dt = DynamicTexAndFont::Instance();
-//		n = dt->Query(m_tex->GetFilepath());
-
 		c2_texcoords = DrawCallBatching::Instance()->Query(this, &texid);
 	}
  	if (c2_texcoords)

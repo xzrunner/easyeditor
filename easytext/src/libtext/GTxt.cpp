@@ -1,23 +1,12 @@
 #include "GTxt.h"
 #include "Sprite.h"
 
-#include <dtex.h>
 #include <gtxt.h>
 
 namespace etext
 {
 
 GTxt* GTxt::m_instance = NULL;
-
-static const char* CFG =
-	"{ \n"
-	"	\"open_c1\" : false, \n"
-	"	\"open_c2\" : true, \n"
-	"	\"open_c3\" : false,	 \n"
-	"	\"open_cg\" : true,	 \n"
-	"	\"c2_tex_size\" : 2048	 \n"
-	"} \n"
-	;
 
 GTxt::GTxt()
 {
@@ -98,7 +87,6 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
 	d2d::Matrix* mt = (d2d::Matrix*)ud;
 	d2d::SpriteRenderer::Instance()->Draw(sym, *mt, d2d::Vector(x, y));
-	dtex_shader_set_texture(0);
 }
 
 void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
@@ -106,9 +94,6 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	if (spr->GetText().empty()) {
 		return;
 	}
-
-	dtex_shader_set_texture(0);
-	d2d::ShaderMgr::Instance()->SetTexture(0);
 
 	gtxt_label_style style;
 
@@ -129,15 +114,28 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	gtxt_label_draw_richtext(utf8.c_str(), &style, render, (void*)&mt);
 }
 
-void GTxt::ReloadTexture()
+void GTxt::Reload(const Sprite* spr) 
 {
-	dtexf_cg_reload_texture();
-	dtexf_cg_clear();
-}
+	if (spr->GetText().empty()) {
+		return;
+	}
 
-void GTxt::Clear()
-{
-//	dtexf_cg_clear();
+	gtxt_label_style style;
+
+	spr->GetSize(style.width, style.height);
+	spr->GetAlign(style.align_h, style.align_v);
+	spr->GetSpace(style.space_h, style.space_v);
+
+	style.gs.font = spr->GetFont();
+	style.gs.font_size = spr->GetFontSize();
+	style.gs.font_color.integer = d2d::trans_color2int(spr->GetFontColor(), d2d::PT_RGBA);
+
+	style.gs.edge = spr->GetEdge();
+	style.gs.edge_size = spr->GetEdgeSize();
+	style.gs.edge_color.integer = d2d::trans_color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
+
+	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
+	gtxt_label_reload_richtext(utf8.c_str(), &style);
 }
 
 GTxt* GTxt::Instance()
@@ -150,12 +148,8 @@ GTxt* GTxt::Instance()
 
 void GTxt::Init()
 {
-//	dtex_shader_load();
-
-	dtexf_create(CFG);
-
-	dtex_cg* cg = dtexf_get_cg();
-	gtxt_render_init(cg);
+	dtex_cg* cg = d2d::DrawCallBatching::Instance()->GetDtexCG();
+	gtxt_adapter_init(cg);
 
 	gtxt_ft_init();
 

@@ -15,8 +15,7 @@ public:
 
 	void Draw(const d2d::Matrix& mt, const Sprite* spr) const;
 
-	void ReloadTexture();
-	void Clear();
+	void Reload(const Sprite* spr);
 
 	static GTxt* Instance();
 

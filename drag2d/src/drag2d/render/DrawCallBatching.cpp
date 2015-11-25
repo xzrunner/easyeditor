@@ -3,7 +3,7 @@
 #include "dataset/Image.h"
 #include "render/ShaderMgr.h"
 
-#include <dtex_facade.h>
+#include <dtex.h>
 
 #include <gl/glew.h>
 
@@ -97,7 +97,7 @@ static void _draw_end()
 
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)
 
-static int _texture_create(int type, int width, int height, const void* data, int channel) {
+static int _texture_create(int type, int width, int height, const void* data, int channel,unsigned int id) {
 	assert(type == DTEX_TF_RGBA8);
 
 	// todo
@@ -163,9 +163,9 @@ static int _texture_create(int type, int width, int height, const void* data, in
 	}
 
 	glActiveTexture(GL_TEXTURE0 + channel);
-
-	GLuint id;
-	glGenTextures(1, &id);
+	if (id == 0) {
+		glGenTextures(1, (GLuint*)&id);	
+	}
 	glBindTexture(GL_TEXTURE_2D, id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -227,26 +227,18 @@ DrawCallBatching::DrawCallBatching()
 	dtex_gl_texture_init(&_texture_create, &_texture_release, &_texture_update, &_texture_id);
 
 	dtexf_create(CFG);
-
-// 	dtex_shader_load();
-// 	dtex_render_init();
-// 
-// 	m_loader = dtexloader_create();
-// 	m_c2 = dtex_c2_create(4096, true, 1, false);
 }
 
 DrawCallBatching::~DrawCallBatching()
 {
-// 	dtexloader_release(m_loader);
-// 	dtex_c2_release(m_c2);
 }
 
-void DrawCallBatching::Begin()
+void DrawCallBatching::LoadBegin()
 {
 	dtexf_c2_load_begin();
 }
 
-int DrawCallBatching::Add(const Image* img)
+int DrawCallBatching::Load(const Image* img)
 {
 	const std::string& filepath = img->GetFilepath();
 	std::map<std::string, int>::iterator itr = m_path2id.find(filepath);
@@ -261,9 +253,29 @@ int DrawCallBatching::Add(const Image* img)
 	return key;
 }
 
-void DrawCallBatching::End()
+void DrawCallBatching::LoadEnd()
 {
 	dtexf_c2_load_end();
+}
+
+void DrawCallBatching::ReloadBegin()
+{
+	dtexf_c2_reload_begin();
+}
+
+void DrawCallBatching::Reload(const Image* img)
+{
+	int key;
+	std::map<std::string, int>::iterator itr = m_path2id.find(img->GetFilepath());
+	assert(itr != m_path2id.end());
+	key = itr->second;
+	
+	dtexf_c2_reload_tex(img->GetTexID(), img->GetOriginWidth(), img->GetOriginHeight(), key);
+}
+
+void DrawCallBatching::ReloadEnd()
+{
+	dtexf_c2_reload_end();
 }
 
 float* DrawCallBatching::Query(const Image* img, int* id)
@@ -273,9 +285,14 @@ float* DrawCallBatching::Query(const Image* img, int* id)
 	if (itr != m_path2id.end()) {
 		key = itr->second;
 	} else {
-		key = Add(img);
+		key = Load(img);
 	}
 	return dtexf_c2_query_tex(key, id);
+}
+
+dtex_cg* DrawCallBatching::GetDtexCG()
+{
+	return dtexf_get_cg();
 }
 
 DrawCallBatching* DrawCallBatching::Instance()

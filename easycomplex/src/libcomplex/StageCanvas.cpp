@@ -45,12 +45,13 @@ void StageCanvas::InitGL()
 	shader_mgr->Null();
 	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
 
+ 	if (d2d::Config::Instance()->IsUseDTex()) {
+ 		d2d::DrawCallBatching::Instance()->ReloadBegin();
+ 	}
 	m_stage->getSymbol()->ReloadTexture();
-// 	if (d2d::Config::Instance()->IsUseDTex()) {
-// 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
-// 	}
-
-//	etext::GTxt::Instance()->ReloadTexture();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->ReloadEnd();
+	}
 
 	ResetViewport();
 }

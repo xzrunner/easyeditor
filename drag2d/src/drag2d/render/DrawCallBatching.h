@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 
+struct dtex_cg;
+
 namespace d2d
 {
 
@@ -12,12 +14,18 @@ class Image;
 class DrawCallBatching
 {
 public:
-	void Begin();
-	int Add(const Image* img);
-	void End();
+	void LoadBegin();
+	int Load(const Image* img);
+	void LoadEnd();
+
+	void ReloadBegin();
+	void Reload(const Image* img);
+	void ReloadEnd();
 
 	float* Query(const Image* img, int* id);
-	
+
+	dtex_cg* GetDtexCG();
+
 	static DrawCallBatching* Instance();
 
 private:

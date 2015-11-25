@@ -3,6 +3,8 @@
 #include "config.h"
 #include "FileLoader.h"
 
+#include <easytext.h>
+
 #include <queue>
 
 namespace ecomplex
@@ -29,12 +31,20 @@ Symbol::~Symbol()
 
 void Symbol::ReloadTexture() const
 {
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(m_sprites[i])) {
+			etext::GTxt::Instance()->Reload(text);
+		}
+	}
+
 	std::set<const ISymbol*> symbols;
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		symbols.insert(&m_sprites[i]->GetSymbol());
+	}
 	std::set<const ISymbol*>::iterator itr = symbols.begin();
-	for ( ; itr != symbols.end(); ++itr)
+	for ( ; itr != symbols.end(); ++itr) {
 		(*itr)->ReloadTexture();
+	}
 }
 
 void Symbol::Draw(const d2d::Matrix& mt,
