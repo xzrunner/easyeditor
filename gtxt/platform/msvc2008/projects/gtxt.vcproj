@@ -150,6 +150,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_adapter.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\gtxt\gtxt_adapter.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\gtxt\gtxt_freetype.c"
 			>
 		</File>
@@ -179,14 +187,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\gtxt\gtxt_layout.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_render.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_render.h"
 			>
 		</File>
 		<File
