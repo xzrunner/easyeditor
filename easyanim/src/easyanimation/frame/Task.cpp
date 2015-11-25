@@ -11,6 +11,7 @@
 #include <easymesh.h>
 #include <easyscale9.h>
 #include <easyicon.h>
+#include <easyparticle3d.h>
 
 #include <wx/splitter.h>
 
@@ -121,6 +122,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_widgets.m_library->AddPage(new emesh::LibraryPage(nb));
 	m_widgets.m_library->AddPage(new escale9::LibraryPage(nb));
 	m_widgets.m_library->AddPage(new eicon::LibraryPage(nb));
+	m_widgets.m_library->AddPage(new eparticle3d::LibraryPage(nb));
 
 	// property
 	m_widgets.m_property = new PropertySettingPanel(split);
