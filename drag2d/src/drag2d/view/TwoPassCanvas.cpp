@@ -7,8 +7,6 @@
 #include "render/RenderContext.h"
 #include "render/DrawCallBatching.h"
 
-#include "render/render_utility.h"
-
 #include <dtex_facade.h>
 
 namespace d2d
@@ -21,7 +19,8 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 
 void TwoPassCanvas::OnSize(int w, int h)
 {
-//	ScreenFBO::Instance()->GetFBO().ChangeSize(w, h);
+	// fix me: init render context
+	ShaderMgr::Instance();
 
 	if (Config::Instance()->IsUseDTex()) {
 		DrawCallBatching::Instance()->OnSize(w, h);
@@ -69,44 +68,30 @@ void TwoPassCanvas::OnSize(int w, int h)
 
 void TwoPassCanvas::OnDrawWhole() const
 {
-//	const FBO& fbo = ScreenFBO::Instance()->GetFBO();
-	ShaderMgr* mgr = ShaderMgr::Instance();
-
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
 
-	gl_debug();
-
 	//////////////////////////////////////////////////////////////////////////
-	// Draw to FBO
+	// Draw to Target
 	//////////////////////////////////////////////////////////////////////////
 	if (IsDirty()) {
 		dtexf_cs_bind();
 
-// 		glClearColor(0, 0, 0, 0);
-// 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ 		glClearColor(0, 0, 0, 0);
+ 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		OnDrawSprites();
 
 		dtexf_cs_unbind();
-
-		//		wxLogDebug("pass 22222222222222222");
-	} else {
-		//		wxLogDebug("pass 1");
 	}
-
-	gl_debug();
 
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-// 	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-// 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-// 
-// 	dtexf_cs_draw_to_screen();
-
-	gl_debug();
-
+ 	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+ 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+ 
+ 	dtexf_cs_draw_to_screen();
 }
 
 }
