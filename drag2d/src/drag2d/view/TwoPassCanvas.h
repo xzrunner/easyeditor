@@ -12,6 +12,7 @@ public:
 	TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 
 protected:
+	virtual void InitGL();
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawWhole() const;
 

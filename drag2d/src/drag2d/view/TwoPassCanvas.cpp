@@ -17,11 +17,18 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 {
 }
 
-void TwoPassCanvas::OnSize(int w, int h)
+void TwoPassCanvas::InitGL()
 {
 	// fix me: init render context
 	ShaderMgr::Instance();
 
+	IStageCanvas::InitGL();
+
+	dtexf_cs_reload();
+}
+
+void TwoPassCanvas::OnSize(int w, int h)
+{
 	if (Config::Instance()->IsUseDTex()) {
 		DrawCallBatching::Instance()->OnSize(w, h);
 	}
@@ -91,7 +98,7 @@ void TwoPassCanvas::OnDrawWhole() const
  	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
- 	dtexf_cs_draw_to_screen();
+	dtexf_cs_draw_to_screen();
 }
 
 }
