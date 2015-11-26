@@ -220,7 +220,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex()) {
-		c2_texcoords = DrawCallBatching::Instance()->Query(this, &texid);
+//		c2_texcoords = DrawCallBatching::Instance()->Query(this, &texid);
 	}
  	if (c2_texcoords)
  	{

@@ -7,6 +7,8 @@
 
 #include "common/Color.h"
 
+#include "render/render_utility.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <gl/glew.h>
@@ -152,7 +154,27 @@ void SpriteShader::Commit()
 	static int last_count = 0;
 	if (m_open_buffer_data) {
 		last_count = m_count;
+		gl_debug();
+
+		GLint fbo = 0;
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING , &fbo);
+
+		GLint tex;
+		glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex);
+
+		if (!glIsProgram(m_prog)) {
+			int zz = 0;
+		}
+
+		if (fbo == 1) {
+			glClearColor(1, 0, 0, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+		}
+
 		glBufferData(GL_ARRAY_BUFFER, m_count * m_vertex_size * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+
+		gl_debug();
+
 	}
 
 	if (!m_open_buffer_data) {
@@ -322,8 +344,13 @@ void SpriteShader::InitBuffers()
 		idxs[i*6+4] = i*4+2;
 		idxs[i*6+5] = i*4+3;
 	}
+
+	gl_debug();
+
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, idxs, GL_STATIC_DRAW);
 	delete[] idxs;
+
+	gl_debug();
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 

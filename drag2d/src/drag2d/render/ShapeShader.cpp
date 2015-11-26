@@ -4,6 +4,8 @@
 #include "ShapeShader.vert"
 #include "ShapeShader.frag"
 
+#include "render/render_utility.h"
+
 #include <gl/glew.h>
 #include <string>
 
@@ -71,6 +73,10 @@ void ShapeShader::SetColor(const Colorf& col)
 {
 	m_color = col;
 	glUniform4fv(m_color_loc, 1, (GLfloat*)(&col.r));
+
+	bool zz = glIsProgram(m_prog);
+
+	gl_debug();
 }
 
 void ShapeShader::LoadShader()

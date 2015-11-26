@@ -35,6 +35,8 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 
 void StageCanvas::InitGL()
 {
+	d2d::ShaderMgr::Instance();
+
 	d2d::OrthoCanvas::InitGL();
 
 	m_library->LoadDefaultSymbol();
@@ -88,9 +90,9 @@ void StageCanvas::OnDrawSprites() const
 	m_stat.End();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->DebugDraw();
-	}
+// 	if (d2d::Config::Instance()->IsUseDTex()) {
+// 		d2d::DrawCallBatching::Instance()->DebugDraw();
+// 	}
 #endif
 
 	m_stat.DrawTime(m_screen);

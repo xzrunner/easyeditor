@@ -3,6 +3,8 @@
 #include <gl/glew.h>
 #include <stdio.h>
 
+#include "render/render_utility.h"
+
 namespace d2d
 {
 
@@ -33,6 +35,8 @@ void Shader::color(const Colorf& multi, const Colorf& add)
 	} else {
 		glUniform4fv(m_col_loc, 1, (GLfloat*)(&multi.r));
 	}
+
+	gl_debug();
 }
 
 void Shader::color(float r, float g, float b, float a)
@@ -51,6 +55,8 @@ void Shader::color(float r, float g, float b, float a)
 		} else {
 			glUniform4fv(m_col_loc, 1, mul);
 		}
+
+		gl_debug();
 	}
 }
 

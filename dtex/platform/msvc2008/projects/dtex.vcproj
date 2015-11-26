@@ -363,6 +363,14 @@
 					RelativePath="..\..\..\src\dtex_cg.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_cs.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_cs.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="extend"
