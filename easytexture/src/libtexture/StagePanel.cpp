@@ -12,7 +12,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = new Symbol))
+	, d2d::ShapesPanelImpl(new SymbolContainer(m_symbol = new Symbol))
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl(GetStageImpl(), new SymbolContainer((Symbol*)(&edited->GetSymbol())))
+	, d2d::ShapesPanelImpl(new SymbolContainer((Symbol*)(&edited->GetSymbol())))
 {
 	SetEditOP(new libshape::EditPolylineOP<libshape::DrawPolygonOP, 
 		d2d::SelectShapesOP>(this, GetStageImpl(), this, NULL, new d2d::OneFloatValueStatic(5), NULL));

@@ -51,7 +51,7 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

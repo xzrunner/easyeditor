@@ -7,22 +7,15 @@
 namespace d2d
 {
 
-class EditPanelImpl;
 class IStageCanvas;
 
 class ShapeSelection : public ObjSelectionSet<IShape>
 {
 public:
-	ShapeSelection(EditPanelImpl* stage);
-	virtual ~ShapeSelection();
-
 	virtual void Clear();
 
 	virtual void Add(IShape* item);
 	virtual void Remove(IShape* item);
-
-private:
-	EditPanelImpl* m_stage;
 
 }; // ShapeSelection
 

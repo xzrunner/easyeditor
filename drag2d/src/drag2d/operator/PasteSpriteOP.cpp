@@ -9,6 +9,7 @@
 #include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
 #include "message/InsertSpriteSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -99,7 +100,7 @@ bool PasteSpriteOP::OnMouseMove(int x, int y)
 
 	setMousePos(x, y);
 
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

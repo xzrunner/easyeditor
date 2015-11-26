@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl(GetStageImpl())
+	, d2d::ShapesPanelImpl()
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
@@ -27,7 +27,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl(GetStageImpl())
+	, d2d::ShapesPanelImpl()
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this, edited, bg_sprites));

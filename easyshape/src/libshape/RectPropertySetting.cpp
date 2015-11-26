@@ -56,7 +56,7 @@ void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

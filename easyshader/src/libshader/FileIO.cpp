@@ -50,7 +50,7 @@ Shader* FileIO::LoadShader(const wxString& filepath, d2d::IStageCanvas* canvas,
 		shader_mgr->Model();
 	}
 	shader->LoadUniforms();
-	canvas->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 
 	return shader;
 }

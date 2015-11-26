@@ -15,7 +15,7 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name,
 {
 	m_editOP = new SelectShapesOP(stage_wnd, stage, shapesImpl);
 
-	m_layersMgr = new LayersMgrWidget(this, stage);
+	m_layersMgr = new LayersMgrWidget(this);
 	m_sizer = new wxBoxSizer(wxVERTICAL);
 	m_sizer->Add(m_layersMgr);
 }
@@ -28,7 +28,7 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name,
 {
 	m_editOP = new SelectSpritesOP(stage_wnd, stage, spritesImpl);
 
-	m_layersMgr = new LayersMgrWidget(this, stage);
+	m_layersMgr = new LayersMgrWidget(this);
 	m_sizer = new wxBoxSizer(wxVERTICAL);
 	m_sizer->Add(m_layersMgr);
 }

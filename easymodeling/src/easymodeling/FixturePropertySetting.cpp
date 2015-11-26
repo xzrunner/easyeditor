@@ -38,7 +38,7 @@ void FixturePropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		dirty = false;
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

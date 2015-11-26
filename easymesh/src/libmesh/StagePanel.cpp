@@ -10,7 +10,7 @@ namespace emesh
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(GetStageImpl())
+	, d2d::MultiShapesImpl()
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(GetStageImpl())
+	, d2d::MultiShapesImpl()
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -34,7 +34,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 // StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 // 					   d2d::LibraryPanel* library, Sprite* sprite)
 // 	: d2d::EditPanel(parent, frame)
-// 	, d2d::MultiShapesImpl(parent)
+// 	, d2d::MultiShapesImpl()
 // 	, m_background(NULL)
 // {
 // 	sprite->Retain();
@@ -64,21 +64,21 @@ void StagePanel::Notify(int sj_id, void* ud)
 	case d2d::MSG_REMOVE_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
 			if (static_cast<EditShape*>(shape)->RemoveShape((d2d::IShape*)ud)) {
-				GetCanvas()->SetDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case d2d::MSG_INSERT_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
 			if (static_cast<EditShape*>(shape)->InsertShape((d2d::IShape*)ud)) {
-				GetCanvas()->SetDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case d2d::MSG_CLEAR_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
 			if (static_cast<EditShape*>(shape)->ClearShape()) {
-				GetCanvas()->SetDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
@@ -177,8 +177,8 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		Symbol* symbol = new Symbol(image->getImage());
 		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
-		m_stage->SetCanvasDirty();
-		m_stage->GetCanvas()->ResetViewport();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		d2d::ResetViewportSJ::Instance()->Reset();
 
 		return true;
 	}

@@ -69,7 +69,7 @@ void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& va
 		spr->SetTID(wxANY_AS(value, wxString).ToStdString());
 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void PropertySetting::UpdateProperties(wxPropertyGrid* pg)

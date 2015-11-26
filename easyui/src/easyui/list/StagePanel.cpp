@@ -48,13 +48,13 @@ void StagePanel::Notify(int sj_id, void* ud)
 		{
 			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
 			if (m_list.InsertSprite(p->spr, p->idx)) {
-				SetCanvasDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}		
 		}
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		if (m_list.ClearAllSprite()) {
-			SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}
@@ -72,7 +72,7 @@ void StagePanel::LoadFromFile(const char* filename)
 	m_toolbar->EnableHori(m_list.IsHoriEnable());
 	m_toolbar->EnableVert(m_list.IsVertEnable());
 
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::StoreToFile(const char* filename) const
@@ -84,7 +84,7 @@ void StagePanel::EnablePage(bool enable)
 {
 	if (enable) {
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
 		RegistSubjects(this);
 	} else {

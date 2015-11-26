@@ -25,6 +25,7 @@
 #include "history/ShearSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
 #include "message/ReorderSpriteSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -37,6 +38,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 									 PropertySettingPanel* propertyPanel,
 									 const ArrangeSpriteConfig& cfg) 
 	: m_wnd(wnd)
+	, m_stage(stage)
 	, m_sprites_impl(spritesImpl)
 	, m_property_panel(propertyPanel)
 	, m_align(spritesImpl)
@@ -44,10 +46,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	, m_cfg(cfg)
 	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection())
 {
-	if (stage) {
-		stage->Retain();
-	}
-	m_stage = stage;
+	m_stage->Retain();
 
 	m_align.SetOpen(cfg.is_auto_align_open);
 
@@ -62,9 +61,8 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
 {
-	if (m_stage) {
-		m_stage->Release();
-	}
+	m_stage->Release();
+
 	m_selection->Release();
 	delete m_op_state;
 }
@@ -231,7 +229,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 		std::vector<ISprite*> sprites;
 		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		m_align.Align(sprites);
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	if (m_property_panel)
@@ -324,7 +322,7 @@ void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseDrag(pos))
 	{
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
@@ -443,7 +441,7 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 	bool dirty = m_op_state->OnDirectionKeyDown(type);
 	if (dirty)
 	{
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 		if (m_property_panel) {
 			m_property_panel->EnablePropertyGrid(false);
 		}
@@ -474,7 +472,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		//sprite->setOffset(Vector(0, 0));
 	}
 	m_stage->AddOpRecord(comb);
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)

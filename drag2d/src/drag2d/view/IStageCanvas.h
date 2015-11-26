@@ -7,23 +7,29 @@
 #include "Screen.h"
 #include "common/Color.h"
 #include "common/Object.h"
+#include "message/Observer.h"
+
+#include <vector>
 
 namespace d2d
 {
 
 class EditPanelImpl;
 
-class IStageCanvas : public wxGLCanvas, public Object
+class IStageCanvas : public wxGLCanvas, public Object, public Observer
 {
 public:
 	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 	virtual ~IStageCanvas();
 
-	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
-	void ResetViewport();		// On Mouse Wheel
-								// onSize no use, if the size not change
-								// also can put gluOrtho2D in each onPaint, save this and Camera's observer pattern
+	void EnableObserve(bool enable) { m_observe_enable = enable; }
+
+	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
 
 	void SetBgColor(const Colorf& color);
 
@@ -32,7 +38,6 @@ public:
 	Camera* GetCamera() { return m_camera; }
 	const Camera* GetCamera() const { return m_camera; }
 
-	void SetDirty() { m_dirty = true; }
 	bool IsDirty() const { return m_dirty; }
 
 	void SetCamDirty() { m_cam_dirty = true; }
@@ -81,6 +86,9 @@ private:
 
 private:
 	wxGLContext* m_context;
+
+	std::vector<Subject*> m_subjects;
+	bool m_observe_enable;
 
 	bool m_inited;
 

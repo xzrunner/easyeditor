@@ -58,7 +58,7 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 
 	ctrl->setCurrFrame(0, 1);
 
- 	ctrl->GetStagePanel()->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)

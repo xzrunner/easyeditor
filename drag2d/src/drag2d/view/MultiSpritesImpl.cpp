@@ -19,7 +19,7 @@ namespace d2d
 MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 	: m_observe_enable(true)
 {
-	m_sprite_selection = new SpriteSelection(stage);
+	m_sprite_selection = new SpriteSelection();
 
 	m_subjects.push_back(SelectSpriteSJ::Instance());
 	m_subjects.push_back(InsertSpriteSJ::Instance());

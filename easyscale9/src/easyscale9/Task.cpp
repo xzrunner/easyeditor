@@ -24,7 +24,7 @@ void Task::Load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_scale9)) {
 		FileIO::load(filepath, m_library, m_stage, m_toolbar);
-		m_stage->GetCanvas()->ResetViewport();
+		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 }
 
@@ -79,7 +79,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
-	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 
 	return m_stage;

@@ -313,7 +313,7 @@ void StagePanel::ReorderSprite(d2d::ISprite* spr, bool up)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSprite(spr, up)) {
-			SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
 	}
@@ -325,7 +325,7 @@ void StagePanel::ReorderSpriteMost(d2d::ISprite* spr, bool up)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSpriteMost(spr, up)) {
-			SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
 	}
@@ -335,7 +335,7 @@ void StagePanel::InsertSprite(d2d::ISprite* spr, int idx)
 {
 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
 	if (layer->InsertSprite(spr, idx)) {
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	if (m_sindex) {
@@ -358,7 +358,7 @@ void StagePanel::RemoveSprite(d2d::ISprite* spr)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->RemoveSprite(spr)) {
-			SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
 	}
@@ -372,7 +372,7 @@ void StagePanel::ClearSprite()
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		if (m_layers[i]->ClearSprite()) {
-			SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 }
@@ -389,7 +389,7 @@ void StagePanel::RemoveShape(d2d::IShape* shape)
 		}
 	}
 	if (dirty) {
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -407,7 +407,7 @@ void StagePanel::InsertShape(d2d::IShape* shape)
 	}
 
 	if (dirty) {
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -420,7 +420,7 @@ void StagePanel::ClearShape()
 		}
 	}
 	if (dirty) {
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

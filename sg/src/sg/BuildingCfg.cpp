@@ -80,7 +80,7 @@ void BuildingCfg::InitBackground(const Json::Value& value)
 	d2d::IStageCanvas* canvas = m_stage->GetCanvas();
 	static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 	symbol->Release();
-	canvas->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void BuildingCfg::InitGrid(const Json::Value& value)
@@ -95,7 +95,7 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 	sprite->SetScale(scale, scale);
 	SymbolRender::Instance()->SetGrid(sprite);
 	symbol->Release();
-	m_stage->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void BuildingCfg::InitArrow(const Json::Value& value)
@@ -108,7 +108,7 @@ void BuildingCfg::InitArrow(const Json::Value& value)
 
 	SymbolRender::Instance()->SetArrow(down, right);
 
-	m_stage->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void BuildingCfg::InitGrass(const Json::Value& value)

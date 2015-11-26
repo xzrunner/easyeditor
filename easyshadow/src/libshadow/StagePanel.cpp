@@ -11,7 +11,7 @@ namespace eshadow
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(GetStageImpl())
+	, d2d::MultiShapesImpl()
 	, m_loop(NULL)
 {
 	SetCanvas(new StageCanvas(this));
@@ -24,7 +24,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(GetStageImpl())
+	, d2d::MultiShapesImpl()
 	, m_loop(NULL)
 {
 	SetCanvas(new StageCanvas(this, edited, bg_sprites));
@@ -99,7 +99,7 @@ void StagePanel::InsertShape(d2d::IShape* shape)
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 
-	GetCanvas()->SetDirty();	
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

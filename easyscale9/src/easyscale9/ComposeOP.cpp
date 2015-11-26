@@ -32,7 +32,7 @@ bool ComposeOP::OnMouseRightDown(int x, int y)
 	d2d::ISprite* selected = SelectByPos(x, y);
 	if (selected) {
 		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + d2d::PI*0.5f);
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;

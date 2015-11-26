@@ -64,7 +64,7 @@ void StagePanel::Notify(int sj_id, void* ud)
 		}
 		break;
 	case MSG_RESET_VIEWPORT:
-		GetCanvas()->ResetViewport();
+		d2d::ResetViewportSJ::Instance()->Reset();
 		break;
 	case d2d::MSG_INSERT_SPRITE:
 		{
@@ -181,7 +181,7 @@ void StagePanel::EnablePage(bool enable)
 {
 	if (enable) {
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(true);
 		UIStagePage::RegistSubjects(this);
 	} else {
@@ -255,7 +255,7 @@ void StagePanel::SetViewSize(int width, int height)
 	m_view_height = height;
 	m_anchor_mgr.OnViewChanged(m_view_width, m_view_height);
 
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

@@ -18,7 +18,7 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 EditPanel::~EditPanel()
 {
-	delete m_impl;
+	m_impl->Release();
 }
 
 Vector EditPanel::TransPosScrToProj(int x, int y) const
@@ -96,11 +96,6 @@ void EditPanel::ResetCanvas()
 	m_impl->ResetCanvas();
 }
 
-void EditPanel::ResetViewport()
-{
-	m_impl->ResetViewport();
-}
-
 void EditPanel::Undo()
 {
 	m_impl->Undo();
@@ -144,11 +139,6 @@ void EditPanel::SetTitleStatus(bool dirty)
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
 	m_impl->OnRightPopupMenu(event);
-}
-
-void EditPanel::SetCanvasDirty()
-{
-	m_impl->SetCanvasDirty();
 }
 
 bool EditPanel::GetKeyState(int key) const 

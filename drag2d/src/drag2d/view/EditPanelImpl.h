@@ -55,7 +55,6 @@ public:
 	void OnMouseWheelRotation(int x, int y, int direction);
 
 	void ResetCanvas();
-	void ResetViewport();
 
 	void Undo();
 	void Redo();
@@ -70,8 +69,6 @@ public:
 	void SetTitleStatus(bool dirty);
 
 	void OnRightPopupMenu(wxCommandEvent& event);
-
-	void SetCanvasDirty();
 
 	bool GetKeyState(int key) const;
 	const KeysState& GetKeyState() const { return m_keys_state; }

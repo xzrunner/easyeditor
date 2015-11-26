@@ -34,9 +34,6 @@ protected:
 
 	ISprite* GetSprite();
 
-protected:
-	d2d::EditPanelImpl* m_stage;
-
 private:
 	SpritePropertyImpl* m_impl;
 

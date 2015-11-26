@@ -12,8 +12,8 @@ class IDataContainer;
 class ShapesPanelImpl : public MultiShapesImpl
 {
 public:
-	ShapesPanelImpl(EditPanelImpl* stage);
-	ShapesPanelImpl(EditPanelImpl* stage, IDataContainer* container);
+	ShapesPanelImpl();
+	ShapesPanelImpl(IDataContainer* container);
 	virtual ~ShapesPanelImpl();
 
 	//
@@ -31,8 +31,6 @@ private:
 	void InitSubjects();
 
 private:
-	EditPanelImpl* m_stage;
-
 	IDataContainer* m_container;
 
 	std::vector<Subject*> m_subjects;

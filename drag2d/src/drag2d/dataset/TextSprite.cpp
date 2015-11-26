@@ -61,7 +61,7 @@ void TextSprite::SetSymbol(ISymbol* symbol)
 
 IPropertySetting* TextSprite::CreatePropertySetting(EditPanelImpl* stage)
 {
-	return new TextPropertySetting(stage, this);
+	return new TextPropertySetting(this);
 }
 
 void TextSprite::SetTransform(const Vector& position, float angle)

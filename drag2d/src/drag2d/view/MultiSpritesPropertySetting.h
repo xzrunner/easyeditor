@@ -15,7 +15,7 @@ class MultiSpritesPropertyImpl;
 class MultiSpritesPropertySetting : public IPropertySetting
 {
 public:
-	MultiSpritesPropertySetting(EditPanelImpl* stage, const std::vector<ISprite*>& sprites);
+	MultiSpritesPropertySetting(const std::vector<ISprite*>& sprites);
 	virtual ~MultiSpritesPropertySetting();
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);

@@ -64,7 +64,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

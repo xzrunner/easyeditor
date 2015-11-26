@@ -105,7 +105,7 @@ void LayersMgr::Insert(Layer* layer)
 	//Layer* layer = m_layers.newLayer();
 	//setCurrFrame(curr_idx, frame());
 	//layer->InsertKeyFrame(1);
-	//GetStagePanel()->SetCanvasDirty();
+	//GetStagePanel()->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	m_ctrl->setCurrFrame(m_layers.size(), 1);
 	m_layers.push_back(layer);

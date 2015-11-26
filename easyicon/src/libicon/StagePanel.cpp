@@ -73,7 +73,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
 		m_stage->SetImage(image->getImage());
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
 	}
 

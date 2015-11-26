@@ -12,15 +12,16 @@
 #include "message/InsertSpriteSJ.h"
 #include "message/RemoveSpriteSJ.h"
 #include "message/ClearSpriteSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* container)
 	: MultiSpritesImpl(stage)
+	, m_stage(stage)
 {
-	stage->Retain();
-	m_stage = stage;
+	m_stage->Retain();
 
 	m_container = container;
 	m_container->Retain();
@@ -30,9 +31,9 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* contain
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	: MultiSpritesImpl(stage)
+	, m_stage(stage)
 {
-	stage->Retain();
-	m_stage = stage;
+	m_stage->Retain();
 
 	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
 	m_container = new SpritesContainer;
@@ -63,33 +64,33 @@ void SpritesPanelImpl::Notify(int sj_id, void* ud)
 		{
 			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
 			m_container->ResetOrder(p->spr, p->up);
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_REORDER_SPRITE_MOST:
 		{
 			ReorderSpriteMostSJ::Params* p = (ReorderSpriteMostSJ::Params*)ud;
 			m_container->ResetOrderMost(p->spr, p->up);
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_INSERT_SPRITE:
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
 			m_container->Insert(p->spr, p->idx);
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_REMOVE_SPRITE:
 		{
 			m_container->Remove((ISprite*)ud);
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_CLEAR_SPRITE:
 		{
 			m_container->Clear();
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}

@@ -8,9 +8,9 @@
 namespace d2d
 {
 
-MultiShapesImpl::MultiShapesImpl(EditPanelImpl* stage)
+MultiShapesImpl::MultiShapesImpl()
 {
-	m_shape_selection = new ShapeSelection(stage);
+	m_shape_selection = new ShapeSelection();
 
 	m_subjects.push_back(SelectShapeSJ::Instance());
 // 	m_subjects.push_back(SelectShapeSetSJ::Instance());

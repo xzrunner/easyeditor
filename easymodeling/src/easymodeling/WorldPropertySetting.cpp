@@ -40,7 +40,7 @@ void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		dirty = false;
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

@@ -21,7 +21,7 @@ d2d::AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const d2d::Vector& p
 {
 	GetSelection()->Traverse(Visitor(m_anchor_mgr));
 	d2d::AbstractAtomicOP* ret = d2d::TranslateSpriteState::OnMouseRelease(pos);
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	return ret;
 }
 

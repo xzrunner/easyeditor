@@ -63,7 +63,6 @@ void Task::InitLayout()
 
 	m_library = new LibraryPanel(left_hori_splitter);
 	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
-	m_library->SetCanvas(m_stage->GetCanvas());
 
 	d2d::PropertySettingPanel* property 
 		= new d2d::PropertySettingPanel(left_hori_splitter);

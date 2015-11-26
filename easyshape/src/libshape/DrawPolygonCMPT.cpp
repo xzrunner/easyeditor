@@ -115,7 +115,7 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			if (dlg.ShowModal()) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
-				m_stage->ResetViewport();
+				d2d::ResetViewportSJ::Instance()->Reset();
 			}
 		}
 		break;
@@ -155,7 +155,7 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 			poly->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->FetchSymbol(m_filePath)));
 			break;
 		}
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

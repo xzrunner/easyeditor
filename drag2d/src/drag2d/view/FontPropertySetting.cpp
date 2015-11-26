@@ -3,6 +3,7 @@
 
 #include "dataset/FontSprite.h"
 #include "view/EditPanelImpl.h"
+#include "message/SetCanvasDirtySJ.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -60,7 +61,7 @@ void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		sprite->loadFont(str);
 	} else if (name == wxT("TextContent")) {
 		sprite->SetTextContent(wxANY_AS(value, wxString));
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (name == wxT("TextID")) {
 		std::string tid = wxANY_AS(value, wxString);
 		sprite->SetTextID(tid);

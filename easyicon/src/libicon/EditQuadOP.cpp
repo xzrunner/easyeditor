@@ -69,7 +69,7 @@ bool EditQuadOP::OnMouseDrag(int x, int y)
 
 	quad_icon->SetScreen(screen);
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

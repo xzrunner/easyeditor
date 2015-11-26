@@ -11,7 +11,6 @@ namespace d2d
 class ListItem;
 class ISymbol;
 class LibraryList;
-class IStageCanvas;
 
 class ILibraryPage : public wxWindow
 {
@@ -38,10 +37,6 @@ public:
 
 	LibraryList* GetList() { return m_list; }
 
-	void SetCanvas(IStageCanvas* canvas) {
-		m_canvas = canvas;
-	}
-
 	void AddItem(ListItem* item);
 
 protected:
@@ -66,8 +61,6 @@ protected:
 	wxButton *m_btn_add, *m_btn_del;
 
 	LibraryList* m_list;
-
-	IStageCanvas* m_canvas;
 
 }; // ILibraryPage
 

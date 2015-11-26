@@ -22,7 +22,7 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 		d2d::InsertShapeSJ::Instance()->Insert(new ChainShape(simplified, false));
 		Clear();
 
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;

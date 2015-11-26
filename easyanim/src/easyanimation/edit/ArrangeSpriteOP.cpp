@@ -59,7 +59,7 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 	if (m_selected)
 	{
 		m_selected->pos = m_stage->TransPosScrToProj(x, y);
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	else
 	{
@@ -85,7 +85,7 @@ bool ArrangeSpriteOP::OnDraw() const
 void ArrangeSpriteOP::addCross()
 {
 	m_crosses.push_back(new Cross());
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ArrangeSpriteOP::delCross()
@@ -105,7 +105,7 @@ void ArrangeSpriteOP::delCross()
 	}
 	delete del;
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 //////////////////////////////////////////////////////////////////////////

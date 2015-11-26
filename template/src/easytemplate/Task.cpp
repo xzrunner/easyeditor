@@ -76,7 +76,6 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	StagePanel* stage = new StagePanel(parent, m_parent, m_library, m_property);
 	m_stage = stage;
-	m_library->SetCanvas(m_stage->GetCanvas());	
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 	return m_stage;
 }

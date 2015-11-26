@@ -2,6 +2,7 @@
 
 #include "view/Camera.h"
 #include "view/EditPanelImpl.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -9,7 +10,13 @@ namespace d2d
 PanViewState::PanViewState(EditPanelImpl* stage)
 	: m_stage(stage)
 {
+	m_stage->Retain();
 	m_last_pos.setInvalid();
+}
+
+PanViewState::~PanViewState()
+{
+	m_stage->Release();
 }
 
 void PanViewState::Bind()
@@ -43,7 +50,7 @@ bool PanViewState::OnMouseDrag(int x, int y)
 
 		m_last_pos.set(x, y);
 
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	return false;
 }

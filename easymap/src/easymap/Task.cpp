@@ -108,7 +108,6 @@ void Task::InitLayout()
 	StagePanel* stage;
 	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
-	m_library->SetCanvas(m_stage->GetCanvas());
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);

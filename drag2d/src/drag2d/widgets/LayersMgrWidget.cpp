@@ -4,13 +4,13 @@
 #include "dataset/Layer.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
 
-LayersMgrWidget::LayersMgrWidget(wxWindow* parent, EditPanelImpl* stage)
+LayersMgrWidget::LayersMgrWidget(wxWindow* parent)
 	: wxPanel(parent)
-	, m_stage(stage)
 	, m_editedLayer(NULL)
 	, m_layersSizer(NULL)
 	, m_btnAdd(NULL), m_btnDel(NULL)
@@ -274,7 +274,7 @@ void LayersMgrWidget::onLayerUp(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	Layout();
 	Refresh(true);
@@ -305,7 +305,7 @@ void LayersMgrWidget::onLayerDown(wxCommandEvent& event)
 		m_btnUp->Enable(true);
 	}
 
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	Layout();
 	Refresh(true);

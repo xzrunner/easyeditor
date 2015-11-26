@@ -3,6 +3,7 @@
 #include "render/PrimitiveDraw.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -40,7 +41,7 @@ bool DrawRectangleOP::OnMouseDrag(int x, int y)
 	if (m_first_pos.isValid())
 	{
 		m_last_pos = m_stage->TransPosScrToProj(x, y);
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;

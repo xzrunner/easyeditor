@@ -82,7 +82,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 	PreviewDialog dlg(this, static_cast<Task*>(m_task)->GetController());
 	dlg.ShowModal();
 
-	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void Frame::OnSetBackground(wxCommandEvent& event)

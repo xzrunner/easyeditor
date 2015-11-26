@@ -127,7 +127,7 @@ void StagePanel::EnablePage(bool enable)
 {
 	if (enable) {
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
 		UIStagePage::RegistSubjects(this);
 	} else {

@@ -16,6 +16,8 @@
 #include "message/SelectSpriteSJ.h"
 #include "message/SelectSpriteSetSJ.h"
 #include "message/InsertSpriteSJ.h"
+#include "message/SetCanvasDirtySJ.h"
+#include "message/ResetViewportSJ.h"
 
 #include <wx/clipbrd.h>
 #include <sstream>
@@ -162,7 +164,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		m_callback->updateControlValue();
 	}
 
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
@@ -333,7 +335,7 @@ void SelectSpritesOP::CopyFromSelection()
 	bool add = m_stage->GetKeyState(WXK_CONTROL);
 	SelectSpriteSJ::Instance()->Select(last_spr, !add);
 
-	m_stage->GetCanvas()->ResetViewport();
+	ResetViewportSJ::Instance()->Reset();
 
 	wxTheClipboard->Close();
 }

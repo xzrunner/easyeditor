@@ -64,7 +64,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

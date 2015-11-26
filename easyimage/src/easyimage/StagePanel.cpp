@@ -44,7 +44,7 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 	sprite->Translate(off);
 	m_image = sprite;
 
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	GetEditOP()->Clear();
 }

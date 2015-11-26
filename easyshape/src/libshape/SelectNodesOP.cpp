@@ -186,7 +186,7 @@ void SelectNodesOP::clearSelectedNodes()
 {
 	for_each(m_nodeSelection.begin(), m_nodeSelection.end(), DeletePointerFunctor<ChainSelectedNodes>());
 	m_nodeSelection.clear();
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
@@ -225,7 +225,7 @@ void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

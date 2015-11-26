@@ -7,6 +7,7 @@
 #include "view/EditPanelImpl.h"
 #include "render/SpriteRenderer.h"
 #include "message/InsertSpriteSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -46,7 +47,7 @@ bool PasteSymbolOP::OnMouseMove(int x, int y)
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

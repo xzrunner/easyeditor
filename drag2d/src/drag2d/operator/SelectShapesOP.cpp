@@ -8,6 +8,7 @@
 #include "message/SelectShapeSJ.h"
 #include "message/SelectShapeSetSJ.h"
 #include "message/InsertShapeSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -137,7 +138,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 		}
 	}
 
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

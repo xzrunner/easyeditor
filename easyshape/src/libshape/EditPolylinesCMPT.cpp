@@ -114,7 +114,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 
 		m_btnMerge->Enable(false);
 
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -141,7 +141,7 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 		chains[i]->Translate(offset);
 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 } // d2d

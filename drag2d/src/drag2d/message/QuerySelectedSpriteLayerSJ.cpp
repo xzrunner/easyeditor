@@ -21,7 +21,7 @@ int QuerySelectedSpriteLayerSJ::Query()
 QuerySelectedSpriteLayerSJ* QuerySelectedSpriteLayerSJ::Instance()
 {
 	if (!m_instance) {
-		m_instance = new QuerySelectedSpriteLayerSJ(MAG_QUERY_SPR_LAYER);
+		m_instance = new QuerySelectedSpriteLayerSJ(MSG_QUERY_SPR_LAYER);
 	}
 	return m_instance;
 }

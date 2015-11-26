@@ -11,7 +11,8 @@ class EditPanelImpl;
 class ZoomViewState : public IEditOPState
 {
 public:
-	ZoomViewState(EditPanelImpl* stage) : m_stage(stage) {}
+	ZoomViewState(EditPanelImpl* stage);
+	virtual ~ZoomViewState();
 	
 	virtual bool OnMouseWheelRotation(int x, int y, int direction);
 

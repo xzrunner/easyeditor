@@ -34,7 +34,7 @@ void PreviewCanvas::OnTimer()
 // 		return;
 // 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	if (m_setting.isCirculate) {
 		m_control.reset();
 	}

@@ -144,13 +144,13 @@ SkeletonData& StagePanel::getSkeletonData()
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_AddJointNode);
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_DelJointNode);
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Reorder(d2d::ISprite* spr, bool up)
@@ -158,7 +158,7 @@ void StagePanel::Reorder(d2d::ISprite* spr, bool up)
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool succ = frame->Reorder(spr, up);
 	if (succ) {
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -167,7 +167,7 @@ void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool succ = frame->ReorderMost(spr, up);
 	if (succ) {
-		SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -197,7 +197,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 
 	m_ctrl->Refresh();
 
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Remove(d2d::ISprite* spr)

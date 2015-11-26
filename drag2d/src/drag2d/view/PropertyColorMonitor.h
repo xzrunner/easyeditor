@@ -6,12 +6,10 @@
 namespace d2d
 {
 
-class EditPanelImpl;
-
 class PropertyColorListener : public IColorMonitor
 {
 public:
-	PropertyColorListener(EditPanelImpl* stage, Colorf* col);
+	PropertyColorListener(Colorf* col);
 
 	//
 	// interface IColorMonitor
@@ -21,8 +19,6 @@ public:
 	virtual void OnColorChanged(const Colorf& col);
 
 private:
-	EditPanelImpl* m_stage;
-
 	Colorf* m_col;
 
 }; // PropertyColorListener

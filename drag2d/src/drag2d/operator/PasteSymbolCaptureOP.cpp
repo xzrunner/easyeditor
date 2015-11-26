@@ -7,6 +7,7 @@
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
 #include "message/InsertSpriteSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -55,7 +56,7 @@ bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 			m_pos = newPos;
 		}
 	}
-	m_stage->SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

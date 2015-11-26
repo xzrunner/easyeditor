@@ -13,6 +13,7 @@
 #include "message/SelectSpriteSJ.h"
 #include "message/ReorderSpriteSJ.h"
 #include "message/ReorderSpriteMostSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -26,6 +27,12 @@ RightPopupMenu::RightPopupMenu(wxWindow* parent,
 	, m_sprites_impl(sprite_impl)
 	, m_selection(selection)
 {
+	m_stage->Retain();
+}
+
+RightPopupMenu::~RightPopupMenu()
+{
+	m_stage->Release();
 }
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
@@ -197,7 +204,7 @@ void RightPopupMenu::HoriMirror()
 		dirty = true;
 	}
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -210,7 +217,7 @@ void RightPopupMenu::VertMirror()
 		dirty = true;
 	}
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

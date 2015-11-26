@@ -32,7 +32,7 @@ void Task::Load(const char* filepath)
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
-		m_stage->GetCanvas()->ResetViewport();
+		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 }
 
@@ -95,7 +95,6 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 
-	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 
 	return m_stage;

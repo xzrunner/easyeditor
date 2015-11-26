@@ -14,6 +14,7 @@ class PanViewState : public IEditOPState
 {
 public:
 	PanViewState(EditPanelImpl* stage);
+	virtual ~PanViewState();
 
 	virtual void Bind();
 	virtual void UnBind();

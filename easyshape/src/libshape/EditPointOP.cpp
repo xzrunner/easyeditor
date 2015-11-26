@@ -113,7 +113,7 @@ bool EditPointOP::OnMouseMove(int x, int y)
 	d2d::IShape* old = m_captured.shape;
 	capture.captureEditable(pos, m_captured);
 	if (old && !m_captured.shape || !old && m_captured.shape) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -128,7 +128,7 @@ bool EditPointOP::OnMouseDrag(int x, int y)
 		get_shape_type(m_captured.shape->GetShapeDesc()) == ST_POINT) {		
 		PointShape* point = static_cast<PointShape*>(m_captured.shape);
 		point->SetPos(m_pos);
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;

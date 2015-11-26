@@ -28,7 +28,7 @@ Task::~Task()
 void Task::Load(const char* filename)
 {
 	FileIO::Load(filename, m_library, m_stage, m_grouptree);
-	m_stage->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void Task::Store(const char* filename) const
@@ -89,7 +89,6 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 	m_library->SetStagePanel(m_stage);
 	m_library->InitPages(m_stage, m_property);
-	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage->GetStageImpl());
 
 	return m_stage;

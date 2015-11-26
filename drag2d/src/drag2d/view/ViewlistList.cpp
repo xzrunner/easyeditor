@@ -76,7 +76,7 @@ void ViewlistList::Notify(int sj_id, void* ud)
 	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
 		break;
-	case MAG_QUERY_SPR_LAYER:
+	case MSG_QUERY_SPR_LAYER:
 		{
 			int* layer = (int*)ud;
 			*layer = GetSelectedIndex();

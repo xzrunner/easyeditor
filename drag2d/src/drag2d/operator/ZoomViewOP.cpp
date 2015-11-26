@@ -6,6 +6,7 @@
 #include "view/EditPanelImpl.h"
 #include "common/config.h"
 #include "common/SettingData.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
@@ -47,7 +48,7 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 		{
 			Camera* cam = m_stage->GetCamera();
 			cam->Reset();
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}

@@ -7,6 +7,7 @@
 #include "common/Exception.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/ISymbol.h"
+#include "message/ResetViewportSJ.h"
 
 namespace d2d
 {
@@ -17,7 +18,6 @@ ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name,
 	, m_name(name)
 	, m_is_static(isStatic)
 	, m_list(NULL)
-	, m_canvas(NULL)
 {
 	m_btn_add = m_btn_del = NULL;
 }
@@ -55,9 +55,7 @@ void ILibraryPage::ReloadTexture() const
 void ILibraryPage::AddItem(ListItem* item)
 {
 	m_list->Insert(item);
-	if (m_canvas) {
-		m_canvas->ResetViewport();
-	}
+	ResetViewportSJ::Instance()->Reset();
 }
 
 void ILibraryPage::InitLayout(bool draggable/* = true*/)

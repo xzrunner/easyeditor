@@ -42,7 +42,7 @@ void InputPanel::InitLayout()
 void InputPanel::OnEnterPress(wxCommandEvent& event)
 {
 	m_spr->SetText(m_text_ctrl->GetValue().ToStdString());
-	m_stage_impl->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

@@ -48,7 +48,7 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 		{
 			d2d::DrawRectangleOP::OnMouseLeftDown(x, y);
 			m_first_pos = pos;
-			m_stage->SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -118,7 +118,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 		}
 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

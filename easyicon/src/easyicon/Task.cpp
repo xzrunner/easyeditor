@@ -24,7 +24,7 @@ void Task::Load(const char* filename)
 	Icon* icon = FileIO::LoadFromFile(filename);
 	m_toolbar->ChangeIconType(get_icon_type(icon->GetIconDesc()));
 	m_stage->GetSymbol().SetIcon(icon);
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Task::Store(const char* filename) const
@@ -50,7 +50,6 @@ void Task::InitLayout()
 
 	m_library = new LibraryPanel(left_splitter);
 	m_stage = new StagePanel(left_splitter, m_parent, m_library);
-	m_library->SetCanvas(m_stage->GetCanvas());
 
 	left_splitter->SetSashGravity(0.2f);
 	left_splitter->SplitVertically(m_library, m_stage);

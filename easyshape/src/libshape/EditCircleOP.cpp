@@ -135,7 +135,7 @@ bool EditCircleOP::OnMouseMove(int x, int y)
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
-			m_stage->SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -165,7 +165,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 		}
 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

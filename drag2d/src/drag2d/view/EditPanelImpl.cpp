@@ -9,6 +9,7 @@
 #include "message/subject_id.h"
 #include "message/ClearSpriteSJ.h"
 #include "message/ClearPanelSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 #include <fstream>
 
@@ -116,7 +117,7 @@ void EditPanelImpl::SetEditOP(AbstractEditOP* editOP)
 	if (m_edit_op) {
 		m_edit_op->OnActive();
 	}
-	SetCanvasDirty();
+	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void EditPanelImpl::SetCanvas(IStageCanvas* canvas) 
@@ -221,14 +222,7 @@ void EditPanelImpl::ResetCanvas()
 	if (m_canvas)
 	{
 		m_canvas->ResetInitState();
-		SetCanvasDirty();
-	}
-}
-
-void EditPanelImpl::ResetViewport()
-{
-	if (m_canvas) {
-		m_canvas->ResetViewport();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -236,7 +230,7 @@ void EditPanelImpl::Undo()
 {
 	HistoryList::Type type = m_history_list.undo();
 	if (type != HistoryList::NO_CHANGE) {
-		SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 		if (type == HistoryList::DIRTY)
 			SetTitleStatus(true);
 		else
@@ -248,7 +242,7 @@ void EditPanelImpl::Redo()
 {
 	HistoryList::Type type = m_history_list.redo();
 	if (type != HistoryList::NO_CHANGE) {
-		SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 		if (type == HistoryList::DIRTY)
 			SetTitleStatus(true);
 		else
@@ -338,13 +332,6 @@ void EditPanelImpl::OnRightPopupMenu(wxCommandEvent& event)
 	}
 }
 
-void EditPanelImpl::SetCanvasDirty()
-{
-	if (m_canvas) {
-		m_canvas->SetDirty();
-	}
-}
-
 bool EditPanelImpl::GetKeyState(int key) const 
 { 
 	return m_keys_state.GetKeyState(key);
@@ -364,7 +351,7 @@ void EditPanelImpl::OnSize(wxSizeEvent& event)
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}
-	SetCanvasDirty();	// no refresh when change window size
+	SetCanvasDirtySJ::Instance()->SetDirty();	// no refresh when change window size
 }
 
 void EditPanelImpl::SetCursor(wxCursor cursor)

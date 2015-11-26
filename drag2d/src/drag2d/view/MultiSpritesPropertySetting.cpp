@@ -5,15 +5,15 @@
 
 #include "common/Math.h"
 #include "view/IStageCanvas.h"
+#include "message/SetCanvasDirtySJ.h"
 
 #include <wx/propgrid/advprops.h>
 
 namespace d2d
 {
 
-MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanelImpl* stage, const std::vector<ISprite*>& sprites)
+MultiSpritesPropertySetting::MultiSpritesPropertySetting(const std::vector<ISprite*>& sprites)
 	: IPropertySetting("MultiSprites")
-	, m_stage(stage)
 	, m_impl(new MultiSpritesPropertyImpl(sprites))
 	, m_overall(false)
 {
@@ -132,7 +132,7 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, con
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

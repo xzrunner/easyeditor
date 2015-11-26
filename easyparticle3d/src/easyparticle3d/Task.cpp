@@ -53,8 +53,6 @@ void Task::initLayout()
 	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
 	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage);
 
-	m_library->SetCanvas(m_stage->GetCanvas());
-
 	leftSplitter->SetSashGravity(0.2f);
 	leftSplitter->SplitVertically(m_library, m_stage);
 

@@ -121,7 +121,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 
 	rebuildPatchSymbol();
 
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Remove(d2d::ISprite* spr)
@@ -134,7 +134,7 @@ void StagePanel::Remove(d2d::ISprite* spr)
 			{
 				m_sprites[i][j] = NULL;
 				spr->Release();
-				SetCanvasDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 				return;
 			}
 		}
@@ -154,7 +154,7 @@ void StagePanel::Clear()
 
 	delete m_symbol, m_symbol = NULL;
 
-	SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 }
 

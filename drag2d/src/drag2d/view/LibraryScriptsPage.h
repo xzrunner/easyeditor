@@ -5,17 +5,19 @@
 
 namespace d2d
 {
-	class LibraryScriptsPage : public ILibraryPage
-	{
-	public:
-		LibraryScriptsPage(wxWindow* parent);
 
-		virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
+class LibraryScriptsPage : public ILibraryPage
+{
+public:
+	LibraryScriptsPage(wxWindow* parent);
 
-	protected:
-		virtual void OnAddPress(wxCommandEvent& event);
+	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
 
-	}; // LibraryScriptsPage
+protected:
+	virtual void OnAddPress(wxCommandEvent& event);
+
+}; // LibraryScriptsPage
+
 }
 
 #endif // D2D_LIBRARY_SCRIPTS_PAGE_H

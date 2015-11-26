@@ -53,7 +53,7 @@ void StageCanvas::InitGL()
 		d2d::DrawCallBatching::Instance()->ReloadEnd();
 	}
 
-	ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void StageCanvas::OnSize(int w, int h)

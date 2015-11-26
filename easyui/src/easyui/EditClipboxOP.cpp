@@ -61,7 +61,7 @@ bool EditClipboxOP::OnMouseDrag(int x, int y)
 		m_rect.xMax = std::max(m_rect.xMin, pos.x);
 		m_rect.yMin = std::min(m_rect.yMax, pos.y);
 	}
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return true;
 }

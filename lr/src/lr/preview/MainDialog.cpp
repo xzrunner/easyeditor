@@ -27,7 +27,7 @@ void MainDialog::InitLayout()
 	d2d::Camera* cam = stage->GetCamera();
 	float old_scale = cam->GetScale();
 	cam->SetScale(old_scale / PREVIEW_SCALE);
-	stage->SetCanvasDirty();
+	stage->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	stage->SetCanvas(new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites));
 	stage->SetEditOP(new CtrlCamOP(stage, stage->GetStageImpl()));

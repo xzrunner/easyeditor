@@ -4,9 +4,8 @@
 namespace ecomplex
 {
 
-SymbolPropertySetting::SymbolPropertySetting(d2d::EditPanelImpl* stage, Symbol* symbol)
-	: d2d::SymbolPropertySetting(stage, symbol)
-	, m_stage(stage)
+SymbolPropertySetting::SymbolPropertySetting(Symbol* symbol)
+	: d2d::SymbolPropertySetting(symbol)
 {
 	m_type = "ComplexSymbol";
 }
@@ -76,7 +75,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

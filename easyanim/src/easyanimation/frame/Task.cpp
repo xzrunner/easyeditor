@@ -63,7 +63,7 @@ void Task::Load(const char* filepath)
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	m_widgets.m_stage->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void Task::Store(const char* filepath) const
@@ -142,7 +142,6 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, 
 		&m_controller);
 	m_widgets.m_property->SetEditPanel(m_widgets.m_stage->GetStageImpl());
-	m_widgets.m_library->SetCanvas(m_widgets.m_stage->GetCanvas());	// ?
 
 	// toolbar
 	m_widgets.m_toolbar = new ToolbarPanel(top_split, m_widgets.m_stage, 

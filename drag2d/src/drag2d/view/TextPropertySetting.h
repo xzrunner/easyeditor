@@ -6,13 +6,12 @@
 namespace d2d
 {
 
-class EditPanelImpl;
 class TextSprite;
 
 class TextPropertySetting : public IPropertySetting
 {
 public:
-	TextPropertySetting(EditPanelImpl* stage, TextSprite* sprite);
+	TextPropertySetting(TextSprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -21,8 +20,6 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanelImpl* m_stage;
-
 	TextSprite* m_sprite;
 
 }; // TextPropertySetting

@@ -138,7 +138,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	else if (type == wxT("Motor"))
 		m_stage_panel->insertJoint(new libmodeling::MotorJoint(body0, body1));
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void JointEditCmpt::onTypeChanged(wxCommandEvent& event)

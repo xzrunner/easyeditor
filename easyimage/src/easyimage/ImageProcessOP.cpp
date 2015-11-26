@@ -29,7 +29,7 @@ bool ImageProcessOP::OnActive()
 		shader->SetTexelSize(1.0f/4096, 1.0f/4096);
 		shader_mgr->SetSpriteShader(shader);
 
-		m_stage->GetCanvas()->ResetViewport();
+		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 
 	return false;

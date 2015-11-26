@@ -49,7 +49,7 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 		NewPolygon(simplified);
 		Clear();
 
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;

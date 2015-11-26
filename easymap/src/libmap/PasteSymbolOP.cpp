@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "SelectSpritesOP.h"
 
+#include <easycomplex.h>
+
 namespace emap
 {
 
@@ -22,7 +24,7 @@ PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library,
 void PasteSymbolOP::ChangeCurrOP()
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	d2d::AbstractEditOP* editop = new d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, m_property);
+	d2d::AbstractEditOP* editop = new d2d::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(stage, stage->GetStageImpl(), stage, m_property);
 
 	m_stage->SetEditOP(editop);	
 }

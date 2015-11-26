@@ -440,7 +440,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		m_toolbar->OnAddChild(wxCommandEvent(), symbol);
 
 		m_stage->m_ps->Start();
-		m_stage->ResetViewport();
+		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 
 	return true;

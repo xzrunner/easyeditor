@@ -36,7 +36,7 @@ wxSizer* CreateRegionCMPT::initLayout()
 void CreateRegionCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
 	d2d::Settings::bDisplayTrisEdge = event.IsChecked();
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

@@ -84,7 +84,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 	static_cast<RectIcon*>(icon)->SetRegion(r);
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

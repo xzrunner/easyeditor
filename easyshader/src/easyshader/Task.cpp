@@ -61,7 +61,6 @@ void Task::initLayout()
 	} else {
 		m_stage = new StagePanel3D(left_splitter, m_parent, m_library);
 	}
-	m_library->SetCanvas(m_stage->GetCanvas());
 
 	m_toolbar = new ToolbarPanel(right_splitter, m_stage);
 

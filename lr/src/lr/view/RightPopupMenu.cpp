@@ -163,10 +163,10 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 
 	if (id == MENU_COVER_LAYER_TAG_ID) {
 		m_sprite->tag += std::string(COVER_LAYER_TAG) + ";";
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (id == MENU_TOP_LAYER_TAG_ID) {
 		m_sprite->tag += std::string(TOP_LAYER_TAG) + ";";
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

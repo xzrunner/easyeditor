@@ -182,7 +182,7 @@ void SettingDialog::OnChangeSpecialLayerFlag(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_special_layer_flag = event.IsChecked();	
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

@@ -39,7 +39,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			try {
 				if (type == "json") {
 					loadFromJsonFile(filename);
-					m_canvas->ResetViewport();
+					d2d::ResetViewportSJ::Instance()->Reset();
 				} else if (type == "lua") {
 					loadFromLuaFile(filename);
 				}

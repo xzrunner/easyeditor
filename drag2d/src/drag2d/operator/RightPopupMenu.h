@@ -17,6 +17,7 @@ class RightPopupMenu
 public:
 	RightPopupMenu(wxWindow* parent, EditPanelImpl* stage,
 		MultiSpritesImpl* sprite_impl, SpriteSelection* selection);
+	~RightPopupMenu();
 
 	void SetRightPopupMenu(wxMenu& menu, int x, int y);
 	void OnRightPopupMenu(int id);

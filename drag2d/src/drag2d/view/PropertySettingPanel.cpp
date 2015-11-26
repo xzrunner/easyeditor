@@ -162,7 +162,7 @@ void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 	} else if (m_selection.size() > 1) {
 		std::vector<ISprite*> sprites;
 		std::copy(m_selection.begin(), m_selection.end(), back_inserter(sprites));
-		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
+		SetPropertySetting(new MultiSpritesPropertySetting(sprites));
 	}
 }
 
@@ -175,7 +175,7 @@ void PropertySettingPanel::OnMultiSpriteSelected(SpriteSelection* selection)
 	} else if (sprites.size() == 1) {
 		OnSpriteSelected(sprites[0], true);
 	} else {
-		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
+		SetPropertySetting(new MultiSpritesPropertySetting(sprites));
 	}
 }
 

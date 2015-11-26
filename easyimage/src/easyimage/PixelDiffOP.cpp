@@ -62,7 +62,7 @@ bool PixelDiffOP::OnActive()
 	shader->Load();
 	shader_mgr->SetSpriteShader(shader);
 
-	m_stage->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 
 	return false;
 }

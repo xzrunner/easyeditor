@@ -14,13 +14,12 @@ namespace d2d
 class IStageCanvas;
 class ShapeSelection;
 class Rect;
-class EditPanelImpl;
 class IShape;
 
 class MultiShapesImpl : public Observer
 {
 public:
-	MultiShapesImpl(EditPanelImpl* stage);
+	MultiShapesImpl();
 	virtual ~MultiShapesImpl();
 
 	//

@@ -176,7 +176,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 
 	m_ctrl->Refresh();
 
- 	m_ctrl->GetStagePanel()->GetCanvas()->ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)

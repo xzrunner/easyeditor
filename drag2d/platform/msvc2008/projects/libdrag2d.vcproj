@@ -3044,6 +3044,26 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="canvas"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\ResetViewportSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\ResetViewportSJ.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\SetCanvasDirtySJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\SetCanvasDirtySJ.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File

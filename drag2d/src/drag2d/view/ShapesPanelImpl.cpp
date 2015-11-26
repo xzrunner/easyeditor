@@ -2,7 +2,6 @@
 #include "IDataContainer.h"
 #include "ShapesContainer.h"
 #include "IStageCanvas.h"
-#include "EditPanelImpl.h"
 
 #include "common/tools.h"
 #include "dataset/IShape.h"
@@ -11,22 +10,21 @@
 #include "message/RemoveShapeSJ.h"
 #include "message/InsertShapeSJ.h"
 #include "message/ClearShapeSJ.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
 
-ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage)
-	: MultiShapesImpl(stage)
-	, m_stage(stage)
+ShapesPanelImpl::ShapesPanelImpl()
+	: MultiShapesImpl()
 {
 	m_container = new ShapesContainer();
 
 	InitSubjects();
 }
 
-ShapesPanelImpl::ShapesPanelImpl(EditPanelImpl* stage, IDataContainer* container)
-	: MultiShapesImpl(stage)
-	, m_stage(stage)
+ShapesPanelImpl::ShapesPanelImpl(IDataContainer* container)
+	: MultiShapesImpl()
 {
 	m_container = container;
 	m_container->Retain();
@@ -51,17 +49,17 @@ void ShapesPanelImpl::Notify(int sj_id, void* ud)
 	{
 	case MSG_REMOVE_SHAPE:
 		if (m_container->Remove((IShape*)ud)) {
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_INSERT_SHAPE:
 		if (m_container->Insert((IShape*)ud)) {
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_CLEAR_SHAPE:
 		if (m_container->Clear()) {
-			m_stage->SetCanvasDirty();
+			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}

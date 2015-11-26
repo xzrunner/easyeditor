@@ -224,14 +224,6 @@
 				RelativePath="..\..\..\src\libmap\PasteSymbolOP.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libmap\SelectSpritesOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libmap\SelectSpritesOP.h"
-				>
-			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libmap\config.h"

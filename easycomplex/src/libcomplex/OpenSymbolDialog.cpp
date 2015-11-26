@@ -34,16 +34,13 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	}
 
 	m_sprites_impl->EnableObserve(false);
+	m_stage->GetCanvas()->EnableObserve(false);
 
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
  		EditDialog dlg(m_wnd, &symbol);
  		dlg.ShowModal();
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
-		m_stage->ResetViewport();
-
 		//////////////////////////////////////////////////////////////////////////
 
 // 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
@@ -53,26 +50,17 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	{
  		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol());
  		dlg.ShowModal();
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
-		m_stage->ResetViewport();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
   		escale9::EditDialog dlg(m_wnd, &symbol);
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
   		dlg.ShowModal();
-		m_stage->ResetViewport();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(spr))
 	{
 		emesh::EditDialog dlg(m_wnd, sprite);
 		dlg.ShowModal();
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
-		m_stage->ResetViewport();
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(spr))
 	{
@@ -83,28 +71,23 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	{
 		etexture::EditDialog dlg(m_wnd, tex, m_sprites_impl);
 		dlg.ShowModal();
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
-		m_stage->ResetViewport();
 	}
 	else if (eicon::Sprite* icon = dynamic_cast<eicon::Sprite*>(spr))
 	{
 		eicon::EditDialog dlg(m_wnd, spr, m_sprites_impl);
 		dlg.ShowModal();
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
-		m_stage->ResetViewport();
 	}
 	else if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(spr))
 	{
 		etext::EditDialog dlg(m_wnd, text, m_sprites_impl);
 		dlg.ShowModal();
-		m_stage->SetCanvasDirty();
-		m_stage->RefreshFrame();
-		m_stage->ResetViewport();
 	}
 
 	m_sprites_impl->EnableObserve(true);
+
+	m_stage->GetCanvas()->EnableObserve(true);
+	d2d::ResetViewportSJ::Instance()->Reset();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

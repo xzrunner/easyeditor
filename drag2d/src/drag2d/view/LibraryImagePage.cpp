@@ -6,6 +6,7 @@
 #include "dataset/ImageSymbol.h"
 #include "view/IStageCanvas.h"
 #include "common/Exception.h"
+#include "message/ResetViewportSJ.h"
 
 namespace d2d
 {
@@ -42,9 +43,7 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 				dlg.ShowModal();
 			}
 		}
-		if (m_canvas) {
-			m_canvas->ResetViewport();
-		}
+		ResetViewportSJ::Instance()->Reset();
 	}
 }
 

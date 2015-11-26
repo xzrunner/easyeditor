@@ -31,7 +31,7 @@ void StageCanvas::InitGL()
 	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
 
 	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
-	ResetViewport();
+	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void StageCanvas::OnDrawSprites() const

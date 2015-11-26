@@ -4,15 +4,14 @@
 #include <wx/propgrid/advprops.h>
 
 #include "dataset/TextSprite.h"
-#include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
 
-TextPropertySetting::TextPropertySetting(EditPanelImpl* stage, TextSprite* sprite)
+TextPropertySetting::TextPropertySetting(TextSprite* sprite)
 	: IPropertySetting("TextSprite")
-	, m_stage(stage)
 	, m_sprite(sprite)
 {
 }
@@ -43,7 +42,7 @@ void TextPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

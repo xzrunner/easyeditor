@@ -99,7 +99,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 		rects.insert(d2d::Rect(d2d::Vector(x, y), d2d::Vector(x+w, y+h)), true);
 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	wxString msg;
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());

@@ -41,9 +41,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			}
 		}
 
-		if (!filenames.empty() && m_canvas) {
-			m_canvas->ResetViewport();
-		}
+		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 }
 

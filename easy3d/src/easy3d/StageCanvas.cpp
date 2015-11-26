@@ -16,7 +16,7 @@ void StageCanvas::Refresh()
 {
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 
-	SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
@@ -45,7 +45,7 @@ void StageCanvas::InitGL()
 
 		ShaderMgr::Instance()->Null();
 
-		ResetViewport();
+		d2d::ResetViewportSJ::Instance()->Reset();
 
 		glShadeModel(GL_SMOOTH);
 		glEnable(GL_TEXTURE_2D);

@@ -4,21 +4,20 @@
 #include "dataset/ISymbol.h"
 #include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
+#include "message/SetCanvasDirtySJ.h"
 
 namespace d2d
 {
 
-SymbolPropertySetting::SymbolPropertySetting(EditPanelImpl* stage, ISymbol* symbol)
+SymbolPropertySetting::SymbolPropertySetting(ISymbol* symbol)
 	: IPropertySetting("Symbol")
-	, m_stage(stage)
 	, m_symbol(symbol)
 	, m_name(NULL)
 {
 }
 
-SymbolPropertySetting::SymbolPropertySetting(EditPanelImpl* stage, std::string* name)
+SymbolPropertySetting::SymbolPropertySetting(std::string* name)
 	: IPropertySetting("Symbol")
-	, m_stage(stage)
 	, m_symbol(NULL)
 	, m_name(name)
 {
@@ -43,7 +42,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

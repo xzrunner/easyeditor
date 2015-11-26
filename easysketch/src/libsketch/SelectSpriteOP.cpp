@@ -44,7 +44,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 		m_selection->Clear();
 	}
 
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }

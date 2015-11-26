@@ -97,7 +97,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				{
 					m_capturedEditable.shape = interrupt.getInterruptedChain();
 					m_capturedEditable.pos = pos;
-					m_stage->SetCanvasDirty();
+					d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 					checkActiveShape(m_capturedEditable);
 				}
@@ -139,7 +139,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 				chain->refresh();
 				m_dirty = true;
 				m_capturedEditable.pos = nearest.getNearestNode();
-				m_stage->SetCanvasDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 
@@ -191,7 +191,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 					d2d::SelectShapeSJ::Instance()->Select(NULL);
 				}
 				m_capturedEditable.shape = NULL;
-				m_stage->SetCanvasDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 
@@ -214,14 +214,14 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 			d2d::IShape* old = m_capturedEditable.shape;
 			capture.captureEditable(pos, m_capturedEditable);
 			if (old && !m_capturedEditable.shape || !old && m_capturedEditable.shape) {
-				m_stage->SetCanvasDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		{
 			d2d::IShape* old = m_captureSelectable.shape;
 			capture.captureSelectable(pos, m_captureSelectable);
 			if (old && !m_captureSelectable.shape || !old && m_captureSelectable.shape) {
-				m_stage->SetCanvasDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 	}
@@ -262,7 +262,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 
 			chain->refresh();
 			m_dirty = true;
-			m_stage->SetCanvasDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 			if (m_propertyPanel) {
 				m_propertyPanel->EnablePropertyGrid(false);

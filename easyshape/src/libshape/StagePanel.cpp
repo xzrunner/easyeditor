@@ -10,7 +10,7 @@ namespace libshape
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(GetStageImpl())
+	, MultiShapesImpl()
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));
@@ -24,7 +24,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(GetStageImpl())
+	, MultiShapesImpl()
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this, edited, bg_sprites));
@@ -39,7 +39,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   Symbol* symbol/*, d2d::LibraryPanel* library*/)
 	: EditPanel(parent, frame)
-	, MultiShapesImpl(GetStageImpl())
+	, MultiShapesImpl()
 	, m_toolbar(NULL)
 {
 	SetCanvas(new StageCanvas(this));
@@ -76,17 +76,17 @@ void StagePanel::Notify(int sj_id, void* ud)
 	{
 	case d2d::MSG_REMOVE_SHAPE:
 		if (m_symbol->Remove((d2d::IShape*)ud)) {
-			GetCanvas()->SetDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case d2d::MSG_INSERT_SHAPE:
 		if (m_symbol->Add((d2d::IShape*)ud)) {
-			GetCanvas()->SetDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case d2d::MSG_CLEAR_SHAPE:
 		if (m_symbol->Clear()) {
-			GetCanvas()->SetDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}
@@ -125,7 +125,7 @@ void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 		if (m_toolbar) {
 			m_toolbar->SelectSuitableEditOP();
 		}
-		GetCanvas()->SetDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

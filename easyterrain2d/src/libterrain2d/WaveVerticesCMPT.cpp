@@ -145,7 +145,7 @@ void WaveVerticesCMPT::OnChangeWaveParams(wxSpinEvent& event)
 void WaveVerticesCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
 	static_cast<WaveVerticesOP*>(m_editOP)->m_draw_tris = event.IsChecked();
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void WaveVerticesCMPT::OnChangeBoundLock(wxCommandEvent& event)

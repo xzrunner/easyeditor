@@ -12,7 +12,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	StageCanvas* canvas = new StageCanvas(this, GetStageImpl(), this, library);
 	SetCanvas(canvas);
-	library->SetCanvas(canvas);
 
 	SetEditOP(new ArrangeSpriteOP(this));
 
@@ -76,7 +75,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 {
 	spr->Retain();
 	m_sprites.push_back(spr);
-	GetCanvas()->SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Remove(d2d::ISprite* spr)
@@ -85,7 +84,7 @@ void StagePanel::Remove(d2d::ISprite* spr)
 		if (m_sprites[i] == spr) {
 			spr->Release();
 			m_sprites.erase(m_sprites.begin() + i);
-			GetCanvas()->SetDirty();
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			return;
 		}
 	}
@@ -97,7 +96,7 @@ void StagePanel::Clear()
 		m_sprites[i]->Release();
 	}
 	m_sprites.clear();
-	GetCanvas()->SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

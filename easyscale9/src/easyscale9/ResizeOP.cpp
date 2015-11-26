@@ -69,7 +69,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		m_resizeCmpt->setSize(width, height);
 		symbol->ResizeScale9(width, height);
 
-		m_stage->SetCanvasDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;

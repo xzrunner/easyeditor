@@ -23,7 +23,7 @@ void Task::Load(const char* filename)
 {
 	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
 	m_stage->LoadFromShadow();
-	m_stage->SetCanvasDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Task::Store(const char* filename) const
@@ -67,9 +67,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new StagePanel(parent, m_parent, m_library);
-	m_library->SetCanvas(m_stage->GetCanvas());	
-	return m_stage;
+	return new StagePanel(parent, m_parent, m_library);
 }
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)

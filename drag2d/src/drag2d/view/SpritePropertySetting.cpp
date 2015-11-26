@@ -13,6 +13,8 @@
 #include "widgets/ColorProperty.h"
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
+#include "message/SetCanvasDirtySJ.h"
+#include "message/ResetViewportSJ.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -21,7 +23,6 @@ namespace d2d
 
 SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, ISprite* sprite)
 	: IPropertySetting("Sprite")
-	, m_stage(stage)
 	, m_impl(new SpritePropertyImpl(stage, sprite))
 	, m_pg(NULL)
 {
@@ -94,7 +95,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		int idx = wxANY_AS(value, int);
 		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
-		m_stage->GetCanvas()->ResetViewport();
+		ResetViewportSJ::Instance()->Reset();
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -185,7 +186,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		m_stage->SetCanvasDirty();
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -228,13 +229,13 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromID(filter));
 
 	ColorProperty* rp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.R"));
-	rp->SetListener(new PropertyColorListener(m_stage, &spr->r_trans));
+	rp->SetListener(new PropertyColorListener(&spr->r_trans));
 
 	ColorProperty* gp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.G"));
-	gp->SetListener(new PropertyColorListener(m_stage, &spr->g_trans));
+	gp->SetListener(new PropertyColorListener(&spr->g_trans));
 
 	ColorProperty* bp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.B"));
-	bp->SetListener(new PropertyColorListener(m_stage, &spr->b_trans));
+	bp->SetListener(new PropertyColorListener(&spr->b_trans));
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
 
@@ -305,15 +306,15 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	col_conv_prop->SetExpanded(false);
 
 	ColorProperty* col_r_prop = new ColorProperty("R");
-	col_r_prop->SetListener(new PropertyColorListener(m_stage, &spr->r_trans));
+	col_r_prop->SetListener(new PropertyColorListener(&spr->r_trans));
 	pg->AppendIn(col_conv_prop, col_r_prop);
 
 	ColorProperty* col_g_prop = new ColorProperty("G");
-	col_g_prop->SetListener(new PropertyColorListener(m_stage, &spr->g_trans));
+	col_g_prop->SetListener(new PropertyColorListener(&spr->g_trans));
 	pg->AppendIn(col_conv_prop, col_g_prop);
 
 	ColorProperty* col_b_prop = new ColorProperty("B");
-	col_b_prop->SetListener(new PropertyColorListener(m_stage, &spr->b_trans));
+	col_b_prop->SetListener(new PropertyColorListener(&spr->b_trans));
 	pg->AppendIn(col_conv_prop, col_b_prop);
 
 // 	wxColour r_trans = wxColour(spr->r_trans.r*255, spr->r_trans.g*255, spr->r_trans.b*255, spr->r_trans.a*255);
