@@ -159,7 +159,7 @@ _adjust_tree2(struct sidx_rnode* parent, struct sidx_rnode* c1, struct sidx_rnod
 		}
 	}
 
-	bool adjust = _insert_data(parent, &c2->region, c2->ud);
+//	bool adjust = _insert_data(parent, &c2->region, c2->ud);
 	// todo	
 }
 

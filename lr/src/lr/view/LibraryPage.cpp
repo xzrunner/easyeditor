@@ -109,7 +109,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 void LibraryPage::OnChangeVisible(wxCommandEvent& event)
 {
 	m_layer->SetVisible(event.IsChecked());
-	m_canvas->SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void LibraryPage::OnChangeEditable(wxCommandEvent& event)

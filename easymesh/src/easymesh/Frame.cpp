@@ -62,7 +62,7 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 		stage->SetBackground(sprite);
 		sprite->Release();
 		symbol->Release();
-		stage->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

@@ -8,7 +8,7 @@ namespace tdtex
 dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
 								   bool load_tex, int lod/*, bool load_texture_async*/)
 {
-	dtex_package* pkg = dtexf_load_pkg(pkg_name.c_str(), pkg_name.c_str(), scale, lod, 0);
+	dtex_package* pkg = dtexf_load_pkg(pkg_name.c_str(), pkg_name.c_str(), scale, lod);
 
 	int idx = 1;
 	while (true)
@@ -30,7 +30,7 @@ dtex_package* Utility::LoadPackage(const std::string& pkg_name, float scale,
 
 	if (load_tex) {
 		for (int i = 0; i < pkg->texture_count; ++i) {
-			dtexf_load_texture(pkg, i, false);
+			dtexf_load_texture(pkg, i);
 		}
 	}
 

@@ -8,7 +8,7 @@ namespace sg
 {
 
 PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), stage, library)
+	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), library)
 {
 }
 

@@ -8,7 +8,7 @@ namespace etexpacker
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel, 
 									 d2d::PropertySettingPanel* propertyPanel)
 	: d2d::ArrangeSpriteImpl(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, 
-	NULL, d2d::ArrangeSpriteConfig(false, false, false, false))
+	d2d::ArrangeSpriteConfig(false, false, false, false))
 	, m_stage(editPanel)
 {
 }

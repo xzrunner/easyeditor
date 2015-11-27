@@ -17,7 +17,7 @@ JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new d2d::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, this, cfg);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, this, cfg);
 	static_cast<SelectJointOP*>(m_editOP)->SetPropertyPanel(propertyPanel);
 }
 

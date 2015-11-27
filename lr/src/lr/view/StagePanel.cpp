@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(GetStageImpl())
-	, d2d::MultiShapesImpl(GetStageImpl())
+	, d2d::MultiShapesImpl()
 	, m_library(library)
 	, m_grids(NULL)
 	, m_sindex(NULL)

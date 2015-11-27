@@ -15,9 +15,9 @@ PasteSymbolPhysicsCMPT::PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString&
 	, m_worldReverse(worldReverse)
 {
 	if (!randomWidget)
-		m_editOP = new PasteSymbolPhysicsOP(stage_wnd, stage, spritesImpl, libraryPanel, physicsImpl, pScale);
+		m_editOP = new PasteSymbolPhysicsOP(stage_wnd, stage, libraryPanel, physicsImpl, pScale);
 	else
-		m_editOP = new PasteSymbolPhysicsRandomOP(stage_wnd, stage, spritesImpl, libraryPanel, physicsImpl, randomWidget);
+		m_editOP = new PasteSymbolPhysicsRandomOP(stage_wnd, stage, libraryPanel, physicsImpl, randomWidget);
 }
 
 wxSizer* PasteSymbolPhysicsCMPT::initLayout()

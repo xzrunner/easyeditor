@@ -76,17 +76,17 @@ void TestAsyncC3Load::OnUpdate()
  		wxLogDebug("+++++++++++ Async Load");
  		int* sprite_ids = new int[1];
  		sprite_ids[0] = dtex_get_spr_id(m_packages[0], "c00001_attack_1");
- 		dtexf_async_load_texture_from_c3(m_packages[0], sprite_ids, 1);
+ 		dtexf_async_load_texture_with_c3(m_packages[0], sprite_ids, 1);
  	} else if (frame == 200) {
  		wxLogDebug("+++++++++++ Async Load");
  		int* sprite_ids = new int[1];
  		sprite_ids[0] = dtex_get_spr_id(m_packages[1], "c00002_attack01_1");
- 		dtexf_async_load_texture_from_c3(m_packages[1], sprite_ids, 1);
+ 		dtexf_async_load_texture_with_c3(m_packages[1], sprite_ids, 1);
  	} else if (frame == 300) {
  		wxLogDebug("+++++++++++ Async Load");
  		int* sprite_ids = new int[1];
  		sprite_ids[0] = dtex_get_spr_id(m_packages[2], "c00003_attack01_1");
- 		dtexf_async_load_texture_from_c3(m_packages[2], sprite_ids, 1);
+ 		dtexf_async_load_texture_with_c3(m_packages[2], sprite_ids, 1);
  	}
  
  	++frame;

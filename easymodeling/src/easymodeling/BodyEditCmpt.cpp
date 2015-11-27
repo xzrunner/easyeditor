@@ -14,7 +14,7 @@ BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const wxString& name,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new d2d::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, NULL, cfg);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, cfg);
 }
 
 wxSizer* BodyEditCmpt::initLayout()

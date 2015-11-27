@@ -82,7 +82,7 @@ void StagePanel::Notify(int sj_id, void* ud)
 			m_ctrl->setCurrFrame(-1, -1);
 
 			if (ret) {
-				GetCanvas()->SetDirty();
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 
 			// 	Context* context = Context::Instance();
@@ -206,7 +206,7 @@ void StagePanel::Remove(d2d::ISprite* spr)
 	bool success = frame->Remove(spr);
 	if (success) {
 		m_ctrl->Refresh();
-		GetCanvas()->SetDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

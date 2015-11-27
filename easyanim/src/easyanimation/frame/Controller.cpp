@@ -42,7 +42,7 @@ void Controller::setCurrFrame(int layer, int frame)
 		}
 	}
 
-	m_widgets->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	if (m_widgets->m_keysPanel) {
 		m_widgets->m_keysPanel->Refresh(true);
 	}
@@ -171,7 +171,7 @@ void Controller::Clear()
 
 void Controller::Refresh()
 {
-	m_widgets->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	m_widgets->m_keysPanel->Refresh(true);
 }
 

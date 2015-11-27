@@ -23,7 +23,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	SetCanvas(new StageCanvas(this));
 
 	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
-	library->SetCanvas(GetCanvas());
 
 	top_pannels->property->SetEditPanel(GetStageImpl());
 

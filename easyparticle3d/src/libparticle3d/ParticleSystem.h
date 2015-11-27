@@ -9,6 +9,8 @@ struct p3d_ps_config;
 struct p3d_symbol;
 struct p3d_particle;
 
+namespace d3d { class Quaternion; }
+
 namespace eparticle3d
 {
 

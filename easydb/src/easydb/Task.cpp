@@ -36,8 +36,7 @@ void Task::storeToFile(const char* filename) const
 
 void Task::clear()
 {
-	Context* context = Context::Instance();
-	context->stage->Clear();
+	d2d::ClearPanelSJ::Instance()->Clear();
 }
 
 void Task::initLayout()

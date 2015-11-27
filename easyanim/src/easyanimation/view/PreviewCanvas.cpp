@@ -38,7 +38,7 @@ void PreviewCanvas::OnDrawSprites() const
 void PreviewCanvas::OnTimer()
 {
 	m_control.update();
-	SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	if (m_control.frame() <= m_ctrl->GetLayers().getFrameCount()) {
 		return;

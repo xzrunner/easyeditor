@@ -20,7 +20,7 @@ StagePanel2D::StagePanel2D(wxWindow* parent, wxTopLevelWindow* frame,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, NULL, NULL, NULL, cfg));
+	SetEditOP(new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, NULL, NULL, cfg));
 }
 
 }
