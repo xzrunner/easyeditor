@@ -84,10 +84,10 @@ void Frame::OnPreview(wxCommandEvent& event)
 	StagePanel* stage = ctrl->GetStagePanel();
 	stage->EnableObserve(false);
 	stage->GetCanvas()->EnableObserve(false);
-
-	PreviewDialog dlg(this, ctrl);
-	dlg.ShowModal();
-
+	{
+		PreviewDialog dlg(this, ctrl);
+		dlg.ShowModal();
+	}
 	stage->EnableObserve(true);
 	stage->GetCanvas()->EnableObserve(true);
 

@@ -19,6 +19,11 @@ public:
 	virtual ~StagePanel();
 
 	//
+	// d2d::EditPanel interface
+	//
+	virtual bool Update(int version);
+
+	//
 	//	interface Observer
 	//
 	virtual void Notify(int sj_id, void* ud);
@@ -49,6 +54,22 @@ public:
 		Menu_AddJointNode = 1000,
 		Menu_DelJointNode
 	};
+
+private:
+	class CheckUpdateVisitor : public d2d::IVisitor
+	{
+	public:
+		CheckUpdateVisitor(int version);
+
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+
+		bool NeedUpdate() const { return m_update; }
+
+	private:
+		int m_version;
+		bool m_update;
+
+	}; // CheckUpdateVisitor
 
 private:
 	Controller* m_ctrl;

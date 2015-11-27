@@ -49,6 +49,13 @@ StagePanel::~StagePanel()
 	}
 }
 
+bool StagePanel::Update(int version)
+{
+	CheckUpdateVisitor visitor(version);
+	TraverseSprites(visitor, d2d::DT_ALL, true);
+	return visitor.NeedUpdate();
+}
+
 void StagePanel::Notify(int sj_id, void* ud)
 {
 	MultiSpritesImpl::Notify(sj_id, ud);
@@ -207,6 +214,28 @@ void StagePanel::Remove(d2d::ISprite* spr)
 	if (success) {
 		m_ctrl->Refresh();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class StagePanel::CheckUpdateVisitor
+//////////////////////////////////////////////////////////////////////////
+
+StagePanel::CheckUpdateVisitor::
+CheckUpdateVisitor(int version) 
+	: m_version(version)
+	, m_update(false) 
+{}
+
+void StagePanel::CheckUpdateVisitor::
+Visit(d2d::Object* object, bool& bFetchNext)
+{
+	d2d::ISprite* spr = static_cast<d2d::ISprite*>(object);
+	if (spr->Update(m_version)) {
+		m_update = true;
+		bFetchNext = false;
+	} else {
+		bFetchNext = true;
 	}
 }
 

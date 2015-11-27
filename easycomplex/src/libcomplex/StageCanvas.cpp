@@ -35,8 +35,6 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 
 void StageCanvas::InitGL()
 {
-	d2d::ShaderMgr::Instance();
-
 	d2d::OrthoCanvas::InitGL();
 
 	m_library->LoadDefaultSymbol();

@@ -63,14 +63,13 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(int version)
 {
-	bool ret = false;
 	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
 		d2d::ISprite* spr = m_symbol->m_sprites[i];
 		if (spr->Update(version)) {
-			ret = true;
+			return true;
 		}
 	}
-	return ret;
+	return false;
 }
 
 void StagePanel::Notify(int sj_id, void* ud)
