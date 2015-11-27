@@ -1,6 +1,7 @@
 #include "TwoPassCanvas.h"
 
 #include "common/Config.h"
+#include "common/color_config.h"
 #include "render/ShaderMgr.h"
 #include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
@@ -15,6 +16,8 @@ namespace d2d
 TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 	: IStageCanvas(stage_wnd, stage)
 {
+	m_scr_style.multi_col = WHITE;
+	m_scr_style.add_col = BLACK;
 }
 
 void TwoPassCanvas::InitGL()
@@ -73,6 +76,12 @@ void TwoPassCanvas::OnSize(int w, int h)
 // 	mgr->DrawScreen(fbo.GetTexID());
 // }
 
+static void
+_before_draw(void* ud) {
+	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
+	ShaderMgr::Instance()->SetSpriteColor(stype->multi_col, stype->add_col);
+}
+
 void TwoPassCanvas::OnDrawWhole() const
 {
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
@@ -99,7 +108,7 @@ void TwoPassCanvas::OnDrawWhole() const
 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		dtexf_cs_draw_to_screen();
+		dtexf_cs_draw_to_screen(&_before_draw, (ScreenStyle*)(&m_scr_style));
 	} 
 	else 
 	{

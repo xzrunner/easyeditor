@@ -13,7 +13,8 @@ class StageCanvas : public d2d::OrthoCanvas
 public:
 	StageCanvas(StagePanel* stage);
 
-	void BuildGrids(int w, int h);
+	d2d::Colorf& GetMultiColor() { return m_scr_style.multi_col; }
+	d2d::Colorf& GetAddColor() { return m_scr_style.add_col; }
 
 protected:
 	virtual void OnDrawSprites() const;

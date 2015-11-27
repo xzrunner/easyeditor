@@ -257,6 +257,18 @@ void StagePanel::BuildGrids(int w, int h)
 	}
 }
 
+d2d::Colorf& StagePanel::GetScreenMultiColor()
+{
+	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
+	return canvas->GetMultiColor();
+}
+
+d2d::Colorf& StagePanel::GetScreenAddColor()
+{
+	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
+	return canvas->GetAddColor();	
+}
+
 void StagePanel::OnMouseHook(wxMouseEvent& event)
 {
 	if (event.RightDown()) {

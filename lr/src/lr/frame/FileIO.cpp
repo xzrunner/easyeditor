@@ -52,6 +52,16 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	cam->SetScale(s);
 	cam->SetPosition(d2d::Vector(x, y));
 
+	// screen
+	if (!value["screen"]["multi_col"].isNull()) {
+		std::string str = value["screen"]["multi_col"].asString();
+		stage->GetScreenMultiColor() = d2d::transColor(str, d2d::PT_RGBA);
+	}
+	if (!value["screen"]["add_col"].isNull()) {
+		std::string str = value["screen"]["add_col"].asString();
+		stage->GetScreenAddColor() = d2d::transColor(str, d2d::PT_RGBA);
+	}
+
 	// layers
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	LoadLayers(value["layer"], stage, library, dir);
@@ -92,6 +102,10 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["camera"]["scale"] = cam->GetScale();
 	value["camera"]["x"] = cam->GetPosition().x;
 	value["camera"]["y"] = cam->GetPosition().y;
+
+	// screen
+	value["screen"]["multi_col"] = d2d::transColor(stage->GetScreenMultiColor(), d2d::PT_RGBA);
+	value["screen"]["add_col"] = d2d::transColor(stage->GetScreenAddColor(), d2d::PT_RGBA);
 
 	// layers
 	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";

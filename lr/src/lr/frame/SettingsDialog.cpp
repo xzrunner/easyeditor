@@ -121,6 +121,24 @@ void SettingDialog::InitLayout()
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeSpecialLayerFlag));
 		right_sizer->Add(check);
 	}
+	// Screen color
+	right_sizer->AddSpacer(10);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("ÆÁÄ»ÌØÐ§"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+		{
+			wxButton* btn = new wxButton(this, wxID_ANY, "MULTI");
+			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeScreenMultiColor));
+			sizer->Add(btn);
+		}
+		sizer->AddSpacer(5);
+		{
+			wxButton* btn = new wxButton(this, wxID_ANY, "ADD");
+			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeScreenAddColor));
+			sizer->Add(btn);
+		}
+		right_sizer->Add(sizer);
+	}
 	top_sizer->Add(right_sizer);
 
 	SetSizer(top_sizer);
@@ -183,6 +201,26 @@ void SettingDialog::OnChangeSpecialLayerFlag(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_special_layer_flag = event.IsChecked();	
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+}
+
+void SettingDialog::OnChangeScreenMultiColor(wxCommandEvent& event)
+{
+	d2d::Colorf& col = m_stage->GetScreenMultiColor();
+	d2d::HSLColorSettingDlg dlg(this, NULL, col);
+	if (dlg.ShowModal()) {
+		col = dlg.GetColor();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+}
+
+void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
+{
+	d2d::Colorf& col = m_stage->GetScreenAddColor();
+	d2d::HSLColorSettingDlg dlg(this, NULL, col);
+	if (dlg.ShowModal()) {
+		col = dlg.GetColor();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
 }
 
 }

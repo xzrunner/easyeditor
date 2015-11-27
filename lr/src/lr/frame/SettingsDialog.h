@@ -22,6 +22,9 @@ private:
 	void OnChangeAllLayersVisibleEditable(wxCommandEvent& event);
 	void OnChangeSpecialLayerFlag(wxCommandEvent& event);
 
+	void OnChangeScreenMultiColor(wxCommandEvent& event);
+	void OnChangeScreenAddColor(wxCommandEvent& event);
+
 private:
 	StagePanel* m_stage;
 

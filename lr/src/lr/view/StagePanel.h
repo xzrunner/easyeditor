@@ -63,6 +63,9 @@ public:
 
 	d2d::LibraryPanel* GetLibrary() { return m_library; }
 
+	d2d::Colorf& GetScreenMultiColor();
+	d2d::Colorf& GetScreenAddColor();
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
