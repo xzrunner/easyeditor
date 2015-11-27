@@ -15,11 +15,9 @@ ShaderMgrBase* RenderContext::m_mgr3 = NULL;
 void RenderContext::Reload()
 {
 	if (m_mgr2) {
-		Bind2d();
 		m_mgr2->reload();
 	}
 	if (m_mgr3) {
-		Bind3d();
 		m_mgr3->reload();
 	}
 }

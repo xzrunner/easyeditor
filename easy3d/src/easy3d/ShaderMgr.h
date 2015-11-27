@@ -18,7 +18,10 @@ class ShaderMgr : public d2d::ShaderMgrBase
 public:
 	static ShaderMgr* Instance();
 
+	virtual void NullProg();
+
 	void Null();
+
 	void Model();
 	void Shape();
 	void Sprite();

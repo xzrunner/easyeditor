@@ -49,6 +49,11 @@ ShaderMgr::~ShaderMgr()
 	delete m_font_shader;
 }
 
+void ShaderMgr::NullProg()
+{
+	null();
+}
+
 void ShaderMgr::SetSpriteColor(const Colorf& multi, const Colorf& add)
 {
 	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);

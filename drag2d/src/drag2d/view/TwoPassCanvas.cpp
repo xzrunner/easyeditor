@@ -77,28 +77,37 @@ void TwoPassCanvas::OnDrawWhole() const
 {
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
 
-	//////////////////////////////////////////////////////////////////////////
-	// Draw to Target
-	//////////////////////////////////////////////////////////////////////////
-	if (IsDirty()) {
-		dtexf_cs_bind();
+	if (dtexf_cs_open()) 
+	{
+		//////////////////////////////////////////////////////////////////////////
+		// Draw to Target
+		//////////////////////////////////////////////////////////////////////////
+		if (IsDirty()) {
+			dtexf_cs_bind();
 
- 		glClearColor(0, 0, 0, 0);
- 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClearColor(0, 0, 0, 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			OnDrawSprites();
+
+			dtexf_cs_unbind();
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+		// Draw to Screen
+		//////////////////////////////////////////////////////////////////////////
+		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		dtexf_cs_draw_to_screen();
+	} 
+	else 
+	{
+		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		OnDrawSprites();
-
-		dtexf_cs_unbind();
 	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// Draw to Screen
-	//////////////////////////////////////////////////////////////////////////
-
- 	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
- 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
- 
-	dtexf_cs_draw_to_screen();
 }
 
 }

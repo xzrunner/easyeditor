@@ -37,6 +37,11 @@ ShaderMgr::~ShaderMgr()
 	delete m_sprite_shader;
 }
 
+void ShaderMgr::NullProg()
+{
+	Null();
+}
+
 void ShaderMgr::Null()
 {
 	d2d::RenderContext::Bind3d();

@@ -23,6 +23,8 @@ class ShaderMgr : public ShaderMgrBase
 public:
 	static ShaderMgr* Instance();
 
+	virtual void NullProg();
+
 	void SetSpriteColor(const Colorf& multi, const Colorf& add);
 	void SetSpriteColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans);
 	void SetShapeColor(const Colorf& col);

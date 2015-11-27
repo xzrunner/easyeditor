@@ -14,6 +14,8 @@ public:
 	ShaderMgrBase();
 	~ShaderMgrBase();
 
+	virtual void NullProg() = 0;
+
 	void Bind();
 	void UnBind();
 
