@@ -26,6 +26,8 @@ SettingData::SettingData()
 
 	pre_multi_alpha = true;
 	load_image = true;
+
+	color_setting_dlg_type = CSDT_DEFAULT;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)
@@ -71,6 +73,15 @@ void SettingData::LoadFromFile(const Json::Value& value)
 
 	if (!value["linear_filter"].isNull()) {
 		linear_filter = value["linear_filter"].asBool();
+	}
+
+	if (!value["color_setting_dlg"].isNull()) {
+		std::string type = value["color_setting_dlg"].asString();
+		if (type == "rgb") {
+			color_setting_dlg_type = CSDT_RGB;
+		} else if (type == "hsl") {
+			color_setting_dlg_type = CSDT_HSL;
+		}
 	}
 }
 

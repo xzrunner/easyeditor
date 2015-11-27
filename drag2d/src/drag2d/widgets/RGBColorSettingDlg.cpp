@@ -4,8 +4,8 @@
 namespace d2d
 {
 
-RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, const Colorf& col)
-	: wxDialog(parent, wxID_ANY, "RGB Color Setting", wxDefaultPosition, wxSize(450, 300))
+RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, const Colorf& col, const wxPoint& pos)
+	: wxDialog(parent, wxID_ANY, "RGB Color Setting", pos, wxSize(450, 300))
 	, m_lsn(lsn)
 	, m_r(NULL)
 	, m_g(NULL)

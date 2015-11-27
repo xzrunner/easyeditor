@@ -8,6 +8,12 @@
 namespace d2d
 {
 
+enum COL_SET_DLG_TYPE {
+	CSDT_DEFAULT = 0,
+	CSDT_RGB,
+	CSDT_HSL
+};
+
 struct SettingData
 {
 	// edit
@@ -35,6 +41,9 @@ struct SettingData
 	// image loading
 	bool pre_multi_alpha;
 	bool load_image;
+
+	// widget
+	COL_SET_DLG_TYPE color_setting_dlg_type;
 
 	SettingData();
 

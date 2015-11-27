@@ -1,6 +1,10 @@
 #include "ColorProperty.h"
 #include "IColorMonitor.h"
+#include "RGBColorSettingDlg.h"
 #include "HSLColorSettingDlg.h"
+
+#include "common/Config.h"
+#include "common/SettingData.h"
 
 namespace d2d
 {
@@ -42,13 +46,17 @@ bool ColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 		return false;
 	}
 
-	wxSize dialogSize(450, 300);
-	wxPoint dlgPos = propGrid->GetGoodEditorDialogPosition(this, dialogSize);
-
-	HSLColorSettingDlg dlg(m_parent, m_lsn, m_lsn->GetColor(), dlgPos);
-	dlg.ShowModal();
-
-	m_lsn->OnColorChanged(dlg.GetColor());
+	wxSize dlg_sz(450, 300);
+	wxPoint dlg_pos = propGrid->GetGoodEditorDialogPosition(this, dlg_sz);
+	if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
+		RGBColorSettingDlg dlg(m_parent, m_lsn, m_lsn->GetColor(), dlg_pos);
+		dlg.ShowModal();
+		m_lsn->OnColorChanged(dlg.GetColor());
+	} else {
+		HSLColorSettingDlg dlg(m_parent, m_lsn, m_lsn->GetColor(), dlg_pos);
+		dlg.ShowModal();
+		m_lsn->OnColorChanged(dlg.GetColor());
+	}
 
 //	// todo
 // 	if ( dlg.ShowModal() == wxID_OK )

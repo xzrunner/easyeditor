@@ -16,7 +16,8 @@ class ColorSlider;
 class RGBColorSettingDlg : public wxDialog, public IColorMonitor
 {
 public:
-	RGBColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, const Colorf& col);
+	RGBColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, const Colorf& col,
+		const wxPoint& pos = wxDefaultPosition);
 
 	//
 	// interface IColorMonitor
