@@ -7,6 +7,7 @@
 #include "common/color_trans.h"
 #include "common/Config.h"
 #include "common/SettingData.h"
+#include "common/FileNameTools.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/IStageCanvas.h"
@@ -208,6 +209,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	ISprite* spr = m_impl->GetSprite();
 
+	std::string filename = FilenameTools::getFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	pg->GetProperty(wxT("FileName"))->SetValue(filename);
+
 	pg->GetProperty(wxT("Name"))->SetValue(spr->name);
 	pg->GetProperty(wxT("Tag"))->SetValue(spr->tag);
 
@@ -285,6 +289,10 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->name));
+
+	std::string filename = FilenameTools::getFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	pg->Append(new wxStringProperty(wxT("FileName"), wxPG_LABEL, filename));
+	pg->SetPropertyReadOnly("FileName");
 
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, spr->tag));
 
