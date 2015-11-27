@@ -64,7 +64,7 @@ void Code::ResolveUI(const std::vector<d2d::ISprite*>& sprites)
 
 			gen_path->line(lua::assign("path."+name, "\""+path+"\""));
 
-			if (const d2d::FontSprite* s = dynamic_cast<const d2d::FontSprite*>(spr))
+			if (const d2d::FontBlankSprite* s = dynamic_cast<const d2d::FontBlankSprite*>(spr))
 			{
 				text_nodes.push_back(std::make_pair("path."+name, "i18n."+s->GetTextID()));
 			}
@@ -111,7 +111,7 @@ void Code::ResolveText(const std::vector<d2d::ISprite*>& sprites)
 			continue;
 		}
 
-		if (d2d::FontSprite* s = dynamic_cast<d2d::FontSprite*>(spr))
+		if (d2d::FontBlankSprite* s = dynamic_cast<d2d::FontBlankSprite*>(spr))
 		{
 			std::string content = s->GetTextContext().ToStdString();
 			size_t pos = 0;

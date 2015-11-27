@@ -1,6 +1,5 @@
 #include "SymbolFactory.h"
 #include "ImageSymbol.h"
-#include "FontSymbol.h"
 #include "FontBlankSymbol.h"
 #include "ScriptsSymbol.h"
 
@@ -21,10 +20,6 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 	if (ext == "png" || ext == "jpg" || ext == "bmp")
 	{
 		symbol = new ImageSymbol;
-	}
-	else if (ext == "ttf")
-	{
-		symbol = new FontSymbol;
 	}
 	else if (ext == "json")
 	{

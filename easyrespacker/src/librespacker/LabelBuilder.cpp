@@ -25,7 +25,7 @@
 // 	}
 //}
 //
-//const IPackNode* LabelBuilder::Create(const d2d::FontSprite* spr)
+//const IPackNode* LabelBuilder::Create(const d2d::FontBlankSprite* spr)
 //{
 //	for (int i = 0, n = m_labels.size(); i < n; ++i) 
 //	{

@@ -4,9 +4,7 @@
 #include "common/FileNameParser.h"
 
 #include "ImageSprite.h"
-#include "TextSprite.h"
-//#include "FontBlankSprite.h"
-#include "FontSprite.h"
+#include "FontBlankSprite.h"
 #include "ScriptsSprite.h"
 
 namespace d2d
@@ -42,10 +40,6 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		{
 			sprite = new ImageSprite(static_cast<ImageSymbol*>(symbol));
 		}
-		else if (ext == "ttf")
-		{
-			sprite = new TextSprite(static_cast<FontSymbol*>(symbol));
-		}
 		else if (ext == "json")
 		{
 			wxString type = d2d::FileNameParser::getFileTag(d2d::FileNameParser::getFileType(filepath));
@@ -53,7 +47,7 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 			if (itr != m_creators.end()) {
 				sprite = (itr->second)(symbol);
 			} else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank)) {
-				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
+				sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
 			}
 		}
 		else if (ext == "lua")

@@ -19,7 +19,7 @@
 //
 //	virtual void Traverse(d2d::IVisitor& visitor) const;
 //
-//	const IPackNode* Create(const d2d::FontSprite* spr);
+//	const IPackNode* Create(const d2d::FontBlankSprite* spr);
 //
 //	void OutputExtraInfo(Json::Value& value) const;
 //

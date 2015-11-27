@@ -6,18 +6,18 @@
 namespace d2d
 {
 
-class FontSprite;
+class FontBlankSprite;
 
 class TextDialog : public wxDialog
 {
 public:
-	TextDialog(wxWindow* parent, FontSprite* font);
+	TextDialog(wxWindow* parent, FontBlankSprite* font);
 
 private:
 	void OnClose(wxCloseEvent& event);
 
 private:
-	FontSprite* m_font;
+	FontBlankSprite* m_font;
 
 	wxTextCtrl* m_text_ctrl;
 

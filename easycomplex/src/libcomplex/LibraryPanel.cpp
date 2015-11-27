@@ -28,10 +28,9 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new libanim::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));
 	AddPage(new etext::LibraryPage(nb));
-//	AddPage(new d2d::LibraryFontBlankPage(nb));
+	AddPage(new d2d::LibraryFontBlankPage(nb));
 	AddPage(new emesh::LibraryPage(nb));
 	AddPage(new d2d::LibraryScriptsPage(nb));
-//	AddPage(new d2d::LibraryFontPage(nb));
 	AddPage(new eparticle3d::LibraryPage(nb));
 	AddPage(new eparticle2d::LibraryPage(nb));
 	AddPage(new eejoy2d::LibraryPage(nb));

@@ -71,7 +71,7 @@ private:
 		const std::map<int, int>& map_id2idx);
 	void ParserSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat);
 	void ParserImageForFrame(const d2d::ISprite* sprite, int id);
-	void ParserFontForFrame(const d2d::FontSprite* font, int id);
+	void ParserFontForFrame(const d2d::FontBlankSprite* font, int id);
 
 	void TransToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
 

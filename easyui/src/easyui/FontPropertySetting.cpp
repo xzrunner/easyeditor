@@ -1,17 +1,17 @@
-#include "FontPropertySetting.h"
+#include "FontBlankPropertySetting.h"
 #include "TidCfg.h"
 
 namespace eui
 {
 
-FontPropertySetting::FontPropertySetting(d2d::EditPanelImpl* stage, d2d::FontSprite* sprite)
-	: d2d::FontPropertySetting(stage, sprite)
+FontBlankPropertySetting::FontBlankPropertySetting(d2d::EditPanelImpl* stage, d2d::FontBlankSprite* sprite)
+	: d2d::FontBlankPropertySetting(stage, sprite)
 {
 }
 
-void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void FontBlankPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	d2d::FontPropertySetting::OnPropertyGridChange(name, value);
+	d2d::FontBlankPropertySetting::OnPropertyGridChange(name, value);
 
 	if (name == wxT("TextID")) 
 	{
@@ -19,7 +19,7 @@ void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 
 		std::string val = TidCfg::Instance()->Query(tid);
 		if (!val.empty()) {
-			d2d::FontSprite* sprite = static_cast<d2d::FontSprite*>(GetSprite());
+			d2d::FontBlankSprite* sprite = static_cast<d2d::FontBlankSprite*>(GetSprite());
 			sprite->SetTextContent(val);
 		}
 	}

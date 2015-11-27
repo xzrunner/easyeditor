@@ -112,7 +112,7 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	d2d::SpritePropertySetting::InitProperties(pg);
 
-	pg->Append(new wxPropertyCategory("FONT", wxPG_LABEL));
+	pg->Append(new wxPropertyCategory("TEXT", wxPG_LABEL));
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 

@@ -6,14 +6,14 @@
 namespace eui
 {
 
-class FontPropertySetting : public d2d::FontPropertySetting
+class FontBlankPropertySetting : public d2d::FontBlankPropertySetting
 {
 public:
-	FontPropertySetting(d2d::EditPanelImpl* stage, d2d::FontSprite* sprite);
+	FontBlankPropertySetting(d2d::EditPanelImpl* stage, d2d::FontBlankSprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
-}; // FontPropertySetting
+}; // FontBlankPropertySetting
 
 }
 

@@ -67,7 +67,7 @@ void Code::ResolveUI(const Symbol& symbol)
 					next.name = name;
 					buffer.push(next);
 				} 
-				else if (d2d::FontSprite* s = dynamic_cast<d2d::FontSprite*>(child))
+				else if (d2d::FontBlankSprite* s = dynamic_cast<d2d::FontBlankSprite*>(child))
 				{
 					text_nodes.push_back(std::make_pair("path."+name, "i18n."+s->GetTextID()));
 				}
@@ -107,7 +107,7 @@ void Code::ResolveText(const Symbol& symbol)
  				continue;
  			}
  
- 			if (d2d::FontSprite* s = dynamic_cast<d2d::FontSprite*>(child))
+ 			if (d2d::FontBlankSprite* s = dynamic_cast<d2d::FontBlankSprite*>(child))
  			{
 				std::string content = s->GetTextContext().ToStdString();
 				size_t pos = 0;

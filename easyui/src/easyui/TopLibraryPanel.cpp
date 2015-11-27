@@ -43,7 +43,6 @@ void TopLibraryPanel::InitLayout()
 	m_library_raw->AddPage(new d2d::LibraryImagePage(nb));
 	m_library_raw->AddPage(new ecomplex::LibraryPage(nb));
 	m_library_raw->AddPage(new etext::LibraryPage(nb));
-//	m_library_raw->AddPage(new d2d::LibraryFontBlankPage(nb));
 	sizer->Add(m_library_raw, 1, wxEXPAND);
 
 	SetSizer(sizer);

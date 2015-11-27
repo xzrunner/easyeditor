@@ -1,6 +1,6 @@
 #include "TextDialog.h"
 
-#include "dataset/FontSprite.h"
+#include "dataset/FontBlankSprite.h"
 
 namespace d2d
 {
@@ -9,7 +9,7 @@ BEGIN_EVENT_TABLE(TextDialog, wxDialog)
 	EVT_CLOSE(TextDialog::OnClose)
 END_EVENT_TABLE()
 
-TextDialog::TextDialog(wxWindow* parent, FontSprite* font)
+TextDialog::TextDialog(wxWindow* parent, FontBlankSprite* font)
 	: wxDialog(parent, wxID_ANY, wxT("Text"), wxDefaultPosition, wxSize(600, 400), wxCLOSE_BOX | wxCAPTION)
 	, m_font(font)
 {

@@ -4,8 +4,6 @@
 
 #include "dataset/ISymbol.h"
 #include "dataset/SymbolMgr.h"
-#include "dataset/Font.h"
-#include "dataset/FontSymbol.h"
 #include "common/Vector.h"
 #include "common/Rect.h"
 #include "common/Color.h"
@@ -305,16 +303,6 @@ void PrimitiveDraw::cross(const Vector& center, float xedge, float yedge, const 
 	s.y -= yedge;
 	e.y += yedge;
 	drawLine(s, e, color, size);
-}
-
-void PrimitiveDraw::text(const char* text)
-{
-	ISymbol* s = SymbolMgr::Instance()->FetchSymbol(Font::DEFAULT_FONTFILE);
-	if (s) {
-		ShaderMgr::Instance()->null();
-		FontSymbol* fs = static_cast<FontSymbol*>(s);
-		fs->print(0, 0, text);
-	}
 }
 
 //////////////////////////////////////////////////////////////////////////

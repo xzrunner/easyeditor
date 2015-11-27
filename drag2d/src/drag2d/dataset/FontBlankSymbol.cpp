@@ -1,5 +1,5 @@
 #include "FontBlankSymbol.h"
-#include "FontSprite.h"
+#include "FontBlankSprite.h"
 #include "Font.h"
 
 #include "common/Vector.h"
@@ -68,7 +68,7 @@ Rect FontBlankSymbol::GetSize(const ISprite* sprite/* = NULL*/) const
 {
 	float w = width, h = height;
 	if (sprite) {
-		const FontSprite* font = dynamic_cast<const FontSprite*>(sprite);
+		const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite);
 		if (font) {
 			w = font->width;
 			h = font->height;
@@ -127,7 +127,7 @@ void FontBlankSymbol::DrawBackground(const ISprite* sprite, const Matrix& mt) co
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;
 	if (sprite) {
-		const FontSprite* font = dynamic_cast<const FontSprite*>(sprite);
+		const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite);
 		if (font) {
 			hw = font->width * 0.5f;
 			hh = font->height * 0.5f;
@@ -140,7 +140,7 @@ void FontBlankSymbol::DrawBackground(const ISprite* sprite, const Matrix& mt) co
 void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
 {
 	if (sprite) {
-		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
+		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
 			const wxString& str = font->GetTextContext();
 			if (!str.empty()) {
 				Vector pos = Math::transVector(Vector(0, 0), mt);
@@ -160,7 +160,7 @@ void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
 	}
 
 // 	if (sprite) {
-// 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
+// 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
 // 			const std::string& str = font->GetTextContext();
 // 			if (!str.empty()) {
 // 				d2d::PrimitiveDraw::text(str.c_str());
@@ -171,7 +171,7 @@ void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
 // 	if (m_font) 
 // 	{
 // 		float w = width;
-// 		if (const FontSprite* s = dynamic_cast<const FontSprite*>(sprite)) {
+// 		if (const FontBlankSprite* s = dynamic_cast<const FontBlankSprite*>(sprite)) {
 // 			w = s->width;
 // 		}
 // 		Shader::Instance()->null();

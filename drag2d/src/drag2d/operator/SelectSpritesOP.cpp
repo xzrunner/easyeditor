@@ -2,8 +2,7 @@
 
 #include "common/Rect.h"
 #include "common/sprite_visitors.h"
-#include "dataset/TextSprite.h"
-#include "dataset/FontSprite.h"
+#include "dataset/FontBlankSprite.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/SpriteFactory.h"
 #include "component/AbstractEditCMPT.h"

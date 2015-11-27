@@ -1,16 +1,16 @@
-#ifndef FONT_PROPERTY_SETTING_H
-#define FONT_PROPERTY_SETTING_H
+#ifndef _DRAG2D_FONT_BLANK_PROPERTY_SETTING_H_
+#define _DRAG2D_FONT_BLANK_PROPERTY_SETTING_H_
 
 #include "SpritePropertySetting.h"
 
 namespace d2d
 {
-class FontSprite;
+class FontBlankSprite;
 
-class FontPropertySetting : public SpritePropertySetting
+class FontBlankPropertySetting : public SpritePropertySetting
 {
 public:
-	FontPropertySetting(EditPanelImpl* stage, FontSprite* sprite);
+	FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -22,7 +22,7 @@ private:
 	static const wxChar* HORI_ALIGN_LABELS[];
 	static const wxChar* VERT_ALIGN_LABELS[];
 
-}; // FontPropertySetting
+}; // FontBlankPropertySetting
 }
 
-#endif // FONT_PROPERTY_SETTING_H
+#endif // _DRAG2D_FONT_BLANK_PROPERTY_SETTING_H_

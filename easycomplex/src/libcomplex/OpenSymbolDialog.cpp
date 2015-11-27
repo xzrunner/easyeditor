@@ -62,7 +62,7 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 		emesh::EditDialog dlg(m_wnd, sprite);
 		dlg.ShowModal();
 	}
-	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(spr))
+	else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(spr))
 	{
 		d2d::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();

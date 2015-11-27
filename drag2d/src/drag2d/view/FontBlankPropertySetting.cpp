@@ -1,7 +1,7 @@
-#include "FontPropertySetting.h"
+#include "FontBlankPropertySetting.h"
 #include "PropertySettingPanel.h"
 
-#include "dataset/FontSprite.h"
+#include "dataset/FontBlankSprite.h"
 #include "view/EditPanelImpl.h"
 #include "message/SetCanvasDirtySJ.h"
 
@@ -10,22 +10,22 @@
 namespace d2d
 {
 
-const wxChar* FontPropertySetting::HORI_ALIGN_LABELS[] = { 
+const wxChar* FontBlankPropertySetting::HORI_ALIGN_LABELS[] = { 
 	wxT("left"), wxT("right"), wxT("center"), wxT("auto"), NULL };
-const wxChar* FontPropertySetting::VERT_ALIGN_LABELS[] = { 
+const wxChar* FontBlankPropertySetting::VERT_ALIGN_LABELS[] = { 
 	wxT("top"), wxT("bottom"), wxT("center"), wxT("auto"), NULL };
 
-FontPropertySetting::FontPropertySetting(EditPanelImpl* stage, FontSprite* sprite)
+FontBlankPropertySetting::FontBlankPropertySetting(EditPanelImpl* stage, FontBlankSprite* sprite)
 	: SpritePropertySetting(stage, sprite)
 {
 	m_type = "Font";
 }
 
-void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void FontBlankPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	SpritePropertySetting::OnPropertyGridChange(name, value);
 
-	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
+	FontBlankSprite* sprite = static_cast<FontBlankSprite*>(GetSprite());
 	if (name == wxT("Font")) {
 		sprite->font = wxANY_AS(value, wxString);
 	} else if (name == wxT("Edge")) {
@@ -68,11 +68,11 @@ void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	}
 }
 
-void FontPropertySetting::UpdateProperties(wxPropertyGrid* pg)
+void FontBlankPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	SpritePropertySetting::UpdateProperties(pg);
 
-	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
+	FontBlankSprite* sprite = static_cast<FontBlankSprite*>(GetSprite());
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
 
 	pg->GetProperty(wxT("Edge"))->SetValue(sprite->has_edge);
@@ -90,13 +90,13 @@ void FontPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("TextID"))->SetValue(sprite->GetTextID());
 }
 
-void FontPropertySetting::InitProperties(wxPropertyGrid* pg)
+void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	SpritePropertySetting::InitProperties(pg);
 
 	pg->Append(new wxPropertyCategory("FONT", wxPG_LABEL));
 
-	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
+	FontBlankSprite* sprite = static_cast<FontBlankSprite*>(GetSprite());
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
 
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, sprite->has_edge));
