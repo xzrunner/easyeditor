@@ -79,10 +79,20 @@ void Frame::onSaveAs(wxCommandEvent& event)
 
 void Frame::OnPreview(wxCommandEvent& event)
 {
-	PreviewDialog dlg(this, static_cast<Task*>(m_task)->GetController());
+	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
+
+	StagePanel* stage = ctrl->GetStagePanel();
+	stage->EnableObserve(false);
+	stage->GetCanvas()->EnableObserve(false);
+
+	PreviewDialog dlg(this, ctrl);
 	dlg.ShowModal();
 
+	stage->EnableObserve(true);
+	stage->GetCanvas()->EnableObserve(true);
+
 	d2d::ResetViewportSJ::Instance()->Reset();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Frame::OnSetBackground(wxCommandEvent& event)

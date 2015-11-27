@@ -23,7 +23,14 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, con
 void PreviewCanvas::InitGL()
 {
 	d2d::OrthoCanvas::InitGL();
+
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->ReloadBegin();
+	}
 	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->ReloadEnd();
+	}
 }
 
 void PreviewCanvas::OnDrawSprites() const
