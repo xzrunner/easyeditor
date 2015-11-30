@@ -23,7 +23,7 @@ void SpriteObserver::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 
 	m_enable = false;
 
-	const std::map<int, KeyFrame*>& frames = m_layer.getAllFrames();
+	const std::map<int, KeyFrame*>& frames = m_layer.GetAllFrames();
 	std::map<int, KeyFrame*>::const_iterator itr_frame = frames.upper_bound(itr_sprite->second);
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
@@ -51,7 +51,7 @@ void SpriteObserver::Rotate(d2d::ISprite* sprite, float delta)
 
 	m_enable = false;
 
-	const std::map<int, KeyFrame*>& frames = m_layer.getAllFrames();
+	const std::map<int, KeyFrame*>& frames = m_layer.GetAllFrames();
 	std::map<int, KeyFrame*>::const_iterator itr_frame = frames.upper_bound(itr_sprite->second);
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{

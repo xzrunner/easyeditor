@@ -19,7 +19,7 @@ LayersMgr::LayersMgr(Controller* ctrl)
 
 LayersMgr::~LayersMgr()
 {
-	clear();
+	Clear();
 
 	InsertLayerSJ::Instance()->UnRegister(this);
 	RemoveLayerSJ::Instance()->UnRegister(this);
@@ -44,7 +44,7 @@ void LayersMgr::Notify(int sj_id, void* ud)
 	}
 }
 
-void LayersMgr::changeLayerOrder(int from, int to)
+void LayersMgr::ChangeLayerOrder(int from, int to)
 {
 	if (from < 0 || from >= m_layers.size()
 		|| to < 0 || to >= m_layers.size()) 
@@ -55,13 +55,23 @@ void LayersMgr::changeLayerOrder(int from, int to)
 	m_layers.insert(m_layers.begin() + to, layer);
 }
 
-Layer* LayersMgr::getLayer(size_t index) const
+Layer* LayersMgr::GetLayer(size_t index) const
 {
 	if (index < 0 || index >= m_layers.size()) return NULL;
 	return m_layers[index];
 }
 
-int LayersMgr::getFrameCount() const
+int LayersMgr::QueryIndex(const Layer* layer) const
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		if (m_layers[i] == layer) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int LayersMgr::GetFrameCount() const
 {
 	int count = 0;
 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
@@ -73,7 +83,7 @@ int LayersMgr::getFrameCount() const
 	return count;
 }
 
-bool LayersMgr::clear()
+bool LayersMgr::Clear()
 {
 	bool ret = !m_layers.empty();
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());

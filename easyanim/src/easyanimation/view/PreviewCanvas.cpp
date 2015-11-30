@@ -49,7 +49,7 @@ void PreviewCanvas::OnTimer()
 	m_control.update();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	if (m_control.frame() <= m_ctrl->GetLayers().getFrameCount()) {
+	if (m_control.frame() <= m_ctrl->GetLayers().GetFrameCount()) {
 		return;
 	}
 
@@ -76,9 +76,9 @@ void PreviewCanvas::DrawStageData() const
 void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i)
+	for (size_t i = 0, n = layers.Size(); i < n; ++i)
 	{
-		Layer* layer = layers.getLayer(i);
+		Layer* layer = layers.GetLayer(i);
 
 		KeyFrame *currFrame = layer->GetCurrKeyFrame(m_control.frame()),
 			*nextFrame = layer->GetNextKeyFrame(m_control.frame());

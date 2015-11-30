@@ -128,7 +128,7 @@ KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 		return NULL;
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	Layer* layer = layers.getLayer(layers.size() - row - 1);
+	Layer* layer = layers.GetLayer(layers.Size() - row - 1);
 	if (!layer) 
 		return NULL;
 	else 
@@ -143,12 +143,12 @@ bool KeysContentWidget::isPosOnKeyFrame() const
 		return false;
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	Layer* layer = layers.getLayer(layers.size() - row - 1);
+	Layer* layer = layers.GetLayer(layers.Size() - row - 1);
 	if (!layer) 
 		return false;
 	else 
 	{
-		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		return frames.find(col + 1) != frames.end();
 	}
 }
@@ -160,7 +160,7 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 	dc.SetBrush(wxBrush(LIGHT_GRAY));
 	dc.DrawRectangle(GetSize());
 
-	const size_t size = m_ctrl->GetLayers().size();
+	const size_t size = m_ctrl->GetLayers().Size();
 	const float width = FRAME_GRID_WIDTH * MAX_FRAME_COUNT,
 		height = FRAME_GRID_HEIGHT * size;
 
@@ -198,10 +198,10 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i)
+	for (size_t i = 0, n = layers.Size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = layers.getLayer(storeIndex)->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layers.GetLayer(storeIndex)->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// during
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -245,10 +245,10 @@ void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i)
+	for (size_t i = 0, n = layers.Size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = layers.getLayer(storeIndex)->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layers.GetLayer(storeIndex)->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// key frame start (circle)
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -282,7 +282,7 @@ void KeysContentWidget::drawCurrPosFlag(wxBufferedPaintDC& dc)
 {
 	const float x = FRAME_GRID_WIDTH * (m_ctrl->frame() - 0.5f);
 	dc.SetPen(DARK_RED);
-	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * m_ctrl->GetLayers().size());
+	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * m_ctrl->GetLayers().Size());
 }
 
 void KeysContentWidget::drawSelected(wxBufferedPaintDC& dc)
@@ -353,8 +353,8 @@ void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
 	if (row != -1 && col != -1)
 	{
 		LayersMgr& layers = m_ctrl->GetLayers();
-		size_t index = layers.size() - row - 1;
-		Layer* layer = layers.getLayer(index);
+		size_t index = layers.Size() - row - 1;
+		Layer* layer = layers.GetLayer(index);
 		layer->InsertKeyFrame(col + 1);
 		m_ctrl->GetKeysPanel()->Refresh(true);
 	}
@@ -366,8 +366,8 @@ void KeysContentWidget::onDeleteKeyFrame(wxCommandEvent& event)
 	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	size_t index = layers.size() - row - 1;
-	Layer* layer = layers.getLayer(index);
+	size_t index = layers.Size() - row - 1;
+	Layer* layer = layers.GetLayer(index);
 	layer->RemoveKeyFrame(col + 1);
 	m_ctrl->GetKeysPanel()->Refresh(true);
 }
@@ -426,8 +426,8 @@ void KeysContentWidget::onUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
 	if (row == -1 || col == -1) return;
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	size_t index = layers.size() - row - 1;
-	Layer* layer = layers.getLayer(index);
+	size_t index = layers.Size() - row - 1;
+	Layer* layer = layers.GetLayer(index);
 	if (layer->IsKeyFrame(col + 1)) 
 		event.Enable(true);
 	else 
@@ -451,8 +451,8 @@ void KeysContentWidget::onInsertFrame()
 	if (row != -1 && col != -1)
 	{
 		LayersMgr& layers = m_ctrl->GetLayers();
-		size_t index = layers.size() - row - 1;
-		Layer* layer = layers.getLayer(index);
+		size_t index = layers.Size() - row - 1;
+		Layer* layer = layers.GetLayer(index);
 		layer->InsertNullFrame(col + 1);
 		m_ctrl->GetKeysPanel()->Refresh(true);
 	}
@@ -465,8 +465,8 @@ void KeysContentWidget::onDeleteFrame()
 	if (row != -1 && col != -1)
 	{
 		LayersMgr& layers = m_ctrl->GetLayers();
-		size_t index = layers.size() - row - 1;
-		Layer* layer = layers.getLayer(index);
+		size_t index = layers.Size() - row - 1;
+		Layer* layer = layers.GetLayer(index);
 		layer->RemoveNullFrame(col + 1);
 		m_ctrl->GetKeysPanel()->Refresh(true);
 	}

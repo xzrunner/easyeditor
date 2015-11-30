@@ -30,7 +30,7 @@ public:
 
 	void ChangeKeyFrame(KeyFrame* frame, int to);
 
-	const std::map<int, KeyFrame*>& getAllFrames() const {
+	const std::map<int, KeyFrame*>& GetAllFrames() const {
 		return m_frames;
 	}
 

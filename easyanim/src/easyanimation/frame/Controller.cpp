@@ -36,7 +36,7 @@ void Controller::setCurrFrame(int layer, int frame)
 		int row, col;
 		m_widgets->m_keysPanel->GetSelectPos(row, col);
 		if (row >= 0 && col >= 0) {
-			row = GetLayers().size() - 1 - layer;
+			row = GetLayers().Size() - 1 - layer;
 			col = m_curr_frame - 1;
 			m_widgets->m_keysPanel->SetSelectPos(row, col);
 		}
@@ -59,7 +59,7 @@ void Controller::UpdateCurrFrame()
 		return;
 	}
 
-	Layer* layer = m_layers.getLayer(m_curr_layer);
+	Layer* layer = m_layers.GetLayer(m_curr_layer);
 	if (layer) {
 		m_last_keyframe = layer->GetCurrKeyFrame(m_curr_frame);
 		reloadViewList(m_last_keyframe);
@@ -76,7 +76,7 @@ KeyFrame* Controller::getCurrFrame()
 
 void Controller::setPrevKeyFrame()
 {
-	Layer* pLayer = m_layers.getLayer(m_curr_layer);
+	Layer* pLayer = m_layers.GetLayer(m_curr_layer);
 	if (!pLayer) {
 		return;
 	}
@@ -90,7 +90,7 @@ void Controller::setPrevKeyFrame()
 
 void Controller::setNextKeyFrame()
 {
-	Layer* pLayer = m_layers.getLayer(m_curr_layer);
+	Layer* pLayer = m_layers.GetLayer(m_curr_layer);
 	if (!pLayer) {
 		return;
 	}
@@ -155,7 +155,7 @@ int Controller::GetMaxFrame() const
 
 bool Controller::ClearAllLayer()
 {
-	return m_layers.clear();
+	return m_layers.Clear();
 }
 
 d2d::ILibraryPage* Controller::GetImagePage()

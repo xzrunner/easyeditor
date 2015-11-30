@@ -20,21 +20,22 @@ public:
 	//
 	virtual void Notify(int sj_id, void* ud);
 
-	void changeLayerOrder(int from, int to);
+	void ChangeLayerOrder(int from, int to);
 
-	size_t size() const {
+	size_t Size() const {
 		return m_layers.size();
 	}
 
-	Layer* getLayer(size_t index) const;
+	Layer* GetLayer(size_t index) const;
+	int QueryIndex(const Layer* layer) const;
 
-	int getFrameCount() const;
+	int GetFrameCount() const;
 
-	bool clear();
+	bool Clear();
 
 //		void removeSprite(d2d::ISprite* sprite);
 
-	const std::vector<Layer*>& getAllLayers() const {
+	const std::vector<Layer*>& CetAllLayers() const {
 		return m_layers;
 	}
 

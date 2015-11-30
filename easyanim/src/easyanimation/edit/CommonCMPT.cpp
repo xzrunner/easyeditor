@@ -212,11 +212,11 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 {
 	int tot = m_filling->GetValue();
 	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i)
+	for (size_t i = 0, n = layers.Size(); i < n; ++i)
 	{
-		Layer* layer = layers.getLayer(i);
+		Layer* layer = layers.GetLayer(i);
 
-		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		std::vector<KeyFrame*> fixed;
 		fixed.reserve(frames.size());
 

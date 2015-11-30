@@ -50,7 +50,7 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 {
 	wxPaintDC dc(this);
 
-	const size_t size = m_ctrl->GetLayers().size();
+	const size_t size = m_ctrl->GetLayers().Size();
 	const float width = GetSize().x;
 
 	// background
@@ -74,7 +74,7 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 	// selected
 	if (m_ctrl->layer() != -1)
 	{
-		int screenIndex = m_ctrl->GetLayers().size() - m_ctrl->layer() - 1;
+		int screenIndex = m_ctrl->GetLayers().Size() - m_ctrl->layer() - 1;
 		dc.SetPen(wxPen(MEDIUM_BLUE));
 		dc.SetBrush(wxBrush(MEDIUM_BLUE));
 		dc.DrawRectangle(0, FRAME_GRID_HEIGHT * screenIndex, width, FRAME_GRID_HEIGHT);
@@ -95,7 +95,7 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 	for (size_t i = 0; i < size; ++i)
 	{
 		size_t storeIndex = size - i - 1;
-		Layer* layer = m_ctrl->GetLayers().getLayer(storeIndex);
+		Layer* layer = m_ctrl->GetLayers().GetLayer(storeIndex);
 		dc.DrawText(layer->GetName(), 5, FRAME_GRID_HEIGHT * i);
 
 		dc.SetPen(*wxBLACK_PEN);
@@ -125,7 +125,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 	static bool isDragOpen = false;
 	static int xpress = 0, ypress = 0;
 
-	const unsigned int size = m_ctrl->GetLayers().size();
+	const unsigned int size = m_ctrl->GetLayers().Size();
 
 	if (event.LeftDown())
 	{
@@ -149,7 +149,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			int layerIndex = size - screenIndex - 1;
 	
 			int x = event.GetX();
-			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
+			Layer* layer = m_ctrl->GetLayers().GetLayer(layerIndex);
 			if (layer && x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->SetEditable(!layer->IsEditable());
 				Refresh(true);
@@ -171,7 +171,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			else
 			{
 				if (to > from) --to;
-				m_ctrl->GetLayers().changeLayerOrder(from, to);
+				m_ctrl->GetLayers().ChangeLayerOrder(from, to);
 				m_ctrl->Refresh();
 			}
 			Refresh(true);
@@ -200,7 +200,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 		int layerIndex = size - screenIndex - 1;
 		if (layerIndex < size)
 		{
-			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
+			Layer* layer = m_ctrl->GetLayers().GetLayer(layerIndex);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
 			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->GetName(), pos);

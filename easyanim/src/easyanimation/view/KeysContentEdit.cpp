@@ -22,7 +22,7 @@ KeysContentEdit::KeysContentEdit(Controller* ctrl)
 void KeysContentEdit::OnMouseLeftDown(int row, int col)
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
-	if (row >= layers.size()) {
+	if (row >= layers.Size()) {
 		return;
 	}
 
@@ -35,10 +35,10 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 	}
 
 	bool selected = false;
-	Layer* layer = layers.getLayer(layers.size() - row - 1);
+	Layer* layer = layers.GetLayer(layers.Size() - row - 1);
 	if (layer)
 	{
-		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr = frames.find(col+1);
 		if (itr != frames.end())
 		{
@@ -64,7 +64,7 @@ void KeysContentEdit::OnMouseDragging(int row, int col)
 		return;
 	}
 
-	if (row == m_last_row && row < m_ctrl->GetLayers().size()) {
+	if (row == m_last_row && row < m_ctrl->GetLayers().Size()) {
 		int col_min = std::min(m_last_col, col),
 			col_max = std::max(m_last_col, col);
 		m_ctrl->GetKeysPanel()->UpdateSelectRegion(col_min, col_max);
@@ -83,9 +83,9 @@ void KeysContentEdit::CopySelection()
 	Json::Value value;
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	int index = layers.size() - row - 1;
-	Layer* layer = layers.getLayer(index);
- 	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+	int index = layers.Size() - row - 1;
+	Layer* layer = layers.GetLayer(index);
+ 	const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
  	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
  		itr_end = frames.upper_bound(col_max + 1);
 	int last_frame = col_min + 1;
@@ -151,8 +151,8 @@ void KeysContentEdit::PasteSelection()
 	}
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	size_t index = layers.size() - row - 1;
-	Layer* layer = layers.getLayer(index);
+	size_t index = layers.Size() - row - 1;
+	Layer* layer = layers.GetLayer(index);
 
 	for (int iframe = 0, n = value["frame"].size(); iframe < n; ++iframe) 
 	{
@@ -201,8 +201,8 @@ void KeysContentEdit::DeleteSelection()
 	}
 
  	LayersMgr& layers = m_ctrl->GetLayers();
- 	int index = layers.size() - row - 1;
- 	Layer* layer = layers.getLayer(index);
+ 	int index = layers.Size() - row - 1;
+ 	Layer* layer = layers.GetLayer(index);
 	if (layer) {
 		d2d::AbstractAtomicOP* aop = layer->RemoveFrameRegion(col_min + 1, col_max + 1);
 		m_ctrl->GetStagePanel()->AddOpRecord(aop);

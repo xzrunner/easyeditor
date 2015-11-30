@@ -41,7 +41,7 @@ public:
 
 	int GetMaxFrame() const;
 
-	int GetLayerCount() const { return m_layers.size(); }
+	int GetLayerCount() const { return m_layers.Size(); }
 
 	bool ClearAllLayer();
 	LayersMgr& GetLayers() { return m_layers; }

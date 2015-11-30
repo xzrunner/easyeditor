@@ -21,10 +21,10 @@ void Love2dCode::resolve()
 	lua::TableAssign ta(m_gen, "frames");
 
 	LayersMgr& layers = m_ctrl->GetLayers();
-	if (layers.size() > 0)
+	if (layers.Size() > 0)
 	{
-		Layer* layer = layers.getLayer(0);
-		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+		Layer* layer = layers.GetLayer(0);
+		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
 		{

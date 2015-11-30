@@ -69,7 +69,7 @@ void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)
 	value["fps"] = GetFpsSJ::Instance()->Get();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
-	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
+	const std::vector<Layer*>& layers = ctrl->GetLayers().CetAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i) {
 		value["layer"][i] = StoreLayer(layers[i], dir, ctrl, true);
 	}
@@ -94,7 +94,7 @@ void FileIO::StoreTemplate(const std::string& filepath, Controller* ctrl)
 	value["fps"] = GetFpsSJ::Instance()->Get();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
-	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
+	const std::vector<Layer*>& layers = ctrl->GetLayers().CetAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i) {
 		value["layer"][i] = StoreLayer(layers[i], dir, ctrl, false);
 	}
@@ -225,7 +225,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir, 
 		frameValue = layerValue["frame"][i++];
 	}
 
-	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+	const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 	std::vector<KeyFrame*> all_frames;
 	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
@@ -456,7 +456,7 @@ Json::Value FileIO::StoreLayer(Layer* layer, const std::string& dir,
 
 	value["name"] = layer->GetName();
 
-	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+	const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 	std::vector<KeyFrame*> all_frames;
 	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
