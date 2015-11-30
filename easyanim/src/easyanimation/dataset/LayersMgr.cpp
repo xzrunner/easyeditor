@@ -32,10 +32,10 @@ void LayersMgr::Notify(int sj_id, void* ud)
 	case MSG_INSERT_LAYER:
 		{
 			Layer* layer = ud ? (Layer*)ud : new Layer(m_ctrl);
+			Insert(layer);
 			if (!ud) {
 				layer->InsertKeyFrame(1);
 			}
-			Insert(layer);
 		}
 		break;
 	case MSG_REMOVE_LAYER:
