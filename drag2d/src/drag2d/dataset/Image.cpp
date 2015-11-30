@@ -224,7 +224,6 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 
 	int texid;
 	d2d::Vector texcoords[4];
-	float txmin, txmax, tymin, tymax;
 
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex()) {
@@ -232,10 +231,14 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	}
  	if (c2_texcoords)
  	{
-		txmin = c2_texcoords[0];
-		txmax = c2_texcoords[2];
-		tymin = c2_texcoords[1];
-		tymax = c2_texcoords[5];
+		texcoords[0].x = c2_texcoords[0];
+		texcoords[0].y = c2_texcoords[1];
+		texcoords[1].x = c2_texcoords[2];
+		texcoords[1].y = c2_texcoords[3];
+		texcoords[2].x = c2_texcoords[4];
+		texcoords[2].y = c2_texcoords[5];
+		texcoords[3].x = c2_texcoords[6];
+		texcoords[3].y = c2_texcoords[7];
 
 		//////////////////////////////////////////////////////////////////////////
 
@@ -266,13 +269,16 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 		//wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
 
 		texid = m_tex->GetTexID();
+
+		float txmin, txmax, tymin, tymax;
 	 	txmin = tymin = 0;
 	 	txmax = tymax = 1;
+
+		texcoords[0].set(txmin, tymin);
+		texcoords[1].set(txmax, tymin);
+		texcoords[2].set(txmax, tymax);
+		texcoords[3].set(txmin, tymax);
 	}
- 	texcoords[0].set(txmin, tymin);
- 	texcoords[1].set(txmax, tymin);
- 	texcoords[2].set(txmax, tymax);
- 	texcoords[3].set(txmin, tymax);
 
 //	RenderList::Instance()->Insert(texid, vertices, texcoords);
 
