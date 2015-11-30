@@ -8,8 +8,6 @@
 #include "render/ShaderMgr.h"
 #include "render/PrimitiveDraw.h"
 
-#include <wx/log.h>
-
 namespace d2d
 {
 
@@ -55,8 +53,6 @@ void ImageSymbol::Draw(const Matrix& mt,
 					   const Colorf& b_trans,
 					   const ISprite* sprite/* = NULL*/) const
 {
-	wxLogDebug("img draw %s", m_filepath);
-
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
 	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);	
