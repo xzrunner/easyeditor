@@ -151,7 +151,7 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 		std::vector<Vector> bound;
 		sprite->GetBounding()->getBoundPos(bound);
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = d2d::Math::transVector(bound[i], t);
+			bound[i] = d2d::Math::transVector(bound[i], mt);
 		}
 		PrimitiveDraw::drawPolyline(bound, BLACK, true, 4);
 		PrimitiveDraw::drawLine(bound[0], bound[2], BLACK, 4);
