@@ -11,6 +11,8 @@
 #include "message/message_id.h"
 #include "message/InsertLayerSJ.h"
 #include "message/RemoveLayerSJ.h"
+#include "message/SetCurrFrameSJ.h"
+#include "message/GetCurrFrameSJ.h"
 
 namespace eanim
 {
@@ -86,7 +88,7 @@ void StagePanel::Notify(int sj_id, void* ud)
 	case d2d::MSG_CLEAR_SPRITE:
 		{
 			bool ret = m_ctrl->ClearAllLayer();
-			m_ctrl->setCurrFrame(-1, -1);
+			SetCurrFrameSJ::Instance()->Set(0, 0);
 
 			if (ret) {
 				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -108,8 +110,10 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	if (m_ctrl->layer() == -1 || m_ctrl->frame() == -1) {
-		return;
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	if (layer == -1 || frame == -1) {
+		int zz = 0;
 	}
 
 	const std::vector<Layer*>& layers = m_ctrl->GetLayers().CetAllLayers();
@@ -120,7 +124,7 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 			(type == d2d::DT_VISIBLE && !layer->IsVisible()))
 			continue;
 
-		KeyFrame* frame = layer->GetCurrKeyFrame(m_ctrl->frame());
+		KeyFrame* frame = layer->GetCurrKeyFrame(frame);
 		if (!frame) continue;
 
 		if (order)
@@ -209,9 +213,8 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 		InsertLayerSJ::Instance()->Insert();
 	}
 
-	int old_layer = m_ctrl->layer(),
-		old_frame = m_ctrl->frame();
-	m_ctrl->setCurrFrame(ud->layer_idx, old_frame);
+	int old_layer, old_frame;
+	GetCurrFrameSJ::Instance()->Get(old_layer, old_frame);
 
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	assert(frame);
@@ -220,7 +223,8 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 	ud->all_layers = &m_ctrl->GetLayers();
 	ud->layer = ud->all_layers->GetLayer(ud->layer_idx);
 	ud->frame = frame;
-	m_ctrl->setCurrFrame(old_layer, old_frame);
+
+	SetCurrFrameSJ::Instance()->Set(old_layer, old_frame);
 }
 
 void StagePanel::InsertWithoutUD(d2d::ISprite* spr)

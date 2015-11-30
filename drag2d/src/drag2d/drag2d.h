@@ -186,6 +186,7 @@
 
 #include "message/subject_id.h"
 #include "message/ClearPanelSJ.h"
+#include "message/RefreshPanelSJ.h"
 #include "message/SelectSpriteSJ.h"
 #include "message/ReorderSpriteSJ.h"
 #include "message/ReorderSpriteMostSJ.h"

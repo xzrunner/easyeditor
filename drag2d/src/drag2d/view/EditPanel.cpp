@@ -96,16 +96,6 @@ void EditPanel::ResetCanvas()
 	m_impl->ResetCanvas();
 }
 
-void EditPanel::Undo()
-{
-	m_impl->Undo();
-}
-
-void EditPanel::Redo()
-{
-	m_impl->Redo();
-}
-
 void EditPanel::AddOpRecord(AbstractAtomicOP* op)
 {
 	m_impl->AddOpRecord(op);

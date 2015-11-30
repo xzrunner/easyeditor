@@ -6,6 +6,8 @@
 #include "message/message_id.h"
 #include "message/InsertLayerSJ.h"
 #include "message/RemoveLayerSJ.h"
+#include "message/SetCurrFrameSJ.h"
+#include "message/GetCurrFrameSJ.h"
 
 namespace eanim
 {
@@ -111,26 +113,22 @@ int LayersMgr::GetMaxFrame() const
 
 void LayersMgr::Insert(Layer* layer)
 {
-	//int curr_idx = m_layers.size();
-	//Layer* layer = m_layers.newLayer();
-	//setCurrFrame(curr_idx, frame());
-	//layer->InsertKeyFrame(1);
-	//GetStagePanel()->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-
-	m_ctrl->setCurrFrame(m_layers.size(), 1);
+	SetCurrFrameSJ::Instance()->Set(m_layers.size(), 0);
 	m_layers.push_back(layer);
 }
 
 void LayersMgr::Remove()
 {
-	int idx = m_ctrl->layer();
-	assert(idx >= 0 && idx < m_layers.size());
-	delete m_layers[idx];
-	m_layers.erase(m_layers.begin() + idx);
-	if (m_layers.size() == 0) {
-		m_ctrl->setCurrFrame(-1, m_ctrl->frame());
-	} else if (m_ctrl->layer() > 0) {
-		m_ctrl->setCurrFrame(m_ctrl->layer() - 1, m_ctrl->frame());
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	assert(layer >= 0 && layer < m_layers.size());
+	delete m_layers[layer];
+	m_layers.erase(m_layers.begin() + layer);
+
+	if (layer > 0) {
+		SetCurrFrameSJ::Instance()->Set(layer - 1, -1);
+	} else if (layer == 0) {
+		SetCurrFrameSJ::Instance()->Set(1, -1);
 	}
 }
 

@@ -47,16 +47,31 @@ LanguageEntry KeysContentWidget::entries[] =
 	{ "É¾³ý¹Ø¼üÖ¡", "Delete Key Frame" }
 };
 
-KeysContentWidget::KeysContentWidget(wxWindow* parent, Controller* ctrl)
+KeysContentWidget::KeysContentWidget(wxWindow* parent, Controller* ctrl, const LayersMgr& layers)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 	, m_editop(ctrl)
-	, m_ctrl(ctrl)
+	, m_layers(layers)
 {
+	m_curr_layer = m_curr_frame = -1;
+
 //  	RegisterHotKey(Hot_InsertFrame, 0, VK_ADD);
 //  	RegisterHotKey(Hot_DeleteFrame, 0, VK_SUBTRACT);
 
 	RegisterHotKey(Hot_InsertFrame, 0, VK_MULTIPLY);
 	RegisterHotKey(Hot_DeleteFrame, 0, VK_DIVIDE);
+}
+
+void KeysContentWidget::Notify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_SET_CURR_FRAME) {
+		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
+		if (cf->layer != -1 && cf->layer != m_curr_layer ||
+			cf->frame != -1 && cf->frame != m_curr_frame) {
+			m_curr_layer = cf->layer;
+			m_curr_frame = cf->frame;
+			Refresh();
+		}
+	}
 }
 
 void KeysContentWidget::onSize(wxSizeEvent& event)

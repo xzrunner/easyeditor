@@ -56,8 +56,6 @@ public:
 
 	void ResetCanvas();
 
-	void Undo();
-	void Redo();
 	void AddOpRecord(AbstractAtomicOP* op);
 
 	void SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);

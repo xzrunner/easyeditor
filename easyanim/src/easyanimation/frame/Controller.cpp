@@ -19,39 +19,39 @@ Controller::Controller(Widgets* widgets)
 	m_curr_frame = 1;
 }
 
-void Controller::setCurrFrame(int layer, int frame)
-{
-	if (m_curr_layer == layer &&
-		m_curr_frame == frame) {
-		return;
-	}
-
-	m_last_keyframe = NULL;
-
-	m_curr_layer = layer;
-	m_curr_frame = frame;
-
-	if (m_widgets->m_keysPanel) 
-	{
-		int row, col;
-		m_widgets->m_keysPanel->GetSelectPos(row, col);
-		if (row >= 0 && col >= 0) {
-			row = GetLayers().Size() - 1 - layer;
-			col = m_curr_frame - 1;
-			m_widgets->m_keysPanel->SetSelectPos(row, col);
-		}
-	}
-
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-	if (m_widgets->m_keysPanel) {
-		m_widgets->m_keysPanel->Refresh(true);
-	}
-	if (m_widgets->m_layersPanel) {
-		m_widgets->m_layersPanel->Refresh(true);
-	}
-
-	GetStagePanel()->GetEditOP()->Clear();
-}
+//void Controller::setCurrFrame(int layer, int frame)
+//{
+//	if (m_curr_layer == layer &&
+//		m_curr_frame == frame) {
+//		return;
+//	}
+//
+//	m_last_keyframe = NULL;
+//
+//	m_curr_layer = layer;
+//	m_curr_frame = frame;
+//
+//	if (m_widgets->m_keysPanel) 
+//	{
+//		int row, col;
+//		m_widgets->m_keysPanel->GetSelectPos(row, col);
+//		if (row >= 0 && col >= 0) {
+//			row = GetLayers().Size() - 1 - layer;
+//			col = m_curr_frame - 1;
+//			m_widgets->m_keysPanel->SetSelectPos(row, col);
+//		}
+//	}
+//
+//	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+//	if (m_widgets->m_keysPanel) {
+//		m_widgets->m_keysPanel->Refresh(true);
+//	}
+//	if (m_widgets->m_layersPanel) {
+//		m_widgets->m_layersPanel->Refresh(true);
+//	}
+//
+//	GetStagePanel()->GetEditOP()->Clear();
+//}
 
 void Controller::UpdateCurrFrame()
 {
@@ -82,9 +82,8 @@ void Controller::setPrevKeyFrame()
 	}
 
 	KeyFrame* prev = pLayer->GetPrevKeyFrame(m_curr_frame);
-	if (prev) 
-	{
-		setCurrFrame(m_curr_layer, prev->GetTime());
+	if (prev) {
+		SetCurrFrameSJ::Instance()->Set(-1, prev->GetTime() - 1);
 	}
 }
 
@@ -96,21 +95,20 @@ void Controller::setNextKeyFrame()
 	}
 
 	KeyFrame* next = pLayer->GetNextKeyFrame(m_curr_frame);
-	if (next) 
-	{
-		setCurrFrame(m_curr_layer, next->GetTime());
+	if (next) {
+		SetCurrFrameSJ::Instance()->Set(-1, next->GetTime() - 1);
 	}
 }
 
-int Controller::layer() const 
-{ 
-	return m_curr_layer; 
-}
+// int Controller::layer() const 
+// { 
+// 	return m_curr_layer; 
+// }
 
-int Controller::frame() const 
-{ 
-	return m_curr_frame; 
-}
+// int Controller::frame() const 
+// { 
+// 	return m_curr_frame; 
+// }
 
 // d2d::ViewlistPanel* Controller::GetViewlist()
 // {
@@ -173,6 +171,7 @@ void Controller::Refresh()
 {
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	m_widgets->m_keysPanel->Refresh(true);
+	m_widgets->m_layersPanel->Refresh(true);
 }
 
 void Controller::reloadViewList(const KeyFrame* frame)

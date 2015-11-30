@@ -4,6 +4,7 @@
 #include "frame/Controller.h"
 #include "view/KeysPanel.h"
 #include "view/EditKeyFramesAOP.h"
+#include "message/SetCurrFrameSJ.h"
 
 namespace eanim
 {
@@ -84,7 +85,7 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		aop->AddInserted(GetEndFrame());
 	}
 
-	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrameTime());
+	SetCurrFrameSJ::Instance()->Set(-1, GetMaxFrameTime());
 
 	m_ctrl->Refresh();
 
@@ -159,7 +160,7 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 		}
 	}
 
-	m_ctrl->setCurrFrame(m_ctrl->layer(), frame->GetTime());
+	SetCurrFrameSJ::Instance()->Set(-1, frame->GetTime());
 }
 
 void Layer::InsertKeyFrame(int time)
@@ -172,7 +173,7 @@ void Layer::InsertKeyFrame(int time)
 			frame->CopyFromOther(GetEndFrame());
 			InsertKeyFrame(time, frame);
 			frame->Release();
-			m_ctrl->setCurrFrame(m_ctrl->layer(), time);
+			SetCurrFrameSJ::Instance()->Set(-1, time);
 		}
 		else
 		{
@@ -197,7 +198,7 @@ void Layer::RemoveKeyFrame(int time)
 	itr->second->Release();
 	m_frames.erase(itr);
 
-	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrameTime());
+	SetCurrFrameSJ::Instance()->Set(-1, GetMaxFrameTime());
 }
 
 void Layer::ChangeKeyFrame(KeyFrame* frame, int to)

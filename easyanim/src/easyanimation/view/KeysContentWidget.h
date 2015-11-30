@@ -16,10 +16,15 @@ class LayersMgr;
 class KeyFrame;
 class Controller;
 
-class KeysContentWidget : public wxPanel
+class KeysContentWidget : public wxPanel, public d2d::Observer
 {
 public:
-	KeysContentWidget(wxWindow* parent, Controller* ctrl);
+	KeysContentWidget(wxWindow* parent, Controller* ctrl, const LayersMgr& layers);
+
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
 	void onSize(wxSizeEvent& event);
 	void onPaint(wxPaintEvent& event);
@@ -84,11 +89,13 @@ private:
 	static const int FRAME_END_RECT_HEIGHT = KEY_FRAME_CIRCLE_RADIUS * 3;
 
 private:
+	const LayersMgr& m_layers;
+
 	KeysContentEdit m_editop;
 
-	Controller* m_ctrl;
-
 	d2d::KeysState m_keys_state;
+
+	int m_curr_layer, m_curr_frame;
 
 	DECLARE_EVENT_TABLE()
 

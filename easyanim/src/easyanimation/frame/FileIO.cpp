@@ -9,6 +9,7 @@
 #include "message/InsertLayerSJ.h"
 #include "message/SetFpsSJ.h"
 #include "message/GetFpsSJ.h"
+#include "message/SetCurrFrameSJ.h"
 
 #include <rapidxml_utils.hpp>
 #include <easyanim.h>
@@ -56,7 +57,7 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 
 	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
-	ctrl->setCurrFrame(0, 1);
+	SetCurrFrameSJ::Instance()->Set(0, 0);
 
 	d2d::ResetViewportSJ::Instance()->Reset();
 }

@@ -2893,6 +2893,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\message\RefreshPanelSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\message\RefreshPanelSJ.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\message\SpriteNameChangeSJ.cpp"
 					>
 				</File>
@@ -3037,6 +3045,26 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\message\SetCanvasDirtySJ.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="editop"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\EditRedoSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\EditRedoSJ.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\EditUndoSJ.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\message\EditUndoSJ.h"
 						>
 					</File>
 				</Filter>

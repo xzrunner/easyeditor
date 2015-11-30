@@ -10,6 +10,9 @@ enum MSG_ID {
 
 	MSG_GET_FPS,
 	MSG_SET_FPS,
+
+	MSG_GET_CURR_FRAME,
+	MSG_SET_CURR_FRAME,
 };
 
 }

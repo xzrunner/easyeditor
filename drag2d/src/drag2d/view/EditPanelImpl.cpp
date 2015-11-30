@@ -10,6 +10,8 @@
 #include "message/ClearSpriteSJ.h"
 #include "message/ClearPanelSJ.h"
 #include "message/SetCanvasDirtySJ.h"
+#include "message/EditUndoSJ.h"
+#include "message/EditRedoSJ.h"
 
 #include <fstream>
 
@@ -25,8 +27,7 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 	m_canvas = NULL;
 	m_camera = new Camera;
 
-	ClearSpriteSJ::Instance()->Register(this);
-	ClearPanelSJ::Instance()->Register(this);
+	RegistSubjects();
 }
 
 EditPanelImpl::~EditPanelImpl()
@@ -42,8 +43,7 @@ EditPanelImpl::~EditPanelImpl()
 		m_canvas = NULL;
 	}
 
-	ClearSpriteSJ::Instance()->UnRegister(this);
-	ClearPanelSJ::Instance()->UnRegister(this);
+	UnRegistSubjects();
 }
 
 void EditPanelImpl::SetEditPanelNull()
@@ -57,6 +57,12 @@ void EditPanelImpl::Notify(int sj_id, void* ud)
 	{
 	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
+		break;
+	case MSG_EDIT_UNDO:
+		Undo();
+		break;
+	case MSG_EDIT_REDO:
+		Redo();
 		break;
 	}
 }
@@ -389,6 +395,24 @@ void EditPanelImpl::Clear()
 	}
 
 	m_history_list.clear();
+}
+
+void EditPanelImpl::RegistSubjects()
+{
+	m_subjects.push_back(ClearSpriteSJ::Instance());
+	m_subjects.push_back(ClearPanelSJ::Instance());
+	m_subjects.push_back(EditUndoSJ::Instance());
+	m_subjects.push_back(EditRedoSJ::Instance());
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->Register(this);
+	}
+}
+
+void EditPanelImpl::UnRegistSubjects()
+{
+	for (int i = 0; i < m_subjects.size(); ++i) {
+		m_subjects[i]->UnRegister(this);
+	}
 }
 
 }

@@ -90,6 +90,9 @@ public:
 private:
 	void Clear();
 
+	void RegistSubjects();
+	void UnRegistSubjects();
+
 protected:
 	AbstractEditOP* m_edit_op;
 
@@ -104,6 +107,8 @@ private:
 	HistoryList m_history_list;
 
 	KeysState m_keys_state;
+
+	std::vector<Subject*> m_subjects;
 
 }; // EditPanelImpl
 

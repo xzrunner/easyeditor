@@ -7,14 +7,14 @@
 namespace eanim
 {
 
-class Controller;
+class LayersMgr;
 struct PlaySettings;
 
 class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		const PlaySettings& settings, d2d::PlayControl& control, Controller* ctrl);
+		const PlaySettings& settings, d2d::PlayControl& control, const LayersMgr& layers);
 
 protected:
 	virtual void InitGL();
@@ -32,7 +32,7 @@ private:
 
 	const PlaySettings& m_settings;
 
-	Controller* m_ctrl;
+	const LayersMgr& m_layers;
 
 }; // PreviewCanvas
 

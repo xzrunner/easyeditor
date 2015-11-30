@@ -1,10 +1,10 @@
 #include "PreviewCanvas.h"
 #include "PreviewSettings.h"
 
-#include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
+#include "message/GetCurrFrameSJ.h"
 
 #include <easyanim.h>
 
@@ -12,11 +12,11 @@ namespace eanim
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, const PlaySettings& settings,
-							 d2d::PlayControl& control, Controller* ctrl)
+							 d2d::PlayControl& control, const LayersMgr& layers)
 	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_control(control)
 	, m_settings(settings)
-	, m_ctrl(ctrl)
+	, m_layers(layers)
 {
 }
 
@@ -49,7 +49,9 @@ void PreviewCanvas::OnTimer()
 	m_control.update();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	if (m_control.frame() <= m_ctrl->GetLayers().GetFrameCount()) {
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	if (frame < m_layers.GetFrameCount()) {
 		return;
 	}
 
@@ -75,35 +77,37 @@ void PreviewCanvas::DrawStageData() const
 
 void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
-	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.Size(); i < n; ++i)
-	{
-		Layer* layer = layers.GetLayer(i);
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
 
-		KeyFrame *currFrame = layer->GetCurrKeyFrame(m_control.frame()),
-			*nextFrame = layer->GetNextKeyFrame(m_control.frame());
-		if (!currFrame)
+	for (size_t i = 0, n = m_layers.Size(); i < n; ++i)
+	{
+		Layer* layer = m_layers.GetLayer(i);
+
+		KeyFrame *curr_f = layer->GetCurrKeyFrame(frame),
+			     *next_f = layer->GetNextKeyFrame(frame);
+		if (!curr_f)
 			continue;
 
-		if (!currFrame) 
+		if (!curr_f) 
 		{
-			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
-				sprites.push_back(currFrame->GetSprite(i)->Clone());
+			for (int i = 0, n = curr_f->Size(); i < n; ++i) {
+				sprites.push_back(curr_f->GetSprite(i)->Clone());
 			}
 		}
-		else if (!currFrame->HasClassicTween() || !nextFrame)
+		else if (!curr_f->HasClassicTween() || !next_f)
 		{
-			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
-				sprites.push_back(currFrame->GetSprite(i)->Clone());
+			for (int i = 0, n = curr_f->Size(); i < n; ++i) {
+				sprites.push_back(curr_f->GetSprite(i)->Clone());
 			}
 		}
 		else
 		{
-			assert(m_control.frame() >= currFrame->GetTime() && m_control.frame() < nextFrame->GetTime());
-			float process = (float) (m_control.frame() - currFrame->GetTime()) / (nextFrame->GetTime() - currFrame->GetTime());
+			assert(frame >= curr_f->GetTime() && frame < next_f->GetTime());
+			float process = (float) (frame - curr_f->GetTime()) / (next_f->GetTime() - curr_f->GetTime());
 //			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
 
-			currFrame->GetTweenSprite(currFrame, nextFrame, sprites, process);
+			curr_f->GetTweenSprite(curr_f, next_f, sprites, process);
 		}
 	}
 }

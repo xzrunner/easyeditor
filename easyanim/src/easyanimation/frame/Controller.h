@@ -19,7 +19,7 @@ class Controller
 public:
 	Controller(Widgets* widgets);
 
-	void setCurrFrame(int layer, int frame);
+//	void setCurrFrame(int layer, int frame);
 	void UpdateCurrFrame();
 	KeyFrame* getCurrFrame();
 	void setPrevKeyFrame();
@@ -27,8 +27,8 @@ public:
 
 	// layer start from 0
 	// frame start from 1
-	int layer() const;
-	int frame() const;
+//	int layer() const;
+//	int frame() const;
 
 //	d2d::ViewlistPanel* GetViewlist();
 	d2d::LibraryPanel* GetLibraryPanel();

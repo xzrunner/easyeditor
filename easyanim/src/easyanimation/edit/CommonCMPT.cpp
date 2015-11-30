@@ -8,6 +8,7 @@
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 #include "message/InsertLayerSJ.h"
+#include "message/SetCurrFrameSJ.h"
 
 namespace eanim
 {
@@ -170,7 +171,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	}
 	InsertLayerSJ::Instance()->Insert(layer);
 
-	m_ctrl->setCurrFrame(0, 1);
+	SetCurrFrameSJ::Instance()->Set(0, 0);
 
 	m_ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 

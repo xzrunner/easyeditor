@@ -1,33 +1,41 @@
-#pragma once
+#ifndef _EASYANIM_KEYS_SCALE_WIDGET_H_
+#define _EASYANIM_KEYS_SCALE_WIDGET_H_
 
-#include <wx/wx.h>
+#include <drag2d.h>
 
 namespace eanim
 {
-	class Controller;
 
-	class KeysScaleWidget : public wxPanel
-	{
-	public:
-		KeysScaleWidget(wxWindow* parent, Controller* ctrl);
+class LayersMgr;
 
-		void onSize(wxSizeEvent& event);
-		void onPaint(wxPaintEvent& event);
-		void onEraseBackground(wxEraseEvent& event);
-		void onMouse(wxMouseEvent& event);
+class KeysScaleWidget : public wxPanel, public d2d::Observer
+{
+public:
+	KeysScaleWidget(wxWindow* parent, const LayersMgr& layers);
 
-	private:
-		int queryGridByPos(float x) const;
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
-	private:
-		static const int DIVISION_HEIGHT = 4;
-		static const int TEXT_Y = 4;
+	void OnSize(wxSizeEvent& event);
+	void OnPaint(wxPaintEvent& event);
+	void OnEraseBackground(wxEraseEvent& event);
+	void OnMouse(wxMouseEvent& event);
 
-	private:
-		Controller* m_ctrl;
+private:
+	int QueryGridByPos(float x) const;
 
-		DECLARE_EVENT_TABLE()
+private:
+	const LayersMgr& m_layers;
 
-	}; // KeysScaleWidget
+	int m_curr_frame;
+
+private:
+	DECLARE_EVENT_TABLE()
+
+}; // KeysScaleWidget
+
 }
 
+#endif // _EASYANIM_KEYS_SCALE_WIDGET_H_

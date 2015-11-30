@@ -2,7 +2,9 @@
 #include "KeysPanel.h"
 #include "Utility.h"
 
-#include "frame/Controller.h"
+#include "dataset/LayersMgr.h"
+#include "message/SetCurrFrameSJ.h"
+#include "message/message_id.h"
 
 #include <wx/dcbuffer.h>
 
@@ -10,26 +12,41 @@ namespace eanim
 {
 
 BEGIN_EVENT_TABLE(KeysScaleWidget, wxPanel)
-	EVT_PAINT(KeysScaleWidget::onPaint)
-	EVT_ERASE_BACKGROUND(KeysScaleWidget::onEraseBackground)
-	EVT_SIZE(KeysScaleWidget::onSize)
-	EVT_MOUSE_EVENTS(KeysScaleWidget::onMouse)
+	EVT_PAINT(KeysScaleWidget::OnPaint)
+	EVT_ERASE_BACKGROUND(KeysScaleWidget::OnEraseBackground)
+	EVT_SIZE(KeysScaleWidget::OnSize)
+	EVT_MOUSE_EVENTS(KeysScaleWidget::OnMouse)
 END_EVENT_TABLE()
 
-KeysScaleWidget::KeysScaleWidget(wxWindow* parent, Controller* ctrl)
+static const int DIVISION_HEIGHT = 4;
+static const int TEXT_Y = 4;
+
+KeysScaleWidget::KeysScaleWidget(wxWindow* parent, const LayersMgr& layers)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, FRAME_GRID_HEIGHT), wxBORDER_NONE)
-	, m_ctrl(ctrl)
+	, m_layers(layers)
+	, m_curr_frame(-1)
 {
 //	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 //	// same with "EVT_ERASE_BACKGROUND(KeysScaleWidget::onEraseBackground)"
 }
 
-void KeysScaleWidget::onSize(wxSizeEvent& event)
+void KeysScaleWidget::Notify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_SET_CURR_FRAME) {
+		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
+		if (cf->frame != -1 && cf->frame != m_curr_frame) {
+			m_curr_frame = cf->frame;
+			Refresh();
+		}
+	}
+}
+
+void KeysScaleWidget::OnSize(wxSizeEvent& event)
 {
 	Refresh(true);
 }
 
-void KeysScaleWidget::onPaint(wxPaintEvent& event)
+void KeysScaleWidget::OnPaint(wxPaintEvent& event)
 {
 	wxBufferedPaintDC dc(this);
 
@@ -39,16 +56,17 @@ void KeysScaleWidget::onPaint(wxPaintEvent& event)
 	dc.DrawRectangle(GetSize());
 
 	// curr pos
-	const int currPos = m_ctrl->frame();
+	int curr_pos = m_curr_frame + 1;
+
 	dc.SetPen(wxPen(DARK_RED));
 	dc.SetBrush(wxBrush(MEDIUM_RED));
-	dc.DrawRectangle(FRAME_GRID_WIDTH * (currPos - 1), 2, FRAME_GRID_WIDTH + 1, FRAME_GRID_HEIGHT - 2);
-	dc.DrawLine(FRAME_GRID_WIDTH * (currPos - 0.5f), FRAME_GRID_HEIGHT, FRAME_GRID_WIDTH * (currPos - 0.5f), 100);
-	if (currPos % 5 != 0)
+	dc.DrawRectangle(FRAME_GRID_WIDTH * (curr_pos - 1), 2, FRAME_GRID_WIDTH + 1, FRAME_GRID_HEIGHT - 2);
+	dc.DrawLine(FRAME_GRID_WIDTH * (curr_pos - 0.5f), FRAME_GRID_HEIGHT, FRAME_GRID_WIDTH * (curr_pos - 0.5f), 100);
+	if (curr_pos % 5 != 0)
 	{
-		wxSize size = dc.GetTextExtent(wxString::Format(wxT("%d"), currPos));
-		dc.DrawText(wxString::Format(wxT("%d"), currPos), 
-			FRAME_GRID_WIDTH * (currPos - 0.5f) - size.GetWidth() / 2, TEXT_Y);
+		wxSize size = dc.GetTextExtent(wxString::Format(wxT("%d"), curr_pos));
+		dc.DrawText(wxString::Format(wxT("%d"), curr_pos), 
+			FRAME_GRID_WIDTH * (curr_pos - 0.5f) - size.GetWidth() / 2, TEXT_Y);
 	}
 
 	// scale
@@ -65,24 +83,23 @@ void KeysScaleWidget::onPaint(wxPaintEvent& event)
 	}
 }
 
-void KeysScaleWidget::onEraseBackground(wxEraseEvent& event)
+void KeysScaleWidget::OnEraseBackground(wxEraseEvent& event)
 {
 
 }
 
-void KeysScaleWidget::onMouse(wxMouseEvent& event)
+void KeysScaleWidget::OnMouse(wxMouseEvent& event)
 {
 	if (event.LeftDown() || event.Dragging())
 	{
-		int frame = queryGridByPos(event.GetX());
-		m_ctrl->setCurrFrame(m_ctrl->layer(), frame);
-		m_ctrl->Refresh();
+		int frame = QueryGridByPos(event.GetX());
+		SetCurrFrameSJ::Instance()->Set(-1, frame);
 	}
 }
 
-int KeysScaleWidget::queryGridByPos(float x) const
+int KeysScaleWidget::QueryGridByPos(float x) const
 {
-	return std::min(m_ctrl->GetMaxFrame(), (int)(x / FRAME_GRID_WIDTH) + 1);
+	return std::min(m_layers.GetMaxFrame(), (int)(x / FRAME_GRID_WIDTH) + 1);
 }
 
 } // eanim

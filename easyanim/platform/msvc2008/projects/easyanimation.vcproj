@@ -652,6 +652,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="frame"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\GetCurrFrameSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\GetCurrFrameSJ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\SetCurrFrameSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\SetCurrFrameSJ.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"

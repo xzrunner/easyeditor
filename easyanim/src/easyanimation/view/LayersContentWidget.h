@@ -1,38 +1,46 @@
-#pragma once
+#ifndef _EASYANIM_LAYERS_CONTENT_WIDGET_H_
+#define _EASYANIM_LAYERS_CONTENT_WIDGET_H_
 
-#include <wx/wx.h>
+#include <drag2d.h>
 
 namespace eanim
 {
 
-	class Controller;
+class LayersMgr;
 
-	class LayersContentWidget : public wxPanel
-	{
-	public:
-		LayersContentWidget(wxWindow* parent, Controller* ctrl);
+class LayersContentWidget : public wxPanel, public d2d::Observer
+{
+public:
+	LayersContentWidget(wxWindow* parent, LayersMgr& layers);
 
-		virtual wxCoord OnGetRowHeight(size_t row) const;
+	//
+	//	interface wxPanel
+	//
+	virtual wxCoord OnGetRowHeight(size_t row) const;
+	virtual int GetNonOrientationTargetSize() const;
+	virtual wxOrientation GetOrientation() const;
 
-		virtual int GetNonOrientationTargetSize() const;
-		virtual wxOrientation GetOrientation() const;
+	//
+	//	interface Observer
+	//
+	virtual void Notify(int sj_id, void* ud);
 
-		void onSize(wxSizeEvent& event);
-		void onPaint(wxPaintEvent& event);
-		void onEraseBackground(wxEraseEvent& event);
-		void onMouse(wxMouseEvent& event);
+	void OnSize(wxSizeEvent& event);
+	void OnPaint(wxPaintEvent& event);
+	void OnEraseBackground(wxEraseEvent& event);
+	void OnMouse(wxMouseEvent& event);
 
-	private:
-		static const int DRAG_FLAG_SIZE = 3;
-		static const int DRAG_FLAG_RADIUS = 4;
+private:
+	LayersMgr& m_layers;
 
-	private:
-		Controller* m_ctrl;
+	int m_drag_flag_line;
 
-		int m_dragFlagLine;
+	int m_curr_layer;
 
-		DECLARE_EVENT_TABLE()
+	DECLARE_EVENT_TABLE()
 
-	}; // LayersContentWidget
+}; // LayersContentWidget
+
 }
 
+#endif // _EASYANIM_LAYERS_CONTENT_WIDGET_H_
