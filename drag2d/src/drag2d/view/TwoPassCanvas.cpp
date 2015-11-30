@@ -7,8 +7,14 @@
 #include "render/SpriteRenderer.h"
 #include "render/RenderContext.h"
 #include "render/DrawCallBatching.h"
+#include "render/SpatialIndex.h"
+#include "view/Camera.h"
 
-#include <dtex_facade.h>
+#define OPEN_SCREEN_CACHE
+
+#ifdef OPEN_SCREEN_CACHE
+#include "render/ScreenCache.h"
+#endif // OPEN_SCREEN_CACHE
 
 namespace d2d
 {
@@ -27,54 +33,18 @@ void TwoPassCanvas::InitGL()
 
 	IStageCanvas::InitGL();
 
-	dtexf_cs_reload();
+#ifdef OPEN_SCREEN_CACHE
+	ScreenCache::Instance()->Reload();
+#endif // OPEN_SCREEN_CACHE
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
 {
 	if (Config::Instance()->IsUseDTex()) {
 		DrawCallBatching::Instance()->OnSize(w, h);
+		ScreenCache::Instance()->OnSize(w, h);
 	}
 }
-
-// void TwoPassCanvas::OnDrawWhole() const
-// {
-// 	const FBO& fbo = ScreenFBO::Instance()->GetFBO();
-// 	ShaderMgr* mgr = ShaderMgr::Instance();
-// 
-// 	SpriteRenderer::Instance()->SetCamera(GetCamera());
-// 
-// 	//////////////////////////////////////////////////////////////////////////
-// 	// Draw to FBO
-// 	//////////////////////////////////////////////////////////////////////////
-// 	if (IsDirty()) {
-//  		mgr->SetFBO(fbo.GetFboID());
-// 		
-// 		glClearColor(0, 0, 0, 0);
-// 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-// 
-// 		OnDrawSprites();
-// 
-// 		RenderContext::Flush();
-// 
-// //		wxLogDebug("pass 22222222222222222");
-// 	} else {
-// //		wxLogDebug("pass 1");
-// 	}
-// 
-// 	//////////////////////////////////////////////////////////////////////////
-// 	// Draw to Screen
-// 	//////////////////////////////////////////////////////////////////////////
-// 
-// 	mgr->SetFBO(0);
-// 	mgr->SetTexture(0);
-// 
-// 	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-// 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-// 
-// 	mgr->Screen();
-// 	mgr->DrawScreen(fbo.GetTexID());
-// }
 
 static void
 _before_draw(void* ud) {
@@ -82,43 +52,80 @@ _before_draw(void* ud) {
 	ShaderMgr::Instance()->SetSpriteColor(stype->multi_col, stype->add_col);
 }
 
+#ifdef OPEN_SCREEN_CACHE
+
 void TwoPassCanvas::OnDrawWhole() const
 {
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
 
-	if (dtexf_cs_open()) 
+	ScreenCache* sc = ScreenCache::Instance();
+
+	//////////////////////////////////////////////////////////////////////////
+	// 1. Compute Invalid Rect
+	// 2. Draw to Target
+	//////////////////////////////////////////////////////////////////////////
+	sc->Bind();
+
+// 	glClearColor(0, 0, 0, 0);
+// 	glClear(GL_COLOR_BUFFER_BIT);
+
+	OnDrawSprites();
+
+	SpatialIndex::Instance()->DebugDraw();
+
+	sc->Unbind();
+
+	//////////////////////////////////////////////////////////////////////////
+	// Draw to Screen
+	//////////////////////////////////////////////////////////////////////////
+
+	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	sc->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
+}
+
+#else
+
+void TwoPassCanvas::OnDrawWhole() const
+{
+	SpriteRenderer::Instance()->SetCamera(GetCamera());
+
+	if (ScreenCache::IsOpen()) 
 	{
 		//////////////////////////////////////////////////////////////////////////
 		// Draw to Target
 		//////////////////////////////////////////////////////////////////////////
 		if (IsDirty()) {
-			dtexf_cs_bind();
+			ScreenCache::Bind();
 
 			glClearColor(0, 0, 0, 0);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT);
 
 			OnDrawSprites();
 
-			dtexf_cs_unbind();
+			ScreenCache::Unbind();
 		}
 
 		//////////////////////////////////////////////////////////////////////////
 		// Draw to Screen
 		//////////////////////////////////////////////////////////////////////////
 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 
-		dtexf_cs_draw_to_screen(&_before_draw, (ScreenStyle*)(&m_scr_style));
+		ScreenCache::DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
 	} 
 	else 
 	{
 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		OnDrawSprites();
 
 		RenderContext::Flush();
 	}
 }
+
+#endif // OPEN_SCREEN_CACHE
 
 }

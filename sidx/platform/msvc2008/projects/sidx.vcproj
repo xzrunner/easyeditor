@@ -181,6 +181,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="null"
+			>
+			<File
+				RelativePath="..\..\..\src\sidx\sidx_null.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sidx\sidx_null.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\sidx\sidx_region.c"
 			>

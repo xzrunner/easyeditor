@@ -32,6 +32,7 @@ public:
 		const Colorf& b_trans = Colorf(0, 0, 1, 0),
 		const ISprite* sprite = NULL) const;
 	virtual Rect GetSize(const ISprite* sprite = NULL) const;
+	virtual void InvalidRect(const Matrix& mt) const;
 
 	unsigned int GetTexID() const;
 

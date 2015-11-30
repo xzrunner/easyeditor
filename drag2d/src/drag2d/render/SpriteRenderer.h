@@ -27,6 +27,8 @@ public:
 			  const Colorf& b_trans = Colorf(0, 0, 1, 0),
 			  bool multi_draw = true) const;
 
+	void InvalidRect(const ISprite* sprite, const Matrix& mt = Matrix());
+
 	void Draw(const ISymbol* symbol, 
 			  const d2d::Matrix& mt = Matrix(), 
 			  const Vector& pos = Vector(0, 0),

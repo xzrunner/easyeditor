@@ -37,6 +37,7 @@ public:
 	const uint8_t* GetPixelData() const;
 
 	void Draw(const Matrix& mt, const ISprite* spr = NULL) const;
+	void InvalidRect(const Matrix& mt) const;
 
 	const Vector& GetOffset() const { return m_offset; }
 

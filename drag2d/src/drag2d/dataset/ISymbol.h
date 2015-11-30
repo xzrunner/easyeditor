@@ -39,6 +39,7 @@ public:
 		const Colorf& b_trans = Colorf(0, 0, 1, 0),
 		const ISprite* sprite = NULL) const = 0;
 	virtual Rect GetSize(const ISprite* sprite = NULL) const = 0;
+	virtual void InvalidRect(const Matrix& mt) const {}
 
 	bool LoadFromFile(const std::string& filepath);
 

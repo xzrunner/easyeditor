@@ -6,6 +6,8 @@
 #include <easyanim.h>
 #include <easytext.h>
 
+#define OPEN_SCREEN_CACHE
+
 namespace ecomplex
 {
 
@@ -65,13 +67,49 @@ void StageCanvas::OnSize(int w, int h)
 	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
 }
 
+#ifdef OPEN_SCREEN_CACHE
+
+void StageCanvas::OnDrawSprites() const
+{
+	wxLogDebug("++++++++ StageCanvas::OnDrawSprites begin");
+
+	m_stat.Begin();
+
+	drawBackground();
+
+	d2d::ScreenCache::Instance()->Draw(m_camera);
+
+	d2d::PrimitiveDraw::rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+
+	if (Settings::bVisibleBGCross)
+	{
+		const float EDGE = 100;
+		d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+	}
+
+	m_stage->DrawEditOP();
+
+	m_stat.End();
+
+#ifdef _DEBUG 
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->DebugDraw();
+	}
+#endif
+
+	m_stat.DrawTime(m_screen);
+
+	wxLogDebug("++++++++ StageCanvas::OnDrawSprites end");
+}
+
+#else
+
 void StageCanvas::OnDrawSprites() const
 {
 	m_stat.Begin();
 
 	drawBackground();
 
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	m_stage->TraverseSprites(d2d::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
 
@@ -83,7 +121,7 @@ void StageCanvas::OnDrawSprites() const
 		d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
 	}
 
- 	m_stage->DrawEditOP();
+	m_stage->DrawEditOP();
 
 	m_stat.End();
 
@@ -95,6 +133,8 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stat.DrawTime(m_screen);
 }
+
+#endif // OPEN_SCREEN_CACHE
 
 void StageCanvas::drawBackground() const
 {

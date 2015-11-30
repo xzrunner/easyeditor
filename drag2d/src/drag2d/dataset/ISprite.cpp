@@ -10,6 +10,8 @@
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
 #include "view/SpritePropertySetting.h"
+#include "render/SpriteRenderer.h"
+#include "render/SpatialIndex.h"
 
 #include <cmath>
 
@@ -326,6 +328,11 @@ bool ISprite::IsIntersect(const Rect& rect) const
 
 void ISprite::Translate(const Vector& offset)
 {
+	bool find = SpatialIndex::Instance()->Remove(this);
+	if (find) {
+		SpriteRenderer::Instance()->InvalidRect(this);
+	}
+
 	if (m_observer)
 		m_observer->Translate(this, offset);
 
@@ -333,10 +340,17 @@ void ISprite::Translate(const Vector& offset)
 	if (m_bounding) {
 		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
+
+	if (find) {
+		SpriteRenderer::Instance()->InvalidRect(this);
+		SpatialIndex::Instance()->Insert(this);
+	}
 }
 
 void ISprite::Rotate(float delta)
 {
+	SpatialIndex::Instance()->Remove(this);
+
 	if (m_observer)
 		m_observer->Rotate(this, delta);
 
@@ -345,6 +359,8 @@ void ISprite::Rotate(float delta)
 	if (m_bounding) {
 		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
+
+	SpatialIndex::Instance()->Insert(this);
 }
 
 void ISprite::SetOffset(const Vector& offset) 

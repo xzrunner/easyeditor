@@ -33,6 +33,9 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 		symbol->Release();
 
 		static_cast<Symbol*>(complex)->m_sprites.push_back(sprite);
+		d2d::SpatialIndex::Instance()->Insert(sprite);
+		d2d::SpriteRenderer::Instance()->InvalidRect(sprite);
+
 		spriteValue = value["sprite"][i++];
 	}	
 }

@@ -181,6 +181,8 @@
 #include "render/Snapshoot.h"
 #include "render/render_utility.h"
 #include "render/DrawCallBatching.h"
+#include "render/ScreenCache.h"
+#include "render/SpatialIndex.h"
 
 #include "message/subject_id.h"
 #include "message/ClearPanelSJ.h"

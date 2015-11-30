@@ -13,6 +13,8 @@
 #include "message/RemoveSpriteSJ.h"
 #include "message/ClearSpriteSJ.h"
 #include "message/SetCanvasDirtySJ.h"
+#include "render/SpatialIndex.h"
+#include "render/SpriteRenderer.h"
 
 namespace d2d
 {
@@ -78,12 +80,17 @@ void SpritesPanelImpl::Notify(int sj_id, void* ud)
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
 			m_container->Insert(p->spr, p->idx);
+			SpatialIndex::Instance()->Insert(p->spr);
+			SpriteRenderer::Instance()->InvalidRect(p->spr);
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_REMOVE_SPRITE:
 		{
-			m_container->Remove((ISprite*)ud);
+			ISprite* spr = (ISprite*)ud;
+			m_container->Remove(spr);
+			SpatialIndex::Instance()->Remove(spr);
+			SpriteRenderer::Instance()->InvalidRect(spr);
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;

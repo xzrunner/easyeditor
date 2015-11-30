@@ -40,8 +40,9 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 						  const Colorf& b_trans,
 						  bool multi_draw) const
 {
-	if (!sprite->visiable)
+	if (!sprite->visiable) {
 		return;
+	}
 
 	if (!multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
 		DrawImpl(sprite, mt, mul, add, r_trans, g_trans, b_trans);
@@ -60,6 +61,19 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		FBO& scr_fbo = ScreenFBO::Instance()->GetFBO();
 		mgr->SetFBO(scr_fbo.GetFboID());
 	}
+}
+
+void SpriteRenderer::InvalidRect(const ISprite* sprite, const Matrix& mt)
+{
+	if (!sprite->visiable) {
+		return;
+	}
+
+	Matrix t;
+	sprite->GetTransMatrix(t);
+	t = mt * t;
+	
+	sprite->GetSymbol().InvalidRect(t);
 }
 
 void SpriteRenderer::Draw(const ISymbol* symbol, 

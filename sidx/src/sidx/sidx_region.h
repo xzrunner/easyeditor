@@ -15,7 +15,7 @@ struct sidx_region {
 
 #define REGION_INIT(r) { \
 	(r).xmin = (r).ymin = FLT_MAX; \
-	(r).xmax = (r).ymax = FLT_MIN; \
+	(r).xmax = (r).ymax = -FLT_MAX; \
 }
 
 #define REGION_AREA(r) (((r).xmax - (r).xmin) * ((r).ymax - (r).ymin))
@@ -30,6 +30,8 @@ struct sidx_region {
 #define REGION_CONTAINS(a, b) ((a).xmin <= (b).xmin && (a).xmax >= (b).xmax && (a).ymin <= (b).ymin && (a).ymax >= (b).ymax)
 
 #define REGION_TOUCH(a, b) ((a).xmin == (b).xmin || (a).xmax == (b).xmax || (a).ymin == (b).ymin || (a).ymax == (b).ymax)
+
+#define REGION_INTERSECT(a, b) (!((a).xmin > (b).xmax || (a).xmax < (b).xmin || (a).ymin > (b).ymax || (a).ymax < (b).ymin))
 
 #endif // spatial_index_region_h
 

@@ -1,14 +1,18 @@
 #include "Image.h"
+
 #include "TextureImgData.h"
 #include "TextureFBO.h"
 
 #include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
 #include "render/DrawCallBatching.h"
+#include "render/ScreenCache.h"
 #include "common/Exception.h"
 #include "common/Config.h"
 
+
 #include <easyimage.h>
+
 #include <wx/filename.h>
 
 namespace d2d
@@ -324,6 +328,27 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	} else {
 		mgr->Draw(vertices, texcoords, texid);
 	}
+}
+
+void Image::InvalidRect(const Matrix& mt) const
+{
+	float hw = m_tex->GetWidth() * 0.5f,
+		  hh = m_tex->GetHeight() * 0.5f;
+	d2d::Vector vertices[4];
+	vertices[0] = Vector(-hw, -hh);
+	vertices[1] = Vector( hw, -hh);
+	vertices[2] = Vector( hw,  hh);
+	vertices[3] = Vector(-hw,  hh);
+
+	float xmin = FLT_MAX, ymin = FLT_MAX, xmax = -FLT_MAX, ymax = -FLT_MAX;
+	for (int i = 0; i < 4; ++i) {
+		d2d::Vector pos = Math::transVector(vertices[i] + m_offset, mt);
+		if (pos.x < xmin) xmin = pos.x;
+		if (pos.x > xmax) xmax = pos.x;
+		if (pos.y < ymin) ymin = pos.y;
+		if (pos.y > ymax) ymax = pos.y;
+	}
+	ScreenCache::Instance()->InvalidRect(xmin, ymin, xmax, ymax);
 }
 
 const ImageData* Image::GetImageData() const 
