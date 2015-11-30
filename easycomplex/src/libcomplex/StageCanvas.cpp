@@ -6,7 +6,8 @@
 #include <easyanim.h>
 #include <easytext.h>
 
-#define OPEN_SCREEN_CACHE
+// todo
+#include <common/dev_config.h>
 
 namespace ecomplex
 {

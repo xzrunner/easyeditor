@@ -1,0 +1,6 @@
+#ifndef _DRAG2D_DEV_CONFIG_H_
+#define _DRAG2D_DEV_CONFIG_H_
+
+//#define OPEN_SCREEN_CACHE
+
+#endif // _DRAG2D_DEV_CONFIG_H_

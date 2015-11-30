@@ -1,4 +1,7 @@
+#include "common/dev_config.h"
+
 #include "ISprite.h"
+
 #include "ISymbol.h"
 
 #include "common/Math.h"
@@ -10,8 +13,11 @@
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
 #include "view/SpritePropertySetting.h"
+
+#ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
 #include "render/SpatialIndex.h"
+#endif // OPEN_SCREEN_CACHE
 
 #include <cmath>
 
@@ -328,10 +334,12 @@ bool ISprite::IsIntersect(const Rect& rect) const
 
 void ISprite::Translate(const Vector& offset)
 {
+#ifdef OPEN_SCREEN_CACHE
 	bool find = SpatialIndex::Instance()->Remove(this);
 	if (find) {
 		SpriteRenderer::Instance()->InvalidRect(this);
 	}
+#endif // OPEN_SCREEN_CACHE
 
 	if (m_observer)
 		m_observer->Translate(this, offset);
@@ -341,15 +349,19 @@ void ISprite::Translate(const Vector& offset)
 		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
 
+#ifdef OPEN_SCREEN_CACHE
 	if (find) {
 		SpriteRenderer::Instance()->InvalidRect(this);
 		SpatialIndex::Instance()->Insert(this);
 	}
+#endif // OPEN_SCREEN_CACHE
 }
 
 void ISprite::Rotate(float delta)
 {
+#ifdef OPEN_SCREEN_CACHE
 	SpatialIndex::Instance()->Remove(this);
+#endif // OPEN_SCREEN_CACHE
 
 	if (m_observer)
 		m_observer->Rotate(this, delta);
@@ -360,7 +372,9 @@ void ISprite::Rotate(float delta)
 		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
 
+#ifdef OPEN_SCREEN_CACHE
 	SpatialIndex::Instance()->Insert(this);
+#endif // OPEN_SCREEN_CACHE
 }
 
 void ISprite::SetOffset(const Vector& offset) 

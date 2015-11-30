@@ -1,3 +1,5 @@
+#include "common/dev_config.h"
+
 #include "TwoPassCanvas.h"
 
 #include "common/Config.h"
@@ -8,13 +10,8 @@
 #include "render/RenderContext.h"
 #include "render/DrawCallBatching.h"
 #include "render/SpatialIndex.h"
-#include "view/Camera.h"
-
-#define OPEN_SCREEN_CACHE
-
-#ifdef OPEN_SCREEN_CACHE
 #include "render/ScreenCache.h"
-#endif // OPEN_SCREEN_CACHE
+#include "view/Camera.h"
 
 namespace d2d
 {
@@ -33,9 +30,7 @@ void TwoPassCanvas::InitGL()
 
 	IStageCanvas::InitGL();
 
-#ifdef OPEN_SCREEN_CACHE
 	ScreenCache::Instance()->Reload();
-#endif // OPEN_SCREEN_CACHE
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
@@ -91,20 +86,20 @@ void TwoPassCanvas::OnDrawWhole() const
 {
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
 
-	if (ScreenCache::IsOpen()) 
-	{
+// 	if (ScreenCache::IsOpen()) 
+// 	{
 		//////////////////////////////////////////////////////////////////////////
 		// Draw to Target
 		//////////////////////////////////////////////////////////////////////////
 		if (IsDirty()) {
-			ScreenCache::Bind();
+			ScreenCache::Instance()->Bind();
 
 			glClearColor(0, 0, 0, 0);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			OnDrawSprites();
 
-			ScreenCache::Unbind();
+			ScreenCache::Instance()->Unbind();
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -113,17 +108,17 @@ void TwoPassCanvas::OnDrawWhole() const
 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		ScreenCache::DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
-	} 
-	else 
-	{
-		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		OnDrawSprites();
-
-		RenderContext::Flush();
-	}
+		ScreenCache::Instance()->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
+// 	} 
+// 	else 
+// 	{
+// 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+// 		glClear(GL_COLOR_BUFFER_BIT);
+// 
+// 		OnDrawSprites();
+// 
+// 		RenderContext::Flush();
+// 	}
 }
 
 #endif // OPEN_SCREEN_CACHE

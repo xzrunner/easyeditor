@@ -1833,6 +1833,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\dev_config.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\SettingData.cpp"
 					>
 				</File>

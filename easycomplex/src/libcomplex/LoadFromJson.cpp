@@ -1,3 +1,5 @@
+#include <common/dev_config.h>
+
 #include "LoadFromJson.h"
 #include "Symbol.h"
 
@@ -33,8 +35,10 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 		symbol->Release();
 
 		static_cast<Symbol*>(complex)->m_sprites.push_back(sprite);
+#ifdef OPEN_SCREEN_CACHE
 		d2d::SpatialIndex::Instance()->Insert(sprite);
 		d2d::SpriteRenderer::Instance()->InvalidRect(sprite);
+#endif // OPEN_SCREEN_CACHE
 
 		spriteValue = value["sprite"][i++];
 	}	

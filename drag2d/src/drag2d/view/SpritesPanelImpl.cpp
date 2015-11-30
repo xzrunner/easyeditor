@@ -80,8 +80,10 @@ void SpritesPanelImpl::Notify(int sj_id, void* ud)
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
 			m_container->Insert(p->spr, p->idx);
+#ifdef OPEN_SCREEN_CACHE
 			SpatialIndex::Instance()->Insert(p->spr);
 			SpriteRenderer::Instance()->InvalidRect(p->spr);
+#endif // OPEN_SCREEN_CACHE
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
@@ -89,8 +91,10 @@ void SpritesPanelImpl::Notify(int sj_id, void* ud)
 		{
 			ISprite* spr = (ISprite*)ud;
 			m_container->Remove(spr);
+#ifdef OPEN_SCREEN_CACHE
 			SpatialIndex::Instance()->Remove(spr);
 			SpriteRenderer::Instance()->InvalidRect(spr);
+#endif // OPEN_SCREEN_CACHE
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;

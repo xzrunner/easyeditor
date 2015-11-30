@@ -1,15 +1,19 @@
+#include "common/dev_config.h"
+
 #include "Image.h"
 
 #include "TextureImgData.h"
 #include "TextureFBO.h"
 
+#ifdef OPEN_SCREEN_CACHE
+#include "render/ScreenCache.h"
+#endif // OPEN_SCREEN_CACHE
+
 #include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
 #include "render/DrawCallBatching.h"
-#include "render/ScreenCache.h"
 #include "common/Exception.h"
 #include "common/Config.h"
-
 
 #include <easyimage.h>
 
@@ -332,6 +336,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 
 void Image::InvalidRect(const Matrix& mt) const
 {
+#ifdef OPEN_SCREEN_CACHE
 	float hw = m_tex->GetWidth() * 0.5f,
 		  hh = m_tex->GetHeight() * 0.5f;
 	d2d::Vector vertices[4];
@@ -349,6 +354,7 @@ void Image::InvalidRect(const Matrix& mt) const
 		if (pos.y > ymax) ymax = pos.y;
 	}
 	ScreenCache::Instance()->InvalidRect(xmin, ymin, xmax, ymax);
+#endif // OPEN_SCREEN_CACHE
 }
 
 const ImageData* Image::GetImageData() const 
