@@ -48,6 +48,9 @@ private:
 	void Insert(d2d::ISprite* spr);
 	void Remove(d2d::ISprite* spr);
 
+	void InsertWithUD(d2d::ISprite* spr);
+	void InsertWithoutUD(d2d::ISprite* spr);
+
 public:
 	enum
 	{

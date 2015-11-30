@@ -1,8 +1,8 @@
 #include "SelectSpritesOP.h"
 
 #include "dataset/SpriteUserData.h"
-// #include "frame/Controller.h"
-// #include "view/StagePanel.h"
+#include "dataset/LayersMgr.h"
+#include "dataset/KeyFrame.h"
 
 #include <easymesh.h>
 #include <easyicon.h>
@@ -39,15 +39,17 @@ void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& 
 	d2d::SelectSpritesOP::PasteSprToClipboard(spr, value);
 
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
-	value["layer"] = ud->layer;
-	value["frame"] = ud->frame;
+	value["anim"]["layer"] = ud->all_layers->QueryIndex(ud->layer);
+	value["anim"]["frame"] = ud->frame->GetTime() - 1;
 }
 
 void SelectSpritesOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
 {
 	d2d::SelectSpritesOP::CopySprFromClipboard(spr, value);
 
-	set_sprite_user_data(spr, value["layer"].asInt(), value["frame"].asInt());
+	int layer_idx = value["anim"]["layer"].asInt(),
+		frame_idx = value["anim"]["frame"].asInt();
+	set_sprite_user_data(spr, layer_idx, frame_idx);
 }
 
 }

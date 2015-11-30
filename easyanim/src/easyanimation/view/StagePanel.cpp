@@ -112,7 +112,7 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 		return;
 	}
 
-	const std::vector<Layer*>& layers = m_ctrl->GetLayers().getAllLayers();
+	const std::vector<Layer*>& layers = m_ctrl->GetLayers().CetAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		Layer* layer = layers[i];
@@ -180,30 +180,12 @@ void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
 
 void StagePanel::Insert(d2d::ISprite* spr)
 {
-	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
-
-	while (ud && ud->layer >= m_ctrl->GetLayerCount()) {
-		InsertLayerSJ::Instance()->Insert();
+	if (spr->GetUserData()) {
+		InsertWithUD(spr);
+	} else {
+		InsertWithoutUD(spr);
 	}
-
-	int old_layer = m_ctrl->layer(),
-		old_frame = m_ctrl->frame();
-
-	if (ud) {
-		ud->frame = old_frame;
-		m_ctrl->setCurrFrame(ud->layer, old_frame);
-	}
-
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	assert(frame);
-	frame->Insert(spr);
-
-	if (ud) {
-		m_ctrl->setCurrFrame(old_layer, old_frame);
-	}
-
 	m_ctrl->Refresh();
-
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -215,6 +197,37 @@ void StagePanel::Remove(d2d::ISprite* spr)
 		m_ctrl->Refresh();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
+}
+
+void StagePanel::InsertWithUD(d2d::ISprite* spr)
+{
+	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
+	assert(ud);
+
+	assert(ud->layer_idx != -1);
+	while (ud && ud->layer_idx >= m_ctrl->GetLayerCount()) {
+		InsertLayerSJ::Instance()->Insert();
+	}
+
+	int old_layer = m_ctrl->layer(),
+		old_frame = m_ctrl->frame();
+	m_ctrl->setCurrFrame(ud->layer_idx, old_frame);
+
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	assert(frame);
+	frame->Insert(spr);
+
+	ud->all_layers = &m_ctrl->GetLayers();
+	ud->layer = ud->all_layers->GetLayer(ud->layer_idx);
+	ud->frame = frame;
+	m_ctrl->setCurrFrame(old_layer, old_frame);
+}
+
+void StagePanel::InsertWithoutUD(d2d::ISprite* spr)
+{
+	KeyFrame* frame = m_ctrl->getCurrFrame();
+	assert(frame);
+	frame->Insert(spr);
 }
 
 //////////////////////////////////////////////////////////////////////////
