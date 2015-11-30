@@ -93,7 +93,9 @@ void PackAnimation::Clear()
 
 bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name, int& comp_idx)
 {
+	bool is_anchor = false;
 	if (const PackAnchor* anchor = dynamic_cast<const PackAnchor*>(node)) {
+		is_anchor = true;
 		for (int i = 0, n = components.size(); i < n; ++i) {
 			if (dynamic_cast<const PackAnchor*>(components[i].node) && components[i].name == name) {
 				comp_idx = i;
@@ -130,7 +132,9 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 	components.push_back(comp);
 	comp_idx = components.size() - 1;
 
-	if (d2d::FileNameParser::isType(node->GetFilepath(), d2d::FileNameParser::e_image)) {
+	if (is_anchor) {
+		return true;
+	} else if (d2d::FileNameParser::isType(node->GetFilepath(), d2d::FileNameParser::e_image)) {
 		return false;
 	} else {
 		return !name.empty();
