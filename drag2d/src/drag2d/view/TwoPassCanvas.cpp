@@ -37,8 +37,11 @@ void TwoPassCanvas::OnSize(int w, int h)
 {
 	if (Config::Instance()->IsUseDTex()) {
 		DrawCallBatching::Instance()->OnSize(w, h);
-		ScreenCache::Instance()->OnSize(w, h);
+	} else {
+		// fix me: ScreenCache depend on DrawCallBatching
+		DrawCallBatching::Instance();
 	}
+	ScreenCache::Instance()->OnSize(w, h);
 }
 
 static void
