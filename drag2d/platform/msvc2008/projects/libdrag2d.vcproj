@@ -3065,22 +3065,14 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="editop"
+					Name="panel"
 					>
 					<File
-						RelativePath="..\..\..\src\drag2d\message\EditRedoSJ.cpp"
+						RelativePath="..\..\..\src\drag2d\message\panel_msg.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\message\EditRedoSJ.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\message\EditUndoSJ.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\message\EditUndoSJ.h"
+						RelativePath="..\..\..\src\drag2d\message\panel_msg.h"
 						>
 					</File>
 				</Filter>

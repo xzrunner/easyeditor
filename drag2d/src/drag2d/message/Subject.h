@@ -26,6 +26,25 @@ private:
 
 }; // Subject
 
+#define SUBJECT_DECLARATION(name) \
+	public: \
+		static name* Instance(); \
+	private: \
+		(name)(int id); \
+	private: \
+		static name* m_instance;
+
+#define SUBJECT_DEFINITION(name, s_id) \
+	name* name::m_instance = NULL; \
+	name::name(int id) : Subject(id) {} \
+	name* name::Instance() \
+	{ \
+		if (!m_instance) { \
+			m_instance = new (name)(s_id); \
+		} \
+		return m_instance; \
+	}
+
 }
 
 #endif // _DRAG2D_SUBJECT_H_
