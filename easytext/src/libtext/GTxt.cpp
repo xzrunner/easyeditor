@@ -159,7 +159,7 @@ void GTxt::Init()
 		gtxt_ft_add_font(fonts[i].first.c_str(), fonts[i].second.c_str());
 	}	
 
-	gtxt_glyph_cache_init(50, 500);
+	gtxt_glyph_init(50, 500, NULL);
 
 	gtxt_richtext_ext_sym_cb_init(&ext_sym_create, &ext_sym_release, &ext_sym_get_size, &ext_sym_render);
 }
