@@ -73,7 +73,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		return true;
 	}
 
-	if (Config::Instance()->IsUseDTex()) {
+	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
 		DrawCallBatching* dcb = DrawCallBatching::Instance();
 		dcb->LoadBegin();
 		dcb->Load(this);
@@ -87,7 +87,7 @@ void Image::ReloadTexture()
 {
 	m_tex->Reload();
 
-	if (Config::Instance()->IsUseDTex()) {
+	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
 		DrawCallBatching::Instance()->Reload(this);
 	}
 }
@@ -226,7 +226,7 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 	d2d::Vector texcoords[4];
 
 	float* c2_texcoords = NULL;
-	if (Config::Instance()->IsUseDTex()) {
+	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
 		c2_texcoords = DrawCallBatching::Instance()->Query(this, &texid);
 	}
  	if (c2_texcoords)
@@ -401,6 +401,11 @@ void Image::LoadWithClip(const std::string& filepath)
 	}
 
 	img_data->Release();
+}
+
+bool Image::CanUseDTex() const
+{
+	return m_tex->GetWidth() < 512 && m_tex->GetHeight() < 512;
 }
 
 } // d2d

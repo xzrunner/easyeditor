@@ -46,6 +46,8 @@ public:
 private:
 	void LoadWithClip(const std::string& filepath);
 
+	bool CanUseDTex() const;
+
 private:
 	ITexture* m_tex;
 
