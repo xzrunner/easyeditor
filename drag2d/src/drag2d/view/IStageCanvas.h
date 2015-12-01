@@ -15,6 +15,7 @@ namespace d2d
 {
 
 class EditPanelImpl;
+class RenderContext;
 
 class IStageCanvas : public wxGLCanvas, public Object, public Observer
 {
@@ -54,6 +55,8 @@ protected:
 
 	virtual void OnTimer() {}
 
+	void Init();
+
 	bool IsInited() const { return m_inited; }
 
 private:
@@ -85,7 +88,8 @@ private:
 	};
 
 private:
-	wxGLContext* m_context;
+	wxGLContext* m_gl_context;
+	RenderContext* m_render_context;
 
 	std::vector<Subject*> m_subjects;
 	bool m_observe_enable;

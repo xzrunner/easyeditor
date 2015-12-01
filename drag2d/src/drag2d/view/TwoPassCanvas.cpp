@@ -7,7 +7,7 @@
 #include "render/ShaderMgr.h"
 #include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
-#include "render/RenderContext.h"
+#include "render/ShaderContext.h"
 #include "render/DrawCallBatching.h"
 #include "render/SpatialIndex.h"
 #include "render/ScreenCache.h"
@@ -21,16 +21,6 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 {
 	m_scr_style.multi_col = WHITE;
 	m_scr_style.add_col = BLACK;
-}
-
-void TwoPassCanvas::InitGL()
-{
-	// fix me: init render context
-	ShaderMgr::Instance();
-
-	IStageCanvas::InitGL();
-
-	ScreenCache::Instance()->Reload();
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
@@ -120,7 +110,7 @@ void TwoPassCanvas::OnDrawWhole() const
 // 
 // 		OnDrawSprites();
 // 
-// 		RenderContext::Flush();
+// 		ShaderContext::Flush();
 // 	}
 }
 

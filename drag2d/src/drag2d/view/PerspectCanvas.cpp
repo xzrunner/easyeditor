@@ -14,7 +14,7 @@ PerspectCanvas::PerspectCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 
 void PerspectCanvas::OnSize(int w, int h)
 {
-	glViewport(0, 0, w, h);
+//	glViewport(0, 0, w, h);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

@@ -5,7 +5,7 @@
 #include "FontShader.h"
 #include "ScreenShader.h"
 
-#include "RenderContext.h"
+#include "ShaderContext.h"
 
 #include <stdio.h>
 
@@ -19,7 +19,7 @@ ShaderMgr* ShaderMgr::Instance()
 	if (!m_instance)
 	{
 		m_instance = new ShaderMgr();
-		RenderContext::SetShader2DMgr(m_instance);
+		ShaderContext::SetShader2DMgr(m_instance);
 	}
 	return m_instance;
 }
@@ -81,25 +81,25 @@ void ShaderMgr::SetBlendMode(BlendMode mode)
 
 void ShaderMgr::sprite()
 {
-	RenderContext::Bind2d();
+	ShaderContext::Bind2d();
 	Switch(m_sprite_shader);
 }
 
 void ShaderMgr::shape()
 {
-	RenderContext::Bind2d();
+	ShaderContext::Bind2d();
 	Switch(m_shape_shader);
 }
 
 void ShaderMgr::Screen()
 {
-	RenderContext::Bind2d();
+	ShaderContext::Bind2d();
 	Switch(m_screen_shader);
 }
 
 void ShaderMgr::null()
 {
-	RenderContext::Bind2d();
+	ShaderContext::Bind2d();
 	Switch(NULL);
 }
 
@@ -173,15 +173,6 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
 		m_all_sprite_shader[i]->SetModelView(offset, scale);
 	}
-	
-	m_offset = offset;
-	m_scale = scale;
-}
-
-void ShaderMgr::GetModelView(Vector& offset, float& scale)
-{
-	offset = m_offset;
-	scale = m_scale;
 }
 
 int ShaderMgr::AddShapeShader(d2d::ShapeShader* shader)

@@ -33,14 +33,25 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 		return;
 	}
 
+	d2d::RenderContext* context = d2d::RenderContext::GetCurrContext();
+
+	d2d::Vector last_offset;
+	float last_scale;
+	context->GetModelView(last_offset, last_scale);
+
+	int last_w, last_h;
+	context->GetProjection(last_w, last_h);
+
 	m_sprites_impl->EnableObserve(false);
 	m_stage->GetCanvas()->EnableObserve(false);
 
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
+
  		EditDialog dlg(m_wnd, &symbol);
  		dlg.ShowModal();
+
 		//////////////////////////////////////////////////////////////////////////
 
 // 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
@@ -84,10 +95,10 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	}
 
 	m_sprites_impl->EnableObserve(true);
-
 	m_stage->GetCanvas()->EnableObserve(true);
-	d2d::ResetViewportSJ::Instance()->Reset();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+
+	context->SetModelView(last_offset, last_scale);
+	context->SetProjection(last_w, last_h);		
 }
 
 }

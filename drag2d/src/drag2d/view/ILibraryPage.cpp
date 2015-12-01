@@ -55,7 +55,7 @@ void ILibraryPage::ReloadTexture() const
 void ILibraryPage::AddItem(ListItem* item)
 {
 	m_list->Insert(item);
-	ResetViewportSJ::Instance()->Reset();
+//	ResetViewportSJ::Instance()->Reset();
 }
 
 void ILibraryPage::InitLayout(bool draggable/* = true*/)

@@ -12,7 +12,8 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* editPanel, d2d::LibraryPanel* library);
+	StageCanvas(StagePanel* editPanel, d2d::LibraryPanel* library,
+		bool reload = false);
 	virtual ~StageCanvas();
 
 	void SetBackground(d2d::ISymbol* symbol);
@@ -26,6 +27,8 @@ protected:
 	StagePanel* m_stage;
 
 private:
+	void ReloadGLContext();
+
 	void drawBackground() const;
 
 private:

@@ -16,8 +16,9 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 	std::vector<d2d::ISprite*> sprites;
 	GetCurrSprites(symbol, index, sprites);
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
+	}
 
 	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::ISprite>());
 }

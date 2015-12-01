@@ -7,6 +7,7 @@
 #include "view/EditPanelImpl.h"
 #include "view/KeysState.h"
 #include "render/ShaderMgr.h"
+#include "render/ShaderContext.h"
 #include "render/RenderContext.h"
 #include "message/SetCanvasDirtySJ.h"
 #include "message/ResetViewportSJ.h"
@@ -42,10 +43,13 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
  	, m_inited(false)
 	, m_dirty(false)
 	, m_cam_dirty(false)
- 	, m_context(new wxGLContext(this))
+ 	, m_gl_context(new wxGLContext(this))
+	, m_render_context(new RenderContext)
 	, m_timer(this, TIMER_ID)
 	, m_version(0)
 {
+	Init();
+
 	m_bg_color.set(0.5f, 0.5f, 0.5f, 1);
 	m_timer.Start(1000 / FPS);
 
@@ -62,7 +66,7 @@ IStageCanvas::~IStageCanvas()
 		m_subjects[i]->UnRegister(this);
 	}
 
-	delete m_context;
+	delete m_gl_context;
 	m_timer.Stop();
 }
 
@@ -81,7 +85,13 @@ void IStageCanvas::Notify(int sj_id, void* ud)
 		// On Mouse Wheel
 		// onSize no use, if the size not change
 		// also can put gluOrtho2D in each onPaint, save this and Camera's observer pattern
-		OnSize(wxSizeEvent(m_parent->GetSize()));
+//		OnSize(wxSizeEvent(m_parent->GetSize()));
+
+		{
+			wxSize sz = m_parent->GetSize();
+			RenderContext::GetCurrContext()->SetProjection(sz.GetWidth(), sz.GetHeight());
+		}
+
 		break;
 	}
 }
@@ -98,18 +108,46 @@ void IStageCanvas::SetBgColor(const Colorf& color)
 
 void IStageCanvas::SetCurrentCanvas()
 {
-	SetCurrent(*m_context);
+	RenderContext::SetCurrContext(m_render_context);
+	SetCurrent(*m_gl_context);
 }
 
 void IStageCanvas::InitGL()
 {
+// 	SetCurrentCanvas();
+// 
+// 	if (glewInit() != GLEW_OK) {
+// 		exit(1);
+// 	}
+// 
+// 	try {
+// 		ShaderContext::Reload();
+// 		ShaderContext::Reset();
+// 
+// 		ResetViewportSJ::Instance()->Reset();
+// 
+// 		glEnable(GL_TEXTURE_2D);
+// 	} catch (Exception& e) {
+// 		ExceptionDlg dlg(m_parent, e);
+// 		dlg.ShowModal();	
+// 	}
+}
+
+void IStageCanvas::Init()
+{
+	SetCurrentCanvas();
+
+	// prepare 2d
+	// todo: move to child, for defferent init (such as 3d ?)
+	ShaderMgr::Instance();
+
 	if (glewInit() != GLEW_OK) {
 		exit(1);
 	}
 
 	try {
-		RenderContext::Reload();
-		RenderContext::Reset();
+		ShaderContext::Reload();
+		ShaderContext::Reset();
 
 		ResetViewportSJ::Instance()->Reset();
 
@@ -122,6 +160,8 @@ void IStageCanvas::InitGL()
 
 void IStageCanvas::OnSize(wxSizeEvent& event)
 {
+	SetCurrentCanvas();
+
 	wxSize size = event.GetSize();
  	m_width = size.GetWidth();
  	m_height = size.GetHeight();
@@ -133,12 +173,6 @@ void IStageCanvas::OnPaint(wxPaintEvent& event)
 	// Makes the OpenGL state that is represented by the OpenGL rendering 
 	// context context current
 	SetCurrentCanvas();
-
-	if (!m_inited)
-	{
-		InitGL();
-		m_inited = true;
-	}
 
 	OnDrawWhole();
 	m_dirty = false;

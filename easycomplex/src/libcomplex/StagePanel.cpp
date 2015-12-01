@@ -47,7 +47,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetEditOP(editop);
 	editop->Release();
 
-	d2d::IStageCanvas* canvas = new StageCanvas(this, library);
+	d2d::IStageCanvas* canvas = new StageCanvas(this, library, true);
 	SetCanvas(canvas);
 	canvas->Release();
 

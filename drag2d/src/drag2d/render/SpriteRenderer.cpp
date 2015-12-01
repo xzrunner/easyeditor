@@ -12,6 +12,7 @@
 #include "view/Camera.h"
 #include "render/LabelNew.h"
 #include "render/PrimitiveDraw.h"
+#include "render/RenderContext.h"
 #include "common/color_config.h"
 
 namespace d2d
@@ -204,14 +205,17 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 	dst[2] = Vector(dst_rect.xMax, dst_rect.yMax);
 	dst[3] = Vector(dst_rect.xMin, dst_rect.yMax);
 
+	RenderContext* context = RenderContext::GetCurrContext();
+
 	Vector offset;
 	float scale;
-	mgr->GetModelView(offset, scale);
+	context->GetModelView(offset, scale);
 
-	mgr->SetModelView(Vector(0, 0), 1);
+	context->SetModelView(Vector(0, 0), 1);
 	Rect r = sprite->GetSymbol().GetSize();
-	mgr->SetProjection(r.xLength(), r.yLength());
-	glViewport(0, 0, r.xLength(), r.yLength());
+	context->SetProjection(r.xLength(), r.yLength());
+	// glViewport no need, from DrawCallBatching?
+//	glViewport(0, 0, r.xLength(), r.yLength());
 
 	BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
@@ -219,9 +223,10 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 
 	mgr->Commit();
 
-	mgr->SetModelView(offset, scale);
-	mgr->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
-	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	context->SetModelView(offset, scale);
+	context->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	// glViewport no need, from DrawCallBatching?
+//	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
 }
 
 void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
@@ -237,14 +242,17 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	RenderContext* context = RenderContext::GetCurrContext();
+
 	Vector offset;
 	float scale;
-	mgr->GetModelView(offset, scale);
+	context->GetModelView(offset, scale);
 
-	mgr->SetModelView(Vector(0, 0), 1);
+	context->SetModelView(Vector(0, 0), 1);
 	Rect r = sprite->GetSymbol().GetSize();
-	mgr->SetProjection(r.xLength(), r.yLength());
-	glViewport(0, 0, r.xLength(), r.yLength());
+	context->SetProjection(r.xLength(), r.yLength());
+	// glViewport no need, from DrawCallBatching?
+//	glViewport(0, 0, r.xLength(), r.yLength());
 
 	BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
@@ -255,9 +263,10 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 
 	mgr->Commit();
 
-	mgr->SetModelView(offset, scale);
-	mgr->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
-	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	context->SetModelView(offset, scale);
+	context->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	// glViewport no need, from DrawCallBatching?
+//	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
 }
 
 void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const

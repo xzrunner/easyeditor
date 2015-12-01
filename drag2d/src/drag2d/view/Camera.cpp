@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "interfaces.h"
 
-#include "render/RenderContext.h"
+#include "render/ShaderContext.h"
 
 namespace d2d
 {
@@ -57,7 +57,7 @@ void Camera::UpdateModelView() const
 // 	ShaderMgr* shader = ShaderMgr::Instance();
 // 	shader->SetModelView(-m_center, 1/m_scale);
 
-	RenderContext::SetModelView(-m_center, 1/m_scale);
+	ShaderContext::SetModelView(-m_center, 1/m_scale);
 }
 
 } // d2d

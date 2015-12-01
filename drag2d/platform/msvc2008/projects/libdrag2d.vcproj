@@ -1082,6 +1082,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderContext.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderContext.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\render\ScreenCache.cpp"
 				>
 			</File>
@@ -1110,6 +1118,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\Exception.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\GL.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\GL.h"
 					>
 				</File>
 				<File
@@ -1293,14 +1309,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\render\RenderContext.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\RenderContext.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
 					>
 				</File>
@@ -1314,6 +1322,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\Shader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderContext.h"
 					>
 				</File>
 				<File

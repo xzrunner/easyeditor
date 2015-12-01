@@ -6,7 +6,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/Camera.h"
-#include "render/RenderContext.h"
+#include "render/ShaderContext.h"
 
 #include <dtex_cs.h>
 #include <dtex_screen.h>
@@ -91,7 +91,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 		spr->GetSymbol().Draw(t);
 	}
 
-	RenderContext::Flush();
+	ShaderContext::Flush();
 }
 
 void ScreenCache::Draw(const Camera* cam)

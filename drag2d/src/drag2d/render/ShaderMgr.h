@@ -51,7 +51,6 @@ public:
 	bool IsOpenBufferData() const;
 
 	void SetModelView(const Vector& offset, float scale);
-	void GetModelView(Vector& offset, float& scale);
 
 	int AddShapeShader(d2d::ShapeShader* shader);
 	void SetShapeShader(int idx);
@@ -80,10 +79,6 @@ private:
 	std::vector<ShapeShader*> m_all_shape_shader;
 
 	int m_version;
-
-	// cache model view
-	Vector m_offset;
-	float m_scale;
 
 }; // ShaderMgr
 

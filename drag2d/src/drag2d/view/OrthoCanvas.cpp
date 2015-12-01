@@ -2,8 +2,7 @@
 #include "Camera.h"
 
 #include "render/ShaderMgr.h"
-
-#include <gl/glu.h>
+#include "render/GL.h"
 
 namespace d2d
 {
@@ -44,22 +43,15 @@ void OrthoCanvas::OnSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	// Makes the OpenGL state that is represented by the OpenGL rendering 
-	// context context current
-	if (IsInited()) {
-		SetCurrentCanvas();
-	}
-
 	d2d::TwoPassCanvas::OnSize(w, h);
-
-	glViewport(0, 0, w, h);
 
  	m_screen.SetSize(w, h);
  	m_screen.SetCamera();
 
 	m_camera->UpdateModelView();
 
-	ShaderMgr::Instance()->SetProjection(w, h);
+	RenderContext::GetCurrContext()->SetProjection(w, h);
+	GL::Viewport(0, 0, w, h);
 }
 
 } // d2d

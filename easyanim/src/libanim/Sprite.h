@@ -24,7 +24,7 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual bool Update(int version) { return true; }
+	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 

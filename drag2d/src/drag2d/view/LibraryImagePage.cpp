@@ -43,7 +43,6 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 				dlg.ShowModal();
 			}
 		}
-		ResetViewportSJ::Instance()->Reset();
 	}
 }
 

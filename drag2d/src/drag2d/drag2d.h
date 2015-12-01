@@ -173,7 +173,7 @@
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
 #include "render/ShaderMgr.h"
-#include "render/RenderContext.h"
+#include "render/ShaderContext.h"
 #include "render/IShader.h"
 #include "render/LabelNew.h"
 #include "render/SpriteShader.h"
@@ -183,6 +183,7 @@
 #include "render/DrawCallBatching.h"
 #include "render/ScreenCache.h"
 #include "render/SpatialIndex.h"
+#include "render/RenderContext.h"
 
 #include "message/subject_id.h"
 #include "message/ClearPanelSJ.h"

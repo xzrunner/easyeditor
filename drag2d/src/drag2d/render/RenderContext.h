@@ -1,38 +1,39 @@
 #ifndef _D2D_RENDER_CONTEXT_H_
 #define _D2D_RENDER_CONTEXT_H_
 
+#include "common/Vector.h"
+
 namespace d2d
 {
-
-class ShaderMgrBase;
-class Vector;
 
 class RenderContext
 {
 public:
-	static void SetShader2DMgr(ShaderMgrBase* mgr) {
-		m_mgr2 = mgr;
+	RenderContext();
+
+	void SetModelView(const Vector& offset, float scale);
+	void SetProjection(int width, int height);
+
+	void GetModelView(Vector& offset, float& scale) { 
+		offset = m_mod_offset; 
+		scale = m_mod_scale;
 	}
-	static void SetShader3DMgr(ShaderMgrBase* mgr) {
-		m_mgr3 = mgr;
+	void GetProjection(int& width, int& height) { 
+		width = m_proj_width; 
+		height = m_proj_height;
 	}
 
-	static void Reload();
-	static void Flush();
-	static void Reset();
-
-	static void Bind2d();
-	static void Bind3d();
-
-	static void SetModelView(const Vector& offset, float scale);
+	static void SetCurrContext(RenderContext* context) { m_current = context; }
+	static RenderContext* GetCurrContext() { return m_current; }
 
 private:
-	static void Bind(ShaderMgrBase* mgr);
+	Vector m_mod_offset;
+	float m_mod_scale;
+
+	int m_proj_width, m_proj_height;
 
 private:
-	static ShaderMgrBase* m_curr;
-	static ShaderMgrBase* m_mgr2;
-	static ShaderMgrBase* m_mgr3;
+	static RenderContext* m_current;
 
 }; // RenderContext
 

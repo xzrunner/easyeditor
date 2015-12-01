@@ -6,6 +6,8 @@
 #include "common/Exception.h"
 #include "common/Matrix.h"
 #include "render/SpriteRenderer.h"
+#include "render/RenderContext.h"
+#include "render/GL.h"
 
 #include <gl/glew.h>
 
@@ -183,12 +185,21 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	}	
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	RenderContext* context = RenderContext::GetCurrContext();
+
+	Vector last_offset;
+	float last_scale;
+	context->GetModelView(last_offset, last_scale);
+
+	int last_w, last_h;
+	context->GetProjection(last_w, last_h);
+
 	d2d::Rect rect = symbol->GetSize();
 	int w = rect.xLength() * scale,
 		h = rect.yLength() * scale;
-	shader->SetModelView(Vector(0, 0), 1);
-	shader->SetProjection(w, h);
-	glViewport(0, 0, w, h);
+	context->SetModelView(Vector(0, 0), 1);
+	context->SetProjection(w, h);
+	GL::Viewport(0, 0, w, h);
 
 	Matrix mt;
 	float dx = -symbol->GetSize().xCenter();
@@ -196,10 +207,15 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	mt.translate(dx, dy);
 	SpriteRenderer::Instance()->Draw(symbol, mt, d2d::Vector(0, 0), 0.0f, scale, -scale);
 
-	// set fbo to force flush
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
+	shader->Commit();
+
 	shader->SetFBO(0);
 	shader->SetTexture(0);
+
+	context->SetModelView(last_offset, last_scale);
+	context->SetProjection(last_w, last_h);
+	GL::Viewport(0, 0, last_w, last_h);
 }
 
 void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, float dx, float dy)
@@ -213,9 +229,18 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	shader->SetModelView(Vector(0, 0), 1);
-	shader->SetProjection(width, height);
-	glViewport(0, 0, width, height);
+	RenderContext* context = RenderContext::GetCurrContext();
+
+	Vector last_offset;
+	float last_scale;
+	context->GetModelView(last_offset, last_scale);
+
+	int last_w, last_h;
+	context->GetProjection(last_w, last_h);
+
+	context->SetModelView(Vector(0, 0), 1);
+	context->SetProjection(width, height);
+	GL::Viewport(0, 0, width, height);
 
 	Matrix mt;
 	mt.setScale(1, -1);
@@ -223,15 +248,19 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 	SpriteRenderer::Instance()->Draw(sprite, mt, Colorf(1,1,1,1), Colorf(0,0,0,0), 
 		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), false);
 
-	// set fbo to force flush
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
+	shader->Commit();
+
 	shader->SetFBO(0);
 	shader->SetTexture(0);
+
+	context->SetModelView(last_offset, last_scale);
+	context->SetProjection(last_w, last_h);	
+	GL::Viewport(0, 0, last_w, last_h);
 }
 
 void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 
 	if (clear) {
@@ -239,15 +268,31 @@ void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	shader->SetModelView(Vector(0, 0), 1);
-	shader->SetProjection(width, height);
-	glViewport(0, 0, width, height);
+	RenderContext* context = RenderContext::GetCurrContext();
+
+	Vector last_offset;
+	float last_scale;
+	context->GetModelView(last_offset, last_scale);
+
+	int last_w, last_h;
+	context->GetProjection(last_w, last_h);
+
+	ShaderMgr* shader = ShaderMgr::Instance();
+	context->SetModelView(Vector(0, 0), 1);
+	context->SetProjection(width, height);
+	GL::Viewport(0, 0, width, height);
 
 	Matrix mt;
 	mt.setScale(1, -1);
 	shape->draw(mt);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
+	shader->Commit();
+
+	context->SetModelView(last_offset, last_scale);
+	context->SetProjection(last_w, last_h);	
 }
 
 }

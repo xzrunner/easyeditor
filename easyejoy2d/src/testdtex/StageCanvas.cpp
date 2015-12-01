@@ -41,7 +41,7 @@ void StageCanvas::OnSize(int w, int h)
 
 	m_camera->UpdateModelView();
 
-	d2d::ShaderMgr::Instance()->SetProjection(w, h);
+	d2d::RenderContext::GetCurrContext()->SetProjection(w, h);
 	//////////////////////////////////////////////////////////////////////////
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();

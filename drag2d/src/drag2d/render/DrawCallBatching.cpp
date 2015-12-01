@@ -2,6 +2,7 @@
 
 #include "dataset/Image.h"
 #include "render/ShaderMgr.h"
+#include "render/RenderContext.h"
 
 #include <dtex.h>
 
@@ -58,23 +59,19 @@ static int _get_target()
 	return ShaderMgr::Instance()->GetFboID();
 }
 
-static int ori_width, ori_height;
-static Vector ori_offset;
-static float ori_scale;
+static Vector LAST_OFFSET;
+static float LAST_SCALE;
+static int LAST_WIDTH, LAST_HEIGHT;
 
 static void _draw_begin() 
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
+	RenderContext* context = RenderContext::GetCurrContext();
+	context->GetModelView(LAST_OFFSET, LAST_SCALE);
+	context->GetProjection(LAST_WIDTH, LAST_HEIGHT);
 
-	int viewport[4];
-	glGetIntegerv(GL_VIEWPORT, viewport);
-	ori_width = viewport[2];
-	ori_height = viewport[3];
+	context->SetModelView(Vector(0, 0), 1);
+	context->SetProjection(2, 2);
 
-	shader->GetModelView(ori_offset, ori_scale);
-
-	shader->SetModelView(Vector(0, 0), 1);
-	shader->SetProjection(2, 2);
 // 	glViewport(0, 0, 2, 2);
 }
 
@@ -86,13 +83,14 @@ static void _draw(const float vb[16])
 
 static void _draw_end()
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
+	ShaderMgr::Instance()->Flush();
 
-	shader->Flush();
 
-	shader->SetModelView(ori_offset, ori_scale);
-	shader->SetProjection(ori_width, ori_height);
-// 	glViewport(0, 0, ori_width, ori_height);
+	RenderContext* context = RenderContext::GetCurrContext();
+	context->SetModelView(LAST_OFFSET, LAST_SCALE);
+	context->SetProjection(LAST_WIDTH, LAST_HEIGHT);
+
+// 	glViewport(0, 0, ORI_WIDTH, ORI_HEIGHT);
 }
 
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)

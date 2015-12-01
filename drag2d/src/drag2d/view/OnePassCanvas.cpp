@@ -1,6 +1,6 @@
 #include "OnePassCanvas.h"
 
-#include "render/RenderContext.h"
+#include "render/ShaderContext.h"
 #include "render/ShaderMgrBase.h"
 
 namespace d2d
@@ -18,7 +18,7 @@ void OnePassCanvas::OnDrawWhole() const
  
  	OnDrawSprites();
  
-	RenderContext::Flush();
+	ShaderContext::Flush();
 }
 
 }
