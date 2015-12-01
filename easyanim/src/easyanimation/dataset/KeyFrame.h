@@ -8,13 +8,13 @@
 namespace eanim
 {
 
-class Controller;
+class LayersMgr;
 class Layer;
 
 class KeyFrame : public d2d::Object
 {
 public:
-	KeyFrame(Controller* ctrl, int time);
+	KeyFrame(LayersMgr* layers, int time);
 	~KeyFrame();
 
 	void SetLayer(Layer* layer) {
@@ -60,7 +60,7 @@ private:
 	bool IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1) const;
 
 private:
-	Controller* m_ctrl;
+	LayersMgr* m_layers;
 
 	int m_time;
 

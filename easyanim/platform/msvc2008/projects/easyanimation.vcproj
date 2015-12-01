@@ -672,6 +672,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="region"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\GetSelectedRegionSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\GetSelectedRegionSJ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\SetSelectedRegionSJ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\message\SetSelectedRegionSJ.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"

@@ -6,36 +6,35 @@
 #include "dataset/KeyFrame.h"
 #include "view/KeysPanel.h"
 #include "view/StagePanel.h"
-#include "frame/Controller.h"
 
 #include <wx/clipbrd.h>
 
 namespace eanim
 {
 
-KeysContentEdit::KeysContentEdit(Controller* ctrl)
-	: m_ctrl(ctrl)
+KeysContentEdit::KeysContentEdit(const LayersMgr& layers, KeysPanel& keys_panel)
+	: m_layers(layers)
+	, m_keys_panel(keys_panel)
 {
 	m_last_row = m_last_col = -1;
 }
 
 void KeysContentEdit::OnMouseLeftDown(int row, int col)
 {
-	LayersMgr& layers = m_ctrl->GetLayers();
-	if (row >= layers.Size()) {
+	if (row >= m_layers.Size()) {
 		return;
 	}
 
 	m_last_col = col;
 	m_last_row = row;
-	if (m_ctrl->GetStagePanel()->GetKeyState(WXK_SHIFT)) {
-		m_ctrl->GetKeysPanel()->SetSelectRegion(row, col);
+	if (d2d::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
+		m_keys_panel->SetSelectRegion(row, col);
 	} else {
-		m_ctrl->GetKeysPanel()->SetSelectPos(row, col);
+		m_keys_panel->SetSelectPos(row, col);
 	}
 
 	bool selected = false;
-	Layer* layer = layers.GetLayer(layers.Size() - row - 1);
+	Layer* layer = m_layers.GetLayer(m_layers.Size() - row - 1);
 	if (layer)
 	{
 		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
@@ -45,11 +44,11 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 			selected = true;
 			KeyFramePropertySetting* property = 
 				new KeyFramePropertySetting(itr->second);
-			m_ctrl->GetPropertyPanel()->SetPropertySetting(property);
+			d2d::SetPropertySettingSJ::Instance()->Set(property);
 		}
 	}
 	if (!selected) {
-		m_ctrl->GetPropertyPanel()->SetPropertySetting(NULL);
+		d2d::SetPropertySettingSJ::Instance()->Set(NULL);
 	}
 }
 
@@ -64,17 +63,17 @@ void KeysContentEdit::OnMouseDragging(int row, int col)
 		return;
 	}
 
-	if (row == m_last_row && row < m_ctrl->GetLayers().Size()) {
+	if (row == m_last_row && row < m_layers.Size()) {
 		int col_min = std::min(m_last_col, col),
 			col_max = std::max(m_last_col, col);
-		m_ctrl->GetKeysPanel()->UpdateSelectRegion(col_min, col_max);
+		m_keys_panel->UpdateSelectRegion(col_min, col_max);
 	}
 }
 
 void KeysContentEdit::CopySelection()
 {
 	int row, col_min, col_max;
-	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
+	m_keys_panel->GetSelectRegion(row, col_min, col_max);
 
 	if (row == -1) {
 		return;
@@ -82,9 +81,8 @@ void KeysContentEdit::CopySelection()
 
 	Json::Value value;
 
-	LayersMgr& layers = m_ctrl->GetLayers();
-	int index = layers.Size() - row - 1;
-	Layer* layer = layers.GetLayer(index);
+	int index = m_layers.Size() - row - 1;
+	Layer* layer = m_layers.GetLayer(index);
  	const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
  	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
  		itr_end = frames.upper_bound(col_max + 1);
@@ -144,15 +142,14 @@ void KeysContentEdit::PasteSelection()
 	//////////////////////////////////////////////////////////////////////////
 
 	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
+	m_keys_panel->GetSelectPos(row, col);
 	if (row == -1 || col == -1) {
 		wxTheClipboard->Close();
 		return;
 	}
 
-	LayersMgr& layers = m_ctrl->GetLayers();
-	size_t index = layers.Size() - row - 1;
-	Layer* layer = layers.GetLayer(index);
+	size_t index = m_layers.Size() - row - 1;
+	Layer* layer = m_layers.GetLayer(index);
 
 	for (int iframe = 0, n = value["frame"].size(); iframe < n; ++iframe) 
 	{
@@ -184,7 +181,7 @@ void KeysContentEdit::PasteSelection()
 		layer->InsertKeyFrame(frame);
 	}
 
-	m_ctrl->Refresh();
+	d2d::RefreshPanelSJ::Instance()->Refresh();
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -194,18 +191,17 @@ void KeysContentEdit::PasteSelection()
 void KeysContentEdit::DeleteSelection()
 {
 	int row, col_min, col_max;
-	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
+	m_keys_panel->GetSelectRegion(row, col_min, col_max);
 
 	if (row == -1) {
 		return;
 	}
 
- 	LayersMgr& layers = m_ctrl->GetLayers();
- 	int index = layers.Size() - row - 1;
- 	Layer* layer = layers.GetLayer(index);
+ 	int index = m_layers.Size() - row - 1;
+ 	Layer* layer = m_layers.GetLayer(index);
 	if (layer) {
 		d2d::AbstractAtomicOP* aop = layer->RemoveFrameRegion(col_min + 1, col_max + 1);
-		m_ctrl->GetStagePanel()->AddOpRecord(aop);
+		d2d::EditAddRecordSJ::Instance()->Add(aop);
 	}
 }
 

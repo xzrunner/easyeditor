@@ -47,10 +47,12 @@ LanguageEntry KeysContentWidget::entries[] =
 	{ "É¾³ý¹Ø¼üÖ¡", "Delete Key Frame" }
 };
 
-KeysContentWidget::KeysContentWidget(wxWindow* parent, Controller* ctrl, const LayersMgr& layers)
+KeysContentWidget::KeysContentWidget(wxWindow* parent, const LayersMgr& layers,
+									 KeysPanel& keys_panel)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 	, m_editop(ctrl)
 	, m_layers(layers)
+	, m_keys_panel(keys_panel)
 {
 	m_curr_layer = m_curr_frame = -1;
 
@@ -123,9 +125,9 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
-		m_ctrl->GetStagePanel()->Undo();
+		d2d::EditUndoSJ::Instance()->Undo();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
-		m_ctrl->GetStagePanel()->Redo();
+		d2d::EditRedoSJ::Instance()->Redo();
 	}
 }
 
@@ -137,32 +139,32 @@ void KeysContentWidget::OnKeyUp(wxKeyEvent& event)
 
 KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row == -1 || col == -1) 
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	if (layer == -1 || frame == -1) {
 		return NULL;
+	}
 
-	LayersMgr& layers = m_ctrl->GetLayers();
-	Layer* layer = layers.GetLayer(layers.Size() - row - 1);
-	if (!layer) 
+	Layer* layer = m_layers.GetLayer(layer);
+	if (!layer) {
 		return NULL;
-	else 
-		return layer->GetCurrKeyFrame(col + 1);
+	} else {
+		return layer->GetCurrKeyFrame(frame + 1);
+	}
 }
 
 bool KeysContentWidget::isPosOnKeyFrame() const
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row == -1 || col == -1) 
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	if (layer == -1 || frame == -1) {
 		return false;
+	}
 
-	LayersMgr& layers = m_ctrl->GetLayers();
-	Layer* layer = layers.GetLayer(layers.Size() - row - 1);
-	if (!layer) 
+	Layer* layer = m_layers.GetLayer(layer);
+	if (!layer) {
 		return false;
-	else 
-	{
+	} else {
 		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		return frames.find(col + 1) != frames.end();
 	}
@@ -175,7 +177,7 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 	dc.SetBrush(wxBrush(LIGHT_GRAY));
 	dc.DrawRectangle(GetSize());
 
-	const size_t size = m_ctrl->GetLayers().Size();
+	const size_t size = m_layers.Size();
 	const float width = FRAME_GRID_WIDTH * MAX_FRAME_COUNT,
 		height = FRAME_GRID_HEIGHT * size;
 
@@ -212,11 +214,10 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 {
-	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.Size(); i < n; ++i)
+	for (size_t i = 0, n = m_layers.Size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = layers.GetLayer(storeIndex)->GetAllFrames();
+		const std::map<int, KeyFrame*>& frames = m_layers.GetLayer(storeIndex)->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// during
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -259,11 +260,10 @@ void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 {
-	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.Size(); i < n; ++i)
+	for (size_t i = 0, n = m_layers.Size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = layers.GetLayer(storeIndex)->GetAllFrames();
+		const std::map<int, KeyFrame*>& frames = m_layers.GetLayer(storeIndex)->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// key frame start (circle)
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -295,20 +295,29 @@ void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawCurrPosFlag(wxBufferedPaintDC& dc)
 {
-	const float x = FRAME_GRID_WIDTH * (m_ctrl->frame() - 0.5f);
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	if (frame < 0) {
+		return;
+	}
+	const float x = FRAME_GRID_WIDTH * (frame - 0.5f);
 	dc.SetPen(DARK_RED);
-	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * m_ctrl->GetLayers().Size());
+	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * m_layers.Size())
 }
 
 void KeysContentWidget::drawSelected(wxBufferedPaintDC& dc)
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row != -1 && col != -1)
+	int layer, frame;
+	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	if (layer != -1 && frame != -1)
 	{
 		dc.SetPen(wxPen(DARK_BLUE));
 		dc.SetBrush(wxBrush(DARK_BLUE));
-		dc.DrawRectangle(FRAME_GRID_WIDTH * col, FRAME_GRID_HEIGHT * row, FRAME_GRID_WIDTH, FRAME_GRID_HEIGHT);
+		dc.DrawRectangle(
+			FRAME_GRID_WIDTH * (col + 1), 
+			FRAME_GRID_HEIGHT * (m_layers.Size() - 1 - row), 
+			FRAME_GRID_WIDTH, 
+			FRAME_GRID_HEIGHT);
 	}
 
 	int col_min, col_max;

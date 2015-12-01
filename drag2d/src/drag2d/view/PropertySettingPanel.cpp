@@ -16,6 +16,9 @@
 #include "message/SelectShapeSJ.h"
 #include "message/SelectShapeSetSJ.h"
 #include "message/RemoveShapeSJ.h"
+#include "message/ClearPanelSJ.h"
+
+#include "message/panel_msg.h"
 
 #include <algorithm>
 
@@ -40,6 +43,10 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 	m_subjects.push_back(SelectShapeSJ::Instance());
 	m_subjects.push_back(SelectShapeSetSJ::Instance());
 	m_subjects.push_back(RemoveShapeSJ::Instance());
+
+	m_subjects.push_back(ClearPanelSJ::Instance());
+
+	m_subjects.push_back(SetPropertySettingSJ::Instance());
 
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
@@ -93,6 +100,10 @@ void PropertySettingPanel::Notify(int sj_id, void* ud)
 
 	case MSG_CLEAR_PANEL:
 		ClearSelection();
+		break;
+
+	case MSG_SET_PROPERTY_SETTING:
+		SetPropertySetting((IPropertySetting*)ud);
 		break;
 	}
 }

@@ -10,8 +10,8 @@
 #include "message/ClearSpriteSJ.h"
 #include "message/ClearPanelSJ.h"
 #include "message/SetCanvasDirtySJ.h"
-#include "message/EditUndoSJ.h"
-#include "message/EditRedoSJ.h"
+
+#include "message/panel_msg.h"
 
 #include <fstream>
 
@@ -58,11 +58,21 @@ void EditPanelImpl::Notify(int sj_id, void* ud)
 	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
 		break;
+
 	case MSG_EDIT_UNDO:
 		Undo();
 		break;
 	case MSG_EDIT_REDO:
 		Redo();
+		break;
+	case MSG_EDIT_ADD_RECORD:
+		AddOpRecord((AbstractAtomicOP*)ud);
+		break;
+	case MSG_GET_KEY_STATE:
+		{
+			GetKeyStateSJ::State* st = (GetKeyStateSJ::State*)ud;
+			st->state = GetKeyState(st->key);
+		}
 		break;
 	}
 }
@@ -401,8 +411,12 @@ void EditPanelImpl::RegistSubjects()
 {
 	m_subjects.push_back(ClearSpriteSJ::Instance());
 	m_subjects.push_back(ClearPanelSJ::Instance());
+
 	m_subjects.push_back(EditUndoSJ::Instance());
 	m_subjects.push_back(EditRedoSJ::Instance());
+	m_subjects.push_back(EditAddRecordSJ::Instance());
+	m_subjects.push_back(GetKeyStateSJ::Instance());	
+
 	for (int i = 0; i < m_subjects.size(); ++i) {
 		m_subjects[i]->Register(this);
 	}

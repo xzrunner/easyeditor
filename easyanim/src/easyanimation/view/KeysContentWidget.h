@@ -19,7 +19,7 @@ class Controller;
 class KeysContentWidget : public wxPanel, public d2d::Observer
 {
 public:
-	KeysContentWidget(wxWindow* parent, Controller* ctrl, const LayersMgr& layers);
+	KeysContentWidget(wxWindow* parent, const LayersMgr& layers, KeysPanel& keys_panel);
 
 	//
 	//	interface Observer
@@ -90,6 +90,8 @@ private:
 
 private:
 	const LayersMgr& m_layers;
+
+	KeysPanel& m_keys_panel;
 
 	KeysContentEdit m_editop;
 

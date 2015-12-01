@@ -1,8 +1,7 @@
 #include "KeyFrame.h"
+#include "LayersMgr.h"
 #include "Layer.h"
 #include "SpriteUserData.h"
-
-#include "frame/Controller.h"
 
 #include <easymesh.h>
 #include <easyanim.h>
@@ -10,8 +9,8 @@
 namespace eanim
 {
 
-KeyFrame::KeyFrame(Controller* ctrl, int time)
-	: m_ctrl(ctrl)
+KeyFrame::KeyFrame(LayersMgr* layers, int time)
+	: m_layers(layers)
 	, m_layer(NULL)
 {
 	m_time = time;
@@ -34,7 +33,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = src->m_sprites[i]->Clone();
-		set_sprite_user_data(s, &m_ctrl->GetLayers(), m_layer, this);
+		set_sprite_user_data(s, &m_layers, m_layer, this);
 		m_sprites.push_back(s);
 
 		if (m_layer) {
@@ -52,7 +51,7 @@ void KeyFrame::Insert(d2d::ISprite* sprite)
 {
 	sprite->Retain();
 
-	set_sprite_user_data(sprite, &m_ctrl->GetLayers(), m_layer, this);
+	set_sprite_user_data(sprite, &m_layers, m_layer, this);
 	m_sprites.push_back(sprite);
 	if (m_layer) {
 		sprite->setObserver(&m_layer->GetSpriteObserver());
