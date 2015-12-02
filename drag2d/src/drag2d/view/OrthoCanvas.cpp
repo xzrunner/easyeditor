@@ -3,6 +3,7 @@
 
 #include "render/ShaderMgr.h"
 #include "render/GL.h"
+#include "render/RenderContext.h"
 
 namespace d2d
 {

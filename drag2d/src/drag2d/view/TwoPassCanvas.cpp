@@ -79,8 +79,8 @@ void TwoPassCanvas::OnDrawWhole() const
 {
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
 
-// 	if (ScreenCache::IsOpen()) 
-// 	{
+ 	//if (ScreenCache::IsOpen()) 
+ 	{
 		//////////////////////////////////////////////////////////////////////////
 		// Draw to Target
 		//////////////////////////////////////////////////////////////////////////
@@ -102,16 +102,16 @@ void TwoPassCanvas::OnDrawWhole() const
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		ScreenCache::Instance()->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
-// 	} 
-// 	else 
-// 	{
-// 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-// 		glClear(GL_COLOR_BUFFER_BIT);
-// 
-// 		OnDrawSprites();
-// 
-// 		ShaderContext::Flush();
-// 	}
+ 	} 
+ 	//else 
+ 	//{
+ 	//	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+ 	//	glClear(GL_COLOR_BUFFER_BIT);
+ 
+ 	//	OnDrawSprites();
+ 
+ 	//	ShaderContext::Flush();
+ 	//}
 }
 
 #endif // OPEN_SCREEN_CACHE

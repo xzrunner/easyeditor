@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "interfaces.h"
 
-#include "render/ShaderContext.h"
+#include "render/RenderContext.h"
 
 namespace d2d
 {
@@ -54,10 +54,7 @@ Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height
 
 void Camera::UpdateModelView() const
 {
-// 	ShaderMgr* shader = ShaderMgr::Instance();
-// 	shader->SetModelView(-m_center, 1/m_scale);
-
-	ShaderContext::SetModelView(-m_center, 1/m_scale);
+	RenderContext::GetCurrContext()->SetModelView(-m_center, 1/m_scale);
 }
 
 } // d2d
