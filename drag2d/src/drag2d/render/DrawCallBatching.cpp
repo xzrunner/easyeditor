@@ -214,7 +214,7 @@ static const char* CFG =
 	"	\"open_c3\" : false,	 \n"
 	"	\"open_cg\" : true,	 \n"
 	"	\"open_cs\" : true,	 \n"
-	"	\"c2_tex_size\" : 2048	 \n"
+	"	\"c2_tex_size\" : 512	 \n"
 	"} \n"
 	;
 
@@ -249,6 +249,8 @@ int DrawCallBatching::Load(const Image* img)
 	m_path2id.insert(std::make_pair(filepath, key));
 	dtexf_c2_load_tex(img->GetTexID(), img->GetOriginWidth(), img->GetOriginHeight(), key);
 
+	m_curr_buf.push_back(filepath);
+
 	return key;
 }
 
@@ -259,6 +261,9 @@ void DrawCallBatching::LoadEnd()
 
 void DrawCallBatching::ReloadBegin()
 {
+// 	m_context_buf.push_back(m_curr_buf);
+// 	m_curr_buf.clear();
+
 	dtexf_c2_reload_begin();
 }
 
@@ -277,6 +282,23 @@ void DrawCallBatching::ReloadEnd()
 	dtexf_c2_reload_end();
 }
 
+void DrawCallBatching::PopContext()
+{
+// 	for (int i = 0, n = m_curr_buf.size(); i < n; ++i) {
+// 		const std::string& filepath = m_curr_buf[i];
+// 		std::map<std::string, int>::iterator itr = m_path2id.find(filepath);
+// 		assert(itr != m_path2id.end());
+// 		dtexf_c2_remove_tex(itr->second);
+// 		m_path2id.erase(itr);		
+// 	}
+// 	m_curr_buf.clear();
+// 
+// 	if (!m_context_buf.empty()) {
+// 		m_curr_buf = m_context_buf.back();
+// 		m_context_buf.pop_back();		
+// 	}
+}
+
 float* DrawCallBatching::Query(const Image* img, int* id)
 {
 	int key;
@@ -284,7 +306,9 @@ float* DrawCallBatching::Query(const Image* img, int* id)
 	if (itr != m_path2id.end()) {
 		key = itr->second;
 	} else {
+		dtexf_c2_load_begin();
 		key = Load(img);
+		dtexf_c2_load_end();
 	}
 	return dtexf_c2_query_tex(key, id);
 }

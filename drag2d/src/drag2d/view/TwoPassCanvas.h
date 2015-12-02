@@ -10,6 +10,7 @@ class TwoPassCanvas : public IStageCanvas
 {
 public:
 	TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
+	virtual ~TwoPassCanvas();
 
 protected:
 	virtual void OnSize(int w, int h);

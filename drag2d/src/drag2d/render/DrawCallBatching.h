@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 struct dtex_cg;
 
@@ -22,6 +23,8 @@ public:
 	void Reload(const Image* img);
 	void ReloadEnd();
 
+	void PopContext();
+
 	float* Query(const Image* img, int* id);
 
 	void Clear();
@@ -40,6 +43,9 @@ private:
 
 private:
 	std::map<std::string, int> m_path2id;
+
+	std::vector<std::vector<std::string> > m_context_buf;
+	std::vector<std::string> m_curr_buf;
 
 private:
 	static DrawCallBatching* m_instance;

@@ -23,6 +23,11 @@ TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 	m_scr_style.add_col = BLACK;
 }
 
+TwoPassCanvas::~TwoPassCanvas()
+{
+	DrawCallBatching::Instance()->PopContext();
+}
+
 void TwoPassCanvas::OnSize(int w, int h)
 {
 	if (Config::Instance()->IsUseDTex()) {
