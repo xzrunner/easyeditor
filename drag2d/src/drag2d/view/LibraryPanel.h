@@ -6,6 +6,8 @@
 #include <wx/wx.h>
 #include <wx/notebook.h>
 
+#include "message/Observer.h"
+
 namespace d2d
 {
 
@@ -15,7 +17,7 @@ class SymbolMgr;
 class LibraryList;
 class IVisitor;
 
-class LibraryPanel : public wxPanel
+class LibraryPanel : public wxPanel, public Observer
 {
 public:
 	LibraryPanel(wxWindow* parent);
@@ -47,6 +49,12 @@ public:
 
 	ILibraryPage* GetCurrPage() { return m_selected; }
 	void SetCurrPage(int idx);
+ 
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InitLayout();

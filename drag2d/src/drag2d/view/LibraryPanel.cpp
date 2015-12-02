@@ -7,6 +7,8 @@
 #include "common/visitors.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/ImageSymbol.h"
+#include "message/ClearPanelSJ.h"
+#include "message/subject_id.h"
 
 namespace d2d
 {
@@ -18,6 +20,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	InitLayout();
 
 	SetDropTarget(new LibraryPanelDropTarget(this));
+
+	RegistSubject(ClearPanelSJ::Instance());
 }
 
 void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
@@ -131,6 +135,16 @@ void LibraryPanel::SetCurrPage(int idx)
 {
 	if (idx >= 0 && idx < m_pages.size()) {
 		m_notebook->SetSelection(idx);
+	}
+}
+
+void LibraryPanel::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_CLEAR_PANEL:
+		Clear();
+		break;
 	}
 }
 
