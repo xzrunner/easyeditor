@@ -14,7 +14,6 @@ class AbstractEditOP : public Object
 {
 public:
 	AbstractEditOP(wxWindow* wnd, EditPanelImpl* stage);
-	virtual ~AbstractEditOP();
 
 	virtual bool OnKeyDown(int keyCode) { return false; }
 	virtual bool OnKeyUp(int keyCode) { return false; }

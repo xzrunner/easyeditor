@@ -46,8 +46,6 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	, m_cfg(cfg)
 	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection())
 {
-	m_stage->Retain();
-
 	m_align.SetOpen(cfg.is_auto_align_open);
 
 	m_selection = spritesImpl->GetSpriteSelection();
@@ -61,8 +59,6 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
 {
-	m_stage->Release();
-
 	m_selection->Release();
 	delete m_op_state;
 }

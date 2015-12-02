@@ -23,8 +23,6 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* contain
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
-	m_stage->Retain();
-
 	m_container = container;
 	m_container->Retain();
 
@@ -35,8 +33,6 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	: MultiSpritesImpl(stage)
 	, m_stage(stage)
 {
-	m_stage->Retain();
-
 	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
 	m_container = new SpritesContainer;
 
@@ -45,8 +41,6 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 
 SpritesPanelImpl::~SpritesPanelImpl()
 {
-	m_stage->Release();
-
 	m_container->Release();
 }
 

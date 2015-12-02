@@ -27,12 +27,10 @@ RightPopupMenu::RightPopupMenu(wxWindow* parent,
 	, m_sprites_impl(sprite_impl)
 	, m_selection(selection)
 {
-	m_stage->Retain();
 }
 
 RightPopupMenu::~RightPopupMenu()
 {
-	m_stage->Release();
 }
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)

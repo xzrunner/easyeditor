@@ -10,13 +10,11 @@ namespace d2d
 PanViewState::PanViewState(EditPanelImpl* stage)
 	: m_stage(stage)
 {
-	m_stage->Retain();
 	m_last_pos.setInvalid();
 }
 
 PanViewState::~PanViewState()
 {
-	m_stage->Release();
 }
 
 void PanViewState::Bind()

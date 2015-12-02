@@ -7,19 +7,9 @@ namespace d2d
 
 AbstractEditOP::AbstractEditOP(wxWindow* wnd, EditPanelImpl* stage)
 	: m_wnd(wnd)
+	, m_stage(stage)
 	, m_cursor(wxCursor(wxCURSOR_ARROW)) 
 {
-	if (stage) {
-		stage->Retain();
-	}
-	m_stage = stage;
-}
-
-AbstractEditOP::~AbstractEditOP()
-{
-	if (m_stage) {
-		m_stage->Release();
-	}
 }
 
 bool AbstractEditOP::OnActive() 
