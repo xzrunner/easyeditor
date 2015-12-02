@@ -485,6 +485,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\history\InsertSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\InsertSpriteAOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\history\MirrorSpriteAOP.cpp"
 					>
 				</File>
@@ -2885,6 +2893,10 @@
 		<Filter
 			Name="message"
 			>
+			<File
+				RelativePath="..\..\..\src\drag2d\message\Observer.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\message\Observer.h"
 				>
