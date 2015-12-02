@@ -132,9 +132,9 @@ void StageCanvas::OnDrawSprites() const
 	m_stat.End();
 
 #ifdef _DEBUG 
-// 	if (d2d::Config::Instance()->IsUseDTex()) {
-// 		d2d::DrawCallBatching::Instance()->DebugDraw();
-// 	}
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->DebugDraw();
+	}
 #endif
 
 	m_stat.DrawTime(m_screen);
