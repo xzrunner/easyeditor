@@ -31,7 +31,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	MODULE_STAGE.impl = this;
 
-	d2d::ClearSpriteSJ::Instance()->Register(this);
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -53,12 +53,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
 
-	d2d::ClearSpriteSJ::Instance()->Register(this);
-}
-
-StagePanel::~StagePanel()
-{
-	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
 bool StagePanel::Update(int version)
@@ -72,13 +67,9 @@ bool StagePanel::Update(int version)
 	return false;
 }
 
-void StagePanel::Notify(int sj_id, void* ud)
+void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::SpritesPanelImpl::Notify(sj_id, ud);
-
-	if (!IsObserveEnable()) {
-		return;
-	}
+	d2d::SpritesPanelImpl::OnNotify(sj_id, ud);
 
 	if (sj_id == d2d::MSG_CLEAR_SPRITE) {
 		Clear();

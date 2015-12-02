@@ -14,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
-	init(NULL);
+	Init(NULL);
 
 	InitSubjects();
 }
@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
-	init(library);
+	Init(library);
 
 	InitSubjects();
 }
@@ -48,44 +48,6 @@ StagePanel::~StagePanel()
 	m_symbol->Release();
 	if (m_background) {
 		m_background->Release();
-	}
-
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	d2d::MultiShapesImpl::Notify(sj_id, ud);
-
-	switch (sj_id) 
-	{
-	case d2d::MSG_REMOVE_SHAPE:
-		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->RemoveShape((d2d::IShape*)ud)) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-			}
-		}
-		break;
-	case d2d::MSG_INSERT_SHAPE:
-		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->InsertShape((d2d::IShape*)ud)) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-			}
-		}
-		break;
-	case d2d::MSG_CLEAR_SHAPE:
-		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->ClearShape()) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-			}
-		}
-		break;
-	case d2d::MSG_CLEAR_PANEL:
-		m_symbol->Release();
-		m_symbol = new Symbol;
-		break;
 	}
 }
 
@@ -137,7 +99,7 @@ void StagePanel::CreateShape()
 	}
 }
 
-void StagePanel::init(d2d::LibraryPanel* library)
+void StagePanel::Init(d2d::LibraryPanel* library)
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
@@ -149,12 +111,43 @@ void StagePanel::init(d2d::LibraryPanel* library)
 
 void StagePanel::InitSubjects()
 {
-	m_subjects.push_back(d2d::ClearPanelSJ::Instance());
-	m_subjects.push_back(d2d::RemoveShapeSJ::Instance());
-	m_subjects.push_back(d2d::InsertShapeSJ::Instance());
-	m_subjects.push_back(d2d::ClearShapeSJ::Instance());
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->Register(this);
+	RegistSubject(d2d::ClearPanelSJ::Instance());
+	RegistSubject(d2d::RemoveShapeSJ::Instance());
+	RegistSubject(d2d::InsertShapeSJ::Instance());
+	RegistSubject(d2d::ClearShapeSJ::Instance());
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	d2d::MultiShapesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id) 
+	{
+	case d2d::MSG_REMOVE_SHAPE:
+		if (Shape* shape = m_symbol->getShape()) {
+			if (static_cast<EditShape*>(shape)->RemoveShape((d2d::IShape*)ud)) {
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			}
+		}
+		break;
+	case d2d::MSG_INSERT_SHAPE:
+		if (Shape* shape = m_symbol->getShape()) {
+			if (static_cast<EditShape*>(shape)->InsertShape((d2d::IShape*)ud)) {
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			}
+		}
+		break;
+	case d2d::MSG_CLEAR_SHAPE:
+		if (Shape* shape = m_symbol->getShape()) {
+			if (static_cast<EditShape*>(shape)->ClearShape()) {
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			}
+		}
+		break;
+	case d2d::MSG_CLEAR_PANEL:
+		m_symbol->Release();
+		m_symbol = new Symbol;
+		break;
 	}
 }
 

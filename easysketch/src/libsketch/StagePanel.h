@@ -12,12 +12,6 @@ class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		d2d::LibraryPanel* library);
-	virtual ~StagePanel();
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiSpritesImpl interface
@@ -27,6 +21,12 @@ public:
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
 	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void Insert(d2d::ISprite* spr);

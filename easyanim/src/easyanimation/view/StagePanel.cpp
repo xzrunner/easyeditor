@@ -33,22 +33,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);
 
-	m_subjects.push_back(d2d::ReorderSpriteSJ::Instance());
-	m_subjects.push_back(d2d::ReorderSpriteMostSJ::Instance());
-	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
-	m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
-	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
-	m_subjects.push_back(RemoveLayerSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
-}
-
-StagePanel::~StagePanel()
-{
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
+	RegistSubject(d2d::ReorderSpriteSJ::Instance());
+	RegistSubject(d2d::ReorderSpriteMostSJ::Instance());
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(RemoveLayerSJ::Instance());
 }
 
 bool StagePanel::Update(int version)
@@ -56,54 +46,6 @@ bool StagePanel::Update(int version)
 	CheckUpdateVisitor visitor(version);
 	TraverseSprites(visitor, d2d::DT_ALL, true);
 	return visitor.NeedUpdate();
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	MultiSpritesImpl::Notify(sj_id, ud);
-	
-	switch (sj_id)
-	{
-	case d2d::MSG_REORDER_SPRITE:
-		{
-			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
-			Reorder(p->spr, p->up);
-		}
-		break;
-	case d2d::MSG_REORDER_SPRITE_MOST:
-		{
-			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
-			ReorderMost(p->spr, p->up);
-		}
-		break;
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			Insert(p->spr);
-		}
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		{
-			bool ret = m_ctrl->ClearAllLayer();
-			SetCurrFrameSJ::Instance()->Set(0, 0);
-
-			if (ret) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-			}
-
-			// 	Context* context = Context::Instance();
-			// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-			// 	frame->clear();
-		}
-		break;
-
-	case MSG_REMOVE_LAYER:
-		ClearSelectedSprite();
-		break;
-	}
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, 
@@ -150,6 +92,54 @@ SkeletonData& StagePanel::getSkeletonData()
 {
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	return frame->GetSkeletonData();	
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_REORDER_SPRITE:
+		{
+			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
+			Reorder(p->spr, p->up);
+		}
+		break;
+	case d2d::MSG_REORDER_SPRITE_MOST:
+		{
+			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
+			ReorderMost(p->spr, p->up);
+		}
+		break;
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
+		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		{
+			bool ret = m_ctrl->ClearAllLayer();
+			SetCurrFrameSJ::Instance()->Set(0, 0);
+
+			if (ret) {
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			}
+
+			// 	Context* context = Context::Instance();
+			// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+			// 	frame->clear();
+		}
+		break;
+
+	case MSG_REMOVE_LAYER:
+		ClearSelectedSprite();
+		break;
+	}
 }
 
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)

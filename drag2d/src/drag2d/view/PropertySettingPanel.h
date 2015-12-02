@@ -24,11 +24,6 @@ public:
 	PropertySettingPanel(wxWindow* parent);
 	virtual ~PropertySettingPanel();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void SetPropertySetting(IPropertySetting* setting);
 
 	wxPropertyGrid* GetPropertyGrid() { return m_pg; }
@@ -46,6 +41,11 @@ protected:
 
 	virtual void OnSpriteSelected(ISprite* spr, bool clear);
 	virtual void OnMultiSpriteSelected(SpriteSelection* selection);
+
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InitLayout();
@@ -66,9 +66,6 @@ protected:
 
 	// todo
 	EditPanelImpl* m_stage;
-
-private:
-	std::vector<Subject*> m_subjects;
 
 }; // PropertySettingPanel
 

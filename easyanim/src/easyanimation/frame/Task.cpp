@@ -27,7 +27,7 @@ Task::Task(wxFrame* parent)
 
 	m_widgets.m_library->LoadFromConfig();
 
-	d2d::ClearPanelSJ::Instance()->Register(this);
+	RegistSubject(d2d::ClearPanelSJ::Instance());
 }
 
 Task::~Task()
@@ -35,17 +35,6 @@ Task::~Task()
 	d2d::SymbolMgr::Instance()->Clear();
 	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
-
-	d2d::ClearPanelSJ::Instance()->UnRegister(this);
-}
-
-void Task::Notify(int sj_id, void* ud)
-{
-	if (sj_id == d2d::MSG_CLEAR_PANEL) {
-		m_controller.Clear();
-		m_widgets.m_library->Clear();
-		InsertLayerSJ::Instance()->Insert();
-	}
 }
 
 void Task::Load(const char* filepath)
@@ -90,6 +79,15 @@ void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_widgets.m_stage;
+}
+
+void Task::OnNotify(int sj_id, void* ud)
+{
+	if (sj_id == d2d::MSG_CLEAR_PANEL) {
+		m_controller.Clear();
+		m_widgets.m_library->Clear();
+		InsertLayerSJ::Instance()->Insert();
+	}
 }
 
 void Task::InitLayout()

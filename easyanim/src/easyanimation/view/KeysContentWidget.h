@@ -21,17 +21,18 @@ class KeysContentWidget : public wxPanel, public d2d::Observer
 public:
 	KeysContentWidget(wxWindow* parent, const LayersMgr& layers, KeysPanel& keys_panel);
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void onSize(wxSizeEvent& event);
 	void onPaint(wxPaintEvent& event);
 	void onEraseBackground(wxEraseEvent& event);
 	void onMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	KeyFrame* queryKeyFrameByPos() const;

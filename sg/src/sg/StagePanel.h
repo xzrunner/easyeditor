@@ -16,12 +16,6 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
-	virtual ~StagePanel();
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	void TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
 	void TransGridPosToCoords(int row, int col, d2d::Vector& pos) const;
@@ -54,6 +48,12 @@ public:
 
 	const CheckerBoard& GetCheckBoard() const { return m_checkboard; }
 	CheckerBoard& GetCheckBoard() { return m_checkboard; }
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	d2d::Vector FixSpriteLocation(const d2d::Vector& pos) const;

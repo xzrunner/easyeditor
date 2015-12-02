@@ -13,37 +13,14 @@ AnchorMgr::AnchorMgr()
 	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);
 	OnViewChanged(width, height);
 
-	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
-	m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
-	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
 AnchorMgr::~AnchorMgr()
 {
 	Clear();
-
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void AnchorMgr::Notify(int sj_id, void* ud)
-{
-	switch (sj_id)
-	{
-	case d2d::MSG_INSERT_SPRITE:
-		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		Clear();
-		break;
-	}
 }
 
 void AnchorMgr::OnViewChanged(int width, int height)
@@ -105,6 +82,22 @@ void AnchorMgr::StoreToFile(Json::Value& value) const
 			a_val[j] = spr_val;
 		}
 		value["anchor"][i] = a_val;
+	}
+}
+
+void AnchorMgr::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
 }
 

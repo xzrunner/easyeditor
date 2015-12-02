@@ -22,37 +22,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	m_base_level = 1;
 
-	d2d::InsertSpriteSJ::Instance()->Register(this);
-	d2d::RemoveSpriteSJ::Instance()->Register(this);
-	d2d::ClearSpriteSJ::Instance()->Register(this);
-}
-
-StagePanel::~StagePanel()
-{
-	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
-	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
-	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	d2d::MultiSpritesImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			Insert(p->spr);
-		}
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		Clear();
-		break;
-	}
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
 void StagePanel::TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
@@ -194,6 +166,27 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 			sprite->setSymbol(symbol);
 // 		}
 // 		symbol->Release();
+	}
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
+		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
 }
 

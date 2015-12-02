@@ -26,11 +26,6 @@ public:
 	virtual bool Update(int version);
 
 	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	//
 	// d2d::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(d2d::IVisitor& visitor, 
@@ -70,6 +65,11 @@ protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
 
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
+
 private:
 	void ChangeEditOP();
 
@@ -99,8 +99,6 @@ private:
 	CharacterAllDirections m_chara_dirs;
 
 	bool m_enable_update;
-
-	std::vector<d2d::Subject*> m_sprite_subjects, m_shape_subjects;
 
 }; // StagePanel
 

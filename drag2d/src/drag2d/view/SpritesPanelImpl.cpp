@@ -28,7 +28,7 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, IDataContainer* contain
 	m_container = container;
 	m_container->Retain();
 
-	RegistSubjects();
+	InitSubjects();
 }
 
 SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
@@ -40,7 +40,7 @@ SpritesPanelImpl::SpritesPanelImpl(EditPanelImpl* stage, LibraryPanel* library)
 	m_stage->SetDropTarget(new SpriteDropTarget(stage, library));
 	m_container = new SpritesContainer;
 
-	RegistSubjects();
+	InitSubjects();
 }
 
 SpritesPanelImpl::~SpritesPanelImpl()
@@ -48,17 +48,17 @@ SpritesPanelImpl::~SpritesPanelImpl()
 	m_stage->Release();
 
 	m_container->Release();
-
-	UnRegistSubjects();
 }
 
-void SpritesPanelImpl::Notify(int sj_id, void* ud)
+void SpritesPanelImpl::TraverseSprites(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/,
+									   bool order/* = true*/) const
 {
-	MultiSpritesImpl::Notify(sj_id, ud);
+	m_container->Traverse(visitor, type, order);
+}
 
-	if (!IsObserveEnable()) {
-		return;
-	}
+void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
+{
+	MultiSpritesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
@@ -107,29 +107,13 @@ void SpritesPanelImpl::Notify(int sj_id, void* ud)
 	}
 }
 
-void SpritesPanelImpl::TraverseSprites(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/,
-									   bool order/* = true*/) const
+void SpritesPanelImpl::InitSubjects()
 {
-	m_container->Traverse(visitor, type, order);
-}
-
-void SpritesPanelImpl::RegistSubjects()
-{
-	m_subjects.push_back(ReorderSpriteSJ::Instance());
-	m_subjects.push_back(ReorderSpriteMostSJ::Instance());
-	m_subjects.push_back(InsertSpriteSJ::Instance());
-	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSpriteSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
-}
-
-void SpritesPanelImpl::UnRegistSubjects()
-{
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
+	RegistSubject(ReorderSpriteSJ::Instance());
+	RegistSubject(ReorderSpriteMostSJ::Instance());
+	RegistSubject(InsertSpriteSJ::Instance());
+	RegistSubject(RemoveSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSJ::Instance());
 }
 
 }

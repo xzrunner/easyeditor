@@ -34,78 +34,25 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 	SetBackgroundColour(wxColour(229, 229, 229));
 
-	m_subjects.push_back(SelectSpriteSJ::Instance());
-	m_subjects.push_back(SelectSpriteSetSJ::Instance());
-	m_subjects.push_back(InsertSpriteSJ::Instance());
-	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSpriteSJ::Instance());
+	RegistSubject(SelectSpriteSJ::Instance());
+	RegistSubject(SelectSpriteSetSJ::Instance());
+	RegistSubject(InsertSpriteSJ::Instance());
+	RegistSubject(RemoveSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSJ::Instance());
 
-	m_subjects.push_back(SelectShapeSJ::Instance());
-	m_subjects.push_back(SelectShapeSetSJ::Instance());
-	m_subjects.push_back(RemoveShapeSJ::Instance());
+	RegistSubject(SelectShapeSJ::Instance());
+	RegistSubject(SelectShapeSetSJ::Instance());
+	RegistSubject(RemoveShapeSJ::Instance());
 
-	m_subjects.push_back(ClearPanelSJ::Instance());
+	RegistSubject(ClearPanelSJ::Instance());
 
-	m_subjects.push_back(SetPropertySettingSJ::Instance());
-
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(SetPropertySettingSJ::Instance());
 }
 
 PropertySettingPanel::~PropertySettingPanel()
 {
 	ClearSelection();
-
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-
 	delete m_setting;
-}
-
-void PropertySettingPanel::Notify(int sj_id, void* ud)
-{
-	switch (sj_id)
-	{
-	case MSG_SELECT_SPRITE:
-		{
-			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-			OnSpriteSelected(p->spr, p->clear);
-		}
-		break;
-	case MSG_SELECT_SPRITE_SET:
-		OnMultiSpriteSelected((SpriteSelection*)ud);
-		break;
-	case MSG_INSERT_SPRITE:
-		SetPropertySetting(CreateDefaultProperty());
-		break;
-	case MSG_REMOVE_SPRITE:
-		SetPropertySetting(CreateDefaultProperty());
-		break;
-	case MSG_CLEAR_SPRITE:
-		ClearSelection();
-		SetPropertySetting(CreateDefaultProperty());
-		break;
-
-	case MSG_SELECT_SHAPE:
-		SelectShape((IShape*)ud);
-		break;
-	case MSG_SELECT_SHAPE_SET:
-		SelectShapeSet((ShapeSelection*)ud);
-		break;
-	case MSG_REMOVE_SHAPE:
-		SetPropertySetting(CreateDefaultProperty());
-		break;
-
-	case MSG_CLEAR_PANEL:
-		ClearSelection();
-		break;
-
-	case MSG_SET_PROPERTY_SETTING:
-		SetPropertySetting((IPropertySetting*)ud);
-		break;
-	}
 }
 
 void PropertySettingPanel::SetPropertySetting(IPropertySetting* setting)
@@ -187,6 +134,50 @@ void PropertySettingPanel::OnMultiSpriteSelected(SpriteSelection* selection)
 		OnSpriteSelected(sprites[0], true);
 	} else {
 		SetPropertySetting(new MultiSpritesPropertySetting(sprites));
+	}
+}
+
+void PropertySettingPanel::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			OnSpriteSelected(p->spr, p->clear);
+		}
+		break;
+	case MSG_SELECT_SPRITE_SET:
+		OnMultiSpriteSelected((SpriteSelection*)ud);
+		break;
+	case MSG_INSERT_SPRITE:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+	case MSG_REMOVE_SPRITE:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+	case MSG_CLEAR_SPRITE:
+		ClearSelection();
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+
+	case MSG_SELECT_SHAPE:
+		SelectShape((IShape*)ud);
+		break;
+	case MSG_SELECT_SHAPE_SET:
+		SelectShapeSet((ShapeSelection*)ud);
+		break;
+	case MSG_REMOVE_SHAPE:
+		SetPropertySetting(CreateDefaultProperty());
+		break;
+
+	case MSG_CLEAR_PANEL:
+		ClearSelection();
+		break;
+
+	case MSG_SET_PROPERTY_SETTING:
+		SetPropertySetting((IPropertySetting*)ud);
+		break;
 	}
 }
 

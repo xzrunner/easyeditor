@@ -19,11 +19,6 @@ public:
 	Task(wxFrame* parent);
 	virtual ~Task();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	virtual void Load(const char* filepath);
 	virtual void Store(const char* filepath) const;
 
@@ -34,6 +29,12 @@ public:
 	virtual const d2d::EditPanel* GetEditPanel() const;
 
 	Controller* GetController() { return &m_controller; }
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InitLayout();

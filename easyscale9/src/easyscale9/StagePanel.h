@@ -13,12 +13,6 @@ class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
-	virtual ~StagePanel();
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiSpritesImpl interface
@@ -38,6 +32,12 @@ public:
 	void rebuildPatchSymbol();
 
 	void setToolbarPanel(ToolbarPanel* toolbar);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void Insert(d2d::ISprite* spr);

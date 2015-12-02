@@ -18,11 +18,6 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	virtual d2d::ISprite* QuerySpriteByPos(const d2d::Vector& pos) const;
 	virtual void QuerySpritesByRect(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result) const;		
 
@@ -36,6 +31,12 @@ public:
 
 	void traverseBodies(d2d::IVisitor& visitor) const;
 	void traverseJoints(d2d::IVisitor& visitor) const;
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	static void loadBody(const wxString& filepath, libmodeling::Body& body);
@@ -73,8 +74,6 @@ private:
 private:
 	std::vector<libmodeling::Body*> m_bodies;
 	std::vector<libmodeling::Joint*> m_joints;
-
-	std::vector<d2d::Subject*> m_subjects;
 
 }; // StagePanel
 

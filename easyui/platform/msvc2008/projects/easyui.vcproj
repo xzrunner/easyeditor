@@ -249,10 +249,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyui\UIStagePage.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyui\UIStagePage.h"
 				>
 			</File>

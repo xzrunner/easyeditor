@@ -5,6 +5,7 @@
 #include "view/Camera.h"
 #include "view/Frame.h"
 #include "view/IStageCanvas.h"
+#include "history/InsertSpriteAOP.h"
 
 #include "message/subject_id.h"
 #include "message/ClearSpriteSJ.h"
@@ -12,6 +13,7 @@
 #include "message/SetCanvasDirtySJ.h"
 
 #include "message/panel_msg.h"
+#include "message/InsertSpriteSJ.h"
 
 #include <fstream>
 
@@ -27,7 +29,7 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 	m_canvas = NULL;
 	m_camera = new Camera;
 
-	RegistSubjects();
+	InitSubjects();
 }
 
 EditPanelImpl::~EditPanelImpl()
@@ -42,39 +44,11 @@ EditPanelImpl::~EditPanelImpl()
 		m_canvas->Release();
 		m_canvas = NULL;
 	}
-
-	UnRegistSubjects();
 }
 
 void EditPanelImpl::SetEditPanelNull()
 {
 	m_stage = NULL;
-}
-
-void EditPanelImpl::Notify(int sj_id, void* ud)
-{
-	switch (sj_id) 
-	{
-	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
-		Clear();
-		break;
-
-	case MSG_EDIT_UNDO:
-		Undo();
-		break;
-	case MSG_EDIT_REDO:
-		Redo();
-		break;
-	case MSG_EDIT_ADD_RECORD:
-		AddOpRecord((AbstractAtomicOP*)ud);
-		break;
-	case MSG_GET_KEY_STATE:
-		{
-			GetKeyStateSJ::State* st = (GetKeyStateSJ::State*)ud;
-			st->state = GetKeyState(st->key);
-		}
-		break;
-	}
 }
 
 bool EditPanelImpl::Update(int version)
@@ -398,6 +372,41 @@ void EditPanelImpl::SetDropTarget(wxDropTarget* target)
 	}
 }
 
+void EditPanelImpl::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id) 
+	{
+	case MSG_INSERT_SPRITE:
+		{
+			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			std::vector<ISprite*> sprites;
+			sprites.push_back(p->spr);
+			AddOpRecord(new InsertSpriteAOP(sprites));
+		}
+		break;
+
+	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
+		Clear();
+		break;
+
+	case MSG_EDIT_UNDO:
+		Undo();
+		break;
+	case MSG_EDIT_REDO:
+		Redo();
+		break;
+	case MSG_EDIT_ADD_RECORD:
+		AddOpRecord((AbstractAtomicOP*)ud);
+		break;
+	case MSG_GET_KEY_STATE:
+		{
+			GetKeyStateSJ::State* st = (GetKeyStateSJ::State*)ud;
+			st->state = GetKeyState(st->key);
+		}
+		break;
+	}
+}
+
 void EditPanelImpl::Clear()
 {
 	if (m_edit_op) {
@@ -407,26 +416,17 @@ void EditPanelImpl::Clear()
 	m_history_list.clear();
 }
 
-void EditPanelImpl::RegistSubjects()
+void EditPanelImpl::InitSubjects()
 {
-	m_subjects.push_back(ClearSpriteSJ::Instance());
-	m_subjects.push_back(ClearPanelSJ::Instance());
+	RegistSubject(InsertSpriteSJ::Instance());
 
-	m_subjects.push_back(EditUndoSJ::Instance());
-	m_subjects.push_back(EditRedoSJ::Instance());
-	m_subjects.push_back(EditAddRecordSJ::Instance());
-	m_subjects.push_back(GetKeyStateSJ::Instance());	
+	RegistSubject(ClearSpriteSJ::Instance());
+	RegistSubject(ClearPanelSJ::Instance());
 
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
-}
-
-void EditPanelImpl::UnRegistSubjects()
-{
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
+	RegistSubject(EditUndoSJ::Instance());
+	RegistSubject(EditRedoSJ::Instance());
+	RegistSubject(EditAddRecordSJ::Instance());
+	RegistSubject(GetKeyStateSJ::Instance());	
 }
 
 }

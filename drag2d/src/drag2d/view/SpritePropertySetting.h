@@ -23,14 +23,17 @@ public:
 	//
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
+protected:
+	//
+	// interface IPropertySetting
+	//
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
+
 	//
 	// interface Observer
 	//
-	virtual void Notify(int sj_id, void* ud);
-
-protected:
-	virtual void UpdateProperties(wxPropertyGrid* pg);
-	virtual void InitProperties(wxPropertyGrid* pg);
+	virtual void OnNotify(int sj_id, void* ud);
 
 	ISprite* GetSprite();
 

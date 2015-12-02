@@ -14,18 +14,17 @@ class ToolbarPanel : public d2d::ToolbarPanel, public d2d::Observer
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage_panel);
-	virtual ~ToolbarPanel();
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	std::string GetWindowName() const;
 	void SetWindowName(const std::string& name);
 
 protected:
 	virtual wxSizer* initLayout();
+
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void OnChangeSize(wxCommandEvent& event);

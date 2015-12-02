@@ -12,36 +12,14 @@ MultiShapesImpl::MultiShapesImpl()
 {
 	m_shape_selection = new ShapeSelection();
 
-	m_subjects.push_back(SelectShapeSJ::Instance());
-// 	m_subjects.push_back(SelectShapeSetSJ::Instance());
-// 	m_subjects.push_back(RemoveShapeSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(SelectShapeSJ::Instance());
+// 	RegistSubject(SelectShapeSetSJ::Instance());
+// 	RegistSubject(RemoveShapeSJ::Instance());
 }
 
 MultiShapesImpl::~MultiShapesImpl()
 {
 	m_shape_selection->Release();
-
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void MultiShapesImpl::Notify(int sj_id, void* ud)
-{
-	switch (sj_id)
-	{
-	case MSG_SELECT_SHAPE:
-		m_shape_selection->Clear();
-		m_shape_selection->Add((IShape*)ud);
-		break;
-// 	case SELECT_SHAPE_SET:
-// 		break;
-// 	case REMOVE_SHAPE:
-// 		break;
-	}
 }
 
 IShape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
@@ -69,6 +47,21 @@ void MultiShapesImpl::ClearSelectedShape()
 	}
 
 	m_shape_selection->Clear();
+}
+
+void MultiShapesImpl::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_SELECT_SHAPE:
+		m_shape_selection->Clear();
+		m_shape_selection->Add((IShape*)ud);
+		break;
+// 	case SELECT_SHAPE_SET:
+// 		break;
+// 	case REMOVE_SHAPE:
+// 		break;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

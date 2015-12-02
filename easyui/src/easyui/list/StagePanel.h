@@ -23,11 +23,6 @@ public:
 	virtual ~StagePanel();
 
 	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	//
 	// d2d::MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(d2d::IVisitor& visitor, 
@@ -43,6 +38,12 @@ public:
 	virtual void OnCode() const {}
 
 	UIList& GetList() { return m_list; }
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	TopPannels* m_top_pannels;

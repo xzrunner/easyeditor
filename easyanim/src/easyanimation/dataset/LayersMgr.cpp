@@ -15,35 +15,13 @@ namespace eanim
 LayersMgr::LayersMgr(Controller* ctrl)
 	: m_ctrl(ctrl)
 {
-	InsertLayerSJ::Instance()->Register(this);
-	RemoveLayerSJ::Instance()->Register(this);
+	RegistSubject(InsertLayerSJ::Instance());
+	RegistSubject(RemoveLayerSJ::Instance());
 }
 
 LayersMgr::~LayersMgr()
 {
 	Clear();
-
-	InsertLayerSJ::Instance()->UnRegister(this);
-	RemoveLayerSJ::Instance()->UnRegister(this);
-}
-
-void LayersMgr::Notify(int sj_id, void* ud)
-{
-	switch (sj_id)
-	{
-	case MSG_INSERT_LAYER:
-		{
-			Layer* layer = ud ? (Layer*)ud : new Layer(m_ctrl);
-			Insert(layer);
-			if (!ud) {
-				layer->InsertKeyFrame(1);
-			}
-		}
-		break;
-	case MSG_REMOVE_LAYER:
-		Remove();
-		break;
-	}
 }
 
 void LayersMgr::ChangeLayerOrder(int from, int to)
@@ -109,6 +87,25 @@ int LayersMgr::GetMaxFrame() const
 		max_frame = std::max(max_frame, m_layers[i]->GetMaxFrameTime());
 	}
 	return max_frame;
+}
+
+void LayersMgr::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_INSERT_LAYER:
+		{
+			Layer* layer = ud ? (Layer*)ud : new Layer(m_ctrl);
+			Insert(layer);
+			if (!ud) {
+				layer->InsertKeyFrame(1);
+			}
+		}
+		break;
+	case MSG_REMOVE_LAYER:
+		Remove();
+		break;
+	}
 }
 
 void LayersMgr::Insert(Layer* layer)

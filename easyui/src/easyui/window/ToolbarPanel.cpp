@@ -14,22 +14,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage_panel)
 	, m_stage_panel(stage_panel)
 {
 	SetSizer(initLayout());	
-	ChangeWindowViewSizeSJ::Instance()->Register(this);
-}
-
-ToolbarPanel::~ToolbarPanel()
-{
-	ChangeWindowViewSizeSJ::Instance()->UnRegister(this);
-}
-
-void ToolbarPanel::Notify(int sj_id, void* ud)
-{
-	if (sj_id == MSG_CHANGE_WINDOW_VIEW_SIZE) 
-	{
-		ChangeWindowViewSizeSJ::Params* p = (ChangeWindowViewSizeSJ::Params*)ud;
-		m_width_text->SetValue(d2d::StringTools::ToString(p->width));
-		m_height_text->SetValue(d2d::StringTools::ToString(p->height));
-	}
+	RegistSubject(ChangeWindowViewSizeSJ::Instance());
 }
 
 std::string ToolbarPanel::GetWindowName() const
@@ -86,6 +71,16 @@ wxSizer* ToolbarPanel::initLayout()
 		top_sizer->Add(sizer);
 	}
 	return top_sizer;
+}
+
+void ToolbarPanel::OnNotify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_CHANGE_WINDOW_VIEW_SIZE) 
+	{
+		ChangeWindowViewSizeSJ::Params* p = (ChangeWindowViewSizeSJ::Params*)ud;
+		m_width_text->SetValue(d2d::StringTools::ToString(p->width));
+		m_height_text->SetValue(d2d::StringTools::ToString(p->height));
+	}
 }
 
 void ToolbarPanel::OnChangeSize(wxCommandEvent& event)

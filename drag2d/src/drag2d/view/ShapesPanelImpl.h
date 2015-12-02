@@ -17,23 +17,22 @@ public:
 	virtual ~ShapesPanelImpl();
 
 	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	//
 	// MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const;
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InitSubjects();
 
 private:
 	IDataContainer* m_container;
-
-	std::vector<Subject*> m_subjects;
 
 }; // ShapesPanelImpl
 

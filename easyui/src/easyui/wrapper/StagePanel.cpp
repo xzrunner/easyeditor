@@ -29,10 +29,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar = new ToolbarPanel(top_pannels->toolbar);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
-	UIStagePage::UnRegistSubjects(this);
-
 	m_clipbox.xMin = m_clipbox.yMin = -200;
 	m_clipbox.xMax = m_clipbox.yMax =  200;
+
+	UnRegistSubjects();
 }
 
 void StagePanel::LoadFromFile(const char* filename)
@@ -128,10 +128,10 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
-		UIStagePage::RegistSubjects(this);
+		RegistSubjects();
 	} else {
 		GetSpriteSelection()->Clear();
-		UIStagePage::UnRegistSubjects(this);
+		UnRegistSubjects();
 	}
 }
 

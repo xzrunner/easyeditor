@@ -28,36 +28,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar = new ToolbarPanel(top_pannels->toolbar, this);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
-	AddSubject(d2d::InsertSpriteSJ::Instance());
-	AddSubject(d2d::ClearSpriteSJ::Instance());
-	UnRegistSubjects(this);
-}
-
-StagePanel::~StagePanel()
-{
-	UnRegistSubjects(this);
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	MultiSpritesImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			if (m_list.InsertSprite(p->spr, p->idx)) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-			}		
-		}
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		if (m_list.ClearAllSprite()) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-		}
-		break;
-	}
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	UnRegistSubjects();
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
@@ -86,10 +59,32 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
-		RegistSubjects(this);
+		RegistSubjects();
 	} else {
 		GetSpriteSelection()->Clear();
-		UnRegistSubjects(this);
+		UnRegistSubjects();
+	}
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			if (m_list.InsertSprite(p->spr, p->idx)) {
+				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			}		
+		}
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		if (m_list.ClearAllSprite()) {
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		}
+		break;
 	}
 }
 

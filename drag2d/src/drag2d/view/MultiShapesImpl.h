@@ -22,11 +22,6 @@ public:
 	MultiShapesImpl();
 	virtual ~MultiShapesImpl();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const = 0;
 
@@ -35,6 +30,12 @@ public:
 
 	ShapeSelection* GetShapeSelection() { return m_shape_selection; }
 	void ClearSelectedShape();
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	class PointQueryVisitor : public IVisitor
@@ -63,9 +64,6 @@ private:
 
 protected:
 	ShapeSelection* m_shape_selection;
-
-private:
-	std::vector<Subject*> m_subjects;
 
 }; // MultiShapesImpl
 

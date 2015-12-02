@@ -13,15 +13,16 @@ class KeysScaleWidget : public wxPanel, public d2d::Observer
 public:
 	KeysScaleWidget(wxWindow* parent, const LayersMgr& layers);
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);
 	void OnEraseBackground(wxEraseEvent& event);
 	void OnMouse(wxMouseEvent& event);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	int QueryGridByPos(float x) const;

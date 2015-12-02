@@ -50,63 +50,13 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 
 	InitRoot();
 
-	m_subjects.push_back(SpriteNameChangeSJ::Instance());
-	m_subjects.push_back(SelectSpriteSJ::Instance());
-	m_subjects.push_back(SelectSpriteSetSJ::Instance());
-	m_subjects.push_back(ReorderSpriteSJ::Instance());
-	m_subjects.push_back(InsertSpriteSJ::Instance());
-	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSpriteSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
-}
-
-GroupTreeCtrl::~GroupTreeCtrl()
-{
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void GroupTreeCtrl::Notify(int sj_id, void* ud)
-{
-	switch (sj_id) 
-	{
-	case MSG_SPRITE_NAME_CHANGE:
-		ChangeName((ISprite*)ud);
-		break;
-	case MSG_SELECT_SPRITE:
-		{
-			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-			Select(p->spr, p->clear);	
-		}
-		break;
-	case MSG_SELECT_SPRITE_SET:
-		{
-			//SpriteSelection* selection = (SpriteSelection*)ud;
-			//OnMultiSpriteSelected(selection);
-		}
-		break;
-	case MSG_REORDER_SPRITE:
-		{
-			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
-			Reorder(p->spr, p->up);
-		}
-		break;
-	case MSG_INSERT_SPRITE:
-		{
-			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
-			AddSprite(p->spr);
-		}
-		break;
-	case MSG_REMOVE_SPRITE:
-		Remove((ISprite*)ud);
-		break;
-	case MSG_CLEAR_SPRITE:
-		Clear();
-		break;
-	}
+	RegistSubject(SpriteNameChangeSJ::Instance());
+	RegistSubject(SelectSpriteSJ::Instance());
+	RegistSubject(SelectSpriteSetSJ::Instance());
+	RegistSubject(ReorderSpriteSJ::Instance());
+	RegistSubject(InsertSpriteSJ::Instance());
+	RegistSubject(RemoveSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSJ::Instance());
 }
 
 void GroupTreeCtrl::Clear()
@@ -299,6 +249,46 @@ bool GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 	SelectItem(new_item);
 
 	return true;
+}
+
+void GroupTreeCtrl::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id) 
+	{
+	case MSG_SPRITE_NAME_CHANGE:
+		ChangeName((ISprite*)ud);
+		break;
+	case MSG_SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			Select(p->spr, p->clear);	
+		}
+		break;
+	case MSG_SELECT_SPRITE_SET:
+		{
+			//SpriteSelection* selection = (SpriteSelection*)ud;
+			//OnMultiSpriteSelected(selection);
+		}
+		break;
+	case MSG_REORDER_SPRITE:
+		{
+			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
+			Reorder(p->spr, p->up);
+		}
+		break;
+	case MSG_INSERT_SPRITE:
+		{
+			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			AddSprite(p->spr);
+		}
+		break;
+	case MSG_REMOVE_SPRITE:
+		Remove((ISprite*)ud);
+		break;
+	case MSG_CLEAR_SPRITE:
+		Clear();
+		break;
+	}
 }
 
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, 

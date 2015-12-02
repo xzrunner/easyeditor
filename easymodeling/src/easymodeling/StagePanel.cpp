@@ -17,42 +17,14 @@ StagePanel::StagePanel(wxWindow* parent,
 {
 	SetCanvas(new StageCanvas(this));
 
-	m_subjects.push_back(d2d::InsertSpriteSJ::Instance());
-	m_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
-	m_subjects.push_back(d2d::ClearSpriteSJ::Instance());
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
 StagePanel::~StagePanel()
 {
 	Clear();
-
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	MultiSpritesImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			Insert(p->spr);
-		}
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		Clear();
-		break;
-	}
 }
 
 d2d::ISprite* StagePanel::QuerySpriteByPos(const d2d::Vector& pos) const
@@ -116,6 +88,27 @@ void StagePanel::traverseJoints(d2d::IVisitor& visitor) const
 		bool hasNext;
 		visitor.Visit(*itr, hasNext);
 		if (!hasNext) break;
+	}
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			Insert(p->spr);
+		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
 	}
 }
 

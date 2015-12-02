@@ -24,12 +24,6 @@ class GroupTreeCtrl : public wxTreeCtrl, public Observer
 public:
 	GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
 		const KeysState& key_state);
-	virtual ~GroupTreeCtrl();
-
-	//
-	// interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	void Clear();
 
@@ -50,6 +44,9 @@ public:
 	bool ReorderItem(wxTreeItemId id, bool up);
 
 	void EnableExpand(bool enable) { m_expand_enable = enable; }
+
+protected:
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, 
@@ -101,8 +98,6 @@ private:
 	};
 
 private:
-	std::vector<Subject*> m_subjects;
-
 	GroupTreePanel* m_parent_panel;
 
 	MultiSpritesImpl* m_sprite_impl;

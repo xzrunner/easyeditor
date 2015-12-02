@@ -23,13 +23,6 @@ public:
 	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
 	virtual ~IStageCanvas();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	void EnableObserve(bool enable) { m_observe_enable = enable; }
-
 	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
 
 	void SetBgColor(const Colorf& color);
@@ -54,6 +47,11 @@ protected:
 	//virtual void OnDrawDC() const {}
 
 	virtual void OnTimer() {}
+
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 	void Init();
 
@@ -90,9 +88,6 @@ private:
 private:
 	wxGLContext* m_gl_context;
 	RenderContext* m_render_context;
-
-	std::vector<Subject*> m_subjects;
-	bool m_observe_enable;
 
 	bool m_inited;
 

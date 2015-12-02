@@ -18,7 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	m_symbol = new Symbol;
 
-	d2d::InsertShapeSJ::Instance()->Register(this);
+	RegistSubject(d2d::InsertShapeSJ::Instance());
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -35,7 +35,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 	LoadFromShadow();
 
-	d2d::InsertShapeSJ::Instance()->Register(this);
+	RegistSubject(d2d::InsertShapeSJ::Instance());
 }
 
 StagePanel::~StagePanel()
@@ -46,8 +46,6 @@ StagePanel::~StagePanel()
 	if (m_loop) {
 		m_loop->Release();
 	}
-
-	d2d::InsertShapeSJ::Instance()->UnRegister(this);
 }
 
 void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
@@ -58,15 +56,6 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 		libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(m_loop);
 		m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 	}	
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	d2d::MultiShapesImpl::Notify(sj_id, ud);
-
-	if (sj_id == d2d::MSG_INSERT_SHAPE) {
-		InsertShape((d2d::IShape*)ud);
-	}
 }
 
 void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
@@ -85,6 +74,15 @@ void StagePanel::LoadFromShadow()
 		m_loop->Release();
 	}
 	m_loop = new libshape::PolygonShape(loop);
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	d2d::MultiShapesImpl::OnNotify(sj_id, ud);
+
+	if (sj_id == d2d::MSG_INSERT_SHAPE) {
+		InsertShape((d2d::IShape*)ud);
+	}
 }
 
 void StagePanel::InsertShape(d2d::IShape* shape)

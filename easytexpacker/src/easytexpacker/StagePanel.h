@@ -13,12 +13,6 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public e
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
-	virtual ~StagePanel();
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	void insertSpriteNoArrange(d2d::ISprite* sprite);
 
@@ -29,6 +23,12 @@ public:
 
 public:
 	static void fixCoords(d2d::ISprite* sprite);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	b2Body* CreateGround();

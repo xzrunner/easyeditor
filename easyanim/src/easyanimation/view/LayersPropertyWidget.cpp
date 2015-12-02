@@ -17,17 +17,11 @@ LayersPropertyWidget::LayersPropertyWidget(wxWindow* parent)
 {
 	InitLayout();
 
-	SetFpsSJ::Instance()->Register(this);
-	GetFpsSJ::Instance()->Register(this);
+	RegistSubject(SetFpsSJ::Instance());
+	RegistSubject(GetFpsSJ::Instance());
 }
 
-LayersPropertyWidget::~LayersPropertyWidget()
-{
-	SetFpsSJ::Instance()->UnRegister(this);
-	GetFpsSJ::Instance()->UnRegister(this);	
-}
-
-void LayersPropertyWidget::Notify(int sj_id, void* ud)
+void LayersPropertyWidget::OnNotify(int sj_id, void* ud)
 {
 	switch (sj_id) 
 	{

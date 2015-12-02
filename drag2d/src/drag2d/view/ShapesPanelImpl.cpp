@@ -35,15 +35,16 @@ ShapesPanelImpl::ShapesPanelImpl(IDataContainer* container)
 ShapesPanelImpl::~ShapesPanelImpl()
 {
 	m_container->Release();
-
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
 }
 
-void ShapesPanelImpl::Notify(int sj_id, void* ud)
+void ShapesPanelImpl::TraverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const
 {
-	MultiShapesImpl::Notify(sj_id, ud);
+	m_container->Traverse(visitor, true);
+}
+
+void ShapesPanelImpl::OnNotify(int sj_id, void* ud)
+{
+	MultiShapesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
@@ -65,19 +66,11 @@ void ShapesPanelImpl::Notify(int sj_id, void* ud)
 	}
 }
 
-void ShapesPanelImpl::TraverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const
-{
-	m_container->Traverse(visitor, true);
-}
-
 void ShapesPanelImpl::InitSubjects()
 {
-	m_subjects.push_back(RemoveShapeSJ::Instance());
-	m_subjects.push_back(InsertShapeSJ::Instance());
-	m_subjects.push_back(ClearShapeSJ::Instance());
-	for (int i = 0, n = m_subjects.size(); i < n; ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(RemoveShapeSJ::Instance());
+	RegistSubject(InsertShapeSJ::Instance());
+	RegistSubject(ClearShapeSJ::Instance());
 }
 
 } // d2d

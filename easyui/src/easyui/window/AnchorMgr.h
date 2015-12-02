@@ -14,11 +14,6 @@ public:
 	AnchorMgr();
 	~AnchorMgr();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void OnViewChanged(int width, int height);
 
 	void OnSprPosChanged(d2d::ISprite* spr);
@@ -30,6 +25,12 @@ public:
 	void StoreToFile(Json::Value& value) const;
 
 	static int GetAnchorRadius() { return RADIUS; }
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void Insert(d2d::ISprite* spr);
@@ -60,8 +61,6 @@ private:
 	// 3 4 5
 	// 6 7 8
 	Anchor m_anchors[ANCHOR_COUNT];
-
-	std::vector<d2d::Subject*> m_subjects;
 
 }; // AnchorMgr
 

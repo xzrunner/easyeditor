@@ -35,7 +35,6 @@ static const float FPS = 30;
 
 IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 	: wxGLCanvas(stage_wnd, wxID_ANY, GL_ATTRIB)
-	, m_observe_enable(true)
 	, m_stage(stage)
  	, m_camera(stage->GetCamera())
 	, m_screen(stage->GetCamera())
@@ -53,47 +52,14 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 	m_bg_color.set(0.5f, 0.5f, 0.5f, 1);
 	m_timer.Start(1000 / FPS);
 
-	m_subjects.push_back(SetCanvasDirtySJ::Instance());
-	m_subjects.push_back(ResetViewportSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(SetCanvasDirtySJ::Instance());
+	RegistSubject(ResetViewportSJ::Instance());
 }
 
 IStageCanvas::~IStageCanvas()
 {
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-
 	delete m_gl_context;
 	m_timer.Stop();
-}
-
-void IStageCanvas::Notify(int sj_id, void* ud) 
-{
-	if (!m_observe_enable) {
-		return;
-	}
-
-	switch (sj_id)
-	{
-	case MSG_SET_CANVAS_DIRTY:
-		m_dirty = true;
-		break;
-	case MSG_RESET_VIEWPORT:
-		// On Mouse Wheel
-		// onSize no use, if the size not change
-		// also can put gluOrtho2D in each onPaint, save this and Camera's observer pattern
-//		OnSize(wxSizeEvent(m_parent->GetSize()));
-
-		{
-			wxSize sz = m_parent->GetSize();
-			RenderContext::GetCurrContext()->SetProjection(sz.GetWidth(), sz.GetHeight());
-		}
-
-		break;
-	}
 }
 
 void IStageCanvas::ResetInitState() 
@@ -142,6 +108,28 @@ void IStageCanvas::InitGL()
 // 		ExceptionDlg dlg(m_parent, e);
 // 		dlg.ShowModal();	
 // 	}
+}
+
+void IStageCanvas::OnNotify(int sj_id, void* ud) 
+{
+	switch (sj_id)
+	{
+	case MSG_SET_CANVAS_DIRTY:
+		m_dirty = true;
+		break;
+	case MSG_RESET_VIEWPORT:
+		// On Mouse Wheel
+		// onSize no use, if the size not change
+		// also can put gluOrtho2D in each onPaint, save this and Camera's observer pattern
+		//		OnSize(wxSizeEvent(m_parent->GetSize()));
+
+		{
+			wxSize sz = m_parent->GetSize();
+			RenderContext::GetCurrContext()->SetProjection(sz.GetWidth(), sz.GetHeight());
+		}
+
+		break;
+	}
 }
 
 void IStageCanvas::Init()

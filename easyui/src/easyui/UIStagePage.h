@@ -20,17 +20,6 @@ public:
 	virtual void OnPreview() const = 0;
 	virtual void OnCode() const = 0;
 
-	void RegistSubjects(d2d::Observer* observer);
-	void UnRegistSubjects(d2d::Observer* observer);
-
-protected:
-	void AddSubject(d2d::Subject* subject) {
-		m_subjects.push_back(subject);
-	}
-
-private:
-	std::vector<d2d::Subject*> m_subjects;
-
 }; // UIStagePage
 
 }

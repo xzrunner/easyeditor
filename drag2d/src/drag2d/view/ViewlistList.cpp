@@ -23,16 +23,13 @@ ViewlistList::ViewlistList(wxWindow* parent)
 	, m_impl(NULL)
 	, m_selected_spr(NULL)
 {
-	m_subjects.push_back(SelectSpriteSJ::Instance());
-	m_subjects.push_back(ReorderSpriteSJ::Instance());
-	m_subjects.push_back(InsertSpriteSJ::Instance());
-	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSpriteSJ::Instance());
-	m_subjects.push_back(QuerySelectedSpriteLayerSJ::Instance());
-	m_subjects.push_back(ClearPanelSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(SelectSpriteSJ::Instance());
+	RegistSubject(ReorderSpriteSJ::Instance());
+	RegistSubject(InsertSpriteSJ::Instance());
+	RegistSubject(RemoveSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSJ::Instance());
+	RegistSubject(QuerySelectedSpriteLayerSJ::Instance());
+	RegistSubject(ClearPanelSJ::Instance());
 }
 
 ViewlistList::~ViewlistList()
@@ -42,47 +39,6 @@ ViewlistList::~ViewlistList()
 	}
 
 	Clear();
-
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void ViewlistList::Notify(int sj_id, void* ud)
-{
-	switch (sj_id)
-	{
-	case MSG_SELECT_SPRITE:
-		{
-			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-			Select(p->spr, p->clear);
-		}
-		break;
-	case MSG_REORDER_SPRITE:
-		{
-			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
-			Reorder(p->spr, p->up);
-		}
-		break;
-	case MSG_INSERT_SPRITE:
-		{
-			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
-			Insert(p->spr, p->idx);
-		}
-		break;
-	case MSG_REMOVE_SPRITE:
-		Remove((ISprite*)ud);
-		break;
-	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
-		Clear();
-		break;
-	case MSG_QUERY_SPR_LAYER:
-		{
-			int* layer = (int*)ud;
-			*layer = GetSelectedIndex();
-		}
-		break;
-	}
 }
 
 void ViewlistList::OnListSelected(wxCommandEvent& event)
@@ -155,6 +111,43 @@ void ViewlistList::Insert(ISprite* sprite, int idx)
 		int order = m_sprites.size() - idx;
 		VerticalImageList::Insert(item, order);
 		m_sprites.insert(m_sprites.begin() + order, sprite);
+	}
+}
+
+void ViewlistList::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			Select(p->spr, p->clear);
+		}
+		break;
+	case MSG_REORDER_SPRITE:
+		{
+			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
+			Reorder(p->spr, p->up);
+		}
+		break;
+	case MSG_INSERT_SPRITE:
+		{
+			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
+			Insert(p->spr, p->idx);
+		}
+		break;
+	case MSG_REMOVE_SPRITE:
+		Remove((ISprite*)ud);
+		break;
+	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
+		Clear();
+		break;
+	case MSG_QUERY_SPR_LAYER:
+		{
+			int* layer = (int*)ud;
+			*layer = GetSelectedIndex();
+		}
+		break;
 	}
 }
 

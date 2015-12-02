@@ -17,52 +17,18 @@ namespace d2d
 {
 
 MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
-	: m_observe_enable(true)
 {
 	m_sprite_selection = new SpriteSelection();
 
-	m_subjects.push_back(SelectSpriteSJ::Instance());
-	m_subjects.push_back(InsertSpriteSJ::Instance());
-	m_subjects.push_back(RemoveSpriteSJ::Instance());
-	m_subjects.push_back(ClearSpriteSJ::Instance());
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->Register(this);
-	}
+	RegistSubject(SelectSpriteSJ::Instance());
+	RegistSubject(InsertSpriteSJ::Instance());
+	RegistSubject(RemoveSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSJ::Instance());
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
 	m_sprite_selection->Release();
-
-	for (int i = 0; i < m_subjects.size(); ++i) {
-		m_subjects[i]->UnRegister(this);
-	}
-}
-
-void MultiSpritesImpl::Notify(int sj_id, void* ud)
-{
-	if (!m_observe_enable) {
-		return;
-	}
-
-	switch (sj_id)
-	{
-	case MSG_SELECT_SPRITE:
-		{
-			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
-			OnSpriteSelected(p->spr, p->clear);
-		}
-		break;
-	case MSG_INSERT_SPRITE:
-		m_sprite_selection->Clear();
-		break;
-	case MSG_REMOVE_SPRITE:
-		m_sprite_selection->Clear();
-		break;
-	case MSG_CLEAR_SPRITE:
-		m_sprite_selection->Clear();
-		break;
-	}
 }
 
 ISprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
@@ -99,6 +65,28 @@ void MultiSpritesImpl::ClearSelectedSprite()
 	}
 
 	m_sprite_selection->Clear();
+}
+
+void MultiSpritesImpl::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_SELECT_SPRITE:
+		{
+			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
+			OnSpriteSelected(p->spr, p->clear);
+		}
+		break;
+	case MSG_INSERT_SPRITE:
+		m_sprite_selection->Clear();
+		break;
+	case MSG_REMOVE_SPRITE:
+		m_sprite_selection->Clear();
+		break;
+	case MSG_CLEAR_SPRITE:
+		m_sprite_selection->Clear();
+		break;
+	}
 }
 
 void MultiSpritesImpl::OnSpriteSelected(ISprite* spr, bool clear)

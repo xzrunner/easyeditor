@@ -30,6 +30,8 @@ LayersContentWidget::LayersContentWidget(wxWindow* parent, LayersMgr& layers)
 {
 	m_drag_flag_line = -1;
 	m_curr_layer = -1;
+
+	RegistSubject(SetCurrFrameSJ::Instance());
 }
 
 wxCoord LayersContentWidget::OnGetRowHeight(size_t row) const
@@ -45,17 +47,6 @@ int LayersContentWidget::GetNonOrientationTargetSize() const
 wxOrientation LayersContentWidget::GetOrientation() const
 {
 	return wxVERTICAL;
-}
-
-void LayersContentWidget::Notify(int sj_id, void* ud)
-{
-	if (sj_id == MSG_SET_CURR_FRAME) {
-		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
-		if (cf->layer != -1 && cf->layer != m_curr_layer) {
-			m_curr_layer = cf->layer;
-			Refresh();
-		}
-	}
 }
 
 void LayersContentWidget::OnSize(wxSizeEvent& event)
@@ -225,6 +216,17 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 				layer->SetName(dlg.getText().ToStdString());
 				Refresh(true);
 			}
+		}
+	}
+}
+
+void LayersContentWidget::OnNotify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_SET_CURR_FRAME) {
+		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
+		if (cf->layer != -1 && cf->layer != m_curr_layer) {
+			m_curr_layer = cf->layer;
+			Refresh();
 		}
 	}
 }

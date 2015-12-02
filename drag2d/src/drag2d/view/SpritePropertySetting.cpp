@@ -29,12 +29,11 @@ SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, ISprite* spri
 	, m_impl(new SpritePropertyImpl(stage, sprite))
 	, m_pg(NULL)
 {
-	SpriteNameChangeSJ::Instance()->Register(this);
+	RegistSubject(SpriteNameChangeSJ::Instance());
 }
 
 SpritePropertySetting::~SpritePropertySetting()
 {
-	SpriteNameChangeSJ::Instance()->UnRegister(this);
 	delete m_impl;
 }
 
@@ -190,16 +189,6 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 
 	if (dirty) {
 		SetCanvasDirtySJ::Instance()->SetDirty();
-	}
-}
-
-void SpritePropertySetting::Notify(int sj_id, void* ud)
-{
-	if (sj_id == MSG_SPRITE_NAME_CHANGE) {
-		ISprite* spr = (ISprite*)ud;
-		if (GetSprite() == spr && m_pg) {
-			m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
-		}
 	}
 }
 
@@ -435,6 +424,16 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Visiable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, spr->editable));
 	pg->SetPropertyAttribute("Editable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+}
+
+void SpritePropertySetting::OnNotify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_SPRITE_NAME_CHANGE) {
+		ISprite* spr = (ISprite*)ud;
+		if (GetSprite() == spr && m_pg) {
+			m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
+		}
+	}
 }
 
 ISprite* SpritePropertySetting::GetSprite()

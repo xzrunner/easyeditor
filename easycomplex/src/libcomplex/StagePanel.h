@@ -17,19 +17,19 @@ public:
 		d2d::PropertySettingPanel* property, LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* symbol, 
 		d2d::PropertySettingPanel* property, LibraryPanel* library);
-	virtual ~StagePanel();
 
 	//
 	// d2d::EditPanel interface
 	//
 	virtual bool Update(int version);
 
+	Symbol* getSymbol() { return m_symbol; }
+
+protected:
 	//
 	//	interface Observer
 	//
-	virtual void Notify(int sj_id, void* ud);
-
-	Symbol* getSymbol() { return m_symbol; }
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void Clear();

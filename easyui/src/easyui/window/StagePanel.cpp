@@ -40,44 +40,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar = new ToolbarPanel(top_pannels->toolbar, this);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
-	AddSubject(QueryWindowViewSizeSJ::Instance());
-	AddSubject(ResetViewportSJ::Instance());
-	UIStagePage::UnRegistSubjects(this);
-}
-
-StagePanel::~StagePanel()
-{
-	UIStagePage::UnRegistSubjects(this);
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	d2d::SpritesPanelImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case MSG_QUERY_WINDOW_VIEW_SIZE:
-		{
-			QueryWindowViewSizeSJ::Params* p = (QueryWindowViewSizeSJ::Params*)ud;
-			p->width = m_view_width;
-			p->height = m_view_height;
-		}
-		break;
-	case MSG_RESET_VIEWPORT:
-		d2d::ResetViewportSJ::Instance()->Reset();
-		break;
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			d2d::ISprite* spr = p->spr;
-			std::string type = "";
-			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
-			if (type.empty() && spr->tag.find("type=unknown") == std::string::npos) {
-				spr->tag = "type=unknown;" + spr->tag;
-			}
-		}
-		break;
-	}
+	RegistSubject(QueryWindowViewSizeSJ::Instance());
+	RegistSubject(ResetViewportSJ::Instance());
+	UnRegistSubjects();
 }
 
 void StagePanel::LoadFromFile(const char* filename)
@@ -183,10 +148,10 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(true);
-		UIStagePage::RegistSubjects(this);
+		RegistSubjects();
 	} else {
 		GetSpriteSelection()->Clear();
-		UIStagePage::UnRegistSubjects(this);
+		UnRegistSubjects();
 	}
 }
 
@@ -256,6 +221,36 @@ void StagePanel::SetViewSize(int width, int height)
 	m_anchor_mgr.OnViewChanged(m_view_width, m_view_height);
 
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	d2d::SpritesPanelImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case MSG_QUERY_WINDOW_VIEW_SIZE:
+		{
+			QueryWindowViewSizeSJ::Params* p = (QueryWindowViewSizeSJ::Params*)ud;
+			p->width = m_view_width;
+			p->height = m_view_height;
+		}
+		break;
+	case MSG_RESET_VIEWPORT:
+		d2d::ResetViewportSJ::Instance()->Reset();
+		break;
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			d2d::ISprite* spr = p->spr;
+			std::string type = "";
+			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
+			if (type.empty() && spr->tag.find("type=unknown") == std::string::npos) {
+				spr->tag = "type=unknown;" + spr->tag;
+			}
+		}
+		break;
+	}
 }
 
 }

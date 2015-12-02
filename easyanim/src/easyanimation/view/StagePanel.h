@@ -14,19 +14,12 @@ class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-		d2d::PropertySettingPanel* property,
-		Controller* ctrl);
-	virtual ~StagePanel();
+		d2d::PropertySettingPanel* property, Controller* ctrl);
 
 	//
 	// d2d::EditPanel interface
 	//
 	virtual bool Update(int version);
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// d2d::MultiSpritesImpl interface
@@ -38,6 +31,12 @@ public:
 	SkeletonData& getSkeletonData();
 
 	Controller* GetController() { return m_ctrl; }
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void onMenuAddJointNode(wxCommandEvent& event);
@@ -76,8 +75,6 @@ private:
 
 private:
 	Controller* m_ctrl;
-
-	std::vector<d2d::Subject*> m_subjects;
 
 }; // StagePanel
 

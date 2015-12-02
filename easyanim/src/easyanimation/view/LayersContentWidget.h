@@ -20,15 +20,16 @@ public:
 	virtual int GetNonOrientationTargetSize() const;
 	virtual wxOrientation GetOrientation() const;
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);
 	void OnEraseBackground(wxEraseEvent& event);
 	void OnMouse(wxMouseEvent& event);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	LayersMgr& m_layers;

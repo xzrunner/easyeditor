@@ -22,12 +22,6 @@ class StagePanel : public UIStagePage, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
-	virtual ~StagePanel();
-
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
 
 	//
 	// UIStagePage interface
@@ -43,6 +37,12 @@ public:
 	AnchorMgr* GetAnchorMgr() { return &m_anchor_mgr; }
 
 	void SetViewSize(int width, int height);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	TopPannels* m_top_pannels;

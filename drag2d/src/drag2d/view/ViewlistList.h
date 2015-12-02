@@ -16,11 +16,6 @@ public:
 	ViewlistList(wxWindow* parent);
 	virtual ~ViewlistList();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	virtual void OnListSelected(wxCommandEvent& event);
 	virtual void OnListDoubleClicked(wxCommandEvent& event);
 
@@ -32,6 +27,12 @@ public:
 	void OnSelected(int idx);
 
 	d2d::ISprite* QuerySprite(int idx);
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	virtual void OnKeyDown(wxKeyEvent& event);
@@ -55,8 +56,6 @@ private:
 	std::vector<ISprite*> m_sprites;
 
 	d2d::ISprite* m_selected_spr;
-
-	std::vector<Subject*> m_subjects;
 
 }; // ViewlistList
 

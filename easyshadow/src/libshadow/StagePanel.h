@@ -23,11 +23,6 @@ public:
 	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL);
 
 	//
-	//	interface MultiShapesImpl
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	//
 	// d2d::MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
@@ -36,6 +31,12 @@ public:
 	Symbol* GetSymbol() { return m_symbol; }
 
 	void LoadFromShadow();
+
+protected:
+	//
+	//	interface MultiShapesImpl
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InsertShape(d2d::IShape* shape);

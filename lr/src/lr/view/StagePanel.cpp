@@ -54,21 +54,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetEditOP(m_arrange_op);
 	SetCanvas(new StageCanvas(this));
 
-	m_sprite_subjects.push_back(d2d::ReorderSpriteSJ::Instance());
-	m_sprite_subjects.push_back(d2d::ReorderSpriteMostSJ::Instance());
-	m_sprite_subjects.push_back(d2d::InsertSpriteSJ::Instance());
-	m_sprite_subjects.push_back(d2d::RemoveSpriteSJ::Instance());
-	m_sprite_subjects.push_back(d2d::ClearSpriteSJ::Instance());
-	for (int i = 0, n = m_sprite_subjects.size(); i < n; ++i) {
-		m_sprite_subjects[i]->Register((d2d::MultiSpritesImpl*)this);
-	}
+	d2d::MultiSpritesImpl::RegistSubject(d2d::ReorderSpriteSJ::Instance());
+	d2d::MultiSpritesImpl::RegistSubject(d2d::ReorderSpriteMostSJ::Instance());
+	d2d::MultiSpritesImpl::RegistSubject(d2d::InsertSpriteSJ::Instance());
+	d2d::MultiSpritesImpl::RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	d2d::MultiSpritesImpl::RegistSubject(d2d::ClearSpriteSJ::Instance());
 
-	m_shape_subjects.push_back(d2d::RemoveShapeSJ::Instance());
-	m_shape_subjects.push_back(d2d::InsertShapeSJ::Instance());
-	m_shape_subjects.push_back(d2d::ClearShapeSJ::Instance());
-	for (int i = 0, n = m_shape_subjects.size(); i < n; ++i) {
-		m_shape_subjects[i]->Register((d2d::MultiShapesImpl*)this);
-	}
+	d2d::MultiShapesImpl::RegistSubject(d2d::RemoveShapeSJ::Instance());
+	d2d::MultiShapesImpl::RegistSubject(d2d::InsertShapeSJ::Instance());
+	d2d::MultiShapesImpl::RegistSubject(d2d::ClearShapeSJ::Instance());
 }
 
 StagePanel::~StagePanel()
@@ -82,13 +76,6 @@ StagePanel::~StagePanel()
 	m_arrange_op->Release();
 
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
-
-	for (int i = 0, n = m_sprite_subjects.size(); i < n; ++i) {
-		m_sprite_subjects[i]->UnRegister((d2d::MultiSpritesImpl*)this);
-	}
-	for (int i = 0, n = m_shape_subjects.size(); i < n; ++i) {
-		m_shape_subjects[i]->UnRegister((d2d::MultiShapesImpl*)this);
-	}
 }
 
 // void StagePanel::Clear()
@@ -121,49 +108,6 @@ bool StagePanel::Update(int version)
 	}
 
 	return ret;
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	d2d::MultiSpritesImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case d2d::MSG_REORDER_SPRITE:
-		{
-			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
-			ReorderSprite(p->spr, p->up);
-		}
-		break;
-	case d2d::MSG_REORDER_SPRITE_MOST:
-		{
-			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
-			ReorderSpriteMost(p->spr, p->up);
-		}
-		break;
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			InsertSprite(p->spr, p->idx);
-		}
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		RemoveSprite((d2d::ISprite*)ud);
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		ClearSprite();
-		break;
-
-	case d2d::MSG_REMOVE_SHAPE:
-		RemoveShape((d2d::IShape*)ud);
-		break;
-	case d2d::MSG_INSERT_SHAPE:
-		InsertShape((d2d::IShape*)ud);
-		break;
-	case d2d::MSG_CLEAR_SHAPE:
-		ClearShape();
-		break;
-	}
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
@@ -317,6 +261,49 @@ void StagePanel::OnKeyHook(int key_code)
 // 	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
 // 	m_edit_op->OnActive();
 // 	m_edit_op->Retain();	
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_REORDER_SPRITE:
+		{
+			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
+			ReorderSprite(p->spr, p->up);
+		}
+		break;
+	case d2d::MSG_REORDER_SPRITE_MOST:
+		{
+			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
+			ReorderSpriteMost(p->spr, p->up);
+		}
+		break;
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			InsertSprite(p->spr, p->idx);
+		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		RemoveSprite((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		ClearSprite();
+		break;
+
+	case d2d::MSG_REMOVE_SHAPE:
+		RemoveShape((d2d::IShape*)ud);
+		break;
+	case d2d::MSG_INSERT_SHAPE:
+		InsertShape((d2d::IShape*)ud);
+		break;
+	case d2d::MSG_CLEAR_SHAPE:
+		ClearShape();
+		break;
+	}
 }
 
 void StagePanel::ReorderSprite(d2d::ISprite* spr, bool up)

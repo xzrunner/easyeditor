@@ -21,11 +21,6 @@ public:
 	virtual ~StagePanel();
 
 	//
-	//	interface MultiShapesImpl
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	//
 	// d2d::MultiShapesImpl interface
 	//
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
@@ -44,6 +39,12 @@ public:
 	}
 
 	void SetSymbolBG(d2d::ISymbol* symbol);
+
+protected:
+	//
+	//	interface MultiShapesImpl
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InitSubjects();
@@ -67,8 +68,6 @@ private:
 	libshape::Symbol* m_symbol;
 
 	ToolbarPanel* m_toolbar;
-
-	std::vector<d2d::Subject*> m_subjects;
 
 }; // StagePanel
 

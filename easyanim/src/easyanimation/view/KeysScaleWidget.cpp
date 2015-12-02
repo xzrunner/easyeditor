@@ -28,17 +28,8 @@ KeysScaleWidget::KeysScaleWidget(wxWindow* parent, const LayersMgr& layers)
 {
 //	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 //	// same with "EVT_ERASE_BACKGROUND(KeysScaleWidget::onEraseBackground)"
-}
 
-void KeysScaleWidget::Notify(int sj_id, void* ud)
-{
-	if (sj_id == MSG_SET_CURR_FRAME) {
-		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
-		if (cf->frame != -1 && cf->frame != m_curr_frame) {
-			m_curr_frame = cf->frame;
-			Refresh();
-		}
-	}
+	RegistSubject(SetCurrFrameSJ::Instance());
 }
 
 void KeysScaleWidget::OnSize(wxSizeEvent& event)
@@ -94,6 +85,17 @@ void KeysScaleWidget::OnMouse(wxMouseEvent& event)
 	{
 		int frame = QueryGridByPos(event.GetX());
 		SetCurrFrameSJ::Instance()->Set(-1, frame);
+	}
+}
+
+void KeysScaleWidget::OnNotify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_SET_CURR_FRAME) {
+		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
+		if (cf->frame != -1 && cf->frame != m_curr_frame) {
+			m_curr_frame = cf->frame;
+			Refresh();
+		}
 	}
 }
 

@@ -28,35 +28,8 @@ StagePanel::StagePanel(wxWindow* parent,
 
 //	m_strategy = new RectBinArrange();
 
-	d2d::InsertSpriteSJ::Instance()->Register(this);
-	d2d::RemoveSpriteSJ::Instance()->Register(this);
-}
-
-StagePanel::~StagePanel()
-{
-	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
-	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	SpritesPanelImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case d2d::MSG_INSERT_SPRITE:
-		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			fixCoords(p->spr);
-			// todo
-			// SpritesPanelImpl::Notify(sj_id, ud);
-			arrangeAllSprites(false);
-		}
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		arrangeAllSprites(false);
-		break;
-	}
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::RemoveSpriteSJ::Instance());
 }
 
 void StagePanel::insertSpriteNoArrange(d2d::ISprite* sprite)
@@ -136,6 +109,27 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 		fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
 		sprite->SetTransform(fixedCenter, sprite->GetAngle());
+	}
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	SpritesPanelImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		{
+			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			fixCoords(p->spr);
+			// todo
+			// SpritesPanelImpl::OnNotify(sj_id, ud);
+			arrangeAllSprites(false);
+		}
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		arrangeAllSprites(false);
+		break;
 	}
 }
 

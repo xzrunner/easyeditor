@@ -19,26 +19,24 @@ public:
 	virtual ~SpritesPanelImpl();
 
 	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
-	//
 	// MultiSpritesImpl interface
 	//
 	virtual void TraverseSprites(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
+
 private:
-	void RegistSubjects();
-	void UnRegistSubjects();
+	void InitSubjects();
 
 private:
 	EditPanelImpl* m_stage;
 
 	IDataContainer* m_container;
-
-	std::vector<Subject*> m_subjects;
 
 }; // SpritesPanelImpl
 

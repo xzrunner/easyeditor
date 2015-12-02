@@ -10,12 +10,12 @@ class LayersPropertyWidget : public wxPanel, public d2d::Observer
 {
 public:
 	LayersPropertyWidget(wxWindow* parent);
-	virtual ~LayersPropertyWidget();
 
+protected:
 	//
 	//	interface Observer
 	//
-	virtual void Notify(int sj_id, void* ud);
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void InitLayout();

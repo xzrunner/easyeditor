@@ -25,11 +25,6 @@ public:
 	EditPanelImpl(wxTopLevelWindow* frame, EditPanel* stage);
 	~EditPanelImpl();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void SetEditPanelNull();
 	
 	bool Update(int version);
@@ -87,11 +82,16 @@ public:
 
 	EditPanel* GetEditPanel() { return m_stage; }
 
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
+
 private:
 	void Clear();
 
-	void RegistSubjects();
-	void UnRegistSubjects();
+	void InitSubjects();
 
 protected:
 	AbstractEditOP* m_edit_op;
@@ -107,8 +107,6 @@ private:
 	HistoryList m_history_list;
 
 	KeysState m_keys_state;
-
-	std::vector<Subject*> m_subjects;
 
 }; // EditPanelImpl
 

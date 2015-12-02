@@ -15,11 +15,6 @@ public:
 	LayersMgr(Controller* ctrl);
 	~LayersMgr();
 
-	//
-	//	interface Observer
-	//
-	virtual void Notify(int sj_id, void* ud);
-
 	void ChangeLayerOrder(int from, int to);
 
 	size_t Size() const {
@@ -40,6 +35,12 @@ public:
 	}
 
 	int GetMaxFrame() const;
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void Insert(Layer* layer);

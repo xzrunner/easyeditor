@@ -17,34 +17,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
 
-	d2d::InsertSpriteSJ::Instance()->Register(this);
-	d2d::RemoveSpriteSJ::Instance()->Register(this);
-	d2d::ClearSpriteSJ::Instance()->Register(this);
-}
-
-StagePanel::~StagePanel()
-{
-	d2d::InsertSpriteSJ::Instance()->UnRegister(this);
-	d2d::RemoveSpriteSJ::Instance()->UnRegister(this);
-	d2d::ClearSpriteSJ::Instance()->UnRegister(this);
-}
-
-void StagePanel::Notify(int sj_id, void* ud)
-{
-	d2d::MultiSpritesImpl::Notify(sj_id, ud);
-
-	switch (sj_id)
-	{
-	case d2d::MSG_INSERT_SPRITE:
-		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
-		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
-		break;
-	case d2d::MSG_CLEAR_SPRITE:
-		Clear();
-		break;
-	}
+	RegistSubject(d2d::InsertSpriteSJ::Instance());
+	RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
@@ -69,6 +44,24 @@ vec3 StagePanel::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
 {
 	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ScreenToProject(scr, proj_z);	
+}
+
+void StagePanel::OnNotify(int sj_id, void* ud)
+{
+	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+
+	switch (sj_id)
+	{
+	case d2d::MSG_INSERT_SPRITE:
+		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
+		break;
+	case d2d::MSG_REMOVE_SPRITE:
+		Remove((d2d::ISprite*)ud);
+		break;
+	case d2d::MSG_CLEAR_SPRITE:
+		Clear();
+		break;
+	}
 }
 
 void StagePanel::Insert(d2d::ISprite* spr)

@@ -61,19 +61,8 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent, const LayersMgr& layers,
 
 	RegisterHotKey(Hot_InsertFrame, 0, VK_MULTIPLY);
 	RegisterHotKey(Hot_DeleteFrame, 0, VK_DIVIDE);
-}
 
-void KeysContentWidget::Notify(int sj_id, void* ud)
-{
-	if (sj_id == MSG_SET_CURR_FRAME) {
-		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
-		if (cf->layer != -1 && cf->layer != m_curr_layer ||
-			cf->frame != -1 && cf->frame != m_curr_frame) {
-			m_curr_layer = cf->layer;
-			m_curr_frame = cf->frame;
-			Refresh();
-		}
-	}
+	RegistSubject(SetCurrFrameSJ::Instance());
 }
 
 void KeysContentWidget::onSize(wxSizeEvent& event)
@@ -135,6 +124,19 @@ void KeysContentWidget::OnKeyUp(wxKeyEvent& event)
 {
 	int key_code = event.GetKeyCode();
 	m_keys_state.OnKeyUp(key_code);
+}
+
+void KeysContentWidget::OnNotify(int sj_id, void* ud)
+{
+	if (sj_id == MSG_SET_CURR_FRAME) {
+		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
+		if (cf->layer != -1 && cf->layer != m_curr_layer ||
+			cf->frame != -1 && cf->frame != m_curr_frame) {
+				m_curr_layer = cf->layer;
+				m_curr_frame = cf->frame;
+				Refresh();
+		}
+	}
 }
 
 KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
