@@ -108,8 +108,19 @@ void IStageCanvas::SetBgColor(const Colorf& color)
 
 void IStageCanvas::SetCurrentCanvas()
 {
-	RenderContext::SetCurrContext(m_render_context);
 	SetCurrent(*m_gl_context);
+
+	Vector offset;
+	float scale;
+	m_render_context->GetModelView(offset, scale);
+
+	int width, height;
+	m_render_context->GetProjection(width, height);
+
+	m_render_context->SetModelView(offset, scale);
+	m_render_context->SetProjection(width, height);
+
+	RenderContext::SetCurrContext(m_render_context);
 }
 
 void IStageCanvas::InitGL()
