@@ -6,8 +6,8 @@ namespace eui
 namespace list
 {
 
-StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
 {
 }

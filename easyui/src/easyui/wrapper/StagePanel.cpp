@@ -9,18 +9,21 @@
 
 #include <easycomplex.h>
 
+extern d2d::StageModule MODULE_STAGE;
+
 namespace eui
 {
 namespace wrapper
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   wxGLContext* glctx, TopPannels* top_pannels)
 	: UIStagePage(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetRawLibrary())
 	, m_top_pannels(top_pannels)
 {
 	SetEditOP(static_cast<EditClipboxOP*>(new EditOP(this, top_pannels->property)));
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(new StageCanvas(this, glctx));
 
 	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
 
@@ -33,6 +36,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_clipbox.xMax = m_clipbox.yMax =  200;
 
 	UnRegistSubjects();
+
+	MODULE_STAGE.impl = this;
 }
 
 void StagePanel::LoadFromFile(const char* filename)

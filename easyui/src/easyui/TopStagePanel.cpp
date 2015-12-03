@@ -41,23 +41,26 @@ void TopStagePanel::InitLayout()
 
 void TopStagePanel::InitTabPages(wxSizer* sizer)
 {
+	wxGLContext* gl_ctx = NULL;
+
 	m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 	// window
 	{
 		window::StagePanel* page = new window::StagePanel(m_notebook, m_frame, m_top_pannels);
+		gl_ctx = page->GetCanvas()->GetGLContext();
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Window"));
 		page->RegistSubjects();
 	}
 	// list
 	{
-		list::StagePanel* page = new list::StagePanel(m_notebook, m_frame, m_top_pannels);
+		list::StagePanel* page = new list::StagePanel(m_notebook, m_frame, gl_ctx, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("List"));
 	}
 	// wrapper
 	{
-		wrapper::StagePanel* page = new wrapper::StagePanel(m_notebook, m_frame, m_top_pannels);
+		wrapper::StagePanel* page = new wrapper::StagePanel(m_notebook, m_frame, gl_ctx, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Wrapper"));
 	}

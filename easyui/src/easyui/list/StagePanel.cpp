@@ -11,13 +11,14 @@ namespace eui
 namespace list
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   wxGLContext* glctx, TopPannels* top_pannels)
 	: UIStagePage(parent, frame)
 	, d2d::MultiSpritesImpl(GetStageImpl())
 	, m_top_pannels(top_pannels)
 {
 	SetEditOP(static_cast<EditClipboxOP*>(new EditOP(this, top_pannels->property)));
-	SetCanvas(new StageCanvas(this));
+	SetCanvas(new StageCanvas(this, glctx));
 
 	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
 	SetDropTarget(new d2d::SpriteDropTarget(GetStageImpl(), library));

@@ -19,7 +19,8 @@ class ToolbarPanel;
 class StagePanel : public UIStagePage, public d2d::MultiSpritesImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx,
+		TopPannels* top_pannels);
 
 	//
 	// d2d::MultiSpritesImpl interface

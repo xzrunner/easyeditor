@@ -13,7 +13,7 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* stage);
+	StageCanvas(StagePanel* stage, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
