@@ -575,30 +575,6 @@
 					RelativePath="..\..\..\src\easyui\window\QueryWindowViewSizeSJ.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\ResetViewportSJ.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\window\"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\window\ResetViewportSJ.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="preview"

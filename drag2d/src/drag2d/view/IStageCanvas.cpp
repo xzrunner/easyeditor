@@ -11,7 +11,6 @@
 #include "render/RenderContext.h"
 #include "render/RenderContextStack.h"
 #include "message/SetCanvasDirtySJ.h"
-#include "message/ResetViewportSJ.h"
 #include "message/subject_id.h"
 
 namespace d2d
@@ -54,7 +53,6 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 	m_timer.Start(1000 / FPS);
 
 	RegistSubject(SetCanvasDirtySJ::Instance());
-	RegistSubject(ResetViewportSJ::Instance());
 
 	RenderContextStack::Instance()->Push(this, m_render_context);
 }
@@ -121,18 +119,6 @@ void IStageCanvas::OnNotify(int sj_id, void* ud)
 	case MSG_SET_CANVAS_DIRTY:
 		m_dirty = true;
 		break;
-	case MSG_RESET_VIEWPORT:
-		// On Mouse Wheel
-		// onSize no use, if the size not change
-		// also can put gluOrtho2D in each onPaint, save this and Camera's observer pattern
-		//		OnSize(wxSizeEvent(m_parent->GetSize()));
-
-		{
-			wxSize sz = m_parent->GetSize();
-			RenderContextStack::Instance()->SetProjection(sz.GetWidth(), sz.GetHeight());
-		}
-
-		break;
 	}
 }
 
@@ -151,8 +137,6 @@ void IStageCanvas::Init()
 	try {
 		ShaderContext::Reload();
 		ShaderContext::Reset();
-
-		ResetViewportSJ::Instance()->Reset();
 
 		glEnable(GL_TEXTURE_2D);
 	} catch (Exception& e) {

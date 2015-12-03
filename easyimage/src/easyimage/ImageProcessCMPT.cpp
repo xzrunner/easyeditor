@@ -76,7 +76,6 @@ void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -91,7 +90,6 @@ void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(m_edge_shader);
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -115,7 +113,6 @@ void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -130,7 +127,6 @@ void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -145,7 +141,6 @@ void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(m_blur_shader);
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

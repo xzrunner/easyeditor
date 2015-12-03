@@ -176,8 +176,6 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	m_ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	m_ctrl->Refresh();
-
-	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)

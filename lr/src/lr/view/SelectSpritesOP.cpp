@@ -139,7 +139,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	m_spritesImpl->EnableObserve(true);
 
 	m_stage->GetCanvas()->EnableObserve(true);
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;

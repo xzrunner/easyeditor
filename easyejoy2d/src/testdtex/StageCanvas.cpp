@@ -16,11 +16,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::InitGL()
 {
 	d2d::OnePassCanvas::InitGL();
-
 	m_panel->Load();
-
-	// todo: resize -> new -> resize
-	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void StageCanvas::OnSize(int w, int h)

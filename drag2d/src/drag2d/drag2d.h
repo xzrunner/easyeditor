@@ -201,4 +201,3 @@
 #include "message/InsertShapeSJ.h"
 #include "message/ClearShapeSJ.h"
 #include "message/SetCanvasDirtySJ.h"
-#include "message/ResetViewportSJ.h"

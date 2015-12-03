@@ -28,7 +28,6 @@ Task::~Task()
 void Task::Load(const char* filename)
 {
 	FileIO::Load(filename, m_library, m_stage, m_grouptree);
-	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void Task::Store(const char* filename) const

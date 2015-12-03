@@ -8,7 +8,6 @@
 #include "message_id.h"
 #include "QueryWindowViewSizeSJ.h"
 #include "ChangeWindowViewSizeSJ.h"
-#include "ResetViewportSJ.h"
 #include "PreviewDialog.h"
 #include "Code.h"
 #include "widget_id.h"
@@ -41,7 +40,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
 	RegistSubject(QueryWindowViewSizeSJ::Instance());
-	RegistSubject(ResetViewportSJ::Instance());
 	UnRegistSubjects();
 }
 
@@ -235,9 +233,6 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 			p->width = m_view_width;
 			p->height = m_view_height;
 		}
-		break;
-	case MSG_RESET_VIEWPORT:
-		d2d::ResetViewportSJ::Instance()->Reset();
 		break;
 	case d2d::MSG_INSERT_SPRITE:
 		{

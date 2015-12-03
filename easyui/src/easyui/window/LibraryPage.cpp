@@ -1,5 +1,4 @@
 #include "LibraryPage.h"
-#include "ResetViewportSJ.h"
 
 #include <easycomplex.h>
 
@@ -38,8 +37,6 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			m_list->Insert(symbol);
 			symbol->Release();
 		}
-
-		ResetViewportSJ::Instance()->Reset();
 	}
 }
 

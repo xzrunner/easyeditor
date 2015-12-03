@@ -91,7 +91,6 @@ void Frame::OnPreview(wxCommandEvent& event)
 	stage->EnableObserve(true);
 	stage->GetCanvas()->EnableObserve(true);
 
-	d2d::ResetViewportSJ::Instance()->Reset();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

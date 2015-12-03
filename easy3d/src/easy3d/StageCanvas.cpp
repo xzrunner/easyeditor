@@ -45,8 +45,6 @@ void StageCanvas::InitGL()
 
 		ShaderMgr::Instance()->Null();
 
-		d2d::ResetViewportSJ::Instance()->Reset();
-
 		glShadeModel(GL_SMOOTH);
 		glEnable(GL_TEXTURE_2D);
 

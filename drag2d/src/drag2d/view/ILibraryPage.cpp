@@ -7,7 +7,6 @@
 #include "common/Exception.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/ISymbol.h"
-#include "message/ResetViewportSJ.h"
 
 namespace d2d
 {
@@ -55,7 +54,6 @@ void ILibraryPage::ReloadTexture() const
 void ILibraryPage::AddItem(ListItem* item)
 {
 	m_list->Insert(item);
-//	ResetViewportSJ::Instance()->Reset();
 }
 
 void ILibraryPage::InitLayout(bool draggable/* = true*/)

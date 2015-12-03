@@ -58,8 +58,6 @@ void StageCanvas::InitGL()
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DrawCallBatching::Instance()->ReloadEnd();
 	}
-
-//	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void StageCanvas::OnSize(int w, int h)

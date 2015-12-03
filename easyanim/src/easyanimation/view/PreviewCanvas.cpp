@@ -31,8 +31,6 @@ void PreviewCanvas::InitGL()
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DrawCallBatching::Instance()->ReloadEnd();
 	}
-
-	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void PreviewCanvas::OnDrawSprites() const

@@ -6,7 +6,6 @@
 #include "dataset/ImageSymbol.h"
 #include "view/IStageCanvas.h"
 #include "common/Exception.h"
-#include "message/ResetViewportSJ.h"
 
 namespace d2d
 {

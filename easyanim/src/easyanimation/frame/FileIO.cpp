@@ -58,8 +58,6 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	SetCurrFrameSJ::Instance()->Set(0, 0);
-
-	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)

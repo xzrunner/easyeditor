@@ -115,7 +115,6 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			if (dlg.ShowModal()) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
-				d2d::ResetViewportSJ::Instance()->Reset();
 			}
 		}
 		break;

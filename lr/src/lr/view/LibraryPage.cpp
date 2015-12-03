@@ -101,8 +101,6 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			m_list->Insert(symbol);
 			symbol->Release();
 		}
-
-		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 }
 

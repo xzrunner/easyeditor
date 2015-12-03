@@ -40,8 +40,6 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 				dlg.ShowModal();
 			}
 		}
-
-		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 }
 

@@ -171,7 +171,6 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-		d2d::ResetViewportSJ::Instance()->Reset();
 
 		return true;
 	}

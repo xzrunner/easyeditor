@@ -28,8 +28,6 @@ bool ImageProcessOP::OnActive()
 // 		shader->SetTexelSize(1/r.xLength(), 1/r.yLength());
 		shader->SetTexelSize(1.0f/4096, 1.0f/4096);
 		shader_mgr->SetSpriteShader(shader);
-
-		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 
 	return false;

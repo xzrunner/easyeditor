@@ -52,7 +52,6 @@ void Task::Load(const char* filepath)
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	d2d::ResetViewportSJ::Instance()->Reset();
 }
 
 void Task::Store(const char* filepath) const

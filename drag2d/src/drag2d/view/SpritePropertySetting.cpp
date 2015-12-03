@@ -17,7 +17,6 @@
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
 #include "message/SetCanvasDirtySJ.h"
-#include "message/ResetViewportSJ.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -97,7 +96,6 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		int idx = wxANY_AS(value, int);
 		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
-		ResetViewportSJ::Instance()->Reset();
 	}
 	else if (name == wxT("Clip"))
 	{

@@ -39,7 +39,6 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 				d2d::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();
 			}
-			d2d::ResetViewportSJ::Instance()->Reset();
 		}
 	}
 }

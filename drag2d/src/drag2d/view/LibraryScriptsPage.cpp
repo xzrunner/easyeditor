@@ -7,7 +7,6 @@
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
 #include "view/IStageCanvas.h"
-#include "message/ResetViewportSJ.h"
 
 namespace d2d
 {
@@ -47,8 +46,6 @@ void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 				dlg.ShowModal();
 			}
 		}
-
-		ResetViewportSJ::Instance()->Reset();
 	}
 }
 

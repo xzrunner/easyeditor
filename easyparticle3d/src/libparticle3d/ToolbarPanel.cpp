@@ -463,9 +463,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	if (symbol)
 	{
 		m_toolbar->OnAddChild(wxCommandEvent(), symbol);
-
 		m_stage->m_ps->Start();
-		d2d::ResetViewportSJ::Instance()->Reset();
 	}
 
 	return true;
