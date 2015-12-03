@@ -20,7 +20,6 @@ class StagePanel : public UIStagePage, public d2d::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);
-	virtual ~StagePanel();
 
 	//
 	// d2d::MultiSpritesImpl interface

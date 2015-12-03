@@ -21,7 +21,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 
 	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
 	SetDropTarget(new d2d::SpriteDropTarget(GetStageImpl(), library));
-	library->SetCanvas(GetCanvas());
 
 	top_pannels->property->SetEditPanel(GetStageImpl());
 

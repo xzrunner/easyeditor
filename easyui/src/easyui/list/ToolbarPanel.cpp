@@ -84,7 +84,7 @@ void ToolbarPanel::OnItemFilling(wxCommandEvent& event)
 {
 	bool succ = m_stage_panel->GetList().ReFilling();
 	if (succ) {
-		m_stage_panel->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -99,7 +99,7 @@ void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 	r.yMin = -hh;
 	r.yMax = hh;
 
-	m_stage_panel->d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ToolbarPanel::OnChangeHori(wxCommandEvent& event)

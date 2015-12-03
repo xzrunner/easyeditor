@@ -47,7 +47,7 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 		window::StagePanel* page = new window::StagePanel(m_notebook, m_frame, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Window"));
-		(static_cast<UIStagePage*>(page))->RegistSubjects();
+		page->RegistSubjects();
 	}
 	// list
 	{
