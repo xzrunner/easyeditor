@@ -83,8 +83,12 @@ void IStageCanvas::SetCurrentCanvas()
 	int width, height;
 	m_render_context->GetProjection(width, height);
 
-	m_render_context->SetModelView(offset, scale);
-	m_render_context->SetProjection(width, height);
+	if (scale != 0) {
+		m_render_context->SetModelView(offset, scale);
+	}
+	if (width != 0 && height != 0) {
+		m_render_context->SetProjection(width, height);
+	}
 
 	RenderContext::SetCurrContext(m_render_context);
 }

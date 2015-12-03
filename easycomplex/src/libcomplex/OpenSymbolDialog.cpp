@@ -97,6 +97,8 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	m_sprites_impl->EnableObserve(true);
 	m_stage->GetCanvas()->EnableObserve(true);
 
+	m_stage->GetCanvas()->SetCurrentCanvas();
+
 	context->SetModelView(last_offset, last_scale);
 	context->SetProjection(last_w, last_h);		
 }
