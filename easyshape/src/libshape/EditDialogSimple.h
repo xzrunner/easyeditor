@@ -12,12 +12,12 @@ class StagePanel;
 class EditDialogSimple : public wxDialog
 {
 public:
-	EditDialogSimple(wxWindow* parent, d2d::ISprite* edited,
-		const d2d::MultiSpritesImpl* sprite_impl);
+	EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
+		d2d::ISprite* edited, const d2d::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialogSimple();
 
 private:
-	void InitLayout(d2d::ISprite* edited, 
+	void InitLayout(wxGLContext* glctx, d2d::ISprite* edited, 
 		const d2d::MultiSpritesImpl* sprite_impl);
 	void InitEditOP(d2d::ISprite* edited);
 

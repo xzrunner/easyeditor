@@ -16,14 +16,14 @@ BEGIN_EVENT_TABLE(EditDialogSimple, wxDialog)
 	EVT_CLOSE(EditDialogSimple::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialogSimple::EditDialogSimple(wxWindow* parent, d2d::ISprite* edited,
-								   const d2d::MultiSpritesImpl* sprite_impl)
+EditDialogSimple::EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
+								   d2d::ISprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
 	, m_capture(5)
 {
-	InitLayout(edited, sprite_impl);
+	InitLayout(glctx, edited, sprite_impl);
 	InitEditOP(edited);
 
 	m_stage->SetTitleStatus(true);
@@ -33,11 +33,12 @@ EditDialogSimple::~EditDialogSimple()
 {
 }
 
-void EditDialogSimple::InitLayout(d2d::ISprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
+void EditDialogSimple::InitLayout(wxGLContext* glctx, d2d::ISprite* edited, 
+								  const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
-	m_stage = new StagePanel(this, this, edited, sprite_impl);
+	m_stage = new StagePanel(this, this, glctx, edited, sprite_impl);
 	sizer->Add(m_stage, 1, wxEXPAND);
 
 	SetSizer(sizer);
