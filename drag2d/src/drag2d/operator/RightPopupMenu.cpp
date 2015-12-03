@@ -150,8 +150,6 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 // 				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
 // 				dtex->InsertSymbol(s);
 // 			}
-// 
-// 			m_stage->GetCanvas()->ResetViewport();
 // 		}
 // 	} else if (id == MENU_REMOVE_FROM_DTEX) {
 // 		if (Config::Instance()->IsUseDTex()) {

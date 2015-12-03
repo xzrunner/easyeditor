@@ -172,10 +172,6 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		m_pc->bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(dlg.GetPath().ToStdString());
-
-		// 		if (m_canvas) {
-		// 			m_canvas->ResetViewport();
-		// 		}
 	}
 }
 

@@ -62,7 +62,6 @@ bool ColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 // 	if ( dlg.ShowModal() == wxID_OK )
 // 	{
 // 		*m_color = dlg.GetColor();
-// 		m_stage->ResetViewport();
 // 		return true;
 // 	}
 
