@@ -40,16 +40,6 @@ void StageCanvas3D::GetScreenSize(int* width, int* height) const
 	*height = m_height;
 }
 
-void StageCanvas3D::InitGL()
-{
-	e3d::StageCanvas::InitGL();
-
-	m_scene->Load(NULL);
-
-	// for Camera reset when init
-	Refresh();
-}
-
 void StageCanvas3D::OnDrawSprites() const
 {
 	m_scene->Draw();

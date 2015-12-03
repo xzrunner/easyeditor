@@ -14,14 +14,15 @@ class ToolbarPanel;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Sprite* spr,
-		const d2d::MultiSpritesImpl* sprite_impl);
+	EditDialog(wxWindow* parent, wxGLContext* glctx, 
+		Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl);
 
 private:
-	void InitLayout(Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl);
+	void InitLayout(wxGLContext* glctx, Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl);
 
 	wxWindow* InitLayoutLeft(wxWindow* parent);
-	wxWindow* InitLayoutCenter(wxWindow* parent, Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl);
+	wxWindow* InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
+		Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl);
 	wxWindow* InitLayoutRight(wxWindow* parent, Sprite* spr);
 
 	void OnCloseEvent(wxCloseEvent& event);

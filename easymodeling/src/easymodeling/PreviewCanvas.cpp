@@ -16,12 +16,6 @@ PreviewCanvas::~PreviewCanvas()
 {
 }
 
-void PreviewCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-}
-
 void PreviewCanvas::OnDrawSprites() const
 {
  	m_stage_panel->drawPhysics();

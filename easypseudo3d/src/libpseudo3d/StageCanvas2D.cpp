@@ -13,16 +13,6 @@ StageCanvas2D::StageCanvas2D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
 	m_scene = new Projection2DScene(stage);
 }
 
-void StageCanvas2D::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-
-	m_scene->Load(NULL);
-
-	// for Camera reset when init
-	Refresh(true);
-}
-
 void StageCanvas2D::OnDrawSprites() const
 {
 	m_scene->Draw();

@@ -11,11 +11,6 @@ StageCanvas::StageCanvas(StagePanel* panel)
 	: d2d::OnePassCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 {
-}
-
-void StageCanvas::InitGL()
-{
-	d2d::OnePassCanvas::InitGL();
 	m_panel->Load();
 }
 

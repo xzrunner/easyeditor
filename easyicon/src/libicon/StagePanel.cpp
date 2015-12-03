@@ -16,10 +16,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
+					   wxGLContext* glctx, d2d::ISprite* edited, 
+					   const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::EditPanel(parent, frame)
 {
-	SetCanvas(new StageCanvas(this, edited, bg_sprites));
+	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
 		m_symbol->Retain();

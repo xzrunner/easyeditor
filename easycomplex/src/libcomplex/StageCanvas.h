@@ -20,7 +20,6 @@ public:
 	void SetBackground(d2d::ISymbol* symbol);
 
 protected:
-	virtual void InitGL();
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawSprites() const;
 

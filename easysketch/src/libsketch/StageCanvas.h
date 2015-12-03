@@ -19,7 +19,6 @@ public:
 	vec3 TransPos3ScreenToDir(const ivec2& screen) const;
 
 protected:
-	virtual void InitGL();
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawSprites() const;
 

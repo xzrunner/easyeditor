@@ -14,7 +14,6 @@ public:
 	virtual ~PreviewCanvas();
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 private:

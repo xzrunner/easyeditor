@@ -31,12 +31,6 @@ vec3 StageCanvas::TransPos3ScreenToDir(const ivec2& screen) const
 	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_screen_width, m_screen_height);
 }
 
-void StageCanvas::InitGL()
-{
-	e3d::StageCanvas::InitGL();
-	m_library->LoadDefaultSymbol();
-}
-
 void StageCanvas::OnSize(int w, int h)
 {
 	e3d::StageCanvas::OnSize(w, h);

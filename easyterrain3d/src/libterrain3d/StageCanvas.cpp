@@ -24,16 +24,9 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
 //	m_demo = new DemoBruteForce(GetCamera3());
 	m_demo = new DemoBruteForceTex(GetCamera3());
 //	m_demo = new DemoOcean(GetCamera3());
-}
 
-void StageCanvas::InitGL()
-{
-	e3d::StageCanvas::InitGL();
-
+	// fixme
 	m_demo->Load();
-
-	// for Camera reset when init
-	Refresh();
 }
 
 void StageCanvas::OnDrawSprites() const

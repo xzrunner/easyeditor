@@ -13,7 +13,6 @@ public:
 		d2d::PlayControl& control, const std::vector<const d2d::ISprite*>& sprites);
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 	virtual void OnTimer();

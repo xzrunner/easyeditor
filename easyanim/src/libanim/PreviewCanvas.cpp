@@ -4,8 +4,8 @@ namespace libanim
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage,
-							 const Symbol* symbol)
-	: d2d::OrthoCanvas(stage_wnd, stage)
+							 const Symbol* symbol, wxGLContext* glctx)
+	: d2d::OrthoCanvas(stage_wnd, stage, glctx)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->getFPS())
 {
@@ -14,13 +14,6 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage,
 PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 {
 	return m_setting;
-}
-
-void PreviewCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-
-	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
 }
 
 void PreviewCanvas::OnDrawSprites() const

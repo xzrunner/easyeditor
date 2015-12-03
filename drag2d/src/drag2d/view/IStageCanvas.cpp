@@ -99,27 +99,6 @@ void IStageCanvas::SetCurrentCanvas()
 	}
 }
 
-void IStageCanvas::InitGL()
-{
-// 	SetCurrentCanvas();
-// 
-// 	if (glewInit() != GLEW_OK) {
-// 		exit(1);
-// 	}
-// 
-// 	try {
-// 		ShaderContext::Reload();
-// 		ShaderContext::Reset();
-// 
-// 		ResetViewportSJ::Instance()->Reset();
-// 
-// 		glEnable(GL_TEXTURE_2D);
-// 	} catch (Exception& e) {
-// 		ExceptionDlg dlg(m_parent, e);
-// 		dlg.ShowModal();	
-// 	}
-}
-
 void IStageCanvas::OnNotify(int sj_id, void* ud) 
 {
 	switch (sj_id)

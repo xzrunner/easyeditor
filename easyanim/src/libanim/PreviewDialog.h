@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _LIBANIM_PREVIEW_DIALOG_H_
+#define _LIBANIM_PREVIEW_DIALOG_H_
 
 #include <wx/wx.h>
 #include <drag2d.h>
@@ -11,17 +12,18 @@ class Symbol;
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent, const Symbol* symbol);
+	PreviewDialog(wxWindow* parent, const Symbol* symbol,
+		wxGLContext* glctx);
 	~PreviewDialog();
 
 private:
-	void initLayout();
+	void InitLayout(wxGLContext* glctx);
 
-	void buildToolBar(wxSizer* topSizer);
-	void buildEditPanel(wxSizer* topSizer);
+	void BuildToolBar(wxSizer* topSizer);
+	void BuildEditPanel(wxSizer* topSizer, wxGLContext* glctx);
 
-	void onSetCirculate(wxCommandEvent& event);
-	void onSetStop(wxCommandEvent& event);
+	void OnSetCirculate(wxCommandEvent& event);
+	void OnSetStop(wxCommandEvent& event);
 
 private:
 	d2d::EditPanel* m_stage;
@@ -32,3 +34,4 @@ private:
 
 }
 
+#endif // _LIBANIM_PREVIEW_DIALOG_H_

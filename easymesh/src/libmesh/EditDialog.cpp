@@ -15,14 +15,14 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Sprite* sprite)
+EditDialog::EditDialog(wxWindow* parent, Sprite* sprite, wxGLContext* glctx)
 	: wxDialog(parent, wxID_ANY, "Edit Mesh", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_sprite(sprite)
 {
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 	SetTitle(symbol.GetFilepath());
-	initLayout();
+	InitLayout(glctx);
 
 	symbol.SetPause(true);
 //	m_symbol->getShape()->RefreshTriangles();
@@ -34,7 +34,7 @@ EditDialog::~EditDialog()
 	symbol.SetPause(false);
 }
 
-void EditDialog::initLayout()
+void EditDialog::InitLayout(wxGLContext* glctx)
 {
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  

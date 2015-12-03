@@ -17,7 +17,6 @@ public:
 		const PlaySettings& settings, d2d::PlayControl& control, const LayersMgr& layers);
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 	virtual void OnTimer();

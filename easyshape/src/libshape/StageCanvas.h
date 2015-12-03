@@ -12,14 +12,13 @@ class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
-	StageCanvas(StagePanel* stage, d2d::ISprite* edited,
-		const d2d::MultiSpritesImpl* bg_sprites);
+	StageCanvas(StagePanel* stage, wxGLContext* glctx,
+		d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites);
 
 public:
 	void DrawGuideLines() const;
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 private:

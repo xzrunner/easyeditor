@@ -40,7 +40,6 @@ public:
 	wxGLContext* GetGLContext() { return m_gl_context; }
 
 protected:
-	virtual void InitGL();
 	virtual void OnSize(int w, int h) = 0;
 	virtual void OnDrawWhole() const = 0;
 	virtual void OnDrawSprites() const = 0;

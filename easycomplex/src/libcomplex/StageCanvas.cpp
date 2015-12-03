@@ -37,25 +37,6 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 	d2d::obj_assign<d2d::ISymbol>(m_background, symbol);
 }
 
-void StageCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-
-	m_library->LoadDefaultSymbol();
-
-	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
-	shader_mgr->Null();
-	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
-
- 	if (d2d::Config::Instance()->IsUseDTex()) {
- 		d2d::DrawCallBatching::Instance()->ReloadBegin();
- 	}
-	m_stage->getSymbol()->ReloadTexture();
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadEnd();
-	}
-}
-
 void StageCanvas::OnSize(int w, int h)
 {
 	d2d::OrthoCanvas::OnSize(w, h);

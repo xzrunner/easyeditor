@@ -11,12 +11,12 @@ class Symbol;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol);
+	EditDialog(wxWindow* parent, Symbol* symbol, wxGLContext* glctx);
 
 private:
-	void initLayout();
+	void InitLayout(wxGLContext* glctx);
 
-	void storeSymbol();
+	void StoreSymbol();
 
 	void OnCloseEvent(wxCloseEvent& event);
 

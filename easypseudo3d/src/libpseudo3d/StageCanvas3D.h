@@ -20,7 +20,6 @@ public:
 	void GetScreenSize(int* width, int* height) const;
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 	//virtual void OnDrawDC() const;
 

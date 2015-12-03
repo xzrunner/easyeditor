@@ -12,12 +12,12 @@ class Sprite;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Sprite* edited, 
-		const d2d::MultiSpritesImpl* sprite_impl);
+	EditDialog(wxWindow* parent, wxGLContext* glctx, 
+		Sprite* edited, const d2d::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(d2d::ISprite* edited, 
+	void InitLayout(wxGLContext* glctx, d2d::ISprite* edited, 
 		const d2d::MultiSpritesImpl* sprite_impl);
 
 	void OnCloseEvent(wxCloseEvent& event);

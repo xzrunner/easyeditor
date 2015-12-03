@@ -17,8 +17,8 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl,
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites, 
-		d2d::LibraryPanel* library);
+		wxGLContext* glctx, d2d::ISprite* edited, 
+		const d2d::MultiSpritesImpl* bg_sprites, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	void Store(const std::string& dir, Json::Value& value) const;

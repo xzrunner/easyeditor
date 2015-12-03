@@ -14,22 +14,14 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
-StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
-						 const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
+StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
+						 d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
+	: d2d::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-}
-
-void StageCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-
-	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-
 	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
 }
 

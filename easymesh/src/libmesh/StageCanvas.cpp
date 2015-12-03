@@ -11,19 +11,6 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
-void StageCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadBegin();
-	}
-	m_panel->GetSymbol()->ReloadTexture();
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadEnd();
-	}
-}
-
 void StageCanvas::OnDrawSprites() const
 {
 	const d2d::ISprite* bg = m_panel->GetBackground();

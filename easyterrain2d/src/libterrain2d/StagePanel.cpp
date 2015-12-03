@@ -23,14 +23,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites, 
+					   wxGLContext* glctx, d2d::ISprite* edited, 
+					   const d2d::MultiSpritesImpl* bg_sprites, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, d2d::ShapesPanelImpl()
 {
 	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
-	SetCanvas(new StageCanvas(this, edited, bg_sprites));
+	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 
 	m_oceans = static_cast<Sprite*>(edited)->GetSymbol().GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {

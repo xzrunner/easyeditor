@@ -13,12 +13,6 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::Pl
 {
 }
 
-void StageCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-}
-
 void StageCanvas::OnDrawSprites() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)

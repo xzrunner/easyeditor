@@ -25,12 +25,12 @@ public:
 	};
 
 public:
-	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, const Symbol* symbol);
+	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+		const Symbol* symbol, wxGLContext* glctx);
 
 	PlaySetting& getPlaySetting();
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 protected:

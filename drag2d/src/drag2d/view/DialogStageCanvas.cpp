@@ -8,23 +8,11 @@
 namespace d2d
 {
 
-DialogStageCanvas::DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, ISymbol* symbol)
-	: OrthoCanvas(stage_wnd, stage)
+DialogStageCanvas::DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
+									 ISymbol* symbol, wxGLContext* glctx)
+	: OrthoCanvas(stage_wnd, stage, glctx)
 	, m_symbol(symbol)
 {
-}
-
-void DialogStageCanvas::InitGL()
-{
-	OrthoCanvas::InitGL();
-
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		DrawCallBatching::Instance()->ReloadBegin();
-	}
-	m_symbol->ReloadTexture();
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		DrawCallBatching::Instance()->ReloadEnd();
-	}
 }
 
 void DialogStageCanvas::OnDrawSprites() const

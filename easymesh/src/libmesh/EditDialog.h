@@ -11,11 +11,11 @@ class Sprite;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Sprite* sprite);
+	EditDialog(wxWindow* parent, Sprite* sprite, wxGLContext* glctx);
 	virtual ~EditDialog();
 
 private:
-	void initLayout();
+	void InitLayout(wxGLContext* glctx);
 
 	void OnCloseEvent(wxCloseEvent& event);
 

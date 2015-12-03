@@ -19,12 +19,6 @@ PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d
 	m_scale_mt.scale(scale, scale);
 }
 
-void PreviewCanvas::InitGL()
-{
-	d2d::OrthoCanvas::InitGL();
-	d2d::ImageMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::Image>());
-}
-
 void PreviewCanvas::OnDrawSprites() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)

@@ -214,7 +214,7 @@ static const char* CFG =
 	"	\"open_c3\" : false,	 \n"
 	"	\"open_cg\" : true,	 \n"
 	"	\"open_cs\" : true,	 \n"
-	"	\"c2_tex_size\" : 512	 \n"
+	"	\"c2_tex_size\" : 2048	\n"
 	"} \n"
 	;
 

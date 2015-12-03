@@ -11,10 +11,10 @@ class ISymbol;
 class DialogStageCanvas : public OrthoCanvas
 {
 public:
-	DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, ISymbol* symbol);
+	DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
+		ISymbol* symbol, wxGLContext* glctx);
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 private:

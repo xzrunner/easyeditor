@@ -14,7 +14,6 @@ public:
 	StageCanvas2D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 private:

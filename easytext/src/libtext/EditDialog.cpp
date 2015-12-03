@@ -14,21 +14,22 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnCloseEvent)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Sprite* spr,
-					   const d2d::MultiSpritesImpl* sprite_impl)
+EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
+					   Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Text", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 {
-	InitLayout(spr, sprite_impl);
+	InitLayout(glctx, spr, sprite_impl);
 }
 
-void EditDialog::InitLayout(Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl)
+void EditDialog::InitLayout(wxGLContext* glctx, Sprite* spr, 
+							const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_split = new wxSplitterWindow(this);
 	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
 	wxWindow* left = InitLayoutLeft(left_split);
-	wxWindow* center = InitLayoutCenter(left_split, spr, sprite_impl);
+	wxWindow* center = InitLayoutCenter(left_split, glctx, spr, sprite_impl);
 	wxWindow* right = InitLayoutRight(right_split, spr);
 
 	left_split->SetSashGravity(0.15f);
@@ -44,12 +45,12 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 	return m_library;
 }
 
-wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, Sprite* spr,
-									   const d2d::MultiSpritesImpl* sprite_impl)
+wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
+									   Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_stage = new StagePanel(split, this, spr, sprite_impl, m_library);
+	m_stage = new StagePanel(split, this, glctx, spr, sprite_impl, m_library);
 
 	m_input = new InputPanel(split, spr, m_stage->GetStageImpl());
 

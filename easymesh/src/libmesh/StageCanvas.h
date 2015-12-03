@@ -14,7 +14,6 @@ public:
 	StageCanvas(StagePanel* panel);
 
 protected:
-	virtual void InitGL();
 	virtual void OnDrawSprites() const;
 
 private:

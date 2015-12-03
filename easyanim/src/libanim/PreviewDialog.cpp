@@ -5,11 +5,12 @@
 namespace libanim
 {
 
-PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* symbol)
+PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* symbol,
+							 wxGLContext* glctx)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 	, m_symbol(symbol)
 {
-	initLayout();
+	InitLayout(glctx);
 }
 
 PreviewDialog::~PreviewDialog()
@@ -17,40 +18,40 @@ PreviewDialog::~PreviewDialog()
 //	delete m_stage;
 }
 
-void PreviewDialog::initLayout()
+void PreviewDialog::InitLayout(wxGLContext* glctx)
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 //	buildToolBar(sizer);
-	buildEditPanel(sizer);
+	BuildEditPanel(sizer, glctx);
 	SetSizer(sizer);
 }
 
-void PreviewDialog::buildToolBar(wxSizer* topSizer)
+void PreviewDialog::BuildToolBar(wxSizer* topSizer)
 {
 	wxBoxSizer* toolSizer = new wxBoxSizer(wxVERTICAL);
 
 	wxCheckBox* circulateCheck = new wxCheckBox(this, wxID_ANY, wxT("Ñ­»·"));
 	circulateCheck->SetValue(true);
-	Connect(circulateCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::onSetCirculate));
+	Connect(circulateCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetCirculate));
 	toolSizer->Add(circulateCheck, 0);
 
 	wxCheckBox* stopCheck = new wxCheckBox(this, wxID_ANY, wxT("ÔÝÍ£"));
 	stopCheck->SetValue(false);
-	Connect(stopCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::onSetStop));
+	Connect(stopCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(PreviewDialog::OnSetStop));
 	toolSizer->Add(stopCheck, 0);
 
 	topSizer->Add(toolSizer, 0);
 }
 
-void PreviewDialog::buildEditPanel(wxSizer* topSizer)
+void PreviewDialog::BuildEditPanel(wxSizer* topSizer, wxGLContext* glctx)
 {
 	m_stage = new d2d::EditPanel(this, this);
 	m_stage->SetEditOP(new d2d::ZoomViewOP(m_stage, m_stage->GetStageImpl(), false));
-	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_symbol));
+	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_stage->GetStageImpl(), m_symbol, glctx));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 
-void PreviewDialog::onSetCirculate(wxCommandEvent& event)
+void PreviewDialog::OnSetCirculate(wxCommandEvent& event)
 {
 	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
 	assert(canvas);
@@ -61,7 +62,7 @@ void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 	m_stage->SetFocus();
 }
 
-void PreviewDialog::onSetStop(wxCommandEvent& event)
+void PreviewDialog::OnSetStop(wxCommandEvent& event)
 {
 	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
 	assert(canvas);

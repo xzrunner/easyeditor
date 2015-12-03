@@ -15,8 +15,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites, 
-		d2d::LibraryPanel* library);
+		wxGLContext* glctx, d2d::ISprite* edited, 
+		const d2d::MultiSpritesImpl* bg_sprites, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	Symbol* GetSymbol() { return m_symbol; }
