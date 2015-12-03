@@ -183,7 +183,7 @@
 #include "render/DrawCallBatching.h"
 #include "render/ScreenCache.h"
 #include "render/SpatialIndex.h"
-#include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 #include "render/GL.h"
 
 #include "message/subject_id.h"

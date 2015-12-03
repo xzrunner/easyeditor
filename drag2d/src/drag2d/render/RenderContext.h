@@ -14,26 +14,14 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 	void SetProjection(int width, int height);
 
-	void GetModelView(Vector& offset, float& scale) { 
-		offset = m_mod_offset; 
-		scale = m_mod_scale;
-	}
-	void GetProjection(int& width, int& height) { 
-		width = m_proj_width; 
-		height = m_proj_height;
-	}
-
-	static void SetCurrContext(RenderContext* context) { m_current = context; }
-	static RenderContext* GetCurrContext() { return m_current; }
+	bool GetModelView(Vector& offset, float& scale) const;
+	bool GetProjection(int& width, int& height) const;
 
 private:
 	Vector m_mod_offset;
 	float m_mod_scale;
 
 	int m_proj_width, m_proj_height;
-
-private:
-	static RenderContext* m_current;
 
 }; // RenderContext
 

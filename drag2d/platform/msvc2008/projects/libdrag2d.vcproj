@@ -1098,6 +1098,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderContextStack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderContextStack.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\render\ScreenCache.cpp"
 				>
 			</File>

@@ -6,7 +6,7 @@
 #include "common/Exception.h"
 #include "common/Matrix.h"
 #include "render/SpriteRenderer.h"
-#include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 #include "render/GL.h"
 
 #include <gl/glew.h>
@@ -185,20 +185,20 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	}	
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	RenderContext* context = RenderContext::GetCurrContext();
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	Vector last_offset;
 	float last_scale;
-	context->GetModelView(last_offset, last_scale);
+	ctx_stack->GetModelView(last_offset, last_scale);
 
 	int last_w, last_h;
-	context->GetProjection(last_w, last_h);
+	ctx_stack->GetProjection(last_w, last_h);
 
 	d2d::Rect rect = symbol->GetSize();
 	int w = rect.xLength() * scale,
 		h = rect.yLength() * scale;
-	context->SetModelView(Vector(0, 0), 1);
-	context->SetProjection(w, h);
+	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);
 
 	Matrix mt;
@@ -213,8 +213,8 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	shader->SetFBO(0);
 	shader->SetTexture(0);
 
-	context->SetModelView(last_offset, last_scale);
-	context->SetProjection(last_w, last_h);
+	ctx_stack->SetModelView(last_offset, last_scale);
+	ctx_stack->SetProjection(last_w, last_h);
 	GL::Viewport(0, 0, last_w, last_h);
 }
 
@@ -229,17 +229,17 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	RenderContext* context = RenderContext::GetCurrContext();
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	Vector last_offset;
 	float last_scale;
-	context->GetModelView(last_offset, last_scale);
+	ctx_stack->GetModelView(last_offset, last_scale);
 
 	int last_w, last_h;
-	context->GetProjection(last_w, last_h);
+	ctx_stack->GetProjection(last_w, last_h);
 
-	context->SetModelView(Vector(0, 0), 1);
-	context->SetProjection(width, height);
+	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 
 	Matrix mt;
@@ -254,8 +254,8 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 	shader->SetFBO(0);
 	shader->SetTexture(0);
 
-	context->SetModelView(last_offset, last_scale);
-	context->SetProjection(last_w, last_h);	
+	ctx_stack->SetModelView(last_offset, last_scale);
+	ctx_stack->SetProjection(last_w, last_h);	
 	GL::Viewport(0, 0, last_w, last_h);
 }
 
@@ -268,18 +268,18 @@ void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	RenderContext* context = RenderContext::GetCurrContext();
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	Vector last_offset;
 	float last_scale;
-	context->GetModelView(last_offset, last_scale);
+	ctx_stack->GetModelView(last_offset, last_scale);
 
 	int last_w, last_h;
-	context->GetProjection(last_w, last_h);
+	ctx_stack->GetProjection(last_w, last_h);
 
 	ShaderMgr* shader = ShaderMgr::Instance();
-	context->SetModelView(Vector(0, 0), 1);
-	context->SetProjection(width, height);
+	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 
 	Matrix mt;
@@ -291,8 +291,8 @@ void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	shader->Commit();
 
-	context->SetModelView(last_offset, last_scale);
-	context->SetProjection(last_w, last_h);	
+	ctx_stack->SetModelView(last_offset, last_scale);
+	ctx_stack->SetProjection(last_w, last_h);	
 }
 
 }

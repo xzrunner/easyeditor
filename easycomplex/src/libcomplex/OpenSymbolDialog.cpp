@@ -33,15 +33,6 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 		return;
 	}
 
-	d2d::RenderContext* context = d2d::RenderContext::GetCurrContext();
-
-	d2d::Vector last_offset;
-	float last_scale;
-	context->GetModelView(last_offset, last_scale);
-
-	int last_w, last_h;
-	context->GetProjection(last_w, last_h);
-
 	m_sprites_impl->EnableObserve(false);
 	m_stage->GetCanvas()->EnableObserve(false);
 
@@ -96,13 +87,6 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 
 	m_sprites_impl->EnableObserve(true);
 	m_stage->GetCanvas()->EnableObserve(true);
-
-	m_stage->GetCanvas()->SetCurrentCanvas();
-
-	context->SetModelView(last_offset, last_scale);
-	context->SetProjection(last_w, last_h);
-	d2d::GL::Viewport(0, 0, last_w, last_h);
-	d2d::DrawCallBatching::Instance()->OnSize(last_w, last_h);
 }
 
 }

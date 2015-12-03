@@ -2,7 +2,7 @@
 
 #include "dataset/Image.h"
 #include "render/ShaderMgr.h"
-#include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 
 #include <dtex.h>
 
@@ -65,12 +65,13 @@ static int LAST_WIDTH, LAST_HEIGHT;
 
 static void _draw_begin() 
 {
-	RenderContext* context = RenderContext::GetCurrContext();
-	context->GetModelView(LAST_OFFSET, LAST_SCALE);
-	context->GetProjection(LAST_WIDTH, LAST_HEIGHT);
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
-	context->SetModelView(Vector(0, 0), 1);
-	context->SetProjection(2, 2);
+	ctx_stack->GetModelView(LAST_OFFSET, LAST_SCALE);
+	ctx_stack->GetProjection(LAST_WIDTH, LAST_HEIGHT);
+
+	ctx_stack->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetProjection(2, 2);
 
 // 	glViewport(0, 0, 2, 2);
 }
@@ -85,10 +86,9 @@ static void _draw_end()
 {
 	ShaderMgr::Instance()->Flush();
 
-
-	RenderContext* context = RenderContext::GetCurrContext();
-	context->SetModelView(LAST_OFFSET, LAST_SCALE);
-	context->SetProjection(LAST_WIDTH, LAST_HEIGHT);
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
+	ctx_stack->SetModelView(LAST_OFFSET, LAST_SCALE);
+	ctx_stack->SetProjection(LAST_WIDTH, LAST_HEIGHT);
 
 // 	glViewport(0, 0, ORI_WIDTH, ORI_HEIGHT);
 }
@@ -261,8 +261,8 @@ void DrawCallBatching::LoadEnd()
 
 void DrawCallBatching::ReloadBegin()
 {
-// 	m_context_buf.push_back(m_curr_buf);
-// 	m_curr_buf.clear();
+	m_context_buf.push_back(m_curr_buf);
+	m_curr_buf.clear();
 
 	dtexf_c2_reload_begin();
 }
@@ -284,19 +284,19 @@ void DrawCallBatching::ReloadEnd()
 
 void DrawCallBatching::PopContext()
 {
-// 	for (int i = 0, n = m_curr_buf.size(); i < n; ++i) {
-// 		const std::string& filepath = m_curr_buf[i];
-// 		std::map<std::string, int>::iterator itr = m_path2id.find(filepath);
-// 		assert(itr != m_path2id.end());
-// 		dtexf_c2_remove_tex(itr->second);
-// 		m_path2id.erase(itr);		
-// 	}
-// 	m_curr_buf.clear();
-// 
-// 	if (!m_context_buf.empty()) {
-// 		m_curr_buf = m_context_buf.back();
-// 		m_context_buf.pop_back();		
-// 	}
+ 	for (int i = 0, n = m_curr_buf.size(); i < n; ++i) {
+ 		const std::string& filepath = m_curr_buf[i];
+ 		std::map<std::string, int>::iterator itr = m_path2id.find(filepath);
+ 		assert(itr != m_path2id.end());
+ 		dtexf_c2_remove_tex(itr->second);
+ 		m_path2id.erase(itr);		
+ 	}
+ 	m_curr_buf.clear();
+ 
+ 	if (!m_context_buf.empty()) {
+ 		m_curr_buf = m_context_buf.back();
+ 		m_context_buf.pop_back();		
+ 	}
 }
 
 float* DrawCallBatching::Query(const Image* img, int* id)

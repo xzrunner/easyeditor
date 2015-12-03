@@ -3,7 +3,7 @@
 
 #include "render/ShaderMgr.h"
 #include "render/GL.h"
-#include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 
 namespace d2d
 {
@@ -51,7 +51,7 @@ void OrthoCanvas::OnSize(int w, int h)
 
 	m_camera->UpdateModelView();
 
-	RenderContext::GetCurrContext()->SetProjection(w, h);
+	RenderContextStack::Instance()->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);
 }
 

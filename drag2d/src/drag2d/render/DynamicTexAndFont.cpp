@@ -6,7 +6,7 @@
 #include "dataset/ISymbol.h"
 #include "render/ShaderMgr.h"
 #include "render/SpriteRenderer.h"
-#include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 
 #include <gl/GL.h>
 #include <algorithm>
@@ -656,8 +656,8 @@ void DynamicTexAndFont::BeginDraw()
 	m_ori_width = viewport[2];
 	m_ori_height = viewport[3];
 
-	RenderContext* context = RenderContext::GetCurrContext();
-	context->GetModelView(m_ori_offset, m_ori_scale);
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
+	ctx_stack->GetModelView(m_ori_offset, m_ori_scale);
 
 	shader->SetFBO(m_fbo);
 	shader->sprite();

@@ -12,7 +12,7 @@
 #include "view/Camera.h"
 #include "render/LabelNew.h"
 #include "render/PrimitiveDraw.h"
-#include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 #include "common/color_config.h"
 
 namespace d2d
@@ -205,15 +205,15 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 	dst[2] = Vector(dst_rect.xMax, dst_rect.yMax);
 	dst[3] = Vector(dst_rect.xMin, dst_rect.yMax);
 
-	RenderContext* context = RenderContext::GetCurrContext();
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	Vector offset;
 	float scale;
-	context->GetModelView(offset, scale);
+	ctx_stack->GetModelView(offset, scale);
 
-	context->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetModelView(Vector(0, 0), 1);
 	Rect r = sprite->GetSymbol().GetSize();
-	context->SetProjection(r.xLength(), r.yLength());
+	ctx_stack->SetProjection(r.xLength(), r.yLength());
 	// glViewport no need, from DrawCallBatching?
 //	glViewport(0, 0, r.xLength(), r.yLength());
 
@@ -223,8 +223,8 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 
 	mgr->Commit();
 
-	context->SetModelView(offset, scale);
-	context->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	ctx_stack->SetModelView(offset, scale);
+	ctx_stack->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
 	// glViewport no need, from DrawCallBatching?
 //	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
 }
@@ -242,15 +242,15 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	RenderContext* context = RenderContext::GetCurrContext();
+	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	Vector offset;
 	float scale;
-	context->GetModelView(offset, scale);
+	ctx_stack->GetModelView(offset, scale);
 
-	context->SetModelView(Vector(0, 0), 1);
+	ctx_stack->SetModelView(Vector(0, 0), 1);
 	Rect r = sprite->GetSymbol().GetSize();
-	context->SetProjection(r.xLength(), r.yLength());
+	ctx_stack->SetProjection(r.xLength(), r.yLength());
 	// glViewport no need, from DrawCallBatching?
 //	glViewport(0, 0, r.xLength(), r.yLength());
 
@@ -263,8 +263,8 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 
 	mgr->Commit();
 
-	context->SetModelView(offset, scale);
-	context->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	ctx_stack->SetModelView(offset, scale);
+	ctx_stack->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
 	// glViewport no need, from DrawCallBatching?
 //	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
 }

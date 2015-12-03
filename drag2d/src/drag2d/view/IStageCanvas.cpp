@@ -9,6 +9,7 @@
 #include "render/ShaderMgr.h"
 #include "render/ShaderContext.h"
 #include "render/RenderContext.h"
+#include "render/RenderContextStack.h"
 #include "message/SetCanvasDirtySJ.h"
 #include "message/ResetViewportSJ.h"
 #include "message/subject_id.h"
@@ -54,12 +55,16 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 
 	RegistSubject(SetCanvasDirtySJ::Instance());
 	RegistSubject(ResetViewportSJ::Instance());
+
+	RenderContextStack::Instance()->Push(this, m_render_context);
 }
 
 IStageCanvas::~IStageCanvas()
 {
 	delete m_gl_context;
 	m_timer.Stop();
+
+	RenderContextStack::Instance()->Pop();
 }
 
 void IStageCanvas::ResetInitState() 
@@ -78,19 +83,14 @@ void IStageCanvas::SetCurrentCanvas()
 
 	Vector offset;
 	float scale;
-	m_render_context->GetModelView(offset, scale);
-
-	int width, height;
-	m_render_context->GetProjection(width, height);
-
-	if (scale != 0) {
+	if (m_render_context->GetModelView(offset, scale)) {
 		m_render_context->SetModelView(offset, scale);
 	}
-	if (width != 0 && height != 0) {
+
+	int width, height;
+	if (m_render_context->GetProjection(width, height)) {
 		m_render_context->SetProjection(width, height);
 	}
-
-	RenderContext::SetCurrContext(m_render_context);
 }
 
 void IStageCanvas::InitGL()
@@ -129,7 +129,7 @@ void IStageCanvas::OnNotify(int sj_id, void* ud)
 
 		{
 			wxSize sz = m_parent->GetSize();
-			RenderContext::GetCurrContext()->SetProjection(sz.GetWidth(), sz.GetHeight());
+			RenderContextStack::Instance()->SetProjection(sz.GetWidth(), sz.GetHeight());
 		}
 
 		break;
