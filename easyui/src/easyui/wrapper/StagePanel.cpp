@@ -138,6 +138,8 @@ void StagePanel::EnablePage(bool enable)
 		GetSpriteSelection()->Clear();
 		UnRegistSubjects();
 	}
+
+	EnableObserve(enable);
 }
 
 }

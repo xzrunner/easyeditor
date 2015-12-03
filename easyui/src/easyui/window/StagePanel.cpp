@@ -151,6 +151,10 @@ void StagePanel::EnablePage(bool enable)
 		GetSpriteSelection()->Clear();
 		UnRegistSubjects();
 	}
+
+	m_toolbar->EnableObserve(enable);
+	m_anchor_mgr.EnableObserve(enable);
+	EnableObserve(enable);
 }
 
 void StagePanel::OnPreview() const
