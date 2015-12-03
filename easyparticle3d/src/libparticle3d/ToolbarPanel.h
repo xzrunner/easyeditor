@@ -11,7 +11,7 @@ namespace eparticle3d
 class StagePanel;
 class ComponentPanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback
+class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback, public d2d::Observer
 {
 public:
 	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
@@ -35,11 +35,16 @@ public:
 protected:
 	virtual wxSizer* initLayout();
 
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
+
 private:
 	wxSizer* CreateMainLayout();
 	wxSizer* CreateComponentLayout();
 
-	void clear();
+	void Clear();
 
 	void OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);

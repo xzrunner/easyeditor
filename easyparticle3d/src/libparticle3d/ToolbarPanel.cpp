@@ -51,6 +51,8 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	InitParticle();
 
 	SetDropTarget(new DropTarget(library, stage, this));
+
+	RegistSubject(d2d::ClearPanelSJ::Instance());
 }
 
 void ToolbarPanel::SetValue(int key, const d2d::UICallback::Data& data)
@@ -119,6 +121,16 @@ wxSizer* ToolbarPanel::initLayout()
 	sizer->Add(CreateMainLayout());
 	sizer->Add(CreateComponentLayout());
 	return sizer;
+}
+
+void ToolbarPanel::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case d2d::MSG_CLEAR_PANEL:
+		Clear();
+		break;
+	}
 }
 
 wxSizer* ToolbarPanel::CreateMainLayout()
@@ -331,7 +343,7 @@ wxSizer* ToolbarPanel::CreateComponentLayout()
 
 void ToolbarPanel::InitParticle()
 {
-	clear();
+	Clear();
 
 	p3d_ps_config* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP, cfg);
@@ -371,7 +383,7 @@ void ToolbarPanel::OnDelChild(ComponentPanel* child)
 	this->Layout();	
 }
 
-void ToolbarPanel::clear()
+void ToolbarPanel::Clear()
 {
 	OnDelAllChild(wxCommandEvent());
 }
