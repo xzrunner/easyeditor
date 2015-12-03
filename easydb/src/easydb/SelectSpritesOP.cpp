@@ -32,8 +32,6 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
 			ecomplex::EditDialog dlg(m_stage, &symbol);
 			dlg.ShowModal();
-
-			m_stage->ResetCanvas();
 		}
 	}
 
@@ -51,8 +49,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
 		ecomplex::EditDialog dlg(m_stage, &symbol);
 		dlg.ShowModal();
-
-		m_stage->ResetCanvas();
 	}
 	//else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	//{

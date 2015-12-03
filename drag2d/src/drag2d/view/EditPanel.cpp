@@ -91,11 +91,6 @@ void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 	m_impl->OnMouseWheelRotation(x, y, direction);
 }
 
-void EditPanel::ResetCanvas()
-{
-	m_impl->ResetCanvas();
-}
-
 void EditPanel::AddOpRecord(AbstractAtomicOP* op)
 {
 	m_impl->AddOpRecord(op);

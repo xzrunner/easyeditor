@@ -65,9 +65,6 @@ void Frame::OnPreview(wxCommandEvent& event)
 
 	preview::MainDialog dlg(this, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
 	dlg.ShowModal();
-
-	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
-	stage->ResetCanvas();
 }
 
 void Frame::OnExtendSetting(wxCommandEvent& event)
@@ -98,8 +95,6 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	ss.DrawShape(&rect);
 
 	ss.SaveToFile(filepath);
-
-	stage->GetCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

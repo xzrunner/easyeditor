@@ -48,7 +48,6 @@ void Task::onPreview() const
 {
 	PreviewDialog dlg;
 	dlg.ShowModal();
-	Context::Instance()->stage->ResetCanvas();
 }
 
 d2d::IStageCanvas* Task::getCanvas() const

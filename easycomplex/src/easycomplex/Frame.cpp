@@ -73,9 +73,6 @@ void Frame::onPreview(wxCommandEvent& event)
 	m_task->GetAllSprite(sprites);
  	PreviewDialog dlg(this, sprites);
  	dlg.ShowModal();
-
-	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
- 	stage->ResetCanvas();
 }
 
 void Frame::onEJPreview(wxCommandEvent& event)
@@ -184,7 +181,6 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->getSymbol();
 	symbol->InitBounding();
 	ss.OutputToImageFile(symbol, filepath);
-	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

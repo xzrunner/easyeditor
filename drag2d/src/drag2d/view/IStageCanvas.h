@@ -23,8 +23,6 @@ public:
 	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx = NULL);
 	virtual ~IStageCanvas();
 
-	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
-
 	void SetBgColor(const Colorf& color);
 
 	void SetCurrentCanvas();
@@ -56,8 +54,6 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 	void Init();
-
-	bool IsInited() const { return m_inited; }
 
 private:
 	void OnSize(wxSizeEvent& event);
@@ -92,8 +88,6 @@ private:
 
 	wxGLContext* m_gl_context;
 	RenderContext* m_render_context;
-
-	bool m_inited;
 
 	bool m_dirty;
 	bool m_cam_dirty;

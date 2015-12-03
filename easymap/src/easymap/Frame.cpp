@@ -28,9 +28,6 @@ void Frame::OnPreview(wxCommandEvent& event)
 
 	PreviewDialog dlg(this, cfg->m_view_width, cfg->m_view_height, sprites);
 	dlg.ShowModal();
-
-	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
-	stage->ResetCanvas();
 }
 
 void Frame::OnExtendSetting(wxCommandEvent& event)

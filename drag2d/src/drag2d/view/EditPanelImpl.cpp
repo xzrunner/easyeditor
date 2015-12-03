@@ -207,15 +207,6 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 	m_camera->Scale(scale, cx, cy, w, h);
 }
 
-void EditPanelImpl::ResetCanvas()
-{
-	if (m_canvas)
-	{
-		m_canvas->ResetInitState();
-		SetCanvasDirtySJ::Instance()->SetDirty();
-	}
-}
-
 void EditPanelImpl::Undo()
 {
 	HistoryList::Type type = m_history_list.undo();

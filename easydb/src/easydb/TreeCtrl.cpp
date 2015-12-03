@@ -112,8 +112,6 @@ namespace edb
 				ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
 				ecomplex::EditDialog dlg(stage, &symbol);
 				dlg.ShowModal();
-
-				stage->ResetCanvas();
 			}
 		}
 		else

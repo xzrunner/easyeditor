@@ -41,7 +41,6 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContex
  	, m_camera(stage->GetCamera())
 	, m_screen(stage->GetCamera())
  	, m_width(0), m_height(0)
- 	, m_inited(false)
 	, m_dirty(false)
 	, m_cam_dirty(false)
 	, m_render_context(new RenderContext)
@@ -74,11 +73,6 @@ IStageCanvas::~IStageCanvas()
 	}
 
 	RenderContextStack::Instance()->Pop();
-}
-
-void IStageCanvas::ResetInitState() 
-{ 
-	m_inited = false; 
 }
 
 void IStageCanvas::SetBgColor(const Colorf& color)

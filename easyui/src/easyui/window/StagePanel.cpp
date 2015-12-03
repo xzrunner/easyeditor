@@ -163,8 +163,6 @@ void StagePanel::OnPreview() const
 
 	PreviewDialog dlg(const_cast<StagePanel*>(this), width, height, sprites);
 	dlg.ShowModal();
-
-	const_cast<StagePanel*>(this)->ResetCanvas();
 }
 
 void StagePanel::OnCode() const

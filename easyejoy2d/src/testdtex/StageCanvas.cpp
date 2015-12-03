@@ -24,12 +24,6 @@ void StageCanvas::OnSize(int w, int h)
 	//////////////////////////////////////////////////////////////////////////
 	// copy from OnePassCanvas
 	//////////////////////////////////////////////////////////////////////////
-	// Makes the OpenGL state that is represented by the OpenGL rendering 
-	// context context current
-	if (IsInited()) {
-		SetCurrentCanvas();
-	}
-
 	glViewport(0, 0, w, h);
 
 	m_screen.SetSize(w, h);

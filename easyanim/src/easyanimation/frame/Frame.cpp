@@ -158,8 +158,6 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	}
 
 	ss.SaveToFile(filepath);
-
-	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsSingle(const std::string& filepath) const

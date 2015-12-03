@@ -27,8 +27,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	{
 		emesh::EditDialog dlg(m_wnd, sprite);
 		dlg.ShowModal();
-
-		m_stage->ResetCanvas();
 	}
 
 	return false;

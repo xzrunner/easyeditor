@@ -49,8 +49,6 @@ public:
 	void OnKeyUp(wxKeyEvent& event);
 	void OnMouseWheelRotation(int x, int y, int direction);
 
-	void ResetCanvas();
-
 	void Undo();
 	void Redo();
 	void AddOpRecord(AbstractAtomicOP* op);
