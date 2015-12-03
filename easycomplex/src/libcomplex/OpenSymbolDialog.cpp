@@ -100,7 +100,9 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	m_stage->GetCanvas()->SetCurrentCanvas();
 
 	context->SetModelView(last_offset, last_scale);
-	context->SetProjection(last_w, last_h);		
+	context->SetProjection(last_w, last_h);
+	d2d::GL::Viewport(0, 0, last_w, last_h);
+	d2d::DrawCallBatching::Instance()->OnSize(last_w, last_h);
 }
 
 }
