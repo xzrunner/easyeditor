@@ -13,12 +13,13 @@ class StagePanel;
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol);
+	EditDialog(wxWindow* parent, Symbol* symbol, 
+		wxGLContext* glctx);
 
 private:
-	void InitLayout();
+	void InitLayout(wxGLContext* glctx);
 	wxWindow* InitLayoutLeft(wxWindow* parent);
-	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent, wxGLContext* glctx);
 	wxWindow* InitLayoutRight(wxWindow* parent);
 
 	void OnCloseEvent(wxCloseEvent& event);

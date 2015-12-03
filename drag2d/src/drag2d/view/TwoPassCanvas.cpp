@@ -16,16 +16,12 @@
 namespace d2d
 {
 
-TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
-	: IStageCanvas(stage_wnd, stage)
+TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
+							 wxGLContext* glctx)
+	: IStageCanvas(stage_wnd, stage, glctx)
 {
 	m_scr_style.multi_col = WHITE;
 	m_scr_style.add_col = BLACK;
-}
-
-TwoPassCanvas::~TwoPassCanvas()
-{
-	DrawCallBatching::Instance()->PopContext();
 }
 
 void TwoPassCanvas::OnSize(int w, int h)

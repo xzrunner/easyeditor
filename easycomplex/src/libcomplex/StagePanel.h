@@ -16,7 +16,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		d2d::PropertySettingPanel* property, LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, Symbol* symbol, 
-		d2d::PropertySettingPanel* property, LibraryPanel* library);
+		d2d::PropertySettingPanel* property, LibraryPanel* library, 
+		wxGLContext* glctx);
 
 	//
 	// d2d::EditPanel interface

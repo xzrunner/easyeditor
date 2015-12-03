@@ -1,7 +1,7 @@
 #include "RenderContextStack.h"
 #include "RenderContext.h"
-#include "GL.h"
 #include "DrawCallBatching.h"
+#include "ScreenCache.h"
 
 #include "view/IStageCanvas.h"
 
@@ -18,6 +18,11 @@ RenderContextStack* RenderContextStack::Instance()
 	return m_instance;
 }
 
+RenderContextStack::RenderContextStack()
+	: m_curr_ctx(NULL)
+{
+}
+
 void RenderContextStack::Push(IStageCanvas* canvas, RenderContext* render)
 {
 	Context ctx;
@@ -30,6 +35,9 @@ void RenderContextStack::Pop()
 {
 	assert(!m_stack.empty());
 	m_stack.pop_back();
+	if (m_stack.empty()) {
+		return;
+	}
 
 	Context ctx = m_stack.back();
 
@@ -37,44 +45,41 @@ void RenderContextStack::Pop()
 
 	int width, height;
 	ctx.render->GetProjection(width, height);
-
-	GL::Viewport(0, 0, width, height);
 	DrawCallBatching::Instance()->OnSize(width, height);
+	ScreenCache::Instance()->OnSize(width, height);
 }
 
 void RenderContextStack::SetModelView(const Vector& offset, float scale)
 {
-	if (m_stack.empty()) {
-		return;
-	} else {
-		m_stack.back().render->SetModelView(offset, scale);
+	if (m_curr_ctx) {
+		m_curr_ctx->SetModelView(offset, scale);
 	}
 }
 
 void RenderContextStack::SetProjection(int width, int height)
 {
-	if (m_stack.empty()) {
-		return;
-	} else {
-		m_stack.back().render->SetProjection(width, height);
+	if (m_curr_ctx) {
+		m_curr_ctx->SetProjection(width, height);
 	}
 }
 
 bool RenderContextStack::GetModelView(Vector& offset, float& scale) const
 {
-	if (m_stack.empty()) {
-		return false;		
+	if (!m_curr_ctx) {
+		return false;
 	} else {
-		return m_stack.back().render->GetModelView(offset, scale);
+		m_curr_ctx->GetModelView(offset, scale);
+		return true;
 	}
 }
 
 bool RenderContextStack::GetProjection(int& width, int& height) const
 {
-	if (m_stack.empty()) {
+	if (!m_curr_ctx) {
 		return false;
 	} else {
-		return m_stack.back().render->GetProjection(width, height);	
+		m_curr_ctx->GetProjection(width, height);
+		return true;
 	}
 }
 

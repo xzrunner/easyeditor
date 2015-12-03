@@ -40,7 +40,7 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 	{
  		Symbol& symbol = const_cast<Symbol&>(complex->GetSymbol());
 
- 		EditDialog dlg(m_wnd, &symbol);
+ 		EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////

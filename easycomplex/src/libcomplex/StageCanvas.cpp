@@ -14,8 +14,8 @@ namespace ecomplex
 
 StageCanvas::StageCanvas(StagePanel* editPanel,
 						 d2d::LibraryPanel* library,
-						 bool reload)
-	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+						 wxGLContext* glctx)
+	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl(), glctx)
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)
@@ -23,10 +23,6 @@ StageCanvas::StageCanvas(StagePanel* editPanel,
 {
 	m_bgStyle.color.set(0.8f, 0.8f, 0.8f);
 	m_clipboxStyle.color.set(0, 0.8f, 0);
-
-	if (reload) {
-		ReloadGLContext();
-	}
 }
 
 StageCanvas::~StageCanvas()
@@ -139,23 +135,6 @@ void StageCanvas::OnDrawSprites() const
 }
 
 #endif // OPEN_SCREEN_CACHE
-
-void StageCanvas::ReloadGLContext()
-{
-	m_library->LoadDefaultSymbol();
-
-	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
-	shader_mgr->Null();
-	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
-
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadBegin();
-	}
-	m_stage->getSymbol()->ReloadTexture();
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadEnd();
-	}
-}
 
 void StageCanvas::drawBackground() const
 {

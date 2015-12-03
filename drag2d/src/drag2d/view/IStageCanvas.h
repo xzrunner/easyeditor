@@ -20,7 +20,7 @@ class RenderContext;
 class IStageCanvas : public wxGLCanvas, public Object, public Observer
 {
 public:
-	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
+	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx = NULL);
 	virtual ~IStageCanvas();
 
 	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
@@ -38,6 +38,8 @@ public:
 
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
+
+	wxGLContext* GetGLContext() { return m_gl_context; }
 
 protected:
 	virtual void InitGL();
@@ -86,6 +88,8 @@ private:
 	};
 
 private:
+	bool m_share_context;
+
 	wxGLContext* m_gl_context;
 	RenderContext* m_render_context;
 

@@ -10,6 +10,7 @@
 #include "render/ShaderContext.h"
 #include "render/RenderContext.h"
 #include "render/RenderContextStack.h"
+#include "render/GL.h"
 #include "message/SetCanvasDirtySJ.h"
 #include "message/subject_id.h"
 
@@ -33,8 +34,9 @@ static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN,
 
 static const float FPS = 30;
 
-IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
+IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx)
 	: wxGLCanvas(stage_wnd, wxID_ANY, GL_ATTRIB)
+	, m_share_context(false)
 	, m_stage(stage)
  	, m_camera(stage->GetCamera())
 	, m_screen(stage->GetCamera())
@@ -42,12 +44,18 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
  	, m_inited(false)
 	, m_dirty(false)
 	, m_cam_dirty(false)
- 	, m_gl_context(new wxGLContext(this))
 	, m_render_context(new RenderContext)
 	, m_timer(this, TIMER_ID)
 	, m_version(0)
 {
-	Init();
+	if (glctx) {
+		m_share_context = true;
+		m_gl_context = glctx;
+	} else {
+		m_share_context = false;
+		m_gl_context = new wxGLContext(this);
+		Init();
+	}
 
 	m_bg_color.set(0.5f, 0.5f, 0.5f, 1);
 	m_timer.Start(1000 / FPS);
@@ -59,8 +67,11 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage)
 
 IStageCanvas::~IStageCanvas()
 {
-	delete m_gl_context;
 	m_timer.Stop();
+
+	if (!m_share_context) {
+		delete m_gl_context;
+	}
 
 	RenderContextStack::Instance()->Pop();
 }
@@ -79,6 +90,8 @@ void IStageCanvas::SetCurrentCanvas()
 {
 	SetCurrent(*m_gl_context);
 
+	RenderContextStack::Instance()->SetCurrCtx(m_render_context);
+
 	Vector offset;
 	float scale;
 	if (m_render_context->GetModelView(offset, scale)) {
@@ -88,6 +101,7 @@ void IStageCanvas::SetCurrentCanvas()
 	int width, height;
 	if (m_render_context->GetProjection(width, height)) {
 		m_render_context->SetProjection(width, height);
+		GL::Viewport(0, 0, width, height);
 	}
 }
 

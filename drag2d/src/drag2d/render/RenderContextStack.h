@@ -22,10 +22,12 @@ public:
 	bool GetModelView(Vector& offset, float& scale) const;
 	bool GetProjection(int& width, int& height) const;
 
+	void SetCurrCtx(RenderContext* ctx) { m_curr_ctx = ctx; }
+
 	static RenderContextStack* Instance();
 
 private:
-	RenderContextStack() {}
+	RenderContextStack();
 	
 private:
 	struct Context
@@ -36,6 +38,8 @@ private:
 
 private:
 	std::vector<Context> m_stack;
+
+	RenderContext* m_curr_ctx;
 
 private:
 	static RenderContextStack* m_instance;

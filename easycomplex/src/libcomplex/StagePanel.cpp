@@ -37,7 +37,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   Symbol* symbol,
 					   d2d::PropertySettingPanel* property,
-					   LibraryPanel* library)
+					   LibraryPanel* library,
+					   wxGLContext* glctx)
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
@@ -47,7 +48,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetEditOP(editop);
 	editop->Release();
 
-	d2d::IStageCanvas* canvas = new StageCanvas(this, library, true);
+	d2d::IStageCanvas* canvas = new StageCanvas(this, library, glctx);
 	SetCanvas(canvas);
 	canvas->Release();
 

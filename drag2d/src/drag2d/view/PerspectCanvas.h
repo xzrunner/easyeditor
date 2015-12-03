@@ -9,7 +9,8 @@ namespace d2d
 class PerspectCanvas : public OnePassCanvas
 {
 public:
-	PerspectCanvas(wxWindow* stage_wnd, EditPanelImpl* stage);
+	PerspectCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
+		wxGLContext* glctx = NULL);
 
 private:
 	virtual void OnSize(int w, int h);
