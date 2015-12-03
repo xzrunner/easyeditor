@@ -1,6 +1,7 @@
 #include "InsertSpriteSJ.h"
 #include "subject_id.h"
 
+#include "dataset/ScriptsSprite.h"
 #include "message/QuerySelectedSpriteLayerSJ.h"
 
 namespace d2d
@@ -15,6 +16,10 @@ InsertSpriteSJ::InsertSpriteSJ(int id)
 
 void InsertSpriteSJ::Insert(ISprite* spr, int idx, Observer* except)
 {
+	if (dynamic_cast<ScriptsSprite*>(spr)) {
+		return;
+	}
+
 	Params p;
 	p.spr = spr;
 	if (idx == -1) {
