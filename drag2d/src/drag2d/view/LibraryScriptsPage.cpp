@@ -23,6 +23,11 @@ bool LibraryScriptsPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 	return dynamic_cast<ScriptsSymbol*>(symbol) != NULL;
 }
 
+bool LibraryScriptsPage::LoadFromConfig()
+{
+	return ILibraryPage::LoadFromConfig("library_script");
+}
+
 void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 {
 	wxString filter = FileNameParser::getFileTag(FileNameParser::e_scripts);

@@ -13,6 +13,8 @@ public:
 
 	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
 
+	virtual bool LoadFromConfig();
+
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);
 

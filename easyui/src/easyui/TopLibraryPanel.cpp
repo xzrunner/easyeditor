@@ -11,6 +11,8 @@ TopLibraryPanel::TopLibraryPanel(wxWindow* parent)
 {
 	InitLayout();
 	EnableUILibrary(true);
+
+	m_library_raw->LoadFromConfig();
 }
 
 void TopLibraryPanel::EnableUILibrary(bool enable)
