@@ -13,7 +13,7 @@ class KeyFrame;
 class EditKeyFramesAOP : public d2d::AbstractAtomicOP
 {
 public:
-	EditKeyFramesAOP(Controller* ctrl, Layer* layer);
+	EditKeyFramesAOP(Layer* layer);
 	virtual ~EditKeyFramesAOP();
 
 	virtual void undo();
@@ -32,7 +32,6 @@ private:
 	};
 
 private:
-	Controller* m_ctrl;
 	Layer* m_layer;
 
 	std::vector<KeyFrame*> m_removed, m_inserted;

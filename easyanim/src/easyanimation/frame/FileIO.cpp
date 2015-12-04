@@ -1,6 +1,5 @@
 #include "FileIO.h"
 
-#include "frame/Controller.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Joint.h"
@@ -20,7 +19,7 @@ namespace eanim
 
 std::string FileIO::m_filepath;
 
-void FileIO::Load(const std::string& filepath, Controller* ctrl)
+void FileIO::Load(const std::string& filepath)
 {
 	FileIO::m_filepath = filepath;
 
@@ -60,7 +59,7 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 	SetCurrFrameSJ::Instance()->Set(0, 0);
 }
 
-void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)
+void FileIO::StoreSingle(const std::string& filepath)
 {
 	Json::Value value;
 
@@ -81,7 +80,7 @@ void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)
 	fout.close();
 }
 
-void FileIO::StoreTemplate(const std::string& filepath, Controller* ctrl)
+void FileIO::StoreTemplate(const std::string& filepath)
 {
 	Json::Value value;
 
@@ -106,7 +105,7 @@ void FileIO::StoreTemplate(const std::string& filepath, Controller* ctrl)
 	fout.close();
 }
 
-void FileIO::Reload(Controller* ctrl)
+void FileIO::Reload()
 {
 	if (m_filepath.empty()) return;
 
@@ -133,7 +132,7 @@ void FileIO::Reload(Controller* ctrl)
 	ctrl->Refresh();
 }
 
-void FileIO::LoadFlash(const std::string& filepath, Controller* ctrl)
+void FileIO::LoadFlash(const std::string& filepath)
 {
 	rapidxml::file<> xmlFile(filepath.c_str());
 	rapidxml::xml_document<> doc;
@@ -208,7 +207,7 @@ void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 	symbol->Release();
 }
 
-Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir, Controller* ctrl)
+Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 {
 	Layer* layer = new Layer(ctrl);
 	InsertLayerSJ::Instance()->Insert(layer);
@@ -234,7 +233,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir, 
 	return layer;
 }
 
-KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& dir, Controller* ctrl)
+KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& dir)
 {
 	int time = frameValue["time"].asInt();
 
@@ -259,7 +258,7 @@ KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& di
 }
 
 d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir,
-								Controller* ctrl)
+								)
 {
 	std::string filepath = actorValue["filepath"].asString();
 	while (true) 
@@ -382,7 +381,7 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<d2
 
 Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 						 const std::map<std::string, std::string>& mapNamePath,
-						 Controller* ctrl)
+						 )
 {
 	Layer* layer = new Layer(ctrl);
 
@@ -402,7 +401,7 @@ Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 
 KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath,
-							Controller* ctrl)
+							)
 {
 	int time = d2d::StringTools::FromString<int>(frameNode->first_attribute("index")->value()) + 1;
 
@@ -449,7 +448,7 @@ d2d::ISprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 }
 
 Json::Value FileIO::StoreLayer(Layer* layer, const std::string& dir, 
-							   Controller* ctrl, bool single)
+							   bool single)
 {
 	Json::Value value;
 
@@ -468,7 +467,7 @@ Json::Value FileIO::StoreLayer(Layer* layer, const std::string& dir,
 }
 
 Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir, 
-							   Controller* ctrl, bool single)
+							   bool single)
 {
 	Json::Value value;
 
@@ -487,7 +486,7 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 }
 
 Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const std::string& dir,
-							   Controller* ctrl, bool single)
+							   bool single)
 {
 	Json::Value value;
 

@@ -33,7 +33,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = src->m_sprites[i]->Clone();
-		set_sprite_user_data(s, &m_layers, m_layer, this);
+		set_sprite_user_data(s, m_layers, m_layer, this);
 		m_sprites.push_back(s);
 
 		if (m_layer) {
@@ -51,7 +51,7 @@ void KeyFrame::Insert(d2d::ISprite* sprite)
 {
 	sprite->Retain();
 
-	set_sprite_user_data(sprite, &m_layers, m_layer, this);
+	set_sprite_user_data(sprite, m_layers, m_layer, this);
 	m_sprites.push_back(sprite);
 	if (m_layer) {
 		sprite->setObserver(&m_layer->GetSpriteObserver());

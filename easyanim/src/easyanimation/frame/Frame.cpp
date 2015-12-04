@@ -128,7 +128,7 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 	ebuilder::CodeGenerator gen;
 	Love2dCode code(gen, static_cast<Task*>(m_task)->GetController());
-	code.resolve();
+	code.Resolve();
 	page->SetReadOnly(false);
 	page->SetText(gen.toText());
 	page->SetReadOnly(true);

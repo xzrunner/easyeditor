@@ -7,9 +7,9 @@ namespace eanim
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, 
 								 d2d::PropertySettingPanel* property,
-								 Controller* ctrl)
+								 LayersMgr* layers)
 	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, property)
-	, m_keyDownHandler(this, ctrl)
+	, m_kd_handler(layers)
 	, m_selected(NULL)
 {
 }
@@ -24,7 +24,7 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnKeyDown(keyCode)) 
 		return true;
 
-	m_keyDownHandler.process(keyCode);
+	m_kd_handler.Process(keyCode);
 
 	return false;
 }
@@ -36,7 +36,7 @@ bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
-		if (m_crosses[i]->contain(pos)) {
+		if (m_crosses[i]->Contain(pos)) {
 			m_selected = m_crosses[i];
 		}
 	}	
@@ -76,19 +76,19 @@ bool ArrangeSpriteOP::OnDraw() const
 		return true;
 
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
-		m_crosses[i]->draw();
+		m_crosses[i]->Draw();
 	}
 
 	return false;
 }
 
-void ArrangeSpriteOP::addCross()
+void ArrangeSpriteOP::AddCross()
 {
 	m_crosses.push_back(new Cross());
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ArrangeSpriteOP::delCross()
+void ArrangeSpriteOP::DelCross()
 {
 	if (m_crosses.empty())
 		return;
@@ -117,13 +117,13 @@ ArrangeSpriteOP::Cross::Cross()
 {
 }
 
-void ArrangeSpriteOP::Cross::draw() const
+void ArrangeSpriteOP::Cross::Draw() const
 {
 	d2d::PrimitiveDraw::drawCircle(pos, RADIUS, false, 1, d2d::LIGHT_RED);
 	d2d::PrimitiveDraw::cross(pos, LENGTH, d2d::LIGHT_RED, 1);
 }
 
-bool ArrangeSpriteOP::Cross::contain(const d2d::Vector& p) const
+bool ArrangeSpriteOP::Cross::Contain(const d2d::Vector& p) const
 {
 	return d2d::Math::getDistance(pos, p) < RADIUS;
 }

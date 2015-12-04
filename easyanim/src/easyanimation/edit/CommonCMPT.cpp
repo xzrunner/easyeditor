@@ -4,7 +4,6 @@
 #include "view/StagePanel.h"
 #include "view/KeysPanel.h"
 #include "frame/FileIO.h"
-#include "frame/Controller.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 #include "message/InsertLayerSJ.h"
@@ -14,42 +13,42 @@ namespace eanim
 {
 
 CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name, 
-	StagePanel* stage, d2d::PropertySettingPanel* property, 
-	bool vertical, Controller* ctrl)
+					   LayersMgr* layers, StagePanel* stage, 
+					   d2d::PropertySettingPanel* property, bool vertical)
 	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	, m_layers(layers)
 	, m_vertical(vertical)
-	, m_ctrl(ctrl)
 {
-	m_editOP = new ArrangeSpriteOP(stage, property, ctrl);
+	m_editOP = new ArrangeSpriteOP(stage, property, layers);
 }
 
 wxSizer* CommonCMPT::initLayout()
 {
-	return initEditPanel();
+	return InitEditPanel();
 }
 
-wxSizer* CommonCMPT::initEditPanel()
+wxSizer* CommonCMPT::InitEditPanel()
 {
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
 	wxBoxSizer* sizer = new wxBoxSizer(orient);
 	sizer->AddSpacer(10);
-	sizer->Add(initLoadPanel());
+	sizer->Add(InitLoadPanel());
 	sizer->AddSpacer(20);
-	sizer->Add(initFillingPanel());
+	sizer->Add(InitFillingPanel());
 	sizer->AddSpacer(10);
-	sizer->Add(initSettingsPanel());
+	sizer->Add(InitSettingsPanel());
 
 	return sizer;
 }
 
-wxSizer* CommonCMPT::initLoadPanel()
+wxSizer* CommonCMPT::InitLoadPanel()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	// folder
 	{
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
+			wxCommandEventHandler(CommonCMPT::OnLoadFromFolder));
 		sizer->Add(btnLoad);
 	}
 	sizer->AddSpacer(10);
@@ -57,13 +56,13 @@ wxSizer* CommonCMPT::initLoadPanel()
 	{
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onLoadFromList));
+			wxCommandEventHandler(CommonCMPT::OnLoadFromList));
 		sizer->Add(btnLoad);
 	}
 	return sizer;
 }
 
-wxSizer* CommonCMPT::initFillingPanel()
+wxSizer* CommonCMPT::InitFillingPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
@@ -82,13 +81,13 @@ wxSizer* CommonCMPT::initFillingPanel()
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Filling"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onFillingFrames));
+			wxCommandEventHandler(CommonCMPT::OnFillingFrames));
 		filling_sizer->Add(btn);
 	}
 	return filling_sizer;
 }
 
-wxSizer* CommonCMPT::initSettingsPanel()
+wxSizer* CommonCMPT::InitSettingsPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("¸¨ÖúÏß"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
@@ -97,16 +96,16 @@ wxSizer* CommonCMPT::initSettingsPanel()
 	wxButton* btnAdd = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(25, 25));
 	sizer->Add(btnAdd, 0, wxLEFT | wxRIGHT, 5);
 	Connect(btnAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-		wxCommandEventHandler(CommonCMPT::onAddCross));
+		wxCommandEventHandler(CommonCMPT::OnAddCross));
 	wxButton* btnDel = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(25, 25));
 	sizer->Add(btnDel, 0, wxLEFT | wxRIGHT, 5);
 	Connect(btnDel->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-		wxCommandEventHandler(CommonCMPT::onDelCross));
+		wxCommandEventHandler(CommonCMPT::OnDelCross));
 
 	return sizer;
 }
 
-void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
+void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 {
 	ArrangeSpriteOP* op = static_cast<ArrangeSpriteOP*>(m_editOP);
 	op->SetMouseMoveFocus(false);
@@ -115,7 +114,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	if (dlg.ShowModal() != wxID_OK)
 		return;
 
-	clear();
+	m_layers->Clear();
 
 	op->SetMouseMoveFocus(true);
 
@@ -150,13 +149,13 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		}
 	}
 
-	m_ctrl->ClearAllLayer();
-	Layer* layer = new Layer(m_ctrl);
+	m_layers->Clear();
+	Layer* layer = new Layer(m_layers);
 	std::map<int, std::vector<std::string> >::iterator itr
 		= mapFrameSymbols.begin();
 	for ( ; itr != mapFrameSymbols.end(); ++itr)
 	{
-		KeyFrame* frame = new KeyFrame(m_ctrl, itr->first);
+		KeyFrame* frame = new KeyFrame(m_layers, itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
@@ -173,27 +172,25 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 
 	SetCurrFrameSJ::Instance()->Set(0, 0);
 
-	m_ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
-
-	m_ctrl->Refresh();
+//	m_ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
-void CommonCMPT::onLoadFromList(wxCommandEvent& event)
+void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 {
 	std::vector<d2d::ISymbol*> symbols;
-	m_ctrl->GetImagePage()->GetList()->
-		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
+// 	m_ctrl->GetImagePage()->GetList()->
+// 		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 
 	if (!symbols.empty()) {
-		m_ctrl->ClearAllLayer();
+		m_layers->Clear();
 	} else {
 		return;
 	}
 
-	Layer* layer = new Layer(m_ctrl);
+	Layer* layer = new Layer(m_layers);
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		KeyFrame* frame = new KeyFrame(m_ctrl, i+1);
+		KeyFrame* frame = new KeyFrame(m_layers, i+1);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
 
 		frame->Insert(sprite);
@@ -203,17 +200,14 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 		frame->Release();
 	}
 	InsertLayerSJ::Instance()->Insert(layer);
-
-	m_ctrl->Refresh();
 }
 
-void CommonCMPT::onFillingFrames(wxCommandEvent& event)
+void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
 {
 	int tot = m_filling->GetValue();
-	LayersMgr& layers = m_ctrl->GetLayers();
-	for (size_t i = 0, n = layers.Size(); i < n; ++i)
+	for (size_t i = 0, n = m_layers->Size(); i < n; ++i)
 	{
-		Layer* layer = layers.GetLayer(i);
+		Layer* layer = m_layers->GetLayer(i);
 
 		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		std::vector<KeyFrame*> fixed;
@@ -234,30 +228,23 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 			fixed[i]->Release();
 		}
 	}
-
-	m_ctrl->Refresh();
 }
 
-void CommonCMPT::onChangeAnim(wxCommandEvent& event)
+void CommonCMPT::OnChangeAnim(wxCommandEvent& event)
 {
-	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
-	FileIO::Reload(m_ctrl);
+// 	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
+// 	FileIO::Reload(m_ctrl);
 }
 
-void CommonCMPT::onAddCross(wxCommandEvent& event)
+void CommonCMPT::OnAddCross(wxCommandEvent& event)
 {
-	static_cast<ArrangeSpriteOP*>(m_editOP)->addCross();
+	static_cast<ArrangeSpriteOP*>(m_editOP)->AddCross();
 
 }
 
-void CommonCMPT::onDelCross(wxCommandEvent& event)
+void CommonCMPT::OnDelCross(wxCommandEvent& event)
 {
-	static_cast<ArrangeSpriteOP*>(m_editOP)->delCross();
-}
-
-void CommonCMPT::clear()
-{
-	m_ctrl->Clear();
+	static_cast<ArrangeSpriteOP*>(m_editOP)->DelCross();
 }
 
 }

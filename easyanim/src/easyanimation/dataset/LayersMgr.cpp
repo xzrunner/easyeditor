@@ -1,8 +1,6 @@
 #include "LayersMgr.h"
 #include "Layer.h"
 
-#include "frame/Controller.h"
-
 #include "message/message_id.h"
 #include "message/InsertLayerSJ.h"
 #include "message/RemoveLayerSJ.h"
@@ -12,8 +10,7 @@
 namespace eanim
 {
 
-LayersMgr::LayersMgr(Controller* ctrl)
-	: m_ctrl(ctrl)
+LayersMgr::LayersMgr()
 {
 	RegistSubject(InsertLayerSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
@@ -27,8 +24,9 @@ LayersMgr::~LayersMgr()
 void LayersMgr::ChangeLayerOrder(int from, int to)
 {
 	if (from < 0 || from >= m_layers.size()
-		|| to < 0 || to >= m_layers.size()) 
+		|| to < 0 || to >= m_layers.size()) {
 		return;
+	}
 
 	Layer* layer = m_layers[from];
 	m_layers.erase(m_layers.begin() + from);
@@ -95,7 +93,7 @@ void LayersMgr::OnNotify(int sj_id, void* ud)
 	{
 	case MSG_INSERT_LAYER:
 		{
-			Layer* layer = ud ? (Layer*)ud : new Layer(m_ctrl);
+			Layer* layer = ud ? (Layer*)ud : new Layer(this);
 			Insert(layer);
 			if (!ud) {
 				layer->InsertKeyFrame(1);

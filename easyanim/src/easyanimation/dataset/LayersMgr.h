@@ -6,13 +6,12 @@
 namespace eanim
 {
 
-class Controller;
 class Layer;
 
 class LayersMgr : public d2d::Observer
 {
 public:
-	LayersMgr(Controller* ctrl);
+	LayersMgr();
 	~LayersMgr();
 
 	void ChangeLayerOrder(int from, int to);
@@ -47,8 +46,6 @@ private:
 	void Remove();
 
 private:
-	Controller* m_ctrl;
-
 	std::vector<Layer*> m_layers;
 
 }; // LayersMgr

@@ -1,24 +1,24 @@
-#pragma once
+#ifndef _EASYANIM_CODE_SETTING_DLG_H_
+#define _EASYANIM_CODE_SETTING_DLG_H_
 
 #include <wx/wx.h>
 
 namespace eanim
 {
 
-	class Controller;
-	class CodeSettingDlg : public wxDialog
-	{
-	public:
-		CodeSettingDlg(wxWindow* parent, Controller* ctrl);
+class CodeSettingDlg : public wxDialog
+{
+public:
+	CodeSettingDlg(wxWindow* parent);
 
-	private:
-		void onSelectPackerFile(wxCommandEvent& event);
+private:
+	void OnSelectTPFile(wxCommandEvent& event);
 
-	private:
-		Controller* m_ctrl;
+private:
+	wxTextCtrl* m_tp_path;
 
-		wxTextCtrl* m_packerPath;
+}; // CodeSettingDlg
 
-	}; // CodeSettingDlg
 }
 
+#endif // _EASYANIM_CODE_SETTING_DLG_H_

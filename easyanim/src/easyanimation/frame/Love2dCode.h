@@ -1,29 +1,32 @@
-#pragma once
+#ifndef _EASYANIM_LOVE2D_CODE_H_
+#define _EASYANIM_LOVE2D_CODE_H_
 
 #include <easybuilder.h>
 
 namespace eanim
 {
-	class Controller;
 
-	class Love2dCode
-	{
-	public:
-		Love2dCode(ebuilder::CodeGenerator& gen,
-			Controller* ctrl);
+class LayersMgr;
 
-		void resolve();
+class Love2dCode
+{
+public:
+	Love2dCode(ebuilder::CodeGenerator& gen, LayersMgr* layers);
 
-	private:
-		int query(const std::string& filepath) const;
+	void Resolve();
 
-	private:
-		ebuilder::CodeGenerator& m_gen;
+private:
+	int Query(const std::string& filepath) const;
 
-		Controller* m_ctrl;
+private:
+	ebuilder::CodeGenerator& m_gen;
 
-		d2d::TexPackerAdapter m_packerAdapter;
+	LayersMgr* m_layers;
 
-	}; // Love2dCode
+	d2d::TexPackerAdapter m_tp_adapter;
+
+}; // Love2dCode
+
 }
 
+#endif // _EASYANIM_LOVE2D_CODE_H_

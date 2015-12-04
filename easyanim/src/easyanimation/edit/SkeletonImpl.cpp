@@ -11,10 +11,10 @@ namespace eanim
 {
 
 SkeletonImpl::SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
-						   d2d::AbstractEditOP* editop)
+						   LayersMgr* layers)
 	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, d2d::ArrangeSpriteConfig())
 	, m_stage(stage)
-	, m_key_handler(editop, stage->GetController())
+	, m_key_handler(layers)
 	, m_selected_joint(NULL)
 {
 }
@@ -22,7 +22,7 @@ SkeletonImpl::SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* propert
 void SkeletonImpl::OnKeyDown(int keyCode)
 {
 	d2d::ArrangeSpriteImpl::OnKeyDown(keyCode);
-	m_key_handler.process(keyCode);
+	m_key_handler.Process(keyCode);
 }
 
 void SkeletonImpl::OnMouseLeftDown(int x, int y)

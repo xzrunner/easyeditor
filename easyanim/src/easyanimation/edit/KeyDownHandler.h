@@ -6,20 +6,21 @@
 namespace eanim
 {
 
-class Controller;
+class LayersMgr;
 
 class KeyDownHandler
 {
 public:
-	KeyDownHandler(d2d::AbstractEditOP* editop,
-		Controller* ctrl);
+	KeyDownHandler(LayersMgr* layers);
 
-	void process(int keyCode) const;
+	void Process(int key_code);
 
 private:
-	d2d::AbstractEditOP* m_editop;
+	void SetPrevKeyFrame();
+	void SetNextKeyFrame();
 
-	Controller* m_ctrl;
+private:
+	LayersMgr* m_layers;
 
 }; // KeyDownHandler
 

@@ -201,3 +201,4 @@
 #include "message/InsertShapeSJ.h"
 #include "message/ClearShapeSJ.h"
 #include "message/SetCanvasDirtySJ.h"
+#include "message/panel_msg.h"

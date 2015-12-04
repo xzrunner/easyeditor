@@ -1,16 +1,16 @@
 #include "Layer.h"
 #include "KeyFrame.h"
 
-#include "frame/Controller.h"
 #include "view/KeysPanel.h"
 #include "view/EditKeyFramesAOP.h"
 #include "message/SetCurrFrameSJ.h"
+#include "message/GetCurrFrameSJ.h"
 
 namespace eanim
 {
 
-Layer::Layer(Controller* ctrl)
-	: m_ctrl(ctrl)
+Layer::Layer(LayersMgr* layers)
+	: m_layers(layers)
 	, m_sprite_observer(*this)
 {
 	static int count = 0;
@@ -40,7 +40,7 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		return NULL;
 	}
 
-	EditKeyFramesAOP* aop = new EditKeyFramesAOP(m_ctrl, this);
+	EditKeyFramesAOP* aop = new EditKeyFramesAOP(this);
 
 	std::vector<KeyFrame*> frames;
 
@@ -86,8 +86,6 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 	}
 
 	SetCurrFrameSJ::Instance()->Set(-1, GetMaxFrameTime());
-
-	m_ctrl->Refresh();
 
 	return aop;
 }
@@ -150,14 +148,17 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 	if (!status.second && frame != status.first->second)
 	{
 		KeyFrame* old_frame = status.first->second;
-		bool refresh = m_ctrl->getCurrFrame() == old_frame;
+
+		int layer, frame;
+		GetCurrFrameSJ::Instance()->Get(layer, frame);
+		bool refresh = (frame == status.first->first);
 
 		old_frame->Release();
-		status.first->second = frame;
-
-		if (refresh) {
-			m_ctrl->UpdateCurrFrame();
-		}
+// 		status.first->second = frame;
+// 
+// 		if (refresh) {
+// 			m_ctrl->UpdateCurrFrame();
+// 		}
 	}
 
 	SetCurrFrameSJ::Instance()->Set(-1, frame->GetTime());
@@ -169,7 +170,7 @@ void Layer::InsertKeyFrame(int time)
 	{
 		if (GetMaxFrameTime() < time)
 		{
-			KeyFrame* frame = new KeyFrame(m_ctrl, time);
+			KeyFrame* frame = new KeyFrame(m_layers, time);
 			frame->CopyFromOther(GetEndFrame());
 			InsertKeyFrame(time, frame);
 			frame->Release();
@@ -177,12 +178,12 @@ void Layer::InsertKeyFrame(int time)
 		}
 		else
 		{
-			InsertKeyFrame(time, new KeyFrame(m_ctrl, time));
+			InsertKeyFrame(time, new KeyFrame(m_layers, time));
 		}
 	}
 	else
 	{
-		InsertKeyFrame(1, new KeyFrame(m_ctrl, 1));
+		InsertKeyFrame(1, new KeyFrame(m_layers, 1));
 	}
 }
 

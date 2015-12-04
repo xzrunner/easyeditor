@@ -7,9 +7,8 @@
 namespace eanim
 {
 
-EditKeyFramesAOP::EditKeyFramesAOP(Controller* ctrl, Layer* layer)
-	: m_ctrl(ctrl)
-	, m_layer(layer)
+EditKeyFramesAOP::EditKeyFramesAOP(Layer* layer)
+	: m_layer(layer)
 {
 }
 
@@ -34,8 +33,6 @@ void EditKeyFramesAOP::undo()
 		const ChangeFrame& change = m_changed[i];
 		m_layer->ChangeKeyFrame(change.frame, change.from);
 	}
-
-	m_ctrl->Refresh();
 }
 
 void EditKeyFramesAOP::redo()
@@ -50,8 +47,6 @@ void EditKeyFramesAOP::redo()
 		const ChangeFrame& change = m_changed[i];
 		m_layer->ChangeKeyFrame(change.frame, change.to);
 	}
-
-	m_ctrl->Refresh();
 }
 
 void EditKeyFramesAOP::AddRemoved(KeyFrame* kf) 

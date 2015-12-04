@@ -15,7 +15,7 @@ class SkeletonImpl : public d2d::ArrangeSpriteImpl
 {
 public:
 	SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
-		d2d::AbstractEditOP* editop);
+		LayersMgr* layers);
 
 	virtual void OnKeyDown(int keyCode);
 	virtual void OnMouseLeftDown(int x, int y);
