@@ -1,11 +1,8 @@
 #include "LayersMgr.h"
 #include "Layer.h"
 
-#include "message/message_id.h"
-#include "message/InsertLayerSJ.h"
-#include "message/RemoveLayerSJ.h"
-#include "message/SetCurrFrameSJ.h"
-#include "message/GetCurrFrameSJ.h"
+#include "message/messages.h"
+#include "view/view_utility.h"
 
 namespace eanim
 {
@@ -93,7 +90,7 @@ void LayersMgr::OnNotify(int sj_id, void* ud)
 	{
 	case MSG_INSERT_LAYER:
 		{
-			Layer* layer = ud ? (Layer*)ud : new Layer(this);
+			Layer* layer = ud ? (Layer*)ud : new Layer;
 			Insert(layer);
 			if (!ud) {
 				layer->InsertKeyFrame(1);
@@ -108,14 +105,13 @@ void LayersMgr::OnNotify(int sj_id, void* ud)
 
 void LayersMgr::Insert(Layer* layer)
 {
-	SetCurrFrameSJ::Instance()->Set(m_layers.size(), 0);
 	m_layers.push_back(layer);
+	SetCurrFrameSJ::Instance()->Set(m_layers.size() - 1, 0);
 }
 
 void LayersMgr::Remove()
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
+	int layer = get_curr_layer_index();
 	assert(layer >= 0 && layer < m_layers.size());
 	delete m_layers[layer];
 	m_layers.erase(m_layers.begin() + layer);

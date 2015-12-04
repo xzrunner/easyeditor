@@ -1,10 +1,10 @@
 #include "KeysScaleWidget.h"
 #include "KeysPanel.h"
-#include "Utility.h"
+#include "config.h"
 
 #include "dataset/LayersMgr.h"
-#include "message/SetCurrFrameSJ.h"
-#include "message/message_id.h"
+#include "dataset/DataMgr.h"
+#include "message/messages.h"
 
 #include <wx/dcbuffer.h>
 
@@ -21,9 +21,8 @@ END_EVENT_TABLE()
 static const int DIVISION_HEIGHT = 4;
 static const int TEXT_Y = 4;
 
-KeysScaleWidget::KeysScaleWidget(wxWindow* parent, const LayersMgr& layers)
+KeysScaleWidget::KeysScaleWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, FRAME_GRID_HEIGHT), wxBORDER_NONE)
-	, m_layers(layers)
 	, m_curr_frame(-1)
 {
 //	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
@@ -101,7 +100,7 @@ void KeysScaleWidget::OnNotify(int sj_id, void* ud)
 
 int KeysScaleWidget::QueryGridByPos(float x) const
 {
-	return std::min(m_layers.GetMaxFrame(), (int)(x / FRAME_GRID_WIDTH) + 1);
+	return std::min(DataMgr::Instance()->GetLayers().GetMaxFrame(), (int)(x / FRAME_GRID_WIDTH) + 1);
 }
 
 } // eanim

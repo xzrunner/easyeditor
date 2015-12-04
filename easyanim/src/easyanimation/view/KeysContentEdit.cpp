@@ -1,40 +1,42 @@
 #include "KeysContentEdit.h"
 #include "KeyFramePropertySetting.h"
 
-#include "dataset/LayersMgr.h"
-#include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
+#include "dataset/Layer.h"
+#include "dataset/LayersMgr.h"
+#include "dataset/DataMgr.h"
 #include "view/KeysPanel.h"
 #include "view/StagePanel.h"
+#include "view/ViewMgr.h"
+#include "message/messages.h"
 
 #include <wx/clipbrd.h>
 
 namespace eanim
 {
 
-KeysContentEdit::KeysContentEdit(const LayersMgr& layers, KeysPanel& keys_panel)
-	: m_layers(layers)
-	, m_keys_panel(keys_panel)
+KeysContentEdit::KeysContentEdit()
 {
 	m_last_row = m_last_col = -1;
 }
 
 void KeysContentEdit::OnMouseLeftDown(int row, int col)
 {
-	if (row >= m_layers.Size()) {
+	int layer_sz = DataMgr::Instance()->GetLayers().Size();
+	if (row >= layer_sz) {
 		return;
 	}
 
 	m_last_col = col;
 	m_last_row = row;
 	if (d2d::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
-		m_keys_panel->SetSelectRegion(row, col);
+		SetSelectedRegionSJ::Instance()->Set(row, col);
 	} else {
-		m_keys_panel->SetSelectPos(row, col);
+		SetCurrFrameSJ::Instance()->Set(layer_sz - row - 1, col);
 	}
 
 	bool selected = false;
-	Layer* layer = m_layers.GetLayer(m_layers.Size() - row - 1);
+	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_sz - row - 1);
 	if (layer)
 	{
 		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
@@ -63,17 +65,17 @@ void KeysContentEdit::OnMouseDragging(int row, int col)
 		return;
 	}
 
-	if (row == m_last_row && row < m_layers.Size()) {
+	if (row == m_last_row && row < DataMgr::Instance()->GetLayers().Size()) {
 		int col_min = std::min(m_last_col, col),
 			col_max = std::max(m_last_col, col);
-		m_keys_panel->UpdateSelectRegion(col_min, col_max);
+		UpdateSelectedRegionSJ::Instance()->Update(col_min, col_max);
 	}
 }
 
 void KeysContentEdit::CopySelection()
 {
 	int row, col_min, col_max;
-	m_keys_panel->GetSelectRegion(row, col_min, col_max);
+	ViewMgr::Instance()->keys->GetSelectRegion(row, col_min, col_max);
 
 	if (row == -1) {
 		return;
@@ -81,8 +83,8 @@ void KeysContentEdit::CopySelection()
 
 	Json::Value value;
 
-	int index = m_layers.Size() - row - 1;
-	Layer* layer = m_layers.GetLayer(index);
+	int index = DataMgr::Instance()->GetLayers().Size() - row - 1;
+	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
  	const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
  	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
  		itr_end = frames.upper_bound(col_max + 1);
@@ -142,15 +144,14 @@ void KeysContentEdit::PasteSelection()
 	//////////////////////////////////////////////////////////////////////////
 
 	int row, col;
-	m_keys_panel->GetSelectPos(row, col);
+	ViewMgr::Instance()->keys->GetSelectPos(row, col);
 	if (row == -1 || col == -1) {
 		wxTheClipboard->Close();
 		return;
 	}
 
-	size_t index = m_layers.Size() - row - 1;
-	Layer* layer = m_layers.GetLayer(index);
-
+	size_t index = DataMgr::Instance()->GetLayers().Size() - row - 1;
+	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
 	for (int iframe = 0, n = value["frame"].size(); iframe < n; ++iframe) 
 	{
 		const Json::Value& k_val = value["frame"][iframe];
@@ -161,7 +162,7 @@ void KeysContentEdit::PasteSelection()
 		}
 		col += dis;
 
-		KeyFrame* frame = new KeyFrame(m_ctrl, col + 1);
+		KeyFrame* frame = new KeyFrame(col + 1);
 		++col;
 
 		for (int i_spr = 0, m = k_val["sprite"].size(); i_spr < m; ++i_spr) 
@@ -191,14 +192,14 @@ void KeysContentEdit::PasteSelection()
 void KeysContentEdit::DeleteSelection()
 {
 	int row, col_min, col_max;
-	m_keys_panel->GetSelectRegion(row, col_min, col_max);
+	ViewMgr::Instance()->keys->GetSelectRegion(row, col_min, col_max);
 
 	if (row == -1) {
 		return;
 	}
 
- 	int index = m_layers.Size() - row - 1;
- 	Layer* layer = m_layers.GetLayer(index);
+ 	int index = DataMgr::Instance()->GetLayers().Size() - row - 1;
+ 	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
 	if (layer) {
 		d2d::AbstractAtomicOP* aop = layer->RemoveFrameRegion(col_min + 1, col_max + 1);
 		d2d::EditAddRecordSJ::Instance()->Add(aop);

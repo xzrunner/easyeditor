@@ -28,7 +28,7 @@ public:
 class EditUndoSJ : public Subject
 {
 public:
-	void Redo();
+	void Undo();
 	SUBJECT_DECLARATION(EditUndoSJ)
 }; // EditUndoSJ
 

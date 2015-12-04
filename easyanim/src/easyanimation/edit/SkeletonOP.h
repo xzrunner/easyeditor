@@ -1,5 +1,5 @@
-#ifndef EANIM_SKELETON_OP_H
-#define EANIM_SKELETON_OP_H
+#ifndef _EASYANIM_SKELETON_OP_H_
+#define _EASYANIM_SKELETON_OP_H_
 
 #include "SelectSpritesOP.h"
 
@@ -17,4 +17,4 @@ public:
 
 }
 
-#endif // EANIM_SKELETON_OP_H
+#endif // _EASYANIM_SKELETON_OP_H_

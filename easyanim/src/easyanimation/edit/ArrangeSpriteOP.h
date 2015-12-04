@@ -12,8 +12,7 @@ class StagePanel;
 class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
 {
 public:
-	ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* property,
-		LayersMgr* layers);
+	ArrangeSpriteOP(StagePanel* stage);
 	virtual ~ArrangeSpriteOP();
 
 	virtual bool OnKeyDown(int keyCode);

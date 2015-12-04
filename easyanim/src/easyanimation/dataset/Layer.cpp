@@ -3,15 +3,14 @@
 
 #include "view/KeysPanel.h"
 #include "view/EditKeyFramesAOP.h"
-#include "message/SetCurrFrameSJ.h"
-#include "message/GetCurrFrameSJ.h"
+#include "view/view_utility.h"
+#include "message/messages.h"
 
 namespace eanim
 {
 
-Layer::Layer(LayersMgr* layers)
-	: m_layers(layers)
-	, m_sprite_observer(*this)
+Layer::Layer()
+	: m_sprite_observer(*this)
 {
 	static int count = 0;
 	m_name = "Layer" + d2d::StringTools::ToString(count++);
@@ -149,16 +148,15 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 	{
 		KeyFrame* old_frame = status.first->second;
 
-		int layer, frame;
-		GetCurrFrameSJ::Instance()->Get(layer, frame);
-		bool refresh = (frame == status.first->first);
+		int frame_idx = get_curr_frame_index();
+		bool refresh = (frame_idx + 1 == status.first->first);
 
 		old_frame->Release();
-// 		status.first->second = frame;
-// 
-// 		if (refresh) {
-// 			m_ctrl->UpdateCurrFrame();
-// 		}
+		status.first->second = frame;
+
+		if (refresh) {
+			reload_viewlist(frame);
+		}
 	}
 
 	SetCurrFrameSJ::Instance()->Set(-1, frame->GetTime());
@@ -170,7 +168,7 @@ void Layer::InsertKeyFrame(int time)
 	{
 		if (GetMaxFrameTime() < time)
 		{
-			KeyFrame* frame = new KeyFrame(m_layers, time);
+			KeyFrame* frame = new KeyFrame(time);
 			frame->CopyFromOther(GetEndFrame());
 			InsertKeyFrame(time, frame);
 			frame->Release();
@@ -178,12 +176,12 @@ void Layer::InsertKeyFrame(int time)
 		}
 		else
 		{
-			InsertKeyFrame(time, new KeyFrame(m_layers, time));
+			InsertKeyFrame(time, new KeyFrame(time));
 		}
 	}
 	else
 	{
-		InsertKeyFrame(1, new KeyFrame(m_layers, 1));
+		InsertKeyFrame(1, new KeyFrame(1));
 	}
 }
 

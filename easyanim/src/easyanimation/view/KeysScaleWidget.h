@@ -6,12 +6,10 @@
 namespace eanim
 {
 
-class LayersMgr;
-
 class KeysScaleWidget : public wxPanel, public d2d::Observer
 {
 public:
-	KeysScaleWidget(wxWindow* parent, const LayersMgr& layers);
+	KeysScaleWidget(wxWindow* parent);
 
 	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);
@@ -28,8 +26,6 @@ private:
 	int QueryGridByPos(float x) const;
 
 private:
-	const LayersMgr& m_layers;
-
 	int m_curr_frame;
 
 private:

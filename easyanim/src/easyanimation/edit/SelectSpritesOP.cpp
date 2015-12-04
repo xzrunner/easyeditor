@@ -3,6 +3,7 @@
 #include "dataset/SpriteUserData.h"
 #include "dataset/LayersMgr.h"
 #include "dataset/KeyFrame.h"
+#include "dataset/DataMgr.h"
 
 #include <easymesh.h>
 #include <easyicon.h>
@@ -21,13 +22,13 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
-	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
-	{
-		emesh::EditDialog dlg(m_wnd, sprite);
-		dlg.ShowModal();
-	}
+// 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+// 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+// 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
+// 	{
+// 		emesh::EditDialog dlg(m_wnd, sprite);
+// 		dlg.ShowModal();
+// 	}
 
 	return false;
 }
@@ -37,7 +38,7 @@ void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& 
 	d2d::SelectSpritesOP::PasteSprToClipboard(spr, value);
 
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
-	value["anim"]["layer"] = ud->all_layers->QueryIndex(ud->layer);
+	value["anim"]["layer"] = DataMgr::Instance()->GetLayers().QueryIndex(ud->layer);
 	value["anim"]["frame"] = ud->frame->GetTime() - 1;
 }
 

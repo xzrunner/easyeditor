@@ -1,10 +1,14 @@
 #include "KeysContentWidget.h"
 #include "KeysPanel.h"
 
-#include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
+#include "dataset/DataMgr.h"
+#include "dataset/data_utility.h"
 #include "view/StagePanel.h"
+#include "view/ViewMgr.h"
+#include "view/view_utility.h"
+#include "message/messages.h"
 
 #include <wx/dcbuffer.h>
 
@@ -12,29 +16,29 @@ namespace eanim
 {
 
 BEGIN_EVENT_TABLE(KeysContentWidget, wxPanel)
-	EVT_PAINT(KeysContentWidget::onPaint)
-	EVT_ERASE_BACKGROUND(KeysContentWidget::onEraseBackground)
-	EVT_SIZE(KeysContentWidget::onSize)
-	EVT_MOUSE_EVENTS(KeysContentWidget::onMouse)
+	EVT_PAINT(KeysContentWidget::OnPaint)
+	EVT_ERASE_BACKGROUND(KeysContentWidget::OnEraseBackground)
+	EVT_SIZE(KeysContentWidget::OnSize)
+	EVT_MOUSE_EVENTS(KeysContentWidget::OnMouse)
 	EVT_KEY_DOWN(KeysContentWidget::OnKeyDown)
 	EVT_KEY_UP(KeysContentWidget::OnKeyUp)
 
-	EVT_MENU(Menu_CreateClassicTween, KeysContentWidget::onCreateClassicTween)
-	EVT_MENU(Menu_DeleteClassicTween, KeysContentWidget::onDeleteClassicTween)
-	EVT_MENU(Menu_InsertFrame, KeysContentWidget::onInsertFrame)
-	EVT_MENU(Menu_DeleteFrame, KeysContentWidget::onDeleteFrame)
-	EVT_MENU(Menu_InsertKeyFrame, KeysContentWidget::onInsertKeyFrame)
-	EVT_MENU(Menu_DeleteKeyFrame, KeysContentWidget::onDeleteKeyFrame)
+	EVT_MENU(Menu_CreateClassicTween, KeysContentWidget::OnCreateClassicTween)
+	EVT_MENU(Menu_DeleteClassicTween, KeysContentWidget::OnDeleteClassicTween)
+	EVT_MENU(Menu_InsertFrame, KeysContentWidget::OnInsertFrame)
+	EVT_MENU(Menu_DeleteFrame, KeysContentWidget::OnDeleteFrame)
+	EVT_MENU(Menu_InsertKeyFrame, KeysContentWidget::OnInsertKeyFrame)
+	EVT_MENU(Menu_DeleteKeyFrame, KeysContentWidget::OnDeleteKeyFrame)
 
-	EVT_UPDATE_UI(Menu_CreateClassicTween, KeysContentWidget::onUpdateCreateClassicTween)
-	EVT_UPDATE_UI(Menu_DeleteClassicTween, KeysContentWidget::onUpdateDeleteClassicTween)
-	EVT_UPDATE_UI(Menu_InsertFrame, KeysContentWidget::onUpdateInsertFrame)
-	EVT_UPDATE_UI(Menu_DeleteFrame, KeysContentWidget::onUpdateDeleteFrame)
-	EVT_UPDATE_UI(Menu_InsertKeyFrame, KeysContentWidget::onUpdateInsertKeyFrame)
-	EVT_UPDATE_UI(Menu_DeleteKeyFrame, KeysContentWidget::onUpdateDeleteKeyFrame)
+	EVT_UPDATE_UI(Menu_CreateClassicTween, KeysContentWidget::OnUpdateCreateClassicTween)
+	EVT_UPDATE_UI(Menu_DeleteClassicTween, KeysContentWidget::OnUpdateDeleteClassicTween)
+	EVT_UPDATE_UI(Menu_InsertFrame, KeysContentWidget::OnUpdateInsertFrame)
+	EVT_UPDATE_UI(Menu_DeleteFrame, KeysContentWidget::OnUpdateDeleteFrame)
+	EVT_UPDATE_UI(Menu_InsertKeyFrame, KeysContentWidget::OnUpdateInsertKeyFrame)
+	EVT_UPDATE_UI(Menu_DeleteKeyFrame, KeysContentWidget::OnUpdateDeleteKeyFrame)
 
-	EVT_HOTKEY(Hot_InsertFrame, KeysContentWidget::onInsertFrame)
-	EVT_HOTKEY(Hot_DeleteFrame, KeysContentWidget::onDeleteFrame)
+	EVT_HOTKEY(Hot_InsertFrame, KeysContentWidget::OnInsertFrame)
+	EVT_HOTKEY(Hot_DeleteFrame, KeysContentWidget::OnDeleteFrame)
 END_EVENT_TABLE()
 
 LanguageEntry KeysContentWidget::entries[] =
@@ -47,12 +51,8 @@ LanguageEntry KeysContentWidget::entries[] =
 	{ "É¾³ý¹Ø¼üÖ¡", "Delete Key Frame" }
 };
 
-KeysContentWidget::KeysContentWidget(wxWindow* parent, const LayersMgr& layers,
-									 KeysPanel& keys_panel)
+KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
-	, m_editop(ctrl)
-	, m_layers(layers)
-	, m_keys_panel(keys_panel)
 {
 	m_curr_layer = m_curr_frame = -1;
 
@@ -65,27 +65,27 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent, const LayersMgr& layers,
 	RegistSubject(SetCurrFrameSJ::Instance());
 }
 
-void KeysContentWidget::onSize(wxSizeEvent& event)
+void KeysContentWidget::OnSize(wxSizeEvent& event)
 {
 	Refresh(true);
 }
 
-void KeysContentWidget::onPaint(wxPaintEvent& event)
+void KeysContentWidget::OnPaint(wxPaintEvent& event)
 {
 	wxBufferedPaintDC dc(this);
 
-	drawBackground(dc);
-	drawLayersDataBg(dc);
-	drawSelected(dc);
-	drawLayersDataFlag(dc);
-	drawCurrPosFlag(dc);
+	DrawBackground(dc);
+	DrawLayersDataBg(dc);
+	DrawSelected(dc);
+	DrawLayersDataFlag(dc);
+	DrawCurrPosFlag(dc);
 }
 
-void KeysContentWidget::onEraseBackground(wxEraseEvent& event)
+void KeysContentWidget::OnEraseBackground(wxEraseEvent& event)
 {
 }
 
-void KeysContentWidget::onMouse(wxMouseEvent& event)
+void KeysContentWidget::OnMouse(wxMouseEvent& event)
 {
 	int row = event.GetY() / FRAME_GRID_HEIGHT,
 		col = event.GetX() / FRAME_GRID_WIDTH;
@@ -139,31 +139,21 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 	}
 }
 
-KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
+KeyFrame* KeysContentWidget::QueryKeyFrameByPos() const
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-	if (layer == -1 || frame == -1) {
-		return NULL;
-	}
-
-	Layer* layer = m_layers.GetLayer(layer);
+	int col;
+	Layer* layer = get_curr_layer(col);
 	if (!layer) {
 		return NULL;
 	} else {
-		return layer->GetCurrKeyFrame(frame + 1);
+		return layer->GetCurrKeyFrame(col + 1);
 	}
 }
 
-bool KeysContentWidget::isPosOnKeyFrame() const
+bool KeysContentWidget::IsPosOnKeyFrame() const
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-	if (layer == -1 || frame == -1) {
-		return false;
-	}
-
-	Layer* layer = m_layers.GetLayer(layer);
+	int col;
+	Layer* layer = get_curr_layer(col);
 	if (!layer) {
 		return false;
 	} else {
@@ -172,14 +162,14 @@ bool KeysContentWidget::isPosOnKeyFrame() const
 	}
 }
 
-void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
+void KeysContentWidget::DrawBackground(wxBufferedPaintDC& dc)
 {
 	// background
 	dc.SetPen(wxPen(LIGHT_GRAY));
 	dc.SetBrush(wxBrush(LIGHT_GRAY));
 	dc.DrawRectangle(GetSize());
 
-	const size_t size = m_layers.Size();
+	const size_t size = DataMgr::Instance()->GetLayers().Size();
 	const float width = FRAME_GRID_WIDTH * MAX_FRAME_COUNT,
 		height = FRAME_GRID_HEIGHT * size;
 
@@ -214,12 +204,12 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 	}
 }
 
-void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
+void KeysContentWidget::DrawLayersDataBg(wxBufferedPaintDC& dc)
 {
-	for (size_t i = 0, n = m_layers.Size(); i < n; ++i)
+	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = m_layers.GetLayer(storeIndex)->GetAllFrames();
+		const std::map<int, KeyFrame*>& frames = DataMgr::Instance()->GetLayers().GetLayer(storeIndex)->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// during
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -260,12 +250,12 @@ void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 	}
 }
 
-void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
+void KeysContentWidget::DrawLayersDataFlag(wxBufferedPaintDC& dc)
 {
-	for (size_t i = 0, n = m_layers.Size(); i < n; ++i)
+	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = m_layers.GetLayer(storeIndex)->GetAllFrames();
+		const std::map<int, KeyFrame*>& frames = DataMgr::Instance()->GetLayers().GetLayer(storeIndex)->GetAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// key frame start (circle)
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -295,40 +285,39 @@ void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 	}
 }
 
-void KeysContentWidget::drawCurrPosFlag(wxBufferedPaintDC& dc)
+void KeysContentWidget::DrawCurrPosFlag(wxBufferedPaintDC& dc)
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-	if (frame < 0) {
+	int frame_idx = get_curr_frame_index();
+	if (frame_idx < 0) {
 		return;
 	}
-	const float x = FRAME_GRID_WIDTH * (frame - 0.5f);
+	const float x = FRAME_GRID_WIDTH * (frame_idx + 0.5f);
 	dc.SetPen(DARK_RED);
-	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * m_layers.Size())
+	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * DataMgr::Instance()->GetLayers().Size());
 }
 
-void KeysContentWidget::drawSelected(wxBufferedPaintDC& dc)
+void KeysContentWidget::DrawSelected(wxBufferedPaintDC& dc)
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-	if (layer != -1 && frame != -1)
+	int layer_idx, frame_idx;
+	get_curr_index(layer_idx, frame_idx);
+	if (layer_idx != -1 && frame_idx != -1)
 	{
 		dc.SetPen(wxPen(DARK_BLUE));
 		dc.SetBrush(wxBrush(DARK_BLUE));
 		dc.DrawRectangle(
-			FRAME_GRID_WIDTH * (col + 1), 
-			FRAME_GRID_HEIGHT * (m_layers.Size() - 1 - row), 
+			FRAME_GRID_WIDTH * frame_idx, 
+			FRAME_GRID_HEIGHT * (DataMgr::Instance()->GetLayers().Size() - 1 - layer_idx), 
 			FRAME_GRID_WIDTH, 
 			FRAME_GRID_HEIGHT);
 	}
 
 	int col_min, col_max;
-	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
+	ViewMgr::Instance()->keys->GetSelectRegion(layer_idx, col_min, col_max);
 	if (col_min != -1 && col_max != -1 && col_min != col_max)
 	{
 		dc.SetPen(wxPen(DARK_BLUE));
 		dc.SetBrush(wxBrush(DARK_BLUE));
-		dc.DrawRectangle(FRAME_GRID_WIDTH * col_min, FRAME_GRID_HEIGHT * row, FRAME_GRID_WIDTH * (col_max - col_min + 1), FRAME_GRID_HEIGHT);
+		dc.DrawRectangle(FRAME_GRID_WIDTH * col_min, FRAME_GRID_HEIGHT * layer_idx, FRAME_GRID_WIDTH * (col_max - col_min + 1), FRAME_GRID_HEIGHT);
 	}
 }
 
@@ -348,59 +337,47 @@ void KeysContentWidget::MousePopupMenu(int x, int y)
 	PopupMenu(&menu, x, y);	
 }
 
-void KeysContentWidget::onCreateClassicTween(wxCommandEvent& event)
+void KeysContentWidget::OnCreateClassicTween(wxCommandEvent& event)
 {
-	KeyFrame* keyFrame = queryKeyFrameByPos();
+	KeyFrame* keyFrame = QueryKeyFrameByPos();
 	keyFrame->SetClassicTween(true);
 	Refresh(true);
 }
 
-void KeysContentWidget::onDeleteClassicTween(wxCommandEvent& event)
+void KeysContentWidget::OnDeleteClassicTween(wxCommandEvent& event)
 {
-	KeyFrame* keyFrame = queryKeyFrameByPos();
+	KeyFrame* keyFrame = QueryKeyFrameByPos();
 	keyFrame->SetClassicTween(false);
 	Refresh(true);
 }
 
-void KeysContentWidget::onInsertFrame(wxCommandEvent& event)
+void KeysContentWidget::OnInsertFrame(wxCommandEvent& event)
 {
-	onInsertFrame();
+	OnInsertFrame();
 }
 
-void KeysContentWidget::onDeleteFrame(wxCommandEvent& event)
+void KeysContentWidget::OnDeleteFrame(wxCommandEvent& event)
 {
-	onDeleteFrame();
+	OnDeleteFrame();
 }
 
-void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
+void KeysContentWidget::OnInsertKeyFrame(wxCommandEvent& event)
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row != -1 && col != -1)
-	{
-		LayersMgr& layers = m_ctrl->GetLayers();
-		size_t index = layers.Size() - row - 1;
-		Layer* layer = layers.GetLayer(index);
-		layer->InsertKeyFrame(col + 1);
-		m_ctrl->GetKeysPanel()->Refresh(true);
-	}
+	int col;
+	Layer* layer = get_curr_layer(col);
+	layer->InsertKeyFrame(col + 1);
 }
 
-void KeysContentWidget::onDeleteKeyFrame(wxCommandEvent& event)
+void KeysContentWidget::OnDeleteKeyFrame(wxCommandEvent& event)
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-
-	LayersMgr& layers = m_ctrl->GetLayers();
-	size_t index = layers.Size() - row - 1;
-	Layer* layer = layers.GetLayer(index);
+	int col;
+	Layer* layer = get_curr_layer(col);
 	layer->RemoveKeyFrame(col + 1);
-	m_ctrl->GetKeysPanel()->Refresh(true);
 }
 
-void KeysContentWidget::onUpdateCreateClassicTween(wxUpdateUIEvent& event)
+void KeysContentWidget::OnUpdateCreateClassicTween(wxUpdateUIEvent& event)
 {
-	KeyFrame* keyFrame = queryKeyFrameByPos();
+	KeyFrame* keyFrame = QueryKeyFrameByPos();
 	if (keyFrame)
 	{
 		if (keyFrame->HasClassicTween())
@@ -414,9 +391,9 @@ void KeysContentWidget::onUpdateCreateClassicTween(wxUpdateUIEvent& event)
 	}
 }
 
-void KeysContentWidget::onUpdateDeleteClassicTween(wxUpdateUIEvent& event)
+void KeysContentWidget::OnUpdateDeleteClassicTween(wxUpdateUIEvent& event)
 {
-	KeyFrame* keyFrame = queryKeyFrameByPos();
+	KeyFrame* keyFrame = QueryKeyFrameByPos();
 	if (keyFrame)
 	{
 		if (keyFrame->HasClassicTween())
@@ -430,72 +407,50 @@ void KeysContentWidget::onUpdateDeleteClassicTween(wxUpdateUIEvent& event)
 	}
 }
 
-void KeysContentWidget::onUpdateInsertFrame(wxUpdateUIEvent& event)
+void KeysContentWidget::OnUpdateInsertFrame(wxUpdateUIEvent& event)
 {
 }
 
-void KeysContentWidget::onUpdateDeleteFrame(wxUpdateUIEvent& event)
+void KeysContentWidget::OnUpdateDeleteFrame(wxUpdateUIEvent& event)
 {
-	if (isPosOnKeyFrame()) event.Enable(false);
+	if (IsPosOnKeyFrame()) event.Enable(false);
 	else event.Enable(true);
 }
 
-void KeysContentWidget::onUpdateInsertKeyFrame(wxUpdateUIEvent& event)
+void KeysContentWidget::OnUpdateInsertKeyFrame(wxUpdateUIEvent& event)
 {
 //	event.Enable(false);
 }
 
-void KeysContentWidget::onUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
+void KeysContentWidget::OnUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row == -1 || col == -1) return;
-
-	LayersMgr& layers = m_ctrl->GetLayers();
-	size_t index = layers.Size() - row - 1;
-	Layer* layer = layers.GetLayer(index);
-	if (layer->IsKeyFrame(col + 1)) 
-		event.Enable(true);
-	else 
-		event.Enable(false);
+	int col;
+	Layer* layer = get_curr_layer(col);
+	event.Enable(layer->IsKeyFrame(col + 1));
 }
 
-void KeysContentWidget::onInsertFrame(wxKeyEvent& event)
+void KeysContentWidget::OnInsertFrame(wxKeyEvent& event)
 {
-	onInsertFrame();
+	OnInsertFrame();
 }
 
-void KeysContentWidget::onDeleteFrame(wxKeyEvent& event)
+void KeysContentWidget::OnDeleteFrame(wxKeyEvent& event)
 {
-	onDeleteFrame();
+	OnDeleteFrame();
 }
 
-void KeysContentWidget::onInsertFrame()
+void KeysContentWidget::OnInsertFrame()
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row != -1 && col != -1)
-	{
-		LayersMgr& layers = m_ctrl->GetLayers();
-		size_t index = layers.Size() - row - 1;
-		Layer* layer = layers.GetLayer(index);
-		layer->InsertNullFrame(col + 1);
-		m_ctrl->GetKeysPanel()->Refresh(true);
-	}
+	int col;
+	Layer* layer = get_curr_layer(col);
+	layer->InsertNullFrame(col + 1);
 }
 
-void KeysContentWidget::onDeleteFrame()
+void KeysContentWidget::OnDeleteFrame()
 {
-	int row, col;
-	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
-	if (row != -1 && col != -1)
-	{
-		LayersMgr& layers = m_ctrl->GetLayers();
-		size_t index = layers.Size() - row - 1;
-		Layer* layer = layers.GetLayer(index);
-		layer->RemoveNullFrame(col + 1);
-		m_ctrl->GetKeysPanel()->Refresh(true);
-	}
+	int col;
+	Layer* layer = get_curr_layer(col);
+	layer->RemoveNullFrame(col + 1);
 }
 
 } // eanim

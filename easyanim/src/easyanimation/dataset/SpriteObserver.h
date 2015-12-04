@@ -1,28 +1,33 @@
-#pragma once
+#ifndef _EASYANIM_SPRITE_OBSERVER_H_
+#define _EASYANIM_SPRITE_OBSERVER_H_
 
 #include <drag2d.h>
 
 namespace eanim
 {
-	class Layer;
 
-	class SpriteObserver : public d2d::ISpriteObserver
-	{
-	public:
-		SpriteObserver(const Layer& layer);
+class Layer;
 
-		virtual void Translate(d2d::ISprite* sprite, const d2d::Vector& offset);
-		virtual void Rotate(d2d::ISprite* sprite, float delta);
+class SpriteObserver : public d2d::ISpriteObserver
+{
+public:
+	SpriteObserver(const Layer& layer);
 
-		void insert(const d2d::ISprite* sprite, int frame);
-		void remove(const d2d::ISprite* sprite);
+	virtual void Translate(d2d::ISprite* sprite, const d2d::Vector& offset);
+	virtual void Rotate(d2d::ISprite* sprite, float delta);
 
-	private:
-		const Layer& m_layer;
+	void insert(const d2d::ISprite* sprite, int frame);
+	void remove(const d2d::ISprite* sprite);
 
-		std::map<d2d::ISprite*, int> m_map2Frame;
+private:
+	const Layer& m_layer;
 
-		bool m_enable;
+	std::map<d2d::ISprite*, int> m_map2frame;
 
-	}; // SpriteObserver
+	bool m_enable;
+
+}; // SpriteObserver
+
 }
+
+#endif // _EASYANIM_SPRITE_OBSERVER_H_

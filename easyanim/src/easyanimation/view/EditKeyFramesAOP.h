@@ -6,7 +6,6 @@
 namespace eanim
 {
 
-class Controller;
 class Layer;
 class KeyFrame;
 

@@ -1,15 +1,13 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
+#include "view/ViewMgr.h"
 
 namespace eanim
 {
 
-ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, 
-								 d2d::PropertySettingPanel* property,
-								 LayersMgr* layers)
-	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, property)
-	, m_kd_handler(layers)
+ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
+	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, ViewMgr::Instance()->property)
 	, m_selected(NULL)
 {
 }

@@ -1,6 +1,5 @@
 #include "EditKeyFramesAOP.h"
 
-#include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 

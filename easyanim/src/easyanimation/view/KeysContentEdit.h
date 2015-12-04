@@ -6,13 +6,10 @@
 namespace eanim
 {
 
-class LayersMgr;
-class KeysPanel;
-
 class KeysContentEdit
 {
 public:
-	KeysContentEdit(const LayersMgr& layers, KeysPanel& keys_panel);
+	KeysContentEdit();
 
 	void OnMouseLeftDown(int row, int col);
 	void OnMouseLeftUp(int row, int col);
@@ -23,10 +20,6 @@ public:
 	void DeleteSelection();
 
 private:
-	const LayersMgr& m_layers;
-
-	KeysPanel& m_keys_panel;
-
 	int m_last_row, m_last_col;
 
 }; // KeysContentEdit

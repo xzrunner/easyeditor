@@ -6,15 +6,12 @@
 namespace eanim
 {
 
-class Controller;
 class StagePanel;
 
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, StagePanel* stage, 
-		d2d::PropertySettingPanel* property, 
-		bool vertical, Controller* ctrl);
+	ToolbarPanel(wxWindow* parent, bool vertical);
 
 	void AddAnimChoice(const std::vector<std::string>& choices);
 
@@ -32,8 +29,6 @@ private:
 	void OnSetTemplateDir(wxCommandEvent& event);
 
 private:
-	Controller* m_ctrl;
-
 	wxSizer* m_tl_sizer;
 
 	wxSizer* m_tl_single_sizer;

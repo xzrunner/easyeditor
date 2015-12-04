@@ -4,26 +4,22 @@ namespace eanim
 {
 
 SpriteUserData::SpriteUserData()
-	: all_layers(NULL)
-	, layer(NULL)
+	: layer(NULL)
 	, frame(NULL)
 {
 	layer_idx = frame_idx = -1;
 }
 
-void set_sprite_user_data(d2d::ISprite* spr, LayersMgr* all_layers,
-						  Layer* layer, KeyFrame* frame)
+void set_sprite_user_data(d2d::ISprite* spr, Layer* layer, KeyFrame* frame)
 {
 	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
 	{
-		old_ud->all_layers = all_layers;
 		old_ud->layer = layer;
 		old_ud->frame = frame;
 	}
 	else
 	{
 		SpriteUserData* ud = new SpriteUserData;
-		ud->all_layers = all_layers;
 		ud->layer = layer;
 		ud->frame = frame;
 		spr->SetUserData(ud);

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _EASYANIM_PREVIEW_DIALOG_H_
+#define _EASYANIM_PREVIEW_DIALOG_H_
 
 #include <wx/wx.h>
 #include <drag2d.h>
@@ -9,32 +10,30 @@
 namespace eanim
 {
 
-	class Controller;
+class PreviewDialog : public wxDialog
+{
+public:
+	PreviewDialog(wxWindow* parent);
+	~PreviewDialog();
 
-	class PreviewDialog : public wxDialog
-	{
-	public:
-		PreviewDialog(wxWindow* parent, Controller* ctrl);
-		~PreviewDialog();
+private:
+	void InitLayout();
 
-	private:
-		void initLayout();
+	void BuildToolBar(wxSizer* top_sizer);
+	void BuildEditPanel(wxSizer* top_sizer);
 
-		void buildToolBar(wxSizer* topSizer);
-		void buildEditPanel(wxSizer* topSizer);
+	void OnSetCirculate(wxCommandEvent& event);
+	void OnSetStop(wxCommandEvent& event);
 
-		void onSetCirculate(wxCommandEvent& event);
-		void onSetStop(wxCommandEvent& event);
+private:
+	d2d::EditPanel* m_stage;
 
-	private:
-		d2d::EditPanel* m_stage;
+	PlaySettings m_settings;
 
-		PlaySettings m_settings;
+	d2d::PlayControl m_control;
 
-		d2d::PlayControl m_control;
-
-		Controller* m_ctrl;
-
-	}; // PreviewDialog
+}; // PreviewDialog
 
 }
+
+#endif // _EASYANIM_PREVIEW_DIALOG_H_

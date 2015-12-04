@@ -3,21 +3,19 @@
 
 #include "edit/CommonCMPT.h"
 #include "edit/SkeletonCMPT.h"
+#include "view/ViewMgr.h"
+#include "dataset/DataMgr.h"
 #include "frame/FileIO.h"
-#include "frame/Controller.h"
 
 namespace eanim
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, 
-						   d2d::PropertySettingPanel* property, 
-						   bool vertical, Controller* ctrl)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl(), vertical)
-	, m_ctrl(ctrl)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, bool vertical)
+	: d2d::ToolbarPanel(parent, ViewMgr::Instance()->stage->GetStageImpl(), vertical)
 	, m_tl_anim_choice(NULL)
 {
-	addChild(new CommonCMPT(this, "Common", stage, property, vertical, ctrl));
-	addChild(new SkeletonCMPT(this, "Skeleton", stage, property, vertical));
+	addChild(new CommonCMPT(this, "Common", vertical));
+	addChild(new SkeletonCMPT(this, "Skeleton", vertical));
 	SetSizer(initLayout());	
 
 	ChangeTemplateMode(true);
@@ -93,11 +91,11 @@ wxSizer* ToolbarPanel::InitTemplateLayout()
 
 void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 {
-	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
+	DataMgr::Instance()->GetTemplate().SetChoice(event.GetInt());
 
 	try {
 		d2d::ClearSpriteSJ::Instance()->Clear();
-		FileIO::Reload(m_ctrl);
+		FileIO::Reload();
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
@@ -113,7 +111,7 @@ void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK) {
 		wxString dir = dlg.GetPath();
 		m_tl_dir_text->SetValue(dir);
-		m_ctrl->GetAnimTemplate().SetTemplateDir(dir.ToStdString());
+		DataMgr::Instance()->GetTemplate().SetTemplateDir(dir.ToStdString());
 	}
 
 	op->SetMouseMoveFocus(true);

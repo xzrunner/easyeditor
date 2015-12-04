@@ -1,51 +1,53 @@
-#ifndef EANIM_SKELETON_DATA_H
-#define EANIM_SKELETON_DATA_H
+#ifndef _EASYANIM_SKELETON_DATA_H_
+#define _EASYANIM_SKELETON_DATA_H_
 
 #include <drag2d.h>
 
 namespace eanim
 {
-	class Joint;
 
-	class SkeletonData
-	{
-	public:
-		~SkeletonData();
+class Joint;
 
-		void copyFrom(const SkeletonData& skeleton);
-		void copyFrom(const std::vector<d2d::ISprite*>& sprites,
-			const SkeletonData& skeleton);
+class SkeletonData
+{
+public:
+	~SkeletonData();
 
-		void removeSprite(d2d::ISprite* sprite);
-		bool isContainSprite(d2d::ISprite* sprite) const;
+	void CopyFrom(const SkeletonData& skeleton);
+	void CopyFrom(const std::vector<d2d::ISprite*>& sprites,
+		const SkeletonData& skeleton);
 
-		void insertJoint(d2d::ISprite* sprite, const d2d::Vector& pos);
-		void removeJoint(d2d::Vector& pos);
+	void RemoveSprite(d2d::ISprite* sprite);
+	bool IsContainSprite(d2d::ISprite* sprite) const;
 
-		Joint* queryJointByPos(const d2d::Vector& pos);
+	void InsertJoint(d2d::ISprite* sprite, const d2d::Vector& pos);
+	void RemoveJoint(d2d::Vector& pos);
 
-		void draw() const;
+	Joint* QueryJointByPos(const d2d::Vector& pos);
 
-		void absorb(d2d::ISprite* sprite);
-		void fixJoint(d2d::ISprite* sprite);
-		void updateJoint(d2d::ISprite* sprite, float dAngle = 0);
+	void Draw() const;
 
-		static void getTweenSprites(SkeletonData& start, SkeletonData& end, 
-			std::vector<d2d::ISprite*>& tween, float process);
+	void Absorb(d2d::ISprite* sprite);
+	void FixJoint(d2d::ISprite* sprite);
+	void UpdateJoint(d2d::ISprite* sprite, float dAngle = 0);
 
-	private:
-		void clean();
+	static void GetTweenSprites(SkeletonData& start, SkeletonData& end, 
+		std::vector<d2d::ISprite*>& tween, float process);
 
-		void translate(d2d::ISprite* sprite, const d2d::Vector& offset);
+private:
+	void Clean();
 
-		static d2d::ISprite* getSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name);
+	void Translate(d2d::ISprite* sprite, const d2d::Vector& offset);
 
-	private:
-		std::map<d2d::ISprite*, std::vector<Joint*> > m_mapJoints;
+	static d2d::ISprite* GetSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name);
 
-		friend class FileIO;
+private:
+	std::map<d2d::ISprite*, std::vector<Joint*> > m_map_joints;
 
-	}; // SkeletonData
+	friend class FileIO;
+
+}; // SkeletonData
+
 }
 
-#endif // EANIM_SKELETON_DATA_H
+#endif // _EASYANIM_SKELETON_DATA_H_

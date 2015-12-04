@@ -1,26 +1,26 @@
-#ifndef EANIM_SKELETON_CMPT_H
-#define EANIM_SKELETON_CMPT_H
+#ifndef _EASYANIM_SKELETON_CMPT_H_
+#define _EASYANIM_SKELETON_CMPT_H_
 
 #include <drag2d.h>
 
 namespace eanim
 {
-	class StagePanel;
 
-	class SkeletonCMPT : public d2d::AbstractEditCMPT
-	{
-	public:
-		SkeletonCMPT(wxWindow* parent, const wxString& name,
-			StagePanel* stage, d2d::PropertySettingPanel* property,
-			bool vertical);
+class StagePanel;
 
-	protected:
-		virtual wxSizer* initLayout();
+class SkeletonCMPT : public d2d::AbstractEditCMPT
+{
+public:
+	SkeletonCMPT(wxWindow* parent, const wxString& name, bool vertical);
 
-	private:
-		wxSizer* initEditPanel();
+protected:
+	virtual wxSizer* initLayout();
 
-	}; // SkeletonCMPT
+private:
+	wxSizer* InitEditPanel();
+
+}; // SkeletonCMPT
+
 }
 
-#endif // EANIM_SKELETON_CMPT_H
+#endif // _EASYANIM_SKELETON_CMPT_H_

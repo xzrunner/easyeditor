@@ -5,16 +5,19 @@
 
 #include "dataset/Joint.h"
 #include "dataset/SkeletonData.h"
+#include "dataset/data_utility.h"
 #include "view/StagePanel.h"
+#include "view/ViewMgr.h"
 
 namespace eanim
 {
 
-SkeletonImpl::SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
-						   LayersMgr* layers)
-	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property, d2d::ArrangeSpriteConfig())
-	, m_stage(stage)
-	, m_key_handler(layers)
+SkeletonImpl::SkeletonImpl()
+	: d2d::ArrangeSpriteImpl(ViewMgr::Instance()->stage, 
+	                         ViewMgr::Instance()->stage->GetStageImpl(), 
+							 ViewMgr::Instance()->stage, 
+							 ViewMgr::Instance()->property, 
+							 d2d::ArrangeSpriteConfig())
 	, m_selected_joint(NULL)
 {
 }
@@ -29,7 +32,13 @@ void SkeletonImpl::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_first_pos = pos;
-	Joint* joint = m_stage->getSkeletonData().queryJointByPos(pos);
+
+	SkeletonData* skeleton = get_curr_skeleton();
+	if (!skeleton) {
+		return;
+	}
+
+	Joint* joint = skeleton->QueryJointByPos(pos);
 	if (joint) {
 		m_selected_joint = joint;
 	} else {
@@ -51,7 +60,11 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 		{
 			std::vector<d2d::ISprite*> sprites;
 			m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-			m_stage->getSkeletonData().absorb(sprites[0]);				
+
+			SkeletonData* skeleton = get_curr_skeleton();
+			if (skeleton) {
+				skeleton->Absorb(sprites[0]);
+			}
 		}
 	}
 }
@@ -67,7 +80,7 @@ void SkeletonImpl::OnMouseDrag(int x, int y)
 	if (m_selected_joint)
 	{
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-		m_selected_joint->setPosition(pos);
+		m_selected_joint->SetPosition(pos);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	else
@@ -84,12 +97,20 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 	{
 	case StagePanel::Menu_AddJointNode:
 		{
-			d2d::ISprite* sprite = m_stage->QuerySpriteByPos(m_first_pos);
-			m_stage->getSkeletonData().insertJoint(sprite, m_first_pos);
+			SkeletonData* skeleton = get_curr_skeleton();
+			if (skeleton) {
+				d2d::ISprite* sprite = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
+				skeleton->InsertJoint(sprite, m_first_pos);
+			}
 		}
 		break;
 	case StagePanel::Menu_DelJointNode:
-		m_stage->getSkeletonData().removeJoint(m_first_pos);
+		{
+			SkeletonData* skeleton = get_curr_skeleton();
+			if (skeleton) {
+				skeleton->RemoveJoint(m_first_pos);
+			}
+		}
 		break;
 	}
 }
@@ -97,13 +118,23 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 void SkeletonImpl::OnDraw() const
 {
 	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
-	m_stage->getSkeletonData().draw();
+
+	SkeletonData* skeleton = get_curr_skeleton();
+	if (skeleton) {
+		skeleton->Draw();
+	}
 }
 
 void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
 	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, x, y);
-	Joint* joint = m_stage->getSkeletonData().queryJointByPos(m_first_pos);
+
+	SkeletonData* skeleton = get_curr_skeleton();
+	if (!skeleton) {
+		return;
+	}
+
+	Joint* joint = skeleton->QueryJointByPos(m_first_pos);
 	if (joint)
 		menu.Append(StagePanel::Menu_DelJointNode, "Add Joint");
 	else
@@ -113,13 +144,13 @@ void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 d2d::IArrangeSpriteState* 
 SkeletonImpl::CreateTranslateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
 {
-	return new TranslateSpriteState(m_stage, selection, first_pos);
+	return new TranslateSpriteState(selection, first_pos);
 }
 
 d2d::IArrangeSpriteState* 
 SkeletonImpl::CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
 {
-	return new RotateSpriteState(m_stage, selection, first_pos);
+	return new RotateSpriteState(selection, first_pos);
 }
 
 }

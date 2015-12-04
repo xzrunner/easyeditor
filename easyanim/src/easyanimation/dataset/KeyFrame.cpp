@@ -9,9 +9,8 @@
 namespace eanim
 {
 
-KeyFrame::KeyFrame(LayersMgr* layers, int time)
-	: m_layers(layers)
-	, m_layer(NULL)
+KeyFrame::KeyFrame(int time)
+	: m_layer(NULL)
 {
 	m_time = time;
 	m_classic_tween = false;
@@ -33,7 +32,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = src->m_sprites[i]->Clone();
-		set_sprite_user_data(s, m_layers, m_layer, this);
+		set_sprite_user_data(s, m_layer, this);
 		m_sprites.push_back(s);
 
 		if (m_layer) {
@@ -43,7 +42,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	}
 
 	// skeleton
-	m_skeletonData.copyFrom(m_sprites, src->m_skeletonData);
+	m_skeletonData.CopyFrom(m_sprites, src->m_skeletonData);
 	// todo spr's ud
 }
 
@@ -51,23 +50,17 @@ void KeyFrame::Insert(d2d::ISprite* sprite)
 {
 	sprite->Retain();
 
-	set_sprite_user_data(sprite, m_layers, m_layer, this);
+	set_sprite_user_data(sprite, m_layer, this);
 	m_sprites.push_back(sprite);
 	if (m_layer) {
 		sprite->setObserver(&m_layer->GetSpriteObserver());
 		m_layer->GetSpriteObserver().insert(sprite, m_time);
 	}
-
-// 	// view list
-// 	KeyFrame* curr = m_ctrl->getCurrFrame();
-// 	if (this == curr) {
-// 		m_ctrl->GetViewlist()->Insert(sprite);
-// 	}
 }
 
 bool KeyFrame::Remove(d2d::ISprite* sprite) 
 {
-	m_skeletonData.removeSprite(sprite);
+	m_skeletonData.RemoveSprite(sprite);
 	if (m_layer) {
 		m_layer->GetSpriteObserver().remove(sprite);
 	}
@@ -81,12 +74,6 @@ bool KeyFrame::Remove(d2d::ISprite* sprite)
 
 		(*itr)->Release();
 		m_sprites.erase(itr);
-
-// 		// viewlist
-// 		KeyFrame* curr = m_ctrl->getCurrFrame();
-// 		if (this == curr) {
-// 			m_ctrl->GetViewlist()->Remove(sprite);
-// 		}
 
 		return true;
 	}
@@ -104,11 +91,9 @@ bool KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 
 		if (up && i != n - 1) {
 			std::swap(m_sprites[i], m_sprites[i+1]);
-//			m_ctrl->GetViewlist()->Reorder(sprite, up);
 			return true;
 		} else if (!up && i != 0) {
 			std::swap(m_sprites[i], m_sprites[i-1]);
-//			m_ctrl->GetViewlist()->Reorder(sprite, up);
 			return true;
 		}
 
@@ -173,7 +158,7 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 
   	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
   		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
-	SkeletonData::getTweenSprites(s_skeleton, e_skeleton, tween, process);
+	SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
 }
 
 void KeyFrame::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
@@ -192,7 +177,7 @@ void KeyFrame::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end,
 bool KeyFrame::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1) const
 {
 	if (libanim::TweenUtility::IsTweenMatched(s0, s1) &&
-		!m_skeletonData.isContainSprite(const_cast<d2d::ISprite*>(s0))) {
+		!m_skeletonData.IsContainSprite(const_cast<d2d::ISprite*>(s0))) {
 		return true;
 	} else {
 		return false;

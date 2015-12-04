@@ -5,19 +5,14 @@
 #include "StagePanel.h"
 
 #include "dataset/Layer.h"
-#include "frame/Controller.h"
-#include "message/InsertLayerSJ.h"
 
 namespace eanim
 {
 
-LayersPanel::LayersPanel(wxWindow* parent, Controller* ctrl)
+LayersPanel::LayersPanel(wxWindow* parent)
 	: wxPanel(parent)
-	, m_ctrl(ctrl)
 {
 	InitLayout();
-
-	InsertLayerSJ::Instance()->Insert();
 }
 
 //void LayersPanel::onPlay()
@@ -35,7 +30,7 @@ void LayersPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(m_layersProperty = new LayersPropertyWidget(this), 0, wxALIGN_LEFT);
-	sizer->Add(m_contentPanel = new LayersContentWidget(this, m_ctrl), 1, wxEXPAND);
+	sizer->Add(m_contentPanel = new LayersContentWidget(this), 1, wxEXPAND);
 	SetSizer(sizer);
 }
 

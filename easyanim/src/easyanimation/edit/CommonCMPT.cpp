@@ -1,25 +1,23 @@
 #include "CommonCMPT.h"
 #include "ArrangeSpriteOP.h"
 
+#include "view/ViewMgr.h"
 #include "view/StagePanel.h"
 #include "view/KeysPanel.h"
 #include "frame/FileIO.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
-#include "message/InsertLayerSJ.h"
-#include "message/SetCurrFrameSJ.h"
+#include "dataset/DataMgr.h"
+#include "message/messages.h"
 
 namespace eanim
 {
 
-CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name, 
-					   LayersMgr* layers, StagePanel* stage, 
-					   d2d::PropertySettingPanel* property, bool vertical)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
-	, m_layers(layers)
+CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name, bool vertical)
+	: d2d::AbstractEditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 	, m_vertical(vertical)
 {
-	m_editOP = new ArrangeSpriteOP(stage, property, layers);
+	m_editOP = new ArrangeSpriteOP(ViewMgr::Instance()->stage);
 }
 
 wxSizer* CommonCMPT::initLayout()
@@ -114,7 +112,7 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	if (dlg.ShowModal() != wxID_OK)
 		return;
 
-	m_layers->Clear();
+	DataMgr::Instance()->GetLayers().Clear();
 
 	op->SetMouseMoveFocus(true);
 
@@ -149,13 +147,13 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 		}
 	}
 
-	m_layers->Clear();
-	Layer* layer = new Layer(m_layers);
+	DataMgr::Instance()->GetLayers().Clear();
+	Layer* layer = new Layer();
 	std::map<int, std::vector<std::string> >::iterator itr
 		= mapFrameSymbols.begin();
 	for ( ; itr != mapFrameSymbols.end(); ++itr)
 	{
-		KeyFrame* frame = new KeyFrame(m_layers, itr->first);
+		KeyFrame* frame = new KeyFrame(itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
@@ -172,25 +170,25 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 
 	SetCurrFrameSJ::Instance()->Set(0, 0);
 
-//	m_ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 {
 	std::vector<d2d::ISymbol*> symbols;
-// 	m_ctrl->GetImagePage()->GetList()->
-// 		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
+	ViewMgr::Instance()->img_page->GetList()->
+		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 
 	if (!symbols.empty()) {
-		m_layers->Clear();
+		DataMgr::Instance()->GetLayers().Clear();
 	} else {
 		return;
 	}
 
-	Layer* layer = new Layer(m_layers);
+	Layer* layer = new Layer;
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		KeyFrame* frame = new KeyFrame(m_layers, i+1);
+		KeyFrame* frame = new KeyFrame(i+1);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
 
 		frame->Insert(sprite);
@@ -205,9 +203,9 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
 {
 	int tot = m_filling->GetValue();
-	for (size_t i = 0, n = m_layers->Size(); i < n; ++i)
+	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
-		Layer* layer = m_layers->GetLayer(i);
+		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);
 
 		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 		std::vector<KeyFrame*> fixed;
@@ -232,8 +230,8 @@ void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
 
 void CommonCMPT::OnChangeAnim(wxCommandEvent& event)
 {
-// 	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
-// 	FileIO::Reload(m_ctrl);
+	DataMgr::Instance()->GetTemplate().SetChoice(event.GetInt());
+	FileIO::Reload();
 }
 
 void CommonCMPT::OnAddCross(wxCommandEvent& event)

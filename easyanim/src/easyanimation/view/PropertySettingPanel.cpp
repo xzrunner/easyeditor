@@ -1,7 +1,6 @@
 #include "PropertySettingPanel.h"
-#include "StagePanel.h"
 
-#include "frame/Controller.h"
+#include "dataset/DataMgr.h"
 
 namespace eanim
 {
@@ -13,8 +12,7 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 d2d::IPropertySetting* PropertySettingPanel::CreateDefaultProperty() const
 {
-	Controller* ctrl = ((StagePanel*)(m_stage->GetEditPanel()))->GetController();
-	return new d2d::SymbolPropertySetting(&ctrl->name);
+	return new d2d::SymbolPropertySetting(&DataMgr::Instance()->name);
 }
 
 }

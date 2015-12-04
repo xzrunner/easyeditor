@@ -1,11 +1,13 @@
 #include "Task.h"
 #include "FileIO.h"
 
+#include "dataset/DataMgr.h"
 #include "view/PropertySettingPanel.h"
 #include "view/StagePanel.h"
 #include "view/ToolbarPanel.h"
 #include "view/TimeLinePanel.h"
-#include "message/InsertLayerSJ.h"
+#include "view/ViewMgr.h"
+#include "message/messages.h"
 
 #include <easycomplex.h>
 #include <easymesh.h>
@@ -21,11 +23,14 @@ namespace eanim
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
-	, m_controller(&m_widgets)
 {
+	DataMgr::Instance();
+
 	InitLayout();
 
-	m_widgets.m_library->LoadFromConfig();
+	InsertLayerSJ::Instance()->Insert();
+
+	ViewMgr::Instance()->library->LoadFromConfig();
 
 	RegistSubject(d2d::ClearPanelSJ::Instance());
 }
@@ -44,10 +49,10 @@ void Task::Load(const char* filepath)
 		return;
 	}
 
-	m_controller.Clear();
+	DataMgr::Instance()->GetLayers().Clear();
 
 	try {
-		FileIO::Load(filepath, &m_controller);
+		FileIO::Load(filepath);
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
@@ -57,34 +62,34 @@ void Task::Load(const char* filepath)
 void Task::Store(const char* filepath) const
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
-		FileIO::StoreSingle(filepath, const_cast<Controller*>(&m_controller));
-		m_widgets.m_stage->OnSave();
+		FileIO::StoreSingle(filepath);
+		ViewMgr::Instance()->stage->OnSave();
 	} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
-		FileIO::StoreTemplate(filepath, const_cast<Controller*>(&m_controller));
-		m_widgets.m_stage->OnSave();
+		FileIO::StoreTemplate(filepath);
+		ViewMgr::Instance()->stage->OnSave();
 	}
 }
 
 bool Task::IsDirty() const
 {
-	return m_widgets.m_stage->IsEditDirty();
+	return ViewMgr::Instance()->stage->IsEditDirty();
 }
 
 void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
-	m_widgets.m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	ViewMgr::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const
 {
-	return m_widgets.m_stage;
+	return ViewMgr::Instance()->stage;
 }
 
 void Task::OnNotify(int sj_id, void* ud)
 {
 	if (sj_id == d2d::MSG_CLEAR_PANEL) {
-		m_controller.Clear();
-		m_widgets.m_library->Clear();
+		DataMgr::Instance()->GetLayers().Clear();
+		ViewMgr::Instance()->library->Clear();
 		InsertLayerSJ::Instance()->Insert();
 	}
 }
@@ -111,21 +116,24 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
+	ViewMgr* mgr = ViewMgr::Instance();
+
 	// library
-	m_widgets.m_library = new d2d::LibraryPanel(split);
-	wxWindow* nb = m_widgets.m_library->GetNotebook();
-	m_widgets.m_library->AddPage(m_widgets.m_imagePage = new d2d::LibraryImagePage(nb));
-	m_widgets.m_library->AddPage(new ecomplex::LibraryPage(nb));
-	m_widgets.m_library->AddPage(new emesh::LibraryPage(nb));
-	m_widgets.m_library->AddPage(new escale9::LibraryPage(nb));
-	m_widgets.m_library->AddPage(new eicon::LibraryPage(nb));
-	m_widgets.m_library->AddPage(new eparticle3d::LibraryPage(nb));
+	d2d::LibraryPanel* library = new d2d::LibraryPanel(split);
+	wxWindow* nb = library->GetNotebook();
+	library->AddPage(ViewMgr::Instance()->img_page = new d2d::LibraryImagePage(nb));
+	library->AddPage(new ecomplex::LibraryPage(nb));
+	library->AddPage(new emesh::LibraryPage(nb));
+	library->AddPage(new escale9::LibraryPage(nb));
+	library->AddPage(new eicon::LibraryPage(nb));
+	library->AddPage(new eparticle3d::LibraryPage(nb));
+	mgr->library = library;
 
 	// property
-	m_widgets.m_property = new PropertySettingPanel(split);
+	mgr->property = new PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);
-	split->SplitHorizontally(m_widgets.m_library, m_widgets.m_property);
+	split->SplitHorizontally(mgr->library, mgr->property);
 
 	return split;
 }
@@ -135,20 +143,20 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	wxSplitterWindow* bottom_split = new wxSplitterWindow(parent);
 	wxSplitterWindow* top_split = new wxSplitterWindow(bottom_split);
 
+	ViewMgr* mgr = ViewMgr::Instance();
+
 	// stage
-	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, 
-		&m_controller);
-	m_widgets.m_property->SetEditPanel(m_widgets.m_stage->GetStageImpl());
+	mgr->stage = new StagePanel(top_split, m_parent);
+	mgr->property->SetEditPanel(mgr->stage->GetStageImpl());
 
 	// toolbar
-	m_widgets.m_toolbar = new ToolbarPanel(top_split, m_widgets.m_stage, 
-		m_widgets.m_property, false, &m_controller);
+	mgr->toolbar = new ToolbarPanel(top_split, false);
 
 	// timeline
-	TimeLinePanel* timeline = new TimeLinePanel(bottom_split, &m_controller);
+	TimeLinePanel* timeline = new TimeLinePanel(bottom_split);
 
 	top_split->SetSashGravity(0.1f);
-	top_split->SplitHorizontally(m_widgets.m_toolbar, m_widgets.m_stage);
+	top_split->SplitHorizontally(mgr->toolbar, mgr->stage);
 
 	bottom_split->SetSashGravity(0.9f);
 	bottom_split->SplitHorizontally(top_split, timeline);
@@ -159,8 +167,9 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	// viewlist
-	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent);
-	return m_widgets.m_viewlist;
+	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(parent);
+	ViewMgr::Instance()->viewlist = viewlist;
+	return viewlist;
 }
 
 }

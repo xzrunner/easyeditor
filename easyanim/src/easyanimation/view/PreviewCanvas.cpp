@@ -4,19 +4,20 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
-#include "message/GetCurrFrameSJ.h"
+#include "dataset/DataMgr.h"
+#include "view/view_utility.h"
+#include "message/messages.h"
 
 #include <easyanim.h>
 
 namespace eanim
 {
 
-PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, const PlaySettings& settings,
-							 d2d::PlayControl& control, const LayersMgr& layers)
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+							 const PlaySettings& settings, d2d::PlayControl& control)
 	: d2d::OrthoCanvas(stage_wnd, stage)
 	, m_control(control)
 	, m_settings(settings)
-	, m_layers(layers)
 {
 }
 
@@ -34,9 +35,8 @@ void PreviewCanvas::OnTimer()
 	m_control.update();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-	if (frame < m_layers.GetFrameCount()) {
+	int frame_idx = get_curr_frame_index();
+	if (frame_idx <= DataMgr::Instance()->GetLayers().GetFrameCount()) {
 		return;
 	}
 
@@ -62,15 +62,13 @@ void PreviewCanvas::DrawStageData() const
 
 void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-
-	for (size_t i = 0, n = m_layers.Size(); i < n; ++i)
+	int frame_idx = get_curr_frame_index();
+	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
-		Layer* layer = m_layers.GetLayer(i);
+		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);
 
-		KeyFrame *curr_f = layer->GetCurrKeyFrame(frame),
-			     *next_f = layer->GetNextKeyFrame(frame);
+		KeyFrame *curr_f = layer->GetCurrKeyFrame(frame_idx),
+			     *next_f = layer->GetNextKeyFrame(frame_idx);
 		if (!curr_f)
 			continue;
 
@@ -88,8 +86,8 @@ void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 		}
 		else
 		{
-			assert(frame >= curr_f->GetTime() && frame < next_f->GetTime());
-			float process = (float) (frame - curr_f->GetTime()) / (next_f->GetTime() - curr_f->GetTime());
+			assert(frame_idx >= curr_f->GetTime() && frame_idx < next_f->GetTime());
+			float process = (float) (frame_idx - curr_f->GetTime()) / (next_f->GetTime() - curr_f->GetTime());
 //			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
 
 			curr_f->GetTweenSprite(curr_f, next_f, sprites, process);

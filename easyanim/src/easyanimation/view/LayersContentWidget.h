@@ -6,12 +6,10 @@
 namespace eanim
 {
 
-class LayersMgr;
-
 class LayersContentWidget : public wxPanel, public d2d::Observer
 {
 public:
-	LayersContentWidget(wxWindow* parent, LayersMgr& layers);
+	LayersContentWidget(wxWindow* parent);
 
 	//
 	//	interface wxPanel
@@ -32,8 +30,6 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	LayersMgr& m_layers;
-
 	int m_drag_flag_line;
 
 	int m_curr_layer;

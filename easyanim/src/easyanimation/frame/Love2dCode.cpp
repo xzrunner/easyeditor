@@ -3,28 +3,27 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
+#include "dataset/DataMgr.h"
 
 namespace eanim
 {
 namespace lua = ebuilder::lua;
 
-Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen,
-					   LayersMgr* layers)
+Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen)
 	: m_gen(gen)
-	, m_layers(layers)
 {
 //	m_tp_adapter.load(m_ctrl->packer);
 }
 
 void Love2dCode::Resolve()
 {
-	if (m_layers->Size() == 0) {
+	if (DataMgr::Instance()->GetLayers().Size() == 0) {
 		return;
 	}
 
 	lua::TableAssign ta(m_gen, "frames");
 
-	Layer* layer = m_layers->GetLayer(0);
+	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(0);
 	const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
 	std::map<int, KeyFrame*>::const_iterator itr;
 	for (itr = frames.begin(); itr != frames.end(); ++itr)

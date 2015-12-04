@@ -1,11 +1,11 @@
 #include "LayersContentWidget.h"
-#include "Utility.h"
+#include "config.h"
 #include "KeysPanel.h"
 
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
-#include "message/SetCurrFrameSJ.h"
-#include "message/message_id.h"
+#include "dataset/DataMgr.h"
+#include "message/messages.h"
 
 namespace eanim
 {
@@ -24,9 +24,8 @@ static const int FLAG_RADIUS = 8;
 static const int FLAG_EDITABLE_X = 80;
 static const int FLAG_VISIBLE_X = 120;
 
-LayersContentWidget::LayersContentWidget(wxWindow* parent, LayersMgr& layers)
+LayersContentWidget::LayersContentWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
-	, m_layers(layers)
 {
 	m_drag_flag_line = -1;
 	m_curr_layer = -1;
@@ -58,7 +57,7 @@ void LayersContentWidget::OnPaint(wxPaintEvent& event)
 {
 	wxPaintDC dc(this);
 
-	const size_t size = m_layers.Size();
+	int size = DataMgr::Instance()->GetLayers().Size();
 	const float width = GetSize().x;
 
 	// background
@@ -82,8 +81,8 @@ void LayersContentWidget::OnPaint(wxPaintEvent& event)
 	// selected
 	if (m_curr_layer >= 0)
 	{
-		assert(m_curr_layer < m_layers.Size());
-		int idx = m_layers.Size() - m_curr_layer - 1;
+		assert(m_curr_layer < DataMgr::Instance()->GetLayers().Size());
+		int idx = size - m_curr_layer - 1;
 		dc.SetPen(wxPen(MEDIUM_BLUE));
 		dc.SetBrush(wxBrush(MEDIUM_BLUE));
 		dc.DrawRectangle(0, FRAME_GRID_HEIGHT * idx, width, FRAME_GRID_HEIGHT);
@@ -104,7 +103,7 @@ void LayersContentWidget::OnPaint(wxPaintEvent& event)
 	for (size_t i = 0; i < size; ++i)
 	{
 		size_t idx = size - i - 1;
-		Layer* layer = m_layers.GetLayer(idx);
+		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(idx);
 		dc.DrawText(layer->GetName(), 5, FRAME_GRID_HEIGHT * i);
 
 		dc.SetPen(*wxBLACK_PEN);
@@ -134,7 +133,7 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 	static bool is_drag_open = false;
 	static int xpress = 0, ypress = 0;
 
-	int size = m_layers.Size();
+	int size = DataMgr::Instance()->GetLayers().Size();
 
 	if (event.LeftDown())
 	{
@@ -158,7 +157,7 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			int layer_idx = size - screen_idx - 1;
 	
 			int x = event.GetX();
-			Layer* layer = m_layers.GetLayer(layer_idx);
+			Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
 			if (layer && x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->SetEditable(!layer->IsEditable());
 				Refresh(true);
@@ -178,7 +177,7 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			else
 			{
 				if (to > from) --to;
-				m_layers.ChangeLayerOrder(from, to);
+				DataMgr::Instance()->GetLayers().ChangeLayerOrder(from, to);
 				d2d::RefreshPanelSJ::Instance()->Refresh();
 			}
 			Refresh(true);
@@ -207,7 +206,7 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 		int layer_idx = size - screen_idx - 1;
 		if (layer_idx < size)
 		{
-			Layer* layer = m_layers.GetLayer(layer_idx);
+			Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
 			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->GetName(), pos);

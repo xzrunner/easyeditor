@@ -8,13 +8,12 @@
 namespace eanim
 {
 
-class LayersMgr;
 class KeyFrame;
 
 class Layer
 {
 public:
-	Layer(LayersMgr* layers);
+	Layer();
 	~Layer();
 
 	bool IsKeyFrame(int time) const;
@@ -59,8 +58,6 @@ private:
 		InsertKeyFrame(int index, KeyFrame* frame);
 
 private:
-	LayersMgr* m_layers;
-
 	std::string m_name;
 
 	bool m_editable, m_visible;

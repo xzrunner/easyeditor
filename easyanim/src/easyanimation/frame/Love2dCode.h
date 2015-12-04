@@ -6,12 +6,10 @@
 namespace eanim
 {
 
-class LayersMgr;
-
 class Love2dCode
 {
 public:
-	Love2dCode(ebuilder::CodeGenerator& gen, LayersMgr* layers);
+	Love2dCode(ebuilder::CodeGenerator& gen);
 
 	void Resolve();
 
@@ -20,8 +18,6 @@ private:
 
 private:
 	ebuilder::CodeGenerator& m_gen;
-
-	LayersMgr* m_layers;
 
 	d2d::TexPackerAdapter m_tp_adapter;
 

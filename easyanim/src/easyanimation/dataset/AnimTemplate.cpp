@@ -1,5 +1,6 @@
 #include "AnimTemplate.h"
 
+#include "view/ViewMgr.h"
 #include "view/ToolbarPanel.h"
 
 namespace eanim
@@ -65,8 +66,7 @@ void AnimTemplate::StoreToFile(Json::Value& value) const
 	}
 }
 
-void AnimTemplate::LoadFromFile(const Json::Value& value,
-								ToolbarPanel* toolbar)
+void AnimTemplate::LoadFromFile(const Json::Value& value)
 {
 	Clear();
 
@@ -82,7 +82,7 @@ void AnimTemplate::LoadFromFile(const Json::Value& value,
 		item_val = value[i++];
 	}
 
-	toolbar->AddAnimChoice(anims);
+	ViewMgr::Instance()->toolbar->AddAnimChoice(anims);
 }
 
 bool AnimTemplate::ContainPath(const std::string& path) const

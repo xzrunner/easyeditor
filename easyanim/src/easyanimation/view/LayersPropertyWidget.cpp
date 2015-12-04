@@ -1,11 +1,7 @@
 #include "LayersPropertyWidget.h"
-#include "Utility.h"
+#include "config.h"
 
-#include "message/message_id.h"
-#include "message/InsertLayerSJ.h"
-#include "message/RemoveLayerSJ.h"
-#include "message/SetFpsSJ.h"
-#include "message/GetFpsSJ.h"
+#include "message/messages.h"
 
 namespace eanim
 {

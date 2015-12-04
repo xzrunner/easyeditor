@@ -1,5 +1,5 @@
-#ifndef EANIM_COMMON_CMPT_H
-#define EANIM_COMMON_CMPT_H
+#ifndef _EASYANIM_COMMON_CMPT_H_
+#define _EASYANIM_COMMON_CMPT_H_
 
 #include <drag2d.h>
 
@@ -12,10 +12,7 @@ class StagePanel;
 class CommonCMPT : public d2d::AbstractEditCMPT
 {
 public:
-	CommonCMPT(wxWindow* parent, const std::string& name,
-		LayersMgr* layers, StagePanel* stage, 
-		d2d::PropertySettingPanel* property,
-		bool vertical);
+	CommonCMPT(wxWindow* parent, const std::string& name, bool vertical);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -38,8 +35,6 @@ private:
 	void OnDelCross(wxCommandEvent& event);
 
 private:
-	LayersMgr* m_layers;
-
 	bool m_vertical;
 
 	wxSpinCtrl* m_filling;
@@ -48,4 +43,4 @@ private:
 
 }
 
-#endif // EANIM_COMMON_CMPT_H
+#endif // _EASYANIM_COMMON_CMPT_H_

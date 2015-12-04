@@ -3,6 +3,7 @@
 #include "Love2dCode.h"
 #include "FileIO.h"
 #include "frame/Task.h"
+#include "view/ViewMgr.h"
 #include "view/PreviewDialog.h"
 #include "view/StageCanvas.h"
 #include "view/StagePanel.h"
@@ -79,13 +80,11 @@ void Frame::onSaveAs(wxCommandEvent& event)
 
 void Frame::OnPreview(wxCommandEvent& event)
 {
-	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
-
-	StagePanel* stage = ctrl->GetStagePanel();
+	StagePanel* stage = ViewMgr::Instance()->stage;
 	stage->EnableObserve(false);
 	stage->GetCanvas()->EnableObserve(false);
 	{
-		PreviewDialog dlg(this, ctrl);
+		PreviewDialog dlg(this);
 		dlg.ShowModal();
 	}
 	stage->EnableObserve(true);
@@ -116,7 +115,7 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 
 void Frame::OnCodeSetting(wxCommandEvent& event)
 {
-	CodeSettingDlg dlg(this, static_cast<Task*>(m_task)->GetController());
+	CodeSettingDlg dlg(this);
 	dlg.ShowModal();
 }
 
@@ -127,7 +126,7 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("main.lua"));
 
 	ebuilder::CodeGenerator gen;
-	Love2dCode code(gen, static_cast<Task*>(m_task)->GetController());
+	Love2dCode code(gen);
 	code.Resolve();
 	page->SetReadOnly(false);
 	page->SetText(gen.toText());
@@ -166,9 +165,8 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 	std::string full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
-	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
-	FileIO::StoreSingle(full_path, ctrl);
-	ctrl->GetStagePanel()->OnSave();
+	FileIO::StoreSingle(full_path);
+	ViewMgr::Instance()->stage->OnSave();
 }
 
 void Frame::SaveAsTemplate(const std::string& filepath) const
@@ -177,9 +175,8 @@ void Frame::SaveAsTemplate(const std::string& filepath) const
 	std::string full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
-	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
-	FileIO::StoreTemplate(full_path, ctrl);
-	ctrl->GetStagePanel()->OnSave();
+	FileIO::StoreTemplate(full_path);
+	ViewMgr::Instance()->stage->OnSave();
 }
 
 }

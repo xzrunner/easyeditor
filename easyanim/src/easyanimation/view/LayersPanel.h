@@ -6,13 +6,12 @@
 namespace eanim
 {
 
-class Controller;
 class LayersPropertyWidget;
 
 class LayersPanel : public wxPanel
 {
 public:
-	LayersPanel(wxWindow* parent, Controller* ctrl);
+	LayersPanel(wxWindow* parent);
 
 //		void onPlay();
 
@@ -20,8 +19,6 @@ private:
 	void InitLayout();
 
 private:
-	Controller* m_ctrl;
-
 	LayersPropertyWidget* m_layersProperty;
 
 	wxWindow* m_contentPanel;

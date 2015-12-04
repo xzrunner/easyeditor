@@ -2,15 +2,15 @@
 #include "SkeletonOP.h"
 
 #include "view/StagePanel.h"
+#include "view/ViewMgr.h"
 
 namespace eanim
 {
 
-SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, 
-	StagePanel* stage, d2d::PropertySettingPanel* property, bool vertical)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, bool vertical)
+	: d2d::AbstractEditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 {
-	m_editOP = new SkeletonOP(stage, property);
+	m_editOP = new SkeletonOP(ViewMgr::Instance()->stage, ViewMgr::Instance()->property);
 }
 
 wxSizer* SkeletonCMPT::initLayout()
@@ -18,7 +18,7 @@ wxSizer* SkeletonCMPT::initLayout()
 	return NULL;
 }
 
-wxSizer* SkeletonCMPT::initEditPanel()
+wxSizer* SkeletonCMPT::InitEditPanel()
 {
 	return NULL;
 }

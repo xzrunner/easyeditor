@@ -3,9 +3,6 @@
 
 #include <drag2d.h>
 
-#include "Widgets.h"
-#include "Controller.h"
-
 namespace eanim
 {
 
@@ -28,8 +25,6 @@ public:
 
 	virtual const d2d::EditPanel* GetEditPanel() const;
 
-	Controller* GetController() { return &m_controller; }
-
 protected:
 	//
 	//	interface Observer
@@ -44,12 +39,7 @@ private:
 
 private:
 	wxWindow* m_root;
-
 	wxFrame* m_parent;
-
-	Widgets m_widgets;
-
-	Controller m_controller;
 
 }; // Task
 

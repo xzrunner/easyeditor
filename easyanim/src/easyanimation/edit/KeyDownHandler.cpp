@@ -1,19 +1,15 @@
 #include "KeyDownHandler.h"
 
+#include "dataset/DataMgr.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
+#include "dataset/data_utility.h"
 #include "view/StagePanel.h"
-#include "message/GetCurrFrameSJ.h"
-#include "message/SetCurrFrameSJ.h"
+#include "message/messages.h"
 
 namespace eanim
 {
-
-KeyDownHandler::KeyDownHandler(LayersMgr* layers)
-	: m_layers(layers)
-{
-}
 
 void KeyDownHandler::Process(int key_code)
 {
@@ -35,13 +31,12 @@ void KeyDownHandler::Process(int key_code)
 
 void KeyDownHandler::SetPrevKeyFrame()
 {
-	int layer_idx, frame_idx;
-	GetCurrFrameSJ::Instance()->Get(layer_idx, frame_idx);
-	Layer* layer = m_layers->GetLayer(layer_idx);
+	int col;
+	Layer* layer = get_curr_layer(col);
 	if (!layer) {
 		return;
 	}
-	KeyFrame* next = layer->GetPrevKeyFrame(frame_idx + 1);
+	KeyFrame* next = layer->GetPrevKeyFrame(col + 1);
 	if (next) {
 		SetCurrFrameSJ::Instance()->Set(-1, next->GetTime() - 1);
 	}
@@ -49,13 +44,12 @@ void KeyDownHandler::SetPrevKeyFrame()
 
 void KeyDownHandler::SetNextKeyFrame()
 {
-	int layer_idx, frame_idx;
-	GetCurrFrameSJ::Instance()->Get(layer_idx, frame_idx);
-	Layer* layer = m_layers->GetLayer(layer_idx);
+	int col;
+	Layer* layer = get_curr_layer(col);
 	if (!layer) {
 		return;
 	}
-	KeyFrame* next = layer->GetNextKeyFrame(frame_idx + 1);
+	KeyFrame* next = layer->GetNextKeyFrame(col + 1);
 	if (next) {
 		SetCurrFrameSJ::Instance()->Set(-1, next->GetTime() - 1);
 	}

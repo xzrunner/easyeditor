@@ -192,6 +192,14 @@
 				RelativePath="..\..\..\src\easyanimation\dataset\AnimTemplate.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\dataset\DataMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\dataset\DataMgr.h"
+				>
+			</File>
 			<Filter
 				Name="level"
 				>
@@ -252,6 +260,14 @@
 				Name="utility"
 				>
 				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\data_utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\data_utility.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyanimation\dataset\SpriteUserData.cpp"
 					>
 				</File>
@@ -270,14 +286,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easyanimation\frame\CodeSettingDlg.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\frame\Controller.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\frame\Controller.h"
 				>
 			</File>
 			<File
@@ -312,10 +320,6 @@
 				RelativePath="..\..\..\src\easyanimation\frame\Task.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\frame\Widgets.cpp"
-				>
-			</File>
 			<Filter
 				Name="code"
 				>
@@ -333,7 +337,23 @@
 			Name="view"
 			>
 			<File
-				RelativePath="..\..\..\src\easyanimation\view\Utility.h"
+				RelativePath="..\..\..\src\easyanimation\view\config.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\view\view_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\view\view_utility.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\view\ViewMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\view\ViewMgr.h"
 				>
 			</File>
 			<Filter
@@ -609,89 +629,13 @@
 			Name="message"
 			>
 			<File
-				RelativePath="..\..\..\src\easyanimation\message\message_id.h"
+				RelativePath="..\..\..\src\easyanimation\message\messages.cpp"
 				>
 			</File>
-			<Filter
-				Name="layer"
+			<File
+				RelativePath="..\..\..\src\easyanimation\message\messages.h"
 				>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\InsertLayerSJ.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\RemoveLayerSJ.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="fps"
-				>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\GetFpsSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\GetFpsSJ.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\SetFpsSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\SetFpsSJ.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="frame"
-				>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\GetCurrFrameSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\GetCurrFrameSJ.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\SetCurrFrameSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\SetCurrFrameSJ.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="region"
-				>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\GetSelectedRegionSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\GetSelectedRegionSJ.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\SetSelectedRegionSJ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\message\SetSelectedRegionSJ.h"
-					>
-				</File>
-			</Filter>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"

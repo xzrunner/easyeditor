@@ -21,7 +21,7 @@ void EditRedoSJ::Redo()
 }
 
 SUBJECT_DEFINITION(EditUndoSJ, MSG_EDIT_UNDO)
-void EditUndoSJ::Redo()
+void EditUndoSJ::Undo()
 {
 	Notify(NULL);
 }

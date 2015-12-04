@@ -2,112 +2,114 @@
 
 namespace eanim
 {
-	const int Joint::REGION = 5;
 
-	Joint::Joint(d2d::ISprite* sprite)
-		: m_sprite(sprite)
-		, m_parent(NULL)
+static const int REGION = 5;
+
+Joint::Joint(d2d::ISprite* sprite)
+	: m_sprite(sprite)
+	, m_parent(NULL)
+{
+	m_relativeAngle = 0;
+	CreateId();
+}
+
+Joint::Joint(d2d::ISprite* sprite, const d2d::Vector& pos)
+	: m_sprite(sprite)
+	, m_parent(NULL)
+{
+	SetPosition(pos);
+	m_relativeAngle = sprite->GetAngle();
+	CreateId();
+}
+
+Joint::~Joint()
+{
+	if (m_parent)
+		m_parent->m_children.erase(this);
+
+	std::set<Joint*>::iterator itr = m_children.begin();
+	for ( ; itr != m_children.end(); ++itr)
 	{
-		m_relativeAngle = 0;
-		createId();
+		Joint* child = *itr;
+		assert(child->m_parent == this);
+		child->m_parent = NULL;
 	}
+}
 
-	Joint::Joint(d2d::ISprite* sprite, const d2d::Vector& pos)
-		: m_sprite(sprite)
-		, m_parent(NULL)
+void Joint::Draw() const
+{
+	d2d::PrimitiveDraw::drawCircle(GetWorldPos(), REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
+	d2d::PrimitiveDraw::drawCircle(GetWorldPos(), REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+	if (m_parent)
 	{
-		setPosition(pos);
-		m_relativeAngle = sprite->GetAngle();
-		createId();
-	}
+		d2d::Vector s = GetWorldPos();
+		d2d::Vector e = m_sprite->GetPosition() * 2 - s;
 
-	Joint::~Joint()
+		const float w = 0.1f;
+		d2d::Vector mid = s + (e-s)*w;
+		d2d::Vector left = mid + d2d::Math::rotateVectorRightAngle(s - mid, false);
+		d2d::Vector right = mid + d2d::Math::rotateVectorRightAngle(s - mid, true);
+
+		d2d::PrimitiveDraw::drawLine(s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::drawLine(left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::drawLine(e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::drawLine(right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+	}
+}
+
+bool Joint::Contain(const d2d::Vector& pos) const
+{
+	return d2d::Math::getDistance(pos, GetWorldPos()) < REGION;
+}
+
+bool Joint::Intersect(const d2d::Vector& pos) const
+{
+	return d2d::Math::getDistance(pos, GetWorldPos()) < REGION * 2;
+}
+
+void Joint::SetPosition(const d2d::Vector& pos) 
+{
+	m_relative = GetRelativePos(pos);
+}
+
+d2d::Vector Joint::GetWorldPos() const
+{
+	return m_sprite->GetPosition() + d2d::Math::rotateVector(m_relative, m_sprite->GetAngle());
+}
+
+d2d::Vector Joint::GetRelativePos(const d2d::Vector& pos) const
+{
+	return d2d::Math::rotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
+}
+
+bool Joint::Connect(Joint* joint)
+{
+	std::set<Joint*>::iterator itr = joint->m_children.find(this);
+	if (itr == joint->m_children.end())
 	{
-		if (m_parent)
-			m_parent->m_children.erase(this);
-
-		std::set<Joint*>::iterator itr = m_children.begin();
-		for ( ; itr != m_children.end(); ++itr)
-		{
-			Joint* child = *itr;
-			assert(child->m_parent == this);
-			child->m_parent = NULL;
-		}
+		joint->m_parent = this;
+		m_children.insert(joint);
+		return true;
 	}
-
-	void Joint::draw() const
+	else
 	{
-		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
-		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		if (m_parent)
-		{
-			d2d::Vector s = getWorldPos();
-			d2d::Vector e = m_sprite->GetPosition() * 2 - s;
-
-			const float w = 0.1f;
-			d2d::Vector mid = s + (e-s)*w;
-			d2d::Vector left = mid + d2d::Math::rotateVectorRightAngle(s - mid, false);
-			d2d::Vector right = mid + d2d::Math::rotateVectorRightAngle(s - mid, true);
-
- 			d2d::PrimitiveDraw::drawLine(s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
- 			d2d::PrimitiveDraw::drawLine(left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
- 			d2d::PrimitiveDraw::drawLine(e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
- 			d2d::PrimitiveDraw::drawLine(right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		}
+		return false;
 	}
+}
 
-	bool Joint::contain(const d2d::Vector& pos) const
+void Joint::Deconnect()
+{
+	if (m_parent)
 	{
-		return d2d::Math::getDistance(pos, getWorldPos()) < REGION;
+		m_parent->m_children.erase(this);
+		m_parent = NULL;
 	}
+}
 
-	bool Joint::intersect(const d2d::Vector& pos) const
-	{
-		return d2d::Math::getDistance(pos, getWorldPos()) < REGION * 2;
-	}
+void Joint::CreateId()
+{
+	static int id = 0;
+	m_id = ++id;
+}
 
-	void Joint::setPosition(const d2d::Vector& pos) 
-	{
-		m_relative = getRelativePos(pos);
-	}
-
-	d2d::Vector Joint::getWorldPos() const
-	{
-		return m_sprite->GetPosition() + d2d::Math::rotateVector(m_relative, m_sprite->GetAngle());
-	}
-	
-	d2d::Vector Joint::getRelativePos(const d2d::Vector& pos) const
-	{
-		return d2d::Math::rotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
-	}
-
-	bool Joint::connect(Joint* joint)
-	{
-		std::set<Joint*>::iterator itr = joint->m_children.find(this);
-		if (itr == joint->m_children.end())
-		{
-			joint->m_parent = this;
-			m_children.insert(joint);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	void Joint::deconnect()
-	{
-		if (m_parent)
-		{
-			m_parent->m_children.erase(this);
-			m_parent = NULL;
-		}
-	}
-
-	void Joint::createId()
-	{
-		static int id = 0;
-		m_id = ++id;
-	}
 }

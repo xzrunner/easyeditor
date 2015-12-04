@@ -7,8 +7,6 @@
 namespace eanim
 {
 
-class ToolbarPanel;
-
 class AnimTemplate
 {
 public:
@@ -26,7 +24,7 @@ public:
 
 	void PreparePaths(const std::string& filepath);
 	void StoreToFile(Json::Value& value) const;
-	void LoadFromFile(const Json::Value& value, ToolbarPanel* toolbar);
+	void LoadFromFile(const Json::Value& value);
 
 	void SetTemplateDir(const std::string& dir) { m_temp_dir = dir; }
 

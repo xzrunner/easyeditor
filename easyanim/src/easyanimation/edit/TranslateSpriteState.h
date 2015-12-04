@@ -6,19 +6,13 @@
 namespace eanim
 {
 
-class StagePanel;
-
 class TranslateSpriteState : public d2d::TranslateSpriteState
 {
 public:
-	TranslateSpriteState(StagePanel* stage, d2d::SpriteSelection* selection, 
-		const d2d::Vector& first_pos);
+	TranslateSpriteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos);
 	
 protected:
 	virtual void Translate(const d2d::Vector& offset);
-
-private:
-	StagePanel* m_stage;
 
 }; // TranslateSpriteState 
 

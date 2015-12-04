@@ -1,51 +1,50 @@
-#ifndef EANIM_JOINT_H
-#define EANIM_JOINT_H
+#ifndef _EASYANIM_JOINT_H_
+#define _EASYANIM_JOINT_H_
 
 #include <drag2d.h>
 
 namespace eanim
 {
-	class Joint
-	{
-	public:
-		Joint(d2d::ISprite* sprite);
-		Joint(d2d::ISprite* sprite, const d2d::Vector& pos);
-		~Joint();
 
-		void draw() const;
+class Joint
+{
+public:
+	Joint(d2d::ISprite* sprite);
+	Joint(d2d::ISprite* sprite, const d2d::Vector& pos);
+	~Joint();
 
-		bool contain(const d2d::Vector& pos) const;
-		bool intersect(const d2d::Vector& pos) const;
+	void Draw() const;
 
-		void setPosition(const d2d::Vector& pos);
+	bool Contain(const d2d::Vector& pos) const;
+	bool Intersect(const d2d::Vector& pos) const;
 
-		d2d::Vector getWorldPos() const;
-		d2d::Vector getRelativePos(const d2d::Vector& pos) const;
+	void SetPosition(const d2d::Vector& pos);
 
-		bool connect(Joint* joint);
-		void deconnect();
+	d2d::Vector GetWorldPos() const;
+	d2d::Vector GetRelativePos(const d2d::Vector& pos) const;
 
-	private:
-		void createId();
+	bool Connect(Joint* joint);
+	void Deconnect();
 
-	private:
-		static const int REGION;
+private:
+	void CreateId();
 
-	private:
-		int m_id;
+private:
+	int m_id;
 
-		d2d::ISprite* m_sprite;
+	d2d::ISprite* m_sprite;
 
-		d2d::Vector m_relative;
-		float m_relativeAngle;
+	d2d::Vector m_relative;
+	float m_relativeAngle;
 
-		Joint* m_parent;
-		std::set<Joint*> m_children;
+	Joint* m_parent;
+	std::set<Joint*> m_children;
 
-		friend class SkeletonData;
-		friend class FileIO;
+	friend class SkeletonData;
+	friend class FileIO;
 
-	}; // Joint
+}; // Joint
+
 }
 
-#endif // EANIM_JOINT_H
+#endif // _EASYANIM_JOINT_H_

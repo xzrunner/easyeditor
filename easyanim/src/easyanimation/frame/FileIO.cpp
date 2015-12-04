@@ -1,14 +1,13 @@
 #include "FileIO.h"
 
+#include "dataset/DataMgr.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Joint.h"
+#include "view/ViewMgr.h"
 #include "view/ToolbarPanel.h"
 #include "view/StagePanel.h"
-#include "message/InsertLayerSJ.h"
-#include "message/SetFpsSJ.h"
-#include "message/GetFpsSJ.h"
-#include "message/SetCurrFrameSJ.h"
+#include "message/messages.h"
 
 #include <rapidxml_utils.hpp>
 #include <easyanim.h>
@@ -37,24 +36,24 @@ void FileIO::Load(const std::string& filepath)
 	SetFpsSJ::Instance()->Set(fps);
 
 	if (value["template"].isNull()) {
-		ctrl->GetToolbarPanel()->ChangeTemplateMode(true);
+		ViewMgr::Instance()->toolbar->ChangeTemplateMode(true);
 	} else {
-		ctrl->GetAnimTemplate().LoadFromFile(value["template"], ctrl->GetToolbarPanel());
-		ctrl->GetToolbarPanel()->ChangeTemplateMode(false);
+		DataMgr::Instance()->GetTemplate().LoadFromFile(value["template"]);
+		ViewMgr::Instance()->toolbar->ChangeTemplateMode(false);
 	}
 
-	ctrl->name = value["name"].asString();
+	DataMgr::Instance()->name = value["name"].asString();
 
-	ctrl->ClearAllLayer();
+	DataMgr::Instance()->GetLayers().Clear();
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		LoadLayer(layerValue, dir, ctrl);
+		LoadLayer(layerValue, dir);
 		layerValue = value["layer"][i++];
 	}
 
-	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	SetCurrFrameSJ::Instance()->Set(0, 0);
 }
@@ -63,13 +62,14 @@ void FileIO::StoreSingle(const std::string& filepath)
 {
 	Json::Value value;
 
-	value["name"] = ctrl->name;
+	value["name"] = DataMgr::Instance()->name;
 	value["fps"] = GetFpsSJ::Instance()->Get();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
-	const std::vector<Layer*>& layers = ctrl->GetLayers().CetAllLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i) {
-		value["layer"][i] = StoreLayer(layers[i], dir, ctrl, true);
+
+	LayersMgr& layers = DataMgr::Instance()->GetLayers();
+	for (size_t i = 0, n = layers.Size(); i < n; ++i) {
+		value["layer"][i] = StoreLayer(layers.GetLayer(i), dir, true);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -84,17 +84,17 @@ void FileIO::StoreTemplate(const std::string& filepath)
 {
 	Json::Value value;
 
-	AnimTemplate& temp = ctrl->GetAnimTemplate();
+	AnimTemplate& temp = DataMgr::Instance()->GetTemplate();
 	temp.PreparePaths(filepath);
 	temp.StoreToFile(value["template"]);
 
-	value["name"] = ctrl->name;
+	value["name"] = DataMgr::Instance()->name;
 	value["fps"] = GetFpsSJ::Instance()->Get();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
-	const std::vector<Layer*>& layers = ctrl->GetLayers().CetAllLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i) {
-		value["layer"][i] = StoreLayer(layers[i], dir, ctrl, false);
+	LayersMgr& layers = DataMgr::Instance()->GetLayers();
+	for (size_t i = 0, n = layers.Size(); i < n; ++i) {
+		value["layer"][i] = StoreLayer(layers.GetLayer(i), dir, false);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -109,7 +109,7 @@ void FileIO::Reload()
 {
 	if (m_filepath.empty()) return;
 
-	ctrl->Clear();
+	DataMgr::Instance()->GetLayers().Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -123,13 +123,11 @@ void FileIO::Reload()
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		Layer* layer = LoadLayer(layerValue, dir, ctrl);
+		Layer* layer = LoadLayer(layerValue, dir);
 		layerValue = value["layer"][i++];
 	}
 
-	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
-
-	ctrl->Refresh();
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::LoadFlash(const std::string& filepath)
@@ -157,12 +155,12 @@ void FileIO::LoadFlash(const std::string& filepath)
 	rapidxml::xml_node<>* layerNode = doc.first_node()->first_node("timelines")
 		->first_node("DOMTimeline")->first_node("layers")->first_node("DOMLayer");
 	while (layerNode) {
-		Layer* layer = LoadLayer(layerNode, mapNamePath, ctrl);
+		Layer* layer = LoadLayer(layerNode, mapNamePath);
 		InsertLayerSJ::Instance()->Insert(layer);
 		layerNode = layerNode->next_sibling();
 	}
 
-	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
@@ -209,7 +207,7 @@ void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 
 Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 {
-	Layer* layer = new Layer(ctrl);
+	Layer* layer = new Layer;
 	InsertLayerSJ::Instance()->Insert(layer);
 
 	layer->SetName(layerValue["name"].asString());
@@ -217,7 +215,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 	int i = 0;
 	Json::Value frameValue = layerValue["frame"][i++];
 	while (!frameValue.isNull()) {
-		KeyFrame* frame = LoadFrame(frameValue, dir, ctrl);
+		KeyFrame* frame = LoadFrame(frameValue, dir);
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 		frameValue = layerValue["frame"][i++];
@@ -237,7 +235,7 @@ KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& di
 {
 	int time = frameValue["time"].asInt();
 
-	KeyFrame* frame = new KeyFrame(ctrl, time);
+	KeyFrame* frame = new KeyFrame(time);
 
 	frame->SetID(frameValue["id"].asInt());
 
@@ -246,7 +244,7 @@ KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& di
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
-		d2d::ISprite* actor = LoadActor(actorValue, dir, ctrl);
+		d2d::ISprite* actor = LoadActor(actorValue, dir);
 		frame->Insert(actor);
 		actor->Release();
 		actorValue = frameValue["actor"][i++];
@@ -257,8 +255,7 @@ KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& di
 	return frame;
 }
 
-d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir,
-								)
+d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir)
 {
 	std::string filepath = actorValue["filepath"].asString();
 	while (true) 
@@ -274,8 +271,8 @@ d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string
 		}
 
 		std::string res_path = absolute_path;
-		if (!ctrl->GetAnimTemplate().Empty())
-			res_path = ctrl->GetAnimTemplate().Dir() + "\\" + filepath;
+		if (!DataMgr::Instance()->GetTemplate().Empty())
+			res_path = DataMgr::Instance()->GetTemplate().Dir() + "\\" + filepath;
 		if (!d2d::FilenameTools::IsFileExist(res_path))
 			absolute_path = d2d::FilenameTools::getAbsolutePath(dir, res_path);
 		if (!d2d::FilenameTools::IsFileExist(absolute_path)) {
@@ -374,23 +371,22 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<d2
 			joints.push_back(joint);
 			jointVal = jointsVal["joints"][j++];
 		}
-		skeleton.m_mapJoints.insert(std::make_pair(sprite, joints));
+		skeleton.m_map_joints.insert(std::make_pair(sprite, joints));
 		jointsVal = skeletonValue[i++];
 	}
 }
 
 Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
-						 const std::map<std::string, std::string>& mapNamePath,
-						 )
+						 const std::map<std::string, std::string>& mapNamePath)
 {
-	Layer* layer = new Layer(ctrl);
+	Layer* layer = new Layer;
 
 	layer->SetName(layerNode->first_attribute("name")->value());
 
 	rapidxml::xml_node<>* frameNode = layerNode->first_node("frames")
 		->first_node("DOMFrame");
 	while (frameNode) {
-		KeyFrame* frame = LoadFrame(frameNode, mapNamePath, ctrl);
+		KeyFrame* frame = LoadFrame(frameNode, mapNamePath);
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 		frameNode = frameNode->next_sibling();
@@ -400,12 +396,11 @@ Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 }
 
 KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
-							const std::map<std::string, std::string>& mapNamePath,
-							)
+							const std::map<std::string, std::string>& mapNamePath)
 {
 	int time = d2d::StringTools::FromString<int>(frameNode->first_attribute("index")->value()) + 1;
 
-	KeyFrame* frame = new KeyFrame(ctrl, time);
+	KeyFrame* frame = new KeyFrame(time);
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
@@ -459,7 +454,7 @@ Json::Value FileIO::StoreLayer(Layer* layer, const std::string& dir,
 	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 	for (size_t i = 0; itr != frames.end(); ++itr, ++i) {
-		value["frame"][i] = StoreFrame(itr->second, dir, ctrl, single);
+		value["frame"][i] = StoreFrame(itr->second, dir, single);
 		all_frames.push_back(itr->second);
 	}
 
@@ -478,7 +473,7 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 	value["tween"] = frame->HasClassicTween();
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
-		value["actor"][i] = StoreActor(frame->GetSprite(i), dir, ctrl, single);
+		value["actor"][i] = StoreActor(frame->GetSprite(i), dir, single);
 
 	value["skeleton"] = StoreSkeleton(frame->GetSkeletonData());
 
@@ -497,7 +492,7 @@ Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const std::string& di
 	if (single) {
 		value["filepath"] = relative_path;
 	} else {
-		if (ctrl->GetAnimTemplate().ContainPath(relative_path)) {
+		if (DataMgr::Instance()->GetTemplate().ContainPath(relative_path)) {
 			value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
 				symbol.GetFilepath()).ToStdString();
 		} else {
@@ -521,8 +516,8 @@ Json::Value FileIO::StoreSkeleton(const SkeletonData& skeleton)
 	Json::Value value;
 
 	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr
-		= skeleton.m_mapJoints.begin();
-	for (int i = 0; itr != skeleton.m_mapJoints.end(); ++itr, ++i)
+		= skeleton.m_map_joints.begin();
+	for (int i = 0; itr != skeleton.m_map_joints.end(); ++itr, ++i)
 	{
 		value[i]["sprite"] = itr->first->name;
 		for (int j = 0, m = itr->second.size(); j < m; ++j)

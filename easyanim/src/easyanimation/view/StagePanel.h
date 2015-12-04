@@ -6,15 +6,13 @@
 namespace eanim
 {
 
-class Controller;
 class KeyFrame;
 class SkeletonData;
 
 class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-		d2d::PropertySettingPanel* property, Controller* ctrl);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
 	//
 	// d2d::EditPanel interface
@@ -28,10 +26,6 @@ public:
 		d2d::DataTraverseType type = d2d::DT_ALL,
 		bool order = true) const;
 
-	SkeletonData& getSkeletonData();
-
-	Controller* GetController() { return m_ctrl; }
-
 protected:
 	//
 	//	interface Observer
@@ -39,8 +33,8 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void onMenuAddJointNode(wxCommandEvent& event);
-	void onMenuDelJointNode(wxCommandEvent& event);
+	void OnMenuAddJointNode(wxCommandEvent& event);
+	void OnMenuDelJointNode(wxCommandEvent& event);
 
 	void Reorder(d2d::ISprite* spr, bool up);
 	void ReorderMost(d2d::ISprite* spr, bool up);
@@ -72,9 +66,6 @@ private:
 		bool m_update;
 
 	}; // CheckUpdateVisitor
-
-private:
-	Controller* m_ctrl;
 
 }; // StagePanel
 

@@ -1,30 +1,24 @@
-#pragma once
+#ifndef _EASYANIM_TIMELINE_PANEL_H_
+#define _EASYANIM_TIMELINE_PANEL_H_
 
 #include <wx/wx.h>
 
 namespace eanim
 {
-	class Controller;
 
-	class TimeLinePanel : public wxPanel
-	{
-	public:
-		TimeLinePanel(wxWindow* parent, Controller* ctrl);
+class TimeLinePanel : public wxPanel
+{
+public:
+	TimeLinePanel(wxWindow* parent);
 
-		void clear();
+private:
+	void InitLayout();
 
-	private:
-		void initLayout();
+	void InitTitle(wxSizer* sizer);
+	void InitSplitterWindow(wxSizer* sizer);
 
-		void initTitle(wxSizer* sizer);
-		void initSplitterWindow(wxSizer* sizer);
+}; // TimeLinePanel
 
-	private:
-		static const float SASH_GRAVITY_VERT;
-
-	private:
-		Controller* m_ctrl;
-
-	}; // TimeLinePanel
 }
 
+#endif // _EASYANIM_TIMELINE_PANEL_H_

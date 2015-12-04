@@ -2,36 +2,31 @@
 #include "StageCanvas.h"
 #include "KeysPanel.h"
 
-#include "frame/Controller.h"
 #include "edit/ArrangeSpriteOP.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/SpriteUserData.h"
-
-#include "message/message_id.h"
-#include "message/InsertLayerSJ.h"
-#include "message/RemoveLayerSJ.h"
-#include "message/SetCurrFrameSJ.h"
-#include "message/GetCurrFrameSJ.h"
+#include "dataset/DataMgr.h"
+#include "dataset/data_utility.h"
+#include "view/ViewMgr.h"
+#include "view/view_utility.h"
+#include "message/messages.h"
 
 namespace eanim
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::PropertySettingPanel* property,
-					   Controller* ctrl)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(GetStageImpl())
-	, m_ctrl(ctrl)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	SetEditOP(new ArrangeSpriteOP(this, property, ctrl));
-	SetCanvas(new StageCanvas(this));
+	SetEditOP(new ArrangeSpriteOP(this));
+	SetCanvas(new StageCanvas(this)); 
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), m_ctrl->GetLibraryPanel()));
+	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), ViewMgr::Instance()->library));
 
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuAddJointNode, this, Menu_AddJointNode);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuDelJointNode, this, Menu_DelJointNode);
 
 	RegistSubject(d2d::ReorderSpriteSJ::Instance());
 	RegistSubject(d2d::ReorderSpriteMostSJ::Instance());
@@ -52,21 +47,15 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	int layer, frame;
-	GetCurrFrameSJ::Instance()->Get(layer, frame);
-	if (layer == -1 || frame == -1) {
-		int zz = 0;
-	}
-
-	const std::vector<Layer*>& layers = m_ctrl->GetLayers().CetAllLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i)
+	int frame_idx = get_curr_frame_index();
+	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
-		Layer* layer = layers[i];
+		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);
 		if ((type == d2d::DT_EDITABLE && !layer->IsEditable()) ||
 			(type == d2d::DT_VISIBLE && !layer->IsVisible()))
 			continue;
 
-		KeyFrame* frame = layer->GetCurrKeyFrame(frame);
+		KeyFrame* frame = layer->GetCurrKeyFrame(frame_idx);
 		if (!frame) continue;
 
 		if (order)
@@ -86,12 +75,6 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 			}
 		}
 	}
-}
-
-SkeletonData& StagePanel::getSkeletonData()
-{
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	return frame->GetSkeletonData();	
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)
@@ -123,12 +106,10 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		{
-			bool ret = m_ctrl->ClearAllLayer();
+			DataMgr::Instance()->GetLayers().Clear();
 			SetCurrFrameSJ::Instance()->Set(0, 0);
 
-			if (ret) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-			}
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 			// 	Context* context = Context::Instance();
 			// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
@@ -142,13 +123,13 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
+void StagePanel::OnMenuAddJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_AddJointNode);
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
+void StagePanel::OnMenuDelJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_DelJointNode);
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -156,18 +137,16 @@ void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 
 void StagePanel::Reorder(d2d::ISprite* spr, bool up)
 {
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool succ = frame->Reorder(spr, up);
-	if (succ) {
+	KeyFrame* frame = get_curr_frame();
+	if (frame && frame->Reorder(spr, up)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
 {
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool succ = frame->ReorderMost(spr, up);
-	if (succ) {
+	KeyFrame* frame = get_curr_frame();
+	if (frame && frame->ReorderMost(spr, up)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
@@ -179,16 +158,13 @@ void StagePanel::Insert(d2d::ISprite* spr)
 	} else {
 		InsertWithoutUD(spr);
 	}
-	m_ctrl->Refresh();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::Remove(d2d::ISprite* spr)
 {
-	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool success = frame->Remove(spr);
-	if (success) {
-		m_ctrl->Refresh();
+	KeyFrame* frame = get_curr_frame();
+	if (frame && frame->Remove(spr)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
@@ -199,27 +175,26 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 	assert(ud);
 
 	assert(ud->layer_idx != -1);
-	while (ud && ud->layer_idx >= m_ctrl->GetLayerCount()) {
+	while (ud && ud->layer_idx >= DataMgr::Instance()->GetLayers().Size()) {
 		InsertLayerSJ::Instance()->Insert();
 	}
 
-	int old_layer, old_frame;
-	GetCurrFrameSJ::Instance()->Get(old_layer, old_frame);
+// 	int old_layer, old_frame;
+// 	GetCurrFrameSJ::Instance()->Get(old_layer, old_frame);
 
-	KeyFrame* frame = m_ctrl->getCurrFrame();
+	KeyFrame* frame = get_curr_frame();
 	assert(frame);
 	frame->Insert(spr);
 
-	ud->all_layers = &m_ctrl->GetLayers();
-	ud->layer = ud->all_layers->GetLayer(ud->layer_idx);
+	ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
 	ud->frame = frame;
 
-	SetCurrFrameSJ::Instance()->Set(old_layer, old_frame);
+//	SetCurrFrameSJ::Instance()->Set(old_layer, old_frame);
 }
 
 void StagePanel::InsertWithoutUD(d2d::ISprite* spr)
 {
-	KeyFrame* frame = m_ctrl->getCurrFrame();
+	KeyFrame* frame = get_curr_frame();
 	assert(frame);
 	frame->Insert(spr);
 }

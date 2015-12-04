@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _EASYANIM_SELECT_SPRITES_OP_H_
+#define _EASYANIM_SELECT_SPRITES_OP_H_
 
 #include <drag2d.h>
 
@@ -20,3 +21,5 @@ protected:
 }; // SelectSpritesOP
 
 }
+
+#endif // _EASYANIM_SELECT_SPRITES_OP_H_

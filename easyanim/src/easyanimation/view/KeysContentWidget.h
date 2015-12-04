@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-#include "Utility.h"
+#include "config.h"
 #include "KeysContentEdit.h"
 
 class wxBufferedPaintDC;
@@ -14,17 +14,16 @@ namespace eanim
 class KeysPanel;
 class LayersMgr;
 class KeyFrame;
-class Controller;
 
 class KeysContentWidget : public wxPanel, public d2d::Observer
 {
 public:
-	KeysContentWidget(wxWindow* parent, const LayersMgr& layers, KeysPanel& keys_panel);
+	KeysContentWidget(wxWindow* parent);
 
-	void onSize(wxSizeEvent& event);
-	void onPaint(wxPaintEvent& event);
-	void onEraseBackground(wxEraseEvent& event);
-	void onMouse(wxMouseEvent& event);
+	void OnSize(wxSizeEvent& event);
+	void OnPaint(wxPaintEvent& event);
+	void OnEraseBackground(wxEraseEvent& event);
+	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
 
@@ -35,37 +34,37 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	KeyFrame* queryKeyFrameByPos() const;
-	bool isPosOnKeyFrame() const;
+	KeyFrame* QueryKeyFrameByPos() const;
+	bool IsPosOnKeyFrame() const;
 
-	void drawBackground(wxBufferedPaintDC& dc);
-	void drawLayersDataBg(wxBufferedPaintDC& dc);
-	void drawLayersDataFlag(wxBufferedPaintDC& dc);
-	void drawCurrPosFlag(wxBufferedPaintDC& dc);
-	void drawSelected(wxBufferedPaintDC& dc);
+	void DrawBackground(wxBufferedPaintDC& dc);
+	void DrawLayersDataBg(wxBufferedPaintDC& dc);
+	void DrawLayersDataFlag(wxBufferedPaintDC& dc);
+	void DrawCurrPosFlag(wxBufferedPaintDC& dc);
+	void DrawSelected(wxBufferedPaintDC& dc);
 
 	void MousePopupMenu(int x, int y);
 
-	void onCreateClassicTween(wxCommandEvent& event);
-	void onDeleteClassicTween(wxCommandEvent& event);
-	void onInsertFrame(wxCommandEvent& event);
-	void onDeleteFrame(wxCommandEvent& event);
-	void onInsertKeyFrame(wxCommandEvent& event);
-	void onDeleteKeyFrame(wxCommandEvent& event);
+	void OnCreateClassicTween(wxCommandEvent& event);
+	void OnDeleteClassicTween(wxCommandEvent& event);
+	void OnInsertFrame(wxCommandEvent& event);
+	void OnDeleteFrame(wxCommandEvent& event);
+	void OnInsertKeyFrame(wxCommandEvent& event);
+	void OnDeleteKeyFrame(wxCommandEvent& event);
 
-	void onUpdateCreateClassicTween(wxUpdateUIEvent& event);
-	void onUpdateDeleteClassicTween(wxUpdateUIEvent& event);
-	void onUpdateInsertFrame(wxUpdateUIEvent& event);
-	void onUpdateDeleteFrame(wxUpdateUIEvent& event);
-	void onUpdateInsertKeyFrame(wxUpdateUIEvent& event);
-	void onUpdateDeleteKeyFrame(wxUpdateUIEvent& event);
+	void OnUpdateCreateClassicTween(wxUpdateUIEvent& event);
+	void OnUpdateDeleteClassicTween(wxUpdateUIEvent& event);
+	void OnUpdateInsertFrame(wxUpdateUIEvent& event);
+	void OnUpdateDeleteFrame(wxUpdateUIEvent& event);
+	void OnUpdateInsertKeyFrame(wxUpdateUIEvent& event);
+	void OnUpdateDeleteKeyFrame(wxUpdateUIEvent& event);
 
-	void onInsertFrame(wxKeyEvent& event);
-	void onDeleteFrame(wxKeyEvent& event);
+	void OnInsertFrame(wxKeyEvent& event);
+	void OnDeleteFrame(wxKeyEvent& event);
 
 private:
-	void onInsertFrame();
-	void onDeleteFrame();
+	void OnInsertFrame();
+	void OnDeleteFrame();
 
 private:
 	enum
@@ -90,10 +89,6 @@ private:
 	static const int FRAME_END_RECT_HEIGHT = KEY_FRAME_CIRCLE_RADIUS * 3;
 
 private:
-	const LayersMgr& m_layers;
-
-	KeysPanel& m_keys_panel;
-
 	KeysContentEdit m_editop;
 
 	d2d::KeysState m_keys_state;
