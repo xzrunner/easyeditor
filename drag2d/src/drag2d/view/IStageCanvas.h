@@ -20,7 +20,8 @@ class RenderContext;
 class IStageCanvas : public wxGLCanvas, public Object, public Observer
 {
 public:
-	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx = NULL);
+	IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx = NULL,
+		bool use_context_stack = true);
 	virtual ~IStageCanvas();
 
 	void SetBgColor(const Colorf& color);
@@ -84,6 +85,7 @@ private:
 
 private:
 	bool m_share_context;
+	bool m_use_context_stack;
 
 	wxGLContext* m_gl_context;
 	RenderContext* m_render_context;

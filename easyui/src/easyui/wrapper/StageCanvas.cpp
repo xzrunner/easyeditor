@@ -7,7 +7,7 @@ namespace wrapper
 {
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx, false)
 	, m_stage(stage)
 {
 }

@@ -9,8 +9,8 @@ namespace d2d
 {
 
 OrthoCanvas::OrthoCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
-						 wxGLContext* glctx)
-	: TwoPassCanvas(stage_wnd, stage, glctx)
+						 wxGLContext* glctx, bool use_context_stack)
+	: TwoPassCanvas(stage_wnd, stage, glctx, use_context_stack)
 {
 }
 

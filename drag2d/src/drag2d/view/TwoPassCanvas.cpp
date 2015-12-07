@@ -17,8 +17,8 @@ namespace d2d
 {
 
 TwoPassCanvas::TwoPassCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
-							 wxGLContext* glctx)
-	: IStageCanvas(stage_wnd, stage, glctx)
+							 wxGLContext* glctx, bool use_context_stack)
+	: IStageCanvas(stage_wnd, stage, glctx, use_context_stack)
 {
 	m_scr_style.multi_col = WHITE;
 	m_scr_style.add_col = BLACK;

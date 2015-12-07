@@ -34,9 +34,11 @@ static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN,
 
 static const float FPS = 30;
 
-IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContext* glctx)
+IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
+						   wxGLContext* glctx, bool use_context_stack)
 	: wxGLCanvas(stage_wnd, wxID_ANY, GL_ATTRIB)
 	, m_share_context(false)
+	, m_use_context_stack(use_context_stack)
 	, m_stage(stage)
  	, m_camera(stage->GetCamera())
 	, m_screen(stage->GetCamera())
@@ -61,7 +63,9 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, wxGLContex
 
 	RegistSubject(SetCanvasDirtySJ::Instance());
 
-	RenderContextStack::Instance()->Push(this, m_render_context);
+	if (m_use_context_stack) {
+		RenderContextStack::Instance()->Push(this, m_render_context);
+	}
 }
 
 IStageCanvas::~IStageCanvas()
@@ -72,7 +76,9 @@ IStageCanvas::~IStageCanvas()
 		delete m_gl_context;
 	}
 
-	RenderContextStack::Instance()->Pop();
+	if (m_use_context_stack) {
+		RenderContextStack::Instance()->Pop();
+	}
 }
 
 void IStageCanvas::SetBgColor(const Colorf& color)

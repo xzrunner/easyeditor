@@ -9,7 +9,7 @@ namespace window
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), NULL, false)
 	, m_stage(stage)
 {
 }
