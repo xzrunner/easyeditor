@@ -14,8 +14,6 @@ public:
 	LayersMgr();
 	~LayersMgr();
 
-	void ChangeLayerOrder(int from, int to);
-
 	size_t Size() const {
 		return m_layers.size();
 	}
@@ -33,17 +31,13 @@ public:
 		return m_layers;
 	}
 
-	int GetMaxFrame() const;
+	int GetMaxFrameTime() const;
 
 protected:
 	//
 	//	interface Observer
 	//
 	virtual void OnNotify(int sj_id, void* ud);
-
-private:
-	void Insert(Layer* layer);
-	void Remove();
 
 private:
 	std::vector<Layer*> m_layers;

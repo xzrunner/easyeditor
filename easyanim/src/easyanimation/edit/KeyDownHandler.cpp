@@ -11,22 +11,33 @@
 namespace eanim
 {
 
-void KeyDownHandler::Process(int key_code)
+KeyDownHandler* KeyDownHandler::m_instance = NULL;
+
+KeyDownHandler* KeyDownHandler::Instance()
+{
+	if (!m_instance) {
+		m_instance = new KeyDownHandler;
+	}
+	return m_instance;
+}
+
+bool KeyDownHandler::Process(int key_code)
 {
 	if (d2d::GetKeyStateSJ::Instance()->Query(WXK_CONTROL) ||
 		d2d::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
-		return;
+		return false;
 	}
 
 	switch (key_code)
 	{
 	case 'z': case 'Z':
 		SetPrevKeyFrame();
-		break;
+		return true;
 	case 'x': case 'X':
 		SetNextKeyFrame();
-		break;
+		return true;
 	}
+	return false;
 }
 
 void KeyDownHandler::SetPrevKeyFrame()
@@ -38,7 +49,7 @@ void KeyDownHandler::SetPrevKeyFrame()
 	}
 	KeyFrame* next = layer->GetPrevKeyFrame(col + 1);
 	if (next) {
-		SetCurrFrameSJ::Instance()->Set(-1, next->GetTime() - 1);
+		SetSelectedSJ::Instance()->Set(-1, next->GetTime() - 1);
 	}
 }
 
@@ -51,7 +62,7 @@ void KeyDownHandler::SetNextKeyFrame()
 	}
 	KeyFrame* next = layer->GetNextKeyFrame(col + 1);
 	if (next) {
-		SetCurrFrameSJ::Instance()->Set(-1, next->GetTime() - 1);
+		SetSelectedSJ::Instance()->Set(-1, next->GetTime() - 1);
 	}
 }
 

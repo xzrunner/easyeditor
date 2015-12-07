@@ -1,4 +1,5 @@
 #include "ArrangeSpriteOP.h"
+#include "KeyDownHandler.h"
 
 #include "view/StagePanel.h"
 #include "view/ViewMgr.h"
@@ -22,9 +23,7 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnKeyDown(keyCode)) 
 		return true;
 
-	m_kd_handler.Process(keyCode);
-
-	return false;
+	return KeyDownHandler::Instance()->Process(keyCode);
 }
 
 bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)

@@ -55,7 +55,7 @@ void FileIO::Load(const std::string& filepath)
 
 	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
-	SetCurrFrameSJ::Instance()->Set(0, 0);
+	SetSelectedSJ::Instance()->Set(0, 0);
 }
 
 void FileIO::StoreSingle(const std::string& filepath)

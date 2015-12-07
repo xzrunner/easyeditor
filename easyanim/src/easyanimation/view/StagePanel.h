@@ -67,6 +67,10 @@ private:
 
 	}; // CheckUpdateVisitor
 
+private:
+	int m_frame_idx;
+	KeyFrame* m_frame;
+
 }; // StagePanel
 
 }

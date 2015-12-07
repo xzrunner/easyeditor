@@ -30,7 +30,8 @@ LayersContentWidget::LayersContentWidget(wxWindow* parent)
 	m_drag_flag_line = -1;
 	m_curr_layer = -1;
 
-	RegistSubject(SetCurrFrameSJ::Instance());
+	RegistSubject(SetSelectedSJ::Instance());
+	RegistSubject(RemoveLayerSJ::Instance());
 }
 
 wxCoord LayersContentWidget::OnGetRowHeight(size_t row) const
@@ -143,7 +144,7 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 		unsigned int screen_idx = event.GetY() / FRAME_GRID_HEIGHT;
 		int layer = size - screen_idx - 1;
 		if (layer >= 0) {
-			SetCurrFrameSJ::Instance()->Set(layer, -1);
+			SetSelectedSJ::Instance()->Set(layer, -1);
 			if (screen_idx < size) {
 				is_drag_open = true;
 			}
@@ -177,10 +178,9 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			else
 			{
 				if (to > from) --to;
-				DataMgr::Instance()->GetLayers().ChangeLayerOrder(from, to);
-				d2d::RefreshPanelSJ::Instance()->Refresh();
+				ReorderLayerSJ::Instance()->Reorder(from, to);
+				SetSelectedSJ::Instance()->Set(to, -1);
 			}
-			Refresh(true);
 		}
 		m_drag_flag_line = -1;
 	}
@@ -221,12 +221,26 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 
 void LayersContentWidget::OnNotify(int sj_id, void* ud)
 {
-	if (sj_id == MSG_SET_CURR_FRAME) {
-		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
-		if (cf->layer != -1 && cf->layer != m_curr_layer) {
-			m_curr_layer = cf->layer;
-			Refresh();
+	switch (sj_id)
+	{
+	case MSG_SET_CURR_FRAME:
+		{
+			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
+			if (cf->layer != -1 && cf->layer != m_curr_layer) {
+				m_curr_layer = cf->layer;
+				Refresh();
+			}
 		}
+		break;
+	case MSG_REMOVE_LAYER:
+		{
+			int layer = *(int*)ud;
+			if (layer == m_curr_layer) {
+				m_curr_layer = -1;
+				Refresh();
+			}
+		}
+		break;
 	}
 }
 

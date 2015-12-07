@@ -13,6 +13,7 @@ namespace eanim
 
 class KeysPanel;
 class LayersMgr;
+class Layer;
 class KeyFrame;
 
 class KeysContentWidget : public wxPanel, public d2d::Observer
@@ -34,7 +35,6 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	KeyFrame* QueryKeyFrameByPos() const;
 	bool IsPosOnKeyFrame() const;
 
 	void DrawBackground(wxBufferedPaintDC& dc);
@@ -93,7 +93,12 @@ private:
 
 	d2d::KeysState m_keys_state;
 
-	int m_curr_layer, m_curr_frame;
+	int m_layer_idx, m_frame_idx;
+	int m_valid_frame_idx;
+	int m_col_min, m_col_max;
+
+	Layer* m_layer;
+	KeyFrame* m_frame;
 
 	DECLARE_EVENT_TABLE()
 

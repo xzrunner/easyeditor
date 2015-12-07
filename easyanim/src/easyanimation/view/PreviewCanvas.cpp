@@ -5,7 +5,6 @@
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
 #include "dataset/DataMgr.h"
-#include "view/view_utility.h"
 #include "message/messages.h"
 
 #include <easyanim.h>
@@ -35,7 +34,7 @@ void PreviewCanvas::OnTimer()
 	m_control.update();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	int frame_idx = get_curr_frame_index();
+	int frame_idx = m_control.frame();
 	if (frame_idx <= DataMgr::Instance()->GetLayers().GetFrameCount()) {
 		return;
 	}
@@ -62,7 +61,7 @@ void PreviewCanvas::DrawStageData() const
 
 void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
-	int frame_idx = get_curr_frame_index();
+	int frame_idx = m_control.frame();
 	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);

@@ -341,14 +341,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyanimation\view\view_utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\view\view_utility.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyanimation\view\ViewMgr.cpp"
 				>
 			</File>

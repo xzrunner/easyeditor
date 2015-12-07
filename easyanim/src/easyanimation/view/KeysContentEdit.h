@@ -12,7 +12,6 @@ public:
 	KeysContentEdit();
 
 	void OnMouseLeftDown(int row, int col);
-	void OnMouseLeftUp(int row, int col);
 	void OnMouseDragging(int row, int col);
 
 	void CopySelection();
@@ -20,7 +19,11 @@ public:
 	void DeleteSelection();
 
 private:
-	int m_last_row, m_last_col;
+	bool IsSelectionValid() const;
+
+private:
+	int m_row, m_col;
+	int m_col_min, m_col_max;
 
 }; // KeysContentEdit
 

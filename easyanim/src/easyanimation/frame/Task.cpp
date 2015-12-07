@@ -29,6 +29,7 @@ Task::Task(wxFrame* parent)
 	InitLayout();
 
 	InsertLayerSJ::Instance()->Insert();
+	SetSelectedSJ::Instance()->Set(0, 0);
 
 	ViewMgr::Instance()->library->LoadFromConfig();
 

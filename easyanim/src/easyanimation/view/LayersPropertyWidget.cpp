@@ -2,6 +2,9 @@
 #include "config.h"
 
 #include "message/messages.h"
+#include "view/ViewMgr.h"
+#include "view/KeysPanel.h"
+#include "dataset/DataMgr.h"
 
 namespace eanim
 {
@@ -67,11 +70,27 @@ void LayersPropertyWidget::InitLayout()
 void LayersPropertyWidget::OnAddLayer(wxCommandEvent& event)
 {
 	InsertLayerSJ::Instance()->Insert();
+
+	SetSelectedSJ::Instance()->Set(DataMgr::Instance()->GetLayers().Size() - 1, 0);
 }
 
 void LayersPropertyWidget::OnDelLayer(wxCommandEvent& event)
 {
-	RemoveLayerSJ::Instance()->Remove();
+	int row, col;
+	ViewMgr::Instance()->keys->GetSelectPos(row, col);
+	if (row == -1) {
+		return;
+	}
+
+	assert(DataMgr::Instance()->GetLayers().Size() > 0);
+	int layer = DataMgr::Instance()->GetLayers().Size() - 1 - row;
+	RemoveLayerSJ::Instance()->Remove(layer);
+
+	int new_layer = layer == 0 ? 0 : layer - 1;
+	if (DataMgr::Instance()->GetLayers().Size() == 0) {
+		new_layer = -1;
+	}
+	SetSelectedSJ::Instance()->Set(new_layer, -1);
 }
 
 //void LayersPropertyWidget::onPlay(wxCommandEvent& event)

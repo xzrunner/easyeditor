@@ -7,11 +7,18 @@ namespace eanim
 class KeyDownHandler
 {
 public:
-	void Process(int key_code);
+	bool Process(int key_code);
+
+	static KeyDownHandler* Instance();
 
 private:
+	KeyDownHandler() {}
+
 	void SetPrevKeyFrame();
 	void SetNextKeyFrame();
+
+private:
+	static KeyDownHandler* m_instance;
 
 }; // KeyDownHandler
 

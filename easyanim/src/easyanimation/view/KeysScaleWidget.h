@@ -6,6 +6,8 @@
 namespace eanim
 {
 
+class Layer;
+
 class KeysScaleWidget : public wxPanel, public d2d::Observer
 {
 public:
@@ -26,7 +28,9 @@ private:
 	int QueryGridByPos(float x) const;
 
 private:
-	int m_curr_frame;
+	int m_frame_idx;
+
+	Layer* m_layer;
 
 private:
 	DECLARE_EVENT_TABLE()

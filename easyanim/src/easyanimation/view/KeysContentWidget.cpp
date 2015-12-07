@@ -1,13 +1,12 @@
 #include "KeysContentWidget.h"
 #include "KeysPanel.h"
 
+#include "edit/KeyDownHandler.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 #include "dataset/DataMgr.h"
-#include "dataset/data_utility.h"
 #include "view/StagePanel.h"
 #include "view/ViewMgr.h"
-#include "view/view_utility.h"
 #include "message/messages.h"
 
 #include <wx/dcbuffer.h>
@@ -53,8 +52,11 @@ LanguageEntry KeysContentWidget::entries[] =
 
 KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
+	, m_layer(NULL)
+	, m_frame(NULL)
 {
-	m_curr_layer = m_curr_frame = -1;
+	m_layer_idx = m_frame_idx = m_valid_frame_idx = -1;
+	m_col_min = m_col_max = -1;
 
 //  	RegisterHotKey(Hot_InsertFrame, 0, VK_ADD);
 //  	RegisterHotKey(Hot_DeleteFrame, 0, VK_SUBTRACT);
@@ -62,7 +64,9 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	RegisterHotKey(Hot_InsertFrame, 0, VK_MULTIPLY);
 	RegisterHotKey(Hot_DeleteFrame, 0, VK_DIVIDE);
 
-	RegistSubject(SetCurrFrameSJ::Instance());
+	RegistSubject(SetSelectedSJ::Instance());
+	RegistSubject(SetSelectedRegionSJ::Instance());
+	RegistSubject(RemoveLayerSJ::Instance());
 }
 
 void KeysContentWidget::OnSize(wxSizeEvent& event)
@@ -91,11 +95,10 @@ void KeysContentWidget::OnMouse(wxMouseEvent& event)
 		col = event.GetX() / FRAME_GRID_WIDTH;
 
 	if (event.RightDown()) {
+		m_editop.OnMouseLeftDown(row, col);
 		MousePopupMenu(event.GetX(), event.GetY());
 	} else if (event.LeftDown()) {
 		m_editop.OnMouseLeftDown(row, col);
-	} else if (event.LeftUp()) {
-		m_editop.OnMouseLeftUp(row, col);
 	} else if (event.Dragging()) {
 		m_editop.OnMouseDragging(row, col);
 	} else if (event.Moving()) {
@@ -106,7 +109,12 @@ void KeysContentWidget::OnMouse(wxMouseEvent& event)
 void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 {
 	int key_code = event.GetKeyCode();
+
 	m_keys_state.OnKeyDown(key_code);
+	if (KeyDownHandler::Instance()->Process(key_code)) {
+		return;
+	}
+
 	if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
 		m_editop.CopySelection();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'v' || key_code == 'V')) {
@@ -128,37 +136,77 @@ void KeysContentWidget::OnKeyUp(wxKeyEvent& event)
 
 void KeysContentWidget::OnNotify(int sj_id, void* ud)
 {
-	if (sj_id == MSG_SET_CURR_FRAME) {
-		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
-		if (cf->layer != -1 && cf->layer != m_curr_layer ||
-			cf->frame != -1 && cf->frame != m_curr_frame) {
-				m_curr_layer = cf->layer;
-				m_curr_frame = cf->frame;
-				Refresh();
-		}
-	}
-}
+	switch (sj_id)
+	{
+	case MSG_SET_CURR_FRAME:
+		{
+			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
 
-KeyFrame* KeysContentWidget::QueryKeyFrameByPos() const
-{
-	int col;
-	Layer* layer = get_curr_layer(col);
-	if (!layer) {
-		return NULL;
-	} else {
-		return layer->GetCurrKeyFrame(col + 1);
+			bool refresh = false;
+			m_col_min = m_col_max = -1;
+			if (cf->layer == -1 && cf->frame == -1) {
+				m_layer_idx = -1;
+				m_layer = NULL;
+				refresh = true;
+			} else {
+				if (cf->layer != -1 && cf->layer != m_layer_idx) {
+					m_layer_idx = cf->layer;
+					m_layer = DataMgr::Instance()->GetLayers().GetLayer(m_layer_idx);
+					refresh = true;
+				}
+				if (cf->frame != m_frame_idx) {
+					if (cf->frame != -1) {
+						m_frame_idx = cf->frame;
+					}
+ 					m_frame = m_layer->GetCurrKeyFrame(m_frame_idx + 1);
+ 					refresh = true;
+				}				
+				int valid_frame_idx = std::min(m_layer->GetMaxFrameTime() - 1, m_frame_idx);
+				if (valid_frame_idx != m_valid_frame_idx) {
+					m_valid_frame_idx = valid_frame_idx;
+					refresh = true;
+				}
+			}
+
+			if (refresh) {
+				Refresh();
+			}
+		}
+		break;
+	case MSG_SET_SELECTED_REGION:
+		if (m_layer) {
+			m_col_min = m_col_max = -1;
+			m_frame = NULL;
+
+			int col = *(int*)ud;
+			m_col_min = std::min(std::min(m_frame_idx, col), m_layer->GetMaxFrameTime() - 1);
+			m_col_max = std::min(std::max(m_frame_idx, col), m_layer->GetMaxFrameTime() - 1);
+
+			Refresh();
+		}
+		break;
+	case MSG_REMOVE_LAYER:
+		{
+			int layer = *(int*)ud;
+			if (layer == m_layer_idx) {
+				m_layer_idx = m_frame_idx = m_valid_frame_idx = -1;
+				m_col_min = m_col_max = -1;
+				m_layer = NULL;
+				m_frame = NULL;
+				Refresh();
+			}
+		}
+		break;
 	}
 }
 
 bool KeysContentWidget::IsPosOnKeyFrame() const
 {
-	int col;
-	Layer* layer = get_curr_layer(col);
-	if (!layer) {
+	if (!m_layer) {
 		return false;
 	} else {
-		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
-		return frames.find(col + 1) != frames.end();
+		const std::map<int, KeyFrame*>& frames = m_layer->GetAllFrames();
+		return frames.find(m_frame_idx + 1) != frames.end();
 	}
 }
 
@@ -287,37 +335,33 @@ void KeysContentWidget::DrawLayersDataFlag(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::DrawCurrPosFlag(wxBufferedPaintDC& dc)
 {
-	int frame_idx = get_curr_frame_index();
-	if (frame_idx < 0) {
-		return;
-	}
-	const float x = FRAME_GRID_WIDTH * (frame_idx + 0.5f);
+	const float x = FRAME_GRID_WIDTH * (m_valid_frame_idx + 0.5f);
 	dc.SetPen(DARK_RED);
 	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * DataMgr::Instance()->GetLayers().Size());
 }
 
 void KeysContentWidget::DrawSelected(wxBufferedPaintDC& dc)
 {
-	int layer_idx, frame_idx;
-	get_curr_index(layer_idx, frame_idx);
-	if (layer_idx != -1 && frame_idx != -1)
-	{
+	if (m_layer_idx == -1) {
+		return;
+	}
+	int row = DataMgr::Instance()->GetLayers().Size() - 1 - m_layer_idx;
+	if (m_col_min != -1 && m_col_max != -1) {
 		dc.SetPen(wxPen(DARK_BLUE));
 		dc.SetBrush(wxBrush(DARK_BLUE));
 		dc.DrawRectangle(
-			FRAME_GRID_WIDTH * frame_idx, 
-			FRAME_GRID_HEIGHT * (DataMgr::Instance()->GetLayers().Size() - 1 - layer_idx), 
-			FRAME_GRID_WIDTH, 
+			FRAME_GRID_WIDTH * m_col_min, 
+			FRAME_GRID_HEIGHT * row, 
+			FRAME_GRID_WIDTH * (m_col_max - m_col_min + 1), 
 			FRAME_GRID_HEIGHT);
-	}
-
-	int col_min, col_max;
-	ViewMgr::Instance()->keys->GetSelectRegion(layer_idx, col_min, col_max);
-	if (col_min != -1 && col_max != -1 && col_min != col_max)
-	{
+	} else {
 		dc.SetPen(wxPen(DARK_BLUE));
 		dc.SetBrush(wxBrush(DARK_BLUE));
-		dc.DrawRectangle(FRAME_GRID_WIDTH * col_min, FRAME_GRID_HEIGHT * layer_idx, FRAME_GRID_WIDTH * (col_max - col_min + 1), FRAME_GRID_HEIGHT);
+		dc.DrawRectangle(
+			FRAME_GRID_WIDTH * m_frame_idx, 
+			FRAME_GRID_HEIGHT * row, 
+			FRAME_GRID_WIDTH, 
+			FRAME_GRID_HEIGHT);
 	}
 }
 
@@ -339,16 +383,18 @@ void KeysContentWidget::MousePopupMenu(int x, int y)
 
 void KeysContentWidget::OnCreateClassicTween(wxCommandEvent& event)
 {
-	KeyFrame* keyFrame = QueryKeyFrameByPos();
-	keyFrame->SetClassicTween(true);
-	Refresh(true);
+	if (m_frame) {
+		m_frame->SetClassicTween(true);
+		Refresh(true);
+	}
 }
 
 void KeysContentWidget::OnDeleteClassicTween(wxCommandEvent& event)
 {
-	KeyFrame* keyFrame = QueryKeyFrameByPos();
-	keyFrame->SetClassicTween(false);
-	Refresh(true);
+	if (m_frame) {
+		m_frame->SetClassicTween(false);
+		Refresh(true);
+	}
 }
 
 void KeysContentWidget::OnInsertFrame(wxCommandEvent& event)
@@ -363,24 +409,20 @@ void KeysContentWidget::OnDeleteFrame(wxCommandEvent& event)
 
 void KeysContentWidget::OnInsertKeyFrame(wxCommandEvent& event)
 {
-	int col;
-	Layer* layer = get_curr_layer(col);
-	layer->InsertKeyFrame(col + 1);
+	m_layer->InsertKeyFrame(m_frame_idx + 1);
+	Refresh();
 }
 
 void KeysContentWidget::OnDeleteKeyFrame(wxCommandEvent& event)
 {
-	int col;
-	Layer* layer = get_curr_layer(col);
-	layer->RemoveKeyFrame(col + 1);
+	m_layer->RemoveKeyFrame(m_frame_idx + 1);
 }
 
 void KeysContentWidget::OnUpdateCreateClassicTween(wxUpdateUIEvent& event)
 {
-	KeyFrame* keyFrame = QueryKeyFrameByPos();
-	if (keyFrame)
+	if (m_frame)
 	{
-		if (keyFrame->HasClassicTween())
+		if (m_frame->HasClassicTween())
 			event.Enable(false);
 		else
 			event.Enable(true);
@@ -393,10 +435,9 @@ void KeysContentWidget::OnUpdateCreateClassicTween(wxUpdateUIEvent& event)
 
 void KeysContentWidget::OnUpdateDeleteClassicTween(wxUpdateUIEvent& event)
 {
-	KeyFrame* keyFrame = QueryKeyFrameByPos();
-	if (keyFrame)
+	if (m_frame)
 	{
-		if (keyFrame->HasClassicTween())
+		if (m_frame->HasClassicTween())
 			event.Enable(true);
 		else
 			event.Enable(false);
@@ -424,9 +465,7 @@ void KeysContentWidget::OnUpdateInsertKeyFrame(wxUpdateUIEvent& event)
 
 void KeysContentWidget::OnUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
 {
-	int col;
-	Layer* layer = get_curr_layer(col);
-	event.Enable(layer->IsKeyFrame(col + 1));
+	event.Enable(m_layer->IsKeyFrame(m_frame_idx + 1));
 }
 
 void KeysContentWidget::OnInsertFrame(wxKeyEvent& event)
@@ -441,16 +480,12 @@ void KeysContentWidget::OnDeleteFrame(wxKeyEvent& event)
 
 void KeysContentWidget::OnInsertFrame()
 {
-	int col;
-	Layer* layer = get_curr_layer(col);
-	layer->InsertNullFrame(col + 1);
+	m_layer->InsertNullFrame(m_frame_idx + 1);
 }
 
 void KeysContentWidget::OnDeleteFrame()
 {
-	int col;
-	Layer* layer = get_curr_layer(col);
-	layer->RemoveNullFrame(col + 1);
+	m_layer->RemoveNullFrame(m_frame_idx + 1);
 }
 
 } // eanim

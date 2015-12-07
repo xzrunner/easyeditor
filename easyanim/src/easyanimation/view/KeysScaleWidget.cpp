@@ -2,6 +2,7 @@
 #include "KeysPanel.h"
 #include "config.h"
 
+#include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
 #include "dataset/DataMgr.h"
 #include "message/messages.h"
@@ -23,12 +24,13 @@ static const int TEXT_Y = 4;
 
 KeysScaleWidget::KeysScaleWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, FRAME_GRID_HEIGHT), wxBORDER_NONE)
-	, m_curr_frame(-1)
+	, m_frame_idx(-1)
+	, m_layer(NULL)
 {
 //	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 //	// same with "EVT_ERASE_BACKGROUND(KeysScaleWidget::onEraseBackground)"
 
-	RegistSubject(SetCurrFrameSJ::Instance());
+	RegistSubject(SetSelectedSJ::Instance());
 }
 
 void KeysScaleWidget::OnSize(wxSizeEvent& event)
@@ -46,17 +48,19 @@ void KeysScaleWidget::OnPaint(wxPaintEvent& event)
 	dc.DrawRectangle(GetSize());
 
 	// curr pos
-	int curr_pos = m_curr_frame + 1;
-
-	dc.SetPen(wxPen(DARK_RED));
-	dc.SetBrush(wxBrush(MEDIUM_RED));
-	dc.DrawRectangle(FRAME_GRID_WIDTH * (curr_pos - 1), 2, FRAME_GRID_WIDTH + 1, FRAME_GRID_HEIGHT - 2);
-	dc.DrawLine(FRAME_GRID_WIDTH * (curr_pos - 0.5f), FRAME_GRID_HEIGHT, FRAME_GRID_WIDTH * (curr_pos - 0.5f), 100);
-	if (curr_pos % 5 != 0)
+	if (m_frame_idx != -1)
 	{
-		wxSize size = dc.GetTextExtent(wxString::Format(wxT("%d"), curr_pos));
-		dc.DrawText(wxString::Format(wxT("%d"), curr_pos), 
-			FRAME_GRID_WIDTH * (curr_pos - 0.5f) - size.GetWidth() / 2, TEXT_Y);
+		int curr_pos = m_frame_idx + 1;
+		dc.SetPen(wxPen(DARK_RED));
+		dc.SetBrush(wxBrush(MEDIUM_RED));
+		dc.DrawRectangle(FRAME_GRID_WIDTH * (curr_pos - 1), 2, FRAME_GRID_WIDTH + 1, FRAME_GRID_HEIGHT - 2);
+		dc.DrawLine(FRAME_GRID_WIDTH * (curr_pos - 0.5f), FRAME_GRID_HEIGHT, FRAME_GRID_WIDTH * (curr_pos - 0.5f), 100);
+		if (curr_pos % 5 != 0)
+		{
+			wxSize size = dc.GetTextExtent(wxString::Format(wxT("%d"), curr_pos));
+			dc.DrawText(wxString::Format(wxT("%d"), curr_pos), 
+				FRAME_GRID_WIDTH * (curr_pos - 0.5f) - size.GetWidth() / 2, TEXT_Y);
+		}
 	}
 
 	// scale
@@ -83,16 +87,25 @@ void KeysScaleWidget::OnMouse(wxMouseEvent& event)
 	if (event.LeftDown() || event.Dragging())
 	{
 		int frame = QueryGridByPos(event.GetX());
-		SetCurrFrameSJ::Instance()->Set(-1, frame);
+		SetSelectedSJ::Instance()->Set(-1, frame);
 	}
 }
 
 void KeysScaleWidget::OnNotify(int sj_id, void* ud)
 {
-	if (sj_id == MSG_SET_CURR_FRAME) {
-		SetCurrFrameSJ::CurrFrame* cf = (SetCurrFrameSJ::CurrFrame*)ud;
-		if (cf->frame != -1 && cf->frame != m_curr_frame) {
-			m_curr_frame = cf->frame;
+	if (sj_id == MSG_SET_CURR_FRAME) 
+	{
+		SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
+		if (cf->layer == -1 && cf->frame == -1) {
+			m_frame_idx = -1;
+			m_layer = NULL;
+		} else {
+			if (cf->layer != -1) {
+				m_layer = DataMgr::Instance()->GetLayers().GetLayer(cf->layer);
+			} 
+			if (cf->frame != -1) {
+				m_frame_idx = std::min(m_layer->GetMaxFrameTime() - 1, cf->frame);
+			}			
 			Refresh();
 		}
 	}
@@ -100,7 +113,7 @@ void KeysScaleWidget::OnNotify(int sj_id, void* ud)
 
 int KeysScaleWidget::QueryGridByPos(float x) const
 {
-	return std::min(DataMgr::Instance()->GetLayers().GetMaxFrame(), (int)(x / FRAME_GRID_WIDTH) + 1);
+	return std::min(DataMgr::Instance()->GetLayers().GetMaxFrameTime() - 1, (int)(x / FRAME_GRID_WIDTH));
 }
 
 } // eanim

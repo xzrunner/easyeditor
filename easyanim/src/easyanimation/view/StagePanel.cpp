@@ -7,9 +7,7 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/SpriteUserData.h"
 #include "dataset/DataMgr.h"
-#include "dataset/data_utility.h"
 #include "view/ViewMgr.h"
-#include "view/view_utility.h"
 #include "message/messages.h"
 
 namespace eanim
@@ -18,6 +16,8 @@ namespace eanim
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(GetStageImpl())
+	, m_frame_idx(-1)
+	, m_frame(NULL)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
 	SetEditOP(new ArrangeSpriteOP(this));
@@ -33,6 +33,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	RegistSubject(d2d::InsertSpriteSJ::Instance());
 	RegistSubject(d2d::RemoveSpriteSJ::Instance());
 	RegistSubject(d2d::ClearSpriteSJ::Instance());
+
+	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
 }
 
@@ -47,7 +49,6 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	int frame_idx = get_curr_frame_index();
 	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);
@@ -55,7 +56,7 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 			(type == d2d::DT_VISIBLE && !layer->IsVisible()))
 			continue;
 
-		KeyFrame* frame = layer->GetCurrKeyFrame(frame_idx);
+		KeyFrame* frame = layer->GetCurrKeyFrame(m_frame_idx + 1);
 		if (!frame) continue;
 
 		if (order)
@@ -107,7 +108,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case d2d::MSG_CLEAR_SPRITE:
 		{
 			DataMgr::Instance()->GetLayers().Clear();
-			SetCurrFrameSJ::Instance()->Set(0, 0);
+			SetSelectedSJ::Instance()->Set(0, 0);
 
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -119,6 +120,20 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	case MSG_REMOVE_LAYER:
 		ClearSelectedSprite();
+		break;
+
+	case MSG_SET_CURR_FRAME:
+		{
+			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
+			if (cf->layer == -1 && cf->frame == -1) {
+				m_frame_idx = -1;
+				m_frame = NULL;
+			} else if (cf->frame != -1) {
+				m_frame_idx = cf->frame;
+				Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(cf->layer);
+				m_frame = layer->GetCurrKeyFrame(cf->frame + 1);
+			}
+		}
 		break;
 	}
 }
@@ -137,16 +152,14 @@ void StagePanel::OnMenuDelJointNode(wxCommandEvent& event)
 
 void StagePanel::Reorder(d2d::ISprite* spr, bool up)
 {
-	KeyFrame* frame = get_curr_frame();
-	if (frame && frame->Reorder(spr, up)) {
+	if (m_frame && m_frame->Reorder(spr, up)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
 {
-	KeyFrame* frame = get_curr_frame();
-	if (frame && frame->ReorderMost(spr, up)) {
+	if (m_frame && m_frame->ReorderMost(spr, up)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
@@ -163,8 +176,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 
 void StagePanel::Remove(d2d::ISprite* spr)
 {
-	KeyFrame* frame = get_curr_frame();
-	if (frame && frame->Remove(spr)) {
+	if (m_frame && m_frame->Remove(spr)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
@@ -182,21 +194,19 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 // 	int old_layer, old_frame;
 // 	GetCurrFrameSJ::Instance()->Get(old_layer, old_frame);
 
-	KeyFrame* frame = get_curr_frame();
-	assert(frame);
-	frame->Insert(spr);
+	assert(m_frame);
+	m_frame->Insert(spr);
 
 	ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
-	ud->frame = frame;
+	ud->frame = m_frame;
 
 //	SetCurrFrameSJ::Instance()->Set(old_layer, old_frame);
 }
 
 void StagePanel::InsertWithoutUD(d2d::ISprite* spr)
 {
-	KeyFrame* frame = get_curr_frame();
-	assert(frame);
-	frame->Insert(spr);
+	assert(m_frame);
+	m_frame->Insert(spr);
 }
 
 //////////////////////////////////////////////////////////////////////////

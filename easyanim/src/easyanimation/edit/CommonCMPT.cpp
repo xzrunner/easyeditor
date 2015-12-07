@@ -168,7 +168,7 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	}
 	InsertLayerSJ::Instance()->Insert(layer);
 
-	SetCurrFrameSJ::Instance()->Set(0, 0);
+	SetSelectedSJ::Instance()->Set(0, 0);
 
 	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }

@@ -1,4 +1,5 @@
 #include "SkeletonImpl.h"
+#include "KeyDownHandler.h"
 
 #include "TranslateSpriteState.h"
 #include "RotateSpriteState.h"
@@ -25,7 +26,7 @@ SkeletonImpl::SkeletonImpl()
 void SkeletonImpl::OnKeyDown(int keyCode)
 {
 	d2d::ArrangeSpriteImpl::OnKeyDown(keyCode);
-	m_key_handler.Process(keyCode);
+	KeyDownHandler::Instance()->Process(keyCode);
 }
 
 void SkeletonImpl::OnMouseLeftDown(int x, int y)

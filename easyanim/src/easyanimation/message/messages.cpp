@@ -4,6 +4,35 @@ namespace eanim
 {
 
 //////////////////////////////////////////////////////////////////////////
+// layer
+//////////////////////////////////////////////////////////////////////////
+
+SUBJECT_DEFINITION(InsertLayerSJ, MSG_INSERT_LAYER)
+void InsertLayerSJ::Insert()
+{
+	Notify(NULL);
+}
+void InsertLayerSJ::Insert(Layer* layer)
+{
+	Notify(layer);
+}
+
+SUBJECT_DEFINITION(RemoveLayerSJ, MSG_REMOVE_LAYER)
+void RemoveLayerSJ::Remove(int layer)
+{
+	Notify(&layer);
+}
+
+SUBJECT_DEFINITION(ReorderLayerSJ, MSG_REORDER_LAYER)
+void ReorderLayerSJ::Reorder(int from, int to)
+{
+	Params p;
+	p.from = from;
+	p.to = to;
+	Notify(&p);
+}
+
+//////////////////////////////////////////////////////////////////////////
 // fps
 //////////////////////////////////////////////////////////////////////////
 
@@ -22,59 +51,22 @@ void SetFpsSJ::Set(int fps)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// curr frame
+// selected
 //////////////////////////////////////////////////////////////////////////
 
-SUBJECT_DEFINITION(SetCurrFrameSJ, MSG_SET_CURR_FRAME)
-void SetCurrFrameSJ::Set(int layer, int frame)
+SUBJECT_DEFINITION(SetSelectedSJ, MSG_SET_CURR_FRAME)
+void SetSelectedSJ::Set(int layer, int frame)
 {
-	CurrFrame cf;
+	Position cf;
 	cf.layer = layer;
 	cf.frame = frame;
 	Notify(&cf);
 }
 
-//////////////////////////////////////////////////////////////////////////
-// layer
-//////////////////////////////////////////////////////////////////////////
-
-SUBJECT_DEFINITION(InsertLayerSJ, MSG_INSERT_LAYER)
-void InsertLayerSJ::Insert()
-{
-	Notify(NULL);
-}
-void InsertLayerSJ::Insert(Layer* layer)
-{
-	Notify(layer);
-}
-
-SUBJECT_DEFINITION(RemoveLayerSJ, MSG_REMOVE_LAYER)
-void RemoveLayerSJ::Remove()
-{
-	Notify(NULL);
-}
-
-//////////////////////////////////////////////////////////////////////////
-// region
-//////////////////////////////////////////////////////////////////////////
-
 SUBJECT_DEFINITION(SetSelectedRegionSJ, MSG_SET_SELECTED_REGION)
-void SetSelectedRegionSJ::Set(int row, int col)
+void SetSelectedRegionSJ::Set(int col)
 {
-	Region sr;
-	sr.row = row;
-	sr.col = col;
-	Notify(&sr);
+	Notify(&col);
 }
-
-SUBJECT_DEFINITION(UpdateSelectedRegionSJ, MSG_UPDATE_SELECTED_REGION)
-void UpdateSelectedRegionSJ::Update(int min, int max)
-{
-	Region sr;
-	sr.min = min;
-	sr.max = max;
-	Notify(&sr);
-}
-
 
 }

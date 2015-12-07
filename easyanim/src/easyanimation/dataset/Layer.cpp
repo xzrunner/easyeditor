@@ -3,7 +3,6 @@
 
 #include "view/KeysPanel.h"
 #include "view/EditKeyFramesAOP.h"
-#include "view/view_utility.h"
 #include "message/messages.h"
 
 namespace eanim
@@ -84,7 +83,7 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		aop->AddInserted(GetEndFrame());
 	}
 
-	SetCurrFrameSJ::Instance()->Set(-1, GetMaxFrameTime());
+	SetSelectedSJ::Instance()->Set(-1, GetMaxFrameTime());
 
 	return aop;
 }
@@ -147,19 +146,11 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 	if (!status.second && frame != status.first->second)
 	{
 		KeyFrame* old_frame = status.first->second;
-
-		int frame_idx = get_curr_frame_index();
-		bool refresh = (frame_idx + 1 == status.first->first);
-
 		old_frame->Release();
 		status.first->second = frame;
-
-		if (refresh) {
-			reload_viewlist(frame);
-		}
 	}
 
-	SetCurrFrameSJ::Instance()->Set(-1, frame->GetTime());
+	SetSelectedSJ::Instance()->Set(-1, frame->GetTime() - 1);
 }
 
 void Layer::InsertKeyFrame(int time)
@@ -172,12 +163,12 @@ void Layer::InsertKeyFrame(int time)
 			frame->CopyFromOther(GetEndFrame());
 			InsertKeyFrame(time, frame);
 			frame->Release();
-			SetCurrFrameSJ::Instance()->Set(-1, time);
 		}
 		else
 		{
 			InsertKeyFrame(time, new KeyFrame(time));
 		}
+		SetSelectedSJ::Instance()->Set(-1, time - 1);
 	}
 	else
 	{
@@ -197,7 +188,12 @@ void Layer::RemoveKeyFrame(int time)
 	itr->second->Release();
 	m_frames.erase(itr);
 
-	SetCurrFrameSJ::Instance()->Set(-1, GetMaxFrameTime());
+	int frame_idx = 0;
+	KeyFrame* frame = GetCurrKeyFrame(time);
+	if (frame) {
+		frame_idx = frame->GetTime() - 1;
+	}
+	SetSelectedSJ::Instance()->Set(-1, frame_idx);
 }
 
 void Layer::ChangeKeyFrame(KeyFrame* frame, int to)

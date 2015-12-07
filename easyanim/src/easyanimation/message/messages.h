@@ -9,17 +9,47 @@ namespace eanim
 enum MSG_ID {
 	MSG_INSERT_LAYER = 1000,
 	MSG_REMOVE_LAYER,
+	MSG_REORDER_LAYER,
 
 	MSG_GET_FPS,
 	MSG_SET_FPS,
 
 	MSG_SET_CURR_FRAME,
-
 	MSG_SET_SELECTED_REGION,
-	MSG_UPDATE_SELECTED_REGION,
-
-	MSG_CHANGE_TEMPLATE_MODE,
 };
+
+//////////////////////////////////////////////////////////////////////////
+// layer
+//////////////////////////////////////////////////////////////////////////
+
+class Layer;
+
+class InsertLayerSJ : public d2d::Subject
+{
+public:
+	void Insert();
+	void Insert(Layer* layer);
+	SUBJECT_DECLARATION(InsertLayerSJ)
+}; // InsertLayerSJ
+
+class RemoveLayerSJ : public d2d::Subject
+{
+public:
+	void Remove(int layer);
+	SUBJECT_DECLARATION(RemoveLayerSJ)
+}; // RemoveLayerSJ
+
+class ReorderLayerSJ : public d2d::Subject
+{
+public:
+	struct Params
+	{
+		int from, to;
+	};
+public:
+	void Reorder(int from, int to);
+	SUBJECT_DECLARATION(ReorderLayerSJ)
+}; // ReorderLayerSJ
 
 //////////////////////////////////////////////////////////////////////////
 // fps
@@ -40,69 +70,28 @@ public:
 }; // SetFpsSJ
 
 //////////////////////////////////////////////////////////////////////////
-// curr frame
+// selected
 //////////////////////////////////////////////////////////////////////////
 
-class SetCurrFrameSJ : public d2d::Subject
+class SetSelectedSJ : public d2d::Subject
 {
 public:
-	struct CurrFrame
+	struct Position
 	{
 		int layer;
 		int frame;
 	};
 public:
 	void Set(int layer, int frame);
-	SUBJECT_DECLARATION(SetCurrFrameSJ)
-}; // SetCurrFrameSJ
-
-//////////////////////////////////////////////////////////////////////////
-// layer
-//////////////////////////////////////////////////////////////////////////
-
-class Layer;
-class InsertLayerSJ : public d2d::Subject
-{
-public:
-	void Insert();
-	void Insert(Layer* layer);
-	SUBJECT_DECLARATION(InsertLayerSJ)
-}; // InsertLayerSJ
-
-class RemoveLayerSJ : public d2d::Subject
-{
-public:
-	void Remove();
-	SUBJECT_DECLARATION(RemoveLayerSJ)
-}; // RemoveLayerSJ
-
-//////////////////////////////////////////////////////////////////////////
-// region
-//////////////////////////////////////////////////////////////////////////
+	SUBJECT_DECLARATION(SetSelectedSJ)
+}; // SetSelectedSJ
 
 class SetSelectedRegionSJ : public d2d::Subject
 {
 public:
-	struct Region
-	{
-		int row, col;
-	};
-public:
-	void Set(int row, int col);
+	void Set(int col);
 	SUBJECT_DECLARATION(SetSelectedRegionSJ)
 }; // SetSelectedRegionSJ
-
-class UpdateSelectedRegionSJ : public d2d::Subject
-{
-public:
-	struct Region
-	{
-		int min, max;
-	};
-public:
-	void Update(int min, int max);
-	SUBJECT_DECLARATION(UpdateSelectedRegionSJ)
-}; // UpdateSelectedRegionSJ
 
 }
 

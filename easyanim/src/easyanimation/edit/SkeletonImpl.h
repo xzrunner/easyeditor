@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "KeyDownHandler.h"
-
 namespace eanim
 {
 
@@ -34,8 +32,6 @@ protected:
 		const d2d::Vector& first_pos) const;
 
 private:
-	KeyDownHandler m_key_handler;
-
 	Joint* m_selected_joint;
 
 	d2d::Vector m_first_pos;

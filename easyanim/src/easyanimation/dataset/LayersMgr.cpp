@@ -2,7 +2,9 @@
 #include "Layer.h"
 
 #include "message/messages.h"
-#include "view/view_utility.h"
+#include "view/ViewMgr.h"
+#include "view/KeysPanel.h"
+#include "dataset/DataMgr.h"
 
 namespace eanim
 {
@@ -11,23 +13,12 @@ LayersMgr::LayersMgr()
 {
 	RegistSubject(InsertLayerSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
+	RegistSubject(ReorderLayerSJ::Instance());
 }
 
 LayersMgr::~LayersMgr()
 {
 	Clear();
-}
-
-void LayersMgr::ChangeLayerOrder(int from, int to)
-{
-	if (from < 0 || from >= m_layers.size()
-		|| to < 0 || to >= m_layers.size()) {
-		return;
-	}
-
-	Layer* layer = m_layers[from];
-	m_layers.erase(m_layers.begin() + from);
-	m_layers.insert(m_layers.begin() + to, layer);
 }
 
 Layer* LayersMgr::GetLayer(size_t index) const
@@ -75,7 +66,7 @@ bool LayersMgr::Clear()
 // 	}
 // }
 
-int LayersMgr::GetMaxFrame() const
+int LayersMgr::GetMaxFrameTime() const
 {
 	int max_frame = -1;
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
@@ -91,35 +82,31 @@ void LayersMgr::OnNotify(int sj_id, void* ud)
 	case MSG_INSERT_LAYER:
 		{
 			Layer* layer = ud ? (Layer*)ud : new Layer;
-			Insert(layer);
+			m_layers.push_back(layer);
 			if (!ud) {
 				layer->InsertKeyFrame(1);
 			}
 		}
 		break;
 	case MSG_REMOVE_LAYER:
-		Remove();
+		{
+			int layer = *(int*)ud;
+			assert(layer >= 0 && layer < m_layers.size());
+			delete m_layers[layer];
+			m_layers.erase(m_layers.begin() + layer);
+		}
 		break;
-	}
-}
-
-void LayersMgr::Insert(Layer* layer)
-{
-	m_layers.push_back(layer);
-	SetCurrFrameSJ::Instance()->Set(m_layers.size() - 1, 0);
-}
-
-void LayersMgr::Remove()
-{
-	int layer = get_curr_layer_index();
-	assert(layer >= 0 && layer < m_layers.size());
-	delete m_layers[layer];
-	m_layers.erase(m_layers.begin() + layer);
-
-	if (layer > 0) {
-		SetCurrFrameSJ::Instance()->Set(layer - 1, -1);
-	} else if (layer == 0) {
-		SetCurrFrameSJ::Instance()->Set(1, -1);
+	case MSG_REORDER_LAYER:
+		{
+			ReorderLayerSJ::Params* p = (ReorderLayerSJ::Params*)ud;
+			if (p->from >= 0 && p->from < m_layers.size() &&
+				p->to >= 0 && p->to < m_layers.size()) {
+				Layer* layer = m_layers[p->from];
+				m_layers.erase(m_layers.begin() + p->from);
+				m_layers.insert(m_layers.begin() + p->to, layer);
+			}
+		}
+		break;
 	}
 }
 

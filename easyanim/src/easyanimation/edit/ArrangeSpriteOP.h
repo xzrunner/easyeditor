@@ -2,7 +2,6 @@
 #define _EASYANIM_ARRANGE_SPRITE_OP_H_
 
 #include "SelectSpritesOP.h"
-#include "KeyDownHandler.h"
 
 namespace eanim
 {
@@ -40,8 +39,6 @@ private:
 	}; // Cross
 
 private:
-	KeyDownHandler m_kd_handler;
-
 	std::vector<Cross*> m_crosses;
 	Cross* m_selected;
 
