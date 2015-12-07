@@ -10,14 +10,25 @@ class ToolbarPanel;
 class StagePanel;
 class LayersPanel;
 class KeysPanel;
+class KeyFrame;
 
-class ViewMgr
+class ViewMgr : public d2d::Observer
 {
 public:	
 	static ViewMgr* Instance();
 
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
+
 private:
 	ViewMgr();
+
+private:
+	void UpdateProperty(KeyFrame* frame);
+	void UpdateViewlist(KeyFrame* frame);
 
 public:
 	// left
@@ -35,6 +46,9 @@ public:
 
 	// right
 	d2d::ViewlistPanel* viewlist;
+
+private:
+	int m_layer, m_frame;
 
 private:
 	static ViewMgr* m_instance;

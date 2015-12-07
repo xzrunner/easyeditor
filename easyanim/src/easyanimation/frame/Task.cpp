@@ -88,10 +88,13 @@ const d2d::EditPanel* Task::GetEditPanel() const
 
 void Task::OnNotify(int sj_id, void* ud)
 {
-	if (sj_id == d2d::MSG_CLEAR_PANEL) {
+	switch (sj_id)
+	{
+	case d2d::MSG_CLEAR_PANEL:
 		DataMgr::Instance()->GetLayers().Clear();
 		ViewMgr::Instance()->library->Clear();
 		InsertLayerSJ::Instance()->Insert();
+		break;
 	}
 }
 

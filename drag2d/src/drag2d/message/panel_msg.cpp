@@ -36,14 +36,4 @@ bool GetKeyStateSJ::Query(int key)
 	return st.state;
 }
 
-//////////////////////////////////////////////////////////////////////////
-// property
-//////////////////////////////////////////////////////////////////////////
-
-SUBJECT_DEFINITION(SetPropertySettingSJ, MSG_SET_PROPERTY_SETTING)
-void SetPropertySettingSJ::Set(IPropertySetting* setting)
-{
-	Notify(setting);
-}
-
 }

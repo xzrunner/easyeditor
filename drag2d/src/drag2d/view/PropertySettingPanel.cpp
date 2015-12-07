@@ -45,8 +45,6 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 	RegistSubject(RemoveShapeSJ::Instance());
 
 	RegistSubject(ClearPanelSJ::Instance());
-
-	RegistSubject(SetPropertySettingSJ::Instance());
 }
 
 PropertySettingPanel::~PropertySettingPanel()
@@ -173,10 +171,6 @@ void PropertySettingPanel::OnNotify(int sj_id, void* ud)
 
 	case MSG_CLEAR_PANEL:
 		ClearSelection();
-		break;
-
-	case MSG_SET_PROPERTY_SETTING:
-		SetPropertySetting((IPropertySetting*)ud);
 		break;
 	}
 }

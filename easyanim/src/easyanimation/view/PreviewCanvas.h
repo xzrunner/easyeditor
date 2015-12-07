@@ -13,7 +13,8 @@ class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		const PlaySettings& settings, d2d::PlayControl& control);
+		const PlaySettings& settings, d2d::PlayControl& control,
+		wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;

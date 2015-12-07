@@ -19,6 +19,8 @@ public:
 	void DeleteSelection();
 
 private:
+	void UpdateRegion(int layer, int frame);
+
 	bool IsSelectionValid() const;
 
 private:

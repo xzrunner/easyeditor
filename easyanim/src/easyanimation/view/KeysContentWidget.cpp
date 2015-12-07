@@ -67,6 +67,7 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(SetSelectedRegionSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
+	RegistSubject(d2d::SetCanvasDirtySJ::Instance());
 }
 
 void KeysContentWidget::OnSize(wxSizeEvent& event)
@@ -145,8 +146,10 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 			bool refresh = false;
 			m_col_min = m_col_max = -1;
 			if (cf->layer == -1 && cf->frame == -1) {
-				m_layer_idx = -1;
+				m_layer_idx = m_frame_idx = m_valid_frame_idx = -1;
+				m_col_min = m_col_max = -1;
 				m_layer = NULL;
+				m_frame = NULL;
 				refresh = true;
 			} else {
 				if (cf->layer != -1 && cf->layer != m_layer_idx) {
@@ -158,13 +161,17 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 					if (cf->frame != -1) {
 						m_frame_idx = cf->frame;
 					}
- 					m_frame = m_layer->GetCurrKeyFrame(m_frame_idx + 1);
+					if (m_layer) {
+						m_frame = m_layer->GetCurrKeyFrame(m_frame_idx + 1);
+					}
  					refresh = true;
-				}				
-				int valid_frame_idx = std::min(m_layer->GetMaxFrameTime() - 1, m_frame_idx);
-				if (valid_frame_idx != m_valid_frame_idx) {
-					m_valid_frame_idx = valid_frame_idx;
-					refresh = true;
+				}
+				if (m_layer) {
+					int valid_frame_idx = std::min(m_layer->GetMaxFrameTime() - 1, m_frame_idx);
+					if (valid_frame_idx != m_valid_frame_idx) {
+						m_valid_frame_idx = valid_frame_idx;
+						refresh = true;
+					}
 				}
 			}
 
@@ -189,13 +196,16 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 		{
 			int layer = *(int*)ud;
 			if (layer == m_layer_idx) {
-				m_layer_idx = m_frame_idx = m_valid_frame_idx = -1;
+				m_layer_idx/* = m_frame_idx*/ = m_valid_frame_idx = -1;
 				m_col_min = m_col_max = -1;
 				m_layer = NULL;
 				m_frame = NULL;
 				Refresh();
 			}
 		}
+		break;
+	case d2d::MSG_SET_CANVAS_DIRTY:
+		Refresh();
 		break;
 	}
 }

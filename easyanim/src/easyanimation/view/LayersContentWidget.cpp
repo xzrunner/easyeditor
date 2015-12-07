@@ -226,7 +226,10 @@ void LayersContentWidget::OnNotify(int sj_id, void* ud)
 	case MSG_SET_CURR_FRAME:
 		{
 			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
-			if (cf->layer != -1 && cf->layer != m_curr_layer) {
+			if (cf->layer == -1 && cf->frame == -1) {
+				m_curr_layer = -1;
+				Refresh();
+			} else if (cf->layer != -1 && cf->layer != m_curr_layer) {
 				m_curr_layer = cf->layer;
 				Refresh();
 			}

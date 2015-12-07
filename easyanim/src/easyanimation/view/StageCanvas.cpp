@@ -32,11 +32,11 @@ void StageCanvas::OnDrawSprites() const
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	m_stage->DrawEditOP();
 
-// #ifdef _DEBUG 
-// 	if (d2d::Config::Instance()->IsUseDTex()) {
-// 		d2d::DrawCallBatching::Instance()->DebugDraw();
-// 	}
-// #endif
+#ifdef _DEBUG 
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->DebugDraw();
+	}
+#endif
 }
 
 void StageCanvas::DrawBackground() const

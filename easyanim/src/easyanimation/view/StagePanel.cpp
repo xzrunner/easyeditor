@@ -16,8 +16,10 @@ namespace eanim
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(GetStageImpl())
+	, m_layer_idx(-1)
 	, m_frame_idx(-1)
 	, m_frame(NULL)
+	, m_refresh(false)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
 	SetEditOP(new ArrangeSpriteOP(this));
@@ -40,6 +42,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 bool StagePanel::Update(int version)
 {
+	if (m_refresh) {
+		m_refresh = false;
+		return true;
+	}
+
 	CheckUpdateVisitor visitor(version);
 	TraverseSprites(visitor, d2d::DT_ALL, true);
 	return visitor.NeedUpdate();
@@ -108,7 +115,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case d2d::MSG_CLEAR_SPRITE:
 		{
 			DataMgr::Instance()->GetLayers().Clear();
-			SetSelectedSJ::Instance()->Set(0, 0);
+			SetSelectedSJ::Instance()->Set(-1, -1);
 
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -120,18 +127,30 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	case MSG_REMOVE_LAYER:
 		ClearSelectedSprite();
+		m_refresh = true;
 		break;
 
 	case MSG_SET_CURR_FRAME:
 		{
 			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
 			if (cf->layer == -1 && cf->frame == -1) {
-				m_frame_idx = -1;
+				m_layer_idx = m_frame_idx = -1;
 				m_frame = NULL;
-			} else if (cf->frame != -1) {
-				m_frame_idx = cf->frame;
-				Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(cf->layer);
-				m_frame = layer->GetCurrKeyFrame(cf->frame + 1);
+			} else {
+				m_refresh = true;
+				GetEditOP()->Clear();
+				if (cf->layer != -1) {
+					m_layer_idx = cf->layer;
+				}
+				if (cf->frame != -1) {
+					m_frame_idx = cf->frame;
+				}
+				if (m_layer_idx != -1) {
+					Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(m_layer_idx);
+					m_frame = layer->GetCurrKeyFrame(m_frame_idx + 1);
+				} else {
+					m_frame = NULL;
+				}
 			}
 		}
 		break;

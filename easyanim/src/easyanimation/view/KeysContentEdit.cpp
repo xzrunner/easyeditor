@@ -1,5 +1,4 @@
 #include "KeysContentEdit.h"
-#include "KeyFramePropertySetting.h"
 
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
@@ -24,45 +23,30 @@ KeysContentEdit::KeysContentEdit()
 void KeysContentEdit::OnMouseLeftDown(int row, int col)
 {
 	int layer_sz = DataMgr::Instance()->GetLayers().Size();
-	if (row >= layer_sz) {
+	if (row < 0 || row >= layer_sz) {
 		return;
 	}
 
-	m_row = row;
-	m_col = col;
+	int layer_idx = layer_sz - row - 1;
 	if (d2d::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
-		SetSelectedRegionSJ::Instance()->Set(col);
+		UpdateRegion(layer_idx, col);
+		SetSelectedRegionSJ::Instance()->Set(m_col);
 	} else {
-		SetSelectedSJ::Instance()->Set(layer_sz - row - 1, col);
-	}
-
-	bool selected = false;
-	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_sz - row - 1);
-	if (layer)
-	{
-		const std::map<int, KeyFrame*>& frames = layer->GetAllFrames();
-		std::map<int, KeyFrame*>::const_iterator itr = frames.find(col+1);
-		if (itr != frames.end())
-		{
-			selected = true;
-			KeyFramePropertySetting* property = 
-				new KeyFramePropertySetting(itr->second);
-			d2d::SetPropertySettingSJ::Instance()->Set(property);
-		}
-	}
-	if (!selected) {
-		d2d::SetPropertySettingSJ::Instance()->Set(NULL);
+		m_row = row;
+		m_col = col;
+		SetSelectedSJ::Instance()->Set(layer_idx, col);
 	}
 }
 
 void KeysContentEdit::OnMouseDragging(int row, int col)
 {
+	UpdateRegion(DataMgr::Instance()->GetLayers().Size() - 1 - row, col);
 	SetSelectedRegionSJ::Instance()->Set(col);
 }
 
 void KeysContentEdit::CopySelection()
 {
-	if (!IsSelectionValid()) {
+	if (m_row == -1 || m_col_min == -1 || m_col_max == -1) {
 		return;
 	}
 
@@ -173,7 +157,7 @@ void KeysContentEdit::PasteSelection()
 
 void KeysContentEdit::DeleteSelection()
 {
-	if (!IsSelectionValid()) {
+	if (m_row == -1 || m_col_min == -1 || m_col_max == -1) {
 		return;
 	}
 
@@ -185,9 +169,14 @@ void KeysContentEdit::DeleteSelection()
 	}
 }
 
-bool KeysContentEdit::IsSelectionValid() const
+void KeysContentEdit::UpdateRegion(int layer_idx, int frame_idx)
 {
-	return m_row != -1 && m_col_min != -1 && m_col_max != -1;
+	if (layer_idx >= 0 && layer_idx < DataMgr::Instance()->GetLayers().Size()) 
+	{
+		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
+		m_col_min = std::min(std::min(m_col, frame_idx), layer->GetMaxFrameTime() - 1);
+		m_col_max = std::min(std::max(m_col, frame_idx), layer->GetMaxFrameTime() - 1);
+	}
 }
 
 }

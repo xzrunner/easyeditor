@@ -68,8 +68,10 @@ private:
 	}; // CheckUpdateVisitor
 
 private:
-	int m_frame_idx;
+	int m_layer_idx, m_frame_idx;
 	KeyFrame* m_frame;
+
+	bool m_refresh;
 
 }; // StagePanel
 

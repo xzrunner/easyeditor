@@ -93,21 +93,25 @@ void KeysScaleWidget::OnMouse(wxMouseEvent& event)
 
 void KeysScaleWidget::OnNotify(int sj_id, void* ud)
 {
-	if (sj_id == MSG_SET_CURR_FRAME) 
+	switch (sj_id)
 	{
-		SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
-		if (cf->layer == -1 && cf->frame == -1) {
-			m_frame_idx = -1;
-			m_layer = NULL;
-		} else {
-			if (cf->layer != -1) {
-				m_layer = DataMgr::Instance()->GetLayers().GetLayer(cf->layer);
-			} 
-			if (cf->frame != -1) {
-				m_frame_idx = std::min(m_layer->GetMaxFrameTime() - 1, cf->frame);
-			}			
+	case MSG_SET_CURR_FRAME:
+		{
+			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
+			if (cf->layer == -1 && cf->frame == -1) {
+				m_frame_idx = -1;
+				m_layer = NULL;
+			} else {
+				if (cf->layer != -1) {
+					m_layer = DataMgr::Instance()->GetLayers().GetLayer(cf->layer);
+				} 
+				if (cf->frame != -1 && m_layer) {
+					m_frame_idx = std::min(m_layer->GetMaxFrameTime() - 1, cf->frame);
+				}
+			}
 			Refresh();
 		}
+		break;
 	}
 }
 

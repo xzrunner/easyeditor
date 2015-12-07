@@ -46,6 +46,9 @@ void KeysPanel::OnNotify(int sj_id, void* ud)
 
 			int row = cf->layer == -1 ? m_selected_row : DataMgr::Instance()->GetLayers().Size() - 1 - cf->layer;
 			int col = cf->frame == -1 ? m_selected_col : cf->frame;
+			if (row == -1) {
+				return;
+			}
 			if (row == m_selected_row && col == m_selected_col) {
 				return;
 			}
@@ -53,19 +56,10 @@ void KeysPanel::OnNotify(int sj_id, void* ud)
 			if (row != m_selected_row) {
 				m_selected_row = row;
 				assert(cf->layer < DataMgr::Instance()->GetLayers().Size());
-				m_layer = DataMgr::Instance()->GetLayers().GetLayer(row);
+				m_layer = DataMgr::Instance()->GetLayers().GetLayer(cf->layer);
 			}
 			if (col != m_selected_col) {
 				m_selected_col = col;
-			}
-
-			KeyFrame* frame = m_layer->GetCurrKeyFrame(m_selected_col + 1);
-			ViewMgr::Instance()->viewlist->Clear();
-			if (frame) {
-				const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
-				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					ViewMgr::Instance()->viewlist->Insert(sprites[i]);
-				}
 			}
 		}
 		break;

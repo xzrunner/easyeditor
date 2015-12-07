@@ -44,18 +44,6 @@ public:
 	SUBJECT_DECLARATION(GetKeyStateSJ)
 }; // GetKeyStateSJ
 
-//////////////////////////////////////////////////////////////////////////
-// property
-//////////////////////////////////////////////////////////////////////////
-
-class IPropertySetting;
-class SetPropertySettingSJ : public Subject
-{
-public:
-	void Set(IPropertySetting* setting);
-	SUBJECT_DECLARATION(SetPropertySettingSJ)
-}; // SetPropertySettingSJ
-
 }
 
 #endif // _DRAG2D_PANEL_MSG_H_

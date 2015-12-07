@@ -32,9 +32,6 @@ enum SUBJECT_ID {
 	MSG_EDIT_REDO,
 	MSG_EDIT_ADD_RECORD,
 	MSG_GET_KEY_STATE,
-
-	// property panel
-	MSG_SET_PROPERTY_SETTING,
 };
 
 }

@@ -13,14 +13,14 @@ namespace eanim
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent);
+	PreviewDialog(wxWindow* parent, wxGLContext* glctx);
 	~PreviewDialog();
 
 private:
-	void InitLayout();
+	void InitLayout(wxGLContext* glctx);
 
 	void BuildToolBar(wxSizer* top_sizer);
-	void BuildEditPanel(wxSizer* top_sizer);
+	void BuildEditPanel(wxSizer* top_sizer, wxGLContext* glctx);
 
 	void OnSetCirculate(wxCommandEvent& event);
 	void OnSetStop(wxCommandEvent& event);
