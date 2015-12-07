@@ -13,7 +13,7 @@
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
 #include "render/BlendModes.h"
-#include "widgets/ColorProperty.h"
+#include "widgets/MyColorProperty.h"
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
 #include "message/SetCanvasDirtySJ.h"
@@ -223,13 +223,13 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	FilterMode filter = spr->GetFilterMode();
 	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromID(filter));
 
-	ColorProperty* rp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.R"));
+	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new PropertyColorListener(&spr->r_trans));
 
-	ColorProperty* gp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.G"));
+	MyColorProperty* gp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.G"));
 	gp->SetListener(new PropertyColorListener(&spr->g_trans));
 
-	ColorProperty* bp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.B"));
+	MyColorProperty* bp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.B"));
 	bp->SetListener(new PropertyColorListener(&spr->b_trans));
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
@@ -300,11 +300,11 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Multi"), wxPG_LABEL, mul_col));
 		pg->AppendIn(col_prop, new wxColourProperty(wxT("Add"), wxPG_LABEL, add_col));
 	} else {
-		ColorProperty* multi_prop = new ColorProperty("Multi");
+		MyColorProperty* multi_prop = new MyColorProperty("Multi");
 		multi_prop->SetListener(new PropertyColorListener(&spr->multiCol));
 		pg->AppendIn(col_prop, multi_prop);
 
-		ColorProperty* add_prop = new ColorProperty("Add");
+		MyColorProperty* add_prop = new MyColorProperty("Add");
 		add_prop->SetListener(new PropertyColorListener(&spr->addCol));
 		pg->AppendIn(col_prop, add_prop);
 	}
@@ -316,15 +316,15 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	wxPGProperty* col_conv_prop = pg->Append(new wxStringProperty(wxT("Color Conversion"), wxPG_LABEL, wxT("<composed>")));
 	col_conv_prop->SetExpanded(false);
 
-	ColorProperty* col_r_prop = new ColorProperty("R");
+	MyColorProperty* col_r_prop = new MyColorProperty("R");
 	col_r_prop->SetListener(new PropertyColorListener(&spr->r_trans));
 	pg->AppendIn(col_conv_prop, col_r_prop);
 
-	ColorProperty* col_g_prop = new ColorProperty("G");
+	MyColorProperty* col_g_prop = new MyColorProperty("G");
 	col_g_prop->SetListener(new PropertyColorListener(&spr->g_trans));
 	pg->AppendIn(col_conv_prop, col_g_prop);
 
-	ColorProperty* col_b_prop = new ColorProperty("B");
+	MyColorProperty* col_b_prop = new MyColorProperty("B");
 	col_b_prop->SetListener(new PropertyColorListener(&spr->b_trans));
 	pg->AppendIn(col_conv_prop, col_b_prop);
 

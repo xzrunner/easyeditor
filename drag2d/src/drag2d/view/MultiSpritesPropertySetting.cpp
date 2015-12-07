@@ -205,15 +205,15 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 	wxPGProperty* col_conv_prop = pg->Append(new wxStringProperty(wxT("Color Conversion"), wxPG_LABEL, wxT("<composed>")));
 	col_conv_prop->SetExpanded(false);
 
-// 	ColorProperty* col_r_prop = new ColorProperty("R");
+// 	MyColorProperty* col_r_prop = new MyColorProperty("R");
 // 	col_r_prop->SetColor(m_impl->GetTransColorR());
 // 	pg->AppendIn(col_conv_prop, col_r_prop);
 // 
-// 	ColorProperty* col_g_prop = new ColorProperty("G");
+// 	MyColorProperty* col_g_prop = new MyColorProperty("G");
 // 	col_g_prop->SetColor(m_impl->GetTransColorG());
 // 	pg->AppendIn(col_conv_prop, col_g_prop);
 // 
-// 	ColorProperty* col_b_prop = new ColorProperty("B");
+// 	MyColorProperty* col_b_prop = new MyColorProperty("B");
 // 	col_b_prop->SetColor(m_impl->GetTransColorB());
 // 	pg->AppendIn(col_conv_prop, col_b_prop);
 

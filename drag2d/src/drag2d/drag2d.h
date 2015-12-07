@@ -85,6 +85,7 @@
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
 #include "view/EditPanel.h"
+#include "view/PropertyColorMonitor.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"
@@ -124,7 +125,8 @@
 #include "widgets/SliderCtrl.h"
 #include "widgets/HSLColorSettingDlg.h"
 #include "widgets/RGBColorSettingDlg.h"
-#include "widgets/ColorProperty.h"
+#include "widgets/MyColorProperty.h"
+#include "widgets/SysColorProperty.h"
 #include "widgets/OneFloatValueStatic.h"
 #include "widgets/OneFloatValueCMPT.h"
 #include "widgets/UICallback.h"

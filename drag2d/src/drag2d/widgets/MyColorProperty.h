@@ -1,5 +1,5 @@
-#ifndef _DRAG2D_COLOR_PROPERTY_H_
-#define _DRAG2D_COLOR_PROPERTY_H_
+#ifndef _DRAG2D_MY_COLOR_PROPERTY_H_
+#define _DRAG2D_MY_COLOR_PROPERTY_H_
 
 #include <wx/propgrid/propgrid.h>
 
@@ -9,14 +9,14 @@ namespace d2d
 class IColorMonitor;
 struct Colorf;
 
-class ColorProperty : public wxLongStringProperty
+class MyColorProperty : public wxLongStringProperty
 {
-	WX_PG_DECLARE_PROPERTY_CLASS(wxTriangleProperty)
+	WX_PG_DECLARE_PROPERTY_CLASS(MyColorProperty)
 
 public:
-	ColorProperty(const wxString& label = wxPG_LABEL, 
+	MyColorProperty(const wxString& label = wxPG_LABEL, 
 		const wxString& name = wxPG_LABEL);
-	virtual ~ColorProperty();
+	virtual ~MyColorProperty();
 
 	virtual wxVariant ChildChanged( wxVariant& thisValue,
 		int childIndex,
@@ -33,8 +33,8 @@ private:
 
 	IColorMonitor* m_lsn;
 
-}; // ColorProperty
+}; // MyColorProperty
 
 }
 
-#endif // _DRAG2D_COLOR_PROPERTY_H_
+#endif // _DRAG2D_MY_COLOR_PROPERTY_H_

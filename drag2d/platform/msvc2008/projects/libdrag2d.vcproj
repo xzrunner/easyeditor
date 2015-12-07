@@ -2705,11 +2705,19 @@
 				Name="property"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\widgets\ColorProperty.cpp"
+					RelativePath="..\..\..\src\drag2d\widgets\MyColorProperty.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\widgets\ColorProperty.h"
+					RelativePath="..\..\..\src\drag2d\widgets\MyColorProperty.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SysColorProperty.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SysColorProperty.h"
 					>
 				</File>
 			</Filter>

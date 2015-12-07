@@ -4,8 +4,6 @@
 #include "EditPolylineOP.h"
 #include "DrawPolygonOP.h"
 
-#include <wx/colordlg.h>
-
 namespace libshape
 {
 
@@ -14,8 +12,7 @@ class DrawPolygonCMPT : public d2d::OneFloatValueCMPT
 public:
 	DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
 		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* property
-		/*, wxColourData& colorData*/);
+		d2d::PropertySettingPanel* property);
 
 	virtual void updateControlValue();
 

@@ -3,29 +3,18 @@
 #include "PolygonShape.h"
 #include "DrawPencilPolygonCMPT.h"
 
-#include <wx/colordlg.h>
-
 namespace libshape
 {
 
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
 								 d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-								 d2d::PropertySettingPanel* property
-								 /*, wxColourData& colorData*/)
+								 d2d::PropertySettingPanel* property)
 	: d2d::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)
 	, m_stage_wnd(stage_wnd)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
-//	, m_colorData(colorData)
 {
 	m_editOP = NULL;
-
-// 	// old
-// 	addChild(new d2d::UniversalCMPT(this, wxT("直接画线"), editPanel, 
-// 		new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this, this)));
-// 	addChild(new d2d::UniversalCMPT(this, wxT("选节点画线"), editPanel, 
-// 		new EditPolylineWithCopyNodeOP<DrawPolygonOP>(editPanel, shapesImpl, propertyPanel)));
-
 	// draw polygon with pen, node capture
 	{
 		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
@@ -98,14 +87,6 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 	{
 	case 0:
 		{
-//			wxColourDialog dialog(this/*, &m_colorData*/);
-//			dialog.SetTitle(wxT("选择颜色"));
-//			if (dialog.ShowModal() == wxID_OK)
-//			{
-//				m_color = dialog.GetColourData().GetColour();
-////				m_colorData = dialog.GetColourData();
-//			}
-
 			// todo trans between wxColor and d2d::Colorf
 			d2d::Colorf col;
 			col.r = m_color.Red() / 255.0f;

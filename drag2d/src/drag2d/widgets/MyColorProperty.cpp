@@ -1,4 +1,4 @@
-#include "ColorProperty.h"
+#include "MyColorProperty.h"
 #include "IColorMonitor.h"
 #include "RGBColorSettingDlg.h"
 #include "HSLColorSettingDlg.h"
@@ -9,18 +9,18 @@
 namespace d2d
 {
 
-WX_PG_IMPLEMENT_PROPERTY_CLASS(ColorProperty,wxLongStringProperty,wxSize,const wxSize&,TextCtrlAndButton)
+WX_PG_IMPLEMENT_PROPERTY_CLASS(MyColorProperty,wxLongStringProperty,wxSize,const wxSize&,TextCtrlAndButton)
 
-ColorProperty::ColorProperty(const wxString& label, const wxString& name) 
+MyColorProperty::MyColorProperty(const wxString& label, const wxString& name) 
 	: wxLongStringProperty(label, name)
 	, m_lsn(NULL)
 	, m_parent(NULL)
 {}
 
-ColorProperty::~ColorProperty() 
+MyColorProperty::~MyColorProperty() 
 {}
 
-void ColorProperty::RefreshChildren()
+void MyColorProperty::RefreshChildren()
 {
 //     if ( !GetChildCount() ) return;
 //     const wxSize& size = wxSizeRefFromVariant(m_value);
@@ -28,7 +28,7 @@ void ColorProperty::RefreshChildren()
 //     Item(1)->SetValue( (long)size.y );
 }
 
-wxVariant ColorProperty::ChildChanged( wxVariant& thisValue,
+wxVariant MyColorProperty::ChildChanged( wxVariant& thisValue,
                                         int childIndex,
                                         wxVariant& childValue ) const
 {
@@ -40,7 +40,7 @@ wxVariant ColorProperty::ChildChanged( wxVariant& thisValue,
 //	}
 }
 
-bool ColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
+bool MyColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 {
 	if (!m_lsn) {
 		return false;
@@ -68,7 +68,7 @@ bool ColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 	return false;
 }
 
-void ColorProperty::SetListener(IColorMonitor* lsn) 
+void MyColorProperty::SetListener(IColorMonitor* lsn) 
 { 
 	if (m_lsn) {
 		delete m_lsn;

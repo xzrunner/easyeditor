@@ -229,6 +229,14 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\libtext\ColorConfig.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtext\ColorConfig.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libtext\GTxt.cpp"
 				>
 			</File>

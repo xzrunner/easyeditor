@@ -41,6 +41,7 @@ public:
 	void SetFontSize(int size) { m_font_size = size; }
 
 	const d2d::Colorf& GetFontColor() const { return m_font_color; }
+	d2d::Colorf& GetFontColor() { return m_font_color; }
 	void SetFontColor(const d2d::Colorf& col) { m_font_color = col; }
 
 	bool GetEdge() const { return m_edge; }

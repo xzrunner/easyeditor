@@ -1,5 +1,6 @@
 #include "PropertySetting.h"
 #include "Sprite.h"
+#include "ColorConfig.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -13,8 +14,16 @@ const wxChar* VERT_ALIGN_LABELS[] = {
 
 PropertySetting::PropertySetting(d2d::EditPanelImpl* edit_impl, Sprite* sprite)
 	: d2d::SpritePropertySetting(edit_impl, sprite)
+	, m_parent(edit_impl->GetEditPanel())
 {
 	m_type = "Text";
+
+	ColorConfig::Instance()->LoadFromFile();
+}
+
+PropertySetting::~PropertySetting()
+{
+	ColorConfig::Instance()->StoreToFile();
 }
 
 void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
@@ -131,9 +140,16 @@ void PropertySetting::InitProperties(wxPropertyGrid* pg)
 	}
 	pg->Append(new wxEnumProperty("Font", wxPG_LABEL, choices));
 	pg->Append(new wxIntProperty("FontSize", wxPG_LABEL, spr->GetFontSize()));
-	const d2d::Colorf& font_col = spr->GetFontColor();
-	pg->Append(new wxColourProperty("FontColor", wxPG_LABEL, wxColour(font_col.r*255, font_col.g*255, font_col.b*255, font_col.a*255)));
-	pg->SetPropertyAttribute("FontColor", "HasAlpha", false);
+
+//	const d2d::Colorf& font_col = spr->GetFontColor();
+// 	pg->Append(new wxColourProperty("FontColor", wxPG_LABEL, wxColour(font_col.r*255, font_col.g*255, font_col.b*255, font_col.a*255)));
+// 	pg->SetPropertyAttribute("FontColor", "HasAlpha", false);
+
+	d2d::SysColorProperty* col_prop = new d2d::SysColorProperty("FontColor");
+	col_prop->SetParent(m_parent);
+	col_prop->SetColorData(ColorConfig::Instance()->GetColorData());
+	col_prop->SetListener(new d2d::PropertyColorListener(&spr->GetFontColor()));
+	pg->Append(col_prop);
 
 	pg->Append(new wxBoolProperty("Edge", wxPG_LABEL, spr->GetEdge()));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
