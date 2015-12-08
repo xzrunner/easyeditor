@@ -34,6 +34,7 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 	} else {
 		m_row = row;
 		m_col = col;
+		m_col_min = m_col_max = col;
 		SetSelectedSJ::Instance()->Set(layer_idx, col);
 	}
 }
