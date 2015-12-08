@@ -29,7 +29,7 @@ public:
 private:
 	static Layer* LoadLayer(const Json::Value& layerValue,
 		const std::string& dir);
-	static KeyFrame* LoadFrame(const Json::Value& frameValue,
+	static KeyFrame* LoadFrame(Layer* layer, const Json::Value& frameValue,
 		const std::string& dir);
 	static d2d::ISprite* LoadActor(const Json::Value& actorValue,
 		const std::string& dir);
@@ -38,7 +38,7 @@ private:
 
 	static Layer* LoadLayer(rapidxml::xml_node<>* layerNode, 
 		const std::map<std::string, std::string>& mapNamePath);
-	static KeyFrame* LoadFrame(rapidxml::xml_node<>* frameNode,
+	static KeyFrame* LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 		const std::map<std::string, std::string>& mapNamePath);
 	static d2d::ISprite* LoadActor(rapidxml::xml_node<>* actorNode,
 		const std::map<std::string, std::string>& mapNamePath);

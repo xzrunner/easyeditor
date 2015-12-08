@@ -221,7 +221,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 	int i = 0;
 	Json::Value frameValue = layerValue["frame"][i++];
 	while (!frameValue.isNull()) {
-		KeyFrame* frame = LoadFrame(frameValue, dir);
+		KeyFrame* frame = LoadFrame(layer, frameValue, dir);
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 		frameValue = layerValue["frame"][i++];
@@ -237,11 +237,12 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 	return layer;
 }
 
-KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& dir)
+KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const std::string& dir)
 {
 	int time = frameValue["time"].asInt();
 
 	KeyFrame* frame = new KeyFrame(time);
+	frame->SetLayer(layer);
 
 	frame->SetID(frameValue["id"].asInt());
 
@@ -392,7 +393,7 @@ Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 	rapidxml::xml_node<>* frameNode = layerNode->first_node("frames")
 		->first_node("DOMFrame");
 	while (frameNode) {
-		KeyFrame* frame = LoadFrame(frameNode, mapNamePath);
+		KeyFrame* frame = LoadFrame(layer, frameNode, mapNamePath);
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 		frameNode = frameNode->next_sibling();
@@ -401,12 +402,14 @@ Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 	return layer;
 }
 
-KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
+KeyFrame* FileIO::LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath)
 {
 	int time = d2d::StringTools::FromString<int>(frameNode->first_attribute("index")->value()) + 1;
 
 	KeyFrame* frame = new KeyFrame(time);
+	frame->SetLayer(layer);
+
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
