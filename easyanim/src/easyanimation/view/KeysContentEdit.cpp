@@ -19,7 +19,7 @@ KeysContentEdit::KeysContentEdit()
 	m_row = m_col = -1;
 	m_col_min = m_col_max = -1;
 
-//	RegistSubject(SetSelectedSJ::Instance());
+	RegistSubject(SetSelectedSJ::Instance());
 }
 
 void KeysContentEdit::OnMouseLeftDown(int row, int col)
@@ -119,6 +119,8 @@ void KeysContentEdit::PasteSelection()
 
 	//////////////////////////////////////////////////////////////////////////
 
+	EnableObserve(false);
+
 	size_t index = DataMgr::Instance()->GetLayers().Size() - m_row - 1;
 	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
 	for (int iframe = 0, n = value["frame"].size(); iframe < n; ++iframe) 
@@ -152,6 +154,8 @@ void KeysContentEdit::PasteSelection()
 	}
 
 	d2d::RefreshPanelSJ::Instance()->Refresh();
+
+	EnableObserve(true);
 
 	//////////////////////////////////////////////////////////////////////////
 
