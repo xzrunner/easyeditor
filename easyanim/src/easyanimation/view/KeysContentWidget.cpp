@@ -410,11 +410,13 @@ void KeysContentWidget::OnDeleteClassicTween(wxCommandEvent& event)
 void KeysContentWidget::OnInsertFrame(wxCommandEvent& event)
 {
 	OnInsertFrame();
+	Refresh();
 }
 
 void KeysContentWidget::OnDeleteFrame(wxCommandEvent& event)
 {
 	OnDeleteFrame();
+	Refresh();
 }
 
 void KeysContentWidget::OnInsertKeyFrame(wxCommandEvent& event)
