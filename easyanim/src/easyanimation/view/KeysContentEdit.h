@@ -1,12 +1,12 @@
 #ifndef _EASYANIM_KEYS_CONTENT_EDIT_H_
 #define _EASYANIM_KEYS_CONTENT_EDIT_H_
 
-#include <vector>
+#include <drag2d.h>
 
 namespace eanim
 {
 
-class KeysContentEdit
+	class KeysContentEdit : public d2d::Observer
 {
 public:
 	KeysContentEdit();
@@ -17,6 +17,12 @@ public:
 	void CopySelection();
 	void PasteSelection();
 	void DeleteSelection();
+
+protected:
+	//
+	//	interface Observer
+	//
+	virtual void OnNotify(int sj_id, void* ud);
 
 private:
 	void UpdateRegion(int layer, int frame);

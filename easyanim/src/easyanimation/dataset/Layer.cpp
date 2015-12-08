@@ -83,7 +83,8 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		aop->AddInserted(GetEndFrame());
 	}
 
-	SetSelectedSJ::Instance()->Set(-1, GetMaxFrameTime() - 1);
+	int frame = std::min(begin - 1, GetMaxFrameTime() - 1);
+	SetSelectedSJ::Instance()->Set(-1, frame);
 
 	return aop;
 }
@@ -192,6 +193,8 @@ void Layer::RemoveKeyFrame(int time)
 	KeyFrame* frame = GetCurrKeyFrame(time);
 	if (frame) {
 		frame_idx = frame->GetTime() - 1;
+	} else {
+		frame_idx = GetMaxFrameTime() - 1;
 	}
 	SetSelectedSJ::Instance()->Set(-1, frame_idx);
 }

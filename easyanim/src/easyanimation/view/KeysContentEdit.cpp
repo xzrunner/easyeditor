@@ -18,6 +18,8 @@ KeysContentEdit::KeysContentEdit()
 {
 	m_row = m_col = -1;
 	m_col_min = m_col_max = -1;
+
+//	RegistSubject(SetSelectedSJ::Instance());
 }
 
 void KeysContentEdit::OnMouseLeftDown(int row, int col)
@@ -167,6 +169,29 @@ void KeysContentEdit::DeleteSelection()
 	if (layer) {
 		d2d::AbstractAtomicOP* aop = layer->RemoveFrameRegion(m_col_min + 1, m_col_max + 1);
 		d2d::EditAddRecordSJ::Instance()->Add(aop);
+	}
+}
+
+void KeysContentEdit::OnNotify(int sj_id, void* ud)
+{
+	switch (sj_id)
+	{
+	case MSG_SET_CURR_FRAME:
+		{
+			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
+			if (cf->layer == -1 && cf->frame == -1) {
+				m_row = m_col = -1;
+				m_col_min = m_col_max = -1;
+			} else {
+				if (cf->layer != -1) {
+					m_row = DataMgr::Instance()->GetLayers().Size() - 1 - cf->layer;
+				}
+				if (cf->frame != -1) {
+					m_col = m_col_min = m_col_max = cf->frame;
+				}
+			}
+		}
+		break;
 	}
 }
 
