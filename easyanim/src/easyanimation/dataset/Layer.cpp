@@ -83,7 +83,7 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 		aop->AddInserted(GetEndFrame());
 	}
 
-	SetSelectedSJ::Instance()->Set(-1, GetMaxFrameTime());
+	SetSelectedSJ::Instance()->Set(-1, GetMaxFrameTime() - 1);
 
 	return aop;
 }
