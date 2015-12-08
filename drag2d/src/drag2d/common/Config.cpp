@@ -32,24 +32,13 @@ Config* Config::Instance()
 	}
 
 	if (!m_loaded) {
-		wxLogDebug("+++++++ Config::Instance 0, %s", FILENAME);
-
 		if (FilenameTools::IsFileExist(FILENAME)) {
-			wxLogDebug("+++++++ Config::Instance 1");
-
 			m_instance->LoadFromFile(FILENAME);
 		} else {
-			wxLogDebug("+++++++ Config::Instance 2");
-
 			wxStandardPathsBase& stdp = wxStandardPaths::Get();
 			wxString exe_path = stdp.GetExecutablePath();
 			wxString cfg_path = FilenameTools::getFileDir(exe_path) + "\\" + FILENAME;
-
-			wxLogDebug("+++++++ Config::Instance 3, %s", cfg_path);
-
 			if (FilenameTools::IsFileExist(cfg_path)) {
-				wxLogDebug("+++++++ Config::Instance 4");
-
 				m_instance->LoadFromFile(cfg_path);
 			}
 		}
