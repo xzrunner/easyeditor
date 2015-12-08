@@ -46,14 +46,14 @@ Frame::Frame(const wxString& title, const wxString& filetag, const wxSize& size)
 	LoadWindowConfig();
 	loadTmpInfo();
 	initMenuBar();
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	initStatueBar();
 
 	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
 	m_log_chain = new wxLogChain(new wxLogStderr);
-#else
-	wxLog::SetLogLevel(0);
-#endif
+// #else
+// 	wxLog::SetLogLevel(0);
+// #endif
 
 	StackTrace::InitUnhandledExceptionFilter();
 
@@ -62,9 +62,9 @@ Frame::Frame(const wxString& title, const wxString& filetag, const wxSize& size)
 
 Frame::~Frame()
 {
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	delete m_log_chain;
-#endif
+//#endif
 
 	StoreWindowConfig();
 	saveTmpInfo();

@@ -131,9 +131,9 @@ private:
 
 	SpecialConfig m_config;
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 	wxLogChain* m_log_chain;
-#endif
+//#endif
 
 private:
 	DECLARE_EVENT_TABLE()

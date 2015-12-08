@@ -98,6 +98,9 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	for (int i = 0, n = fonts.size(); i < n; ++i) {
 		choices.push_back(fonts[i].first);
 	}
+
+	wxLogDebug("PropertySetting::UpdateProperties choices: %d, font: %d", choices.size(), spr->GetFont());
+
 	pg->GetProperty("Font")->SetValue(choices[spr->GetFont()]);
 	pg->GetProperty("FontSize")->SetValue(spr->GetFontSize());
 	const d2d::Colorf& font_col = spr->GetFontColor();
