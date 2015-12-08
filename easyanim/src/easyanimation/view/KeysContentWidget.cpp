@@ -183,7 +183,6 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 	case MSG_SET_SELECTED_REGION:
 		if (m_layer) {
 			m_col_min = m_col_max = -1;
-			m_frame = NULL;
 
 			int col = *(int*)ud;
 			m_col_min = std::min(std::min(m_frame_idx, col), m_layer->GetMaxFrameTime() - 1);
