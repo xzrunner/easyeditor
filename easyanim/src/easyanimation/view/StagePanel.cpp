@@ -208,6 +208,7 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 	assert(ud->layer_idx != -1);
 	while (ud && ud->layer_idx >= DataMgr::Instance()->GetLayers().Size()) {
 		InsertLayerSJ::Instance()->Insert();
+		SetSelectedSJ::Instance()->Set(0, 0);
 	}
 
 // 	int old_layer, old_frame;

@@ -45,6 +45,8 @@ void FileIO::Load(const std::string& filepath)
 	DataMgr::Instance()->name = value["name"].asString();
 
 	DataMgr::Instance()->GetLayers().Clear();
+	ViewMgr::Instance()->library->Clear();
+	SetSelectedSJ::Instance()->Set(-1, -1);
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
@@ -110,6 +112,8 @@ void FileIO::Reload()
 	if (m_filepath.empty()) return;
 
 	DataMgr::Instance()->GetLayers().Clear();
+	ViewMgr::Instance()->library->Clear();
+	SetSelectedSJ::Instance()->Set(-1, -1);
 
 	Json::Value value;
 	Json::Reader reader;
@@ -157,6 +161,7 @@ void FileIO::LoadFlash(const std::string& filepath)
 	while (layerNode) {
 		Layer* layer = LoadLayer(layerNode, mapNamePath);
 		InsertLayerSJ::Instance()->Insert(layer);
+		SetSelectedSJ::Instance()->Set(0, 0);
 		layerNode = layerNode->next_sibling();
 	}
 
@@ -209,6 +214,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir)
 {
 	Layer* layer = new Layer;
 	InsertLayerSJ::Instance()->Insert(layer);
+	SetSelectedSJ::Instance()->Set(0, 0);
 
 	layer->SetName(layerValue["name"].asString());
 

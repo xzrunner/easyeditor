@@ -70,7 +70,6 @@ void LayersPropertyWidget::InitLayout()
 void LayersPropertyWidget::OnAddLayer(wxCommandEvent& event)
 {
 	InsertLayerSJ::Instance()->Insert();
-
 	SetSelectedSJ::Instance()->Set(DataMgr::Instance()->GetLayers().Size() - 1, 0);
 }
 

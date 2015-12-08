@@ -35,6 +35,7 @@ ViewMgr::ViewMgr()
 	m_layer = m_frame = -1;
 
 	RegistSubject(SetSelectedSJ::Instance());
+
 }
 
 void ViewMgr::OnNotify(int sj_id, void* ud)
@@ -45,6 +46,7 @@ void ViewMgr::OnNotify(int sj_id, void* ud)
 		{
 			SetSelectedSJ::Position* cf = (SetSelectedSJ::Position*)ud;
 			if (cf->layer == -1 && cf->frame == -1) {
+				m_layer = m_frame = -1;
 				viewlist->Clear();
 			} else {
 				if (cf->layer != -1) {

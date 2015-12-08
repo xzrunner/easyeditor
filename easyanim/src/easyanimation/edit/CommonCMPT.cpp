@@ -113,6 +113,8 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 		return;
 
 	DataMgr::Instance()->GetLayers().Clear();
+	ViewMgr::Instance()->library->Clear();
+	SetSelectedSJ::Instance()->Set(-1, -1);
 
 	op->SetMouseMoveFocus(true);
 
@@ -148,6 +150,9 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	}
 
 	DataMgr::Instance()->GetLayers().Clear();
+	ViewMgr::Instance()->library->Clear();
+	SetSelectedSJ::Instance()->Set(-1, -1);
+
 	Layer* layer = new Layer();
 	std::map<int, std::vector<std::string> >::iterator itr
 		= mapFrameSymbols.begin();
@@ -167,7 +172,6 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 		frame->Release();
 	}
 	InsertLayerSJ::Instance()->Insert(layer);
-
 	SetSelectedSJ::Instance()->Set(0, 0);
 
 	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
@@ -181,6 +185,8 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 
 	if (!symbols.empty()) {
 		DataMgr::Instance()->GetLayers().Clear();
+		ViewMgr::Instance()->library->Clear();
+		SetSelectedSJ::Instance()->Set(-1, -1);
 	} else {
 		return;
 	}
@@ -198,6 +204,7 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 		frame->Release();
 	}
 	InsertLayerSJ::Instance()->Insert(layer);
+	SetSelectedSJ::Instance()->Set(0, 0);
 }
 
 void CommonCMPT::OnFillingFrames(wxCommandEvent& event)

@@ -50,8 +50,6 @@ void Task::Load(const char* filepath)
 		return;
 	}
 
-	DataMgr::Instance()->GetLayers().Clear();
-
 	try {
 		FileIO::Load(filepath);
 	} catch (d2d::Exception& e) {
@@ -94,6 +92,7 @@ void Task::OnNotify(int sj_id, void* ud)
 		DataMgr::Instance()->GetLayers().Clear();
 		ViewMgr::Instance()->library->Clear();
 		InsertLayerSJ::Instance()->Insert();
+		SetSelectedSJ::Instance()->Set(0, 0);
 		break;
 	}
 }
