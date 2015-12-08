@@ -25,7 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	SetEditOP(new ArrangeSpriteOP(this));
 	SetCanvas(new StageCanvas(this)); 
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), ViewMgr::Instance()->library));
+	SetDropTarget(new StageDropTarget(this, ViewMgr::Instance()->library));
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuDelJointNode, this, Menu_DelJointNode);
@@ -225,8 +225,9 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 
 void StagePanel::InsertWithoutUD(d2d::ISprite* spr)
 {
-	assert(m_frame);
-	m_frame->Insert(spr);
+	if (m_frame) {
+		m_frame->Insert(spr);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -249,6 +250,33 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	} else {
 		bFetchNext = true;
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class StagePanel::StageDropTarget
+//////////////////////////////////////////////////////////////////////////
+
+StagePanel::StageDropTarget::
+StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
+	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
+	, m_stage(stage)
+{
+}
+
+void StagePanel::StageDropTarget::
+OnDropText(wxCoord x, wxCoord y, const wxString& text)
+{
+	if (m_stage->IsCurrFrameValid()) {
+		d2d::StageDropTarget::OnDropText(x, y, text);
+	}
+}
+
+void StagePanel::StageDropTarget::
+OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
+{
+	if (m_stage->IsCurrFrameValid()) {
+		d2d::StageDropTarget::OnDropFiles(x, y, filenames);
+	}	
 }
 
 } // eanim

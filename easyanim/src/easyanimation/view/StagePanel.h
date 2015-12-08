@@ -44,6 +44,8 @@ private:
 	void InsertWithUD(d2d::ISprite* spr);
 	void InsertWithoutUD(d2d::ISprite* spr);
 
+	bool IsCurrFrameValid() const { return m_frame != NULL; }
+
 public:
 	enum
 	{
@@ -66,6 +68,19 @@ private:
 		bool m_update;
 
 	}; // CheckUpdateVisitor
+
+	class StageDropTarget : public d2d::StageDropTarget
+	{
+	public:
+		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
+
+		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text);
+		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
+
+	private:
+		StagePanel* m_stage;
+
+	}; // StageDropTarget
 
 private:
 	int m_layer_idx, m_frame_idx;

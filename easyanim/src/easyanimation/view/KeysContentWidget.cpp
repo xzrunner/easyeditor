@@ -187,6 +187,9 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 			int col = *(int*)ud;
 			m_col_min = std::min(std::min(m_frame_idx, col), m_layer->GetMaxFrameTime() - 1);
 			m_col_max = std::min(std::max(m_frame_idx, col), m_layer->GetMaxFrameTime() - 1);
+			if (m_col_min == m_col_max) {
+				SetSelectedSJ::Instance()->Set(-1, m_col_min);
+			}
 
 			Refresh();
 		}
