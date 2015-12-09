@@ -3,6 +3,7 @@
 #include "dataset/Image.h"
 #include "render/ShaderMgr.h"
 #include "render/RenderContextStack.h"
+#include "render/ShaderContext.h"
 
 #include <dtex.h>
 
@@ -247,7 +248,7 @@ int DrawCallBatching::Load(const Image* img)
 
 	int key = m_path2id.size();
 	m_path2id.insert(std::make_pair(filepath, key));
-	dtexf_c2_load_tex(img->GetTexID(), img->GetOriginWidth(), img->GetOriginHeight(), key);
+	dtexf_c2_load_tex(img->GetTexID(), img->GetClippedWidth(), img->GetClippedHeight(), key);
 
 	return key;
 }
@@ -308,6 +309,7 @@ void DrawCallBatching::OnSize(int w, int h)
 
 void DrawCallBatching::DebugDraw() const
 {
+	ShaderContext::Flush();
 	dtexf_debug_draw();
 }
 
