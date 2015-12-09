@@ -32,6 +32,7 @@ LayersContentWidget::LayersContentWidget(wxWindow* parent)
 
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
+	RegistSubject(d2d::RefreshPanelSJ::Instance());
 }
 
 wxCoord LayersContentWidget::OnGetRowHeight(size_t row) const
@@ -161,10 +162,10 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
 			if (layer && x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->SetEditable(!layer->IsEditable());
-				Refresh(true);
+				d2d::RefreshPanelSJ::Instance()->Refresh();
 			} else if (layer && x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
 				layer->SetVisible(!layer->IsVisible());
-				Refresh(true);
+				d2d::RefreshPanelSJ::Instance()->Refresh();
 			}
 		}
 
@@ -243,6 +244,10 @@ void LayersContentWidget::OnNotify(int sj_id, void* ud)
 				Refresh();
 			}
 		}
+		break;
+
+	case d2d::MSG_REFRESH_PANEL:
+		Refresh();
 		break;
 	}
 }

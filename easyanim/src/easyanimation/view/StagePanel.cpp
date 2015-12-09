@@ -30,6 +30,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuDelJointNode, this, Menu_DelJointNode);
 
+	RegistSubject(d2d::RefreshPanelSJ::Instance());
 	RegistSubject(d2d::ReorderSpriteSJ::Instance());
 	RegistSubject(d2d::ReorderSpriteMostSJ::Instance());
 	RegistSubject(d2d::InsertSpriteSJ::Instance());
@@ -91,6 +92,10 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
+	case d2d::MSG_REFRESH_PANEL:
+		m_refresh = true;
+		break;
+
 	case d2d::MSG_REORDER_SPRITE:
 		{
 			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
