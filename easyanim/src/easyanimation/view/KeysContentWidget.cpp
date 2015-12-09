@@ -412,13 +412,11 @@ void KeysContentWidget::OnDeleteClassicTween(wxCommandEvent& event)
 void KeysContentWidget::OnInsertFrame(wxCommandEvent& event)
 {
 	OnInsertFrame();
-	Refresh();
 }
 
 void KeysContentWidget::OnDeleteFrame(wxCommandEvent& event)
 {
 	OnDeleteFrame();
-	Refresh();
 }
 
 void KeysContentWidget::OnInsertKeyFrame(wxCommandEvent& event)
@@ -495,11 +493,13 @@ void KeysContentWidget::OnDeleteFrame(wxKeyEvent& event)
 void KeysContentWidget::OnInsertFrame()
 {
 	m_layer->InsertNullFrame(m_frame_idx + 1);
+	Refresh();
 }
 
 void KeysContentWidget::OnDeleteFrame()
 {
 	m_layer->RemoveNullFrame(m_frame_idx + 1);
+	Refresh();
 }
 
 } // eanim
