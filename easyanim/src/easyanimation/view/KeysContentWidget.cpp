@@ -58,11 +58,8 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	m_layer_idx = m_frame_idx = m_valid_frame_idx = -1;
 	m_col_min = m_col_max = -1;
 
-//  	RegisterHotKey(Hot_InsertFrame, 0, VK_ADD);
-//  	RegisterHotKey(Hot_DeleteFrame, 0, VK_SUBTRACT);
-
-	RegisterHotKey(Hot_InsertFrame, 0, VK_MULTIPLY);
-	RegisterHotKey(Hot_DeleteFrame, 0, VK_DIVIDE);
+ 	RegisterHotKey(Hot_InsertFrame, 0, VK_OEM_PLUS);
+ 	RegisterHotKey(Hot_DeleteFrame, 0, VK_OEM_MINUS);
 
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(SetSelectedRegionSJ::Instance());
