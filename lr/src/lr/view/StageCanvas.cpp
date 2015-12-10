@@ -7,6 +7,7 @@
 #include "frame/SettingCfg.h"
 
 #include <easyparticle3d.h>
+#include <easytext.h>
 
 namespace lr
 {
@@ -89,7 +90,7 @@ void StageCanvas::DrawSprite(d2d::ISprite* spr, bool draw_edge) const
 	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
 		d2d::Matrix t;
 		spr->GetTransMatrix(t);
-		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
+		float s = std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale;
 		t.scale(s, s);
 		etext::GTxt::Instance()->Draw(t, spr->name);
 	}
