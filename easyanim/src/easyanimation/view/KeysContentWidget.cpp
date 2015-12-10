@@ -35,9 +35,6 @@ BEGIN_EVENT_TABLE(KeysContentWidget, wxPanel)
 	EVT_UPDATE_UI(Menu_DeleteFrame, KeysContentWidget::OnUpdateDeleteFrame)
 	EVT_UPDATE_UI(Menu_InsertKeyFrame, KeysContentWidget::OnUpdateInsertKeyFrame)
 	EVT_UPDATE_UI(Menu_DeleteKeyFrame, KeysContentWidget::OnUpdateDeleteKeyFrame)
-
-	EVT_HOTKEY(Hot_InsertFrame, KeysContentWidget::OnInsertFrame)
-	EVT_HOTKEY(Hot_DeleteFrame, KeysContentWidget::OnDeleteFrame)
 END_EVENT_TABLE()
 
 LanguageEntry KeysContentWidget::entries[] =
@@ -57,9 +54,6 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent)
 {
 	m_layer_idx = m_frame_idx = m_valid_frame_idx = -1;
 	m_col_min = m_col_max = -1;
-
- 	RegisterHotKey(Hot_InsertFrame, 0, VK_OEM_PLUS);
- 	RegisterHotKey(Hot_DeleteFrame, 0, VK_OEM_MINUS);
 
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(SetSelectedRegionSJ::Instance());
@@ -113,7 +107,11 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 		return;
 	}
 
-	if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
+	if (key_code == 0x3D) {
+		OnInsertFrame();
+	} else if (key_code == 0x2D) {
+		OnDeleteFrame();
+	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
 		m_editop.CopySelection();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'v' || key_code == 'V')) {
 		m_editop.PasteSelection();
