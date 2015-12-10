@@ -182,34 +182,39 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 	std::vector<d2d::ISymbol*> symbols;
 	ViewMgr::Instance()->img_page->GetList()->
 		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
-
-	if (!symbols.empty()) {
-		DataMgr::Instance()->GetLayers().Clear();
-		ViewMgr::Instance()->library->Clear();
-		SetSelectedSJ::Instance()->Set(-1, -1);
-	} else {
+	if (symbols.empty()) {
 		return;
 	}
 
 	Layer* layer = new Layer;
+	DataMgr::Instance()->GetLayers().Clear();
+	SetSelectedSJ::Instance()->Set(-1, -1);
+	InsertLayerSJ::Instance()->Insert(layer);
+	SetSelectedSJ::Instance()->Set(0, 0);
+
+	int tot = m_filling->GetValue() - 1;
+	int space = tot / (symbols.size() - 1);
+	int frame_idx = 1;
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		KeyFrame* frame = new KeyFrame(i+1);
+		KeyFrame* frame = new KeyFrame(frame_idx);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
 
-		frame->Insert(sprite);
+		frame->Insert(sprite);		
 		layer->InsertKeyFrame(frame);
 
 		sprite->Release();
 		frame->Release();
-	}
-	InsertLayerSJ::Instance()->Insert(layer);
+
+		frame_idx += space;
+	}	
+
 	SetSelectedSJ::Instance()->Set(0, 0);
 }
 
 void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
 {
-	int tot = m_filling->GetValue();
+	int tot = m_filling->GetValue() - 1;
 	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);
@@ -218,7 +223,7 @@ void CommonCMPT::OnFillingFrames(wxCommandEvent& event)
 		std::vector<KeyFrame*> fixed;
 		fixed.reserve(frames.size());
 
-		int dis = tot / frames.size();
+		int dis = tot / (frames.size() - 1);
 		std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 		for (size_t i = 0; itr != frames.end(); ++itr, ++i)
 		{
