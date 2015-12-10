@@ -10,7 +10,7 @@ namespace eanim
 
 class KeyFrame;
 
-class Layer
+class Layer : public d2d::Object
 {
 public:
 	Layer();

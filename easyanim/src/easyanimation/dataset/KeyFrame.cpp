@@ -22,6 +22,12 @@ KeyFrame::~KeyFrame()
 	Clear();
 }
 
+void KeyFrame::SetLayer(Layer* layer) 
+{
+	d2d::obj_assign(m_layer, layer);
+}
+
+
 void KeyFrame::CopyFromOther(const KeyFrame* src)
 {
 	if (this == src) {

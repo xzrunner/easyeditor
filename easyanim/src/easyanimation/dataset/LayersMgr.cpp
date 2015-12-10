@@ -52,7 +52,7 @@ int LayersMgr::GetFrameCount() const
 bool LayersMgr::Clear()
 {
 	bool ret = !m_layers.empty();
-	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), d2d::ReleaseObjectFunctor<Layer>());
 	m_layers.clear();
 	return ret;
 }

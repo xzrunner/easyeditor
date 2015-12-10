@@ -16,9 +16,7 @@ public:
 	KeyFrame(int time);
 	~KeyFrame();
 
-	void SetLayer(Layer* layer) {
-		m_layer = layer;
-	}
+	void SetLayer(Layer* layer);
 
 	void CopyFromOther(const KeyFrame* src);
 
