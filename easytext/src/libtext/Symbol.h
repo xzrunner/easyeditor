@@ -39,7 +39,7 @@ protected:
 
 private:
 	void DrawBackground(const d2d::ISprite* sprite, const d2d::Matrix& mt) const;
-	void DrawText(const d2d::ISprite* sprite, const d2d::Matrix& mt) const;
+	void DrawText(const d2d::ISprite* sprite, const d2d::Matrix& mt, const d2d::Colorf& mul, const d2d::Colorf& add) const;
 
 private:
 	int m_width;

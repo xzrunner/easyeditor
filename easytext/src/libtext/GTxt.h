@@ -13,7 +13,8 @@ class GTxt
 public:
 	void LoadFont(const char* filepath);
 
-	void Draw(const d2d::Matrix& mt, const Sprite* spr) const;
+	void Draw(const Sprite* spr, const d2d::Matrix& mt, 
+		const d2d::Colorf& mul, const d2d::Colorf& add) const;
 	void Draw(const d2d::Matrix& mt, const std::string& str) const;
 
 	void Reload(const Sprite* spr);

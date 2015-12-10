@@ -32,7 +32,7 @@ void Symbol::Draw(const d2d::Matrix& mt,
 		DrawBackground(sprite, mt);
 	} 
  	if (setting.visible_label_text) {
- 		DrawText(sprite, mt);
+ 		DrawText(sprite, mt, mul, add);
  	}
 }
 
@@ -89,14 +89,15 @@ void Symbol::DrawBackground(const d2d::ISprite* sprite, const d2d::Matrix& mt) c
 	}
 }
 
-void Symbol::DrawText(const d2d::ISprite* sprite, const d2d::Matrix& mt) const
+void Symbol::DrawText(const d2d::ISprite* sprite, const d2d::Matrix& mt,
+					  const d2d::Colorf& mul, const d2d::Colorf& add) const
 {
 	if (!sprite) {
 		return;
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		GTxt::Instance()->Draw(mt, font);
+		GTxt::Instance()->Draw(font, mt, mul, add);
 	}
 }
 

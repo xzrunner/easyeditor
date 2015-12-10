@@ -6,6 +6,13 @@
 namespace etext
 {
 
+struct render_params
+{
+	const d2d::Matrix* mt;
+	const d2d::Colorf* mul;
+	const d2d::Colorf* add;
+};
+
 GTxt* GTxt::m_instance = NULL;
 
 GTxt::GTxt()
@@ -20,7 +27,7 @@ void GTxt::LoadFont(const char* filepath)
 
 void render(int id, float* _texcoords, float x, float y, float w, float h, void* ud) 
 {
-	d2d::Matrix* mt = (d2d::Matrix*)ud;
+	render_params* rp = (render_params*)ud;
 
 	float hw = w * 0.5f, hh = h * 0.5f;
 
@@ -30,7 +37,7 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, void*
 	vertices[2] = d2d::Vector(x + hw, y - hh);
 	vertices[3] = d2d::Vector(x + hw, y + hh);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = d2d::Math::transVector(vertices[i], *mt);
+		vertices[i] = d2d::Math::transVector(vertices[i], *rp->mt);
 	}
 
 	d2d::Vector texcoords[4];
@@ -41,6 +48,7 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, void*
 
 	d2d::ShaderMgr* mgr = d2d::ShaderMgr::Instance();
 	mgr->sprite();
+	mgr->SetSpriteColor(*rp->mul, *rp->add);
 	mgr->Draw(vertices, texcoords, id);
 }
 
@@ -89,7 +97,8 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	d2d::SpriteRenderer::Instance()->Draw(sym, *mt, d2d::Vector(x, y));
 }
 
-void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
+void GTxt::Draw(const Sprite* spr, const d2d::Matrix& mt,
+				const d2d::Colorf& mul, const d2d::Colorf& add) const
 {
 	if (spr->GetText().empty()) {
 		return;
@@ -109,9 +118,14 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	style.gs.edge_size = spr->GetEdgeSize();
 	style.gs.edge_color.integer = d2d::trans_color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
 
+	render_params rp;
+	rp.mt = &mt;
+	rp.mul = &mul;
+	rp.add = &add;
+
 	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
-// 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&mt);
-	gtxt_label_draw_richtext(utf8.c_str(), &style, render, (void*)&mt);
+// 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&rp);
+	gtxt_label_draw_richtext(utf8.c_str(), &style, render, (void*)&rp);
 }
 
 void GTxt::Draw(const d2d::Matrix& mt, const std::string& str) const
