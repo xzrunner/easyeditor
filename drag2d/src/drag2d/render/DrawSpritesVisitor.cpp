@@ -6,6 +6,8 @@
 #include "dataset/ISprite.h"
 #include "render/ShaderMgr.h"
 
+#include <easytext.h>
+
 namespace d2d
 {
 
@@ -31,10 +33,12 @@ void DrawSpritesVisitor::Visit(Object* object, bool& bFetchNext)
 	DrawSprite(rd, spr);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
-	if (cfg.visible_node_name) {
+	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
 		Matrix t;
 		spr->GetTransMatrix(t);
-		rd->DrawName(spr->name, std::max(1.0f, m_cam_scale) * cfg.node_name_scale, t);
+		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
+		t.scale(s, s);
+		etext::GTxt::Instance()->Draw(t, spr->name);
 	}
 }
 

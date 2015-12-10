@@ -21,8 +21,6 @@ private:
 	~LogViewer();
 
 private:
-	d2d::LabelStyle m_style;
-
 	mutable std::vector<std::string> m_log;
 
 private:

@@ -10,7 +10,6 @@
 #include "dataset/ISymbol.h"
 #include "dataset/AbstractBV.h"
 #include "view/Camera.h"
-#include "render/LabelNew.h"
 #include "render/PrimitiveDraw.h"
 #include "render/RenderContextStack.h"
 #include "common/color_config.h"
@@ -95,26 +94,6 @@ void SpriteRenderer::Draw(const ISymbol* symbol,
 	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	t = mt * t;
 	symbol->Draw(t, mul, add, r_trans, g_trans, b_trans);
-}
-
-void SpriteRenderer::DrawName(const std::string& name, float scale, const Matrix& mt) const
-{
-	if (name.empty() || name[0] == '_') {
-		return;
-	}
-
-	Vector pos = Math::transVector(Vector(0, 0), mt);
-
-	LabelStyle style;
-	style.has_edge = false;
-	style.font_size = 20;
-	style.width = 200;
-	style.height = 50;
-	style.color = Colorf(0, 0, 0);
-	style.align_hori = HAT_CENTER;
-	style.align_vert = VAT_TOP;
-
-	LabelNew::Print(name.c_str(), pos, scale, style);
 }
 
 void SpriteRenderer::DrawImpl(const ISprite* sprite, 

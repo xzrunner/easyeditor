@@ -11,7 +11,6 @@
 #include "common/Math.h"
 #include "render/PrimitiveDraw.h"
 #include "render/Shader.h"
-#include "render/LabelNew.h"
 
 //OpenGL Headers 
 #include <windows.h>
@@ -139,25 +138,25 @@ void FontBlankSymbol::DrawBackground(const ISprite* sprite, const Matrix& mt) co
 
 void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
 {
-	if (sprite) {
-		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
-			const wxString& str = font->GetTextContext();
-			if (!str.empty()) {
-				Vector pos = Math::transVector(Vector(0, 0), mt);
-
-				LabelStyle style;
-				style.has_edge = font->has_edge;
-				style.font_size = font->size;
-				style.width = font->width;
-				style.height = font->height;
-				style.color = font->color;
-				style.align_hori = font->align_hori;
-				style.align_vert = font->align_vert;
-
-				LabelNew::Print(str.utf8_str(), pos, 1, style);
-			}
-		}
-	}
+// 	if (sprite) {
+// 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {
+// 			const wxString& str = font->GetTextContext();
+// 			if (!str.empty()) {
+// 				Vector pos = Math::transVector(Vector(0, 0), mt);
+// 
+// 				LabelStyle style;
+// 				style.has_edge = font->has_edge;
+// 				style.font_size = font->size;
+// 				style.width = font->width;
+// 				style.height = font->height;
+// 				style.color = font->color;
+// 				style.align_hori = font->align_hori;
+// 				style.align_vert = font->align_vert;
+// 
+// 				LabelNew::Print(str.utf8_str(), pos, 1, style);
+// 			}
+// 		}
+// 	}
 
 // 	if (sprite) {
 // 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {

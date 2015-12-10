@@ -2,11 +2,12 @@
 
 #include "common/color_config.h"
 #include "common/Vector.h"
-#include "render/LabelNew.h"
 #include "render/ShaderMgr.h"
 #include "view/Screen.h"
 
 #include <sstream>
+
+#include <easytext.h>
 
 namespace d2d
 {
@@ -61,29 +62,10 @@ void FpsStat::DrawFPS(const Screen& scr) const
 
 void FpsStat::Draw(const Screen& scr, const std::string& str) const
 {
-	return;
-
-	LabelStyle style;
-	style.has_edge = false;
-	style.font_size = 20;
-	style.width = 200;
-	style.height = 50;
-	style.color = LIGHT_RED;
-	style.align_hori = HAT_LEFT;
-	style.align_vert = VAT_TOP;
-
-	const Vector& size = scr.GetSize();
-	Vector pos;
- 	pos.x = -size.x * 0.4f;
- 	pos.y = size.y * 0.45f;
-
-// 	ShaderMgr* shader = ShaderMgr::Instance();
-// 	shader->Commit();
-//	shader->SetSpriteModelView(Vector(0, 0), 1);
-	LabelNew::Print(m_time.c_str(), pos, 1, style);
-//	shader->Commit();
-// 	shader->Commit();
-// 	scr.UpdateModelView();
+ //	const Vector& size = scr.GetSize();
+	//Matrix t;
+	//t.setTranslation(-size.x * 0.4f, size.y * 0.45f);
+	//etext::GTxt::Instance()->Draw(t, str);
 }
 
 }

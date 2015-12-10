@@ -114,6 +114,33 @@ void GTxt::Draw(const d2d::Matrix& mt, const Sprite* spr) const
 	gtxt_label_draw_richtext(utf8.c_str(), &style, render, (void*)&mt);
 }
 
+void GTxt::Draw(const d2d::Matrix& mt, const std::string& str) const
+{
+	if (str.empty()) {
+		return;
+	}
+
+	gtxt_label_style style;
+
+	style.width = 200;
+	style.height = 50;
+
+	style.align_h = HA_CENTER;
+	style.align_v = VA_CENTER;
+
+	style.space_h = style.space_v = 1;
+
+	style.gs.font = 0;
+	style.gs.font_size = 20;
+	style.gs.font_color.integer = 0xffffffff;
+
+	style.gs.edge = true;
+	style.gs.edge_size = 1;
+	style.gs.edge_color.integer = 0x000000ff;
+
+	gtxt_label_draw(str.c_str(), &style, render, (void*)&mt);
+}
+
 void GTxt::Reload(const Sprite* spr) 
 {
 	if (spr->GetText().empty()) {

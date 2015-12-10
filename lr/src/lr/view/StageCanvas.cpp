@@ -86,10 +86,12 @@ void StageCanvas::DrawSprite(d2d::ISprite* spr, bool draw_edge) const
 	rd->Draw(spr);
 
 	d2d::SettingData& cfg = d2d::Config::Instance()->GetSettings();
-	if (cfg.visible_node_name) {
+	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
 		d2d::Matrix t;
 		spr->GetTransMatrix(t);
-		rd->DrawName(spr->name, std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale, t);
+		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
+		t.scale(s, s);
+		etext::GTxt::Instance()->Draw(t, spr->name);
 	}
 }
 

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;..\..\..\..\dtex\src;..\..\..\..\dtex\external\ejoy2d;..\..\..\..\particle\src;..\..\..\..\sidx\src\sidx;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;;&quot;..\..\..\..\editor-external\stackwalker&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;..\..\..\..\easytext\src;..\..\..\..\dtex\src;..\..\..\..\dtex\external\ejoy2d;..\..\..\..\particle\src;..\..\..\..\sidx\src\sidx;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\stackwalker&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;..\..\..\..\dtex\src;..\..\..\..\dtex\external\ejoy2d;..\..\..\..\particle\src;..\..\..\..\sidx\src\sidx;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;;&quot;..\..\..\..\editor-external\stackwalker&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;..\..\..\..\easytext\src;..\..\..\..\dtex\src;..\..\..\..\dtex\external\ejoy2d;..\..\..\..\particle\src;..\..\..\..\sidx\src\sidx;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\stackwalker&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -1290,26 +1290,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="label"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\LabelLayout.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\LabelLayout.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\LabelNew.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\LabelNew.h"
 					>
 				</File>
 			</Filter>
@@ -2863,18 +2843,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\algorithms\Triangulation.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="sprites"
-			>
-			<File
-				RelativePath="..\..\..\src\drag2d\sprites\SpritesHandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\sprites\SpritesHandler.h"
 				>
 			</File>
 		</Filter>

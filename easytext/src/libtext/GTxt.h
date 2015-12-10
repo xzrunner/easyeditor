@@ -14,6 +14,7 @@ public:
 	void LoadFont(const char* filepath);
 
 	void Draw(const d2d::Matrix& mt, const Sprite* spr) const;
+	void Draw(const d2d::Matrix& mt, const std::string& str) const;
 
 	void Reload(const Sprite* spr);
 
