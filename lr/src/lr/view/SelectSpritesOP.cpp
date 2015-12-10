@@ -58,6 +58,11 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		return false;
 	}
 
+	if (selected->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
+		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
+		return false;
+	}
+
 	m_spritesImpl->EnableObserve(false);
 	m_stage->GetCanvas()->EnableObserve(false);
 
@@ -75,7 +80,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
- 		ecomplex::EditDialog dlg(m_wnd, &symbol);
+ 		ecomplex::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 
 		//////////////////////////////////////////////////////////////////////////
@@ -85,18 +90,18 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	{
- 		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol());
+ 		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol(), m_stage->GetCanvas()->GetGLContext());
  		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
-  		escale9::EditDialog dlg(m_wnd, &symbol);
+  		escale9::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
   		dlg.ShowModal();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::EditDialog dlg(m_wnd, sprite);
+		emesh::EditDialog dlg(m_wnd, sprite, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(selected))
@@ -106,23 +111,23 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
-		etexture::EditDialog dlg(m_wnd, tex, m_spritesImpl);
+		etexture::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), tex, m_spritesImpl);
 		dlg.ShowModal();
 		UpdateShapeFromETexture(tex);
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
-		libshape::EditDialogSimple dlg(m_wnd, shape, m_spritesImpl);
+		libshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_spritesImpl);
 		dlg.ShowModal();
 	}
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
 	{
-		eterrain2d::EditDialog dlg(m_wnd, terr, m_spritesImpl);
+		eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_spritesImpl);
 		dlg.ShowModal();
 	} 
 	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
 	{
-		eshadow::EditDialog dlg(m_wnd, shadow, m_spritesImpl);
+		eshadow::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shadow, m_spritesImpl);
 		dlg.ShowModal();
 	}
 	else if (selected)
@@ -135,11 +140,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	stage->SetUpdateState(true);
-
 	m_spritesImpl->EnableObserve(true);
-
 	m_stage->GetCanvas()->EnableObserve(true);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
