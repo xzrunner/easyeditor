@@ -71,7 +71,8 @@ void Frame::onPreview(wxCommandEvent& event)
 
 	std::vector<const d2d::ISprite*> sprites;
 	m_task->GetAllSprite(sprites);
- 	PreviewDialog dlg(this, sprites);
+	d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+ 	PreviewDialog dlg(this, canvas->GetGLContext(), sprites);
  	dlg.ShowModal();
 }
 

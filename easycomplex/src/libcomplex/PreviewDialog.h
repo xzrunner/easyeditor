@@ -9,13 +9,14 @@ namespace ecomplex
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent, const std::vector<const d2d::ISprite*>& sprites);
+	PreviewDialog(wxWindow* parent, wxGLContext* glctx, 
+		const std::vector<const d2d::ISprite*>& sprites);
 	~PreviewDialog();
 
 private:
-	void InitLayout();
+	void InitLayout(wxGLContext* glctx);
 
-	void BuildEditPanel(wxSizer* sizer);
+	void BuildEditPanel(wxSizer* sizer, wxGLContext* glctx);
 
 private:
 	std::vector<const d2d::ISprite*> m_sprites;

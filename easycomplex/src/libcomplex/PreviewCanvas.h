@@ -10,7 +10,7 @@ class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		const std::vector<const d2d::ISprite*>& sprites);
+		const std::vector<const d2d::ISprite*>& sprites, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
