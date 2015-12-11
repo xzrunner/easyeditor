@@ -64,8 +64,12 @@ static Vector LAST_OFFSET;
 static float LAST_SCALE;
 static int LAST_WIDTH, LAST_HEIGHT;
 
+static int COUNT = 0;
+
 static void _draw_begin() 
 {
+	++COUNT;
+
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	ctx_stack->GetModelView(LAST_OFFSET, LAST_SCALE);
@@ -85,6 +89,15 @@ static void _draw(const float vb[16])
 
 static void _draw_end()
 {
+	--COUNT;
+	if (COUNT > 0) {
+		return;
+	}
+	if (COUNT < 0) {
+		COUNT = 0;
+		return;
+	}
+
 	ShaderMgr::Instance()->Flush();
 
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
