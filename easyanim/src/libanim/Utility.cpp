@@ -29,45 +29,51 @@ void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::I
 	{
 		Symbol::Layer* layer = symbol->m_layers[i];
 
-		Symbol::Frame *currFrame = GetCurrFrame(layer, index),
-			*nextFrame = GetNextFrame(layer, index);
-		if (!currFrame)
+		Symbol::Frame *curr_f = GetCurrFrame(layer, index),
+			          *next_f = GetNextFrame(layer, index);
+		if (!curr_f)
 			continue;
 
-		if (!nextFrame)
+		if (!curr_f->bClassicTween || !next_f)
 		{
-//			;
-
-			for (size_t i = 0, n = currFrame->sprites.size(); i < n; ++i)
-				sprites.push_back(currFrame->sprites[i]->Clone());	
-		}
-		else if (!currFrame->bClassicTween)
-		{
-			for (size_t i = 0, n = currFrame->sprites.size(); i < n; ++i)
-				sprites.push_back(currFrame->sprites[i]->Clone());	
+			for (size_t i = 0, n = curr_f->sprites.size(); i < n; ++i) {
+				sprites.push_back(curr_f->sprites[i]->Clone());	
+			}
 		}
 		else
 		{
-			assert(index >= currFrame->index && index < nextFrame->index);
-			float process = (float) (index - currFrame->index) / (nextFrame->index - currFrame->index);
-			TweenUtility::GetTweenSprites(currFrame->sprites, nextFrame->sprites, sprites, process);
+			assert(index >= curr_f->index && index < next_f->index);
+			float process = (float) (index - curr_f->index) / (next_f->index - curr_f->index);
+			TweenUtility::GetTweenSprites(curr_f->sprites, next_f->sprites, sprites, process);
 		}
 	}
 }
 
 Symbol::Frame* Utility::GetCurrFrame(Symbol::Layer* layer, int index)
 {
-	Symbol::Frame* ret = NULL;
+	if (layer->frames.empty()) return NULL;
 
-	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
-	{
+	Symbol::Frame *prev = NULL, *curr = NULL;
+	for (size_t i = 0, n = layer->frames.size(); i < n; ++i) {
 		Symbol::Frame* frame = layer->frames[i];
-		if (frame->index <= index)
-			ret = frame;
-		else
+		if (frame->index >= index) {
+			curr = frame;
 			break;
+		} else {
+			prev = frame;
+		}
 	}
-	return ret;
+
+	if (!curr) {
+		return NULL;
+	} else if (curr->index == index) {
+		return curr;
+	} else if (!prev) {
+		return NULL;
+	} else {
+		assert(prev->index <= index);
+		return prev;
+	}
 }
 
 Symbol::Frame* Utility::GetNextFrame(Symbol::Layer* layer, int index)

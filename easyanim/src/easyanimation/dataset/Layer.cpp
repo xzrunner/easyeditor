@@ -224,20 +224,15 @@ KeyFrame* Layer::GetCurrKeyFrame(int time)
 	if (m_frames.empty()) return NULL;
 
 	std::map<int, KeyFrame*>::iterator itr = m_frames.lower_bound(time);
-	if (itr == m_frames.end()) return NULL;
-
-	if (itr->first == time) 
-	{
+	if (itr == m_frames.end()) {
+		return NULL;
+	} else if (itr->first == time) {
 		return itr->second;
-	}
-	else
-	{
-		if (itr == m_frames.begin()) return NULL;
-
+	} else if (itr == m_frames.begin()) {
+		return NULL;
+	} else {
 		--itr;
 		assert(itr->first <= time);
-		if (itr->first > time) return NULL;
-
 		return itr->second;
 	}
 }
