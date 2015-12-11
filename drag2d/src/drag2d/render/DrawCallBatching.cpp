@@ -64,12 +64,8 @@ static Vector LAST_OFFSET;
 static float LAST_SCALE;
 static int LAST_WIDTH, LAST_HEIGHT;
 
-static int COUNT = 0;
-
 static void _draw_begin() 
 {
-	++COUNT;
-
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
 	ctx_stack->GetModelView(LAST_OFFSET, LAST_SCALE);
@@ -89,15 +85,6 @@ static void _draw(const float vb[16])
 
 static void _draw_end()
 {
-	--COUNT;
-	if (COUNT > 0) {
-		return;
-	}
-	if (COUNT < 0) {
-		COUNT = 0;
-		return;
-	}
-
 	ShaderMgr::Instance()->Flush();
 
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
@@ -105,6 +92,11 @@ static void _draw_end()
 	ctx_stack->SetProjection(LAST_WIDTH, LAST_HEIGHT);
 
 // 	glViewport(0, 0, ORI_WIDTH, ORI_HEIGHT);
+}
+
+static void _draw_flush()
+{
+	ShaderMgr::Instance()->Flush();
 }
 
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)
@@ -235,7 +227,7 @@ static const char* CFG =
 DrawCallBatching::DrawCallBatching()
 {
 	dtex_shader_init(&_program, &_blend, &_set_texture, &_get_texture, &_set_target, &_get_target,
-		&_draw_begin, &_draw, &_draw_end);
+		&_draw_begin, &_draw, &_draw_end, &_draw_flush);
 
 	dtex_gl_texture_init(&_texture_create, &_texture_release, &_texture_update, &_texture_id);
 
