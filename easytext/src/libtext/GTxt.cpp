@@ -25,11 +25,11 @@ void GTxt::LoadFont(const char* filepath)
 {
 }
 
-void render(int id, float* _texcoords, float x, float y, float w, float h, void* ud) 
+void render(int id, float* _texcoords, float x, float y, float w, float h, struct gtxt_draw_style* ds, void* ud) 
 {
 	render_params* rp = (render_params*)ud;
 
-	float hw = w * 0.5f, hh = h * 0.5f;
+	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
 
 	d2d::Vector vertices[4];
 	vertices[0] = d2d::Vector(x - hw, y + hh);
@@ -46,9 +46,12 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, void*
 	texcoords[2].set(_texcoords[4], _texcoords[5]);
 	texcoords[3].set(_texcoords[6], _texcoords[7]);
 
+	d2d::Colorf multi_col = *rp->mul;
+	multi_col.a *= ds->alpha;
+
 	d2d::ShaderMgr* mgr = d2d::ShaderMgr::Instance();
 	mgr->sprite();
-	mgr->SetSpriteColor(*rp->mul, *rp->add);
+	mgr->SetSpriteColor(multi_col, *rp->add);
 	mgr->Draw(vertices, texcoords, id);
 }
 
