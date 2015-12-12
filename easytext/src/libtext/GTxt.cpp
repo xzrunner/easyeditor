@@ -29,7 +29,7 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, struc
 {
 	render_params* rp = (render_params*)ud;
 
-	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
+ 	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
 
 	d2d::Vector vertices[4];
 	vertices[0] = d2d::Vector(x - hw, y + hh);
@@ -127,8 +127,9 @@ void GTxt::Draw(const Sprite* spr, const d2d::Matrix& mt,
 	rp.add = &add;
 
 	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
-// 	gtxt_label_draw(utf8.c_str(), &style, render, (void*)&rp);
-	gtxt_label_draw_richtext(utf8.c_str(), &style, render, (void*)&rp);
+	gtxt_label_draw_richtext(utf8.c_str(), &style, spr->GetTime(), render, (void*)&rp);
+
+	spr->UpdateTime();
 }
 
 void GTxt::Draw(const d2d::Matrix& mt, const std::string& str) const

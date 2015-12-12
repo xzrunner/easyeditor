@@ -22,7 +22,7 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual bool Update(int version) { return false; }
+	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 
@@ -65,6 +65,9 @@ public:
 	const std::string& GetTID() const { return m_tid; }
 	void SetTID(const std::string& tid) { m_tid = tid; }	
 
+	int GetTime() const { return m_time; }
+	void UpdateTime() const { ++m_time; }
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
@@ -90,6 +93,9 @@ private:
 private:
 	std::string m_text;
 	std::string m_tid;
+
+private:
+	mutable int m_time;	 // for gtxt dynamic draw
 
 private:
 	Symbol* m_symbol;

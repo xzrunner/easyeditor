@@ -23,6 +23,8 @@ Sprite::Sprite()
 
 	m_space_hori = 1;
 	m_space_vert = 1;
+
+	m_time = 0;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -47,6 +49,8 @@ Sprite::Sprite(const Sprite& sprite)
 
 	m_space_hori = sprite.m_space_hori;
 	m_space_vert = sprite.m_space_vert;
+
+	m_time = sprite.m_time;
 }
 
 Sprite::Sprite(Symbol* symbol)
@@ -71,6 +75,8 @@ Sprite::Sprite(Symbol* symbol)
 	m_space_hori = symbol->m_space_hori;
 	m_space_vert = symbol->m_space_vert;
 
+	m_time = 0;
+
 	BuildBounding();	
 }
 
@@ -86,6 +92,11 @@ Sprite* Sprite::Clone() const
 	Sprite* sprite = new Sprite(*this);
 	d2d::SpriteFactory::Instance()->insert(sprite);
 	return sprite;
+}
+
+bool Sprite::Update(int version) 
+{ 
+	return m_text.find("dynamic") != std::string::npos;
 }
 
 const Symbol& Sprite::GetSymbol() const
