@@ -29,6 +29,8 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, struc
 {
 	render_params* rp = (render_params*)ud;
 
+	x += ds->offset_x;
+	y += ds->offset_y;
  	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
 
 	d2d::Vector vertices[4];
