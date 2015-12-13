@@ -81,25 +81,25 @@ void SpriteShader::Bind()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
 
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(0));
+	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 36, BUFFER_OFFSET(0));
 
 	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(8));
+	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 36, BUFFER_OFFSET(8));
 
 	glEnableVertexAttribArray(ATTRIB_COLOR);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(16));
+	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(16));
 
 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
-	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(20));  
+	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(20));  
 
 	glEnableVertexAttribArray(ATTRIB_R_TRANS);
-	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(24));  
+	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(24));  
 
 	glEnableVertexAttribArray(ATTRIB_G_TRANS);
-	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(28));  
+	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(28));  
 
 	glEnableVertexAttribArray(ATTRIB_B_TRANS);
-	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(32));  
+	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(32));  
 }
 
 void SpriteShader::Unbind()
