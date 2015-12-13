@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "rapidvg", "projects\rapidvg.icproj", "{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "projects\test.vcproj", "{6BE4297D-07CB-4155-AB16-C5AF67CB9843}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8833502D-52B5-4C5C-BE5B-6C611E6F9848} = {8833502D-52B5-4C5C-BE5B-6C611E6F9848}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8833502D-52B5-4C5C-BE5B-6C611E6F9848}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8833502D-52B5-4C5C-BE5B-6C611E6F9848}.Debug|Win32.Build.0 = Debug|Win32
+		{8833502D-52B5-4C5C-BE5B-6C611E6F9848}.Release|Win32.ActiveCfg = Release|Win32
+		{8833502D-52B5-4C5C-BE5B-6C611E6F9848}.Release|Win32.Build.0 = Release|Win32
+		{6BE4297D-07CB-4155-AB16-C5AF67CB9843}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6BE4297D-07CB-4155-AB16-C5AF67CB9843}.Debug|Win32.Build.0 = Debug|Win32
+		{6BE4297D-07CB-4155-AB16-C5AF67CB9843}.Release|Win32.ActiveCfg = Release|Win32
+		{6BE4297D-07CB-4155-AB16-C5AF67CB9843}.Release|Win32.Build.0 = Release|Win32
+		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
