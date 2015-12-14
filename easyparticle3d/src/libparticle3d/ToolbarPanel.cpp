@@ -184,7 +184,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MIN]));	
 
-			m_min_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MIN_HORI);
+			m_min_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -360, 360, MIN_HORI);
 			Connect(m_min_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetHori));
 			sizer->Add(m_min_hori);
 
@@ -194,7 +194,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MAX]));	
 
-			m_max_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MAX_HORI);
+			m_max_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -360, 360, MAX_HORI);
 			Connect(m_max_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetHori));
 			sizer->Add(m_max_hori);
 
