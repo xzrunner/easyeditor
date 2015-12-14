@@ -10,3 +10,6 @@
 [submodule "gtxt/src/gtxt"]
 	path = gtxt/src/gtxt
 	url = ssh://tea.ejoy.com:3222/LR/gtxt.git
+[submodule "rapidvg/src/rapidvg"]
+	path = rapidvg/src/rapidvg
+	url = ssh://tea.ejoy.com:3222/LR/RapidVG.git
