@@ -2,6 +2,7 @@
 #include "Sprite.h"
 
 #include <gtxt.h>
+#include <rvg.h>
 
 namespace etext
 {
@@ -23,6 +24,42 @@ GTxt::GTxt()
 
 void GTxt::LoadFont(const char* filepath)
 {
+}
+
+void render_decoration(const d2d::Matrix& mat, float x, float y, float w, float h, float row_y, float row_h, struct gtxt_decoration* d)
+{
+	if (d->type == DT_NULL) {
+		return;
+	}
+
+	d2d::ShaderMgr::Instance()->RVG();
+	rvg_shader_color(d->color);
+
+	float hw = w * 0.5f,
+		  hh = h * 0.5f;
+	if (d->type == DT_OVERLINE || d->type == DT_UNDERLINE || d->type == DT_STRIKETHROUGH) {
+		d2d::Vector left(x - hw, y), right(x + hw, y);
+		switch (d->type) 
+		{
+		case DT_OVERLINE:
+			left.y = right.y = row_y + row_h;
+			break;
+		case DT_UNDERLINE:
+			left.y = right.y = row_y;
+			break;
+		case DT_STRIKETHROUGH:
+			left.y = right.y = row_y + row_h * 0.5f;
+			break;
+		}
+		left = d2d::Math::transVector(left, mat);
+		right = d2d::Math::transVector(right, mat);
+		rvg_line(left.x, left.y, right.x, right.y);
+	} else if (d->type == DT_BORDER || d->type == DT_BG) {
+		
+		float xmin = x - hw, xmax = x + hw;
+		float ymin = row_y, ymax = row_y + row_h;
+		rvg_rect(xmin, ymin, xmax, ymax, d->type == DT_BG);
+	}
 }
 
 void render(int id, float* _texcoords, float x, float y, float w, float h, struct gtxt_draw_style* ds, void* ud) 
@@ -55,6 +92,8 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, struc
 	mgr->sprite();
 	mgr->SetSpriteColor(multi_col, *rp->add);
 	mgr->Draw(vertices, texcoords, id);
+
+	render_decoration(*rp->mt, x, y, w, h, ds->row_y, ds->row_h, &ds->decoration);
 }
 
 void*
