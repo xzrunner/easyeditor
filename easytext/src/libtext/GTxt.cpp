@@ -26,49 +26,12 @@ void GTxt::LoadFont(const char* filepath)
 {
 }
 
-void render_decoration(const d2d::Matrix& mat, float x, float y, float w, float h, float row_y, float row_h, struct gtxt_decoration* d)
+static void
+render_glyph(int id, float* _texcoords, float x, float y, float w, float h, struct gtxt_draw_style* ds, render_params* rp) 
 {
-	if (d->type == DT_NULL) {
-		return;
-	}
-
-	d2d::ShaderMgr::Instance()->RVG();
-	rvg_shader_color(d->color);
-
-	float hw = w * 0.5f,
-		  hh = h * 0.5f;
-	if (d->type == DT_OVERLINE || d->type == DT_UNDERLINE || d->type == DT_STRIKETHROUGH) {
-		d2d::Vector left(x - hw, y), right(x + hw, y);
-		switch (d->type) 
-		{
-		case DT_OVERLINE:
-			left.y = right.y = row_y + row_h;
-			break;
-		case DT_UNDERLINE:
-			left.y = right.y = row_y;
-			break;
-		case DT_STRIKETHROUGH:
-			left.y = right.y = row_y + row_h * 0.5f;
-			break;
-		}
-		left = d2d::Math::transVector(left, mat);
-		right = d2d::Math::transVector(right, mat);
-		rvg_line(left.x, left.y, right.x, right.y);
-	} else if (d->type == DT_BORDER || d->type == DT_BG) {
-		
-		float xmin = x - hw, xmax = x + hw;
-		float ymin = row_y, ymax = row_y + row_h;
-		rvg_rect(xmin, ymin, xmax, ymax, d->type == DT_BG);
-	}
-}
-
-void render(int id, float* _texcoords, float x, float y, float w, float h, struct gtxt_draw_style* ds, void* ud) 
-{
-	render_params* rp = (render_params*)ud;
-
 	x += ds->offset_x;
 	y += ds->offset_y;
- 	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
+	float hw = w * 0.5f * ds->scale, hh = h * 0.5f * ds->scale;
 
 	d2d::Vector vertices[4];
 	vertices[0] = d2d::Vector(x - hw, y + hh);
@@ -92,8 +55,69 @@ void render(int id, float* _texcoords, float x, float y, float w, float h, struc
 	mgr->sprite();
 	mgr->SetSpriteColor(multi_col, *rp->add);
 	mgr->Draw(vertices, texcoords, id);
+}
 
-	render_decoration(*rp->mt, x, y, w, h, ds->row_y, ds->row_h, &ds->decoration);
+static void 
+render_decoration(const d2d::Matrix& mat, float x, float y, float w, float h, struct gtxt_draw_style* ds)
+{
+	struct gtxt_decoration* d = &ds->decoration;
+	if (d->type == GRDT_NULL) {
+		return;
+	}
+
+	d2d::ShaderMgr::Instance()->RVG();
+	rvg_shader_color(d->color);
+
+	float hw = w * 0.5f,
+		  hh = h * 0.5f;
+	if (d->type == GRDT_OVERLINE || d->type == GRDT_UNDERLINE || d->type == GRDT_STRIKETHROUGH) {
+		d2d::Vector left(x - hw, y), right(x + hw, y);
+		switch (d->type) 
+		{
+		case GRDT_OVERLINE:
+			left.y = right.y = ds->row_y + ds->row_h;
+			break;
+		case GRDT_UNDERLINE:
+			left.y = right.y = ds->row_y;
+			break;
+		case GRDT_STRIKETHROUGH:
+			left.y = right.y = ds->row_y + ds->row_h * 0.5f;
+			break;
+		}
+		left = d2d::Math::transVector(left, mat);
+		right = d2d::Math::transVector(right, mat);
+		rvg_line(left.x, left.y, right.x, right.y);
+	} else if (d->type == GRDT_BORDER || d->type == GRDT_BG) {
+		d2d::Vector min(x - hw, ds->row_y),
+			        max(x + hw, ds->row_y + ds->row_h);
+		min = d2d::Math::transVector(min, mat);
+		max = d2d::Math::transVector(max, mat);
+		if (d->type == GRDT_BG) {
+			rvg_rect(min.x, min.y, max.x, max.y, true);
+		} else if (ds->pos_type != GRPT_NULL) {
+			rvg_line(min.x, min.y, max.x, min.y);
+			rvg_line(min.x, max.y, max.x, max.y);
+			if (ds->pos_type == GRPT_BEGIN) {
+				rvg_line(min.x, min.y, min.x, max.y);
+			}
+			if (ds->pos_type == GRPT_END) {
+				rvg_line(max.x, min.y, max.x, max.y);
+			}
+		}
+	}
+}
+
+static void 
+render(int id, float* _texcoords, float x, float y, float w, float h, struct gtxt_draw_style* ds, void* ud) 
+{
+ 	render_params* rp = (render_params*)ud;
+	if (ds->decoration.type == GRDT_BG) {
+		render_decoration(*rp->mt, x, y, w, h, ds);
+		render_glyph(id, _texcoords, x, y, w, h, ds, rp);
+	} else {
+		render_glyph(id, _texcoords, x, y, w, h, ds, rp);
+		render_decoration(*rp->mt, x, y, w, h, ds);
+	}
 }
 
 void*
