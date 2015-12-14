@@ -8,7 +8,18 @@ void
 display(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	rvg_rect(10, 10, 100, 100);
+	rvg_shader_color(0xff0000ff);
+	rvg_point(0, 0, 5);
+	rvg_shader_color(0xffff00ff);
+	rvg_line(-100, -100, -50, -80);
+	rvg_shader_color(0xffffffff);
+	rvg_rect(10, 10, 100, 100, true);
+
+	rvg_circle(100, -100, 50, false);
+
+	rvg_shader_color(0xff00ffff);
+	rvg_set_circle_segments(32);
+	rvg_circle(200, -100, 50, true);
 
 	rvg_shader_flush();
 
@@ -38,7 +49,7 @@ main(int argc, char** argv) {
 
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-	glutInitWindowSize(250, 250);
+	glutInitWindowSize(800, 480);
 
 	glutInitWindowPosition(100, 100);
 
