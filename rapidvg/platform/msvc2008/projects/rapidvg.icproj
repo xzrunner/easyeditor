@@ -3,7 +3,7 @@
 	ProjectType="Intel C++ Project"
 	Version="11.1"
 	Name="rapidvg"
-	ProjectGUID="{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
+	ProjectGUID="{08E82851-7338-42C7-831E-2CD86F65FB70}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="rapidvg.vcproj">
 	<Configurations>

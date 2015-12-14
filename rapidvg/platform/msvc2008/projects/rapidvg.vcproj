@@ -154,6 +154,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\rapidvg\rvg.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\rapidvg\rvg_math.h"
 			>
 		</File>

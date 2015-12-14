@@ -4,6 +4,7 @@
 #include "BlendShader.h"
 #include "FontShader.h"
 #include "ScreenShader.h"
+#include "RVGShader.h"
 
 #include "ShaderContext.h"
 
@@ -40,13 +41,16 @@ ShaderMgr::ShaderMgr()
 
 	m_screen_shader = new ScreenShader;
 	m_shaders.push_back(m_screen_shader);
+
+	m_rvg_shader = new RVGShader;
+	m_shaders.push_back(m_rvg_shader);
 }
 
 ShaderMgr::~ShaderMgr()
 {
-	delete m_shape_shader;
-	delete m_sprite_shader;
-	delete m_font_shader;
+	for (int i = 0, n = m_shaders.size(); i < n; ++i) {
+		delete m_shaders[i];
+	}
 }
 
 void ShaderMgr::NullProg()
@@ -95,6 +99,12 @@ void ShaderMgr::Screen()
 {
 	ShaderContext::Bind2d();
 	Switch(m_screen_shader);
+}
+
+void ShaderMgr::RVG()
+{
+	ShaderContext::Bind2d();
+	Switch(m_rvg_shader);
 }
 
 void ShaderMgr::null()
@@ -173,6 +183,7 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
 		m_all_sprite_shader[i]->SetModelView(offset, scale);
 	}
+	m_rvg_shader->SetModelView(offset, scale);
 }
 
 int ShaderMgr::AddShapeShader(d2d::ShapeShader* shader)
