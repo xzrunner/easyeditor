@@ -10,6 +10,7 @@
 #include "message/messages.h"
 
 #include <easycomplex.h>
+#include <easyanim.h>
 #include <easymesh.h>
 #include <easyscale9.h>
 #include <easyicon.h>
@@ -126,6 +127,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxWindow* nb = library->GetNotebook();
 	library->AddPage(ViewMgr::Instance()->img_page = new d2d::LibraryImagePage(nb));
 	library->AddPage(new ecomplex::LibraryPage(nb));
+	library->AddPage(new libanim::LibraryPage(nb));
 	library->AddPage(new emesh::LibraryPage(nb));
 	library->AddPage(new escale9::LibraryPage(nb));
 	library->AddPage(new eicon::LibraryPage(nb));
