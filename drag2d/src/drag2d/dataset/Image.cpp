@@ -134,76 +134,6 @@ const uint8_t* Image::GetPixelData() const
 
 void Image::Draw(const Matrix& mt, const ISprite* spr) const
 {
-	////////////////////////////////////////////////////////////////////////////
-	//// 原始 直接画
- //   	ShaderMgr* shader = ShaderMgr::Instance();
- //   	shader->sprite();
- //   
- //   	float tot_hw = m_width * 0.5f,
- //   		  tot_hh = m_height * 0.5f;
- //   	float txmin = (r.xMin + tot_hw) / m_width,
- //   		txmax = (r.xMax + tot_hw) / m_width,
- //   		tymin = (r.yMin + tot_hh) / m_height,
- //   		tymax = (r.yMax + tot_hh) / m_height;
- //   
- // 	d2d::Vector vertices[4];
- // 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
- // 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
- // 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
- // 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
- // 
- // 	for (int i = 0; i < 4; ++i) {
- // 		scr.TransPosForRender(vertices[i]);
- // 	}
- // 
- // 	float vb[16];
- // 	vb[0] = vertices[0].x;
- // 	vb[1] = vertices[0].y;
- // 	vb[2] = txmin;
- // 	vb[3] = tymin;
- // 	vb[4] = vertices[1].x;
- // 	vb[5] = vertices[1].y;
- // 	vb[6] = txmax;
- // 	vb[7] = tymin;
- // 	vb[8] = vertices[2].x;
- // 	vb[9] = vertices[2].y;
- // 	vb[10] = txmax;
- // 	vb[11] = tymax;
- // 	vb[12] = vertices[3].x;
- // 	vb[13] = vertices[3].y;
- // 	vb[14] = txmin;
- // 	vb[15] = tymax;
- // 
- // 	shader->Draw(vb, m_textureID);
-
-	//////////////////////////////////////////////////////////////////////////
-//	用renderlist
-// 	d2d::Vector vertices[4];
-// 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
-// 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
-// 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
-// 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
-// 	for (int i = 0; i < 4; ++i) {
-// 		scr.TransPosForRender(vertices[i]);
-// 	}
-// 
-// 	d2d::Vector texcoords[4];
-// 	float tot_hw = m_width * 0.5f,
-// 		tot_hh = m_height * 0.5f;
-// 	float txmin = (r.xMin + tot_hw) / m_width,
-// 		txmax = (r.xMax + tot_hw) / m_width,
-// 		tymin = (r.yMin + tot_hh) / m_height,
-// 		tymax = (r.yMax + tot_hh) / m_height;
-// 	texcoords[0].set(txmin, tymin);
-// 	texcoords[1].set(txmax, tymin);
-// 	texcoords[2].set(txmax, tymax);
-// 	texcoords[3].set(txmin, tymax);
-// 
-// 	RenderList::Instance()->Insert(m_textureID, vertices, texcoords);
-
-	//////////////////////////////////////////////////////////////////////////
-	// 用dtex
-
 	float hw = m_tex->GetWidth() * 0.5f,
 		hh = m_tex->GetHeight() * 0.5f;
 
@@ -239,35 +169,9 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 		texcoords[2].y = c2_texcoords[5];
 		texcoords[3].x = c2_texcoords[6];
 		texcoords[3].y = c2_texcoords[7];
-
-		//////////////////////////////////////////////////////////////////////////
-
-// 		float extend = dt->GetExtend();
-// 		int width = dt->GetWidth();
-// 		int height = dt->GetHeight();
-// 		texid = dt->GetTextureID();
-//		txmin = (n->GetMinX()+extend) / width;
-//		txmax = (n->GetMaxX()-extend) / width;
-//		tymin = (n->GetMinY()+extend) / height;
-//		tymax = (n->GetMaxY()-extend) / height;
-//
-//// 		if (texid != 1) {
-//// 			wxLogDebug(_T("img dt's tex = %d"), texid);
-//// 		}
-//
-// 		if (n->IsRotated())
-// 		{
-// 			d2d::Vector tmp = vertices[3];
-// 			vertices[3] = vertices[2];
-// 			vertices[2] = vertices[1];
-// 			vertices[1] = vertices[0];
-// 			vertices[0] = tmp;
-// 		}
  	}
  	else
 	{
-		//wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
-
 		texid = m_tex->GetTexID();
 
 		float txmin, txmax, tymin, tymax;
@@ -279,8 +183,6 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 		texcoords[2].set(txmax, tymax);
 		texcoords[3].set(txmin, tymax);
 	}
-
-//	RenderList::Instance()->Insert(texid, vertices, texcoords);
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	mgr->sprite();
