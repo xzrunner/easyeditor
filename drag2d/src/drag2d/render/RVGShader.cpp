@@ -44,7 +44,7 @@ void RVGShader::Commit()
 
 void RVGShader::SetModelView(const Vector& offset, float scale)
 {
-	rvg_shader_modelview(offset.x, offset.y, scale);
+	rvg_shader_modelview(offset.x, offset.y, scale, scale);
 }
 
 void RVGShader::SetColor(const Colorf& col)
