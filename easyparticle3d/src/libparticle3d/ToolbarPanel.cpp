@@ -161,7 +161,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	m_sliders.push_back(s_capacity);
 	// Count
 	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, LANG[LK_COUNT], 
-		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));
+		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 500));
 	top_sizer->Add(s_count);
 	m_sliders.push_back(s_count);
 	// Emission Time
