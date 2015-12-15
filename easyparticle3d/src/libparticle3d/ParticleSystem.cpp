@@ -181,6 +181,7 @@ void ParticleSystem::SetDirection(const Quaternion& dir)
 void ParticleSystem::Start()
 {
 	m_ps->active = true;
+	m_ps->particle_count = 0;
 }
 
 void ParticleSystem::Stop()
