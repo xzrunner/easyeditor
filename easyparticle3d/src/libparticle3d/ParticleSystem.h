@@ -58,6 +58,8 @@ public:
 	void StoreAnimRecord(const std::string& filepath) const;
 	void StoreInvertRecord(const std::string& filepath) const;
 
+	void RemoveFromInvertRecord(p3d_particle* p);
+
 	void SetHori(int min, int max);
 	void SetVert(int min, int max);
 	
@@ -65,7 +67,8 @@ public:
 	void SetOrientToMovement(bool open);
 	void SetRadius3D(bool is3d);
 
-	void SetPosition(const d2d::Vector& pos) { m_pos = pos; }
+ 	void SetPosition(const d2d::Vector& pos) { m_pos = pos; }
+	const d2d::Vector& GetPosition() const { return m_pos; }
 
 	p3d_symbol* AddSymbol(d2d::ISymbol* symbol);
 	void DelSymbol(int idx);
@@ -80,9 +83,6 @@ private:
 
 	void SetPSCapacity(int cap);
 
-	static void AddFunc(p3d_particle* p);
-	static void RemoveFunc(p3d_particle* p);
-
 private:
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;
@@ -91,8 +91,6 @@ private:
 	d2d::Vector m_pos;
 
 	p3d_particle_system* m_ps;
-
-	static ParticleSystem* PS;
 
 }; // ParticleSystem
 

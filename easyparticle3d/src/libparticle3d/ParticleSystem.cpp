@@ -11,32 +11,41 @@
 namespace eparticle3d
 {
 
+static void add_func(p3d_particle* p, void* ud)
+{
+	ParticleSystem* ps = (ParticleSystem*)ud;
+	const d2d::Vector& pos = ps->GetPosition();
+	p->init_pos.x = pos.x;
+	p->init_pos.y = pos.y;
+}
 
-ParticleSystem* ParticleSystem::PS = NULL;
+static void remove_func(p3d_particle* p, void* ud)
+{
+	ParticleSystem* ps = (ParticleSystem*)ud;
+	ps->RemoveFromInvertRecord(p);
+}
 
 ParticleSystem::ParticleSystem(unsigned int buffer, p3d_ps_config* cfg)
 	: m_anim_recorder(new AnimRecorder(buffer))
 	, m_inv_record(new InvertRecord)
 {
-	PS = this;
-
 	m_ps = p3d_create(buffer, cfg);
 
-	m_ps->add_func = &AddFunc;
-	m_ps->remove_func = &RemoveFunc;
+	m_ps->add_func = &add_func;
+	m_ps->remove_func = &remove_func;
+	m_ps->ud = this;
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	PS = this;
-
 	m_pos = ps.m_pos;
 	m_ps = p3d_create(ps.GetPSCapacity(), ps.m_ps->cfg);
 
-	m_ps->add_func = &AddFunc;
-	m_ps->remove_func = &RemoveFunc;
+	m_ps->add_func = &add_func;
+	m_ps->remove_func = &remove_func;
+	m_ps->ud = this;
 }
 
 ParticleSystem::~ParticleSystem()
@@ -256,6 +265,13 @@ void ParticleSystem::StoreInvertRecord(const std::string& filepath) const
 	}
 }
 
+void ParticleSystem::RemoveFromInvertRecord(p3d_particle* p) 
+{
+	if (m_inv_record) {
+		m_inv_record->AddItem(p);
+	}	
+}
+
 void ParticleSystem::SetHori(int min, int max) 
 {
 	m_ps->cfg->hori = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
@@ -408,21 +424,9 @@ void ParticleSystem::SetPSCapacity(int cap)
 		p3d_release(m_ps);
 		m_ps = new_ps;
 
-		m_ps->add_func = &AddFunc;
-		m_ps->remove_func = &RemoveFunc;
-	}
-}
-
-void ParticleSystem::AddFunc(p3d_particle* p)
-{
-	p->init_pos.x = PS->m_pos.x;
-	p->init_pos.y = PS->m_pos.y;
-}
-
-void ParticleSystem::RemoveFunc(p3d_particle* p)
-{
-	if (PS->m_inv_record) {
-		PS->m_inv_record->AddItem(p);
+		m_ps->add_func = &add_func;
+		m_ps->remove_func = &remove_func;
+		m_ps->ud = this;
 	}
 }
 
