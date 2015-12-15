@@ -175,32 +175,60 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 	}
 }
 
+//void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
+//{
+//	d2d::Colorf col;
+//	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
+//
+//	d2d::RGBColorSettingDlg dlg(this, NULL, col);
+//	if (!dlg.ShowModal()) {
+//		return;
+//	}
+//
+//	col = dlg.GetColor();
+//	memcpy(&m_pc->col_mul.r, &col.r, sizeof(m_pc->col_mul));
+//}
+//
+//void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
+//{
+//	d2d::Colorf col;
+//	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
+//
+//	d2d::RGBColorSettingDlg dlg(this, NULL, col);
+//	if (!dlg.ShowModal()) {
+//		return;
+//	}
+//
+//	col = dlg.GetColor();
+//	memcpy(&m_pc->col_add.r, &col.r, sizeof(m_pc->col_add));
+//}
+
 void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 {
-	d2d::Colorf col;
-	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
-
-	d2d::RGBColorSettingDlg dlg(this, NULL, col);
-	if (!dlg.ShowModal()) {
-		return;
+	wxColourDialog dlg(m_parent);
+	dlg.SetTitle(wxT("Multi Color"));
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		const wxColor& col = dlg.GetColourData().GetColour();
+		m_pc->col_mul.r = col.Red() / 255.0f;
+		m_pc->col_mul.g = col.Green() / 255.0f;
+		m_pc->col_mul.b = col.Blue() / 255.0f;
+		m_pc->col_mul.a = col.Alpha() / 255.0f;
 	}
-
-	col = dlg.GetColor();
-	memcpy(&m_pc->col_mul.r, &col.r, sizeof(m_pc->col_mul));
 }
 
 void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 {
-	d2d::Colorf col;
-	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
-
-	d2d::RGBColorSettingDlg dlg(this, NULL, col);
-	if (!dlg.ShowModal()) {
-		return;
+	wxColourDialog dlg(m_parent);
+	dlg.SetTitle(wxT("Add Color"));
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		const wxColor& col = dlg.GetColourData().GetColour();
+		m_pc->col_add.r = col.Red() / 255.0f;
+		m_pc->col_add.g = col.Green() / 255.0f;
+		m_pc->col_add.b = col.Blue() / 255.0f;
+		m_pc->col_add.a = col.Alpha() / 255.0f;
 	}
-
-	col = dlg.GetColor();
-	memcpy(&m_pc->col_add.r, &col.r, sizeof(m_pc->col_add));
 }
 
 }
