@@ -26,9 +26,17 @@ ScreenCache::ScreenCache()
 	CS = dtex_cs_create();
 }
 
-void ScreenCache::OnSize(int w, int h)
+void ScreenCache::SetSize(int w, int h)
 {
+	m_width = w;
+	m_height = h;
 	dtex_cs_on_size(CS, w, h);
+}
+
+void ScreenCache::GetSize(int& w, int& h) const
+{
+	w = m_width;
+	h = m_height;
 }
 
 void ScreenCache::Reload()

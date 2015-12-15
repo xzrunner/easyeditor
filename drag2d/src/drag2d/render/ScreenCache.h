@@ -9,7 +9,8 @@ class Camera;
 class ScreenCache
 {
 public:
-	void OnSize(int w, int h);
+	void SetSize(int w, int h);
+	void GetSize(int& w, int& h) const;
 
 	void Reload();
 
@@ -25,6 +26,9 @@ public:
 
 private:
 	ScreenCache();
+
+private:
+	int m_width, m_height;
 
 private:
 	static ScreenCache* m_instance;

@@ -26,6 +26,7 @@ public:
 			  const Colorf& g_trans = Colorf(0, 1, 0, 0),
 			  const Colorf& b_trans = Colorf(0, 0, 1, 0),
 			  bool multi_draw = true) const;
+	void NormalDraw(const ISprite* sprite, const d2d::Matrix& mt) const;
 
 	void InvalidRect(const ISprite* sprite, const Matrix& mt = Matrix());
 
@@ -50,7 +51,6 @@ public:
 
 private:
 	SpriteRenderer();
-	~SpriteRenderer();
 
 	void DrawImpl(const ISprite* sprite, 
   				  const Matrix& mt = Matrix(),
@@ -60,21 +60,8 @@ private:
   				  const Colorf& g_trans = Colorf(0, 1, 0, 0),
   				  const Colorf& b_trans = Colorf(0, 0, 1, 0)) const;
 
-	void DrawImplBlend(const ISprite* sprite) const;
-
-	void DrawUnderToTmp(const ISprite* sprite) const;
-	void DrawSprToTmp(const ISprite* sprite) const;
-	void DrawTmpToScreen(const ISprite* sprite) const;
-
-	void InitBlendShader() const;
-
 private:
-	mutable FBO* m_fbo;
-	mutable int m_blend_idx;
-
 	const Camera* m_cam;
-
-	Matrix m_mt;
 
 private:
 	static SpriteRenderer* m_instance;

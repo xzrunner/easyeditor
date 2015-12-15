@@ -316,14 +316,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\dtex_c1_new.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_c1_new.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\dtex_c2.c"
 					>
 				</File>

@@ -5,7 +5,6 @@
 #include "common/Config.h"
 #include "common/color_config.h"
 #include "render/ShaderMgr.h"
-#include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
 #include "render/ShaderContext.h"
 #include "render/DrawCallBatching.h"
@@ -32,7 +31,7 @@ void TwoPassCanvas::OnSize(int w, int h)
 		// fix me: ScreenCache depend on DrawCallBatching
 		DrawCallBatching::Instance();
 	}
-	ScreenCache::Instance()->OnSize(w, h);
+	ScreenCache::Instance()->SetSize(w, h);
 }
 
 static void

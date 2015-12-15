@@ -46,7 +46,7 @@ void RenderContextStack::Pop()
 	int width, height;
 	ctx.render->GetProjection(width, height);
 	DrawCallBatching::Instance()->OnSize(width, height);
-	ScreenCache::Instance()->OnSize(width, height);
+	ScreenCache::Instance()->SetSize(width, height);
 }
 
 void RenderContextStack::SetModelView(const Vector& offset, float scale)
