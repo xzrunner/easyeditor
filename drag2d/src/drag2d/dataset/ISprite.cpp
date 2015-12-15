@@ -38,6 +38,7 @@ ISprite::ISprite()
 	visiable = editable = true;
 
 	m_angle = 0.0f;
+	m_offset.setInvalid();
 	m_scale.set(1, 1);
 	m_shear.set(0, 0);
 	m_xMirror = m_yMirror = false;
@@ -258,7 +259,7 @@ void ISprite::BuildBounding()
 		return;
 	}
 
-	if (m_offset.x == 0 && m_offset.y == 0) {
+	if (!m_offset.isValid()) {
 		m_offset.set(rect.xCenter(), rect.yCenter());
 	}
 	rect.scale(m_scale.x, m_scale.y);
