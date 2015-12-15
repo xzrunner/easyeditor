@@ -10,7 +10,6 @@
 #endif // OPEN_SCREEN_CACHE
 
 #include "render/BlendShader.h"
-#include "render/ScreenFBO.h"
 #include "render/DrawCallBatching.h"
 #include "common/Exception.h"
 #include "common/Config.h"
@@ -192,8 +191,8 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 		const Camera* cam = rd->GetCamera();
 		assert(cam);
 
-		int w = ScreenFBO::Instance()->GetFBO().GetWidth(),
-			h = ScreenFBO::Instance()->GetFBO().GetHeight();
+		int w, h;
+		ScreenCache::Instance()->GetSize(w, h);
 
 		//////////////////////////////////////////////////////////////////////////
 

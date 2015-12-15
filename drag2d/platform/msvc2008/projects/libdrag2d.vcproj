@@ -1241,6 +1241,22 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\SpriteBlend.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\SpriteBlend.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\SpriteBlend2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\SpriteBlend2.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\SpriteRenderer.cpp"
 					>
 				</File>
@@ -1302,14 +1318,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\IShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\RenderList.h"
 					>
 				</File>
 				<File
@@ -1554,14 +1562,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\render_utility.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\ScreenFBO.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\ScreenFBO.h"
 					>
 				</File>
 				<File
