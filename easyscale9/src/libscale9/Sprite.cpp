@@ -99,13 +99,9 @@ void Sprite::SetSize(float w, float h)
 }
 
 void Sprite::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans) const
+				  const d2d::ColorTrans& color) const
 {
-	m_data.Draw(mt, mul, add, r_trans, g_trans, b_trans);
+	m_data.Draw(mt, color);
 }
 
 }

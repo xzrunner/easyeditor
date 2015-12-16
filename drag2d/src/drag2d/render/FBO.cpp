@@ -245,8 +245,7 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 	Matrix mt;
 	mt.setScale(1, -1);
 	mt.translate(-dx, -dy);
-	SpriteRenderer::Instance()->Draw(sprite, mt, Colorf(1,1,1,1), Colorf(0,0,0,0), 
-		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), false);
+	SpriteRenderer::Instance()->Draw(sprite, NULL, mt, ColorTrans(), false);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	shader->Commit();

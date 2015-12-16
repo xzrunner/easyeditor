@@ -131,7 +131,7 @@ const uint8_t* Image::GetPixelData() const
 	return m_tex->GetPixelData(); 
 }
 
-void Image::Draw(const Matrix& mt, const ISprite* spr) const
+void Image::Draw(const Matrix& mt, const ISprite* spr, const ISprite* root) const
 {
 	float hw = m_tex->GetWidth() * 0.5f,
 		hh = m_tex->GetHeight() * 0.5f;

@@ -63,16 +63,10 @@ void ShaderMgr::NullProg()
 	null();
 }
 
-void ShaderMgr::SetSpriteColor(const Colorf& multi, const Colorf& add)
+void ShaderMgr::SetSpriteColor(const ColorTrans& color)
 {
 	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	shader->SetColor(multi, add);
-}
-
-void ShaderMgr::SetSpriteColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans)
-{
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	shader->SetColorTrans(r_trans, g_trans, b_trans);
+	shader->SetColor(color);
 }
 
 void ShaderMgr::SetShapeColor(const Colorf& col)

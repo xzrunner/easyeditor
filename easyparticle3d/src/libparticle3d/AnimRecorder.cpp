@@ -84,7 +84,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 
 			sprite->SetTransform(d2d::Vector(item->x, item->y), item->angle);
 			sprite->SetScale(item->scale, item->scale);
-			sprite->multiCol = item->mul_col;
+			sprite->color.multi = item->mul_col;
 
 			frame->sprites.push_back(sprite);
 		}

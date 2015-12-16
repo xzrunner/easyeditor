@@ -26,12 +26,9 @@ SpriteRenderer::SpriteRenderer()
 }
 
 void SpriteRenderer::Draw(const ISprite* sprite, 
+						  const ISprite* root,
 						  const d2d::Matrix& mt,
-						  const Colorf& mul, 
-						  const Colorf& add,
-						  const Colorf& r_trans,
-						  const Colorf& g_trans,
-						  const Colorf& b_trans,
+						  const ColorTrans& color,
 						  bool multi_draw) const
 {
 	if (!sprite->visiable) {
@@ -39,19 +36,19 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 	}
 
 	if (!multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
-		DrawImpl(sprite, mt, mul, add, r_trans, g_trans, b_trans);
+		DrawImpl(sprite, root, mt, color);
 	} else {
 		SpriteBlend::Instance()->Draw(sprite, mt);
 	}
 }
 
-void SpriteRenderer::DrawWithoutBlend(const ISprite* sprite, const d2d::Matrix& mt) const
+void SpriteRenderer::DrawWithoutBlend(const ISprite* sprite, const ISprite* root, const d2d::Matrix& mt) const
 {
 	if (!sprite->visiable) {
 		return;
 	}
 
-	DrawImpl(sprite, mt);
+	DrawImpl(sprite, root, mt);
 }
 
 void SpriteRenderer::InvalidRect(const ISprite* sprite, const Matrix& mt)
@@ -75,48 +72,41 @@ void SpriteRenderer::Draw(const ISymbol* symbol,
 						  float yScale/* = 1.0f*/, 
 						  float xShear/* = 0.0f*/, 
 						  float yShear/* = 0.0f*/, 
-						  const Colorf& mul /*= Colorf(1,1,1,1)*/,
-						  const Colorf& add /*= Colorf(0,0,0,0)*/,
-						  const Colorf& r_trans,
-						  const Colorf& g_trans,
-						  const Colorf& b_trans) const
+						  const ColorTrans& color) const
 {
 	Matrix t;
 	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	t = mt * t;
-	symbol->Draw(t, mul, add, r_trans, g_trans, b_trans);
+	symbol->Draw(t, color);
 }
 
 void SpriteRenderer::DrawImpl(const ISprite* sprite, 
+							  const ISprite* root,
 							  const d2d::Matrix& mt,
-							  const Colorf& mul, 
-							  const Colorf& add,
-							  const Colorf& r_trans,
-							  const Colorf& g_trans,
-							  const Colorf& b_trans) const
+							  const ColorTrans& color) const
 {
 	Matrix t;
 	sprite->GetTransMatrix(t);
 	t = mt * t;
 
-	Colorf _mul = cMul(sprite->multiCol, mul),
-		_add = cAdd(sprite->addCol, add);
+	ColorTrans col_new;
 
-	Colorf _r_trans, _g_trans, _b_trans;
+	col_new.multi = cMul(sprite->color.multi, color.multi);
+	col_new.add = cAdd(sprite->color.add, color.add);
 
-	_r_trans.r = sprite->r_trans.r * r_trans.r + sprite->r_trans.g * g_trans.r + sprite->r_trans.b * b_trans.r;
-	_r_trans.g = sprite->r_trans.r * r_trans.g + sprite->r_trans.g * g_trans.g + sprite->r_trans.b * b_trans.g;
-	_r_trans.b = sprite->r_trans.r * r_trans.b + sprite->r_trans.g * g_trans.b + sprite->r_trans.b * b_trans.b;
+	col_new.r.r = sprite->color.r.r * color.r.r + sprite->color.r.g * color.g.r + sprite->color.r.b * color.b.r;
+	col_new.r.g = sprite->color.r.r * color.r.g + sprite->color.r.g * color.g.g + sprite->color.r.b * color.b.g;
+	col_new.r.b = sprite->color.r.r * color.r.b + sprite->color.r.g * color.g.b + sprite->color.r.b * color.b.b;
 
-	_g_trans.r = sprite->g_trans.r * r_trans.r + sprite->g_trans.g * g_trans.r + sprite->g_trans.b * b_trans.r;
-	_g_trans.g = sprite->g_trans.r * r_trans.g + sprite->g_trans.g * g_trans.g + sprite->g_trans.b * b_trans.g;
-	_g_trans.b = sprite->g_trans.r * r_trans.b + sprite->g_trans.g * g_trans.b + sprite->g_trans.b * b_trans.b;
+	col_new.g.r = sprite->color.g.r * color.r.r + sprite->color.g.g * color.g.r + sprite->color.g.b * color.b.r;
+	col_new.g.g = sprite->color.g.r * color.r.g + sprite->color.g.g * color.g.g + sprite->color.g.b * color.b.g;
+	col_new.g.b = sprite->color.g.r * color.r.b + sprite->color.g.g * color.g.b + sprite->color.g.b * color.b.b;
 
-	_b_trans.r = sprite->b_trans.r * r_trans.r + sprite->b_trans.g * g_trans.r + sprite->b_trans.b * b_trans.r;
-	_b_trans.g = sprite->b_trans.r * r_trans.g + sprite->b_trans.g * g_trans.g + sprite->b_trans.b * b_trans.g;
-	_b_trans.b = sprite->b_trans.r * r_trans.b + sprite->b_trans.g * g_trans.b + sprite->b_trans.b * b_trans.b;
+	col_new.b.r = sprite->color.b.r * color.r.r + sprite->color.b.g * color.g.r + sprite->color.b.b * color.b.r;
+	col_new.b.g = sprite->color.b.r * color.r.g + sprite->color.b.g * color.g.g + sprite->color.b.b * color.b.g;
+	col_new.b.b = sprite->color.b.r * color.r.b + sprite->color.b.g * color.g.b + sprite->color.b.b * color.b.b;
 
-	sprite->GetSymbol().Draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
+	sprite->GetSymbol().Draw(t, col_new, sprite);
 
 	if (sprite->IsAnchor()) {
 		std::vector<Vector> bound;

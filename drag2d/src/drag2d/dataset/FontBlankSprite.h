@@ -55,7 +55,7 @@ public:
 
 	bool has_edge;
 
-	Colorf color;
+	Colorf font_color;
 
 	HoriAlignType align_hori;
 	VertAlignType align_vert;

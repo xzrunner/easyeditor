@@ -41,13 +41,8 @@ void Symbol::ReloadTexture() const
 	}	
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
 	clock_t curr = clock();
 	if (m_time == 0) {
@@ -56,8 +51,7 @@ void Symbol::Draw(const d2d::Matrix& mt,
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
-	shader->SetSpriteColor(mul, add);
-	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+	shader->SetSpriteColor(color);
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -65,7 +59,7 @@ void Symbol::Draw(const d2d::Matrix& mt,
 		if (m_update) {
 			ocean->Update(dt);
 		}
-		ocean->Draw(mt, mul, add, false);
+		ocean->Draw(mt, color.multi, color.add, false);
 	}
 
 	m_time = curr;

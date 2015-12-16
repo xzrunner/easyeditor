@@ -15,7 +15,7 @@ FontBlankSprite::FontBlankSprite()
 {
 	font = "";
 	has_edge = false;
-	color.set(1, 1, 1, 1);
+	font_color.set(1, 1, 1, 1);
 	align_hori = HAT_LEFT;
 	align_vert = VAT_TOP;
 	size = 16;
@@ -44,7 +44,7 @@ FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 {
 	m_symbol->Retain();
 	font = m_symbol->font;
-	color = transColor(m_symbol->color, PT_ARGB);
+	font_color = transColor(m_symbol->color, PT_ARGB);
 
 	if (symbol->align_hori == 0)
 		align_hori = HAT_LEFT;
@@ -106,7 +106,7 @@ void FontBlankSprite::Load(const Json::Value& val)
 	if (val["font"].isNull())
 	{
 		font = m_symbol->font;
-		color = transColor(m_symbol->color, PT_ARGB);
+		font_color = transColor(m_symbol->color, PT_ARGB);
 		align_hori = HoriAlignType((int)m_symbol->align_hori);
 		align_vert = VertAlignType((int)m_symbol->align_vert);
 		size = m_symbol->size;
@@ -117,7 +117,7 @@ void FontBlankSprite::Load(const Json::Value& val)
 	else
 	{
 		font = val["font"].asString();
-		color = transColor(val["color"].asString(), PT_ARGB);
+		font_color = transColor(val["color"].asString(), PT_ARGB);
 		// is old version data
 		if (!val["align"].isNull()) {
 			align_hori = HoriAlignType(val["align"].asInt());
@@ -144,7 +144,7 @@ void FontBlankSprite::Store(Json::Value& val) const
 	ISprite::Store(val);
 
 	val["font"] = font;
-	val["color"] = transColor(color, PT_ARGB);
+	val["color"] = transColor(font_color, PT_ARGB);
 	val["align hori"] = align_hori;
 	val["align vert"] = align_vert;
 	val["size"] = size;

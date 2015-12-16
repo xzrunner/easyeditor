@@ -19,7 +19,6 @@ public:
 
 	void SetBlendMode(const std::string& mode);
 
-	void DrawBlend(const float vb[24], int texid);
 	void DrawBlend(const Vector vertices[4], const Vector texcoords[4], 
 		const Vector texcoords_base[4], int texid);
 

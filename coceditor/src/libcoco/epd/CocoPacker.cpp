@@ -1637,7 +1637,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		if (isFont)
 		{
 			const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite);
-			bool is_mount_node = font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+			bool is_mount_node = font && font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
 			if (is_mount_node)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1647,7 +1647,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", transColor(font->color, d2d::PT_ARGB));
+				std::string aColor = lua::assign("color", transColor(font->font_color, d2d::PT_ARGB));
 
 //				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
 				int align_hori = font->align_hori;
@@ -1669,7 +1669,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
 				const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_mount_node = font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+				is_mount_node = font && font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1704,7 +1704,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
 				const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_mount_node = font && font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
+				is_mount_node = font && font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1861,7 +1861,7 @@ void CocoPacker::ParserFontForFrame(const d2d::FontBlankSprite* sprite, int id)
 	float mat[6];
 	TransToMat(sprite, mat, true);
 
-	bool isNullNode = sprite->font.empty() && sprite->color == d2d::Colorf(0, 0, 0, 0);
+	bool isNullNode = sprite->font.empty() && sprite->font_color == d2d::Colorf(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// move to left-top
@@ -1949,23 +1949,23 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 
 void CocoPacker::GetColorAssignParams(const d2d::ISprite* sprite, std::vector<std::string>& params) const
 {
-	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0)) 
+	if (sprite->color.multi != d2d::Colorf(1,1,1,1) || sprite->color.add != d2d::Colorf(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
+		std::string str_multi = lua::assign("color", d2d::transColor(sprite->color.multi, d2d::PT_BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
+		std::string str_add = lua::assign("add", d2d::transColor(sprite->color.add, d2d::PT_ABGR));
 		params.push_back(str_add);
 	}
 
-	if (sprite->r_trans != d2d::Colorf(1, 0, 0, 1) || sprite->g_trans != d2d::Colorf(0, 1, 0, 1) || sprite->b_trans != d2d::Colorf(0, 0, 1, 1))
+	if (sprite->color.r != d2d::Colorf(1, 0, 0, 1) || sprite->color.g != d2d::Colorf(0, 1, 0, 1) || sprite->color.b != d2d::Colorf(0, 0, 1, 1))
 	{
-		std::string str_r = lua::assign("r_map", d2d::transColor(sprite->r_trans, d2d::PT_RGBA));
+		std::string str_r = lua::assign("r_map", d2d::transColor(sprite->color.r, d2d::PT_RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", d2d::transColor(sprite->g_trans, d2d::PT_RGBA));
+		std::string str_g = lua::assign("g_map", d2d::transColor(sprite->color.g, d2d::PT_RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", d2d::transColor(sprite->b_trans, d2d::PT_RGBA));
+		std::string str_b = lua::assign("b_map", d2d::transColor(sprite->color.b, d2d::PT_RGBA));
 		params.push_back(str_b);
 	}
 }

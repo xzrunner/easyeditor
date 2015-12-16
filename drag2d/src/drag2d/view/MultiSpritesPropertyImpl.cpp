@@ -92,9 +92,9 @@ Colorf MultiSpritesPropertyImpl::GetMultiColor() const
 		return WHITE;
 	}
 
-	Colorf col = m_sprites[0]->multiCol;
+	Colorf col = m_sprites[0]->color.multi;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->multiCol) {
+		if (col != m_sprites[i]->color.multi) {
 			return WHITE;
 		}
 	}
@@ -107,9 +107,9 @@ Colorf MultiSpritesPropertyImpl::GetAddColor() const
 		return BLACK;
 	}
 	
-	Colorf col = m_sprites[0]->addCol;
+	Colorf col = m_sprites[0]->color.add;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->addCol) {
+		if (col != m_sprites[i]->color.add) {
 			return BLACK;
 		}
 	}
@@ -122,9 +122,9 @@ Colorf MultiSpritesPropertyImpl::GetTransColorR() const
 		return RED;
 	}
 
-	Colorf col = m_sprites[0]->r_trans;
+	Colorf col = m_sprites[0]->color.r;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->r_trans) {
+		if (col != m_sprites[i]->color.r) {
 			return RED;
 		}
 	}
@@ -137,9 +137,9 @@ Colorf MultiSpritesPropertyImpl::GetTransColorG() const
 		return GREEN;
 	}
 
-	Colorf col = m_sprites[0]->g_trans;
+	Colorf col = m_sprites[0]->color.g;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->g_trans) {
+		if (col != m_sprites[i]->color.g) {
 			return GREEN;
 		}
 	}
@@ -152,9 +152,9 @@ Colorf MultiSpritesPropertyImpl::GetTransColorB() const
 		return BLUE;
 	}
 
-	Colorf col = m_sprites[0]->b_trans;
+	Colorf col = m_sprites[0]->color.b;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->b_trans) {
+		if (col != m_sprites[i]->color.b) {
 			return BLUE;
 		}
 	}
@@ -283,25 +283,25 @@ void MultiSpritesPropertyImpl::SetPos(float x, float y)
 void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		float alpha = m_sprites[i]->multiCol.a;
-		m_sprites[i]->multiCol = col;
-		m_sprites[i]->multiCol.a = alpha;
+		float alpha = m_sprites[i]->color.multi.a;
+		m_sprites[i]->color.multi = col;
+		m_sprites[i]->color.multi.a = alpha;
 	}
 }
 
 void MultiSpritesPropertyImpl::SetColorAdd(const Colorf& col)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		float alpha = m_sprites[i]->addCol.a;
-		m_sprites[i]->addCol = col;
-		m_sprites[i]->addCol.a = alpha;
+		float alpha = m_sprites[i]->color.add.a;
+		m_sprites[i]->color.add = col;
+		m_sprites[i]->color.add.a = alpha;
 	}
 }
 
 void MultiSpritesPropertyImpl::SetColorAlpha(float alpha)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->multiCol.a = alpha;
+		m_sprites[i]->color.multi.a = alpha;
 	}
 }
 

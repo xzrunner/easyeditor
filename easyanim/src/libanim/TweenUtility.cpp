@@ -76,8 +76,8 @@ void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::I
 		yshear = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
 	tween->SetShear(xshear, yshear);
 
-	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
-	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
+	tween->color.add = cInterpolate(start->color.add, end->color.add, process);
+	tween->color.multi = cInterpolate(start->color.multi, end->color.multi, process);
 
 	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
 	{

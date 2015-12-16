@@ -111,16 +111,19 @@ void OceanMesh::Draw(const d2d::Matrix& mt, const d2d::Colorf& mul,
 {
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	if (m_blend_open && m_image1) {
-		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, m_blend_base), d2d::Colorf(0, 0, 0, 0));
+		d2d::ColorTrans color;
+		color.multi = d2d::Colorf(1, 1, 1, m_blend_base);
+		shader->SetSpriteColor(color);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(mt, mul, add, m_image0->GetTexID());
 		}
-		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, 1 - m_blend_base), d2d::Colorf(0, 0, 0, 0));
+		color.multi = d2d::Colorf(1, 1, 1, 1 - m_blend_base);
+		shader->SetSpriteColor(color);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(mt, mul, add, m_image1->GetTexID());
 		}
 	} else {
-		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0));
+		shader->SetSpriteColor(d2d::ColorTrans());
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(mt, mul, add);
 		}

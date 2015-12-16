@@ -9,6 +9,7 @@
 namespace d2d
 {
 
+struct ColorTrans;
 struct Colorf;
 class Vector;
 class ShaderImpl;
@@ -27,8 +28,7 @@ public:
 
 	virtual void NullProg();
 
-	void SetSpriteColor(const Colorf& multi, const Colorf& add);
-	void SetSpriteColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans);
+	void SetSpriteColor(const ColorTrans& color);
 	void SetShapeColor(const Colorf& col);
 	void SetBlendMode(BlendMode mode);
 

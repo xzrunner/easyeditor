@@ -47,13 +47,8 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite/* = NULL*/) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
  	const d2d::TPNode* n = NULL;
 	if (d2d::Config::Instance()->IsUseDTex() && 
@@ -117,7 +112,7 @@ void Symbol::Draw(const d2d::Matrix& mt,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			d2d::SpriteRenderer::Instance()->Draw(m_sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
+			d2d::SpriteRenderer::Instance()->Draw(m_sprites[i], root, mt, color);
 		}
 		if (m_clipbox.xLength() > 0 && m_clipbox.yLength() > 0) {
 			d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);

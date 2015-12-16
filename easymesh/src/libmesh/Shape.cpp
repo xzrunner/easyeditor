@@ -115,7 +115,10 @@ void Shape::DrawTexture(const d2d::Matrix& mt,
 {
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->sprite();
-	shader->SetSpriteColor(mul, add);
+	d2d::ColorTrans color;
+	color.multi = mul;
+	color.add = add;
+	shader->SetSpriteColor(color);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];

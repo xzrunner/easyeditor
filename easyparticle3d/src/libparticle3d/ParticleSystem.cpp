@@ -381,7 +381,10 @@ void ParticleSystem::Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRe
 		d2d::Matrix _mt(mt);
 		_mt.translate(p->init_pos.x, p->init_pos.y);
 		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p->cfg.symbol->ud);
-		d2d::SpriteRenderer::Instance()->Draw(symbol, _mt, pos, p->angle, s, s, 0, 0, mul_col, add_col);
+		d2d::ColorTrans color;
+		color.multi = mul_col;
+		color.add = add_col;
+		d2d::SpriteRenderer::Instance()->Draw(symbol, _mt, pos, p->angle, s, s, 0, 0, color);
 
 		if (p->bind_ps) {
 			d2d::Matrix _mt;

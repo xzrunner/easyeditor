@@ -1,6 +1,7 @@
 #ifndef _DRAG2D_SYMBOL_H_
 #define _DRAG2D_SYMBOL_H_
 
+#include "ColorTrans.h"
 #include "widgets/ListItem.h"
 #include "common/ResourcesMgr.h"
 #include "common/Rect.h"
@@ -31,13 +32,8 @@ public:
 	virtual void ClearUserData(bool deletePtr);
 
 	virtual void ReloadTexture() const = 0;
-	virtual void Draw(const Matrix& mt,
-		const Colorf& mul = Colorf(1, 1, 1, 1), 
-		const Colorf& add = Colorf(0, 0, 0, 0),
-		const Colorf& r_trans = Colorf(1, 0, 0, 0),
-		const Colorf& g_trans = Colorf(0, 1, 0, 0),
-		const Colorf& b_trans = Colorf(0, 0, 1, 0),
-		const ISprite* sprite = NULL) const = 0;
+	virtual void Draw(const Matrix& mt, const ColorTrans& col = ColorTrans(), 
+		const ISprite* spr = NULL, const ISprite* root = NULL) const = 0;
 	virtual Rect GetSize(const ISprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const Matrix& mt) const {}
 

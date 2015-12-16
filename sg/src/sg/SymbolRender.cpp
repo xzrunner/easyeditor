@@ -110,7 +110,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 				d2d::Vector pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->SetTransform(pos, m_grid->GetAngle());
-				d2d::SpriteRenderer::Instance()->Draw(m_grid, d2d::Matrix(), color);
+				d2d::SpriteRenderer::Instance()->Draw(m_grid, NULL, d2d::Matrix(), color);
 			}
 		}
 	}

@@ -38,13 +38,8 @@ void Symbol::ReloadTexture() const
 	m_ps->ReloadTexture();
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
 	if (!m_ps) {
 		return;
@@ -56,14 +51,13 @@ void Symbol::Draw(const d2d::Matrix& mt,
 		return;
 	}
 
-	if (sprite) {
-		const Sprite* spr = static_cast<const Sprite*>(sprite);
-		m_ps->SetDirection(spr->GetDir());
+	if (spr) {
+		const Sprite* _spr = static_cast<const Sprite*>(spr);
+		m_ps->SetDirection(_spr->GetDir());
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
-	shader->SetSpriteColor(mul, add);
-	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+	shader->SetSpriteColor(color);
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;

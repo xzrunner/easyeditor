@@ -19,20 +19,15 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite/* = NULL*/) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
 	const d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		DrawBackground(sprite, mt);
+		DrawBackground(spr, mt);
 	} 
  	if (setting.visible_label_text) {
- 		DrawText(sprite, mt, mul, add);
+ 		DrawText(spr, mt, color.multi, color.add);
  	}
 }
 

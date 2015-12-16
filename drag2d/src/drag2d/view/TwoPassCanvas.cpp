@@ -37,7 +37,10 @@ void TwoPassCanvas::OnSize(int w, int h)
 static void
 _before_draw(void* ud) {
 	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
-	ShaderMgr::Instance()->SetSpriteColor(stype->multi_col, stype->add_col);
+	ColorTrans color;
+	color.multi = stype->multi_col;
+	color.add = stype->add_col;
+	ShaderMgr::Instance()->SetSpriteColor(color);
 }
 
 #ifdef OPEN_SCREEN_CACHE

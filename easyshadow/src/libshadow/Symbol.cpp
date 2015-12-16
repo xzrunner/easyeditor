@@ -33,16 +33,11 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
 	if (m_shadow) {
-		m_shadow->Draw(mt, mul.a);
+		m_shadow->Draw(mt, color.multi.a);
 	}
 }
 

@@ -7,17 +7,13 @@ namespace libanim
 void Utility::DrawAnimSymbol(const Symbol* symbol, 
 						   const d2d::Matrix& mt,
 						   int index, 
-						   const d2d::Colorf& mul, 
-						   const d2d::Colorf& add,
-						   const d2d::Colorf& r_trans,
-						   const d2d::Colorf& g_trans,
-						   const d2d::Colorf& b_trans)
+						   const d2d::ColorTrans& color)
 {
 	std::vector<d2d::ISprite*> sprites;
 	GetCurrSprites(symbol, index, sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
+		d2d::SpriteRenderer::Instance()->Draw(sprites[i], NULL, mt, color);
 	}
 
 	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::ISprite>());

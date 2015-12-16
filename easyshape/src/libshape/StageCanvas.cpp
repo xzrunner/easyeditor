@@ -43,7 +43,7 @@ void StageCanvas::OnDrawSprites() const
 	if (m_edited && m_bg) 
 	{
 		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, mat);
+		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
 	m_shape_impl->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);

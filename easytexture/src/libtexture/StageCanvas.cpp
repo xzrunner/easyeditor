@@ -30,7 +30,7 @@ void StageCanvas::OnDrawSprites() const
 	if (m_edited && m_bg) 
 	{
 		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, mat);
+		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
 	d2d::Rect sr = m_screen.GetRegion();

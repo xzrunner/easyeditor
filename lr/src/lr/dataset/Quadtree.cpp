@@ -72,7 +72,7 @@ void Quadtree::DebugDraw() const
 	if (m_selected) {
 		d2d::PrimitiveDraw::rect(d2d::Matrix(), m_selected->m_rect, d2d::LIGHT_RED_THIN_LINE);
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
-			d2d::SpriteRenderer::Instance()->Draw(m_selected->m_sprites[i], d2d::Matrix(), d2d::LIGHT_BLUE);
+			d2d::SpriteRenderer::Instance()->Draw(m_selected->m_sprites[i], NULL, d2d::Matrix(), d2d::LIGHT_BLUE);
 		}
 	}
 }

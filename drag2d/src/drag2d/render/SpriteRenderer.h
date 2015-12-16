@@ -2,7 +2,7 @@
 #define _DRAG2D_SPRITE_RENDERER_H_
 
 #include "common/Matrix.h"
-#include "common/Color.h"
+#include "dataset/ColorTrans.h"
 
 namespace d2d
 {
@@ -19,14 +19,11 @@ class SpriteRenderer
 {
 public:
 	void Draw(const ISprite* sprite, 
+		      const ISprite* root = NULL,
 			  const Matrix& mt = Matrix(),
-			  const Colorf& mul = Colorf(1,1,1,1),
-			  const Colorf& add = Colorf(0,0,0,0),
-			  const Colorf& r_trans = Colorf(1, 0, 0, 0),
-			  const Colorf& g_trans = Colorf(0, 1, 0, 0),
-			  const Colorf& b_trans = Colorf(0, 0, 1, 0),
+			  const ColorTrans& color = ColorTrans(),
 			  bool multi_draw = true) const;
-	void DrawWithoutBlend(const ISprite* sprite, const d2d::Matrix& mt) const;
+	void DrawWithoutBlend(const ISprite* sprite, const ISprite* root, const d2d::Matrix& mt) const;
 
 	void InvalidRect(const ISprite* sprite, const Matrix& mt = Matrix());
 
@@ -38,11 +35,7 @@ public:
 			  float yScale = 1.0f,
 			  float xShear = 0.0f, 
 			  float yShear = 0.0f, 
-			  const Colorf& mul = Colorf(1,1,1,1),
-			  const Colorf& add = Colorf(0,0,0,0),
-			  const Colorf& r_trans = Colorf(1, 0, 0, 0),
-			  const Colorf& g_trans = Colorf(0, 1, 0, 0),
-			  const Colorf& b_trans = Colorf(0, 0, 1, 0)) const;
+			  const ColorTrans& color = ColorTrans()) const;
 
 	void SetCamera(const Camera* cam) { m_cam = cam; }
 	const Camera* GetCamera() const { return m_cam; }
@@ -53,12 +46,9 @@ private:
 	SpriteRenderer();
 
 	void DrawImpl(const ISprite* sprite, 
+		          const ISprite* root = NULL,
   				  const Matrix& mt = Matrix(),
-  				  const Colorf& mul = Colorf(1,1,1,1),
-  				  const Colorf& add = Colorf(0,0,0,0),
-  				  const Colorf& r_trans = Colorf(1, 0, 0, 0),
-  				  const Colorf& g_trans = Colorf(0, 1, 0, 0),
-  				  const Colorf& b_trans = Colorf(0, 0, 1, 0)) const;
+  				  const ColorTrans& color = ColorTrans()) const;
 
 private:
 	const Camera* m_cam;

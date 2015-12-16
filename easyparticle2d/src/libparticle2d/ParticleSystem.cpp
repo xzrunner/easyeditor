@@ -169,9 +169,9 @@ void ParticleSystem::Draw(const d2d::Matrix& mt) const
 	p2d_particle* p = m_ps->start;
 	while (p != m_ps->last)
 	{
-		d2d::Colorf mul_col, add_col;
-		memcpy(&mul_col.r, &p->col_mul.r, sizeof(float) * 4);
-		memcpy(&add_col.r, &p->col_add.r, sizeof(float) * 4);
+		d2d::ColorTrans color;
+		memcpy(&color.multi.r, &p->col_mul.r, sizeof(float) * 4);
+		memcpy(&color.add.r, &p->col_add.r, sizeof(float) * 4);
 
 		d2d::Vector pos;
 		pos.x = p->position.x;
@@ -180,7 +180,7 @@ void ParticleSystem::Draw(const d2d::Matrix& mt) const
 		float s = p->scale;
 
 		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p->symbol->ud);
-		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), pos, p->angle, s, s, 0, 0, mul_col, add_col);
+		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), pos, p->angle, s, s, 0, 0, color);
 
 		++p;
 	}

@@ -5,6 +5,7 @@
 #include "SpriteShader.frag"
 #include "SpriteFasterShader.frag"
 
+#include "dataset/ColorTrans.h"
 #include "common/Color.h"
 
 #include <stdio.h>
@@ -222,40 +223,37 @@ bool SpriteShader::IsOpenBufferData() const
 	return m_open_buffer_data; 
 }
 
-void SpriteShader::SetColor(const Colorf& multi, const Colorf& add)
+void SpriteShader::SetColor(const ColorTrans& color)
 {
 	m_color = 
-		((int)(multi.a * 255 + 0.5f) << 24) | 
-		((int)(multi.b * 255 + 0.5f) << 16) | 
-		((int)(multi.g * 255 + 0.5f) << 8) | 
-		((int)(multi.r * 255 + 0.5f));
+		((int)(color.multi.a * 255 + 0.5f) << 24) | 
+		((int)(color.multi.b * 255 + 0.5f) << 16) | 
+		((int)(color.multi.g * 255 + 0.5f) << 8) | 
+		((int)(color.multi.r * 255 + 0.5f));
 
 	m_additive = 
-		((int)(add.a * 255 + 0.5f) << 24) | 
-		((int)(add.b * 255 + 0.5f) << 16) | 
-		((int)(add.g * 255 + 0.5f) << 8) | 
-		((int)(add.r * 255 + 0.5f));
-}
+		((int)(color.add.a * 255 + 0.5f) << 24) | 
+		((int)(color.add.b * 255 + 0.5f) << 16) | 
+		((int)(color.add.g * 255 + 0.5f) << 8) | 
+		((int)(color.add.r * 255 + 0.5f));
 
-void SpriteShader::SetColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans)
-{
 	m_r_trans = 
-		((int)(r_trans.a * 255 + 0.5f) << 24) | 
-		((int)(r_trans.b * 255 + 0.5f) << 16) | 
-		((int)(r_trans.g * 255 + 0.5f) << 8) | 
-		((int)(r_trans.r * 255 + 0.5f));
+		((int)(color.r.a * 255 + 0.5f) << 24) | 
+		((int)(color.r.b * 255 + 0.5f) << 16) | 
+		((int)(color.r.g * 255 + 0.5f) << 8) | 
+		((int)(color.r.r * 255 + 0.5f));
 
 	m_g_trans = 
-		((int)(g_trans.a * 255 + 0.5f) << 24) | 
-		((int)(g_trans.b * 255 + 0.5f) << 16) | 
-		((int)(g_trans.g * 255 + 0.5f) << 8) | 
-		((int)(g_trans.r * 255 + 0.5f));
+		((int)(color.g.a * 255 + 0.5f) << 24) | 
+		((int)(color.g.b * 255 + 0.5f) << 16) | 
+		((int)(color.g.g * 255 + 0.5f) << 8) | 
+		((int)(color.g.r * 255 + 0.5f));
 
 	m_b_trans = 
-		((int)(b_trans.a * 255 + 0.5f) << 24) | 
-		((int)(b_trans.b * 255 + 0.5f) << 16) | 
-		((int)(b_trans.g * 255 + 0.5f) << 8) | 
-		((int)(b_trans.r * 255 + 0.5f));
+		((int)(color.b.a * 255 + 0.5f) << 24) | 
+		((int)(color.b.b * 255 + 0.5f) << 16) | 
+		((int)(color.b.g * 255 + 0.5f) << 8) | 
+		((int)(color.b.r * 255 + 0.5f));
 }
 
 void SpriteShader::Draw(const float vb[16], int texid)

@@ -57,30 +57,26 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
- 	if (m_shape) {
- 		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
- 		shader->sprite();
-		shader->SetSpriteColor(mul, add);
-		shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+	if (!m_shape) {
+		return;
+	}
 
- 		m_shape->DrawTexture(mt, mul, add);
-  		if (!m_pause && sprite) 
-		{
-			const Sprite* s = static_cast<const Sprite*>(sprite);
-  			d2d::Vector spd = s->GetSpeed();
-  			if (spd.x != 0 || spd.y != 0) {
-  				m_shape->OffsetUV(spd.x, spd.y);
-  			}
-  		}
- 	}
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	shader->sprite();
+	shader->SetSpriteColor(color);
+
+	m_shape->DrawTexture(mt, color.multi, color.add);
+	if (!m_pause && spr) 
+	{
+		const Sprite* s = static_cast<const Sprite*>(spr);
+		d2d::Vector spd = s->GetSpeed();
+		if (spd.x != 0 || spd.y != 0) {
+			m_shape->OffsetUV(spd.x, spd.y);
+		}
+	}
 }
 
 // d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const

@@ -46,20 +46,16 @@ void FontBlankSymbol::ReloadTexture() const
 {
 }
 
-void FontBlankSymbol::Draw(const Matrix& mt,
-						   const Colorf& mul, 
-						   const Colorf& add,
-						   const Colorf& r_trans,
-						   const Colorf& g_trans,
-						   const Colorf& b_trans,
-						   const ISprite* sprite/* = NULL*/) const
+void FontBlankSymbol::Draw(const Matrix& mt, const ColorTrans& col, 
+						   const ISprite* spr, const ISprite* root) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();
+	const FontBlankSprite* fb = (const FontBlankSprite*)spr;
 	if (setting.visible_label_bg) {
- 		DrawBackground(sprite, mt);
+ 		DrawBackground(fb, mt);
  	} 
 	if (setting.visible_label_text) {
-		DrawText(sprite, mt);
+		DrawText(fb, mt);
 	}
 }
 
@@ -121,22 +117,19 @@ void FontBlankSymbol::LoadResources()
 	}
 }
 
-void FontBlankSymbol::DrawBackground(const ISprite* sprite, const Matrix& mt) const
+void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const Matrix& mt) const
 {
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;
-	if (sprite) {
-		const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite);
-		if (font) {
-			hw = font->width * 0.5f;
-			hh = font->height * 0.5f;
-		}
+	if (fb) {
+		hw = fb->width * 0.5f;
+		hh = fb->height * 0.5f;
 	}
 
 	PrimitiveDraw::rect(mt, hw, hh, m_style);
 }
 
-void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
+void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const Matrix& mt) const
 {
 // 	if (sprite) {
 // 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {

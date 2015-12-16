@@ -61,19 +61,6 @@ void BlendShader::SetBlendMode(const std::string& str)
 	}
 }
 
-void BlendShader::DrawBlend(const float vb[24], int texid)
-{
-	SetTexID(texid);
-
-	CopyVertex(vb);
-	if (++m_count >= m_max_commbine) {
-		if (m_count != 0) {
-			wxLogDebug(_T("Shader Commit count to max"));
-		}
-		Commit();
-	}
-}
-
 void BlendShader::DrawBlend(const Vector vertices[4], const Vector texcoords[4], 
 							const Vector texcoords_base[4], int texid)
 {
@@ -87,7 +74,16 @@ void BlendShader::DrawBlend(const Vector vertices[4], const Vector texcoords[4],
 		vb[j*6+4] = texcoords_base[j].x;
 		vb[j*6+5] = texcoords_base[j].y;
 	}
-	DrawBlend(vb, texid);
+
+	SetTexID(texid);
+
+	CopyVertex(vb);
+	if (++m_count >= m_max_commbine) {
+		if (m_count != 0) {
+			wxLogDebug(_T("Shader Commit count to max"));
+		}
+		Commit();
+	}
 }
 
 void BlendShader::BindAttribLocation(GLuint prog)

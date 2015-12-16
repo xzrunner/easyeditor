@@ -53,19 +53,14 @@ void Scale9Data::ReloadTexture() const
 	}
 }
 
-void Scale9Data::Draw(const d2d::Matrix& mt,
-					  const d2d::Colorf& mul, 
-					  const d2d::Colorf& add,
-					  const d2d::Colorf& r_trans,
-					  const d2d::Colorf& g_trans,
-					  const d2d::Colorf& b_trans,
-					  const d2d::ISprite* sprite/* = NULL*/) const
+void Scale9Data::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+					  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
-	if (sprite) {
-		const Sprite* spr = static_cast<const Sprite*>(sprite);
-		spr->Draw(mt, mul, add, r_trans, g_trans, b_trans);
+	if (spr) {
+		const Sprite* _spr = static_cast<const Sprite*>(spr);
+		_spr->Draw(mt, color);
 	} else {
-		DrawScale9(m_type, m_sprites, mt, mul, add, r_trans, g_trans, b_trans);
+		DrawScale9(m_type, m_sprites, mt, color, root);
 	}
 }
 
@@ -171,14 +166,8 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 	ResizeScale9(m_type, m_sprites, m_width, m_height);
 }
 
-void Scale9Data::DrawScale9(Scale9Type type,
-							d2d::ISprite* const sprites[3][3],
-							const d2d::Matrix& mt,
-							const d2d::Colorf& mul, 
-							const d2d::Colorf& add,
-							const d2d::Colorf& r_trans,
-							const d2d::Colorf& g_trans,
-							const d2d::Colorf& b_trans)
+void Scale9Data::DrawScale9(Scale9Type type, d2d::ISprite* const sprites[3][3], const d2d::Matrix& mt,
+							const d2d::ColorTrans& color, const d2d::ISprite* root)
 {
 	switch (type)
 	{
@@ -186,7 +175,7 @@ void Scale9Data::DrawScale9(Scale9Type type,
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
+				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], root, mt, color);
 			}
 		}
 		break;
@@ -195,27 +184,27 @@ void Scale9Data::DrawScale9(Scale9Type type,
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (!sprites[i][j]) continue;
-				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
+				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], root, mt, color);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[1][i]) continue;
-			d2d::SpriteRenderer::Instance()->Draw(sprites[1][i], mt, mul, add, r_trans, g_trans, b_trans);
+			d2d::SpriteRenderer::Instance()->Draw(sprites[1][i], root, mt, color);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[i][1]) continue;
-			d2d::SpriteRenderer::Instance()->Draw(sprites[i][1], mt, mul, add, r_trans, g_trans, b_trans);
+			d2d::SpriteRenderer::Instance()->Draw(sprites[i][1], root, mt, color);
 		}
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
+				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], root, mt, color);
 			}
 		}
 		break;

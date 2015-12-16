@@ -435,8 +435,7 @@ void DynamicTexAndFont::DrawRegion(const Rect& vertex, const Rect& texcoords, in
 	}
 
 	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
-	shader->SetSpriteColorTrans(Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0));	
+	shader->SetSpriteColor(ColorTrans());
 	shader->Draw(vb, texid);
 }
 
@@ -663,7 +662,7 @@ void DynamicTexAndFont::BeginDraw()
 	shader->sprite();
 	shader->SetModelView(Vector(0, 0), 1);
 	shader->SetProjection(m_width, m_height);
-	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
+	shader->SetSpriteColor(ColorTrans());
 	glViewport(0, 0, m_width, m_height);
 
    	glEnable(GL_BLEND);

@@ -2,10 +2,10 @@
 #define _DRAG2D_ISPRITE_H_
 
 #include "interfaces.h"
+#include "ColorTrans.h"
 #include "common/UserDataImpl.h"
 #include "common/Object.h"
 #include "common/Vector.h"
-#include "common/Color.h"
 #include "render/BlendModes.h"
 #include "render/FilterModes.h"
 
@@ -105,9 +105,8 @@ protected:
 
 public:
 	// info
-	std::string name;		
-	Colorf multiCol, addCol;
-	Colorf r_trans, g_trans, b_trans;
+	std::string name;
+	ColorTrans color;
 	std::string tag;
 	bool clip;
 

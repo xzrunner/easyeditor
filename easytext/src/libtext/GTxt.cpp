@@ -53,7 +53,10 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 
 	d2d::ShaderMgr* mgr = d2d::ShaderMgr::Instance();
 	mgr->sprite();
-	mgr->SetSpriteColor(multi_col, *rp->add);
+	d2d::ColorTrans color;
+	color.multi = multi_col;
+	color.add = *rp->add;
+	mgr->SetSpriteColor(color);
 	mgr->Draw(vertices, texcoords, id);
 }
 

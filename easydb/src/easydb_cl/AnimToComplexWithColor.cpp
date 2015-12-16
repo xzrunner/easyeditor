@@ -76,11 +76,11 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		rgb.g /= 255.0f;
 		rgb.b /= 255.0f;
 		if (type == "r") {
-			sprite->r_trans = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+			sprite->color.r = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
 		} else if (type == "g") {
-			sprite->g_trans = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+			sprite->color.g = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
 		} else if (type == "b") {
-			sprite->b_trans = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+			sprite->color.b = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
 		} else {
 			throw d2d::Exception("AnimToComplexWithColor::Run: Unknown color type %s", type);
 		}

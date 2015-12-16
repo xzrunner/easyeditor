@@ -32,12 +32,7 @@ public:
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);
 
-	void Draw(const d2d::Matrix& mt,
-		const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
-		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
-		const d2d::Colorf& r_trans = d2d::Colorf(1, 0, 0, 0),
-		const d2d::Colorf& g_trans = d2d::Colorf(0, 1, 0, 0),
-		const d2d::Colorf& b_trans = d2d::Colorf(0, 0, 1, 0)) const;
+	void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans()) const;
 
 	Scale9Type GetScale9Type() const { return m_data.GetType(); }
 

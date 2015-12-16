@@ -34,15 +34,14 @@ void StageCanvas::OnDrawSprites() const
 	if (m_edited && m_bg) 
 	{
 		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, mat);
+		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
 	Sprite sprite;
 	sprite.SetSymbol(&m_stage->GetSymbol());
 	sprite.SetProcess(0.5f);
 
-	m_stage->GetSymbol().Draw(d2d::Matrix(), d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0),
-		d2d::Colorf(1, 0, 0, 0), d2d::Colorf(0, 1, 0, 0), d2d::Colorf(0, 0, 1, 0), &sprite);
+	m_stage->GetSymbol().Draw(d2d::Matrix(), d2d::ColorTrans(), &sprite);
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));;
 

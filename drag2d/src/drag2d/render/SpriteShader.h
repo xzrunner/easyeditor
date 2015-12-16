@@ -10,7 +10,7 @@ typedef unsigned __int32 uint32_t;
 namespace d2d
 {
 
-struct Colorf;
+struct ColorTrans;
 
 class SpriteShader : public IShader
 {
@@ -41,8 +41,7 @@ public:
 	void SetBufferData(bool open);
 	bool IsOpenBufferData() const;
 
-	void SetColor(const Colorf& multi, const Colorf& add);
-	void SetColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans);
+	void SetColor(const ColorTrans& color);
 
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);

@@ -27,8 +27,10 @@ SpriteBlend::SpriteBlend()
 }
 
 void SpriteBlend::Draw(const ISprite* sprite, const Matrix& mt) const
-{
+{ 
 	assert(sprite->GetBlendMode() != BM_NORMAL);
+
+	// draw spr to c1
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
 
@@ -41,13 +43,15 @@ void SpriteBlend::Draw(const ISprite* sprite, const Matrix& mt) const
 	BlendShader* blend_shader = mgr->GetBlendShader();
 	blend_shader->SetBaseTexID(ScreenCache::Instance()->GetTexID());
 
-	SpriteRenderer::Instance()->DrawWithoutBlend(sprite, mt);
-
-	mgr->Flush();
+	SpriteRenderer::Instance()->DrawWithoutBlend(sprite, NULL, mt);
 
 	dtexf_c1_unbind();
 
 	mgr->SetSpriteShader(0);
+
+	// draw c1 to screen
+	
+	
 }
 
 }

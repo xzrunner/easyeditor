@@ -25,13 +25,8 @@ public:
 
 	void ReloadTexture() const;
 
-	void Draw(const d2d::Matrix& mt,
-		const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
-		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
-		const d2d::Colorf& r_trans = d2d::Colorf(1, 0, 0, 0),
-		const d2d::Colorf& g_trans = d2d::Colorf(0, 1, 0, 0),
-		const d2d::Colorf& b_trans = d2d::Colorf(0, 0, 1, 0),
-		const d2d::ISprite* sprite = NULL) const;
+	void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
+		const d2d::ISprite* spr = NULL, const d2d::ISprite* root = NULL) const;
 
 	void GetSize(float& width, float& height) const;
 
@@ -44,14 +39,8 @@ public:
 	
 	d2d::ISprite* GetSprite(int i, int j) const { return m_sprites[i][j]; }
 
-	static void DrawScale9(Scale9Type type,
-		d2d::ISprite* const sprites[3][3],
-		const d2d::Matrix& mt,
-		const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
-		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
-		const d2d::Colorf& r_trans = d2d::Colorf(1, 0, 0, 0),
-		const d2d::Colorf& g_trans = d2d::Colorf(0, 1, 0, 0),
-		const d2d::Colorf& b_trans = d2d::Colorf(0, 0, 1, 0));
+	static void DrawScale9(Scale9Type type, d2d::ISprite* const sprites[3][3], const d2d::Matrix& mt, 
+		const d2d::ColorTrans& color = d2d::ColorTrans(), const d2d::ISprite* root = NULL);
 
 	static void ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3],
 		float width, float height);

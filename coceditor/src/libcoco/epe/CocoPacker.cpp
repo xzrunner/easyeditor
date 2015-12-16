@@ -322,7 +322,7 @@ void CocoPacker::resolveFont(const d2d::FontBlankSprite* sprite)
 	}
 
 	std::string aFont = lua::assign("font", "\""+sprite->font+"\"");
-	std::string aColor = lua::assign("color", transColor(sprite->color, d2d::PT_ARGB));
+	std::string aColor = lua::assign("color", transColor(sprite->font_color, d2d::PT_ARGB));
 //	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align).ToStdString());
 	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align_hori).ToStdString());
 	std::string aSize = lua::assign("size", wxString::FromDouble(sprite->size).ToStdString());
@@ -700,10 +700,10 @@ void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool 
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
+	if (sprite->color.multi != d2d::Colorf(1,1,1,1) || sprite->color.add != d2d::Colorf(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
+		std::string assignColor = lua::assign("color", d2d::transColor(sprite->color.multi, d2d::PT_BGRA));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->color.add, d2d::PT_ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
@@ -724,10 +724,10 @@ void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
+	if (sprite->color.multi != d2d::Colorf(1,1,1,1) || sprite->color.add != d2d::Colorf(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
+		std::string assignColor = lua::assign("color", d2d::transColor(sprite->color.multi, d2d::PT_BGRA));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->color.add, d2d::PT_ABGR));
 		if (sprite->clip)
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else
@@ -749,7 +749,7 @@ void CocoPacker::resolveSpriteForFrameFont(const d2d::FontBlankSprite* sprite, i
 	float mat[6];
 	transToMat(sprite, mat, true);
 
-	bool isNullNode = sprite->font.empty() && sprite->color == d2d::Colorf(0, 0, 0, 0);
+	bool isNullNode = sprite->font.empty() && sprite->font_color == d2d::Colorf(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// flip y

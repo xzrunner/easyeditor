@@ -6,6 +6,7 @@
 #include "common/config.h"
 #include "common/SettingData.h"
 #include "dataset/TPNode.h"
+#include "dataset/ColorTrans.h"
 #include "render/PrimitiveDraw.h"
 #include "render/style_config.h"
 
@@ -50,7 +51,7 @@ void DynamicPacker::DebugDrawStatic() const
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(0);
 	shader->sprite();
-	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
+	shader->SetSpriteColor(ColorTrans());
 
 	float vb[16];
 
@@ -81,8 +82,7 @@ void DynamicPacker::DebugDraw() const
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->sprite();
-	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
-	shader->SetSpriteColorTrans(Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0));	
+	shader->SetSpriteColor(ColorTrans());
 
 	float vb[16];
 

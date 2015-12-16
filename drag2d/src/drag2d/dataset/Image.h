@@ -36,7 +36,7 @@ public:
 	int GetClippedHeight() const;
 	const uint8_t* GetPixelData() const;
 
-	void Draw(const Matrix& mt, const ISprite* spr = NULL) const;
+	void Draw(const Matrix& mt, const ISprite* spr = NULL, const ISprite* root = NULL) const;
 	void InvalidRect(const Matrix& mt) const;
 
 	const Vector& GetOffset() const { return m_offset; }

@@ -34,26 +34,21 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt,
-				  const d2d::Colorf& mul, 
-				  const d2d::Colorf& add,
-				  const d2d::Colorf& r_trans,
-				  const d2d::Colorf& g_trans,
-				  const d2d::Colorf& b_trans,
-				  const d2d::ISprite* sprite/* = NULL*/) const
+void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
+				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
 	if (m_index != 0) {
-		Utility::DrawAnimSymbol(this, mt, m_index, mul, add, r_trans, g_trans, b_trans);
+		Utility::DrawAnimSymbol(this, mt, m_index, color);
 	} else {
 		static clock_t init = 0;
 		if (init == 0) {
 			init = clock();
-			Utility::DrawAnimSymbol(this, mt, 1, mul, add, r_trans, g_trans, b_trans);
+			Utility::DrawAnimSymbol(this, mt, 1, color);
 		} else {
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;
 			int index = during / (1.0f / m_fps);
-			Utility::DrawAnimSymbol(this, mt, index % getMaxFrameIndex() + 1, mul, add, r_trans, g_trans, b_trans);
+			Utility::DrawAnimSymbol(this, mt, index % getMaxFrameIndex() + 1, color);
 		}
 	}
 }
