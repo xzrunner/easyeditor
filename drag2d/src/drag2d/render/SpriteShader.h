@@ -60,7 +60,9 @@ private:
 	void CopyVertex(const float vb[16]);
 
 protected:
-	int m_vertex_size;
+	int m_vertex_size;	// byte
+	int m_quad_size;	// float
+
 	int m_max_commbine;
 
 	int m_count;

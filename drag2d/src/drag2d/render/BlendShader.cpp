@@ -17,7 +17,8 @@ BlendShader::BlendShader()
 	: m_mode(BM_UNKNOWN)
 	, m_mode_id(0)
 {
-	m_vertex_size += 4 * 2;
+	m_vertex_size += 2 * sizeof(float);
+	m_quad_size += 2 * 4;
 }
 
 void BlendShader::Bind()
@@ -113,7 +114,7 @@ void BlendShader::LoadShader()
 
 void BlendShader::CopyVertex(const float vb[24])
 {
-	float* ptr = m_vb + m_vertex_size * m_count;
+	float* ptr = m_vb + m_quad_size * m_count;
 	for (int i = 0; i < 4; ++i)
 	{
 		memcpy(ptr, &vb[i*6], 4 * sizeof(float));
@@ -128,8 +129,8 @@ void BlendShader::CopyVertex(const float vb[24])
 		ptr += 1;
 		memcpy(ptr, &m_b_trans, sizeof(int));
 		ptr += 1;
-		memcpy(ptr, &vb[i*6+4], 2 * sizeof(float));
-		ptr += 2;
+ 		memcpy(ptr, &vb[i*6+4], 2 * sizeof(float));
+ 		ptr += 2;
 	}	
 }
 

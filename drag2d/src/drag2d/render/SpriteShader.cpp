@@ -25,7 +25,9 @@ static const int ATTRIB_B_TRANS   = 6;
 
 SpriteShader::SpriteShader()
 {
-	m_vertex_size = 4 * 4 + 4 * 2 + 4 * 3;
+	m_vertex_size = (4 + 2 + 3) * sizeof(float);
+	m_quad_size = (4 + 2 + 3) * 4;
+
 	m_max_commbine = 20000;	// 4096
 
 	m_model_view = m_projection = 0;
@@ -57,7 +59,7 @@ void SpriteShader::Load()
 	InitBuffers();
 
 	if (!m_vb) {
-		m_vb = new float[m_vertex_size * m_max_commbine];
+		m_vb = new float[m_quad_size * m_max_commbine];
 	}
 }
 
@@ -81,25 +83,25 @@ void SpriteShader::Bind()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
 
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 36, BUFFER_OFFSET(0));
+	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(0));
 
 	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 36, BUFFER_OFFSET(8));
+	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(8));
 
 	glEnableVertexAttribArray(ATTRIB_COLOR);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(16));
+	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(16));
 
 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
-	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(20));  
+	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(20));  
 
 	glEnableVertexAttribArray(ATTRIB_R_TRANS);
-	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(24));  
+	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(24));  
 
 	glEnableVertexAttribArray(ATTRIB_G_TRANS);
-	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(28));  
+	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(28));  
 
 	glEnableVertexAttribArray(ATTRIB_B_TRANS);
-	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, 36, BUFFER_OFFSET(32));  
+	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(32));  
 }
 
 void SpriteShader::Unbind()
@@ -152,7 +154,7 @@ void SpriteShader::Commit()
 	static int last_count = 0;
 	if (m_open_buffer_data) {
 		last_count = m_count;
-		glBufferData(GL_ARRAY_BUFFER, m_count * m_vertex_size * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, m_count * m_quad_size * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
 	}
 
 	if (!m_open_buffer_data) {
@@ -333,7 +335,7 @@ void SpriteShader::InitBuffers()
 
 void SpriteShader::CopyVertex(const float vb[16])
 {
-	float* ptr = m_vb + m_vertex_size * m_count;
+	float* ptr = m_vb + m_quad_size * m_count;
 	for (int i = 0; i < 4; ++i)
 	{
 		memcpy(ptr, &vb[i*4], 4 * sizeof(float));
