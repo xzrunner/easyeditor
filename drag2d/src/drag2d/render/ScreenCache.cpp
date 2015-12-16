@@ -114,6 +114,11 @@ void ScreenCache::DrawToScreen(void (*before_draw)(void* ud), void* ud)
 	dtex_cs_draw_to_screen(CS, before_draw, ud);
 }
 
+int ScreenCache::GetTexID() const
+{
+	return dtex_cs_get_texture_id(CS);
+}
+
 ScreenCache* ScreenCache::Instance()
 {
 	if (!m_instance) {

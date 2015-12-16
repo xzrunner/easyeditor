@@ -22,6 +22,8 @@ public:
 
 	void DrawToScreen(void (*before_draw)(void* ud), void* ud);
 
+	int GetTexID() const;
+
 	static ScreenCache* Instance();
 
 private:
