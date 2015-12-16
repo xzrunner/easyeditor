@@ -187,14 +187,15 @@ void Image::Draw(const Matrix& mt, const ISprite* spr, const ISprite* root) cons
 	mgr->sprite();
 
 	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(mgr->GetSpriteShader())) {
-		SpriteRenderer* rd = SpriteRenderer::Instance();
-		const Camera* cam = rd->GetCamera();
-		assert(cam);
-
-		int w, h;
-		ScreenCache::Instance()->GetSize(w, h);
-
 		assert(spr);
+
+		if (root) {
+			Vector offset = root->GetPosition();
+			for (int i = 0; i < 4; ++i) {
+				vertices[i] -= offset;
+			}
+		}
+
 		d2d::Vector vertices_scr[4];
 		float img_hw = m_tex->GetWidth() * 0.5f,
 			  img_hh = m_tex->GetHeight() * 0.5f;
@@ -204,6 +205,11 @@ void Image::Draw(const Matrix& mt, const ISprite* spr, const ISprite* root) cons
  		vertices_scr[3] = Math::transVector(Vector(-img_hw,  img_hh), mt);
 
 		d2d::Vector tex_coolds_base[4];
+		SpriteRenderer* rd = SpriteRenderer::Instance();
+		const Camera* cam = rd->GetCamera();
+		assert(cam);
+		int w, h;
+		ScreenCache::Instance()->GetSize(w, h);
 		for (int i = 0; i < 4; ++i) {
 			tex_coolds_base[i] = cam->transPosProjectToScreen(vertices_scr[i], w, h);
 			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;

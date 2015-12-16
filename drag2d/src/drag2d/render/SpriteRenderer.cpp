@@ -106,7 +106,7 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	col_new.b.g = sprite->color.b.r * color.r.g + sprite->color.b.g * color.g.g + sprite->color.b.b * color.b.g;
 	col_new.b.b = sprite->color.b.r * color.r.b + sprite->color.b.g * color.g.b + sprite->color.b.b * color.b.b;
 
-	sprite->GetSymbol().Draw(t, col_new, sprite);
+	sprite->GetSymbol().Draw(t, col_new, sprite, root);
 
 	if (sprite->IsAnchor()) {
 		std::vector<Vector> bound;

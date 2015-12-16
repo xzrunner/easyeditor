@@ -18,6 +18,10 @@ private:
 	SpriteBlend();
 
 private:
+	void DrawSprToTmp(const ISprite* sprite, const Matrix& mt) const;
+	void DrawTmpToScreen(const ISprite* sprite, const Matrix& mt) const;
+
+private:
 	static SpriteBlend* m_instance;
 
 }; // SpriteBlend
