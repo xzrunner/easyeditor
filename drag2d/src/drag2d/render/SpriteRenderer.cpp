@@ -1,5 +1,5 @@
 #include "SpriteRenderer.h"
-#include "SpriteBlend2.h"
+#include "SpriteBlend.h"
 
 #include "common/color_config.h"
 #include "dataset/ISprite.h"
@@ -41,11 +41,11 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 	if (!multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
 		DrawImpl(sprite, mt, mul, add, r_trans, g_trans, b_trans);
 	} else {
-		SpriteBlend2::Instance()->Draw(sprite, mt);
+		SpriteBlend::Instance()->Draw(sprite, mt);
 	}
 }
 
-void SpriteRenderer::NormalDraw(const ISprite* sprite, const d2d::Matrix& mt) const
+void SpriteRenderer::DrawWithoutBlend(const ISprite* sprite, const d2d::Matrix& mt) const
 {
 	if (!sprite->visiable) {
 		return;

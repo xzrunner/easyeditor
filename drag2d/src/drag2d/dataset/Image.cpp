@@ -194,15 +194,14 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 		int w, h;
 		ScreenCache::Instance()->GetSize(w, h);
 
-		//////////////////////////////////////////////////////////////////////////
-
 		assert(spr);
 		d2d::Vector vertices_scr[4];
-		d2d::Rect r = spr->GetRect();
-		vertices_scr[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
-		vertices_scr[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
-		vertices_scr[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
-		vertices_scr[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+		float img_hw = m_tex->GetWidth() * 0.5f,
+			  img_hh = m_tex->GetHeight() * 0.5f;
+ 		vertices_scr[0] = Math::transVector(Vector(-img_hw, -img_hh), mt);
+ 		vertices_scr[1] = Math::transVector(Vector( img_hw, -img_hh), mt);
+ 		vertices_scr[2] = Math::transVector(Vector( img_hw,  img_hh), mt);
+ 		vertices_scr[3] = Math::transVector(Vector(-img_hw,  img_hh), mt);
 
 		d2d::Vector tex_coolds_base[4];
 		for (int i = 0; i < 4; ++i) {
@@ -213,28 +212,6 @@ void Image::Draw(const Matrix& mt, const ISprite* spr) const
 			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
 			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
 		}
-
-		//////////////////////////////////////////////////////////////////////////
-
-//  		assert(spr);
-//  		d2d::Vector vertices_scr[4];
-//  		d2d::Rect r = spr->GetRect();
-//  		vertices_scr[0] = Math::transVector(Vector(0.0f, 0.0f), mt);
-//  		vertices_scr[1] = Math::transVector(Vector(r.xLength(), 0.0f), mt);
-//  		vertices_scr[2] = Math::transVector(Vector(r.xLength(), r.yLength()), mt);
-//  		vertices_scr[3] = Math::transVector(Vector(0.0f, r.yLength()), mt);
-//  
-//  		d2d::Vector tex_coolds_base[4];
-//  		for (int i = 0; i < 4; ++i) {
-//  			tex_coolds_base[i] = cam->transPosProjectToScreen(vertices_scr[i], w, h);
-//  			tex_coolds_base[i].x /= w;
-//  			tex_coolds_base[i].y /= h;
-//  			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
-//  			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
-//  		}
-
-		//////////////////////////////////////////////////////////////////////////
-
 		blend_shader->DrawBlend(vertices, texcoords, tex_coolds_base, texid);
 	} else {
 		mgr->Draw(vertices, texcoords, texid);

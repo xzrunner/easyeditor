@@ -1249,14 +1249,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\render\SpriteBlend2.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\SpriteBlend2.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\render\SpriteRenderer.cpp"
 					>
 				</File>

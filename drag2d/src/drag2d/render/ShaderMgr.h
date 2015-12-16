@@ -18,6 +18,7 @@ class SpriteShader;
 class FontShader;
 class ScreenShader;
 class RVGShader;
+class BlendShader;
 
 class ShaderMgr : public ShaderMgrBase
 {
@@ -35,6 +36,7 @@ public:
 	void shape();
 	void Screen();
 	void RVG();
+	void SpriteBlend();
 	void null();
 
 	int GetTexID() const;
@@ -63,6 +65,7 @@ public:
 
 	ShapeShader* GetShapeShader() { return m_shape_shader; }
 	SpriteShader* GetSpriteShader() { return m_sprite_shader; }
+	BlendShader* GetBlendShader() { return m_blend_shader; }
 
 private:
 	ShaderMgr();
@@ -77,6 +80,7 @@ private:
 	FontShader* m_font_shader;
 	ScreenShader* m_screen_shader;
 	RVGShader* m_rvg_shader;
+	BlendShader* m_blend_shader;
 
 	std::vector<SpriteShader*> m_all_sprite_shader;
 	std::vector<ShapeShader*> m_all_shape_shader;

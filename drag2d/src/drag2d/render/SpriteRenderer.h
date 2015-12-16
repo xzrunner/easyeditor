@@ -26,7 +26,7 @@ public:
 			  const Colorf& g_trans = Colorf(0, 1, 0, 0),
 			  const Colorf& b_trans = Colorf(0, 0, 1, 0),
 			  bool multi_draw = true) const;
-	void NormalDraw(const ISprite* sprite, const d2d::Matrix& mt) const;
+	void DrawWithoutBlend(const ISprite* sprite, const d2d::Matrix& mt) const;
 
 	void InvalidRect(const ISprite* sprite, const Matrix& mt = Matrix());
 

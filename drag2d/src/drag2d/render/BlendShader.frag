@@ -70,80 +70,71 @@ varying vec2 v_texcoord_base;
 
 void main()
 {
-	gl_FragColor = vec4(1, 1, 0, 1);
-}
+	vec4 base = texture2D(texture1, v_texcoord_base);
+	vec4 blend = texture2D(texture0, v_texcoord);
 
-// void main()
-// {
-// 	vec4 base = texture2D(texture1, v_texcoord_base);
-// 	vec4 blend = texture2D(texture0, v_texcoord);
-// 		
-// 	vec3 result;
-// 	// normal
-// 	if (u_mode == 0) {
-// 		result = BlendNormal(base.rgb, blend.rgb);
-// 	} 
-// 	// darken modes
-// 	else if (u_mode == 10) {
-// 		result = BlendDarken(base.rgb, blend.rgb);		
-// 	} else if (u_mode == 11) {
-// 		result = BlendMultiply(base.rgb, blend.rgb);
-// 	} else if (u_mode == 12) {
-// 		result = BlendColorBurn(base.rgb, blend.rgb);
-// 	} else if (u_mode == 13) {
-// 		result = BlendLinearBurn(base.rgb, blend.rgb);
-// 	}
-// 	// lighten modes
-// 	else if (u_mode == 20) {
-// 		result = BlendLighten(base.rgb, blend.rgb);
-// 	} else if (u_mode == 21) {
-// 		result = BlendScreen(base.rgb, blend.rgb);
-// 	} else if (u_mode == 22) {
-// 		result = BlendColorDodge(base.rgb, blend.rgb);
-// 	} else if (u_mode == 23) {
-// 		result = BlendLinearDodge(base.rgb, blend.rgb);
-// 	} else if (u_mode == 24) {
-// 		result = BlendLinearDodge(base.rgb, blend.rgb);
-// 	}
-// 	// saturation modes
-// 	else if (u_mode == 30) {
-// 		//result = BlendOverlay(base.rgb, blend.rgb);
-// 		gl_FragColor = vec4(1, 1, 0, 1);
-// 		//result = blend;
-// 	} else if (u_mode == 31) {
-// 		result = BlendSoftLight(base.rgb, blend.rgb);
-// 	} else if (u_mode == 32) {
-// 		result = BlendHardLight(base.rgb, blend.rgb);
-// 	} else if (u_mode == 33) {
-// 		result = BlendVividLight(base.rgb, blend.rgb);
-// 	} else if (u_mode == 34) {
-// 		result = BlendLinearLight(base.rgb, blend.rgb);
-// 	} else if (u_mode == 35) {
-// 		result = BlendPinLight(base.rgb, blend.rgb);
-// 	} else if (u_mode == 36) {
-// 		result = BlendHardMix(base.rgb, blend.rgb);
-// 	}
-// 	// substraction modes
-// 	else if (u_mode == 40) {
-// 		result = BlendDifference(base.rgb, blend.rgb);
-// 	} else if (u_mode == 41) {
-// 		result = BlendExclusion(base.rgb, blend.rgb);
-// 	} else if (u_mode == 42) {
-// 		result = BlendExclusion(base.rgb, blend.rgb);
-// 	}
-// 	// color modes 
-// 	
-// 	// others
-// 	else {
-// 		result = BlendNormal(base.rgb, blend.rgb);
-// 	}
-// 	
-// // 	gl_FragColor.xyz = result * v_fragmentColor.xyz; 
-// // 	gl_FragColor.w = blend.w;   
-// // 	gl_FragColor *= v_fragmentColor.w; 
-// // 	gl_FragColor.xyz += v_fragmentAddi.xyz * blend.w; 
-// 
-// 	gl_FragColor = vec4(1, 1, 0, 1);
-// }
+	vec3 result;
+	// normal
+	if (u_mode == 0) {
+		result = BlendNormal(base.rgb, blend.rgb);
+	}
+	// darken modes
+	else if (u_mode == 10) {
+		result = BlendDarken(base.rgb, blend.rgb);
+	} else if (u_mode == 11) {
+		result = BlendMultiply(base.rgb, blend.rgb);
+	} else if (u_mode == 12) {
+		result = BlendColorBurn(base.rgb, blend.rgb);
+	} else if (u_mode == 13) {
+		result = BlendLinearBurn(base.rgb, blend.rgb);
+	}
+	// lighten modes
+	else if (u_mode == 20) {
+		result = BlendLighten(base.rgb, blend.rgb);
+	} else if (u_mode == 21) {
+		result = BlendScreen(base.rgb, blend.rgb);
+	} else if (u_mode == 22) {
+		result = BlendColorDodge(base.rgb, blend.rgb);
+	} else if (u_mode == 23) {
+		result = BlendLinearDodge(base.rgb, blend.rgb);
+	} else if (u_mode == 24) {
+		result = BlendLinearDodge(base.rgb, blend.rgb);
+	}
+	// saturation modes
+	else if (u_mode == 30) {
+		result = BlendOverlay(base.rgb, blend.rgb);
+	} else if (u_mode == 31) {
+		result = BlendSoftLight(base.rgb, blend.rgb);
+	} else if (u_mode == 32) {
+		result = BlendHardLight(base.rgb, blend.rgb);
+	} else if (u_mode == 33) {
+		result = BlendVividLight(base.rgb, blend.rgb);
+	} else if (u_mode == 34) {
+		result = BlendLinearLight(base.rgb, blend.rgb);
+	} else if (u_mode == 35) {
+		result = BlendPinLight(base.rgb, blend.rgb);
+	} else if (u_mode == 36) {
+		result = BlendHardMix(base.rgb, blend.rgb);
+	}
+	// substraction modes
+	else if (u_mode == 40) {
+		result = BlendDifference(base.rgb, blend.rgb);
+	} else if (u_mode == 41) {
+		result = BlendExclusion(base.rgb, blend.rgb);
+	} else if (u_mode == 42) {
+		result = BlendExclusion(base.rgb, blend.rgb);
+	}
+	// color modes 
+	
+	// others
+	else {
+		result = BlendNormal(base.rgb, blend.rgb);
+	}
+		
+	gl_FragColor.xyz = result * v_fragmentColor.xyz; 
+	gl_FragColor.w = blend.w;   
+	gl_FragColor *= v_fragmentColor.w; 
+	gl_FragColor.xyz += v_fragmentAddi.xyz * blend.w; 
+}
 
 );

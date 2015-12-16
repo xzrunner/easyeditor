@@ -5,6 +5,7 @@
 #include "FontShader.h"
 #include "ScreenShader.h"
 #include "RVGShader.h"
+#include "BlendShader.h"
 
 #include "ShaderContext.h"
 
@@ -44,6 +45,10 @@ ShaderMgr::ShaderMgr()
 
 	m_rvg_shader = new RVGShader;
 	m_shaders.push_back(m_rvg_shader);
+
+	m_blend_shader = new BlendShader;
+	m_shaders.push_back(m_blend_shader);
+	m_all_sprite_shader.push_back(m_blend_shader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -105,6 +110,13 @@ void ShaderMgr::RVG()
 {
 	ShaderContext::Bind2d();
 	Switch(m_rvg_shader);
+}
+
+void ShaderMgr::SpriteBlend()
+{
+	ShaderContext::Bind2d();
+	Switch(m_blend_shader);
+	m_sprite_shader = m_blend_shader;
 }
 
 void ShaderMgr::null()
