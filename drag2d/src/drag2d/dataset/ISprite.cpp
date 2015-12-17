@@ -192,6 +192,14 @@ void ISprite::Load(const Json::Value& val)
 	float angle = val["angle"].asDouble();
 	SetTransform(Vector(x, y), angle);
 
+	// blend
+	if (!val["blend"].isNull()) {
+		std::string disc = val["blend"].asString();
+		if (Config::Instance()->IsRenderOpen()) {
+			m_blend_mode = BlendModes::Instance()->GetIDFromNameEN(disc);
+		}
+	}
+
 	// filter
 	if (!val["filter"].isNull()) {
 		std::string disc = val["filter"].asString();
@@ -237,6 +245,7 @@ void ISprite::Store(Json::Value& val) const
 	val["y perspective"] = m_perspective.y;
 
 	if (Config::Instance()->IsRenderOpen()) {
+		val["blend"] = BlendModes::Instance()->GetNameENFromID(m_blend_mode);
 		val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
 	}
 
