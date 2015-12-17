@@ -8,6 +8,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ImageSymbol.h"
 #include "view/Camera.h"
+#include "render/GL.h"
 
 #include <dtex_facade.h>
 
@@ -32,19 +33,27 @@ void SpriteBlend::Draw(const ISprite* sprite, const Matrix& mt) const
 { 
 	assert(sprite->GetBlendMode() != BM_NORMAL);
 
-	SpriteRenderer* rd = SpriteRenderer::Instance();
-	const Camera* cam = rd->GetCamera();
-	const Vector& ori_pos = cam->GetPosition();
-	float ori_scale = cam->GetScale();
+	ShaderMgr::Instance()->Flush();
 
-// 	cam->SetPosition(Vector(-128, -128));
-// 	cam->SetScale(1);
+	RenderContextStack* rc = RenderContextStack::Instance();
 
-	RenderContextStack::Instance()->SetModelView(Vector(-128, -128), 1);
+	Vector ori_offset;
+	float ori_scale;
+	rc->GetModelView(ori_offset, ori_scale);
+
+	int ori_width, ori_height;
+	rc->GetProjection(ori_width, ori_height);
+
+	rc->SetModelView(Vector(0, 0), 1);
+	int edge = dtexf_c1_get_texture_size();
+	rc->SetProjection(edge, edge);
+	GL::Viewport(0, 0, edge, edge);
 
 	DrawSprToTmp(sprite, mt);
 
-	RenderContextStack::Instance()->SetModelView(ori_pos, ori_scale);
+	rc->SetModelView(ori_offset, ori_scale);
+	rc->SetProjection(ori_width, ori_height);
+	GL::Viewport(0, 0, ori_width, ori_height);
 
 	DrawTmpToScreen(sprite, mt);
 }
@@ -87,10 +96,10 @@ void SpriteBlend::DrawTmpToScreen(const ISprite* sprite, const Matrix& mt) const
 		vertices[i] = Math::transVector(vertices[i], t);
 	}
 
-	static const float EDGE = 256;
+	int edge = dtexf_c1_get_texture_size();
 	for (int i = 0; i < 4; ++i) {
-		texcoords[i].x = texcoords[i].x / EDGE + 0.5f;
-		texcoords[i].y = texcoords[i].y / EDGE + 0.5f;
+		texcoords[i].x = texcoords[i].x / edge + 0.5f;
+		texcoords[i].y = texcoords[i].y / edge + 0.5f;
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
