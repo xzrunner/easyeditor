@@ -3,9 +3,11 @@
 #include "ShaderMgr.h"
 #include "SpriteRenderer.h"
 #include "ScreenCache.h"
+#include "RenderContextStack.h"
 
 #include "dataset/ISprite.h"
 #include "dataset/ImageSymbol.h"
+#include "view/Camera.h"
 
 #include <dtex_facade.h>
 
@@ -29,7 +31,21 @@ SpriteBlend::SpriteBlend()
 void SpriteBlend::Draw(const ISprite* sprite, const Matrix& mt) const
 { 
 	assert(sprite->GetBlendMode() != BM_NORMAL);
+
+	SpriteRenderer* rd = SpriteRenderer::Instance();
+	const Camera* cam = rd->GetCamera();
+	const Vector& ori_pos = cam->GetPosition();
+	float ori_scale = cam->GetScale();
+
+// 	cam->SetPosition(Vector(-128, -128));
+// 	cam->SetScale(1);
+
+	RenderContextStack::Instance()->SetModelView(Vector(-128, -128), 1);
+
 	DrawSprToTmp(sprite, mt);
+
+	RenderContextStack::Instance()->SetModelView(ori_pos, ori_scale);
+
 	DrawTmpToScreen(sprite, mt);
 }
 
@@ -71,13 +87,14 @@ void SpriteBlend::DrawTmpToScreen(const ISprite* sprite, const Matrix& mt) const
 		vertices[i] = Math::transVector(vertices[i], t);
 	}
 
-	static const float EDGE = 1024;
+	static const float EDGE = 256;
 	for (int i = 0; i < 4; ++i) {
 		texcoords[i].x = texcoords[i].x / EDGE + 0.5f;
 		texcoords[i].y = texcoords[i].y / EDGE + 0.5f;
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
+
 	mgr->sprite();
 	mgr->Draw(vertices, texcoords, dtexf_c1_get_texture_id());
 }
