@@ -55,8 +55,6 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		std::string angle = output.substr(pos + 1);
 		output = output.substr(0, pos);
 
-		printf("line %s, ext %s \n", line.c_str(), trans.ext.c_str());
-
 		output = dir + "\\" + output + "_" + trans.ext + "_" + angle + "_complex.json";
 		ecomplex::FileStorer::Store(output.c_str(), symbol);
 
