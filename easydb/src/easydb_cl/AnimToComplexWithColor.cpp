@@ -55,6 +55,8 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		std::string angle = output.substr(pos + 1);
 		output = output.substr(0, pos);
 
+		printf("line %s, ext %s \n", line.c_str(), trans.ext.c_str());
+
 		output = dir + "\\" + output + "_" + trans.ext + "_" + angle + "_complex.json";
 		ecomplex::FileStorer::Store(output.c_str(), symbol);
 
@@ -119,24 +121,15 @@ void AnimToComplexWithColor::TransSpr(const Trans& t, d2d::ISprite* spr)
 {
 	if (t.type & CC_R) {
 		d2d::Colori rgb = d2d::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
-		rgb.r /= 255.0f;
-		rgb.g /= 255.0f;
-		rgb.b /= 255.0f;
-		spr->color.r = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+		spr->color.r = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
 	}
 	if (t.type & CC_G) {
 		d2d::Colori rgb = d2d::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
-		rgb.r /= 255.0f;
-		rgb.g /= 255.0f;
-		rgb.b /= 255.0f;
-		spr->color.g = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+		spr->color.g = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
 	}
 	if (t.type & CC_B) {
 		d2d::Colori rgb = d2d::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
-		rgb.r /= 255.0f;
-		rgb.g /= 255.0f;
-		rgb.b /= 255.0f;
-		spr->color.b = d2d::Colorf(rgb.r, rgb.g, rgb.b, 1);
+		spr->color.b = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
 	}
 }
 
