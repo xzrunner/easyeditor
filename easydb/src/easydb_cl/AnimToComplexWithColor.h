@@ -24,7 +24,26 @@ public:
 	static ICommand* Create() { return new AnimToComplexWithColor(); }
 
 private:
+	enum COLOR_CHANNEL
+	{
+		CC_R = 1,
+		CC_G = 2,
+		CC_B = 4,
+	};
+
+	struct Trans
+	{
+		int type;
+		d2d::Colori col_r, col_g, col_b;
+		std::string ext;
+	};
+
+private:
 	void Run(const std::string& cfg_filepath);
+
+private:
+	static std::string ParserTrans(const std::string& str, Trans& t);
+	static void TransSpr(const Trans& t, d2d::ISprite* spr);
 
 }; // AnimToComplexWithColor
 
