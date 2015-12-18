@@ -19,14 +19,7 @@ HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, con
 
 Colorf HSLColorSettingDlg::GetColor() const
 {
-	Colori rgb = hsl2rgb(m_h->GetColorValue(), m_s->GetColorValue(), m_l->GetColorValue());
-
-	// todo fix rgb2hsl
-	if (rgb.r == 0 && rgb.g == 254 && rgb.b == 0) {
-		rgb.g = 255;
-	}
-
-	return Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f);
+	return hsl2rgb(m_h->GetColorValue() / 255.0f, m_s->GetColorValue() / 255.0f, m_l->GetColorValue() / 255.0f);
 }
 
 void HSLColorSettingDlg::OnColorChanged()
@@ -38,9 +31,8 @@ void HSLColorSettingDlg::OnColorChanged()
 	m_s->SetColorRegion(Colorf(h, 0, l), Colorf(h, 1, l));
 	m_l->SetColorRegion(Colorf(h, s, 0), Colorf(h, s, 1));
 
-	Colori rgb = hsl2rgb(m_h->GetColorValue(), 
-		m_s->GetColorValue(), m_l->GetColorValue());
-	m_color_bg->SetBackgroundColour(wxColour(rgb.r, rgb.g, rgb.b));
+	Colorf rgb = hsl2rgb(m_h->GetColorValue() / 255.0f, m_s->GetColorValue() / 255.0f, m_l->GetColorValue() / 255.0f);
+	m_color_bg->SetBackgroundColour(wxColour(rgb.r * 255 + 0.5f, rgb.g * 255 + 0.5f, rgb.b * 255 + 0.5f));
 	m_color_bg->Refresh(true);
 
 	if (m_lsn) {
@@ -86,10 +78,13 @@ void HSLColorSettingDlg::InitLayout()
 
 void HSLColorSettingDlg::SetColor(const Colorf& col)
 {
-	Colori hsl = rgb2hsl(col.r*255, col.g*255, col.b*255);
-	m_h->SetColorValue(hsl.r);
-	m_s->SetColorValue(hsl.g);
-	m_l->SetColorValue(hsl.b);
+	Colorf hsl = rgb2hsl(col.r, col.g, col.b);
+
+	Colorf test = hsl2rgb(hsl.r, hsl.g, hsl.b);
+
+	m_h->SetColorValue(hsl.r * 255.0f + 0.5f);
+	m_s->SetColorValue(hsl.g * 255.0f + 0.5f);
+	m_l->SetColorValue(hsl.b * 255.0f + 0.5f);
 	OnColorChanged(col);
 }
 

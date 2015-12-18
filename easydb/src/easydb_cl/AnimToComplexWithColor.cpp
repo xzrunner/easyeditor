@@ -118,16 +118,13 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 void AnimToComplexWithColor::TransSpr(const Trans& t, d2d::ISprite* spr)
 {
 	if (t.type & CC_R) {
-		d2d::Colori rgb = d2d::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
-		spr->color.r = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
+		spr->color.r = d2d::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
 	}
 	if (t.type & CC_G) {
-		d2d::Colori rgb = d2d::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
-		spr->color.g = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
+		spr->color.g = d2d::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
 	}
 	if (t.type & CC_B) {
-		d2d::Colori rgb = d2d::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
-		spr->color.b = d2d::Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f, 1);
+		spr->color.b = d2d::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
 	}
 }
 

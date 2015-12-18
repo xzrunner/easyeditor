@@ -6,8 +6,8 @@
 namespace d2d
 {
 
-Colori hsl2rgb(float h, float s, float l);
-Colori rgb2hsl(float r, float g, float b);
+Colorf hsl2rgb(float h, float s, float l);
+Colorf rgb2hsl(float r, float g, float b);
 
 }
 

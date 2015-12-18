@@ -62,8 +62,8 @@ OnDraw() const
 		float s = (end.g - begin.g) * p + begin.g;
 		float l = (end.b - begin.b) * p + begin.b;
 
-		Colori rgb = hsl2rgb(h*255, s*255, l*255);
-		glColor3f(rgb.r/255.0f, rgb.g/255.0f, rgb.b/255.0f);
+		Colorf rgb = hsl2rgb(h, s, l);
+		glColor3f(rgb.r, rgb.g, rgb.b);
 
 		float sx = -1 + 2.0f / COUNT * i,
 			ex = -1 + 2.0f / COUNT * (i + 1);
