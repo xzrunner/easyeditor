@@ -210,22 +210,22 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	assert(ud);
 
-	assert(ud->layer_idx != -1);
-	while (ud && ud->layer_idx >= DataMgr::Instance()->GetLayers().Size()) {
-		InsertLayerSJ::Instance()->Insert();
-		SetSelectedSJ::Instance()->Set(0, 0);
+	if (ud->layer_idx != -1) {
+		assert(ud->layer_idx != -1);
+		while (ud && ud->layer_idx >= DataMgr::Instance()->GetLayers().Size()) {
+			InsertLayerSJ::Instance()->Insert();
+			SetSelectedSJ::Instance()->Set(0, 0);
+		}
+
+		assert(m_frame);
+		m_frame->Insert(spr);
+
+		ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
+		ud->frame = m_frame;
+	} else {
+		assert(ud->frame);
+		ud->frame->Insert(spr);
 	}
-
-// 	int old_layer, old_frame;
-// 	GetCurrFrameSJ::Instance()->Get(old_layer, old_frame);
-
-	assert(m_frame);
-	m_frame->Insert(spr);
-
-	ud->layer = DataMgr::Instance()->GetLayers().GetLayer(ud->layer_idx);
-	ud->frame = m_frame;
-
-//	SetCurrFrameSJ::Instance()->Set(old_layer, old_frame);
 }
 
 void StagePanel::InsertWithoutUD(d2d::ISprite* spr)
