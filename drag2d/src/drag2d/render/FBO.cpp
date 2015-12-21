@@ -187,12 +187,18 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
+	bool has_context = true;
+
 	Vector last_offset;
 	float last_scale;
-	ctx_stack->GetModelView(last_offset, last_scale);
+	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
+		has_context = false;
+	}
 
 	int last_w, last_h;
-	ctx_stack->GetProjection(last_w, last_h);
+	if (!ctx_stack->GetProjection(last_w, last_h)) {
+		has_context = false;
+	}
 
 	d2d::Rect rect = symbol->GetSize();
 	int w = rect.xLength() * scale,
@@ -213,9 +219,11 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	shader->SetFBO(0);
 	shader->SetTexture(0);
 
-	ctx_stack->SetModelView(last_offset, last_scale);
-	ctx_stack->SetProjection(last_w, last_h);
-	GL::Viewport(0, 0, last_w, last_h);
+	if (has_context) {
+		ctx_stack->SetModelView(last_offset, last_scale);
+		ctx_stack->SetProjection(last_w, last_h);
+		GL::Viewport(0, 0, last_w, last_h);
+	}
 }
 
 void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, float dx, float dy)
@@ -231,12 +239,18 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
+	bool has_context = true;
+
 	Vector last_offset;
 	float last_scale;
-	ctx_stack->GetModelView(last_offset, last_scale);
+	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
+		has_context = false;
+	}
 
 	int last_w, last_h;
-	ctx_stack->GetProjection(last_w, last_h);
+	if (!ctx_stack->GetProjection(last_w, last_h)) {
+		has_context = false;
+	}
 
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
@@ -253,9 +267,11 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 	shader->SetFBO(0);
 	shader->SetTexture(0);
 
-	ctx_stack->SetModelView(last_offset, last_scale);
-	ctx_stack->SetProjection(last_w, last_h);	
-	GL::Viewport(0, 0, last_w, last_h);
+	if (has_context) {
+		ctx_stack->SetModelView(last_offset, last_scale);
+		ctx_stack->SetProjection(last_w, last_h);	
+		GL::Viewport(0, 0, last_w, last_h);
+	}
 }
 
 void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
@@ -269,12 +285,18 @@ void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 
+	bool has_context = true;
+
 	Vector last_offset;
 	float last_scale;
-	ctx_stack->GetModelView(last_offset, last_scale);
+	if (!ctx_stack->GetModelView(last_offset, last_scale)) {
+		has_context = false;
+	}
 
 	int last_w, last_h;
-	ctx_stack->GetProjection(last_w, last_h);
+	if (!ctx_stack->GetProjection(last_w, last_h)) {
+		has_context = false;
+	}
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	ctx_stack->SetModelView(Vector(0, 0), 1);
@@ -290,8 +312,10 @@ void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	shader->Commit();
 
-	ctx_stack->SetModelView(last_offset, last_scale);
-	ctx_stack->SetProjection(last_w, last_h);	
+	if (has_context) {
+		ctx_stack->SetModelView(last_offset, last_scale);
+		ctx_stack->SetProjection(last_w, last_h);	
+	}
 }
 
 }

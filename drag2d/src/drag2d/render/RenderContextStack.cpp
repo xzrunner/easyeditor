@@ -2,6 +2,7 @@
 #include "RenderContext.h"
 #include "DrawCallBatching.h"
 #include "ScreenCache.h"
+#include "ShaderMgr.h"
 
 #include "view/IStageCanvas.h"
 
@@ -53,6 +54,8 @@ void RenderContextStack::SetModelView(const Vector& offset, float scale)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetModelView(offset, scale);
+	} else {
+		ShaderMgr::Instance()->SetModelView(offset, scale);
 	}
 }
 
@@ -60,6 +63,8 @@ void RenderContextStack::SetProjection(int width, int height)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetProjection(width, height);
+	} else {
+		ShaderMgr::Instance()->SetProjection(width, height);
 	}
 }
 
