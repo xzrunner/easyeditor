@@ -157,7 +157,7 @@ void StagePanel::EnablePage(bool enable)
 	EnableObserve(enable);
 }
 
-void StagePanel::OnPreview() const
+void StagePanel::OnPreview()
 {
 	int width, height;
 	QueryWindowViewSizeSJ::Instance()->Query(width, height);
@@ -165,8 +165,14 @@ void StagePanel::OnPreview() const
 	std::vector<const d2d::ISprite*> sprites;
 	TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 
-	PreviewDialog dlg(const_cast<StagePanel*>(this), width, height, sprites);
+	EnableObserve(false);
+	GetCanvas()->EnableObserve(false);
+
+	PreviewDialog dlg(const_cast<StagePanel*>(this), GetCanvas()->GetGLContext(), width, height, sprites);
 	dlg.ShowModal();
+
+	EnableObserve(true);
+	GetCanvas()->EnableObserve(true);
 }
 
 void StagePanel::OnCode() const

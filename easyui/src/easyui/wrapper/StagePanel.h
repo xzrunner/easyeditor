@@ -27,7 +27,7 @@ public:
 	virtual void LoadFromFile(const char* filename);
 	virtual void StoreToFile(const char* filename) const;
 	virtual void EnablePage(bool enable);
-	virtual void OnPreview() const {}
+	virtual void OnPreview() {}
 	virtual void OnCode() const {}
 
 	d2d::Rect& GetClipbox() { return m_clipbox; }
