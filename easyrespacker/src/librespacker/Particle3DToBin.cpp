@@ -143,9 +143,9 @@ void Particle3DToBin::PackComponent(const PackParticle3D::Component& comp,
 	uint32_t col_add = comp.col_add;
 	pack(col_add, ptr);
 
-	uint16_t alpha_start = TransFloat(comp.alpha_start);
+	uint16_t alpha_start = comp.alpha_start;
 	pack(alpha_start, ptr);
-	uint16_t alpha_end = TransFloat(comp.alpha_end);
+	uint16_t alpha_end = comp.alpha_end;
 	pack(alpha_end, ptr);
 }
 

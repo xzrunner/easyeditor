@@ -18,7 +18,7 @@ public:
 		float angle, angle_var;
 
 		uint32_t col_mul, col_add;
-		float alpha_start, alpha_end;
+		uint8_t alpha_start, alpha_end;
 
 		const IPackNode* node;
 	};
