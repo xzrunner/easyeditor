@@ -149,6 +149,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	// Loop
 	{
 		m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
+		m_loop->SetValue(true);
 		Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
 		top_sizer->Add(m_loop);
 	}

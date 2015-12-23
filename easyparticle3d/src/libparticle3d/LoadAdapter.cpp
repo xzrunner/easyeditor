@@ -1,5 +1,7 @@
 #include "LoadAdapter.h"
 
+#include <particle3d.h>
+
 namespace eparticle3d
 {
 
@@ -81,7 +83,11 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	fadeout_time = value["fadeout_time"].asInt() * 0.001f;
 
-	ground = value["ground"].asBool();
+	if (value["ground"].isNull()) {
+		ground = P3D_GROUND_WITH_BOUNCE;
+	} else {
+		ground = value["ground"].asInt();
+	}
 
 	additive_blend = value["additive_blend"].asBool();
 
