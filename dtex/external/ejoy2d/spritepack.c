@@ -398,8 +398,6 @@ import_particle3d(struct import_stream *is) {
 
 	cfg->orient_to_movement = import_byte(is);
 
-	cfg->loop = import_byte(is);
-
 	// todo dir
 	cfg->dir.x = 0;
 	cfg->dir.y = 0;

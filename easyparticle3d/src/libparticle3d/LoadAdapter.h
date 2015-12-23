@@ -67,8 +67,6 @@ public:
 	bool orient_to_movement;
 	bool orient_to_parent;
 
-	bool loop;
-
 	std::vector<Component> components;
 
 }; // LoadAdapter

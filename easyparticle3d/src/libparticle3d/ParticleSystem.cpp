@@ -250,13 +250,13 @@ void ParticleSystem::Pause()
 
 void ParticleSystem::SetLoop(bool loop)
 {
-	if (loop == m_ps->cfg->loop) {
+	if (loop == m_ps->loop) {
 		return;
 	}
 
-	m_ps->cfg->loop = loop;
+	m_ps->loop = loop;
 
-	if (m_ps->cfg->loop) {
+	if (m_ps->loop) {
 		Start();
 	} else {
 		Pause();

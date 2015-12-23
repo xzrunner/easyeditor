@@ -24,7 +24,6 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint8_t);						// ground
 	sz += sizeof(uint16_t) + sizeof(uint8_t);	// radius
 	sz += sizeof(uint8_t);						// orient_to_movement
-	sz += sizeof(uint8_t);						// loop
 	return sz;
 }
 
@@ -106,9 +105,6 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 
 	uint8_t orient_to_movement = TransBool(p3d->orient_to_movement);
 	pack(orient_to_movement, ptr);
-
-	uint8_t loop = TransBool(p3d->loop);
-	pack(loop, ptr);
 }
 
 int Particle3DToBin::ComponentSize()

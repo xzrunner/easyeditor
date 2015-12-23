@@ -29,7 +29,7 @@ struct p2d_particle_system;
 struct ps2d_sprite
 {
 	struct p2d_particle_system* ps;
-	int last_frame;
+	float ps_time;
 	int _dummy;		// unused: dummy for align to 64bit
 };
 
@@ -46,7 +46,7 @@ struct p3d_particle_system;
 struct ps3d_sprite
 {
 	struct p3d_particle_system* ps;
-	int last_frame;
+	float ps_time;
 	int _dummy;		// unused: dummy for align to 64bit
 };
 

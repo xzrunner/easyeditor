@@ -82,9 +82,6 @@ void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGene
 
 	lua::connect(gen, 1, 
 		lua::assign("orient_to_movement", TransBool(p3d->orient_to_movement)));
-
-	lua::connect(gen, 1, 
-		lua::assign("loop", TransBool(p3d->loop)));
 }
 
 void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp, 

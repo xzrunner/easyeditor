@@ -93,8 +93,6 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 	p3d->is_start_radius_3d = LuaDataHelper::GetBoolField(L, "is_start_radius_3d");
 
 	p3d->orient_to_movement = LuaDataHelper::GetBoolField(L, "orient_to_movement");
-
-	p3d->loop = LuaDataHelper::GetBoolField(L, "loop");
 }
 
 float Particle3DFromLua::TransTime(int time)

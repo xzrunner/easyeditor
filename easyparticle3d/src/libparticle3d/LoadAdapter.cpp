@@ -91,8 +91,6 @@ void LoadAdapter::Load(const std::string& filepath)
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
 
-	loop = value["loop"].asBool();
-
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	int i = 0;
 	Json::Value comp_val = value["components"][i++];

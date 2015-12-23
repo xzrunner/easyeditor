@@ -51,8 +51,6 @@ public:
 	bool is_start_radius_3d;
 
 	bool orient_to_movement;
-	
-	bool loop;
 
 	std::vector<Component> components;
 

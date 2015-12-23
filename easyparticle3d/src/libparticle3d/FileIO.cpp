@@ -121,9 +121,6 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	ps->SetOrientToMovement(adapter.orient_to_movement);
 
-	toolbar->m_loop->SetValue(adapter.loop);
-	ps->SetLoop(adapter.loop);
-
 	toolbar->m_radius_3d->SetValue(adapter.is_start_radius_3d);
 	ps->SetRadius3D(adapter.is_start_radius_3d);
 
@@ -206,8 +203,6 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->is_start_radius_3d = adapter.is_start_radius_3d;
 
 	cfg->orient_to_movement = adapter.orient_to_movement;
-
-	cfg->loop = adapter.loop;
 
 	// todo dir
 	cfg->dir.x = 0;
