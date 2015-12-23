@@ -85,7 +85,7 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 
 	ps->fadeout_time = cfg->fadeout_time;
 
-	ps->bounce = cfg->bounce;
+	ps->ground = cfg->ground;
 
 	ps->start_radius = cfg->start_radius;
 	ps->is_start_radius_3d = cfg->is_start_radius_3d;

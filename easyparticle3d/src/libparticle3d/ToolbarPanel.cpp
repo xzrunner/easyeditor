@@ -211,7 +211,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MIN]));
 
-			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MIN_VERT);
+			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -90, 90, MIN_VERT);
 			Connect(m_min_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
 			sizer->Add(m_min_vert);
 
@@ -222,7 +222,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MAX]));	
 
-			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MAX_VERT);
+			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -90, 90, MAX_VERT);
 			Connect(m_max_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
 			sizer->Add(m_max_vert);
 
@@ -279,11 +279,17 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	top_sizer->Add(s_fadeout);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_fadeout);
-	// Bounce
+	// Ground
 	{
-		m_bounce = new wxCheckBox(this, wxID_ANY, LANG[LK_BOUNCE]);
-		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetBounce));
-		top_sizer->Add(m_bounce);
+		const int size = 3;
+		wxString choices[size];
+		choices[0] = LANG[LK_NO_GROUND];
+		choices[1] = LANG[LK_GROUND_WITH_BOUNCE];
+		choices[2] = LANG[LK_GROUND_NO_BOUNCE];
+		m_ground = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, size, choices);
+		m_ground->SetSelection(1);
+		Connect(m_ground->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnSetGround));
+		top_sizer->Add(m_ground);
 	}
 	top_sizer->AddSpacer(10);
 	// Start Radius
@@ -355,6 +361,7 @@ void ToolbarPanel::InitParticle()
 
 	ps->SetHori(m_min_hori->GetValue(), m_max_hori->GetValue());
 	ps->SetVert(m_min_vert->GetValue(), m_max_vert->GetValue());
+	ps->SetGround(m_ground->GetSelection());
 }
 
 void ToolbarPanel::OnDelChild(ComponentPanel* child)
@@ -434,9 +441,10 @@ void ToolbarPanel::OnSetVert(wxSpinEvent& event)
 	m_stage->m_ps->SetVert(m_min_vert->GetValue(), m_max_vert->GetValue());
 }
 
-void ToolbarPanel::OnSetBounce(wxCommandEvent& event)
+void ToolbarPanel::OnSetGround(wxCommandEvent& event)
 {
-	m_stage->m_ps->SetBounce(event.IsChecked());
+	int ground = m_ground->GetSelection();
+	m_stage->m_ps->SetGround(ground);
 }
 
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)

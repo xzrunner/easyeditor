@@ -131,8 +131,8 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 	s = wxString::FromDouble(val["fadeout_time"].asInt());
 	lua::assign(gen, "['fadeout_time']", s+"*l,");
 
-	s = val["bounce"].asBool() ? "true" : "false";
-	lua::assign(gen, "['bounce']", s+",");
+	s = wxString::FromDouble(val["ground"].asInt());
+	lua::assign(gen, "['ground']", s+",");
 
 	s = val["additive_blend"].asBool() ? "true" : "false";
 	lua::assign(gen, "['additive_blend']", s+",");
@@ -280,8 +280,8 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 	s = wxString::FromDouble(val["fadeout_time"].asDouble());
 	lua::assign(gen, "['fadeout_time']", s+"*l,");
 
-	s = val["bounce"].asBool() ? "true" : "false";
-	lua::assign(gen, "['bounce']", s+",");
+	s = wxString::FromDouble(val["ground"].asInt());
+	lua::assign(gen, "['ground']", s+",");
 
 	s = val["additive_blend"].asBool() ? "true" : "false";
 	lua::assign(gen, "['additive_blend']", s+",");

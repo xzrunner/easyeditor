@@ -91,9 +91,9 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	unpack(fadeout_time, ptr);
 	p3d->fadeout_time = TransTime(fadeout_time);
 
-	uint8_t bounce;
-	unpack(bounce, ptr);
-	p3d->bounce = TransBool(bounce);
+	uint8_t ground;
+	unpack(ground, ptr);
+	p3d->ground = ground;
 
 	uint16_t start_radius;
 	unpack(start_radius, ptr);

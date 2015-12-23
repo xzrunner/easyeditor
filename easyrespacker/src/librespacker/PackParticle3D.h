@@ -45,7 +45,7 @@ public:
 
 	float fadeout_time;
 
-	bool bounce;
+	int ground;
 
 	float start_radius;
 	bool is_start_radius_3d;

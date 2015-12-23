@@ -87,7 +87,7 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 
 	p3d->fadeout_time = TransTime(LuaDataHelper::GetIntField(L, "fadeout_time"));
 
-	p3d->bounce = LuaDataHelper::GetBoolField(L, "bounce");
+	p3d->ground = LuaDataHelper::GetIntField(L, "ground");
 
 	p3d->start_radius = LuaDataHelper::GetIntField(L, "start_radius");
 	p3d->is_start_radius_3d = LuaDataHelper::GetBoolField(L, "is_start_radius_3d");

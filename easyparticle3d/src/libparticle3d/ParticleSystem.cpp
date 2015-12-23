@@ -15,8 +15,7 @@ static void render_func(void* symbol, float x, float y, float angle, float scale
                         struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
 {
 	d2d::Matrix mt = *(d2d::Matrix*)ud;
-	// todo init_pos
-	//_mt.translate(p->init_pos.x, p->init_pos.y);
+//	mt.translate(p->init_pos.x, p->init_pos.y);
 
 	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
 	d2d::ColorTrans color;
@@ -315,9 +314,9 @@ void ParticleSystem::SetVert(int min, int max)
 	m_ps->cfg->vert_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 }
 
-void ParticleSystem::SetBounce(bool open) 
-{ 
-	m_ps->cfg->bounce = open; 
+void ParticleSystem::SetGround(int ground)
+{
+	m_ps->cfg->ground = ground;
 }
 
 void ParticleSystem::SetOrientToMovement(bool open) 

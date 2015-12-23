@@ -74,7 +74,7 @@ void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGene
 		lua::assign("fadeout_time", TransTime(p3d->fadeout_time)));
 
 	lua::connect(gen, 1, 
-		lua::assign("bounce", TransBool(p3d->bounce)));
+		lua::assign("ground", p3d->ground));
 
 	lua::connect(gen, 2, 
 		lua::assign("start_radius", TransFloat(p3d->start_radius)), 

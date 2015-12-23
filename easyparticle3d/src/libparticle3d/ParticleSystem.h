@@ -62,8 +62,9 @@ public:
 
 	void SetHori(int min, int max);
 	void SetVert(int min, int max);
-	
-	void SetBounce(bool open);
+
+	void SetGround(int ground);
+
 	void SetOrientToMovement(bool open);
 	void SetRadius3D(bool is3d);
 

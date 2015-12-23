@@ -81,7 +81,8 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	fadeout_time = value["fadeout_time"].asInt() * 0.001f;
 
-	bounce = value["bounce"].asBool();
+	ground = value["ground"].asBool();
+
 	additive_blend = value["additive_blend"].asBool();
 
 	start_radius = value["start_radius"].asInt();

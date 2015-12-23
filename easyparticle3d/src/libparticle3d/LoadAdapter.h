@@ -57,7 +57,7 @@ public:
 
 	float fadeout_time;
 
-	bool bounce;
+	int ground;
 
 	bool additive_blend;
 

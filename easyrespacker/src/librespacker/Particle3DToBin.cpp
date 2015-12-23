@@ -21,7 +21,7 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint16_t);						// gravity
 	sz += sizeof(uint16_t) * 2;					// acc
 	sz += sizeof(uint16_t);						// fadeout_time
-	sz += sizeof(uint8_t);						// bounce
+	sz += sizeof(uint8_t);						// ground
 	sz += sizeof(uint16_t) + sizeof(uint8_t);	// radius
 	sz += sizeof(uint8_t);						// orient_to_movement
 	sz += sizeof(uint8_t);						// loop
@@ -96,8 +96,8 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	uint16_t fadeout_time = TransTime(p3d->fadeout_time);
 	pack(fadeout_time, ptr);
 
-	uint8_t bounce = TransBool(p3d->bounce);
-	pack(bounce, ptr);
+	uint8_t ground = p3d->ground;
+	pack(ground, ptr);
 
 	uint16_t start_radius = TransFloat(p3d->start_radius);
 	pack(start_radius, ptr);

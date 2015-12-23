@@ -26,7 +26,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	value["min_vert"] = toolbar->m_min_vert->GetValue();
 	value["max_vert"] = toolbar->m_max_vert->GetValue();
 
-	value["bounce"] = toolbar->m_bounce->GetValue();
+	value["ground"] = toolbar->m_ground->GetSelection();
 
 	value["start_radius_3d"] = toolbar->m_radius_3d->GetValue();
 
@@ -115,8 +115,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * d2d::TRANS_RAD_TO_DEG);
 	ps->SetVert(toolbar->m_min_vert->GetValue(), toolbar->m_max_vert->GetValue());
 
-	toolbar->m_bounce->SetValue(adapter.bounce);
-	ps->SetBounce(adapter.bounce);
+	toolbar->m_ground->SetSelection(adapter.ground);
+	ps->SetGround(adapter.ground);
 
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	ps->SetOrientToMovement(adapter.orient_to_movement);
@@ -200,7 +200,7 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 
 	cfg->fadeout_time = adapter.fadeout_time;
 
-	cfg->bounce = adapter.bounce;
+	cfg->ground = adapter.ground;
 
 	cfg->start_radius = adapter.start_radius;
 	cfg->is_start_radius_3d = adapter.is_start_radius_3d;

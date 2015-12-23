@@ -52,7 +52,7 @@ p3d_ps_config* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p
 
 	cfg->fadeout_time = p3d->fadeout_time;
 
-	cfg->bounce = p3d->bounce;
+	cfg->ground = p3d->ground;
 
 	cfg->start_radius = p3d->start_radius;
 	cfg->is_start_radius_3d = p3d->is_start_radius_3d;

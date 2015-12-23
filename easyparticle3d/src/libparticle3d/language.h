@@ -29,11 +29,14 @@ enum {
 	LK_LINEAR_ACC,
 	LK_INERTIA,
 	LK_FADEOUT_TIME,
-	LK_BOUNCE,
 	LK_ADDITIVE_BLAND,
 	LK_START_RADIUS,
 	LK_ORIENT_MOVEMENT,
 	LK_ORIENT_PARENT,
+
+	LK_NO_GROUND,
+	LK_GROUND_WITH_BOUNCE,
+	LK_GROUND_NO_BOUNCE,
 
 	LK_REMOVE,
 	LK_REMOVE_ALL,
@@ -72,11 +75,14 @@ static const char* EN[] = {
 	"Linear Acc (pixel)",
 	"Inertia",
 	"Fadeout Time (ms)",
-	"Bounce",
 	"Additive Blend",
 	"Start Radius (pixel)",
 	"Orient to Movement",
 	"Orient to Parent",
+
+	"No Ground",
+	"Ground with Bounce",
+	"Ground without Bounce",
 
 	"Remove",
 	"Remove All",
@@ -115,11 +121,14 @@ static const char* CN[] = {
 	"线性加速度",
 	"转动惯量",
 	"消逝时间",
-	"弹跳",
 	"叠加渲染",
 	"起始半径",
 	"朝向运动方向",
 	"朝向父节点方向",
+
+	"无地面",
+	"弹性地面",
+	"非弹性地面",
 
 	"删除",
 	"删除全部",

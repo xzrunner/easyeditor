@@ -52,7 +52,7 @@ private:
 	void OnSetLoop(wxCommandEvent& event);
 	void OnSetHori(wxSpinEvent& event);
 	void OnSetVert(wxSpinEvent& event);
-	void OnSetBounce(wxCommandEvent& event);
+	void OnSetGround(wxCommandEvent& event);
 	void OnSetOrientToMovement(wxCommandEvent& event);
 	void OnSetRadius3D(wxCommandEvent& event);
 
@@ -83,7 +83,7 @@ private:
 	wxCheckBox* m_loop;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
-	wxCheckBox* m_bounce;
+	wxChoice* m_ground;
 	wxCheckBox* m_orient_to_movement;
 //	wxCheckBox* m_orient_to_parent;
 	wxCheckBox* m_radius_3d;

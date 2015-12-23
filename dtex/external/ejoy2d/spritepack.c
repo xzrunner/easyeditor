@@ -391,7 +391,7 @@ import_particle3d(struct import_stream *is) {
 
 	cfg->fadeout_time = import_word(is) * 0.001f;
 
-	cfg->bounce = import_byte(is);
+	cfg->ground = import_byte(is);
 
 	cfg->start_radius = import_word(is);
 	cfg->is_start_radius_3d = import_byte(is);
