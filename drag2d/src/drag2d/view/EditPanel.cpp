@@ -111,11 +111,6 @@ bool EditPanel::IsEditDirty() const
 	return m_impl->IsEditDirty();
 }
 
-void EditPanel::SetTitleStatus(bool dirty)
-{
-	m_impl->SetTitleStatus(dirty);
-}
-
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
 	m_impl->OnRightPopupMenu(event);

@@ -60,8 +60,6 @@ public:
 	void OnSave();
 	bool IsEditDirty() const;
 
-	void SetTitleStatus(bool dirty);
-
 	void OnRightPopupMenu(wxCommandEvent& event);
 
 	bool GetKeyState(int key) const;

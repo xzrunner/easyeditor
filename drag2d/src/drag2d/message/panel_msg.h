@@ -44,6 +44,13 @@ public:
 	SUBJECT_DECLARATION(GetKeyStateSJ)
 }; // GetKeyStateSJ
 
+class SetWndDirtySJ : public Subject
+{
+public:
+	void SetDirty();
+	SUBJECT_DECLARATION(SetWndDirtySJ)
+}; // SetWndDirtySJ
+
 }
 
 #endif // _DRAG2D_PANEL_MSG_H_

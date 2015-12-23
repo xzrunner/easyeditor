@@ -213,9 +213,9 @@ void EditPanelImpl::Undo()
 	if (type != HistoryList::NO_CHANGE) {
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		if (type == HistoryList::DIRTY)
-			SetTitleStatus(true);
+			SetWndDirty(true);
 		else
-			SetTitleStatus(false);
+			SetWndDirty(false);
 	}
 }
 
@@ -225,9 +225,9 @@ void EditPanelImpl::Redo()
 	if (type != HistoryList::NO_CHANGE) {
 		SetCanvasDirtySJ::Instance()->SetDirty();
 		if (type == HistoryList::DIRTY)
-			SetTitleStatus(true);
+			SetWndDirty(true);
 		else
-			SetTitleStatus(false);
+			SetWndDirty(false);
 	}
 }
 
@@ -266,7 +266,7 @@ void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vec
 void EditPanelImpl::OnSave()
 {
 	m_history_list.onSave();
-	SetTitleStatus(false);
+	SetWndDirty(false);
 }
 
 bool EditPanelImpl::IsEditDirty() const
@@ -280,24 +280,6 @@ bool EditPanelImpl::IsEditDirty() const
 		return false;
 	}
 	return title[title.Len()-1] == '*';
-}
-
-void EditPanelImpl::SetTitleStatus(bool dirty)
-{
-	if (!m_frame) return;
-
-	wxString title = m_frame->GetTitle();
-	if (title.IsNull()) return;
-	if (dirty && title[title.Len()-1] != '*')
-	{
-		title.Append('*');
-		m_frame->SetTitle(title);
-	}
-	else if (!dirty && title[title.Len()-1] == '*')
-	{
-		title = title.SubString(0, title.Len()-2);
-		m_frame->SetTitle(title);
-	}
 }
 
 void EditPanelImpl::OnRightPopupMenu(wxCommandEvent& event)
@@ -389,6 +371,9 @@ void EditPanelImpl::OnNotify(int sj_id, void* ud)
 			st->state = GetKeyState(st->key);
 		}
 		break;
+	case MSG_SET_WND_DIRTY:
+		SetWndDirty(true);
+		break;
 	}
 }
 
@@ -412,12 +397,31 @@ void EditPanelImpl::InitSubjects()
 	RegistSubject(EditRedoSJ::Instance());
 	RegistSubject(EditAddRecordSJ::Instance());
 	RegistSubject(GetKeyStateSJ::Instance());	
+	RegistSubject(SetWndDirtySJ::Instance());
 }
 
 void EditPanelImpl::AddOpRecord(AbstractAtomicOP* op)
 {
 	m_history_list.insert(op);
-	SetTitleStatus(true);
+	SetWndDirty(true);
+}
+
+void EditPanelImpl::SetWndDirty(bool dirty)
+{
+	if (!m_frame) return;
+
+	wxString title = m_frame->GetTitle();
+	if (title.IsNull()) return;
+	if (dirty && title[title.Len()-1] != '*')
+	{
+		title.Append('*');
+		m_frame->SetTitle(title);
+	}
+	else if (!dirty && title[title.Len()-1] == '*')
+	{
+		title = title.SubString(0, title.Len()-2);
+		m_frame->SetTitle(title);
+	}
 }
 
 }

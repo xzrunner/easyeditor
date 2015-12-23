@@ -27,7 +27,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 		m_toolbar->SelectSuitableEditOP();
 	}
 
-	m_stage->SetTitleStatus(true);
+	d2d::SetWndDirtySJ::Instance()->SetDirty();
 }
 
 EditDialog::~EditDialog()

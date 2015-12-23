@@ -29,7 +29,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 
 	InitLayout(glctx, edited, sprite_impl);
 
-	m_stage->SetTitleStatus(true);
+	d2d::SetWndDirtySJ::Instance()->SetDirty();
 }
 
 EditDialog::~EditDialog()

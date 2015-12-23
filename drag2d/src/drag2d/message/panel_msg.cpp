@@ -36,4 +36,10 @@ bool GetKeyStateSJ::Query(int key)
 	return st.state;
 }
 
+SUBJECT_DEFINITION(SetWndDirtySJ, MSG_SET_WND_DIRTY)
+void SetWndDirtySJ::SetDirty()
+{
+	Notify(NULL);
+}
+
 }

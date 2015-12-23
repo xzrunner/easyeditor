@@ -26,7 +26,7 @@ EditDialogSimple::EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
 	InitLayout(glctx, edited, sprite_impl);
 	InitEditOP(edited);
 
-	m_stage->SetTitleStatus(true);
+	d2d::SetWndDirtySJ::Instance()->SetDirty();
 }
 
 EditDialogSimple::~EditDialogSimple()

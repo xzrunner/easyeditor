@@ -257,6 +257,8 @@ bool MultiSpritesPropertyImpl::GetEditable() const
 
 void MultiSpritesPropertyImpl::SetTag(const wxString& tag)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->tag = tag;
 	}
@@ -264,6 +266,8 @@ void MultiSpritesPropertyImpl::SetTag(const wxString& tag)
 
 void MultiSpritesPropertyImpl::SetClip(int clip)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	Bool3Type type = (Bool3Type)clip;
 	if (type == e_bool_true) {
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -288,6 +292,8 @@ void MultiSpritesPropertyImpl::SetPos(float x, float y)
 
 void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		float alpha = m_sprites[i]->color.multi.a;
 		m_sprites[i]->color.multi = col;
@@ -297,6 +303,8 @@ void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
 
 void MultiSpritesPropertyImpl::SetColorAdd(const Colorf& col)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		float alpha = m_sprites[i]->color.add.a;
 		m_sprites[i]->color.add = col;
@@ -306,6 +314,8 @@ void MultiSpritesPropertyImpl::SetColorAdd(const Colorf& col)
 
 void MultiSpritesPropertyImpl::SetColorAlpha(float alpha)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->color.multi.a = alpha;
 	}
@@ -313,6 +323,8 @@ void MultiSpritesPropertyImpl::SetColorAlpha(float alpha)
 
 void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	if (overall) 
 	{
 		Vector center = GetOverallCenter();
@@ -333,6 +345,8 @@ void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 
 void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	if (overall)
 	{
 		Vector center = GetOverallCenter();
@@ -352,6 +366,8 @@ void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 
 void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	if (overall)
 	{
 		Vector center = GetOverallCenter();
@@ -371,6 +387,8 @@ void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 
 void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	if (overall)
 	{
 		Vector center = GetOverallCenter();
@@ -390,6 +408,7 @@ void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
 
 void MultiSpritesPropertyImpl::SetVisible(bool visible)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->visiable = visible;
 	}
@@ -397,6 +416,7 @@ void MultiSpritesPropertyImpl::SetVisible(bool visible)
 
 void MultiSpritesPropertyImpl::SetEditable(bool editable)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->editable = editable;
 	}
@@ -404,6 +424,8 @@ void MultiSpritesPropertyImpl::SetEditable(bool editable)
 
 void MultiSpritesPropertyImpl::OnAlign(int align)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	AlignType type = (AlignType)align;
 
 	if (type == e_align_left)
@@ -538,6 +560,8 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 
 void MultiSpritesPropertyImpl::OnCenter(int center)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	CenterType type = (CenterType)center;
 
 	if (type == e_center_horizontal)
@@ -605,6 +629,8 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 
 void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(m_sprites, Vector(dx, dy)));
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -618,6 +644,8 @@ void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 
 void MultiSpritesPropertyImpl::OnAngleChange(float angle)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* spr = m_sprites[i];
@@ -627,6 +655,8 @@ void MultiSpritesPropertyImpl::OnAngleChange(float angle)
 
 void MultiSpritesPropertyImpl::OnScaleChange(float dx, float dy)
 {
+	SetWndDirtySJ::Instance()->SetDirty();
+
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* s = m_sprites[i];
@@ -642,6 +672,8 @@ Vector MultiSpritesPropertyImpl::GetOverallCenter() const
 	if (m_sprites.empty()) {
 		return Vector(0, 0);
 	}
+
+	SetWndDirtySJ::Instance()->SetDirty();
 
 	Vector center(0, 0);
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {

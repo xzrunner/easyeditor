@@ -58,8 +58,6 @@ public:
 	void OnSave();
 	bool IsEditDirty() const;
 
-	void SetTitleStatus(bool dirty);
-
 	void OnRightPopupMenu(wxCommandEvent& event);
 
 	bool GetKeyState(int key) const;
@@ -91,6 +89,8 @@ private:
 	void InitSubjects();
 
 	void AddOpRecord(AbstractAtomicOP* op);
+
+	void SetWndDirty(bool dirty);
 
 protected:
 	AbstractEditOP* m_edit_op;
