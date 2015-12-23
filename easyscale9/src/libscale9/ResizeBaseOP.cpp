@@ -45,7 +45,7 @@ bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		const d2d::Vector src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
 			dst(fabs(pos.x)*2, fabs(pos.y)*2);
-		m_stage->AddOpRecord(new ResizeAtomicOP(m_symbol, src, dst));
+		d2d::EditAddRecordSJ::Instance()->Add(new ResizeAtomicOP(m_symbol, src, dst));
 	}
 
 	m_status = e_null;

@@ -51,7 +51,6 @@ public:
 
 	void Undo();
 	void Redo();
-	void AddOpRecord(AbstractAtomicOP* op);
 
 	void SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
 	void LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
@@ -90,6 +89,8 @@ private:
 	void Clear();
 
 	void InitSubjects();
+
+	void AddOpRecord(AbstractAtomicOP* op);
 
 protected:
 	AbstractEditOP* m_edit_op;

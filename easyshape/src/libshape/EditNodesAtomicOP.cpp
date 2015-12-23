@@ -20,13 +20,13 @@ ModifyNodesAOP::ModifyNodesAOP(const std::vector<ChainShape*>& chains,
 	}
 }
 
-void ModifyNodesAOP::undo()
+void ModifyNodesAOP::Undo()
 {
 	for (size_t i = 0, n = m_chains.size(); i< n; ++i)
 		m_chains[i]->Load(m_src[i]);
 }
 
-void ModifyNodesAOP::redo()
+void ModifyNodesAOP::Redo()
 {
 	for (size_t i = 0, n = m_chains.size(); i< n; ++i)
 		m_chains[i]->Load(m_dst[i]);

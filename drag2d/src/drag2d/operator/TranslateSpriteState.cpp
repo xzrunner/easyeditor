@@ -2,6 +2,7 @@
 
 #include "history/TranslateSpriteAOP.h"
 #include "view/SpriteSelection.h"
+#include "message/panel_msg.h"
 
 namespace d2d
 {
@@ -26,14 +27,13 @@ void TranslateSpriteState::OnMousePress(const Vector& pos)
 	m_first_pos = m_last_pos = pos;
 }
 
-AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
+void TranslateSpriteState::OnMouseRelease(const Vector& pos)
 {
 	m_last_pos.setInvalid();
 	if (m_dirty) {
 		m_dirty = false;
-		return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
-	} else {
-		return NULL;
+		AbstractAtomicOP* aop = new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
+		EditAddRecordSJ::Instance()->Add(aop);
 	}
 }
 
@@ -54,20 +54,27 @@ bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
 {
 	if (m_selection->IsEmpty()) return false;
 
+	d2d::Vector offset;
+
 	switch (type)
 	{
 	case e_left:
-		Translate(Vector(-1, 0));
+		offset.set(-1, 0);
 		break;
 	case e_right:
-		Translate(Vector(1, 0));
+		offset.set(1, 0);
 		break;
 	case e_down:
-		Translate(Vector(0, -1));
+		offset.set(0, -1);
 		break;
 	case e_up:
-		Translate(Vector(0, 1));
+		offset.set(0, 1);
 		break;
+	}
+
+	if (offset.x != 0 || offset.y != 0) {
+		Translate(offset);
+		EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(*m_selection, offset));
 	}
 
 	return true;

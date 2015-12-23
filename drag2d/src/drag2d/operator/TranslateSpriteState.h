@@ -9,8 +9,7 @@
 namespace d2d
 {
 
-class SpriteSelection
-	;
+class SpriteSelection;
 
 class TranslateSpriteState : public IArrangeSpriteState
 {
@@ -19,7 +18,7 @@ public:
 	virtual ~TranslateSpriteState();
 
 	virtual	void OnMousePress(const Vector& pos);
-	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
+	virtual void OnMouseRelease(const Vector& pos);
 	virtual	bool OnMouseDrag(const Vector& pos);
 
 	virtual bool OnDirectionKeyDown(DirectionType type);

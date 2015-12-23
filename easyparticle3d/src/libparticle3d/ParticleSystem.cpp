@@ -11,6 +11,35 @@
 namespace eparticle3d
 {
 
+static void render_func(void* symbol, float x, float y, float angle, float scale, 
+                        struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
+{
+	d2d::Matrix mt = *(d2d::Matrix*)ud;
+	// todo init_pos
+	//_mt.translate(p->init_pos.x, p->init_pos.y);
+
+	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
+	d2d::ColorTrans color;
+	memcpy(&color.multi, mul_col, sizeof(*mul_col));
+	memcpy(&color.add, add_col, sizeof(*add_col));
+
+	d2d::SpriteRenderer::Instance()->Draw(sym, mt, d2d::Vector(x, y), angle, scale, scale, 0, 0, color);
+
+	// todo bind
+// 	if (p->bind_ps) {
+// 		d2d::Matrix _mt;
+// 		_mt.translate(p->pos.x, p->pos.y);
+// 		Draw(p->bind_ps, _mt, recorder);
+// 	}
+
+	// todo record
+// 	AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
+// 	if (curr_record) {
+// 		d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
+// 		curr_record->AddItem(symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
+// 	}
+}
+
 static void add_func(p3d_particle* p, void* ud)
 {
 	ParticleSystem* ps = (ParticleSystem*)ud;
@@ -31,6 +60,7 @@ ParticleSystem::ParticleSystem(unsigned int buffer, p3d_ps_config* cfg)
 {
 	m_ps = p3d_create(buffer, cfg);
 
+	m_ps->render_func = &render_func;
 	m_ps->add_func = &add_func;
 	m_ps->remove_func = &remove_func;
 	m_ps->ud = this;
@@ -354,54 +384,12 @@ int ParticleSystem::GetPSCapacity() const
 
 void ParticleSystem::Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRecorder* recorder) const
 {
-	if (m_anim_recorder) {
-		m_anim_recorder->FinishFrame();
-	}
+	// todo record
+// 	if (m_anim_recorder) {
+// 		m_anim_recorder->FinishFrame();
+// 	}
 
-	p3d_particle* p = ps->start;
-	while (p != ps->last)
-	{
-		//glPushAttrib(GL_CURRENT_BIT);
-
-		d2d::Colorf mul_col, add_col;
-		memcpy(&mul_col.r, &p->cfg.symbol->col_mul.r, sizeof(float) * 4);
-		memcpy(&add_col.r, &p->cfg.symbol->col_add.r, sizeof(float) * 4);
-		if (p->life < ps->cfg->fadeout_time) {
-			mul_col.a = p->life / ps->cfg->fadeout_time;
-		}
-
-		//		d2d::Vector pos = TransCoords3To2(p->position, direction);
-		d2d::Vector pos = TransCoords3To2(p->pos.xyz);
-
-		float proc = (p->cfg.lifetime - p->life) / p->cfg.lifetime;
-		float s = proc * (p->cfg.symbol->scale_end - p->cfg.symbol->scale_start) + p->cfg.symbol->scale_start;
-		float alpha = proc * (p->cfg.symbol->alpha_end - p->cfg.symbol->alpha_start) + p->cfg.symbol->alpha_start;
-		mul_col.a *= alpha;
-
-		d2d::Matrix _mt(mt);
-		_mt.translate(p->init_pos.x, p->init_pos.y);
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p->cfg.symbol->ud);
-		d2d::ColorTrans color;
-		color.multi = mul_col;
-		color.add = add_col;
-		d2d::SpriteRenderer::Instance()->Draw(symbol, _mt, pos, p->angle, s, s, 0, 0, color);
-
-		if (p->bind_ps) {
-			d2d::Matrix _mt;
-			_mt.translate(p->pos.x, p->pos.y);
-			Draw(p->bind_ps, _mt, recorder);
-		}
-
-		AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
-		if (curr_record) {
-			d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
-			curr_record->AddItem(symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
-		}
-
-		//glPopAttrib();
-
-		++p;
-	}
+	p3d_draw(ps, &mt);
 }
 
 void ParticleSystem::SetPSCapacity(int cap)

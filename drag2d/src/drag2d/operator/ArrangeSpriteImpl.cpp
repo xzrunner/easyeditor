@@ -26,6 +26,7 @@
 #include "render/PrimitiveDraw.h"
 #include "message/ReorderSpriteSJ.h"
 #include "message/SetCanvasDirtySJ.h"
+#include "message/panel_msg.h"
 
 namespace d2d
 {
@@ -202,11 +203,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state) 
 	{
-		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-		if (history) {
-			m_stage->AddOpRecord(history);
-		}
-
+		m_op_state->OnMouseRelease(pos);
 		ChangeOPState(NULL);
 	}
 
@@ -288,10 +285,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 	}
 	else if (m_op_state)
 	{
-		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-		if (history) {
-			m_stage->AddOpRecord(history);
-		}
+		m_op_state->OnMouseRelease(pos);
 		ChangeOPState(NULL);
 	}
 
@@ -463,11 +457,11 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		//comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
 
 		sprite->SetTransform(Vector(0, 0), 0);
-		sprite->SetScale(1, 1);
-		sprite->SetShear(0, 0);
+		sprite->SetScale(Vector(1, 1));
+		sprite->SetShear(Vector(0, 0));
 		//sprite->setOffset(Vector(0, 0));
 	}
-	m_stage->AddOpRecord(comb);
+	EditAddRecordSJ::Instance()->Add(comb);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -511,7 +505,7 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	// add to history
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites));
+	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprites));
 
 	m_sprites_impl->ClearSelectedSprite();
 }

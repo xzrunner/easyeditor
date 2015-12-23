@@ -91,7 +91,7 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 	float scale = value["grid"]["scale"].asDouble();
 	float alpha = value["grid"]["alpha"].asInt();
 	sprite->SetTransform(d2d::Vector(0, 0), angle * d2d::TRANS_DEG_TO_RAD);
-	sprite->SetScale(scale, scale);
+	sprite->SetScale(d2d::Vector(scale, scale));
 	SymbolRender::Instance()->SetGrid(sprite);
 	symbol->Release();
 }
@@ -116,7 +116,7 @@ void BuildingCfg::InitGrass(const Json::Value& value)
 		float scale = grassVal["scale"].asDouble();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->SetScale(scale, scale);
+		sprite->SetScale(d2d::Vector(scale, scale));
 		SymbolRender::Instance()->SetGrass(i-1, sprite);
 
 		grassVal = value["grass"]["levels"][i++];

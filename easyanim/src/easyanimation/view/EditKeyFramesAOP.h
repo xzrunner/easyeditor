@@ -15,9 +15,9 @@ public:
 	EditKeyFramesAOP(Layer* layer);
 	virtual ~EditKeyFramesAOP();
 
-	virtual void undo();
-	virtual void redo();
-	virtual Json::Value store(const std::vector<d2d::ISprite*>& sprites) { return Json::Value(); }
+	virtual void Undo();
+	virtual void Redo();
+	virtual Json::Value Store(const std::vector<d2d::ISprite*>& sprites) const { return Json::Value(); }
 
 	void AddRemoved(KeyFrame* kf);
 	void AddInserted(KeyFrame* kf);

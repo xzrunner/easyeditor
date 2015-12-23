@@ -14,18 +14,18 @@ PerspectiveSpriteAOP::PerspectiveSpriteAOP(ISprite* sprite,
 {
 }
 
-void PerspectiveSpriteAOP::undo()
+void PerspectiveSpriteAOP::Undo()
 {
 	m_spr->SetPerspective(m_old_persp);
 }
 
-void PerspectiveSpriteAOP::redo()
+void PerspectiveSpriteAOP::Redo()
 {
 	m_spr->SetPerspective(m_new_persp);
 }
 
 // todo
-Json::Value PerspectiveSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value PerspectiveSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value ret;
 	return ret;

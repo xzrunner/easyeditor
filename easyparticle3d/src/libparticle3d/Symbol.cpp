@@ -54,6 +54,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	if (spr) {
 		const Sprite* _spr = static_cast<const Sprite*>(spr);
 		m_ps->SetDirection(_spr->GetDir());
+		m_ps->SetPosition(spr->GetPosition());
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
@@ -63,7 +64,8 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
 	m_ps->SetLoop(loop);
 	m_ps->Update(dt);
-	m_ps->Draw(mt);
+//	m_ps->Draw(mt);
+	m_ps->Draw(d2d::Matrix());
 
 	m_time = curr;
 }

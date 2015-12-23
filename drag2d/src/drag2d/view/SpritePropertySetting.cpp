@@ -17,6 +17,8 @@
 #include "message/subject_id.h"
 #include "message/SpriteNameChangeSJ.h"
 #include "message/SetCanvasDirtySJ.h"
+#include "message/panel_msg.h"
+#include "history/SetSpriteColorAOP.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -58,19 +60,28 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	// color
 	else if (name == "Color.Multi" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
-		wxColour col = wxANY_AS(value, wxColour);
-		spr->color.multi.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, spr->color.multi.a);
+		wxColour wx_col = wxANY_AS(value, wxColour);
+		Colorf col(wx_col.Red() / 255.0f, wx_col.Green() / 255.0f, wx_col.Blue() / 255.0f, spr->color.multi.a);
+		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+		spr->color.multi = col;
 	}
 	else if (name == "Color.Add" && Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_DEFAULT)
 	{
-		wxColour col = wxANY_AS(value, wxColour);
-		spr->color.add.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, spr->color.add.a);
+		wxColour wx_col = wxANY_AS(value, wxColour);
+		Colorf col(wx_col.Red() / 255.0f, wx_col.Green() / 255.0f, wx_col.Blue() / 255.0f, spr->color.add.a);
+		EditAddRecordSJ::Instance()->Add(new SetSpriteAddColorAOP(spr, col));
+		spr->color.add = col;
 	}
 	else if (name == "Color.Alpha")
 	{
 		int alpha = wxANY_AS(value, int);
 		alpha = std::max(0, std::min(255, alpha));
-		spr->color.multi.a = alpha / 255.0f;
+
+		Colorf col = spr->color.multi;
+		col.a = alpha / 255.0f;
+		EditAddRecordSJ::Instance()->Add(new SetSpriteMulColorAOP(spr, col));
+
+		spr->color.multi = col;
 	}
 // 	else if (name == "Color.R")
 // 	{

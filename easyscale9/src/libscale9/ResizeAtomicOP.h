@@ -12,10 +12,10 @@ namespace escale9
 		ResizeAtomicOP(Symbol* symbol, const d2d::Vector& src, 
 			const d2d::Vector& dst);
 
-		virtual void undo();
-		virtual void redo();
+		virtual void Undo();
+		virtual void Redo();
 
-		virtual Json::Value store(const std::vector<d2d::ISprite*>& sprites) {
+		virtual Json::Value Store(const std::vector<d2d::ISprite*>& sprites) const {
 			Json::Value ret;
 			return ret;
 		}

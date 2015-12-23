@@ -83,7 +83,7 @@ void ScaleImage::Scale(d2d::Snapshoot& ss, const std::string& src, const std::st
 		d2d::Rect r = symbol->GetSize();
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->SetScale(scale, scale);
+		sprite->SetScale(d2d::Vector(scale, scale));
 
 		int width = r.xLength() * scale,
 			height = r.yLength() * scale;

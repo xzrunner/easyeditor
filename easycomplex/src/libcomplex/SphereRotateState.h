@@ -13,7 +13,7 @@ public:
 	SphereRotateState(d2d::EditPanelImpl* stage, const d2d::Vector& first_pos,
 		Quaternion& dir);
 
-	virtual d2d::AbstractAtomicOP* OnMouseRelease(const d2d::Vector& pos);
+	virtual void OnMouseRelease(const d2d::Vector& pos);
 	virtual bool OnMouseDrag(const d2d::Vector& pos);
 
 private:

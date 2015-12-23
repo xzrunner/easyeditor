@@ -5,6 +5,8 @@
 #include "common/visitors.h"
 #include "view/SpriteSelection.h"
 
+#include <algorithm>
+
 namespace d2d
 {
 
@@ -27,21 +29,16 @@ TranslateSpriteAOP::TranslateSpriteAOP(ISprite* sprite, const Vector& offset)
 TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<ISprite*>& sprites, const Vector& offset)
 	: m_offset(offset)
 {
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
-	{
-		sprites[i]->Retain();
-		m_sprites.push_back(sprites[i]);
-	}
+	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<ISprite>());
+	m_sprites = sprites;
 }
 
 TranslateSpriteAOP::~TranslateSpriteAOP()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
-	}
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
 }
 
-void TranslateSpriteAOP::undo()
+void TranslateSpriteAOP::Undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -50,7 +47,7 @@ void TranslateSpriteAOP::undo()
 	}
 }
 
-void TranslateSpriteAOP::redo()
+void TranslateSpriteAOP::Redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -59,7 +56,7 @@ void TranslateSpriteAOP::redo()
 	}
 }
 
-Json::Value TranslateSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value TranslateSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

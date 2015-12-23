@@ -12,10 +12,10 @@ public:
 	InsertSpriteAOP(const std::vector<ISprite*>& sprites);
 	virtual ~InsertSpriteAOP();
 
-	virtual void undo();
-	virtual void redo();
+	virtual void Undo();
+	virtual void Redo();
 
-	virtual Json::Value store(const std::vector<ISprite*>& sprites);
+	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
 
 private:
 	std::vector<ISprite*> m_sprites;

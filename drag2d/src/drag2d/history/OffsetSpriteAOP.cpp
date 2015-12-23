@@ -14,18 +14,18 @@ OffsetSpriteAOP::OffsetSpriteAOP(ISprite* sprite,
 {
 }
 
-void OffsetSpriteAOP::undo()
+void OffsetSpriteAOP::Undo()
 {
 	m_sprite->SetOffset(m_old_offset);
 }
 
-void OffsetSpriteAOP::redo()
+void OffsetSpriteAOP::Redo()
 {
 	m_sprite->SetOffset(m_new_offset);
 }
 
 // todo
-Json::Value OffsetSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value OffsetSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value ret;
 	return ret;

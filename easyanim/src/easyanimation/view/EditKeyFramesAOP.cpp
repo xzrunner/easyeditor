@@ -20,7 +20,7 @@ EditKeyFramesAOP::~EditKeyFramesAOP()
 	}
 }
 
-void EditKeyFramesAOP::undo()
+void EditKeyFramesAOP::Undo()
 {
 	for (int i = 0, n = m_inserted.size(); i < n; ++i) {
 		m_layer->RemoveKeyFrame(m_inserted[i]->GetTime());
@@ -34,7 +34,7 @@ void EditKeyFramesAOP::undo()
 	}
 }
 
-void EditKeyFramesAOP::redo()
+void EditKeyFramesAOP::Redo()
 {
 	for (int i = 0, n = m_removed.size(); i < n; ++i) {
 		m_layer->RemoveKeyFrame(m_removed[i]->GetTime());

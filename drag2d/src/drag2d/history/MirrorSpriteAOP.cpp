@@ -24,17 +24,17 @@ MirrorSpriteAOP::~MirrorSpriteAOP()
 	m_sprite->Release();
 }
 
-void MirrorSpriteAOP::undo()
+void MirrorSpriteAOP::Undo()
 {
 	m_sprite->SetMirror(m_old_mirror_x, m_old_mirror_y);
 }
 
-void MirrorSpriteAOP::redo()
+void MirrorSpriteAOP::Redo()
 {
 	m_sprite->SetMirror(m_new_mirror_x, m_new_mirror_y);
 }
 
-Json::Value MirrorSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value MirrorSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["type"] = AT_SHEAR;

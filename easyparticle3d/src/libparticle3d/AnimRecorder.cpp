@@ -83,7 +83,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 				new d2d::NullSymbol(item->filepath));
 
 			sprite->SetTransform(d2d::Vector(item->x, item->y), item->angle);
-			sprite->SetScale(item->scale, item->scale);
+			sprite->SetScale(d2d::Vector(item->scale, item->scale));
 			sprite->color.multi = item->mul_col;
 
 			frame->sprites.push_back(sprite);

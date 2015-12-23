@@ -561,6 +561,42 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpriteAngleAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpriteAngleAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpriteColorAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpriteColorAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpritePosAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpritePosAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpriteTwoAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\SetSpriteTwoAOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="edit_component"

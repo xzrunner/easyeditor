@@ -24,25 +24,21 @@ ShearSpriteAOP::~ShearSpriteAOP()
 	}
 }
 
-void ShearSpriteAOP::undo()
+void ShearSpriteAOP::Undo()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) 
-	{
-		ISprite* sprite = m_sprites[i];
-		sprite->SetShear(m_old_shear.x, m_old_shear.y);
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
+		m_sprites[i]->SetShear(m_old_shear);
+	}
+}
+
+void ShearSpriteAOP::Redo()
+{
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
+		m_sprites[i]->SetShear(m_new_shear);
 	} 
 }
 
-void ShearSpriteAOP::redo()
-{
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) 
-	{
-		ISprite* sprite = m_sprites[i];
-		sprite->SetShear(m_new_shear.x, m_new_shear.y);
-	} 
-}
-
-Json::Value ShearSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value ShearSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

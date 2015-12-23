@@ -27,7 +27,7 @@ HistoryList::Type HistoryList::undo()
 
 	AbstractAtomicOP* op = m_undoStack.top();
 	m_undoStack.pop();
-	op->undo();
+	op->Undo();
 	m_redoStack.push(op);
 
 	if (!m_savedOP && m_undoStack.empty())
@@ -45,7 +45,7 @@ HistoryList::Type HistoryList::redo()
 
 	AbstractAtomicOP* op = m_redoStack.top();
 	m_redoStack.pop();
-	op->redo();
+	op->Redo();
 	m_undoStack.push(op);
 
 	if (!m_savedOP && m_undoStack.empty())
@@ -105,7 +105,7 @@ void HistoryList::store(std::stack<AbstractAtomicOP*>& stack, Json::Value& val,
 
 	for (int i = tmp.size() - 1; i >= 0; --i) {
 		AbstractAtomicOP* op = tmp[i];
-		val[tmp.size() - 1 - i] = op->store(sprites);
+		val[tmp.size() - 1 - i] = op->Store(sprites);
 		stack.push(op);
 	}
 }

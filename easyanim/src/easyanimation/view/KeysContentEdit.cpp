@@ -8,6 +8,7 @@
 #include "view/StagePanel.h"
 #include "view/ViewMgr.h"
 #include "message/messages.h"
+#include "message/panel_msg.h"
 
 #include <wx/clipbrd.h>
 

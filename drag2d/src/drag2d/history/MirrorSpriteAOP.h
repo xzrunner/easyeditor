@@ -13,10 +13,10 @@ public:
 		bool new_mirror_x, bool new_mirror_y);
 	virtual ~MirrorSpriteAOP();
 
-	virtual void undo();
-	virtual void redo();
+	virtual void Undo();
+	virtual void Redo();
 
-	virtual Json::Value store(const std::vector<ISprite*>& sprites);
+	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
 
 private:
 	ISprite* m_sprite;

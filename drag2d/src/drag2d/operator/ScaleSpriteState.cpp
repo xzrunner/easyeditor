@@ -7,6 +7,7 @@
 #include "history/CombineAOP.h"
 #include "history/TranslateSpriteAOP.h"
 #include "history/ScaleSpriteAOP.h"
+#include "message/panel_msg.h"
 
 namespace d2d
 {
@@ -26,14 +27,14 @@ ScaleSpriteState::~ScaleSpriteState()
 	m_sprite->Release();
 }
 
-AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)
+void ScaleSpriteState::OnMouseRelease(const Vector& pos)
 {
 	CombineAOP* comb = new CombineAOP();
 
 	comb->Insert(new TranslateSpriteAOP(m_sprite, m_sprite->GetPosition() - m_first_pos));
 	comb->Insert(new ScaleSpriteAOP(m_sprite, m_sprite->GetScale(), m_first_scale));
 
-	return comb;
+	EditAddRecordSJ::Instance()->Add(comb);
 }
 
 bool ScaleSpriteState::OnMouseDrag(const Vector& pos)
@@ -52,17 +53,18 @@ void ScaleSpriteState::Scale(const Vector& curr)
 	Vector fix;
 	Math::getFootOfPerpendicular(center, ori, curr, &fix);
 
-	float scale = Math::getDistance(center, fix) / Math::getDistance(center, ori);
-	if (fabs(scale - 1) < FLT_EPSILON) {
+	float scale_times = Math::getDistance(center, fix) / Math::getDistance(center, ori);
+	if (fabs(scale_times - 1) < FLT_EPSILON) {
 		return;
 	}
+
+	Vector scale = m_sprite->GetScale();
 	if (m_ctrl_node.type == SpriteCtrlNode::UP || m_ctrl_node.type == SpriteCtrlNode::DOWN) {
-		m_sprite->SetScale(m_sprite->GetScale().x, scale * m_sprite->GetScale().y);
+		scale.y *= scale_times;
 	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT || m_ctrl_node.type == SpriteCtrlNode::RIGHT) {
-		m_sprite->SetScale(scale * m_sprite->GetScale().x, m_sprite->GetScale().y);
-	} else {
-		m_sprite->SetScale(scale * m_sprite->GetScale().x, scale * m_sprite->GetScale().y);
+		scale.x *= scale_times;
 	}
+	m_sprite->SetScale(scale);
 }
 
 }

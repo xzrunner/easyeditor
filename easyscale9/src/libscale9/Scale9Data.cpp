@@ -311,9 +311,9 @@ void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center,
 	sprite->SetTransform(center, sprite->GetAngle());
 	const float times = sprite->GetAngle() / d2d::PI;
 	if (times - (int)(times + 0.01f) < 0.3f)
-		sprite->SetScale(width / w, height / h);
+		sprite->SetScale(d2d::Vector(width / w, height / h));
 	else
-		sprite->SetScale(height / w, width / h);
+		sprite->SetScale(d2d::Vector(height / w, width / h));
 
 	sprite->Translate(d2d::Math::rotateVector(sprite->GetOffset(), sprite->GetAngle()) - sprite->GetOffset());
 }

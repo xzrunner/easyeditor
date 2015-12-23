@@ -54,8 +54,6 @@ public:
 	void OnKeyUp(wxKeyEvent& event);
 	void OnMouseWheelRotation(int x, int y, int direction);
 
-	void AddOpRecord(AbstractAtomicOP* op);
-
 	void SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
 	void LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
 

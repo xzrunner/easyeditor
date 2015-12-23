@@ -24,23 +24,21 @@ ScaleSpriteAOP::~ScaleSpriteAOP()
 	}
 }
 
-void ScaleSpriteAOP::undo()
+void ScaleSpriteAOP::Undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* sprite = m_sprites[i];
-		sprite->SetScale(m_old_scale.x, m_old_scale.y);
+		m_sprites[i]->SetScale(m_old_scale);
 	} 
 }
 
-void ScaleSpriteAOP::redo()
+void ScaleSpriteAOP::Redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* sprite = m_sprites[i];
-		sprite->SetScale(m_new_scale.x, m_new_scale.y);
+		m_sprites[i]->SetScale(m_new_scale);
 	} 
 }
 
-Json::Value ScaleSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value ScaleSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

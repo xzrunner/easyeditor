@@ -5,6 +5,7 @@
 #include "dataset/AbstractBV.h"
 #include "common/Math.h"
 #include "history/ShearSpriteAOP.h"
+#include "message/panel_msg.h"
 
 namespace d2d
 {
@@ -24,9 +25,10 @@ ShearSpriteState::~ShearSpriteState()
 	m_sprite->Release();
 }
 
-AbstractAtomicOP* ShearSpriteState::OnMouseRelease(const Vector& pos)
+void ShearSpriteState::OnMouseRelease(const Vector& pos)
 {
-	return new ShearSpriteAOP(m_sprite, m_sprite->GetShear(), m_first_shear);
+	AbstractAtomicOP* aop = new ShearSpriteAOP(m_sprite, m_sprite->GetShear(), m_first_shear);
+	EditAddRecordSJ::Instance()->Add(aop);
 }
 
 bool ShearSpriteState::OnMouseDrag(const Vector& pos)
@@ -122,7 +124,7 @@ void ShearSpriteState::Shear(const Vector& curr)
 			ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
 	}
 
-	m_sprite->SetShear(kx, ky);
+	m_sprite->SetShear(Vector(kx, ky));
 }
 
 void ShearSpriteState::Shear2(const Vector& curr)
@@ -159,7 +161,7 @@ void ShearSpriteState::Shear2(const Vector& curr)
 				kx = -kx;
 			}
 			kx /= sx;
-			m_sprite->SetShear(kx, ky);
+			m_sprite->SetShear(Vector(kx, ky));
 		}
 		break;
 	case SpriteCtrlNode::LEFT: case SpriteCtrlNode::RIGHT:
@@ -179,7 +181,7 @@ void ShearSpriteState::Shear2(const Vector& curr)
 				ky = -ky;
 			}
 			ky /= sy;
-			m_sprite->SetShear(kx, ky);
+			m_sprite->SetShear(Vector(kx, ky));
 		}
 		break;
 	}

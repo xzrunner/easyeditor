@@ -129,30 +129,30 @@ void ISprite::Load(const Json::Value& val)
 	}
 
 	// scale
-	float sx, sy;
+	Vector scale;
 	if (val["scale"].isNull())
 	{
-		sx = val["x scale"].asDouble();
-		sy = val["y scale"].asDouble();
+		scale.x = val["x scale"].asDouble();
+		scale.y = val["y scale"].asDouble();
 	}
 	else
 	{
-		sx = sy = val["scale"].asDouble();
+		scale.x = scale.y = val["scale"].asDouble();
 	}
-	SetScale(sx, sy);
+	SetScale(scale);
 
 	// shear
-	float kx, ky;
+	Vector shear;
 	if (!val["x shear"].isNull())
 	{
-		kx = val["x shear"].asDouble();
-		ky = val["y shear"].asDouble();
+		shear.x = val["x shear"].asDouble();
+		shear.y = val["y shear"].asDouble();
 	}
 	else
 	{
-		kx = ky = 0;
+		shear.set(0, 0);
 	}
-	SetShear(kx, ky);
+	SetShear(shear);
 
 	// mirror
 	bool mx = val["x mirror"].asBool();
@@ -283,11 +283,11 @@ void ISprite::SetTransform(const Vector& position, float angle)
 	if (m_angle != angle) Rotate(angle - m_angle);
 }
 
-void ISprite::SetScale(float xScale, float yScale)
+void ISprite::SetScale(const Vector& scale)
 {
 	Vector dscale;
-	dscale.x = xScale / m_scale.x;
-	dscale.y = yScale / m_scale.y;
+	dscale.x = scale.x / m_scale.x;
+	dscale.y = scale.y / m_scale.y;
 
 	Vector old_offset = m_offset;
 	Vector new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
@@ -308,23 +308,36 @@ void ISprite::SetScale(float xScale, float yScale)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	m_scale.set(xScale, yScale);
+	m_scale = scale;
 	BuildBounding();
  }
 
-void ISprite::SetShear(float xShear, float yShear)
+void ISprite::SetShear(const Vector& shear)
 {
 	Matrix mat_old, mat_new;
 	mat_old.shear(m_shear.x, m_shear.y);
-	mat_new.shear(xShear, yShear);
+	mat_new.shear(shear.x, shear.y);
 
 	Vector offset = Math::transVector(m_offset, mat_new) - Math::transVector(m_offset, mat_old);
 
 	m_offset += offset;
 	Translate(-offset);
 
-	m_shear.set(xShear, yShear);
+	m_shear = shear;
 	BuildBounding();
+}
+
+void ISprite::SetOffset(const Vector& offset) 
+{
+	// rotate + offset -> offset + rotate	
+	Vector old_center = GetCenter();
+	m_offset = offset;
+	Vector new_center = GetCenter();
+	m_pos += (old_center - new_center);
+
+	if (m_bounding) {
+		m_bounding->SetTransform(m_pos, m_offset, m_angle);
+	}
 }
 
 bool ISprite::IsContain(const Vector& pos) const
@@ -380,19 +393,6 @@ void ISprite::Rotate(float delta)
 #ifdef OPEN_SCREEN_CACHE
 	SpatialIndex::Instance()->Insert(this);
 #endif // OPEN_SCREEN_CACHE
-}
-
-void ISprite::SetOffset(const Vector& offset) 
-{
-	// rotate + offset -> offset + rotate	
-	Vector old_center = GetCenter();
-	m_offset = offset;
-	Vector new_center = GetCenter();
-	m_pos += (old_center - new_center);
-
-	if (m_bounding) {
-		m_bounding->SetTransform(m_pos, m_offset, m_angle);
-	}
 }
 
 void ISprite::SetMirror(bool xMirror, bool yMirror) 

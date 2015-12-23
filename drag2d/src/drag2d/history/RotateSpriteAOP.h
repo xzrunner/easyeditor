@@ -22,10 +22,10 @@ public:
 	RotateSpriteAOP(ISprite* sprite, float angle);
 	virtual ~RotateSpriteAOP();
 
-	virtual void undo();
-	virtual void redo();
+	virtual void Undo();
+	virtual void Redo();
 
-	virtual Json::Value store(const std::vector<ISprite*>& sprites);
+	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
 
 private:
 	void Init(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end);

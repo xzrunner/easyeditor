@@ -17,7 +17,7 @@ public:
 	TranslateSpriteState(StagePanel* stage, d2d::SpriteSelection* selection, 
 		const d2d::Vector& first_pos, AnchorMgr* anchor_mgr);
 
-	virtual d2d::AbstractAtomicOP* OnMouseRelease(const d2d::Vector& pos);
+	virtual void OnMouseRelease(const d2d::Vector& pos);
 
 private:
 	class Visitor : public d2d::IVisitor

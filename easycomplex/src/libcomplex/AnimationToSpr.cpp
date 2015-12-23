@@ -124,7 +124,7 @@ void AnimationToSpr::TransSpriteMat(d2d::ISprite* spr, const librespacker::PackA
 	}
 	spr->SetMirror(xmirror, ymirror);
 
-	spr->SetScale(sx, sy);
+	spr->SetScale(d2d::Vector(sx, sy));
 	spr->SetTransform(d2d::Vector(dx, dy), angle);
 }
 

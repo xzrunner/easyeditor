@@ -29,7 +29,7 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 		sprite->Translate(m_pos);
 
 		if (m_randomValue.scale != 1.0f) {
-			sprite->SetScale(m_randomValue.scale, m_randomValue.scale);
+			sprite->SetScale(d2d::Vector(m_randomValue.scale, m_randomValue.scale));
 		}
 		if (m_randomValue.angle != 0.0f) {
 			sprite->SetTransform(m_pos, m_randomValue.angle);

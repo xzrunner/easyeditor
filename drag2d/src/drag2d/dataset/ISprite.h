@@ -52,21 +52,23 @@ public:
 	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	virtual void SetTransform(const Vector& position, float angle);
-	void SetScale(float xScale, float yScale);
-	void SetShear(float xShear, float yShear);
+	const Vector& GetPosition() const { return m_pos; }
+	float GetAngle() const { return m_angle; }
+
+	const Vector& GetScale() const { return m_scale; }
+	void SetScale(const Vector& scale);
+
+	const Vector& GetShear() const { return m_shear; }
+	void SetShear(const Vector& shear);
+
+	const Vector& GetOffset() const { return m_offset; }
+	void SetOffset(const Vector& offset);
 
 	bool IsContain(const Vector& pos) const;
 	bool IsIntersect(const Rect& rect) const;
 
 	void Translate(const Vector& offset);
 	void Rotate(float delta);
-
-	const Vector& GetPosition() const { return m_pos; }
-	const Vector& GetOffset() const { return m_offset; }
-	void SetOffset(const Vector& offset);
-	float GetAngle() const { return m_angle; }
-	const Vector& GetScale() const { return m_scale; }
-	const Vector& GetShear() const { return m_shear; }
 
 	void SetMirror(bool xMirror, bool yMirror);
 	void GetMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }

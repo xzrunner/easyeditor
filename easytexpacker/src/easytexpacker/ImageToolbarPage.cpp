@@ -202,8 +202,9 @@ void ImageToolbarPage::onChangeScale(wxSpinEvent& event)
 
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->SetScale(scale, scale);
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		sprites[i]->SetScale(d2d::Vector(scale, scale));
+	}
 
 	m_stage->arrangeAllSprites(true);
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();

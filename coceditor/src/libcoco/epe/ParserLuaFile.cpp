@@ -713,7 +713,7 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 		sx = dw / 16.0f / sw;
 		sy = dh / 16.0f / sh;
 	}
-	sprite->SetScale(sx, sy);
+	sprite->SetScale(d2d::Vector(sx, sy));
 
 	sprite->SetMirror(xMirror, yMirror);
 	angle = -angle;
@@ -826,8 +826,8 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 		sprite->Rotate(angle);
 		sprite->Translate(d2d::Vector(x, y));
 		const d2d::Vector& scale = sprite->GetScale();
-		sprite->SetScale(scale.x * sx, scale.y * sy);
-		sprite->SetShear(kx, ky);
+		sprite->SetScale(d2d::Vector(scale.x * sx, scale.y * sy));
+		sprite->SetShear(d2d::Vector(kx, ky));
 	}
 }
 

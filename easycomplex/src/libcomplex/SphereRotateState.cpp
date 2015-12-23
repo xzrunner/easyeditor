@@ -13,10 +13,9 @@ SphereRotateState::SphereRotateState(d2d::EditPanelImpl* stage, const d2d::Vecto
 	m_last_pos.y = p.y;
 }
 
-d2d::AbstractAtomicOP* SphereRotateState::OnMouseRelease(const d2d::Vector& pos)
+void SphereRotateState::OnMouseRelease(const d2d::Vector& pos)
 {
 	m_last_pos.x = m_last_pos.y = INT_MAX;
-	return NULL;
 }
 
 bool SphereRotateState::OnMouseDrag(const d2d::Vector& pos)

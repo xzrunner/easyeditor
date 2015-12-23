@@ -13,7 +13,7 @@ public:
 	ShearSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ShearSpriteState();
 
-	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
+	virtual void OnMouseRelease(const Vector& pos);
 	virtual	bool OnMouseDrag(const Vector& pos);
 
 private:

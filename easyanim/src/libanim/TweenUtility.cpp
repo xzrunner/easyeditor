@@ -55,7 +55,7 @@ void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::I
 {
 	float xscale = (end->GetScale().x - start->GetScale().x) * process + start->GetScale().x,
 		yscale = (end->GetScale().y - start->GetScale().y) * process + start->GetScale().y;
-	tween->SetScale(xscale, yscale);
+	tween->SetScale(d2d::Vector(xscale, yscale));
 
 	d2d::Vector offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
 	tween->SetOffset(offset);
@@ -72,9 +72,10 @@ void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::I
 	d2d::Vector pos_t = base_t -  offset;
 	tween->SetTransform(pos_t, angle);
 
-	float xshear = (end->GetShear().x - start->GetShear().x) * process + start->GetShear().x,
-		yshear = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
-	tween->SetShear(xshear, yshear);
+	d2d::Vector shear;
+	shear.x = (end->GetShear().x - start->GetShear().x) * process + start->GetShear().x;
+	shear.y = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
+	tween->SetShear(shear);
 
 	tween->color.add = cInterpolate(start->color.add, end->color.add, process);
 	tween->color.multi = cInterpolate(start->color.multi, end->color.multi, process);

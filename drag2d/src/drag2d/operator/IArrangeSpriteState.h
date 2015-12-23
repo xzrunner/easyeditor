@@ -9,7 +9,6 @@ namespace d2d
 {
 
 class Vector;
-class AbstractAtomicOP;
 
 class IArrangeSpriteState
 {
@@ -17,7 +16,7 @@ public:
 	virtual ~IArrangeSpriteState() {}
 	
 	virtual void OnMousePress(const Vector& pos) {}
-	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos) { return NULL; }
+	virtual void OnMouseRelease(const Vector& pos) {}
 	virtual bool OnMouseMove(const Vector& pos) { return false; }
 	virtual bool OnMouseDrag(const Vector& pos) { return false; }
 

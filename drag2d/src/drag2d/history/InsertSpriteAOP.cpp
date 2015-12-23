@@ -24,21 +24,21 @@ InsertSpriteAOP::~InsertSpriteAOP()
 	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
 }
 
-void InsertSpriteAOP::undo()
+void InsertSpriteAOP::Undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(m_sprites[i]);
 	}
 }
 
-void InsertSpriteAOP::redo()
+void InsertSpriteAOP::Redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
 	}
 }
 
-Json::Value InsertSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value InsertSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

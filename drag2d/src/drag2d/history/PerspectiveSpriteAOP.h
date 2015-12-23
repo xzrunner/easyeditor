@@ -16,10 +16,10 @@ public:
 	PerspectiveSpriteAOP(ISprite* sprite, const Vector& new_persp,
 		const Vector& old_persp);
 
-	virtual void undo();
-	virtual void redo();
+	virtual void Undo();
+	virtual void Redo();
 
-	virtual Json::Value store(const std::vector<ISprite*>& sprites);
+	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
 
 private:
 	ISprite* m_spr;

@@ -1,6 +1,7 @@
 #include "EditNodesOP.h"
 #include "ChainShape.h"
 #include "EditNodesAtomicOP.h"
+#include "message/panel_msg.h"
 
 namespace libshape
 {
@@ -161,7 +162,7 @@ void EditNodesOP::updateModified()
 		chainsDst.push_back(result);
 	}
 
-	m_stage->AddOpRecord(new edit_nodes::ModifyNodesAOP(chains, chainsDst));
+	d2d::EditAddRecordSJ::Instance()->Add(new edit_nodes::ModifyNodesAOP(chains, chainsDst));
 
 	m_buffer.clear();
 	clearSelectedNodes();

@@ -5,6 +5,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "history/PerspectiveSpriteAOP.h"
+#include "message/panel_msg.h"
 
 namespace d2d
 {
@@ -24,9 +25,10 @@ PerspectiveSpriteState::~PerspectiveSpriteState()
 	m_sprite->Release();
 }
 
-AbstractAtomicOP* PerspectiveSpriteState::OnMouseRelease(const Vector& pos)
+void PerspectiveSpriteState::OnMouseRelease(const Vector& pos)
 {
-	return new PerspectiveSpriteAOP(m_sprite, m_sprite->GetPerspective(), m_first_persp);
+	AbstractAtomicOP* aop = new PerspectiveSpriteAOP(m_sprite, m_sprite->GetPerspective(), m_first_persp);
+	EditAddRecordSJ::Instance()->Add(aop);
 }
 
 bool PerspectiveSpriteState::OnMouseDrag(const Vector& pos)

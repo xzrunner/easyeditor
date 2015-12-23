@@ -17,12 +17,11 @@ TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
 {
 }
 
-d2d::AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const d2d::Vector& pos)
+void TranslateSpriteState::OnMouseRelease(const d2d::Vector& pos)
 {
 	GetSelection()->Traverse(Visitor(m_anchor_mgr));
-	d2d::AbstractAtomicOP* ret = d2d::TranslateSpriteState::OnMouseRelease(pos);
+	d2d::TranslateSpriteState::OnMouseRelease(pos);
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
-	return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -3,6 +3,7 @@
 #include "history/RotateSpriteAOP.h"
 #include "common/Math.h"
 #include "view/SpriteSelection.h"
+#include "message/panel_msg.h"
 
 namespace d2d
 {
@@ -21,12 +22,12 @@ RotateSpriteState::~RotateSpriteState()
 	m_selection->Release();
 }
 
-AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
+void RotateSpriteState::OnMouseRelease(const Vector& pos)
 {
 	if (pos != m_first_pos) {
-		return new RotateSpriteAOP(*m_selection, m_first_pos, pos);
+		AbstractAtomicOP* aop = new RotateSpriteAOP(*m_selection, m_first_pos, pos);
+		EditAddRecordSJ::Instance()->Add(aop);
 	}
-	return NULL;
 }
 
 bool RotateSpriteState::OnMouseDrag(const Vector& pos)

@@ -231,12 +231,6 @@ void EditPanelImpl::Redo()
 	}
 }
 
-void EditPanelImpl::AddOpRecord(AbstractAtomicOP* op)
-{
-	m_history_list.insert(op);
-	SetTitleStatus(true);
-}
-
 void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
 	Json::Value value;
@@ -418,6 +412,12 @@ void EditPanelImpl::InitSubjects()
 	RegistSubject(EditRedoSJ::Instance());
 	RegistSubject(EditAddRecordSJ::Instance());
 	RegistSubject(GetKeyStateSJ::Instance());	
+}
+
+void EditPanelImpl::AddOpRecord(AbstractAtomicOP* op)
+{
+	m_history_list.insert(op);
+	SetTitleStatus(true);
 }
 
 }

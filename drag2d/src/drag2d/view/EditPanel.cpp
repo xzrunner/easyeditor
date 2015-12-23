@@ -91,11 +91,6 @@ void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 	m_impl->OnMouseWheelRotation(x, y, direction);
 }
 
-void EditPanel::AddOpRecord(AbstractAtomicOP* op)
-{
-	m_impl->AddOpRecord(op);
-}
-
 void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
 	m_impl->SaveOpRecordList(filepath, sprites);

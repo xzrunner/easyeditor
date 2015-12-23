@@ -6,6 +6,10 @@
 #include "dataset/ISymbol.h"
 #include "common/color_config.h"
 #include "common/Math.h"
+#include "message/panel_msg.h"
+#include "history/SetSpriteColorAOP.h"
+#include "history/SetSpritePosAOP.h"
+#include "history/TranslateSpriteAOP.h"
 
 #include <algorithm>
 
@@ -274,10 +278,12 @@ void MultiSpritesPropertyImpl::SetClip(int clip)
 
 void MultiSpritesPropertyImpl::SetPos(float x, float y)
 {
+	Vector pos(x, y);
+	EditAddRecordSJ::Instance()->Add(new SetSpritePosAOP(m_sprites, pos));
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->SetTransform(Vector(x, y), spr->GetAngle());
-	}	
+		spr->SetTransform(pos, spr->GetAngle());
+	}
 }
 
 void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
@@ -340,8 +346,7 @@ void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 	}
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* spr = m_sprites[i];
-		spr->SetScale(sx, sy);
+		m_sprites[i]->SetScale(Vector(sx, sy));
 	}
 }
 
@@ -600,6 +605,7 @@ void MultiSpritesPropertyImpl::OnCenter(int center)
 
 void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 {
+	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(m_sprites, Vector(dx, dy)));
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* spr = m_sprites[i];
@@ -627,7 +633,7 @@ void MultiSpritesPropertyImpl::OnScaleChange(float dx, float dy)
 		Vector scale = s->GetScale();
 		scale.x *= dx;
 		scale.y *= dy;
-		s->SetScale(scale.x, scale.y);
+		s->SetScale(scale);
 	}
 }
 

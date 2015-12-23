@@ -27,21 +27,21 @@ DeleteSpriteAOP::~DeleteSpriteAOP()
 	}
 }
 
-void DeleteSpriteAOP::undo()
+void DeleteSpriteAOP::Undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
 	}
 }
 
-void DeleteSpriteAOP::redo()
+void DeleteSpriteAOP::Redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(m_sprites[i]);
 	}
 }
 
-Json::Value DeleteSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value DeleteSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

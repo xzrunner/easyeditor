@@ -17,10 +17,10 @@ public:
 	ModifyNodesAOP(const std::vector<ChainShape*>& chains, 
 		const std::vector<std::vector<d2d::Vector> >& dstChains);
 
-	virtual void undo();
-	virtual void redo();
+	virtual void Undo();
+	virtual void Redo();
 
-	virtual Json::Value store(const std::vector<d2d::ISprite*>& sprites) { return NULL; }
+	virtual Json::Value Store(const std::vector<d2d::ISprite*>& sprites) const { return NULL; }
 
 private:
 	std::vector<ChainShape*> m_chains;

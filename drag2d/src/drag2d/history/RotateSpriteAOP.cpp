@@ -41,7 +41,7 @@ RotateSpriteAOP::~RotateSpriteAOP()
 	}
 }
 
-void RotateSpriteAOP::undo()
+void RotateSpriteAOP::Undo()
 {
 	if (m_start.isValid() && m_end.isValid()) 
 	{
@@ -62,7 +62,7 @@ void RotateSpriteAOP::undo()
 	}
 }
 
-void RotateSpriteAOP::redo()
+void RotateSpriteAOP::Redo()
 {
 	if (m_start.isValid() && m_end.isValid()) 
 	{
@@ -83,7 +83,7 @@ void RotateSpriteAOP::redo()
 	}
 }
 
-Json::Value RotateSpriteAOP::store(const std::vector<ISprite*>& sprites)
+Json::Value RotateSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);
