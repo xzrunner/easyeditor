@@ -103,8 +103,8 @@ void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp,
 	lua::connect(gen, 4, 
 		lua::assign("col_mul", comp.col_mul), 
 		lua::assign("col_add", comp.col_add),
-		lua::assign("alpha_start", comp.alpha_start), 
-		lua::assign("alpha_end", comp.alpha_end));
+		lua::assign("alpha_start", (int)comp.alpha_start), 
+		lua::assign("alpha_end", (int)comp.alpha_end));
 }
 
 int Particle3DToLuaString::TransTime(float time)
