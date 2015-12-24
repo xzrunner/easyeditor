@@ -25,7 +25,7 @@ PS::PS()
 
 static void 
 render_func(void* symbol, float x, float y, float angle, float scale, 
-struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
+            struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
 {
 	d2d::Matrix mt = *(d2d::Matrix*)ud;
 	//	mt.translate(p->init_pos.x, p->init_pos.y);
