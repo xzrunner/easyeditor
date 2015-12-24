@@ -21,7 +21,7 @@ public:
 
 	void Notify(int sj_id, void* ud);
 
-	void EnableObserve(bool enable) { m_observe_enable = enable; }
+	void EnableObserve(bool enable);
 
 protected:
 	virtual void OnNotify(int sj_id, void* ud) = 0;

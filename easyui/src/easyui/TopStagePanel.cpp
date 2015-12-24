@@ -50,19 +50,24 @@ void TopStagePanel::InitTabPages(wxSizer* sizer)
 		gl_ctx = page->GetCanvas()->GetGLContext();
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Window"));
-		page->RegistSubjects();
+		page->EnableObserve(true);
+		page->GetStageImpl()->EnableObserve(true);
 	}
 	// list
 	{
 		list::StagePanel* page = new list::StagePanel(m_notebook, m_frame, gl_ctx, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("List"));
+		page->EnableObserve(false);
+		page->GetStageImpl()->EnableObserve(false);
 	}
 	// wrapper
 	{
 		wrapper::StagePanel* page = new wrapper::StagePanel(m_notebook, m_frame, gl_ctx, m_top_pannels);
 		m_pages.push_back(page);
 		m_notebook->AddPage(page, wxT("Wrapper"));
+		page->EnableObserve(false);
+		page->GetStageImpl()->EnableObserve(false);
 	}
 	m_top_pannels->toolbar->EnableToolbar(0);
 	sizer->Add(m_notebook, 1, wxEXPAND);

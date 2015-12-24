@@ -35,8 +35,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_clipbox.xMin = m_clipbox.yMin = -200;
 	m_clipbox.xMax = m_clipbox.yMax =  200;
 
-	UnRegistSubjects();
-
 	MODULE_STAGE.impl = this;
 }
 
@@ -133,13 +131,12 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
-		RegistSubjects();
 	} else {
 		GetSpriteSelection()->Clear();
-		UnRegistSubjects();
 	}
 
 	EnableObserve(enable);
+	GetStageImpl()->EnableObserve(enable);
 }
 
 }

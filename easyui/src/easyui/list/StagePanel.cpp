@@ -30,7 +30,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	RegistSubject(d2d::InsertSpriteSJ::Instance());
 	RegistSubject(d2d::ClearSpriteSJ::Instance());
-	UnRegistSubjects();
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
@@ -59,13 +58,12 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
-		RegistSubjects();
 	} else {
 		GetSpriteSelection()->Clear();
-		UnRegistSubjects();
 	}
 
 	EnableObserve(enable);
+	GetStageImpl()->EnableObserve(enable);
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

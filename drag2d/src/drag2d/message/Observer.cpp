@@ -43,4 +43,9 @@ void Observer::Notify(int sj_id, void* ud)
 	OnNotify(sj_id, ud);
 }
 
+void Observer::EnableObserve(bool enable) 
+{ 
+	m_observe_enable = enable; 
+}
+
 }

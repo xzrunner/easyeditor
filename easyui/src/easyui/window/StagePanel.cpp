@@ -40,7 +40,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* to
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
 	RegistSubject(QueryWindowViewSizeSJ::Instance());
-	UnRegistSubjects();
 }
 
 void StagePanel::LoadFromFile(const char* filename)
@@ -146,15 +145,14 @@ void StagePanel::EnablePage(bool enable)
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(true);
-		RegistSubjects();
 	} else {
 		GetSpriteSelection()->Clear();
-		UnRegistSubjects();
 	}
 
 	m_toolbar->EnableObserve(enable);
 	m_anchor_mgr.EnableObserve(enable);
 	EnableObserve(enable);
+	GetStageImpl()->EnableObserve(enable);
 }
 
 void StagePanel::OnPreview()
@@ -167,12 +165,14 @@ void StagePanel::OnPreview()
 
 	EnableObserve(false);
 	GetCanvas()->EnableObserve(false);
+	GetStageImpl()->EnableObserve(false);
 
 	PreviewDialog dlg(const_cast<StagePanel*>(this), GetCanvas()->GetGLContext(), width, height, sprites);
 	dlg.ShowModal();
 
 	EnableObserve(true);
 	GetCanvas()->EnableObserve(true);
+	GetStageImpl()->EnableObserve(true);
 }
 
 void StagePanel::OnCode() const
