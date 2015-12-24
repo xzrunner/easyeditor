@@ -154,6 +154,14 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\libparticle3d\PS.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\PS.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libparticle3d\Sprite.cpp"
 				>
 			</File>
