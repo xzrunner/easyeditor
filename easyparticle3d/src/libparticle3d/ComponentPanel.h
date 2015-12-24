@@ -36,6 +36,8 @@ private:
 	void OnSetMultiCol(wxCommandEvent& event);
 	void OnSetAddCol(wxCommandEvent& event);
 
+	void SetBtnColor();
+
 private:
 	p3d_symbol* m_pc;
 
@@ -44,6 +46,8 @@ private:
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 
 	wxTextCtrl* m_name;
+
+	wxButton *m_mul_col_btn, *m_add_col_btn;
 
 	friend class FileIO;
 	friend class ToolbarPanel;

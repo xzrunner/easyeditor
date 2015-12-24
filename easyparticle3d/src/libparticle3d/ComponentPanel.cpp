@@ -20,6 +20,7 @@ ComponentPanel::ComponentPanel(wxWindow* parent, p3d_symbol* pc, ToolbarPanel* t
 	, m_toolbar(toolbar)
 {
 	InitLayout();
+	SetBtnColor();
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}
@@ -137,14 +138,32 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 	top_sizer->Add(s_rotate);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);
+	// Color
+	wxBoxSizer* color_sz = new wxBoxSizer(wxHORIZONTAL);
 	// Multi Color
-	wxButton* mul_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_MUL]);
-	Connect(mul_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetMultiCol));
-	top_sizer->Add(mul_btn);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_COL_MUL]);
+		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+		m_mul_col_btn = new wxButton(this, wxID_ANY);
+		Connect(m_mul_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetMultiCol));
+		sizer->Add(m_mul_col_btn);
+
+		color_sz->Add(sizer);
+	}
+	color_sz->AddSpacer(30);
 	// Add Color
-	wxButton* add_btn = new wxButton(this, wxID_ANY, LANG[LK_COL_ADD]);
-	Connect(add_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetAddCol));
-	top_sizer->Add(add_btn);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_COL_ADD]);
+		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+		m_add_col_btn = new wxButton(this, wxID_ANY);
+		Connect(m_add_col_btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnSetAddCol));
+		sizer->Add(m_add_col_btn);
+
+		color_sz->Add(sizer);
+	}
+	top_sizer->Add(color_sz);
 	// Alpha
 	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
 		d2d::SliderItem(LANG[LK_START], "start", 100, 0, 100), d2d::SliderItem(LANG[LK_END], "end", 100, 0, 100));
@@ -205,8 +224,16 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 
 void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 {
-	wxColourDialog dlg(m_parent);
+	wxColourData data;
+	data.SetColour(wxColour(m_pc->col_mul.r * 255, m_pc->col_mul.g * 255, m_pc->col_mul.b * 255));
+	wxColourDialog dlg(m_parent, &data);
+
 	dlg.SetTitle(wxT("Multi Color"));
+
+	wxPoint pos = wxGetMousePosition();
+	pos.x -= 400;
+	dlg.SetPosition(pos);
+
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		const wxColor& col = dlg.GetColourData().GetColour();
@@ -214,13 +241,23 @@ void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 		m_pc->col_mul.g = col.Green() / 255.0f;
 		m_pc->col_mul.b = col.Blue() / 255.0f;
 		m_pc->col_mul.a = col.Alpha() / 255.0f;
+
+		SetBtnColor();
 	}
 }
 
 void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 {
-	wxColourDialog dlg(m_parent);
+	wxColourData data;
+	data.SetColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
+	wxColourDialog dlg(m_parent, &data);
+
 	dlg.SetTitle(wxT("Add Color"));
+
+	wxPoint pos = wxGetMousePosition();
+	pos.x -= 400;
+	dlg.SetPosition(pos);
+
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		const wxColor& col = dlg.GetColourData().GetColour();
@@ -228,7 +265,15 @@ void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 		m_pc->col_add.g = col.Green() / 255.0f;
 		m_pc->col_add.b = col.Blue() / 255.0f;
 		m_pc->col_add.a = col.Alpha() / 255.0f;
+
+		SetBtnColor();
 	}
+}
+
+void ComponentPanel::SetBtnColor()
+{
+	m_mul_col_btn->SetBackgroundColour(wxColour(m_pc->col_mul.r * 255, m_pc->col_mul.g * 255, m_pc->col_mul.b * 255));
+	m_add_col_btn->SetBackgroundColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
 }
 
 }
