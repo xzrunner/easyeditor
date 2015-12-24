@@ -4,7 +4,6 @@
 #include "FileIO.h"
 #include "config.h"
 #include "ps_config.h"
-#include "item_string.h"
 #include "PSConfigMgr.h"
 #include "ComponentPanel.h"
 #include "language.h"
@@ -39,6 +38,13 @@ static const float LINEAR_ACC_OFFSET	= 0;
 static const float INERTIA				= 4;
 static const float FADEOUT_TIME			= 300;
 static const float START_RADIUS			= 0;
+static const float START_HEIGHT         = 0;
+
+static const char* ITEM_ATTR_CENTER = "center";
+static const char* ITEM_ATTR_OFFSET = "offset";
+
+static const char* ITEM_ATTR_RADIUS = "radius";
+static const char* ITEM_ATTR_HEIGHT = "height";
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   StagePanel* stage)
@@ -293,23 +299,13 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 		top_sizer->Add(m_ground);
 	}
 	top_sizer->AddSpacer(10);
-	// Start Radius
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_START_RADIUS]);
-		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_radius_3d = new wxCheckBox(this, wxID_ANY, "3D");
-		Connect(m_radius_3d->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetRadius3D));
-		sizer->Add(m_radius_3d);
-
-		d2d::SliderCtrlOne* s_start_radius = new d2d::SliderCtrlOne(this, "", "start_radius", 
-			this, PS_START_RADIUS, d2d::SliderItem("", "", START_RADIUS, 0, 1000));
-		sizer->Add(s_start_radius);
-		m_sliders.push_back(s_start_radius);
-
-		top_sizer->Add(sizer);
-		top_sizer->AddSpacer(10);
-	}
+	// Start Position
+	d2d::SliderCtrlTwo* s_start_pos = new d2d::SliderCtrlTwo(this, LANG[LK_START_POSITION], "start_pos", this, PS_START_POS, 
+		d2d::SliderItem(LANG[LK_RADIUS], ITEM_ATTR_RADIUS, START_RADIUS, 0, 1000), 
+		d2d::SliderItem(LANG[LK_HEIGHT], ITEM_ATTR_HEIGHT, START_HEIGHT, -1000, 1000));
+	top_sizer->Add(s_start_pos);
+	top_sizer->AddSpacer(10);
+	m_sliders.push_back(s_start_pos);
 	// orient_to_movement
 	{
 		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, LANG[LK_ORIENT_MOVEMENT]);	
@@ -451,11 +447,6 @@ void ToolbarPanel::OnSetGround(wxCommandEvent& event)
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
 {
 	m_stage->m_ps->SetOrientToMovement(event.IsChecked());
-}
-
-void ToolbarPanel::OnSetRadius3D(wxCommandEvent& event)
-{
-	m_stage->m_ps->SetRadius3D(event.IsChecked());
 }
 
 //////////////////////////////////////////////////////////////////////////

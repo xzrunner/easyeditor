@@ -13,6 +13,8 @@ enum {
 	LK_SPEED,
 	LK_START,
 	LK_END,
+	LK_RADIUS,
+	LK_HEIGHT,
 
 	LK_NAME,
 	LK_LOOP,
@@ -30,7 +32,7 @@ enum {
 	LK_INERTIA,
 	LK_FADEOUT_TIME,
 	LK_ADDITIVE_BLAND,
-	LK_START_RADIUS,
+	LK_START_POSITION,
 	LK_ORIENT_MOVEMENT,
 	LK_ORIENT_PARENT,
 
@@ -59,6 +61,8 @@ static const char* EN[] = {
 	"speed (pixel)",
 	"start",
 	"end",
+	"radius",
+	"height",
 
 	"Name",
 	"Loop",
@@ -76,7 +80,7 @@ static const char* EN[] = {
 	"Inertia",
 	"Fadeout Time (ms)",
 	"Additive Blend",
-	"Start Radius (pixel)",
+	"Start Position (pixel)",
 	"Orient to Movement",
 	"Orient to Parent",
 
@@ -105,6 +109,8 @@ static const char* CN[] = {
 	"速度",
 	"起始",
 	"结束",
+	"半径",
+	"高度",
 
 	"名字",
 	"连续播放",
@@ -122,7 +128,7 @@ static const char* CN[] = {
 	"转动惯量",
 	"消逝时间",
 	"叠加渲染",
-	"起始半径",
+	"起始位置",
 	"朝向运动方向",
 	"朝向父节点方向",
 

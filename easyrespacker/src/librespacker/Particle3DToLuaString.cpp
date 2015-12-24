@@ -78,7 +78,7 @@ void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGene
 
 	lua::connect(gen, 2, 
 		lua::assign("start_radius", TransFloat(p3d->start_radius)), 
-		lua::assign("is_start_radius_3d", TransBool(p3d->is_start_radius_3d)));
+		lua::assign("start_height", TransFloat(p3d->start_height)));
 
 	lua::connect(gen, 1, 
 		lua::assign("orient_to_movement", TransBool(p3d->orient_to_movement)));

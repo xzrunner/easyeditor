@@ -100,8 +100,8 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 
 	uint16_t start_radius = TransFloat(p3d->start_radius);
 	pack(start_radius, ptr);
-	uint8_t is_start_radius_3d = TransBool(p3d->is_start_radius_3d);
-	pack(is_start_radius_3d, ptr);
+	int16_t start_height = TransFloat(p3d->start_height);
+	pack(start_height, ptr);
 
 	uint8_t orient_to_movement = TransBool(p3d->orient_to_movement);
 	pack(orient_to_movement, ptr);

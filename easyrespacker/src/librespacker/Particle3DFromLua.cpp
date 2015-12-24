@@ -90,7 +90,7 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 	p3d->ground = LuaDataHelper::GetIntField(L, "ground");
 
 	p3d->start_radius = LuaDataHelper::GetIntField(L, "start_radius");
-	p3d->is_start_radius_3d = LuaDataHelper::GetBoolField(L, "is_start_radius_3d");
+	p3d->start_height = LuaDataHelper::GetIntField(L, "start_height");
 
 	p3d->orient_to_movement = LuaDataHelper::GetBoolField(L, "orient_to_movement");
 }

@@ -28,8 +28,6 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 	value["ground"] = toolbar->m_ground->GetSelection();
 
-	value["start_radius_3d"] = toolbar->m_radius_3d->GetValue();
-
 	value["orient_to_movement"] = toolbar->m_orient_to_movement->GetValue();
 
 	value["loop"] = toolbar->m_loop->GetValue();
@@ -121,9 +119,6 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	ps->SetOrientToMovement(adapter.orient_to_movement);
 
-	toolbar->m_radius_3d->SetValue(adapter.is_start_radius_3d);
-	ps->SetRadius3D(adapter.is_start_radius_3d);
-
 //	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 
 	for (size_t i = 0, n = adapter.components.size(); i < n; ++i) {
@@ -200,7 +195,7 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->ground = adapter.ground;
 
 	cfg->start_radius = adapter.start_radius;
-	cfg->is_start_radius_3d = adapter.is_start_radius_3d;
+	cfg->start_height = adapter.start_height;
 
 	cfg->orient_to_movement = adapter.orient_to_movement;
 

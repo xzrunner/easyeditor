@@ -54,7 +54,6 @@ private:
 	void OnSetVert(wxSpinEvent& event);
 	void OnSetGround(wxCommandEvent& event);
 	void OnSetOrientToMovement(wxCommandEvent& event);
-	void OnSetRadius3D(wxCommandEvent& event);
 
 private:
 	class DropTarget : public wxTextDropTarget
@@ -86,7 +85,6 @@ private:
 	wxChoice* m_ground;
 	wxCheckBox* m_orient_to_movement;
 //	wxCheckBox* m_orient_to_parent;
-	wxCheckBox* m_radius_3d;
 
 	wxSizer* m_comp_sizer;
 	std::vector<ComponentPanel*> m_children;

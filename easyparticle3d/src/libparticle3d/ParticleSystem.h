@@ -66,7 +66,6 @@ public:
 	void SetGround(int ground);
 
 	void SetOrientToMovement(bool open);
-	void SetRadius3D(bool is3d);
 
  	void SetPosition(const d2d::Vector& pos) { m_pos = pos; }
 	const d2d::Vector& GetPosition() const { return m_pos; }

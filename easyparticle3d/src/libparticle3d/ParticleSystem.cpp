@@ -82,8 +82,9 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 	case PS_FADEOUT_TIME:
 		m_ps->cfg->fadeout_time = data.val0 * 0.001f;
 		break;
-	case PS_START_RADIUS:
+	case PS_START_POS:
 		m_ps->cfg->start_radius = data.val0;
+		m_ps->cfg->start_height = data.val1;
 		break;
 	}
 }
@@ -131,8 +132,9 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 	case PS_FADEOUT_TIME:
 		data.val0 = m_ps->cfg->fadeout_time * 1000;
 		break;
-	case PS_START_RADIUS:
+	case PS_START_POS:
 		data.val0 = m_ps->cfg->start_radius;
+		data.val1 = m_ps->cfg->start_height;
 		break;
 	}
 }
@@ -275,11 +277,6 @@ void ParticleSystem::SetGround(int ground)
 void ParticleSystem::SetOrientToMovement(bool open) 
 { 
 	m_ps->cfg->orient_to_movement = open;
-}
-
-void ParticleSystem::SetRadius3D(bool is3d) 
-{ 
-	m_ps->cfg->is_start_radius_3d = is3d;
 }
 
 p3d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)

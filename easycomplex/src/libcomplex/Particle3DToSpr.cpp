@@ -55,7 +55,7 @@ p3d_ps_config* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p
 	cfg->ground = p3d->ground;
 
 	cfg->start_radius = p3d->start_radius;
-	cfg->is_start_radius_3d = p3d->is_start_radius_3d;
+	cfg->start_height = p3d->start_height;
 
 	cfg->orient_to_movement = p3d->orient_to_movement;
 

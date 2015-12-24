@@ -88,7 +88,7 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 	ps->ground = cfg->ground;
 
 	ps->start_radius = cfg->start_radius;
-	ps->is_start_radius_3d = cfg->is_start_radius_3d;
+	ps->start_height = cfg->start_height;
 
 	ps->orient_to_movement = cfg->orient_to_movement;
 

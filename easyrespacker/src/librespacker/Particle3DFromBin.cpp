@@ -99,9 +99,9 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	unpack(start_radius, ptr);
 	p3d->start_radius = start_radius;
 
-	uint8_t is_start_radius_3d;
-	unpack(is_start_radius_3d, ptr);
-	p3d->is_start_radius_3d = TransBool(is_start_radius_3d);
+	int16_t start_height;
+	unpack(start_height, ptr);
+	p3d->start_height = start_height;
 
 	uint8_t orient_to_movement;
 	unpack(orient_to_movement, ptr);
