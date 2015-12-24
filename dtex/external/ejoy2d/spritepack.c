@@ -132,14 +132,6 @@ get_texid(struct import_stream *is, int texid) {
 	return is->pack->tex[texid];
 }
 
-static int
-texture_coord(int id, float x, float y, uint16_t *u, uint16_t *v) {
-	*u = (uint16_t)x;
-	*v = (uint16_t)y;
-	return 1;
-}
-
-
 static void
 import_picture(struct import_stream *is) {
 	int n = import_word(is);
@@ -154,7 +146,9 @@ import_picture(struct import_stream *is) {
 			float x = (float)import_word(is);
 			float y = (float)import_word(is);
 			// todo: check the return value
-			texture_coord(q->texid, x, y, &q->texture_coord[j], &q->texture_coord[j+1]);
+//			texture_coord(q->texid, x, y, &q->texture_coord[j], &q->texture_coord[j+1]);
+			q->texture_coord[j] = (uint16_t)x;
+			q->texture_coord[j+1] = (uint16_t)y;
 		}
 		for (j=0;j<8;j++) {
 			q->screen_coord[j] = import_int32(is);
@@ -179,7 +173,7 @@ import_polygon(struct import_stream *is) {
 			float x = (float)import_word(is);
 			float y = (float)import_word(is);
 			// todo: check the return value
-			texture_coord(p->texid, x, y, &p->texture_coord[j], &p->texture_coord[j+1]);
+//			texture_coord(p->texid, x, y, &p->texture_coord[j], &p->texture_coord[j+1]);
 		}
 		for (j=0;j<p->n*2;j++) {
 			p->screen_coord[j] = import_int32(is);
@@ -301,15 +295,26 @@ import_animation(struct import_stream *is) {
 static void
 import_label(struct import_stream *is) {
 	struct pack_label * pl = (struct pack_label *)ialloc(is->alloc, SIZEOF_LABEL);
-	pl->align = import_byte(is);
-	pl->color = import_color(is);
-	pl->size = import_word(is);
+
 	pl->width = import_word(is);
 	pl->height = import_word(is);
+
+	pl->font = import_byte(is);
+	pl->font_size = import_byte(is);
+	pl->font_color = import_color(is);
+
 	pl->edge = import_byte(is);
-	pl->space_w = import_byte(is);
-	pl->space_h = import_byte(is);
-	pl->auto_scale = import_byte(is);
+	pl->edge_size = import_word(is) / 1024.0f;
+	pl->edge_color = import_color(is);
+
+	pl->align_hori = import_byte(is);
+	pl->align_vert = import_byte(is);
+
+	pl->space_hori = import_word(is) / 1024.0f;
+	pl->space_vert = import_word(is) / 1024.0f;
+
+	pl->text = import_string(is);
+	pl->tid = import_string(is);
 }
 
 static void
@@ -338,7 +343,7 @@ import_particle3d(struct import_stream *is) {
 
 		uint16_t id = import_word(is);
 		dst->ud = (void*)(id << 16 | i);
-	
+
 		dst->scale_start = import_word(is) * 0.01f;
 		dst->scale_end = import_word(is) * 0.01f;
 
@@ -357,8 +362,8 @@ import_particle3d(struct import_stream *is) {
 		dst->col_add.g = (add >> 8 & 0xff) / 255.0f;
 		dst->col_add.b = (add & 0xff) / 255.0f;
 
-		dst->alpha_start = import_word(is);
-		dst->alpha_end = import_word(is);
+		dst->alpha_start = import_word(is) / 255.0f;
+		dst->alpha_end = import_word(is) / 255.0f;
 	}
 
 	int cap = import_word(is);
@@ -405,13 +410,14 @@ import_particle3d(struct import_stream *is) {
 
 	// create spr
 
-	pp->spr.last_frame = -1;
+	pp->spr.ps_time = 0;
 
 	int particles_sz = SIZEOF_P3D_PARTICLE_SYSTEM + cap * SIZEOF_P3D_PARTICLE;
 	void* mem = ialloc(is->alloc, particles_sz);
 	struct p3d_particle_system* ps = p3d_create_with_mem(mem, cap, cfg);
 	// todo
 	ps->active = true;
+	ps->particle_count = 0;
 	pp->spr.ps = ps;
 }
 
@@ -521,7 +527,7 @@ import_particle2d(struct import_stream *is) {
 
 	// create spr
 
-	pp->spr.last_frame = -1;
+	pp->spr.ps_time = 0;
 
 	int particles_sz = SIZEOF_P2D_PARTICLE_SYSTEM + cap * SIZEOF_P2D_PARTICLE;
 	void* mem = ialloc(is->alloc, particles_sz);
