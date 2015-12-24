@@ -63,6 +63,8 @@ void ScaleSpriteState::Scale(const Vector& curr)
 		scale.y *= scale_times;
 	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT || m_ctrl_node.type == SpriteCtrlNode::RIGHT) {
 		scale.x *= scale_times;
+	} else {
+		scale *= scale_times;
 	}
 	m_sprite->SetScale(scale);
 }
