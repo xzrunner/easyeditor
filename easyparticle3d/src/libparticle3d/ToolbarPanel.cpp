@@ -302,7 +302,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	// Start Position
 	d2d::SliderCtrlTwo* s_start_pos = new d2d::SliderCtrlTwo(this, LANG[LK_START_POSITION], "start_pos", this, PS_START_POS, 
 		d2d::SliderItem(LANG[LK_RADIUS], ITEM_ATTR_RADIUS, START_RADIUS, 0, 1000), 
-		d2d::SliderItem(LANG[LK_HEIGHT], ITEM_ATTR_HEIGHT, START_HEIGHT, -1000, 1000));
+		d2d::SliderItem(LANG[LK_HEIGHT], ITEM_ATTR_HEIGHT, START_HEIGHT, -5000, 5000));
 	top_sizer->Add(s_start_pos);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_start_pos);
