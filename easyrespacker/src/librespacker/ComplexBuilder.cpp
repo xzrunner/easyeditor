@@ -145,7 +145,7 @@ void ComplexBuilder::GroupFromTag(const std::vector<d2d::ISprite*>& src,
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = src[i];
-		if (sprite->tag.empty() || sprite->tag.find("=") != std::string::npos)
+		if (sprite->tag.empty())
 		{
 			others.push_back(sprite);
 		}
@@ -156,6 +156,10 @@ void ComplexBuilder::GroupFromTag(const std::vector<d2d::ISprite*>& src,
 			bool is_action = false;
 			for (int i = 0, n = tags.size(); i < n; ++i)
 			{
+				if (tags[i].find("=") != std::string::npos) {
+					continue;
+				}
+
 				is_action = true;
 
 				std::map<std::string, std::vector<d2d::ISprite*> >::iterator 
