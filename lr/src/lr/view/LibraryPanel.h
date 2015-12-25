@@ -45,6 +45,7 @@ public:
 	Layer* GetLayer(int idx);
 
 	bool IsCurrUnitLayer();
+	bool IsCurrLevelLayer();
 
 	void GetAllPathName(std::vector<std::string>& names) const;
 
@@ -60,6 +61,7 @@ private:
 	LibraryPage* m_terrain_page;
 	LibraryPage* m_unit_page;
 	LibraryPage* m_path_page;
+	LibraryPage* m_level_page;
 
 	DECLARE_EVENT_TABLE()
 

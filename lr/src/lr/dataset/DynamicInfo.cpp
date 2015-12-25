@@ -1,11 +1,11 @@
-#include "UnitInfo.h"
+#include "DynamicInfo.h"
 
 #include <drag2d.h>
 
 namespace lr
 {
 
-UnitInfo::UnitInfo(const std::string& str)
+DynamicInfo::DynamicInfo(const std::string& str)
 {
 	std::vector<std::string> pairs;
 	d2d::StringTools::Split(str, ";", pairs);
@@ -27,7 +27,7 @@ UnitInfo::UnitInfo(const std::string& str)
 	}
 }
 
-std::string UnitInfo::QueryValue(const std::string& key) const
+std::string DynamicInfo::QueryValue(const std::string& key) const
 {
 	std::map<std::string, Item>::const_iterator itr 
 		= m_map_val.find(key);
@@ -38,7 +38,7 @@ std::string UnitInfo::QueryValue(const std::string& key) const
 	}
 }
 
-void UnitInfo::SetValue(const std::string& key, const std::string& val,
+void DynamicInfo::SetValue(const std::string& key, const std::string& val,
 						bool is_default)
 {
 	std::map<std::string, Item>::iterator itr 
@@ -56,7 +56,7 @@ void UnitInfo::SetValue(const std::string& key, const std::string& val,
 	}
 }
 
-std::string UnitInfo::ToString() const
+std::string DynamicInfo::ToString() const
 {
 	std::string str;
 

@@ -18,9 +18,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	, m_viewlist(NULL) 
 	, m_grouptree(NULL)
 	, m_stage(NULL)
-	, m_terrain_page(NULL)
-	, m_unit_page(NULL)
 {
+	m_terrain_page = m_unit_page = m_path_page = m_level_page = NULL;
 }
 
 void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
@@ -194,6 +193,14 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
+	{
+		LibraryPage* page = new LibraryPage(this, "¹Ø¿¨", LT_DEFAULT, id++);
+		Layer* layer = page->GetLayer();
+		page->AddEditOP(m_stage->GetBaseOP());
+		page->AddEditOP(paste_op);
+		AddPage(page);
+		m_level_page = page;
+	}
 
 	paste_op->Release();
 	draw_line_op->Release();
@@ -260,6 +267,11 @@ Layer* LibraryPanel::GetLayer(int idx)
 bool LibraryPanel::IsCurrUnitLayer()
 {
 	return m_unit_page == static_cast<LibraryPage*>(GetCurrPage());
+}
+
+bool LibraryPanel::IsCurrLevelLayer()
+{
+	return m_level_page == static_cast<LibraryPage*>(GetCurrPage());
 }
 
 void LibraryPanel::GetAllPathName(std::vector<std::string>& names) const

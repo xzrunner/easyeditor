@@ -1,5 +1,5 @@
-#ifndef _LR_UNIT_INFO_H_
-#define _LR_UNIT_INFO_H_
+#ifndef _LR_DYNAMIC_INFO_H_
+#define _LR_DYNAMIC_INFO_H_
 
 #include <string>
 #include <map>
@@ -9,10 +9,10 @@ namespace lr
 
 static const std::string DEFAULT_VAL = "_DEFAULT_";;
 	
-class UnitInfo
+class DynamicInfo
 {
 public:
-	UnitInfo(const std::string& str);
+	DynamicInfo(const std::string& str);
 
 	std::string QueryValue(const std::string& key) const;
 
@@ -30,8 +30,8 @@ private:
 
 	std::map<std::string, Item> m_map_val;
 
-}; // UnitInfo
+}; // DynamicInfo
 
 }
 
-#endif // _LR_UNIT_INFO_H_
+#endif // _LR_DYNAMIC_INFO_H_

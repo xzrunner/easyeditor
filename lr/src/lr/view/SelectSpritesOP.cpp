@@ -6,6 +6,7 @@
 #include "dataset/data_utility.h"
 #include "view/LibraryPanel.h"
 #include "view/UnitEditDlg.h"
+#include "view/LevelEditDlg.h"
 #include "frame/config.h"
 
 #include <easyscale9.h>
@@ -77,6 +78,12 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 			selected->tag = dlg.ToString();
 		}
 	} 
+	else if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrLevelLayer())  {
+		LevelEditDlg dlg(m_wnd, selected);
+		if (dlg.ShowModal() == wxID_OK) {
+			selected->tag = dlg.ToString();
+		}
+	}
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());

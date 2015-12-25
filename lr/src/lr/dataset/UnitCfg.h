@@ -6,7 +6,7 @@
 namespace lr
 {
 
-class UnitWidget;
+class DynamicWidget;
 
 class UnitCfg
 {
@@ -14,18 +14,16 @@ public:
 	static UnitCfg* Instance();
 
 private:
-	UnitCfg() {}
+	UnitCfg();
 
 	void LoadFromFile(const char* filename);
 
 public:
 	int col;
 
-	std::vector<UnitWidget*> widgets;
+	std::vector<DynamicWidget*> widgets;
 
 private:
-	static bool m_loaded;
-
 	static UnitCfg* m_instance;
 
 }; // UnitCfg

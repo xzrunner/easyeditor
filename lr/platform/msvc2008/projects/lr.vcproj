@@ -333,6 +333,22 @@
 				Name="dialog"
 				>
 				<File
+					RelativePath="..\..\..\src\lr\view\CfgEditDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\CfgEditDlg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\LevelEditDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\LevelEditDlg.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\lr\view\UnitEditDlg.cpp"
 					>
 				</File>
@@ -456,22 +472,82 @@
 					RelativePath="..\..\..\src\lr\dataset\UnitCfg.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="level"
+				>
 				<File
-					RelativePath="..\..\..\src\lr\dataset\UnitInfo.cpp"
+					RelativePath="..\..\..\src\lr\dataset\LevelCfg.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\dataset\UnitInfo.h"
+					RelativePath="..\..\..\src\lr\dataset\LevelCfg.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="config"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\DynamicInfo.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\dataset\UnitWidget.cpp"
+					RelativePath="..\..\..\src\lr\dataset\DynamicInfo.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\dataset\UnitWidget.h"
+					RelativePath="..\..\..\src\lr\dataset\DynamicWidget.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\DynamicWidget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\WidgetFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\WidgetFactory.h"
+					>
+				</File>
+				<Filter
+					Name="widget"
+					>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\CheckBoxWidget.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\CheckBoxWidget.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\ChoiceWidget.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\ChoiceWidget.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\ComboBoxWidget.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\ComboBoxWidget.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\TextWidget.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\lr\dataset\TextWidget.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
