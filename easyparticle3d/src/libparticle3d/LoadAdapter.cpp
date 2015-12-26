@@ -115,7 +115,9 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 
 	if (!comp_val["bind ps filepath"].isNull()) {
 		comp.bind_filepath = comp_val["bind ps filepath"].asString();
-		comp.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.bind_filepath);
+		if (!comp.bind_filepath.empty()) {
+			comp.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.bind_filepath);
+		}
 	}
 
 	comp.name = comp_val["name"].asString();
