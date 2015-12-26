@@ -106,6 +106,7 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 	memcpy(&pc->col_mul.r, &comp.col_mul.r, sizeof(pc->col_mul));
 	memcpy(&pc->col_add.r, &comp.col_add.r, sizeof(pc->col_add));
 	cp->SetValue(PS_ALPHA, d2d::UICallback::Data(comp.alpha_start, comp.alpha_end));
+	cp->SetBtnColor();
 
 	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
 		cp->m_sliders[i]->Load();

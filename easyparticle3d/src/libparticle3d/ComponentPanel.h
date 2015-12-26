@@ -25,6 +25,8 @@ public:
 	const ps_color4f& GetMulColor() const;
 	const ps_color4f& GetAddColor() const;
 
+	void SetBtnColor();
+
 private:
 	void InitLayout();
 	void InitLayout(wxSizer* sizer);
@@ -35,8 +37,6 @@ private:
 
 	void OnSetMultiCol(wxCommandEvent& event);
 	void OnSetAddCol(wxCommandEvent& event);
-
-	void SetBtnColor();
 
 private:
 	p3d_symbol* m_pc;

@@ -20,7 +20,6 @@ ComponentPanel::ComponentPanel(wxWindow* parent, p3d_symbol* pc, ToolbarPanel* t
 	, m_toolbar(toolbar)
 {
 	InitLayout();
-	SetBtnColor();
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
 		m_sliders[i]->Update();
 	}
@@ -72,6 +71,12 @@ const ps_color4f& ComponentPanel::GetMulColor() const
 const ps_color4f& ComponentPanel::GetAddColor() const
 {
 	return m_pc->col_add;
+}
+
+void ComponentPanel::SetBtnColor()
+{
+	m_mul_col_btn->SetBackgroundColour(wxColour(m_pc->col_mul.r * 255, m_pc->col_mul.g * 255, m_pc->col_mul.b * 255));
+	m_add_col_btn->SetBackgroundColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
 }
 
 void ComponentPanel::InitLayout()
@@ -268,12 +273,6 @@ void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 
 		SetBtnColor();
 	}
-}
-
-void ComponentPanel::SetBtnColor()
-{
-	m_mul_col_btn->SetBackgroundColour(wxColour(m_pc->col_mul.r * 255, m_pc->col_mul.g * 255, m_pc->col_mul.b * 255));
-	m_add_col_btn->SetBackgroundColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
 }
 
 }
