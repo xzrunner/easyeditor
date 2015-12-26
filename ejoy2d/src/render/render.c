@@ -11,9 +11,6 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-// #ifdef _WIN32
-// #include <dtex_pvr.h>
-// #endif // _WIN32
 
 
 #if !defined (VAO_DISABLE) && !defined (__ANDROID__)
@@ -29,6 +26,7 @@
 #endif
 
 #endif
+
 
 #define MAX_VB_SLOT 8
 #define MAX_ATTRIB 16
@@ -732,15 +730,9 @@ render_texture_update(struct render *R, RID id, int width, int height, const voi
 	GLenum itype = 0;
 	int compressed = texture_format(tex, &format, &itype);
 	if (compressed) {
-// #ifdef _WIN32
-// 		uint8_t* uncompressed = dtex_pvr_decode(pixels, width, height);
-// 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, uncompressed);
-// 		free(uncompressed);
-// #else
- 		glCompressedTexImage2D(target, miplevel, format,
- 			(GLsizei)tex->width, (GLsizei)tex->height, 0, 
- 			calc_texture_size(tex->format, width, height), pixels);
-// #endif // _WIN32
+		glCompressedTexImage2D(target, miplevel, format,
+			(GLsizei)tex->width, (GLsizei)tex->height, 0, 
+			calc_texture_size(tex->format, width, height), pixels);
 	} else {
 		glTexImage2D(target, miplevel, format, (GLsizei)width, (GLsizei)height, 0, format, itype, pixels);
 	}

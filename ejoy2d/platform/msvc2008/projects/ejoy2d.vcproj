@@ -186,31 +186,11 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\ejoy2d.h"
+			RelativePath="..\..\..\src\array.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\matrix.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\matrix.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\sprite.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\sprite.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\spritepack.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\spritepack.h"
+			RelativePath="..\..\..\src\opengl.h"
 			>
 		</File>
 	</Files>
