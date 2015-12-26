@@ -4,8 +4,8 @@
 #include <drag2d.h>
 #include <easy3d.h>
 
-struct p3d_particle_system;
-struct p3d_ps_config;
+struct p3d_emitter;
+struct p3d_emitter_cfg;
 struct p3d_symbol;
 struct p3d_particle;
 
@@ -20,7 +20,7 @@ class InvertRecord;
 class ParticleSystem : public d2d::Object, public d2d::ICloneable, public d2d::UICallback
 {
 public:
-	ParticleSystem(unsigned int buffer, p3d_ps_config* cfg);
+	ParticleSystem(p3d_emitter_cfg* cfg);
 	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
@@ -74,14 +74,7 @@ public:
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 
-	const p3d_ps_config* GetConfig() const;
-
-	int GetPSCapacity() const;
-
-private:
-	void Draw(p3d_particle_system* ps, const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
-
-	void SetPSCapacity(int cap);
+	const p3d_emitter_cfg* GetConfig() const;
 
 private:
 	AnimRecorder* m_anim_recorder;
@@ -90,7 +83,7 @@ private:
 private:
 	d2d::Vector m_pos;
 
-	p3d_particle_system* m_ps;
+	p3d_emitter* m_et;
 
 }; // ParticleSystem
 

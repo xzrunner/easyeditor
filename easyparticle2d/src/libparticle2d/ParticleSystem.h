@@ -3,8 +3,8 @@
 
 #include <drag2d.h>
 
-struct p2d_ps_config;
-struct p2d_particle_system;
+struct p2d_emitter_cfg;
+struct p2d_emitter;
 struct p2d_symbol;
 
 namespace eparticle2d
@@ -13,7 +13,7 @@ namespace eparticle2d
 class ParticleSystem : public d2d::Object, public d2d::UICallback
 {
 public:
-	ParticleSystem(unsigned int buffer, p2d_ps_config* cfg);
+	ParticleSystem(p2d_emitter_cfg* cfg);
 	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
@@ -48,17 +48,12 @@ public:
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 
-	const p2d_ps_config* GetConfig() const;
-
-	int GetPSCapacity() const;
-
-private:
-	void SetPSCapacity(int cap);
+	const p2d_emitter_cfg* GetConfig() const;
 
 private:
 	d2d::Vector m_pos;
 
-	p2d_particle_system* m_ps;
+	p2d_emitter* m_et;
 
 }; // ParticleSystem
 

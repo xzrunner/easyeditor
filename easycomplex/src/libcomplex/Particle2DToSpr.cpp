@@ -9,19 +9,19 @@ namespace ecomplex
 
 d2d::ISprite* Particle2DToSpr::Trans(const librespacker::PackParticle2D* p2d)
 {
-	p2d_ps_config* cfg = LoadConfig(p2d);
+	p2d_emitter_cfg* cfg = LoadConfig(p2d);
 
-	eparticle2d::ParticleSystem* ps = new eparticle2d::ParticleSystem(p2d->capacity, cfg);
+	eparticle2d::ParticleSystem* ps = new eparticle2d::ParticleSystem(cfg);
 
 	eparticle2d::Symbol* symbol = new eparticle2d::Symbol;
 	symbol->SetPS(ps);
 	return new eparticle2d::Sprite(symbol);
 }
 
-p2d_ps_config* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D* p2d)
+p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D* p2d)
 {
 	int sz = SIZEOF_P2D_PS_CONFIG + SIZEOF_P2D_SYMBOL * eparticle2d::MAX_COMPONENTS;
-	p2d_ps_config* cfg = (p2d_ps_config*) operator new(sz);
+	p2d_emitter_cfg* cfg = (p2d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 
 	cfg->mode_type = p2d->mode_type;

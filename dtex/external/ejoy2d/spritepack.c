@@ -333,7 +333,7 @@ import_particle3d(struct import_stream *is) {
 	struct pack_particle3d* pp = (struct pack_particle3d*)ialloc(is->alloc, sz);
 	memset(pp, 0, sz);
 
-	struct p3d_ps_config* cfg = &pp->cfg;
+	struct p3d_emitter_cfg* cfg = &pp->cfg;
 
 	cfg->symbol_count = n;
 	cfg->symbols = (struct p3d_symbol*)(cfg + 1);
@@ -412,13 +412,13 @@ import_particle3d(struct import_stream *is) {
 
 	pp->spr.ps_time = 0;
 
-	int particles_sz = SIZEOF_P3D_PARTICLE_SYSTEM + cap * SIZEOF_P3D_PARTICLE;
-	void* mem = ialloc(is->alloc, particles_sz);
-	struct p3d_particle_system* ps = p3d_create_with_mem(mem, cap, cfg);
-	// todo
-	ps->active = true;
-	ps->particle_count = 0;
-	pp->spr.ps = ps;
+	//int particles_sz = SIZEOF_P3D_PARTICLE_SYSTEM + cap * SIZEOF_P3D_PARTICLE;
+	//void* mem = ialloc(is->alloc, particles_sz);
+	//struct p3d_emitter* ps = p3d_create_with_mem(mem, cap, cfg);
+	//// todo
+	//ps->active = true;
+	//ps->particle_count = 0;
+	//pp->spr.ps = ps;
 }
 
 static void
@@ -429,7 +429,7 @@ import_particle2d(struct import_stream *is) {
 	struct pack_particle2d* pp = (struct pack_particle2d*)ialloc(is->alloc, sz);
 	memset(pp, 0, sz);
 
-	struct p2d_ps_config* cfg = &pp->cfg;
+	struct p2d_emitter_cfg* cfg = &pp->cfg;
 
 	cfg->symbol_count = n;
 	cfg->symbols = (struct p2d_symbol*)(cfg + 1);
@@ -529,13 +529,13 @@ import_particle2d(struct import_stream *is) {
 
 	pp->spr.ps_time = 0;
 
-	int particles_sz = SIZEOF_P2D_PARTICLE_SYSTEM + cap * SIZEOF_P2D_PARTICLE;
-	void* mem = ialloc(is->alloc, particles_sz);
-	struct p2d_particle_system* ps = p2d_create_with_mem(mem, cap, cfg);
-	// todo
-	ps->is_active = true;
-	ps->is_loop = true;
-	pp->spr.ps = ps;
+// 	int particles_sz = SIZEOF_P2D_PARTICLE_SYSTEM + cap * SIZEOF_P2D_PARTICLE;
+// 	void* mem = ialloc(is->alloc, particles_sz);
+// 	struct p2d_emitter* ps = p2d_create_with_mem(mem, cap, cfg);
+// 	// todo
+// 	ps->active = true;
+// 	ps->loop = true;
+// 	pp->spr.ps = ps;
 }
 
 static void

@@ -64,8 +64,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
 	m_ps->SetLoop(loop);
 	m_ps->Update(dt);
-//	m_ps->Draw(mt);
-	m_ps->Draw(d2d::Matrix());
+	m_ps->Draw(mt);
 
 	m_time = curr;
 }

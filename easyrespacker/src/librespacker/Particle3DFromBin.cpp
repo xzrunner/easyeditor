@@ -12,7 +12,6 @@ int Particle3DFromBin::Size(const PackParticle3D* p3d)
 	sz += SIZEOF_PARTICLE3D;
 	sz += p3d->components.size() * SIZEOF_P3D_SYMBOL;
 	sz += SIZEOF_P3D_PARTICLE_SYSTEM;
-	sz += p3d->capacity * SIZEOF_P3D_PARTICLE;
 	return sz;
 }
 
@@ -28,10 +27,6 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	}
 
 	// body
-
-	uint16_t capacity;
-	unpack(capacity, ptr);
-	p3d->capacity = capacity;
 
 	uint16_t emission_time, count;
 	unpack(emission_time, ptr);

@@ -3,7 +3,7 @@
 
 #include <string>
 
-struct p2d_ps_config;
+struct p2d_emitter_cfg;
 
 namespace eparticle2d
 {
@@ -19,7 +19,7 @@ public:
 		ToolbarPanel* toolbar);
 
 	static ParticleSystem* LoadPS(const std::string& filepath);
-	static p2d_ps_config* LoadPSConfig(const std::string& filepath);
+	static p2d_emitter_cfg* LoadPSConfig(const std::string& filepath);
 
 }; // FileIO
 

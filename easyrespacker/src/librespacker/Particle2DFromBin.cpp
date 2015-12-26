@@ -14,7 +14,6 @@ int Particle2DFromBin::Size(const PackParticle2D* p2d)
 	sz += SIZEOF_PARTICLE2D;
 	sz += p2d->components.size() * SIZEOF_P2D_SYMBOL;
 	sz += SIZEOF_P2D_PARTICLE_SYSTEM;
-	sz += p2d->capacity * SIZEOF_P2D_PARTICLE;
 	return sz;
 }
 
@@ -30,10 +29,6 @@ void Particle2DFromBin::Unpack(uint8_t** ptr, PackParticle2D* p2d)
 	}
 
 	// body
-
-	uint16_t capacity;
-	unpack(capacity, ptr);
-	p2d->capacity = capacity;
 
 	uint16_t emission_time, count;
 	unpack(emission_time, ptr);

@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <easyrespacker.h>
 
-struct p3d_ps_config;
+struct p3d_emitter_cfg;
 
 namespace ecomplex
 {
@@ -15,7 +15,7 @@ public:
 	static d2d::ISprite* Trans(const librespacker::PackParticle3D* p3d);
 
 private:
-	static p3d_ps_config* LoadConfig(const librespacker::PackParticle3D* p3d);
+	static p3d_emitter_cfg* LoadConfig(const librespacker::PackParticle3D* p3d);
 
 }; // Particle3DToSpr
 

@@ -111,12 +111,11 @@ ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	int cap = value["capacity"].asInt();
-	p2d_ps_config* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
-	return new ParticleSystem(cap, cfg);
+	p2d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
+	return new ParticleSystem(cfg);
 }
 
-p2d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
+p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -130,7 +129,7 @@ p2d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	adapter.Load(filepath);
 
 	int sz = SIZEOF_P2D_PS_CONFIG + SIZEOF_P2D_SYMBOL * MAX_COMPONENTS;
-	p2d_ps_config* cfg = (p2d_ps_config*) operator new(sz);
+	p2d_emitter_cfg* cfg = (p2d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 
 	cfg->mode_type = adapter.mode_type;

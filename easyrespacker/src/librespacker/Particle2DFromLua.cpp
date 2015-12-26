@@ -59,8 +59,6 @@ void Particle2DFromLua::UnpackComponents(lua_State* L, PackParticle2D* p2d)
 
 void Particle2DFromLua::UnpackBody(lua_State* L, PackParticle2D* p2d)
 {
-	p2d->capacity = LuaDataHelper::GetIntField(L, "capacity");
-
 	p2d->emission_time = TransTime(LuaDataHelper::GetIntField(L, "emission_time"));
 	p2d->count = LuaDataHelper::GetIntField(L, "count");
 

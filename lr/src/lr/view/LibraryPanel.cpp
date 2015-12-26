@@ -84,15 +84,11 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 
 void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 {
-	if (layers.size() != m_pages.size()) {
-		throw d2d::Exception("lr json file error!");
-	}
-
-	for (int i = 0, n = m_pages.size(); i < n; ++i)
+	assert(layers.size() <= m_pages.size());
+	for (int i = 0, n = layers.size(); i < n; ++i)
 	{
-		d2d::ILibraryPage* page = m_pages[i];
-
 		Layer* layer = layers[i];
+		d2d::ILibraryPage* page = m_pages[i];
 
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
 		layer->SetName(page->GetPageName().ToStdString());

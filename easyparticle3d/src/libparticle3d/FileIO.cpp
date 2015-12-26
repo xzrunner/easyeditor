@@ -97,10 +97,6 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 		value["speed"]["offset"] = adapter.spd_var;
 	}
 
-	if (value["capacity"].isNull()) {
-		value["capacity"] = PARTICLE_CAP;
-	}
-
 	toolbar->Load(value, version);
 
 	toolbar->m_name->SetValue(adapter.name);
@@ -128,26 +124,11 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 {
-	p3d_ps_config* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
-
-	int cap = PARTICLE_CAP;
-
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	if (!value["capacity"].isNull()) {
-		cap = value["capacity"].asInt();
-	}
-
-	return new ParticleSystem(cap, cfg);
+	p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
+	return new ParticleSystem(cfg);
 }
 
-p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
+p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -161,7 +142,7 @@ p3d_ps_config* FileIO::LoadPSConfig(const std::string& filepath)
 	adapter.Load(filepath);
 	
 	int sz = SIZEOF_P3D_PS_CONFIG + SIZEOF_P3D_SYMBOL * MAX_COMPONENTS;
-	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
+	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 	
 	cfg->emission_time = adapter.emission_time;

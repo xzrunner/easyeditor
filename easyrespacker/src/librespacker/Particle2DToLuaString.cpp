@@ -35,9 +35,6 @@ void Particle2DToLuaString::Pack(const PackParticle2D* p2d, ebuilder::CodeGenera
 
 void Particle2DToLuaString::PackPS(const PackParticle2D* p2d, ebuilder::CodeGenerator& gen)
 {
-	lua::connect(gen, 1, 
-		lua::assign("capacity", p2d->capacity));
-
 	lua::connect(gen, 2, 
 		lua::assign("emission_time", TransTime(p2d->emission_time)), 
 		lua::assign("count", p2d->count));

@@ -25,10 +25,10 @@
 #define PTR_SIZE_DIFF (8 - sizeof(void *))
 #define SIZEOF_POINTER 8
 
-struct p2d_particle_system;
+struct p2d_emitter;
 struct ps2d_sprite
 {
-	struct p2d_particle_system* ps;
+	struct p2d_emitter* ps;
 	float ps_time;
 	int _dummy;		// unused: dummy for align to 64bit
 };
@@ -37,15 +37,15 @@ struct ps2d_sprite
 
 struct pack_particle2d {
 	struct ps2d_sprite spr;
-	struct p2d_ps_config cfg;
+	struct p2d_emitter_cfg cfg;
 };
 
 #define SIZEOF_PARTICLE2D (SIZEOF_PS2D_SPRITE + SIZEOF_P2D_PS_CONFIG)
 
-struct p3d_particle_system;
+struct p3d_emitter;
 struct ps3d_sprite
 {
-	struct p3d_particle_system* ps;
+	struct p3d_emitter* ps;
 	float ps_time;
 	int _dummy;		// unused: dummy for align to 64bit
 };
@@ -54,7 +54,7 @@ struct ps3d_sprite
 
 struct pack_particle3d {
 	struct ps3d_sprite spr;
-	struct p3d_ps_config cfg;
+	struct p3d_emitter_cfg cfg;
 };
 
 #define SIZEOF_PARTICLE3D (SIZEOF_PS3D_SPRITE + SIZEOF_P3D_PS_CONFIG)

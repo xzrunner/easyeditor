@@ -34,9 +34,6 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 
 void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGenerator& gen)
 {
-	lua::connect(gen, 1, 
-		lua::assign("capacity", p3d->capacity));
-
 	lua::connect(gen, 2, 
 		lua::assign("emission_time", TransTime(p3d->emission_time)), 
 		lua::assign("count", p3d->count));

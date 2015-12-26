@@ -23,8 +23,6 @@ public:
 		const IPackNode* node;
 	};
 
-	int capacity;
-
 	float emission_time;
 	int count;
 

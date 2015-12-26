@@ -96,8 +96,8 @@ void ToolbarPanel::InitParticle()
 {
 	Clear();
 
-	p2d_ps_config* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
-	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP, cfg);
+	p2d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetDefaultConfig();
+	ParticleSystem* ps = new ParticleSystem(cfg);
 	//	ps->Start();
 	d2d::obj_assign<ParticleSystem>(m_stage->m_ps, ps);
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
@@ -172,12 +172,6 @@ wxSizer* ToolbarPanel::CreateMainCommonLayout()
 		top_sizer->Add(sizer);
 	}
 	top_sizer->AddSpacer(10);
-	// Capacity
-	d2d::SliderCtrlOne* s_capacity = new d2d::SliderCtrlOne(this, LANG[LK_CAPACITY], 
-		"capacity", this, PS_CAPACITY, d2d::SliderItem("", "", CAPACITY, 1, 1000));
-	top_sizer->Add(s_capacity);
-	top_sizer->AddSpacer(10);
-	m_sliders.push_back(s_capacity);
 	// Count
 	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, LANG[LK_COUNT], 
 		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));

@@ -39,7 +39,8 @@ render_func(void* symbol, float x, float y, float angle, float scale,
 
 void PS::Init()
 {
-	p2d_init(render_func);	
+	p2d_init();
+	p2d_regist_cb(render_func);	
 }
 
 }

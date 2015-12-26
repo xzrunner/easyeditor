@@ -9,19 +9,19 @@ namespace ecomplex
 
 d2d::ISprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
 {
-	p3d_ps_config* cfg = LoadConfig(p3d);
+	p3d_emitter_cfg* cfg = LoadConfig(p3d);
 
-	eparticle3d::ParticleSystem* ps = new eparticle3d::ParticleSystem(p3d->capacity, cfg);
+	eparticle3d::ParticleSystem* ps = new eparticle3d::ParticleSystem(cfg);
 
 	eparticle3d::Symbol* symbol = new eparticle3d::Symbol;
 	symbol->SetPS(ps);
 	return new eparticle3d::Sprite(symbol);
 }
 
-p3d_ps_config* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p3d)
+p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p3d)
 {
 	int sz = SIZEOF_P3D_PS_CONFIG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
-	p3d_ps_config* cfg = (p3d_ps_config*) operator new(sz);
+	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 
 	cfg->emission_time = p3d->emission_time;

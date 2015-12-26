@@ -55,10 +55,10 @@ render_func(void* symbol, float x, float y, float angle, float scale,
 static void 
 add_func(p3d_particle* p, void* ud)
 {
-	ParticleSystem* ps = (ParticleSystem*)ud;
-	const d2d::Vector& pos = ps->GetPosition();
-	p->init_pos.x = pos.x;
-	p->init_pos.y = pos.y;
+// 	ParticleSystem* ps = (ParticleSystem*)ud;
+// 	const d2d::Vector& pos = ps->GetPosition();
+// 	p->init_pos.x = pos.x;
+// 	p->init_pos.y = pos.y;
 }
 
 static void 
@@ -70,7 +70,8 @@ remove_func(p3d_particle* p, void* ud)
 
 void PS::Init()
 {
-	p3d_init(render_func, add_func, remove_func);	
+	p3d_init();
+	p3d_regist_cb(render_func, add_func, remove_func);	
 }
 
 }

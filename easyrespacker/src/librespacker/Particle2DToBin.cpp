@@ -14,7 +14,6 @@ int Particle2DToBin::Size(const PackParticle2D* p2d)
 	sz += sizeof(uint8_t);						// type
 	sz += sizeof(uint16_t);						// component sz
 	sz += ComponentSize() * p2d->components.size();
-	sz += sizeof(uint16_t);						// capacity
 	sz += sizeof(uint16_t) * 2;					// emission_time, count
 	sz += sizeof(uint16_t) * 2;					// life
 	sz += sizeof(uint16_t) * 4;					// position
@@ -62,9 +61,6 @@ void Particle2DToBin::Pack(const PackParticle2D* p2d, uint8_t** ptr)
 	}
 
 	// body
-
-	uint16_t capacity = p2d->capacity;
-	pack(capacity, ptr);
 
 	uint16_t emission_time = TransTime(p2d->emission_time);
 	pack(emission_time, ptr);
