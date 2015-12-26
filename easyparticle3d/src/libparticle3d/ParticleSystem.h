@@ -73,6 +73,7 @@ public:
 	p3d_symbol* AddSymbol(d2d::ISymbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
+	p3d_symbol* GetSymbol(int idx);
 
 	const p3d_emitter_cfg* GetConfig() const;
 

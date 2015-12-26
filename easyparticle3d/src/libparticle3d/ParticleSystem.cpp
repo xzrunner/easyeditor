@@ -331,7 +331,16 @@ void ParticleSystem::DelAllSymbol()
 	m_et->cfg->symbol_count = 0;
 }
 
-const p3d_emitter_cfg* ParticleSystem::GetConfig() const
+p3d_symbol* ParticleSystem::GetSymbol(int idx)
+{
+	if (idx < 0 || idx >= m_ps->cfg->symbol_count) {
+		return NULL;
+	} else {
+		return &m_ps->cfg->symbols[idx];
+	}
+}
+
+const p3d_ps_config* ParticleSystem::GetConfig() const
 {
 	return m_et->cfg;
 }

@@ -372,13 +372,17 @@ void ToolbarPanel::OnDelChild(ComponentPanel* child)
 		return;
 	}
 
-	m_comp_sizer->Detach(idx);
+	m_comp_sizer->Detach(m_children[idx]);
 	delete m_children[idx];
 	m_children.erase(m_children.begin() + idx);
 
 	m_stage->m_ps->DelSymbol(idx);
 
 	this->Layout();	
+
+	for (int i = 0, n = m_children.size(); i < n; ++i) {
+		m_children[i]->m_pc = m_stage->m_ps->GetSymbol(i);
+	}
 }
 
 void ToolbarPanel::Clear()
