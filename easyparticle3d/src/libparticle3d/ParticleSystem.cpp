@@ -9,11 +9,16 @@
 namespace eparticle3d
 {
 
-ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg)
-	: m_anim_recorder(new AnimRecorder(4096))
-	, m_inv_record(new InvertRecord)
+ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg, bool record)
+	: m_anim_recorder(NULL)
+	, m_inv_record(NULL)
 {
 	PS::Instance();
+
+	if (record) {
+		m_anim_recorder = new AnimRecorder(4096);
+		m_inv_record = new InvertRecord;
+	}
 
 	m_et = p3d_emitter_create(cfg);
 	m_et->ud = this;

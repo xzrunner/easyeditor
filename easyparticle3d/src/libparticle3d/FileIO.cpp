@@ -125,7 +125,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 ParticleSystem* FileIO::LoadPS(const std::string& filepath)
 {
 	p3d_emitter_cfg* cfg = PSConfigMgr::Instance()->GetConfig(filepath);
-	return new ParticleSystem(cfg);
+	return new ParticleSystem(cfg, false);
 }
 
 p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)

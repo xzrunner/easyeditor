@@ -20,7 +20,7 @@ class InvertRecord;
 class ParticleSystem : public d2d::Object, public d2d::ICloneable, public d2d::UICallback
 {
 public:
-	ParticleSystem(p3d_emitter_cfg* cfg);
+	ParticleSystem(p3d_emitter_cfg* cfg, bool record);
 	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
