@@ -85,6 +85,7 @@ void LRJsonPacker::PackAll(const std::string& filepath)
 	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
 	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
+	ParserLevel(lr_val, 8, "level", out_val);
 
 	out_val["package"] = lr_name + "_scene";
 
@@ -380,25 +381,7 @@ void LRJsonPacker::ParserCharacter(const Json::Value& src_val,
 			tag += ";";
 		}
 		tag += tag_ext;
-		std::vector<std::string> tags;
-		int pos = tag.find_first_of(';');
-		tags.push_back(tag.substr(0, pos));
-		do 
-		{
-			int next_pos = tag.find_first_of(';', pos + 1);
-			tags.push_back(tag.substr(pos + 1, next_pos - pos - 1));
-			pos = next_pos;
-		} while (pos != std::string::npos);
-		for (int i = 0, n = tags.size(); i < n; ++i) {
-			const std::string& str = tags[i];
-			int pos = str.find_first_of('=');
-			if (pos == std::string::npos) {
-				continue;
-			}
-			std::string key = str.substr(0, pos);
-			std::string val = str.substr(pos+1);
-			char_val["tag"][key] = val;
-		}
+		ParserSprTag(tag, char_val);
 
 		// filename
 		std::string filename = d2d::FilenameTools::getFilename(filepath);
@@ -415,6 +398,23 @@ void LRJsonPacker::ParserCharacter(const Json::Value& src_val,
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = char_val;
+
+		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	}
+}
+
+void LRJsonPacker::ParserLevel(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val)
+{
+	int idx = 0;
+	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
+		Json::Value level_val;
+		std::string tag = spr_val["tag"].asString();
+		ParserSprTag(tag, level_val);
+
+		int sz = out_val[name].size();
+		out_val[name][sz] = level_val;
 
 		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	}
@@ -535,6 +535,22 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 
 	int sz = out_val["particle"].size();
 	out_val["particle"][sz] = dec_val;
+}
+
+void LRJsonPacker::ParserSprTag(const std::string& tag, Json::Value& out_val)
+{
+	std::vector<std::string> tags;
+	d2d::StringTools::Split(tag, ";", tags);
+	for (int i = 0, n = tags.size(); i < n; ++i) {
+		const std::string& str = tags[i];
+		int pos = str.find_first_of('=');
+		if (pos == std::string::npos) {
+			continue;
+		}
+		std::string key = str.substr(0, pos);
+		std::string val = str.substr(pos+1);
+		out_val["tag"][key] = val;
+	}
 }
 
 }
