@@ -9,17 +9,17 @@ namespace eparticle2d
 
 ParticleSystem::ParticleSystem(p2d_emitter_cfg* cfg)
 {
-	m_et = p2d_emitter_create(cfg);
-
 	PS::Instance();
+
+	m_et = p2d_emitter_create(cfg);
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 {
+	PS::Instance();
+
 	m_pos = ps.m_pos;
 	m_et = p2d_emitter_create(ps.m_et->cfg);
-
-	PS::Instance();
 }
 
 ParticleSystem::~ParticleSystem()
