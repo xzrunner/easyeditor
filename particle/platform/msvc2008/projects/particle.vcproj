@@ -146,27 +146,31 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\particle2d.c"
+			RelativePath="..\..\..\src\ps_2d.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\particle2d.h"
+			RelativePath="..\..\..\src\ps_2d.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\particle3d.c"
+			RelativePath="..\..\..\src\ps_3d.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\particle3d.h"
+			RelativePath="..\..\..\src\ps_3d.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\utility.c"
+			RelativePath="..\..\..\src\ps_array.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\utility.h"
+			RelativePath="..\..\..\src\ps_utility.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ps_utility.h"
 			>
 		</File>
 	</Files>

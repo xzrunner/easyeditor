@@ -5,7 +5,7 @@
 #include "PSConfigMgr.h"
 #include "ps_config.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 #include <json/json.h>
 
 namespace eparticle2d

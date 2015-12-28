@@ -2,7 +2,7 @@
 #define _EASYPARTICLE2D_COMPONENT_PANEL_H_
 
 #include <drag2d.h>
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace eparticle2d
 {

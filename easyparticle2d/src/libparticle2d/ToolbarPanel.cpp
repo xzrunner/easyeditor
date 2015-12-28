@@ -7,7 +7,7 @@
 #include "PSConfigMgr.h"
 #include "ComponentPanel.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace eparticle2d
 {

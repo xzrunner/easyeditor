@@ -8,7 +8,7 @@
 #include "ComponentPanel.h"
 #include "language.h"
 
-#include <particle3d.h>
+#include <ps_3d.h>
 
 #include <easyanim.h>
 

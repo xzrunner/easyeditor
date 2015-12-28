@@ -2,7 +2,7 @@
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace librespacker
 {

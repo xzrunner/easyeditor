@@ -1,7 +1,7 @@
 #include "Particle2DToLuaString.h"
 
 #include <easybuilder.h>
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace lua = ebuilder::lua;
 

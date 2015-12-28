@@ -2,7 +2,7 @@
 #include "UnpackNodeFactory.h"
 #include "pack_unpack.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 #include <spritepack.h>
 
 namespace librespacker
@@ -13,7 +13,6 @@ int Particle2DFromBin::Size(const PackParticle2D* p2d)
 	int sz = 0;
 	sz += SIZEOF_PARTICLE2D;
 	sz += p2d->components.size() * SIZEOF_P2D_SYMBOL;
-	sz += SIZEOF_P2D_PARTICLE_SYSTEM;
 	return sz;
 }
 

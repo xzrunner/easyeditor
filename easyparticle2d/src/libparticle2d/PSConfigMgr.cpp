@@ -2,7 +2,7 @@
 #include "ps_config.h"
 #include "FileIO.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace eparticle2d
 {

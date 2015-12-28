@@ -2,14 +2,14 @@
 #include "ps_config.h"
 #include "PS.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace eparticle2d
 {
 
 ParticleSystem::ParticleSystem(p2d_emitter_cfg* cfg)
 {
-	m_et = p2d_create(cfg);
+	m_et = p2d_emitter_create(cfg);
 
 	PS::Instance();
 }
@@ -17,7 +17,7 @@ ParticleSystem::ParticleSystem(p2d_emitter_cfg* cfg)
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 {
 	m_pos = ps.m_pos;
-	m_et = p2d_create(ps.m_et->cfg);
+	m_et = p2d_emitter_create(ps.m_et->cfg);
 
 	PS::Instance();
 }

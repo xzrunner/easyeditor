@@ -1,6 +1,6 @@
 #include "LoadAdapter.h"
 
-#include <particle2d.h>
+#include <ps_2d.h>
 
 namespace eparticle2d
 {

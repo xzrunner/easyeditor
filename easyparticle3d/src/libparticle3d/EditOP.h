@@ -17,6 +17,9 @@ public:
 	virtual bool OnMouseDrag(int x, int y);
 
 private:
+	void SetEmitterMat(const d2d::Vector& pos);
+
+private:
 	StagePanel* m_stage;
 
 }; // EditOP

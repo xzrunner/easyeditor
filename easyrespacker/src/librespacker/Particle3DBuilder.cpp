@@ -3,7 +3,7 @@
 #include "PackNodeFactory.h"
 
 #include <easyparticle3d.h>
-#include <particle3d.h>
+#include <ps_3d.h>
 
 namespace librespacker
 {

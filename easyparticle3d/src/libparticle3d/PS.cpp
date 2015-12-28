@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-#include <particle3d.h>
+#include <ps_3d.h>
 
 namespace eparticle3d
 {

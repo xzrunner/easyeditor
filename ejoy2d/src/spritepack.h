@@ -1,8 +1,8 @@
 #ifndef EJOY_2D_SPRITE_PACK_H
 #define EJOY_2D_SPRITE_PACK_H
 
-#include "particle3d.h"
-#include "particle2d.h"
+#include "ps_3d.h"
+#include "ps_2d.h"
 
 #include <stdint.h>
 

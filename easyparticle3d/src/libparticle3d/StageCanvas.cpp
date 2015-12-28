@@ -3,6 +3,7 @@
 #include "ParticleSystem.h"
 
 #include <easyanim.h>
+#include <ps_3d.h>
 
 namespace eparticle3d
 {
@@ -30,9 +31,9 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	if (m_stage->m_ps) {
+		const p3d_emitter* et = m_stage->m_ps->GetEmitter();
 		d2d::Matrix mt;
-		const d2d::Vector& pos = m_stage->m_ps->GetPosition();
-		mt.setTranslation(pos.x, pos.y);
+		mt.translate(et->mat[4], et->mat[5]);
 		m_stage->m_ps->Draw(mt);
 	}
 

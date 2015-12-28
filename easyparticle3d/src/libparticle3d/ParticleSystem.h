@@ -40,6 +40,8 @@ public:
 
 	void Update(float dt);
 
+	void SetEmitterMat(const d2d::Matrix& mt) const;
+
 	void SetDirection(float x, float y, float z);
 	void SetDirection(const Quaternion& dir);
 
@@ -67,23 +69,19 @@ public:
 
 	void SetOrientToMovement(bool open);
 
- 	void SetPosition(const d2d::Vector& pos) { m_pos = pos; }
-	const d2d::Vector& GetPosition() const { return m_pos; }
-
 	p3d_symbol* AddSymbol(d2d::ISymbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);
 
 	const p3d_emitter_cfg* GetConfig() const;
+	const p3d_emitter* GetEmitter() const { return m_et; }
 
 private:
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;
 
 private:
-	d2d::Vector m_pos;
-
 	p3d_emitter* m_et;
 
 }; // ParticleSystem

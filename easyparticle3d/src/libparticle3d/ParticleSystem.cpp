@@ -4,7 +4,7 @@
 #include "ps_config.h"
 #include "PS.h"
 
-#include <particle3d.h>
+#include <ps_3d.h>
 
 namespace eparticle3d
 {
@@ -13,21 +13,20 @@ ParticleSystem::ParticleSystem(p3d_emitter_cfg* cfg)
 	: m_anim_recorder(new AnimRecorder(4096))
 	, m_inv_record(new InvertRecord)
 {
+	PS::Instance();
+
 	m_et = p3d_emitter_create(cfg);
 	m_et->ud = this;
-
-	PS::Instance();
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	: m_anim_recorder(NULL)
 	, m_inv_record(NULL)
 {
-	m_pos = ps.m_pos;
+	PS::Instance();
+
 	m_et = p3d_emitter_create(ps.m_et->cfg);
 	m_et->ud = this;
-
-	PS::Instance();
 }
 
 ParticleSystem::~ParticleSystem()
@@ -140,15 +139,6 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	const float* src = mt.getElements();
-	float* mat = (float*)m_et->mat;
-	m_et->mat[0] = src[0];
-	m_et->mat[1] = src[1];
-	m_et->mat[2] = src[4];
-	m_et->mat[3] = src[5];
-	m_et->mat[4] = src[12];
-	m_et->mat[5] = src[13];
-
 	if (m_et->local_mode_draw) {
 		p3d_emitter_draw(m_et, &mt);
 	} else {
@@ -159,6 +149,18 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 void ParticleSystem::Update(float dt)
 {
 	p3d_emitter_update(m_et, dt);
+}
+
+void ParticleSystem::SetEmitterMat(const d2d::Matrix& mt) const
+{
+	const float* src = mt.getElements();
+	float* mat = (float*)m_et->mat;
+	m_et->mat[0] = src[0];
+	m_et->mat[1] = src[1];
+	m_et->mat[2] = src[4];
+	m_et->mat[3] = src[5];
+	m_et->mat[4] = src[12];
+	m_et->mat[5] = src[13];	
 }
 
 void ParticleSystem::SetDirection(float x, float y, float z)

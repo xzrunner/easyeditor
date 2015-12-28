@@ -54,8 +54,9 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	if (spr) {
 		const Sprite* _spr = static_cast<const Sprite*>(spr);
 		m_ps->SetDirection(_spr->GetDir());
-		m_ps->SetPosition(spr->GetPosition());
+//		m_ps->SetPosition(spr->GetPosition());
 	}
+	m_ps->SetEmitterMat(mt);
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);
