@@ -24,11 +24,21 @@ PS::PS()
 }
 
 static void 
-render_func(void* symbol, float x, float y, float angle, float scale, 
+render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
             struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
 {
-	d2d::Matrix mt = *(d2d::Matrix*)ud;
-	//	mt.translate(p->init_pos.x, p->init_pos.y);
+	d2d::Matrix mt;
+	if (ud) {
+		mt = *(d2d::Matrix*)ud;
+	} else {
+		float* m = (float*)mt.getElements();
+		m[0] = mat[0];
+		m[1] = mat[1];
+		m[4] = mat[2];
+		m[5] = mat[3];
+		m[12] = mat[4];
+		m[13] = mat[5];		
+	}
 
 	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
 	d2d::ColorTrans color;
@@ -55,10 +65,10 @@ render_func(void* symbol, float x, float y, float angle, float scale,
 static void 
 add_func(p3d_particle* p, void* ud)
 {
-// 	ParticleSystem* ps = (ParticleSystem*)ud;
-// 	const d2d::Vector& pos = ps->GetPosition();
-// 	p->init_pos.x = pos.x;
-// 	p->init_pos.y = pos.y;
+//  	ParticleSystem* ps = (ParticleSystem*)ud;
+//  	const d2d::Vector& pos = ps->GetPosition();
+//  	p->init_pos.x = pos.x;
+//  	p->init_pos.y = pos.y;
 }
 
 static void 

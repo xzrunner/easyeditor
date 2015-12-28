@@ -2,7 +2,7 @@
 #define _EASYEJOY2D_EJSPRITE_H_
 
 #include <drag2d.h>
-#include <ejoy2d.h>
+//#include <ejoy2d.h>
 
 #include <stdint.h>
 
@@ -15,7 +15,7 @@ class EJSprite : public d2d::Object
 {
 public:
 	EJSprite(dtex_package* pkg, const char* name);
-	EJSprite(ej_sprite* spr);
+//	EJSprite(ej_sprite* spr);
 	virtual ~EJSprite();
 
 	void Update();
@@ -25,12 +25,12 @@ public:
 
 	void SetFrame(int frame);
 
-	ej_sprite* GetEjSpr() { return m_ej_spr; }
+//	ej_sprite* GetEjSpr() { return m_ej_spr; }
 
 private:
 	dtex_package* m_pkg;
 
-	ej_sprite* m_ej_spr;
+//	ej_sprite* m_ej_spr;
 
 //	ej_srt m_ej_srt;
 

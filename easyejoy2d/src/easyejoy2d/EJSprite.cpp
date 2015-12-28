@@ -11,18 +11,18 @@ namespace eejoy2d
 
 EJSprite::EJSprite(dtex_package* pkg, const char* name)
 	: m_pkg(pkg)
-	, m_ej_spr(NULL)
+//	, m_ej_spr(NULL)
 {
 	int id = dtex_get_spr_id(pkg, name);
 	assert(id >= 0);
 //	m_ej_spr = dtex_ej_sprite_create(pkg, id);
 }
 
-EJSprite::EJSprite(ej_sprite* spr)
-	: m_pkg(NULL)
-	, m_ej_spr(spr)
-{
-}
+//EJSprite::EJSprite(ej_sprite* spr)
+//	: m_pkg(NULL)
+//	, m_ej_spr(spr)
+//{
+//}
 
 EJSprite::~EJSprite()
 {
@@ -31,9 +31,9 @@ EJSprite::~EJSprite()
 
 void EJSprite::Update()
 {
-	if (m_ej_spr) {
-		SetFrame(m_ej_spr->frame + 1);
-	}
+	//if (m_ej_spr) {
+	//	SetFrame(m_ej_spr->frame + 1);
+	//}
 }
 
 void EJSprite::Draw(int x, int y) const
@@ -57,9 +57,9 @@ void EJSprite::Draw(int x, int y) const
 
 void EJSprite::SetFrame(int frame)
 {
-	if (m_ej_spr) {
-		ej_sprite_setframe(m_ej_spr, frame, false);
-	}
+	//if (m_ej_spr) {
+	//	ej_sprite_setframe(m_ej_spr, frame, false);
+	//}
 }
 
 }

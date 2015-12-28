@@ -140,7 +140,20 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	p3d_emitter_draw(m_et, &mt);
+	const float* src = mt.getElements();
+	float* mat = (float*)m_et->mat;
+	m_et->mat[0] = src[0];
+	m_et->mat[1] = src[1];
+	m_et->mat[2] = src[4];
+	m_et->mat[3] = src[5];
+	m_et->mat[4] = src[12];
+	m_et->mat[5] = src[13];
+
+	if (m_et->local_mode_draw) {
+		p3d_emitter_draw(m_et, &mt);
+	} else {
+		p3d_emitter_draw(m_et, NULL);
+	}
 }
 
 void ParticleSystem::Update(float dt)
