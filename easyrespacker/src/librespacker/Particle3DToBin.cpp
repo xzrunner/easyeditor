@@ -10,7 +10,7 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	int sz = 0;
 	sz += sizeof(uint16_t);						// id
 	sz += sizeof(uint8_t);						// type
-	sz += sizeof(uint16_t);						// component sz
+	sz += sizeof(uint16_t);						// component size
 	sz += ComponentSize() * p3d->components.size();
 	sz += sizeof(uint16_t) * 2;					// emission_time, count
 	sz += sizeof(uint16_t) * 2;					// life
@@ -21,8 +21,9 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint16_t) * 2;					// acc
 	sz += sizeof(uint16_t);						// fadeout_time
 	sz += sizeof(uint8_t);						// ground
-	sz += sizeof(uint16_t) + sizeof(uint8_t);	// radius
+	sz += sizeof(uint16_t) * 2;					// start position
 	sz += sizeof(uint8_t);						// orient_to_movement
+	// todo struct ps_vec3 dir
 	return sz;
 }
 
@@ -53,11 +54,11 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	uint16_t life_var = TransTime(p3d->life_var);
 	pack(life_var, ptr);
 
-	uint16_t hori = TransRadian(p3d->hori);
+	int16_t hori = TransRadian(p3d->hori);
 	pack(hori, ptr);
 	uint16_t hori_var = TransRadian(p3d->hori_var);
 	pack(hori_var, ptr);
-	uint16_t vert = TransRadian(p3d->vert);
+	int16_t vert = TransRadian(p3d->vert);
 	pack(vert, ptr);
 	uint16_t vert_var = TransRadian(p3d->vert_var);
 	pack(vert_var, ptr);

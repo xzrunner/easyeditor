@@ -28,7 +28,7 @@ struct p2d_emitter;
 struct ps2d_sprite
 {
 	struct p2d_emitter* ps;
-	int last_frame;
+	float ps_time;
 	int _dummy;		// unused: dummy for align to 64bit
 };
 
@@ -45,7 +45,7 @@ struct p3d_emitter;
 struct ps3d_sprite
 {
 	struct p3d_emitter* ps;
-	int last_frame;
+	float ps_time;
 	int _dummy;		// unused: dummy for align to 64bit
 };
 
@@ -56,7 +56,7 @@ struct pack_particle3d {
 	struct p3d_emitter_cfg cfg;
 };
 
-#define SIZEOF_PARTICLE3D (SIZEOF_PS3D_SPRITE + SIZEOF_P3D_PS_CONFIG)
+#define SIZEOF_PARTICLE3D (SIZEOF_PS3D_SPRITE + SIZEOF_P3D_EMITTER_CFG)
 
 struct matrix;
 
@@ -71,18 +71,28 @@ struct pack_pannel {
 #define SIZEOF_PANNEL (sizeof(struct pack_pannel))
 
 struct pack_label {
-	uint32_t color;
 	int width;
 	int height;
-	int align;
-	int size;
+
+	int font;
+	int font_size;
+	uint32_t font_color;
+
 	int edge;
-    int space_h;
-    int space_w;
-    int auto_scale;
+	float edge_size;
+	uint32_t edge_color;
+
+	int align_hori;
+	int align_vert;
+
+	float space_hori;
+	float space_vert;
+
+	const char* text;
+	const char* tid;
 };
 
-#define SIZEOF_LABEL (sizeof(struct pack_label))
+#define SIZEOF_LABEL (sizeof(struct pack_label) + PTR_SIZE_DIFF * 2)
 
 struct pack_quad {
 	int texid;
