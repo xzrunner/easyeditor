@@ -214,6 +214,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\spritepack.c"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\spritepack.h"
 			>
 		</File>
