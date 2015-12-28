@@ -1,8 +1,8 @@
 #include "Particle2DToBin.h"
 #include "pack_unpack.h"
-#include "spritepack.h"
 
 #include <particle2d.h>
+#include <spritepack.h>
 
 namespace librespacker
 {

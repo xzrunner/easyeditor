@@ -1,5 +1,4 @@
 #include "PackNodeFactory.h"
-#include "spritepack.h"
 #include "PackUI.h"
 
 // picture
@@ -36,6 +35,8 @@
 
 // clipbox
 #include "ClipboxBuilder.h"
+
+#include <spritepack.h>
 
 namespace librespacker
 {

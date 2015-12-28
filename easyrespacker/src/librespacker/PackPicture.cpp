@@ -1,11 +1,12 @@
 #include "PackPicture.h"
-#include "spritepack.h"
 
 #include "PictureToLuaString.h"
 #include "PictureFromLua.h"
 
 #include "PictureToBin.h"
 #include "PictureFromBin.h"
+
+#include <spritepack.h>
 
 namespace librespacker
 {

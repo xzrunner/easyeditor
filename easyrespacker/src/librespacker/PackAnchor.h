@@ -2,7 +2,8 @@
 #define _LIBRESPACKER_PACK_ANCHOR_H_
 
 #include "IPackNode.h"
-#include "spritepack.h"
+
+#include <spritepack.h>
 
 #include <drag2d.h>
 

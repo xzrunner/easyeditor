@@ -1,7 +1,7 @@
 #include "AnimToLuaString.h"
-#include "spritepack.h"
 
 #include <easybuilder.h>
+#include <spritepack.h>
 
 namespace lua = ebuilder::lua;
 

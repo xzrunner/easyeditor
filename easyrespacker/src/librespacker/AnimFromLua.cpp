@@ -1,7 +1,8 @@
 #include "AnimFromLua.h"
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
-#include "spritepack.h"
+
+#include <spritepack.h>
 
 namespace librespacker
 {

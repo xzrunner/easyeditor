@@ -2,12 +2,13 @@
 #include "PackNodeFactory.h"
 #include "IPackNode.h"
 #include "pack_unpack.h"
-#include "spritepack.h"
 #include "Lzma.h"
 
 #include "PackPNG.h"
 #include "PackPVR.h"
 #include "PackPKM.h"
+
+#include <spritepack.h>
 
 namespace librespacker
 {

@@ -1,6 +1,5 @@
 #include "UnpackNodeFactory.h"
 #include "pack_unpack.h"
-#include "spritepack.h"
 #include "LuaDataHelper.h"
 
 #include "PackPicture.h"
@@ -10,6 +9,8 @@
 #include "PackParticle3D.h"
 #include "PackParticle2D.h"
 #include "PackClipbox.h"
+
+#include <spritepack.h>
 
 extern "C" {
 #include <lua.h>
