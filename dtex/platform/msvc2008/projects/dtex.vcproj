@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\rg_etc1;..\..\..\external\ejoy2d;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\libpng\include\libpng;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\external\rg_etc1;..\..\..\external\ejoy2d;..\..\..\..\particle\src;&quot;..\..\..\..\editor-external\libpng\include\libpng&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\libpng\include\libpng;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -533,66 +533,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\dtex_stack.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="external"
-			>
-			<Filter
-				Name="rg_etc1"
-				>
-				<File
-					RelativePath="..\..\..\external\rg_etc1\rg_etc1.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\rg_etc1\rg_etc1.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\rg_etc1\rg_etc1_for_c.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\rg_etc1\rg_etc1_for_c.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="ejoy2d"
-				>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\matrix.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\matrix.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\opengl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\shader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\sprite.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\sprite.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\spritepack.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\external\ejoy2d\spritepack.h"
 					>
 				</File>
 			</Filter>

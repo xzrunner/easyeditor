@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easygui\src;&quot;..\..\..\..\editor-external\gl\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easygui\src;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easygui\src;&quot;..\..\..\..\editor-external\gl\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easygui\src;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
