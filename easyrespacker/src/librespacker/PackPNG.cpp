@@ -131,9 +131,11 @@ void PackPNG::Store(std::ofstream& fout, uint8_t* buffer,
 		Lzma::Compress(&dst, &dst_sz, buf, sz);
 		delete[] buf;
 
-		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
-		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
-		delete[] dst;
+		if (dst_sz > 0) {
+			fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+			fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+			delete[] dst;
+		}
 	}
 	else
 	{

@@ -76,9 +76,11 @@ void PackPKM::Store(const std::string& filepath, float scale) const
 
 		delete[] buf;
 
-		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
-		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
-		delete[] dst;
+		if (dst_sz > 0) {
+			fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+			fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+			delete[] dst;
+		}
 	}
 	else
 	{

@@ -86,9 +86,10 @@ void PackToBin::PackEPE(const std::string& filepath,
 		uint8_t* dst = NULL;
 		size_t dst_sz;
 		Lzma::Compress(&dst, &dst_sz, buf, out_sz);
-
-		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(dst_sz));
-		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+		if (dst_sz > 0) {
+			fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(dst_sz));
+			fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+		}
 	} else {
 		int32_t sz = -(int)out_sz;
 		fout.write(reinterpret_cast<const char*>(&sz), sizeof(out_sz));

@@ -45,7 +45,11 @@ void Lzma::Compress(unsigned char** dst, size_t* dst_len,
 	size_t prop_sz = PropHeaderSize;
 	int result = LzmaEncode(buf + HeaderSize, &out_sz, src, src_len, &props, buf + 4, &prop_sz, 
 		0, NULL, &g_Alloc, &g_Alloc);
-	assert(result == SZ_OK);
+	if (SZ_OK != result) {
+		*dst_len = 0;
+		*dst = NULL;
+		return;
+	}
 
 	*dst_len = out_sz + HeaderSize;
 
