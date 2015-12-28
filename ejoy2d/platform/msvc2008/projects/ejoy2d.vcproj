@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\render;..\..\..\..\particle\src;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\render;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\render;..\..\..\..\particle\src;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\render;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -190,7 +190,31 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\matrix.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\matrix.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\opengl.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\sprite.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\sprite.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\spritepack.h"
 			>
 		</File>
 	</Files>
