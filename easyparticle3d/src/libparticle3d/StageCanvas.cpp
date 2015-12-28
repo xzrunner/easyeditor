@@ -30,7 +30,10 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	if (m_stage->m_ps) {
-		m_stage->m_ps->Draw(d2d::Matrix());
+		d2d::Matrix mt;
+		const d2d::Vector& pos = m_stage->m_ps->GetPosition();
+		mt.setTranslation(pos.x, pos.y);
+		m_stage->m_ps->Draw(mt);
 	}
 
 	m_stage->DrawEditOP();
