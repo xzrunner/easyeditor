@@ -20,7 +20,7 @@ d2d::ISprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
 
 p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p3d)
 {
-	int sz = SIZEOF_P3D_PS_CONFIG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
+	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 

@@ -57,7 +57,7 @@ struct pack_particle3d {
 	struct p3d_emitter_cfg cfg;
 };
 
-#define SIZEOF_PARTICLE3D (SIZEOF_PS3D_SPRITE + SIZEOF_P3D_PS_CONFIG)
+#define SIZEOF_PARTICLE3D (SIZEOF_PS3D_SPRITE + SIZEOF_P3D_EMITTER_CFG)
 
 struct matrix;
 

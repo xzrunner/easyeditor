@@ -11,7 +11,7 @@ int Particle3DFromBin::Size(const PackParticle3D* p3d)
 	int sz = 0;
 	sz += SIZEOF_PARTICLE3D;
 	sz += p3d->components.size() * SIZEOF_P3D_SYMBOL;
-	sz += SIZEOF_P3D_PARTICLE_SYSTEM;
+	sz += SIZEOF_P3D_PARTICLE_EMITTER;
 	return sz;
 }
 
