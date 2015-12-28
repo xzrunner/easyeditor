@@ -12,7 +12,7 @@ class SymbolPropertySetting : public IPropertySetting
 {
 public:
 	SymbolPropertySetting(ISymbol* symbol);
-	SymbolPropertySetting(std::string* name);
+	SymbolPropertySetting(std::string* name, std::string* tag);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -24,6 +24,7 @@ protected:
 	ISymbol* m_symbol;
 
 	std::string* m_name;
+	std::string* m_tag;
 
 }; // SymbolPropertySetting
 

@@ -148,10 +148,11 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	d2d::SymbolPropertySetting::UpdateProperties(pg);
 
-	if (m_symbol) 
+	if (m_symbol) {
 		pg->GetProperty(wxT("Groups"))->SetValue(GetGroupNames());
-	else
+	} else {
 		pg->GetProperty(wxT("Groups"))->SetValue(wxEmptyString);
+	}
 
 	if (m_symbol)
 	{
@@ -176,10 +177,11 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	d2d::SymbolPropertySetting::InitProperties(pg);
 
-	if (m_symbol)
+	if (m_symbol) {
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, GetGroupNames()));
-	else
+	} else {
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, wxEmptyString));
+	}
 
 	wxPGProperty* cbProp = pg->Append(new wxStringProperty(("Clipbox"), wxPG_LABEL, wxT("<composed>")));
 	pg->AppendIn(cbProp, new wxIntProperty(wxT("xmin"), wxPG_LABEL, 0));

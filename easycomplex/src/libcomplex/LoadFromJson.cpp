@@ -9,6 +9,7 @@ namespace ecomplex
 void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol* complex)
 {
 	complex->name = value["name"].asString();
+	complex->tag = value["tag"].asString();
 
 	complex->m_clipbox.xMin = value["xmin"].asInt();
 	complex->m_clipbox.xMax = value["xmax"].asInt();

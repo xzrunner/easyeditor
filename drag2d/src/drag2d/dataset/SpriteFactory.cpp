@@ -63,6 +63,10 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		sprite->name = "_sprite"+wxString::FromDouble(m_id++);
 	}
 
+	if (!symbol->tag.empty()) {
+		sprite->tag = symbol->tag;
+	}
+
 	return sprite;
 }
 

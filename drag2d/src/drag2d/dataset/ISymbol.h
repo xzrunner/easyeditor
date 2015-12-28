@@ -51,6 +51,7 @@ public:
 
 public:
 	std::string name;
+	std::string tag;
 
 protected:
 	virtual void LoadResources() = 0;

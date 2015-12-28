@@ -11,6 +11,7 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 //	centerSymbol(symbol);
 
 	value["name"] = symbol->name;
+	value["tag"] = symbol->tag;
 
 	value["xmin"] = symbol->m_clipbox.xMin;
 	value["xmax"] = symbol->m_clipbox.xMax;
@@ -36,6 +37,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 	Json::Value value;
 
 	value["name"] = symbol->name;
+	value["tag"] = symbol->tag;
 
 	value["xmin"] = symbol->m_clipbox.xMin;
 	value["xmax"] = symbol->m_clipbox.xMax;
