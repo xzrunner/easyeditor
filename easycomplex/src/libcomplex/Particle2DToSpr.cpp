@@ -20,7 +20,7 @@ d2d::ISprite* Particle2DToSpr::Trans(const librespacker::PackParticle2D* p2d)
 
 p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D* p2d)
 {
-	int sz = SIZEOF_P2D_PS_CONFIG + SIZEOF_P2D_SYMBOL * eparticle2d::MAX_COMPONENTS;
+	int sz = SIZEOF_P2D_EMITTER_CFG + SIZEOF_P2D_SYMBOL * eparticle2d::MAX_COMPONENTS;
 	p2d_emitter_cfg* cfg = (p2d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 
