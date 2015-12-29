@@ -74,7 +74,9 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		break;
 	case PS_GRAVITY:
 		m_et->cfg->gravity = data.val0 * 0.3f;
-		m_inv_record->SetGravity(m_et->cfg->gravity);
+		if (m_inv_record) {
+			m_inv_record->SetGravity(m_et->cfg->gravity);
+		}
 		break;
 	case PS_LINEAR_ACC:
 		m_et->cfg->linear_acc = data.val0;
