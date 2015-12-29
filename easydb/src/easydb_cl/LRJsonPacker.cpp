@@ -47,59 +47,6 @@ void LRJsonPacker::Run(const std::string& filepath)
 	}
 }
 
-void LRJsonPacker::PackAll(const std::string& filepath)
-{
-	Json::Value lr_val;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, lr_val);
-	fin.close();
-
-	m_dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
-
-	Json::Value out_val;
-
-	out_val["width"] = lr_val["size"]["width"];
-	out_val["height"] = lr_val["size"]["height"];
-	out_val["view width"] = lr_val["size"]["view width"];
-	out_val["view height"] = lr_val["size"]["view height"];
-
-	lr::Grids grids;
-	int w = lr_val["size"]["width"].asUInt(),
-		h = lr_val["size"]["height"].asUInt();
-	grids.Build(w, h);
-
-	int col, row;
-	grids.GetGridSize(col, row);
-	out_val["col"] = col;
-	out_val["row"] = row;
-
-	std::string lr_name = get_lr_name_from_file(filepath);
-
-	ParserSpecial(lr_val, lr_name, out_val);
-	ParserCharacter(lr_val, grids, 2, "character", out_val);
-	ParserPoint(lr_val, 3, "point", out_val);
-	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
-	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
-	ParserShapeLayer(lr_val, grids, true, 6, "collision region", out_val);
-	ParserCamera(lr_val, 7, "camera", out_val);
-	ParserLevel(lr_val, 8, "level", out_val);
-
-	out_val["package"] = lr_name + "_scene";
-
-	out_val["base"] = lr_name + "_base";
-
-	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(outfile.c_str());
-	std::locale::global(std::locale("C"));
-	writer.write(fout, out_val);
-	fout.close();
-}
-
 void LRJsonPacker::PackGraphics(const std::string& filepath)
 {
 	Json::Value lr_val;
@@ -410,12 +357,31 @@ void LRJsonPacker::ParserLevel(const Json::Value& src_val, int layer_idx, const 
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!spr_val.isNull()) 
 	{
+		std::string spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		if (!symbol) {
+			std::string filepath = spr_val["filepath"].asString();
+			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
+				m_dir.c_str(), filepath.c_str());
+		}
+
 		Json::Value level_val;
+
+		level_val["name"] = spr_val["name"];
+
+		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		sprite->Load(spr_val);
+		level_val["x"] = sprite->GetPosition().x;
+		level_val["y"] = sprite->GetPosition().y;
+
 		std::string tag = spr_val["tag"].asString();
 		ParserSprTag(tag, level_val);
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = level_val;
+
+		sprite->Release();
+		symbol->Release();
 
 		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	}

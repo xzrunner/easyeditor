@@ -28,7 +28,6 @@ public:
 	void Run(const std::string& filepath);
 
 private:
-	void PackAll(const std::string& filepath);
 	void PackGraphics(const std::string& filepath);
 	void PackLogic(const std::string& filepath);
 
