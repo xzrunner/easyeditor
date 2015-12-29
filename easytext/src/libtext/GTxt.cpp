@@ -48,14 +48,18 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	texcoords[2].set(_texcoords[4], _texcoords[5]);
 	texcoords[3].set(_texcoords[6], _texcoords[7]);
 
-	d2d::Colorf multi_col = *rp->mul;
-	multi_col.a *= ds->alpha;
+	d2d::ColorTrans color;
+	if (rp->mul) {
+		d2d::Colorf multi_col = *rp->mul;
+		multi_col.a *= ds->alpha;
+		color.multi = multi_col;
+	} 
+	if (rp->add) {
+		color.add = *rp->add;
+	}
 
 	d2d::ShaderMgr* mgr = d2d::ShaderMgr::Instance();
 	mgr->sprite();
-	d2d::ColorTrans color;
-	color.multi = multi_col;
-	color.add = *rp->add;
 	mgr->SetSpriteColor(color);
 	mgr->Draw(vertices, texcoords, id);
 }
@@ -114,12 +118,20 @@ static void
 render(int id, float* _texcoords, float x, float y, float w, float h, struct gtxt_draw_style* ds, void* ud) 
 {
  	render_params* rp = (render_params*)ud;
-	if (ds->decoration.type == GRDT_BG) {
-		render_decoration(*rp->mt, x, y, w, h, ds);
-		render_glyph(id, _texcoords, x, y, w, h, ds, rp);
+	if (ds) {
+		if (ds->decoration.type == GRDT_BG) {
+			render_decoration(*rp->mt, x, y, w, h, ds);
+			render_glyph(id, _texcoords, x, y, w, h, ds, rp);
+		} else {
+			render_glyph(id, _texcoords, x, y, w, h, ds, rp);
+			render_decoration(*rp->mt, x, y, w, h, ds);
+		}
 	} else {
-		render_glyph(id, _texcoords, x, y, w, h, ds, rp);
-		render_decoration(*rp->mt, x, y, w, h, ds);
+		struct gtxt_draw_style ds;
+		ds.alpha = 1;
+		ds.scale = 1;
+		ds.offset_x = ds.offset_y = 0;
+		render_glyph(id, _texcoords, x, y, w, h, &ds, rp);
 	}
 }
 
@@ -224,7 +236,12 @@ void GTxt::Draw(const d2d::Matrix& mt, const std::string& str) const
 	style.gs.edge_size = 1;
 	style.gs.edge_color.integer = 0x000000ff;
 
-	gtxt_label_draw(str.c_str(), &style, render, (void*)&mt);
+	render_params rp;
+	rp.mt = &mt;
+	rp.mul = NULL;
+	rp.add = NULL;
+
+	gtxt_label_draw(str.c_str(), &style, render, (void*)&rp);
 }
 
 void GTxt::Reload(const Sprite* spr) 
