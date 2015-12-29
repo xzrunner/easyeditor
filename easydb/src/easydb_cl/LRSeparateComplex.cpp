@@ -64,7 +64,7 @@ void LRSeparateComplex::Run(const std::string& filepath)
 	std::string dst_folder = m_output_dir;
 	d2d::mk_dir(dst_folder, false);
 
-	for (int layer_idx = 0; layer_idx < 8; ++layer_idx)
+	for (int layer_idx = 0; layer_idx < 9; ++layer_idx)
 	{
 		// shape layer
 		if (layer_idx == 4 || layer_idx == 5 || layer_idx == 6) {
