@@ -185,13 +185,18 @@ void StagePanel::PointQuery(const d2d::Vector& pos)
 
 void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 {
+	if (m_layers.empty()) {
+		for_each(layers.begin(), layers.end(), d2d::RetainObjectFunctor<Layer>());
+		m_layers = layers;
+		return;
+	}
+
+	assert(m_layers.size() >= layers.size());
 	for (int i = 0, n = layers.size(); i < n; ++i) {
-		layers[i]->Retain();
-	}
-	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->Release();
+		layers[i]->Retain();
+		m_layers[i] = layers[i];
 	}
-	m_layers = layers;
 }
 
 void StagePanel::BuildGrids(int w, int h)
