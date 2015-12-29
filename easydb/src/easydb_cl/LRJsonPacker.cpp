@@ -178,7 +178,8 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 	ParserShapeLayer(lr_val, grids, false, 4, "path", out_val);
 	ParserShapeLayer(lr_val, grids, true, 5, "region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
-	
+	ParserLevel(lr_val, 8, "level", out_val);
+
 	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
