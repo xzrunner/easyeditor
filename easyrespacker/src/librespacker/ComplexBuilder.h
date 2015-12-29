@@ -30,6 +30,8 @@ private:
 
 	IPackNode* LoadAnchor(const ecomplex::Symbol* symbol);
 
+	void WrapParticle(PackAnimation* anim);
+
 	static void GroupFromTag(const std::vector<d2d::ISprite*>& src, 
 		std::map<std::string, std::vector<d2d::ISprite*> >& dst,
 		std::vector<d2d::ISprite*>& others);
@@ -40,6 +42,8 @@ private:
 	ClipboxBuilder* m_cb_builder;
 
 	std::map<const ecomplex::Symbol*, const PackAnimation*> m_map_data;
+
+	std::vector<PackAnimation*> m_gen_nodes;
 
 }; // ComplexBuilder
 
