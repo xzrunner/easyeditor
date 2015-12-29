@@ -31,10 +31,7 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	if (m_stage->m_ps) {
-		const p3d_emitter* et = m_stage->m_ps->GetEmitter();
-		d2d::Matrix mt;
-		mt.translate(et->mat[4], et->mat[5]);
-		m_stage->m_ps->Draw(mt);
+		m_stage->m_ps->Draw(m_stage->GetPSMat());
 	}
 
 	m_stage->DrawEditOP();

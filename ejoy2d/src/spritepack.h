@@ -24,14 +24,7 @@
 #define PTR_SIZE_DIFF (8 - sizeof(void *))
 #define SIZEOF_POINTER 8
 
-struct pack_particle3d {
-	struct p3d_emitter_cfg cfg;
-};
 #define SIZEOF_PARTICLE3D SIZEOF_P3D_EMITTER_CFG
-
-struct pack_particle2d {
-	struct p2d_emitter_cfg cfg;
-};
 #define SIZEOF_PARTICLE2D SIZEOF_P2D_EMITTER_CFG
 
 struct matrix;

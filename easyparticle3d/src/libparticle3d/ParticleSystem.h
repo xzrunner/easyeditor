@@ -38,9 +38,7 @@ public:
 
 	virtual void Draw(const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
 
-	void Update(float dt);
-
-	void SetEmitterMat(const d2d::Matrix& mt) const;
+	void Update(float dt, const d2d::Matrix& mat);
 
 	void SetDirection(float x, float y, float z);
 	void SetDirection(const Quaternion& dir);

@@ -38,23 +38,29 @@ struct sprite {
 		struct pack_label *label;
 		struct pack_pannel *pannel;
 		struct matrix *mat;
-		struct pack_particle3d *p3d;
-		struct pack_particle2d *p2d;
+		struct p3d_emitter_cfg* p3d_cfg;
+		struct p2d_emitter_cfg* p2d_cfg;
 	} s;
 	struct matrix mat;
 	int start_frame;
 	int total_frame;
 	int frame;
 	int flags;
+	int time;
 	const char *name;	// name for parent
 	struct material *material;
 	union {
+		struct p3d_emitter* p3d;
+		struct p2d_emitter* p2d;
+	} ext;
+	union {
 		struct sprite * children[1];
-		struct rich_text * rich_text;
+		const char* text;
 		int scissor;
 		struct anchor_data *anchor;
 	} data;
 };
+
 
 // sprite_size must be call before sprite_init
 int sprite_size(struct dtex_package* pkg, int id);

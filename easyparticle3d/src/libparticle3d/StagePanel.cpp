@@ -37,12 +37,17 @@ bool StagePanel::Update(int version)
 		m_last_time = curr;
 
 		if (m_ps) {
-			m_ps->Update((float)dt / CLOCKS_PER_SEC);
+			m_ps->Update((float)dt / CLOCKS_PER_SEC, m_ps_mat);
 			ret = true;
 		}
 	}
 
 	return ret;
+}
+
+void StagePanel::SetPSMat(const d2d::Vector& pos)
+{
+	m_ps_mat.setTranslation(pos.x, pos.y);
 }
 
 }

@@ -18,6 +18,9 @@ public:
 
 	virtual bool Update(int version);
 
+	void SetPSMat(const d2d::Vector& pos);
+	const d2d::Matrix& GetPSMat() const { return m_ps_mat; }
+
 private:
 	void UpdateControl();
 
@@ -28,6 +31,8 @@ public:
 
 private:
 	clock_t m_last_time;
+
+	d2d::Matrix m_ps_mat;
 
 }; // StagePanel
 

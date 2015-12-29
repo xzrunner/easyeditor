@@ -24,11 +24,11 @@ sprite_size(struct dtex_package* pkg, int id) {
 		struct pack_animation * ani = (struct pack_animation *)ej_pkg->data[id];
 		return sizeof(struct sprite) + (ani->component_number - 1) * sizeof(struct sprite *);
 	} else if (type == TYPE_PARTICLE3D) {
-		struct pack_particle3d * p3d = (struct pack_particle3d *)ej_pkg->data[id];
-		return sizeof(struct sprite) + (p3d->cfg.symbol_count - 1) * sizeof(struct sprite *);
+		struct p3d_emitter_cfg* p3d_cfg = (struct p3d_emitter_cfg*)ej_pkg->data[id];
+		return sizeof(struct sprite) + (p3d_cfg->symbol_count - 1) * sizeof(struct sprite*);
 	} else if (type == TYPE_PARTICLE2D) {
-		struct pack_particle2d * p2d = (struct pack_particle2d *)ej_pkg->data[id];
-		return sizeof(struct sprite) + (p2d->cfg.symbol_count - 1) * sizeof(struct sprite *);
+		struct p2d_emitter_cfg* p2d_cfg = (struct p2d_emitter_cfg*)ej_pkg->data[id];
+		return sizeof(struct sprite) + (p2d_cfg->symbol_count - 1) * sizeof(struct sprite*);
 	} else {
 		return sizeof(struct sprite);
 	}
@@ -69,6 +69,7 @@ sprite_action(struct sprite *s, const char * action) {
 void
 sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 	struct sprite_pack* ej_pkg = pkg->ej_pkg;
+
 	if (id < 0 || id >=	ej_pkg->n)
 		return;
 	s->pkg = pkg;
@@ -81,6 +82,7 @@ sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 	s->t.bmap = 0x0000ffff;
 	s->t.program = PROGRAM_DEFAULT;
 	s->flags = 0;
+	s->time = 0;
 	s->name = NULL;
 	s->id = id;
 	s->type = ej_pkg->type[id];
@@ -88,6 +90,7 @@ sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 	s->start_frame = 0;
 	s->total_frame = 0;
 	s->frame = 0;
+	s->ext.p3d = NULL;
 	if (s->type == TYPE_ANIMATION) {
 		struct pack_animation * ani = (struct pack_animation *)ej_pkg->data[id];
 		s->s.ani = ani;
@@ -99,23 +102,27 @@ sprite_init(struct sprite * s, struct dtex_package* pkg, int id, int sz) {
 			s->data.children[i] = NULL;
 		}
 	} else if (s->type == TYPE_PARTICLE3D) {
-		struct pack_particle3d* p3d = (struct pack_particle3d*)ej_pkg->data[id];
-		s->s.p3d = p3d;
-		int i;
-		int n = p3d->cfg.symbol_count;
+		struct p3d_emitter_cfg* cfg = (struct p3d_emitter_cfg*)ej_pkg->data[id];
+		s->s.p3d_cfg = cfg;
+		int n = cfg->symbol_count;
 		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
-		for (i=0; i<n ;i++) {
+		for (int i = 0; i < n ; ++i) {
 			s->data.children[i] = NULL;
 		}
+		struct p3d_emitter* et = p3d_emitter_create(cfg);
+		et->active = true;
+		s->ext.p3d = et;
 	} else if (s->type == TYPE_PARTICLE2D) {
-		struct pack_particle2d* p2d = (struct pack_particle2d*)ej_pkg->data[id];
-		s->s.p2d = p2d;
-		int i;
-		int n = p2d->cfg.symbol_count;
+		struct p2d_emitter_cfg* cfg = (struct p2d_emitter_cfg*)ej_pkg->data[id];
+		s->s.p2d_cfg = cfg;
+		int n = cfg->symbol_count;
 		assert(sz >= sizeof(struct sprite) + (n - 1) * sizeof(struct sprite *));
-		for (i=0; i<n ;i++) {
+		for (int i = 0; i < n ; ++i) {
 			s->data.children[i] = NULL;
 		}
+		struct p2d_emitter* et = p2d_emitter_create(cfg);
+		et->active = true;
+		s->ext.p2d = et;
 	} else {
 		s->s.pic = (struct pack_picture *)ej_pkg->data[id];
 		memset(&s->data, 0, sizeof(s->data));
@@ -261,19 +268,19 @@ sprite_component(struct sprite *s, int index) {
 		}
 		return ani->component[index].id;
 	} else if (s->type == TYPE_PARTICLE3D) {
-		struct pack_particle3d* pp = (struct pack_particle3d*)s->s.p3d;
-		if (index < 0 || index >= pp->cfg.symbol_count) {
+		struct p3d_emitter_cfg* p3d_cfg = s->s.p3d_cfg;
+		if (index < 0 || index >= p3d_cfg->symbol_count) {
 			return -1;
 		}
-		uint32_t id = (uint32_t)pp->cfg.symbols[index].ud;
+		uint32_t id = (uint32_t)p3d_cfg->symbols[index].ud;
 		return (id >> 16) & 0xffff;
 	} else if (s->type == TYPE_PARTICLE2D) {
-		struct pack_particle2d* pp = (struct pack_particle2d*)s->s.p2d;
-		if (index < 0 || index >= pp->cfg.symbol_count) {
+		struct p2d_emitter_cfg* p2d_cfg = (struct p2d_emitter_cfg*)s->s.p2d_cfg;
+		if (index < 0 || index >= p2d_cfg->symbol_count) {
 			return -1;
 		}
-		uint32_t id = (uint32_t)pp->cfg.symbols[index].ud;
-		return (id >> 16) & 0xffff;		
+		uint32_t id = (uint32_t)p2d_cfg->symbols[index].ud;
+		return (id >> 16) & 0xffff;
 	} else {
 		return -1;
 	}
@@ -292,17 +299,24 @@ sprite_childname(struct sprite *s, int index) {
 void
 sprite_mount(struct sprite *parent, int index, struct sprite *child) {
 	assert(parent->type == TYPE_ANIMATION || parent->type == TYPE_PARTICLE3D || parent->type == TYPE_PARTICLE2D);
+	if (child && child->type == TYPE_PARTICLE3D && parent && !parent->ext.p3d) {
+		struct p3d_emitter* et = p3d_emitter_create(child->s.p3d_cfg);
+		et->active = true;
+		parent->ext.p3d = et;
+	} else if (child && child->type == TYPE_PARTICLE2D && parent && !parent->ext.p2d) {
+		struct p2d_emitter* et = p2d_emitter_create(child->s.p2d_cfg);
+		et->active = true;
+		parent->ext.p2d = et;
+	}
 
 	int num = 0;
 	if (parent->type == TYPE_ANIMATION) {
 		struct pack_animation *ani = parent->s.ani;
 		num = ani->component_number;
 	} else if (parent->type == TYPE_PARTICLE3D) {
-		struct pack_particle3d* p3d = parent->s.p3d;
-		num = p3d->cfg.symbol_count;
+		num = parent->s.p3d_cfg->symbol_count;
 	} else if (parent->type == TYPE_PARTICLE2D) {
-		struct pack_particle2d* p2d = parent->s.p2d;
-		num = p2d->cfg.symbol_count;
+		num = parent->s.p2d_cfg->symbol_count;
 	}
 
 	assert(index >= 0 && index < num);

@@ -153,21 +153,18 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 	}
 }
 
-void ParticleSystem::Update(float dt)
+void ParticleSystem::Update(float dt, const d2d::Matrix& mat)
 {
-	p3d_emitter_update(m_et, dt);
-}
+	const float* src = mat.getElements();
+	float mt[6];
+	mt[0] = src[0];
+	mt[1] = src[1];
+	mt[2] = src[4];
+	mt[3] = src[5];
+	mt[4] = src[12];
+	mt[5] = src[13];	
 
-void ParticleSystem::SetEmitterMat(const d2d::Matrix& mt) const
-{
-	const float* src = mt.getElements();
-	float* mat = (float*)m_et->mat;
-	m_et->mat[0] = src[0];
-	m_et->mat[1] = src[1];
-	m_et->mat[2] = src[4];
-	m_et->mat[3] = src[5];
-	m_et->mat[4] = src[12];
-	m_et->mat[5] = src[13];	
+	p3d_emitter_update(m_et, dt, mt);
 }
 
 void ParticleSystem::SetDirection(float x, float y, float z)
