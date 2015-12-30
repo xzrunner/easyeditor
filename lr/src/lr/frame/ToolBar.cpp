@@ -28,6 +28,7 @@ void ToolBar::PopulateToolbar(int id)
 	m_toolbar->AddTool(++id, wxEmptyString, wxBITMAP(BMP_CAREA));
 	m_toolbar->AddSeparator();
 	m_toolbar->AddTool(++id, wxEmptyString, wxBITMAP(BMP_CAMERA));
+	m_toolbar->AddTool(++id, wxEmptyString, wxBITMAP(BMP_LEVEL));
 
 	m_toolbar->Realize();
 }

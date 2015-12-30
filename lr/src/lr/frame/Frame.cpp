@@ -15,7 +15,7 @@ namespace lr
 BEGIN_EVENT_TABLE(Frame, d2d::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::OnPreview)
 	EVT_MENU(ID_SETING_EXTEND, Frame::OnExtendSetting)
-	EVT_MENU_RANGE(ID_TOOLBAR+1, ID_TOOLBAR+8, Frame::OnToolBarClick)
+	EVT_MENU_RANGE(ID_TOOLBAR+1, ID_TOOLBAR+9, Frame::OnToolBarClick)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
