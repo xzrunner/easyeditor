@@ -27,6 +27,9 @@ enum SUBJECT_ID {
 
 	MSG_SET_CANVAS_DIRTY,
 
+	// layer panel
+	MSG_CHANGE_LAYER_MGR_MSG,
+
 	// stage panel
 	MSG_EDIT_UNDO,
 	MSG_EDIT_REDO,

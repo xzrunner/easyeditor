@@ -868,6 +868,14 @@
 					RelativePath="..\..\..\src\drag2d\dataset\Layer.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\LayerMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\LayerMgr.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="shape"
@@ -2574,6 +2582,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\GroupTreeVisitor.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="layer"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LayerList.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LayerList.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LayerPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LayerPanel.h"
 					>
 				</File>
 			</Filter>

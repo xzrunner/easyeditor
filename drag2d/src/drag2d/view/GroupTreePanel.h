@@ -31,8 +31,6 @@ public:
 
 private:
 	void InitLayout();
-	
-	void InitTitleLayout(wxSizer* sizer);
 	wxSizer* InitHeaderLayout();
 
 private:

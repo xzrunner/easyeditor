@@ -21,31 +21,45 @@ Layer::Layer(int id, LibraryPanel* library)
 void Layer::TraverseSprite(d2d::IVisitor& visitor, bool order/* = true*/) const
 {
 	m_sprites.Traverse(visitor, order);
+	m_layer_mgr.TraverseSprite(visitor, d2d::DT_ALL, order);
 }
 
 void Layer::TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
 {
 	m_sprites.Traverse(visitor, type, order);
+	m_layer_mgr.TraverseSprite(visitor, type, order);
 }
 
 bool Layer::RemoveSprite(Object* obj)
 {
 	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
 	m_name_set.erase(spr->name);
-	return m_sprites.Remove(spr);
+
+	if (m_layer_mgr.selected) {
+		return m_layer_mgr.selected->Remove(spr);
+	} else {
+		return m_sprites.Remove(spr);
+	}
 }
 
 bool Layer::InsertSprite(Object* obj, int idx)
 {
 	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
 	CheckSpriteName(spr);
-	return m_sprites.Insert(spr, idx);
+
+	if (m_layer_mgr.selected) {
+		return m_layer_mgr.selected->Insert(spr);
+	} else {
+		return m_sprites.Insert(spr, idx);
+	}
 }
 
 bool Layer::ClearSprite()
 {
 	m_next_id = 0;
 	m_name_set.clear();
+
+	m_layer_mgr.Clear();
 
 	return m_sprites.Clear();
 }
@@ -93,6 +107,10 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int lay
 
 	LoadSprites(val["sprite"], dir);
 	LoadShapes(val["shape"], dir);
+
+	if (!val["layers"].isNull()) {
+		m_layer_mgr.LoadFromFile(val["layers"], dir);
+	}
 }
 
 void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
@@ -103,6 +121,8 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	if (!m_base_filepath.empty()) {
 		val["base filepath"] = m_base_filepath;
 	}
+
+	m_layer_mgr.StoreToFile(val["layers"], dir);
 
 	std::vector<d2d::ISprite*> sprites;
 	m_sprites.Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_ALL);

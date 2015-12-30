@@ -45,6 +45,8 @@ public:
 
 	int GetID() const { return m_id; }
 
+	d2d::LayerMgr* GetLayerMgr() { return &m_layer_mgr; }
+
 private:
 	static bool IsValidFloat(float f);
 
@@ -59,7 +61,7 @@ private:
 
 	void LoadShapesUD(const Json::Value& spr_val, d2d::ISprite* spr) const;
 	void StoreShapesUD(d2d::ISprite* spr, Json::Value& spr_val) const;
-
+	
 private:
 	template<typename T>
 	class QueryNameVisitor : public d2d::IVisitor
@@ -90,6 +92,8 @@ private:
 
 	int m_next_id;
 	std::set<std::string> m_name_set;
+
+	d2d::LayerMgr m_layer_mgr;
 
 }; // Layer
 

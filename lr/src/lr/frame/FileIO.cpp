@@ -4,6 +4,7 @@
 #include "dataset/LayerFactory.h"
 #include "frame/SettingCfg.h"
 #include "view/LibraryPanel.h"
+#include "view/LibraryPage.h"
 #include "view/StagePanel.h"
 
 namespace lr
@@ -77,6 +78,9 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	}
 
 	library->Refresh();
+
+	Layer* layer = static_cast<LibraryPage*>(library->GetCurrPage())->GetLayer();
+	d2d::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
 }
 
 void FileIO::Store(const char* filename, LibraryPanel* library,

@@ -1,116 +1,109 @@
 #include "Layer.h"
+#include "ISymbol.h"
+#include "SymbolSearcher.h"
+#include "SymbolMgr.h"
+#include "SpriteFactory.h"
 
-#include "dataset/ISprite.h"
-#include "dataset/IShape.h"
+#include "common/StringTools.h"
+#include "common/visitors.h"
+#include "common/FileNameTools.h"
+#include "common/Exception.h"
 
 namespace d2d
 {
 
 Layer::Layer()
+	: visible(true)
+	, editable(true)
 {
 	static int count = 0;
-	m_name = wxT("layer") + wxString::FromDouble(count++);
+	name = std::string("layer") + StringTools::ToString(count++);
 }
 
 Layer::~Layer()
 {
-	clear();
+	Clear();
 }
 
-void Layer::setName(const wxString& name)
+void Layer::TraverseSprite(IVisitor& visitor, DataTraverseType type, bool order) const
 {
-	m_name = name;
-}
-
-void Layer::traverseSprites(IVisitor& visitor) const
-{
-	std::vector<ISprite*>::const_iterator itr = m_sprites.begin();
-	for ( ; itr != m_sprites.end(); ++itr)
+	if (type == DT_EDITABLE && editable ||
+		type == DT_VISIBLE && visible ||
+		type == DT_ALL || type == DT_SELECTABLE)
 	{
-		bool hasNext;
-		visitor.Visit(*itr, hasNext);
-		if (!hasNext) break;
+		m_sprites.Traverse(visitor, type, order);
 	}
 }
 
-void Layer::traverseShapes(IVisitor& visitor) const
+bool Layer::Insert(ISprite* sprite)
 {
-	std::vector<IShape*>::const_iterator itr = m_shapes.begin();
-	for ( ; itr != m_shapes.end(); ++itr)
-	{
-		bool hasNext;
-		visitor.Visit(*itr, hasNext);
-		if (!hasNext) break;
+	if (m_sprites.IsExist(sprite)) {
+		return false;
+	} else {
+// 		sprite->visiable = m_visible;
+// 		sprite->editable = m_editable;
+		m_sprites.Insert(sprite);
+		return true;
 	}
 }
 
-void Layer::insert(ISprite* sprite)
+bool Layer::Remove(ISprite* sprite)
 {
-	m_sprites.push_back(sprite);
+	return m_sprites.Remove(sprite);
 }
 
-void Layer::remove(ISprite* sprite)
+void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 {
-	std::vector<ISprite*>::iterator itr = m_sprites.begin();
-	for ( ; itr != m_sprites.end(); ++itr)
-	{
-		if (*itr == sprite)
-		{
-			m_sprites.erase(itr);
-			break;
+	name = val["name"].asString();
+	visible = val["visible"].asBool();
+	editable = val["editable"].asBool();
+
+	int i = 0;
+	Json::Value spr_val = val["sprite"][i++];
+	while (!spr_val.isNull()) {
+		std::string filepath = SymbolSearcher::GetSymbolPath(dir, spr_val);
+		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
+		if (!symbol) {
+			std::string filepath = spr_val["filepath"].asString();
+			throw Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.c_str(), filepath.c_str());
 		}
+		SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
+
+		//		symbol->refresh();
+		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		sprite->Load(spr_val);
+		m_sprites.Insert(sprite);
+
+		symbol->Release();
+
+		spr_val = val["sprite"][i++];
+	}	
+}
+
+void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
+{
+	val["name"] = name;
+	val["visible"] = visible;
+	val["editable"] = editable;
+
+	std::vector<ISprite*> sprites;
+	m_sprites.Traverse(FetchAllVisitor<ISprite>(sprites), true);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ISprite* spr = sprites[i];
+
+		Json::Value spr_val;
+		spr_val["filepath"] = FilenameTools::getRelativePath(dir,
+			spr->GetSymbol().GetFilepath()).ToStdString();
+		spr->Store(spr_val);
+
+		val["sprite"][i] = spr_val;
 	}
 }
 
-void Layer::resetOrder(ISprite* sprite, bool up)
+void Layer::Clear()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	{
-		if (m_sprites[i] == sprite)
-		{
-			if (up && i != n - 1)
-			{
-				ISprite* tmp = m_sprites[i];
-				m_sprites[i] = m_sprites[i+1];
-				m_sprites[i+1] = tmp;
-			}
-			else if (!up && i != 0)
-			{
-				ISprite* tmp = m_sprites[i];
-				m_sprites[i] = m_sprites[i-1];
-				m_sprites[i-1] = tmp;
-			}
-		}
-	}
-}
-
-void Layer::insert(IShape* shape)
-{
-	m_shapes.push_back(shape);
-}
-
-void Layer::remove(IShape* shape)
-{
-	std::vector<IShape*>::iterator itr = m_shapes.begin();
-	for ( ; itr != m_shapes.end(); ++itr)
-	{
-		if (*itr == shape)
-		{
-			m_shapes.erase(itr);
-			break;
-		}
-	}
-}
-
-void Layer::clear()
-{
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		m_sprites[i]->Release();
-	m_sprites.clear();
-
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
-		m_shapes[i]->Release();
-	m_shapes.clear();
+	m_sprites.Clear();
+	m_shapes.Clear();
 }
 
 } // d2d

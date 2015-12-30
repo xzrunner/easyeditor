@@ -41,6 +41,7 @@
 #include "dataset/TextureFactory.h"
 #include "dataset/TexturePacker.h"
 #include "dataset/LibpngAdapter.h"
+#include "dataset/LayerMgr.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"
@@ -86,6 +87,7 @@
 #include "view/ShapeSelection.h"
 #include "view/EditPanel.h"
 #include "view/PropertyColorMonitor.h"
+#include "view/LayerPanel.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

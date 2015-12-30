@@ -27,6 +27,7 @@ void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 	d2d::LibraryPanel::OnPageChanged(event);
 
 	Layer* curr = static_cast<LibraryPage*>(GetCurrPage())->GetLayer();
+	d2d::ChangeLayerMgrSJ::Instance()->Change(curr->GetLayerMgr());
 	curr->SetEditable(true);
 	static_cast<LibraryPage*>(m_pages[event.GetSelection()])->UpdateStatusFromLayer();
 

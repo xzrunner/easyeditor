@@ -383,7 +383,7 @@ onSetSelectable(wxCommandEvent& event)
 void LayersMgrWidget::LayerWidget::
 onSetName(wxCommandEvent& event)
 {
-	m_layer->setName(event.GetString());
+	m_layer->name = event.GetString().ToStdString();
 }
 
 void LayersMgrWidget::LayerWidget::
@@ -412,7 +412,7 @@ initLayout()
 
 	sizer->AddSpacer(5);
 
-	m_name = new wxTextCtrl(this, wxID_ANY, m_layer->getName(), wxDefaultPosition, wxSize(50, -1));
+	m_name = new wxTextCtrl(this, wxID_ANY, m_layer->name, wxDefaultPosition, wxSize(50, -1));
 	Connect(m_name->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(LayerWidget::onSetName));
 	sizer->Add(m_name);
 

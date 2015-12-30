@@ -1,47 +1,45 @@
-#pragma once
+#ifndef _DRAG2D_LAYER_H_
+#define _DRAG2D_LAYER_H_
 
-#include <wx/wx.h>
-#include <vector>
-
-#include "interfaces.h"
 #include "common/Object.h"
+#include "view/ObjectVector.h"
+
+#include "ISprite.h"
+#include "IShape.h"
+
+#include <json/json.h>
 
 namespace d2d
 {	
-	class ISprite;
-	class IShape;
 
-	class Layer : public Object
- 	{
- 	public:
- 		Layer();
- 		~Layer();
+class Layer : public Object
+{
+public:
+	Layer();
+	~Layer();
 
-		const wxString& getName() const { return m_name; }
-		void setName(const wxString& name);
+	void TraverseSprite(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
-		// use IVisitor if has other implementation
-		const std::vector<ISprite*>& getSprites() const { return m_sprites; }
-		const std::vector<IShape*>& getShapes() const { return m_shapes; }
+	bool Insert(ISprite* sprite);
+	bool Remove(ISprite* sprite);
 
-		void traverseSprites(IVisitor& visitor) const;
-		void traverseShapes(IVisitor& visitor) const;
+	void LoadFromFile(const Json::Value& val, const std::string& dir);
+	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
-		void insert(ISprite* shape);
-		void remove(ISprite* shape);
-		void resetOrder(ISprite* sprite, bool up);
+	void Clear();
 
-		void insert(IShape* sprite);
-		void remove(IShape* sprite);
+public:
+	std::string name;
 
- 		void clear();
- 
- 	private:
-		wxString m_name;
+	bool visible;
+	bool editable;
 
- 		std::vector<ISprite*> m_sprites;
- 		std::vector<IShape*> m_shapes;
- 
- 	}; // Layer
+private:
+	ObjectVector<ISprite> m_sprites;
+	ObjectVector<IShape> m_shapes;
+
+}; // Layer
+
 }
 
+#endif // _DRAG2D_LAYER_H_

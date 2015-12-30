@@ -5,6 +5,7 @@
 
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
+#include "dataset/Layer.h"
 
 namespace lr
 {
@@ -14,6 +15,10 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
+
+	Layer* layer = m_library->GetLayer(0);
+	d2d::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
+
 	m_stage->GetBaseOP()->OnActive();
 	static_cast<Frame*>(parent)->GetToolBar()->SetLibrary(m_library);
 }
@@ -62,7 +67,7 @@ void Task::InitLayout()
 	left_split->SetSashGravity(0.2f);
 	left_split->SplitVertically(left, center);
 
-	right_split->SetSashGravity(0.85f);
+	right_split->SetSashGravity(0.75f);
 	right_split->SplitVertically(left_split, right);
 
 	m_root = right_split;
@@ -73,7 +78,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
 	m_library = new LibraryPanel(split);
-
 	m_property = new d2d::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.75f);
@@ -96,15 +100,21 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
+	m_layer = new d2d::LayerPanel(split);
 
-	m_viewlist = new d2d::ViewlistPanel(split);
+	wxSplitterWindow* right_split = new wxSplitterWindow(split);
+
+	m_viewlist = new d2d::ViewlistPanel(right_split);
 	m_library->SetViewlist(m_viewlist);
 
-	m_grouptree = new d2d::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
+	m_grouptree = new d2d::GroupTreePanel(right_split, m_stage, m_stage->GetKeyState());
 	m_library->SetGroupTree(m_grouptree);
 
+	right_split->SetSashGravity(0.5f);
+	right_split->SplitHorizontally(m_viewlist, m_grouptree);
+
 	split->SetSashGravity(0.5f);
-	split->SplitHorizontally(m_viewlist, m_grouptree);
+	split->SplitVertically(m_layer, right_split);
 
 	return split;
 }

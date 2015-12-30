@@ -38,6 +38,7 @@ private:
 
  	LibraryPanel* m_library;
 	d2d::PropertySettingPanel* m_property;
+	d2d::LayerPanel* m_layer;
  	StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
 	d2d::GroupTreePanel* m_grouptree;
