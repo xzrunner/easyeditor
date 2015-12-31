@@ -1003,8 +1003,14 @@ render_state_reset(struct render *R) {
 void 
 render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
 	static int draw_mode[] = {
-		GL_TRIANGLES,
+		GL_POINTS,
 		GL_LINES,
+		GL_LINE_LOOP,
+		GL_LINE_STRIP,
+		GL_TRIANGLES,
+		GL_TRIANGLE_STRIP,
+		GL_TRIANGLE_FAN,
+		GL_QUADS,
 	};
 	assert((int)mode < sizeof(draw_mode)/sizeof(int));
 	render_state_commit(R);

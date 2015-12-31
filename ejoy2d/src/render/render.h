@@ -100,8 +100,14 @@ enum UNIFORM_FORMAT {
 };
 
 enum DRAW_MODE {
-	DRAW_TRIANGLE = 0,
-	DRAW_LINE,
+	DRAW_POINTS = 0,
+	DRAW_LINES,
+	DRAW_LINE_LOOP,
+	DRAW_LINE_STRIP,
+	DRAW_TRIANGLES,
+	DRAW_TRIANGLE_STRIP,
+	DRAW_TRIANGLE_FAN,
+	DRAW_QUADS,
 };
 
 enum CULL_MODE {
@@ -150,6 +156,7 @@ void render_enablescissor(struct render *R, int enable);
 void render_state_reset(struct render *R);
 
 void render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long argb);
+void render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 void render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 
 #endif
