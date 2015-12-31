@@ -71,32 +71,16 @@ void LRSeparateComplex::Run(const std::string& filepath)
 			continue;
 		}
 
+		const Json::Value& src_layer_val = lr_val["layer"][layer_idx];
+		Json::Value& dst_layer_val = new_lr_val["layer"][layer_idx];
+
+		SeparateFromSprites(src_layer_val, dst_layer_val);
+
 		int idx = 0;
-		Json::Value src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
-		while (!src_val.isNull()) {
-			bool is_cover = false;
-
-			std::string tag = src_val["tag"].asString();
-			if (tag.find(COVER_LAYER_STR) != std::string::npos) {
-				is_cover = true;
-			}
-
-			std::string filepath = src_val["filepath"].asString();
-			if (!is_cover &&
-				d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d) &&
-				tag.find(TOP_LAYER_STR) == std::string::npos) {
-				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
-				is_cover = true;
-			} 
-						
-			Json::Value& dst_val = 	new_lr_val["layer"][layer_idx]["sprite"][idx-1];
-			if (is_cover) {
-				SeparateSprite(src_val, dst_val);
-			} else {
-				FixSpriteName(src_val, dst_val);
-			}
-
-			src_val = lr_val["layer"][layer_idx]["sprite"][idx++];
+		Json::Value cl_val = src_layer_val["layers"][idx++];
+		while (!cl_val.isNull()) {
+			SeparateFromSprites(cl_val, dst_layer_val["layers"][idx - 1]);
+			cl_val = src_layer_val["layers"][idx++];
 		}
 	}
 
@@ -108,6 +92,37 @@ void LRSeparateComplex::Run(const std::string& filepath)
 	std::locale::global(std::locale("C"));
 	writer.write(fout, new_lr_val);
 	fout.close();
+}
+
+void LRSeparateComplex::SeparateFromSprites(const Json::Value& old_val, Json::Value& new_val) 
+{
+	int idx = 0;
+	Json::Value src_val = old_val["sprite"][idx++];
+	while (!src_val.isNull()) {
+		bool is_cover = false;
+
+		std::string tag = src_val["tag"].asString();
+		if (tag.find(COVER_LAYER_STR) != std::string::npos) {
+			is_cover = true;
+		}
+
+		std::string filepath = src_val["filepath"].asString();
+		if (!is_cover &&
+			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d) &&
+			tag.find(TOP_LAYER_STR) == std::string::npos) {
+				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
+				is_cover = true;
+		} 
+
+		Json::Value& dst_val = new_val["sprite"][idx-1];
+		if (is_cover) {
+			SeparateSprite(src_val, dst_val);
+		} else {
+			FixSpriteName(src_val, dst_val);
+		}
+
+		src_val = old_val["sprite"][idx++];
+	}
 }
 
 void LRSeparateComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)

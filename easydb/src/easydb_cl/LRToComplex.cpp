@@ -48,8 +48,18 @@ void LRToComplex::Run(const std::string& filepath)
 void LRToComplex::SeparateBottomLayer(const Json::Value& lr_val, const std::string& filepath)
 {
 	Json::Value complex_val;
-	for (int layer_idx = 0; layer_idx < 2; ++layer_idx) {
-		LoadAllSpriteValue(lr_val["layer"][layer_idx]["sprite"], complex_val["sprite"], true);
+	for (int layer_idx = 0; layer_idx < 2; ++layer_idx) 
+	{
+		const Json::Value& layer_val = lr_val["layer"][layer_idx];
+
+		LoadAllSpriteValue(layer_val["sprite"], complex_val["sprite"], true);
+
+		int idx = 0;
+		Json::Value cl_val = layer_val["layers"][idx++];
+		while (!cl_val.isNull()) {
+			LoadAllSpriteValue(cl_val, complex_val["sprite"], true);
+			cl_val = layer_val["layers"][idx++];
+		}
 	}
 	OutputComplexFile(complex_val, filepath, "base");
 }
@@ -57,8 +67,18 @@ void LRToComplex::SeparateBottomLayer(const Json::Value& lr_val, const std::stri
 void LRToComplex::SeparateTopLayer(const Json::Value& lr_val, const std::string& filepath)
 {
 	Json::Value complex_val;
-	for (int layer_idx = 0; layer_idx < 2; ++layer_idx) {
-		LoadAllSpriteValue(lr_val["layer"][layer_idx]["sprite"], complex_val["sprite"], false);
+	for (int layer_idx = 0; layer_idx < 2; ++layer_idx) 
+	{
+		const Json::Value& layer_val = lr_val["layer"][layer_idx];
+
+		LoadAllSpriteValue(layer_val["sprite"], complex_val["sprite"], false);
+
+		int idx = 0;
+		Json::Value cl_val = layer_val["layers"][idx++];
+		while (!cl_val.isNull()) {
+			LoadAllSpriteValue(cl_val, complex_val["sprite"], false);
+			cl_val = layer_val["layers"][idx++];
+		}
 	}
 	OutputComplexFile(complex_val, filepath, "top");
 }

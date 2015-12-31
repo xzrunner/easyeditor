@@ -30,6 +30,8 @@ private:
 	void Run(const std::string& filepath);
 
 private:
+	void SeparateFromSprites(const Json::Value& old_val, Json::Value& new_val);
+
 	void SeparateSprite(const Json::Value& src, Json::Value& dst);
 	void FixSpriteName(const Json::Value& src, Json::Value& dst);
 
