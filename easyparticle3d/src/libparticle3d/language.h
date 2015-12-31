@@ -17,7 +17,9 @@ enum {
 	LK_HEIGHT,
 
 	LK_NAME,
+	LK_STATE,
 	LK_LOOP,
+	LK_LOCAL_DRAW,
 	LK_COUNT,
 	LK_EMISSION_TIME,
 	LK_LIFE,
@@ -64,7 +66,9 @@ static const char* EN[] = {
 	"height",
 
 	"Name",
+	"State",
 	"Loop",
+	"Local Draw",
 	"Count",
 	"Emission Time (ms)",
 	"Life (ms)",
@@ -111,7 +115,9 @@ static const char* CN[] = {
 	"高度",
 
 	"名字",
+	"播放状态",
 	"连续播放",
+	"局部坐标",
 	"数量",
 	"发射周期(毫秒)",
 	"生命周期(毫秒)",

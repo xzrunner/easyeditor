@@ -238,7 +238,7 @@ void ParticleSystem::SetLoop(bool loop)
 	}
 }
 
-void ParticleSystem::SetDrawMode(bool local)
+void ParticleSystem::SetLocalModeDraw(bool local)
 {
 	m_et->local_mode_draw = local;
 }

@@ -88,7 +88,7 @@ void Sprite::Load(const Json::Value& val)
 	m_dir = Quaternion(x, y, z, w);
 
 	m_ps->SetLoop(p_val["loop"].asBool());
-	m_ps->SetDrawMode(p_val["local_mode_draw"].asBool());
+	m_ps->SetLocalModeDraw(p_val["local_mode_draw"].asBool());
 }
 
 void Sprite::Store(Json::Value& val) const

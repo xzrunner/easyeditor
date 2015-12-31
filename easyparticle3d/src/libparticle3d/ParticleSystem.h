@@ -48,7 +48,7 @@ public:
 	void Reset();
 	void Pause();
 	void SetLoop(bool loop);
-	void SetDrawMode(bool local);
+	void SetLocalModeDraw(bool local);
 
 	void Clear();
 

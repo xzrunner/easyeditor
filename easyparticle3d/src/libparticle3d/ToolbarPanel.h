@@ -50,6 +50,8 @@ private:
 	void OnDelAllChild(wxCommandEvent& event);
 
 	void OnSetLoop(wxCommandEvent& event);
+	void OnSetLocalModeDraw(wxCommandEvent& event);
+	void OnSet(wxCommandEvent& event);
 	void OnSetHori(wxSpinEvent& event);
 	void OnSetVert(wxSpinEvent& event);
 	void OnSetGround(wxCommandEvent& event);
@@ -80,6 +82,7 @@ private:
 
 	wxTextCtrl* m_name;
 	wxCheckBox* m_loop;
+	wxCheckBox* m_local_mode_draw;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
 	wxChoice* m_ground;

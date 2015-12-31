@@ -145,20 +145,31 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(10);
 
-	// Name
+// 	// Name
+// 	{
+// 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+// 		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
+// 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+// 		top_sizer->Add(sizer);
+// 	}
+	// State
 	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
-		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_STATE]);
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		{
+			m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
+			m_loop->SetValue(true);
+			Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
+			sizer->Add(m_loop);
+		}
+		sizer->AddSpacer(5);
+		{
+			m_local_mode_draw = new wxCheckBox(this, wxID_ANY, LANG[LK_LOCAL_DRAW]);	
+			m_local_mode_draw->SetValue(false);
+			Connect(m_local_mode_draw->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLocalModeDraw));
+			sizer->Add(m_local_mode_draw);
+		}
 		top_sizer->Add(sizer);
-	}
-	top_sizer->AddSpacer(10);
-	// Loop
-	{
-		m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
-		m_loop->SetValue(true);
-		Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
-		top_sizer->Add(m_loop);
 	}
 	top_sizer->AddSpacer(10);
 	// Count
@@ -425,6 +436,11 @@ void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)
 void ToolbarPanel::OnSetLoop(wxCommandEvent& event)
 {
 	m_stage->m_ps->SetLoop(event.IsChecked());
+}
+
+void ToolbarPanel::OnSetLocalModeDraw(wxCommandEvent& event)
+{
+	m_stage->m_ps->SetLocalModeDraw(event.IsChecked());
 }
 
 void ToolbarPanel::OnSetHori(wxSpinEvent& event)
