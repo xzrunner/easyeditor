@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
 #include "PS.h"
+#include "PropertySetting.h"
 
 #include <ps_3d.h>
 
@@ -112,6 +113,11 @@ void Sprite::Store(Json::Value& val) const
 	val["particle3d"] = p_val;
 }
 
+d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
+{
+	return new PropertySetting(stage, this);
+}
+
 void Sprite::Start()
 {
 	m_ps->Start();
@@ -120,6 +126,26 @@ void Sprite::Start()
 void Sprite::Draw(const d2d::Matrix& mt) const
 {
 	m_ps->Draw(mt);
+}
+
+bool Sprite::GetLoop() const
+{
+	return m_ps->GetEmitter()->loop;
+}
+
+void Sprite::SetLoop(bool loop)
+{
+	m_ps->SetLoop(loop);
+}
+
+bool Sprite::GetLocalModeDraw() const
+{
+	return m_ps->GetEmitter()->local_mode_draw;
+}
+
+void Sprite::SetLocalModeDraw(bool local)
+{
+	m_ps->SetLocalModeDraw(local);
 }
 
 }

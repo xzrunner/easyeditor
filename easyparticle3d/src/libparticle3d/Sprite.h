@@ -27,8 +27,11 @@ public:
 	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
+
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
+
+	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
 
 	void Start();
 
@@ -38,6 +41,12 @@ public:
 
 	Quaternion& GetDir() { return m_dir; }
 	const Quaternion& GetDir() const { return m_dir; }
+
+	bool GetLoop() const;
+	void SetLoop(bool loop);
+
+	bool GetLocalModeDraw() const;
+	void SetLocalModeDraw(bool local);
 
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));

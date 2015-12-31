@@ -301,6 +301,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\PropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\PropertySetting.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tools"
