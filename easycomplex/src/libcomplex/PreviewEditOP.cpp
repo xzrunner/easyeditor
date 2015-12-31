@@ -20,8 +20,7 @@ bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (const eparticle3d::Sprite* particle = dynamic_cast<const eparticle3d::Sprite*>(m_sprites[i])) {
-			eparticle3d::Symbol& symbol = const_cast<eparticle3d::Symbol&>(particle->GetSymbol());
-			symbol.Start();
+			const_cast<eparticle3d::Sprite*>(particle)->Start();
 		}
 	}
 

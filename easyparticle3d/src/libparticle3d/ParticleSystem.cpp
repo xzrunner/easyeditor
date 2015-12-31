@@ -153,8 +153,14 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 	}
 }
 
-void ParticleSystem::Update(float dt, const d2d::Matrix& mat)
+bool ParticleSystem::Update(const d2d::Matrix& mat)
 {
+	float time = PS::Instance()->GetTime();
+	assert(m_et->time <= time);
+	if (m_et->time == time) {
+		return false;
+	}
+
 	const float* src = mat.getElements();
 	float mt[6];
 	mt[0] = src[0];
@@ -164,7 +170,11 @@ void ParticleSystem::Update(float dt, const d2d::Matrix& mat)
 	mt[4] = src[12];
 	mt[5] = src[13];	
 
+	float dt = time - m_et->time;
 	p3d_emitter_update(m_et, dt, mt);
+	m_et->time = time;
+
+	return true;
 }
 
 void ParticleSystem::SetDirection(float x, float y, float z)
@@ -226,6 +236,11 @@ void ParticleSystem::SetLoop(bool loop)
 	} else {
 		Pause();
 	}
+}
+
+void ParticleSystem::SetDrawMode(bool local)
+{
+	m_et->local_mode_draw = local;
 }
 
 void ParticleSystem::Clear()

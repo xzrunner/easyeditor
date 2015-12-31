@@ -19,8 +19,24 @@ PS* PS::Instance()
 }
 
 PS::PS()
+	: m_time(0)
 {
 	Init();
+}
+
+void PS::UpdateTime()
+{
+	static clock_t last = 0;
+	if (last == 0) {
+		last = clock();
+	} else {
+		clock_t curr = clock();
+		if (curr != last) {
+			float dt = (float)(curr - last) / CLOCKS_PER_SEC;
+			m_time += dt;
+			last = curr;
+		}
+	}
 }
 
 static void 

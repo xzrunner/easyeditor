@@ -24,23 +24,33 @@ public:
 	//
 	// ISprite interface
 	//
-	virtual bool Update(int version) { return true; }
+	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
-		return new Sprite(static_cast<Symbol*>(symbol));
-	}
+	void Start();
+
+	void Draw(const d2d::Matrix& mt) const;
+
+	void SetMatrix(const d2d::Matrix& mat) { m_mat = mat; }
 
 	Quaternion& GetDir() { return m_dir; }
 	const Quaternion& GetDir() const { return m_dir; }
+
+	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
+		return new Sprite(static_cast<Symbol*>(symbol));
+	}
 
 protected:
 	Symbol* m_symbol;
 
 private:
+	ParticleSystem* m_ps;
+
+	d2d::Matrix m_mat;
+
 	Quaternion m_dir;
 
 }; // Sprite

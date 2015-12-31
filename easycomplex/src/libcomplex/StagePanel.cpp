@@ -59,13 +59,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 bool StagePanel::Update(int version)
 {
+	bool dirty = false;
 	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
 		d2d::ISprite* spr = m_symbol->m_sprites[i];
 		if (spr->Update(version)) {
-			return true;
+			dirty = true;
 		}
 	}
-	return false;
+	return dirty;
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)

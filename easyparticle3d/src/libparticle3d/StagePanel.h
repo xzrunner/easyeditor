@@ -30,8 +30,6 @@ public:
 	float xRot, yRot;
 
 private:
-	clock_t m_last_time;
-
 	d2d::Matrix m_ps_mat;
 
 }; // StagePanel

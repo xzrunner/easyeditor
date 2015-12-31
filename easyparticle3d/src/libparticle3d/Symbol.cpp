@@ -2,30 +2,22 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
 #include "FileIO.h"
+#include "PSConfigMgr.h"
+
+#include <ps_3d.h>
 
 namespace eparticle3d
 {
 
 Symbol::Symbol()
-	: m_ps(NULL)
-	, m_time(0)
+	: m_et_cfg(NULL)
 {
 }
 
 Symbol::Symbol(const Symbol& s)
 	: d2d::ISymbol(s)
-	, m_time(s.m_time)
+	, m_et_cfg(s.m_et_cfg)
 {
-//	m_ps = new ParticleSystem(*s.m_ps);
-}
-
-Symbol::~Symbol()
-{
-	if (m_ps)
-	{
-		m_ps->Release();
-		m_ps = NULL;
-	}
 }
 
 Symbol* Symbol::Clone() const
@@ -35,59 +27,36 @@ Symbol* Symbol::Clone() const
 
 void Symbol::ReloadTexture() const
 {
-	m_ps->ReloadTexture();
+	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
+		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(m_et_cfg->symbols[i].ud);
+		symbol->ReloadTexture();
+	}
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
 				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
-	if (!m_ps) {
+	if (!spr) {
 		return;
 	}
 
-	clock_t curr = clock();
-	if (m_time == 0) {
-		m_time = curr;
-		return;
-	}
-
-	if (spr) {
-		const Sprite* _spr = static_cast<const Sprite*>(spr);
-		m_ps->SetDirection(_spr->GetDir());
-//		m_ps->SetPosition(spr->GetPosition());
-	}
+	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
+	p3d_spr->SetMatrix(mt);
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);
 
-	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
-	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
-	m_ps->SetLoop(loop);
-	m_ps->Update(dt, mt);
-	m_ps->Draw(mt);
-
-	m_time = curr;
+	p3d_spr->Draw(mt);
 }
 
 d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
-//	return m_region;
 	return d2d::Rect(200, 200);
-}
-
-void Symbol::Start() const
-{
-	m_ps->Start();
-}
-
-void Symbol::SetPS(ParticleSystem* ps)
-{
-	d2d::obj_assign<ParticleSystem>(m_ps, ps);
 }
 
 void Symbol::LoadResources()
 {
-	m_ps = FileIO::LoadPS(m_filepath.c_str());	
+	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
 
 	Json::Value value;
 	Json::Reader reader;
@@ -98,8 +67,6 @@ void Symbol::LoadResources()
 	fin.close();
 
 	name = value["name"].asString();
-
-	Start();
 }
 
 }

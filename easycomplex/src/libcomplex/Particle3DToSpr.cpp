@@ -9,12 +9,8 @@ namespace ecomplex
 
 d2d::ISprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
 {
-	p3d_emitter_cfg* cfg = LoadConfig(p3d);
-
-	eparticle3d::ParticleSystem* ps = new eparticle3d::ParticleSystem(cfg, false);
-
 	eparticle3d::Symbol* symbol = new eparticle3d::Symbol;
-	symbol->SetPS(ps);
+	symbol->SetEmitterCfg(LoadConfig(p3d));
 	return new eparticle3d::Sprite(symbol);
 }
 

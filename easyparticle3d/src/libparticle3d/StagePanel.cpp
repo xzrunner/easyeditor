@@ -4,6 +4,7 @@
 #include "LibraryPanel.h"
 #include "ToolBarPanel.h"
 #include "ParticleSystem.h"
+#include "PS.h"
 
 namespace eparticle3d
 {
@@ -13,7 +14,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(GetStageImpl(), library)
 	, m_ps(NULL)
-	, m_last_time(-1)
 {
 	xRot = yRot = 0;
 
@@ -27,22 +27,12 @@ StagePanel::~StagePanel()
 
 bool StagePanel::Update(int version)
 {
-	bool ret = false;
-
-	if (m_last_time == -1) {
-		m_last_time = clock();
+	PS::Instance()->UpdateTime();
+	if (m_ps) {
+		return m_ps->Update(m_ps_mat);
 	} else {
-		clock_t curr = clock();
-		int dt = curr - m_last_time;
-		m_last_time = curr;
-
-		if (m_ps) {
-			m_ps->Update((float)dt / CLOCKS_PER_SEC, m_ps_mat);
-			ret = true;
-		}
+		return false;
 	}
-
-	return ret;
 }
 
 void StagePanel::SetPSMat(const d2d::Vector& pos)

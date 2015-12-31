@@ -38,7 +38,7 @@ public:
 
 	virtual void Draw(const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
 
-	void Update(float dt, const d2d::Matrix& mat);
+	bool Update(const d2d::Matrix& mat);
 
 	void SetDirection(float x, float y, float z);
 	void SetDirection(const Quaternion& dir);
@@ -48,6 +48,7 @@ public:
 	void Reset();
 	void Pause();
 	void SetLoop(bool loop);
+	void SetDrawMode(bool local);
 
 	void Clear();
 
