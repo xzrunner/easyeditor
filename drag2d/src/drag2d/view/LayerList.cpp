@@ -102,7 +102,7 @@ void LayerList::LoadFromLayerMgr(LayerMgr* layer_mgr)
 void LayerList::OnEndLabelEdit(wxListEvent& event)
 {
 	int item = event.GetIndex();
-	Layer* layer = m_layer_mgr->GetLayer(item);
+	Layer* layer = m_layer_mgr->GetLayer(GetItemCount() - 1 - item);
 	if (layer) {
 		layer->name = event.m_item.m_text;
 	}
