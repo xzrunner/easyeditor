@@ -23,6 +23,7 @@ private:
 
 public:
 	std::string name;
+	std::string tag;
 
 private:
 	LayersMgr m_layers;

@@ -12,7 +12,8 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 
 d2d::IPropertySetting* PropertySettingPanel::CreateDefaultProperty() const
 {
-	return new d2d::SymbolPropertySetting(&DataMgr::Instance()->name);
+	DataMgr* mgr = DataMgr::Instance();
+	return new d2d::SymbolPropertySetting(&mgr->name, &mgr->tag);
 }
 
 }
