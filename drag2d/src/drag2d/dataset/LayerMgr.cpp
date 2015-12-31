@@ -23,6 +23,13 @@ void LayerMgr::TraverseSprite(IVisitor& visitor, DataTraverseType type, bool ord
 	}
 }
 
+void LayerMgr::TraverseShape(IVisitor& visitor, bool order) const
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		m_layers[i]->TraverseShape(visitor, order);
+	}	
+}
+
 void LayerMgr::Insert(Layer* layer)
 {
 	if (!selected) {

@@ -19,9 +19,12 @@ public:
 	~Layer();
 
 	void TraverseSprite(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-
 	bool Insert(ISprite* sprite);
 	bool Remove(ISprite* sprite);
+
+	void TraverseShape(IVisitor& visitor, bool order = true) const;
+	bool Insert(IShape* shape);
+	bool Remove(IShape* shape);
 
 	void LoadFromFile(const Json::Value& val, const std::string& dir);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;

@@ -77,20 +77,32 @@ bool Layer::ResetOrderSpriteMost(const Object* obj, bool up)
 void Layer::TraverseShape(d2d::IVisitor& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);
+	m_layer_mgr.TraverseShape(visitor, order);
 }
 
 bool Layer::RemoveShape(Object* obj)
 {
-	return m_shapes.Remove(static_cast<d2d::IShape*>(obj));
+	d2d::IShape* shape = static_cast<d2d::IShape*>(obj);
+	if (m_layer_mgr.selected) {
+		return m_layer_mgr.selected->Remove(shape);
+	} else {
+		return m_shapes.Remove(shape);
+	}
 }
 
 bool Layer::InsertShape(Object* obj)
 {
-	return m_shapes.Insert(static_cast<d2d::IShape*>(obj));
+	d2d::IShape* shape = static_cast<d2d::IShape*>(obj);
+	if (m_layer_mgr.selected) {
+		return m_layer_mgr.selected->Insert(shape);
+	} else {
+		return m_shapes.Insert(shape);
+	}
 }
 
 bool Layer::ClearShape()
 {
+	m_layer_mgr.Clear();
 	return m_shapes.Clear();
 }
 

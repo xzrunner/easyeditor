@@ -40,16 +40,32 @@ bool Layer::Insert(ISprite* sprite)
 	if (m_sprites.IsExist(sprite)) {
 		return false;
 	} else {
-// 		sprite->visiable = m_visible;
-// 		sprite->editable = m_editable;
-		m_sprites.Insert(sprite);
-		return true;
+		return m_sprites.Insert(sprite);
 	}
 }
 
 bool Layer::Remove(ISprite* sprite)
 {
 	return m_sprites.Remove(sprite);
+}
+
+void Layer::TraverseShape(IVisitor& visitor, bool order) const
+{
+	m_shapes.Traverse(visitor, order);
+}
+
+bool Layer::Insert(IShape* shape)
+{
+	if (m_shapes.IsExist(shape)) {
+		return false;
+	} else {
+		return m_shapes.Insert(shape);
+	}
+}
+
+bool Layer::Remove(IShape* shape)
+{
+	return m_shapes.Remove(shape);
 }
 
 void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
@@ -69,7 +85,6 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 		}
 		SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
 
-		//		symbol->refresh();
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->Load(spr_val);
 		m_sprites.Insert(sprite);
@@ -77,7 +92,17 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 		symbol->Release();
 
 		spr_val = val["sprite"][i++];
-	}	
+	}
+
+// 	i = 0;
+// 	Json::Value shape_val = val["shape"][i++];
+// 	while (!shape_val.isNull()) {
+// 		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
+// 		m_shapes.Insert(shape);
+// 		shape->Release();
+// 
+// 		shape_val = val["shape"][i++];
+// 	}
 }
 
 void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
@@ -97,6 +122,15 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 		spr->Store(spr_val);
 
 		val["sprite"][i] = spr_val;
+	}
+
+	std::vector<IShape*> shapes;
+	m_shapes.Traverse(FetchAllVisitor<IShape>(shapes), true);
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		IShape* shape = shapes[i];
+		Json::Value shape_val;
+		shape->StoreToFile(shape_val, dir);
+		val["shape"][i] = shape_val;
 	}
 }
 

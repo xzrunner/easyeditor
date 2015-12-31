@@ -19,6 +19,7 @@ public:
 	~LayerMgr();
 
 	void TraverseSprite(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseShape(IVisitor& visitor, bool order = true) const;
 
 	const std::vector<Layer*>& GetAllLayers() const { return m_layers; }
 
