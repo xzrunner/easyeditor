@@ -44,6 +44,9 @@ private:
 
 	wxSizer* CreateComponentLayout();
 
+	void OnSetLoop(wxCommandEvent& event);
+	void OnSetLocalModeDraw(wxCommandEvent& event);
+
 	void OnChangeMode(wxCommandEvent& event);
 
 	void OnSetRotationIsDir(wxCommandEvent& event);
@@ -73,7 +76,9 @@ private:
 private:
 	StagePanel* m_stage;
 
-	wxTextCtrl* m_name;
+//	wxTextCtrl* m_name;
+	wxCheckBox* m_loop;
+	wxCheckBox* m_local_mode_draw;
 
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 	std::vector<std::vector<d2d::ISliderCtrl*> > m_mode_sliders;

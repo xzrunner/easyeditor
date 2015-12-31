@@ -33,7 +33,7 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	if (m_stage->m_ps) {
-		m_stage->m_ps->Draw(d2d::Matrix());
+		m_stage->m_ps->Draw(m_stage->GetPSMat());
 	}
 	
 	m_stage->DrawEditOP();

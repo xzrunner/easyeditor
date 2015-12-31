@@ -19,14 +19,14 @@ public:
 
 	virtual bool Update(int version);
 
-	void SetSelectedSymbol(Symbol* symbol);
-	void SetToolbar(ToolbarPanel* toolbar);
+	void SetPSMat(const d2d::Vector& pos);
+	const d2d::Matrix& GetPSMat() const { return m_ps_mat; }
 
 public:
 	ParticleSystem* m_ps;
 
 private:
-	clock_t m_last_time;
+	d2d::Matrix m_ps_mat;
 
 }; // StagePanel
 

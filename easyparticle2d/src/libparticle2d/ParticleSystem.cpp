@@ -165,12 +165,35 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 
 void ParticleSystem::Draw(const d2d::Matrix& mt) const
 {
-	p2d_emitter_draw(m_et, &mt);
+	if (m_et->local_mode_draw) {
+		p2d_emitter_draw(m_et, &mt);
+	} else {
+		p2d_emitter_draw(m_et, NULL);
+	}
 }
 
-void ParticleSystem::Update(float dt)
+bool ParticleSystem::Update(const d2d::Matrix& mat)
 {
-	p2d_emitter_update(m_et, dt);
+	float time = PS::Instance()->GetTime();
+	assert(m_et->time <= time);
+	if (m_et->time == time) {
+		return false;
+	}
+
+	const float* src = mat.getElements();
+	float mt[6];
+	mt[0] = src[0];
+	mt[1] = src[1];
+	mt[2] = src[4];
+	mt[3] = src[5];
+	mt[4] = src[12];
+	mt[5] = src[13];	
+
+	float dt = time - m_et->time;
+	p2d_emitter_update(m_et, dt, mt);
+	m_et->time = time;
+
+	return true;
 }
 
 void ParticleSystem::Start()
@@ -207,6 +230,11 @@ void ParticleSystem::SetLoop(bool loop)
 	} else {
 		Pause();
 	}
+}
+
+void ParticleSystem::SetLocalModeDraw(bool local)
+{
+	m_et->local_mode_draw = local;
 }
 
 void ParticleSystem::SetMode(int mode)

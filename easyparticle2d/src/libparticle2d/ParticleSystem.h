@@ -26,13 +26,14 @@ public:
 
 	virtual void Draw(const d2d::Matrix& mt) const;
 
-	void Update(float dt);
+	bool Update(const d2d::Matrix& mat);
 
 	void Start();
 	void Stop();
 	void Reset();
 	void Pause();
 	void SetLoop(bool loop);
+	void SetLocalModeDraw(bool local);
 
 	void SetMode(int mode);
 
@@ -49,6 +50,7 @@ public:
 	void DelAllSymbol();
 
 	const p2d_emitter_cfg* GetConfig() const;
+	const p2d_emitter* GetEmitter() const { return m_et; }
 
 private:
 	d2d::Vector m_pos;

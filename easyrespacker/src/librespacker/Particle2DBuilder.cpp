@@ -53,7 +53,7 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 {
 	m_export_set.LoadExport(symbol, ps);
 
-	const p2d_emitter_cfg* cfg = symbol->GetPS()->GetConfig();
+	const p2d_emitter_cfg* cfg = symbol->GetEmitterCfg();
 
 	ps->emission_time = cfg->emission_time;
 	ps->count = cfg->count;

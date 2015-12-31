@@ -69,10 +69,10 @@ void LoadAdapter::Load(const std::string& filepath)
 	life				= value["life"]["center"].asDouble() * 0.001f;
 	life_var			= value["life"]["offset"].asDouble() * 0.001f;
 
-	position.x			= value["position"]["center"]["x"].asDouble();
-	position.y			= value["position"]["center"]["y"].asDouble();
-	position_var.x		= value["position"]["offset"]["x"].asDouble();
-	position_var.y		= value["position"]["offset"]["y"].asDouble();
+	position.x			= value["position_x"]["center"].asDouble();
+	position_var.x		= value["position_x"]["offset"].asDouble();
+	position.y			= value["position_y"]["center"].asDouble();
+	position_var.y		= value["position_y"]["offset"].asDouble();
 
 	direction			= value["direction"]["center"].asDouble() * d2d::TRANS_DEG_TO_RAD;
 	direction_var		= value["direction"]["offset"].asDouble() * d2d::TRANS_DEG_TO_RAD;

@@ -13,10 +13,14 @@ namespace eparticle2d
 {
 
 static const float CAPACITY				= 100;
-static const float COUNT				= 20;
-static const float EMISSION_TIME		= 150;
+static const float COUNT				= 6;
+static const float EMISSION_TIME		= 100;
 static const float LIFE_CENTER			= 800;
 static const float LIFE_OFFSET			= 500;
+static const float X_OFFSET				= 60;
+static const float ANGLE_CENTER			= 90;
+static const float SPEED_CENTER			= 120;
+static const float RADIAL_ACCEL_CENTER	= 700;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
 							 StagePanel* stage)
@@ -164,11 +168,30 @@ wxSizer* ToolbarPanel::CreateMainCommonLayout()
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(10);
 
-	// Name
+// 	// Name
+// 	{
+// 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+// 		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
+// 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+// 		top_sizer->Add(sizer);
+// 	}
+	// State
 	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
-		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_STATE]);
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		{
+			m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
+			m_loop->SetValue(true);
+			Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
+			sizer->Add(m_loop);
+		}
+		sizer->AddSpacer(5);
+		{
+			m_local_mode_draw = new wxCheckBox(this, wxID_ANY, LANG[LK_LOCAL_DRAW]);	
+			m_local_mode_draw->SetValue(false);
+			Connect(m_local_mode_draw->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLocalModeDraw));
+			sizer->Add(m_local_mode_draw);
+		}
 		top_sizer->Add(sizer);
 	}
 	top_sizer->AddSpacer(10);
@@ -195,7 +218,7 @@ wxSizer* ToolbarPanel::CreateMainCommonLayout()
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
 		d2d::SliderCtrlTwo* s_pos_x = new d2d::SliderCtrlTwo(this, LANG[LK_X], "position_x", this, PS_POSITION_X, 
-			d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, -500, 500), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
+			d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, -500, 500), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, X_OFFSET, 0, 1000));
 		sizer->Add(s_pos_x);
 		m_sliders.push_back(s_pos_x);
 
@@ -209,7 +232,7 @@ wxSizer* ToolbarPanel::CreateMainCommonLayout()
 	}
 	// Direction
 	d2d::SliderCtrlTwo* s_direction = new d2d::SliderCtrlTwo(this, LANG[LK_DIRECTION], "direction", this, PS_DIRECTION, 
-		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 360), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 90));
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, ANGLE_CENTER, 0, 360), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 90));
 	top_sizer->Add(s_direction);
 	top_sizer->AddSpacer(20);
 	m_sliders.push_back(s_direction);
@@ -240,19 +263,19 @@ wxSizer* ToolbarPanel::CreateModeGravityLayout()
 	sliders.push_back(s_gravity);
 	// Speed
 	d2d::SliderCtrlTwo* s_speed = new d2d::SliderCtrlTwo(this, LANG[LK_SPEED], "speed", this, PS_SPEED, 
-		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, SPEED_CENTER, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_speed);
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_speed);
 	// tangential accel
-	d2d::SliderCtrlTwo* s_tangential = new d2d::SliderCtrlTwo(this, LANG[LK_TANGENTIAL_ACCEL], "tangential accel", this, PS_TANGENTIAL_ACCEL, 
+	d2d::SliderCtrlTwo* s_tangential = new d2d::SliderCtrlTwo(this, LANG[LK_TANGENTIAL_ACCEL], "tangential_accel", this, PS_TANGENTIAL_ACCEL, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_tangential);
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_tangential);
 	// radial accel
-	d2d::SliderCtrlTwo* s_radial = new d2d::SliderCtrlTwo(this, LANG[LK_RADIAL_ACCEL], "radial accel", this, PS_RADIAL_ACCEL, 
-		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
+	d2d::SliderCtrlTwo* s_radial = new d2d::SliderCtrlTwo(this, LANG[LK_RADIAL_ACCEL], "radial_accel", this, PS_RADIAL_ACCEL, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, RADIAL_ACCEL_CENTER, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_radial);
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_radial);
@@ -271,19 +294,19 @@ wxSizer* ToolbarPanel::CreateModeRadiusLayout()
 	std::vector<d2d::ISliderCtrl*> sliders;
 
 	// Start Radius
-	d2d::SliderCtrlTwo* s_start_radius = new d2d::SliderCtrlTwo(this, LANG[LK_START_RADIUS], "start radius", this, PS_START_RADIUS, 
+	d2d::SliderCtrlTwo* s_start_radius = new d2d::SliderCtrlTwo(this, LANG[LK_START_RADIUS], "start_radius", this, PS_START_RADIUS, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_start_radius);
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_start_radius);
 	// End Radius
-	d2d::SliderCtrlTwo* s_end_radius = new d2d::SliderCtrlTwo(this, LANG[LK_END_RADIUS], "end radius", this, PS_END_RADIUS, 
+	d2d::SliderCtrlTwo* s_end_radius = new d2d::SliderCtrlTwo(this, LANG[LK_END_RADIUS], "end_radius", this, PS_END_RADIUS, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_end_radius);
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_end_radius);
 	// Direction Delta
-	d2d::SliderCtrlTwo* s_direction_spd = new d2d::SliderCtrlTwo(this, LANG[LK_DIRECTION_SPEED], "direction speed", this, PS_DIRECTION_SPEED, 
+	d2d::SliderCtrlTwo* s_direction_spd = new d2d::SliderCtrlTwo(this, LANG[LK_DIRECTION_SPEED], "direction_delta", this, PS_DIRECTION_SPEED, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_direction_spd);
 	top_sizer->AddSpacer(10);
@@ -305,13 +328,13 @@ wxSizer* ToolbarPanel::CreateModeSpdCosLayout()
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_speed);
 	// Cos Amplitude
-	d2d::SliderCtrlTwo* s_cos_amplitude = new d2d::SliderCtrlTwo(this, LANG[LK_SPD_COS_AMPLITUDE], "cos amplitude", this, PS_COS_AMPLITUDE, 
+	d2d::SliderCtrlTwo* s_cos_amplitude = new d2d::SliderCtrlTwo(this, LANG[LK_SPD_COS_AMPLITUDE], "cos_amplitude", this, PS_COS_AMPLITUDE, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_cos_amplitude);
 	top_sizer->AddSpacer(10);
 	sliders.push_back(s_cos_amplitude);
 	// Cos Frequency
-	d2d::SliderCtrlTwo* s_cos_frequency = new d2d::SliderCtrlTwo(this, LANG[LK_SPD_COS_FREQUENCY], "cos frequency", this, PS_COS_FREQUENCY, 
+	d2d::SliderCtrlTwo* s_cos_frequency = new d2d::SliderCtrlTwo(this, LANG[LK_SPD_COS_FREQUENCY], "cos_frequency", this, PS_COS_FREQUENCY, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, 0, 1000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 1000));
 	top_sizer->Add(s_cos_frequency);
 	top_sizer->AddSpacer(10);
@@ -338,6 +361,16 @@ wxSizer* ToolbarPanel::CreateComponentLayout()
 		top_sizer->Add(m_comp_sizer);
 	}
 	return top_sizer;
+}
+
+void ToolbarPanel::OnSetLoop(wxCommandEvent& event)
+{
+	m_stage->m_ps->SetLoop(event.IsChecked());
+}
+
+void ToolbarPanel::OnSetLocalModeDraw(wxCommandEvent& event)
+{
+	m_stage->m_ps->SetLocalModeDraw(event.IsChecked());
 }
 
 void ToolbarPanel::OnChangeMode(wxCommandEvent& event)

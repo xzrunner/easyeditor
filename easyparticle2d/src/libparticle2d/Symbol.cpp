@@ -1,30 +1,23 @@
 #include "Symbol.h"
+#include "Sprite.h"
 #include "ParticleSystem.h"
 #include "FileIO.h"
+#include "PSConfigMgr.h"
 
-#include <time.h>
+#include <ps_2d.h>
 
 namespace eparticle2d
 {
 
 Symbol::Symbol()
-	: m_ps(NULL)
-	, m_curr_frame(0)
+	: m_et_cfg(NULL)
 {
 }
 
 Symbol::Symbol(const Symbol& s)
 	: d2d::ISymbol(s)
+	, m_et_cfg(s.m_et_cfg)
 {
-}
-
-Symbol::~Symbol()
-{
-	if (m_ps)
-	{
-		m_ps->Release();
-		m_ps = NULL;
-	}
 }
 
 Symbol* Symbol::Clone() const
@@ -34,21 +27,26 @@ Symbol* Symbol::Clone() const
 
 void Symbol::ReloadTexture() const
 {
-	m_ps->ReloadTexture();
+	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
+		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(m_et_cfg->symbols[i].ud);
+		symbol->ReloadTexture();
+	}
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
 				  const d2d::ISprite* spr, const d2d::ISprite* root) const
 {
-	if (!m_ps) {
+	if (!spr) {
 		return;
 	}
 
-	DrawPS(mt);
+	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
+	p2d_spr->SetMatrix(mt);
 
-	if (spr) {
-		DrawBackground(spr->GetPosition());
-	}
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	shader->SetSpriteColor(color);
+
+	p2d_spr->Draw(mt);		
 }
 
 d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
@@ -56,44 +54,9 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 	return d2d::Rect(200, 200);
 }
 
-void Symbol::ResetPS()
-{
-	m_ps->Reset();
-	m_ps->Start();
-}
-
-void Symbol::SetPS(ParticleSystem* ps)
-{
-	d2d::obj_assign<ParticleSystem>(m_ps, ps);
-}
-
 void Symbol::LoadResources()
 {
-	m_ps = FileIO::LoadPS(m_filepath.c_str());	
-}
-
-void Symbol::DrawPS(const d2d::Matrix& mt) const
-{
-	static clock_t last_time = 0;
-	if (last_time == 0) {
-		last_time = clock();
-	} else {
-		clock_t curr_time = clock();
-		float dt = (float)(curr_time - last_time) / CLOCKS_PER_SEC;
-		m_ps->Update(dt);
-		last_time = curr_time;
-	}
-	m_ps->Draw(mt);
-}
-
-void Symbol::DrawBackground(const d2d::Vector& pos) const
-{
-	d2d::Matrix mat;
-	mat.translate(pos.x, pos.y);
-
-	d2d::Rect r = GetSize();
-
-	d2d::PrimitiveDraw::rect(mat, r, d2d::LIGHT_GREY_LINE);
+	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
 }
 
 }
