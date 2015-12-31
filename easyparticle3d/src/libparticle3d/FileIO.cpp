@@ -19,7 +19,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 	toolbar->Store(value);
 	value["version"] = VERSION;
 
-	value["name"] = toolbar->m_name->GetValue().ToStdString();
+//	value["name"] = toolbar->m_name->GetValue().ToStdString();
 
 	value["min_hori"] = toolbar->m_min_hori->GetValue();
 	value["max_hori"] = toolbar->m_max_hori->GetValue();
@@ -99,7 +99,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 	toolbar->Load(value, version);
 
-	toolbar->m_name->SetValue(adapter.name);
+//	toolbar->m_name->SetValue(adapter.name);
 
 	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
 	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);

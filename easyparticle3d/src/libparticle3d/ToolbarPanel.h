@@ -80,7 +80,7 @@ private:
 
 	std::vector<d2d::ISliderCtrl*> m_sliders;
 
-	wxTextCtrl* m_name;
+//	wxTextCtrl* m_name;
 	wxCheckBox* m_loop;
 	wxCheckBox* m_local_mode_draw;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
