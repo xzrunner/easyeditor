@@ -91,8 +91,8 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	additive_blend = value["additive_blend"].asBool();
 
-	start_radius = value["start_radius"].asInt();
-	start_height = value["start_height"].asInt();
+	start_radius = value["start_pos"]["radius"].asInt();
+	start_height = value["start_pos"]["height"].asInt();
 
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
