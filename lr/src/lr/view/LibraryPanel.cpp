@@ -45,10 +45,14 @@ void LibraryPanel::OnPageChanging(wxBookCtrlEvent& event)
 
 void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	int layer_idx = 0;
-	Json::Value layer_val = value[layer_idx++];
-	while (!layer_val.isNull()) {
-		d2d::LibraryList* list = m_pages[layer_idx-1]->GetList();
+	for (int i = 0, n = value.size(); i < n; ++i)
+	{
+		Json::Value layer_val = value[i];
+		if (layer_val.isNull()) {
+			continue;
+		}
+
+		d2d::LibraryList* list = m_pages[i]->GetList();
 		int item_idx = 0;
 		Json::Value item_val = layer_val[item_idx++];
 		while (!item_val.isNull()) {
@@ -64,8 +68,6 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			}
 			item_val = layer_val[item_idx++];
 		}
-
-		layer_val = value[layer_idx++];
 	}
 }
 
