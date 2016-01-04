@@ -26,10 +26,15 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
+
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
+	}
+
+	d2d::SceneNodeMgr::Instance()->Draw();
+
 	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 

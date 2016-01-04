@@ -24,8 +24,6 @@ protected:
 private:
 	void DrawStageData() const;
 
-	void GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
-
 private:
 	d2d::PlayControl& m_control;
 

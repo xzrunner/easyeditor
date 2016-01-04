@@ -162,6 +162,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\ps_3d_buffer.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ps_3d_buffer.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\ps_array.h"
 			>
 		</File>

@@ -48,6 +48,9 @@ public:
 	bool GetLocalModeDraw() const;
 	void SetLocalModeDraw(bool local);
 
+	bool GetUseBuffer() const;
+	void SetUseBuffer(bool use);
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
@@ -61,6 +64,8 @@ private:
 	d2d::Matrix m_mat;
 
 	Quaternion m_dir;
+
+	bool m_use_buffer;
 
 }; // Sprite
 

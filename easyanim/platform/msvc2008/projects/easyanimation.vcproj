@@ -376,11 +376,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewPanel.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyanimation\view\PreviewSettings.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyanimation\view\PreviewSettings.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewUtility.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewUtility.h"
 					>
 				</File>
 			</Filter>
