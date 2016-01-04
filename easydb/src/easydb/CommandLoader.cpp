@@ -57,6 +57,7 @@
 #include "TransOldTextFile.h"
 #include "TransOldAnchorFile.h"
 #include "TransNewTextFile.h"
+#include "TransOldP3DFile.h"
 
 namespace edb
 {
@@ -119,6 +120,7 @@ void CommandLoader::Init()
 	fc->Register(TransOldTextFile::Create());
 	fc->Register(TransOldAnchorFile::Create());
 	fc->Register(TransNewTextFile::Create());
+	fc->Register(TransOldP3DFile::Create());
 }
 
 }
