@@ -17,6 +17,7 @@ public:
 	LayerList(wxWindow* parent);	
 
 	void Insert();
+	void Remove();
 
 protected:
 	//

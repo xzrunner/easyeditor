@@ -20,6 +20,8 @@ wxBEGIN_EVENT_TABLE(LayerList, wxListCtrl)
 	EVT_LIST_KEY_DOWN(LAYER_LIST_ID, LayerList::OnListKeyDown)
 wxEND_EVENT_TABLE()
 
+static const char* STAT_SELECTED = "[!]";
+
 LayerList::LayerList(wxWindow* parent)
 	: wxListCtrl(parent, LAYER_LIST_ID, wxDefaultPosition, wxDefaultSize, 
 	wxLC_REPORT | wxLC_EDIT_LABELS | wxLC_SINGLE_SEL)
@@ -41,6 +43,22 @@ void LayerList::Insert()
 	m_layer_mgr->Insert(layer);
 	Insert(layer);
 	layer->Release();
+}
+
+void LayerList::Remove()
+{
+	if (!m_layer_mgr) {
+		return;
+	}
+
+	if (m_layer_mgr->selected) {
+		Remove(m_layer_mgr->selected);
+	}
+
+	if (GetItemCount() > 0) {
+		m_layer_mgr->selected = m_layer_mgr->GetLayer(GetItemCount() - 1);
+		SetItem(0, 1, STAT_SELECTED);
+	}
 }
 
 void LayerList::OnNotify(int sj_id, void* ud)
@@ -70,7 +88,7 @@ void LayerList::Insert(Layer* layer)
 
 	SetItem(item, 0, layer->name);
 
-	std::string stat = m_layer_mgr->selected == layer ? "[!]" : "";
+	std::string stat = m_layer_mgr->selected == layer ? STAT_SELECTED : "";
 	SetItem(item, 1, stat);
 
 	SetItem(item, 2, layer->visible ? "T" : "F");
@@ -114,7 +132,7 @@ void LayerList::OnSelected(wxListEvent& event)
 		SetItem(i, 1, "");
 	}
 	int item = event.GetIndex();
-	SetItem(item, 1, "[!]");
+	SetItem(item, 1, STAT_SELECTED);
 
 	m_layer_mgr->selected = m_layer_mgr->GetLayer(GetItemCount() - 1 - item);
 }

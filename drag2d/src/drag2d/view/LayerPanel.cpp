@@ -36,6 +36,11 @@ wxSizer* LayerPanel::InitHeaderLayout()
 	Connect(btn_add->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LayerPanel::OnAddPress));
 	sizer->Add(btn_add, 0, wxLEFT | wxRIGHT, 5);
 
+	// del
+	wxButton* btn_del = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(20, 20));
+	Connect(btn_del->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LayerPanel::OnDelPress));
+	sizer->Add(btn_del, 0, wxLEFT | wxRIGHT, 5);
+
 	sizer->Fit(this);
 
 	return sizer;
@@ -48,6 +53,7 @@ void LayerPanel::OnAddPress(wxCommandEvent& event)
 
 void LayerPanel::OnDelPress(wxCommandEvent& event)
 {
+	m_list->Remove();
 }
 
 }
