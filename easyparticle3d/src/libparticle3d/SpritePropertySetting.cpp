@@ -1,21 +1,21 @@
-#include "PropertySetting.h"
+#include "SpritePropertySetting.h"
 #include "Sprite.h"
 
 namespace eparticle3d
 {
 
-PropertySetting::PropertySetting(d2d::EditPanelImpl* edit_impl, Sprite* sprite)
+SpritePropertySetting::SpritePropertySetting(d2d::EditPanelImpl* edit_impl, Sprite* sprite)
 	: d2d::SpritePropertySetting(edit_impl, sprite)
 	, m_parent(edit_impl->GetEditPanel())
 {
 	m_type = "P3D";
 }
 
-PropertySetting::~PropertySetting()
+SpritePropertySetting::~SpritePropertySetting()
 {
 }
 
-void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	d2d::SpritePropertySetting::OnPropertyGridChange(name, value);
 
@@ -29,7 +29,7 @@ void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& va
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
+void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	d2d::SpritePropertySetting::UpdateProperties(pg);
 
@@ -39,7 +39,7 @@ void PropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty("Local")->SetValue(spr->GetLocalModeDraw());
 }
 
-void PropertySetting::InitProperties(wxPropertyGrid* pg)
+void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	d2d::SpritePropertySetting::InitProperties(pg);
 

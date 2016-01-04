@@ -148,12 +148,6 @@ void PropertySettingPanel::OnNotify(int sj_id, void* ud)
 	case MSG_SELECT_SPRITE_SET:
 		OnMultiSpriteSelected((SpriteSelection*)ud);
 		break;
-	case MSG_INSERT_SPRITE:
-		SetPropertySetting(CreateDefaultProperty());
-		break;
-	case MSG_REMOVE_SPRITE:
-		SetPropertySetting(CreateDefaultProperty());
-		break;
 	case MSG_CLEAR_SPRITE:
 		ClearSelection();
 		SetPropertySetting(CreateDefaultProperty());

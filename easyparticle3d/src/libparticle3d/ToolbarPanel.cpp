@@ -152,26 +152,26 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 // 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
 // 		top_sizer->Add(sizer);
 // 	}
-	// State
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_STATE]);
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
-		{
-			m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
-			m_loop->SetValue(true);
-			Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
-			sizer->Add(m_loop);
-		}
-		sizer->AddSpacer(5);
-		{
-			m_local_mode_draw = new wxCheckBox(this, wxID_ANY, LANG[LK_LOCAL_DRAW]);	
-			m_local_mode_draw->SetValue(false);
-			Connect(m_local_mode_draw->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLocalModeDraw));
-			sizer->Add(m_local_mode_draw);
-		}
-		top_sizer->Add(sizer);
-	}
-	top_sizer->AddSpacer(10);
+// 	// State
+// 	{
+// 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_STATE]);
+// 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+// 		{
+// 			m_loop = new wxCheckBox(this, wxID_ANY, LANG[LK_LOOP]);	
+// 			m_loop->SetValue(true);
+// 			Connect(m_loop->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLoop));
+// 			sizer->Add(m_loop);
+// 		}
+// 		sizer->AddSpacer(5);
+// 		{
+// 			m_local_mode_draw = new wxCheckBox(this, wxID_ANY, LANG[LK_LOCAL_DRAW]);	
+// 			m_local_mode_draw->SetValue(false);
+// 			Connect(m_local_mode_draw->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetLocalModeDraw));
+// 			sizer->Add(m_local_mode_draw);
+// 		}
+// 		top_sizer->Add(sizer);
+// 	}
+// 	top_sizer->AddSpacer(10);
 	// Count
 	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, LANG[LK_COUNT], 
 		"count", this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 500));

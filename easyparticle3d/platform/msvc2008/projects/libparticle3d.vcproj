@@ -305,11 +305,19 @@
 				Name="property"
 				>
 				<File
-					RelativePath="..\..\..\src\libparticle3d\PropertySetting.cpp"
+					RelativePath="..\..\..\src\libparticle3d\SpritePropertySetting.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libparticle3d\PropertySetting.h"
+					RelativePath="..\..\..\src\libparticle3d\SpritePropertySetting.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\SymbolPropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\SymbolPropertySetting.h"
 					>
 				</File>
 			</Filter>

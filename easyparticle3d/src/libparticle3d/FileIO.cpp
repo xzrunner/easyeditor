@@ -12,7 +12,8 @@
 namespace eparticle3d
 {
 
-void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
+void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
+				   ToolbarPanel* toolbar)
 {
 	Json::Value value;
 
@@ -28,9 +29,9 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 	value["ground"] = toolbar->m_ground->GetSelection();
 
-	value["orient_to_movement"] = toolbar->m_orient_to_movement->GetValue();
+	value["orient_to_movement"] = ps->GetEmitter()->local_mode_draw;
 
-	value["loop"] = toolbar->m_loop->GetValue();
+	value["loop"] = ps->GetEmitter()->loop;
 
 //	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 

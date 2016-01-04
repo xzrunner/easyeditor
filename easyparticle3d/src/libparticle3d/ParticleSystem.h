@@ -76,6 +76,9 @@ public:
 	const p3d_emitter_cfg* GetConfig() const;
 	const p3d_emitter* GetEmitter() const { return m_et; }
 
+public:
+	std::string name;
+
 private:
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;

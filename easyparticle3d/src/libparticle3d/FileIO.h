@@ -14,7 +14,8 @@ class ToolbarPanel;
 class FileIO
 {
 public:
-	static void Store(const std::string& filepath, ToolbarPanel* toolbar);
+	static void Store(const std::string& filepath, ParticleSystem* ps,
+		ToolbarPanel* toolbar);
 	static void Load(const std::string& filepath, ParticleSystem* ps,
 		ToolbarPanel* toolbar);
 

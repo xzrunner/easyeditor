@@ -80,7 +80,6 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
 	m_library = new ecomplex::LibraryPanel(split);
-
 	m_property = new ecomplex::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);

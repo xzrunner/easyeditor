@@ -1,7 +1,7 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
 #include "PS.h"
-#include "PropertySetting.h"
+#include "SpritePropertySetting.h"
 
 #include <ps_3d.h>
 
@@ -115,7 +115,7 @@ void Sprite::Store(Json::Value& val) const
 
 d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
-	return new PropertySetting(stage, this);
+	return new SpritePropertySetting(stage, this);
 }
 
 void Sprite::Start()
