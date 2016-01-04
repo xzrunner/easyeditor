@@ -291,4 +291,21 @@ void Sprite::SetReuse(bool reuse)
 	m_reuse = reuse;
 }
 
+bool Sprite::GetUseBuffer() const 
+{ 
+	return m_use_buffer; 
+}
+
+void Sprite::SetUseBuffer(bool use) 
+{ 
+ 	m_use_buffer = use; 
+
+	p3d_emitter* et = (p3d_emitter*)(m_ps->GetEmitter());
+	if (use) {
+		p3d_buffer_add(et);		
+	} else {
+		p3d_buffer_remove(et);
+	}
+}
+
 }
