@@ -2,6 +2,7 @@
 
 #include "dataset/Layer.h"
 #include "dataset/LayerMgr.h"
+#include "view/LayerDialog.h"
 #include "message/subject_id.h"
 #include "message/panel_msg.h"
 #include "message/SetCanvasDirtySJ.h"
@@ -18,6 +19,7 @@ wxBEGIN_EVENT_TABLE(LayerList, wxListCtrl)
 	EVT_LIST_ITEM_SELECTED(LAYER_LIST_ID, LayerList::OnSelected)
 	EVT_LIST_COL_CLICK(LAYER_LIST_ID, LayerList::OnColClick)
 	EVT_LIST_KEY_DOWN(LAYER_LIST_ID, LayerList::OnListKeyDown)
+	EVT_LIST_ITEM_ACTIVATED(LAYER_LIST_ID, LayerList::OnActivated)
 wxEND_EVENT_TABLE()
 
 static const char* STAT_SELECTED = "[!]";
@@ -180,6 +182,34 @@ void LayerList::OnListKeyDown(wxListEvent& event)
 			Remove(m_layer_mgr->selected);
 		}
 		break;
+	}
+}
+
+void LayerList::OnActivated(wxListEvent& event)
+{
+	int item = event.GetIndex();
+	Layer* layer = m_layer_mgr->GetLayer(GetItemCount() - 1 - item);
+	if (!layer) {
+		return;
+	}
+
+	bool ori_view = layer->visible,
+		 ori_edit = layer->editable;
+
+	wxPoint pos = wxGetMousePosition();
+	pos.x -= 400;
+
+	LayerDialog dlg(this, layer, pos);
+	dlg.ShowModal();
+
+	if (ori_view != layer->visible) {
+		std::string tag = layer->visible ? "T" : "F";
+		SetItem(item, 2, tag);
+		SetCanvasDirtySJ::Instance()->SetDirty();		
+	}
+	if (ori_edit != layer->editable) {
+		std::string tag = layer->editable ? "T" : "F";
+		SetItem(item, 3, tag);
 	}
 }
 
