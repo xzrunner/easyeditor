@@ -36,7 +36,11 @@ bool Layer::RemoveSprite(Object* obj)
 	m_name_set.erase(spr->name);
 
 	if (m_layer_mgr.selected) {
-		return m_layer_mgr.selected->Remove(spr);
+		if (!m_layer_mgr.selected->Remove(spr)) {
+			return m_sprites.Remove(spr);
+		} else {
+			return true;
+		}
 	} else {
 		return m_sprites.Remove(spr);
 	}
