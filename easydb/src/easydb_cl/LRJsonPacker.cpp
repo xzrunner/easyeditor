@@ -195,7 +195,6 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, m_dir);
 
 		Json::Value dst_val;
-		std::string name = shape_val["name"].asString();
 		dst_val["name"] = shape_val["name"];
 		ParserShape(shape, d2d::Vector(0, 0), 0, grids, force_grids, dst_val);
 
