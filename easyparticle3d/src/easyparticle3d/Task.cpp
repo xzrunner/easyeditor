@@ -70,7 +70,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
 	m_library = new LibraryPanel(split);
-	m_property = new d2d::PropertySettingPanel(split);
+	m_property = new PropertySettingPanel(split);
 	
 	split->SetSashGravity(0.7f);
 	split->SplitHorizontally(m_library, m_property);
@@ -81,6 +81,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
+	m_property->SetStagePanel(m_stage);
 	return m_stage;
 }
 

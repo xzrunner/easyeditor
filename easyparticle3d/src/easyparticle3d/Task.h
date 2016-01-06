@@ -8,6 +8,7 @@ namespace eparticle3d
 {
 
 class LibraryPanel;
+class PropertySettingPanel;
 class StagePanel;
 class ToolbarPanel;
 
@@ -41,7 +42,7 @@ private:
 	wxFrame* m_parent;
 
 	LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
+	PropertySettingPanel* m_property;
 	StagePanel* m_stage;
 	ToolbarPanel* m_toolbar;
 

@@ -305,6 +305,14 @@
 				Name="property"
 				>
 				<File
+					RelativePath="..\..\..\src\libparticle3d\PropertySettingPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\PropertySettingPanel.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libparticle3d\SpritePropertySetting.cpp"
 					>
 				</File>

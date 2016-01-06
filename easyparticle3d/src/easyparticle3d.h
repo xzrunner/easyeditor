@@ -8,6 +8,7 @@
 #include "libparticle3d/Sprite.h"
 #include "libparticle3d/LibraryPage.h"
 #include "libparticle3d/LibraryPanel.h"
+#include "libparticle3d/PropertySettingPanel.h"
 #include "libparticle3d/SymbolPropertySetting.h"
 #include "libparticle3d/StagePanel.h"
 #include "libparticle3d/ToolbarPanel.h"
