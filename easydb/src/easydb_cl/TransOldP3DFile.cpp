@@ -76,9 +76,10 @@ void TransOldP3DFile::Trans(const std::string& filepath) const
 	// emission count
 	float time = value["emission_time"].asDouble();
 	if (time < 1000 / 30.0f) {
+		float f = 1000 / 30.0f / time;
 		dirty = true;
-		value["count"] = value["count"].asDouble() * 4;
-		value["emission_time"] = value["emission_time"].asDouble() * 4;
+		value["count"] = value["count"].asDouble() * f;
+		value["emission_time"] = value["emission_time"].asDouble() * f;
 	}
 	
 	if (dirty) {
