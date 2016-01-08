@@ -35,15 +35,13 @@ bool Layer::RemoveSprite(Object* obj)
 	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
 	m_name_set.erase(spr->name);
 
-	if (m_layer_mgr.selected) {
-		if (!m_layer_mgr.selected->Remove(spr)) {
-			return m_sprites.Remove(spr);
-		} else {
+	const std::vector<d2d::Layer*>& layers = m_layer_mgr.GetAllLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		if (layers[i]->Remove(spr)) {
 			return true;
 		}
-	} else {
-		return m_sprites.Remove(spr);
 	}
+	return m_sprites.Remove(spr);
 }
 
 bool Layer::InsertSprite(Object* obj, int idx)

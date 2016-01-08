@@ -47,7 +47,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
-	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_chara_dirs);
+	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(library, property, this, &m_chara_dirs);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
 		NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
 

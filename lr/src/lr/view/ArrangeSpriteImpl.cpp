@@ -10,11 +10,12 @@
 namespace lr
 {
 
-ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, 
+ArrangeSpriteImpl::ArrangeSpriteImpl(d2d::LibraryPanel* library, 
 									 d2d::PropertySettingPanel* property,
+									 StagePanel* stage, 
 									 CharacterAllDirections* dirs)
 	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
-	, m_popup(stage)
+	, m_popup(library, stage)
 	, m_dirs(dirs)
 {
 }

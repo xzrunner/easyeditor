@@ -3,29 +3,31 @@
 #include "typedef.h"
 
 #include "dataset/Layer.h"
+#include "view/LibraryPage.h"
 
 #include <easycomplex.h>
 
 namespace lr
 {
 
-RightPopupMenu::RightPopupMenu(StagePanel* stage)
-	: m_stage(stage)
+RightPopupMenu::RightPopupMenu(d2d::LibraryPanel* library, StagePanel* stage)
+	: m_library(library)
+	, m_stage(stage)
 	, m_sprite(NULL)
 {
 }
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
-	if (m_stage->GetSpriteSelection()->Size() != 1) {
-		return;
+	d2d::SpriteSelection* selection = m_stage->GetSpriteSelection();
+	if (selection->Size() == 1) {
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+		selection->Traverse(d2d::PointQueryVisitor(pos, &m_sprite));
+		CreateShapeMenu(menu);
+		CreateAnimMenu(menu);
+		CreateLayerTagMenu(menu);
 	}
-
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	m_stage->GetSpriteSelection()->Traverse(d2d::PointQueryVisitor(pos, &m_sprite));
-	CreateShapeMenu(menu);
-	CreateAnimMenu(menu);
-	CreateLayerTagMenu(menu);
+	CreateLayerMoveMenu(menu);
 }
 
 void RightPopupMenu::OnRightPopupMenu(int id)
@@ -36,6 +38,8 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		HandleAnimMenu(id);
 	} else if (id >= MENU_LAYER_CLEAR_TAG_ID && id <= MENU_TOP_LAYER_TAG_ID) {
 		HandleLayerTagMenu(id);
+	} else if (id >= MENU_MOVE_TO_LAYER_BEGIN_ID && id < MENU_MOVE_TO_LAYER_END_ID) {
+		HandleMoveToLayerMenu(id);
 	}
 }
 
@@ -104,6 +108,19 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 	}
 }
 
+void RightPopupMenu::CreateLayerMoveMenu(wxMenu& menu)
+{
+	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
+	const std::vector<d2d::Layer*>& layers = layer->GetLayerMgr()->GetAllLayers();
+	wxMenu* sub_menu = new wxMenu;
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		int id = MENU_MOVE_TO_LAYER_BEGIN_ID + i;
+		sub_menu->Append(id, layers[i]->name);
+		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, id);
+	}
+	menu.AppendSubMenu(sub_menu, "ÒÆ¶¯µ½");
+}
+
 void RightPopupMenu::HandleShapeMenu(int id)
 {
 	std::vector<d2d::ISprite*> selected;
@@ -167,6 +184,22 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 	} else if (id == MENU_TOP_LAYER_TAG_ID) {
 		m_sprite->tag += std::string(TOP_LAYER_TAG) + ";";
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+}
+
+void RightPopupMenu::HandleMoveToLayerMenu(int id)
+{
+	int idx = id - MENU_MOVE_TO_LAYER_BEGIN_ID;	
+	Layer* from = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
+	d2d::Layer* to = from->GetLayerMgr()->GetLayer(idx);
+	
+	d2d::SpriteSelection* selection = m_stage->GetSpriteSelection();
+	std::vector<d2d::ISprite*> sprites;
+	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* spr = sprites[i];
+		from->RemoveSprite(spr);
+		to->Insert(spr);
 	}
 }
 

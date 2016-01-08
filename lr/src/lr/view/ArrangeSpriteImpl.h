@@ -15,8 +15,8 @@ class CharacterAllDirections;
 class ArrangeSpriteImpl : public d2d::ArrangeSpriteImpl
 {
 public:
-	ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
-		CharacterAllDirections* dirs);
+	ArrangeSpriteImpl(d2d::LibraryPanel* library, d2d::PropertySettingPanel* property,
+		StagePanel* stage, CharacterAllDirections* dirs);
 
 	virtual void OnPopMenuSelected(int type);
 

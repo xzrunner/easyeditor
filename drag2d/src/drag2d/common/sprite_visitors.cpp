@@ -22,7 +22,7 @@ void PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
 	ISprite* sprite = static_cast<ISprite*>(object);
 	if (sprite->IsContain(m_pos))
 	{
-		*m_result = sprite;
+		obj_assign<ISprite>(*m_result, sprite);
 		bFetchNext = false;
 	}
 	else
