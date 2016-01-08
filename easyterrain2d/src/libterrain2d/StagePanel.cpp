@@ -142,7 +142,7 @@ void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageS
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, NULL, library)
+	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
 	, m_stage(stage)
 {
 }
@@ -156,6 +156,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
 			poly->SetMaterialTexture(image);
 			m_stage->AddOcean(poly, image);
+			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else {
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			sprite->Translate(pos);
