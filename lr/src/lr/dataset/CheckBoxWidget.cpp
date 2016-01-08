@@ -13,19 +13,24 @@ std::string CheckBoxWidget::GetValue() const
 	}
 }
 
-void CheckBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
-									const DynamicInfo& info)
+bool CheckBoxWidget::IsChanged() const
 {
-	bool default_bool = m_default;
+	bool now_val = m_ctrl->IsChecked();
+	return now_val != m_ori_val;
+}
+
+void CheckBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const DynamicInfo& info)
+{
+	m_ori_val = m_default;
 	std::string value = info.QueryValue(GetKey());
 	if (value == "true") {
-		default_bool = true;
+		m_ori_val = true;
 	} else if (value == "false") {
-		default_bool = false;
+		m_ori_val = false;
 	}
 
 	m_ctrl = new wxCheckBox(parent, wxID_ANY, GetTitle());
-	m_ctrl->SetValue(default_bool);
+	m_ctrl->SetValue(m_ori_val);
 
 	top_sizer->Add(m_ctrl);
 	top_sizer->AddSpacer(10);

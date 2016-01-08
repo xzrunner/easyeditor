@@ -22,32 +22,38 @@ std::string ComboBoxWidget::GetValue() const
 	}
 }
 
+bool ComboBoxWidget::IsChanged() const
+{
+	int now_val = m_ctrl->GetSelection();
+	return now_val != m_ori_val;
+}
+
 void ComboBoxWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const DynamicInfo& info)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
 
-	int default_sel = m_default;
+	m_ori_val = m_default;
 	std::string value = info.QueryValue(GetKey());
 	wxString choices[MAX_ITEMS];
 	bool find = false;
 	for (int i = 0, n = m_choices.size(); i < n; ++i) {
 		if (m_choices[i].value == value) {
 			find = true;
-			default_sel = i;
+			m_ori_val = i;
 		}
 		choices[i] = m_choices[i].title;
 	}
 
 	m_ctrl = new wxComboBox(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_choices.size(), choices); 
 	if (find) {
-		m_ctrl->SetSelection(default_sel);
+		m_ctrl->SetSelection(m_ori_val);
 	} else {
 		if (!value.empty()) {
 			m_ctrl->SetValue(value);
 		} else {
-			m_ctrl->SetSelection(default_sel);
+			m_ctrl->SetSelection(m_ori_val);
 		}
 	}
 

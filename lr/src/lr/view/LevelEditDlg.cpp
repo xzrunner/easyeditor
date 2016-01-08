@@ -8,39 +8,34 @@ namespace lr
 
 LevelEditDlg::LevelEditDlg(wxWindow* parent, d2d::ISprite* spr)
 	: CfgEditDlg(parent, "Level", spr)
-{	
-	InitType(spr->tag);
+{
+	InitData(spr);
 	InitLayout();
 }
 
 std::string LevelEditDlg::ToString()
 {
 	std::string ret = "type=" + m_type + ";";
-	for (int i = 0, n = m_widgets.size(); i < n; ++i) {
-		DynamicWidget* widget = m_widgets[i];
-		m_info.SetValue(widget->GetKey(), widget->GetValue(), widget->GetValue() == DEFAULT_VAL);
-	}
-	ret += m_info.ToString();
+ 	for (int i = 0, n = m_widgets.size(); i < n; ++i) {
+ 		DynamicWidget* dw = m_widgets[i];
+		if (dw->GetValue() == DEFAULT_VAL) {
+			continue;
+		}
+		if (dw->GetTag() == "sprite" || dw->IsChanged()) {
+			ret += dw->GetKey() + "=" + dw->GetValue() + ";";
+ 		}
+ 	}
 	return ret;
 }
 
-void LevelEditDlg::InitType(const std::string& tag)
+void LevelEditDlg::InitData(d2d::ISprite* spr)
 {
-	std::vector<std::string> tags;
-	d2d::StringTools::Split(tag, ";", tags);
-
-	std::string type_tag;
-	for (int i = 0, n = tags.size(); i < n; ++i) {
-		if (tags[i].find("type") != std::string::npos) {
-			type_tag = tags[i];
-			break;
-		}
+	if (spr->tag.find("[symbol]") != std::string::npos) {
+		m_info.LoadFromString(spr->GetSymbol().tag, "symbol");
 	}
+	m_info.LoadFromString(spr->tag, "sprite");
 
-	if (!type_tag.empty() && 
-		type_tag.find('=') != std::string::npos) {
-		m_type = type_tag.substr(type_tag.find_first_of('=') + 1);
-	}
+	m_type = m_info.QueryValue("type");
 }
 
 void LevelEditDlg::InitLayout()

@@ -11,6 +11,8 @@ class TextWidget : public DynamicWidget
 public:
 	virtual std::string GetValue() const;
 
+	virtual bool IsChanged() const;
+
 	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
 		const DynamicInfo& info);
 
@@ -21,6 +23,8 @@ private:
 	std::string m_default;
 
 	wxTextCtrl* m_ctrl;
+
+	std::string m_ori_val;
 
 }; // TextWidget
 

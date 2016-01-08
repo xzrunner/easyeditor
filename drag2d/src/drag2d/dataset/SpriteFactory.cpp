@@ -64,7 +64,7 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 	}
 
 	if (!symbol->tag.empty()) {
-		sprite->tag = symbol->tag;
+		sprite->tag = "[symbol]";
 	}
 
 	return sprite;

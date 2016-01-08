@@ -14,19 +14,24 @@ std::string TextWidget::GetValue() const
 	}
 }
 
-void TextWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
-								const DynamicInfo& info)
+bool TextWidget::IsChanged() const
+{
+	std::string now_val = m_ctrl->GetValue().ToStdString();
+	return now_val != m_ori_val;
+}
+
+void TextWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const DynamicInfo& info)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
 
-	std::string default_str = m_default;
+	m_ori_val = m_default;
 	std::string value = info.QueryValue(GetKey());
 	if (!value.empty()) {
-		default_str = value;
+		m_ori_val = value;
 	}
-	m_ctrl = new wxTextCtrl(parent, wxID_ANY, default_str, wxDefaultPosition, wxSize(200, -1));
+	m_ctrl = new wxTextCtrl(parent, wxID_ANY, m_ori_val, wxDefaultPosition, wxSize(200, -1));
 	sizer->Add(m_ctrl, 0, wxLEFT | wxRIGHT, 5);
 
 	top_sizer->Add(sizer);

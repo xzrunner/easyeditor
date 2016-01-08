@@ -14,7 +14,7 @@ public:
 	std::string ToString();
 
 private:
-	void InitType(const std::string& tag);
+	void InitData(d2d::ISprite* spr);
 	void InitLayout();
 
 private:

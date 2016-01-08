@@ -11,6 +11,8 @@ class ChoiceWidget : public DynamicWidget
 public:
 	virtual std::string GetValue() const;
 
+	virtual bool IsChanged() const;
+
 	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
 		const DynamicInfo& info);
 
@@ -35,6 +37,8 @@ private:
 	std::vector<Item> m_choices;
 
 	wxChoice* m_ctrl;
+
+	int m_ori_val;
 
 }; // ChoiceWidget
 

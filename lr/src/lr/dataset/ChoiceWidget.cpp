@@ -18,25 +18,30 @@ std::string ChoiceWidget::GetValue() const
 	}
 }
 
-void ChoiceWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer,
-								  const DynamicInfo& info)
+bool ChoiceWidget::IsChanged() const
+{
+	int now_val = m_ctrl->GetSelection();
+	return now_val != m_ori_val;
+}
+
+void ChoiceWidget::InitLayout(wxWindow* parent, wxSizer* top_sizer, const DynamicInfo& info)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	sizer->Add(new wxStaticText(parent, wxID_ANY, GetTitle()), 0, wxLEFT | wxRIGHT, 5);
 
-	int default_sel = m_default;
+	int m_ori_val = m_default;
 	std::string value = info.QueryValue(GetKey());
 	wxString choices[MAX_ITEMS];
 	for (int i = 0, n = m_choices.size(); i < n; ++i) {
 		if (m_choices[i].value == value) {
-			default_sel = i;
+			m_ori_val = i;
 		}
 		choices[i] = m_choices[i].title;
 	}
 
 	m_ctrl = new wxChoice(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choices.size(), choices); 
-	m_ctrl->SetSelection(default_sel);
+	m_ctrl->SetSelection(m_ori_val);
 	sizer->Add(m_ctrl);
 
 	top_sizer->Add(sizer);

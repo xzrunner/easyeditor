@@ -12,18 +12,20 @@ class DynamicInfo;
 class DynamicWidget
 {
 public:
+	DynamicWidget();
 	virtual ~DynamicWidget() {}
+
+	virtual std::string GetValue() const = 0;
+	virtual bool IsChanged() const = 0;
+	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer, const DynamicInfo& info) = 0;
 
 	virtual void LoadFromFile(const Json::Value& value);
 
 	const std::string& GetTitle() const { return m_title; }
-
 	const std::string& GetKey() const { return m_key; }
 
-	virtual std::string GetValue() const = 0;
-
-	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
-		const DynamicInfo& info) = 0;
+	void SetTag(const std::string& tag) { m_tag = tag; }
+	const std::string& GetTag() const { return m_tag; }
 
 protected:
 	virtual void Load(const Json::Value& value) = 0;
@@ -31,6 +33,7 @@ protected:
 protected:
 	std::string m_title;
 	std::string m_key;
+	std::string m_tag;
 
 	bool m_special;
 

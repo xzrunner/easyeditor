@@ -79,7 +79,11 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	else if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrLevelLayer())  {
 		LevelEditDlg dlg(m_wnd, selected);
 		if (dlg.ShowModal() == wxID_OK) {
-			selected->tag = dlg.ToString();
+			bool use_symbol = selected->tag.find("[symbol]") != std::string::npos;
+			if (use_symbol) {
+				selected->tag = "[symbol];";
+			}
+			selected->tag += dlg.ToString();
 		}
 	}
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))

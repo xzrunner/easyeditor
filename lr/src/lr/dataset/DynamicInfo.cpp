@@ -5,7 +5,49 @@
 namespace lr
 {
 
-DynamicInfo::DynamicInfo(const std::string& str)
+std::string DynamicInfo::QueryValue(const std::string& key) const
+{
+	std::map<std::string, Item>::const_iterator itr 
+		= m_map_val.find(key);
+	if (itr == m_map_val.end()) {
+		return "";
+	} else {
+		return itr->second.val;
+	}
+}
+
+std::string DynamicInfo::QueryTag(const std::string& key) const
+{
+	std::map<std::string, Item>::const_iterator itr 
+		= m_map_val.find(key);
+	if (itr == m_map_val.end()) {
+		return "";
+	} else {
+		return itr->second.tag;
+	}
+}
+
+void DynamicInfo::SetValue(const std::string& key, const std::string& val, 
+						   bool is_default, const std::string& tag)
+{
+	std::map<std::string, Item>::iterator itr 
+		= m_map_val.find(key);
+	if (itr == m_map_val.end()) {
+		Item item;
+		item.val = val;
+		item.is_default = is_default;
+		item.tag = tag;
+		m_map_val.insert(std::make_pair(key, item));
+	} else {
+		itr->second.is_default = is_default;
+		if (!is_default) {
+			itr->second.val = val;
+			itr->second.tag = tag;
+		}
+	}
+}
+
+void DynamicInfo::LoadFromString(const std::string& str, const std::string& tag)
 {
 	std::vector<std::string> pairs;
 	d2d::StringTools::Split(str, ";", pairs);
@@ -23,36 +65,7 @@ DynamicInfo::DynamicInfo(const std::string& str)
 			continue;
 		}
 
-		SetValue(key, val);
-	}
-}
-
-std::string DynamicInfo::QueryValue(const std::string& key) const
-{
-	std::map<std::string, Item>::const_iterator itr 
-		= m_map_val.find(key);
-	if (itr == m_map_val.end()) {
-		return "";
-	} else {
-		return itr->second.val;
-	}
-}
-
-void DynamicInfo::SetValue(const std::string& key, const std::string& val,
-						bool is_default)
-{
-	std::map<std::string, Item>::iterator itr 
-		= m_map_val.find(key);
-	if (itr == m_map_val.end()) {
-		Item item;
-		item.val = val;
-		item.is_default = is_default;
-		m_map_val.insert(std::make_pair(key, item));
-	} else {
-		itr->second.is_default = is_default;
-		if (!is_default) {
-			itr->second.val = val;
-		}
+		SetValue(key, val, false, tag);
 	}
 }
 

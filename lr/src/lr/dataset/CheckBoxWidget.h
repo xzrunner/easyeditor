@@ -11,6 +11,8 @@ class CheckBoxWidget : public DynamicWidget
 public:
 	virtual std::string GetValue() const;
 
+	virtual bool IsChanged() const;
+
 	virtual void InitLayout(wxWindow* parent, wxSizer* top_sizer,
 		const DynamicInfo& info);
 
@@ -22,6 +24,8 @@ private:
 	bool m_has_default;
 
 	wxCheckBox* m_ctrl;
+
+	bool m_ori_val;
 
 }; // CheckBoxWidget
 

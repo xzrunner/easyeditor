@@ -11,6 +11,8 @@ UnitEditDlg::UnitEditDlg(wxWindow* parent, d2d::ISprite* spr,
 	: CfgEditDlg(parent, "Unit", spr)
 	, m_path_names(path_names)
 {	
+	m_info.LoadFromString(spr->tag);
+
 	InitDefault();
 	InitLayout();
 }

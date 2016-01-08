@@ -8,7 +8,6 @@ namespace lr
 CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, d2d::ISprite* spr)
 	: d2d::BaseDialog(parent, name)
 	, m_spr(spr)
-	, m_info(spr->tag)
 {
 }
 
@@ -30,7 +29,10 @@ void CfgEditDlg::InitLayout(int col, const std::vector<DynamicWidget*>& widgets)
 	for (int i = 0, n = widgets.size(); i < n; ++i) {
 		int idx = i / count;
 		wxSizer* sz = col_sizers[idx];
-		widgets[i]->InitLayout(this, sz, m_info);
+
+		DynamicWidget* dw = widgets[i];
+		dw->SetTag(m_info.QueryTag(dw->GetKey()));
+		dw->InitLayout(this, sz, m_info);
 	}
 
 	for (int i = 0; i < col; ++i) {
