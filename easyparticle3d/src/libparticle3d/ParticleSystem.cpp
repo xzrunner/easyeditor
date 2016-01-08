@@ -39,7 +39,7 @@ ParticleSystem::~ParticleSystem()
 	delete m_anim_recorder;
 	delete m_inv_record;
 
-	free(m_et);
+	p3d_emitter_release(m_et);	
 }
 
 void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
