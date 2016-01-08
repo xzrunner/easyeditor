@@ -21,9 +21,7 @@ Symbol::Symbol(const Symbol& s)
 
 Symbol::~Symbol()
 {
-	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
-		delete m_oceans[i];
-	}
+	Clear();
 }
 
 void Symbol::ReloadTexture() const
@@ -84,6 +82,8 @@ void Symbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
+	Clear();
+
 	std::string dir = d2d::FilenameTools::getFileDir(m_filepath).ToStdString();
 	int i = 0;
 	Json::Value ocean_val = value["ocean"][i++];
@@ -103,6 +103,12 @@ void Symbol::LoadResources()
 		}
 		ocean_val = value["ocean"][i++];
 	}
+}
+
+void Symbol::Clear()
+{
+	for_each(m_oceans.begin(), m_oceans.end(), d2d::ReleaseObjectFunctor<OceanMesh>());
+	m_oceans.clear();
 }
 
 }

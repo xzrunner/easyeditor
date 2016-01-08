@@ -12,6 +12,7 @@ class PolygonPropertySetting : public d2d::IPropertySetting
 {
 public:
 	PolygonPropertySetting(d2d::EditPanelImpl* stage, PolygonShape* poly);
+	virtual ~PolygonPropertySetting();
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 

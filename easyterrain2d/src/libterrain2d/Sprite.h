@@ -26,7 +26,6 @@ public:
 	virtual const Symbol& GetSymbol() const;
 	virtual void SetSymbol(d2d::ISymbol* symbol);
 	virtual void Load(const Json::Value& val);
-	virtual void BuildBounding();
 
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));

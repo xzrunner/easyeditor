@@ -159,6 +159,13 @@ void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType ty
 	}
 }
 
+void StagePanel::EnableObserve(bool enable)
+{
+	GetCanvas()->EnableObserve(enable);
+	MultiSpritesImpl::EnableObserve(enable);
+	MultiShapesImpl::EnableObserve(enable);
+}
+
 void StagePanel::DebugDraw() const
 {
 	if (m_sindex) {

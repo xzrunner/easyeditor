@@ -37,6 +37,8 @@ public:
 	virtual void TraverseShapes(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
+	void EnableObserve(bool enable);
+
 	void DebugDraw() const;
 
 	void Pathfinding(const d2d::Vector& start, const d2d::Vector& end);

@@ -35,7 +35,7 @@ OceanMesh::~OceanMesh()
 {
 	Clear();
 
-	delete m_shape;
+	m_shape->Release();
 }
 
 void OceanMesh::Build()

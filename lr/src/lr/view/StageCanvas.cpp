@@ -33,6 +33,12 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	m_stage->DrawEditOP();
+
+#ifdef _DEBUG 
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DrawCallBatching::Instance()->DebugDraw();
+	}
+#endif
 }
 
 void StageCanvas::DrawSprites() const

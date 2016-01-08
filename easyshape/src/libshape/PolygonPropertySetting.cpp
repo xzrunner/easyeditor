@@ -8,8 +8,14 @@ PolygonPropertySetting::PolygonPropertySetting(d2d::EditPanelImpl* stage,
 											   PolygonShape* poly)
 	: IPropertySetting("Polygon")
 	, m_stage(stage)
-	, m_poly(poly)
 {
+	poly->Retain();
+	m_poly = poly;
+}
+
+PolygonPropertySetting::~PolygonPropertySetting()
+{
+	m_poly->Release();	
 }
 
 void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)

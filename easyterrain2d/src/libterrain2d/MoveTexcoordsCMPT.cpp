@@ -9,6 +9,7 @@ namespace eterrain2d
 
 MoveTexcoordsCMPT::MoveTexcoordsCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	, m_stage_panel(stage)
 {
 	m_editOP = new WaveVerticesOP(stage);
 }

@@ -64,10 +64,8 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		return false;
 	}
 
-	m_spritesImpl->EnableObserve(false);
-	m_stage->GetCanvas()->EnableObserve(false);
-
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
+	stage->EnableObserve(false);
 	stage->SetUpdateState(false);
 	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
 	{
@@ -147,8 +145,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	stage->SetUpdateState(true);
-	m_spritesImpl->EnableObserve(true);
-	m_stage->GetCanvas()->EnableObserve(true);
+	stage->EnableObserve(true);
 
 	return false;
 }

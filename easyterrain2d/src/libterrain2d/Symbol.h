@@ -41,6 +41,9 @@ protected:
 	virtual void LoadResources();
 
 private:
+	void Clear();
+
+private:
 	bool m_update;
 
 	std::vector<OceanMesh*> m_oceans;

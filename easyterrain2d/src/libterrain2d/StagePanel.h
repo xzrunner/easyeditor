@@ -21,6 +21,8 @@ public:
 		const d2d::MultiSpritesImpl* bg_sprites, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
+	virtual bool Update(int version);
+
 	void Store(const std::string& dir, Json::Value& value) const;
 	void Load(const std::string& dir, const Json::Value& value, 
 		d2d::LibraryPanel* library, ToolbarPanel* toolbar);

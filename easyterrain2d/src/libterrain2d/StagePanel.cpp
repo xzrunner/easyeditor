@@ -35,8 +35,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	m_oceans = static_cast<Sprite*>(edited)->GetSymbol().GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
-		OceanMesh* ocean = m_oceans[i];
-		ocean->Retain();
+ 		OceanMesh* ocean = m_oceans[i];
+ 		ocean->Retain();
 		d2d::InsertShapeSJ::Instance()->Insert(
 			const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 	}
@@ -49,6 +49,11 @@ StagePanel::~StagePanel()
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		m_oceans[i]->Release();
 	}
+}
+
+bool StagePanel::Update(int version)
+{
+	return true;
 }
 
 void StagePanel::Store(const std::string& dir, Json::Value& value) const
