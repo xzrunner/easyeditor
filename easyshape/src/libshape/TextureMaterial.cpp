@@ -33,7 +33,7 @@ void TextureMaterial::Translate(const d2d::Vector& offset)
 	}
 }
 
-void TextureMaterial::Draw(const d2d::Matrix& mt) const
+void TextureMaterial::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
 	if (m_tris.empty()) {
 		return;

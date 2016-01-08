@@ -131,8 +131,8 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 		if (chain) 
 		{
 			chains.push_back(chain);
-			if (chain->getRect().xMin < leftmost)
-				leftmost = chain->getRect().xMin;
+			if (chain->GetRect().xMin < leftmost)
+				leftmost = chain->GetRect().xMin;
 		}
 	}
 

@@ -4,6 +4,7 @@
 #include "common/visitors.h"
 #include "common/Color.h"
 #include "common/Rect.h"
+#include "dataset/ColorTrans.h"
 
 namespace d2d
 {
@@ -19,7 +20,7 @@ public:
 private:
 	Rect m_screen_region;
 
-	Colorf m_color;
+	ColorTrans m_ct;
 
 }; // DrawShapesVisitor
 

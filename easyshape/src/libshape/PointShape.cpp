@@ -24,12 +24,12 @@ PointShape* PointShape::Clone() const
 	return new PointShape(*this);
 }
 
-bool PointShape::isContain(const d2d::Vector& pos) const
+bool PointShape::IsContain(const d2d::Vector& pos) const
 {
 	return d2d::Math::isPointInRect(pos, m_rect);
 }
 
-bool PointShape::isIntersect(const d2d::Rect& rect) const
+bool PointShape::IsIntersect(const d2d::Rect& rect) const
 {
 	return d2d::Math::isRectIntersectRect(rect, m_rect);
 }
@@ -40,12 +40,12 @@ void PointShape::Translate(const d2d::Vector& offset)
 	m_rect.translate(offset);
 }
 
-void PointShape::draw(const d2d::Matrix& mt, const d2d::Colorf& color) const
+void PointShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::PrimitiveDraw::drawCircle(mt, m_pos, RADIUS, true, 2, color);
+	d2d::PrimitiveDraw::drawCircle(mt, m_pos, RADIUS, true, 2, color.multi);
 }
 
-d2d::IPropertySetting* PointShape::createPropertySetting(d2d::EditPanelImpl* stage)
+d2d::IPropertySetting* PointShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return NULL;
 }

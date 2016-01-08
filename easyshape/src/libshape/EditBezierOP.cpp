@@ -146,7 +146,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 	{
 		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
-			d2d::Vector center(bezier->getRect().xCenter(), bezier->getRect().yCenter());
+			d2d::Vector center(bezier->GetRect().xCenter(), bezier->GetRect().yCenter());
 
 			if (!m_captured.pos.isValid()) {
 				bezier->Translate(m_currPos - center);
@@ -175,7 +175,7 @@ bool EditBezierOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::drawCircle(d2d::Vector(bezier->getRect().xCenter(), bezier->getRect().yCenter()), 
+				d2d::PrimitiveDraw::drawCircle(d2d::Vector(bezier->GetRect().xCenter(), bezier->GetRect().yCenter()), 
 					tolerance, true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.isValid()) {
 					d2d::PrimitiveDraw::drawCircle(m_captured.pos, tolerance, true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
@@ -188,7 +188,7 @@ bool EditBezierOP::OnDraw() const
 		if (m_firstPress.isValid() && m_currPos.isValid())
 		{
 			BezierShape bezier(m_firstPress, m_currPos);
-			bezier.draw(d2d::Matrix());
+			bezier.Draw(d2d::Matrix());
 		}
 //			PrimitiveDraw::drawRect(m_firstPress, m_currPos);
 	}

@@ -255,8 +255,8 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			else
 			{
 				d2d::Vector old;
-				old.x = chain->getRect().xCenter();
-				old.y = chain->getRect().yCenter();
+				old.x = chain->GetRect().xCenter();
+				old.y = chain->GetRect().yCenter();
 				chain->Translate(pos - old);
 			}
 
@@ -311,8 +311,8 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 		}
 
 		d2d::Vector center;
-		center.x = chain->getRect().xCenter();
-		center.y = chain->getRect().yCenter();
+		center.x = chain->GetRect().xCenter();
+		center.y = chain->GetRect().yCenter();
 		d2d::PrimitiveDraw::drawCircle(center, m_node_capture->GetValue(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
@@ -344,7 +344,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	d2d::Rect rect(m_pos, m_tol, m_tol);
 
 	ChainShape* chain = static_cast<ChainShape*>(object);
-	if (!chain->isIntersect(rect)) 
+	if (!chain->IsIntersect(rect)) 
 	{
 		bFetchNext = true;
 		return;
@@ -400,7 +400,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 
 	d2d::Rect rect(m_pos, m_tol, m_tol);
 
-	if (!chain->isIntersect(rect)) 
+	if (!chain->IsIntersect(rect)) 
 	{
 		bFetchNext = true;
 		return;

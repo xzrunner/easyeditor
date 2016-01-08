@@ -25,11 +25,11 @@ public:
 	// IShape interface
 	//
 	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
-	virtual bool isContain(const d2d::Vector& pos) const;
-	virtual bool isIntersect(const d2d::Rect& rect) const;
+	virtual bool IsContain(const d2d::Vector& pos) const;
+	virtual bool IsIntersect(const d2d::Rect& rect) const;
 	virtual void Translate(const d2d::Vector& offset);
-	virtual void draw(const d2d::Matrix& mt,
-		const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;
+	virtual void Draw(const d2d::Matrix& mt,
+		const d2d::ColorTrans& color = d2d::ColorTrans()) const;
 
 	const std::vector<std::vector<d2d::Vector> >& GetHoles() const { return m_holes; }
 

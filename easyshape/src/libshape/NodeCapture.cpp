@@ -89,7 +89,7 @@ bool NodeCapture::RectQueryVisitor::
 Visit(BezierShape* bezier)
 {
 	// capture center
-	const d2d::Rect& rect = bezier->getRect();
+	const d2d::Rect& rect = bezier->GetRect();
 	if (d2d::Math::getDistance(d2d::Vector(rect.xCenter(), rect.yCenter()), m_pos) < m_tolerance)
 	{
 		m_result.shape = bezier;
@@ -114,7 +114,7 @@ bool NodeCapture::RectQueryVisitor::
 Visit(ChainShape* chain)
 {
 	// capture center
-	const d2d::Rect& rect = chain->getRect();
+	const d2d::Rect& rect = chain->GetRect();
 	if (d2d::Math::getDistance(d2d::Vector(rect.xCenter(), rect.yCenter()), m_pos) < m_tolerance)
 	{
 		m_result.shape = chain;
@@ -123,10 +123,10 @@ Visit(ChainShape* chain)
 	}
 
 	// capture control points
-	if (!d2d::Math::isRectIntersectRect(m_rect, chain->getRect()))
+	if (!d2d::Math::isRectIntersectRect(m_rect, chain->GetRect()))
 		return false;
 
-	if (!chain->isIntersect(m_rect)) 
+	if (!chain->IsIntersect(m_rect)) 
 		return false;
 
 	const std::vector<d2d::Vector>& vertices = chain->GetVertices();

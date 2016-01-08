@@ -58,10 +58,10 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	if (d2d::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-			m_bg_outline[i]->draw(mt);
+			m_bg_outline[i]->Draw(mt);
 		}
 		for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-			m_shapes[i]->draw(mt);
+			m_shapes[i]->Draw(mt);
 		}
 	}
 }
@@ -70,10 +70,10 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	d2d::Rect rect;
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-		rect.combine(m_bg_outline[i]->getRect());
+		rect.combine(m_bg_outline[i]->GetRect());
 	}
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-		rect.combine(m_shapes[i]->getRect());
+		rect.combine(m_shapes[i]->GetRect());
 	}
 	return rect;
 }

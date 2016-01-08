@@ -1229,6 +1229,10 @@
 				Name="shape"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\DrawSelectedShapeVisitor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\DrawSelectedShapeVisitor.h"
 					>
 				</File>
@@ -1254,6 +1258,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\PrimitiveDrawNew.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\PrimitiveDrawRVG.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\PrimitiveDrawRVG.h"
 					>
 				</File>
 				<File

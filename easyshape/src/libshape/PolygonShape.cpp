@@ -41,7 +41,7 @@ PolygonShape* PolygonShape::Clone() const
 	return new PolygonShape(*this);
 }
 
-bool PolygonShape::isContain(const d2d::Vector& pos) const
+bool PolygonShape::IsContain(const d2d::Vector& pos) const
 {
 	return d2d::Math::isPointInRect(pos, m_rect) 
 		&& d2d::Math::isPointInArea(pos, m_vertices);
@@ -59,22 +59,21 @@ void PolygonShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void PolygonShape::draw(const d2d::Matrix& mt,
-						const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void PolygonShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
 	if (m_material) {
-		m_material->Draw(mt);
+		m_material->Draw(mt, color);
 		if (d2d::Settings::bDisplayTrisEdge) {
 			m_material->DebugDrawTris(mt);
 		}
 	}
 
 	if (d2d::Config::Instance()->GetSettings().visible_tex_edge) {
-		ChainShape::draw(mt, color);
+		ChainShape::Draw(mt, color);
 	}
 }
 
-d2d::IPropertySetting* PolygonShape::createPropertySetting(d2d::EditPanelImpl* stage)
+d2d::IPropertySetting* PolygonShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return new PolygonPropertySetting(stage, this);
 }

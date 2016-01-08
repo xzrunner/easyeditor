@@ -64,10 +64,12 @@ bool EditPolylinesOP::OnDraw() const
 {
 	if (d2d::SelectShapesOP::OnDraw()) return true;
 
+	d2d::ColorTrans color;
+	color.multi.set(0.8f, 0.8f, 0.2f);
+
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
-	for ( ; itr != m_simplifyBuffer.end(); ++itr)
-	{
-		itr->second->draw(d2d::Matrix(), d2d::Colorf(0.8f, 0.8f, 0.2f));
+	for ( ; itr != m_simplifyBuffer.end(); ++itr) {
+		itr->second->Draw(d2d::Matrix(), color);
 		d2d::PrimitiveDraw::drawCircles(itr->second->GetVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 

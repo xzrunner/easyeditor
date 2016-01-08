@@ -43,7 +43,7 @@ BezierShape* BezierShape::Clone() const
 	return new BezierShape(*this);
 }
 
-bool BezierShape::isContain(const d2d::Vector& pos) const
+bool BezierShape::IsContain(const d2d::Vector& pos) const
 {
 	bool ret = false;
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
@@ -63,10 +63,9 @@ void BezierShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void BezierShape::draw(const d2d::Matrix& mt,
-					   const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void BezierShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	ChainShape::draw(mt, color);
+	ChainShape::Draw(mt, color);
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
 		d2d::Vector pos = d2d::Math::transVector(m_control_nodes[i], mt);
@@ -74,7 +73,7 @@ void BezierShape::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::IPropertySetting* BezierShape::createPropertySetting(d2d::EditPanelImpl* stage)
+d2d::IPropertySetting* BezierShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return new BezierPropertySetting(stage, this);
 }
@@ -116,8 +115,8 @@ void BezierShape::createCurve()
 
 void BezierShape::Mirror(bool x, bool y)
 {
-	float cx = getRect().xCenter();
-	float cy = getRect().yCenter();
+	float cx = GetRect().xCenter();
+	float cy = GetRect().yCenter();
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		if (x) {
 			m_control_nodes[i].x = cx * 2 - m_control_nodes[i].x;

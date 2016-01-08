@@ -29,12 +29,12 @@ RectShape* RectShape::Clone() const
 	return new RectShape(*this);
 }
 
-bool RectShape::isContain(const d2d::Vector& pos) const
+bool RectShape::IsContain(const d2d::Vector& pos) const
 {
 	return d2d::Math::isPointInRect(pos, m_rect);
 }
 
-bool RectShape::isIntersect(const d2d::Rect& rect) const
+bool RectShape::IsIntersect(const d2d::Rect& rect) const
 {
 	return d2d::Math::isRectIntersectRect(rect, m_rect);
 }
@@ -44,13 +44,12 @@ void RectShape::Translate(const d2d::Vector& offset)
 	m_rect.translate(offset);
 }
 
-void RectShape::draw(const d2d::Matrix& mt, 
-					 const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
+void RectShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
 	d2d::PrimitiveDraw::rect(mt, m_rect, m_style);
 }
 
-d2d::IPropertySetting* RectShape::createPropertySetting(d2d::EditPanelImpl* stage)
+d2d::IPropertySetting* RectShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return new RectPropertySetting(stage, this);
 }

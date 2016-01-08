@@ -2,7 +2,6 @@
 #include "Sprite.h"
 
 #include <gtxt.h>
-#include <rvg.h>
 
 namespace etext
 {
@@ -73,7 +72,7 @@ render_decoration(const d2d::Matrix& mat, float x, float y, float w, float h, st
 	}
 
 	d2d::ShaderMgr::Instance()->RVG();
-	rvg_shader_color(d->color);
+	d2d::PrimitiveDrawRVG::SetColor(d->color);
 
 	float hw = w * 0.5f,
 		  hh = h * 0.5f;
@@ -91,24 +90,20 @@ render_decoration(const d2d::Matrix& mat, float x, float y, float w, float h, st
 			left.y = right.y = ds->row_y + ds->row_h * 0.5f;
 			break;
 		}
-		left = d2d::Math::transVector(left, mat);
-		right = d2d::Math::transVector(right, mat);
-		rvg_line(left.x, left.y, right.x, right.y);
+		d2d::PrimitiveDrawRVG::Line(mat, left, right);
 	} else if (d->type == GRDT_BORDER || d->type == GRDT_BG) {
 		d2d::Vector min(x - hw, ds->row_y),
 			        max(x + hw, ds->row_y + ds->row_h);
-		min = d2d::Math::transVector(min, mat);
-		max = d2d::Math::transVector(max, mat);
 		if (d->type == GRDT_BG) {
-			rvg_rect(min.x, min.y, max.x, max.y, true);
+			d2d::PrimitiveDrawRVG::Rect(mat, min, max, true);
 		} else if (ds->pos_type != GRPT_NULL) {
-			rvg_line(min.x, min.y, max.x, min.y);
-			rvg_line(min.x, max.y, max.x, max.y);
+			d2d::PrimitiveDrawRVG::Line(mat, min, d2d::Vector(max.x, min.y));
+			d2d::PrimitiveDrawRVG::Line(mat, d2d::Vector(min.x, max.y), max);
 			if (ds->pos_type == GRPT_BEGIN) {
-				rvg_line(min.x, min.y, min.x, max.y);
+				d2d::PrimitiveDrawRVG::Line(mat, min, d2d::Vector(min.x, max.y));
 			}
 			if (ds->pos_type == GRPT_END) {
-				rvg_line(max.x, min.y, max.x, max.y);
+				d2d::PrimitiveDrawRVG::Line(mat, d2d::Vector(max.x, min.y), max);
 			}
 		}
 	}

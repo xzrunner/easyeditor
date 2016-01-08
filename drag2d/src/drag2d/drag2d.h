@@ -169,6 +169,7 @@
 #include "common/ReloadTextureVisitor.h"
 
 #include "render/PrimitiveDraw.h"
+#include "render/PrimitiveDrawRVG.h"
 #include "render/DrawSelectedShapeVisitor.h"
 #include "render/DrawShapesVisitor.h"
 #include "render/DrawSelectedSpriteVisitor.h"

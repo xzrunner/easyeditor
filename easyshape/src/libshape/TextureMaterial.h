@@ -15,7 +15,7 @@ public:
 	virtual Json::Value Store(const std::string& dirpath) const;
 
 	virtual void Translate(const d2d::Vector& offset);
-	virtual void Draw(const d2d::Matrix& mt) const;	
+	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const;	
 
 	virtual void ReloadTexture();
 

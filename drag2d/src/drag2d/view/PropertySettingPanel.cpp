@@ -198,7 +198,7 @@ void PropertySettingPanel::SelectShape(IShape* shape)
 {
 	assert(m_stage);
 	if (shape) {
-		SetPropertySetting(shape->createPropertySetting(m_stage));
+		SetPropertySetting(shape->CreatePropertySetting(m_stage));
 	} else {
 		SetPropertySetting(CreateDefaultProperty());
 	}

@@ -1,19 +1,21 @@
-#pragma once
+#ifndef _DRAG2D_DRAW_SELECTED_SHAPE_VISITOR_H_
+#define _DRAG2D_DRAW_SELECTED_SHAPE_VISITOR_H_
 
-#include <drag2d.h>
+#include "common/visitors.h"
 
 namespace d2d
 {
-	class DrawSelectedShapeVisitor : public IVisitor
-	{
-	public:
-		virtual void Visit(Object* object, bool& bFetchNext) 
-		{
-			IShape* shape = static_cast<IShape*>(object);
-			shape->draw(d2d::Matrix(), Colorf(1, 0, 0));
-			bFetchNext = true;
-		}
 
-	}; // DrawSelectedShapeVisitor
+class IShape;
+class Matrix;
+
+class DrawSelectedShapeVisitor : public IVisitor
+{
+public:
+	virtual void Visit(Object* object, bool& bFetchNext);
+
+}; // DrawSelectedShapeVisitor
+
 }
 
+#endif // _DRAG2D_DRAW_SELECTED_SHAPE_VISITOR_H_

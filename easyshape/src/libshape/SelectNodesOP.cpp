@@ -246,7 +246,7 @@ Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	if (d2d::Math::isRectIntersectRect(chain->getRect(), m_rect))
+	if (d2d::Math::isRectIntersectRect(chain->GetRect(), m_rect))
 	{
 		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
@@ -283,7 +283,7 @@ Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	if (d2d::Math::isRectIntersectRect(chain->getRect(), m_rect))
+	if (d2d::Math::isRectIntersectRect(chain->GetRect(), m_rect))
 	{
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->chain = chain;

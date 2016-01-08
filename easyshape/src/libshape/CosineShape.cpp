@@ -41,12 +41,11 @@ void CosineShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void CosineShape::draw(const d2d::Matrix& mt,
-					   const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void CosineShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
 	if (m_vertices.empty()) return;
 
-	d2d::PrimitiveDraw::drawPolyline(m_midPoints, color, m_isLoop);
+	d2d::PrimitiveDraw::drawPolyline(m_midPoints, color.multi, m_isLoop);
 	if (d2d::Settings::ctlPosSize != 0) {
 		d2d::PrimitiveDraw::drawCircles(m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
 	}
@@ -55,7 +54,7 @@ void CosineShape::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::IPropertySetting* CosineShape::createPropertySetting(d2d::EditPanelImpl* stage)
+d2d::IPropertySetting* CosineShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return NULL;
 }

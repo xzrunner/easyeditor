@@ -30,12 +30,12 @@ CircleShape* CircleShape::Clone() const
 	return new CircleShape(*this);
 }
 
-bool CircleShape::isContain(const d2d::Vector& pos) const
+bool CircleShape::IsContain(const d2d::Vector& pos) const
 {
 	return d2d::Math::getDistance(center, pos) < QUERY_ACCURACY;
 }
 
-bool CircleShape::isIntersect(const d2d::Rect& rect) const
+bool CircleShape::IsIntersect(const d2d::Rect& rect) const
 {
 	const float cx = (rect.xMin + rect.xMax) * 0.5f,
 		cy = (rect.yMin + rect.yMax) * 0.5f;
@@ -74,13 +74,12 @@ void CircleShape::Translate(const d2d::Vector& offset)
 	center += offset;
 }
 
-void CircleShape::draw(const d2d::Matrix& mt,
-					   const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
+void CircleShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::PrimitiveDraw::drawCircle(mt, center, radius, false, 3, color, 32);
+	d2d::PrimitiveDraw::drawCircle(mt, center, radius, false, 3, color.multi, 32);
 }
 
-d2d::IPropertySetting* CircleShape::createPropertySetting(d2d::EditPanelImpl* stage)
+d2d::IPropertySetting* CircleShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
 {
 	return new CirclePropertySetting(stage, this);
 }

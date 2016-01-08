@@ -4,7 +4,7 @@
 #include "interfaces.h"
 #include "common/UserDataImpl.h"
 #include "common/Object.h"
-#include "common/Color.h"
+#include "dataset/ColorTrans.h"
 
 #include <json/json.h>
 
@@ -16,6 +16,7 @@ class Rect;
 class IPropertySetting;
 class Matrix;
 class EditPanelImpl;
+struct ColorTrans;
 
 class IShape : public ICloneable, public UserDataImpl, public Object
 {
@@ -35,18 +36,18 @@ public:
 
 	virtual const char* GetShapeDesc() const = 0;
 
-	virtual bool isContain(const Vector& pos) const = 0;
-	virtual bool isIntersect(const Rect& rect) const = 0;
+	virtual bool IsContain(const Vector& pos) const = 0;
+	virtual bool IsIntersect(const Rect& rect) const = 0;
 
 	virtual void Translate(const Vector& offset) = 0;
 //	virtual void Rotate(float delta) = 0;
 
-	virtual const Rect& getRect() const = 0;
+	virtual const Rect& GetRect() const = 0;
 
-	virtual void draw(const Matrix& mt, 
-		const Colorf& color = Colorf(0, 0, 0)) const = 0;
+	virtual void Draw(const Matrix& mt, 
+		const ColorTrans& color = ColorTrans()) const = 0;
 
-	virtual IPropertySetting* createPropertySetting(EditPanelImpl* stage) = 0;
+	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;
 
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;

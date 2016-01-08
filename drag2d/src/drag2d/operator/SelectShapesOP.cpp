@@ -3,6 +3,8 @@
 #include "common/visitors.h"
 #include "common/Rect.h"
 #include "view/MultiShapesImpl.h"
+#include "view/ShapeSelection.h"
+#include "view/EditPanelImpl.h"
 #include "component/AbstractEditCMPT.h"
 #include "render/DrawSelectedShapeVisitor.h"
 #include "message/SelectShapeSJ.h"

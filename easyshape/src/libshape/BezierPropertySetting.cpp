@@ -25,13 +25,13 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("X"))
 	{
 		const float x = wxANY_AS(value, float);
-		const float dx = x - m_bezier->getRect().xCenter();
+		const float dx = x - m_bezier->GetRect().xCenter();
 		m_bezier->Translate(d2d::Vector(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
-		const float dy = y - m_bezier->getRect().yCenter();
+		const float dy = y - m_bezier->GetRect().yCenter();
 		m_bezier->Translate(d2d::Vector(0.0f, dy));
 	}
 	else if (name == wxT("Mirror"))
@@ -58,8 +58,8 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 void BezierPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("Name"))->SetValue(m_bezier->name);
-	pg->GetProperty(wxT("X"))->SetValue(m_bezier->getRect().xCenter());
-	pg->GetProperty(wxT("Y"))->SetValue(m_bezier->getRect().yCenter());
+	pg->GetProperty(wxT("X"))->SetValue(m_bezier->GetRect().xCenter());
+	pg->GetProperty(wxT("Y"))->SetValue(m_bezier->GetRect().yCenter());
 	pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
 }
 
@@ -69,11 +69,11 @@ void BezierPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_bezier->name));
 
-	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_bezier->getRect().xCenter()));
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_bezier->GetRect().xCenter()));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_bezier->getRect().yCenter()));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_bezier->GetRect().yCenter()));
 	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 

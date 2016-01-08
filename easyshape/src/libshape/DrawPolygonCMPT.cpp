@@ -86,13 +86,25 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 	switch (m_fillingTypeChoice->GetSelection()) 
 	{
 	case 0:
+// 		{
+// 			// todo trans between wxColor and d2d::Colorf
+// 			d2d::Colorf col;
+// 			col.r = m_color.Red() / 255.0f;
+// 			col.g = m_color.Green() / 255.0f;
+// 			col.b = m_color.Blue() / 255.0f;
+// 			d2d::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
+// 			if (dlg.ShowModal()) {
+// 				col = dlg.GetColor();
+// 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
+// 			}
+// 		}
 		{
 			// todo trans between wxColor and d2d::Colorf
 			d2d::Colorf col;
 			col.r = m_color.Red() / 255.0f;
 			col.g = m_color.Green() / 255.0f;
 			col.b = m_color.Blue() / 255.0f;
-			d2d::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
+			d2d::RGBColorSettingDlg dlg(m_stage_wnd, NULL, col);
 			if (dlg.ShowModal()) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);

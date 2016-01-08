@@ -305,7 +305,7 @@ void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
 
 	Matrix mt;
 	mt.setScale(1, -1);
-	shape->draw(mt);
+	shape->Draw(mt);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 

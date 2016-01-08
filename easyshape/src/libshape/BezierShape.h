@@ -26,11 +26,11 @@ public:
 	// IShape interface
 	//
 	virtual const char* GetShapeDesc() const { return "bezier"; }
-	virtual bool isContain(const d2d::Vector& pos) const;
+	virtual bool IsContain(const d2d::Vector& pos) const;
 	virtual void Translate(const d2d::Vector& offset);
-	virtual void draw(const d2d::Matrix& mt,
-		const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;
-	virtual d2d::IPropertySetting* createPropertySetting(d2d::EditPanelImpl* stage);
+	virtual void Draw(const d2d::Matrix& mt,
+		const d2d::ColorTrans& color = d2d::ColorTrans()) const;
+	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 

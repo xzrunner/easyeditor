@@ -78,7 +78,7 @@ MultiShapesImpl::PointQueryVisitor::PointQueryVisitor(const Vector& pos, IShape*
 void MultiShapesImpl::PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	IShape* shape = static_cast<IShape*>(object);
-	if (shape->isContain(m_pos))
+	if (shape->IsContain(m_pos))
 	{
 		*m_pResult = shape;
 		bFetchNext = false;
@@ -101,7 +101,7 @@ MultiShapesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, std::vecto
 void MultiShapesImpl::RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	IShape* shape = static_cast<IShape*>(object);
-	if (shape->isIntersect(m_rect))
+	if (shape->IsIntersect(m_rect))
 		m_result.push_back(shape);
 	bFetchNext = true;
 }
