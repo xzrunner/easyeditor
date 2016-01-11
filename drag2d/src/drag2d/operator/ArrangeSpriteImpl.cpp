@@ -27,6 +27,8 @@
 #include "message/ReorderSpriteSJ.h"
 #include "message/SetCanvasDirtySJ.h"
 #include "message/panel_msg.h"
+#include "widgets/RGBColorSettingDlg.h"
+#include "widgets/HSLColorSettingDlg.h"
 
 namespace d2d
 {
@@ -64,9 +66,68 @@ ArrangeSpriteImpl::~ArrangeSpriteImpl()
 	delete m_op_state;
 }
 
-void ArrangeSpriteImpl::OnKeyDown(int keyCode)
+void ArrangeSpriteImpl::OnKeyDown(int keycode)
 {
-	switch (keyCode)
+	if (m_stage->GetKeyState(WXK_SHIFT)) 
+	{
+		std::vector<ISprite*> sprites;
+		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+		if (sprites.empty()) {
+			return;
+		}
+
+		if (keycode == 'h' || keycode == 'H') {
+			for (int i = 0, n = sprites.size(); i < n; ++i) {
+				ISprite* spr = sprites[i];
+				spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
+			}
+			SetCanvasDirtySJ::Instance()->SetDirty();
+		} else if (keycode == 'v' || keycode == 'V') {
+			for (int i = 0, n = sprites.size(); i < n; ++i) {
+				ISprite* spr = sprites[i];
+				spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
+			}
+			SetCanvasDirtySJ::Instance()->SetDirty();
+		} else if (keycode == 'm' || keycode == 'M') {
+			if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
+				RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi);
+				if (dlg.ShowModal()) {
+					for (int i = 0, n = sprites.size(); i < n; ++i) {
+						sprites[i]->color.multi = dlg.GetColor();
+					}
+				}
+			} else {
+				HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi);
+				if (dlg.ShowModal()) {
+					for (int i = 0, n = sprites.size(); i < n; ++i) {
+						sprites[i]->color.multi = dlg.GetColor();
+					}
+				}
+			}
+			SetCanvasDirtySJ::Instance()->SetDirty();
+		} else if (keycode == 'a' || keycode == 'A') {
+			if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
+				RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add);
+				if (dlg.ShowModal()) {
+					for (int i = 0, n = sprites.size(); i < n; ++i) {
+						sprites[i]->color.add = dlg.GetColor();
+					}
+				}
+			} else {
+				HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add);
+				if (dlg.ShowModal()) {
+					for (int i = 0, n = sprites.size(); i < n; ++i) {
+						sprites[i]->color.add = dlg.GetColor();
+					}
+				}
+			}
+			SetCanvasDirtySJ::Instance()->SetDirty();
+		}
+
+		return;
+	}
+
+	switch (keycode)
 	{
 	case WXK_DELETE:
 		OnDeleteKeyDown();

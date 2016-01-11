@@ -188,7 +188,7 @@ void LayerList::OnListKeyDown(wxListEvent& event)
 		layer->visible = !layer->visible;
 		std::string tag = layer->visible ? "T" : "F";
 		SetItem(m_selected, 2, tag);
-		SetCanvasDirtySJ::Instance()->SetDirty();		
+		SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (keycode == 'e' || keycode == 'E') {
 		layer->editable = !layer->editable;
 		std::string tag = layer->editable ? "T" : "F";
