@@ -58,6 +58,7 @@ private:
 
 	void ParserParticleLayer(const Json::Value& spr_val, Json::Value& out_val, bool top_layer);
 
+	void ParserSprTag(const std::string& tag, const std::string& symbol_path, Json::Value& out_val);
 	void ParserSprTag(const std::string& tag, Json::Value& out_val);
 
 private:

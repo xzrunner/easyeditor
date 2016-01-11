@@ -389,7 +389,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 			tag += ";";
 		}
 		tag += tag_ext;
-		ParserSprTag(tag, char_val);
+		ParserSprTag(tag, filepath, char_val);
 
 		// filename
 		std::string filename = d2d::FilenameTools::getFilename(filepath);
@@ -449,7 +449,7 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 		level_val["y"] = sprite->GetPosition().y;
 
 		std::string tag = spr_val["tag"].asString();
-		ParserSprTag(tag, level_val);
+		ParserSprTag(tag, spr_path, level_val);
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = level_val;
@@ -591,6 +591,23 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 
 	int sz = out_val["particle"].size();
 	out_val["particle"][sz] = dec_val;
+}
+
+void LRJsonPacker::ParserSprTag(const std::string& tag, const std::string& symbol_path, Json::Value& out_val)
+{
+	if (tag.find("[symbol]") != std::string::npos) {
+		Json::Value symbol_val;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(symbol_path.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, symbol_val);
+		fin.close();
+
+		ParserSprTag(symbol_val["tag"].asString(), out_val);
+	}
+
+	ParserSprTag(tag, out_val);
 }
 
 void LRJsonPacker::ParserSprTag(const std::string& tag, Json::Value& out_val)
