@@ -65,10 +65,10 @@ void TransOldP3DFile::Trans(const std::string& filepath) const
 		float start_radius = value["start_radius"].asDouble();
 		if (start_radius_3d) {
 			float angle = (value["max_vert"].asDouble() + value["min_vert"].asDouble()) * 0.5f;
-			value["start_pos"]["radius"] = start_radius * cos(angle);
+			value["start_pos"]["radius"] = fabs(start_radius * cos(angle));
 			value["start_pos"]["height"] = start_radius * sin(angle);
 		} else {
-			value["start_pos"]["radius"] = start_radius;
+			value["start_pos"]["radius"] = fabs(start_radius);
 			value["start_pos"]["height"] = 0;
 		}
 	}
