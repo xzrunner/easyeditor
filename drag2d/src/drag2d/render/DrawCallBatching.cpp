@@ -286,8 +286,13 @@ void DrawCallBatching::ReloadEnd()
 
 float* DrawCallBatching::Query(const Image* img, int* id)
 {
+	std::string filepath = img->GetFilepath();
+	if (filepath.empty()) {
+		return NULL;
+	}
+
 	int key;
-	std::map<std::string, int>::iterator itr = m_path2id.find(img->GetFilepath());
+	std::map<std::string, int>::iterator itr = m_path2id.find(filepath);
 	if (itr != m_path2id.end()) {
 		key = itr->second;
 	} else {
