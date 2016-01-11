@@ -12,8 +12,7 @@ namespace d2d
 class DrawShapesVisitor : public IVisitor
 {
 public:
-	DrawShapesVisitor(const Rect& screen_region,
-		const Colorf& color = Colorf(0, 0, 0));
+	DrawShapesVisitor(const Rect& screen_region);
 
 	virtual void Visit(Object* object, bool& bFetchNext);
 

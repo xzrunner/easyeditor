@@ -6,11 +6,9 @@
 namespace d2d
 {
 
-DrawShapesVisitor::DrawShapesVisitor(const Rect& screen_region,
-									 const Colorf& color/* = Colorf(0, 0, 0)*/)
+DrawShapesVisitor::DrawShapesVisitor(const Rect& screen_region)
 	: m_screen_region(screen_region)
 {
-	m_ct.multi = color;
 }
 
 void DrawShapesVisitor::Visit(Object* object, bool& bFetchNext)
