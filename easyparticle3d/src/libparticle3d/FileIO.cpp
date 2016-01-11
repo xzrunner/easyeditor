@@ -29,7 +29,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 	value["ground"] = toolbar->m_ground->GetSelection();
 
-	value["orient_to_movement"] = ps->GetEmitter()->local_mode_draw;
+	value["orient_to_movement"] = ps->GetEmitter()->cfg->orient_to_movement;
 
 	value["loop"] = ps->GetEmitter()->loop;
 
