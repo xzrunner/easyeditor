@@ -58,6 +58,7 @@
 #include "TransOldAnchorFile.h"
 #include "TransNewTextFile.h"
 #include "TransOldP3DFile.h"
+#include "AverageRectCut.h"
 
 namespace edb
 {
@@ -121,6 +122,7 @@ void CommandLoader::Init()
 	fc->Register(TransOldAnchorFile::Create());
 	fc->Register(TransNewTextFile::Create());
 	fc->Register(TransOldP3DFile::Create());
+	fc->Register(AverageRectCut::Create());
 }
 
 }
