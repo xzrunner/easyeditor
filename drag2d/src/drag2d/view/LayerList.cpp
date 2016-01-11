@@ -28,6 +28,7 @@ LayerList::LayerList(wxWindow* parent)
 	: wxListCtrl(parent, LAYER_LIST_ID, wxDefaultPosition, wxDefaultSize, 
 	wxLC_REPORT | wxLC_EDIT_LABELS | wxLC_SINGLE_SEL)
 	, m_layer_mgr(NULL)
+	, m_selected(0)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 	InitLayout();
@@ -60,6 +61,7 @@ void LayerList::Remove()
 	if (GetItemCount() > 0) {
 		m_layer_mgr->selected = m_layer_mgr->GetLayer(GetItemCount() - 1);
 		SetItem(0, 1, STAT_SELECTED);
+		m_selected = 0;
 	}
 }
 
@@ -137,6 +139,7 @@ void LayerList::OnSelected(wxListEvent& event)
 	SetItem(item, 1, STAT_SELECTED);
 
 	m_layer_mgr->selected = m_layer_mgr->GetLayer(GetItemCount() - 1 - item);
+	m_selected = item;
 }
 
 void LayerList::OnColClick(wxListEvent& event)
@@ -175,13 +178,21 @@ void LayerList::OnColClick(wxListEvent& event)
 
 void LayerList::OnListKeyDown(wxListEvent& event)
 {
-	switch (event.GetKeyCode())
-	{
-	case WXK_DELETE:
-		if (m_layer_mgr->selected) {
-			Remove(m_layer_mgr->selected);
-		}
-		break;
+	Layer* layer = m_layer_mgr->selected;
+	if (!layer) { return; }
+
+	int keycode = event.GetKeyCode();
+	if (keycode == WXK_DELETE) {
+		Remove(m_layer_mgr->selected);
+	} else if (keycode == 'v' || keycode == 'V') {
+		layer->visible = !layer->visible;
+		std::string tag = layer->visible ? "T" : "F";
+		SetItem(m_selected, 2, tag);
+		SetCanvasDirtySJ::Instance()->SetDirty();		
+	} else if (keycode == 'e' || keycode == 'E') {
+		layer->editable = !layer->editable;
+		std::string tag = layer->editable ? "T" : "F";
+		SetItem(m_selected, 3, tag);
 	}
 }
 

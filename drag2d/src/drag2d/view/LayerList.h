@@ -41,10 +41,9 @@ private:
 	void OnActivated(wxListEvent& event);
 
 private:
-	
-
-private:
 	LayerMgr* m_layer_mgr;
+
+	int m_selected;
 
 	wxDECLARE_EVENT_TABLE();
 
