@@ -10,6 +10,7 @@
 #include <easyicon.h>
 #include <easyshadow.h>
 #include <easytext.h>
+#include <easyterrain2d.h>
 
 namespace ecomplex
 {
@@ -84,6 +85,11 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 		etext::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), text, m_sprites_impl);
 		dlg.ShowModal();
 	}
+	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr))
+	{
+		eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_sprites_impl);
+		dlg.ShowModal();
+	} 
 
 	m_sprites_impl->EnableObserve(true);
 	m_stage->GetCanvas()->EnableObserve(true);
