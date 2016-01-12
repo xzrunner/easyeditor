@@ -5,6 +5,7 @@
 
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
+#include "view/ViewlistListImpl.h"
 #include "dataset/Layer.h"
 
 namespace lr
@@ -105,6 +106,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 	wxSplitterWindow* right_split = new wxSplitterWindow(split);
 
 	m_viewlist = new d2d::ViewlistPanel(right_split);
+	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 	m_library->SetViewlist(m_viewlist);
 
 	m_grouptree = new d2d::GroupTreePanel(right_split, m_stage, m_stage->GetKeyState());

@@ -357,6 +357,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="viewlist"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\view\ViewlistListImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\ViewlistListImpl.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="utility"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\view\OpenSymbolDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\OpenSymbolDialog.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"

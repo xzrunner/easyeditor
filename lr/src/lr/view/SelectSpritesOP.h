@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-namespace etexture { class Sprite; }
+#include "OpenSymbolDialog.h"
 
 namespace lr
 {
@@ -18,10 +18,9 @@ public:
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
-	void UpdateShapeFromETexture(etexture::Sprite* spr);
-
-private:
 	d2d::Vector m_first_press;
+
+	OpenSymbolDialog m_open_symbol;
 
 }; // SelectSpritesOP
 

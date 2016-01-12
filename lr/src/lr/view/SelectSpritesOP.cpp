@@ -1,29 +1,13 @@
 #include "SelectSpritesOP.h"
 #include "StagePanel.h"
 
-#include "dataset/ShapesUD.h"
-#include "dataset/Layer.h"
-#include "dataset/data_utility.h"
-#include "view/LibraryPanel.h"
-#include "view/UnitEditDlg.h"
-#include "view/LevelEditDlg.h"
-#include "frame/config.h"
-
-#include <easyscale9.h>
-#include <easymesh.h>
-#include <easyanim.h>
-#include <easycomplex.h>
-#include <easytexture.h>
-#include <easyshape.h>
-#include <easyterrain2d.h>
-#include <easyshadow.h>
-
 namespace lr
 {
 
 SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 								 d2d::AbstractEditCMPT* callback/* = NULL*/)
 	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
+	, m_open_symbol(stage_wnd, stage, spritesImpl)
 {
 	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
 
@@ -55,131 +39,11 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
-	if (!selected) {
-		return false;
+	if (selected) {
+		m_open_symbol.Open(selected);
 	}
-
-	if (selected->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
-		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
-		return false;
-	}
-
-	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	stage->EnableObserve(false);
-	stage->SetUpdateState(false);
-	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
-	{
-		std::vector<std::string> path_names;
-		static_cast<LibraryPanel*>(stage->GetLibrary())->GetAllPathName(path_names);
-		UnitEditDlg dlg(m_wnd, selected, path_names);
-		if (dlg.ShowModal() == wxID_OK) {
-			selected->tag = dlg.ToString();
-		}
-	} 
-	else if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrLevelLayer())  {
-		LevelEditDlg dlg(m_wnd, selected);
-		if (dlg.ShowModal() == wxID_OK) {
-			bool use_symbol = selected->tag.find("[symbol]") != std::string::npos;
-			if (use_symbol) {
-				selected->tag = "[symbol];";
-			}
-			selected->tag += dlg.ToString();
-		}
-	}
-	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
-	{
- 		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
- 		ecomplex::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
- 		dlg.ShowModal();
-
-		//////////////////////////////////////////////////////////////////////////
-
-// 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
-// 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
-	}
-	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
-	{
- 		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol(), m_stage->GetCanvas()->GetGLContext());
- 		dlg.ShowModal();
-	}
-	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
- 	{
-		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->GetSymbol());
-  		escale9::EditDialog dlg(m_wnd, &symbol, m_stage->GetCanvas()->GetGLContext());
-  		dlg.ShowModal();
- 	}
-	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
-	{
-		emesh::EditDialog dlg(m_wnd, sprite, m_stage->GetCanvas()->GetGLContext());
-		dlg.ShowModal();
-	}
-	else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(selected))
-	{
-		d2d::TextDialog dlg(m_wnd, font);
-		dlg.ShowModal();
-	}
-	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
-	{
-		etexture::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), tex, m_spritesImpl);
-		dlg.ShowModal();
-		UpdateShapeFromETexture(tex);
-	}
-	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
-	{
-		libshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_spritesImpl);
-		dlg.ShowModal();
-	}
-	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
-	{
-		eterrain2d::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), terr, m_spritesImpl);
-		dlg.ShowModal();
-	} 
-	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
-	{
-		eshadow::EditDialog dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shadow, m_spritesImpl);
-		dlg.ShowModal();
-	}
-	else if (selected)
-	{
-		d2d::SpriteDialog dlg(m_wnd, selected);
-		if (dlg.ShowModal() == wxID_OK) {
-			selected->name = dlg.GetNameStr();
-			selected->tag = dlg.GetTagStr();
-		}
-	}
-
-	stage->SetUpdateState(true);
-	stage->EnableObserve(true);
 
 	return false;
-}
-
-void SelectSpritesOP::UpdateShapeFromETexture(etexture::Sprite* spr)
-{
-	if (!spr->GetUserData()) {
-		return;
-	}
-
-	UserData* ud = static_cast<UserData*>(spr->GetUserData());
-	if (ud->type == UT_BASE_FILE) {
-		return;
-	}
-
-	ShapesUD* sud = static_cast<ShapesUD*>(ud);
-	LibraryPanel* library = static_cast<LibraryPanel*>(static_cast<StagePanel*>(m_wnd)->GetLibrary());
-	Layer* layer = library->GetLayer(sud->layer_id);
-	for (int i = 0, n = sud->shape_names.size(); i < n; ++i) {
-		d2d::IShape* shape = layer->QueryShape(sud->shape_names[i]);
-		layer->RemoveShape(shape);
-	}
-
-	sud->shape_names.clear();
-	std::vector<d2d::IShape*> shapes;
-	create_shapes_from_etxture(spr, shapes);
-	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		layer->InsertShape(shapes[i]);
-		sud->shape_names.push_back(shapes[i]->name);
-	}
 }
 
 }
