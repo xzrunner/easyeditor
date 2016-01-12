@@ -11,6 +11,7 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
+	d2d::Config::Instance()->GetSettings().visible_tex_edge = true;
 }
 
 Task::~Task()

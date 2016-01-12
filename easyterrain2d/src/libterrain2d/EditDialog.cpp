@@ -32,10 +32,15 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	InitLayout(glctx, edited, sprite_impl);
 
 	d2d::SetWndDirtySJ::Instance()->SetDirty();
+
+	m_visible_tex_edge = d2d::Config::Instance()->GetSettings().visible_tex_edge;
+	d2d::Config::Instance()->GetSettings().visible_tex_edge = true;
 }
 
 EditDialog::~EditDialog()
 {
+	d2d::Config::Instance()->GetSettings().visible_tex_edge = m_visible_tex_edge;
+
 	if (m_symbol) {
 		m_symbol->Release();
 	}

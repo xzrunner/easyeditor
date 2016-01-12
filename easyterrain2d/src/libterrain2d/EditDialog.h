@@ -29,6 +29,8 @@ private:
 
 	d2d::EditPanel* m_stage;
 
+	bool m_visible_tex_edge;
+
 	DECLARE_EVENT_TABLE()
 
 }; // EditDialog
