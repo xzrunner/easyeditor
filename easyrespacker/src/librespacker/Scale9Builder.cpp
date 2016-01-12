@@ -115,7 +115,7 @@ void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 			ImageBuilder::LoadPictureQuad(image, quad);
 			pic->quads.push_back(quad);
 		} else {
-			throw d2d::Exception("PackPicture::LoadScale9 unknown spr type.");
+			throw d2d::Exception("PackPicture::LoadScale9 unknown spr type, filepath: %s", image->GetSymbol().GetFilepath().c_str());
 		}
 	}
 }

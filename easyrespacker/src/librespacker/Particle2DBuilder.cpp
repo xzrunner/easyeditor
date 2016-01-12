@@ -107,7 +107,7 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 	}
 	else
 	{
-		throw d2d::Exception("Particle2DBuilder::Load unknown mode type.");
+		throw d2d::Exception("Particle2DBuilder::Load unknown mode type, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
 
