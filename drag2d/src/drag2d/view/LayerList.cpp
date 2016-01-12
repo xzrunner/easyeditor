@@ -194,6 +194,8 @@ void LayerList::OnListKeyDown(wxListEvent& event)
 		std::string tag = layer->editable ? "T" : "F";
 		SetItem(m_selected, 3, tag);
 	}
+
+	event.Veto();
 }
 
 void LayerList::OnActivated(wxListEvent& event)
