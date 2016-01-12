@@ -21,7 +21,9 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 
 void ColorMaterial::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::PrimitiveDraw::drawTriangles(mt, m_tris, m_color);
+	d2d::Colorf c = d2d::cMul(m_color, color.multi);
+	d2d::PrimitiveDraw::drawTriangles(mt, m_tris, c);
+
 	//d2d::ShaderMgr::Instance()->RVG();
 	//d2d::Colorf c = d2d::cMul(m_color, color.multi);
 	//d2d::PrimitiveDrawRVG::SetColor(d2d::trans_color2int(c, d2d::PT_ABGR));
