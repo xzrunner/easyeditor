@@ -2637,34 +2637,6 @@
 				Name="dialog"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\widgets\ColorSlider.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\ColorSlider.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\IColorMonitor.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\RGBColorSettingDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\RGBColorSettingDlg.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\widgets\SetValueDialog.cpp"
 					>
 				</File>
@@ -2681,26 +2653,42 @@
 					>
 				</File>
 				<Filter
-					Name="color panel"
+					Name="color"
 					>
 					<File
-						RelativePath="..\..\..\src\drag2d\widgets\HSLColorPanel.cpp"
+						RelativePath="..\..\..\src\drag2d\widgets\AlphaSettingDlg.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\widgets\HSLColorPanel.h"
+						RelativePath="..\..\..\src\drag2d\widgets\AlphaSettingDlg.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\widgets\ITweenColorPanel.h"
+						RelativePath="..\..\..\src\drag2d\widgets\ColorSlider.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\widgets\RGBColorPanel.cpp"
+						RelativePath="..\..\..\src\drag2d\widgets\ColorSlider.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\widgets\RGBColorPanel.h"
+						RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\IColorMonitor.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\RGBColorSettingDlg.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\RGBColorSettingDlg.h"
 						>
 					</File>
 				</Filter>
@@ -2852,6 +2840,30 @@
 					RelativePath="..\..\..\src\drag2d\widgets\ImagePanel.h"
 					>
 				</File>
+				<Filter
+					Name="color"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\HSLColorPanel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\HSLColorPanel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\ITweenColorPanel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\RGBColorPanel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\RGBColorPanel.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

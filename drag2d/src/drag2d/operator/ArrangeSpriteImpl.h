@@ -72,6 +72,8 @@ private:
 
 	void ChangeOPState(IArrangeSpriteState* state);
 
+	void OnSpriteShortcutKey(int keycode);
+
 private:
 	static const float CTRL_NODE_RADIUS;
 	static const float MAX_CTRL_NODE_RADIUS;

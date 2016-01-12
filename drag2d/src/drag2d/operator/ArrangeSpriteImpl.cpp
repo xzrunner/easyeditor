@@ -29,6 +29,7 @@
 #include "message/panel_msg.h"
 #include "widgets/RGBColorSettingDlg.h"
 #include "widgets/HSLColorSettingDlg.h"
+#include "widgets/AlphaSettingDlg.h"
 
 namespace d2d
 {
@@ -68,62 +69,8 @@ ArrangeSpriteImpl::~ArrangeSpriteImpl()
 
 void ArrangeSpriteImpl::OnKeyDown(int keycode)
 {
-	if (m_stage->GetKeyState(WXK_SHIFT)) 
-	{
-		std::vector<ISprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-		if (sprites.empty()) {
-			return;
-		}
-
-		if (keycode == 'h' || keycode == 'H') {
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				ISprite* spr = sprites[i];
-				spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
-			}
-			SetCanvasDirtySJ::Instance()->SetDirty();
-		} else if (keycode == 'v' || keycode == 'V') {
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				ISprite* spr = sprites[i];
-				spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
-			}
-			SetCanvasDirtySJ::Instance()->SetDirty();
-		} else if (keycode == 'm' || keycode == 'M') {
-			if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-				RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi);
-				if (dlg.ShowModal()) {
-					for (int i = 0, n = sprites.size(); i < n; ++i) {
-						sprites[i]->color.multi = dlg.GetColor();
-					}
-				}
-			} else {
-				HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi);
-				if (dlg.ShowModal()) {
-					for (int i = 0, n = sprites.size(); i < n; ++i) {
-						sprites[i]->color.multi = dlg.GetColor();
-					}
-				}
-			}
-			SetCanvasDirtySJ::Instance()->SetDirty();
-		} else if (keycode == 'a' || keycode == 'A') {
-			if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-				RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add);
-				if (dlg.ShowModal()) {
-					for (int i = 0, n = sprites.size(); i < n; ++i) {
-						sprites[i]->color.add = dlg.GetColor();
-					}
-				}
-			} else {
-				HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add);
-				if (dlg.ShowModal()) {
-					for (int i = 0, n = sprites.size(); i < n; ++i) {
-						sprites[i]->color.add = dlg.GetColor();
-					}
-				}
-			}
-			SetCanvasDirtySJ::Instance()->SetDirty();
-		}
-
+	if (m_stage->GetKeyState(WXK_SHIFT)) {
+		OnSpriteShortcutKey(keycode);
 		return;
 	}
 
@@ -601,6 +548,83 @@ void ArrangeSpriteImpl::ChangeOPState(IArrangeSpriteState* state)
 		delete m_op_state;
 	}
 	m_op_state = state;
+}
+
+void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
+{
+	std::vector<ISprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	if (sprites.empty()) {
+		return;
+	}
+
+	Vector proj_pos = sprites[0]->GetPosition();
+	Vector screen_pos = m_stage->TransPosProjToScr(proj_pos);
+	wxPoint pos(screen_pos.x, screen_pos.y);
+
+	// hori mirror
+	if (keycode == 'h' || keycode == 'H') {
+		for (int i = 0, n = sprites.size(); i < n; ++i) {
+			ISprite* spr = sprites[i];
+			spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
+		}
+		SetCanvasDirtySJ::Instance()->SetDirty();
+	} 
+	// vert mirror
+	else if (keycode == 'v' || keycode == 'V') {
+		for (int i = 0, n = sprites.size(); i < n; ++i) {
+			ISprite* spr = sprites[i];
+			spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
+		}
+		SetCanvasDirtySJ::Instance()->SetDirty();
+	} 
+	// multi color
+	else if (keycode == 'm' || keycode == 'M') {
+		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi, pos);
+			if (dlg.ShowModal()) {
+				for (int i = 0, n = sprites.size(); i < n; ++i) {
+					sprites[i]->color.multi = dlg.GetColor();
+				}
+			}
+		} else {
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi, pos);
+			if (dlg.ShowModal()) {
+				for (int i = 0, n = sprites.size(); i < n; ++i) {
+					sprites[i]->color.multi = dlg.GetColor();
+				}
+			}
+		}
+		SetCanvasDirtySJ::Instance()->SetDirty();
+	} 
+	// add color
+	else if (keycode == 'a' || keycode == 'A') {
+		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add, pos);
+			if (dlg.ShowModal()) {
+				for (int i = 0, n = sprites.size(); i < n; ++i) {
+					sprites[i]->color.add = dlg.GetColor();
+				}
+			}
+		} else {
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add, pos);
+			if (dlg.ShowModal()) {
+				for (int i = 0, n = sprites.size(); i < n; ++i) {
+					sprites[i]->color.add = dlg.GetColor();
+				}
+			}
+		}
+		SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+	// alpha
+	else if (keycode == 't' || keycode == 'T') {
+		AlphaSettingDlg dlg(m_wnd, sprites[0]->color.multi, pos);
+		if (dlg.ShowModal()) {
+			for (int i = 0, n = sprites.size(); i < n; ++i) {
+				sprites[i]->color.multi.a = dlg.GetColor().a;
+			}
+		}
+	}
 }
 
 }
