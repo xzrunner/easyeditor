@@ -296,6 +296,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="8. shape"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\ShapeBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\ShapeBuilder.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="nodes"
@@ -620,6 +632,58 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\librespacker\ClipboxToLuaString.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="8. shape"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackShape.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeToBin.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeToLuaString.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\ShapeToLuaString.h"
 						>
 					</File>
 				</Filter>

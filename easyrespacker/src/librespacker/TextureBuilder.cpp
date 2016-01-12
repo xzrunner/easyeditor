@@ -33,6 +33,23 @@ void TextureBuilder::Traverse(d2d::IVisitor& visitor) const
 	}
 }
 
+bool TextureBuilder::CanHandle(const etexture::Symbol* symbol) const
+{
+	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
+	if (shapes.size() != 1) {
+		return false;
+	}
+	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
+	if (!poly) {
+		return false;
+	}
+	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
+	if (!material) {
+		return false;
+	}
+	return true;
+}
+
 const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::iterator 

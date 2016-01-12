@@ -21,8 +21,10 @@ public:
 
 	virtual void Traverse(d2d::IVisitor& visitor) const;
 
-	const IPackNode* Create(const etexture::Symbol* symbol);
+	bool CanHandle(const etexture::Symbol* symbol) const;
 
+	const IPackNode* Create(const etexture::Symbol* symbol);
+	
 private:
 	void Load(const etexture::Symbol* symbol, PackPicture* pic);
 

@@ -36,6 +36,9 @@
 // clipbox
 #include "ClipboxBuilder.h"
 
+// shape
+#include "ShapeBuilder.h"
+
 #include <spritepack.h>
 
 namespace librespacker
@@ -70,6 +73,9 @@ PackNodeFactory::PackNodeFactory()
 
 	// particle2d
 	m_builders.push_back(m_particle2d_builder = new Particle2DBuilder(m_export_set));
+
+	// shape
+	m_builders.push_back(m_shape_builder = new ShapeBuilder);
 }
 
 const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
@@ -89,7 +95,14 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 	} else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(spr)) {
 		node = m_icon_builder->Create(icon);
 	} else if (const etexture::Sprite* tex = dynamic_cast<const etexture::Sprite*>(spr)) {
-		node = m_tex_builder->Create(&tex->GetSymbol());
+		const etexture::Symbol* sym = &tex->GetSymbol();
+		if (m_tex_builder->CanHandle(sym)) {
+			node = m_tex_builder->Create(sym);
+		} else if (m_shape_builder->CanHandle(sym)) {
+			node = m_shape_builder->Create(sym);
+		} else {
+			throw d2d::Exception("PackNodeFactory::Create unknown etexture.");
+		}
 	}
 
 	// label

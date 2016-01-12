@@ -35,5 +35,6 @@
 #include "libshape/DrawPolygon2CMPT.h"
 
 #include "libshape/TextureMaterial.h"
+#include "libshape/ColorMaterial.h"
 
 #endif // EASY_SHAPE_H

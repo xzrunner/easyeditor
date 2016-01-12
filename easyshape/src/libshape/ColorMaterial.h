@@ -18,6 +18,8 @@ public:
 
 	virtual void ReloadTexture() {}
 
+	const d2d::Colorf& GetColor() const { return m_color; }
+
 protected:
 	virtual void BuildEnd();
 

@@ -36,6 +36,9 @@ class Particle2DBuilder;
 // clipbox
 class ClipboxBuilder;
 
+// shape
+class ShapeBuilder;
+
 class PackNodeFactory
 {
 public:
@@ -93,6 +96,9 @@ private:
 
 	// clipbox
 	ClipboxBuilder* m_clipbox_builder;
+
+	// shape
+	ShapeBuilder* m_shape_builder;
 
 private:
 	static PackNodeFactory* m_instance;

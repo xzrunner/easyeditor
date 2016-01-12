@@ -6,16 +6,17 @@
 
 #include <stdint.h>
 
-#define TYPE_EMPTY 0
-#define TYPE_PICTURE 1
-#define TYPE_ANIMATION 2
-#define TYPE_POLYGON 3
-#define TYPE_LABEL 4
-#define TYPE_PANNEL 5
-#define TYPE_ANCHOR 6
-#define TYPE_MATRIX 7
-#define TYPE_PARTICLE3D 8
-#define TYPE_PARTICLE2D 9
+#define TYPE_EMPTY			0
+#define TYPE_PICTURE		1
+#define TYPE_ANIMATION		2
+#define TYPE_POLYGON		3
+#define TYPE_LABEL			4
+#define TYPE_PANNEL			5
+#define TYPE_ANCHOR			6
+#define TYPE_MATRIX			7
+#define TYPE_PARTICLE3D		8
+#define TYPE_PARTICLE2D		9
+#define TYPE_SHAPE			12
 
 #define ANCHOR_ID 0xffff
 #define SCREEN_SCALE 16
@@ -77,6 +78,15 @@ struct pack_picture {
 };
 
 #define SIZEOF_PICTURE (sizeof(struct pack_picture) - sizeof(struct pack_quad))
+
+struct pack_shape {
+	int type;
+	uint32_t color;
+	int num;
+	int32_t* vertices;
+};
+
+#define SIZEOF_SHAPE (sizeof(struct pack_shape) + 2 * PTR_SIZE_DIFF)
 
 struct pack_poly {
 	uint16_t *texture_coord;
