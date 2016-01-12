@@ -14,6 +14,7 @@ Task::Task(wxFrame* parent)
 	, m_toolbar(NULL)
 {
 	InitLayout();
+	d2d::Config::Instance()->GetSettings().visible_tex_edge = true;
 }
 
 Task::~Task()
