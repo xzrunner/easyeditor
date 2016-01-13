@@ -224,7 +224,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MIN]));
 
-			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -90, 90, MIN_VERT);
+			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -90, 270, MIN_VERT);
 			Connect(m_min_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
 			sizer->Add(m_min_vert);
 
@@ -235,7 +235,7 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, LANG[LK_MAX]));	
 
-			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -90, 90, MAX_VERT);
+			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -90, 270, MAX_VERT);
 			Connect(m_max_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnSetVert));
 			sizer->Add(m_max_vert);
 
