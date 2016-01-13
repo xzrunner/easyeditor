@@ -47,7 +47,7 @@ int Particle2DToBin::Size(const PackParticle2D* p2d)
 
 void Particle2DToBin::Pack(const PackParticle2D* p2d, uint8_t** ptr)
 {
-	uint16_t id = p2d->GetID();
+	uint16_t id = p2d->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_PARTICLE2D;
@@ -167,7 +167,7 @@ int Particle2DToBin::ComponentSize()
 void Particle2DToBin::PackComponent(const PackParticle2D::Component& comp, 
 									uint8_t** ptr)
 {
-	uint16_t id = comp.node->GetID();
+	uint16_t id = comp.node->GetSprID();
 	pack(id, ptr);
 
 	uint16_t angle_start = TransRadian(comp.angle_start);

@@ -72,6 +72,36 @@ void ResPacker::OutputUIExtra(const std::string& outfile) const
 	fout.close();
 }
 
+void ResPacker::OutputSprID(const std::string& outfile) const
+{
+	std::vector<IPackNode*> nodes;
+	PackNodeFactory::Instance()->GetAllNodes(nodes);
+	if (nodes.empty()) {
+		return;
+	}
+
+	Json::Value value;
+	for (int i = 0, n = nodes.size(); i < n; ++i) {
+		IPackNode* node = nodes[i];
+		if (node->GetPkgID() != 0xffff) {
+			continue;
+		}
+
+		Json::Value item;
+		item["file"] = node->GetFilepath();
+		item["id"] = node->GetSprID();
+		value[value.size()] = item;
+	}
+	
+	std::string filepath = outfile + "_spr_id.json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();	
+}
+
 void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_name)
 {
 	std::vector<int> images_sz;

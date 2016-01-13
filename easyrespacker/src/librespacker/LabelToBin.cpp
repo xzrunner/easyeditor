@@ -35,7 +35,7 @@ int LabelToBin::Size(const PackLabel* label)
 
 void LabelToBin::Pack(const PackLabel* label, uint8_t** ptr)
 {
-	uint16_t id = label->GetID();
+	uint16_t id = label->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_LABEL;

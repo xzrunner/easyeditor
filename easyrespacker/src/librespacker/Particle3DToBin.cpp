@@ -30,7 +30,7 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 
 void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 {
-	uint16_t id = p3d->GetID();
+	uint16_t id = p3d->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_PARTICLE3D;
@@ -119,7 +119,7 @@ int Particle3DToBin::ComponentSize()
 void Particle3DToBin::PackComponent(const PackParticle3D::Component& comp, 
 									uint8_t** ptr)
 {
-	uint16_t id = comp.node->GetID();
+	uint16_t id = comp.node->GetSprID();
 	pack(id, ptr);
 
 	uint16_t scale_start = TransFloatX100(comp.scale_start);

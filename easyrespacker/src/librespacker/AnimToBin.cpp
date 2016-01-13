@@ -36,7 +36,7 @@ int AnimToBin::Size(const PackAnimation* anim)
 
 void AnimToBin::Pack(const PackAnimation* anim, uint8_t** ptr)
 {
-	uint16_t id = anim->GetID();
+	uint16_t id = anim->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_ANIMATION;
@@ -46,7 +46,7 @@ void AnimToBin::Pack(const PackAnimation* anim, uint8_t** ptr)
 	uint16_t sz = anim->components.size();
 	pack(sz, ptr);
 	for (int i = 0; i < sz; ++i) {
-		uint16_t id = anim->components[i].node->GetID();
+		uint16_t id = anim->components[i].node->GetSprID();
 		pack(id, ptr);
 		pack_str(anim->components[i].name, ptr);
 	}

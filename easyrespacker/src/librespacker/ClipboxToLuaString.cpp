@@ -15,7 +15,7 @@ void ClipboxToLuaString::Pack(const PackClipbox* cb, ebuilder::CodeGenerator& ge
 	lua::comments(gen, "file: " + cb->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"pannel\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(cb->GetID()));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(cb->GetSprID()));
 
 	std::ostringstream ss;
 	ss << "x = " << cb->x << ", ";

@@ -16,7 +16,7 @@ void ShapeToLuaString::Pack(const PackShape* shape, ebuilder::CodeGenerator& gen
 	lua::comments(gen, "file: " + shape->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"shape\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(shape->GetID()));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(shape->GetSprID()));
 
 	lua::assign_with_end(gen, "shape_type", shape->type);
 	lua::assign_with_end(gen, "color", d2d::transColor(shape->color, d2d::PT_RGBA));

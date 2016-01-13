@@ -313,6 +313,10 @@
 			Name="nodes"
 			>
 			<File
+				RelativePath="..\..\..\src\librespacker\IPackNode.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\librespacker\IPackNode.h"
 				>
 			</File>

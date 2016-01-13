@@ -11,13 +11,8 @@ namespace librespacker
 class IPackNode : public d2d::Object
 {
 public:
-	IPackNode() {
-		static int ID = 0;
-		m_id = ID++;
-	}
-	IPackNode(int id) {
-		m_id = id;
-	}
+	IPackNode();
+	IPackNode(int spr_id);
 	virtual ~IPackNode() {}
 
 	// lua
@@ -34,7 +29,8 @@ public:
 	virtual void UnpackFromBin(uint8_t** ptr, 
 		const std::vector<d2d::Image*>& images) = 0;
 
-	int GetID() const { return m_id; }
+	int GetPkgID() const { return m_pkg_id; }
+	int GetSprID() const { return m_spr_id; }
 
 	void SetFilepath(const std::string& filepath) const {
 		m_filepath = filepath;
@@ -47,7 +43,8 @@ public:
 	std::string export_name;
 
 protected:
-	int m_id;
+	int m_pkg_id;
+	int m_spr_id;
 
 	mutable std::string m_filepath;
 
@@ -57,7 +54,7 @@ class PackNodeCmp
 {
 public:
 	bool operator () (const IPackNode* lhs, const IPackNode* rhs) const {
-		return lhs->GetID() < rhs->GetID();
+		return lhs->GetSprID() < rhs->GetSprID();
 	}
 }; // PackNodeCmp
 

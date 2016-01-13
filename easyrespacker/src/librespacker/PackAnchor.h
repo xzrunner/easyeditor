@@ -13,8 +13,8 @@ namespace librespacker
 class PackAnchor : public IPackNode
 {
 public:
-	PackAnchor() { m_id = ANCHOR_ID; }
-	PackAnchor(int id) { m_id = ANCHOR_ID; }
+	PackAnchor() { m_spr_id = ANCHOR_ID; }
+	PackAnchor(int id) { m_spr_id = ANCHOR_ID; }
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const d2d::TexturePacker& tp, float scale) const {}

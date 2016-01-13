@@ -32,7 +32,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 
 	// header
 	uint16_t export_n = export_set.size();
-	uint16_t maxid = nodes[nodes.size() - 1]->GetID();
+	uint16_t maxid = nodes[nodes.size() - 1]->GetSprID();
 	uint16_t tex = textures.size();
 	uint32_t unpack_sz = 0;
 	unpack_sz += SIZEOF_PACK + tex * sizeof(int);

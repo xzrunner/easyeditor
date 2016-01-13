@@ -15,7 +15,7 @@ void LabelToLuaString::Pack(const PackLabel* label, ebuilder::CodeGenerator& gen
 	lua::comments(gen, "file: " + label->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"label\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(label->GetID()));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(label->GetSprID()));
 
 	lua::connect(gen, 2, 
 		lua::assign("width", label->width), 

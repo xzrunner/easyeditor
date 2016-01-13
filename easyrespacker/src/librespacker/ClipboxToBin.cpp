@@ -19,7 +19,7 @@ int ClipboxToBin::Size()
 
 void ClipboxToBin::Pack(const PackClipbox* cb, uint8_t** ptr)
 {
-	uint16_t id = cb->GetID();
+	uint16_t id = cb->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_PANNEL;

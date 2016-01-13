@@ -16,7 +16,7 @@ void Particle2DToLuaString::Pack(const PackParticle2D* p2d, ebuilder::CodeGenera
 	lua::comments(gen, "file: " + p2d->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"particle2d\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p2d->GetID()));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p2d->GetSprID()));
 	if (!p2d->export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + p2d->export_name + "\"");
 	}
@@ -114,7 +114,7 @@ void Particle2DToLuaString::PackComponent(const PackParticle2D::Component& comp,
  	lua::TableAssign ta(gen, "", true);
  
  	lua::connect(gen, 1, 
- 		lua::assign("id", comp.node->GetID()));
+ 		lua::assign("id", comp.node->GetSprID()));
 
 	lua::connect(gen, 2, 
 		lua::assign("angle_start", TransRadian(comp.angle_start)), 

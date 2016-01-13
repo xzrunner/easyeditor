@@ -86,7 +86,7 @@ void TextBuilder::OutputExtraInfo(Json::Value& value) const
 
 		Json::Value item_val;
 		item_val["type"] = "label";
-		item_val["id"] = label->GetID();
+		item_val["id"] = label->GetSprID();
 		if (!label->text.empty()) {
 			item_val["content"] = d2d::StringTools::ToUtf8(label->text);
 		}

@@ -20,7 +20,7 @@ int PictureToBin::Size(const PackPicture* pic)
 void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, 
 						const d2d::TexturePacker& tp, float scale)
 {
-	uint16_t id = pic->GetID();
+	uint16_t id = pic->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_PICTURE;

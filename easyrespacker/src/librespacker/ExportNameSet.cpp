@@ -19,7 +19,7 @@ void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, IPackNode* node)
 	}
 
 	node->export_name = export_name;
-	m_map.insert(std::make_pair(export_name, node->GetID()));
+	m_map.insert(std::make_pair(export_name, node->GetSprID()));
 }
 
 }

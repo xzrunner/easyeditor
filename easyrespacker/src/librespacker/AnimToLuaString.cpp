@@ -16,7 +16,7 @@ void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& g
 	lua::comments(gen, "file: " + anim->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"animation\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(anim->GetID()));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(anim->GetSprID()));
 	if (!anim->export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + anim->export_name + "\"");
 	}
@@ -27,7 +27,7 @@ void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& g
 		for (int i = 0, n = anim->components.size(); i < n; ++i) {
 			const PackAnimation::Component& comp = anim->components[i];
 
-			int node_id = comp.node->GetID();
+			int node_id = comp.node->GetSprID();
 			if (node_id == ANCHOR_ID) {
 				if (comp.name.empty()) {
 					throw d2d::Exception("AnimToLuaString::Pack Anchor need a name.");

@@ -15,7 +15,7 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 	lua::comments(gen, "file: " + p3d->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"particle3d\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p3d->GetID()));
+	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p3d->GetSprID()));
 	if (!p3d->export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + p3d->export_name + "\"");
 	}
@@ -87,7 +87,7 @@ void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp,
 	lua::TableAssign ta(gen, "", true);
 
 	lua::connect(gen, 1, 
-		lua::assign("id", comp.node->GetID()));
+		lua::assign("id", comp.node->GetSprID()));
 
 	lua::connect(gen, 2, 
 		lua::assign("scale_start", TransFloatX100(comp.scale_start)), 

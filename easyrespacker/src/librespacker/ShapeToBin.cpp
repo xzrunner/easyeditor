@@ -21,7 +21,7 @@ int ShapeToBin::Size(const PackShape* shape)
 
 void ShapeToBin::Pack(const PackShape* shape, uint8_t** ptr)
 {
-	uint16_t id = shape->GetID();
+	uint16_t id = shape->GetSprID();
 	pack(id, ptr);
 
 	uint8_t type = TYPE_SHAPE;

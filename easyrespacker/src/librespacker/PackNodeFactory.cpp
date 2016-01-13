@@ -135,7 +135,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 	
 	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
 
-	if (node->GetID() > ANCHOR_ID) {
+	if (node->GetSprID() > ANCHOR_ID) {
 		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
 
@@ -180,11 +180,11 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 
 	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, symbol->GetFilepath()).ToStdString());
 
-	if (node->GetID() > ANCHOR_ID) {
+	if (node->GetSprID() > ANCHOR_ID) {
 		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
 
-	PackUI::Instance()->OnKnownPackID(symbol->GetFilepath(), node->GetID());
+	PackUI::Instance()->OnKnownPackID(symbol->GetFilepath(), node->GetSprID());
 
 	return node;
 }
