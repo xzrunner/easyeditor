@@ -800,6 +800,18 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="pkg"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackPkgMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackPkgMgr.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="unpack"

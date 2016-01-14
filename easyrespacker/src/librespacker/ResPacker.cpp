@@ -15,8 +15,12 @@
 namespace librespacker
 {
 
+// ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name, 
+// 					 const std::string& tp_dir, const std::string& pkgs_cfg_file)
+// 	: m_tp(tp_dir)
+// 	, m_pkgs(pkgs_cfg_file)
 ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name, 
-					   const std::string& tp_dir)
+					 const std::string& tp_dir)
 	: m_tp(tp_dir)
 {
 	d2d::TextureFactory::Instance()->InitTexturePacker(tp_dir);

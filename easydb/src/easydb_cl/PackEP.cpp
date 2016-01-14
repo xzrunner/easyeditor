@@ -57,9 +57,14 @@ void PackEP::Run(int argc, char *argv[])
 		d2d::ShaderMgr::Instance()->reload();
 	}
 
+// 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], LOD, scale);
 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
 }
 
+// void PackEP::Trigger(const std::string& pkgs_cfg_file,
+// 					 const std::string& json_dir, const std::string& tp_json,
+// 					 const std::string& tp_dir, const std::string& out_file,
+// 					 const std::string& type, int LOD, float scale)
 void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& tp_dir, const std::string& out_file,
 					 const std::string& type, int LOD, float scale)
