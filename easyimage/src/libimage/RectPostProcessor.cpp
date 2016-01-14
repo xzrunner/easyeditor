@@ -205,10 +205,6 @@ void RectPostProcessor::Align()
 	{
 		Item* item = *itr;
 
-		if (item->r.x == 204 && item->r.y == 165) {
-			int zz = 0;
-		}
-
 		UpdateFreedom(item);
 
 		while (true) {
@@ -1038,11 +1034,6 @@ void RectPostProcessor::RemovePixelItem(Item* item, const Rect& r)
 {
 	for (int x = r.x; x < r.x + r.w; ++x) {
 		for (int y = r.y; y < r.y + r.h; ++y) {
-
-			if (x == 20 && y == 92) {
-				int zz = 0;
-			}
-
 			if (x >= 0 && x < m_width && y >= 0 && y < m_height) {
 				Pixel* p = m_pixels[y * m_width + x];
 				p->Remove(item);
@@ -1055,11 +1046,6 @@ void RectPostProcessor::InsertPixelItem(Item* item, const Rect& r)
 {
 	for (int x = r.x; x < r.x + r.w; ++x) {
 		for (int y = r.y; y < r.y + r.h; ++y) {
-
-			if (x == 20 && y == 92) {
-				int zz = 0;
-			}
-
 			if (x >= 0 && x < m_width && y >= 0 && y < m_height) {
 				Pixel* p = m_pixels[y * m_width + x];
 				p->Add(item);

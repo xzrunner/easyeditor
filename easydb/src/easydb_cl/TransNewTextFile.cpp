@@ -41,11 +41,6 @@ void TransNewTextFile::Run(const std::string& folder)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-
-		if (filepath.find("btn_green_adorn4") != std::string::npos) {
-			int zz = 0;
-		}
-
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 			d2d::ISymbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) {
