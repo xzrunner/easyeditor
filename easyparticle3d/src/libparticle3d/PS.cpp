@@ -1,9 +1,8 @@
 #include "PS.h"
 #include "ParticleSystem.h"
 
-#include <drag2d.h>
-
 #include <ps_3d.h>
+#include <ps_3d_buffer.h>
 
 namespace eparticle3d
 {
@@ -22,6 +21,18 @@ PS::PS()
 	: m_time(0)
 {
 	Init();
+
+	d2d::SceneNodeMgr::Instance()->Add(this);
+}
+
+void PS::Update(float dt)
+{
+	p3d_buffer_update(dt);
+}
+
+void PS::Draw() const
+{
+	p3d_buffer_draw();
 }
 
 void PS::UpdateTime()
@@ -98,6 +109,8 @@ void PS::Init()
 {
 	p3d_init();
 	p3d_regist_cb(render_func, add_func, remove_func);	
+
+	p3d_buffer_init();
 }
 
 }

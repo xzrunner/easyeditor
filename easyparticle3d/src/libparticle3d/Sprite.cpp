@@ -4,6 +4,7 @@
 #include "SpritePropertySetting.h"
 
 #include <ps_3d.h>
+#include <ps_3d_buffer.h>
 
 namespace eparticle3d
 {
@@ -11,6 +12,7 @@ namespace eparticle3d
 Sprite::Sprite()
 	: m_symbol(NULL)
 	, m_ps(NULL)
+	, m_use_buffer(false)
 {
 }
 
@@ -18,6 +20,7 @@ Sprite::Sprite(const Sprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_ps(NULL)
+	, m_use_buffer(sprite.m_use_buffer)
 {
 	m_symbol->Retain();
 
@@ -31,6 +34,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 	, m_ps(NULL)
+	, m_use_buffer(false)
 {
 	m_symbol->Retain();
 	BuildBounding();
@@ -146,6 +150,23 @@ bool Sprite::GetLocalModeDraw() const
 void Sprite::SetLocalModeDraw(bool local)
 {
 	m_ps->SetLocalModeDraw(local);
+}
+
+bool Sprite::GetUseBuffer() const 
+{ 
+	return m_use_buffer; 
+}
+
+void Sprite::SetUseBuffer(bool use) 
+{ 
+ 	m_use_buffer = use; 
+
+	p3d_emitter* et = (p3d_emitter*)(m_ps->GetEmitter());
+	if (use) {
+		p3d_buffer_add(et);		
+	} else {
+		p3d_buffer_remove(et);
+	}
 }
 
 }

@@ -876,6 +876,14 @@
 					RelativePath="..\..\..\src\drag2d\dataset\LayerMgr.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\SceneNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\SceneNode.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="shape"

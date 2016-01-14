@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libparticle"
+	Name="shaderlab"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
-	RootNamespace="particle"
+	RootNamespace="shaderlab"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\particle\x86\Debug"
-			IntermediateDirectory="..\particle\x86\Debug\obj"
+			OutputDirectory="..\shaderlab\x86\Debug"
+			IntermediateDirectory="..\shaderlab\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\particle\x86\Release"
-			IntermediateDirectory="..\particle\x86\Release\obj"
+			OutputDirectory="..\shaderlab\x86\Release"
+			IntermediateDirectory="..\shaderlab\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\editor-external\c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -146,39 +146,19 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\ps_2d.c"
+			RelativePath="..\..\..\src\shaderlab\sl_shader.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\ps_2d.h"
+			RelativePath="..\..\..\src\shaderlab\sl_shader.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\ps_3d.c"
+			RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\ps_3d.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d_buffer.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_3d_buffer.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_array.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_utility.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ps_utility.h"
+			RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.h"
 			>
 		</File>
 	</Files>

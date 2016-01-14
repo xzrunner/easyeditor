@@ -38,7 +38,6 @@ ParticleSystem::~ParticleSystem()
 {
 	delete m_anim_recorder;
 	delete m_inv_record;
-
 	p3d_emitter_release(m_et);	
 }
 

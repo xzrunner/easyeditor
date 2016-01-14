@@ -24,6 +24,8 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
 		spr->SetLocalModeDraw(wxANY_AS(value, bool));
+	} else if (name == "Buffer") {
+		spr->SetUseBuffer(wxANY_AS(value, bool));
 	}
 
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -37,6 +39,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty("Loop")->SetValue(spr->GetLoop());
 	pg->GetProperty("Local")->SetValue(spr->GetLocalModeDraw());
+	pg->GetProperty("Local")->SetValue(spr->GetUseBuffer());
 }
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -51,6 +54,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->GetLocalModeDraw()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+	pg->Append(new wxBoolProperty("Buffer", wxPG_LABEL, spr->GetUseBuffer()));
+	pg->SetPropertyAttribute("Buffer", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
 }

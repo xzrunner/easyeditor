@@ -43,6 +43,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 bool StagePanel::Update(int version)
 {
+	d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+
 	if (m_refresh) {
 		m_refresh = false;
 		return true;

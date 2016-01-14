@@ -42,6 +42,7 @@
 #include "dataset/TexturePacker.h"
 #include "dataset/LibpngAdapter.h"
 #include "dataset/LayerMgr.h"
+#include "dataset/SceneNode.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/TwoPassCanvas.h"
