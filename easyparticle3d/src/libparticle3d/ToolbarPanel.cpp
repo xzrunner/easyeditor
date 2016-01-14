@@ -24,8 +24,8 @@ static const float MIN_HORI				= 0;
 static const float MAX_HORI				= 360;
 static const float MIN_VERT				= 60;
 static const float MAX_VERT				= 90;
-static const float SPEED_CENTER			= 1600;
-static const float SPEED_OFFSET			= 400;
+static const float RADIAL_SPEED_CENTER	= 1600;
+static const float RADIAL_SPEED_OFFSET	= 400;
 static const float ANGULAR_SPEED_CENTER = 0;
 static const float ANGULAR_SPEED_OFFSET = 0;
 static const float DISTURBANCE_RADIUS_CENTER = 0;
@@ -244,18 +244,24 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 		top_sizer->Add(vertSizer);
 	}
 	top_sizer->AddSpacer(10);
-	// Speed
-	d2d::SliderCtrlTwo* s_spd = new d2d::SliderCtrlTwo(this, LANG[LK_LINEAR_SPEED], "speed", this, PS_SPEED, 
-		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, SPEED_CENTER, 0, 40000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, SPEED_OFFSET, 0, 20000));
-	top_sizer->Add(s_spd);
+	// Radial Speed
+	d2d::SliderCtrlTwo* s_r_spd = new d2d::SliderCtrlTwo(this, LANG[LK_RADIAL_SPEED], "radial_speed", this, PS_RADIAL_SPEED, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, RADIAL_SPEED_CENTER, 0, 40000), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, RADIAL_SPEED_OFFSET, 0, 20000));
+	top_sizer->Add(s_r_spd);
 	top_sizer->AddSpacer(10);
-	m_sliders.push_back(s_spd);
+	m_sliders.push_back(s_r_spd);
+	// Tangential Speed
+	d2d::SliderCtrlTwo* s_t_spd = new d2d::SliderCtrlTwo(this, LANG[LK_TANGENTIAL_SPEED], "tangential_spd", this, PS_TANGENTIAL_SPEED, 
+		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, 0, -400, 400), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, 0, 0, 200));
+	top_sizer->Add(s_t_spd);
+	top_sizer->AddSpacer(10);
+	m_sliders.push_back(s_t_spd);
 	// Angular Speed
-	d2d::SliderCtrlTwo* s_aspd = new d2d::SliderCtrlTwo(this, LANG[LK_ANGULAR_SPEED], "angular_speed", this, PS_ANGULAR_SPEED, 
+	d2d::SliderCtrlTwo* s_a_spd = new d2d::SliderCtrlTwo(this, LANG[LK_ANGULAR_SPEED], "angular_speed", this, PS_ANGULAR_SPEED, 
 		d2d::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, ANGULAR_SPEED_CENTER, -3600, 3600), d2d::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, ANGULAR_SPEED_OFFSET, 0, 360));
-	top_sizer->Add(s_aspd);
+	top_sizer->Add(s_a_spd);
 	top_sizer->AddSpacer(10);
-	m_sliders.push_back(s_aspd);
+	m_sliders.push_back(s_a_spd);
 	// Disturbance 
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, LANG[LK_DISTURBANCE]);

@@ -94,8 +94,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	if (version == 0) {
 		value["life"]["center"] = adapter.life;
 		value["life"]["offset"] = adapter.life_var;
-		value["speed"]["center"] = adapter.spd;
-		value["speed"]["offset"] = adapter.spd_var;
+		value["radial_speed"]["center"] = adapter.radial_spd;
+		value["radial_speed"]["offset"] = adapter.radial_spd_var;
 	}
 
 	toolbar->Load(value, version);
@@ -157,8 +157,10 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	cfg->vert = adapter.vert;
 	cfg->vert_var = adapter.vert_var;
 
-	cfg->spd = adapter.spd;
-	cfg->spd_var = adapter.spd_var;
+	cfg->radial_spd = adapter.radial_spd;
+	cfg->radial_spd_var = adapter.radial_spd_var;
+	cfg->tangential_spd = adapter.tangential_spd;
+	cfg->tangential_spd_var = adapter.tangential_spd_var;
 	cfg->angular_spd = adapter.angular_spd;
 	cfg->angular_spd_var = adapter.angular_spd_var;
 

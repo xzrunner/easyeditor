@@ -16,7 +16,9 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint16_t) * 2;					// emission_time, count
 	sz += sizeof(uint16_t) * 2;					// life
 	sz += sizeof(uint16_t) * 4;					// dir
-	sz += sizeof(uint16_t) * 4;					// spd
+	sz += sizeof(uint16_t) * 2;					// radial spd
+	sz += sizeof(uint16_t) * 2;					// tangential spd
+	sz += sizeof(uint16_t) * 2;					// angular spd
 	sz += sizeof(uint16_t) * 4;					// dis
 	sz += sizeof(uint16_t);						// gravity
 	sz += sizeof(uint16_t) * 2;					// acc
@@ -64,10 +66,16 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	uint16_t vert_var = TransRadian(p3d->vert_var);
 	pack(vert_var, ptr);
 
-	uint16_t spd = TransFloat(p3d->spd);
-	pack(spd, ptr);
-	uint16_t spd_var = TransFloat(p3d->spd_var);
-	pack(spd_var, ptr);
+	uint16_t radial_spd = TransFloat(p3d->radial_spd);
+	pack(radial_spd, ptr);
+	uint16_t radial_spd_var = TransFloat(p3d->radial_spd_var);
+	pack(radial_spd_var, ptr);
+
+	uint16_t tangential_spd = TransFloat(p3d->tangential_spd);
+	pack(tangential_spd, ptr);
+	uint16_t tangential_spd_var = TransFloat(p3d->tangential_spd_var);
+	pack(tangential_spd_var, ptr);
+
 	int16_t angular_spd = TransRadian(p3d->angular_spd);
 	pack(angular_spd, ptr);
 	uint16_t angular_spd_var = TransRadian(p3d->angular_spd_var);

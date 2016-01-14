@@ -55,9 +55,13 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_et->cfg->life = data.val0 * 0.001f;
 		m_et->cfg->life_var = data.val1 * 0.001f;
 		break;
-	case PS_SPEED:
-		m_et->cfg->spd = data.val0 * 0.25f;
-		m_et->cfg->spd_var = data.val1 * 0.25f;
+	case PS_RADIAL_SPEED:
+		m_et->cfg->radial_spd = data.val0 * 0.25f;
+		m_et->cfg->radial_spd_var = data.val1 * 0.25f;
+		break;
+	case PS_TANGENTIAL_SPEED:
+		m_et->cfg->tangential_spd = data.val0;
+		m_et->cfg->tangential_spd_var = data.val1;
 		break;
 	case PS_ANGULAR_SPEED:
 		m_et->cfg->angular_spd = data.val0 * d2d::TRANS_DEG_TO_RAD;
@@ -105,9 +109,13 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		data.val0 = m_et->cfg->life * 1000;
 		data.val1 = m_et->cfg->life_var * 1000;
 		break;
-	case PS_SPEED:
-		data.val0 = m_et->cfg->spd * 4;
-		data.val1 = m_et->cfg->spd_var * 4;
+	case PS_RADIAL_SPEED:
+		data.val0 = m_et->cfg->radial_spd * 4;
+		data.val1 = m_et->cfg->radial_spd_var * 4;
+		break;
+	case PS_TANGENTIAL_SPEED:
+		data.val0 = m_et->cfg->tangential_spd;
+		data.val1 = m_et->cfg->tangential_spd_var;
 		break;
 	case PS_ANGULAR_SPEED:
 		data.val0 = m_et->cfg->angular_spd * d2d::TRANS_RAD_TO_DEG;

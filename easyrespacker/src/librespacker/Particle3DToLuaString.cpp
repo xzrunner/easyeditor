@@ -48,9 +48,11 @@ void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGene
 		lua::assign("vert", TransRadian(p3d->vert)), 
 		lua::assign("vert_var", TransRadian(p3d->vert_var)));
 
-	lua::connect(gen, 4, 
-		lua::assign("spd", TransFloat(p3d->spd)), 
-		lua::assign("spd_var", TransFloat(p3d->spd_var)),
+	lua::connect(gen, 6, 
+		lua::assign("radial_spd", TransFloat(p3d->radial_spd)), 
+		lua::assign("radial_spd_var", TransFloat(p3d->radial_spd_var)),
+		lua::assign("tangential_spd", TransFloat(p3d->tangential_spd)), 
+		lua::assign("tangential_spd_var", TransFloat(p3d->tangential_spd_var)),
 		lua::assign("angular_spd", TransRadian(p3d->angular_spd)), 
 		lua::assign("angular_spd_var", TransRadian(p3d->angular_spd_var)));
 

@@ -66,8 +66,10 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 	ps->vert = cfg->vert;
 	ps->vert_var = cfg->vert_var;
 
-	ps->spd = cfg->spd;
-	ps->spd_var = cfg->spd_var;
+	ps->radial_spd = cfg->radial_spd;
+	ps->radial_spd_var = cfg->radial_spd_var;
+	ps->tangential_spd = cfg->tangential_spd;
+	ps->tangential_spd_var = cfg->tangential_spd_var;
 	ps->angular_spd = cfg->angular_spd;
 	ps->angular_spd_var = cfg->angular_spd_var;
 

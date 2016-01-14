@@ -41,19 +41,26 @@ void LoadAdapter::Load(const std::string& filepath)
 	vert = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 	vert_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
 
-	if (!value["speed"].isNull()) {
-		spd = value["speed"]["center"].asInt();
-		spd_var = value["speed"]["offset"].asInt();
+	if (!value["radial_speed"].isNull()) {
+		radial_spd = value["radial_speed"]["center"].asInt();
+		radial_spd_var = value["radial_speed"]["offset"].asInt();
+	} else if (!value["speed"].isNull()) {
+		radial_spd = value["speed"]["center"].asInt();
+		radial_spd_var = value["speed"]["offset"].asInt();
 	} else {
 		int min, max;
 		min = value["min_spd"].asInt();
 		max = value["max_spd"].asInt();
-		spd = (min + max) * 0.5f;
-		spd_var = (max - min) * 0.5f;
+		radial_spd = (min + max) * 0.5f;
+		radial_spd_var = (max - min) * 0.5f;
 	}
+
+	tangential_spd = value["tangential_spd"]["center"].asInt();
+	tangential_spd_var = value["tangential_spd"]["offset"].asInt();
+
 	// todo
-	spd *= 0.25f;
-	spd_var *= 0.25f;
+	radial_spd *= 0.25f;
+	radial_spd_var *= 0.25f;
 
 	if (!value["angular_speed"].isNull()) {
 		angular_spd = value["angular_speed"]["center"].asInt() * d2d::TRANS_DEG_TO_RAD;

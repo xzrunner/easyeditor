@@ -31,8 +31,10 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D*
 	cfg->vert = p3d->vert;
 	cfg->vert_var = p3d->vert_var;
 
-	cfg->spd = p3d->spd;
-	cfg->spd_var = p3d->spd_var;
+	cfg->radial_spd = p3d->radial_spd;
+	cfg->radial_spd_var = p3d->radial_spd_var;
+	cfg->tangential_spd = p3d->tangential_spd;
+	cfg->tangential_spd_var = p3d->tangential_spd_var;
 	cfg->angular_spd = p3d->angular_spd;
 	cfg->angular_spd_var = p3d->angular_spd_var;
 

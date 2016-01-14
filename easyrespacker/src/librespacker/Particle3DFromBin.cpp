@@ -50,14 +50,22 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 	p3d->vert = TransDegree(vert);
 	p3d->vert_var = TransDegree(vert_var);
 
-	uint16_t spd, spd_var, angular_spd_var;
+	uint16_t radial_spd, radial_spd_var;
+	unpack(radial_spd, ptr);
+	unpack(radial_spd_var, ptr);
+	p3d->radial_spd = radial_spd;
+	p3d->radial_spd_var = radial_spd_var;
+
+	uint16_t tangential_spd, tangential_spd_var;
+	unpack(tangential_spd, ptr);
+	unpack(tangential_spd_var, ptr);
+	p3d->tangential_spd = tangential_spd;
+	p3d->tangential_spd_var = tangential_spd_var;	
+
+	uint16_t angular_spd_var;
 	int16_t angular_spd;
-	unpack(spd, ptr);
-	unpack(spd_var, ptr);
 	unpack(angular_spd, ptr);
 	unpack(angular_spd_var, ptr);
-	p3d->spd = spd;
-	p3d->spd_var = spd_var;
 	p3d->angular_spd = TransDegree(angular_spd);
 	p3d->angular_spd_var = TransDegree(angular_spd_var);
 

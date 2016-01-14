@@ -68,8 +68,10 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 	p3d->vert = TransDegree(LuaDataHelper::GetIntField(L, "vert"));
 	p3d->vert_var = TransDegree(LuaDataHelper::GetIntField(L, "vert_var"));
 
-	p3d->spd = LuaDataHelper::GetIntField(L, "spd");
-	p3d->spd_var = LuaDataHelper::GetIntField(L, "spd_var");
+	p3d->radial_spd = LuaDataHelper::GetIntField(L, "radial_spd");
+	p3d->radial_spd_var = LuaDataHelper::GetIntField(L, "radial_spd_var");
+	p3d->tangential_spd = LuaDataHelper::GetIntField(L, "tangential_spd");
+	p3d->tangential_spd_var = LuaDataHelper::GetIntField(L, "tangential_spd_var");
 	p3d->angular_spd = TransDegree(LuaDataHelper::GetIntField(L, "angular_spd"));
 	p3d->angular_spd_var = TransDegree(LuaDataHelper::GetIntField(L, "angular_spd_var"));
 
