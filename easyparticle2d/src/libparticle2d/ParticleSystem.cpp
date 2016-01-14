@@ -198,13 +198,12 @@ bool ParticleSystem::Update(const d2d::Matrix& mat)
 
 void ParticleSystem::Start()
 {
-	m_et->active = true;
+	p2d_emitter_start(m_et);
 }
 
 void ParticleSystem::Stop()
 {
-	m_et->active = false;
-	m_et->emit_counter = 0;
+	p2d_emitter_stop(m_et);
 }
 
 void ParticleSystem::Reset()
@@ -214,7 +213,7 @@ void ParticleSystem::Reset()
 
 void ParticleSystem::Pause()
 {
-	m_et->active = false;
+	p2d_emitter_pause(m_et);
 }
 
 void ParticleSystem::SetLoop(bool loop)

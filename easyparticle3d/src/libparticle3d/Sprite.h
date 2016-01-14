@@ -4,6 +4,7 @@
 #include "Symbol.h"
 
 #include <easy3d.h>
+#include <ps_3d_buffer.h>
 
 namespace eparticle3d
 {
@@ -37,35 +38,47 @@ public:
 
 	void Draw(const d2d::Matrix& mt) const;
 
-	void SetMatrix(const d2d::Matrix& mat) { m_mat = mat; }
+	void SetMatrix(const d2d::Matrix& mat);
 
 	Quaternion& GetDir() { return m_dir; }
 	const Quaternion& GetDir() const { return m_dir; }
 
-	bool GetLoop() const;
+	bool IsLoop() const;
 	void SetLoop(bool loop);
 
-	bool GetLocalModeDraw() const;
+	bool IsLocalModeDraw() const;
 	void SetLocalModeDraw(bool local);
 
-	bool GetUseBuffer() const;
-	void SetUseBuffer(bool use);
+	bool IsAlone() const { return m_alone; }
+	void SetAlone(bool alone);
+
+	bool IsReuse() const { return m_reuse; }
+	void SetReuse(bool reuse);
 
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
+private:
+	void CreateWithAlone();
+
 protected:
 	Symbol* m_symbol;
 
 private:
-	ParticleSystem* m_ps;
+	union {
+		// alone
+		p3d_sprite* spr;
+		// not alone
+		ParticleSystem* ps;
+	} m_data;
 
 	d2d::Matrix m_mat;
 
 	Quaternion m_dir;
 
-	bool m_use_buffer;
+	bool m_alone;
+	bool m_reuse;
 
 }; // Sprite
 

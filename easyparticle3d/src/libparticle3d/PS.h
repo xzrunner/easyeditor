@@ -12,7 +12,7 @@ public:
 	//
 	// interface d2d::SceneNode
 	//
-	virtual void Update(float dt);
+	virtual bool Update(float dt);
 	virtual void Draw() const;
 
 	void UpdateTime();

@@ -145,11 +145,12 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	if (m_et->local_mode_draw) {
+	if (m_local_mode_draw) {
 		p3d_emitter_draw(m_et, &mt);
 	} else {
 		p3d_emitter_draw(m_et, NULL);
 	}
+	
 }
 
 bool ParticleSystem::Update(const d2d::Matrix& mat)
@@ -191,14 +192,12 @@ void ParticleSystem::SetDirection(const Quaternion& dir)
 
 void ParticleSystem::Start()
 {
-	m_et->active = true;
-	m_et->particle_count = 0;
+	p3d_emitter_start(m_et);
 }
 
 void ParticleSystem::Stop()
 {
-	m_et->active = false;
-	m_et->emit_counter = 0;
+	p3d_emitter_stop(m_et);
 }
 
 void ParticleSystem::Reset()
@@ -219,7 +218,7 @@ void ParticleSystem::Reset()
 
 void ParticleSystem::Pause()
 {
-	m_et->active = false;
+	p3d_emitter_pause(m_et);
 }
 
 void ParticleSystem::SetLoop(bool loop)
@@ -230,16 +229,12 @@ void ParticleSystem::SetLoop(bool loop)
 
 	m_et->loop = loop;
 
-	if (m_et->loop) {
-		Start();
-	} else {
-		Pause();
-	}
-}
-
-void ParticleSystem::SetLocalModeDraw(bool local)
-{
-	m_et->local_mode_draw = local;
+	Start();
+// 	if (m_et->loop) {
+// 		Start();
+// 	} else {
+// 		Pause();
+// 	}
 }
 
 void ParticleSystem::Clear()

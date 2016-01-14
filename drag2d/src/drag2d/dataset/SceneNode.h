@@ -10,7 +10,7 @@ class SceneNode
 {
 public:
 	virtual ~SceneNode() {}
-	virtual void Update(float dt) = 0;
+	virtual bool Update(float dt) = 0;
 	virtual void Draw() const = 0;
 }; // SceneNode
 
@@ -20,7 +20,7 @@ public:
 	void Add(SceneNode* node);
 	void Remove(SceneNode* node);
 
-	void Update(float dt);
+	bool Update(float dt);
 	void Draw() const;
 
 	static SceneNodeMgr* Instance();

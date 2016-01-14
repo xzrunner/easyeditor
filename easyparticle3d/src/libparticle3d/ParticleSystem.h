@@ -48,7 +48,8 @@ public:
 	void Reset();
 	void Pause();
 	void SetLoop(bool loop);
-	void SetLocalModeDraw(bool local);
+	void SetLocalModeDraw(bool local) { m_local_mode_draw = local; }
+	bool IsLocalModeDraw() const { return m_local_mode_draw; }
 
 	void Clear();
 
@@ -85,6 +86,8 @@ private:
 
 private:
 	p3d_emitter* m_et;
+
+	bool m_local_mode_draw;
 
 }; // ParticleSystem
 

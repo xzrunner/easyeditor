@@ -25,12 +25,16 @@ void SceneNodeMgr::Remove(SceneNode* node)
 	m_nodes.erase(node);
 }
 
-void SceneNodeMgr::Update(float dt)
+bool SceneNodeMgr::Update(float dt)
 {
+	bool dirty = false;
 	std::set<SceneNode*>::iterator itr = m_nodes.begin();
 	for ( ; itr != m_nodes.end(); ++itr) {
-		(*itr)->Update(dt);
+		if ((*itr)->Update(dt)) {
+			dirty = true;
+		}
 	}
+	return dirty;
 }
 
 void SceneNodeMgr::Draw() const

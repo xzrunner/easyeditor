@@ -31,7 +31,7 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	d2d::SymbolPropertySetting::UpdateProperties(pg);
 
 	pg->GetProperty("Loop")->SetValue(m_ps->GetEmitter()->loop);
-	pg->GetProperty("Local")->SetValue(m_ps->GetEmitter()->local_mode_draw);
+	pg->GetProperty("Local")->SetValue(m_ps->IsLocalModeDraw());
 }
 
 void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -42,7 +42,7 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, m_ps->GetEmitter()->loop));
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, m_ps->GetEmitter()->local_mode_draw));
+	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, m_ps->IsLocalModeDraw()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 

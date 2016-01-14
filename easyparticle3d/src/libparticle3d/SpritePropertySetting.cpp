@@ -24,8 +24,10 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
 		spr->SetLocalModeDraw(wxANY_AS(value, bool));
-	} else if (name == "Buffer") {
-		spr->SetUseBuffer(wxANY_AS(value, bool));
+	} else if (name == "Alone") {
+		spr->SetAlone(wxANY_AS(value, bool));
+	} else if (name == "Reuse") {
+		spr->SetReuse(wxANY_AS(value, bool));
 	}
 
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -37,9 +39,10 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
-	pg->GetProperty("Loop")->SetValue(spr->GetLoop());
-	pg->GetProperty("Local")->SetValue(spr->GetLocalModeDraw());
-	pg->GetProperty("Local")->SetValue(spr->GetUseBuffer());
+	pg->GetProperty("Loop")->SetValue(spr->IsLoop());
+	pg->GetProperty("Local")->SetValue(spr->IsLocalModeDraw());
+	pg->GetProperty("Alone")->SetValue(spr->IsAlone());
+	pg->GetProperty("Reuse")->SetValue(spr->IsReuse());
 }
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
@@ -50,12 +53,14 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
-	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->GetLoop()));
+	pg->Append(new wxBoolProperty("Loop", wxPG_LABEL, spr->IsLoop()));
 	pg->SetPropertyAttribute("Loop", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->GetLocalModeDraw()));
+	pg->Append(new wxBoolProperty("Local", wxPG_LABEL, spr->IsLocalModeDraw()));
 	pg->SetPropertyAttribute("Local", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	pg->Append(new wxBoolProperty("Buffer", wxPG_LABEL, spr->GetUseBuffer()));
-	pg->SetPropertyAttribute("Buffer", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+	pg->Append(new wxBoolProperty("Alone", wxPG_LABEL, spr->IsAlone()));
+	pg->SetPropertyAttribute("Alone", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+	pg->Append(new wxBoolProperty("Reuse", wxPG_LABEL, spr->IsReuse()));
+	pg->SetPropertyAttribute("Reuse", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
 }

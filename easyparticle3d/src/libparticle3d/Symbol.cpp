@@ -41,10 +41,10 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	}
 
 	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
-	if (p3d_spr->GetUseBuffer()) {
+	p3d_spr->SetMatrix(mt);
+	if (p3d_spr->IsAlone()) {
 		return;
 	}
-	p3d_spr->SetMatrix(mt);
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);

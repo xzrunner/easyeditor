@@ -102,6 +102,8 @@ void StageCanvas::OnDrawSprites() const
 		d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
 	}
 
+	d2d::SceneNodeMgr::Instance()->Draw();
+
 	m_stage->DrawEditOP();
 
 	m_stat.End();

@@ -25,9 +25,10 @@ PS::PS()
 	d2d::SceneNodeMgr::Instance()->Add(this);
 }
 
-void PS::Update(float dt)
+bool PS::Update(float dt)
 {
-	p3d_buffer_update(dt);
+	UpdateTime();
+	return p3d_buffer_update(GetTime());
 }
 
 void PS::Draw() const
@@ -102,7 +103,26 @@ static void
 remove_func(p3d_particle* p, void* ud)
 {
 	ParticleSystem* ps = (ParticleSystem*)ud;
-	ps->RemoveFromInvertRecord(p);
+	if (ps) {
+		ps->RemoveFromInvertRecord(p);
+	}
+}
+
+static void* create_render_params_func()
+{
+	return new d2d::Matrix;
+}
+
+static void
+wrap_render_params_func(void* params, float* mat)
+{
+	float* dmat = (float*)(((d2d::Matrix*)params)->getElements());
+	dmat[0] = mat[0];
+	dmat[1] = mat[1];
+	dmat[4] = mat[2];
+	dmat[5] = mat[3];
+	dmat[12] = mat[4];
+	dmat[13] = mat[5];	
 }
 
 void PS::Init()
@@ -110,7 +130,7 @@ void PS::Init()
 	p3d_init();
 	p3d_regist_cb(render_func, add_func, remove_func);	
 
-	p3d_buffer_init();
+	p3d_buffer_init(create_render_params_func, wrap_render_params_func);
 }
 
 }
