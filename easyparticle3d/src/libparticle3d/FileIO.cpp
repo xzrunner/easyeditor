@@ -97,8 +97,8 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	}
 
 	if (value["radial_speed"].isNull()) {
-		value["radial_speed"]["center"] = adapter.radial_spd;
-		value["radial_speed"]["offset"] = adapter.radial_spd_var;
+		value["radial_speed"]["center"] = adapter.radial_spd * 4;
+		value["radial_speed"]["offset"] = adapter.radial_spd_var * 4;
 	}
 
 	toolbar->Load(value, version);
