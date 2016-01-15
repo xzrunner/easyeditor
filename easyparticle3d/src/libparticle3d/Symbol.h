@@ -4,6 +4,7 @@
 #include <drag2d.h>
 
 struct p3d_emitter_cfg;
+struct p3d_emitter;
 
 namespace eparticle3d
 {
@@ -32,6 +33,8 @@ public:
 	void SetEmitterCfg(p3d_emitter_cfg* cfg) { m_et_cfg = cfg; }
 	const p3d_emitter_cfg* GetEmitterCfg() const { return m_et_cfg; }
 
+	p3d_emitter* GetEmitter() { return m_et; }
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -39,6 +42,8 @@ protected:
 
 private:
 	p3d_emitter_cfg* m_et_cfg;
+
+	p3d_emitter* m_et;
 	
 }; // ParticleSystem
 

@@ -11,10 +11,10 @@ namespace eparticle3d
 
 Sprite::Sprite()
 	: m_symbol(NULL)
+	, m_spr(NULL)
 	, m_alone(false)
 	, m_reuse(false)
 {
-	m_data.spr = NULL;
 }
 
 Sprite::Sprite(const Sprite& sprite)
@@ -26,18 +26,14 @@ Sprite::Sprite(const Sprite& sprite)
 	m_symbol->Retain();
 
 	if (sprite.m_alone) {
-		p3d_sprite* spr = p3d_buffer_add();
-		if (spr) {
-			spr->et = p3d_emitter_create(sprite.m_data.spr->et->cfg);
-			p3d_emitter_start(spr->et);
-		}
-		m_data.spr = spr;
-		m_data.spr->ud = &m_data.spr;
+		m_spr = p3d_buffer_add();
 	} else {
-		assert(sprite.m_data.ps);
-		p3d_emitter_cfg* cfg = (p3d_emitter_cfg*)(sprite.m_data.ps->GetConfig());
-		m_data.ps = new ParticleSystem(cfg, false);
-		m_data.ps->Start();
+		m_spr = new p3d_sprite;
+	}
+	if (m_spr) {
+		m_spr->et = p3d_emitter_create(sprite.m_spr->et->cfg);
+		p3d_emitter_start(m_spr->et);
+		m_spr->ud = &m_spr;
 	}
 }
 
@@ -50,8 +46,10 @@ Sprite::Sprite(Symbol* symbol)
 	BuildBounding();
 
 	if (const p3d_emitter_cfg* cfg = symbol->GetEmitterCfg()) {
-		m_data.ps = new ParticleSystem(const_cast<p3d_emitter_cfg*>(cfg), false);
-		m_data.ps->Start();
+		m_spr = new p3d_sprite;
+		m_spr->et = p3d_emitter_create(cfg);
+		p3d_emitter_start(m_spr->et);
+		m_spr->ud = &m_spr;
 	}
 }
 
@@ -62,7 +60,8 @@ Sprite::~Sprite()
 	}
 
 	if (!m_alone) {
-		delete m_data.ps;
+		p3d_emitter_release(m_spr->et);
+		delete m_spr;
 	}
 }
 
@@ -77,11 +76,31 @@ bool Sprite::Update(int version)
 {
 	PS::Instance()->UpdateTime();
 
-	if (!m_alone) {
-		m_data.ps->SetDirection(m_dir);
-		return m_data.ps->Update(m_mat);
-	} else {
+	if (m_alone) {
 		return false;
+	} else {
+		p3d_emitter* et = m_spr->et;
+
+		float time = PS::Instance()->GetTime();
+		assert(et->time <= time);
+		if (et->time == time) {
+			return false;
+		}
+
+		const float* src = m_mat.getElements();
+		float mt[6];
+		mt[0] = src[0];
+		mt[1] = src[1];
+		mt[2] = src[4];
+		mt[3] = src[5];
+		mt[4] = src[12];
+		mt[5] = src[13];	
+
+		float dt = time - et->time;
+		p3d_emitter_update(et, dt, mt);
+		et->time = time;
+
+		return true;
 	}
 }
 
@@ -108,11 +127,20 @@ void Sprite::Load(const Json::Value& val)
 		  w = d_val["w"].asDouble();
 	m_dir = Quaternion(x, y, z, w);
 
+	m_alone = p_val["alone"].asBool();
+	m_reuse = p_val["reuse"].asBool();
+	
 	if (m_alone) {
-
+		m_spr = p3d_buffer_add();
 	} else {
-		m_data.ps->SetLoop(p_val["loop"].asBool());
-		m_data.ps->SetLocalModeDraw(p_val["local_mode_draw"].asBool());	
+		m_spr = new p3d_sprite;
+	}
+	if (m_spr) {
+		m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
+		p3d_emitter_start(m_spr->et);
+		m_spr->ud = &m_spr;
+		m_spr->et->loop = p_val["loop"].asBool();
+		m_spr->local_mode_draw = p_val["local_mode_draw"].asBool();
 	}
 }
 
@@ -133,14 +161,8 @@ void Sprite::Store(Json::Value& val) const
 	p_val["alone"] = m_alone;
 	p_val["reuse"] = m_reuse;
 
-	if (m_alone) {
-		p_val["loop"] = m_data.spr->et->loop;
-		p_val["local_mode_draw"] = m_data.spr->local_mode_draw;
-	} else {
-		const p3d_emitter* et = m_data.ps->GetEmitter();
-		p_val["loop"] = m_data.ps->GetEmitter()->loop;
-		p_val["local_mode_draw"] = m_data.ps->IsLocalModeDraw();
-	}
+	p_val["loop"] = m_spr->et->loop;
+	p_val["local_mode_draw"] = m_spr->local_mode_draw;
 
 	val["particle3d"] = p_val;
 }
@@ -152,17 +174,17 @@ d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
 
 void Sprite::Start()
 {
-	if (m_alone) {
-		p3d_emitter_start(m_data.spr->et);
-	} else {
-		m_data.ps->Start();
-	}
+	p3d_emitter_start(m_spr->et);
 }
 
 void Sprite::Draw(const d2d::Matrix& mt) const
 {
 	if (!m_alone) {
-		m_data.ps->Draw(mt);
+		if (m_spr->local_mode_draw) {
+			p3d_emitter_draw(m_spr->et, &mt);
+		} else {
+			p3d_emitter_draw(m_spr->et, NULL);
+		}
 	}
 }
 
@@ -172,7 +194,7 @@ void Sprite::SetMatrix(const d2d::Matrix& mat)
 
 	if (m_alone) {
 		const float* src = mat.getElements();
-		float* mt = m_data.spr->mat;
+		float* mt = m_spr->mat;
 		mt[0] = src[0];
 		mt[1] = src[1];
 		mt[2] = src[4];
@@ -184,45 +206,43 @@ void Sprite::SetMatrix(const d2d::Matrix& mat)
 
 bool Sprite::IsLoop() const
 {
-	if (m_alone) {
-		return m_data.spr->et->loop;
-	} else {
-		return m_data.ps->GetEmitter()->loop;
-	}
+	return m_spr->et->loop;
 }
 
 void Sprite::SetLoop(bool loop)
 {
 	if (m_alone) {
-		if (!m_data.spr->et->loop) {
+		if (!m_spr->et->loop) {
 			p3d_sprite* spr = p3d_buffer_add();
-			memcpy(spr, m_data.spr, sizeof(*spr));
-			m_data.spr = spr;
-			m_data.spr->ud = &m_data.spr;
-			p3d_emitter_start(spr->et);
+			memcpy(spr, m_spr, sizeof(*spr));
+			m_spr = spr;
+			m_spr->ud = &m_spr;
+			p3d_emitter_start(m_spr->et);
 		}
-		m_data.spr->et->loop = loop;
-	} else {
-		m_data.ps->SetLoop(loop);
 	}
+
+// 	if (m_alone) {
+// 		if (!m_data.spr->et->loop) {
+// 			p3d_sprite* spr = p3d_buffer_add();
+// 			memcpy(spr, m_data.spr, sizeof(*spr));
+// 			m_data.spr = spr;
+// 			m_data.spr->ud = &m_data.spr;
+// 			p3d_emitter_start(spr->et);
+// 		}
+// 		m_data.spr->et->loop = loop;
+// 	} else {
+// 		m_data.ps->SetLoop(loop);
+// 	}
 }
 
 bool Sprite::IsLocalModeDraw() const
 {
-	if (m_alone) {
-		return m_data.spr->local_mode_draw;
-	} else {
-		return m_data.ps->IsLocalModeDraw();
-	}
+	return m_spr->local_mode_draw;
 }
 
 void Sprite::SetLocalModeDraw(bool local)
 {
-	if (m_alone) {
-		m_data.spr->local_mode_draw = local;
-	} else {
-		m_data.ps->SetLocalModeDraw(local);
-	}
+	m_spr->local_mode_draw = local;
 }
 
 void Sprite::SetAlone(bool alone) 
@@ -231,23 +251,23 @@ void Sprite::SetAlone(bool alone)
 		return;
 	}
 
-	if (m_alone) {
-		p3d_emitter_cfg* cfg = m_data.spr->et->cfg;
-		ParticleSystem* ps = new ParticleSystem(cfg, false);
-		p3d_emitter_clear(m_data.spr->et);
-		p3d_buffer_remove(m_data.spr);
-		m_data.ps = ps;
-		m_data.ps->Start();
-	} else {
-		p3d_sprite* spr = p3d_buffer_add();
-		if (spr) {
-			spr->et = p3d_emitter_create(m_data.ps->GetEmitter()->cfg);
-			p3d_emitter_start(spr->et);
-		}
-		delete m_data.ps;
-		m_data.spr = spr;
-		m_data.spr->ud = &m_data.spr;
-	}
+// 	if (m_alone) {
+// 		p3d_emitter_cfg* cfg = m_data.spr->et->cfg;
+// 		ParticleSystem* ps = new ParticleSystem(cfg, false);
+// 		p3d_emitter_clear(m_data.spr->et);
+// 		p3d_buffer_remove(m_data.spr);
+// 		m_data.ps = ps;
+// 		m_data.ps->Start();
+// 	} else {
+// 		p3d_sprite* spr = p3d_buffer_add();
+// 		if (spr) {
+// 			spr->et = p3d_emitter_create(m_data.ps->GetEmitter()->cfg);
+// 			p3d_emitter_start(spr->et);
+// 		}
+// 		delete m_data.ps;
+// 		m_data.spr = spr;
+// 		m_data.spr->ud = &m_data.spr;
+// 	}
 
  	m_alone = alone; 
 }

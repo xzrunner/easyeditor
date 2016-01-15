@@ -66,12 +66,7 @@ protected:
 	Symbol* m_symbol;
 
 private:
-	union {
-		// alone
-		p3d_sprite* spr;
-		// not alone
-		ParticleSystem* ps;
-	} m_data;
+	p3d_sprite* m_spr;
 
 	d2d::Matrix m_mat;
 

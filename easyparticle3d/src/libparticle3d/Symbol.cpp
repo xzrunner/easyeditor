@@ -60,6 +60,7 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 void Symbol::LoadResources()
 {
 	m_et_cfg = PSConfigMgr::Instance()->GetConfig(m_filepath);
+	m_et = p3d_emitter_create(m_et_cfg);
 
 	Json::Value value;
 	Json::Reader reader;
