@@ -95,19 +95,4 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 	p3d->orient_to_movement = LuaDataHelper::GetBoolField(L, "orient_to_movement");
 }
 
-float Particle3DFromLua::TransTime(int time)
-{
-	return time * 0.001f;
-}
-
-float Particle3DFromLua::TransDegree(int deg)
-{
-	return deg * d2d::TRANS_DEG_TO_RAD;
-}
-
-float Particle3DFromLua::TransFloatX100(int f)
-{
-	return f * 0.01f;
-}
-
 }

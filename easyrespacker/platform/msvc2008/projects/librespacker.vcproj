@@ -273,7 +273,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="7. clipbox"
+				Name="9. clipbox"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\ClipboxBuilder.cpp"
@@ -297,7 +297,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="8. shape"
+				Name="10. shape"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\ShapeBuilder.cpp"
@@ -308,18 +308,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="7. p3d_spr"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\P3dSprBuilder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\P3dSprBuilder.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="8. p2d_spr"
+				>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="nodes"
 			>
-			<File
-				RelativePath="..\..\..\src\librespacker\IPackNode.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\librespacker\IPackNode.h"
-				>
-			</File>
 			<Filter
 				Name="1. picture"
 				>
@@ -589,7 +597,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="7. clipbox"
+				Name="9. clipbox"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackClipbox.cpp"
@@ -641,7 +649,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="8. shape"
+				Name="10. shape"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackShape.cpp"
@@ -688,6 +696,114 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\librespacker\ShapeToLuaString.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="7. p3d_spr"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackP3dSpr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\PackP3dSpr.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprToBin.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprToLuaString.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\P3dSprToLuaString.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="8. p2d_spr"
+				>
+			</Filter>
+			<Filter
+				Name="base"
+				>
+				<File
+					RelativePath="..\..\..\src\librespacker\IPackNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\librespacker\IPackNode.h"
+					>
+				</File>
+				<Filter
+					Name="bin"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeFromBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeFromBin.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeToBin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeToBin.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="lua"
+					>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeFromLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeFromLua.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeToLua.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\librespacker\NodeToLua.h"
 						>
 					</File>
 				</Filter>

@@ -116,19 +116,4 @@ void Particle2DFromLua::UnpackBody(lua_State* L, PackParticle2D* p2d)
 	}
 }
 
-float Particle2DFromLua::TransTime(int time)
-{
-	return time * 0.001f;
-}
-
-float Particle2DFromLua::TransDegree(int deg)
-{
-	return deg * d2d::TRANS_DEG_TO_RAD;
-}
-
-float Particle2DFromLua::TransFloatX100(int f)
-{
-	return f * 0.01f;
-}
-
 }

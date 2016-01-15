@@ -106,29 +106,4 @@ void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp,
 		lua::assign("alpha_end", (int)comp.alpha_end));
 }
 
-int Particle3DToLuaString::TransTime(float time)
-{
-	return floor(time * 1000 + 0.5f);
-}
-
-int Particle3DToLuaString::TransRadian(float r)
-{
-	return floor(r * d2d::TRANS_RAD_TO_DEG + 0.5f);
-}
-
-int Particle3DToLuaString::TransFloat(float f)
-{
-	return floor(f + 0.5f);
-}
-
-int Particle3DToLuaString::TransFloatX100(float f)
-{
-	return TransFloat(100 * f);
-}
-
-std::string Particle3DToLuaString::TransBool(bool b)
-{
-	return b ? "true" : "false";
-}
-
 }

@@ -151,24 +151,4 @@ void Particle3DFromBin::UnpackComponent(uint8_t** ptr, PackParticle3D* p3d)
 	comp.alpha_end = alpha_end;
 }
 
-float Particle3DFromBin::TransTime(int time)
-{
-	return time * 0.001f;
-}
-
-float Particle3DFromBin::TransDegree(int deg)
-{
-	return deg * d2d::TRANS_DEG_TO_RAD;
-}
-
-float Particle3DFromBin::TransFloatX100(int f)
-{
-	return f * 0.01f;
-}
-
-bool Particle3DFromBin::TransBool(int b)
-{
-	return b == 0 ? false : true;
-}
-
 }

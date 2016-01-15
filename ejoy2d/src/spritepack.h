@@ -16,6 +16,8 @@
 #define TYPE_MATRIX			7
 #define TYPE_PARTICLE3D		8
 #define TYPE_PARTICLE2D		9
+#define TYPE_P3D_SPR		10
+#define TYPE_P2D_SPR		11
 #define TYPE_SHAPE			12
 
 #define ANCHOR_ID 0xffff
@@ -27,6 +29,16 @@
 
 #define SIZEOF_PARTICLE3D SIZEOF_P3D_EMITTER_CFG
 #define SIZEOF_PARTICLE2D SIZEOF_P2D_EMITTER_CFG
+
+struct pack_p3d_spr {
+	int id;
+	uint8_t loop;
+	uint8_t local;
+	uint8_t alone;
+	uint8_t reuse;
+};
+
+#define SIZEOF_P3D_SPR (sizeof(struct pack_p3d_spr))
 
 struct matrix;
 

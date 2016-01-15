@@ -131,29 +131,4 @@ void Particle2DToLuaString::PackComponent(const PackParticle2D::Component& comp,
  		lua::assign("col_add_end", comp.col_add_end));
 }
 
-int Particle2DToLuaString::TransTime(float time)
-{
-	return floor(time * 1000 + 0.5f);
-}
-
-int Particle2DToLuaString::TransRadian(float r)
-{
-	return floor(r * d2d::TRANS_RAD_TO_DEG + 0.5f);
-}
-
-int Particle2DToLuaString::TransFloat(float f)
-{
-	return floor(f + 0.5f);
-}
-
-int Particle2DToLuaString::TransFloatX100(float f)
-{
-	return TransFloat(100 * f);
-}
-
-std::string Particle2DToLuaString::TransBool(bool b)
-{
-	return b ? "true" : "false";
-}
-
 }

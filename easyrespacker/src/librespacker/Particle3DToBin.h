@@ -1,12 +1,13 @@
 #ifndef _LIBRESPACKER_PARTICLE3D_TO_BIN_H_
 #define _LIBRESPACKER_PARTICLE3D_TO_BIN_H_
 
+#include "NodeToBin.h"
 #include "PackParticle3D.h"
 
 namespace librespacker
 {
 
-class Particle3DToBin
+class Particle3DToBin : private NodeToBin
 {
 public:
 	static int Size(const PackParticle3D* p3d);
@@ -17,12 +18,6 @@ private:
 	static int ComponentSize();
 
 	static void PackComponent(const PackParticle3D::Component& comp, uint8_t** ptr);
-
-	static int TransTime(float time);
-	static int TransRadian(float r);
-	static int TransFloat(float f);
-	static int TransFloatX100(float f);
-	static int TransBool(bool b);
 
 }; // Particle3DToBin
 

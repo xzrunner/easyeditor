@@ -33,6 +33,9 @@ class Particle3DBuilder;
 // particle2d
 class Particle2DBuilder;
 
+// p3d spr
+class P3dSprBuilder;
+
 // clipbox
 class ClipboxBuilder;
 
@@ -93,6 +96,9 @@ private:
 
 	// particle2d
 	Particle2DBuilder* m_particle2d_builder;
+
+	// p3d spr
+	P3dSprBuilder* m_p3d_spr_builder;
 
 	// clipbox
 	ClipboxBuilder* m_clipbox_builder;

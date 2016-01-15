@@ -33,6 +33,9 @@
 #include "Particle2DBuilder.h"
 #include <easyparticle2d.h>
 
+// p3d spr
+#include "P3dSprBuilder.h"
+
 // clipbox
 #include "ClipboxBuilder.h"
 
@@ -73,6 +76,9 @@ PackNodeFactory::PackNodeFactory()
 
 	// particle2d
 	m_builders.push_back(m_particle2d_builder = new Particle2DBuilder(m_export_set));
+
+	// p3d spr
+	m_builders.push_back(m_p3d_spr_builder = new P3dSprBuilder);
 
 	// shape
 	m_builders.push_back(m_shape_builder = new ShapeBuilder);
@@ -119,9 +125,9 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		node = m_terrain2d_builder->Create(&terr2d->GetSymbol());
 	}
 
-	// particle3d
+	// p3d spr
 	else if (const eparticle3d::Sprite* p3d = dynamic_cast<const eparticle3d::Sprite*>(spr)) {
-		node = m_particle3d_builder->Create(&p3d->GetSymbol());
+		node = m_p3d_spr_builder->Create(p3d);
 	}
 
 	// particle2d

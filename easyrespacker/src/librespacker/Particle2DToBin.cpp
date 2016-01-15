@@ -191,29 +191,4 @@ void Particle2DToBin::PackComponent(const PackParticle2D::Component& comp,
 	pack(col_add_end, ptr);
 }
 
-int Particle2DToBin::TransTime(float time)
-{
-	return floor(time * 1000 + 0.5f);
-}
-
-int Particle2DToBin::TransRadian(float r)
-{
-	return floor(r * d2d::TRANS_RAD_TO_DEG + 0.5f);
-}
-
-int Particle2DToBin::TransFloat(float f)
-{
-	return floor(f + 0.5f);
-}
-
-int Particle2DToBin::TransFloatX100(float f)
-{
-	return TransFloat(100 * f);
-}
-
-int Particle2DToBin::TransBool(bool b)
-{
-	return b ? 1 : 0;
-}
-
 }

@@ -176,24 +176,4 @@ void Particle2DFromBin::UnpackComponent(uint8_t** ptr, PackParticle2D* p2d)
 	comp.col_add_end = col_add_end;
 }
 
-float Particle2DFromBin::TransTime(int time)
-{
-	return time * 0.001f;
-}
-
-float Particle2DFromBin::TransDegree(int deg)
-{
-	return deg * d2d::TRANS_DEG_TO_RAD;
-}
-
-float Particle2DFromBin::TransFloatX100(int f)
-{
-	return f * 0.01f;
-}
-
-bool Particle2DFromBin::TransBool(int b)
-{
-	return b == 0 ? false : true;
-}
-
 }
