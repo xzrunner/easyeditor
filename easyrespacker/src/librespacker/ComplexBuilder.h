@@ -30,8 +30,6 @@ private:
 
 	IPackNode* LoadAnchor(const ecomplex::Symbol* symbol);
 
-	void WrapParticle(PackAnimation* anim);
-
 	static void GroupFromTag(const std::vector<d2d::ISprite*>& src, 
 		std::map<std::string, std::vector<d2d::ISprite*> >& dst,
 		std::vector<d2d::ISprite*>& others);
