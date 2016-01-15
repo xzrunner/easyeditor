@@ -3,6 +3,7 @@
 #include "ParticleSystem.h"
 #include "FileIO.h"
 #include "PSConfigMgr.h"
+#include "PS.h"
 
 #include <ps_3d.h>
 
@@ -12,12 +13,14 @@ namespace eparticle3d
 Symbol::Symbol()
 	: m_et_cfg(NULL)
 {
+	PS::Instance();
 }
 
 Symbol::Symbol(const Symbol& s)
 	: d2d::ISymbol(s)
 	, m_et_cfg(s.m_et_cfg)
 {
+	PS::Instance();
 }
 
 Symbol* Symbol::Clone() const

@@ -136,7 +136,11 @@ void Sprite::Load(const Json::Value& val)
 		m_spr = new p3d_sprite;
 	}
 	if (m_spr) {
-		m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
+		if (m_reuse) {
+			m_spr->et = m_symbol->GetEmitter();
+		} else {
+			m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
+		}
 		p3d_emitter_start(m_spr->et);
 		m_spr->ud = &m_spr;
 		m_spr->et->loop = p_val["loop"].asBool();
@@ -211,28 +215,18 @@ bool Sprite::IsLoop() const
 
 void Sprite::SetLoop(bool loop)
 {
-	if (m_alone) {
-		if (!m_spr->et->loop) {
-			p3d_sprite* spr = p3d_buffer_add();
-			memcpy(spr, m_spr, sizeof(*spr));
-			m_spr = spr;
-			m_spr->ud = &m_spr;
-			p3d_emitter_start(m_spr->et);
-		}
+	if (m_spr->et->loop == loop) {
+		return;
 	}
 
-// 	if (m_alone) {
-// 		if (!m_data.spr->et->loop) {
-// 			p3d_sprite* spr = p3d_buffer_add();
-// 			memcpy(spr, m_data.spr, sizeof(*spr));
-// 			m_data.spr = spr;
-// 			m_data.spr->ud = &m_data.spr;
-// 			p3d_emitter_start(spr->et);
-// 		}
-// 		m_data.spr->et->loop = loop;
-// 	} else {
-// 		m_data.ps->SetLoop(loop);
-// 	}
+	if (m_alone && !m_spr->et->loop) {
+		p3d_sprite* spr = p3d_buffer_add();
+		memcpy(spr, m_spr, sizeof(*spr));
+		m_spr = spr;
+		m_spr->ud = &m_spr;
+		p3d_emitter_start(m_spr->et);
+	}
+	m_spr->et->loop = loop;
 }
 
 bool Sprite::IsLocalModeDraw() const
@@ -251,29 +245,38 @@ void Sprite::SetAlone(bool alone)
 		return;
 	}
 
-// 	if (m_alone) {
-// 		p3d_emitter_cfg* cfg = m_data.spr->et->cfg;
-// 		ParticleSystem* ps = new ParticleSystem(cfg, false);
-// 		p3d_emitter_clear(m_data.spr->et);
-// 		p3d_buffer_remove(m_data.spr);
-// 		m_data.ps = ps;
-// 		m_data.ps->Start();
-// 	} else {
-// 		p3d_sprite* spr = p3d_buffer_add();
-// 		if (spr) {
-// 			spr->et = p3d_emitter_create(m_data.ps->GetEmitter()->cfg);
-// 			p3d_emitter_start(spr->et);
-// 		}
-// 		delete m_data.ps;
-// 		m_data.spr = spr;
-// 		m_data.spr->ud = &m_data.spr;
-// 	}
-
- 	m_alone = alone; 
+	p3d_emitter_clear(m_spr->et);
+	const p3d_emitter_cfg* cfg = m_spr->et->cfg;
+	p3d_emitter* et = p3d_emitter_create(cfg);
+	if (m_alone) {
+		p3d_buffer_remove(m_spr);
+		m_spr = new p3d_sprite;
+	} else {
+		delete m_spr;
+		m_spr = p3d_buffer_add();
+	}
+	if (m_spr) {
+		m_spr->et = et;
+		p3d_emitter_start(m_spr->et);
+		m_spr->ud = &m_spr;
+	}
+	m_alone = alone;
 }
 
 void Sprite::SetReuse(bool reuse)
 {
+	if (m_reuse == reuse) {
+		return;
+	}
+
+	if (m_reuse) {
+		m_spr->et = p3d_emitter_create(m_spr->et->cfg);
+	} else {
+		p3d_emitter_release(m_spr->et);
+		m_spr->et = m_symbol->GetEmitter();
+	}
+	p3d_emitter_start(m_spr->et);
+
 	m_reuse = reuse;
 }
 
