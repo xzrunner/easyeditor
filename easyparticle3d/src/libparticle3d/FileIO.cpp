@@ -94,6 +94,9 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	if (version == 0) {
 		value["life"]["center"] = adapter.life;
 		value["life"]["offset"] = adapter.life_var;
+	}
+
+	if (value["radial_speed"].isNull()) {
 		value["radial_speed"]["center"] = adapter.radial_spd;
 		value["radial_speed"]["offset"] = adapter.radial_spd_var;
 	}
