@@ -127,8 +127,16 @@ void Sprite::Load(const Json::Value& val)
 		  w = d_val["w"].asDouble();
 	m_dir = Quaternion(x, y, z, w);
 
-	m_alone = p_val["alone"].asBool();
-	m_reuse = p_val["reuse"].asBool();
+	if (p_val["alone"].isNull()) {
+		m_alone = false;
+	} else {
+		m_alone = p_val["alone"].asBool();
+	}
+	if (p_val["reuse"].isNull()) {
+		m_reuse = false;
+	} else {
+		m_reuse = p_val["reuse"].asBool();
+	}
 	
 	if (m_alone) {
 		m_spr = p3d_buffer_add();
@@ -143,8 +151,16 @@ void Sprite::Load(const Json::Value& val)
 		}
 		p3d_emitter_start(m_spr->et);
 		m_spr->ud = &m_spr;
-		m_spr->et->loop = p_val["loop"].asBool();
-		m_spr->local_mode_draw = p_val["local_mode_draw"].asBool();
+		if (p_val["loop"].isNull()) {
+			m_spr->et->loop = true;
+		} else {
+			m_spr->et->loop = p_val["loop"].asBool();
+		}
+		if (p_val["local_mode_draw"].isNull()) {
+			m_spr->local_mode_draw = false;
+		} else {
+			m_spr->local_mode_draw = p_val["local_mode_draw"].asBool();
+		}
 	}
 }
 
