@@ -156,7 +156,7 @@ void render_enablescissor(struct render *R, int enable);
 void render_state_reset(struct render *R);
 
 void render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long argb);
-void render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
-void render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
+void render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
+void render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 
 #endif

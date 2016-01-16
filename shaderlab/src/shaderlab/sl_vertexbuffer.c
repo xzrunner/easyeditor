@@ -11,6 +11,7 @@ sl_vb_create(int size, int cap) {
 	vb->size = size;
 	vb->n = 0;
 	vb->cap = cap;
+	vb->buf = (char*)(vb + 1);
 	return vb;
 }
 

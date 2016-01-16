@@ -1001,7 +1001,7 @@ render_state_reset(struct render *R) {
 
 // draw
 void 
-render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
+render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
 	static int draw_mode[] = {
 		GL_POINTS,
 		GL_LINES,
@@ -1028,6 +1028,24 @@ render_draw(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
 		glDrawElements(draw_mode[mode], ni, type, (char *)0 + offset);
 		CHECK_GL_ERROR
 	}
+}
+
+void 
+render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int ni) {
+	static int draw_mode[] = {
+		GL_POINTS,
+		GL_LINES,
+		GL_LINE_LOOP,
+		GL_LINE_STRIP,
+		GL_TRIANGLES,
+		GL_TRIANGLE_STRIP,
+		GL_TRIANGLE_FAN,
+		GL_QUADS,
+	};
+	assert((int)mode < sizeof(draw_mode)/sizeof(int));
+	render_state_commit(R);
+	glDrawArrays(draw_mode[mode], 0, ni);
+	CHECK_GL_ERROR
 }
 
 void

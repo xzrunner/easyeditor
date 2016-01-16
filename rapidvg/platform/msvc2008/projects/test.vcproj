@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\rapidvg;..\..\..\..\editor-external\freeglut\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src\rapidvg;&quot;..\..\..\..\editor-external\freeglut\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\shaderlab\src\shaderlab"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\rapidvg;..\..\..\..\editor-external\freeglut\include;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src\rapidvg;&quot;..\..\..\..\editor-external\freeglut\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;..\..\..\..\shaderlab\src\shaderlab"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -182,7 +182,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\test\helloworld.c"
+			RelativePath="..\..\..\src\test\helloworld2.cpp"
 			>
 		</File>
 	</Files>

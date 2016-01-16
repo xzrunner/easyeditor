@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\ejoy2d\src\;..\..\..\..\ejoy2d\src\render"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\shaderlab\src\shaderlab"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\ejoy2d\src\;..\..\..\..\ejoy2d\src\render"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\shaderlab\src\shaderlab"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -146,14 +146,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\rapidvg\normal_shader.frag"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\rapidvg\normal_shader.vert"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\rapidvg\rvg.h"
 			>
 		</File>
@@ -183,6 +175,22 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\rapidvg\rvg_shader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\rapidvg\rvg_shader2.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\rapidvg\rvg_shader2.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\rapidvg\shader.frag"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\rapidvg\shader.vert"
 			>
 		</File>
 	</Files>
