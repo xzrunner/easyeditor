@@ -25,15 +25,12 @@ Sprite::Sprite(const Sprite& sprite)
 {
 	m_symbol->Retain();
 
-	if (sprite.m_alone) {
-		m_spr = p3d_buffer_add();
-	} else {
-		m_spr = new p3d_sprite;
-	}
-	if (m_spr) {
-		m_spr->et = p3d_emitter_create(sprite.m_spr->et->cfg);
-		p3d_emitter_start(m_spr->et);
-		m_spr->ud = &m_spr;
+	m_spr = sprite.m_spr;
+	m_spr->ud = &m_spr;
+	p3d_emitter_start(m_spr->et);
+	if (!m_spr->et->loop) {
+		p3d_buffer_remove(m_spr);
+		p3d_buffer_insert(m_spr);
 	}
 }
 
@@ -46,7 +43,7 @@ Sprite::Sprite(Symbol* symbol)
 	BuildBounding();
 
 	if (const p3d_emitter_cfg* cfg = symbol->GetEmitterCfg()) {
-		m_spr = new p3d_sprite;
+		m_spr = p3d_sprite_create();
 		m_spr->et = p3d_emitter_create(cfg);
 		p3d_emitter_start(m_spr->et);
 		m_spr->ud = &m_spr;
@@ -61,7 +58,11 @@ Sprite::~Sprite()
 
 	if (!m_alone) {
 		p3d_emitter_release(m_spr->et);
-		delete m_spr;
+	} else {
+		if (m_spr->et->loop) {
+			p3d_emitter_release(m_spr->et);
+			p3d_buffer_remove(m_spr);
+		}
 	}
 }
 
@@ -138,10 +139,9 @@ void Sprite::Load(const Json::Value& val)
 		m_reuse = p_val["reuse"].asBool();
 	}
 	
+	m_spr = p3d_sprite_create();
 	if (m_alone) {
-		m_spr = p3d_buffer_add();
-	} else {
-		m_spr = new p3d_sprite;
+		p3d_buffer_insert(m_spr);
 	}
 	if (m_spr) {
 		if (m_reuse) {
@@ -236,11 +236,8 @@ void Sprite::SetLoop(bool loop)
 	}
 
 	if (m_alone && !m_spr->et->loop) {
-		p3d_sprite* spr = p3d_buffer_add();
-		memcpy(spr, m_spr, sizeof(*spr));
-		m_spr = spr;
-		m_spr->ud = &m_spr;
 		p3d_emitter_start(m_spr->et);
+		p3d_buffer_insert(m_spr);
 	}
 	m_spr->et->loop = loop;
 }
@@ -266,10 +263,8 @@ void Sprite::SetAlone(bool alone)
 	p3d_emitter* et = p3d_emitter_create(cfg);
 	if (m_alone) {
 		p3d_buffer_remove(m_spr);
-		m_spr = new p3d_sprite;
 	} else {
-		delete m_spr;
-		m_spr = p3d_buffer_add();
+		p3d_buffer_insert(m_spr);
 	}
 	if (m_spr) {
 		m_spr->et = et;

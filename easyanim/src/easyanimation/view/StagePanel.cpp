@@ -43,7 +43,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 bool StagePanel::Update(int version)
 {
-	d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+	bool dirty = d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 
 	if (m_refresh) {
 		m_refresh = false;
@@ -52,7 +52,10 @@ bool StagePanel::Update(int version)
 
 	CheckUpdateVisitor visitor(version);
 	TraverseSprites(visitor, d2d::DT_ALL, true);
-	return visitor.NeedUpdate();
+	if (visitor.NeedUpdate()) {
+		dirty = true;
+	}
+	return dirty;
 }
 
 void StagePanel::TraverseSprites(d2d::IVisitor& visitor, 
