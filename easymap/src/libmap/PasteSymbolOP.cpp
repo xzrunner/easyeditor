@@ -1,6 +1,5 @@
 #include "PasteSymbolOP.h"
 #include "StagePanel.h"
-#include "SelectSpritesOP.h"
 
 #include <easycomplex.h>
 

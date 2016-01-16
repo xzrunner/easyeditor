@@ -345,7 +345,7 @@ void FileIO::LoadValue(const Json::Value& value, int count,
 	}
 
 	if (count == 1) {
-		uniform->Set(items[0].val);
+		uniform->Set(items[0].default);
 	} else if (count == 2) {
 		uniform->Set(items[0].default, items[1].default);
 	} else if (count == 3) {

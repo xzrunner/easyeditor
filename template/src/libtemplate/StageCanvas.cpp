@@ -26,7 +26,7 @@ void StageCanvas::OnSize(int w, int h)
 
 	m_camera->UpdateModelView();
 
-	RenderContextStack::Instance()->SetProjection(w, h);
+	d2d::RenderContextStack::Instance()->SetProjection(w, h);
 }
 
 void StageCanvas::OnDrawSprites() const

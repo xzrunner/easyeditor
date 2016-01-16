@@ -1,6 +1,5 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "SelectSpritesOP.h"
 
 namespace emap
 {

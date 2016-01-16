@@ -110,7 +110,9 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 				d2d::Vector pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->SetTransform(pos, m_grid->GetAngle());
-				d2d::SpriteRenderer::Instance()->Draw(m_grid, NULL, d2d::Matrix(), color);
+				d2d::ColorTrans ct;
+				ct.multi = color;
+				d2d::SpriteRenderer::Instance()->Draw(m_grid, NULL, d2d::Matrix(), ct);
 			}
 		}
 	}
@@ -170,7 +172,9 @@ void SymbolRender::DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos
 
 	float s = (float)(max_reg) / m_region_size;
 	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
-	rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s, 0, 0, d2d::Colorf(1, 0, 0));
+	d2d::ColorTrans ct;
+	ct.multi = d2d::Colorf(1, 0, 0);
+	rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s, 0, 0, ct);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
 		rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s);
