@@ -12,24 +12,22 @@ namespace librespacker
 
 class IPackNode;
 class PackParticle3D;
-class ExportNameSet;
+class P3dSprBuilder;
 
 class Particle3DBuilder : public INodeBuilder
 {
 public:
-	Particle3DBuilder(ExportNameSet& export_set);
+	Particle3DBuilder();
 	virtual ~Particle3DBuilder();
 
 	virtual void Traverse(d2d::IVisitor& visitor) const;
 
-	const IPackNode* Create(const eparticle3d::Symbol* symbol);
+	const IPackNode* Create(const eparticle3d::Symbol* symbol, P3dSprBuilder* spr_builder);
 
 private:
 	void Load(const eparticle3d::Symbol* symbol, PackParticle3D* ps);
 
 private:
-	ExportNameSet& m_export_set;
-
 	std::map<const eparticle3d::Symbol*, const PackParticle3D*> m_map_data;
 
 }; // Particle3DBuilder

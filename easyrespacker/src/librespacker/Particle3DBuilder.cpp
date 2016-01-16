@@ -1,6 +1,7 @@
 #include "Particle3DBuilder.h"
 #include "PackParticle3D.h"
 #include "PackNodeFactory.h"
+#include "P3dSprBuilder.h"
 
 #include <easyparticle3d.h>
 #include <ps_3d.h>
@@ -8,8 +9,7 @@
 namespace librespacker
 {
 
-Particle3DBuilder::Particle3DBuilder(ExportNameSet& export_set)
-	: m_export_set(export_set)
+Particle3DBuilder::Particle3DBuilder()
 {
 }
 
@@ -35,7 +35,7 @@ void Particle3DBuilder::Traverse(d2d::IVisitor& visitor) const
 	}
 }
 
-const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* symbol)
+const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* symbol, P3dSprBuilder* spr_builder)
 {
 	std::map<const eparticle3d::Symbol*, const PackParticle3D*>::iterator 
 		itr = m_map_data.find(symbol);
@@ -46,13 +46,12 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* symbol)
 	PackParticle3D* node = new PackParticle3D;
 	Load(symbol, node);
 	m_map_data.insert(std::make_pair(symbol, node));
+	spr_builder->Create(symbol, node);
 	return node;
 }
 
 void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* ps)
 {
-	m_export_set.LoadExport(symbol, ps);
-
 	const p3d_emitter_cfg* cfg = symbol->GetEmitterCfg();
 
 	ps->emission_time = cfg->emission_time;

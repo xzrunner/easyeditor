@@ -7,7 +7,8 @@
 namespace librespacker
 {
 
-P3dSprBuilder::P3dSprBuilder()
+P3dSprBuilder::P3dSprBuilder(ExportNameSet& export_set)
+	: m_export_set(export_set)
 {
 }
 
@@ -37,6 +38,20 @@ const IPackNode* P3dSprBuilder::Create(const eparticle3d::Sprite* spr)
 	node->reuse = spr->IsReuse();
 	m_nodes.push_back(node);
 	return node;
+}
+
+void P3dSprBuilder::Create(const eparticle3d::Symbol* sym, const IPackNode* p3d)
+{
+	PackP3dSpr* node = new PackP3dSpr;
+
+	node->p3d = p3d;
+	node->loop = true;
+	node->local = false;
+	node->alone = false;
+	node->reuse = true;
+	m_nodes.push_back(node);
+
+	m_export_set.LoadExport(sym, node);
 }
 
 }

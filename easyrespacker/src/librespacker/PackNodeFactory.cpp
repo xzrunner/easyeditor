@@ -72,13 +72,13 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_anchor_builder = new AnchorBuilder);
 
 	// particle3d
-	m_builders.push_back(m_particle3d_builder = new Particle3DBuilder(m_export_set));
+	m_builders.push_back(m_particle3d_builder = new Particle3DBuilder);
 
 	// particle2d
 	m_builders.push_back(m_particle2d_builder = new Particle2DBuilder(m_export_set));
 
 	// p3d spr
-	m_builders.push_back(m_p3d_spr_builder = new P3dSprBuilder);
+	m_builders.push_back(m_p3d_spr_builder = new P3dSprBuilder(m_export_set));
 
 	// shape
 	m_builders.push_back(m_shape_builder = new ShapeBuilder);
@@ -172,7 +172,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 
 	// particle3d
 	else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
-		node = m_particle3d_builder->Create(p3d);
+		node = m_particle3d_builder->Create(p3d, m_p3d_spr_builder);
 	}
 
 	// particle2d
