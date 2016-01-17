@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libdtex"
+	Name="0.dtex"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	RootNamespace="dtex"
 	Keyword="Win32Proj"
