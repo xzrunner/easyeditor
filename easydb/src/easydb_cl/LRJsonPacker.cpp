@@ -515,7 +515,8 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 	float px = spr_val["position"]["x"].asDouble(),
 		py = spr_val["position"]["y"].asDouble();
 
-	std::string export_name = "";
+	std::string s_name;
+	std::string export_name;
 	wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
 	if (spr_path.Contains(".json")) 
 	{
@@ -527,7 +528,8 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		reader.parse(fin, val);
 		fin.close();
 
-		export_name = val["name"].asString();
+		s_name = val["name"].asString();
+		export_name = val["export"].asString();
 
 		int idx = 0;
 		const Json::Value& spr_val = val["sprite"][idx];
@@ -536,6 +538,7 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		px += cx;
 		py += cy;
 	}
+	dec_val["name"] = s_name;
 	dec_val["export"] = export_name;
 
 	dec_val["x"] = px;

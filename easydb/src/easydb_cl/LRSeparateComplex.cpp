@@ -127,8 +127,8 @@ void LRSeparateComplex::SeparateFromSprites(const Json::Value& old_val, Json::Va
 
 void LRSeparateComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 {
-	std::string name = CreateNewComplexFile(src);
-	ResetOldSpriteVal(dst, name, src["tag"].asString());
+	std::string export_name = CreateNewComplexFile(src);
+	ResetOldSpriteVal(dst, export_name, src["tag"].asString());
 }
 
 void LRSeparateComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
@@ -179,9 +179,9 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 	return name;
 }
 
-void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const
+void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& export_name, const std::string& tag) const
 {
-	val["filepath"] = name + "_complex.json";
+	val["filepath"] = export_name + "_complex.json";
 	val["position"]["x"] = 0;
 	val["position"]["y"] = 0;
 
@@ -195,7 +195,7 @@ void LRSeparateComplex::ResetOldSpriteVal(Json::Value& val, const std::string& n
 	val["x mirror"] = false;
 	val["y mirror"] = false;
 
-	val["name"] = name;
+	val["export"] = export_name;
 	val["tag"] = tag;
 	val["clip"] = false;
 
