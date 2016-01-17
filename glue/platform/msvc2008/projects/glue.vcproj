@@ -180,6 +180,10 @@
 			Name="math"
 			>
 			<File
+				RelativePath="..\..\..\src\dataset\Math.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\math\Math.h"
 				>
 			</File>
@@ -201,6 +205,22 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\dataset\PngLoader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dataset\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dataset\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dataset\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dataset\Symbol.h"
 				>
 			</File>
 			<File

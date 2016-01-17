@@ -21,7 +21,7 @@ Texture::~Texture()
 
 void Texture::Load(const std::string& filepath)
 {
-	if (filepath.find(".png") == std::string::npos) {
+	if (filepath.find(".png") != std::string::npos) {
 		const uint8_t* data = PngLoader::Read(filepath, m_width, m_height, m_format);
 		Load(data, m_width, m_height, m_format);
 		delete[] data;

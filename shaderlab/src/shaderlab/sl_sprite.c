@@ -70,6 +70,8 @@ sl_sprite_init() {
 
 	S.color = 0xffffffff;
 	S.additive = 0x00000000;
+
+	sl_shader_set_draw_mode(s, DRAW_TRIANGLES);
 }
 
 void 
@@ -92,13 +94,10 @@ sl_sprite_modelview(float x, float y, float sx, float sy) {
 	sl_shader_set_uniform(S.shader, S.modeview_idx, UNIFORM_FLOAT44, S.modelview_mat.e);
 }
 
-// void 
-// sl_sprite_type(int type) {
-// 	sl_shader_set_draw_mode(S.shader, type);
-// }
-
 void 
 sl_sprite_draw(float* positions, float* texcoords, int texid) {
+	sl_shader_set_texture(texid, 0);
+
 	struct vertex vb[4];
 	for (int i = 0; i < 4; ++i) {
 		struct vertex* v = &vb[i];

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg"
+				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\ejoy2d\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,10 +64,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32sd.lib"
+				AdditionalDependencies="glew32sd.lib libpngd.lib zlibd.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\freeglut\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\gl\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg"
+				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\ejoy2d\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -144,10 +144,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32s.lib"
+				AdditionalDependencies="glew32s.lib libpng.lib zlib.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\freeglut\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\gl\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
 				SubSystem="1"
@@ -182,7 +182,27 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\sample\sprite.cpp"
+			RelativePath="..\..\..\sample\main.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestShape.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestShape.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestSprite.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestSprite.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestTask.h"
 			>
 		</File>
 	</Files>

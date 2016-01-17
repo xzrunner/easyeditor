@@ -1,3 +1,8 @@
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #ifndef ejoy3d_render_h
 #define ejoy3d_render_h
 
@@ -159,4 +164,8 @@ void render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long argb);
 void render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 void render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

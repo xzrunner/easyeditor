@@ -61,7 +61,9 @@ uint8_t* PngLoader::Read(const std::string& filename, int& width, int& height, T
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
 	std::locale::global(std::locale("C"));
-	assert(!fin.fail());
+	if (fin.fail()) {
+		return NULL;
+	}
 
 	// get length of file:
 	fin.seekg(0, fin.end);

@@ -1,27 +1,22 @@
-#include "rvg_render.h"
-
-#include <sl_shader.h>
-#include <sl_sprite.h>
+#ifndef _TEST_MAIN_
+#define _TEST_MAIN_
 
 #include <gl/glew.h>
 #include <gl/freeglut.h>
+
+#include <sl_shader.h>
+
+#include "TestShape.h"
+#include "TestSprite.h"
+
+//test::TestTask* task = new test::TestShape;
+test::TestTask* task = new test::TestSprite;
 
 void 
 display(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-// 	sl_shape_color(0xff0000ff);
-// 	rvg_point(0, 0, 5);
-// 	sl_shape_color(0xffff00ff);
-// 	rvg_line(-100, -100, -50, -80);
-// 	sl_shape_color(0xffffffff);
-// 	rvg_rect(10, 10, 100, 100, true);
-// 
-// 	rvg_circle(100, -100, 50, false);
-// 
-// 	sl_shape_color(0xff00ffff);
-// 	rvg_set_circle_segments(32);
-// 	rvg_circle(200, -100, 50, true);
+	task->Draw();
 
 	sl_shader_flush();
 
@@ -33,17 +28,15 @@ init(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	sl_shader_init();
-	sl_sprite_init();
 
-	sl_sprite_modelview(0, 0, 1, 1);
+	task->Init();
 }
 
 void 
 resize(int width, int height) {
 	glViewport(0, 0, width, height);
-	sl_sprite_projection(width, height);
 
-	sl_sprite_bind();
+	task->Resize(width, height);
 }
 
 int 
@@ -69,3 +62,5 @@ main(int argc, char** argv) {
 
 	return 0;
 }
+
+#endif // _TEST_MAIN_

@@ -15,8 +15,8 @@ uniform mat4 u_modelview;
 void main()
 {
 	gl_Position = u_projection * u_modelview * position;
-	v_color = color / 255.0;
-	v_additive = additive / 255.0;
+	v_color = color;
+	v_additive = additive;
 	v_texcoord = texcoord;
 }
 
