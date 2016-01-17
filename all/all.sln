@@ -145,6 +145,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easydb_cl", "..\easydb\plat
 		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
 		{E5C07F5D-F889-4FC2-8DA8-194023914BBE} = {E5C07F5D-F889-4FC2-8DA8-194023914BBE}
 		{594D7A78-858A-4B09-AE88-68C817B6EF61} = {594D7A78-858A-4B09-AE88-68C817B6EF61}
+		{4A75EE84-4487-4506-BBAB-42F1924A1DD5} = {4A75EE84-4487-4506-BBAB-42F1924A1DD5}
 		{716758A5-F6CF-4294-88B2-29C9950304AF} = {716758A5-F6CF-4294-88B2-29C9950304AF}
 		{AAD82BAC-510C-4571-A420-5AE5EE7E29D6} = {AAD82BAC-510C-4571-A420-5AE5EE7E29D6}
 		{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70} = {62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}
@@ -533,28 +534,28 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libterrain3d", "..\easyterr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeasy3d", "..\easy3d\platform\msvc2008\projects\easy3d.vcproj", "{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libparticle", "..\particle\platform\msvc2008\projects\particle.icproj", "{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.ps", "..\particle\platform\msvc2008\projects\particle.icproj", "{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "librespacker", "..\easyrespacker\platform\msvc2008\projects\librespacker.vcproj", "{E5C07F5D-F889-4FC2-8DA8-194023914BBE}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libgtxt", "..\gtxt\platform\msvc2008\projects\gtxt.icproj", "{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.gtxt", "..\gtxt\platform\msvc2008\projects\gtxt.icproj", "{62BFD3AD-27F7-4AE6-A1EB-F5E86877BB70}"
 	ProjectSection(ProjectDependencies) = postProject
 		{17BC84E5-4CEC-4E1E-B09D-858B89643592} = {17BC84E5-4CEC-4E1E-B09D-858B89643592}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtext", "..\easytext\platform\msvc2008\projects\libtext.vcproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libsidx", "..\sidx\platform\msvc2008\projects\sidx.icproj", "{594D7A78-858A-4B09-AE88-68C817B6EF61}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.sidx", "..\sidx\platform\msvc2008\projects\sidx.icproj", "{594D7A78-858A-4B09-AE88-68C817B6EF61}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "rapidvg", "..\rapidvg\platform\msvc2008\projects\rapidvg.icproj", "{08E82851-7338-42C7-831E-2CD86F65FB70}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.rapidvg", "..\rapidvg\platform\msvc2008\projects\rapidvg.icproj", "{08E82851-7338-42C7-831E-2CD86F65FB70}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "libdtex", "..\dtex\platform\msvc2008\projects\dtex.icproj", "{17BC84E5-4CEC-4E1E-B09D-858B89643592}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.dtex", "..\dtex\platform\msvc2008\projects\dtex.icproj", "{17BC84E5-4CEC-4E1E-B09D-858B89643592}"
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "ejoy2d", "..\ejoy2d\platform\msvc2008\projects\ejoy2d.icproj", "{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "shaderlab", "..\shaderlab\platform\msvc2008\projects\shaderlab.icproj", "{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.shaderlab", "..\shaderlab\platform\msvc2008\projects\shaderlab.icproj", "{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glue", "..\glue\platform\msvc2008\projects\glue.vcproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1.glue", "..\glue\platform\msvc2008\projects\glue.vcproj", "{70C5478D-6D53-4F75-99D4-F06373175C83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -838,30 +839,28 @@ Global
 		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Debug|Win32.Build.0 = Debug|Win32
 		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Release|Win32.ActiveCfg = Release|Win32
 		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Release|Win32.Build.0 = Release|Win32
-		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.ActiveCfg = Debug|Win32
-		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
-		{C3A09A35-3134-4097-888A-659E9067902D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C3A09A35-3134-4097-888A-659E9067902D}.Release|Win32.ActiveCfg = Release|Win32
-		{4EE6BE16-9635-4654-BB10-A5D3B8442D32}.Debug|Win32.ActiveCfg = Debug|Win32
-		{4EE6BE16-9635-4654-BB10-A5D3B8442D32}.Release|Win32.ActiveCfg = Release|Win32
-		{8BC5EF69-1364-436F-8F2C-3E173AAE0986}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8BC5EF69-1364-436F-8F2C-3E173AAE0986}.Release|Win32.ActiveCfg = Release|Win32
-		{A49345A0-8C5C-4E17-93CA-29955FBE4661}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A49345A0-8C5C-4E17-93CA-29955FBE4661}.Release|Win32.ActiveCfg = Release|Win32
-		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
 		{4A75EE84-4487-4506-BBAB-42F1924A1DD5}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4A75EE84-4487-4506-BBAB-42F1924A1DD5}.Debug|Win32.Build.0 = Debug|Win32
 		{4A75EE84-4487-4506-BBAB-42F1924A1DD5}.Release|Win32.ActiveCfg = Release|Win32
 		{4A75EE84-4487-4506-BBAB-42F1924A1DD5}.Release|Win32.Build.0 = Release|Win32
-		{A617FE90-2FF9-4C08-B74D-01173EC8EA99}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A617FE90-2FF9-4C08-B74D-01173EC8EA99}.Release|Win32.ActiveCfg = Release|Win32
-		{04F39033-C7F3-41FC-8F66-D665ABD4A04F}.Debug|Win32.ActiveCfg = Debug|Win32
-		{04F39033-C7F3-41FC-8F66-D665ABD4A04F}.Release|Win32.ActiveCfg = Release|Win32
 		{70C5478D-6D53-4F75-99D4-F06373175C83}.Debug|Win32.ActiveCfg = Debug|Win32
 		{70C5478D-6D53-4F75-99D4-F06373175C83}.Debug|Win32.Build.0 = Debug|Win32
 		{70C5478D-6D53-4F75-99D4-F06373175C83}.Release|Win32.ActiveCfg = Release|Win32
 		{70C5478D-6D53-4F75-99D4-F06373175C83}.Release|Win32.Build.0 = Release|Win32
+		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
+		{F484D515-EFBB-4011-9EDA-95C3F8B231B0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F484D515-EFBB-4011-9EDA-95C3F8B231B0}.Release|Win32.ActiveCfg = Release|Win32
+		{B88866E1-B273-4A58-A415-ECD2555080E9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B88866E1-B273-4A58-A415-ECD2555080E9}.Release|Win32.ActiveCfg = Release|Win32
+		{FE79A541-C78A-4612-A09B-A6AFFCD5E01B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE79A541-C78A-4612-A09B-A6AFFCD5E01B}.Release|Win32.ActiveCfg = Release|Win32
+		{D76D845A-F2CC-4311-BA82-14393AF82F5C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D76D845A-F2CC-4311-BA82-14393AF82F5C}.Release|Win32.ActiveCfg = Release|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
+		{84D2A89B-11FD-4A6E-82DF-D5006243177F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{84D2A89B-11FD-4A6E-82DF-D5006243177F}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
