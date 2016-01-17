@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="1.glue"
+	Name="2.glue"
 	ProjectGUID="{70C5478D-6D53-4F75-99D4-F06373175C83}"
 	RootNamespace="glue"
 	Keyword="Win32Proj"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\render;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -50,7 +50,6 @@
 				WarningLevel="3"
 				DebugInformationFormat="4"
 				CompileAs="0"
-				DisableSpecificWarnings="94"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -107,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\render;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\libpng\include;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -153,21 +152,29 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\render\IShader.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\render\IShader.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\render\SpriteShader.cpp"
+				RelativePath="..\..\..\src\render\RenderContext.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\render\SpriteShader.h"
+				RelativePath="..\..\..\src\render\RenderContext.h"
 				>
 			</File>
+			<Filter
+				Name="shader"
+				>
+				<File
+					RelativePath="..\..\..\src\render\SpriteShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\SpriteShader.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="math"
@@ -189,11 +196,19 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\dataset\Image.cpp"
+				RelativePath="..\..\..\src\dataset\PngLoader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\dataset\Image.h"
+				RelativePath="..\..\..\src\dataset\PngLoader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dataset\Texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\dataset\Texture.h"
 				>
 			</File>
 		</Filter>
@@ -208,7 +223,23 @@
 				RelativePath="..\..\..\src\utility\Exception.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\render\macro.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\utility\StringHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\utility\StringHelper.h"
+				>
+			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\glue.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
