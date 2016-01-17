@@ -182,7 +182,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\test\helloworld2.cpp"
+			RelativePath="..\..\..\src\test\helloworld.cpp"
 			>
 		</File>
 	</Files>
