@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="shaderlab"
+	Name="0.shaderlab"
 	ProjectGUID="{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="shaderlab.vcproj">

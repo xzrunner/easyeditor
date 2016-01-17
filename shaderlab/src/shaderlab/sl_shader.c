@@ -47,7 +47,7 @@ struct shader_mgr {
 	int shader_size;
 	struct shader shader[MAX_SHADER];
 
-// 	RID tex[MAX_TEXTURE_CHANNEL];
+ 	int tex[MAX_TEXTURE_CHANNEL];
 // 	int blendchange;
 // 	int drawcall;
 
@@ -56,11 +56,11 @@ struct shader_mgr {
 // 	struct render_buffer vb;
 };
 
-static struct shader_mgr* SM = NULL;
+static struct shader_mgr* S = NULL;
 
 void 
 sl_shader_init() {
-	if (SM) return;
+	if (S) return;
 
 	struct shader_mgr* sm = (struct shader_mgr*)malloc(sizeof(*sm));
 	memset(sm, 0 , sizeof(*sm));
@@ -82,17 +82,17 @@ sl_shader_init() {
 //	sm->blendchange = 0;
 	render_setblend(sm->R, BLEND_ONE, BLEND_ONE_MINUS_SRC_ALPHA);
 
-	SM = sm;
+	S = sm;
 }
 
 int 
 sl_shader_create() {
-	if (SM->shader_size >= MAX_SHADER) {
+	if (S->shader_size >= MAX_SHADER) {
 		return -1;
 	} else {
-		int id = SM->shader_size++;
-		struct shader* s = &SM->shader[id];
-		struct render* R = SM->R;
+		int id = S->shader_size++;
+		struct shader* s = &S->shader[id];
+		struct render* R = S->R;
 		if (s->prog) {
 			render_release(R, SHADER, s->prog);
 			s->prog = 0;
@@ -104,8 +104,8 @@ sl_shader_create() {
 
 void 
 sl_shader_load(int id, const char* vs, const char* fs) {
-	struct shader* s = &SM->shader[id];
-	struct render* R = SM->R;
+	struct shader* s = &S->shader[id];
+	struct render* R = S->R;
 	struct shader_init_args args;
 	args.vs = vs;
 	args.fs = fs;
@@ -115,7 +115,7 @@ sl_shader_load(int id, const char* vs, const char* fs) {
 	render_shader_bind(R, s->prog);
 	render_shader_bind(R, 0);
 //	p->texture_number = texture;
-	SM->curr_shader = -1;
+	S->curr_shader = -1;
 }
 
 static inline void
@@ -124,15 +124,15 @@ _commit(struct shader* s) {
 	if (vb->n == 0) {
 		return;
 	}
-	render_buffer_update(SM->R, s->vertex_buffer, vb->buf, vb->n);
-	render_draw_arrays(SM->R, s->draw_mode, 0, vb->n);
+	render_buffer_update(S->R, s->vertex_buffer, vb->buf, vb->n);
+	render_draw_arrays(S->R, s->draw_mode, 0, vb->n);
 	vb->n = 0;
 }
 
 void 
 sl_shader_set_draw_mode(int id, enum DRAW_MODE dm) {
 	assert(id >= 0 && id < MAX_SHADER);
-	struct shader* s = &SM->shader[id];
+	struct shader* s = &S->shader[id];
 	if (s->draw_mode != dm) {
 		_commit(s);
 		s->draw_mode = dm;
@@ -140,11 +140,21 @@ sl_shader_set_draw_mode(int id, enum DRAW_MODE dm) {
 }
 
 void 
+sl_shader_set_texture(int id, int channel) {
+	assert(channel < MAX_TEXTURE_CHANNEL);
+	if (S->tex[channel] != id) {
+		sl_shader_flush();
+		S->tex[channel] = id;
+		render_set(S->R, TEXTURE, id, channel);
+	}
+}
+
+void 
 sl_shader_create_vertex_buffer(int id, int n, int stride) {
 	assert(id >= 0 && id < MAX_SHADER);
-	struct shader* s = &SM->shader[id];
+	struct shader* s = &S->shader[id];
 
-	struct render* R = SM->R;
+	struct render* R = S->R;
 	RID vertex_buffer = render_buffer_create(R, VERTEXBUFFER, NULL, n, stride);
 	render_set(R, VERTEXBUFFER, vertex_buffer, 0);
 
@@ -153,30 +163,30 @@ sl_shader_create_vertex_buffer(int id, int n, int stride) {
 }
 
 void 
-sl_shader_create_index_buffer(int id, int n, int stride) {
+sl_shader_create_index_buffer(int id, int n, int stride, const void* data) {
 	assert(id >= 0 && id < MAX_SHADER);
 
-	struct render* R = SM->R;
-	RID index_buffer = render_buffer_create(R, INDEXBUFFER, NULL,  n, stride);
+	struct render* R = S->R;
+	RID index_buffer = render_buffer_create(R, INDEXBUFFER, data, n, stride);
 	render_set(R, INDEXBUFFER, index_buffer, 0);
 
-	SM->shader[id].index_buffer = index_buffer;
+	S->shader[id].index_buffer = index_buffer;
 }
 
 void 
 sl_shader_create_vertex_layout(int id, int n, struct vertex_attrib* va) {
 	assert(id >= 0 && id < MAX_SHADER);
 
-	struct render* R = SM->R;
+	struct render* R = S->R;
 	RID layout = render_register_vertexlayout(R, n, va);
 	render_set(R, VERTEXLAYOUT, layout, 0);
 
-	SM->shader[id].layout = layout;
+	S->shader[id].layout = layout;
 }
 
 static void
 _apply_uniform(struct shader* s) {
-	struct render* R = SM->R;
+	struct render* R = S->R;
 	for (int i = 0; i < s->uniform_number; ++i) {
 		if (!s->uniform_change[i]) {
 			continue;
@@ -191,13 +201,13 @@ _apply_uniform(struct shader* s) {
 
 void 
 sl_shader_bind(int id) {
-	struct shader* s = &SM->shader[id];
-	if (SM->curr_shader != id || s->reset_uniform) {
+	struct shader* s = &S->shader[id];
+	if (S->curr_shader != id || s->reset_uniform) {
 		_commit(s);
 	}
-	if (SM->curr_shader != id) {
-		SM->curr_shader = id;
-		render_shader_bind(SM->R, s->prog);
+	if (S->curr_shader != id) {
+		S->curr_shader = id;
+		render_shader_bind(S->R, s->prog);
 		_apply_uniform(s);
 	} else if (s->reset_uniform) {
 		_apply_uniform(s);
@@ -209,9 +219,9 @@ sl_shader_add_uniform(int id, const char* name, enum UNIFORM_FORMAT t) {
 	// reset current_program
 	assert(id >=0 && id < MAX_SHADER);
 	sl_shader_bind(id);
-	struct shader* s = &SM->shader[id];
+	struct shader* s = &S->shader[id];
 	assert(s->uniform_number < MAX_UNIFORM);
-	int loc = render_shader_locuniform(SM->R, name);
+	int loc = render_shader_locuniform(S->R, name);
 	int index = s->uniform_number++;
 	struct uniform* u = &s->uniform[index];
 	u->loc = loc;
@@ -230,7 +240,7 @@ sl_shader_add_uniform(int id, const char* name, enum UNIFORM_FORMAT t) {
 void 
 sl_shader_set_uniform(int id, int index, enum UNIFORM_FORMAT t, float* v) {
 	assert(id >= 0 && id < MAX_SHADER);
-	struct shader* s = &SM->shader[id];
+	struct shader* s = &S->shader[id];
 	_commit(s);
 	assert(index >= 0 && index < s->uniform_number);
 	struct uniform* u = &s->uniform[index];
@@ -273,15 +283,15 @@ sl_shader_uniform_size(enum UNIFORM_FORMAT t) {
 void 
 sl_shader_draw(int id, void* data, int n) {
 	assert(id >= 0 && id < MAX_SHADER);
-	struct shader* s = &SM->shader[id];
+	struct shader* s = &S->shader[id];
 	if (sl_vb_add(s->vb, data, n)) {
 		_commit(s);
 	}
 }
 
 void 
-sl_shader_flush(int id) {
-	assert(id >= 0 && id < MAX_SHADER);
-	struct shader* s = &SM->shader[id];
+sl_shader_flush() {
+	assert(S->curr_shader >= 0 && S->curr_shader < MAX_SHADER);
+	struct shader* s = &S->shader[S->curr_shader];
 	_commit(s);
 }

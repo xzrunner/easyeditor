@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="shaderlab"
+	Name="0.shaderlab"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	RootNamespace="shaderlab"
 	Keyword="Win32Proj"
@@ -145,6 +145,58 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="sprite"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_sprite.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sprite.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sprite.vert"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="shape"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\shape.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\shape.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_shape.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_shape.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="utility"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_matrix.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_matrix.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\shaderlab\sl_shader.c"
 			>
