@@ -8,6 +8,8 @@ extern "C"
 
 void sl_shader_init();
 
+struct render* sl_shader_get_render();
+
 int sl_shader_create();
 void sl_shader_load(int id, const char* vs, const char* fs);
 

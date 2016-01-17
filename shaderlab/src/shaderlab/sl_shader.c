@@ -85,6 +85,11 @@ sl_shader_init() {
 	S = sm;
 }
 
+struct render* 
+sl_shader_get_render() {
+	return S->R;
+}
+
 int 
 sl_shader_create() {
 	if (S->shader_size >= MAX_SHADER) {
