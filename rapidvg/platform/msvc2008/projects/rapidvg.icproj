@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="0.rapidvg"
+	Name="1.rapidvg"
 	ProjectGUID="{08E82851-7338-42C7-831E-2CD86F65FB70}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="rapidvg.vcproj">

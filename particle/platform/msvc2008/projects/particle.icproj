@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="0.ps"
+	Name="1.ps"
 	ProjectGUID="{8833502D-52B5-4C5C-BE5B-6C611E6F9848}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
 	VCNestedProjectFileName="particle.vcproj">

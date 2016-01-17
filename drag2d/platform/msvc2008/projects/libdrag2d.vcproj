@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libdrag2d"
+	Name="2.drag2d"
 	ProjectGUID="{E69A7CDE-521A-45B5-B776-AD16F72F6A07}"
 	RootNamespace="libdrag2d"
 	Keyword="Win32Proj"

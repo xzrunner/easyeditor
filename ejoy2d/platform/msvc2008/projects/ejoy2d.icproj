@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="ejoy2d"
+	Name="0.ejoy2d"
 	ProjectGUID="{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
 	VCNestedProjectGUID="{2B614163-E3A3-4BCD-9933-EF59B8467868}"
 	VCNestedProjectFileName="ejoy2d.vcproj">
