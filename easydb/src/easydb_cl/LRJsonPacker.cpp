@@ -528,8 +528,10 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		reader.parse(fin, val);
 		fin.close();
 
-		s_name = val["name"].asString();
-		export_name = val["export"].asString();
+		export_name = val["name"].asString();
+
+		assert(val["sprite"].size() == 1);
+		s_name = val["sprite"][(Json::Value::UInt)0]["name"].asString();
 
 		int idx = 0;
 		const Json::Value& spr_val = val["sprite"][idx];
