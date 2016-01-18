@@ -540,7 +540,9 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 		px += cx;
 		py += cy;
 	}
-	dec_val["name"] = s_name;
+	if (!s_name.empty() && s_name[0] != '_') {
+		dec_val["name"] = s_name;
+	}
 	dec_val["export"] = export_name;
 
 	dec_val["x"] = px;
