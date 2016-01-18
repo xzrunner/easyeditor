@@ -8,9 +8,11 @@
 
 #include "TestShape.h"
 #include "TestSprite.h"
+#include "TestMulti.h"
 
 //test::TestTask* task = new test::TestShape;
-test::TestTask* task = new test::TestSprite;
+//test::TestTask* task = new test::TestSprite;
+test::TestTask* task = new test::TestMulti;
 
 void 
 display(void) {

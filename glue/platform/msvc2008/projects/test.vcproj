@@ -186,6 +186,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\sample\TestMulti.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestMulti.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\sample\TestShape.cpp"
 			>
 		</File>

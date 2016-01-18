@@ -47,6 +47,7 @@ sl_sprite_init() {
 		idxs[i*6+4] = i*4+2;
 		idxs[i*6+5] = i*4+3;
 	}
+
 	sl_shader_create_index_buffer(s, 6 * MAX_COMMBINE, sizeof(uint16_t), idxs);	
 
 	sl_shader_create_vertex_buffer(s, 4 * MAX_COMMBINE, sizeof(struct vertex));
@@ -108,5 +109,5 @@ sl_sprite_draw(float* positions, float* texcoords, int texid) {
 		v->color = S.color;
 		v->additive = S.additive;
 	}
-	sl_shader_draw(S.shader, vb, 4);
+	sl_shader_draw(S.shader, vb, 4, 6);
 }

@@ -14,12 +14,16 @@ struct sl_vertexbuffer {
 	int size;
 	int n;
 	int cap;
+
+	// for render_draw_elements
+	int element;
 };
 
 struct sl_vertexbuffer* sl_vb_create(int size, int cap);
 void sl_vb_release(struct sl_vertexbuffer*);
 
-bool sl_vb_add(struct sl_vertexbuffer*, void* data, int n);
+extern inline bool 
+sl_vb_add(struct sl_vertexbuffer*, void* data, int n, int en);
 
 #endif // shader_lab_vertexbuffer_h
 

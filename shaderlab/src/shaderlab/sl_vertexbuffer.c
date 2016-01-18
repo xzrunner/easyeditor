@@ -20,13 +20,14 @@ sl_vb_release(struct sl_vertexbuffer* vb) {
 	free(vb);
 }
 
-bool 
-sl_vb_add(struct sl_vertexbuffer* vb, void* data, int n) {
+inline bool 
+sl_vb_add(struct sl_vertexbuffer* vb, void* data, int n, int en) {
 	if (vb->n + n >= vb->cap) {
 		return true;
 	}
 
 	memcpy(vb->buf + vb->size * vb->n, data, vb->size * n);
 	vb->n += n;
+	vb->element += en;
 	return false;
 }

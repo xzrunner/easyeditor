@@ -96,5 +96,5 @@ sl_shape_draw(float* positions, int count) {
 		v->vy = positions[i * 2 + 1];
 		v->color = S.color;
 	}
-	sl_shader_draw(S.shader, vb, count);
+	sl_shader_draw(S.shader, vb, count, 0);
 }

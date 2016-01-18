@@ -38,6 +38,8 @@ struct shader {
 
 	enum DRAW_MODE draw_mode;
 	struct sl_vertexbuffer* vb;
+
+	bool element;
 };
 
 struct shader_mgr {
@@ -126,12 +128,17 @@ sl_shader_load(int id, const char* vs, const char* fs) {
 static inline void
 _commit(struct shader* s) {
 	struct sl_vertexbuffer* vb = s->vb;
-	if (vb->n == 0) {
+	if (!vb || vb->n == 0) {
 		return;
 	}
 	render_buffer_update(S->R, s->vertex_buffer, vb->buf, vb->n);
-	render_draw_arrays(S->R, s->draw_mode, 0, vb->n);
+	if (s->element) {
+		render_draw_elements(S->R, s->draw_mode, 0, vb->element);
+	} else {
+		render_draw_arrays(S->R, s->draw_mode, 0, vb->n);
+	}	
 	vb->n = 0;
+	vb->element = 0;
 }
 
 void 
@@ -175,7 +182,9 @@ sl_shader_create_index_buffer(int id, int n, int stride, const void* data) {
 	RID index_buffer = render_buffer_create(R, INDEXBUFFER, data, n, stride);
 	render_set(R, INDEXBUFFER, index_buffer, 0);
 
-	S->shader[id].index_buffer = index_buffer;
+	struct shader* s = &S->shader[id];
+	s->index_buffer = index_buffer;
+	s->element = true;
 }
 
 void 
@@ -207,12 +216,13 @@ _apply_uniform(struct shader* s) {
 void 
 sl_shader_bind(int id) {
 	struct shader* s = &S->shader[id];
-	if (S->curr_shader != id || s->reset_uniform) {
-		_commit(s);
+	if (S->curr_shader != -1 && (S->curr_shader != id || s->reset_uniform)) {
+		_commit(&S->shader[S->curr_shader]);
 	}
 	if (S->curr_shader != id) {
 		S->curr_shader = id;
 		render_shader_bind(S->R, s->prog);
+		render_set(S->R, VERTEXBUFFER, s->vertex_buffer, 0);
 		_apply_uniform(s);
 	} else if (s->reset_uniform) {
 		_apply_uniform(s);
@@ -286,10 +296,10 @@ sl_shader_uniform_size(enum UNIFORM_FORMAT t) {
 }
 
 void 
-sl_shader_draw(int id, void* data, int n) {
+sl_shader_draw(int id, void* data, int n, int element) {
 	assert(id >= 0 && id < MAX_SHADER);
 	struct shader* s = &S->shader[id];
-	if (sl_vb_add(s->vb, data, n)) {
+	if (sl_vb_add(s->vb, data, n, element)) {
 		_commit(s);
 	}
 }
