@@ -146,6 +146,10 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\ps.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\ps_2d.c"
 			>
 		</File>
@@ -167,6 +171,14 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\ps_3d_buffer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ps_3d_sprite.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ps_3d_sprite.h"
 			>
 		</File>
 		<File

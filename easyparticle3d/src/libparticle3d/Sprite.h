@@ -2,9 +2,10 @@
 #define _EASYPARTICLE3D_SPRITE_H_
 
 #include "Symbol.h"
+#include "PS.h"
 
 #include <easy3d.h>
-#include <ps_3d_buffer.h>
+#include <ps_3d_sprite.h>
 
 namespace eparticle3d
 {
@@ -55,6 +56,8 @@ public:
 	bool IsReuse() const { return m_reuse; }
 	void SetReuse(bool reuse);
 
+	p3d_sprite* GetP3D() const { return m_spr; }
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
@@ -74,6 +77,8 @@ private:
 
 	bool m_alone;
 	bool m_reuse;
+
+	mutable RenderParams m_rp;
 
 }; // Sprite
 

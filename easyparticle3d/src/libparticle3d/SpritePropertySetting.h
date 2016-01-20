@@ -23,6 +23,8 @@ protected:
 private:
 	wxWindow* m_parent;
 
+	wxPropertyGrid* m_pg;
+
 }; // SpritePropertySetting
 
 

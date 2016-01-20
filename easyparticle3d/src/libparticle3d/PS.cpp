@@ -2,6 +2,7 @@
 #include "ParticleSystem.h"
 
 #include <ps_3d.h>
+#include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
 
 namespace eparticle3d
@@ -33,7 +34,7 @@ bool PS::Update(float dt)
 
 void PS::Draw() const
 {
-	p3d_buffer_draw();
+	p3d_buffer_draw(0, 0, 1);
 }
 
 void PS::UpdateTime()
@@ -55,25 +56,28 @@ static void
 render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
             struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
 {
-	d2d::Matrix mt;
-	if (ud) {
-		mt = *(d2d::Matrix*)ud;
-	} else {
-		float* m = (float*)mt.getElements();
-		m[0] = mat[0];
-		m[1] = mat[1];
-		m[4] = mat[2];
-		m[5] = mat[3];
-		m[12] = mat[4];
-		m[13] = mat[5];		
-	}
+	assert(ud);
+	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 
 	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
-	d2d::ColorTrans color;
-	memcpy(&color.multi, mul_col, sizeof(*mul_col));
-	memcpy(&color.add, add_col, sizeof(*add_col));
+	d2d::ColorTrans ct;
+	memcpy(&ct.multi, mul_col, sizeof(*mul_col));
+	memcpy(&ct.add, add_col, sizeof(*add_col));
+	ct.multi = cMul(ct.multi, rp->ct.multi);
+	ct.add = cAdd(ct.add, rp->ct.add);
+	// todo color trans
 
-	d2d::SpriteRenderer::Instance()->Draw(sym, mt, d2d::Vector(x, y), angle, scale, scale, 0, 0, color);
+	d2d::Matrix mt = rp->mat;
+	if (!rp->p3d->local_mode_draw) {
+		float* src = const_cast<float*>(mt.getElements());
+		src[0] = mat[0];
+		src[1] = mat[1];
+		src[4] = mat[2];
+		src[5] = mat[3];
+		src[12]= mat[4];
+		src[13]= mat[5];
+	}
+	d2d::SpriteRenderer::Instance()->Draw(sym, mt, d2d::Vector(x, y), angle, scale, scale, 0, 0, ct);
 
 	// todo bind
 	// 	if (p->bind_ps) {
@@ -108,29 +112,33 @@ remove_func(p3d_particle* p, void* ud)
 	}
 }
 
-static void* create_render_params_func()
-{
-	return new d2d::Matrix;
+static void
+update_srt_func(void* params, float x, float y, float scale) {
+	RenderParams* rp = static_cast<RenderParams*>(params);
+	rp->mat.translate(x, y);
+	rp->mat.scale(scale, scale);
 }
 
 static void
-wrap_render_params_func(void* params, float* mat)
-{
-	float* dmat = (float*)(((d2d::Matrix*)params)->getElements());
-	dmat[0] = mat[0];
-	dmat[1] = mat[1];
-	dmat[4] = mat[2];
-	dmat[5] = mat[3];
-	dmat[12] = mat[4];
-	dmat[13] = mat[5];	
+create_draw_params_func(struct p3d_sprite* spr) {
+	RenderParams* rp = new RenderParams;
+	rp->p3d = spr;
+	spr->draw_params = rp;
+}
+
+void 
+release_draw_params_func(struct p3d_sprite* spr) {
+	RenderParams* rp = static_cast<RenderParams*>(spr->draw_params);
+	delete rp;
+	spr->draw_params = NULL;
 }
 
 void PS::Init()
 {
 	p3d_init();
 	p3d_regist_cb(render_func, add_func, remove_func);	
-
-	p3d_buffer_init(create_render_params_func, wrap_render_params_func);
+	p3d_buffer_init(update_srt_func);
+	p3d_sprite_init(create_draw_params_func, release_draw_params_func);
 }
 
 }

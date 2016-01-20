@@ -156,11 +156,11 @@ void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
 // 	}
 
 	if (m_local_mode_draw) {
-		p3d_emitter_draw(m_et, &mt);
+		m_rp.mat = const_cast<d2d::Matrix&>(mt);
+		p3d_emitter_draw(m_et, &m_rp);
 	} else {
 		p3d_emitter_draw(m_et, NULL);
 	}
-	
 }
 
 bool ParticleSystem::Update(const d2d::Matrix& mat)

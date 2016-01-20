@@ -1,6 +1,8 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
+#include "PS.h"
+
 #include <drag2d.h>
 #include <easy3d.h>
 
@@ -81,6 +83,8 @@ public:
 	std::string name;
 
 private:
+	mutable RenderParams m_rp;
+
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;
 

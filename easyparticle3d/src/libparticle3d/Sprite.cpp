@@ -26,7 +26,7 @@ Sprite::Sprite(const Sprite& sprite)
 	m_symbol->Retain();
 
 	m_spr = sprite.m_spr;
-	m_spr->ud = &m_spr;
+	m_spr->ptr_self = &m_spr;
 	p3d_emitter_start(m_spr->et);
 	if (!m_spr->et->loop) {
 		p3d_buffer_remove(m_spr);
@@ -46,7 +46,7 @@ Sprite::Sprite(Symbol* symbol)
 		m_spr = p3d_sprite_create();
 		m_spr->et = p3d_emitter_create(cfg);
 		p3d_emitter_start(m_spr->et);
-		m_spr->ud = &m_spr;
+		m_spr->ptr_self = &m_spr;
 	}
 }
 
@@ -56,12 +56,14 @@ Sprite::~Sprite()
 		m_symbol->Release();
 	}
 
-	if (!m_alone) {
-		p3d_emitter_release(m_spr->et);
-	} else {
-		if (m_spr->et->loop) {
+	if (m_spr) {
+		if (!m_alone) {
 			p3d_emitter_release(m_spr->et);
-			p3d_buffer_remove(m_spr);
+		} else {
+			if (m_spr->et->loop) {
+				p3d_buffer_remove(m_spr);
+				p3d_sprite_release(m_spr);
+			}
 		}
 	}
 }
@@ -77,7 +79,9 @@ bool Sprite::Update(int version)
 {
 	PS::Instance()->UpdateTime();
 
-	if (m_alone) {
+	if (!m_spr) {
+		return true;
+	} else if (m_alone) {
 		return false;
 	} else {
 		p3d_emitter* et = m_spr->et;
@@ -150,7 +154,7 @@ void Sprite::Load(const Json::Value& val)
 			m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
 		}
 		p3d_emitter_start(m_spr->et);
-		m_spr->ud = &m_spr;
+		m_spr->ptr_self = &m_spr;
 		if (p_val["loop"].isNull()) {
 			m_spr->et->loop = true;
 		} else {
@@ -181,8 +185,13 @@ void Sprite::Store(Json::Value& val) const
 	p_val["alone"] = m_alone;
 	p_val["reuse"] = m_reuse;
 
-	p_val["loop"] = m_spr->et->loop;
-	p_val["local_mode_draw"] = m_spr->local_mode_draw;
+	if (m_spr) {
+		p_val["loop"] = m_spr->et->loop;
+		p_val["local_mode_draw"] = m_spr->local_mode_draw;
+	} else {
+		p_val["loop"] = true;
+		p_val["local_mode_draw"] = true;
+	}
 
 	val["particle3d"] = p_val;
 }
@@ -194,25 +203,24 @@ d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
 
 void Sprite::Start()
 {
-	p3d_emitter_start(m_spr->et);
+	if (m_spr) {
+		p3d_emitter_start(m_spr->et);
+	}
 }
 
 void Sprite::Draw(const d2d::Matrix& mt) const
 {
-	if (!m_alone) {
-		if (m_spr->local_mode_draw) {
-			p3d_emitter_draw(m_spr->et, &mt);
-		} else {
-			p3d_emitter_draw(m_spr->et, NULL);
-		}
+	if (!m_alone && m_spr) {
+		m_rp.mat = mt;
+		m_rp.p3d = m_spr;
+		p3d_emitter_draw(m_spr->et, &m_rp);
 	}
 }
 
 void Sprite::SetMatrix(const d2d::Matrix& mat) 
 { 
-	m_mat = mat; 
-
-	if (m_alone) {
+	m_mat = mat;
+	if (m_spr && m_alone) {
 		const float* src = mat.getElements();
 		float* mt = m_spr->mat;
 		mt[0] = src[0];
@@ -226,35 +234,46 @@ void Sprite::SetMatrix(const d2d::Matrix& mat)
 
 bool Sprite::IsLoop() const
 {
-	return m_spr->et->loop;
+	if (m_spr) {
+		return m_spr->et->loop;
+	} else {
+		return false;
+	}
 }
 
 void Sprite::SetLoop(bool loop)
 {
-	if (m_spr->et->loop == loop) {
-		return;
-	}
-
-	if (m_alone && !m_spr->et->loop) {
+	// removed from buffer
+	if (!m_spr) {
+		m_spr = p3d_sprite_create();
+		m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
 		p3d_emitter_start(m_spr->et);
+		m_spr->ptr_self = &m_spr;
 		p3d_buffer_insert(m_spr);
 	}
+
 	m_spr->et->loop = loop;
 }
 
 bool Sprite::IsLocalModeDraw() const
 {
-	return m_spr->local_mode_draw;
+	if (m_spr) {
+		return m_spr->local_mode_draw;
+	} else {
+		return true;
+	}
 }
 
 void Sprite::SetLocalModeDraw(bool local)
 {
-	m_spr->local_mode_draw = local;
+	if (m_spr) {
+		m_spr->local_mode_draw = local;
+	}
 }
 
 void Sprite::SetAlone(bool alone) 
 { 
-	if (m_alone == alone) {
+	if (m_alone == alone || !m_spr) {
 		return;
 	}
 
@@ -269,14 +288,14 @@ void Sprite::SetAlone(bool alone)
 	if (m_spr) {
 		m_spr->et = et;
 		p3d_emitter_start(m_spr->et);
-		m_spr->ud = &m_spr;
+		m_spr->ptr_self = &m_spr;
 	}
 	m_alone = alone;
 }
 
 void Sprite::SetReuse(bool reuse)
 {
-	if (m_reuse == reuse) {
+	if (m_reuse == reuse || !m_spr) {
 		return;
 	}
 

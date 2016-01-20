@@ -46,6 +46,20 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
 	p3d_spr->SetMatrix(mt);
 	if (p3d_spr->IsAlone()) {
+		p3d_sprite* p3d = p3d_spr->GetP3D();
+		if (!p3d) {
+			return;
+		}
+		RenderParams* rp = static_cast<RenderParams*>(p3d->draw_params);
+		rp->mat = mt;
+		rp->ct = color;
+		const float* src = mt.getElements();
+		p3d->mat[0] = src[0];
+		p3d->mat[1] = src[1];
+		p3d->mat[2] = src[4];
+		p3d->mat[3] = src[5];
+		p3d->mat[4] = src[12];
+		p3d->mat[5] = src[13];	
 		return;
 	}
 

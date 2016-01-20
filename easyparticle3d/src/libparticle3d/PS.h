@@ -3,8 +3,20 @@
 
 #include <drag2d.h>
 
+struct p3d_sprite;
+
 namespace eparticle3d
 {
+
+class RenderParams
+{
+public:
+	d2d::Matrix mat;
+	d2d::ColorTrans ct;
+	p3d_sprite* p3d;
+
+	RenderParams() : p3d(NULL) {}
+};
 
 class PS : public d2d::SceneNode
 {

@@ -23,11 +23,21 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (name == "Loop") {
 		spr->SetLoop(wxANY_AS(value, bool));
 	} else if (name == "Local") {
-		spr->SetLocalModeDraw(wxANY_AS(value, bool));
+		bool local = wxANY_AS(value, bool);
+		spr->SetLocalModeDraw(local);
+		if (!local) {
+			m_pg->GetProperty("Reuse")->SetValue(false);
+			spr->SetReuse(false);
+		}
 	} else if (name == "Alone") {
 		spr->SetAlone(wxANY_AS(value, bool));
 	} else if (name == "Reuse") {
-		spr->SetReuse(wxANY_AS(value, bool));
+		bool reuse = wxANY_AS(value, bool);
+		spr->SetReuse(reuse);
+		if (reuse) {
+			m_pg->GetProperty("Local")->SetValue(true);
+			spr->SetLocalModeDraw(true);
+		}
 	}
 
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -35,6 +45,8 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 
 void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
+	m_pg = pg;
+
 	d2d::SpritePropertySetting::UpdateProperties(pg);
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
@@ -47,6 +59,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
+	m_pg = pg;
+
 	d2d::SpritePropertySetting::InitProperties(pg);
 
 	pg->Append(new wxPropertyCategory("P3D", wxPG_LABEL));
