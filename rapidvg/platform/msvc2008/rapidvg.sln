@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.rapidvg", "projects\rapidvg.icproj", "{08E82851-7338-42C7-831E-2CD86F65FB70}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.rapidvg", "projects\rapidvg.icproj", "{08E82851-7338-42C7-831E-2CD86F65FB70}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "projects\test.vcproj", "{6BE4297D-07CB-4155-AB16-C5AF67CB9843}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -10,9 +10,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "projects\test.vcpro
 		{4A75EE84-4487-4506-BBAB-42F1924A1DD5} = {4A75EE84-4487-4506-BBAB-42F1924A1DD5}
 	EndProjectSection
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.shaderlab", "..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.icproj", "{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.shaderlab", "..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.icproj", "{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "ejoy2d", "..\..\..\ejoy2d\platform\msvc2008\projects\ejoy2d.icproj", "{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "0.ejoy2d", "..\..\..\ejoy2d\platform\msvc2008\projects\ejoy2d.icproj", "{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,12 +36,12 @@ Global
 		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Debug|Win32.Build.0 = Debug|Win32
 		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Release|Win32.ActiveCfg = Release|Win32
 		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Release|Win32.Build.0 = Release|Win32
+		{D51D7E2C-9FA1-4314-8011-66FAD71B1773}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D51D7E2C-9FA1-4314-8011-66FAD71B1773}.Release|Win32.ActiveCfg = Release|Win32
 		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Debug|Win32.ActiveCfg = Debug|Win32
 		{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}.Release|Win32.ActiveCfg = Release|Win32
-		{1710E489-C9E9-4EC2-8654-48755F29EA68}.Debug|Win32.ActiveCfg = Debug|Win32
-		{1710E489-C9E9-4EC2-8654-48755F29EA68}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
