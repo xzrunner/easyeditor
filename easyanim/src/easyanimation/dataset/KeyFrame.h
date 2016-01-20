@@ -51,6 +51,8 @@ public:
 	int GetID() const { return m_id; }
 	void SetID(int id) { m_id = id; }
 
+	void OnActive();
+
 private:
 	void GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
 

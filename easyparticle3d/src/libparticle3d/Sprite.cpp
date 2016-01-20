@@ -25,11 +25,8 @@ Sprite::Sprite(const Sprite& sprite)
 {
 	m_symbol->Retain();
 
-	m_spr = sprite.m_spr;
-	m_spr->ptr_self = &m_spr;
-	p3d_emitter_start(m_spr->et);
-	if (!m_spr->et->loop) {
-		p3d_buffer_remove(m_spr);
+	CreatePS();
+	if (m_alone) {
 		p3d_buffer_insert(m_spr);
 	}
 }
@@ -42,12 +39,7 @@ Sprite::Sprite(Symbol* symbol)
 	m_symbol->Retain();
 	BuildBounding();
 
-	if (const p3d_emitter_cfg* cfg = symbol->GetEmitterCfg()) {
-		m_spr = p3d_sprite_create();
-		m_spr->et = p3d_emitter_create(cfg);
-		p3d_emitter_start(m_spr->et);
-		m_spr->ptr_self = &m_spr;
-	}
+	CreatePS();
 }
 
 Sprite::~Sprite()
@@ -245,10 +237,7 @@ void Sprite::SetLoop(bool loop)
 {
 	// removed from buffer
 	if (!m_spr) {
-		m_spr = p3d_sprite_create();
-		m_spr->et = p3d_emitter_create(m_symbol->GetEmitterCfg());
-		p3d_emitter_start(m_spr->et);
-		m_spr->ptr_self = &m_spr;
+		CreatePS();
 		p3d_buffer_insert(m_spr);
 	}
 
@@ -308,6 +297,28 @@ void Sprite::SetReuse(bool reuse)
 	p3d_emitter_start(m_spr->et);
 
 	m_reuse = reuse;
+}
+
+void Sprite::OnActive()
+{
+	// removed from buffer
+	if (!m_spr) {
+		CreatePS();
+		p3d_buffer_insert(m_spr);
+	}
+}
+
+void Sprite::CreatePS()
+{
+	const p3d_emitter_cfg* cfg = m_symbol->GetEmitterCfg();
+	if (!cfg) {
+		return;
+	}
+
+	m_spr = p3d_sprite_create();
+	m_spr->et = p3d_emitter_create(cfg);
+	p3d_emitter_start(m_spr->et);
+	m_spr->ptr_self = &m_spr;
 }
 
 }

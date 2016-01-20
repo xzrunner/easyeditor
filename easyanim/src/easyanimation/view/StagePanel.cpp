@@ -10,6 +10,8 @@
 #include "view/ViewMgr.h"
 #include "message/messages.h"
 
+#include <easyparticle3d.h>
+
 namespace eanim
 {
 
@@ -161,6 +163,11 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 				} else {
 					m_frame = NULL;
 				}
+			}
+
+			eparticle3d::PS::Instance()->BufferClear();
+			if (m_frame) {
+				m_frame->OnActive();
 			}
 		}
 		break;

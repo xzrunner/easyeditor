@@ -37,6 +37,11 @@ void PS::Draw() const
 	p3d_buffer_draw(0, 0, 1);
 }
 
+void PS::BufferClear()
+{
+	p3d_buffer_clear();
+}
+
 void PS::UpdateTime()
 {
 	static clock_t last = 0;

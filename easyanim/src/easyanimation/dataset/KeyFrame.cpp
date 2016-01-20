@@ -5,6 +5,7 @@
 
 #include <easymesh.h>
 #include <easyanim.h>
+#include <easyparticle3d.h>
 
 namespace eanim
 {
@@ -165,6 +166,17 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
   	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
   		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
 	SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
+}
+
+void KeyFrame::OnActive()
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(m_sprites[i])) {
+			if (p3d->IsAlone()) {
+				p3d->OnActive();
+			}
+		}
+	}
 }
 
 void KeyFrame::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 

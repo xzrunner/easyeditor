@@ -58,12 +58,14 @@ public:
 
 	p3d_sprite* GetP3D() const { return m_spr; }
 
+	void OnActive();
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
 private:
-	void CreateWithAlone();
+	void CreatePS();
 
 protected:
 	Symbol* m_symbol;

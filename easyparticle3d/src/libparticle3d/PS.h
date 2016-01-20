@@ -27,6 +27,8 @@ public:
 	virtual bool Update(float dt);
 	virtual void Draw() const;
 
+	void BufferClear();
+
 	void UpdateTime();
 	float GetTime() const { return m_time; }
 
