@@ -14,5 +14,6 @@
 #include "librespacker/UnpackNodeFactory.h"
 #include "librespacker/pack_unpack.h"
 #include "librespacker/Lzma.h"
+#include "librespacker/PackToBin.h"
 
 #endif // _EASYRESPACKER_H_

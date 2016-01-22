@@ -59,6 +59,7 @@
 #include "TransNewTextFile.h"
 #include "TransOldP3DFile.h"
 #include "AverageRectCut.h"
+#include "PackEPT.h"
 
 namespace edb
 {
@@ -123,6 +124,7 @@ void CommandLoader::Init()
 	fc->Register(TransNewTextFile::Create());
 	fc->Register(TransOldP3DFile::Create());
 	fc->Register(AverageRectCut::Create());
+	fc->Register(PackEPT::Create());
 }
 
 }
