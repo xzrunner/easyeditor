@@ -7,6 +7,7 @@
 #include "message/messages.h"
 
 #include <easyanim.h>
+#include <easyparticle3d.h>
 
 namespace eanim
 {
@@ -49,14 +50,25 @@ void PreviewCanvas::OnTimer()
 // todo: waste time!
 void PreviewCanvas::DrawStageData() const
 {
+	eparticle3d::PS::Instance()->BufferClear();
+
 	std::vector<d2d::ISprite*> sprites;
 	PreviewUtility::GetCurrSprites(m_control, sprites);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(sprites[i])) {
+			p3d->OnActive();
+		}
+	}
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* spr = sprites[i];
+		spr->Update(0);
+		d2d::SpriteRenderer::Instance()->Draw(spr);
+	}
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		sprites[i]->Release();
+	}
 
 	d2d::SceneNodeMgr::Instance()->Draw();
 }

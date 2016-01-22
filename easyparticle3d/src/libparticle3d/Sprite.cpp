@@ -25,7 +25,10 @@ Sprite::Sprite(const Sprite& sprite)
 {
 	m_symbol->Retain();
 
-	CreatePS();
+//	CreatePS();
+
+	m_spr = sprite.m_spr;
+
 	if (m_alone) {
 		p3d_buffer_insert(m_spr);
 	}
@@ -304,6 +307,9 @@ void Sprite::OnActive()
 	// removed from buffer
 	if (!m_spr) {
 		CreatePS();
+	}
+
+	if (m_alone) {
 		p3d_buffer_insert(m_spr);
 	}
 }
