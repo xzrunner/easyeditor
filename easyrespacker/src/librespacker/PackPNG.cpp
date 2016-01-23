@@ -54,7 +54,8 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 	std::locale::global(std::locale("C"));
 
 	if (scale == 1) {
-		RevertAndStore(fout, m_buffer, m_width, m_height);
+//		RevertAndStore(fout, m_buffer, m_width, m_height);
+		Store(fout, m_buffer, m_width, m_height);
 	} else {
 		size_t sz = m_width * m_height * 4;
 		uint8_t* buf = new uint8_t[sz];

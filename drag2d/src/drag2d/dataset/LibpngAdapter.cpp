@@ -10,7 +10,8 @@
 namespace d2d
 {
 
-int LibpngAdapter::Write(const uint8_t* pixels, int width, int height, const std::string& filename)
+int LibpngAdapter::Write(const uint8_t* pixels, int width, int height, 
+						 const std::string& filename, bool reverse)
 {
 	unsigned bands_per_pixel = 4;
 
@@ -35,9 +36,14 @@ int LibpngAdapter::Write(const uint8_t* pixels, int width, int height, const std
 	png_write_info(p_str, p_info);
 
 	std::vector<uint8_t*> row_pointers(height);
-	for (unsigned y = 0; y < height; y++) {
-		// reverse
-		row_pointers[height - 1 - y] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
+	if (reverse) {
+		for (unsigned y = 0; y < height; y++) {
+			row_pointers[height - 1 - y] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
+		}
+	} else {
+		for (unsigned y = 0; y < height; y++) {
+			row_pointers[height] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
+		}
 	}
 
 	png_write_image(p_str, &row_pointers[0]);

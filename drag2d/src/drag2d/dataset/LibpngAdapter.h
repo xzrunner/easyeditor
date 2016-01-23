@@ -11,7 +11,7 @@ class LibpngAdapter
 {
 public:
 	static int Write(const uint8_t* pixels, int width, int height,
-		const std::string& filename);
+		const std::string& filename, bool reverse = true);
 
 	static uint8_t* Read(const std::string& filename, int& width, int& height, 
 		int& channels, int& format);
