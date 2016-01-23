@@ -33,7 +33,11 @@ void PackTexture::Run(int argc, char *argv[])
 	} else {
 		libtexpacker::ImageTrimData* trim = NULL;
 		if (argc > 6) {
-			trim = new libtexpacker::ImageTrimData(argv[6]);
+			if (strcmp(argv[6], "null") == 0) {
+				trim = NULL;
+			} else {
+				trim = new libtexpacker::ImageTrimData(argv[6]);
+			}
 		}
 		int extrude = 1;
 		if (argc > 7) {
