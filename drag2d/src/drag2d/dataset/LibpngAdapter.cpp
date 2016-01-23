@@ -42,7 +42,7 @@ int LibpngAdapter::Write(const uint8_t* pixels, int width, int height,
 		}
 	} else {
 		for (unsigned y = 0; y < height; y++) {
-			row_pointers[height] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
+			row_pointers[y] = (uint8_t*)pixels + y * (width * bands_per_pixel * bit_depth / 8);
 		}
 	}
 
