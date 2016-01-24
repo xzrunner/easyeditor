@@ -5,6 +5,7 @@
 #include <render/render.h>
 
 #include <stdint.h>
+#include <string.h>
 
 #define STRINGIFY(A)  #A
 #include "shape.vert"
@@ -31,7 +32,7 @@ struct shader_state {
 static struct shader_state S;
 
 void 
-sl_shape_init() {
+sl_shape_load() {
 	int s = sl_shader_create();
 	if (s < 0) {
 		return;
@@ -58,8 +59,17 @@ sl_shape_init() {
 }
 
 void 
+sl_shape_unload() {
+	memset(&S, 0, sizeof(struct shader_state));
+}
+
+void 
 sl_shape_bind() {
 	sl_shader_bind(S.shader);
+}
+
+void 
+sl_shape_unbind() {
 }
 
 void 

@@ -163,9 +163,25 @@
 				RelativePath="..\..\..\src\render\RenderContext.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\render\ShaderMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\render\ShaderMgr.h"
+				>
+			</File>
 			<Filter
 				Name="shader"
 				>
+				<File
+					RelativePath="..\..\..\src\render\ShapeShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\ShapeShader.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\render\SpriteShader.cpp"
 					>

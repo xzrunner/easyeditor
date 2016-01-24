@@ -70,7 +70,7 @@ sl_shader_init() {
 	struct render_init_args RA;
 	// todo: config these args
 	RA.max_buffer = 128;
-	RA.max_layout = 4;
+	RA.max_layout = 8;
 	RA.max_target = 128;
 	RA.max_texture = 256;
 	RA.max_shader = MAX_SHADER;
@@ -174,17 +174,18 @@ sl_shader_create_vertex_buffer(int id, int n, int stride) {
 	s->vb = sl_vb_create(stride, n);
 }
 
+int 
+sl_shader_create_index_buffer(int n, int stride, const void* data) {
+	return render_buffer_create(S->R, INDEXBUFFER, data, n, stride);	
+}
+
 void 
-sl_shader_create_index_buffer(int id, int n, int stride, const void* data) {
+sl_shader_set_index_buffer(int id, int buf_id) {
 	assert(id >= 0 && id < MAX_SHADER);
-
-	struct render* R = S->R;
-	RID index_buffer = render_buffer_create(R, INDEXBUFFER, data, n, stride);
-	render_set(R, INDEXBUFFER, index_buffer, 0);
-
 	struct shader* s = &S->shader[id];
-	s->index_buffer = index_buffer;
+	s->index_buffer = buf_id;
 	s->element = true;
+	render_set(S->R, INDEXBUFFER, buf_id, 0);
 }
 
 void 

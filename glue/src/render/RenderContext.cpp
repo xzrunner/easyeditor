@@ -12,11 +12,15 @@ SINGLETON_DEFINITION(RenderContext)
 
 RenderContext::RenderContext() 
 {
-	sl_shader_init();
 }
 
 RenderContext::~RenderContext() 
 {
+}
+
+void RenderContext::Init()
+{
+	sl_shader_init();
 }
 
 RID RenderContext::CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format)

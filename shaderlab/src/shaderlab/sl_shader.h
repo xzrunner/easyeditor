@@ -17,7 +17,8 @@ void sl_shader_set_draw_mode(int id, enum DRAW_MODE dm);
 void sl_shader_set_texture(int id, int channel);
 
 void sl_shader_create_vertex_buffer(int id, int n, int stride);
-void sl_shader_create_index_buffer(int id, int n, int stride, const void* data);
+int sl_shader_create_index_buffer(int n, int stride, const void* data);
+void sl_shader_set_index_buffer(int id, int buf_id);
 void sl_shader_create_vertex_layout(int id, int n, struct vertex_attrib* va);
 
 void sl_shader_bind(int id);

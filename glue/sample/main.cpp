@@ -4,7 +4,7 @@
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 
-#include <sl_shader.h>
+#include <glue.h>
 
 #include "TestShape.h"
 #include "TestSprite.h"
@@ -20,7 +20,7 @@ display(void) {
 
 	task->Draw();
 
-	sl_shader_flush();
+	glue::ShaderMgr::Instance()->Flush();
 
 	glFlush();
 }
@@ -29,7 +29,7 @@ void
 init(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	sl_shader_init();
+	glue::RenderContext::Instance()->Init();
 
 	task->Init();
 }

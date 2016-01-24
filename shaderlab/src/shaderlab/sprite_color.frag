@@ -1,4 +1,4 @@
-static const char* sprite_frag = STRINGIFY(
+static const char* sprite_color_frag = STRINGIFY(
 
 varying vec4 v_color;
 varying vec4 v_additive;

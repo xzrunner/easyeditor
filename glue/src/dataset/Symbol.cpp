@@ -2,8 +2,7 @@
 #include "Texture.h"
 
 #include "math/Math.h"
-
-#include <sl_sprite.h>
+#include "render/ShaderMgr.h"
 
 namespace glue
 {
@@ -36,8 +35,7 @@ void Symbol::Draw(const mat4& mt) const
 	texcoords[2] = vec2(1, 1);
 	texcoords[3] = vec2(0, 1);
 
-	sl_sprite_bind();
-	sl_sprite_draw(&positions[0].x, &texcoords[0].x, texid);
+	ShaderMgr::Instance()->SpriteDraw(positions, texcoords, texid);
 }
 
 void Symbol::Load()

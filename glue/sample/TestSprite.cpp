@@ -1,15 +1,13 @@
 #include "TestSprite.h"
 
 #include <rvg_render.h>
-#include <sl_sprite.h>
 
 namespace test
 {
 
 void TestSprite::Init()
 {
-	sl_sprite_init();
-	sl_sprite_modelview(0, 0, 1, 1);
+	glue::ShaderMgr::Instance()->Init();
 
 	glue::Symbol* sym = new glue::Symbol("coin_00.png");
 	m_spr = new glue::Sprite(sym);
@@ -17,8 +15,7 @@ void TestSprite::Init()
 
 void TestSprite::Resize(int width, int height)
 {
-	sl_sprite_projection(width, height);
-	sl_sprite_bind();
+	glue::ShaderMgr::Instance()->OnSize(width, height);
 }
 
 void TestSprite::Draw() const

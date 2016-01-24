@@ -157,11 +157,23 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sprite.frag"
+				RelativePath="..\..\..\src\shaderlab\sprite.vert"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sprite.vert"
+				RelativePath="..\..\..\src\shaderlab\sprite_both.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sprite_color.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sprite_map.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sprite_plain.frag"
 				>
 			</File>
 		</Filter>

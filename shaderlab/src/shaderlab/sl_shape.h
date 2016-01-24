@@ -6,8 +6,11 @@ extern "C"
 #ifndef shader_lab_shape_h
 #define shader_lab_shape_h
 
-void sl_shape_init();
+void sl_shape_load();
+void sl_shape_unload();
+
 void sl_shape_bind();
+void sl_shape_unbind();
 
 void sl_shape_projection(int width, int height);
 void sl_shape_modelview(float x, float y, float sx, float sy);

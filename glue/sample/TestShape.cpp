@@ -1,5 +1,6 @@
 #include "TestShape.h"
 
+#include <glue.h>
 #include <rvg_render.h>
 #include <sl_shape.h>
 
@@ -8,18 +9,18 @@ namespace test
 
 void TestShape::Init()
 {
-	sl_shape_init();
-	sl_shape_modelview(0, 0, 1, 1);
+	glue::ShaderMgr::Instance()->Init();
 }
 
 void TestShape::Resize(int width, int height)
 {
-	sl_shape_projection(width, height);
-	sl_shape_bind();
+	glue::ShaderMgr::Instance()->OnSize(width, height);
 }
 
 void TestShape::Draw() const
 {
+	glue::ShaderMgr::Instance()->ShapeDraw();
+
 	sl_shape_color(0xff0000ff);
 	rvg_point(0, 0, 5);
 	sl_shape_color(0xffff00ff);

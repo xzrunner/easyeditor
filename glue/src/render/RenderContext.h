@@ -11,6 +11,8 @@ namespace glue
 class RenderContext
 {
 public:
+	void Init();
+
 	RID CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format);
 	void ReleaseTexture(RID id);
 
