@@ -1116,3 +1116,10 @@ int
 render_version(struct render *R) {
 	return OPENGLES;
 }
+
+int 
+render_query_target() {
+	GLint fbo = 0;
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &fbo);
+	return fbo;
+}

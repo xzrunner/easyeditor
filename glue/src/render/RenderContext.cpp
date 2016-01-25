@@ -20,7 +20,7 @@ RenderContext::~RenderContext()
 
 void RenderContext::Init()
 {
-	sl_shader_init();
+	sl_shader_mgr_create();
 }
 
 RID RenderContext::CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format)

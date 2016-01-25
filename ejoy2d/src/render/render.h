@@ -164,6 +164,8 @@ void render_clear(struct render *R, enum CLEAR_MASK mask, unsigned long argb);
 void render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 void render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 
+int render_query_target();
+
 #endif
 
 #ifdef __cplusplus

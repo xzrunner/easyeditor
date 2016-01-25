@@ -13,3 +13,6 @@
 [submodule "rapidvg/src/rapidvg"]
 	path = rapidvg/src/rapidvg
 	url = ssh://tea.ejoy.com:3222/LR/RapidVG.git
+[submodule "shaderlab/src/shaderlab"]
+	path = shaderlab/src/shaderlab
+	url = ssh://zz@tea.ejoy.com:3222/LR/ShaderLab.git
