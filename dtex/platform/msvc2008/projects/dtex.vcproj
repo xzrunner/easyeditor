@@ -348,6 +348,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\dtex_c4.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dtex_c4.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\dtex_cg.c"
 					>
 				</File>
@@ -363,6 +371,18 @@
 					RelativePath="..\..\..\src\dtex_cs.h"
 					>
 				</File>
+				<Filter
+					Name="base"
+					>
+					<File
+						RelativePath="..\..\..\src\dtex_cfull.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\dtex_cfull.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="extend"
