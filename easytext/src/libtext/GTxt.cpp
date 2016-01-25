@@ -274,9 +274,9 @@ GTxt* GTxt::Instance()
 void GTxt::Init()
 {
 	dtex_cg* cg = d2d::DrawCallBatching::Instance()->GetDtexCG();
-	gtxt_adapter_init(cg);
+	gtxt_adapter_create(cg);
 
-	gtxt_ft_init();
+	gtxt_ft_create();
 
 	const std::vector<std::pair<std::string, std::string> >& 
 		fonts = d2d::Config::Instance()->GetFonts();
@@ -284,7 +284,7 @@ void GTxt::Init()
 		gtxt_ft_add_font(fonts[i].first.c_str(), fonts[i].second.c_str());
 	}	
 
-	gtxt_glyph_init(50, 500, NULL);
+	gtxt_glyph_create(50, 500, NULL);
 
 	gtxt_richtext_ext_sym_cb_init(&ext_sym_create, &ext_sym_release, &ext_sym_get_size, &ext_sym_render, NULL);
 }

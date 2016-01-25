@@ -125,6 +125,10 @@ update_srt_func(void* params, float x, float y, float scale) {
 }
 
 static void
+buf_remove_func(struct p3d_sprite* spr) {
+}
+
+static void
 create_draw_params_func(struct p3d_sprite* spr) {
 	RenderParams* rp = new RenderParams;
 	rp->p3d = spr;
@@ -142,7 +146,7 @@ void PS::Init()
 {
 	p3d_init();
 	p3d_regist_cb(render_func, add_func, remove_func);	
-	p3d_buffer_init(update_srt_func);
+	p3d_buffer_init(update_srt_func, buf_remove_func);
 	p3d_sprite_init(create_draw_params_func, release_draw_params_func);
 }
 
