@@ -68,20 +68,20 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 			height = m_height * scale;
 		d2d::Snapshoot ss;
 		uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
-		Store(fout, buffer, width, height);
+		RevertAndStore(fout, buffer, width, height);
 		delete[] buffer;
 	}
 
 	fout.close();
 }
 
-//void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
-//{
-//	eimage::ImageVerticalFlip revert(buffer, width, height);
-//	uint8_t* buf_revert = revert.Revert();		
-//	Store(fout, buf_revert, width, height);
-//	delete[] buf_revert;
-//}
+void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
+{
+	eimage::ImageVerticalFlip revert(buffer, width, height);
+	uint8_t* buf_revert = revert.Revert();		
+	Store(fout, buf_revert, width, height);
+	delete[] buf_revert;
+}
 
 void PackPNG::Clear()
 {
