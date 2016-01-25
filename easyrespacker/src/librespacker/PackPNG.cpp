@@ -54,7 +54,6 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 	std::locale::global(std::locale("C"));
 
 	if (scale == 1) {
-//		RevertAndStore(fout, m_buffer, m_width, m_height);
 		Store(fout, m_buffer, m_width, m_height);
 	} else {
 		size_t sz = m_width * m_height * 4;
@@ -76,13 +75,13 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 	fout.close();
 }
 
-void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
-{
-	eimage::ImageVerticalFlip revert(buffer, width, height);
-	uint8_t* buf_revert = revert.Revert();		
-	Store(fout, buf_revert, width, height);
-	delete[] buf_revert;
-}
+//void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
+//{
+//	eimage::ImageVerticalFlip revert(buffer, width, height);
+//	uint8_t* buf_revert = revert.Revert();		
+//	Store(fout, buf_revert, width, height);
+//	delete[] buf_revert;
+//}
 
 void PackPNG::Clear()
 {
