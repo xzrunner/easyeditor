@@ -11,11 +11,12 @@ namespace libtexpacker
 static const bool CLOCKWISE_ROT = true;
 
 NormalPack::NormalPack(const std::vector<std::string>& files, const ImageTrimData* trim_info,
-					   int extrude_min, int extrude_max)
+					   int extrude_min, int extrude_max, int start_id)
 	: m_filepaths(files)
 	, m_trim_info(trim_info)
 	, m_extrude_min(extrude_min)
 	, m_extrude_max(extrude_max)
+	, m_start_id(start_id)
 {
 }
 
@@ -135,7 +136,7 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 		value["meta"] = meta_val;
 
 		std::string out_filepath = dst_file;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(i + 1));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(m_start_id + i));
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
@@ -200,7 +201,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 		}
 
 		std::string out_filepath = filepath;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(i + 1));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(m_start_id + 1));
 		pack.OutputToFile(out_filepath);
 	}
 }

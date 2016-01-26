@@ -47,7 +47,11 @@ void PackTexture::Run(int argc, char *argv[])
 		if (argc > 8) {
 			ignore = argv[8];
 		}
-		RunFromCmd(trim, argv[2], ignore, argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude);
+		int start_id = 1;
+		if (argc > 9) {
+			start_id = atoi(argv[9]);
+		}
+		RunFromCmd(trim, argv[2], ignore, argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude, start_id);
 	}
 }
 
@@ -78,13 +82,14 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
  	int extrude_min = value["extrude min"].asInt(),
  		extrude_max = value["extrude max"].asInt();
 
-	RunFromCmd(trim, src_dir, dst_file, "", static_size, max_size, min_size, extrude_min, extrude_max);
+	RunFromCmd(trim, src_dir, dst_file, "", static_size, max_size, min_size, extrude_min, extrude_max, 1);
 
 	delete trim;
 }
 
 void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& src_ignore,
-							 const std::string& dst_file, int static_size, int max_size, int min_size, int extrude_min, int extrude_max) 
+							 const std::string& dst_file, int static_size, int max_size, int min_size, int extrude_min, int extrude_max,
+							 int start_id) 
 {
 	std::vector<std::string> images;
 
@@ -104,7 +109,7 @@ void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::strin
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	libtexpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max);
+	libtexpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max, start_id);
 	tex_packer.Pack(static_size, max_size, min_size);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");

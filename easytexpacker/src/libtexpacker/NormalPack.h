@@ -17,7 +17,7 @@ class NormalPack
 {
 public:
 	NormalPack(const std::vector<std::string>& files, const ImageTrimData* trim_info,
-		int extrude_min = 1, int extrude_max = 4);
+		int extrude_min = 1, int extrude_max = 4, int start_id = 1);
 
 	void Pack(int static_size, int max_size = 4096, int min_size = 0);
 
@@ -44,6 +44,8 @@ private:
 	std::vector<std::vector<int> > m_dst_img_idx;
 
 	int m_extrude_min, m_extrude_max;
+
+	int m_start_id;
 
 }; // NormalPack
 
