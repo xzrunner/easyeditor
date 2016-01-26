@@ -36,7 +36,7 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 	{
 		wxString ext = FilenameTools::getExtension(filepath).Lower();
 
-		if (ext == "png" || ext == "jpg" || ext == "bmp")
+		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr")
 		{
 			sprite = new ImageSprite(static_cast<ImageSymbol*>(symbol));
 		}

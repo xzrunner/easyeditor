@@ -8,6 +8,8 @@
 #include "LibpngAdapter.h"
 #include "PPMAdapter.h"
 
+#include <dtex_pvr.h>
+
 #include <assert.h>
 #include <gl/glew.h>
 
@@ -40,6 +42,17 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 		std::string filename = filepath.substr(0, filepath.find_last_of("."));
 		channels = 4;
 		data = PPMAdapter::Read(filename, width, height);
+	}
+	else if (type == "pvr")
+	{
+		uint32_t w, h;
+		uint8_t* compressed = dtex_pvr_read_file(filepath.c_str(), &w, &h);
+		uint8_t* uncompressed = dtex_pvr_decode(compressed, w, h);
+		free(compressed);
+		data = uncompressed;
+		width = w;
+		height = h;
+		channels = 4;
 	}
 	else
 	{
