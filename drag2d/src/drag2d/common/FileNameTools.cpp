@@ -206,6 +206,43 @@ void FilenameTools::fetchAllFiles(const std::string& dirpath, wxArrayString& fil
 	dir.Traverse(traverser);
 }
 
+void FilenameTools::fetchAllFiles(const std::string& dirpath, const std::string& ignore_dir, wxArrayString& files)
+{
+	class DirTraverser : public wxDirTraverser
+	{
+	public:
+		DirTraverser(wxArrayString& files, const std::string& ignore_dir) 
+			: m_files(files)
+			, m_ignore_dir(ignore_dir)
+		{}
+
+		virtual wxDirTraverseResult OnFile(const wxString& filename)
+		{
+			m_files.Add(filename);
+			return wxDIR_CONTINUE;
+		}
+
+		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+		{
+			if (dirname == m_ignore_dir) {
+				return wxDIR_IGNORE;
+			} else {
+				return wxDIR_CONTINUE;
+			}
+		}
+
+	private:
+		wxArrayString& m_files;
+		std::string m_ignore_dir;
+
+	}; // DirTraverser
+
+	DirTraverser traverser(files, ignore_dir);
+
+	wxDir dir(dirpath);
+	dir.Traverse(traverser);
+}
+
 void FilenameTools::fetchAllFiles(const std::string& dirpath, wxArrayString& files, FileNameParser::Type type)
 {
 	class DirTraverser : public wxDirTraverser

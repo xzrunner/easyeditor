@@ -41,9 +41,13 @@ void PackTexture::Run(int argc, char *argv[])
 		}
 		int extrude = 1;
 		if (argc > 7) {
-			extrude = atoi(argv[7]);			
+			extrude = atoi(argv[7]);
 		}
-		RunFromCmd(trim, argv[2], argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude);
+		std::string ignore;
+		if (argc > 8) {
+			ignore = argv[8];
+		}
+		RunFromCmd(trim, argv[2], ignore, argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude);
 	}
 }
 
@@ -74,18 +78,18 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
  	int extrude_min = value["extrude min"].asInt(),
  		extrude_max = value["extrude max"].asInt();
 
-	RunFromCmd(trim, src_dir, dst_file, static_size, max_size, min_size, extrude_min, extrude_max);
+	RunFromCmd(trim, src_dir, dst_file, "", static_size, max_size, min_size, extrude_min, extrude_max);
 
 	delete trim;
 }
 
-void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& dst_file, 
-							 int static_size, int max_size, int min_size, int extrude_min, int extrude_max) 
+void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& src_ignore,
+							 const std::string& dst_file, int static_size, int max_size, int min_size, int extrude_min, int extrude_max) 
 {
 	std::vector<std::string> images;
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FilenameTools::fetchAllFiles(src_dir, src_ignore, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
 			std::string filepath = d2d::FilenameTools::FormatFilepathAbsolute(files[i].ToStdString());

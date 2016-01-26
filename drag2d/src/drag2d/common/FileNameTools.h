@@ -56,6 +56,7 @@ public:
 	static void FormatSeparators(std::string& filepath);
 
 	static void fetchAllFiles(const std::string& dirpath, wxArrayString& files);
+	static void fetchAllFiles(const std::string& dirpath, const std::string& ignore_dir, wxArrayString& files);
 	static void fetchAllFiles(const std::string& dirpath, wxArrayString& files, FileNameParser::Type type);
 	static void FetchCurrDirs(const std::string& dirpath, wxArrayString& dirs);
 
