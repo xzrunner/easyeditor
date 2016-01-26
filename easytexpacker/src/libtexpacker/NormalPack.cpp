@@ -201,7 +201,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 		}
 
 		std::string out_filepath = filepath;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(m_start_id + 1));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(m_start_id + i));
 		pack.OutputToFile(out_filepath);
 	}
 }
