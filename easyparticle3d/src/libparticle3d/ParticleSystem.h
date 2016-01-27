@@ -50,8 +50,8 @@ public:
 	void Reset();
 	void Pause();
 	void SetLoop(bool loop);
-	void SetLocalModeDraw(bool local) { m_local_mode_draw = local; }
-	bool IsLocalModeDraw() const { return m_local_mode_draw; }
+	void SetLocalModeDraw(bool local);
+	bool IsLocalModeDraw() const;
 
 	void Clear();
 
@@ -77,7 +77,10 @@ public:
 	p3d_symbol* GetSymbol(int idx);
 
 	const p3d_emitter_cfg* GetConfig() const;
-	const p3d_emitter* GetEmitter() const { return m_et; }
+	const p3d_emitter* GetEmitter() const;
+
+private:
+	void Init(const p3d_emitter_cfg* cfg);
 
 public:
 	std::string name;
@@ -89,9 +92,7 @@ private:
 	InvertRecord* m_inv_record;
 
 private:
-	p3d_emitter* m_et;
-
-	bool m_local_mode_draw;
+	p3d_sprite* m_spr;
 
 }; // ParticleSystem
 

@@ -63,6 +63,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 {
 	assert(ud);
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
+	assert(rp->p3d);
 
 	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
 	d2d::ColorTrans ct;
