@@ -8,7 +8,7 @@ namespace d2d
 {
 
 void ImageSaver::StoreToFile(const uint8_t* pixels, int width, int height,
-							 int channels, const std::string& filename, Type type)
+							 int channels, const std::string& filename, Type type, bool reverse)
 {
 	if (!pixels) {
 		throw Exception("Fail to store image %s: null pixles!", filename.c_str());
@@ -17,7 +17,7 @@ void ImageSaver::StoreToFile(const uint8_t* pixels, int width, int height,
 	switch (type)
 	{
 	case e_png:
-		LibpngAdapter::Write(pixels, width, height, filename);
+		LibpngAdapter::Write(pixels, width, height, filename, reverse);
 		break;
 	case e_ppm:
 		PPMAdapter::Write(pixels, width, height, filename);

@@ -18,7 +18,7 @@ public:
 	};
 
 	static void StoreToFile(const uint8_t* pixels, int width, int height,
-		int channels, const std::string& filename, Type type);
+		int channels, const std::string& filename, Type type, bool reverse = true);
 
 }; // ImageSaver
 
