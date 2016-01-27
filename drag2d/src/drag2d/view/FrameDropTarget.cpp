@@ -12,7 +12,7 @@ bool FrameDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 	}
 
 	wxString filename = filenames[0];
-	m_frame->openFile(filename);
+	m_frame->OpenFile(filename);
 
 	return true;
 }

@@ -19,19 +19,19 @@ Frame::~Frame()
 #endif
 }
 
-void Frame::onNew(wxCommandEvent& event)
+void Frame::OnNew(wxCommandEvent& event)
 {
 }
 
-void Frame::onOpen(wxCommandEvent& event)
+void Frame::OnOpen(wxCommandEvent& event)
 {
 }
 
-void Frame::onSave(wxCommandEvent& event)
+void Frame::OnSave(wxCommandEvent& event)
 {
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
 }
 

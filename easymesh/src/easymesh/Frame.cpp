@@ -16,7 +16,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
 	if (!m_task) return;
 

@@ -12,13 +12,13 @@ public:
 	Frame(const wxString& title, const wxString& filetag);
 
 protected:
-	virtual void onSaveAs(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event);
 
-	virtual void onSettings(wxCommandEvent& event);
+	virtual void OnSettings(wxCommandEvent& event);
 
 private:
 	void onPreview(wxCommandEvent& event);
-	void onEJPreview(wxCommandEvent& event);
+	void OnEJPreview(wxCommandEvent& event);
 	void onSetBackground(wxCommandEvent& event);
 	void onCode(wxCommandEvent& event);
 

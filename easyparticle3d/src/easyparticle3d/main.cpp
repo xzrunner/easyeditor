@@ -33,7 +33,7 @@ bool MyApp::OnInit()
 
 	eparticle3d::Frame* frame = new eparticle3d::Frame(wxT("EasyParticle3D"), eparticle3d::FILE_TAG);
 	eparticle3d::Task* task = new eparticle3d::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

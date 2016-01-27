@@ -8,7 +8,7 @@ bool MyApp::OnInit()
 {
 	eterrain3d::Frame* frame = new eterrain3d::Frame("EasyTerrain");
 	eterrain3d::Task* task = new eterrain3d::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

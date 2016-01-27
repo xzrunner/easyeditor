@@ -13,10 +13,10 @@ public:
 	virtual ~Frame();
 
 protected:
-	virtual void onNew(wxCommandEvent& event);
-	virtual void onOpen(wxCommandEvent& event);
-	virtual void onSave(wxCommandEvent& event);
-	virtual void onSaveAs(wxCommandEvent& event);
+	virtual void OnNew(wxCommandEvent& event);
+	virtual void OnOpen(wxCommandEvent& event);
+	virtual void OnSave(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event);
 
 #ifdef _DEBUG
 private:

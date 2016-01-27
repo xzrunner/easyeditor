@@ -18,12 +18,12 @@ bool MyApp::OnInit()
 
 	d2d::Frame* frame = new emesh::Frame("EasyMesh", emesh::FILE_TAG);
 	emesh::Task* task = new emesh::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
 		wxString path(wxGetApp().argv[1]);
-		frame->initWithFile(path);
+		frame->InitWithFile(path);
 	}
 
 	return true;

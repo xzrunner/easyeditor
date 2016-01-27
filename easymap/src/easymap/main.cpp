@@ -27,7 +27,7 @@ bool MyApp::OnInit()
 
 	emap::Frame* frame = new emap::Frame("EasyMap", emap::FILE_TAG);
 	emap::Task* task = new emap::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

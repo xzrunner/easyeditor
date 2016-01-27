@@ -43,14 +43,14 @@ bool MyApp::OnInit()
 
 	eanim::Frame* frame = new eanim::Frame("easyanim", libanim::FILE_TAG);
 	eanim::Task* task = new eanim::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
 		const_cast<d2d::EditPanel*>(task->GetEditPanel())->GetCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);
-		frame->initWithFile(path);
+		frame->InitWithFile(path);
 	}
 
 	return true;

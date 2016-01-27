@@ -16,7 +16,7 @@ public:
 	ToolBar* GetToolBar() { return m_toolbar; }
 
 protected:
-	virtual void onSaveAs(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event);
 	virtual void OnFullView(wxCommandEvent& event);
 
 	void OnToolBarClick(wxCommandEvent& event);

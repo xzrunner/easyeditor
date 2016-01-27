@@ -18,7 +18,7 @@ bool MyApp::OnInit()
 
 	d2d::Frame* frame = new d2d::Frame("EasyShader", eshader::FILE_TAG);
 	eshader::Task* task = new eshader::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

@@ -26,14 +26,14 @@ bool MyApp::OnInit()
 
 	d2d::Frame* frame = new d2d::Frame("EasyShape", libshape::FILE_TAG);
 	eshape::Task* task = new eshape::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
 		d2d::Config::Instance()->EnableUseDTex(false);
 		d2d::Config::Instance()->EnableRender(false);
 		wxString path(wxGetApp().argv[1]);
-		frame->initWithFile(path);
+		frame->InitWithFile(path);
 		d2d::Config::Instance()->EnableUseDTex(true);
 		d2d::Config::Instance()->EnableRender(true);
 	}

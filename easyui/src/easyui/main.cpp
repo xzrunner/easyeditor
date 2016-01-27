@@ -51,7 +51,7 @@ bool MyApp::OnInit()
 
 	eui::Frame* frame = new eui::Frame("EasyUI", eui::FILE_TAG);
 	eui::Task* task = new eui::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

@@ -31,7 +31,7 @@ bool MyApp::OnInit()
 
 	d2d::Frame* frame = new d2d::Frame("EasyParticle2D", eparticle2d::FILE_TAG);
 	eparticle2d::Task* task = new eparticle2d::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

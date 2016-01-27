@@ -14,7 +14,7 @@ public:
 	Frame(const wxString& title, const wxString& filetag);
 
 protected:
-	virtual void onSaveAs(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event);
 
 private:
 	void SaveAsParticle3d(const wxString& filepath) const;

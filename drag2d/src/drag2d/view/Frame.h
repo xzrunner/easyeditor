@@ -1,15 +1,16 @@
-#pragma once
+#ifndef _DRAG2D_FRAME_H_
+#define _DRAG2D_FRAME_H_
 
 #include "interfaces.h"
 
 #include <wx/wx.h>
-#include <json/json.h>
-#include <deque>
 
 #include "common/SpecialConfig.h"
 
 namespace d2d
 {
+
+class RecentFilesMenu;
 
 class Frame : public wxFrame
 {
@@ -17,23 +18,23 @@ public:
 	Frame(const wxString& title, const wxString& filetag, const wxSize& size = wxSize(800, 600));
 	virtual ~Frame();
 
-	void setTask(ITask* task);
+	void SetTask(ITask* task);
 
-	void initWithFile(const wxString& path);
+	void InitWithFile(const wxString& path);
 
-	void openFile(const wxString& filename);
+	void OpenFile(const wxString& filename);
 
 	// F5 refresh with curr file
 	void RefreshWithCurrFile();
 
 protected:
-	virtual void onNew(wxCommandEvent& event);
-	virtual void onOpen(wxCommandEvent& event);
-	virtual void onSave(wxCommandEvent& event);
-	virtual void onSaveAs(wxCommandEvent& event);
+	virtual void OnNew(wxCommandEvent& event);
+	virtual void OnOpen(wxCommandEvent& event);
+	virtual void OnSave(wxCommandEvent& event);
+	virtual void OnSaveAs(wxCommandEvent& event);
 
 	virtual void OnFullView(wxCommandEvent& event);
-	virtual void onSettings(wxCommandEvent& event);
+	virtual void OnSettings(wxCommandEvent& event);
 
 	wxString GetFileFilter() const;
 	static wxString GetJsonFileFilter(const wxString& file_tag);
@@ -41,31 +42,27 @@ protected:
 private:
 	void Clear();
 
-	void saveTmpInfo();
-	void loadTmpInfo();
+	void SaveTmpInfo();
+	void LoadTmpInfo();
 
-	void onOpenRecent1(wxCommandEvent& event);
-	void onOpenRecent2(wxCommandEvent& event);
-	void onOpenRecent3(wxCommandEvent& event);
-	void onOpenRecent4(wxCommandEvent& event);
-	void onOpenRecent5(wxCommandEvent& event);
+	void OnOpenRecentFile(wxCommandEvent& event);
 
-	void onEJPreview(wxCommandEvent& event);
+	void OnEJPreview(wxCommandEvent& event);
 
-	void onQuit(wxCommandEvent& event);
+	void OnQuit(wxCommandEvent& event);
 
-	void onClose(wxCloseEvent& event);
+	void OnClose(wxCloseEvent& event);
 
-	void initMenuBar();
-	void initStatueBar();
+	void InitMenuBar();
+	void InitStatueBar();
 
-	wxMenu* initFileBar();
-	wxMenu* initViewBar();
-	wxMenu* initSettingsBar();
+	wxMenu* InitFileBar();
+	wxMenu* InitViewBar();
+	wxMenu* InitSettingsBar();
 	wxMenu* InitCodeBar();
-	wxMenu* initHelpBar();
+	wxMenu* InitHelpBar();
 
-	void setCurrFilename();
+	void SetCurrFilename();
 
 	void LoadWindowConfig();
 	void StoreWindowConfig();
@@ -82,53 +79,16 @@ private:
 	{
 		ID_FULL_VIEWS		= 1000,
 		ID_SETTINGS,
-		ID_RECENT_FILES		= 1050,
+
+		ID_RECENT_FILENAME	= 8000,
 	};
-
-private:
-	class RecentFiles
-	{
-	public:
-		RecentFiles(wxFrame* frame);
-
-		void save(Json::Value& value) const;
-		void load(const Json::Value& value);
-
-		wxMenu* getMenu() { return m_menu; }
-
-		void insert(const wxString& filename);
-
-		wxString getFilename(int idx) const {
-			if (idx >= 0 && idx < (int)m_files.size()) {
-				return m_files[idx];
-			} else {
-				return wxEmptyString;
-			}
-		}
-
-	private:
-		void openFile(wxCommandEvent& event);
-
-		void insertOnlyMenu(const wxString& filename);
-
-	private:
-		static const int CAPACITY = 2;
-
-	private:
-		wxFrame* m_frame;
-
-		wxMenu* m_menu;
-
-		std::deque<wxString> m_files;
-
-	}; // RecentFiles
 
 protected:
 	wxString m_filetag;
 	mutable std::string m_curr_filename;
 
 private:
-	RecentFiles m_recent;
+	RecentFilesMenu* m_recent_menu;
 
 	SpecialConfig m_config;
 
@@ -142,3 +102,5 @@ private:
 }; // Frame 
 
 }
+
+#endif // _DRAG2D_FRAME_H_

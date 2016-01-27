@@ -8,7 +8,7 @@ bool MyApp::OnInit()
 {
 	eimage::Frame* frame = new eimage::Frame("EasyImage");
 	eimage::Task* task = new eimage::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

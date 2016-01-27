@@ -2497,6 +2497,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\RecentFilesMenu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\RecentFilesMenu.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\SettingsDialog.cpp"
 					>
 				</File>

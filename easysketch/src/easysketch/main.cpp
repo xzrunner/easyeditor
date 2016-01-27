@@ -18,7 +18,7 @@ bool MyApp::OnInit()
 
 	esketch::Frame* frame = new esketch::Frame("EasySketch");
 	esketch::Task* task = new esketch::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

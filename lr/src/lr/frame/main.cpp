@@ -43,7 +43,7 @@ bool MyApp::OnInit()
 
 	lr::Frame* frame = new lr::Frame("LR", lr::FILE_TAG);
 	lr::Task* task = new lr::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

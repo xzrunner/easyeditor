@@ -29,7 +29,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_code_menu->Append(ID_LOVE2D, wxT("love2d"), wxEmptyString);
 }
 
-void Frame::onOpen(wxCommandEvent& event)
+void Frame::OnOpen(wxCommandEvent& event)
 {
 	if (!m_task) return;
 
@@ -42,7 +42,7 @@ void Frame::onOpen(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			std::string filename = dlg.GetPath();
-			openFile(filename);
+			OpenFile(filename);
 		}
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(this, e);
@@ -50,7 +50,7 @@ void Frame::onOpen(wxCommandEvent& event)
 	}
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
  	if (!m_task) return;
  

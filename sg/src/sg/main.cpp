@@ -27,7 +27,7 @@ bool MyApp::OnInit()
 
 	d2d::Frame* frame = new sg::Frame("SgEditor", sg::FILE_TAG);
 	sg::Task* task = new sg::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

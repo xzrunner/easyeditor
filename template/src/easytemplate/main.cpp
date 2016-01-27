@@ -9,7 +9,7 @@ bool MyApp::OnInit()
 {
 	d2d::Frame* frame = new d2d::Frame("EasyTemplate", etemplate::FILE_TAG);
 	etemplate::Task* task = new etemplate::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;

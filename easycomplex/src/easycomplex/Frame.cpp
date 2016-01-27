@@ -16,7 +16,7 @@ enum MenuID
 
 BEGIN_EVENT_TABLE(Frame, d2d::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::onPreview)
-	EVT_MENU(ID_EJ_PREVIEW, Frame::onEJPreview)
+	EVT_MENU(ID_EJ_PREVIEW, Frame::OnEJPreview)
 	EVT_MENU(ID_SET_BG, Frame::onSetBackground)
 	EVT_MENU(ID_CODE, Frame::onCode)
 END_EVENT_TABLE()
@@ -32,7 +32,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	SetIcon(wxICON(aaaa));
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
 	if (!m_task) return;
 
@@ -55,7 +55,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 	}
 }
 
-void Frame::onSettings(wxCommandEvent& event)
+void Frame::OnSettings(wxCommandEvent& event)
 {
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
@@ -76,7 +76,7 @@ void Frame::onPreview(wxCommandEvent& event)
  	dlg.ShowModal();
 }
 
-void Frame::onEJPreview(wxCommandEvent& event)
+void Frame::OnEJPreview(wxCommandEvent& event)
 {
 	std::vector<const d2d::ISprite*> sprites;
 	m_task->GetAllSprite(sprites);

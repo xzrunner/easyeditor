@@ -70,14 +70,14 @@ bool MyApp::OnInit()
 
 	d2d::Frame* frame = new ecomplex::Frame("EasyComplex", ecomplex::FILE_TAG);
 	ecomplex::Task* task = new ecomplex::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
 		const_cast<d2d::EditPanel*>(task->GetEditPanel())->GetCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);
-		frame->initWithFile(path);
+		frame->InitWithFile(path);
 	}
 
 	return true;

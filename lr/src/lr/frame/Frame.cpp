@@ -28,7 +28,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_toolbar = new ToolBar(this, ID_TOOLBAR);
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
 	if (!m_task) return;
 

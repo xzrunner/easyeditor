@@ -9,7 +9,7 @@ bool MyApp::OnInit()
 {
 	d2d::Frame* frame = new d2d::Frame("EasyTerrain2D", eterrain2d::FILE_TAG);
 	eterrain2d::Task* task = new eterrain2d::Task(frame);
-	frame->setTask(task);
+	frame->SetTask(task);
 	frame->Show(true);
 
 	return true;
