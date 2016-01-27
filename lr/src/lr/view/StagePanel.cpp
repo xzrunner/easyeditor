@@ -250,7 +250,7 @@ void StagePanel::ChangeEditOP()
 
 void StagePanel::OnKeyHook(int key_code)
 {
-	if (key_code >= '1' && key_code <= '8') {
+	if (key_code >= '1' && key_code <= '9') {
 		int idx = key_code - '1';
 		m_library->SetCurrPage(idx);
 		return;

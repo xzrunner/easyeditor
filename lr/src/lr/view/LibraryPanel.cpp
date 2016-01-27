@@ -286,7 +286,7 @@ void LibraryPanel::GetAllPathName(std::vector<std::string>& names) const
 void LibraryPanel::CharHook(wxKeyEvent& event)
 {
 	int key_code = event.GetKeyCode();
-	if (key_code >= '1' && key_code <= '8') {
+	if (key_code >= '1' && key_code <= '9') {
 		int idx = key_code - '1';
 		SetCurrPage(idx);
 		return;
