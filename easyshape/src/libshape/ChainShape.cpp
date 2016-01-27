@@ -93,6 +93,7 @@ void ChainShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 	if (d2d::Settings::ctlPosSize != 0) {
 		d2d::PrimitiveDraw::drawCircles(m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
 	}
+	d2d::PrimitiveDraw::drawCircle(m_vertices[0], 10, true, 2, color.multi);
 }
 
 d2d::IPropertySetting* ChainShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
