@@ -1,6 +1,7 @@
 #include "DrawCallBatching.h"
 
 #include "dataset/Image.h"
+#include "dataset/ColorTrans.h"
 #include "render/ShaderMgr.h"
 #include "render/RenderContextStack.h"
 #include "render/ShaderContext.h"
@@ -73,6 +74,9 @@ static void _draw_begin()
 
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(2, 2);
+
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->SetSpriteColor(ColorTrans());
 
 // 	glViewport(0, 0, 2, 2);
 }
