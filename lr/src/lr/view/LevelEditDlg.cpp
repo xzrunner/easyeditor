@@ -11,6 +11,8 @@ LevelEditDlg::LevelEditDlg(wxWindow* parent, d2d::ISprite* spr)
 {
 	InitData(spr);
 	InitLayout();
+
+	SetTitle(m_type.c_str());
 }
 
 std::string LevelEditDlg::ToString()
