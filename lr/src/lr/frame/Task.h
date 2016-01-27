@@ -9,6 +9,7 @@ namespace lr
 
 class LibraryPanel;
 class StagePanel;
+class ToolBar;
 
 class Task : public d2d::ITask
 {
@@ -25,6 +26,8 @@ public:
 
 	virtual const d2d::EditPanel* GetEditPanel() const;
 
+	void OnFullView();
+
 private:
 	void InitLayout();
 	wxWindow* InitLayoutLeft(wxWindow* parent);
@@ -34,6 +37,9 @@ private:
 private:
 	wxWindow* m_root;
 
+	wxSplitterWindow *m_left_split, *m_right_split;
+	bool m_full_view;
+	
 	wxFrame* m_parent;
 
  	LibraryPanel* m_library;

@@ -32,6 +32,7 @@ protected:
 	virtual void onSave(wxCommandEvent& event);
 	virtual void onSaveAs(wxCommandEvent& event);
 
+	virtual void OnFullView(wxCommandEvent& event);
 	virtual void onSettings(wxCommandEvent& event);
 
 	wxString GetFileFilter() const;
@@ -79,9 +80,9 @@ protected:
 private:
 	enum
 	{
-		ID_VIEWS = 1000,
+		ID_FULL_VIEWS		= 1000,
 		ID_SETTINGS,
-		ID_RECENT_FILES = 1050,
+		ID_RECENT_FILES		= 1050,
 	};
 
 private:

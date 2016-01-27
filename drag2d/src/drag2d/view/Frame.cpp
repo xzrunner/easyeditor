@@ -28,7 +28,8 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_OPEN, Frame::onOpen)
 	EVT_MENU(wxID_SAVE, Frame::onSave)
 	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
-	
+
+	EVT_MENU(ID_FULL_VIEWS, Frame::OnFullView)
 	EVT_MENU(ID_SETTINGS, Frame::onSettings)
 
 	EVT_MENU(wxID_EXIT, Frame::onQuit)
@@ -222,6 +223,10 @@ void Frame::onSaveAs(wxCommandEvent& event)
 	}
 }
 
+void Frame::OnFullView(wxCommandEvent& event)
+{
+}
+
 void Frame::onSettings(wxCommandEvent& event)
 {
 	SettingsDialog dlg(this);
@@ -328,6 +333,7 @@ wxMenu* Frame::initFileBar()
 wxMenu* Frame::initViewBar()
 {
 	wxMenu* viewMenu = new wxMenu;
+	viewMenu->Append(ID_FULL_VIEWS, wxT("Full view\tF12"), wxT("Switch full view"));
 //	viewMenu->Append(ID_EJ_PREVIEW, wxT("View"), wxT("View"));
 	return viewMenu;
 }

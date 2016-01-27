@@ -3,6 +3,7 @@
 #include "SettingCfg.h"
 #include "config.h"
 #include "ToolBar.h"
+#include "Task.h"
 
 #include "preview/MainDialog.h"
 #include "view/StagePanel.h"
@@ -48,6 +49,11 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		d2d::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
+}
+
+void Frame::OnFullView(wxCommandEvent& event)
+{
+	static_cast<Task*>(m_task)->OnFullView();
 }
 
 void Frame::OnToolBarClick(wxCommandEvent& event)

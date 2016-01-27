@@ -1,7 +1,7 @@
 #include "Task.h"
 #include "FileIO.h"
-#include "ToolBar.h"
 #include "Frame.h"
+#include "ToolBar.h"
 
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
@@ -11,9 +11,13 @@
 namespace lr
 {
 
+static const float LEFT_POS = 0.2f;
+static const float RIGHT_POS = 0.75f;
+
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
+	, m_full_view(false)
 {
 	InitLayout();
 
@@ -21,6 +25,7 @@ Task::Task(wxFrame* parent)
 	d2d::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
 
 	m_stage->GetBaseOP()->OnActive();
+
 	static_cast<Frame*>(parent)->GetToolBar()->SetLibrary(m_library);
 }
 
@@ -56,22 +61,36 @@ const d2d::EditPanel* Task::GetEditPanel() const
 	return m_stage;
 }
 
+void Task::OnFullView()
+{
+	int w, h;
+	m_parent->GetSize(&w, &h);
+	if (m_full_view) {
+		m_left_split->SetSashPosition(w * LEFT_POS);
+		m_right_split->SetSashPosition(w * RIGHT_POS);
+	} else {
+		m_right_split->SetSashPosition(w - 1);
+		m_left_split->SetSashPosition(1);
+	}
+	m_full_view = !m_full_view;
+}
+
 void Task::InitLayout()
 {
-	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
+	m_right_split = new wxSplitterWindow(m_parent);
+	m_left_split = new wxSplitterWindow(m_right_split);
 
-	wxWindow* left = InitLayoutLeft(left_split);
-	wxWindow* center = InitLayoutCenter(left_split);
-	wxWindow* right = InitLayoutRight(right_split);
+	wxWindow* left = InitLayoutLeft(m_left_split);
+	wxWindow* center = InitLayoutCenter(m_left_split);
+	wxWindow* right = InitLayoutRight(m_right_split);
 
-	left_split->SetSashGravity(0.2f);
-	left_split->SplitVertically(left, center);
+	m_left_split->SetSashGravity(LEFT_POS);
+	m_left_split->SplitVertically(left, center);
 
-	right_split->SetSashGravity(0.75f);
-	right_split->SplitVertically(left_split, right);
+	m_right_split->SetSashGravity(RIGHT_POS);
+	m_right_split->SplitVertically(m_left_split, right);
 
-	m_root = right_split;
+	m_root = m_right_split;
 }
 
 wxWindow* Task::InitLayoutLeft(wxWindow* parent)
