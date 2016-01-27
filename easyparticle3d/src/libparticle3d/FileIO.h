@@ -5,6 +5,8 @@
 
 struct p3d_emitter_cfg;
 
+namespace d2d { class LibraryPanel; }
+
 namespace eparticle3d
 {
 
@@ -17,7 +19,7 @@ public:
 	static void Store(const std::string& filepath, ParticleSystem* ps,
 		ToolbarPanel* toolbar);
 	static void Load(const std::string& filepath, ParticleSystem* ps,
-		ToolbarPanel* toolbar);
+		ToolbarPanel* toolbar, d2d::LibraryPanel* library);
 
 	static ParticleSystem* LoadPS(const std::string& filepath);
 	static p3d_emitter_cfg* LoadPSConfig(const std::string& filepath);

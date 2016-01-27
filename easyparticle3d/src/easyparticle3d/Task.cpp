@@ -28,7 +28,7 @@ void Task::Load(const char* filepath)
 	if (!wxFileName::FileExists(filepath)) {
 		throw d2d::Exception("File: %s don't exist!", filepath);
 	}
-	FileIO::Load(filepath, m_stage->m_ps, m_toolbar);
+	FileIO::Load(filepath, m_stage->m_ps, m_toolbar, m_library);
 	m_stage->m_ps->Start();
 }
 

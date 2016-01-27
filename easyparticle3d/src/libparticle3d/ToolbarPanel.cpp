@@ -90,10 +90,11 @@ void ToolbarPanel::Store(Json::Value& val) const
 	}
 }
 
-void ToolbarPanel::Add(const LoadAdapter::Component& comp)
+void ToolbarPanel::Add(const LoadAdapter::Component& comp, d2d::LibraryPanel* library)
 {
 	// todo Release symbol
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
+	library->AddSymbol(symbol);
 	p3d_symbol* pc = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 

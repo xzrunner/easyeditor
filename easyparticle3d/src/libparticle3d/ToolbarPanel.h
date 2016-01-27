@@ -26,7 +26,7 @@ public:
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void Add(const LoadAdapter::Component& comp);
+	void Add(const LoadAdapter::Component& comp, d2d::LibraryPanel* library);
 
 	void InitParticle();
 

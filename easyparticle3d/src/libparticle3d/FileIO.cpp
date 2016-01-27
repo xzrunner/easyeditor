@@ -77,7 +77,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 }
 
 void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
-				  ToolbarPanel* toolbar)
+				  ToolbarPanel* toolbar, d2d::LibraryPanel* library)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -122,7 +122,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 //	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 
 	for (size_t i = 0, n = adapter.components.size(); i < n; ++i) {
-		toolbar->Add(adapter.components[i]);
+		toolbar->Add(adapter.components[i], library);
 	}
 }
 
