@@ -13,6 +13,12 @@ public:
 	virtual ~Symbol();
 
 	//
+	// Object interface
+	//
+	virtual void Retain() const;
+	virtual void Release() const;
+
+	//
 	// ICloneable interface
 	//
 	virtual Symbol* Clone() const { return NULL; }

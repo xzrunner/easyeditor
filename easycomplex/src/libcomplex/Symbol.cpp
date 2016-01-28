@@ -29,6 +29,18 @@ Symbol::~Symbol()
 	Clear();
 }
 
+void Symbol::Retain() const
+{
+	d2d::Object::Retain();
+	for_each(m_sprites.begin(), m_sprites.end(), d2d::RetainObjectFunctor<d2d::ISprite>());
+}
+
+void Symbol::Release() const
+{
+	d2d::Object::Release();
+	for_each(m_sprites.begin(), m_sprites.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
+}
+
 void Symbol::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
