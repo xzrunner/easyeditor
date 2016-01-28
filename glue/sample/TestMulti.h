@@ -3,6 +3,8 @@
 
 #include "TestTask.h"
 
+#include <vector>
+
 #include <glue.h>
 
 namespace test
@@ -17,7 +19,7 @@ public:
 	virtual void Update();
 
 private:
-	glue::Sprite* m_spr;
+	std::vector<glue::Sprite*> m_sprites;
 	
 }; // TestMulti
 

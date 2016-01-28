@@ -1105,6 +1105,9 @@ render_shader_setuniform(struct render *R, int loc, enum UNIFORM_FORMAT format, 
 	case UNIFORM_FLOAT44:
 		glUniformMatrix4fv(loc, 1, GL_FALSE, v);
 		break;
+	case UNIFORM_INT1:
+		glUniform1i(loc, (int)v[0]);
+		break;
 	default:
 		assert(0);
 		return;

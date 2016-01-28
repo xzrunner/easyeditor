@@ -173,6 +173,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\shaderlab\sprite_map_fast.frag"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\sprite_plain.frag"
 				>
 			</File>
@@ -208,6 +212,78 @@
 				RelativePath="..\..\..\src\shaderlab\sl_matrix.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_typedef.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_utility.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_utility.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="blend"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\blend.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\blend.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_blend.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_blend.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="filter"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\blur.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\edge_detect.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\filter.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\outline.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\relief.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_filter.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_filter.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\shaderlab\sl_shader.c"
@@ -215,14 +291,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\shaderlab\sl_shader.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.h"
 			>
 		</File>
 	</Files>

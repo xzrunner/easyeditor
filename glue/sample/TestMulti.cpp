@@ -11,7 +11,21 @@ void TestMulti::Init()
 	glue::ShaderMgr::Instance()->Init();
 
 	glue::Symbol* sym = new glue::Symbol("coin_00.png");
-	m_spr = new glue::Sprite(sym);
+	{
+		glue::Sprite* spr = new glue::Sprite(sym);
+		spr->SetPositioin(glue::vec2(0, 0));
+		m_sprites.push_back(spr);
+	}
+	{
+		glue::Sprite* spr = new glue::Sprite(sym);
+		spr->SetPositioin(glue::vec2(100, 100));
+		m_sprites.push_back(spr);
+	}
+	{
+		glue::Sprite* spr = new glue::Sprite(sym);
+		spr->SetPositioin(glue::vec2(-100, -100));
+		m_sprites.push_back(spr);
+	}
 }
 
 void TestMulti::Resize(int width, int height)
@@ -22,9 +36,12 @@ void TestMulti::Resize(int width, int height)
 void TestMulti::Draw() const
 {
 	//////////////////////////////////////////////////////////////////////////
-
-	glue::mat4 mt = m_spr->GetTransMatrix();
-	m_spr->GetSymbol().Draw(mt);
+	
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		glue::Sprite* spr = m_sprites[i];
+		glue::mat4 mt = spr->GetTransMatrix();
+		spr->GetSymbol().Draw(mt);	
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 

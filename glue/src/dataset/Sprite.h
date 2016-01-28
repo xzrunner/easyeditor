@@ -20,6 +20,8 @@ public:
 
 	mat4 GetTransMatrix() const;
 
+	void SetPositioin(const vec2& pos) { m_pos = pos; }
+
 private:
 	vec2 m_pos;
 

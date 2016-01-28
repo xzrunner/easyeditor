@@ -71,6 +71,9 @@ void ShaderMgr::Flush()
 
 void ShaderMgr::ChangeShader(IShader* shader)
 {
+	if (m_curr_shader == shader) {
+		return;
+	}
 	if (m_curr_shader && m_curr_shader != shader) {
 		m_curr_shader->Commit();
 		m_curr_shader->Unbind();
