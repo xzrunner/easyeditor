@@ -324,20 +324,17 @@ void Layer::StoreShapesUD(d2d::ISprite* spr, Json::Value& spr_val) const
 
 d2d::ISprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path)
 {
-	float x = val["position"]["x"].asDouble(),
-		  y = val["position"]["y"].asDouble();
-
 	std::vector<d2d::ISprite*> sprites;
 	int idx = 0;
 	Json::Value cval = val["group"][idx++];
 	while (!cval.isNull()) {
 		d2d::ISprite* spr = LoadSprite(cval, dir, base_path);
-		spr->Translate(d2d::Vector(x, y));
 		sprites.push_back(spr);
 		cval = val["group"][idx++];
 	}
 
 	d2d::ISprite* group = GroupHelper::Group(sprites);
+	group->Load(val);
 	for_each(sprites.begin(), sprites.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
 	return group;
 }
