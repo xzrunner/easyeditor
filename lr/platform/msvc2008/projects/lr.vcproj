@@ -573,6 +573,18 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="group"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\GroupHelper.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\dataset\GroupHelper.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="preview"

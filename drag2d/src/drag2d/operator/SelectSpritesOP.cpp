@@ -29,12 +29,12 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	: DrawSelectRectOP(wnd, stage)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
-	, m_bDraggable(true)
+	, m_draggable(true)
 {
 	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_first_pos.setInvalid();
+	m_left_first_pos.setInvalid();
 }
 
 SelectSpritesOP::~SelectSpritesOP()
@@ -69,7 +69,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
- 	m_bDraggable = true;
+ 	m_draggable = true;
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
 	ISprite* selected = SelectByPos(pos);
@@ -96,7 +96,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				SelectSpriteSJ::Instance()->Select(selected, !add);
 			}
 		}
-		m_first_pos.setInvalid();
+		m_left_first_pos.setInvalid();
 
 		if (m_callback)
 			m_callback->updateControlValue();
@@ -106,13 +106,13 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		DrawSelectRectOP::OnMouseLeftDown(x, y);
 
 		if (m_stage->GetKeyState(WXK_SPACE)) {
-			m_first_pos.setInvalid();
+			m_left_first_pos.setInvalid();
 		} else {
-			m_first_pos = pos;
+			m_left_first_pos = pos;
 		}
 
 		if (m_stage->GetKeyState(WXK_CONTROL)) {
-			m_bDraggable = false;
+			m_draggable = false;
 		} else {
 			m_selection->Clear();
 		}
@@ -125,16 +125,16 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 {
 	if (DrawSelectRectOP::OnMouseLeftUp(x, y)) return true;
 
-	m_bDraggable = true;
+	m_draggable = true;
 
-	if (!m_first_pos.isValid()) {
+	if (!m_left_first_pos.isValid()) {
 		return false;
 	}
 
 	Vector end = m_stage->TransPosScrToProj(x, y);
-	Rect rect(m_first_pos, end);
+	Rect rect(m_left_first_pos, end);
 	std::vector<ISprite*> sprites;
-	m_spritesImpl->QuerySpritesByRect(rect, m_first_pos.x < end.x, sprites);
+	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprites);
 	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
@@ -156,7 +156,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 
-	m_first_pos.setInvalid();
+	m_left_first_pos.setInvalid();
 
 	if (m_callback) {
 		m_callback->updateControlValue();
@@ -169,7 +169,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 {
-	m_rightFirstScrPos.set(x, y);
+	m_right_first_pos.set(x, y);
 
 	SetRightPan(m_selection->IsEmpty());
 	if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;
@@ -180,7 +180,7 @@ bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 {
 	// select
-	if (m_rightFirstScrPos == Vector(x, y))
+	if (m_right_first_pos == Vector(x, y))
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);
 		PointMultiQueryVisitor visitor(pos);
@@ -198,7 +198,7 @@ bool SelectSpritesOP::OnMouseDrag(int x, int y)
 {
 	if (DrawSelectRectOP::OnMouseDrag(x, y)) return true;
 
-	return !m_bDraggable;
+	return !m_draggable;
 }
 
 bool SelectSpritesOP::OnDraw() const
@@ -217,7 +217,7 @@ bool SelectSpritesOP::Clear()
 	if (DrawSelectRectOP::Clear()) return true;
 
 	m_selection->Clear();
-	m_first_pos.setInvalid();
+	m_left_first_pos.setInvalid();
 
 	return false;
 }

@@ -14,8 +14,13 @@ public:
 	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
 		d2d::AbstractEditCMPT* callback = NULL);
 
+	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftDClick(int x, int y);
+
+private:
+	void GroupSelection();
+	void BreakUpSelection();
 
 private:
 	d2d::Vector m_first_press;

@@ -1,10 +1,13 @@
 #include "Layer.h"
 #include "ShapesUD.h"
 #include "BaseFileUD.h"
+#include "GroupHelper.h"
 
 #include "view/LibraryPanel.h"
+#include "view/typedef.h"
 
 #include <easyshape.h>
+#include <easycomplex.h>
 
 namespace lr
 {
@@ -143,26 +146,10 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	int count = 0;
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		d2d::ISprite* spr = sprites[i];
-		if (spr->GetUserData()) {
-			UserData* ud = static_cast<UserData*>(spr->GetUserData());
-			if (ud->type == UT_BASE_FILE) {
-				return;
-			}
+		Json::Value cval;
+		if (StoreSprite(sprites[i], cval, dir)) {
+			val["sprite"][count++] = cval;
 		}
-
-		if (!IsValidFloat(spr->GetPosition().x) || 
-			!IsValidFloat(spr->GetPosition().y)) {
-			continue;
-		}
-
-		Json::Value spr_val;
-		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->GetSymbol().GetFilepath()).ToStdString();
-		spr->Store(spr_val);
-		StoreShapesUD(spr, spr_val);
-
-		val["sprite"][count++] = spr_val;
 	}
 
 	std::vector<d2d::IShape*> shapes;
@@ -223,53 +210,10 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 {
 	int idx = 0;
 	Json::Value spr_val = val[idx++];
-	while (!spr_val.isNull()) 
-	{
-		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		if (filepath.empty()) {
-			std::string filepath = spr_val["filepath"].asString();
-			throw d2d::Exception("filepath err: %s", filepath.c_str());
-		}
-		d2d::ISymbol* symbol = NULL;
-
-		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
-		std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
-		std::string spr_tag;
-		if (d2d::FilenameTools::IsFileExist(shape_filepath)) {
-			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-			const std::vector<d2d::IShape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
-			if (!shapes.empty()) {
-				spr_tag = shapes[0]->name;
-			}
-		} else {
-			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		}
-
-		if (!symbol) {
-			throw d2d::Exception("create symbol err: %s", filepath.c_str()); 
-		}
-
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->Load(spr_val);
-
-		if (!sprite->tag.empty() && sprite->tag[sprite->tag.size()-1] != ';') {
-			sprite->tag += ";";
-		}
-		sprite->tag += spr_tag;
-
-		if (!base_path.empty()) {
-			BaseFileUD* ud = new BaseFileUD(base_path);
-			sprite->SetUserData(ud);
-			sprite->editable = false;
-		}
-		CheckSpriteName(sprite);
-		m_sprites.Insert(sprite);
-
-		LoadShapesUD(spr_val, sprite);
-
-		sprite->Release();
-		symbol->Release();
-
+	while (!spr_val.isNull()) {
+		d2d::ISprite* spr = LoadSprite(spr_val, dir, base_path);
+		m_sprites.Insert(spr);
+		spr->Release();
 		spr_val = val[idx++];
 	}
 }
@@ -376,6 +320,123 @@ void Layer::StoreShapesUD(d2d::ISprite* spr, Json::Value& spr_val) const
 	}
 
 	spr_val["ud"] = val;
+}
+
+d2d::ISprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path)
+{
+	float x = val["position"]["x"].asDouble(),
+		  y = val["position"]["y"].asDouble();
+
+	std::vector<d2d::ISprite*> sprites;
+	int idx = 0;
+	Json::Value cval = val["group"][idx++];
+	while (!cval.isNull()) {
+		d2d::ISprite* spr = LoadSprite(cval, dir, base_path);
+		spr->Translate(d2d::Vector(x, y));
+		sprites.push_back(spr);
+		cval = val["group"][idx++];
+	}
+
+	d2d::ISprite* group = GroupHelper::Group(sprites);
+	for_each(sprites.begin(), sprites.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
+	return group;
+}
+
+void Layer::StoreGroup(d2d::ISprite* spr, Json::Value& val, const std::string& dir) const
+{
+	val["filepath"] = GROUP_TAG;
+	spr->Store(val);
+
+	ecomplex::Symbol* comp = &dynamic_cast<ecomplex::Symbol&>(const_cast<d2d::ISymbol&>(spr->GetSymbol()));
+	assert(comp);
+	std::vector<d2d::ISprite*>& sprites = comp->m_sprites;
+	int count = 0;
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		Json::Value cval;
+		if (StoreSprite(sprites[i], cval, dir)) {
+			val["group"][count++] = cval;
+		}
+	}
+}
+
+d2d::ISprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path)
+{
+	std::string filepath = val["filepath"].asString();
+	if (filepath == GROUP_TAG) {
+		return LoadGroup(val, dir, base_path);
+	}
+
+	filepath = d2d::SymbolSearcher::GetSymbolPath(dir, val);
+	if (filepath.empty()) {
+		std::string filepath = val["filepath"].asString();
+		throw d2d::Exception("filepath err: %s", filepath.c_str());
+	}
+	d2d::ISymbol* symbol = NULL;
+
+	std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
+	std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
+	std::string spr_tag;
+	if (d2d::FilenameTools::IsFileExist(shape_filepath)) {
+		symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+		const std::vector<d2d::IShape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
+		if (!shapes.empty()) {
+			spr_tag = shapes[0]->name;
+		}
+	} else {
+		symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	}
+
+	if (!symbol) {
+		throw d2d::Exception("create symbol err: %s", filepath.c_str()); 
+	}
+
+	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	sprite->Load(val);
+
+	if (!sprite->tag.empty() && sprite->tag[sprite->tag.size()-1] != ';') {
+		sprite->tag += ";";
+	}
+	sprite->tag += spr_tag;
+
+	if (!base_path.empty()) {
+		BaseFileUD* ud = new BaseFileUD(base_path);
+		sprite->SetUserData(ud);
+		sprite->editable = false;
+	}
+	CheckSpriteName(sprite);
+
+	LoadShapesUD(val, sprite);
+
+	symbol->Release();
+
+	return sprite;
+}
+
+bool Layer::StoreSprite(d2d::ISprite* spr, Json::Value& val, const std::string& dir) const
+{
+	if (spr->GetUserData()) {
+		UserData* ud = static_cast<UserData*>(spr->GetUserData());
+		if (ud->type == UT_BASE_FILE) {
+			return false;
+		}
+	}
+
+	if (!IsValidFloat(spr->GetPosition().x) || 
+		!IsValidFloat(spr->GetPosition().y)) {
+		return false;
+	}
+
+	if (spr->GetSymbol().GetFilepath() == GROUP_TAG) {
+		StoreGroup(spr, val, dir);
+	} else {
+		std::string filepath = spr->GetSymbol().GetFilepath();
+		assert(!filepath.empty());
+		val["filepath"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
+		spr->Store(val);
+		StoreShapesUD(spr, val);
+	}
+
+	return true;
 }
 
 //////////////////////////////////////////////////////////////////////////

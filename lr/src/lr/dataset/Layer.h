@@ -61,6 +61,12 @@ private:
 
 	void LoadShapesUD(const Json::Value& spr_val, d2d::ISprite* spr) const;
 	void StoreShapesUD(d2d::ISprite* spr, Json::Value& spr_val) const;
+
+	d2d::ISprite* LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	void StoreGroup(d2d::ISprite* spr, Json::Value& val, const std::string& dir) const;
+
+	d2d::ISprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	bool StoreSprite(d2d::ISprite* spr, Json::Value& val, const std::string& dir) const;
 	
 private:
 	template<typename T>
