@@ -120,22 +120,21 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
-	m_layer = new d2d::LayerPanel(split);
-
-	wxSplitterWindow* right_split = new wxSplitterWindow(split);
-
-	m_viewlist = new d2d::ViewlistPanel(right_split);
+	m_viewlist = new d2d::ViewlistPanel(split);
 	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 	m_library->SetViewlist(m_viewlist);
+
+	wxSplitterWindow* right_split = new wxSplitterWindow(split);
+	m_layer = new d2d::LayerPanel(right_split);
 
 	m_grouptree = new d2d::GroupTreePanel(right_split, m_stage, m_stage->GetKeyState());
 	m_library->SetGroupTree(m_grouptree);
 
 	right_split->SetSashGravity(0.5f);
-	right_split->SplitHorizontally(m_viewlist, m_grouptree);
+	right_split->SplitHorizontally(m_layer, m_grouptree);
 
 	split->SetSashGravity(0.5f);
-	split->SplitVertically(m_layer, right_split);
+	split->SplitVertically(right_split, m_viewlist);
 
 	return split;
 }
