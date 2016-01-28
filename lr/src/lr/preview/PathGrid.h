@@ -59,7 +59,7 @@ private:
 	private:
 		Node* QueryNode(const d2d::Vector& pos) const;
 
-		void Expend(VisitedNode* node, const d2d::Vector& end);
+		void Expand(VisitedNode* node, const d2d::Vector& end);
 
 		void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 

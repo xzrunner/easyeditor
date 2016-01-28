@@ -48,7 +48,7 @@
 #include "PackTexture.h"
 #include "CalculateImageArea.h"
 #include "RectCutWithJson.h"
-#include "LRExpansion.h"
+#include "LRExpandInherit.h"
 #include "ImageVerticalFlip.h"
 #include "PackLuaDescFile.h"
 #include "PackEP.h"
@@ -60,6 +60,7 @@
 #include "TransOldP3DFile.h"
 #include "AverageRectCut.h"
 #include "PackEPT.h"
+#include "LRExpandGroup.h"
 
 namespace edb
 {
@@ -113,7 +114,7 @@ void CommandLoader::Init()
 	fc->Register(PackTexture::Create());
 	fc->Register(CalImageArea::Create());
 	fc->Register(RectCutWithJson::Create());
-	fc->Register(LRExpansion::Create());
+	fc->Register(LRExpandInherit::Create());
 	fc->Register(ImageVerticalFlip::Create());
 	fc->Register(PackLuaDescFile::Create());
 	fc->Register(PackEP::Create());
@@ -125,6 +126,7 @@ void CommandLoader::Init()
 	fc->Register(TransOldP3DFile::Create());
 	fc->Register(AverageRectCut::Create());
 	fc->Register(PackEPT::Create());
+	fc->Register(LRExpandGroup::Create());
 }
 
 }

@@ -4,7 +4,8 @@
 #include "check_params.h"
 #include "lr_tools.h"
 
-#include "LRExpansion.h"
+#include "LRExpandGroup.h"
+#include "LRExpandInherit.h"
 #include "LRSeparateComplex.h"
 #include "LRToComplex.h"
 #include "LRJsonPacker.h"
@@ -50,22 +51,26 @@ void LRPacker::Run(int argc, char *argv[])
 	d2d::mk_dir(out_dir, true);
 
 	// 0
-	LRExpansion exp;
-	exp.Run(argv[2]);
+	LRExpandGroup ex_group;
+	ex_group.Run(argv[2]);
 
 	// 1
-	LRSeparateComplex sep;
-	sep.Run(exp.GetOutputFilepath(argv[2]), "", tmp_lr_file);
+	LRExpandInherit ex_inherit;
+	ex_inherit.Run(argv[2]);
 
 	// 2
+	LRSeparateComplex sep;
+	sep.Run(ex_inherit.GetOutputFilepath(argv[2]), "", tmp_lr_file);
+
+	// 3
 	LRToComplex tocomplex;
 	tocomplex.Run(tmp_lr_file);	
 
-	// 3
+	// 4
 	LRJsonPacker json_pack;
 	json_pack.Run(tmp_lr_file);
 
-	// 4
+	// 5
 	if (only_json != 1) {
 		int LOD = d2d::StringTools::FromString<int>(argv[6]);
 		if (LOD != 0) {
@@ -86,7 +91,7 @@ void LRPacker::Run(int argc, char *argv[])
 	}
 
 	// end
-	wxRemoveFile(exp.GetOutputFilepath(argv[2]));
+	wxRemoveFile(ex_inherit.GetOutputFilepath(argv[2]));
 }
 
 void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,

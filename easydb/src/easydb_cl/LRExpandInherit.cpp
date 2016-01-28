@@ -1,27 +1,27 @@
-#include "LRExpansion.h"
+#include "LRExpandInherit.h"
 #include "check_params.h"
 
 namespace edb
 {
 
-std::string LRExpansion::Command() const
+std::string LRExpandInherit::Command() const
 {
-	return "lr-expansion";
+	return "lr-expand-inherit";
 }
 
-std::string LRExpansion::Description() const
+std::string LRExpandInherit::Description() const
 {
-	return "expansion lr file";
+	return "expand inherit";
 }
 
-std::string LRExpansion::Usage() const
+std::string LRExpandInherit::Usage() const
 {
-	// lr-expansion e:/test2/test_lr.json
+	// lr-expand-inherit e:/test2/test_lr.json
 	std::string usage = Command() + " [filepath]";
 	return usage;
 }
 
-void LRExpansion::Run(int argc, char *argv[])
+void LRExpandInherit::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 3)) return;
 	if (!check_file(argv[2])) return;
@@ -29,7 +29,7 @@ void LRExpansion::Run(int argc, char *argv[])
 	Run(argv[2]);
 }
 
-void LRExpansion::Run(const std::string& filepath)
+void LRExpandInherit::Run(const std::string& filepath)
 {
 	Json::Value lr_val;
 	Json::Reader reader;
@@ -61,15 +61,15 @@ void LRExpansion::Run(const std::string& filepath)
 	fout.close();
 }
 
-std::string LRExpansion::GetOutputFilepath(const std::string& filepath) const
+std::string LRExpandInherit::GetOutputFilepath(const std::string& filepath) const
 {
 	std::string out_path = filepath;
 	out_path.insert(filepath.find("_lr.json"), "_ext");
 	return out_path;
 }
 
-void LRExpansion::ExtendLayer(const std::string& dir, const std::string& filepath, 
-							  int layer_idx, Json::Value& dst_val)
+void LRExpandInherit::ExtendLayer(const std::string& dir, const std::string& filepath, 
+								  int layer_idx, Json::Value& dst_val)
 {
 	Json::Value lr_val;
 	Json::Reader reader;

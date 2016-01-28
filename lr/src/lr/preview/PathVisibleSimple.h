@@ -68,7 +68,7 @@ private:
 
 	// route
 	VisitedNode* QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end);
-	void Expend(VisitedNode* node, const d2d::Vector& end);
+	void Expand(VisitedNode* node, const d2d::Vector& end);
 	void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 private:

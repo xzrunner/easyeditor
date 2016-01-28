@@ -251,14 +251,14 @@ VisitedNode* PathVisibleSimple::QueryRouteImpl(const d2d::Vector& start, const d
 		if (opt->m_id == en->id) {
 			return opt;
 		} else {
-			Expend(opt, end);
+			Expand(opt, end);
 		}
 	}
 
 	return NULL;
 }
 
-void PathVisibleSimple::Expend(VisitedNode* node, const d2d::Vector& end)
+void PathVisibleSimple::Expand(VisitedNode* node, const d2d::Vector& end)
 {
 	std::vector<Connection> connections;
 	GetConnections(node, connections);

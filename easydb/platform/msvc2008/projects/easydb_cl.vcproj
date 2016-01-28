@@ -793,11 +793,19 @@
 					Name="base"
 					>
 					<File
-						RelativePath="..\..\..\src\easydb_cl\LRExpansion.cpp"
+						RelativePath="..\..\..\src\easydb_cl\LRExpandGroup.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\easydb_cl\LRExpansion.h"
+						RelativePath="..\..\..\src\easydb_cl\LRExpandGroup.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRExpandInherit.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRExpandInherit.h"
 						>
 					</File>
 					<File

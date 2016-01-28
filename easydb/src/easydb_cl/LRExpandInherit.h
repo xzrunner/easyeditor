@@ -1,5 +1,5 @@
-#ifndef _EASYDB_LR_EXPANSION_H_
-#define _EASYDB_LR_EXPANSION_H_
+#ifndef _EASYDB_LR_EXPAND_INHERIT_H_
+#define _EASYDB_LR_EXPAND_INHERIT_H_
 
 #include "ICommand.h"
 
@@ -8,10 +8,10 @@
 namespace edb
 {
 
-class LRExpansion : public ICommand
+class LRExpandInherit : public ICommand
 {
 public:
-	LRExpansion() {}
+	LRExpandInherit() {}
 
 	//
 	// interface ITask
@@ -21,7 +21,7 @@ public:
 	virtual std::string Usage() const;
 	virtual void Run(int argc, char *argv[]);
 
-	static ICommand* Create() { return new LRExpansion(); }
+	static ICommand* Create() { return new LRExpandInherit(); }
 
 	void Run(const std::string& filepath);
 
@@ -30,8 +30,8 @@ public:
 private:
 	void ExtendLayer(const std::string& dir, const std::string& filepath, int layer_idx, Json::Value& dst_val);
 
-}; // LRExpansion
+}; // LRExpandInherit
 
 }
 
-#endif // _EASYDB_LR_EXPANSION_H_
+#endif // _EASYDB_LR_EXPAND_INHERIT_H_

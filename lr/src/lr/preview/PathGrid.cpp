@@ -124,7 +124,7 @@ QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 		if (opt->m_id == en->id) {
 			return opt;
 		} else {
-			Expend(opt, end);
+			Expand(opt, end);
 		}
 	}
 
@@ -166,7 +166,7 @@ QueryNode(const d2d::Vector& pos) const
 }
 
 void PathGrid::Network::
-Expend(VisitedNode* node, const d2d::Vector& end)
+Expand(VisitedNode* node, const d2d::Vector& end)
 {
 	std::vector<Connection> connections;
 	GetConnections(node, connections);
