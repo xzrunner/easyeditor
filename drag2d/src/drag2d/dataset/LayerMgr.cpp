@@ -1,6 +1,9 @@
 #include "LayerMgr.h"
 #include "Layer.h"
 
+#include "message/panel_msg.h"
+#include "message/SetCanvasDirtySJ.h"
+
 #include <algorithm>
 
 namespace d2d
@@ -43,6 +46,7 @@ void LayerMgr::Insert(Layer* layer)
 void LayerMgr::Remove(int idx)
 {
 	assert(idx >= 0 && idx < m_layers.size());
+
 	m_layers[idx]->Release();
 	m_layers.erase(m_layers.begin() + idx);
 }

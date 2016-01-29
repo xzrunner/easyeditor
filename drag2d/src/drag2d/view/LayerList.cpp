@@ -6,8 +6,13 @@
 #include "message/subject_id.h"
 #include "message/panel_msg.h"
 #include "message/SetCanvasDirtySJ.h"
+#include "message/RemoveSpriteSJ.h"
+#include "message/RemoveShapeSJ.h"
+#include "history/DeleteLayerAOP.h"
+#include "common/visitors.h"
 
 #include <vector>
+#include <algorithm>
 
 namespace d2d
 {
@@ -43,7 +48,6 @@ void LayerList::Insert()
 	}
 
 	Layer* layer = new Layer;
-	m_layer_mgr->Insert(layer);
 	Insert(layer);
 	layer->Release();
 }
@@ -62,6 +66,34 @@ void LayerList::Remove()
 		m_layer_mgr->selected = m_layer_mgr->GetLayer(GetItemCount() - 1);
 		SetItem(0, 1, STAT_SELECTED);
 		m_selected = 0;
+	}
+}
+
+void LayerList::Insert(Layer* layer)
+{
+	m_layer_mgr->Insert(layer);
+
+	long item = InsertItem(0, "");
+
+	SetItem(item, 0, layer->name);
+
+	std::string stat = m_layer_mgr->selected == layer ? STAT_SELECTED : "";
+	SetItem(item, 1, stat);
+
+	SetItem(item, 2, layer->visible ? "T" : "F");
+	SetItem(item, 3, layer->editable ? "T" : "F");
+}
+
+void LayerList::Remove(Layer* layer)
+{
+	const std::vector<Layer*>& layers = m_layer_mgr->GetAllLayers();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		if (layer == layers[i]) {
+			ClearLayer(layer);
+			m_layer_mgr->Remove(i);
+			DeleteItem(n - 1 - i);
+			return;
+		}
 	}
 }
 
@@ -86,31 +118,6 @@ void LayerList::InitLayout()
 	InsertColumn(3, "edit", wxLIST_FORMAT_LEFT, 50);
 }
 
-void LayerList::Insert(Layer* layer)
-{
-	long item = InsertItem(0, "");
-
-	SetItem(item, 0, layer->name);
-
-	std::string stat = m_layer_mgr->selected == layer ? STAT_SELECTED : "";
-	SetItem(item, 1, stat);
-
-	SetItem(item, 2, layer->visible ? "T" : "F");
-	SetItem(item, 3, layer->editable ? "T" : "F");
-}
-
-void LayerList::Remove(Layer* layer)
-{
-	const std::vector<Layer*>& layers = m_layer_mgr->GetAllLayers();
-	for (int i = 0, n = layers.size(); i < n; ++i) {
-		if (layer == layers[i]) {
-			m_layer_mgr->Remove(i);
-			DeleteItem(n - 1 - i);
-			return;
-		}
-	}
-}
-
 void LayerList::LoadFromLayerMgr(LayerMgr* layer_mgr)
 {
 	DeleteAllItems();
@@ -119,6 +126,27 @@ void LayerList::LoadFromLayerMgr(LayerMgr* layer_mgr)
 	for (int i = 0, n = layers.size(); i < n; ++i) {
 		Insert(layers[i]);
 	}
+}
+
+void LayerList::ClearLayer(Layer* layer)
+{
+	EditAddRecordSJ::Instance()->Add(new DeleteLayerAOP(this, layer));
+
+	std::vector<ISprite*> sprites;
+	layer->TraverseSprite(FetchAllVisitor<ISprite>(sprites));
+	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<ISprite>());
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
+	}
+
+	std::vector<IShape*> shapes;
+	layer->TraverseSprite(FetchAllVisitor<IShape>(shapes));
+	for_each(shapes.begin(), shapes.end(), RetainObjectFunctor<IShape>());
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		RemoveShapeSJ::Instance()->Remove(shapes[i]);
+	}
+
+	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void LayerList::OnEndLabelEdit(wxListEvent& event)

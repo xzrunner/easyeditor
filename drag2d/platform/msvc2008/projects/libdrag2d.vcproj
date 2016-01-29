@@ -466,7 +466,7 @@
 				>
 			</File>
 			<Filter
-				Name="arrange"
+				Name="sprite"
 				>
 				<File
 					RelativePath="..\..\..\src\drag2d\history\ArrangeSpriteAtomicOP.cpp"
@@ -550,7 +550,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="other"
+				Name="utility"
 				>
 				<File
 					RelativePath="..\..\..\src\drag2d\history\CombineAOP.cpp"
@@ -594,6 +594,18 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\history\SetSpriteTwoAOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="layer"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\DeleteLayerAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\DeleteLayerAOP.h"
 					>
 				</File>
 			</Filter>

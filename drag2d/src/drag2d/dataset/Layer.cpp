@@ -8,8 +8,6 @@
 #include "common/visitors.h"
 #include "common/FileNameTools.h"
 #include "common/Exception.h"
-#include "message/RemoveSpriteSJ.h"
-#include "message/RemoveShapeSJ.h"
 
 namespace d2d
 {
@@ -138,18 +136,6 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 void Layer::Clear()
 {
-	std::vector<ISprite*> sprites;
-	m_sprites.Traverse(FetchAllVisitor<ISprite>(sprites), true);
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
-	}
-
-	std::vector<IShape*> shapes;
-	m_shapes.Traverse(FetchAllVisitor<IShape>(shapes), true);
-	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		RemoveShapeSJ::Instance()->Remove(shapes[i]);
-	}
-
 	m_sprites.Clear();
 	m_shapes.Clear();
 }

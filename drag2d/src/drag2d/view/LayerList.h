@@ -19,6 +19,9 @@ public:
 	void Insert();
 	void Remove();
 
+	void Insert(Layer* layer);
+	void Remove(Layer* layer);
+
 protected:
 	//
 	//	interface Observer
@@ -28,10 +31,9 @@ protected:
 private:
 	void InitLayout();
 
-	void Insert(Layer* layer);
-	void Remove(Layer* layer);
-
 	void LoadFromLayerMgr(LayerMgr* layer_mgr);
+
+	void ClearLayer(Layer* layer);
 
 private:
 	void OnEndLabelEdit(wxListEvent& event);
