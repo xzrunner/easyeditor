@@ -42,6 +42,7 @@ void CfgEditDlg::InitLayout(int col, const std::vector<DynamicWidget*>& widgets)
 	top_sizer->Add(main_sizer);
 
 	top_sizer->AddSpacer(20);
+	SetEscapeId(wxID_CANCEL);
 	top_sizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), 0, wxCENTER);
 	top_sizer->AddSpacer(20);
 

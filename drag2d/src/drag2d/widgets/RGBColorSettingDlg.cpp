@@ -76,6 +76,7 @@ void RGBColorSettingDlg::InitLayout()
 	}
 	// default
 	{
+		SetEscapeId(wxID_CANCEL);
 		top_sizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), 0, wxCENTER);
 	}
 	SetSizer(top_sizer);
