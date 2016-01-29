@@ -20,23 +20,21 @@ public:
 
 	bool LoadFromFile(const std::string& filepath);
 
-	const wxBitmap* GetBitmap() const {
-		return m_bitmap;
-	}
+	const wxBitmap* GetLargeBmp() const { return m_bmp_large; }
+	const wxBitmap* GetSmallBmp() const { return m_bmp_small; }
 
 private:
+	void InitBmp(const wxImage& image);
+
 	static unsigned char* TransRGBA2RGB(unsigned char* rgba, int width, int height);
 
 	static void GetImage(const std::string& filepath, wxImage& image);
 
-	static wxBitmap* GetBitmap(const wxImage& image);
-
-	static float ComputeScale(float width);
-
 private:
 	std::string m_filename;
 
-	wxBitmap* m_bitmap;
+	wxBitmap* m_bmp_large;
+	wxBitmap* m_bmp_small;
 
 	float m_scale;
 

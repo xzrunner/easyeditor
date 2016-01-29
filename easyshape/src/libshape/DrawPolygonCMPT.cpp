@@ -164,7 +164,7 @@ void DrawPolygonCMPT::fillingButton()
 		}
 		break;
 	case 1:
-		if (const wxBitmap* bmp = m_bitmap.GetBitmap()) {
+		if (const wxBitmap* bmp = m_bitmap.GetLargeBmp()) {
 			m_btnReview->SetBitmap(*bmp);
 		}
 		break;

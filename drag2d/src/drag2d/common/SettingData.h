@@ -35,6 +35,9 @@ struct SettingData
 	Colorf bg_color;
 	bool visible_spr_update;
 
+	// widgets
+	bool img_list_compact;
+
 	// image filter
 	bool linear_filter;
 

@@ -15,15 +15,18 @@
 namespace d2d
 {
 
+static const int SMALL_SIZE = 24;
+
 Bitmap::Bitmap()
-	: m_bitmap(NULL)
+	: m_bmp_large(NULL)
+	, m_bmp_small(NULL)
 {
 }
 
 Bitmap::~Bitmap()
 {
 	BitmapMgr::Instance()->RemoveItem(m_filename);
-	delete m_bitmap;
+	delete m_bmp_large;
 }
 
 bool Bitmap::LoadFromFile(const std::string& filepath)
@@ -54,18 +57,13 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 		wxImage image(img_data->GetWidth(), img_data->GetHeight(), (unsigned char*)(img_data->GetPixelData()), true);
 //		image.SetData((unsigned char*)(img_data->GetPixelData()), img_data->GetWidth(), img_data->GetHeight());
-		if (m_bitmap) {
-			delete m_bitmap;
-			m_bitmap = NULL;
-		}
-		m_bitmap = GetBitmap(image);
+		InitBmp(image);
 	}
 	else if (FileNameParser::isType(filepath, FileNameParser::e_image))
 	{
 		wxImage image;
 		GetImage(filepath, image);
-
-		m_bitmap = GetBitmap(image);
+		InitBmp(image);
 	}
 	else if (FileNameParser::isType(filepath, FileNameParser::e_terrain2d))
 	{
@@ -88,16 +86,35 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		delete[] rgba;
 
 		wxImage image(w, h, rgb, true);
-		if (m_bitmap) {
-			delete m_bitmap;
-			m_bitmap = NULL;
-		}
-		m_bitmap = GetBitmap(image);
+		InitBmp(image);
 		delete[] rgb;
 		symbol->Release();
 	}
 
 	return true;
+}
+
+void Bitmap::InitBmp(const wxImage& image)
+{
+	int width = image.GetWidth();
+	{
+		if (m_bmp_large) {
+			delete m_bmp_large;
+		}
+		float scale_large = width > 300 ? 150.0f / width : 0.5f;
+		int w = std::max(1.0f, image.GetWidth() * scale_large);
+		int h = std::max(1.0f, image.GetHeight() * scale_large);
+		m_bmp_large = new wxBitmap(image.Scale(w, h));
+	}
+	{
+		if (m_bmp_small) {
+			delete m_bmp_small;
+		}
+		float scale_small = (float)SMALL_SIZE / width;
+		int w = std::max(1.0f, image.GetWidth() * scale_small);
+		int h = std::max(1.0f, image.GetHeight() * scale_small);
+		m_bmp_small = new wxBitmap(image.Scale(w, h));
+	}
 }
 
 unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
@@ -135,19 +152,6 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 	} else {
 		dst_img.LoadFile(filepath);
 	}
-}
-
-wxBitmap* Bitmap::GetBitmap(const wxImage& image)
-{
-	float scale = ComputeScale(image.GetWidth());
-	int w = std::max(1.0f, image.GetWidth() * scale);
-	int h = std::max(1.0f, image.GetHeight() * scale);
-	return new wxBitmap(image.Scale(w, h));
-}
-
-float Bitmap::ComputeScale(float width)
-{
-	return width > 300 ? 150.0f / width : 0.5f;
 }
 
 } // d2d

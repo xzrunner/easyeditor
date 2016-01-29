@@ -22,6 +22,8 @@ SettingData::SettingData()
 	bg_color.set(0.5f, 0.5f, 0.5f);
 	visible_spr_update = true;
 
+	img_list_compact = false;
+
 	linear_filter = true;
 
 	pre_multi_alpha = true;
@@ -69,6 +71,10 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	}
 	if (!value["visible_spr_update"].isNull()) {
 		visible_spr_update = value["visible_spr_update"].asBool();
+	}
+
+	if (!value["img_list_compact"].isNull()) {
+		img_list_compact = value["img_list_compact"].asBool();
 	}
 
 	if (!value["linear_filter"].isNull()) {

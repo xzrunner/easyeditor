@@ -1,9 +1,10 @@
 #include "ViewlistList.h"
 #include "ViewlistListImpl.h"
 
+#include "common/config.h"
+#include "common/SettingData.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
-
 #include "message/subject_id.h"
 #include "message/SelectSpriteSJ.h"
 #include "message/ReorderSpriteSJ.h"
@@ -19,7 +20,7 @@ namespace d2d
 {
 
 ViewlistList::ViewlistList(wxWindow* parent)
-	: VerticalImageList(parent, "viewlist", false)
+	: VerticalImageList(parent, "viewlist", false, Config::Instance()->GetSettings().img_list_compact)
 	, m_impl(NULL)
 	, m_selected_spr(NULL)
 {

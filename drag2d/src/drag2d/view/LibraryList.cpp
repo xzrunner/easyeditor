@@ -2,6 +2,8 @@
 #include "ILibraryPage.h"
 #include "LibraryPageDropTarget.h"
 
+#include "common/config.h"
+#include "common/SettingData.h"
 #include "common/StringTools.h"
 #include "dataset/ISymbol.h"
 
@@ -11,7 +13,7 @@ namespace d2d
 LibraryList::LibraryList(ILibraryPage* page,
 						 const std::string& filter/* = wxT("symbol")*/,
 						 bool draggable /*= true*/)
-	: VerticalImageList(page, filter, draggable)
+	: VerticalImageList(page, filter, draggable, Config::Instance()->GetSettings().img_list_compact)
 {
 	SetDropTarget(new LibraryPageDropTarget(page));
 }

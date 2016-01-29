@@ -7,8 +7,12 @@
 namespace d2d
 {
 
-static const int SPACE_UP = 5;
-static const int SPACE_DOWN = 25;
+static const int NORMAL_SPACE_UP	= 5;
+static const int NORMAL_SPACE_DOWN	= 25;
+
+static const int COMPACT_HEIGHT		= 24;
+static const int COMPACT_SPACE_UP	= 4;
+static const int COMPACT_SPACE_LEFT	= COMPACT_HEIGHT;
 
 BEGIN_EVENT_TABLE(VerticalImageList, wxVListBox)
 	EVT_KEY_DOWN(VerticalImageList::OnKeyDown)
@@ -19,9 +23,11 @@ END_EVENT_TABLE()
 
 VerticalImageList::VerticalImageList(wxWindow* parent, 
 									 const std::string& name,
-									 bool draggable /*= true*/)
+									 bool draggable /*= true*/,
+									 bool compact/* = false*/)
 	: wxVListBox(parent)
 	, m_name(name)
+	, m_compact(compact)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
 	SetSelectionBackground(wxColour(128, 128, 128));
@@ -114,36 +120,52 @@ const ListItem* VerticalImageList::GetSelected() const
 void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
 	bool is_selected = n == GetSelection();
-
-	int y = rect.y + SPACE_UP;
-
-	const Bitmap* bmp = m_items[n]->GetBitmap();
-	if (bmp)
+	if (m_compact) 
 	{
-		const wxBitmap* wxBmp = bmp->GetBitmap();
-		if (wxBmp) 
-		{
-			// bmp
-			int x = wxBmp->GetWidth() > rect.width ? 0 : (rect.width - wxBmp->GetWidth()) * 0.5f;
-			dc.DrawBitmap(*wxBmp, x, y);
-
-			// info
-			wxString info = m_items[n]->GetInfo();
-			dc.SetFont(wxFont(18, wxDEFAULT, wxNORMAL, wxNORMAL));
-			//dc.SetTextForeground(wxColour(0xFF, 0x20, 0xFF));
-			wxSize size = dc.GetTextExtent(info);
-			//dc.DrawText(info, rect.x/* + rect.width * 0.5f - size.GetWidth() * 0.5f*/, y);
-			dc.DrawText(info, rect.x + SPACE_UP, y);
-
-			y += wxBmp->GetHeight();
+		// bmp
+		if (const Bitmap* bmp = m_items[n]->GetBitmap()) {
+			if (const wxBitmap* wx_bmp = bmp->GetSmallBmp()) {
+				int x = COMPACT_SPACE_LEFT;
+				int y = rect.y + COMPACT_SPACE_UP;
+				dc.DrawBitmap(*wx_bmp, x, y);
+			}
 		}
-	}
 
-	// name
-	wxString name = m_items[n]->GetName();
-	dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
-	wxSize size = dc.GetTextExtent(name);
-	dc.DrawText(name, rect.x + rect.width * 0.5f - size.GetWidth() * 0.5f, y + SPACE_UP);
+		// name
+		wxString name = m_items[n]->GetName();
+		dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
+		wxSize size = dc.GetTextExtent(name);
+		int x = rect.x + COMPACT_SPACE_LEFT + COMPACT_HEIGHT * 2;
+		int y = rect.y + COMPACT_SPACE_UP;
+		dc.DrawText(name, x, y);
+	} 
+	else 
+	{
+		int y = rect.y + NORMAL_SPACE_UP;
+		if (const Bitmap* bmp = m_items[n]->GetBitmap()) {
+			if (const wxBitmap* wx_bmp = bmp->GetLargeBmp()) {
+				// bmp
+				int x = wx_bmp->GetWidth() > rect.width ? 0 : (rect.width - wx_bmp->GetWidth()) * 0.5f;
+				dc.DrawBitmap(*wx_bmp, x, y);
+
+				// info
+				wxString info = m_items[n]->GetInfo();
+				dc.SetFont(wxFont(18, wxDEFAULT, wxNORMAL, wxNORMAL));
+				//dc.SetTextForeground(wxColour(0xFF, 0x20, 0xFF));
+				wxSize size = dc.GetTextExtent(info);
+				//dc.DrawText(info, rect.x/* + rect.width * 0.5f - size.GetWidth() * 0.5f*/, y);
+				dc.DrawText(info, rect.x + NORMAL_SPACE_UP, y);
+
+				y += wx_bmp->GetHeight();
+			}
+		}
+
+		// name
+		wxString name = m_items[n]->GetName();
+		dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
+		wxSize size = dc.GetTextExtent(name);
+		dc.DrawText(name, rect.x + rect.width * 0.5f - size.GetWidth() * 0.5f, y + NORMAL_SPACE_UP);
+	}
 }
 
 // void VerticalImageList::OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const
@@ -160,15 +182,17 @@ void VerticalImageList::OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const
 
 wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 {
-	int size = SPACE_UP + SPACE_DOWN;
-	const Bitmap* bmp = m_items[n]->GetBitmap();
-	if (bmp) {
-		const wxBitmap* wxBmp = bmp->GetBitmap();
-		if (wxBmp) {
-			size = wxBmp->GetHeight() + SPACE_UP + SPACE_DOWN;
+	if (m_compact) {
+		return COMPACT_HEIGHT;
+	} else {
+		int size = NORMAL_SPACE_UP + NORMAL_SPACE_DOWN;
+		if (const Bitmap* bmp = m_items[n]->GetBitmap()) {
+			if (const wxBitmap* wx_bmp = bmp->GetLargeBmp()) {
+				size = wx_bmp->GetHeight() + NORMAL_SPACE_UP + NORMAL_SPACE_DOWN;
+			}
 		}
+		return size;
 	}
-	return size;
 }
 
 void VerticalImageList::OnKeyDown(wxKeyEvent& event)
