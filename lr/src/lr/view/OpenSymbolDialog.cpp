@@ -55,7 +55,7 @@ void OpenSymbolDialog::Open(d2d::ISprite* spr)
 			if (use_symbol) {
 				spr->tag = "[symbol];";
 			}
-			spr->tag += dlg.ToString();
+			spr->tag = dlg.ToString();
 		}
 	}
 	else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr))
