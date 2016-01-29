@@ -221,7 +221,7 @@ void ToolbarPanel::OnChangeFontSize(wxCommandEvent& event)
 void ToolbarPanel::OnChangeFontColor(wxCommandEvent& event)
 {
 	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetFontColor());
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		m_spr->SetFontColor(dlg.GetColor());
 	}
 }
@@ -240,7 +240,7 @@ void ToolbarPanel::OnChangeEdgeSize(wxCommandEvent& event)
 void ToolbarPanel::OnChangeEdgeColor(wxCommandEvent& event)
 {
 	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetEdgeColor());
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		m_spr->SetEdgeColor(dlg.GetColor());
 	}
 }

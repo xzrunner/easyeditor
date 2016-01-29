@@ -73,7 +73,11 @@ void RGBColorSettingDlg::InitLayout()
 		sizer->Add(m_b);
 
 		top_sizer->Add(sizer);
-	}	
+	}
+	// default
+	{
+		top_sizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), 0, wxCENTER);
+	}
 	SetSizer(top_sizer);
 	top_sizer->Fit(this);
 }

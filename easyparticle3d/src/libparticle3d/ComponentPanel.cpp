@@ -205,7 +205,7 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 //	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
 //
 //	d2d::RGBColorSettingDlg dlg(this, NULL, col);
-//	if (!dlg.ShowModal()) {
+//	if (!dlg.ShowModal() == wxID_OK) {
 //		return;
 //	}
 //
@@ -219,7 +219,7 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 //	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
 //
 //	d2d::RGBColorSettingDlg dlg(this, NULL, col);
-//	if (!dlg.ShowModal()) {
+//	if (!dlg.ShowModal() == wxID_OK) {
 //		return;
 //	}
 //

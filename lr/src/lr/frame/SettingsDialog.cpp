@@ -207,7 +207,7 @@ void SettingDialog::OnChangeScreenMultiColor(wxCommandEvent& event)
 {
 	d2d::Colorf& col = m_stage->GetScreenMultiColor();
 	d2d::HSLColorSettingDlg dlg(this, NULL, col);
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -217,7 +217,7 @@ void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 {
 	d2d::Colorf& col = m_stage->GetScreenAddColor();
 	d2d::HSLColorSettingDlg dlg(this, NULL, col);
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}

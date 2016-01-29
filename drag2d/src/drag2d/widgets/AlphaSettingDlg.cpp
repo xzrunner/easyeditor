@@ -40,6 +40,8 @@ void AlphaSettingDlg::InitLayout()
 	m_alpha = new ColorSlider(this, this, "Alpha", true);
 	top_sizer->Add(m_alpha);
 
+	top_sizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), 0, wxCENTER);
+
 	SetSizer(top_sizer);
 	top_sizer->Fit(this);
 }

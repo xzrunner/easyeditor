@@ -72,7 +72,7 @@ void ToolbarPanel::OnSetInnerColor(wxCommandEvent& event)
 {
 	Shadow* shadow = m_stage->GetSymbol()->GetShadow();
 	d2d::RGBColorSettingDlg dlg(this, NULL, shadow->GetInnerColor());
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		shadow->SetInnerColer(dlg.GetColor());
 		shadow->BuildFace();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -83,7 +83,7 @@ void ToolbarPanel::OnSetOuterColor(wxCommandEvent& event)
 {
 	Shadow* shadow = m_stage->GetSymbol()->GetShadow();
 	d2d::RGBColorSettingDlg dlg(this, NULL, shadow->GetOuterColor());
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		shadow->SetOuterColer(dlg.GetColor());
 		shadow->BuildFace();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();

@@ -188,7 +188,7 @@ void SettingsDialog::onChangeTextureEdge(wxCommandEvent& event)
 void SettingsDialog::onSetBGColor(wxCommandEvent& event)
 {
 	d2d::RGBColorSettingDlg dlg(this, NULL, m_settings.bg_color);
-	if (dlg.ShowModal()) {
+	if (dlg.ShowModal() == wxID_OK) {
 		m_settings.bg_color = dlg.GetColor();
 	}
 }

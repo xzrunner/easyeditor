@@ -93,7 +93,7 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 // 			col.g = m_color.Green() / 255.0f;
 // 			col.b = m_color.Blue() / 255.0f;
 // 			d2d::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
-// 			if (dlg.ShowModal()) {
+// 			if (dlg.ShowModal() == wxID_OK) {
 // 				col = dlg.GetColor();
 // 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
 // 			}
@@ -105,7 +105,7 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			col.g = m_color.Green() / 255.0f;
 			col.b = m_color.Blue() / 255.0f;
 			d2d::RGBColorSettingDlg dlg(m_stage_wnd, NULL, col);
-			if (dlg.ShowModal()) {
+			if (dlg.ShowModal() == wxID_OK) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
 			}

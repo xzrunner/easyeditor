@@ -181,12 +181,10 @@ void ComponentPanel::UpdateColor(ps_color4f& color)
 	memcpy(&tmp.r, &color.r, sizeof(color));
 
 	d2d::RGBColorSettingDlg dlg(this, NULL, tmp);
-	if (!dlg.ShowModal()) {
-		return;
+	if (dlg.ShowModal() == wxID_OK) {
+		tmp = dlg.GetColor();
+		memcpy(&color.r, &tmp.r, sizeof(color));
 	}
-
-	tmp = dlg.GetColor();
-	memcpy(&color.r, &tmp.r, sizeof(color));
 }
 
 }
