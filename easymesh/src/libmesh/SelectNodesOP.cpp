@@ -12,7 +12,7 @@ SelectNodesOP::SelectNodesOP(StagePanel* stage)
 {
 	m_style.color = d2d::Colorf(0.8f, 0.2f, 0.2f);
 
-	m_first_pos.setInvalid();
+	m_first_pos.SetInvalid();
 }
 
 SelectNodesOP::~SelectNodesOP()
@@ -47,7 +47,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 					m_selection.Add(node);
 				}
 			}
-			m_first_pos.setInvalid();
+			m_first_pos.SetInvalid();
 		}
 	}
 	else
@@ -71,7 +71,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 	m_bDraggable = true;
 
 	Shape* shape = m_stage->GetShape();
-	if (m_first_pos.isValid() && shape)
+	if (m_first_pos.IsValid() && shape)
 	{
 		d2d::Vector end = m_stage->TransPosScrToProj(x, y);
 		d2d::Rect rect(m_first_pos, end);
@@ -80,7 +80,7 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 		for (size_t i = 0, n = nodes.size(); i < n; ++i)
 			m_selection.Add(nodes[i]);
 
-		m_first_pos.setInvalid();
+		m_first_pos.SetInvalid();
 	}
 
 	//	enableRightTap(m_selection->empty());
@@ -97,7 +97,7 @@ bool SelectNodesOP::OnMouseDrag(int x, int y)
 
 bool SelectNodesOP::OnDraw() const
 {
-	if (m_first_pos.isValid())
+	if (m_first_pos.IsValid())
 	{
 		if (d2d::DrawRectangleOP::OnDraw())
 			return true;
@@ -111,7 +111,7 @@ bool SelectNodesOP::OnDraw() const
 		points.push_back(nodes[i]->xy);
 
 	if (Shape* shape = m_stage->GetShape()) {
-		d2d::PrimitiveDraw::drawCircles(points, shape->GetNodeRegion(), 
+		d2d::PrimitiveDraw::DrawCircles(points, shape->GetNodeRegion(), 
 			true, 2, d2d::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
 	}
 
@@ -123,7 +123,7 @@ bool SelectNodesOP::Clear()
 	if (d2d::DrawRectangleOP::Clear()) return true;
 
 	m_selection.Clear();
-	m_first_pos.setInvalid();
+	m_first_pos.SetInvalid();
 
 	return false;
 }

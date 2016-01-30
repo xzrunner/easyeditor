@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class AbstractAtomicOP
 {
@@ -16,7 +16,7 @@ public:
 	virtual void Undo() = 0;
 	virtual void Redo() = 0;
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const = 0;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const = 0;
 
 //	virtual void load(const Json::Value& val) = 0;
 

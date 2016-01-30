@@ -29,7 +29,7 @@ void TranslateSpriteState::OnMousePress(const Vector& pos)
 
 void TranslateSpriteState::OnMouseRelease(const Vector& pos)
 {
-	m_last_pos.setInvalid();
+	m_last_pos.SetInvalid();
 	if (m_dirty) {
 		m_dirty = false;
 		AbstractAtomicOP* aop = new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
@@ -39,7 +39,7 @@ void TranslateSpriteState::OnMouseRelease(const Vector& pos)
 
 bool TranslateSpriteState::OnMouseDrag(const Vector& pos)
 {
-	if (m_selection->IsEmpty() || !m_last_pos.isValid()) {
+	if (m_selection->IsEmpty() || !m_last_pos.IsValid()) {
 		return false;
 	}
 
@@ -54,21 +54,21 @@ bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
 {
 	if (m_selection->IsEmpty()) return false;
 
-	d2d::Vector offset;
+	Vector offset;
 
 	switch (type)
 	{
 	case e_left:
-		offset.set(-1, 0);
+		offset.Set(-1, 0);
 		break;
 	case e_right:
-		offset.set(1, 0);
+		offset.Set(1, 0);
 		break;
 	case e_down:
-		offset.set(0, -1);
+		offset.Set(0, -1);
 		break;
 	case e_up:
-		offset.set(0, 1);
+		offset.Set(0, 1);
 		break;
 	}
 
@@ -90,11 +90,11 @@ void TranslateSpriteState::Translate(const Vector& offset)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
-	ISprite* sprite = static_cast<ISprite*>(object);
+	Sprite* sprite = static_cast<Sprite*>(object);
 	sprite->Translate(m_offset);
-	bFetchNext = true;
+	next = true;
 }
 
 }

@@ -37,7 +37,7 @@ void VisitedList::DebugDraw() const
 		= m_data.begin();
 	for ( ; itr != m_data.end(); ++itr) {
 		d2d::Vector pos = m_nw->TransIDToPos((*itr)->m_id);
-		d2d::PrimitiveDraw::drawPoint(pos, d2d::MID_RED, 5);
+		d2d::PrimitiveDraw::DrawPoint(pos, d2d::MID_RED, 5);
 	}
 }
 

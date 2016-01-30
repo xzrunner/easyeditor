@@ -12,14 +12,14 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = wxT("*_") + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_texture) + wxT(".json");
+	wxString filter = wxT("*_") + d2d::FileType::GetTag(d2d::FileType::e_texture) + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入texture文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
@@ -29,7 +29,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			std::string filename = filenames[i].ToStdString();
 			try {
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 				symbol->RefreshThumbnail(filename);
 				m_list->Insert(symbol);
 				symbol->Release();

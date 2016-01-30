@@ -67,15 +67,15 @@ void StagePanel::LoadFromFile(const char* filename)
 		ChangeWindowViewSizeSJ::Instance()->Change(m_view_width, m_view_height);
 	}
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
-//	std::vector<d2d::ISprite*> sprites;
+	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
+//	std::vector<d2d::Sprite*> sprites;
 	int idx = 0;
 	Json::Value spr_val = value["sprite"][idx++];
 	while (!spr_val.isNull()) {
 		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 
 		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
@@ -91,7 +91,7 @@ void StagePanel::LoadFromFile(const char* filename)
 
 void StagePanel::StoreToFile(const char* filename) const
 {
-	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
 
 	Json::Value value;
 
@@ -99,14 +99,14 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	value["name"] = m_toolbar->GetWindowName();
 
-	std::vector<d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_ALL);
+	std::vector<d2d::Sprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_ALL);
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		d2d::ISprite* spr = sprites[i];
+		d2d::Sprite* spr = sprites[i];
 
 		Json::Value spr_val;
-		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+		spr_val["filepath"] = d2d::FileHelper::GetRelativePath(dir,
 			spr->GetSymbol().GetFilepath()).ToStdString();
 		spr->Store(spr_val);
 
@@ -117,7 +117,7 @@ void StagePanel::StoreToFile(const char* filename) const
 
 	// wrapper complex
 	ecomplex::Symbol wrapper_complex;
-	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::ISprite>());
+	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
 	wrapper_complex.m_sprites = sprites;
 	std::string name = filename;
 	name = name.substr(0, name.find_last_of('_'));
@@ -129,7 +129,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["view"]["width"] = m_view_width;
 	value["view"]["height"] = m_view_height;
 
-	value["wrapper filepath"] = d2d::FilenameTools::getRelativePath(dir, wrapper_path).ToStdString();;
+	value["wrapper filepath"] = d2d::FileHelper::GetRelativePath(dir, wrapper_path).ToStdString();;
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -160,8 +160,8 @@ void StagePanel::OnPreview()
 	int width, height;
 	QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	std::vector<const d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	std::vector<const d2d::Sprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
 
 	EnableObserve(false);
 	GetCanvas()->EnableObserve(false);
@@ -178,8 +178,8 @@ void StagePanel::OnPreview()
 void StagePanel::OnCode() const
 {
 	ebuilder::CodeDialog dlg(const_cast<StagePanel*>(this));
-	std::vector<d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
 	// ui
 	{
@@ -245,7 +245,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case d2d::MSG_INSERT_SPRITE:
 		{
 			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
-			d2d::ISprite* spr = p->spr;
+			d2d::Sprite* spr = p->spr;
 			std::string type = "";
 			SymbolCfg::Instance()->QueryType(&spr->GetSymbol(), type);
 			if (type.empty() && spr->tag.find("type=unknown") == std::string::npos) {

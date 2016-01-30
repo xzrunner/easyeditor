@@ -8,7 +8,7 @@
 namespace d2d
 {
 
-class ISymbol;
+class Symbol;
 class ILibraryPage;
 
 class LibraryList : public VerticalImageList

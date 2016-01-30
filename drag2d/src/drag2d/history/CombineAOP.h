@@ -15,7 +15,7 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
 	std::vector<AbstractAtomicOP*> m_atomics;

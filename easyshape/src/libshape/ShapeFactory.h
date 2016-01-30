@@ -10,7 +10,7 @@ namespace libshape
 class ShapeFactory
 {
 public:
-	static d2d::IShape* CreateShapeFromFile(const Json::Value& value,
+	static d2d::Shape* CreateShapeFromFile(const Json::Value& value,
 		const std::string& dir);
 
 }; // ShapeFactory

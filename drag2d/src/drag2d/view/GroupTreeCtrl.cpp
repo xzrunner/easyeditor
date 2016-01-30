@@ -4,7 +4,7 @@
 #include "GroupTreeImpl.h"
 
 #include "dataset/Group.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/SpriteSelection.h"
 #include "view/KeysState.h"
 
@@ -155,7 +155,7 @@ void GroupTreeCtrl::DelNode()
 		return;
 	}
 
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 	Traverse(id, GroupTreeImpl::GetSpritesVisitor(this, sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprites[i], this);
@@ -164,7 +164,7 @@ void GroupTreeCtrl::DelNode()
 	Delete(id);
 }
 
-wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
+wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, Sprite* spr)
 {
 	if (!parent.IsOk()) {
 		return m_root;
@@ -185,7 +185,7 @@ wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
 	}
 }
 
-wxTreeItemId GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
+wxTreeItemId GroupTreeCtrl::AddSprite(Sprite* spr)
 {
 	if (!m_add_del_open) {
 		return m_root;
@@ -256,7 +256,7 @@ void GroupTreeCtrl::OnNotify(int sj_id, void* ud)
 	switch (sj_id) 
 	{
 	case MSG_SPRITE_NAME_CHANGE:
-		ChangeName((ISprite*)ud);
+		ChangeName((Sprite*)ud);
 		break;
 	case MSG_SELECT_SPRITE:
 		{
@@ -283,7 +283,7 @@ void GroupTreeCtrl::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case MSG_REMOVE_SPRITE:
-		Remove((ISprite*)ud);
+		Remove((Sprite*)ud);
 		break;
 	case MSG_CLEAR_SPRITE:
 		Clear();
@@ -337,7 +337,7 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 
 	GroupTreeImpl::GetFirstSpriteVisitor visitor(this);
 	Traverse(id, visitor);
-	ISprite* spr = visitor.GetFirstSprite();
+	Sprite* spr = visitor.GetFirstSprite();
 
 	bool add = m_key_state.GetKeyState(WXK_CONTROL);
 	SelectSpriteSJ::Instance()->Select(spr, !add, this);
@@ -427,7 +427,7 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && !data->IsGroup()) {
-		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		bool add = m_key_state.GetKeyState(WXK_CONTROL);
 		SelectSpriteSJ::Instance()->Select(spr, !add, this);
 	}
@@ -438,7 +438,7 @@ void GroupTreeCtrl::OnLabelEdited(wxTreeEvent& event)
 	m_selected_item = event.GetItem();
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && !data->IsGroup()) {
-		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		Sprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
 		spr->name = event.GetLabel();
 		SpriteNameChangeSJ::Instance()->OnSpriteNameChanged(spr, this);
 	}
@@ -456,11 +456,11 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 	}
 
 	SpriteSelection* selection = m_sprite_impl->GetSpriteSelection();
-	std::vector<ISprite*> sprites;
-	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ISprite* spr = sprites[i];
+		Sprite* spr = sprites[i];
 		bool ok = group->Insert(spr);
 		if (ok) {
 			GroupTreeItem* data = new GroupTreeSpriteItem(spr);
@@ -556,10 +556,10 @@ void GroupTreeCtrl::SelectRight()
 
 void GroupTreeCtrl::ReorderSprites()
 {
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 	Traverse(m_root, GroupTreeImpl::GetSpritesVisitor(this, sprites));
 	for (int i = sprites.size() - 1; i >= 0; --i) {
-		ISprite* spr = sprites[i];
+		Sprite* spr = sprites[i];
 		m_add_del_open = false;
 		RemoveSpriteSJ::Instance()->Remove(spr);
 		InsertSpriteSJ::Instance()->Insert(spr);
@@ -590,7 +590,7 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	PopupMenu(&menu, pt);
 }
 
-void GroupTreeCtrl::ChangeName(ISprite* spr)
+void GroupTreeCtrl::ChangeName(Sprite* spr)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
 	Traverse(visitor);
@@ -599,7 +599,7 @@ void GroupTreeCtrl::ChangeName(ISprite* spr)
 	SetItemText(id, spr->name);
 }
 
-void GroupTreeCtrl::Select(d2d::ISprite* spr, bool clear)
+void GroupTreeCtrl::Select(Sprite* spr, bool clear)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
 	Traverse(visitor);
@@ -612,14 +612,14 @@ void GroupTreeCtrl::Select(d2d::ISprite* spr, bool clear)
 
 void GroupTreeCtrl::SelectSet(SpriteSelection* selection)
 {
-	std::vector<ISprite*> sprites;
-	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		Select(sprites[i], false);
 	}
 }
 
-void GroupTreeCtrl::Reorder(ISprite* spr, bool up)
+void GroupTreeCtrl::Reorder(Sprite* spr, bool up)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(this, spr);
 	Traverse(visitor);
@@ -629,7 +629,7 @@ void GroupTreeCtrl::Reorder(ISprite* spr, bool up)
 	}
 }
 
-bool GroupTreeCtrl::Remove(ISprite* sprite)
+bool GroupTreeCtrl::Remove(Sprite* sprite)
 {
 	if (m_add_del_open) {
 		GroupTreeImpl::RemoveVisitor visitor(this, sprite);

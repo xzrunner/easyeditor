@@ -26,7 +26,7 @@ bool DrawComplexPolygonOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	m_polyline.clear();
-	m_currPos.setInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }
@@ -40,7 +40,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<d
 	{
 		PolygonShape* poly = polygon_shapes[i];
 		const std::vector<d2d::Vector>& outline = poly->GetVertices();
-		if (!d2d::Math::IsPolygonInPolygon(polyline, outline)) {
+		if (!d2d::Math2D::IsPolygonInPolygon(polyline, outline)) {
 			continue;
 		}
 
@@ -49,7 +49,7 @@ ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<d
 		{
 			const std::vector<std::vector<d2d::Vector> >& holes = cpoly->GetHoles();
 			for (int i = 0, n = holes.size(); i < n; ++i) {
-				if (d2d::Math::isPolylineIntersectPolyline(holes[i], polyline)) {
+				if (d2d::Math2D::isPolylineIntersectPolylinI(holes[i], polyline)) {
 					return NULL;
 				}
 			}

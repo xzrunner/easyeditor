@@ -10,7 +10,7 @@ namespace d2d
 class EditPanelImpl;
 class MultiSpritesImpl;
 class SpriteSelection;
-class ISprite;
+class Sprite;
 
 class RightPopupMenu
 {
@@ -67,7 +67,7 @@ private:
 
 	SpriteSelection* m_selection;
 
-	std::vector<ISprite*> m_edited_sprs, m_selected_sprs;
+	std::vector<Sprite*> m_edited_sprs, m_selected_sprs;
 
 }; // RightPopupMenu
 

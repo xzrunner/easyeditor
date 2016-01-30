@@ -28,7 +28,7 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
 {
 }
 
-void OpenSymbolDialog::Open(d2d::ISprite* spr)
+void OpenSymbolDialog::Open(d2d::Sprite* spr)
 {
 	if (spr->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
@@ -139,12 +139,12 @@ void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)
 	LibraryPanel* library = static_cast<LibraryPanel*>(static_cast<StagePanel*>(m_wnd)->GetLibrary());
 	Layer* layer = library->GetLayer(sud->layer_id);
 	for (int i = 0, n = sud->shape_names.size(); i < n; ++i) {
-		d2d::IShape* shape = layer->QueryShape(sud->shape_names[i]);
+		d2d::Shape* shape = layer->QueryShape(sud->shape_names[i]);
 		layer->RemoveShape(shape);
 	}
 
 	sud->shape_names.clear();
-	std::vector<d2d::IShape*> shapes;
+	std::vector<d2d::Shape*> shapes;
 	create_shapes_from_etxture(spr, shapes);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		layer->InsertShape(shapes[i]);

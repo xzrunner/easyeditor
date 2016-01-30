@@ -14,22 +14,22 @@ SkeletonData::~SkeletonData()
 
 void SkeletonData::CopyFrom(const SkeletonData& skeleton)
 {
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<d2d::Sprite*> sprites;
 	sprites.reserve(skeleton.m_map_joints.size());
-	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr 
 		= skeleton.m_map_joints.begin();
 	for ( ; itr != skeleton.m_map_joints.end(); ++itr)
 		sprites.push_back(itr->first->Clone());
 	CopyFrom(sprites, skeleton);
 }
 
-void SkeletonData::CopyFrom(const std::vector<d2d::ISprite*>& sprites,
+void SkeletonData::CopyFrom(const std::vector<d2d::Sprite*>& sprites,
 	const SkeletonData& skeleton)
 {
 	Clean();
 
 	// check
-	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr
+	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr
 		= skeleton.m_map_joints.begin();
 	for ( ; itr != skeleton.m_map_joints.end(); ++itr)
 		if (!GetSpriteByName(sprites, itr->first->name))
@@ -39,7 +39,7 @@ void SkeletonData::CopyFrom(const std::vector<d2d::ISprite*>& sprites,
 	std::map<Joint*, Joint*> mapCovJoint;
 	for (itr = skeleton.m_map_joints.begin() ; itr != skeleton.m_map_joints.end(); ++itr)
 	{
-		d2d::ISprite* sprite = GetSpriteByName(sprites, itr->first->name);
+		d2d::Sprite* sprite = GetSpriteByName(sprites, itr->first->name);
 		if (sprite == NULL)
 			return;
 
@@ -88,10 +88,10 @@ void SkeletonData::CopyFrom(const std::vector<d2d::ISprite*>& sprites,
 	// convert skeleton
 	for (itr = skeleton.m_map_joints.begin() ; itr != skeleton.m_map_joints.end(); ++itr)
 	{
-		d2d::ISprite* src_sprite = itr->first;
+		d2d::Sprite* src_sprite = itr->first;
 		std::vector<Joint*> src_joints = itr->second;
 
-		d2d::ISprite* dst_sprite = GetSpriteByName(sprites, src_sprite->name);
+		d2d::Sprite* dst_sprite = GetSpriteByName(sprites, src_sprite->name);
 		std::vector<Joint*> dst_joints;
 		for (int i = 0, n = src_joints.size(); i < n; ++i)
 		{
@@ -104,9 +104,9 @@ void SkeletonData::CopyFrom(const std::vector<d2d::ISprite*>& sprites,
 	}
 }
 
-void SkeletonData::RemoveSprite(d2d::ISprite* sprite)
+void SkeletonData::RemoveSprite(d2d::Sprite* sprite)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr
 		= m_map_joints.find(sprite);
 	if (itr != m_map_joints.end())
 	{
@@ -116,14 +116,14 @@ void SkeletonData::RemoveSprite(d2d::ISprite* sprite)
 	}
 }
 
-bool SkeletonData::IsContainSprite(d2d::ISprite* sprite) const
+bool SkeletonData::IsContainSprite(d2d::Sprite* sprite) const
 {
 	return m_map_joints.find(sprite) != m_map_joints.end();
 }
 
-void SkeletonData::InsertJoint(d2d::ISprite* sprite, const d2d::Vector& pos)
+void SkeletonData::InsertJoint(d2d::Sprite* sprite, const d2d::Vector& pos)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.find(sprite);
 	if (itr == m_map_joints.end())
 	{
@@ -144,7 +144,7 @@ void SkeletonData::InsertJoint(d2d::ISprite* sprite, const d2d::Vector& pos)
 
 void SkeletonData::RemoveJoint(d2d::Vector& pos)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.begin();
 	for ( ; itr != m_map_joints.end(); ++itr)
 	{
@@ -164,7 +164,7 @@ void SkeletonData::RemoveJoint(d2d::Vector& pos)
 
 Joint* SkeletonData::QueryJointByPos(const d2d::Vector& pos)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.begin();
 	for ( ; itr != m_map_joints.end(); ++itr)
 	{
@@ -180,7 +180,7 @@ Joint* SkeletonData::QueryJointByPos(const d2d::Vector& pos)
 
 void SkeletonData::Draw() const
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr
+	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr
 		= m_map_joints.begin();
 	for ( ; itr != m_map_joints.end(); ++itr) {
 		for (int i = 0, n = itr->second.size(); i < n; ++i) {
@@ -189,14 +189,14 @@ void SkeletonData::Draw() const
 	}
 }
 
-void SkeletonData::Absorb(d2d::ISprite* sprite)
+void SkeletonData::Absorb(d2d::Sprite* sprite)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_child 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr_child 
 		= m_map_joints.find(sprite);
 	if (itr_child == m_map_joints.end())
 		return;
 
-	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_parent
+	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr_parent
 		= m_map_joints.begin();
 	for ( ; itr_parent != m_map_joints.end(); ++itr_parent)
 	{
@@ -224,9 +224,9 @@ void SkeletonData::Absorb(d2d::ISprite* sprite)
 	}
 }
 
-void SkeletonData::FixJoint(d2d::ISprite* sprite)
+void SkeletonData::FixJoint(d2d::Sprite* sprite)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.find(sprite);
 	if (itr == m_map_joints.end()) return;
 
@@ -241,9 +241,9 @@ void SkeletonData::FixJoint(d2d::ISprite* sprite)
 	}
 }
 
-void SkeletonData::UpdateJoint(d2d::ISprite* sprite, float dAngle)
+void SkeletonData::UpdateJoint(d2d::Sprite* sprite, float dAngle)
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr 
 		= m_map_joints.find(sprite);
 	if (itr == m_map_joints.end()) return;
 
@@ -265,26 +265,26 @@ void SkeletonData::UpdateJoint(d2d::ISprite* sprite, float dAngle)
 }
 
 void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end, 
-	std::vector<d2d::ISprite*>& tween, float process)
+	std::vector<d2d::Sprite*>& tween, float process)
 {
 	SkeletonData mid;
 	mid.CopyFrom(start);
 
-	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_s
+	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr_s
 		= start.m_map_joints.begin();
 	for ( ; itr_s != start.m_map_joints.end(); ++itr_s)
 	{
-		d2d::ISprite* s = itr_s->first;
-		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_e
+		d2d::Sprite* s = itr_s->first;
+		std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr_e
 			= end.m_map_joints.begin();
 		for ( ; itr_e != end.m_map_joints.end(); ++itr_e)
 		{
 			if (s->name == itr_e->first->name)
 			{
-				d2d::ISprite* e = itr_e->first;
+				d2d::Sprite* e = itr_e->first;
 				
-				d2d::ISprite* sprite = NULL;
-				std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr_mid = mid.m_map_joints.begin();
+				d2d::Sprite* sprite = NULL;
+				std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr_mid = mid.m_map_joints.begin();
 				for ( ; itr_mid != mid.m_map_joints.end(); ++itr_mid)
 				{
 					if (itr_mid->first->name == s->name)
@@ -304,14 +304,14 @@ void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end,
 		}
 	}
 
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr = mid.m_map_joints.begin();
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr = mid.m_map_joints.begin();
 	for ( ; itr != mid.m_map_joints.end(); ++itr)
 		tween.push_back(itr->first);
 }
 
 void SkeletonData::Clean()
 {
-	std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr
+	std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr
 		= m_map_joints.begin();
 	for ( ; itr != m_map_joints.end(); ++itr)
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
@@ -319,17 +319,17 @@ void SkeletonData::Clean()
 	m_map_joints.clear();
 }
 
-void SkeletonData::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
+void SkeletonData::Translate(d2d::Sprite* sprite, const d2d::Vector& offset)
 {
-	std::set<d2d::ISprite*> sprites;
-	std::queue<d2d::ISprite*> buf;
+	std::set<d2d::Sprite*> sprites;
+	std::queue<d2d::Sprite*> buf;
 	buf.push(sprite);
 	while (!buf.empty())
 	{
-		d2d::ISprite* curr = buf.front(); buf.pop();
+		d2d::Sprite* curr = buf.front(); buf.pop();
 		sprites.insert(curr);
 
-		std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+		std::map<d2d::Sprite*, std::vector<Joint*> >::iterator itr 
 			= m_map_joints.find(curr);
 		assert(itr != m_map_joints.end());
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
@@ -339,19 +339,19 @@ void SkeletonData::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 			std::set<Joint*>::iterator itr_child = j->m_children.begin();
 			for ( ; itr_child != j->m_children.end(); ++itr_child)
 			{
-				d2d::ISprite* child = (*itr_child)->m_sprite;
+				d2d::Sprite* child = (*itr_child)->m_sprite;
 				if (sprites.find(child) == sprites.end())
 					buf.push(child);
 			}
 		}
 	}
 
-	std::set<d2d::ISprite*>::iterator itr = sprites.begin();
+	std::set<d2d::Sprite*>::iterator itr = sprites.begin();
 	for ( ; itr != sprites.end(); ++itr)
 		(*itr)->Translate(offset);
 }
 
-d2d::ISprite* SkeletonData::GetSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name)
+d2d::Sprite* SkeletonData::GetSpriteByName(const std::vector<d2d::Sprite*>& sprites, const std::string& name)
 {
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 		if (sprites[i]->name == name)

@@ -28,4 +28,4 @@ wxSizer* DrawLineCMPT::initLayout()
 	return initChildrenLayout();
 }
 
-} // d2d
+}

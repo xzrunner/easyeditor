@@ -29,7 +29,7 @@ private:
 private:
 	d2d::EditPanelImpl* m_stage;
 
-	std::vector<d2d::ISymbol*> m_buildings;
+	std::vector<d2d::Symbol*> m_buildings;
 	std::vector<d2d::Vector> m_positions;
 
 }; // Projection2DScene

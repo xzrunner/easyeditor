@@ -39,12 +39,12 @@ private:
 	void checkActiveShape(const NodeAddr& captured);
 
 private:
-	class InterruptChainVisitor : public d2d::IVisitor
+	class InterruptChainVisitor : public d2d::Visitor
 	{
 	public:
 		InterruptChainVisitor(const d2d::Vector& pos, int tol);
 
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 		ChainShape* getInterruptedChain() { return m_chain; }
 
@@ -55,12 +55,12 @@ private:
 
 	}; // InterruptChainVisitor
 
-	class NearestNodeVisitor : public d2d::IVisitor
+	class NearestNodeVisitor : public d2d::Visitor
 	{
 	public:
 		NearestNodeVisitor(const d2d::Vector& pos, int tol);
 
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 		const d2d::Vector& getNearestNode() const {
 			return m_nearest;

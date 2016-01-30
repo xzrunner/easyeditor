@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
+void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type, bool order) const
 {
 	m_list.TraverseSprites(visitor);
 }

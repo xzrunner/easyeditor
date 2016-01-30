@@ -16,7 +16,7 @@ TextBuilder::~TextBuilder()
 	for_each(m_labels.begin(), m_labels.end(), DeletePointerFunctor<const PackLabel>());
 }
 
-void TextBuilder::Traverse(d2d::IVisitor& visitor) const
+void TextBuilder::Traverse(d2d::Visitor& visitor) const
 {
  	for (int i = 0, n = m_labels.size(); i < n; ++i) {
 		bool has_next;
@@ -88,10 +88,10 @@ void TextBuilder::OutputExtraInfo(Json::Value& value) const
 		item_val["type"] = "label";
 		item_val["id"] = label->GetSprID();
 		if (!label->text.empty()) {
-			item_val["content"] = d2d::StringTools::ToUtf8(label->text);
+			item_val["content"] = d2d::StringHelper::ToUtf8(label->text);
 		}
 		if (!label->tid.empty()) {
-			item_val["tid"] = d2d::StringTools::ToUtf8(label->tid);
+			item_val["tid"] = d2d::StringHelper::ToUtf8(label->tid);
 		}
 		value[value.size()] = item_val;
 	}

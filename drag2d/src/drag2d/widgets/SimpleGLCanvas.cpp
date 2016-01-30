@@ -33,7 +33,7 @@ void SimpleGLCanvas::OnSize(wxSizeEvent& event)
 // 	glViewport(0, 0, w, h);
 // 
 // 	ShaderMgr* shader = ShaderMgr::Instance();
-// 	shader->SetModelView(d2d::Vector(0, 0), 1);
+// 	shader->SetModelView(Vector(0, 0), 1);
 // 	shader->SetProjection(w, h);
 }
 

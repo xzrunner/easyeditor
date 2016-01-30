@@ -29,7 +29,7 @@ GenRegularRectBinary::~GenRegularRectBinary()
 
 void GenRegularRectBinary::PackToBinary() const
 {
-	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
+	wxString dir = d2d::FileHelper::GetFileDir(m_filepath);
 	wxString filepath = dir + "\\pack.rrp";
 
 	std::ofstream fout(filepath.mb_str(), std::ios::binary);
@@ -135,10 +135,10 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 		d2d::Rect r;
 		for (int j = 0, m = pic->parts.size(); j < m; ++j) {
 			const Rect& r_src = pic->parts[j]->src;
-			r.combine(d2d::Vector(r_src.x, r_src.y));
-			r.combine(d2d::Vector(r_src.x+r_src.w, r_src.y+r_src.h));
-			pic->w = r.xLength();
-			pic->h = r.yLength();
+			r.Combine(d2d::Vector(r_src.x, r_src.y));
+			r.Combine(d2d::Vector(r_src.x+r_src.w, r_src.y+r_src.h));
+			pic->w = r.Width();
+			pic->h = r.Height();
 		}
 	}
 

@@ -44,7 +44,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected) {
 		m_open_symbol.Open(selected);
 	}

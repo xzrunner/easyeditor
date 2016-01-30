@@ -25,7 +25,7 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::IVisitor& visitor, 
+	virtual void TraverseSprites(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	//

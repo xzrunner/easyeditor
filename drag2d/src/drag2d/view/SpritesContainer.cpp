@@ -1,7 +1,7 @@
 #include "SpritesContainer.h"
 #include "ObjectVector.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 
 namespace d2d
 {
@@ -11,29 +11,29 @@ SpritesContainer::~SpritesContainer()
 	Clear();
 }
 
-void SpritesContainer::Traverse(IVisitor& visitor, bool order/* = true*/) const
+void SpritesContainer::Traverse(Visitor& visitor, bool order/* = true*/) const
 {
 	m_sprites.Traverse(visitor, order);
 }
 
-void SpritesContainer::Traverse(IVisitor& visitor, DataTraverseType type, bool order) const
+void SpritesContainer::Traverse(Visitor& visitor, DataTraverseType type, bool order) const
 {
 	m_sprites.Traverse(visitor, type, order);
 }
 
 bool SpritesContainer::Remove(Object* obj)
 {
-	return m_sprites.Remove(static_cast<ISprite*>(obj));
+	return m_sprites.Remove(static_cast<Sprite*>(obj));
 }
 
 bool SpritesContainer::Insert(Object* obj)
 {
-	return m_sprites.Insert(static_cast<ISprite*>(obj));
+	return m_sprites.Insert(static_cast<Sprite*>(obj));
 }
 
 bool SpritesContainer::Insert(Object* obj, int idx)
 {
-	return m_sprites.Insert(static_cast<ISprite*>(obj), idx);
+	return m_sprites.Insert(static_cast<Sprite*>(obj), idx);
 }
 
 bool SpritesContainer::Clear()
@@ -43,12 +43,12 @@ bool SpritesContainer::Clear()
 
 bool SpritesContainer::ResetOrder(const Object* obj, bool up)
 {
-	return m_sprites.ResetOrder(static_cast<const ISprite*>(obj), up);
+	return m_sprites.ResetOrder(static_cast<const Sprite*>(obj), up);
 }
 
 bool SpritesContainer::ResetOrderMost(const Object* obj, bool up)
 {
-	return m_sprites.ResetOrderMost(static_cast<const ISprite*>(obj), up);	
+	return m_sprites.ResetOrderMost(static_cast<const Sprite*>(obj), up);	
 }
 
 int SpritesContainer::Size() const

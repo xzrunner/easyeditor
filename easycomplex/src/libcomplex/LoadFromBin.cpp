@@ -10,7 +10,7 @@ namespace ecomplex
 void LoadFromBin::Load(const Json::Value& value, const std::string& dir, 
 					   Symbol* symbol)
 {
-	std::string filename = d2d::FilenameTools::getAbsolutePath(dir, value["bin file"].asString());
+	std::string filename = d2d::FileHelper::GetAbsolutePath(dir, value["bin file"].asString());
 
 	std::string ept_path = filename;
 	std::vector<d2d::Image*> images;
@@ -39,8 +39,8 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 	int idx = 1;
 	while (true) 
 	{
-		std::string _filepath = filepath + "." + d2d::StringTools::ToString(idx++) + ".ept";
-		if (!d2d::FilenameTools::IsFileExist(_filepath)) {
+		std::string _filepath = filepath + "." + d2d::StringHelper::ToString(idx++) + ".ept";
+		if (!d2d::FileHelper::IsFileExist(_filepath)) {
 			break;
 		}
 

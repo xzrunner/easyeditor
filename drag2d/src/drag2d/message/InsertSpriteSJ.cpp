@@ -14,7 +14,7 @@ InsertSpriteSJ::InsertSpriteSJ(int id)
 {
 }
 
-void InsertSpriteSJ::Insert(ISprite* spr, int idx, Observer* except)
+void InsertSpriteSJ::Insert(Sprite* spr, int idx, Observer* except)
 {
 	if (dynamic_cast<ScriptsSprite*>(spr)) {
 		return;

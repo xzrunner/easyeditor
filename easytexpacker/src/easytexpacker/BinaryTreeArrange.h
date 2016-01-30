@@ -21,7 +21,7 @@ namespace etexpacker
 		struct Node
 		{
 			Node* child[2];
-			d2d::ISprite* texture;
+			d2d::Sprite* texture;
 			d2d::Rect rc;
 
 			Node();

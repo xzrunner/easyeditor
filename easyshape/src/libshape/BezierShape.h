@@ -23,7 +23,7 @@ public:
 	virtual BezierShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "bezier"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

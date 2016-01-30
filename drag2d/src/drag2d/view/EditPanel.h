@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class AbstractAtomicOP;
 class AbstractEditOP;
 class IStageCanvas;
@@ -54,8 +54,8 @@ public:
 	void OnKeyUp(wxKeyEvent& event);
 	void OnMouseWheelRotation(int x, int y, int direction);
 
-	void SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
-	void LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
+	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites);
+	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites);
 
 	void OnSave();
 	bool IsEditDirty() const;

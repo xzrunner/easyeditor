@@ -15,14 +15,14 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 {
 	Json::Value val;
 	val["type"] = "color";
-	val["color"] = m_color.pack();
+	val["color"] = m_color.Pack();
 	return val;
 }
 
 void ColorMaterial::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::Colorf c = d2d::cMul(m_color, color.multi);
-	d2d::PrimitiveDraw::drawTriangles(mt, m_tris, c);
+	d2d::Colorf c = d2d::col_mul(m_color, color.multi);
+	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, c);
 
 	//d2d::ShaderMgr::Instance()->RVG();
 	//d2d::Colorf c = d2d::cMul(m_color, color.multi);
@@ -35,14 +35,14 @@ void ColorMaterial::BuildEnd()
 	m_tris.clear();
 
 	std::vector<d2d::Vector> outline;
-	d2d::Math::removeDuplicatePoints(m_outline, outline);
+	d2d::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
 	if (!m_segments.empty()) {
-		d2d::Triangulation::lines(m_outline, m_segments, m_tris);
+		d2d::Triangulation::Lines(m_outline, m_segments, m_tris);
 	} else if (!m_holes.empty()) {
 		d2d::Triangulation::Holes(m_outline, m_holes, m_tris);
 	} else {
-		d2d::Triangulation::normal(m_outline, m_tris);
+		d2d::Triangulation::Normal(m_outline, m_tris);
 	}
 }
 

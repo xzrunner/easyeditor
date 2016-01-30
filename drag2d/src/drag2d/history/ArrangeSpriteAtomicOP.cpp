@@ -3,7 +3,7 @@
 //
 //#include "common/Math.h"
 //#include "common/FileNameTools.h"
-//#include "dataset/ISymbol.h"
+//#include "dataset/Symbol.h"
 //#include "view/MultiSpritesImpl.h"
 //
 //namespace d2d
@@ -16,12 +16,12 @@
 //
 //SpritesAOP::SpritesAOP(const SpriteSelection& selection)
 //{
-//	selection.traverse(FetchAllVisitor<ISprite>(m_sprites));
+//	selection.traverse(FetchAllVisitor<Sprite>(m_sprites));
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //		m_sprites[i]->Retain();
 //}
 //
-//SpritesAOP::SpritesAOP(const std::vector<ISprite*>& sprites)
+//SpritesAOP::SpritesAOP(const std::vector<Sprite*>& sprites)
 //{
 //	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 //	{
@@ -36,7 +36,7 @@
 //		m_sprites[i]->Release();
 //}
 //
-//Json::Value SpritesAOP::store(const std::vector<ISprite*>& sprites)
+//Json::Value SpritesAOP::store(const std::vector<Sprite*>& sprites)
 //{
 //	Json::Value ret;
 //	int count = 0;
@@ -70,7 +70,7 @@
 //	m_offset = offset;
 //}
 //
-//MoveSpritesAOP::MoveSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& offset)
+//MoveSpritesAOP::MoveSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& offset)
 //	: SpritesAOP(sprites)
 //{
 //	m_offset = offset;
@@ -80,7 +80,7 @@
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //	{
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->translate(-m_offset);
 //	}
 //}
@@ -89,7 +89,7 @@
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //	{
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->translate(m_offset);
 //	}
 //}
@@ -115,7 +115,7 @@
 //{
 //}
 //
-//RotateSpritesAOP::RotateSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end)
+//RotateSpritesAOP::RotateSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& start, const Vector& end)
 //	: SpritesAOP(sprites)
 //	, m_start(start)
 //	, m_end(end)
@@ -123,27 +123,27 @@
 //{
 //}
 //
-//RotateSpritesAOP::RotateSpritesAOP(const std::vector<ISprite*>& sprites, float angle)
+//RotateSpritesAOP::RotateSpritesAOP(const std::vector<Sprite*>& sprites, float angle)
 //	: SpritesAOP(sprites)
 //	, m_angle(angle)
 //{
-//	m_start.setInvalid();
-//	m_end.setInvalid();
+//	m_start.SetInvalid();
+//	m_end.SetInvalid();
 //}
 //
 //void RotateSpritesAOP::undo()
 //{
-//	if (m_start.isValid() && m_end.isValid()) {
+//	if (m_start.IsValid() && m_end.IsValid()) {
 //		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //		{
-//			ISprite* sprite = m_sprites[i];
+//			Sprite* sprite = m_sprites[i];
 //			float angle = Math::getAngleInDirection(sprite->getPosition(), m_start, m_end);
 //			sprite->rotate(-angle);
 //		}
 //	} else if (m_angle != 0) {
 //		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //		{
-//			ISprite* sprite = m_sprites[i];
+//			Sprite* sprite = m_sprites[i];
 //			sprite->rotate(-m_angle);
 //		}
 //	}
@@ -151,17 +151,17 @@
 //
 //void RotateSpritesAOP::redo()
 //{
-//	if (m_start.isValid() && m_end.isValid()) {
+//	if (m_start.IsValid() && m_end.IsValid()) {
 //		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //		{
-//			ISprite* sprite = m_sprites[i];
+//			Sprite* sprite = m_sprites[i];
 //			float angle = Math::getAngleInDirection(sprite->getPosition(), m_start, m_end);
 //			sprite->rotate(angle);
 //		}
 //	} else if (m_angle != 0) {
 //		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 //		{
-//			ISprite* sprite = m_sprites[i];
+//			Sprite* sprite = m_sprites[i];
 //			sprite->rotate(m_angle);
 //		}
 //	}
@@ -189,7 +189,7 @@
 //	m_spritesImpl = spritesImpl;
 //}
 //
-//DeleteSpritesAOP::DeleteSpritesAOP(const std::vector<ISprite*>& sprites, MultiSpritesImpl* spritesImpl)
+//DeleteSpritesAOP::DeleteSpritesAOP(const std::vector<Sprite*>& sprites, MultiSpritesImpl* spritesImpl)
 //	: SpritesAOP(sprites)
 //{
 //	m_spritesImpl = spritesImpl;
@@ -218,7 +218,7 @@
 //// class ScaleSpritesAOP
 ////////////////////////////////////////////////////////////////////////////
 //
-//ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<ISprite*>& sprites, 
+//ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<Sprite*>& sprites, 
 //								 const Vector& new_scale, 
 //								 const Vector& old_scale)
 //	: SpritesAOP(sprites)
@@ -226,12 +226,12 @@
 //{
 //	m_oldScales.reserve(sprites.size());
 //	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-//		ISprite* sprite = sprites[i];
+//		Sprite* sprite = sprites[i];
 //		m_oldScales.push_back(old_scale);
 //	}
 //}
 //
-//ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_scale,
+//ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_scale,
 //				const std::vector<Vector>& oldScales)
 //	: SpritesAOP(sprites)
 //	, m_scale(new_scale)
@@ -242,7 +242,7 @@
 //void ScaleSpritesAOP::undo()
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->setScale(m_oldScales[i].x, m_oldScales[i].y);
 //	} 
 //}
@@ -250,7 +250,7 @@
 //void ScaleSpritesAOP::redo()
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->setScale(m_scale.x, m_scale.y);
 //	} 
 //}
@@ -272,19 +272,19 @@
 //// class ShearSpritesAOP
 ////////////////////////////////////////////////////////////////////////////
 //
-//ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear, 
+//ShearSpritesAOP::ShearSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_shear, 
 //								 const Vector& old_shear)
 //	: SpritesAOP(sprites)
 //	, m_shear(new_shear)
 //{
 //	m_oldShears.reserve(sprites.size());
 //	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-//		ISprite* sprite = sprites[i];
+//		Sprite* sprite = sprites[i];
 //		m_oldShears.push_back(old_shear);
 //	}
 //}
 //
-//ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear,
+//ShearSpritesAOP::ShearSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_shear,
 //								 const std::vector<Vector>& oldShears)
 //	: SpritesAOP(sprites)
 //	, m_shear(new_shear)
@@ -295,7 +295,7 @@
 //void ShearSpritesAOP::undo()
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->setShear(m_oldShears[i].x, m_oldShears[i].y);
 //	} 
 //}
@@ -303,7 +303,7 @@
 //void ShearSpritesAOP::redo()
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->setShear(m_shear.x, m_shear.y);
 //	} 
 //}
@@ -325,21 +325,21 @@
 //// class MirrorSpritesAOP
 ////////////////////////////////////////////////////////////////////////////
 //
-//MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror)
+//MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<Sprite*>& sprites, bool xMirror, bool yMirror)
 //	: SpritesAOP(sprites)
 //	, m_xMirror(xMirror)
 //	, m_yMirror(yMirror)
 //{
 //	m_oldMirrors.reserve(sprites.size());
 //	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-//		ISprite* sprite = sprites[i];
+//		Sprite* sprite = sprites[i];
 //		bool mx, my;
 //		sprite->getMirror(mx, my);
 //		m_oldMirrors.push_back(std::make_pair(mx, my));
 //	}
 //}
 //
-//MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror,
+//MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<Sprite*>& sprites, bool xMirror, bool yMirror,
 //								   const std::vector<std::pair<bool, bool> >& oldMirrors)
 //	: SpritesAOP(sprites)
 //	, m_xMirror(xMirror)
@@ -351,7 +351,7 @@
 //void MirrorSpritesAOP::undo()
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->setMirror(m_oldMirrors[i].first, m_oldMirrors[i].second);
 //	} 
 //}
@@ -359,7 +359,7 @@
 //void MirrorSpritesAOP::redo()
 //{
 //	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-//		ISprite* sprite = m_sprites[i];
+//		Sprite* sprite = m_sprites[i];
 //		sprite->setMirror(m_xMirror, m_yMirror);
 //	} 
 //}
@@ -378,4 +378,4 @@
 //}
 //
 //} // arrange_sprite
-//} // d2d
+//}

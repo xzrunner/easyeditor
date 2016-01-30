@@ -301,7 +301,7 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		const wxString& filepath = files[i];
-		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 			continue;
 		}
 

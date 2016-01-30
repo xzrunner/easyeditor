@@ -15,15 +15,15 @@ class UIList
 public:
 	UIList();
 
-	bool InsertSprite(d2d::ISprite* sprite, int idx = -1);
+	bool InsertSprite(d2d::Sprite* sprite, int idx = -1);
 	bool ClearAllSprite();
-	void TraverseSprites(d2d::IVisitor& visitor) const;
+	void TraverseSprites(d2d::Visitor& visitor) const;
 
 	void StoreToFile(const char* filename) const;
 	void LoadFromFile(const char* filename);
 
 	bool ReFilling();
-	bool Arrange(const d2d::ISprite* spr);
+	bool Arrange(const d2d::Sprite* spr);
 
 	d2d::Rect& GetClipbox() { return m_clipbox; }
 
@@ -39,9 +39,9 @@ private:
 private:
 	d2d::Rect m_clipbox;
 
-	std::vector<d2d::ISprite*> m_items;
-//	d2d::ISprite *m_base_spr, *m_hori_spr, *m_vert_spr;
-	d2d::ISprite* m_item_spr;
+	std::vector<d2d::Sprite*> m_items;
+//	d2d::Sprite *m_base_spr, *m_hori_spr, *m_vert_spr;
+	d2d::Sprite* m_item_spr;
 
 	bool m_horizontal;
 	bool m_vertical;

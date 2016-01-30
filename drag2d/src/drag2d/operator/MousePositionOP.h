@@ -11,7 +11,7 @@ class MousePositionCMPT;
 class MousePositionOP : public ZoomViewOP
 {
 public:
-	MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	MousePositionOP(wxWindow* wnd, EditPanelImpl* stage, 
 		MousePositionCMPT* cmpt);
 
 	virtual bool OnMouseMove(int x, int y);

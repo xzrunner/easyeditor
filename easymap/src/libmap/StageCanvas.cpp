@@ -27,7 +27,7 @@ void StageCanvas::DrawGuideLines() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 
 		cfg->m_view_width * 0.5f,
 		cfg->m_view_height * 0.5f,
 		d2d::LIGHT_GREY_LINE);

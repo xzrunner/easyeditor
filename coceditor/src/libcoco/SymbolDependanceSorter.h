@@ -15,26 +15,26 @@ class SymbolDependanceSorter
 {
 public:
 
-	void prepare(const std::vector<const d2d::ISymbol*>& symbols);
-	void prepare(const std::vector<const d2d::ISprite*>& sprites);
+	void prepare(const std::vector<const d2d::Symbol*>& symbols);
+	void prepare(const std::vector<const d2d::Sprite*>& sprites);
 
-// 	const std::vector<const d2d::ISymbol*>& GetSymbolOrdered() const {
+// 	const std::vector<const d2d::Symbol*>& GetSymbolOrdered() const {
 // 		return m_symbol_set.GetOrdered();
 // 	}
 	const SymbolSet& GetSymbolSet() const { return m_symbol_set; }
 
 private:
-	void fetch(const std::vector<const d2d::ISymbol*>& symbols);
+	void fetch(const std::vector<const d2d::Symbol*>& symbols);
 	void sort();
 
-	bool IsSymbolPrepared(const d2d::ISprite* sprite) const;
-	bool IsSymbolPrepared(const d2d::ISymbol* symbol) const;
+	bool IsSymbolPrepared(const d2d::Sprite* sprite) const;
+	bool IsSymbolPrepared(const d2d::Symbol* symbol) const;
 
-	void PrepareScale9(std::queue<const d2d::ISymbol*>& buffer, const escale9::Symbol* scale9);
+	void PrepareScale9(std::queue<const d2d::Symbol*>& buffer, const escale9::Symbol* scale9);
 
 private:
-//	std::set<const d2d::ISymbol*, d2d::SymbolCmp> m_unique;
-	std::set<const d2d::ISymbol*> m_unique;
+//	std::set<const d2d::Symbol*, d2d::SymbolCmp> m_unique;
+	std::set<const d2d::Symbol*> m_unique;
 
 	SymbolSet m_symbol_set;
 

@@ -10,7 +10,7 @@ namespace ecomplex
 class LabelToSpr
 {
 public:
-	static d2d::ISprite* Trans(const librespacker::PackLabel* label);
+	static d2d::Sprite* Trans(const librespacker::PackLabel* label);
 
 }; // LabelToSpr
 

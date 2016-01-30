@@ -21,8 +21,8 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 	if (keyCode == WXK_SPACE)
 	{
 		d2d::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
-		std::vector<d2d::ISprite*> sprites;
-		selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		std::vector<d2d::Sprite*> sprites;
+		selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
@@ -43,7 +43,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
 		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
@@ -66,7 +66,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	////   		m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::Scale9Sprite>(sprites));
 	////   		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	////   		{
-	////   			d2d::ISprite* sprite = sprites[i];
+	////   			d2d::Sprite* sprite = sprites[i];
 	////   			if (&sprite->getSymbol() == &symbol)
 	////   				sprite->buildBounding();
 	////   		}

@@ -7,14 +7,14 @@
 #include "history/MirrorSpriteAOP.h"
 #include "history/OffsetSpriteAOP.h"
 #include "history/PerspectiveSpriteAOP.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/EditPanelImpl.h"
 #include "message/panel_msg.h"
 
 namespace d2d
 {
 
-SpritePropertyImpl::SpritePropertyImpl(EditPanelImpl* stage, ISprite* sprite)
+SpritePropertyImpl::SpritePropertyImpl(EditPanelImpl* stage, Sprite* sprite)
 	: m_stage(stage)
 	, m_sprite(NULL)
 {
@@ -39,7 +39,7 @@ void SpritePropertyImpl::Translate(float x, float y)
 
 	Vector new_pos(x, y);
 
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 	sprites.push_back(m_sprite);
 	EditAddRecordSJ::Instance()->Add(new TranslateSpriteAOP(sprites, new_pos - m_sprite->GetPosition()));
 
@@ -54,7 +54,7 @@ void SpritePropertyImpl::Rotate(float angle)
 
 	float offset_angle = angle - m_sprite->GetAngle();
 
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 	sprites.push_back(m_sprite);
 	EditAddRecordSJ::Instance()->Add(new RotateSpriteAOP(sprites, offset_angle));
 

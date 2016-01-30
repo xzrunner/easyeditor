@@ -18,8 +18,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
 
-	virtual d2d::ISprite* QuerySpriteByPos(const d2d::Vector& pos) const;
-	virtual void QuerySpritesByRect(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result) const;		
+	virtual d2d::Sprite* QuerySpriteByPos(const d2d::Vector& pos) const;
+	virtual void QuerySpritesByRect(const d2d::Rect& rect, std::vector<d2d::Sprite*>& result) const;		
 
 	libmodeling::Joint* queryJointByPos(const d2d::Vector& pos) const;
 	void queryJointsByRect(const d2d::Rect& rect, std::vector<libmodeling::Joint*>& result) const;
@@ -29,8 +29,8 @@ public:
 	}
 	void removeJoint(libmodeling::Joint* joint);
 
-	void traverseBodies(d2d::IVisitor& visitor) const;
-	void traverseJoints(d2d::IVisitor& visitor) const;
+	void traverseBodies(d2d::Visitor& visitor) const;
+	void traverseJoints(d2d::Visitor& visitor) const;
 
 protected:
 	//
@@ -40,34 +40,34 @@ protected:
 
 private:
 	static void loadBody(const wxString& filepath, libmodeling::Body& body);
-	static void loadBody(d2d::ISprite* sprite, libmodeling::Body& body);
+	static void loadBody(d2d::Sprite* sprite, libmodeling::Body& body);
 
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	void Insert(d2d::Sprite* spr);
+	void Remove(d2d::Sprite* spr);
 	void Clear();
 
 private:
-	class PointQueryVisitor : public d2d::IVisitor
+	class PointQueryVisitor : public d2d::Visitor
 	{
 	public:
-		PointQueryVisitor(const d2d::Vector& pos, d2d::ISprite** pResult);
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		PointQueryVisitor(const d2d::Vector& pos, d2d::Sprite** pResult);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 	private:
 		const d2d::Vector& m_pos;
-		d2d::ISprite** m_pResult;
+		d2d::Sprite** m_pResult;
 
 	}; // PointQueryVisitor
 
-	class RectQueryVisitor : public d2d::IVisitor
+	class RectQueryVisitor : public d2d::Visitor
 	{
 	public:
-		RectQueryVisitor(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result);
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		RectQueryVisitor(const d2d::Rect& rect, std::vector<d2d::Sprite*>& result);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 	private:
 		const d2d::Rect& m_rect;
-		std::vector<d2d::ISprite*>& m_result;
+		std::vector<d2d::Sprite*>& m_result;
 
 	}; // RectQueryVisitor
 

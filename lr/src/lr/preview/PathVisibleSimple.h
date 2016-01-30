@@ -19,7 +19,7 @@ public:
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const d2d::ISprite* spr, bool disable);
+	virtual void DisableRegion(const d2d::Sprite* spr, bool disable);
 	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
 	virtual void DebugDraw() const;
 
@@ -55,8 +55,8 @@ private:
 
 private:
 	// data struct
-	void InsertBoundary(const d2d::ISprite* spr);
-	void RemoveBoundary(std::map<const d2d::ISprite*, std::vector<Node*> >::iterator itr);
+	void InsertBoundary(const d2d::Sprite* spr);
+	void RemoveBoundary(std::map<const d2d::Sprite*, std::vector<Node*> >::iterator itr);
 
 	void BuildConnection(const std::vector<Node*>& nodes) const;
 	bool IsSegIntersectAllBound(const d2d::Vector& p0, const d2d::Vector& p1) const;
@@ -77,7 +77,7 @@ private:
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const d2d::ISprite*, std::vector<Node*> > m_bounds;
+	std::map<const d2d::Sprite*, std::vector<Node*> > m_bounds;
 	
 	int m_node_id;
 	std::map<int, Node*> m_nodes;

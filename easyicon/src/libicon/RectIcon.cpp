@@ -27,20 +27,20 @@ void RectIcon::StoreToFile(Json::Value& value) const
 
 void RectIcon::GetBound(float process, d2d::Vector bound[4]) const
 {
-	bound[0].set(m_min.x, m_min.y);
-	bound[1].set(m_min.x, m_max.y);
-	bound[2].set(m_max.x, m_max.y);
-	bound[3].set(m_max.x, m_min.y);
+	bound[0].Set(m_min.x, m_min.y);
+	bound[1].Set(m_min.x, m_max.y);
+	bound[2].Set(m_max.x, m_max.y);
+	bound[3].Set(m_max.x, m_min.y);
 }
 
 void RectIcon::SetRegion(const d2d::Rect& r)
 {
 	float w = m_img->GetClippedWidth(),
 		h = m_img->GetClippedHeight();
-	m_min.x = r.xMin / w + 0.5f;
-	m_min.y = r.yMin / h + 0.5f;
-	m_max.x = r.xMax / w + 0.5f;
-	m_max.y = r.yMax / h + 0.5f;
+	m_min.x = r.xmin / w + 0.5f;
+	m_min.y = r.ymin / h + 0.5f;
+	m_max.x = r.xmax / w + 0.5f;
+	m_max.y = r.ymax / h + 0.5f;
 
 	m_min.x = std::min(1.0f, std::max(0.0f, m_min.x));
 	m_min.y = std::min(1.0f, std::max(0.0f, m_min.y));

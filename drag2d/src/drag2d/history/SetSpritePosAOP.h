@@ -8,22 +8,22 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class SetSpritePosAOP : public AbstractAtomicOP
 {
 public:
-	SetSpritePosAOP(ISprite* sprite, const Vector& pos);
-	SetSpritePosAOP(const std::vector<ISprite*>& sprites, const Vector& pos);
+	SetSpritePosAOP(Sprite* sprite, const Vector& pos);
+	SetSpritePosAOP(const std::vector<Sprite*>& sprites, const Vector& pos);
 	virtual ~SetSpritePosAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 	std::vector<Vector> m_old_pos;
 
 	Vector m_new_pos;

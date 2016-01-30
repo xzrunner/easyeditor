@@ -119,22 +119,22 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 	op->SetMouseMoveFocus(true);
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dlg.GetPath().ToStdString(), files);
+	d2d::FileHelper::FetchAllFiles(dlg.GetPath().ToStdString(), files);
 
 	std::map<int, std::vector<std::string> > mapFrameSymbols;
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i];
-		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 			continue;
 
-		std::string name = d2d::FilenameTools::getFilename(filepath);
+		std::string name = d2d::FileHelper::GetFilename(filepath);
 		size_t mid = name.find('_');
 		if (mid == std::string::npos)
 			continue;
 
-		int item = d2d::StringTools::FromString<int>(name.substr(0, mid)),
-			frame = d2d::StringTools::FromString<int>(name.substr(mid+1));		
+		int item = d2d::StringHelper::FromString<int>(name.substr(0, mid)),
+			frame = d2d::StringHelper::FromString<int>(name.substr(mid+1));		
 		std::map<int, std::vector<std::string> >::iterator itr 
 			= mapFrameSymbols.find(frame);
 		if (itr == mapFrameSymbols.end())
@@ -161,9 +161,9 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 		KeyFrame* frame = new KeyFrame(itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(itr->second[i]);
 //			symbol->refresh();
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 			frame->Insert(sprite);
 			sprite->Release();
 			symbol->Release();
@@ -179,9 +179,9 @@ void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 
 void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 {
-	std::vector<d2d::ISymbol*> symbols;
+	std::vector<d2d::Symbol*> symbols;
 	ViewMgr::Instance()->img_page->GetList()->
-		Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
+		Traverse(d2d::FetchAllVisitor<d2d::Symbol>(symbols));
 	if (symbols.empty()) {
 		return;
 	}
@@ -198,7 +198,7 @@ void CommonCMPT::OnLoadFromList(wxCommandEvent& event)
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
 		KeyFrame* frame = new KeyFrame(frame_idx);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbols[i]);
 
 		frame->Insert(sprite);		
 		layer->InsertKeyFrame(frame);

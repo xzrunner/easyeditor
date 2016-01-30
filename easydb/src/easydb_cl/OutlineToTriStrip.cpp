@@ -34,19 +34,19 @@ void OutlineToTriStrip::Run(int argc, char *argv[])
 void OutlineToTriStrip::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 			continue;
 		}
 
-		wxString outline_path = d2d::FilenameTools::getFilenameAddTag(
+		wxString outline_path = d2d::FileHelper::GetFilenameAddTag(
 			filepath, eimage::OUTLINE_FILE_TAG, "json");
-		if (!d2d::FilenameTools::IsFileExist(filepath)) {
+		if (!d2d::FileHelper::IsFileExist(filepath)) {
 			continue;
 		}
 
@@ -59,23 +59,23 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 		fin.close();
 
 		std::vector<d2d::Vector> vertices;
-		d2d::JsonIO::Load(value["normal"], vertices);
+		d2d::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}
 
 		std::vector<d2d::Vector> tris;
-		d2d::Triangulation::normal(vertices, tris);
+		d2d::Triangulation::Normal(vertices, tris);
 		std::vector<std::vector<d2d::Vector> > strips;
 //		d2d::Triangulation::strips(tris, strips);
 		strips.push_back(tris);
 
 		Json::Value value_out;
 		for (int i = 0, n = strips.size(); i < n; ++i) {
-			d2d::JsonIO::Store(strips[i], value_out["strips"][i]);
+			d2d::JsonSerializer::Store(strips[i], value_out["strips"][i]);
 		}
 
-		wxString out_file = d2d::FilenameTools::getFilenameAddTag(filepath, 
+		wxString out_file = d2d::FileHelper::GetFilenameAddTag(filepath, 
 			eimage::TRI_STRIP_FILE_TAG, "json");
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));

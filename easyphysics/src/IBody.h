@@ -8,13 +8,13 @@
 namespace ephysics
 {
 
-class IBody : public d2d::ICloneable, public d2d::Object
+class IBody : public d2d::Cloneable, public d2d::Object
 {
 public:
 	virtual ~IBody();
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual IBody* Clone() const;
 

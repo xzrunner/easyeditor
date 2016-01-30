@@ -54,4 +54,4 @@ void IPropertySetting::SplitString2Double(const wxAny& value, double* x, double*
 	sy.ToDouble(y);
 }
 
-} // d2d
+}

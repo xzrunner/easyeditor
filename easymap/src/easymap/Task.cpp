@@ -33,14 +33,14 @@ void Task::Load(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(filename);
+	wxString dir = d2d::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value spr_val = value["sprites"][i++];
 	while (!spr_val.isNull()) {
 		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 		symbol->Release();
 		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
@@ -52,14 +52,14 @@ void Task::Load(const char* filename)
 
 void Task::Store(const char* filename) const
 {
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
 	Json::Value value;
-	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+	wxString dir = d2d::FileHelper::GetFileDir(filename) + "\\";
 	for (size_t i = 0; i < sprites.size(); ++i) {
-		d2d::ISprite* spr = sprites[i];
-		value["sprites"][i]["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+		d2d::Sprite* spr = sprites[i];
+		value["sprites"][i]["filepath"] = d2d::FileHelper::GetRelativePath(dir,
 			spr->GetSymbol().GetFilepath()).ToStdString();
 		spr->Store(value["sprites"][i]);
 	}
@@ -80,9 +80,9 @@ bool Task::IsDirty() const
 	return false;
 }
 
-void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

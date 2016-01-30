@@ -17,7 +17,7 @@ public:
 		int index = 1, 
 		const d2d::ColorTrans& color = d2d::ColorTrans());
 
-	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::ISprite*>& sprites);
+	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::Sprite*>& sprites);
 
 private:
 	static Symbol::Frame* GetCurrFrame(Symbol::Layer* layer, int index);

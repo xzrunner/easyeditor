@@ -25,12 +25,12 @@ private:
 	void Rotate(const e3d::Camera& cam, const ivec2& start, const ivec2& end);
 
 private:
-	class Visitor : public d2d::IVisitor
+	class Visitor : public d2d::Visitor
 	{
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const ivec2& start, const ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 	private:
 		StagePanel* m_stage;

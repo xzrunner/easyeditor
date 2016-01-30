@@ -19,7 +19,7 @@ namespace eparticle3d
 class AnimRecorder;
 class InvertRecord;
 
-class ParticleSystem : public d2d::Object, public d2d::ICloneable, public d2d::UICallback
+class ParticleSystem : public d2d::Object, public d2d::Cloneable, public d2d::UICallback
 {
 public:
 	ParticleSystem(p3d_emitter_cfg* cfg, bool record);
@@ -28,7 +28,7 @@ public:
 	virtual ~ParticleSystem();
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual ParticleSystem* Clone() const { return new ParticleSystem(*this); }
 
@@ -71,7 +71,7 @@ public:
 
 	void SetOrientToMovement(bool open);
 
-	p3d_symbol* AddSymbol(d2d::ISymbol* symbol);
+	p3d_symbol* AddSymbol(d2d::Symbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);

@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 			try {
 				cmd->Run(argc, argv);
 			} catch (d2d::Exception& e) {
-				std::cout << e.what() << std::endl;
+				std::cout << e.What() << std::endl;
 				return -1;
 			}
 		}

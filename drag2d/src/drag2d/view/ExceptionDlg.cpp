@@ -8,7 +8,7 @@ namespace d2d
 ExceptionDlg::ExceptionDlg(wxWindow* parent, const Exception& exp)
 	: BaseDialog(parent, "Exception", wxDefaultPosition, wxSize(600, 480))
 {
-	InitLayout(exp.what());
+	InitLayout(exp.What());
 }
 
 ExceptionDlg::ExceptionDlg(wxWindow* parent, const std::string& msg)

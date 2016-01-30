@@ -9,13 +9,13 @@ namespace d2d
 {
 
 class EditPanelImpl;
-class ISprite;
+class Sprite;
 class SpritePropertyImpl;
 
 class SpritePropertySetting : public IPropertySetting, public Observer
 {
 public:
-	SpritePropertySetting(EditPanelImpl* stage, ISprite* sprite);
+	SpritePropertySetting(EditPanelImpl* stage, Sprite* sprite);
 	virtual ~SpritePropertySetting();
 
 	//
@@ -35,7 +35,7 @@ protected:
 	//
 	virtual void OnNotify(int sj_id, void* ud);
 
-	ISprite* GetSprite();
+	Sprite* GetSprite();
 
 private:
 	SpritePropertyImpl* m_impl;

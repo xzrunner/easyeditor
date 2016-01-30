@@ -10,7 +10,7 @@ PathGrid::PathGrid(const d2d::Rect& region, int row, int col)
 {
 }
 
-void PathGrid::DisableRegion(const d2d::ISprite* spr, bool disable)
+void PathGrid::DisableRegion(const d2d::Sprite* spr, bool disable)
 {
 	m_nw.SetStatus(spr->GetRect(), !disable);
 }
@@ -22,8 +22,8 @@ void PathGrid::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 		return;
 	}
 
-	float dx = -m_nw.m_region.xLength() * 0.5f,
-		dy = -m_nw.m_region.yLength() * 0.5f;
+	float dx = -m_nw.m_region.Width() * 0.5f,
+		dy = -m_nw.m_region.Height() * 0.5f;
 	m_routes.clear();
 	while (node) {
 		int y = node->m_id / m_nw.m_col;
@@ -36,7 +36,7 @@ void PathGrid::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 void PathGrid::DebugDraw() const
 {
 	m_nw.DebugDraw();	
-	d2d::PrimitiveDraw::drawPolyline(m_routes, d2d::LIGHT_RED, false);
+	d2d::PrimitiveDraw::DrawPolyline(m_routes, d2d::LIGHT_RED, false);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -50,8 +50,8 @@ Network(const d2d::Rect& region, int row, int col)
 	, m_col(col)
 	, m_visited(this)
 {
-	m_width = m_region.xLength() / m_col;
-	m_height = m_region.yLength() / m_row;
+	m_width = m_region.Width() / m_col;
+	m_height = m_region.Height() / m_row;
 
 	int sz = m_row * m_col;
 	m_nodes = new Node[sz];
@@ -70,7 +70,7 @@ d2d::Vector PathGrid::Network::
 TransIDToPos(int id) const
 {
 	d2d::Vector ret;
-	ret.setInvalid();
+	ret.SetInvalid();
 
 	int y = id / m_col;
 	int x = id - y * m_col;
@@ -79,8 +79,8 @@ TransIDToPos(int id) const
 		return ret;
 	}
 
-	ret.x = m_width * x - m_region.xLength() * 0.5f;
-	ret.y = m_height * y - m_region.yLength() * 0.5f;
+	ret.x = m_width * x - m_region.Width() * 0.5f;
+	ret.y = m_height * y - m_region.Height() * 0.5f;
 
 	return ret;
 }
@@ -88,14 +88,14 @@ TransIDToPos(int id) const
 void PathGrid::Network::
 SetStatus(const d2d::Rect& region, bool used)
 {
-	if (!d2d::Math::isRectContainRect(m_region, region)) {
+	if (!d2d::Math2D::IsRectContainRect(m_region, region)) {
 		return;
 	}
 
-	int xs = std::floor((region.xMin - m_region.xMin) / m_width),
-		xe = std::ceil((region.xMax - m_region.xMin) / m_width);
-	int ys = std::floor((region.yMin - m_region.yMin) / m_height),
-		ye = std::ceil((region.yMax - m_region.yMin) / m_height);
+	int xs = std::floor((region.xmin - m_region.xmin) / m_width),
+		xe = std::ceil((region.xmax - m_region.xmin) / m_width);
+	int ys = std::floor((region.ymin - m_region.ymin) / m_height),
+		ye = std::ceil((region.ymax - m_region.ymin) / m_height);
 	for (int y = ys; y < ye; ++y) {
 		for (int x = xs; x < xe; ++x) {
 			m_nodes[y * m_col + x].m_used = used;
@@ -106,7 +106,7 @@ SetStatus(const d2d::Rect& region, bool used)
 VisitedNode* PathGrid::Network::
 QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 {
-	if (!d2d::Math::isPointInRect(start, m_region) || !d2d::Math::isPointInRect(end, m_region)) {
+	if (!d2d::Math2D::IsPointInRect(start, m_region) || !d2d::Math2D::IsPointInRect(end, m_region)) {
 		return NULL;
 	}
 
@@ -134,8 +134,8 @@ QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 void PathGrid::Network::
 DebugDraw() const
 {
-	float dx = -m_region.xLength() * 0.5f,
-		dy = -m_region.yLength() * 0.5f;
+	float dx = -m_region.Width() * 0.5f,
+		dy = -m_region.Height() * 0.5f;
 	int idx = 0;
 	for (int y = 0; y < m_row; ++y) {
 		for (int x = 0; x < m_col; ++x) {
@@ -144,7 +144,7 @@ DebugDraw() const
 			}
 			d2d::Vector p0(x * m_width + dx, y * m_height + dy);
 			d2d::Vector p1(p0.x + m_width, p0.y + m_height);
-			d2d::PrimitiveDraw::rect(d2d::Matrix(), p0, p1, d2d::LIGHT_GREEN_FACE);
+			d2d::PrimitiveDraw::DrawRect(d2d::Matrix(), p0, p1, d2d::LIGHT_GREEN_FACE);
 		}
 	}
 
@@ -154,12 +154,12 @@ DebugDraw() const
 PathGrid::Node* PathGrid::Network::
 QueryNode(const d2d::Vector& pos) const
 {
-	if (!d2d::Math::isPointInRect(pos, m_region)) {
+	if (!d2d::Math2D::IsPointInRect(pos, m_region)) {
 		return NULL;
 	}
 
-	float dx = m_region.xLength() * 0.5f,
-		dy = m_region.yLength() * 0.5f;
+	float dx = m_region.Width() * 0.5f,
+		dy = m_region.Height() * 0.5f;
 	int x = std::floor((pos.x+dx) / m_width),
 		y = std::floor((pos.y+dy) / m_height);
 	return &m_nodes[y * m_col + x];
@@ -187,7 +187,7 @@ Expand(VisitedNode* node, const d2d::Vector& end)
 		}
 		else
 		{
-			float to = d2d::Math::getDistance(end, TransIDToPos(ct.n->id));
+			float to = d2d::Math2D::GetDistance(end, TransIDToPos(ct.n->id));
 			VisitedNode* new_node = new VisitedNode(ct.n->id, node, node->m_from + ct.len, to);
 			m_visited.Push(new_node);
 			m_candidate.Push(new_node);

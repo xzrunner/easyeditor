@@ -5,7 +5,7 @@
 #include "common/config.h"
 #include "common/SettingData.h"
 #include "common/StringTools.h"
-#include "dataset/ISymbol.h"
+#include "dataset/Symbol.h"
 
 namespace d2d
 {
@@ -72,7 +72,7 @@ ListItem* LibraryList::GetItem(int index/* = -1*/) const
 void LibraryList::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_items.size(); i < n; ++i)
-		static_cast<ISymbol*>(m_items[i])->ReloadTexture();
+		static_cast<Symbol*>(m_items[i])->ReloadTexture();
 }
 
 void LibraryList::OnKeyDown(wxKeyEvent& event)
@@ -109,7 +109,7 @@ void LibraryList::OnMouseEvent(wxMouseEvent& event)
 	std::string text = m_name + ",";
 	std::set<int>::iterator itr = m_selection_set.begin();
 	for ( ; itr != m_selection_set.end(); ++itr) {
-		text += StringTools::ToString(*itr) + ",";
+		text += StringHelper::ToString(*itr) + ",";
 	}
 
 	wxTextDataObject tdo(text);
@@ -117,4 +117,4 @@ void LibraryList::OnMouseEvent(wxMouseEvent& event)
 	ds.DoDragDrop(wxDrag_CopyOnly);
 }
 
-} // d2d
+}

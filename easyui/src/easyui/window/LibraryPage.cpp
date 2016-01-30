@@ -13,7 +13,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	InitLayout();
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 // 	return dynamic_cast<d2d::ImageSymbol*>(symbol) != NULL
 // 		|| dynamic_cast<ecomplex::Symbol*>(symbol) != NULL;
@@ -32,7 +32,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			std::string filepath = filenames[i].ToStdString();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
 			m_list->Insert(symbol);
 			symbol->Release();

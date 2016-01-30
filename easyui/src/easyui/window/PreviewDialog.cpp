@@ -7,7 +7,7 @@ namespace window
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx, int width, 
-							 int height, const std::vector<const d2d::ISprite*>& sprites)
+							 int height, const std::vector<const d2d::Sprite*>& sprites)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(width, height), wxCLOSE_BOX | wxCAPTION)
 	, m_sprites(sprites)
 	, m_control(0.033f)

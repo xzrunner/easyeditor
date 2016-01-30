@@ -8,8 +8,8 @@ namespace d2d
 
 MoveSpriteState::MoveSpriteState(SpriteSelection* selection)
 {
-	m_center.set(0, 0);
-	selection->Traverse(FetchAllVisitor<ISprite>(m_sprites));
+	m_center.Set(0, 0);
+	selection->Traverse(FetchAllVisitor<Sprite>(m_sprites));
 	if (!m_sprites.empty())
 	{
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -38,7 +38,7 @@ bool MoveSpriteState::OnMouseMove(const Vector& pos)
 
 	assert(m_sprites.size() == m_offset.size());
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* spr = m_sprites[i];
+		Sprite* spr = m_sprites[i];
 		spr->SetTransform(pos + m_offset[i], spr->GetAngle());
 	}
 

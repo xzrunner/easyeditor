@@ -12,9 +12,9 @@ public:
 	Quadtree(const d2d::Rect& rect);
 	~Quadtree();
 
-	void Insert(const d2d::ISprite* spr);
+	void Insert(const d2d::Sprite* spr);
 	
-	std::vector<const d2d::ISprite*> Query(const d2d::Rect& rect) const;
+	std::vector<const d2d::Sprite*> Query(const d2d::Rect& rect) const;
 
 	void DebugDraw() const;
 
@@ -27,19 +27,19 @@ private:
 		Node(const d2d::Rect& rect);
 		~Node();
 
-		void Insert(const d2d::ISprite* spr);
+		void Insert(const d2d::Sprite* spr);
 
 		bool IsLeaf() const;
 
 	private:
 		bool IsIntersect(const d2d::Rect& rect) const;
 		bool IsContain(const d2d::Vector& pos) const;
-		bool IsContain(const d2d::ISprite* spr) const;
+		bool IsContain(const d2d::Sprite* spr) const;
 
 		bool NeedSplit() const;
 		void Split();
 
-		float GetContainArea(const d2d::ISprite* spr) const;
+		float GetContainArea(const d2d::Sprite* spr) const;
 
 	private:
 		static const int MAX_COUNT;
@@ -53,7 +53,7 @@ private:
 		// 2 3
 		Node* m_children[4];
 
-		std::vector<const d2d::ISprite*> m_sprites;
+		std::vector<const d2d::Sprite*> m_sprites;
 
 		friend class Quadtree;
 

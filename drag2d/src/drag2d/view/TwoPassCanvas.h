@@ -19,7 +19,7 @@ protected:
 public:
 	struct ScreenStyle
 	{
-		d2d::Colorf multi_col, add_col;
+		Colorf multi_col, add_col;
 	};
 
 protected:

@@ -12,7 +12,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
@@ -51,7 +51,7 @@ void LibraryPage::LoadDefaultSymbol()
 // 		dlg.GetPaths(filenames);
 // 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 // 		{
-//  			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+//  			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 //  			m_list->insert(symbol);
 //  			symbol->Release();
 // 		}

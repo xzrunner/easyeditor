@@ -8,19 +8,19 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class OffsetSpriteState : public IArrangeSpriteState
 {
 public:
-	OffsetSpriteState(ISprite* sprite);
+	OffsetSpriteState(Sprite* sprite);
 	virtual ~OffsetSpriteState();
 
 	virtual void OnMouseRelease(const Vector& pos);
 	virtual	bool OnMouseDrag(const Vector& pos);
 
 private:
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 	Vector m_old_offset;
 

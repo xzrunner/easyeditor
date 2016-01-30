@@ -1,8 +1,8 @@
 #include "ScaleSpriteState.h"
 
 #include "common/Matrix.h"
-#include "dataset/ISymbol.h"
-#include "dataset/ISprite.h"
+#include "dataset/Symbol.h"
+#include "dataset/Sprite.h"
 #include "history/ArrangeSpriteAtomicOP.h"
 #include "history/CombineAOP.h"
 #include "history/TranslateSpriteAOP.h"
@@ -12,7 +12,7 @@
 namespace d2d
 {
 
-ScaleSpriteState::ScaleSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node)
+ScaleSpriteState::ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node)
 	: m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
@@ -51,9 +51,9 @@ void ScaleSpriteState::Scale(const Vector& curr)
 	Vector ori = ctrls[m_ctrl_node.type];
 	Vector center = m_sprite->GetPosition() + m_sprite->GetOffset();
 	Vector fix;
-	Math::getFootOfPerpendicular(center, ori, curr, &fix);
+	Math2D::GetFootOfPerpendicular(center, ori, curr, &fix);
 
-	float scale_times = Math::getDistance(center, fix) / Math::getDistance(center, ori);
+	float scale_times = Math2D::GetDistance(center, fix) / Math2D::GetDistance(center, ori);
 	if (fabs(scale_times - 1) < FLT_EPSILON) {
 		return;
 	}

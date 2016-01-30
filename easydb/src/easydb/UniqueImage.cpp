@@ -43,16 +43,16 @@ void UniqueImage::Trigger(const std::string& imgdir, const std::string& jsondir)
 void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(imgdir, files);
+	d2d::FileHelper::FetchAllFiles(imgdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 		{
 			std::string imgpath(filepath.c_str());
-			d2d::StringTools::ToLower(imgpath);
+			d2d::StringHelper::ToLower(imgpath);
 
 			char sig[32];
 			md5_file(imgpath.c_str(), sig);
@@ -82,14 +82,14 @@ void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 void UniqueImage::ProcessJsonFiles(const std::string& jsondir)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(jsondir, files);
+	d2d::FileHelper::FetchAllFiles(jsondir, files);
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 			std::string filename = filepath.ToStdString();
 			FixImagePath(filename);
 		}
@@ -120,7 +120,7 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 	Json::Value outValue = value;
 	bool dirty = false;
 
-	wxString dir = d2d::FilenameTools::getFileDir(animpath);
+	wxString dir = d2d::FileHelper::GetFileDir(animpath);
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
@@ -132,10 +132,10 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 			Json::Value entryValue = frameValue["actor"][k++];
 			while (!entryValue.isNull()) {
 				std::string filepath = entryValue["filepath"].asString();
-				if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) 
+				if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) 
 				{
-					filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-					d2d::StringTools::ToLower(filepath);
+					filepath = d2d::FileHelper::GetAbsolutePath(dir, filepath);
+					d2d::StringHelper::ToLower(filepath);
 
 					std::map<std::string, std::string>::iterator itr_img
 						= m_map_image_2_md5.find(filepath);
@@ -151,7 +151,7 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 						dirty = true;
 
   						const wxString& absolute = itr_md5->second;
-  						wxString relative = d2d::FilenameTools::getRelativePath(dir, absolute);
+  						wxString relative = d2d::FileHelper::GetRelativePath(dir, absolute);
   						outValue["layer"][i-1]["frame"][j-1]["actor"][k-1]["filepath"] = relative.ToStdString();
 					}
 				}

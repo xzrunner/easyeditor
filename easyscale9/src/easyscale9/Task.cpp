@@ -22,7 +22,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_scale9)) {
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_scale9)) {
 		FileIO::load(filepath, m_library, m_stage, m_toolbar);
 	}
 }

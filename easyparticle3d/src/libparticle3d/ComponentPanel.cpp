@@ -83,8 +83,8 @@ void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
-	name = d2d::FilenameTools::getFilename(name);
+	std::string name = static_cast<d2d::Symbol*>(m_pc->ud)->GetFilepath();
+	name = d2d::FileHelper::GetFilename(name);
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -123,8 +123,8 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		hori_sizer->AddSpacer(20);
 		// Right Icon
 		{
-			std::string filepath = static_cast<d2d::ISymbol*>(m_pc->ud)->GetFilepath();
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+			std::string filepath = static_cast<d2d::Symbol*>(m_pc->ud)->GetFilepath();
+			if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 				d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
 			}
@@ -190,7 +190,7 @@ void ComponentPanel::OnDelete(wxCommandEvent& event)
 
 void ComponentPanel::OnBindPS(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	wxString filter = d2d::FileType::GetTag(d2d::FileType::e_particle3d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)

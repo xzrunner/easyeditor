@@ -19,7 +19,7 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 	d2d::InsertShapeSJ::Instance()->Insert(curve);
 
 	m_polyline.clear();
-	m_currPos.setInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }

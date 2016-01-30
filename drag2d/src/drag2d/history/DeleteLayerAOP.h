@@ -8,7 +8,7 @@ namespace d2d
 
 class Layer;
 class LayerList;
-class IShape;
+class Shape;
 
 class DeleteLayerAOP : public AbstractAtomicOP
 {
@@ -19,14 +19,14 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
 	LayerList* m_list;
 
 	Layer* m_layer;
-	std::vector<ISprite*> m_sprites;
-	std::vector<IShape*> m_shapes;
+	std::vector<Sprite*> m_sprites;
+	std::vector<Shape*> m_shapes;
 
 }; // DeleteLayerAOP
 

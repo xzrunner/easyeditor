@@ -47,7 +47,7 @@ void Projection2DScene::Draw() const
 {
 	assert(m_buildings.size() == m_positions.size());
 	for (int i = 0, n = m_buildings.size(); i < n; ++i) {
-		d2d::ISymbol* sym = m_buildings[i];
+		d2d::Symbol* sym = m_buildings[i];
 
 		d2d::Vector pos;
 		float scale;

@@ -21,7 +21,7 @@ SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, OrthoCanvas* canvas
 		wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
 	Connect(drawChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
 		wxCommandEventHandler(SelectDrawTypeWidget::onSetDrawType));
-	drawChoice->SetSelection(Settings::drawType);
+	drawChoice->SetSelection(Settings::draw_type);
 
 	sizer->Add(drawChoice);
 
@@ -30,8 +30,8 @@ SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, OrthoCanvas* canvas
 
 void SelectDrawTypeWidget::onSetDrawType(wxCommandEvent& event)
 {
-	Settings::drawType = static_cast<Settings::DrawType>(event.GetSelection());
+	Settings::draw_type = static_cast<Settings::DrawType>(event.GetSelection());
 	m_canvas->Refresh(true);
 }
 
-} // d2d
+}

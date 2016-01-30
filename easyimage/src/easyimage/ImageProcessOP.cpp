@@ -18,7 +18,7 @@ bool ImageProcessOP::OnActive()
 		return true;
 	}
 
-	if (const d2d::ISprite* sprite = m_stage->getImage())
+	if (const d2d::Sprite* sprite = m_stage->getImage())
 	{
 		d2d::Rect r = sprite->GetSymbol().GetSize();
 

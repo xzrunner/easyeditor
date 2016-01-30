@@ -18,10 +18,10 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 		return false;
 	}
 
-	const d2d::ISprite* s_left = m_stage->getLeft();
-	const d2d::ISprite* s_right = m_stage->getRight();
-	d2d::Image* left = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_left)->GetSymbol()).getImage();
-	d2d::Image* right = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_right)->GetSymbol()).getImage();
+	const d2d::Sprite* s_left = m_stage->getLeft();
+	const d2d::Sprite* s_right = m_stage->getRight();
+	d2d::Image* left = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_left)->GetSymbol()).GetImage();
+	d2d::Image* right = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_right)->GetSymbol()).GetImage();
 	d2d::Vector p = m_stage->TransPosScrToProj(x, y);
 
 	m_stage->getLeft()->GetSymbol().GetSize();
@@ -40,7 +40,7 @@ bool PixelDiffOP::OnDraw() const
 {
 // 	if (d2d::ZoomViewOP::OnDraw()) return true;
 // 
-// 	d2d::PrimitiveDraw::drawLine(d2d::Vector(0, -1024), d2d::Vector(0, 1024), d2d::LIGHT_GREY);
+// 	d2d::PrimitiveDraw::DrawLine(d2d::Vector(0, -1024), d2d::Vector(0, 1024), d2d::LIGHT_GREY);
 
 	return false;
 }

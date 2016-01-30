@@ -19,12 +19,12 @@ void FileIO::load(const char* filename, StagePanel* stage)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
 
 	int i = 0;
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
-		d2d::ISprite* sprite = load(imgValue, stage, dir);
+		d2d::Sprite* sprite = load(imgValue, stage, dir);
 		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		imgValue = value["image"][i++];
 	}
@@ -36,10 +36,10 @@ void FileIO::store(const char* filename, StagePanel* stage)
 {
 	Json::Value value;
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
 
-	std::vector<d2d::ISprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		value["image"][i] = store(sprites[i], stage, dir);
 	}
@@ -52,17 +52,17 @@ void FileIO::store(const char* filename, StagePanel* stage)
 	fout.close();
 }
 
-d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
+d2d::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
 {
 	int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
 	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	SetSymbolUserData(symbol);
 
 	d2d::Vector pos;
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 	sprite->tag = value["tag"].asString();
 	symbol->Release();
 
@@ -96,12 +96,12 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	return sprite;
 }
 
-Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage, 
+Json::Value FileIO::store(const d2d::Sprite* sprite, StagePanel* stage, 
 						  const std::string& dir)
 {
 	Json::Value value;
 
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+	value["filepath"] = d2d::FileHelper::GetRelativePath(dir,
 		sprite->GetSymbol().GetFilepath()).ToStdString();
 
 	int row, col;
@@ -131,7 +131,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 	return value;
 }
 
-void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
+void FileIO::SetSymbolUserData(d2d::Symbol* symbol)
 {
 	if (symbol->GetUserData()) {
 		return;
@@ -147,7 +147,7 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 	std::string wall_path = filepath.substr(0, pos) + ".png";
 
 	try {
-		d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(wall_path);
+		d2d::Symbol* wall_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(wall_path);
 		if (!wall_symbol || !wall_symbol->GetUserData()) {
 			return;
 		}

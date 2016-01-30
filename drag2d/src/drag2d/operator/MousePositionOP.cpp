@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-MousePositionOP::MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+MousePositionOP::MousePositionOP(wxWindow* wnd, EditPanelImpl* stage, 
 								 MousePositionCMPT* cmpt)
 	: ZoomViewOP(wnd, stage, true)
 	, m_cmpt(cmpt)
@@ -22,4 +22,4 @@ bool MousePositionOP::OnMouseMove(int x, int y)
 	return false;
 }
 
-} // d2d
+}

@@ -61,7 +61,7 @@
 //	}
 //}
 //
-//void StageData::ChangePSSymbol(d2d::ISymbol* symbol)
+//void StageData::ChangePSSymbol(d2d::Symbol* symbol)
 //{
 //	if (!m_ps) {
 //		m_ps = new ParticleSystem(1000);

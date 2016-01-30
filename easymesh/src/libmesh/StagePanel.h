@@ -22,7 +22,7 @@ public:
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(d2d::IVisitor& visitor, 
+	virtual void TraverseShapes(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
 	void SetSymbol(Symbol* symbol);
@@ -32,18 +32,18 @@ public:
 // 	Sprite* getSprite() { return m_sprite; }
 
 	// for background
-	void SetBackground(d2d::ISprite* bg) { 
+	void SetBackground(d2d::Sprite* bg) { 
 		bg->Retain();
 		m_background = bg; 
 	}
-	const d2d::ISprite* GetBackground() const { return m_background; }
+	const d2d::Sprite* GetBackground() const { return m_background; }
 	void TranslateBackground(const d2d::Vector& offset) { 
 		if (m_background) {
 			m_background->Translate(offset);
 		}
 	}
 
-	void LoadFromSymbol(const d2d::ISymbol* symbol);
+	void LoadFromSymbol(const d2d::Symbol* symbol);
 
 	void UpdateSymbol();
 
@@ -66,7 +66,7 @@ private:
 	public:
 		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
 
-		virtual bool OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos);
+		virtual bool OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos);
 
 	private:
 		StagePanel* m_stage;
@@ -74,7 +74,7 @@ private:
 	}; // StageDropTarget 
 
 private:
-	d2d::ISprite* m_background;
+	d2d::Sprite* m_background;
 
 	Symbol* m_symbol;
 

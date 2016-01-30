@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::ISprite* edited, 
+					   wxGLContext* glctx, d2d::Sprite* edited, 
 					   const d2d::MultiSpritesImpl* bg_sprites, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
@@ -58,11 +58,11 @@ bool StagePanel::Update(int version)
 
 void StagePanel::Store(const std::string& dir, Json::Value& value) const
 {
-	std::vector<d2d::ISprite*> bg_sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(bg_sprites));
+	std::vector<d2d::Sprite*> bg_sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(bg_sprites));
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
-		d2d::ISprite* bg = bg_sprites[i];
-		value["bg"][i]["filepath"] = d2d::FilenameTools::getRelativePath(
+		d2d::Sprite* bg = bg_sprites[i];
+		value["bg"][i]["filepath"] = d2d::FileHelper::GetRelativePath(
 			dir, bg->GetSymbol().GetFilepath()).ToStdString();
 		bg->Store(value["bg"][i]);
 	}
@@ -79,8 +79,8 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 	Json::Value bg_val = value["bg"][i++];
 	while (!bg_val.isNull()) {
 		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::ISprite* bg = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		d2d::Sprite* bg = d2d::SpriteFactory::Instance()->Create(symbol);
 		bg->Load(bg_val);
 		d2d::InsertSpriteSJ::Instance()->Insert(bg);
 		symbol->Release();
@@ -97,8 +97,8 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 			d2d::InsertShapeSJ::Instance()->Insert(
 				const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));
-			if (const d2d::ISymbol* tex1 = ocean->GetImage1()) {
-				library->AddSymbol(const_cast<d2d::ISymbol*>(tex1));
+			if (const d2d::Symbol* tex1 = ocean->GetImage1()) {
+				library->AddSymbol(const_cast<d2d::Symbol*>(tex1));
 			}
 			toolbar->SetControlersValue(ocean);
 		}
@@ -153,17 +153,17 @@ StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
+OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos)
 {
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
-		d2d::IShape* shape = m_stage->QueryShapeByPos(pos);
+		d2d::Shape* shape = m_stage->QueryShapeByPos(pos);
 		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
 			poly->SetMaterialTexture(image);
 			m_stage->AddOcean(poly, image);
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else {
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 			sprite->Translate(pos);
 			d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		}

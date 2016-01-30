@@ -18,8 +18,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString anim_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim));
-		wxString inv_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_p3dinv));
+		wxString anim_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anim));
+		wxString inv_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_p3dinv));
 		wxString filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
@@ -44,7 +44,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 
 void Frame::SaveAsParticle3d(const wxString& filepath) const
 {
-	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	wxString fixed = d2d::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }

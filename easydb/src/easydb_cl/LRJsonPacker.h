@@ -37,7 +37,7 @@ private:
 		const char* name, Json::Value& out_val);
 	void ParserShapeFromShape(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
 		const char* name, Json::Value& out_val);	
-	void ParserShape(d2d::IShape* shape, const d2d::Vector& offset, float angle,
+	void ParserShape(d2d::Shape* shape, const d2d::Vector& offset, float angle,
 		const lr::Grids& grids, bool force_grids, Json::Value& out_val);
 	
 	void ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);

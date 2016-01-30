@@ -9,7 +9,7 @@ namespace librespacker
 class Utility
 {
 public:
-	static bool IsAnchor(const d2d::ISprite* spr);
+	static bool IsAnchor(const d2d::Sprite* spr);
 
 	static bool IsNameValid(const std::string& name);
 

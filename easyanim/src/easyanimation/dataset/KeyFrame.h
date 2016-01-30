@@ -24,17 +24,17 @@ public:
 		return m_sprites.empty();
 	}
 
-	void Insert(d2d::ISprite* sprite);
-	bool Remove(d2d::ISprite* sprite);
-	bool Reorder(const d2d::ISprite* sprite, bool up);
-	bool ReorderMost(const d2d::ISprite* sprite, bool up);
+	void Insert(d2d::Sprite* sprite);
+	bool Remove(d2d::Sprite* sprite);
+	bool Reorder(const d2d::Sprite* sprite, bool up);
+	bool ReorderMost(const d2d::Sprite* sprite, bool up);
 
 	int Size() const { return m_sprites.size(); }
-	const d2d::ISprite* GetSprite(int index) {
+	const d2d::Sprite* GetSprite(int index) {
 		return index >= 0 && index < m_sprites.size() ? m_sprites[index] : NULL;
 	}
 
-	const std::vector<d2d::ISprite*>& GetAllSprites() const { return m_sprites; }
+	const std::vector<d2d::Sprite*>& GetAllSprites() const { return m_sprites; }
 
 	bool HasClassicTween() const { return m_classic_tween; }
 	void SetClassicTween(bool tween = true) { m_classic_tween = tween; }
@@ -46,7 +46,7 @@ public:
 
 	SkeletonData& GetSkeletonData() { return m_skeletonData; }
 
-	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process) const;
+	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::Sprite*>& tween, float process) const;
 
 	int GetID() const { return m_id; }
 	void SetID(int id) { m_id = id; }
@@ -54,14 +54,14 @@ public:
 	void OnActive();
 
 private:
-	void GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
+	void GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end, d2d::Sprite* tween, float process) const;
 
-	bool IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1) const;
+	bool IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1) const;
 
 private:
 	int m_time;
 
-	std::vector<d2d::ISprite*> m_sprites;
+	std::vector<d2d::Sprite*> m_sprites;
 
 	bool m_classic_tween;
 

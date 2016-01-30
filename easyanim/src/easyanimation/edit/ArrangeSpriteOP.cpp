@@ -116,13 +116,13 @@ ArrangeSpriteOP::Cross::Cross()
 
 void ArrangeSpriteOP::Cross::Draw() const
 {
-	d2d::PrimitiveDraw::drawCircle(pos, RADIUS, false, 1, d2d::LIGHT_RED);
-	d2d::PrimitiveDraw::cross(pos, LENGTH, d2d::LIGHT_RED, 1);
+	d2d::PrimitiveDraw::DrawCircle(pos, RADIUS, false, 1, d2d::LIGHT_RED);
+	d2d::PrimitiveDraw::Cross(pos, LENGTH, d2d::LIGHT_RED, 1);
 }
 
 bool ArrangeSpriteOP::Cross::Contain(const d2d::Vector& p) const
 {
-	return d2d::Math::getDistance(pos, p) < RADIUS;
+	return d2d::Math2D::GetDistance(pos, p) < RADIUS;
 }
 
 } // eanim

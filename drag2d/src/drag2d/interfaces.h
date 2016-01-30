@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class EditPanel;
 class ITask
 {
@@ -14,7 +14,7 @@ public:
 	virtual void Load(const char* filename) = 0;
 	virtual void Store(const char* filename) const = 0;
 	virtual bool IsDirty() const = 0;
-	virtual void GetAllSprite(std::vector<const ISprite*>& sprites) const = 0;
+	virtual void GetAllSprite(std::vector<const Sprite*>& sprites) const = 0;
 	virtual const EditPanel* GetEditPanel() const = 0;
 	virtual ~ITask() {}
 };
@@ -29,13 +29,6 @@ public:
 	virtual ~IObjectStream() {}
 };
 
-class IVisitor
-{
-public:
-	virtual void Visit(Object* object, bool& bFetchNext) = 0;
-	virtual ~IVisitor() {}
-}; // IVisitor
-
 // 	class ISerializable
 // 	{
 // 	public:
@@ -44,23 +37,8 @@ public:
 // 		virtual ~ISerializable() {}
 // 	}; // ISerializable
 
-class ICloneable 
-{
-public:
-	virtual ICloneable* Clone() const = 0;
-	virtual ~ICloneable() {}
-}; // ICloneable
-
-class ISprite;
+class Sprite;
 class Vector;
-
-class ISpriteObserver
-{
-public:
-	virtual void Translate(ISprite* sprite, const Vector& offset) = 0;
-	virtual void Rotate(ISprite* sprite, float delta) = 0;
-	virtual ~ISpriteObserver() {}
-}; // ISpriteObserver
 
 }
 

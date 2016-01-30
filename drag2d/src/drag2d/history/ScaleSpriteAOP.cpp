@@ -2,12 +2,12 @@
 #include "AtomicType.h"
 #include "HistoryUtil.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 
 namespace d2d
 {
 
-ScaleSpriteAOP::ScaleSpriteAOP(ISprite* sprite, 
+ScaleSpriteAOP::ScaleSpriteAOP(Sprite* sprite, 
 							   const Vector& new_scale, 
 							   const Vector& old_scale)
 	: m_new_scale(new_scale)
@@ -38,7 +38,7 @@ void ScaleSpriteAOP::Redo()
 	} 
 }
 
-Json::Value ScaleSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value ScaleSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

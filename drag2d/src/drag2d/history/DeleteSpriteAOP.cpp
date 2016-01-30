@@ -2,7 +2,7 @@
 #include "AtomicType.h"
 #include "HistoryUtil.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/MultiSpritesImpl.h"
 
 #include "message/InsertSpriteSJ.h"
@@ -11,7 +11,7 @@
 namespace d2d
 {
 
-DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<ISprite*>& sprites)
+DeleteSpriteAOP::DeleteSpriteAOP(const std::vector<Sprite*>& sprites)
 {
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 	{
@@ -41,7 +41,7 @@ void DeleteSpriteAOP::Redo()
 	}
 }
 
-Json::Value DeleteSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value DeleteSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

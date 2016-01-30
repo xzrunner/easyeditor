@@ -6,7 +6,7 @@
 namespace etexture
 {
 
-class Symbol : public d2d::ISymbol
+class Symbol : public d2d::Symbol
 {
 public:
 	Symbol();
@@ -14,21 +14,21 @@ public:
 	virtual ~Symbol();
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual Symbol* Clone() const;
 
 	//
-	// ISymbol interfaces
+	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
 	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::ISprite* spr = NULL, const d2d::ISprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::ISprite* sprite = NULL) const;
+		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
+	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
 
-	const std::vector<d2d::IShape*>& GetAllShapes() const { return m_shapes; }
+	const std::vector<d2d::Shape*>& GetAllShapes() const { return m_shapes; }
 
-	static d2d::ISymbol* Create() { return new Symbol(); }
+	static d2d::Symbol* Create() { return new Symbol(); }
 	
 protected:
 	virtual void LoadResources();
@@ -36,7 +36,7 @@ protected:
 	void Clear();
 
 private:
-	std::vector<d2d::IShape*> m_shapes;
+	std::vector<d2d::Shape*> m_shapes;
 
 	friend class SymbolContainer;
 

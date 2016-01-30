@@ -20,11 +20,11 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
-	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);

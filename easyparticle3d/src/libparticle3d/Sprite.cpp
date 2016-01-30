@@ -18,7 +18,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: ISprite(sprite)
+	: Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_alone(sprite.m_alone)
 	, m_reuse(sprite.m_reuse)
@@ -66,7 +66,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->insert(sprite);
+	d2d::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -87,7 +87,7 @@ bool Sprite::Update(int version)
 			return false;
 		}
 
-		const float* src = m_mat.getElements();
+		const float* src = m_mat.GetElements();
 		float mt[6];
 		mt[0] = src[0];
 		mt[1] = src[1];
@@ -109,14 +109,14 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::Symbol* symbol)
 {
-	d2d::ISprite::SetSymbol(&m_symbol, symbol);
+	d2d::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
 {
-	ISprite::Load(val);
+	Sprite::Load(val);
 
 	const Json::Value& p_val = val["particle3d"];
 
@@ -165,7 +165,7 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	ISprite::Store(val);
+	Sprite::Store(val);
 
 	Json::Value p_val;
 
@@ -216,7 +216,7 @@ void Sprite::SetMatrix(const d2d::Matrix& mat)
 { 
 	m_mat = mat;
 	if (m_spr && m_alone) {
-		const float* src = mat.getElements();
+		const float* src = mat.GetElements();
 		float* mt = m_spr->mat;
 		mt[0] = src[0];
 		mt[1] = src[1];

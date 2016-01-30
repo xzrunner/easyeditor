@@ -200,8 +200,8 @@ void ImageToolbarPage::onChangeScale(wxSpinEvent& event)
 {
 	float scale = Context::Instance()->scale = event.GetValue() * 0.01f;
 
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		sprites[i]->SetScale(d2d::Vector(scale, scale));
 	}

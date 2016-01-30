@@ -17,7 +17,7 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl,
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, d2d::ISprite* edited, 
+		wxGLContext* glctx, d2d::Sprite* edited, 
 		const d2d::MultiSpritesImpl* bg_sprites, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
@@ -43,7 +43,7 @@ private:
  	public:
  		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
  
- 		virtual bool OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos);
+ 		virtual bool OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos);
  
  	private:
  		StagePanel* m_stage;

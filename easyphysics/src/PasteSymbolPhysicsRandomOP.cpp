@@ -18,14 +18,14 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::ISymbol* symbol = m_randomValue.symbol;
+	d2d::Symbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
 		symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 
 		if (m_randomValue.scale != 1.0f) {
@@ -62,11 +62,11 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 {
 	if (d2d::ZoomViewOP::OnDraw()) return true;
 
-	d2d::ISymbol* symbol = m_randomValue.symbol;
+	d2d::Symbol* symbol = m_randomValue.symbol;
 	if (!symbol)  {
 		symbol = m_libraryPanel->GetSymbol();
 	}
-	if (symbol && m_pos.isValid()) {
+	if (symbol && m_pos.IsValid()) {
 		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
 	}
 

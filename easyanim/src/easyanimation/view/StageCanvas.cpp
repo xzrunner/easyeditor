@@ -18,17 +18,17 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(d2d::ISymbol* symbol)
+void StageCanvas::SetBackground(d2d::Symbol* symbol)
 {
-	d2d::obj_assign<d2d::ISymbol>(m_background, symbol);
+	d2d::obj_assign<d2d::Symbol>(m_background, symbol);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<d2d::Sprite*> sprites;
+	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
@@ -52,7 +52,7 @@ void StageCanvas::DrawBackground() const
 
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
+	d2d::PrimitiveDraw::Cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
 }
 
 } // eanim

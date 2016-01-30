@@ -21,7 +21,7 @@ public:
 	void transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
 	void transToMemory(const std::vector<std::string>& texfilenames);
 
-	void getAllSymbols(std::vector<d2d::ISymbol*>& symbols) const;
+	void getAllSymbols(std::vector<d2d::Symbol*>& symbols) const;
 
 private:
 	struct Picture
@@ -37,7 +37,7 @@ private:
 
 			void init();
 
-			void transform(d2d::ISprite* sprite) const;
+			void transform(d2d::Sprite* sprite) const;
 
 		private:
 			std::string dstMode(const d2d::Vector dst[4]) const;
@@ -67,7 +67,7 @@ private:
 			int mat[6];
 			bool is_full;
 
-			void transform(d2d::ISprite* sprite) const;
+			void transform(d2d::Sprite* sprite) const;
 
 			Item() {
 				color = 0xffffffff;
@@ -108,7 +108,7 @@ private:
 	std::map<int, Picture*> m_mapPictures;
 	std::map<int, Animation*> m_mapAnims;
 
-	std::map<int, d2d::ISymbol*> m_mapSymbols;
+	std::map<int, d2d::Symbol*> m_mapSymbols;
 
 }; // ParserLuaFile
 

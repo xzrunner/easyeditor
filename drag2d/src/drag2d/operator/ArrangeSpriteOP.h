@@ -42,7 +42,7 @@ public:
 	virtual bool IsEmpty() const;
 
 protected:
-	virtual ISprite* SelectByPos(const Vector& pos) const;
+	virtual Sprite* SelectByPos(const Vector& pos) const;
 
 private:
 	ArrangeSpriteImpl* m_impl;

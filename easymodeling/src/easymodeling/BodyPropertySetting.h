@@ -11,7 +11,7 @@ namespace emodeling
 class BodyPropertySetting : public d2d::IPropertySetting
 {
 public:
-	BodyPropertySetting(d2d::EditPanelImpl* stage, d2d::ISprite* sprite);
+	BodyPropertySetting(d2d::EditPanelImpl* stage, d2d::Sprite* sprite);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 

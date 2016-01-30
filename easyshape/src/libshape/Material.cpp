@@ -41,7 +41,7 @@ void Material::DebugDrawTris(const d2d::Matrix& mt) const
 		buf.push_back(m_tris[i]);
 		if (buf.size() == 3)
 		{
-			d2d::PrimitiveDraw::drawPolyline(mt, buf, d2d::Colorf(0, 1, 0), true);
+			d2d::PrimitiveDraw::DrawPolyline(mt, buf, d2d::Colorf(0, 1, 0), true);
 			buf.clear();
 		}
 	}

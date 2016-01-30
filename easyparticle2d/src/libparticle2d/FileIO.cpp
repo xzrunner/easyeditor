@@ -23,7 +23,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 	value["rotation_is_dir"] = toolbar->m_rotation_is_dir_ctrl->GetValue();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
@@ -31,8 +31,8 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 		Json::Value cval;
 
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p_symbol->ud);
-		cval["filepath"] = d2d::FilenameTools::getRelativePath(dir, symbol->GetFilepath()).ToStdString();
+		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(p_symbol->ud);
+		cval["filepath"] = d2d::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(cval);

@@ -16,13 +16,13 @@ inline ObjectVector<T>::~ObjectVector()
 }
 
 template<class T>
-void ObjectVector<T>::Traverse(IVisitor& visitor, bool order) const
+void ObjectVector<T>::Traverse(Visitor& visitor, bool order) const
 {
 	Traverse(m_objs, visitor, order);
 }
 
 template<class T>
-void ObjectVector<T>::Traverse(IVisitor& visitor, DataTraverseType type, bool order) const
+void ObjectVector<T>::Traverse(Visitor& visitor, DataTraverseType type, bool order) const
 {
 	Traverse(m_objs, visitor, type, order);
 }
@@ -81,16 +81,16 @@ int ObjectVector<T>::Size() const
 }
 
 template<class T>
-inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& visitor, bool order/* = true*/)
+inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, Visitor& visitor, bool order/* = true*/)
 {
 	if (order)
 	{
 		std::vector<T*>::const_iterator itr = objs.begin();
 		for ( ; itr != objs.end(); ++itr)
 		{
-			bool hasNext;
-			visitor.Visit(*itr, hasNext);
-			if (!hasNext) break;
+			bool next;
+			visitor.Visit(*itr, next);
+			if (!next) break;
 		}
 	}
 	else
@@ -98,16 +98,16 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& vis
 		std::vector<T*>::const_reverse_iterator itr = objs.rbegin();
 		for ( ; itr != objs.rend(); ++itr)
 		{
-			bool hasNext;
-			visitor.Visit(*itr, hasNext);
-			if (!hasNext) break;
+			bool next;
+			visitor.Visit(*itr, next);
+			if (!next) break;
 		}
 	}
 }
 
 template<class T>
 inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
-									  IVisitor& visitor, 
+									  Visitor& visitor, 
 									  DataTraverseType type, 
 									  bool order)
 {
@@ -120,9 +120,9 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 				type == DT_VISIBLE && (*itr)->visiable ||
 				type == DT_ALL || type == DT_SELECTABLE)
 			{
-				bool hasNext;
-				visitor.Visit(*itr, hasNext);
-				if (!hasNext) break;
+				bool next;
+				visitor.Visit(*itr, next);
+				if (!next) break;
 			}
 		}
 	}
@@ -131,9 +131,9 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 		std::vector<T*>::const_reverse_iterator itr = objs.rbegin();
 		for ( ; itr != objs.rend(); ++itr)
 		{
-			bool hasNext;
-			visitor.Visit(*itr, hasNext);
-			if (!hasNext) break;
+			bool next;
+			visitor.Visit(*itr, next);
+			if (!next) break;
 		}
 	}
 }

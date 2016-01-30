@@ -34,8 +34,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
-			template_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis)),
+		std::string single_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anim)),
+			template_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anis)),
 			all_filter = "All | *_ani?.json";
 		std::string filter = all_filter + "|" + single_filter + "|" + template_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
@@ -55,8 +55,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
  	if (!m_task) return;
  
  	try {
-		std::string single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
-			template_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis)),
+		std::string single_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anim)),
+			template_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anis)),
 			png_filter = "PNG files (*.png)|*.png";
 		std::string filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
@@ -101,7 +101,7 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
@@ -139,21 +139,21 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	std::vector<d2d::ISprite*> sprites;
-	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<d2d::Sprite*> sprites;
+	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
 
 	d2d::Rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
  		std::vector<d2d::Vector> vertices;
- 		sprites[i]->GetBounding()->getBoundPos(vertices);
+ 		sprites[i]->GetBounding()->GetBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j) {
- 			region.combine(vertices[j]);
+ 			region.Combine(vertices[j]);
 		}
  	}
 
-	d2d::Snapshoot ss(region.xLength(), region.yLength());
+	d2d::Snapshoot ss(region.Width(), region.Height());
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ss.DrawSprite(sprites[i], false, region.xCenter(), region.yCenter());
+		ss.DrawSprite(sprites[i], false, region.CenterX(), region.CenterY());
 	}
 
 	ss.SaveToFile(filepath);
@@ -161,8 +161,8 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsSingle(const std::string& filepath) const
 {
-	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim);
-	std::string full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
+	std::string tag = d2d::FileType::GetTag(d2d::FileType::e_anim);
+	std::string full_path = d2d::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
 	FileIO::StoreSingle(full_path);
@@ -171,8 +171,8 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 
 void Frame::SaveAsTemplate(const std::string& filepath) const
 {
-	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis);
-	std::string full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
+	std::string tag = d2d::FileType::GetTag(d2d::FileType::e_anis);
+	std::string full_path = d2d::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
 	FileIO::StoreTemplate(full_path);

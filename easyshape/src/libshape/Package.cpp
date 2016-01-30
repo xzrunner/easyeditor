@@ -10,7 +10,7 @@
 namespace libshape
 {
 
-void Paskage::packShape(d2d::IShape* shape, std::ofstream& fout)
+void Paskage::packShape(d2d::Shape* shape, std::ofstream& fout)
 {
 	if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
 	{

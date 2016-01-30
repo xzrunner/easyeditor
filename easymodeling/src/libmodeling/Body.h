@@ -47,7 +47,7 @@ namespace libmodeling
 
 		float gravityScale;
 
-		d2d::ISprite* sprite;
+		d2d::Sprite* sprite;
 
 		std::vector<Fixture*> fixtures;
 

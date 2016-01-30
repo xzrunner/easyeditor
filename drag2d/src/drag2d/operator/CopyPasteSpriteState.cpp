@@ -1,13 +1,13 @@
 #include "CopyPasteSpriteState.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/SpriteSelection.h"
 #include "message/InsertSpriteSJ.h"
 
 namespace d2d
 {
 
-CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection, ISprite* selected)
+CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection, Sprite* selected)
 	: m_selection(selection)
 	, m_spr(NULL)
 {

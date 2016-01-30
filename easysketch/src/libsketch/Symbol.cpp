@@ -25,7 +25,7 @@ void Symbol::ReloadTexture() const
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	if (!spr) {
 		return;
@@ -43,7 +43,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	shader->DrawModel(m_model, mat);
 }
 
-d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
 {
 	return d2d::Rect(100, 100);
 }
@@ -74,8 +74,8 @@ void Symbol::LoadResources()
   	reader.parse(fin, value);
   	fin.close();
   
-  	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
-  	std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
+  	wxString dir = d2d::FileHelper::GetFileDir(m_filepath);
+  	std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, value["filepath"].asString());
   	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
 }
 

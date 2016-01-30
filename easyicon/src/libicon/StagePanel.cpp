@@ -16,7 +16,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::ISprite* edited, 
+					   wxGLContext* glctx, d2d::Sprite* edited, 
 					   const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::EditPanel(parent, frame)
 {
@@ -69,11 +69,11 @@ StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
+OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos)
 {
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
-		m_stage->SetImage(image->getImage());
+		m_stage->SetImage(image->GetImage());
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
 	}

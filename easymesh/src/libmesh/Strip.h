@@ -17,7 +17,7 @@ public:
 	Strip(const d2d::Image& image);
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual Strip* Clone() const;
 
@@ -37,9 +37,9 @@ public:
 	virtual d2d::Vector* FindNode(const d2d::Vector& p);
 	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst);
 
-	virtual void TraverseShape(d2d::IVisitor& visitor) const {}
-	virtual bool RemoveShape(d2d::IShape* shape) { return false; }
-	virtual bool InsertShape(d2d::IShape* shape) { return false; }
+	virtual void TraverseShape(d2d::Visitor& visitor) const {}
+	virtual bool RemoveShape(d2d::Shape* shape) { return false; }
+	virtual bool InsertShape(d2d::Shape* shape) { return false; }
 	virtual bool ClearShape() { return false; }
 
 	virtual void Reset();

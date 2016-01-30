@@ -20,7 +20,7 @@ public:
 	virtual CosineShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
 	virtual void Translate(const d2d::Vector& offset);

@@ -22,7 +22,7 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	d2d::ISprite* SelectByPos(int x, int y);
+	d2d::Sprite* SelectByPos(int x, int y);
 
 private:
 	ToolbarPanel* m_toolbar;

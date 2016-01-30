@@ -14,7 +14,7 @@ SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, d2d::PropertySettingPane
 	, m_stagePanel(editPanel)
 	, m_propertyPanel(propertyPanel)
 {
-	m_first_pos.setInvalid();
+	m_first_pos.SetInvalid();
 }
 
 SelectFixtureOP::~SelectFixtureOP()
@@ -25,7 +25,7 @@ SelectFixtureOP::~SelectFixtureOP()
 bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* sprite = m_stagePanel->QuerySpriteByPos(pos);
+	d2d::Sprite* sprite = m_stagePanel->QuerySpriteByPos(pos);
 
 	d2d::IPropertySetting* setting = NULL;
 	if (sprite)
@@ -63,10 +63,10 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 {
 	if (d2d::DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_first_pos.isValid())
+	if (m_first_pos.IsValid())
 	{
 		d2d::Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		std::vector<d2d::ISprite*> sprites;
+		std::vector<d2d::Sprite*> sprites;
 		m_stagePanel->QuerySpritesByRect(rect, sprites);
 
 		m_selected = NULL;
@@ -88,7 +88,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 		else
 			m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
 
-		m_first_pos.setInvalid();
+		m_first_pos.SetInvalid();
 	}
 
 	return false;
@@ -101,7 +101,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 	m_mouseOn = NULL;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
+	d2d::Sprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
 	if (sprite)
 	{
 		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
@@ -139,7 +139,7 @@ bool SelectFixtureOP::Clear()
 {
 	if (d2d::DrawRectangleOP::Clear()) return true;
 
-	m_first_pos.setInvalid();
+	m_first_pos.SetInvalid();
 
 	m_selected = m_mouseOn = NULL;
 

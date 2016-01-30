@@ -1,13 +1,13 @@
 #include "SetSpritePosAOP.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 
 #include <algorithm>
 
 namespace d2d
 {
 
-SetSpritePosAOP::SetSpritePosAOP(ISprite* sprite, const Vector& pos)
+SetSpritePosAOP::SetSpritePosAOP(Sprite* sprite, const Vector& pos)
 	: m_new_pos(pos)
 {
 	sprite->Retain();
@@ -15,10 +15,10 @@ SetSpritePosAOP::SetSpritePosAOP(ISprite* sprite, const Vector& pos)
 	m_old_pos.push_back(sprite->GetPosition());
 }
 
-SetSpritePosAOP::SetSpritePosAOP(const std::vector<ISprite*>& sprites, const Vector& pos)
+SetSpritePosAOP::SetSpritePosAOP(const std::vector<Sprite*>& sprites, const Vector& pos)
 	: m_new_pos(pos)
 {
-	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<ISprite>());
+	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());
 	m_sprites = sprites;
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
@@ -28,14 +28,14 @@ SetSpritePosAOP::SetSpritePosAOP(const std::vector<ISprite*>& sprites, const Vec
 
 SetSpritePosAOP::~SetSpritePosAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
 }
 
 void SetSpritePosAOP::Undo()
 {
 	assert(m_sprites.size() == m_old_pos.size());
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* spr = m_sprites[i];
+		Sprite* spr = m_sprites[i];
 		spr->SetTransform(m_old_pos[i], spr->GetAngle());
 	}
 }
@@ -43,12 +43,12 @@ void SetSpritePosAOP::Undo()
 void SetSpritePosAOP::Redo()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* spr = m_sprites[i];
+		Sprite* spr = m_sprites[i];
 		spr->SetTransform(m_new_pos, spr->GetAngle());
 	}
 }
 
-Json::Value SetSpritePosAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value SetSpritePosAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value ret;
 	return ret;

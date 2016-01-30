@@ -29,11 +29,11 @@ protected:
 	Vector GetLastPos() const { return m_last_pos; }
 
 private:
-	class Visitor : public IVisitor
+	class Visitor : public Visitor
 	{
 	public:
 		Visitor(const Vector& start, const Vector& end) : m_start(start), m_end(end) {}
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 	private:
 		Vector m_start, m_end;
 	}; // Visitor

@@ -28,19 +28,19 @@ void StagePanel::setImage(const std::string& filepath)
 		m_image->Release();
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (symbol) {
 		setImage(symbol);
 		symbol->Release();
 	}
 }
 
-void StagePanel::setImage(d2d::ISymbol* symbol)
+void StagePanel::setImage(d2d::Symbol* symbol)
 {
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 	d2d::Vector off;
-	off.x = sprite->GetSymbol().GetSize().xLength() * 0.5f;
-	off.y = sprite->GetSymbol().GetSize().yLength() * 0.5f;
+	off.x = sprite->GetSymbol().GetSize().Width() * 0.5f;
+	off.y = sprite->GetSymbol().GetSize().Height() * 0.5f;
 	sprite->Translate(off);
 	m_image = sprite;
 
@@ -70,7 +70,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	long index;
 	sIndex.ToLong(&index);
 
-	d2d::ISymbol* symbol = m_library->GetSymbol(index);
+	d2d::Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol) {
 		m_stage->setImage(symbol);
 	}
@@ -78,7 +78,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 // 	// todo for diff
 // 	// fixme
 // 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-// 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+// 	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 // 	d2d::Rect r = sprite->getSymbol().getSize();
 // 	if (pos.x < 0) {
 // 		sprite->setTransform(d2d::Vector(-r.xLength() * 0.5f - 10, 0.0f), 0);
@@ -97,7 +97,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	std::string filename = filenames[0].ToStdString();
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 	m_stage->setImage(symbol);
 	symbol->Release();
 }

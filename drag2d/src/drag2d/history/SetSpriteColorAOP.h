@@ -8,23 +8,23 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 #define SET_SPRITE_COLOR_AOP_DEC(name) \
 	class SetSprite##name##ColorAOP : public AbstractAtomicOP \
 	{ \
 	public: \
-		SetSprite##name##ColorAOP(ISprite* sprite, const Colorf& color); \
-		SetSprite##name##ColorAOP(const std::vector<ISprite*>& sprites, const Colorf& color); \
+		SetSprite##name##ColorAOP(Sprite* sprite, const Colorf& color); \
+		SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const Colorf& color); \
 		virtual ~SetSprite##name##ColorAOP(); \
 	\
 		virtual void Undo(); \
 		virtual void Redo(); \
 	\
-		virtual Json::Value Store(const std::vector<ISprite*>& sprites) const; \
+		virtual Json::Value Store(const std::vector<Sprite*>& sprites) const; \
 	\
 	private: \
-		std::vector<ISprite*> m_sprites; \
+		std::vector<Sprite*> m_sprites; \
 		std::vector<Colorf> m_old_color; \
 	\
 		Colorf m_new_color; \

@@ -19,7 +19,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::ISprite* edited, 
+					   wxGLContext* glctx, d2d::Sprite* edited, 
 					   const d2d::MultiSpritesImpl* bg_sprites, 
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)

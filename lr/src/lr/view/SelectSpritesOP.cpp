@@ -14,7 +14,7 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage,
 {
 	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
 
-	m_first_press.setInvalid();
+	m_first_press.SetInvalid();
 }
 
 bool SelectSpritesOP::OnKeyDown(int keyCode)
@@ -46,9 +46,9 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 	stage->PointQuery(pos);
 
-	if (m_first_press.isValid()) {
+	if (m_first_press.IsValid()) {
 		stage->Pathfinding(m_first_press, pos);
-		m_first_press.setInvalid();
+		m_first_press.SetInvalid();
 	} else {
 		m_first_press = pos;
 	}
@@ -61,7 +61,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected) {
 		m_open_symbol.Open(selected);
 	}
@@ -75,13 +75,13 @@ void SelectSpritesOP::GroupSelection()
 		return;
 	}
 
-	std::vector<d2d::ISprite*> sprites;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
-	d2d::ISprite* group = GroupHelper::Group(sprites);
+	d2d::Sprite* group = GroupHelper::Group(sprites);
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* spr = sprites[i];
+		d2d::Sprite* spr = sprites[i];
 		d2d::RemoveSpriteSJ::Instance()->Remove(spr);
 		spr->Release();
 	}
@@ -96,19 +96,19 @@ void SelectSpritesOP::BreakUpSelection()
 		return;
 	}
 
-	std::vector<d2d::ISprite*> sprites;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		d2d::ISprite* spr = sprites[i];
+		d2d::Sprite* spr = sprites[i];
 		if (spr->GetSymbol().GetFilepath() != GROUP_TAG) {
 			continue;
 		}
 
-		std::vector<d2d::ISprite*> children;
+		std::vector<d2d::Sprite*> children;
 		GroupHelper::BreakUp(spr, children);
  		for (int j = 0, m = children.size(); j < m; ++j) {
-			d2d::ISprite* spr = children[j];
+			d2d::Sprite* spr = children[j];
  			d2d::InsertSpriteSJ::Instance()->Insert(spr);
 			spr->Release();
  		}

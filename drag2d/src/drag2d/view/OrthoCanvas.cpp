@@ -45,7 +45,7 @@ void OrthoCanvas::OnSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	d2d::TwoPassCanvas::OnSize(w, h);
+	TwoPassCanvas::OnSize(w, h);
 
  	m_screen.SetSize(w, h);
  	m_screen.SetCamera();
@@ -56,4 +56,4 @@ void OrthoCanvas::OnSize(int w, int h)
 	GL::Viewport(0, 0, w, h);
 }
 
-} // d2d
+}

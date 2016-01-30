@@ -14,7 +14,7 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public e
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
-	void insertSpriteNoArrange(d2d::ISprite* sprite);
+	void insertSpriteNoArrange(d2d::Sprite* sprite);
 
 	void arrangeAllSprites(bool bClearSelection);
 	void loadFromLibrary();
@@ -22,7 +22,7 @@ public:
 	int GetTextureAccount() const;
 
 public:
-	static void fixCoords(d2d::ISprite* sprite);
+	static void fixCoords(d2d::Sprite* sprite);
 
 protected:
 	//

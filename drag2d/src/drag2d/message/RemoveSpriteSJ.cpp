@@ -11,7 +11,7 @@ RemoveSpriteSJ::RemoveSpriteSJ(int id)
 {
 }
 
-void RemoveSpriteSJ::Remove(ISprite* spr, Observer* except)
+void RemoveSpriteSJ::Remove(Sprite* spr, Observer* except)
 {
 	Notify((void*)spr, except);
 }

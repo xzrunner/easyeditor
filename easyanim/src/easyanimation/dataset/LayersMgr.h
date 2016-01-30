@@ -25,7 +25,7 @@ public:
 
 	bool Clear();
 
-//		void removeSprite(d2d::ISprite* sprite);
+//		void removeSprite(d2d::Sprite* sprite);
 
 	const std::vector<Layer*>& CetAllLayers() const {
 		return m_layers;

@@ -30,13 +30,13 @@ void Task::Load(const char* filename)
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
-	m_stage->Load(d2d::FilenameTools::getFileDir(filename).ToStdString(), value, m_library, m_toolbar);
+	m_stage->Load(d2d::FileHelper::GetFileDir(filename).ToStdString(), value, m_library, m_toolbar);
 }
 
 void Task::Store(const char* filename) const
 {
 	Json::Value value;
-	m_stage->Store(d2d::FilenameTools::getFileDir(filename).ToStdString(), value);
+	m_stage->Store(d2d::FileHelper::GetFileDir(filename).ToStdString(), value);
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);

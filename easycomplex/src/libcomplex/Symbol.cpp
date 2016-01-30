@@ -20,8 +20,8 @@ Symbol::Symbol()
 	static int id = 0;
 	m_name = FILE_TAG + wxVariant(id++);
 
-	m_clipbox.xMin = m_clipbox.xMax = m_clipbox.yMin = m_clipbox.yMax = 0;
-	m_style.color.set(0, 0.8f, 0);
+	m_clipbox.xmin = m_clipbox.xmax = m_clipbox.ymin = m_clipbox.ymax = 0;
+	m_style.color.Set(0, 0.8f, 0);
 }
 
 Symbol::~Symbol()
@@ -32,13 +32,13 @@ Symbol::~Symbol()
 void Symbol::Retain() const
 {
 	d2d::Object::Retain();
-	for_each(m_sprites.begin(), m_sprites.end(), d2d::RetainObjectFunctor<d2d::ISprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
 }
 
 void Symbol::Release() const
 {
 	d2d::Object::Release();
-	for_each(m_sprites.begin(), m_sprites.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
 }
 
 void Symbol::ReloadTexture() const
@@ -49,18 +49,18 @@ void Symbol::ReloadTexture() const
 		}
 	}
 
-	std::set<const ISymbol*> symbols;
+	std::set<const Symbol*> symbols;
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		symbols.insert(&m_sprites[i]->GetSymbol());
 	}
-	std::set<const ISymbol*>::iterator itr = symbols.begin();
+	std::set<const Symbol*>::iterator itr = symbols.begin();
 	for ( ; itr != symbols.end(); ++itr) {
 		(*itr)->ReloadTexture();
 	}
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
  	const d2d::TPNode* n = NULL;
 	if (d2d::Config::Instance()->IsUseDTex() && 
@@ -86,10 +86,10 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 		//d2d::Vector vertices[4];
 		//float hw = m_rect.xLength() * 0.5f,
 		//	hh = m_rect.yLength() * 0.5f;
-		//vertices[0] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMin), mt);
-		//vertices[1] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMin), mt);
-		//vertices[2] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMax), mt);
-		//vertices[3] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMax), mt);
+		//vertices[0] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmin, m_rect.ymin), mt);
+		//vertices[1] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmax, m_rect.ymin), mt);
+		//vertices[2] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmax, m_rect.ymax), mt);
+		//vertices[3] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmin, m_rect.ymax), mt);
 		//if (n->IsRotated())
 		//{
 		//	d2d::Vector tmp = vertices[3];
@@ -126,13 +126,13 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 			d2d::SpriteRenderer::Instance()->Draw(m_sprites[i], root, mt, color);
 		}
-		if (m_clipbox.xLength() > 0 && m_clipbox.yLength() > 0) {
-			d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
+		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
+			d2d::PrimitiveDraw::DrawRect(mt, m_clipbox, m_style);
 		}
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -147,13 +147,13 @@ bool Symbol::isOneLayer() const
 
 void Symbol::InitBounding()
 {
-	m_rect.makeInfinite();
+	m_rect.MakeInfinite();
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		std::vector<d2d::Vector> vertices;
-		m_sprites[i]->GetBounding()->getBoundPos(vertices);
+		m_sprites[i]->GetBounding()->GetBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
-			m_rect.combine(vertices[j]);
+			m_rect.Combine(vertices[j]);
 	}
 
 	// 为兼容老数据，临时去掉

@@ -16,7 +16,7 @@ void ViewlistListImpl::OnSelected(d2d::ViewlistList* list, int idx)
 
 void ViewlistListImpl::OnDoubleClicked(d2d::ViewlistList* list, int idx)
 {
-	d2d::ISprite* selected = list->QuerySprite(idx);
+	d2d::Sprite* selected = list->QuerySprite(idx);
 	m_open_symbol.Open(selected);
 }
 

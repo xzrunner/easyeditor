@@ -9,7 +9,7 @@ namespace d2d
 
 class GroupTreeCtrl;
 class MultiSpritesImpl;
-class ISprite;
+class Sprite;
 class KeysState;
 
 class GroupTreePanel : public wxPanel
@@ -22,12 +22,12 @@ public:
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);
 
-	void InitGroups(const std::map<std::string, std::vector<d2d::ISprite*> >& groups);
+	void InitGroups(const std::map<std::string, std::vector<Sprite*> >& groups);
 
 	void EnableExpand(bool enable);
 
 	void Clear();
-	void Insert(ISprite* sprite);
+	void Insert(Sprite* sprite);
 
 private:
 	void InitLayout();

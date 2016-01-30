@@ -17,4 +17,4 @@ void LibraryFontBlankList::OnListDoubleClicked(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
-} // d2d
+}

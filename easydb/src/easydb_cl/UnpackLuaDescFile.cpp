@@ -44,8 +44,8 @@ void UnpackLuaDescFile::LoadAllImages(const std::string& img_name, std::vector<d
 	int idx = 1;
 	while (true)
 	{
-		std::string filepath = img_name + d2d::StringTools::ToString(idx++) + ".png";
-		if (d2d::FilenameTools::IsFileExist(filepath)) {
+		std::string filepath = img_name + d2d::StringHelper::ToString(idx++) + ".png";
+		if (d2d::FileHelper::IsFileExist(filepath)) {
 			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);
 		} else {	

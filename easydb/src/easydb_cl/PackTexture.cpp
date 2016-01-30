@@ -65,14 +65,14 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(cfg_file);
+	std::string dir = d2d::FileHelper::GetFileDir(cfg_file);
 
-	std::string src_dir = d2d::FilenameTools::getAbsolutePath(dir, value["src"].asString());
-	std::string dst_file = d2d::FilenameTools::getAbsolutePath(dir, value["dst"].asString());
+	std::string src_dir = d2d::FileHelper::GetAbsolutePath(dir, value["src"].asString());
+	std::string dst_file = d2d::FileHelper::GetAbsolutePath(dir, value["dst"].asString());
 
  	libtexpacker::ImageTrimData* trim = NULL;
  	if (!value["trim file"].isNull()) {
- 		std::string trim_file = d2d::FilenameTools::getAbsolutePath(dir, value["trim file"].asString());
+ 		std::string trim_file = d2d::FileHelper::GetAbsolutePath(dir, value["trim file"].asString());
  		trim = new libtexpacker::ImageTrimData(trim_file);
  	}
 
@@ -94,16 +94,16 @@ void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::strin
 	std::vector<std::string> images;
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, src_ignore, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, src_ignore, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
-			std::string filepath = d2d::FilenameTools::FormatFilepathAbsolute(files[i].ToStdString());
+		if (d2d::FileType::IsType(files[i], d2d::FileType::e_image)) {
+			std::string filepath = d2d::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
 			images.push_back(filepath);
 		}
 	}
 
-	std::string dst_dir = d2d::FilenameTools::getFileDir(dst_file);
-	d2d::mk_dir(dst_dir);
+	std::string dst_dir = d2d::FileHelper::GetFileDir(dst_file);
+	ee::FileHelper::MkDir(dst_dir);
 
 	d2d::SettingData& sd = d2d::Config::Instance()->GetSettings();
 	bool ori_cfg = sd.open_image_edge_clip;

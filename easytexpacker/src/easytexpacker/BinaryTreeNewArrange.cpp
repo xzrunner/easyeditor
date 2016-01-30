@@ -42,8 +42,8 @@ void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites
 			bool success = Insert(*s);
 			if (!success) {
 				d2d::Rect r = s->GetSymbol().GetSize();
-				float w = r.xLength() * scale + PADDING*2;
-				float h = r.yLength() * scale + PADDING*2;
+				float w = r.Width() * scale + PADDING*2;
+				float h = r.Height() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&
 					(w > tot_h || h > tot_w)) {
 					d2d::Vector pos;
@@ -87,7 +87,7 @@ Insert(d2d::ImageSprite& img) const
 	}
 
 	d2d::TPNode* n = NULL;
-	d2d::Image* image = img.GetSymbol().getImage();
+	d2d::Image* image = img.GetSymbol().GetImage();
 	int w = image->GetClippedWidth(),
 		h = image->GetClippedHeight();
 	float scale = 1.0f;

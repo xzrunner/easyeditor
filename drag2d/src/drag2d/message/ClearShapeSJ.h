@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class IShape;
+class Shape;
 
 class ClearShapeSJ : public Subject
 {

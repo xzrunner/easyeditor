@@ -34,7 +34,7 @@ void SymbolRender::Init(StagePanel* stage)
 	m_stage = stage;
 }
 
-void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, 
+void SymbolRender::DrawGrass(const d2d::Symbol& symbol, 
 							 const d2d::Vector& pos, 
 							 bool is_flat) const
 {
@@ -55,7 +55,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 		p = (pos + fixed) * 0.5f;
 	}
 
-	d2d::ISprite* grass = m_grass[info->size - 1];
+	d2d::Sprite* grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
 		d2d::Rect r = grass->GetSymbol().GetSize();
@@ -63,8 +63,8 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 		float half_edge = info->size * EDGE * 0.5f;
 
 		d2d::Matrix mat;
-		mat.translate(p.x, p.y);
-		d2d::PrimitiveDraw::rect(mat, half_edge, half_edge, d2d::LIGHT_GREEN_FACE);
+		mat.Translate(p.x, p.y);
+		d2d::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, d2d::LIGHT_GREEN_FACE);
 	}
 	else
 	{
@@ -73,7 +73,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 	}
 }
 
-void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, 
+void SymbolRender::DrawGrids(const d2d::Symbol& symbol, 
 							 const d2d::Vector& pos, 
 							 bool valid,
 							 bool is_flat) const
@@ -94,14 +94,14 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row, col, pos);
 		d2d::Matrix mat;
-		mat.translate(pos.x, pos.y);
+		mat.Translate(pos.x, pos.y);
 
 		float half_edge = info->size * EDGE * 0.5f;
 
 		d2d::ShapeStyle style = d2d::LIGHT_GREEN_FACE;
 		style.color = color;
 
- 		d2d::PrimitiveDraw::rect(mat, half_edge, half_edge, style);
+ 		d2d::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, style);
 	}
 	else
 	{
@@ -118,7 +118,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 	}
 }
 
-void SymbolRender::DrawArrow(const d2d::ISymbol& symbol, 
+void SymbolRender::DrawArrow(const d2d::Symbol& symbol, 
 							 const d2d::Vector& pos) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
@@ -157,7 +157,7 @@ void SymbolRender::DrawArrow(const d2d::ISymbol& symbol,
 	}
 }
 
-void SymbolRender::DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos)
+void SymbolRender::DrawRegion(const d2d::Symbol& symbol, const d2d::Vector& pos)
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {

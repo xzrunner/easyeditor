@@ -39,7 +39,7 @@ EditDialog::~EditDialog()
 	}
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, d2d::ISprite* edited, 
+void EditDialog::InitLayout(wxGLContext* glctx, d2d::Sprite* edited, 
 							const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(this);
@@ -69,7 +69,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_symbol->GetFilepath();
 //			FileSaver::Store(filepath, m_symbol);
 		m_symbol->RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)
@@ -79,12 +79,12 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 }
 
-void EditDialog::InitCamera(d2d::Camera* cam, d2d::ISprite* spr) const
+void EditDialog::InitCamera(d2d::Camera* cam, d2d::Sprite* spr) const
 {
 	d2d::Rect r = spr->GetRect();
 
 	wxSize sz = GetSize();
-	float scale = std::min(sz.GetWidth() / r.xLength(), sz.GetHeight() / r.yLength());
+	float scale = std::min(sz.GetWidth() / r.Width(), sz.GetHeight() / r.Height());
 	cam->SetScale(1 / scale);
 
 	cam->SetPosition(d2d::Vector(0, 0));

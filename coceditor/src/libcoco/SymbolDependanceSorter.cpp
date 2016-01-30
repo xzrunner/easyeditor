@@ -11,31 +11,31 @@
 namespace libcoco
 {
 
-void SymbolDependanceSorter::prepare(const std::vector<const d2d::ISymbol*>& symbols)
+void SymbolDependanceSorter::prepare(const std::vector<const d2d::Symbol*>& symbols)
 {
 	fetch(symbols);
 	sort();
 }
 
-void SymbolDependanceSorter::prepare(const std::vector<const d2d::ISprite*>& sprites)
+void SymbolDependanceSorter::prepare(const std::vector<const d2d::Sprite*>& sprites)
 {
-	std::vector<const d2d::ISymbol*> symbols;
+	std::vector<const d2d::Symbol*> symbols;
 	symbols.reserve(sprites.size());
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 		symbols.push_back(&sprites[i]->GetSymbol());
 	prepare(symbols);
 }
 
-void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbols)
+void SymbolDependanceSorter::fetch(const std::vector<const d2d::Symbol*>& symbols)
 {
 	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		m_unique.insert(symbols[i]);
 	}
 
-	std::queue<const d2d::ISymbol*> buffer;
+	std::queue<const d2d::Symbol*> buffer;
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		const d2d::ISymbol* symbol = symbols[i];
+		const d2d::Symbol* symbol = symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
@@ -91,7 +91,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 
 	while (!buffer.empty())
 	{
-		const d2d::ISymbol* symbol = buffer.front(); buffer.pop();
+		const d2d::Symbol* symbol = buffer.front(); buffer.pop();
 		if (const d2d::ImageSymbol* image = dynamic_cast<const d2d::ImageSymbol*>(symbol))
 		{
 			m_unique.insert(image);
@@ -107,7 +107,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 				m_unique.insert(complex);
 				for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 				{
-					d2d::ISprite* child = complex->m_sprites[i];
+					d2d::Sprite* child = complex->m_sprites[i];
 					buffer.push(&child->GetSymbol());
 
 					// patch for scale9
@@ -130,7 +130,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 						libanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						{
-							d2d::ISprite* child = frame->sprites[k];
+							d2d::Sprite* child = frame->sprites[k];
 							buffer.push(&child->GetSymbol());
 
 							// patch for scale9
@@ -161,7 +161,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(symbol))
 		{
 			const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_unique.insert(symbol);
 			m_unique.insert(icon);
 		}
@@ -172,10 +172,10 @@ void SymbolDependanceSorter::sort()
 {
 	while (!m_unique.empty())
 	{
-		std::set<const d2d::ISymbol*>::iterator itr = m_unique.begin();
+		std::set<const d2d::Symbol*>::iterator itr = m_unique.begin();
 		for ( ; itr != m_unique.end(); ++itr)
 		{
-			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(*itr);
+			d2d::Symbol* symbol = const_cast<d2d::Symbol*>(*itr);
 			if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 			{
 				std::string path = symbol->GetFilepath();
@@ -273,7 +273,7 @@ void SymbolDependanceSorter::sort()
 			else if (emesh::Symbol* mesh = dynamic_cast<emesh::Symbol*>(symbol))
 			{
  				std::string path = mesh->GetImagePath();
- 				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
+ 				d2d::Symbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 				m_symbol_set.Insert(image);
 				m_symbol_set.Insert(mesh);
 				m_unique.erase(itr);
@@ -286,7 +286,7 @@ void SymbolDependanceSorter::sort()
 				eterrain2d::OceanMesh* ocean = oceans[0];
 				const d2d::ImageSymbol* img = ocean->GetImage0();
 				std::string path = img->GetFilepath();
-				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
+				d2d::Symbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 				m_symbol_set.Insert(image);
 				m_symbol_set.Insert(ocean_symbol);
 				m_unique.erase(itr);
@@ -294,11 +294,11 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (etexture::Symbol* tex = dynamic_cast<etexture::Symbol*>(symbol))
 			{
-				const std::vector<d2d::IShape*>& shapes = tex->GetAllShapes();
+				const std::vector<d2d::Shape*>& shapes = tex->GetAllShapes();
 				assert(shapes.size() == 1);
 				for (int i = 0, n = shapes.size(); i < n; ++i)
 				{
-					d2d::IShape* shape = shapes[i];
+					d2d::Shape* shape = shapes[i];
 					libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape);
 					assert(poly);
 					const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
@@ -313,7 +313,7 @@ void SymbolDependanceSorter::sort()
 			else if (eicon::Symbol* icon = dynamic_cast<eicon::Symbol*>(symbol)) 
 			{
 				const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (IsSymbolPrepared(symbol)) {
  					m_symbol_set.Insert(icon);
  					m_unique.erase(itr);
@@ -324,17 +324,17 @@ void SymbolDependanceSorter::sort()
 	}
 }
 
-bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISprite* sprite) const
+bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::Sprite* sprite) const
 {
 	return IsSymbolPrepared(&sprite->GetSymbol());
 }
 
-bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISymbol* symbol) const
+bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::Symbol* symbol) const
 {
 	return m_symbol_set.Query(symbol);
 }
 
-void SymbolDependanceSorter::PrepareScale9(std::queue<const d2d::ISymbol*>& buffer,
+void SymbolDependanceSorter::PrepareScale9(std::queue<const d2d::Symbol*>& buffer,
 										   const escale9::Symbol* scale9)
 {
 	if (m_unique.find(scale9) == m_unique.end())

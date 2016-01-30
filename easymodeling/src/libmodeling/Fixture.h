@@ -28,7 +28,7 @@ namespace libmodeling
 
 		Body* body;
 
-		d2d::IShape* shape;
+		d2d::Shape* shape;
 
 		float density;
 

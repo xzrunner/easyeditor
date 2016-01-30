@@ -34,7 +34,7 @@ private:
 		const std::string& tp_dir);
 
 private:
-	std::vector<const d2d::ISymbol*> m_symbols;
+	std::vector<const d2d::Symbol*> m_symbols;
 
 	libcoco::epd::TextureMgr m_tex_mgr;
 

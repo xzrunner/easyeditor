@@ -67,7 +67,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		FileIO::store(symbol.GetFilepath().c_str(), &symbol);
 		symbol.RefreshThumbnail(filepath);
 
-		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
+		d2d::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

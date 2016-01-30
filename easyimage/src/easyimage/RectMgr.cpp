@@ -18,10 +18,10 @@ void RectMgr::load(const Json::Value& value)
 	Json::Value val = value["rect"][i++];
 	while (!val.isNull()) {
 		d2d::Rect* r = new d2d::Rect;
-		r->xMin = val["xmin"].asDouble();
-		r->xMax = val["xmax"].asDouble();
-		r->yMin = val["ymin"].asDouble();
-		r->yMax = val["ymax"].asDouble();
+		r->xmin = val["xmin"].asDouble();
+		r->xmax = val["xmax"].asDouble();
+		r->ymin = val["ymin"].asDouble();
+		r->ymax = val["ymax"].asDouble();
 		m_rects.push_back(r);
 
 		val = value["rect"][i++];
@@ -33,10 +33,10 @@ void RectMgr::store(Json::Value& value) const
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
 		const d2d::Rect* r = m_rects[i];
-		value["rect"][i]["xmin"] = r->xMin;
-		value["rect"][i]["xmax"] = r->xMax;
-		value["rect"][i]["ymin"] = r->yMin;
-		value["rect"][i]["ymax"] = r->yMax;
+		value["rect"][i]["xmin"] = r->xmin;
+		value["rect"][i]["xmax"] = r->xmax;
+		value["rect"][i]["ymin"] = r->ymin;
+		value["rect"][i]["ymax"] = r->ymax;
 	}
 }
 
@@ -44,8 +44,8 @@ void RectMgr::draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		d2d::PrimitiveDraw::rect(*m_rects[i], d2d::LIGHT_RED_FACE);
-		d2d::PrimitiveDraw::rect(*m_rects[i], d2d::LIGHT_RED_THIN_LINE);
+		d2d::PrimitiveDraw::DrawRect(*m_rects[i], d2d::LIGHT_RED_FACE);
+		d2d::PrimitiveDraw::DrawRect(*m_rects[i], d2d::LIGHT_RED_THIN_LINE);
 	}
 }
 
@@ -53,7 +53,7 @@ void RectMgr::insert(const d2d::Rect& rect, bool force)
 {
 	if (!force) {
 		for (int i = 0, n = m_rects.size(); i < n; ++i) {
-			if (d2d::Math::isRectIntersectRect(*m_rects[i], rect)) {
+			if (d2d::Math2D::IsRectIntersectRect(*m_rects[i], rect)) {
 				return;
 			}
 		}
@@ -67,7 +67,7 @@ bool RectMgr::remove(const d2d::Vector& pos)
 	std::vector<d2d::Rect*>::iterator itr = m_rects.begin();
 	for ( ; itr != m_rects.end(); ++itr)
 	{
-		if (d2d::Math::isPointInRect(pos, **itr)) {
+		if (d2d::Math2D::IsPointInRect(pos, **itr)) {
 			m_rects.erase(itr);
 			return true;
 		}
@@ -79,7 +79,7 @@ d2d::Vector RectMgr::queryNearestAxis(const d2d::Vector& pos,
 									  const d2d::Rect* except) const
 {
 	d2d::Vector ret;
-	ret.setInvalid();
+	ret.SetInvalid();
 
 	float minx = FLT_MAX,
 		  miny = FLT_MAX;
@@ -92,32 +92,32 @@ d2d::Vector RectMgr::queryNearestAxis(const d2d::Vector& pos,
 
 		float dx, dy;
 
-		dx = fabs(pos.x - r->xMin);
+		dx = fabs(pos.x - r->xmin);
 		if (dx < RADIUS && dx < minx)
 		{
 			minx = dx;
-			ret.x = r->xMin;
+			ret.x = r->xmin;
 		}
 
-		dx = fabs(pos.x - r->xMax);
+		dx = fabs(pos.x - r->xmax);
 		if (dx < RADIUS && dx < minx)
 		{
 			minx = dx;
-			ret.x = r->xMax;
+			ret.x = r->xmax;
 		}
 
-		dy = fabs(pos.y - r->yMin);
+		dy = fabs(pos.y - r->ymin);
 		if (dy < RADIUS && dy < miny)
 		{
 			miny = dy;
-			ret.y = r->yMin;
+			ret.y = r->ymin;
 		}
 
-		dy = fabs(pos.y - r->yMax);
+		dy = fabs(pos.y - r->ymax);
 		if (dy < RADIUS && dy < miny)
 		{
 			miny = dy;
-			ret.y = r->yMax;
+			ret.y = r->ymax;
 		}
 	}
 
@@ -134,21 +134,21 @@ RectMgr::Node RectMgr::queryNode(const d2d::Vector& pos) const
 		const d2d::Rect* r = m_rects[i];
 
 		d2d::Vector selected;
-		selected.setInvalid();
+		selected.SetInvalid();
 
-		if (fabs(pos.x - r->xMin) < RADIUS) {
-			selected.x = r->xMin;
-		} else if (fabs(pos.x - r->xMax) < RADIUS) {
-			selected.x = r->xMax;
+		if (fabs(pos.x - r->xmin) < RADIUS) {
+			selected.x = r->xmin;
+		} else if (fabs(pos.x - r->xmax) < RADIUS) {
+			selected.x = r->xmax;
 		}
 
-		if (fabs(pos.y - r->yMin) < RADIUS) {
-			selected.y = r->yMin;
-		} else if (fabs(pos.y - r->yMax) < RADIUS) {
-			selected.y = r->yMax;
+		if (fabs(pos.y - r->ymin) < RADIUS) {
+			selected.y = r->ymin;
+		} else if (fabs(pos.y - r->ymax) < RADIUS) {
+			selected.y = r->ymax;
 		}
 
-		if (selected.isValid()) {
+		if (selected.IsValid()) {
 			ret.rect = r;
 			ret.pos = selected;
 			return ret;
@@ -162,7 +162,7 @@ d2d::Rect* RectMgr::queryRect(const d2d::Vector& pos) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		if (d2d::Math::isPointInRect(pos, *m_rects[i])) {
+		if (d2d::Math2D::IsPointInRect(pos, *m_rects[i])) {
 			return m_rects[i];
 		}
 	}
@@ -178,32 +178,32 @@ bool RectMgr::moveNode(const Node& node, const d2d::Vector& to)
 	d2d::Rect rect = *node.rect;
 
 	float* ptr_x = NULL;
-	if (rect.xMin == node.pos.x) {
-		ptr_x = &rect.xMin;
-	} else if (rect.xMax == node.pos.x) {
-		ptr_x = &rect.xMax;
+	if (rect.xmin == node.pos.x) {
+		ptr_x = &rect.xmin;
+	} else if (rect.xmax == node.pos.x) {
+		ptr_x = &rect.xmax;
 	}
 
 	float* ptr_y = NULL;
-	if (rect.yMin == node.pos.y) {
-		ptr_y = &rect.yMin;
-	} else if (rect.yMax == node.pos.y) {
-		ptr_y = &rect.yMax;
+	if (rect.ymin == node.pos.y) {
+		ptr_y = &rect.ymin;
+	} else if (rect.ymax == node.pos.y) {
+		ptr_y = &rect.ymax;
 	}
 
 	if (ptr_x && ptr_y)
 	{
 		*ptr_x = to.x;
 		*ptr_y = to.y;
-		if (rect.xMin > rect.xMax) {
-			std::swap(rect.xMin, rect.xMax);
+		if (rect.xmin > rect.xmax) {
+			std::swap(rect.xmin, rect.xmax);
 		}
-		if (rect.yMin > rect.yMax) {
-			std::swap(rect.yMin, rect.yMax);
+		if (rect.ymin > rect.ymax) {
+			std::swap(rect.ymin, rect.ymax);
 		}
 	}
 
-	if (rect.xMin == rect.xMax || rect.yMin == rect.yMax) 
+	if (rect.xmin == rect.xmax || rect.ymin == rect.ymax) 
 	{
 		return false;
 	}
@@ -224,10 +224,10 @@ void RectMgr::moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d
 	d2d::Rect* r = const_cast<d2d::Rect*>(rect);
 	float dx = to.x - from.x,
 		  dy = to.y - from.y;
-	r->xMin += dx;
-	r->xMax += dx;
-	r->yMin += dy;
-	r->yMax += dy;
+	r->xmin += dx;
+	r->xmax += dx;
+	r->ymin += dy;
+	r->ymax += dy;
 }
 
 void RectMgr::clear()

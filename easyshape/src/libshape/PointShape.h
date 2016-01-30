@@ -6,7 +6,7 @@
 namespace libshape
 {
 
-class PointShape : public d2d::IShape
+class PointShape : public d2d::Shape
 {
 public:
 	PointShape();
@@ -19,7 +19,7 @@ public:
 	virtual PointShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "point"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

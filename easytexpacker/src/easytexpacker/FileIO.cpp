@@ -44,8 +44,8 @@ void FileIO::loadFromEasypackerFile(const char* filename)
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
 		d2d::TexPackerAdapter::Texture tex = adapter.textures[i];
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		symbol->Release();
 
 		d2d::Vector pos;
@@ -79,17 +79,17 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 	context->width = value["meta"]["size"]["w"].asInt();
 	context->height = value["meta"]["size"]["h"].asInt();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value frame_val = value["frames"][i++];
 	while (!frame_val.isNull()) {
 		std::string filepath = frame_val["filename"].asString();
-		if (!d2d::FilenameTools::IsFileExist(filepath))
-			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+		if (!d2d::FileHelper::IsFileExist(filepath))
+			filepath = d2d::FileHelper::GetAbsolutePath(dir, filepath);
 
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		symbol->Release();
 
 		int width = frame_val["sourceSize"]["w"].asInt();
@@ -157,23 +157,23 @@ void FileIO::storeImage(const char* filename)
 	unsigned char* dst_data = (unsigned char*) malloc(channel * width * height);
 	memset(dst_data, 0, channel * width * height);
 
-	std::vector<d2d::ISprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		const d2d::Vector& center = sprite->GetPosition();
 
 		float sw, sh;
 		if (sprite->GetAngle() == 0)
 		{
-			sw = sprite->GetSymbol().GetSize().xLength();
-			sh = sprite->GetSymbol().GetSize().yLength();
+			sw = sprite->GetSymbol().GetSize().Width();
+			sh = sprite->GetSymbol().GetSize().Height();
 		}
 		else
 		{
-			sw = sprite->GetSymbol().GetSize().yLength();
-			sh = sprite->GetSymbol().GetSize().xLength();
+			sw = sprite->GetSymbol().GetSize().Height();
+			sh = sprite->GetSymbol().GetSize().Width();
 		}
 
 		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
@@ -248,7 +248,7 @@ void FileIO::storeImage(const char* filename)
 	}
 
 	wxString imgFile(filename);
-	imgFile = d2d::FilenameTools::getFilePathExceptExtension(imgFile);
+	imgFile = d2d::FileHelper::GetFilePathExceptExtension(imgFile);
 
 	switch (type)
 	{
@@ -257,12 +257,12 @@ void FileIO::storeImage(const char* filename)
 		break;
 	case e_jpg:
 		{
-			d2d::LibJpeg::ImageData data;
+			d2d::LibjpegAdapter::ImageData data;
 			data.width = width;
 			data.height = height;
 			data.pixels = dst_data;
 
-			d2d::LibJpeg::write_JPEG_file((imgFile + ".jpg").c_str(), 80, data);
+			d2d::LibjpegAdapter::Write((imgFile + ".jpg").c_str(), 80, data);
 		}
 		break;
 	case e_png:
@@ -282,8 +282,8 @@ void FileIO::storeEasypackerPosition(const char* filename)
 	value["width"] = Context::Instance()->width;
 	value["height"] = Context::Instance()->height;
 
-	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["image"][i] = store(sprites[i]);
 
@@ -301,10 +301,10 @@ void FileIO::storeTexpackerPosition(const char* filename)
 
 	value["meta"] = Context::Instance()->tp_meta;
 
-	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		if (sprite->GetUserData()) 
 		{
 			Json::Value* val = static_cast<Json::Value*>(sprite->GetUserData());
@@ -315,7 +315,7 @@ void FileIO::storeTexpackerPosition(const char* filename)
 			// todo
 // 			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->GetSymbol()).getImage();
 // 			Json::Value val;
-// 			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->GetFilepath()).ToStdString();
+// 			val["filename"] = d2d::FileHelper::getFilenameWithExtension(img->GetFilepath()).ToStdString();
 // 			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
 // 			val["trimmed"] = true;
 // 			val["sourceSize"]["w"] = img->GetOriginWidth();
@@ -324,12 +324,12 @@ void FileIO::storeTexpackerPosition(const char* filename)
 // 			d2d::Rect r = img->GetClippedRegion();
 // 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
 // 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
-// 			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->GetOriginWidth();
-// 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.yMax + 0.5f * img->GetOriginHeight());
+// 			val["spriteSourceSize"]["x"] = r.xmin + 0.5f * img->GetOriginWidth();
+// 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.ymax + 0.5f * img->GetOriginHeight());
 // 			
 // 			const d2d::Vector& pos = sprite->GetPosition();
-// 			val["frame"]["x"] = pos.x + r.xMin;
-// 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.yMax);
+// 			val["frame"]["x"] = pos.x + r.xmin;
+// 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.ymax);
 // 
 // 			value["frames"][i] = val;
 		}
@@ -343,13 +343,13 @@ void FileIO::storeTexpackerPosition(const char* filename)
 	fout.close();
 }
 
-Json::Value FileIO::store(const d2d::ISprite* sprite)
+Json::Value FileIO::store(const d2d::Sprite* sprite)
 {
 	Json::Value value;
 
-	const d2d::ISymbol& symbol = sprite->GetSymbol();
-	const float w = symbol.GetSize().xLength(),
-		h = symbol.GetSize().yLength();
+	const d2d::Symbol& symbol = sprite->GetSymbol();
+	const float w = symbol.GetSize().Width(),
+		h = symbol.GetSize().Height();
 	const d2d::Vector& pos = sprite->GetPosition();
 
 	bool bRotate = sprite->GetAngle() != 0;

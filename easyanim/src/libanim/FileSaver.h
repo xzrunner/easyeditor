@@ -15,7 +15,7 @@ public:
 private:
 	static void store(Json::Value& value, Symbol::Layer* layer, const wxString& dir);
 	static void store(Json::Value& value, Symbol::Frame* frame, const wxString& dir);
-	static void store(Json::Value& value, d2d::ISprite* sprite, const wxString& dir);
+	static void store(Json::Value& value, d2d::Sprite* sprite, const wxString& dir);
 
 }; // FileSaver
 

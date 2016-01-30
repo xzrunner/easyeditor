@@ -48,8 +48,8 @@ void PackRes::Trigger(const std::string& config_path)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string config_dir = d2d::FilenameTools::getFileDir(
-		d2d::FilenameTools::FormatFilepathAbsolute(config_path));
+	std::string config_dir = d2d::FileHelper::GetFileDir(
+		d2d::FileHelper::FormatFilepathAbsolute(config_path));
 
  	std::string trim_file = ConnectCfgDir(config_dir, value["trim file"].asString());
 // 	libtexpacker::ImageTrimData trim(trim_file);
@@ -75,7 +75,7 @@ void PackRes::Trigger(const std::string& config_path)
 void PackRes::Prepare(const Json::Value& pkg_val, const std::string& config_dir) 
 {
 	std::string dst_folder = ConnectCfgDir(config_dir, pkg_val["output dir"].asString());
- 	d2d::mk_dir(dst_folder);
+ 	ee::FileHelper::MkDir(dst_folder);
 }
 
 void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
@@ -162,7 +162,7 @@ void PackRes::GetImagesFromJson(const Json::Value& pkg_val, const std::string& c
 		while (!src_val.isNull()) {
 			std::string path = ConnectCfgDir(config_dir, src_val.asString());
 			if (wxFileName::DirExists(path)) {
-				d2d::StringTools::ToLower(path);
+				d2d::StringHelper::ToLower(path);
 				src_dirs.push_back(path);
 			}
 			src_val = pkg_val["json list"][i++];
@@ -177,7 +177,7 @@ void PackRes::GetImagesFromJson(const Json::Value& pkg_val, const std::string& c
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
 		if (wxFileName::DirExists(path)) {
 			wxArrayString files;
-			d2d::FilenameTools::fetchAllFiles(path, files);
+			d2d::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				GetImagesFromJson(src_dirs, files[i].ToStdString(), img_set);
 			}
@@ -195,9 +195,9 @@ void PackRes::GetImagesFromJson(const Json::Value& pkg_val, const std::string& c
 void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const std::string& filepath, 
 								 std::set<std::string>& img_set) const
 {
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) 
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -214,7 +214,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			spr_val = value["sprite"][j++];
 		}	
 	} 
-	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) 
+	else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -241,7 +241,7 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			layer_val = value["layer"][j++];
 		}	
 	} 
-	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_texture))
+	else if (d2d::FileType::IsType(filepath, d2d::FileType::e_texture))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -257,14 +257,14 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 			std::string type = shape_val["material"]["type"].asString();
 			if (type == "texture") {
 				std::string filepath = shape_val["material"]["texture path"].asString();
-				filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-				filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+				filepath = d2d::FileHelper::GetAbsolutePath(dir, filepath);
+				filepath = d2d::FileHelper::FormatFilepathAbsolute(filepath);
 				img_set.insert(filepath);
 			}
 			shape_val = value["shapes"][i++];
 		}
 	}
-	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_terrain2d))
+	else if (d2d::FileType::IsType(filepath, d2d::FileType::e_terrain2d))
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -278,13 +278,13 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 		Json::Value ocean_val = value["ocean"][i++];
 		while (!ocean_val.isNull()) {
 			std::string filepath = ocean_val["tex0"].asString();
-			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-			filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+			filepath = d2d::FileHelper::GetAbsolutePath(dir, filepath);
+			filepath = d2d::FileHelper::FormatFilepathAbsolute(filepath);
 			img_set.insert(filepath);
 			ocean_val = value["ocean"][i++];
 		}
 	}
-	else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) 
+	else if (d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) 
 	{
 		Json::Value value;
 		Json::Reader reader;
@@ -298,8 +298,8 @@ void PackRes::GetImagesFromJson(const std::vector<std::string>& src_dirs, const 
 		Json::Value comp_val = value["components"][i++];
 		while (!comp_val.isNull()) {
 			std::string filepath = comp_val["filepath"].asString();
-			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-			filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+			filepath = d2d::FileHelper::GetAbsolutePath(dir, filepath);
+			filepath = d2d::FileHelper::FormatFilepathAbsolute(filepath);
 			img_set.insert(filepath);
 			comp_val = value["components"][i++];
 		}
@@ -317,10 +317,10 @@ void PackRes::GetImagesFromSprite(const std::vector<std::string>& src_dirs, cons
 								   const Json::Value& spr_val, std::set<std::string>& images) const
 {
 	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(spr_dir, spr_val);
-	filepath = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) 
+	filepath = d2d::FileHelper::FormatFilepathAbsolute(filepath);
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) 
 	{
-//		filepath = d2d::FilenameTools::getRelativePath(".", filepath);
+//		filepath = d2d::FileHelper::getRelativePath(".", filepath);
 		images.insert(filepath);
 	} 
 	else 
@@ -356,15 +356,15 @@ void PackRes::GetImagesFromCfg(const Json::Value& pkg_val, const std::string& co
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
 		if (wxFileName::DirExists(path)) {
 			wxArrayString files;
-			d2d::FilenameTools::fetchAllFiles(path, files);
+			d2d::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
-					images.push_back(d2d::FilenameTools::FormatFilepath(files[i].ToStdString()));
+				if (d2d::FileType::IsType(files[i], d2d::FileType::e_image)) {
+					images.push_back(d2d::FileHelper::FormatFilepath(files[i].ToStdString()));
 				}
 			}
 		} else if (wxFileName::FileExists(path)) {
-			if (d2d::FileNameParser::isType(path, d2d::FileNameParser::e_image)) {
-				images.push_back(d2d::FilenameTools::FormatFilepath(path));
+			if (d2d::FileType::IsType(path, d2d::FileType::e_image)) {
+				images.push_back(d2d::FileHelper::FormatFilepath(path));
 			}
 		} else {
 			throw d2d::Exception("PackRes::GetImagesFromCfg: unknown image path %s", path.c_str());
@@ -377,7 +377,7 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 {
 	std::vector<std::string> files;
 	GetAllDataFiles(pkg_val, config_dir, files);
-	std::vector<const d2d::ISymbol*> symbols;
+	std::vector<const d2d::Symbol*> symbols;
  	for (int i = 0, n = files.size(); i < n; ++i) {
  		symbols.push_back(d2d::SymbolMgr::Instance()->FetchSymbol(files[i]));
  	}
@@ -390,8 +390,8 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 	tex_mgr.SetSrcDataDir(config_dir);
 	int i = 1;
 	while (true) {
-		std::string path = dst_name + d2d::StringTools::ToString(i) + ".json";
-		if (d2d::FilenameTools::IsFileExist(path)) {
+		std::string path = dst_name + d2d::StringHelper::ToString(i) + ".json";
+		if (d2d::FileHelper::IsFileExist(path)) {
 			tex_mgr.Add(path, i - 1);
 		} else {
 			break;
@@ -431,7 +431,7 @@ void PackRes::GetAllDataFiles(const Json::Value& pkg_val, const std::string& con
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
 		if (wxFileName::DirExists(path)) {
 			wxArrayString files;
-			d2d::FilenameTools::fetchAllFiles(path, files);
+			d2d::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				AddJsonFile(files[i].ToStdString(), filter, unique_files);
 			}
@@ -453,8 +453,8 @@ void PackRes::AddJsonFile(const std::string& filepath, const std::string& filter
 		return;
 	}
 
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex) || 
-		d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) 
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex) || 
+		d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) 
 	{
 		json_set.insert(filepath);
 	}
@@ -552,19 +552,19 @@ void PackRes::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& conf
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
 		if (wxFileName::DirExists(path)) {
 			wxArrayString files;
-			d2d::FilenameTools::fetchAllFiles(path, files);
+			d2d::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
+				if (d2d::FileType::IsType(files[i], d2d::FileType::e_image)) {
 					std::string pts_path = files[i].substr(0, files[i].find(".png")) + "_strip.json";
-					if (d2d::FilenameTools::IsFileExist(pts_path)) {
+					if (d2d::FileHelper::IsFileExist(pts_path)) {
 						pts_files.push_back(pts_path);
 					}
 				}
 			}
 		} else if (wxFileName::FileExists(path)) {
-			if (d2d::FileNameParser::isType(path, d2d::FileNameParser::e_image)) {
+			if (d2d::FileType::IsType(path, d2d::FileType::e_image)) {
 				std::string pts_path = path.substr(0, path.find(".png")) + "_strip.json";
-				if (d2d::FilenameTools::IsFileExist(pts_path)) {
+				if (d2d::FileHelper::IsFileExist(pts_path)) {
 					pts_files.push_back(pts_path);
 				}
 			}

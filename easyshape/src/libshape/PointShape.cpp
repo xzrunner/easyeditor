@@ -26,23 +26,23 @@ PointShape* PointShape::Clone() const
 
 bool PointShape::IsContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::isPointInRect(pos, m_rect);
+	return d2d::Math2D::IsPointInRect(pos, m_rect);
 }
 
 bool PointShape::IsIntersect(const d2d::Rect& rect) const
 {
-	return d2d::Math::isRectIntersectRect(rect, m_rect);
+	return d2d::Math2D::IsRectIntersectRect(rect, m_rect);
 }
 
 void PointShape::Translate(const d2d::Vector& offset)
 {
 	m_pos += offset;
-	m_rect.translate(offset);
+	m_rect.Translate(offset);
 }
 
 void PointShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::PrimitiveDraw::drawCircle(mt, m_pos, RADIUS, true, 2, color.multi);
+	d2d::PrimitiveDraw::DrawCircle(mt, m_pos, RADIUS, true, 2, color.multi);
 }
 
 d2d::IPropertySetting* PointShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
@@ -52,7 +52,7 @@ d2d::IPropertySetting* PointShape::CreatePropertySetting(d2d::EditPanelImpl* sta
 
 void PointShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::IShape::LoadFromFile(value, dir);
+	d2d::Shape::LoadFromFile(value, dir);
 
 	m_pos.x = value["x"].asDouble();
 	m_pos.y = value["y"].asDouble();
@@ -60,7 +60,7 @@ void PointShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 
 void PointShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::IShape::StoreToFile(value, dir);
+	d2d::Shape::StoreToFile(value, dir);
 
 	value["x"] = m_pos.x;
 	value["y"] = m_pos.y;

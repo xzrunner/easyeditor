@@ -19,7 +19,7 @@ void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
 	
 	uint32_t color;
 	unpack(color, ptr);
-	shape->color = d2d::transColor(color, d2d::PT_RGBA);
+	shape->color = d2d::TransColor(color, d2d::PT_RGBA);
 
 	uint16_t num;
 	unpack(num, ptr);

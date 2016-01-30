@@ -6,7 +6,7 @@
 namespace escale9
 {
 
-class Sprite : public d2d::ISprite
+class Sprite : public d2d::Sprite
 {
 public:
 	Sprite();
@@ -20,11 +20,11 @@ public:
 	virtual Sprite* Clone() const;
 
 	//
-	// d2d::ISprite interface
+	// d2d::Sprite interface
 	//
 	virtual bool Update(int version) { return false; }
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::ISymbol* symbol);
+	virtual void SetSymbol(d2d::Symbol* symbol);
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);	
@@ -38,7 +38,7 @@ public:
 
 	const Scale9Data& GetScale9Data() const { return m_data; }
 
-	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
+	static d2d::Sprite* Create(d2d::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 	

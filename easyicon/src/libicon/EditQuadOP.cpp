@@ -31,7 +31,7 @@ bool EditQuadOP::OnMouseLeftDown(int x, int y)
 
 	const d2d::Vector* screen = static_cast<QuadIcon*>(icon)->GetScreen();
 	for (int i = 0; i < 4; ++i) {
-		if (d2d::Math::getDistance(screen[i], pos) < CTRL_NODE_RADIUS) {
+		if (d2d::Math2D::GetDistance(screen[i], pos) < CTRL_NODE_RADIUS) {
 			m_selected = i;
 		}
 	}
@@ -111,7 +111,7 @@ bool EditQuadOP::OnDraw() const
 
 	float w = img->GetClippedWidth(),
 		h = img->GetClippedHeight();
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), w * 0.5f, h * 0.5f, 
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), w * 0.5f, h * 0.5f, 
 		d2d::LIGHT_RED_THIN_LINE);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
@@ -121,9 +121,9 @@ bool EditQuadOP::OnDraw() const
 		screen.push_back(quad_icon->GetScreen()[i]);
 	}
 
-	d2d::PrimitiveDraw::drawPolyline(screen, d2d::LIGHT_GREEN, true);
+	d2d::PrimitiveDraw::DrawPolyline(screen, d2d::LIGHT_GREEN, true);
 	for (int i = 0; i < 4; ++i) {
-		d2d::PrimitiveDraw::rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::DrawRect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
 	}
 
 	return false;

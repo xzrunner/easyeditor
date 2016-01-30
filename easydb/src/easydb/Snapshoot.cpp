@@ -52,14 +52,14 @@ void Snapshoot::Run(int argc, char *argv[])
 void Snapshoot::Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(srcdir, files);
+	d2d::FileHelper::FetchAllFiles(srcdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex) || 
-			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex) || 
+			d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
 		{
 			Json::Value value;
 			Json::Reader reader;
@@ -73,7 +73,7 @@ void Snapshoot::Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::st
 			if (name.empty()) {
 				continue;
 			}
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			std::string filename = dstdir + "//" + name;
 			ss.OutputToImageFile(symbol, filename);
 			symbol->Release();

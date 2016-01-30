@@ -10,7 +10,7 @@ namespace d2d
 class ShearSpriteState : public IArrangeSpriteState
 {
 public:
-	ShearSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
+	ShearSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ShearSpriteState();
 
 	virtual void OnMouseRelease(const Vector& pos);
@@ -21,7 +21,7 @@ private:
 	void Shear2(const Vector& curr);
 
 private:
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 

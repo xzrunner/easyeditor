@@ -34,7 +34,7 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 
 	uint32_t font_color;
 	unpack(font_color, ptr);
-	label->font_color = d2d::transColor(font_color, d2d::PT_RGBA);
+	label->font_color = d2d::TransColor(font_color, d2d::PT_RGBA);
 
 	uint8_t edge;
 	unpack(edge, ptr);
@@ -46,7 +46,7 @@ void LabelFromBin::Unpack(uint8_t** ptr, PackLabel* label)
 
 	uint32_t edge_color;
 	unpack(edge_color, ptr);
-	label->edge_color = d2d::transColor(edge_color, d2d::PT_RGBA);
+	label->edge_color = d2d::TransColor(edge_color, d2d::PT_RGBA);
 
 	uint8_t align_hori, align_vert;
 	unpack(align_hori, ptr);

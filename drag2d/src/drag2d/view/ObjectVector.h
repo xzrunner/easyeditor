@@ -17,8 +17,8 @@ public:
 	ObjectVector();
 	virtual ~ObjectVector();
 	
-	void Traverse(IVisitor& visitor, bool order = true) const;
-	void Traverse(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void Traverse(Visitor& visitor, bool order = true) const;
+	void Traverse(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
 	bool Remove(T* obj);
 
@@ -35,8 +35,8 @@ public:
 	int Size() const;
 
 public:
-	static void Traverse(const std::vector<T*>& objs, IVisitor& visitor, bool order = true);
-	static void Traverse(const std::vector<T*>& objs, IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true);
+	static void Traverse(const std::vector<T*>& objs, Visitor& visitor, bool order = true);
+	static void Traverse(const std::vector<T*>& objs, Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true);
 
 	static bool Remove(std::vector<T*>& objs, T* obj);
 

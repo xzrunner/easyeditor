@@ -2,7 +2,7 @@
 #include "IPropertySetting.h"
 
 #include "common/visitors.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/MultiSpritesPropertySetting.h"
 #include "view/SpriteSelection.h"
 #include "view/ShapeSelection.h"
@@ -87,10 +87,10 @@ void PropertySettingPanel::EnablePropertyGrid(bool enable)
 	}
 }
 
-void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
+void PropertySettingPanel::OnSpriteSelected(Sprite* spr, bool clear)
 {
 	if (spr) {
-		std::set<ISprite*>::iterator itr = m_selection.find(spr);
+		std::set<Sprite*>::iterator itr = m_selection.find(spr);
 		if (itr != m_selection.end()) {
 			if (!clear) {
 				return;
@@ -116,7 +116,7 @@ void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 			SetPropertySetting(CreateDefaultProperty());
 		}
 	} else if (m_selection.size() > 1) {
-		std::vector<ISprite*> sprites;
+		std::vector<Sprite*> sprites;
 		std::copy(m_selection.begin(), m_selection.end(), back_inserter(sprites));
 		SetPropertySetting(new MultiSpritesPropertySetting(sprites));
 	}
@@ -124,8 +124,8 @@ void PropertySettingPanel::OnSpriteSelected(ISprite* spr, bool clear)
 
 void PropertySettingPanel::OnMultiSpriteSelected(SpriteSelection* selection)
 {
-	std::vector<ISprite*> sprites;
-	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	if (sprites.empty()) {
 		OnSpriteSelected(NULL, true);
 	} else if (sprites.size() == 1) {
@@ -154,7 +154,7 @@ void PropertySettingPanel::OnNotify(int sj_id, void* ud)
 		break;
 
 	case MSG_SELECT_SHAPE:
-		SelectShape((IShape*)ud);
+		SelectShape((Shape*)ud);
 		break;
 	case MSG_SELECT_SHAPE_SET:
 		SelectShapeSet((ShapeSelection*)ud);
@@ -194,7 +194,7 @@ void PropertySettingPanel::InitLayout()
 	SetSizer(sizer);
 }
 
-void PropertySettingPanel::SelectShape(IShape* shape)
+void PropertySettingPanel::SelectShape(Shape* shape)
 {
 	assert(m_stage);
 	if (shape) {
@@ -206,8 +206,8 @@ void PropertySettingPanel::SelectShape(IShape* shape)
 
 void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 {
-	std::vector<IShape*> shapes;
-	selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	std::vector<Shape*> shapes;
+	selection->Traverse(FetchAllVisitor<Shape>(shapes));
 	if (shapes.empty()) {
 		SelectShape(NULL);
 	} else if (shapes.size() == 1) {
@@ -219,8 +219,8 @@ void PropertySettingPanel::SelectShapeSet(ShapeSelection* selection)
 
 void PropertySettingPanel::ClearSelection()
 {
-	for_each(m_selection.begin(), m_selection.end(), ReleaseObjectFunctor<ISprite>());
+	for_each(m_selection.begin(), m_selection.end(), ReleaseObjectFunctor<Sprite>());
 	m_selection.clear();
 }
 
-} // d2d
+}

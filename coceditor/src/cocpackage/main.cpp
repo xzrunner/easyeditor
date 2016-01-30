@@ -11,7 +11,7 @@
 
 #define CHARACTER
 
-std::vector<const d2d::ISymbol*> SYMBOLS;
+std::vector<const d2d::Symbol*> SYMBOLS;
 
 libcoco::epd::TextureMgr TEX_MGR;
 
@@ -44,7 +44,7 @@ static void InitSymbolCreators()
 void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sorted)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
@@ -63,11 +63,11 @@ void LoadFromDir(const std::string& dir)
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
-			|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
+		if (d2d::FileType::IsType(*itr, d2d::FileType::e_complex)
+			|| d2d::FileType::IsType(*itr, d2d::FileType::e_anim))
 		{
 			// todo release symbol
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
 			SYMBOLS.push_back(symbol);
 		}
 	}
@@ -77,7 +77,7 @@ void LoadFromList(const std::string& list)
 {
 	std::set<std::string> names;
 
-	wxString ext = d2d::FilenameTools::getExtension(list).Lower();
+	wxString ext = d2d::FileHelper::GetExtension(list).Lower();
 	if (ext == "txt")
 	{
 		std::locale::global(std::locale(""));
@@ -115,7 +115,7 @@ void LoadFromList(const std::string& list)
 		return;
 	}
 
-	wxString dir = d2d::FilenameTools::getFileDir(list);
+	wxString dir = d2d::FileHelper::GetFileDir(list);
 
 	std::set<std::string> files_sorted;
 	LoadAllFilesSorted(dir.ToStdString(), files_sorted);
@@ -123,11 +123,11 @@ void LoadFromList(const std::string& list)
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
-			|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
+		if (d2d::FileType::IsType(*itr, d2d::FileType::e_complex)
+			|| d2d::FileType::IsType(*itr, d2d::FileType::e_anim))
 		{
 			// todo release symbol
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
 			std::set<std::string>::iterator itr = names.find(symbol->name);
 			if (itr == names.end()) {
 //					symbol->release();
@@ -179,7 +179,7 @@ void ParamsDetection(int argc, char *argv[], float& scale, std::string& ignore_f
 
 void LoadIgnoreList(const std::string& filename)
 {
-	wxString ext = d2d::FilenameTools::getExtension(filename).Lower();
+	wxString ext = d2d::FileHelper::GetExtension(filename).Lower();
 
 	std::set<std::string> list;
 
@@ -254,7 +254,7 @@ int main(int argc, char *argv[])
 		packer.Parser();
 		packer.Output(argv[4]);
 	} catch (d2d::Exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << e.What() << std::endl;
 		return 1;
 	}
 

@@ -50,7 +50,7 @@ void QuadIcon::Draw(const d2d::Matrix& mt, float process) const
 
 	d2d::Vector vertices[4];
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = d2d::Math::transVector(m_screen[i], mt);
+		vertices[i] = d2d::Math2D::TransVector(m_screen[i], mt);
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
@@ -65,10 +65,10 @@ d2d::Rect QuadIcon::GetRegion(float process) const
 	for (int i = 0; i < 4; ++i) {
 		float x = m_screen[i].x,
 			y = m_screen[i].y;
-		if (x < ret.xMin) ret.xMin = x;
-		if (x > ret.xMax) ret.xMax = x;
-		if (y < ret.yMin) ret.yMin = y;
-		if (y > ret.yMax) ret.yMax = y;
+		if (x < ret.xmin) ret.xmin = x;
+		if (x > ret.xmax) ret.xmax = x;
+		if (y < ret.ymin) ret.ymin = y;
+		if (y > ret.ymax) ret.ymax = y;
 	}
 
 	return ret;
@@ -87,17 +87,17 @@ void QuadIcon::SetScreen(const d2d::Vector* screen)
 
 void QuadIcon::AfterSetImage()
 {
-	m_src[0].set(0, 0);
-	m_src[1].set(0, 1);
-	m_src[2].set(1, 1);
-	m_src[3].set(1, 0);
+	m_src[0].Set(0, 0);
+	m_src[1].Set(0, 1);
+	m_src[2].Set(1, 1);
+	m_src[3].Set(1, 0);
 
 	float hw = m_img->GetClippedWidth() * 0.5f,
 		hh = m_img->GetClippedHeight() * 0.5f;
-	m_screen[0].set(-hw, -hh);
-	m_screen[1].set(-hw,  hh);
-	m_screen[2].set( hw,  hh);
-	m_screen[3].set( hw, -hh);	
+	m_screen[0].Set(-hw, -hh);
+	m_screen[1].Set(-hw,  hh);
+	m_screen[2].Set( hw,  hh);
+	m_screen[3].Set( hw, -hh);	
 }
 
 }

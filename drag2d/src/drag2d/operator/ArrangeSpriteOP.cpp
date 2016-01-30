@@ -4,9 +4,9 @@
 #include "ArrangeSpriteOP.h"
 #include "ArrangeSpriteImpl.h"
 
-#include "dataset/ISprite.h"
-#include "dataset/ISymbol.h"
-#include "dataset/AbstractBV.h"
+#include "dataset/Sprite.h"
+#include "dataset/Symbol.h"
+#include "dataset/BoundingBox.h"
 #include "common/Math.h"
 #include "common/visitors.h"
 #include "common/Matrix.h"
@@ -133,9 +133,9 @@ bool ArrangeSpriteOP<TBase>::IsEmpty() const
 }
 
 template <typename TBase>
-ISprite* ArrangeSpriteOP<TBase>::SelectByPos(const Vector& pos) const
+Sprite* ArrangeSpriteOP<TBase>::SelectByPos(const Vector& pos) const
 {
-	ISprite* sprite = NULL;
+	Sprite* sprite = NULL;
 	sprite = m_impl->QueryEditedSprite(pos);
 	if (!sprite) {
 		sprite = TBase::SelectByPos(pos);

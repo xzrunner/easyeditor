@@ -38,16 +38,16 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 			m_width = w;
 			m_yCurr = 0;
 		}
-		r.xMin = m_xCurr;
-		r.xMax = r.xMin + w;
-		r.yMin = m_yCurr;
-		r.yMax = r.yMin + h;
+		r.xmin = m_xCurr;
+		r.xmax = r.xmin + w;
+		r.ymin = m_yCurr;
+		r.ymax = r.ymin + h;
 		m_yCurr += h;
 
-		r.xMin += extra_half;
-		r.xMax -= extra_half;
-		r.yMin += extra_half;
-		r.yMax -= extra_half;
+		r.xmin += extra_half;
+		r.xmax -= extra_half;
+		r.ymin += extra_half;
+		r.ymax -= extra_half;
 		m_mapImg2Rect.insert(std::make_pair(img, r));
 	}
 }
@@ -69,11 +69,11 @@ void TexturePacker::storeToMemory()
 		const unsigned char* pixels = itr->first->GetPixelData();
 		const d2d::Rect& r = itr->second;
 		//////////////////////////////////////////////////////////////////////////
-		int src_line_size = r.xLength() * channels;
-		for (int i = 0, n = r.yLength(); i < n ;++i)
+		int src_line_size = r.Width() * channels;
+		for (int i = 0, n = r.Height(); i < n ;++i)
 		{
-			int ptr_src = src_line_size * (r.yLength() - i - 1);
-			int ptr_dst = size_line * (r.yMin + i) + r.xMin * channels;
+			int ptr_src = src_line_size * (r.Height() - i - 1);
+			int ptr_dst = size_line * (r.ymin + i) + r.xmin * channels;
 			memcpy(&m_pixels[ptr_dst], &pixels[ptr_src], src_line_size);
 			for (int j = 0; j < m_extrude; ++j)
 			{
@@ -81,15 +81,15 @@ void TexturePacker::storeToMemory()
 				memcpy(&m_pixels[ptr_dst + size_line + channels * j], &pixels[ptr_src + size_line - channels], channels);
 			}
 		}
-		const int xoffset = (r.xMin - m_extrude) * channels;
+		const int xoffset = (r.xmin - m_extrude) * channels;
 		for (int i = 0; i < m_extrude; ++i)
 		{
-			int ptr_src = size_line * r.yMin + xoffset;
-			int ptr_dst = size_line * (r.yMin - i - 1) + xoffset;
-			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (r.xLength() + 2 * m_extrude));
-			ptr_src = size_line * (r.yMin + r.yLength() - 1) + xoffset;
-			ptr_dst = size_line * (r.yMin + r.yLength() + i) + xoffset;
-			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (r.xLength() + 2 * m_extrude));
+			int ptr_src = size_line * r.ymin + xoffset;
+			int ptr_dst = size_line * (r.ymin - i - 1) + xoffset;
+			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (r.Width() + 2 * m_extrude));
+			ptr_src = size_line * (r.ymin + r.Height() - 1) + xoffset;
+			ptr_dst = size_line * (r.ymin + r.Height() + i) + xoffset;
+			memcpy(&m_pixels[ptr_dst], &m_pixels[ptr_src], channels * (r.Width() + 2 * m_extrude));
 		}
 	}
 }

@@ -12,7 +12,7 @@ EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	, m_cmpt(cmpt)
 	, m_bDirty(false)
 {
-	m_lastPos.setInvalid();
+	m_lastPos.SetInvalid();
 
 	clearBuffer();
 }
@@ -21,10 +21,10 @@ bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
-	if (!m_first_pos.isValid())
+	if (!m_first_pos.IsValid())
 		m_lastPos = m_stage->TransPosScrToProj(x, y);
 	else
-		m_lastPos.setInvalid();
+		m_lastPos.SetInvalid();
 
 	return false;
 }
@@ -46,7 +46,7 @@ bool EditPolylinesOP::OnMouseDrag(int x, int y)
 {
 	if (d2d::SelectShapesOP::OnMouseDrag(x, y)) return true;
 
-	if (m_lastPos.isValid())
+	if (m_lastPos.IsValid())
 	{
 		d2d::Vector currPos = m_stage->TransPosScrToProj(x, y);
 		d2d::Vector offset = currPos - m_lastPos;
@@ -65,12 +65,12 @@ bool EditPolylinesOP::OnDraw() const
 	if (d2d::SelectShapesOP::OnDraw()) return true;
 
 	d2d::ColorTrans color;
-	color.multi.set(0.8f, 0.8f, 0.2f);
+	color.multi.Set(0.8f, 0.8f, 0.2f);
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr) {
 		itr->second->Draw(d2d::Matrix(), color);
-		d2d::PrimitiveDraw::drawCircles(itr->second->GetVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		d2d::PrimitiveDraw::DrawCircles(itr->second->GetVertices(), d2d::SettingData::ctl_pos_sz, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;
@@ -91,7 +91,7 @@ void EditPolylinesOP::simplify()
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
 		std::vector<d2d::Vector> simplified;
-		d2d::DouglasPeucker::implement(itr->first->GetVertices(), m_cmpt->getSimplifyThreshold(), simplified);
+		d2d::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->getSimplifyThreshold(), simplified);
 		itr->second->Load(simplified);
 	}
 
@@ -122,13 +122,13 @@ void EditPolylinesOP::clearBuffer()
 //////////////////////////////////////////////////////////////////////////
 
 void EditPolylinesOP::UpdateChainVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
 	chain->refresh();
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -142,13 +142,13 @@ UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer)
 }
 
 void EditPolylinesOP::UpdateBufferVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
 	m_simplifyBuffer.insert(std::make_pair(chain, chain->Clone()));
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -162,11 +162,11 @@ OffsetVisitor(const d2d::Vector& offset)
 }
 
 void EditPolylinesOP::OffsetVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 	chain->Translate(m_offset);
-	bFetchNext = true;
+	next = true;
 }
 
 }

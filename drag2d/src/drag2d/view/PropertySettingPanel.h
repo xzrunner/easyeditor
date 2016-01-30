@@ -13,9 +13,9 @@ namespace d2d
 
 class IPropertySetting;
 class EditPanelImpl;
-class ISprite;
+class Sprite;
 class SpriteSelection;
-class IShape;
+class Shape;
 class ShapeSelection;
 
 class PropertySettingPanel : public wxPanel, public Observer
@@ -39,7 +39,7 @@ public:
 protected:
 	virtual IPropertySetting* CreateDefaultProperty() const { return NULL; }
 
-	virtual void OnSpriteSelected(ISprite* spr, bool clear);
+	virtual void OnSpriteSelected(Sprite* spr, bool clear);
 	virtual void OnMultiSpriteSelected(SpriteSelection* selection);
 
 	//
@@ -50,7 +50,7 @@ protected:
 private:
 	void InitLayout();
 
-	void SelectShape(IShape* shape);
+	void SelectShape(Shape* shape);
 	void SelectShapeSet(ShapeSelection* selection);
 
 	void ClearSelection();
@@ -62,7 +62,7 @@ protected:
 
 	IPropertySetting* m_setting;
 
-	std::set<ISprite*> m_selection;
+	std::set<Sprite*> m_selection;
 
 	// todo
 	EditPanelImpl* m_stage;

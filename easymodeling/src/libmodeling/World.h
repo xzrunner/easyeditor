@@ -21,7 +21,7 @@ namespace libmodeling
 
 	public:
 		World() {
-			gravity.set(0, -10);
+			gravity.Set(0, -10);
 			allowSleep = true;
 
 			warmStarting = true;

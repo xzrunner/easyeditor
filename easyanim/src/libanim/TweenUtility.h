@@ -9,14 +9,14 @@ namespace libanim
 class TweenUtility
 {
 public:
-	static void GetTweenSprites(const std::vector<d2d::ISprite*>& start, 
-		const std::vector<d2d::ISprite*>& end, 
-		std::vector<d2d::ISprite*>& tween, float process);
+	static void GetTweenSprites(const std::vector<d2d::Sprite*>& start, 
+		const std::vector<d2d::Sprite*>& end, 
+		std::vector<d2d::Sprite*>& tween, float process);
 
-	static bool IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1);
+	static bool IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1);
 
-	static void GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
-		d2d::ISprite* tween, float process);	
+	static void GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end, 
+		d2d::Sprite* tween, float process);	
 
 }; // TweenUtility
 

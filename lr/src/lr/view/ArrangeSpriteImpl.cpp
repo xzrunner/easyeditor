@@ -35,8 +35,8 @@ void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 d2d::IArrangeSpriteState* ArrangeSpriteImpl::
 CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
 {
-	std::vector<d2d::ISprite*> sprites;
-	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	if (sprites.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprites[0])) {
 		return new ecomplex::SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprites[0])->GetDir());
 	} else {
@@ -59,15 +59,15 @@ RotateSpriteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos,
 void ArrangeSpriteImpl::RotateSpriteState::
 Rotate(const d2d::Vector& dst)
 {
-	std::vector<d2d::ISprite*> sprs;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprs));
+	std::vector<d2d::Sprite*> sprs;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprs));
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
-		d2d::ISprite* spr = sprs[i];
+		d2d::Sprite* spr = sprs[i];
 		std::string filepath = spr->GetSymbol().GetFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
 			d2d::Vector center = spr->GetPosition() + spr->GetOffset();
-			float angle = d2d::Math::getAngleInDirection(center, m_last_pos, dst);
+			float angle = d2d::Math2D::GetAngleInDirection(center, m_last_pos, dst);
 			spr->Rotate(angle);
 		}
 	}

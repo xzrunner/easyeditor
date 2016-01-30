@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class ViewlistList;
 class ViewlistListImpl;
 
@@ -16,7 +16,7 @@ public:
 	ViewlistPanel(wxWindow* parent);
 
 	void Clear();
-	void Insert(ISprite* sprite, int idx = -1);
+	void Insert(Sprite* sprite, int idx = -1);
 
 	void SetListImpl(ViewlistListImpl* impl);
 

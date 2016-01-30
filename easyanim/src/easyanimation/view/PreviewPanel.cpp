@@ -15,7 +15,7 @@ bool PreviewPanel::Update(int version)
 {
 	d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<d2d::Sprite*> sprites;
 	PreviewUtility::GetCurrSprites(m_ctrl, sprites);
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {

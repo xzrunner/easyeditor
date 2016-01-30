@@ -14,7 +14,7 @@ public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void SetBackground(d2d::ISymbol* background);
+	void SetBackground(d2d::Symbol* background);
 
 	static d2d::Vector TransToBirdView(const d2d::Vector& pos);
 	static d2d::Vector TransToFlatView(const d2d::Vector& pos);
@@ -34,7 +34,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::ISprite* m_background;
+	d2d::Sprite* m_background;
 
 }; // StageCanvas
 

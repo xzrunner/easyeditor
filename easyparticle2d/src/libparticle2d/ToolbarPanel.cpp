@@ -77,7 +77,7 @@ void ToolbarPanel::Store(Json::Value& val) const
 void ToolbarPanel::Add(const LoadAdapter::Component& comp)
 {
 	// todo Release symbol
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(comp.filepath);
 	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, p_symbol, this);
 
@@ -408,7 +408,7 @@ void ToolbarPanel::Clear()
 	OnDelAllChild(wxCommandEvent());
 }
 
-void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol)
+void ToolbarPanel::OnAddChild(wxCommandEvent& event, d2d::Symbol* symbol)
 {
 	p2d_symbol* p_symbol = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, p_symbol, this);
@@ -461,7 +461,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	d2d::ISymbol* symbol = m_library->GetSymbol(index);
+	d2d::Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
 		m_toolbar->OnAddChild(wxCommandEvent(), symbol);

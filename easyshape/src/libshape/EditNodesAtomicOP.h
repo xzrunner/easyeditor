@@ -20,7 +20,7 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<d2d::ISprite*>& sprites) const { return NULL; }
+	virtual Json::Value Store(const std::vector<d2d::Sprite*>& sprites) const { return NULL; }
 
 private:
 	std::vector<ChainShape*> m_chains;

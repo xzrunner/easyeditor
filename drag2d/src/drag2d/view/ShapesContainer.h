@@ -7,7 +7,7 @@
 namespace d2d
 {
 
-class IShape;
+class Shape;
 
 class ShapesContainer : public IDataContainer
 {
@@ -17,8 +17,8 @@ public:
 	//
 	// IDataContainer interface
 	//
-	virtual void Traverse(IVisitor& visitor, bool order = true) const;
-	virtual void Traverse(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	virtual void Traverse(Visitor& visitor, bool order = true) const;
+	virtual void Traverse(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 	virtual bool Remove(Object* obj);
 	virtual bool Insert(Object* obj);
 	virtual bool Insert(Object* obj, int idx);
@@ -27,7 +27,7 @@ public:
 	virtual bool ResetOrderMost(const Object* obj, bool up);
 
 private:
-	ObjectVector<IShape> m_shapes;
+	ObjectVector<Shape> m_shapes;
 
 }; // ShapesContainer
 

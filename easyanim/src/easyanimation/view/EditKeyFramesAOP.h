@@ -17,7 +17,7 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
-	virtual Json::Value Store(const std::vector<d2d::ISprite*>& sprites) const { return Json::Value(); }
+	virtual Json::Value Store(const std::vector<d2d::Sprite*>& sprites) const { return Json::Value(); }
 
 	void AddRemoved(KeyFrame* kf);
 	void AddInserted(KeyFrame* kf);

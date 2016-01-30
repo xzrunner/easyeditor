@@ -28,16 +28,16 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::drawConnection() const
 {
-	std::map<d2d::ISprite*, Node*>& connection
+	std::map<d2d::Sprite*, Node*>& connection
 		= Context::Instance()->stage->m_graphics.connection;
-	std::map<d2d::ISprite*, Node*>::iterator itr = connection.begin();
+	std::map<d2d::Sprite*, Node*>::iterator itr = connection.begin();
 	for ( ; itr != connection.end(); ++itr)
 	{
-		d2d::ISprite* from = itr->first;
+		d2d::Sprite* from = itr->first;
 		for (size_t i = 0, n = itr->second->out.size(); i < n; ++i)
 		{
-			d2d::ISprite* to = itr->second->out[i];
-			d2d::PrimitiveDraw::drawLine(from->GetPosition(), to->GetPosition(), 
+			d2d::Sprite* to = itr->second->out[i];
+			d2d::PrimitiveDraw::DrawLine(from->GetPosition(), to->GetPosition(), 
 				d2d::Colorf(0.8f, 0.8f, 0.8f));
 		}
 	}

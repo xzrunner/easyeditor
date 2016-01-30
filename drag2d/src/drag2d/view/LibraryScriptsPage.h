@@ -11,7 +11,7 @@ class LibraryScriptsPage : public ILibraryPage
 public:
 	LibraryScriptsPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual bool IsHandleSymbol(Symbol* symbol) const;
 
 	virtual bool LoadFromConfig();
 

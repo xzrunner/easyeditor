@@ -66,9 +66,9 @@ void KeysContentEdit::CopySelection()
 		Json::Value k_val;
 		k_val["distance"] = itr->first - last_frame;
 
-		const std::vector<d2d::ISprite*>& sprites = itr->second->GetAllSprites();
+		const std::vector<d2d::Sprite*>& sprites = itr->second->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			d2d::ISprite* spr = sprites[i];
+			d2d::Sprite* spr = sprites[i];
 			Json::Value s_val;
 			s_val["filename"] = spr->GetSymbol().GetFilepath();
 			spr->Store(s_val);	
@@ -142,9 +142,9 @@ void KeysContentEdit::PasteSelection()
 			const Json::Value& s_val = k_val["sprite"][i_spr];
 			
 			std::string filepath = s_val["filename"].asString();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
-			d2d::ISprite* spr = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Sprite* spr = d2d::SpriteFactory::Instance()->Create(symbol);
 			spr->Load(s_val);
 			frame->Insert(spr);
 			spr->Release();

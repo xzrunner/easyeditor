@@ -20,12 +20,12 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
+	d2d::Symbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		if (m_pScale) {
 			sprite->SetScale(d2d::Vector(*m_pScale, *m_pScale));

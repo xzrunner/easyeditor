@@ -9,10 +9,10 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 					   Symbol* symbol)
 {
 	std::vector<d2d::Image*> images;
-	std::string img_name = d2d::FilenameTools::getAbsolutePath(dir, value["image name"].asString());
+	std::string img_name = d2d::FileHelper::GetAbsolutePath(dir, value["image name"].asString());
 	LoadImages(img_name, images);
 
-	std::string lua_file = d2d::FilenameTools::getAbsolutePath(dir, value["lua desc"].asString());
+	std::string lua_file = d2d::FileHelper::GetAbsolutePath(dir, value["lua desc"].asString());
 	librespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 
@@ -33,8 +33,8 @@ void LoadFromLua::LoadImages(const std::string& name, std::vector<d2d::Image*>& 
 	int idx = 1;
 	while (true)
 	{
-		std::string filepath = name + d2d::StringTools::ToString(idx++) + ".png";
-		if (d2d::FilenameTools::IsFileExist(filepath)) {
+		std::string filepath = name + d2d::StringHelper::ToString(idx++) + ".png";
+		if (d2d::FileHelper::IsFileExist(filepath)) {
 			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);
 		} else {	

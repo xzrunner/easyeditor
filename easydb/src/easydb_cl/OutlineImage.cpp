@@ -35,13 +35,13 @@ void OutlineImage::Run(int argc, char *argv[])
 void OutlineImage::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 			continue;
 		}
 
@@ -59,15 +59,15 @@ void OutlineImage::Trigger(const std::string& dir) const
 		std::vector<d2d::Vector> vertices(fine.GetResult());
 
 		float src_area = image->GetClippedWidth() * image->GetClippedHeight();
-		float dst_area = d2d::Math::GetPolygonArea(vertices);
+		float dst_area = d2d::Math2D::GetPolygonArea(vertices);
 		if (dst_area < src_area * 0.95f)
 		{
 			for (int i = 0, n = vertices.size(); i < n; ++i) {
 				vertices[i] += offset;
 			}
-			d2d::JsonIO::Store(vertices, value["normal"]);
+			d2d::JsonSerializer::Store(vertices, value["normal"]);
 
-			wxString out_file = d2d::FilenameTools::getFilenameAddTag(filepath, 
+			wxString out_file = d2d::FileHelper::GetFilenameAddTag(filepath, 
 				eimage::OUTLINE_FILE_TAG, "json");
 			Json::StyledStreamWriter writer;
 			std::locale::global(std::locale(""));

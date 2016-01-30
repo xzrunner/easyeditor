@@ -96,14 +96,14 @@ void VerticalImageList::Swap(int i0, int i1)
 	Refresh(true);
 }
 
-void VerticalImageList::Traverse(IVisitor& visitor) const
+void VerticalImageList::Traverse(Visitor& visitor) const
 {
 	std::vector<ListItem*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)
 	{
-		bool hasNext;
-		visitor.Visit(*itr, hasNext);
-		if (!hasNext) break;
+		bool next;
+		visitor.Visit(*itr, next);
+		if (!next) break;
 	}
 }
 
@@ -220,4 +220,4 @@ void VerticalImageList::OnMouseEvent(wxMouseEvent& event)
 {
 }
 
-} // d2d
+}

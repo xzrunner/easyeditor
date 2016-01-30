@@ -23,4 +23,4 @@ wxSizer* PasteSymbolRandomCMPT::initLayout()
 	return topSizer;
 }
 
-} // d2d
+}

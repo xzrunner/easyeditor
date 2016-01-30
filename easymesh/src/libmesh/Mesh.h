@@ -19,7 +19,7 @@ public:
 	Mesh(const d2d::Image& image, bool initBound = true, bool use_region = false);
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual Mesh* Clone() const;
 
@@ -40,9 +40,9 @@ public:
 	virtual d2d::Vector* FindNode(const d2d::Vector& p) { return NULL; }
 	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst) {}
 
-	virtual void TraverseShape(d2d::IVisitor& visitor) const;
-	virtual bool RemoveShape(d2d::IShape* shape);
-	virtual bool InsertShape(d2d::IShape* shape);
+	virtual void TraverseShape(d2d::Visitor& visitor) const;
+	virtual bool RemoveShape(d2d::Shape* shape);
+	virtual bool InsertShape(d2d::Shape* shape);
 	virtual bool ClearShape();
 
  	virtual void Reset();

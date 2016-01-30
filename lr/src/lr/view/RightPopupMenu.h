@@ -48,7 +48,7 @@ private:
 
 	StagePanel* m_stage;
 
-	d2d::ISprite* m_sprite;
+	d2d::Sprite* m_sprite;
 
 	std::vector<CharacterFileName> m_anim_files;
 

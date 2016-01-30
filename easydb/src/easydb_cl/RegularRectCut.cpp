@@ -38,7 +38,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 // 	d2d::ShaderMgr::Instance()->reload();
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
@@ -46,11 +46,11 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::string filepath = filename.GetFullPath().ToStdString();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
+			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->GetImage();
 			eimage::RegularRectCut cut(*image);
 			cut.AutoCut();
 
@@ -58,7 +58,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			msg.Printf("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea());
 			std::cout << msg << std::endl;
 
-			wxString filename = d2d::FilenameTools::getRelativePath(src_dir, filepath);
+			wxString filename = d2d::FileHelper::GetRelativePath(src_dir, filepath);
 			filename = filename.substr(0, filename.find_last_of('.'));
 			filename.Replace("\\", "%");
 

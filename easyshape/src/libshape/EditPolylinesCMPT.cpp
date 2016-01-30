@@ -95,8 +95,8 @@ void EditPolylinesCMPT::onUpdateFromSimplified(wxCommandEvent& event)
 
 void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 {
-	std::vector<d2d::IShape*> shapes;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	std::vector<d2d::Shape*> shapes;
+	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::Shape>(shapes));
 	if (shapes.size() == 2)
 	{
 		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
@@ -120,8 +120,8 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 
 void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 {
-	std::vector<d2d::IShape*> shapes;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	std::vector<d2d::Shape*> shapes;
+	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::Shape>(shapes));
 
 	float leftmost = FLT_MAX;
 	std::vector<ChainShape*> chains;
@@ -131,8 +131,8 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 		if (chain) 
 		{
 			chains.push_back(chain);
-			if (chain->GetRect().xMin < leftmost)
-				leftmost = chain->GetRect().xMin;
+			if (chain->GetRect().xmin < leftmost)
+				leftmost = chain->GetRect().xmin;
 		}
 	}
 
@@ -144,4 +144,4 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-} // d2d
+}

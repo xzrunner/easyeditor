@@ -30,7 +30,7 @@ private:
 	void TransComplex(const std::string& filepath) const;
 	void TransAnimation(const std::string& filepath) const;
 
-	bool IsAnchor(const d2d::ISprite* spr) const;
+	bool IsAnchor(const d2d::Sprite* spr) const;
 
 }; // TransOldAnchorFile
 

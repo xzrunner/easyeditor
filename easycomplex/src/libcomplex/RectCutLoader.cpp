@@ -17,8 +17,8 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
 		const Picture& s = pictures[i];
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(s.filepath.ToStdString());
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(s.filepath.ToStdString());
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 
 		d2d::Vector pos;
 		pos.x = s.src.x + s.src.w * 0.5f;
@@ -39,7 +39,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	std::vector<Picture> pictures;
 	LoadJsonFile(pack_file, img_name, pictures);
 
-	std::string dir = d2d::FilenameTools::getFileDir(pack_file);
+	std::string dir = d2d::FileHelper::GetFileDir(pack_file);
 	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
 
 	eimage::ImageClip clip(*img);
@@ -83,7 +83,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 ////	LoadJsonFile(pack_file, img_name, pictures);
 //	LoadRRPFile(pack_file, 5837, pictures);
 //
-//	std::string dir = d2d::FilenameTools::getFileDir(pack_file);
+//	std::string dir = d2d::FileHelper::getFileDir(pack_file);
 //	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
 //
 ////	eimage::ImageClip clip(*img_data);

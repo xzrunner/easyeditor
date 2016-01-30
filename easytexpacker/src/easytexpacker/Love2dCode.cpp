@@ -19,36 +19,36 @@ void Love2dCode::resolve()
 
 	lua::TableAssign ta(m_gen, "quads");
 
-	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 
-		const d2d::ISymbol& symbol = sprite->GetSymbol();
+		const d2d::Symbol& symbol = sprite->GetSymbol();
 		const d2d::Vector& pos = sprite->GetPosition();
 
-		std::string name = d2d::FilenameTools::getFilename(symbol.GetFilepath());
+		std::string name = d2d::FileHelper::GetFilename(symbol.GetFilepath());
 
 		std::string x, y, w, h, px, py, a;
 		if (sprite->GetAngle() != 0)
 		{
-			x = wxString::FromDouble(pos.x - symbol.GetSize().yLength() * 0.5f);
-			y = wxString::FromDouble(pos.y - symbol.GetSize().xLength() * 0.5f);
-			w = wxString::FromDouble(symbol.GetSize().yLength());
-			h = wxString::FromDouble(symbol.GetSize().xLength());
+			x = wxString::FromDouble(pos.x - symbol.GetSize().Height() * 0.5f);
+			y = wxString::FromDouble(pos.y - symbol.GetSize().Width() * 0.5f);
+			w = wxString::FromDouble(symbol.GetSize().Height());
+			h = wxString::FromDouble(symbol.GetSize().Width());
 			a = "1.57";
 		}
 		else
 		{
-			x = wxString::FromDouble(pos.x - symbol.GetSize().xLength() * 0.5f);
-			y = wxString::FromDouble(pos.y - symbol.GetSize().yLength() * 0.5f);
-			w = wxString::FromDouble(symbol.GetSize().xLength());
-			h = wxString::FromDouble(symbol.GetSize().yLength());
+			x = wxString::FromDouble(pos.x - symbol.GetSize().Width() * 0.5f);
+			y = wxString::FromDouble(pos.y - symbol.GetSize().Height() * 0.5f);
+			w = wxString::FromDouble(symbol.GetSize().Width());
+			h = wxString::FromDouble(symbol.GetSize().Height());
 			a = "0";
 		}
-		px = wxString::FromDouble(symbol.GetSize().xLength() * 0.5f);
-		py = wxString::FromDouble(480 - symbol.GetSize().yLength() * 0.5f);
+		px = wxString::FromDouble(symbol.GetSize().Width() * 0.5f);
+		py = wxString::FromDouble(480 - symbol.GetSize().Height() * 0.5f);
 
 		// q = love.graphics.newQuad(x, y, w, h, sw, sh)
 		std::string aq = lua::assign("q", lua::call("", "love.graphics.newQuad", 6, x, y, w, h, sw, sh));

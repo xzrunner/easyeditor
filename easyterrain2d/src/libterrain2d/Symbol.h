@@ -8,7 +8,7 @@ namespace eterrain2d
 
 class OceanMesh;
 
-class Symbol : public d2d::ISymbol
+class Symbol : public d2d::Symbol
 {
 public:
 	Symbol();
@@ -16,17 +16,17 @@ public:
 	virtual ~Symbol();
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual Symbol* Clone() const { return NULL; }
 
 	//
-	// ISymbol interfaces
+	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
 	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::ISprite* spr = NULL, const d2d::ISprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::ISprite* sprite = NULL) const;
+		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
+	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
 
 	std::vector<OceanMesh*>& GetOceans() { return m_oceans; }
 	const std::vector<OceanMesh*>& GetOceans() const { return m_oceans; }
@@ -35,7 +35,7 @@ public:
 
 	float GetOceanAngle() const { return m_angle; }
 
-	static d2d::ISymbol* Create() { return new Symbol(); }
+	static d2d::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();

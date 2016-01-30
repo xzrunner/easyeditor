@@ -78,8 +78,8 @@ void ToolbarPanel::OnNotify(int sj_id, void* ud)
 	if (sj_id == MSG_CHANGE_WINDOW_VIEW_SIZE) 
 	{
 		ChangeWindowViewSizeSJ::Params* p = (ChangeWindowViewSizeSJ::Params*)ud;
-		m_width_text->SetValue(d2d::StringTools::ToString(p->width));
-		m_height_text->SetValue(d2d::StringTools::ToString(p->height));
+		m_width_text->SetValue(d2d::StringHelper::ToString(p->width));
+		m_height_text->SetValue(d2d::StringHelper::ToString(p->height));
 	}
 }
 

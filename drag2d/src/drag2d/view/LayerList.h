@@ -11,7 +11,7 @@ namespace d2d
 class Layer;
 class LayerMgr;
 
-class LayerList : public wxListCtrl, public d2d::Observer
+class LayerList : public wxListCtrl, public Observer
 {
 public:
 	LayerList(wxWindow* parent);	

@@ -25,15 +25,15 @@ void Joint::drawBodyFlag() const
 }
 
 d2d::Vector Joint::transWorldToLocal(const d2d::Vector& world, 
-									const d2d::ISprite* sprite)
+									const d2d::Sprite* sprite)
 {
-	return d2d::Math::rotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
+	return d2d::Math2D::RotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
 }
 
 d2d::Vector Joint::transLocalToWorld(const d2d::Vector& local, 
-									const d2d::ISprite* sprite)
+									const d2d::Sprite* sprite)
 {
-	return d2d::Math::rotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
+	return d2d::Math2D::RotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
 }
 
 void Joint::drawBodyFlag(const d2d::Vector& pos) const
@@ -45,5 +45,5 @@ void Joint::drawBodyFlag(const d2d::Vector& pos) const
 	vertices[1].x += edge;
 	vertices[2].y -= edge;
 	vertices[3].y += edge;
-	d2d::PrimitiveDraw::drawLines(vertices, d2d::Colorf(0.4f, 0.8f, 0.8f), 1);
+	d2d::PrimitiveDraw::DrawLines(vertices, d2d::Colorf(0.4f, 0.8f, 0.8f), 1);
 }

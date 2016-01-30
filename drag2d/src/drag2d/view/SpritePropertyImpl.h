@@ -5,12 +5,12 @@ namespace d2d
 {
 
 class EditPanelImpl;
-class ISprite;
+class Sprite;
 
 class SpritePropertyImpl
 {
 public:
-	SpritePropertyImpl(EditPanelImpl* stage, ISprite* sprite);
+	SpritePropertyImpl(EditPanelImpl* stage, Sprite* sprite);
 	~SpritePropertyImpl();
 
 	void Translate(float x, float y);
@@ -21,12 +21,12 @@ public:
 	void Mirror(bool mx, bool my);
 	void Perspective(float px, float py);
 
-	ISprite* GetSprite() { return m_sprite; }
+	Sprite* GetSprite() { return m_sprite; }
 
 private:
 	EditPanelImpl* m_stage;
 
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 }; // SpritePropertyImpl
 

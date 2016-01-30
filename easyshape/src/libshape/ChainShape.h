@@ -6,7 +6,7 @@
 namespace libshape
 {
 
-class ChainShape : public d2d::IShape
+class ChainShape : public d2d::Shape
 {
 public:
 	ChainShape();
@@ -19,7 +19,7 @@ public:
 	virtual ChainShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "chain"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

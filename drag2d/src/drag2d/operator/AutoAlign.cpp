@@ -1,8 +1,8 @@
 #include "AutoAlign.h"
 
-#include "dataset/AbstractBV.h"
-#include "dataset/ISymbol.h"
-#include "dataset/ISprite.h"
+#include "dataset/BoundingBox.h"
+#include "dataset/Symbol.h"
+#include "dataset/Sprite.h"
 #include "dataset/sprite_utility.h"
 #include "view/MultiSpritesImpl.h"
 #include "render/PrimitiveDraw.h"
@@ -16,15 +16,15 @@ AutoAlign::AutoAlign(MultiSpritesImpl* sprites_impl)
 {
 }
 
-void AutoAlign::Align(const std::vector<ISprite*>& sprites)
+void AutoAlign::Align(const std::vector<Sprite*>& sprites)
 {
-	m_hor[0].set(0, 0);
-	m_hor[1].set(0, 0);
-	m_ver[0].set(0, 0);
-	m_ver[1].set(0, 0);
+	m_hor[0].Set(0, 0);
+	m_hor[1].Set(0, 0);
+	m_ver[0].Set(0, 0);
+	m_ver[1].Set(0, 0);
 
-	std::vector<ISprite*> sources;
-	m_sprites_impl->TraverseSprites(FetchAllVisitor<ISprite>(sources));
+	std::vector<Sprite*> sources;
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sources));
 
 	// not support multi src now
 	if (sprites.size() > 1)
@@ -32,12 +32,12 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 
 	const float DIS = 5;
 
-	ISprite *hor_nearest = NULL, *ver_nearest = NULL;
+	Sprite *hor_nearest = NULL, *ver_nearest = NULL;
 	float dis_hor = DIS, dis_ver = DIS;
 	// hor
 	for (size_t i = 0, n = sources.size(); i < n; ++i)
 	{
-		ISprite *dst = sprites[0], *src = sources[i];
+		Sprite *dst = sprites[0], *src = sources[i];
 
 		if (src == dst) continue;
 
@@ -75,7 +75,7 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 	// ver
 	for (size_t i = 0, n = sources.size(); i < n; ++i)
 	{
-		ISprite *dst = sprites[0], *src = sources[i];
+		Sprite *dst = sprites[0], *src = sources[i];
 
 		if (src == dst) continue;
 
@@ -117,7 +117,7 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 		Align(ver_nearest, sprites[0]);
 }
 
-void AutoAlign::Align(const ISprite* src, ISprite* dst)
+void AutoAlign::Align(const Sprite* src, Sprite* dst)
 {
 	const float DIS = 5;
 	const float LEN = 400;
@@ -136,15 +136,15 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_up), dst->GetAngle());
-		m_hor[0].set(src_cx - LEN, src_up);
-		m_hor[1].set(src_cx + LEN, src_up);
+		m_hor[0].Set(src_cx - LEN, src_up);
+		m_hor[1].Set(src_cx + LEN, src_up);
 	}
 	else if (float dis = fabs(dst_up - src_down) < nearest)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_up), dst->GetAngle());
-		m_hor[0].set(src_cx - LEN, src_down);
-		m_hor[1].set(src_cx + LEN, src_down);
+		m_hor[0].Set(src_cx - LEN, src_down);
+		m_hor[1].Set(src_cx + LEN, src_down);
 	}		
 	// down
 	float dst_down = get_spr_down(dst);;
@@ -152,15 +152,15 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_up - dst_down), dst->GetAngle());
-		m_hor[0].set(src_cx - LEN, src_up);
-		m_hor[1].set(src_cx + LEN, src_up);
+		m_hor[0].Set(src_cx - LEN, src_up);
+		m_hor[1].Set(src_cx + LEN, src_up);
 	}
 	else if (float dis = fabs(dst_down - src_down) < nearest)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x, dst->GetPosition().y + src_down - dst_down), dst->GetAngle());
-		m_hor[0].set(src_cx - LEN, src_down);
-		m_hor[1].set(src_cx + LEN, src_down);
+		m_hor[0].Set(src_cx - LEN, src_down);
+		m_hor[1].Set(src_cx + LEN, src_down);
 	}	
 	// left
 	nearest = DIS;
@@ -169,15 +169,15 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x + src_left - dst_left, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(src_left, src_cy - LEN);
-		m_ver[1].set(src_left, src_cy + LEN);
+		m_ver[0].Set(src_left, src_cy - LEN);
+		m_ver[1].Set(src_left, src_cy + LEN);
 	}
 	else if (float dis = fabs(dst_left - src_right) < nearest)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x + src_right - dst_left, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(src_right, src_cy - LEN);
-		m_ver[1].set(src_right, src_cy + LEN);
+		m_ver[0].Set(src_right, src_cy - LEN);
+		m_ver[1].Set(src_right, src_cy + LEN);
 	}
 	// right
 	float dst_right = get_spr_right(dst);
@@ -185,15 +185,15 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x + src_left - dst_right, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(src_left, src_cy - LEN);
-		m_ver[1].set(src_left, src_cy + LEN);
+		m_ver[0].Set(src_left, src_cy - LEN);
+		m_ver[1].Set(src_left, src_cy + LEN);
 	}
 	else if (float dis = fabs(dst_right - src_right) < nearest)
 	{
 		nearest = dis;
 		dst->SetTransform(Vector(dst->GetPosition().x + src_right - dst_right, dst->GetPosition().y), dst->GetAngle());
-		m_ver[0].set(src_right, src_cy - LEN);
-		m_ver[1].set(src_right, src_cy + LEN);
+		m_ver[0].Set(src_right, src_cy - LEN);
+		m_ver[1].Set(src_right, src_cy + LEN);
 	}
 }
 
@@ -202,10 +202,10 @@ void AutoAlign::Draw() const
 	if (m_open)
 	{
 		if (m_hor[0] != m_hor[1]) {
-			PrimitiveDraw::drawDashLine(m_hor[0], m_hor[1], Colorf(0, 0, 0));
+			PrimitiveDraw::DrawDashLine(m_hor[0], m_hor[1], Colorf(0, 0, 0));
 		}
 		if (m_ver[0] != m_ver[1]) {
-			PrimitiveDraw::drawDashLine(m_ver[0], m_ver[1], Colorf(0, 0, 0));
+			PrimitiveDraw::DrawDashLine(m_ver[0], m_ver[1], Colorf(0, 0, 0));
 		}
 	}
 }

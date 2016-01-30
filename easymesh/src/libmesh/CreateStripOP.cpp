@@ -11,7 +11,7 @@ CreateStripOP::CreateStripOP(StagePanel* stage)
 	, m_stage(stage)
 	, m_selected(NULL)
 {
-	m_last_right.setInvalid();
+	m_last_right.SetInvalid();
 }
 
 bool CreateStripOP::OnMouseLeftDown(int x, int y)
@@ -69,7 +69,7 @@ bool CreateStripOP::OnMouseRightUp(int x, int y)
 	if (d2d::ZoomViewOP::OnMouseRightUp(x, y))
 		return true;
 
-	m_last_right.setInvalid();
+	m_last_right.SetInvalid();
 
 	return false;
 }
@@ -82,7 +82,7 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 
 	// move background
-	if (m_last_right.isValid())
+	if (m_last_right.IsValid())
 	{
 		d2d::Vector offset = pos - m_last_right;
 		StagePanel* stage = static_cast<StagePanel*>(m_stage);

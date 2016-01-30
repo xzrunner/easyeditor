@@ -34,16 +34,16 @@ void TransToPVR::Run(int argc, char *argv[])
 
 void TransToPVR::Trigger(const std::string& path)
 {
-	if (d2d::FilenameTools::IsDirExist(path)) 
+	if (d2d::FileHelper::IsDirExist(path)) 
 	{
 		wxArrayString files;
-		d2d::FilenameTools::fetchAllFiles(path, files);
+		d2d::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			wxFileName filename(files[i]);
 			filename.Normalize();
 			std::string filepath = filename.GetFullPath();
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+			if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 			{
 				std::cout << i << " / " << n << " : " << filepath << "\n";
 				EncodeByPvrTexTool(filepath);
@@ -51,9 +51,9 @@ void TransToPVR::Trigger(const std::string& path)
 		}
 
 	} 
-	else if (d2d::FilenameTools::IsFileExist(path))
+	else if (d2d::FileHelper::IsFileExist(path))
 	{
-		if (d2d::FileNameParser::isType(path, d2d::FileNameParser::e_image)) {
+		if (d2d::FileType::IsType(path, d2d::FileType::e_image)) {
 			EncodeByPvrTexTool(path);
 		}
 	}

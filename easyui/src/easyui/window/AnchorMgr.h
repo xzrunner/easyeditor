@@ -16,12 +16,12 @@ public:
 
 	void OnViewChanged(int width, int height);
 
-	void OnSprPosChanged(d2d::ISprite* spr);
+	void OnSprPosChanged(d2d::Sprite* spr);
 
 	void Draw() const;
 
 	void LoadFromFile(const Json::Value& value, 
-		const std::vector<d2d::ISprite*>& sprites);
+		const std::vector<d2d::Sprite*>& sprites);
 	void StoreToFile(Json::Value& value) const;
 
 	static int GetAnchorRadius() { return RADIUS; }
@@ -33,8 +33,8 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	void Insert(d2d::Sprite* spr);
+	void Remove(d2d::Sprite* spr);
 	void Clear();
 
 private:
@@ -46,14 +46,14 @@ private:
 	struct Anchor
 	{
 		d2d::Vector pos;
-		std::vector<d2d::ISprite*> sprites;
+		std::vector<d2d::Sprite*> sprites;
 		
 	}; // Anchor
 
 private:
 	static void ChangeAnchorPos(Anchor& anchor, const d2d::Vector& pos);
 
-	static void LoadAnchorData(const std::vector<d2d::ISprite*>& sprites,
+	static void LoadAnchorData(const std::vector<d2d::Sprite*>& sprites,
 		const Json::Value& value, Anchor& anchor);
 
 private:

@@ -5,7 +5,7 @@
 namespace librespacker
 {
 
-void ExportNameSet::LoadExport(const d2d::ISymbol* symbol, IPackNode* node)
+void ExportNameSet::LoadExport(const d2d::Symbol* symbol, IPackNode* node)
 {
 	std::string export_name = symbol->name;
 	if (!Utility::IsNameValid(export_name)) {

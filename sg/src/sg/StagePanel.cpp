@@ -75,10 +75,10 @@ void StagePanel::TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) con
 
 void StagePanel::UpdateAllSpritesLocation()
 {
-	std::vector<d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* s = sprites[i];
+		d2d::Sprite* s = sprites[i];
 		s->SetTransform(FixSpriteLocation(s->GetPosition()), s->GetAngle());
 	}
 }
@@ -89,11 +89,11 @@ void StagePanel::SetPerspective(bool is_flat)
 		return;
 	}
 
-	std::vector<d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 
 		int row, col;
 		TransCoordsToGridPos(sprite->GetPosition(), row, col);
@@ -111,11 +111,11 @@ void StagePanel::SetPerspective(bool is_flat)
 
 void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
-	std::vector<d2d::ISprite*> sprites;
-	GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 
 		SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());
 		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
@@ -128,7 +128,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 
 		spr_info->level = up ? spr_info->level + 1 : spr_info->level - 1;
 		std::string new_filepath = symbol_info->building->levels[spr_info->level - 1].res_snapshoot_path;
-		d2d::ISymbol* new_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(new_filepath);
+		d2d::Symbol* new_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(new_filepath);
 		if (new_symbol != &sprite->GetSymbol()) {
 			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->GetUserData());
 			new_symbol_info->remain--;
@@ -151,7 +151,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 			return;
 // 		}
 // 
-// 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
+// 		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
 // 		if (symbol) {
 // 			if (symbol->GetUserData() == NULL) 
 // 			{
@@ -182,7 +182,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
+		Remove((d2d::Sprite*)ud);
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		Clear();
@@ -200,7 +200,7 @@ d2d::Vector StagePanel::FixSpriteLocation(const d2d::Vector& pos) const
 	return ret;
 }
 
-void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
+void StagePanel::ChangeSymbolRemain(d2d::Sprite* sprite, bool increase) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 	if (!info) {
@@ -212,12 +212,12 @@ void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
 	} else {
 		--info->remain;
 	}
-	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(sprite->GetSymbol());
+	d2d::Symbol& symbol = const_cast<d2d::Symbol&>(sprite->GetSymbol());
 	symbol.SetInfo(wxString::FromDouble(info->remain).ToStdString());
 	m_library->Refresh(true);
 }
 
-void StagePanel::Insert(d2d::ISprite* spr)
+void StagePanel::Insert(d2d::Sprite* spr)
 {
 	spr->SetTransform(FixSpriteLocation(spr->GetPosition()), spr->GetAngle());
 
@@ -226,7 +226,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 		return;
 	}
 
-	if (!spr->GetPosition().isValid()) {
+	if (!spr->GetPosition().IsValid()) {
 		return;
 	}
 
@@ -252,7 +252,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 	}
 }
 
-void StagePanel::Remove(d2d::ISprite* spr)
+void StagePanel::Remove(d2d::Sprite* spr)
 {
 	bool reset_wall = IsSymbolWall(*spr);
 
@@ -267,8 +267,8 @@ void StagePanel::Remove(d2d::ISprite* spr)
 
 void StagePanel::Clear()
 {
-	std::vector<d2d::ISprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	bool ret = !sprites.empty();
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ChangeSymbolRemain(sprites[i], true);

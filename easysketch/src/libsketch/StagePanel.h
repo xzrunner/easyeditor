@@ -16,7 +16,7 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::IVisitor& visitor, 
+	virtual void TraverseSprites(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
@@ -29,12 +29,12 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	void Insert(d2d::Sprite* spr);
+	void Remove(d2d::Sprite* spr);
 	void Clear();
 
 private:
-	std::vector<d2d::ISprite*> m_sprites;
+	std::vector<d2d::Sprite*> m_sprites;
 
 }; // StagePanel
 

@@ -13,10 +13,10 @@ class BodyManager
 public:
 	static BodyManager* Instance();
 
-	IBody* LoadBody(d2d::ISprite* sprite);
-	void UnloadBody(d2d::ISprite* sprite);
+	IBody* LoadBody(d2d::Sprite* sprite);
+	void UnloadBody(d2d::Sprite* sprite);
 
-	const IBody* QueryBody(d2d::ISprite* sprite) const;
+	const IBody* QueryBody(d2d::Sprite* sprite) const;
 
 	void Update();
 
@@ -24,10 +24,10 @@ private:
 	BodyManager();
 
 private:
-	static IBody* CreateBody(d2d::ISprite* sprite);
+	static IBody* CreateBody(d2d::Sprite* sprite);
 
 private:
-	std::map<d2d::ISprite*, IBody*> m_map_body;
+	std::map<d2d::Sprite*, IBody*> m_map_body;
 
 private:
 	static BodyManager* m_instance;

@@ -19,8 +19,8 @@ void ChangedSectorIcon::StoreToFile(Json::Value& value) const
 
 void ChangedSectorIcon::GetBound(float process, d2d::Vector bound[4]) const
 {
-	bound[0].set(0, 0);
-	bound[1].set(0, 1);
+	bound[0].Set(0, 0);
+	bound[1].Set(0, 1);
 
 	float angle = m_min + (m_max - m_min) * process;
 	float tan_val = std::tan(angle);
@@ -29,13 +29,13 @@ void ChangedSectorIcon::GetBound(float process, d2d::Vector bound[4]) const
 		h = m_img->GetClippedHeight();
 	float x = h / tan_val;
 	if (x < w) {
-		bound[2].set(x / w, 1.0f);
+		bound[2].Set(x / w, 1.0f);
 		bound[3] = bound[2];
 	} else {
 		float y = w * tan_val;
 		assert(y <= h);
-		bound[2].set(1, 1);
-		bound[3].set(1, y / h);
+		bound[2].Set(1, 1);
+		bound[3].Set(1, y / h);
 	}
 }
 

@@ -13,7 +13,7 @@ ImageBuilder::~ImageBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
-void ImageBuilder::Traverse(d2d::IVisitor& visitor) const
+void ImageBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;
@@ -36,22 +36,22 @@ const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 
 void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
 {
-	quad.img = img->GetSymbol().getImage();
+	quad.img = img->GetSymbol().GetImage();
 
-	quad.texture_coord[0].set(0, 0);
-	quad.texture_coord[1].set(0, 1);
-	quad.texture_coord[2].set(1, 1);
-	quad.texture_coord[3].set(1, 0);
+	quad.texture_coord[0].Set(0, 0);
+	quad.texture_coord[1].Set(0, 1);
+	quad.texture_coord[2].Set(1, 1);
+	quad.texture_coord[3].Set(1, 0);
 
 	d2d::Rect r = img->GetSymbol().GetSize();	
-	quad.screen_coord[0].set(r.xMin, r.yMin);
-	quad.screen_coord[1].set(r.xMin, r.yMax);
-	quad.screen_coord[2].set(r.xMax, r.yMax);
-	quad.screen_coord[3].set(r.xMax, r.yMin);
+	quad.screen_coord[0].Set(r.xmin, r.ymin);
+	quad.screen_coord[1].Set(r.xmin, r.ymax);
+	quad.screen_coord[2].Set(r.xmax, r.ymax);
+	quad.screen_coord[3].Set(r.xmax, r.ymin);
 	TransScreen(quad, img);
 }
 
-void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
+void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::Sprite* spr)
 {
 	// 1. shear
 	float hw = quad.img->GetClippedWidth() * 0.5f,
@@ -87,7 +87,7 @@ void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::ISprite* spr)
 
 	// 4. rotate
 	for (size_t i = 0; i < 4; ++i) {
-		d2d::Vector rot = d2d::Math::rotateVector(quad.screen_coord[i], spr->GetAngle());
+		d2d::Vector rot = d2d::Math2D::RotateVector(quad.screen_coord[i], spr->GetAngle());
 		quad.screen_coord[i] = rot;
 	}
 

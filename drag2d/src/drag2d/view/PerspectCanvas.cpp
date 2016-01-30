@@ -30,4 +30,4 @@ void PerspectCanvas::OnSize(int w, int h)
 		0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 
-} // d2d
+}

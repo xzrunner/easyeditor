@@ -29,7 +29,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
 	}
@@ -47,9 +47,9 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const
@@ -126,8 +126,8 @@ void Task::LoadGroupTree(const char* filepath)
 	if (!value["group"].isNull()) {
 		m_grouptree->LoadFromFile(value["group"]);
 	} else {
-		std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
-		std::vector<d2d::ISprite*> others;
+		std::map<std::string, std::vector<d2d::Sprite*> > map_actions;
+		std::vector<d2d::Sprite*> others;
 		libcoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
 		m_grouptree->InitGroups(map_actions);
 	}

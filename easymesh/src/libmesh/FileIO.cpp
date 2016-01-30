@@ -19,8 +19,8 @@ void FileIO::store(const char* filepath, const Symbol* symbol)
 		return;
 	}
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
-	value["image"] = d2d::FilenameTools::getRelativePath(dir, symbol->GetImagePath()).ToStdString();
+	wxString dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
+	value["image"] = d2d::FileHelper::GetRelativePath(dir, symbol->GetImagePath()).ToStdString();
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -42,8 +42,8 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 
 	if (!value["image"].isNull())
 	{
-		wxString dir = d2d::FilenameTools::getFileDir(filepath);
-		std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
+		wxString dir = d2d::FileHelper::GetFileDir(filepath);
+		std::string path = d2d::FileHelper::GetAbsolutePath(dir, value["image"].asString());
 		// todo Release symbol
 		//symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 		symbol->LoadImage(path);

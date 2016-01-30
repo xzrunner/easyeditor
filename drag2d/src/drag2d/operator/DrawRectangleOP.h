@@ -12,7 +12,7 @@ namespace d2d
 class DrawRectangleOP : public ZoomViewOP
 {
 public:
-	DrawRectangleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool bOpenRightTap = true);
+	DrawRectangleOP(wxWindow* wnd, EditPanelImpl* stage, bool bOpenRightTap = true);
 	
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);

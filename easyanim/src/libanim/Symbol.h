@@ -8,14 +8,14 @@ namespace libanim
 
 class LayersLoader;
 
-class Symbol : public d2d::ISymbol
+class Symbol : public d2d::Symbol
 {
 public:
 	struct Frame
 	{
 //		int id;
 		int index;
-		std::vector<d2d::ISprite*> sprites;
+		std::vector<d2d::Sprite*> sprites;
 		bool bClassicTween;
 	};
 
@@ -33,17 +33,17 @@ public:
 	virtual ~Symbol();
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual Symbol* Clone() const { return NULL; }
 
 	//
-	// ISymbol interfaces
+	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
 	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::ISprite* spr = NULL, const d2d::ISprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::ISprite* sprite = NULL) const;
+		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
+	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
 
 	size_t getMaxFrameIndex() const;
 
@@ -58,7 +58,7 @@ public:
 
 	void LoadFromFile(const LayersLoader& loader);
 
-	static d2d::ISymbol* Create() { return new Symbol(); }
+	static d2d::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();

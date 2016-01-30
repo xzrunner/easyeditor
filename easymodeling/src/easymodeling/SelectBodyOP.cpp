@@ -34,7 +34,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 	m_mouseOn = NULL;
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected)
 		m_mouseOn = static_cast<libmodeling::Body*>(selected->GetUserData());
 
@@ -50,11 +50,11 @@ bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 	// todo
 
 // 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-// 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
+// 	d2d::Sprite* selected = m_spritesImpl->querySpriteByPos(pos);
 // 	if (selected)
 // 	{
 // 		libshape::Symbol symbol;
-// 		symbol.SetBG(&const_cast<d2d::ISymbol&>(selected->getSymbol()));
+// 		symbol.SetBG(&const_cast<d2d::Symbol&>(selected->getSymbol()));
 // 		libshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
 // 		dlg.ShowModal();
 // 		Context::Instance()->stage->resetCanvas();
@@ -89,11 +89,11 @@ bool SelectBodyOP::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 void SelectBodyOP::DrawSelectedVisitor::
-Visit(d2d::Object* object, bool& bFetchNext) 
+Visit(d2d::Object* object, bool& next) 
 {
 	std::vector<d2d::Vector> bound;
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
 	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	DrawUtils::drawBody(body, DrawUtils::e_selected);
-	bFetchNext = true;
+	next = true;
 }

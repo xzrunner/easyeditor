@@ -84,7 +84,7 @@ void ExtractOutlineRaw::CreateBorderLineAndMerge()
 
 void ExtractOutlineRaw::CreateBorderConvexHull()
 {
-	d2d::ConvexHull::Implement(m_border_line, m_convex_hull);
+	d2d::ConvexHull::Do(m_border_line, m_convex_hull);
 }
 
 void ExtractOutlineRaw::CreateBorderLine()
@@ -94,18 +94,18 @@ void ExtractOutlineRaw::CreateBorderLine()
 	// find start, downmost and leftmost
 	bool* flag = new bool[m_width * m_height];
 	d2d::Vector first;
-	first.setInvalid();
+	first.SetInvalid();
 	for (int y = 0; y < m_height; ++y) {
 		for (int x = 0; x < m_width; ++x) {
 			bool is_border = IsPixelBorder(x, y);
 			flag[m_width*y+x] = is_border;
 			if (is_border) {
-				if (first.isValid()) {
+				if (first.IsValid()) {
 					if (y < first.y || y == first.y && x < first.x) {
-						first.set(x, y);
+						first.Set(x, y);
 					}
 				} else {
-					first.set(x, y);
+					first.Set(x, y);
 				}
 			}
 		}
@@ -113,7 +113,7 @@ void ExtractOutlineRaw::CreateBorderLine()
 
 	d2d::Vector curr_pos = first;
 	int curr_dir = -1;
-	while (curr_pos.isValid()) 
+	while (curr_pos.IsValid()) 
 	{
 		// finish
 		if (!m_border_line.empty() &&
@@ -177,7 +177,7 @@ void ExtractOutlineRaw::MergeBorderLine()
 {
 	m_border_line_merged.clear();
 	//	MergeRawBorder(border, border_merged);
-	d2d::DouglasPeucker::implement(m_border_line, 1.5f, m_border_line_merged);
+	d2d::DouglasPeucker::Do(m_border_line, 1.5f, m_border_line_merged);
 }
 
 bool ExtractOutlineRaw::IsPixelBorder(int x, int y) const
@@ -236,7 +236,7 @@ void ExtractOutlineRaw::MergeLine(const std::vector<d2d::Vector>& src, std::vect
 	for (int i = 2, n = src.size(); i < n; ++i)
 	{
 		const d2d::Vector& p = src[i];
-		if (d2d::Math::IsTwoLineParallel(dst[dst.size()-1], dst[dst.size()-2], dst[dst.size()-1], p)) {
+		if (d2d::Math2D::IsTwoLineParallel(dst[dst.size()-1], dst[dst.size()-2], dst[dst.size()-1], p)) {
 			dst.pop_back();
 		}
 		dst.push_back(p);

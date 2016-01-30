@@ -15,7 +15,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 }
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
-						 d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
+						 d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
 	, m_panel(panel)
 	, m_edited(edited)
@@ -38,7 +38,7 @@ void StageCanvas::OnDrawSprites() const
 		d2d::DT_VISIBLE);
 	m_panel->TraverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
 
-	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	m_stage->DrawEditOP();
 }

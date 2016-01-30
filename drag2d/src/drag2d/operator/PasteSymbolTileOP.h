@@ -9,12 +9,12 @@ namespace d2d
 {
 	class MultiSpritesImpl;
 	class LibraryPanel;
-	class ISprite;
+	class Sprite;
 
 	class PasteSymbolTileOP : public PasteSymbolOP
 	{
 	public:
-		PasteSymbolTileOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
+		PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
 			LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt);
 
 		virtual bool OnMouseLeftDown(int x, int y);
@@ -24,19 +24,19 @@ namespace d2d
 		virtual bool OnDraw() const;
 
 	private:
-		class NearestQueryVisitor : public IVisitor
+		class NearestQueryVisitor : public Visitor
 		{
 		public:
-			NearestQueryVisitor(const Vector& pos, ISprite** ret);
+			NearestQueryVisitor(const Vector& pos, Sprite** ret);
 
-			virtual void Visit(Object* object, bool& bFetchNext);
+			virtual void Visit(Object* object, bool& next);
 
 		private:
 			const Vector& m_pos;
 
 			float m_dis;
 
-			ISprite** m_result;
+			Sprite** m_result;
 
 		}; // NearestQueryVisitor
 

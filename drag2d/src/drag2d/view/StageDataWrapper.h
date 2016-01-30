@@ -4,8 +4,8 @@
 //
 //#include "interfaces.h"
 ////#include "dataset/VectorObjectStream.h"
-//#include "dataset/ISprite.h"
-//#include "dataset/IShape.h"
+//#include "dataset/Sprite.h"
+//#include "dataset/Shape.h"
 //
 //namespace d2d
 //{
@@ -16,7 +16,7 @@
 //		StageDataWrapper(std::vector<T*>& objs);
 //		~StageDataWrapper();
 //
-//		void traverse(IVisitor& visitor, bool order = true) const;
+//		void traverse(Visitor& visitor, bool order = true) const;
 //		void remove(T* obj);
 //		void insert(T* obj);
 //		void clear();
@@ -48,16 +48,16 @@
 //	}
 //
 //	template<class T>
-//	inline void StageDataWrapper<T>::traverse(IVisitor& visitor, bool order/* = true*/) const
+//	inline void StageDataWrapper<T>::traverse(Visitor& visitor, bool order/* = true*/) const
 //	{
 //		if (order)
 //		{
 //			std::vector<T*>::const_iterator itr = m_objs.begin();
 //			for ( ; itr != m_objs.end(); ++itr)
 //			{
-//				bool hasNext;
-//				visitor.visit(*itr, hasNext);
-//				if (!hasNext) break;
+//				bool next;
+//				visitor.visit(*itr, next);
+//				if (!next) break;
 //			}
 //		}
 //		else
@@ -65,9 +65,9 @@
 //			std::vector<T*>::const_reverse_iterator itr = m_objs.rbegin();
 //			for ( ; itr != m_objs.rend(); ++itr)
 //			{
-//				bool hasNext;
-//				visitor.visit(*itr, hasNext);
-//				if (!hasNext) break;
+//				bool next;
+//				visitor.visit(*itr, next);
+//				if (!next) break;
 //			}
 //		}
 //	}
@@ -110,13 +110,13 @@
 //			{
 //				if (up && i != n - 1)
 //				{
-//					ISprite* tmp = m_objs[i];
+//					Sprite* tmp = m_objs[i];
 //					m_objs[i] = m_objs[i+1];
 //					m_objs[i+1] = tmp;
 //				}
 //				else if (!up && i != 0)
 //				{
-//					ISprite* tmp = m_objs[i];
+//					Sprite* tmp = m_objs[i];
 //					m_objs[i] = m_objs[i-1];
 //					m_objs[i-1] = tmp;
 //				}
@@ -126,6 +126,6 @@
 //		}
 //	}
 //
-//	typedef StageDataWrapper<ISprite> SpritesWrapper;
-//	typedef StageDataWrapper<IShape> ShapesWrapper;
+//	typedef StageDataWrapper<Sprite> SpritesWrapper;
+//	typedef StageDataWrapper<Shape> ShapesWrapper;
 //}

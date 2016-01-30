@@ -4,12 +4,12 @@
 #include "PropertyColorMonitor.h"
 
 #include "common/Math.h"
-#include "common/color_trans.h"
+#include "common/trans_color.h"
 #include "common/Config.h"
 #include "common/SettingData.h"
 #include "common/FileNameTools.h"
-#include "dataset/ISprite.h"
-#include "dataset/ISymbol.h"
+#include "dataset/Sprite.h"
+#include "dataset/Symbol.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
 #include "render/BlendModes.h"
@@ -25,7 +25,7 @@
 namespace d2d
 {
 
-SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, ISprite* sprite)
+SpritePropertySetting::SpritePropertySetting(EditPanelImpl* stage, Sprite* sprite)
 	: IPropertySetting("Sprite")
 	, m_impl(new SpritePropertyImpl(stage, sprite))
 	, m_pg(NULL)
@@ -43,7 +43,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (value.IsNull())
 		return;
 
-	ISprite* spr = m_impl->GetSprite();
+	Sprite* spr = m_impl->GetSprite();
 
 	bool dirty = true;
 
@@ -140,7 +140,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		double w, h;
 		SplitString2Double(value, &w, &h);
-		m_impl->Scale(w/spr->GetSymbol().GetSize().xLength(), h/spr->GetSymbol().GetSize().yLength());
+		m_impl->Scale(w/spr->GetSymbol().GetSize().Width(), h/spr->GetSymbol().GetSize().Height());
 	}
 	// shear
 	else if (name == wxT("Shear"))
@@ -205,9 +205,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	m_pg = pg;
 
-	ISprite* spr = m_impl->GetSprite();
+	Sprite* spr = m_impl->GetSprite();
 
-	std::string filename = FilenameTools::getFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->GetProperty(wxT("FileName"))->SetValue(filename);
 
 	pg->GetProperty(wxT("Name"))->SetValue(spr->name);
@@ -254,8 +254,8 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->GetSymbol().GetSize(spr).xLength() * spr->GetScale().x);
-	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->GetSymbol().GetSize(spr).yLength() * spr->GetScale().y);
+	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->GetSymbol().GetSize(spr).Width() * spr->GetScale().x);
+	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->GetSymbol().GetSize(spr).Height() * spr->GetScale().y);
 	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Shear.X"))->SetValue(spr->GetShear().x);
 	pg->GetProperty(wxT("Shear.Y"))->SetValue(spr->GetShear().y);
@@ -280,7 +280,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	ISprite* spr = m_impl->GetSprite();
+	Sprite* spr = m_impl->GetSprite();
 
 	pg->Clear();
 
@@ -288,7 +288,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->name));
 
-	std::string filename = FilenameTools::getFilenameWithExtension(spr->GetSymbol().GetFilepath());
+	std::string filename = FileHelper::GetFilenameWithExtension(spr->GetSymbol().GetFilepath());
 	pg->Append(new wxStringProperty(wxT("FileName"), wxPG_LABEL, filename));
 	pg->SetPropertyReadOnly("FileName");
 
@@ -346,7 +346,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("G"), wxPG_LABEL, g_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("B"), wxPG_LABEL, b_trans));
 
-	wxArrayString names;
+	std::vector<std::string> names;
 	BlendModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, names);
 	int idx = BlendModes::Instance()->GetIdxFromID(spr->GetBlendMode());
@@ -385,10 +385,10 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("Size"), wxPG_LABEL, wxT("<composed>")));
 	sizeProp->SetExpanded(false);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, spr->GetSymbol().GetSize().xLength() * spr->GetScale().x));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, spr->GetSymbol().GetSize().Width() * spr->GetScale().x));
 	pg->SetPropertyAttribute(wxT("Size.Width"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Width"), "Precision", 2);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, spr->GetSymbol().GetSize().yLength() * spr->GetScale().y));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, spr->GetSymbol().GetSize().Height() * spr->GetScale().y));
 	pg->SetPropertyAttribute(wxT("Size.Height"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Height"), "Precision", 2);
 
@@ -438,14 +438,14 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 void SpritePropertySetting::OnNotify(int sj_id, void* ud)
 {
 	if (sj_id == MSG_SPRITE_NAME_CHANGE) {
-		ISprite* spr = (ISprite*)ud;
+		Sprite* spr = (Sprite*)ud;
 		if (GetSprite() == spr && m_pg) {
 			m_pg->GetProperty(wxT("Name"))->SetValue(spr->name);	
 		}
 	}
 }
 
-ISprite* SpritePropertySetting::GetSprite()
+Sprite* SpritePropertySetting::GetSprite()
 {
 	if (m_impl) {
 		return m_impl->GetSprite();
@@ -454,4 +454,4 @@ ISprite* SpritePropertySetting::GetSprite()
 	}
 }
 
-} // d2d
+}

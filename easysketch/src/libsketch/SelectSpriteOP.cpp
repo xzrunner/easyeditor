@@ -19,7 +19,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::AbstractEditOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::ISprite* selected = SelectByPos(ivec2(x, y));
+	d2d::Sprite* selected = SelectByPos(ivec2(x, y));
 	if (selected && selected->editable)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL)) 
@@ -53,8 +53,8 @@ bool SelectSpriteOP::OnDraw() const
 {
 	if (d2d::AbstractEditOP::OnDraw()) return true;
 
-	std::vector<d2d::ISprite*> sprites;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
 		mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
@@ -67,12 +67,12 @@ bool SelectSpriteOP::OnDraw() const
 
 // 以sprite的中心和方向，旋转ray的坐标系
 // 即AABB不变
-d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
+d2d::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 {
-	d2d::ISprite* selected = NULL;
+	d2d::Sprite* selected = NULL;
 
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
@@ -81,7 +81,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		const Symbol& symbol = static_cast<const Symbol&>(sprite->GetSymbol());
 		
 		const e3d::AABB& aabb = symbol.GetAABB();

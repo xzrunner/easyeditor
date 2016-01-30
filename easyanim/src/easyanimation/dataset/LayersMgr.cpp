@@ -57,7 +57,7 @@ bool LayersMgr::Clear()
 	return ret;
 }
 
-// void LayersMgr::removeSprite(d2d::ISprite* sprite)
+// void LayersMgr::removeSprite(d2d::Sprite* sprite)
 // {
 // 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 // 	{

@@ -17,8 +17,8 @@ public:
 	//
 	// IDataContainer interface
 	//
-	virtual void Traverse(d2d::IVisitor& visitor, bool order = true) const;
-	virtual void Traverse(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual void Traverse(d2d::Visitor& visitor, bool order = true) const;
+	virtual void Traverse(d2d::Visitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 	virtual bool Remove(Object* obj);
 	virtual bool Insert(Object* obj);
 	virtual bool Insert(Object* obj, int idx);

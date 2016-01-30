@@ -103,7 +103,7 @@ void LayerList::OnNotify(int sj_id, void* ud)
 	{
 	case MSG_CHANGE_LAYER_MGR_MSG:
 		{
-			m_layer_mgr = (d2d::LayerMgr*)ud;
+			m_layer_mgr = (LayerMgr*)ud;
 			LoadFromLayerMgr(m_layer_mgr);
 		}
 		break;
@@ -132,16 +132,16 @@ void LayerList::ClearLayer(Layer* layer)
 {
 	EditAddRecordSJ::Instance()->Add(new DeleteLayerAOP(this, layer));
 
-	std::vector<ISprite*> sprites;
-	layer->TraverseSprite(FetchAllVisitor<ISprite>(sprites));
-	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<ISprite>());
+	std::vector<Sprite*> sprites;
+	layer->TraverseSprite(FetchAllVisitor<Sprite>(sprites));
+	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
 	}
 
-	std::vector<IShape*> shapes;
-	layer->TraverseSprite(FetchAllVisitor<IShape>(shapes));
-	for_each(shapes.begin(), shapes.end(), RetainObjectFunctor<IShape>());
+	std::vector<Shape*> shapes;
+	layer->TraverseSprite(FetchAllVisitor<Shape>(shapes));
+	for_each(shapes.begin(), shapes.end(), RetainObjectFunctor<Shape>());
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		RemoveShapeSJ::Instance()->Remove(shapes[i]);
 	}

@@ -8,14 +8,14 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class MultiSpritesImpl;
 class PasteSpriteCMPT;
 
 class PasteSpriteOP : public SelectSpritesOP
 {
 public:
-	PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	PasteSpriteOP(wxWindow* wnd, EditPanelImpl* stage, 
 		MultiSpritesImpl* spritesImpl, PasteSpriteCMPT* cmpt = NULL);
 	virtual ~PasteSpriteOP();
 
@@ -54,7 +54,7 @@ private:
 		void computeCenter();
 
 	private:
-		std::vector<ISprite*> m_selected;
+		std::vector<Sprite*> m_selected;
 		Vector m_center;
 
 	}; // SpriteBatch

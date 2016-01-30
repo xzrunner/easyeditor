@@ -6,12 +6,12 @@
 namespace libanim
 {
 
-void TweenUtility::GetTweenSprites(const std::vector<d2d::ISprite*>& start, const std::vector<d2d::ISprite*>& end, 
-	std::vector<d2d::ISprite*>& tween, float process)
+void TweenUtility::GetTweenSprites(const std::vector<d2d::Sprite*>& start, const std::vector<d2d::Sprite*>& end, 
+	std::vector<d2d::Sprite*>& tween, float process)
 {
 	for (size_t i = 0, n = start.size(); i < n; ++i)
 	{
-		d2d::ISprite *start_spr = start[i], *end_spr = NULL;
+		d2d::Sprite *start_spr = start[i], *end_spr = NULL;
 		for (size_t j = 0, m = end.size(); j < m; ++j)
 		{
 			if (IsTweenMatched(start_spr, end[j]))
@@ -23,7 +23,7 @@ void TweenUtility::GetTweenSprites(const std::vector<d2d::ISprite*>& start, cons
 
 		if (end_spr)
 		{
-			d2d::ISprite* tween_spr = start_spr->Clone();
+			d2d::Sprite* tween_spr = start_spr->Clone();
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
 			tween.push_back(tween_spr);
 		}
@@ -34,7 +34,7 @@ void TweenUtility::GetTweenSprites(const std::vector<d2d::ISprite*>& start, cons
 	}
 }
 
-bool TweenUtility::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1)
+bool TweenUtility::IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1)
 {
 	bool auto_named = false;
 	if (!s0->name.empty() && s0->name[0] == '_' && !s1->name.empty() && s1->name[0] == '_') {
@@ -51,7 +51,7 @@ bool TweenUtility::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1
 	}
 }
 
-void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process)
+void TweenUtility::GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end, d2d::Sprite* tween, float process)
 {
 	float xscale = (end->GetScale().x - start->GetScale().x) * process + start->GetScale().x,
 		yscale = (end->GetScale().y - start->GetScale().y) * process + start->GetScale().y;
@@ -77,8 +77,8 @@ void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::I
 	shear.y = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
 	tween->SetShear(shear);
 
-	tween->color.add = cInterpolate(start->color.add, end->color.add, process);
-	tween->color.multi = cInterpolate(start->color.multi, end->color.multi, process);
+	tween->color.add = col_interpolate(start->color.add, end->color.add, process);
+	tween->color.multi = col_interpolate(start->color.multi, end->color.multi, process);
 
 	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
 	{

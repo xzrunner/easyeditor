@@ -25,25 +25,25 @@ void PreviewCanvas::OnDrawSprites() const
 {
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
+	d2d::PrimitiveDraw::Cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
 
 	DrawStageData();
 }
 
 void PreviewCanvas::OnTimer()
 {
-	m_control.update();
+	m_control.Update();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	int frame_idx = m_control.frame();
+	int frame_idx = m_control.Frame();
 	if (frame_idx <= DataMgr::Instance()->GetLayers().GetFrameCount()) {
 		return;
 	}
 
 	if (m_settings.isCirculate) {
-		m_control.reset();
+		m_control.Reset();
 	} else {
-		m_control.decrease();
+		m_control.Decrease();
 	}
 }
 
@@ -52,7 +52,7 @@ void PreviewCanvas::DrawStageData() const
 {
 	eparticle3d::PS::Instance()->BufferClear();
 
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<d2d::Sprite*> sprites;
 	PreviewUtility::GetCurrSprites(m_control, sprites);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		if (eparticle3d::Sprite* p3d = dynamic_cast<eparticle3d::Sprite*>(sprites[i])) {
@@ -61,7 +61,7 @@ void PreviewCanvas::DrawStageData() const
 	}
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* spr = sprites[i];
+		d2d::Sprite* spr = sprites[i];
 		spr->Update(0);
 		d2d::SpriteRenderer::Instance()->Draw(spr);
 	}

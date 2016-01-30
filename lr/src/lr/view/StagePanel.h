@@ -28,13 +28,13 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::IVisitor& visitor, 
+	virtual void TraverseSprites(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(d2d::IVisitor& visitor, 
+	virtual void TraverseShapes(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
 	void EnableObserve(bool enable);
@@ -75,14 +75,14 @@ protected:
 private:
 	void ChangeEditOP();
 
-	void ReorderSprite(d2d::ISprite* spr, bool up);
-	void ReorderSpriteMost(d2d::ISprite* spr, bool up);
-	void InsertSprite(d2d::ISprite* spr, int idx);
-	void RemoveSprite(d2d::ISprite* spr);
+	void ReorderSprite(d2d::Sprite* spr, bool up);
+	void ReorderSpriteMost(d2d::Sprite* spr, bool up);
+	void InsertSprite(d2d::Sprite* spr, int idx);
+	void RemoveSprite(d2d::Sprite* spr);
 	void ClearSprite();
 
-	void RemoveShape(d2d::IShape* shape);
-	void InsertShape(d2d::IShape* shape);
+	void RemoveShape(d2d::Shape* shape);
+	void InsertShape(d2d::Shape* shape);
 	void ClearShape();
 
 private:

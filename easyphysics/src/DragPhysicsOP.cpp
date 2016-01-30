@@ -12,7 +12,7 @@ DragPhysicsOP::DragPhysicsOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	, m_ground(ground)
 	, m_mouseJoint(NULL)
 {
-	currPos.setInvalid();
+	currPos.SetInvalid();
 }
 
 bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
@@ -45,7 +45,7 @@ bool DragPhysicsOP::OnMouseLeftUp(int x, int y)
 	{
 		m_world->DestroyJoint(m_mouseJoint);
 		m_mouseJoint = NULL;
-		currPos.setInvalid();
+		currPos.SetInvalid();
 	}
 
 	return false;

@@ -37,7 +37,7 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 							  const std::string& name)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, files);
 
 	wxString filepath = dst_dir + "\\" + name;
 

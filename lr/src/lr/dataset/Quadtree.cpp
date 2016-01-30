@@ -17,14 +17,14 @@ Quadtree::~Quadtree()
 	delete m_root;
 }
 
-void Quadtree::Insert(const d2d::ISprite* spr)
+void Quadtree::Insert(const d2d::Sprite* spr)
 {
 	m_root->Insert(spr);
 }
 
-std::vector<const d2d::ISprite*> Quadtree::Query(const d2d::Rect& rect) const
+std::vector<const d2d::Sprite*> Quadtree::Query(const d2d::Rect& rect) const
 {
-	std::set<const d2d::ISprite*> set_sprites;
+	std::set<const d2d::Sprite*> set_sprites;
 
 	std::queue<Node*> buffer;
 	buffer.push(m_root);
@@ -45,7 +45,7 @@ std::vector<const d2d::ISprite*> Quadtree::Query(const d2d::Rect& rect) const
 		}
 	}
 
-	std::vector<const d2d::ISprite*> sprites;
+	std::vector<const d2d::Sprite*> sprites;
 	copy(set_sprites.begin(), set_sprites.end(), back_inserter(sprites));
 	return sprites;
 }
@@ -58,7 +58,7 @@ void Quadtree::DebugDraw() const
 	{
 		Node* node = buffer.front(); buffer.pop();
 
-		d2d::PrimitiveDraw::rect(d2d::Matrix(), node->m_rect, d2d::LIGHT_GREY_THIN_LINE);
+		d2d::PrimitiveDraw::DrawRect(d2d::Matrix(), node->m_rect, d2d::LIGHT_GREY_THIN_LINE);
 
 		if (!node->IsLeaf()) 
 		{
@@ -70,7 +70,7 @@ void Quadtree::DebugDraw() const
 	}
 
 	if (m_selected) {
-		d2d::PrimitiveDraw::rect(d2d::Matrix(), m_selected->m_rect, d2d::LIGHT_RED_THIN_LINE);
+		d2d::PrimitiveDraw::DrawRect(d2d::Matrix(), m_selected->m_rect, d2d::LIGHT_RED_THIN_LINE);
 		d2d::ColorTrans color;
 		color.multi = d2d::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
@@ -126,7 +126,7 @@ Quadtree::Node::
 }
 
 void Quadtree::Node::
-Insert(const d2d::ISprite* spr)
+Insert(const d2d::Sprite* spr)
 {
 	spr->Retain();
 
@@ -160,22 +160,22 @@ IsLeaf() const
 bool Quadtree::Node::
 IsIntersect(const d2d::Rect& rect) const
 {
-	return d2d::Math::isRectIntersectRect(m_rect, rect);
+	return d2d::Math2D::IsRectIntersectRect(m_rect, rect);
 }
 
 bool Quadtree::Node::
 IsContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::isPointInRect(pos, m_rect);
+	return d2d::Math2D::IsPointInRect(pos, m_rect);
 }
 
 bool Quadtree::Node::
-IsContain(const d2d::ISprite* spr) const
+IsContain(const d2d::Sprite* spr) const
 {
 	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->GetSymbol();
 	assert(shape.GetShapeType() == libshape::ST_POLYGON);
 
-	const std::vector<d2d::IShape*>& shapes = shape.GetShapes();
+	const std::vector<d2d::Shape*>& shapes = shape.GetShapes();
 	assert(!shapes.empty());
 
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shapes[0]);
@@ -183,9 +183,9 @@ IsContain(const d2d::ISprite* spr) const
 	d2d::Matrix mt;
 	spr->GetTransMatrix(mt);
 	std::vector<d2d::Vector> bound;
-	d2d::Math::TransVertices(mt, poly->GetVertices(), bound);
+	d2d::Math2D::TransVertices(mt, poly->GetVertices(), bound);
 
-	return d2d::Math::isPolylineIntersectRect(bound, true, m_rect);
+	return d2d::Math2D::IsPolylineIntersectRect(bound, true, m_rect);
 }
 
 bool Quadtree::Node::
@@ -199,7 +199,7 @@ NeedSplit() const
 		a_shape += GetContainArea(m_sprites[i]);
 	}
 
-	float a_rect = m_rect.xLength() * m_rect.yLength();
+	float a_rect = m_rect.Width() * m_rect.Height();
 	float p = a_shape / a_rect;
 
 	if (fabs(a_rect - 0) < 0.001f) {
@@ -216,13 +216,13 @@ Split()
 	for (int i = 0; i < 4; ++i) {
 		m_children[i] = new Node(m_rect);
 	}
-	m_children[0]->m_rect.xMax = m_children[2]->m_rect.xMax = 
-		m_children[1]->m_rect.xMin = m_children[3]->m_rect.xMin = m_rect.xCenter();
-	m_children[2]->m_rect.yMax = m_children[3]->m_rect.yMax = 
-		m_children[0]->m_rect.yMin = m_children[1]->m_rect.yMin = m_rect.yCenter();
+	m_children[0]->m_rect.xmax = m_children[2]->m_rect.xmax = 
+		m_children[1]->m_rect.xmin = m_children[3]->m_rect.xmin = m_rect.CenterX();
+	m_children[2]->m_rect.ymax = m_children[3]->m_rect.ymax = 
+		m_children[0]->m_rect.ymin = m_children[1]->m_rect.ymin = m_rect.CenterY();
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		const d2d::ISprite* spr = m_sprites[i];
+		const d2d::Sprite* spr = m_sprites[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
 			d2d::Rect rect = spr->GetRect();
@@ -236,12 +236,12 @@ Split()
 }
 
 float Quadtree::Node::
-GetContainArea(const d2d::ISprite* spr) const
+GetContainArea(const d2d::Sprite* spr) const
 {
 	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->GetSymbol();
 	assert(shape.GetShapeType() == libshape::ST_POLYGON);
 
-	const std::vector<d2d::IShape*>& shapes = shape.GetShapes();
+	const std::vector<d2d::Shape*>& shapes = shape.GetShapes();
 	assert(!shapes.empty());
 
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shapes[0]);
@@ -249,13 +249,13 @@ GetContainArea(const d2d::ISprite* spr) const
 	d2d::Matrix mt;
 	spr->GetTransMatrix(mt);
 	std::vector<d2d::Vector> bound;
-	d2d::Math::TransVertices(mt, poly->GetVertices(), bound);
+	d2d::Math2D::TransVertices(mt, poly->GetVertices(), bound);
 
 	std::vector<d2d::Vector> loop;
-	loop.push_back(d2d::Vector(m_rect.xMin, m_rect.yMin));
-	loop.push_back(d2d::Vector(m_rect.xMin, m_rect.yMax));
-	loop.push_back(d2d::Vector(m_rect.xMax, m_rect.yMax));
-	loop.push_back(d2d::Vector(m_rect.xMax, m_rect.yMin));
+	loop.push_back(d2d::Vector(m_rect.xmin, m_rect.ymin));
+	loop.push_back(d2d::Vector(m_rect.xmin, m_rect.ymax));
+	loop.push_back(d2d::Vector(m_rect.xmax, m_rect.ymax));
+	loop.push_back(d2d::Vector(m_rect.xmax, m_rect.ymin));
 	std::vector<std::vector<d2d::Vector> > loops;
 	loops.push_back(loop);
 
@@ -263,12 +263,12 @@ GetContainArea(const d2d::ISprite* spr) const
 
 	std::vector<d2d::Vector> lines;
 	std::vector<d2d::Vector> tris;
-	d2d::Triangulation::linesAndLoops(bound, lines, loops, tris);
+	d2d::Triangulation::LinesAndLoops(bound, lines, loops, tris);
 	for (int i = 0, n = tris.size() / 3; i < n; ++i)
 	{
 		d2d::Vector center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
-		if (d2d::Math::isPointInRect(center, m_rect)) {
-			area += d2d::Math::GetTriangleArea(tris[i*3], tris[i*3+1], tris[i*3+2]);
+		if (d2d::Math2D::IsPointInRect(center, m_rect)) {
+			area += d2d::Math2D::GetTriangleArea(tris[i*3], tris[i*3+1], tris[i*3+2]);
 		}
 	}
 

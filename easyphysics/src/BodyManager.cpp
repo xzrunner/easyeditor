@@ -14,9 +14,9 @@ BodyManager::BodyManager()
 {
 }
 
-IBody* BodyManager::LoadBody(d2d::ISprite* sprite)
+IBody* BodyManager::LoadBody(d2d::Sprite* sprite)
 {
-	std::map<d2d::ISprite*, IBody*>::iterator itr = 
+	std::map<d2d::Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(sprite);
 	IBody* body = CreateBody(sprite);
 	if (itr == m_map_body.end()) {
@@ -30,9 +30,9 @@ IBody* BodyManager::LoadBody(d2d::ISprite* sprite)
 	return body;
 }
 
-void BodyManager::UnloadBody(d2d::ISprite* sprite)
+void BodyManager::UnloadBody(d2d::Sprite* sprite)
 {
-	std::map<d2d::ISprite*, IBody*>::iterator itr = 
+	std::map<d2d::Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(sprite);
 	if (itr != m_map_body.end()) {
 		itr->first->Release();
@@ -41,9 +41,9 @@ void BodyManager::UnloadBody(d2d::ISprite* sprite)
 	}
 }
 
-const IBody* BodyManager::QueryBody(d2d::ISprite* sprite) const
+const IBody* BodyManager::QueryBody(d2d::Sprite* sprite) const
 {
-	std::map<d2d::ISprite*, IBody*>::const_iterator itr = 
+	std::map<d2d::Sprite*, IBody*>::const_iterator itr = 
 		m_map_body.find(sprite);
 	if (itr != m_map_body.end()) {
 		return itr->second;
@@ -54,14 +54,14 @@ const IBody* BodyManager::QueryBody(d2d::ISprite* sprite) const
 
 void BodyManager::Update()
 {
-	std::map<d2d::ISprite*, IBody*>::iterator itr =
+	std::map<d2d::Sprite*, IBody*>::iterator itr =
 		m_map_body.begin();
 	for ( ; itr != m_map_body.end(); ++itr) {
 		IBody* body = itr->second;
 		if (!body || !(body->getBody())) {
 			continue;
 		}
-		d2d::ISprite* sprite = itr->first;
+		d2d::Sprite* sprite = itr->first;
 		b2Body* b2body = body->getBody();
 		if (body->isAlive() && b2body->GetType() != b2_staticBody) {
 			d2d::Vector pos(b2body->GetPosition().x, b2body->GetPosition().y);
@@ -73,11 +73,11 @@ void BodyManager::Update()
 	}
 }
 
-IBody* BodyManager::CreateBody(d2d::ISprite* sprite)
+IBody* BodyManager::CreateBody(d2d::Sprite* sprite)
 {
-	std::string filepath = d2d::FilenameTools::getFilenameAddTag(
+	std::string filepath = d2d::FileHelper::GetFilenameAddTag(
 		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
-	if (d2d::FilenameTools::IsFileExist(filepath)) {
+	if (d2d::FileHelper::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
 		d2d::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
 		body->getBody()->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());

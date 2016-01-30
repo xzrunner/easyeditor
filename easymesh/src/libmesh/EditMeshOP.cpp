@@ -15,14 +15,14 @@ EditMeshOP::EditMeshOP(StagePanel* stage)
 	, m_bRightPress(false)
 	, m_selCenter(false)
 {
-	m_lastPos.setInvalid();
-	m_center.set(0, 0);
+	m_lastPos.SetInvalid();
+	m_center.Set(0, 0);
 }
 
 bool EditMeshOP::OnMouseLeftDown(int x, int y)
 {
 	m_lastPos = m_stage->TransPosScrToProj(x, y);
-	if (d2d::Math::getDistance(m_lastPos, m_center) < CENTER_RADIUS)
+	if (d2d::Math2D::GetDistance(m_lastPos, m_center) < CENTER_RADIUS)
 	{
 		m_selCenter = true;
 		return false;
@@ -96,8 +96,8 @@ bool EditMeshOP::OnDraw() const
 		shape->DrawInfoXY();
 	}
 
-	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
-	d2d::PrimitiveDraw::drawCircle(m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
+	d2d::PrimitiveDraw::Cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
+	d2d::PrimitiveDraw::DrawCircle(m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
 
 	if (SelectNodesOP::OnDraw())
 		return true;
@@ -117,14 +117,14 @@ void EditMeshOP::translasteNode(const d2d::Vector& offset)
 
 void EditMeshOP::rotateNode(const d2d::Vector& dst)
 {
-	float angle = d2d::Math::getAngleInDirection(m_center, m_lastPos, dst);
+	float angle = d2d::Math2D::GetAngleInDirection(m_center, m_lastPos, dst);
 	std::vector<Node*> nodes;
 	m_selection.Traverse(d2d::FetchAllVisitor<Node>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		Node* node = nodes[i];
 		d2d::Vector v = node->xy - m_center;
-		v = d2d::Math::rotateVector(v, angle);
+		v = d2d::Math2D::RotateVector(v, angle);
 		node->xy = m_center + v;
 	}
 }

@@ -55,8 +55,8 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_left_down_pos.setInvalid();
-	m_right_down_pos.setInvalid();
+	m_left_down_pos.SetInvalid();
+	m_right_down_pos.SetInvalid();
 
 	m_ctrl_node_radius = CTRL_NODE_RADIUS;
 }
@@ -136,11 +136,11 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 
 	m_align.SetInvisible();
 
-	ISprite* selected = NULL;
+	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
 	{
-		std::vector<ISprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+		std::vector<Sprite*> sprites;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		selected = sprites[0];
 	}
 	if (!selected) {
@@ -159,8 +159,8 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// offset
 	if (m_cfg.is_offset_open)
 	{
-		d2d::Vector offset = GetSprOffset(selected);
-		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
+		Vector offset = GetSprOffset(selected);
+		if (Math2D::GetDistance(offset, pos) < m_ctrl_node_radius) {
 			ChangeOPState(CreateOffsetState(selected));
 			return;
 		}
@@ -173,7 +173,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
-			if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
+			if (Math2D::GetDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
 			{
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
@@ -190,7 +190,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 		Vector ctrl_node[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
 		for (int i = 0; i < 4; ++i) {
-			if (Math::getDistance(ctrl_node[i], pos) < m_ctrl_node_radius) {
+			if (Math2D::GetDistance(ctrl_node[i], pos) < m_ctrl_node_radius) {
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrl_node[i];
 				cn.type = SpriteCtrlNode::Type(i);
@@ -217,7 +217,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 
 	if (!m_selection->IsEmpty()) {
 		Vector p;
-		p.setInvalid();
+		p.SetInvalid();
 		ChangeOPState(CreateTranslateState(m_selection, p));
 	}
 
@@ -227,8 +227,8 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 		&& !m_selection->IsEmpty()
 		&& m_left_down_pos != pos)
 	{
-		std::vector<ISprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+		std::vector<Sprite*> sprites;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		m_align.Align(sprites);
 		SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -245,11 +245,11 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 	Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_right_down_pos = pos;
 
-	ISprite* selected = NULL;
+	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
 	{
-		std::vector<ISprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+		std::vector<Sprite*> sprites;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		selected = sprites[0];
 	}
 	if (!selected) return;
@@ -261,7 +261,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
-			if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
+			if (Math2D::GetDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
 			{
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
@@ -280,7 +280,7 @@ void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
-	if (!m_right_down_pos.isValid()) {
+	if (!m_right_down_pos.IsValid()) {
 		return;
 	}
 
@@ -341,13 +341,13 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
-		ISprite* selected = NULL;
-		std::vector<ISprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+		Sprite* selected = NULL;
+		std::vector<Sprite*> sprites;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		selected = sprites[0];
 
 		Rect r = selected->GetRect();
-		float max_e = std::max(r.xLength(), r.yLength());
+		float max_e = std::max(r.Width(), r.Height());
 		if (m_ctrl_node_radius > max_e * 0.1f) {
 			m_ctrl_node_radius = 0;
 		} else {
@@ -356,22 +356,22 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 				Vector ctrl_nodes[4];
 				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i)
-					PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+					PrimitiveDraw::DrawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 			}
 			else
 			{
 				Vector ctrl_nodes[8];
 				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i)
-					PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+					PrimitiveDraw::DrawCircle(ctrl_nodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 				for (int i = 4; i < 8; ++i)
-					PrimitiveDraw::drawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+					PrimitiveDraw::DrawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 			}
 
 			if (m_cfg.is_offset_open)
 			{
-				d2d::Vector offset = GetSprOffset(selected);
-				PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+				Vector offset = GetSprOffset(selected);
+				PrimitiveDraw::DrawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 			}
 		}
 	}
@@ -383,21 +383,21 @@ void ArrangeSpriteImpl::Clear()
 {
 }
 
-ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
+Sprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 {
-	ISprite* selected = NULL;
+	Sprite* selected = NULL;
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
-		std::vector<ISprite*> sprites;
-		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+		std::vector<Sprite*> sprites;
+		m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 		selected = sprites[0];
 	}
 	if (!selected) return NULL;
 
 	if (m_cfg.is_offset_open)
 	{
-		d2d::Vector offset = GetSprOffset(selected);
-		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
+		Vector offset = GetSprOffset(selected);
+		if (Math2D::GetDistance(offset, pos) < m_ctrl_node_radius) {
 			return selected;
 		}
 	}
@@ -407,7 +407,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 		Vector ctrl_nodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 		for (int i = 0; i < 8; ++i) {
-			if (Math::getDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
+			if (Math2D::GetDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
 				return selected;
 			}
 		}
@@ -418,7 +418,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 		Vector ctrl_nodes[4];
 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 		for (int i = 0; i < 4; ++i) {
-			if (Math::getDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
+			if (Math2D::GetDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
 				return selected;
 			}
 		}
@@ -448,8 +448,8 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 
 void ArrangeSpriteImpl::OnSpaceKeyDown()
 {
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	if (sprites.empty()) {
 		return;
 	}
@@ -457,7 +457,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 	CombineAOP* comb = new CombineAOP();
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		ISprite* sprite = sprites[i];
+		Sprite* sprite = sprites[i];
 
 		comb->Insert(new TranslateSpriteAOP(sprite, -sprite->GetPosition()));
 		comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->GetScale()));
@@ -488,22 +488,22 @@ IArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* selec
 	return new RotateSpriteState(selection, first_pos);
 }
 
-IArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+IArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new ScaleSpriteState(sprite, ctrl_node);
 }
 
-IArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+IArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new ShearSpriteState(sprite, ctrl_node);
 }
 
-IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(ISprite* sprite) const
+IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(Sprite* sprite) const
 {
 	return new OffsetSpriteState(sprite);
 }
 
-IArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+IArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new PerspectiveSpriteState(sprite, ctrl_node);
 }
@@ -511,8 +511,8 @@ IArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(ISprite* sprite, 
 void ArrangeSpriteImpl::OnDeleteKeyDown()
 {
 	// add to history
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprites));
 
 	m_sprites_impl->ClearSelectedSprite();
@@ -520,8 +520,8 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 
 void ArrangeSpriteImpl::UpOneLayer()
 {
-	std::vector<d2d::ISprite*> selected;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	std::vector<Sprite*> selected;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], true);
 	}
@@ -529,16 +529,16 @@ void ArrangeSpriteImpl::UpOneLayer()
 
 void ArrangeSpriteImpl::DownOneLayer()
 {
-	std::vector<d2d::ISprite*> selected;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	std::vector<Sprite*> selected;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		ReorderSpriteSJ::Instance()->Reorder(selected[i], false);
 	}
 }
 
-d2d::Vector ArrangeSpriteImpl::GetSprOffset(const ISprite* spr) const
+Vector ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
 {
-	d2d::Vector offset = spr->GetPosition() + spr->GetOffset();
+	Vector offset = spr->GetPosition() + spr->GetOffset();
 	return offset;
 }
 
@@ -552,8 +552,8 @@ void ArrangeSpriteImpl::ChangeOPState(IArrangeSpriteState* state)
 
 void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 {
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	if (sprites.empty()) {
 		return;
 	}
@@ -566,7 +566,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	if (keycode == 'h' || keycode == 'H') 
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ISprite* spr = sprites[i];
+			Sprite* spr = sprites[i];
 			spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
@@ -575,7 +575,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'v' || keycode == 'V') 
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ISprite* spr = sprites[i];
+			Sprite* spr = sprites[i];
 			spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();

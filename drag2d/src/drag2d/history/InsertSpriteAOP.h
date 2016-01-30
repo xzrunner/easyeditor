@@ -9,16 +9,16 @@ namespace d2d
 class InsertSpriteAOP : public AbstractAtomicOP
 {
 public:
-	InsertSpriteAOP(const std::vector<ISprite*>& sprites);
+	InsertSpriteAOP(const std::vector<Sprite*>& sprites);
 	virtual ~InsertSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 }; // InsertSpriteAOP
 

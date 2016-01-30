@@ -25,15 +25,15 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(d2d::ISymbol* background)
+void StageCanvas::SetBackground(d2d::Symbol* background)
 {
-	m_background = d2d::SpriteFactory::Instance()->create(background);
-	m_background->Translate(d2d::Vector(0.0f, m_background->GetBounding()->height() * 0.375f));
+	m_background = d2d::SpriteFactory::Instance()->Create(background);
+	m_background->Translate(d2d::Vector(0.0f, m_background->GetBounding()->Height() * 0.375f));
 }
 
 d2d::Vector StageCanvas::TransToBirdView(const d2d::Vector& pos)
 {
-	d2d::Vector ret = d2d::Math::rotateVector(pos, d2d::PI / 4);
+	d2d::Vector ret = d2d::Math2D::RotateVector(pos, d2d::PI / 4);
 	ret.y *= VIEW_TRANS;
 	return ret;
 }
@@ -42,7 +42,7 @@ d2d::Vector StageCanvas::TransToFlatView(const d2d::Vector& pos)
 {
 	d2d::Vector ret = pos;
 	ret.y /= VIEW_TRANS;
-	ret = d2d::Math::rotateVector(ret, - d2d::PI / 4);
+	ret = d2d::Math2D::RotateVector(ret, - d2d::PI / 4);
 	return ret;
 }
 
@@ -98,10 +98,10 @@ void StageCanvas::DrawGuideLines() const
 	if (is_flat)
 	{
 		for (int i = 0; i <= row; ++i) {
-			d2d::PrimitiveDraw::drawLine(d2d::Vector(0, i*edge), d2d::Vector(width, i*edge), d2d::LIGHT_GREY);
+			d2d::PrimitiveDraw::DrawLine(d2d::Vector(0, i*edge), d2d::Vector(width, i*edge), d2d::LIGHT_GREY);
 		}
 		for (int i = 0; i <= col; ++i) {
-			d2d::PrimitiveDraw::drawLine(d2d::Vector(i*edge, 0), d2d::Vector(i*edge, height), d2d::LIGHT_GREY);
+			d2d::PrimitiveDraw::DrawLine(d2d::Vector(i*edge, 0), d2d::Vector(i*edge, height), d2d::LIGHT_GREY);
 		}
 	}
 	else
@@ -109,32 +109,32 @@ void StageCanvas::DrawGuideLines() const
 		for (int i = 0; i <= row; ++i) {
 			d2d::Vector s = TransToBirdView(d2d::Vector(0, i*edge));
 			d2d::Vector e = TransToBirdView(d2d::Vector(width, i*edge));
-			d2d::PrimitiveDraw::drawLine(s, e, d2d::LIGHT_GREY);
+			d2d::PrimitiveDraw::DrawLine(s, e, d2d::LIGHT_GREY);
 		}
 		for (int i = 0; i <= col; ++i) {
 			d2d::Vector s = TransToBirdView(d2d::Vector(i*edge, 0));
 			d2d::Vector e = TransToBirdView(d2d::Vector(i*edge, height));
-			d2d::PrimitiveDraw::drawLine(s, e, d2d::LIGHT_GREY);
+			d2d::PrimitiveDraw::DrawLine(s, e, d2d::LIGHT_GREY);
 		}
 	}
 }
 
 void StageCanvas::DrawGrass() const
 {
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* s = sprites[i];
+		d2d::Sprite* s = sprites[i];
 		SymbolRender::Instance()->DrawGrass(s->GetSymbol(), s->GetPosition(), m_stage->GetPerspective());
 	}
 }
 
 void StageCanvas::DrawGrids() const
 {
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* s = sprites[i];
+		d2d::Sprite* s = sprites[i];
 		bool valid = m_stage->GetCheckBoard().IsValid(s);
 		SymbolRender::Instance()->DrawGrids(s->GetSymbol(), s->GetPosition(), valid, m_stage->GetPerspective());
 	}
@@ -144,12 +144,12 @@ void StageCanvas::DrawSprites() const
 {
 	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
 
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
 	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		if (IsSymbolWall(*sprite)) {
 			SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 			{
@@ -175,20 +175,20 @@ void StageCanvas::DrawSprites() const
 
 void StageCanvas::DrawArrow() const
 {
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	if (sprites.size() == 1) {
-		d2d::ISprite* s = sprites[0];
+		d2d::Sprite* s = sprites[0];
 		SymbolRender::Instance()->DrawArrow(s->GetSymbol(), s->GetPosition());
 	}
 }
 
 void StageCanvas::DrawAttackRegion() const
 {
-	std::vector<d2d::ISprite*> sprites;
-	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* s = sprites[i];
+		d2d::Sprite* s = sprites[i];
 		SymbolRender::Instance()->DrawRegion(s->GetSymbol(), s->GetPosition());
 	}
 }

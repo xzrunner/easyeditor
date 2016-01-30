@@ -31,51 +31,51 @@ LayersMgrWidget::~LayersMgrWidget()
 	m_editedLayer = NULL;
 }
 
-void LayersMgrWidget::traverseEditableLayers(IVisitor& visitor)
+void LayersMgrWidget::traverseEditableLayers(Visitor& visitor)
 {
 	if (m_editedLayer)
 	{
-		bool hasNext;
-		visitor.Visit(m_editedLayer, hasNext);
+		bool next;
+		visitor.Visit(m_editedLayer, next);
 	}
 }
 
-void LayersMgrWidget::traverseVisibleLayers(IVisitor& visitor)
+void LayersMgrWidget::traverseVisibleLayers(Visitor& visitor)
 {
 	std::vector<LayerWidget*>::const_iterator itr = m_layers.begin();
 	for ( ; itr != m_layers.end(); ++itr)
 	{
 		if ((*itr)->isVisible())
 		{
-			bool hasNext;
-			visitor.Visit((*itr)->getLayer(), hasNext);
-			if (!hasNext) break;
+			bool next;
+			visitor.Visit((*itr)->getLayer(), next);
+			if (!next) break;
 		}
 	}
 }
 
-void LayersMgrWidget::traverseSelectableLayers(IVisitor& visitor)
+void LayersMgrWidget::traverseSelectableLayers(Visitor& visitor)
 {
 	std::vector<LayerWidget*>::const_iterator itr = m_layers.begin();
 	for ( ; itr != m_layers.end(); ++itr)
 	{
 		if ((*itr)->isSelectable())
 		{
-			bool hasNext;
-			visitor.Visit((*itr)->getLayer(), hasNext);
-			if (!hasNext) break;
+			bool next;
+			visitor.Visit((*itr)->getLayer(), next);
+			if (!next) break;
 		}
 	}
 }
 
-void LayersMgrWidget::traverseAllLayers(IVisitor& visitor)
+void LayersMgrWidget::traverseAllLayers(Visitor& visitor)
 {
 	std::vector<LayerWidget*>::const_iterator itr = m_layers.begin();
 	for ( ; itr != m_layers.end(); ++itr)
 	{
-		bool hasNext;
-		visitor.Visit((*itr)->getLayer(), hasNext);
-		if (!hasNext) break;
+		bool next;
+		visitor.Visit((*itr)->getLayer(), next);
+		if (!next) break;
 	}
 }
 
@@ -419,4 +419,4 @@ initLayout()
 	SetSizer(sizer);
 }
 
-} // d2d
+}

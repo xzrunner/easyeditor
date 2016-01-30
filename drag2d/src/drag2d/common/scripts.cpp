@@ -18,7 +18,7 @@ namespace d2d
 		lua_State* L = luaL_newstate();
 		luaL_openlibs(L);
 
-		d2d::luax_preload(L, luaopen_d2d, "d2d");
+		luax_preload(L, luaopen_d2d, "d2d");
 		luaopen_d2d(L);
 
 		return L;

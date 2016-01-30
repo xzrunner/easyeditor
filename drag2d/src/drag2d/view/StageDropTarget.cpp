@@ -4,7 +4,7 @@
 #include "common/StringTools.h"
 #include "dataset/SpriteFactory.h"
 #include "dataset/SymbolMgr.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/EditPanelImpl.h"
 #include "message/InsertSpriteSJ.h"
 
@@ -22,7 +22,7 @@ StageDropTarget::StageDropTarget(wxWindow* stage_wnd, EditPanelImpl* stage,
 void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 {
 	std::vector<std::string> keys;
-	StringTools::Split(text.ToStdString(), ",", keys);
+	StringHelper::Split(text.ToStdString(), ",", keys);
 
 	if (keys.size() <= 1) {
 		return;
@@ -30,8 +30,8 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 
 	for (int i = 1, n = keys.size(); i < n; ++i)
 	{
-		int idx = StringTools::FromString<int>(keys[i]);
-		ISymbol* symbol = m_library->GetSymbol(idx);
+		int idx = StringHelper::FromString<int>(keys[i]);
+		Symbol* symbol = m_library->GetSymbol(idx);
 		if (!symbol) {
 			continue;
 		}
@@ -42,8 +42,8 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			continue;
 		}
 
-		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-		if (sprite->GetSymbol().GetSize().isValid()) {
+		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
+		if (sprite->GetSymbol().GetSize().IsValid()) {
 			sprite->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(sprite);
 		}
@@ -56,7 +56,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i].ToStdString();
-		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
+		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
 		symbol->RefreshThumbnail(filename);
 		bool success = m_library->AddSymbol(symbol);
 		if (success) {
@@ -66,7 +66,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 				continue;
 			}
 
-			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+			Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 			sprite->Translate(pos);
 			InsertSpriteSJ::Instance()->Insert(sprite);
 			sprite->Release();

@@ -24,13 +24,13 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(filepath);
-	if (type == d2d::FileNameParser::e_shape) {
+	d2d::FileType::Type type = d2d::FileType::GetType(filepath);
+	if (type == d2d::FileType::e_shape) {
 		m_stage->LoadFromFile(filepath);		
-	} else if (type == d2d::FileNameParser::e_image 
-		|| type == d2d::FileNameParser::e_complex
-		|| type == d2d::FileNameParser::e_texture) {
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	} else if (type == d2d::FileType::e_image 
+		|| type == d2d::FileType::e_complex
+		|| type == d2d::FileType::e_texture) {
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		m_stage->SetSymbolBG(symbol);
 		symbol->Release();
 	}
@@ -39,10 +39,10 @@ void Task::Load(const char* filepath)
 void Task::Store(const char* filepath) const
 {
 	std::string fixed = filepath;
-	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(fixed);
-	if (type != d2d::FileNameParser::e_shape) {
-		wxString tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
-		fixed = d2d::FilenameTools::getFilenameAddTag(fixed, tag, "json");
+	d2d::FileType::Type type = d2d::FileType::GetType(fixed);
+	if (type != d2d::FileType::e_shape) {
+		wxString tag = d2d::FileType::GetTag(d2d::FileType::e_shape);
+		fixed = d2d::FileHelper::GetFilenameAddTag(fixed, tag, "json");
 	}
 	m_stage->StoreToFile(fixed.c_str());
 }
@@ -52,7 +52,7 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
 {
 
 }

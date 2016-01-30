@@ -47,7 +47,7 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "宽"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_width = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(w),
+		m_width = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(w),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_width->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 		csizer->Add(m_width);
@@ -59,7 +59,7 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "高"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_height = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(h),
+		m_height = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(h),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_height->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 		csizer->Add(m_height);
@@ -91,7 +91,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 		csizer->Add(new wxStaticText(this, wxID_ANY, "字号"), 0, wxLEFT | wxRIGHT, 5);
 
 		int size = m_spr->GetFontSize();
-		m_font_size = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(size),
+		m_font_size = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(size),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_font_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeFontSize));
 		csizer->Add(m_font_size);
@@ -121,7 +121,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 			csizer->Add(new wxStaticText(this, wxID_ANY, "宽度"), 0, wxLEFT | wxRIGHT, 5);
 
 			float size = m_spr->GetEdgeSize();
-			m_edge_size = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(size),
+			m_edge_size = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(size),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_edge_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeEdgeSize));
 			csizer->Add(m_edge_size);
@@ -177,7 +177,7 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "字间距"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_space_h = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(space_h),
+		m_space_h = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(space_h),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_space_h->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
 		csizer->Add(m_space_h);
@@ -189,7 +189,7 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "行间距"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_space_v = new wxTextCtrl(this, wxID_ANY, d2d::StringTools::ToString(space_v),
+		m_space_v = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(space_v),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_space_v->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
 		csizer->Add(m_space_v);
@@ -201,8 +201,8 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 
 void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 {	
-	int w = d2d::StringTools::FromString<int>(m_width->GetValue().ToStdString());
-	int h = d2d::StringTools::FromString<int>(m_height->GetValue().ToStdString());
+	int w = d2d::StringHelper::FromString<int>(m_width->GetValue().ToStdString());
+	int h = d2d::StringHelper::FromString<int>(m_height->GetValue().ToStdString());
 	m_spr->SetSize(w, h);
 }
 
@@ -214,7 +214,7 @@ void ToolbarPanel::OnChangeFont(wxCommandEvent& event)
 
 void ToolbarPanel::OnChangeFontSize(wxCommandEvent& event)
 {
-	int sz = d2d::StringTools::FromString<int>(m_font_size->GetValue().ToStdString());
+	int sz = d2d::StringHelper::FromString<int>(m_font_size->GetValue().ToStdString());
 	m_spr->SetFontSize(sz);
 }
 
@@ -233,7 +233,7 @@ void ToolbarPanel::OnChangeEdge(wxCommandEvent& event)
 
 void ToolbarPanel::OnChangeEdgeSize(wxCommandEvent& event)
 {
-	int sz = d2d::StringTools::FromString<float>(m_edge_size->GetValue().ToStdString());
+	int sz = d2d::StringHelper::FromString<float>(m_edge_size->GetValue().ToStdString());
 	m_spr->SetEdgeSize(sz);
 }
 
@@ -254,8 +254,8 @@ void ToolbarPanel::OnChangeAlign(wxCommandEvent& event)
 
 void ToolbarPanel::OnChangeSpace(wxCommandEvent& event)
 {
-	float hspace = d2d::StringTools::FromString<float>(m_space_h->GetValue().ToStdString());
-	float vspace = d2d::StringTools::FromString<float>(m_space_v->GetValue().ToStdString());
+	float hspace = d2d::StringHelper::FromString<float>(m_space_h->GetValue().ToStdString());
+	float vspace = d2d::StringHelper::FromString<float>(m_space_v->GetValue().ToStdString());
 	m_spr->SetSpace(hspace, vspace);
 }
 

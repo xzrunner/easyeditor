@@ -8,7 +8,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class SpriteSelection;
 
 class RotateSpriteAOP : public AbstractAtomicOP
@@ -16,23 +16,23 @@ class RotateSpriteAOP : public AbstractAtomicOP
 public:
 	RotateSpriteAOP() {}
 
-	RotateSpriteAOP(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end);
-	RotateSpriteAOP(const std::vector<ISprite*>& sprites, float angle);
+	RotateSpriteAOP(const std::vector<Sprite*>& sprites, const Vector& start, const Vector& end);
+	RotateSpriteAOP(const std::vector<Sprite*>& sprites, float angle);
 	RotateSpriteAOP(const SpriteSelection& selection, const Vector& start, const Vector& end);
-	RotateSpriteAOP(ISprite* sprite, float angle);
+	RotateSpriteAOP(Sprite* sprite, float angle);
 	virtual ~RotateSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	void Init(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end);
-	void Init(const std::vector<ISprite*>& sprites, float angle);
+	void Init(const std::vector<Sprite*>& sprites, const Vector& start, const Vector& end);
+	void Init(const std::vector<Sprite*>& sprites, float angle);
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 	Vector m_start, m_end;
 

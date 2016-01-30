@@ -5,7 +5,7 @@
 namespace emodeling
 {
 
-BodyPropertySetting::BodyPropertySetting(d2d::EditPanelImpl* stage, d2d::ISprite* sprite)
+BodyPropertySetting::BodyPropertySetting(d2d::EditPanelImpl* stage, d2d::Sprite* sprite)
 	: d2d::IPropertySetting("Body")
 	, m_stage(stage)
 {

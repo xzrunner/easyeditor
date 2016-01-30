@@ -37,7 +37,7 @@ void FontBlankPropertySetting::OnPropertyGridChange(const wxString& name, const 
 		}
 	} else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
-		sprite->font_color.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+		sprite->font_color.Set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 	} else if (name == wxT("Align.Hori")) {
 		sprite->align_hori = HoriAlignType(wxANY_AS(value, int));
 	} else if (name == wxT("Align.Vert")) {
@@ -58,7 +58,7 @@ void FontBlankPropertySetting::OnPropertyGridChange(const wxString& name, const 
 		sprite->BuildBounding();
 	} else if (name == wxT("Filename")) {
 		std::string str = wxANY_AS(value, wxString);
-		sprite->loadFont(str);
+		sprite->LoadFont(str);
 	} else if (name == wxT("TextContent")) {
 		sprite->SetTextContent(wxANY_AS(value, wxString));
 		SetCanvasDirtySJ::Instance()->SetDirty();

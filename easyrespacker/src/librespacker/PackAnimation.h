@@ -86,7 +86,7 @@ public:
 	virtual void UnpackFromBin(uint8_t** ptr, 
 		const std::vector<d2d::Image*>& images);
 
-	void CreateFramePart(const d2d::ISprite* spr, Frame& frame);
+	void CreateFramePart(const d2d::Sprite* spr, Frame& frame);
 	void CreateClipboxFramePart(const PackClipbox* cb, Frame& frame);
 
 	void Clear();
@@ -96,9 +96,9 @@ public:
 private:
 	bool AddComponent(const IPackNode* node, const std::string& name, int& comp_idx);	
 
-	static void LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans, bool force_mat);
-	static void LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans, bool force);
-	static void LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans);
+	static void LoadSprTrans(const d2d::Sprite* spr, SpriteTrans& trans, bool force_mat);
+	static void LoadSprMat(const d2d::Sprite* spr, SpriteTrans& trans, bool force);
+	static void LoadSprColor(const d2d::Sprite* spr, SpriteTrans& trans);
 
 public:
 	std::vector<Component> components;

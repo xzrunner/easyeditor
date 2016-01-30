@@ -27,8 +27,8 @@ BezierShape::BezierShape(const d2d::Vector& start, const d2d::Vector& end)
 
 	d2d::Vector mid = (start + end) * 0.5f;
 	d2d::Vector offset = (end - start) * 0.5f;
-	m_control_nodes[1] = mid + d2d::Math::rotateVectorRightAngle(offset, true);
-	m_control_nodes[2] = mid + d2d::Math::rotateVectorRightAngle(offset, false);
+	m_control_nodes[1] = mid + d2d::Math2D::RotateVectorRightAngle(offset, true);
+	m_control_nodes[2] = mid + d2d::Math2D::RotateVectorRightAngle(offset, false);
 
 	createCurve();
 }
@@ -47,7 +47,7 @@ bool BezierShape::IsContain(const d2d::Vector& pos) const
 {
 	bool ret = false;
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
-		if (d2d::Math::getDistance(pos, m_control_nodes[i]) < RADIUS) {
+		if (d2d::Math2D::GetDistance(pos, m_control_nodes[i]) < RADIUS) {
 			ret = true;
 			break;
 		}
@@ -68,8 +68,8 @@ void BezierShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) cons
 	ChainShape::Draw(mt, color);
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
-		d2d::Vector pos = d2d::Math::transVector(m_control_nodes[i], mt);
-		d2d::PrimitiveDraw::rect(pos, (float)RADIUS, (float)RADIUS, m_style);
+		d2d::Vector pos = d2d::Math2D::TransVector(m_control_nodes[i], mt);
+		d2d::PrimitiveDraw::DrawRect(pos, (float)RADIUS, (float)RADIUS, m_style);
 	}
 }
 
@@ -80,7 +80,7 @@ d2d::IPropertySetting* BezierShape::CreatePropertySetting(d2d::EditPanelImpl* st
 
 void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::IShape::LoadFromFile(value, dir);
+	d2d::Shape::LoadFromFile(value, dir);
 
 	d2d::Vector points[4];
 	for (size_t i = 0; i < 4; ++i)
@@ -95,7 +95,7 @@ void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 
 void BezierShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::IShape::StoreToFile(value, dir);
+	d2d::Shape::StoreToFile(value, dir);
 
 	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
 		value["points"]["x"][i] = m_control_nodes[i].x;
@@ -105,7 +105,7 @@ void BezierShape::StoreToFile(Json::Value& value, const std::string& dir) const
 
 void BezierShape::createCurve()
 {
-	const size_t num = std::max(20, (int)(d2d::Math::getDistance(m_control_nodes[0], m_control_nodes[3]) / 10));
+	const size_t num = std::max(20, (int)(d2d::Math2D::GetDistance(m_control_nodes[0], m_control_nodes[3]) / 10));
 	float dt = 1.0f / (num - 1);
 	std::vector<d2d::Vector> vertices(num);
 	for (size_t i = 0; i < num; ++i)
@@ -115,8 +115,8 @@ void BezierShape::createCurve()
 
 void BezierShape::Mirror(bool x, bool y)
 {
-	float cx = GetRect().xCenter();
-	float cy = GetRect().yCenter();
+	float cx = GetRect().CenterX();
+	float cy = GetRect().CenterY();
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		if (x) {
 			m_control_nodes[i].x = cx * 2 - m_control_nodes[i].x;

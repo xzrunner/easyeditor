@@ -2,12 +2,12 @@
 #include "AtomicType.h"
 #include "HistoryUtil.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 
 namespace d2d
 {
 
-ShearSpriteAOP::ShearSpriteAOP(ISprite* sprite, 
+ShearSpriteAOP::ShearSpriteAOP(Sprite* sprite, 
 							   const Vector& new_shear, 
 							   const Vector& old_shear)
    : m_new_shear(new_shear)
@@ -38,7 +38,7 @@ void ShearSpriteAOP::Redo()
 	} 
 }
 
-Json::Value ShearSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value ShearSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

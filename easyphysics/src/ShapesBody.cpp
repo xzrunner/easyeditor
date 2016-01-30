@@ -59,7 +59,7 @@ ShapesBody::ShapesBody(b2World* world, const BodyData& bodyData, float scale/* =
 
 void ShapesBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const
 {
-	rect.makeInfinite();
+	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		if (b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape()))
@@ -68,16 +68,16 @@ void ShapesBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float ang
 			for (size_t i = 0; i < poly->GetVertexCount(); ++i)
 			{
 				const b2Vec2& p = poly->m_vertices[i];
-				d2d::Vector transform = d2d::Math::rotateVector(d2d::Vector(p.x, p.y), angle) + position;
-				rect.combine(transform);
+				d2d::Vector transform = d2d::Math2D::RotateVector(d2d::Vector(p.x, p.y), angle) + position;
+				rect.Combine(transform);
 			}
 		}
 		else if (b2Shape* shape = m_body->GetFixtureList()->GetShape())
 		{
 			b2CircleShape* circle = dynamic_cast<b2CircleShape*>(shape);
 			assert(circle);
-			rect.combine(d2d::Vector(position.x - circle->m_radius, position.y - circle->m_radius));
-			rect.combine(d2d::Vector(position.x + circle->m_radius, position.y + circle->m_radius));
+			rect.Combine(d2d::Vector(position.x - circle->m_radius, position.y - circle->m_radius));
+			rect.Combine(d2d::Vector(position.x + circle->m_radius, position.y + circle->m_radius));
 		}
 	}
 }

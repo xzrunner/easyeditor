@@ -106,7 +106,7 @@ void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
 		}
 	}
 
-//	std::string filepath = dir + "//" + d2d::FilenameTools::getFilenameWithExtension(pic.filepath);
+//	std::string filepath = dir + "//" + d2d::FileHelper::getFilenameWithExtension(pic.filepath);
 	std::string filepath = pic.filepath;
 	d2d::LibpngAdapter::Write(pixels, pic.w, pic.h, filepath.c_str());
 

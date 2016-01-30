@@ -8,7 +8,7 @@
 #include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 #include "view/MultiSpritesImpl.h"
-#include "dataset/ISymbol.h"
+#include "dataset/Symbol.h"
 
 #include "message/SelectSpriteSJ.h"
 #include "message/ReorderSpriteSJ.h"
@@ -87,9 +87,9 @@ void RightPopupMenu::CreateSelectMenu(wxMenu& menu)
 
 	int sz = std::min(MENU_MULTI_SELECTED_END - MENU_MULTI_SELECTED + 1, (int)m_selected_sprs.size());
 	for (int i = 0; i < sz; ++i) {
-		ISprite* spr = m_selected_sprs[i];
+		Sprite* spr = m_selected_sprs[i];
 		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_MULTI_SELECTED + i);
-		std::string name = FilenameTools::getFilename(spr->GetSymbol().GetFilepath());
+		std::string name = FileHelper::GetFilename(spr->GetSymbol().GetFilepath());
 		menu.Append(MENU_MULTI_SELECTED + i, name);
 	}
 
@@ -134,7 +134,7 @@ void RightPopupMenu::HandleSelectMenu(int id)
 		return;
 	}
 
-	ISprite* selected = m_selected_sprs[idx];
+	Sprite* selected = m_selected_sprs[idx];
 	m_selection->Clear();
 	m_selection->Add(selected);
 
@@ -147,7 +147,7 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 // 		if (Config::Instance()->IsUseDTex()) {
 // 			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 // 			for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-// 				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
+// 				Symbol& s = const_cast<Symbol&>(m_edited_sprs[i]->GetSymbol());
 // 				dtex->InsertSymbol(s);
 // 			}
 // 		}
@@ -156,7 +156,7 @@ void RightPopupMenu::HandleDebugTagMenu(int id)
 // 			//DynamicTexture* dtex = DynamicTexture::Instance();
 // 			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 // 			for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-// 				ISymbol& s = const_cast<ISymbol&>(m_edited_sprs[i]->GetSymbol());
+// 				Symbol& s = const_cast<Symbol&>(m_edited_sprs[i]->GetSymbol());
 // 				dtex->Remove(s.GetFilepath());
 // 			}
 // 		}
@@ -195,7 +195,7 @@ void RightPopupMenu::HoriMirror()
 {
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		ISprite* spr = m_edited_sprs[i];
+		Sprite* spr = m_edited_sprs[i];
 		spr->SetMirror(!spr->GetMirrorX(), spr->GetMirrorY());
 		dirty = true;
 	}
@@ -208,7 +208,7 @@ void RightPopupMenu::VertMirror()
 {
 	bool dirty = false;
 	for (size_t i = 0, n = m_edited_sprs.size(); i < n; ++i) {
-		ISprite* spr = m_edited_sprs[i];
+		Sprite* spr = m_edited_sprs[i];
 		spr->SetMirror(spr->GetMirrorX(), !spr->GetMirrorY());
 		dirty = true;
 	}
@@ -226,9 +226,9 @@ void RightPopupMenu::OnSelected(int x, int y)
 
 	PointMultiQueryVisitor visitor_selected(pos);
 	m_selection->Traverse(visitor_selected);
-	const std::vector<ISprite*>& sprites_selected = visitor_selected.GetResult();
+	const std::vector<Sprite*>& sprites_selected = visitor_selected.GetResult();
 	if (!sprites_selected.empty()) {
-		m_selection->Traverse(FetchAllVisitor<ISprite>(m_edited_sprs));
+		m_selection->Traverse(FetchAllVisitor<Sprite>(m_edited_sprs));
 	}
 
 	PointMultiQueryVisitor visitor_all(pos);

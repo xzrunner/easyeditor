@@ -30,7 +30,7 @@ bool StagePanel::Update(int version)
 
 void StagePanel::SetPSMat(const d2d::Vector& pos)
 {
-	m_ps_mat.setTranslation(pos.x, pos.y);
+	m_ps_mat.SetTranslation(pos.x, pos.y);
 }
 
 }

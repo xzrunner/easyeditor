@@ -11,17 +11,17 @@ namespace d2d
 class ShearSpriteAOP : public AbstractAtomicOP
 {
 public:
-	ShearSpriteAOP(ISprite* sprite, const Vector& new_shear, 
+	ShearSpriteAOP(Sprite* sprite, const Vector& new_shear, 
 		const Vector& old_shear);
 	virtual ~ShearSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 	Vector m_old_shear, m_new_shear;
 

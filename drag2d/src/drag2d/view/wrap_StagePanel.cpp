@@ -5,7 +5,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "message/InsertSpriteSJ.h"
 
-d2d::StageModule MODULE_STAGE;
+StageModule MODULE_STAGE;
 
 namespace d2d
 {
@@ -21,8 +21,8 @@ namespace d2d
 // 			SpriteSelection* sel = MODULE_STAGE.impl->getSpriteSelection();
 // 			if (sel) 
 // 			{
-// 				std::vector<ISprite*> sprites;
-// 				sel->traverse(FetchAllVisitor<ISprite>(sprites));
+// 				std::vector<Sprite*> sprites;
+// 				sel->traverse(FetchAllVisitor<Sprite>(sprites));
 // 				if (!sprites.empty())
 // 				{
 // 					luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)sprites[0]);
@@ -53,11 +53,11 @@ namespace d2d
 
 		float x = (float)luaL_checknumber(L, 1);
 		float y = (float)luaL_checknumber(L, 2);
-		std::vector<ISprite*> sprites;
-		MODULE_STAGE.impl->TraverseSprites(FetchAllVisitor<ISprite>(sprites));
+		std::vector<Sprite*> sprites;
+		MODULE_STAGE.impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
-			ISprite* s = sprites[i];
+			Sprite* s = sprites[i];
 			Vector pos = s->GetPosition() + Vector(x, y);
 			s->SetTransform(pos, s->GetAngle());
 		}
@@ -69,7 +69,7 @@ namespace d2d
 		if (!MODULE_STAGE.impl)
 			return 0;
 
-		ISprite* t = luax_checksprite(L, 1);
+		Sprite* t = luax_checksprite(L, 1);
 		if (t) {
 			InsertSpriteSJ::Instance()->Insert(t);
 		}

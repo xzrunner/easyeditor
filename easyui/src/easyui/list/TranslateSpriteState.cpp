@@ -20,10 +20,10 @@ void TranslateSpriteState::Translate(const d2d::Vector& offset)
 		return;
 	}
 
-	std::vector<d2d::ISprite*> selected;
-	GetSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	std::vector<d2d::Sprite*> selected;
+	GetSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(selected));
 	assert(selected.size() == 1);
-	d2d::ISprite* spr = selected[0];
+	d2d::Sprite* spr = selected[0];
 	spr->SetTransform(spr->GetPosition() + offset, spr->GetAngle());
 
 	m_list->Arrange(spr);

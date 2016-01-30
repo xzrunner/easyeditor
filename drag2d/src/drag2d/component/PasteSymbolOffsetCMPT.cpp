@@ -6,7 +6,7 @@
 #include <wx/spinctrl.h>
 
 template <typename TOperation>
-d2d::PasteSymbolOffsetCMPT<TOperation>::
+PasteSymbolOffsetCMPT<TOperation>::
 PasteSymbolOffsetCMPT(wxWindow* parent, const wxString& name,
 					  wxWindow* stage_wnd, EditPanelImpl* stage, 
 					  MultiSpritesImpl* spritesImpl, 
@@ -17,13 +17,13 @@ PasteSymbolOffsetCMPT(wxWindow* parent, const wxString& name,
 }
 
 template <typename TOperation>
-d2d::Vector d2d::PasteSymbolOffsetCMPT<TOperation>::getOffset() const
+Vector PasteSymbolOffsetCMPT<TOperation>::getOffset() const
 {
 	return Vector(m_xSpin->GetValue(), m_ySpin->GetValue());
 }
 
 template <typename TOperation>
-wxSizer* d2d::PasteSymbolOffsetCMPT<TOperation>::initLayout()
+wxSizer* PasteSymbolOffsetCMPT<TOperation>::initLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("×Ô¶¯Æ«ÒÆ"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);

@@ -2,7 +2,7 @@
 
 #include "common/Math.h"
 #include "dataset/SpriteFactory.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
@@ -18,19 +18,19 @@ PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, 
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 {
-	m_lastPos.setInvalid();
+	m_lastPos.SetInvalid();
 }
 
 bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 {
-	ISymbol* symbol = m_libraryPanel->GetSymbol();
+	Symbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		if (!m_bCaptured)
 			m_pos = m_stage->TransPosScrToProj(x, y);
 		m_lastPos = m_pos;
 
-		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();
@@ -45,12 +45,12 @@ bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 
 	m_bCaptured = false;
 	m_pos = m_stage->TransPosScrToProj(x, y);
-	if (m_lastPos.isValid())
+	if (m_lastPos.IsValid())
 	{
 		Vector offset = m_cmpt->getOffset();
 		Vector newPos = m_lastPos + offset;
-		if (Math::getDistance(m_pos, newPos) < 
-			Math::getDistance(offset, Vector(0, 0)))
+		if (Math2D::GetDistance(m_pos, newPos) < 
+			Math2D::GetDistance(offset, Vector(0, 0)))
 		{
 			m_bCaptured = true;
 			m_pos = newPos;
@@ -65,9 +65,9 @@ bool PasteSymbolCaptureOP::Clear()
 {
 	if (PasteSymbolOP::Clear()) return true;
 
-	m_lastPos.setInvalid();
+	m_lastPos.SetInvalid();
 
 	return false;
 }
 
-} // d2d
+}

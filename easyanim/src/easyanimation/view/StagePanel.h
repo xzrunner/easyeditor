@@ -22,7 +22,7 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::IVisitor& visitor, 
+	virtual void TraverseSprites(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL,
 		bool order = true) const;
 
@@ -36,13 +36,13 @@ private:
 	void OnMenuAddJointNode(wxCommandEvent& event);
 	void OnMenuDelJointNode(wxCommandEvent& event);
 
-	void Reorder(d2d::ISprite* spr, bool up);
-	void ReorderMost(d2d::ISprite* spr, bool up);
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	void Reorder(d2d::Sprite* spr, bool up);
+	void ReorderMost(d2d::Sprite* spr, bool up);
+	void Insert(d2d::Sprite* spr);
+	void Remove(d2d::Sprite* spr);
 
-	void InsertWithUD(d2d::ISprite* spr);
-	void InsertWithoutUD(d2d::ISprite* spr);
+	void InsertWithUD(d2d::Sprite* spr);
+	void InsertWithoutUD(d2d::Sprite* spr);
 
 	bool IsCurrFrameValid() const { return m_frame != NULL; }
 
@@ -54,12 +54,12 @@ public:
 	};
 
 private:
-	class CheckUpdateVisitor : public d2d::IVisitor
+	class CheckUpdateVisitor : public d2d::Visitor
 	{
 	public:
 		CheckUpdateVisitor(int version);
 
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 		bool NeedUpdate() const { return m_update; }
 

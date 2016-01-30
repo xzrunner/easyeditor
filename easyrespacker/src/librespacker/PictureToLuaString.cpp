@@ -19,7 +19,7 @@ void PictureToLuaString::Pack(const PackPicture* pic,
 	lua::comments(gen, "file: " + pic->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"picture\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(pic->GetSprID()));
+	lua::assign_with_end(gen, "id", d2d::StringHelper::ToString(pic->GetSprID()));
 
 	for (int i = 0, n = pic->quads.size(); i < n; ++i) {
 		PackQuad(pic->quads[i], gen, tp, scale);
@@ -35,7 +35,7 @@ void PictureToLuaString::PackQuad(const PackPicture::Quad& quad,
 								  float scale)
 {
 	int idx = tp.QueryIdx(quad.img->GetFilepath());
-	std::string tex_str = lua::assign("tex", d2d::StringTools::ToString(idx));
+	std::string tex_str = lua::assign("tex", d2d::StringHelper::ToString(idx));
 
 	char buff[256];
 

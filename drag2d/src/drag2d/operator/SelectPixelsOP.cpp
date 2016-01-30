@@ -126,8 +126,8 @@
 //
 //	for_each(m_result.begin(), m_result.end(), DeletePointerFunctor<RawPixels::PixelsPos>());
 //	m_result.clear();
-//	m_firstPos.setInvalid();
-//	m_currPos.setInvalid();
+//	m_firstPos.SetInvalid();
+//	m_currPos.SetInvalid();
 //	m_area.clear();
 //
 //	return false;
@@ -148,34 +148,34 @@
 //	int width, height;
 //	m_pixels->getSize(width, height);
 //
-//	int xMin, xMax, yMin, yMax;
+//	int xmin, xmax, ymin, ymax;
 //	if (m_firstPos.x < m_currPos.x)
 //	{
-//		xMin = static_cast<int>(m_firstPos.x + width * 0.5f + 0.5f);
-//		xMax = static_cast<int>(m_currPos.x + width * 0.5f + 0.5f);
+//		xmin = static_cast<int>(m_firstPos.x + width * 0.5f + 0.5f);
+//		xmax = static_cast<int>(m_currPos.x + width * 0.5f + 0.5f);
 //	}
 //	else
 //	{
-//		xMin = static_cast<int>(m_currPos.x + width * 0.5f + 0.5f);
-//		xMax = static_cast<int>(m_firstPos.x + width * 0.5f + 0.5f);
+//		xmin = static_cast<int>(m_currPos.x + width * 0.5f + 0.5f);
+//		xmax = static_cast<int>(m_firstPos.x + width * 0.5f + 0.5f);
 //	}
 //	if (m_firstPos.y < m_currPos.y)
 //	{
-//		yMin = static_cast<int>(m_firstPos.y + height * 0.5f + 0.5f);
-//		yMax = static_cast<int>(m_currPos.y + height * 0.5f + 0.5f);
+//		ymin = static_cast<int>(m_firstPos.y + height * 0.5f + 0.5f);
+//		ymax = static_cast<int>(m_currPos.y + height * 0.5f + 0.5f);
 //	}
 //	else
 //	{
-//		yMin = static_cast<int>(m_currPos.y + height * 0.5f + 0.5f);
-//		yMax = static_cast<int>(m_firstPos.y + height * 0.5f + 0.5f);
+//		ymin = static_cast<int>(m_currPos.y + height * 0.5f + 0.5f);
+//		ymax = static_cast<int>(m_firstPos.y + height * 0.5f + 0.5f);
 //	}
-//	if (xMin < 0) xMin = 0;
-//	if (xMax >= width) xMax = width - 1;
-//	if (yMin < 0) yMin = 0;
-//	if (yMax >= height) yMax = height - 1;
+//	if (xmin < 0) xmin = 0;
+//	if (xmax >= width) xmax = width - 1;
+//	if (ymin < 0) ymin = 0;
+//	if (ymax >= height) ymax = height - 1;
 //
-//	for (int x = xMin; x <= xMax; ++x)
-//		for (int y = yMin; y <= yMax; ++y)
+//	for (int x = xmin; x <= xmax; ++x)
+//		for (int y = ymin; y <= ymax; ++y)
 //			SelectByPos(x, y);
 //
 //	m_stage->Refresh();
@@ -278,4 +278,4 @@
 //	}
 //}
 //
-//} // d2d
+//}

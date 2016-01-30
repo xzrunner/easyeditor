@@ -22,7 +22,7 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
-	class GetPhysicsStaticVisitor : public d2d::IVisitor
+	class GetPhysicsStaticVisitor : public d2d::Visitor
 	{
 	public:
 		enum TYPE
@@ -34,7 +34,7 @@ private:
 
 	public:
 		GetPhysicsStaticVisitor();
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 		TYPE getType() const { return m_type; }
 
 	private:
@@ -42,11 +42,11 @@ private:
 
 	}; // GetPhysicsStaticVisitor
 
-	class SetPhysicsStaticVisitor : public d2d::IVisitor
+	class SetPhysicsStaticVisitor : public d2d::Visitor
 	{
 	public:
 		SetPhysicsStaticVisitor(bool bChecked);
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 	private:
 		bool m_bChecked;

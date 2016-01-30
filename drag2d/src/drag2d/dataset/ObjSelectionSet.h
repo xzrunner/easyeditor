@@ -3,8 +3,8 @@
 
 #include "SelectionSet.h"
 
-#include "dataset/ISprite.h"
-#include "dataset/IShape.h"
+#include "dataset/Sprite.h"
+#include "dataset/Shape.h"
 
 namespace d2d
 {
@@ -22,8 +22,8 @@ public:
 
 }; // ObjSelection
 
-// typedef ObjSelectionSet<ISprite> SpriteSelection;
-// typedef ObjSelectionSet<IShape> ShapeSelection;
+// typedef ObjSelectionSet<Sprite> SpriteSelection;
+// typedef ObjSelectionSet<Shape> ShapeSelection;
 
 }
 

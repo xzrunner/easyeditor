@@ -22,7 +22,7 @@ DFFParser::DFFParser(const char* filepath)
 
 	delete[] pixels;
 
-	m_dir = d2d::FilenameTools::getFileDir(filepath);
+	m_dir = d2d::FileHelper::GetFileDir(filepath);
 }
 
 void DFFParser::outputImage(int width, int height)

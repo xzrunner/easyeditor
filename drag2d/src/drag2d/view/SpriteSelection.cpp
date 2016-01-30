@@ -7,19 +7,19 @@ namespace d2d
 
 void SpriteSelection::Clear()
 {
-	ObjSelectionSet<ISprite>::Clear();
+	ObjSelectionSet<Sprite>::Clear();
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SpriteSelection::Add(ISprite* item)
+void SpriteSelection::Add(Sprite* item)
 {
-	ObjSelectionSet<ISprite>::Add(item);
+	ObjSelectionSet<Sprite>::Add(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SpriteSelection::Remove(ISprite* item)
+void SpriteSelection::Remove(Sprite* item)
 {
-	ObjSelectionSet<ISprite>::Remove(item);
+	ObjSelectionSet<Sprite>::Remove(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

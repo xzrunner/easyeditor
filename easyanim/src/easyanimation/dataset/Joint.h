@@ -9,8 +9,8 @@ namespace eanim
 class Joint
 {
 public:
-	Joint(d2d::ISprite* sprite);
-	Joint(d2d::ISprite* sprite, const d2d::Vector& pos);
+	Joint(d2d::Sprite* sprite);
+	Joint(d2d::Sprite* sprite, const d2d::Vector& pos);
 	~Joint();
 
 	void Draw() const;
@@ -32,7 +32,7 @@ private:
 private:
 	int m_id;
 
-	d2d::ISprite* m_sprite;
+	d2d::Sprite* m_sprite;
 
 	d2d::Vector m_relative;
 	float m_relativeAngle;

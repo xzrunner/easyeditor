@@ -4,7 +4,7 @@
 #include "IStageCanvas.h"
 
 #include "common/tools.h"
-#include "dataset/IShape.h"
+#include "dataset/Shape.h"
 
 #include "message/subject_id.h"
 #include "message/RemoveShapeSJ.h"
@@ -37,7 +37,7 @@ ShapesPanelImpl::~ShapesPanelImpl()
 	m_container->Release();
 }
 
-void ShapesPanelImpl::TraverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const
+void ShapesPanelImpl::TraverseShapes(Visitor& visitor, DataTraverseType type/* = e_allExisting*/) const
 {
 	m_container->Traverse(visitor, true);
 }
@@ -49,12 +49,12 @@ void ShapesPanelImpl::OnNotify(int sj_id, void* ud)
 	switch (sj_id)
 	{
 	case MSG_REMOVE_SHAPE:
-		if (m_container->Remove((IShape*)ud)) {
+		if (m_container->Remove((Shape*)ud)) {
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	case MSG_INSERT_SHAPE:
-		if (m_container->Insert((IShape*)ud)) {
+		if (m_container->Insert((Shape*)ud)) {
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
@@ -73,4 +73,4 @@ void ShapesPanelImpl::InitSubjects()
 	RegistSubject(ClearShapeSJ::Instance());
 }
 
-} // d2d
+}

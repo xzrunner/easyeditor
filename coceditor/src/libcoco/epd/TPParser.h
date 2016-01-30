@@ -35,7 +35,7 @@ public:
 	};
 
 public:
-	TPParser(const std::vector<const d2d::ISymbol*>& symbols,
+	TPParser(const std::vector<const d2d::Symbol*>& symbols,
 		const TextureMgr& tex_mgr);
 
 	void Parser();
@@ -46,7 +46,7 @@ public:
 		return m_symbol_sorter.GetSymbolSet();
 	}
 
-	TPParser::Picture* FindPicture(const d2d::ISymbol* symbol) const;
+	TPParser::Picture* FindPicture(const d2d::Symbol* symbol) const;
 
 	void DebugInfo() const;
 
@@ -60,7 +60,7 @@ private:
 
 	int m_tex_size;
 
-	std::map<const d2d::ISymbol*, Picture*> m_map_symbol2picture;
+	std::map<const d2d::Symbol*, Picture*> m_map_symbol2picture;
 
 }; // TPParser
 

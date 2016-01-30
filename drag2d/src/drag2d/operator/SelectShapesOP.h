@@ -10,13 +10,13 @@ namespace d2d
 class MultiShapesImpl;
 class AbstractEditCMPT;
 class IPropertySetting;
-class IShape;
+class Shape;
 class ShapeSelection;
 
 class SelectShapesOP : public DrawRectangleOP
 {
 public:
-	SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiShapesImpl* shapesImpl, 
+	SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesImpl* shapesImpl, 
 		AbstractEditCMPT* callback = NULL);
 	virtual ~SelectShapesOP();
 
@@ -40,13 +40,13 @@ protected:
 	ShapeSelection* m_selection;
 
 private:
-	class TranslateVisitor : public d2d::IVisitor
+	class TranslateVisitor : public Visitor
 	{
 	public:
-		TranslateVisitor(const d2d::Vector& offset) : m_offset(offset) {}
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		TranslateVisitor(const Vector& offset) : m_offset(offset) {}
+		virtual void Visit(Object* object, bool& next);
 	private:
-		d2d::Vector m_offset;
+		Vector m_offset;
 	}; // TranslateVisitor
 
 private:
@@ -54,12 +54,12 @@ private:
 
 	MultiShapesImpl* m_shapeImpl;
 
-	mutable std::vector<IShape*> m_clipboard;
+	mutable std::vector<Shape*> m_clipboard;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;
 
-	d2d::Vector m_move_last_pos;
+	Vector m_move_last_pos;
 
 }; // SelectShapesOP
 

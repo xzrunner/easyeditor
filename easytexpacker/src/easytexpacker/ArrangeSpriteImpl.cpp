@@ -29,8 +29,8 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_selection->Size() == 1)
 	{
-		std::vector<d2d::ISprite*> sprites;
-		m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		std::vector<d2d::Sprite*> sprites;
+		m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
 		const d2d::Vector& pos = sprites[0]->GetPosition();
 		float angle = sprites[0]->GetAngle();
@@ -58,9 +58,9 @@ void ArrangeSpriteImpl::OnDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 void ArrangeSpriteImpl::FixCoordsVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
 
 	const d2d::Vector& pos = sprite->GetPosition();
 
@@ -69,13 +69,13 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	float width, height;
 	if (sprite->GetAngle() == 0)
 	{
-		width = sprite->GetSymbol().GetSize().xLength() * s + p;
-		height = sprite->GetSymbol().GetSize().yLength() * s + p;
+		width = sprite->GetSymbol().GetSize().Width() * s + p;
+		height = sprite->GetSymbol().GetSize().Height() * s + p;
 	}
 	else
 	{
-		width = sprite->GetSymbol().GetSize().yLength() * s + p;
-		height = sprite->GetSymbol().GetSize().xLength() * s + p;
+		width = sprite->GetSymbol().GetSize().Height() * s + p;
+		height = sprite->GetSymbol().GetSize().Width() * s + p;
 	}
 
 	d2d::Vector leftTop;
@@ -85,7 +85,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	if (leftTop.x == std::floor(leftTop.x) && 
 		leftTop.y == std::floor(leftTop.y))
 	{
-		bFetchNext = true;
+		next = true;
 		return;
 	}
 
@@ -96,7 +96,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
 	sprite->SetTransform(fixedCenter, sprite->GetAngle());
-	bFetchNext = true;
+	next = true;
 }
 
 }

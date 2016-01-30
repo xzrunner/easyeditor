@@ -13,16 +13,16 @@ public:
 		d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	const d2d::ISprite* getImage() const {
+	const d2d::Sprite* getImage() const {
 		return m_image;
 	}
 	void setImage(const std::string& filepath);
 
-	const d2d::ISprite* getLeft() const { return m_left; }
-	const d2d::ISprite* getRight() const { return m_right; }
+	const d2d::Sprite* getLeft() const { return m_left; }
+	const d2d::Sprite* getRight() const { return m_right; }
 
 private:
-	void setImage(d2d::ISymbol* symbol);
+	void setImage(d2d::Symbol* symbol);
 
 private:
 	class StageDropTarget : public d2d::CombinedDropTarget
@@ -40,10 +40,10 @@ private:
 	}; // StageDropTarget
 
 private:
-	d2d::ISprite* m_image;
+	d2d::Sprite* m_image;
 
 	// todo 根据OP的不同来组织数据
-	const d2d::ISprite *m_left, *m_right;
+	const d2d::Sprite *m_left, *m_right;
 	
 }; // StagePanel
 

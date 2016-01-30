@@ -42,8 +42,8 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 
 			Json::Value frame_val;
 
-			//std::string filepath = d2d::FilenameTools::FormatFilepath(m_filepaths[idx]);	
-			std::string filepath = d2d::FilenameTools::getRelativePath(dir, m_filepaths[idx]);	
+			//std::string filepath = d2d::FileHelper::FormatFilepath(m_filepaths[idx]);	
+			std::string filepath = d2d::FileHelper::GetRelativePath(dir, m_filepaths[idx]);	
 			frame_val["filename"] = filepath;
 
 			const RectSize& src_sz = m_src_sizes[idx];
@@ -136,7 +136,7 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 		value["meta"] = meta_val;
 
 		std::string out_filepath = dst_file;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(m_start_id + i));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringHelper::ToString(m_start_id + i));
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
@@ -201,7 +201,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 		}
 
 		std::string out_filepath = filepath;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringTools::ToString(m_start_id + i));
+		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringHelper::ToString(m_start_id + i));
 		pack.OutputToFile(out_filepath);
 	}
 }

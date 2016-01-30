@@ -9,7 +9,7 @@ namespace d2d
 	public:
 		LibraryFontBlankPage(wxWindow* parent);
 
-		virtual bool IsHandleSymbol(ISymbol* symbol) const;
+		virtual bool IsHandleSymbol(Symbol* symbol) const;
 
 		virtual bool LoadFromConfig();
 

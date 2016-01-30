@@ -26,7 +26,7 @@ namespace etexpacker
 		static void storeEasypackerPosition(const char* filename);
 		static void storeTexpackerPosition(const char* filename);
 
-		static Json::Value store(const d2d::ISprite* sprite);
+		static Json::Value store(const d2d::Sprite* sprite);
 
 
 

@@ -6,7 +6,7 @@
 namespace eterrain2d
 {
 
-class Sprite : public d2d::ISprite
+class Sprite : public d2d::Sprite
 {
 public:
 	Sprite();
@@ -20,14 +20,14 @@ public:
 	virtual Sprite* Clone() const;
 
 	//
-	// ISprite interface
+	// Sprite interface
 	//
 	virtual bool Update(int version) { return true; }
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::ISymbol* symbol);
+	virtual void SetSymbol(d2d::Symbol* symbol);
 	virtual void Load(const Json::Value& val);
 
-	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
+	static d2d::Sprite* Create(d2d::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 

@@ -10,17 +10,17 @@ class SymbolSet
 {
 public:
 
-	void Insert(const d2d::ISymbol* symbol);
+	void Insert(const d2d::Symbol* symbol);
 
-	const d2d::ISymbol* Query(const std::string& filepath) const;
-	bool Query(const d2d::ISymbol* symbol) const;
+	const d2d::Symbol* Query(const std::string& filepath) const;
+	bool Query(const d2d::Symbol* symbol) const;
 
-	const std::vector<const d2d::ISymbol*>& GetOrdered() const { return m_symbol_ordered; }
+	const std::vector<const d2d::Symbol*>& GetOrdered() const { return m_symbol_ordered; }
 
 private:
-	std::multimap<std::string, const d2d::ISymbol*> m_symbol_map;
+	std::multimap<std::string, const d2d::Symbol*> m_symbol_map;
 
-	std::vector<const d2d::ISymbol*> m_symbol_ordered;
+	std::vector<const d2d::Symbol*> m_symbol_ordered;
 
 }; // SymbolSet
 

@@ -20,7 +20,7 @@ ShapeBuilder::~ShapeBuilder()
 	}
 }
 
-void ShapeBuilder::Traverse(d2d::IVisitor& visitor) const
+void ShapeBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	std::map<const etexture::Symbol*, const PackShape*>::const_iterator 
 		itr = m_map_data.begin();
@@ -35,7 +35,7 @@ void ShapeBuilder::Traverse(d2d::IVisitor& visitor) const
 
 bool ShapeBuilder::CanHandle(const etexture::Symbol* symbol) const
 {
-	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
+	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -66,7 +66,7 @@ const IPackNode* ShapeBuilder::Create(const etexture::Symbol* symbol)
 
 void ShapeBuilder::Load(const etexture::Symbol* symbol, PackShape* shape)
 {
-	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
+	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
 		throw d2d::Exception("ShapeBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
 	}

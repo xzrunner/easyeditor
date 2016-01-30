@@ -40,14 +40,14 @@ void GroupTreePanel::LoadFromFile(const Json::Value& value)
 	io.Load(value);
 }
 
-void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<d2d::ISprite*> >& groups)
+void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<Sprite*> >& groups)
 {
 	if (groups.empty()) {
 		return;
 	}
 
 	std::vector<wxTreeItemId> groups_id;
-	std::map<std::string, std::vector<d2d::ISprite*> >::const_iterator itr
+	std::map<std::string, std::vector<Sprite*> >::const_iterator itr
 		= groups.begin();
 	for ( ; itr != groups.end(); ++itr)
 	{
@@ -76,7 +76,7 @@ void GroupTreePanel::Clear()
 	m_grouptree->Clear();
 }
 
-void GroupTreePanel::Insert(ISprite* sprite)
+void GroupTreePanel::Insert(Sprite* sprite)
 {
 	m_grouptree->AddSprite(sprite);
 }

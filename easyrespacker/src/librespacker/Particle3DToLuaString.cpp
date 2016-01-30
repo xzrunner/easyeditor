@@ -15,7 +15,7 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 	lua::comments(gen, "file: " + p3d->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"particle3d\"");
-	lua::assign_with_end(gen, "id", d2d::StringTools::ToString(p3d->GetSprID()));
+	lua::assign_with_end(gen, "id", d2d::StringHelper::ToString(p3d->GetSprID()));
 	if (!p3d->export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + p3d->export_name + "\"");
 	}

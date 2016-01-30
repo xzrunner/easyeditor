@@ -42,15 +42,15 @@ bool ArrangeSpriteFixOP::OnMouseRightUp(int x, int y)
 
 void ArrangeSpriteFixOP::FixSpritesLocation()
 {
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	fixSpritesLocation(sprites);
 }
 
-void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<ISprite*>& sprites)
+void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<Sprite*>& sprites)
 {
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ISprite* spr = sprites[i];
+		Sprite* spr = sprites[i];
 		spr->Retain();
 		RemoveSpriteSJ::Instance()->Remove(spr);
 		InsertSpriteSJ::Instance()->Insert(spr);
@@ -58,4 +58,4 @@ void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<ISprite*>& sprites
 	}
 }
 
-} // d2d
+}

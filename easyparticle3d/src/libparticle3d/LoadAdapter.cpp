@@ -104,7 +104,7 @@ void LoadAdapter::Load(const std::string& filepath)
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 	int i = 0;
 	Json::Value comp_val = value["components"][i++];
 	while (!comp_val.isNull()) {
@@ -118,12 +118,12 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	Component comp;
 
 	comp.filepath = comp_val["filepath"].asString();
-	comp.filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.filepath);
+	comp.filepath = d2d::FileHelper::GetAbsolutePath(dir, comp.filepath);
 
 	if (!comp_val["bind ps filepath"].isNull()) {
 		comp.bind_filepath = comp_val["bind ps filepath"].asString();
 		if (!comp.bind_filepath.empty()) {
-			comp.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, comp.bind_filepath);
+			comp.bind_filepath = d2d::FileHelper::GetAbsolutePath(dir, comp.bind_filepath);
 		}
 	}
 

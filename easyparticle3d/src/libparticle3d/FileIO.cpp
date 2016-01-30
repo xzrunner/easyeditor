@@ -35,20 +35,20 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 //	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
 		p3d_symbol* pc = cp->m_pc;
 
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(pc->ud);
+		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(pc->ud);
 		value["components"][i]["filepath"] = 
-			d2d::FilenameTools::getRelativePath(dir, symbol->GetFilepath()).ToStdString();
+			d2d::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
 
 		if (pc->bind_ps_cfg) {
 			std::string filepath = PSConfigMgr::Instance()->GetFilepath(pc->bind_ps_cfg);
 			value["components"][i]["bind ps filepath"] = 
-				d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
+				d2d::FileHelper::GetRelativePath(dir, filepath).ToStdString();
 		}
 
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
@@ -208,7 +208,7 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		dst.alpha_start = src.alpha_start * 0.01f;
 		dst.alpha_end = src.alpha_end * 0.01f;
 
-		if (d2d::FilenameTools::IsFileExist(src.bind_filepath)) {
+		if (d2d::FileHelper::IsFileExist(src.bind_filepath)) {
 			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);
 		}
 

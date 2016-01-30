@@ -11,7 +11,7 @@ SelectSpriteSJ::SelectSpriteSJ(int id)
 {
 }
 
-void SelectSpriteSJ::Select(ISprite* spr, bool clear, Observer* except)
+void SelectSpriteSJ::Select(Sprite* spr, bool clear, Observer* except)
 {
 	Params p;
 	p.spr = spr;

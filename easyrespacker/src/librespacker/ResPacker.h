@@ -35,7 +35,7 @@ private:
 	void Pack() const;
 
 private:
-	std::vector<const d2d::ISymbol*> m_symbols;
+	std::vector<const d2d::Symbol*> m_symbols;
 
 	d2d::TexturePacker m_tp;
 

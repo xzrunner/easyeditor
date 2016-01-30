@@ -2,7 +2,7 @@
 
 #include "common/Random.h"
 #include "common/Math.h"
-#include "dataset/ISymbol.h"
+#include "dataset/Symbol.h"
 #include "view/LibraryPanel.h"
 
 #include <wx/spinctrl.h>
@@ -55,20 +55,20 @@ void PasteSymbolRandomWidget::initLayout()
 
 void PasteSymbolRandomWidget::getRandomValue(RandomValue& val) const
 {
-	std::vector<ISymbol*> symbols;
+	std::vector<Symbol*> symbols;
 	m_libraryPanel->Traverse(FilterSymbolVisitor(m_symbolFilterCtrl->GetValue(), symbols));
 	if (symbols.empty())
 		val.symbol = NULL;
 	else
-		val.symbol = symbols[static_cast<int>(symbols.size() * Random::getNum0To1())];
+		val.symbol = symbols[static_cast<int>(symbols.size() * Random::GetNum0To1())];
 
 	const float scaleMin = m_scaleMinCtrl->GetValue() * 0.01f,
 		scaleMax = m_scaleMaxCtrl->GetValue() * 0.01f;
-	val.scale = scaleMin + (scaleMax - scaleMin) * Random::getNum0To1();
+	val.scale = scaleMin + (scaleMax - scaleMin) * Random::GetNum0To1();
 
 	const float angleMin = m_angleMinCtrl->GetValue() * TRANS_DEG_TO_RAD,
 		angleMax = m_angleMaxCtrl->GetValue() * TRANS_DEG_TO_RAD;
-	val.angle = angleMin + (angleMax - angleMin) * Random::getNum0To1();
+	val.angle = angleMin + (angleMax - angleMin) * Random::GetNum0To1();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -76,19 +76,19 @@ void PasteSymbolRandomWidget::getRandomValue(RandomValue& val) const
 //////////////////////////////////////////////////////////////////////////
 
 PasteSymbolRandomWidget::FilterSymbolVisitor::
-FilterSymbolVisitor(const wxString& filter, std::vector<ISymbol*>& result)
+FilterSymbolVisitor(const wxString& filter, std::vector<Symbol*>& result)
 	: m_filter(filter)
 	, m_result(result)
 {
 }
 
 void PasteSymbolRandomWidget::FilterSymbolVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
-	ISymbol* symbol = static_cast<ISymbol*>(object);
+	Symbol* symbol = static_cast<Symbol*>(object);
 	if (!m_filter.empty() && symbol->GetFilepath().find(m_filter) != wxNOT_FOUND)
 		m_result.push_back(symbol);
-	bFetchNext = true;
+	next = true;
 }
 
-} // d2d
+}

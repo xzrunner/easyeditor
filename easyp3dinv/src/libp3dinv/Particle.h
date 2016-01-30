@@ -36,7 +36,7 @@ private:
 	float m_rotate;
 	float m_angle;
 
-	d2d::ISymbol* m_symbol;
+	d2d::Symbol* m_symbol;
 	float m_start_scale, m_end_scale; 
 
 private:

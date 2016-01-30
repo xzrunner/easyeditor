@@ -3,8 +3,8 @@
 
 #include "common/config.h"
 #include "common/SettingData.h"
-#include "dataset/ISprite.h"
-#include "dataset/ISymbol.h"
+#include "dataset/Sprite.h"
+#include "dataset/Symbol.h"
 #include "message/subject_id.h"
 #include "message/SelectSpriteSJ.h"
 #include "message/ReorderSpriteSJ.h"
@@ -70,14 +70,14 @@ void ViewlistList::SetImpl(ViewlistListImpl* impl)
 
 void ViewlistList::OnSelected(int idx)
 {
-	if (d2d::ISprite* spr = QuerySprite(idx)) {
+	if (Sprite* spr = QuerySprite(idx)) {
 		OnSelected(spr);
 	}
 }
 
-d2d::ISprite* ViewlistList::QuerySprite(int idx)
+Sprite* ViewlistList::QuerySprite(int idx)
 {
-	d2d::ISprite* spr = NULL;
+	Sprite* spr = NULL;
 	if (idx >= 0 && idx < m_sprites.size()) {
 		spr = m_sprites[idx];
 	}
@@ -93,18 +93,18 @@ void ViewlistList::Clear()
 		m_selected_spr = NULL;
 	}
 
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
 	m_sprites.clear();
 }
 
-void ViewlistList::Insert(ISprite* sprite, int idx)
+void ViewlistList::Insert(Sprite* sprite, int idx)
 {
 	if (!sprite) {
 		return;
 	}
 	sprite->Retain();
 
-	ListItem* item = const_cast<ISymbol*>(&sprite->GetSymbol());
+	ListItem* item = const_cast<Symbol*>(&sprite->GetSymbol());
 	if (idx < 0 || idx >= m_sprites.size()) {
 		VerticalImageList::Insert(item, 0);
 		m_sprites.insert(m_sprites.begin(), sprite);
@@ -138,7 +138,7 @@ void ViewlistList::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case MSG_REMOVE_SPRITE:
-		Remove((ISprite*)ud);
+		Remove((Sprite*)ud);
 		break;
 	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
@@ -180,7 +180,7 @@ int ViewlistList::GetSelectedIndex() const
 	return GetItemCount() - 1 - GetSelection();
 }
 
-void ViewlistList::OnSelected(d2d::ISprite* spr)
+void ViewlistList::OnSelected(Sprite* spr)
 {
 	m_selected_spr = spr;
 	m_selected_spr->Retain();
@@ -189,7 +189,7 @@ void ViewlistList::OnSelected(d2d::ISprite* spr)
 	SelectSpriteSJ::Instance()->Select(spr, !add);
 }
 
-int ViewlistList::QuerySprIdx(const ISprite* spr) const
+int ViewlistList::QuerySprIdx(const Sprite* spr) const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (m_sprites[i] == spr) {
@@ -210,7 +210,7 @@ void ViewlistList::ReorderSelected(bool up)
 	ReorderSpriteSJ::Instance()->Reorder(m_selected_spr, up, this);
 }
 
-void ViewlistList::Select(ISprite* spr, bool clear)
+void ViewlistList::Select(Sprite* spr, bool clear)
 {
 	int idx = QuerySprIdx(spr);
 	if (idx >= 0) {
@@ -218,7 +218,7 @@ void ViewlistList::Select(ISprite* spr, bool clear)
 	}
 }
 
-void ViewlistList::Reorder(const ISprite* sprite, bool up)
+void ViewlistList::Reorder(const Sprite* sprite, bool up)
 {
 	int i = QuerySprIdx(sprite);
 	if (i < 0) {
@@ -248,7 +248,7 @@ void ViewlistList::Reorder(const ISprite* sprite, bool up)
 	}
 }
 
-void ViewlistList::Remove(ISprite* sprite)
+void ViewlistList::Remove(Sprite* sprite)
 {
 	int idx = QuerySprIdx(sprite);
 	if (idx < 0) {
@@ -271,4 +271,4 @@ void ViewlistList::RemoveSelected()
 	m_sprites.erase(m_sprites.begin() + idx);
 }
 
-} // d2d
+}

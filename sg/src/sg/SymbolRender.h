@@ -13,23 +13,23 @@ class SymbolRender
 public:
 	void Init(StagePanel* stage);
 
-	void SetGrid(d2d::ISprite* grid) { m_grid = grid; }
-	void SetArrow(d2d::ISymbol* arrow_down, d2d::ISymbol* arrow_right) { 
+	void SetGrid(d2d::Sprite* grid) { m_grid = grid; }
+	void SetArrow(d2d::Symbol* arrow_down, d2d::Symbol* arrow_right) { 
 		m_arrow_down = arrow_down; 
 		m_arrow_right = arrow_right;
 	}
-	void SetGrass(int idx, d2d::ISprite* grass) { 
+	void SetGrass(int idx, d2d::Sprite* grass) { 
 		if (idx >= 0 && idx < GRASS_COUNT) { m_grass[idx] = grass; }
 	}
-	void SetRegion(d2d::ISymbol* region, int size) {
+	void SetRegion(d2d::Symbol* region, int size) {
 		m_region = region;
 		m_region_size = size;
 	}
 
-	void DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool is_flat) const;
-	void DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool valid, bool is_flat) const;
-	void DrawArrow(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
-	void DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos);
+	void DrawGrass(const d2d::Symbol& symbol, const d2d::Vector& pos, bool is_flat) const;
+	void DrawGrids(const d2d::Symbol& symbol, const d2d::Vector& pos, bool valid, bool is_flat) const;
+	void DrawArrow(const d2d::Symbol& symbol, const d2d::Vector& pos) const;
+	void DrawRegion(const d2d::Symbol& symbol, const d2d::Vector& pos);
 
 public:
 	static SymbolRender* Instance();
@@ -41,13 +41,13 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::ISprite* m_grid;
-	d2d::ISymbol *m_arrow_down, *m_arrow_right;
+	d2d::Sprite* m_grid;
+	d2d::Symbol *m_arrow_down, *m_arrow_right;
 
 	static const int GRASS_COUNT = 5;
-	d2d::ISprite* m_grass[GRASS_COUNT];
+	d2d::Sprite* m_grass[GRASS_COUNT];
 
-	d2d::ISymbol* m_region;
+	d2d::Symbol* m_region;
 	int m_region_size;
 
 private:

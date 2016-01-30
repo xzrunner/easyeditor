@@ -19,7 +19,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
-					   d2d::ISprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
+					   d2d::Sprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
@@ -30,7 +30,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	d2d::SetWndDirtySJ::Instance()->SetDirty();
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, d2d::ISprite* edited, 
+void EditDialog::InitLayout(wxGLContext* glctx, d2d::Sprite* edited, 
 							const d2d::MultiSpritesImpl* sprite_impl)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -41,7 +41,7 @@ void EditDialog::InitLayout(wxGLContext* glctx, d2d::ISprite* edited,
 	SetSizer(sizer);
 }
 
-void EditDialog::InitEditOP(d2d::ISprite* edited)
+void EditDialog::InitEditOP(d2d::Sprite* edited)
 {
 	d2d::AbstractEditOP* op = NULL;
 
@@ -82,7 +82,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	{
 		FileIO::StoreToFile(filepath.c_str(), symbol.GetIcon());
 		symbol.RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
+		d2d::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

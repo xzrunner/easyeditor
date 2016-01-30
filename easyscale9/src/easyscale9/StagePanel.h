@@ -17,13 +17,13 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::IVisitor& visitor, 
+	virtual void TraverseSprites(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL,
 		bool order = true) const;
 
 	Symbol* getPatchSymbol() { return m_symbol; }
 
-	d2d::ISprite* getSprite(int row, int col) {
+	d2d::Sprite* getSprite(int row, int col) {
 		if (row < 0 || row >= 3 || col < 0 || col >= 3)
 			return NULL;
 		return m_sprites[row][col];
@@ -40,15 +40,15 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	void Insert(d2d::Sprite* spr);
+	void Remove(d2d::Sprite* spr);
 	void Clear();
 
 private:
 	// [2][0]
 	// [1][0]
 	// [0][0] [0][1] [0][2]
-	d2d::ISprite* m_sprites[3][3];
+	d2d::Sprite* m_sprites[3][3];
 
 	Symbol* m_symbol;
 

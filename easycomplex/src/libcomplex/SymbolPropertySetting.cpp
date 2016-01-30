@@ -27,34 +27,34 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Clipbox") && m_symbol) 
 	{
 		std::vector<std::string> str;
-		d2d::StringTools::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
+		d2d::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
 		if (str.size() == 4) {
 			Symbol* c = static_cast<Symbol*>(m_symbol);
-			d2d::StringTools::FromString(str[0], c->m_clipbox.xMin);
-			d2d::StringTools::FromString(str[1], c->m_clipbox.xMax);
-			d2d::StringTools::FromString(str[2], c->m_clipbox.yMin);
-			d2d::StringTools::FromString(str[3], c->m_clipbox.yMax);
+			d2d::StringHelper::FromString(str[0], c->m_clipbox.xmin);
+			d2d::StringHelper::FromString(str[1], c->m_clipbox.xmax);
+			d2d::StringHelper::FromString(str[2], c->m_clipbox.ymin);
+			d2d::StringHelper::FromString(str[3], c->m_clipbox.ymax);
 		}
 	}
 	else if (name == wxT("Clipbox.xmin") && m_symbol)
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
-		c->m_clipbox.xMin = wxANY_AS(value, int);
+		c->m_clipbox.xmin = wxANY_AS(value, int);
 	}
 	else if (name == wxT("Clipbox.xmax") && m_symbol)
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
-		c->m_clipbox.xMax = wxANY_AS(value, int);
+		c->m_clipbox.xmax = wxANY_AS(value, int);
 	}
 	else if (name == wxT("Clipbox.ymin") && m_symbol)
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
-		c->m_clipbox.yMin = wxANY_AS(value, int);
+		c->m_clipbox.ymin = wxANY_AS(value, int);
 	}
 	else if (name == wxT("Clipbox.ymax") && m_symbol)
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
-		c->m_clipbox.yMax = wxANY_AS(value, int);
+		c->m_clipbox.ymax = wxANY_AS(value, int);
 	}
 	else if (name == wxT("Cache") && m_symbol)
 	{
@@ -157,10 +157,10 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	if (m_symbol)
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
-		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)c->m_clipbox.xMin);
-		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)c->m_clipbox.xMax);
-		pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)c->m_clipbox.yMin);
-		pg->SetPropertyValue(wxT("Clipbox.ymax"), (int)c->m_clipbox.yMax);
+		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)c->m_clipbox.xmin);
+		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)c->m_clipbox.xmax);
+		pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)c->m_clipbox.ymin);
+		pg->SetPropertyValue(wxT("Clipbox.ymax"), (int)c->m_clipbox.ymax);
 		pg->SetPropertyValue(wxT("Cache"), c->m_use_render_cache);
 	}
 	else

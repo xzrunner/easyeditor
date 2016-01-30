@@ -51,9 +51,9 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

@@ -38,4 +38,4 @@ wxSizer* LayersMgrCMPT::initLayout()
 	return m_sizer;
 }
 
-} // d2d
+}

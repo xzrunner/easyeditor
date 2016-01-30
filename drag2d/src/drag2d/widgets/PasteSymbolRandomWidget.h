@@ -8,7 +8,7 @@
 
 namespace d2d
 {
-	class ISymbol;
+	class Symbol;
 	class LibraryPanel;
 
 	class PasteSymbolRandomWidget : public wxPanel
@@ -16,7 +16,7 @@ namespace d2d
 	public:
 		struct RandomValue
 		{
-			ISymbol* symbol;
+			Symbol* symbol;
 			float scale;
 			float angle;	// in radian
 		};
@@ -30,17 +30,17 @@ namespace d2d
 		void initLayout();
 
 	private:
-		class FilterSymbolVisitor : public IVisitor
+		class FilterSymbolVisitor : public Visitor
 		{
 		public:
-			FilterSymbolVisitor(const wxString& filter, std::vector<ISymbol*>& result);
+			FilterSymbolVisitor(const wxString& filter, std::vector<Symbol*>& result);
 
-			virtual void Visit(Object* object, bool& bFetchNext);
+			virtual void Visit(Object* object, bool& next);
 
 		private:
 			wxString m_filter;
 
-			std::vector<ISymbol*>& m_result;
+			std::vector<Symbol*>& m_result;
 		};
 
 	private:

@@ -4,32 +4,32 @@
 
 #include "common/Math.h"
 #include "common/visitors.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/SpriteSelection.h"
 
 namespace d2d
 {
 
-RotateSpriteAOP::RotateSpriteAOP(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end)
+RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprites, const Vector& start, const Vector& end)
 {
 	Init(sprites, start, end);
 }
 
-RotateSpriteAOP::RotateSpriteAOP(const std::vector<ISprite*>& sprites, float angle)
+RotateSpriteAOP::RotateSpriteAOP(const std::vector<Sprite*>& sprites, float angle)
 {
 	Init(sprites, angle);
 }
 
 RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, const Vector& start, const Vector& end)
 {
-	std::vector<ISprite*> sprites;
-	selection.Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	selection.Traverse(FetchAllVisitor<Sprite>(sprites));
 	Init(sprites, start, end);
 }
 
-RotateSpriteAOP::RotateSpriteAOP(ISprite* sprite, float angle)
+RotateSpriteAOP::RotateSpriteAOP(Sprite* sprite, float angle)
 {
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 	sprites.push_back(sprite);
 	Init(sprites, angle);
 }
@@ -43,12 +43,12 @@ RotateSpriteAOP::~RotateSpriteAOP()
 
 void RotateSpriteAOP::Undo()
 {
-	if (m_start.isValid() && m_end.isValid()) 
+	if (m_start.IsValid() && m_end.IsValid()) 
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			ISprite* sprite = m_sprites[i];
-			float angle = Math::getAngleInDirection(sprite->GetPosition(), m_start, m_end);
+			Sprite* sprite = m_sprites[i];
+			float angle = Math2D::GetAngleInDirection(sprite->GetPosition(), m_start, m_end);
 			sprite->Rotate(-angle);
 		}
 	} 
@@ -56,7 +56,7 @@ void RotateSpriteAOP::Undo()
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			ISprite* sprite = m_sprites[i];
+			Sprite* sprite = m_sprites[i];
 			sprite->Rotate(-m_angle);
 		}
 	}
@@ -64,12 +64,12 @@ void RotateSpriteAOP::Undo()
 
 void RotateSpriteAOP::Redo()
 {
-	if (m_start.isValid() && m_end.isValid()) 
+	if (m_start.IsValid() && m_end.IsValid()) 
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			ISprite* sprite = m_sprites[i];
-			float angle = Math::getAngleInDirection(sprite->GetPosition(), m_start, m_end);
+			Sprite* sprite = m_sprites[i];
+			float angle = Math2D::GetAngleInDirection(sprite->GetPosition(), m_start, m_end);
 			sprite->Rotate(angle);
 		}
 	} 
@@ -77,13 +77,13 @@ void RotateSpriteAOP::Redo()
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			ISprite* sprite = m_sprites[i];
+			Sprite* sprite = m_sprites[i];
 			sprite->Rotate(m_angle);
 		}
 	}
 }
 
-Json::Value RotateSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value RotateSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);
@@ -96,7 +96,7 @@ Json::Value RotateSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
 	return val;
 }
 
-void RotateSpriteAOP::Init(const std::vector<ISprite*>& sprites, 
+void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprites, 
 						   const Vector& start, const Vector& end)
 {
 	m_start = start;
@@ -110,10 +110,10 @@ void RotateSpriteAOP::Init(const std::vector<ISprite*>& sprites,
 	}
 }
 
-void RotateSpriteAOP::Init(const std::vector<ISprite*>& sprites, float angle)
+void RotateSpriteAOP::Init(const std::vector<Sprite*>& sprites, float angle)
 {
-	m_start.setInvalid();
-	m_end.setInvalid();
+	m_start.SetInvalid();
+	m_end.SetInvalid();
 	m_angle = angle;
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 

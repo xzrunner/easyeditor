@@ -43,8 +43,8 @@ bool FixSpriteColor::FixSprite(const wxString& filepath, Json::Value& sprite_val
 		return false;
 	}
 
-	d2d::Colorf col = d2d::transColor(str, d2d::PT_ARGB);
-	sprite_val["add color"] = d2d::transColor(col, d2d::PT_ABGR);
+	d2d::Colorf col = d2d::TransColor(str, d2d::PT_ARGB);
+	sprite_val["add color"] = d2d::TransColor(col, d2d::PT_ABGR);
 
 	return true;
 }
@@ -52,15 +52,15 @@ bool FixSpriteColor::FixSprite(const wxString& filepath, Json::Value& sprite_val
 void FixSpriteColor::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
 			FixComplex(filepath);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 			FixAnim(filepath);
 		}
 	}

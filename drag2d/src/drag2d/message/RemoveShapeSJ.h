@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class IShape;
+class Shape;
 
 class RemoveShapeSJ : public Subject
 {
 public:
-	void Remove(IShape* spr, Observer* except = NULL);
+	void Remove(Shape* spr, Observer* except = NULL);
 
 	static RemoveShapeSJ* Instance();
 

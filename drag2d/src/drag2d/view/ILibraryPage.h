@@ -9,7 +9,7 @@ namespace d2d
 {
 
 class ListItem;
-class ISymbol;
+class Symbol;
 class LibraryList;
 
 class ILibraryPage : public wxWindow
@@ -17,7 +17,7 @@ class ILibraryPage : public wxWindow
 public:
 	ILibraryPage(wxWindow* parent, const wxString& name, bool isStatic = false);
 
-	virtual bool IsHandleSymbol(ISymbol* symbol) const = 0;
+	virtual bool IsHandleSymbol(Symbol* symbol) const = 0;
 
 	virtual void Clear();
 
@@ -26,12 +26,12 @@ public:
 
 	virtual void OnActive() {}
 
-	void Traverse(IVisitor& visitor) const;
+	void Traverse(Visitor& visitor) const;
 
 	const wxString& GetPageName() const { return m_name; }
 
 	ListItem* GetItem(int index = -1) const;
-	ISymbol* GetSymbol(int index = -1) const;
+	Symbol* GetSymbol(int index = -1) const;
 
 	void ReloadTexture() const;
 

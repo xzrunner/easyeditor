@@ -5,7 +5,7 @@ namespace eanim
 
 static const int REGION = 5;
 
-Joint::Joint(d2d::ISprite* sprite)
+Joint::Joint(d2d::Sprite* sprite)
 	: m_sprite(sprite)
 	, m_parent(NULL)
 {
@@ -13,7 +13,7 @@ Joint::Joint(d2d::ISprite* sprite)
 	CreateId();
 }
 
-Joint::Joint(d2d::ISprite* sprite, const d2d::Vector& pos)
+Joint::Joint(d2d::Sprite* sprite, const d2d::Vector& pos)
 	: m_sprite(sprite)
 	, m_parent(NULL)
 {
@@ -38,8 +38,8 @@ Joint::~Joint()
 
 void Joint::Draw() const
 {
-	d2d::PrimitiveDraw::drawCircle(GetWorldPos(), REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
-	d2d::PrimitiveDraw::drawCircle(GetWorldPos(), REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+	d2d::PrimitiveDraw::DrawCircle(GetWorldPos(), REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
+	d2d::PrimitiveDraw::DrawCircle(GetWorldPos(), REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 	if (m_parent)
 	{
 		d2d::Vector s = GetWorldPos();
@@ -47,24 +47,24 @@ void Joint::Draw() const
 
 		const float w = 0.1f;
 		d2d::Vector mid = s + (e-s)*w;
-		d2d::Vector left = mid + d2d::Math::rotateVectorRightAngle(s - mid, false);
-		d2d::Vector right = mid + d2d::Math::rotateVectorRightAngle(s - mid, true);
+		d2d::Vector left = mid + d2d::Math2D::RotateVectorRightAngle(s - mid, false);
+		d2d::Vector right = mid + d2d::Math2D::RotateVectorRightAngle(s - mid, true);
 
-		d2d::PrimitiveDraw::drawLine(s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		d2d::PrimitiveDraw::drawLine(left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		d2d::PrimitiveDraw::drawLine(e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		d2d::PrimitiveDraw::drawLine(right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::DrawLine(s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::DrawLine(left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::DrawLine(e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::DrawLine(right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 	}
 }
 
 bool Joint::Contain(const d2d::Vector& pos) const
 {
-	return d2d::Math::getDistance(pos, GetWorldPos()) < REGION;
+	return d2d::Math2D::GetDistance(pos, GetWorldPos()) < REGION;
 }
 
 bool Joint::Intersect(const d2d::Vector& pos) const
 {
-	return d2d::Math::getDistance(pos, GetWorldPos()) < REGION * 2;
+	return d2d::Math2D::GetDistance(pos, GetWorldPos()) < REGION * 2;
 }
 
 void Joint::SetPosition(const d2d::Vector& pos) 
@@ -74,12 +74,12 @@ void Joint::SetPosition(const d2d::Vector& pos)
 
 d2d::Vector Joint::GetWorldPos() const
 {
-	return m_sprite->GetPosition() + d2d::Math::rotateVector(m_relative, m_sprite->GetAngle());
+	return m_sprite->GetPosition() + d2d::Math2D::RotateVector(m_relative, m_sprite->GetAngle());
 }
 
 d2d::Vector Joint::GetRelativePos(const d2d::Vector& pos) const
 {
-	return d2d::Math::rotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
+	return d2d::Math2D::RotateVector(pos - m_sprite->GetPosition(), -m_sprite->GetAngle());
 }
 
 bool Joint::Connect(Joint* joint)

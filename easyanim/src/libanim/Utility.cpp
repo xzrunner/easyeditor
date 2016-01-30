@@ -9,17 +9,17 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 						   int index, 
 						   const d2d::ColorTrans& color)
 {
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<d2d::Sprite*> sprites;
 	GetCurrSprites(symbol, index, sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i], NULL, mt, color);
 	}
 
-	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::ISprite>());
+	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::Sprite>());
 }
 
-void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::ISprite*>& sprites)
+void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::Sprite*>& sprites)
 {
 	for (size_t i = 0, n = symbol->m_layers.size(); i < n; ++i)
 	{

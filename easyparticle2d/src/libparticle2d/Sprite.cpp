@@ -15,7 +15,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: ISprite(sprite)
+	: Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_ps(NULL)
 {
@@ -57,7 +57,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->insert(sprite);
+	d2d::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -72,14 +72,14 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::ISymbol* symbol)
+void Sprite::SetSymbol(d2d::Symbol* symbol)
 {
-	d2d::ISprite::SetSymbol(&m_symbol, symbol);
+	d2d::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
 {
-	ISprite::Load(val);
+	Sprite::Load(val);
 
 	const Json::Value& p_val = val["particle2d"];
 	m_ps->SetLoop(p_val["loop"].asBool());
@@ -88,7 +88,7 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	ISprite::Store(val);
+	Sprite::Store(val);
 
 	Json::Value p_val;
 	const p2d_emitter* et = m_ps->GetEmitter();

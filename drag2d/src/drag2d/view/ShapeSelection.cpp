@@ -7,19 +7,19 @@ namespace d2d
 
 void ShapeSelection::Clear()
 {
-	ObjSelectionSet<IShape>::Clear();
+	ObjSelectionSet<Shape>::Clear();
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ShapeSelection::Add(IShape* item)
+void ShapeSelection::Add(Shape* item)
 {
-	ObjSelectionSet<IShape>::Add(item);
+	ObjSelectionSet<Shape>::Add(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ShapeSelection::Remove(IShape* item)
+void ShapeSelection::Remove(Shape* item)
 {
-	ObjSelectionSet<IShape>::Remove(item);
+	ObjSelectionSet<Shape>::Remove(item);
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

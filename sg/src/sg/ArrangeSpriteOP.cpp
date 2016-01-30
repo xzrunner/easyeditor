@@ -25,16 +25,16 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::ISprite* selected = stage->QuerySpriteByPos(pos);
+	d2d::Sprite* selected = stage->QuerySpriteByPos(pos);
 	if (!selected) {
 		return false;
 	}
 
-	std::vector<d2d::ISprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* s = sprites[i];
+		d2d::Sprite* s = sprites[i];
 		if (&s->GetSymbol() == &selected->GetSymbol()) {
 			stage->GetSpriteSelection()->Add(s);
 		}
@@ -47,11 +47,11 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
 
-	std::vector<d2d::ISprite*> sprites;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* s = sprites[i];
+		d2d::Sprite* s = sprites[i];
 		int row, col;
 		stage->TransCoordsToGridPos(s->GetPosition(), row, col);
 		switch (type)
@@ -78,13 +78,13 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ArrangeSpriteOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
+void ArrangeSpriteOP::PasteSprToClipboard(const d2d::Sprite* spr, Json::Value& value) const
 {
 	d2d::ArrangeSpriteFixOP::PasteSprToClipboard(spr, value);
 	value["level"] = static_cast<SpriteExt*>(spr->GetUserData())->level;
 }
 
-void ArrangeSpriteOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
+void ArrangeSpriteOP::CopySprFromClipboard(d2d::Sprite* spr, const Json::Value& value) const
 {
 	d2d::ArrangeSpriteFixOP::CopySprFromClipboard(spr, value);
 	SpriteExt* info = new SpriteExt;

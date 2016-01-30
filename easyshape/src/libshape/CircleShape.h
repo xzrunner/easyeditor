@@ -6,7 +6,7 @@
 namespace libshape
 {
 
-class CircleShape : public d2d::IShape
+class CircleShape : public d2d::Shape
 {
 public:
 	CircleShape();
@@ -19,7 +19,7 @@ public:
 	virtual CircleShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "circle"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

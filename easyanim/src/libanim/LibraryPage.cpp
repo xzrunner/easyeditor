@@ -15,14 +15,14 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(libanim::FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim);
+	std::string filter = d2d::FileType::GetTag(d2d::FileType::e_anim);
 	filter = "*_" + filter + ".json";
 	filter += "; *.lua";
 	wxFileDialog dlg(this, wxT("导入anim文件"), wxEmptyString, 
@@ -35,7 +35,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			const std::string filename = filenames[i];
 			std::string type = filename.substr(filename.find_last_of(".") + 1);
-			d2d::StringTools::ToLower(type);
+			d2d::StringHelper::ToLower(type);
 			try {
 				if (type == "json") {
 					loadFromJsonFile(filename);
@@ -52,7 +52,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryPage::loadFromJsonFile(const std::string& filename)
 {
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
 	m_list->Insert(symbol);
 	symbol->Release();
@@ -68,7 +68,7 @@ void LibraryPage::loadFromLuaFile(const std::string& filename)
  	parser.parser(filename);
  	parser.transToMemory(texfilenames);
  
- 	std::vector<d2d::ISymbol*> symbols;
+ 	std::vector<d2d::Symbol*> symbols;
  	parser.getAllSymbols(symbols);
  	for (int i = 0, n = symbols.size(); i < n; ++i)
  		if (IsHandleSymbol(symbols[i]))

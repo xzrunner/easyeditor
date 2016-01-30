@@ -23,7 +23,7 @@ OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
 {
 }
 
-void OpenSymbolDialog::Open(d2d::ISprite* spr)
+void OpenSymbolDialog::Open(d2d::Sprite* spr)
 {
 	if (!spr) {
 		return;

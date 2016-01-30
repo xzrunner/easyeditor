@@ -60,8 +60,8 @@ void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<d2d::ISymbol*>(m_component->ud)->GetFilepath();
-	name = d2d::FilenameTools::getFilename(name);
+	std::string name = static_cast<d2d::Symbol*>(m_component->ud)->GetFilepath();
+	name = d2d::FileHelper::GetFilename(name);
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -87,8 +87,8 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		sizer->AddSpacer(50);
 		// Icon
 		{
-			std::string filepath = static_cast<d2d::ISymbol*>(m_component->ud)->GetFilepath();
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+			std::string filepath = static_cast<d2d::Symbol*>(m_component->ud)->GetFilepath();
+			if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 				d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
 				sizer->Add(panel);
 			}

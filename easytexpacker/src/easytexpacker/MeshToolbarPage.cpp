@@ -115,8 +115,8 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 
 		while (!item_val.isNull()) {
 			std::string filepath = item_val["filepath"].asString();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 
 			d2d::Vector pos;
 			pos.x = item_val["pos"]["x"].asDouble() - width * 0.5f;
@@ -131,7 +131,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			item_val = value[i++];
 		}
 
-		wxString outpath = d2d::FilenameTools::getFileDir(physics_filepath) + "\\image.png";
+		wxString outpath = d2d::FileHelper::GetFileDir(physics_filepath) + "\\image.png";
 		ss.SaveToFile(outpath.ToStdString());
 	}
 }
@@ -157,17 +157,17 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
  	fd.filter.groupIndex = 0;
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+	d2d::FileHelper::FetchAllFiles(dir.ToStdString(), files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_shape)) {
+		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_shape)) {
 			continue;
 		}
 
-		std::vector<d2d::IShape*> shapes;
+		std::vector<d2d::Shape*> shapes;
 		std::string bg_filepath;
 		libshape::FileIO::LoadFromFile(filepath, shapes, bg_filepath);
 		for (int i = 0, n = shapes.size(); i < n; ++i)
@@ -179,7 +179,7 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 
 			b2Body* body = m_stage->getWorld()->CreateBody(&bd);
 
-			b2Vec2 pos(d2d::Random::getNum(-HALF_WIDTH*4, HALF_WIDTH*4), d2d::Random::getNum(HALF_WIDTH*5, HALF_WIDTH*100));
+			b2Vec2 pos(d2d::Random::GetNum(-HALF_WIDTH*4, HALF_WIDTH*4), d2d::Random::GetNum(HALF_WIDTH*5, HALF_WIDTH*100));
 			body->SetTransform(pos, 0);
 
 			const std::vector<d2d::Vector>& src = polygon->GetVertices();

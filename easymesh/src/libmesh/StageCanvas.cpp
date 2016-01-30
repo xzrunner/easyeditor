@@ -13,7 +13,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 void StageCanvas::OnDrawSprites() const
 {
-	const d2d::ISprite* bg = m_panel->GetBackground();
+	const d2d::Sprite* bg = m_panel->GetBackground();
 	if (bg) {
 		d2d::SpriteRenderer::Instance()->Draw(bg);
 	}

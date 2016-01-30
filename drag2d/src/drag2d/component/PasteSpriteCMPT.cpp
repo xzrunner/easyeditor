@@ -25,4 +25,4 @@ wxSizer* PasteSpriteCMPT::initLayout()
 	return sizer;
 }
 
-} // d2d
+}

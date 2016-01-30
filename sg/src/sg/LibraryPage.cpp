@@ -11,7 +11,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	InitLayout();
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return dynamic_cast<d2d::ImageSymbol*>(symbol) != NULL
 		|| dynamic_cast<ecomplex::Symbol*>(symbol) != NULL;

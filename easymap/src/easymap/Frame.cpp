@@ -23,7 +23,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	std::vector<const d2d::ISprite*> sprites;
+	std::vector<const d2d::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
 	PreviewDialog dlg(this, cfg->m_view_width, cfg->m_view_height, sprites);

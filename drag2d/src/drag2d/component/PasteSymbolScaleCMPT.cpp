@@ -41,4 +41,4 @@ void PasteSymbolScaleCMPT::onChangeScale(wxSpinEvent& event)
 	m_scaleVal = event.GetValue() * 0.01f;
 }
 
-} // d2d
+}

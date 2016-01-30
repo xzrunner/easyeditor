@@ -30,11 +30,11 @@ protected:
 	SpriteSelection* GetSelection() { return m_selection; } 
 
 private:
-	class Visitor : public IVisitor
+	class Visitor : public Visitor
 	{
 	public:
 		Visitor(const Vector& offset) : m_offset(offset) {}
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 	private:
 		Vector m_offset;
 	}; // Visitor

@@ -12,13 +12,13 @@ class MainDialog : public wxDialog
 {
 public:
 	MainDialog(wxWindow* parent, int width, int height, 
-		const std::vector<const d2d::ISprite*>& sprites);
+		const std::vector<const d2d::Sprite*>& sprites);
 
 private:
 	void InitLayout();
 
 private:
-	std::vector<const d2d::ISprite*> m_sprites;
+	std::vector<const d2d::Sprite*> m_sprites;
 
 	d2d::PlayControl m_control;
 

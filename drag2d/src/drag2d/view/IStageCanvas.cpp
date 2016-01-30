@@ -58,7 +58,7 @@ IStageCanvas::IStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 		Init();
 	}
 
-	m_bg_color.set(0.5f, 0.5f, 0.5f, 1);
+	m_bg_color.Set(0.5f, 0.5f, 0.5f, 1);
 	m_timer.Start(1000 / FPS);
 
 	RegistSubject(SetCanvasDirtySJ::Instance());

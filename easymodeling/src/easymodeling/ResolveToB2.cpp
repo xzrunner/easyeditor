@@ -62,10 +62,10 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		}
 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
 		{
-			const float hx = (rect->m_rect.xMax - rect->m_rect.xMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
-				hy = (rect->m_rect.yMax - rect->m_rect.yMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
-			const float cx = (rect->m_rect.xMax + rect->m_rect.xMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
-				cy = (rect->m_rect.yMax + rect->m_rect.yMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
+			const float hx = (rect->m_rect.xmax - rect->m_rect.xmin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
+				hy = (rect->m_rect.ymax - rect->m_rect.ymin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
+			const float cx = (rect->m_rect.xmax + rect->m_rect.xmin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
+				cy = (rect->m_rect.ymax + rect->m_rect.ymin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
 
 			b2PolygonShape shape;
 			shape.SetAsBox(hx, hy, b2Vec2(cx, cy), 0);
@@ -211,7 +211,7 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			jd.collideConnected = joint->collideConnected;
 			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
-			jd.length = d2d::Math::getDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB()) / ephysics::BOX2D_SCALE_FACTOR;
+			jd.length = d2d::Math2D::GetDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB()) / ephysics::BOX2D_SCALE_FACTOR;
 			jd.frequencyHz = joint->frequencyHz;
 			jd.dampingRatio = joint->dampingRatio;
 

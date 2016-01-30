@@ -17,13 +17,13 @@ bool EditClipboxOP::OnMouseLeftDown(int x, int y)
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 
 	m_clipbox_selected = -1;
-	if (d2d::Math::getDistance(d2d::Vector(m_rect.xMin, m_rect.yMin), pos) < NODE_RADIUS) {
+	if (d2d::Math2D::GetDistance(d2d::Vector(m_rect.xmin, m_rect.ymin), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 0;
-	} else if (d2d::Math::getDistance(d2d::Vector(m_rect.xMin, m_rect.yMax), pos) < NODE_RADIUS) {
+	} else if (d2d::Math2D::GetDistance(d2d::Vector(m_rect.xmin, m_rect.ymax), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 1;
-	} else if (d2d::Math::getDistance(d2d::Vector(m_rect.xMax, m_rect.yMax), pos) < NODE_RADIUS) {
+	} else if (d2d::Math2D::GetDistance(d2d::Vector(m_rect.xmax, m_rect.ymax), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 2;
-	} else if (d2d::Math::getDistance(d2d::Vector(m_rect.xMax, m_rect.yMin), pos) < NODE_RADIUS) {
+	} else if (d2d::Math2D::GetDistance(d2d::Vector(m_rect.xmax, m_rect.ymin), pos) < NODE_RADIUS) {
 		m_clipbox_selected = 3;
 	}
 
@@ -49,17 +49,17 @@ bool EditClipboxOP::OnMouseDrag(int x, int y)
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_clipbox_selected == 0) {
-		m_rect.xMin = std::min(m_rect.xMax, pos.x);			
-		m_rect.yMin = std::min(m_rect.yMax, pos.y);
+		m_rect.xmin = std::min(m_rect.xmax, pos.x);			
+		m_rect.ymin = std::min(m_rect.ymax, pos.y);
 	} else if (m_clipbox_selected == 1) {
-		m_rect.xMin = std::min(m_rect.xMax, pos.x);
-		m_rect.yMax = std::max(m_rect.yMin, pos.y);
+		m_rect.xmin = std::min(m_rect.xmax, pos.x);
+		m_rect.ymax = std::max(m_rect.ymin, pos.y);
 	} else if (m_clipbox_selected == 2) {
-		m_rect.xMax = std::max(m_rect.xMin, pos.x);
-		m_rect.yMax = std::max(m_rect.yMin, pos.y);
+		m_rect.xmax = std::max(m_rect.xmin, pos.x);
+		m_rect.ymax = std::max(m_rect.ymin, pos.y);
 	} else if (m_clipbox_selected == 3) {
-		m_rect.xMax = std::max(m_rect.xMin, pos.x);
-		m_rect.yMin = std::min(m_rect.yMax, pos.y);
+		m_rect.xmax = std::max(m_rect.xmin, pos.x);
+		m_rect.ymin = std::min(m_rect.ymax, pos.y);
 	}
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -70,12 +70,12 @@ bool EditClipboxOP::OnDraw() const
 {
 	if (d2d::ZoomViewOP::OnDraw()) return true;
 
-	d2d::PrimitiveDraw::rect(m_rect, d2d::LIGHT_GREEN_LINE);
+	d2d::PrimitiveDraw::DrawRect(m_rect, d2d::LIGHT_GREEN_LINE);
 
-	d2d::PrimitiveDraw::drawCircle(d2d::Vector(m_rect.xMin, m_rect.yMin), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
-	d2d::PrimitiveDraw::drawCircle(d2d::Vector(m_rect.xMin, m_rect.yMax), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
-	d2d::PrimitiveDraw::drawCircle(d2d::Vector(m_rect.xMax, m_rect.yMax), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
-	d2d::PrimitiveDraw::drawCircle(d2d::Vector(m_rect.xMax, m_rect.yMin), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
+	d2d::PrimitiveDraw::DrawCircle(d2d::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
+	d2d::PrimitiveDraw::DrawCircle(d2d::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
+	d2d::PrimitiveDraw::DrawCircle(d2d::Vector(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
+	d2d::PrimitiveDraw::DrawCircle(d2d::Vector(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true, 2, d2d::LIGHT_GREY);
 
 	return false;
 }

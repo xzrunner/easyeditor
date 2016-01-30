@@ -14,7 +14,7 @@ namespace d2d
 class IStageCanvas;
 class ShapeSelection;
 class Rect;
-class IShape;
+class Shape;
 
 class MultiShapesImpl : public Observer
 {
@@ -22,11 +22,11 @@ public:
 	MultiShapesImpl();
 	virtual ~MultiShapesImpl();
 
-	virtual void TraverseShapes(IVisitor& visitor, 
+	virtual void TraverseShapes(Visitor& visitor, 
 		DataTraverseType type = DT_ALL) const = 0;
 
-	IShape* QueryShapeByPos(const Vector& pos) const;
-	void QueryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const;		
+	Shape* QueryShapeByPos(const Vector& pos) const;
+	void QueryShapesByRect(const Rect& rect, std::vector<Shape*>& result) const;		
 
 	ShapeSelection* GetShapeSelection() { return m_shape_selection; }
 	void ClearSelectedShape();
@@ -38,27 +38,27 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	class PointQueryVisitor : public IVisitor
+	class PointQueryVisitor : public Visitor
 	{
 	public:
-		PointQueryVisitor(const Vector& pos, IShape** pResult);
-		virtual void Visit(Object* object, bool& bFetchNext);
+		PointQueryVisitor(const Vector& pos, Shape** pResult);
+		virtual void Visit(Object* object, bool& next);
 
 	private:
 		const Vector& m_pos;
-		IShape** m_pResult;
+		Shape** m_pResult;
 
 	}; // PointQueryVisitor
 
-	class RectQueryVisitor : public IVisitor
+	class RectQueryVisitor : public Visitor
 	{
 	public:
-		RectQueryVisitor(const Rect& rect, std::vector<IShape*>& result);
-		virtual void Visit(Object* object, bool& bFetchNext);
+		RectQueryVisitor(const Rect& rect, std::vector<Shape*>& result);
+		virtual void Visit(Object* object, bool& next);
 
 	private:
 		const Rect& m_rect;
-		std::vector<IShape*>& m_result;
+		std::vector<Shape*>& m_result;
 
 	}; // RectQueryVisitor
 

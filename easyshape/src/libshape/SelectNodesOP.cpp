@@ -11,7 +11,7 @@ SelectNodesOP::SelectNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	: DrawRectangleOP(wnd, stage)
 	, m_shapeImpl(shapesImpl)
 {
-	m_firstPos.setInvalid();
+	m_firstPos.SetInvalid();
 }
 
 SelectNodesOP::~SelectNodesOP()
@@ -61,7 +61,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				if (chainNodes->chain != selected->chain) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
-					if (d2d::Math::getDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
+					if (d2d::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
 					{
 						chainNodes->selectedNodes.erase(chainNodes->selectedNodes.begin() + j);
 						if (chainNodes->selectedNodes.empty())
@@ -85,7 +85,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				if (chainNodes->chain != selected->chain) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
-					if (d2d::Math::getDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
+					if (d2d::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
 						isExist = true;
 				}
 			}
@@ -99,7 +99,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				delete selected;
 		}
 
-		m_firstPos.setInvalid();
+		m_firstPos.SetInvalid();
 	}
 	else
 	{
@@ -117,13 +117,13 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
-	if (m_firstPos.isValid())
+	if (m_firstPos.IsValid())
 	{
 		d2d::Rect rect(m_firstPos, m_stage->TransPosScrToProj(x, y));
 		m_shapeImpl->TraverseShapes(RectQueryVisitor(rect, m_nodeSelection), 
 			d2d::DT_SELECTABLE);
 
-		m_firstPos.setInvalid();
+		m_firstPos.SetInvalid();
 	}
 
 	return false;
@@ -147,7 +147,7 @@ bool SelectNodesOP::OnDraw() const
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
-	d2d::PrimitiveDraw::drawCircles(nodes, getThreshold(), true, 2, d2d::Colorf(0.8f, 0.4f, 0.4f));
+	d2d::PrimitiveDraw::DrawCircles(nodes, getThreshold(), true, 2, d2d::Colorf(0.8f, 0.4f, 0.4f));
 
 	return false;
 }
@@ -157,7 +157,7 @@ bool SelectNodesOP::Clear()
 	if (DrawRectangleOP::Clear()) return true;
 
 	clearSelectedNodes();
-	m_firstPos.setInvalid();
+	m_firstPos.SetInvalid();
 
 	return false;
 }
@@ -179,7 +179,7 @@ void SelectNodesOP::fetchSelectedNode(std::vector<d2d::Vector>& nodes) const
 
 int SelectNodesOP::getThreshold()
 {
-	return d2d::Settings::ctlPosSize == 0 ? 3 : d2d::Settings::ctlPosSize;
+	return d2d::SettingData::ctl_pos_sz == 0 ? 3 : d2d::SettingData::ctl_pos_sz;
 }
 
 void SelectNodesOP::clearSelectedNodes()
@@ -242,29 +242,29 @@ PosQueryVisitor(const d2d::Vector& pos, ChainSelectedNodes** result)
 }
 
 void SelectNodesOP::PosQueryVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	if (d2d::Math::isRectIntersectRect(chain->GetRect(), m_rect))
+	if (d2d::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
 	{
 		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
-			if (d2d::Math::getDistance(m_pos, vertices[i]) < SelectNodesOP::getThreshold())
+			if (d2d::Math2D::GetDistance(m_pos, vertices[i]) < SelectNodesOP::getThreshold())
 			{
 				ChainSelectedNodes* result = new ChainSelectedNodes;
 				result->chain = chain;
 				result->selectedNodes.push_back(vertices[i]);
 				*m_result = result;
 
-				bFetchNext = false;
+				next = false;
 				return;
 			}
 		}
 	}
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -279,11 +279,11 @@ RectQueryVisitor(const d2d::Rect& rect, std::vector<ChainSelectedNodes*>& result
 }
 
 void SelectNodesOP::RectQueryVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	if (d2d::Math::isRectIntersectRect(chain->GetRect(), m_rect))
+	if (d2d::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
 	{
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->chain = chain;
@@ -291,7 +291,7 @@ Visit(Object* object, bool& bFetchNext)
 		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
-			if (d2d::Math::isPointInRect(vertices[i], m_rect))
+			if (d2d::Math2D::IsPointInRect(vertices[i], m_rect))
 				result->selectedNodes.push_back(vertices[i]);
 		}
 
@@ -301,7 +301,7 @@ Visit(Object* object, bool& bFetchNext)
 			m_result.push_back(result);
 	}
 
-	bFetchNext = true;
+	next = true;
 }
 
 }

@@ -36,17 +36,17 @@ void ImageVerticalFlip::Run(int argc, char *argv[])
 
 void ImageVerticalFlip::Trigger(const std::string& path) const
 {
-	if (d2d::FilenameTools::IsFileExist(path)) {
+	if (d2d::FileHelper::IsFileExist(path)) {
 		VerticalFlip(path);
-	} else if (d2d::FilenameTools::IsDirExist(path)) {
+	} else if (d2d::FileHelper::IsDirExist(path)) {
 		wxArrayString files;
-		d2d::FilenameTools::fetchAllFiles(path, files);
+		d2d::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			wxFileName filename(files[i]);
 			filename.Normalize();
 			std::string filepath = filename.GetFullPath().ToStdString();
-			if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+			if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 				continue;
 			}
 

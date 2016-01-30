@@ -17,7 +17,7 @@ void ComposeGrids::Draw()
 			p0.x = X + EDGE*i;
 			p0.y = Y + EDGE*j;
 			d2d::Vector p1(p0.x + EDGE, p0.y + EDGE);
-			d2d::PrimitiveDraw::rect(p0, p1, d2d::LIGHT_GREY_LINE);
+			d2d::PrimitiveDraw::DrawRect(p0, p1, d2d::LIGHT_GREY_LINE);
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace ecomplex
 class Particle2DToSpr
 {
 public:
-	static d2d::ISprite* Trans(const librespacker::PackParticle2D* p2d);
+	static d2d::Sprite* Trans(const librespacker::PackParticle2D* p2d);
 
 private:
 	static p2d_emitter_cfg* LoadConfig(const librespacker::PackParticle2D* p2d);

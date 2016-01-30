@@ -11,7 +11,7 @@ namespace libcoco
 namespace epe
 {
 
-void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites, 
+void PackLuaFile::pack(const std::vector<const d2d::Sprite*>& sprites, 
 	const std::string& outfloder)
 {
 	// root symbol
@@ -19,7 +19,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	root.name = "root";
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = const_cast<d2d::ISprite*>(sprites[i]);
+		d2d::Sprite* sprite = const_cast<d2d::Sprite*>(sprites[i]);
 		sprite->Retain();
 		root.m_sprites.push_back(sprite);
 	}
@@ -27,7 +27,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	// get all symbols
 	SymbolDependanceSorter preprocess;
 	preprocess.prepare(sprites);
-	std::vector<const d2d::ISymbol*> symbols = preprocess.GetSymbolSet().GetOrdered();
+	std::vector<const d2d::Symbol*> symbols = preprocess.GetSymbolSet().GetOrdered();
 	symbols.push_back(&root);
 
 	// pack images
@@ -35,7 +35,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	for (int i = 0, n = symbols.size(); i < n; ++i)
 	{
 		if (const d2d::ImageSymbol* s = dynamic_cast<const d2d::ImageSymbol*>(symbols[i]))
-			setImages.insert(s->getImage());
+			setImages.insert(s->GetImage());
 	}
 
 	TexturePacker textures;

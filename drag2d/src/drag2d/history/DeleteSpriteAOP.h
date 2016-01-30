@@ -9,16 +9,16 @@ namespace d2d
 class DeleteSpriteAOP : public AbstractAtomicOP
 {
 public:
-	DeleteSpriteAOP(const std::vector<ISprite*>& sprites);
+	DeleteSpriteAOP(const std::vector<Sprite*>& sprites);
 	virtual ~DeleteSpriteAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 }; // DeleteSpriteAOP
 

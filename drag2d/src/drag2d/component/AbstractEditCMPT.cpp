@@ -142,4 +142,4 @@ void AbstractEditCMPT::onChangeEditType(wxCommandEvent& event)
 		m_children[index]->loadEditOP(this);
 }
 
-} // d2d
+}

@@ -21,9 +21,9 @@ public:
 	virtual d2d::Vector* FindNode(const d2d::Vector& p) = 0;
 	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst) = 0;
 
-	virtual void TraverseShape(d2d::IVisitor& visitor) const = 0;
-	virtual bool RemoveShape(d2d::IShape* shape) = 0;
-	virtual bool InsertShape(d2d::IShape* shape) = 0;
+	virtual void TraverseShape(d2d::Visitor& visitor) const = 0;
+	virtual bool RemoveShape(d2d::Shape* shape) = 0;
+	virtual bool InsertShape(d2d::Shape* shape) = 0;
 	virtual bool ClearShape() = 0;	
 	
 	virtual void Reset() = 0;

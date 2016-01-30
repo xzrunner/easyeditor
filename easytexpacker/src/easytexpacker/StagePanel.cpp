@@ -32,7 +32,7 @@ StagePanel::StagePanel(wxWindow* parent,
 	RegistSubject(d2d::RemoveSpriteSJ::Instance());
 }
 
-void StagePanel::insertSpriteNoArrange(d2d::ISprite* sprite)
+void StagePanel::insertSpriteNoArrange(d2d::Sprite* sprite)
 {
 //	fixCoords(sprite);
 	d2d::InsertSpriteSJ::Instance()->Insert(sprite);
@@ -55,7 +55,7 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 
 void StagePanel::loadFromLibrary()
 {
-	d2d::ISymbol* symbol = NULL;
+	d2d::Symbol* symbol = NULL;
 	int index = 0;
 	while (true)
 	{
@@ -64,7 +64,7 @@ void StagePanel::loadFromLibrary()
 			break;
 		else 
 		{
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 			d2d::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 	}
@@ -77,7 +77,7 @@ int StagePanel::GetTextureAccount() const
 	return m_strategy->GetTextureAccount();
 }
 
-void StagePanel::fixCoords(d2d::ISprite* sprite)
+void StagePanel::fixCoords(d2d::Sprite* sprite)
 {
 	const d2d::Vector& pos = sprite->GetPosition();
 
@@ -86,13 +86,13 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 	float width, height;
 	if (sprite->GetAngle() == 0)
 	{
-		width = sprite->GetSymbol().GetSize().xLength() * s;
-		height = sprite->GetSymbol().GetSize().yLength() * s;
+		width = sprite->GetSymbol().GetSize().Width() * s;
+		height = sprite->GetSymbol().GetSize().Height() * s;
 	}
 	else
 	{
-		width = sprite->GetSymbol().GetSize().yLength() * s;
-		height = sprite->GetSymbol().GetSize().xLength() * s;
+		width = sprite->GetSymbol().GetSize().Height() * s;
+		height = sprite->GetSymbol().GetSize().Width() * s;
 	}
 
 	d2d::Vector leftTop;

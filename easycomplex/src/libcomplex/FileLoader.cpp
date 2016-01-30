@@ -29,19 +29,19 @@ namespace ecomplex
 //
 //	name = value["name"].asString();
 //
-//	m_clipbox.xMin = value["xmin"].asInt();
-//	m_clipbox.xMax = value["xmax"].asInt();
-//	m_clipbox.yMin = value["ymin"].asInt();
-//	m_clipbox.yMax = value["ymax"].asInt();
+//	m_clipbox.xmin = value["xmin"].asInt();
+//	m_clipbox.xmax = value["xmax"].asInt();
+//	m_clipbox.ymin = value["ymin"].asInt();
+//	m_clipbox.ymax = value["ymax"].asInt();
 //
 //	m_use_render_cache = value["use_render_cache"].asBool();
 //
-// 	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
+// 	wxString dir = d2d::FileHelper::getFileDir(m_filepath);
 //	int i = 0;
 //	Json::Value spriteValue = value["sprite"][i++];
 //	while (!spriteValue.isNull()) {
-//		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
-//		ISymbol* symbol = NULL;
+//		wxString path = d2d::FileHelper::getAbsolutePath(dir, spriteValue["filepath"].asString());
+//		Symbol* symbol = NULL;
 //		std::string real_filepath = path;
 //		try {
 //			symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
@@ -54,7 +54,7 @@ namespace ecomplex
 // 				Json::Value filepath_val = filepaths_val[j++];
 // 				while (!filepath_val.isNull() && !symbol) {
 //					real_filepath = filepath_val.asString();
-// 					wxString filepath = d2d::FilenameTools::getAbsolutePath(dir, real_filepath);
+// 					wxString filepath = d2d::FileHelper::getAbsolutePath(dir, real_filepath);
 //					filepath_val = filepaths_val[j++];
 // 					try {
 // 						symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
@@ -87,7 +87,7 @@ namespace ecomplex
 // 		}
 //
 ////		symbol->refresh();
-//		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+//		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 //		sprite->load(spriteValue);
 //
 //		symbol->Release();
@@ -122,7 +122,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 	if (!value["lua desc"].isNull()) {
 		LoadFromLua::Load(value, dir, complex);
 	} else if (!value["bin file"].isNull()) {

@@ -16,7 +16,7 @@ void ViewlistPanel::Clear()
 	m_list->Clear();
 }
 
-void ViewlistPanel::Insert(ISprite* sprite, int idx)
+void ViewlistPanel::Insert(Sprite* sprite, int idx)
 {
 	m_list->Insert(sprite, idx);
 }
@@ -42,4 +42,4 @@ void ViewlistPanel::InitLayout()
 	SetSizer(sizer);
 }
 
-} // d2d
+}

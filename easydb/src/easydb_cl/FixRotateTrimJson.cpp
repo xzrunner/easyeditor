@@ -39,15 +39,15 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 	LoadTrimInfo(dir);
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
 			FixComplex(filepath);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 			FixAnim(filepath);
 		}
 	}
@@ -56,12 +56,12 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 bool FixRotateTrimJson::FixSprite(const wxString& filepath, Json::Value& sprite_val) const
 {
 	std::string spr_path = sprite_val["filepath"].asString();
-	if (!d2d::FileNameParser::isType(spr_path, d2d::FileNameParser::e_image)) {
+	if (!d2d::FileType::IsType(spr_path, d2d::FileType::e_image)) {
 		return false;
 	}
 
-	wxString spr_abs_path = d2d::FilenameTools::getAbsolutePathFromFile(filepath, spr_path);
-	wxString spr_rel_path = d2d::FilenameTools::getRelativePath(m_dir, spr_abs_path);
+	wxString spr_abs_path = d2d::FileHelper::GetAbsolutePathFromFile(filepath, spr_path);
+	wxString spr_rel_path = d2d::FileHelper::GetRelativePath(m_dir, spr_abs_path);
 	std::map<std::string, TrimInfo>::const_iterator itr 
 		= m_trim_info.find(spr_rel_path.ToStdString());
 	if (itr == m_trim_info.end()) {
@@ -77,14 +77,14 @@ bool FixRotateTrimJson::FixSprite(const wxString& filepath, Json::Value& sprite_
 	old_offset.y = sprite_val["y offset"].asDouble();
 	float old_angle = sprite_val["angle"].asDouble();
 
-	d2d::Vector new_offset = d2d::Math::rotateVector(old_offset, old_angle);
+	d2d::Vector new_offset = d2d::Math2D::RotateVector(old_offset, old_angle);
 
-	d2d::Vector trim_offset = d2d::Math::rotateVector(d2d::Vector(trim.x, trim.y), -trim.angle);
+	d2d::Vector trim_offset = d2d::Math2D::RotateVector(d2d::Vector(trim.x, trim.y), -trim.angle);
 
 	float new_angle = old_angle - trim.angle;
 
-	d2d::Vector new_pos = d2d::Math::rotateVector(-old_offset, old_angle) + old_offset + old_pos 
-		- d2d::Math::rotateVector(-new_offset, new_angle) - new_offset - trim_offset;
+	d2d::Vector new_pos = d2d::Math2D::RotateVector(-old_offset, old_angle) + old_offset + old_pos 
+		- d2d::Math2D::RotateVector(-new_offset, new_angle) - new_offset - trim_offset;
 
 	sprite_val["position"]["x"] = new_pos.x;
 	sprite_val["position"]["y"] = new_pos.y;

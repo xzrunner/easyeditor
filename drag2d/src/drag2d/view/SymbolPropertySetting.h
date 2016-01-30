@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class ISymbol;
+class Symbol;
 
 class SymbolPropertySetting : public IPropertySetting
 {
 public:
-	SymbolPropertySetting(ISymbol* symbol);
+	SymbolPropertySetting(Symbol* symbol);
 	SymbolPropertySetting(std::string* name, std::string* tag);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
@@ -21,7 +21,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 protected:
-	ISymbol* m_symbol;
+	Symbol* m_symbol;
 
 	std::string* m_name;
 	std::string* m_tag;

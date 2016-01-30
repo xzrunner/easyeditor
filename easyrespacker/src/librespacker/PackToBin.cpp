@@ -147,10 +147,10 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		float pack_scale = scale;
 		for (int lod = 0; lod <= LOD; ++lod) 
 		{
-			std::string idx_str = "." + d2d::StringTools::ToString(i + 1);
+			std::string idx_str = "." + d2d::StringHelper::ToString(i + 1);
 			std::string scale_str = "";
 			if (LOD != 0 && pack_scale != 1) {
-				scale_str = "." + d2d::StringTools::ToString((int)(pack_scale * 100));
+				scale_str = "." + d2d::StringHelper::ToString((int)(pack_scale * 100));
 			}
 			std::string fmt_str = ".ept";
 

@@ -91,12 +91,12 @@ void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 	m_impl->OnMouseWheelRotation(x, y, direction);
 }
 
-void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
+void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites)
 {
 	m_impl->SaveOpRecordList(filepath, sprites);
 }
 
-void EditPanel::LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
+void EditPanel::LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites)
 {
 	m_impl->LoadOpRecordList(filepath, sprites);
 }
@@ -141,4 +141,4 @@ void EditPanel::OnSize(wxSizeEvent& event)
 	m_impl->OnSize(event);
 }
 
-} // d2d
+}

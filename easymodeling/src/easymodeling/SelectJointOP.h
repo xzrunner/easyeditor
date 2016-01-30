@@ -32,10 +32,10 @@ public:
 	}
 
 private:
-	class DrawSelectedVisitor : public d2d::IVisitor
+	class DrawSelectedVisitor : public d2d::Visitor
 	{
 	public:
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 	}; // DrawSelectedVisitor
 
 private:

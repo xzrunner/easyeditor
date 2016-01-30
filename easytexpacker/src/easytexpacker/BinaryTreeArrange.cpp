@@ -60,8 +60,8 @@ void BinaryTreeArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 				{
 					d2d::Rect r = sorted[j]->GetSymbol().GetSize();
 					d2d::Vector pos;
-					pos.x = -SPACING - r.xLength() * 0.5f - r.xCenter();
-					pos.y = -SPACING - r.yLength() * 0.5f - r.yCenter();
+					pos.x = -SPACING - r.Width() * 0.5f - r.CenterX();
+					pos.y = -SPACING - r.Height() * 0.5f - r.CenterY();
 					sorted[j]->SetTransform(pos, 0);
 				}
 				break;
@@ -74,9 +74,9 @@ void BinaryTreeArrange::resetRoot()
 {
 	delete m_root;
 	m_root = new Node;
-	m_root->rc.xMin = m_root->rc.yMin = 0;
-	m_root->rc.xMax = Context::Instance()->width;
-	m_root->rc.yMax = Context::Instance()->height;
+	m_root->rc.xmin = m_root->rc.ymin = 0;
+	m_root->rc.xmax = Context::Instance()->width;
+	m_root->rc.ymax = Context::Instance()->height;
 }
 
 BinaryTreeArrange::Node::Node()
@@ -106,35 +106,35 @@ BinaryTreeArrange::Node::insert(d2d::ImageSprite* sprite, int flag)
 
 		const float s = Context::Instance()->scale,
 			p = Context::Instance()->padding * 2;
-		float width = sprite->GetSymbol().GetSize().xLength() * s + p,
-			height = sprite->GetSymbol().GetSize().yLength() * s + p;
+		float width = sprite->GetSymbol().GetSize().Width() * s + p,
+			height = sprite->GetSymbol().GetSize().Height() * s + p;
 		if (sprite->GetAngle() != 0)
 		{
 			float tmp = width;
 			width = height;
 			height = tmp;
 		}
-		if (width > rc.xLength() || height > rc.yLength()) return NULL;
+		if (width > rc.Width() || height > rc.Height()) return NULL;
 
 		child[0] = new Node();
 		child[1] = new Node();
 
-		const float dw = rc.xLength() - width,
-			dh = rc.yLength() - height;
+		const float dw = rc.Width() - width,
+			dh = rc.Height() - height;
 		child[0]->rc = child[1]->rc = rc;
 		if ((flag % 2 == 0) && dw > dh)
 		{
-			child[0]->rc.xMax = rc.xMin + width;
-			child[1]->rc.xMin = rc.xMin + width;
+			child[0]->rc.xmax = rc.xmin + width;
+			child[1]->rc.xmin = rc.xmin + width;
 		}
 		else
 		{
-			child[0]->rc.yMax = rc.yMin + height;
-			child[1]->rc.yMin = rc.yMin + height;
+			child[0]->rc.ymax = rc.ymin + height;
+			child[1]->rc.ymin = rc.ymin + height;
 		}
 		d2d::Vector center;
-		center.x = child[0]->rc.xMin + width * 0.5f;
-		center.y = child[0]->rc.yMin + height * 0.5f;
+		center.x = child[0]->rc.xmin + width * 0.5f;
+		center.y = child[0]->rc.ymin + height * 0.5f;
 		sprite->SetTransform(center, sprite->GetAngle());
 
 		if (child[0]->rc.xLength() > width)
@@ -143,21 +143,21 @@ BinaryTreeArrange::Node::insert(d2d::ImageSprite* sprite, int flag)
 			child[0]->child[1] = new Node();
 
 			child[0]->child[0]->rc = child[0]->child[1]->rc = child[0]->rc;
-			child[0]->child[0]->rc.xMax = child[0]->rc.xMin + width;
-			child[0]->child[1]->rc.xMin = child[0]->rc.xMin + width;
+			child[0]->child[0]->rc.xmax = child[0]->rc.xmin + width;
+			child[0]->child[1]->rc.xmin = child[0]->rc.xmin + width;
 
 			child[0]->child[0]->texture = sprite;
 
 			return child[0]->child[0];
 		}
-		else if (child[0]->rc.yLength() > height)
+		else if (child[0]->rc.Height() > height)
 		{
 			child[0]->child[0] = new Node();
 			child[0]->child[1] = new Node();
 
 			child[0]->child[0]->rc = child[0]->child[1]->rc = child[0]->rc;
-			child[0]->child[0]->rc.yMax = child[0]->rc.yMin + height;
-			child[0]->child[1]->rc.yMin = child[0]->rc.yMin + height;
+			child[0]->child[0]->rc.ymax = child[0]->rc.ymin + height;
+			child[0]->child[1]->rc.ymin = child[0]->rc.ymin + height;
 
 			child[0]->child[0]->texture = sprite;
 

@@ -6,18 +6,18 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class InsertSpriteSJ : public Subject
 {
 public:
 	struct Params {
-		ISprite* spr;
+		Sprite* spr;
 		int idx;
 	};
 
 public:
-	void Insert(ISprite* spr, int idx = -1, Observer* except = NULL);
+	void Insert(Sprite* spr, int idx = -1, Observer* except = NULL);
 
 	static InsertSpriteSJ* Instance();
 

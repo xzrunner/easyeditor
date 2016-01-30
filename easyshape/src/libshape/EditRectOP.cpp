@@ -67,11 +67,11 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_firstPress.isValid())
+		if (m_firstPress.IsValid())
 		{
 			m_currPos = m_stage->TransPosScrToProj(x, y);
 
-			const float dis = d2d::Math::getDistance(m_firstPress, m_currPos);
+			const float dis = d2d::Math2D::GetDistance(m_firstPress, m_currPos);
 			if (dis > 1)
 			{
 				RectShape* rect = new RectShape(m_firstPress, m_currPos);
@@ -130,7 +130,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
-		d2d::IShape* old = m_captured.shape;
+		d2d::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -150,24 +150,24 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	{
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			d2d::Vector center(rect->m_rect.xCenter(), rect->m_rect.yCenter());
+			d2d::Vector center(rect->m_rect.CenterX(), rect->m_rect.CenterY());
 
 			// move
-			if (!m_captured.pos.isValid())
+			if (!m_captured.pos.IsValid())
 			{
-				rect->m_rect.translate(m_currPos - center);
+				rect->m_rect.Translate(m_currPos - center);
 			}
 			// change size
 			else 
 			{
 				if (m_captured.pos.x > center.x)
-					rect->m_rect.xMax = m_currPos.x;
+					rect->m_rect.xmax = m_currPos.x;
 				else
-					rect->m_rect.xMin = m_currPos.x;
+					rect->m_rect.xmin = m_currPos.x;
 				if (m_captured.pos.y > center.y)
-					rect->m_rect.yMax = m_currPos.y;
+					rect->m_rect.ymax = m_currPos.y;
 				else
-					rect->m_rect.yMin = m_currPos.y;
+					rect->m_rect.ymin = m_currPos.y;
 
 				m_captured.pos = m_currPos;
 			}
@@ -193,18 +193,18 @@ bool EditRectOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
-				d2d::Vector pos(rect->m_rect.xCenter(), rect->m_rect.yCenter());
-				d2d::PrimitiveDraw::drawCircle(pos, tolerance, true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
-				if (m_captured.pos.isValid()) {
-					d2d::PrimitiveDraw::drawCircle(m_captured.pos, tolerance, true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+				d2d::Vector pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+				d2d::PrimitiveDraw::DrawCircle(pos, tolerance, true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+				if (m_captured.pos.IsValid()) {
+					d2d::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
 	}
 	else
 	{
-		if (m_firstPress.isValid() && m_currPos.isValid())
-			d2d::PrimitiveDraw::rect(m_firstPress, m_currPos, m_style);
+		if (m_firstPress.IsValid() && m_currPos.IsValid())
+			d2d::PrimitiveDraw::DrawRect(m_firstPress, m_currPos, m_style);
 	}
 
 	return false;
@@ -214,8 +214,8 @@ bool EditRectOP::Clear()
 {
 	if (d2d::ZoomViewOP::Clear()) return true;
 
-	m_firstPress.setInvalid();
-	m_currPos.setInvalid();
+	m_firstPress.SetInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }

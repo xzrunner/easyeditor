@@ -75,7 +75,7 @@ void Love2dCode::resolveLoadImages()
 	{
 		libmodeling::Body* body = bodies[i];
 		std::string path = body->sprite->GetSymbol().GetFilepath();
-		std::string name = d2d::FilenameTools::getFilename(path);
+		std::string name = d2d::FileHelper::GetFilename(path);
 		mapNamePath.insert(std::make_pair(name, path));
 	}
 
@@ -83,7 +83,7 @@ void Love2dCode::resolveLoadImages()
 	for ( ; itr != mapNamePath.end(); ++itr)
 	{
 		// "path"
-		std::string path = "\""+d2d::FilenameTools::getFilenameWithExtension(itr->second)+"\"";
+		std::string path = "\""+d2d::FileHelper::GetFilenameWithExtension(itr->second)+"\"";
 		// love.graphics.newImage("path"),
 		std::string str = lua::call("", "love.graphics.newImage", 1, path) + ",";
 		// name = love.graphics.newImage("path"),
@@ -128,7 +128,7 @@ void Love2dCode::resolveLoadBodies()
 
 		gen.line();
 
-		std::string name = d2d::FilenameTools::getFilename(body->sprite->GetSymbol().GetFilepath());
+		std::string name = d2d::FileHelper::GetFilename(body->sprite->GetSymbol().GetFilepath());
 
 		// local actor = {}
 		lua::assign(gen, "local", name, "{}");
@@ -238,10 +238,10 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
 		{
 			// love.physics.newRectangleShape(x, y, w, h)
-			std::string x = wxString::FromDouble((rect->m_rect.xMax + rect->m_rect.xMin) * 0.5f, 1),
-				y = wxString::FromDouble(-(rect->m_rect.yMax + rect->m_rect.yMin) * 0.5f, 1);
-			std::string w = wxString::FromDouble(rect->m_rect.xMax - rect->m_rect.xMin, 1),
-				h = wxString::FromDouble(rect->m_rect.yMax - rect->m_rect.yMin, 1);
+			std::string x = wxString::FromDouble((rect->m_rect.xmax + rect->m_rect.xmin) * 0.5f, 1),
+				y = wxString::FromDouble(-(rect->m_rect.ymax + rect->m_rect.ymin) * 0.5f, 1);
+			std::string w = wxString::FromDouble(rect->m_rect.xmax - rect->m_rect.xmin, 1),
+				h = wxString::FromDouble(rect->m_rect.ymax - rect->m_rect.ymin, 1);
 			newShape = lua::call("", "love.physics.newRectangleShape", 4, x, y, w, h);
 		}
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
@@ -280,7 +280,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		// local shape = newShape
 		lua::assign(gen, "", "shape", newShape);
 		// local fixture = love.physics.newFixture(body, shape)
-		std::string sBody = d2d::FilenameTools::getFilename(body->sprite->GetSymbol().GetFilepath())+".body";
+		std::string sBody = d2d::FileHelper::GetFilename(body->sprite->GetSymbol().GetFilepath())+".body";
 		lua::assign(gen, "", "fixture", lua::call("", "love.physics.newFixture", 2, sBody, "shape"));
 
 		if (fData->density != 1)

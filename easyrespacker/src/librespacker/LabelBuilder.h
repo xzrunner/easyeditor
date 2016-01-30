@@ -17,7 +17,7 @@
 //	LabelBuilder();
 //	virtual ~LabelBuilder();
 //
-//	virtual void Traverse(d2d::IVisitor& visitor) const;
+//	virtual void Traverse(d2d::Visitor& visitor) const;
 //
 //	const IPackNode* Create(const d2d::FontBlankSprite* spr);
 //

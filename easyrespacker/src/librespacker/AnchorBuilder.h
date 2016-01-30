@@ -17,9 +17,9 @@ public:
 	AnchorBuilder();
 	virtual ~AnchorBuilder();
 
-	virtual void Traverse(d2d::IVisitor& visitor) const;
+	virtual void Traverse(d2d::Visitor& visitor) const;
 
-	const IPackNode* Create(const d2d::ISprite* spr);
+	const IPackNode* Create(const d2d::Sprite* spr);
 
 private:
 	std::vector<const PackAnchor*> m_anchors;

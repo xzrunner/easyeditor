@@ -8,7 +8,7 @@ namespace d2d
 
 class EditPanelImpl;
 class LibraryPanel;
-class ISprite;
+class Sprite;
 class IDataContainer;
 
 class SpritesPanelImpl : public MultiSpritesImpl
@@ -21,7 +21,7 @@ public:
 	//
 	// MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(IVisitor& visitor, 
+	virtual void TraverseSprites(Visitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const;
 
 protected:

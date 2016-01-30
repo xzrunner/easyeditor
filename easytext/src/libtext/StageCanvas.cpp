@@ -16,7 +16,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
-						 d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
+						 d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
 	, m_edited(edited)
@@ -58,9 +58,9 @@ void StageCanvas::DrawSprBound() const
 
 	d2d::ShapeStyle style;
 	style.fill = false;
-	style.color.set(0.8f, 0.4f, 0.4f);
+	style.color.Set(0.8f, 0.4f, 0.4f);
 
-	d2d::PrimitiveDraw::rect(mt, w * 0.5f, h * 0.5f, style);
+	d2d::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, style);
 }
 
 }

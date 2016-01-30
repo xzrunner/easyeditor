@@ -8,14 +8,14 @@ namespace eterrain2d
 void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json::Value& value)
 {
 	if (const libshape::PolygonShape* shape = ocean->GetBounding()) {
-		d2d::JsonIO::Store(shape->GetVertices(), value["bound"]);
+		d2d::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
 	}
 	if (const d2d::ImageSymbol* img = ocean->GetImage0()) {
-		value["tex0"] = d2d::FilenameTools::getRelativePath(dir,
+		value["tex0"] = d2d::FileHelper::GetRelativePath(dir,
 			img->GetFilepath()).ToStdString();
 	}
 	if (const d2d::ImageSymbol* img = ocean->GetImage1()) {
-		value["tex1"] = d2d::FilenameTools::getRelativePath(dir,
+		value["tex1"] = d2d::FileHelper::GetRelativePath(dir,
 			img->GetFilepath()).ToStdString();
 	}
 
@@ -42,18 +42,18 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	}
 
 	std::vector<d2d::Vector> bounding;
-	d2d::JsonIO::Load(value["bound"], bounding);
+	d2d::JsonSerializer::Load(value["bound"], bounding);
 	libshape::PolygonShape* shape = new libshape::PolygonShape(bounding);
 
 	std::string tex0_path = dir + "\\" + value["tex0"].asString();
-	d2d::ISymbol* tex0 = d2d::SymbolMgr::Instance()->FetchSymbol(tex0_path);
+	d2d::Symbol* tex0 = d2d::SymbolMgr::Instance()->FetchSymbol(tex0_path);
 	shape->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(tex0));
 
 	OceanMesh* ocean = new OceanMesh(shape, static_cast<d2d::ImageSymbol*>(tex0));
 
 	if (!value["tex1"].isNull()) {
 		std::string tex1_path = dir + "\\" + value["tex1"].asString();
-		d2d::ISymbol* tex1 = d2d::SymbolMgr::Instance()->FetchSymbol(tex1_path);
+		d2d::Symbol* tex1 = d2d::SymbolMgr::Instance()->FetchSymbol(tex1_path);
 		ocean->SetImage1(static_cast<d2d::ImageSymbol*>(tex1));
 	}
 
@@ -86,7 +86,7 @@ void FileIO::StoreSymbol(const char* filepath, const Symbol* symbol)
 	Json::Value dst_value;
 	dst_value["bg"] = src_value["bg"];
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath).ToStdString();
+	std::string dir = d2d::FileHelper::GetFileDir(filepath).ToStdString();
 	std::vector<OceanMesh*> meshes = symbol->GetOceans();
 	for (int i = 0, n = meshes.size(); i < n; ++i) {
 		FileIO::StoreOceanMesh(meshes[i], dir, dst_value["ocean"][i]);

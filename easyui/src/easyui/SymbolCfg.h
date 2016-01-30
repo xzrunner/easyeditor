@@ -9,7 +9,7 @@ namespace eui
 class SymbolCfg
 {
 public:
-	void QueryType(const d2d::ISymbol* sym, std::string& type) const;
+	void QueryType(const d2d::Symbol* sym, std::string& type) const;
 
 	static SymbolCfg* Instance();
 

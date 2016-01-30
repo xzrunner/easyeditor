@@ -46,8 +46,8 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim) &&
-		!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
+	if (!d2d::FileType::IsType(filepath, d2d::FileType::e_anim) &&
+		!d2d::FileType::IsType(filepath, d2d::FileType::e_anis)) {
 		return;
 	}
 
@@ -61,10 +61,10 @@ void Task::Load(const char* filepath)
 
 void Task::Store(const char* filepath) const
 {
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 		FileIO::StoreSingle(filepath);
 		ViewMgr::Instance()->stage->OnSave();
-	} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
+	} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anis)) {
 		FileIO::StoreTemplate(filepath);
 		ViewMgr::Instance()->stage->OnSave();
 	}
@@ -75,9 +75,9 @@ bool Task::IsDirty() const
 	return ViewMgr::Instance()->stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
 {
-	ViewMgr::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
+	ViewMgr::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
 }
 
 const d2d::EditPanel* Task::GetEditPanel() const

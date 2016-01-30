@@ -79,7 +79,7 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 		for (int j = 0, m = record_frame->items.size(); j < m; ++j)
 		{
 			Item* item = record_frame->items[j];
-			d2d::ISprite* sprite = new d2d::NullSprite(
+			d2d::Sprite* sprite = new d2d::NullSprite(
 				new d2d::NullSymbol(item->filepath));
 
 			sprite->SetTransform(d2d::Vector(item->x, item->y), item->angle);

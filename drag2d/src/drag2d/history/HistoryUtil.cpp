@@ -3,8 +3,8 @@
 namespace d2d
 {
 
-Json::Value HistoryUtil::StoreSpritesIndex(const std::vector<ISprite*>& myself, 
-										   const std::vector<ISprite*>& other)
+Json::Value HistoryUtil::StoreSpritesIndex(const std::vector<Sprite*>& myself, 
+										   const std::vector<Sprite*>& other)
 {
 	Json::Value ret;
 	int count = 0;

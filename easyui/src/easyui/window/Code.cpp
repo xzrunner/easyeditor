@@ -19,16 +19,16 @@ Code::Code(ebuilder::CodeGenerator& gen)
 
 struct Node
 {
-	const d2d::ISprite* sprite;
+	const d2d::Sprite* sprite;
 	std::string path;
 	std::string name;
 
-	Node(const d2d::ISprite* s, const std::string& p) 
+	Node(const d2d::Sprite* s, const std::string& p) 
 		: sprite(s), path(p) {}
 
 }; // Node
 
-void Code::ResolveUI(const std::vector<d2d::ISprite*>& sprites)
+void Code::ResolveUI(const std::vector<d2d::Sprite*>& sprites)
 {
 	ebuilder::CodeGenerator *gen_init = new ebuilder::CodeGenerator(), 
 		*gen_path = new ebuilder::CodeGenerator();
@@ -47,7 +47,7 @@ void Code::ResolveUI(const std::vector<d2d::ISprite*>& sprites)
 		while (!buffer.empty()) 
 		{
 			Node parent = buffer.front(); buffer.pop();
-			const d2d::ISprite* spr = parent.sprite;
+			const d2d::Sprite* spr = parent.sprite;
 
 			if (spr->name.empty() || spr->name[0] == '_') {
 				continue;
@@ -96,16 +96,16 @@ void Code::ResolveUI(const std::vector<d2d::ISprite*>& sprites)
 	m_gen.block(*gen_path);
 }
 
-void Code::ResolveText(const std::vector<d2d::ISprite*>& sprites)
+void Code::ResolveText(const std::vector<d2d::Sprite*>& sprites)
 {
-	std::queue<d2d::ISprite*> buffer;
+	std::queue<d2d::Sprite*> buffer;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		buffer.push(sprites[i]);
 	}
 
  	while (!buffer.empty()) 
  	{
-		d2d::ISprite* spr = buffer.front(); buffer.pop();
+		d2d::Sprite* spr = buffer.front(); buffer.pop();
 
 		if (spr->name.empty() || spr->name[0] == '_') {
 			continue;

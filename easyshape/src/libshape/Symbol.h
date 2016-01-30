@@ -8,7 +8,7 @@
 namespace libshape
 {
 
-class Symbol : public d2d::ISymbol
+class Symbol : public d2d::Symbol
 {
 public:
 	Symbol();
@@ -21,43 +21,43 @@ public:
 	virtual Symbol* Clone() const;
 
 	//
-	// ISymbol interface
+	// Symbol interface
 	//
 	virtual void ReloadTexture() const;
 	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::ISprite* spr = NULL, const d2d::ISprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::ISprite* sprite = NULL) const;
+		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
+	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
 
-	void Traverse(d2d::IVisitor& visitor) const;
-	bool Add(d2d::IShape* shape);
-	bool Remove(d2d::IShape* shape);
+	void Traverse(d2d::Visitor& visitor) const;
+	bool Add(d2d::Shape* shape);
+	bool Remove(d2d::Shape* shape);
 	bool Clear();
 
-	void SetBG(d2d::ISymbol* bg);
-	const d2d::ISymbol* GetBG() const { return m_bg; }
+	void SetBG(d2d::Symbol* bg);
+	const d2d::Symbol* GetBG() const { return m_bg; }
 
 	void StoreToFile(const char* filename) const;
 
 	ShapeType GetShapeType() const;
 
-	static d2d::ISymbol* Create() { return new Symbol(); }
+	static d2d::Symbol* Create() { return new Symbol(); }
 
 	// todo
-	const std::vector<d2d::IShape*>& GetShapes() const { return m_shapes; }
+	const std::vector<d2d::Shape*>& GetShapes() const { return m_shapes; }
 
 protected:
 	virtual void LoadResources();
 
 private:
-	void LoadBGOutline(d2d::ISymbol* bg);
-	void LoadBGTriStrip(d2d::ISymbol* bg);
+	void LoadBGOutline(d2d::Symbol* bg);
+	void LoadBGTriStrip(d2d::Symbol* bg);
 
 private:
-	d2d::ISymbol* m_bg;
-	std::vector<d2d::IShape*> m_bg_outline;
+	d2d::Symbol* m_bg;
+	std::vector<d2d::Shape*> m_bg_outline;
 	std::vector<std::vector<d2d::Vector> > m_bg_tri_strips;
 
-	std::vector<d2d::IShape*> m_shapes;
+	std::vector<d2d::Shape*> m_shapes;
 
 }; // Symbol
 

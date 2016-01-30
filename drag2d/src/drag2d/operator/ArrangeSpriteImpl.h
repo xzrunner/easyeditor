@@ -42,7 +42,7 @@ public:
 	virtual void Clear();
 
 	// query edited sprite, include its extra edit region
-	ISprite* QueryEditedSprite(const Vector& pos) const;
+	Sprite* QueryEditedSprite(const Vector& pos) const;
 
 	bool IsSelectionEmpty() const;
 
@@ -54,10 +54,10 @@ protected:
 
 	virtual IArrangeSpriteState* CreateTranslateState(SpriteSelection* selection, const Vector& first_pos) const;
 	virtual IArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const;
-	virtual IArrangeSpriteState* CreateScaleState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
-	virtual IArrangeSpriteState* CreateShearState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
-	virtual IArrangeSpriteState* CreateOffsetState(ISprite* sprite) const;
-	virtual IArrangeSpriteState* CreatePerspectiveState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual IArrangeSpriteState* CreateScaleState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual IArrangeSpriteState* CreateShearState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual IArrangeSpriteState* CreateOffsetState(Sprite* sprite) const;
+	virtual IArrangeSpriteState* CreatePerspectiveState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 
 protected:
 	SpriteSelection* m_selection;
@@ -68,7 +68,7 @@ private:
 	void UpOneLayer();
 	void DownOneLayer();
 
-	d2d::Vector GetSprOffset(const ISprite* spr) const;
+	Vector GetSprOffset(const Sprite* spr) const;
 
 	void ChangeOPState(IArrangeSpriteState* state);
 

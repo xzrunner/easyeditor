@@ -15,7 +15,7 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::ISymbol(s)
+	: d2d::Symbol(s)
 {
 	s.m_image->Retain();
 	m_image = s.m_image;
@@ -58,7 +58,7 @@ void Symbol::ReloadTexture() const
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	if (!m_shape) {
 		return;
@@ -79,7 +79,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	}
 }
 
-// d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+// d2d::Rect Symbol::getSize(const d2d::Sprite* sprite) const
 // {
 // //	return m_image->getRegion();
 // }

@@ -50,7 +50,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_symbol->GetFilepath();
 		FileSaver::store(filepath.c_str(), *m_symbol);
 		m_symbol->RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

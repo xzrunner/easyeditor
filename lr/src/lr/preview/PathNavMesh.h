@@ -19,7 +19,7 @@ public:
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const d2d::ISprite* spr, bool disable);
+	virtual void DisableRegion(const d2d::Sprite* spr, bool disable);
 	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
 	virtual void DebugDraw() const;
 
@@ -47,7 +47,7 @@ private:
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const d2d::ISprite*, std::vector<d2d::Vector> > m_bounds;
+	std::map<const d2d::Sprite*, std::vector<d2d::Vector> > m_bounds;
 
 	std::vector<d2d::Vector> m_tris;
 

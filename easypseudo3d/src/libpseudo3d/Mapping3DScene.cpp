@@ -60,7 +60,7 @@ void Mapping3DScene::Store(const char* filename) const
 	uint8_t* pixels_revert = revert.Revert();
 	delete[] pixels;
 
-	std::string img_path = d2d::FilenameTools::getFilePathExceptExtension(filename);
+	std::string img_path = d2d::FileHelper::GetFilePathExceptExtension(filename);
 	d2d::ImageSaver::StoreToFile(pixels_revert, w, h, 4, img_path, d2d::ImageSaver::e_png);
 	delete[] pixels_revert;
 

@@ -10,12 +10,12 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class MultiSpritesPropertyImpl
 {
 public:
-	MultiSpritesPropertyImpl(const std::vector<ISprite*>& sprites);
+	MultiSpritesPropertyImpl(const std::vector<Sprite*>& sprites);
 	~MultiSpritesPropertyImpl();
 
 public:
@@ -91,7 +91,7 @@ private:
 	};
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 }; // MultiSpritesPropertyImpl
 

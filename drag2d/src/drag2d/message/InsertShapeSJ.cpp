@@ -11,7 +11,7 @@ InsertShapeSJ::InsertShapeSJ(int id)
 {
 }
 
-void InsertShapeSJ::Insert(d2d::IShape* shape, Observer* except)
+void InsertShapeSJ::Insert(Shape* shape, Observer* except)
 {
 	Notify((void*)shape, except);
 }

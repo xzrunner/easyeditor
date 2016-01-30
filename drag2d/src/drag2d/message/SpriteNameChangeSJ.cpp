@@ -11,7 +11,7 @@ SpriteNameChangeSJ::SpriteNameChangeSJ(int id)
 {
 }
 
-void SpriteNameChangeSJ::OnSpriteNameChanged(const ISprite* spr, Observer* except)
+void SpriteNameChangeSJ::OnSpriteNameChanged(const Sprite* spr, Observer* except)
 {
 	Notify((void*)spr, except);
 }

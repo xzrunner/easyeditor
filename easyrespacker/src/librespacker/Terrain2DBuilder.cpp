@@ -20,7 +20,7 @@ Terrain2DBuilder::~Terrain2DBuilder()
 	}
 }
 
-void Terrain2DBuilder::Traverse(d2d::IVisitor& visitor) const
+void Terrain2DBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	std::map<const eterrain2d::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();
@@ -93,7 +93,7 @@ void Terrain2DBuilder::Load(const eterrain2d::Symbol* symbol, PackAnimation* ani
 
 				PackPicture::Quad quad;
 
-				quad.img = ocean->GetImage0()->getImage();
+				quad.img = ocean->GetImage0()->GetImage();
 
 				for (int i = 0; i < 3; ++i) {
 					quad.texture_coord[i] = tri->nodes[i]->uv;

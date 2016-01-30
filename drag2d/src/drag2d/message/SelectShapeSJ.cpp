@@ -11,7 +11,7 @@ SelectShapeSJ::SelectShapeSJ(int id)
 {
 }
 
-void SelectShapeSJ::Select(IShape* shape, Observer* except)
+void SelectShapeSJ::Select(Shape* shape, Observer* except)
 {
 	Notify((void*)shape, except);
 }

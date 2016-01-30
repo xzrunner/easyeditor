@@ -5,7 +5,7 @@
 
 #include "dataset/SymbolMgr.h"
 #include "dataset/FontBlankSymbol.h"
-#include "common/FileNameParser.h"
+#include "common/FileType.h"
 #include "common/Exception.h"
 
 #include <json/json.h>
@@ -20,7 +20,7 @@ LibraryFontBlankPage::LibraryFontBlankPage(wxWindow* parent)
 	InitLayout();
 }
 
-bool LibraryFontBlankPage::IsHandleSymbol(ISymbol* symbol) const
+bool LibraryFontBlankPage::IsHandleSymbol(Symbol* symbol) const
 {
 	return dynamic_cast<FontBlankSymbol*>(symbol) != NULL;
 }
@@ -52,7 +52,7 @@ void LibraryFontBlankPage::InitLayout(bool draggable /*= true*/)
 
 void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = FileNameParser::getFileTag(FileNameParser::e_fontblank);
+	wxString filter = FileType::GetTag(FileType::e_fontblank);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入font blank文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
@@ -63,7 +63,7 @@ void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(symbol);
 				symbol->Release();
 			} catch (Exception& e) {
@@ -83,4 +83,4 @@ void LibraryFontBlankPage::onNewBtnPress(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
-} // d2d
+}

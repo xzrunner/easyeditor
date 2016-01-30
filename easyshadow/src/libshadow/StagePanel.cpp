@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::ISprite* edited, 
+					   wxGLContext* glctx, d2d::Sprite* edited, 
 					   const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiShapesImpl()
@@ -59,11 +59,11 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 	}	
 }
 
-void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
+void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType type) const
 {
 	if (m_loop) {
-		bool hasNext;
-		visitor.Visit(m_loop, hasNext);
+		bool next;
+		visitor.Visit(m_loop, next);
 	}
 }
 
@@ -82,11 +82,11 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	d2d::MultiShapesImpl::OnNotify(sj_id, ud);
 
 	if (sj_id == d2d::MSG_INSERT_SHAPE) {
-		InsertShape((d2d::IShape*)ud);
+		InsertShape((d2d::Shape*)ud);
 	}
 }
 
-void StagePanel::InsertShape(d2d::IShape* shape)
+void StagePanel::InsertShape(d2d::Shape* shape)
 {
 	if (libshape::get_shape_type(shape->GetShapeDesc()) != libshape::ST_POLYGON) {
 		return;

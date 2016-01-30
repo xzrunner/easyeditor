@@ -14,7 +14,7 @@
 namespace d2d
 {
 
-PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, EditPanelImpl* stage, 
 							 MultiSpritesImpl* spritesImpl,
 							 PasteSpriteCMPT* cmpt)
 	: SelectSpritesOP(wnd, stage, spritesImpl)
@@ -23,7 +23,7 @@ PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_pos.setInvalid();
+	m_pos.SetInvalid();
 }
 
 PasteSpriteOP::~PasteSpriteOP()
@@ -121,7 +121,7 @@ bool PasteSpriteOP::Clear()
 {
 	if (SelectSpritesOP::Clear()) return true;
 
-	m_pos.setInvalid();
+	m_pos.SetInvalid();
 	m_batch.clear();
 
 	return false;
@@ -137,7 +137,7 @@ void PasteSpriteOP::setMousePos(int x, int y)
 void PasteSpriteOP::fixPosOrthogonal()
 {
 	const Vector& center = m_batch.getCenter();
-	if (m_pos.isValid() && center.isValid())
+	if (m_pos.IsValid() && center.IsValid())
 	{
 		if (fabs(m_pos.x - center.x) < fabs(m_pos.y - center.y))
 			m_pos.x = center.x;
@@ -153,7 +153,7 @@ void PasteSpriteOP::fixPosOrthogonal()
 PasteSpriteOP::SpriteBatch::
 SpriteBatch()
 {
-	m_center.setInvalid();
+	m_center.SetInvalid();
 }
 
 PasteSpriteOP::SpriteBatch::
@@ -168,7 +168,7 @@ loadFromSelection(const SpriteSelection& selection)
 	if (!selection.IsEmpty())
 	{	
 		clear();
-		selection.Traverse(FetchAllVisitor<ISprite>(m_selected));
+		selection.Traverse(FetchAllVisitor<Sprite>(m_selected));
 		computeCenter();
 	}
 }
@@ -178,7 +178,7 @@ insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
 {
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 	{
-		ISprite* sprite = m_selected[i];
+		Sprite* sprite = m_selected[i];
 		Vector fixed = sprite->GetPosition() - m_center;
 		if (isHorMirror)
 			fixed.x += (m_center.x - sprite->GetPosition().x) * 2;
@@ -187,7 +187,7 @@ insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
 
 //		spritesImpl->insertSprite(sprite->getSymbol(), fixed + pos);
 
-		ISprite* newOne = sprite->Clone();
+		Sprite* newOne = sprite->Clone();
 		newOne->SetTransform(fixed + pos, newOne->GetAngle());
 		InsertSpriteSJ::Instance()->Insert(newOne);
 		newOne->Release();
@@ -197,7 +197,7 @@ insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
 void PasteSpriteOP::SpriteBatch::
 draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 {
-	if (!m_selected.empty() && pos.isValid())
+	if (!m_selected.empty() && pos.IsValid())
 	{
 		const float xOffset = pos.x - m_center.x,
 			yOffset = pos.y - m_center.y;
@@ -224,16 +224,16 @@ void PasteSpriteOP::SpriteBatch::
 clear()
 {
 	m_selected.clear();
-	m_center.setInvalid();
+	m_center.SetInvalid();
 }
 
 void PasteSpriteOP::SpriteBatch::
 computeCenter()
 {
-	m_center.set(0, 0);
+	m_center.Set(0, 0);
 	for (size_t i = 0, n = m_selected.size(); i < n; ++i)
 		m_center += m_selected[i]->GetPosition();
 	m_center /= m_selected.size();
 }
 
-} // d2d
+}

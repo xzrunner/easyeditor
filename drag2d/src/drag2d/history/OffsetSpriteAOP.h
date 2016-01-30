@@ -8,21 +8,21 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class OffsetSpriteAOP : public AbstractAtomicOP
 {
 public:
-	OffsetSpriteAOP(ISprite* sprite, const Vector& new_offset, 
+	OffsetSpriteAOP(Sprite* sprite, const Vector& new_offset, 
 		const Vector& old_offset);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 	Vector m_new_offset, m_old_offset;
 

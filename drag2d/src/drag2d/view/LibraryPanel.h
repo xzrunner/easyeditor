@@ -11,11 +11,11 @@
 namespace d2d
 {
 
-class ISymbol;
+class Symbol;
 class ILibraryPage;
 class SymbolMgr;
 class LibraryList;
-class IVisitor;
+class Visitor;
 
 class LibraryPanel : public wxPanel, public Observer
 {
@@ -33,16 +33,16 @@ public:
 
 	void AddPage(ILibraryPage* page, const char* name = NULL);
 
-	ISymbol* GetSymbol(int index = -1) const;
+	Symbol* GetSymbol(int index = -1) const;
 
 	void LoadFromSymbolMgr(const SymbolMgr& mgr);
-	void LoadSymbol(d2d::ISymbol* symbol);
+	void LoadSymbol(Symbol* symbol);
 
-	void Traverse(IVisitor& visitor) const;
+	void Traverse(Visitor& visitor) const;
 
 	wxWindow* GetNotebook() { return m_notebook; }
 
-	bool AddSymbol(ISymbol* symbol);
+	bool AddSymbol(Symbol* symbol);
 
 	void LoadFromConfig();
 	void LoadDefaultSymbol();

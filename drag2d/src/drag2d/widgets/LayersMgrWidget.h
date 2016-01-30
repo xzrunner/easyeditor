@@ -8,7 +8,7 @@ namespace d2d
 {
 
 class Layer;
-class IVisitor;
+class Visitor;
 
 class LayersMgrWidget : public wxPanel
 {
@@ -18,10 +18,10 @@ public:
 	LayersMgrWidget(wxWindow* parent);
 	virtual ~LayersMgrWidget();
 
-	void traverseEditableLayers(IVisitor& visitor);
-	void traverseVisibleLayers(IVisitor& visitor);
-	void traverseSelectableLayers(IVisitor& visitor);
-	void traverseAllLayers(IVisitor& visitor);
+	void traverseEditableLayers(Visitor& visitor);
+	void traverseVisibleLayers(Visitor& visitor);
+	void traverseSelectableLayers(Visitor& visitor);
+	void traverseAllLayers(Visitor& visitor);
 
 	void setEditable(LayerWidget* layer);
 

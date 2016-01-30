@@ -9,7 +9,7 @@ namespace d2d
 {
 
 AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
-										const std::vector<ISprite*>& sprites)
+										const std::vector<Sprite*>& sprites)
 {
 	AtomicType type = AtomicType(val["type"].asInt());
 
@@ -34,7 +34,7 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 
 				float angle = val["angle"].asDouble();
 
-				if (start.isValid() && end.isValid()) {
+				if (start.IsValid() && end.IsValid()) {
 					ret = new RotateSpriteAOP(sprites, start, end);
 				} else {
 					ret = new RotateSpriteAOP(sprites, angle);

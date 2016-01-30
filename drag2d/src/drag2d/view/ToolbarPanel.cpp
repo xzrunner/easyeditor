@@ -8,4 +8,4 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, EditPanelImpl* stage, bool vertical
 {
 }
 
-} // d2d
+}

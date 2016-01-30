@@ -11,7 +11,7 @@ RemoveShapeSJ::RemoveShapeSJ(int id)
 {
 }
 
-void RemoveShapeSJ::Remove(IShape* spr, Observer* except)
+void RemoveShapeSJ::Remove(Shape* spr, Observer* except)
 {
 	Notify((void*)spr, except);
 }

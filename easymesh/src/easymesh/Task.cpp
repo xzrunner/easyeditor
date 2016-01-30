@@ -24,8 +24,8 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_mesh)) {
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_mesh)) {
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		Symbol* msymbol = static_cast<Symbol*>(symbol);
 		m_stage->SetSymbol(msymbol);
 		

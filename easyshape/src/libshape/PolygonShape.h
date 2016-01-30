@@ -22,7 +22,7 @@ public:
 	virtual PolygonShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "polygon"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

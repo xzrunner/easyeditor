@@ -9,8 +9,8 @@ namespace lr
 class GroupHelper
 {
 public:
-	static d2d::ISprite* Group(const std::vector<d2d::ISprite*>& sprites);
-	static void BreakUp(d2d::ISprite* group, std::vector<d2d::ISprite*>& sprites);
+	static d2d::Sprite* Group(const std::vector<d2d::Sprite*>& sprites);
+	static void BreakUp(d2d::Sprite* group, std::vector<d2d::Sprite*>& sprites);
 
 }; // GroupHelper
 

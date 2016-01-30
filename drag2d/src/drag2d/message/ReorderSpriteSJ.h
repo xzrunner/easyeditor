@@ -6,18 +6,18 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class ReorderSpriteSJ : public Subject
 {
 public:
 	struct Params {
-		ISprite* spr;
+		Sprite* spr;
 		bool up;
 	};
 
 public:
-	void Reorder(ISprite* spr, bool up, Observer* except = NULL);
+	void Reorder(Sprite* spr, bool up, Observer* except = NULL);
 
 	static ReorderSpriteSJ* Instance();
 

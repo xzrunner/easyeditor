@@ -16,7 +16,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 StageCanvas::StageCanvas(StagePanel* stage, 
 						 wxGLContext* glctx,
-						 d2d::ISprite* edited,
+						 d2d::Sprite* edited,
 						 const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
@@ -43,7 +43,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->GetSymbol().Draw(d2d::Matrix(), d2d::ColorTrans(), &sprite);
 
-	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));;
+	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));;
 
 	m_stage->DrawEditOP();
 }

@@ -10,15 +10,15 @@ namespace ecomplex
 class AnimationToSpr
 {
 public:
-	static d2d::ISprite* Trans(const librespacker::PackAnimation* anim);
+	static d2d::Sprite* Trans(const librespacker::PackAnimation* anim);
 
 private:
-	static d2d::ISprite* TransComplex(const librespacker::PackAnimation* anim);
-	static d2d::ISprite* TransAnim(const librespacker::PackAnimation* anim);
+	static d2d::Sprite* TransComplex(const librespacker::PackAnimation* anim);
+	static d2d::Sprite* TransAnim(const librespacker::PackAnimation* anim);
 
-	static void TransSprite(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
-	static void TransSpriteMat(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
-	static void TransSpriteCol(d2d::ISprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
+	static void TransSprite(d2d::Sprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
+	static void TransSpriteMat(d2d::Sprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
+	static void TransSpriteCol(d2d::Sprite* spr, const librespacker::PackAnimation::SpriteTrans& t);
 
 }; // AnimationToSpr
 

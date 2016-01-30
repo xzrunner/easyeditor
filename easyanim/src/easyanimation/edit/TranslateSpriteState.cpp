@@ -27,8 +27,8 @@ void TranslateSpriteState::Translate(const d2d::Vector& offset)
 		return;
 	}
 
-	std::vector<d2d::ISprite*> sprites;
-	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	skeleton->UpdateJoint(sprites[0]);
 }
 

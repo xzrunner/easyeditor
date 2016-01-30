@@ -10,7 +10,7 @@ namespace d2d
 class ScaleSpriteState : public IArrangeSpriteState
 {
 public:
-	ScaleSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
+	ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ScaleSpriteState();
 
 	virtual void OnMouseRelease(const Vector& pos);
@@ -20,7 +20,7 @@ protected:
 	virtual void Scale(const Vector& curr);
 
 private:
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 

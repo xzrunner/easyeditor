@@ -23,7 +23,7 @@
 namespace d2d
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage, 
 								 MultiSpritesImpl* spritesImpl, 
 								 AbstractEditCMPT* callback)
 	: DrawSelectRectOP(wnd, stage)
@@ -34,7 +34,7 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	m_selection = spritesImpl->GetSpriteSelection();
 	m_selection->Retain();
 
-	m_left_first_pos.setInvalid();
+	m_left_first_pos.SetInvalid();
 }
 
 SelectSpritesOP::~SelectSpritesOP()
@@ -72,7 +72,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
  	m_draggable = true;
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-	ISprite* selected = SelectByPos(pos);
+	Sprite* selected = SelectByPos(pos);
 	if (selected)
 	{
 		assert(selected->editable);
@@ -96,7 +96,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				SelectSpriteSJ::Instance()->Select(selected, !add);
 			}
 		}
-		m_left_first_pos.setInvalid();
+		m_left_first_pos.SetInvalid();
 
 		if (m_callback)
 			m_callback->updateControlValue();
@@ -106,7 +106,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		DrawSelectRectOP::OnMouseLeftDown(x, y);
 
 		if (m_stage->GetKeyState(WXK_SPACE)) {
-			m_left_first_pos.setInvalid();
+			m_left_first_pos.SetInvalid();
 		} else {
 			m_left_first_pos = pos;
 		}
@@ -127,19 +127,19 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	m_draggable = true;
 
-	if (!m_left_first_pos.isValid()) {
+	if (!m_left_first_pos.IsValid()) {
 		return false;
 	}
 
 	Vector end = m_stage->TransPosScrToProj(x, y);
 	Rect rect(m_left_first_pos, end);
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprites);
 	if (m_stage->GetKeyState(WXK_CONTROL))
 	{
 		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 		{
-			d2d::ISprite* sprite = sprites[i];
+			Sprite* sprite = sprites[i];
 			if (m_selection->IsExist(sprite)) {
 				m_selection->Remove(sprites[i]);
 			} else {
@@ -156,7 +156,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 
-	m_left_first_pos.setInvalid();
+	m_left_first_pos.SetInvalid();
 
 	if (m_callback) {
 		m_callback->updateControlValue();
@@ -169,7 +169,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 {
-	m_right_first_pos.set(x, y);
+	m_right_first_pos.Set(x, y);
 
 	SetRightPan(m_selection->IsEmpty());
 	if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;
@@ -185,7 +185,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 		Vector pos = m_stage->TransPosScrToProj(x, y);
 		PointMultiQueryVisitor visitor(pos);
 		m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
-		const std::vector<ISprite*>& sprites = visitor.GetResult();
+		const std::vector<Sprite*>& sprites = visitor.GetResult();
 		SetRightPan(sprites.empty());
 	}
 
@@ -217,30 +217,30 @@ bool SelectSpritesOP::Clear()
 	if (DrawSelectRectOP::Clear()) return true;
 
 	m_selection->Clear();
-	m_left_first_pos.setInvalid();
+	m_left_first_pos.SetInvalid();
 
 	return false;
 }
 
-ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
+Sprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 {
 	if (m_stage->GetKeyState(WXK_SPACE)) {
 		return NULL;
 	}
 
-	ISprite* selected = NULL;
-	std::vector<ISprite*> sprites;
-	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
+	Sprite* selected = NULL;
+	std::vector<Sprite*> sprites;
+	m_spritesImpl->GetSpriteSelection()->Traverse(FetchAllVisitor<Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		ISprite* spr = sprites[i];
+		Sprite* spr = sprites[i];
 		if (spr->editable && spr->IsContain(pos)) {
 			selected = spr;
 			break;
 		}
 	}
 	if (!selected) {
-		ISprite* spr = m_spritesImpl->QuerySpriteByPos(pos);
+		Sprite* spr = m_spritesImpl->QuerySpriteByPos(pos);
 		if (spr) {
 			selected = spr;
 		}
@@ -248,26 +248,26 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 	return selected;
 }
 
-void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
+void SelectSpritesOP::PasteSprToClipboard(const Sprite* spr, Json::Value& value) const
 {
 	value["filename"] = spr->GetSymbol().GetFilepath();
 	spr->Store(value);	
 }
 
-void SelectSpritesOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
+void SelectSpritesOP::CopySprFromClipboard(Sprite* spr, const Json::Value& value) const
 {
 	spr->Load(value);
 }
 
 void SelectSpritesOP::PasteToSelection() const
 {
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	Json::Value value;
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Json::Value& sval = value["sprite"][i];
-		d2d::ISprite* s = sprites[i];
+		Sprite* s = sprites[i];
 		if (wxTheClipboard->Open()) {
 			PasteSprToClipboard(s, sval);
 		}
@@ -305,18 +305,18 @@ void SelectSpritesOP::CopyFromSelection()
  
 	m_selection->Clear();
 
-	ISprite* last_spr = NULL;
+	Sprite* last_spr = NULL;
 
-	std::vector<ISprite*> sprites;
+	std::vector<Sprite*> sprites;
 
 	int i = 0;
 	Json::Value sval = value["sprite"][i++];
 	while (!sval.isNull()) {
 		std::string filepath = sval["filename"].asString();
-		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
+		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 		// for snapshoot
 		symbol->RefreshThumbnail(filepath);
-		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprites.push_back(sprite);
 		symbol->Release();
 		CopySprFromClipboard(sprite, sval);
@@ -336,4 +336,4 @@ void SelectSpritesOP::CopyFromSelection()
 	wxTheClipboard->Close();
 }
 
-} // d2d
+}

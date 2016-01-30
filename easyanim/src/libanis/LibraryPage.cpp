@@ -8,17 +8,17 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Anis"))
 {
 	InitLayout();
-	m_list->SetFileter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis).ToStdString());
+	m_list->SetFileter(d2d::FileType::GetTag(d2d::FileType::e_anis).ToStdString());
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim);
+	wxString filter = d2d::FileType::GetTag(d2d::FileType::e_anim);
 	wxFileDialog dlg(this, wxT("导入anis文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
@@ -29,7 +29,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			try {
 				std::string filename = filenames[i].ToStdString();
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 				symbol->RefreshThumbnail(filename);
 				m_list->Insert(symbol);
 				symbol->Release();

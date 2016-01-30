@@ -41,11 +41,11 @@ protected:
 	}; // ChainSelectedNodes
 
 private:
-	class PosQueryVisitor : public d2d::IVisitor
+	class PosQueryVisitor : public d2d::Visitor
 	{
 	public:
 		PosQueryVisitor(const d2d::Vector& pos, ChainSelectedNodes** result);
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 
 	private:
 		const d2d::Vector& m_pos;
@@ -54,11 +54,11 @@ private:
 
 	}; // PosQueryVisitor
 
-	class RectQueryVisitor : public d2d::IVisitor
+	class RectQueryVisitor : public d2d::Visitor
 	{
 	public:
 		RectQueryVisitor(const d2d::Rect& rect, std::vector<ChainSelectedNodes*>& result);
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 
 	private:
 		const d2d::Rect& m_rect;

@@ -22,7 +22,7 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(filename);
+	wxString dir = d2d::FileHelper::GetFileDir(filename);
 
 	bool need_offset = true;
 	if (!value["version"].isNull() && value["version"].asInt() >= OFFSET_VERSION) {
@@ -32,7 +32,7 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
-		d2d::ISprite* sprite = load(spriteValue, dir);
+		d2d::Sprite* sprite = load(spriteValue, dir);
 		if (need_offset) {
 			sprite->Translate(d2d::Vector(-150, -150));
 		}
@@ -59,10 +59,10 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	value["width"] = toolbar->getWidth();
 	value["height"] = toolbar->getHeight();
 
- 	std::vector<d2d::ISprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+ 	std::vector<d2d::Sprite*> sprites;
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
-	wxString dir = d2d::FilenameTools::getFileDir(filename);
+	wxString dir = d2d::FileHelper::GetFileDir(filename);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		value["sprite"][i] = StoreNew(sprites[i], dir);
 	}
@@ -72,7 +72,7 @@ void FileIO::store(const char* filename, StagePanel* stage,
 // 	int idx = 0;
 // 	for (int i = 0; i < 3; ++i) {
 // 		for (int j = 0; j < 3; ++j) {
-// 			d2d::ISprite* sprite = s_data.GetSprite(i, j);
+// 			d2d::Sprite* sprite = s_data.GetSprite(i, j);
 // 			if (sprite) {
 // 				value["sprite new"][idx++] = StoreNew(sprite, dir);
 // 			} else {
@@ -90,31 +90,31 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	fout.close();
 }
 
-d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
+d2d::Sprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
 	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
-	if (!d2d::FilenameTools::IsFileExist(filepath)) {
+	if (!d2d::FileHelper::IsFileExist(filepath)) {
 		std::string filepath = value["filepath"].asString();
 		throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 			dir.ToStdString().c_str(), filepath.c_str());
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, value);
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(value);
 	symbol->Release();
 
 	return sprite;
 }
 
-Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
+Json::Value FileIO::store(d2d::Sprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::ISymbol& symbol = sprite->GetSymbol();
+	const d2d::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+	value["filepath"] = d2d::FileHelper::GetRelativePath(dir,
 		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
@@ -128,13 +128,13 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 	return value;
 }
 
-Json::Value FileIO::StoreNew(d2d::ISprite* sprite, const wxString& dir)
+Json::Value FileIO::StoreNew(d2d::Sprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::ISymbol& symbol = sprite->GetSymbol();
+	const d2d::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+	value["filepath"] = d2d::FileHelper::GetRelativePath(dir,
 		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();

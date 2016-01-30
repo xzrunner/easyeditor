@@ -10,7 +10,7 @@ namespace ecomplex
 class NodeToSprite
 {
 public:
-	static d2d::ISprite* Trans(const librespacker::IPackNode* node);
+	static d2d::Sprite* Trans(const librespacker::IPackNode* node);
 
 };	// NodeToSprite
 

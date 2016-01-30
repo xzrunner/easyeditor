@@ -13,7 +13,7 @@ namespace d2d
 {
 
 class GroupTreePanel;
-class ISprite;
+class Sprite;
 class Group;
 class MultiSpritesImpl;
 class KeysState;
@@ -36,8 +36,8 @@ public:
 		bool visible = true, bool editable = true);
 	void DelNode();
 
-	wxTreeItemId AddSprite(wxTreeItemId parent, d2d::ISprite* spr);
-	wxTreeItemId AddSprite(d2d::ISprite* spr);
+	wxTreeItemId AddSprite(wxTreeItemId parent, Sprite* spr);
+	wxTreeItemId AddSprite(Sprite* spr);
 
 	wxTreeItemId GetRootID() const { return m_root; }
 
@@ -80,11 +80,11 @@ private:
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
-	void ChangeName(ISprite* spr);
-	void Select(ISprite* spr, bool clear);
+	void ChangeName(Sprite* spr);
+	void Select(Sprite* spr, bool clear);
 	void SelectSet(SpriteSelection* selection);
-	void Reorder(ISprite* spr, bool up);
-	bool Remove(ISprite* sprite);
+	void Reorder(Sprite* spr, bool up);
+	bool Remove(Sprite* sprite);
 
 private:
 	enum

@@ -19,7 +19,7 @@
 //
 //void MultiColorMaterial::Draw(const d2d::Matrix& mt) const
 //{
-//	d2d::PrimitiveDraw::drawTriangles(mt, m_tris, m_color);
+//	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, m_color);
 //}
 //
 //void MultiColorMaterial::Build(const std::vector<d2d::Vector>& vertices)
@@ -27,7 +27,7 @@
 //	m_tris.clear();
 //
 //	std::vector<d2d::Vector> bounding;
-//	d2d::Math::removeDuplicatePoints(vertices, bounding);
+//	d2d::Math2D::removeDuplicatePoints(vertices, bounding);
 //
 //	d2d::Triangulation::normal(bounding, m_tris);
 //}
@@ -38,7 +38,7 @@
 //	m_tris.clear();
 //
 //	std::vector<d2d::Vector> bounding;
-//	d2d::Math::removeDuplicatePoints(vertices, bounding);
+//	d2d::Math2D::removeDuplicatePoints(vertices, bounding);
 //
 //	d2d::Triangulation::lines(bounding, segments, m_tris);
 //}

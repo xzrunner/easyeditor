@@ -15,16 +15,16 @@
 //		{
 //		public:
 //			SpritesAOP(const SpriteSelection& selection);
-//			SpritesAOP(const std::vector<ISprite*>& sprites);
+//			SpritesAOP(const std::vector<Sprite*>& sprites);
 //			virtual ~SpritesAOP();
 //
-//			virtual Json::Value store(const std::vector<ISprite*>& sprites);
+//			virtual Json::Value store(const std::vector<Sprite*>& sprites);
 //
 //		protected:
 //			virtual Json::Value storeValues() = 0;
 //
 //		protected:
-//			std::vector<ISprite*> m_sprites;
+//			std::vector<Sprite*> m_sprites;
 //
 //		}; // SpritesAOP
 //
@@ -32,7 +32,7 @@
 //		{
 //		public:
 //			MoveSpritesAOP(const SpriteSelection& selection, const Vector& offset);
-//			MoveSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& offset);
+//			MoveSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& offset);
 //
 //			virtual void undo();
 //			virtual void redo();
@@ -49,8 +49,8 @@
 //		{
 //		public:
 //			RotateSpritesAOP(const SpriteSelection& selection, const Vector& start, const Vector& end);
-//			RotateSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end);
-//			RotateSpritesAOP(const std::vector<ISprite*>& sprites, float angle);
+//			RotateSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& start, const Vector& end);
+//			RotateSpritesAOP(const std::vector<Sprite*>& sprites, float angle);
 //
 //			virtual void undo();
 //			virtual void redo();
@@ -69,7 +69,7 @@
 //		{
 //		public:
 //			DeleteSpritesAOP(const SpriteSelection& selection, MultiSpritesImpl* spritesImpl);
-//			DeleteSpritesAOP(const std::vector<ISprite*>& sprites, MultiSpritesImpl* spritesImpl);
+//			DeleteSpritesAOP(const std::vector<Sprite*>& sprites, MultiSpritesImpl* spritesImpl);
 //
 //			virtual void undo();
 //			virtual void redo();
@@ -85,9 +85,9 @@
 //		class ScaleSpritesAOP : public SpritesAOP
 //		{
 //		public:
-//			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_scale, 
+//			ScaleSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_scale, 
 //				const Vector& old_scale);
-//			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_scale,
+//			ScaleSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_scale,
 //				const std::vector<Vector>& oldScales);
 //
 //			virtual void undo();
@@ -105,9 +105,9 @@
 //		class ShearSpritesAOP : public SpritesAOP
 //		{
 //		public:
-//			ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear, 
+//			ShearSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_shear, 
 //				const Vector& old_shear);
-//			ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear,
+//			ShearSpritesAOP(const std::vector<Sprite*>& sprites, const Vector& new_shear,
 //				const std::vector<Vector>& oldShears);
 //
 //			virtual void undo();
@@ -125,8 +125,8 @@
 //		class MirrorSpritesAOP : public SpritesAOP
 //		{
 //		public:
-//			MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror);
-//			MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror,
+//			MirrorSpritesAOP(const std::vector<Sprite*>& sprites, bool xMirror, bool yMirror);
+//			MirrorSpritesAOP(const std::vector<Sprite*>& sprites, bool xMirror, bool yMirror,
 //				const std::vector<std::pair<bool, bool> >& oldMirrors);
 //
 //			virtual void undo();

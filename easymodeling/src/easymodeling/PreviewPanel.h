@@ -23,11 +23,11 @@ namespace emodeling
 		void createGround();
 
 	private:
-		class LoadBodyVisitor : public d2d::IVisitor
+		class LoadBodyVisitor : public d2d::Visitor
 		{
 		public:
 			LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody);
-			virtual void Visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& next);
 
 		private:
 			b2World* m_world;
@@ -36,13 +36,13 @@ namespace emodeling
 
 		}; // LoadBodyVisitor
 
-		class LoadJointVisitor : public d2d::IVisitor
+		class LoadJointVisitor : public d2d::Visitor
 		{
 		public:
 			LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
 				std::map<libmodeling::Joint*, b2Joint*>& mapJoint);
 
-			virtual void Visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& next);
 
 		private:
 			b2World* m_world;
@@ -53,13 +53,13 @@ namespace emodeling
 
 		}; // LoadJointVisitor
 
-		class LoadGearJointVisitor : public d2d::IVisitor
+		class LoadGearJointVisitor : public d2d::Visitor
 		{
 		public:
 			LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
 				const std::map<libmodeling::Joint*, b2Joint*>& mapJoint);
 
-			virtual void Visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& next);
 
 		private:
 			b2World* m_world;

@@ -6,18 +6,18 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class SelectSpriteSJ : public Subject
 {
 public:
 	struct Params {
-		ISprite* spr;
+		Sprite* spr;
 		bool clear;
 	};
 
 public:
-	void Select(ISprite* spr, bool clear, Observer* except = NULL);
+	void Select(Sprite* spr, bool clear, Observer* except = NULL);
 
 	static SelectSpriteSJ* Instance();
 

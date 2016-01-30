@@ -25,13 +25,13 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	else if (name == wxT("X"))
 	{
 		const float x = wxANY_AS(value, float);
-		const float dx = x - m_chain->GetRect().xCenter();
+		const float dx = x - m_chain->GetRect().CenterX();
 		m_chain->Translate(d2d::Vector(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
-		const float dy = y - m_chain->GetRect().yCenter();
+		const float dy = y - m_chain->GetRect().CenterY();
 		m_chain->Translate(d2d::Vector(0.0f, dy));
 	}
 	else if (name == wxT("Closed"))
@@ -43,7 +43,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		int type = wxANY_AS(value, int);
 		if (type == 1)
 		{
-			float x = m_chain->GetRect().xCenter();
+			float x = m_chain->GetRect().CenterX();
 			std::vector<d2d::Vector> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
@@ -51,7 +51,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		}
 		else if (type == 2)
 		{
-			float y = m_chain->GetRect().yCenter();
+			float y = m_chain->GetRect().CenterY();
 			std::vector<d2d::Vector> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
@@ -71,8 +71,8 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 void ChainPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("Name"))->SetValue(m_chain->name);
-	pg->GetProperty(wxT("X"))->SetValue(m_chain->GetRect().xCenter());
-	pg->GetProperty(wxT("Y"))->SetValue(m_chain->GetRect().yCenter());
+	pg->GetProperty(wxT("X"))->SetValue(m_chain->GetRect().CenterX());
+	pg->GetProperty(wxT("Y"))->SetValue(m_chain->GetRect().CenterY());
 	pg->GetProperty(wxT("Closed"))->SetValue(m_chain->IsClosed());
 	pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
 }
@@ -83,11 +83,11 @@ void ChainPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_chain->name));
 
-	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_chain->GetRect().xCenter()));
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_chain->GetRect().CenterX()));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_chain->GetRect().yCenter()));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_chain->GetRect().CenterY()));
 	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 

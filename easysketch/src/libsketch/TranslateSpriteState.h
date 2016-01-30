@@ -23,12 +23,12 @@ private:
 	void Translate(const ivec2& first, const ivec2& curr);
 
 private:
-	class Visitor : public d2d::IVisitor
+	class Visitor : public d2d::Visitor
 	{
 	public:
 		Visitor(StagePanel* stage, const ivec2& last, const ivec2& curr) 
 			: m_stage(stage), m_last(last), m_curr(curr) {}
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 	private:
 		StagePanel* m_stage;
 		ivec2 m_last, m_curr;

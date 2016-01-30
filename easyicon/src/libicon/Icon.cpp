@@ -38,7 +38,7 @@ void Icon::Draw(const d2d::Matrix& mt, float process) const
 	d2d::Vector scr_coords[4];
 	GetScreenCoords(process, tex_coords, scr_coords);
 	for (int i = 0; i < 4; ++i) {
-		scr_coords[i] = d2d::Math::transVector(scr_coords[i], mt);
+		scr_coords[i] = d2d::Math2D::TransVector(scr_coords[i], mt);
 	}
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
@@ -62,10 +62,10 @@ d2d::Rect Icon::GetRegion(float process) const
 	for (int i = 0; i < 4; ++i) {
 		float x = scr_coords[i].x,
 			y = scr_coords[i].y;
-		if (x < ret.xMin) ret.xMin = x;
-		if (x > ret.xMax) ret.xMax = x;
-		if (y < ret.yMin) ret.yMin = y;
-		if (y > ret.yMax) ret.yMax = y;
+		if (x < ret.xmin) ret.xmin = x;
+		if (x > ret.xmax) ret.xmax = x;
+		if (y < ret.ymin) ret.ymin = y;
+		if (y > ret.ymax) ret.ymax = y;
 	}
 
 	return ret;

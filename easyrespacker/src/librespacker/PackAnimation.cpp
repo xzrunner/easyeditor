@@ -53,7 +53,7 @@ void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>&
 	AnimFromBin::Unpack(ptr, this);
 }
 
-void PackAnimation::CreateFramePart(const d2d::ISprite* spr, Frame& frame)
+void PackAnimation::CreateFramePart(const d2d::Sprite* spr, Frame& frame)
 {	
 	const IPackNode* node = PackNodeFactory::Instance()->Create(spr);
 
@@ -115,10 +115,10 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				&& components[i].name == name
 				&& !name.empty()) 
 			{
-				d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(node->GetFilepath());
-				if (type == d2d::FileNameParser::e_image ||
-					type == d2d::FileNameParser::e_complex ||
-					type == d2d::FileNameParser::e_anim) {
+				d2d::FileType::Type type = d2d::FileType::GetType(node->GetFilepath());
+				if (type == d2d::FileType::e_image ||
+					type == d2d::FileType::e_complex ||
+					type == d2d::FileType::e_anim) {
 					comp_idx = i;
 					return true;
 				}
@@ -134,20 +134,20 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 
 	if (is_anchor) {
 		return true;
-	} else if (d2d::FileNameParser::isType(node->GetFilepath(), d2d::FileNameParser::e_image)) {
+	} else if (d2d::FileType::IsType(node->GetFilepath(), d2d::FileType::e_image)) {
 		return false;
 	} else {
 		return !name.empty();
 	}
 }
 
-void PackAnimation::LoadSprTrans(const d2d::ISprite* spr, SpriteTrans& trans, bool force_mat)
+void PackAnimation::LoadSprTrans(const d2d::Sprite* spr, SpriteTrans& trans, bool force_mat)
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
 }
 
-void PackAnimation::LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans, bool force)
+void PackAnimation::LoadSprMat(const d2d::Sprite* spr, SpriteTrans& trans, bool force)
 {
 	if (!force && dynamic_cast<const d2d::ImageSprite*>(spr)) {
 		return;
@@ -196,14 +196,14 @@ void PackAnimation::LoadSprMat(const d2d::ISprite* spr, SpriteTrans& trans, bool
 	trans.mat[5] = -trans.mat[5];
 }
 
-void PackAnimation::LoadSprColor(const d2d::ISprite* spr, SpriteTrans& trans)
+void PackAnimation::LoadSprColor(const d2d::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = d2d::trans_color2int(spr->color.multi, d2d::PT_ARGB);
-	trans.additive = d2d::trans_color2int(spr->color.add, d2d::PT_ARGB);
+	trans.color = d2d::color2int(spr->color.multi, d2d::PT_ARGB);
+	trans.additive = d2d::color2int(spr->color.add, d2d::PT_ARGB);
 
-	trans.rmap = d2d::trans_color2int(spr->color.r, d2d::PT_RGBA);
-	trans.gmap = d2d::trans_color2int(spr->color.g, d2d::PT_RGBA);
-	trans.bmap = d2d::trans_color2int(spr->color.b, d2d::PT_RGBA);	
+	trans.rmap = d2d::color2int(spr->color.r, d2d::PT_RGBA);
+	trans.gmap = d2d::color2int(spr->color.g, d2d::PT_RGBA);
+	trans.bmap = d2d::color2int(spr->color.b, d2d::PT_RGBA);	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

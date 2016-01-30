@@ -20,11 +20,11 @@ public:
 	virtual void OnMouseRelease(const d2d::Vector& pos);
 
 private:
-	class Visitor : public d2d::IVisitor
+	class Visitor : public d2d::Visitor
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 	private:
 		AnchorMgr* m_anchor_mgr;
 	}; // Visitor

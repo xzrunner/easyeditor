@@ -180,7 +180,7 @@ bool ParticleSystem::Update(const d2d::Matrix& mat)
 		return false;
 	}
 
-	const float* src = mat.getElements();
+	const float* src = mat.GetElements();
 	float mt[6];
 	mt[0] = src[0];
 	mt[1] = src[1];
@@ -259,12 +259,12 @@ bool ParticleSystem::IsEmpty() const
 void ParticleSystem::ReloadTexture() const
 {
 	for (int i = 0; i < m_et->cfg->symbol_count; ++i) {
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(m_et->cfg->symbols[i].ud);
+		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(m_et->cfg->symbols[i].ud);
 		symbol->ReloadTexture();
 	}
 }
 
-p2d_symbol* ParticleSystem::AddSymbol(d2d::ISymbol* symbol)
+p2d_symbol* ParticleSystem::AddSymbol(d2d::Symbol* symbol)
 {
 	assert(m_et->cfg->symbol_count < MAX_COMPONENTS);
 

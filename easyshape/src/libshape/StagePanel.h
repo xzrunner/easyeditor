@@ -15,7 +15,7 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, d2d::ISprite* edited, 
+		wxGLContext* glctx, d2d::Sprite* edited, 
 		const d2d::MultiSpritesImpl* bg_sprites);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		Symbol* symbol/*, d2d::LibraryPanel* library*/);
@@ -24,7 +24,7 @@ public:
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(d2d::IVisitor& visitor, 
+	virtual void TraverseShapes(d2d::Visitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
 
 	void LoadFromFile(const char* filename);
@@ -33,13 +33,13 @@ public:
 	//virtual void loadShapes();
 	//virtual void storeShapes() const;
 
-	const d2d::ISymbol& GetSymbol() const;
+	const d2d::Symbol& GetSymbol() const;
 
 	void SetToolbarPanel(ToolbarPanel* toolbar) {
 		m_toolbar = toolbar;
 	}
 
-	void SetSymbolBG(d2d::ISymbol* symbol);
+	void SetSymbolBG(d2d::Symbol* symbol);
 
 protected:
 	//

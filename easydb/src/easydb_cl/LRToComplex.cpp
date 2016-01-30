@@ -116,7 +116,7 @@ void LRToComplex::LoadSpriteValue(const Json::Value& spr_val, Json::Value& dst_v
 	int pos = filepath.find(suffix);
 	if (pos!= std::string::npos) {
 		std::string fix_filepath = filepath.substr(0, pos) + ".png";
-		if (d2d::FilenameTools::IsFileExist(fix_filepath)) {
+		if (d2d::FileHelper::IsFileExist(fix_filepath)) {
 			spr_val_fix["filepath"] = fix_filepath;
 		}
 	}	
@@ -134,8 +134,8 @@ void LRToComplex::OutputComplexFile(Json::Value& complex_val, const std::string&
 	complex_val["ymax"] = 0;
 	complex_val["ymin"] = 0;
 
-	std::string outfile = d2d::FilenameTools::getFileDir(filepath) + "\\" + name 
-		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
+	std::string outfile = d2d::FileHelper::GetFileDir(filepath) + "\\" + name 
+		+ "_" + d2d::FileType::GetTag(d2d::FileType::e_complex) + ".json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(outfile.c_str());

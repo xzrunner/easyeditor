@@ -8,21 +8,21 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class PerspectiveSpriteAOP : public AbstractAtomicOP
 {
 public:
-	PerspectiveSpriteAOP(ISprite* sprite, const Vector& new_persp,
+	PerspectiveSpriteAOP(Sprite* sprite, const Vector& new_persp,
 		const Vector& old_persp);
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	ISprite* m_spr;
+	Sprite* m_spr;
 
 	Vector m_new_persp, m_old_persp;
 

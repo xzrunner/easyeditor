@@ -15,7 +15,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
-						 d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
+						 d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
 	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
 	, m_edited(edited)

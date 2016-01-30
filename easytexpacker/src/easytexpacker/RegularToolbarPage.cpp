@@ -46,7 +46,7 @@ void RegularToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 		wxString dir = dlg.GetPath();
 
 		wxArrayString files;
-		d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+		d2d::FileHelper::FetchAllFiles(dir.ToStdString(), files);
 		libtexpacker::RegularRectPack rrp(files);
 
 		m_src_dir->SetValue(dir);

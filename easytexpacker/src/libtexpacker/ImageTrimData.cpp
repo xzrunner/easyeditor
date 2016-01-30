@@ -34,7 +34,7 @@ void ImageTrimData::Load(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value spr_val = value[i++];
@@ -57,7 +57,7 @@ void ImageTrimData::Load(const std::string& filepath)
 		trim.bound[7] = spr_val["bound"]["up"]["tot"].asInt();
 
 		std::string file_path = dir + "\\" + spr_val["filepath"].asString();
-		file_path = d2d::FilenameTools::FormatFilepathAbsolute(file_path);
+		file_path = d2d::FileHelper::FormatFilepathAbsolute(file_path);
 
 		m_trim_info.insert(std::make_pair(file_path, trim));
 

@@ -62,7 +62,7 @@ void ScaleOverall::Run(int argc, char *argv[])
 void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale) const
 {	
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 
 	std::map<std::string, d2d::Vector> mapImg2Center;
 
@@ -71,7 +71,7 @@ void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 			ScaleImage(filepath, scale, ss, mapImg2Center);
 		}
 	}
@@ -81,9 +81,9 @@ void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
 			ScaleComplex(filepath, scale, mapImg2Center);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 			ScaleAnim(filepath, scale, mapImg2Center);
 		}
 	}
@@ -92,13 +92,13 @@ void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale
 void ScaleOverall::ScaleImage(const std::string& filepath, float scale, d2d::Snapshoot& ss,
 							  std::map<std::string, d2d::Vector>& mapImg2Center) const
 {
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
 	d2d::ImageSymbol* img = static_cast<d2d::ImageSymbol*>(symbol);
 
 	d2d::Vector img_offset;
-	img_offset.x = img->GetSize().xCenter();
-	img_offset.y = img->GetSize().yCenter();
+	img_offset.x = img->GetSize().CenterX();
+	img_offset.y = img->GetSize().CenterY();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
 	ss.OutputToImageFile(symbol, filepath, scale);
@@ -120,13 +120,13 @@ void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(path);
+	std::string dir = d2d::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value spriteVal = value["sprite"][i++];
 	while (!spriteVal.isNull()) {
 		std::string relative = spriteVal["filepath"].asString();
-		std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, relative);
+		std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, relative);
 
 		std::map<std::string, d2d::Vector>::const_iterator itr 
 			= mapImg2Center.find(filepath);
@@ -165,7 +165,7 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(path);
+	std::string dir = d2d::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value layerVal = value["layer"][i++];
@@ -177,7 +177,7 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 			Json::Value entryVal = frameVal["actor"][k++];
 			while (!entryVal.isNull()) {
 				std::string relative = entryVal["filepath"].asString();
-				std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, relative);
+				std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, relative);
 
 				std::map<std::string, d2d::Vector>::const_iterator itr 
 					= mapImg2Center.find(filepath);
@@ -220,10 +220,10 @@ d2d::Vector ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale,
 	offset.x = sprite_val["x offset"].asDouble();
 	offset.y = sprite_val["y offset"].asDouble();
 
-// 	d2d::Vector center = pos + d2d::Math::rotateVector(-offset, angle);
-// 	center = center + d2d::Math::rotateVector(img_offset, angle);
+// 	d2d::Vector center = pos + d2d::Math2D::RotateVector(-offset, angle);
+// 	center = center + d2d::Math2D::RotateVector(img_offset, angle);
 
-	d2d::Vector center = pos + d2d::Math::rotateVector(img_offset, angle);
+	d2d::Vector center = pos + d2d::Math2D::RotateVector(img_offset, angle);
 
 	center *= scale;
 

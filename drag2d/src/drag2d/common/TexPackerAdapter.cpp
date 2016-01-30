@@ -20,7 +20,7 @@ void TexPackerAdapter::load(const char* filename)
 	width = value["width"].asInt();
 	height = value["height"].asInt();
 
-	std::string dir = FilenameTools::getFileDir(filename);
+	std::string dir = FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value texValue = value["image"][i++];
@@ -35,8 +35,8 @@ void TexPackerAdapter::load(const Json::Value& value, const std::string& dir)
 	Texture texture;
 
 	texture.filepath = value["filepath"].asString();
-	if (!d2d::FilenameTools::IsFileExist(texture.filepath))
-		texture.filepath = d2d::FilenameTools::getAbsolutePath(dir, texture.filepath);
+	if (!FileHelper::IsFileExist(texture.filepath))
+		texture.filepath = FileHelper::GetAbsolutePath(dir, texture.filepath);
 
 	texture.region.left = value["left"].asInt();
 	texture.region.low = value["low"].asInt();
@@ -47,4 +47,4 @@ void TexPackerAdapter::load(const Json::Value& value, const std::string& dir)
 
 	textures.push_back(texture);
 }
-} // d2d
+}

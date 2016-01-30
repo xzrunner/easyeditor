@@ -10,7 +10,7 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 {
 }
 
-//bool BodyEditStage::InsertShape(d2d::IShape* shape)
+//bool BodyEditStage::InsertShape(d2d::Shape* shape)
 //{
 //	return libshape::StagePanel::InsertShape(shape);
 //
@@ -25,7 +25,7 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 // 	}
 //}
 //
-//bool BodyEditStage::RemoveShape(d2d::IShape* shape)
+//bool BodyEditStage::RemoveShape(d2d::Shape* shape)
 //{
 //	return libshape::StagePanel::RemoveShape(shape);
 //
@@ -54,7 +54,7 @@ void BodyEditStage::loadShapes()
 // 		m_shapes.reserve(bd->fixtures.size());
 // 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 // 		{
-// 			d2d::IShape* shape = bd->fixtures[i]->shape;
+// 			d2d::Shape* shape = bd->fixtures[i]->shape;
 // 			shape->Retain();
 // 			m_shapes.push_back(shape);
 // 		}

@@ -63,7 +63,7 @@ PolygonBody::PolygonBody(b2World* world, float hWidth, float hHeight,
 
 void PolygonBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const
 {
-	rect.makeInfinite();
+	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());
@@ -71,8 +71,8 @@ void PolygonBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float an
 		for (size_t i = 0; i < poly->GetVertexCount(); ++i)
 		{
 			const b2Vec2& p = poly->m_vertices[i];
-			d2d::Vector transform = d2d::Math::rotateVector(d2d::Vector(p.x, p.y), angle) + position;
-			rect.combine(transform);
+			d2d::Vector transform = d2d::Math2D::RotateVector(d2d::Vector(p.x, p.y), angle) + position;
+			rect.Combine(transform);
 		}
 	}
 }

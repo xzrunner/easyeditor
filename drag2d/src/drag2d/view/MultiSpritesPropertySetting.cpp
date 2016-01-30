@@ -12,7 +12,7 @@
 namespace d2d
 {
 
-MultiSpritesPropertySetting::MultiSpritesPropertySetting(const std::vector<ISprite*>& sprites)
+MultiSpritesPropertySetting::MultiSpritesPropertySetting(const std::vector<Sprite*>& sprites)
 	: IPropertySetting("MultiSprites")
 	, m_impl(new MultiSpritesPropertyImpl(sprites))
 	, m_overall(false)
@@ -299,4 +299,4 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Editable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
-} // d2d
+}

@@ -43,12 +43,12 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<d2d::ISprite*> cover_layer, top_layer;
+	std::vector<d2d::Sprite*> cover_layer, top_layer;
 
-	std::vector<d2d::ISprite*> all_sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(all_sprites), d2d::DT_VISIBLE);
+	std::vector<d2d::Sprite*> all_sprites;
+	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(all_sprites), d2d::DT_VISIBLE);
 	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
-		d2d::ISprite* spr = all_sprites[i];
+		d2d::Sprite* spr = all_sprites[i];
 
 		const std::string& tag = spr->tag;
 		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
@@ -64,21 +64,21 @@ void StageCanvas::DrawSprites() const
 	bool draw_flag = SettingCfg::Instance()->m_special_layer_flag;
 	std::sort(cover_layer.begin(), cover_layer.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
-		d2d::ISprite* spr = cover_layer[i];
+		d2d::Sprite* spr = cover_layer[i];
 		DrawSprite(spr, draw_flag);
 	}
 
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
-		d2d::ISprite* spr = top_layer[i];
+		d2d::Sprite* spr = top_layer[i];
 		DrawSprite(spr, false);
 	}
 }
 
-void StageCanvas::DrawSprite(d2d::ISprite* spr, bool draw_edge) const
+void StageCanvas::DrawSprite(d2d::Sprite* spr, bool draw_edge) const
 {
 	d2d::Rect screen_region = m_screen.GetRegion();
-	if (screen_region.isValid() &&
-		!d2d::Math::isRectIntersectRect(spr->GetRect(), screen_region)) {
+	if (screen_region.IsValid() &&
+		!d2d::Math2D::IsRectIntersectRect(spr->GetRect(), screen_region)) {
 			return;
 	}
 
@@ -97,7 +97,7 @@ void StageCanvas::DrawSprite(d2d::ISprite* spr, bool draw_edge) const
 		d2d::Matrix t;
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale;
-		t.scale(s, s);
+		t.Scale(s, s);
 		etext::GTxt::Instance()->Draw(t, spr->name);
 	}
 }
@@ -106,12 +106,12 @@ void StageCanvas::DrawRegion() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 
 		cfg->m_map_width * 0.5f,
 		cfg->m_map_height * 0.5f,
 		d2d::LIGHT_GREY_LINE);
 
-	d2d::PrimitiveDraw::rect(
+	d2d::PrimitiveDraw::DrawRect(
 		d2d::Vector(cfg->m_view_dx, cfg->m_view_dy), 
 		cfg->m_view_width * 0.5f,
 		cfg->m_view_height * 0.5f,

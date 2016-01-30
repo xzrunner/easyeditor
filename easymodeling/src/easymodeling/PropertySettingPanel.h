@@ -12,7 +12,7 @@ public:
 	PropertySettingPanel(wxWindow* parent);
 
 protected:
-	virtual void OnSpriteSelected(d2d::ISprite* spr, bool clear);
+	virtual void OnSpriteSelected(d2d::Sprite* spr, bool clear);
 
 }; // PropertySettingPanel
  

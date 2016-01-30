@@ -6,7 +6,7 @@
 namespace libshape
 {
 
-class RectShape : public d2d::IShape
+class RectShape : public d2d::Shape
 {
 public:
 	RectShape();
@@ -20,7 +20,7 @@ public:
 	virtual RectShape* Clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "rect"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

@@ -705,10 +705,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ColorTrans.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\Font.cpp"
 					>
 				</File>
@@ -760,338 +756,6 @@
 						>
 					</File>
 				</Filter>
-				<Filter
-					Name="image"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\Bitmap.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\Bitmap.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\Image.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\Image.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ImageData.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ImageData.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ITexture.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TextureFactory.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TextureFactory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TextureFBO.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TextureFBO.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TextureImgData.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TextureImgData.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TexturePacker.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\TexturePacker.h"
-						>
-					</File>
-					<Filter
-						Name="io"
-						>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\ImageLoader.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\LibpngAdapter.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\LibpngAdapter.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\PPMAdapter.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\dataset\PPMAdapter.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="scene"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Group.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Group.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Layer.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Layer.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\LayerMgr.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\LayerMgr.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\SceneNode.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\SceneNode.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="shape"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\IShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\IShape.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="sprite"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\FontBlankSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\FontBlankSprite.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageSprite.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSprite.h"
-					>
-				</File>
-				<Filter
-					Name="base"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ISprite.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ISprite.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\NullSprite.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\sprite_utility.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\sprite_utility.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SpriteFactory.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SpriteFactory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\wrap_ISprite.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\wrap_ISprite.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="symbol"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\FontBlankSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\FontBlankSymbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ImageSymbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSymbol.h"
-					>
-				</File>
-				<Filter
-					Name="base"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ISymbol.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\ISymbol.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\NullSymbol.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SymbolFactory.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SymbolFactory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SymbolMgr.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SymbolMgr.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="searcher"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SearcherPathMgr.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SearcherPathMgr.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SymbolSearcher.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SymbolSearcher.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="bv"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\AABB.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\AABB.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\AbstractBV.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\BVFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\BVFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\BVTypes.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\OBB.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\OBB.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="struct"
@@ -1154,10 +818,6 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\common\opengl\platform.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\render\RenderContext.cpp"
 				>
 			</File>
@@ -1197,14 +857,6 @@
 				Name="opengl"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\render\Exception.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\Exception.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\render\GL.cpp"
 					>
 				</File>
@@ -1218,30 +870,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\GL10.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\VertexArray.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\VertexArray.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\VertexBuffer.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\VertexBuffer.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\VertexBufferObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\VertexBufferObject.h"
 					>
 				</File>
 			</Filter>
@@ -1346,38 +974,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\DrawCallBatching.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicFont.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicFont.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicPacker.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicPacker.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicTexAndFont.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicTexAndFont.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicTexture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
 					>
 				</File>
 			</Filter>
@@ -1650,63 +1246,11 @@
 			Name="common"
 			>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\Exception.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)\common\"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="$(IntDir)\common\"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Exception.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\interface.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\LibJpeg.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\LibJpeg.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Log.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\common\Module.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\Object.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Object.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\common\PointerPool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\ResourcesMgr.h"
 				>
 			</File>
 			<File
@@ -1715,18 +1259,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\common\Statistics.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\typedef.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\UserDataImpl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\UserDataImpl.h"
 				>
 			</File>
 			<Filter
@@ -1742,54 +1274,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\TexPackerAdapter.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="filename"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\FileNameParser.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\FileNameParser.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\FileNameTools.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\FileNameTools.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="color"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Color.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\color_config.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\color_convert.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\color_convert.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\color_trans.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\color_trans.h"
 					>
 				</File>
 			</Filter>
@@ -1814,154 +1298,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="tools"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\filetools.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\filetools.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\FpsStat.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\FpsStat.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\JsonIO.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\JsonIO.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\PlayControl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\PlayControl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\StackTrace.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\StackTrace.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\StringTools.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\StringTools.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Timer.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Timer.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\tools.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="math"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Math.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Math.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\math_common.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Matrix.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Random.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Rect.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Vector.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="settings"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Config.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Config.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\const.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\dev_config.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\SettingData.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\SettingData.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Settings.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Settings.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\SpecialConfig.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\SpecialConfig.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\types.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="visitor"
 				>
 				<File
@@ -1980,31 +1316,11 @@
 					RelativePath="..\..\..\src\drag2d\common\sprite_visitors.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\visitors.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
 			>
-			<File
-				RelativePath="..\..\..\src\drag2d\view\Camera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\view\Camera.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\view\Screen.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\view\Screen.h"
-				>
-			</File>
 			<Filter
 				Name="library"
 				>
@@ -2725,14 +2041,6 @@
 				Name="list"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\widgets\ListItem.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\ListItem.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\widgets\VerticalImageList.cpp"
 					>
 				</File>
@@ -2892,118 +2200,6 @@
 						>
 					</File>
 				</Filter>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="algorithms"
-			>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\ConvexHull.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\ConvexHull.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\CosineSmooth.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\CosineSmooth.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\DelaunayTriangulation.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\DelaunayTriangulation.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\DouglasPeucker.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\DouglasPeucker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\MinBoundingBox.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\MinBoundingBox.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\PolygonClipper.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\PolygonClipper.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\SGI.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\SGI.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\TrapezoidalDec.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\TrapezoidalDec.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\Triangulation.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="..\libdrag2d\x86\Debug\triangle.obj"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\algorithms\Triangulation.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="external"
-			>
-			<Filter
-				Name="clipper"
-				>
-				<File
-					RelativePath="..\..\..\..\editor-external\clipper\clipper.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\editor-external\clipper\clipper.hpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="stackwalker"
-				>
-				<File
-					RelativePath="..\..\..\..\editor-external\stackwalker\StackWalker.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\editor-external\stackwalker\StackWalker.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter

@@ -33,7 +33,7 @@ void AnimToComplexWithColor::Run(int argc, char *argv[])
 
 void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 {
-	std::string dir = d2d::FilenameTools::getFileDir(cfg_filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(cfg_filepath);
 
 	std::locale::global(std::locale(""));
 	std::ifstream fin(cfg_filepath.c_str());
@@ -46,7 +46,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		std::string filepath = ParserTrans(line, trans);
 
 		ecomplex::Symbol* symbol = new ecomplex::Symbol;
-		d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(dir + "\\" + filepath + ".json"));
+		d2d::Sprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(dir + "\\" + filepath + ".json"));
 		TransSpr(trans, sprite);
 		symbol->m_sprites.push_back(sprite);
 
@@ -66,7 +66,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct Trans& t)
 {
 	std::vector<std::string> token;
-	d2d::StringTools::Split(str, " ", token);
+	d2d::StringHelper::Split(str, " ", token);
 
 	if (token.size() == 0) {
 		return "";
@@ -98,9 +98,9 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 				t.type |= CC_B;
 			}
 			++ptr;
-			d2d::StringTools::FromString(token[ptr++], col->r);
-			d2d::StringTools::FromString(token[ptr++], col->g);
-			d2d::StringTools::FromString(token[ptr++], col->b);
+			d2d::StringHelper::FromString(token[ptr++], col->r);
+			d2d::StringHelper::FromString(token[ptr++], col->g);
+			d2d::StringHelper::FromString(token[ptr++], col->b);
 		} 
 		else 
 		{
@@ -115,7 +115,7 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 	return token[0];
 }
 
-void AnimToComplexWithColor::TransSpr(const Trans& t, d2d::ISprite* spr)
+void AnimToComplexWithColor::TransSpr(const Trans& t, d2d::Sprite* spr)
 {
 	if (t.type & CC_R) {
 		spr->color.r = d2d::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);

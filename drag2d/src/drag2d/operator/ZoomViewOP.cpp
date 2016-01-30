@@ -132,4 +132,4 @@ void ZoomViewOP::SwitchState(IEditOPState* state)
 	}
 }
 
-} // d2d
+}

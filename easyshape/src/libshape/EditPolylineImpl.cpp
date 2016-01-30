@@ -28,7 +28,7 @@ EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, d2d::EditPanelImpl* stage,
 	m_node_capture = node_capture;
 
 	m_selectOP = select_op;
-	m_lastLeftDownPos.setInvalid();
+	m_lastLeftDownPos.SetInvalid();
 	m_bSelectOpen = false;
 
 	m_draw_op = draw_op;
@@ -71,14 +71,14 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 			// 			d2d::Vector screen = m_stage->transPosProjectToScreen(m_capturedEditable.pos);
 			// 			bNotDeliver = m_draw_op->OnMouseLeftDown(screen.x, screen.y);
 
-			if (m_capturedEditable.pos.isValid())
+			if (m_capturedEditable.pos.IsValid())
 				m_draw_op->m_polyline.push_back(m_capturedEditable.pos);
 
 			checkActiveShape(m_capturedEditable);
 		}
 		else if (m_captureSelectable.shape)
 		{
-			if (m_captureSelectable.pos.isValid())
+			if (m_captureSelectable.pos.IsValid())
 				m_draw_op->m_polyline.push_back(m_captureSelectable.pos);
 
 			checkActiveShape(m_captureSelectable);
@@ -106,7 +106,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 					int sz = m_shapesImpl->GetShapeSelection()->Size();
 
 					d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-					d2d::IShape* shape = m_shapesImpl->QueryShapeByPos(pos);
+					d2d::Shape* shape = m_shapesImpl->QueryShapeByPos(pos);
 
 					return m_base_op->OnMouseLeftDownBase(x, y);
 				}
@@ -129,7 +129,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
 		m_shapesImpl->TraverseShapes(nearest, d2d::DT_VISIBLE);
-		float dis = d2d::Math::getDistance(nearest.getNearestNode(), pos);
+		float dis = d2d::Math2D::GetDistance(nearest.getNearestNode(), pos);
 		if (dis < tolerance)
 		{
 			if (m_capturedEditable.shape)
@@ -156,7 +156,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	{
 		m_selectOP->OnMouseLeftUp(x, y);
 		m_bSelectOpen = false;
-		m_lastLeftDownPos.setInvalid();
+		m_lastLeftDownPos.SetInvalid();
 	}
 
 
@@ -174,7 +174,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 			capture.captureEditable(m_stage->TransPosScrToProj(x, y), m_capturedEditable);
 			if (m_capturedEditable.shape)
 			{
-				if (m_capturedEditable.pos.isValid())
+				if (m_capturedEditable.pos.IsValid())
 				{
 					ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
 					chain->Remove(m_capturedEditable.pos);
@@ -211,14 +211,14 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		NodeCapture capture(m_shapesImpl, tolerance);
 		{
-			d2d::IShape* old = m_capturedEditable.shape;
+			d2d::Shape* old = m_capturedEditable.shape;
 			capture.captureEditable(pos, m_capturedEditable);
 			if (old && !m_capturedEditable.shape || !old && m_capturedEditable.shape) {
 				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		{
-			d2d::IShape* old = m_captureSelectable.shape;
+			d2d::Shape* old = m_captureSelectable.shape;
 			capture.captureSelectable(pos, m_captureSelectable);
 			if (old && !m_captureSelectable.shape || !old && m_captureSelectable.shape) {
 				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -247,7 +247,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		if (ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape))
 		{
-			if (m_capturedEditable.pos.isValid())
+			if (m_capturedEditable.pos.IsValid())
 			{
 				chain->Change(m_capturedEditable.pos, pos);
 				m_capturedEditable.pos = pos;
@@ -255,8 +255,8 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			else
 			{
 				d2d::Vector old;
-				old.x = chain->GetRect().xCenter();
-				old.y = chain->GetRect().yCenter();
+				old.x = chain->GetRect().CenterX();
+				old.y = chain->GetRect().CenterY();
 				chain->Translate(pos - old);
 			}
 
@@ -269,8 +269,8 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			}
 		}
 	}
-	else if (m_lastLeftDownPos.isValid() 
-		&& d2d::Math::getDistance(m_lastLeftDownPos, d2d::Vector(x, y)) < DRAG_SELECT_TOL)
+	else if (m_lastLeftDownPos.IsValid() 
+		&& d2d::Math2D::GetDistance(m_lastLeftDownPos, d2d::Vector(x, y)) < DRAG_SELECT_TOL)
 		//		&& (m_lastLeftDownPos.x != x || m_lastLeftDownPos.y != y))
 	{
 		if (m_draw_op->m_polyline.size() == 1)
@@ -306,14 +306,14 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 {
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
-		if (captured.pos.isValid()) {
-			d2d::PrimitiveDraw::drawCircle(captured.pos, m_node_capture->GetValue(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+		if (captured.pos.IsValid()) {
+			d2d::PrimitiveDraw::DrawCircle(captured.pos, m_node_capture->GetValue(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 		}
 
 		d2d::Vector center;
-		center.x = chain->GetRect().xCenter();
-		center.y = chain->GetRect().yCenter();
-		d2d::PrimitiveDraw::drawCircle(center, m_node_capture->GetValue(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+		center.x = chain->GetRect().CenterX();
+		center.y = chain->GetRect().CenterY();
+		d2d::PrimitiveDraw::DrawCircle(center, m_node_capture->GetValue(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
 
@@ -339,40 +339,40 @@ InterruptChainVisitor(const d2d::Vector& pos, int tol)
 }
 
 void EditPolylineImpl::InterruptChainVisitor::
-Visit(d2d::Object* object, bool& bFetchNext) 
+Visit(d2d::Object* object, bool& next) 
 {
 	d2d::Rect rect(m_pos, m_tol, m_tol);
 
 	ChainShape* chain = static_cast<ChainShape*>(object);
 	if (!chain->IsIntersect(rect)) 
 	{
-		bFetchNext = true;
+		next = true;
 		return;
 	}
 
 	size_t iPos;
 	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
-	float dis = d2d::Math::getDisPointToPolyline(m_pos, vertices, &iPos);
+	float dis = d2d::Math2D::GetDisPointToPolyline(m_pos, vertices, &iPos);
 	if (dis < m_tol)
 	{
 		chain->Add(iPos + 1, m_pos);
 		m_chain = chain;
-		bFetchNext = false;
+		next = false;
 		return;
 	}
 	else if (chain->IsClosed() && vertices.size() > 1)
 	{
-		float dis = d2d::Math::getDisPointToSegment(m_pos, vertices.front(), vertices.back());
+		float dis = d2d::Math2D::GetDisPointToSegment(m_pos, vertices.front(), vertices.back());
 		if (dis < m_tol)
 		{
 			chain->Add(vertices.size(), m_pos);
 			m_chain = chain;
-			bFetchNext = false;
+			next = false;
 			return;
 		}
 	}
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -385,16 +385,16 @@ NearestNodeVisitor(const d2d::Vector& pos, int tol)
 , m_tol(tol)
 {
 	m_dis = FLT_MAX;
-	m_nearest.setInvalid();
+	m_nearest.SetInvalid();
 }
 
 void EditPolylineImpl::NearestNodeVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
 	ChainShape* chain = dynamic_cast<ChainShape*>(object);
 	if (!chain) 
 	{
-		bFetchNext = true;
+		next = true;
 		return;
 	}
 
@@ -402,14 +402,14 @@ Visit(d2d::Object* object, bool& bFetchNext)
 
 	if (!chain->IsIntersect(rect)) 
 	{
-		bFetchNext = true;
+		next = true;
 		return;
 	}
 
 	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
-		float dis = d2d::Math::getDistance(m_pos, vertices[i]);
+		float dis = d2d::Math2D::GetDistance(m_pos, vertices[i]);
 		if (dis < m_dis && dis != 0)
 		{
 			m_dis = dis;
@@ -417,7 +417,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 		}
 	}
 
-	bFetchNext = true;
+	next = true;
 }
 
 }

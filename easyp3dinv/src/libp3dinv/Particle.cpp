@@ -51,7 +51,7 @@ void Particle::Draw(const d2d::Matrix& mt) const
 // 	}
 
 	d2d::Matrix _mt(mt);
-	_mt.translate(0, 0);
+	_mt.Translate(0, 0);
 
 	float scale = m_during / m_life * (m_start_scale - m_end_scale) + m_end_scale;
 

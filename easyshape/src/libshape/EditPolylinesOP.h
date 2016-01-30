@@ -29,30 +29,30 @@ private:
 	void clearBuffer();
 
 private:
-	class UpdateChainVisitor : public d2d::IVisitor
+	class UpdateChainVisitor : public d2d::Visitor
 	{
 	public:
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 	}; // UpdateChainVisitor
 
-	class UpdateBufferVisitor : public d2d::IVisitor
+	class UpdateBufferVisitor : public d2d::Visitor
 	{
 	public:
 		UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer);
 
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 
 	private:
 		std::map<ChainShape*, ChainShape*>& m_simplifyBuffer;
 
 	}; // UpdateBufferVisitor
 
-	class OffsetVisitor : public d2d::IVisitor
+	class OffsetVisitor : public d2d::Visitor
 	{
 	public:
 		OffsetVisitor(const d2d::Vector& offset);
 
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 	private:
 		const d2d::Vector& m_offset;

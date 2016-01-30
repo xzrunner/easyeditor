@@ -36,15 +36,15 @@ void ScaleJson::Run(int argc, char *argv[])
 void ScaleJson::Trigger(const std::string& dir, float scale, const std::string& sprite_filename) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
 			ScaleComplex(filepath, scale, sprite_filename);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 			ScaleAnim(filepath, scale, sprite_filename);
 		}
 	}
@@ -64,7 +64,7 @@ void ScaleJson::ScaleComplex(const wxString& path, float scale, const std::strin
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(path);
+	wxString dir = d2d::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value spriteVal = value["sprite"][i++];
@@ -98,7 +98,7 @@ void ScaleJson::ScaleAnim(const wxString& path, float scale, const std::string& 
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(path);
+	wxString dir = d2d::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value layerVal = value["layer"][i++];

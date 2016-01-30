@@ -39,7 +39,7 @@ b2Body* PhysicsQuery::queryNear(b2World* world, const d2d::Vector& pos)
 		for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 		{
 			b2Vec2 bPos = b->GetPosition();
-			const float dis = d2d::Math::getDistance(pos, d2d::Vector(bPos.x, bPos.y));
+			const float dis = d2d::Math2D::GetDistance(pos, d2d::Vector(bPos.x, bPos.y));
 			if (dis < nearDis)
 			{
 				nearDis = dis;
@@ -79,4 +79,4 @@ bool PhysicsQuery::QueryCallback::ReportFixture(b2Fixture* fixture)
 	return true;
 }
 
-} // d2d
+}

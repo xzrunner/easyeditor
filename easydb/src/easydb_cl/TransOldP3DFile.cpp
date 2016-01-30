@@ -32,13 +32,13 @@ void TransOldP3DFile::Run(int argc, char *argv[])
 void TransOldP3DFile::Run(const std::string& folder)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(folder, files);
+	d2d::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) {
 			Trans(filepath);
 		}
 	}
@@ -54,7 +54,7 @@ void TransOldP3DFile::Trans(const std::string& filepath) const
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath);
+	wxString dir = d2d::FileHelper::GetFileDir(filepath);
 
 	bool dirty = false;
 

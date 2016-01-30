@@ -29,7 +29,7 @@ bool ComposeOP::OnMouseRightDown(int x, int y)
 		return true;
 	}
 
-	d2d::ISprite* selected = SelectByPos(x, y);
+	d2d::Sprite* selected = SelectByPos(x, y);
 	if (selected) {
 		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + d2d::PI*0.5f);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -61,7 +61,7 @@ bool ComposeOP::OnDraw() const
 	return false;
 }
 
-d2d::ISprite* ComposeOP::SelectByPos(int x, int y)
+d2d::Sprite* ComposeOP::SelectByPos(int x, int y)
 {
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	int col, row;
@@ -71,7 +71,7 @@ d2d::ISprite* ComposeOP::SelectByPos(int x, int y)
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	d2d::ISprite* selected = stage->getSprite(row, col);
+	d2d::Sprite* selected = stage->getSprite(row, col);
 	if (selected) {
 		d2d::SpriteSelection* selection = stage->GetSpriteSelection();
 		selection->Clear();

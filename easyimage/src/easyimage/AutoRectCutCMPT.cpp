@@ -80,11 +80,11 @@ wxSizer* AutoRectCutCMPT::initLayout()
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
-	const d2d::ISprite* sprite = m_stage->getImage();
+	const d2d::Sprite* sprite = m_stage->getImage();
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->GetSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -108,11 +108,11 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
-	const d2d::ISprite* sprite = m_stage->getImage();
+	const d2d::Sprite* sprite = m_stage->getImage();
 	const d2d::ImageSprite* img_sprite 
 		= dynamic_cast<const d2d::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->GetSymbol().getImage();
+	const d2d::Image* img = img_sprite->GetSymbol().GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -121,7 +121,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
-	wxString ori_path = d2d::FilenameTools::getFilePathExceptExtension(img->GetFilepath());
+	wxString ori_path = d2d::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
 	eimage::ImageClip img_cut(*img->GetImageData());
 	const std::vector<Rect>& result = cut.GetResult();
 	for (int i = 0, n = result.size(); i < n; ++i) {

@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class GroupTreeCtrl;
 class SpriteSelection;
 
@@ -19,7 +19,7 @@ public:
 	class QuerySpriteVisitor : public IGroupTreeVisitor
 	{
 	public:
-		QuerySpriteVisitor(wxTreeCtrl* treectrl, ISprite* spr);
+		QuerySpriteVisitor(wxTreeCtrl* treectrl, Sprite* spr);
 		virtual ~QuerySpriteVisitor();
 
 		virtual bool VisitLeaf(wxTreeItemId id);
@@ -29,7 +29,7 @@ public:
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		ISprite* m_spr;
+		Sprite* m_spr;
 
 		wxTreeItemId m_id;
 
@@ -38,7 +38,7 @@ public:
 	class RemoveVisitor : public IGroupTreeVisitor
 	{
 	public:
-		RemoveVisitor(wxTreeCtrl* treectrl, ISprite* spr);
+		RemoveVisitor(wxTreeCtrl* treectrl, Sprite* spr);
 		virtual ~RemoveVisitor();
 
 		virtual bool VisitNonleaf(wxTreeItemId id);
@@ -49,7 +49,7 @@ public:
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		ISprite* m_spr;
+		Sprite* m_spr;
 
 		bool m_finish;
 
@@ -73,14 +73,14 @@ public:
 	class GetSpritesVisitor : public IGroupTreeVisitor
 	{
 	public:
-		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<ISprite*>& sprites);
+		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<Sprite*>& sprites);
 
 		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		std::vector<ISprite*>& m_sprites;
+		std::vector<Sprite*>& m_sprites;
 
 	}; // GetSpritesVisitor
 
@@ -91,12 +91,12 @@ public:
 
 		virtual bool VisitLeaf(wxTreeItemId id);
 
-		ISprite* GetFirstSprite() { return m_first; }
+		Sprite* GetFirstSprite() { return m_first; }
 
 	private:
 		wxTreeCtrl* m_treectrl;
 
-		ISprite* m_first;
+		Sprite* m_first;
 
 	}; // GetFirstSpriteVisitor
 

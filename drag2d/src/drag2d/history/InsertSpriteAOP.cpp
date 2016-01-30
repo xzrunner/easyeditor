@@ -2,7 +2,7 @@
 #include "AtomicType.h"
 #include "HistoryUtil.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/MultiSpritesImpl.h"
 
 #include "message/InsertSpriteSJ.h"
@@ -13,15 +13,15 @@
 namespace d2d
 {
 
-InsertSpriteAOP::InsertSpriteAOP(const std::vector<ISprite*>& sprites)
+InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprites)
 {	
-	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<ISprite>());
+	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());
 	m_sprites = sprites;
 }
 
 InsertSpriteAOP::~InsertSpriteAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
 }
 
 void InsertSpriteAOP::Undo()
@@ -38,7 +38,7 @@ void InsertSpriteAOP::Redo()
 	}
 }
 
-Json::Value InsertSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value InsertSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value val;
 	val["idx"] = HistoryUtil::StoreSpritesIndex(m_sprites, sprites);

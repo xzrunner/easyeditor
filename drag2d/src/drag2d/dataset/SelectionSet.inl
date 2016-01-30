@@ -59,9 +59,9 @@ inline void SelectionSet<T>::Traverse(IVisitor& visitor) const
 	std::vector<T*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)
 	{
-		bool hasNext;
-		visitor.Visit(*itr, hasNext);
-		if (!hasNext) break;
+		bool next;
+		visitor.Visit(*itr, next);
+		if (!next) break;
 	}
 }
 

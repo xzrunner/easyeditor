@@ -65,17 +65,17 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 	assert(rp->p3d);
 
-	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
+	d2d::Symbol* sym = static_cast<d2d::Symbol*>(symbol);
 	d2d::ColorTrans ct;
 	memcpy(&ct.multi, mul_col, sizeof(*mul_col));
 	memcpy(&ct.add, add_col, sizeof(*add_col));
-	ct.multi = cMul(ct.multi, rp->ct.multi);
-	ct.add = cAdd(ct.add, rp->ct.add);
+	ct.multi = col_mul(ct.multi, rp->ct.multi);
+	ct.add = col_add(ct.add, rp->ct.add);
 	// todo color trans
 
 	d2d::Matrix mt = rp->mat;
 	if (!rp->p3d->local_mode_draw) {
-		float* src = const_cast<float*>(mt.getElements());
+		float* src = const_cast<float*>(mt.GetElements());
 		src[0] = mat[0];
 		src[1] = mat[1];
 		src[4] = mat[2];
@@ -95,7 +95,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	// todo record
 	// 	AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 	// 	if (curr_record) {
-	// 		d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
+	// 		d2d::Vector fixed = d2d::Math2D::transVector(pos, _mt);
 	// 		curr_record->AddItem(symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
 	// 	}
 }
@@ -121,8 +121,8 @@ remove_func(p3d_particle* p, void* ud)
 static void
 update_srt_func(void* params, float x, float y, float scale) {
 	RenderParams* rp = static_cast<RenderParams*>(params);
-	rp->mat.translate(x, y);
-	rp->mat.scale(scale, scale);
+	rp->mat.Translate(x, y);
+	rp->mat.Scale(scale, scale);
 }
 
 static void

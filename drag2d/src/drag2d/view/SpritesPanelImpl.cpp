@@ -5,7 +5,7 @@
 #include "SpritesContainer.h"
 #include "IStageCanvas.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "message/subject_id.h"
 #include "message/ReorderSpriteSJ.h"
 #include "message/ReorderSpriteMostSJ.h"
@@ -44,7 +44,7 @@ SpritesPanelImpl::~SpritesPanelImpl()
 	m_container->Release();
 }
 
-void SpritesPanelImpl::TraverseSprites(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/,
+void SpritesPanelImpl::TraverseSprites(Visitor& visitor, DataTraverseType type/* = e_allExisting*/,
 									   bool order/* = true*/) const
 {
 	m_container->Traverse(visitor, type, order);
@@ -83,7 +83,7 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 		break;
 	case MSG_REMOVE_SPRITE:
 		{
-			ISprite* spr = (ISprite*)ud;
+			Sprite* spr = (Sprite*)ud;
 			m_container->Remove(spr);
 #ifdef OPEN_SCREEN_CACHE
 			SpatialIndex::Instance()->Remove(spr);

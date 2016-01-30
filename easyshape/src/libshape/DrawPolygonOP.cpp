@@ -19,7 +19,7 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 	{
 		d2d::InsertShapeSJ::Instance()->Insert(new PolygonShape(m_polyline));
 		m_polyline.clear();
-		m_currPos.setInvalid();
+		m_currPos.SetInvalid();
 	}
 
 	return false;

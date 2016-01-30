@@ -8,42 +8,42 @@ namespace d2d
 
 class Rect;
 
-class PointQueryVisitor : public IVisitor
+class PointQueryVisitor : public Visitor
 {
 public:
-	PointQueryVisitor(const Vector& pos, ISprite** result);
-	virtual void Visit(Object* object, bool& bFetchNext);
+	PointQueryVisitor(const Vector& pos, Sprite** result);
+	virtual void Visit(Object* object, bool& next);
 
 private:
 	const Vector& m_pos;
-	ISprite** m_result;
+	Sprite** m_result;
 
 }; // PointQueryVisitor
 
-class PointMultiQueryVisitor : public IVisitor
+class PointMultiQueryVisitor : public Visitor
 {
 public:
 	PointMultiQueryVisitor(const Vector& pos);
-	virtual void Visit(Object* object, bool& bFetchNext);
+	virtual void Visit(Object* object, bool& next);
 
-	const std::vector<ISprite*>& GetResult() const { return m_sprites; }
+	const std::vector<Sprite*>& GetResult() const { return m_sprites; }
 
 private:
 	const Vector& m_pos;
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 }; // PointMultiQueryVisitor
 
-class RectQueryVisitor : public IVisitor
+class RectQueryVisitor : public Visitor
 {
 public:
-	RectQueryVisitor(const Rect& rect, bool contain, std::vector<ISprite*>& result);
-	virtual void Visit(Object* object, bool& bFetchNext);
+	RectQueryVisitor(const Rect& rect, bool contain, std::vector<Sprite*>& result);
+	virtual void Visit(Object* object, bool& next);
 
 private:
 	const Rect& m_rect;
 	bool m_contain;
-	std::vector<ISprite*>& m_result;
+	std::vector<Sprite*>& m_result;
 
 }; // RectQueryVisitor
 

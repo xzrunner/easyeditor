@@ -11,7 +11,7 @@ namespace d2d
 {
 
 class ListItem;
-class IVisitor;
+class Visitor;
 
 class VerticalImageList : public wxVListBox
 {
@@ -29,7 +29,7 @@ public:
 	virtual void Remove(int index);
 	virtual void Swap(int i0, int i1);
 
-	void Traverse(IVisitor& visitor) const;
+	void Traverse(Visitor& visitor) const;
 
 	void SetFileter(const std::string& filter) {
 		m_name = filter;

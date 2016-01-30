@@ -21,7 +21,7 @@ public:
 	//
 	//	interface d2d::ILibraryPage
 	//
-	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual bool IsHandleSymbol(d2d::Symbol* symbol) const;
 
 	void UpdateStatusFromLayer();
 

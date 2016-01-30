@@ -33,13 +33,13 @@ void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
 	switch (type)
 	{
 	case libmodeling::Body::e_static:
-		cFace.set(0.5f, 0.9f, 0.5f, 0.2f);
+		cFace.Set(0.5f, 0.9f, 0.5f, 0.2f);
 		break;
 	case libmodeling::Body::e_kinematic:
-		cFace.set(0.5f, 0.5f, 0.9f, 0.2f);
+		cFace.Set(0.5f, 0.5f, 0.9f, 0.2f);
 		break;
 	case libmodeling::Body::e_dynamic:
-		cFace.set(0.5f, 0.5f, 0.3f, 0.2f);
+		cFace.Set(0.5f, 0.5f, 0.3f, 0.2f);
 		break;
 	}
 
@@ -71,7 +71,7 @@ void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
 
 void DrawUtils::getFixtureColor(DrawType type, d2d::Colorf& cFace, d2d::Colorf& cEdge)
 {
-	cFace.set(0.6f, 0.35f, 0.6f, 0.5f);
+	cFace.Set(0.6f, 0.35f, 0.6f, 0.5f);
 	switch (type)
 	{
 	case e_mouseOn:

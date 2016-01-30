@@ -22,7 +22,7 @@ Particle3DBuilder::~Particle3DBuilder()
 	}
 }
 
-void Particle3DBuilder::Traverse(d2d::IVisitor& visitor) const
+void Particle3DBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	std::map<const eparticle3d::Symbol*, const PackParticle3D*>::const_iterator 
 		itr = m_map_data.begin();
@@ -104,13 +104,13 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 		comp.angle_var = p_symbol.angle_var;
 
 		d2d::Colorf d2d_mul(p_symbol.col_mul.r, p_symbol.col_mul.g, p_symbol.col_mul.b, p_symbol.col_mul.a);
-		comp.col_mul = d2d::trans_color2int(d2d_mul, d2d::PT_ARGB);
+		comp.col_mul = d2d::color2int(d2d_mul, d2d::PT_ARGB);
 		d2d::Colorf d2d_add(p_symbol.col_add.r, p_symbol.col_add.g, p_symbol.col_add.b, p_symbol.col_add.a);
-		comp.col_add = d2d::trans_color2int(d2d_add, d2d::PT_ARGB);
+		comp.col_add = d2d::color2int(d2d_add, d2d::PT_ARGB);
 		comp.alpha_start = p_symbol.alpha_start * 255.0f + 0.5f;
 		comp.alpha_end = p_symbol.alpha_end * 255.0f + 0.5f;
 
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(p_symbol.ud);
+		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(p_symbol.ud);
 		comp.node = PackNodeFactory::Instance()->Create(symbol);
 
 		ps->components.push_back(comp);

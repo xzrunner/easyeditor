@@ -75,7 +75,7 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 	}
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
@@ -84,11 +84,11 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
+			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->GetImage();
 			int width, height;
 			d2d::Vector center;
 			float angle;
@@ -98,22 +98,22 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 				continue;
 			}
 
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 			sprite->SetTransform(center, angle);
 			ss.DrawSprite(sprite, true, width, height);
 
 			sprite->Release();
 			symbol->Release();
 
-			//wxString dir = d2d::FilenameTools::getFileDir(filepath);
-			//wxString name = d2d::FilenameTools::getFilename(filepath);
+			//wxString dir = d2d::FileHelper::getFileDir(filepath);
+			//wxString name = d2d::FileHelper::getFilename(filepath);
  		//	wxString outpath = dir + "\\test_" + name + ".png";
  		//	ss.SaveToFile(outpath.ToStdString(), width, height);
 
 			ss.SaveToFile(filepath, width, height);
 
 			// output info
-			wxString path = d2d::FilenameTools::getRelativePath(dir, filepath);
+			wxString path = d2d::FileHelper::GetRelativePath(dir, filepath);
 			fout << path << " " << center.x << " " << center.y << " " << angle << "\n";
 		}
 	}
@@ -132,7 +132,7 @@ bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 	raw.CreateBorderConvexHull();
 
 	d2d::Vector bound[4];
-	bool is_rotate = d2d::MinBoundingBox::Implement(raw.GetConvexHull(), bound);
+	bool is_rotate = d2d::MinBoundingBox::Do(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
 	center.x -= image->GetOriginWidth() * 0.5f;
@@ -154,11 +154,11 @@ bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 		const d2d::Vector& e = bound[left_idx == 3 ? 0 : left_idx + 1];
 		d2d::Vector right = s;
 		right.x += 1;
-		angle = -d2d::Math::getAngle(s, e, right);
-		center = d2d::Math::rotateVector(center, angle);
+		angle = -d2d::Math2D::GetAngle(s, e, right);
+		center = d2d::Math2D::RotateVector(center, angle);
 
-		width = std::ceil(d2d::Math::getDistance(s, e));
-		height = std::ceil(d2d::Math::getDistance(e, bound[(left_idx+2)%4]));
+		width = std::ceil(d2d::Math2D::GetDistance(s, e));
+		height = std::ceil(d2d::Math2D::GetDistance(e, bound[(left_idx+2)%4]));
 	} else {
 		angle = 0;
 	}

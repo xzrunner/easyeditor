@@ -54,7 +54,7 @@ private:
 private:
 	void Clear();
 
-	void OnAddChild(wxCommandEvent& event, d2d::ISymbol* symbol);
+	void OnAddChild(wxCommandEvent& event, d2d::Symbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:

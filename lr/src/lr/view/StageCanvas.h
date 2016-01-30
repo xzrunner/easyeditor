@@ -21,7 +21,7 @@ protected:
 
 private:
 	void DrawSprites() const;
-	void DrawSprite(d2d::ISprite* spr, bool draw_edge) const;
+	void DrawSprite(d2d::Sprite* spr, bool draw_edge) const;
 
 	void DrawRegion() const;
 

@@ -38,13 +38,13 @@ void NumberImages::Trigger(const std::string& src_dir, const std::string& dst_fi
 	std::ofstream fout(dst_file.c_str());
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		wxString filepath = files[i];
-		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 			continue;
 		}
-		filepath = d2d::FilenameTools::getRelativePath(src_dir, filepath);
+		filepath = d2d::FileHelper::GetRelativePath(src_dir, filepath);
 		fout << filepath.Lower() << "\n";
 	}
 

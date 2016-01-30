@@ -20,7 +20,7 @@ TextureBuilder::~TextureBuilder()
 	}
 }
 
-void TextureBuilder::Traverse(d2d::IVisitor& visitor) const
+void TextureBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::const_iterator 
 		itr = m_map_data.begin();
@@ -35,7 +35,7 @@ void TextureBuilder::Traverse(d2d::IVisitor& visitor) const
 
 bool TextureBuilder::CanHandle(const etexture::Symbol* symbol) const
 {
-	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
+	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -66,7 +66,7 @@ const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
 
 void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 {
-	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
+	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
 		throw d2d::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
 	}
@@ -88,7 +88,7 @@ void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 	{
 		PackPicture::Quad quad;
 
-		quad.img = material->GetImage()->getImage();
+		quad.img = material->GetImage()->GetImage();
 
 		for (int j = 0; j < 3; ++j) {
 			quad.texture_coord[j] = texcoords[i+j];

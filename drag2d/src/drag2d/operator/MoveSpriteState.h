@@ -10,7 +10,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class SpriteSelection;
 
 class MoveSpriteState : public IArrangeSpriteState
@@ -22,7 +22,7 @@ public:
 	virtual	bool OnMouseMove(const Vector& pos);
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
 	Vector m_center;
 	std::vector<Vector> m_offset;

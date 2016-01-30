@@ -5,7 +5,7 @@ namespace libcoco
 namespace epd
 {
 
-TPParser::TPParser(const std::vector<const d2d::ISymbol*>& symbols,
+TPParser::TPParser(const std::vector<const d2d::Symbol*>& symbols,
 				   const TextureMgr& tex_mgr)
 	: m_tex_mgr(tex_mgr)
 	, m_tex_size(0)
@@ -23,9 +23,9 @@ void TPParser::Parser()
 	m_tex_size = idx;
 }
 
-TPParser::Picture* TPParser::FindPicture(const d2d::ISymbol* symbol) const
+TPParser::Picture* TPParser::FindPicture(const d2d::Symbol* symbol) const
 {
-	std::map<const d2d::ISymbol*, TPParser::Picture*>::const_iterator itr 
+	std::map<const d2d::Symbol*, TPParser::Picture*>::const_iterator itr 
 		= m_map_symbol2picture.find(symbol);
 	if (itr == m_map_symbol2picture.end()) {
 		return NULL;
@@ -38,7 +38,7 @@ void TPParser::DebugInfo() const
 {
 	std::ofstream fout("d:/zz_debug.txt");
 
-	std::map<const d2d::ISymbol*, Picture*>::const_iterator itr 
+	std::map<const d2d::Symbol*, Picture*>::const_iterator itr 
 		= m_map_symbol2picture.begin();
 	for ( ; itr != m_map_symbol2picture.end(); ++itr) {
 		fout << itr->first->GetFilepath() << "\n";
@@ -58,7 +58,7 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		const TPAdapter::Entry& entry = frames[i];
 
 		// find symbol
-		const d2d::ISymbol* symbol = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
+		const d2d::Symbol* symbol = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
 		if (!symbol) {
 			continue;
 		}
@@ -85,10 +85,10 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 				down = entry.frame.y + entry.frame.w;
 			}
 
-			picture->scr[0].set(right, up);
-			picture->scr[1].set(left, up);
-			picture->scr[2].set(left, down);
-			picture->scr[3].set(right, down);
+			picture->scr[0].Set(right, up);
+			picture->scr[1].Set(left, up);
+			picture->scr[2].Set(left, down);
+			picture->scr[3].Set(right, down);
 		}
 		else
 		{
@@ -102,10 +102,10 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 				down = entry.frame.y + entry.frame.h;
 			}
 
-			picture->scr[0].set(left, up);
-			picture->scr[1].set(left, down);
-			picture->scr[2].set(right, down);
-			picture->scr[3].set(right, up);
+			picture->scr[0].Set(left, up);
+			picture->scr[1].Set(left, down);
+			picture->scr[2].Set(right, down);
+			picture->scr[3].Set(right, up);
 		}
 
 		picture->offset.x = (entry.sprite_source_size.x + entry.sprite_source_size.w * 0.5f) - entry.src_width * 0.5f;

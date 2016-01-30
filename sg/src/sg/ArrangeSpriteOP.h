@@ -19,8 +19,8 @@ public:
 protected:
 	virtual void onDirectionKeyDown(d2d::DirectionType type);
 
-	virtual void PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const;
-	virtual void CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const;
+	virtual void PasteSprToClipboard(const d2d::Sprite* spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(d2d::Sprite* spr, const Json::Value& value) const;
 
 }; // ArrangeSpriteOP
 

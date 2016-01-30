@@ -17,7 +17,7 @@ P3dSprBuilder::~P3dSprBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
-void P3dSprBuilder::Traverse(d2d::IVisitor& visitor) const
+void P3dSprBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;

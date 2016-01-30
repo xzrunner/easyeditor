@@ -26,17 +26,17 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			wxString ext = d2d::FilenameTools::getExtension(filename);
+			wxString ext = d2d::FileHelper::GetExtension(filename);
 			if (ext == "png")
 			{
 				d2d::Snapshoot ss;
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
+				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
 				ss.OutputToImageFile(symbol, filename.ToStdString());
 				symbol->Release();
 			}
 			else
 			{
-				wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
+				wxString fixed = d2d::FileHelper::GetFilenameAddTag(dlg.GetPath(), m_filetag, "json");
 				m_curr_filename = fixed;
 				m_task->Store(fixed);
 			}
@@ -56,8 +56,8 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
 		stage->SetBackground(sprite);
 		sprite->Release();

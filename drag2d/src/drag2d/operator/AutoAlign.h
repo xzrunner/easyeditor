@@ -8,7 +8,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class MultiSpritesImpl;
 
 class AutoAlign
@@ -16,8 +16,8 @@ class AutoAlign
 public:
 	AutoAlign(MultiSpritesImpl* sprites_impl);
 
-	void Align(const std::vector<ISprite*>& sprites);
-	void Align(const ISprite* src, ISprite* dst);
+	void Align(const std::vector<Sprite*>& sprites);
+	void Align(const Sprite* src, Sprite* dst);
 
 	void Draw() const;
 

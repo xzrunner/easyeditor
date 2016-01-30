@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class ClearSpriteSJ : public Subject
 {

@@ -6,15 +6,15 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class SpriteCtrlNode
 {
 public:
 	
-	static void GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8]);
+	static void GetSpriteCtrlNodes(const Sprite* sprite, Vector nodes[8]);
 
-	static void GetSpriteCtrlNodesExt(const ISprite* sprite, Vector nodes[4]);
+	static void GetSpriteCtrlNodesExt(const Sprite* sprite, Vector nodes[4]);
 
 public:
  	// 0 4 1
@@ -38,10 +38,10 @@ public:
  		Type type;
  
  		void setInvalid() {
- 			pos.setInvalid();
+ 			pos.SetInvalid();
  		}
  		bool isValid() {
- 			return pos.isValid();
+ 			return pos.IsValid();
  		}
  	};
 

@@ -55,13 +55,13 @@ void TransToGif::Run(int argc, char *argv[])
 void TransToGif::Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(srcdir, files);
+	d2d::FileHelper::FetchAllFiles(srcdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
 		{
 			Json::Value value;
 			Json::Reader reader;
@@ -75,12 +75,12 @@ void TransToGif::Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::s
 			if (name.empty()) {
 				continue;
 			}
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 			int max_frame = anim->getMaxFrameIndex();
-			int width = symbol->GetSize().xLength();
-			int height = symbol->GetSize().yLength();
+			int width = symbol->GetSize().Width();
+			int height = symbol->GetSize().Height();
 			AnimatedGifSaver saver(width, height);
 			for (int i = 0; i < max_frame; ++i)
 			{

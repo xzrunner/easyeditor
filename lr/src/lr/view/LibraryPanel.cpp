@@ -57,9 +57,9 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 		Json::Value item_val = layer_val[item_idx++];
 		while (!item_val.isNull()) {
 			std::string item_path = item_val.asString();
-			std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, item_path);
+			std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, item_path);
 			try {
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(symbol->GetFilepath());
 				list->Insert(symbol);
 				symbol->Release();
@@ -77,10 +77,10 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 	{
 		d2d::LibraryList* list = m_pages[i]->GetList();
 		int j = 0;
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(list->GetItem(j++));
+		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(list->GetItem(j++));
 		while (symbol) {
-			value[i][j-1] = d2d::FilenameTools::getRelativePath(dir, symbol->GetFilepath()).ToStdString();
-			symbol = static_cast<d2d::ISymbol*>(list->GetItem(j++));
+			value[i][j-1] = d2d::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+			symbol = static_cast<d2d::Symbol*>(list->GetItem(j++));
 		}
 	}
 }
@@ -106,17 +106,17 @@ void LibraryPanel::LoadSymbolFromLayer()
 	{
 		LibraryPage* page = static_cast<LibraryPage*>(m_pages[i]);
 
- 		std::vector<d2d::ISprite*> sprites;
- 		page->GetLayer()->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
- 		std::set<d2d::ISymbol*> symbol_set;
+ 		std::vector<d2d::Sprite*> sprites;
+ 		page->GetLayer()->TraverseSprite(d2d::FetchAllVisitor<d2d::Sprite>(sprites), true);
+ 		std::set<d2d::Symbol*> symbol_set;
  		for (int i = 0, n = sprites.size(); i < n; ++i) {
- 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(&sprites[i]->GetSymbol());
+ 			d2d::Symbol* symbol = const_cast<d2d::Symbol*>(&sprites[i]->GetSymbol());
  			symbol_set.insert(symbol);
  		}
  
- 		std::set<d2d::ISymbol*>::iterator itr = symbol_set.begin();
+ 		std::set<d2d::Symbol*>::iterator itr = symbol_set.begin();
  		for ( ; itr != symbol_set.end(); ++itr) {
- 			d2d::ISymbol* symbol = *itr;
+ 			d2d::Symbol* symbol = *itr;
  			symbol->RefreshThumbnail(symbol->GetFilepath());
  			page->GetList()->Insert(symbol);
  		}
@@ -218,8 +218,8 @@ void LibraryPanel::Refresh()
 {
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
 
-	std::vector<d2d::ISprite*> sprites;
-	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
+	std::vector<d2d::Sprite*> sprites;
+	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::Sprite>(sprites), true);
 
 	// stage
 	m_stage->GetSpriteSelection()->Clear();
@@ -276,8 +276,8 @@ bool LibraryPanel::IsCurrLevelLayer()
 void LibraryPanel::GetAllPathName(std::vector<std::string>& names) const
 {
 	Layer* layer = static_cast<LibraryPage*>(m_path_page)->GetLayer();
-	std::vector<d2d::IShape*> shapes;
-	layer->TraverseShape(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	std::vector<d2d::Shape*> shapes;
+	layer->TraverseShape(d2d::FetchAllVisitor<d2d::Shape>(shapes));
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		names.push_back(shapes[i]->name);
 	}

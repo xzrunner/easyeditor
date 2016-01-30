@@ -110,7 +110,7 @@ bool StagePanel::Update(int version)
 	return ret;
 }
 
-void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
+void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
@@ -135,7 +135,7 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 	}
 }
 
-void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
+void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType type) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
 		type == d2d::DT_ALL ||
@@ -300,17 +300,17 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case d2d::MSG_REMOVE_SPRITE:
-		RemoveSprite((d2d::ISprite*)ud);
+		RemoveSprite((d2d::Sprite*)ud);
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		ClearSprite();
 		break;
 
 	case d2d::MSG_REMOVE_SHAPE:
-		RemoveShape((d2d::IShape*)ud);
+		RemoveShape((d2d::Shape*)ud);
 		break;
 	case d2d::MSG_INSERT_SHAPE:
-		InsertShape((d2d::IShape*)ud);
+		InsertShape((d2d::Shape*)ud);
 		break;
 	case d2d::MSG_CLEAR_SHAPE:
 		ClearShape();
@@ -318,7 +318,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::ReorderSprite(d2d::ISprite* spr, bool up)
+void StagePanel::ReorderSprite(d2d::Sprite* spr, bool up)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -330,7 +330,7 @@ void StagePanel::ReorderSprite(d2d::ISprite* spr, bool up)
 	}
 }
 
-void StagePanel::ReorderSpriteMost(d2d::ISprite* spr, bool up)
+void StagePanel::ReorderSpriteMost(d2d::Sprite* spr, bool up)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -342,7 +342,7 @@ void StagePanel::ReorderSpriteMost(d2d::ISprite* spr, bool up)
 	}
 }
 
-void StagePanel::InsertSprite(d2d::ISprite* spr, int idx)
+void StagePanel::InsertSprite(d2d::Sprite* spr, int idx)
 {
 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
 	if (layer->InsertSprite(spr, idx)) {
@@ -363,7 +363,7 @@ void StagePanel::InsertSprite(d2d::ISprite* spr, int idx)
 	}
 }
 
-void StagePanel::RemoveSprite(d2d::ISprite* spr)
+void StagePanel::RemoveSprite(d2d::Sprite* spr)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -388,7 +388,7 @@ void StagePanel::ClearSprite()
 	}
 }
 
-void StagePanel::RemoveShape(d2d::IShape* shape)
+void StagePanel::RemoveShape(d2d::Shape* shape)
 {
 	bool dirty = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
@@ -404,7 +404,7 @@ void StagePanel::RemoveShape(d2d::IShape* shape)
 	}
 }
 
-void StagePanel::InsertShape(d2d::IShape* shape)
+void StagePanel::InsertShape(d2d::Shape* shape)
 {
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
 	bool dirty = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);

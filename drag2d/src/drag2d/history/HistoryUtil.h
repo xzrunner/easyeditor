@@ -6,13 +6,13 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class HistoryUtil
 {
 public:
-	static Json::Value StoreSpritesIndex(const std::vector<ISprite*>& myself, 
-		const std::vector<ISprite*>& other);
+	static Json::Value StoreSpritesIndex(const std::vector<Sprite*>& myself, 
+		const std::vector<Sprite*>& other);
 
 }; // HistoryUtil
 

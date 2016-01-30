@@ -7,27 +7,27 @@ namespace d2d
 template <typename T>
 ReloadTextureVisitor<T>::ReloadTextureVisitor()
 {
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadBegin();
+	if (Config::Instance()->IsUseDTex()) {
+		DrawCallBatching::Instance()->ReloadBegin();
 	}
 }
 
 template <typename T>
 ReloadTextureVisitor<T>::~ReloadTextureVisitor()
 {
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->ReloadEnd();
+	if (Config::Instance()->IsUseDTex()) {
+		DrawCallBatching::Instance()->ReloadEnd();
 	}
 }
 
 template <typename T>
-void ReloadTextureVisitor<T>::Visit(Object* object, bool& bFetchNext)
+void ReloadTextureVisitor<T>::Visit(Object* object, bool& next)
 {
 	T* item = dynamic_cast<T*>(object);
 	if (item) {
 		item->ReloadTexture();
 	}
-	bFetchNext = true;
+	next = true;
 }
 
 }

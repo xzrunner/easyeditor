@@ -30,7 +30,7 @@ void ShapeToBin::Pack(const PackShape* shape, uint8_t** ptr)
 	uint8_t shape_type = shape->type;
 	pack(shape_type, ptr);
 
-	uint32_t font_color = d2d::trans_color2int(shape->color, d2d::PT_RGBA);
+	uint32_t font_color = d2d::color2int(shape->color, d2d::PT_RGBA);
 	pack(font_color, ptr);
 
 	if (shape->vertices.size() > USHRT_MAX) {

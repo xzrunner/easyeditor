@@ -6,19 +6,19 @@
 namespace d2d
 {
 
-class ISymbol;
+class Symbol;
 
 class DialogStageCanvas : public OrthoCanvas
 {
 public:
 	DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 
-		ISymbol* symbol, wxGLContext* glctx);
+		Symbol* symbol, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
 
 private:
-	ISymbol* m_symbol;
+	Symbol* m_symbol;
 
 }; // DialogStageCanvas
 

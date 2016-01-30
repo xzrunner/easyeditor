@@ -12,7 +12,7 @@ class IPathfinding
 {
 public:
 	virtual ~IPathfinding() {}
-	virtual void DisableRegion(const d2d::ISprite* spr, bool disable) = 0;	
+	virtual void DisableRegion(const d2d::Sprite* spr, bool disable) = 0;	
 	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end) = 0;
 	virtual void DebugDraw() const = 0;
 

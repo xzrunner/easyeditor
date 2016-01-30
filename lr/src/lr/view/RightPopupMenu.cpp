@@ -123,8 +123,8 @@ void RightPopupMenu::CreateLayerMoveMenu(wxMenu& menu)
 
 void RightPopupMenu::HandleShapeMenu(int id)
 {
-	std::vector<d2d::ISprite*> selected;
-	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	std::vector<d2d::Sprite*> selected;
+	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(selected));
 	if (!selected.empty()) {
 		std::string cmd = "easyshape_new.exe " + selected[0]->GetSymbol().GetFilepath();
 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
@@ -149,7 +149,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 		if (dir == 0) { dir = 8; }
 		else if (dir == 9) { dir = 1; }
 
-		d2d::ISymbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
+		d2d::Symbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
 		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 
 
@@ -163,7 +163,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 	{
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
 		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 	}
 }
@@ -194,10 +194,10 @@ void RightPopupMenu::HandleMoveToLayerMenu(int id)
 	d2d::Layer* to = from->GetLayerMgr()->GetLayer(idx);
 	
 	d2d::SpriteSelection* selection = m_stage->GetSpriteSelection();
-	std::vector<d2d::ISprite*> sprites;
-	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* spr = sprites[i];
+		d2d::Sprite* spr = sprites[i];
 		from->RemoveSprite(spr);
 		to->Insert(spr);
 	}
@@ -209,9 +209,9 @@ void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 
 	CharacterFileName name(filepath);
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files, d2d::FileNameParser::e_complex);
+	d2d::FileHelper::FetchAllFiles(dir, files, d2d::FileType::e_complex);
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{

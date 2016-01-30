@@ -29,11 +29,11 @@ void TranslateSpriteState::OnMouseRelease(const d2d::Vector& pos)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
 	m_anchor_mgr->OnSprPosChanged(sprite);
-	bFetchNext = true;
+	next = true;
 }
 
 }

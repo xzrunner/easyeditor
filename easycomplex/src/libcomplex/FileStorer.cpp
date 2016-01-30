@@ -13,14 +13,14 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 	value["name"] = symbol->name;
 	value["tag"] = symbol->tag;
 
-	value["xmin"] = symbol->m_clipbox.xMin;
-	value["xmax"] = symbol->m_clipbox.xMax;
-	value["ymin"] = symbol->m_clipbox.yMin;
-	value["ymax"] = symbol->m_clipbox.yMax;
+	value["xmin"] = symbol->m_clipbox.xmin;
+	value["xmax"] = symbol->m_clipbox.xmax;
+	value["ymin"] = symbol->m_clipbox.ymin;
+	value["ymax"] = symbol->m_clipbox.ymax;
 
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	wxString dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
@@ -39,14 +39,14 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 	value["name"] = symbol->name;
 	value["tag"] = symbol->tag;
 
-	value["xmin"] = symbol->m_clipbox.xMin;
-	value["xmax"] = symbol->m_clipbox.xMax;
-	value["ymin"] = symbol->m_clipbox.yMin;
-	value["ymax"] = symbol->m_clipbox.yMax;
+	value["xmin"] = symbol->m_clipbox.xmin;
+	value["xmax"] = symbol->m_clipbox.xmax;
+	value["ymin"] = symbol->m_clipbox.ymin;
+	value["ymax"] = symbol->m_clipbox.ymax;
 
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	wxString dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
@@ -66,23 +66,23 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 void FileStorer::CenterSymbol(Symbol* symbol)
 {
 	d2d::Vector offset;
-	offset.x = symbol->m_rect.xCenter();
-	offset.y = symbol->m_rect.yCenter();
+	offset.x = symbol->m_rect.CenterX();
+	offset.y = symbol->m_rect.CenterY();
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = symbol->m_sprites[i];
+		d2d::Sprite* sprite = symbol->m_sprites[i];
 		sprite->Translate(-offset);
 	}
-	symbol->m_rect.translate(-offset);
+	symbol->m_rect.Translate(-offset);
 }
 
-Json::Value FileStorer::Store(d2d::ISprite* sprite, const wxString& dir)
+Json::Value FileStorer::Store(d2d::Sprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::ISymbol& symbol = sprite->GetSymbol();
+	const d2d::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+	value["filepath"] = d2d::FileHelper::GetRelativePath(dir,
 		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();

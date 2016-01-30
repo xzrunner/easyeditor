@@ -8,13 +8,13 @@
 //
 //class EditPanel;
 //class LibraryPanel;
-//class ISprite;
+//class Sprite;
 //
 //class EJPreviewDialog : public wxDialog
 //{
 //public:
 //	EJPreviewDialog(wxWindow* parent,
-//		const std::vector<const ISprite*>& sprites);
+//		const std::vector<const Sprite*>& sprites);
 //	~EJPreviewDialog();
 //
 //private:
@@ -24,7 +24,7 @@
 //	EditPanel* m_stage;
 //	LibraryPanel* m_library;
 //
-//	const std::vector<const ISprite*>& m_sprites;
+//	const std::vector<const Sprite*>& m_sprites;
 //
 //}; // EJPreviewDialog
 //

@@ -4,7 +4,7 @@
 
 #include "dataset/ScriptsSymbol.h"
 #include "dataset/SymbolMgr.h"
-#include "common/FileNameParser.h"
+#include "common/FileType.h"
 #include "common/Exception.h"
 #include "view/IStageCanvas.h"
 
@@ -18,7 +18,7 @@ LibraryScriptsPage::LibraryScriptsPage(wxWindow* parent)
 	m_list->SetFileter("scripts");
 }
 
-bool LibraryScriptsPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryScriptsPage::IsHandleSymbol(Symbol* symbol) const
 {
 	return dynamic_cast<ScriptsSymbol*>(symbol) != NULL;
 }
@@ -30,7 +30,7 @@ bool LibraryScriptsPage::LoadFromConfig()
 
 void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = FileNameParser::getFileTag(FileNameParser::e_scripts);
+	wxString filter = FileType::GetTag(FileType::e_scripts);
 	filter = wxT("*_") + filter + wxT(".lua");
 	wxFileDialog dlg(this, wxT("导入scripts文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
@@ -42,7 +42,7 @@ void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 		{
 			try {
 				std::string filepath = filenames[i].ToStdString();
-				ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
+				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(filepath);
 				m_list->Insert(symbol);
 				symbol->Release();

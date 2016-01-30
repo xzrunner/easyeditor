@@ -36,7 +36,7 @@ Shader* FileIO::LoadShader(const wxString& filepath, d2d::IStageCanvas* canvas,
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath);
+	wxString dir = d2d::FileHelper::GetFileDir(filepath);
 	Shader* shader = LoadShader(dir, value, toolbar, is_2d);
 	if (is_2d) {
 		d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();

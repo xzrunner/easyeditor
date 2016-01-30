@@ -45,7 +45,7 @@ void Code::ResolveUI(const Symbol& symbol)
 			const Symbol& parent_symbol = parent.symbol;
 			for (int i = 0, n = parent_symbol.m_sprites.size(); i < n; ++i)
 			{
-				d2d::ISprite* child = parent_symbol.m_sprites[i];
+				d2d::Sprite* child = parent_symbol.m_sprites[i];
 				if (child->name.empty() || child->name[0] == '_') {
 					continue;
 				}
@@ -102,7 +102,7 @@ void Code::ResolveText(const Symbol& symbol)
  		const Symbol* parent = buffer.front(); buffer.pop();
  		for (int i = 0, n = parent->m_sprites.size(); i < n; ++i)
  		{
- 			d2d::ISprite* child = parent->m_sprites[i];
+ 			d2d::Sprite* child = parent->m_sprites[i];
  			if (child->name.empty() || child->name[0] == '_') {
  				continue;
  			}

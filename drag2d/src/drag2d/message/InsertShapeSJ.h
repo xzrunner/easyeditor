@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class IShape;
+class Shape;
 
 class InsertShapeSJ : public Subject
 {
 public:
-	void Insert(d2d::IShape* shape, Observer* except = NULL);
+	void Insert(Shape* shape, Observer* except = NULL);
 
 	static InsertShapeSJ* Instance();
 

@@ -1,14 +1,14 @@
 #include "OffsetSpriteState.h"
 
 #include "common/Matrix.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "history/OffsetSpriteAOP.h"
 #include "message/panel_msg.h"
 
 namespace d2d
 {
 
-OffsetSpriteState::OffsetSpriteState(ISprite* sprite)
+OffsetSpriteState::OffsetSpriteState(Sprite* sprite)
 {
 	m_sprite = sprite;
 	m_sprite->Retain();
@@ -23,14 +23,14 @@ OffsetSpriteState::~OffsetSpriteState()
 
 void OffsetSpriteState::OnMouseRelease(const Vector& pos)
 {
-	Vector new_offset = Math::rotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
+	Vector new_offset = Math2D::RotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
 	AbstractAtomicOP* aop = new OffsetSpriteAOP(m_sprite, new_offset, m_old_offset);
 	EditAddRecordSJ::Instance()->Add(aop);
 }
 
 bool OffsetSpriteState::OnMouseDrag(const Vector& pos)
 {
-	Vector offset = Math::rotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
+	Vector offset = Math2D::RotateVector(pos - m_sprite->GetCenter(), -m_sprite->GetAngle());
 	m_sprite->SetOffset(offset);
 	return true;
 }

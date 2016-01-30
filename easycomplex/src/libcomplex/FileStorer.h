@@ -16,7 +16,7 @@ public:
 
 private:
 	static void CenterSymbol(Symbol* symbol);
-	static Json::Value Store(d2d::ISprite* sprite, const wxString& dir);
+	static Json::Value Store(d2d::Sprite* sprite, const wxString& dir);
 
 }; // FileStorer
 

@@ -22,7 +22,7 @@ bool PreviewOP::OnKeyDown(int keyCode)
 	if (keyCode == WXK_SPACE)
 	{
 		m_settings.isStop = !m_settings.isStop;
-		m_control.reset();
+		m_control.Reset();
 	}
 
 	return false;

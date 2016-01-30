@@ -12,7 +12,7 @@ namespace d2d
 class DrawSelectRectOP : public ZoomViewOP
 {
 public:
-	DrawSelectRectOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	DrawSelectRectOP(wxWindow* wnd, EditPanelImpl* stage, 
 		bool bOpenRightTap = true);
 	
 	virtual bool OnMouseLeftDown(int x, int y);

@@ -10,7 +10,7 @@ DrawPolylineOP::DrawPolylineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool is
 	m_cursor = wxCursor(wxCURSOR_RIGHT_ARROW);
 
 	m_isClosed = isClosed;
-	m_currPos.setInvalid();
+	m_currPos.SetInvalid();
 }
 
 bool DrawPolylineOP::OnMouseLeftDown(int x, int y)
@@ -34,7 +34,7 @@ bool DrawPolylineOP::OnMouseRightDown(int x, int y)
 	if (!m_polyline.empty())
 	{
 		m_polyline.pop_back();
-		if (m_polyline.empty()) m_currPos.setInvalid();
+		if (m_polyline.empty()) m_currPos.SetInvalid();
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -74,15 +74,15 @@ bool DrawPolylineOP::OnDraw() const
 
 	if (!m_polyline.empty())
 	{
-		if (m_currPos.isValid())
+		if (m_currPos.IsValid())
 		{
 			m_polyline.push_back(m_currPos);
-			d2d::PrimitiveDraw::drawPolyline(m_polyline, d2d::Colorf(0, 0, 0), false, 2);
+			d2d::PrimitiveDraw::DrawPolyline(m_polyline, d2d::Colorf(0, 0, 0), false, 2);
 			m_polyline.pop_back();
 		}
 		else
 		{
-			d2d::PrimitiveDraw::drawPolyline(m_polyline, d2d::Colorf(0, 0, 0), false, 2);
+			d2d::PrimitiveDraw::DrawPolyline(m_polyline, d2d::Colorf(0, 0, 0), false, 2);
 		}
 	}
 
@@ -94,7 +94,7 @@ bool DrawPolylineOP::Clear()
 	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_polyline.clear();
-	m_currPos.setInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }

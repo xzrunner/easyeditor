@@ -15,8 +15,8 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPane
 d2d::IArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(d2d::SpriteSelection* selection, 
 															   const d2d::Vector& first_pos) const
 {
-	std::vector<d2d::ISprite*> sprites;
-	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	if (sprites.size() == 1 && dynamic_cast<eparticle3d::Sprite*>(sprites[0])) {
 		return new SphereRotateState(m_stage, first_pos, static_cast<eparticle3d::Sprite*>(sprites[0])->GetDir());
 	} else {

@@ -23,9 +23,9 @@ namespace epd
 class CocoPacker
 {
 public:
-	CocoPacker(const std::vector<const d2d::ISymbol*>& symbols, 
+	CocoPacker(const std::vector<const d2d::Symbol*>& symbols, 
 		const TextureMgr& tex_mgr);
-	CocoPacker(const std::vector<const d2d::ISymbol*>& symbols, 
+	CocoPacker(const std::vector<const d2d::Symbol*>& symbols, 
 		const TextureMgr& tex_mgr, const std::string& img_id_file, 
 		float scale = 1.0f);
 	~CocoPacker();
@@ -60,22 +60,22 @@ private:
 	int ParserTerrain2D(const eterrain2d::Sprite* sprite);
 	int ParserTexture(const etexture::Sprite* sprite);
 
-	void ParserSymbolBase(const d2d::ISymbol* symbol);
+	void ParserSymbolBase(const d2d::Symbol* symbol);
 
-	void ParserSpriteForComponent(const d2d::ISprite* sprite, 
+	void ParserSpriteForComponent(const d2d::Sprite* sprite, 
 		std::vector<int>& ids, std::map<int, std::vector<std::string> >& unique, 
 		std::vector<std::pair<int, std::string> >& order);
-	void ParserSpriteForFrame(const d2d::ISprite* sprite, int index,
+	void ParserSpriteForFrame(const d2d::Sprite* sprite, int index,
 		const std::vector<int>& ids, const std::vector<std::pair<int, std::string> >& order);
-	void ParserSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order,
+	void ParserSpriteForFrame(const d2d::Sprite* sprite, const std::vector<std::pair<int, std::string> >& order,
 		const std::map<int, int>& map_id2idx);
-	void ParserSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat);
-	void ParserImageForFrame(const d2d::ISprite* sprite, int id);
+	void ParserSpriteForFrame(const d2d::Sprite* sprite, int id, bool forceMat);
+	void ParserImageForFrame(const d2d::Sprite* sprite, int id);
 	void ParserFontForFrame(const d2d::FontBlankSprite* font, int id);
 
-	void TransToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
+	void TransToMat(const d2d::Sprite* sprite, float mat[6], bool force = false) const;
 
-	void GetColorAssignParams(const d2d::ISprite* sprite, std::vector<std::string>& params) const;
+	void GetColorAssignParams(const d2d::Sprite* sprite, std::vector<std::string>& params) const;
 
 	int QueryIconID(const eicon::Sprite* icon) const;
 
@@ -87,16 +87,16 @@ private:
 	TPParser m_parser;
 
 	int m_id;
-	std::map<const d2d::ISprite*, int> m_mapSpriteID;
-	std::map<const d2d::ISymbol*, int> m_mapSymbolID;
+	std::map<const d2d::Sprite*, int> m_mapSpriteID;
+	std::map<const d2d::Symbol*, int> m_mapSymbolID;
 
 	// patch for multi mesh symbol
 	struct SpriteID
 	{
-		d2d::ISprite* sprite;
+		d2d::Sprite* sprite;
 		int id;
 	};
-	std::map<const d2d::ISymbol*, std::vector<SpriteID> > m_map_symbol2ids;
+	std::map<const d2d::Symbol*, std::vector<SpriteID> > m_map_symbol2ids;
 
 	std::map<const eicon::Symbol*, std::map<float, int> > m_map_icon2ids;
 

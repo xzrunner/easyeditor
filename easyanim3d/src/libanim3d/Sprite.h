@@ -6,7 +6,7 @@
 namespace eanim3d
 {
 
-class Sprite : public d2d::ISprite
+class Sprite : public d2d::Sprite
 {
 public:
 	Sprite();
@@ -15,16 +15,16 @@ public:
 	virtual ~Sprite();
 
 	//
-	// ICloneable interface
+	// Cloneable interface
 	//
 	virtual Sprite* Clone() const;
 
 	//
-	// ISprite interface
+	// Sprite interface
 	//
 	virtual bool Update(int version) { return false; }
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::ISymbol* symbol);
+	virtual void SetSymbol(d2d::Symbol* symbol);
 
 	const vec3& GetPos3() const { return m_pos3; }
 	void SetPos3(const vec3& pos) { m_pos3 = pos; }
@@ -37,7 +37,7 @@ public:
 		m_ori3 = delta.Rotated(m_ori3);
 	}
 
-	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
+	static d2d::Sprite* Create(d2d::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 

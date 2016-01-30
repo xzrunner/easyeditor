@@ -31,7 +31,7 @@ void Love2dCode::Resolve()
 		KeyFrame* frame = itr->second;			
 		if (frame->Size() != 0)
 		{
-			const d2d::ISprite* sprite = frame->GetSprite(0);
+			const d2d::Sprite* sprite = frame->GetSprite(0);
 			int index = Query(sprite->GetSymbol().GetFilepath());
 			if (index != -1)
 			{

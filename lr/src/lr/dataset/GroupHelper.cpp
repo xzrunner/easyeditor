@@ -7,15 +7,15 @@
 namespace lr
 {
 
-d2d::ISprite* GroupHelper::Group(const std::vector<d2d::ISprite*>& sprites)
+d2d::Sprite* GroupHelper::Group(const std::vector<d2d::Sprite*>& sprites)
 {
 	static int id = 0;
-	std::string name = "_group" + d2d::StringTools::ToString(id++);
+	std::string name = "_group" + d2d::StringHelper::ToString(id++);
 
 	ecomplex::Symbol* sym = new ecomplex::Symbol();
 	sym->SetFilepath(GROUP_TAG);
 	sym->m_sprites = sprites;
-	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::ISprite>());
+	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
 	sym->InitBounding();
 	d2d::Vector c = sym->GetSize().Center();
 	for (int i = 0, n = sym->m_sprites.size(); i < n; ++i) {
@@ -31,19 +31,19 @@ d2d::ISprite* GroupHelper::Group(const std::vector<d2d::ISprite*>& sprites)
 	return spr;
 }
 
-void GroupHelper::BreakUp(d2d::ISprite* group, std::vector<d2d::ISprite*>& sprites)
+void GroupHelper::BreakUp(d2d::Sprite* group, std::vector<d2d::Sprite*>& sprites)
 {
-	ecomplex::Symbol* comp = &dynamic_cast<ecomplex::Symbol&>(const_cast<d2d::ISymbol&>(group->GetSymbol()));
+	ecomplex::Symbol* comp = &dynamic_cast<ecomplex::Symbol&>(const_cast<d2d::Symbol&>(group->GetSymbol()));
 	assert(comp);
 	sprites = comp->m_sprites;
-	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::ISprite>());
+	for_each(sprites.begin(), sprites.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
 
 	const d2d::Vector& pos = group->GetPosition();
 	const d2d::Vector& scale = group->GetScale();
 	float angle = group->GetAngle();
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		d2d::ISprite* spr = sprites[i];
+		d2d::Sprite* spr = sprites[i];
 
 		d2d::Vector _scale = spr->GetScale();
 		_scale.x *= scale.x;
@@ -54,7 +54,7 @@ void GroupHelper::BreakUp(d2d::ISprite* group, std::vector<d2d::ISprite*>& sprit
 		d2d::Vector _pos = spr->GetPosition();
 		d2d::Matrix mt;
 		group->GetTransMatrix(mt);
-		_pos = d2d::Math::transVector(_pos, mt);
+		_pos = d2d::Math2D::TransVector(_pos, mt);
 
 		spr->SetScale(_scale);
 		spr->SetTransform(_pos, _angle);

@@ -11,13 +11,13 @@ SpriteObserver::SpriteObserver(const Layer& layer)
 {
 }
 
-void SpriteObserver::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
+void SpriteObserver::Translate(d2d::Sprite* sprite, const d2d::Vector& offset)
 {
 	if (!m_enable) {
 		return;
 	}
 
-	std::map<d2d::ISprite*, int>::iterator itr_sprite = m_map2frame.find(sprite);
+	std::map<d2d::Sprite*, int>::iterator itr_sprite = m_map2frame.find(sprite);
 	if (itr_sprite == m_map2frame.end())
 		return;
 
@@ -28,7 +28,7 @@ void SpriteObserver::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
-		const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
+		const std::vector<d2d::Sprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == sprite->name)
@@ -39,13 +39,13 @@ void SpriteObserver::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 	m_enable = true;
 }
 
-void SpriteObserver::Rotate(d2d::ISprite* sprite, float delta)
+void SpriteObserver::Rotate(d2d::Sprite* sprite, float delta)
 {
 	if (!m_enable) {
 		return;
 	}
 
-	std::map<d2d::ISprite*, int>::iterator itr_sprite = m_map2frame.find(sprite);
+	std::map<d2d::Sprite*, int>::iterator itr_sprite = m_map2frame.find(sprite);
 	if (itr_sprite == m_map2frame.end())
 		return;
 
@@ -56,7 +56,7 @@ void SpriteObserver::Rotate(d2d::ISprite* sprite, float delta)
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
-		const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
+		const std::vector<d2d::Sprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == sprite->name)
@@ -67,15 +67,15 @@ void SpriteObserver::Rotate(d2d::ISprite* sprite, float delta)
 	m_enable = true;
 }
 
-void SpriteObserver::insert(const d2d::ISprite* sprite, int frame)
+void SpriteObserver::insert(const d2d::Sprite* sprite, int frame)
 {
-	m_map2frame.insert(std::make_pair(const_cast<d2d::ISprite*>(sprite), frame));
+	m_map2frame.insert(std::make_pair(const_cast<d2d::Sprite*>(sprite), frame));
 }
 
-void SpriteObserver::remove(const d2d::ISprite* sprite)
+void SpriteObserver::remove(const d2d::Sprite* sprite)
 {
-	std::map<d2d::ISprite*, int>::iterator itr 
-		= m_map2frame.find(const_cast<d2d::ISprite*>(sprite));
+	std::map<d2d::Sprite*, int>::iterator itr 
+		= m_map2frame.find(const_cast<d2d::Sprite*>(sprite));
 	if (itr != m_map2frame.end())
 		m_map2frame.erase(itr);
 }

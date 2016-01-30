@@ -38,7 +38,7 @@ bool PasteSymbolOP::OnDraw() const
 
 	bool ret;
 
-	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
+	d2d::Symbol* symbol = m_libraryPanel->GetSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
@@ -60,7 +60,7 @@ bool PasteSymbolOP::OnDraw() const
 
 bool PasteSymbolOP::isCurrSymbolValid() const
 {
-// 	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
+// 	d2d::Symbol* symbol = m_libraryPanel->getSymbol();
 // 	if (!symbol) {
 // 		return false;
 // 	}
@@ -79,7 +79,7 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 
 bool PasteSymbolOP::isCurrSymbolIsWall() const
 {
-	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
+	d2d::Symbol* symbol = m_libraryPanel->GetSymbol();
 	return IsSymbolWall(*symbol);
 }
 

@@ -45,7 +45,7 @@ void StageCanvas::DrawGuideLines() const
 	int width, height;
 	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 
 		width * 0.5f,
 		height * 0.5f,
 		d2d::LIGHT_GREY_LINE);

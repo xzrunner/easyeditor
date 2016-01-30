@@ -19,7 +19,7 @@ Scale9Data::Scale9Data(const Scale9Data& data)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			d2d::ISprite* src = data.m_sprites[i][j];
+			d2d::Sprite* src = data.m_sprites[i][j];
 			if (src) {
 				m_sprites[i][j] = src->Clone();
 			} else {
@@ -54,7 +54,7 @@ void Scale9Data::ReloadTexture() const
 }
 
 void Scale9Data::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-					  const d2d::ISprite* spr, const d2d::ISprite* root) const
+					  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	if (spr) {
 		const Sprite* _spr = static_cast<const Sprite*>(spr);
@@ -81,7 +81,7 @@ void Scale9Data::Resize(float width, float height)
 	ResizeScale9(m_type, m_sprites, m_width, m_height);	
 }
 
-void Scale9Data::Compose(d2d::ISprite* sprites[3][3], float width, float height)
+void Scale9Data::Compose(d2d::Sprite* sprites[3][3], float width, float height)
 {
 	m_type = CheckType(sprites);
 
@@ -91,7 +91,7 @@ void Scale9Data::Compose(d2d::ISprite* sprites[3][3], float width, float height)
 				m_sprites[i][j]->Release();
 			}
 
-			d2d::ISprite* src = sprites[i][j];
+			d2d::Sprite* src = sprites[i][j];
 			if (src) {
 				m_sprites[i][j] = src->Clone();
 			} else {
@@ -116,7 +116,7 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 
 	Json::Value spr_val = value["sprite"];
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	m_width = value["width"].asInt();
 	m_height = value["height"].asInt();
@@ -166,8 +166,8 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 	ResizeScale9(m_type, m_sprites, m_width, m_height);
 }
 
-void Scale9Data::DrawScale9(Scale9Type type, d2d::ISprite* const sprites[3][3], const d2d::Matrix& mt,
-							const d2d::ColorTrans& color, const d2d::ISprite* root)
+void Scale9Data::DrawScale9(Scale9Type type, d2d::Sprite* const sprites[3][3], const d2d::Matrix& mt,
+							const d2d::ColorTrans& color, const d2d::Sprite* root)
 {
 	switch (type)
 	{
@@ -211,16 +211,16 @@ void Scale9Data::DrawScale9(Scale9Type type, d2d::ISprite* const sprites[3][3], 
 	}	
 }
 
-void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3],
+void Scale9Data::ResizeScale9(Scale9Type type, d2d::Sprite* const sprites[3][3],
 							  float width, float height)
 {
 	if (type == e_9Grid) 
 	{
-		const float w0 = sprites[0][0]->GetSymbol().GetSize().xLength(),
-			w2 = sprites[0][2]->GetSymbol().GetSize().xLength(),
+		const float w0 = sprites[0][0]->GetSymbol().GetSize().Width(),
+			w2 = sprites[0][2]->GetSymbol().GetSize().Width(),
 			w1 = width - w0 - w2;
-		const float h0 = sprites[0][0]->GetSymbol().GetSize().yLength(),
-			h2 = sprites[0][2]->GetSymbol().GetSize().yLength(),
+		const float h0 = sprites[0][0]->GetSymbol().GetSize().Height(),
+			h2 = sprites[0][2]->GetSymbol().GetSize().Height(),
 			h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][0], d2d::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -237,11 +237,11 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_9GridHollow)
 	{
-		const float w0 = sprites[0][0]->GetSymbol().GetSize().xLength(),
-			w2 = sprites[0][2]->GetSymbol().GetSize().xLength(),
+		const float w0 = sprites[0][0]->GetSymbol().GetSize().Width(),
+			w2 = sprites[0][2]->GetSymbol().GetSize().Width(),
 			w1 = width - w0 - w2;
-		const float h0 = sprites[0][0]->GetSymbol().GetSize().yLength(),
-			h2 = sprites[0][2]->GetSymbol().GetSize().yLength(),
+		const float h0 = sprites[0][0]->GetSymbol().GetSize().Height(),
+			h2 = sprites[0][2]->GetSymbol().GetSize().Height(),
 			h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][0], d2d::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -257,10 +257,10 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_6GridUpper)
 	{
-		const float w0 = sprites[2][0]->GetSymbol().GetSize().xLength(),
-			w2 = sprites[2][2]->GetSymbol().GetSize().xLength(),
+		const float w0 = sprites[2][0]->GetSymbol().GetSize().Width(),
+			w2 = sprites[2][2]->GetSymbol().GetSize().Width(),
 			w1 = width - w0 - w2;
-		const float h2 = sprites[2][0]->GetSymbol().GetSize().yLength(),
+		const float h2 = sprites[2][0]->GetSymbol().GetSize().Height(),
 			h1 = height - h2;
 
 		ResizeSprite(sprites[1][0], d2d::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
@@ -273,8 +273,8 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_3GridHor)
 	{
-		const float w0 = sprites[1][0]->GetSymbol().GetSize().xLength(),
-			w2 = sprites[1][2]->GetSymbol().GetSize().xLength(),
+		const float w0 = sprites[1][0]->GetSymbol().GetSize().Width(),
+			w2 = sprites[1][2]->GetSymbol().GetSize().Width(),
 			w1 = width - w0 - w2; 
 
 		ResizeSprite(sprites[1][0], d2d::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, height);
@@ -283,8 +283,8 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_3GridVer)
 	{
-		const float h0 = sprites[0][1]->GetSymbol().GetSize().yLength(),
-			h2 = sprites[2][1]->GetSymbol().GetSize().yLength(),
+		const float h0 = sprites[0][1]->GetSymbol().GetSize().Height(),
+			h2 = sprites[2][1]->GetSymbol().GetSize().Height(),
 			h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][1], d2d::Vector(0.0f, -h0*0.5f-h1*0.5f), width, h0);
@@ -293,7 +293,7 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}	
 }
 
-void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center, 
+void Scale9Data::ResizeSprite(d2d::Sprite* sprite, const d2d::Vector& center, 
 							  float width, float height)
 {
 	if (width <= 0) {
@@ -304,8 +304,8 @@ void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center,
 	}
 
 	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->GetSymbol());
-	int w = symbol.getImage()->GetOriginWidth(),
-		h = symbol.getImage()->GetOriginHeight();
+	int w = symbol.GetImage()->GetOriginWidth(),
+		h = symbol.GetImage()->GetOriginHeight();
 	assert(w != 0 && h != 0);
 
 	sprite->SetTransform(center, sprite->GetAngle());
@@ -315,10 +315,10 @@ void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center,
 	else
 		sprite->SetScale(d2d::Vector(height / w, width / h));
 
-	sprite->Translate(d2d::Math::rotateVector(sprite->GetOffset(), sprite->GetAngle()) - sprite->GetOffset());
+	sprite->Translate(d2d::Math2D::RotateVector(sprite->GetOffset(), sprite->GetAngle()) - sprite->GetOffset());
 }
 
-Scale9Type Scale9Data::CheckType(d2d::ISprite* sprites[3][3])
+Scale9Type Scale9Data::CheckType(d2d::Sprite* sprites[3][3])
 {
 	Scale9Type type = e_null;
 
@@ -369,18 +369,18 @@ Scale9Type Scale9Data::CheckType(d2d::ISprite* sprites[3][3])
 	return type;
 }
 
-void Scale9Data::InitSprite(const Json::Value& spr_val, d2d::ISprite** pSprite, 
+void Scale9Data::InitSprite(const Json::Value& spr_val, d2d::Sprite** pSprite, 
 							const std::string& dir)
 {
 	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (!symbol) {
 		std::string filepath = spr_val["filepath"].asString();
 		throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 			dir.c_str(), filepath.c_str());
 	}
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(spr_val);
 	symbol->Release();
 

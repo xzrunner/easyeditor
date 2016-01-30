@@ -3,14 +3,14 @@
 //#include "LibraryPanel.h"
 //#include "EditPanel.h"
 //
-//#include "dataset/ISprite.h"
+//#include "dataset/Sprite.h"
 //#include "operator/ZoomViewOP.h"
 //
 //namespace d2d
 //{
 //
 //EJPreviewDialog::EJPreviewDialog(wxWindow* parent, /*LibraryPanel* library,*/
-//	const std::vector<const ISprite*>& sprites)
+//	const std::vector<const Sprite*>& sprites)
 //	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 //	, m_sprites(sprites)
 //{

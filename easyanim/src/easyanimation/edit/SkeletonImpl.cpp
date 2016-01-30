@@ -59,8 +59,8 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 
 		if (m_selection->Size() == 1)
 		{
-			std::vector<d2d::ISprite*> sprites;
-			m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+			std::vector<d2d::Sprite*> sprites;
+			m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
@@ -100,7 +100,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 		{
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
-				d2d::ISprite* sprite = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
+				d2d::Sprite* sprite = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
 				skeleton->InsertJoint(sprite, m_first_pos);
 			}
 		}

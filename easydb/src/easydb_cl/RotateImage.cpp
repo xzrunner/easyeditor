@@ -62,25 +62,25 @@ void RotateImage::Run(int argc, char *argv[])
 void RotateImage::Rotate(d2d::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 			d2d::Rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * d2d::TRANS_DEG_TO_RAD;
 				sprite->SetTransform(sprite->GetPosition(), rad);
-				int width = d2d::Math::rotateVector(d2d::Vector(r.xMax, r.yMax), -rad).x * 2;
-				int height = d2d::Math::rotateVector(d2d::Vector(r.xMin, r.yMax), -rad).y * 2;
+				int width = d2d::Math2D::RotateVector(d2d::Vector(r.xmax, r.ymax), -rad).x * 2;
+				int height = d2d::Math2D::RotateVector(d2d::Vector(r.xmin, r.ymax), -rad).y * 2;
 				ss.DrawSprite(sprite, true, width, height);
 
-				wxString name = d2d::FilenameTools::getFilename(filepath);
+				wxString name = d2d::FileHelper::GetFilename(filepath);
 				wxString outpath;
 				outpath.Printf("%s\\%s_%d.png", dst_dir, name, deg);
 				ss.SaveToFile(outpath.ToStdString(), width, height);

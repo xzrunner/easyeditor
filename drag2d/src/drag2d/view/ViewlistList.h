@@ -7,7 +7,7 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class ViewlistListImpl;
 
 class ViewlistList : public VerticalImageList, public Observer
@@ -22,11 +22,11 @@ public:
 	void SetImpl(ViewlistListImpl* impl);
 
 	void Clear();
-	void Insert(ISprite* sprite, int idx = -1);
+	void Insert(Sprite* sprite, int idx = -1);
 
 	void OnSelected(int idx);
 
-	d2d::ISprite* QuerySprite(int idx);
+	Sprite* QuerySprite(int idx);
 
 protected:
 	//
@@ -39,23 +39,23 @@ private:
 
 	int GetSelectedIndex() const;
 
-	void OnSelected(d2d::ISprite* spr);
+	void OnSelected(Sprite* spr);
 
-	int QuerySprIdx(const ISprite* spr) const;
+	int QuerySprIdx(const Sprite* spr) const;
 
 	void ReorderSelected(bool up);
 
-	void Select(ISprite* spr, bool clear);
-	void Reorder(const ISprite* sprite, bool up);
-	void Remove(ISprite* sprite);
+	void Select(Sprite* spr, bool clear);
+	void Reorder(const Sprite* sprite, bool up);
+	void Remove(Sprite* sprite);
 	void RemoveSelected();
 
 private:
 	ViewlistListImpl* m_impl;
 
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 
-	d2d::ISprite* m_selected_spr;
+	Sprite* m_selected_spr;
 
 }; // ViewlistList
 

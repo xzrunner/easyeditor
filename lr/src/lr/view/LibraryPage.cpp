@@ -24,7 +24,7 @@ LibraryPage::~LibraryPage()
 	for_each(m_editops.begin(), m_editops.end(), d2d::ReleaseObjectFunctor<d2d::AbstractEditOP>());
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return true;
 }
@@ -96,7 +96,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			std::string filepath = filenames[i].ToStdString();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
 			m_list->Insert(symbol);
 			symbol->Release();

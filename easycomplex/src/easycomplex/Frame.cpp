@@ -42,7 +42,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			wxString ext = d2d::FilenameTools::getExtension(filename);
+			wxString ext = d2d::FileHelper::GetExtension(filename);
 			if (ext == "png") {
 				SaveAsPNG(filename.ToStdString());
 			} else {
@@ -66,10 +66,10 @@ void Frame::OnSettings(wxCommandEvent& event)
 
 void Frame::onPreview(wxCommandEvent& event)
 {
-// 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
+// 	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
 // 	symbol->ReloadTexture();
 
-	std::vector<const d2d::ISprite*> sprites;
+	std::vector<const d2d::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 	d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
  	PreviewDialog dlg(this, canvas->GetGLContext(), sprites);
@@ -78,7 +78,7 @@ void Frame::onPreview(wxCommandEvent& event)
 
 void Frame::OnEJPreview(wxCommandEvent& event)
 {
-	std::vector<const d2d::ISprite*> sprites;
+	std::vector<const d2d::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ void Frame::OnEJPreview(wxCommandEvent& event)
 	//////////////////////////////////////////////////////////////////////////
 
 	const char* folder = "_tmp_ejoy2d_preview";
-	d2d::mk_dir(folder);
+	ee::FileHelper::MkDir(folder);
 
 	libcoco::epe::PackLuaFile pack;
 	pack.pack(sprites, folder);
@@ -113,7 +113,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
  		std::string filename = dlg.GetPath().ToStdString();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
@@ -186,7 +186,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
-	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	wxString fixed = d2d::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }

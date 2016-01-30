@@ -22,14 +22,14 @@ MultiShapesImpl::~MultiShapesImpl()
 	m_shape_selection->Release();
 }
 
-IShape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
+Shape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
 {
-	IShape* result = NULL;
+	Shape* result = NULL;
 	TraverseShapes(PointQueryVisitor(pos, &result), DT_EDITABLE);
 	return result;
 }
 
-void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const
+void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<Shape*>& result) const
 {
 	TraverseShapes(RectQueryVisitor(rect, result), DT_EDITABLE);
 }
@@ -40,8 +40,8 @@ void MultiShapesImpl::ClearSelectedShape()
 		return;
 	}
 
-	std::vector<IShape*> shapes;
-	m_shape_selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	std::vector<Shape*> shapes;
+	m_shape_selection->Traverse(FetchAllVisitor<Shape>(shapes));
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		RemoveShapeSJ::Instance()->Remove(shapes[i]);
 	}
@@ -55,7 +55,7 @@ void MultiShapesImpl::OnNotify(int sj_id, void* ud)
 	{
 	case MSG_SELECT_SHAPE:
 		m_shape_selection->Clear();
-		m_shape_selection->Add((IShape*)ud);
+		m_shape_selection->Add((Shape*)ud);
 		break;
 // 	case SELECT_SHAPE_SET:
 // 		break;
@@ -68,24 +68,24 @@ void MultiShapesImpl::OnNotify(int sj_id, void* ud)
 // class MultiShapesImpl::PointQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-MultiShapesImpl::PointQueryVisitor::PointQueryVisitor(const Vector& pos, IShape** pResult)
+MultiShapesImpl::PointQueryVisitor::PointQueryVisitor(const Vector& pos, Shape** pResult)
 	: m_pos(pos)
 {
 	m_pResult = pResult;
 	*m_pResult = NULL;
 }
 
-void MultiShapesImpl::PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
+void MultiShapesImpl::PointQueryVisitor::Visit(Object* object, bool& next)
 {
-	IShape* shape = static_cast<IShape*>(object);
+	Shape* shape = static_cast<Shape*>(object);
 	if (shape->IsContain(m_pos))
 	{
 		*m_pResult = shape;
-		bFetchNext = false;
+		next = false;
 	}
 	else
 	{
-		bFetchNext = true;
+		next = true;
 	}
 }
 
@@ -93,17 +93,17 @@ void MultiShapesImpl::PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
 // class MultiShapesImpl::RectQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-MultiShapesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, std::vector<IShape*>& result)
+MultiShapesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, std::vector<Shape*>& result)
 	: m_rect(rect), m_result(result)
 {
 }
 
-void MultiShapesImpl::RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
+void MultiShapesImpl::RectQueryVisitor::Visit(Object* object, bool& next)
 {
-	IShape* shape = static_cast<IShape*>(object);
+	Shape* shape = static_cast<Shape*>(object);
 	if (shape->IsIntersect(m_rect))
 		m_result.push_back(shape);
-	bFetchNext = true;
+	next = true;
 }
 
-} // d2d
+}

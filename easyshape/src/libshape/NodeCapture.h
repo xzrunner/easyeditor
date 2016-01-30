@@ -14,14 +14,14 @@ class RectShape;
 
 struct NodeAddr
 {
-	d2d::IShape* shape;
+	d2d::Shape* shape;
 	d2d::Vector pos;
 
 	NodeAddr() : shape(NULL) {}
 
 	void clear() {
 		shape = NULL;
-		pos.setInvalid();
+		pos.SetInvalid();
 	}
 };
 
@@ -34,12 +34,12 @@ public:
 	void captureSelectable(const d2d::Vector& pos, NodeAddr& result);
 
 private:
-	class RectQueryVisitor : public d2d::IVisitor
+	class RectQueryVisitor : public d2d::Visitor
 	{
 	public:
 		RectQueryVisitor(const d2d::Vector& pos, float tolerance, NodeAddr& result);
 
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 
 	private:
 		bool Visit(PointShape* point);

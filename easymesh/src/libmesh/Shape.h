@@ -9,7 +9,7 @@ namespace emesh
 class Node;
 class Triangle;
 
-class Shape : public d2d::Object, public d2d::ICloneable
+class Shape : public d2d::Object, public d2d::Cloneable
 {
 public:
 	Shape();
@@ -18,7 +18,7 @@ public:
 	virtual ~Shape();
 
  	//
- 	// ICloneable interface
+ 	// Cloneable interface
  	//
  	virtual Shape* Clone() const { return NULL; }
 

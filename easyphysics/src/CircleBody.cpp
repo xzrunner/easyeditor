@@ -51,10 +51,10 @@ void CircleBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float ang
 	b2Shape* shape = m_body->GetFixtureList()->GetShape();
 	b2CircleShape* circle = dynamic_cast<b2CircleShape*>(shape);
 	assert(circle);
-	rect.xMin = position.x - circle->m_radius;
-	rect.xMax = position.x + circle->m_radius;
-	rect.yMin = position.y - circle->m_radius;
-	rect.yMax = position.y + circle->m_radius;
+	rect.xmin = position.x - circle->m_radius;
+	rect.xmax = position.x + circle->m_radius;
+	rect.ymin = position.y - circle->m_radius;
+	rect.ymax = position.y + circle->m_radius;
 }
 
 }

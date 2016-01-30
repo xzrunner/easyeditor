@@ -31,4 +31,4 @@ void SetValueDialog::initLayout(const wxString& oldVal)
 	topSizer->Fit(this);
 }
 
-} // d2d
+}

@@ -26,10 +26,10 @@ bool AutoRectCutOP::OnMouseLeftUp(int x, int y)
 	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_selected) {
-		m_selected->xMin = (int)(m_selected->xMin+0.5f);
-		m_selected->xMax = (int)(m_selected->xMax+0.5f);
-		m_selected->yMin = (int)(m_selected->yMin+0.5f);
-		m_selected->yMax = (int)(m_selected->yMax+0.5f);
+		m_selected->xmin = (int)(m_selected->xmin+0.5f);
+		m_selected->xmax = (int)(m_selected->xmax+0.5f);
+		m_selected->ymin = (int)(m_selected->ymin+0.5f);
+		m_selected->ymax = (int)(m_selected->ymax+0.5f);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -84,12 +84,12 @@ bool AutoRectCutOP::OnDraw() const
 {
 	if (d2d::ZoomViewOP::OnDraw()) return true;
 
-	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	m_rects.draw();
 
 	if (m_selected) {
-		d2d::PrimitiveDraw::rect(*m_selected, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::DrawRect(*m_selected, d2d::LIGHT_GREEN_FACE);
 	}
 
 	return false;

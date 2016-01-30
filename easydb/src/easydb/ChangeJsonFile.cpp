@@ -44,10 +44,10 @@ void ChangeJsonFile::Run(int argc, char *argv[])
 	}
 }
 
-void ChangeJsonFile::Run(const std::string& dir/*, d2d::FileNameParser::Type type*/)
+void ChangeJsonFile::Run(const std::string& dir/*, d2d::FileType::Type type*/)
 //	: m_type(type)
 {
-	d2d::FilenameTools::fetchAllFiles(dir, m_files);
+	d2d::FileHelper::FetchAllFiles(dir, m_files);
 }
 
 void ChangeJsonFile::Scale(const std::string& key, float times)
@@ -57,7 +57,7 @@ void ChangeJsonFile::Scale(const std::string& key, float times)
 		wxFileName filename(m_files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-//		if (d2d::FileNameParser::isType(filepath, m_type))
+//		if (d2d::FileType::isType(filepath, m_type))
 		{
 			Json::Value value;
 			Json::Reader reader;

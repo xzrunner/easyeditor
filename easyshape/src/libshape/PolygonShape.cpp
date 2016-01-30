@@ -43,8 +43,8 @@ PolygonShape* PolygonShape::Clone() const
 
 bool PolygonShape::IsContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::isPointInRect(pos, m_rect) 
-		&& d2d::Math::isPointInArea(pos, m_vertices);
+	return d2d::Math2D::IsPointInRect(pos, m_rect) 
+		&& d2d::Math2D::IsPointInArea(pos, m_vertices);
 }
 
 // bool PolygonShape::isIntersect(const d2d::Rect& rect) const
@@ -63,7 +63,7 @@ void PolygonShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) con
 {
 	if (m_material) {
 		m_material->Draw(mt, color);
-		if (d2d::Settings::bDisplayTrisEdge) {
+		if (d2d::SettingData::draw_tris_edge) {
 			m_material->DebugDrawTris(mt);
 		}
 	}
@@ -80,7 +80,7 @@ d2d::IPropertySetting* PolygonShape::CreatePropertySetting(d2d::EditPanelImpl* s
 
 void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::IShape::LoadFromFile(value, dir);
+	d2d::Shape::LoadFromFile(value, dir);
 
 	size_t num = value["vertices"]["x"].size();
 	m_vertices.resize(num);
@@ -98,7 +98,7 @@ void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir
 
 void PolygonShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::IShape::StoreToFile(value, dir);
+	d2d::Shape::StoreToFile(value, dir);
 
 	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
 		value["vertices"]["x"][i] = m_vertices[i].x;
@@ -163,7 +163,7 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 	std::string type = val["type"].asString();
 	if (type == "color") {
 		d2d::Colorf col;
-		col.unpack(val["color"].asUInt());
+		col.Unpack(val["color"].asUInt());
 		m_material = new ColorMaterial(m_vertices, col);
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
@@ -174,4 +174,4 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 	}
 }
 
-} // d2d
+}

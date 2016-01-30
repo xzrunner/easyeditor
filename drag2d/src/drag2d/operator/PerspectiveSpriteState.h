@@ -10,7 +10,7 @@ namespace d2d
 class PerspectiveSpriteState : public IArrangeSpriteState
 {
 public:
-	PerspectiveSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
+	PerspectiveSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~PerspectiveSpriteState();
 
 	virtual void OnMouseRelease(const Vector& pos);
@@ -20,7 +20,7 @@ private:
 	void Perspective(const Vector& curr);
 
 private:
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
 

@@ -86,8 +86,8 @@ void Frame::InitWithFile(const wxString& path)
 //	SetTitle(path);
 	try {
 		m_task->Load(path);
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (Exception& e) {
+		ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
@@ -110,8 +110,8 @@ void Frame::OpenFile(const wxString& filename)
 
 	try {
 		m_task->Load(m_curr_filename.c_str());
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (Exception& e) {
+		ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
@@ -222,7 +222,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 			GetFileFilter(), wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
-			wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
+			wxString fixed = FileHelper::GetFilenameAddTag(dlg.GetPath(), m_filetag, "json");
 			m_curr_filename = fixed;
 			m_task->Store(fixed);
 		}
@@ -242,7 +242,7 @@ void Frame::OnSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	const Colorf& col = Config::Instance()->GetSettings().bg_color;
-	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
+	const_cast<EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 
 wxString Frame::GetFileFilter() const
@@ -351,7 +351,7 @@ void Frame::SetCurrFilename()
 			wxString::FromDouble(id++) + 
 			wxT(".json");
 
-		if (!d2d::FilenameTools::IsFileExist(str))
+		if (!FileHelper::IsFileExist(str))
 		{
 			m_curr_filename = str;
 			break;

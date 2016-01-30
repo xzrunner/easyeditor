@@ -22,12 +22,12 @@ void Symbol::ReloadTexture() const
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	
 }
 
-d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -44,7 +44,7 @@ void Symbol::LoadResources()
 
 	m_name = name = value["name"].asString();
 
-	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
 
 	int idx = 0;
 	Json::Value temp_val = value["template"][idx++];
@@ -60,7 +60,7 @@ void Symbol::LoadResources()
 	}
 
 	for (int i = 0, n = m_symbols.size(); i < n; ++i) {
-		m_rect.combine(m_symbols[i]->GetSize());
+		m_rect.Combine(m_symbols[i]->GetSize());
 	}
 }
 
@@ -80,21 +80,21 @@ GetSymbolPath(const std::string& dir, const Json::Value& json_val) const
 	std::string filepath = json_val["filepath"].asString();
 	while (true)
 	{
-		if (d2d::FilenameTools::IsFileExist(filepath))
+		if (d2d::FileHelper::IsFileExist(filepath))
 			break;
 
-		std::string absolute_path = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-		if (d2d::FilenameTools::IsFileExist(absolute_path))
+		std::string absolute_path = d2d::FileHelper::GetAbsolutePath(dir, filepath);
+		if (d2d::FileHelper::IsFileExist(absolute_path))
 		{
 			filepath = absolute_path;
 			break;
 		}
 
 		std::string res_path = m_dirpath + "\\" + filepath;
-		if (!d2d::FilenameTools::IsFileExist(res_path)) {
-			absolute_path = d2d::FilenameTools::getAbsolutePath(dir, res_path);
+		if (!d2d::FileHelper::IsFileExist(res_path)) {
+			absolute_path = d2d::FileHelper::GetAbsolutePath(dir, res_path);
 		}
-		if (!d2d::FilenameTools::IsFileExist(absolute_path)) {
+		if (!d2d::FileHelper::IsFileExist(absolute_path)) {
 			throw d2d::Exception("File: %s don't exist!", res_path.c_str());
 		}
 

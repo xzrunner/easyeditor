@@ -20,9 +20,9 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 {
 	InitLayout(symbol);
 
-	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
+	wxString filepath = d2d::FileHelper::GetFilenameAddTag(
 		symbol->GetFilepath(), libshape::FILE_TAG, "json");
-	if (d2d::FilenameTools::IsFileExist(filepath)) {
+	if (d2d::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.mb_str());
 		m_toolbar->SelectSuitableEditOP();
 	}
@@ -65,7 +65,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(m_stage->GetSymbol());
+	d2d::Symbol& symbol = const_cast<d2d::Symbol&>(m_stage->GetSymbol());
 	const std::string& filepath = symbol.GetFilepath();
 
 	d2d::ConfirmDialog dlg(this);
@@ -74,7 +74,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	{
 		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
+		d2d::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

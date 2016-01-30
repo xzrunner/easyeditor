@@ -86,7 +86,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_symbol->GetFilepath();
 		FileStorer::Store(filepath.c_str(), m_symbol);
 		m_symbol->RefreshThumbnail(filepath, true);
-		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	} 
 	else if (val == wxID_NO) 
@@ -99,7 +99,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 void EditDialog::LoadSymbolInfo()
 {
 	for (size_t i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		m_library->AddSymbol(const_cast<d2d::ISymbol*>(&m_symbol->m_sprites[i]->GetSymbol()));
+		m_library->AddSymbol(const_cast<d2d::Symbol*>(&m_symbol->m_sprites[i]->GetSymbol()));
 		m_viewlist->Insert(m_symbol->m_sprites[i]);
 	}
 }

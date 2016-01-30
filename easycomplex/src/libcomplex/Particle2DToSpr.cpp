@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* Particle2DToSpr::Trans(const librespacker::PackParticle2D* p2d)
+d2d::Sprite* Particle2DToSpr::Trans(const librespacker::PackParticle2D* p2d)
 {
 	eparticle2d::Symbol* symbol = new eparticle2d::Symbol;
 	symbol->SetEmitterCfg(LoadConfig(p2d));
@@ -90,18 +90,18 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D*
 		dst.scale_end = src.scale_end;
 
 		d2d::Colorf 
-			col_mul_start = d2d::transColor(src.col_mul_start, d2d::PT_ARGB),
-			col_mul_end = d2d::transColor(src.col_mul_end, d2d::PT_ARGB),
-			col_add_start = d2d::transColor(src.col_add_start, d2d::PT_ARGB),
-			col_add_end = d2d::transColor(src.col_add_end, d2d::PT_ARGB);
+			col_mul_start = d2d::TransColor(src.col_mul_start, d2d::PT_ARGB),
+			col_mul_end = d2d::TransColor(src.col_mul_end, d2d::PT_ARGB),
+			col_add_start = d2d::TransColor(src.col_add_start, d2d::PT_ARGB),
+			col_add_end = d2d::TransColor(src.col_add_end, d2d::PT_ARGB);
 
 		memcpy(&dst.col_mul_start.r, &col_mul_start.r, sizeof(col_mul_start));
 		memcpy(&dst.col_mul_end.r, &col_mul_end.r, sizeof(col_mul_end));
 		memcpy(&dst.col_add_start.r, &col_add_start.r, sizeof(col_add_start));
 		memcpy(&dst.col_add_end.r, &col_add_end.r, sizeof(col_add_end));
 		
-		d2d::ISprite* spr = NodeToSprite::Trans(src.node);
-		dst.ud = const_cast<d2d::ISymbol*>(&spr->GetSymbol());
+		d2d::Sprite* spr = NodeToSprite::Trans(src.node);
+		dst.ud = const_cast<d2d::Symbol*>(&spr->GetSymbol());
 	}
 
 	return cfg;

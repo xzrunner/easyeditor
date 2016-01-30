@@ -21,10 +21,10 @@ public:
 	virtual void OnDraw() const;
 
 private:
-	class FixCoordsVisitor : public d2d::IVisitor
+	class FixCoordsVisitor : public d2d::Visitor
 	{
 	public:
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 	}; // FixCoordsVisitor
 
 private:

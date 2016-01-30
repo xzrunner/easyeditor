@@ -31,8 +31,8 @@ void LRSeparateComplex::Run(int argc, char *argv[])
 	if (!check_file(argv[2])) return;
 
 	m_point_dir = argv[3];
-	m_output_dir = d2d::FilenameTools::getFileDir(argv[4]);
-	m_output_name = d2d::FilenameTools::getFilenameWithExtension(argv[4]);
+	m_output_dir = d2d::FileHelper::GetFileDir(argv[4]);
+	m_output_name = d2d::FileHelper::GetFilenameWithExtension(argv[4]);
 
 	Run(argv[2]);
 }
@@ -41,8 +41,8 @@ void LRSeparateComplex::Run(const std::string& lr_file, const std::string& point
 							const std::string& dst_file)
 {
 	m_point_dir = point_dir;	
-	m_output_dir = d2d::FilenameTools::getFileDir(dst_file);
-	m_output_name = d2d::FilenameTools::getFilenameWithExtension(dst_file);
+	m_output_dir = d2d::FileHelper::GetFileDir(dst_file);
+	m_output_name = d2d::FileHelper::GetFilenameWithExtension(dst_file);
 
 	Run(lr_file);
 }
@@ -59,10 +59,10 @@ void LRSeparateComplex::Run(const std::string& filepath)
 
 	Json::Value new_lr_val = lr_val;
 
-	m_dir = d2d::FilenameTools::getFileDir(filepath);
+	m_dir = d2d::FileHelper::GetFileDir(filepath);
 
 	std::string dst_folder = m_output_dir;
-	d2d::mk_dir(dst_folder, false);
+	ee::FileHelper::MkDir(dst_folder, false);
 
 	for (int layer_idx = 0; layer_idx < 9; ++layer_idx)
 	{
@@ -108,7 +108,7 @@ void LRSeparateComplex::SeparateFromSprites(const Json::Value& old_val, Json::Va
 
 		std::string filepath = src_val["filepath"].asString();
 		if (!is_cover &&
-			d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d) &&
+			d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d) &&
 			tag.find(TOP_LAYER_STR) == std::string::npos) {
 				src_val["tag"] = tag + ";" + COVER_LAYER_STR;
 				is_cover = true;
@@ -133,7 +133,7 @@ void LRSeparateComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 
 void LRSeparateComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
 {
-	wxString relative_path = d2d::FilenameTools::getRelativePath(m_output_dir, 
+	wxString relative_path = d2d::FileHelper::GetRelativePath(m_output_dir, 
 		m_dir + "\\" + dst["filepath"].asString());
 	dst["filepath"] = relative_path.ToStdString();
 }
@@ -153,7 +153,7 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 
 	Json::Value spr_val = value;
 
-	wxString relative_path = d2d::FilenameTools::getRelativePath(m_output_dir, 
+	wxString relative_path = d2d::FileHelper::GetRelativePath(m_output_dir, 
 		m_dir + "\\" + spr_val["filepath"].asString());
 	spr_val["filepath"] = relative_path.ToStdString();
 
@@ -210,17 +210,17 @@ void LRSeparateComplex::FixPosWithShape(d2d::Vector& pos, const std::string& fil
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_shape.json";
 	std::string shape_path = m_dir + "\\" + m_point_dir + "\\" + path;
-	if (!d2d::FilenameTools::IsFileExist(shape_path)) {
+	if (!d2d::FileHelper::IsFileExist(shape_path)) {
 		return;
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_path);
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_path);
 	libshape::Symbol* shape_symbol = dynamic_cast<libshape::Symbol*>(symbol);
 	if (!shape_symbol) {
 		throw d2d::Exception("shape file err:%s", filepath);
 	}
 	
-	std::vector<d2d::IShape*> shapes = shape_symbol->GetShapes();
+	std::vector<d2d::Shape*> shapes = shape_symbol->GetShapes();
 	if (shapes.empty()) {
 		throw d2d::Exception("shape file empty:%s", filepath);
 	}

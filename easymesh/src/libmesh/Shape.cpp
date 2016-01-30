@@ -42,7 +42,7 @@ void Shape::QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes)
 	{
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j) {
-			if (d2d::Math::getDistance(tri->nodes[j]->xy, p) < m_node_radius) {
+			if (d2d::Math2D::GetDistance(tri->nodes[j]->xy, p) < m_node_radius) {
 				nodes.push_back(tri->nodes[j]);
 			}
 		}
@@ -56,7 +56,7 @@ void Shape::QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes)
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j)
 		{
-			if (d2d::Math::isPointInRect(tri->nodes[j]->xy, r))
+			if (d2d::Math2D::IsPointInRect(tri->nodes[j]->xy, r))
 				nodes.push_back(tri->nodes[j]);
 		}
 	}
@@ -75,11 +75,11 @@ void Shape::DrawInfoUV() const
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		d2d::PrimitiveDraw::DrawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::DrawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
 void Shape::DrawInfoXY() const
@@ -94,11 +94,11 @@ void Shape::DrawInfoXY() const
 			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		d2d::PrimitiveDraw::DrawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::DrawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
 void Shape::DrawTexture(const d2d::Matrix& mt,
@@ -125,7 +125,7 @@ void Shape::DrawTexture(const d2d::Matrix& mt,
 		d2d::Vector vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
-			vertices[i] = d2d::Math::transVector(tri->nodes[i]->xy, mt);
+			vertices[i] = d2d::Math2D::TransVector(tri->nodes[i]->xy, mt);
 			texcoords[i] = tri->nodes[i]->uv;
 		}
 		vertices[3] = vertices[2];
@@ -147,7 +147,7 @@ d2d::Rect Shape::GetRegion() const
 	{
 		Triangle* tri = m_tris[i];
 		for (int i = 0; i < 3; ++i) {
-			r.combine(tri->nodes[i]->xy);
+			r.Combine(tri->nodes[i]->xy);
 		}
 	}	
 	return r;
@@ -183,13 +183,13 @@ void Shape::StoreTriangles(Json::Value& value) const
 		for (int i = 0; i < 3; ++i)
 			transform.push_back(tri->nodes[i]->xy);
 	}
-	d2d::JsonIO::Store(transform, value);
+	d2d::JsonSerializer::Store(transform, value);
 }
 
 void Shape::LoadTriangles(const Json::Value& value)
 {
 	std::vector<d2d::Vector> transform;
-	d2d::JsonIO::Load(value, transform);
+	d2d::JsonSerializer::Load(value, transform);
 	int itr = 0;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{

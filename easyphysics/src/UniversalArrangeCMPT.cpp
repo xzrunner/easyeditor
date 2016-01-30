@@ -78,12 +78,12 @@ GetPhysicsStaticVisitor()
 }
 
 void UniversalArrangeCMPT::GetPhysicsStaticVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
 	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
 	if (!body) {
-		bFetchNext = true;
+		next = true;
 		return;
 	}
 
@@ -91,13 +91,13 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	if (m_type == e_uncertain)
 	{
 		m_type = (b2body->GetType() == b2_staticBody) ? e_checked : e_unchecked;
-		bFetchNext = true;
+		next = true;
 	} else if ((m_type == e_unchecked && b2body->GetType() == b2_staticBody) 
 		    || (m_type == e_checked && b2body->GetType() != b2_staticBody)) {
 		m_type = e_uncertain;
-		bFetchNext = false;
+		next = false;
 	} else {
-		bFetchNext = true;
+		next = true;
 	}
 }
 
@@ -112,14 +112,14 @@ SetPhysicsStaticVisitor(bool bChecked)
 }
 
 void UniversalArrangeCMPT::SetPhysicsStaticVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
 	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
 	if (body) {
 		body->getBody()->SetType(m_bChecked ? b2_staticBody : b2_dynamicBody);
 	}
-	bFetchNext = true;
+	next = true;
 }
 
 }

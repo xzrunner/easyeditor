@@ -38,12 +38,12 @@ void AverageRectCut::Run(int argc, char *argv[])
 void AverageRectCut::Trigger(const std::string& src_dir, const std::string& dst_dir, int min_edge)
 {
 	std::string out_img_dir = dst_dir + "\\" + IMAGE_DIR;
-	d2d::mk_dir(out_img_dir);
+	ee::FileHelper::MkDir(out_img_dir);
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
-	d2d::mk_dir(out_json_dir);
+	ee::FileHelper::MkDir(out_json_dir);
 
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
@@ -51,13 +51,13 @@ void AverageRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::string filepath = filename.GetFullPath().ToStdString();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 			RectCutImage(src_dir, dst_dir, filepath, min_edge);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
 			FixComplex(src_dir, dst_dir, filepath);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
 			FixAnim(src_dir, dst_dir, filepath);
-		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_scale9)) {
+		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_scale9)) {
 			FixScale9(src_dir, dst_dir, filepath);
 		}
 	}
@@ -73,27 +73,27 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 
 	eimage::ImageTrim trim(*img);
 	d2d::Rect img_r = trim.Trim();
-	if (!img_r.isValid()) {
-		img_r.xMin = img_r.yMin = 0;
-		img_r.xMax = img->GetWidth();
-		img_r.yMax = img->GetHeight();
+	if (!img_r.IsValid()) {
+		img_r.xmin = img_r.ymin = 0;
+		img_r.xmax = img->GetWidth();
+		img_r.ymax = img->GetHeight();
 	}
 
 	eimage::ImageClip clip(*img);
-	const uint8_t* pixels = clip.Clip(img_r.xMin, img_r.xMax, img_r.yMin, img_r.yMax);
-	d2d::ImageData* img_trimed = new d2d::ImageData(pixels, img_r.xLength(), img_r.yLength(), 4);
+	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
+	d2d::ImageData* img_trimed = new d2d::ImageData(pixels, img_r.Width(), img_r.Height(), 4);
 
-	wxString filename = d2d::FilenameTools::getRelativePath(src_dir, filepath);
+	wxString filename = d2d::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
 	filename.Replace("\\", "%");
 
 	ecomplex::Symbol complex;
 	eimage::ImageClip img_cut(*img_trimed, false);
 
-	int row = std::ceil(img_r.yLength() / min_edge),
-		col = std::ceil(img_r.xLength() / min_edge);
-	float xedge = img_r.xLength() / col,
-		  yedge = img_r.yLength() / row;
+	int row = std::ceil(img_r.Height() / min_edge),
+		col = std::ceil(img_r.Width() / min_edge);
+	float xedge = img_r.Width() / col,
+		  yedge = img_r.Height() / row;
 	for (int y = 0; y < row; ++y) {
 		for (int x = 0; x < col; ++x) {
 			int xmin = std::floor(xedge * x),
@@ -101,10 +101,10 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			int xmax = std::floor(xedge * (x + 1)),
 				ymax = std::floor(yedge * (y + 1));
 			if (x == col - 1) {
-				xmax = img_r.xLength();
+				xmax = img_r.Width();
 			}
 			if (y == row - 1) {
-				ymax = img_r.yLength();
+				ymax = img_r.Height();
 			}
 
 			int w = xmax - xmin,
@@ -118,10 +118,10 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 			delete[] pixels;
 
 			std::string spr_path = std::string(out_img_dir + "\\" + img_name);
-			d2d::ISprite* spr = new d2d::NullSprite(new d2d::NullSymbol(spr_path, w, h));
+			d2d::Sprite* spr = new d2d::NullSprite(new d2d::NullSymbol(spr_path, w, h));
 			d2d::Vector offset;
-			offset.x = img_r.xMin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
-			offset.y = img_r.yMin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
+			offset.x = img_r.xmin + xmin + w * 0.5f - img->GetWidth() * 0.5f;
+			offset.y = img_r.ymin + ymin + h * 0.5f - img->GetHeight() * 0.5f;
 			spr->Translate(offset);
 			complex.m_sprites.push_back(spr);
 		}
@@ -144,7 +144,7 @@ void AverageRectCut::FixComplex(const std::string& src_dir, const std::string& d
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value spr_val = value["sprite"][i++];
@@ -172,7 +172,7 @@ void AverageRectCut::FixAnim(const std::string& src_dir, const std::string& dst_
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value layerVal = value["layer"][i++];
@@ -212,7 +212,7 @@ void AverageRectCut::FixScale9(const std::string& src_dir, const std::string& ds
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value spr_val = value["sprite"][i++];
@@ -234,13 +234,13 @@ void AverageRectCut::FixSpriteValue(const std::string& src_dir, const std::strin
 									 const std::string& file_dir, Json::Value& sprite_val) const
 {
 	std::string filepath = sprite_val["filepath"].asString();
-	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+	if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
 		return;
 	}
 
-	filepath = d2d::FilenameTools::getAbsolutePath(file_dir, filepath);
+	filepath = d2d::FileHelper::GetAbsolutePath(file_dir, filepath);
 
-	std::string filename = d2d::FilenameTools::getRelativePath(src_dir, filepath);
+	std::string filename = d2d::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.')) + "_complex.json";
 
 	// todo
@@ -255,7 +255,7 @@ void AverageRectCut::FixSpriteValue(const std::string& src_dir, const std::strin
 
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 	std::string fixed_filepath = out_json_dir + "\\" + filename;
-	sprite_val["filepath"] = d2d::FilenameTools::getRelativePath(file_dir, fixed_filepath).ToStdString();
+	sprite_val["filepath"] = d2d::FileHelper::GetRelativePath(file_dir, fixed_filepath).ToStdString();
 }
 
 }

@@ -22,7 +22,7 @@ public:
 	virtual ComplexPolygonShape* Clone() const { return new ComplexPolygonShape(*this); }
 
 	//
-	// IShape interface
+	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
 	virtual bool IsContain(const d2d::Vector& pos) const;

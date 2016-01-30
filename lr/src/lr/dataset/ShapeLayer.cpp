@@ -16,13 +16,13 @@ ShapeLayer::ShapeLayer(int id, LibraryPanel* library)
 
 bool ShapeLayer::InsertSprite(Object* obj)
 {
-	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
+	d2d::Sprite* spr = static_cast<d2d::Sprite*>(obj);
 	etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr);
 	if (!tex) {
 		return Layer::InsertSprite(obj, -1);
 	}
 
-	std::vector<d2d::IShape*> shapes;
+	std::vector<d2d::Shape*> shapes;
 	create_shapes_from_etxture(tex, shapes);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		InsertShape(shapes[i]);
@@ -34,7 +34,7 @@ bool ShapeLayer::InsertSprite(Object* obj)
 		ud->shape_names.push_back(shapes[i]->name);
 	}
 
-	d2d::ISprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(spr->name);
+	d2d::Sprite* base_spr = m_library->GetTerrainLayer()->QuerySprite(spr->name);
 	base_spr->SetUserData(ud);	
 
 	return true;

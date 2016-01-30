@@ -7,7 +7,7 @@ namespace ecomplex
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
-							 const std::vector<const d2d::ISprite*>& sprites)
+							 const std::vector<const d2d::Sprite*>& sprites)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 	, m_sprites(sprites)
 	, m_control(0.033f)

@@ -15,30 +15,30 @@ class CheckerBoard
 public:
 	CheckerBoard(StagePanel* stage);
 
-	void AddSprite(d2d::ISprite* sprite);
-	void RemoveSprite(d2d::ISprite* sprite);
+	void AddSprite(d2d::Sprite* sprite);
+	void RemoveSprite(d2d::Sprite* sprite);
 	void Clear();
 
-	bool IsValid(d2d::ISprite* sprite) const;
-	bool IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
+	bool IsValid(d2d::Sprite* sprite) const;
+	bool IsValid(const d2d::Symbol& symbol, const d2d::Vector& pos) const;
 
 	void DebugDraw() const;
 
 	void ClearRemovedCache() {
 		m_mapRemoved.clear();
 	}
-	bool SetCachedPos(d2d::ISprite* sprite) const;
+	bool SetCachedPos(d2d::Sprite* sprite) const;
 
 	void ResetWall();
 
 private:
 	StagePanel* m_stage;
 
-	d2d::ISprite* m_grid[ROW][COL];
+	d2d::Sprite* m_grid[ROW][COL];
 
-	std::map<d2d::ISprite*, d2d::Vector> m_mapSprite2Pos;
+	std::map<d2d::Sprite*, d2d::Vector> m_mapSprite2Pos;
 
-	std::map<d2d::ISprite*, d2d::Vector> m_mapRemoved;
+	std::map<d2d::Sprite*, d2d::Vector> m_mapRemoved;
 
 }; // CheckerBoard
 

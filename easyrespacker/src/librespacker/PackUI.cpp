@@ -44,7 +44,7 @@ void PackUI::AddTask(const std::string& filepath)
 
 void PackUI::OnKnownPackID(const std::string& filepath, int id)
 {
-	std::string key = d2d::FilenameTools::FormatFilepathAbsolute(filepath);
+	std::string key = d2d::FileHelper::FormatFilepathAbsolute(filepath);
 
 	std::map<std::string, std::set<PackUITask*> >::iterator 
 		itr = m_task_listener.find(key);

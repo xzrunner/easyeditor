@@ -5,13 +5,13 @@ namespace d2d
 {
 
 template <typename T>
-class ReloadTextureVisitor : public IVisitor
+class ReloadTextureVisitor : public Visitor
 {
 public:
 	ReloadTextureVisitor();
 	virtual ~ReloadTextureVisitor();
 
-	virtual void Visit(Object* object, bool& bFetchNext);
+	virtual void Visit(Object* object, bool& next);
 
 }; // ReloadTextureVisitor
 

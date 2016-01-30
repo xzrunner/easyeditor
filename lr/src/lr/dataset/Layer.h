@@ -13,15 +13,15 @@ class Layer : public d2d::Object
 public:
 	Layer(int id, LibraryPanel* library);
 	
-	virtual void TraverseSprite(d2d::IVisitor& visitor, bool order = true) const;
-	virtual void TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual void TraverseSprite(d2d::Visitor& visitor, bool order = true) const;
+	virtual void TraverseSprite(d2d::Visitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 	virtual bool RemoveSprite(Object* obj);
 	virtual bool InsertSprite(Object* obj, int idx);
 	virtual bool ClearSprite();
 	virtual bool ResetOrderSprite(const Object* obj, bool up);
 	virtual bool ResetOrderSpriteMost(const Object* obj, bool up);
 
-	virtual void TraverseShape(d2d::IVisitor& visitor, bool order = true) const;
+	virtual void TraverseShape(d2d::Visitor& visitor, bool order = true) const;
 	virtual bool RemoveShape(Object* obj);
 	virtual bool InsertShape(Object* obj);
 	virtual bool ClearShape();
@@ -40,8 +40,8 @@ public:
 
 	bool Update(int version);
 
-	d2d::ISprite* QuerySprite(const std::string& name) const;
-	d2d::IShape* QueryShape(const std::string& name) const;
+	d2d::Sprite* QuerySprite(const std::string& name) const;
+	d2d::Shape* QueryShape(const std::string& name) const;
 
 	int GetID() const { return m_id; }
 
@@ -57,24 +57,24 @@ private:
 
 	void LoadFromBaseFile(int layer_idx, const std::string& filepath, const std::string& dir);
 
-	void CheckSpriteName(d2d::ISprite* spr);
+	void CheckSpriteName(d2d::Sprite* spr);
 
-	void LoadShapesUD(const Json::Value& spr_val, d2d::ISprite* spr) const;
-	void StoreShapesUD(d2d::ISprite* spr, Json::Value& spr_val) const;
+	void LoadShapesUD(const Json::Value& spr_val, d2d::Sprite* spr) const;
+	void StoreShapesUD(d2d::Sprite* spr, Json::Value& spr_val) const;
 
-	d2d::ISprite* LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path);
-	void StoreGroup(d2d::ISprite* spr, Json::Value& val, const std::string& dir) const;
+	d2d::Sprite* LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	void StoreGroup(d2d::Sprite* spr, Json::Value& val, const std::string& dir) const;
 
-	d2d::ISprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
-	bool StoreSprite(d2d::ISprite* spr, Json::Value& val, const std::string& dir) const;
+	d2d::Sprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	bool StoreSprite(d2d::Sprite* spr, Json::Value& val, const std::string& dir) const;
 	
 private:
 	template<typename T>
-	class QueryNameVisitor : public d2d::IVisitor
+	class QueryNameVisitor : public d2d::Visitor
 	{
 	public:
 		QueryNameVisitor(const std::string& name);
-		virtual void Visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& next);
 		T* GetResult() { return m_result; }
 	private:
 		std::string m_name;
@@ -91,8 +91,8 @@ private:
 
 	bool m_editable, m_visible;
 
-	d2d::ObjectVector<d2d::ISprite> m_sprites;
-	d2d::ObjectVector<d2d::IShape> m_shapes;
+	d2d::ObjectVector<d2d::Sprite> m_sprites;
+	d2d::ObjectVector<d2d::Shape> m_shapes;
 
 	std::string m_base_filepath;
 

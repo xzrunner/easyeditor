@@ -18,7 +18,7 @@ ClipboxBuilder::~ClipboxBuilder()
 	}
 }
 
-void ClipboxBuilder::Traverse(d2d::IVisitor& visitor) const
+void ClipboxBuilder::Traverse(d2d::Visitor& visitor) const
 {
 	std::map<const ecomplex::Symbol*, const PackClipbox*>::const_iterator itr 
 		= m_map_clipbox.begin();
@@ -39,20 +39,20 @@ const IPackNode* ClipboxBuilder::Create(const ecomplex::Symbol* complex)
 		return itr->second;
 	}
 
-	if (complex->m_clipbox.xMin == 0 &&
-		complex->m_clipbox.yMin == 0 &&
-		complex->m_clipbox.xMax == 0 &&
-		complex->m_clipbox.yMax == 0) {
+	if (complex->m_clipbox.xmin == 0 &&
+		complex->m_clipbox.ymin == 0 &&
+		complex->m_clipbox.xmax == 0 &&
+		complex->m_clipbox.ymax == 0) {
 		return NULL;
 	}
 
 	const d2d::Rect& r = complex->m_clipbox;
 
 	PackClipbox* cb = new PackClipbox;
-	cb->x = r.xMin;
-	cb->y = r.yMax;
-	cb->w = r.xLength();
-	cb->h = r.yLength();
+	cb->x = r.xmin;
+	cb->y = r.ymax;
+	cb->w = r.Width();
+	cb->h = r.Height();
 	m_map_clipbox.insert(std::make_pair(complex, cb));
 
 	return cb;

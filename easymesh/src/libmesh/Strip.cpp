@@ -36,8 +36,8 @@ void Strip::Load(const Json::Value& value)
 
 	m_left_nodes.m_ori.clear();
 	m_right_nodes.m_ori.clear();
-	d2d::JsonIO::Load(value["left nodes"], m_left_nodes.m_ori);
-	d2d::JsonIO::Load(value["right nodes"], m_right_nodes.m_ori);
+	d2d::JsonSerializer::Load(value["left nodes"], m_left_nodes.m_ori);
+	d2d::JsonSerializer::Load(value["right nodes"], m_right_nodes.m_ori);
 	m_left_nodes.m_ext = m_left_nodes.m_ori;
 	m_right_nodes.m_ext = m_right_nodes.m_ori;
 
@@ -53,8 +53,8 @@ void Strip::Store(Json::Value& value) const
 	value["width"] = m_width;
 	value["height"] = m_height;
 
-	d2d::JsonIO::Store(m_left_nodes.m_ori, value["left nodes"]);
-	d2d::JsonIO::Store(m_right_nodes.m_ori, value["right nodes"]);
+	d2d::JsonSerializer::Store(m_left_nodes.m_ori, value["left nodes"]);
+	d2d::JsonSerializer::Store(m_right_nodes.m_ori, value["right nodes"]);
 
 	StoreTriangles(value["triangles"]);
 }
@@ -119,9 +119,9 @@ void Strip::OffsetUV(float dx, float dy)
 	{
 		Triangle* tri = m_tris[i];
 		d2d::Rect r;
-		r.makeInfinite();
+		r.MakeInfinite();
 		for (int i = 0; i < 3; ++i) {
-			r.combine(tri->nodes[i]->uv);
+			r.Combine(tri->nodes[i]->uv);
 		}
 
 		for (int i = 0; i < 3; ++i) 
@@ -129,10 +129,10 @@ void Strip::OffsetUV(float dx, float dy)
 			Node* n = tri->nodes[i];
 			float y = n->uv.y - m_uv_offset;
 			y = y - std::floor(y);
-			if (fabs(y - 0) < 0.0001f && n->uv.y == r.yMax) {
+			if (fabs(y - 0) < 0.0001f && n->uv.y == r.ymax) {
 				y = 1;
 			}
-			if (fabs(y - 1) < 0.0001f && n->uv.y == r.yMin) {
+			if (fabs(y - 1) < 0.0001f && n->uv.y == r.ymin) {
 				y = 0;
 			}
 			n->uv.y = y;
@@ -316,7 +316,7 @@ void Strip::TranslateNode(Node* node, const std::vector<std::pair<d2d::Vector, d
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
-		float dis = d2d::Math::getDistanceSquare(node->ori_xy, trans_list[i].first);
+		float dis = d2d::Math2D::GetDistanceSquare(node->ori_xy, trans_list[i].first);
 		if (dis < 0.01) {
 			node->xy = trans_list[i].second;
 			break;
@@ -328,7 +328,7 @@ void Strip::TranslateNode(d2d::Vector& node, const std::vector<std::pair<d2d::Ve
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
 	{
-		float dis = d2d::Math::getDistanceSquare(node, trans_list[i].first);
+		float dis = d2d::Math2D::GetDistanceSquare(node, trans_list[i].first);
 		if (dis < 0.01) {
 			node = trans_list[i].second;
 			break;
@@ -347,9 +347,9 @@ void Strip::MapUV2XY(const std::vector<d2d::Vector>& nodes, int index, const d2d
 	TranslateNode(xy_e, trans_list);
 
 	d2d::Vector foot;
-	int st = d2d::Math::getFootOfPerpendicular(s, e, pos, &foot);
+	int st = d2d::Math2D::GetFootOfPerpendicular(s, e, pos, &foot);
 	
-	float p = d2d::Math::getDistance(s, foot) / d2d::Math::getDistance(s, e);
+	float p = d2d::Math2D::GetDistance(s, foot) / d2d::Math2D::GetDistance(s, e);
  	d2d::Vector xy_p = xy_s + (xy_e - xy_s) * p;
  	trans_list.push_back(std::make_pair(foot, xy_p));
 }
@@ -392,11 +392,11 @@ GetNodeInsertPos(const d2d::Vector& p, d2d::Vector& nearest)
 	for (int i = 0, n = m_ext.size() - 1; i < n; ++i)
 	{
 		d2d::Vector foot;
-		int st = d2d::Math::getFootOfPerpendicular(m_ext[i], m_ext[i+1], p, &foot);
+		int st = d2d::Math2D::GetFootOfPerpendicular(m_ext[i], m_ext[i+1], p, &foot);
 		if (st == -1) {
 			continue;
 		}
-		float dis = d2d::Math::getDistanceSquare(foot, p);
+		float dis = d2d::Math2D::GetDistanceSquare(foot, p);
 		if (dis < dis_nearest) {
 			idx_nearest = i;
 			dis_nearest = dis;
@@ -416,7 +416,7 @@ QueryIndex(const d2d::Vector& p, float radius) const
 {
 	// front and back are bound
 	for (int i = 1, n = m_ori.size() - 1; i < n; ++i) {
-		if (d2d::Math::getDistance(m_ori[i], p) < radius) {
+		if (d2d::Math2D::GetDistance(m_ori[i], p) < radius) {
 			return i;
 		}
 	}
@@ -438,7 +438,7 @@ bool Strip::NodeList::
 IsRegionContain(const d2d::Vector& p) const
 {
 	d2d::Vector foot;
-	return d2d::Math::getFootOfPerpendicular(m_ori.front(), m_ori.back(), p, &foot) != -1;
+	return d2d::Math2D::GetFootOfPerpendicular(m_ori.front(), m_ori.back(), p, &foot) != -1;
 }
 
 void Strip::NodeList::
@@ -457,11 +457,11 @@ Insert(std::vector<d2d::Vector>& nodes, const d2d::Vector& p)
 	for (int i = 0, n = nodes.size() - 1; i < n; ++i)
 	{
 		d2d::Vector foot;
-		int st = d2d::Math::getFootOfPerpendicular(nodes[i], nodes[i+1], p, &foot);
+		int st = d2d::Math2D::GetFootOfPerpendicular(nodes[i], nodes[i+1], p, &foot);
 		if (st == -1) {
 			continue;
 		}
-		float dis = d2d::Math::getDistanceSquare(foot, p);
+		float dis = d2d::Math2D::GetDistanceSquare(foot, p);
 		if (dis < dis_nearest) {
 			idx_nearest = i;
 			dis_nearest = dis;

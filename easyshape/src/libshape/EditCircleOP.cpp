@@ -67,11 +67,11 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_firstPress.isValid())
+		if (m_firstPress.IsValid())
 		{
 			m_currPos = m_stage->TransPosScrToProj(x, y);
 
-			const float radius = d2d::Math::getDistance(m_firstPress, m_currPos);
+			const float radius = d2d::Math2D::GetDistance(m_firstPress, m_currPos);
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
@@ -132,7 +132,7 @@ bool EditCircleOP::OnMouseMove(int x, int y)
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
-		d2d::IShape* old = m_captured.shape;
+		d2d::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -153,11 +153,11 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
 			// move  
-			if (m_captured.pos.isValid())
+			if (m_captured.pos.IsValid())
 				circle->center = m_currPos;
 			// change size
 			else
-				circle->radius = d2d::Math::getDistance(m_currPos, circle->center);
+				circle->radius = d2d::Math2D::GetDistance(m_currPos, circle->center);
 
 			if (m_propertyPanel) {
 				m_propertyPanel->EnablePropertyGrid(false);
@@ -181,10 +181,10 @@ bool EditCircleOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::drawCircle(circle->center, tolerance, 
+				d2d::PrimitiveDraw::DrawCircle(circle->center, tolerance, 
 					true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
-				if (!m_captured.pos.isValid()) {
-					d2d::PrimitiveDraw::drawCircle(circle->center, circle->radius,
+				if (!m_captured.pos.IsValid()) {
+					d2d::PrimitiveDraw::DrawCircle(circle->center, circle->radius,
 						false, tolerance, d2d::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
@@ -192,8 +192,8 @@ bool EditCircleOP::OnDraw() const
 	}
 	else
 	{
-		if (m_firstPress.isValid() && m_currPos.isValid()) {
-			d2d::PrimitiveDraw::drawCircle(m_firstPress, d2d::Math::getDistance(m_firstPress, m_currPos), 
+		if (m_firstPress.IsValid() && m_currPos.IsValid()) {
+			d2d::PrimitiveDraw::DrawCircle(m_firstPress, d2d::Math2D::GetDistance(m_firstPress, m_currPos), 
 				false, 3, d2d::Colorf(0, 0, 0), 32);
 		}
 	}
@@ -205,8 +205,8 @@ bool EditCircleOP::Clear()
 {
 	if (ZoomViewOP::Clear()) return true;
 
-	m_firstPress.setInvalid();
-	m_currPos.setInvalid();
+	m_firstPress.SetInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }

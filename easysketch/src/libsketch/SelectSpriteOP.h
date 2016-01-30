@@ -26,7 +26,7 @@ public:
 	}
 
 private:
-	d2d::ISprite* SelectByPos(const ivec2& pos) const;
+	d2d::Sprite* SelectByPos(const ivec2& pos) const;
 
 protected:
 	StagePanel* m_stage;

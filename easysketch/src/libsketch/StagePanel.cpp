@@ -22,7 +22,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
+void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type, 
 								 bool order) const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -56,7 +56,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
 		break;
 	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
+		Remove((d2d::Sprite*)ud);
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		Clear();
@@ -64,14 +64,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::Insert(d2d::ISprite* spr)
+void StagePanel::Insert(d2d::Sprite* spr)
 {
 	spr->Retain();
 	m_sprites.push_back(spr);
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(d2d::ISprite* spr)
+void StagePanel::Remove(d2d::Sprite* spr)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (m_sprites[i] == spr) {

@@ -29,10 +29,10 @@ void PreviewCanvas::OnTimer()
 
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	if (m_setting.isCirculate) {
-		m_control.reset();
+		m_control.Reset();
 	}
 	else {
-		m_control.decrease();
+		m_control.Decrease();
 	}
 }
 

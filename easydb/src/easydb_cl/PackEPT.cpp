@@ -42,8 +42,8 @@ void PackEPT::Trigger(const std::string& tp_json, const std::string& tp_dir,
 	// load tp data
 	int i = 1;
 	while (true) {
-		std::string tp_path = tp_json + d2d::StringTools::ToString(i) + ".json";
-		if (d2d::FilenameTools::IsFileExist(tp_path)) {
+		std::string tp_path = tp_json + d2d::StringHelper::ToString(i) + ".json";
+		if (d2d::FileHelper::IsFileExist(tp_path)) {
 			tp.Add(tp_path);
 			d2d::TextureFactory::Instance()->AddTextureFromConfig(tp_path);
 		} else {

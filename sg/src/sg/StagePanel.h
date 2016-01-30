@@ -58,10 +58,10 @@ protected:
 private:
 	d2d::Vector FixSpriteLocation(const d2d::Vector& pos) const;
 
-	void ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const;
+	void ChangeSymbolRemain(d2d::Sprite* sprite, bool increase) const;
 
-	void Insert(d2d::ISprite* spr);
-	void Remove(d2d::ISprite* spr);
+	void Insert(d2d::Sprite* spr);
+	void Remove(d2d::Sprite* spr);
 	void Clear();
 
 private:

@@ -12,7 +12,7 @@ public:
 	OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
 		d2d::MultiSpritesImpl* sprites_impl);
 
-	void Open(d2d::ISprite* spr);
+	void Open(d2d::Sprite* spr);
 
 private:
 	wxWindow* m_wnd;

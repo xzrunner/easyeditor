@@ -1,6 +1,6 @@
 #include "GroupTreeItem.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "dataset/Group.h"
 
 namespace d2d
@@ -10,7 +10,7 @@ namespace d2d
 // class GroupTreeSpriteItem
 //////////////////////////////////////////////////////////////////////////
 
-GroupTreeSpriteItem::GroupTreeSpriteItem(ISprite* sprite)
+GroupTreeSpriteItem::GroupTreeSpriteItem(Sprite* sprite)
 	: m_sprite(sprite)
 {
 	if (m_sprite) {

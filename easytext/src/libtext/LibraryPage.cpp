@@ -12,14 +12,14 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string type = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_text);
+	std::string type = d2d::FileType::GetTag(d2d::FileType::e_text);
 	d2d::ILibraryPage::OnAddPress(type);
 }
 

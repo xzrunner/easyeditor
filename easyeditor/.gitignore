@@ -1,0 +1,5 @@
+platform/msvc2008/libdata
+platform/msvc2008/libmath
+platform/msvc2008/librender
+platform/msvc2008/libtool
+platform/msvc2008/libview

@@ -93,7 +93,7 @@ void Task::FormatFiles()
 {
 	wxString dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+	d2d::FileHelper::FetchAllFiles(dir.ToStdString(), files);
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
 		wxFileName filename(files[i]);

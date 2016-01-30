@@ -23,7 +23,7 @@ void Symbol::ReloadTexture() const
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	if (m_ps) {
 		m_ps->Update(1.0f / 30);
@@ -31,7 +31,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
 {
 	return d2d::Rect(200, 200);
 }

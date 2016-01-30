@@ -26,12 +26,12 @@ void PreviewCanvas::OnDrawSprites() const
  		b2Vec2 target = op->m_mouseJoint->GetAnchorB();
  		d2d::Vector first(target.x * ephysics::BOX2D_SCALE_FACTOR, target.y * ephysics::BOX2D_SCALE_FACTOR);
  
- 		if (op->currPos.isValid())
+ 		if (op->currPos.IsValid())
  		{
- 			d2d::PrimitiveDraw::drawLine(first, op->currPos, d2d::Colorf(1, 1, 1), 1);
- 			d2d::PrimitiveDraw::drawCircle(op->currPos, 2, true, 2, d2d::Colorf(0, 1, 0));
+ 			d2d::PrimitiveDraw::DrawLine(first, op->currPos, d2d::Colorf(1, 1, 1), 1);
+ 			d2d::PrimitiveDraw::DrawCircle(op->currPos, 2, true, 2, d2d::Colorf(0, 1, 0));
  		}
- 		d2d::PrimitiveDraw::drawCircle(first, 2, true, 2, d2d::Colorf(0, 1, 0));
+ 		d2d::PrimitiveDraw::DrawCircle(first, 2, true, 2, d2d::Colorf(0, 1, 0));
  	}
 }
 

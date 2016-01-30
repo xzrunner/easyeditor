@@ -51,7 +51,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::TraverseShapes(d2d::IVisitor& visitor, 
+void StagePanel::TraverseShapes(d2d::Visitor& visitor, 
 								d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
 {
 	Shape* shape = m_symbol->getShape();
@@ -79,7 +79,7 @@ Shape* StagePanel::GetShape()
 	return m_symbol->getShape();
 }
 
-void StagePanel::LoadFromSymbol(const d2d::ISymbol* symbol)
+void StagePanel::LoadFromSymbol(const d2d::Symbol* symbol)
 {
 }
 
@@ -125,14 +125,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	{
 	case d2d::MSG_REMOVE_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->RemoveShape((d2d::IShape*)ud)) {
+			if (static_cast<EditShape*>(shape)->RemoveShape((d2d::Shape*)ud)) {
 				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case d2d::MSG_INSERT_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->InsertShape((d2d::IShape*)ud)) {
+			if (static_cast<EditShape*>(shape)->InsertShape((d2d::Shape*)ud)) {
 				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
@@ -163,11 +163,11 @@ StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
+OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos)
 {
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
-		Symbol* symbol = new Symbol(image->getImage());
+		Symbol* symbol = new Symbol(image->GetImage());
 		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();

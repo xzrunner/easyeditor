@@ -38,7 +38,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			wxString ext = d2d::FilenameTools::getExtension(filename);
+			wxString ext = d2d::FileHelper::GetExtension(filename);
 			if (ext == "png") {
 				SaveAsPNG(filename.ToStdString());
 			} else {
@@ -66,7 +66,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	std::vector<const d2d::ISprite*> sprites;
+	std::vector<const d2d::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
 	preview::MainDialog dlg(this, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
@@ -85,14 +85,14 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	d2d::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
-	std::vector<d2d::ISprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<d2d::Sprite*> sprites;
+	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i]);
 	}
 
-	std::vector<d2d::IShape*> shapes;
-	stage->TraverseShapes(d2d::FetchAllVisitor<d2d::IShape>(shapes), d2d::DT_VISIBLE);
+	std::vector<d2d::Shape*> shapes;
+	stage->TraverseShapes(d2d::FetchAllVisitor<d2d::Shape>(shapes), d2d::DT_VISIBLE);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		ss.DrawShape(shapes[i]);		
 	}
@@ -105,7 +105,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
-	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	wxString fixed = d2d::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }

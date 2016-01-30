@@ -24,7 +24,7 @@ wxDragResult CombinedDropTarget::OnData(wxCoord x, wxCoord y, wxDragResult def)
 	bool b = false;
 	try {
 		b = dobj->OnData(x, y);
-	} catch (d2d::Exception& e) {
+	} catch (Exception& e) {
 		ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}

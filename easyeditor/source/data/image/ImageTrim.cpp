@@ -1,0 +1,115 @@
+#include "ImageTrim.h"
+
+namespace eimage
+{
+
+ImageTrim::ImageTrim(const ImageData& img_data)
+	: m_img_data(img_data)
+{
+}
+
+Rect ImageTrim::Trim() const
+{
+	Rect sub;
+	sub.MakeInfinite();
+
+	if (m_img_data.GetChannels() != 4) {
+		return sub;
+	}
+
+	const uint8_t* pixels = m_img_data.GetPixelData();
+	int width = m_img_data.GetWidth(),
+		height = m_img_data.GetHeight();
+
+	if (!pixels || width <= 0 || height <= 0) {
+		return sub;
+	}
+
+	// down
+	sub.ymin = 0;
+	for (int i = 0; i < height; ++i)
+	{
+		int j = 0;
+		for ( ; j < width; ++j) {
+			if (!IsTransparent(j, i)) {
+				break;
+			}
+		}
+		if (j == width) {
+			++sub.ymin;
+		} else {
+			break;
+		}
+	}
+	// up
+	sub.ymax = height;
+	for (int i = height - 1; i >= 0; --i)
+	{
+		int j = 0;
+		for ( ; j < width; ++j) {
+			if (!IsTransparent(j, i)) {
+				break;
+			}
+		}
+		if (j == width) {
+			--sub.ymax;
+		} else {
+			break;
+		}
+	}
+	// left
+	sub.xmin = 0;
+	for (int i = 0; i < width; ++i)
+	{
+		int j = 0;
+		for ( ; j < height; ++j) {
+			if (!IsTransparent(i, j)) {
+				break;
+			}
+		}
+		if (j == height) {
+			++sub.xmin;
+		} else {
+			break;
+		}
+	}
+	// right
+	sub.xmax = width;
+	for (int i = width - 1; i >= 0; --i)
+	{
+		int j = 0;
+		for ( ; j < height; ++j) {
+			if (!IsTransparent(i, j)) {
+				break;
+			}
+		}
+		if (j == height) {
+			--sub.xmax;
+		} else {
+			break;
+		}
+	}
+
+	if (sub.IsValid()) {
+		return sub;
+	} else {
+		Rect ret;
+
+// 		const Rect& r = m_image->getRegion();
+// 		ret.xmin = ret.ymin = 0;
+// 		ret.xmax = r.xLength();
+// 		ret.ymax = r.yLength();
+
+		ret.xmin = ret.ymin = 0;
+		ret.xmax = ret.ymax = 1;
+
+		return ret;
+	}
+}
+
+bool ImageTrim::IsTransparent(int x, int y) const
+{
+	return m_img_data.GetPixelData()[(y * m_img_data.GetWidth() + x) * 4 + 3] == 0;
+}
+
+}

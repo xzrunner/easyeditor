@@ -7,7 +7,7 @@ namespace d2d
 {
 
 class Group;
-class ISprite;
+class Sprite;
 
 class GroupTreeItem : public wxTreeItemData
 {
@@ -20,7 +20,7 @@ public:
 class GroupTreeSpriteItem : public GroupTreeItem
 {
 public:
-	GroupTreeSpriteItem(ISprite* sprite);
+	GroupTreeSpriteItem(Sprite* sprite);
 	GroupTreeSpriteItem(const GroupTreeSpriteItem& item);
 	virtual ~GroupTreeSpriteItem();
 
@@ -28,10 +28,10 @@ public:
 
 	virtual bool IsGroup() const { return false; }
 
-	ISprite* GetSprite() { return m_sprite; }
+	Sprite* GetSprite() { return m_sprite; }
 
 private:
-	ISprite* m_sprite;
+	Sprite* m_sprite;
 
 }; // GroupTreeSpriteItem
 

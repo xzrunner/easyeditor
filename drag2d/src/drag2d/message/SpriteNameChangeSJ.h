@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class SpriteNameChangeSJ : public Subject
 {
 public:
-	void OnSpriteNameChanged(const ISprite* spr, Observer* except = NULL);
+	void OnSpriteNameChanged(const Sprite* spr, Observer* except = NULL);
 
 	static SpriteNameChangeSJ* Instance();
 

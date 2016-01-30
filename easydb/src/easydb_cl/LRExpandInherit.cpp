@@ -39,7 +39,7 @@ void LRExpandInherit::Run(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	Json::Value new_lr_val = lr_val;
 
@@ -74,7 +74,7 @@ void LRExpandInherit::ExtendLayer(const std::string& dir, const std::string& fil
 	Json::Value lr_val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::string full_path = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+	std::string full_path = d2d::FileHelper::GetAbsolutePath(dir, filepath);
 	std::ifstream fin(full_path.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, lr_val);

@@ -50,15 +50,15 @@ void RotateSpriteState::Rotate(const Vector& dst)
 //////////////////////////////////////////////////////////////////////////
 
 void RotateSpriteState::Visitor::
-	Visit(Object* object, bool& bFetchNext)
+	Visit(Object* object, bool& next)
 {
-	ISprite* sprite = static_cast<ISprite*>(object);
+	Sprite* sprite = static_cast<Sprite*>(object);
 
 	Vector center = sprite->GetPosition() + sprite->GetOffset();
-	float angle = Math::getAngleInDirection(center, m_start, m_end);
+	float angle = Math2D::GetAngleInDirection(center, m_start, m_end);
 	sprite->Rotate(angle);
 
-	bFetchNext = false;
+	next = false;
 }
 
 }

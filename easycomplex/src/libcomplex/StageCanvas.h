@@ -17,7 +17,7 @@ public:
 	
 	virtual ~StageCanvas();
 
-	void SetBackground(d2d::ISymbol* symbol);
+	void SetBackground(d2d::Symbol* symbol);
 
 protected:
 	virtual void OnSize(int w, int h);
@@ -34,9 +34,9 @@ private:
 
 	d2d::ShapeStyle m_bgStyle, m_clipboxStyle;
 
-	d2d::ISymbol* m_background;
+	d2d::Symbol* m_background;
 
-	mutable d2d::FpsStat m_stat;
+	mutable d2d::FPS m_fps;
 
 	e3d::Camera m_camera3;
 

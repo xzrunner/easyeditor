@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class RemoveSpriteSJ : public Subject
 {
 public:
-	void Remove(ISprite* spr, Observer* except = NULL);
+	void Remove(Sprite* spr, Observer* except = NULL);
 
 	static RemoveSpriteSJ* Instance();
 

@@ -1,7 +1,7 @@
 #include "MultiSpritesImpl.h"
 #include "SpriteSelection.h"
 
-#include "dataset/AbstractBV.h"
+#include "dataset/BoundingBox.h"
 #include "common/Rect.h"
 #include "common/sprite_visitors.h"
 
@@ -31,12 +31,12 @@ MultiSpritesImpl::~MultiSpritesImpl()
 	m_sprite_selection->Release();
 }
 
-ISprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
+Sprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
 {
-	ISprite* selected = NULL;
+	Sprite* selected = NULL;
 	TraverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
 	if (selected && !selected->editable) {
-		std::vector<ISprite*> sprites;
+		std::vector<Sprite*> sprites;
 		QuerySpritesByRect(Rect(pos, 1, 1), false, sprites);
 		if (!sprites.empty()) {
 			selected = sprites.back();
@@ -47,7 +47,7 @@ ISprite* MultiSpritesImpl::QuerySpriteByPos(const Vector& pos) const
 	return selected;
 }
 
-void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const
+void MultiSpritesImpl::QuerySpritesByRect(const Rect& rect, bool contain, std::vector<Sprite*>& result) const
 {
 	TraverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
 }
@@ -58,8 +58,8 @@ void MultiSpritesImpl::ClearSelectedSprite()
 		return;
 	}
 
-	std::vector<ISprite*> sprites;
-	m_sprite_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_sprite_selection->Traverse(FetchAllVisitor<Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		RemoveSpriteSJ::Instance()->Remove(sprites[i]);
 	}
@@ -89,7 +89,7 @@ void MultiSpritesImpl::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void MultiSpritesImpl::OnSpriteSelected(ISprite* spr, bool clear)
+void MultiSpritesImpl::OnSpriteSelected(Sprite* spr, bool clear)
 {
 	if (clear) {
 		m_sprite_selection->Clear();
@@ -103,4 +103,4 @@ void MultiSpritesImpl::OnSpriteSelected(ISprite* spr, bool clear)
 	}
 }
 
-} // d2d
+}

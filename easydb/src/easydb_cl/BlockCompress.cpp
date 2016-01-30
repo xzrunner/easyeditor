@@ -35,10 +35,10 @@ void BlockCompress::Run(int argc, char *argv[])
 void BlockCompress::Trigger(const std::string& src_dir, const std::string& dst_dir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(src_dir, files);
+	d2d::FileHelper::FetchAllFiles(src_dir, files);
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
+		if (d2d::FileType::IsType(files[i], d2d::FileType::e_image)) {
 			filepaths.push_back(files[i].ToStdString());
 		}
 	}

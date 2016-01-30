@@ -32,37 +32,37 @@ CircleShape* CircleShape::Clone() const
 
 bool CircleShape::IsContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::getDistance(center, pos) < QUERY_ACCURACY;
+	return d2d::Math2D::GetDistance(center, pos) < QUERY_ACCURACY;
 }
 
 bool CircleShape::IsIntersect(const d2d::Rect& rect) const
 {
-	const float cx = (rect.xMin + rect.xMax) * 0.5f,
-		cy = (rect.yMin + rect.yMax) * 0.5f;
+	const float cx = (rect.xmin + rect.xmax) * 0.5f,
+		cy = (rect.ymin + rect.ymax) * 0.5f;
 
-	const float dis = d2d::Math::getDistance(center, d2d::Vector(cx, cy));
-	if (dis > d2d::Vector(rect.xMax - cx, rect.yMax - cy).length() + radius)
+	const float dis = d2d::Math2D::GetDistance(center, d2d::Vector(cx, cy));
+	if (dis > d2d::Vector(rect.xmax - cx, rect.ymax - cy).Length() + radius)
 		return false;
 
-	if (d2d::Math::isPointInCircle(d2d::Vector(rect.xMin, rect.yMin), center, radius))
+	if (d2d::Math2D::IsPointInCircle(d2d::Vector(rect.xmin, rect.ymin), center, radius))
 		return true;
-	if (d2d::Math::isPointInCircle(d2d::Vector(rect.xMax, rect.yMin), center, radius))
+	if (d2d::Math2D::IsPointInCircle(d2d::Vector(rect.xmax, rect.ymin), center, radius))
 		return true;
-	if (d2d::Math::isPointInCircle(d2d::Vector(rect.xMax, rect.yMax), center, radius))
+	if (d2d::Math2D::IsPointInCircle(d2d::Vector(rect.xmax, rect.ymax), center, radius))
 		return true;
-	if (d2d::Math::isPointInCircle(d2d::Vector(rect.xMin, rect.yMax), center, radius))
+	if (d2d::Math2D::IsPointInCircle(d2d::Vector(rect.xmin, rect.ymax), center, radius))
 		return true;
-	if (d2d::Math::isPointInRect(center, rect))
+	if (d2d::Math2D::IsPointInRect(center, rect))
 		return true;
 
-	if (center.x > rect.xMin && center.x < rect.xMax)
+	if (center.x > rect.xmin && center.x < rect.xmax)
 	{
-		if (dis < rect.yMax - cy + radius)
+		if (dis < rect.ymax - cy + radius)
 			return true;
 	}
-	if (center.y > rect.yMin && center.y < rect.yMax)
+	if (center.y > rect.ymin && center.y < rect.ymax)
 	{
-		if (dis < rect.xMax - cx + radius)
+		if (dis < rect.xmax - cx + radius)
 			return true;
 	}
 
@@ -76,7 +76,7 @@ void CircleShape::Translate(const d2d::Vector& offset)
 
 void CircleShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::PrimitiveDraw::drawCircle(mt, center, radius, false, 3, color.multi, 32);
+	d2d::PrimitiveDraw::DrawCircle(mt, center, radius, false, 3, color.multi, 32);
 }
 
 d2d::IPropertySetting* CircleShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
@@ -86,7 +86,7 @@ d2d::IPropertySetting* CircleShape::CreatePropertySetting(d2d::EditPanelImpl* st
 
 void CircleShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::IShape::LoadFromFile(value, dir);
+	d2d::Shape::LoadFromFile(value, dir);
 
 	center.x = value["x"].asDouble();
 	center.y = value["y"].asDouble();
@@ -97,7 +97,7 @@ void CircleShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 
 void CircleShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::IShape::StoreToFile(value, dir);
+	d2d::Shape::StoreToFile(value, dir);
 
 	value["x"] = center.x;
 	value["y"] = center.y;

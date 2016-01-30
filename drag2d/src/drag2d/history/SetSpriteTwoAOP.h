@@ -8,22 +8,22 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 #define SET_SPRITE_TWO_AOP_DEC(name) \
 	class SetSprite##name##AOP : public AbstractAtomicOP \
 	{ \
 	public: \
-		SetSprite##name##AOP(const std::vector<ISprite*>& sprites, const Vector& val); \
+		SetSprite##name##AOP(const std::vector<Sprite*>& sprites, const Vector& val); \
 		virtual ~SetSprite##name##AOP(); \
 	\
 		virtual void Undo(); \
 		virtual void Redo(); \
 	\
-		virtual Json::Value Store(const std::vector<ISprite*>& sprites) const; \
+		virtual Json::Value Store(const std::vector<Sprite*>& sprites) const; \
 	\
 	private: \
-		std::vector<ISprite*> m_sprites; \
+		std::vector<Sprite*> m_sprites; \
 		std::vector<Vector> m_old; \
 	\
 		Vector m_new; \

@@ -36,11 +36,11 @@ void AddFrameSprite::Run(int argc, char *argv[])
 void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_path) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxString filename = files[i];
-		if (!d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_anim)) {
+		if (!d2d::FileType::IsType(filename, d2d::FileType::e_anim)) {
 			continue;
 		}
 
@@ -50,8 +50,8 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 		d2d::NullSprite sprite(&symbol);
 		Json::Value actor_val;
 		sprite.Store(actor_val);
-		wxString dir = d2d::FilenameTools::getFileDir(json_file);
-		actor_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, sprite_path).ToStdString();
+		wxString dir = d2d::FileHelper::GetFileDir(json_file);
+		actor_val["filepath"] = d2d::FileHelper::GetRelativePath(dir, sprite_path).ToStdString();
 
 		Json::Value value;
 		Json::Reader reader;

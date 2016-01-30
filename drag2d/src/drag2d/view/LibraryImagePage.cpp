@@ -17,7 +17,7 @@ LibraryImagePage::LibraryImagePage(wxWindow* parent, bool supportBmp/* = true*/)
 	InitLayout();
 }
 
-bool LibraryImagePage::IsHandleSymbol(ISymbol* symbol) const
+bool LibraryImagePage::IsHandleSymbol(Symbol* symbol) const
 {
 	return dynamic_cast<ImageSymbol*>(symbol) != NULL;
 }
@@ -34,7 +34,7 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(symbol);
 				symbol->Release();
 			} catch (Exception& e) {
@@ -45,4 +45,4 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 	}
 }
 
-} // d2d
+}

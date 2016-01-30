@@ -17,13 +17,13 @@ MotorJoint::MotorJoint(Body* b0, Body* b1)
 bool MotorJoint::isContain(const d2d::Vector& pos) const
 {
 	const d2d::Vector center = (bodyA->sprite->GetPosition() + bodyB->sprite->GetPosition()) * 0.5f;
-	return d2d::Math::getDistance(center, pos) < JOINT_RADIUS_OUT;
+	return d2d::Math2D::GetDistance(center, pos) < JOINT_RADIUS_OUT;
 }
 
 bool MotorJoint::isIntersect(const d2d::Rect& rect) const
 {
 	const d2d::Vector center = (bodyA->sprite->GetPosition() + bodyB->sprite->GetPosition()) * 0.5f;
-	return d2d::Math::isPointInRect(center, rect);
+	return d2d::Math2D::IsPointInRect(center, rect);
 }
 
 void MotorJoint::draw(DrawType type) const
@@ -32,8 +32,8 @@ void MotorJoint::draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::drawDashLine(center, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::drawDashLine(center, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		d2d::PrimitiveDraw::DrawDashLine(center, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
+		d2d::PrimitiveDraw::DrawDashLine(center, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		drawBodyFlag();
 	}
@@ -47,16 +47,16 @@ void MotorJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 	switch (type)
 	{
 	case e_default:
-		color.set(0.8f, 0.8f, 0.8f);
+		color.Set(0.8f, 0.8f, 0.8f);
 		break;
 	case e_mouseOn:
-		color.set(1, 1, 1);
+		color.Set(1, 1, 1);
 		break;
 	case e_selected:
-		color.set(1, 1, 0);
+		color.Set(1, 1, 0);
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }

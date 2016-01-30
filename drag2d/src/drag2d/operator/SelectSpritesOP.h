@@ -15,12 +15,12 @@ class MultiSpritesImpl;
 class AbstractEditCMPT;
 class IPropertySetting;
 class SpriteSelection;
-class ISprite;
+class Sprite;
 
 class SelectSpritesOP : public DrawSelectRectOP
 {
 public:
-	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage, 
 		MultiSpritesImpl* spritesImpl, AbstractEditCMPT* callback = NULL);
 	virtual ~SelectSpritesOP();
 
@@ -35,10 +35,10 @@ public:
 	virtual bool Clear();
 
 protected:
-	virtual ISprite* SelectByPos(const Vector& pos) const;
+	virtual Sprite* SelectByPos(const Vector& pos) const;
 
-	virtual void PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const;
-	virtual void CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const;
+	virtual void PasteSprToClipboard(const Sprite* spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(Sprite* spr, const Json::Value& value) const;
 
 private:
 	void PasteToSelection() const;

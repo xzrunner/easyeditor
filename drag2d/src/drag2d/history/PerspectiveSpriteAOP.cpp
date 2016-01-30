@@ -1,11 +1,11 @@
 #include "PerspectiveSpriteAOP.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 
 namespace d2d
 {
 
-PerspectiveSpriteAOP::PerspectiveSpriteAOP(ISprite* sprite, 
+PerspectiveSpriteAOP::PerspectiveSpriteAOP(Sprite* sprite, 
 										   const Vector& new_persp, 
 										   const Vector& old_persp)
 	: m_spr(sprite)
@@ -25,7 +25,7 @@ void PerspectiveSpriteAOP::Redo()
 }
 
 // todo
-Json::Value PerspectiveSpriteAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value PerspectiveSpriteAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	Json::Value ret;
 	return ret;

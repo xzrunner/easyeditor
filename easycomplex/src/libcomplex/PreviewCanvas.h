@@ -10,7 +10,7 @@ class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		const std::vector<const d2d::ISprite*>& sprites, wxGLContext* glctx);
+		const std::vector<const d2d::Sprite*>& sprites, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -18,10 +18,10 @@ protected:
 private:
 	void drawStageData();
 
-//	void getCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
+//	void getCurrSprites(std::vector<d2d::Sprite*>& sprites) const;
 
 private:
-	std::vector<const d2d::ISprite*> m_sprites;
+	std::vector<const d2d::Sprite*> m_sprites;
 
 }; // PreviewCanvas
 

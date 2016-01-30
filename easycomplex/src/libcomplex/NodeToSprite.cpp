@@ -10,7 +10,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* NodeToSprite::Trans(const librespacker::IPackNode* node)
+d2d::Sprite* NodeToSprite::Trans(const librespacker::IPackNode* node)
 {
 	if (const librespacker::PackPicture* pic = dynamic_cast<const librespacker::PackPicture*>(node)) {
 		return PictureToSpr::Trans(pic);

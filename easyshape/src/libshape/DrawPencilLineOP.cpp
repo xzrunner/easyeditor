@@ -18,7 +18,7 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 	if (!m_curve.empty())
 	{
 		std::vector<d2d::Vector> simplified;
-		d2d::DouglasPeucker::implement(m_curve, m_simplify->GetValue(), simplified);
+		d2d::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
 		d2d::InsertShapeSJ::Instance()->Insert(new ChainShape(simplified, false));
 		Clear();
 

@@ -16,11 +16,11 @@ namespace d2d
 DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 	: m_list(list)
 {
-	layer->TraverseSprite(FetchAllVisitor<ISprite>(m_sprites));
-	for_each(m_sprites.begin(), m_sprites.end(), RetainObjectFunctor<ISprite>());
+	layer->TraverseSprite(FetchAllVisitor<Sprite>(m_sprites));
+	for_each(m_sprites.begin(), m_sprites.end(), RetainObjectFunctor<Sprite>());
 
-	layer->TraverseSprite(FetchAllVisitor<IShape>(m_shapes));
-	for_each(m_shapes.begin(), m_shapes.end(), RetainObjectFunctor<IShape>());
+	layer->TraverseSprite(FetchAllVisitor<Shape>(m_shapes));
+	for_each(m_shapes.begin(), m_shapes.end(), RetainObjectFunctor<Shape>());
 
 	layer->Retain();
 	m_layer = layer;
@@ -28,8 +28,8 @@ DeleteLayerAOP::DeleteLayerAOP(LayerList* list, Layer* layer)
 
 DeleteLayerAOP::~DeleteLayerAOP()
 {
-	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<ISprite>());
-	for_each(m_shapes.begin(), m_shapes.end(), ReleaseObjectFunctor<IShape>());
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
+	for_each(m_shapes.begin(), m_shapes.end(), ReleaseObjectFunctor<Shape>());
 	m_layer->Release();
 }
 
@@ -57,7 +57,7 @@ void DeleteLayerAOP::Redo()
 	}
 }
 
-Json::Value DeleteLayerAOP::Store(const std::vector<ISprite*>& sprites) const
+Json::Value DeleteLayerAOP::Store(const std::vector<Sprite*>& sprites) const
 {
 	return Json::Value();
 }

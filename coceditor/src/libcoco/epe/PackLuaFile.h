@@ -11,7 +11,7 @@ namespace epe
 class PackLuaFile
 {
 public:
-	void pack(const std::vector<const d2d::ISprite*>& sprites, 
+	void pack(const std::vector<const d2d::Sprite*>& sprites, 
 		const std::string& outfloder);
 
 private:

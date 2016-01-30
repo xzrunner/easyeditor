@@ -47,7 +47,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	if (ud) {
 		mt = *(d2d::Matrix*)ud;
 	} else {
-		float* m = (float*)mt.getElements();
+		float* m = (float*)mt.GetElements();
 		m[0] = mat[0];
 		m[1] = mat[1];
 		m[4] = mat[2];
@@ -56,7 +56,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 		m[13] = mat[5];		
 	}
 
-	d2d::ISymbol* sym = static_cast<d2d::ISymbol*>(symbol);
+	d2d::Symbol* sym = static_cast<d2d::Symbol*>(symbol);
 	d2d::ColorTrans color;
 	memcpy(&color.multi, mul_col, sizeof(*mul_col));
 	memcpy(&color.add, add_col, sizeof(*add_col));

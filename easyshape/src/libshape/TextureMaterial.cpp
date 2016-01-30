@@ -21,7 +21,7 @@ Json::Value TextureMaterial::Store(const std::string& dirpath) const
 {
 	Json::Value val;
 	val["type"] = "texture";
-	val["texture path"] = d2d::FilenameTools::getRelativePath(dirpath, m_image->GetFilepath()).ToStdString();
+	val["texture path"] = d2d::FileHelper::GetRelativePath(dirpath, m_image->GetFilepath()).ToStdString();
 	return val;
 }
 
@@ -46,7 +46,7 @@ void TextureMaterial::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) 
 	for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 		d2d::Vector vertices[4], texcoords[4];
 		for (int j = 0; j < 3; ++j) {
-			vertices[j] = d2d::Math::transVector(m_tris[i+j], mt);
+			vertices[j] = d2d::Math2D::TransVector(m_tris[i+j], mt);
 			texcoords[j] = m_tris_texcoord[i+j];
 		}
 		vertices[3] = vertices[2];
@@ -72,7 +72,7 @@ void TextureMaterial::BuildEnd()
 	m_tris_texcoord.clear();
 
 	std::vector<d2d::Vector> outline;
-	d2d::Math::removeDuplicatePoints(m_outline, outline);
+	d2d::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
 	d2d::Rect r = GetBoundingRegion(outline);
 
@@ -82,7 +82,7 @@ void TextureMaterial::BuildEnd()
 		copy(m_segments.begin(), m_segments.end(), back_inserter(segments));
 	}
 
-	d2d::Triangulation::lines(outline, segments, m_tris);
+	d2d::Triangulation::Lines(outline, segments, m_tris);
 
 	CalTexcoords(r);
 }
@@ -91,7 +91,7 @@ d2d::Rect TextureMaterial::GetBoundingRegion(const std::vector<d2d::Vector>& bou
 {
 	d2d::Rect r;
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
-		r.combine(bounding[i]);
+		r.Combine(bounding[i]);
 	}
 	return r;
 }
@@ -99,24 +99,24 @@ d2d::Rect TextureMaterial::GetBoundingRegion(const std::vector<d2d::Vector>& bou
 void TextureMaterial::GetTexBoundarySegments(const d2d::Rect& rect, std::vector<d2d::Vector>& segments)
 {
 	static const int EXTEND = 1;
-	int width = m_image->GetSize().xLength(),
-		height = m_image->GetSize().yLength();
-	for (float x = rect.xMin; x < rect.xMax; x += width)
+	int width = m_image->GetSize().Width(),
+		height = m_image->GetSize().Height();
+	for (float x = rect.xmin; x < rect.xmax; x += width)
 	{
- 		segments.push_back(d2d::Vector(x, rect.yMin - EXTEND));
- 		segments.push_back(d2d::Vector(x, rect.yMax + EXTEND));
+ 		segments.push_back(d2d::Vector(x, rect.ymin - EXTEND));
+ 		segments.push_back(d2d::Vector(x, rect.ymax + EXTEND));
 	}
-	for (float y = rect.yMin; y < rect.yMax; y += height)
+	for (float y = rect.ymin; y < rect.ymax; y += height)
 	{
- 		segments.push_back(d2d::Vector(rect.xMin - EXTEND, y));
- 		segments.push_back(d2d::Vector(rect.xMax + EXTEND, y));
+ 		segments.push_back(d2d::Vector(rect.xmin - EXTEND, y));
+ 		segments.push_back(d2d::Vector(rect.xmax + EXTEND, y));
 	}
 }
 
 void TextureMaterial::CalTexcoords(const d2d::Rect& rect)
 {
-	int width = m_image->GetSize().xLength(),
-		height = m_image->GetSize().yLength();
+	int width = m_image->GetSize().Width(),
+		height = m_image->GetSize().Height();
 	int index = 0;
 	for (size_t i = 0, n = m_tris.size() / 3; i < n; ++i)
 	{
@@ -129,11 +129,11 @@ void TextureMaterial::CalTexcoords(const d2d::Rect& rect)
 		cx /= 3;
 		cy /= 3;
 
-		int ix = (cx - rect.xMin) / width,
-			iy = (cy - rect.yMin) / height;
+		int ix = (cx - rect.xmin) / width,
+			iy = (cy - rect.ymin) / height;
 		d2d::Vector base;
-		base.x = rect.xMin + width * ix;
-		base.y = rect.yMin + height * iy;
+		base.x = rect.xmin + width * ix;
+		base.y = rect.ymin + height * iy;
 
 		for (size_t j = 0; j < 3; ++j)
 		{

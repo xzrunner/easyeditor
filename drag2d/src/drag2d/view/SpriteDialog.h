@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class SpriteDialog : public BaseDialog
 {
 public:
-	SpriteDialog(wxWindow* parent, ISprite* spr);
+	SpriteDialog(wxWindow* parent, Sprite* spr);
 
 	wxString GetNameStr() const { return m_name_ctrl->GetValue(); }
 	wxString GetTagStr() const { return m_tag_ctrl->GetValue(); }
@@ -20,7 +20,7 @@ private:
 	void InitLayout();
 
 private:
-	ISprite* m_spr;
+	Sprite* m_spr;
 
 	wxTextCtrl* m_name_ctrl;
 	wxTextCtrl* m_tag_ctrl;

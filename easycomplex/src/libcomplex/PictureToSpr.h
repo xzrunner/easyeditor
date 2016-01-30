@@ -10,10 +10,10 @@ namespace ecomplex
 class PictureToSpr
 {
 public:
-	static d2d::ISprite* Trans(const librespacker::PackPicture* pic);
+	static d2d::Sprite* Trans(const librespacker::PackPicture* pic);
 
 private:
-	static d2d::ISprite* TransQuad(const librespacker::PackPicture::Quad* quad);
+	static d2d::Sprite* TransQuad(const librespacker::PackPicture::Quad* quad);
 
 }; // PictureToSpr
 

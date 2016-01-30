@@ -46,9 +46,9 @@ namespace libmodeling
 		void drawBodyFlag() const;
 
 		static d2d::Vector transWorldToLocal(const d2d::Vector& world, 
-			const d2d::ISprite* sprite);
+			const d2d::Sprite* sprite);
 		static d2d::Vector transLocalToWorld(const d2d::Vector& local, 
-			const d2d::ISprite* sprite);
+			const d2d::Sprite* sprite);
 
 	private:
 		void drawBodyFlag(const d2d::Vector& pos) const;

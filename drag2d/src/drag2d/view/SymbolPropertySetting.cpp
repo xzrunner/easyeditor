@@ -1,7 +1,7 @@
 #include "SymbolPropertySetting.h"
 #include "PropertySettingPanel.h"
 
-#include "dataset/ISymbol.h"
+#include "dataset/Symbol.h"
 #include "view/EditPanelImpl.h"
 #include "view/IStageCanvas.h"
 #include "message/SetCanvasDirtySJ.h"
@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-SymbolPropertySetting::SymbolPropertySetting(ISymbol* symbol)
+SymbolPropertySetting::SymbolPropertySetting(Symbol* symbol)
 	: IPropertySetting("Symbol")
 	, m_symbol(symbol)
 	, m_name(NULL)
@@ -81,4 +81,4 @@ void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 	}
 }
 
-} // d2d
+}

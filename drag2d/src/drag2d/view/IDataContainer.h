@@ -12,8 +12,8 @@ namespace d2d
 class IDataContainer : public Object
 {
 public:
-	virtual void Traverse(IVisitor& visitor, bool order = true) const = 0;
-	virtual void Traverse(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const = 0;
+	virtual void Traverse(Visitor& visitor, bool order = true) const = 0;
+	virtual void Traverse(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const = 0;
 	virtual bool Remove(Object* obj) = 0;
 	virtual bool Insert(Object* obj) = 0;
 	virtual bool Insert(Object* obj, int idx) = 0;

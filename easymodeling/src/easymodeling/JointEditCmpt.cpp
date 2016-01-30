@@ -93,9 +93,9 @@ wxSizer* JointEditCmpt::initLayout()
 
 void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 {
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<d2d::Sprite*> sprites;
 	d2d::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
-	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	assert(sprites.size() == 2);
 	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->GetUserData()),
 		*body1 = static_cast<libmodeling::Body*>(sprites[1]->GetUserData());

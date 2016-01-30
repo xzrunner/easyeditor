@@ -14,10 +14,10 @@ void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
 	dst.reserve(s0.size() + s1.size());
 
 	float d[4];
-	d[0] = d2d::Math::getDistanceSquare(s0.back(), s1.front());
-	d[1] = d2d::Math::getDistanceSquare(s0.back(), s1.back());
-	d[2] = d2d::Math::getDistanceSquare(s0.front(), s1.front());
-	d[3] = d2d::Math::getDistanceSquare(s0.front(), s1.back());
+	d[0] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.front());
+	d[1] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.back());
+	d[2] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.front());
+	d[3] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.back());
 	float nearest = FLT_MAX;
 	for (size_t i = 0; i < 4; ++i)
 		if (d[i] < nearest)
@@ -138,10 +138,10 @@ float Math::getDistanceOfChains(const ChainShape& chain0, const ChainShape& chai
 	const std::vector<d2d::Vector>& s1 = chain1.GetVertices();
 
 	float d[4];
-	d[0] = d2d::Math::getDistanceSquare(s0.back(), s1.front());
-	d[1] = d2d::Math::getDistanceSquare(s0.back(), s1.back());
-	d[2] = d2d::Math::getDistanceSquare(s0.front(), s1.front());
-	d[3] = d2d::Math::getDistanceSquare(s0.front(), s1.back());
+	d[0] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.front());
+	d[1] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.back());
+	d[2] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.front());
+	d[3] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.back());
 	float nearest = FLT_MAX;
 	for (size_t i = 0; i < 4; ++i)
 		if (d[i] < nearest)

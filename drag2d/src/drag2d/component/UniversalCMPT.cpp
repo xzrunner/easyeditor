@@ -15,4 +15,4 @@ wxSizer* UniversalCMPT::initLayout()
 	return new wxBoxSizer(wxHORIZONTAL);
 }
 
-} // d2d
+}

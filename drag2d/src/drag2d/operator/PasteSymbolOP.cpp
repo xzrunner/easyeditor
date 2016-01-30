@@ -1,7 +1,7 @@
 #include "PasteSymbolOP.h"
 
 #include "dataset/SpriteFactory.h"
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/LibraryPanel.h"
 #include "view/IStageCanvas.h"
 #include "view/EditPanelImpl.h"
@@ -12,7 +12,7 @@
 namespace d2d
 {
 
-PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
+PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, EditPanelImpl* stage,
 							 LibraryPanel* libraryPanel, float* pScale/* = NULL*/)
 	: ZoomViewOP(wnd, stage, true)
 	, m_libraryPanel(libraryPanel)
@@ -20,18 +20,18 @@ PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 {
 	m_cursor = wxCursor(wxCURSOR_PAINT_BRUSH);
 
-	m_pos.setInvalid();
+	m_pos.SetInvalid();
 }
 
 bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	ISymbol* symbol = m_libraryPanel->GetSymbol();
+	Symbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol)
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
-		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		if (m_pScale) {
 			sprite->SetScale(Vector(*m_pScale, *m_pScale));
@@ -57,8 +57,8 @@ bool PasteSymbolOP::OnDraw() const
 {
 	if (ZoomViewOP::OnDraw()) return true;
 
-	ISymbol* symbol = m_libraryPanel->GetSymbol();
-	if (symbol && m_pos.isValid())
+	Symbol* symbol = m_libraryPanel->GetSymbol();
+	if (symbol && m_pos.IsValid())
 	{
 		SpriteRenderer* rd = SpriteRenderer::Instance();
 		if (m_pScale) {
@@ -75,9 +75,9 @@ bool PasteSymbolOP::Clear()
 {
 	if (ZoomViewOP::Clear()) return true;
 
-	m_pos.setInvalid();
+	m_pos.SetInvalid();
 
 	return false;
 }
 
-} // d2d
+}

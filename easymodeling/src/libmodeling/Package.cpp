@@ -51,10 +51,10 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			int type = e_rect;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-			fout.write(reinterpret_cast<const char*>(&rect->m_rect.xMin), sizeof(float));
-			fout.write(reinterpret_cast<const char*>(&rect->m_rect.xMax), sizeof(float));
-			fout.write(reinterpret_cast<const char*>(&rect->m_rect.yMin), sizeof(float));
-			fout.write(reinterpret_cast<const char*>(&rect->m_rect.yMax), sizeof(float));
+			fout.write(reinterpret_cast<const char*>(&rect->m_rect.xmin), sizeof(float));
+			fout.write(reinterpret_cast<const char*>(&rect->m_rect.xmax), sizeof(float));
+			fout.write(reinterpret_cast<const char*>(&rect->m_rect.ymin), sizeof(float));
+			fout.write(reinterpret_cast<const char*>(&rect->m_rect.ymax), sizeof(float));
 		}
 		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
@@ -158,7 +158,7 @@ void Paskage::packJoint(const Joint& data, std::ofstream& fout,
 			fout.write(reinterpret_cast<const char*>(&joint->localAnchorB.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&joint->localAnchorB.y), sizeof(float));
 
-			float length = d2d::Math::getDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB());
+			float length = d2d::Math2D::GetDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB());
 			fout.write(reinterpret_cast<const char*>(&length), sizeof(float));
 
 			fout.write(reinterpret_cast<const char*>(&joint->frequencyHz), sizeof(float));

@@ -66,7 +66,7 @@ void ScaleImage::Run(int argc, char *argv[])
 void ScaleImage::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale)
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		Scale(ss, files[i].ToStdString(), files[i].ToStdString(), scale);
 	}
@@ -77,16 +77,16 @@ void ScaleImage::Scale(d2d::Snapshoot& ss, const std::string& src, const std::st
 	wxFileName filename(src);
 	filename.Normalize();
 	std::string filepath = filename.GetFullPath().ToStdString();
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+	if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
 	{
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::Rect r = symbol->GetSize();
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->SetScale(d2d::Vector(scale, scale));
 
-		int width = r.xLength() * scale,
-			height = r.yLength() * scale;
+		int width = r.Width() * scale,
+			height = r.Height() * scale;
 		ss.DrawSprite(sprite, true, width, height);
 
 		sprite->Release();

@@ -29,17 +29,17 @@ namespace edb
 	private:
 		void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
 
-		wxString getItemName(const d2d::ISprite& sprite) const;
+		wxString getItemName(const d2d::Sprite& sprite) const;
 
 		void onSelChanged(wxTreeEvent& event);
 		void onItemClick(wxTreeEvent& event);
 
-		d2d::ISprite* querySpriteByID(wxTreeItemId id) const;
+		d2d::Sprite* querySpriteByID(wxTreeItemId id) const;
 
 	private:
 		wxTreeItemId m_root;
 
-		std::map<wxTreeItemId, d2d::ISprite*> m_mapID2Sprite;
+		std::map<wxTreeItemId, d2d::Sprite*> m_mapID2Sprite;
 
 		std::map<wxTreeItemId, wxString> m_mapID2Path;
 

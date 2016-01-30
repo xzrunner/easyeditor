@@ -72,8 +72,8 @@ void RectBinArrange::BeforePacking(const std::vector<d2d::ImageSprite*>& sorted,
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
 		RectSize rect;
-		rect.width = sorted[i]->GetSymbol().GetSize().xLength() * s + p;
-		rect.height = sorted[i]->GetSymbol().GetSize().yLength() * s + p;
+		rect.width = sorted[i]->GetSymbol().GetSize().Width() * s + p;
+		rect.height = sorted[i]->GetSymbol().GetSize().Height() * s + p;
 		input.push_back(rect);
 	}
 }
@@ -95,19 +95,19 @@ void RectBinArrange::AfterPacking(float xoffset,
 			d2d::Rect r = sprite->GetSymbol().GetSize();
 			d2d::Vector pos;
 			float angle = 0;
-			if (r.xLength() == rect.width && r.yLength() == rect.height)
+			if (r.Width() == rect.width && r.Height() == rect.height)
 			{
-				pos.x = rect.x + r.xLength() * 0.5f * s + p - r.xCenter();
-				pos.y = rect.y + r.yLength() * 0.5f * s + p - r.yCenter();
+				pos.x = rect.x + r.Width() * 0.5f * s + p - r.CenterX();
+				pos.y = rect.y + r.Height() * 0.5f * s + p - r.CenterY();
 			}
-			else if (r.xLength() == rect.height && r.yLength() == rect.width)
+			else if (r.Width() == rect.height && r.Height() == rect.width)
 			{
 				angle = d2d::PI * 0.5f;
 				// 					pos.x = output.x + r.yLength() * 0.5f * s + p/* - r.yCenter()*/;
 				// 					pos.y = output.y + r.xLength() * 0.5f * s + p /*- r.xCenter()*/;
 
-				pos.x = rect.x + 0.5f * rect.width - r.xCenter();
-				pos.y = rect.y + 0.5f * rect.height - r.yCenter();
+				pos.x = rect.x + 0.5f * rect.width - r.CenterX();
+				pos.y = rect.y + 0.5f * rect.height - r.CenterY();
 			}
 			else
 			{

@@ -60,7 +60,7 @@ bool StagePanel::Update(int version)
 	return dirty;
 }
 
-void StagePanel::TraverseSprites(d2d::IVisitor& visitor, 
+void StagePanel::TraverseSprites(d2d::Visitor& visitor, 
 								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
@@ -77,17 +77,17 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor,
 		if (order)
 		{
 			for (int i = 0, n = frame->Size(); i < n; ++i) {
-				bool hasNext;
-				visitor.Visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
-				if (!hasNext) break;
+				bool next;
+				visitor.Visit(const_cast<d2d::Sprite*>(frame->GetSprite(i)), next);
+				if (!next) break;
 			}
 		}
 		else
 		{
 			for (int i = frame->Size() - 1; i >= 0; --i) {
-				bool hasNext;
-				visitor.Visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
-				if (!hasNext) break;
+				bool next;
+				visitor.Visit(const_cast<d2d::Sprite*>(frame->GetSprite(i)), next);
+				if (!next) break;
 			}
 		}
 	}
@@ -122,7 +122,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
+		Remove((d2d::Sprite*)ud);
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		{
@@ -186,21 +186,21 @@ void StagePanel::OnMenuDelJointNode(wxCommandEvent& event)
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Reorder(d2d::ISprite* spr, bool up)
+void StagePanel::Reorder(d2d::Sprite* spr, bool up)
 {
 	if (m_frame && m_frame->Reorder(spr, up)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::ReorderMost(d2d::ISprite* spr, bool up)
+void StagePanel::ReorderMost(d2d::Sprite* spr, bool up)
 {
 	if (m_frame && m_frame->ReorderMost(spr, up)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::Insert(d2d::ISprite* spr)
+void StagePanel::Insert(d2d::Sprite* spr)
 {
 	if (spr->GetUserData()) {
 		InsertWithUD(spr);
@@ -210,14 +210,14 @@ void StagePanel::Insert(d2d::ISprite* spr)
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(d2d::ISprite* spr)
+void StagePanel::Remove(d2d::Sprite* spr)
 {
 	if (m_frame && m_frame->Remove(spr)) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::InsertWithUD(d2d::ISprite* spr)
+void StagePanel::InsertWithUD(d2d::Sprite* spr)
 {
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	assert(ud);
@@ -240,7 +240,7 @@ void StagePanel::InsertWithUD(d2d::ISprite* spr)
 	}
 }
 
-void StagePanel::InsertWithoutUD(d2d::ISprite* spr)
+void StagePanel::InsertWithoutUD(d2d::Sprite* spr)
 {
 	if (m_frame) {
 		m_frame->Insert(spr);
@@ -258,14 +258,14 @@ CheckUpdateVisitor(int version)
 {}
 
 void StagePanel::CheckUpdateVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
-	d2d::ISprite* spr = static_cast<d2d::ISprite*>(object);
+	d2d::Sprite* spr = static_cast<d2d::Sprite*>(object);
 	if (spr->Update(m_version)) {
 		m_update = true;
-		bFetchNext = false;
+		next = false;
 	} else {
-		bFetchNext = true;
+		next = true;
 	}
 }
 

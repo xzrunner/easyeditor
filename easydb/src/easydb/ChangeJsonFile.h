@@ -24,14 +24,14 @@ public:
 	static ICommand* Create() { return new ChangeJsonFile(); }
 
 private:
-	void Run(const std::string& dir/*, d2d::FileNameParser::Type type*/);
+	void Run(const std::string& dir/*, d2d::FileType::Type type*/);
 
 	void Scale(const std::string& key, float times);
 
 private:
 	wxArrayString m_files;
 
-//	d2d::FileNameParser::Type m_type;
+//	d2d::FileType::Type m_type;
 
 }; // ChangeJsonFile
 

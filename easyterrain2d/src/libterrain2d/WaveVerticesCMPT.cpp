@@ -102,7 +102,7 @@ wxSizer* WaveVerticesCMPT::initLayout()
 	// display
 	{
 		wxCheckBox* tris_edge = new wxCheckBox(this, wxID_ANY, wxT("triangle edge"));
-		tris_edge->SetValue(d2d::Settings::bDisplayTrisEdge);
+		tris_edge->SetValue(d2d::SettingData::draw_tris_edge);
 		Connect(tris_edge->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(WaveVerticesCMPT::OnChangeDisplayTriangles));
 		sizer->Add(tris_edge);

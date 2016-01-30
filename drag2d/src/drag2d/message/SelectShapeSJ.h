@@ -6,12 +6,12 @@
 namespace d2d
 {
 
-class IShape;
+class Shape;
 
 class SelectShapeSJ : public Subject
 {
 public:
-	void Select(IShape* shape, Observer* except = NULL);
+	void Select(Shape* shape, Observer* except = NULL);
 
 	static SelectShapeSJ* Instance();
 

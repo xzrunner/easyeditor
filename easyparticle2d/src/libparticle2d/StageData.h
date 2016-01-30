@@ -29,7 +29,7 @@
 //
 //	void SetToolbar(ToolbarPanel* toolbar) { m_toolbar = toolbar; }
 //
-//	void ChangePSSymbol(d2d::ISymbol* symbol);
+//	void ChangePSSymbol(d2d::Symbol* symbol);
 //
 //private:
 //	ParticleSystem* m_ps;

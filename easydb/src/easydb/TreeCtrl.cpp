@@ -29,7 +29,7 @@ namespace edb
 		if (empty)
 			m_root = AddRoot("Root");
 
-		std::map<d2d::ISprite*, Node*>::const_iterator itr
+		std::map<d2d::Sprite*, Node*>::const_iterator itr
 			= graph.connection.begin();
 		for ( ; itr != graph.connection.end(); ++itr)
 		{
@@ -51,10 +51,10 @@ namespace edb
 		for (size_t i = 0, n = files.size(); i < n; ++i)
 		{
 			wxString filepath = files[i];
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
-				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+			if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)
+				|| d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
 			{
-				wxString name = d2d::FilenameTools::getFilename(filepath);
+				wxString name = d2d::FileHelper::GetFilename(filepath);
 				wxTreeItemId id = AppendItem(m_root, name);
 				m_mapID2Path.insert(std::make_pair(id, filepath));
 			}
@@ -71,7 +71,7 @@ namespace edb
 	{
 		for (size_t i = 0, n = node.out.size(); i < n; ++i)
 		{
-			d2d::ISprite* child = node.out[i];
+			d2d::Sprite* child = node.out[i];
 			wxTreeItemId id = AppendItem(parent, getItemName(*child));
 			m_mapID2Sprite.insert(std::make_pair(id, child));
 
@@ -81,16 +81,16 @@ namespace edb
 		}
 	}
 
-	wxString TreeCtrl::getItemName(const d2d::ISprite& sprite) const
+	wxString TreeCtrl::getItemName(const d2d::Sprite& sprite) const
 	{
 		wxString name = sprite.GetSymbol().GetFilepath();
-		name = d2d::FilenameTools::getFilename(name);
+		name = d2d::FileHelper::GetFilename(name);
 		return name;
 	}
 
 	void TreeCtrl::onSelChanged(wxTreeEvent& event)
 	{
-		d2d::ISprite* sprite = querySpriteByID(event.GetItem());
+		d2d::Sprite* sprite = querySpriteByID(event.GetItem());
 		if (!sprite) return;
 		
 		d2d::SpriteSelection* selection = Context::Instance()->stage->GetSpriteSelection();
@@ -102,7 +102,7 @@ namespace edb
 
 	void TreeCtrl::onItemClick(wxTreeEvent& event)
 	{
-		d2d::ISprite* sprite = querySpriteByID(event.GetItem());
+		d2d::Sprite* sprite = querySpriteByID(event.GetItem());
 		if (sprite) 
 		{
 			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprite))
@@ -120,18 +120,18 @@ namespace edb
 			if (itr != m_mapID2Path.end())
 			{
 				std::string filename = itr->second;
-				if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_complex))
+				if (d2d::FileType::IsType(filename, d2d::FileType::e_complex))
 				{
 					std::string cmd = "easycomplex.exe " + itr->second;
 					WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 				}
-				else if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_anim))
+				else if (d2d::FileType::IsType(filename, d2d::FileType::e_anim))
 				{
 					std::string cmd = "easyanimation.exe " + itr->second;
 					WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 				}
 
-// 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(itr->second);
+// 				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(itr->second);
 // 				if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
 // 				{
 //  					StagePanel* stage = Context::Instance()->stage;
@@ -147,9 +147,9 @@ namespace edb
 		}
 	}
 
-	d2d::ISprite* TreeCtrl::querySpriteByID(wxTreeItemId id) const
+	d2d::Sprite* TreeCtrl::querySpriteByID(wxTreeItemId id) const
 	{
-		std::map<wxTreeItemId, d2d::ISprite*>::const_iterator 
+		std::map<wxTreeItemId, d2d::Sprite*>::const_iterator 
 			itr = m_mapID2Sprite.find(id);
 		if (itr == m_mapID2Sprite.end()) 
 			return NULL;

@@ -35,7 +35,7 @@ void Symbol::ReloadTexture() const
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	if (m_index != 0) {
 		Utility::DrawAnimSymbol(this, mt, m_index, color);
@@ -53,7 +53,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -72,7 +72,7 @@ size_t Symbol::getMaxFrameIndex() const
 
 void Symbol::InitBounding()
 {
-	m_rect.makeInfinite();
+	m_rect.MakeInfinite();
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
@@ -82,9 +82,9 @@ void Symbol::InitBounding()
 			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
 			{
 				std::vector<d2d::Vector> vertices;
-				frame->sprites[i]->GetBounding()->getBoundPos(vertices);
+				frame->sprites[i]->GetBounding()->GetBoundPos(vertices);
 				for (int i = 0, n = vertices.size(); i < n; ++i) {
-					m_rect.combine(vertices[i]);
+					m_rect.Combine(vertices[i]);
 				}
 			}
 		}
@@ -106,7 +106,7 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 	m_name  = name = value["name"].asString();
 	m_fps = value["fps"].asInt();
 
-	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
 
 	loader.LoadLayers(value, dir, m_layers);
 

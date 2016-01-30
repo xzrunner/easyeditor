@@ -11,13 +11,13 @@
 //{
 //
 //class EditPanel;
-//class ISprite;
+//class Sprite;
 //
 //class EJPreviewCanvas : public OrthoCanvas
 //{
 //public:
 //	EJPreviewCanvas(EditPanel* stage,
-//		const std::vector<const ISprite*>& sprites);
+//		const std::vector<const Sprite*>& sprites);
 //
 //protected:
 //	virtual void InitGL();
@@ -26,7 +26,7 @@
 //	void onTimer(wxTimerEvent& event);
 //
 //private:
-//	void prepareSprites(const std::vector<const ISprite*>& sprites);
+//	void prepareSprites(const std::vector<const Sprite*>& sprites);
 //
 //private:
 //	enum

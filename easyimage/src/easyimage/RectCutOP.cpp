@@ -10,9 +10,9 @@ RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
 	, m_stage(stage)
 	, m_rectSelected(NULL)
 {
-	m_firstPos.setInvalid();
-	m_currPos.setInvalid();
-	m_captured.setInvalid();
+	m_firstPos.SetInvalid();
+	m_currPos.SetInvalid();
+	m_captured.SetInvalid();
 }
 
 bool RectCutOP::OnMouseLeftDown(int x, int y)
@@ -48,10 +48,10 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 	// fix rect
 	if (m_rectSelected)
 	{
-		m_rectSelected->xMin = ceil(m_rectSelected->xMin);
-		m_rectSelected->xMax = ceil(m_rectSelected->xMax);
-		m_rectSelected->yMin = ceil(m_rectSelected->yMin);
-		m_rectSelected->yMax = ceil(m_rectSelected->yMax);
+		m_rectSelected->xmin = ceil(m_rectSelected->xmin);
+		m_rectSelected->xmax = ceil(m_rectSelected->xmax);
+		m_rectSelected->ymin = ceil(m_rectSelected->ymin);
+		m_rectSelected->ymax = ceil(m_rectSelected->ymax);
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -76,22 +76,22 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	if (!m_firstPos.isValid()) {
+	if (!m_firstPos.IsValid()) {
 		return false;
 	}
 
 	const float RADIUS = 5;
 	// remove rect
 	m_currPos = m_stage->TransPosScrToProj(x, y);
-	if (d2d::Math::getDistance(m_currPos, m_firstPos) < RADIUS)
+	if (d2d::Math2D::GetDistance(m_currPos, m_firstPos) < RADIUS)
 	{
 		bool removed = m_rects.remove(m_currPos);
 		if (remove) {
 			m_nodeSelected.rect = NULL;
 			m_rectSelected = NULL;
 
-			m_firstPos.setInvalid();
-			m_currPos.setInvalid();
+			m_firstPos.SetInvalid();
+			m_currPos.SetInvalid();
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -103,8 +103,8 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 		{
 			m_rects.insert(d2d::Rect(m_firstPos, m_currPos));
 
-			m_firstPos.setInvalid();
-			m_currPos.setInvalid();
+			m_firstPos.SetInvalid();
+			m_currPos.SetInvalid();
 			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
@@ -133,7 +133,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	if (!m_stage->getImage()) return false;
 
 	// create rect
-	if (m_firstPos.isValid())
+	if (m_firstPos.IsValid())
 	{
 		m_currPos = m_stage->TransPosScrToProj(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos);
@@ -169,24 +169,24 @@ bool RectCutOP::OnDraw() const
 {
 	if (d2d::ZoomViewOP::OnDraw()) return true;
 
-	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	if (!m_stage->getImage()) return false;
 
 	m_rects.draw();
 
-	if (m_firstPos.isValid() && m_currPos.isValid())
+	if (m_firstPos.IsValid() && m_currPos.IsValid())
 	{
-		d2d::PrimitiveDraw::rect(m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
+		d2d::PrimitiveDraw::DrawRect(m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
 	}
 
 	drawCaptureLine();
 
 	if (m_rectSelected) {
-		d2d::PrimitiveDraw::rect(*m_rectSelected, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::DrawRect(*m_rectSelected, d2d::LIGHT_GREEN_FACE);
 	}
 	if (m_nodeSelected.rect) {
-		d2d::PrimitiveDraw::rect(*m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::DrawRect(*m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
 	}
 
 	return false;
@@ -196,8 +196,8 @@ bool RectCutOP::Clear()
 {
 	if (d2d::ZoomViewOP::Clear()) return true;
 
-	m_firstPos.setInvalid();
-	m_currPos.setInvalid();
+	m_firstPos.SetInvalid();
+	m_currPos.SetInvalid();
 
 	m_rects.clear();
 	m_rectSelected = NULL;
@@ -208,7 +208,7 @@ bool RectCutOP::Clear()
 
 std::string RectCutOP::getImageFilepath() const
 {
-	if (const d2d::ISprite* s = m_stage->getImage()) {
+	if (const d2d::Sprite* s = m_stage->getImage()) {
 		return s->GetSymbol().GetFilepath();
 	} else {
 		return "";
@@ -222,7 +222,7 @@ void RectCutOP::loadImageFromFile(const std::string& filepath)
 
 void RectCutOP::drawCaptureLine() const
 {
-	if (!m_currPos.isValid()) return;
+	if (!m_currPos.IsValid()) return;
 	if (m_captured.x == FLT_INVALID && m_captured.y == FLT_INVALID) return;
 
 	const float EDGE = 4096;
@@ -230,14 +230,14 @@ void RectCutOP::drawCaptureLine() const
 	{
 		d2d::Vector p0(m_captured.x, -EDGE);
 		d2d::Vector p1(m_captured.x, EDGE);
-		d2d::PrimitiveDraw::drawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
+		d2d::PrimitiveDraw::DrawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
 	}
 
 	if (m_captured.y != FLT_INVALID)
 	{
 		d2d::Vector p0(-EDGE, m_captured.y);
 		d2d::Vector p1(EDGE, m_captured.y);
-		d2d::PrimitiveDraw::drawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
+		d2d::PrimitiveDraw::DrawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
 	}
 }
 
@@ -262,8 +262,8 @@ void RectCutOP::fixedPos(d2d::Vector& pos) const
 	pos.y = std::ceil(pos.y);
 
 	// to image
-	float w = m_stage->getImage()->GetSymbol().GetSize().xLength();
-	float h = m_stage->getImage()->GetSymbol().GetSize().yLength();
+	float w = m_stage->getImage()->GetSymbol().GetSize().Width();
+	float h = m_stage->getImage()->GetSymbol().GetSize().Height();
 	if (pos.x < 0) {
 		pos.x = 0;
 	}

@@ -61,7 +61,7 @@ bool StagePanel::Update(int version)
 {
 	bool dirty = d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		d2d::ISprite* spr = m_symbol->m_sprites[i];
+		d2d::Sprite* spr = m_symbol->m_sprites[i];
 		if (spr->Update(version)) {
 			dirty = true;
 		}

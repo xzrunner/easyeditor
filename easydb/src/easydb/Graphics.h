@@ -6,21 +6,21 @@ namespace edb
 {
 	struct Node
 	{
-		std::vector<d2d::ISprite*> out, in;
+		std::vector<d2d::Sprite*> out, in;
 	};
 
 	class Graphics
 	{
 	public:
-		void connect(d2d::ISprite* from, d2d::ISprite* to);
+		void connect(d2d::Sprite* from, d2d::Sprite* to);
 
-		void move(d2d::ISprite* sprite, const d2d::Vector& offset);
+		void move(d2d::Sprite* sprite, const d2d::Vector& offset);
 
-		Node* query(d2d::ISprite* sprite) const;
+		Node* query(d2d::Sprite* sprite) const;
 
 		void clear();
 
 	public:
-		std::map<d2d::ISprite*, Node*> connection;
+		std::map<d2d::Sprite*, Node*> connection;
 	};
 }

@@ -18,7 +18,7 @@ StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
 	, m_stage(stage)
 	, m_start_time(0)
 {
-	m_bg_color.set(1, 1, 1, 1);
+	m_bg_color.Set(1, 1, 1, 1);
 	m_timer.Start(100);
 }
 
@@ -31,14 +31,14 @@ void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
 	m_start_time = clock();
 
 	Shader* shader = m_stage->GetShader();
-	d2d::ISprite* sprite = m_stage->QuerySpriteByPos(pos);
+	d2d::Sprite* sprite = m_stage->QuerySpriteByPos(pos);
 	if (shader && sprite) {
 		d2d::ShaderMgr::Instance()->sprite();
 
 		d2d::Vector center = sprite->GetCenter();
 		d2d::Rect r = sprite->GetSymbol().GetSize();
-		float x = (pos.x - center.x) / r.xLength() + 0.5f,
-			  y = (pos.y - center.y) / r.xLength() + 0.5f;
+		float x = (pos.x - center.x) / r.Width() + 0.5f,
+			  y = (pos.y - center.y) / r.Width() + 0.5f;
 		static_cast<Shader2D*>(shader)->SetInputUniform(x, y);
 	}
 }
@@ -52,17 +52,17 @@ void StageCanvas2D::OnDrawSprites() const
 
 void StageCanvas2D::DrawBackground() const
 {
-	d2d::PrimitiveDraw::rect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
+	d2d::PrimitiveDraw::DrawRect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
 		d2d::LIGHT_RED_LINE);
 }
 
 void StageCanvas2D::DrawSprites() const
 {
-	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<d2d::Sprite*> sprites;
+	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);

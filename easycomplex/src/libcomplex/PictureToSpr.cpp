@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-d2d::ISprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
+d2d::Sprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
 {
 	if (pic->quads.size() == 1) {
 		return TransQuad(&pic->quads[0]);
@@ -23,7 +23,7 @@ d2d::ISprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
 	}
 }
 
-d2d::ISprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* quad)
+d2d::Sprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* quad)
 {
 	float w = quad->img->GetOriginWidth(),
 		h = quad->img->GetOriginHeight();
@@ -40,7 +40,7 @@ d2d::ISprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* qua
 
 	eicon::Symbol* symbol = new eicon::Symbol;
 	symbol->SetIcon(icon);
-	d2d::ISprite* ret = new eicon::Sprite(symbol);
+	d2d::Sprite* ret = new eicon::Sprite(symbol);
 	ret->BuildBounding();
 	return ret;
 }

@@ -28,7 +28,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(d2d::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
+void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
 								 bool order/* = true*/) const
 {
 	for (size_t i = 0; i < 3; ++i) 
@@ -37,9 +37,9 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 		{
 			if (!m_sprites[i][j]) continue;
 
-			bool hasNext;
-			visitor.Visit(m_sprites[i][j], hasNext);
-			if (!hasNext) return;
+			bool next;
+			visitor.Visit(m_sprites[i][j], next);
+			if (!next) return;
 		}
 	}
 }
@@ -58,9 +58,9 @@ void StagePanel::rebuildPatchSymbol()
 		  height = m_toolbar->getHeight();
 
 	if (type == e_3GridHor) {
-		height = m_sprites[1][1]->GetSymbol().GetSize().yLength();
+		height = m_sprites[1][1]->GetSymbol().GetSize().Height();
 	} else if (type == e_3GridVer) {
-		width = m_sprites[1][1]->GetSymbol().GetSize().xLength();
+		width = m_sprites[1][1]->GetSymbol().GetSize().Width();
 	}
 
 	m_symbol->ComposeFromSprites(m_sprites, width, height);
@@ -87,7 +87,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 		}
 		break;
 	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::ISprite*)ud);
+		Remove((d2d::Sprite*)ud);
 		break;
 	case d2d::MSG_CLEAR_SPRITE:
 		Clear();
@@ -95,7 +95,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::Insert(d2d::ISprite* spr)
+void StagePanel::Insert(d2d::Sprite* spr)
 {
 	const d2d::Vector& pos = spr->GetPosition();
 	int col, row;
@@ -117,7 +117,7 @@ void StagePanel::Insert(d2d::ISprite* spr)
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(d2d::ISprite* spr)
+void StagePanel::Remove(d2d::Sprite* spr)
 {
 	for (size_t i = 0; i < 3; ++i) 
 	{

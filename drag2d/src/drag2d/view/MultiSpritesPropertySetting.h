@@ -9,13 +9,13 @@ namespace d2d
 {
 
 class EditPanelImpl;
-class ISprite;
+class Sprite;
 class MultiSpritesPropertyImpl;
 
 class MultiSpritesPropertySetting : public IPropertySetting
 {
 public:
-	MultiSpritesPropertySetting(const std::vector<ISprite*>& sprites);
+	MultiSpritesPropertySetting(const std::vector<Sprite*>& sprites);
 	virtual ~MultiSpritesPropertySetting();
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);

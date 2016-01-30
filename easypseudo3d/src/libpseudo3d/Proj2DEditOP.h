@@ -19,7 +19,7 @@ public:
 	void InitPlayer();
 
 private:
-	d2d::ISymbol* m_player;
+	d2d::Symbol* m_player;
 
 }; // Proj2DEditOP
 

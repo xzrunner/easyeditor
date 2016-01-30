@@ -16,7 +16,7 @@ bool DrawPenLineOP::OnMouseLeftDClick(int x, int y)
 
 	d2d::InsertShapeSJ::Instance()->Insert(new ChainShape(m_polyline, false));
 	m_polyline.clear();
-	m_currPos.setInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }

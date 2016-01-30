@@ -25,7 +25,7 @@ wxSizer* CreateRegionCMPT::initLayout()
 	sizer->AddSpacer(20);
 	
 	wxCheckBox* tris_edge = new wxCheckBox(this, wxID_ANY, wxT("triangle edge"));
-	tris_edge->SetValue(d2d::Settings::bDisplayTrisEdge);
+	tris_edge->SetValue(d2d::SettingData::draw_tris_edge);
 	Connect(tris_edge->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 		wxCommandEventHandler(CreateRegionCMPT::OnChangeDisplayTriangles));
 	sizer->Add(tris_edge);
@@ -35,7 +35,7 @@ wxSizer* CreateRegionCMPT::initLayout()
 
 void CreateRegionCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
-	d2d::Settings::bDisplayTrisEdge = event.IsChecked();
+	d2d::SettingData::draw_tris_edge = event.IsChecked();
 	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

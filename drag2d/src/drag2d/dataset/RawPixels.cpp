@@ -103,4 +103,4 @@ void RawPixels::replaceBySelected(const PixelBuf& selected)
  	m_pixelData = newData;
 }
 
-} // d2d
+}

@@ -15,7 +15,7 @@
 namespace d2d
 {
 
-SelectShapesOP::SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiShapesImpl* shapesImpl,
+SelectShapesOP::SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesImpl* shapesImpl,
 							   AbstractEditCMPT* callback/* = NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_callback(callback)
@@ -25,7 +25,7 @@ SelectShapesOP::SelectShapesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, MultiSh
 	m_selection = shapesImpl->GetShapeSelection();
 	m_selection->Retain();
 
-	m_first_pos.setInvalid();
+	m_first_pos.SetInvalid();
 }
 
 SelectShapesOP::~SelectShapesOP()
@@ -54,8 +54,8 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 	{
 		clearClipboard();
 
-		std::vector<IShape*> shapes;
-		m_selection->Traverse(FetchAllVisitor<IShape>(shapes));
+		std::vector<Shape*> shapes;
+		m_selection->Traverse(FetchAllVisitor<Shape>(shapes));
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_clipboard.push_back(shapes[i]->Clone());
 	}
@@ -73,10 +73,10 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 {
 	m_bDraggable = true;
 
-	m_move_last_pos.setInvalid();
+	m_move_last_pos.SetInvalid();
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-	IShape* selected = m_shapeImpl->QueryShapeByPos(pos);
+	Shape* selected = m_shapeImpl->QueryShapeByPos(pos);
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -99,7 +99,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 				m_move_last_pos = pos;
 			}
 		}
-		m_first_pos.setInvalid();
+		m_first_pos.SetInvalid();
 
 		if (m_callback)
 			m_callback->updateControlValue();
@@ -123,17 +123,17 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 
 	m_bDraggable = true;
 
-	if (m_first_pos.isValid())
+	if (m_first_pos.IsValid())
 	{
 		Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		std::vector<IShape*> shapes;
+		std::vector<Shape*> shapes;
 		m_shapeImpl->QueryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_selection->Add(shapes[i]);
 
 		SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shapeImpl);
 
-		m_first_pos.setInvalid();
+		m_first_pos.SetInvalid();
 
 		if (m_callback) {
 			m_callback->updateControlValue();
@@ -149,8 +149,8 @@ bool SelectShapesOP::OnMouseDrag(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
-	if (!m_selection->IsEmpty() && m_move_last_pos.isValid()) {
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	if (!m_selection->IsEmpty() && m_move_last_pos.IsValid()) {
+		Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_selection->Traverse(TranslateVisitor(pos - m_move_last_pos));
 		m_move_last_pos = pos;
 	}
@@ -173,7 +173,7 @@ bool SelectShapesOP::Clear()
 
 	clearClipboard();
 	m_selection->Clear();
-	m_first_pos.setInvalid();
+	m_first_pos.SetInvalid();
 
 	return false;
 }
@@ -187,8 +187,8 @@ void SelectShapesOP::clearClipboard()
 
 void SelectShapesOP::PasteToSelection() const
 {
-	std::vector<IShape*> shapes;
-	m_selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	std::vector<Shape*> shapes;
+	m_selection->Traverse(FetchAllVisitor<Shape>(shapes));
 	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
 		m_clipboard.push_back(shapes[i]->Clone());
 	}
@@ -206,11 +206,11 @@ void SelectShapesOP::CopyFromSelection()
 //////////////////////////////////////////////////////////////////////////
 
 void SelectShapesOP::TranslateVisitor::
-Visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& next)
 {
-	d2d::IShape* shape = static_cast<d2d::IShape*>(object);
+	Shape* shape = static_cast<Shape*>(object);
 	shape->Translate(m_offset);
-	bFetchNext = true;
+	next = true;
 }
 
 }

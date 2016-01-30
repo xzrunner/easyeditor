@@ -14,7 +14,7 @@ public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void SetBackground(d2d::ISymbol* symbol);
+	void SetBackground(d2d::Symbol* symbol);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -28,7 +28,7 @@ private:
 private:
 	StagePanel* m_stage_panel;
 
-	d2d::ISymbol* m_background;
+	d2d::Symbol* m_background;
 
 }; // StageCanvas
 

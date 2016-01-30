@@ -31,22 +31,22 @@ RectShape* RectShape::Clone() const
 
 bool RectShape::IsContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::isPointInRect(pos, m_rect);
+	return d2d::Math2D::IsPointInRect(pos, m_rect);
 }
 
 bool RectShape::IsIntersect(const d2d::Rect& rect) const
 {
-	return d2d::Math::isRectIntersectRect(rect, m_rect);
+	return d2d::Math2D::IsRectIntersectRect(rect, m_rect);
 }
 
 void RectShape::Translate(const d2d::Vector& offset)
 {
-	m_rect.translate(offset);
+	m_rect.Translate(offset);
 }
 
 void RectShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
 {
-	d2d::PrimitiveDraw::rect(mt, m_rect, m_style);
+	d2d::PrimitiveDraw::DrawRect(mt, m_rect, m_style);
 }
 
 d2d::IPropertySetting* RectShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
@@ -56,22 +56,22 @@ d2d::IPropertySetting* RectShape::CreatePropertySetting(d2d::EditPanelImpl* stag
 
 void RectShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::IShape::LoadFromFile(value, dir);
+	d2d::Shape::LoadFromFile(value, dir);
 
-	m_rect.xMin = value["xmin"].asDouble();
-	m_rect.xMax = value["xmax"].asDouble();
-	m_rect.yMin = value["ymin"].asDouble();
-	m_rect.yMax = value["ymax"].asDouble();
+	m_rect.xmin = value["xmin"].asDouble();
+	m_rect.xmax = value["xmax"].asDouble();
+	m_rect.ymin = value["ymin"].asDouble();
+	m_rect.ymax = value["ymax"].asDouble();
 }
 
 void RectShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::IShape::StoreToFile(value, dir);
+	d2d::Shape::StoreToFile(value, dir);
 
-	value["xmin"] = m_rect.xMin;
-	value["xmax"] = m_rect.xMax;
-	value["ymin"] = m_rect.yMin;
-	value["ymax"] = m_rect.yMax;
+	value["xmin"] = m_rect.xmin;
+	value["xmax"] = m_rect.xmax;
+	value["ymin"] = m_rect.ymin;
+	value["ymax"] = m_rect.ymax;
 }
 
 }

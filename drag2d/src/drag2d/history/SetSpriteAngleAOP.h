@@ -8,22 +8,22 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 
 class SetSpriteAngleAOP : public AbstractAtomicOP
 {
 public:
-	SetSpriteAngleAOP(ISprite* sprite, float angle);
-	SetSpriteAngleAOP(const std::vector<ISprite*>& sprites, float angle);
+	SetSpriteAngleAOP(Sprite* sprite, float angle);
+	SetSpriteAngleAOP(const std::vector<Sprite*>& sprites, float angle);
 	virtual ~SetSpriteAngleAOP();
 
 	virtual void Undo();
 	virtual void Redo();
 
-	virtual Json::Value Store(const std::vector<ISprite*>& sprites) const;
+	virtual Json::Value Store(const std::vector<Sprite*>& sprites) const;
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<Sprite*> m_sprites;
 	std::vector<float> m_old_angle;
 
 	float m_new_angle;

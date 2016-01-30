@@ -12,8 +12,8 @@ PackUIWrapperTask::PackUIWrapperTask(const std::string& filepath, const Json::Va
 	, m_id(-1)
 {
 	std::string wrapper_filepath = value["wrapper filepath"].asString();
-	wrapper_filepath = d2d::FilenameTools::getAbsolutePathFromFile(filepath, wrapper_filepath);
-	wrapper_filepath = d2d::FilenameTools::FormatFilepathAbsolute(wrapper_filepath);
+	wrapper_filepath = d2d::FileHelper::GetAbsolutePathFromFile(filepath, wrapper_filepath);
+	wrapper_filepath = d2d::FileHelper::FormatFilepathAbsolute(wrapper_filepath);
 
 	m_cb_w = value["clipbox"]["w"].asInt();
 	m_cb_h = value["clipbox"]["h"].asInt();
@@ -31,7 +31,7 @@ void PackUIWrapperTask::OnKnownPackID(const std::string& filepath, int id)
 void PackUIWrapperTask::Output(const std::string& dir, Json::Value& value) const
 {
 	Json::Value item_val;
-	item_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, m_filepath).ToStdString();
+	item_val["filepath"] = d2d::FileHelper::GetRelativePath(dir, m_filepath).ToStdString();
 	item_val["wrapper id"] = m_id;
 	item_val["type"] = m_type;
 	item_val["clipbox"]["w"] = m_cb_w;

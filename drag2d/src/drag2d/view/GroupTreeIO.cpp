@@ -1,7 +1,7 @@
 #include "GroupTreeIO.h"
 #include "GroupTreeCtrl.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 #include "view/MultiSpritesImpl.h"
 
 #include <queue>
@@ -17,8 +17,8 @@ GroupTreeIO::GroupTreeIO(GroupTreeCtrl* tree, MultiSpritesImpl* sprites_impl)
 
 void GroupTreeIO::Load(const Json::Value& value)
 {
-	std::vector<ISprite*> sprites;
-	m_sprites_impl->TraverseSprites(FetchAllVisitor<ISprite>(sprites));
+	std::vector<Sprite*> sprites;
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
 
 	std::vector<Node> nodes;
 	LoadToNodes(value, nodes);
@@ -40,7 +40,7 @@ void GroupTreeIO::Load(const Json::Value& value)
  			const Node& node = *itr;
  			if (node.parent == candidate.first) {
 				if (!node.sprite.empty()) {
-					ISprite* spr = NULL;
+					Sprite* spr = NULL;
 
 					for (int i = 0, n = sprites.size(); i < n; ++i) {
 						if (node.name == sprites[i]->name) {

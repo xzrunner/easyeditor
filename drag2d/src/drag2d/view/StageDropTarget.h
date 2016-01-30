@@ -8,7 +8,7 @@ namespace d2d
 
 class EditPanelImpl;
 class LibraryPanel;
-class ISymbol;
+class Symbol;
 class Vector;
 
 class StageDropTarget : public CombinedDropTarget

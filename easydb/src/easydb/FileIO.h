@@ -13,11 +13,11 @@ namespace edb
 		static void store(const char* filename);
 
 	private:
-		static d2d::ISprite* loadSprite(const Json::Value& value);
-		static d2d::IShape* loadShape(const Json::Value& value);
+		static d2d::Sprite* loadSprite(const Json::Value& value);
+		static d2d::Shape* loadShape(const Json::Value& value);
 
-		static Json::Value store(d2d::ISprite* sprite, const d2d::Vector& offset);
-		static Json::Value store(d2d::IShape* shape, const d2d::Vector& offset);
+		static Json::Value store(d2d::Sprite* sprite, const d2d::Vector& offset);
+		static Json::Value store(d2d::Shape* shape, const d2d::Vector& offset);
 
 	}; // FileIO
 }

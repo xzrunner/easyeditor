@@ -12,7 +12,7 @@ class ExportNameSet
 {
 public:
 	
-	void LoadExport(const d2d::ISymbol* symbol, IPackNode* node);
+	void LoadExport(const d2d::Symbol* symbol, IPackNode* node);
 
 	const std::map<std::string, int>& GetData() const { return m_map; }
 

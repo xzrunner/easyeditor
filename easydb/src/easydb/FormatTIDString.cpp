@@ -35,7 +35,7 @@ void FormatTIDString::Run(int argc, char *argv[])
 void FormatTIDString::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);

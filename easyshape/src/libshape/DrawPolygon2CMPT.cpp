@@ -30,4 +30,4 @@ wxSizer* DrawPolygon2CMPT::initLayout()
 	return initChildrenLayout();
 }
 
-} // d2d
+}

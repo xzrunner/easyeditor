@@ -9,8 +9,8 @@ namespace libcoco
 class Utility
 {
 public:
-	static void GroupSpritesFromTag(const std::vector<d2d::ISprite*>& src, 
-		std::map<std::string, std::vector<d2d::ISprite*> >& dst, std::vector<d2d::ISprite*>& others);
+	static void GroupSpritesFromTag(const std::vector<d2d::Sprite*>& src, 
+		std::map<std::string, std::vector<d2d::Sprite*> >& dst, std::vector<d2d::Sprite*>& others);
 
 }; // Utility
 

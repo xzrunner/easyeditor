@@ -38,14 +38,14 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	vertices[2] = d2d::Vector(x + hw, y - hh);
 	vertices[3] = d2d::Vector(x + hw, y + hh);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = d2d::Math::transVector(vertices[i], *rp->mt);
+		vertices[i] = d2d::Math2D::TransVector(vertices[i], *rp->mt);
 	}
 
 	d2d::Vector texcoords[4];
-	texcoords[0].set(_texcoords[0], _texcoords[1]);
-	texcoords[1].set(_texcoords[2], _texcoords[3]);
-	texcoords[2].set(_texcoords[4], _texcoords[5]);
-	texcoords[3].set(_texcoords[6], _texcoords[7]);
+	texcoords[0].Set(_texcoords[0], _texcoords[1]);
+	texcoords[1].Set(_texcoords[2], _texcoords[3]);
+	texcoords[2].Set(_texcoords[4], _texcoords[5]);
+	texcoords[3].Set(_texcoords[6], _texcoords[7]);
 
 	d2d::ColorTrans color;
 	if (rp->mul) {
@@ -137,7 +137,7 @@ ext_sym_create(const char* str) {
 	}
 
 	std::string filepath(&str[5]);
-	d2d::ISymbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	d2d::Symbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	return sym;
 }
 
@@ -147,7 +147,7 @@ ext_sym_release(void* ext_sym) {
 		return;
 	}
 
-// 	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
+// 	d2d::Symbol* sym = (d2d::Symbol*)ext_sym;
 // 	sym->Release();
 }
 
@@ -158,10 +158,10 @@ ext_sym_get_size(void* ext_sym, int* width, int* height) {
 		return;
 	}
 
-	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
+	d2d::Symbol* sym = (d2d::Symbol*)ext_sym;
 	d2d::Rect sz = sym->GetSize();
-	*width = sz.xLength();
-	*height = sz.yLength();
+	*width = sz.Width();
+	*height = sz.Height();
 }
 
 void
@@ -170,7 +170,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 		return;
 	}
 
-	d2d::ISymbol* sym = (d2d::ISymbol*)ext_sym;
+	d2d::Symbol* sym = (d2d::Symbol*)ext_sym;
 	d2d::Matrix* mt = (d2d::Matrix*)ud;
 	d2d::SpriteRenderer::Instance()->Draw(sym, *mt, d2d::Vector(x, y));
 }
@@ -190,18 +190,18 @@ void GTxt::Draw(const Sprite* spr, const d2d::Matrix& mt,
 
 	style.gs.font = spr->GetFont();
 	style.gs.font_size = spr->GetFontSize();
-	style.gs.font_color.integer = d2d::trans_color2int(spr->GetFontColor(), d2d::PT_RGBA);
+	style.gs.font_color.integer = d2d::color2int(spr->GetFontColor(), d2d::PT_RGBA);
 
 	style.gs.edge = spr->GetEdge();
 	style.gs.edge_size = spr->GetEdgeSize();
-	style.gs.edge_color.integer = d2d::trans_color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
+	style.gs.edge_color.integer = d2d::color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
 
 	render_params rp;
 	rp.mt = &mt;
 	rp.mul = &mul;
 	rp.add = &add;
 
-	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
+	std::string utf8 = d2d::StringHelper::ToUtf8(spr->GetText());
 	gtxt_label_draw_richtext(utf8.c_str(), &style, spr->GetTime(), render, (void*)&rp);
 
 	spr->UpdateTime();
@@ -253,13 +253,13 @@ void GTxt::Reload(const Sprite* spr)
 
 	style.gs.font = spr->GetFont();
 	style.gs.font_size = spr->GetFontSize();
-	style.gs.font_color.integer = d2d::trans_color2int(spr->GetFontColor(), d2d::PT_RGBA);
+	style.gs.font_color.integer = d2d::color2int(spr->GetFontColor(), d2d::PT_RGBA);
 
 	style.gs.edge = spr->GetEdge();
 	style.gs.edge_size = spr->GetEdgeSize();
-	style.gs.edge_color.integer = d2d::trans_color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
+	style.gs.edge_color.integer = d2d::color2int(spr->GetEdgeColor(), d2d::PT_RGBA);
 
-	std::string utf8 = d2d::StringTools::ToUtf8(spr->GetText());
+	std::string utf8 = d2d::StringHelper::ToUtf8(spr->GetText());
 	gtxt_label_reload_richtext(utf8.c_str(), &style);
 }
 

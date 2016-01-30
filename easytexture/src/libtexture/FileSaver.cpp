@@ -9,12 +9,12 @@ namespace etexture
 
 void FileSaver::Store(const char* filepath, const Symbol* symbol)
 {
-	const std::vector<d2d::IShape*>& shapes = symbol->GetAllShapes();
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	Json::Value value;
 	for (size_t i = 0; i < shapes.size(); ++i) {
-		d2d::IShape* shape = shapes[i];
+		d2d::Shape* shape = shapes[i];
 		value["shapes"][i] = libshape::FileIO::StoreShape(dir, shape);
 	}
 

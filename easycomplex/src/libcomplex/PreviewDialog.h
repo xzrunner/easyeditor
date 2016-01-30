@@ -10,7 +10,7 @@ class PreviewDialog : public wxDialog
 {
 public:
 	PreviewDialog(wxWindow* parent, wxGLContext* glctx, 
-		const std::vector<const d2d::ISprite*>& sprites);
+		const std::vector<const d2d::Sprite*>& sprites);
 	~PreviewDialog();
 
 private:
@@ -19,7 +19,7 @@ private:
 	void BuildEditPanel(wxSizer* sizer, wxGLContext* glctx);
 
 private:
-	std::vector<const d2d::ISprite*> m_sprites;
+	std::vector<const d2d::Sprite*> m_sprites;
 
 	d2d::PlayControl m_control;
 

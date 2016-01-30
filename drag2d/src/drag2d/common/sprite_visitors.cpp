@@ -1,7 +1,7 @@
 #include "sprite_visitors.h"
 
-#include "dataset/ISprite.h"
-#include "dataset/AbstractBV.h"
+#include "dataset/Sprite.h"
+#include "dataset/BoundingBox.h"
 
 namespace d2d
 {
@@ -10,24 +10,24 @@ namespace d2d
 // class PointQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-PointQueryVisitor::PointQueryVisitor(const Vector& pos, ISprite** result)
+PointQueryVisitor::PointQueryVisitor(const Vector& pos, Sprite** result)
 	: m_pos(pos)
 {
 	m_result = result;
 	*m_result = NULL;
 }
 
-void PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
+void PointQueryVisitor::Visit(Object* object, bool& next)
 {
-	ISprite* sprite = static_cast<ISprite*>(object);
+	Sprite* sprite = static_cast<Sprite*>(object);
 	if (sprite->IsContain(m_pos))
 	{
-		obj_assign<ISprite>(*m_result, sprite);
-		bFetchNext = false;
+		obj_assign<Sprite>(*m_result, sprite);
+		next = false;
 	}
 	else
 	{
-		bFetchNext = true;
+		next = true;
 	}
 }
 
@@ -40,47 +40,47 @@ PointMultiQueryVisitor::PointMultiQueryVisitor(const Vector& pos)
 {
 }
 
-void PointMultiQueryVisitor::Visit(Object* object, bool& bFetchNext)
+void PointMultiQueryVisitor::Visit(Object* object, bool& next)
 {
-	ISprite* sprite = static_cast<ISprite*>(object);
+	Sprite* sprite = static_cast<Sprite*>(object);
 	if (sprite->IsContain(m_pos))
 	{
 		m_sprites.push_back(sprite);
-		bFetchNext = false;
+		next = false;
 	}
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // class RectQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-RectQueryVisitor::RectQueryVisitor(const Rect& rect, bool contain, std::vector<ISprite*>& result)
+RectQueryVisitor::RectQueryVisitor(const Rect& rect, bool contain, std::vector<Sprite*>& result)
 	: m_rect(rect)
 	, m_contain(contain)
 	, m_result(result)
 {
 }
 
-void RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
+void RectQueryVisitor::Visit(Object* object, bool& next)
 {
-	ISprite* sprite = static_cast<ISprite*>(object);
+	Sprite* sprite = static_cast<Sprite*>(object);
 	// 	if (sprite->editable && sprite->isIntersect(m_rect))
 	// 		m_result.push_back(sprite);
 	if (sprite->editable)
 	{
-		AbstractBV* bv = sprite->GetBounding();
+		BoundingBox* bv = sprite->GetBounding();
 		// 		if (!m_contain && bv->isIntersect(m_rect))
 		// 			m_result.push_back(sprite);
 
-		if (m_contain && bv && bv->isContain(m_rect)) {
+		if (m_contain && bv && bv->IsContain(m_rect)) {
 			m_result.push_back(sprite);
-		} else if (!m_contain && bv && bv->isIntersect(m_rect)) {
+		} else if (!m_contain && bv && bv->IsIntersect(m_rect)) {
 			m_result.push_back(sprite);
 		}
 	}
-	bFetchNext = true;
+	next = true;
 }
 
 }

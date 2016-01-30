@@ -42,7 +42,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 	m_fine_border.clear();
 
 	d2d::Vector bound[4];
-	d2d::MinBoundingBox::Implement(m_raw_border, bound);
+	d2d::MinBoundingBox::Do(m_raw_border, bound);
 	m_fine_border.assign(bound, bound+4);
 
 	std::vector<d2d::Vector> last_fine_border = m_fine_border;
@@ -52,7 +52,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 	do {
 		success = false;
 
-		float area = d2d::Math::GetPolygonArea(m_fine_border);
+		float area = d2d::Math2D::GetPolygonArea(m_fine_border);
 
 		// remove one node
 		d2d::Vector r_new0, r_new1;
@@ -102,9 +102,9 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 				const d2d::Vector& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
 				d2d::Vector cross_start;
 				int new_node_pos;
-				d2d::Math::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &cross_start);
-				if (d2d::Math::getDistanceSquare(cross_start, a_new_start) < d2d::Math::getDistanceSquare(cross_start, a_new_node) &&
-					d2d::Math::getDistanceSquare(cross_start, a_new_node) >= d2d::Math::getDistanceSquare(a_new_start, a_new_node)) {
+				d2d::Math2D::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &cross_start);
+				if (d2d::Math2D::GetDistanceSquare(cross_start, a_new_start) < d2d::Math2D::GetDistanceSquare(cross_start, a_new_node) &&
+					d2d::Math2D::GetDistanceSquare(cross_start, a_new_node) >= d2d::Math2D::GetDistanceSquare(a_new_start, a_new_node)) {
 					new_node_pos = (a_idx+1)%m_fine_border.size();
 					m_fine_border[a_idx] = cross_start;
 				} else {					
@@ -121,9 +121,9 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 				const d2d::Vector& end = m_fine_border[(new_node_pos+1)%m_fine_border.size()];
 				const d2d::Vector& end_next = m_fine_border[(new_node_pos+2)%m_fine_border.size()];
 				d2d::Vector cross_end;
-				d2d::Math::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &cross_end);
-				if (d2d::Math::getDistanceSquare(cross_end, a_new_end) < d2d::Math::getDistanceSquare(cross_end, a_new_node) &&
-					d2d::Math::getDistanceSquare(cross_end, a_new_node) >= d2d::Math::getDistanceSquare(a_new_end, a_new_node)) {
+				d2d::Math2D::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &cross_end);
+				if (d2d::Math2D::GetDistanceSquare(cross_end, a_new_end) < d2d::Math2D::GetDistanceSquare(cross_end, a_new_node) &&
+					d2d::Math2D::GetDistanceSquare(cross_end, a_new_node) >= d2d::Math2D::GetDistanceSquare(a_new_end, a_new_node)) {
 					m_fine_border[(new_node_pos+1)%m_fine_border.size()] = cross_end;
 				} else {
 					m_fine_border.insert(m_fine_border.begin()+((new_node_pos+1)%m_fine_border.size()), a_new_end);
@@ -152,7 +152,7 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 			}
 		}
 
-		assert(d2d::Math::IsPolygonInPolygon(m_raw_border_merged, m_fine_border));
+		assert(d2d::Math2D::IsPolygonInPolygon(m_raw_border_merged, m_fine_border));
 
 // 		// test legal
 // 		if (!IsOutlineLegal()) {
@@ -174,12 +174,12 @@ void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& 
 	const d2d::Vector& prev = m_fine_border[(idx+m_fine_border.size()-1)%m_fine_border.size()];
 	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
 	d2d::Vector s0 = curr - prev, s1 = next - curr;
-	if (f2Cross(s0, s1) >= 0) {
+	if (vec_cross(s0, s1) >= 0) {
 		return;
 	}
 
-	float len_prev = d2d::Math::getDistance(curr, prev),
-		len_next = d2d::Math::getDistance(curr, next);
+	float len_prev = d2d::Math2D::GetDistance(curr, prev),
+		len_next = d2d::Math2D::GetDistance(curr, next);
 	float area_max = 0;
 	float idx_e = 0;
 	for (float i = 0; i < len_prev; i+=1) {
@@ -187,7 +187,7 @@ void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& 
 		for (float j = idx_e; j < len_next; j+=1) {
 			d2d::Vector e = curr + (next-curr)*(j/len_next);
 			if (IsCutTriLegal(curr, s, e)) {
-				float a = d2d::Math::GetTriangleArea(s, curr, e);
+				float a = d2d::Math2D::GetTriangleArea(s, curr, e);
 				if (a > decrease) {
 					decrease = a;
 					new0 = s;
@@ -242,14 +242,14 @@ bool ExtractOutlineFine::IsCutTriLegal(const d2d::Vector& center,
 									   const d2d::Vector& p0, 
 									   const d2d::Vector& p1) const
 {
-	if (d2d::Math::IsSegmentIntersectPolyline(p0, p1, m_fine_border)) {
+	if (d2d::Math2D::IsSegmentIntersectPolyline(p0, p1, m_fine_border)) {
 		return false;
 	}
 
 	d2d::Vector tri_v[3] = {center, p0, p1};
 	std::vector<d2d::Vector> tri;
 	tri.assign(tri_v, tri_v+3);
-	if (d2d::Math::IsPolygonIntersectPolygon(m_raw_border_merged, tri)) {
+	if (d2d::Math2D::IsPolygonIntersectPolygon(m_raw_border_merged, tri)) {
 		return false;
 	}
 
@@ -261,8 +261,8 @@ bool ExtractOutlineFine::IsAddTriLeagal(const d2d::Vector& p0, const d2d::Vector
 	d2d::Vector tri_v[3] = {p0, p1, p2};
 	std::vector<d2d::Vector> tri;
 	tri.assign(tri_v, tri_v+3);
-	return !d2d::Math::IsPolygonIntersectPolygon(m_raw_border_merged, tri)
-		&& !d2d::Math::IsPolygonIntersectPolygon(m_fine_border, tri);
+	return !d2d::Math2D::IsPolygonIntersectPolygon(m_raw_border_merged, tri)
+		&& !d2d::Math2D::IsPolygonIntersectPolygon(m_fine_border, tri);
 }
 
 // 已经是算出来的
@@ -435,11 +435,11 @@ void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vect
 			{
 				d2d::Vector offset = m_rotate_lut[j] * step;
 				d2d::Vector curr_mid = mid + offset;
-				float area = d2d::Math::GetTriangleArea(start, curr_mid, end);
+				float area = d2d::Math2D::GetTriangleArea(start, curr_mid, end);
 				if (area > score &&
-					d2d::Math::isPointInArea(curr_mid, m_fine_border)) {
+					d2d::Math2D::IsPointInArea(curr_mid, m_fine_border)) {
 
-						// !d2d::Math::isPointInArea(curr_mid, m_raw_border_merged)
+						// !d2d::Math2D::isPointInArea(curr_mid, m_raw_border_merged)
 
 						if (IsAddTriLeagal(start, end, curr_mid)) {
 							score = area;
@@ -460,7 +460,7 @@ void ExtractOutlineFine::ReduceNode(float tolerance)
 		return;
 	}
 
-	float area_limit = d2d::Math::GetPolygonArea(m_fine_border) * tolerance;
+	float area_limit = d2d::Math2D::GetPolygonArea(m_fine_border) * tolerance;
 
 	bool success = false;
 	do {
@@ -472,9 +472,9 @@ void ExtractOutlineFine::ReduceNode(float tolerance)
 			const d2d::Vector& next = m_fine_border[(i+1)%m_fine_border.size()];
 			d2d::Vector s0 = curr - prev, s1 = next - curr;
 			// area increase & perimeter decrease
-			if (f2Cross(s0, s1) >= 0) 
+			if (vec_cross(s0, s1) >= 0) 
 			{
-				float a = d2d::Math::GetTriangleArea(curr, prev, next);
+				float a = d2d::Math2D::GetTriangleArea(curr, prev, next);
 				if (a < area_limit && IsAddTriLeagal(prev, next, curr))
 				{
 					m_fine_border.erase(m_fine_border.begin()+i);
@@ -501,8 +501,8 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 		return;
 	}
 
-	float area_limit = d2d::Math::GetPolygonArea(m_fine_border) * area_tol;
-	float perimeter_limit = d2d::Math::GetPolygonPerimeter(m_fine_border) * perimeter_tol;
+	float area_limit = d2d::Math2D::GetPolygonArea(m_fine_border) * area_tol;
+	float perimeter_limit = d2d::Math2D::GetPolygonPerimeter(m_fine_border) * perimeter_tol;
 	bool success = false;
 	do {
 		ReduceNode(area_tol);
@@ -523,22 +523,22 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 			}
 			
 			d2d::Vector intersect;
-			bool cross = d2d::Math::GetTwoLineCross(start_prev, start, end, end_next, &intersect);
+			bool cross = d2d::Math2D::GetTwoLineCross(start_prev, start, end, end_next, &intersect);
 			if (!cross) {
 				continue;
 			}
 
-			bool inside_s = d2d::Math::isBetween(start_prev.x, start.x, intersect.x) 
-				&& d2d::Math::isBetween(start_prev.y, start.y, intersect.y);
-			bool inside_e = d2d::Math::isBetween(end.x, end_next.x, intersect.x) 
-				&& d2d::Math::isBetween(end.y, end_next.y, intersect.y);
+			bool inside_s = d2d::Math2D::IsBetween(start_prev.x, start.x, intersect.x) 
+				&& d2d::Math2D::IsBetween(start_prev.y, start.y, intersect.y);
+			bool inside_e = d2d::Math2D::IsBetween(end.x, end_next.x, intersect.x) 
+				&& d2d::Math2D::IsBetween(end.y, end_next.y, intersect.y);
 			// add new triangle, area increase & perimeter increase
 			if (!inside_s && !inside_e) 
 			{
-				float a = d2d::Math::GetTriangleArea(intersect, start, end);
-				float len = d2d::Math::getDistance(intersect, start) 
-					+ d2d::Math::getDistance(intersect, end)
-					- d2d::Math::getDistance(start, end);
+				float a = d2d::Math2D::GetTriangleArea(intersect, start, end);
+				float len = d2d::Math2D::GetDistance(intersect, start) 
+					+ d2d::Math2D::GetDistance(intersect, end)
+					- d2d::Math2D::GetDistance(start, end);
 				if (a < area_limit && len < perimeter_limit && 
 					IsAddTriLeagal(start, end, intersect))
 				{
@@ -558,11 +558,11 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 
 				bool is_inside;
 				if (inside_s) {
-					is_inside = d2d::Math::IsTurnRight(start, intersect, end_next);
+					is_inside = d2d::Math2D::IsTurnRight(start, intersect, end_next);
 				} else {
-					is_inside = d2d::Math::IsTurnLeft(end, intersect, start_prev);
+					is_inside = d2d::Math2D::IsTurnLeft(end, intersect, start_prev);
 				}
-				if (is_inside || d2d::Math::GetTriangleArea(intersect, start, end) < area_limit) {
+				if (is_inside || d2d::Math2D::GetTriangleArea(intersect, start, end) < area_limit) {
 					if (IsCutTriLegal(intersect, start, end)) {
 						if (inside_s) {
 							m_fine_border[i] = intersect;

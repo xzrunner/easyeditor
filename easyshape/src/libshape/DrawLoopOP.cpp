@@ -14,12 +14,12 @@ bool DrawLoopOP::OnMouseLeftDClick(int x, int y)
 {
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
-	d2d::IShape* shape = new ChainShape(m_polyline, true);
+	d2d::Shape* shape = new ChainShape(m_polyline, true);
 	d2d::InsertShapeSJ::Instance()->Insert(shape);
 	shape->Release();
 
 	m_polyline.clear();
-	m_currPos.setInvalid();
+	m_currPos.SetInvalid();
 
 	return false;
 }

@@ -34,13 +34,13 @@ bool BodyData::LoadFromFile(const std::string& filename)
 
 	m_filename = filename;
 
-	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(filename);
+	d2d::FileType::Type type = d2d::FileType::GetType(filename);
 	switch (type)
 	{
-	case d2d::FileNameParser::e_mesh:
+	case d2d::FileType::e_mesh:
 		loadFromMeshFile(filename);
 		break;
-	case d2d::FileNameParser::e_shape:
+	case d2d::FileType::e_shape:
 		loadFromShapeFile(filename);
 	default:
 		return false;
@@ -77,7 +77,7 @@ void BodyData::loadFromShapeFile(const std::string& filename)
 {
 // 	m_type = e_shapes;
 // 
-// 	std::vector<IShape*> shapes;
+// 	std::vector<Shape*> shapes;
 // 	libshape::FileAdapter adapter(shapes);
 // 
 // 	adapter.load(filename.c_str());
@@ -93,10 +93,10 @@ void BodyData::loadFromShapeFile(const std::string& filename)
 // 		{
 // 			FixtureData* fd = new FixtureData;
 // 			fd->vertices.resize(4);
-// 			fd->vertices[0] = d2d::Vector(rect->m_rect.xMin, rect->m_rect.yMin);
-// 			fd->vertices[1] = d2d::Vector(rect->m_rect.xMax, rect->m_rect.yMin);
-// 			fd->vertices[2] = d2d::Vector(rect->m_rect.xMax, rect->m_rect.yMax);
-// 			fd->vertices[3] = d2d::Vector(rect->m_rect.xMin, rect->m_rect.yMax);
+// 			fd->vertices[0] = d2d::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
+// 			fd->vertices[1] = d2d::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
+// 			fd->vertices[2] = d2d::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
+// 			fd->vertices[3] = d2d::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
 // 			m_fixtures.push_back(fd);
 // 		}
 // 		else if (CircleShape* circle = dynamic_cast<CircleShape*>(shapes[i]))

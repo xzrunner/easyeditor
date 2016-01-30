@@ -13,7 +13,7 @@ class LibraryPanel;
 class PasteSymbolOP : public ZoomViewOP
 {
 public:
-	PasteSymbolOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	PasteSymbolOP(wxWindow* wnd, EditPanelImpl* stage, 
 		LibraryPanel* libraryPanel, float* pScale = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);

@@ -17,14 +17,14 @@ WheelJoint::WheelJoint(Body* b0, Body* b1)
 
 bool WheelJoint::isContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::getDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| d2d::Math::getDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
+	return d2d::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| d2d::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
 bool WheelJoint::isIntersect(const d2d::Rect& rect) const
 {
-	return d2d::Math::isPointInRect(getWorldAnchorA(), rect) 
-		|| d2d::Math::isPointInRect(getWorldAnchorB(), rect);
+	return d2d::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
+		|| d2d::Math2D::IsPointInRect(getWorldAnchorB(), rect);
 }
 
 void WheelJoint::draw(DrawType type) const
@@ -34,8 +34,8 @@ void WheelJoint::draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::drawDashLine(anchorA, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::drawDashLine(anchorB, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		d2d::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
+		d2d::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		drawAxisALine(anchorA);
 		drawFootBLine(anchorA, anchorB);
@@ -69,12 +69,12 @@ void WheelJoint::setLocalAnchorB(const d2d::Vector& world)
 void WheelJoint::drawAxisALine(const d2d::Vector& worldAnchorA) const
 {
 	d2d::Vector unit = localAxisA;
-	unit.normalize();
+	unit.Normalize();
 
 	const d2d::Vector start = worldAnchorA + unit * 150,
 		end = worldAnchorA - unit * 150;
 
-	d2d::PrimitiveDraw::drawDotDashLine(start, end, d2d::Colorf(0.4f, 0.6f, 0.4f), 1);
+	d2d::PrimitiveDraw::DrawDotDashLine(start, end, d2d::Colorf(0.4f, 0.6f, 0.4f), 1);
 }
 
 void WheelJoint::drawFootBLine(const d2d::Vector& worldAnchorA, const d2d::Vector& worldAnchorB) const
@@ -82,10 +82,10 @@ void WheelJoint::drawFootBLine(const d2d::Vector& worldAnchorA, const d2d::Vecto
 	d2d::Vector otherA = worldAnchorA + localAxisA;
 
 	d2d::Vector foot;
-	d2d::Math::getFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
+	d2d::Math2D::GetFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
-	d2d::PrimitiveDraw::drawDashLine(worldAnchorB, foot, d2d::Colorf(1, 0, 0), 1);
-	d2d::PrimitiveDraw::drawCircle(foot, JOINT_RADIUS_IN, true, 2, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::DrawDashLine(worldAnchorB, foot, d2d::Colorf(1, 0, 0), 1);
+	d2d::PrimitiveDraw::DrawCircle(foot, JOINT_RADIUS_IN, true, 2, d2d::Colorf(1, 0, 0));
 }
 
 void WheelJoint::drawAnchorA(const d2d::Vector& pos, DrawType type) const
@@ -94,18 +94,18 @@ void WheelJoint::drawAnchorA(const d2d::Vector& pos, DrawType type) const
 	switch (type)
 	{
 	case e_default:
-		color.set(0.8f, 0.8f, 0.8f);
+		color.Set(0.8f, 0.8f, 0.8f);
 		break;
 	case e_mouseOn:
-		color.set(1, 1, 1);
+		color.Set(1, 1, 1);
 		break;
 	case e_selected:
-		color.set(1, 1, 0);
+		color.Set(1, 1, 0);
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::rect(pos, JOINT_RADIUS_OUT, d2d::ShapeStyle(true, color));
+	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::DrawRect(pos, JOINT_RADIUS_OUT, d2d::ShapeStyle(true, color));
 }
 
 void WheelJoint::drawAnchorB(const d2d::Vector& pos, DrawType type) const
@@ -114,16 +114,16 @@ void WheelJoint::drawAnchorB(const d2d::Vector& pos, DrawType type) const
 	switch (type)
 	{
 	case e_default:
-		color.set(0.8f, 0.8f, 0.8f);
+		color.Set(0.8f, 0.8f, 0.8f);
 		break;
 	case e_mouseOn:
-		color.set(1, 1, 1);
+		color.Set(1, 1, 1);
 		break;
 	case e_selected:
-		color.set(1, 1, 0);
+		color.Set(1, 1, 0);
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }

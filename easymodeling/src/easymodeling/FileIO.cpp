@@ -26,7 +26,7 @@ void FileIO::load(const char* filename)
 	delete context->world;
 	context->world = libmodeling::FileApapter::j2World(value["world"]);
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
@@ -71,7 +71,7 @@ void FileIO::store(const char* filename)
 
 	Json::Value value;
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FileHelper::GetFileDir(filename);
 
 	value["world"] = b2j(Context::Instance()->world);
 
@@ -131,7 +131,7 @@ Json::Value FileIO::b2j(const libmodeling::Body* body, const std::string& dlg)
 
 	value["name"] = body->name.ToStdString();
 
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dlg, 
+	value["filepath"] = d2d::FileHelper::GetRelativePath(dlg, 
 		body->sprite->GetSymbol().GetFilepath()).ToStdString();
 
 	value["type"] = body->type;
@@ -301,7 +301,7 @@ Json::Value FileIO::b2j(libmodeling::Joint* joint, const std::map<libmodeling::B
 			value["anchorB"]["x"] = wJoint->localAnchorB.x;
 			value["anchorB"]["y"] = wJoint->localAnchorB.y;
 
-			float len = d2d::Math::getDistance(wJoint->localAxisA, d2d::Vector());
+			float len = d2d::Math2D::GetDistance(wJoint->localAxisA, d2d::Vector());
 			value["AxisA"]["x"] = wJoint->localAxisA.x / len;
 			value["AxisA"]["y"] = wJoint->localAxisA.y / len;
 

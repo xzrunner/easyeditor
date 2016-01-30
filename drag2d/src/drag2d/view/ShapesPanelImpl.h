@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class IShape;
+class Shape;
 class IDataContainer;
 
 class ShapesPanelImpl : public MultiShapesImpl
@@ -19,7 +19,7 @@ public:
 	//
 	// MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(IVisitor& visitor, 
+	virtual void TraverseShapes(Visitor& visitor, 
 		DataTraverseType type = DT_ALL) const;
 
 protected:

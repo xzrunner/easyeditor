@@ -68,7 +68,7 @@ Vector EditPanelImpl::TransPosScrToProj(int x, int y) const
 
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
-	return m_camera->transPosScreenToProject(x, y, w, h);
+	return m_camera->TransPosScreenToProject(x, y, w, h);
 }
 
 Vector EditPanelImpl::TransPosProjToScr(const Vector& proj) const
@@ -79,7 +79,7 @@ Vector EditPanelImpl::TransPosProjToScr(const Vector& proj) const
 
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
-	return m_camera->transPosProjectToScreen(proj, w, h);
+	return m_camera->TransPosProjectToScreen(proj, w, h);
 }
 
 void EditPanelImpl::DrawEditOP() const
@@ -165,7 +165,7 @@ void EditPanelImpl::OnKeyDown(wxKeyEvent& event)
 	switch (key_code) {
 	case WXK_F5:
 		{
-			d2d::Frame* frame = dynamic_cast<Frame*>(m_frame);
+			Frame* frame = dynamic_cast<Frame*>(m_frame);
 			if (frame) {
 				Clear();
 				frame->RefreshWithCurrFile();
@@ -231,7 +231,7 @@ void EditPanelImpl::Redo()
 	}
 }
 
-void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
+void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites)
 {
 	Json::Value value;
 	m_history_list.store(value, sprites);
@@ -245,7 +245,7 @@ void EditPanelImpl::SaveOpRecordList(const std::string& filepath, const std::vec
 	fout.close();
 }
 
-void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
+void EditPanelImpl::LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites)
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 
@@ -346,7 +346,7 @@ void EditPanelImpl::OnNotify(int sj_id, void* ud)
 	case MSG_INSERT_SPRITE:
 		{
 			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
-			std::vector<ISprite*> sprites;
+			std::vector<Sprite*> sprites;
 			sprites.push_back(p->spr);
 			AddOpRecord(new InsertSpriteAOP(sprites));
 		}

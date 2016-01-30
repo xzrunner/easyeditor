@@ -84,7 +84,7 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_shape_builder = new ShapeBuilder);
 }
 
-const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
+const IPackNode* PackNodeFactory::Create(const d2d::Sprite* spr)
 {
 	const IPackNode* node = NULL;
 
@@ -139,7 +139,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 		throw d2d::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 	
-	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
+	node->SetFilepath(d2d::FileHelper::GetRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
@@ -148,7 +148,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISprite* spr)
 	return node;
 }
 
-const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
+const IPackNode* PackNodeFactory::Create(const d2d::Symbol* symbol)
 {
 	const IPackNode* node = NULL;
 
@@ -184,7 +184,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::ISymbol* symbol)
 		throw d2d::Exception("PackNodeFactory::Create unknown symbol type.");
 	}
 
-	node->SetFilepath(d2d::FilenameTools::getRelativePath(m_files_dir, symbol->GetFilepath()).ToStdString());
+	node->SetFilepath(d2d::FileHelper::GetRelativePath(m_files_dir, symbol->GetFilepath()).ToStdString());
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");

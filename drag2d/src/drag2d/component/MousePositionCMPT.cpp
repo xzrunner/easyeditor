@@ -42,4 +42,4 @@ wxSizer* MousePositionCMPT::initLayout()
 	return topSizer;
 }
 
-} // d2d
+}

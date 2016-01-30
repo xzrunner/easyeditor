@@ -94,7 +94,7 @@ void CreateMeshCMPT::onChangeUseRegion(wxCommandEvent& event)
 
 void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 {
-// 	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_mesh);
+// 	std::string tag = d2d::FileType::getFileTag(d2d::FileType::e_mesh);
 // 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
 // 		wxT("*_") + tag + wxT(".json"), wxFD_OPEN);
 // 	if (dlg.ShowModal() == wxID_OK)

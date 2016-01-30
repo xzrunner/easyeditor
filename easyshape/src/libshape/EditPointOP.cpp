@@ -60,7 +60,7 @@ bool EditPointOP::OnMouseLeftUp(int x, int y)
 {
 	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
-	if (!m_pos.isValid()) {
+	if (!m_pos.IsValid()) {
 		return false;
 	}
 
@@ -110,7 +110,7 @@ bool EditPointOP::OnMouseMove(int x, int y)
 
 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	NodeCapture capture(m_shapes_impl, tolerance);
-	d2d::IShape* old = m_captured.shape;
+	d2d::Shape* old = m_captured.shape;
 	capture.captureEditable(pos, m_captured);
 	if (old && !m_captured.shape || !old && m_captured.shape) {
 		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -138,8 +138,8 @@ bool EditPointOP::OnDraw() const
 {
 	if (d2d::ZoomViewOP::OnDraw()) return true;
 
-	if (m_pos.isValid()) {
-		d2d::PrimitiveDraw::drawCircle(m_pos, m_node_capture->GetValue(), true, 2, d2d::LIGHT_RED);
+	if (m_pos.IsValid()) {
+		d2d::PrimitiveDraw::DrawCircle(m_pos, m_node_capture->GetValue(), true, 2, d2d::LIGHT_RED);
 	}
 
 	return false;
@@ -149,7 +149,7 @@ bool EditPointOP::Clear()
 {
 	if (d2d::ZoomViewOP::Clear()) return true;
 
-	m_pos.setInvalid();
+	m_pos.SetInvalid();
 
 	return false;
 }

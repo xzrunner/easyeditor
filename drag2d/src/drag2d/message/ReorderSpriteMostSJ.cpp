@@ -11,7 +11,7 @@ ReorderSpriteMostSJ::ReorderSpriteMostSJ(int id)
 {
 }
 
-void ReorderSpriteMostSJ::Reorder(ISprite* spr, bool up, Observer* except)
+void ReorderSpriteMostSJ::Reorder(Sprite* spr, bool up, Observer* except)
 {
 	Params p;
 	p.spr = spr;

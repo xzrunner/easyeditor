@@ -7,9 +7,9 @@
 namespace eanim
 {
 
-void PreviewUtility::GetCurrSprites(const d2d::PlayControl& ctrl, std::vector<d2d::ISprite*>& sprites)
+void PreviewUtility::GetCurrSprites(const d2d::PlayControl& ctrl, std::vector<d2d::Sprite*>& sprites)
 {
-	int frame_idx = ctrl.frame();
+	int frame_idx = ctrl.Frame();
 	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);

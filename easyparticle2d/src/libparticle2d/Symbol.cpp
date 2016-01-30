@@ -15,7 +15,7 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::ISymbol(s)
+	: d2d::Symbol(s)
 	, m_et_cfg(s.m_et_cfg)
 {
 }
@@ -28,13 +28,13 @@ Symbol* Symbol::Clone() const
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
-		d2d::ISymbol* symbol = static_cast<d2d::ISymbol*>(m_et_cfg->symbols[i].ud);
+		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(m_et_cfg->symbols[i].ud);
 		symbol->ReloadTexture();
 	}
 }
 
 void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::ISprite* spr, const d2d::ISprite* root) const
+				  const d2d::Sprite* spr, const d2d::Sprite* root) const
 {
 	if (!spr) {
 		return;
@@ -49,7 +49,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	p2d_spr->Draw(mt);		
 }
 
-d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
 {
 	return d2d::Rect(200, 200);
 }

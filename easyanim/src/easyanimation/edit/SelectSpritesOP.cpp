@@ -23,7 +23,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		return true;
 
 // 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-// 	d2d::ISprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+// 	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 // 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 // 	{
 // 		emesh::EditDialog dlg(m_wnd, sprite);
@@ -33,7 +33,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	return false;
 }
 
-void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
+void SelectSpritesOP::PasteSprToClipboard(const d2d::Sprite* spr, Json::Value& value) const
 {
 	d2d::SelectSpritesOP::PasteSprToClipboard(spr, value);
 
@@ -42,7 +42,7 @@ void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& 
 	value["anim"]["frame"] = ud->frame->GetTime() - 1;
 }
 
-void SelectSpritesOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
+void SelectSpritesOP::CopySprFromClipboard(d2d::Sprite* spr, const Json::Value& value) const
 {
 	d2d::SelectSpritesOP::CopySprFromClipboard(spr, value);
 

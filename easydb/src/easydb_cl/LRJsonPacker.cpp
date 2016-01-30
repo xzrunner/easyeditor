@@ -57,7 +57,7 @@ void LRJsonPacker::PackGraphics(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	m_dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	m_dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
 
 	Json::Value out_val;
 
@@ -99,7 +99,7 @@ void LRJsonPacker::PackLogic(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	m_dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	m_dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
 
 	Json::Value out_val;
 
@@ -160,18 +160,18 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) {
 		std::string spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		assert(symbol);
 
 		Json::Value dst_val;
 		dst_val["name"] = spr_val["name"];
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 
 		libshape::Sprite* shape_spr = dynamic_cast<libshape::Sprite*>(sprite);
 		assert(shape_spr);
-		const std::vector<d2d::IShape*>& shapes = shape_spr->GetSymbol().GetShapes();
+		const std::vector<d2d::Shape*>& shapes = shape_spr->GetSymbol().GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
 			ParserShape(shapes[i], sprite->GetPosition(), sprite->GetAngle(), grids, force_grids, dst_val);
 		}
@@ -192,7 +192,7 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 	int idx = 0;
 	Json::Value shape_val = src_val["shape"][idx++];
 	while (!shape_val.isNull()) {
-		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, m_dir);
+		d2d::Shape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, m_dir);
 
 		Json::Value dst_val;
 		dst_val["name"] = shape_val["name"];
@@ -207,7 +207,7 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 	}
 }
 
-void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, float angle,
+void LRJsonPacker::ParserShape(d2d::Shape* shape, const d2d::Vector& offset, float angle,
 							   const lr::Grids& grids, bool force_grids, Json::Value& out_val)
 {
 	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
@@ -216,7 +216,7 @@ void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, fl
 
 		std::vector<d2d::Vector> bound = poly->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = d2d::Math::rotateVector(bound[i], angle) + offset;
+			bound[i] = d2d::Math2D::RotateVector(bound[i], angle) + offset;
 		}
 		grid_idx = grids.IntersectPolygon(bound);
 
@@ -229,7 +229,7 @@ void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, fl
 	{
 		std::vector<d2d::Vector> bound = chain->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
-			bound[i] = d2d::Math::rotateVector(bound[i], angle) + offset;
+			bound[i] = d2d::Math2D::RotateVector(bound[i], angle) + offset;
 		}
 
 		if (force_grids) {
@@ -241,7 +241,7 @@ void LRJsonPacker::ParserShape(d2d::IShape* shape, const d2d::Vector& offset, fl
 				out_val["grid"][sz] = grid_idx[i];
 			}
 		} else {
-			d2d::JsonIO::Store(bound, out_val["pos"]);
+			d2d::JsonSerializer::Store(bound, out_val["pos"]);
 		}
 	}
 	else
@@ -271,7 +271,7 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 	while (!spr_val.isNull()) 
 	{
 		std::string spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		if (!symbol) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
@@ -281,7 +281,7 @@ void LRJsonPacker::ParserPointFromSprite(const Json::Value& src_val, const char*
 		Json::Value shape_val;
 		shape_val["name"] = spr_val["name"];
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 
 		shape_val["x"] = sprite->GetPosition().x;
@@ -353,8 +353,8 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 	while (!spr_val.isNull()) 
 	{
 		std::string filepath = spr_val["filepath"].asString();
-		filepath = d2d::FilenameTools::getAbsolutePath(m_dir, filepath);
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
+		filepath = d2d::FileHelper::GetAbsolutePath(m_dir, filepath);
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) {
 			spr_val = src_val["sprite"][idx++];
 			continue;
 		}				
@@ -365,12 +365,12 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		char_val["y"] = spr_val["position"]["y"];
 
 		// region
-		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
-		std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
+		std::string shape_tag = d2d::FileType::GetTag(d2d::FileType::e_shape);
+		std::string shape_filepath = d2d::FileHelper::GetFilenameAddTag(filepath, shape_tag, "json");
 		std::string tag_ext;
-		if (d2d::FilenameTools::IsFileExist(shape_filepath)) {
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-			const std::vector<d2d::IShape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
+		if (d2d::FileHelper::IsFileExist(shape_filepath)) {
+			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
+			const std::vector<d2d::Shape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
 			if (!shapes.empty()) {
 				tag_ext = shapes[0]->name;
 
@@ -392,7 +392,7 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		ParserSprTag(tag, filepath, char_val);
 
 		// filename
-		std::string filename = d2d::FilenameTools::getFilename(filepath);
+		std::string filename = d2d::FileHelper::GetFilename(filepath);
 		lr::CharacterFileName out_name(filename);
 		//		char_val["filename"] = out_name.GetOutputName();
 
@@ -432,7 +432,7 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 	while (!spr_val.isNull()) 
 	{
 		std::string spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
+		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		if (!symbol) {
 			std::string filepath = spr_val["filepath"].asString();
 			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
@@ -443,7 +443,7 @@ void LRJsonPacker::ParserLevelFromSprite(const Json::Value& src_val, const char*
 
 		level_val["name"] = spr_val["name"];
 
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 		level_val["x"] = sprite->GetPosition().x;
 		level_val["y"] = sprite->GetPosition().y;
@@ -489,7 +489,7 @@ void LRJsonPacker::ParserSpecialFromSprite(const Json::Value& src_val, const std
 		std::string filepath = spr_val["filepath"].asString();
 
 		std::string tag = spr_val["tag"].asString();
-		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d)) {
+		if (d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) {
 			bool top_layer = false;
 			if (is_layer2 || tag.find(TOP_LAYER_STR) != std::string::npos) {
 				top_layer = true;
@@ -565,9 +565,9 @@ void LRJsonPacker::ParserParticleLayer(const Json::Value& spr_val, Json::Value& 
 	dec_val["scale"] = std::max(sx, sy);
 
 	std::string sym_path = spr_val["filepath"].asString();
-	std::string name = d2d::FilenameTools::getFilename(sym_path);
+	std::string name = d2d::FileHelper::GetFilename(sym_path);
 	name = name.substr(0, name.find("_particle"));
-	d2d::StringTools::ToLower(name);
+	d2d::StringHelper::ToLower(name);
 
 	dec_val["export"] = name;
 //	dec_val["export"] = spr_val["name"];
@@ -620,7 +620,7 @@ void LRJsonPacker::ParserSprTag(const std::string& tag, const std::string& symbo
 void LRJsonPacker::ParserSprTag(const std::string& tag, Json::Value& out_val)
 {
 	std::vector<std::string> tags;
-	d2d::StringTools::Split(tag, ";", tags);
+	d2d::StringHelper::Split(tag, ";", tags);
 	for (int i = 0, n = tags.size(); i < n; ++i) {
 		const std::string& str = tags[i];
 		int pos = str.find_first_of('=');

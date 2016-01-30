@@ -6,7 +6,7 @@
 #include "common/Config.h"
 #include "common/Exception.h"
 #include "dataset/SymbolMgr.h"
-#include "dataset/ISymbol.h"
+#include "dataset/Symbol.h"
 
 namespace d2d
 {
@@ -26,7 +26,7 @@ void ILibraryPage::Clear()
 	m_list->Clear();
 }
 
-void ILibraryPage::Traverse(IVisitor& visitor) const
+void ILibraryPage::Traverse(Visitor& visitor) const
 {
 	m_list->Traverse(visitor);
 }
@@ -36,11 +36,11 @@ ListItem* ILibraryPage::GetItem(int index/* = -1*/) const
 	return m_list->GetItem(index);
 }
 
-ISymbol* ILibraryPage::GetSymbol(int index/* = -1*/) const
+Symbol* ILibraryPage::GetSymbol(int index/* = -1*/) const
 {
 	ListItem* item = GetItem(index);
 	if (item) {
-		return static_cast<ISymbol*>(item);
+		return static_cast<Symbol*>(item);
 	} else {
 		return NULL;
 	}
@@ -111,7 +111,7 @@ bool ILibraryPage::LoadFromConfig(const std::string& key)
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i];
-		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
+		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
 		m_list->Insert(symbol);
 		symbol->Release();
 		ret = true;
@@ -131,15 +131,15 @@ void ILibraryPage::OnAddPress(const std::string& type)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
+				Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->Insert(symbol);
 				symbol->Release();
-			} catch (d2d::Exception& e) {
-				d2d::ExceptionDlg dlg(m_parent, e);
+			} catch (Exception& e) {
+				ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();
 			}
 		}
 	}
 }
 
-} // d2d
+}

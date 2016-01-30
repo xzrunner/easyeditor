@@ -8,7 +8,7 @@ namespace etexture { class Sprite; }
 namespace lr
 {
 
-void create_shapes_from_etxture(etexture::Sprite* spr, std::vector<d2d::IShape*>& shapes);
+void create_shapes_from_etxture(etexture::Sprite* spr, std::vector<d2d::Shape*>& shapes);
 
 }
 

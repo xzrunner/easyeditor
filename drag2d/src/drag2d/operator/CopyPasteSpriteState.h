@@ -6,13 +6,13 @@
 namespace d2d
 {
 
-class ISprite;
+class Sprite;
 class SpriteSelection;
 
 class CopyPasteSpriteState : public IArrangeSpriteState
 {
 public:
-	CopyPasteSpriteState(SpriteSelection* selection, ISprite* selected);
+	CopyPasteSpriteState(SpriteSelection* selection, Sprite* selected);
 	virtual ~CopyPasteSpriteState();
 
 	virtual bool OnMouseDrag(const Vector& pos);
@@ -20,7 +20,7 @@ public:
 private:
 	SpriteSelection* m_selection;
 
-	ISprite* m_spr;
+	Sprite* m_spr;
 
 }; // CopyPasteSpriteState
 

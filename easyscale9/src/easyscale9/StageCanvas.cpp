@@ -30,9 +30,9 @@ void StageCanvas::OnDrawSprites() const
 	}
 	else
 	{
-		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, d2d::LIGHT_GREY_LINE);
+		d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, d2d::LIGHT_GREY_LINE);
 
-		d2d::ISymbol* symbol = m_stage_panel->getPatchSymbol();
+		d2d::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)
 			symbol->Draw(d2d::Matrix());
 	}

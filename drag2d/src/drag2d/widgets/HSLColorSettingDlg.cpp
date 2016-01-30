@@ -1,7 +1,7 @@
 #include "HSLColorSettingDlg.h"
 #include "ColorSlider.h"
 
-#include "common/color_convert.h"
+#include "common/convert_color.h"
 
 namespace d2d
 {

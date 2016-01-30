@@ -67,13 +67,13 @@ LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody)
 {}
 
 void PreviewPanel::LoadBodyVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
 	libmodeling::Body* data = static_cast<libmodeling::Body*>(object);
 
 	b2Body* body = ResolveToB2::createBody(*data, m_world, m_mapBody);
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& ma
 {}
 
 void PreviewPanel::LoadJointVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
 	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
 
@@ -97,7 +97,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	if (joint)
 		m_mapJoint.insert(std::make_pair(data, joint));
 
-	bFetchNext = true;
+	next = true;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -113,12 +113,12 @@ LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>
 {}
 
 void PreviewPanel::LoadGearJointVisitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
 	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
 
 	ResolveToB2::createJoint(*data, m_world, m_mapBody, m_mapJoint);
 
-	bFetchNext = true;
+	next = true;
 }
 

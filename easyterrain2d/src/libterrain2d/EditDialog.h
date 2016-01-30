@@ -17,12 +17,12 @@ public:
 	virtual ~EditDialog();
 
 private:
-	void InitLayout(wxGLContext* glctx, d2d::ISprite* edited, 
+	void InitLayout(wxGLContext* glctx, d2d::Sprite* edited, 
 		const d2d::MultiSpritesImpl* sprite_impl);
 
 	void OnCloseEvent(wxCloseEvent& event);
 
-	void InitCamera(d2d::Camera* cam, d2d::ISprite* spr) const;
+	void InitCamera(d2d::Camera* cam, d2d::Sprite* spr) const;
 
 private:
 	Symbol* m_symbol;

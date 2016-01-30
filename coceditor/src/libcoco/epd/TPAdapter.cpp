@@ -45,7 +45,7 @@ void TPAdapter::Load(const Json::Value& value, Entry& entry)
 	wxFileName filename(filepath);
 	filename.MakeAbsolute(m_src_data_dir);
 	filename.Normalize();
-	filepath = d2d::FilenameTools::FormatFilepath(filename.GetFullPath().ToStdString());
+	filepath = d2d::FileHelper::FormatFilepath(filename.GetFullPath().ToStdString());
 
 	entry.filename = filepath;
 
@@ -65,5 +65,5 @@ void TPAdapter::Load(const Json::Value& value, Region& region)
 	region.h = value["h"].asInt();
 }
 
-} // d2d
+}
 }

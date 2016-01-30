@@ -13,7 +13,7 @@ class StageCanvas : public d2d::OrthoCanvas
 public:
 	StageCanvas(StagePanel* stage);
 	StageCanvas(StagePanel* stage, wxGLContext* glctx,
-		d2d::ISprite* edited, const d2d::MultiSpritesImpl* bg_sprites);
+		d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -21,10 +21,10 @@ protected:
 private:
 	StagePanel* m_stage;
 
-	d2d::ISprite* m_edited;
+	d2d::Sprite* m_edited;
 	const d2d::MultiSpritesImpl* m_sprite_impl;
 
-	d2d::ISprite* m_bg;
+	d2d::Sprite* m_bg;
 
 }; // StageCanvas
 

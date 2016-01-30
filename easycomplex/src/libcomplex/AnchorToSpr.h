@@ -10,7 +10,7 @@ namespace ecomplex
 class AnchorToSpr
 {
 public:
-	static d2d::ISprite* Trans(const librespacker::PackAnchor* anchor);
+	static d2d::Sprite* Trans(const librespacker::PackAnchor* anchor);
 
 }; // AnchorToSpr
 

@@ -1,11 +1,11 @@
 #include "SpriteDialog.h"
 
-#include "dataset/ISprite.h"
+#include "dataset/Sprite.h"
 
 namespace d2d
 {
 
-SpriteDialog::SpriteDialog(wxWindow* parent, ISprite* spr)
+SpriteDialog::SpriteDialog(wxWindow* parent, Sprite* spr)
 	: BaseDialog(parent, wxT("Sprite"))
 	, m_spr(spr)
 {

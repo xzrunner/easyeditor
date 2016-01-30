@@ -21,7 +21,7 @@ Scale9Builder::~Scale9Builder()
 	}
 }
 
-void Scale9Builder::Traverse(d2d::IVisitor& visitor) const
+void Scale9Builder::Traverse(d2d::Visitor& visitor) const
 {
 	std::multimap<const escale9::Symbol*, Value>::const_iterator 
 		itr = m_map_data.begin();
@@ -75,7 +75,7 @@ const IPackNode* Scale9Builder::Query(const escale9::Sprite* spr) const
 
 void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 {
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<d2d::Sprite*> sprites;
 	const escale9::Scale9Data& data = spr->GetScale9Data();
 	switch (data.GetType())
 	{
@@ -109,7 +109,7 @@ void Scale9Builder::Load(const escale9::Sprite* spr, PackPicture* pic)
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite)) {
 			PackPicture::Quad quad;
 			ImageBuilder::LoadPictureQuad(image, quad);

@@ -100,7 +100,7 @@ void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 {
-	const d2d::ISymbol* bg = static_cast<const libshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
+	const d2d::Symbol* bg = static_cast<const libshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
 	const d2d::ImageSymbol* img_symbol = dynamic_cast<const d2d::ImageSymbol*>(bg);
 	if (!img_symbol) {
 		return;
@@ -108,7 +108,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 
 	d2d::ClearShapeSJ::Instance()->Clear();
 
-	d2d::Image* img = img_symbol->getImage();
+	d2d::Image* img = img_symbol->GetImage();
 	eimage::ExtractOutlineRaw raw(*img);
 	raw.CreateBorderLineAndMerge();
 	eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
@@ -126,8 +126,8 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 
 void ToolbarPanel::SelectSuitableEditOP()
 {
-	std::vector<d2d::IShape*> shapes;
-	m_stage_panel->TraverseShapes(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	std::vector<d2d::Shape*> shapes;
+	m_stage_panel->TraverseShapes(d2d::FetchAllVisitor<d2d::Shape>(shapes));
 	if (shapes.empty()) return;
 
 	ShapeType type = get_shape_type(shapes[0]->GetShapeDesc());

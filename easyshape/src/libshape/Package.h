@@ -15,7 +15,7 @@ public:
 	};
 
 public:
-	static void packShape(d2d::IShape* shape, std::ofstream& fout);
+	static void packShape(d2d::Shape* shape, std::ofstream& fout);
 
 }; // Paskage
 

@@ -16,7 +16,7 @@ class PathGrid : public IPathfinding
 public:
 	PathGrid(const d2d::Rect& region, int row, int col);
 
-	virtual void DisableRegion(const d2d::ISprite* spr, bool disable);
+	virtual void DisableRegion(const d2d::Sprite* spr, bool disable);
 
 	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
 

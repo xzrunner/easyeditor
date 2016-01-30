@@ -20,7 +20,7 @@
 //	EVT_TIMER(TIMER_ID, EJPreviewCanvas::onTimer)
 //END_EVENT_TABLE()
 //
-//EJPreviewCanvas::EJPreviewCanvas(EditPanel* stage, const std::vector<const ISprite*>& sprites)
+//EJPreviewCanvas::EJPreviewCanvas(EditPanel* stage, const std::vector<const Sprite*>& sprites)
 //	: OrthoCanvas(stage)
 //	, m_timer(this, TIMER_ID)
 //{
@@ -47,7 +47,7 @@
 //	Refresh();
 //}
 //
-//void EJPreviewCanvas::prepareSprites(const std::vector<const ISprite*>& sprites)
+//void EJPreviewCanvas::prepareSprites(const std::vector<const Sprite*>& sprites)
 //{
 //// 	if (sprites.empty())
 //// 		return;

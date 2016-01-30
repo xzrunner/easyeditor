@@ -1,8 +1,8 @@
 #include "SpriteDropTarget.h"
 
 #include "common/Vector.h"
-#include "dataset/ISymbol.h"
-#include "dataset/ISprite.h"
+#include "dataset/Symbol.h"
+#include "dataset/Sprite.h"
 #include "dataset/SpriteFactory.h"
 #include "view/LibraryPanel.h"
 #include "view/EditPanelImpl.h"
@@ -26,11 +26,11 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	ISymbol* symbol = m_libraryPanel->GetSymbol(index);
+	Symbol* symbol = m_libraryPanel->GetSymbol(index);
 	if (symbol)
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);
-		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(pos);
 		InsertSpriteSJ::Instance()->Insert(sprite);
 		sprite->Release();

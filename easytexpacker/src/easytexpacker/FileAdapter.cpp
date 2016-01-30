@@ -28,7 +28,7 @@ void FileAdapter::resolve(const wxString& filepath)
 	for (size_t i = 0; i < size; ++i)
 	{
 		Item item;
-		item.filepath = d2d::StringTools::GetLine(fin);
+		item.filepath = d2d::StringHelper::GetLine(fin);
 		fin >> item.left >> item.top >> item.width >> item.height;
 		m_data.push_back(item);
 	}

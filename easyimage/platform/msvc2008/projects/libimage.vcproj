@@ -358,42 +358,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="process"
-			>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageClip.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageClip.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImagePack.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImagePack.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageTrim.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageTrim.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageVerticalFlip.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\ImageVerticalFlip.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="format"
 			>
 			<File

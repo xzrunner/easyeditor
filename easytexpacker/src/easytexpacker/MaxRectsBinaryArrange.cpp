@@ -12,7 +12,7 @@ void MaxRectsBinaryArrange::arrange(const std::vector<d2d::ImageSprite*>& sprite
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
 		d2d::Rect r = sprites[i]->GetSymbol().GetSize();
-		rects.push_back(libtexpacker::RectSize(r.xLength(), r.yLength()));
+		rects.push_back(libtexpacker::RectSize(r.Width(), r.Height()));
 	}
 	std::vector<libtexpacker::Rect> output;
 
@@ -21,7 +21,7 @@ void MaxRectsBinaryArrange::arrange(const std::vector<d2d::ImageSprite*>& sprite
 
 	assert(sprites.size() == output.size());
 	for (int i = 0; i < sz; ++i) {
-		d2d::ISprite* sprite = sprites[i];
+		d2d::Sprite* sprite = sprites[i];
 		const libtexpacker::Rect& r = output[i];
 		d2d::Vector pos;
 		pos.x = r.x + r.width * 0.5f;

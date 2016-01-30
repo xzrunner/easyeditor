@@ -44,7 +44,7 @@ void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& next)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 
@@ -53,7 +53,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 	vec3 curr = m_stage->TransPos3ScreenToProject(m_curr, old.z);
 	sprite->Translate3(curr - last);
 
-	bFetchNext = true;
+	next = true;
 }
 
 }

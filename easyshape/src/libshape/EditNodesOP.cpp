@@ -9,7 +9,7 @@ namespace libshape
 EditNodesOP::EditNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl)
 	: SelectNodesOP(wnd, stage, shapesImpl, NULL)
 {
-	m_lastPos.setInvalid();
+	m_lastPos.SetInvalid();
 }
 
 bool EditNodesOP::OnKeyDown(int keyCode)
@@ -36,7 +36,7 @@ bool EditNodesOP::OnMouseLeftDown(int x, int y)
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
 	if (m_nodeSelection.empty())
-		m_lastPos.setInvalid();
+		m_lastPos.SetInvalid();
 	else
 		m_lastPos = m_stage->TransPosScrToProj(x, y);
 
@@ -49,7 +49,7 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
-	if (m_lastPos.isValid())
+	if (m_lastPos.IsValid())
 	{
 		d2d::Vector currPos = m_stage->TransPosScrToProj(x, y);
 		d2d::Vector offset = currPos - m_lastPos;
@@ -77,11 +77,11 @@ bool EditNodesOP::OnDraw() const
 {
 	if (SelectNodesOP::OnDraw()) return true;
 
-	const float radius = d2d::Settings::ctlPosSize == 0 ? 3 : d2d::Settings::ctlPosSize;
+	const float radius = d2d::SettingData::ctl_pos_sz == 0 ? 3 : d2d::SettingData::ctl_pos_sz;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		d2d::PrimitiveDraw::drawPolyline(m_buffer[i].dst, d2d::Colorf(0.8f, 0.2f, 0.2f), false);
-		d2d::PrimitiveDraw::drawCircles(m_buffer[i].dst, radius, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		d2d::PrimitiveDraw::DrawPolyline(m_buffer[i].dst, d2d::Colorf(0.8f, 0.2f, 0.2f), false);
+		d2d::PrimitiveDraw::DrawCircles(m_buffer[i].dst, radius, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;
@@ -91,7 +91,7 @@ bool EditNodesOP::Clear()
 {
 	if (SelectNodesOP::Clear()) return true;
 
-	m_lastPos.setInvalid();
+	m_lastPos.SetInvalid();
 	m_buffer.clear();
 
 	return false;
@@ -104,7 +104,7 @@ void EditNodesOP::simplify(float threshold)
 	{
 		Modified modified;
 		modified.src = m_nodeSelection[i];
-		d2d::DouglasPeucker::implement(modified.src->selectedNodes, threshold, modified.dst);
+		d2d::DouglasPeucker::Do(modified.src->selectedNodes, threshold, modified.dst);
 		m_buffer.push_back(modified);
 	}
 }
@@ -116,7 +116,7 @@ void EditNodesOP::smooth(float samplingWidth)
 	{
 		Modified modified;
 		modified.src = m_nodeSelection[i];
-		d2d::CosineSmooth::implement(modified.src->selectedNodes, samplingWidth, modified.dst);
+		d2d::CosineSmooth::Do(modified.src->selectedNodes, samplingWidth, modified.dst);
 		m_buffer.push_back(modified);
 	}
 }

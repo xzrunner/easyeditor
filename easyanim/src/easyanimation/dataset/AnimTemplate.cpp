@@ -41,13 +41,13 @@ void AnimTemplate::PreparePaths(const std::string& filepath)
 	Clear();
 
 	wxArrayString dirs;
-	d2d::FilenameTools::FetchCurrDirs(m_temp_dir, dirs);
+	d2d::FileHelper::FetchCurrDirs(m_temp_dir, dirs);
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FileHelper::GetFileDir(filepath);
 
 	for (int i = 0; i < dirs.size(); ++i) {
-		std::string path = d2d::FilenameTools::getRelativePath(dir, dirs[i]),
-			name = d2d::FilenameTools::GetDirName(dirs[i]);
+		std::string path = d2d::FileHelper::GetRelativePath(dir, dirs[i]),
+			name = d2d::FileHelper::GetDirName(dirs[i]);
 		Add(path, name);
 	}
 }

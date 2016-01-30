@@ -5,7 +5,7 @@
 namespace lr
 {
 
-CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, d2d::ISprite* spr)
+CfgEditDlg::CfgEditDlg(wxWindow* parent, const char* name, d2d::Sprite* spr)
 	: d2d::BaseDialog(parent, name)
 	, m_spr(spr)
 {

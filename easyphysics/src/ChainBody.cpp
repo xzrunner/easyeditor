@@ -72,7 +72,7 @@ ChainBody::ChainBody(b2World* world, float scale/* = 1.0f*/)
  
 void ChainBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const
 {
-	rect.makeInfinite();
+	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
 	{
 		b2ChainShape* chain = dynamic_cast<b2ChainShape*>(f->GetShape());
@@ -80,8 +80,8 @@ void ChainBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angl
 		for (size_t i = 0; i < chain->m_count; ++i)
 		{
 			const b2Vec2& p = chain->m_vertices[i];
-			d2d::Vector transform = d2d::Math::rotateVector(d2d::Vector(p.x, p.y), angle) + position;
-			rect.combine(transform);
+			d2d::Vector transform = d2d::Math2D::RotateVector(d2d::Vector(p.x, p.y), angle) + position;
+			rect.Combine(transform);
 		}
 	}
 }

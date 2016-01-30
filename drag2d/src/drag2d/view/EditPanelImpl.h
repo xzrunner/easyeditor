@@ -52,8 +52,8 @@ public:
 	void Undo();
 	void Redo();
 
-	void SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
-	void LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
+	void SaveOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites);
+	void LoadOpRecordList(const std::string& filepath, const std::vector<Sprite*>& sprites);
 
 	void OnSave();
 	bool IsEditDirty() const;

@@ -25,10 +25,10 @@ private:
 	void DrawLines() const;
 
 private:
-	class DrawJointVisitor : public d2d::IVisitor
+	class DrawJointVisitor : public d2d::Visitor
 	{
 	public:
-		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& next);
 	};
 
 private:

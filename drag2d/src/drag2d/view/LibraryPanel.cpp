@@ -67,7 +67,7 @@ void LibraryPanel::AddPage(ILibraryPage* page, const char* name)
 	m_pages.push_back(page);
 }
 
-ISymbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
+Symbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
 {
 	if (m_selected)
 		return m_selected->GetSymbol(index);
@@ -77,14 +77,14 @@ ISymbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
 
 void LibraryPanel::LoadFromSymbolMgr(const SymbolMgr& mgr)
 {
-	std::vector<ISymbol*> symbols;
-	mgr.Traverse(FetchAllVisitor<ISymbol>(symbols));
+	std::vector<Symbol*> symbols;
+	mgr.Traverse(FetchAllVisitor<Symbol>(symbols));
 	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		LoadSymbol(symbols[i]);
 	}
 }
 
-void LibraryPanel::LoadSymbol(d2d::ISymbol* symbol)
+void LibraryPanel::LoadSymbol(Symbol* symbol)
 {
 	for (size_t j = 0, m = m_pages.size(); j < m; ++j)
 	{
@@ -98,13 +98,13 @@ void LibraryPanel::LoadSymbol(d2d::ISymbol* symbol)
 	}
 }
 
-void LibraryPanel::Traverse(IVisitor& visitor) const
+void LibraryPanel::Traverse(Visitor& visitor) const
 {
 	if (m_selected)
 		m_selected->Traverse(visitor);
 }
 
-bool LibraryPanel::AddSymbol(ISymbol* symbol)
+bool LibraryPanel::AddSymbol(Symbol* symbol)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) 
 	{
@@ -161,4 +161,4 @@ void LibraryPanel::InitLayout()
 	SetSizer(sizer);
 }
 
-} // d2d
+}

@@ -17,7 +17,7 @@ void FileIO::load(const char* filename)
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
-		d2d::ISprite* sprite = loadSprite(spriteValue);
+		d2d::Sprite* sprite = loadSprite(spriteValue);
 		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
  		spriteValue = value["sprite"][i++];
  	}
@@ -27,18 +27,18 @@ void FileIO::store(const char* filename)
 {
 	Json::Value value;
 
- 	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+ 	std::vector<d2d::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
  
  	d2d::Rect rect;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i)
  	{
  		std::vector<d2d::Vector> vertices;
- 		sprites[i]->GetBounding()->getBoundPos(vertices);
+ 		sprites[i]->GetBounding()->GetBoundPos(vertices);
  		for (size_t j = 0, m = vertices.size(); j < m; ++j)
- 			rect.combine(vertices[j]);
+ 			rect.Combine(vertices[j]);
  	}
- 	d2d::Vector offset(-rect.xCenter(), -rect.yCenter());
+ 	d2d::Vector offset(-rect.CenterX(), -rect.CenterY());
  
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["sprite"][i] = store(sprites[i], offset);
@@ -51,12 +51,12 @@ void FileIO::store(const char* filename)
 	fout.close();
 }
 
-d2d::ISprite* FileIO::loadSprite(const Json::Value& value)
+d2d::Sprite* FileIO::loadSprite(const Json::Value& value)
 {
-	d2d::ISprite* sprite = NULL;
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(
+	d2d::Sprite* sprite = NULL;
+	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(
 		value["filepath"].asString());
-	sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	sprite = d2d::SpriteFactory::Instance()->Create(symbol);
 	symbol->Release();
 
 	sprite->Load(value);
@@ -64,13 +64,13 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value)
 	return sprite;
 }
 
-d2d::IShape* FileIO::loadShape(const Json::Value& value)
+d2d::Shape* FileIO::loadShape(const Json::Value& value)
 {
-	d2d::IShape* shape = NULL;
+	d2d::Shape* shape = NULL;
 	return shape;
 }
 
-Json::Value FileIO::store(d2d::ISprite* sprite, const d2d::Vector& offset)
+Json::Value FileIO::store(d2d::Sprite* sprite, const d2d::Vector& offset)
 {
 	Json::Value value;
 	value["filepath"] = sprite->GetSymbol().GetFilepath();
@@ -78,7 +78,7 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const d2d::Vector& offset)
 	return value;
 }
 
-Json::Value FileIO::store(d2d::IShape* shape, const d2d::Vector& offset)
+Json::Value FileIO::store(d2d::Shape* shape, const d2d::Vector& offset)
 {
 	Json::Value value;
 

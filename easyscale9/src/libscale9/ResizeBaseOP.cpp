@@ -22,15 +22,15 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	m_firstPos = m_stage->TransPosScrToProj(x, y);
 
-	const float hw = m_symbol->GetSize().xLength() * 0.5f,
-		hh = m_symbol->GetSize().yLength() * 0.5f;
-	if (d2d::Math::isPointInRect(m_firstPos, d2d::Vector(-hw, -hh), REGION, REGION))
+	const float hw = m_symbol->GetSize().Width() * 0.5f,
+		hh = m_symbol->GetSize().Height() * 0.5f;
+	if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(-hw, -hh), REGION, REGION))
 		m_status = e_leftlow;
-	else if (d2d::Math::isPointInRect(m_firstPos, d2d::Vector(hw, -hh), REGION, REGION))
+	else if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(hw, -hh), REGION, REGION))
 		m_status = e_rightlow;
-	else if (d2d::Math::isPointInRect(m_firstPos, d2d::Vector(hw, hh), REGION, REGION))
+	else if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(hw, hh), REGION, REGION))
 		m_status = e_rightup;
-	else if (d2d::Math::isPointInRect(m_firstPos, d2d::Vector(-hw, hh), REGION, REGION))
+	else if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(-hw, hh), REGION, REGION))
 		m_status = e_leftup;
 
 	return false;
@@ -74,13 +74,13 @@ bool ResizeBaseOP::OnDraw() const
 
 	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 
-	const float hw = m_symbol->GetSize().xLength() * 0.5f,
-		hh = m_symbol->GetSize().yLength() * 0.5f;
+	const float hw = m_symbol->GetSize().Width() * 0.5f,
+		hh = m_symbol->GetSize().Height() * 0.5f;
 	const float r = REGION;
-	d2d::PrimitiveDraw::rect(d2d::Vector(-hw, -hh), r, r, m_style);
-	d2d::PrimitiveDraw::rect(d2d::Vector( hw, -hh), r, r, m_style);
-	d2d::PrimitiveDraw::rect(d2d::Vector( hw,  hh), r, r, m_style);
-	d2d::PrimitiveDraw::rect(d2d::Vector(-hw,  hh), r, r, m_style);
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector(-hw, -hh), r, r, m_style);
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector( hw, -hh), r, r, m_style);
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector( hw,  hh), r, r, m_style);
+	d2d::PrimitiveDraw::DrawRect(d2d::Vector(-hw,  hh), r, r, m_style);
 
 	return false;
 }
