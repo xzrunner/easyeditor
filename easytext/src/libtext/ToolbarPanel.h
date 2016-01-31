@@ -1,7 +1,7 @@
 #ifndef _EASYTEXT_TOOLBAR_PANEL_H_
 #define _EASYTEXT_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace etext
 {
@@ -9,14 +9,14 @@ namespace etext
 class StagePanel;
 class Sprite;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage, Sprite* spr);
 	virtual ~ToolbarPanel();
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void InitSizeLayout(wxSizer* top_sizer);

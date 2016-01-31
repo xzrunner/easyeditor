@@ -61,13 +61,13 @@ void Frame::onOpen(wxCommandEvent& event)
 	{
 		clear();
 		m_currFilename = dlg.GetPath();
-		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
-		Game::DLG_PATH = d2d::FilenameTools::getFileDir(dlg.GetPath()) + "\\";
-		d2d::Config::Instance()->GetResPathes().insert(Game::DLG_PATH);
+		SetTitle(ee::FilenameTools::getFilename(dlg.GetPath()));
+		Game::DLG_PATH = ee::FilenameTools::getFileDir(dlg.GetPath()) + "\\";
+		ee::Config::Instance()->GetResPathes().insert(Game::DLG_PATH);
 		try {
 			FileIO::load(dlg.GetPath());
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(this, e);
+		} catch (ee::Exception& e) {
+			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
 		}
 		Context::Instance()->stage->rebuildCodePages();
@@ -78,7 +78,7 @@ void Frame::onSave(wxCommandEvent& event)
 {
 	if (!m_currFilename.empty())
 	{
-		SetTitle(d2d::FilenameTools::getFilename(m_currFilename));
+		SetTitle(ee::FilenameTools::getFilename(m_currFilename));
 		FileIO::store(m_currFilename);
 	}
 }
@@ -89,7 +89,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		wxT("*.json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_currFilename = d2d::FilenameTools::getFilePathExceptExtension(dlg.GetPath()) + wxT(".json");
+		m_currFilename = ee::FilenameTools::getFilePathExceptExtension(dlg.GetPath()) + wxT(".json");
 		FileIO::store(m_currFilename);
 	}
 }
@@ -295,7 +295,7 @@ void Frame::setCurrFilename()
 			wxString::FromDouble(id++) + 
 			wxT(".json");
 
-		if (!d2d::FilenameTools::isExist(str))
+		if (!ee::FilenameTools::isExist(str))
 		{
 			m_currFilename = str;
 			break;

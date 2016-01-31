@@ -10,7 +10,7 @@ namespace eanim
 {
 
 LibrarySkeletonPage::LibrarySkeletonPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, "Skeleton")
+	: ee::ILibraryPage(parent, "Skeleton")
 {
 	initLayout();
 
@@ -20,7 +20,7 @@ LibrarySkeletonPage::LibrarySkeletonPage(wxWindow* parent)
 	SetSizer(sizer);
 }
 
-bool LibrarySkeletonPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibrarySkeletonPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return dynamic_cast<WholeSkeleton*>(symbol) != NULL;
 }

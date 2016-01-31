@@ -1,7 +1,7 @@
 #include "BinB4R.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 #include <epbin.h>
 
 namespace edb
@@ -37,11 +37,11 @@ void BinB4R::Trigger(const std::string& src_dir, const std::string& img_id_file,
 					 const std::string& dst_file, const std::string& tex_format)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(src_dir, files);
+	ee::FileHelper::FetchAllFiles(src_dir, files);
 
 	std::vector<std::string> img_files;
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (d2d::FileType::IsType(files[i], d2d::FileType::e_image)) {
+		if (ee::FileType::IsType(files[i], ee::FileType::e_image)) {
 			img_files.push_back(files[i].ToStdString());
 		}
 	}

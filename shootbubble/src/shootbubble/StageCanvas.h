@@ -1,13 +1,13 @@
 #ifndef SHOOTBUBBLE_STAGE_CANVAS_H_
 #define SHOOTBUBBLE_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace shootbubble
 {
 	class StagePanel;
 
-	class StageCanvas : public d2d::SpriteStageCanvas
+	class StageCanvas : public ee::SpriteStageCanvas
 	{
 	public:
 		StageCanvas(StagePanel* parent);

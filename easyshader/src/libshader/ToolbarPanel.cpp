@@ -4,8 +4,8 @@
 namespace eshader
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::EditPanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::EditPanel* stage)
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
 	SetSizer(new wxBoxSizer(wxVERTICAL));
 }
@@ -35,7 +35,7 @@ void ToolbarPanel::AddUniform(const std::string& title, const std::string& name,
 	}
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	return NULL;
 }

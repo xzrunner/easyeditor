@@ -32,7 +32,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->Insert(sprite);
+	ee::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -40,7 +40,7 @@ bool Sprite::Update(int version)
 { 
 	bool ret = false;
 	for (int i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = m_symbol->m_sprites[i];
+		ee::Sprite* spr = m_symbol->m_sprites[i];
 		if (spr->Update(version)) {
 			ret = true;
 		}
@@ -53,9 +53,9 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 }

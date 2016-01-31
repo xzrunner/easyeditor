@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
@@ -12,7 +12,7 @@ namespace complex
 	{
 	public:
 		Dialog(wxWindow* parent, complex::Symbol* complexSymbol,
-			d2d::PropertySettingPanel* propertyPanel);
+			ee::PropertySettingPanel* propertyPanel);
 		virtual ~Dialog();
 
 	private:
@@ -27,7 +27,7 @@ namespace complex
 
 		complex::Symbol* m_complexSymbol;
 
-		d2d::PropertySettingPanel* m_propertyPanel;
+		ee::PropertySettingPanel* m_propertyPanel;
 
 		DECLARE_EVENT_TABLE()
 

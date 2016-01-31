@@ -11,12 +11,12 @@ namespace emesh
 
 CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
 					   StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_mesh_op = new CreateMeshOP(stage);
 	m_strip_op= new CreateStripOP(stage);
-	loadEditOP(m_mesh_op);
+	LoadEditOP(m_mesh_op);
 }
 
 CreateMeshCMPT::~CreateMeshCMPT()
@@ -25,7 +25,7 @@ CreateMeshCMPT::~CreateMeshCMPT()
 	m_strip_op->Release();
 }
 
-wxSizer* CreateMeshCMPT::initLayout()
+wxSizer* CreateMeshCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(15);
@@ -76,12 +76,12 @@ void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
 	{
 	case 0:
 		ShapeFactory::Instance()->SetShapeType(ST_MESH);
-		loadEditOP(m_mesh_op);
+		LoadEditOP(m_mesh_op);
 		m_stage->CreateShape();
 		break;
 	case 1:
 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
-		loadEditOP(m_strip_op);
+		LoadEditOP(m_strip_op);
 		m_stage->CreateShape();
 		break;
 	}
@@ -94,7 +94,7 @@ void CreateMeshCMPT::onChangeUseRegion(wxCommandEvent& event)
 
 void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 {
-// 	std::string tag = d2d::FileType::getFileTag(d2d::FileType::e_mesh);
+// 	std::string tag = ee::FileType::GetTag(ee::FileType::e_mesh);
 // 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
 // 		wxT("*_") + tag + wxT(".json"), wxFD_OPEN);
 // 	if (dlg.ShowModal() == wxID_OK)
@@ -109,7 +109,7 @@ void CreateMeshCMPT::onClear(wxCommandEvent& event)
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Clear();
 	}
-	d2d::ClearShapeSJ::Instance()->Clear();
+	ee::ClearShapeSJ::Instance()->Clear();
 
 	m_editOP->Clear();
 }

@@ -7,17 +7,17 @@ namespace lr
 {
 
 void create_shapes_from_etxture(etexture::Sprite* spr, 
-								std::vector<d2d::Shape*>& output)
+								std::vector<ee::Shape*>& output)
 {
 	output.clear();
-	const std::vector<d2d::Shape*>& shapes = spr->GetSymbol().GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = spr->GetSymbol().GetAllShapes();
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[i])) {
-			std::vector<d2d::Vector> bound = poly->GetVertices();
+			std::vector<ee::Vector> bound = poly->GetVertices();
 			for (int i = 0, n = bound.size(); i < n; ++i) {
 				bound[i] += spr->GetPosition();
 			}
-			d2d::Shape* shape = new libshape::PolygonShape(bound);
+			ee::Shape* shape = new libshape::PolygonShape(bound);
 			output.push_back(shape);
 		}		
 	}

@@ -20,10 +20,10 @@ namespace ecomplex
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
-	AddPage(new d2d::LibraryImagePage(nb));
+	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new LibraryPage(nb));
 	AddPage(new libanim::LibraryPage(nb));
 	AddPage(new escale9::LibraryPage(nb));
@@ -33,9 +33,9 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eicon::LibraryPage(nb));
 	AddPage(new libshape::LibraryPage(nb));
 
-	AddPage(new d2d::LibraryFontBlankPage(nb));
+	AddPage(new ee::LibraryFontBlankPage(nb));
 	AddPage(new emesh::LibraryPage(nb));
-	AddPage(new d2d::LibraryScriptsPage(nb));
+	AddPage(new ee::LibraryScriptsPage(nb));
 	AddPage(new eparticle2d::LibraryPage(nb));
 	AddPage(new eejoy2d::LibraryPage(nb));
 	AddPage(new eterrain2d::LibraryPage(nb));

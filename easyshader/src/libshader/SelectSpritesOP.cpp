@@ -4,20 +4,20 @@
 namespace eshader
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-								 d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
+SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+								 ee::MultiSpritesImpl* spritesImpl, 
+								 ee::EditCMPT* callback/* = NULL*/)
+	: ee::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
 {
 }
 
 bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::SelectSpritesOP::OnMouseLeftDown(x, y)) {
+	if (ee::SelectSpritesOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	static_cast<StageCanvas2D*>(m_stage->GetCanvas())->OnMousePressed(pos);
 
 	return false;

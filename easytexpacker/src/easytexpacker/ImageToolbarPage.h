@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_IMAGE_TOOLBAR_PAGE_H_
 #define _EASYTEXPACKER_IMAGE_TOOLBAR_PAGE_H_
 
-#include <drag2d.h>
+
 
 #include "const.h"
 

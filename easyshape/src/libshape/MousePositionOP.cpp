@@ -3,9 +3,9 @@
 namespace libshape
 {
 
-MousePositionOP::MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-								 d2d::MousePositionCMPT* cmpt)
-	: d2d::MousePositionOP(wnd, stage, cmpt)
+MousePositionOP::MousePositionOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+								 ee::MousePositionCMPT* cmpt)
+	: ee::MousePositionOP(wnd, stage, cmpt)
 {
 	m_draw_impl = new DrawPolylineOP(wnd, stage, false);
 }
@@ -27,7 +27,7 @@ bool MousePositionOP::OnMouseRightDown(int x, int y)
 
 bool MousePositionOP::OnMouseMove(int x, int y)
 {
-	if (d2d::MousePositionOP::OnMouseMove(x, y)) return true;
+	if (ee::MousePositionOP::OnMouseMove(x, y)) return true;
 	return m_draw_impl->OnMouseMove(x, y);
 }
 

@@ -112,7 +112,7 @@ void Particle2DFromLua::UnpackBody(lua_State* L, PackParticle2D* p2d)
 	}
 	else 
 	{
-		throw d2d::Exception("Particle2DFromLua::UnpackBody unknown mode type.");
+		throw ee::Exception("Particle2DFromLua::UnpackBody unknown mode type.");
 	}
 }
 

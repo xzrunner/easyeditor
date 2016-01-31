@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace coceditor

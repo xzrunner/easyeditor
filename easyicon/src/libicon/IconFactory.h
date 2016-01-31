@@ -1,7 +1,7 @@
 #ifndef _EASYICON_ICON_FACTORY_H_
 #define _EASYICON_ICON_FACTORY_H_
 
-#include <drag2d.h>
+
 #include <json/json.h>
 
 namespace eicon

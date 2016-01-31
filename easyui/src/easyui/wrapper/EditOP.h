@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WRAPPER_EDIT_OP_H_
 #define _EASYUI_WRAPPER_EDIT_OP_H_
 
-#include <drag2d.h>
+
 
 #include "EditClipboxOP.h"
 
@@ -12,10 +12,10 @@ namespace wrapper
 
 class StagePanel;
 
-class EditOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>, public EditClipboxOP
+class EditOP : public ee::ArrangeSpriteOP<ee::SelectSpritesOP>, public EditClipboxOP
 {
 public:
-	EditOP(StagePanel* stage, d2d::PropertySettingPanel* property);
+	EditOP(StagePanel* stage, ee::PropertySettingPanel* property);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnKeyUp(int keyCode);

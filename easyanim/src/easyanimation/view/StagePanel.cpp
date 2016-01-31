@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	, m_frame(NULL)
 	, m_refresh(false)
 {
-//	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
+//	m_editOP = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, this);
 	SetEditOP(new ArrangeSpriteOP(this));
 	SetCanvas(new StageCanvas(this)); 
 
@@ -32,12 +32,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnMenuDelJointNode, this, Menu_DelJointNode);
 
-	RegistSubject(d2d::RefreshPanelSJ::Instance());
-	RegistSubject(d2d::ReorderSpriteSJ::Instance());
-	RegistSubject(d2d::ReorderSpriteMostSJ::Instance());
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::RemoveSpriteSJ::Instance());
-	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(ee::RefreshPanelSJ::Instance());
+	RegistSubject(ee::ReorderSpriteSJ::Instance());
+	RegistSubject(ee::ReorderSpriteMostSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::RemoveSpriteSJ::Instance());
+	RegistSubject(ee::ClearSpriteSJ::Instance());
 
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
@@ -45,7 +45,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 bool StagePanel::Update(int version)
 {
-	bool dirty = d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+	bool dirty = ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 
 	if (m_refresh) {
 		m_refresh = false;
@@ -53,22 +53,22 @@ bool StagePanel::Update(int version)
 	}
 
 	CheckUpdateVisitor visitor(version);
-	TraverseSprites(visitor, d2d::DT_ALL, true);
+	TraverseSprites(visitor, ee::DT_ALL, true);
 	if (visitor.NeedUpdate()) {
 		dirty = true;
 	}
 	return dirty;
 }
 
-void StagePanel::TraverseSprites(d2d::Visitor& visitor, 
-								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
+void StagePanel::TraverseSprites(ee::Visitor& visitor, 
+								 ee::DataTraverseType type/* = ee::e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	for (size_t i = 0, n = DataMgr::Instance()->GetLayers().Size(); i < n; ++i)
 	{
 		Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(i);
-		if ((type == d2d::DT_EDITABLE && !layer->IsEditable()) ||
-			(type == d2d::DT_VISIBLE && !layer->IsVisible()))
+		if ((type == ee::DT_EDITABLE && !layer->IsEditable()) ||
+			(type == ee::DT_VISIBLE && !layer->IsVisible()))
 			continue;
 
 		KeyFrame* frame = layer->GetCurrKeyFrame(m_frame_idx + 1);
@@ -78,7 +78,7 @@ void StagePanel::TraverseSprites(d2d::Visitor& visitor,
 		{
 			for (int i = 0, n = frame->Size(); i < n; ++i) {
 				bool next;
-				visitor.Visit(const_cast<d2d::Sprite*>(frame->GetSprite(i)), next);
+				visitor.Visit(const_cast<ee::Sprite*>(frame->GetSprite(i)), next);
 				if (!next) break;
 			}
 		}
@@ -86,7 +86,7 @@ void StagePanel::TraverseSprites(d2d::Visitor& visitor,
 		{
 			for (int i = frame->Size() - 1; i >= 0; --i) {
 				bool next;
-				visitor.Visit(const_cast<d2d::Sprite*>(frame->GetSprite(i)), next);
+				visitor.Visit(const_cast<ee::Sprite*>(frame->GetSprite(i)), next);
 				if (!next) break;
 			}
 		}
@@ -99,37 +99,37 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
-	case d2d::MSG_REFRESH_PANEL:
+	case ee::MSG_REFRESH_PANEL:
 		m_refresh = true;
 		break;
 
-	case d2d::MSG_REORDER_SPRITE:
+	case ee::MSG_REORDER_SPRITE:
 		{
-			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
+			ee::ReorderSpriteSJ::Params* p = (ee::ReorderSpriteSJ::Params*)ud;
 			Reorder(p->spr, p->up);
 		}
 		break;
-	case d2d::MSG_REORDER_SPRITE_MOST:
+	case ee::MSG_REORDER_SPRITE_MOST:
 		{
-			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
+			ee::ReorderSpriteMostSJ::Params* p = (ee::ReorderSpriteMostSJ::Params*)ud;
 			ReorderMost(p->spr, p->up);
 		}
 		break;
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			Insert(p->spr);
 		}
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::Sprite*)ud);
+	case ee::MSG_REMOVE_SPRITE:
+		Remove((ee::Sprite*)ud);
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		{
 			DataMgr::Instance()->GetLayers().Clear();
 			SetSelectedSJ::Instance()->Set(-1, -1);
 
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 			// 	Context* context = Context::Instance();
 			// 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
@@ -177,47 +177,47 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 void StagePanel::OnMenuAddJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_AddJointNode);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::OnMenuDelJointNode(wxCommandEvent& event)
 {
 	GetEditOP()->OnPopMenuSelected(Menu_DelJointNode);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Reorder(d2d::Sprite* spr, bool up)
+void StagePanel::Reorder(ee::Sprite* spr, bool up)
 {
 	if (m_frame && m_frame->Reorder(spr, up)) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::ReorderMost(d2d::Sprite* spr, bool up)
+void StagePanel::ReorderMost(ee::Sprite* spr, bool up)
 {
 	if (m_frame && m_frame->ReorderMost(spr, up)) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::Insert(d2d::Sprite* spr)
+void StagePanel::Insert(ee::Sprite* spr)
 {
 	if (spr->GetUserData()) {
 		InsertWithUD(spr);
 	} else {
 		InsertWithoutUD(spr);
 	}
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(d2d::Sprite* spr)
+void StagePanel::Remove(ee::Sprite* spr)
 {
 	if (m_frame && m_frame->Remove(spr)) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::InsertWithUD(d2d::Sprite* spr)
+void StagePanel::InsertWithUD(ee::Sprite* spr)
 {
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	assert(ud);
@@ -240,7 +240,7 @@ void StagePanel::InsertWithUD(d2d::Sprite* spr)
 	}
 }
 
-void StagePanel::InsertWithoutUD(d2d::Sprite* spr)
+void StagePanel::InsertWithoutUD(ee::Sprite* spr)
 {
 	if (m_frame) {
 		m_frame->Insert(spr);
@@ -258,9 +258,9 @@ CheckUpdateVisitor(int version)
 {}
 
 void StagePanel::CheckUpdateVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* spr = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* spr = static_cast<ee::Sprite*>(object);
 	if (spr->Update(m_version)) {
 		m_update = true;
 		next = false;
@@ -274,8 +274,8 @@ Visit(d2d::Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
+StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::StageDropTarget(stage, stage->GetStageImpl(), library)
 	, m_stage(stage)
 {
 }
@@ -284,7 +284,7 @@ void StagePanel::StageDropTarget::
 OnDropText(wxCoord x, wxCoord y, const wxString& text)
 {
 	if (m_stage->IsCurrFrameValid()) {
-		d2d::StageDropTarget::OnDropText(x, y, text);
+		ee::StageDropTarget::OnDropText(x, y, text);
 	}
 }
 
@@ -292,7 +292,7 @@ void StagePanel::StageDropTarget::
 OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 {
 	if (m_stage->IsCurrFrameValid()) {
-		d2d::StageDropTarget::OnDropFiles(x, y, filenames);
+		ee::StageDropTarget::OnDropFiles(x, y, filenames);
 	}	
 }
 

@@ -16,8 +16,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 
 	m_parent->SetTitle("EasyParticle");
@@ -26,7 +26,7 @@ Task::~Task()
 void Task::Load(const char* filepath)
 {
 	if (!wxFileName::FileExists(filepath)) {
-		throw d2d::Exception("File: %s don't exist!", filepath);
+		throw ee::Exception("File: %s don't exist!", filepath);
 	}
 	FileIO::Load(filepath, m_stage->m_ps, m_toolbar, m_library);
 	m_stage->m_ps->Start();
@@ -42,7 +42,7 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const 
+const ee::EditPanel* Task::GetEditPanel() const 
 { 
 	return m_stage; 
 }

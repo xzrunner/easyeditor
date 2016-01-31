@@ -10,7 +10,7 @@ Colorf::Colorf()
 {}
 
 inline
-Colorf::Colorf(float _r, float _g, float _b, float _a = 1) 
+Colorf::Colorf(float _r, float _g, float _b, float _a) 
 	: r(_r), g(_g), b(_b), a(_a) 
 {}
 
@@ -130,7 +130,7 @@ Colori::Colori()
 {}
 
 inline
-Colori::Colori(int _r, int _g, int _b, int _a = 255) 
+Colori::Colori(int _r, int _g, int _b, int _a) 
 	: r(_r), g(_g), b(_b), a(_a) 
 {}
 

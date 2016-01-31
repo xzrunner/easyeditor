@@ -5,9 +5,9 @@
 namespace libshape
 {
 
-DrawPencilPolygonOP::DrawPencilPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-										 d2d::MultiShapesImpl* shapesImpl,
-										 d2d::OneFloatValue* simplify,
+DrawPencilPolygonOP::DrawPencilPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+										 ee::MultiShapesImpl* shapesImpl,
+										 ee::OneFloatValue* simplify,
 										 DrawPencilPolygonCMPT* cmpt)
 	: DrawCurveOP(wnd, stage)
 	, m_shapesImpl(shapesImpl)
@@ -44,22 +44,22 @@ bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_curve.empty())
 	{
-		std::vector<d2d::Vector> simplified;
-		d2d::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
+		std::vector<ee::Vector> simplified;
+		ee::DouglasPeucker::Do(m_curve, m_simplify->GetValue(), simplified);
 		NewPolygon(simplified);
 		Clear();
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
 }
 
-void DrawPencilPolygonOP::NewPolygon(const std::vector<d2d::Vector>& poly)
+void DrawPencilPolygonOP::NewPolygon(const std::vector<ee::Vector>& poly)
 {
 	Type type = (Type)m_cmpt->GetSelected();
 	if (type == e_normal) {
-		d2d::InsertShapeSJ::Instance()->Insert(new PolygonShape(poly));
+		ee::InsertShapeSJ::Instance()->Insert(new PolygonShape(poly));
 	} else if (type == e_union) {
 		UnionPolygon(poly);
 	} else if (type == e_difference) {
@@ -71,54 +71,54 @@ void DrawPencilPolygonOP::NewPolygon(const std::vector<d2d::Vector>& poly)
 	}
 }
 
-void DrawPencilPolygonOP::UnionPolygon(const std::vector<d2d::Vector>& poly)
+void DrawPencilPolygonOP::UnionPolygon(const std::vector<ee::Vector>& poly)
 {
-	std::vector<std::vector<d2d::Vector> > sub_points;
+	std::vector<std::vector<ee::Vector> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<d2d::Vector> > result = 
-		d2d::PolygonClipper::Union(sub_points, poly);
+	std::vector<std::vector<ee::Vector> > result = 
+		ee::PolygonClipper::Union(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::DifferencePolygon(const std::vector<d2d::Vector>& poly)
+void DrawPencilPolygonOP::DifferencePolygon(const std::vector<ee::Vector>& poly)
 {
-	std::vector<std::vector<d2d::Vector> > sub_points;
+	std::vector<std::vector<ee::Vector> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<d2d::Vector> > result = 
-		d2d::PolygonClipper::Difference(sub_points, poly);
+	std::vector<std::vector<ee::Vector> > result = 
+		ee::PolygonClipper::Difference(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::IntersectionPolygon(const std::vector<d2d::Vector>& poly)
+void DrawPencilPolygonOP::IntersectionPolygon(const std::vector<ee::Vector>& poly)
 {
-	std::vector<std::vector<d2d::Vector> > sub_points;
+	std::vector<std::vector<ee::Vector> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<d2d::Vector> > result = 
-		d2d::PolygonClipper::Intersection(sub_points, poly);
+	std::vector<std::vector<ee::Vector> > result = 
+		ee::PolygonClipper::Intersection(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::XorPolygon(const std::vector<d2d::Vector>& poly)
+void DrawPencilPolygonOP::XorPolygon(const std::vector<ee::Vector>& poly)
 {
-	std::vector<std::vector<d2d::Vector> > sub_points;
+	std::vector<std::vector<ee::Vector> > sub_points;
 	PrepareSubjectPaths(sub_points);
 
-	std::vector<std::vector<d2d::Vector> > result = 
-		d2d::PolygonClipper::Xor(sub_points, poly);
+	std::vector<std::vector<ee::Vector> > result = 
+		ee::PolygonClipper::Xor(sub_points, poly);
 
 	ReplacePolygons(result);
 }
 
-void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<d2d::Vector> >& paths) const
+void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<ee::Vector> >& paths) const
 {
 	std::vector<PolygonShape*> shapes;
-	m_shapesImpl->TraverseShapes(d2d::FetchAllVisitor<PolygonShape>(shapes));
+	m_shapesImpl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(shapes));
 
 	paths.clear();
 	paths.resize(shapes.size());
@@ -127,16 +127,16 @@ void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<d2d::Vecto
 	}
 }
 
-void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<d2d::Vector> >& paths)
+void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<ee::Vector> >& paths)
 {
 	// for shadow, fixme!
 	if (paths.size() > 1) {
 		return;
 	}
 
-	d2d::ClearShapeSJ::Instance()->Clear();
+	ee::ClearShapeSJ::Instance()->Clear();
 	for (int i = 0, n = paths.size(); i < n; ++i) {
-		d2d::InsertShapeSJ::Instance()->Insert(new PolygonShape(paths[i]));
+		ee::InsertShapeSJ::Instance()->Insert(new PolygonShape(paths[i]));
 	}
 }
 

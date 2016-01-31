@@ -46,7 +46,7 @@ void ChangeTPJsonFile::Run(int argc, char *argv[])
 
 void ChangeTPJsonFile::Run(const std::string& dir)
 {
-	d2d::FileHelper::FetchAllFiles(dir, m_files);
+	ee::FileHelper::FetchAllFiles(dir, m_files);
 }
 
 void ChangeTPJsonFile::TranslateFrameXY(int dx, int dy)

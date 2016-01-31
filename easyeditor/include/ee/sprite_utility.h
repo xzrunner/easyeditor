@@ -1,7 +1,7 @@
-#ifndef _DRAG2D_SPRITE_UTILITY_H_
-#define _DRAG2D_SPRITE_UTILITY_H_
+#ifndef _EASYEDITOR_SPRITE_UTILITY_H_
+#define _EASYEDITOR_SPRITE_UTILITY_H_
 
-namespace d2d
+namespace ee
 {
 
 class Sprite;
@@ -16,4 +16,4 @@ float get_spr_center_y(const Sprite* spr);
 
 }
 
-#endif // _DRAG2D_SPRITE_UTILITY_H_
+#endif // _EASYEDITOR_SPRITE_UTILITY_H_

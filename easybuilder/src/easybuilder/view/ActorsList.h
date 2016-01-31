@@ -2,13 +2,13 @@
 #ifndef EBUILDER_ACTORS_LIST_H
 #define EBUILDER_ACTORS_LIST_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class Layer;
 
-	class ActorsList : public d2d::LibraryList
+	class ActorsList : public ee::LibraryList
 	{
 	public:
 		ActorsList(wxWindow* parent);

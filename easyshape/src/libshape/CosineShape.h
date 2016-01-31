@@ -11,7 +11,7 @@ class CosineShape : public ChainShape
 public:
 	CosineShape();
 	CosineShape(const CosineShape& curve);
-	CosineShape(const std::vector<d2d::Vector>& vertices);
+	CosineShape(const std::vector<ee::Vector>& vertices);
 	virtual ~CosineShape();
 
 	//
@@ -23,27 +23,27 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
-	virtual void Translate(const d2d::Vector& offset);
-	virtual void Draw(const d2d::Matrix& mt,
-		const d2d::ColorTrans& color = d2d::ColorTrans()) const;
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
+	virtual void Translate(const ee::Vector& offset);
+	virtual void Draw(const ee::Matrix& mt,
+		const ee::ColorTrans& color = ee::ColorTrans()) const;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
 	//
 	// ChainShape interface
 	//
-	virtual void insertVertices(size_t index, const d2d::Vector& pos);
-	virtual void removeVertices(const d2d::Vector& pos);
-	virtual void changeVertices(const d2d::Vector& from, const d2d::Vector& to);
+	virtual void insertVertices(size_t index, const ee::Vector& pos);
+	virtual void removeVertices(const ee::Vector& pos);
+	virtual void changeVertices(const ee::Vector& from, const ee::Vector& to);
 	virtual void refresh();
 
-	const std::vector<d2d::Vector>& getMidPoints() const { return m_midPoints; }
+	const std::vector<ee::Vector>& getMidPoints() const { return m_midPoints; }
 	void setMidPoints();
 
 private:
 	static const float SAMPLING_WIDTH;
 
 private:
-	std::vector<d2d::Vector> m_midPoints;
+	std::vector<ee::Vector> m_midPoints;
 
 }; // CosineShape
 

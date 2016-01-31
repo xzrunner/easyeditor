@@ -1,7 +1,7 @@
 #ifndef _ESHADER_TOOLBAR_PANEL_H_
 #define _ESHADER_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "SliderItem.h"
 
@@ -12,10 +12,10 @@ class Shader;
 class Uniform;
 class SliderCtrl;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::EditPanel* stage);
+	ToolbarPanel(wxWindow* parent, ee::EditPanel* stage);
 	virtual ~ToolbarPanel();
 
 	void AddUniform(const std::string& title, const std::string& name, 
@@ -28,7 +28,7 @@ public:
 	void Clear();
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void AddSlider(SliderCtrl* slider);

@@ -10,7 +10,7 @@ namespace eanim
 {
 
 LibrarySymbolList::LibrarySymbolList(wxWindow* parent)
-	: d2d::LibraryList(parent, LibraryPanel::SYMBOL_LIST_NAME)
+	: ee::LibraryList(parent, LibraryPanel::SYMBOL_LIST_NAME)
 {
 }
 

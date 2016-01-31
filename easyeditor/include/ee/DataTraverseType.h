@@ -1,0 +1,17 @@
+#ifndef _EASYEDITOR_DATA_TRAVERSE_TYPE_H_
+#define _EASYEDITOR_DATA_TRAVERSE_TYPE_H_
+
+namespace ee
+{
+
+enum DataTraverseType
+{
+	DT_EDITABLE,
+	DT_VISIBLE,
+	DT_SELECTABLE,
+	DT_ALL
+};
+
+}
+
+#endif // _EASYEDITOR_DATA_TRAVERSE_TYPE_H_

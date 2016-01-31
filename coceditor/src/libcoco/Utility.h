@@ -1,7 +1,7 @@
 #ifndef _EASYCOCO_UTILITY_H_
 #define _EASYCOCO_UTILITY_H_
 
-#include <drag2d.h>
+
 
 namespace libcoco
 {
@@ -9,8 +9,8 @@ namespace libcoco
 class Utility
 {
 public:
-	static void GroupSpritesFromTag(const std::vector<d2d::Sprite*>& src, 
-		std::map<std::string, std::vector<d2d::Sprite*> >& dst, std::vector<d2d::Sprite*>& others);
+	static void GroupSpritesFromTag(const std::vector<ee::Sprite*>& src, 
+		std::map<std::string, std::vector<ee::Sprite*> >& dst, std::vector<ee::Sprite*>& others);
 
 }; // Utility
 

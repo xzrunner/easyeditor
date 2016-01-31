@@ -27,20 +27,20 @@ void BodyData::clear()
 bool BodyData::LoadFromFile(const std::string& filename)
 {
 	if (!wxFileName::FileExists(filename)) {
-		throw d2d::Exception("File: %s don't exist!", filename.c_str());
+		throw ee::Exception("File: %s don't exist!", filename.c_str());
 	}
 
 	clear();
 
 	m_filename = filename;
 
-	d2d::FileType::Type type = d2d::FileType::GetType(filename);
+	ee::FileType::Type type = ee::FileType::GetType(filename);
 	switch (type)
 	{
-	case d2d::FileType::e_mesh:
+	case ee::FileType::e_mesh:
 		loadFromMeshFile(filename);
 		break;
-	case d2d::FileType::e_shape:
+	case ee::FileType::e_shape:
 		loadFromShapeFile(filename);
 	default:
 		return false;
@@ -57,7 +57,7 @@ void BodyData::loadFromMeshFile(const std::string& filename)
 	//MeshSymbol symbol;
 	//symbol.LoadFromFile(filename);
 
-	//const std::vector<d2d::Vector>& triangles = symbol.getVertices();
+	//const std::vector<ee::Vector>& triangles = symbol.getVertices();
 
 	//size_t size = triangles.size() / 3;
 	//m_fixtures.reserve(size);
@@ -93,16 +93,16 @@ void BodyData::loadFromShapeFile(const std::string& filename)
 // 		{
 // 			FixtureData* fd = new FixtureData;
 // 			fd->vertices.resize(4);
-// 			fd->vertices[0] = d2d::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
-// 			fd->vertices[1] = d2d::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
-// 			fd->vertices[2] = d2d::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
-// 			fd->vertices[3] = d2d::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
+// 			fd->vertices[0] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
+// 			fd->vertices[1] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
+// 			fd->vertices[2] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
+// 			fd->vertices[3] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
 // 			m_fixtures.push_back(fd);
 // 		}
 // 		else if (CircleShape* circle = dynamic_cast<CircleShape*>(shapes[i]))
 // 		{
 // 			FixtureData* fd = new FixtureData;
-// 			fd->vertices.push_back(d2d::Vector(circle->radius*2, circle->radius*2));
+// 			fd->vertices.push_back(ee::Vector(circle->radius*2, circle->radius*2));
 // 			m_fixtures.push_back(fd);
 // 		}
 // 

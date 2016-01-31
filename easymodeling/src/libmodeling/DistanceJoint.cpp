@@ -11,27 +11,27 @@ DistanceJoint::DistanceJoint(Body* b0, Body* b1)
 {
 }
 
-bool DistanceJoint::isContain(const d2d::Vector& pos) const
+bool DistanceJoint::isContain(const ee::Vector& pos) const
 {
-	return d2d::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| d2d::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
+	return ee::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
-bool DistanceJoint::isIntersect(const d2d::Rect& rect) const
+bool DistanceJoint::isIntersect(const ee::Rect& rect) const
 {
-	return d2d::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
-		|| d2d::Math2D::IsPointInRect(getWorldAnchorB(), rect);
+	return ee::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
+		|| ee::Math2D::IsPointInRect(getWorldAnchorB(), rect);
 }
 
 void DistanceJoint::draw(DrawType type) const
 {
-	const d2d::Vector anchorA = getWorldAnchorA(),
+	const ee::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		drawBodyFlag();
 	}
@@ -42,29 +42,29 @@ void DistanceJoint::draw(DrawType type) const
 }
 
 
-d2d::Vector DistanceJoint::getWorldAnchorA() const
+ee::Vector DistanceJoint::getWorldAnchorA() const
 {
 	return transLocalToWorld(localAnchorA, bodyA->sprite);
 }
 
-d2d::Vector DistanceJoint::getWorldAnchorB() const
+ee::Vector DistanceJoint::getWorldAnchorB() const
 {
 	return transLocalToWorld(localAnchorB, bodyB->sprite);
 }
 
-void DistanceJoint::setLocalAnchorA(const d2d::Vector& world)
+void DistanceJoint::setLocalAnchorA(const ee::Vector& world)
 {
 	localAnchorA = transWorldToLocal(world, bodyA->sprite);
 }
 
-void DistanceJoint::setLocalAnchorB(const d2d::Vector& world)
+void DistanceJoint::setLocalAnchorB(const ee::Vector& world)
 {
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void DistanceJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
+void DistanceJoint::drawAnchor(const ee::Vector& pos, DrawType type) const
 {
-	d2d::Colorf color;
+	ee::Colorf color;
 	switch (type)
 	{
 	case e_default:
@@ -78,14 +78,14 @@ void DistanceJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 		break;
 	}
 
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }
 
-void DistanceJoint::drawConnection(const d2d::Vector& worldAnchorA, 
-								   const d2d::Vector& worldAnchorB, DrawType type) const
+void DistanceJoint::drawConnection(const ee::Vector& worldAnchorA, 
+								   const ee::Vector& worldAnchorB, DrawType type) const
 {
-	d2d::Colorf color;
+	ee::Colorf color;
 	switch (type)
 	{
 	case e_default:
@@ -99,5 +99,5 @@ void DistanceJoint::drawConnection(const d2d::Vector& worldAnchorA,
 		break;
 	}
 
-	d2d::PrimitiveDraw::DrawLine(worldAnchorA, worldAnchorB, color, 1);
+	ee::PrimitiveDraw::DrawLine(worldAnchorA, worldAnchorB, color, 1);
 }

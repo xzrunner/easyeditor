@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
@@ -8,7 +8,7 @@ namespace complex
 {
 	class StagePanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
+	class StageCanvas : public ee::OrthoCanvas
 	{
 	public:
 		StageCanvas(StagePanel* editPanel);

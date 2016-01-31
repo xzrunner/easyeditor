@@ -1,7 +1,7 @@
 #ifndef _LIBCOCO_EPD_COCO_PACKER_H_
 #define _LIBCOCO_EPD_COCO_PACKER_H_
 
-#include <drag2d.h>
+
 
 #include "TPParser.h"
 
@@ -23,9 +23,9 @@ namespace epd
 class CocoPacker
 {
 public:
-	CocoPacker(const std::vector<const d2d::Symbol*>& symbols, 
+	CocoPacker(const std::vector<const ee::Symbol*>& symbols, 
 		const TextureMgr& tex_mgr);
-	CocoPacker(const std::vector<const d2d::Symbol*>& symbols, 
+	CocoPacker(const std::vector<const ee::Symbol*>& symbols, 
 		const TextureMgr& tex_mgr, const std::string& img_id_file, 
 		float scale = 1.0f);
 	~CocoPacker();
@@ -46,36 +46,36 @@ private:
 private:
 	void ResolveSymbols();
 
-	void ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc = e_null, PicFixType tscreen = e_null);
-	void ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc = e_null);
+	void ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc = e_null, PicFixType tscreen = e_null);
+	void ParserPicture(const ee::ImageSymbol* symbol, PicFixType tsrc = e_null);
 	int ParserIcon(const eicon::Sprite* sprite);
 	void ParserIcon(const eicon::Symbol* symbol, float process, int id);
 	void ParserComplex(const ecomplex::Symbol* symbol);
 	void ParserAnimation(const libanim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
 
-	void CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture);
-	void CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* picture);
+	void CalSrcFromUV(ee::Vector src[4], TPParser::Picture* picture);
+	void CalSrcFromUVFixed(ee::Vector src[4], TPParser::Picture* picture);
 	int ParserMesh(const emesh::Sprite* sprite);
 	int ParserTerrain2D(const eterrain2d::Sprite* sprite);
 	int ParserTexture(const etexture::Sprite* sprite);
 
-	void ParserSymbolBase(const d2d::Symbol* symbol);
+	void ParserSymbolBase(const ee::Symbol* symbol);
 
-	void ParserSpriteForComponent(const d2d::Sprite* sprite, 
+	void ParserSpriteForComponent(const ee::Sprite* sprite, 
 		std::vector<int>& ids, std::map<int, std::vector<std::string> >& unique, 
 		std::vector<std::pair<int, std::string> >& order);
-	void ParserSpriteForFrame(const d2d::Sprite* sprite, int index,
+	void ParserSpriteForFrame(const ee::Sprite* sprite, int index,
 		const std::vector<int>& ids, const std::vector<std::pair<int, std::string> >& order);
-	void ParserSpriteForFrame(const d2d::Sprite* sprite, const std::vector<std::pair<int, std::string> >& order,
+	void ParserSpriteForFrame(const ee::Sprite* sprite, const std::vector<std::pair<int, std::string> >& order,
 		const std::map<int, int>& map_id2idx);
-	void ParserSpriteForFrame(const d2d::Sprite* sprite, int id, bool forceMat);
-	void ParserImageForFrame(const d2d::Sprite* sprite, int id);
-	void ParserFontForFrame(const d2d::FontBlankSprite* font, int id);
+	void ParserSpriteForFrame(const ee::Sprite* sprite, int id, bool forceMat);
+	void ParserImageForFrame(const ee::Sprite* sprite, int id);
+	void ParserFontForFrame(const ee::FontBlankSprite* font, int id);
 
-	void TransToMat(const d2d::Sprite* sprite, float mat[6], bool force = false) const;
+	void TransToMat(const ee::Sprite* sprite, float mat[6], bool force = false) const;
 
-	void GetColorAssignParams(const d2d::Sprite* sprite, std::vector<std::string>& params) const;
+	void GetColorAssignParams(const ee::Sprite* sprite, std::vector<std::string>& params) const;
 
 	int QueryIconID(const eicon::Sprite* icon) const;
 
@@ -87,16 +87,16 @@ private:
 	TPParser m_parser;
 
 	int m_id;
-	std::map<const d2d::Sprite*, int> m_mapSpriteID;
-	std::map<const d2d::Symbol*, int> m_mapSymbolID;
+	std::map<const ee::Sprite*, int> m_mapSpriteID;
+	std::map<const ee::Symbol*, int> m_mapSymbolID;
 
 	// patch for multi mesh symbol
 	struct SpriteID
 	{
-		d2d::Sprite* sprite;
+		ee::Sprite* sprite;
 		int id;
 	};
-	std::map<const d2d::Symbol*, std::vector<SpriteID> > m_map_symbol2ids;
+	std::map<const ee::Symbol*, std::vector<SpriteID> > m_map_symbol2ids;
 
 	std::map<const eicon::Symbol*, std::map<float, int> > m_map_icon2ids;
 

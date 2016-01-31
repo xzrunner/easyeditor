@@ -1,4 +1,6 @@
 #include "ImagePack.h"
+#include "Image.h"
+#include "LibpngAdapter.h"
 
 #include <assert.h>
 

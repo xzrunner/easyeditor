@@ -41,7 +41,7 @@ void FileIO::load(const wxString& filepath)
 
 	int i = 0;
 	Json::Value sceneValue = value["scene"][i++];
-	d2d::LibraryList* list = library->getSceneList();
+	ee::LibraryList* list = library->getSceneList();
 	while (!sceneValue.isNull()) {
 		SceneItem* scene = loadScene(sceneValue, buffer);
 		list->insert(scene);
@@ -52,7 +52,7 @@ void FileIO::load(const wxString& filepath)
 	list->onListSelected(wxCommandEvent(list->GetSelection()));
 	if (i > 2) library->getScenePage()->enableDelBtn();
 
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	library->loadFromSymbolMgr(*ee::SymbolMgr::Instance());
 
 	loadBehaviorsValue(buffer);
 }
@@ -65,7 +65,7 @@ void FileIO::store(const wxString& filepath)
 
 	std::vector<SceneItem*> scenes;
 	Context::Instance()->library->getSceneList()->traverse(
-		d2d::FetchAllVisitor<SceneItem>(scenes));
+		ee::FetchAllVisitor<SceneItem>(scenes));
 
 	for (size_t i = 0, n = scenes.size(); i < n; ++i)
 	{
@@ -152,7 +152,7 @@ LayerItem* FileIO::loadLayer(const Json::Value& layerValue,
 	i = 0;
 	Json::Value textValue = layerValue["text"][i++];
 	while (!textValue.isNull()) {
-		d2d::TextSprite* text = loadText(textValue);
+		ee::TextSprite* text = loadText(textValue);
 		layer->insert(text);
 		textValue = layerValue["text"][i++];
 	}
@@ -166,8 +166,8 @@ Actor* FileIO::loadActor(const Json::Value& actorValue,
 						 std::vector<std::pair<Behavior*, wxString> >& buffer)
 {
 	wxString filepath = actorValue["filepath"].asString();
-	d2d::ImageSymbol* symbol = dynamic_cast<d2d::ImageSymbol*>
-		(d2d::SymbolMgr::Instance()->fetchSymbol(filepath));
+	ee::ImageSymbol* symbol = dynamic_cast<ee::ImageSymbol*>
+		(ee::SymbolMgr::Instance()->fetchSymbol(filepath));
 	assert(symbol);
 
 	Actor* actor = new Actor(symbol);
@@ -187,14 +187,14 @@ Actor* FileIO::loadActor(const Json::Value& actorValue,
 	return actor;
 }
 
-d2d::TextSprite* FileIO::loadText(const Json::Value& textValue)
+ee::TextSprite* FileIO::loadText(const Json::Value& textValue)
 {
 	wxString filepath = textValue["filepath"].asString();
-	d2d::FontSymbol* symbol = dynamic_cast<d2d::FontSymbol*>
-		(d2d::SymbolMgr::Instance()->fetchSymbol(filepath));
+	ee::FontSymbol* symbol = dynamic_cast<ee::FontSymbol*>
+		(ee::SymbolMgr::Instance()->fetchSymbol(filepath));
 	assert(symbol);
 
-	d2d::TextSprite* text = new d2d::TextSprite(symbol);
+	ee::TextSprite* text = new ee::TextSprite(symbol);
 	symbol->release();
 	text->load(textValue);
 
@@ -202,7 +202,7 @@ d2d::TextSprite* FileIO::loadText(const Json::Value& textValue)
 
 	text->setSize(textValue["size"].asInt());
 
-	d2d::Colori c;
+	ee::Colori c;
 	c.r = textValue["color"]["r"].asInt();
 	c.g = textValue["color"]["g"].asInt();
 	c.b = textValue["color"]["b"].asInt();
@@ -240,8 +240,8 @@ Behavior* FileIO::loadBehavior(const Json::Value& behaviorValue,
 			(BehaviorFactory::createBehavior(e_ChangeImage, actor));
 		std::string path = behaviorValue["image path"].asString();
 		// todo release symbol
-		d2d::ImageSymbol* symbol = dynamic_cast<d2d::ImageSymbol*>
-			(d2d::SymbolMgr::Instance()->fetchSymbol(path));
+		ee::ImageSymbol* symbol = dynamic_cast<ee::ImageSymbol*>
+			(ee::SymbolMgr::Instance()->fetchSymbol(path));
 		buffer.push_back(std::make_pair(changeImage, path));
 		return changeImage;
 	}
@@ -299,7 +299,7 @@ void FileIO::loadBehaviorsValue(const std::vector<std::pair<Behavior*, wxString>
 				ChangeImage* changeImage = static_cast<ChangeImage*>(behavior);
 
 				int index = 0;
-				d2d::ISymbol* symbol = library->getMediaList()->getSymbol(index);
+				ee::ISymbol* symbol = library->getMediaList()->getSymbol(index);
 				while (symbol)
 				{
 					if (symbol->getFilepath() == buffer[i].second)
@@ -317,7 +317,7 @@ void FileIO::loadBehaviorsValue(const std::vector<std::pair<Behavior*, wxString>
 				ChangeScene* changeScene = static_cast<ChangeScene*>(behavior);
 
 				int index = 0;
-				d2d::ISymbol* symbol = library->getSceneList()->getSymbol(index);
+				ee::ISymbol* symbol = library->getSceneList()->getSymbol(index);
 				while (symbol)
 				{
 					if (symbol->getName() == buffer[i].second)
@@ -374,7 +374,7 @@ Json::Value FileIO::store(Layer* layer, const wxString& filepath)
 	for (size_t i = 0, n = actors.size(); i < n; ++i)
 		value["actor"][i] = store(actors[i], filepath);
 
-	std::vector<d2d::TextSprite*> texts = layer->getTexts();
+	std::vector<ee::TextSprite*> texts = layer->getTexts();
 	for (size_t i = 0, n = texts.size(); i < n; ++i)
 		value["text"][i] = store(texts[i], filepath);
 
@@ -385,8 +385,8 @@ Json::Value FileIO::store(Actor* actor, const wxString& filepath)
 {
 	Json::Value value;
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+	wxString dir = ee::FilenameTools::getFileDir(filepath) + "\\";
+	value["filepath"] = ee::FilenameTools::getRelativePath(dir,
 		actor->getSymbol().getFilepath()).ToStdString();
 	actor->store(value);
 
@@ -401,12 +401,12 @@ Json::Value FileIO::store(Actor* actor, const wxString& filepath)
 	return value;
 }
 
-Json::Value FileIO::store(d2d::TextSprite* text, const wxString& filepath)
+Json::Value FileIO::store(ee::TextSprite* text, const wxString& filepath)
 {
 	Json::Value value;
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+	wxString dir = ee::FilenameTools::getFileDir(filepath) + "\\";
+	value["filepath"] = ee::FilenameTools::getRelativePath(dir,
 		text->getSymbol().getFilepath()).ToStdString();
 	text->store(value);
 
@@ -414,7 +414,7 @@ Json::Value FileIO::store(d2d::TextSprite* text, const wxString& filepath)
 
 	value["size"] = text->getSize();
 
-	const d2d::Colori& c = text->getColor();
+	const ee::Colori& c = text->getColor();
 	value["color"]["r"] = c.r;
 	value["color"]["g"] = c.g;
 	value["color"]["b"] = c.b;

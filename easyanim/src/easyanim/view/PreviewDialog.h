@@ -1,7 +1,7 @@
 #pragma once
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -24,7 +24,7 @@ namespace eanim
 		void onSetStop(wxCommandEvent& event);
 
 	private:
-		d2d::EditPanel* m_editPanel;
+		ee::EditPanel* m_editPanel;
 		
 	}; // PreviewDialog
 }

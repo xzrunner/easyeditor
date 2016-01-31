@@ -22,7 +22,7 @@ Task::Task(wxFrame* parent)
 	InitLayout();
 
 	Layer* layer = m_library->GetLayer(0);
-	d2d::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
+	ee::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
 
 	m_stage->GetBaseOP()->OnActive();
 
@@ -31,8 +31,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -51,12 +51,12 @@ bool Task::IsDirty() const
 	return true;
 }
 
-void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
+	m_stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -98,7 +98,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
 	m_library = new LibraryPanel(split);
-	m_property = new d2d::PropertySettingPanel(split);
+	m_property = new ee::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.75f);
 	split->SplitHorizontally(m_library, m_property);
@@ -120,14 +120,14 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
-	m_viewlist = new d2d::ViewlistPanel(split);
+	m_viewlist = new ee::ViewlistPanel(split);
 	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 	m_library->SetViewlist(m_viewlist);
 
 	wxSplitterWindow* right_split = new wxSplitterWindow(split);
-	m_layer = new d2d::LayerPanel(right_split);
+	m_layer = new ee::LayerPanel(right_split);
 
-	m_grouptree = new d2d::GroupTreePanel(right_split, m_stage, m_stage->GetKeyState());
+	m_grouptree = new ee::GroupTreePanel(right_split, m_stage, m_stage->GetKeyState());
 	m_library->SetGroupTree(m_grouptree);
 
 	right_split->SetSashGravity(0.5f);

@@ -26,13 +26,13 @@ void FileIO::load(const char* filename)
 	delete context->world;
 	context->world = libmodeling::FileApapter::j2World(value["world"]);
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
 		libmodeling::Body* body = libmodeling::FileApapter::j2bBody(bodyValue, dir);
-		d2d::InsertSpriteSJ::Instance()->Insert(body->sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(body->sprite);
 		bodies.push_back(body);
 
 		bodyValue = value["body"][i++];
@@ -58,20 +58,20 @@ void FileIO::load(const char* filename)
 		}
 	}
 
-	context->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	context->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename)
 {
 	std::vector<libmodeling::Body*> bodies;
-	Context::Instance()->stage->traverseBodies(d2d::FetchAllVisitor<libmodeling::Body>(bodies));
+	Context::Instance()->stage->traverseBodies(ee::FetchAllVisitor<libmodeling::Body>(bodies));
 
 	std::vector<libmodeling::Joint*> joints;
-	Context::Instance()->stage->traverseJoints(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
+	Context::Instance()->stage->traverseJoints(ee::FetchAllVisitor<libmodeling::Joint>(joints));
 
 	Json::Value value;
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	value["world"] = b2j(Context::Instance()->world);
 
@@ -131,7 +131,7 @@ Json::Value FileIO::b2j(const libmodeling::Body* body, const std::string& dlg)
 
 	value["name"] = body->name.ToStdString();
 
-	value["filepath"] = d2d::FileHelper::GetRelativePath(dlg, 
+	value["filepath"] = ee::FileHelper::GetRelativePath(dlg, 
 		body->sprite->GetSymbol().GetFilepath()).ToStdString();
 
 	value["type"] = body->type;
@@ -301,7 +301,7 @@ Json::Value FileIO::b2j(libmodeling::Joint* joint, const std::map<libmodeling::B
 			value["anchorB"]["x"] = wJoint->localAnchorB.x;
 			value["anchorB"]["y"] = wJoint->localAnchorB.y;
 
-			float len = d2d::Math2D::GetDistance(wJoint->localAxisA, d2d::Vector());
+			float len = ee::Math2D::GetDistance(wJoint->localAxisA, ee::Vector());
 			value["AxisA"]["x"] = wJoint->localAxisA.x / len;
 			value["AxisA"]["y"] = wJoint->localAxisA.y / len;
 

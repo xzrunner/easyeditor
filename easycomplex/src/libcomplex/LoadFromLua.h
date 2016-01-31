@@ -1,7 +1,7 @@
 #ifndef _LIBCOMPLEX_LOAD_FROM_LUA_H_
 #define _LIBCOMPLEX_LOAD_FROM_LUA_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
@@ -15,7 +15,7 @@ public:
 		Symbol* complex);
 
 private:
-	static void LoadImages(const std::string& name, std::vector<d2d::Image*>& images);
+	static void LoadImages(const std::string& name, std::vector<ee::Image*>& images);
 
 }; // LoadFromLua
 

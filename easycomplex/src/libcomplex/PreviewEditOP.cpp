@@ -5,16 +5,16 @@
 namespace ecomplex
 {
 
-PreviewEditOP::PreviewEditOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-							 const std::vector<const d2d::Sprite*>& sprites)
-	: d2d::ZoomViewOP(wnd, stage, true)
+PreviewEditOP::PreviewEditOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+							 const std::vector<const ee::Sprite*>& sprites)
+	: ee::ZoomViewOP(wnd, stage, true)
 	, m_sprites(sprites)
 {
 }
 
 bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) {
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 

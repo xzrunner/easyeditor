@@ -11,8 +11,8 @@ class ChainShape;
 class SelectNodesOP : public DrawRectangleOP
 {
 public:
-	SelectNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl, 
-		d2d::AbstractEditCMPT* callback = NULL);
+	SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl, 
+		ee::EditCMPT* callback = NULL);
 	virtual ~SelectNodesOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -22,7 +22,7 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	void fetchSelectedNode(std::vector<d2d::Vector>& nodes) const;
+	void fetchSelectedNode(std::vector<ee::Vector>& nodes) const;
 
 	static int getThreshold();
 
@@ -30,38 +30,38 @@ protected:
 	void clearSelectedNodes();
 
 private:
-	void OnDirectionKeyDown(d2d::DirectionType type);
+	void OnDirectionKeyDown(ee::DirectionType type);
 
 protected:
 	struct ChainSelectedNodes
 	{
 	public:
 		ChainShape* chain;
-		std::vector<d2d::Vector> selectedNodes;
+		std::vector<ee::Vector> selectedNodes;
 	}; // ChainSelectedNodes
 
 private:
-	class PosQueryVisitor : public d2d::Visitor
+	class PosQueryVisitor : public ee::Visitor
 	{
 	public:
-		PosQueryVisitor(const d2d::Vector& pos, ChainSelectedNodes** result);
+		PosQueryVisitor(const ee::Vector& pos, ChainSelectedNodes** result);
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		const d2d::Vector& m_pos;
-		d2d::Rect m_rect;
+		const ee::Vector& m_pos;
+		ee::Rect m_rect;
 		ChainSelectedNodes** m_result;
 
 	}; // PosQueryVisitor
 
-	class RectQueryVisitor : public d2d::Visitor
+	class RectQueryVisitor : public ee::Visitor
 	{
 	public:
-		RectQueryVisitor(const d2d::Rect& rect, std::vector<ChainSelectedNodes*>& result);
+		RectQueryVisitor(const ee::Rect& rect, std::vector<ChainSelectedNodes*>& result);
 		virtual void Visit(Object* object, bool& next);
 
 	private:
-		const d2d::Rect& m_rect;
+		const ee::Rect& m_rect;
 		std::vector<ChainSelectedNodes*>& m_result;
 
 	}; // RectQueryVisitor
@@ -70,9 +70,9 @@ protected:
 	std::vector<ChainSelectedNodes*> m_nodeSelection;
 
 private:
-	d2d::MultiShapesImpl* m_shapeImpl;
+	ee::MultiShapesImpl* m_shapeImpl;
 
-	d2d::Vector m_firstPos;
+	ee::Vector m_firstPos;
 
 }; // SelectNodesOP
 

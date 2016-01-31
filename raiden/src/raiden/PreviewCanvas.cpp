@@ -8,12 +8,12 @@
 
 using namespace raiden;
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(PreviewCanvas, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+PreviewCanvas::PreviewCanvas(ee::EditPanel* editPanel)
+	: ee::OrthoCanvas(editPanel)
 	, m_timer(this, TIMER_ID)
 	, m_yOffset(0.0f)
 {
@@ -30,7 +30,7 @@ PreviewCanvas::~PreviewCanvas()
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
 
 	glTranslatef(-(480 + 80*2) * 0.5f, 800 * 0.5f, 0.0f);
 
@@ -58,8 +58,8 @@ void PreviewCanvas::onTimer(wxTimerEvent& event)
 
 void PreviewCanvas::loadSprites()
 {
-	std::vector<d2d::ISprite*> src;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(src), d2d::e_visible);
+	std::vector<ee::ISprite*> src;
+	Context::Instance()->stage->traverseSprites(ee::FetchAllVisitor<ee::ISprite>(src), ee::e_visible);
 	m_sprites.reserve(src.size());
 	for (size_t i = 0, n = src.size(); i < n; ++i)
 		m_sprites.push_back(new Sprite(src[i]));
@@ -69,9 +69,9 @@ void PreviewCanvas::drawSprites()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = m_sprites[i]->s;
+		ee::ISprite* sprite = m_sprites[i]->s;
 
-		d2d::Vector center = sprite->getBounding()->center();
+		ee::Vector center = sprite->getBounding()->center();
 		float hHeight = sprite->getBounding()->height() * 0.5f;
 		if (center.y - m_yOffset < 0+hHeight && center.y - m_yOffset > -800-hHeight)
 			m_buffer.insert(m_sprites[i]);
@@ -85,7 +85,7 @@ void PreviewCanvas::drawSprites()
 		if (sprite->finish)
 			continue;
 
-		d2d::SpriteDraw::drawSprite(sprite->s);
+		ee::SpriteDraw::drawSprite(sprite->s);
 	}
 }
 
@@ -107,12 +107,12 @@ void PreviewCanvas::updateSprites(float dt)
 
 		float dis = sprite->curr;
 		sprite->finish = true;
-		d2d::Vector pos;
+		ee::Vector pos;
 		for (size_t i = 0, n = sprite->lines.size() - 1; i < n; ++i)
 		{
-	 		const d2d::Vector &start = sprite->lines[i],
+	 		const ee::Vector &start = sprite->lines[i],
 	 			&end = sprite->lines[i + 1];
-			float seg = d2d::Math::getDistance(start, end);
+			float seg = ee::Math::getDistance(start, end);
 			if (dis < seg)
 			{
 				sprite->finish = false;
@@ -127,15 +127,15 @@ void PreviewCanvas::updateSprites(float dt)
 
 		//////////////////////////////////////////////////////////////////////////
 
-// 		d2d::Vector pos;
+// 		ee::Vector pos;
 // 
-// 		d2d::Vector start = sprite->lines[sprite->index],
+// 		ee::Vector start = sprite->lines[sprite->index],
 // 			end = sprite->lines[sprite->index + 1];
 // 
 // 		float tot = sprite->speed * dt;
 // 		
 // 		float curr = sprite->dis + tot;
-// 		float seg = d2d::Math::getDistance(start, end);
+// 		float seg = ee::Math::getDistance(start, end);
 // 		while (true)
 // 		{
 // 			if (curr < seg)
@@ -153,7 +153,7 @@ void PreviewCanvas::updateSprites(float dt)
 // 
 // 					start = sprite->lines[sprite->index];
 // 					end = sprite->lines[sprite->index+1];
-// 					seg = d2d::Math::getDistance(start, end);
+// 					seg = ee::Math::getDistance(start, end);
 // 					curr -= seg;
 // 				}
 // 
@@ -175,7 +175,7 @@ void PreviewCanvas::updateSprites(float dt)
 // class PreviewCanvas::Sprite
 //////////////////////////////////////////////////////////////////////////
 
-PreviewCanvas::Sprite::Sprite(d2d::ISprite* sprite)
+PreviewCanvas::Sprite::Sprite(ee::ISprite* sprite)
 {
 	s = sprite->clone();
 

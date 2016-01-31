@@ -1,17 +1,17 @@
 #ifndef _LIBSHAPE_CHAIN_PROPERTY_SETTING_H_
 #define _LIBSHAPE_CHAIN_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
 class ChainShape;
 
-class ChainPropertySetting : public d2d::IPropertySetting
+class ChainPropertySetting : public ee::PropertySetting
 {
 public:
-	ChainPropertySetting(d2d::EditPanelImpl* stage, ChainShape* chain);
+	ChainPropertySetting(ee::EditPanelImpl* stage, ChainShape* chain);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -20,7 +20,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanelImpl* m_stage;
+	ee::EditPanelImpl* m_stage;
 
 	ChainShape* m_chain;
 

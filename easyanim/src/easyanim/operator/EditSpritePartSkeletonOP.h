@@ -2,14 +2,14 @@
 
 #include "dataset/PartSkeleton.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
-	class EditSpritePartSkeletonOP : public d2d::ZoomViewOP
+	class EditSpritePartSkeletonOP : public ee::ZoomViewOP
 	{
 	public:
-		EditSpritePartSkeletonOP(d2d::EditPanel* editPanel, PartSkeleton* skeleton);
+		EditSpritePartSkeletonOP(ee::EditPanel* editPanel, PartSkeleton* skeleton);
 		
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);

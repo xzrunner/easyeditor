@@ -9,8 +9,8 @@ namespace eshader
 class StageCanvas3D : public libsketch::StageCanvas
 {
 public:
-	StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiSpritesImpl* sprite_impl, d2d::LibraryPanel* library);
+	StageCanvas3D(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::MultiSpritesImpl* sprite_impl, ee::LibraryPanel* library);
 
 private:
 	void OnTimer(wxTimerEvent& event);

@@ -12,7 +12,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& s)
-	: d2d::Sprite(s)
+	: ee::Sprite(s)
 	, m_speed(s.m_speed)
 {
 	m_symbol = s.m_symbol->Clone();
@@ -44,9 +44,9 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
@@ -73,10 +73,10 @@ void Sprite::Store(Json::Value& val) const
 void Sprite::BuildBounding()
 {
 	if (!m_bounding) 
-		m_bounding = d2d::BBFactory::CreateBB(d2d::e_obb);
-	const d2d::Symbol& symbol = GetSymbol();
+		m_bounding = ee::BBFactory::CreateBB(ee::e_obb);
+	const ee::Symbol& symbol = GetSymbol();
 
-	d2d::Rect rect = m_symbol->GetSize();
+	ee::Rect rect = m_symbol->GetSize();
 	if (m_offset.x == 0 && m_offset.y == 0)
 		m_offset.Set(rect.CenterX(), rect.CenterY());
 	rect.Scale(m_scale.x, m_scale.y);

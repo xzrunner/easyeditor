@@ -2,11 +2,11 @@
 #ifndef EBUILDER_PROPERTY_SETTING_PANEL_H
 #define EBUILDER_PROPERTY_SETTING_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
-	class PropertySettingPanel : public d2d::PropertySettingPanel
+	class PropertySettingPanel : public ee::PropertySettingPanel
 	{
 	public:
 		PropertySettingPanel(wxWindow* parent);

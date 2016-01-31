@@ -4,7 +4,7 @@
 
 #include "Behavior.h"
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {	
@@ -13,14 +13,14 @@ namespace ebuilder
 		class ChangeImage : public Behavior
 		{
 		public:
-			ChangeImage(d2d::ISprite* sprite, d2d::ISymbol* symbol);
+			ChangeImage(ee::ISprite* sprite, ee::ISymbol* symbol);
 
 			virtual void trigger();
 
 		private:
-			d2d::ISprite* m_sprite;
+			ee::ISprite* m_sprite;
 
-			d2d::ISymbol* m_symbol;
+			ee::ISymbol* m_symbol;
 
 		}; // ChangeImage
 	}

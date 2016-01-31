@@ -13,8 +13,8 @@ EditKeyFramesAOP::EditKeyFramesAOP(Layer* layer)
 
 EditKeyFramesAOP::~EditKeyFramesAOP()
 {
-	for_each(m_inserted.begin(), m_inserted.end(), d2d::ReleaseObjectFunctor<KeyFrame>());
-	for_each(m_removed.begin(), m_removed.end(), d2d::ReleaseObjectFunctor<KeyFrame>());
+	for_each(m_inserted.begin(), m_inserted.end(), ee::ReleaseObjectFunctor<KeyFrame>());
+	for_each(m_removed.begin(), m_removed.end(), ee::ReleaseObjectFunctor<KeyFrame>());
 	for (int i = 0, n = m_changed.size(); i < n; ++i) {
 		m_changed[i].frame->Release();
 	}

@@ -27,7 +27,7 @@ void Builder::loadPages()
 {
 	std::vector<SceneItem*> scenes;
 	Context::Instance()->library->getSceneList()->traverse(
-		d2d::FetchAllVisitor<SceneItem>(scenes));
+		ee::FetchAllVisitor<SceneItem>(scenes));
 
 	for (size_t i = 0, n = scenes.size(); i < n; ++i)
 		insertPage(*scenes[i]);
@@ -180,7 +180,7 @@ void Builder::buildActor(const Actor& actor, SceneContent& content) const
 	CodeGenerator& gen = *content.cGen;
 
 	std::string name = actor.name;
-	std::string filename = "\""+d2d::FilenameTools::getFilenameWithExtension(actor.getSymbol().getFilepath())+"\"";
+	std::string filename = "\""+ee::FilenameTools::getFilenameWithExtension(actor.getSymbol().getFilepath())+"\"";
 
 	std::string x, y;
 	buildPosition(actor.getPosition(), x, y);
@@ -304,7 +304,7 @@ std::string Builder::buildBehavior(const std::string& sprite, Behavior* behavior
 		{
 			ChangeImage* changeImage = static_cast<ChangeImage*>(behavior);
 			std::string path = changeImage->selected->getFilepath();
-			std::string name = "\""+d2d::FilenameTools::getFilenameWithExtension(path)+"\"";
+			std::string name = "\""+ee::FilenameTools::getFilenameWithExtension(path)+"\"";
 			// new e2d::ChangeImage(sprite, name)
 			str = cpp::call("new e2d::ChangeImage", 2, sprite.c_str(), name.c_str());
 		}
@@ -370,7 +370,7 @@ std::string Builder::buildBehavior(const std::string& sprite, Behavior* behavior
 	return str;
 }
 
-void Builder::buildPosition(const d2d::Vector& pos, std::string& x, std::string& y)
+void Builder::buildPosition(const ee::Vector& pos, std::string& x, std::string& y)
 {
 	const float px = (pos.x + Game::WIDTH * 0.5f) / Game::WIDTH,
 		py = (pos.y + Game::HEIGHT * 0.5f) / Game::HEIGHT;

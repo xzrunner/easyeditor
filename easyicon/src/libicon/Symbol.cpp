@@ -25,14 +25,14 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (!m_icon) {
 		return;
 	}
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);
 
 	float process = 1;
@@ -42,9 +42,9 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	m_icon->Draw(mt, process);
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	d2d::Rect r;
+	ee::Rect r;
 	if (!m_icon) {
 		return r;
 	}
@@ -58,10 +58,10 @@ d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
 
 void Symbol::SetIcon(Icon* icon)
 {
-	d2d::obj_assign<Icon>(m_icon, icon);
+	ee::obj_assign<Icon>(m_icon, icon);
 }
 
-void Symbol::SetImage(d2d::Image* img)
+void Symbol::SetImage(ee::Image* img)
 {
 	if (m_icon) {
 		m_icon->SetImage(img);

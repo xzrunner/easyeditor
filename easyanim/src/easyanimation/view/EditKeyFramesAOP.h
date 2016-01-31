@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_EDIT_EKY_FRAMES_AOP_H_
 #define _EASYANIM_EDIT_EKY_FRAMES_AOP_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -9,7 +9,7 @@ namespace eanim
 class Layer;
 class KeyFrame;
 
-class EditKeyFramesAOP : public d2d::AbstractAtomicOP
+class EditKeyFramesAOP : public ee::AtomicOP
 {
 public:
 	EditKeyFramesAOP(Layer* layer);
@@ -17,7 +17,7 @@ public:
 
 	virtual void Undo();
 	virtual void Redo();
-	virtual Json::Value Store(const std::vector<d2d::Sprite*>& sprites) const { return Json::Value(); }
+	virtual Json::Value Store(const std::vector<ee::Sprite*>& sprites) const { return Json::Value(); }
 
 	void AddRemoved(KeyFrame* kf);
 	void AddInserted(KeyFrame* kf);

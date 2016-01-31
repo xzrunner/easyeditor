@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	RemoveDuplicateSprite() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -39,10 +39,10 @@ private:
 
 		std::string filepath;
 
-		d2d::Vector pos;
+		ee::Vector pos;
 		float angle;
-		d2d::Vector scale;
-		d2d::Vector shear;
+		ee::Vector scale;
+		ee::Vector shear;
 
 		Json::Value json_val;
 

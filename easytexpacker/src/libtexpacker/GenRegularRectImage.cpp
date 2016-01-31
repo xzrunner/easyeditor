@@ -41,7 +41,7 @@ void GenRegularRectImage::CreateSingle(const wxString& filepath)
 		int w = spr_val["dst"]["w"].asInt(),
 			h = spr_val["dst"]["h"].asInt();
 		std::string filepath = spr_val["filepath"].asString();
-		d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
+		ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 		assert(img->GetOriginWidth() == w && img->GetOriginHeight() == h 
 			|| img->GetOriginWidth() == h && img->GetOriginHeight() == w);
 		bool rot = img->GetOriginWidth() != w && img->GetOriginHeight() != h;

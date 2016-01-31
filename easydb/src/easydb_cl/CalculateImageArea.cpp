@@ -37,16 +37,16 @@ void CalImageArea::Trigger(const std::string& dir)
 	int area = 0;
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
 
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
-			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
+			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 			area += img->GetClippedWidth() * img->GetClippedHeight();
 			img->Release();
 		}

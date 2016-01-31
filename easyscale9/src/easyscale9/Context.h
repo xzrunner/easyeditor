@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
@@ -11,8 +11,8 @@ namespace escale9
 	class Context
 	{
 	public:
-		d2d::PropertySettingPanel* property;
-		d2d::LibraryPanel* library;
+		ee::PropertySettingPanel* property;
+		ee::LibraryPanel* library;
 		StagePanel* stage;
 		ToolbarPanel* toolbar;
 

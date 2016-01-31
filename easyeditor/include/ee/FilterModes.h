@@ -3,7 +3,7 @@
 
 #include <map>
 #include <vector>
-#include <wx/utils.h>
+#include <string>
 
 namespace ee
 {

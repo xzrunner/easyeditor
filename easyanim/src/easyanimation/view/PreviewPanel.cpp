@@ -5,17 +5,17 @@ namespace eanim
 {
 
 PreviewPanel::PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame,
-						   d2d::PlayControl& ctrl)
-	: d2d::EditPanel(parent, frame)
+						   ee::PlayControl& ctrl)
+	: ee::EditPanel(parent, frame)
 	, m_ctrl(ctrl)
 {
 }
 
 bool PreviewPanel::Update(int version)
 {
-	d2d::SceneNodeMgr::Instance()->Update(1 / 30.0f);
+	ee::SceneNodeMgr::Instance()->Update(1 / 30.0f);
 
-	std::vector<d2d::Sprite*> sprites;
+	std::vector<ee::Sprite*> sprites;
 	PreviewUtility::GetCurrSprites(m_ctrl, sprites);
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {

@@ -1,16 +1,16 @@
 #ifndef _EASYICON_ICON_H_
 #define _EASYICON_ICON_H_
 
-#include <drag2d.h>
+
 
 namespace eicon
 {
 
-class Icon : public d2d::Object
+class Icon : public ee::Object
 {
 public:
 	Icon();
-	Icon(d2d::Image* img);
+	Icon(ee::Image* img);
 	virtual ~Icon();
 
 	virtual const char* GetIconDesc() const = 0;
@@ -19,26 +19,26 @@ public:
 	virtual void StoreToFile(Json::Value& value) const = 0;
 
 	// return [0, 1]
-	virtual void GetBound(float process, d2d::Vector bound[4]) const = 0;
+	virtual void GetBound(float process, ee::Vector bound[4]) const = 0;
 
-	virtual void Draw(const d2d::Matrix& mt, float process) const;
+	virtual void Draw(const ee::Matrix& mt, float process) const;
 
-	virtual d2d::Rect GetRegion(float process) const;
+	virtual ee::Rect GetRegion(float process) const;
 
-	void GetTexCoords(float process, d2d::Vector* tex_coords) const;
-	void GetScreenCoords(float process, const d2d::Vector* tex_coords,
-		d2d::Vector* screen_coords) const;
+	void GetTexCoords(float process, ee::Vector* tex_coords) const;
+	void GetScreenCoords(float process, const ee::Vector* tex_coords,
+		ee::Vector* screen_coords) const;
 
 	void ReloadTexture() const;
 
-	void SetImage(d2d::Image* img);
-	const d2d::Image* GetImage() const { return m_img; }
+	void SetImage(ee::Image* img);
+	const ee::Image* GetImage() const { return m_img; }
 
 protected:
 	virtual void AfterSetImage() {}
 
 protected:
-	d2d::Image* m_img;
+	ee::Image* m_img;
 
 }; // Icon
 

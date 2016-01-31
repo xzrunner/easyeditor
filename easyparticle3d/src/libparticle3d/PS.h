@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_PS_H_
 #define _EASYPARTICLE3D_PS_H_
 
-#include <drag2d.h>
+
 
 struct p3d_sprite;
 
@@ -11,18 +11,18 @@ namespace eparticle3d
 class RenderParams
 {
 public:
-	d2d::Matrix mat;
-	d2d::ColorTrans ct;
+	ee::Matrix mat;
+	ee::ColorTrans ct;
 	p3d_sprite* p3d;
 
 	RenderParams() : p3d(NULL) {}
 };
 
-class PS : public d2d::SceneNode
+class PS : public ee::SceneNode
 {
 public:
 	//
-	// interface d2d::SceneNode
+	// interface ee::SceneNode
 	//
 	virtual bool Update(float dt);
 	virtual void Draw() const;

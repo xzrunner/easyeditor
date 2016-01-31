@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_KEYS_SCALE_WIDGET_H_
 #define _EASYANIM_KEYS_SCALE_WIDGET_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class Layer;
 
-class KeysScaleWidget : public wxPanel, public d2d::Observer
+class KeysScaleWidget : public wxPanel, public ee::Observer
 {
 public:
 	KeysScaleWidget(wxWindow* parent);

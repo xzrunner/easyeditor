@@ -9,13 +9,13 @@ namespace eimage
 
 AutoRectCutCMPT::AutoRectCutCMPT(wxWindow* parent, const wxString& name, 
 								 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_editOP = new AutoRectCutOP(stage, stage->GetStageImpl());
 }
 
-wxSizer* AutoRectCutCMPT::initLayout()
+wxSizer* AutoRectCutCMPT::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -73,18 +73,18 @@ wxSizer* AutoRectCutCMPT::initLayout()
 // 	int height = wxVariant(m_height_choice->GetString(m_height_choice->GetSelection())).GetInteger();
 // 
 // 	AutoRectCutOP* op = static_cast<AutoRectCutOP*>(m_editOP);
-// 	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
+// 	op->getRectMgr().insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
 // 
 // 	m_stage->Refresh();
 // }
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
-	const d2d::Sprite* sprite = m_stage->getImage();
-	const d2d::ImageSprite* img_sprite 
-		= dynamic_cast<const d2d::ImageSprite*>(sprite);
+	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::ImageSprite* img_sprite 
+		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol().GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -96,10 +96,10 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 			y = result[i].y,
 			w = result[i].w,
 			h = result[i].h;
-		rects.insert(d2d::Rect(d2d::Vector(x, y), d2d::Vector(x+w, y+h)), true);
+		rects.insert(ee::Rect(ee::Vector(x, y), ee::Vector(x+w, y+h)), true);
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	wxString msg;
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
@@ -108,11 +108,11 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
-	const d2d::Sprite* sprite = m_stage->getImage();
-	const d2d::ImageSprite* img_sprite 
-		= dynamic_cast<const d2d::ImageSprite*>(sprite);
+	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::ImageSprite* img_sprite 
+		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
-	const d2d::Image* img = img_sprite->GetSymbol().GetImage();
+	const ee::Image* img = img_sprite->GetSymbol().GetImage();
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
@@ -121,7 +121,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
-	wxString ori_path = d2d::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
+	wxString ori_path = ee::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
 	eimage::ImageClip img_cut(*img->GetImageData());
 	const std::vector<Rect>& result = cut.GetResult();
 	for (int i = 0, n = result.size(); i < n; ++i) {
@@ -130,7 +130,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 
 		wxString out_path;
 		out_path.Printf("%s#%d#%d#%d#%d#", ori_path, r.x, r.y, r.w, r.h);
-		d2d::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), d2d::ImageSaver::e_png);
+		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), ee::ImageSaver::e_png);
 		delete[] pixels;
 	}
 }

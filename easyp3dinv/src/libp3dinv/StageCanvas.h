@@ -1,14 +1,14 @@
 #ifndef _EASYP3DINV_STAGE_CANVAS_H_
 #define _EASYP3DINV_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace ep3dinv
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

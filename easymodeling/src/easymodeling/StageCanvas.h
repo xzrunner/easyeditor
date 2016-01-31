@@ -1,14 +1,14 @@
 #ifndef _EASYMODELING_STAGE_CANVAS_H_
 #define _EASYMODELING_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace emodeling
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* editPanel);
@@ -25,10 +25,10 @@ private:
 	void DrawLines() const;
 
 private:
-	class DrawJointVisitor : public d2d::Visitor
+	class DrawJointVisitor : public ee::Visitor
 	{
 	public:
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 	};
 
 private:

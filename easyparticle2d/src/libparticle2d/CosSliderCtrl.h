@@ -1,17 +1,17 @@
 #ifndef _EASYPARTICLE2D_COS_SLIDER_CTRL_H_
 #define _EASYPARTICLE2D_COS_SLIDER_CTRL_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle2d
 {
 
-class d2d::SliderCtrlTwo;
+class ee::SliderCtrlTwo;
 
-class CosSliderCtrl : public d2d::ISliderCtrl, public wxPanel, public d2d::UICallback
+class CosSliderCtrl : public ee::SliderCtrl, public wxPanel, public ee::UICallback
 {
 public:
-	CosSliderCtrl(wxPanel* parent, const char* title, d2d::UICallback* cb);
+	CosSliderCtrl(wxPanel* parent, const char* title, ee::UICallback* cb);
 
 	virtual void Update();
 	virtual void Load(const Json::Value& val, int version);
@@ -25,10 +25,10 @@ public:
 	virtual void GetValue(int key, Data& data);
 
 private:
-	d2d::UICallback* m_cb;
+	ee::UICallback* m_cb;
 
-	d2d::SliderCtrlTwo* m_amplitude_ctrl;
-	d2d::SliderCtrlTwo* m_frequency_ctrl;
+	ee::SliderCtrlTwo* m_amplitude_ctrl;
+	ee::SliderCtrlTwo* m_frequency_ctrl;
 
 }; // CosSliderCtrl
 

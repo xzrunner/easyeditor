@@ -1,7 +1,7 @@
 #ifndef FORMATION_ACTOR_INFO_H
 #define FORMATION_ACTOR_INFO_H
 
-//#include <drag2d.h>
+//
 
 namespace formation
 {

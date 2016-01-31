@@ -5,7 +5,7 @@ namespace etext
 {
 
 InputPanel::InputPanel(wxWindow* parent, Sprite* spr,
-					   d2d::EditPanelImpl* stage_impl)
+					   ee::EditPanelImpl* stage_impl)
 	: wxPanel(parent, wxID_ANY)
 	, m_stage_impl(stage_impl)
 {
@@ -42,7 +42,7 @@ void InputPanel::InitLayout()
 void InputPanel::OnEnterPress(wxCommandEvent& event)
 {
 	m_spr->SetText(m_text_ctrl->GetValue().ToStdString());
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -8,7 +8,7 @@ namespace eanim
 
 	class Symbol;
 
-	class WholeSkeleton : public d2d::ListItem
+	class WholeSkeleton : public ee::ListItem
 	{
 	public:
 		struct Node;
@@ -21,7 +21,7 @@ namespace eanim
 		virtual ~WholeSkeleton();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual WholeSkeleton* clone() const;
 
@@ -30,13 +30,13 @@ namespace eanim
 		void storeToTextFile(std::ofstream& fout, const std::vector<Node*>& nodes,
 			const std::vector<Body*>& bodies) const;
 
-		void traverse(d2d::IVisitor& visitor);
+		void traverse(ee::IVisitor& visitor);
 
 		void onDraw();
 
-		void getBounding(d2d::AbstractBV& bounding);
+		void getBounding(ee::AbstractBV& bounding);
 
-		Sprite* queryByPos(const d2d::Vector& pos);
+		Sprite* queryByPos(const ee::Vector& pos);
 
 		const wxString& getName() const;
 
@@ -48,29 +48,29 @@ namespace eanim
 	public:
 		struct Node
 		{
-			d2d::Vector pos;
+			ee::Vector pos;
 
 			Node();
-			Node(const d2d::Vector& p);
+			Node(const ee::Vector& p);
 
 		}; // Node
 
-		class Body : public d2d::ISerializable
+		class Body : public ee::ISerializable
 		{
 		public:
 			Body(Symbol* symbol);
 			~Body();
 
 			//
-			// d2d::ISerializable interface
+			// ee::ISerializable interface
 			//
 			virtual void loadFromTextFile(std::ifstream& fin);
 			virtual void storeToTextFile(std::ofstream& fout) const;
 
 			void onDraw() const;
 
-			Node* queryNodeByPos(const d2d::Vector& pos);
-			void insertNode(const d2d::Vector& pos);
+			Node* queryNodeByPos(const ee::Vector& pos);
+			void insertNode(const ee::Vector& pos);
 			void eraseNode(Node* node);
 
 			Symbol* getSymbol() { return m_symbol; }
@@ -93,16 +93,16 @@ namespace eanim
 
 		}; // Body
 
-		class Sprite : public d2d::ImageSprite
+		class Sprite : public ee::ImageSprite
 		{
 		public:
 			Sprite();
-			Sprite(Body* body, const d2d::Vector& pos);
+			Sprite(Body* body, const ee::Vector& pos);
 			Sprite(const Sprite& sprite, Sprite* parent = NULL);
 			~Sprite();
 			
 			//
-			// d2d::ICloneable interface
+			// ee::ICloneable interface
 			//
 			virtual Sprite* clone() const;
 
@@ -114,7 +114,7 @@ namespace eanim
 			void loadFromTextFile(std::ifstream& fin);
 			void storeToTextFile(std::ofstream& fout) const;
 
-			void traverse(d2d::IVisitor& visitor);
+			void traverse(ee::IVisitor& visitor);
 
 			void remove();
 
@@ -126,7 +126,7 @@ namespace eanim
 
 			Symbol* getSymbol();
 
-			d2d::Vector getNodeWorldCoords(Node* node) const;
+			ee::Vector getNodeWorldCoords(Node* node) const;
 
 		private:
 			void clear();
@@ -155,10 +155,10 @@ namespace eanim
 
 			}; // RelativeCoords
 
-			class PosterityAbsoluteCoordsVisitor : public d2d::IVisitor
+			class PosterityAbsoluteCoordsVisitor : public ee::IVisitor
 			{
 			public:
-				virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+				virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 			}; // PosterityAbsoluteCoordsVisitor 
 			
 		private:
@@ -188,47 +188,47 @@ namespace eanim
 			bool operator() (const Sprite* s0, const Sprite* s1) const;
 		}; // BoneCmp
 
-		class FetchAllBonesVisitor : public d2d::IVisitor
+		class FetchAllBonesVisitor : public ee::IVisitor
 		{
 		public:
 			FetchAllBonesVisitor(std::vector<Sprite*>& bones);
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 
 		private:
 			std::vector<Sprite*>& m_bones;
 
 		}; // FetchAllBonesVisitor
 
-		class DrawVisitor : public d2d::IVisitor
+		class DrawVisitor : public ee::IVisitor
 		{
 		public:
 			DrawVisitor();
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 
 		private:
 			void drawBone(Sprite* bone, Sprite* curr, int times);
 
 		}; // DrawVisitor
 
-		class ComputeBoundingVisitor : public d2d::IVisitor
+		class ComputeBoundingVisitor : public ee::IVisitor
 		{
 		public:
-			ComputeBoundingVisitor(d2d::AbstractBV& bounding);
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			ComputeBoundingVisitor(ee::AbstractBV& bounding);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 
 		private:
-			d2d::AbstractBV& m_bounding;
+			ee::AbstractBV& m_bounding;
 
 		}; // ComputeBoundingVisitor
 
-		class PointQueryVisitor : public d2d::IVisitor
+		class PointQueryVisitor : public ee::IVisitor
 		{
 		public:
-			PointQueryVisitor(const d2d::Vector& pos, Sprite** pSelected);
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			PointQueryVisitor(const ee::Vector& pos, Sprite** pSelected);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 
 		private:
-			const d2d::Vector& m_pos;
+			const ee::Vector& m_pos;
 			Sprite** m_pSelected;
 
 		}; // PointQueryVisitor

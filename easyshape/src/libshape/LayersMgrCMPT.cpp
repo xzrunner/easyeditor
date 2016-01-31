@@ -4,9 +4,9 @@ namespace libshape
 {
 
 LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const wxString& name, 
-							 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-							 d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel)
+							 ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl,
+							 ee::PropertySettingPanel* propertyPanel)
+	: ee::AbstractEditCMPT(parent, name, editPanel)
 	, m_layersMgr(NULL)
 {
 //	m_editOP = new SelectShapesOP(editPanel, shapesImpl, propertyPanel);

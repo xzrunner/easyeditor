@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace edb 
 {
@@ -43,18 +43,18 @@ void VerifyJson::Trigger(const std::string& dirpath)
 void VerifyJson::InitFiles(const std::string& dirpath)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dirpath, files);
+	ee::FileHelper::FetchAllFiles(dirpath, files);
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		std::string name = d2d::FileHelper::GetFilenameWithExtension(filepath).ToStdString();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		std::string name = ee::FileHelper::GetFilenameWithExtension(filepath).ToStdString();
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			_complex_files.push_back(filepath.ToStdString());
 			_map_name2node.insert(std::make_pair(name, new Node(filepath.ToStdString())));
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			_anim_files.push_back(filepath.ToStdString());
 			_map_name2node.insert(std::make_pair(name, new Node(filepath.ToStdString())));
 		}
@@ -157,24 +157,24 @@ void VerifyJson::Report() const
 void VerifyJson::HandleSpritePath(const std::string& parent,
 								   const std::string& child)
 {
- 	if (!d2d::FileType::IsType(child, d2d::FileType::e_complex) &&
-		!d2d::FileType::IsType(child, d2d::FileType::e_anim))
+ 	if (!ee::FileType::IsType(child, ee::FileType::e_complex) &&
+		!ee::FileType::IsType(child, ee::FileType::e_anim))
  		return;
  
 	wxFileName filename(child);
 	filename.Normalize();
-	std::string childname = d2d::FileHelper::GetFilenameWithExtension(filename.GetFullPath());
-	d2d::StringHelper::ToLower(childname);
+	std::string childname = ee::FileHelper::GetFilenameWithExtension(filename.GetFullPath());
+	ee::StringHelper::ToLower(childname);
 	
 	std::map<std::string, Node*>::iterator itr = _map_name2node.find(childname);
 	if (itr == _map_name2node.end()) {
 		_reports.insert("Lack Json " + child + "!");
 	} else {
-		std::string parentname = d2d::FileHelper::GetFilenameWithExtension(parent);
+		std::string parentname = ee::FileHelper::GetFilenameWithExtension(parent);
 		std::map<std::string, Node*>::iterator itr_p = _map_name2node.find(parentname);
 		if (itr_p == _map_name2node.end()) {
 			std::string str = "HandleSpritePath fail to find \""+parentname+"\"";
-			throw d2d::Exception(str.c_str());
+			throw ee::Exception(str.c_str());
 		}
 		itr_p->second->children.insert(itr->second);
 		itr->second->parents.insert(itr_p->second);

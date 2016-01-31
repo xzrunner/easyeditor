@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -11,7 +11,7 @@ namespace eanim
 	class LibrarySymbolList;
 	class LibrarySkeletonPage;
 
-	class LibraryPanel : public wxPanel, public d2d::ISerializable
+	class LibraryPanel : public wxPanel, public ee::ISerializable
 	{
 	public:
 		static const wxString SYMBOL_LIST_NAME;
@@ -21,7 +21,7 @@ namespace eanim
 		LibraryPanel(wxWindow* parent);
 
 		//
-		// d2d::ISerializable interface
+		// ee::ISerializable interface
 		//
 		virtual void loadFromTextFile(std::ifstream& fin);
 		virtual void storeToTextFile(std::ofstream& fout) const;

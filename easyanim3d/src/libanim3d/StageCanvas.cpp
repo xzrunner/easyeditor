@@ -4,8 +4,8 @@
 namespace eanim3d
 {
 
-StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-						 d2d::MultiSpritesImpl* sprites_impl)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+						 ee::MultiSpritesImpl* sprites_impl)
 	: e3d::StageCanvas(stage_wnd, stage)
 	, m_sprites_impl(sprites_impl)
 {
@@ -28,22 +28,22 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), d2d::LIGHT_RED);
+	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), ee::LIGHT_RED);
 	//  	e3d::DrawGrids(vec3(-10, -10, 0), vec3(10, 10, 0), vec3(0.5f, 0.5f, FLT_MAX), 
-	//  		d2d::LIGHT_RED);
+	//  		ee::LIGHT_RED);
 }
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<d2d::Sprite*> sprites;
-	m_sprites_impl->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_sprites_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteRenderer::Instance()->Draw(sprite);
+		ee::SpriteRenderer::Instance()->Draw(sprite);
 	}
 }
 

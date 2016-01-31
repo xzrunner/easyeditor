@@ -1,12 +1,12 @@
 #ifndef _EASYCOMPLEX_FRAME_H_
 #define _EASYCOMPLEX_FRAME_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
 
-class Frame : public d2d::Frame
+class Frame : public ee::Frame
 {
 public:
 	Frame(const wxString& title, const wxString& filetag);

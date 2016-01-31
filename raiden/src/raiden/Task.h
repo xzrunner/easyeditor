@@ -1,7 +1,7 @@
 #ifndef RAIDEN_TASK_H
 #define RAIDEN_TASK_H
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace raiden

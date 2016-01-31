@@ -6,7 +6,7 @@ namespace eterrain2d
 {
 
 OceanMesh::OceanMesh(const libshape::PolygonShape* shape, 
-					 const d2d::ImageSymbol* image)
+					 const ee::ImageSymbol* image)
 	 : m_shape(shape->Clone())
 	 , m_image0(image)
 	 , m_image1(NULL)
@@ -42,21 +42,21 @@ void OceanMesh::Build()
 {
 	Clear();
 
-	std::vector<d2d::Vector> bound;
-	d2d::Math2D::RemoveDuplicatePoints(m_shape->GetVertices(), bound);
+	std::vector<ee::Vector> bound;
+	ee::Math2D::RemoveDuplicatePoints(m_shape->GetVertices(), bound);
 
-	d2d::Rect r = CalBoundRegion(bound);
+	ee::Rect r = CalBoundRegion(bound);
 
-	std::vector<d2d::Vector> segs;
+	std::vector<ee::Vector> segs;
 	CalSegments(r, segs);
 
-	std::vector<d2d::Vector> tris_vertices;
-	d2d::Triangulation::Lines(bound, segs, tris_vertices);
+	std::vector<ee::Vector> tris_vertices;
+	ee::Triangulation::Lines(bound, segs, tris_vertices);
 	if (tris_vertices.empty()) {
 		return;
 	}
 
-	std::vector<d2d::Vector> tris_texcoords;
+	std::vector<ee::Vector> tris_texcoords;
 	CalTrisTexcords(r, tris_vertices, tris_texcoords);
 
 	BuildGrids(r, tris_vertices, tris_texcoords, bound);
@@ -77,7 +77,7 @@ void OceanMesh::SetWaveInfo(float speed, float height)
 	m_wave_height = height;
 }
 
-void OceanMesh::SetTexcoordsSpeed(const d2d::Vector& speed)
+void OceanMesh::SetTexcoordsSpeed(const ee::Vector& speed)
 {
 	m_texcoords_spd = speed;
 }
@@ -101,29 +101,29 @@ void OceanMesh::Update(float dt)
 	}
 	m_during += dt;
 
-	if (m_wave_speed * m_during > d2d::PI * 2) {
+	if (m_wave_speed * m_during > ee::PI * 2) {
 		m_during = 0;
 	}
 }
 
-void OceanMesh::Draw(const d2d::Matrix& mt, const d2d::Colorf& mul, 
-					 const d2d::Colorf& add, bool draw_tris) const
+void OceanMesh::Draw(const ee::Matrix& mt, const ee::Colorf& mul, 
+					 const ee::Colorf& add, bool draw_tris) const
 {
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	if (m_blend_open && m_image1) {
-		d2d::ColorTrans color;
-		color.multi = d2d::Colorf(1, 1, 1, m_blend_base);
+		ee::ColorTrans color;
+		color.multi = ee::Colorf(1, 1, 1, m_blend_base);
 		shader->SetSpriteColor(color);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(mt, mul, add, m_image0->GetTexID());
 		}
-		color.multi = d2d::Colorf(1, 1, 1, 1 - m_blend_base);
+		color.multi = ee::Colorf(1, 1, 1, 1 - m_blend_base);
 		shader->SetSpriteColor(color);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(mt, mul, add, m_image1->GetTexID());
 		}
 	} else {
-		shader->SetSpriteColor(d2d::ColorTrans());
+		shader->SetSpriteColor(ee::ColorTrans());
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(mt, mul, add);
 		}
@@ -157,7 +157,7 @@ void OceanMesh::OpenBlend(bool open)
 	m_blend_open = open; 
 }
 
-void OceanMesh::SetImage1(const d2d::ImageSymbol* image)
+void OceanMesh::SetImage1(const ee::ImageSymbol* image)
 {
 	if (m_image0->GetSize().Width() != image->GetSize().Width() ||
 		m_image0->GetSize().Height() != image->GetSize().Height()) {
@@ -167,9 +167,9 @@ void OceanMesh::SetImage1(const d2d::ImageSymbol* image)
 	m_image1 = image;
 }
 
-d2d::Rect OceanMesh::GetRegion() const
+ee::Rect OceanMesh::GetRegion() const
 {
-	d2d::Rect ret;
+	ee::Rect ret;
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		emesh::Shape* shape = m_grids[i];
 		ret.Combine(shape->GetRegion());
@@ -180,7 +180,7 @@ d2d::Rect OceanMesh::GetRegion() const
 float OceanMesh::GetTexcoordSpdAngle() const
 {
 	if (m_texcoords_spd.y == 0) {
-		return d2d::PI * 0.5f;
+		return ee::PI * 0.5f;
 	} else {
 		return atan(m_texcoords_spd.x / m_texcoords_spd.y);
 	}
@@ -188,9 +188,9 @@ float OceanMesh::GetTexcoordSpdAngle() const
 
 void OceanMesh::Rotate(float angle)
 {
-	std::vector<d2d::Vector> vertices = m_shape->GetVertices();
+	std::vector<ee::Vector> vertices = m_shape->GetVertices();
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
-		vertices[i] = d2d::Math2D::RotateVector(vertices[i], angle);
+		vertices[i] = ee::Math2D::RotateVector(vertices[i], angle);
 	}
 	m_shape->Load(vertices);
 
@@ -207,9 +207,9 @@ void OceanMesh::Clear()
 	m_grids.clear();
 }
 
-d2d::Rect OceanMesh::CalBoundRegion(const std::vector<d2d::Vector>& bound) const
+ee::Rect OceanMesh::CalBoundRegion(const std::vector<ee::Vector>& bound) const
 {
-	d2d::Rect r;
+	ee::Rect r;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
 		r.Combine(bound[i]);
 	}
@@ -217,27 +217,27 @@ d2d::Rect OceanMesh::CalBoundRegion(const std::vector<d2d::Vector>& bound) const
 	return r;
 }
 
-void OceanMesh::CalSegments(const d2d::Rect& r, std::vector<d2d::Vector>& segs) const
+void OceanMesh::CalSegments(const ee::Rect& r, std::vector<ee::Vector>& segs) const
 {
 	int img_w = m_image0->GetSize().Width(),
 		img_h = m_image0->GetSize().Height();
 	float dw = img_w / m_col,
 		  dh = img_h / m_row;
 	for (float x = r.xmin; x < r.xmax; x += dw) {
-		segs.push_back(d2d::Vector(x, r.ymin - 1));
-		segs.push_back(d2d::Vector(x, r.ymax + 1));
+		segs.push_back(ee::Vector(x, r.ymin - 1));
+		segs.push_back(ee::Vector(x, r.ymax + 1));
 	}
 	for (float y = r.ymin; y < r.ymax; y += dh) {
-		segs.push_back(d2d::Vector(r.xmin - 1, y));
-		segs.push_back(d2d::Vector(r.xmax + 1, y));
+		segs.push_back(ee::Vector(r.xmin - 1, y));
+		segs.push_back(ee::Vector(r.xmax + 1, y));
 	}
 
  	if (m_texcoords_base.x != 0) {
  		float offset = m_texcoords_base.x * img_w;
 		if (fabs(offset - (int)(offset / dw) * dw) > 1) {
 			for (float x = r.xmin + offset; x < r.xmax; x += img_w) {
-				segs.push_back(d2d::Vector(x, r.ymin - 1));
-				segs.push_back(d2d::Vector(x, r.ymax + 1));
+				segs.push_back(ee::Vector(x, r.ymin - 1));
+				segs.push_back(ee::Vector(x, r.ymax + 1));
 			}
 		}
  	}
@@ -245,30 +245,30 @@ void OceanMesh::CalSegments(const d2d::Rect& r, std::vector<d2d::Vector>& segs) 
  		float offset = m_texcoords_base.y * img_h;
 		if (fabs(offset - (int)(offset / dh) * dh) > 1) {
 			for (float y = r.ymin + offset; y < r.ymax; y += img_h) {
-				segs.push_back(d2d::Vector(r.xmin - 1, y));
-				segs.push_back(d2d::Vector(r.xmax + 1, y));
+				segs.push_back(ee::Vector(r.xmin - 1, y));
+				segs.push_back(ee::Vector(r.xmax + 1, y));
 			}
 		}
  	}
 }
 
-void OceanMesh::CalTrisTexcords(const d2d::Rect& r, 
-								const std::vector<d2d::Vector>& tris_vertices,
-								std::vector<d2d::Vector>& texcoords) const
+void OceanMesh::CalTrisTexcords(const ee::Rect& r, 
+								const std::vector<ee::Vector>& tris_vertices,
+								std::vector<ee::Vector>& texcoords) const
 {
 	float img_w = m_image0->GetSize().Width(),
 		  img_h = m_image0->GetSize().Height();
 
-	d2d::Vector left_low;
+	ee::Vector left_low;
 	left_low.x = r.xmin - (1 - m_texcoords_base.x) * img_w;
 	left_low.y = r.ymin - (1 - m_texcoords_base.y) * img_h;
 	assert(tris_vertices.size() % 3 == 0);
 	for (int i = 0, n = tris_vertices.size(); i < n; i += 3)
 	{
-		d2d::Vector center = tris_vertices[i] + tris_vertices[i+1] + tris_vertices[i+2];
+		ee::Vector center = tris_vertices[i] + tris_vertices[i+1] + tris_vertices[i+2];
 		center /= 3;
 
-		d2d::Vector base;
+		ee::Vector base;
 		int ix = (center.x - left_low.x) / img_w,
 			iy = (center.y - left_low.y) / img_h;
 		base.x = left_low.x + img_w * ix;
@@ -277,15 +277,15 @@ void OceanMesh::CalTrisTexcords(const d2d::Rect& r,
 		for (int j = 0; j < 3; ++j) {
 			float tx = (tris_vertices[i+j].x - base.x) / img_w,
 				  ty = (tris_vertices[i+j].y - base.y) / img_h;
-			texcoords.push_back(d2d::Vector(tx, ty));
+			texcoords.push_back(ee::Vector(tx, ty));
 		}
 	}
 }
 
-void OceanMesh::BuildGrids(const d2d::Rect& region, 
-						   const std::vector<d2d::Vector>& vertices, 
-						   const std::vector<d2d::Vector>& texcoords,
-						   const std::vector<d2d::Vector>& bound)
+void OceanMesh::BuildGrids(const ee::Rect& region, 
+						   const std::vector<ee::Vector>& vertices, 
+						   const std::vector<ee::Vector>& texcoords,
+						   const std::vector<ee::Vector>& bound)
 {
 	float img_w = m_image0->GetSize().Width(),
 		  img_h = m_image0->GetSize().Height();
@@ -295,7 +295,7 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 	grids.resize(cx * cy, NULL);
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
 	{
-		d2d::Vector center = vertices[i] + vertices[i+1] + vertices[i+2];
+		ee::Vector center = vertices[i] + vertices[i+1] + vertices[i+2];
 		center /= 3;
 
 		int ix = (center.x - region.xmin) / img_w,

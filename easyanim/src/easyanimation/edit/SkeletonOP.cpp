@@ -6,9 +6,9 @@
 namespace eanim
 {
 
-SkeletonOP::SkeletonOP(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, property, 
-	NULL, d2d::ArrangeSpriteConfig(), new SkeletonImpl)
+SkeletonOP::SkeletonOP(StagePanel* stage, ee::PropertySettingPanel* property)
+	: ee::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, property, 
+	NULL, ee::ArrangeSpriteConfig(), new SkeletonImpl)
 {
 }
 

@@ -14,7 +14,7 @@ public:
 	TransToETC1() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;

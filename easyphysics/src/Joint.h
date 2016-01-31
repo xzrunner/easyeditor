@@ -7,12 +7,12 @@
 //namespace ephysics
 //{
 //	struct JointDef;
-//	class d2d::Vector;
+//	class ee::Vector;
 //
 //	class Joint
 //	{
 //	public:
-//		Joint(b2World* world, const JointDef& params, const d2d::Vector& anchor, 
+//		Joint(b2World* world, const JointDef& params, const ee::Vector& anchor, 
 //			b2Body* b0, b2Body* b1, bool isMotor, float scale);
 //		~Joint();
 //
@@ -20,7 +20,7 @@
 //		void setAngleLimit(bool isLeft);
 //
 //	private:
-//		void initialize(const JointDef& params, const d2d::Vector& anchor, b2Body* b0, b2Body* b1, bool isMotor);
+//		void initialize(const JointDef& params, const ee::Vector& anchor, b2Body* b0, b2Body* b1, bool isMotor);
 //
 //	private:
 //		float m_scale;

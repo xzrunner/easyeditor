@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN3D_INTERFACE_DEMO_H_
 #define _EASYTERRAIN3D_INTERFACE_DEMO_H_
 
-#include <drag2d.h>
+
 
 namespace libterrain3d
 {
@@ -19,7 +19,7 @@ protected:
 	mutable int m_tris_per_frame;
 
 private:
-	d2d::Timer m_timer;
+	ee::Timer m_timer;
 
 }; // IDemo
 

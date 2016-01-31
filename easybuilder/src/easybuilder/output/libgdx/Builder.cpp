@@ -32,7 +32,7 @@ namespace libgdx
 
 		std::vector<SceneItem*> scenes;
 		Context::Instance()->library->getSceneList()->traverse(
-			d2d::FetchAllVisitor<SceneItem>(scenes));
+			ee::FetchAllVisitor<SceneItem>(scenes));
 
 		for (size_t i = 0, n = scenes.size(); i < n; ++i)
 			insertPage(*scenes[i]);
@@ -89,7 +89,7 @@ namespace libgdx
 			gen.line();
 			std::vector<SceneItem*> scenes;
 			Context::Instance()->library->getSceneList()->traverse(
-				d2d::FetchAllVisitor<SceneItem>(scenes));
+				ee::FetchAllVisitor<SceneItem>(scenes));
 			if (!scenes.empty())
 			{
 				for (size_t i = 0, n = scenes.size(); i < n ;++i)
@@ -277,8 +277,8 @@ namespace libgdx
 			for (size_t i = 0, n = actors.size(); i < n; ++i)
 			{
 				wxString path = actors[i]->getSymbol().getFilepath();
-				wxString name = d2d::FilenameTools::getFilename(path);
-				wxString filename = d2d::FilenameTools::getFilenameWithExtension(path);
+				wxString name = ee::FilenameTools::getFilename(path);
+				wxString filename = ee::FilenameTools::getFilenameWithExtension(path);
 				images.insert(std::make_pair(name.ToStdString(), filename.ToStdString()));
 			}
 			std::set<std::pair<std::string, std::string> >::iterator itr;
@@ -430,7 +430,7 @@ namespace libgdx
 
 		std::string path = actor.getSymbol().getFilepath();
 		std::string name = actor.name;
-		std::string tex_name = "r_"+d2d::FilenameTools::getFilename(path);
+		std::string tex_name = "r_"+ee::FilenameTools::getFilename(path);
 
 		std::string _x, _y;
 		buildPosition(actor, _x, _y);
@@ -441,7 +441,7 @@ namespace libgdx
 		std::string _ox = wxString::FromDouble(actor.getSymbol().getSize().xLength()*0.5f, 1) + "f";
 		std::string _oy = wxString::FromDouble(actor.getSymbol().getSize().yLength()*0.5f, 1) + "f";
 
-		std::string _angle = wxString::FromDouble(actor.getAngle()*180/d2d::PI, 2) + "f";
+		std::string _angle = wxString::FromDouble(actor.getAngle()*180/ee::PI, 2) + "f";
 
 		float s = actor.getScale().x;
 		bool xMirror, yMirror;
@@ -581,7 +581,7 @@ namespace libgdx
 
 				ChangeImage* changeImage = static_cast<ChangeImage*>(behavior);
 				std::string path = changeImage->selected->getFilepath();
-				std::string tex_region_name = "r_"+d2d::FilenameTools::getFilename(path);
+				std::string tex_region_name = "r_"+ee::FilenameTools::getFilename(path);
 
 				// new TextureRegionDrawable(name)
 				std::string sTex = java::create("TextureRegionDrawable", 1, tex_region_name.c_str());
@@ -627,7 +627,7 @@ namespace libgdx
 				std::string ex, ey;
 				buildPosition(move->end, ex, ey);
 
-				const float duration = d2d::Math::getDistance(move->start, move->end) / move->speed;
+				const float duration = ee::Math::getDistance(move->start, move->end) / move->speed;
 				std::string _duration = wxString::FromDouble(duration, 1) + "f";
 
 				// moveTo(x, y, duration)
@@ -638,7 +638,7 @@ namespace libgdx
 			{
 				Rotate* rotate = static_cast<Rotate*>(behavior);
 
-				std::string end = wxString::FromDouble(rotate->end*180/d2d::PI, 1) + "f";
+				std::string end = wxString::FromDouble(rotate->end*180/ee::PI, 1) + "f";
 
 				const float duration = fabs(rotate->end - rotate->start) / rotate->speed;
 				std::string _duration = wxString::FromDouble(duration, 1) + "f";
@@ -658,7 +658,7 @@ namespace libgdx
 		y = wxString::FromDouble(py, 1) + "f";
 	}
 
-	void Builder::buildPosition(const d2d::Vector& pos, std::string& x, std::string& y)
+	void Builder::buildPosition(const ee::Vector& pos, std::string& x, std::string& y)
 	{
 		const float px = pos.x + Game::WIDTH * 0.5f,
 			py = pos.y + Game::HEIGHT * 0.5f;

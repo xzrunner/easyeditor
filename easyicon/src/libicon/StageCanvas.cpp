@@ -6,7 +6,7 @@ namespace eicon
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -16,16 +16,18 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 StageCanvas::StageCanvas(StagePanel* stage, 
 						 wxGLContext* glctx,
-						 d2d::Sprite* edited,
-						 const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
+						 ee::Sprite* edited,
+						 const ee::MultiSpritesImpl* bg_sprites)
+	: ee::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
 	if (m_sprite_impl) {
-		m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+		std::vector<Sprite*> sprites;
+		m_sprite_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+		m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 	}
 }
 
@@ -33,17 +35,17 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
+		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		ee::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
 	Sprite sprite;
 	sprite.SetSymbol(&m_stage->GetSymbol());
 	sprite.SetProcess(0.5f);
 
-	m_stage->GetSymbol().Draw(d2d::Matrix(), d2d::ColorTrans(), &sprite);
+	m_stage->GetSymbol().Draw(ee::Matrix(), ee::ColorTrans(), &sprite);
 
-	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));;
+	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));;
 
 	m_stage->DrawEditOP();
 }

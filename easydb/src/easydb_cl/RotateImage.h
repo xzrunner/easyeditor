@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	RotateImage() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -24,7 +24,7 @@ public:
 	static ICommand* Create() { return new RotateImage(); }
 
 private:
-	void Rotate(d2d::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir);
+	void Rotate(ee::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir);
 
 }; // RotateImage
 

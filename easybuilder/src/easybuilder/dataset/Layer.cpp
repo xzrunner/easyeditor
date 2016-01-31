@@ -22,12 +22,12 @@ void Layer::insert(Actor* actor)
 	m_actors.push_back(actor);
 }
 
-void Layer::insert(d2d::TextSprite* text) 
+void Layer::insert(ee::TextSprite* text) 
 {
 	m_texts.push_back(text);
 }
 
-void Layer::remove(d2d::ISprite* sprite)
+void Layer::remove(ee::ISprite* sprite)
 {
 	{
 		std::vector<Actor*>::iterator itr = find(m_actors.begin(), m_actors.end(), sprite);
@@ -39,7 +39,7 @@ void Layer::remove(d2d::ISprite* sprite)
 		}
 	}
 	{
-		std::vector<d2d::TextSprite*>::iterator itr = find(m_texts.begin(), m_texts.end(), sprite);
+		std::vector<ee::TextSprite*>::iterator itr = find(m_texts.begin(), m_texts.end(), sprite);
 		if (itr != m_texts.end())
 		{
 			(*itr)->release();
@@ -49,7 +49,7 @@ void Layer::remove(d2d::ISprite* sprite)
 	}
 }
 
-void Layer::resetOrder(d2d::ISprite* sprite, bool up)
+void Layer::resetOrder(ee::ISprite* sprite, bool up)
 {
 	for (size_t i = 0, n = m_actors.size(); i < n; ++i)
 	{

@@ -9,8 +9,8 @@ namespace emesh
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl()
+	: ee::EditPanel(parent, frame)
+	, ee::MultiShapesImpl()
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -20,9 +20,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl()
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiShapesImpl()
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
@@ -32,9 +32,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 // StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-// 					   d2d::LibraryPanel* library, Sprite* sprite)
-// 	: d2d::EditPanel(parent, frame)
-// 	, d2d::MultiShapesImpl()
+// 					   ee::LibraryPanel* library, Sprite* sprite)
+// 	: ee::EditPanel(parent, frame)
+// 	, ee::MultiShapesImpl()
 // 	, m_background(NULL)
 // {
 // 	sprite->Retain();
@@ -51,8 +51,8 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::TraverseShapes(d2d::Visitor& visitor, 
-								d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
+void StagePanel::TraverseShapes(ee::Visitor& visitor, 
+								ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
 	Shape* shape = m_symbol->getShape();
 	if (shape) {
@@ -79,7 +79,7 @@ Shape* StagePanel::GetShape()
 	return m_symbol->getShape();
 }
 
-void StagePanel::LoadFromSymbol(const d2d::Symbol* symbol)
+void StagePanel::LoadFromSymbol(const ee::Symbol* symbol)
 {
 }
 
@@ -87,7 +87,7 @@ void StagePanel::UpdateSymbol()
 {
 	if (Shape* shape = m_symbol->getShape()) {
 		std::vector<const libshape::ChainShape*> polylines;
-		TraverseShapes(d2d::FetchAllVisitor<const libshape::ChainShape>(polylines));
+		TraverseShapes(ee::FetchAllVisitor<const libshape::ChainShape>(polylines));
 		shape->Refresh();
 	}
 }
@@ -99,9 +99,9 @@ void StagePanel::CreateShape()
 	}
 }
 
-void StagePanel::Init(d2d::LibraryPanel* library)
+void StagePanel::Init(ee::LibraryPanel* library)
 {
-	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
+	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
 
 	if (library) {
@@ -111,40 +111,40 @@ void StagePanel::Init(d2d::LibraryPanel* library)
 
 void StagePanel::InitSubjects()
 {
-	RegistSubject(d2d::ClearPanelSJ::Instance());
-	RegistSubject(d2d::RemoveShapeSJ::Instance());
-	RegistSubject(d2d::InsertShapeSJ::Instance());
-	RegistSubject(d2d::ClearShapeSJ::Instance());
+	RegistSubject(ee::ClearPanelSJ::Instance());
+	RegistSubject(ee::RemoveShapeSJ::Instance());
+	RegistSubject(ee::InsertShapeSJ::Instance());
+	RegistSubject(ee::ClearShapeSJ::Instance());
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiShapesImpl::OnNotify(sj_id, ud);
+	ee::MultiShapesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id) 
 	{
-	case d2d::MSG_REMOVE_SHAPE:
+	case ee::MSG_REMOVE_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->RemoveShape((d2d::Shape*)ud)) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			if (static_cast<EditShape*>(shape)->RemoveShape((ee::Shape*)ud)) {
+				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
-	case d2d::MSG_INSERT_SHAPE:
+	case ee::MSG_INSERT_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->InsertShape((d2d::Shape*)ud)) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			if (static_cast<EditShape*>(shape)->InsertShape((ee::Shape*)ud)) {
+				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
-	case d2d::MSG_CLEAR_SHAPE:
+	case ee::MSG_CLEAR_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
 			if (static_cast<EditShape*>(shape)->ClearShape()) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
-	case d2d::MSG_CLEAR_PANEL:
+	case ee::MSG_CLEAR_PANEL:
 		m_symbol->Release();
 		m_symbol = new Symbol;
 		break;
@@ -156,21 +156,21 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
+StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::StageDropTarget(stage, stage->GetStageImpl(), library)
 	, m_stage(stage)
 {
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos)
+OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
 {
-	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
+	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
 	{
 		Symbol* symbol = new Symbol(image->GetImage());
 		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 		return true;
 	}

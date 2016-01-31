@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_LOAD_ADAPTER_H_
 #define _EASYPARTICLE2D_LOAD_ADAPTER_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle2d
 {
@@ -21,8 +21,8 @@ public:
 
 		float scale_start, scale_end;
 
-		d2d::Colorf col_mul_start, col_mul_end;
-		d2d::Colorf col_add_start, col_add_end;
+		ee::Colorf col_mul_start, col_mul_end;
+		ee::Colorf col_add_start, col_add_end;
 
 		std::string filepath;
 	}; // Component
@@ -37,7 +37,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 	struct A
 	{
-		d2d::Vector gravity;
+		ee::Vector gravity;
 
 		float speed, speed_var;
 
@@ -78,7 +78,7 @@ public:
 
 	float life, life_var;
 
-	d2d::Vector position, position_var;
+	ee::Vector position, position_var;
 
 	float direction, direction_var;
 

@@ -4,8 +4,8 @@
 namespace eanim
 {
 
-EditSpriteMeshOP::EditSpriteMeshOP(d2d::EditPanel* editPanel, Mesh* mesh)
-	: d2d::ZoomViewOP(editPanel, false), EditMeshUtility(mesh)
+EditSpriteMeshOP::EditSpriteMeshOP(ee::EditPanel* editPanel, Mesh* mesh)
+	: ee::ZoomViewOP(editPanel, false), EditMeshUtility(mesh)
 {
 	m_mesh = mesh;
 	m_selectedNode = NULL;	
@@ -16,7 +16,7 @@ bool EditSpriteMeshOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	m_selectedNode = selectNodeByPos(pos);
 
 	if (!m_selectedNode && !m_mesh->isMerged())
@@ -49,7 +49,7 @@ bool EditSpriteMeshOP::onMouseDrag(int x, int y)
 	}
 	else if (m_selectedTri)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		std::vector<MeshNode*> nodes;
 		m_selectedTri->getNodes(nodes);
 		for (size_t i = 0; i < 3; ++i)
@@ -81,18 +81,18 @@ bool EditSpriteMeshOP::clear()
 	return false;
 }
 
-MeshTri* EditSpriteMeshOP::selectTriByPos(const d2d::Vector& pos) const
+MeshTri* EditSpriteMeshOP::selectTriByPos(const ee::Vector& pos) const
 {
 	const std::vector<MeshTri*>& tris = m_mesh->getAllTris();
 	for (size_t i = 0, n = tris.size(); i < n; ++i)
 	{
 		std::vector<MeshNode*> nodes;
 		tris[i]->getNodes(nodes);
-		std::vector<d2d::Vector> bound;
+		std::vector<ee::Vector> bound;
 		for (size_t j = 0; j < 3; ++j)
 			bound.push_back(nodes[j]->projCoords);
 
-		if (d2d::Math::isPointInArea(pos, bound))
+		if (ee::Math::isPointInArea(pos, bound))
 			return tris[i];
 	}
 	return NULL;

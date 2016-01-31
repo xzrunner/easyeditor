@@ -6,7 +6,7 @@
 
 using namespace ebuilder;
 
-ListObserver::ListObserver(d2d::LibraryList* list)
+ListObserver::ListObserver(ee::LibraryList* list)
 	: m_list(list)
 {
 }

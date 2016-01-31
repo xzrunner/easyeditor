@@ -8,8 +8,8 @@ namespace sg
 
 void FileIO::load(const char* filename, StagePanel* stage)
 {
-// 	d2d::SymbolMgr::Instance()->Clear();
-// 	d2d::BitmapMgr::Instance()->Clear();
+// 	ee::SymbolMgr::Instance()->Clear();
+// 	ee::BitmapMgr::Instance()->Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -19,27 +19,27 @@ void FileIO::load(const char* filename, StagePanel* stage)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
+	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 
 	int i = 0;
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
-		d2d::Sprite* sprite = load(imgValue, stage, dir);
-		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::Sprite* sprite = load(imgValue, stage, dir);
+		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 		imgValue = value["image"][i++];
 	}
 
-//	library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+//	library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename, StagePanel* stage)
 {
 	Json::Value value;
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
+	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 
-	std::vector<d2d::Sprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		value["image"][i] = store(sprites[i], stage, dir);
 	}
@@ -52,17 +52,17 @@ void FileIO::store(const char* filename, StagePanel* stage)
 	fout.close();
 }
 
-d2d::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
+ee::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
 {
 	int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
-	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, value);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	SetSymbolUserData(symbol);
 
-	d2d::Vector pos;
-	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+	ee::Vector pos;
+	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->tag = value["tag"].asString();
 	symbol->Release();
 
@@ -96,12 +96,12 @@ d2d::Sprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std
 	return sprite;
 }
 
-Json::Value FileIO::store(const d2d::Sprite* sprite, StagePanel* stage, 
+Json::Value FileIO::store(const ee::Sprite* sprite, StagePanel* stage, 
 						  const std::string& dir)
 {
 	Json::Value value;
 
-	value["filepath"] = d2d::FileHelper::GetRelativePath(dir,
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
 		sprite->GetSymbol().GetFilepath()).ToStdString();
 
 	int row, col;
@@ -131,7 +131,7 @@ Json::Value FileIO::store(const d2d::Sprite* sprite, StagePanel* stage,
 	return value;
 }
 
-void FileIO::SetSymbolUserData(d2d::Symbol* symbol)
+void FileIO::SetSymbolUserData(ee::Symbol* symbol)
 {
 	if (symbol->GetUserData()) {
 		return;
@@ -147,7 +147,7 @@ void FileIO::SetSymbolUserData(d2d::Symbol* symbol)
 	std::string wall_path = filepath.substr(0, pos) + ".png";
 
 	try {
-		d2d::Symbol* wall_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(wall_path);
+		ee::Symbol* wall_symbol = ee::SymbolMgr::Instance()->FetchSymbol(wall_path);
 		if (!wall_symbol || !wall_symbol->GetUserData()) {
 			return;
 		}
@@ -162,7 +162,7 @@ void FileIO::SetSymbolUserData(d2d::Symbol* symbol)
 		new_info->building = info->building;
 
 		symbol->SetUserData(new_info);
-	} catch (d2d::Exception& e) {
+	} catch (ee::Exception& e) {
 		;
 	}
 }

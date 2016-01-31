@@ -1,6 +1,6 @@
 #include "MyThread.h"
 
-#include <drag2d.h>
+
 
 DEFINE_EVENT_TYPE(wxEVT_MYTHREAD)
 MyThread::MyThread() : wxThread(wxTHREAD_DETACHED)
@@ -19,7 +19,7 @@ void* MyThread::Entry()
 	int w, h, c;
 	unsigned int tex;
 	for (int i = 0; i < 100; ++i) {
-		d2d::ImageLoader::FileToTexture(filepath, w, h, tex, c);
+		ee::ImageLoader::FileToTexture(filepath, w, h, tex, c);
 	}
 
 	return 0;

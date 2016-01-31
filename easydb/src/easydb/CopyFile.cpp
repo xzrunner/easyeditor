@@ -1,7 +1,7 @@
 #include "CopyFile.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -52,7 +52,7 @@ void CopyFile::Init(const std::string& src_dir, const std::string& dst_dir)
 	m_src_dir = src_dir;
 	m_dst_dir = dst_dir;
 
-	d2d::FileHelper::FetchAllFiles(src_dir, m_files);
+	ee::FileHelper::FetchAllFiles(src_dir, m_files);
 }
 
 void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) const
@@ -63,8 +63,8 @@ void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) cons
 		wxFileName filename(m_files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex) ||
-			d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) ||
+			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
 			Json::Value value;
 			Json::Reader reader;
@@ -92,11 +92,11 @@ void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& f
 		return;
 	}
 
-	if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex))
+	if (ee::FileType::IsType(filepath, ee::FileType::e_complex))
 	{
 		Json::Value value;
 		Json::Reader reader;
-		wxString fullpath = d2d::FileHelper::GetAbsolutePath(m_src_dir, filepath);
+		wxString fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
 		std::locale::global(std::locale(""));
 		std::ifstream fin(fullpath.fn_str());
 		std::locale::global(std::locale("C"));
@@ -107,8 +107,8 @@ void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& f
 		Json::Value spriteValue = value["sprite"][i++];
 		while (!spriteValue.isNull()) {
 			std::string item_path = spriteValue["filepath"].asString();
-			if (d2d::FileType::IsType(item_path, d2d::FileType::e_complex)
-				|| d2d::FileType::IsType(item_path, d2d::FileType::e_anim))
+			if (ee::FileType::IsType(item_path, ee::FileType::e_complex)
+				|| ee::FileType::IsType(item_path, ee::FileType::e_anim))
 			{
 				GetDependFiles(item_path, files);
 			}
@@ -116,11 +116,11 @@ void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& f
 			spriteValue = value["sprite"][i++];
 		}	
 	}
-	else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
+	else if (ee::FileType::IsType(filepath, ee::FileType::e_anim))
 	{
 		Json::Value value;
 		Json::Reader reader;
-		wxString fullpath = d2d::FileHelper::GetAbsolutePath(m_src_dir, filepath);
+		wxString fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
 		std::locale::global(std::locale(""));
 		std::ifstream fin(fullpath.fn_str());
 		std::locale::global(std::locale("C"));
@@ -137,8 +137,8 @@ void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& f
 				Json::Value entryValue = frameValue["actor"][m++];
 				while (!entryValue.isNull()) {
 					std::string item_path = entryValue["filepath"].asString();
-					if (d2d::FileType::IsType(item_path, d2d::FileType::e_complex)
-						|| d2d::FileType::IsType(item_path, d2d::FileType::e_anim))
+					if (ee::FileType::IsType(item_path, ee::FileType::e_complex)
+						|| ee::FileType::IsType(item_path, ee::FileType::e_anim))
 					{
 						GetDependFiles(item_path, files);
 					}
@@ -157,7 +157,7 @@ void CopyFile::Copy(const std::set<std::string>& files) const
 	std::set<std::string>::const_iterator itr = files.begin();
 	for ( ; itr != files.end(); ++itr)
 	{
-		wxString filename = d2d::FileHelper::GetFilenameWithExtension(*itr);
+		wxString filename = ee::FileHelper::GetFilenameWithExtension(*itr);
 		wxString src = m_src_dir + "\\" + filename;
 		wxString dst = m_dst_dir + "\\" + filename;
 		wxCopyFile(src, dst, true);

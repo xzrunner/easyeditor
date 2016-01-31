@@ -2,13 +2,13 @@
 
 #include "dataset/WholeSkeleton.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class SkeletonEditPanel;
 
-	class ComposeWholeSkeletonOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>
+	class ComposeWholeSkeletonOP : public ee::ArrangeSpriteOP<ee::SelectSpritesOP>
 	{
 	public:
 		ComposeWholeSkeletonOP(SkeletonEditPanel* editPanel, 
@@ -26,8 +26,8 @@ namespace eanim
 		void setSelectedBoneLayer(int layer);
 
 	protected:
-		virtual void translateSprite(const d2d::Vector& delta);
-		virtual void rotateSprite(const d2d::Vector& dst);
+		virtual void translateSprite(const ee::Vector& delta);
+		virtual void rotateSprite(const ee::Vector& dst);
 
 	private:
 		void connect(WholeSkeleton::Sprite* parent, WholeSkeleton::Sprite* child,
@@ -38,13 +38,13 @@ namespace eanim
 		void translateToCenter();
 
 	private:
-		class NearestNodeVisitor : public d2d::IVisitor
+		class NearestNodeVisitor : public ee::IVisitor
 		{
 		public:
 			NearestNodeVisitor(WholeSkeleton::Sprite* sprite, WholeSkeleton::Sprite** pResult, 
 				WholeSkeleton::Node** pFromNode, WholeSkeleton::Node** pToNode);
 
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 
 		private:
 			WholeSkeleton::Sprite* m_sprite;

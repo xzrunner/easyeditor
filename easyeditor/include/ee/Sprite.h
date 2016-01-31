@@ -19,7 +19,7 @@ class Rect;
 class Symbol;
 class BoundingBox;
 class Matrix;
-class IPropertySetting;
+class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
 
@@ -50,7 +50,7 @@ public:
 
 	virtual void BuildBounding();
 
-	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage);
+	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	virtual void SetTransform(const Vector& position, float angle);
 	const Vector& GetPosition() const { return m_pos; }

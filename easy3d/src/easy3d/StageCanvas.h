@@ -1,7 +1,7 @@
 #ifndef _E3D_STAGE_CANVAS_H_
 #define _E3D_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 #include "Matrix.h"
 #include "Camera.h"
@@ -9,10 +9,10 @@
 namespace e3d
 {
 
-class StageCanvas : public d2d::OnePassCanvas
+class StageCanvas : public ee::OnePassCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
+	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage);
 
 	virtual void Refresh();
 

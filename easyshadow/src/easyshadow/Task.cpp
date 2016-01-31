@@ -14,8 +14,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -23,7 +23,7 @@ void Task::Load(const char* filename)
 {
 	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
 	m_stage->LoadFromShadow();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Task::Store(const char* filename) const
@@ -36,7 +36,7 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

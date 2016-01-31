@@ -1,6 +1,6 @@
 #include "ImageVerticalFlip.h"
 
-namespace eimage
+namespace ee
 {
 
 ImageVerticalFlip::ImageVerticalFlip(const uint8_t* pixels, int width, int height)

@@ -1,7 +1,7 @@
 #ifndef _EASYMAP_PREVIEW_DIALOG_H_
 #define _EASYMAP_PREVIEW_DIALOG_H_
 
-#include <drag2d.h>
+
 
 namespace emap
 {
@@ -10,15 +10,15 @@ class PreviewDialog : public wxDialog
 {
 public:
 	PreviewDialog(wxWindow* parent, int width, int height, 
-		const std::vector<const d2d::Sprite*>& sprites);
+		const std::vector<const ee::Sprite*>& sprites);
 
 private:
 	void InitLayout();
 
 private:
-	std::vector<const d2d::Sprite*> m_sprites;
+	std::vector<const ee::Sprite*> m_sprites;
 
-	d2d::PlayControl m_control;
+	ee::PlayControl m_control;
 
 }; // PreviewDialog
 

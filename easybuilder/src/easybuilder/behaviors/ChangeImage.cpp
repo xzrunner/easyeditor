@@ -6,7 +6,7 @@
 
 using namespace ebuilder;
 
-ChangeImage::ChangeImage(Actor* actor, d2d::LibraryList* mediaList) 
+ChangeImage::ChangeImage(Actor* actor, ee::LibraryList* mediaList) 
 	: Behavior(e_ChangeImage, actor)
 	, m_mediaPage(NULL)
 {
@@ -19,7 +19,7 @@ ChangeImage::~ChangeImage()
 		m_mediaPage->getListObserver()->removeListener(this);
 }
 
-void ChangeImage::update(const d2d::LibraryList& list) 
+void ChangeImage::update(const ee::LibraryList& list) 
 {
 	if (!isSymbolInList(selected, list))
 		selected = list.getSymbol(0);

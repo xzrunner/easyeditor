@@ -1,16 +1,16 @@
 #ifndef _EPHYSICS_BODY_DATA_H_
 #define _EPHYSICS_BODY_DATA_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
 {
 
 class BodyData;
-typedef d2d::ResourcesMgr<BodyData> BodyDataMgr;
+typedef ee::ResourcesMgr<BodyData> BodyDataMgr;
 
-class BodyData : public d2d::Object
+class BodyData : public ee::Object
 {
 public:
 	enum Type
@@ -24,7 +24,7 @@ public:
 
 	struct FixtureData
 	{
-		std::vector<d2d::Vector> vertices;
+		std::vector<ee::Vector> vertices;
 		float density, friction, restitution;
 
 		FixtureData() {
@@ -70,7 +70,7 @@ private:
 
 	std::vector<FixtureData*> m_fixtures;
 
-	friend class d2d::ResourcesMgr<BodyData>;
+	friend class ee::ResourcesMgr<BodyData>;
 
 }; // BodyData
 

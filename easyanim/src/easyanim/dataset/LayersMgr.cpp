@@ -83,7 +83,7 @@ void LayersMgr::clear()
 	m_layers.clear();
 }
 
-void LayersMgr::removeSprite(d2d::ISprite* sprite)
+void LayersMgr::removeSprite(ee::ISprite* sprite)
 {
 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 	{

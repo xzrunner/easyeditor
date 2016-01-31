@@ -2,7 +2,7 @@
 #ifndef EBUILDER_STAGE_PANEL_H
 #define EBUILDER_STAGE_PANEL_H
 
-#include <drag2d.h>
+
 #include <wx/wx.h>
 #include <wx/notebook.h>
 

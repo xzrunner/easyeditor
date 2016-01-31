@@ -13,7 +13,7 @@ ShaderMgr* ShaderMgr::Instance()
 	if (!m_instance)
 	{
 		m_instance = new ShaderMgr();
-		d2d::ShaderContext::SetShader3DMgr(m_instance);
+		ee::ShaderContext::SetShader3DMgr(m_instance);
 	}
 	return m_instance;
 }
@@ -44,25 +44,25 @@ void ShaderMgr::NullProg()
 
 void ShaderMgr::Null()
 {
-	d2d::ShaderContext::Bind3d();
+	ee::ShaderContext::Bind3d();
 	Switch(NULL);
 }
 
 void ShaderMgr::Model()
 {
-	d2d::ShaderContext::Bind3d();
+	ee::ShaderContext::Bind3d();
 	Switch(m_model_shader);
 }
 
 void ShaderMgr::Shape()
 {
-	d2d::ShaderContext::Bind3d();
+	ee::ShaderContext::Bind3d();
 	Switch(m_shape_shader);
 }
 
 void ShaderMgr::Sprite()
 {
-	d2d::ShaderContext::Bind3d();
+	ee::ShaderContext::Bind3d();
 	Switch(m_sprite_shader);	
 }
 
@@ -71,17 +71,17 @@ void ShaderMgr::DrawModel(const IModel* model, const mat4& m)
 	m_model_shader->Draw(model, m);
 }
 
-void ShaderMgr::DrawShape(int type, const float* vertices, int count, const d2d::Colorf& col, bool force)
+void ShaderMgr::DrawShape(int type, const float* vertices, int count, const ee::Colorf& col, bool force)
 {
 	m_shape_shader->Draw(type, vertices, count, col, force);
 }
 
-void ShaderMgr::DrawShape(int type, const float* vertices, int count, d2d::Colorf* cols, bool force)
+void ShaderMgr::DrawShape(int type, const float* vertices, int count, ee::Colorf* cols, bool force)
 {
 	m_shape_shader->Draw(type, vertices, count, cols, force);
 }
 
-void ShaderMgr::DrawShape(int type, const float* vertices, int vcount, const d2d::Colorf& col, 
+void ShaderMgr::DrawShape(int type, const float* vertices, int vcount, const ee::Colorf& col, 
 						  unsigned short* indices, int icount)
 {
 	m_shape_shader->Draw(type, vertices, vcount, col, indices, icount);
@@ -115,7 +115,7 @@ void ShaderMgr::SetModelShader(ModelShader* shader, bool delete_old)
 		return;
 	}
 
-	std::vector<d2d::IShader*>::iterator itr;
+	std::vector<ee::IShader*>::iterator itr;
 	for (itr = m_shaders.begin(); itr != m_shaders.end(); ++itr) {
 		if (*itr == m_model_shader) {
 			m_shaders.erase(itr);

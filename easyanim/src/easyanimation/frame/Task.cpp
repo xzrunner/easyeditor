@@ -34,37 +34,37 @@ Task::Task(wxFrame* parent)
 
 	ViewMgr::Instance()->library->LoadFromConfig();
 
-	RegistSubject(d2d::ClearPanelSJ::Instance());
+	RegistSubject(ee::ClearPanelSJ::Instance());
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
 void Task::Load(const char* filepath)
 {
-	if (!d2d::FileType::IsType(filepath, d2d::FileType::e_anim) &&
-		!d2d::FileType::IsType(filepath, d2d::FileType::e_anis)) {
+	if (!ee::FileType::IsType(filepath, ee::FileType::e_anim) &&
+		!ee::FileType::IsType(filepath, ee::FileType::e_anis)) {
 		return;
 	}
 
 	try {
 		FileIO::Load(filepath);
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 }
 
 void Task::Store(const char* filepath) const
 {
-	if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+	if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 		FileIO::StoreSingle(filepath);
 		ViewMgr::Instance()->stage->OnSave();
-	} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anis)) {
+	} else if (ee::FileType::IsType(filepath, ee::FileType::e_anis)) {
 		FileIO::StoreTemplate(filepath);
 		ViewMgr::Instance()->stage->OnSave();
 	}
@@ -75,12 +75,12 @@ bool Task::IsDirty() const
 	return ViewMgr::Instance()->stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
-	ViewMgr::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
+	ViewMgr::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return ViewMgr::Instance()->stage;
 }
@@ -89,7 +89,7 @@ void Task::OnNotify(int sj_id, void* ud)
 {
 	switch (sj_id)
 	{
-	case d2d::MSG_CLEAR_PANEL:
+	case ee::MSG_CLEAR_PANEL:
 		DataMgr::Instance()->GetLayers().Clear();
 		ViewMgr::Instance()->library->Clear();
 		InsertLayerSJ::Instance()->Insert();
@@ -123,9 +123,9 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	ViewMgr* mgr = ViewMgr::Instance();
 
 	// library
-	d2d::LibraryPanel* library = new d2d::LibraryPanel(split);
+	ee::LibraryPanel* library = new ee::LibraryPanel(split);
 	wxWindow* nb = library->GetNotebook();
-	library->AddPage(ViewMgr::Instance()->img_page = new d2d::LibraryImagePage(nb));
+	library->AddPage(ViewMgr::Instance()->img_page = new ee::LibraryImagePage(nb));
 	library->AddPage(new ecomplex::LibraryPage(nb));
 	library->AddPage(new libanim::LibraryPage(nb));
 	library->AddPage(new emesh::LibraryPage(nb));
@@ -172,7 +172,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	// viewlist
-	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(parent);
+	ee::ViewlistPanel* viewlist = new ee::ViewlistPanel(parent);
 	ViewMgr::Instance()->viewlist = viewlist;
 	return viewlist;
 }

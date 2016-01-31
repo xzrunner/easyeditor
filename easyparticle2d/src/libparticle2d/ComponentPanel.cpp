@@ -18,13 +18,13 @@ ComponentPanel::ComponentPanel(wxWindow* parent, p2d_symbol* component,
 	}
 }
 
-void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
+void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
 	switch (key)
 	{
 	case PS_ANGLE:
-		m_component->angle_start = data.val0 * d2d::TRANS_DEG_TO_RAD;
-		m_component->angle_end = data.val1 * d2d::TRANS_DEG_TO_RAD;
+		m_component->angle_start = data.val0 * ee::TRANS_DEG_TO_RAD;
+		m_component->angle_end = data.val1 * ee::TRANS_DEG_TO_RAD;
 		break;
 	case PS_SCALE:
 		m_component->scale_start = data.val0 * 0.01f;
@@ -37,13 +37,13 @@ void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
 	}
 }
 
-void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
+void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
 {
 	switch (key)
 	{
 	case PS_ANGLE:
-		data.val0 = m_component->angle_start * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = m_component->angle_end * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = m_component->angle_start * ee::TRANS_RAD_TO_DEG;
+		data.val1 = m_component->angle_end * ee::TRANS_RAD_TO_DEG;
 		break;
 	case PS_SCALE:
 		data.val0 = m_component->scale_start * 100;
@@ -60,8 +60,8 @@ void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<d2d::Symbol*>(m_component->ud)->GetFilepath();
-	name = d2d::FileHelper::GetFilename(name);
+	std::string name = static_cast<ee::Symbol*>(m_component->ud)->GetFilepath();
+	name = ee::FileHelper::GetFilename(name);
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -87,9 +87,9 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		sizer->AddSpacer(50);
 		// Icon
 		{
-			std::string filepath = static_cast<d2d::Symbol*>(m_component->ud)->GetFilepath();
-			if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
-				d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
+			std::string filepath = static_cast<ee::Symbol*>(m_component->ud)->GetFilepath();
+			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				sizer->Add(panel);
 			}
 			sizer->AddSpacer(10);
@@ -98,16 +98,16 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 	}
 	// Angle
 	{
-		d2d::SliderCtrlTwo* s_angle = new d2d::SliderCtrlTwo(this, LANG[LK_ANGLE], "angle", this, PS_ANGLE, 
-			d2d::SliderItem(LANG[LK_START], "start", 0, -360, 360), d2d::SliderItem(LANG[LK_END], "end", 0, -360, 360));
+		ee::SliderCtrlTwo* s_angle = new ee::SliderCtrlTwo(this, LANG[LK_ANGLE], "angle", this, PS_ANGLE, 
+			ee::SliderItem(LANG[LK_START], "start", 0, -360, 360), ee::SliderItem(LANG[LK_END], "end", 0, -360, 360));
 		top_sizer->Add(s_angle);
 		top_sizer->AddSpacer(10);
 		m_sliders.push_back(s_angle);	
 	}
 	// Scale
 	{
-		d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
-			d2d::SliderItem(LANG[LK_START], "start", 100, 0, 500), d2d::SliderItem(LANG[LK_END], "end", 100, 0, 500));
+		ee::SliderCtrlTwo* s_scale = new ee::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
+			ee::SliderItem(LANG[LK_START], "start", 100, 0, 500), ee::SliderItem(LANG[LK_END], "end", 100, 0, 500));
 		top_sizer->Add(s_scale);
 		top_sizer->AddSpacer(10);
 		m_sliders.push_back(s_scale);	
@@ -142,8 +142,8 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 	}
 	// Alpha
 	{
-		d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
-			d2d::SliderItem(LANG[LK_START], "start", 100, 0, 100), d2d::SliderItem(LANG[LK_END], "end", 100, 0, 100));
+		ee::SliderCtrlTwo* s_alpha = new ee::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
+			ee::SliderItem(LANG[LK_START], "start", 100, 0, 100), ee::SliderItem(LANG[LK_END], "end", 100, 0, 100));
 		top_sizer->Add(s_alpha);
 		top_sizer->AddSpacer(10);
 		m_sliders.push_back(s_alpha);
@@ -177,10 +177,10 @@ void ComponentPanel::OnSetAddColEnd(wxCommandEvent& event)
 
 void ComponentPanel::UpdateColor(ps_color4f& color)
 {
-	d2d::Colorf tmp;
+	ee::Colorf tmp;
 	memcpy(&tmp.r, &color.r, sizeof(color));
 
-	d2d::RGBColorSettingDlg dlg(this, NULL, tmp);
+	ee::RGBColorSettingDlg dlg(this, NULL, tmp);
 	if (dlg.ShowModal() == wxID_OK) {
 		tmp = dlg.GetColor();
 		memcpy(&color.r, &tmp.r, sizeof(color));

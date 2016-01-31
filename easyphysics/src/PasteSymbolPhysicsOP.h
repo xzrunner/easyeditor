@@ -1,7 +1,7 @@
 #ifndef _EPHYSICS_PASTE_SYMBOL_PHYSICS_OP_H_
 #define _EPHYSICS_PASTE_SYMBOL_PHYSICS_OP_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
@@ -9,11 +9,11 @@ namespace ephysics
 
 class PhysicsPanelImpl;
 
-class PasteSymbolPhysicsOP : public d2d::PasteSymbolOP
+class PasteSymbolPhysicsOP : public ee::PasteSymbolOP
 {
 public:
-	PasteSymbolPhysicsOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, float* pScale = NULL);
+	PasteSymbolPhysicsOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, float* pScale = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 

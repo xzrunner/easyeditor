@@ -2,14 +2,14 @@
 
 #include "dataset/WholeSkeleton.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class Sprite;
 	class SkeletonSymbolList;
 
-	class SkeletonEditPanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
+	class SkeletonEditPanel : public ee::EditPanel, public ee::MultiSpritesImpl
 	{
 	public:
 		static const wxString BONE_SYMBOL_LIST_NAME;
@@ -19,16 +19,16 @@ namespace eanim
 			SkeletonSymbolList* symbolList, wxTextCtrl* layerTextCtrl);
 
 		//
-		// d2d::MultiSpritesImpl interface
+		// ee::MultiSpritesImpl interface
 		//
-		virtual void traverseSprites(d2d::IVisitor& visitor, 
-			d2d::TraverseType type = d2d::e_allExisting,
+		virtual void traverseSprites(ee::IVisitor& visitor, 
+			ee::TraverseType type = ee::e_allExisting,
 			bool order = true) const;
-		virtual void removeSprite(d2d::ISprite* sprite);
-		virtual void insertSprite(d2d::ISprite* sprite) {}
+		virtual void removeSprite(ee::ISprite* sprite);
+		virtual void insertSprite(ee::ISprite* sprite) {}
 		virtual void clearSprites() {}
 
-		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up) {}
+		virtual void resetSpriteOrder(ee::ISprite* sprite, bool up) {}
 
 		void insertSprite(int symbolIndex, wxCoord x, wxCoord y);
 

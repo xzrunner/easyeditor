@@ -5,13 +5,13 @@
 namespace etexpacker
 {
 
-void MaxRectsBinaryArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
+void MaxRectsBinaryArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 	int sz = sprites.size();
 	std::vector<libtexpacker::RectSize> rects;
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		d2d::Rect r = sprites[i]->GetSymbol().GetSize();
+		ee::Rect r = sprites[i]->GetSymbol().GetSize();
 		rects.push_back(libtexpacker::RectSize(r.Width(), r.Height()));
 	}
 	std::vector<libtexpacker::Rect> output;
@@ -21,9 +21,9 @@ void MaxRectsBinaryArrange::arrange(const std::vector<d2d::ImageSprite*>& sprite
 
 	assert(sprites.size() == output.size());
 	for (int i = 0; i < sz; ++i) {
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 		const libtexpacker::Rect& r = output[i];
-		d2d::Vector pos;
+		ee::Vector pos;
 		pos.x = r.x + r.width * 0.5f;
 		pos.y = r.y + r.height * 0.5f;
 		sprite->SetTransform(pos, sprite->GetAngle());

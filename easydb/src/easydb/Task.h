@@ -1,7 +1,7 @@
 #ifndef EDB_TASK_H
 #define EDB_TASK_H
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace edb
@@ -25,7 +25,7 @@ namespace edb
 		~Task();
 
 	private:
-		void initLayout();
+		void InitLayout();
 
 	private:
 		wxWindow* m_root;

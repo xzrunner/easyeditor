@@ -1,13 +1,13 @@
 #ifndef EDB_STAGE_CANVAS_H
 #define EDB_STAGE_CANVAS_H
 
-#include <drag2d.h>
+
 
 namespace edb
 {
 	class StagePanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
+	class StageCanvas : public ee::OrthoCanvas
 	{
 	public:
 		StageCanvas(StagePanel* editPanel);
@@ -22,7 +22,7 @@ namespace edb
 	private:
 		StagePanel* m_stage_panel;
 
-		d2d::SpriteBatch m_batch;
+		ee::SpriteBatch m_batch;
 
 	}; // StageCanvas
 }

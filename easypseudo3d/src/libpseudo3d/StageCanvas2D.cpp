@@ -5,10 +5,10 @@
 namespace epseudo3d
 {
 
-StageCanvas2D::StageCanvas2D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
-	: d2d::OrthoCanvas(stage_wnd, stage)
+StageCanvas2D::StageCanvas2D(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
+	: ee::OrthoCanvas(stage_wnd, stage)
 {
-	SetBgColor(d2d::BLACK);
+	SetBgColor(ee::BLACK);
 
 	m_scene = new Projection2DScene(stage);
 }

@@ -1,7 +1,7 @@
 #ifndef _E3D_CONTROL_CAMERA_OP_H_
 #define _E3D_CONTROL_CAMERA_OP_H_
 
-#include <drag2d.h>
+
 
 #include "Vector.h"
 
@@ -10,10 +10,10 @@ namespace e3d
 
 class StageCanvas;
 
-class ControlCameraOP : public d2d::AbstractEditOP
+class ControlCameraOP : public ee::EditOP
 {
 public:
-	ControlCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
+	ControlCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);

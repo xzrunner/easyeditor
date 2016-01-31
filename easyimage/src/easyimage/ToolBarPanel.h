@@ -1,20 +1,20 @@
 #ifndef _EASYIMAGE_TOOLBAR_PANEL_H_
 #define _EASYIMAGE_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, StagePanel* stage);
+	ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library, StagePanel* stage);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 }; // ToolbarPanel
 

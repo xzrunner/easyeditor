@@ -1,16 +1,16 @@
 #ifndef _EASYMAP_PREVIEW_CANVAS_H_
 #define _EASYMAP_PREVIEW_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace emap
 {
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public ee::OrthoCanvas
 {
 public:
-	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::PlayControl& control, const std::vector<const d2d::Sprite*>& sprites);
+	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::PlayControl& control, const std::vector<const ee::Sprite*>& sprites);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -18,9 +18,9 @@ protected:
 	virtual void OnTimer();
 
 private:
-	d2d::PlayControl& m_control;
+	ee::PlayControl& m_control;
 
-	std::vector<const d2d::Sprite*> m_sprites;
+	std::vector<const ee::Sprite*> m_sprites;
 
 }; // PreviewCanvas
 

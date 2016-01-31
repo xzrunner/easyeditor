@@ -34,14 +34,14 @@ bool ResizeOP::OnMouseLeftUp(int x, int y)
 
 bool ResizeOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	Symbol* symbol = dynamic_cast<Symbol*>(m_stage->getPatchSymbol());
 	if (m_status != e_null && symbol)
 	{
 		float width, height;
 
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 
 		Scale9Type type = symbol->GetScale9Data().GetType();
 		if (type == e_9Grid || 
@@ -69,7 +69,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		m_resizeCmpt->setSize(width, height);
 		symbol->ResizeScale9(width, height);
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -77,7 +77,7 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 
 bool ResizeOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) return true;
+	if (ee::ZoomViewOP::OnActive()) return true;
 
 	m_toolbar->setComposeOP(false);
 	m_stage->rebuildPatchSymbol();

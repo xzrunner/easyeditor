@@ -24,7 +24,7 @@ IconBuilder::~IconBuilder()
 	}
 }
 
-void IconBuilder::Traverse(d2d::Visitor& visitor) const
+void IconBuilder::Traverse(ee::Visitor& visitor) const
 {
 	std::multimap<const eicon::Symbol*, Value>::const_iterator
 		itr = m_map_data.begin();

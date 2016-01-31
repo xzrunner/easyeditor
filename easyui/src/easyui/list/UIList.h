@@ -1,7 +1,7 @@
 #ifndef _EASYUI_LIST_UI_LIST_H_
 #define _EASYUI_LIST_UI_LIST_H_
 
-#include <drag2d.h>
+
 
 #include <json/json.h>
 
@@ -15,17 +15,17 @@ class UIList
 public:
 	UIList();
 
-	bool InsertSprite(d2d::Sprite* sprite, int idx = -1);
+	bool InsertSprite(ee::Sprite* sprite, int idx = -1);
 	bool ClearAllSprite();
-	void TraverseSprites(d2d::Visitor& visitor) const;
+	void TraverseSprites(ee::Visitor& visitor) const;
 
 	void StoreToFile(const char* filename) const;
 	void LoadFromFile(const char* filename);
 
 	bool ReFilling();
-	bool Arrange(const d2d::Sprite* spr);
+	bool Arrange(const ee::Sprite* spr);
 
-	d2d::Rect& GetClipbox() { return m_clipbox; }
+	ee::Rect& GetClipbox() { return m_clipbox; }
 
 	bool IsHoriEnable() const { return m_horizontal; }
 	bool IsVertEnable() const { return m_vertical; }
@@ -37,11 +37,11 @@ private:
 	bool Arrange(float hori_space, float vert_space);
 
 private:
-	d2d::Rect m_clipbox;
+	ee::Rect m_clipbox;
 
-	std::vector<d2d::Sprite*> m_items;
-//	d2d::Sprite *m_base_spr, *m_hori_spr, *m_vert_spr;
-	d2d::Sprite* m_item_spr;
+	std::vector<ee::Sprite*> m_items;
+//	ee::Sprite *m_base_spr, *m_hori_spr, *m_vert_spr;
+	ee::Sprite* m_item_spr;
 
 	bool m_horizontal;
 	bool m_vertical;

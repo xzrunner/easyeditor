@@ -43,9 +43,9 @@ void LRPacker::Run(int argc, char *argv[])
 
 	std::string tmp_dir = argv[3];
 	std::string out_dir = argv[4];
-	std::string tmp_lr_file = tmp_dir + "\\" + d2d::FileHelper::GetFilenameWithExtension(argv[2]);
+	std::string tmp_lr_file = tmp_dir + "\\" + ee::FileHelper::GetFilenameWithExtension(argv[2]);
 
-	bool only_json = d2d::StringHelper::FromString<bool>(argv[5]);
+	bool only_json = ee::StringHelper::FromString<bool>(argv[5]);
 
 	ee::FileHelper::MkDir(tmp_dir, true);
 	ee::FileHelper::MkDir(out_dir, true);
@@ -72,7 +72,7 @@ void LRPacker::Run(int argc, char *argv[])
 
 	// 5
 	if (only_json != 1) {
-		int LOD = d2d::StringHelper::FromString<int>(argv[6]);
+		int LOD = ee::StringHelper::FromString<int>(argv[6]);
 		if (LOD != 0) {
 			glfwInit();
 			if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
@@ -85,7 +85,7 @@ void LRPacker::Run(int argc, char *argv[])
 				return;
 			}
 
-			d2d::ShaderMgr::Instance()->reload();
+			ee::ShaderMgr::Instance()->reload();
 		}
 		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD);
 	}
@@ -100,7 +100,7 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	Json::Value val;
 
 	// 		std::string trim_file = argv[6];
-	// 		trim_file = d2d::FileHelper::getRelativePath(tmp_dir, trim_file);
+	// 		trim_file = ee::FileHelper::GetRelativePath(tmp_dir, trim_file);
 	// 		val["trim file"] = trim_file;
 
 	Json::Value pkg_val;
@@ -116,19 +116,19 @@ void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file
 	++idx;
 	{
 		int i = 0;
-		std::string filename = "name_" + d2d::StringHelper::ToString(i) + "_complex.json";
-		std::string dir = d2d::FileHelper::GetFileDir(tmp_lr_file);
-		while (d2d::FileHelper::IsFileExist(dir + "\\" + filename)) {
+		std::string filename = "name_" + ee::StringHelper::ToString(i) + "_complex.json";
+		std::string dir = ee::FileHelper::GetFileDir(tmp_lr_file);
+		while (ee::FileHelper::IsFileExist(dir + "\\" + filename)) {
 			pkg_val["json list"][idx++] = filename;
 			++i;
-			filename = "name_" + d2d::StringHelper::ToString(i) + "_complex.json";
+			filename = "name_" + ee::StringHelper::ToString(i) + "_complex.json";
 		}
 	}
 
 	// 		int idx = 0;
 	// 		pkg_val["json list"][idx] = ".";
 
-	std::string _out_dir = d2d::FileHelper::GetRelativePath(tmp_dir, out_dir);
+	std::string _out_dir = ee::FileHelper::GetRelativePath(tmp_dir, out_dir);
 	pkg_val["output dir"] = _out_dir;
 
 	pkg_val["texture type"] = "png";

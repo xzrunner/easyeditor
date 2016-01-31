@@ -6,7 +6,7 @@ namespace emodeling
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
 	m_bg_color.Set(0, 0, 0, 1);
@@ -32,11 +32,11 @@ void StageCanvas::DrawGuideLines() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<d2d::Sprite*> sprites;
-	m_stage_panel->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_stage_panel->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
 		DrawUtils::drawBody(static_cast<libmodeling::Body*>(sprites[i]->GetUserData()), DrawUtils::e_default);
 	}
 }
@@ -44,12 +44,12 @@ void StageCanvas::DrawSprites() const
 void StageCanvas::DrawCrossLine() const
 {
 	const float halfEdge = 1000.0f;
-	std::vector<d2d::Vector> vertices(4);
+	std::vector<ee::Vector> vertices(4);
 	vertices[0].x = -halfEdge;
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	d2d::PrimitiveDraw::DrawLines(vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
+	ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
 }
 
 void StageCanvas::DrawLines() const
@@ -57,41 +57,41 @@ void StageCanvas::DrawLines() const
  	const float halfEdge = 100.0f;
 	// green
 	{
-		std::vector<d2d::Vector> vertices;
+		std::vector<ee::Vector> vertices;
 		size_t size = halfEdge * 2 * 2 * 2;
 		vertices.reserve(size);
 		for (float x = -halfEdge; x <= halfEdge; x += 1.0f)
 		{
-			vertices.push_back(d2d::Vector(x, -halfEdge));
-			vertices.push_back(d2d::Vector(x, halfEdge));
+			vertices.push_back(ee::Vector(x, -halfEdge));
+			vertices.push_back(ee::Vector(x, halfEdge));
 		}
 		for (float y = -halfEdge; y <= halfEdge; y += 1.0f)
 		{
-			vertices.push_back(d2d::Vector(-halfEdge, y));
-			vertices.push_back(d2d::Vector(halfEdge, y));
+			vertices.push_back(ee::Vector(-halfEdge, y));
+			vertices.push_back(ee::Vector(halfEdge, y));
 		}
-		d2d::PrimitiveDraw::DrawLines(vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
+		ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
 	}
 	// red
 	{
-		std::vector<d2d::Vector> vertices;
+		std::vector<ee::Vector> vertices;
 		size_t size = halfEdge * 0.1f * 2 * 2 * 2;
 		vertices.reserve(size);
 		for (float x = -halfEdge; x <= halfEdge; x += 10)
 		{
-			vertices.push_back(d2d::Vector(x, -halfEdge));
-			vertices.push_back(d2d::Vector(x, halfEdge));
+			vertices.push_back(ee::Vector(x, -halfEdge));
+			vertices.push_back(ee::Vector(x, halfEdge));
 		}
 		for (float y = -halfEdge; y <= halfEdge; y += 10)
 		{
-			vertices.push_back(d2d::Vector(-halfEdge, y));
-			vertices.push_back(d2d::Vector(halfEdge, y));
+			vertices.push_back(ee::Vector(-halfEdge, y));
+			vertices.push_back(ee::Vector(halfEdge, y));
 		}
-		d2d::PrimitiveDraw::DrawLines(vertices, d2d::Colorf(0.9f, 0.7f, 0.7f), 1);
+		ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.9f, 0.7f, 0.7f), 1);
 	}
 }
 
-void StageCanvas::DrawJointVisitor::Visit(d2d::Object* object, bool& next)
+void StageCanvas::DrawJointVisitor::Visit(ee::Object* object, bool& next)
 {
 	libmodeling::Joint* joint = static_cast<libmodeling::Joint*>(object);
 	joint->draw(libmodeling::Joint::e_default);

@@ -31,7 +31,7 @@ namespace cc
 
 		std::vector<SceneItem*> scenes;
 		Context::Instance()->library->getSceneList()->traverse(
-			d2d::FetchAllVisitor<SceneItem>(scenes));
+			ee::FetchAllVisitor<SceneItem>(scenes));
 
 		for (size_t i = 0, n = scenes.size(); i < n; ++i)
 			insertPage(*scenes[i]);
@@ -168,7 +168,7 @@ namespace cc
 		// for scene_name
 		std::vector<SceneItem*> scenes;
 		Context::Instance()->library->getSceneList()->traverse(
-			d2d::FetchAllVisitor<SceneItem>(scenes));
+			ee::FetchAllVisitor<SceneItem>(scenes));
 
 		cGen.line("#include \"AppDelegate.h\"");
 		for (size_t i = 0, n = scenes.size(); i < n; ++i)
@@ -393,7 +393,7 @@ namespace cc
 		std::string name = actor.name;
 
 		wxString path = actor.getSymbol().getFilepath();
-		std::string filename = "\""+d2d::FilenameTools::getFilenameWithExtension(path)+"\"";
+		std::string filename = "\""+ee::FilenameTools::getFilenameWithExtension(path)+"\"";
 
 		// CCSprite* name = CCSprite::create("filename");
 		std::string new_actor = cpp::call("CCSprite::create", 1, filename.c_str());
@@ -439,7 +439,7 @@ namespace cc
 		std::string menuName = "menu"+actorName;
 
 		wxString path = actor.getSymbol().getFilepath();
-		std::string filename = "\""+d2d::FilenameTools::getFilenameWithExtension(path)+"\"";
+		std::string filename = "\""+ee::FilenameTools::getFilenameWithExtension(path)+"\"";
 
 		// void menuCallback(CCObject* pSender);
 		cpp::funcDef(*content.hCallbackGen, "void", funcName, 1, "CCObject* pSender");
@@ -499,7 +499,7 @@ namespace cc
 			{
 				ChangeImage* changeImage = static_cast<ChangeImage*>(behavior);
 				std::string path = changeImage->selected->getFilepath();
-				std::string filename = "\""+d2d::FilenameTools::getFilenameWithExtension(path)+"\"";
+				std::string filename = "\""+ee::FilenameTools::getFilenameWithExtension(path)+"\"";
 
 				// CCTextureCache::sharedTextureCache()->addImage(tex_name)
 				std::string sTex = cpp::call("CCTextureCache::sharedTextureCache()->addImage", 1, filename.c_str());
@@ -511,7 +511,7 @@ namespace cc
 			{
 				std::vector<SceneItem*> scenes;
 				Context::Instance()->library->getSceneList()->traverse(
-					d2d::FetchAllVisitor<SceneItem>(scenes));
+					ee::FetchAllVisitor<SceneItem>(scenes));
 
 				ChangeScene* changeScene = static_cast<ChangeScene*>(behavior);
 				int index = -1;
@@ -550,7 +550,7 @@ namespace cc
 				std::string ex, ey;
 				buildPosition(move->end, ex, ey);
 
-				const float duration = d2d::Math::getDistance(move->start, move->end) / move->speed;
+				const float duration = ee::Math::getDistance(move->start, move->end) / move->speed;
 				std::string _duration = wxString::FromDouble(duration, 1) + "f";
 
 				// ccp(x, y)
@@ -565,7 +565,7 @@ namespace cc
 			{
 				Rotate* rotate = static_cast<Rotate*>(behavior);
 
-				std::string end = wxString::FromDouble(rotate->end/**180/d2d::PI*/, 1) + "f";
+				std::string end = wxString::FromDouble(rotate->end/**180/ee::PI*/, 1) + "f";
 
 				const float duration = fabs(rotate->end - rotate->start) / rotate->speed;
 				std::string _duration = wxString::FromDouble(duration, 1) + "f";
@@ -579,7 +579,7 @@ namespace cc
 		}
 	}
 
-	void Builder::buildPosition(const d2d::Vector& pos, std::string& x, std::string& y)
+	void Builder::buildPosition(const ee::Vector& pos, std::string& x, std::string& y)
 	{
 		const float px = pos.x + Game::WIDTH * 0.5f,
 			py = pos.y + Game::HEIGHT * 0.5f;

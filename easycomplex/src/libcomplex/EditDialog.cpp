@@ -66,7 +66,7 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx)
 
 wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 {
-	m_viewlist = new d2d::ViewlistPanel(parent);
+	m_viewlist = new ee::ViewlistPanel(parent);
 	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 	return m_viewlist;
 }
@@ -78,7 +78,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	d2d::ConfirmDialog dlg(this);
+	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES) 
 	{
@@ -86,7 +86,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		const std::string& filepath = m_symbol->GetFilepath();
 		FileStorer::Store(filepath.c_str(), m_symbol);
 		m_symbol->RefreshThumbnail(filepath, true);
-		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	} 
 	else if (val == wxID_NO) 
@@ -99,7 +99,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 void EditDialog::LoadSymbolInfo()
 {
 	for (size_t i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
-		m_library->AddSymbol(const_cast<d2d::Symbol*>(&m_symbol->m_sprites[i]->GetSymbol()));
+		m_library->AddSymbol(const_cast<ee::Symbol*>(&m_symbol->m_sprites[i]->GetSymbol()));
 		m_viewlist->Insert(m_symbol->m_sprites[i]);
 	}
 }

@@ -7,7 +7,7 @@ namespace etext
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -16,51 +16,53 @@ StageCanvas::StageCanvas(StagePanel* stage)
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx,
-						 d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
+						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
+	: ee::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	std::vector<Sprite*> sprites;
+	m_sprite_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
+		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		ee::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
-	d2d::SpriteRenderer::Instance()->Draw(m_edited);
+	ee::SpriteRenderer::Instance()->Draw(m_edited);
 
 	DrawSprBound();
 
 	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->DebugDraw();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
 	}
 #endif
 }
 
 void StageCanvas::DrawSprBound() const
 {
-	d2d::Matrix mt;
+	ee::Matrix mt;
 	m_edited->GetTransMatrix(mt);
 
 	const Sprite* font = static_cast<const Sprite*>(m_edited);
 	int w, h;
 	font->GetSize(w, h);
 
-	d2d::ShapeStyle style;
+	ee::ShapeStyle style;
 	style.fill = false;
 	style.color.Set(0.8f, 0.4f, 0.4f);
 
-	d2d::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, style);
+	ee::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, style);
 }
 
 }

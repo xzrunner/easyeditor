@@ -2,7 +2,7 @@
 #ifndef EMODELING_CONTEXT_H
 #define EMODELING_CONTEXT_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling { class World; }
 
@@ -14,8 +14,8 @@ namespace emodeling
 	class Context
 	{
 	public:
-		d2d::PropertySettingPanel* property;
-		d2d::LibraryPanel* library;
+		ee::PropertySettingPanel* property;
+		ee::LibraryPanel* library;
 		StagePanel* stage;
 		ToolbarPanel* toolbar;
 

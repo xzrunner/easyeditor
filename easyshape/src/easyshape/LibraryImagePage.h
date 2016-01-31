@@ -11,7 +11,7 @@ class LibraryImagePage : public LibraryPage
 public:
 	LibraryImagePage(wxWindow* parent);
 
-	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 protected:
 	virtual void onAddPress(wxCommandEvent& event);

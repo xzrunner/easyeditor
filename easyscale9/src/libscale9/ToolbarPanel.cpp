@@ -5,15 +5,15 @@
 
 namespace escale9
 {
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::EditPanel* stage, Symbol* symbol)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::EditPanel* stage, Symbol* symbol)
 	: wxPanel(parent)
 	, m_stage(stage)
 	, m_symbol(symbol)
 {
-	initLayout();
+	InitLayout();
 }
 
-void ToolbarPanel::initLayout()
+void ToolbarPanel::InitLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("size"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -39,11 +39,11 @@ void ToolbarPanel::initLayout()
 
 void ToolbarPanel::onChangeSize(wxSpinEvent& event)
 {
-	d2d::SetWndDirtySJ::Instance()->SetDirty();
+	ee::SetWndDirtySJ::Instance()->SetDirty();
 	const float w = m_wSpin->GetValue(),
 		h = m_hSpin->GetValue();
 	m_symbol->ResizeScale9(w, h);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

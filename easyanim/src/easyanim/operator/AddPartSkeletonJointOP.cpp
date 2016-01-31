@@ -5,8 +5,8 @@
 namespace eanim
 {
 
-AddPartSkeletonJointOP::AddPartSkeletonJointOP(d2d::EditPanel* editPanel, PartSkeleton* skeleton)
-	: d2d::ZoomViewOP(editPanel, false)
+AddPartSkeletonJointOP::AddPartSkeletonJointOP(ee::EditPanel* editPanel, PartSkeleton* skeleton)
+	: ee::ZoomViewOP(editPanel, false)
 	, m_skeleton(skeleton)
 {
 	m_lastPos.setInvalid();
@@ -49,7 +49,7 @@ bool AddPartSkeletonJointOP::onDraw() const
 
 	m_skeleton->onDraw();
 
-	d2d::Vector last = m_skeleton->topJoint();
+	ee::Vector last = m_skeleton->topJoint();
 	if (last.isValid())
 	{
 		glLineWidth(2.0f);

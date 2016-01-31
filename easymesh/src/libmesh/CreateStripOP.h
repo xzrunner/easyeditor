@@ -1,14 +1,14 @@
 #ifndef _EASYMESH_CREATE_STRIP_OP_H_
 #define _EASYMESH_CREATE_STRIP_OP_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
 
 class StagePanel;
 
-class CreateStripOP : public d2d::ZoomViewOP
+class CreateStripOP : public ee::ZoomViewOP
 {
 public:
 	CreateStripOP(StagePanel* stage);
@@ -24,9 +24,9 @@ public:
 private:
 	StagePanel* m_stage;
 
-	d2d::Vector* m_selected;
+	ee::Vector* m_selected;
 
-	d2d::Vector m_last_right;
+	ee::Vector m_last_right;
 
 }; // CreateStripOP
 

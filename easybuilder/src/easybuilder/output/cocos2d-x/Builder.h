@@ -2,7 +2,7 @@
 #ifndef EBUILDER_CC_BUILDER_H
 #define EBUILDER_CC_BUILDER_H
 
-#include <drag2d.h>
+
 #include <easybuilder.h>
 
 #include "../CodePageBuilder.h"
@@ -66,7 +66,7 @@ namespace cc
 		void buildBehavior(const std::string& name, Behavior* behavior, 
 			CodeGenerator& gen, CodeGenerator& genInclude);
 
-		static void buildPosition(const d2d::Vector& pos, std::string& x, std::string& y);
+		static void buildPosition(const ee::Vector& pos, std::string& x, std::string& y);
 
 	private:
 		static const int PAGE_OFFSET = 5;	// designer page + main + AppDelegate

@@ -2,7 +2,7 @@
 
 #include "EditMeshUtility.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -10,10 +10,10 @@ namespace eanim
 	struct MeshNode;
 	class MeshTri;
 
-	class EditSpriteMeshOP : public d2d::ZoomViewOP, private EditMeshUtility
+	class EditSpriteMeshOP : public ee::ZoomViewOP, private EditMeshUtility
 	{
 	public:
-		EditSpriteMeshOP(d2d::EditPanel* editPanel, Mesh* mesh);
+		EditSpriteMeshOP(ee::EditPanel* editPanel, Mesh* mesh);
 
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);
@@ -23,7 +23,7 @@ namespace eanim
 		virtual bool clear();
 
 	private:
-		MeshTri* selectTriByPos(const d2d::Vector& pos) const;
+		MeshTri* selectTriByPos(const ee::Vector& pos) const;
 
 	private:
 		Mesh* m_mesh;
@@ -31,7 +31,7 @@ namespace eanim
 		MeshNode* m_selectedNode;
 		MeshTri* m_selectedTri;
 
-		d2d::Vector m_lastPos;
+		ee::Vector m_lastPos;
 
 	}; // EditSpriteMeshOP
 }

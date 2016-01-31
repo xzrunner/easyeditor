@@ -2,7 +2,7 @@
 #ifndef EBUILDER_LIST_OBSERVER_H
 #define EBUILDER_LIST_OBSERVER_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -12,7 +12,7 @@ namespace ebuilder
 	class ListObserver
 	{
 	public:
-		ListObserver(d2d::LibraryList* list);
+		ListObserver(ee::LibraryList* list);
 		
 		void registerListener(Behavior* lsn);
 		void registerListener(BehaviorPanel* lsn);
@@ -23,7 +23,7 @@ namespace ebuilder
 		void updateListeners();
 
 	private:
-		d2d::LibraryList* m_list;
+		ee::LibraryList* m_list;
 
 		std::vector<Behavior*> m_listeners;
 		std::vector<BehaviorPanel*> m_uiListeners;

@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <epbin.h>
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -47,7 +47,7 @@ void BinEP::Trigger(const std::string& filename, const std::string& type,
 	} else if (type == "pkm") {
 		t = epbin::TT_PKM;
 	} else {
-		throw d2d::Exception("BinEP::Trigger unknown type: %s\n", type);
+		throw ee::Exception("BinEP::Trigger unknown type: %s\n", type);
 	}
 	epbin::BinaryEPP epp(filename, t);
 	epp.Pack(output + ".epp");

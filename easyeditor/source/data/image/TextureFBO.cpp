@@ -1,6 +1,5 @@
 #include "TextureFBO.h"
-
-//#include "render/FBO.h"
+#include "FBO.h"
 
 namespace ee
 {
@@ -8,30 +7,27 @@ namespace ee
 TextureFBO::TextureFBO(const FBO* fbo)
 	: m_fbo(fbo)
 {
-//	m_fbo->Retain();
+	m_fbo->Retain();
 }
 
 TextureFBO::~TextureFBO()
 {
-//	m_fbo->Release();
+	m_fbo->Release();
 }
 
 unsigned int TextureFBO::GetTexID() const 
 { 
-//	return m_fbo->GetTexID(); 
-	return 0;
+	return m_fbo->GetTexID(); 
 }
 
 int TextureFBO::GetWidth() const
 {
-//	return m_fbo->GetWidth();
-	return 0;
+	return m_fbo->GetWidth();
 }
 
 int TextureFBO::GetHeight() const
 {
-//	return m_fbo->GetHeight();
-	return 0;
+	return m_fbo->GetHeight();
 }
 
 int TextureFBO::GetChannels() const

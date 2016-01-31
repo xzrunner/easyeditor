@@ -17,7 +17,7 @@ CosineShape::CosineShape(const CosineShape& curve)
 	m_midPoints = curve.m_midPoints;
 }
 
-CosineShape::CosineShape(const std::vector<d2d::Vector>& vertices)
+CosineShape::CosineShape(const std::vector<ee::Vector>& vertices)
 	: ChainShape(vertices, false)
 {
 	setMidPoints();
@@ -33,7 +33,7 @@ CosineShape* CosineShape::Clone() const
 	return new CosineShape(*this);	
 }
 
-void CosineShape::Translate(const d2d::Vector& offset)
+void CosineShape::Translate(const ee::Vector& offset)
 {
 	ChainShape::Translate(offset);
 	for (int i = 0, n = m_midPoints.size(); i < n; ++i) {
@@ -41,37 +41,37 @@ void CosineShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void CosineShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
+void CosineShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	if (m_vertices.empty()) return;
 
-	d2d::PrimitiveDraw::DrawPolyline(m_midPoints, color.multi, m_isLoop);
-	if (d2d::SettingData::ctl_pos_sz != 0) {
-		d2d::PrimitiveDraw::DrawCircles(m_vertices, d2d::SettingData::ctl_pos_sz, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
+	ee::PrimitiveDraw::DrawPolyline(m_midPoints, color.multi, m_isLoop);
+	if (ee::SettingData::ctl_pos_sz != 0) {
+		ee::PrimitiveDraw::DrawCircles(m_vertices, ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 	}
-	if (d2d::SettingData::ctl_pos_sz != 0) {
-		d2d::PrimitiveDraw::DrawCircles(m_midPoints, d2d::SettingData::ctl_pos_sz * 0.5f, true, 2, d2d::Colorf(0.8f, 0.8f, 0.4f));
+	if (ee::SettingData::ctl_pos_sz != 0) {
+		ee::PrimitiveDraw::DrawCircles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true, 2, ee::Colorf(0.8f, 0.8f, 0.4f));
 	}
 }
 
-d2d::IPropertySetting* CosineShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
+ee::PropertySetting* CosineShape::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return NULL;
 }
 
-void CosineShape::insertVertices(size_t index, const d2d::Vector& pos)
+void CosineShape::insertVertices(size_t index, const ee::Vector& pos)
 {
 	ChainShape::Add(index, pos);
 	setMidPoints();
 }
 
-void CosineShape::removeVertices(const d2d::Vector& pos)
+void CosineShape::removeVertices(const ee::Vector& pos)
 {
 	ChainShape::Remove(pos);
 	setMidPoints();
 }
 
-void CosineShape::changeVertices(const d2d::Vector& from, const d2d::Vector& to)
+void CosineShape::changeVertices(const ee::Vector& from, const ee::Vector& to)
 {
 	ChainShape::Change(from, to);
 	setMidPoints();
@@ -88,11 +88,11 @@ void CosineShape::setMidPoints()
 
 	if (m_vertices.size() <= 1) return;
 
-	std::vector<d2d::Vector> smooth;
-	d2d::CosineSmooth::Do(m_vertices, SAMPLING_WIDTH, smooth);
+	std::vector<ee::Vector> smooth;
+	ee::CosineSmooth::Do(m_vertices, SAMPLING_WIDTH, smooth);
 
 #ifdef SIMPLIFY
-	d2d::DouglasPeucker::Do(smooth, 0.75f, m_midPoints);
+	ee::DouglasPeucker::Do(smooth, 0.75f, m_midPoints);
 #endif
 }
 

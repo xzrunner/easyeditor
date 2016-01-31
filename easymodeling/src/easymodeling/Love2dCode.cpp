@@ -69,13 +69,13 @@ void Love2dCode::resolveLoadImages()
 	gen.tab();
 
 	std::vector<libmodeling::Body*> bodies;
-	Context::Instance()->stage->traverseBodies(d2d::FetchAllVisitor<libmodeling::Body>(bodies));
+	Context::Instance()->stage->traverseBodies(ee::FetchAllVisitor<libmodeling::Body>(bodies));
 	std::map<std::string, std::string> mapNamePath;
 	for (size_t i = 0, n = bodies.size(); i < n; ++i)
 	{
 		libmodeling::Body* body = bodies[i];
 		std::string path = body->sprite->GetSymbol().GetFilepath();
-		std::string name = d2d::FileHelper::GetFilename(path);
+		std::string name = ee::FileHelper::GetFilename(path);
 		mapNamePath.insert(std::make_pair(name, path));
 	}
 
@@ -83,7 +83,7 @@ void Love2dCode::resolveLoadImages()
 	for ( ; itr != mapNamePath.end(); ++itr)
 	{
 		// "path"
-		std::string path = "\""+d2d::FileHelper::GetFilenameWithExtension(itr->second)+"\"";
+		std::string path = "\""+ee::FileHelper::GetFilenameWithExtension(itr->second)+"\"";
 		// love.graphics.newImage("path"),
 		std::string str = lua::call("", "love.graphics.newImage", 1, path) + ",";
 		// name = love.graphics.newImage("path"),
@@ -121,14 +121,14 @@ void Love2dCode::resolveLoadBodies()
 	// local fixtures
 	gen.line("local fixtures");
 	std::vector<libmodeling::Body*> bodies;
-	Context::Instance()->stage->traverseBodies(d2d::FetchAllVisitor<libmodeling::Body>(bodies));
+	Context::Instance()->stage->traverseBodies(ee::FetchAllVisitor<libmodeling::Body>(bodies));
 	for (size_t i = 0, n = bodies.size(); i < n; ++i)
 	{
 		libmodeling::Body* body = bodies[i];
 
 		gen.line();
 
-		std::string name = d2d::FileHelper::GetFilename(body->sprite->GetSymbol().GetFilepath());
+		std::string name = ee::FileHelper::GetFilename(body->sprite->GetSymbol().GetFilepath());
 
 		// local actor = {}
 		lua::assign(gen, "local", name, "{}");
@@ -247,7 +247,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
 			// love.physics.newPolygonShape(size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
-			const std::vector<d2d::Vector>& vertices = polygon->GetVertices();
+			const std::vector<ee::Vector>& vertices = polygon->GetVertices();
 			std::string strParams;
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 			{
@@ -264,7 +264,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		{
 			// love.physics.newChainShape(loop, size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
 			std::string strParams = chain->IsClosed() ? "true" : "false";
-			const std::vector<d2d::Vector>& vertices = chain->GetVertices();
+			const std::vector<ee::Vector>& vertices = chain->GetVertices();
 			std::string size = wxString::FromDouble(vertices.size() * 2, 1);
 			strParams += ", "+size;
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
@@ -280,7 +280,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		// local shape = newShape
 		lua::assign(gen, "", "shape", newShape);
 		// local fixture = love.physics.newFixture(body, shape)
-		std::string sBody = d2d::FileHelper::GetFilename(body->sprite->GetSymbol().GetFilepath())+".body";
+		std::string sBody = ee::FileHelper::GetFilename(body->sprite->GetSymbol().GetFilepath())+".body";
 		lua::assign(gen, "", "fixture", lua::call("", "love.physics.newFixture", 2, sBody, "shape"));
 
 		if (fData->density != 1)
@@ -325,7 +325,7 @@ void Love2dCode::resolveLoadJoints()
 	gen.line("-- Create joints.");
 
 	std::vector<libmodeling::Joint*> joints;
-	Context::Instance()->stage->traverseJoints(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
+	Context::Instance()->stage->traverseJoints(ee::FetchAllVisitor<libmodeling::Joint>(joints));
 	// move gear joint to the end
 	size_t iLast = joints.size() - 1;
 	for (size_t i = 0, n = joints.size(); i < n; ++i)
@@ -340,7 +340,7 @@ void Love2dCode::resolveLoadJoints()
 	}
 
 	std::vector<libmodeling::Body*> bodies;
-	Context::Instance()->stage->traverseBodies(d2d::FetchAllVisitor<libmodeling::Body>(bodies));
+	Context::Instance()->stage->traverseBodies(ee::FetchAllVisitor<libmodeling::Body>(bodies));
 	for (size_t i = 0, n = joints.size(); i < n; ++i)
 	{
 		gen.line();
@@ -377,7 +377,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 		{
 			libmodeling::RevoluteJoint* joint = static_cast<libmodeling::RevoluteJoint*>(j);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA();
+			ee::Vector anchorA = joint->getWorldAnchorA();
 			std::string x = wxString::FromDouble(anchorA.x, 1),
 				y = wxString::FromDouble(-anchorA.y, 1);
 
@@ -421,7 +421,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 		{
 			libmodeling::PrismaticJoint* joint = static_cast<libmodeling::PrismaticJoint*>(j);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA(),
+			ee::Vector anchorA = joint->getWorldAnchorA(),
 				anchorB = joint->getWorldAnchorB();
 			std::string xA = wxString::FromDouble(anchorA.x, 1),
 				yA = wxString::FromDouble(-anchorA.y, 1);
@@ -471,7 +471,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 		{
 			libmodeling::DistanceJoint* joint = static_cast<libmodeling::DistanceJoint*>(j);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA(),
+			ee::Vector anchorA = joint->getWorldAnchorA(),
 				anchorB = joint->getWorldAnchorB();
 			std::string xA = wxString::FromDouble(anchorA.x, 1),
 				yA = wxString::FromDouble(-anchorA.y, 1);
@@ -506,7 +506,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 			std::string gxB = wxString::FromDouble(joint->groundAnchorB.x, 1),
 				gyB = wxString::FromDouble(-joint->groundAnchorB.y, 1);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA(),
+			ee::Vector anchorA = joint->getWorldAnchorA(),
 				anchorB = joint->getWorldAnchorB();
 			std::string xA = wxString::FromDouble(anchorA.x, 1),
 				yA = wxString::FromDouble(-anchorA.y, 1);
@@ -593,7 +593,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 		{
 			libmodeling::WeldJoint* joint = static_cast<libmodeling::WeldJoint*>(j);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA(),
+			ee::Vector anchorA = joint->getWorldAnchorA(),
 				anchorB = joint->getWorldAnchorB();
 			std::string xA = wxString::FromDouble(anchorA.x, 1),
 				yA = wxString::FromDouble(-anchorA.y, 1);
@@ -623,7 +623,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 		{
 			libmodeling::FrictionJoint* joint = static_cast<libmodeling::FrictionJoint*>(j);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA(),
+			ee::Vector anchorA = joint->getWorldAnchorA(),
 				anchorB = joint->getWorldAnchorB();
 			std::string xA = wxString::FromDouble(anchorA.x, 1),
 				yA = wxString::FromDouble(-anchorA.y, 1);
@@ -653,7 +653,7 @@ void Love2dCode::resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints
 		{
 			libmodeling::RopeJoint* joint = static_cast<libmodeling::RopeJoint*>(j);
 
-			d2d::Vector anchorA = joint->getWorldAnchorA(),
+			ee::Vector anchorA = joint->getWorldAnchorA(),
 				anchorB = joint->getWorldAnchorB();
 			std::string xA = wxString::FromDouble(anchorA.x, 1),
 				yA = wxString::FromDouble(-anchorA.y, 1);

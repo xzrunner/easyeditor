@@ -19,16 +19,16 @@ void Love2dCode::resolve()
 
 	lua::TableAssign ta(m_gen, "quads");
 
-	std::vector<d2d::Sprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 
-		const d2d::Symbol& symbol = sprite->GetSymbol();
-		const d2d::Vector& pos = sprite->GetPosition();
+		const ee::Symbol& symbol = sprite->GetSymbol();
+		const ee::Vector& pos = sprite->GetPosition();
 
-		std::string name = d2d::FileHelper::GetFilename(symbol.GetFilepath());
+		std::string name = ee::FileHelper::GetFilename(symbol.GetFilepath());
 
 		std::string x, y, w, h, px, py, a;
 		if (sprite->GetAngle() != 0)

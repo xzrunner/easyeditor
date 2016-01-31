@@ -1,7 +1,7 @@
 #ifndef _ESHAPE_TOOLBAR_PANEL_H_
 #define _ESHAPE_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eshape
 {
@@ -9,10 +9,10 @@ namespace eshape
 class StagePanel;
 class LibraryItem;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
+	ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 		StagePanel* stage);
 
 	void changeCurrItem(LibraryItem* item);

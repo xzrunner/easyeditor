@@ -2,7 +2,7 @@
 #ifndef LIBMODELING_PACKAGE_H
 #define LIBMODELING_PACKAGE_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling
 {

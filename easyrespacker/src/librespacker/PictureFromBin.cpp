@@ -12,7 +12,7 @@ int PictureFromBin::Size(const PackPicture* pic)
 	return SIZEOF_PICTURE + pic->quads.size() * SIZEOF_QUAD;
 }
 
-void PictureFromBin::Unpack(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+void PictureFromBin::Unpack(uint8_t** ptr, const std::vector<ee::Image*>& images,
 							PackPicture* pic)
 {
 	uint16_t sz;
@@ -24,7 +24,7 @@ void PictureFromBin::Unpack(uint8_t** ptr, const std::vector<d2d::Image*>& image
 	}
 }
 
-void PictureFromBin::UnpackQuad(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+void PictureFromBin::UnpackQuad(uint8_t** ptr, const std::vector<ee::Image*>& images,
 								PackPicture::Quad& quad)
 {
 	uint8_t tex_idx;

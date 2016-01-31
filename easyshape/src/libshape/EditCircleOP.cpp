@@ -5,10 +5,10 @@
 namespace libshape
 {
 
-EditCircleOP::EditCircleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-						   d2d::MultiShapesImpl* shapesImpl, 
-						   d2d::PropertySettingPanel* propertyPanel, 
-						   d2d::OneFloatValue* node_capture)
+EditCircleOP::EditCircleOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+						   ee::MultiShapesImpl* shapesImpl, 
+						   ee::PropertySettingPanel* propertyPanel, 
+						   ee::OneFloatValue* node_capture)
 	: ZoomViewOP(wnd, stage, true)
 	, m_propertyPanel(propertyPanel)
 	, m_shapesImpl(shapesImpl)
@@ -27,7 +27,7 @@ bool EditCircleOP::OnKeyDown(int keyCode)
 	{
 		m_shapesImpl->ClearSelectedShape();
 		m_captured.clear();
-		d2d::SelectShapeSJ::Instance()->Select(NULL);
+		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
 	return false;
@@ -50,7 +50,7 @@ bool EditCircleOP::OnMouseLeftDown(int x, int y)
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
 			m_shapesImpl->GetShapeSelection()->Add(circle);
-			d2d::SelectShapeSJ::Instance()->Select(circle);
+			ee::SelectShapeSJ::Instance()->Select(circle);
 		}
 	}
 	else
@@ -71,12 +71,12 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 		{
 			m_currPos = m_stage->TransPosScrToProj(x, y);
 
-			const float radius = d2d::Math2D::GetDistance(m_firstPress, m_currPos);
+			const float radius = ee::Math2D::GetDistance(m_firstPress, m_currPos);
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
-				d2d::SelectShapeSJ::Instance()->Select(circle);
-				d2d::InsertShapeSJ::Instance()->Insert(NULL);
+				ee::SelectShapeSJ::Instance()->Select(circle);
+				ee::InsertShapeSJ::Instance()->Insert(NULL);
 			}
 		}
 	}
@@ -85,7 +85,7 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 		if (m_propertyPanel) {
 			m_propertyPanel->EnablePropertyGrid(true);
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape)) {
-				d2d::SelectShapeSJ::Instance()->Select(circle);
+				ee::SelectShapeSJ::Instance()->Select(circle);
 			}
 		}
 	}
@@ -109,10 +109,10 @@ bool EditCircleOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			d2d::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
+			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-			d2d::SelectShapeSJ::Instance()->Select(NULL);
+			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else
@@ -127,15 +127,15 @@ bool EditCircleOP::OnMouseMove(int x, int y)
 {
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
-		d2d::Shape* old = m_captured.shape;
+		ee::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -157,7 +157,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 				circle->center = m_currPos;
 			// change size
 			else
-				circle->radius = d2d::Math2D::GetDistance(m_currPos, circle->center);
+				circle->radius = ee::Math2D::GetDistance(m_currPos, circle->center);
 
 			if (m_propertyPanel) {
 				m_propertyPanel->EnablePropertyGrid(false);
@@ -165,7 +165,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 		}
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
@@ -181,11 +181,11 @@ bool EditCircleOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::DrawCircle(circle->center, tolerance, 
-					true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+				ee::PrimitiveDraw::DrawCircle(circle->center, tolerance, 
+					true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
 				if (!m_captured.pos.IsValid()) {
-					d2d::PrimitiveDraw::DrawCircle(circle->center, circle->radius,
-						false, tolerance, d2d::Colorf(1.0f, 0.4f, 0.4f));
+					ee::PrimitiveDraw::DrawCircle(circle->center, circle->radius,
+						false, tolerance, ee::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
@@ -193,8 +193,8 @@ bool EditCircleOP::OnDraw() const
 	else
 	{
 		if (m_firstPress.IsValid() && m_currPos.IsValid()) {
-			d2d::PrimitiveDraw::DrawCircle(m_firstPress, d2d::Math2D::GetDistance(m_firstPress, m_currPos), 
-				false, 3, d2d::Colorf(0, 0, 0), 32);
+			ee::PrimitiveDraw::DrawCircle(m_firstPress, ee::Math2D::GetDistance(m_firstPress, m_currPos), 
+				false, 3, ee::Colorf(0, 0, 0), 32);
 		}
 	}
 

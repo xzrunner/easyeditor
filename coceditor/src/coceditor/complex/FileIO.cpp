@@ -21,15 +21,15 @@ namespace complex
 		fout.close();
 	}
 
-	Json::Value FileIO::store(d2d::ISprite* sprite)
+	Json::Value FileIO::store(ee::ISprite* sprite)
 	{
 		Json::Value value;
 
 //		value["id"] = *static_cast<int*>(sprite->getUserData());
 		void* data = sprite->getUserData();
 
-		value["filepath"] = d2d::FilenameTools::getRelativePath(
-			d2d::Context::Instance()->getDir(),
+		value["filepath"] = ee::FilenameTools::getRelativePath(
+			ee::Context::Instance()->getDir(),
 			sprite->getSymbol().getFilepath()).ToStdString();
 
 		value["position"]["x"] = sprite->getPosition().x;

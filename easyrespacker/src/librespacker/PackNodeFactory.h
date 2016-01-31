@@ -45,8 +45,8 @@ class ShapeBuilder;
 class PackNodeFactory
 {
 public:
-	const IPackNode* Create(const d2d::Sprite* spr);	
-	const IPackNode* Create(const d2d::Symbol* symbol);	
+	const IPackNode* Create(const ee::Sprite* spr);	
+	const IPackNode* Create(const ee::Symbol* symbol);	
 
 	void GetAllNodes(std::vector<IPackNode*>& nodes) const;
 

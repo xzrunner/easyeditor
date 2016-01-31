@@ -1,15 +1,15 @@
 #ifndef _EASYTEMPLATE_STAGE_CANVAS_H_
 #define _EASYTEMPLATE_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+#include <ee/TwoPassCanvas.h>
 
 namespace etemplate
 {
 
 class StagePanel;
 
-//class StageCanvas : public d2d::OrthoCanvas
-class StageCanvas : public d2d::TwoPassCanvas
+//class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::TwoPassCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

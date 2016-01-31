@@ -43,11 +43,11 @@ void RotateImage::Run(int argc, char *argv[])
 		return;
 	}
 
-	d2d::ShaderMgr::Instance()->reload();
+	ee::ShaderMgr::Instance()->reload();
 
-	d2d::Snapshoot ss;
+	ee::Snapshoot ss;
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
@@ -59,28 +59,28 @@ void RotateImage::Run(int argc, char *argv[])
 	data.pre_multi_alpha = ori_alpha_cfg;
 }
 
-void RotateImage::Rotate(d2d::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir)
+void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(src_dir, files);
+	ee::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
-			d2d::Rect r = symbol->GetSize();
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+			ee::Rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {
-				float rad = deg * d2d::TRANS_DEG_TO_RAD;
+				float rad = deg * ee::TRANS_DEG_TO_RAD;
 				sprite->SetTransform(sprite->GetPosition(), rad);
-				int width = d2d::Math2D::RotateVector(d2d::Vector(r.xmax, r.ymax), -rad).x * 2;
-				int height = d2d::Math2D::RotateVector(d2d::Vector(r.xmin, r.ymax), -rad).y * 2;
+				int width = ee::Math2D::RotateVector(ee::Vector(r.xmax, r.ymax), -rad).x * 2;
+				int height = ee::Math2D::RotateVector(ee::Vector(r.xmin, r.ymax), -rad).y * 2;
 				ss.DrawSprite(sprite, true, width, height);
 
-				wxString name = d2d::FileHelper::GetFilename(filepath);
+				wxString name = ee::FileHelper::GetFilename(filepath);
 				wxString outpath;
 				outpath.Printf("%s\\%s_%d.png", dst_dir, name, deg);
 				ss.SaveToFile(outpath.ToStdString(), width, height);

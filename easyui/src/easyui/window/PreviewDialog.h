@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_PREVIEW_DIALOG_H_
 #define _EASYUI_WINDOW_PREVIEW_DIALOG_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
@@ -12,15 +12,15 @@ class PreviewDialog : public wxDialog
 {
 public:
 	PreviewDialog(wxWindow* parent, wxGLContext* glctx, int width, 
-		int height, const std::vector<const d2d::Sprite*>& sprites);
+		int height, const std::vector<const ee::Sprite*>& sprites);
 
 private:
 	void InitLayout(wxGLContext* glctx);
 
 private:
-	std::vector<const d2d::Sprite*> m_sprites;
+	std::vector<const ee::Sprite*> m_sprites;
 
-	d2d::PlayControl m_control;
+	ee::PlayControl m_control;
 
 }; // PreviewDialog
 

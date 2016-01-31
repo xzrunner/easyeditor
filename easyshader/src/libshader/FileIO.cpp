@@ -23,7 +23,7 @@ static const std::string STR_MAT4	= "mat4";
 static const std::string STR_TIME	= "time";
 static const std::string STR_INPUT	= "input";
 
-Shader* FileIO::LoadShader(const wxString& filepath, d2d::IStageCanvas* canvas,
+Shader* FileIO::LoadShader(const wxString& filepath, ee::StageCanvas* canvas,
 						   ToolbarPanel* toolbar, bool is_2d)
 {
 	toolbar->Clear();
@@ -36,12 +36,12 @@ Shader* FileIO::LoadShader(const wxString& filepath, d2d::IStageCanvas* canvas,
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FileHelper::GetFileDir(filepath);
+	wxString dir = ee::FileHelper::GetFileDir(filepath);
 	Shader* shader = LoadShader(dir, value, toolbar, is_2d);
 	if (is_2d) {
-		d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 		shader_mgr->null();
-		shader_mgr->SetSpriteShader(static_cast<d2d::SpriteShader*>(shader->GetShaderImpl()));
+		shader_mgr->SetSpriteShader(static_cast<ee::SpriteShader*>(shader->GetShaderImpl()));
 		shader_mgr->sprite();
 	} else {
 		e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
@@ -253,7 +253,7 @@ UniformType FileIO::TransStrToUType(const std::string& str)
 	} else if (str == STR_INPUT) {
 		type = UT_INPUT;
 	} else {
-		throw d2d::Exception("uniform known type [%s]\n", str);
+		throw ee::Exception("uniform known type [%s]\n", str);
 	}
 
 	return type;
@@ -290,7 +290,7 @@ std::string FileIO::TransUTypeToStr(UniformType type)
 	} else if (type == UT_INPUT) {
 		return STR_INPUT;
 	} else {
-		throw d2d::Exception("uniform known type [%d]\n", type);
+		throw ee::Exception("uniform known type [%d]\n", type);
 	}
 }
 
@@ -303,7 +303,7 @@ void FileIO::LoadValue(const Json::Value& value, int count,
 		wxString msg;
 		msg.Printf("uniform [%s] value not fit type [%s]\n", 
 			uniform->GetName(), TransUTypeToStr(uniform->GetType()));
-		throw d2d::Exception(msg);
+		throw ee::Exception(msg);
 	}
 
 	// no need sliders

@@ -13,7 +13,7 @@ class PolygonShape : public ChainShape
 public:
 	PolygonShape();
 	PolygonShape(const PolygonShape& polygon);
-	PolygonShape(const std::vector<d2d::Vector>& vertices);
+	PolygonShape(const std::vector<ee::Vector>& vertices);
 	virtual ~PolygonShape();
 	
 	//
@@ -25,12 +25,12 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "polygon"; }
-	virtual bool IsContain(const d2d::Vector& pos) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
 	// todo
-	//virtual bool isIntersect(const d2d::Rect& rect) const;
-	virtual void Translate(const d2d::Vector& offset);
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const;
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
+	//virtual bool isIntersect(const ee::Rect& rect) const;
+	virtual void Translate(const ee::Vector& offset);
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 	virtual void ReloadTexture();
@@ -40,8 +40,8 @@ public:
 	//
 	virtual void refresh();
 
-	void SetMaterialColor(const d2d::Colorf& color);
-	void SetMaterialTexture(d2d::ImageSymbol* image);
+	void SetMaterialColor(const ee::Colorf& color);
+	void SetMaterialTexture(ee::ImageSymbol* image);
 
 	Json::Value StoreMaterial(const std::string& dirpath) const;
 	void LoadMaterial(const std::string& dirpath, const Json::Value& val);

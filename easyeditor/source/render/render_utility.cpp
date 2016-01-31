@@ -1,27 +1,22 @@
 #include "render_utility.h"
 #include "Snapshoot.h"
-
-#include "dataset/BoundingBox.h"
-#include "dataset/Image.h"
-#include "dataset/ImageSprite.h"
-#include "view/MultiSpritesImpl.h"
+#include "BoundingBox.h"
+#include "Image.h"
+#include "ImageSprite.h"
 
 #include <gl/glew.h>
 
 namespace ee
 {
 
-Sprite* draw_all_to_one_spr(const MultiSpritesImpl* sprites_impl, Sprite* except)
+Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites, Sprite* except)
 {
-	std::vector<Sprite*> sprites;
-	sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	std::vector<Sprite*> _sprites;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		if (sprites[i] == except) {
-			sprites.erase(sprites.begin() + i);
-			break;
+		if (sprites[i] != except) {
+			_sprites.push_back(sprites[i]);
 		}
 	}
-
 	return draw_all_to_one_spr(sprites);
 }
 
@@ -35,13 +30,13 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		std::vector<Vector> bound;
 		sprites[i]->GetBounding()->GetBoundPos(bound);
-		for (int j = 0; j < bound.size(); ++j) {
+		for (int j = 0, m = bound.size(); j < m; ++j) {
 			r.Combine(bound[j]);
 		}
 	}
 
-	float dx = r.CenterX(),
-		dy = r.CenterY();
+	int dx = static_cast<int>(r.CenterX()),
+		dy = static_cast<int>(r.CenterY());
 	Snapshoot ss(r.Width(), r.Height());
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i], false, dx, dy);

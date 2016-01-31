@@ -9,8 +9,8 @@ QuadIcon::QuadIcon()
 	memset(m_screen, 0, sizeof(m_screen));
 }
 
-QuadIcon::QuadIcon(d2d::Image* img, const d2d::Vector* src, 
-				   const d2d::Vector* screen)
+QuadIcon::QuadIcon(ee::Image* img, const ee::Vector* src, 
+				   const ee::Vector* screen)
 	: Icon(img)
 {
 	memcpy(m_src, src, sizeof(m_src));
@@ -37,30 +37,30 @@ void QuadIcon::StoreToFile(Json::Value& value) const
 	}
 }
 
-void QuadIcon::GetBound(float process, d2d::Vector bound[4]) const
+void QuadIcon::GetBound(float process, ee::Vector bound[4]) const
 {
-	memcpy(bound, m_src, sizeof(d2d::Vector) * 4);
+	memcpy(bound, m_src, sizeof(ee::Vector) * 4);
 }
 
-void QuadIcon::Draw(const d2d::Matrix& mt, float process) const
+void QuadIcon::Draw(const ee::Matrix& mt, float process) const
 {
 	if (!m_img) {
 		return;
 	}
 
-	d2d::Vector vertices[4];
+	ee::Vector vertices[4];
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = d2d::Math2D::TransVector(m_screen[i], mt);
+		vertices[i] = ee::Math2D::TransVector(m_screen[i], mt);
 	}
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->sprite();
 	shader->Draw(vertices, m_src, m_img->GetTexID());
 }
 
-d2d::Rect QuadIcon::GetRegion(float process) const
+ee::Rect QuadIcon::GetRegion(float process) const
 {
-	d2d::Rect ret;
+	ee::Rect ret;
 
 	for (int i = 0; i < 4; ++i) {
 		float x = m_screen[i].x,
@@ -74,7 +74,7 @@ d2d::Rect QuadIcon::GetRegion(float process) const
 	return ret;
 }
 
-void QuadIcon::SetScreen(const d2d::Vector* screen)
+void QuadIcon::SetScreen(const ee::Vector* screen)
 {
 	float w = m_img->GetClippedWidth(),
 		h = m_img->GetClippedHeight();

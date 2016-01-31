@@ -39,7 +39,7 @@ void LRExpandGroup::Run(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	Json::Value new_lr_val = lr_val;
 

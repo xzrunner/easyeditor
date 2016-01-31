@@ -13,8 +13,8 @@ class ComplexPolygonShape : public PolygonShape
 public:
 	ComplexPolygonShape();
 	ComplexPolygonShape(const ComplexPolygonShape& poly);
-	ComplexPolygonShape(const std::vector<d2d::Vector>& outline,
-		const std::vector<std::vector<d2d::Vector> >& holes);
+	ComplexPolygonShape(const std::vector<ee::Vector>& outline,
+		const std::vector<std::vector<ee::Vector> >& holes);
 
 	//
 	// IObject interface
@@ -25,16 +25,16 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
-	virtual bool IsContain(const d2d::Vector& pos) const;
-	virtual bool IsIntersect(const d2d::Rect& rect) const;
-	virtual void Translate(const d2d::Vector& offset);
-	virtual void Draw(const d2d::Matrix& mt,
-		const d2d::ColorTrans& color = d2d::ColorTrans()) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
+	virtual void Translate(const ee::Vector& offset);
+	virtual void Draw(const ee::Matrix& mt,
+		const ee::ColorTrans& color = ee::ColorTrans()) const;
 
-	const std::vector<std::vector<d2d::Vector> >& GetHoles() const { return m_holes; }
+	const std::vector<std::vector<ee::Vector> >& GetHoles() const { return m_holes; }
 
 private:
-	std::vector<std::vector<d2d::Vector> > m_holes;
+	std::vector<std::vector<ee::Vector> > m_holes;
 
 }; // ComplexPolygonShape
 

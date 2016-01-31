@@ -10,7 +10,7 @@ using namespace emodeling;
 
 PreviewPanel::PreviewPanel(wxWindow* parent,
 						   wxTopLevelWindow* frame)
-	: d2d::EditPanel(parent, frame)
+	: ee::EditPanel(parent, frame)
 {
 	createGround();
 
@@ -67,7 +67,7 @@ LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody)
 {}
 
 void PreviewPanel::LoadBodyVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
 	libmodeling::Body* data = static_cast<libmodeling::Body*>(object);
 
@@ -89,7 +89,7 @@ LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& ma
 {}
 
 void PreviewPanel::LoadJointVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
 	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
 
@@ -113,7 +113,7 @@ LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>
 {}
 
 void PreviewPanel::LoadGearJointVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
 	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
 

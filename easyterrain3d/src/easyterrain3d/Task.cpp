@@ -9,13 +9,13 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -32,14 +32,14 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
-	d2d::EditPanel* stage = new d2d::EditPanel(m_parent, m_parent);
+	ee::EditPanel* stage = new ee::EditPanel(m_parent, m_parent);
 	stage->SetCanvas(new libterrain3d::StageCanvas(stage, stage->GetStageImpl()));
 	stage->SetEditOP(new e3d::ControlCameraOP(stage, stage->GetStageImpl()));
 }

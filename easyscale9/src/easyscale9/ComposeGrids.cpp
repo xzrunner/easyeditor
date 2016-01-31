@@ -1,6 +1,6 @@
 #include "ComposeGrids.h"
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
@@ -13,16 +13,16 @@ void ComposeGrids::Draw()
 {
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j) {
-			d2d::Vector p0;
+			ee::Vector p0;
 			p0.x = X + EDGE*i;
 			p0.y = Y + EDGE*j;
-			d2d::Vector p1(p0.x + EDGE, p0.y + EDGE);
-			d2d::PrimitiveDraw::DrawRect(p0, p1, d2d::LIGHT_GREY_LINE);
+			ee::Vector p1(p0.x + EDGE, p0.y + EDGE);
+			ee::PrimitiveDraw::DrawRect(p0, p1, ee::LIGHT_GREY_LINE);
 		}
 	}
 }
 
-void ComposeGrids::Query(const d2d::Vector& pos, int* col, int* row)
+void ComposeGrids::Query(const ee::Vector& pos, int* col, int* row)
 {
 	if (pos.x < X || pos.x > X + EDGE * 3 ||
 		pos.y < Y || pos.y > Y + EDGE * 3) {
@@ -35,9 +35,9 @@ void ComposeGrids::Query(const d2d::Vector& pos, int* col, int* row)
 	*row = (int)((pos.y - Y) / EDGE);
 }
 
-d2d::Vector ComposeGrids::GetGridCenter(int col, int row)
+ee::Vector ComposeGrids::GetGridCenter(int col, int row)
 {
-	return d2d::Vector(X + (col + 0.5f) * EDGE, Y + (row + 0.5f) * EDGE);
+	return ee::Vector(X + (col + 0.5f) * EDGE, Y + (row + 0.5f) * EDGE);
 }
 
 }

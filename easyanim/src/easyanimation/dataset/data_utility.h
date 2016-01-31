@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_DATA_UTILITY_H_
 #define _EASYANIM_DATA_UTILITY_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {

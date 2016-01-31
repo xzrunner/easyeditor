@@ -1,14 +1,14 @@
 #ifndef _EASYIMAGE_STAGE_CANVAS_H_
 #define _EASYIMAGE_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

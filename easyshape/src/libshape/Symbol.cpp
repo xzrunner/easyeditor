@@ -49,13 +49,13 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
  	if (m_bg) {
  		m_bg->Draw(mt, color, spr);
  	}
-	if (d2d::Config::Instance()->GetSettings().visible_shape)
+	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 			m_bg_outline[i]->Draw(mt);
@@ -66,9 +66,9 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
-	d2d::Rect rect;
+	ee::Rect rect;
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		rect.Combine(m_bg_outline[i]->GetRect());
 	}
@@ -78,7 +78,7 @@ d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
 	return rect;
 }
 
-void Symbol::Traverse(d2d::Visitor& visitor) const
+void Symbol::Traverse(ee::Visitor& visitor) const
 {
 	for (int i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		bool next;
@@ -92,7 +92,7 @@ void Symbol::Traverse(d2d::Visitor& visitor) const
 	}
 }
 
-bool Symbol::Add(d2d::Shape* shape)
+bool Symbol::Add(ee::Shape* shape)
 {
 	if (!shape) {
 		return false;
@@ -103,7 +103,7 @@ bool Symbol::Add(d2d::Shape* shape)
 	return true;
 }
 
-bool Symbol::Remove(d2d::Shape* shape)
+bool Symbol::Remove(ee::Shape* shape)
 {
 	if (!shape) {
 		return false;
@@ -139,18 +139,18 @@ bool Symbol::Clear()
 	return ret;
 }
 
-void Symbol::SetBG(d2d::Symbol* bg)
+void Symbol::SetBG(ee::Symbol* bg)
 {
 	if (m_bg != bg) {
 		LoadBGOutline(bg);
 		LoadBGTriStrip(bg);
 	}
-	d2d::obj_assign<d2d::Symbol>(m_bg, bg);
+	ee::obj_assign<ee::Symbol>(m_bg, bg);
 }
 
 void Symbol::StoreToFile(const char* filename) const
 {
-	std::vector<d2d::Shape*> shapes(m_shapes);
+	std::vector<ee::Shape*> shapes(m_shapes);
 	std::copy(m_bg_outline.begin(), m_bg_outline.end(), back_inserter(shapes));
 	FileIO::StoreToFile(filename, shapes, m_bg);
 }
@@ -161,7 +161,7 @@ void Symbol::LoadResources()
 	FileIO::LoadFromFile(m_filepath.c_str(), m_shapes, m_bg);
 }
 
-void Symbol::LoadBGOutline(d2d::Symbol* bg)
+void Symbol::LoadBGOutline(ee::Symbol* bg)
 {
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		m_bg_outline[i]->Release();
@@ -172,9 +172,9 @@ void Symbol::LoadBGOutline(d2d::Symbol* bg)
 		return;
 	}
 
-	wxString filepath = d2d::FileHelper::GetFilenameAddTag(
+	wxString filepath = ee::FileHelper::GetFilenameAddTag(
 		bg->GetFilepath(), eimage::OUTLINE_FILE_TAG, "json");
-	if (!d2d::FileHelper::IsFileExist(filepath)) {
+	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
 	}
 
@@ -186,21 +186,21 @@ void Symbol::LoadBGOutline(d2d::Symbol* bg)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::vector<d2d::Vector> vertices;
-	d2d::JsonSerializer::Load(value["normal"], vertices);
+	std::vector<ee::Vector> vertices;
+	ee::JsonSerializer::Load(value["normal"], vertices);
 	if (!vertices.empty()) {
-		d2d::Shape* shape = new PolygonShape(vertices);
+		ee::Shape* shape = new PolygonShape(vertices);
 		m_bg_outline.push_back(shape);
 	}
 }
 
-void Symbol::LoadBGTriStrip(d2d::Symbol* bg)
+void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 {
 	m_bg_tri_strips.clear();
 
-	wxString filepath = d2d::FileHelper::GetFilenameAddTag(
+	wxString filepath = ee::FileHelper::GetFilenameAddTag(
 		bg->GetFilepath(), eimage::TRI_STRIP_FILE_TAG, "json");
-	if (!d2d::FileHelper::IsFileExist(filepath)) {
+	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
 	}
 	
@@ -215,8 +215,8 @@ void Symbol::LoadBGTriStrip(d2d::Symbol* bg)
 	int i = 0;
 	Json::Value strip_val = value["strips"][i++];
 	while (!strip_val.isNull()) {
-		std::vector<d2d::Vector> strip;
-		d2d::JsonSerializer::Load(strip_val, strip);
+		std::vector<ee::Vector> strip;
+		ee::JsonSerializer::Load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];
 	}
@@ -228,7 +228,7 @@ ShapeType Symbol::GetShapeType() const
 		return ST_UNKNOWN;
 	}
 
-	d2d::Shape* shape = m_shapes[0];
+	ee::Shape* shape = m_shapes[0];
 	return get_shape_type(shape->GetShapeDesc());
 }
 

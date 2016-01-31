@@ -61,7 +61,7 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			int type = dynamic_cast<libshape::PolygonShape*>(chain) ? e_polygon : e_chain;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-			const std::vector<d2d::Vector>& vertices = chain->GetVertices();
+			const std::vector<ee::Vector>& vertices = chain->GetVertices();
 			size_t vSize = vertices.size();
 			fout.write(reinterpret_cast<const char*>(&vSize), sizeof(size_t));
 			for (size_t j = 0; j < vSize; ++j)
@@ -158,7 +158,7 @@ void Paskage::packJoint(const Joint& data, std::ofstream& fout,
 			fout.write(reinterpret_cast<const char*>(&joint->localAnchorB.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&joint->localAnchorB.y), sizeof(float));
 
-			float length = d2d::Math2D::GetDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB());
+			float length = ee::Math2D::GetDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB());
 			fout.write(reinterpret_cast<const char*>(&length), sizeof(float));
 
 			fout.write(reinterpret_cast<const char*>(&joint->frequencyHz), sizeof(float));
@@ -211,7 +211,7 @@ void Paskage::packJoint(const Joint& data, std::ofstream& fout,
 
 			fout.write(reinterpret_cast<const char*>(&joint->collideConnected), sizeof(int));
 
-			d2d::Vector anchor = joint->getWorldAnchorB();
+			ee::Vector anchor = joint->getWorldAnchorB();
 			fout.write(reinterpret_cast<const char*>(&anchor.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&anchor.y), sizeof(float));
 

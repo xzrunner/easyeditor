@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -44,16 +44,16 @@ void SetNameFromFile::Run(int argc, char *argv[])
 void SetNameFromFile::AddNameFromFile(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			AddName(filepath);
 		} else if (m_do_complex && 
-			d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+			ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			AddName(filepath);		
 		}
 	}

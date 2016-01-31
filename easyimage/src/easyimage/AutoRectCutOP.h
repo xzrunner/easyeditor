@@ -4,15 +4,15 @@
 #include "interfaces.h"
 #include "RectMgr.h"
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
-class AutoRectCutOP : public d2d::ZoomViewOP
+class AutoRectCutOP : public ee::ZoomViewOP
 {
 public:
-	AutoRectCutOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
+	AutoRectCutOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -29,9 +29,9 @@ public:
 private:
 	RectMgr m_rects;
 
-	d2d::Rect* m_selected;
+	ee::Rect* m_selected;
 
-	d2d::Vector m_last_pos;
+	ee::Vector m_last_pos;
 
 }; // AutoRectCutOP
 

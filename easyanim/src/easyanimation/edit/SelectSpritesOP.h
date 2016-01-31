@@ -1,22 +1,22 @@
 #ifndef _EASYANIM_SELECT_SPRITES_OP_H_
 #define _EASYANIM_SELECT_SPRITES_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-class SelectSpritesOP : public d2d::SelectSpritesOP
+class SelectSpritesOP : public ee::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+		ee::EditCMPT* callback = NULL);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 protected:
-	virtual void PasteSprToClipboard(const d2d::Sprite* spr, Json::Value& value) const;
-	virtual void CopySprFromClipboard(d2d::Sprite* spr, const Json::Value& value) const;
+	virtual void PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const;
 
 }; // SelectSpritesOP
 

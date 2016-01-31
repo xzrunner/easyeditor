@@ -1,12 +1,12 @@
 #ifndef _EASYANIM_LAYERS_PROPERTY_WIDGET_H_
 #define _EASYANIM_LAYERS_PROPERTY_WIDGET_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-class LayersPropertyWidget : public wxPanel, public d2d::Observer
+class LayersPropertyWidget : public wxPanel, public ee::Observer
 {
 public:
 	LayersPropertyWidget(wxWindow* parent);

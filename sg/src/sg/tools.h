@@ -4,7 +4,7 @@
 namespace sg
 {
 
-static bool IsSymbolWall(const d2d::Symbol& symbol)
+static bool IsSymbolWall(const ee::Symbol& symbol)
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
@@ -14,7 +14,7 @@ static bool IsSymbolWall(const d2d::Symbol& symbol)
 	return info->wall_type != -1;
 }
 
-static bool IsSymbolWall(const d2d::Sprite& sprite)
+static bool IsSymbolWall(const ee::Sprite& sprite)
 {
 	return IsSymbolWall(sprite.GetSymbol());
 }

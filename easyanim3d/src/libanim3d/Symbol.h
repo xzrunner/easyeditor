@@ -1,13 +1,13 @@
 #ifndef _EASYANIM3D_SYMBOL_H_
 #define _EASYANIM3D_SYMBOL_H_
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace eanim3d
 {
 
-class Symbol : public d2d::Symbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -22,11 +22,11 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
+		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
-	static d2d::Symbol* Create() { return new Symbol(); }
+	static ee::Symbol* Create() { return new Symbol(); }
 
 	void SetModel(e3d::IModel* model);
 

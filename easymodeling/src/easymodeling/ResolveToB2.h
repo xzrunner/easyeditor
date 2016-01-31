@@ -2,7 +2,7 @@
 #ifndef EMODELING_RESOLVE_TO_B2_H
 #define EMODELING_RESOLVE_TO_B2_H
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace libmodeling

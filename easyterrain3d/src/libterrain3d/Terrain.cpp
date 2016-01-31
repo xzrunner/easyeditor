@@ -276,7 +276,7 @@ bool Terrain::MakeTerrainPlasma( int iSize, float fRoughness )
 				mi= ( i+iRectSize/2 );
 				mj= ( j+iRectSize/2 );
 
-				fTempBuffer[mi+mj*m_data.size]= ( float )( ( fTempBuffer[i+j*m_data.size] + fTempBuffer[ni+j*m_data.size] + fTempBuffer[i+nj*m_data.size] + fTempBuffer[ni+nj*m_data.size] )/4 + d2d::Random::GetNum( -fHeight/2, fHeight/2 ) );
+				fTempBuffer[mi+mj*m_data.size]= ( float )( ( fTempBuffer[i+j*m_data.size] + fTempBuffer[ni+j*m_data.size] + fTempBuffer[i+nj*m_data.size] + fTempBuffer[ni+nj*m_data.size] )/4 + ee::Random::GetNum( -fHeight/2, fHeight/2 ) );
 			}
 		}
 
@@ -336,14 +336,14 @@ bool Terrain::MakeTerrainPlasma( int iSize, float fRoughness )
 														fTempBuffer[ni+j*m_data.size]	  +
 														fTempBuffer[mi+pmj*m_data.size]	  +
 														fTempBuffer[mi+mj*m_data.size] )/4+
-														d2d::Random::GetNum( -fHeight/2, fHeight/2 ) );
+														ee::Random::GetNum( -fHeight/2, fHeight/2 ) );
 
 				//Calculate the square value for the left side of the rectangle
 				fTempBuffer[i+mj*m_data.size]= ( float )( ( fTempBuffer[i+j*m_data.size]	  +
 														fTempBuffer[i+nj*m_data.size]	  +
 														fTempBuffer[pmi+mj*m_data.size]	  +
 														fTempBuffer[mi+mj*m_data.size] )/4+ 
-														d2d::Random::GetNum( -fHeight/2, fHeight/2 ) );
+														ee::Random::GetNum( -fHeight/2, fHeight/2 ) );
 			}
 		}
 

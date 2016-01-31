@@ -2,14 +2,14 @@
 
 #include "dataset/PartSkeleton.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
-	class AddPartSkeletonJointOP : public d2d::ZoomViewOP
+	class AddPartSkeletonJointOP : public ee::ZoomViewOP
 	{
 	public:
-		AddPartSkeletonJointOP(d2d::EditPanel* editPanel, PartSkeleton* skeleton);
+		AddPartSkeletonJointOP(ee::EditPanel* editPanel, PartSkeleton* skeleton);
 
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseRightDown(int x, int y);
@@ -21,7 +21,7 @@ namespace eanim
 	private:
 		PartSkeleton* m_skeleton;
 
-		d2d::Vector m_lastPos;
+		ee::Vector m_lastPos;
 
 	}; // AddPartSkeletonJointOP
 }

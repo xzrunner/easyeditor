@@ -9,23 +9,23 @@ namespace eshadow
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl()
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiShapesImpl()
 	, m_loop(NULL)
 {
 	SetCanvas(new StageCanvas(this));
 
 	m_symbol = new Symbol;
 
-	RegistSubject(d2d::InsertShapeSJ::Instance());
+	RegistSubject(ee::InsertShapeSJ::Instance());
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::Sprite* edited, 
-					   const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl()
+					   wxGLContext* glctx, ee::Sprite* edited, 
+					   const ee::MultiSpritesImpl* bg_sprites)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiShapesImpl()
 	, m_loop(NULL)
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 	LoadFromShadow();
 
-	RegistSubject(d2d::InsertShapeSJ::Instance());
+	RegistSubject(ee::InsertShapeSJ::Instance());
 }
 
 StagePanel::~StagePanel()
@@ -51,7 +51,7 @@ StagePanel::~StagePanel()
 
 void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 {
-	d2d::EditPanel::Refresh(eraseBackground, rect);
+	ee::EditPanel::Refresh(eraseBackground, rect);
 
 	if (m_loop) {
 		libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(m_loop);
@@ -59,7 +59,7 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 	}	
 }
 
-void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType type) const
+void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type) const
 {
 	if (m_loop) {
 		bool next;
@@ -70,7 +70,7 @@ void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType typ
 void StagePanel::LoadFromShadow()
 {
 	const Shadow* shadow = m_symbol->GetShadow();
-	const std::vector<d2d::Vector>& loop = shadow->GetInnerLoop();
+	const std::vector<ee::Vector>& loop = shadow->GetInnerLoop();
 	if (m_loop) {
 		m_loop->Release();
 	}
@@ -79,14 +79,14 @@ void StagePanel::LoadFromShadow()
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiShapesImpl::OnNotify(sj_id, ud);
+	ee::MultiShapesImpl::OnNotify(sj_id, ud);
 
-	if (sj_id == d2d::MSG_INSERT_SHAPE) {
-		InsertShape((d2d::Shape*)ud);
+	if (sj_id == ee::MSG_INSERT_SHAPE) {
+		InsertShape((ee::Shape*)ud);
 	}
 }
 
-void StagePanel::InsertShape(d2d::Shape* shape)
+void StagePanel::InsertShape(ee::Shape* shape)
 {
 	if (libshape::get_shape_type(shape->GetShapeDesc()) != libshape::ST_POLYGON) {
 		return;
@@ -98,7 +98,7 @@ void StagePanel::InsertShape(d2d::Shape* shape)
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

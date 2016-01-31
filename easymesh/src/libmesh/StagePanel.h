@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_STAGE_PANEL_H_
 #define _EASYMESH_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
@@ -9,21 +9,21 @@ namespace emesh
 class Symbol;
 class Shape;
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
+class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 // 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-// 		d2d::LibraryPanel* library, Sprite* sprite);
+// 		ee::LibraryPanel* library, Sprite* sprite);
 	virtual ~StagePanel();
 
 	//
-	// d2d::MultiShapesImpl interface
+	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(d2d::Visitor& visitor, 
-		d2d::DataTraverseType type = d2d::DT_ALL) const;
+	virtual void TraverseShapes(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL) const;
 
 	void SetSymbol(Symbol* symbol);
 	const Symbol* GetSymbol() const;
@@ -32,18 +32,18 @@ public:
 // 	Sprite* getSprite() { return m_sprite; }
 
 	// for background
-	void SetBackground(d2d::Sprite* bg) { 
+	void SetBackground(ee::Sprite* bg) { 
 		bg->Retain();
 		m_background = bg; 
 	}
-	const d2d::Sprite* GetBackground() const { return m_background; }
-	void TranslateBackground(const d2d::Vector& offset) { 
+	const ee::Sprite* GetBackground() const { return m_background; }
+	void TranslateBackground(const ee::Vector& offset) { 
 		if (m_background) {
 			m_background->Translate(offset);
 		}
 	}
 
-	void LoadFromSymbol(const d2d::Symbol* symbol);
+	void LoadFromSymbol(const ee::Symbol* symbol);
 
 	void UpdateSymbol();
 
@@ -56,17 +56,17 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Init(d2d::LibraryPanel* library);
+	void Init(ee::LibraryPanel* library);
 
 	void InitSubjects();
 
 private:
-	class StageDropTarget : public d2d::StageDropTarget
+	class StageDropTarget : public ee::StageDropTarget
 	{
 	public:
-		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
+		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
-		virtual bool OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos);
+		virtual bool OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos);
 
 	private:
 		StagePanel* m_stage;
@@ -74,7 +74,7 @@ private:
 	}; // StageDropTarget 
 
 private:
-	d2d::Sprite* m_background;
+	ee::Sprite* m_background;
 
 	Symbol* m_symbol;
 

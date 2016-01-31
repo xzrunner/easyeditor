@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_TASK_H_
 #define _EASYANIM_TASK_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -10,7 +10,7 @@ class StagePanel;
 class KeysPanel;
 class KeyFrame;
 
-class Task : public d2d::ITask, public d2d::Observer
+class Task : public ee::Task, public ee::Observer
 {
 public:
 	Task(wxFrame* parent);
@@ -21,9 +21,9 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const;
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const;
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 protected:
 	//

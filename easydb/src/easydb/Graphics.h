@@ -1,26 +1,26 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace edb
 {
 	struct Node
 	{
-		std::vector<d2d::Sprite*> out, in;
+		std::vector<ee::Sprite*> out, in;
 	};
 
 	class Graphics
 	{
 	public:
-		void connect(d2d::Sprite* from, d2d::Sprite* to);
+		void connect(ee::Sprite* from, ee::Sprite* to);
 
-		void move(d2d::Sprite* sprite, const d2d::Vector& offset);
+		void move(ee::Sprite* sprite, const ee::Vector& offset);
 
-		Node* query(d2d::Sprite* sprite) const;
+		Node* query(ee::Sprite* sprite) const;
 
 		void clear();
 
 	public:
-		std::map<d2d::Sprite*, Node*> connection;
+		std::map<ee::Sprite*, Node*> connection;
 	};
 }

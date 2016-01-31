@@ -34,7 +34,7 @@ void EditMeshUtility::draw() const
 	}
 }
 
-MeshNode* EditMeshUtility::selectNodeByPos(const d2d::Vector& pos) const
+MeshNode* EditMeshUtility::selectNodeByPos(const ee::Vector& pos) const
 {
 	MeshNode* selected = NULL;
 	float nearest = FLT_MAX;
@@ -46,7 +46,7 @@ MeshNode* EditMeshUtility::selectNodeByPos(const d2d::Vector& pos) const
 		tris[i]->getNodes(nodes);
 		for (size_t j = 0; j < 3; ++j)
 		{
-			float dis = d2d::Math::getDistance(pos, nodes[j]->projCoords);
+			float dis = ee::Math::getDistance(pos, nodes[j]->projCoords);
 			if (dis < nearest)
 			{
 				nearest = dis;

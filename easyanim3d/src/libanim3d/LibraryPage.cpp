@@ -8,13 +8,13 @@ namespace eanim3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("3D"))
+	: ee::LibraryPage(parent, wxT("3D"))
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }

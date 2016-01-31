@@ -6,22 +6,22 @@ namespace etexpacker
 {
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel, 
-									 d2d::PropertySettingPanel* propertyPanel)
-	: d2d::ArrangeSpriteImpl(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, 
-	d2d::ArrangeSpriteConfig(false, false, false, false))
+									 ee::PropertySettingPanel* propertyPanel)
+	: ee::ArrangeSpriteImpl(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, 
+	ee::ArrangeSpriteConfig(false, false, false, false))
 	, m_stage(editPanel)
 {
 }
 
 void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::OnMouseLeftUp(x, y);
+	ee::ArrangeSpriteImpl::OnMouseLeftUp(x, y);
 	m_selection->Traverse(FixCoordsVisitor());
 }
 
 void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::OnMouseRightDown(x, y);
+	ee::ArrangeSpriteImpl::OnMouseRightDown(x, y);
 	OnMouseLeftDown(x, y);
 }
 
@@ -29,13 +29,13 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_selection->Size() == 1)
 	{
-		std::vector<d2d::Sprite*> sprites;
-		m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+		std::vector<ee::Sprite*> sprites;
+		m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
-		const d2d::Vector& pos = sprites[0]->GetPosition();
+		const ee::Vector& pos = sprites[0]->GetPosition();
 		float angle = sprites[0]->GetAngle();
 		if (angle == 0)
-			angle = d2d::PI * 0.5f;
+			angle = ee::PI * 0.5f;
 		else
 			angle = 0;
 		sprites[0]->SetTransform(pos, angle);
@@ -46,10 +46,10 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 
 void ArrangeSpriteImpl::OnDraw() const
 {
-	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
+	ee::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
 	m_stage->TraverseSprites(
-		d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1.0f, 1.0f, 0.0f)),
-		d2d::DT_VISIBLE
+		ee::DrawSelectedSpriteVisitor(ee::Colorf(1.0f, 1.0f, 0.0f)),
+		ee::DT_VISIBLE
 		);
 }
 
@@ -58,11 +58,11 @@ void ArrangeSpriteImpl::OnDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 void ArrangeSpriteImpl::FixCoordsVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 
-	const d2d::Vector& pos = sprite->GetPosition();
+	const ee::Vector& pos = sprite->GetPosition();
 
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -78,7 +78,7 @@ Visit(d2d::Object* object, bool& next)
 		height = sprite->GetSymbol().GetSize().Width() * s + p;
 	}
 
-	d2d::Vector leftTop;
+	ee::Vector leftTop;
 	leftTop.x = pos.x - width * 0.5f;
 	leftTop.y = pos.y - height * 0.5f;
 
@@ -89,7 +89,7 @@ Visit(d2d::Object* object, bool& next)
 		return;
 	}
 
-	d2d::Vector fixedCenter;
+	ee::Vector fixedCenter;
 	fixedCenter.x = leftTop.x > 0 ? leftTop.x + 0.5f : leftTop.x - 0.5f;
 	fixedCenter.y = leftTop.y > 0 ? leftTop.y + 0.5f : leftTop.y - 0.5f;
 	fixedCenter.x = int(fixedCenter.x) + width * 0.5f;

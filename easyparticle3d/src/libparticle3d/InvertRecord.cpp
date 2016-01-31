@@ -68,7 +68,7 @@ Item(p3d_particle* p)
 	rotate = p->cfg.angular_spd;
 	angle = p->angle;
 
-	symbol = static_cast<d2d::Symbol*>(p->cfg.symbol->ud)->GetFilepath();
+	symbol = static_cast<ee::Symbol*>(p->cfg.symbol->ud)->GetFilepath();
 
 	start_scale = p->cfg.symbol->scale_start;
 	end_scale = p->cfg.symbol->scale_end;

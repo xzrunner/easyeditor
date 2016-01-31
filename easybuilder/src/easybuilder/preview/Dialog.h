@@ -2,7 +2,7 @@
 #ifndef EBUILDER_PREVIEW_DIALOG_H
 #define EBUILDER_PREVIEW_DIALOG_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {

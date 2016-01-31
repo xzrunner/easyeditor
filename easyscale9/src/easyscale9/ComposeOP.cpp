@@ -7,14 +7,14 @@ namespace escale9
 {
 
 ComposeOP::ComposeOP(StagePanel* stage, ToolbarPanel* toolbar)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_toolbar(toolbar)
 {
 }
 
 bool ComposeOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) {
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -25,14 +25,14 @@ bool ComposeOP::OnMouseLeftDown(int x, int y)
 
 bool ComposeOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) {
+	if (ee::ZoomViewOP::OnMouseRightDown(x, y)) {
 		return true;
 	}
 
-	d2d::Sprite* selected = SelectByPos(x, y);
+	ee::Sprite* selected = SelectByPos(x, y);
 	if (selected) {
-		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + d2d::PI*0.5f);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + ee::PI*0.5f);
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -40,7 +40,7 @@ bool ComposeOP::OnMouseRightDown(int x, int y)
 
 bool ComposeOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
@@ -51,19 +51,19 @@ bool ComposeOP::OnActive()
 
 bool ComposeOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) {
+	if (ee::ZoomViewOP::OnDraw()) {
 		return true;
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	stage->GetSpriteSelection()->Traverse(d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1, 0, 0)));
+	stage->GetSpriteSelection()->Traverse(ee::DrawSelectedSpriteVisitor(ee::Colorf(1, 0, 0)));
 
 	return false;
 }
 
-d2d::Sprite* ComposeOP::SelectByPos(int x, int y)
+ee::Sprite* ComposeOP::SelectByPos(int x, int y)
 {
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	int col, row;
 	ComposeGrids::Query(pos, &col, &row);
 	if (col == -1 || row == -1) {
@@ -71,13 +71,13 @@ d2d::Sprite* ComposeOP::SelectByPos(int x, int y)
 	}
 
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
-	d2d::Sprite* selected = stage->getSprite(row, col);
+	ee::Sprite* selected = stage->getSprite(row, col);
 	if (selected) {
-		d2d::SpriteSelection* selection = stage->GetSpriteSelection();
+		ee::SpriteSelection* selection = stage->GetSpriteSelection();
 		selection->Clear();
 		selection->Add(selected);
 
-		d2d::SelectSpriteSJ::Instance()->Select(selected, true);
+		ee::SelectSpriteSJ::Instance()->Select(selected, true);
 	}
 
 	return selected;

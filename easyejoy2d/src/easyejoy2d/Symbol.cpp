@@ -13,10 +13,10 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::Symbol(s)
+	: ee::Symbol(s)
 {
 	EJSprite* spr = s.m_spr;
-	d2d::obj_assign<EJSprite>(m_spr, spr);
+	ee::obj_assign<EJSprite>(m_spr, spr);
 }
 
 Symbol::~Symbol()
@@ -37,8 +37,8 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (!m_spr) {
 		return;
@@ -48,9 +48,9 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	DrawFromEJScreen();
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	return d2d::Rect(200, 200);
+	return ee::Rect(200, 200);
 }
 
 void Symbol::LoadResources()
@@ -68,7 +68,7 @@ void Symbol::LoadResources()
 	std::string filepath = value["filepath"].asString();
 	std::string name = value["export name"].asString();
 
-	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 
 	dtex_package* pkg = PackageMgr::Instance()->Fetch(dir + "\\" + filepath);
 	assert(pkg);
@@ -112,7 +112,7 @@ void Symbol::DrawFromEJScreen() const
 	vb[8] = right, vb[9] = up;
 	vb[12] = right, vb[13] = down;
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	// reset
 	shader->SetTexture(0);
 	shader->null();

@@ -2,7 +2,7 @@
 #include "RotateTrimImage.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -39,15 +39,15 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 	LoadTrimInfo(dir);
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			FixComplex(filepath);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			FixAnim(filepath);
 		}
 	}
@@ -56,12 +56,12 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 bool FixRotateTrimJson::FixSprite(const wxString& filepath, Json::Value& sprite_val) const
 {
 	std::string spr_path = sprite_val["filepath"].asString();
-	if (!d2d::FileType::IsType(spr_path, d2d::FileType::e_image)) {
+	if (!ee::FileType::IsType(spr_path, ee::FileType::e_image)) {
 		return false;
 	}
 
-	wxString spr_abs_path = d2d::FileHelper::GetAbsolutePathFromFile(filepath, spr_path);
-	wxString spr_rel_path = d2d::FileHelper::GetRelativePath(m_dir, spr_abs_path);
+	wxString spr_abs_path = ee::FileHelper::GetAbsolutePathFromFile(filepath, spr_path);
+	wxString spr_rel_path = ee::FileHelper::GetRelativePath(m_dir, spr_abs_path);
 	std::map<std::string, TrimInfo>::const_iterator itr 
 		= m_trim_info.find(spr_rel_path.ToStdString());
 	if (itr == m_trim_info.end()) {
@@ -70,21 +70,21 @@ bool FixRotateTrimJson::FixSprite(const wxString& filepath, Json::Value& sprite_
 
 	TrimInfo trim = itr->second;
 
-	d2d::Vector old_pos, old_offset;
+	ee::Vector old_pos, old_offset;
 	old_pos.x = sprite_val["position"]["x"].asDouble();
 	old_pos.y = sprite_val["position"]["y"].asDouble();
 	old_offset.x = sprite_val["x offset"].asDouble();
 	old_offset.y = sprite_val["y offset"].asDouble();
 	float old_angle = sprite_val["angle"].asDouble();
 
-	d2d::Vector new_offset = d2d::Math2D::RotateVector(old_offset, old_angle);
+	ee::Vector new_offset = ee::Math2D::RotateVector(old_offset, old_angle);
 
-	d2d::Vector trim_offset = d2d::Math2D::RotateVector(d2d::Vector(trim.x, trim.y), -trim.angle);
+	ee::Vector trim_offset = ee::Math2D::RotateVector(ee::Vector(trim.x, trim.y), -trim.angle);
 
 	float new_angle = old_angle - trim.angle;
 
-	d2d::Vector new_pos = d2d::Math2D::RotateVector(-old_offset, old_angle) + old_offset + old_pos 
-		- d2d::Math2D::RotateVector(-new_offset, new_angle) - new_offset - trim_offset;
+	ee::Vector new_pos = ee::Math2D::RotateVector(-old_offset, old_angle) + old_offset + old_pos 
+		- ee::Math2D::RotateVector(-new_offset, new_angle) - new_offset - trim_offset;
 
 	sprite_val["position"]["x"] = new_pos.x;
 	sprite_val["position"]["y"] = new_pos.y;

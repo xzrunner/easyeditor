@@ -1,20 +1,20 @@
 #ifndef _LIBSHAPE_DRAW_LINE_CMPT_H_
 #define _LIBSHAPE_DRAW_LINE_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
-class DrawLineCMPT : public d2d::AbstractEditCMPT
+class DrawLineCMPT : public ee::EditCMPT
 {
 public:
 	DrawLineCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
-		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel);
+		ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+		ee::PropertySettingPanel* propertyPanel);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 }; // DrawLineCMPT
 

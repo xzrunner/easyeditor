@@ -2,14 +2,14 @@
 
 #include "WholeSkeleton.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class Mesh;
 	class PartSkeleton;
 
-	class Symbol : public d2d::ImageSymbol
+	class Symbol : public ee::ImageSymbol
 	{
 	public:
 		Symbol();
@@ -17,15 +17,15 @@ namespace eanim
 		virtual ~Symbol();
 		
 		////
-		//// d2d::ISerializable interface
+		//// ee::ISerializable interface
 		////
 		//virtual void loadFromTextFile(std::ifstream& fin);
 		//virtual void storeToTextFile(std::ofstream& fout) const;
 
 // 		void loadFromModifiedData();
-		void replaceBySelectedPixels(const d2d::RawPixels::PixelBuf& selected);
+		void replaceBySelectedPixels(const ee::RawPixels::PixelBuf& selected);
 
-		d2d::RawPixels* getRawPixels();
+		ee::RawPixels* getRawPixels();
 
 		Mesh* getMesh();
 		Mesh* createMesh();
@@ -40,7 +40,7 @@ namespace eanim
 		void clear();
 
 	private:
-		d2d::RawPixels* m_pixelData;
+		ee::RawPixels* m_pixelData;
 
 		Mesh* m_mesh;
 		PartSkeleton* m_skeleton;

@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_STAGE_PANEL_H_
 #define _EASYTEXPACKER_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 #include <easyphysics.h>
 
 namespace etexpacker
@@ -9,12 +9,12 @@ namespace etexpacker
 
 class BaseStrategy;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public ephysics::PhysicsPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, public ephysics::PhysicsPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
-	void insertSpriteNoArrange(d2d::Sprite* sprite);
+	void insertSpriteNoArrange(ee::Sprite* sprite);
 
 	void arrangeAllSprites(bool bClearSelection);
 	void loadFromLibrary();
@@ -22,7 +22,7 @@ public:
 	int GetTextureAccount() const;
 
 public:
-	static void fixCoords(d2d::Sprite* sprite);
+	static void fixCoords(ee::Sprite* sprite);
 
 protected:
 	//

@@ -3,7 +3,7 @@
 
 using namespace ebuilder::preview;
 
-Rotate::Rotate(d2d::ISprite* sprite, float start, 
+Rotate::Rotate(ee::ISprite* sprite, float start, 
 			   float end, float speed)
 	: m_sprite(sprite)
 	, m_start(start)

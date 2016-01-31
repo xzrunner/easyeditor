@@ -9,7 +9,7 @@ namespace eanim
 {
 
 SkeletonSymbolList::SkeletonSymbolList(wxWindow* parent, LibraryPanel* library)
-	: d2d::VerticalImageList(parent, SkeletonEditPanel::BONE_SYMBOL_LIST_NAME)
+	: ee::VerticalImageList(parent, SkeletonEditPanel::BONE_SYMBOL_LIST_NAME)
 {
 	int index = 0;
 	while (true)

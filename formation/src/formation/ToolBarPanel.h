@@ -1,14 +1,14 @@
 #ifndef FORMATION_TOOLBAR_PANEL_H
 #define FORMATION_TOOLBAR_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {
 	class StagePanel;
 	class RandomPasteCMPT;
 
-	class ToolbarPanel : public d2d::ToolbarPanel
+	class ToolbarPanel : public ee::ToolbarPanel
 	{
 	public:
 		ToolbarPanel(wxWindow* parent);

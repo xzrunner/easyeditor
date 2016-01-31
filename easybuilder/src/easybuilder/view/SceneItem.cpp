@@ -13,7 +13,7 @@ SceneItem::SceneItem(Scene* scene)
 {
 	m_name = m_scene->m_name;
 
-	//m_bitmap = new d2d::Bitmap(
+	//m_bitmap = new ee::Bitmap(
 	//	new wxBitmap(
 	//	Game::WIDTH * Thumbnail::SCALE, 
 	//	Game::HEIGHT * Thumbnail::SCALE)
@@ -34,16 +34,16 @@ void SceneItem::reloadTexture() const
 {
 }
 
-void SceneItem::draw(const d2d::Matrix& mt,
-					 const d2d::Colorf& mul, 
-					 const d2d::Colorf& add,
-					 const d2d::ISprite* sprite/* = NULL*/) const
+void SceneItem::draw(const ee::Matrix& mt,
+					 const ee::Colorf& mul, 
+					 const ee::Colorf& add,
+					 const ee::ISprite* sprite/* = NULL*/) const
 {
 }
 
-d2d::Rect SceneItem::getSize(const d2d::ISprite* sprite /*= NULL*/) const
+ee::Rect SceneItem::getSize(const ee::ISprite* sprite /*= NULL*/) const
 {
-	return d2d::Rect();
+	return ee::Rect();
 }
 
 const wxString& SceneItem::getName() const

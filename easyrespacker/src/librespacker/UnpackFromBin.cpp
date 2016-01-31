@@ -16,7 +16,7 @@ struct block {
 };
 
 void UnpackFromBin::Unpack(const std::string& filepath, 
-						   const std::vector<d2d::Image*>& images)
+						   const std::vector<ee::Image*>& images)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
@@ -46,7 +46,7 @@ void UnpackFromBin::Unpack(const std::string& filepath,
 		size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
 		Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
 		if (guess_sz == uc_sz) {
-			throw d2d::Exception("UnpackFromBin::Unpack no enough space.");
+			throw ee::Exception("UnpackFromBin::Unpack no enough space.");
 		}
 		delete[] c_buf;
 
@@ -59,7 +59,7 @@ void UnpackFromBin::Unpack(const std::string& filepath,
 	UnpackNodeFactory::Instance()->AfterUnpack();
 }
 
-void UnpackFromBin::Unpack(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+void UnpackFromBin::Unpack(uint8_t** ptr, const std::vector<ee::Image*>& images)
 {
 	UnpackNodeFactory* factory = UnpackNodeFactory::Instance();
 

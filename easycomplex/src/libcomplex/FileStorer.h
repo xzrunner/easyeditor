@@ -1,7 +1,7 @@
 #ifndef _LIBCOMPLEX_FILE_STORER_H_
 #define _LIBCOMPLEX_FILE_STORER_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
@@ -16,7 +16,7 @@ public:
 
 private:
 	static void CenterSymbol(Symbol* symbol);
-	static Json::Value Store(d2d::Sprite* sprite, const wxString& dir);
+	static Json::Value Store(ee::Sprite* sprite, const wxString& dir);
 
 }; // FileStorer
 

@@ -20,7 +20,7 @@ ScenePropertySetting::ScenePropertySetting(SceneItem* scene, ScenesPage* page)
 {
 }
 
-void ScenePropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
+void ScenePropertySetting::updatePanel(ee::PropertySettingPanel* panel)
 {
 	wxPropertyGrid* pg = panel->getPG();
 
@@ -60,12 +60,12 @@ void ScenePropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 		m_scene->getScene()->m_color = (wxANY_AS(value, wxColour));
 }
 
-void ScenePropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void ScenePropertySetting::updatePropertyGrid(ee::PropertySettingPanel* panel)
 {
 	updatePanel(panel);
 }
 
-void ScenePropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void ScenePropertySetting::enablePropertyGrid(ee::PropertySettingPanel* panel, bool bEnable)
 {
 }
 
@@ -83,7 +83,7 @@ void ScenePropertySetting::updateSceneName(const wxString& name)
 //////////////////////////////////////////////////////////////////////////
 
 void ScenePropertySetting::UpdateNameVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+visit(ee::Object* object, bool& bFetchNext)
 {
 	SceneItem* item = static_cast<SceneItem*>(object);
 	if (item == m_scene)

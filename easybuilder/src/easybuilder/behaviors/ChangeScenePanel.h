@@ -11,10 +11,10 @@ namespace ebuilder
 	class ChangeScenePanel : public BehaviorPanel
 	{
 	public:
-		virtual void update(const d2d::LibraryList& list);
+		virtual void update(const ee::LibraryList& list);
 
 	private:
-		ChangeScenePanel(wxWindow* parent, d2d::LibraryList* sceneList,
+		ChangeScenePanel(wxWindow* parent, ee::LibraryList* sceneList,
 			ChangeScene* behavior);
 
 	protected:
@@ -28,7 +28,7 @@ namespace ebuilder
 		void initChoice();
 
 	private:
-		d2d::LibraryList* m_list;
+		ee::LibraryList* m_list;
 
 		ChangeScene* m_behavior;
 

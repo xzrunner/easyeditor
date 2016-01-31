@@ -5,6 +5,7 @@
 #include "SettingData.h"
 #include "ShaderMgr.h"
 #include "Config.h"
+#include "EE_GTxt.h"
 
 namespace ee
 {
@@ -36,7 +37,7 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, m_cam_scale) * cfg.node_name_scale;
 		t.Scale(s, s);
-		etext::GTxt::Instance()->Draw(t, spr->name);
+		GTxt::Instance()->Draw(t, spr->name);
 	}
 }
 

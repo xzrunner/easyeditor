@@ -34,8 +34,8 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (m_index != 0) {
 		Utility::DrawAnimSymbol(this, mt, m_index, color);
@@ -53,7 +53,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -81,7 +81,7 @@ void Symbol::InitBounding()
 			Frame* frame = layer->frames[i];
 			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
 			{
-				std::vector<d2d::Vector> vertices;
+				std::vector<ee::Vector> vertices;
 				frame->sprites[i]->GetBounding()->GetBoundPos(vertices);
 				for (int i = 0, n = vertices.size(); i < n; ++i) {
 					m_rect.Combine(vertices[i]);
@@ -106,7 +106,7 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 	m_name  = name = value["name"].asString();
 	m_fps = value["fps"].asInt();
 
-	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 
 	loader.LoadLayers(value, dir, m_layers);
 
@@ -121,7 +121,7 @@ void Symbol::LoadResources()
 		virtual std::string GetSymbolPath(const std::string& dir, 
 			const Json::Value& json_val) const
 		{
-			return d2d::SymbolSearcher::GetSymbolPath(dir, json_val).ToStdString();
+			return ee::SymbolSearcher::GetSymbolPath(dir, json_val).ToStdString();
 		}
 	};
 

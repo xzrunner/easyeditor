@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_SKELETON_IMPL_H_
 #define _EASYANIM_SKELETON_IMPL_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class Joint;
 
-class SkeletonImpl : public d2d::ArrangeSpriteImpl
+class SkeletonImpl : public ee::ArrangeSpriteImpl
 {
 public:
 	SkeletonImpl();
@@ -26,15 +26,15 @@ public:
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
-	virtual d2d::IArrangeSpriteState* CreateTranslateState(d2d::SpriteSelection* selection, 
-		const d2d::Vector& first_pos) const;
-	virtual d2d::IArrangeSpriteState* CreateRotateState(d2d::SpriteSelection* selection, 
-		const d2d::Vector& first_pos) const;
+	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
+		const ee::Vector& first_pos) const;
+	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
+		const ee::Vector& first_pos) const;
 
 private:
 	Joint* m_selected_joint;
 
-	d2d::Vector m_first_pos;
+	ee::Vector m_first_pos;
 
 }; // SkeletonImpl 
 

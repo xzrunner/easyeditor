@@ -35,14 +35,14 @@ void TransNewTextFile::Run(int argc, char *argv[])
 void TransNewTextFile::Run(const std::string& folder)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(folder, files);
+	ee::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
-			d2d::Symbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
+			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) {
 				bool dirty = false;
 				for (int i = 0, n = complex->m_sprites.size(); i < n; ++i) {

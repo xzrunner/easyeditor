@@ -14,11 +14,11 @@ LibraryShapePage::LibraryShapePage(wxWindow* parent)
 	initLayout();
 }
 
-bool LibraryShapePage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryShapePage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	const wxString& filepath = symbol->getFilepath();
-	wxString ext = d2d::FilenameTools::getExtension(filepath).Lower();
-	return ext == "json" && d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_shape);
+	wxString ext = ee::FilenameTools::getExtension(filepath).Lower();
+	return ext == "json" && ee::FileNameParser::isType(filepath, ee::FileNameParser::e_shape);
 }
 
 void LibraryShapePage::initLayout(bool draggable /*= true*/)
@@ -43,7 +43,7 @@ void LibraryShapePage::initLayout(bool draggable /*= true*/)
 
 void LibraryShapePage::onAddPress(wxCommandEvent& event)
 {
-	wxString filter = "*_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape) + ".json";
+	wxString filter = "*_" + ee::FileNameParser::getFileTag(ee::FileNameParser::e_shape) + ".json";
 	wxFileDialog dlg(this, wxT("Select shapes"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
@@ -54,7 +54,7 @@ void LibraryShapePage::onAddPress(wxCommandEvent& event)
 		{
 			LibraryItem* item = new LibraryItem(filenames[i]);
 
-			std::vector<d2d::IShape*>* shapes = new std::vector<d2d::IShape*>;
+			std::vector<ee::IShape*>* shapes = new std::vector<ee::IShape*>;
 			item->setUserData(shapes);
 
 			libshape::FileAdapter adapter(*shapes);
@@ -72,7 +72,7 @@ void LibraryShapePage::onNewBtnPress(wxCommandEvent& event)
 {
 	LibraryItem* item = new LibraryItem;
 
-	std::vector<d2d::IShape*>* shapes = new std::vector<d2d::IShape*>;
+	std::vector<ee::IShape*>* shapes = new std::vector<ee::IShape*>;
 	item->setUserData(shapes);
 
 	m_stage->changeCurrItem(item);

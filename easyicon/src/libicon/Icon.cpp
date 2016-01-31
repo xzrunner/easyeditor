@@ -8,7 +8,7 @@ Icon::Icon()
 {
 }
 
-Icon::Icon(d2d::Image* img)
+Icon::Icon(ee::Image* img)
 	: m_img(NULL)
 {
 	SetImage(img);
@@ -21,7 +21,7 @@ Icon::~Icon()
 	}
 }
 
-void Icon::Draw(const d2d::Matrix& mt, float process) const
+void Icon::Draw(const ee::Matrix& mt, float process) const
 {
 	if (!m_img) {
 		return;
@@ -31,33 +31,33 @@ void Icon::Draw(const d2d::Matrix& mt, float process) const
 	int texid = m_img->GetTexID();
 
 	// tex_coords
-	d2d::Vector tex_coords[4];
+	ee::Vector tex_coords[4];
 	GetTexCoords(process, tex_coords);
 
 	// vertices
-	d2d::Vector scr_coords[4];
+	ee::Vector scr_coords[4];
 	GetScreenCoords(process, tex_coords, scr_coords);
 	for (int i = 0; i < 4; ++i) {
-		scr_coords[i] = d2d::Math2D::TransVector(scr_coords[i], mt);
+		scr_coords[i] = ee::Math2D::TransVector(scr_coords[i], mt);
 	}
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->sprite();
 	shader->Draw(scr_coords, tex_coords, texid);
 }
 
-d2d::Rect Icon::GetRegion(float process) const
+ee::Rect Icon::GetRegion(float process) const
 {
-	d2d::Rect ret;
+	ee::Rect ret;
 
 	if (!m_img) {
 		return ret;
 	}
 	
-	d2d::Vector tex_coords[4];
+	ee::Vector tex_coords[4];
 	GetTexCoords(process, tex_coords);
 
-	d2d::Vector scr_coords[4];
+	ee::Vector scr_coords[4];
 	GetScreenCoords(process, tex_coords, scr_coords);
 	for (int i = 0; i < 4; ++i) {
 		float x = scr_coords[i].x,
@@ -71,9 +71,9 @@ d2d::Rect Icon::GetRegion(float process) const
 	return ret;
 }
 
-void Icon::GetTexCoords(float process, d2d::Vector* tex_coords) const
+void Icon::GetTexCoords(float process, ee::Vector* tex_coords) const
 {
-	d2d::Vector bound[4];
+	ee::Vector bound[4];
 	GetBound(process, bound);
 	for (int i = 0; i < 4; ++i) {
 		tex_coords[i].x = bound[i].x;
@@ -81,8 +81,8 @@ void Icon::GetTexCoords(float process, d2d::Vector* tex_coords) const
 	}
 }
 
-void Icon::GetScreenCoords(float process, const d2d::Vector* tex_coords, 
-						   d2d::Vector* screen_coords) const
+void Icon::GetScreenCoords(float process, const ee::Vector* tex_coords, 
+						   ee::Vector* screen_coords) const
 {
 	float w = m_img->GetClippedWidth(),
 		h = m_img->GetClippedHeight();	
@@ -99,9 +99,9 @@ void Icon::ReloadTexture() const
 	}
 }
 
-void Icon::SetImage(d2d::Image* img)
+void Icon::SetImage(ee::Image* img)
 {
-	d2d::obj_assign<d2d::Image>(m_img, img);
+	ee::obj_assign<ee::Image>(m_img, img);
 	AfterSetImage();
 }
 

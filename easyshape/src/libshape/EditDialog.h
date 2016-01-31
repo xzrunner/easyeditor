@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_ETID_DIALOG_H_
 #define _LIBSHAPE_ETID_DIALOG_H_
 
-//#include <drag2d.h>
+//
 
 #include <wx/wx.h>
 

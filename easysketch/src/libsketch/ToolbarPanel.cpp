@@ -5,14 +5,14 @@ namespace libsketch
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
-	return initChildrenLayout();
+	return InitChildrenLayout();
 }
 	
 }

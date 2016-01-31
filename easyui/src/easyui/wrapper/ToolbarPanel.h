@@ -1,14 +1,14 @@
 #ifndef _EASYUI_WRAPPER_TOOLBAR_PANEL_H_
 #define _EASYUI_WRAPPER_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
 namespace wrapper
 {
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent);
@@ -20,7 +20,7 @@ public:
 	void SetTag(const std::string& tag);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxTextCtrl* m_type_text;

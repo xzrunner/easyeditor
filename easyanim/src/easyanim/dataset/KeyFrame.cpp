@@ -54,7 +54,7 @@ void KeyFrame::insertSprite(Sprite* sprite)
 	m_sprites.push_back(sprite);
 }
 
-bool KeyFrame::removeSprite(d2d::ISprite* sprite)
+bool KeyFrame::removeSprite(ee::ISprite* sprite)
 {
 	std::vector<Sprite*>::iterator itr = m_sprites.begin();
 	for ( ; itr != m_sprites.end(); ++itr)

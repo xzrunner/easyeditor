@@ -2,7 +2,7 @@
 #ifndef EBUILDER_GAME_H
 #define EBUILDER_GAME_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {

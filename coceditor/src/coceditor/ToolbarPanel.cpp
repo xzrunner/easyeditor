@@ -7,15 +7,15 @@ namespace coceditor
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+	: ee::ToolbarPanel(parent, Context::Instance()->stage)
 {
 	Context* context = Context::Instance();
 
-// 	addChild(new d2d::UniversalCMPT(this, wxT("paste"), context->stage, 
-// 		new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(context->stage, context->stage)));
+// 	addChild(new ee::UniversalCMPT(this, wxT("paste"), context->stage, 
+// 		new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(context->stage, context->stage)));
 
-	addChild(new d2d::UniversalCMPT(this, wxT("paste"), context->stage, 
-		new d2d::ArrangeSpriteOP<SelectSpritesOP>(context->stage, context->stage, context->property)));
+	addChild(new ee::UniversalCMPT(this, wxT("paste"), context->stage, 
+		new ee::ArrangeSpriteOP<SelectSpritesOP>(context->stage, context->stage, context->property)));
 
 	SetSizer(initLayout());	
 }

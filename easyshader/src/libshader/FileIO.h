@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_FILE_IO_H_
 #define _DRAG2D_FILE_IO_H_
 
-#include <drag2d.h>
+
 #include <JSON/value.h>
 
 #include "Uniform.h"
@@ -16,7 +16,7 @@ class Shader;
 class FileIO
 {
 public:
-	static Shader* LoadShader(const wxString& filepath, d2d::IStageCanvas* canvas,
+	static Shader* LoadShader(const wxString& filepath, ee::StageCanvas* canvas,
 		ToolbarPanel* toolbar, bool is_2d);
 	static void StoreShader(const wxString& filepath, const ToolbarPanel* toolbar);
 

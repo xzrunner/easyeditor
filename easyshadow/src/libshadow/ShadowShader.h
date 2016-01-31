@@ -1,12 +1,12 @@
 #ifndef _EASYSHADOW_SHADOW_SHADER_H_
 #define _EASYSHADOW_SHADOW_SHADER_H_
 
-#include <drag2d.h>
+
 
 namespace eshadow
 {
 
-class ShadowShader : public d2d::ShapeShader
+class ShadowShader : public ee::ShapeShader
 {
 public:
 	ShadowShader();

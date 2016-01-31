@@ -6,7 +6,7 @@
 namespace etext
 {
 
-class Sprite : public d2d::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite();
@@ -24,12 +24,12 @@ public:
 	//
 	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::Symbol* symbol);
+	virtual void SetSymbol(ee::Symbol* symbol);
 
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
 	void GetSize(int& width, int& height) const;
 	void SetSize(int width, int height);
@@ -40,9 +40,9 @@ public:
 	int GetFontSize() const { return m_font_size; }
 	void SetFontSize(int size) { m_font_size = size; }
 
-	const d2d::Colorf& GetFontColor() const { return m_font_color; }
-	d2d::Colorf& GetFontColor() { return m_font_color; }
-	void SetFontColor(const d2d::Colorf& col) { m_font_color = col; }
+	const ee::Colorf& GetFontColor() const { return m_font_color; }
+	ee::Colorf& GetFontColor() { return m_font_color; }
+	void SetFontColor(const ee::Colorf& col) { m_font_color = col; }
 
 	bool GetEdge() const { return m_edge; }
 	void SetEdge(bool edge) { m_edge = edge; }
@@ -50,8 +50,8 @@ public:
 	float GetEdgeSize() const { return m_edge_size; }
 	void SetEdgeSize(float size) { m_edge_size = size; }
 
-	const d2d::Colorf& GetEdgeColor() const { return m_edge_color; }
-	void SetEdgeColor(const d2d::Colorf& col) { m_edge_color = col; }
+	const ee::Colorf& GetEdgeColor() const { return m_edge_color; }
+	void SetEdgeColor(const ee::Colorf& col) { m_edge_color = col; }
 
 	void GetAlign(int& halign, int& valign) const;
 	void SetAlign(int halign, int valign);
@@ -68,7 +68,7 @@ public:
 	int GetTime() const { return m_time; }
 	void UpdateTime() const { ++m_time; }
 
-	static d2d::Sprite* Create(d2d::Symbol* symbol) {
+	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
@@ -78,11 +78,11 @@ private:
 
 	int m_font;
 	int m_font_size;
-	d2d::Colorf m_font_color;
+	ee::Colorf m_font_color;
 
 	bool m_edge;
 	float m_edge_size;
-	d2d::Colorf m_edge_color;
+	ee::Colorf m_edge_color;
 
 	HoriAlignType m_align_hori;
 	VertAlignType m_align_vert;

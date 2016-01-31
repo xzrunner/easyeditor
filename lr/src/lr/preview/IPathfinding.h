@@ -1,7 +1,7 @@
 #ifndef _LR_PREVIEW_INTERFACE_PATHFINDING_H_
 #define _LR_PREVIEW_INTERFACE_PATHFINDING_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -12,8 +12,8 @@ class IPathfinding
 {
 public:
 	virtual ~IPathfinding() {}
-	virtual void DisableRegion(const d2d::Sprite* spr, bool disable) = 0;	
-	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end) = 0;
+	virtual void DisableRegion(const ee::Sprite* spr, bool disable) = 0;	
+	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end) = 0;
 	virtual void DebugDraw() const = 0;
 
 }; // IPathfinding

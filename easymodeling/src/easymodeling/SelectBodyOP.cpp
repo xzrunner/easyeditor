@@ -9,17 +9,17 @@
 using namespace emodeling;
 
 SelectBodyOP::SelectBodyOP(wxWindow* stage_wnd,
-						   d2d::EditPanelImpl* stage, 
-						   d2d::MultiSpritesImpl* spritesImpl, 
-						   d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
+						   ee::EditPanelImpl* stage, 
+						   ee::MultiSpritesImpl* spritesImpl, 
+						   ee::EditCMPT* callback/* = NULL*/)
+	: ee::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
 	, m_mouseOn(NULL)
 {
 }
 
 bool SelectBodyOP::OnKeyDown(int keyCode)
 {
-	if (d2d::SelectSpritesOP::OnKeyDown(keyCode)) return true;
+	if (ee::SelectSpritesOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE && m_mouseOn)
 		m_mouseOn = NULL;
@@ -29,32 +29,32 @@ bool SelectBodyOP::OnKeyDown(int keyCode)
 
 bool SelectBodyOP::OnMouseMove(int x, int y)
 {
-	if (d2d::SelectSpritesOP::OnMouseMove(x, y)) return true;
+	if (ee::SelectSpritesOP::OnMouseMove(x, y)) return true;
 
 	m_mouseOn = NULL;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected)
 		m_mouseOn = static_cast<libmodeling::Body*>(selected->GetUserData());
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
 
 bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
+	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	// todo
 
-// 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-// 	d2d::Sprite* selected = m_spritesImpl->querySpriteByPos(pos);
+// 	ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+// 	ee::Sprite* selected = m_spritesImpl->querySpriteByPos(pos);
 // 	if (selected)
 // 	{
 // 		libshape::Symbol symbol;
-// 		symbol.SetBG(&const_cast<d2d::Symbol&>(selected->getSymbol()));
+// 		symbol.SetBG(&const_cast<ee::Symbol&>(selected->getSymbol()));
 // 		libshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
 // 		dlg.ShowModal();
 // 		Context::Instance()->stage->resetCanvas();
@@ -65,7 +65,7 @@ bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 
 bool SelectBodyOP::OnDraw() const
 {
-	if (d2d::SelectSpritesOP::OnDraw()) return true;
+	if (ee::SelectSpritesOP::OnDraw()) return true;
 
 	m_selection->Traverse(DrawSelectedVisitor());
 
@@ -77,7 +77,7 @@ bool SelectBodyOP::OnDraw() const
 
 bool SelectBodyOP::Clear()
 {
-	if (d2d::SelectSpritesOP::Clear()) return true;
+	if (ee::SelectSpritesOP::Clear()) return true;
 
 	m_mouseOn = NULL;
 
@@ -89,10 +89,10 @@ bool SelectBodyOP::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 void SelectBodyOP::DrawSelectedVisitor::
-Visit(d2d::Object* object, bool& next) 
+Visit(ee::Object* object, bool& next) 
 {
-	std::vector<d2d::Vector> bound;
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	std::vector<ee::Vector> bound;
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	DrawUtils::drawBody(body, DrawUtils::e_selected);
 	next = true;

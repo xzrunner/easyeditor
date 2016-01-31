@@ -15,7 +15,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
-					   Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl)
+					   Sprite* spr, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Text", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 {
@@ -23,7 +23,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 }
 
 void EditDialog::InitLayout(wxGLContext* glctx, Sprite* spr, 
-							const d2d::MultiSpritesImpl* sprite_impl)
+							const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* right_split = new wxSplitterWindow(this);
 	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
@@ -46,7 +46,7 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 }
 
 wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent, wxGLContext* glctx,
-									   Sprite* spr, const d2d::MultiSpritesImpl* sprite_impl)
+									   Sprite* spr, const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
@@ -73,7 +73,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-// 	d2d::ConfirmDialog dlg(this);
+// 	ee::ConfirmDialog dlg(this);
 // 	int val = dlg.ShowModal();
 // 	if (val == wxID_YES) 
 // 	{
@@ -81,7 +81,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 // 		const std::string& filepath = m_symbol->GetFilepath();
 // 		FileStorer::Store(filepath.c_str(), m_symbol);
 // 		m_symbol->RefreshThumbnail(filepath, true);
-// 		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+// 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 // 		Destroy();
 // 	} 
 // 	else if (val == wxID_NO) 

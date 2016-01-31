@@ -8,7 +8,7 @@ namespace libsketch
 {
 
 SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
-	: d2d::AbstractEditOP(stage, stage->GetStageImpl())
+	: ee::EditOP(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_selection = stage->GetSpriteSelection();
@@ -17,9 +17,9 @@ SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
 
 bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::AbstractEditOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::Sprite* selected = SelectByPos(ivec2(x, y));
+	ee::Sprite* selected = SelectByPos(ivec2(x, y));
 	if (selected && selected->editable)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL)) 
@@ -44,22 +44,22 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 		m_selection->Clear();
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
 
 bool SelectSpriteOP::OnDraw() const
 {
-	if (d2d::AbstractEditOP::OnDraw()) return true;
+	if (ee::EditOP::OnDraw()) return true;
 
-	std::vector<d2d::Sprite*> sprites;
-	m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
 		mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
 			mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
-		e3d::DrawCube(mat, s->GetSymbol().GetAABB(), d2d::MID_RED);
+		e3d::DrawCube(mat, s->GetSymbol().GetAABB(), ee::MID_RED);
 	}
 
 	return false;
@@ -67,12 +67,12 @@ bool SelectSpriteOP::OnDraw() const
 
 // 以sprite的中心和方向，旋转ray的坐标系
 // 即AABB不变
-d2d::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
+ee::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 {
-	d2d::Sprite* selected = NULL;
+	ee::Sprite* selected = NULL;
 
-	std::vector<d2d::Sprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
@@ -81,7 +81,7 @@ d2d::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 		const Symbol& symbol = static_cast<const Symbol&>(sprite->GetSymbol());
 		
 		const e3d::AABB& aabb = symbol.GetAABB();

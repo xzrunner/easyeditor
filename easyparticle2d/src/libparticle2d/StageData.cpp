@@ -24,7 +24,7 @@
 //
 //void StageData::SetValue(int key, const Data& data)
 //{
-//	d2d::UICallback* cb = GetCurrPS();
+//	ee::UICallback* cb = GetCurrPS();
 //	if (cb) {
 //		cb->SetValue(key, data);
 //	}
@@ -32,7 +32,7 @@
 //
 //void StageData::GetValue(int key, Data& data)
 //{
-//	d2d::UICallback* cb = GetCurrPS();
+//	ee::UICallback* cb = GetCurrPS();
 //	if (cb) {
 //		cb->GetValue(key, data);
 //	}	
@@ -61,7 +61,7 @@
 //	}
 //}
 //
-//void StageData::ChangePSSymbol(d2d::Symbol* symbol)
+//void StageData::ChangePSSymbol(ee::Symbol* symbol)
 //{
 //	if (!m_ps) {
 //		m_ps = new ParticleSystem(1000);

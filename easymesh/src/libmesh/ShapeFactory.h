@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_SHAPE_FACTORY_H_
 #define _EASYMESH_SHAPE_FACTORY_H_
 
-#include <drag2d.h>
+
 
 #include "config.h"
 
@@ -13,7 +13,7 @@ class Shape;
 class ShapeFactory
 {
 public:
-	Shape* CreateShape(const d2d::Image& image) const;
+	Shape* CreateShape(const ee::Image& image) const;
 
 	void SetShapeType(ShapeType type);
 

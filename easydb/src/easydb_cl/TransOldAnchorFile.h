@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	TransOldAnchorFile() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -30,7 +30,7 @@ private:
 	void TransComplex(const std::string& filepath) const;
 	void TransAnimation(const std::string& filepath) const;
 
-	bool IsAnchor(const d2d::Sprite* spr) const;
+	bool IsAnchor(const ee::Sprite* spr) const;
 
 }; // TransOldAnchorFile
 

@@ -3,7 +3,7 @@
 
 #include "IPackNode.h"
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -28,7 +28,7 @@ public:
 
 	float life, life_var;
 
-	d2d::Vector position, position_var;
+	ee::Vector position, position_var;
 
 	float direction, direction_var;
 
@@ -41,7 +41,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 	struct A
 	{
-		d2d::Vector gravity;
+		ee::Vector gravity;
 
 		float speed, speed_var;
 
@@ -82,14 +82,14 @@ public:
 	PackParticle2D(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen, 
-		const d2d::TexturePacker& tp, float scale) const;
-	virtual void UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images);
+		const ee::TexturePacker& tp, float scale) const;
+	virtual void UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr, 
-		const d2d::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
-	virtual void UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images);
+	virtual void UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images);
 
 }; // PackParticle2D
 

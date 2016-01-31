@@ -1,16 +1,16 @@
 #ifndef _EPHYSICS_DRAG_PHYSICS_OP_H_
 #define _EPHYSICS_DRAG_PHYSICS_OP_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
 {
 
-class DragPhysicsOP : public d2d::ZoomViewOP
+class DragPhysicsOP : public ee::ZoomViewOP
 {
 public:
-	DragPhysicsOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+	DragPhysicsOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 		b2World* world, b2Body* ground);
 
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -24,7 +24,7 @@ private:
 public:
 	b2MouseJoint* m_mouseJoint;
 
-	d2d::Vector currPos;
+	ee::Vector currPos;
 
 }; // DragPhysicsOP
 

@@ -9,7 +9,7 @@ TopToolbarPanel::TopToolbarPanel(wxWindow* parent)
 	InitLayout();
 }
 
-int TopToolbarPanel::AddToolbar(d2d::ToolbarPanel* toolbar)
+int TopToolbarPanel::AddToolbar(ee::ToolbarPanel* toolbar)
 {
 	wxSizer* sizer = GetSizer();
 	sizer->Add(toolbar);

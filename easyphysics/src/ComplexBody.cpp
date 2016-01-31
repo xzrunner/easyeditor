@@ -2,7 +2,7 @@
 #include "BodyData.h"
 #include "const.h"
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
@@ -71,7 +71,7 @@ ComplexBody::ComplexBody(b2World* world, const std::vector<FixtureDataInfo>& fix
 	}
 }
 
-void ComplexBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const
+void ComplexBody::getRect(ee::Rect& rect, const ee::Vector& position, float angle) const
 {
 	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
@@ -82,7 +82,7 @@ void ComplexBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float an
 			for (size_t i = 0; i < poly->GetVertexCount(); ++i)
 			{
 				const b2Vec2& p = poly->m_vertices[i];
-				d2d::Vector transform = d2d::Math2D::RotateVector(d2d::Vector(p.x, p.y), angle) + position;
+				ee::Vector transform = ee::Math2D::RotateVector(ee::Vector(p.x, p.y), angle) + position;
 				rect.Combine(transform);
 			}
 		}
@@ -92,7 +92,7 @@ void ComplexBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float an
 			b2CircleShape* circle = dynamic_cast<b2CircleShape*>(shape);
 			if (circle)
 			{
-				d2d::Rect part;
+				ee::Rect part;
 				part.xmin = position.x - circle->m_radius;
 				part.xmax = position.x + circle->m_radius;
 				part.ymin = position.y - circle->m_radius;

@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	LRSeparateComplex() : m_count(0) {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -42,7 +42,7 @@ private:
 	std::string CreateNewComplexFile(const Json::Value& value) const;
 	void ResetOldSpriteVal(Json::Value& val, const std::string& name, const std::string& tag) const;
 
-	void FixPosWithShape(d2d::Vector& pos, const std::string& filepath) const;
+	void FixPosWithShape(ee::Vector& pos, const std::string& filepath) const;
 
 private:
 	mutable int m_count;

@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_INVERT_RECORDER_H_
 #define _EASYPARTICLE3D_INVERT_RECORDER_H_
 
-#include <drag2d.h>
+
 
 struct p3d_particle;
 
@@ -42,7 +42,7 @@ private:
 		std::string symbol;
 		float start_scale, end_scale; 
 		float start_alpha, end_alpha;
-		d2d::Colorf mul_col, add_col;
+		ee::Colorf mul_col, add_col;
 
 	}; // Item
 

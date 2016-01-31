@@ -20,7 +20,7 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
-	wxString dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
+	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
@@ -46,7 +46,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
-	wxString dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
+	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
@@ -55,7 +55,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 	std::ofstream fout(filepath);
 	std::locale::global(std::locale("C"));
 	if (fout.fail()) {
-		throw d2d::Exception("Can't save file: %s !", filepath);
+		throw ee::Exception("Can't save file: %s !", filepath);
 	}
 	writer.write(fout, value);
 	fout.close();
@@ -65,24 +65,24 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 void FileStorer::CenterSymbol(Symbol* symbol)
 {
-	d2d::Vector offset;
+	ee::Vector offset;
 	offset.x = symbol->m_rect.CenterX();
 	offset.y = symbol->m_rect.CenterY();
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = symbol->m_sprites[i];
+		ee::Sprite* sprite = symbol->m_sprites[i];
 		sprite->Translate(-offset);
 	}
 	symbol->m_rect.Translate(-offset);
 }
 
-Json::Value FileStorer::Store(d2d::Sprite* sprite, const wxString& dir)
+Json::Value FileStorer::Store(ee::Sprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-	const d2d::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = d2d::FileHelper::GetRelativePath(dir,
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
 		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();

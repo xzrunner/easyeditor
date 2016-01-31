@@ -5,7 +5,7 @@
 using namespace emodeling;
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::LibraryImagePage(parent)
+	: ee::LibraryImagePage(parent)
 {
 	m_list = new LibraryList(this);
 	InitLayout();

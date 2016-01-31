@@ -13,10 +13,10 @@
 namespace libshape
 {
 
-d2d::Shape* ShapeFactory::CreateShapeFromFile(const Json::Value& value, 
+ee::Shape* ShapeFactory::CreateShapeFromFile(const Json::Value& value, 
 											   const std::string& dir)
 {
-	d2d::Shape* shape = NULL;
+	ee::Shape* shape = NULL;
 
 	std::string desc = value["type"].asString();
 	ShapeType type = get_shape_type(desc);

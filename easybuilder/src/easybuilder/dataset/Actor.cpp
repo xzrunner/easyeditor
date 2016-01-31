@@ -6,13 +6,13 @@
 using namespace ebuilder;
 
 Actor::Actor(const Actor& actor)
-	: d2d::ImageSprite(actor)
+	: ee::ImageSprite(actor)
 {
 	m_isBg = actor.m_isBg;
 }
 
-Actor::Actor(d2d::ImageSymbol* symbol)
-	: d2d::ImageSprite(symbol)
+Actor::Actor(ee::ImageSymbol* symbol)
+	: ee::ImageSprite(symbol)
 	, m_isBg(false)
 {
 	static int count = 0;

@@ -66,7 +66,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->Insert(sprite);
+	ee::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -109,9 +109,9 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
@@ -191,7 +191,7 @@ void Sprite::Store(Json::Value& val) const
 	val["particle3d"] = p_val;
 }
 
-d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
+ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
 }
@@ -203,7 +203,7 @@ void Sprite::Start()
 	}
 }
 
-void Sprite::Draw(const d2d::Matrix& mt) const
+void Sprite::Draw(const ee::Matrix& mt) const
 {
 	if (!m_alone && m_spr) {
 		m_rp.mat = mt;
@@ -212,7 +212,7 @@ void Sprite::Draw(const d2d::Matrix& mt) const
 	}
 }
 
-void Sprite::SetMatrix(const d2d::Matrix& mat) 
+void Sprite::SetMatrix(const ee::Matrix& mat) 
 { 
 	m_mat = mat;
 	if (m_spr && m_alone) {

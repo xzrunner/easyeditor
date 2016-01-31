@@ -6,7 +6,7 @@
 namespace escale9
 {
 
-class Sprite : public d2d::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite();
@@ -20,25 +20,25 @@ public:
 	virtual Sprite* Clone() const;
 
 	//
-	// d2d::Sprite interface
+	// ee::Sprite interface
 	//
 	virtual bool Update(int version) { return false; }
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::Symbol* symbol);
+	virtual void SetSymbol(ee::Symbol* symbol);
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);	
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);	
 
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);
 
-	void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans()) const;
+	void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans()) const;
 
 	Scale9Type GetScale9Type() const { return m_data.GetType(); }
 
 	const Scale9Data& GetScale9Data() const { return m_data; }
 
-	static d2d::Sprite* Create(d2d::Symbol* symbol) {
+	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 	

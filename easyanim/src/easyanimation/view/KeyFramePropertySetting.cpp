@@ -6,7 +6,7 @@ namespace eanim
 {
 
 KeyFramePropertySetting::KeyFramePropertySetting(KeyFrame* frame)
-	: d2d::IPropertySetting("KeyFrame")
+	: ee::PropertySetting("KeyFrame")
 	, m_frame(frame)
 {
 }

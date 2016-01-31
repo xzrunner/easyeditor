@@ -10,10 +10,10 @@ namespace window
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage_panel)
-	: d2d::ToolbarPanel(parent, NULL)
+	: ee::ToolbarPanel(parent, NULL)
 	, m_stage_panel(stage_panel)
 {
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 	RegistSubject(ChangeWindowViewSizeSJ::Instance());
 }
 
@@ -27,7 +27,7 @@ void ToolbarPanel::SetWindowName(const std::string& name)
 	m_name_text->SetValue(name);
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(10);
@@ -78,8 +78,8 @@ void ToolbarPanel::OnNotify(int sj_id, void* ud)
 	if (sj_id == MSG_CHANGE_WINDOW_VIEW_SIZE) 
 	{
 		ChangeWindowViewSizeSJ::Params* p = (ChangeWindowViewSizeSJ::Params*)ud;
-		m_width_text->SetValue(d2d::StringHelper::ToString(p->width));
-		m_height_text->SetValue(d2d::StringHelper::ToString(p->height));
+		m_width_text->SetValue(ee::StringHelper::ToString(p->width));
+		m_height_text->SetValue(ee::StringHelper::ToString(p->height));
 	}
 }
 

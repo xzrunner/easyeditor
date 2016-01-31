@@ -1,14 +1,14 @@
 #ifndef _EASYIMAGE_RECT_CUT_CMPT_H_
 #define _EASYIMAGE_RECT_CUT_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
 class StagePanel;
 
-class RectCutCMPT : public d2d::AbstractEditCMPT
+class RectCutCMPT : public ee::EditCMPT
 {
 public:
 	RectCutCMPT(wxWindow* parent, const wxString& name,
@@ -18,7 +18,7 @@ public:
 	void onLoadEditOP(wxCommandEvent& event);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxSizer* initEditIOLayout();

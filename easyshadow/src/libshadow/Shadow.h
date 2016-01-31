@@ -1,12 +1,12 @@
 #ifndef _EASYSHADOW_SHADOW_H_
 #define _EASYSHADOW_SHADOW_H_
 
-#include <drag2d.h>
+
 
 namespace eshadow
 {
 
-class Shadow : public d2d::Object
+class Shadow : public ee::Object
 {
 public:
 	Shadow(float radius);
@@ -15,41 +15,41 @@ public:
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);
 
-	void Draw(const d2d::Matrix& mt, float alpha) const;
+	void Draw(const ee::Matrix& mt, float alpha) const;
 
 	void BuildFace();
 	void BuildOutterLine();
-	void BuildInnerLine(const std::vector<d2d::Vector>& loop);
+	void BuildInnerLine(const std::vector<ee::Vector>& loop);
 
-	const d2d::Rect& GetRegion() const { return m_region; }
+	const ee::Rect& GetRegion() const { return m_region; }
 
-	const d2d::Colorf& GetInnerColor() const { return m_inner_color; }
-	const d2d::Colorf& GetOuterColor() const { return m_outer_color; }
-	void SetInnerColer(const d2d::Colorf& col);
-	void SetOuterColer(const d2d::Colorf& col);
+	const ee::Colorf& GetInnerColor() const { return m_inner_color; }
+	const ee::Colorf& GetOuterColor() const { return m_outer_color; }
+	void SetInnerColer(const ee::Colorf& col);
+	void SetOuterColer(const ee::Colorf& col);
 
 	void SetRadius(float r) { m_radius = r; }
 
-	const std::vector<d2d::Vector>& GetInnerLoop() const { return m_inner_loop; }
+	const std::vector<ee::Vector>& GetInnerLoop() const { return m_inner_loop; }
 
 	static void InitShader();
 
 private:
-	void BuildInnerLoop(const std::vector<d2d::Vector>& loop);
+	void BuildInnerLoop(const std::vector<ee::Vector>& loop);
 	void BuildOuterLoop();
 
 private:
 	float m_radius;
 
-	std::vector<d2d::Vector> m_inner_loop;
-	std::vector<d2d::Vector> m_outer_loop;
+	std::vector<ee::Vector> m_inner_loop;
+	std::vector<ee::Vector> m_outer_loop;
 
-	d2d::Colorf m_inner_color, m_outer_color;
+	ee::Colorf m_inner_color, m_outer_color;
 
-	std::vector<d2d::Vector> m_tris;	
-	std::vector<d2d::Colorf> m_colors;	
+	std::vector<ee::Vector> m_tris;	
+	std::vector<ee::Colorf> m_colors;	
 
-	d2d::Rect m_region;
+	ee::Rect m_region;
 
 	static int m_shader_idx;
 

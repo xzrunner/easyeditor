@@ -10,28 +10,28 @@ class QuadIcon : public Icon
 {
 public:
 	QuadIcon();
-	QuadIcon(d2d::Image* img, const d2d::Vector* src, 
-		const d2d::Vector* screen);
+	QuadIcon(ee::Image* img, const ee::Vector* src, 
+		const ee::Vector* screen);
 
 	virtual const char* GetIconDesc() const { return "quad"; }
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
-	virtual void GetBound(float process, d2d::Vector bound[4]) const;
+	virtual void GetBound(float process, ee::Vector bound[4]) const;
 
-	virtual void Draw(const d2d::Matrix& mt, float process) const;
+	virtual void Draw(const ee::Matrix& mt, float process) const;
 
-	virtual d2d::Rect GetRegion(float process) const;
+	virtual ee::Rect GetRegion(float process) const;
 
-	const d2d::Vector* GetScreen() const { return m_screen; }
-	void SetScreen(const d2d::Vector* screen);
+	const ee::Vector* GetScreen() const { return m_screen; }
+	void SetScreen(const ee::Vector* screen);
 
 protected:
 	virtual void AfterSetImage();
 
 private:
-	d2d::Vector m_src[4], m_screen[4];
+	ee::Vector m_src[4], m_screen[4];
 
 }; // QuadIcon
 

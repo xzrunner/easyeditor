@@ -4,13 +4,15 @@
 #include "SpriteRenderer.h"
 #include "ScreenCache.h"
 #include "RenderContextStack.h"
-
-#include "dataset/Sprite.h"
-#include "dataset/ImageSymbol.h"
-#include "view/Camera.h"
-#include "render/GL.h"
+#include "Sprite.h"
+#include "ImageSymbol.h"
+#include "Camera.h"
+#include "GL.h"
+#include "Math2D.h"
 
 #include <dtex_facade.h>
+
+#include <assert.h>
 
 namespace ee
 {

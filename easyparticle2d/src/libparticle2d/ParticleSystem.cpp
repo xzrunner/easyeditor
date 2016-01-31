@@ -27,7 +27,7 @@ ParticleSystem::~ParticleSystem()
 	free(m_et);
 }
 
-void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
+void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -50,8 +50,8 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		m_et->cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		m_et->cfg->direction = data.val0 * d2d::TRANS_DEG_TO_RAD;
-		m_et->cfg->direction_var = data.val1 * d2d::TRANS_DEG_TO_RAD;
+		m_et->cfg->direction = data.val0 * ee::TRANS_DEG_TO_RAD;
+		m_et->cfg->direction_var = data.val1 * ee::TRANS_DEG_TO_RAD;
 		break;
 
 	case PS_GRAVITY:
@@ -95,7 +95,7 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
+void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -118,8 +118,8 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		m_et->cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		data.val0 = m_et->cfg->direction * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = m_et->cfg->direction_var * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = m_et->cfg->direction * ee::TRANS_RAD_TO_DEG;
+		data.val1 = m_et->cfg->direction_var * ee::TRANS_RAD_TO_DEG;
 		break;
 
 	case PS_GRAVITY:
@@ -163,7 +163,7 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::Draw(const d2d::Matrix& mt) const
+void ParticleSystem::Draw(const ee::Matrix& mt) const
 {
 	if (m_et->local_mode_draw) {
 		p2d_emitter_draw(m_et, &mt);
@@ -172,7 +172,7 @@ void ParticleSystem::Draw(const d2d::Matrix& mt) const
 	}
 }
 
-bool ParticleSystem::Update(const d2d::Matrix& mat)
+bool ParticleSystem::Update(const ee::Matrix& mat)
 {
 	float time = PS::Instance()->GetTime();
 	assert(m_et->time <= time);
@@ -259,12 +259,12 @@ bool ParticleSystem::IsEmpty() const
 void ParticleSystem::ReloadTexture() const
 {
 	for (int i = 0; i < m_et->cfg->symbol_count; ++i) {
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(m_et->cfg->symbols[i].ud);
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et->cfg->symbols[i].ud);
 		symbol->ReloadTexture();
 	}
 }
 
-p2d_symbol* ParticleSystem::AddSymbol(d2d::Symbol* symbol)
+p2d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
 {
 	assert(m_et->cfg->symbol_count < MAX_COMPONENTS);
 

@@ -1,7 +1,7 @@
 #ifndef _EASYMAP_TASK_H_
 #define _EASYMAP_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace emap
@@ -9,7 +9,7 @@ namespace emap
 
 class StagePanel;
 
-class Task : public d2d::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
@@ -20,9 +20,9 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const;
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const;
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 private:
 	void InitLayout();
@@ -32,10 +32,10 @@ private:
 
 	wxFrame* m_parent;
 
- 	d2d::LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
+ 	ee::LibraryPanel* m_library;
+	ee::PropertySettingPanel* m_property;
  	StagePanel* m_stage;
-	d2d::ViewlistPanel* m_viewlist;
+	ee::ViewlistPanel* m_viewlist;
 
 }; // Task
 

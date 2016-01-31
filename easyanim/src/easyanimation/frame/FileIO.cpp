@@ -30,7 +30,7 @@ void FileIO::Load(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	int fps = value["fps"].asInt();
 	SetFpsSJ::Instance()->Set(fps);
@@ -55,7 +55,7 @@ void FileIO::Load(const std::string& filepath)
 		layerValue = value["layer"][i++];
 	}
 
-	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 
 	SetSelectedSJ::Instance()->Set(0, 0);
 }
@@ -67,7 +67,7 @@ void FileIO::StoreSingle(const std::string& filepath)
 	value["name"] = DataMgr::Instance()->name;
 	value["fps"] = GetFpsSJ::Instance()->Get();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	LayersMgr& layers = DataMgr::Instance()->GetLayers();
 	for (size_t i = 0, n = layers.Size(); i < n; ++i) {
@@ -93,7 +93,7 @@ void FileIO::StoreTemplate(const std::string& filepath)
 	value["name"] = DataMgr::Instance()->name;
 	value["fps"] = GetFpsSJ::Instance()->Get();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	LayersMgr& layers = DataMgr::Instance()->GetLayers();
 	for (size_t i = 0, n = layers.Size(); i < n; ++i) {
 		value["layer"][i] = StoreLayer(layers.GetLayer(i), dir, false);
@@ -123,7 +123,7 @@ void FileIO::Reload()
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
@@ -131,7 +131,7 @@ void FileIO::Reload()
 		layerValue = value["layer"][i++];
 	}
 
-	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void FileIO::LoadFlash(const std::string& filepath)
@@ -143,13 +143,13 @@ void FileIO::LoadFlash(const std::string& filepath)
 	std::map<std::string, std::string> mapNamePath;
 	rapidxml::xml_node<>* imageNode = doc.first_node()->first_node("media")
 		->first_node("DOMBitmapItem");
-	std::string dlgpath = d2d::FileHelper::GetFileDir(filepath) + "\\";
+	std::string dlgpath = ee::FileHelper::GetFileDir(filepath) + "\\";
 	while (imageNode) {
 		std::string name = imageNode->first_attribute("name")->value();
-		name = d2d::FileHelper::GetFilePathExceptExtension(name);
+		name = ee::FileHelper::GetFilePathExceptExtension(name);
 
 		std::string path = imageNode->first_attribute("sourceExternalFilepath")->value();
-		std::string absolutePath = d2d::FileHelper::GetAbsolutePath(dlgpath, path);
+		std::string absolutePath = ee::FileHelper::GetAbsolutePath(dlgpath, path);
 
 		mapNamePath.insert(std::make_pair(name, absolutePath));
 
@@ -165,17 +165,17 @@ void FileIO::LoadFlash(const std::string& filepath)
 		layerNode = layerNode->next_sibling();
 	}
 
-	ViewMgr::Instance()->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ViewMgr::Instance()->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 {
-	if (!d2d::FileType::IsType(src, d2d::FileType::e_anim)) {
+	if (!ee::FileType::IsType(src, ee::FileType::e_anim)) {
 		return;
 	}
 
-	d2d::Snapshoot ss;
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(src);
+	ee::Snapshoot ss;
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(src);
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
@@ -200,12 +200,12 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 
 void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 {
-	if (!d2d::FileType::IsType(src, d2d::FileType::e_anim)) {
+	if (!ee::FileType::IsType(src, ee::FileType::e_anim)) {
 		return;
 	}
 
-	d2d::Snapshoot ss;
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(src);
+	ee::Snapshoot ss;
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(src);
 	ss.OutputToImageFile(symbol, dst);
 	symbol->Release();
 }
@@ -251,7 +251,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
-		d2d::Sprite* actor = LoadActor(actorValue, dir);
+		ee::Sprite* actor = LoadActor(actorValue, dir);
 		frame->Insert(actor);
 		actor->Release();
 		actorValue = frameValue["actor"][i++];
@@ -262,16 +262,16 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, const Json::Value& frameValue, const s
 	return frame;
 }
 
-d2d::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir)
+ee::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir)
 {
 	std::string filepath = actorValue["filepath"].asString();
 	while (true) 
 	{
-		if (d2d::FileHelper::IsFileExist(filepath))
+		if (ee::FileHelper::IsFileExist(filepath))
 			break;
 
-		std::string absolute_path = d2d::FileHelper::GetAbsolutePath(dir, filepath);
-		if (d2d::FileHelper::IsFileExist(absolute_path))
+		std::string absolute_path = ee::FileHelper::GetAbsolutePath(dir, filepath);
+		if (ee::FileHelper::IsFileExist(absolute_path))
 		{
 			filepath = absolute_path;
 			break;
@@ -280,27 +280,27 @@ d2d::Sprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string&
 		std::string res_path = absolute_path;
 		if (!DataMgr::Instance()->GetTemplate().Empty())
 			res_path = DataMgr::Instance()->GetTemplate().Dir() + "\\" + filepath;
-		if (!d2d::FileHelper::IsFileExist(res_path))
-			absolute_path = d2d::FileHelper::GetAbsolutePath(dir, res_path);
-		if (!d2d::FileHelper::IsFileExist(absolute_path)) {
-			throw d2d::Exception("File: %s don't exist!", res_path.c_str());
+		if (!ee::FileHelper::IsFileExist(res_path))
+			absolute_path = ee::FileHelper::GetAbsolutePath(dir, res_path);
+		if (!ee::FileHelper::IsFileExist(absolute_path)) {
+			throw ee::Exception("File: %s don't exist!", res_path.c_str());
 		}
 
 		filepath = absolute_path;
 		break;
 	}
 
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
 //	symbol->refresh();
-	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	sprite->Load(actorValue);
 	symbol->Release();
 
 	return sprite;
 }
 
-void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<d2d::Sprite*>& sprites,
+void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee::Sprite*>& sprites,
 						  SkeletonData& skeleton)
 {
 	// prepare joints
@@ -310,7 +310,7 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<d2
 	Json::Value jointsVal = skeletonValue[i++];
 	while (!jointsVal.isNull()) {
 		std::string spriteName = jointsVal["sprite"].asString();
-		d2d::Sprite* sprite = NULL;
+		ee::Sprite* sprite = NULL;
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == spriteName) 
@@ -340,7 +340,7 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<d2
 	jointsVal = skeletonValue[i++];
 	while (!jointsVal.isNull()) {
 		std::string spriteName = jointsVal["sprite"].asString();
-		d2d::Sprite* sprite = NULL;
+		ee::Sprite* sprite = NULL;
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == spriteName) 
@@ -405,7 +405,7 @@ Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 KeyFrame* FileIO::LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath)
 {
-	int time = d2d::StringHelper::FromString<int>(frameNode->first_attribute("index")->value()) + 1;
+	int time = ee::StringHelper::FromString<int>(frameNode->first_attribute("index")->value()) + 1;
 
 	KeyFrame* frame = new KeyFrame(time);
 	frame->SetLayer(layer);
@@ -413,7 +413,7 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
-		d2d::Sprite* actor = LoadActor(actorNode, mapNamePath);
+		ee::Sprite* actor = LoadActor(actorNode, mapNamePath);
 		frame->Insert(actor);
 		actor->Release();
 		actorNode = actorNode->next_sibling();
@@ -422,14 +422,14 @@ KeyFrame* FileIO::LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 	return frame;
 }
 
-d2d::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
+ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 								const std::map<std::string, std::string>& mapNamePath)
 {
 	std::string name = actorNode->first_attribute("libraryItemName")->value();
 	std::string filepath = mapNamePath.find(name)->second;
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 //	symbol->refresh();
-	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	symbol->Release();
 
 	rapidxml::xml_node<>* matrixNode = actorNode->first_node("matrix")->first_node("Matrix");
@@ -446,7 +446,7 @@ d2d::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	wxString(sx).ToDouble(&x);
 	wxString(sy).ToDouble(&y);
 
-	sprite->SetTransform(d2d::Vector(float(tx+x), float(ty+y)), 0);
+	sprite->SetTransform(ee::Vector(float(tx+x), float(ty+y)), 0);
 
 	return sprite;
 }
@@ -489,20 +489,20 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir,
 	return value;
 }
 
-Json::Value FileIO::StoreActor(const d2d::Sprite* sprite, const std::string& dir,
+Json::Value FileIO::StoreActor(const ee::Sprite* sprite, const std::string& dir,
 							   bool single)
 {
 	Json::Value value;
 
-	const d2d::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol& symbol = sprite->GetSymbol();
 	// filepath
-	std::string relative_path = d2d::FileHelper::GetRelativePath(dir, 
+	std::string relative_path = ee::FileHelper::GetRelativePath(dir, 
 		symbol.GetFilepath()).ToStdString();
 	if (single) {
 		value["filepath"] = relative_path;
 	} else {
 		if (DataMgr::Instance()->GetTemplate().ContainPath(relative_path)) {
-			value["filepath"] = d2d::FileHelper::GetFilenameWithExtension(
+			value["filepath"] = ee::FileHelper::GetFilenameWithExtension(
 				symbol.GetFilepath()).ToStdString();
 		} else {
 			value["filepath"] = relative_path;
@@ -524,7 +524,7 @@ Json::Value FileIO::StoreSkeleton(const SkeletonData& skeleton)
 {
 	Json::Value value;
 
-	std::map<d2d::Sprite*, std::vector<Joint*> >::const_iterator itr
+	std::map<ee::Sprite*, std::vector<Joint*> >::const_iterator itr
 		= skeleton.m_map_joints.begin();
 	for (int i = 0; itr != skeleton.m_map_joints.end(); ++itr, ++i)
 	{

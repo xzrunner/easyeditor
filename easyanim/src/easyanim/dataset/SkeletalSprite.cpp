@@ -80,7 +80,7 @@ void SkeletalSprite::reloadTexture()
 
 void SkeletalSprite::initBounding()
 {
-	m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
+	m_bounding = ee::BVFactory::createBV(ee::e_obb);
 	m_skeleton->getBounding(*m_bounding);
 }
 
@@ -88,7 +88,7 @@ void SkeletalSprite::initBounding()
 // class SkeletalSprite::ReloadTextureVisitor
 //////////////////////////////////////////////////////////////////////////
 
-void SkeletalSprite::ReloadTextureVisitor::visit(d2d::ICloneable* object, bool& bFetchNext)
+void SkeletalSprite::ReloadTextureVisitor::visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	WholeSkeleton::Sprite* bone = static_cast<WholeSkeleton::Sprite*>(object);
 	bone->getSymbol()->reloadTexture();

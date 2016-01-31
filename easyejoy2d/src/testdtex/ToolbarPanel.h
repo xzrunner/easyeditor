@@ -1,20 +1,20 @@
 #ifndef _TEST_DTEX_TOOLBAR_PANEL_H_
 #define _TEST_DTEX_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace tdtex
 {
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 }; // ToolbarPanel
 

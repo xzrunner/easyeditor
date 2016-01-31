@@ -19,14 +19,14 @@ void Love2dCode::resolve()
 	{
 		std::vector<LibraryItem*> items;
 		m_library->getShapePage()->getList()->
-			traverse(d2d::FetchAllVisitor<LibraryItem>(items));
+			traverse(ee::FetchAllVisitor<LibraryItem>(items));
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 			resolve(items[i]);
 	}
 	{
 		std::vector<LibraryItem*> items;
 		m_library->getImagePage()->getList()->
-			traverse(d2d::FetchAllVisitor<LibraryItem>(items));
+			traverse(ee::FetchAllVisitor<LibraryItem>(items));
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 			resolve(items[i]);
 	}
@@ -38,13 +38,13 @@ void Love2dCode::resolve(LibraryItem* item)
 
 	lua::TableAssign ta(m_gen, name);
 	
-	std::vector<d2d::IShape*>* shapes 
-		= static_cast<std::vector<d2d::IShape*>*>(item->getUserData());
+	std::vector<ee::IShape*>* shapes 
+		= static_cast<std::vector<ee::IShape*>*>(item->getUserData());
 	for (size_t i = 0, n = shapes->size(); i < n; ++i)
 		resolve((*shapes)[i]);
 }
 
-void Love2dCode::resolve(d2d::IShape* shape)
+void Love2dCode::resolve(ee::IShape* shape)
 {
 	if (libshape::BezierShape* bezier = dynamic_cast<libshape::BezierShape*>(shape))
 		resolve(bezier);
@@ -66,7 +66,7 @@ void Love2dCode::resolve(const libshape::BezierShape* bezier)
 
 	std::string points = lua::assign("points", "");
 	points += "{ ";
-	const d2d::Vector* ctrl_nodes = bezier->GetCtrlNode();
+	const ee::Vector* ctrl_nodes = bezier->GetCtrlNode();
 	for (int i = 0; i < libshape::BezierShape::CTRL_NODE_COUNT; ++i)
 	{
 		points += wxString::FromDouble(ctrl_nodes[i].x, 1)+",";
@@ -84,7 +84,7 @@ void Love2dCode::resolve(const libshape::PolygonShape* poly)
 	std::string name = lua::assign("name", "\""+poly->name+"\"");
 
 	std::string points = lua::assign("points", "");
-	const std::vector<d2d::Vector>& vertices = poly->GetVertices();
+	const std::vector<ee::Vector>& vertices = poly->GetVertices();
 	points += "{ ";
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
@@ -103,7 +103,7 @@ void Love2dCode::resolve(const libshape::ChainShape* chain)
 	std::string name = lua::assign("name", "\""+chain->name+"\"");
 
 	std::string points = lua::assign("points", "");
-	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
+	const std::vector<ee::Vector>& vertices = chain->GetVertices();
 	points += "{ ";
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{

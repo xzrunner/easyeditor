@@ -3,13 +3,13 @@
 namespace libcoco
 {
 
-void Utility::GroupSpritesFromTag(const std::vector<d2d::Sprite*>& src, 
-								  std::map<std::string, std::vector<d2d::Sprite*> >& dst,
-								  std::vector<d2d::Sprite*>& others)
+void Utility::GroupSpritesFromTag(const std::vector<ee::Sprite*>& src, 
+								  std::map<std::string, std::vector<ee::Sprite*> >& dst,
+								  std::vector<ee::Sprite*>& others)
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = src[i];
+		ee::Sprite* sprite = src[i];
 		if (sprite->tag.empty())
 		{
 			others.push_back(sprite);
@@ -17,7 +17,7 @@ void Utility::GroupSpritesFromTag(const std::vector<d2d::Sprite*>& src,
 		else
 		{
 			std::vector<std::string> tags;
-			d2d::StringHelper::Split(sprite->tag, ";", tags);
+			ee::StringHelper::Split(sprite->tag, ";", tags);
 			bool is_action = false;
 			for (int i = 0, n = tags.size(); i < n; ++i)
 			{
@@ -27,11 +27,11 @@ void Utility::GroupSpritesFromTag(const std::vector<d2d::Sprite*>& src,
 
 				is_action = true;
 
-				std::map<std::string, std::vector<d2d::Sprite*> >::iterator itr = 
+				std::map<std::string, std::vector<ee::Sprite*> >::iterator itr = 
 					dst.find(tags[i]);
 				if (itr == dst.end())
 				{
-					std::vector<d2d::Sprite*> sprites;
+					std::vector<ee::Sprite*> sprites;
 					sprites.push_back(sprite);
 					dst.insert(std::make_pair(tags[i], sprites));
 				}

@@ -1,18 +1,18 @@
 #ifndef FORMATION_SELECT_SPRITES_OP_H
 #define FORMATION_SELECT_SPRITES_OP_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {
-	class SelectSpritesOP : public d2d::SelectSpritesOP
+	class SelectSpritesOP : public ee::SelectSpritesOP
 	{
 	public:
-		SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-			d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback = NULL);
+		SelectSpritesOP(ee::EditPanel* editPanel, ee::MultiSpritesImpl* spritesImpl, 
+			ee::PropertySettingPanel* propertyPanel, ee::AbstractEditCMPT* callback = NULL);
 
-		virtual d2d::IPropertySetting* createPropertySetting(d2d::ISprite* sprite) const;
-		virtual d2d::IPropertySetting* createPropertySetting(const std::vector<d2d::ISprite*>& sprites) const;
+		virtual ee::IPropertySetting* createPropertySetting(ee::ISprite* sprite) const;
+		virtual ee::IPropertySetting* createPropertySetting(const std::vector<ee::ISprite*>& sprites) const;
 
 	}; // SelectSpritesOP
 }

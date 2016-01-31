@@ -5,12 +5,12 @@ namespace eanim3d
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library,
-					   d2d::PropertySettingPanel* property)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+					   ee::LibraryPanel* library,
+					   ee::PropertySettingPanel* property)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	SetEditOP(new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, GetStageImpl(), this, property));
+	SetEditOP(new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this, property));
 	SetCanvas(new StageCanvas(this, GetStageImpl(), this));
 }
 

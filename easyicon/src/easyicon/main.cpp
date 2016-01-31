@@ -7,7 +7,7 @@ IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-	d2d::Frame* frame = new d2d::Frame("EasyIcon", eicon::FILE_TAG);
+	ee::Frame* frame = new ee::Frame("EasyIcon", eicon::FILE_TAG);
 	eicon::Task* task = new eicon::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_IMAGE_PROCESS_CMPT_H_
 #define _EASYIMAGE_IMAGE_PROCESS_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
@@ -10,14 +10,14 @@ class StagePanel;
 class EdgeDetectionShader;
 class BlurShader;
 
-class ImageProcessCMPT : public d2d::AbstractEditCMPT
+class ImageProcessCMPT : public ee::EditCMPT
 {
 public:
 	ImageProcessCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void OnNormal(wxCommandEvent& event);

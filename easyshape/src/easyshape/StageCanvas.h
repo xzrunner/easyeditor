@@ -1,14 +1,14 @@
 #ifndef _ESHAPE_STAGE_CANVAS_H_
 #define _ESHAPE_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace eshape
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::ShapeStageCanvas
+class StageCanvas : public ee::ShapeStageCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

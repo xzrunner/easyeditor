@@ -4,7 +4,7 @@
 #include "check_params.h"
 
 #include <wx/filename.h>
-#include <drag2d.h>
+
 #include <glfw.h>
 
 namespace edb
@@ -43,11 +43,11 @@ void ScaleOverall::Run(int argc, char *argv[])
 		return;
 	}
 
-	d2d::ShaderMgr::Instance()->reload();
+	ee::ShaderMgr::Instance()->reload();
 
-	d2d::Snapshoot ss;
+	ee::Snapshoot ss;
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
@@ -59,19 +59,19 @@ void ScaleOverall::Run(int argc, char *argv[])
 	data.pre_multi_alpha = ori_alpha_cfg;
 }
 
-void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale) const
+void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale) const
 {	
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 
-	std::map<std::string, d2d::Vector> mapImg2Center;
+	std::map<std::string, ee::Vector> mapImg2Center;
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			ScaleImage(filepath, scale, ss, mapImg2Center);
 		}
 	}
@@ -81,22 +81,22 @@ void ScaleOverall::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			ScaleComplex(filepath, scale, mapImg2Center);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			ScaleAnim(filepath, scale, mapImg2Center);
 		}
 	}
 }
 
-void ScaleOverall::ScaleImage(const std::string& filepath, float scale, d2d::Snapshoot& ss,
-							  std::map<std::string, d2d::Vector>& mapImg2Center) const
+void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
+							  std::map<std::string, ee::Vector>& mapImg2Center) const
 {
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
-	d2d::ImageSymbol* img = static_cast<d2d::ImageSymbol*>(symbol);
+	ee::ImageSymbol* img = static_cast<ee::ImageSymbol*>(symbol);
 
-	d2d::Vector img_offset;
+	ee::Vector img_offset;
 	img_offset.x = img->GetSize().CenterX();
 	img_offset.y = img->GetSize().CenterY();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
@@ -106,7 +106,7 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale, d2d::Sna
 }
 
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,
-								const std::map<std::string, d2d::Vector>& mapImg2Center) const
+								const std::map<std::string, ee::Vector>& mapImg2Center) const
 {
 	wxFileName filename(path);
 	filename.Normalize();
@@ -120,21 +120,21 @@ void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(path);
+	std::string dir = ee::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value spriteVal = value["sprite"][i++];
 	while (!spriteVal.isNull()) {
 		std::string relative = spriteVal["filepath"].asString();
-		std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, relative);
+		std::string filepath = ee::FileHelper::GetAbsolutePath(dir, relative);
 
-		std::map<std::string, d2d::Vector>::const_iterator itr 
+		std::map<std::string, ee::Vector>::const_iterator itr 
 			= mapImg2Center.find(filepath);
 		if (itr == mapImg2Center.end()) {
-//			throw d2d::Exception("Image %s, not found in images!", filepath.c_str());
+//			throw ee::Exception("Image %s, not found in images!", filepath.c_str());
 			continue;
 		} else {
-			d2d::Vector pos = GetScaledPos(spriteVal, scale, itr->second);
+			ee::Vector pos = GetScaledPos(spriteVal, scale, itr->second);
 			value["sprite"][i-1]["position"]["x"] = pos.x;
 			value["sprite"][i-1]["position"]["y"] = pos.y;
 		}
@@ -151,7 +151,7 @@ void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 }
 
 void ScaleOverall::ScaleAnim(const std::string& path, float scale,
-							 const std::map<std::string, d2d::Vector>& mapImg2Center) const
+							 const std::map<std::string, ee::Vector>& mapImg2Center) const
 {
 	wxFileName filename(path);
 	filename.Normalize();
@@ -165,7 +165,7 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(path);
+	std::string dir = ee::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value layerVal = value["layer"][i++];
@@ -177,15 +177,15 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 			Json::Value entryVal = frameVal["actor"][k++];
 			while (!entryVal.isNull()) {
 				std::string relative = entryVal["filepath"].asString();
-				std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, relative);
+				std::string filepath = ee::FileHelper::GetAbsolutePath(dir, relative);
 
-				std::map<std::string, d2d::Vector>::const_iterator itr 
+				std::map<std::string, ee::Vector>::const_iterator itr 
 					= mapImg2Center.find(filepath);
 				if (itr == mapImg2Center.end()) {
-//					throw d2d::Exception("Image %s, not found in images!", filepath.c_str());
+//					throw ee::Exception("Image %s, not found in images!", filepath.c_str());
 					continue;
 				} else {
-					d2d::Vector pos = GetScaledPos(entryVal, scale, itr->second);
+					ee::Vector pos = GetScaledPos(entryVal, scale, itr->second);
 					value["layer"][i-1]["frame"][j-1]["actor"][k-1]["position"]["x"] = pos.x;
 					value["layer"][i-1]["frame"][j-1]["actor"][k-1]["position"]["y"] = pos.y;
 				}
@@ -207,23 +207,23 @@ void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 	fout.close();
 }
 
-d2d::Vector ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
-									   const d2d::Vector& img_offset) const
+ee::Vector ScaleOverall::GetScaledPos(Json::Value& sprite_val, float scale, 
+									   const ee::Vector& img_offset) const
 {
-	d2d::Vector pos;
+	ee::Vector pos;
 	pos.x = sprite_val["position"]["x"].asDouble();
 	pos.y = sprite_val["position"]["y"].asDouble();
 
 	float angle = sprite_val["angle"].asDouble();
 
-	d2d::Vector offset;
+	ee::Vector offset;
 	offset.x = sprite_val["x offset"].asDouble();
 	offset.y = sprite_val["y offset"].asDouble();
 
-// 	d2d::Vector center = pos + d2d::Math2D::RotateVector(-offset, angle);
-// 	center = center + d2d::Math2D::RotateVector(img_offset, angle);
+// 	ee::Vector center = pos + ee::Math2D::RotateVector(-offset, angle);
+// 	center = center + ee::Math2D::RotateVector(img_offset, angle);
 
-	d2d::Vector center = pos + d2d::Math2D::RotateVector(img_offset, angle);
+	ee::Vector center = pos + ee::Math2D::RotateVector(img_offset, angle);
 
 	center *= scale;
 

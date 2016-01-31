@@ -1,7 +1,7 @@
 #ifndef _EASYEDITOR_RENDER_CONTEXT_H_
 #define _EASYEDITOR_RENDER_CONTEXT_H_
 
-#include "common/Vector.h"
+#include "Vector.h"
 
 namespace ee
 {

@@ -4,7 +4,7 @@
 using namespace ebuilder;
 
 PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
-	: d2d::PropertySettingPanel(parent)
+	: ee::PropertySettingPanel(parent)
 {
 	initLayout();
 }

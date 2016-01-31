@@ -9,22 +9,22 @@
 //class MultiColorMaterial : public Material
 //{
 //public:
-//	MultiColorMaterial(const std::vector<d2d::Vector>& vertices,
-//		const d2d::Colorf& color);
+//	MultiColorMaterial(const std::vector<ee::Vector>& vertices,
+//		const ee::Colorf& color);
 //
 //	virtual Json::Value Store(const std::string& dirpath) const;
 //
-//	virtual void Draw(const d2d::Matrix& mt) const;
+//	virtual void Draw(const ee::Matrix& mt) const;
 //
 //	virtual void ReloadTexture() {}
 //
 //protected:
-//	virtual void Build(const std::vector<d2d::Vector>& vertices);
-//	virtual void Build(const std::vector<d2d::Vector>& vertices,
-//		const std::vector<d2d::Vector>& segments);
+//	virtual void Build(const std::vector<ee::Vector>& vertices);
+//	virtual void Build(const std::vector<ee::Vector>& vertices,
+//		const std::vector<ee::Vector>& segments);
 //
 //private:
-//	std::vector<d2d::Colorf> m_colors;
+//	std::vector<ee::Colorf> m_colors;
 //
 //}; // MultiColorMaterial
 //

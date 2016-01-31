@@ -14,9 +14,9 @@ BodyManager::BodyManager()
 {
 }
 
-IBody* BodyManager::LoadBody(d2d::Sprite* sprite)
+IBody* BodyManager::LoadBody(ee::Sprite* sprite)
 {
-	std::map<d2d::Sprite*, IBody*>::iterator itr = 
+	std::map<ee::Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(sprite);
 	IBody* body = CreateBody(sprite);
 	if (itr == m_map_body.end()) {
@@ -25,14 +25,14 @@ IBody* BodyManager::LoadBody(d2d::Sprite* sprite)
 			m_map_body.insert(std::make_pair(sprite, body));
 		}
 	} else {
-		d2d::obj_assign<IBody>(itr->second, body);
+		ee::obj_assign<IBody>(itr->second, body);
 	}
 	return body;
 }
 
-void BodyManager::UnloadBody(d2d::Sprite* sprite)
+void BodyManager::UnloadBody(ee::Sprite* sprite)
 {
-	std::map<d2d::Sprite*, IBody*>::iterator itr = 
+	std::map<ee::Sprite*, IBody*>::iterator itr = 
 		m_map_body.find(sprite);
 	if (itr != m_map_body.end()) {
 		itr->first->Release();
@@ -41,9 +41,9 @@ void BodyManager::UnloadBody(d2d::Sprite* sprite)
 	}
 }
 
-const IBody* BodyManager::QueryBody(d2d::Sprite* sprite) const
+const IBody* BodyManager::QueryBody(ee::Sprite* sprite) const
 {
-	std::map<d2d::Sprite*, IBody*>::const_iterator itr = 
+	std::map<ee::Sprite*, IBody*>::const_iterator itr = 
 		m_map_body.find(sprite);
 	if (itr != m_map_body.end()) {
 		return itr->second;
@@ -54,32 +54,32 @@ const IBody* BodyManager::QueryBody(d2d::Sprite* sprite) const
 
 void BodyManager::Update()
 {
-	std::map<d2d::Sprite*, IBody*>::iterator itr =
+	std::map<ee::Sprite*, IBody*>::iterator itr =
 		m_map_body.begin();
 	for ( ; itr != m_map_body.end(); ++itr) {
 		IBody* body = itr->second;
 		if (!body || !(body->getBody())) {
 			continue;
 		}
-		d2d::Sprite* sprite = itr->first;
+		ee::Sprite* sprite = itr->first;
 		b2Body* b2body = body->getBody();
 		if (body->isAlive() && b2body->GetType() != b2_staticBody) {
-			d2d::Vector pos(b2body->GetPosition().x, b2body->GetPosition().y);
+			ee::Vector pos(b2body->GetPosition().x, b2body->GetPosition().y);
 			sprite->SetTransform(pos * BOX2D_SCALE_FACTOR, b2body->GetAngle());
 		} else {
-			d2d::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
+			ee::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
 			b2body->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
 		}
 	}
 }
 
-IBody* BodyManager::CreateBody(d2d::Sprite* sprite)
+IBody* BodyManager::CreateBody(ee::Sprite* sprite)
 {
-	std::string filepath = d2d::FileHelper::GetFilenameAddTag(
+	std::string filepath = ee::FileHelper::GetFilenameAddTag(
 		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
-	if (d2d::FileHelper::IsFileExist(filepath)) {
+	if (ee::FileHelper::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
-		d2d::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
+		ee::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;
 		body->getBody()->SetTransform(b2Vec2(pos.x, pos.y), sprite->GetAngle());
 		return body;
 	} else {

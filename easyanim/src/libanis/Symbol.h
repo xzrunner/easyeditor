@@ -3,14 +3,14 @@
 
 #include "../libanim/LayersLoader.h"
 
-#include <drag2d.h>
+
 
 namespace libanim { class Symbol; }
 
 namespace libanis
 {
 
-class Symbol : public d2d::Symbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -25,9 +25,9 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
+		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 protected:
 	virtual void LoadResources();
@@ -51,7 +51,7 @@ private:
 	void Clear();
 
 private:
-	d2d::Rect m_rect;
+	ee::Rect m_rect;
 
 	std::vector<libanim::Symbol*> m_symbols;	
 

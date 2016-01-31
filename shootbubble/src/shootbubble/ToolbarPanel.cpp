@@ -5,15 +5,15 @@
 using namespace shootbubble;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+	: ee::ToolbarPanel(parent, Context::Instance()->stage)
 {
 	Context* context = Context::Instance();
 
-	addChild(new d2d::UniversalCMPT(this, wxT("paste"), context->stage, 
-		new d2d::PasteSymbolOP(context->stage, context->stage, context->library)));
-	addChild(new d2d::PasteSpriteCMPT(this, wxT("batch"), context->stage, context->stage, context->property));
-	addChild(new d2d::UniversalCMPT(this, wxT("arrange"), context->stage, 
-		new d2d::ArrangeSpriteFixOP(context->stage, context->stage, context->property)));
+	addChild(new ee::UniversalCMPT(this, wxT("paste"), context->stage, 
+		new ee::PasteSymbolOP(context->stage, context->stage, context->library)));
+	addChild(new ee::PasteSpriteCMPT(this, wxT("batch"), context->stage, context->stage, context->property));
+	addChild(new ee::UniversalCMPT(this, wxT("arrange"), context->stage, 
+		new ee::ArrangeSpriteFixOP(context->stage, context->stage, context->property)));
 
 	SetSizer(initLayout());	
 }

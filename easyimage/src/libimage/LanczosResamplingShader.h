@@ -1,12 +1,12 @@
 #ifndef _EASYIMAGE_LANCZOS_RESAMPLING_SHADER_H_
 #define _EASYIMAGE_LANCZOS_RESAMPLING_SHADER_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
-class LanczosResamplingShader : public d2d::SpriteShader
+class LanczosResamplingShader : public ee::SpriteShader
 {
 public:
 	LanczosResamplingShader();

@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_STAGE_PANEL_H_
 #define _EASYSCALE9_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
@@ -9,21 +9,21 @@ namespace escale9
 class Symbol;
 class ToolbarPanel;
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
+class StagePanel : public ee::EditPanel, public ee::MultiSpritesImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, ee::LibraryPanel* library);
 
 	//
-	// d2d::MultiSpritesImpl interface
+	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::Visitor& visitor, 
-		d2d::DataTraverseType type = d2d::DT_ALL,
+	virtual void TraverseSprites(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL,
 		bool order = true) const;
 
 	Symbol* getPatchSymbol() { return m_symbol; }
 
-	d2d::Sprite* getSprite(int row, int col) {
+	ee::Sprite* getSprite(int row, int col) {
 		if (row < 0 || row >= 3 || col < 0 || col >= 3)
 			return NULL;
 		return m_sprites[row][col];
@@ -40,19 +40,19 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(d2d::Sprite* spr);
-	void Remove(d2d::Sprite* spr);
+	void Insert(ee::Sprite* spr);
+	void Remove(ee::Sprite* spr);
 	void Clear();
 
 private:
 	// [2][0]
 	// [1][0]
 	// [0][0] [0][1] [0][2]
-	d2d::Sprite* m_sprites[3][3];
+	ee::Sprite* m_sprites[3][3];
 
 	Symbol* m_symbol;
 
-	d2d::LibraryPanel* m_library;
+	ee::LibraryPanel* m_library;
 
 	ToolbarPanel* m_toolbar;
 

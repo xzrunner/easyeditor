@@ -6,7 +6,7 @@ namespace emap
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
+	: ee::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 {
 }
@@ -15,10 +15,10 @@ void StageCanvas::OnDrawSprites() const
 {
 	DrawGuideLines();
 
-	d2d::Rect sr = m_screen.GetRegion();
-	m_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
-	m_panel->TraverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	ee::Rect sr = m_screen.GetRegion();
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		ee::DT_VISIBLE);
+	m_panel->TraverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();
 }
@@ -27,10 +27,10 @@ void StageCanvas::DrawGuideLines() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 
+	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 
 		cfg->m_view_width * 0.5f,
 		cfg->m_view_height * 0.5f,
-		d2d::LIGHT_GREY_LINE);
+		ee::LIGHT_GREY_LINE);
 }
 
 }

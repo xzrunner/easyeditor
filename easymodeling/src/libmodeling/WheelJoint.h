@@ -11,29 +11,29 @@ namespace libmodeling
 	public:
 		WheelJoint(Body* b0, Body* b1);
 
-		virtual bool isContain(const d2d::Vector& pos) const;
-		virtual bool isIntersect(const d2d::Rect& rect) const;
+		virtual bool isContain(const ee::Vector& pos) const;
+		virtual bool isIntersect(const ee::Rect& rect) const;
 
 		virtual void draw(DrawType type) const;
 
-		d2d::Vector getWorldAnchorA() const;
-		d2d::Vector getWorldAnchorB() const;
+		ee::Vector getWorldAnchorA() const;
+		ee::Vector getWorldAnchorB() const;
 
-		void setLocalAnchorA(const d2d::Vector& world);
-		void setLocalAnchorB(const d2d::Vector& world);
+		void setLocalAnchorA(const ee::Vector& world);
+		void setLocalAnchorB(const ee::Vector& world);
 
 	private:
-		void drawAxisALine(const d2d::Vector& worldAnchorA) const;
-		void drawFootBLine(const d2d::Vector& worldAnchorA, const d2d::Vector& worldAnchorB) const;
+		void drawAxisALine(const ee::Vector& worldAnchorA) const;
+		void drawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const;
 
-		void drawAnchorA(const d2d::Vector& pos, DrawType type) const;
-		void drawAnchorB(const d2d::Vector& pos, DrawType type) const;
+		void drawAnchorA(const ee::Vector& pos, DrawType type) const;
+		void drawAnchorB(const ee::Vector& pos, DrawType type) const;
 
 	public:
-		d2d::Vector localAnchorA;
-		d2d::Vector localAnchorB;
+		ee::Vector localAnchorA;
+		ee::Vector localAnchorB;
 
-		d2d::Vector localAxisA;
+		ee::Vector localAxisA;
 
 		bool enableMotor;
 		float maxMotorTorque;

@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-BezierPropertySetting::BezierPropertySetting(d2d::EditPanelImpl* stage, 
+BezierPropertySetting::BezierPropertySetting(ee::EditPanelImpl* stage, 
 											 BezierShape* bezier)
-	: d2d::IPropertySetting("Bezier")
+	: ee::PropertySetting("Bezier")
 	, m_stage(stage)
 	, m_bezier(bezier)
 {
@@ -26,13 +26,13 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_bezier->GetRect().CenterX();
-		m_bezier->Translate(d2d::Vector(dx, 0.0f));
+		m_bezier->Translate(ee::Vector(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_bezier->GetRect().CenterY();
-		m_bezier->Translate(d2d::Vector(0.0f, dy));
+		m_bezier->Translate(ee::Vector(0.0f, dy));
 	}
 	else if (name == wxT("Mirror"))
 	{
@@ -51,7 +51,7 @@ void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

@@ -9,7 +9,7 @@ namespace librespacker
 class PictureFromLua
 {
 public:
-	static void Unpack(lua_State* L, const std::vector<d2d::Image*>& images,
+	static void Unpack(lua_State* L, const std::vector<ee::Image*>& images,
 		PackPicture* picture);
 
 }; // PictureFromLua

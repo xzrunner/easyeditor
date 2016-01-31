@@ -8,7 +8,7 @@ namespace emesh
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* panel);

@@ -8,10 +8,10 @@ namespace eanim
 
 class StagePanel;
 
-class SkeletonOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
+class SkeletonOP : public ee::ArrangeSpriteOP<SelectSpritesOP>
 {
 public:
-	SkeletonOP(StagePanel* stage, d2d::PropertySettingPanel* property);
+	SkeletonOP(StagePanel* stage, ee::PropertySettingPanel* property);
 
 }; // SkeletonOP
 

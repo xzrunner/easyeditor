@@ -1,12 +1,12 @@
 #ifndef _EASYTERRAIN3D_FRAME_H_
 #define _EASYTERRAIN3D_FRAME_H_
 
-#include <drag2d.h>
+
 
 namespace eterrain3d
 {
 
-class Frame : public d2d::Frame
+class Frame : public ee::Frame
 {
 public:
 	Frame(const wxString& title);

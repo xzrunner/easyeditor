@@ -6,33 +6,33 @@ namespace coceditor
 {
 namespace complex
 {
-	BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
+	BEGIN_EVENT_TABLE(StageCanvas, ee::OrthoCanvas)
 		EVT_MOUSE_EVENTS(StageCanvas::onMouse)
 		EVT_KEY_DOWN(StageCanvas::onKeyDown)
 	END_EVENT_TABLE()
 
 	StageCanvas::StageCanvas(StagePanel* editPanel)
-		: d2d::OrthoCanvas(editPanel)
+		: ee::OrthoCanvas(editPanel)
 		, m_editPanel(editPanel)
 	{
 	}
 
 	void StageCanvas::initGL()
 	{
-		d2d::OrthoCanvas::initGL();
+		ee::OrthoCanvas::initGL();
 		m_editPanel->getLibraryPanel()->reloadTexture();
 	}
 
 	void StageCanvas::onDraw()
 	{
-// 		m_editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_batch), d2d::e_visible);
+// 		m_editPanel->traverseSprites(ee::DrawSpritesVisitor(m_batch), ee::e_visible);
 // 		m_editPanel->drawEditTemp();
 
-		std::vector<d2d::ISprite*> sprites;
-		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		std::vector<ee::ISprite*> sprites;
+		m_editPanel->traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites));
 
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
-			d2d::SpriteDraw::drawSprite(sprites[i]);
+			ee::SpriteDraw::drawSprite(sprites[i]);
 	}
 
 	void StageCanvas::onMouse(wxMouseEvent& event)

@@ -1,13 +1,13 @@
 #ifndef _EASYMODELING_PREVIEW_CANVAS_H_
 #define _EASYMODELING_PREVIEW_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace emodeling
 {
 class PreviewPanel;
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public ee::OrthoCanvas
 {
 public:
 	PreviewCanvas(PreviewPanel* editPanel);

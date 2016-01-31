@@ -5,9 +5,9 @@
 namespace libshape
 {
 
-SelectNodesOP::SelectNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-							 d2d::MultiShapesImpl* shapesImpl,
-							 d2d::AbstractEditCMPT* callback /*= NULL*/)
+SelectNodesOP::SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+							 ee::MultiShapesImpl* shapesImpl,
+							 ee::EditCMPT* callback /*= NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_shapeImpl(shapesImpl)
 {
@@ -29,16 +29,16 @@ bool SelectNodesOP::OnKeyDown(int keyCode)
 		clearSelectedNodes();
 		break;
 	case 'a': case 'A':
-		OnDirectionKeyDown(d2d::e_left);
+		OnDirectionKeyDown(ee::e_left);
 		break;
 	case 'd': case 'D':
-		OnDirectionKeyDown(d2d::e_right);
+		OnDirectionKeyDown(ee::e_right);
 		break;
 	case 's': case 'S':
-		OnDirectionKeyDown(d2d::e_down);
+		OnDirectionKeyDown(ee::e_down);
 		break;
 	case 'w': case 'W':
-		OnDirectionKeyDown(d2d::e_up);
+		OnDirectionKeyDown(ee::e_up);
 		break;
 	}
 
@@ -47,9 +47,9 @@ bool SelectNodesOP::OnKeyDown(int keyCode)
 
 bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	ChainSelectedNodes* selected = NULL;
-	m_shapeImpl->TraverseShapes(PosQueryVisitor(pos, &selected), d2d::DT_VISIBLE);
+	m_shapeImpl->TraverseShapes(PosQueryVisitor(pos, &selected), ee::DT_VISIBLE);
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -61,7 +61,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				if (chainNodes->chain != selected->chain) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
-					if (d2d::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
+					if (ee::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
 					{
 						chainNodes->selectedNodes.erase(chainNodes->selectedNodes.begin() + j);
 						if (chainNodes->selectedNodes.empty())
@@ -85,7 +85,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 				if (chainNodes->chain != selected->chain) continue;
 				for (size_t j = 0, m = chainNodes->selectedNodes.size(); j < m && !isExist; ++j)
 				{
-					if (d2d::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
+					if (ee::Math2D::GetDistance(pos, chainNodes->selectedNodes[j]) < getThreshold())
 						isExist = true;
 				}
 			}
@@ -119,9 +119,9 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 
 	if (m_firstPos.IsValid())
 	{
-		d2d::Rect rect(m_firstPos, m_stage->TransPosScrToProj(x, y));
+		ee::Rect rect(m_firstPos, m_stage->TransPosScrToProj(x, y));
 		m_shapeImpl->TraverseShapes(RectQueryVisitor(rect, m_nodeSelection), 
-			d2d::DT_SELECTABLE);
+			ee::DT_SELECTABLE);
 
 		m_firstPos.SetInvalid();
 	}
@@ -135,7 +135,7 @@ bool SelectNodesOP::OnDraw() const
 
 	if (m_nodeSelection.empty()) return false;
 
-	std::vector<d2d::Vector> nodes;
+	std::vector<ee::Vector> nodes;
 	int count = 0;
 	for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
 		count += m_nodeSelection[i]->selectedNodes.size();
@@ -143,11 +143,11 @@ bool SelectNodesOP::OnDraw() const
 
 	for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
 	{
-		const std::vector<d2d::Vector>& selectedNodes = m_nodeSelection[i]->selectedNodes;
+		const std::vector<ee::Vector>& selectedNodes = m_nodeSelection[i]->selectedNodes;
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
-	d2d::PrimitiveDraw::DrawCircles(nodes, getThreshold(), true, 2, d2d::Colorf(0.8f, 0.4f, 0.4f));
+	ee::PrimitiveDraw::DrawCircles(nodes, getThreshold(), true, 2, ee::Colorf(0.8f, 0.4f, 0.4f));
 
 	return false;
 }
@@ -162,7 +162,7 @@ bool SelectNodesOP::Clear()
 	return false;
 }
 
-void SelectNodesOP::fetchSelectedNode(std::vector<d2d::Vector>& nodes) const
+void SelectNodesOP::fetchSelectedNode(std::vector<ee::Vector>& nodes) const
 {
 	if (m_nodeSelection.empty()) return;
 
@@ -179,35 +179,35 @@ void SelectNodesOP::fetchSelectedNode(std::vector<d2d::Vector>& nodes) const
 
 int SelectNodesOP::getThreshold()
 {
-	return d2d::SettingData::ctl_pos_sz == 0 ? 3 : d2d::SettingData::ctl_pos_sz;
+	return ee::SettingData::ctl_pos_sz == 0 ? 3 : ee::SettingData::ctl_pos_sz;
 }
 
 void SelectNodesOP::clearSelectedNodes()
 {
 	for_each(m_nodeSelection.begin(), m_nodeSelection.end(), DeletePointerFunctor<ChainSelectedNodes>());
 	m_nodeSelection.clear();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
+void SelectNodesOP::OnDirectionKeyDown(ee::DirectionType type)
 {
 	if (m_nodeSelection.empty()) {
 		return;
 	}
 
-	d2d::Vector offset;
+	ee::Vector offset;
 	switch (type)
 	{
-	case d2d::e_left:
+	case ee::e_left:
 		offset.x -= 1;
 		break;
-	case d2d::e_right:
+	case ee::e_right:
 		offset.x += 1;
 		break;
-	case d2d::e_down:
+	case ee::e_down:
 		offset.y -= 1;
 		break;
-	case d2d::e_up:
+	case ee::e_up:
 		offset.y += 1;
 		break;
 	}
@@ -216,8 +216,8 @@ void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
 	for (int i = 0, n = m_nodeSelection.size(); i < n; ++i) {
 		ChainSelectedNodes* nodes = m_nodeSelection[i];
 		for (int j = 0, m = nodes->selectedNodes.size(); j < m; ++j) {
-			const d2d::Vector& from = nodes->selectedNodes[j];
-			d2d::Vector to = from + offset;
+			const ee::Vector& from = nodes->selectedNodes[j];
+			ee::Vector to = from + offset;
 			nodes->chain->Change(from, to);
 			nodes->selectedNodes[j] = to;
 			dirty = true;
@@ -225,7 +225,7 @@ void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -234,7 +234,7 @@ void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
 //////////////////////////////////////////////////////////////////////////
 
 SelectNodesOP::PosQueryVisitor::
-PosQueryVisitor(const d2d::Vector& pos, ChainSelectedNodes** result)
+PosQueryVisitor(const ee::Vector& pos, ChainSelectedNodes** result)
 	: m_pos(pos)
 	, m_rect(pos, SelectNodesOP::getThreshold(), SelectNodesOP::getThreshold())
 	, m_result(result)
@@ -246,12 +246,12 @@ Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	if (d2d::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
+	if (ee::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
 	{
-		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
+		const std::vector<ee::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
-			if (d2d::Math2D::GetDistance(m_pos, vertices[i]) < SelectNodesOP::getThreshold())
+			if (ee::Math2D::GetDistance(m_pos, vertices[i]) < SelectNodesOP::getThreshold())
 			{
 				ChainSelectedNodes* result = new ChainSelectedNodes;
 				result->chain = chain;
@@ -272,7 +272,7 @@ Visit(Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 SelectNodesOP::RectQueryVisitor::
-RectQueryVisitor(const d2d::Rect& rect, std::vector<ChainSelectedNodes*>& result)
+RectQueryVisitor(const ee::Rect& rect, std::vector<ChainSelectedNodes*>& result)
 	: m_rect(rect)
 	, m_result(result)
 {
@@ -283,15 +283,15 @@ Visit(Object* object, bool& next)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	if (d2d::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
+	if (ee::Math2D::IsRectIntersectRect(chain->GetRect(), m_rect))
 	{
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->chain = chain;
 
-		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
+		const std::vector<ee::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
-			if (d2d::Math2D::IsPointInRect(vertices[i], m_rect))
+			if (ee::Math2D::IsPointInRect(vertices[i], m_rect))
 				result->selectedNodes.push_back(vertices[i]);
 		}
 

@@ -33,7 +33,7 @@ void AnimToComplexWithColor::Run(int argc, char *argv[])
 
 void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 {
-	std::string dir = d2d::FileHelper::GetFileDir(cfg_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(cfg_filepath);
 
 	std::locale::global(std::locale(""));
 	std::ifstream fin(cfg_filepath.c_str());
@@ -46,7 +46,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		std::string filepath = ParserTrans(line, trans);
 
 		ecomplex::Symbol* symbol = new ecomplex::Symbol;
-		d2d::Sprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(dir + "\\" + filepath + ".json"));
+		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(dir + "\\" + filepath + ".json"));
 		TransSpr(trans, sprite);
 		symbol->m_sprites.push_back(sprite);
 
@@ -66,7 +66,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct Trans& t)
 {
 	std::vector<std::string> token;
-	d2d::StringHelper::Split(str, " ", token);
+	ee::StringHelper::Split(str, " ", token);
 
 	if (token.size() == 0) {
 		return "";
@@ -86,7 +86,7 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 			token[ptr] == "b") 
 		{
 			set_color = true;
-			d2d::Colori* col;
+			ee::Colori* col;
 			if (token[ptr] == "r") {
 				col = &t.col_r;
 				t.type |= CC_R;
@@ -98,9 +98,9 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 				t.type |= CC_B;
 			}
 			++ptr;
-			d2d::StringHelper::FromString(token[ptr++], col->r);
-			d2d::StringHelper::FromString(token[ptr++], col->g);
-			d2d::StringHelper::FromString(token[ptr++], col->b);
+			ee::StringHelper::FromString(token[ptr++], col->r);
+			ee::StringHelper::FromString(token[ptr++], col->g);
+			ee::StringHelper::FromString(token[ptr++], col->b);
 		} 
 		else 
 		{
@@ -115,16 +115,16 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 	return token[0];
 }
 
-void AnimToComplexWithColor::TransSpr(const Trans& t, d2d::Sprite* spr)
+void AnimToComplexWithColor::TransSpr(const Trans& t, ee::Sprite* spr)
 {
 	if (t.type & CC_R) {
-		spr->color.r = d2d::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
+		spr->color.r = ee::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
 	}
 	if (t.type & CC_G) {
-		spr->color.g = d2d::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
+		spr->color.g = ee::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
 	}
 	if (t.type & CC_B) {
-		spr->color.b = d2d::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
+		spr->color.b = ee::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
 	}
 }
 

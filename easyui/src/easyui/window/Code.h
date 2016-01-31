@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_CODE_H_
 #define _EASYUI_WINDOW_CODE_H_
 
-#include <drag2d.h>
+
 
 namespace ebuilder { class CodeGenerator; }
 
@@ -15,8 +15,8 @@ class Code
 public:
 	Code(ebuilder::CodeGenerator& gen);
 
-	void ResolveUI(const std::vector<d2d::Sprite*>& sprites);
-	void ResolveText(const std::vector<d2d::Sprite*>& sprites);
+	void ResolveUI(const std::vector<ee::Sprite*>& sprites);
+	void ResolveText(const std::vector<ee::Sprite*>& sprites);
 
 private:
 	ebuilder::CodeGenerator& m_gen;

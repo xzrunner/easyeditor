@@ -6,10 +6,10 @@
 namespace ephysics
 {
 
-PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-										   d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
+PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+										   ee::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
 										   float* pScale /*= NULL*/)
-	: d2d::PasteSymbolOP(stage_wnd, stage, libraryPanel, pScale)
+	: ee::PasteSymbolOP(stage_wnd, stage, libraryPanel, pScale)
 	, m_pScale(pScale)
 	, m_bStatic(false)
 {
@@ -18,24 +18,24 @@ PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(wxWindow* stage_wnd, d2d::EditPanelIm
 
 bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::Symbol* symbol = m_libraryPanel->GetSymbol();
+	ee::Symbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 		if (m_pScale) {
-			sprite->SetScale(d2d::Vector(*m_pScale, *m_pScale));
+			sprite->SetScale(ee::Vector(*m_pScale, *m_pScale));
 		}
 
 		IBody* body = BodyManager::Instance()->LoadBody(sprite);
 		if (body) {
 			body->getBody()->SetType(m_bStatic ? b2_staticBody : b2_dynamicBody);
 		}
-		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 
 		sprite->Release();
 	}

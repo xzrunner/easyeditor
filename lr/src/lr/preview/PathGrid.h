@@ -4,7 +4,7 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -14,11 +14,11 @@ namespace preview
 class PathGrid : public IPathfinding
 {
 public:
-	PathGrid(const d2d::Rect& region, int row, int col);
+	PathGrid(const ee::Rect& region, int row, int col);
 
-	virtual void DisableRegion(const d2d::Sprite* spr, bool disable);
+	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
 
-	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
+	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end);
 
 	virtual void DebugDraw() const;
 
@@ -45,26 +45,26 @@ private:
 	class Network : public INetwork
 	{
 	public:
-		Network(const d2d::Rect& region, int row, int col);
+		Network(const ee::Rect& region, int row, int col);
 		~Network();
 
-		virtual d2d::Vector TransIDToPos(int id) const;
+		virtual ee::Vector TransIDToPos(int id) const;
 
-		void SetStatus(const d2d::Rect& region, bool used);
+		void SetStatus(const ee::Rect& region, bool used);
 
-		VisitedNode* QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
+		VisitedNode* QueryRoute(const ee::Vector& start, const ee::Vector& end);
 
 		void DebugDraw() const;
 
 	private:
-		Node* QueryNode(const d2d::Vector& pos) const;
+		Node* QueryNode(const ee::Vector& pos) const;
 
-		void Expand(VisitedNode* node, const d2d::Vector& end);
+		void Expand(VisitedNode* node, const ee::Vector& end);
 
 		void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 	private:
-		d2d::Rect m_region;
+		ee::Rect m_region;
 
 		int m_row, m_col;
 		float m_width, m_height;
@@ -82,7 +82,7 @@ private:
 private:
 	Network m_nw;
 
-	std::vector<d2d::Vector> m_routes;
+	std::vector<ee::Vector> m_routes;
 
 }; // PathGrid
 

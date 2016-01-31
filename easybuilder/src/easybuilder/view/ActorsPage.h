@@ -2,19 +2,19 @@
 #ifndef EBUILDER_ACTORS_PAGE_H
 #define EBUILDER_ACTORS_PAGE_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
-	class ActorsPage : public d2d::ILibraryPage
+	class ActorsPage : public ee::ILibraryPage
 	{
 	public:
 		ActorsPage(wxWindow* parent);
 
 		//
-		// d2d::ILibraryPage interface
+		// ee::ILibraryPage interface
 		//
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 	protected:
 		virtual void initLayout(bool draggable = true);

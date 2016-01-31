@@ -10,34 +10,34 @@ namespace eicon
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
 	// Rect
 	{
-		d2d::AbstractEditOP* op = new EditRectOP(stage);
-		addChild(new d2d::UniversalCMPT(this, "矩形", stage->GetStageImpl(), op));
+		ee::EditOP* op = new EditRectOP(stage);
+		addChild(new ee::UniversalCMPT(this, "矩形", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}
 	// Quad
 	{
-		d2d::AbstractEditOP* op = new EditQuadOP(stage);
-		addChild(new d2d::UniversalCMPT(this, "四边形", stage->GetStageImpl(), op));
+		ee::EditOP* op = new EditQuadOP(stage);
+		addChild(new ee::UniversalCMPT(this, "四边形", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}
  	// Changed Rect
  	{
- 		d2d::AbstractEditOP* op = new EditChangedRectOP(stage);
- 		addChild(new d2d::UniversalCMPT(this, "可变的矩形", stage->GetStageImpl(), op));
+ 		ee::EditOP* op = new EditChangedRectOP(stage);
+ 		addChild(new ee::UniversalCMPT(this, "可变的矩形", stage->GetStageImpl(), op));
  		stage->SetEditOP(op);
  	}
 	// Changed Sector
 	{
-		d2d::AbstractEditOP* op = new EditChangedSectorOP(stage);
-		addChild(new d2d::UniversalCMPT(this, "可变的扇形", stage->GetStageImpl(), op));
+		ee::EditOP* op = new EditChangedSectorOP(stage);
+		addChild(new ee::UniversalCMPT(this, "可变的扇形", stage->GetStageImpl(), op));
 		stage->SetEditOP(op);
 	}
 
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
 void ToolbarPanel::ChangeIconType(IconType type)
@@ -59,10 +59,10 @@ void ToolbarPanel::ChangeIconType(IconType type)
 	}
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(initChildrenLayout());
+	sizer->Add(InitChildrenLayout());
 	return sizer;
 }
 

@@ -15,15 +15,15 @@
 namespace ecomplex
 {
 
-OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage,
-								   d2d::MultiSpritesImpl* sprites_impl)
+OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage,
+								   ee::MultiSpritesImpl* sprites_impl)
 	: m_wnd(wnd)
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
 {
 }
 
-void OpenSymbolDialog::Open(d2d::Sprite* spr)
+void OpenSymbolDialog::Open(ee::Sprite* spr)
 {
 	if (!spr) {
 		return;
@@ -65,9 +65,9 @@ void OpenSymbolDialog::Open(d2d::Sprite* spr)
 		emesh::EditDialog dlg(m_wnd, sprite, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(spr))
+	else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))
 	{
-		d2d::TextDialog dlg(m_wnd, font);
+		ee::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr))

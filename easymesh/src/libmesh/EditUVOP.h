@@ -1,14 +1,14 @@
 #ifndef _EASYMESH_EDIT_UV_OP_H_
 #define _EASYMESH_EDIT_UV_OP_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
 
 class StagePanel;
 
-class EditUVOP : public d2d::ZoomViewOP
+class EditUVOP : public ee::ZoomViewOP
 {
 public:
 	EditUVOP(StagePanel* stage);

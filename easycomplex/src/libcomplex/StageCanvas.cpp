@@ -13,9 +13,9 @@ namespace ecomplex
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel,
-						 d2d::LibraryPanel* library,
+						 ee::LibraryPanel* library,
 						 wxGLContext* glctx)
-	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl(), glctx)
+	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl(), glctx)
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)
@@ -32,14 +32,14 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(d2d::Symbol* symbol)
+void StageCanvas::SetBackground(ee::Symbol* symbol)
 {
-	d2d::obj_assign<d2d::Symbol>(m_background, symbol);
+	ee::obj_assign<ee::Symbol>(m_background, symbol);
 }
 
 void StageCanvas::OnSize(int w, int h)
 {
-	d2d::OrthoCanvas::OnSize(w, h);
+	ee::OrthoCanvas::OnSize(w, h);
 
 	m_camera3.SetScreenSize(w, h);
 
@@ -58,14 +58,14 @@ void StageCanvas::OnDrawSprites() const
 
 	drawBackground();
 
-	d2d::ScreenCache::Instance()->Draw(m_camera);
+	ee::ScreenCache::Instance()->Draw(m_camera);
 
-	d2d::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+	ee::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		d2d::PrimitiveDraw::Cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+		ee::PrimitiveDraw::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
 	}
 
 	m_stage->DrawEditOP();
@@ -73,8 +73,8 @@ void StageCanvas::OnDrawSprites() const
 	m_fps.End();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->DebugDraw();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
 	}
 #endif
 
@@ -91,26 +91,26 @@ void StageCanvas::OnDrawSprites() const
 
 	drawBackground();
 
-	m_stage->TraverseSprites(d2d::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
+		ee::DT_VISIBLE);
 
-	d2d::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+	ee::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		d2d::PrimitiveDraw::Cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+		ee::PrimitiveDraw::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
 	}
 
-	d2d::SceneNodeMgr::Instance()->Draw();
+	ee::SceneNodeMgr::Instance()->Draw();
 
 	m_stage->DrawEditOP();
 
 	m_fps.End();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->DebugDraw();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
 	}
 #endif
 
@@ -122,11 +122,11 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::drawBackground() const
 {
 	if (m_background) {
-		d2d::SpriteRenderer::Instance()->Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background);
 	}
 
 	if (Settings::bVisibleBGRect) {
-		d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 	}
 }
 

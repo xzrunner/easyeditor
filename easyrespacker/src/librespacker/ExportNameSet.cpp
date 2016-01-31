@@ -5,7 +5,7 @@
 namespace librespacker
 {
 
-void ExportNameSet::LoadExport(const d2d::Symbol* symbol, IPackNode* node)
+void ExportNameSet::LoadExport(const ee::Symbol* symbol, IPackNode* node)
 {
 	std::string export_name = symbol->name;
 	if (!Utility::IsNameValid(export_name)) {
@@ -14,7 +14,7 @@ void ExportNameSet::LoadExport(const d2d::Symbol* symbol, IPackNode* node)
 
 	std::map<std::string, int>::iterator itr = m_map.find(export_name);
 	if (itr != m_map.end()) {
-		throw d2d::Exception("Duplicate export name %s, file %s", 
+		throw ee::Exception("Duplicate export name %s, file %s", 
 			export_name.c_str(), symbol->GetFilepath().c_str());
 	}
 

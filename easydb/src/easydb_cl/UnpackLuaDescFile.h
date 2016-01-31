@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 #include <easycoco.h>
 
 namespace edb
@@ -15,7 +15,7 @@ public:
 	UnpackLuaDescFile() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -27,7 +27,7 @@ public:
 	void Trigger(const std::string& lua_file, const std::string& img_name);
 
 private:
-	static void LoadAllImages(const std::string& img_name, std::vector<d2d::Image*>& images);
+	static void LoadAllImages(const std::string& img_name, std::vector<ee::Image*>& images);
 
 }; // UnpackLuaDescFile
 

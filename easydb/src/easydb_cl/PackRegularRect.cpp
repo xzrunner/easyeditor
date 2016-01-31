@@ -1,7 +1,7 @@
 #include "PackRegularRect.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 #include <easytexpacker.h>
 
 namespace edb
@@ -37,7 +37,7 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 							  const std::string& name)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(src_dir, files);
+	ee::FileHelper::FetchAllFiles(src_dir, files);
 
 	wxString filepath = dst_dir + "\\" + name;
 

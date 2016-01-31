@@ -9,7 +9,7 @@
 
 #include <easycomplex.h>
 
-extern d2d::StageModule MODULE_STAGE;
+extern ee::StageModule MODULE_STAGE;
 
 namespace eui
 {
@@ -19,13 +19,13 @@ namespace wrapper
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   wxGLContext* glctx, TopPannels* top_pannels)
 	: UIStagePage(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetRawLibrary())
+	, ee::SpritesPanelImpl(GetStageImpl(), top_pannels->library->GetRawLibrary())
 	, m_top_pannels(top_pannels)
 {
 	SetEditOP(static_cast<EditClipboxOP*>(new EditOP(this, top_pannels->property)));
 	SetCanvas(new StageCanvas(this, glctx));
 
-	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
+	ee::LibraryPanel* library = top_pannels->library->GetRawLibrary();
 
 	top_pannels->property->SetEditPanel(GetStageImpl());
 
@@ -66,12 +66,12 @@ void StagePanel::LoadFromFile(const char* filename)
 	m_clipbox.ymin = m_clipbox.ymax - cb_val["h"].asDouble();
 
 	std::string items_filepath = value["items filepath"].asString();
-	items_filepath = d2d::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
+	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
 	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = items_complex.m_sprites[i];
-		d2d::InsertSpriteSJ::Instance()->Insert(spr);
+		ee::Sprite* spr = items_complex.m_sprites[i];
+		ee::InsertSpriteSJ::Instance()->Insert(spr);
 	}
 }
 
@@ -80,12 +80,12 @@ void StagePanel::StoreToFile(const char* filename) const
 	std::string name = filename;
 	name = name.substr(0, name.find_last_of('_'));
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(items_complex.m_sprites));
-	for_each(items_complex.m_sprites.begin(), items_complex.m_sprites.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(items_complex.m_sprites));
+	for_each(items_complex.m_sprites.begin(), items_complex.m_sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
 	std::string items_path = name + "_items_complex[gen].json";
 	items_complex.SetFilepath(items_path);
 	ecomplex::FileStorer::Store(items_path.c_str(), &items_complex);
@@ -106,15 +106,15 @@ void StagePanel::StoreToFile(const char* filename) const
 	std::string ui_path = filename;
 	Json::Value value;
 	value["type"] = get_widget_desc(ID_WRAPPER);
-	value["items filepath"] = d2d::FileHelper::GetRelativePath(dir, items_path).ToStdString();
-	value["wrapper filepath"] = d2d::FileHelper::GetRelativePath(dir, top_path).ToStdString();
+	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path).ToStdString();
+	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path).ToStdString();
 	value["user type"] = m_toolbar->GetType();
 	value["tag"] = m_toolbar->GetTag();
 	value["clipbox"]["w"] = m_clipbox.Width();
 	value["clipbox"]["h"] = m_clipbox.Height();
 	value["clipbox"]["x"] = m_clipbox.xmin;
 	value["clipbox"]["y"] = m_clipbox.ymax;
-	d2d::Rect r = items_sprite.GetRect();
+	ee::Rect r = items_sprite.GetRect();
 	value["children"]["w"] = r.Width();
 	value["children"]["h"] = r.Height();
 	Json::StyledStreamWriter writer;
@@ -129,7 +129,7 @@ void StagePanel::EnablePage(bool enable)
 {
 	if (enable) {
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
 	} else {
 		GetSpriteSelection()->Clear();

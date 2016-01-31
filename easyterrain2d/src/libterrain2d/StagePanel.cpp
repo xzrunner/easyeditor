@@ -11,33 +11,33 @@ namespace eterrain2d
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl()
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
+	, ee::ShapesPanelImpl()
 {
-	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
+	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
 
  	SetDropTarget(new StageDropTarget(this, library));
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::Sprite* edited, 
-					   const d2d::MultiSpritesImpl* bg_sprites, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl()
+					   wxGLContext* glctx, ee::Sprite* edited, 
+					   const ee::MultiSpritesImpl* bg_sprites, 
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
+	, ee::ShapesPanelImpl()
 {
-	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
+	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 
 	m_oceans = static_cast<Sprite*>(edited)->GetSymbol().GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
  		OceanMesh* ocean = m_oceans[i];
  		ocean->Retain();
-		d2d::InsertShapeSJ::Instance()->Insert(
+		ee::InsertShapeSJ::Instance()->Insert(
 			const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 	}
 
@@ -58,11 +58,11 @@ bool StagePanel::Update(int version)
 
 void StagePanel::Store(const std::string& dir, Json::Value& value) const
 {
-	std::vector<d2d::Sprite*> bg_sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(bg_sprites));
+	std::vector<ee::Sprite*> bg_sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(bg_sprites));
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
-		d2d::Sprite* bg = bg_sprites[i];
-		value["bg"][i]["filepath"] = d2d::FileHelper::GetRelativePath(
+		ee::Sprite* bg = bg_sprites[i];
+		value["bg"][i]["filepath"] = ee::FileHelper::GetRelativePath(
 			dir, bg->GetSymbol().GetFilepath()).ToStdString();
 		bg->Store(value["bg"][i]);
 	}
@@ -73,16 +73,16 @@ void StagePanel::Store(const std::string& dir, Json::Value& value) const
 }
 
 void StagePanel::Load(const std::string& dir, const Json::Value& value,
-					  d2d::LibraryPanel* library, ToolbarPanel* toolbar)
+					  ee::LibraryPanel* library, ToolbarPanel* toolbar)
 {
 	int i = 0;
 	Json::Value bg_val = value["bg"][i++];
 	while (!bg_val.isNull()) {
 		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::Sprite* bg = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* bg = ee::SpriteFactory::Instance()->Create(symbol);
 		bg->Load(bg_val);
-		d2d::InsertSpriteSJ::Instance()->Insert(bg);
+		ee::InsertSpriteSJ::Instance()->Insert(bg);
 		symbol->Release();
 
 		bg_val = value["bg"][i++];
@@ -94,11 +94,11 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		OceanMesh* ocean = FileIO::LoadOceanMesh(dir, ocean_val);
 		if (ocean) {
 			m_oceans.push_back(ocean);
-			d2d::InsertShapeSJ::Instance()->Insert(
+			ee::InsertShapeSJ::Instance()->Insert(
 				const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
-			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));
-			if (const d2d::Symbol* tex1 = ocean->GetImage1()) {
-				library->AddSymbol(const_cast<d2d::Symbol*>(tex1));
+			library->AddSymbol(const_cast<ee::ImageSymbol*>(ocean->GetImage0()));
+			if (const ee::Symbol* tex1 = ocean->GetImage1()) {
+				library->AddSymbol(const_cast<ee::Symbol*>(tex1));
 			}
 			toolbar->SetControlersValue(ocean);
 		}
@@ -116,7 +116,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 // 	return m_symbol->GetOceans();
 // }
 
-void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageSymbol* image)
+void StagePanel::AddOcean(const libshape::PolygonShape* shape, const ee::ImageSymbol* image)
 {
 	bool is_new = true;
 	std::vector<OceanMesh*>::iterator itr = m_oceans.begin();
@@ -146,26 +146,26 @@ void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageS
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
+StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::StageDropTarget(stage, stage->GetStageImpl(), library)
 	, m_stage(stage)
 {
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos)
+OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
 {
-	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
+	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
 	{
-		d2d::Shape* shape = m_stage->QueryShapeByPos(pos);
+		ee::Shape* shape = m_stage->QueryShapeByPos(pos);
 		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
 			poly->SetMaterialTexture(image);
 			m_stage->AddOcean(poly, image);
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else {
-			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 			sprite->Translate(pos);
-			d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+			ee::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 		return true;
 	}

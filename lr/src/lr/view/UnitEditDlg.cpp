@@ -6,7 +6,7 @@
 namespace lr
 {
 
-UnitEditDlg::UnitEditDlg(wxWindow* parent, d2d::Sprite* spr,
+UnitEditDlg::UnitEditDlg(wxWindow* parent, ee::Sprite* spr,
 						 const std::vector<std::string>& path_names)
 	: CfgEditDlg(parent, "Unit", spr)
 	, m_path_names(path_names)

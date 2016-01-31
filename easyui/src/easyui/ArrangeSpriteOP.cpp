@@ -4,14 +4,14 @@
 namespace eui
 {
 
-ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, property)
+ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, ee::PropertySettingPanel* property)
+	: ee::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, property)
 {
 }
 
 bool ArrangeSpriteOP::onDraw() const
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) {
+	if (ee::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) {
 		return true;
 	}
 

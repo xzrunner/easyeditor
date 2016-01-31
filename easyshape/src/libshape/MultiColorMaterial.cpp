@@ -3,8 +3,8 @@
 //namespace libshape
 //{
 //
-//MultiColorMaterial::MultiColorMaterial(const std::vector<d2d::Vector>& vertices, 
-//							 const d2d::Colorf& color)
+//MultiColorMaterial::MultiColorMaterial(const std::vector<ee::Vector>& vertices, 
+//							 const ee::Colorf& color)
 //{
 //	Build(vertices);
 //}
@@ -17,30 +17,30 @@
 //	return val;
 //}
 //
-//void MultiColorMaterial::Draw(const d2d::Matrix& mt) const
+//void MultiColorMaterial::Draw(const ee::Matrix& mt) const
 //{
-//	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, m_color);
+//	ee::PrimitiveDraw::DrawTriangles(mt, m_tris, m_color);
 //}
 //
-//void MultiColorMaterial::Build(const std::vector<d2d::Vector>& vertices)
+//void MultiColorMaterial::Build(const std::vector<ee::Vector>& vertices)
 //{
 //	m_tris.clear();
 //
-//	std::vector<d2d::Vector> bounding;
-//	d2d::Math2D::removeDuplicatePoints(vertices, bounding);
+//	std::vector<ee::Vector> bounding;
+//	ee::Math2D::removeDuplicatePoints(vertices, bounding);
 //
-//	d2d::Triangulation::normal(bounding, m_tris);
+//	ee::Triangulation::normal(bounding, m_tris);
 //}
 //
-//void MultiColorMaterial::Build(const std::vector<d2d::Vector>& vertices, 
-//						  const std::vector<d2d::Vector>& segments)
+//void MultiColorMaterial::Build(const std::vector<ee::Vector>& vertices, 
+//						  const std::vector<ee::Vector>& segments)
 //{
 //	m_tris.clear();
 //
-//	std::vector<d2d::Vector> bounding;
-//	d2d::Math2D::removeDuplicatePoints(vertices, bounding);
+//	std::vector<ee::Vector> bounding;
+//	ee::Math2D::removeDuplicatePoints(vertices, bounding);
 //
-//	d2d::Triangulation::lines(bounding, segments, m_tris);
+//	ee::Triangulation::lines(bounding, segments, m_tris);
 //}
 //
 //}

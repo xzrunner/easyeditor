@@ -7,14 +7,14 @@ namespace eui
 namespace list
 {
 
-ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
-	: d2d::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
+ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel* property)
+	: ee::ArrangeSpriteImpl(stage, stage->GetStageImpl(), stage, property)
 	, m_stage(stage)
 {
 }
 
-d2d::IArrangeSpriteState* ArrangeSpriteImpl::
-CreateTranslateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+ee::ArrangeSpriteState* ArrangeSpriteImpl::
+CreateTranslateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
 {
 	return new TranslateSpriteState(selection, first_pos, &m_stage->GetList()); 
 }

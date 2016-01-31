@@ -6,14 +6,14 @@
 namespace ee
 {
 
-class IStageCanvas;
+class StageCanvas;
 class RenderContext;
 class Vector;
 
 class RenderContextStack
 {
 public:
-	void Push(IStageCanvas* canvas, RenderContext* render);
+	void Push(StageCanvas* canvas, RenderContext* render);
 	void Pop();
 
 	void SetModelView(const Vector& offset, float scale);
@@ -32,7 +32,7 @@ private:
 private:
 	struct Context
 	{
-		IStageCanvas* canvas;
+		StageCanvas* canvas;
 		RenderContext* render;
 	};
 

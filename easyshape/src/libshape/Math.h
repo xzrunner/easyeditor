@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_MATH_H_
 #define _LIBSHAPE_MATH_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -12,10 +12,10 @@ class Math
 {
 public:
 	static void mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
-		std::vector<d2d::Vector>& dst);
+		std::vector<ee::Vector>& dst);
 
 	static void mergeMultiChains(const std::vector<ChainShape*>& src, 
-		std::vector<d2d::Vector>& dst);
+		std::vector<ee::Vector>& dst);
 
 private:
 	// for mergeMultiChains

@@ -2,7 +2,7 @@
 #define _COCO_EPE_PARSER_LUA_FILE_H_
 
 #include <string>
-#include <drag2d.h>
+
 
 struct lua_State;
 
@@ -21,7 +21,7 @@ public:
 	void transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
 	void transToMemory(const std::vector<std::string>& texfilenames);
 
-	void getAllSymbols(std::vector<d2d::Symbol*>& symbols) const;
+	void getAllSymbols(std::vector<ee::Symbol*>& symbols) const;
 
 private:
 	struct Picture
@@ -29,21 +29,21 @@ private:
 		struct Part
 		{
 			int tex;
-			d2d::Vector src[4];
-			d2d::Vector dst[4];
+			ee::Vector src[4];
+			ee::Vector dst[4];
 
 			int xmin, xmax, ymin, ymax;
 			std::string filename;
 
 			void init();
 
-			void transform(d2d::Sprite* sprite) const;
+			void transform(ee::Sprite* sprite) const;
 
 		private:
-			std::string dstMode(const d2d::Vector dst[4]) const;
+			std::string dstMode(const ee::Vector dst[4]) const;
 			// 0 1
 			// 3 2
-			static int nodeMode(const d2d::Vector& center, const d2d::Vector& node);
+			static int nodeMode(const ee::Vector& center, const ee::Vector& node);
 			static int findInMode(int mode[4], int query);
 		};
 
@@ -67,7 +67,7 @@ private:
 			int mat[6];
 			bool is_full;
 
-			void transform(d2d::Sprite* sprite) const;
+			void transform(ee::Sprite* sprite) const;
 
 			Item() {
 				color = 0xffffffff;
@@ -108,7 +108,7 @@ private:
 	std::map<int, Picture*> m_mapPictures;
 	std::map<int, Animation*> m_mapAnims;
 
-	std::map<int, d2d::Symbol*> m_mapSymbols;
+	std::map<int, ee::Symbol*> m_mapSymbols;
 
 }; // ParserLuaFile
 

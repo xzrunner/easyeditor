@@ -7,8 +7,8 @@
 namespace e3d
 {
 
-StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
-	: d2d::OnePassCanvas(stage_wnd, stage)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
+	: ee::OnePassCanvas(stage_wnd, stage)
 {
 }
 
@@ -16,7 +16,7 @@ void StageCanvas::Refresh()
 {
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
@@ -32,12 +32,12 @@ ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 
 void StageCanvas::InitGL()
 {
-//	d2d::IStageCanvas::InitGL();
+//	ee::StageCanvas::InitGL();
 
 	//////////////////////////////////////////////////////////////////////////
 
 	try {
-		wxLogDebug(_T("IStageCanvas::InitGL()"));
+		wxLogDebug(_T("StageCanvas::InitGL()"));
 
 		if (glewInit() != GLEW_OK) {
 			exit(1);
@@ -48,9 +48,9 @@ void StageCanvas::InitGL()
 		glShadeModel(GL_SMOOTH);
 		glEnable(GL_TEXTURE_2D);
 
-		d2d::ShaderContext::Reload();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+		ee::ShaderContext::Reload();
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();	
 	}
 

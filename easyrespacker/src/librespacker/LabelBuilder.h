@@ -3,7 +3,7 @@
 //
 //#include "INodeBuilder.h"
 //
-//#include <drag2d.h>
+//
 //
 //namespace librespacker
 //{
@@ -17,9 +17,9 @@
 //	LabelBuilder();
 //	virtual ~LabelBuilder();
 //
-//	virtual void Traverse(d2d::Visitor& visitor) const;
+//	virtual void Traverse(ee::Visitor& visitor) const;
 //
-//	const IPackNode* Create(const d2d::FontBlankSprite* spr);
+//	const IPackNode* Create(const ee::FontBlankSprite* spr);
 //
 //	void OutputExtraInfo(Json::Value& value) const;
 //

@@ -103,4 +103,4 @@ private:
 
 }
 
-#endif // _DRAG2D_TEXTURE_PACKER_H_
+#endif // _EASYEDITOR_TEXTURE_PACKER_H_

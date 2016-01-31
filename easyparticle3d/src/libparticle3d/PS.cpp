@@ -23,7 +23,7 @@ PS::PS()
 {
 	Init();
 
-	d2d::SceneNodeMgr::Instance()->Add(this);
+	ee::SceneNodeMgr::Instance()->Add(this);
 }
 
 bool PS::Update(float dt)
@@ -65,15 +65,15 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	const RenderParams* rp = (static_cast<const RenderParams*>(ud));
 	assert(rp->p3d);
 
-	d2d::Symbol* sym = static_cast<d2d::Symbol*>(symbol);
-	d2d::ColorTrans ct;
+	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
+	ee::ColorTrans ct;
 	memcpy(&ct.multi, mul_col, sizeof(*mul_col));
 	memcpy(&ct.add, add_col, sizeof(*add_col));
 	ct.multi = col_mul(ct.multi, rp->ct.multi);
 	ct.add = col_add(ct.add, rp->ct.add);
 	// todo color trans
 
-	d2d::Matrix mt = rp->mat;
+	ee::Matrix mt = rp->mat;
 	if (!rp->p3d->local_mode_draw) {
 		float* src = const_cast<float*>(mt.GetElements());
 		src[0] = mat[0];
@@ -83,11 +83,11 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 		src[12]= mat[4];
 		src[13]= mat[5];
 	}
-	d2d::SpriteRenderer::Instance()->Draw(sym, mt, d2d::Vector(x, y), angle, scale, scale, 0, 0, ct);
+	ee::SpriteRenderer::Instance()->Draw(sym, mt, ee::Vector(x, y), angle, scale, scale, 0, 0, ct);
 
 	// todo bind
 	// 	if (p->bind_ps) {
-	// 		d2d::Matrix _mt;
+	// 		ee::Matrix _mt;
 	// 		_mt.translate(p->pos.x, p->pos.y);
 	// 		Draw(p->bind_ps, _mt, recorder);
 	// 	}
@@ -95,7 +95,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	// todo record
 	// 	AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 	// 	if (curr_record) {
-	// 		d2d::Vector fixed = d2d::Math2D::transVector(pos, _mt);
+	// 		ee::Vector fixed = ee::Math2D::TransVector(pos, _mt);
 	// 		curr_record->AddItem(symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, mul_col, add_col);
 	// 	}
 }
@@ -104,7 +104,7 @@ static void
 add_func(p3d_particle* p, void* ud)
 {
 //  	ParticleSystem* ps = (ParticleSystem*)ud;
-//  	const d2d::Vector& pos = ps->GetPosition();
+//  	const ee::Vector& pos = ps->GetPosition();
 //  	p->init_pos.x = pos.x;
 //  	p->init_pos.y = pos.y;
 }

@@ -1,17 +1,17 @@
 #ifndef _LIBSHAPE_RECT_PROPERTY_SETTING_H_
 #define _LIBSHAPE_RECT_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
 class RectShape;
 
-class RectPropertySetting : public d2d::IPropertySetting
+class RectPropertySetting : public ee::PropertySetting
 {
 public:
-	RectPropertySetting(d2d::EditPanelImpl* stage, RectShape* rect);
+	RectPropertySetting(ee::EditPanelImpl* stage, RectShape* rect);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -20,7 +20,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanelImpl* m_stage;
+	ee::EditPanelImpl* m_stage;
 
 	RectShape* m_rect;
 

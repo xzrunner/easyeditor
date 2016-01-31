@@ -1,7 +1,7 @@
 #ifndef _LIBRESPACKER_RES_PACKER_H_
 #define _LIBRESPACKER_RES_PACKER_H_
 
-#include <drag2d.h>
+
 
 #include "typedef.h"
 //#include "PackPkgMgr.h"
@@ -35,9 +35,9 @@ private:
 	void Pack() const;
 
 private:
-	std::vector<const d2d::Symbol*> m_symbols;
+	std::vector<const ee::Symbol*> m_symbols;
 
-	d2d::TexturePacker m_tp;
+	ee::TexturePacker m_tp;
 
 //	PackPkgMgr m_pkgs;
 

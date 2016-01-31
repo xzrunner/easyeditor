@@ -5,21 +5,21 @@ namespace libanim
 {
 
 void Utility::DrawAnimSymbol(const Symbol* symbol, 
-						   const d2d::Matrix& mt,
+						   const ee::Matrix& mt,
 						   int index, 
-						   const d2d::ColorTrans& color)
+						   const ee::ColorTrans& color)
 {
-	std::vector<d2d::Sprite*> sprites;
+	std::vector<ee::Sprite*> sprites;
 	GetCurrSprites(symbol, index, sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i], NULL, mt, color);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i], NULL, mt, color);
 	}
 
-	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::Sprite>());
+	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<ee::Sprite>());
 }
 
-void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::Sprite*>& sprites)
+void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites)
 {
 	for (size_t i = 0, n = symbol->m_layers.size(); i < n; ++i)
 	{

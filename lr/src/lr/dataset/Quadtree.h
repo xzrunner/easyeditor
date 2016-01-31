@@ -1,7 +1,7 @@
 #ifndef _LR_QUADTREE_H_
 #define _LR_QUADTREE_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -9,37 +9,37 @@ namespace lr
 class Quadtree
 {
 public:
-	Quadtree(const d2d::Rect& rect);
+	Quadtree(const ee::Rect& rect);
 	~Quadtree();
 
-	void Insert(const d2d::Sprite* spr);
+	void Insert(const ee::Sprite* spr);
 	
-	std::vector<const d2d::Sprite*> Query(const d2d::Rect& rect) const;
+	std::vector<const ee::Sprite*> Query(const ee::Rect& rect) const;
 
 	void DebugDraw() const;
 
-	void SelectNode(const d2d::Vector& pos);
+	void SelectNode(const ee::Vector& pos);
 
 private:
 	class Node
 	{
 	public:
-		Node(const d2d::Rect& rect);
+		Node(const ee::Rect& rect);
 		~Node();
 
-		void Insert(const d2d::Sprite* spr);
+		void Insert(const ee::Sprite* spr);
 
 		bool IsLeaf() const;
 
 	private:
-		bool IsIntersect(const d2d::Rect& rect) const;
-		bool IsContain(const d2d::Vector& pos) const;
-		bool IsContain(const d2d::Sprite* spr) const;
+		bool IsIntersect(const ee::Rect& rect) const;
+		bool IsContain(const ee::Vector& pos) const;
+		bool IsContain(const ee::Sprite* spr) const;
 
 		bool NeedSplit() const;
 		void Split();
 
-		float GetContainArea(const d2d::Sprite* spr) const;
+		float GetContainArea(const ee::Sprite* spr) const;
 
 	private:
 		static const int MAX_COUNT;
@@ -47,13 +47,13 @@ private:
 		static const int MIN_GRID;
 
 	private:
-		d2d::Rect m_rect;
+		ee::Rect m_rect;
 
 		// 0 1
 		// 2 3
 		Node* m_children[4];
 
-		std::vector<const d2d::Sprite*> m_sprites;
+		std::vector<const ee::Sprite*> m_sprites;
 
 		friend class Quadtree;
 

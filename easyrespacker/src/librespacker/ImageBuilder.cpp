@@ -13,7 +13,7 @@ ImageBuilder::~ImageBuilder()
 	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
 }
 
-void ImageBuilder::Traverse(d2d::Visitor& visitor) const
+void ImageBuilder::Traverse(ee::Visitor& visitor) const
 {
 	for (int i = 0, n = m_nodes.size(); i < n; ++i) {
 		bool has_next;
@@ -24,7 +24,7 @@ void ImageBuilder::Traverse(d2d::Visitor& visitor) const
 	}
 }
 
-const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
+const IPackNode* ImageBuilder::Create(const ee::ImageSprite* spr)
 {
 	PackPicture* node = new PackPicture;
 	PackPicture::Quad quad;
@@ -34,7 +34,7 @@ const IPackNode* ImageBuilder::Create(const d2d::ImageSprite* spr)
 	return node;
 }
 
-void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Quad& quad)
+void ImageBuilder::LoadPictureQuad(const ee::ImageSprite* img, PackPicture::Quad& quad)
 {
 	quad.img = img->GetSymbol().GetImage();
 
@@ -43,7 +43,7 @@ void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Qua
 	quad.texture_coord[2].Set(1, 1);
 	quad.texture_coord[3].Set(1, 0);
 
-	d2d::Rect r = img->GetSymbol().GetSize();	
+	ee::Rect r = img->GetSymbol().GetSize();	
 	quad.screen_coord[0].Set(r.xmin, r.ymin);
 	quad.screen_coord[1].Set(r.xmin, r.ymax);
 	quad.screen_coord[2].Set(r.xmax, r.ymax);
@@ -51,7 +51,7 @@ void ImageBuilder::LoadPictureQuad(const d2d::ImageSprite* img, PackPicture::Qua
 	TransScreen(quad, img);
 }
 
-void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::Sprite* spr)
+void ImageBuilder::TransScreen(PackPicture::Quad& quad, const ee::Sprite* spr)
 {
 	// 1. shear
 	float hw = quad.img->GetClippedWidth() * 0.5f,
@@ -87,12 +87,12 @@ void ImageBuilder::TransScreen(PackPicture::Quad& quad, const d2d::Sprite* spr)
 
 	// 4. rotate
 	for (size_t i = 0; i < 4; ++i) {
-		d2d::Vector rot = d2d::Math2D::RotateVector(quad.screen_coord[i], spr->GetAngle());
+		ee::Vector rot = ee::Math2D::RotateVector(quad.screen_coord[i], spr->GetAngle());
 		quad.screen_coord[i] = rot;
 	}
 
 	// 5. translate
-	d2d::Vector center = spr->GetCenter();
+	ee::Vector center = spr->GetCenter();
 	for (size_t i = 0; i < 4; ++i)
 		quad.screen_coord[i] += center;
 

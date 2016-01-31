@@ -1,14 +1,14 @@
 #ifndef _EASYIMAGE_PIXEL_DIFF_OP_H_
 #define _EASYIMAGE_PIXEL_DIFF_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
 class StagePanel;
 
-class PixelDiffOP : public d2d::ZoomViewOP
+class PixelDiffOP : public ee::ZoomViewOP
 {
 public:
 	PixelDiffOP(StagePanel* stage);
@@ -23,7 +23,7 @@ public:
 private:
 	StagePanel* m_stage;
 
-//	d2d::ImageSprite *m_left, *m_right;
+//	ee::ImageSprite *m_left, *m_right;
 
 }; // PixelDiffOP 
 

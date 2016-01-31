@@ -1,6 +1,6 @@
 #include "NodeToBin.h"
 
-#include <drag2d.h>
+
 
 #include <math.h>
 
@@ -14,7 +14,7 @@ int NodeToBin::TransTime(float time)
 
 int NodeToBin::TransRadian(float r)
 {
-	return floor(r * d2d::TRANS_RAD_TO_DEG + 0.5f);
+	return floor(r * ee::TRANS_RAD_TO_DEG + 0.5f);
 }
 
 int NodeToBin::TransFloat(float f)

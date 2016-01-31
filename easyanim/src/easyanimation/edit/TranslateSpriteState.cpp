@@ -7,28 +7,28 @@
 namespace eanim
 {
 
-TranslateSpriteState::TranslateSpriteState(d2d::SpriteSelection* selection, 
-										   const d2d::Vector& first_pos)
-	: d2d::TranslateSpriteState(selection, first_pos)
+TranslateSpriteState::TranslateSpriteState(ee::SpriteSelection* selection, 
+										   const ee::Vector& first_pos)
+	: ee::TranslateSpriteState(selection, first_pos)
 {
 }
 
-void TranslateSpriteState::Translate(const d2d::Vector& offset)
+void TranslateSpriteState::Translate(const ee::Vector& offset)
 {
-	d2d::TranslateSpriteState::Translate(offset);
+	ee::TranslateSpriteState::Translate(offset);
 
 	SkeletonData* skeleton = get_curr_skeleton();
 	if (!skeleton) {
 		return;
 	}
 
-	d2d::SpriteSelection* selection = GetSelection();
+	ee::SpriteSelection* selection = GetSelection();
 	if (selection->IsEmpty()) {
 		return;
 	}
 
-	std::vector<d2d::Sprite*> sprites;
-	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	skeleton->UpdateJoint(sprites[0]);
 }
 

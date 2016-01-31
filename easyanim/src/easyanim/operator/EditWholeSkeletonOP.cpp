@@ -4,8 +4,8 @@
 namespace eanim
 {
 
-EditWholeSkeletonOP::EditWholeSkeletonOP(d2d::EditPanel* editPanel, WholeSkeleton* skeleton)
-	: d2d::ZoomViewOP(editPanel, false)
+EditWholeSkeletonOP::EditWholeSkeletonOP(ee::EditPanel* editPanel, WholeSkeleton* skeleton)
+	: ee::ZoomViewOP(editPanel, false)
 {
 	m_skeleton = skeleton;
 	m_selected = NULL;
@@ -30,10 +30,10 @@ bool EditWholeSkeletonOP::onMouseLeftUp(int x, int y)
 
 	if (m_selected && m_firstPos.isValid())
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 
-		const d2d::Vector& center = m_selected->getNodeWorldCoords(m_selected->m_relativeCoords.from);
-		float angle = d2d::Math::getAngleInDirection(center, m_firstPos, pos);
+		const ee::Vector& center = m_selected->getNodeWorldCoords(m_selected->m_relativeCoords.from);
+		float angle = ee::Math::getAngleInDirection(center, m_firstPos, pos);
 
 		m_editPanel->addHistoryOP(new edit_whole_skeleton::RotateBoneAOP(m_editPanel, m_selected, angle));
 	}
@@ -49,10 +49,10 @@ bool EditWholeSkeletonOP::onMouseDrag(int x, int y)
 
 	if (m_selected->m_parent)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 
-		const d2d::Vector& center = m_selected->getNodeWorldCoords(m_selected->m_relativeCoords.from);
-		float angle = d2d::Math::getAngleInDirection(center, m_lastPos, pos);
+		const ee::Vector& center = m_selected->getNodeWorldCoords(m_selected->m_relativeCoords.from);
+		float angle = ee::Math::getAngleInDirection(center, m_lastPos, pos);
 
 		m_selected->m_relativeCoords.delta += angle;
 		m_selected->computePosterityAbsoluteCoords();

@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace edb 
 {
@@ -47,24 +47,24 @@ void VerifyImage::Trigger(const std::string& dirpath)
 void VerifyImage::InitFiles(const std::string& dirpath)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dirpath, files);
+	ee::FileHelper::FetchAllFiles(dirpath, files);
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			std::string filename = filepath.ToStdString();
-			d2d::StringHelper::ToLower(filename);
+			ee::StringHelper::ToLower(filename);
 			_complex_files.push_back(filename);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			std::string filename = filepath.ToStdString();
-			d2d::StringHelper::ToLower(filename);
+			ee::StringHelper::ToLower(filename);
 			_anim_files.push_back(filename);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			std::string filename = filepath.ToStdString();
-			d2d::StringHelper::ToLower(filename);
+			ee::StringHelper::ToLower(filename);
 			_map_images.insert(std::make_pair(filename, false));
 		}
 	}
@@ -87,8 +87,8 @@ void VerifyImage::VerifyLack()
 		while (!spriteValue.isNull()) {
 			std::string base = _complex_files[i];
 			std::string relative = spriteValue["filepath"].asString();
-			std::string filepath = d2d::FileHelper::GetAbsolutePathFromFile(base, relative).ToStdString();
-			d2d::StringHelper::ToLower(filepath);
+			std::string filepath = ee::FileHelper::GetAbsolutePathFromFile(base, relative).ToStdString();
+			ee::StringHelper::ToLower(filepath);
 			HandleSpritePath(filepath);
 
 			spriteValue = value["sprite"][j++];
@@ -116,8 +116,8 @@ void VerifyImage::VerifyLack()
 				Json::Value entryValue = frameValue["actor"][j++];
 				while (!entryValue.isNull()) {
 					std::string relative = entryValue["filepath"].asString();
-					std::string filepath = d2d::FileHelper::GetAbsolutePathFromFile(anim, relative).ToStdString();
-					d2d::StringHelper::ToLower(filepath);
+					std::string filepath = ee::FileHelper::GetAbsolutePathFromFile(anim, relative).ToStdString();
+					ee::StringHelper::ToLower(filepath);
 					HandleSpritePath(filepath);
 
 					entryValue = frameValue["actor"][j++];
@@ -155,7 +155,7 @@ void VerifyImage::Report() const
 
 void VerifyImage::HandleSpritePath(const std::string& filepath)
 {
-	if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+	if (!ee::FileType::IsType(filepath, ee::FileType::e_image))
 		return;
 
 	std::map<std::string, bool>::iterator itr = _map_images.find(filepath);

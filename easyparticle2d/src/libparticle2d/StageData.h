@@ -1,7 +1,7 @@
 //#ifndef _EASYPARTICLE2D_STAGE_DATA_H_
 //#define _EASYPARTICLE2D_STAGE_DATA_H_
 //
-//#include <drag2d.h>
+//
 //
 //namespace eparticle2d
 //{
@@ -10,7 +10,7 @@
 //class Symbol;
 //class ToolbarPanel;
 //
-//class StageData : public d2d::UICallback
+//class StageData : public ee::UICallback
 //{
 //public:
 //	StageData();
@@ -29,7 +29,7 @@
 //
 //	void SetToolbar(ToolbarPanel* toolbar) { m_toolbar = toolbar; }
 //
-//	void ChangePSSymbol(d2d::Symbol* symbol);
+//	void ChangePSSymbol(ee::Symbol* symbol);
 //
 //private:
 //	ParticleSystem* m_ps;

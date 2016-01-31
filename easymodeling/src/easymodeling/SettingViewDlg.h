@@ -2,14 +2,14 @@
 #ifndef EMODELING_SETTING_VIEW_DLG_H
 #define EMODELING_SETTING_VIEW_DLG_H
 
-#include <drag2d.h>
+
 
 namespace emodeling
 {
 	class SettingViewDlg : public wxDialog
 	{
 	public:
-		SettingViewDlg(wxWindow* parent, d2d::IStageCanvas* canvas);
+		SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas);
 
 	private:
 		wxSizer* initDisplayTypePanel();
@@ -21,7 +21,7 @@ namespace emodeling
 		void onChangeDisplayPolygonBound(wxCommandEvent& event);
 
 	private:
-		d2d::IStageCanvas* m_canvas;
+		ee::StageCanvas* m_canvas;
 
 		wxSpinCtrl* m_ctlPointSize;
 

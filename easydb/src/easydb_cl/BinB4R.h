@@ -12,7 +12,7 @@ public:
 	BinB4R() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;

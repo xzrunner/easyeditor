@@ -1,7 +1,7 @@
 #ifndef _EASYCOMPLEX_TASK_H_
 #define _EASYCOMPLEX_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace ecomplex 
@@ -11,7 +11,7 @@ class LibraryPanel;
 class PropertySettingPanel;
 class StagePanel;
 
-class Task : public d2d::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
@@ -22,9 +22,9 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const;
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const;
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 private:
 	void InitLayout();
@@ -43,8 +43,8 @@ private:
 	ecomplex::LibraryPanel* m_library;
 	PropertySettingPanel* m_property;
 	ecomplex::StagePanel* m_stage;
-	d2d::ViewlistPanel* m_viewlist;
-	d2d::GroupTreePanel* m_grouptree;
+	ee::ViewlistPanel* m_viewlist;
+	ee::GroupTreePanel* m_grouptree;
 
 	friend class FileIO;
 

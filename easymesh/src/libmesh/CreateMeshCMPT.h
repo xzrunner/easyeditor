@@ -1,13 +1,13 @@
 #ifndef _EASYMESH_CREATE_MESH_CMPT_H_
 #define _EASYMESH_CREATE_MESH_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
 
 class StagePanel;
-class CreateMeshCMPT : public d2d::AbstractEditCMPT
+class CreateMeshCMPT : public ee::EditCMPT
 {
 public:
 	CreateMeshCMPT(wxWindow* parent, const wxString& name,
@@ -15,7 +15,7 @@ public:
 	virtual ~CreateMeshCMPT();
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void onChangeType(wxCommandEvent& event);
@@ -26,7 +26,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::AbstractEditOP *m_mesh_op, *m_strip_op;
+	ee::EditOP *m_mesh_op, *m_strip_op;
 
 }; // CreateMeshCMPT
 

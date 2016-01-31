@@ -2,7 +2,7 @@
 #ifndef EBUILDER_PREVIEW_PANEL_H
 #define EBUILDER_PREVIEW_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -13,7 +13,7 @@ namespace ebuilder
 		class Canvas;
 		class Scene;
 
-		class Panel : public d2d::EditPanel
+		class Panel : public ee::EditPanel
 		{
 		public:
 			Panel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -28,7 +28,7 @@ namespace ebuilder
 			void setScene(Scene* scene);
 
 		private:
-			class MouseActionOP : public d2d::AbstractEditOP
+			class MouseActionOP : public ee::AbstractEditOP
 			{
 			public:
 				MouseActionOP(Panel* panel);

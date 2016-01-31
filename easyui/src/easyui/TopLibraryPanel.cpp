@@ -37,15 +37,15 @@ void TopLibraryPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	m_library_ui = new d2d::LibraryPanel(this);
+	m_library_ui = new ee::LibraryPanel(this);
 	sizer->Add(m_library_ui, 1, wxEXPAND);
 
-	m_library_raw = new d2d::LibraryPanel(this);
+	m_library_raw = new ee::LibraryPanel(this);
 	wxWindow* nb = m_library_raw->GetNotebook();
-	m_library_raw->AddPage(new d2d::LibraryImagePage(nb));
+	m_library_raw->AddPage(new ee::LibraryImagePage(nb));
 	m_library_raw->AddPage(new ecomplex::LibraryPage(nb));
 	m_library_raw->AddPage(new etext::LibraryPage(nb));
-	m_library_raw->AddPage(new d2d::LibraryScriptsPage(nb));
+	m_library_raw->AddPage(new ee::LibraryScriptsPage(nb));
 	sizer->Add(m_library_raw, 1, wxEXPAND);
 
 	SetSizer(sizer);

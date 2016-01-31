@@ -30,7 +30,7 @@ IBody* BodyFactory::createBody(const std::string& filename, float scale/* = 1.0f
 }
 
 // todo: BodyData's destructor func will delete the FixtureData pointer
-IBody* BodyFactory::createBody(const std::vector<d2d::Vector>& triangles, float scale/* = 1.0f*/)
+IBody* BodyFactory::createBody(const std::vector<ee::Vector>& triangles, float scale/* = 1.0f*/)
 {
 	BodyData bd;
 

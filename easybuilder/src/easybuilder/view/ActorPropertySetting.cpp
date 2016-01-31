@@ -11,14 +11,14 @@
 using namespace ebuilder;
 
 ActorPropertySetting::ActorPropertySetting(Actor* actor, 
-										   d2d::LibraryList* list)
+										   ee::LibraryList* list)
 	: IPropertySetting(Context::Instance()->stage->getDesignerPage(), wxT("Actor"))
 	, m_actor(actor)
 	, m_list(list)
 {
 }
 
-void ActorPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
+void ActorPropertySetting::updatePanel(ee::PropertySettingPanel* panel)
 {
 	wxPropertyGrid* pg = panel->getPG();
 
@@ -83,9 +83,9 @@ void ActorPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	else if (name == wxT("Tag"))
 		m_actor->tag = wxANY_AS(value, wxString);
 	else if (name == wxT("X"))
-		m_actor->setTransform(d2d::Vector(wxANY_AS(value, float), m_actor->getPosition().y), m_actor->getAngle());
+		m_actor->setTransform(ee::Vector(wxANY_AS(value, float), m_actor->getPosition().y), m_actor->getAngle());
 	else if (name == wxT("Y"))
-		m_actor->setTransform(d2d::Vector(m_actor->getPosition().x, wxANY_AS(value, float)), m_actor->getAngle());
+		m_actor->setTransform(ee::Vector(m_actor->getPosition().x, wxANY_AS(value, float)), m_actor->getAngle());
 	else if (name == wxT("Angle"))
 		m_actor->setTransform(m_actor->getPosition(), wxANY_AS(value, float));
 	else if (name == wxT("Scale"))
@@ -113,12 +113,12 @@ void ActorPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	m_editPanel->Refresh();
 }
 
-void ActorPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void ActorPropertySetting::updatePropertyGrid(ee::PropertySettingPanel* panel)
 {
 	updatePanel(panel);
 }
 
-void ActorPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void ActorPropertySetting::enablePropertyGrid(ee::PropertySettingPanel* panel, bool bEnable)
 {
 	wxPropertyGrid* pg = panel->getPG();
 
@@ -181,7 +181,7 @@ void ActorPropertySetting::updateActorName(const wxString& name)
 //////////////////////////////////////////////////////////////////////////
 
 void ActorPropertySetting::UpdateNameVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+visit(ee::Object* object, bool& bFetchNext)
 {
 	ActorItem* item = static_cast<ActorItem*>(object);
 	if (item->getActor() == m_actor)

@@ -2,7 +2,7 @@
 #ifndef LIBMODELING_BODY_H
 #define LIBMODELING_BODY_H
 
-#include <drag2d.h>
+
 
 #include <vector>
 
@@ -10,7 +10,7 @@ namespace libmodeling
 {
 	class Fixture;
 
-	class Body : public d2d::Object
+	class Body : public ee::Object
 	{
 	public:
 		enum Type
@@ -24,11 +24,11 @@ namespace libmodeling
 		Body();
 		~Body();
 
-		bool isContain(const d2d::Vector& pos) const;
-		bool isIntersect(const d2d::Rect& rect) const;
+		bool isContain(const ee::Vector& pos) const;
+		bool isIntersect(const ee::Rect& rect) const;
 
-		void draw(const d2d::Matrix& mt, const d2d::Colorf& cFace, 
-			const d2d::Colorf& cEdge) const;
+		void draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
+			const ee::Colorf& cEdge) const;
 
 	public:
 		wxString name;
@@ -47,7 +47,7 @@ namespace libmodeling
 
 		float gravityScale;
 
-		d2d::Sprite* sprite;
+		ee::Sprite* sprite;
 
 		std::vector<Fixture*> fixtures;
 

@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	TrimImage() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -26,8 +26,8 @@ public:
 private:
 	void Trigger(const std::string& src_dir, const std::string& dst_dir);
 
-	void StoreBoundInfo(const d2d::ImageData& img, const d2d::Rect& r, Json::Value& val) const;
-	bool IsTransparent(const d2d::ImageData& img, int x, int y) const;
+	void StoreBoundInfo(const ee::ImageData& img, const ee::Rect& r, Json::Value& val) const;
+	bool IsTransparent(const ee::ImageData& img, int x, int y) const;
 
 	void Trim(const std::string& filepath);
 

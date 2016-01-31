@@ -12,14 +12,14 @@ namespace emodeling
 
 StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
 	SetCanvas(new StageCanvas(this));
 
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::RemoveSpriteSJ::Instance());
-	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::RemoveSpriteSJ::Instance());
+	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
 StagePanel::~StagePanel()
@@ -27,19 +27,19 @@ StagePanel::~StagePanel()
 	Clear();
 }
 
-d2d::Sprite* StagePanel::QuerySpriteByPos(const d2d::Vector& pos) const
+ee::Sprite* StagePanel::QuerySpriteByPos(const ee::Vector& pos) const
 {
-	d2d::Sprite* result = NULL;
-	TraverseSprites(PointQueryVisitor(pos, &result), d2d::DT_EDITABLE, false);
+	ee::Sprite* result = NULL;
+	TraverseSprites(PointQueryVisitor(pos, &result), ee::DT_EDITABLE, false);
 	return result;
 }
 
-void StagePanel::QuerySpritesByRect(const d2d::Rect& rect, std::vector<d2d::Sprite*>& result) const
+void StagePanel::QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite*>& result) const
 {
-	TraverseSprites(RectQueryVisitor(rect, result), d2d::DT_EDITABLE);
+	TraverseSprites(RectQueryVisitor(rect, result), ee::DT_EDITABLE);
 }
 
-libmodeling::Joint* StagePanel::queryJointByPos(const d2d::Vector& pos) const
+libmodeling::Joint* StagePanel::queryJointByPos(const ee::Vector& pos) const
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 		if (m_joints[i]->isContain(pos))
@@ -47,7 +47,7 @@ libmodeling::Joint* StagePanel::queryJointByPos(const d2d::Vector& pos) const
 	return NULL;
 }
 
-void StagePanel::queryJointsByRect(const d2d::Rect& rect, std::vector<libmodeling::Joint*>& result) const
+void StagePanel::queryJointsByRect(const ee::Rect& rect, std::vector<libmodeling::Joint*>& result) const
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
@@ -69,7 +69,7 @@ void StagePanel::removeJoint(libmodeling::Joint* joint)
 	}
 }
 
-void StagePanel::traverseBodies(d2d::Visitor& visitor) const
+void StagePanel::traverseBodies(ee::Visitor& visitor) const
 {
 	std::vector<libmodeling::Body*>::const_iterator itr = m_bodies.begin();
 	for ( ; itr != m_bodies.end(); ++itr)
@@ -80,7 +80,7 @@ void StagePanel::traverseBodies(d2d::Visitor& visitor) const
 	}
 }
 
-void StagePanel::traverseJoints(d2d::Visitor& visitor) const
+void StagePanel::traverseJoints(ee::Visitor& visitor) const
 {
 	std::vector<libmodeling::Joint*>::const_iterator itr = m_joints.begin();
 	for ( ; itr != m_joints.end(); ++itr)
@@ -97,16 +97,16 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			Insert(p->spr);
 		}
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::Sprite*)ud);
+	case ee::MSG_REMOVE_SPRITE:
+		Remove((ee::Sprite*)ud);
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		Clear();
 		break;
 	}
@@ -114,8 +114,8 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 {
-	d2d::Symbol* bg = NULL;
-	std::vector<d2d::Shape*> shapes;
+	ee::Symbol* bg = NULL;
+	std::vector<ee::Shape*> shapes;
 	libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
 	for (size_t i = 0, n = shapes.size();  i< n; ++i)
 	{
@@ -130,17 +130,17 @@ void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 		// 		}
 		// 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shapes[i]))
 		// 		{
-		// 			std::vector<d2d::Vector> vertices(4);
-		//  			vertices[0] = d2d::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
-		//  			vertices[1] = d2d::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
-		//  			vertices[2] = d2d::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
-		//  			vertices[3] = d2d::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
+		// 			std::vector<ee::Vector> vertices(4);
+		//  			vertices[0] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
+		//  			vertices[1] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymin);
+		//  			vertices[2] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
+		//  			vertices[3] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
 		// 
 		// 			fixture->shape = new libshape::ChainShape(vertices, true);
 		// 		}
 		// 		else if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shapes[i]))
 		// 		{
-		// 			fixture->shape = new libshape::CircleShape(d2d::Vector(), circle->radius);
+		// 			fixture->shape = new libshape::CircleShape(ee::Vector(), circle->radius);
 		// 		}
 		body.fixtures.push_back(fixture);
 
@@ -148,28 +148,28 @@ void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 	}
 }
 
-void StagePanel::loadBody(d2d::Sprite* sprite, libmodeling::Body& body)
+void StagePanel::loadBody(ee::Sprite* sprite, libmodeling::Body& body)
 {
 	libmodeling::Fixture* fixture = new libmodeling::Fixture;
 	fixture->body = &body;
 
 	const float width = sprite->GetSymbol().GetSize().Width(),
 		height = sprite->GetSymbol().GetSize().Height();
-	fixture->shape = new libshape::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
+	fixture->shape = new libshape::RectShape(ee::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 	body.fixtures.push_back(fixture);
 }
 
-void StagePanel::Insert(d2d::Sprite* spr)
+void StagePanel::Insert(ee::Sprite* spr)
 {
-	wxString filepath = d2d::FileHelper::GetFilenameAddTag(
+	wxString filepath = ee::FileHelper::GetFilenameAddTag(
 		spr->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
-	if (!d2d::FileHelper::IsFileExist(filepath)) {
+	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
 	}
 
-	d2d::Symbol* bg = NULL;
-	std::vector<d2d::Shape*> shapes;
+	ee::Symbol* bg = NULL;
+	std::vector<ee::Shape*> shapes;
 	libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
 	libmodeling::Body* body = new libmodeling::Body;
 	for (int i = 0, n = shapes.size(); i< n; ++i)
@@ -186,7 +186,7 @@ void StagePanel::Insert(d2d::Sprite* spr)
 	m_bodies.push_back(body);
 }
 
-void StagePanel::Remove(d2d::Sprite* spr)
+void StagePanel::Remove(ee::Sprite* spr)
 {
 	for (size_t i = 0, n = m_bodies.size(); i < n; ++i)
 	{
@@ -212,7 +212,7 @@ void StagePanel::Clear()
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::PointQueryVisitor::
-	PointQueryVisitor(const d2d::Vector& pos, d2d::Sprite** pResult)
+	PointQueryVisitor(const ee::Vector& pos, ee::Sprite** pResult)
 	: m_pos(pos)
 {
 	m_pResult = pResult;
@@ -220,9 +220,9 @@ StagePanel::PointQueryVisitor::
 }
 
 void StagePanel::PointQueryVisitor::
-	Visit(d2d::Object* object, bool& next)
+	Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	if (data->isContain(m_pos))
 	{
@@ -240,15 +240,15 @@ void StagePanel::PointQueryVisitor::
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::RectQueryVisitor::
-	RectQueryVisitor(const d2d::Rect& rect, std::vector<d2d::Sprite*>& result)
+	RectQueryVisitor(const ee::Rect& rect, std::vector<ee::Sprite*>& result)
 	: m_rect(rect), m_result(result)
 {
 }
 
 void StagePanel::RectQueryVisitor::
-	Visit(d2d::Object* object, bool& next)
+	Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	if (data->isIntersect(m_rect))
 		m_result.push_back(sprite);

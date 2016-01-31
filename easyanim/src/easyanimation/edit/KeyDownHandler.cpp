@@ -23,8 +23,8 @@ KeyDownHandler* KeyDownHandler::Instance()
 
 bool KeyDownHandler::Process(int key_code)
 {
-	if (d2d::GetKeyStateSJ::Instance()->Query(WXK_CONTROL) ||
-		d2d::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
+	if (ee::GetKeyStateSJ::Instance()->Query(WXK_CONTROL) ||
+		ee::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
 		return false;
 	}
 

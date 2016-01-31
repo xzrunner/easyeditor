@@ -16,7 +16,7 @@ void P3dSprToLuaString::Pack(const PackP3dSpr* spr, ebuilder::CodeGenerator& gen
 	lua::comments(gen, "file: " + spr->GetFilepath());
 
 	lua::assign_with_end(gen, "type", "\"p3d_spr\"");
-	lua::assign_with_end(gen, "id", d2d::StringHelper::ToString(spr->GetSprID()));
+	lua::assign_with_end(gen, "id", ee::StringHelper::ToString(spr->GetSprID()));
 	if (!spr->export_name.empty()) {
 		lua::assign_with_end(gen, "export", "\"" + spr->export_name + "\"");
 	}

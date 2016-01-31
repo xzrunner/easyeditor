@@ -1,27 +1,27 @@
 #ifndef _LR_LAYER_H_
 #define _LR_LAYER_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
 
 class LibraryPanel;
 
-class Layer : public d2d::Object
+class Layer : public ee::Object
 {
 public:
 	Layer(int id, LibraryPanel* library);
 	
-	virtual void TraverseSprite(d2d::Visitor& visitor, bool order = true) const;
-	virtual void TraverseSprite(d2d::Visitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual void TraverseSprite(ee::Visitor& visitor, bool order = true) const;
+	virtual void TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 	virtual bool RemoveSprite(Object* obj);
 	virtual bool InsertSprite(Object* obj, int idx);
 	virtual bool ClearSprite();
 	virtual bool ResetOrderSprite(const Object* obj, bool up);
 	virtual bool ResetOrderSpriteMost(const Object* obj, bool up);
 
-	virtual void TraverseShape(d2d::Visitor& visitor, bool order = true) const;
+	virtual void TraverseShape(ee::Visitor& visitor, bool order = true) const;
 	virtual bool RemoveShape(Object* obj);
 	virtual bool InsertShape(Object* obj);
 	virtual bool ClearShape();
@@ -40,12 +40,12 @@ public:
 
 	bool Update(int version);
 
-	d2d::Sprite* QuerySprite(const std::string& name) const;
-	d2d::Shape* QueryShape(const std::string& name) const;
+	ee::Sprite* QuerySprite(const std::string& name) const;
+	ee::Shape* QueryShape(const std::string& name) const;
 
 	int GetID() const { return m_id; }
 
-	d2d::LayerMgr* GetLayerMgr() { return &m_layer_mgr; }
+	ee::LayerMgr* GetLayerMgr() { return &m_layer_mgr; }
 
 private:
 	static bool IsValidFloat(float f);
@@ -57,20 +57,20 @@ private:
 
 	void LoadFromBaseFile(int layer_idx, const std::string& filepath, const std::string& dir);
 
-	void CheckSpriteName(d2d::Sprite* spr);
+	void CheckSpriteName(ee::Sprite* spr);
 
-	void LoadShapesUD(const Json::Value& spr_val, d2d::Sprite* spr) const;
-	void StoreShapesUD(d2d::Sprite* spr, Json::Value& spr_val) const;
+	void LoadShapesUD(const Json::Value& spr_val, ee::Sprite* spr) const;
+	void StoreShapesUD(ee::Sprite* spr, Json::Value& spr_val) const;
 
-	d2d::Sprite* LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path);
-	void StoreGroup(d2d::Sprite* spr, Json::Value& val, const std::string& dir) const;
+	ee::Sprite* LoadGroup(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	void StoreGroup(ee::Sprite* spr, Json::Value& val, const std::string& dir) const;
 
-	d2d::Sprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
-	bool StoreSprite(d2d::Sprite* spr, Json::Value& val, const std::string& dir) const;
+	ee::Sprite* LoadSprite(const Json::Value& val, const std::string& dir, const std::string& base_path);
+	bool StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& dir) const;
 	
 private:
 	template<typename T>
-	class QueryNameVisitor : public d2d::Visitor
+	class QueryNameVisitor : public ee::Visitor
 	{
 	public:
 		QueryNameVisitor(const std::string& name);
@@ -91,15 +91,15 @@ private:
 
 	bool m_editable, m_visible;
 
-	d2d::ObjectVector<d2d::Sprite> m_sprites;
-	d2d::ObjectVector<d2d::Shape> m_shapes;
+	ee::ObjectVector<ee::Sprite> m_sprites;
+	ee::ObjectVector<ee::Shape> m_shapes;
 
 	std::string m_base_filepath;
 
 	int m_next_id;
 	std::set<std::string> m_name_set;
 
-	d2d::LayerMgr m_layer_mgr;
+	ee::LayerMgr m_layer_mgr;
 
 }; // Layer
 

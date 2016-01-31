@@ -1,20 +1,20 @@
 #ifndef _EASYANIM_STAGE_CANVAS_H_
 #define _EASYANIM_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void SetBackground(d2d::Symbol* symbol);
+	void SetBackground(ee::Symbol* symbol);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -28,7 +28,7 @@ private:
 private:
 	StagePanel* m_stage_panel;
 
-	d2d::Symbol* m_background;
+	ee::Symbol* m_background;
 
 }; // StageCanvas
 

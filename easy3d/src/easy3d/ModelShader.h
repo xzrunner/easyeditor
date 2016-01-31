@@ -3,7 +3,7 @@
 
 #include "Matrix.h"
 
-#include <drag2d.h>
+
 
 namespace e3d
 {
@@ -11,7 +11,7 @@ namespace e3d
 class IModel;
 struct Material;
 
-class ModelShader : public d2d::IShader
+class ModelShader : public ee::IShader
 {
 public:
 	ModelShader();

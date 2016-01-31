@@ -11,12 +11,12 @@
 using namespace edb;
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl(GetStageImpl())
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
+	, ee::ShapesPanelImpl(GetStageImpl())
 {
-	m_edit_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this);
+	m_edit_op = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, this);
 	m_canvas = new StageCanvas(this);
 }
 
@@ -26,21 +26,21 @@ StagePanel::~StagePanel()
 
 void StagePanel::loadFromDir(const std::string& dirpath)
 {
-	d2d::ClearSpriteSJ::Instance()->Clear();
+	ee::ClearSpriteSJ::Instance()->Clear();
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dirpath, files);
+	ee::FileHelper::FetchAllFiles(dirpath, files);
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i].ToStdString();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)
-			|| d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)
+			|| ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 			symbol->Release();
-			d2d::InsertSpriteSJ::Insert(sprite);
+			ee::InsertSpriteSJ::Insert(sprite);
 		}
 	}
 
@@ -53,7 +53,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 void StagePanel::loadFromDirFast(const std::string& dirpath)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dirpath, files);
+	ee::FileHelper::FetchAllFiles(dirpath, files);
 
 	Context::Instance()->tree->init(files);
 }
@@ -62,17 +62,17 @@ void StagePanel::initConnection()
 {
 	m_graphics.clear();
 
-	std::vector<d2d::Sprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* from = sprites[i];
+		ee::Sprite* from = sprites[i];
 		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
 		{
 			const ecomplex::Symbol& symbol = complex->GetSymbol();
 			for (size_t i = 0, n = symbol.m_sprites.size(); i < n; ++i)
 			{
-				d2d::Sprite* child = symbol.m_sprites[i];
+				ee::Sprite* child = symbol.m_sprites[i];
 				for (size_t i = 0, n = sprites.size(); i < n; ++i)
 					if (&child->GetSymbol() == &sprites[i]->GetSymbol())
 						m_graphics.connect(from, sprites[i]);
@@ -89,7 +89,7 @@ void StagePanel::initConnection()
 					libanim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 					{
-						d2d::Sprite* child = frame->sprites[i];
+						ee::Sprite* child = frame->sprites[i];
 						for (size_t i = 0, n = sprites.size(); i < n; ++i)
 							if (&child->GetSymbol() == &sprites[i]->GetSymbol())
 								m_graphics.connect(from, sprites[i]);
@@ -102,20 +102,20 @@ void StagePanel::initConnection()
 
 void StagePanel::initPosition()
 {
-	std::vector<d2d::Sprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	// 1 single random
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 
 		Node* node = m_graphics.query(sprite);
 		if (!node || node->in.empty())
 		{
-			d2d::Vector pos;
-			float radius = d2d::Random::GetNum0To1() * 4096;
-			float angle = d2d::Random::GetNum(0, d2d::PI*2);
+			ee::Vector pos;
+			float radius = ee::Random::GetNum0To1() * 4096;
+			float angle = ee::Random::GetNum(0, ee::PI*2);
 			pos.x = cos(angle)*radius;
 			pos.y = sin(angle)*radius;
 			sprite->SetTransform(pos, 0);
@@ -125,19 +125,19 @@ void StagePanel::initPosition()
 	// 2 to
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 
 		Node* node = m_graphics.query(sprite);
 //		if (node && node->in.empty())
 		if (node)
 		{
 			float radius = 256;
-			float angle = d2d::PI*2 / node->out.size();
+			float angle = ee::PI*2 / node->out.size();
 			for (size_t i = 0, n = node->out.size(); i < n; ++i)
 			{
-				d2d::Sprite* to = node->out[i];
+				ee::Sprite* to = node->out[i];
 
-				d2d::Vector pos = sprite->GetPosition();
+				ee::Vector pos = sprite->GetPosition();
 				pos.x += cos(angle*i)*radius;
 				pos.y += sin(angle*i)*radius;
 // 				if (to->getPosition().x != 0 || to->getPosition().y != 0)

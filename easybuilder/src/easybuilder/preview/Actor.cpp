@@ -3,7 +3,7 @@
 
 using namespace ebuilder::preview;
 
-Actor::Actor(const d2d::ImageSprite& sprite)
+Actor::Actor(const ee::ImageSprite& sprite)
 	: Item(e_actor, sprite)
 {
 }

@@ -1,27 +1,27 @@
 #ifndef SHOOTBUBBLE_STAGE_PANEL_H_
 #define SHOOTBUBBLE_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace shootbubble
 {
-	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+	class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
 		//
-		// d2d::EditPanel interface
+		// ee::EditPanel interface
 		//
 		virtual void clear();
 
 		//
-		// d2d::SpritesPanelImpl interface
+		// ee::SpritesPanelImpl interface
 		//
-		virtual void insertSprite(d2d::ISprite* sprite);
+		virtual void insertSprite(ee::ISprite* sprite);
 
-		void transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
-		void transGridPosToCoords(int row, int col, d2d::Vector& pos) const;
+		void transCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const;
+		void transGridPosToCoords(int row, int col, ee::Vector& pos) const;
 
 		void computeParams(float& hEdge, float& posOffset, float& posOffset1, 
 			float& rowOffset) const;
@@ -29,7 +29,7 @@ namespace shootbubble
 		void updateAllSpritesLocation();
 
 	private:
-		d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
+		ee::Vector fixSpriteLocation(const ee::Vector& pos) const;
 
 	}; // StagePanel
 }

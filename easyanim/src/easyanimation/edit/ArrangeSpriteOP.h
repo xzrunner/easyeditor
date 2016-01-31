@@ -8,7 +8,7 @@ namespace eanim
 
 class StagePanel;
 
-class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
+class ArrangeSpriteOP : public ee::ArrangeSpriteOP<SelectSpritesOP>
 {
 public:
 	ArrangeSpriteOP(StagePanel* stage);
@@ -32,9 +32,9 @@ private:
 
 		Cross();
 		void Draw() const;
-		bool Contain(const d2d::Vector& p) const;
+		bool Contain(const ee::Vector& p) const;
 
-		d2d::Vector pos;
+		ee::Vector pos;
 
 	}; // Cross
 

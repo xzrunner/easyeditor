@@ -52,4 +52,6 @@ private:
 
 }
 
+#include "OBB.inl"
+
 #endif // _EASYEDITOR_OBB_H_

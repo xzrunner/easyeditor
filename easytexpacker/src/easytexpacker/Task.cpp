@@ -10,20 +10,20 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
 void Task::loadFromFile(const char* filename)
 {
 	if (!wxFileName::FileExists(filename)) {
-		throw d2d::Exception("File: %s don't exist!", filename);
+		throw ee::Exception("File: %s don't exist!", filename);
 	}
 	FileIO::load(filename);
 }
@@ -35,7 +35,7 @@ void Task::storeToFile(const char* filename) const
 
 void Task::clear()
 {
-	d2d::ClearPanelSJ::Instance()->Clear();
+	ee::ClearPanelSJ::Instance()->Clear();
 }
 
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
@@ -46,10 +46,10 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 {
 	Context* context = Context::Instance();
 
-	library = context->library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	context->library->AddPage(new d2d::LibraryImagePage(context->library->GetNotebook()));
+	library = context->library = new ee::LibraryPanel(leftHorizontalSplitter);
+	context->library->AddPage(new ee::LibraryImagePage(context->library->GetNotebook()));
 
-	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	property = context->property = new ee::PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
 	context->property->SetEditPanel(context->stage->GetStageImpl());
@@ -57,7 +57,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage);
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
 	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);

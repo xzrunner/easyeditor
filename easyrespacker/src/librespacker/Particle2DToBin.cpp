@@ -39,7 +39,7 @@ int Particle2DToBin::Size(const PackParticle2D* p2d)
 	}
 	else
 	{
-		throw d2d::Exception("Particle2DToBin::Size unknown mode type.");
+		throw ee::Exception("Particle2DToBin::Size unknown mode type.");
 	}
 
 	return sz;
@@ -150,7 +150,7 @@ void Particle2DToBin::Pack(const PackParticle2D* p2d, uint8_t** ptr)
 	}
 	else
 	{
-		throw d2d::Exception("Particle2DToBin::Pack unknown mode type.");
+		throw ee::Exception("Particle2DToBin::Pack unknown mode type.");
 	}
 }
 

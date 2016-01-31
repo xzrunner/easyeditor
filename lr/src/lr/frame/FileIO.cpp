@@ -11,10 +11,10 @@ namespace lr
 {
 
 void FileIO::Load(const char* filename, LibraryPanel* library, 
-				  StagePanel* stage, d2d::GroupTreePanel* grouptree)
+				  StagePanel* stage, ee::GroupTreePanel* grouptree)
 {
-// 	d2d::SymbolMgr::Instance()->Clear();
-// 	d2d::BitmapMgr::Instance()->Clear();
+// 	ee::SymbolMgr::Instance()->Clear();
+// 	ee::BitmapMgr::Instance()->Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -49,22 +49,22 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	float s = value["camera"]["scale"].asDouble();
 	float x = value["camera"]["x"].asDouble(),
 		y = value["camera"]["y"].asDouble();
-	d2d::Camera* cam = stage->GetCamera();
+	ee::Camera* cam = stage->GetCamera();
 	cam->SetScale(s);
-	cam->SetPosition(d2d::Vector(x, y));
+	cam->SetPosition(ee::Vector(x, y));
 
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
 		std::string str = value["screen"]["multi_col"].asString();
-		stage->GetScreenMultiColor() = d2d::TransColor(str, d2d::PT_RGBA);
+		stage->GetScreenMultiColor() = ee::TransColor(str, ee::PT_RGBA);
 	}
 	if (!value["screen"]["add_col"].isNull()) {
 		std::string str = value["screen"]["add_col"].asString();
-		stage->GetScreenAddColor() = d2d::TransColor(str, d2d::PT_RGBA);
+		stage->GetScreenAddColor() = ee::TransColor(str, ee::PT_RGBA);
 	}
 
 	// layers
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 	LoadLayers(value["layer"], stage, library, dir);
 
 // 	// groups
@@ -80,11 +80,11 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	library->Refresh();
 
 	Layer* layer = static_cast<LibraryPage*>(library->GetCurrPage())->GetLayer();
-	d2d::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
+	ee::ChangeLayerMgrSJ::Instance()->Change(layer->GetLayerMgr());
 }
 
 void FileIO::Store(const char* filename, LibraryPanel* library,
-				   StagePanel* stage, d2d::GroupTreePanel* grouptree)
+				   StagePanel* stage, ee::GroupTreePanel* grouptree)
 {
 	Json::Value value;
 
@@ -102,17 +102,17 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["size"]["view offset y"] = cfg->m_view_dy;
 
 	// camera
-	d2d::Camera* cam = stage->GetCamera();
+	ee::Camera* cam = stage->GetCamera();
 	value["camera"]["scale"] = cam->GetScale();
 	value["camera"]["x"] = cam->GetPosition().x;
 	value["camera"]["y"] = cam->GetPosition().y;
 
 	// screen
-	value["screen"]["multi_col"] = d2d::TransColor(stage->GetScreenMultiColor(), d2d::PT_RGBA);
-	value["screen"]["add_col"] = d2d::TransColor(stage->GetScreenAddColor(), d2d::PT_RGBA);
+	value["screen"]["multi_col"] = ee::TransColor(stage->GetScreenMultiColor(), ee::PT_RGBA);
+	value["screen"]["add_col"] = ee::TransColor(stage->GetScreenAddColor(), ee::PT_RGBA);
 
 	// layers
-	std::string dir = d2d::FileHelper::GetFileDir(filename) + "\\";
+	std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 	StoreLayers(value["layer"], stage->GetLayers(), dir);
 
 // 	// groups

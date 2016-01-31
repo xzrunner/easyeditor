@@ -8,7 +8,7 @@ namespace librespacker
 void ShapeFromLua::Unpack(lua_State* L, PackShape* shape)
 {
 	shape->type = ShapeType(LuaDataHelper::GetIntField(L, "shape_type"));
-	shape->color = d2d::TransColor((uint32_t)LuaDataHelper::GetDoubleField(L, "color"), d2d::PT_RGBA);
+	shape->color = ee::TransColor((uint32_t)LuaDataHelper::GetDoubleField(L, "color"), ee::PT_RGBA);
 
 	int num = LuaDataHelper::GetIntField(L, "vertices_num");
 	shape->vertices.resize(num);

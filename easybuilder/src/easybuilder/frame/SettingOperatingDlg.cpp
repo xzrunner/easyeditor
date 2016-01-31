@@ -1,6 +1,6 @@
 //#include "SettingOperatingDlg.h"
 //
-//#include <drag2d.h>
+//
 //
 //using namespace ebuilder;
 //
@@ -15,7 +15,7 @@
 //
 //		wxRadioBox* editChoice = new wxRadioBox(this, wxID_ANY, wxT("scale method"), 
 //			wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
-//		if (d2d::Settings::bZoomOnlyUseMouseWheel)
+//		if (ee::Settings::bZoomOnlyUseMouseWheel)
 //			editChoice->SetSelection(0);
 //		else
 //			editChoice->SetSelection(1);
@@ -30,7 +30,7 @@
 //void SettingOperatingDlg::onChangeZoomType(wxCommandEvent& event)
 //{
 //	if (event.GetInt() == 0)
-//		d2d::Settings::bZoomOnlyUseMouseWheel = true;
+//		ee::Settings::bZoomOnlyUseMouseWheel = true;
 //	else
-//		d2d::Settings::bZoomOnlyUseMouseWheel = false;
+//		ee::Settings::bZoomOnlyUseMouseWheel = false;
 //}

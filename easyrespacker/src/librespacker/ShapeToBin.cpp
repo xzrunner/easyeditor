@@ -30,17 +30,17 @@ void ShapeToBin::Pack(const PackShape* shape, uint8_t** ptr)
 	uint8_t shape_type = shape->type;
 	pack(shape_type, ptr);
 
-	uint32_t font_color = d2d::color2int(shape->color, d2d::PT_RGBA);
+	uint32_t font_color = ee::color2int(shape->color, ee::PT_RGBA);
 	pack(font_color, ptr);
 
 	if (shape->vertices.size() > USHRT_MAX) {
-		throw d2d::Exception("ShapeToBin::Pack num too layer.");
+		throw ee::Exception("ShapeToBin::Pack num too layer.");
 	}
 	uint16_t num = shape->vertices.size();
 	pack(num, ptr);
 	
 	for (int i = 0, n = shape->vertices.size(); i < n; ++i) {
-		const d2d::Vector& pos = shape->vertices[i];
+		const ee::Vector& pos = shape->vertices[i];
 		int32_t x = floor(pos.x * SCALE + 0.5f),
 			    y =-floor(pos.y * SCALE + 0.5f);
 		pack(x, ptr);

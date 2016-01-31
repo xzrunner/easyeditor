@@ -11,11 +11,11 @@
 #include "SpriteFactory.h"
 #include "ColorTrans.h"
 #include "SpriteObserver.h"
-//#include "SpritePropertySetting.h"
+#include "SpritePropertySetting.h"
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
-#include "render/SpatialIndex.h"
+#include "render/EE_SIdx.h"
 #endif // OPEN_SCREEN_CACHE
 
 namespace ee
@@ -129,12 +129,12 @@ void Sprite::Load(const Json::Value& val)
 	Vector scale;
 	if (val["scale"].isNull())
 	{
-		scale.x = val["x scale"].asDouble();
-		scale.y = val["y scale"].asDouble();
+		scale.x = static_cast<float>(val["x scale"].asDouble());
+		scale.y = static_cast<float>(val["y scale"].asDouble());
 	}
 	else
 	{
-		scale.x = scale.y = val["scale"].asDouble();
+		scale.x = scale.y = static_cast<float>(val["scale"].asDouble());
 	}
 	SetScale(scale);
 
@@ -142,8 +142,8 @@ void Sprite::Load(const Json::Value& val)
 	Vector shear;
 	if (!val["x shear"].isNull())
 	{
-		shear.x = val["x shear"].asDouble();
-		shear.y = val["y shear"].asDouble();
+		shear.x = static_cast<float>(val["x shear"].asDouble());
+		shear.y = static_cast<float>(val["y shear"].asDouble());
 	}
 	else
 	{
@@ -160,8 +160,8 @@ void Sprite::Load(const Json::Value& val)
 	if (!val["x perspective"].isNull())
 	{
 		Vector persp;
-		persp.x = val["x perspective"].asDouble();
-		persp.y = val["y perspective"].asDouble();
+		persp.x = static_cast<float>(val["x perspective"].asDouble());
+		persp.y = static_cast<float>(val["y perspective"].asDouble());
 		SetPerspective(persp);
 	}
 
@@ -169,8 +169,8 @@ void Sprite::Load(const Json::Value& val)
 	float ox, oy;
 	if (!val["x offset"].isNull())
 	{
-		ox = val["x offset"].asDouble();
-		oy = val["y offset"].asDouble();
+		ox = static_cast<float>(val["x offset"].asDouble());
+		oy = static_cast<float>(val["y offset"].asDouble());
 	}
 	else
 	{
@@ -179,14 +179,14 @@ void Sprite::Load(const Json::Value& val)
 	SetOffset(Vector(ox, oy));
 
 	// translate
-	float x = val["position"]["x"].asDouble();
-	float y = val["position"]["y"].asDouble();
+	float x = static_cast<float>(val["position"]["x"].asDouble());
+	float y = static_cast<float>(val["position"]["y"].asDouble());
 	if (fabs(x) >= FLT_MAX || fabs(y) >= FLT_MAX) {
 		throw Exception("sprite pos err, filepath: %s, name: %s", val["filepath"].asString().c_str(), name.c_str());
 	}
 
 	// rotate
-	float angle = val["angle"].asDouble();
+	float angle = static_cast<float>(val["angle"].asDouble());
 	SetTransform(Vector(x, y), angle);
 
 	// blend
@@ -269,7 +269,7 @@ void Sprite::BuildBounding()
 	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
-IPropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
+PropertySetting* Sprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
 }
@@ -298,7 +298,7 @@ void Sprite::SetScale(const Vector& scale)
 // 	mat_old.scale(m_scale.x, m_scale.y);
 // 	mat_new.scale(xScale, yScale);
 // 
-// 	Vector offset = Math2D::transVector(m_offset, mat_new) - Math2D::transVector(m_offset, mat_old);
+// 	Vector offset = Math2D::TransVector(m_offset, mat_new) - Math2D::TransVector(m_offset, mat_old);
 // 
 // 	m_offset += offset;
 // 	translate(-offset);
@@ -350,7 +350,7 @@ bool Sprite::IsIntersect(const Rect& rect) const
 void Sprite::Translate(const Vector& offset)
 {
 #ifdef OPEN_SCREEN_CACHE
-	bool find = SpatialIndex::Instance()->Remove(this);
+	bool find = SIdx::Instance()->Remove(this);
 	if (find) {
 		SpriteRenderer::Instance()->InvalidRect(this);
 	}
@@ -367,7 +367,7 @@ void Sprite::Translate(const Vector& offset)
 #ifdef OPEN_SCREEN_CACHE
 	if (find) {
 		SpriteRenderer::Instance()->InvalidRect(this);
-		SpatialIndex::Instance()->Insert(this);
+		SIdx::Instance()->Insert(this);
 	}
 #endif // OPEN_SCREEN_CACHE
 }
@@ -375,7 +375,7 @@ void Sprite::Translate(const Vector& offset)
 void Sprite::Rotate(float delta)
 {
 #ifdef OPEN_SCREEN_CACHE
-	SpatialIndex::Instance()->Remove(this);
+	SIdx::Instance()->Remove(this);
 #endif // OPEN_SCREEN_CACHE
 
 	if (m_observer)
@@ -388,7 +388,7 @@ void Sprite::Rotate(float delta)
 	}
 
 #ifdef OPEN_SCREEN_CACHE
-	SpatialIndex::Instance()->Insert(this);
+	SIdx::Instance()->Insert(this);
 #endif // OPEN_SCREEN_CACHE
 }
 

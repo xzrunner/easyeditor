@@ -11,7 +11,7 @@ void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 
 	value["fps"] = symbol.getFPS();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 		store(value["layer"][i], symbol.m_layers[i], dir);
 
@@ -37,12 +37,12 @@ void FileSaver::store(Json::Value& value, Symbol::Frame* frame, const wxString& 
 		store(value["actor"][i], frame->sprites[i], dir);
 }
 
-void FileSaver::store(Json::Value& value, d2d::Sprite* sprite, const wxString& dir)
+void FileSaver::store(Json::Value& value, ee::Sprite* sprite, const wxString& dir)
 {
-	const d2d::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = d2d::FileHelper::GetRelativePath(dir, 
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir, 
 		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();

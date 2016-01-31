@@ -24,16 +24,16 @@ void LayersLoader::LoadLayers(const Json::Value& value,
 			int k = 0;
 			Json::Value spr_val = frame_val["actor"][k++];
 			while (!spr_val.isNull()) {
-				std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+				std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
+				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (!symbol) {
 					std::string filepath = spr_val["filepath"].asString();
-					throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
+					throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
 						dir.c_str(), filepath.c_str());
 				}
-				d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
+				ee::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
 
-				d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+				ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 				symbol->Release();
 				sprite->Load(spr_val);
 				dst_frame->sprites.push_back(sprite);

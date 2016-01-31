@@ -12,7 +12,7 @@ ShapeFactory::ShapeFactory()
 {
 }
 
-Shape* ShapeFactory::CreateShape(const d2d::Image& image) const
+Shape* ShapeFactory::CreateShape(const ee::Image& image) const
 {
 	Shape* shape = NULL;
 	switch (m_type)

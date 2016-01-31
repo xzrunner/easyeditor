@@ -1,14 +1,14 @@
 #ifndef _EASYICON_EDIT_QUAD_OP_H_
 #define _EASYICON_EDIT_QUAD_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eicon
 {
 
 class StagePanel;
 
-class EditQuadOP : public d2d::ZoomViewOP
+class EditQuadOP : public ee::ZoomViewOP
 {
 public:
 	EditQuadOP(StagePanel* stage);

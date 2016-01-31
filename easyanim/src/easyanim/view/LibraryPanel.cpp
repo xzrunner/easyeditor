@@ -21,7 +21,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 
 void LibraryPanel::loadFromTextFile(std::ifstream& fin)
 {
-	d2d::BitmapMgr::Instance()->clear();
+	ee::BitmapMgr::Instance()->clear();
 	m_symbolPage->loadFromTextFile(fin);
 	m_skeletonPage->loadFromTextFile(fin);
 }

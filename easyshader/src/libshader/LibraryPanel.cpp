@@ -7,11 +7,11 @@ namespace eshader
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent, bool is_2d)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
 	if (is_2d) {
-		AddPage(new d2d::LibraryImagePage(nb));
+		AddPage(new ee::LibraryImagePage(nb));
 	} else {
 		AddPage(new libsketch::LibraryPage(nb));
 	}

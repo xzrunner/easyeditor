@@ -1,18 +1,18 @@
 #ifndef _LR_PREVIEW_STAGE_CANVAS_H_
 #define _LR_PREVIEW_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
 namespace preview
 {
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::PlayControl& control,
-		const std::vector<const d2d::Sprite*>& sprites);
+	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::PlayControl& control,
+		const std::vector<const ee::Sprite*>& sprites);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -20,9 +20,9 @@ protected:
 	virtual void OnTimer();
 
 private:
-	d2d::PlayControl& m_control;
+	ee::PlayControl& m_control;
 
-	std::vector<const d2d::Sprite*> m_sprites;
+	std::vector<const ee::Sprite*> m_sprites;
 
 }; // StageCanvas
 

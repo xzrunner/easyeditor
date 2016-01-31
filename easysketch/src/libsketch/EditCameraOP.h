@@ -1,7 +1,7 @@
 #ifndef _LIBSKETCH_EDIT_CAMERA_OP_H_
 #define _LIBSKETCH_EDIT_CAMERA_OP_H_
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace libsketch
@@ -9,10 +9,10 @@ namespace libsketch
 
 class IEditState;
 
-class EditCameraOP : public d2d::AbstractEditOP
+class EditCameraOP : public ee::EditOP
 {
 public:
-	EditCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
+	EditCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 	virtual ~EditCameraOP();
 
 	virtual bool OnKeyDown(int keyCode);

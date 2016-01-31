@@ -1,7 +1,7 @@
 #ifndef _LIBCOMPLEX_NODE_TO_SPRITE_H_
 #define _LIBCOMPLEX_NODE_TO_SPRITE_H_
 
-#include <drag2d.h>
+
 #include <easyrespacker.h>
 
 namespace ecomplex
@@ -10,7 +10,7 @@ namespace ecomplex
 class NodeToSprite
 {
 public:
-	static d2d::Sprite* Trans(const librespacker::IPackNode* node);
+	static ee::Sprite* Trans(const librespacker::IPackNode* node);
 
 };	// NodeToSprite
 

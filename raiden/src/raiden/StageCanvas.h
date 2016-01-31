@@ -1,13 +1,13 @@
 #ifndef RAIDEN_STAGE_CANVAS_H
 #define RAIDEN_STAGE_CANVAS_H
 
-#include <drag2d.h>
+
 
 namespace raiden
 {
 	class StagePanel;
 
-	class StageCanvas : public d2d::SpriteStageCanvas
+	class StageCanvas : public ee::SpriteStageCanvas
 	{
 	public:
 		StageCanvas(StagePanel* parent);

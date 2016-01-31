@@ -8,12 +8,12 @@ namespace eterrain2d
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* panel);
 	StageCanvas(StagePanel* panel, wxGLContext* glctx,
-		d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites);
+		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -28,10 +28,10 @@ private:
 private:
 	StagePanel* m_panel;
 
-	d2d::Sprite* m_edited;
-	const d2d::MultiSpritesImpl* m_sprite_impl;
+	ee::Sprite* m_edited;
+	const ee::MultiSpritesImpl* m_sprite_impl;
 
-	d2d::Sprite* m_bg;
+	ee::Sprite* m_bg;
 
 }; // StageCanvas
 

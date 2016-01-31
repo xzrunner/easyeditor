@@ -5,19 +5,19 @@ namespace eimage
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 }
 
 void StageCanvas::OnDrawSprites() const
 {
-	if (const d2d::Sprite* s = m_stage->getImage())
+	if (const ee::Sprite* s = m_stage->getImage())
 	{
-		d2d::SpriteRenderer::Instance()->Draw(s);
+		ee::SpriteRenderer::Instance()->Draw(s);
 	}
 
-	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
 	m_stage->DrawEditOP();
 }

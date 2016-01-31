@@ -1,22 +1,22 @@
 #ifndef _EASYTEXTURE_STAGE_PANEL_H_
 #define _EASYTEXTURE_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace etexture
 {
 
 class Symbol;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
-	public d2d::ShapesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, 
+	public ee::ShapesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, d2d::Sprite* edited, 
-		const d2d::MultiSpritesImpl* bg_sprites, d2d::LibraryPanel* library);
+		wxGLContext* glctx, ee::Sprite* edited, 
+		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	Symbol* GetSymbol() { return m_symbol; }

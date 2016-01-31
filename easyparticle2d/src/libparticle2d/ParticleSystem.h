@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE2D_PARTICLE_SYSTEM_H_
 
-#include <drag2d.h>
+
 
 struct p2d_emitter_cfg;
 struct p2d_emitter;
@@ -10,7 +10,7 @@ struct p2d_symbol;
 namespace eparticle2d
 {
 
-class ParticleSystem : public d2d::Object, public d2d::UICallback
+class ParticleSystem : public ee::Object, public ee::UICallback
 {
 public:
 	ParticleSystem(p2d_emitter_cfg* cfg);
@@ -21,12 +21,12 @@ public:
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	virtual void Draw(const d2d::Matrix& mt) const;
+	virtual void Draw(const ee::Matrix& mt) const;
 
-	bool Update(const d2d::Matrix& mat);
+	bool Update(const ee::Matrix& mat);
 
 	void Start();
 	void Stop();
@@ -45,7 +45,7 @@ public:
 
 	void ReloadTexture() const;
 
-	p2d_symbol* AddSymbol(d2d::Symbol* symbol);
+	p2d_symbol* AddSymbol(ee::Symbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 
@@ -53,7 +53,7 @@ public:
 	const p2d_emitter* GetEmitter() const { return m_et; }
 
 private:
-	d2d::Vector m_pos;
+	ee::Vector m_pos;
 
 	p2d_emitter* m_et;
 

@@ -3,9 +3,9 @@
 namespace libanim
 {
 
-PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage,
+PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 							 const Symbol* symbol, wxGLContext* glctx)
-	: d2d::OrthoCanvas(stage_wnd, stage, glctx)
+	: ee::OrthoCanvas(stage_wnd, stage, glctx)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->getFPS())
 {
@@ -18,7 +18,7 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 
 void PreviewCanvas::OnDrawSprites() const
 {
-	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
+	ee::SpriteRenderer::Instance()->Draw(m_symbol);
 }
 
 void PreviewCanvas::OnTimer()
@@ -27,7 +27,7 @@ void PreviewCanvas::OnTimer()
 // 		return;
 // 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	if (m_setting.isCirculate) {
 		m_control.Reset();
 	}

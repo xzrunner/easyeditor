@@ -1,12 +1,12 @@
 #ifndef _EASYTEXTURE_SYMBOL_H_
 #define _EASYTEXTURE_SYMBOL_H_
 
-#include <drag2d.h>
+
 
 namespace etexture
 {
 
-class Symbol : public d2d::Symbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -22,13 +22,13 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
+		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
-	const std::vector<d2d::Shape*>& GetAllShapes() const { return m_shapes; }
+	const std::vector<ee::Shape*>& GetAllShapes() const { return m_shapes; }
 
-	static d2d::Symbol* Create() { return new Symbol(); }
+	static ee::Symbol* Create() { return new Symbol(); }
 	
 protected:
 	virtual void LoadResources();
@@ -36,7 +36,7 @@ protected:
 	void Clear();
 
 private:
-	std::vector<d2d::Shape*> m_shapes;
+	std::vector<ee::Shape*> m_shapes;
 
 	friend class SymbolContainer;
 

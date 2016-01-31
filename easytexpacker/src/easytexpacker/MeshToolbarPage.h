@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_MESH_TOOLBAR_PAGE_H_
 #define _EASYTEXPACKER_MESH_TOOLBAR_PAGE_H_
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {

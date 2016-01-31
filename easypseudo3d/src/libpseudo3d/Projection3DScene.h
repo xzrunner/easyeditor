@@ -3,7 +3,7 @@
 
 #include "IScene.h"
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace epseudo3d
@@ -24,12 +24,12 @@ public:
 	virtual void DebugDraw() const;
 
 private:
-	void DrawSprite(d2d::Image* img, int x, int y) const;
+	void DrawSprite(ee::Image* img, int x, int y) const;
 
 private:
 	StageCanvas3D* m_canvas;
 
-	std::vector<d2d::Image*> m_images;
+	std::vector<ee::Image*> m_images;
 	std::vector<vec2> m_positions;
 
 }; // Projection3DScene

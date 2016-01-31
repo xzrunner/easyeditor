@@ -11,21 +11,21 @@
 namespace eimage
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
+ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library, 
 						   StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
 	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));
 	addChild(new AutoTriCutCMPT(this, wxT("Auto Tri Cut"), stage));
 	addChild(new AutoRectCutCMPT(this, wxT("Auto Rect Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
 	addChild(new ImageProcessCMPT(this, wxT("Image Process"), stage));
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
-	return initChildrenLayout();
+	return InitChildrenLayout();
 }
 	
 }

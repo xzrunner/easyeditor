@@ -11,7 +11,7 @@
 using namespace ebuilder;
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 	, m_scenePage(NULL)
 	, m_actorPage(NULL)
 	, m_mediaPage(NULL)
@@ -31,27 +31,27 @@ void LibraryPanel::clearUIListeners()
 	m_scenePage->getListObserver()->clearUIListeners();
 }
 
-d2d::LibraryList* LibraryPanel::getActorList() 
+ee::LibraryList* LibraryPanel::getActorList() 
 { 
 	return m_actorPage->getList(); 
 }
 
-d2d::LibraryList* LibraryPanel::getLayerList()
+ee::LibraryList* LibraryPanel::getLayerList()
 {
 	return m_layerPage->getList();
 }
 
-d2d::LibraryList* LibraryPanel::getSceneList() 
+ee::LibraryList* LibraryPanel::getSceneList() 
 { 
 	return m_scenePage->getList(); 
 }
 
-d2d::LibraryList* LibraryPanel::getMediaList() 
+ee::LibraryList* LibraryPanel::getMediaList() 
 { 
 	return m_mediaPage->getList(); 
 }
 
-d2d::LibraryList* LibraryPanel::getBehaviorList() 
+ee::LibraryList* LibraryPanel::getBehaviorList() 
 { 
 	return m_behaviorPage->getList(); 
 }

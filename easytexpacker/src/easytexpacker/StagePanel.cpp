@@ -28,14 +28,14 @@ StagePanel::StagePanel(wxWindow* parent,
 
 //	m_strategy = new RectBinArrange();
 
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::RemoveSpriteSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::RemoveSpriteSJ::Instance());
 }
 
-void StagePanel::insertSpriteNoArrange(d2d::Sprite* sprite)
+void StagePanel::insertSpriteNoArrange(ee::Sprite* sprite)
 {
 //	fixCoords(sprite);
-	d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+	ee::InsertSpriteSJ::Instance()->Insert(sprite);
 }
 
 void StagePanel::arrangeAllSprites(bool bClearSelection)
@@ -48,14 +48,14 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 		m_sprite_selection->Clear();
 	}
 
-	std::vector<d2d::ImageSprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::ImageSprite>(sprites), d2d::DT_EDITABLE);
+	std::vector<ee::ImageSprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::ImageSprite>(sprites), ee::DT_EDITABLE);
 	m_strategy->arrange(sprites);
 }
 
 void StagePanel::loadFromLibrary()
 {
-	d2d::Symbol* symbol = NULL;
+	ee::Symbol* symbol = NULL;
 	int index = 0;
 	while (true)
 	{
@@ -64,8 +64,8 @@ void StagePanel::loadFromLibrary()
 			break;
 		else 
 		{
-			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
-			d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+			ee::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 	}
 
@@ -77,9 +77,9 @@ int StagePanel::GetTextureAccount() const
 	return m_strategy->GetTextureAccount();
 }
 
-void StagePanel::fixCoords(d2d::Sprite* sprite)
+void StagePanel::fixCoords(ee::Sprite* sprite)
 {
-	const d2d::Vector& pos = sprite->GetPosition();
+	const ee::Vector& pos = sprite->GetPosition();
 
 	const float s = Context::Instance()->scale;
 
@@ -95,14 +95,14 @@ void StagePanel::fixCoords(d2d::Sprite* sprite)
 		height = sprite->GetSymbol().GetSize().Width() * s;
 	}
 
-	d2d::Vector leftTop;
+	ee::Vector leftTop;
 	leftTop.x = pos.x - width * 0.5f;
 	leftTop.y = pos.y - height * 0.5f;
 
 	if (leftTop.x != std::floor(leftTop.x) ||
 		leftTop.y != std::floor(leftTop.y))
 	{
-		d2d::Vector fixedCenter;
+		ee::Vector fixedCenter;
 		fixedCenter.x = leftTop.x > 0 ? leftTop.x + 0.5f : leftTop.x - 0.5f;
 		fixedCenter.y = leftTop.y > 0 ? leftTop.y + 0.5f : leftTop.y - 0.5f;
 		fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
@@ -118,16 +118,16 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			fixCoords(p->spr);
 			// todo
 			// SpritesPanelImpl::OnNotify(sj_id, ud);
 			arrangeAllSprites(false);
 		}
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
+	case ee::MSG_REMOVE_SPRITE:
 		arrangeAllSprites(false);
 		break;
 	}

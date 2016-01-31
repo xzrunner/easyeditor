@@ -1,23 +1,23 @@
 #ifndef _LIBSKETCH_STAGE_PANEL_H_
 #define _LIBSKETCH_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace libsketch
 {
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
+class StagePanel : public ee::EditPanel, public ee::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 
 	//
-	// d2d::MultiSpritesImpl interface
+	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::Visitor& visitor, 
-		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual void TraverseSprites(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
 	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;
@@ -29,12 +29,12 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	void Insert(d2d::Sprite* spr);
-	void Remove(d2d::Sprite* spr);
+	void Insert(ee::Sprite* spr);
+	void Remove(ee::Sprite* spr);
 	void Clear();
 
 private:
-	std::vector<d2d::Sprite*> m_sprites;
+	std::vector<ee::Sprite*> m_sprites;
 
 }; // StagePanel
 

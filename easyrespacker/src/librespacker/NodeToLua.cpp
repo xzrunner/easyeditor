@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -14,7 +14,7 @@ int NodeToLua::TransTime(float time)
 
 int NodeToLua::TransRadian(float r)
 {
-	return floor(r * d2d::TRANS_RAD_TO_DEG + 0.5f);
+	return floor(r * ee::TRANS_RAD_TO_DEG + 0.5f);
 }
 
 int NodeToLua::TransFloat(float f)

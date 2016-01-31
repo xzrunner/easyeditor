@@ -1,24 +1,24 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
-	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+	class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 		virtual ~StagePanel();
 
 		//
-		// d2d::EditPanel interface
+		// ee::EditPanel interface
 		//
 		virtual void clear();
 
 		//
-		// d2d::SpritesPanelImpl interface
+		// ee::SpritesPanelImpl interface
 		//
-		virtual void insertSprite(d2d::ISprite* sprite);
+		virtual void insertSprite(ee::ISprite* sprite);
 
 	private:
 		class DragSymbolTarget : public wxTextDropTarget

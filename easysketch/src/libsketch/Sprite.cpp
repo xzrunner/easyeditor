@@ -9,7 +9,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: d2d::Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
 	m_symbol->Retain();
@@ -32,7 +32,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->Insert(sprite);
+	ee::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -41,9 +41,9 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::loadBodyFromFile()

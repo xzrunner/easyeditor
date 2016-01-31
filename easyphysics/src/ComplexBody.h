@@ -15,7 +15,7 @@ public:
 	ComplexBody(b2World* world, const std::vector<FixtureDataInfo>& fixtures, 
 		float scale = 1.0f);
 
-	virtual void getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const;
+	virtual void getRect(ee::Rect& rect, const ee::Vector& position, float angle) const;
 
 }; // ComplexBody
 

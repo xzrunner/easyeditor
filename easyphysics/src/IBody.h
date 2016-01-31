@@ -3,12 +3,12 @@
 
 #include <wx/string.h>
 #include <Box2D/Box2D.h>
-#include <drag2d.h>
+
 
 namespace ephysics
 {
 
-class IBody : public d2d::Cloneable, public d2d::Object
+class IBody : public ee::Cloneable, public ee::Object
 {
 public:
 	virtual ~IBody();
@@ -18,7 +18,7 @@ public:
 	//
 	virtual IBody* Clone() const;
 
-	virtual void getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const = 0;
+	virtual void getRect(ee::Rect& rect, const ee::Vector& position, float angle) const = 0;
 
 	b2Body* getBody() const;
 	void setBody(b2Body* body);
@@ -32,7 +32,7 @@ public:
 	void setFriction(float friction);
 	void setCollisionFilter(const b2Filter& filter);
 
-	void setTransform(const d2d::Vector& pos, float angle);
+	void setTransform(const ee::Vector& pos, float angle);
 
 protected:
 	IBody() {}

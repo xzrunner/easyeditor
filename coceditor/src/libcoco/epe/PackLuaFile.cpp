@@ -11,7 +11,7 @@ namespace libcoco
 namespace epe
 {
 
-void PackLuaFile::pack(const std::vector<const d2d::Sprite*>& sprites, 
+void PackLuaFile::pack(const std::vector<const ee::Sprite*>& sprites, 
 	const std::string& outfloder)
 {
 	// root symbol
@@ -19,7 +19,7 @@ void PackLuaFile::pack(const std::vector<const d2d::Sprite*>& sprites,
 	root.name = "root";
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = const_cast<d2d::Sprite*>(sprites[i]);
+		ee::Sprite* sprite = const_cast<ee::Sprite*>(sprites[i]);
 		sprite->Retain();
 		root.m_sprites.push_back(sprite);
 	}
@@ -27,21 +27,21 @@ void PackLuaFile::pack(const std::vector<const d2d::Sprite*>& sprites,
 	// get all symbols
 	SymbolDependanceSorter preprocess;
 	preprocess.prepare(sprites);
-	std::vector<const d2d::Symbol*> symbols = preprocess.GetSymbolSet().GetOrdered();
+	std::vector<const ee::Symbol*> symbols = preprocess.GetSymbolSet().GetOrdered();
 	symbols.push_back(&root);
 
 	// pack images
-	std::set<d2d::Image*> setImages;
+	std::set<ee::Image*> setImages;
 	for (int i = 0, n = symbols.size(); i < n; ++i)
 	{
-		if (const d2d::ImageSymbol* s = dynamic_cast<const d2d::ImageSymbol*>(symbols[i]))
+		if (const ee::ImageSymbol* s = dynamic_cast<const ee::ImageSymbol*>(symbols[i]))
 			setImages.insert(s->GetImage());
 	}
 
 	TexturePacker textures;
 	textures.pack(setImages);
 	textures.storeToMemory();
-	textures.storeToFile(outfloder, "tmp.1", d2d::ImageSaver::e_ppm);
+	textures.storeToFile(outfloder, "tmp.1", ee::ImageSaver::e_ppm);
 
 	// pack lua file
 	CocoPacker code(textures);

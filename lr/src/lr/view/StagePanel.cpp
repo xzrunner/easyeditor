@@ -19,18 +19,18 @@ namespace lr
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::PropertySettingPanel* property,
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(GetStageImpl())
-	, d2d::MultiShapesImpl()
+					   ee::PropertySettingPanel* property,
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiSpritesImpl(GetStageImpl())
+	, ee::MultiShapesImpl()
 	, m_library(library)
 	, m_grids(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
 	, m_enable_update(true)
 {
-	SetDropTarget(new d2d::SpriteDropTarget(GetStageImpl(), library));
+	SetDropTarget(new ee::SpriteDropTarget(GetStageImpl(), library));
 
 	if (OPEN_GRIDS) {
 		m_grids = new Grids;
@@ -39,30 +39,30 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 
 	if (TEST_QUADTREE) {
-		m_sindex = new Quadtree(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		m_sindex = new Quadtree(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 	if (PATHFINDING) {
-		//	m_pathfinding = new preview::PathGrid(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256);
-		//m_pathfinding = new preview::PathNavMesh(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
-		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		//	m_pathfinding = new preview::PathGrid(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256);
+		//m_pathfinding = new preview::PathNavMesh(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		m_pathfinding = new preview::PathVisibleSimple(ee::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
 	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(library, property, this, &m_chara_dirs);
-	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
-		NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
+	m_arrange_op = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property, 
+		NULL, ee::ArrangeSpriteConfig(), arrange_impl);
 
 	SetEditOP(m_arrange_op);
 	SetCanvas(new StageCanvas(this));
 
-	d2d::MultiSpritesImpl::RegistSubject(d2d::ReorderSpriteSJ::Instance());
-	d2d::MultiSpritesImpl::RegistSubject(d2d::ReorderSpriteMostSJ::Instance());
-	d2d::MultiSpritesImpl::RegistSubject(d2d::InsertSpriteSJ::Instance());
-	d2d::MultiSpritesImpl::RegistSubject(d2d::RemoveSpriteSJ::Instance());
-	d2d::MultiSpritesImpl::RegistSubject(d2d::ClearSpriteSJ::Instance());
+	ee::MultiSpritesImpl::RegistSubject(ee::ReorderSpriteSJ::Instance());
+	ee::MultiSpritesImpl::RegistSubject(ee::ReorderSpriteMostSJ::Instance());
+	ee::MultiSpritesImpl::RegistSubject(ee::InsertSpriteSJ::Instance());
+	ee::MultiSpritesImpl::RegistSubject(ee::RemoveSpriteSJ::Instance());
+	ee::MultiSpritesImpl::RegistSubject(ee::ClearSpriteSJ::Instance());
 
-	d2d::MultiShapesImpl::RegistSubject(d2d::RemoveShapeSJ::Instance());
-	d2d::MultiShapesImpl::RegistSubject(d2d::InsertShapeSJ::Instance());
-	d2d::MultiShapesImpl::RegistSubject(d2d::ClearShapeSJ::Instance());
+	ee::MultiShapesImpl::RegistSubject(ee::RemoveShapeSJ::Instance());
+	ee::MultiShapesImpl::RegistSubject(ee::InsertShapeSJ::Instance());
+	ee::MultiShapesImpl::RegistSubject(ee::ClearShapeSJ::Instance());
 }
 
 StagePanel::~StagePanel()
@@ -80,7 +80,7 @@ StagePanel::~StagePanel()
 
 // void StagePanel::Clear()
 // {
-// 	d2d::EditPanel::Clear();
+// 	ee::EditPanel::Clear();
 // 	ClearSprite();
 // 	ClearShape();
 // 
@@ -103,19 +103,19 @@ bool StagePanel::Update(int version)
 		}
 	}
 
-	if (!d2d::Config::Instance()->GetSettings().visible_spr_update) {
+	if (!ee::Config::Instance()->GetSettings().visible_spr_update) {
 		ret = false;
 	}
 
 	return ret;
 }
 
-void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
+void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
-		type == d2d::DT_ALL ||
-		type == d2d::DT_SELECTABLE) 
+		type == ee::DT_ALL ||
+		type == ee::DT_SELECTABLE) 
 	{
 		for (int i = 0, n = m_layers.size(); i < n; ++i) {
 			m_layers[i]->TraverseSprite(visitor, type, order);
@@ -126,8 +126,8 @@ void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType ty
 		for (int i = 0, n = m_layers.size(); i < n; ++i) 
 		{
 			Layer* layer = m_layers[i];
-			if (type == d2d::DT_EDITABLE && layer->IsEditable() ||
-				type == d2d::DT_VISIBLE && layer->IsVisible())
+			if (type == ee::DT_EDITABLE && layer->IsEditable() ||
+				type == ee::DT_VISIBLE && layer->IsVisible())
 			{
 				layer->TraverseSprite(visitor, type, order);
 			}
@@ -135,11 +135,11 @@ void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType ty
 	}
 }
 
-void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType type) const
+void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
-		type == d2d::DT_ALL ||
-		type == d2d::DT_SELECTABLE) 
+		type == ee::DT_ALL ||
+		type == ee::DT_SELECTABLE) 
 	{
 		for (int i = 0, n = m_layers.size(); i < n; ++i) {
 			m_layers[i]->TraverseShape(visitor);
@@ -150,8 +150,8 @@ void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType typ
 		for (int i = 0, n = m_layers.size(); i < n; ++i) 
 		{
 			Layer* layer = m_layers[i];
-			if (type == d2d::DT_EDITABLE && layer->IsEditable() ||
-				type == d2d::DT_VISIBLE && layer->IsVisible())
+			if (type == ee::DT_EDITABLE && layer->IsEditable() ||
+				type == ee::DT_VISIBLE && layer->IsVisible())
 			{
 				layer->TraverseShape(visitor);
 			}
@@ -176,14 +176,14 @@ void StagePanel::DebugDraw() const
 	}
 }
 
-void StagePanel::Pathfinding(const d2d::Vector& start, const d2d::Vector& end)
+void StagePanel::Pathfinding(const ee::Vector& start, const ee::Vector& end)
 {
 	if (m_pathfinding) {
 		m_pathfinding->QueryRoute(start, end);
 	}
 }
 
-void StagePanel::PointQuery(const d2d::Vector& pos)
+void StagePanel::PointQuery(const ee::Vector& pos)
 {
 	if (m_sindex) {
 		m_sindex->SelectNode(pos);
@@ -193,7 +193,7 @@ void StagePanel::PointQuery(const d2d::Vector& pos)
 void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 {
 	if (m_layers.empty()) {
-		for_each(layers.begin(), layers.end(), d2d::RetainObjectFunctor<Layer>());
+		for_each(layers.begin(), layers.end(), ee::RetainObjectFunctor<Layer>());
 		m_layers = layers;
 		return;
 	}
@@ -213,13 +213,13 @@ void StagePanel::BuildGrids(int w, int h)
 	}
 }
 
-d2d::Colorf& StagePanel::GetScreenMultiColor()
+ee::Colorf& StagePanel::GetScreenMultiColor()
 {
 	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
 	return canvas->GetMultiColor();
 }
 
-d2d::Colorf& StagePanel::GetScreenAddColor()
+ee::Colorf& StagePanel::GetScreenAddColor()
 {
 	StageCanvas* canvas = static_cast<StageCanvas*>(GetCanvas());
 	return canvas->GetAddColor();	
@@ -240,7 +240,7 @@ void StagePanel::ChangeEditOP()
 // 
 // 	m_editOP->Release();
 // 	if (m_editOP == m_arrange_op) {
-// 		d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+// 		ee::LibraryPage* curr_page = m_library->GetCurrPage();
 // 		m_editOP = static_cast<LibraryPage*>(curr_page)->GetEditOP();
 // 	} else {
 // 		m_editOP = m_arrange_op;
@@ -264,12 +264,12 @@ void StagePanel::OnKeyHook(int key_code)
 		return;
 	}
 
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	ee::LibraryPage* curr_page = m_library->GetCurrPage();
 	SetEditOP(static_cast<LibraryPage*>(curr_page)->GetNextEditOP());
 	GetEditOP()->OnActive();
 
 // 	m_edit_op->Release();
-// 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+// 	ee::LibraryPage* curr_page = m_library->GetCurrPage();
 // 	m_edit_op = static_cast<LibraryPage*>(curr_page)->GetNextEditOP();
 // 	m_edit_op->OnActive();
 // 	m_edit_op->Retain();	
@@ -277,76 +277,76 @@ void StagePanel::OnKeyHook(int key_code)
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+	ee::MultiSpritesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
-	case d2d::MSG_REORDER_SPRITE:
+	case ee::MSG_REORDER_SPRITE:
 		{
-			d2d::ReorderSpriteSJ::Params* p = (d2d::ReorderSpriteSJ::Params*)ud;
+			ee::ReorderSpriteSJ::Params* p = (ee::ReorderSpriteSJ::Params*)ud;
 			ReorderSprite(p->spr, p->up);
 		}
 		break;
-	case d2d::MSG_REORDER_SPRITE_MOST:
+	case ee::MSG_REORDER_SPRITE_MOST:
 		{
-			d2d::ReorderSpriteMostSJ::Params* p = (d2d::ReorderSpriteMostSJ::Params*)ud;
+			ee::ReorderSpriteMostSJ::Params* p = (ee::ReorderSpriteMostSJ::Params*)ud;
 			ReorderSpriteMost(p->spr, p->up);
 		}
 		break;
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			InsertSprite(p->spr, p->idx);
 		}
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		RemoveSprite((d2d::Sprite*)ud);
+	case ee::MSG_REMOVE_SPRITE:
+		RemoveSprite((ee::Sprite*)ud);
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		ClearSprite();
 		break;
 
-	case d2d::MSG_REMOVE_SHAPE:
-		RemoveShape((d2d::Shape*)ud);
+	case ee::MSG_REMOVE_SHAPE:
+		RemoveShape((ee::Shape*)ud);
 		break;
-	case d2d::MSG_INSERT_SHAPE:
-		InsertShape((d2d::Shape*)ud);
+	case ee::MSG_INSERT_SHAPE:
+		InsertShape((ee::Shape*)ud);
 		break;
-	case d2d::MSG_CLEAR_SHAPE:
+	case ee::MSG_CLEAR_SHAPE:
 		ClearShape();
 		break;
 	}
 }
 
-void StagePanel::ReorderSprite(d2d::Sprite* spr, bool up)
+void StagePanel::ReorderSprite(ee::Sprite* spr, bool up)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSprite(spr, up)) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
 	}
 }
 
-void StagePanel::ReorderSpriteMost(d2d::Sprite* spr, bool up)
+void StagePanel::ReorderSpriteMost(ee::Sprite* spr, bool up)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSpriteMost(spr, up)) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
 	}
 }
 
-void StagePanel::InsertSprite(d2d::Sprite* spr, int idx)
+void StagePanel::InsertSprite(ee::Sprite* spr, int idx)
 {
 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
 	if (layer->InsertSprite(spr, idx)) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	if (m_sindex) {
@@ -363,13 +363,13 @@ void StagePanel::InsertSprite(d2d::Sprite* spr, int idx)
 	}
 }
 
-void StagePanel::RemoveSprite(d2d::Sprite* spr)
+void StagePanel::RemoveSprite(ee::Sprite* spr)
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->RemoveSprite(spr)) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			break;
 		}
 	}
@@ -383,12 +383,12 @@ void StagePanel::ClearSprite()
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		if (m_layers[i]->ClearSprite()) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 }
 
-void StagePanel::RemoveShape(d2d::Shape* shape)
+void StagePanel::RemoveShape(ee::Shape* shape)
 {
 	bool dirty = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
@@ -400,13 +400,13 @@ void StagePanel::RemoveShape(d2d::Shape* shape)
 		}
 	}
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void StagePanel::InsertShape(d2d::Shape* shape)
+void StagePanel::InsertShape(ee::Shape* shape)
 {
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	ee::LibraryPage* curr_page = m_library->GetCurrPage();
 	bool dirty = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
 
 	if (m_grids) {
@@ -418,7 +418,7 @@ void StagePanel::InsertShape(d2d::Shape* shape)
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -431,7 +431,7 @@ void StagePanel::ClearShape()
 		}
 	}
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

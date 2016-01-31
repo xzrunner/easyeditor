@@ -2,7 +2,7 @@
 #ifndef EBUILDER_LAYER_H
 #define EBUILDER_LAYER_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -17,14 +17,14 @@ namespace ebuilder
 		const std::vector<Actor*>& getActors() const {
 			return m_actors;
 		}
-		const std::vector<d2d::TextSprite*>& getTexts() const {
+		const std::vector<ee::TextSprite*>& getTexts() const {
 			return m_texts;
 		}
 
 		void insert(Actor* actor);
-		void insert(d2d::TextSprite* text);
-		void remove(d2d::ISprite* sprite);
-		void resetOrder(d2d::ISprite* sprite, bool up);
+		void insert(ee::TextSprite* text);
+		void remove(ee::ISprite* sprite);
+		void resetOrder(ee::ISprite* sprite, bool up);
 
 		void clear();
 
@@ -37,7 +37,7 @@ namespace ebuilder
 	private:
 		std::vector<Actor*> m_actors;
 
-		std::vector<d2d::TextSprite*> m_texts;
+		std::vector<ee::TextSprite*> m_texts;
 
 	}; // Layer
 }

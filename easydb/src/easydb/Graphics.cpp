@@ -2,7 +2,7 @@
 
 namespace edb
 {
-	void Graphics::connect(d2d::Sprite* from, d2d::Sprite* to) 
+	void Graphics::connect(ee::Sprite* from, ee::Sprite* to) 
 	{
 		Node* f = query(from);
 		if (!f) 
@@ -20,7 +20,7 @@ namespace edb
 		t->in.push_back(from);
 	}
 
-	void Graphics::move(d2d::Sprite* sprite, const d2d::Vector& offset) 
+	void Graphics::move(ee::Sprite* sprite, const ee::Vector& offset) 
 	{
 		sprite->SetTransform(sprite->GetPosition() + offset, 0);
 		Node* node = query(sprite);
@@ -29,9 +29,9 @@ namespace edb
 				move(node->out[i], offset);
 	}
 
-	Node* Graphics::query(d2d::Sprite* sprite) const 
+	Node* Graphics::query(ee::Sprite* sprite) const 
 	{
-		std::map<d2d::Sprite*, Node*>::const_iterator itr
+		std::map<ee::Sprite*, Node*>::const_iterator itr
 			= connection.find(sprite);
 		if (itr == connection.end())
 			return NULL;
@@ -41,7 +41,7 @@ namespace edb
 
 	void Graphics::clear()
 	{
-		std::map<d2d::Sprite*, Node*>::iterator itr = connection.begin();
+		std::map<ee::Sprite*, Node*>::iterator itr = connection.begin();
 		for ( ; itr != connection.end(); ++itr)
 			delete itr->second;
 		connection.clear();

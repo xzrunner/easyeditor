@@ -1,11 +1,11 @@
 #ifndef RAIDEN_LIBRARY_SHAPE_LIST_H
 #define RAIDEN_LIBRARY_SHAPE_LIST_H
 
-#include <drag2d.h>
+
 
 namespace raiden
 {
-	class LibraryShapeList : public d2d::LibraryList
+	class LibraryShapeList : public ee::LibraryList
 	{
 	public:
 		LibraryShapeList(wxWindow* parent);

@@ -3,7 +3,7 @@
 
 #include <Box2D/Box2D.h>
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 #include "Box2DRender.h"
 
@@ -20,7 +20,7 @@ public:
 
 	virtual void drawPhysics();
 
-	b2World* createWorld(const d2d::Vector& gravity);
+	b2World* createWorld(const ee::Vector& gravity);
 
 	void pause();
 

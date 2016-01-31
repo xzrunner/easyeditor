@@ -12,7 +12,7 @@ static const std::string FILTER = "rectcut";
 
 RectCutCMPT::RectCutCMPT(wxWindow* parent, const wxString& name,
 						 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_editOP = new RectCutOP(this, stage);
@@ -29,11 +29,11 @@ void RectCutCMPT::onSaveEditOP(wxCommandEvent& event)
 		Json::Value value;
 
 		std::string filepath = op->getImageFilepath();
-		std::string dir = d2d::FileHelper::GetFileDir(dlg.GetPath());
-		value["image filepath"] = d2d::FileHelper::GetRelativePath(dir, filepath).ToStdString();
+		std::string dir = ee::FileHelper::GetFileDir(dlg.GetPath());
+		value["image filepath"] = ee::FileHelper::GetRelativePath(dir, filepath).ToStdString();
 		op->getRectMgr().store(value);
 
-		wxString filename = d2d::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILTER, "json");
+		wxString filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILTER, "json");
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
 		std::ofstream fout(filename.fn_str());
@@ -49,7 +49,7 @@ void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
 		wxT("*_") + FILTER + wxT(".json"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString filename = d2d::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILTER, "json");
+		wxString filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILTER, "json");
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
@@ -59,15 +59,15 @@ void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
 		fin.close();
 
 		RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-		wxString dlgpath = d2d::FileHelper::GetFileDir(filename);
+		wxString dlgpath = ee::FileHelper::GetFileDir(filename);
 		wxString path = value["image filepath"].asString();
-		wxString absolutePath = d2d::FileHelper::GetAbsolutePath(dlgpath, path);
+		wxString absolutePath = ee::FileHelper::GetAbsolutePath(dlgpath, path);
 		op->loadImageFromFile(absolutePath.ToStdString());
 		op->getRectMgr().load(value);
 	}
 }
 
-wxSizer* RectCutCMPT::initLayout()
+wxSizer* RectCutCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 // 	sizer->Add(initEditIOLayout());
@@ -202,31 +202,31 @@ void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
 void RectCutCMPT::onOutputData(wxCommandEvent& event)
 {
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	const std::vector<d2d::Rect*>& rects = op->getRectMgr().getAllRect();
+	const std::vector<ee::Rect*>& rects = op->getRectMgr().getAllRect();
 	if (rects.empty()) {
 		return;
 	}
 
-	const d2d::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->getImage();
 	if (!sprite) {
 		return;
 	}
 
-	const d2d::ImageSprite* imgSprite = dynamic_cast<const d2d::ImageSprite*>(sprite);
+	const ee::ImageSprite* imgSprite = dynamic_cast<const ee::ImageSprite*>(sprite);
 	if (!imgSprite) {
 		return;
 	}
 
-	d2d::Image* image = imgSprite->GetSymbol().GetImage();
+	ee::Image* image = imgSprite->GetSymbol().GetImage();
 
 	wxString imageDir = m_imagePath->GetValue();
 	wxString jsonDir = m_jsonPath->GetValue();
 
-	wxString imageName = d2d::FileHelper::GetFilename(image->GetFilepath());
+	wxString imageName = ee::FileHelper::GetFilename(image->GetFilepath());
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
-		const d2d::Rect& r = *rects[i];
+		const ee::Rect& r = *rects[i];
 
 		eimage::ImageClip clip(*image->GetImageData());
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
@@ -234,23 +234,23 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		float height = r.Height();
 
 		wxString img_filename = imageDir + "\\" + imageName + "_" + wxString::FromDouble(i);
-		d2d::ImageSaver::StoreToFile(pixels, width, height, 4, img_filename.ToStdString(), d2d::ImageSaver::e_png);
+		ee::ImageSaver::StoreToFile(pixels, width, height, 4, img_filename.ToStdString(), ee::ImageSaver::e_png);
 
 		wxString img_fullname = img_filename + ".png";
-		d2d::Sprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(img_fullname.ToStdString(), width, height));
-		d2d::Vector off;
+		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(img_fullname.ToStdString(), width, height));
+		ee::Vector off;
 		off.x = r.CenterX() - image->GetClippedWidth() * 0.5f;
 		off.y = r.CenterY() - image->GetClippedHeight() * 0.5f;
 		sprite->Translate(off);
 		complex->m_sprites.push_back(sprite);
 	}
 
-	wxString tag = d2d::FileType::GetTag(d2d::FileType::e_complex);
+	wxString tag = ee::FileType::GetTag(ee::FileType::e_complex);
 	wxString json_filename = jsonDir + "\\" + imageName + "_" + tag + ".json";
 	ecomplex::FileStorer::Store(json_filename.c_str(), complex);
 	delete complex;
 
-	d2d::FinishDialog dlg(this);
+	ee::FinishDialog dlg(this);
 	dlg.ShowModal();
 }
 
@@ -261,9 +261,9 @@ void RectCutCMPT::onAddRect(wxCommandEvent& event)
 	m_heightCtrl->GetValue().ToDouble(&height);
 	
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
+	op->getRectMgr().insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

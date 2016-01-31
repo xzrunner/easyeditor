@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -20,7 +20,7 @@ namespace eanim
 	public:
 		static Sprite* createSprite(SPRITE_TYPE type);
 
-		static Sprite* createMorphingSprite(Symbol* symbol, const d2d::Vector& pos, bool isCopyMesh);
+		static Sprite* createMorphingSprite(Symbol* symbol, const ee::Vector& pos, bool isCopyMesh);
 		static Sprite* createSkeletalSprite(WholeSkeleton* skeleton);
 
 	}; // SpriteFactory

@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-d2d::Sprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
+ee::Sprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
 {
 	if (pic->quads.size() == 1) {
 		return TransQuad(&pic->quads[0]);
@@ -23,12 +23,12 @@ d2d::Sprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
 	}
 }
 
-d2d::Sprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* quad)
+ee::Sprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* quad)
 {
 	float w = quad->img->GetOriginWidth(),
 		h = quad->img->GetOriginHeight();
 
-	d2d::Vector src[4], screen[4];
+	ee::Vector src[4], screen[4];
 	for (int i = 0; i < 4; ++i) {
 		src[i].x = quad->texture_coord[i].x / w;
 		src[i].y = 1 - quad->texture_coord[i].y / h;
@@ -36,11 +36,11 @@ d2d::Sprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* quad
 	}
 
 	eicon::QuadIcon* icon = new eicon::QuadIcon(
-		const_cast<d2d::Image*>(quad->img), src, screen);
+		const_cast<ee::Image*>(quad->img), src, screen);
 
 	eicon::Symbol* symbol = new eicon::Symbol;
 	symbol->SetIcon(icon);
-	d2d::Sprite* ret = new eicon::Sprite(symbol);
+	ee::Sprite* ret = new eicon::Sprite(symbol);
 	ret->BuildBounding();
 	return ret;
 }

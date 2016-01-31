@@ -5,6 +5,7 @@
 #include "Exception.h"
 #include "LibpngAdapter.h"
 #include "PPMAdapter.h"
+#include "ShaderMgr.h"
 
 #include <dtex_pvr.h>
 
@@ -141,7 +142,7 @@ void ImageLoader::PixelsToTexture(unsigned int& texture, const uint8_t* pixel, i
 			pixel);
 	}
 
-//	glBindTexture(GL_TEXTURE_2D, ShaderMgr::Instance()->GetTexID());
+	glBindTexture(GL_TEXTURE_2D, ShaderMgr::Instance()->GetTexID());
 }
 
 void ImageLoader::FormatPixelsAlpha(uint8_t* pixels, int width, int height, int val)

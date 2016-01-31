@@ -6,8 +6,8 @@
 namespace emodeling
 {
 
-WorldPropertySetting::WorldPropertySetting(d2d::EditPanelImpl* stage)
-	: d2d::IPropertySetting("World")
+WorldPropertySetting::WorldPropertySetting(ee::EditPanelImpl* stage)
+	: ee::PropertySetting("World")
 	, m_stage(stage)
 {
 }
@@ -40,7 +40,7 @@ void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		dirty = false;
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

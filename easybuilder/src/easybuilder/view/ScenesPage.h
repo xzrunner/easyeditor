@@ -2,20 +2,20 @@
 #ifndef EBUILDER_SCENES_PAGE_H
 #define EBUILDER_SCENES_PAGE_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class ListObserver;
 	class Behavior;
 
-	class ScenesPage : public d2d::ILibraryPage
+	class ScenesPage : public ee::ILibraryPage
 	{
 	public:
 		ScenesPage(wxWindow* parent);
 		virtual ~ScenesPage();
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 		ListObserver* getListObserver() {
 			return m_observer;

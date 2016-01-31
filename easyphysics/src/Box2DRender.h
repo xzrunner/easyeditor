@@ -2,7 +2,7 @@
 #define _EPHYSICS_BOX2D_RENDER_H_
 
 #include <Box2D/Box2D.h>
-#include <drag2d.h>
+
 
 namespace ephysics
 {
@@ -31,11 +31,11 @@ public:
 	virtual void DrawAABB(b2AABB* aabb, const b2Color& color);
 
 private:
-	d2d::Vector TransVertex(const b2Vec2& vertex) const;
+	ee::Vector TransVertex(const b2Vec2& vertex) const;
 
-	void TransVertices(const b2Vec2* src, int count, std::vector<d2d::Vector>& dst) const;
+	void TransVertices(const b2Vec2* src, int count, std::vector<ee::Vector>& dst) const;
 
-	d2d::Colorf TransColor(const b2Color& col, float alpha = 1) const;
+	ee::Colorf TransColor(const b2Color& col, float alpha = 1) const;
 
 private:
 	float m_ratio;

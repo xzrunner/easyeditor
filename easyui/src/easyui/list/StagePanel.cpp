@@ -14,25 +14,25 @@ namespace list
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   wxGLContext* glctx, TopPannels* top_pannels)
 	: UIStagePage(parent, frame)
-	, d2d::MultiSpritesImpl(GetStageImpl())
+	, ee::MultiSpritesImpl(GetStageImpl())
 	, m_top_pannels(top_pannels)
 {
 	SetEditOP(static_cast<EditClipboxOP*>(new EditOP(this, top_pannels->property)));
 	SetCanvas(new StageCanvas(this, glctx));
 
-	d2d::LibraryPanel* library = top_pannels->library->GetRawLibrary();
-	SetDropTarget(new d2d::SpriteDropTarget(GetStageImpl(), library));
+	ee::LibraryPanel* library = top_pannels->library->GetRawLibrary();
+	SetDropTarget(new ee::SpriteDropTarget(GetStageImpl(), library));
 
 	top_pannels->property->SetEditPanel(GetStageImpl());
 
 	m_toolbar = new ToolbarPanel(top_pannels->toolbar, this);
 	m_toolbar_idx = top_pannels->toolbar->AddToolbar(m_toolbar);
 
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type, bool order) const
+void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type, bool order) const
 {
 	m_list.TraverseSprites(visitor);
 }
@@ -44,7 +44,7 @@ void StagePanel::LoadFromFile(const char* filename)
 	m_toolbar->EnableHori(m_list.IsHoriEnable());
 	m_toolbar->EnableVert(m_list.IsVertEnable());
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void StagePanel::StoreToFile(const char* filename) const
@@ -56,7 +56,7 @@ void StagePanel::EnablePage(bool enable)
 {
 	if (enable) {
 		m_top_pannels->toolbar->EnableToolbar(m_toolbar_idx);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_top_pannels->library->EnableUILibrary(false);
 	} else {
 		GetSpriteSelection()->Clear();
@@ -72,17 +72,17 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			if (m_list.InsertSprite(p->spr, p->idx)) {
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}		
 		}
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		if (m_list.ClearAllSprite()) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}

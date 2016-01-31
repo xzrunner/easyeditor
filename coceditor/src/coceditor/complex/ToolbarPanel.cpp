@@ -8,12 +8,12 @@ namespace coceditor
 namespace complex
 {
 	ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* editPanel)
-		: d2d::ToolbarPanel(parent, editPanel)
+		: ee::ToolbarPanel(parent, editPanel)
 	{
 		Context* context = Context::Instance();
 
-		addChild(new d2d::UniversalCMPT(this, wxT("paste"), editPanel, 
-			new d2d::ArrangeSpriteOP<SelectSpritesOP>(editPanel, editPanel)));
+		addChild(new ee::UniversalCMPT(this, wxT("paste"), editPanel, 
+			new ee::ArrangeSpriteOP<SelectSpritesOP>(editPanel, editPanel)));
 
 		SetSizer(initLayout());	
 	}

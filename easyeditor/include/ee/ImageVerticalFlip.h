@@ -1,9 +1,9 @@
 #ifndef _EASYIMAGE_IMAGE_VERITAL_FLIP_H_
 #define _EASYIMAGE_IMAGE_VERITAL_FLIP_H_
 
-#include <drag2d.h>
+#include <stdint.h>
 
-namespace eimage
+namespace ee
 {
 
 class ImageVerticalFlip

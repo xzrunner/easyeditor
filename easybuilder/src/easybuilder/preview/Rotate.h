@@ -5,7 +5,7 @@
 #include "Behavior.h"
 #include "AnimationControl.h"
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -14,7 +14,7 @@ namespace ebuilder
 		class Rotate : public Behavior, public ITimeObserver
 		{
 		public:
-			Rotate(d2d::ISprite* sprite, float start, 
+			Rotate(ee::ISprite* sprite, float start, 
 				float end, float speed);
 
 			virtual void trigger();
@@ -22,7 +22,7 @@ namespace ebuilder
 			virtual void onTick();
 
 		private:
-			d2d::ISprite* m_sprite;
+			ee::ISprite* m_sprite;
 
 			float m_start, m_end;
 

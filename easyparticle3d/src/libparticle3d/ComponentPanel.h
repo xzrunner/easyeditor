@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_COMPONENT_PANEL_H_
 #define _EASYPARTICLE3D_COMPONENT_PANEL_H_
 
-#include <drag2d.h>
+
 
 struct p3d_symbol;
 struct ps_color4f;
@@ -11,7 +11,7 @@ namespace eparticle3d
 
 class ToolbarPanel;
 
-class ComponentPanel : public wxPanel, public d2d::UICallback
+class ComponentPanel : public wxPanel, public ee::UICallback
 {
 public:
 	ComponentPanel(wxWindow* parent, p3d_symbol* pc, ToolbarPanel* toolbar);
@@ -19,8 +19,8 @@ public:
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
 	const ps_color4f& GetMulColor() const;
 	const ps_color4f& GetAddColor() const;
@@ -43,7 +43,7 @@ private:
 
 	ToolbarPanel* m_toolbar;
 
-	std::vector<d2d::ISliderCtrl*> m_sliders;
+	std::vector<ee::SliderCtrl*> m_sliders;
 
 	wxTextCtrl* m_name;
 

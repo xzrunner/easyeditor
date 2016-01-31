@@ -1,23 +1,23 @@
 #ifndef _LIBSHAPE_POLYLINES_CMPT_H_
 #define _LIBSHAPE_POLYLINES_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
-class EditPolylinesCMPT : public d2d::AbstractEditCMPT
+class EditPolylinesCMPT : public ee::EditCMPT
 {
 public:
 	EditPolylinesCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+		ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl);
 
 	virtual void updateControlValue();
 
 	float getSimplifyThreshold() const;
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxSizer* initSimplifyPanel();
@@ -31,7 +31,7 @@ private:
 	void onTranslate(wxCommandEvent& event);
 
 private:
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 
 	wxSpinCtrl* m_simplifySpin;
 

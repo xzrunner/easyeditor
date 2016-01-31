@@ -6,11 +6,11 @@
 
 template <typename TBase, typename TSelected>
 libshape::EditPolylineOP<TBase, TSelected>::
-EditPolylineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-			   d2d::MultiShapesImpl* shapesImpl,
-			   d2d::PropertySettingPanel* propertyPanel,
-			   d2d::OneFloatValue* node_capture,
-			   d2d::AbstractEditCMPT* cmpt)
+EditPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+			   ee::MultiShapesImpl* shapesImpl,
+			   ee::PropertySettingPanel* propertyPanel,
+			   ee::OneFloatValue* node_capture,
+			   ee::EditCMPT* cmpt)
 	: TBase(wnd, stage, shapesImpl)
 	, m_node_capture(node_capture)
 {

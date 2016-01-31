@@ -8,10 +8,10 @@ namespace etexpacker
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	SetSizer(initLayout());
+	SetSizer(InitLayout());
 }
 
 IMG_TYPE ToolbarPanel::getImgType() const
@@ -24,7 +24,7 @@ void ToolbarPanel::setSize(int width, int height)
 	m_image_page->setSize(width, height);
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	wxNotebook* notebook = new wxNotebook(this, wxID_ANY);

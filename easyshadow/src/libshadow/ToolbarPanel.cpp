@@ -9,14 +9,14 @@ namespace eshadow
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	addChild(new libshape::DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, NULL));
-	SetSizer(initLayout());
+	SetSizer(InitLayout());
 }
 
-void ToolbarPanel::SetValue(int key, const d2d::UICallback::Data& data)
+void ToolbarPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -25,13 +25,13 @@ void ToolbarPanel::SetValue(int key, const d2d::UICallback::Data& data)
 			Shadow* shadow = m_stage->GetSymbol()->GetShadow();
 			shadow->SetRadius(data.val0);
 			shadow->BuildOutterLine();
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}
 }
 
-void ToolbarPanel::GetValue(int key, d2d::UICallback::Data& data)
+void ToolbarPanel::GetValue(int key, ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -41,11 +41,11 @@ void ToolbarPanel::GetValue(int key, d2d::UICallback::Data& data)
 	}
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
-	sizer->Add(initChildrenLayout());
+	sizer->Add(InitChildrenLayout());
 	sizer->AddSpacer(40);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, "内环颜色");
@@ -61,8 +61,8 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	sizer->AddSpacer(20);
 	{
-		m_slider_radius = new d2d::SliderCtrlOne(this, "半径", "radius",
-			this, S_RADIUS, d2d::SliderItem("", "", 20, 5, 200));
+		m_slider_radius = new ee::SliderCtrlOne(this, "半径", "radius",
+			this, S_RADIUS, ee::SliderItem("", "", 20, 5, 200));
 		sizer->Add(m_slider_radius);
 	}
 	return sizer;
@@ -71,22 +71,22 @@ wxSizer* ToolbarPanel::initLayout()
 void ToolbarPanel::OnSetInnerColor(wxCommandEvent& event)
 {
 	Shadow* shadow = m_stage->GetSymbol()->GetShadow();
-	d2d::RGBColorSettingDlg dlg(this, NULL, shadow->GetInnerColor());
+	ee::RGBColorSettingDlg dlg(this, NULL, shadow->GetInnerColor());
 	if (dlg.ShowModal() == wxID_OK) {
 		shadow->SetInnerColer(dlg.GetColor());
 		shadow->BuildFace();
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void ToolbarPanel::OnSetOuterColor(wxCommandEvent& event)
 {
 	Shadow* shadow = m_stage->GetSymbol()->GetShadow();
-	d2d::RGBColorSettingDlg dlg(this, NULL, shadow->GetOuterColor());
+	ee::RGBColorSettingDlg dlg(this, NULL, shadow->GetOuterColor());
 	if (dlg.ShowModal() == wxID_OK) {
 		shadow->SetOuterColer(dlg.GetColor());
 		shadow->BuildFace();
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

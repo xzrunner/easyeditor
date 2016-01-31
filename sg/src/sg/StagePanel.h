@@ -1,7 +1,7 @@
 #ifndef _SG_STAGE_PANEL_H_
 #define _SG_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "BuildingCfg.h"
 #include "CheckerBoard.h"
@@ -11,17 +11,17 @@ namespace sg
 
 class BuildingCfg;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 
-	void TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
-	void TransGridPosToCoords(int row, int col, d2d::Vector& pos) const;
+	void TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const;
+	void TransGridPosToCoords(int row, int col, ee::Vector& pos) const;
 
-	void TransCoordsToGridPosNew(const d2d::Vector& pos, int& row, int& col) const;
-	void TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) const;
+	void TransCoordsToGridPosNew(const ee::Vector& pos, int& row, int& col) const;
+	void TransGridPosToCoordsNew(int row, int col, ee::Vector& pos) const;
 
 	void UpdateAllSpritesLocation();
 
@@ -56,16 +56,16 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	d2d::Vector FixSpriteLocation(const d2d::Vector& pos) const;
+	ee::Vector FixSpriteLocation(const ee::Vector& pos) const;
 
-	void ChangeSymbolRemain(d2d::Sprite* sprite, bool increase) const;
+	void ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const;
 
-	void Insert(d2d::Sprite* spr);
-	void Remove(d2d::Sprite* spr);
+	void Insert(ee::Sprite* spr);
+	void Remove(ee::Sprite* spr);
 	void Clear();
 
 private:
-	d2d::LibraryPanel* m_library;
+	ee::LibraryPanel* m_library;
 
 	// layout
 	int m_row, m_col;

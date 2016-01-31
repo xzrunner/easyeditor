@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_TOOLBAR_PANEL_H_
 #define _EASYTEXPACKER_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "const.h"
 
@@ -11,7 +11,7 @@ namespace etexpacker
 class StagePanel;
 class ImageToolbarPage;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage);
@@ -21,7 +21,7 @@ public:
 	void setSize(int width, int height);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	StagePanel* m_stage;

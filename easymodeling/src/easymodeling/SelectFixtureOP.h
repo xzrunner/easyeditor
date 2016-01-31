@@ -2,7 +2,7 @@
 #ifndef EMODELING_SELECT_FIXTURE_OP_H
 #define EMODELING_SELECT_FIXTURE_OP_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling { class Fixture; }
 
@@ -10,10 +10,10 @@ namespace emodeling
 {
 	class StagePanel;
 
-	class SelectFixtureOP : public d2d::DrawRectangleOP
+	class SelectFixtureOP : public ee::DrawRectangleOP
 	{
 	public:
-		SelectFixtureOP(StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel);
+		SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel);
 		virtual ~SelectFixtureOP();
 
 		virtual bool OnMouseLeftDown(int x, int y);
@@ -26,9 +26,9 @@ namespace emodeling
 	private:
 		StagePanel* m_stagePanel;
 
-		d2d::PropertySettingPanel* m_propertyPanel;
+		ee::PropertySettingPanel* m_propertyPanel;
 
-		d2d::Vector m_first_pos;
+		ee::Vector m_first_pos;
 
 		libmodeling::Fixture* m_selected;
 		libmodeling::Fixture* m_mouseOn;

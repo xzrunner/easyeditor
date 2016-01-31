@@ -16,7 +16,7 @@ LayerPropertySetting::LayerPropertySetting(LayerItem* layer, LayersPage* page)
 {
 }
 
-void LayerPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
+void LayerPropertySetting::updatePanel(ee::PropertySettingPanel* panel)
 {
 	wxPropertyGrid* pg = panel->getPG();
 
@@ -57,12 +57,12 @@ void LayerPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	m_editPanel->Refresh();
 }
 
-void LayerPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void LayerPropertySetting::updatePropertyGrid(ee::PropertySettingPanel* panel)
 {
 	updatePanel(panel);
 }
 
-void LayerPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void LayerPropertySetting::enablePropertyGrid(ee::PropertySettingPanel* panel, bool bEnable)
 {
 	wxPropertyGrid* pg = panel->getPG();
 

@@ -1,17 +1,17 @@
 #ifndef _LIBSHAPE_CHAIN_SHAPE_H_
 #define _LIBSHAPE_CHAIN_SHAPE_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
-class ChainShape : public d2d::Shape
+class ChainShape : public ee::Shape
 {
 public:
 	ChainShape();
 	ChainShape(const ChainShape& chain);
-	ChainShape(const std::vector<d2d::Vector>& vertices, bool isLoop);
+	ChainShape(const std::vector<ee::Vector>& vertices, bool isLoop);
 
 	//
 	// IObject interface
@@ -22,38 +22,38 @@ public:
 	// Shape interface
 	//
 	virtual const char* GetShapeDesc() const { return "chain"; }
-	virtual bool IsContain(const d2d::Vector& pos) const;
-	virtual bool IsIntersect(const d2d::Rect& rect) const;
-	virtual void Translate(const d2d::Vector& offset);
-	virtual const d2d::Rect& GetRect() const { return m_rect; }
-	virtual void Draw(const d2d::Matrix& mt,
-		const d2d::ColorTrans& color = d2d::ColorTrans()) const;
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
+	virtual void Translate(const ee::Vector& offset);
+	virtual const ee::Rect& GetRect() const { return m_rect; }
+	virtual void Draw(const ee::Matrix& mt,
+		const ee::ColorTrans& color = ee::ColorTrans()) const;
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
-	virtual void Add(size_t index, const d2d::Vector& pos);
+	virtual void Add(size_t index, const ee::Vector& pos);
 	// todo: too slow! 
 	// cache index or pointer? how to avoid iterator's invalid
 	// maybe use list instead of array, but others' effective? 
-	virtual void Remove(const d2d::Vector& pos);
-	virtual void Change(const d2d::Vector& from, const d2d::Vector& to);
-	virtual void Load(const std::vector<d2d::Vector>& vertices);
+	virtual void Remove(const ee::Vector& pos);
+	virtual void Change(const ee::Vector& from, const ee::Vector& to);
+	virtual void Load(const std::vector<ee::Vector>& vertices);
 	virtual void refresh() {}
 
 	void SetClosed(bool isClose) { m_isLoop = isClose; }
 	bool IsClosed() const { return m_isLoop; }
 
-	const std::vector<d2d::Vector>& GetVertices() const { return m_vertices; }
+	const std::vector<ee::Vector>& GetVertices() const { return m_vertices; }
 
 protected:
 	void InitBounding();
 
 protected:
-	std::vector<d2d::Vector> m_vertices;
+	std::vector<ee::Vector> m_vertices;
 	bool m_isLoop;
 
-	d2d::Rect m_rect;
+	ee::Rect m_rect;
 
 }; // ChainShape
 

@@ -6,14 +6,14 @@
 namespace libshape
 {
 
-DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,d2d::EditPanelImpl* stage, 
-						   d2d::MultiShapesImpl* shapesImpl, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, stage, wxT("Tools"))
+DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,ee::EditPanelImpl* stage, 
+						   ee::MultiShapesImpl* shapesImpl, ee::PropertySettingPanel* propertyPanel)
+	: ee::EditCMPT(parent, name, stage, wxT("Tools"))
 {
  	// draw polyline with pen, node capture
 	{
-		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPenLineOP, d2d::SelectShapesOP>(stage_wnd, stage, shapesImpl, propertyPanel, cmpt, cmpt);
+		ee::OneFloatValueCMPT* cmpt = new ee::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
+		ee::EditOP* op = new EditPolylineOP<DrawPenLineOP, ee::SelectShapesOP>(stage_wnd, stage, shapesImpl, propertyPanel, cmpt, cmpt);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
 	}
@@ -23,9 +23,9 @@ DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, wxWindow* sta
 	}
 }
 
-wxSizer* DrawLineCMPT::initLayout()
+wxSizer* DrawLineCMPT::InitLayout()
 {
-	return initChildrenLayout();
+	return InitChildrenLayout();
 }
 
 }

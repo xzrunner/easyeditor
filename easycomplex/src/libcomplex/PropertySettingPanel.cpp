@@ -6,11 +6,11 @@ namespace ecomplex
 {
 
 PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
-	: d2d::PropertySettingPanel(parent)
+	: ee::PropertySettingPanel(parent)
 {
 }
 
-d2d::IPropertySetting* PropertySettingPanel::CreateDefaultProperty() const
+ee::PropertySetting* PropertySettingPanel::CreateDefaultProperty() const
 {
 	return new SymbolPropertySetting(static_cast<StagePanel*>(m_stage->GetEditPanel())->getSymbol());
 }

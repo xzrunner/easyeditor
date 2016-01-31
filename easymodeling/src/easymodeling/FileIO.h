@@ -2,7 +2,7 @@
 #ifndef EMODELING_FILE_IO_H
 #define EMODELING_FILE_IO_H
 
-#include <drag2d.h>
+
 #include <json/json.h>
 #include <easymodeling.h>
 

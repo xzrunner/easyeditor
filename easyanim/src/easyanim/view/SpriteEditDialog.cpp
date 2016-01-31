@@ -50,7 +50,7 @@ void SpriteEditDialog::buildToolBar(wxSizer* topSizer)
 
 void SpriteEditDialog::buildEditPanel(wxSizer* topSizer)
 {
-	m_editPanel = new d2d::EditPanel(this);
+	m_editPanel = new ee::EditPanel(this);
 
 	if (m_sprite->getMesh()) 
 		m_editPanel->setEditOP(new EditSpriteMeshOP(m_editPanel, m_sprite->getMesh()));

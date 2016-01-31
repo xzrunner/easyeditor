@@ -2,7 +2,7 @@
 #define _LR_FILE_IO_H_
 
 #include <json/json.h>
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -15,9 +15,9 @@ class FileIO
 {
 public:
 	static void Load(const char* filename, LibraryPanel* library, 
-		StagePanel* stage, d2d::GroupTreePanel* grouptree);
+		StagePanel* stage, ee::GroupTreePanel* grouptree);
 	static void Store(const char* filename, LibraryPanel* library,
-		StagePanel* stage, d2d::GroupTreePanel* grouptree);
+		StagePanel* stage, ee::GroupTreePanel* grouptree);
 
 private:
 	static void LoadLayers(const Json::Value& value, StagePanel* stage,

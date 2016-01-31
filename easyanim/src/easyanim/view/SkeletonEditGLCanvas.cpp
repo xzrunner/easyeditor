@@ -5,13 +5,13 @@
 namespace eanim
 {
 
-BEGIN_EVENT_TABLE(SkeletonEditGLCanvas, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(SkeletonEditGLCanvas, ee::OrthoCanvas)
 	EVT_MOUSE_EVENTS(SkeletonEditGLCanvas::onMouse)
 END_EVENT_TABLE()
 
-SkeletonEditGLCanvas::SkeletonEditGLCanvas(d2d::EditPanel* parent, WholeSkeleton* skeleton, 
+SkeletonEditGLCanvas::SkeletonEditGLCanvas(ee::EditPanel* parent, WholeSkeleton* skeleton, 
 										   SkeletonSymbolList* symbolList)
-	: d2d::OrthoCanvas(parent)
+	: ee::OrthoCanvas(parent)
 {
 	m_skeleton = skeleton;
 	m_symbolList = symbolList;
@@ -19,7 +19,7 @@ SkeletonEditGLCanvas::SkeletonEditGLCanvas(d2d::EditPanel* parent, WholeSkeleton
 
 void SkeletonEditGLCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
  	m_symbolList->reloadAllTexture();
 }
 

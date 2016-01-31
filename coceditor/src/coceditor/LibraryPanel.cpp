@@ -8,17 +8,17 @@ namespace coceditor
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 {
 	Context* context = Context::Instance();
 
-	m_imagePage = new d2d::LibraryImagePage(getNotebook());
+	m_imagePage = new ee::LibraryImagePage(getNotebook());
 	addPage(m_imagePage);
 	m_complexPage = new LibraryComplexPage(getNotebook());
 	addPage(m_complexPage);
-	m_animPage = new d2d::LibraryAnimPage(getNotebook());
+	m_animPage = new ee::LibraryAnimPage(getNotebook());
 	addPage(m_animPage);
-	m_scale9Page = new d2d::Library9PatchPage(getNotebook());
+	m_scale9Page = new ee::Library9PatchPage(getNotebook());
 	addPage(m_scale9Page);
 }
 
@@ -32,7 +32,7 @@ void LibraryPanel::storeToTextFile(std::ofstream& fout) const
 
 //void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 //{
-//	d2d::LibraryPanel::onPageChanged(event);
+//	ee::LibraryPanel::onPageChanged(event);
 //
 //	Context::Instance()->changeCurrItem(NULL);
 //
@@ -42,22 +42,22 @@ void LibraryPanel::storeToTextFile(std::ofstream& fout) const
 //		m_imagePage->clickListSelection();
 //}
 
-d2d::ILibraryPage* LibraryPanel::getImagePage()
+ee::ILibraryPage* LibraryPanel::getImagePage()
 {
 	return m_imagePage;
 }
 
-d2d::ILibraryPage* LibraryPanel::getComplexPage()
+ee::ILibraryPage* LibraryPanel::getComplexPage()
 {
 	return m_complexPage;
 }
 
-d2d::ILibraryPage* LibraryPanel::getAnimPage()
+ee::ILibraryPage* LibraryPanel::getAnimPage()
 {
 	return m_animPage;
 }
 
-d2d::ILibraryPage* LibraryPanel::get9PatchPage()
+ee::ILibraryPage* LibraryPanel::get9PatchPage()
 {
 	return m_scale9Page;
 }

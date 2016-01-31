@@ -8,7 +8,7 @@ namespace libshape
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
+					   ee::LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl()
 	, m_toolbar(NULL)
@@ -22,8 +22,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::Sprite* edited, 
-					   const d2d::MultiSpritesImpl* bg_sprites)
+					   wxGLContext* glctx, ee::Sprite* edited, 
+					   const ee::MultiSpritesImpl* bg_sprites)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl()
 	, m_toolbar(NULL)
@@ -38,7 +38,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   Symbol* symbol/*, d2d::LibraryPanel* library*/)
+					   Symbol* symbol/*, ee::LibraryPanel* library*/)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl()
 	, m_toolbar(NULL)
@@ -61,14 +61,14 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::TraverseShapes(d2d::Visitor& visitor, d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
+void StagePanel::TraverseShapes(ee::Visitor& visitor, ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
 	if (m_symbol) {
 		m_symbol->Traverse(visitor);
 	}
 }
 
-const d2d::Symbol& StagePanel::GetSymbol() const
+const ee::Symbol& StagePanel::GetSymbol() const
 {
 	return *m_symbol;
 }
@@ -87,14 +87,14 @@ void StagePanel::StoreToFile(const char* filename) const
 	}
 }
 
-void StagePanel::SetSymbolBG(d2d::Symbol* symbol)
+void StagePanel::SetSymbolBG(ee::Symbol* symbol)
 {
 	if (m_symbol) {
 		m_symbol->SetBG(symbol);
 		if (m_toolbar) {
 			m_toolbar->SelectSuitableEditOP();
 		}
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -103,13 +103,13 @@ void StagePanel::SetSymbolBG(d2d::Symbol* symbol)
 // 	if (!m_sprite)
 // 	{
 // 		wxString filepath = m_symbol.getFilepath();
-// 		if (!d2d::FileType::isType(filepath, d2d::FileType::e_shape))
+// 		if (!ee::FileType::isType(filepath, ee::FileType::e_shape))
 // 		{
-// 			filepath = d2d::FileHelper::getFilePathExceptExtension(filepath);
-// 			filepath = filepath + "_" + d2d::FileType::getFileTag(d2d::FileType::e_shape) + ".json";
+// 			filepath = ee::FileHelper::getFilePathExceptExtension(filepath);
+// 			filepath = filepath + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
 // 		}
 // 
-// 		if (d2d::FileHelper::isExist(filepath))
+// 		if (ee::FileHelper::isExist(filepath))
 // 		{
 // 			libshape::FileAdapter adapter(m_shapes);
 // 			adapter.load(filepath.c_str());
@@ -125,17 +125,17 @@ void StagePanel::SetSymbolBG(d2d::Symbol* symbol)
 //	{
 //		wxString filepath = m_symbol.getFilepath();
 //		if (filepath.empty())
-//			filepath = m_symbol.getName() + "_" + d2d::FileType::getFileTag(d2d::FileType::e_shape) + ".json";
-//		if (!d2d::FileType::isType(filepath, d2d::FileType::e_shape))
+//			filepath = m_symbol.getName() + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
+//		if (!ee::FileType::isType(filepath, ee::FileType::e_shape))
 //		{
-//			filepath = d2d::FileHelper::getFilePathExceptExtension(filepath);
-//			filepath = filepath + "_" + d2d::FileType::getFileTag(d2d::FileType::e_shape) + ".json";
+//			filepath = ee::FileHelper::getFilePathExceptExtension(filepath);
+//			filepath = filepath + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
 //		}
 //		else
 //		{
-//			Symbol* symbol = static_cast<Symbol*>(const_cast<d2d::Symbol*>(&m_symbol));
+//			Symbol* symbol = static_cast<Symbol*>(const_cast<ee::Symbol*>(&m_symbol));
 //
-//			std::vector<d2d::Shape*>& shapes = symbol->m_shapes;
+//			std::vector<ee::Shape*>& shapes = symbol->m_shapes;
 //
 //			for (size_t i = 0, n = shapes.size(); i < n; ++i)
 //				shapes[i]->Release();
@@ -146,7 +146,7 @@ void StagePanel::SetSymbolBG(d2d::Symbol* symbol)
 //			copy(m_shapes.begin(), m_shapes.end(), back_inserter(shapes));
 //		}
 //
-////		if (d2d::FileHelper::isExist(filepath))
+////		if (ee::FileHelper::isExist(filepath))
 //		{
 //			libshape::FileAdapter adapter(m_shapes);
 //			adapter.store(filepath.c_str());
@@ -156,7 +156,7 @@ void StagePanel::SetSymbolBG(d2d::Symbol* symbol)
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiShapesImpl::OnNotify(sj_id, ud);
+	ee::MultiShapesImpl::OnNotify(sj_id, ud);
 
 	if (!m_symbol) {
 		return;
@@ -164,19 +164,19 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 	switch (sj_id)
 	{
-	case d2d::MSG_REMOVE_SHAPE:
-		if (m_symbol->Remove((d2d::Shape*)ud)) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	case ee::MSG_REMOVE_SHAPE:
+		if (m_symbol->Remove((ee::Shape*)ud)) {
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
-	case d2d::MSG_INSERT_SHAPE:
-		if (m_symbol->Add((d2d::Shape*)ud)) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	case ee::MSG_INSERT_SHAPE:
+		if (m_symbol->Add((ee::Shape*)ud)) {
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
-	case d2d::MSG_CLEAR_SHAPE:
+	case ee::MSG_CLEAR_SHAPE:
 		if (m_symbol->Clear()) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;
 	}
@@ -184,9 +184,9 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::InitSubjects()
 {
-	RegistSubject(d2d::RemoveShapeSJ::Instance());
-	RegistSubject(d2d::InsertShapeSJ::Instance());
-	RegistSubject(d2d::ClearShapeSJ::Instance());
+	RegistSubject(ee::RemoveShapeSJ::Instance());
+	RegistSubject(ee::InsertShapeSJ::Instance());
+	RegistSubject(ee::ClearShapeSJ::Instance());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -194,8 +194,8 @@ void StagePanel::InitSubjects()
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::DropTarget::
-DropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::CombinedDropTarget(stage)
+DropTarget(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::CombinedDropTarget(stage)
 	, m_stage(stage)
 	, m_library(library)
 {
@@ -210,7 +210,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	d2d::Symbol* symbol = m_library->GetSymbol(index);
+	ee::Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol) {
 		m_stage->SetSymbolBG(symbol);
 	}
@@ -224,7 +224,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	std::string filename = filenames[0].ToStdString();
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
 	bool success = m_library->AddSymbol(symbol);
 	if (success) {

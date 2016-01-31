@@ -15,8 +15,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 
 	m_parent->SetTitle("EasyParticle");
@@ -25,7 +25,7 @@ Task::~Task()
 void Task::Load(const char* filepath)
 {
 	if (!wxFileName::FileExists(filepath)) {
-		throw d2d::Exception("File: %s don't exist!", filepath);
+		throw ee::Exception("File: %s don't exist!", filepath);
 	}
 	FileIO::Load(filepath, m_stage->m_ps, m_toolbar);
 }
@@ -40,17 +40,17 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
 
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
 
-// d2d::IStageCanvas* Task::getCanvas() const
+// ee::StageCanvas* Task::getCanvas() const
 // {
 // 	return m_stage->getCanvas();
 // }
@@ -64,8 +64,8 @@ void Task::InitLayout()
 	m_library = new LibraryPanel(left_hori_splitter);
 	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
 
-	d2d::PropertySettingPanel* property 
-		= new d2d::PropertySettingPanel(left_hori_splitter);
+	ee::PropertySettingPanel* property 
+		= new ee::PropertySettingPanel(left_hori_splitter);
 	property->SetEditPanel(m_stage->GetStageImpl());
 
 //	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, m_stage->GetStageData());

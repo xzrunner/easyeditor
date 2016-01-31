@@ -19,7 +19,7 @@ public:
 
 private:
 	void resolve(LibraryItem* item);
-	void resolve(d2d::IShape* shape);
+	void resolve(ee::IShape* shape);
 	void resolve(const libshape::BezierShape* bezier);
 	void resolve(const libshape::PolygonShape* poly);
 	void resolve(const libshape::ChainShape* chain);

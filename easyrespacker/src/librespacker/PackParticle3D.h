@@ -3,7 +3,7 @@
 
 #include "IPackNode.h"
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -58,16 +58,16 @@ public:
 	PackParticle3D(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<d2d::Image*>& images);
+		const std::vector<ee::Image*>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
-		const d2d::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<d2d::Image*>& images);
+		const std::vector<ee::Image*>& images);
 
 };	// PackParticle3D 
 

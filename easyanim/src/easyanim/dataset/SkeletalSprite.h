@@ -15,7 +15,7 @@ namespace eanim
 		virtual ~SkeletalSprite();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual SkeletalSprite* clone() const;
 
@@ -33,10 +33,10 @@ namespace eanim
 		void initBounding();
 
 	private:
-		class ReloadTextureVisitor : public d2d::IVisitor
+		class ReloadTextureVisitor : public ee::IVisitor
 		{
 		public:
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 		}; // ReloadTextureVisitor
 
 	private:

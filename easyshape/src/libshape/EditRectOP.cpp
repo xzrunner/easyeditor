@@ -5,11 +5,11 @@
 namespace libshape
 {
 
-EditRectOP::EditRectOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-					   d2d::MultiShapesImpl* shapesImpl,
-					   d2d::PropertySettingPanel* propertyPanel,
-					   d2d::OneFloatValue* node_capture)
-	: d2d::ZoomViewOP(wnd, stage, true)
+EditRectOP::EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+					   ee::MultiShapesImpl* shapesImpl,
+					   ee::PropertySettingPanel* propertyPanel,
+					   ee::OneFloatValue* node_capture)
+	: ee::ZoomViewOP(wnd, stage, true)
 	, m_propertyPanel(propertyPanel)
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
@@ -21,13 +21,13 @@ EditRectOP::EditRectOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 
 bool EditRectOP::OnKeyDown(int keyCode)
 {
-	if (d2d::ZoomViewOP::OnKeyDown(keyCode)) return true;
+	if (ee::ZoomViewOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 	{
 		m_shapesImpl->ClearSelectedShape();
 		m_captured.clear();
-		d2d::SelectShapeSJ::Instance()->Select(NULL);
+		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
 	return false;
@@ -35,7 +35,7 @@ bool EditRectOP::OnKeyDown(int keyCode)
 
 bool EditRectOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPress = m_currPos = m_stage->TransPosScrToProj(x, y);
 
@@ -50,7 +50,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
 			m_shapesImpl->GetShapeSelection()->Add(rect);
-			d2d::SelectShapeSJ::Instance()->Select(rect);
+			ee::SelectShapeSJ::Instance()->Select(rect);
 		}
 	}
 	else
@@ -63,7 +63,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 bool EditRectOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_captured.shape)
 	{
@@ -71,12 +71,12 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 		{
 			m_currPos = m_stage->TransPosScrToProj(x, y);
 
-			const float dis = d2d::Math2D::GetDistance(m_firstPress, m_currPos);
+			const float dis = ee::Math2D::GetDistance(m_firstPress, m_currPos);
 			if (dis > 1)
 			{
 				RectShape* rect = new RectShape(m_firstPress, m_currPos);
-				d2d::SelectShapeSJ::Instance()->Select(rect);
-				d2d::InsertShapeSJ::Instance()->Insert(NULL);
+				ee::SelectShapeSJ::Instance()->Select(rect);
+				ee::InsertShapeSJ::Instance()->Insert(NULL);
 			}
 		}
 	}
@@ -84,7 +84,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 	{
 		m_propertyPanel->EnablePropertyGrid(true);
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape)) {
-			d2d::SelectShapeSJ::Instance()->Select(rect);
+			ee::SelectShapeSJ::Instance()->Select(rect);
 		}
 	}
 
@@ -96,7 +96,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 bool EditRectOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
@@ -107,10 +107,10 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			d2d::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
+			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-			d2d::SelectShapeSJ::Instance()->Select(NULL);
+			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else
@@ -123,17 +123,17 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 
 bool EditRectOP::OnMouseMove(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseMove(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
-		d2d::Shape* old = m_captured.shape;
+		ee::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -142,7 +142,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 
 bool EditRectOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_currPos = m_stage->TransPosScrToProj(x, y);
 
@@ -150,7 +150,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 	{
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			d2d::Vector center(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+			ee::Vector center(rect->m_rect.CenterX(), rect->m_rect.CenterY());
 
 			// move
 			if (!m_captured.pos.IsValid())
@@ -174,7 +174,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 			m_propertyPanel->EnablePropertyGrid(false);
 
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -184,7 +184,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 bool EditRectOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) return true;
+	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (m_captured.shape)
 	{
@@ -193,10 +193,10 @@ bool EditRectOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
-				d2d::Vector pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
-				d2d::PrimitiveDraw::DrawCircle(pos, tolerance, true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+				ee::Vector pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
+				ee::PrimitiveDraw::DrawCircle(pos, tolerance, true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.IsValid()) {
-					d2d::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+					ee::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, ee::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
@@ -204,7 +204,7 @@ bool EditRectOP::OnDraw() const
 	else
 	{
 		if (m_firstPress.IsValid() && m_currPos.IsValid())
-			d2d::PrimitiveDraw::DrawRect(m_firstPress, m_currPos, m_style);
+			ee::PrimitiveDraw::DrawRect(m_firstPress, m_currPos, m_style);
 	}
 
 	return false;
@@ -212,7 +212,7 @@ bool EditRectOP::OnDraw() const
 
 bool EditRectOP::Clear()
 {
-	if (d2d::ZoomViewOP::Clear()) return true;
+	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_firstPress.SetInvalid();
 	m_currPos.SetInvalid();

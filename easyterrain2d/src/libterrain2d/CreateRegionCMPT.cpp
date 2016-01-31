@@ -6,9 +6,9 @@ namespace eterrain2d
 {
 
 CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: d2d::OneFloatValueCMPT(parent, name, stage->GetStageImpl(), "node capture", 5, 30, 10)
+	: ee::OneFloatValueCMPT(parent, name, stage->GetStageImpl(), "node capture", 5, 30, 10)
 {
-	m_editOP = new libshape::EditPolylineOP<CreateRegionOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, NULL, this, this);
+	m_editOP = new libshape::EditPolylineOP<CreateRegionOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, NULL, this, this);
 }
 
 // float CreateRegionCMPT::GetValue() const
@@ -16,16 +16,16 @@ CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const wxString& name, Stage
 // 	return 5;
 // }
 
-wxSizer* CreateRegionCMPT::initLayout()
+wxSizer* CreateRegionCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
- 	wxSizer* psizer = d2d::OneFloatValueCMPT::initLayout();
+ 	wxSizer* psizer = ee::OneFloatValueCMPT::InitLayout();
  	sizer->Add(psizer);
 	sizer->AddSpacer(20);
 	
 	wxCheckBox* tris_edge = new wxCheckBox(this, wxID_ANY, wxT("triangle edge"));
-	tris_edge->SetValue(d2d::SettingData::draw_tris_edge);
+	tris_edge->SetValue(ee::SettingData::draw_tris_edge);
 	Connect(tris_edge->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 		wxCommandEventHandler(CreateRegionCMPT::OnChangeDisplayTriangles));
 	sizer->Add(tris_edge);
@@ -35,8 +35,8 @@ wxSizer* CreateRegionCMPT::initLayout()
 
 void CreateRegionCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
-	d2d::SettingData::draw_tris_edge = event.IsChecked();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SettingData::draw_tris_edge = event.IsChecked();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

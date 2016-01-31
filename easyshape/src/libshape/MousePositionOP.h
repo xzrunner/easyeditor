@@ -1,18 +1,18 @@
 #ifndef _LIBSHAPE_MOUSE_POSITION_OP_H_
 #define _LIBSHAPE_MOUSE_POSITION_OP_H_
 
-#include <drag2d.h>
+
 
 #include "DrawPolylineOP.h"
 
 namespace libshape
 {
 
-class MousePositionOP : public d2d::MousePositionOP 
+class MousePositionOP : public ee::MousePositionOP 
 {
 public:
-	MousePositionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-		d2d::MousePositionCMPT* cmpt);
+	MousePositionOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+		ee::MousePositionCMPT* cmpt);
 	virtual ~MousePositionOP();
 
 	virtual bool OnMouseLeftDown(int x, int y);

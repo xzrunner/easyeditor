@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_PREVIEW_CANVAS_H_
 #define _EASYANIM_PREVIEW_CANVAS_H_
 
-#include <drag2d.h>
+
 #include <wx/wx.h>
 
 namespace eanim
@@ -9,11 +9,11 @@ namespace eanim
 
 struct PlaySettings;
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public ee::OrthoCanvas
 {
 public:
-	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		const PlaySettings& settings, d2d::PlayControl& control,
+	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		const PlaySettings& settings, ee::PlayControl& control,
 		wxGLContext* glctx);
 
 protected:
@@ -25,7 +25,7 @@ private:
 	void DrawStageData() const;
 
 private:
-	d2d::PlayControl& m_control;
+	ee::PlayControl& m_control;
 
 	const PlaySettings& m_settings;
 

@@ -43,11 +43,11 @@ void ScaleImage::Run(int argc, char *argv[])
 		return;
 	}
 
-	d2d::ShaderMgr::Instance()->reload();
+	ee::ShaderMgr::Instance()->reload();
 
-	d2d::Snapshoot ss;
+	ee::Snapshoot ss;
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
@@ -63,27 +63,27 @@ void ScaleImage::Run(int argc, char *argv[])
 	data.pre_multi_alpha = ori_alpha_cfg;
 }
 
-void ScaleImage::Scale(d2d::Snapshoot& ss, const std::string& dir, float scale)
+void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
 		Scale(ss, files[i].ToStdString(), files[i].ToStdString(), scale);
 	}
 }
 
-void ScaleImage::Scale(d2d::Snapshoot& ss, const std::string& src, const std::string& dst, float scale)
+void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::string& dst, float scale)
 {
 	wxFileName filename(src);
 	filename.Normalize();
 	std::string filepath = filename.GetFullPath().ToStdString();
-	if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 	{
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::Rect r = symbol->GetSize();
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Rect r = symbol->GetSize();
 
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
-		sprite->SetScale(d2d::Vector(scale, scale));
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+		sprite->SetScale(ee::Vector(scale, scale));
 
 		int width = r.Width() * scale,
 			height = r.Height() * scale;

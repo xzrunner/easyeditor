@@ -9,7 +9,7 @@ namespace eanim
 {
 
 Symbol::Symbol()
-	: d2d::ImageSymbol()
+	: ee::ImageSymbol()
 {
 	m_pixelData = NULL;
 	m_mesh = NULL;
@@ -19,7 +19,7 @@ Symbol::Symbol()
 
 Symbol::Symbol(const wxString& filepath)
 {
- 	m_pixelData = new d2d::RawPixels;
+ 	m_pixelData = new ee::RawPixels;
 	m_pixelData->loadFromFile(filepath.c_str());
 
 	m_mesh = NULL;
@@ -36,8 +36,8 @@ Symbol::~Symbol()
 //{
 //	clear();
 //
-//	d2d::ISymbol::loadFromTextFile(fin);
-//	m_pixelData = new d2d::RawPixels;
+//	ee::ISymbol::loadFromTextFile(fin);
+//	m_pixelData = new ee::RawPixels;
 //	loadResources();
 //
 //	std::string flag;
@@ -65,7 +65,7 @@ Symbol::~Symbol()
 //
 //void Symbol::storeToTextFile(std::ofstream& fout) const
 //{
-//	d2d::ISymbol::storeToTextFile(fout);
+//	ee::ISymbol::storeToTextFile(fout);
 //
 //	if (m_mesh)
 //	{
@@ -121,7 +121,7 @@ Symbol::~Symbol()
 // 	m_bitmap = new wxBitmap(img);
 // }
 
-void Symbol::replaceBySelectedPixels(const d2d::RawPixels::PixelBuf& selected)
+void Symbol::replaceBySelectedPixels(const ee::RawPixels::PixelBuf& selected)
 {
 	m_pixelData->replaceBySelected(selected);
 
@@ -145,7 +145,7 @@ void Symbol::replaceBySelectedPixels(const d2d::RawPixels::PixelBuf& selected)
 // 		);
 }
 
-d2d::RawPixels* Symbol::getRawPixels()
+ee::RawPixels* Symbol::getRawPixels()
 {
 	return m_pixelData;
 }

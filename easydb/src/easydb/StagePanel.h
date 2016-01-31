@@ -1,18 +1,18 @@
 #ifndef EDB_STAGE_PANEL_H
 #define EDB_STAGE_PANEL_H
 
-#include <drag2d.h>
+
 
 #include "Graphics.h"
 
 namespace edb
 {
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
-	               public d2d::ShapesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, 
+	               public ee::ShapesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	void loadFromDir(const std::string& dirpath);

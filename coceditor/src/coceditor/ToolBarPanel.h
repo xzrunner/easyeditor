@@ -1,10 +1,10 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
-	class ToolbarPanel : public d2d::ToolbarPanel
+	class ToolbarPanel : public ee::ToolbarPanel
 	{
 	public:
 		ToolbarPanel(wxWindow* parent);

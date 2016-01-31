@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_KEYS_PANEL_H_
 #define _EASYANIM_KEYS_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class Layer;
 
-class KeysPanel : public wxScrolledWindow, public d2d::Observer
+class KeysPanel : public wxScrolledWindow, public ee::Observer
 {
 public:
 	KeysPanel(wxWindow* parent);

@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_STAGE_PANEL_H_
 #define _EASYUI_WINDOW_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "SymbolsCfg.h"
 #include "AnchorMgr.h"
@@ -18,7 +18,7 @@ namespace window
 class SymbolsCfg;
 class ToolbarPanel;
 
-class StagePanel : public UIStagePage, public d2d::SpritesPanelImpl
+class StagePanel : public UIStagePage, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, TopPannels* top_pannels);

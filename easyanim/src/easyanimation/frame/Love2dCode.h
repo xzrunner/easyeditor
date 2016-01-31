@@ -19,7 +19,7 @@ private:
 private:
 	ebuilder::CodeGenerator& m_gen;
 
-	d2d::TexPackerAdapter m_tp_adapter;
+	ee::TexPackerAdapter m_tp_adapter;
 
 }; // Love2dCode
 

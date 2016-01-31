@@ -1,7 +1,7 @@
 #ifndef _EASYUI_TOP_PANNELS_H_
 #define _EASYUI_TOP_PANNELS_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
@@ -15,7 +15,7 @@ class TopPannels
 public:
 	TopLibraryPanel* library;
 
-	d2d::PropertySettingPanel* property;
+	ee::PropertySettingPanel* property;
 
 	TopStagePanel* stage;
 

@@ -7,25 +7,25 @@ namespace eimage
 {
 
 ImageProcessOP::ImageProcessOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true, false, false)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true, false, false)
 	, m_stage(stage)
 {
 }
 
 bool ImageProcessOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
-	if (const d2d::Sprite* sprite = m_stage->getImage())
+	if (const ee::Sprite* sprite = m_stage->getImage())
 	{
-		d2d::Rect r = sprite->GetSymbol().GetSize();
+		ee::Rect r = sprite->GetSymbol().GetSize();
 
-		d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 		LanczosResamplingShader* shader = new LanczosResamplingShader;
 		shader->Load();
-// 		shader->SetTexelSize(1/r.xLength(), 1/r.yLength());
+// 		shader->SetTexelSize(1/r.Width(), 1/r.Height());
 		shader->SetTexelSize(1.0f/4096, 1.0f/4096);
 		shader_mgr->SetSpriteShader(shader);
 	}

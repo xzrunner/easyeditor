@@ -7,7 +7,7 @@ namespace libsketch
 {
 
 RotateSpriteState::RotateSpriteState(StagePanel* stage,
-									 const d2d::SpriteSelection& selection)
+									 const ee::SpriteSelection& selection)
 	: m_stage(stage)
 	, m_selection(selection)
 {
@@ -43,7 +43,7 @@ void RotateSpriteState::Rotate(const e3d::Camera& cam, const ivec2& start, const
 //////////////////////////////////////////////////////////////////////////
 
 void RotateSpriteState::Visitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 

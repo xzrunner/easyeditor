@@ -1,7 +1,7 @@
 #ifndef _LIBANIM_PREVIEW_CANVAS_H_
 #define _LIBANIM_PREVIEW_CANVAS_H_
 
-#include <drag2d.h>
+
 #include <wx/wx.h>
 
 #include "Symbol.h"
@@ -9,7 +9,7 @@
 namespace libanim
 {
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public ee::OrthoCanvas
 {
 public:
 	struct PlaySetting
@@ -25,7 +25,7 @@ public:
 	};
 
 public:
-	PreviewCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
+	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 		const Symbol* symbol, wxGLContext* glctx);
 
 	PlaySetting& getPlaySetting();
@@ -41,7 +41,7 @@ private:
 
 	const Symbol* m_symbol;
 
-	d2d::PlayControl m_control;
+	ee::PlayControl m_control;
 
 }; // PreviewCanvas
 

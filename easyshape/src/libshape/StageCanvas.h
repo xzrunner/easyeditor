@@ -1,19 +1,19 @@
 #ifndef _LIBSHAPE_STAGE_CANVAS_H_
 #define _LIBSHAPE_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
 	StageCanvas(StagePanel* stage, wxGLContext* glctx,
-		d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites);
+		ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites);
 
 public:
 	void DrawGuideLines() const;
@@ -24,12 +24,12 @@ protected:
 private:
 	StagePanel* m_stage;
 
-	const d2d::MultiShapesImpl* m_shape_impl;
+	const ee::MultiShapesImpl* m_shape_impl;
 
-	d2d::Sprite* m_edited;
-	const d2d::MultiSpritesImpl* m_sprite_impl;
+	ee::Sprite* m_edited;
+	const ee::MultiSpritesImpl* m_sprite_impl;
 
-	d2d::Sprite* m_bg;
+	ee::Sprite* m_bg;
 
 }; // StageCanvas
 

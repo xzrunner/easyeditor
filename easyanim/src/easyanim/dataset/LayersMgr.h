@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -26,7 +26,7 @@ namespace eanim
 
 		void clear();
 
-		void removeSprite(d2d::ISprite* sprite);
+		void removeSprite(ee::ISprite* sprite);
 
 	private:
 		std::vector<Layer*> m_layers;

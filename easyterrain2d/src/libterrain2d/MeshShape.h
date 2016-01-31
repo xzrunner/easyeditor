@@ -9,10 +9,10 @@ namespace eterrain2d
 class MeshShape : public emesh::Shape
 {
 public:
-	MeshShape(const d2d::Image& image);
+	MeshShape(const ee::Image& image);
 
-	void InsertTriangle(const d2d::Vector* vertices, 
-		const d2d::Vector* texcoords, const std::vector<d2d::Vector>& bound);
+	void InsertTriangle(const ee::Vector* vertices, 
+		const ee::Vector* texcoords, const std::vector<ee::Vector>& bound);
 
 private:
 	static const bool IS_BOUND = true;

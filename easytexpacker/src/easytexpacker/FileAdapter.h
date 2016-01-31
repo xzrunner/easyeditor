@@ -3,7 +3,7 @@
 
 #include "ToolbarPanel.h"
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {

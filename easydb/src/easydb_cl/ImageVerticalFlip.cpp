@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <glfw.h>
-#include <drag2d.h>
+
 #include <easyanim.h>
 #include <easyimage.h>
 
@@ -36,17 +36,17 @@ void ImageVerticalFlip::Run(int argc, char *argv[])
 
 void ImageVerticalFlip::Trigger(const std::string& path) const
 {
-	if (d2d::FileHelper::IsFileExist(path)) {
+	if (ee::FileHelper::IsFileExist(path)) {
 		VerticalFlip(path);
-	} else if (d2d::FileHelper::IsDirExist(path)) {
+	} else if (ee::FileHelper::IsDirExist(path)) {
 		wxArrayString files;
-		d2d::FileHelper::FetchAllFiles(path, files);
+		ee::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			wxFileName filename(files[i]);
 			filename.Normalize();
 			std::string filepath = filename.GetFullPath().ToStdString();
-			if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
+			if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 				continue;
 			}
 
@@ -57,12 +57,12 @@ void ImageVerticalFlip::Trigger(const std::string& path) const
 
 void ImageVerticalFlip::VerticalFlip(const std::string& filepath) const
 {
-	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(filepath);		
+	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
 
 	eimage::ImageVerticalFlip revert(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	uint8_t* pixels_revert = revert.Revert();		
-	d2d::ImageSaver::StoreToFile(pixels_revert, img->GetWidth(), img->GetHeight(), 
-		img->GetChannels(), filepath, d2d::ImageSaver::e_png);
+	ee::ImageSaver::StoreToFile(pixels_revert, img->GetWidth(), img->GetHeight(), 
+		img->GetChannels(), filepath, ee::ImageSaver::e_png);
 	delete[] pixels_revert;
 
 	img->Release();

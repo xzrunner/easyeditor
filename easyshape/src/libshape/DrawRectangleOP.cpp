@@ -3,8 +3,8 @@
 namespace libshape
 {
 
-DrawRectangleOP::DrawRectangleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool bOpenRightTap)
-	: d2d::ZoomViewOP(wnd, stage, true, bOpenRightTap)
+DrawRectangleOP::DrawRectangleOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool bOpenRightTap)
+	: ee::ZoomViewOP(wnd, stage, true, bOpenRightTap)
 {
 	m_firstPos.SetInvalid();
 	m_currPos.SetInvalid();
@@ -12,7 +12,7 @@ DrawRectangleOP::DrawRectangleOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool 
 
 bool DrawRectangleOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPos = m_stage->TransPosScrToProj(x, y);
 
@@ -22,7 +22,7 @@ bool DrawRectangleOP::OnMouseLeftDown(int x, int y)
 
 bool DrawRectangleOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	m_firstPos.SetInvalid();
 	m_currPos.SetInvalid();
@@ -33,12 +33,12 @@ bool DrawRectangleOP::OnMouseLeftUp(int x, int y)
 
 bool DrawRectangleOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_firstPos.IsValid())
 	{
 		m_currPos = m_stage->TransPosScrToProj(x, y);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -46,10 +46,10 @@ bool DrawRectangleOP::OnMouseDrag(int x, int y)
 
 bool DrawRectangleOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) return true;
+	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (m_firstPos.IsValid() && m_currPos.IsValid()) {
-		d2d::PrimitiveDraw::DrawRect(m_firstPos, m_currPos, m_style);
+		ee::PrimitiveDraw::DrawRect(m_firstPos, m_currPos, m_style);
 	}
 
 	return false;
@@ -57,7 +57,7 @@ bool DrawRectangleOP::OnDraw() const
 
 bool DrawRectangleOP::Clear()
 {
-	if (d2d::ZoomViewOP::Clear()) return true;
+	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_firstPos.SetInvalid();
 	m_currPos.SetInvalid();

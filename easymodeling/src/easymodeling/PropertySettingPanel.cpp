@@ -7,11 +7,11 @@ namespace emodeling
 {
 
 PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
-	: d2d::PropertySettingPanel(parent)
+	: ee::PropertySettingPanel(parent)
 {
 }
 
-void PropertySettingPanel::OnSpriteSelected(d2d::Sprite* spr, bool clear)
+void PropertySettingPanel::OnSpriteSelected(ee::Sprite* spr, bool clear)
 {
 	assert(m_stage);
 	if (spr) {

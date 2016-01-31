@@ -1,7 +1,7 @@
 #ifndef _LIBCOCO_EPD_TP_PARSER_H_
 #define _LIBCOCO_EPD_TP_PARSER_H_
 
-#include <drag2d.h>
+
 
 #include "TPAdapter.h"
 #include "TextureMgr.h"
@@ -29,13 +29,13 @@ public:
 
 		// 0 3
 		// 1 2
-		d2d::Vector scr[4];
+		ee::Vector scr[4];
 
-		d2d::Vector offset;
+		ee::Vector offset;
 	};
 
 public:
-	TPParser(const std::vector<const d2d::Symbol*>& symbols,
+	TPParser(const std::vector<const ee::Symbol*>& symbols,
 		const TextureMgr& tex_mgr);
 
 	void Parser();
@@ -46,7 +46,7 @@ public:
 		return m_symbol_sorter.GetSymbolSet();
 	}
 
-	TPParser::Picture* FindPicture(const d2d::Symbol* symbol) const;
+	TPParser::Picture* FindPicture(const ee::Symbol* symbol) const;
 
 	void DebugInfo() const;
 
@@ -60,7 +60,7 @@ private:
 
 	int m_tex_size;
 
-	std::map<const d2d::Symbol*, Picture*> m_map_symbol2picture;
+	std::map<const ee::Symbol*, Picture*> m_map_symbol2picture;
 
 }; // TPParser
 

@@ -5,20 +5,20 @@ namespace libanis
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Anis"))
+	: ee::LibraryPage(parent, wxT("Anis"))
 {
 	InitLayout();
-	m_list->SetFileter(d2d::FileType::GetTag(d2d::FileType::e_anis).ToStdString());
+	m_list->SetFileter(ee::FileType::GetTag(ee::FileType::e_anis).ToStdString());
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileType::GetTag(d2d::FileType::e_anim);
+	wxString filter = ee::FileType::GetTag(ee::FileType::e_anim);
 	wxFileDialog dlg(this, wxT("导入anis文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
@@ -29,12 +29,12 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			try {
 				std::string filename = filenames[i].ToStdString();
-				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 				symbol->RefreshThumbnail(filename);
 				m_list->Insert(symbol);
 				symbol->Release();
-			} catch (d2d::Exception& e) {
-				d2d::ExceptionDlg dlg(m_parent, e);
+			} catch (ee::Exception& e) {
+				ee::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();
 			}
 		}

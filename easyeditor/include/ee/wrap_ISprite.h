@@ -1,14 +1,16 @@
-#ifndef D2D_WRAP_ISPRITE_H
-#define D2D_WRAP_ISPRITE_H
+#ifndef _EASYEDITOR_WRAP_ISPRITE_H_
+#define _EASYEDITOR_WRAP_ISPRITE_H_
 
-#include <common/runtime.h>
+#include <lua.h>
 
-#include "Sprite.h"
-
-namespace d2d
+namespace ee
 {
-	Sprite* luax_checksprite(lua_State* L, int idx);
-	extern "C" int luaopen_sprite(lua_State* L);
+
+class Sprite;
+
+Sprite* luax_checksprite(lua_State* L, int idx);
+extern "C" int luaopen_sprite(lua_State* L);
+
 }
 
-#endif // D2D_WRAP_ISPRITE_H
+#endif // _EASYEDITOR_WRAP_ISPRITE_H_

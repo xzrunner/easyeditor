@@ -9,22 +9,22 @@ namespace libshape
 class ColorMaterial : public Material
 {
 public:
-	ColorMaterial(const std::vector<d2d::Vector>& vertices,
-		const d2d::Colorf& color);
+	ColorMaterial(const std::vector<ee::Vector>& vertices,
+		const ee::Colorf& color);
 
 	virtual Json::Value Store(const std::string& dirpath) const;
 
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const;
 
 	virtual void ReloadTexture() {}
 
-	const d2d::Colorf& GetColor() const { return m_color; }
+	const ee::Colorf& GetColor() const { return m_color; }
 
 protected:
 	virtual void BuildEnd();
 
 private:
-	d2d::Colorf m_color;
+	ee::Colorf m_color;
 
 }; // ColorMaterial
 

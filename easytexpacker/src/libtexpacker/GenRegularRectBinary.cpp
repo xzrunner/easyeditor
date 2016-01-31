@@ -1,6 +1,6 @@
 #include "GenRegularRectBinary.h"
 
-#include <drag2d.h>
+
 
 #include <json/json.h>
 #include <fstream>
@@ -29,7 +29,7 @@ GenRegularRectBinary::~GenRegularRectBinary()
 
 void GenRegularRectBinary::PackToBinary() const
 {
-	wxString dir = d2d::FileHelper::GetFileDir(m_filepath);
+	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
 	wxString filepath = dir + "\\pack.rrp";
 
 	std::ofstream fout(filepath.mb_str(), std::ios::binary);
@@ -132,11 +132,11 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 	// set picture region
 	for (int i = 0, n = m_pics.size(); i < n; ++i) {
 		Picture* pic = m_pics[i];
-		d2d::Rect r;
+		ee::Rect r;
 		for (int j = 0, m = pic->parts.size(); j < m; ++j) {
 			const Rect& r_src = pic->parts[j]->src;
-			r.Combine(d2d::Vector(r_src.x, r_src.y));
-			r.Combine(d2d::Vector(r_src.x+r_src.w, r_src.y+r_src.h));
+			r.Combine(ee::Vector(r_src.x, r_src.y));
+			r.Combine(ee::Vector(r_src.x+r_src.w, r_src.y+r_src.h));
 			pic->w = r.Width();
 			pic->h = r.Height();
 		}
@@ -159,7 +159,7 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 		std::map<std::string, int>::iterator itr 
 			= image_map.find(pic->path.Lower().ToStdString());
 		if (itr == image_map.end()) {
-			throw d2d::Exception("Cannot find image %s in %s\n", 
+			throw ee::Exception("Cannot find image %s in %s\n", 
 				pic->path, img_id_file);
 		}
 		pic->id = itr->second;

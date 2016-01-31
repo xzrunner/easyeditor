@@ -5,12 +5,12 @@ namespace ecomplex
 {
 
 SettingsDialog::SettingsDialog(wxWindow* parent)
-	: d2d::SettingsDialog(parent)
+	: ee::SettingsDialog(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
-void SettingsDialog::initLayout()
+void SettingsDialog::InitLayout()
 {
 	wxSizer* sizer = GetSizer();
 	sizer->Add(initViewPanel(), 0, wxCENTER);

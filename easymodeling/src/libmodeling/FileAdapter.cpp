@@ -42,13 +42,13 @@ World* FileApapter::j2World(const Json::Value& worldValue)
 Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 {
 	std::string filepath = bodyValue["filepath"].asString();
-	filepath = d2d::FileHelper::GetAbsolutePath(dlg, filepath);
+	filepath = ee::FileHelper::GetAbsolutePath(dlg, filepath);
 
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	symbol->Release();
 
-	d2d::Vector pos;
+	ee::Vector pos;
 	pos.x = bodyValue["position"]["x"].asDouble();
 	pos.y = bodyValue["position"]["y"].asDouble();
 	float angle = bodyValue["angle"].asDouble();
@@ -298,7 +298,7 @@ void FileApapter::resolve(const wxString& filepath)
 
 	j2World(value["world"]);
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];

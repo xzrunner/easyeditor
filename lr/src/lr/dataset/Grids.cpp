@@ -17,14 +17,14 @@ void Grids::Draw() const
 	for (int i = 0, n = m_grids.size(); i < n; ++i)
 	{
 		const Grid& g = m_grids[i];
-		d2d::PrimitiveDraw::DrawPolyline(g.m_bird_bound, d2d::LIGHT_GREY, true);
-//		d2d::PrimitiveDraw::DrawRect(g.m_flat_bound, d2d::LIGHT_GREY_LINE);
+		ee::PrimitiveDraw::DrawPolyline(g.m_bird_bound, ee::LIGHT_GREY, true);
+//		ee::PrimitiveDraw::DrawRect(g.m_flat_bound, ee::LIGHT_GREY_LINE);
 	}
-//	d2d::PrimitiveDraw::DrawPolyline(m_flat_bound, d2d::LIGHT_GREY, true);
+//	ee::PrimitiveDraw::DrawPolyline(m_flat_bound, ee::LIGHT_GREY, true);
 
 	for (int i = 0, n = m_debug_draw_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[m_debug_draw_grids[i]];
-		d2d::PrimitiveDraw::DrawPolyline(g.m_bird_bound, d2d::BLUE, true);
+		ee::PrimitiveDraw::DrawPolyline(g.m_bird_bound, ee::BLUE, true);
 	}
 }
 
@@ -60,11 +60,11 @@ void Grids::Build(int width, int height)
 	m_flat_bound.push_back(TransToFlatView(-width*0.5f, -height*0.5f));
 }
 
-std::vector<int> Grids::IntersectPolygon(const std::vector<d2d::Vector>& poly) const
+std::vector<int> Grids::IntersectPolygon(const std::vector<ee::Vector>& poly) const
 {
 	std::vector<int> ret;
 
-	std::vector<d2d::Vector> poly_flat;
+	std::vector<ee::Vector> poly_flat;
 	TransVerticesToFlat(poly, poly_flat);
 
 	int xmin, xmax, ymin, ymax;
@@ -74,7 +74,7 @@ std::vector<int> Grids::IntersectPolygon(const std::vector<d2d::Vector>& poly) c
 		for (int x = xmin; x < xmax; ++x) {
 			int idx = y * m_col + x;
 			const Grid& g = m_grids[idx];
-			if (d2d::Math2D::IsPolygonIntersectRect(poly_flat, g.m_flat_bound)) {
+			if (ee::Math2D::IsPolygonIntersectRect(poly_flat, g.m_flat_bound)) {
 				ret.push_back(idx);
 			}
 		}
@@ -83,11 +83,11 @@ std::vector<int> Grids::IntersectPolygon(const std::vector<d2d::Vector>& poly) c
 	return ret;
 }
 
-std::vector<int> Grids::IntersectPolyline(const std::vector<d2d::Vector>& path) const
+std::vector<int> Grids::IntersectPolyline(const std::vector<ee::Vector>& path) const
 {
 	std::vector<int> ret;
 
-	std::vector<d2d::Vector> poly_flat;
+	std::vector<ee::Vector> poly_flat;
 	TransVerticesToFlat(path, poly_flat);
 
 	int xmin, xmax, ymin, ymax;
@@ -97,7 +97,7 @@ std::vector<int> Grids::IntersectPolyline(const std::vector<d2d::Vector>& path) 
 		for (int x = xmin; x < xmax; ++x) {
 			int idx = y * m_col + x;
 			const Grid& g = m_grids[idx];
-			if (d2d::Math2D::IsPolylineIntersectRect(poly_flat, false, g.m_flat_bound)) {
+			if (ee::Math2D::IsPolylineIntersectRect(poly_flat, false, g.m_flat_bound)) {
 				ret.push_back(idx);
 			}
 		}
@@ -106,25 +106,25 @@ std::vector<int> Grids::IntersectPolyline(const std::vector<d2d::Vector>& path) 
 	return ret;
 }
 
-d2d::Vector Grids::TransToBirdView(float x, float y)
+ee::Vector Grids::TransToBirdView(float x, float y)
 {
-	d2d::Vector ret = d2d::Math2D::RotateVector(d2d::Vector(x, y), d2d::PI / 4);
+	ee::Vector ret = ee::Math2D::RotateVector(ee::Vector(x, y), ee::PI / 4);
 	ret.y *= PROJ_TRANS;
 	return ret;
 }
 
-d2d::Vector Grids::TransToFlatView(float x, float y)
+ee::Vector Grids::TransToFlatView(float x, float y)
 {
-	d2d::Vector ret = d2d::Vector(x, y);
+	ee::Vector ret = ee::Vector(x, y);
 	ret.y /= PROJ_TRANS;
-	ret = d2d::Math2D::RotateVector(ret, - d2d::PI / 4);
+	ret = ee::Math2D::RotateVector(ret, - ee::PI / 4);
 	return ret;
 }
 
-void Grids::GetGridRegion(const std::vector<d2d::Vector>& area, 
+void Grids::GetGridRegion(const std::vector<ee::Vector>& area, 
 						  int& xmin, int& xmax, int& ymin, int& ymax) const
 {
-	d2d::Rect r;
+	ee::Rect r;
 	for (int i = 0, n = area.size(); i < n; ++i) {
 		r.Combine(area[i]);
 	}
@@ -138,7 +138,7 @@ void Grids::GetGridRegion(const std::vector<d2d::Vector>& area,
 	ymax = std::min((float)m_row, (top-r.ymin)/BIRD_HH+2);
 }
 
-void Grids::TransVerticesToFlat(const std::vector<d2d::Vector>& src, std::vector<d2d::Vector>& dst)
+void Grids::TransVerticesToFlat(const std::vector<ee::Vector>& src, std::vector<ee::Vector>& dst)
 {
 	dst.resize(src.size());
 	for (int i = 0, n = src.size(); i < n; ++i) {
@@ -152,12 +152,12 @@ void Grids::TransVerticesToFlat(const std::vector<d2d::Vector>& src, std::vector
 
 Grids::Grid::Grid(float left, float top)
 {
-	m_bird_bound.push_back(d2d::Vector(left+Grids::BIRD_HW, top));
-	m_bird_bound.push_back(d2d::Vector(left, top-Grids::BIRD_HH));
-	m_bird_bound.push_back(d2d::Vector(left+Grids::BIRD_HW, top-Grids::BIRD_HH*2));
-	m_bird_bound.push_back(d2d::Vector(left+Grids::BIRD_HW*2, top-Grids::BIRD_HH));
+	m_bird_bound.push_back(ee::Vector(left+Grids::BIRD_HW, top));
+	m_bird_bound.push_back(ee::Vector(left, top-Grids::BIRD_HH));
+	m_bird_bound.push_back(ee::Vector(left+Grids::BIRD_HW, top-Grids::BIRD_HH*2));
+	m_bird_bound.push_back(ee::Vector(left+Grids::BIRD_HW*2, top-Grids::BIRD_HH));
 
-	d2d::Vector flat[4];
+	ee::Vector flat[4];
 	for (int i = 0; i < 4; ++i) {
 		flat[i] = TransToFlatView(m_bird_bound[i].x, m_bird_bound[i].y);
 		m_flat_bound.Combine(flat[i]);

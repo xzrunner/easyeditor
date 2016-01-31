@@ -2,7 +2,7 @@
 #define _SG_BUILDING_CFG_H_
 
 #include <JSON/json.h>
-#include <drag2d.h>
+
 
 namespace sg
 {
@@ -13,7 +13,7 @@ class StagePanel;
 class BuildingCfg
 {
 public:
-	BuildingCfg(StagePanel* stage, d2d::LibraryPanel* library);
+	BuildingCfg(StagePanel* stage, ee::LibraryPanel* library);
 
 	void InitAllData();
 
@@ -69,7 +69,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::LibraryPanel* m_library;
+	ee::LibraryPanel* m_library;
 
 	AllBuilding m_buildings;
 

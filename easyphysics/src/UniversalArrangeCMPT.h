@@ -1,28 +1,28 @@
 #ifndef _EPHYSICS_UNIVERSAL_ARRANGE_CMPT_H_
 #define _EPHYSICS_UNIVERSAL_ARRANGE_CMPT_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
 {
 
-class UniversalArrangeCMPT : public d2d::AbstractEditCMPT
+class UniversalArrangeCMPT : public ee::EditCMPT
 {
 public:
 	UniversalArrangeCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
-		d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
-		d2d::PropertySettingPanel* propertyPanel);
+		ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
+		ee::PropertySettingPanel* propertyPanel);
 
 	virtual void updateControlValue();
 
 	void addPhysicsEditOP(b2World* world, b2Body* ground);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
-	class GetPhysicsStaticVisitor : public d2d::Visitor
+	class GetPhysicsStaticVisitor : public ee::Visitor
 	{
 	public:
 		enum TYPE
@@ -34,7 +34,7 @@ private:
 
 	public:
 		GetPhysicsStaticVisitor();
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 		TYPE getType() const { return m_type; }
 
 	private:
@@ -42,11 +42,11 @@ private:
 
 	}; // GetPhysicsStaticVisitor
 
-	class SetPhysicsStaticVisitor : public d2d::Visitor
+	class SetPhysicsStaticVisitor : public ee::Visitor
 	{
 	public:
 		SetPhysicsStaticVisitor(bool bChecked);
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
 		bool m_bChecked;
@@ -57,7 +57,7 @@ private:
 	void onChangeStaticType(wxCommandEvent& event);
 
 private:
-	d2d::MultiSpritesImpl* m_spritesImpl;
+	ee::MultiSpritesImpl* m_spritesImpl;
 
 	wxCheckBox* m_physicsStaticCtrl;
 	

@@ -4,8 +4,7 @@
 #include "BoundingBox.h"
 #include "BBFactory.h"
 #include "trans_color.h"
-
-//#include "view/FontBlankPropertySetting.h"
+#include "FontBlankPropertySetting.h"
 
 namespace ee
 {
@@ -65,11 +64,11 @@ FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 		align_vert = VAT_AUTO;
 
 	align_vert = VAT_TOP;
-	size = symbol->size;
-	width = symbol->width;
-	height = symbol->height;
-	filename = symbol->filename;
-	has_edge = false;
+	size	= static_cast<int>(symbol->size);
+	width	= static_cast<int>(symbol->width);
+	height	= static_cast<int>(symbol->height);
+	filename= symbol->filename;
+	has_edge= false;
 
 	BuildBounding();
 }
@@ -109,10 +108,10 @@ void FontBlankSprite::Load(const Json::Value& val)
 		font_color = TransColor(m_symbol->color, PT_ARGB);
 		align_hori = HoriAlignType((int)m_symbol->align_hori);
 		align_vert = VertAlignType((int)m_symbol->align_vert);
-		size = m_symbol->size;
-		width = m_symbol->width;
-		height = m_symbol->height;
-		filename = m_symbol->filename;
+		size	= static_cast<int>(m_symbol->size);
+		width	= static_cast<int>(m_symbol->width);
+		height	= static_cast<int>(m_symbol->height);
+		filename= m_symbol->filename;
 	}
 	else
 	{
@@ -160,7 +159,7 @@ void FontBlankSprite::BuildBounding()
 	if (!m_bounding) {
 		m_bounding = BBFactory::CreateBB(e_obb);
 	}
-	Rect rect(width, height);
+	Rect rect(static_cast<float>(width), static_cast<float>(height));
 	if (m_offset.x == 0 && m_offset.y == 0) {
 		m_offset.Set(rect.CenterX(), rect.CenterY());
 	}
@@ -170,7 +169,7 @@ void FontBlankSprite::BuildBounding()
 	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
-IPropertySetting* FontBlankSprite::CreatePropertySetting(EditPanelImpl* stage)
+PropertySetting* FontBlankSprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new FontBlankPropertySetting(stage, this);
 }

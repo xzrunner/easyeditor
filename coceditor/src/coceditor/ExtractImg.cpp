@@ -1,14 +1,14 @@
 #include "ExtractImg.h"
 
-#include <drag2d.h>
+
 // #include <SOIL/SOIL.h>
 // #include <SOIL/stb_image_write.h>
 namespace coceditor
 {
 	void ExtractImg::trigger(const std::string& path)
 	{
-// 		std::string dir = d2d::FilenameTools::getFileDir(path);
-// 		std::string fil = d2d::FilenameTools::getFilename(path);
+// 		std::string dir = ee::FilenameTools::getFileDir(path);
+// 		std::string fil = ee::FilenameTools::getFilename(path);
 // 	
 // // 		// debug
 // // 		std::string src = dir+"\\"+wxString::FromDouble(1)+".png";

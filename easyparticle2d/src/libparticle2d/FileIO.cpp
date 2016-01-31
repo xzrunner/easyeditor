@@ -23,7 +23,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 	value["rotation_is_dir"] = toolbar->m_rotation_is_dir_ctrl->GetValue();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (int i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
@@ -31,8 +31,8 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 
 		Json::Value cval;
 
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(p_symbol->ud);
-		cval["filepath"] = d2d::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol->ud);
+		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(cval);
@@ -191,8 +191,8 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		const LoadAdapter::Component& src = adapter.components[i];
 		p2d_symbol& dst = cfg->symbols[i];
 
-		dst.angle_start = src.angle_start * d2d::TRANS_DEG_TO_RAD;
-		dst.angle_end = src.angle_end * d2d::TRANS_DEG_TO_RAD;
+		dst.angle_start = src.angle_start * ee::TRANS_DEG_TO_RAD;
+		dst.angle_end = src.angle_end * ee::TRANS_DEG_TO_RAD;
 
 		dst.scale_start = src.scale_start * 0.01f;
 		dst.scale_end = src.scale_end * 0.01f;
@@ -202,7 +202,7 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		memcpy(&dst.col_add_start.r, &src.col_add_start.r, sizeof(src.col_add_start));
 		memcpy(&dst.col_add_end.r, &src.col_add_end.r, sizeof(src.col_add_end));
 
-		dst.ud = d2d::SymbolMgr::Instance()->FetchSymbol(src.filepath);
+		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);
 	}
 
 	return cfg;

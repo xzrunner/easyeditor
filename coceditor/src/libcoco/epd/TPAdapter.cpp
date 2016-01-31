@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-#include <drag2d.h>
+
 
 namespace libcoco
 {
@@ -45,7 +45,7 @@ void TPAdapter::Load(const Json::Value& value, Entry& entry)
 	wxFileName filename(filepath);
 	filename.MakeAbsolute(m_src_data_dir);
 	filename.Normalize();
-	filepath = d2d::FileHelper::FormatFilepath(filename.GetFullPath().ToStdString());
+	filepath = ee::FileHelper::FormatFilepath(filename.GetFullPath().ToStdString());
 
 	entry.filename = filepath;
 

@@ -10,7 +10,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: d2d::Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_data(sprite.m_data)
 {
@@ -36,7 +36,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->Insert(sprite);
+	ee::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -45,9 +45,9 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
@@ -82,7 +82,7 @@ void Sprite::Store(Json::Value& val) const
 	val["scale9"]["height"] = h;
 }
 
-d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
+ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new SpritePropertySetting(stage, this);
 }
@@ -98,8 +98,8 @@ void Sprite::SetSize(float w, float h)
 	BuildBounding();
 }
 
-void Sprite::Draw(const d2d::Matrix& mt,
-				  const d2d::ColorTrans& color) const
+void Sprite::Draw(const ee::Matrix& mt,
+				  const ee::ColorTrans& color) const
 {
 	m_data.Draw(mt, color);
 }

@@ -124,7 +124,7 @@ void CodeSettingDlg::onSelectSymbolDir(wxCommandEvent& event)
 //  	if (dlg.ShowModal() == wxID_OK)
 //  	{
 //  		std::string path = dlg.GetPath();
-//  		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
+//  		ee::ISymbol* symbol = ee::SymbolMgr::Instance()->getSymbol(path);
 //  		Context::Instance()->symbols.push_back(static_cast<complex::Symbol*>(symbol));
 //  //		if (Context::Instance()->symbol)
 //  			m_symbolPath->SetValue(path);
@@ -149,16 +149,16 @@ void CodeSettingDlg::onSelectSymbolDir(wxCommandEvent& event)
   		for (size_t i = 0, n = files.size(); i < n; ++i)
   		{
   			wxString filepath = files[i];
-  			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex))
+  			if (ee::FileNameParser::isType(filepath, ee::FileNameParser::e_complex))
   			{
-  				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+  				ee::ISymbol* symbol = ee::SymbolMgr::Instance()->getSymbol(filepath);
   				Context::Instance()->symbols.push_back(static_cast<complex::Symbol*>(symbol));
   			}
-  			else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+  			else if (ee::FileNameParser::isType(filepath, ee::FileNameParser::e_anim))
   			{
-  				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+  				ee::ISymbol* symbol = ee::SymbolMgr::Instance()->getSymbol(filepath);
   
-  				d2d::ISprite* child = d2d::SpriteFactory::Instance()->create(symbol);
+  				ee::ISprite* child = ee::SpriteFactory::Instance()->create(symbol);
   				tot->m_sprites.push_back(child);
   			}
   		}

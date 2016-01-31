@@ -137,7 +137,7 @@ void AnimFromLua::UnpackPart(lua_State* L, PackAnimation::Part& part)
 			part.t.bmap = (uint32_t)LuaDataHelper::GetDoubleField(L, "bmap");
 		}
 	} else {
-		throw d2d::Exception("PackAnimation::UnpackFromLua unknown item type.");
+		throw ee::Exception("PackAnimation::UnpackFromLua unknown item type.");
 	}
 }
 

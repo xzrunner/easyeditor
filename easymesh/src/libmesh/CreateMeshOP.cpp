@@ -7,7 +7,7 @@ namespace emesh
 {
 
 CreateMeshOP::CreateMeshOP(StagePanel* stage)
-	: libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>(stage, stage->GetStageImpl(), stage, NULL, new d2d::OneFloatValueStatic(5), NULL)
+	: libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>(stage, stage->GetStageImpl(), stage, NULL, new ee::OneFloatValueStatic(5), NULL)
 	, m_stage(stage)
 {
 	SetLoop(true);
@@ -88,12 +88,12 @@ bool CreateMeshOP::OnMouseRightUp(int x, int y)
 
 bool CreateMeshOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw())
+	if (ee::ZoomViewOP::OnDraw())
 		return true;
 
-	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
+	if (const ee::Image* image = m_stage->GetSymbol()->getImage())
  	{
-		d2d::Matrix mt;
+		ee::Matrix mt;
 		image->Draw(mt);
  	}
 

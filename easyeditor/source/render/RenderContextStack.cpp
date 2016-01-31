@@ -1,10 +1,11 @@
 #include "RenderContextStack.h"
 #include "RenderContext.h"
-#include "DrawCallBatching.h"
 #include "ScreenCache.h"
 #include "ShaderMgr.h"
+#include "EE_DTex.h"
+#include "StageCanvas.h"
 
-#include "view/IStageCanvas.h"
+#include <assert.h>
 
 namespace ee
 {
@@ -24,7 +25,7 @@ RenderContextStack::RenderContextStack()
 {
 }
 
-void RenderContextStack::Push(IStageCanvas* canvas, RenderContext* render)
+void RenderContextStack::Push(StageCanvas* canvas, RenderContext* render)
 {
 	Context ctx;
 	ctx.canvas = canvas;
@@ -46,7 +47,7 @@ void RenderContextStack::Pop()
 
 	int width, height;
 	ctx.render->GetProjection(width, height);
-	DrawCallBatching::Instance()->OnSize(width, height);
+	DTex::Instance()->OnSize(width, height);
 	ScreenCache::Instance()->SetSize(width, height);
 }
 

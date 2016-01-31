@@ -5,7 +5,7 @@
 #include "Sprite.h"
 #include "typedef.h"
 
-#include <drag2d.h>
+
 
 namespace libtexpacker
 {
@@ -24,9 +24,9 @@ public:
 private:
 	int CalTotArea(const std::vector<Sprite>& list) const;
 
-	d2d::TPNode* NewRoot(int w, int h);
+	ee::TPNode* NewRoot(int w, int h);
 
-	bool Insert(d2d::TPNode* root, const libtexpacker::Sprite* sprite, int tex_id = 0) const;
+	bool Insert(ee::TPNode* root, const libtexpacker::Sprite* sprite, int tex_id = 0) const;
 
 	void PackAuto(const std::vector<Sprite>& sprites, int area);
 	void PackSquare(const std::vector<Sprite>& sprites, int area);
@@ -41,11 +41,11 @@ private:
 	class NodeCmp
 	{
 	public:
-		bool operator() (const d2d::TPNode* n0, d2d::TPNode* n1) const;
+		bool operator() (const ee::TPNode* n0, ee::TPNode* n1) const;
 	}; // NodeCmp
 
 private:
-	std::vector<d2d::TPNode*> m_roots;
+	std::vector<ee::TPNode*> m_roots;
 
 }; // MaxRectsBinaryPack2
 

@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_TASK_H_
 #define _EASYPARTICLE3D_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace eparticle3d
@@ -12,7 +12,7 @@ class PropertySettingPanel;
 class StagePanel;
 class ToolbarPanel;
 
-class Task : public d2d::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
@@ -23,9 +23,9 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const {}
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const {}
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 	void StoreAsAnim(const wxString& filepath) const;
 	void StoreAsInvert(const wxString& filepath) const;

@@ -42,7 +42,7 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 	stage->SetSymbol(&symbol);
  	m_stage = stage;
- 	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
+ 	ee::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
  
  	splitter->SetSashGravity(0.85f);
  	splitter->SplitVertically(stage, toolbar);
@@ -59,7 +59,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 
-	d2d::ConfirmDialog dlg(this);
+	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
@@ -67,7 +67,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		FileIO::store(symbol.GetFilepath().c_str(), &symbol);
 		symbol.RefreshThumbnail(filepath);
 
-		d2d::SpriteFactory::Instance()->UpdateBoundings(symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

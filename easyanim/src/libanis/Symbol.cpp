@@ -21,13 +21,13 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -44,7 +44,7 @@ void Symbol::LoadResources()
 
 	m_name = name = value["name"].asString();
 
-	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 
 	int idx = 0;
 	Json::Value temp_val = value["template"][idx++];
@@ -66,7 +66,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), d2d::ReleaseObjectFunctor<libanim::Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), ee::ReleaseObjectFunctor<libanim::Symbol>());
 	m_symbols.clear();
 }
 
@@ -80,22 +80,22 @@ GetSymbolPath(const std::string& dir, const Json::Value& json_val) const
 	std::string filepath = json_val["filepath"].asString();
 	while (true)
 	{
-		if (d2d::FileHelper::IsFileExist(filepath))
+		if (ee::FileHelper::IsFileExist(filepath))
 			break;
 
-		std::string absolute_path = d2d::FileHelper::GetAbsolutePath(dir, filepath);
-		if (d2d::FileHelper::IsFileExist(absolute_path))
+		std::string absolute_path = ee::FileHelper::GetAbsolutePath(dir, filepath);
+		if (ee::FileHelper::IsFileExist(absolute_path))
 		{
 			filepath = absolute_path;
 			break;
 		}
 
 		std::string res_path = m_dirpath + "\\" + filepath;
-		if (!d2d::FileHelper::IsFileExist(res_path)) {
-			absolute_path = d2d::FileHelper::GetAbsolutePath(dir, res_path);
+		if (!ee::FileHelper::IsFileExist(res_path)) {
+			absolute_path = ee::FileHelper::GetAbsolutePath(dir, res_path);
 		}
-		if (!d2d::FileHelper::IsFileExist(absolute_path)) {
-			throw d2d::Exception("File: %s don't exist!", res_path.c_str());
+		if (!ee::FileHelper::IsFileExist(absolute_path)) {
+			throw ee::Exception("File: %s don't exist!", res_path.c_str());
 		}
 
 		filepath = absolute_path;

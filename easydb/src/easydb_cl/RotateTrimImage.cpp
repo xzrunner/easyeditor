@@ -44,11 +44,11 @@ void RotateTrimImage::Run(int argc, char *argv[])
 		return;
 	}
 
-	d2d::ShaderMgr::Instance()->reload();
+	ee::ShaderMgr::Instance()->reload();
 
-	d2d::Snapshoot ss;
+	ee::Snapshoot ss;
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
@@ -65,7 +65,7 @@ const char* RotateTrimImage::GetOutputFileName()
 	return OUTPUT_FILE;
 }
 
-void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
+void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 {
 	std::string output_file = dir + "\\" + OUTPUT_FILE;
 	std::ofstream fout(output_file.c_str(), std::ios::binary);
@@ -75,7 +75,7 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 	}
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
@@ -84,13 +84,13 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->GetImage();
+			ee::Image* image = static_cast<ee::ImageSymbol*>(symbol)->GetImage();
 			int width, height;
-			d2d::Vector center;
+			ee::Vector center;
 			float angle;
 			bool success = GetRotateTrimInfo(image, width, height, center, angle);
 			if (!success || angle == 0) {
@@ -98,22 +98,22 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 				continue;
 			}
 
-			d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 			sprite->SetTransform(center, angle);
 			ss.DrawSprite(sprite, true, width, height);
 
 			sprite->Release();
 			symbol->Release();
 
-			//wxString dir = d2d::FileHelper::getFileDir(filepath);
-			//wxString name = d2d::FileHelper::getFilename(filepath);
+			//wxString dir = ee::FileHelper::getFileDir(filepath);
+			//wxString name = ee::FileHelper::getFilename(filepath);
  		//	wxString outpath = dir + "\\test_" + name + ".png";
  		//	ss.SaveToFile(outpath.ToStdString(), width, height);
 
 			ss.SaveToFile(filepath, width, height);
 
 			// output info
-			wxString path = d2d::FileHelper::GetRelativePath(dir, filepath);
+			wxString path = ee::FileHelper::GetRelativePath(dir, filepath);
 			fout << path << " " << center.x << " " << center.y << " " << angle << "\n";
 		}
 	}
@@ -121,8 +121,8 @@ void RotateTrimImage::RotateTrim(d2d::Snapshoot& ss, const std::string& dir)
 	fout.close();
 }
 
-bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int& height,
-										d2d::Vector& center, float& angle) const
+bool RotateTrimImage::GetRotateTrimInfo(const ee::Image* image, int& width, int& height,
+										ee::Vector& center, float& angle) const
 {
 	eimage::ExtractOutlineRaw raw(*image);
 	raw.CreateBorderLineAndMerge();
@@ -131,8 +131,8 @@ bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 	}
 	raw.CreateBorderConvexHull();
 
-	d2d::Vector bound[4];
-	bool is_rotate = d2d::MinBoundingBox::Do(raw.GetConvexHull(), bound);
+	ee::Vector bound[4];
+	bool is_rotate = ee::MinBoundingBox::Do(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
 	center.x -= image->GetOriginWidth() * 0.5f;
@@ -150,15 +150,15 @@ bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 			}
 		}
 
-		const d2d::Vector& s = bound[left_idx];
-		const d2d::Vector& e = bound[left_idx == 3 ? 0 : left_idx + 1];
-		d2d::Vector right = s;
+		const ee::Vector& s = bound[left_idx];
+		const ee::Vector& e = bound[left_idx == 3 ? 0 : left_idx + 1];
+		ee::Vector right = s;
 		right.x += 1;
-		angle = -d2d::Math2D::GetAngle(s, e, right);
-		center = d2d::Math2D::RotateVector(center, angle);
+		angle = -ee::Math2D::GetAngle(s, e, right);
+		center = ee::Math2D::RotateVector(center, angle);
 
-		width = std::ceil(d2d::Math2D::GetDistance(s, e));
-		height = std::ceil(d2d::Math2D::GetDistance(e, bound[(left_idx+2)%4]));
+		width = std::ceil(ee::Math2D::GetDistance(s, e));
+		height = std::ceil(ee::Math2D::GetDistance(e, bound[(left_idx+2)%4]));
 	} else {
 		angle = 0;
 	}

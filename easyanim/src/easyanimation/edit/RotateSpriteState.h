@@ -1,18 +1,18 @@
 #ifndef _EASYANIM_ROTATE_SPRITE_STATE_H_
 #define _EASYANIM_ROTATE_SPRITE_STATE_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-class RotateSpriteState : public d2d::RotateSpriteState
+class RotateSpriteState : public ee::RotateSpriteState
 {
 public:
-	RotateSpriteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos);
+	RotateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos);
 
 protected:
-	virtual void Rotate(const d2d::Vector& dst);
+	virtual void Rotate(const ee::Vector& dst);
 
 }; // RotateSpriteState
 

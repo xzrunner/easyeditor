@@ -28,19 +28,19 @@ void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
-		const d2d::ImageSymbol* img0 = ocean->GetImage0();
+		const ee::ImageSymbol* img0 = ocean->GetImage0();
 		if (img0) {
 			img0->ReloadTexture();
 		}
-		const d2d::ImageSymbol* img1 = ocean->GetImage1();
+		const ee::ImageSymbol* img1 = ocean->GetImage1();
 		if (img1) {
 			img1->ReloadTexture();
 		}
 	}	
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	clock_t curr = clock();
 	if (m_time == 0) {
@@ -48,7 +48,7 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 		return;
 	}
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
@@ -63,9 +63,9 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	m_time = curr;
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	d2d::Rect ret;
+	ee::Rect ret;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		ret.Combine(m_oceans[i]->GetRegion());
 	}
@@ -84,7 +84,7 @@ void Symbol::LoadResources()
 
 	Clear();
 
-	std::string dir = d2d::FileHelper::GetFileDir(m_filepath).ToStdString();
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath).ToStdString();
 	int i = 0;
 	Json::Value ocean_val = value["ocean"][i++];
 	while (!ocean_val.isNull()) {
@@ -95,9 +95,9 @@ void Symbol::LoadResources()
 
 			m_oceans.push_back(ocean);
 // 			insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
-// 			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));
-// 			if (const d2d::Symbol* tex1 = ocean->GetImage1()) {
-// 				library->AddSymbol(const_cast<d2d::Symbol*>(tex1));
+// 			library->AddSymbol(const_cast<ee::ImageSymbol*>(ocean->GetImage0()));
+// 			if (const ee::Symbol* tex1 = ocean->GetImage1()) {
+// 				library->AddSymbol(const_cast<ee::Symbol*>(tex1));
 // 			}
 // 			toolbar->SetControlersValue(ocean);
 		}
@@ -107,7 +107,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_oceans.begin(), m_oceans.end(), d2d::ReleaseObjectFunctor<OceanMesh>());
+	for_each(m_oceans.begin(), m_oceans.end(), ee::ReleaseObjectFunctor<OceanMesh>());
 	m_oceans.clear();
 }
 

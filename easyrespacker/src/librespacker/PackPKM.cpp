@@ -2,7 +2,7 @@
 #include "Lzma.h"
 #include "typedef.h"
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -124,7 +124,7 @@ void PackPKM::LoadCompressed(const std::string& filename, uint8_t*& buf,
 	uint32_t sz = (width * height) >> 1;
 	buf = new uint8_t[sz];
 	if (!buf) {
-		throw d2d::Exception("Out of memory: PackPKM::LoadCompressed %s \n", filename.c_str());
+		throw ee::Exception("Out of memory: PackPKM::LoadCompressed %s \n", filename.c_str());
 	}
 	fin.read(reinterpret_cast<char*>(buf), sz);
 

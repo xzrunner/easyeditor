@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_EDIT_POLYLINES_OP_H_
 #define _LIBSHAPE_EDIT_POLYLINES_OP_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -9,10 +9,10 @@ namespace libshape
 class ChainShape;
 class EditPolylinesCMPT;
 
-class EditPolylinesOP : public d2d::SelectShapesOP
+class EditPolylinesOP : public ee::SelectShapesOP
 {
 public:
-	EditPolylinesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
+	EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
 		EditPolylinesCMPT* cmpt);
 
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -29,13 +29,13 @@ private:
 	void clearBuffer();
 
 private:
-	class UpdateChainVisitor : public d2d::Visitor
+	class UpdateChainVisitor : public ee::Visitor
 	{
 	public:
 		virtual void Visit(Object* object, bool& next);
 	}; // UpdateChainVisitor
 
-	class UpdateBufferVisitor : public d2d::Visitor
+	class UpdateBufferVisitor : public ee::Visitor
 	{
 	public:
 		UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer);
@@ -47,15 +47,15 @@ private:
 
 	}; // UpdateBufferVisitor
 
-	class OffsetVisitor : public d2d::Visitor
+	class OffsetVisitor : public ee::Visitor
 	{
 	public:
-		OffsetVisitor(const d2d::Vector& offset);
+		OffsetVisitor(const ee::Vector& offset);
 
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
-		const d2d::Vector& m_offset;
+		const ee::Vector& m_offset;
 
 	}; // OffsetVisitor
 
@@ -64,7 +64,7 @@ private:
 
 	std::map<ChainShape*, ChainShape*> m_simplifyBuffer;
 
-	d2d::Vector m_lastPos;
+	ee::Vector m_lastPos;
 
 	bool m_bDirty;
 

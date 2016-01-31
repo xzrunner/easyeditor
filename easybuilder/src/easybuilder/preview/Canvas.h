@@ -2,7 +2,7 @@
 #ifndef EBUILDER_PREVIEW_CANVAS_H
 #define EBUILDER_PREVIEW_CANVAS_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -12,7 +12,7 @@ namespace ebuilder
 	{
 		class Panel;
 
-		class Canvas : public d2d::OrthoCanvas
+		class Canvas : public ee::OrthoCanvas
 		{
 		public:
 			Canvas(Panel* panel, LibraryPanel* libraryPanel);

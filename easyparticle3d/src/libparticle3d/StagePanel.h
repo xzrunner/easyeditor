@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_STAGEPANEL_H_
 #define _EASYPARTICLE3D_STAGEPANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
@@ -9,7 +9,7 @@ namespace eparticle3d
 class LibraryPanel;
 class ParticleSystem;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -18,8 +18,8 @@ public:
 
 	virtual bool Update(int version);
 
-	void SetPSMat(const d2d::Vector& pos);
-	const d2d::Matrix& GetPSMat() const { return m_ps_mat; }
+	void SetPSMat(const ee::Vector& pos);
+	const ee::Matrix& GetPSMat() const { return m_ps_mat; }
 
 private:
 	void UpdateControl();
@@ -30,7 +30,7 @@ public:
 	float xRot, yRot;
 
 private:
-	d2d::Matrix m_ps_mat;
+	ee::Matrix m_ps_mat;
 
 }; // StagePanel
 

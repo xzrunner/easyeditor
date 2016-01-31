@@ -1,7 +1,7 @@
 #ifndef _LR_LIBRARY_PANEL_H_
 #define _LR_LIBRARY_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "dataset/layer_type.h"
 
@@ -12,7 +12,7 @@ class Layer;
 class StagePanel;
 class LibraryPage;
 
-class LibraryPanel : public d2d::LibraryPanel
+class LibraryPanel : public ee::LibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);
@@ -26,16 +26,16 @@ public:
 	void InitFromLayers(const std::vector<Layer*>& layers);
 	void LoadSymbolFromLayer();
 
-	void SetViewlist(d2d::ViewlistPanel* viewlist) {
+	void SetViewlist(ee::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;
 	}
-	void SetGroupTree(d2d::GroupTreePanel* grouptree) {
+	void SetGroupTree(ee::GroupTreePanel* grouptree) {
 		m_grouptree = grouptree;
 	}
 	void SetStagePanel(StagePanel* stage) {
 		m_stage = stage;
 	}
-	void InitPages(StagePanel* stage, d2d::PropertySettingPanel* property);
+	void InitPages(StagePanel* stage, ee::PropertySettingPanel* property);
 
 	void Refresh();
 
@@ -53,8 +53,8 @@ private:
 	void CharHook(wxKeyEvent& event);
 
 private:
-	d2d::ViewlistPanel* m_viewlist;
-	d2d::GroupTreePanel* m_grouptree;
+	ee::ViewlistPanel* m_viewlist;
+	ee::GroupTreePanel* m_grouptree;
 
 	StagePanel* m_stage;
 

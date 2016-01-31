@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace lr { class Grids; }
 
@@ -16,7 +16,7 @@ public:
 	LRJsonPacker() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -37,7 +37,7 @@ private:
 		const char* name, Json::Value& out_val);
 	void ParserShapeFromShape(const Json::Value& src_val, const lr::Grids& grids, bool force_grids,
 		const char* name, Json::Value& out_val);	
-	void ParserShape(d2d::Shape* shape, const d2d::Vector& offset, float angle,
+	void ParserShape(ee::Shape* shape, const ee::Vector& offset, float angle,
 		const lr::Grids& grids, bool force_grids, Json::Value& out_val);
 	
 	void ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);

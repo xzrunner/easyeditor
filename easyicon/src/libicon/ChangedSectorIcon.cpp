@@ -4,7 +4,7 @@ namespace eicon
 {
 
 ChangedSectorIcon::ChangedSectorIcon()
-	: m_min(d2d::PI * 0.5f)
+	: m_min(ee::PI * 0.5f)
 	, m_max(0)
 {
 }
@@ -17,7 +17,7 @@ void ChangedSectorIcon::StoreToFile(Json::Value& value) const
 {
 }
 
-void ChangedSectorIcon::GetBound(float process, d2d::Vector bound[4]) const
+void ChangedSectorIcon::GetBound(float process, ee::Vector bound[4]) const
 {
 	bound[0].Set(0, 0);
 	bound[1].Set(0, 1);

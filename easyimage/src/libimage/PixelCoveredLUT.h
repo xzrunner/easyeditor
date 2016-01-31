@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_PIXEL_COVERED_LUT_H_
 #define _EASYIMAGE_PIXEL_COVERED_LUT_H_
 
-#include <drag2d.h>
+
 
 #include "Rect.h"
 

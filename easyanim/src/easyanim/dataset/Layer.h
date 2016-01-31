@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -25,7 +25,7 @@ namespace eanim
 		const std::map<int, KeyFrame*>& getAllFrames() const;
 
 		bool insertSprite(Sprite* sprite, int currFrame);
-		bool removeSprite(d2d::ISprite* sprite);
+		bool removeSprite(ee::ISprite* sprite);
 
 		KeyFrame* getCurrKeyFrame(int currFrame);
 		KeyFrame* getNextKeyFrame(int currFrame);

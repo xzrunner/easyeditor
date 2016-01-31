@@ -18,19 +18,19 @@ void BruteForce::Draw() const
 	for (int y = 0; y < m_data.size - 1; ++y)
 	{
 		int size = (m_data.size - 1) * 2;
-		std::vector<d2d::Colorf> colors;
+		std::vector<ee::Colorf> colors;
 		colors.reserve(size);
 		std::vector<vec3> vertices;
 		vertices.reserve(size);
 		for (int x = 0; x < m_data.size - 1; ++x)
 		{
 			col = GetTrueHeightAtPoint(x, y) / 255.0f;
-			colors.push_back(d2d::Colorf(col, col, col));
+			colors.push_back(ee::Colorf(col, col, col));
 			height = GetScaledHeightAtPoint(x, y);
 			vertices.push_back(vec3(scale*x, scale*y, height));
 
 			col = GetTrueHeightAtPoint(x, y+1) / 255.0f;
-			colors.push_back(d2d::Colorf(col, col, col));
+			colors.push_back(ee::Colorf(col, col, col));
 			height = GetScaledHeightAtPoint(x, y+1);
 			vertices.push_back(vec3(scale*x, scale*(y+1), height));
 		}

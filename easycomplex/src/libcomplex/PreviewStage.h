@@ -1,21 +1,21 @@
 #ifndef _EASYCOMPLEX_PREVIEW_STAGE_H_
 #define _EASYCOMPLEX_PREVIEW_STAGE_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
 
-class PreviewStage : public d2d::EditPanel
+class PreviewStage : public ee::EditPanel
 {
 public:
 	PreviewStage(wxWindow* parent, wxTopLevelWindow* frame,
-		d2d::PlayControl& control);
+		ee::PlayControl& control);
 	
 	virtual bool Update(int version);
 	
 private:
-	d2d::PlayControl& m_control;
+	ee::PlayControl& m_control;
 
 }; // PreviewStage
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
-	class LibraryComplexList : public d2d::LibraryList
+	class LibraryComplexList : public ee::LibraryList
 	{
 	public:
 		LibraryComplexList(wxWindow* parent);

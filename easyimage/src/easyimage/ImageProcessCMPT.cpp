@@ -9,15 +9,15 @@ namespace eimage
 
 ImageProcessCMPT::ImageProcessCMPT(wxWindow* parent, const wxString& name, 
 								   StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_edge_shader(NULL)
 {
 //	m_editOP = new ImageProcessOP(stage);
 
-	m_editOP = new d2d::ZoomViewOP(stage, stage->GetStageImpl(), true);
+	m_editOP = new ee::ZoomViewOP(stage, stage->GetStageImpl(), true);
 }
 
-wxSizer* ImageProcessCMPT::initLayout()
+wxSizer* ImageProcessCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	{
@@ -67,89 +67,89 @@ wxSizer* ImageProcessCMPT::initLayout()
 
 void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 {
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	d2d::SpriteShader* shader = new d2d::SpriteShader;
+	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+	ee::SpriteShader* shader = new ee::SpriteShader;
 	try {
 		shader->Load();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 {
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 	m_edge_shader = new EdgeDetectionShader;
 	try {
 		m_edge_shader->Load();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(m_edge_shader);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnSetEdgeBlend(wxScrollEvent& event)
 {
 	if (m_edge_shader) {
-		d2d::ShaderMgr::Instance()->sprite();
+		ee::ShaderMgr::Instance()->sprite();
 		m_edge_shader->SetBlend(event.GetInt() * 0.01f);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 {
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 	ReliefShader* shader = new ReliefShader;
 	try {
 		shader->Load();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
 {
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 	OutlineShader* shader = new OutlineShader;
 	try {
 		shader->Load();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 {
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 	m_blur_shader = new BlurShader;
 	try {
 		m_blur_shader->Load();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(m_blur_shader);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ImageProcessCMPT::OnSetBlurRadius(wxScrollEvent& event)
 {
 	if (m_blur_shader) {
-		d2d::ShaderMgr::Instance()->sprite();
+		ee::ShaderMgr::Instance()->sprite();
 		m_blur_shader->SetRadius(event.GetInt() * 0.1f);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

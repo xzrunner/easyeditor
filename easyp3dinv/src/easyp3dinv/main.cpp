@@ -7,7 +7,7 @@ IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-	d2d::Frame* frame = new d2d::Frame("EasyP3DInv", ep3dinv::FILE_TAG);
+	ee::Frame* frame = new ee::Frame("EasyP3DInv", ep3dinv::FILE_TAG);
 	ep3dinv::Task* task = new ep3dinv::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

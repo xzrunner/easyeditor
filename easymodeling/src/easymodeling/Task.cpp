@@ -14,13 +14,13 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 
 	m_parent->SetTitle("EasyMoodeling");
@@ -29,7 +29,7 @@ Task::~Task()
 void Task::loadFromFile(const char* filename)
 {
 	if (!wxFileName::FileExists(filename)) {
-		throw d2d::Exception("File: %s don't exist!", filename);
+		throw ee::Exception("File: %s don't exist!", filename);
 	}
   	FileIO::load(filename);
 }
@@ -41,7 +41,7 @@ void Task::storeToFile(const char* filename) const
 
 void Task::clear()
 {
-	d2d::ClearPanelSJ::Instance()->Clear();
+	ee::ClearPanelSJ::Instance()->Clear();
 }
 
 void Task::onPreview() const
@@ -50,9 +50,9 @@ void Task::onPreview() const
 	dlg.ShowModal();
 }
 
-d2d::IStageCanvas* Task::getCanvas() const
+ee::StageCanvas* Task::getCanvas() const
 {
-	if (d2d::EditPanel* stage = Context::Instance()->stage)
+	if (ee::EditPanel* stage = Context::Instance()->stage)
 		return stage->GetCanvas();
 	else
 		return NULL;
@@ -78,7 +78,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	context->property->SetPropertySetting(new WorldPropertySetting(context->stage->GetStageImpl()));
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
 	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);

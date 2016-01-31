@@ -3,28 +3,28 @@
 namespace ecomplex
 {
 
-SphereRotateState::SphereRotateState(d2d::EditPanelImpl* stage, const d2d::Vector& first_pos,
+SphereRotateState::SphereRotateState(ee::EditPanelImpl* stage, const ee::Vector& first_pos,
 									 Quaternion& dir)
 	: m_stage(stage)
 	, m_dir(dir)
 {
-	d2d::Vector p = m_stage->TransPosProjToScr(first_pos);
+	ee::Vector p = m_stage->TransPosProjToScr(first_pos);
 	m_last_pos.x = p.x;
 	m_last_pos.y = p.y;
 }
 
-void SphereRotateState::OnMouseRelease(const d2d::Vector& pos)
+void SphereRotateState::OnMouseRelease(const ee::Vector& pos)
 {
 	m_last_pos.x = m_last_pos.y = INT_MAX;
 }
 
-bool SphereRotateState::OnMouseDrag(const d2d::Vector& pos)
+bool SphereRotateState::OnMouseDrag(const ee::Vector& pos)
 {
 	if (m_last_pos.x == INT_MAX || m_last_pos.y == INT_MAX)	 {
 		return false;
 	}
 
-	d2d::Vector p = m_stage->TransPosProjToScr(pos);
+	ee::Vector p = m_stage->TransPosProjToScr(pos);
 
 	vec3 start = MapToSphere(m_last_pos.x, m_last_pos.y),
 		end = MapToSphere(p.x, p.y);

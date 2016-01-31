@@ -3,8 +3,8 @@
 namespace libshape
 {
 
-ColorMaterial::ColorMaterial(const std::vector<d2d::Vector>& vertices, 
-							 const d2d::Colorf& color)
+ColorMaterial::ColorMaterial(const std::vector<ee::Vector>& vertices, 
+							 const ee::Colorf& color)
 	: m_color(color)
 {
 	BuildBegin(vertices);
@@ -19,30 +19,30 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 	return val;
 }
 
-void ColorMaterial::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
+void ColorMaterial::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
-	d2d::Colorf c = d2d::col_mul(m_color, color.multi);
-	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, c);
+	ee::Colorf c = ee::col_mul(m_color, color.multi);
+	ee::PrimitiveDraw::DrawTriangles(mt, m_tris, c);
 
-	//d2d::ShaderMgr::Instance()->RVG();
-	//d2d::Colorf c = d2d::cMul(m_color, color.multi);
-	//d2d::PrimitiveDrawRVG::SetColor(d2d::trans_color2int(c, d2d::PT_ABGR));
-	//d2d::PrimitiveDrawRVG::Triangles(mt, m_tris);
+	//ee::ShaderMgr::Instance()->RVG();
+	//ee::Colorf c = ee::cMul(m_color, color.multi);
+	//ee::PrimitiveDrawRVG::SetColor(ee::trans_color2int(c, ee::PT_ABGR));
+	//ee::PrimitiveDrawRVG::Triangles(mt, m_tris);
 }
 
 void ColorMaterial::BuildEnd()
 {
 	m_tris.clear();
 
-	std::vector<d2d::Vector> outline;
-	d2d::Math2D::RemoveDuplicatePoints(m_outline, outline);
+	std::vector<ee::Vector> outline;
+	ee::Math2D::RemoveDuplicatePoints(m_outline, outline);
 
 	if (!m_segments.empty()) {
-		d2d::Triangulation::Lines(m_outline, m_segments, m_tris);
+		ee::Triangulation::Lines(m_outline, m_segments, m_tris);
 	} else if (!m_holes.empty()) {
-		d2d::Triangulation::Holes(m_outline, m_holes, m_tris);
+		ee::Triangulation::Holes(m_outline, m_holes, m_tris);
 	} else {
-		d2d::Triangulation::Normal(m_outline, m_tris);
+		ee::Triangulation::Normal(m_outline, m_tris);
 	}
 }
 

@@ -137,7 +137,7 @@ void ShapeShader::SetModelView(const mat4& mat)
 }
 
 void ShapeShader::Draw(int type, const float* vertices, int count, 
-					   const d2d::Colorf& col, bool force)
+					   const ee::Colorf& col, bool force)
 {
 	if (m_count + count >= MAX_VERTEX) {
 		wxLogDebug(_T("ShapeShader Commit count to max"));
@@ -154,7 +154,7 @@ void ShapeShader::Draw(int type, const float* vertices, int count,
 }
 
 void ShapeShader::Draw(int type, const float* vertices, int count, 
-					   d2d::Colorf* cols, bool force)
+					   ee::Colorf* cols, bool force)
 {
 	if (m_count + count >= MAX_VERTEX) {
 		wxLogDebug(_T("ShapeShader Commit count to max"));
@@ -171,7 +171,7 @@ void ShapeShader::Draw(int type, const float* vertices, int count,
 }
 
 void ShapeShader::Draw(int type, const float* vertices, int vcount, 
-					   const d2d::Colorf& col, unsigned short* indices, int icount)
+					   const ee::Colorf& col, unsigned short* indices, int icount)
 {
 	if (vcount >= MAX_VERTEX) {
 		return;
@@ -209,7 +209,7 @@ void ShapeShader::CopyVertex(const float* vertices, int count, int color)
 	m_count += count;
 }
 
-void ShapeShader::CopyVertex(const float* vertices, int count, d2d::Colorf* cols)
+void ShapeShader::CopyVertex(const float* vertices, int count, ee::Colorf* cols)
 {
  	float* ptr_dst = m_vb + VERTEX_FLOAT_SIZE * m_count;
  	const float* ptr_src = &vertices[0];
@@ -242,7 +242,7 @@ void ShapeShader::Commit(int type, unsigned short* indices, int count)
 	m_count = 0;
 }
 
-int ShapeShader::PackColor(const d2d::Colorf& col)
+int ShapeShader::PackColor(const ee::Colorf& col)
 {
 	int color = ((int)(col.a * 255 + 0.5f) << 24) | 
 				((int)(col.b * 255 + 0.5f) << 16) | 

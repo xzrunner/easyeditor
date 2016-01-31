@@ -2,7 +2,7 @@
 #define _EASYP3DINV_PARTICLE_H_
 
 #include <json/json.h>
-#include <drag2d.h>
+
 
 namespace ep3dinv
 {
@@ -14,7 +14,7 @@ public:
 	~Particle();
 
 	void Update(float dt, float gravity);
-	void Draw(const d2d::Matrix& mt) const;
+	void Draw(const ee::Matrix& mt) const;
 
 	void LoadFromFile(const Json::Value& val);
 
@@ -36,7 +36,7 @@ private:
 	float m_rotate;
 	float m_angle;
 
-	d2d::Symbol* m_symbol;
+	ee::Symbol* m_symbol;
 	float m_start_scale, m_end_scale; 
 
 private:

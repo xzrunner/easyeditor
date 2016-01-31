@@ -1,14 +1,14 @@
 #ifndef _LR_DATA_UTILITY_H_
 #define _LR_DATA_UTILITY_H_
 
-#include <drag2d.h>
+
 
 namespace etexture { class Sprite; }
 
 namespace lr
 {
 
-void create_shapes_from_etxture(etexture::Sprite* spr, std::vector<d2d::Shape*>& shapes);
+void create_shapes_from_etxture(etexture::Sprite* spr, std::vector<ee::Shape*>& shapes);
 
 }
 

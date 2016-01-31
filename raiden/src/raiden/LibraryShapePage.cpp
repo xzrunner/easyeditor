@@ -8,17 +8,17 @@
 using namespace raiden;
 
 LibraryShapePage::LibraryShapePage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, "Shape")
+	: ee::ILibraryPage(parent, "Shape")
 {
 	m_list = new LibraryShapeList(this);
 	initLayout();
 }
 
-bool LibraryShapePage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryShapePage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	const wxString& filepath = symbol->getFilepath();
-	wxString ext = d2d::FilenameTools::getExtension(filepath).Lower();
-	return ext == "json" && d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_shape);
+	wxString ext = ee::FilenameTools::getExtension(filepath).Lower();
+	return ext == "json" && ee::FileNameParser::isType(filepath, ee::FileNameParser::e_shape);
 }
 
 void LibraryShapePage::initLayout(bool draggable /*= true*/)
@@ -51,7 +51,7 @@ void LibraryShapePage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+			ee::ISymbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
 			symbol->release();
 		}

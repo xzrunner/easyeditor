@@ -1,7 +1,7 @@
 #ifndef _EASYICON_EDIT_RECT_OP_H_
 #define _EASYICON_EDIT_RECT_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eicon
 {
@@ -9,7 +9,7 @@ namespace eicon
 class RectIcon;
 class StagePanel;
 
-class EditRectOP : public d2d::ZoomViewOP
+class EditRectOP : public ee::ZoomViewOP
 {
 public:
 	EditRectOP(StagePanel* stage);

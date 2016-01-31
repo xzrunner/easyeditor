@@ -1,21 +1,21 @@
 #ifndef _LIBANIMATION_SYMBOL_H_
 #define _LIBANIMATION_SYMBOL_H_
 
-#include <drag2d.h>
+
 
 namespace libanim
 {
 
 class LayersLoader;
 
-class Symbol : public d2d::Symbol
+class Symbol : public ee::Symbol
 {
 public:
 	struct Frame
 	{
 //		int id;
 		int index;
-		std::vector<d2d::Sprite*> sprites;
+		std::vector<ee::Sprite*> sprites;
 		bool bClassicTween;
 	};
 
@@ -41,9 +41,9 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
+		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	size_t getMaxFrameIndex() const;
 
@@ -58,7 +58,7 @@ public:
 
 	void LoadFromFile(const LayersLoader& loader);
 
-	static d2d::Symbol* Create() { return new Symbol(); }
+	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();
@@ -70,7 +70,7 @@ public:
 	std::vector<Layer*> m_layers;
 
 private:
-	d2d::Rect m_rect;
+	ee::Rect m_rect;
 
 	int m_fps;
 

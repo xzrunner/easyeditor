@@ -6,7 +6,7 @@
 #include "Context.h"
 #include "../StagePanel.h"
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
@@ -17,7 +17,7 @@ namespace complex
 	END_EVENT_TABLE()
 
 	Dialog::Dialog(wxWindow* parent, complex::Symbol* complexSymbol,
-					d2d::PropertySettingPanel* propertyPanel)
+					ee::PropertySettingPanel* propertyPanel)
  		: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
 		wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 		, m_complexSymbol(complexSymbol)
@@ -44,24 +44,24 @@ namespace complex
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
-	//	d2d::LibraryPanel* libraryPanel = new d2d::LibraryPanel(this);
-	//	libraryPanel->addPage(new d2d::LibraryImagePage(libraryPanel->getNotebook()));
-	//	libraryPanel->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	//	ee::LibraryPanel* libraryPanel = new ee::LibraryPanel(this);
+	//	libraryPanel->addPage(new ee::LibraryImagePage(libraryPanel->getNotebook()));
+	//	libraryPanel->loadFromSymbolMgr(*ee::SymbolMgr::Instance());
 
  		LibraryPanel* libraryPanel = new LibraryPanel(this);
  		{
- 			d2d::ILibraryPage* page = Context::Instance()->library->getImagePage();
+ 			ee::ILibraryPage* page = Context::Instance()->library->getImagePage();
  			int index = 0;
- 			while (d2d::ISymbol* symbol = page->getSymbol(index++))
+ 			while (ee::ISymbol* symbol = page->getSymbol(index++))
  				libraryPanel->getImagePage()->getList()->insert(symbol);
  		}
  		{
- 			d2d::ILibraryPage* page = Context::Instance()->library->getComplexPage();
+ 			ee::ILibraryPage* page = Context::Instance()->library->getComplexPage();
  			int index = 0;
- 			while (d2d::ISymbol* symbol = page->getSymbol(index++))
+ 			while (ee::ISymbol* symbol = page->getSymbol(index++))
  				libraryPanel->getComplexPage()->getList()->insert(symbol);			
  		}
-//		libraryPanel->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+//		libraryPanel->loadFromSymbolMgr(*ee::SymbolMgr::Instance());
 
 		sizer->Add(libraryPanel, 1, wxEXPAND);
 
@@ -76,10 +76,10 @@ namespace complex
 	void Dialog::refreshSpritesBounding()
 	{
 		std::vector<complex::Sprite*> sprites;
-		Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<complex::Sprite>(sprites));
+		Context::Instance()->stage->traverseSprites(ee::FetchAllVisitor<complex::Sprite>(sprites));
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
-			d2d::ISprite* sprite = sprites[i];
+			ee::ISprite* sprite = sprites[i];
 			if (&sprite->getSymbol() == m_complexSymbol)
 				sprite->buildBounding();
 		}

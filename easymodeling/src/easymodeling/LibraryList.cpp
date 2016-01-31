@@ -6,8 +6,8 @@
 
 using namespace emodeling;
 
-LibraryList::LibraryList(d2d::ILibraryPage* page)
-	: d2d::LibraryList(page)
+LibraryList::LibraryList(ee::LibraryPage* page)
+	: ee::LibraryList(page)
 {
 }
 

@@ -1,7 +1,7 @@
 #ifndef _EASYDB_DISTANCE_FIELD_FONT_PARSER_H_
 #define _EASYDB_DISTANCE_FIELD_FONT_PARSER_H_
 
-#include <drag2d.h>
+
 
 namespace edb
 {

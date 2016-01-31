@@ -1,7 +1,7 @@
 #ifndef _EPHYSICS_PASTE_SYMBOL_PHYSICS_CMPT_H_
 #define _EPHYSICS_PASTE_SYMBOL_PHYSICS_CMPT_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
@@ -9,16 +9,16 @@ namespace ephysics
 
 class PhysicsPanelImpl;
 
-class PasteSymbolPhysicsCMPT : public d2d::AbstractEditCMPT
+class PasteSymbolPhysicsCMPT : public ee::EditCMPT
 {
 public:
-	PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiSpritesImpl* spritesImpl, d2d::LibraryPanel* libraryPanel,
+	PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::MultiSpritesImpl* spritesImpl, ee::LibraryPanel* libraryPanel,
 		PhysicsPanelImpl* physicsImpl, b2World* world, b2World* worldReverse,
-		float* pScale = NULL, d2d::PasteSymbolRandomWidget* randomWidget = NULL);
+		float* pScale = NULL, ee::PasteSymbolRandomWidget* randomWidget = NULL);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void onChangeGravity(wxCommandEvent& event);

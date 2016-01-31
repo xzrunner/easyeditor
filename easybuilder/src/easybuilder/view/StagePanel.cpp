@@ -46,7 +46,7 @@ void StagePanel::updateCodePages(SceneItem* scene) const
 	{
 		std::vector<SceneItem*> scenes;
 		Context::Instance()->library->getSceneList()->traverse(
-			d2d::FetchAllVisitor<SceneItem>(scenes));
+			ee::FetchAllVisitor<SceneItem>(scenes));
 		for (size_t i = 0, n = scenes.size(); i < n; ++i)
 			builder->updatePage(*scenes[i]);
 	}

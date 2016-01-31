@@ -31,7 +31,7 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 	}
 
 	int layer_idx = layer_sz - row - 1;
-	if (d2d::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
+	if (ee::GetKeyStateSJ::Instance()->Query(WXK_SHIFT)) {
 		UpdateRegion(layer_idx, col);
 		SetSelectedRegionSJ::Instance()->Set(m_col);
 	} else {
@@ -66,9 +66,9 @@ void KeysContentEdit::CopySelection()
 		Json::Value k_val;
 		k_val["distance"] = itr->first - last_frame;
 
-		const std::vector<d2d::Sprite*>& sprites = itr->second->GetAllSprites();
+		const std::vector<ee::Sprite*>& sprites = itr->second->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			d2d::Sprite* spr = sprites[i];
+			ee::Sprite* spr = sprites[i];
 			Json::Value s_val;
 			s_val["filename"] = spr->GetSymbol().GetFilepath();
 			spr->Store(s_val);	
@@ -142,9 +142,9 @@ void KeysContentEdit::PasteSelection()
 			const Json::Value& s_val = k_val["sprite"][i_spr];
 			
 			std::string filepath = s_val["filename"].asString();
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
-			d2d::Sprite* spr = d2d::SpriteFactory::Instance()->Create(symbol);
+			ee::Sprite* spr = ee::SpriteFactory::Instance()->Create(symbol);
 			spr->Load(s_val);
 			frame->Insert(spr);
 			spr->Release();
@@ -154,7 +154,7 @@ void KeysContentEdit::PasteSelection()
 		layer->InsertKeyFrame(frame);
 	}
 
-	d2d::RefreshPanelSJ::Instance()->Refresh();
+	ee::RefreshPanelSJ::Instance()->Refresh();
 
 	EnableObserve(true);
 
@@ -172,8 +172,8 @@ void KeysContentEdit::DeleteSelection()
  	int index = DataMgr::Instance()->GetLayers().Size() - m_row - 1;
  	Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(index);
 	if (layer) {
-		d2d::AbstractAtomicOP* aop = layer->RemoveFrameRegion(m_col_min + 1, m_col_max + 1);
-		d2d::EditAddRecordSJ::Instance()->Add(aop);
+		ee::AtomicOP* aop = layer->RemoveFrameRegion(m_col_min + 1, m_col_max + 1);
+		ee::EditAddRecordSJ::Instance()->Add(aop);
 	}
 }
 

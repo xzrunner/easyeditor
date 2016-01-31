@@ -81,7 +81,7 @@ void ViewMgr::UpdateViewlist(KeyFrame* frame)
 		return;
 	}
 
-	const std::vector<d2d::Sprite*>& sprites = frame->GetAllSprites();
+	const std::vector<ee::Sprite*>& sprites = frame->GetAllSprites();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		viewlist->Insert(sprites[i]);
 	}

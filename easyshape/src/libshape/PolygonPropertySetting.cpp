@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-PolygonPropertySetting::PolygonPropertySetting(d2d::EditPanelImpl* stage, 
+PolygonPropertySetting::PolygonPropertySetting(ee::EditPanelImpl* stage, 
 											   PolygonShape* poly)
-	: IPropertySetting("Polygon")
+	: PropertySetting("Polygon")
 	, m_stage(stage)
 {
 	poly->Retain();
@@ -32,14 +32,14 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_poly->GetRect().CenterX();
-		m_poly->Translate(d2d::Vector(dx, 0.0f));
+		m_poly->Translate(ee::Vector(dx, 0.0f));
 		m_poly->refresh();
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_poly->GetRect().CenterY();
-		m_poly->Translate(d2d::Vector(0.0f, dy));
+		m_poly->Translate(ee::Vector(0.0f, dy));
 		m_poly->refresh();
 	}
 	else if (name == wxT("Mirror"))
@@ -48,7 +48,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		if (type == 1)
 		{
 			float x = m_poly->GetRect().CenterX();
-			std::vector<d2d::Vector> vertices = m_poly->GetVertices();
+			std::vector<ee::Vector> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
 			m_poly->Load(vertices);
@@ -57,7 +57,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		else if (type == 2)
 		{
 			float y = m_poly->GetRect().CenterY();
-			std::vector<d2d::Vector> vertices = m_poly->GetVertices();
+			std::vector<ee::Vector> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
 			m_poly->Load(vertices);
@@ -70,7 +70,7 @@ void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wx
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

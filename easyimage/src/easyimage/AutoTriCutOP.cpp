@@ -3,18 +3,18 @@
 namespace eimage
 {
 
-AutoTriCutOP::AutoTriCutOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
-	: d2d::ZoomViewOP(wnd, stage, true)
+AutoTriCutOP::AutoTriCutOP(wxWindow* wnd, ee::EditPanelImpl* stage)
+	: ee::ZoomViewOP(wnd, stage, true)
 {
 }
 
 bool AutoTriCutOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
-	d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	setting.open_image_edge_clip = false;
 	setting.linear_filter = false;
 
@@ -23,15 +23,15 @@ bool AutoTriCutOP::OnActive()
 
 bool AutoTriCutOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) {
+	if (ee::ZoomViewOP::OnDraw()) {
 		return true;
 	}
 
-// 	d2d::PrimitiveDraw::DrawPolyline(m_raw_bound_line, d2d::LIGHT_RED, false);
-// 	d2d::PrimitiveDraw::DrawPoints(m_raw_bound_points, d2d::LIGHT_RED, 5);
+// 	ee::PrimitiveDraw::DrawPolyline(m_raw_bound_line, ee::LIGHT_RED, false);
+// 	ee::PrimitiveDraw::DrawPoints(m_raw_bound_points, ee::LIGHT_RED, 5);
 
- 	d2d::PrimitiveDraw::DrawPolyline(m_raw_bound_line_merged, d2d::LIGHT_RED, false);
- 	d2d::PrimitiveDraw::DrawPolyline(m_fine_bound_line, d2d::LIGHT_BLUE, true);
+ 	ee::PrimitiveDraw::DrawPolyline(m_raw_bound_line_merged, ee::LIGHT_RED, false);
+ 	ee::PrimitiveDraw::DrawPolyline(m_fine_bound_line, ee::LIGHT_BLUE, true);
 
 	return false;
 }

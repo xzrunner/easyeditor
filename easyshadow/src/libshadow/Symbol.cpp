@@ -12,7 +12,7 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::Symbol(s)
+	: ee::Symbol(s)
 {
 	m_shadow = new Shadow(SOFT_SHADOW_RADIUS);
 }
@@ -33,20 +33,20 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (m_shadow) {
 		m_shadow->Draw(mt, color.multi.a);
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
 	if (m_shadow) {
 		return m_shadow->GetRegion();
 	} else {
-		return d2d::Rect(200, 200);
+		return ee::Rect(200, 200);
 	}
 }
 

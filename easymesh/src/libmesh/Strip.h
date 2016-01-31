@@ -14,7 +14,7 @@ class Strip : public EditShape
 public:
 	Strip();
 	Strip(const Strip& strip);
-	Strip(const d2d::Image& image);
+	Strip(const ee::Image& image);
 
 	//
 	// Cloneable interface
@@ -32,14 +32,14 @@ public:
 	//
 	// EditShape interface
 	//
-	virtual void InsertNode(const d2d::Vector& p);
-	virtual void RemoveNode(const d2d::Vector& p);
-	virtual d2d::Vector* FindNode(const d2d::Vector& p);
-	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst);
+	virtual void InsertNode(const ee::Vector& p);
+	virtual void RemoveNode(const ee::Vector& p);
+	virtual ee::Vector* FindNode(const ee::Vector& p);
+	virtual void MoveNode(ee::Vector* src, const ee::Vector& dst);
 
-	virtual void TraverseShape(d2d::Visitor& visitor) const {}
-	virtual bool RemoveShape(d2d::Shape* shape) { return false; }
-	virtual bool InsertShape(d2d::Shape* shape) { return false; }
+	virtual void TraverseShape(ee::Visitor& visitor) const {}
+	virtual bool RemoveShape(ee::Shape* shape) { return false; }
+	virtual bool InsertShape(ee::Shape* shape) { return false; }
 	virtual bool ClearShape() { return false; }
 
 	virtual void Reset();
@@ -53,43 +53,43 @@ private:
 	void RefreshTriangles();
 	void CopyTriangles(const Strip& strip);
 
-	void AbsorbNodeToRegion(d2d::Vector& node);
+	void AbsorbNodeToRegion(ee::Vector& node);
 	void RemoveCornerFromNodes();
 
-	void GetTransList(std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list) const;
+	void GetTransList(std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list) const;
 
-	static void TranslateNode(Node* node, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list);
-	static void TranslateNode(d2d::Vector& node, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list);
+	static void TranslateNode(Node* node, const std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list);
+	static void TranslateNode(ee::Vector& node, const std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list);
 
-	static void MapUV2XY(const std::vector<d2d::Vector>& nodes, int index, const d2d::Vector& pos, 
-		std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list);
+	static void MapUV2XY(const std::vector<ee::Vector>& nodes, int index, const ee::Vector& pos, 
+		std::vector<std::pair<ee::Vector, ee::Vector> >& trans_list);
 
 private:
 	class NodeList
 	{
 	public:
-		void Reset(const d2d::Vector& begin,
-			const d2d::Vector& end);
+		void Reset(const ee::Vector& begin,
+			const ee::Vector& end);
 
-		void Insert(const d2d::Vector& p);
+		void Insert(const ee::Vector& p);
 		void Remove(int idx);
 
-		int GetNodeInsertPos(const d2d::Vector& p, d2d::Vector& nearest);
+		int GetNodeInsertPos(const ee::Vector& p, ee::Vector& nearest);
 
-		int QueryIndex(const d2d::Vector& p, float radius) const;
-		d2d::Vector* QueryPointer(const d2d::Vector& p, float radius);
+		int QueryIndex(const ee::Vector& p, float radius) const;
+		ee::Vector* QueryPointer(const ee::Vector& p, float radius);
 
-		bool IsRegionContain(const d2d::Vector& p) const;
+		bool IsRegionContain(const ee::Vector& p) const;
 
 		int Size() const { return m_ori.size(); }
 
 		void Sort();
 
 	private:
-		static void Insert(std::vector<d2d::Vector>& nodes, const d2d::Vector& p);
+		static void Insert(std::vector<ee::Vector>& nodes, const ee::Vector& p);
 
 	public:
-		std::vector<d2d::Vector> m_ori, m_ext;
+		std::vector<ee::Vector> m_ori, m_ext;
 
 	}; // NodeList
 

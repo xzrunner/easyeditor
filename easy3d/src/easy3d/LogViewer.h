@@ -1,7 +1,7 @@
 #ifndef _E3D_LOG_VIEWER_H_
 #define _E3D_LOG_VIEWER_H_
 
-#include <drag2d.h>
+
 
 namespace e3d
 {

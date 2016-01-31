@@ -13,41 +13,41 @@ PulleyJoint::PulleyJoint(Body* b0, Body* b1)
 	groundAnchorA.y += 10;
 	groundAnchorB.y += 10;
 
-	d2d::Vector center = (b0->sprite->GetPosition() + b1->sprite->GetPosition()) * 0.5f;
+	ee::Vector center = (b0->sprite->GetPosition() + b1->sprite->GetPosition()) * 0.5f;
 	setLocalAnchorA(center);
 	setLocalAnchorB(center);
 }
 
-bool PulleyJoint::isContain(const d2d::Vector& pos) const
+bool PulleyJoint::isContain(const ee::Vector& pos) const
 {
-	return d2d::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| d2d::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT
-		|| d2d::Math2D::GetDistance(groundAnchorA, pos) < JOINT_RADIUS_OUT
-		|| d2d::Math2D::GetDistance(groundAnchorB, pos) < JOINT_RADIUS_OUT;
+	return ee::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(groundAnchorA, pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(groundAnchorB, pos) < JOINT_RADIUS_OUT;
 }
 
-bool PulleyJoint::isIntersect(const d2d::Rect& rect) const
+bool PulleyJoint::isIntersect(const ee::Rect& rect) const
 {
-	return d2d::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
-		|| d2d::Math2D::IsPointInRect(getWorldAnchorB(), rect)
-		|| d2d::Math2D::IsPointInRect(groundAnchorA, rect) 
-		|| d2d::Math2D::IsPointInRect(groundAnchorB, rect);
+	return ee::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
+		|| ee::Math2D::IsPointInRect(getWorldAnchorB(), rect)
+		|| ee::Math2D::IsPointInRect(groundAnchorA, rect) 
+		|| ee::Math2D::IsPointInRect(groundAnchorB, rect);
 }
 
 void PulleyJoint::draw(DrawType type) const
 {
-	const d2d::Vector anchorA = getWorldAnchorA(),
+	const ee::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::DrawDashLine(anchorA, anchorB, d2d::Colorf(1, 0, 0), 2);
-		d2d::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, anchorB, ee::Colorf(1, 0, 0), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
 
-		d2d::PrimitiveDraw::DrawLine(anchorA, groundAnchorA, d2d::Colorf(0.8f, 0.8f, 0.4f));
-		d2d::PrimitiveDraw::DrawLine(anchorB, groundAnchorB, d2d::Colorf(0.8f, 0.8f, 0.4f));
-		d2d::PrimitiveDraw::DrawLine(groundAnchorA, groundAnchorB, d2d::Colorf(0.8f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawLine(anchorA, groundAnchorA, ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawLine(anchorB, groundAnchorB, ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawLine(groundAnchorA, groundAnchorB, ee::Colorf(0.8f, 0.8f, 0.4f));
 
 		drawBodyFlag();
 	}
@@ -59,29 +59,29 @@ void PulleyJoint::draw(DrawType type) const
 }
 
 
-d2d::Vector PulleyJoint::getWorldAnchorA() const
+ee::Vector PulleyJoint::getWorldAnchorA() const
 {
 	return transLocalToWorld(localAnchorA, bodyA->sprite);
 }
 
-d2d::Vector PulleyJoint::getWorldAnchorB() const
+ee::Vector PulleyJoint::getWorldAnchorB() const
 {
 	return transLocalToWorld(localAnchorB, bodyB->sprite);
 }
 
-void PulleyJoint::setLocalAnchorA(const d2d::Vector& world)
+void PulleyJoint::setLocalAnchorA(const ee::Vector& world)
 {
 	localAnchorA = transWorldToLocal(world, bodyA->sprite);
 }
 
-void PulleyJoint::setLocalAnchorB(const d2d::Vector& world)
+void PulleyJoint::setLocalAnchorB(const ee::Vector& world)
 {
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void PulleyJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
+void PulleyJoint::drawAnchor(const ee::Vector& pos, DrawType type) const
 {
-	d2d::Colorf color;
+	ee::Colorf color;
 	switch (type)
 	{
 	case e_default:
@@ -95,6 +95,6 @@ void PulleyJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 		break;
 	}
 
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }

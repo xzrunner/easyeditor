@@ -6,7 +6,7 @@
 // #include <map>
 // #include <vector>
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -16,8 +16,8 @@ class IPackNode;
 class UnpackNodeFactory
 {
 public:
-	void UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images);
-	const IPackNode* UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+	void UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images);
+	const IPackNode* UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images,
 		const std::map<int, std::string>& map_export);
 
 	IPackNode* Query(int id) const;

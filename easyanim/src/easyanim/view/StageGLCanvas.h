@@ -1,12 +1,12 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class StagePanel;
 
-	class StageGLCanvas : public d2d::OrthoCanvas
+	class StageGLCanvas : public ee::OrthoCanvas
 	{
 	public:
 		StageGLCanvas(StagePanel* editPanel);
@@ -21,11 +21,11 @@ namespace eanim
 		void drawbackground() const;
 
 	private:
-		class DrawVisitor : public d2d::IVisitor
+		class DrawVisitor : public ee::IVisitor
 		{
 		public:
 			DrawVisitor();
-			virtual void visit(d2d::ICloneable* object, bool& bFetchNext);
+			virtual void visit(ee::ICloneable* object, bool& bFetchNext);
 		}; // DrawVisitor
 
 	}; // StageGLCanvas

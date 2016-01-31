@@ -3,16 +3,16 @@
 
 using namespace raiden;
 
-ActorPropertySetting::ActorPropertySetting(d2d::EditPanel* editPanel, 
-										   const std::vector<d2d::ISprite*>& sprites)
-	: d2d::MultiSpritesPropertySetting(editPanel, sprites)
+ActorPropertySetting::ActorPropertySetting(ee::EditPanel* editPanel, 
+										   const std::vector<ee::ISprite*>& sprites)
+	: ee::MultiSpritesPropertySetting(editPanel, sprites)
 {
 }
 
-void ActorPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
+void ActorPropertySetting::updatePanel(ee::PropertySettingPanel* panel)
 {
 	if (m_sprites.size() > 1)
-		d2d::MultiSpritesPropertySetting::updatePanel(panel);
+		ee::MultiSpritesPropertySetting::updatePanel(panel);
 
 	wxPropertyGrid* pg = panel->getPG();
 
@@ -45,7 +45,7 @@ void ActorPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 		return;
 
 	if (m_sprites.size() > 1)
-		d2d::MultiSpritesPropertySetting::onPropertyGridChange(name, value);
+		ee::MultiSpritesPropertySetting::onPropertyGridChange(name, value);
 
 	if (name == wxT("ID"))
 	{
@@ -61,17 +61,17 @@ void ActorPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	}
 }
 
-void ActorPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void ActorPropertySetting::updatePropertyGrid(ee::PropertySettingPanel* panel)
 {
 	if (m_sprites.size() > 1)
-		d2d::MultiSpritesPropertySetting::updatePanel(panel);
+		ee::MultiSpritesPropertySetting::updatePanel(panel);
 	updatePanel(panel);
 }
 
-void ActorPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void ActorPropertySetting::enablePropertyGrid(ee::PropertySettingPanel* panel, bool bEnable)
 {
 	if (m_sprites.size() > 1)
-		d2d::MultiSpritesPropertySetting::enablePropertyGrid(panel, bEnable);
+		ee::MultiSpritesPropertySetting::enablePropertyGrid(panel, bEnable);
 
 	wxPropertyGrid* pg = panel->getPG();
 

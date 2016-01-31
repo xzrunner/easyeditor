@@ -9,9 +9,9 @@ namespace ephysics
 class PasteSymbolPhysicsRandomOP : public PasteSymbolPhysicsOP
 {
 public:
-	PasteSymbolPhysicsRandomOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
-		d2d::PasteSymbolRandomWidget* randomWidget);
+	PasteSymbolPhysicsRandomOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
+		ee::PasteSymbolRandomWidget* randomWidget);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);
@@ -22,9 +22,9 @@ private:
 	void changeRandomValue();
 
 private:
-	d2d::PasteSymbolRandomWidget* m_randomWidget;
+	ee::PasteSymbolRandomWidget* m_randomWidget;
 
-	d2d::PasteSymbolRandomWidget::RandomValue m_randomValue;
+	ee::PasteSymbolRandomWidget::RandomValue m_randomValue;
 
 }; // PasteSymbolPhysicsRandomOP
 

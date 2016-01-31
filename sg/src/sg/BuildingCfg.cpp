@@ -10,7 +10,7 @@
 namespace sg
 {
 
-BuildingCfg::BuildingCfg(StagePanel* stage, d2d::LibraryPanel* library)
+BuildingCfg::BuildingCfg(StagePanel* stage, ee::LibraryPanel* library)
 	: m_stage(stage)
 	, m_library(library)
 {
@@ -36,7 +36,7 @@ void BuildingCfg::InitAllData()
  		InitBuildings(value);
  		InitArrow(value);
 		InitGrass(value);
-	} catch (d2d::Exception& e) {
+	} catch (ee::Exception& e) {
 		std::cerr << e.What() << std::endl;
 	}
 }
@@ -76,8 +76,8 @@ bool BuildingCfg::QueryAttackRegion(const std::string& name, int& max_region, in
 void BuildingCfg::InitBackground(const Json::Value& value)
 {
 	std::string filepath = value["background"].asString();
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-	d2d::IStageCanvas* canvas = m_stage->GetCanvas();
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::StageCanvas* canvas = m_stage->GetCanvas();
 	static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 	symbol->Release();
 }
@@ -85,13 +85,13 @@ void BuildingCfg::InitBackground(const Json::Value& value)
 void BuildingCfg::InitGrid(const Json::Value& value)
 {
 	std::string filepath = value["grid"]["filepath"].asString();
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	float angle = value["grid"]["angle"].asInt();
 	float scale = value["grid"]["scale"].asDouble();
 	float alpha = value["grid"]["alpha"].asInt();
-	sprite->SetTransform(d2d::Vector(0, 0), angle * d2d::TRANS_DEG_TO_RAD);
-	sprite->SetScale(d2d::Vector(scale, scale));
+	sprite->SetTransform(ee::Vector(0, 0), angle * ee::TRANS_DEG_TO_RAD);
+	sprite->SetScale(ee::Vector(scale, scale));
 	SymbolRender::Instance()->SetGrid(sprite);
 	symbol->Release();
 }
@@ -99,10 +99,10 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 void BuildingCfg::InitArrow(const Json::Value& value)
 {
 	std::string filepath = value["arrow"]["down_path"].asString();
-	d2d::Symbol* down = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* down = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
 	filepath = value["arrow"]["right_path"].asString();
-	d2d::Symbol* right = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* right = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
 	SymbolRender::Instance()->SetArrow(down, right);
 }
@@ -114,9 +114,9 @@ void BuildingCfg::InitGrass(const Json::Value& value)
 	while (!grassVal.isNull()) {
 		std::string filepath = grassVal["filepath"].asString();
 		float scale = grassVal["scale"].asDouble();
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
-		sprite->SetScale(d2d::Vector(scale, scale));
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+		sprite->SetScale(ee::Vector(scale, scale));
 		SymbolRender::Instance()->SetGrass(i-1, sprite);
 
 		grassVal = value["grass"]["levels"][i++];
@@ -149,7 +149,7 @@ void BuildingCfg::InitRegion(const Json::Value& value)
 	}
 
 	std::string filepath = value["region"]["filepath"].asString();
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
 	SymbolRender::Instance()->SetRegion(symbol, value["region"]["size"].asInt());
 
@@ -179,7 +179,7 @@ void BuildingCfg::InitBuildings(const Json::Value& value)
 	m_library->AddPage(m_resources);
 	m_army = new LibraryPage(nb, "Army");
 	m_library->AddPage(m_army);	
-	d2d::ILibraryPage* other = new d2d::LibraryImagePage(nb);
+	ee::LibraryPage* other = new ee::LibraryImagePage(nb);
 	m_library->AddPage(other);
 
 	ResetLibraryList();
@@ -235,7 +235,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 
 		if (!filepath.empty()) 
 		{
-			d2d::Symbol* s = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* s = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			assert(s->GetUserData());
 			SymbolExt* info = static_cast<SymbolExt*>(s->GetUserData());
 			info->remain = QueryAmountLimit(pItem->building->name, m_stage->GetBaseLevel());
@@ -273,11 +273,11 @@ void BuildingCfg::LoadSymbolUserData(const std::vector<Building*>& buildings)
 			info->building = item.building;
 
 			try {
-				d2d::Symbol* s = d2d::SymbolMgr::Instance()->FetchSymbol(item.res_snapshoot_path);
+				ee::Symbol* s = ee::SymbolMgr::Instance()->FetchSymbol(item.res_snapshoot_path);
 				s->RefreshThumbnail(item.res_snapshoot_path);
 				s->SetInfo(wxString::FromDouble(info->remain).ToStdString());
 				s->SetUserData(info);
-			} catch (d2d::Exception& e) {
+			} catch (ee::Exception& e) {
 				std::cerr << e.What() << std::endl;
 			}
 		}

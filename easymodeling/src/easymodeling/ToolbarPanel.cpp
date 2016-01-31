@@ -9,7 +9,7 @@
 using namespace emodeling;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, Context::Instance()->stage->GetStageImpl())
 {
 	Context* context = Context::Instance();
 
@@ -17,12 +17,12 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent)
 	addChild(new FixtureEditCmpt(this, wxT("Fixture"), context->stage, context->property));
 	addChild(new JointEditCmpt(this, wxT("Joint"), context->stage, context->property));
 
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
-	topSizer->Add(initChildrenLayout());
+	topSizer->Add(InitChildrenLayout());
 	return topSizer;
 }

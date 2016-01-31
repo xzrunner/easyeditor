@@ -1,12 +1,12 @@
 #ifndef _EASYANIM_FRAME_H_
 #define _EASYANIM_FRAME_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-class Frame : public d2d::Frame
+class Frame : public ee::Frame
 {
 public:
 	Frame(const wxString& title, const wxString& filetag);

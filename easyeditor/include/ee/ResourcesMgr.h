@@ -40,4 +40,6 @@ private:
 
 }
 
+#include "ResourcesMgr.inl"
+
 #endif // _EASYEDITOR_RESOURCES_MGR_H_

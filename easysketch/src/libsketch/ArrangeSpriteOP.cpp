@@ -15,7 +15,7 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 	: SelectSpriteOP(stage)
 	, m_state(NULL)
 {
-	const d2d::SpriteSelection& selection = GetSelection();
+	const ee::SpriteSelection& selection = GetSelection();
 	m_translate_sprite = new TranslateSpriteState(m_stage, selection);
 	m_rotate_sprite = new RotateSpriteState(m_stage, selection);
 
@@ -44,7 +44,7 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 	case WXK_SPACE:
 		{
 			std::vector<Sprite*> sprites;
-			GetSelection().Traverse(d2d::FetchAllVisitor<Sprite>(sprites));
+			GetSelection().Traverse(ee::FetchAllVisitor<Sprite>(sprites));
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
 				Sprite* sprite = sprites[i];
 				sprite->SetPos3(vec3(0, 0, 0));
@@ -99,7 +99,7 @@ bool ArrangeSpriteOP::OnMouseRightDown(int x, int y)
 		return true;
 	}
 
-	const d2d::SpriteSelection& selection = GetSelection();
+	const ee::SpriteSelection& selection = GetSelection();
 	if (selection.IsEmpty()) {
 		m_state = m_rotate_camera;
 	} else if (selection.Size() == 1) {

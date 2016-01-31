@@ -1,7 +1,7 @@
 #ifndef _LR_ARRANGE_SPRITE_IMPL_H_
 #define _LR_ARRANGE_SPRITE_IMPL_H_
 
-#include <drag2d.h>
+
 
 #include "RightPopupMenu.h"
 
@@ -12,10 +12,10 @@ class StagePanel;
 class RightPopupMenu;
 class CharacterAllDirections;
 
-class ArrangeSpriteImpl : public d2d::ArrangeSpriteImpl
+class ArrangeSpriteImpl : public ee::ArrangeSpriteImpl
 {
 public:
-	ArrangeSpriteImpl(d2d::LibraryPanel* library, d2d::PropertySettingPanel* property,
+	ArrangeSpriteImpl(ee::LibraryPanel* library, ee::PropertySettingPanel* property,
 		StagePanel* stage, CharacterAllDirections* dirs);
 
 	virtual void OnPopMenuSelected(int type);
@@ -23,18 +23,18 @@ public:
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, int x, int y);
 
-	virtual d2d::IArrangeSpriteState* CreateRotateState(d2d::SpriteSelection* selection, 
-		const d2d::Vector& first_pos) const;
+	virtual ee::ArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, 
+		const ee::Vector& first_pos) const;
 
 private:
-	class RotateSpriteState : public d2d::RotateSpriteState
+	class RotateSpriteState : public ee::RotateSpriteState
 	{
 	public:
-		RotateSpriteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos,
+		RotateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos,
 			CharacterAllDirections* dirs);
 
 	protected:
-		virtual void Rotate(const d2d::Vector& dst);
+		virtual void Rotate(const ee::Vector& dst);
 
 	private:
 		static int GetAnglePos(float angle);

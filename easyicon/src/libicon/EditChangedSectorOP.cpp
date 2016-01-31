@@ -7,14 +7,14 @@ namespace eicon
 {
 
 EditChangedSectorOP::EditChangedSectorOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_stage(stage)
 {
 }
 
 bool EditChangedSectorOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 

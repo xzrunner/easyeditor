@@ -1,12 +1,12 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
 	class StagePanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
+	class StageCanvas : public ee::OrthoCanvas
 	{
 	public:
 		StageCanvas(StagePanel* editPanel);
@@ -19,7 +19,7 @@ namespace coceditor
 		void drawGuideLines();
 
 	private:
-		d2d::SpriteBatch m_batch;
+		ee::SpriteBatch m_batch;
 
 	}; // StageCanvas
 }

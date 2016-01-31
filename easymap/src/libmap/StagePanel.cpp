@@ -5,14 +5,14 @@ namespace emap
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library,
-					   d2d::PropertySettingPanel* property)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
-	, d2d::ShapesPanelImpl(GetStageImpl())
+					   ee::LibraryPanel* library,
+					   ee::PropertySettingPanel* property)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
+	, ee::ShapesPanelImpl(GetStageImpl())
 {
-	m_paste_op = new d2d::PasteSymbolOP(this, GetStageImpl(), this, library);
-	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property);
+	m_paste_op = new ee::PasteSymbolOP(this, GetStageImpl(), this, library);
+	m_arrange_op = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, GetStageImpl(), this, property);
 
 	SetEditOP(m_paste_op);
 	SetCanvas(new StageCanvas(this));

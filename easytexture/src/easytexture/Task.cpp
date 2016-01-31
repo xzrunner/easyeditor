@@ -14,13 +14,13 @@ Task::Task(wxFrame* parent)
 	, m_toolbar(NULL)
 {
 	InitLayout();
-	d2d::Config::Instance()->GetSettings().visible_tex_edge = true;
+	ee::Config::Instance()->GetSettings().visible_tex_edge = true;
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -39,7 +39,7 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -51,7 +51,7 @@ void Task::InitLayout()
 	wxSplitterWindow* left_hori_splitter = new wxSplitterWindow(left_vert_splitter);
 
 	m_library = new LibraryPanel(left_hori_splitter);
-	m_property = new d2d::PropertySettingPanel(left_hori_splitter);
+	m_property = new ee::PropertySettingPanel(left_hori_splitter);
 
 	left_hori_splitter->SetSashGravity(0.5f);
 	left_hori_splitter->SplitHorizontally(m_library, m_property);

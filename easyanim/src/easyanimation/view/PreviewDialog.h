@@ -2,7 +2,7 @@
 #define _EASYANIM_PREVIEW_DIALOG_H_
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 #include <easyanim.h>
 
 #include "PreviewSettings.h"
@@ -26,11 +26,11 @@ private:
 	void OnSetStop(wxCommandEvent& event);
 
 private:
-	d2d::EditPanel* m_stage;
+	ee::EditPanel* m_stage;
 
 	PlaySettings m_settings;
 
-	d2d::PlayControl m_control;
+	ee::PlayControl m_control;
 
 }; // PreviewDialog
 

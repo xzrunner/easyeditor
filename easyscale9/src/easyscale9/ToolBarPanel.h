@@ -1,7 +1,7 @@
 #ifndef _ESCALE9_TOOLBAR_PANEL_H_
 #define _ESCALE9_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
@@ -9,11 +9,11 @@ namespace escale9
 class StagePanel;
 class ResizeCMPT;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage,
-		d2d::PropertySettingPanel* property);
+		ee::PropertySettingPanel* property);
 	
 	void setComposeOP(bool use) {
 		m_isComposeOP = use;
@@ -27,7 +27,7 @@ public:
 	float getHeight() const;
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	ResizeCMPT* m_resizeCmpt;

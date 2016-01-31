@@ -4,8 +4,8 @@
 namespace libshape
 {
 
-DrawPenLineOP::DrawPenLineOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
-							 d2d::MultiShapesImpl* shapesImpl)
+DrawPenLineOP::DrawPenLineOP(wxWindow* wnd, ee::EditPanelImpl* stage,
+							 ee::MultiShapesImpl* shapesImpl)
 	: DrawPolylineOP(wnd, stage, false)
 {
 }
@@ -14,7 +14,7 @@ bool DrawPenLineOP::OnMouseLeftDClick(int x, int y)
 {
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
-	d2d::InsertShapeSJ::Instance()->Insert(new ChainShape(m_polyline, false));
+	ee::InsertShapeSJ::Instance()->Insert(new ChainShape(m_polyline, false));
 	m_polyline.clear();
 	m_currPos.SetInvalid();
 

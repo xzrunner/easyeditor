@@ -8,7 +8,7 @@ namespace eterrain2d
 
 class StagePanel;
 
-class CreateRegionCMPT : public d2d::OneFloatValueCMPT
+class CreateRegionCMPT : public ee::OneFloatValueCMPT
 {
 public:
 	CreateRegionCMPT(wxWindow* parent, const wxString& name,
@@ -20,7 +20,7 @@ public:
 // 	virtual float GetValue() const;
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void OnChangeDisplayTriangles(wxCommandEvent& event);

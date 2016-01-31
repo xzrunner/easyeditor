@@ -17,13 +17,13 @@ PackPicture::PackPicture(int id)
 }
 
 void PackPicture::PackToLuaString(ebuilder::CodeGenerator& gen, 
-								  const d2d::TexturePacker& tp,
+								  const ee::TexturePacker& tp,
 								  float scale) const
 {
 	PictureToLuaString::Pack(this, gen, tp, scale);
 }
 
-void PackPicture::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+void PackPicture::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
 {
 	PictureFromLua::Unpack(L, images, this);
 }
@@ -34,7 +34,7 @@ int PackPicture::SizeOfPackToBin() const
 }
 
 void PackPicture::PackToBin(uint8_t** ptr,
-							const d2d::TexturePacker& tp,
+							const ee::TexturePacker& tp,
 							float scale) const
 {
 	PictureToBin::Pack(this, ptr, tp, scale);
@@ -45,18 +45,18 @@ int PackPicture::SizeOfUnpackFromBin() const
 	return PictureFromBin::Size(this);
 }
 
-void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+void PackPicture::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
 {
 	PictureFromBin::Unpack(ptr, images, this);
 }
 
-void PackPicture::GetImgSrcPos(const d2d::TexturePacker& tp, const d2d::Image* img, 
-							   const d2d::Vector* texture_coord, int* src)
+void PackPicture::GetImgSrcPos(const ee::TexturePacker& tp, const ee::Image* img, 
+							   const ee::Vector* texture_coord, int* src)
 {
-	const d2d::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
+	const ee::TexturePacker::Frame* tp_frame = tp.Query(img->GetFilepath());
 	if (!tp_frame) {
 		std::string str = img->GetFilepath();
-		throw d2d::Exception("Image can't find in tp, %s", str.c_str());
+		throw ee::Exception("Image can't find in tp, %s", str.c_str());
 	}
 	if (!tp_frame->src.rotated) {
 		int left = tp_frame->dst.tex_coords[0].x, bottom = tp_frame->dst.tex_coords[0].y;

@@ -2,19 +2,19 @@
 #include "StagePanel.h"
 #include "Context.h"
 
-static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
+static const ee::Colorf LIGHT_GRAY = ee::Colorf(0.8f, 0.8f, 0.8f);
 
 using namespace shootbubble;
 
 StageCanvas::StageCanvas(StagePanel* parent)
-	: d2d::SpriteStageCanvas(parent, parent)
+	: ee::SpriteStageCanvas(parent, parent)
 {
 }
 
 void StageCanvas::onDraw()
 {
 	drawGuideLines();
-	d2d::SpriteStageCanvas::onDraw();
+	ee::SpriteStageCanvas::onDraw();
 }
 
 void StageCanvas::drawGuideLines()
@@ -27,7 +27,7 @@ void StageCanvas::drawGuideLines()
 	static_cast<StagePanel*>(m_editPanel)->computeParams(hEdge, posOffset, posOffset1, rowOffset);
 
 	glColor3f(LIGHT_GRAY.r, LIGHT_GRAY.g, LIGHT_GRAY.b);
-	d2d::Vector base(hEdge, -posOffset1);
+	ee::Vector base(hEdge, -posOffset1);
 	for (size_t i = 0; i < context->row; ++i)
 	{
 		int col = (i % 2 ? context->col - 1 : context->col);

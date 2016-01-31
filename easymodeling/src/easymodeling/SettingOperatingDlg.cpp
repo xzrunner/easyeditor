@@ -1,7 +1,7 @@
 //
 //#include "SettingOperatingDlg.h"
 //
-//#include <drag2d.h>
+//
 //
 //using namespace emodeling;
 //
@@ -15,7 +15,7 @@
 //		choices.Add(wxT("Mouse + Keyboard"));
 //
 //		wxRadioBox* editChoice = new wxRadioBox(this, wxID_ANY, wxT("Scale type"), wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
-//		if (d2d::SettingData::bZoomOnlyUseMouseWheel)
+//		if (ee::SettingData::bZoomOnlyUseMouseWheel)
 //			editChoice->SetSelection(0);
 //		else
 //			editChoice->SetSelection(1);
@@ -28,7 +28,7 @@
 //void SettingOperatingDlg::onChangeZoomType(wxCommandEvent& event)
 //{
 //	if (event.GetInt() == 0)
-//		d2d::SettingData::bZoomOnlyUseMouseWheel = true;
+//		ee::SettingData::bZoomOnlyUseMouseWheel = true;
 //	else
-//		d2d::SettingData::bZoomOnlyUseMouseWheel = false;
+//		ee::SettingData::bZoomOnlyUseMouseWheel = false;
 //}

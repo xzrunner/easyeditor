@@ -3,7 +3,7 @@
 
 #include <json/json.h>
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {
@@ -26,7 +26,7 @@ namespace etexpacker
 		static void storeEasypackerPosition(const char* filename);
 		static void storeTexpackerPosition(const char* filename);
 
-		static Json::Value store(const d2d::Sprite* sprite);
+		static Json::Value store(const ee::Sprite* sprite);
 
 
 

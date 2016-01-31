@@ -5,8 +5,8 @@
 namespace emodeling
 {
 
-BodyPropertySetting::BodyPropertySetting(d2d::EditPanelImpl* stage, d2d::Sprite* sprite)
-	: d2d::IPropertySetting("Body")
+BodyPropertySetting::BodyPropertySetting(ee::EditPanelImpl* stage, ee::Sprite* sprite)
+	: ee::PropertySetting("Body")
 	, m_stage(stage)
 {
 	m_body = static_cast<libmodeling::Body*>(sprite->GetUserData());
@@ -39,7 +39,7 @@ void BodyPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 		dirty = false;
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

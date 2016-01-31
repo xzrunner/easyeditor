@@ -35,19 +35,19 @@ void OutlineToPolygon::Run(int argc, char *argv[])
 void OutlineToPolygon::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
+		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
 
-		wxString outline_path = d2d::FileHelper::GetFilenameAddTag(
+		wxString outline_path = ee::FileHelper::GetFilenameAddTag(
 			filepath, eimage::OUTLINE_FILE_TAG, "json");
-		if (!d2d::FileHelper::IsFileExist(filepath)) {
+		if (!ee::FileHelper::IsFileExist(filepath)) {
 			continue;
 		}
 
@@ -59,20 +59,20 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		reader.parse(fin, value);
 		fin.close();
 
-		std::vector<d2d::Vector> vertices;
-		d2d::JsonSerializer::Load(value["normal"], vertices);
+		std::vector<ee::Vector> vertices;
+		ee::JsonSerializer::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}
 
-		wxString shape_path = d2d::FileHelper::GetFilenameAddTag(
+		wxString shape_path = ee::FileHelper::GetFilenameAddTag(
 			filepath, libshape::FILE_TAG, "json");
 
-		std::vector<d2d::Shape*> shapes;
+		std::vector<ee::Shape*> shapes;
 		libshape::PolygonShape poly(vertices);
 		shapes.push_back(&poly);
 
-		d2d::NullSymbol bg(filepath.ToStdString());
+		ee::NullSymbol bg(filepath.ToStdString());
 
 		libshape::FileIO::StoreToFile(shape_path.mb_str(), shapes, &bg);
 	}

@@ -21,7 +21,7 @@ AnimBuilder::~AnimBuilder()
 	}
 }
 
-void AnimBuilder::Traverse(d2d::Visitor& visitor) const
+void AnimBuilder::Traverse(ee::Visitor& visitor) const
 {
  	std::map<const libanim::Symbol*, const PackAnimation*>::const_iterator 
  		itr = m_map_data.begin();
@@ -56,7 +56,7 @@ void AnimBuilder::Load(const libanim::Symbol* symbol, PackAnimation* anim)
 	{
 		PackAnimation::Frame frame;
 
-		std::vector<d2d::Sprite*> sprites;
+		std::vector<ee::Sprite*> sprites;
 		libanim::Utility::GetCurrSprites(symbol, i, sprites);
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			anim->CreateFramePart(sprites[i], frame);

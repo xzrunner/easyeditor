@@ -6,15 +6,15 @@
 using namespace raiden;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+	: ee::ToolbarPanel(parent, Context::Instance()->stage)
 {
 	Context* context = Context::Instance();
 
-	addChild(new d2d::UniversalCMPT(this, wxT("paste"), context->stage, 
-		new d2d::PasteSymbolOP(context->stage, context->stage, context->library)));
-	addChild(new d2d::PasteSpriteCMPT(this, wxT("batch"), context->stage, context->stage, context->property));
-	addChild(new d2d::UniversalCMPT(this, wxT("arrange"), context->stage, 
-		new d2d::ArrangeSpriteOP<SelectSpritesOP>(context->stage, context->stage, context->property)));
+	addChild(new ee::UniversalCMPT(this, wxT("paste"), context->stage, 
+		new ee::PasteSymbolOP(context->stage, context->stage, context->library)));
+	addChild(new ee::PasteSpriteCMPT(this, wxT("batch"), context->stage, context->stage, context->property));
+	addChild(new ee::UniversalCMPT(this, wxT("arrange"), context->stage, 
+		new ee::ArrangeSpriteOP<SelectSpritesOP>(context->stage, context->stage, context->property)));
 
 	SetSizer(initLayout());	
 }
@@ -25,7 +25,7 @@ wxSizer* ToolbarPanel::initLayout()
 	sizer->AddSpacer(10);
 	sizer->Add(initSettingLayout());
 	sizer->AddSpacer(20);
-	sizer->Add(Context::Instance()->layers = new d2d::LayersMgrWidget(this, m_editPanel));
+	sizer->Add(Context::Instance()->layers = new ee::LayersMgrWidget(this, m_editPanel));
 	sizer->AddSpacer(20);
 	sizer->Add(initChildrenLayout());
 	return sizer;

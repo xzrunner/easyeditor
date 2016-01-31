@@ -2,7 +2,7 @@
 #ifndef LIBMODELING_FIXTURE_H
 #define LIBMODELING_FIXTURE_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling
 {
@@ -14,21 +14,21 @@ namespace libmodeling
 		Fixture();
 		~Fixture();
 
-		bool isContain(const d2d::Vector& pos) const;
-		bool isIntersect(const d2d::Rect& rect) const;
+		bool isContain(const ee::Vector& pos) const;
+		bool isIntersect(const ee::Rect& rect) const;
 
-		void draw(const d2d::Matrix& mt, const d2d::Colorf& cFace, 
-			const d2d::Colorf& cEdge) const;
+		void draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
+			const ee::Colorf& cEdge) const;
 
 	private:
-		void transLocalToWorld(const std::vector<d2d::Vector>& local, std::vector<d2d::Vector>& world) const;
+		void transLocalToWorld(const std::vector<ee::Vector>& local, std::vector<ee::Vector>& world) const;
 
 	public:
 		wxString name;
 
 		Body* body;
 
-		d2d::Shape* shape;
+		ee::Shape* shape;
 
 		float density;
 

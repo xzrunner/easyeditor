@@ -5,8 +5,8 @@
 namespace escale9
 {
 
-ResizeBaseOP::ResizeBaseOP(wxWindow* wnd, d2d::EditPanelImpl* stage, Symbol* symbol)
-	: d2d::ZoomViewOP(wnd, stage, true)
+ResizeBaseOP::ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, Symbol* symbol)
+	: ee::ZoomViewOP(wnd, stage, true)
 	, m_symbol(symbol)
 	, m_status(e_null)
 {
@@ -14,7 +14,7 @@ ResizeBaseOP::ResizeBaseOP(wxWindow* wnd, d2d::EditPanelImpl* stage, Symbol* sym
 
 bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_symbol) {
 		return false;
@@ -24,13 +24,13 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;
-	if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(-hw, -hh), REGION, REGION))
+	if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(-hw, -hh), REGION, REGION))
 		m_status = e_leftlow;
-	else if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(hw, -hh), REGION, REGION))
+	else if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(hw, -hh), REGION, REGION))
 		m_status = e_rightlow;
-	else if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(hw, hh), REGION, REGION))
+	else if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(hw, hh), REGION, REGION))
 		m_status = e_rightup;
-	else if (d2d::Math2D::IsPointInRect(m_firstPos, d2d::Vector(-hw, hh), REGION, REGION))
+	else if (ee::Math2D::IsPointInRect(m_firstPos, ee::Vector(-hw, hh), REGION, REGION))
 		m_status = e_leftup;
 
 	return false;
@@ -38,14 +38,14 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_status != e_null)
 	{
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-		const d2d::Vector src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		const ee::Vector src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
 			dst(fabs(pos.x)*2, fabs(pos.y)*2);
-		d2d::EditAddRecordSJ::Instance()->Add(new ResizeAtomicOP(m_symbol, src, dst));
+		ee::EditAddRecordSJ::Instance()->Add(new ResizeAtomicOP(m_symbol, src, dst));
 	}
 
 	m_status = e_null;
@@ -56,13 +56,13 @@ bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 
 bool ResizeBaseOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_status != e_null)
 	{
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -70,17 +70,17 @@ bool ResizeBaseOP::OnMouseDrag(int x, int y)
 
 bool ResizeBaseOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) return true;
+	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
+	ee::SpriteRenderer::Instance()->Draw(m_symbol);
 
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;
 	const float r = REGION;
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(-hw, -hh), r, r, m_style);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector( hw, -hh), r, r, m_style);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector( hw,  hh), r, r, m_style);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(-hw,  hh), r, r, m_style);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(-hw, -hh), r, r, m_style);
+	ee::PrimitiveDraw::DrawRect(ee::Vector( hw, -hh), r, r, m_style);
+	ee::PrimitiveDraw::DrawRect(ee::Vector( hw,  hh), r, r, m_style);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(-hw,  hh), r, r, m_style);
 
 	return false;
 }

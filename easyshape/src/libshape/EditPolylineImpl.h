@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_EDIT_POLYLINE_IMPL_H_
 #define _LIBSHAPE_EDIT_POLYLINE_IMPL_H_
 
-#include <drag2d.h>
+
 
 #include "NodeCapture.h"
 
@@ -10,15 +10,15 @@ namespace libshape
 
 class ChainShape;
 class DrawPolylineOP;
-class d2d::OneFloatValue;
+class ee::OneFloatValue;
 class IOperaterBase;
 
 class EditPolylineImpl
 {
 public:
-	EditPolylineImpl(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl, 
-		d2d::PropertySettingPanel* propertyPanel, d2d::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
-		d2d::AbstractEditOP* select_op, IOperaterBase* base_op);
+	EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl, 
+		ee::PropertySettingPanel* propertyPanel, ee::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
+		ee::EditOP* select_op, IOperaterBase* base_op);
 
 	bool OnKeyDown(int keyCode);
 	bool OnMouseLeftDown(int x, int y);
@@ -39,39 +39,39 @@ private:
 	void checkActiveShape(const NodeAddr& captured);
 
 private:
-	class InterruptChainVisitor : public d2d::Visitor
+	class InterruptChainVisitor : public ee::Visitor
 	{
 	public:
-		InterruptChainVisitor(const d2d::Vector& pos, int tol);
+		InterruptChainVisitor(const ee::Vector& pos, int tol);
 
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 
 		ChainShape* getInterruptedChain() { return m_chain; }
 
 	private:
-		const d2d::Vector& m_pos;
+		const ee::Vector& m_pos;
 		int m_tol;
 		ChainShape* m_chain;
 
 	}; // InterruptChainVisitor
 
-	class NearestNodeVisitor : public d2d::Visitor
+	class NearestNodeVisitor : public ee::Visitor
 	{
 	public:
-		NearestNodeVisitor(const d2d::Vector& pos, int tol);
+		NearestNodeVisitor(const ee::Vector& pos, int tol);
 
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 
-		const d2d::Vector& getNearestNode() const {
+		const ee::Vector& getNearestNode() const {
 			return m_nearest;
 		}
 
 	private:
-		d2d::Vector m_pos;
+		ee::Vector m_pos;
 		int m_tol;
 
 		float m_dis;
-		d2d::Vector m_nearest;
+		ee::Vector m_nearest;
 
 	}; // NearestNodeVisitor
 
@@ -79,9 +79,9 @@ private:
 	static const int DRAG_SELECT_TOL = 5;
 
 private:
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 
-	d2d::PropertySettingPanel* m_propertyPanel;
+	ee::PropertySettingPanel* m_propertyPanel;
 
 	//		NodeAddr m_captured;
 
@@ -89,19 +89,19 @@ private:
 
 	IOperaterBase* m_base_op;
 
-	d2d::EditPanelImpl* m_stage;
+	ee::EditPanelImpl* m_stage;
 
 protected:
 	NodeAddr m_capturedEditable, m_captureSelectable;
 
 protected:
-	d2d::AbstractEditOP* m_selectOP;
+	ee::EditOP* m_selectOP;
 
 private:
-	d2d::Vector m_lastLeftDownPos;
+	ee::Vector m_lastLeftDownPos;
 	bool m_bSelectOpen;
 
-	d2d::OneFloatValue* m_node_capture;
+	ee::OneFloatValue* m_node_capture;
 
 	bool m_dirty;
 

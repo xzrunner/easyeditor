@@ -20,15 +20,15 @@
 namespace lr
 {
 
-OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-								   d2d::MultiSpritesImpl* sprites_impl)
+OpenSymbolDialog::OpenSymbolDialog(wxWindow* wnd, ee::EditPanelImpl* stage, 
+								   ee::MultiSpritesImpl* sprites_impl)
 	: m_wnd(wnd)
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
 {
 }
 
-void OpenSymbolDialog::Open(d2d::Sprite* spr)
+void OpenSymbolDialog::Open(ee::Sprite* spr)
 {
 	if (spr->GetSymbol().GetFilepath().find("[gen].json") != std::string::npos) {
 		wxMessageBox("禁止编辑自动生成的文件", "warning", wxOK | wxICON_INFORMATION, m_wnd);
@@ -85,9 +85,9 @@ void OpenSymbolDialog::Open(d2d::Sprite* spr)
 		emesh::EditDialog dlg(m_wnd, sprite, m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
-	else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(spr))
+	else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(spr))
 	{
-		d2d::TextDialog dlg(m_wnd, font);
+		ee::TextDialog dlg(m_wnd, font);
 		dlg.ShowModal();
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(spr))
@@ -113,7 +113,7 @@ void OpenSymbolDialog::Open(d2d::Sprite* spr)
 	}
 	else if (spr)
 	{
-		d2d::SpriteDialog dlg(m_wnd, spr);
+		ee::SpriteDialog dlg(m_wnd, spr);
 		if (dlg.ShowModal() == wxID_OK) {
 			spr->name = dlg.GetNameStr();
 			spr->tag = dlg.GetTagStr();
@@ -139,12 +139,12 @@ void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)
 	LibraryPanel* library = static_cast<LibraryPanel*>(static_cast<StagePanel*>(m_wnd)->GetLibrary());
 	Layer* layer = library->GetLayer(sud->layer_id);
 	for (int i = 0, n = sud->shape_names.size(); i < n; ++i) {
-		d2d::Shape* shape = layer->QueryShape(sud->shape_names[i]);
+		ee::Shape* shape = layer->QueryShape(sud->shape_names[i]);
 		layer->RemoveShape(shape);
 	}
 
 	sud->shape_names.clear();
-	std::vector<d2d::Shape*> shapes;
+	std::vector<ee::Shape*> shapes;
 	create_shapes_from_etxture(spr, shapes);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		layer->InsertShape(shapes[i]);

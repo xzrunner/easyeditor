@@ -10,7 +10,7 @@ namespace emesh
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, 
 						   bool full, Sprite* sprite)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_sprite(sprite)
 {
 	if (full)
@@ -19,13 +19,13 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 	}
 	addChild(new EditMeshCMPT(this, wxT("Edit"), stage));
 	addChild(new EditUVCMPT(this, wxT("UV"), stage));
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(initChildrenLayout());
+	sizer->Add(InitChildrenLayout());
 // 	sizer->AddSpacer(10);
 // 	{
 // 		wxSizer* speed_sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -59,7 +59,7 @@ void ToolbarPanel::OnSetSpeed(wxCommandEvent& event)
 	double x, y;
 	m_ctrl_xspeed->GetValue().ToDouble(&x);
 	m_ctrl_yspeed->GetValue().ToDouble(&y);
-	m_sprite->SetSpeed(d2d::Vector(x, y));
+	m_sprite->SetSpeed(ee::Vector(x, y));
 }
 
 }

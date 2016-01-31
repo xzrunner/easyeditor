@@ -24,7 +24,7 @@ Body::~Body()
 	fixtures.clear();
 }
 
-bool Body::isContain(const d2d::Vector& pos) const
+bool Body::isContain(const ee::Vector& pos) const
 {
 	for (size_t i = 0, n = fixtures.size(); i < n; ++i)
 		if (fixtures[i]->isContain(pos))
@@ -32,7 +32,7 @@ bool Body::isContain(const d2d::Vector& pos) const
 	return false;
 }
 
-bool Body::isIntersect(const d2d::Rect& rect) const
+bool Body::isIntersect(const ee::Rect& rect) const
 {
 	for (size_t i = 0, n = fixtures.size(); i < n; ++i)
 		if (fixtures[i]->isIntersect(rect))
@@ -40,7 +40,7 @@ bool Body::isIntersect(const d2d::Rect& rect) const
 	return false;
 }
 
-void Body::draw(const d2d::Matrix& mt, const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
+void Body::draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colorf& cEdge) const
 {
 	for (size_t i = 0, n = fixtures.size(); i < n; ++i) {
 		fixtures[i]->draw(mt, cFace, cEdge);

@@ -3,11 +3,11 @@
 namespace ecomplex
 {
 
-d2d::Sprite* AnchorToSpr::Trans(const librespacker::PackAnchor* anchor)
+ee::Sprite* AnchorToSpr::Trans(const librespacker::PackAnchor* anchor)
 {
-	d2d::FontBlankSymbol* symbol = new d2d::FontBlankSymbol();
+	ee::FontBlankSymbol* symbol = new ee::FontBlankSymbol();
 
-	d2d::FontBlankSprite* spr = new d2d::FontBlankSprite(symbol);
+	ee::FontBlankSprite* spr = new ee::FontBlankSprite(symbol);
 	spr->width = 32;
 	spr->height = 32;
 	return spr;

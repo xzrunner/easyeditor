@@ -9,7 +9,7 @@
 using namespace ebuilder;
 
 ChangeScenePanel::ChangeScenePanel(wxWindow* parent,
-								   d2d::LibraryList* sceneList, 
+								   ee::LibraryList* sceneList, 
 								   ChangeScene* behavior)
 	: BehaviorPanel(parent, CHANGE_SCENE_NAME)
 	, m_list(sceneList)
@@ -17,7 +17,7 @@ ChangeScenePanel::ChangeScenePanel(wxWindow* parent,
 {
 }
 
-void ChangeScenePanel::update(const d2d::LibraryList& list)
+void ChangeScenePanel::update(const ee::LibraryList& list)
 {
 	initChoice();
 }
@@ -53,7 +53,7 @@ void ChangeScenePanel::onChoiceChanged(wxCommandEvent& event)
 void ChangeScenePanel::initChoice()
 {
 	std::vector<wxString> names;
-	m_list->traverse(d2d::GetNameVisitor<d2d::ListItem>(names));
+	m_list->traverse(ee::GetNameVisitor<ee::ListItem>(names));
 
 	m_choice->Clear();
 	if (!names.empty()) 

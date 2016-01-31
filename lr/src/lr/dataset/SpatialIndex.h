@@ -1,16 +1,16 @@
 #ifndef _LR_SPATIAL_INDEX_H_
 #define _LR_SPATIAL_INDEX_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
 
-class SpatialIndex
+class SIdx
 {
 public:
 	
-}; // SpatialIndex
+}; // SIdx
 
 }
 

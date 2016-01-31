@@ -1,13 +1,13 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
 	class GenPentagon
 	{
 	public:
-		static void trigger(float edge, float val[5], d2d::Vector out[5]);
+		static void trigger(float edge, float val[5], ee::Vector out[5]);
 
 	}; // GenPentagon
 }

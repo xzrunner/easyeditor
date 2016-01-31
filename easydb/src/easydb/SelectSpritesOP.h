@@ -1,16 +1,16 @@
 #ifndef _EASYDB_SELECT_SPRITES_OP_H_
 #define _EASYDB_SELECT_SPRITES_OP_H_
 
-#include <drag2d.h>
+
 
 namespace edb
 {
 
-class SelectSpritesOP : public d2d::SelectSpritesOP
+class SelectSpritesOP : public ee::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiSpritesImpl* spritesImpl, d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::MultiSpritesImpl* spritesImpl, ee::EditCMPT* callback = NULL);
 
 	virtual bool OnKeyDown(int keyCode); 
 	virtual bool OnMouseLeftDClick(int x, int y);

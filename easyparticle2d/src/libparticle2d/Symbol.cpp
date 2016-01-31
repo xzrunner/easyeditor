@@ -15,7 +15,7 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::Symbol(s)
+	: ee::Symbol(s)
 	, m_et_cfg(s.m_et_cfg)
 {
 }
@@ -28,13 +28,13 @@ Symbol* Symbol::Clone() const
 void Symbol::ReloadTexture() const
 {
 	for (int i = 0; i < m_et_cfg->symbol_count; ++i) {
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(m_et_cfg->symbols[i].ud);
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_et_cfg->symbols[i].ud);
 		symbol->ReloadTexture();
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (!spr) {
 		return;
@@ -43,15 +43,15 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
 	p2d_spr->SetMatrix(mt);
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);
 
 	p2d_spr->Draw(mt);		
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	return d2d::Rect(200, 200);
+	return ee::Rect(200, 200);
 }
 
 void Symbol::LoadResources()

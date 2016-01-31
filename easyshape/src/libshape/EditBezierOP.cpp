@@ -5,9 +5,9 @@
 namespace libshape
 {
 
-EditBezierOP::EditBezierOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-						   d2d::PropertySettingPanel* propertyPanel, 
-						   d2d::OneFloatValue* node_capture)
+EditBezierOP::EditBezierOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+						   ee::PropertySettingPanel* propertyPanel, 
+						   ee::OneFloatValue* node_capture)
 	: ZoomViewOP(wnd, stage, true)
 	, m_propertyPanel(propertyPanel)
 	, m_shapesImpl(shapesImpl)
@@ -26,7 +26,7 @@ bool EditBezierOP::OnKeyDown(int keyCode)
 	{
 		m_shapesImpl->ClearSelectedShape();
 		m_captured.clear();
-		d2d::SelectShapeSJ::Instance()->Select(NULL);
+		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
 
 	return false;
@@ -48,7 +48,7 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
 			m_shapesImpl->GetShapeSelection()->Add(bezier);
-			d2d::SelectShapeSJ::Instance()->Select(bezier);
+			ee::SelectShapeSJ::Instance()->Select(bezier);
 		}
 	}
 	else
@@ -69,19 +69,19 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 		{
 			m_currPos = m_stage->TransPosScrToProj(x, y);
 
-			const float dis = d2d::Math2D::GetDistance(m_firstPress, m_currPos);
+			const float dis = ee::Math2D::GetDistance(m_firstPress, m_currPos);
 			if (dis > 1)
 			{
 				BezierShape* bezier = new BezierShape(m_firstPress, m_currPos);
-				d2d::SelectShapeSJ::Instance()->Select(bezier);
-				d2d::InsertShapeSJ::Instance()->Insert(bezier);
+				ee::SelectShapeSJ::Instance()->Select(bezier);
+				ee::InsertShapeSJ::Instance()->Insert(bezier);
 			}
 		}
 	}
 	else
 	{
  		m_propertyPanel->EnablePropertyGrid(true);
-		d2d::SelectShapeSJ::Instance()->Select(m_captured.shape);
+		ee::SelectShapeSJ::Instance()->Select(m_captured.shape);
 	}
 
 	Clear();
@@ -103,10 +103,10 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			d2d::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
+			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
 			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
-			d2d::SelectShapeSJ::Instance()->Select(NULL);
+			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
 	}
 	else
@@ -121,15 +121,15 @@ bool EditBezierOP::OnMouseMove(int x, int y)
 {
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
-		d2d::Shape* old = m_captured.shape;
+		ee::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -146,7 +146,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 	{
 		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
-			d2d::Vector center(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
+			ee::Vector center(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
 
 			if (!m_captured.pos.IsValid()) {
 				bezier->Translate(m_currPos - center);
@@ -159,7 +159,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 		}
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
@@ -175,10 +175,10 @@ bool EditBezierOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::DrawCircle(d2d::Vector(bezier->GetRect().CenterX(), bezier->GetRect().CenterY()), 
-					tolerance, true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+				ee::PrimitiveDraw::DrawCircle(ee::Vector(bezier->GetRect().CenterX(), bezier->GetRect().CenterY()), 
+					tolerance, true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.IsValid()) {
-					d2d::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+					ee::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, ee::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
@@ -188,7 +188,7 @@ bool EditBezierOP::OnDraw() const
 		if (m_firstPress.IsValid() && m_currPos.IsValid())
 		{
 			BezierShape bezier(m_firstPress, m_currPos);
-			bezier.Draw(d2d::Matrix());
+			bezier.Draw(ee::Matrix());
 		}
 //			PrimitiveDraw::drawRect(m_firstPress, m_currPos);
 	}

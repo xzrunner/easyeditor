@@ -1,16 +1,17 @@
-#ifndef _DRAG2D_LAYER_MGR_H_
-#define _DRAG2D_LAYER_MGR_H_
+#ifndef _EASYEDITOR_LAYER_MGR_H_
+#define _EASYEDITOR_LAYER_MGR_H_
 
-#include "view/DataTraverseType.h"
+#include "DataTraverseType.h"
 
-#include <vector>
 #include <json/json.h>
 
-namespace d2d
+#include <vector>
+
+namespace ee
 {	
 
 class Layer;
-class IVisitor;
+class Visitor;
 
 class LayerMgr
 {
@@ -18,8 +19,8 @@ public:
 	LayerMgr();
 	~LayerMgr();
 
-	void TraverseSprite(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
-	void TraverseShape(IVisitor& visitor, bool order = true) const;
+	void TraverseSprite(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseShape(Visitor& visitor, bool order = true) const;
 
 	const std::vector<Layer*>& GetAllLayers() const { return m_layers; }
 
@@ -43,4 +44,4 @@ private:
 
 }
 
-#endif // _DRAG2D_LAYER_MGR_H_
+#endif // _EASYEDITOR_LAYER_MGR_H_

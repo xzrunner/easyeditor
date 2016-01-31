@@ -11,14 +11,14 @@ class StagePanel;
 class CreateRegionOP : public libshape::DrawPolygonOP
 {
 public:
-	CreateRegionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl);
+	CreateRegionOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnDraw() const;
 
 private:
 	StagePanel* m_stage;
 
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 
 }; // CreateRegionOP
 

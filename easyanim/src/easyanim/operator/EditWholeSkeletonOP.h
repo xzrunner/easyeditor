@@ -6,10 +6,10 @@ namespace eanim
 {
 	namespace edit_whole_skeleton { class RotateBoneAOP; }
 
-	class EditWholeSkeletonOP : public d2d::ZoomViewOP
+	class EditWholeSkeletonOP : public ee::ZoomViewOP
 	{
 	public:
-		EditWholeSkeletonOP(d2d::EditPanel* editPanel, WholeSkeleton* skeleton);
+		EditWholeSkeletonOP(ee::EditPanel* editPanel, WholeSkeleton* skeleton);
 
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);
@@ -22,9 +22,9 @@ namespace eanim
 		WholeSkeleton* m_skeleton;
 
 		WholeSkeleton::Sprite* m_selected;
-		d2d::Vector m_lastPos;
+		ee::Vector m_lastPos;
 
-		d2d::Vector m_firstPos;
+		ee::Vector m_firstPos;
 
 		friend class edit_whole_skeleton::RotateBoneAOP;
 

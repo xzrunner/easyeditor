@@ -3,7 +3,7 @@
 
 #include "INodeBuilder.h"
 
-#include <drag2d.h>
+
 #include <easycomplex.h>
 
 namespace librespacker
@@ -18,7 +18,7 @@ public:
 	ClipboxBuilder();
 	virtual ~ClipboxBuilder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	const IPackNode* Create(const ecomplex::Symbol* complex);
 

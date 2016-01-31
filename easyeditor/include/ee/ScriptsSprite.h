@@ -1,10 +1,10 @@
-#ifndef _DRAG2D_SCRIPTS_SPRITE_H_
-#define _DRAG2D_SCRIPTS_SPRITE_H_
+#ifndef _EASYEDITOR_SCRIPTS_SPRITE_H_
+#define _EASYEDITOR_SCRIPTS_SPRITE_H_
 
 #include "Sprite.h"
 #include "ScriptsSymbol.h"
 
-namespace d2d
+namespace ee
 {
 
 class ScriptsSprite : public Sprite
@@ -33,4 +33,4 @@ private:
 
 }
 
-#endif // _DRAG2D_SCRIPTS_SPRITE_H_
+#endif // _EASYEDITOR_SCRIPTS_SPRITE_H_

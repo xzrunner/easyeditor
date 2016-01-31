@@ -6,7 +6,7 @@
 #include "PackUIWrapperTask.h"
 
 #include <fstream>
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -36,7 +36,7 @@ void PackUI::AddTask(const std::string& filepath)
 	} else if (type == UI_WRAPPER) {
 		task = new PackUIWrapperTask(filepath, value);
 	} else {
-//		throw d2d::Exception("PackUI unknown task %s", type);
+//		throw ee::Exception("PackUI unknown task %s", type);
 		return;
 	}
 	m_tasks.push_back(task);
@@ -44,7 +44,7 @@ void PackUI::AddTask(const std::string& filepath)
 
 void PackUI::OnKnownPackID(const std::string& filepath, int id)
 {
-	std::string key = d2d::FileHelper::FormatFilepathAbsolute(filepath);
+	std::string key = ee::FileHelper::FormatFilepathAbsolute(filepath);
 
 	std::map<std::string, std::set<PackUITask*> >::iterator 
 		itr = m_task_listener.find(key);

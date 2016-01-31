@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WRAPPER_STAGE_PANEL_H_
 #define _EASYUI_WRAPPER_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "UIStagePage.h"
 
@@ -15,7 +15,7 @@ namespace wrapper
 
 class ToolbarPanel;
 
-class StagePanel : public UIStagePage, public d2d::SpritesPanelImpl
+class StagePanel : public UIStagePage, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -30,7 +30,7 @@ public:
 	virtual void OnPreview() {}
 	virtual void OnCode() const {}
 
-	d2d::Rect& GetClipbox() { return m_clipbox; }
+	ee::Rect& GetClipbox() { return m_clipbox; }
 
 private:
 	TopPannels* m_top_pannels;
@@ -38,7 +38,7 @@ private:
 
 	int m_toolbar_idx;
 
-	d2d::Rect m_clipbox;
+	ee::Rect m_clipbox;
 
 }; // StagePanel
 

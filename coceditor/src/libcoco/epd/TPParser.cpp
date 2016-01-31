@@ -5,7 +5,7 @@ namespace libcoco
 namespace epd
 {
 
-TPParser::TPParser(const std::vector<const d2d::Symbol*>& symbols,
+TPParser::TPParser(const std::vector<const ee::Symbol*>& symbols,
 				   const TextureMgr& tex_mgr)
 	: m_tex_mgr(tex_mgr)
 	, m_tex_size(0)
@@ -23,9 +23,9 @@ void TPParser::Parser()
 	m_tex_size = idx;
 }
 
-TPParser::Picture* TPParser::FindPicture(const d2d::Symbol* symbol) const
+TPParser::Picture* TPParser::FindPicture(const ee::Symbol* symbol) const
 {
-	std::map<const d2d::Symbol*, TPParser::Picture*>::const_iterator itr 
+	std::map<const ee::Symbol*, TPParser::Picture*>::const_iterator itr 
 		= m_map_symbol2picture.find(symbol);
 	if (itr == m_map_symbol2picture.end()) {
 		return NULL;
@@ -38,7 +38,7 @@ void TPParser::DebugInfo() const
 {
 	std::ofstream fout("d:/zz_debug.txt");
 
-	std::map<const d2d::Symbol*, Picture*>::const_iterator itr 
+	std::map<const ee::Symbol*, Picture*>::const_iterator itr 
 		= m_map_symbol2picture.begin();
 	for ( ; itr != m_map_symbol2picture.end(); ++itr) {
 		fout << itr->first->GetFilepath() << "\n";
@@ -58,7 +58,7 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		const TPAdapter::Entry& entry = frames[i];
 
 		// find symbol
-		const d2d::Symbol* symbol = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
+		const ee::Symbol* symbol = m_symbol_sorter.GetSymbolSet().Query(entry.filename);
 		if (!symbol) {
 			continue;
 		}

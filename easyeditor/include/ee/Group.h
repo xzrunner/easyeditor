@@ -1,12 +1,12 @@
-#ifndef _DRAG2D_GROUP_H_
-#define _DRAG2D_GROUP_H_
+#ifndef _EASYEDITOR_GROUP_H_
+#define _EASYEDITOR_GROUP_H_
 
-#include "common/Object.h"
-#include "view/ObjectVector.h"
-#include "dataset/Sprite.h"
-#include "dataset/Shape.h"
+#include "Object.h"
+#include "ObjectVector.h"
+#include "Sprite.h"
+#include "Shape.h"
 
-namespace d2d
+namespace ee
 {
 
 class Group : public Object
@@ -18,7 +18,7 @@ public:
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }
 
-	void TraverseSprite(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseSprite(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 
 	bool Insert(Sprite* sprite);
 	bool Remove(Sprite* sprite);
@@ -44,4 +44,4 @@ private:
 
 }
 
-#endif // _DRAG2D_GROUP_H_
+#endif // _EASYEDITOR_GROUP_H_

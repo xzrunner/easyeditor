@@ -13,7 +13,7 @@
 namespace eanim
 {
 
-BEGIN_EVENT_TABLE(Frame, d2d::Frame)
+BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::OnPreview)
 	EVT_MENU(ID_BACKGROUND, Frame::OnSetBackground)
 	EVT_MENU(ID_CODESETTING, Frame::OnCodeSetting)
@@ -21,7 +21,7 @@ BEGIN_EVENT_TABLE(Frame, d2d::Frame)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
-	: d2d::Frame(title, filetag)
+	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_setting_menu->Append(ID_BACKGROUND, wxT("Background"), wxT("Background"));
@@ -34,8 +34,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		std::string single_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anim)),
-			template_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anis)),
+		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim)),
+			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anis)),
 			all_filter = "All | *_ani?.json";
 		std::string filter = all_filter + "|" + single_filter + "|" + template_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
@@ -44,8 +44,8 @@ void Frame::OnOpen(wxCommandEvent& event)
 			std::string filename = dlg.GetPath();
 			OpenFile(filename);
 		}
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
@@ -55,8 +55,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
  	if (!m_task) return;
  
  	try {
-		std::string single_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anim)),
-			template_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anis)),
+		std::string single_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim)),
+			template_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anis)),
 			png_filter = "PNG files (*.png)|*.png";
 		std::string filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
@@ -72,8 +72,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 				SaveAsPNG(filename);
 			}
  		}
- 	} catch (d2d::Exception& e) {
- 		d2d::ExceptionDlg dlg(this, e);
+ 	} catch (ee::Exception& e) {
+ 		ee::ExceptionDlg dlg(this, e);
  		dlg.ShowModal();
  	}
 }
@@ -90,7 +90,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 	stage->EnableObserve(true);
 	stage->GetCanvas()->EnableObserve(true);
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Frame::OnSetBackground(wxCommandEvent& event)
@@ -101,14 +101,14 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
 	else
 	{
-		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
 	}
 }
@@ -139,19 +139,19 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	std::vector<d2d::Sprite*> sprites;
-	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<ee::Sprite*> sprites;
+	((StagePanel*)(m_task->GetEditPanel()))->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
 
-	d2d::Rect region;
+	ee::Rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
- 		std::vector<d2d::Vector> vertices;
+ 		std::vector<ee::Vector> vertices;
  		sprites[i]->GetBounding()->GetBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j) {
  			region.Combine(vertices[j]);
 		}
  	}
 
-	d2d::Snapshoot ss(region.Width(), region.Height());
+	ee::Snapshoot ss(region.Width(), region.Height());
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i], false, region.CenterX(), region.CenterY());
 	}
@@ -161,8 +161,8 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsSingle(const std::string& filepath) const
 {
-	std::string tag = d2d::FileType::GetTag(d2d::FileType::e_anim);
-	std::string full_path = d2d::FileHelper::GetFilenameAddTag(filepath, tag, "json");
+	std::string tag = ee::FileType::GetTag(ee::FileType::e_anim);
+	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
 	FileIO::StoreSingle(full_path);
@@ -171,8 +171,8 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 
 void Frame::SaveAsTemplate(const std::string& filepath) const
 {
-	std::string tag = d2d::FileType::GetTag(d2d::FileType::e_anis);
-	std::string full_path = d2d::FileHelper::GetFilenameAddTag(filepath, tag, "json");
+	std::string tag = ee::FileType::GetTag(ee::FileType::e_anis);
+	std::string full_path = ee::FileHelper::GetFilenameAddTag(filepath, tag, "json");
 	m_curr_filename = full_path;
 
 	FileIO::StoreTemplate(full_path);

@@ -1,12 +1,12 @@
 //#ifndef _LIBSKETCH_SHAPE_SHADER_H_
 //#define _LIBSKETCH_SHAPE_SHADER_H_
 //
-//#include <drag2d.h>
+//
 //
 //namespace libsketch
 //{
 //
-//class ShapeShader : public d2d::IShader
+//class ShapeShader : public ee::IShader
 //{
 //public:
 //	

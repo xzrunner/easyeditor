@@ -20,13 +20,13 @@ PackAnimation::PackAnimation(int id)
 }
 
 void PackAnimation::PackToLuaString(ebuilder::CodeGenerator& gen, 
-									const d2d::TexturePacker& tp,
+									const ee::TexturePacker& tp,
 									float scale) const
 {
 	AnimToLuaString::Pack(this, gen);
 }
 
-void PackAnimation::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+void PackAnimation::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
 {
 	AnimFromLua::Unpack(L, this);
 }
@@ -37,7 +37,7 @@ int PackAnimation::SizeOfPackToBin() const
 }
 
 void PackAnimation::PackToBin(uint8_t** ptr, 
-							  const d2d::TexturePacker& tp,
+							  const ee::TexturePacker& tp,
 							  float scale) const
 {
 	AnimToBin::Pack(this, ptr);
@@ -48,12 +48,12 @@ int PackAnimation::SizeOfUnpackFromBin() const
 	return AnimFromBin::Size(this);
 }
 
-void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+void PackAnimation::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
 {
 	AnimFromBin::Unpack(ptr, this);
 }
 
-void PackAnimation::CreateFramePart(const d2d::Sprite* spr, Frame& frame)
+void PackAnimation::CreateFramePart(const ee::Sprite* spr, Frame& frame)
 {	
 	const IPackNode* node = PackNodeFactory::Instance()->Create(spr);
 
@@ -115,10 +115,10 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 				&& components[i].name == name
 				&& !name.empty()) 
 			{
-				d2d::FileType::Type type = d2d::FileType::GetType(node->GetFilepath());
-				if (type == d2d::FileType::e_image ||
-					type == d2d::FileType::e_complex ||
-					type == d2d::FileType::e_anim) {
+				ee::FileType::Type type = ee::FileType::GetType(node->GetFilepath());
+				if (type == ee::FileType::e_image ||
+					type == ee::FileType::e_complex ||
+					type == ee::FileType::e_anim) {
 					comp_idx = i;
 					return true;
 				}
@@ -134,22 +134,22 @@ bool PackAnimation::AddComponent(const IPackNode* node, const std::string& name,
 
 	if (is_anchor) {
 		return true;
-	} else if (d2d::FileType::IsType(node->GetFilepath(), d2d::FileType::e_image)) {
+	} else if (ee::FileType::IsType(node->GetFilepath(), ee::FileType::e_image)) {
 		return false;
 	} else {
 		return !name.empty();
 	}
 }
 
-void PackAnimation::LoadSprTrans(const d2d::Sprite* spr, SpriteTrans& trans, bool force_mat)
+void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool force_mat)
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
 }
 
-void PackAnimation::LoadSprMat(const d2d::Sprite* spr, SpriteTrans& trans, bool force)
+void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
 {
-	if (!force && dynamic_cast<const d2d::ImageSprite*>(spr)) {
+	if (!force && dynamic_cast<const ee::ImageSprite*>(spr)) {
 		return;
 	}
 
@@ -163,7 +163,7 @@ void PackAnimation::LoadSprMat(const d2d::Sprite* spr, SpriteTrans& trans, bool 
 	mat[1] = mat[2] = mat[4] = mat[5] = 0;
 	mat[0] = mat[3] = 1;
 
-	d2d::Vector center = spr->GetCenter();
+	ee::Vector center = spr->GetCenter();
 
 	bool xmir, ymir;
 	spr->GetMirror(xmir, ymir);
@@ -196,14 +196,14 @@ void PackAnimation::LoadSprMat(const d2d::Sprite* spr, SpriteTrans& trans, bool 
 	trans.mat[5] = -trans.mat[5];
 }
 
-void PackAnimation::LoadSprColor(const d2d::Sprite* spr, SpriteTrans& trans)
+void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = d2d::color2int(spr->color.multi, d2d::PT_ARGB);
-	trans.additive = d2d::color2int(spr->color.add, d2d::PT_ARGB);
+	trans.color = ee::color2int(spr->color.multi, ee::PT_ARGB);
+	trans.additive = ee::color2int(spr->color.add, ee::PT_ARGB);
 
-	trans.rmap = d2d::color2int(spr->color.r, d2d::PT_RGBA);
-	trans.gmap = d2d::color2int(spr->color.g, d2d::PT_RGBA);
-	trans.bmap = d2d::color2int(spr->color.b, d2d::PT_RGBA);	
+	trans.rmap = ee::color2int(spr->color.r, ee::PT_RGBA);
+	trans.gmap = ee::color2int(spr->color.g, ee::PT_RGBA);
+	trans.bmap = ee::color2int(spr->color.b, ee::PT_RGBA);	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

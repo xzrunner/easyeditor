@@ -8,9 +8,9 @@
 using namespace emodeling;
 
 SelectJointOP::SelectJointOP(wxWindow* stage_wnd,
-							 d2d::EditPanelImpl* stage, 
-							 d2d::MultiSpritesImpl* spritesImpl, 
-							 d2d::AbstractEditCMPT* callback /*= NULL*/)
+							 ee::EditPanelImpl* stage, 
+							 ee::MultiSpritesImpl* spritesImpl, 
+							 ee::EditCMPT* callback /*= NULL*/)
 	: SelectBodyOP(stage_wnd, stage, spritesImpl, callback)
 	, m_property_panel(NULL)
 	, m_mouseOn(NULL)
@@ -27,7 +27,7 @@ bool SelectJointOP::OnKeyDown(int keyCode)
 		if (m_mouseOn == m_selected) m_mouseOn = NULL;
 		static_cast<StagePanel*>(m_wnd)->removeJoint(m_selected);
 		m_selected = NULL;
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -35,10 +35,10 @@ bool SelectJointOP::OnKeyDown(int keyCode)
 
 bool SelectJointOP::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	libmodeling::Joint* selected = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
 	if (selected && !m_selected || !selected && m_selected)
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -85,9 +85,9 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 
 bool SelectJointOP::OnMouseLeftUp(int x, int y)
 {
-	//d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	//ee::Vector pos = m_stage->transPosScreenToProject(x, y);
 	//selectedJoints.clear();
-	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(d2d::Rect(pos, m_firstPos), selectedJoints);
+	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(ee::Rect(pos, m_firstPos), selectedJoints);
 	//if (selectedJoints.size() == 1)
 	//	m_property_panel->SetPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
 
@@ -106,10 +106,10 @@ bool SelectJointOP::OnMouseMove(int x, int y)
 	if (SelectBodyOP::OnMouseMove(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	libmodeling::Joint* joint = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
 	if (joint && !m_mouseOn || !joint && m_mouseOn)
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	m_mouseOn = joint;
 
@@ -123,14 +123,14 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 
 	if (m_selected)
 	{
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 		switch (m_selected->type)
 		{
 		case libmodeling::Joint::e_revoluteJoint:
 			{
 				libmodeling::RevoluteJoint* joint = static_cast<libmodeling::RevoluteJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -140,8 +140,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_prismaticJoint:
 			{
 				libmodeling::PrismaticJoint* joint = static_cast<libmodeling::PrismaticJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -151,8 +151,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_distanceJoint:
 			{
 				libmodeling::DistanceJoint* joint = static_cast<libmodeling::DistanceJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -162,10 +162,10 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_pulleyJoint:
 			{
 				libmodeling::PulleyJoint* joint = static_cast<libmodeling::PulleyJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
-				const float disGA = d2d::Math2D::GetDistance(pos, joint->groundAnchorA),
-					disGB = d2d::Math2D::GetDistance(pos, joint->groundAnchorB);
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disGA = ee::Math2D::GetDistance(pos, joint->groundAnchorA),
+					disGB = ee::Math2D::GetDistance(pos, joint->groundAnchorB);
 
 				float dis = std::min(std::min(disA, disB), std::min(disGA, disGB));
 				if (dis == disA)
@@ -185,8 +185,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_wheelJoint:
 			{
 				libmodeling::WheelJoint* joint = static_cast<libmodeling::WheelJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -196,8 +196,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_weldJoint:
 			{
 				libmodeling::WeldJoint* joint = static_cast<libmodeling::WeldJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -207,8 +207,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_frictionJoint:
 			{
 				libmodeling::FrictionJoint* joint = static_cast<libmodeling::FrictionJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -218,8 +218,8 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 		case libmodeling::Joint::e_ropeJoint:
 			{
 				libmodeling::RopeJoint* joint = static_cast<libmodeling::RopeJoint*>(m_selected);
-				const float disA = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = d2d::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
 				if (disA < disB)
 					joint->setLocalAnchorA(pos);
 				else
@@ -232,7 +232,7 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 			break;
 		}
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -264,10 +264,10 @@ bool SelectJointOP::Clear()
 }
 
 void SelectJointOP::DrawSelectedVisitor::
-Visit(d2d::Object* object, bool& next) 
+Visit(ee::Object* object, bool& next) 
 {
-	std::vector<d2d::Vector> bound;
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	std::vector<ee::Vector> bound;
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	DrawUtils::drawBody(body, DrawUtils::e_selected);
 	next = true;

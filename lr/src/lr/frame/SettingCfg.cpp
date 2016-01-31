@@ -1,6 +1,6 @@
 #include "SettingCfg.h"
 
-#include <drag2d.h>
+
 
 #include <stdio.h>
 
@@ -11,8 +11,8 @@ SettingCfg* SettingCfg::m_instance = NULL;
 
 SettingCfg::SettingCfg()
 {
-	m_map_width = d2d::HALF_S_WIDTH * 2;
-	m_map_height = d2d::HALF_S_HEIGHT * 2;
+	m_map_width = ee::HALF_S_WIDTH * 2;
+	m_map_height = ee::HALF_S_HEIGHT * 2;
 
 	m_view_dx = m_view_dy = 0;
 	m_view_width = m_map_width;

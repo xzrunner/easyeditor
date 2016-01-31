@@ -2,7 +2,7 @@
 #ifndef EMODELING_DRAW_UTILS_H
 #define EMODELING_DRAW_UTILS_H
 
-#include <drag2d.h>
+
 
 #include <easymodeling.h>
 
@@ -25,11 +25,11 @@ namespace emodeling
 
 	private:
 		static void getBodyColor(libmodeling::Body::Type type, DrawType dType,
-			d2d::Colorf& cFace, d2d::Colorf& cEdge);
-		static void getFixtureColor(DrawType type, d2d::Colorf& cFace, 
-			d2d::Colorf& cEdge);
+			ee::Colorf& cFace, ee::Colorf& cEdge);
+		static void getFixtureColor(DrawType type, ee::Colorf& cFace, 
+			ee::Colorf& cEdge);
 
-		static d2d::Colorf colorEnlarge(const d2d::Colorf& color, float factor);
+		static ee::Colorf colorEnlarge(const ee::Colorf& color, float factor);
 
 	}; // DrawUtils
 }

@@ -2,21 +2,21 @@
 #ifndef EBUILDER_SCENE_ITEM_H
 #define EBUILDER_SCENE_ITEM_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class Layer;
 	class Scene;
 
-	class SceneItem : public d2d::ISymbol
+	class SceneItem : public ee::ISymbol
 	{
 	public:
 		SceneItem(Scene* scene);
 		virtual ~SceneItem();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//	
 		virtual SceneItem* clone();
 
@@ -24,11 +24,11 @@ namespace ebuilder
 		// ISymbol interface
 		//
 		virtual void reloadTexture() const;
-		virtual void draw(const d2d::Matrix& mt,
-			const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
-			const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
-			const d2d::ISprite* sprite = NULL) const;
-		virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
+		virtual void draw(const ee::Matrix& mt,
+			const ee::Colorf& mul = ee::Colorf(1, 1, 1, 1), 
+			const ee::Colorf& add = ee::Colorf(0, 0, 0, 0),
+			const ee::ISprite* sprite = NULL) const;
+		virtual ee::Rect getSize(const ee::ISprite* sprite = NULL) const;
 
 		Scene* getScene() const {
 			return m_scene;

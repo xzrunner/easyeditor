@@ -5,7 +5,7 @@
 namespace ecomplex
 {
 
-d2d::Sprite* LabelToSpr::Trans(const librespacker::PackLabel* label)
+ee::Sprite* LabelToSpr::Trans(const librespacker::PackLabel* label)
 {
 	etext::Symbol* symbol = new etext::Symbol();
 

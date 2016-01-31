@@ -11,7 +11,7 @@
 namespace eanim
 {
 
-void Render::drawPos(const d2d::Vector& pos, float radius)
+void Render::drawPos(const ee::Vector& pos, float radius)
 {
 	glBegin(GL_QUADS);
 		glVertex2f(pos.x - radius, pos.y - radius);
@@ -28,11 +28,11 @@ void Render::drawSprites(const std::vector<Sprite*>& sprites)
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		Sprite* sprite = sprites[i];
-		const d2d::Vector& pos = sprite->getPosition();
+		const ee::Vector& pos = sprite->getPosition();
 
 		glPushMatrix();
 		glTranslatef(pos.x, pos.y, 0.0f);
-		glRotatef(sprite->getAngle() * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
+		glRotatef(sprite->getAngle() * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
 			drawSpriteCenter(sprite);
 		glPopMatrix();
 	}
@@ -47,7 +47,7 @@ void Render::drawSpriteCenter(Sprite* sprite)
 	else if (sprite->getWholeSkeleton())
 		drawSpriteCenterWholeSkeleton(sprite);
 	else
-		d2d::SpriteDraw::drawSprite(sprite);
+		ee::SpriteDraw::drawSprite(sprite);
 }
 
 void Render::drawSpriteCenterMesh(Sprite* sprite)
@@ -88,7 +88,7 @@ void Render::drawSpriteCenterWholeSkeleton(Sprite* sprite)
 	sprite->getWholeSkeleton()->onDraw();
 }
 
-void Render::drawRawPixels(const d2d::RawPixels& pixels)
+void Render::drawRawPixels(const ee::RawPixels& pixels)
 {
 	int width, height, channels;
 	pixels.getSize(width, height);
@@ -122,7 +122,7 @@ void Render::drawRawPixels(const d2d::RawPixels& pixels)
 	glPopMatrix();
 }
 
-void Render::drawRawPixelsBound(const d2d::RawPixels& pixels)
+void Render::drawRawPixelsBound(const ee::RawPixels& pixels)
 {
 	int width, height, channels;
 	pixels.getSize(width, height);
@@ -164,7 +164,7 @@ void Render::drawRawPixelsBound(const d2d::RawPixels& pixels)
 	glPopMatrix();
 }
 
-void Render::drawRawPixelsSelected(const d2d::RawPixels& original, const d2d::RawPixels::PixelBuf& selected)
+void Render::drawRawPixelsSelected(const ee::RawPixels& original, const ee::RawPixels::PixelBuf& selected)
 {
 	int width, height, channels;
 	original.getSize(width, height);
@@ -175,7 +175,7 @@ void Render::drawRawPixelsSelected(const d2d::RawPixels& original, const d2d::Ra
 	glTranslatef(- width * 0.5f, - height * 0.5f, 0.0f);
 
 	const unsigned char* data = original.getPixelData();
-	d2d::RawPixels::PixelBuf::const_iterator itr = selected.begin();
+	ee::RawPixels::PixelBuf::const_iterator itr = selected.begin();
 	for ( ; itr != selected.end(); ++itr)
 	{
 		float x = (*itr)->x, y = (*itr)->y;
@@ -198,7 +198,7 @@ void Render::drawRawPixelsSelected(const d2d::RawPixels& original, const d2d::Ra
 	glPopMatrix();
 }
 
-void Render::drawRawPixelsSelectedFlag(const d2d::RawPixels& original, const d2d::RawPixels::PixelBuf& selected)
+void Render::drawRawPixelsSelectedFlag(const ee::RawPixels& original, const ee::RawPixels::PixelBuf& selected)
 {
 	int width, height, channels;
 	original.getSize(width, height);
@@ -208,7 +208,7 @@ void Render::drawRawPixelsSelectedFlag(const d2d::RawPixels& original, const d2d
 	glPushMatrix();
 	glTranslatef(- width * 0.5f, - height * 0.5f, 0.0f);
 
-	d2d::RawPixels::PixelBuf::const_iterator itr = selected.begin();
+	ee::RawPixels::PixelBuf::const_iterator itr = selected.begin();
 	glColor4f(1.0f, 0.2f, 0.2f, 0.5f);
 	for ( ; itr != selected.end(); ++itr)
 	{

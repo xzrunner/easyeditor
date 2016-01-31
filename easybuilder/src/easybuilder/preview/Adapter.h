@@ -2,7 +2,7 @@
 #ifndef EBUILDER_PREVIEW_ADAPTER_H
 #define EBUILDER_PREVIEW_ADAPTER_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {	
@@ -31,7 +31,7 @@ namespace ebuilder
 			
 			Button* builder2Button(const ebuilder::Actor& actor);
 
-			Behavior* builder2Behavior(d2d::ISprite* sprite,
+			Behavior* builder2Behavior(ee::ISprite* sprite,
 				const ebuilder::Behavior& behavior);
 
 			Scene* getScene(const ebuilder::Scene* scene);

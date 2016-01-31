@@ -1,6 +1,6 @@
 #include "Task.h"
 
-#include <drag2d.h>
+
 #include <easyterrain2d.h>
 
 namespace eterrain2d
@@ -11,13 +11,13 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
-	d2d::Config::Instance()->GetSettings().visible_tex_edge = true;
+	ee::Config::Instance()->GetSettings().visible_tex_edge = true;
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -30,13 +30,13 @@ void Task::Load(const char* filename)
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
-	m_stage->Load(d2d::FileHelper::GetFileDir(filename).ToStdString(), value, m_library, m_toolbar);
+	m_stage->Load(ee::FileHelper::GetFileDir(filename).ToStdString(), value, m_library, m_toolbar);
 }
 
 void Task::Store(const char* filename) const
 {
 	Json::Value value;
-	m_stage->Store(d2d::FileHelper::GetFileDir(filename).ToStdString(), value);
+	m_stage->Store(ee::FileHelper::GetFileDir(filename).ToStdString(), value);
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);
@@ -50,7 +50,7 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

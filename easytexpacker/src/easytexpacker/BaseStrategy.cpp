@@ -3,17 +3,17 @@
 
 using namespace etexpacker;
 
-void BaseStrategy::sortByArea(std::vector<d2d::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::sortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {
 	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_area, isDescend));
 }
 
-void BaseStrategy::sortByMaxEdge(std::vector<d2d::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::sortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {
 	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_maxEdge, isDescend));
 }
 
-void BaseStrategy::sortByTotEdges(std::vector<d2d::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::sortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {
 	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_totEdges, isDescend));
 }
@@ -24,7 +24,7 @@ BaseStrategy::SpriteCmp::SpriteCmp(SortStrategy strategy, bool isDescend)
 	m_isDescend = isDescend;
 }
 
-bool BaseStrategy::SpriteCmp::operator() (const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	bool isLess;
 
@@ -45,7 +45,7 @@ bool BaseStrategy::SpriteCmp::operator() (const d2d::ImageSprite* s0, const d2d:
 	else return isLess;
 }
 
-bool BaseStrategy::SpriteCmp::isAreaLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::isAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -54,7 +54,7 @@ bool BaseStrategy::SpriteCmp::isAreaLess(const d2d::ImageSprite* s0, const d2d::
 		<= (s1->GetSymbol().GetSize().Width() * s + p) * (s1->GetSymbol().GetSize().Height() * s + p);
 }
 
-bool BaseStrategy::SpriteCmp::isEdgeLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::isEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -63,7 +63,7 @@ bool BaseStrategy::SpriteCmp::isEdgeLess(const d2d::ImageSprite* s0, const d2d::
 		<= std::max((s1->GetSymbol().GetSize().Width() * s + p), (s1->GetSymbol().GetSize().Height() * s + p));
 }
 
-bool BaseStrategy::SpriteCmp::isTotEdgesLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::isTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;

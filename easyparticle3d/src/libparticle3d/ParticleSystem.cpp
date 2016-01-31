@@ -40,7 +40,7 @@ ParticleSystem::~ParticleSystem()
 	p3d_sprite_release(m_spr);	
 }
 
-void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
+void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 {
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
 
@@ -65,8 +65,8 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		cfg->tangential_spd_var = data.val1;
 		break;
 	case PS_ANGULAR_SPEED:
-		cfg->angular_spd = data.val0 * d2d::TRANS_DEG_TO_RAD;
-		cfg->angular_spd_var = data.val1 * d2d::TRANS_DEG_TO_RAD;
+		cfg->angular_spd = data.val0 * ee::TRANS_DEG_TO_RAD;
+		cfg->angular_spd_var = data.val1 * ee::TRANS_DEG_TO_RAD;
 		break;
 	case PS_DISTURBANCE_RADIUS:
 		cfg->dis_region = data.val0;
@@ -96,7 +96,7 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
+void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -119,8 +119,8 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_spr->et->cfg->tangential_spd_var;
 		break;
 	case PS_ANGULAR_SPEED:
-		data.val0 = m_spr->et->cfg->angular_spd * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = m_spr->et->cfg->angular_spd_var * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = m_spr->et->cfg->angular_spd * ee::TRANS_RAD_TO_DEG;
+		data.val1 = m_spr->et->cfg->angular_spd_var * ee::TRANS_RAD_TO_DEG;
 		break;
 	case PS_DISTURBANCE_RADIUS:
 		data.val0 = m_spr->et->cfg->dis_region;
@@ -147,18 +147,18 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::Draw(const d2d::Matrix& mt, AnimRecorder* recorder) const
+void ParticleSystem::Draw(const ee::Matrix& mt, AnimRecorder* recorder) const
 {
 //  // todo record
 // 	if (m_anim_recorder) {
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	m_rp.mat = const_cast<d2d::Matrix&>(mt);
+	m_rp.mat = const_cast<ee::Matrix&>(mt);
 	p3d_emitter_draw(m_spr->et, &m_rp);
 }
 
-bool ParticleSystem::Update(const d2d::Matrix& mat)
+bool ParticleSystem::Update(const ee::Matrix& mat)
 {
 	float time = PS::Instance()->GetTime();
 	assert(m_spr->et->time <= time);
@@ -271,7 +271,7 @@ bool ParticleSystem::IsEmpty() const
 void ParticleSystem::ReloadTexture() const
 {
 	for (int i = 0; i < m_spr->et->cfg->symbol_count; ++i) {
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(m_spr->et->cfg->symbols[i].ud);
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(m_spr->et->cfg->symbols[i].ud);
 		symbol->ReloadTexture();
 	}
 }
@@ -300,15 +300,15 @@ void ParticleSystem::RemoveFromInvertRecord(p3d_particle* p)
 void ParticleSystem::SetHori(int min, int max) 
 {
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	cfg->hori = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
-	cfg->hori_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+	cfg->hori = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	cfg->hori_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetVert(int min, int max) 
 { 
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	cfg->vert = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
-	cfg->vert_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+	cfg->vert = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	cfg->vert_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetGround(int ground)
@@ -321,7 +321,7 @@ void ParticleSystem::SetOrientToMovement(bool open)
 	const_cast<p3d_emitter_cfg*>(m_spr->et->cfg)->orient_to_movement = open;
 }
 
-p3d_symbol* ParticleSystem::AddSymbol(d2d::Symbol* symbol)
+p3d_symbol* ParticleSystem::AddSymbol(ee::Symbol* symbol)
 {
 	assert(m_spr->et->cfg->symbol_count < MAX_COMPONENTS);
 

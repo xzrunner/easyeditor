@@ -17,7 +17,7 @@ MorphingSprite::MorphingSprite()
 	m_skeleton = NULL;
 }
 
-MorphingSprite::MorphingSprite(Symbol* symbol, const d2d::Vector& pos, bool isCopyMesh)
+MorphingSprite::MorphingSprite(Symbol* symbol, const ee::Vector& pos, bool isCopyMesh)
 {
 	m_pos = pos;
 	m_symbol = symbol;
@@ -131,8 +131,8 @@ void MorphingSprite::initBounding(Symbol* symbol)
 	const float hWidth = symbol->getWidth() * 0.5f,
 		hHeight = symbol->getHeight() * 0.5f;
 
-	m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
-	d2d::Rect aabb;
+	m_bounding = ee::BVFactory::createBV(ee::e_obb);
+	ee::Rect aabb;
 	aabb.xMin = -hWidth;
 	aabb.xMax = hWidth;
 	aabb.yMin = -hHeight;

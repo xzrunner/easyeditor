@@ -10,10 +10,10 @@ namespace ecomplex
 
 //void Symbol::loadResources()
 //{
-//	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
-//	d2d::DynamicTexAndFont* dtex = NULL;
+//	bool use_dtex = ee::Config::Instance()->IsUseDTex();
+//	ee::DynamicTexAndFont* dtex = NULL;
 //	if (use_dtex) {
-//		dtex = d2d::DynamicTexAndFont::Instance();
+//		dtex = ee::DynamicTexAndFont::Instance();
 //		dtex->BeginImage();
 //	}
 //
@@ -36,16 +36,16 @@ namespace ecomplex
 //
 //	m_use_render_cache = value["use_render_cache"].asBool();
 //
-// 	wxString dir = d2d::FileHelper::getFileDir(m_filepath);
+// 	wxString dir = ee::FileHelper::getFileDir(m_filepath);
 //	int i = 0;
 //	Json::Value spriteValue = value["sprite"][i++];
 //	while (!spriteValue.isNull()) {
-//		wxString path = d2d::FileHelper::getAbsolutePath(dir, spriteValue["filepath"].asString());
+//		wxString path = ee::FileHelper::GetAbsolutePath(dir, spriteValue["filepath"].asString());
 //		Symbol* symbol = NULL;
 //		std::string real_filepath = path;
 //		try {
-//			symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
-//		} catch (d2d::Exception& e) {
+//			symbol = ee::SymbolMgr::Instance()->fetchSymbol(path);
+//		} catch (ee::Exception& e) {
 // 			symbol = NULL;
 // 			Json::Value filepaths_val = spriteValue["filepaths"];
 // 			if (!filepaths_val.isNull()) 
@@ -54,11 +54,11 @@ namespace ecomplex
 // 				Json::Value filepath_val = filepaths_val[j++];
 // 				while (!filepath_val.isNull() && !symbol) {
 //					real_filepath = filepath_val.asString();
-// 					wxString filepath = d2d::FileHelper::getAbsolutePath(dir, real_filepath);
+// 					wxString filepath = ee::FileHelper::GetAbsolutePath(dir, real_filepath);
 //					filepath_val = filepaths_val[j++];
 // 					try {
-// 						symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-// 					} catch (d2d::Exception& e) {
+// 						symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
+// 					} catch (ee::Exception& e) {
 // 						symbol = NULL;
 // 					}
 // 				}
@@ -87,7 +87,7 @@ namespace ecomplex
 // 		}
 //
 ////		symbol->refresh();
-//		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+//		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 //		sprite->load(spriteValue);
 //
 //		symbol->Release();
@@ -108,8 +108,8 @@ namespace ecomplex
 
 void FileLoader::Load(const std::string& filepath, Symbol* complex)
 {
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->LoadBegin();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->LoadBegin();
 	}
 
 	complex->Clear();
@@ -122,7 +122,7 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	if (!value["lua desc"].isNull()) {
 		LoadFromLua::Load(value, dir, complex);
 	} else if (!value["bin file"].isNull()) {
@@ -133,8 +133,8 @@ void FileLoader::Load(const std::string& filepath, Symbol* complex)
 
 	complex->InitBounding();
 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->LoadEnd();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->LoadEnd();
 
 // 		if (complex->m_use_render_cache) {
 // 			dtex->InsertSymbol(*complex);

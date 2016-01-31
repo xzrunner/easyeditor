@@ -13,15 +13,15 @@ namespace ebuilder
 	public:
 		virtual ~ChangeScene();
 
-		virtual void update(const d2d::LibraryList& list);
+		virtual void update(const ee::LibraryList& list);
 
 		void registerListener(ScenesPage* scenePage);
 
 	private:
-		ChangeScene(Actor* actor, d2d::LibraryList* sceneList);
+		ChangeScene(Actor* actor, ee::LibraryList* sceneList);
 
 	public:
-		d2d::ISymbol* selected;
+		ee::ISymbol* selected;
 
 		ScenesPage* m_scenePage;
 

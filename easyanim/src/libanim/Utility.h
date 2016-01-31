@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_UTILITY_H_
 #define _EASYANIM_UTILITY_H_
 
-#include <drag2d.h>
+
 
 #include "Symbol.h"
 
@@ -13,11 +13,11 @@ class Utility
 public:
 	static void DrawAnimSymbol(
 		const Symbol* symbol, 
-		const d2d::Matrix& mt = d2d::Matrix(),
+		const ee::Matrix& mt = ee::Matrix(),
 		int index = 1, 
-		const d2d::ColorTrans& color = d2d::ColorTrans());
+		const ee::ColorTrans& color = ee::ColorTrans());
 
-	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::Sprite*>& sprites);
+	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);
 
 private:
 	static Symbol::Frame* GetCurrFrame(Symbol::Layer* layer, int index);

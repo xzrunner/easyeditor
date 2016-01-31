@@ -1,21 +1,21 @@
 #ifndef _EASYIMAGE_AUTO_RECT_CUT_CMPT_H_
 #define _EASYIMAGE_AUTO_RECT_CUT_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
 class StagePanel;
 
-class AutoRectCutCMPT : public d2d::AbstractEditCMPT
+class AutoRectCutCMPT : public ee::EditCMPT
 {
 public:
 	AutoRectCutCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 	//void OnAddRect(wxCommandEvent& event);
 	void OnCreateRects(wxCommandEvent& event);

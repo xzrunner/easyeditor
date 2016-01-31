@@ -13,15 +13,15 @@ namespace ebuilder
 	public:
 		virtual ~ChangeImage();
 
-		virtual void update(const d2d::LibraryList& list);
+		virtual void update(const ee::LibraryList& list);
 
 		void registerListener(MediaPage* mediaPage);
 
 	private:
-		ChangeImage(Actor* actor, d2d::LibraryList* mediaList);
+		ChangeImage(Actor* actor, ee::LibraryList* mediaList);
 
 	public:
-		d2d::ISymbol* selected;
+		ee::ISymbol* selected;
 
 		MediaPage* m_mediaPage;
 

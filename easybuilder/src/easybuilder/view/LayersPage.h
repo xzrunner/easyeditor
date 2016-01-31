@@ -2,16 +2,16 @@
 #ifndef EBUILDER_LAYERS_PAGE_H
 #define EBUILDER_LAYERS_PAGE_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
-	class LayersPage : public d2d::ILibraryPage
+	class LayersPage : public ee::ILibraryPage
 	{
 	public:
 		LayersPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 		void refreshThumbnail();
 

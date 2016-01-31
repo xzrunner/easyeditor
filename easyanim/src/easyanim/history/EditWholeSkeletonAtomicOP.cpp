@@ -5,7 +5,7 @@ namespace eanim
 namespace eanim::edit_whole_skeleton
 {
 
-RotateBoneAOP::RotateBoneAOP(d2d::EditPanel* editPanel, WholeSkeleton::Sprite* selected, float delta)
+RotateBoneAOP::RotateBoneAOP(ee::EditPanel* editPanel, WholeSkeleton::Sprite* selected, float delta)
 {
 	m_editPanel = editPanel;
 	m_selected = selected;

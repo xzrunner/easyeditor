@@ -11,7 +11,7 @@ class LibraryShapePage : public LibraryPage
 public:
 	LibraryShapePage(wxWindow* parent);
 
-	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 protected:
 	virtual void initLayout(bool draggable = true);

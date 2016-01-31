@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-ChainPropertySetting::ChainPropertySetting(d2d::EditPanelImpl* stage, 
+ChainPropertySetting::ChainPropertySetting(ee::EditPanelImpl* stage, 
 										   ChainShape* chain)
-	: d2d::IPropertySetting("Chain")
+	: ee::PropertySetting("Chain")
 	, m_stage(stage)
 	, m_chain(chain)
 {
@@ -26,13 +26,13 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_chain->GetRect().CenterX();
-		m_chain->Translate(d2d::Vector(dx, 0.0f));
+		m_chain->Translate(ee::Vector(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_chain->GetRect().CenterY();
-		m_chain->Translate(d2d::Vector(0.0f, dy));
+		m_chain->Translate(ee::Vector(0.0f, dy));
 	}
 	else if (name == wxT("Closed"))
 	{
@@ -44,7 +44,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		if (type == 1)
 		{
 			float x = m_chain->GetRect().CenterX();
-			std::vector<d2d::Vector> vertices = m_chain->GetVertices();
+			std::vector<ee::Vector> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
 			m_chain->Load(vertices);
@@ -52,7 +52,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 		else if (type == 2)
 		{
 			float y = m_chain->GetRect().CenterY();
-			std::vector<d2d::Vector> vertices = m_chain->GetVertices();
+			std::vector<ee::Vector> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
 			m_chain->Load(vertices);
@@ -64,7 +64,7 @@ void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

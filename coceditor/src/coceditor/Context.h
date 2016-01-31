@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 #include "TextureMgr.h"
 
@@ -14,7 +14,7 @@ namespace libcoco
 	class Context
 	{
 	public:
-		d2d::PropertySettingPanel* property;
+		ee::PropertySettingPanel* property;
 		LibraryPanel* library;
 		StagePanel* stage;
 		ToolbarPanel* toolbar;
@@ -22,7 +22,7 @@ namespace libcoco
 		int id;
 
 		TextureMgr texMgr;
-		std::vector<const d2d::ISymbol*> symbols;
+		std::vector<const ee::ISymbol*> symbols;
 		wxString dlgPath;
 
 		std::set<std::string> ignore_list;

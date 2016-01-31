@@ -64,7 +64,7 @@ void IBody::setCollisionFilter(const b2Filter& filter)
 	}
 }
 
-void IBody::setTransform(const d2d::Vector& pos, float angle)
+void IBody::setTransform(const ee::Vector& pos, float angle)
 {
 	m_body->SetTransform(b2Vec2(pos.x, pos.y), angle);
 }

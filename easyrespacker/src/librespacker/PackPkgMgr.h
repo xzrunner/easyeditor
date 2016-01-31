@@ -1,7 +1,7 @@
 #ifndef _LIBRESPACKER_PACK_PKG_MGR_H_
 #define _LIBRESPACKER_PACK_PKG_MGR_H_
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {

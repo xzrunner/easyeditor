@@ -11,16 +11,16 @@ namespace libmodeling
 	public:
 		MotorJoint(Body* b0, Body* b1);
 
-		virtual bool isContain(const d2d::Vector& pos) const;
-		virtual bool isIntersect(const d2d::Rect& rect) const;
+		virtual bool isContain(const ee::Vector& pos) const;
+		virtual bool isIntersect(const ee::Rect& rect) const;
 
 		virtual void draw(DrawType type) const;
 
 	private:
-		void drawAnchor(const d2d::Vector& pos, DrawType type) const;
+		void drawAnchor(const ee::Vector& pos, DrawType type) const;
 
 	public:
-		d2d::Vector linearOffset;
+		ee::Vector linearOffset;
 		float angularOffset;
 
 		float maxForce;

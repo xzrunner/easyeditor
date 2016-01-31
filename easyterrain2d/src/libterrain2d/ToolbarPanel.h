@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN2D_TOOLBAR_PANEL_H_
 #define _EASYTERRAIN2D_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eterrain2d
 {
@@ -12,7 +12,7 @@ class WaveVerticesCMPT;
 class MoveTexcoordsCMPT;
 class BlendTextureCMPT;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage);
@@ -20,7 +20,7 @@ public:
 	void SetControlersValue(const OceanMesh* ocean);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	WaveVerticesCMPT* m_wave_cmpt;

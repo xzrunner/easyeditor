@@ -29,9 +29,9 @@ void LibraryItem::clearUserData(bool deletePtr)
 {
 	if (m_userData)
 	{
-		std::vector<d2d::IShape*>* shapes 
-			= static_cast<std::vector<d2d::IShape*>*>(m_userData);
-		for_each(shapes->begin(), shapes->end(), DeletePointerFunctor<d2d::IShape>());
+		std::vector<ee::IShape*>* shapes 
+			= static_cast<std::vector<ee::IShape*>*>(m_userData);
+		for_each(shapes->begin(), shapes->end(), DeletePointerFunctor<ee::IShape>());
 		shapes->clear();
 		if (deletePtr)
 			delete shapes, m_userData = NULL;
@@ -43,25 +43,25 @@ void LibraryItem::reloadTexture() const
 	m_symbol->reloadTexture();
 }
 
-void LibraryItem::draw(const d2d::Matrix& mt,
-					   const d2d::Colorf& mul, 
-					   const d2d::Colorf& add,
-					   const d2d::ISprite* sprite/* = NULL*/) const
+void LibraryItem::draw(const ee::Matrix& mt,
+					   const ee::Colorf& mul, 
+					   const ee::Colorf& add,
+					   const ee::ISprite* sprite/* = NULL*/) const
 {
-	m_symbol->draw(d2d::Matrix());
+	m_symbol->draw(ee::Matrix());
 }
 
-d2d::Rect LibraryItem::getSize(const d2d::ISprite* sprite/* = NULL*/) const
+ee::Rect LibraryItem::getSize(const ee::ISprite* sprite/* = NULL*/) const
 {
-	return d2d::Rect();
+	return ee::Rect();
 }
 
 void LibraryItem::loadResources()
 {
-	m_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_filepath);
+	m_symbol = ee::SymbolMgr::Instance()->fetchSymbol(m_filepath);
 
 	m_name = m_symbol->getName();
-	m_bitmap = const_cast<d2d::Bitmap*>(m_symbol->getBitmap());
+	m_bitmap = const_cast<ee::Bitmap*>(m_symbol->getBitmap());
 
 	//	FileIO::loadItemShapes(this);
 }

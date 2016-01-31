@@ -1,17 +1,17 @@
 #ifndef _LR_PREVIEW_CTRL_CAM_OP_H_
 #define _LR_PREVIEW_CTRL_CAM_OP_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
 namespace preview
 {
 
-class CtrlCamOP : public d2d::AbstractEditOP
+class CtrlCamOP : public ee::EditOP
 {
 public:
-	CtrlCamOP(wxWindow* wnd, d2d::EditPanelImpl* stage);
+	CtrlCamOP(wxWindow* wnd, ee::EditPanelImpl* stage);
 
 	virtual bool OnKeyDown(int keyCode);
 

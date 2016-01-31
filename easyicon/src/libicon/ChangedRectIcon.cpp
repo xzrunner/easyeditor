@@ -14,17 +14,17 @@ ChangedRectIcon::ChangedRectIcon()
 
 void ChangedRectIcon::LoadFromFile(const Json::Value& value)
 {
-	d2d::JsonSerializer::Load(value["begin"], m_begin);
-	d2d::JsonSerializer::Load(value["end"], m_end);
+	ee::JsonSerializer::Load(value["begin"], m_begin);
+	ee::JsonSerializer::Load(value["end"], m_end);
 }
 
 void ChangedRectIcon::StoreToFile(Json::Value& value) const
 {
-	d2d::JsonSerializer::Store(m_begin, value["begin"]);
-	d2d::JsonSerializer::Store(m_end, value["end"]);
+	ee::JsonSerializer::Store(m_begin, value["begin"]);
+	ee::JsonSerializer::Store(m_end, value["end"]);
 }
 
-void ChangedRectIcon::GetBound(float process, d2d::Vector bound[4]) const
+void ChangedRectIcon::GetBound(float process, ee::Vector bound[4]) const
 {
 	float xmin = m_begin.xmin + (m_end.xmin - m_begin.xmin) * process,
 		xmax = m_begin.xmax + (m_end.xmax - m_begin.xmax) * process,

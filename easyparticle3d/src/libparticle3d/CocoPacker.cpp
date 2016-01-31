@@ -1,6 +1,6 @@
 #include "CocoPacker.h"
 
-#include <drag2d.h>
+
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
@@ -13,13 +13,13 @@ void CocoPacker::PackDir(const wxString& srcdir, const wxString& dstfilename)
 	ebuilder::CodeGenerator gen;
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(srcdir.ToStdString(), files);
+	ee::FileHelper::FetchAllFiles(srcdir.ToStdString(), files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
 			PackSingle(filepath, gen);
 		}
 	}
@@ -44,7 +44,7 @@ void CocoPacker::PackSingle(const wxString& filepath, ebuilder::CodeGenerator& g
 	reader.parse(fin, val);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	int version = val["version"].asInt();
 	if (version == 0) {
 		PackOldVersion(val, gen, dir);
@@ -158,7 +158,7 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			lua::TableAssign ta(gen, "", true);
 
 			{
-				wxString filepath = d2d::FileHelper::GetAbsolutePath(dir, child_val["filepath"].asString());
+				wxString filepath = ee::FileHelper::GetAbsolutePath(dir, child_val["filepath"].asString());
 
 				Json::Value value;
 				Json::Reader reader;
@@ -307,7 +307,7 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 			lua::TableAssign ta(gen, "", true);
 
 			{
-				wxString filepath = d2d::FileHelper::GetAbsolutePath(dir, child_val["filepath"].asString());
+				wxString filepath = ee::FileHelper::GetAbsolutePath(dir, child_val["filepath"].asString());
 
 				Json::Value value;
 				Json::Reader reader;

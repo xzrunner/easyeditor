@@ -33,7 +33,7 @@ ComplexBuilder::~ComplexBuilder()
 	for_each(m_gen_nodes.begin(), m_gen_nodes.end(), DeletePointerFunctor<PackAnimation>());
 }
 
-void ComplexBuilder::Traverse(d2d::Visitor& visitor) const
+void ComplexBuilder::Traverse(ee::Visitor& visitor) const
 {
 	std::map<const ecomplex::Symbol*, const PackAnimation*>::const_iterator 
 		itr = m_map_data.begin();
@@ -77,8 +77,8 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 	// clipbox
 	const PackClipbox* cb = static_cast<const PackClipbox*>(m_cb_builder->Create(symbol));
 
-	std::map<std::string, std::vector<d2d::Sprite*> > map_actions;
-	std::vector<d2d::Sprite*> others;
+	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
+	std::vector<ee::Sprite*> others;
 	GroupFromTag(symbol->m_sprites, map_actions, others);
 	
 	if (map_actions.empty()) 
@@ -98,7 +98,7 @@ IPackNode* ComplexBuilder::LoadComplex(const ecomplex::Symbol* symbol)
 	}
 	else
 	{
-		std::map<std::string, std::vector<d2d::Sprite*> >::iterator 
+		std::map<std::string, std::vector<ee::Sprite*> >::iterator 
 			itr = map_actions.begin();
 		for ( ; itr != map_actions.end(); ++itr)
 		{
@@ -151,13 +151,13 @@ IPackNode* ComplexBuilder::LoadAnchor(const ecomplex::Symbol* symbol)
 	return node;
 }
 
-void ComplexBuilder::GroupFromTag(const std::vector<d2d::Sprite*>& src, 
-								  std::map<std::string, std::vector<d2d::Sprite*> >& dst, 
-								  std::vector<d2d::Sprite*>& others)
+void ComplexBuilder::GroupFromTag(const std::vector<ee::Sprite*>& src, 
+								  std::map<std::string, std::vector<ee::Sprite*> >& dst, 
+								  std::vector<ee::Sprite*>& others)
 {
 	for (int i = 0, n = src.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = src[i];
+		ee::Sprite* sprite = src[i];
 		if (sprite->tag.empty())
 		{
 			others.push_back(sprite);
@@ -165,7 +165,7 @@ void ComplexBuilder::GroupFromTag(const std::vector<d2d::Sprite*>& src,
 		else
 		{
 			std::vector<std::string> tags;
-			d2d::StringHelper::Split(sprite->tag, ";", tags);
+			ee::StringHelper::Split(sprite->tag, ";", tags);
 			bool is_action = false;
 			for (int i = 0, n = tags.size(); i < n; ++i)
 			{
@@ -175,11 +175,11 @@ void ComplexBuilder::GroupFromTag(const std::vector<d2d::Sprite*>& src,
 
 				is_action = true;
 
-				std::map<std::string, std::vector<d2d::Sprite*> >::iterator 
+				std::map<std::string, std::vector<ee::Sprite*> >::iterator 
 					itr = dst.find(tags[i]);
 				if (itr == dst.end())
 				{
-					std::vector<d2d::Sprite*> sprites;
+					std::vector<ee::Sprite*> sprites;
 					sprites.push_back(sprite);
 					dst.insert(std::make_pair(tags[i], sprites));
 				}

@@ -5,7 +5,7 @@ namespace eimage
 {
 
 RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_cmpt(cmpt)
 	, m_stage(stage)
 	, m_rectSelected(NULL)
@@ -17,11 +17,11 @@ RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
 
 bool RectCutOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_nodeSelected = m_rects.queryNode(pos);
 
 	return false;
@@ -29,7 +29,7 @@ bool RectCutOP::OnMouseLeftDown(int x, int y)
 
 bool RectCutOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -41,7 +41,7 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 		if (moved)
 		{
 			m_nodeSelected.pos = m_currPos;
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		m_nodeSelected.rect = NULL;
 	}
@@ -52,7 +52,7 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 		m_rectSelected->xmax = ceil(m_rectSelected->xmax);
 		m_rectSelected->ymin = ceil(m_rectSelected->ymin);
 		m_rectSelected->ymax = ceil(m_rectSelected->ymax);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -60,7 +60,7 @@ bool RectCutOP::OnMouseLeftUp(int x, int y)
 
 bool RectCutOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -72,7 +72,7 @@ bool RectCutOP::OnMouseRightDown(int x, int y)
 
 bool RectCutOP::OnMouseRightUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -83,7 +83,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 	const float RADIUS = 5;
 	// remove rect
 	m_currPos = m_stage->TransPosScrToProj(x, y);
-	if (d2d::Math2D::GetDistance(m_currPos, m_firstPos) < RADIUS)
+	if (ee::Math2D::GetDistance(m_currPos, m_firstPos) < RADIUS)
 	{
 		bool removed = m_rects.remove(m_currPos);
 		if (remove) {
@@ -92,7 +92,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 			m_firstPos.SetInvalid();
 			m_currPos.SetInvalid();
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 	// insert rect
@@ -101,11 +101,11 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 		fixedPos(m_currPos);
 		if (m_firstPos.x != m_currPos.x && m_firstPos.y != m_currPos.y)
 		{
-			m_rects.insert(d2d::Rect(m_firstPos, m_currPos));
+			m_rects.insert(ee::Rect(m_firstPos, m_currPos));
 
 			m_firstPos.SetInvalid();
 			m_currPos.SetInvalid();
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -114,21 +114,21 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 bool RectCutOP::OnMouseMove(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseMove(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
 	m_currPos = m_stage->TransPosScrToProj(x, y);
 	m_rectSelected = m_rects.queryRect(m_currPos);
 	m_captured = m_rects.queryNearestAxis(m_currPos);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
 
 bool RectCutOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -138,7 +138,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 		m_currPos = m_stage->TransPosScrToProj(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos);
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	// move rect's node
 	else if (m_nodeSelected.rect)
@@ -146,20 +146,20 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 		m_currPos = m_stage->TransPosScrToProj(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos, m_nodeSelected.rect);
 
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_rects.moveNode(m_nodeSelected, pos);
 		m_nodeSelected.pos = pos;
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	// move rect
 	else if (m_rectSelected)
 	{
-		d2d::Vector curr = m_stage->TransPosScrToProj(x, y);
+		ee::Vector curr = m_stage->TransPosScrToProj(x, y);
 		m_rects.moveRect(m_rectSelected, m_currPos, curr);
 		m_currPos = curr;
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -167,9 +167,9 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 
 bool RectCutOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) return true;
+	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
 	if (!m_stage->getImage()) return false;
 
@@ -177,16 +177,16 @@ bool RectCutOP::OnDraw() const
 
 	if (m_firstPos.IsValid() && m_currPos.IsValid())
 	{
-		d2d::PrimitiveDraw::DrawRect(m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
+		ee::PrimitiveDraw::DrawRect(m_firstPos, m_currPos, ee::LIGHT_RED_LINE);
 	}
 
 	drawCaptureLine();
 
 	if (m_rectSelected) {
-		d2d::PrimitiveDraw::DrawRect(*m_rectSelected, d2d::LIGHT_GREEN_FACE);
+		ee::PrimitiveDraw::DrawRect(*m_rectSelected, ee::LIGHT_GREEN_FACE);
 	}
 	if (m_nodeSelected.rect) {
-		d2d::PrimitiveDraw::DrawRect(*m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
+		ee::PrimitiveDraw::DrawRect(*m_nodeSelected.rect, ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;
@@ -194,7 +194,7 @@ bool RectCutOP::OnDraw() const
 
 bool RectCutOP::Clear()
 {
-	if (d2d::ZoomViewOP::Clear()) return true;
+	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_firstPos.SetInvalid();
 	m_currPos.SetInvalid();
@@ -208,7 +208,7 @@ bool RectCutOP::Clear()
 
 std::string RectCutOP::getImageFilepath() const
 {
-	if (const d2d::Sprite* s = m_stage->getImage()) {
+	if (const ee::Sprite* s = m_stage->getImage()) {
 		return s->GetSymbol().GetFilepath();
 	} else {
 		return "";
@@ -228,20 +228,20 @@ void RectCutOP::drawCaptureLine() const
 	const float EDGE = 4096;
 	if (m_captured.x != FLT_INVALID)
 	{
-		d2d::Vector p0(m_captured.x, -EDGE);
-		d2d::Vector p1(m_captured.x, EDGE);
-		d2d::PrimitiveDraw::DrawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
+		ee::Vector p0(m_captured.x, -EDGE);
+		ee::Vector p1(m_captured.x, EDGE);
+		ee::PrimitiveDraw::DrawDashLine(p0, p1, ee::Colorf(0, 0, 0));
 	}
 
 	if (m_captured.y != FLT_INVALID)
 	{
-		d2d::Vector p0(-EDGE, m_captured.y);
-		d2d::Vector p1(EDGE, m_captured.y);
-		d2d::PrimitiveDraw::DrawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
+		ee::Vector p0(-EDGE, m_captured.y);
+		ee::Vector p1(EDGE, m_captured.y);
+		ee::PrimitiveDraw::DrawDashLine(p0, p1, ee::Colorf(0, 0, 0));
 	}
 }
 
-void RectCutOP::fixedPos(d2d::Vector& pos) const
+void RectCutOP::fixedPos(ee::Vector& pos) const
 {
 	const float RADIUS = 5;
 	if (fabs(pos.x - m_captured.x) > RADIUS || 

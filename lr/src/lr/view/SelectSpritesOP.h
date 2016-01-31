@@ -1,18 +1,18 @@
 #ifndef _LR_SELECT_SPRITES_OP_H_
 #define _LR_SELECT_SPRITES_OP_H_
 
-#include <drag2d.h>
+
 
 #include "OpenSymbolDialog.h"
 
 namespace lr
 {
 
-class SelectSpritesOP : public d2d::SelectSpritesOP
+class SelectSpritesOP : public ee::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+		ee::EditCMPT* callback = NULL);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -23,7 +23,7 @@ private:
 	void BreakUpSelection();
 
 private:
-	d2d::Vector m_first_press;
+	ee::Vector m_first_press;
 
 	OpenSymbolDialog m_open_symbol;
 

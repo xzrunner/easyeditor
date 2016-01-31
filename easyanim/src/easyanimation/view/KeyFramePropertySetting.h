@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_FRAME_PROPERTY_SETTING_H_
 #define _EASYANIM_FRAME_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class KeyFrame;
 
-class KeyFramePropertySetting : public d2d::IPropertySetting
+class KeyFramePropertySetting : public ee::PropertySetting
 {
 public:
 	KeyFramePropertySetting(KeyFrame* frame);

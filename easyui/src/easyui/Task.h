@@ -1,7 +1,7 @@
 #ifndef _EASYUI_TASK_H_
 #define _EASYUI_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 #include "TopPannels.h"
@@ -11,7 +11,7 @@ namespace eui
 
 class UIStagePage;
 
-class Task : public d2d::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
@@ -22,9 +22,9 @@ public:
 
 	virtual bool IsDirty() const { return false; }
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const {}
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const {}
 
-	virtual const d2d::EditPanel* GetEditPanel() const { return NULL; }
+	virtual const ee::EditPanel* GetEditPanel() const { return NULL; }
 
 	UIStagePage* GetSelectedStagePage();
 

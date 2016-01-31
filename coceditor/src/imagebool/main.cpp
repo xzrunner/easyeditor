@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <drag2d.h>
+
 #include <SOIL/SOIL.h>
 #include <SOIL/stb_image_write.h>
 
@@ -19,10 +19,10 @@ int main(int argc, char *argv[])
 	int channels = 4;
 	
 	int s1w, s1h, format1;
-	unsigned char* src1_data = d2d::ImageLoader::loadData(src1path, s1w, s1h, format1);
+	unsigned char* src1_data = ee::ImageLoader::loadData(src1path, s1w, s1h, format1);
 
 	int s2w, s2h, format2;
-	unsigned char* src2_data = d2d::ImageLoader::loadData(src2path, s2w, s2h, format2);
+	unsigned char* src2_data = ee::ImageLoader::loadData(src2path, s2w, s2h, format2);
 
 	assert(s1w == s2w && s1h == s2h && format1 == format2);
 

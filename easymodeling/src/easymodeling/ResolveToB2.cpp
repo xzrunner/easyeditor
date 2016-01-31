@@ -75,7 +75,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		}
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
-// 			const std::vector<d2d::Vector>& src = polygon->GetVertices();
+// 			const std::vector<ee::Vector>& src = polygon->GetVertices();
 // 			const size_t size = src.size();
 // 			std::vector<b2Vec2> dst(size);
 // 			for (size_t j = 0; j < size; ++j)
@@ -92,7 +92,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 
 			//////////////////////////////////////////////////////////////////////////
 
-			const std::vector<d2d::Vector>& src = polygon->GetVertices();
+			const std::vector<ee::Vector>& src = polygon->GetVertices();
 			for (int i = 0, n = src.size(); i < n; i += 3) {
  				b2Vec2 dst[3];
 				for (int j = 0; j < 3; ++j) {
@@ -109,7 +109,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		}
 		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
-			const std::vector<d2d::Vector>& src = chain->GetVertices();
+			const std::vector<ee::Vector>& src = chain->GetVertices();
 			const size_t size = src.size();
 			std::vector<b2Vec2> dst(size);
 			for (size_t j = 0; j < size; ++j)
@@ -211,7 +211,7 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			jd.collideConnected = joint->collideConnected;
 			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
-			jd.length = d2d::Math2D::GetDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB()) / ephysics::BOX2D_SCALE_FACTOR;
+			jd.length = ee::Math2D::GetDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB()) / ephysics::BOX2D_SCALE_FACTOR;
 			jd.frequencyHz = joint->frequencyHz;
 			jd.dampingRatio = joint->dampingRatio;
 
@@ -233,7 +233,7 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 
 			b2Vec2 groundAnchorA(joint->groundAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->groundAnchorA.y / ephysics::BOX2D_SCALE_FACTOR),
 				groundAnchorB(joint->groundAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->groundAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
-			d2d::Vector anchorA_ = joint->getWorldAnchorA(),
+			ee::Vector anchorA_ = joint->getWorldAnchorA(),
 				anchorB_ = joint->getWorldAnchorB();
 			b2Vec2 anchorA(anchorA_.x / ephysics::BOX2D_SCALE_FACTOR, anchorA_.y / ephysics::BOX2D_SCALE_FACTOR),
 				anchorB(anchorB_.x / ephysics::BOX2D_SCALE_FACTOR, anchorB_.y / ephysics::BOX2D_SCALE_FACTOR);
@@ -261,7 +261,7 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			b2Body* bodyA = itrA->second;
 			b2Body* bodyB = itrB->second;
 
-			d2d::Vector pos = joint->getWorldAnchorB() / ephysics::BOX2D_SCALE_FACTOR;
+			ee::Vector pos = joint->getWorldAnchorB() / ephysics::BOX2D_SCALE_FACTOR;
 			b2Vec2 axis(joint->localAxisA.x, joint->localAxisA.y);
 			axis.Normalize();
 			jd.Initialize(bodyA, bodyB, b2Vec2(pos.x, pos.y), axis);

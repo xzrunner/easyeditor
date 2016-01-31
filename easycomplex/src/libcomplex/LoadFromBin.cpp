@@ -10,10 +10,10 @@ namespace ecomplex
 void LoadFromBin::Load(const Json::Value& value, const std::string& dir, 
 					   Symbol* symbol)
 {
-	std::string filename = d2d::FileHelper::GetAbsolutePath(dir, value["bin file"].asString());
+	std::string filename = ee::FileHelper::GetAbsolutePath(dir, value["bin file"].asString());
 
 	std::string ept_path = filename;
-	std::vector<d2d::Image*> images;
+	std::vector<ee::Image*> images;
 	LoadImages(ept_path, images);
 
 	std::string epe_path = filename + ".epe";
@@ -34,13 +34,13 @@ struct block {
 	uint8_t data[119];
 };
 
-void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image*>& images)
+void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::Image*>& images)
 {
 	int idx = 1;
 	while (true) 
 	{
-		std::string _filepath = filepath + "." + d2d::StringHelper::ToString(idx++) + ".ept";
-		if (!d2d::FileHelper::IsFileExist(_filepath)) {
+		std::string _filepath = filepath + "." + ee::StringHelper::ToString(idx++) + ".ept";
+		if (!ee::FileHelper::IsFileExist(_filepath)) {
 			break;
 		}
 
@@ -72,7 +72,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 			size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
 			librespacker::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
 			if (guess_sz == uc_sz) {
-				throw d2d::Exception("ecomplex LoadFromBin::LoadImages no enough space.");
+				throw ee::Exception("ecomplex LoadFromBin::LoadImages no enough space.");
 			}
 			delete[] c_buf;
 
@@ -84,7 +84,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<d2d::Image
 	}
 }
 
-void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<d2d::Image*>& images)
+void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::Image*>& images)
 {
 	int8_t type;
 	librespacker::unpack(type, ptr);
@@ -97,8 +97,8 @@ void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<d2d::Image*>& images)
 	int buf_sz = w * h * c;
 	uint8_t* buf = new uint8_t[buf_sz];
 	memcpy(buf, *ptr, buf_sz);
-	d2d::ImageData* data = new d2d::ImageData(buf, w, h, c);
-	images.push_back(new d2d::Image(data));
+	ee::ImageData* data = new ee::ImageData(buf, w, h, c);
+	images.push_back(new ee::Image(data));
 }
 
 }

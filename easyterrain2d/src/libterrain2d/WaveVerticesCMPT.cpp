@@ -8,7 +8,7 @@ namespace eterrain2d
 {
 
 WaveVerticesCMPT::WaveVerticesCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
 	m_editOP = new WaveVerticesOP(stage);
@@ -25,7 +25,7 @@ void WaveVerticesCMPT::SetControlersValue(const OceanMesh* ocean)
 	m_bound_lock->SetValue(ocean->IsBoundLockOpen());
 }
 
-wxSizer* WaveVerticesCMPT::initLayout()
+wxSizer* WaveVerticesCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
@@ -102,7 +102,7 @@ wxSizer* WaveVerticesCMPT::initLayout()
 	// display
 	{
 		wxCheckBox* tris_edge = new wxCheckBox(this, wxID_ANY, wxT("triangle edge"));
-		tris_edge->SetValue(d2d::SettingData::draw_tris_edge);
+		tris_edge->SetValue(ee::SettingData::draw_tris_edge);
 		Connect(tris_edge->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(WaveVerticesCMPT::OnChangeDisplayTriangles));
 		sizer->Add(tris_edge);
@@ -145,7 +145,7 @@ void WaveVerticesCMPT::OnChangeWaveParams(wxSpinEvent& event)
 void WaveVerticesCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
 	static_cast<WaveVerticesOP*>(m_editOP)->m_draw_tris = event.IsChecked();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void WaveVerticesCMPT::OnChangeBoundLock(wxCommandEvent& event)

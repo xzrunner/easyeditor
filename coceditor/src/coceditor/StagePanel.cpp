@@ -7,10 +7,10 @@ namespace coceditor
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, Context::Instance()->library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(this, Context::Instance()->library)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, Context::Instance()->property);
+	m_editOP = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, this, Context::Instance()->property);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new DragSymbolTarget(this));
@@ -23,13 +23,13 @@ StagePanel::~StagePanel()
 
 void StagePanel::clear()
 {
-	d2d::EditPanel::clear();
-	d2d::SpritesPanelImpl::clearSprites();
+	ee::EditPanel::clear();
+	ee::SpritesPanelImpl::clearSprites();
 }
 
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+void StagePanel::insertSprite(ee::ISprite* sprite)
 {
-	d2d::SpritesPanelImpl::insertSprite(sprite);
+	ee::SpritesPanelImpl::insertSprite(sprite);
 	if (!sprite->getUserData())
 		sprite->setUserData(new int(Context::Instance()->id++));
 }
@@ -53,20 +53,20 @@ bool StagePanel::DragSymbolTarget::OnDropText(wxCoord x, wxCoord y, const wxStri
 
 	LibraryPanel* library = Context::Instance()->library;
 
-	d2d::ISymbol* symbol = NULL;
+	ee::ISymbol* symbol = NULL;
 	if (sType == "symbol")
-		symbol = static_cast<d2d::ISymbol*>(library->getImagePage()->getSymbol(index));
+		symbol = static_cast<ee::ISymbol*>(library->getImagePage()->getSymbol(index));
 	else if (sType == "complex")
-		symbol = static_cast<d2d::ISymbol*>(library->getComplexPage()->getSymbol(index));
+		symbol = static_cast<ee::ISymbol*>(library->getComplexPage()->getSymbol(index));
 	else if (sType == "anim")
-		symbol = static_cast<d2d::ISymbol*>(library->getAnimPage()->getSymbol(index));
+		symbol = static_cast<ee::ISymbol*>(library->getAnimPage()->getSymbol(index));
 	else if (sType == "scale9")
-		symbol = static_cast<d2d::ISymbol*>(library->get9PatchPage()->getSymbol(index));
+		symbol = static_cast<ee::ISymbol*>(library->get9PatchPage()->getSymbol(index));
 
 	if (symbol)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+		ee::ISprite* sprite = ee::SpriteFactory::Instance()->create(symbol);
 		sprite->translate(pos);
 		m_stage->insertSprite(sprite);
 	}

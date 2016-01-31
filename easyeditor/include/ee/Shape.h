@@ -13,7 +13,7 @@ namespace ee
 
 class Vector;
 class Rect;
-class IPropertySetting;
+class PropertySetting;
 class Matrix;
 class EditPanelImpl;
 struct ColorTrans;
@@ -47,7 +47,7 @@ public:
 	virtual void Draw(const Matrix& mt, 
 		const ColorTrans& color = ColorTrans()) const = 0;
 
-	virtual IPropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;
+	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;
 
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;

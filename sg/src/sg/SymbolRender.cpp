@@ -34,8 +34,8 @@ void SymbolRender::Init(StagePanel* stage)
 	m_stage = stage;
 }
 
-void SymbolRender::DrawGrass(const d2d::Symbol& symbol, 
-							 const d2d::Vector& pos, 
+void SymbolRender::DrawGrass(const ee::Symbol& symbol, 
+							 const ee::Vector& pos, 
 							 bool is_flat) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
@@ -43,38 +43,38 @@ void SymbolRender::DrawGrass(const d2d::Symbol& symbol,
 		return;
 	}
 
-	d2d::Vector p = pos;
+	ee::Vector p = pos;
 	if (info->size % 2 == 0)
 	{
 		int row, col;
 		m_stage->TransCoordsToGridPos(pos, row, col);
 
-		d2d::Vector fixed;
+		ee::Vector fixed;
 		m_stage->TransGridPosToCoords(row - 1, col - 1, fixed);
 
 		p = (pos + fixed) * 0.5f;
 	}
 
-	d2d::Sprite* grass = m_grass[info->size - 1];
+	ee::Sprite* grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
-		d2d::Rect r = grass->GetSymbol().GetSize();
+		ee::Rect r = grass->GetSymbol().GetSize();
 
 		float half_edge = info->size * EDGE * 0.5f;
 
-		d2d::Matrix mat;
+		ee::Matrix mat;
 		mat.Translate(p.x, p.y);
-		d2d::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, d2d::LIGHT_GREEN_FACE);
+		ee::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, ee::LIGHT_GREEN_FACE);
 	}
 	else
 	{
 		grass->SetTransform(p, 0);
-		d2d::SpriteRenderer::Instance()->Draw(grass);
+		ee::SpriteRenderer::Instance()->Draw(grass);
 	}
 }
 
-void SymbolRender::DrawGrids(const d2d::Symbol& symbol, 
-							 const d2d::Vector& pos, 
+void SymbolRender::DrawGrids(const ee::Symbol& symbol, 
+							 const ee::Vector& pos, 
 							 bool valid,
 							 bool is_flat) const
 {
@@ -85,41 +85,41 @@ void SymbolRender::DrawGrids(const d2d::Symbol& symbol,
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 
-	d2d::Colorf color = valid ? d2d::Colorf(0, 1.0f, 0, 0.8f) : d2d::Colorf(1, 0, 0, 0.8f);
+	ee::Colorf color = valid ? ee::Colorf(0, 1.0f, 0, 0.8f) : ee::Colorf(1, 0, 0, 0.8f);
 
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	int center = (info->size >> 1);
 	if (is_flat)
 	{
-		d2d::Vector pos;
+		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col, pos);
-		d2d::Matrix mat;
+		ee::Matrix mat;
 		mat.Translate(pos.x, pos.y);
 
 		float half_edge = info->size * EDGE * 0.5f;
 
-		d2d::ShapeStyle style = d2d::LIGHT_GREEN_FACE;
+		ee::ShapeStyle style = ee::LIGHT_GREEN_FACE;
 		style.color = color;
 
- 		d2d::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, style);
+ 		ee::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, style);
 	}
 	else
 	{
 		for (int i = 0; i < info->size; ++i) {
 			for (int j = 0; j < info->size; ++j) {
-				d2d::Vector pos;
+				ee::Vector pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->SetTransform(pos, m_grid->GetAngle());
-				d2d::ColorTrans ct;
+				ee::ColorTrans ct;
 				ct.multi = color;
-				d2d::SpriteRenderer::Instance()->Draw(m_grid, NULL, d2d::Matrix(), ct);
+				ee::SpriteRenderer::Instance()->Draw(m_grid, NULL, ee::Matrix(), ct);
 			}
 		}
 	}
 }
 
-void SymbolRender::DrawArrow(const d2d::Symbol& symbol, 
-							 const d2d::Vector& pos) const
+void SymbolRender::DrawArrow(const ee::Symbol& symbol, 
+							 const ee::Vector& pos) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
@@ -127,37 +127,37 @@ void SymbolRender::DrawArrow(const d2d::Symbol& symbol,
 	}
 	int r = (info->size >> 1) + 2;
 
-	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
+	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
 
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 	// left
 	{
-		d2d::Vector pos;
+		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
-		rd->Draw(m_arrow_down, d2d::Matrix(), pos, 0, -1);
+		rd->Draw(m_arrow_down, ee::Matrix(), pos, 0, -1);
 	}
 	// right
 	{
-		d2d::Vector pos;
+		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
-		rd->Draw(m_arrow_right, d2d::Matrix(), pos);
+		rd->Draw(m_arrow_right, ee::Matrix(), pos);
 	}
 	// up
 	{
-		d2d::Vector pos;
+		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
-		rd->Draw(m_arrow_right, d2d::Matrix(), pos, 0, -1);
+		rd->Draw(m_arrow_right, ee::Matrix(), pos, 0, -1);
 	}
 	// down
 	{
-		d2d::Vector pos;
+		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
-		rd->Draw(m_arrow_down, d2d::Matrix(), pos);
+		rd->Draw(m_arrow_down, ee::Matrix(), pos);
 	}
 }
 
-void SymbolRender::DrawRegion(const d2d::Symbol& symbol, const d2d::Vector& pos)
+void SymbolRender::DrawRegion(const ee::Symbol& symbol, const ee::Vector& pos)
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
@@ -171,13 +171,13 @@ void SymbolRender::DrawRegion(const d2d::Symbol& symbol, const d2d::Vector& pos)
 	}
 
 	float s = (float)(max_reg) / m_region_size;
-	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
-	d2d::ColorTrans ct;
-	ct.multi = d2d::Colorf(1, 0, 0);
-	rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s, 0, 0, ct);
+	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
+	ee::ColorTrans ct;
+	ct.multi = ee::Colorf(1, 0, 0);
+	rd->Draw(m_region, ee::Matrix(), pos, 0, s, s, 0, 0, ct);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
-		rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s);
+		rd->Draw(m_region, ee::Matrix(), pos, 0, s, s);
 	}
 }
 

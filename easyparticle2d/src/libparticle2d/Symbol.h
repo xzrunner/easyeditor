@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_SYMBOL_H_
 #define _EASYPARTICLE2D_SYMBOL_H_
 
-#include <drag2d.h>
+
 
 struct p2d_emitter_cfg;
 
@@ -10,7 +10,7 @@ namespace eparticle2d
 
 class ParticleSystem;
 
-class Symbol : public d2d::Symbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -25,14 +25,14 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
+		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	void SetEmitterCfg(p2d_emitter_cfg* cfg) { m_et_cfg = cfg; }
 	const p2d_emitter_cfg* GetEmitterCfg() const { return m_et_cfg; }
 
-	static d2d::Symbol* Create() { return new Symbol(); }
+	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();

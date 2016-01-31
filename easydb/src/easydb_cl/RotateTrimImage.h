@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	RotateTrimImage() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -26,11 +26,11 @@ public:
 	static const char* GetOutputFileName();
 
 private:
-	void RotateTrim(d2d::Snapshoot& ss, const std::string& dir);	
+	void RotateTrim(ee::Snapshoot& ss, const std::string& dir);	
 
-	bool GetRotateTrimInfo(const d2d::Image* image, 
+	bool GetRotateTrimInfo(const ee::Image* image, 
 		int& width, int& height,
-		d2d::Vector& center, float& angle) const;
+		ee::Vector& center, float& angle) const;
 
 }; // RotateTrimImage
 

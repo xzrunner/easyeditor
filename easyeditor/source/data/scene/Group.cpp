@@ -1,6 +1,6 @@
 #include "Group.h"
 
-namespace d2d
+namespace ee
 {
 
 Group::Group(const std::string& name, bool visible, bool editable)
@@ -15,7 +15,7 @@ Group::~Group()
 	Clear();
 }
 
-void Group::TraverseSprite(IVisitor& visitor, DataTraverseType type, bool order) const
+void Group::TraverseSprite(Visitor& visitor, DataTraverseType type, bool order) const
 {
 	if (type == DT_EDITABLE && m_editable ||
 		type == DT_VISIBLE && m_visible ||

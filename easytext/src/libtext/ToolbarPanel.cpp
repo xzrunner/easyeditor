@@ -11,12 +11,12 @@ static const wxString VERT_ALIGN_LABELS[] = {
 	wxT("上"), wxT("下"), wxT("中"), wxT("自动") };
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, Sprite* spr)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
 	spr->Retain();
 	m_spr = spr;
 
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
 ToolbarPanel::~ToolbarPanel()
@@ -24,7 +24,7 @@ ToolbarPanel::~ToolbarPanel()
 	m_spr->Release();
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	top_sizer->AddSpacer(20);
@@ -47,7 +47,7 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "宽"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_width = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(w),
+		m_width = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(w),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_width->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 		csizer->Add(m_width);
@@ -59,7 +59,7 @@ void ToolbarPanel::InitSizeLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "高"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_height = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(h),
+		m_height = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(h),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_height->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 		csizer->Add(m_height);
@@ -75,7 +75,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
 		const std::vector<std::pair<std::string, std::string> >& 
-			fonts = d2d::Config::Instance()->GetFonts();
+			fonts = ee::Config::Instance()->GetFonts();
 		wxArrayString choices;
 		for (int i = 0, n = fonts.size(); i < n; ++i) {
 			choices.push_back(fonts[i].first);
@@ -91,7 +91,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 		csizer->Add(new wxStaticText(this, wxID_ANY, "字号"), 0, wxLEFT | wxRIGHT, 5);
 
 		int size = m_spr->GetFontSize();
-		m_font_size = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(size),
+		m_font_size = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(size),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_font_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeFontSize));
 		csizer->Add(m_font_size);
@@ -121,7 +121,7 @@ void ToolbarPanel::InitFontLayout(wxSizer* top_sizer)
 			csizer->Add(new wxStaticText(this, wxID_ANY, "宽度"), 0, wxLEFT | wxRIGHT, 5);
 
 			float size = m_spr->GetEdgeSize();
-			m_edge_size = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(size),
+			m_edge_size = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(size),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_edge_size->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeEdgeSize));
 			csizer->Add(m_edge_size);
@@ -177,7 +177,7 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "字间距"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_space_h = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(space_h),
+		m_space_h = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(space_h),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_space_h->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
 		csizer->Add(m_space_h);
@@ -189,7 +189,7 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 		wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 		csizer->Add(new wxStaticText(this, wxID_ANY, "行间距"), 0, wxLEFT | wxRIGHT, 5);
 
-		m_space_v = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(space_v),
+		m_space_v = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(space_v),
 			wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 		Connect(m_space_v->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSpace));
 		csizer->Add(m_space_v);
@@ -201,8 +201,8 @@ void ToolbarPanel::InitLayoutLayout(wxSizer* top_sizer)
 
 void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 {	
-	int w = d2d::StringHelper::FromString<int>(m_width->GetValue().ToStdString());
-	int h = d2d::StringHelper::FromString<int>(m_height->GetValue().ToStdString());
+	int w = ee::StringHelper::FromString<int>(m_width->GetValue().ToStdString());
+	int h = ee::StringHelper::FromString<int>(m_height->GetValue().ToStdString());
 	m_spr->SetSize(w, h);
 }
 
@@ -214,13 +214,13 @@ void ToolbarPanel::OnChangeFont(wxCommandEvent& event)
 
 void ToolbarPanel::OnChangeFontSize(wxCommandEvent& event)
 {
-	int sz = d2d::StringHelper::FromString<int>(m_font_size->GetValue().ToStdString());
+	int sz = ee::StringHelper::FromString<int>(m_font_size->GetValue().ToStdString());
 	m_spr->SetFontSize(sz);
 }
 
 void ToolbarPanel::OnChangeFontColor(wxCommandEvent& event)
 {
-	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetFontColor());
+	ee::RGBColorSettingDlg dlg(this, NULL, m_spr->GetFontColor());
 	if (dlg.ShowModal() == wxID_OK) {
 		m_spr->SetFontColor(dlg.GetColor());
 	}
@@ -233,13 +233,13 @@ void ToolbarPanel::OnChangeEdge(wxCommandEvent& event)
 
 void ToolbarPanel::OnChangeEdgeSize(wxCommandEvent& event)
 {
-	int sz = d2d::StringHelper::FromString<float>(m_edge_size->GetValue().ToStdString());
+	int sz = ee::StringHelper::FromString<float>(m_edge_size->GetValue().ToStdString());
 	m_spr->SetEdgeSize(sz);
 }
 
 void ToolbarPanel::OnChangeEdgeColor(wxCommandEvent& event)
 {
-	d2d::RGBColorSettingDlg dlg(this, NULL, m_spr->GetEdgeColor());
+	ee::RGBColorSettingDlg dlg(this, NULL, m_spr->GetEdgeColor());
 	if (dlg.ShowModal() == wxID_OK) {
 		m_spr->SetEdgeColor(dlg.GetColor());
 	}
@@ -254,8 +254,8 @@ void ToolbarPanel::OnChangeAlign(wxCommandEvent& event)
 
 void ToolbarPanel::OnChangeSpace(wxCommandEvent& event)
 {
-	float hspace = d2d::StringHelper::FromString<float>(m_space_h->GetValue().ToStdString());
-	float vspace = d2d::StringHelper::FromString<float>(m_space_v->GetValue().ToStdString());
+	float hspace = ee::StringHelper::FromString<float>(m_space_h->GetValue().ToStdString());
+	float vspace = ee::StringHelper::FromString<float>(m_space_v->GetValue().ToStdString());
 	m_spr->SetSpace(hspace, vspace);
 }
 

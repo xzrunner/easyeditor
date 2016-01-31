@@ -2,14 +2,14 @@
 #ifndef EMODELING_LIBRARY_LIST_H
 #define EMODELING_LIBRARY_LIST_H
 
-#include <drag2d.h>
+
 
 namespace emodeling
 {
-	class LibraryList : public d2d::LibraryList
+	class LibraryList : public ee::LibraryList
 	{
 	public:
-		LibraryList(d2d::ILibraryPage* page);
+		LibraryList(ee::LibraryPage* page);
 
 		virtual void OnListDoubleClicked(wxCommandEvent& event);
 

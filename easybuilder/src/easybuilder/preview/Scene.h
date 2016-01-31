@@ -2,7 +2,7 @@
 #ifndef EBUILDER_PREVIEW_SCENE_H
 #define EBUILDER_PREVIEW_SCENE_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {	
@@ -17,12 +17,12 @@ namespace ebuilder
 		public:
 			~Scene();
 
-			Button* queryButtonByPos(const d2d::Vector& pos) const;
+			Button* queryButtonByPos(const ee::Vector& pos) const;
 
 			void triggerAllBehaviors();
 
 		public:
-			d2d::Colorf m_color;
+			ee::Colorf m_color;
 
 			std::vector<Item*> m_items;
 

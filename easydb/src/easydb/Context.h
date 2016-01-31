@@ -1,7 +1,7 @@
 #ifndef EDB_CONTEXT_H
 #define EDB_CONTEXT_H
 
-#include <drag2d.h>
+
 
 namespace edb
 {

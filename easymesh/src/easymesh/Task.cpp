@@ -12,24 +12,24 @@ Task::Task(wxFrame* parent)
 	, m_property(NULL)
 	, m_stage(NULL)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
 void Task::Load(const char* filepath)
 {
-	if (d2d::FileType::IsType(filepath, d2d::FileType::e_mesh)) {
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	if (ee::FileType::IsType(filepath, ee::FileType::e_mesh)) {
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		Symbol* msymbol = static_cast<Symbol*>(symbol);
 		m_stage->SetSymbol(msymbol);
 		
-		m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+		m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 		symbol->Release();
 	}
 }
@@ -45,7 +45,7 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const 
+const ee::EditPanel* Task::GetEditPanel() const 
 { 
 	return m_stage; 
 }
@@ -54,10 +54,10 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
 	wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar)
 {
-	library = m_library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
+	library = m_library = new ee::LibraryPanel(leftHorizontalSplitter);
+	m_library->AddPage(new ee::LibraryImagePage(m_library->GetNotebook()));
 
-	property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	property = m_property = new ee::PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = m_stage = new emesh::StagePanel(leftVerticalSplitter, m_parent, m_library);
 //	m_property->SetPropertySetting(new complex::PropertySetting(m_stage, m_sstage->getSymbol()));
@@ -66,7 +66,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	toolbar = new emesh::ToolbarPanel(rightVerticalSplitter, m_stage, true, NULL);
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
 	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);

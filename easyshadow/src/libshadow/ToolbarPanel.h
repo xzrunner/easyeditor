@@ -1,26 +1,26 @@
 #ifndef _EASYSHADOW_TOOLBAR_PANEL_H_
 #define _EASYSHADOW_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eshadow
 {
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback
+class ToolbarPanel : public ee::ToolbarPanel, public ee::UICallback
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
 	//
-	// interface d2d::UICallback
+	// interface ee::UICallback
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void OnSetInnerColor(wxCommandEvent& event);
@@ -35,7 +35,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::SliderCtrlOne* m_slider_radius;
+	ee::SliderCtrlOne* m_slider_radius;
 
 }; // ToolbarPanel
 

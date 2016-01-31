@@ -7,8 +7,8 @@ namespace lr
 namespace preview
 {
 
-CtrlCamOP::CtrlCamOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
-	: d2d::AbstractEditOP(wnd, stage)
+CtrlCamOP::CtrlCamOP(wxWindow* wnd, ee::EditPanelImpl* stage)
+	: ee::EditOP(wnd, stage)
 {	
 }
 
@@ -38,8 +38,8 @@ bool CtrlCamOP::OnKeyDown(int keyCode)
 void CtrlCamOP::OffsetCamera(float dx, float dy)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
-	m_stage->GetCamera()->Translate(d2d::Vector(dx, dy));
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	m_stage->GetCamera()->Translate(ee::Vector(dx, dy));
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

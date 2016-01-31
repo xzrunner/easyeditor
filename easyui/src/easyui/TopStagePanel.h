@@ -1,7 +1,7 @@
 #ifndef _EASYUI_TOP_STAGE_PANEL_H_
 #define _EASYUI_TOP_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {

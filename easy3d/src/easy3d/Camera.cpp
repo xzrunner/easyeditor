@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-#include <drag2d.h>
+
 
 namespace e3d
 {
@@ -76,11 +76,11 @@ vec3 Camera::GetToward() const
 {
 	// reset rot matrix
 	// compute trig functions once
-	float rad_elevation = m_rot_elevation * d2d::TRANS_DEG_TO_RAD;
+	float rad_elevation = m_rot_elevation * ee::TRANS_DEG_TO_RAD;
 	float sin_elevation = sin(rad_elevation);
 	float cos_elevation = cos(rad_elevation);
 
-	float rad_heading = m_rot_heading * d2d::TRANS_DEG_TO_RAD;
+	float rad_heading = m_rot_heading * ee::TRANS_DEG_TO_RAD;
 	float sin_heading = sin(rad_heading);
 	float cos_heading = cos(rad_heading);
 

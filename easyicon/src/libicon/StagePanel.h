@@ -1,7 +1,7 @@
 #ifndef _EASYICON_STAGE_PANEL_H_
 #define _EASYICON_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eicon
 {
@@ -9,30 +9,30 @@ namespace eicon
 class Symbol;
 class Icon;
 
-class StagePanel : public d2d::EditPanel
+class StagePanel : public ee::EditPanel
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, d2d::Sprite* edited, 
-		const d2d::MultiSpritesImpl* bg_sprites);
+		wxGLContext* glctx, ee::Sprite* edited, 
+		const ee::MultiSpritesImpl* bg_sprites);
 	virtual ~StagePanel();
 
 	void SetIcon(Icon* icon);
 	Icon* GetIcon();
 
-	void SetImage(d2d::Image* img);
+	void SetImage(ee::Image* img);
 
 	const Symbol& GetSymbol() const { return *m_symbol; }
 	Symbol& GetSymbol() { return *m_symbol; }
 
 private:
-	class StageDropTarget : public d2d::StageDropTarget
+	class StageDropTarget : public ee::StageDropTarget
 	{
 	public:
-		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
-		virtual bool OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos);
+		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
+		virtual bool OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos);
 	private:
 		StagePanel* m_stage;
 	}; // StageDropTarget 

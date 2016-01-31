@@ -3,7 +3,7 @@
 
 using namespace ebuilder::preview;
 
-ChangeImage::ChangeImage(d2d::ISprite* sprite, d2d::ISymbol* symbol)
+ChangeImage::ChangeImage(ee::ISprite* sprite, ee::ISymbol* symbol)
 	: m_sprite(sprite)
 	, m_symbol(symbol)
 {

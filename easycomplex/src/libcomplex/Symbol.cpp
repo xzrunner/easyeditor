@@ -31,14 +31,14 @@ Symbol::~Symbol()
 
 void Symbol::Retain() const
 {
-	d2d::Object::Retain();
-	for_each(m_sprites.begin(), m_sprites.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
+	ee::Object::Retain();
+	for_each(m_sprites.begin(), m_sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
 }
 
 void Symbol::Release() const
 {
-	d2d::Object::Release();
-	for_each(m_sprites.begin(), m_sprites.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+	ee::Object::Release();
+	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 }
 
 void Symbol::ReloadTexture() const
@@ -59,21 +59,21 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
- 	const d2d::TPNode* n = NULL;
-	if (d2d::Config::Instance()->IsUseDTex() && 
+ 	const ee::TPNode* n = NULL;
+	if (ee::Config::Instance()->IsUseDTex() && 
 		m_render_cache_open) 
 	{
-// 		d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+// 		ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
 // 		n = dtex->Query(m_filepath);
 	}
  	if (n) 
  	{
-		//d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+		//ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
 
-		//d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+		//ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 		//if (shader->GetVersion() != m_render_version)
 		//{
 		//	m_render_cache_open = false;
@@ -83,23 +83,23 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 		//	m_render_version = shader->GetVersion();
 		//}
 
-		//d2d::Vector vertices[4];
-		//float hw = m_rect.xLength() * 0.5f,
-		//	hh = m_rect.yLength() * 0.5f;
-		//vertices[0] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmin, m_rect.ymin), mt);
-		//vertices[1] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmax, m_rect.ymin), mt);
-		//vertices[2] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmax, m_rect.ymax), mt);
-		//vertices[3] = d2d::Math2D::transVector(d2d::Vector(m_rect.xmin, m_rect.ymax), mt);
+		//ee::Vector vertices[4];
+		//float hw = m_rect.Width() * 0.5f,
+		//	hh = m_rect.Height() * 0.5f;
+		//vertices[0] = ee::Math2D::TransVector(ee::Vector(m_rect.xmin, m_rect.ymin), mt);
+		//vertices[1] = ee::Math2D::TransVector(ee::Vector(m_rect.xmax, m_rect.ymin), mt);
+		//vertices[2] = ee::Math2D::TransVector(ee::Vector(m_rect.xmax, m_rect.ymax), mt);
+		//vertices[3] = ee::Math2D::TransVector(ee::Vector(m_rect.xmin, m_rect.ymax), mt);
 		//if (n->IsRotated())
 		//{
-		//	d2d::Vector tmp = vertices[3];
+		//	ee::Vector tmp = vertices[3];
 		//	vertices[3] = vertices[2];
 		//	vertices[2] = vertices[1];
 		//	vertices[1] = vertices[0];
 		//	vertices[0] = tmp;
 		//}
 
-		//d2d::Vector texcoords[4];
+		//ee::Vector texcoords[4];
 		//float txmin, txmax, tymin, tymax;
 		//float extend = dtex->GetExtend();
 		//int width = dtex->GetWidth();
@@ -124,15 +124,15 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			d2d::SpriteRenderer::Instance()->Draw(m_sprites[i], root, mt, color);
+			ee::SpriteRenderer::Instance()->Draw(m_sprites[i], root, mt, color);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
-			d2d::PrimitiveDraw::DrawRect(mt, m_clipbox, m_style);
+			ee::PrimitiveDraw::DrawRect(mt, m_clipbox, m_style);
 		}
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite/* = NULL*/) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -150,7 +150,7 @@ void Symbol::InitBounding()
 	m_rect.MakeInfinite();
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		std::vector<d2d::Vector> vertices;
+		std::vector<ee::Vector> vertices;
 		m_sprites[i]->GetBounding()->GetBoundPos(vertices);
 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
 			m_rect.Combine(vertices[j]);
@@ -158,11 +158,11 @@ void Symbol::InitBounding()
 
 	// 为兼容老数据，临时去掉
 	//// to center
-	//float x = m_rect.xCenter(),
-	//	y = m_rect.yCenter();
+	//float x = m_rect.CenterX(),
+	//	y = m_rect.CenterY();
 	//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	//	m_sprites[i]->translate(d2d::Vector(-x, -y));
-	//m_rect.translate(d2d::Vector(-x, -y));
+	//	m_sprites[i]->translate(ee::Vector(-x, -y));
+	//m_rect.translate(ee::Vector(-x, -y));
 }
 
 void Symbol::LoadResources()

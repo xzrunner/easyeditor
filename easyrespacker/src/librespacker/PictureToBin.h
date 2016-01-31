@@ -12,13 +12,13 @@ public:
 	static int Size(const PackPicture* pic);
 
 	static void Pack(const PackPicture* pic, uint8_t** ptr,
-		const d2d::TexturePacker& tp, float scale);
+		const ee::TexturePacker& tp, float scale);
 
 private:
 	static int SizeQuad();
 
 	static void PackQuad(const PackPicture::Quad& quad, uint8_t** ptr, 
-		const d2d::TexturePacker& tp, float scale);
+		const ee::TexturePacker& tp, float scale);
 
 }; // PictureToBin
 

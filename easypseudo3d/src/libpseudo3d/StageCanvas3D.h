@@ -1,7 +1,7 @@
 #ifndef _EASYPSEUDO3D_STAGE_CANVAS_3D_H_
 #define _EASYPSEUDO3D_STAGE_CANVAS_3D_H_
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace epseudo3d
@@ -12,7 +12,7 @@ class IScene;
 class StageCanvas3D : public e3d::StageCanvas
 {
 public:
-	StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage);
+	StageCanvas3D(wxWindow* stage_wnd, ee::EditPanelImpl* stage);
 
 	void StoreScene(const char* filename) const;
 	void LoadScene(const char* filename);

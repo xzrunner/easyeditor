@@ -5,24 +5,24 @@ namespace eimage
 {
 
 PixelDiffOP::PixelDiffOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_stage(stage)
 {
 }
 
 bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_stage->getLeft() || !m_stage->getRight()) {
 		return false;
 	}
 
-	const d2d::Sprite* s_left = m_stage->getLeft();
-	const d2d::Sprite* s_right = m_stage->getRight();
-	d2d::Image* left = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_left)->GetSymbol()).GetImage();
-	d2d::Image* right = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_right)->GetSymbol()).GetImage();
-	d2d::Vector p = m_stage->TransPosScrToProj(x, y);
+	const ee::Sprite* s_left = m_stage->getLeft();
+	const ee::Sprite* s_right = m_stage->getRight();
+	ee::Image* left = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_left)->GetSymbol()).GetImage();
+	ee::Image* right = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_right)->GetSymbol()).GetImage();
+	ee::Vector p = m_stage->TransPosScrToProj(x, y);
 
 	m_stage->getLeft()->GetSymbol().GetSize();
 
@@ -38,27 +38,27 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 
 bool PixelDiffOP::OnDraw() const
 {
-// 	if (d2d::ZoomViewOP::OnDraw()) return true;
+// 	if (ee::ZoomViewOP::OnDraw()) return true;
 // 
-// 	d2d::PrimitiveDraw::DrawLine(d2d::Vector(0, -1024), d2d::Vector(0, 1024), d2d::LIGHT_GREY);
+// 	ee::PrimitiveDraw::DrawLine(ee::Vector(0, -1024), ee::Vector(0, 1024), ee::LIGHT_GREY);
 
 	return false;
 }
 
 bool PixelDiffOP::Clear()
 {
-	if (d2d::ZoomViewOP::Clear()) return true;
+	if (ee::ZoomViewOP::Clear()) return true;
 	return false;
 }
 
 bool PixelDiffOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	d2d::SpriteShader* shader = new d2d::SpriteShader;
+	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+	ee::SpriteShader* shader = new ee::SpriteShader;
 	shader->Load();
 	shader_mgr->SetSpriteShader(shader);
 

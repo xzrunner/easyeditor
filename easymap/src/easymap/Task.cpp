@@ -18,8 +18,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -33,33 +33,33 @@ void Task::Load(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FileHelper::GetFileDir(filename);
+	wxString dir = ee::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value spr_val = value["sprites"][i++];
 	while (!spr_val.isNull()) {
-		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 		symbol->Release();
-		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 		spr_val = value["sprites"][i++];
 	}
 
-	m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void Task::Store(const char* filename) const
 {
-	std::vector<d2d::Sprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	Json::Value value;
-	wxString dir = d2d::FileHelper::GetFileDir(filename) + "\\";
+	wxString dir = ee::FileHelper::GetFileDir(filename) + "\\";
 	for (size_t i = 0; i < sprites.size(); ++i) {
-		d2d::Sprite* spr = sprites[i];
-		value["sprites"][i]["filepath"] = d2d::FileHelper::GetRelativePath(dir,
+		ee::Sprite* spr = sprites[i];
+		value["sprites"][i]["filepath"] = ee::FileHelper::GetRelativePath(dir,
 			spr->GetSymbol().GetFilepath()).ToStdString();
 		spr->Store(value["sprites"][i]);
 	}
@@ -69,7 +69,7 @@ void Task::Store(const char* filename) const
 	std::ofstream fout(filename);
 	std::locale::global(std::locale("C"));
 	if (fout.fail()) {
-		throw d2d::Exception("Can't save file: %s !", filename);
+		throw ee::Exception("Can't save file: %s !", filename);
 	}
 	writer.write(fout, value);
 	fout.close();
@@ -80,12 +80,12 @@ bool Task::IsDirty() const
 	return false;
 }
 
-void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
+	m_stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -98,7 +98,7 @@ void Task::InitLayout()
 
 	m_library = new LibraryPanel(left_hori_splitter);
 
-	m_property = new d2d::PropertySettingPanel(left_hori_splitter);
+	m_property = new ee::PropertySettingPanel(left_hori_splitter);
 
 	left_hori_splitter->SetSashGravity(0.5f);
 	left_hori_splitter->SplitHorizontally(m_library, m_property);
@@ -111,7 +111,7 @@ void Task::InitLayout()
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 //	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
-	m_viewlist = new d2d::ViewlistPanel(right_splitter);
+	m_viewlist = new ee::ViewlistPanel(right_splitter);
 
 	right_splitter->SetSashGravity(0.85f);
 	right_splitter->SplitVertically(left_vert_splitter, m_viewlist);

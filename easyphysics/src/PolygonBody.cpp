@@ -2,7 +2,7 @@
 #include "BodyData.h"
 #include "const.h"
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
@@ -61,7 +61,7 @@ PolygonBody::PolygonBody(b2World* world, float hWidth, float hHeight,
 	m_body->CreateFixture(&fd);
 }
 
-void PolygonBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const
+void PolygonBody::getRect(ee::Rect& rect, const ee::Vector& position, float angle) const
 {
 	rect.MakeInfinite();
 	for (b2Fixture* f = m_body->GetFixtureList(); f; f = f->GetNext())
@@ -71,7 +71,7 @@ void PolygonBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float an
 		for (size_t i = 0; i < poly->GetVertexCount(); ++i)
 		{
 			const b2Vec2& p = poly->m_vertices[i];
-			d2d::Vector transform = d2d::Math2D::RotateVector(d2d::Vector(p.x, p.y), angle) + position;
+			ee::Vector transform = ee::Math2D::RotateVector(ee::Vector(p.x, p.y), angle) + position;
 			rect.Combine(transform);
 		}
 	}

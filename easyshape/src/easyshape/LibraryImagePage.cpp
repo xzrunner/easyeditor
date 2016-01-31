@@ -14,9 +14,9 @@ LibraryImagePage::LibraryImagePage(wxWindow* parent)
 	initLayout();
 }
 
-bool LibraryImagePage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryImagePage::isHandleSymbol(ee::ISymbol* symbol) const
 {
-	wxString ext = d2d::FilenameTools::getExtension(symbol->getFilepath()).Lower();
+	wxString ext = ee::FilenameTools::getExtension(symbol->getFilepath()).Lower();
 	return ext == "png" || ext == "jpg" || ext == "bmp";
 }
 
@@ -32,11 +32,11 @@ void LibraryImagePage::onAddPress(wxCommandEvent& event)
 		{
 			LibraryItem* item = new LibraryItem(filenames[i]);
 
-			std::vector<d2d::IShape*>* shapes = new std::vector<d2d::IShape*>;
+			std::vector<ee::IShape*>* shapes = new std::vector<ee::IShape*>;
 			item->setUserData(shapes);
 
-			wxString shape_filepath = d2d::FilenameTools::getFilePathExceptExtension(filenames[i]) 
-				+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape) + ".json";
+			wxString shape_filepath = ee::FilenameTools::getFilePathExceptExtension(filenames[i]) 
+				+ "_" + ee::FileNameParser::getFileTag(ee::FileNameParser::e_shape) + ".json";
 			libshape::FileAdapter adapter(*shapes);
 			adapter.load(shape_filepath);
 

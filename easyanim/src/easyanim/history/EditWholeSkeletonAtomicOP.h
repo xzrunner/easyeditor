@@ -6,17 +6,17 @@ namespace eanim
 {
 	namespace edit_whole_skeleton
 	{
-		class RotateBoneAOP : public d2d::AbstractAtomicOP
+		class RotateBoneAOP : public ee::AbstractAtomicOP
 		{
 		public:
-			RotateBoneAOP(d2d::EditPanel* editPanel, 
+			RotateBoneAOP(ee::EditPanel* editPanel, 
 				WholeSkeleton::Sprite* selected, float delta);
 
 			virtual void undo();
 			virtual void redo();
 
 		private:
-			d2d::EditPanel* m_editPanel;
+			ee::EditPanel* m_editPanel;
 
 			WholeSkeleton::Sprite* m_selected;
 			float m_delta;

@@ -7,20 +7,20 @@ namespace ecomplex
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx,
-							 const std::vector<const d2d::Sprite*>& sprites)
+							 const std::vector<const ee::Sprite*>& sprites)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 	, m_sprites(sprites)
 	, m_control(0.033f)
 {
 	InitLayout(glctx);
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = false;
 }
 
 PreviewDialog::~PreviewDialog()
 {
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	data.particle3d_loop = true;
 }
 

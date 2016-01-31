@@ -1,43 +1,40 @@
-#ifndef D2D_SCRIPTS_SYMBOL_H
-#define D2D_SCRIPTS_SYMBOL_H
+#ifndef _EASYEDITOR_SCRIPTS_SYMBOL_H_
+#define _EASYEDITOR_SCRIPTS_SYMBOL_H_
 
 #include "Symbol.h"
 
-namespace d2d
+namespace ee
 {
-	class ScriptsSymbol : public Symbol
-	{
-	public:
-		ScriptsSymbol() {}
-		virtual ~ScriptsSymbol() {}
 
-		//
-		// Cloneable interface
-		//
-		virtual ScriptsSymbol* Clone() const { return NULL; }
+class ScriptsSymbol : public Symbol
+{
+public:
+	ScriptsSymbol() {}
+	virtual ~ScriptsSymbol() {}
 
-		//
-		// Symbol interfaces
-		//
-		virtual void ReloadTexture() const {}
-		virtual void Draw(const Matrix& mt, const ColorTrans& col = ColorTrans(), 
-			const Sprite* spr = NULL, const Sprite* root = NULL) const {}
-		virtual Rect GetSize(const Sprite* sprite = NULL) const;
+	//
+	// Cloneable interface
+	//
+	virtual ScriptsSymbol* Clone() const { return NULL; }
 
-		//
-		// ListItem interface
-		//
-		virtual void refresh() {}
+	//
+	// Symbol interfaces
+	//
+	virtual void ReloadTexture() const {}
+	virtual void Draw(const Matrix& mt, const ColorTrans& col = ColorTrans(), 
+		const Sprite* spr = NULL, const Sprite* root = NULL) const {}
+	virtual Rect GetSize(const Sprite* sprite = NULL) const;
 
-		const std::string getContent() const { return m_data; }
+	const std::string GetContent() const { return m_data; }
 
-	protected:
-		virtual void LoadResources();
+protected:
+	virtual void LoadResources();
 
-	private:
-		std::string m_data;
+private:
+	std::string m_data;
 
-	}; // ScriptsSymbol
+}; // ScriptsSymbol
+
 }
 
-#endif // D2D_SCRIPTS_SYMBOL_H
+#endif // _EASYEDITOR_SCRIPTS_SYMBOL_H_

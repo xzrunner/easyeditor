@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_SHAPE_H_
 #define _EASYMESH_SHAPE_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
@@ -9,12 +9,12 @@ namespace emesh
 class Node;
 class Triangle;
 
-class Shape : public d2d::Object, public d2d::Cloneable
+class Shape : public ee::Object, public ee::Cloneable
 {
 public:
 	Shape();
 	Shape(const Shape& shape);
-	Shape(const d2d::Image& image);
+	Shape(const ee::Image& image);
 	virtual ~Shape();
 
  	//
@@ -29,21 +29,21 @@ public:
 	virtual void Update() {}
 	virtual void Refresh() {}
 
-	void QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes);
-	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
+	void QueryNode(const ee::Vector& p, std::vector<Node*>& nodes);
+	void QueryNode(const ee::Rect& r, std::vector<Node*>& nodes);
 
 	void DrawInfoUV() const;
 	void DrawInfoXY() const;
-	void DrawTexture(const d2d::Matrix& mt, const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
-		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0)) const;
-	void DrawTexture(const d2d::Matrix& mt, const d2d::Colorf& mul, 
-		const d2d::Colorf& add, unsigned int texid) const;
+	void DrawTexture(const ee::Matrix& mt, const ee::Colorf& mul = ee::Colorf(1, 1, 1, 1), 
+		const ee::Colorf& add = ee::Colorf(0, 0, 0, 0)) const;
+	void DrawTexture(const ee::Matrix& mt, const ee::Colorf& mul, 
+		const ee::Colorf& add, unsigned int texid) const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 
 	float GetNodeRegion() const { return m_node_radius; }
 
-	d2d::Rect GetRegion() const;
+	ee::Rect GetRegion() const;
 
 	void SetTween(Shape* begin, Shape* end, float process);
 

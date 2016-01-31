@@ -2,7 +2,7 @@
 #include "Lzma.h"
 #include "typedef.h"
 
-#include <drag2d.h>
+
 #include <easyimage.h>
 
 namespace librespacker
@@ -23,14 +23,14 @@ void PackPNG::Load(const std::string& filepath)
 {
 	Clear();
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool ori_clip_cfg = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool ori_alpha_cfg = data.pre_multi_alpha;
 	data.pre_multi_alpha = false;
 
 	int w, h, c, f;
-	uint8_t* buf = d2d::ImageLoader::FileToPixels(filepath, w, h, c, f);
+	uint8_t* buf = ee::ImageLoader::FileToPixels(filepath, w, h, c, f);
 
 	data.open_image_edge_clip = ori_clip_cfg;
 	data.pre_multi_alpha = ori_alpha_cfg;
@@ -39,7 +39,7 @@ void PackPNG::Load(const std::string& filepath)
 	m_height = h;
 	m_buffer = buf;
 	if (c != 4) {
-		throw d2d::Exception("PackPNG::Load: image is not rgba.");
+		throw ee::Exception("PackPNG::Load: image is not rgba.");
 	}
 
 	if (m_type == TT_PNG4) {
@@ -60,13 +60,13 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 		uint8_t* buf = new uint8_t[sz];
 		memcpy(buf, m_buffer, sz);
 
-		d2d::ImageData img_data(buf, m_width, m_height, 4);
-		d2d::Image img(&img_data);
-		d2d::ImageSymbol symbol(&img, "");
+		ee::ImageData img_data(buf, m_width, m_height, 4);
+		ee::Image img(&img_data);
+		ee::ImageSymbol symbol(&img, "");
 
 		int width = m_width * scale,
 			height = m_height * scale;
-		d2d::Snapshoot ss;
+		ee::Snapshoot ss;
 		uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
 		RevertAndStore(fout, buffer, width, height);
 		delete[] buffer;

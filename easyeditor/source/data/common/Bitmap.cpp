@@ -8,7 +8,8 @@
 #include "FileType.h"
 #include "FileHelper.h"
 #include "Exception.h"
-//#include "render/Snapshoot.h"
+#include "Snapshoot.h"
+#include "ImageTrim.h"
 
 #include <gl/glew.h>
 //#include <wx/filename.h>
@@ -137,7 +138,7 @@ void Bitmap::GetImage(const std::string& filepath, wxImage& dst_img)
 {
 	ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 	int h = img_data->GetHeight();
-	eimage::ImageTrim trim(*img_data);
+	ImageTrim trim(*img_data);
 	Rect trim_r = trim.Trim();
 	img_data->Release();
 

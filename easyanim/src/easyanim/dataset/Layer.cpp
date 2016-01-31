@@ -119,7 +119,7 @@ bool Layer::insertSprite(Sprite* sprite, int currFrame)
 	}
 }
 
-bool Layer::removeSprite(d2d::ISprite* sprite)
+bool Layer::removeSprite(ee::ISprite* sprite)
 {
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
 	for ( ; itr != m_frames.end(); ++itr)

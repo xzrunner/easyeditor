@@ -208,7 +208,7 @@ void MainFrame::setCurrFilename()
 	while (true)
 	{
 		wxString str = wxT("new") + wxString::FromDouble(id++) + wxT(".ani");
-		if (!d2d::FilenameTools::isExist(str))
+		if (!ee::FilenameTools::isExist(str))
 		{
 			m_currFilename = str.ToStdString();
 			break;

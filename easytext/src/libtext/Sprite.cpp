@@ -63,11 +63,11 @@ Sprite::Sprite(Symbol* symbol)
 
 	m_font = symbol->m_font;
 	m_font_size = symbol->m_font_size;
-	m_font_color = d2d::TransColor(symbol->m_font_color, d2d::PT_RGBA);
+	m_font_color = ee::TransColor(symbol->m_font_color, ee::PT_RGBA);
 
 	m_edge = symbol->m_edge;
 	m_edge_size = symbol->m_edge_size;
-	m_edge_color = d2d::TransColor(symbol->m_edge_color, d2d::PT_RGBA);
+	m_edge_color = ee::TransColor(symbol->m_edge_color, ee::PT_RGBA);
 
 	m_align_hori = symbol->m_align_hori;
 	m_align_vert = symbol->m_align_vert;
@@ -90,7 +90,7 @@ Sprite::~Sprite()
 Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
-	d2d::SpriteFactory::Instance()->Insert(sprite);
+	ee::SpriteFactory::Instance()->Insert(sprite);
 	return sprite;
 }
 
@@ -104,9 +104,9 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
@@ -120,11 +120,11 @@ void Sprite::Load(const Json::Value& val)
 
 	m_font = text_val["font"].asInt();
 	m_font_size = text_val["font_size"].asInt();
-	m_font_color = TransColor(text_val["font_color"].asString(), d2d::PT_RGBA);
+	m_font_color = TransColor(text_val["font_color"].asString(), ee::PT_RGBA);
 
 	m_edge = text_val["edge"].asBool();
 	m_edge_size = text_val["edge_size"].asInt();
-	m_edge_color = TransColor(text_val["edge_color"].asString(), d2d::PT_RGBA);	
+	m_edge_color = TransColor(text_val["edge_color"].asString(), ee::PT_RGBA);	
 
 	m_align_hori = HoriAlignType(text_val["align_hori"].asInt());
 	m_align_vert = VertAlignType(text_val["align_vert"].asInt());
@@ -149,11 +149,11 @@ void Sprite::Store(Json::Value& val) const
 
 	text_val["font"] = m_font;
 	text_val["font_size"] = m_font_size;
-	text_val["font_color"] = TransColor(m_font_color, d2d::PT_RGBA);
+	text_val["font_color"] = TransColor(m_font_color, ee::PT_RGBA);
 
 	text_val["edge"] = m_edge;
 	text_val["edge_size"] = m_edge_size;
-	text_val["edge_color"] = TransColor(m_edge_color, d2d::PT_RGBA);
+	text_val["edge_color"] = TransColor(m_edge_color, ee::PT_RGBA);
 
 	text_val["align_hori"] = m_align_hori;
 	text_val["align_vert"] = m_align_vert;
@@ -167,7 +167,7 @@ void Sprite::Store(Json::Value& val) const
 	val["text"] = text_val;
 }
 
-d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanelImpl* stage)
+ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new PropertySetting(stage, this);
 }

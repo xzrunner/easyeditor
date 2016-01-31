@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_ANIM_RECORDER_H_
 #define _EASYPARTICLE3D_ANIM_RECORDER_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
@@ -13,7 +13,7 @@ public:
 	~AnimRecorder();
 
 	void AddItem(const std::string& filepath, float x, float y, float angle, 
-		float scale, const d2d::Colorf& mul_col, const d2d::Colorf& add_col);
+		float scale, const ee::Colorf& mul_col, const ee::Colorf& add_col);
 	void FinishFrame();
 
 	void Clear();
@@ -27,7 +27,7 @@ private:
 		float x, y;
 		float angle;
 		float scale;
-		d2d::Colorf mul_col, add_col;
+		ee::Colorf mul_col, add_col;
 	};
 
 	struct Frame
@@ -44,8 +44,8 @@ private:
 
 	Frame* m_curr_frame;
 
-	d2d::PointerPool<Frame> m_frame_pool;
-	d2d::PointerPool<Item> m_item_pool;
+	ee::PointerPool<Frame> m_frame_pool;
+	ee::PointerPool<Item> m_item_pool;
 
 }; // AnimRecorder
 

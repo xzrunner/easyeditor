@@ -7,7 +7,7 @@ namespace eshape
 {
 
 LibraryList::LibraryList(wxWindow* parent)
-	: d2d::LibraryList(parent)
+	: ee::LibraryList(parent)
 	, m_stage(NULL)
 	, m_toolbar(NULL)
 {

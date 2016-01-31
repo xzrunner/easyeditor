@@ -1,6 +1,6 @@
 #include "NodeFromBin.h"
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -12,7 +12,7 @@ float NodeFromBin::TransTime(int time)
 
 float NodeFromBin::TransDegree(int deg)
 {
-	return deg * d2d::TRANS_DEG_TO_RAD;
+	return deg * ee::TRANS_DEG_TO_RAD;
 }
 
 float NodeFromBin::TransFloatX100(int f)

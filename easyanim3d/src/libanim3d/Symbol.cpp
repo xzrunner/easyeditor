@@ -17,8 +17,8 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (!spr) {
 		return;
@@ -30,15 +30,15 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
 		mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 
-	// 	e3d::DrawCube(mat, m_aabb, d2d::BLACK);
+	// 	e3d::DrawCube(mat, m_aabb, ee::BLACK);
 
 	shader->Model();
 	shader->DrawModel(m_model, mat);
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	return d2d::Rect(100, 100);
+	return ee::Rect(100, 100);
 }
 
 void Symbol::LoadResources()
@@ -55,8 +55,8 @@ void Symbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FileHelper::GetFileDir(m_filepath);
-	std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, value["filepath"].asString());
+	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
+	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["filepath"].asString());
 	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
 }
 

@@ -8,8 +8,8 @@ IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
 {
-	d2d::SymbolFactory::RegisterCreator(libsketch::FILE_TAG, &libsketch::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(libsketch::FILE_TAG, &libsketch::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(libsketch::FILE_TAG, &libsketch::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(libsketch::FILE_TAG, &libsketch::Sprite::Create);
 }
 
 bool MyApp::OnInit()

@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_STAGE_CANVAS_H_
 #define _EASYPARTICLE3D_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 #include <easyanim.h>
 
 namespace eparticle3d
@@ -9,7 +9,7 @@ namespace eparticle3d
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* editPanel);

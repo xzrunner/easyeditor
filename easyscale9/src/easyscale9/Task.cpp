@@ -15,14 +15,14 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
 void Task::Load(const char* filepath)
 {
-	if (d2d::FileType::IsType(filepath, d2d::FileType::e_scale9)) {
+	if (ee::FileType::IsType(filepath, ee::FileType::e_scale9)) {
 		FileIO::load(filepath, m_library, m_stage, m_toolbar);
 	}
 }
@@ -37,7 +37,7 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -64,10 +64,10 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_library = new d2d::LibraryPanel(split);
-	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
+	m_library = new ee::LibraryPanel(split);
+	m_library->AddPage(new ee::LibraryImagePage(m_library->GetNotebook()));
 
-	m_property = new d2d::PropertySettingPanel(split);
+	m_property = new ee::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_library, m_property);

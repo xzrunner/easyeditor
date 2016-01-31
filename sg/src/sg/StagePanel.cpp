@@ -9,9 +9,9 @@ namespace sg
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, m_library(library)
 	, m_is_flat(false)
 	, m_building_cfg(this, library)
@@ -22,14 +22,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	m_base_level = 1;
 
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::RemoveSpriteSJ::Instance());
-	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::RemoveSpriteSJ::Instance());
+	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
+void StagePanel::TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const
 {
-	d2d::Vector p;
+	ee::Vector p;
 	if (m_is_flat) {
 		p = pos;
 	} else {
@@ -39,7 +39,7 @@ void StagePanel::TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col
 	row = std::max(0.0f, std::min(p.y / m_edge, (float)(m_row - 1)));
 }
 
-void StagePanel::TransGridPosToCoords(int row, int col, d2d::Vector& pos) const
+void StagePanel::TransGridPosToCoords(int row, int col, ee::Vector& pos) const
 {
 	pos.x = m_edge * col + m_edge * 0.5f;
 	pos.y = m_edge * row + m_edge * 0.5f;
@@ -48,9 +48,9 @@ void StagePanel::TransGridPosToCoords(int row, int col, d2d::Vector& pos) const
 	}
 }
 
-void StagePanel::TransCoordsToGridPosNew(const d2d::Vector& pos, int& row, int& col) const
+void StagePanel::TransCoordsToGridPosNew(const ee::Vector& pos, int& row, int& col) const
 {
-	d2d::Vector p;
+	ee::Vector p;
 	if (m_is_flat) {
 		p = pos;
 	} else {
@@ -64,7 +64,7 @@ void StagePanel::TransCoordsToGridPosNew(const d2d::Vector& pos, int& row, int& 
 	row = ROW - 1 - row;
 }
 
-void StagePanel::TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) const
+void StagePanel::TransGridPosToCoordsNew(int row, int col, ee::Vector& pos) const
 {
 	pos.x = m_edge * (COL - 1 - col) + m_edge * 0.5f;
 	pos.y = m_edge * (ROW - 1 - row) + m_edge * 0.5f;
@@ -75,10 +75,10 @@ void StagePanel::TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) con
 
 void StagePanel::UpdateAllSpritesLocation()
 {
-	std::vector<d2d::Sprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::Sprite* s = sprites[i];
+		ee::Sprite* s = sprites[i];
 		s->SetTransform(FixSpriteLocation(s->GetPosition()), s->GetAngle());
 	}
 }
@@ -89,17 +89,17 @@ void StagePanel::SetPerspective(bool is_flat)
 		return;
 	}
 
-	std::vector<d2d::Sprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 
 		int row, col;
 		TransCoordsToGridPos(sprite->GetPosition(), row, col);
 		m_is_flat = !m_is_flat;
 
-		d2d::Vector pos;
+		ee::Vector pos;
 		TransGridPosToCoords(row, col, pos);
 		m_is_flat = !m_is_flat;
 
@@ -111,11 +111,11 @@ void StagePanel::SetPerspective(bool is_flat)
 
 void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
-	std::vector<d2d::Sprite*> sprites;
-	GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 
 		SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());
 		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
@@ -128,7 +128,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 
 		spr_info->level = up ? spr_info->level + 1 : spr_info->level - 1;
 		std::string new_filepath = symbol_info->building->levels[spr_info->level - 1].res_snapshoot_path;
-		d2d::Symbol* new_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(new_filepath);
+		ee::Symbol* new_symbol = ee::SymbolMgr::Instance()->FetchSymbol(new_filepath);
 		if (new_symbol != &sprite->GetSymbol()) {
 			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->GetUserData());
 			new_symbol_info->remain--;
@@ -151,7 +151,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 			return;
 // 		}
 // 
-// 		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
+// 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
 // 		if (symbol) {
 // 			if (symbol->GetUserData() == NULL) 
 // 			{
@@ -171,36 +171,36 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+	ee::MultiSpritesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			Insert(p->spr);
 		}
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::Sprite*)ud);
+	case ee::MSG_REMOVE_SPRITE:
+		Remove((ee::Sprite*)ud);
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		Clear();
 		break;
 	}
 }
 
-d2d::Vector StagePanel::FixSpriteLocation(const d2d::Vector& pos) const
+ee::Vector StagePanel::FixSpriteLocation(const ee::Vector& pos) const
 {
 	int row, col;
 	TransCoordsToGridPos(pos, row, col);
 
-	d2d::Vector ret;
+	ee::Vector ret;
 	TransGridPosToCoords(row, col, ret);
 	return ret;
 }
 
-void StagePanel::ChangeSymbolRemain(d2d::Sprite* sprite, bool increase) const
+void StagePanel::ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(sprite->GetSymbol().GetUserData());
 	if (!info) {
@@ -212,17 +212,17 @@ void StagePanel::ChangeSymbolRemain(d2d::Sprite* sprite, bool increase) const
 	} else {
 		--info->remain;
 	}
-	d2d::Symbol& symbol = const_cast<d2d::Symbol&>(sprite->GetSymbol());
+	ee::Symbol& symbol = const_cast<ee::Symbol&>(sprite->GetSymbol());
 	symbol.SetInfo(wxString::FromDouble(info->remain).ToStdString());
 	m_library->Refresh(true);
 }
 
-void StagePanel::Insert(d2d::Sprite* spr)
+void StagePanel::Insert(ee::Sprite* spr)
 {
 	spr->SetTransform(FixSpriteLocation(spr->GetPosition()), spr->GetAngle());
 
 	if (!spr->GetSymbol().GetUserData()) {
-//		d2d::SpritesPanelImpl::InsertSprite(spr);
+//		ee::SpritesPanelImpl::InsertSprite(spr);
 		return;
 	}
 
@@ -243,7 +243,7 @@ void StagePanel::Insert(d2d::Sprite* spr)
 		spr->SetUserData(ext);
 	}
 
-//	bool ret = d2d::SpritesPanelImpl::InsertSprite(spr);
+//	bool ret = ee::SpritesPanelImpl::InsertSprite(spr);
 	ChangeSymbolRemain(spr, false);
 	m_checkboard.AddSprite(spr);
 
@@ -252,7 +252,7 @@ void StagePanel::Insert(d2d::Sprite* spr)
 	}
 }
 
-void StagePanel::Remove(d2d::Sprite* spr)
+void StagePanel::Remove(ee::Sprite* spr)
 {
 	bool reset_wall = IsSymbolWall(*spr);
 
@@ -267,8 +267,8 @@ void StagePanel::Remove(d2d::Sprite* spr)
 
 void StagePanel::Clear()
 {
-	std::vector<d2d::Sprite*> sprites;
-	TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	bool ret = !sprites.empty();
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ChangeSymbolRemain(sprites[i], true);

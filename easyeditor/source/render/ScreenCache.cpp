@@ -1,12 +1,11 @@
 #include "ScreenCache.h"
-#include "SpatialIndex.h"
-
-#include "common/Rect.h"
-#include "common/Matrix.h"
-#include "dataset/Sprite.h"
-#include "dataset/Symbol.h"
-#include "view/Camera.h"
-#include "render/ShaderContext.h"
+#include "EE_SIdx.h"
+#include "Rect.h"
+#include "Matrix.h"
+#include "Sprite.h"
+#include "Symbol.h"
+#include "Camera.h"
+#include "ShaderContext.h"
 
 #include <dtex_cs.h>
 #include <dtex_screen.h>
@@ -75,10 +74,10 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	float scr_w, scr_h, scr_s;
 	dtex_get_screen(&scr_w, &scr_h, &scr_s);
 
-	float x = (r->xmin - cam_x) / cam_scale + scr_w * 0.5f,
-		y = (r->ymin - cam_y) / cam_scale + scr_h * 0.5f,
-		w = (r->xmax - r->xmin) / cam_scale,
-		h = (r->ymax - r->ymin) / cam_scale;
+	int x = static_cast<int>((r->xmin - cam_x) / cam_scale + scr_w * 0.5f),
+		y = static_cast<int>((r->ymin - cam_y) / cam_scale + scr_h * 0.5f),
+		w = static_cast<int>((r->xmax - r->xmin) / cam_scale),
+		h = static_cast<int>((r->ymax - r->ymin) / cam_scale);
 	dtex_gl_scissor(x, y, w, h);
 	dtex_gl_clear_color(0, 1, 0, 1);
 
@@ -89,7 +88,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	rq.ymax = r->ymax;
 
 	std::vector<const Sprite*> sprites;
-	SpatialIndex::Instance()->Query(rq, sprites);
+	SIdx::Instance()->Query(rq, sprites);
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* spr = sprites[i];

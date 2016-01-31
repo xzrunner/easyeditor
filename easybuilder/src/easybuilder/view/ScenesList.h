@@ -2,13 +2,13 @@
 #ifndef EBUILDER_SCENES_LIST_H
 #define EBUILDER_SCENES_LIST_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class ScenesPage;
 
-	class ScenesList : public d2d::LibraryList
+	class ScenesList : public ee::LibraryList
 	{
 	public:
 		ScenesList(ScenesPage* page);

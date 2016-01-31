@@ -7,7 +7,7 @@ namespace eanim
 
 ComposeWholeSkeletonOP::ComposeWholeSkeletonOP(SkeletonEditPanel* editPanel, WholeSkeleton* skeleton, 
 											   wxTextCtrl* layerTextCtrl)
-	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(editPanel, editPanel)
+	: ee::ArrangeSpriteOP<ee::SelectSpritesOP>(editPanel, editPanel)
 {
 	m_skeleton = skeleton;
 	m_selected = NULL;
@@ -21,9 +21,9 @@ ComposeWholeSkeletonOP::~ComposeWholeSkeletonOP()
 
 bool ComposeWholeSkeletonOP::onMouseLeftDown(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onMouseLeftDown(x, y)) return true;
+	if (ee::ArrangeSpriteOP<ee::SelectSpritesOP>::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	m_selected = m_skeleton->queryByPos(pos);
 
 	return false;
@@ -31,7 +31,7 @@ bool ComposeWholeSkeletonOP::onMouseLeftDown(int x, int y)
 
 bool ComposeWholeSkeletonOP::onMouseLeftUp(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onMouseLeftUp(x, y)) return true;
+	if (ee::ArrangeSpriteOP<ee::SelectSpritesOP>::onMouseLeftUp(x, y)) return true;
 
 	if (m_selected)
 	{
@@ -47,7 +47,7 @@ bool ComposeWholeSkeletonOP::onMouseLeftUp(int x, int y)
 
 bool ComposeWholeSkeletonOP::onMouseRightUp(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onMouseRightUp(x, y)) return true;
+	if (ee::ArrangeSpriteOP<ee::SelectSpritesOP>::onMouseRightUp(x, y)) return true;
 
 	if (m_selected) 
 	{
@@ -62,7 +62,7 @@ bool ComposeWholeSkeletonOP::onMouseRightUp(int x, int y)
 
 bool ComposeWholeSkeletonOP::onDraw() const
 {
-	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onDraw()) return true;
+	if (ee::ArrangeSpriteOP<ee::SelectSpritesOP>::onDraw()) return true;
 
 	if (m_selected) m_selected->drawPosterity();
 
@@ -86,7 +86,7 @@ void ComposeWholeSkeletonOP::absorbSprite(WholeSkeleton::Sprite* sprite)
 	m_skeleton->traverse(NearestNodeVisitor(sprite, &nearest, &fromNode, &toNode));
 	assert(nearest && fromNode && toNode);
 
-	d2d::Vector p0 = sprite->getNodeWorldCoords(fromNode),
+	ee::Vector p0 = sprite->getNodeWorldCoords(fromNode),
 		p1 = nearest->getNodeWorldCoords(toNode);
 	sprite->translate(p1 - p0);
 	connect(nearest, sprite, fromNode, toNode);
@@ -101,9 +101,9 @@ void ComposeWholeSkeletonOP::setSelectedBoneLayer(int layer)
 	}
 }
 
-void ComposeWholeSkeletonOP::translateSprite(const d2d::Vector& delta)
+void ComposeWholeSkeletonOP::translateSprite(const ee::Vector& delta)
 {
-	d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::translateSprite(delta);
+	ee::ArrangeSpriteOP<ee::SelectSpritesOP>::translateSprite(delta);
 
 	if (!m_selected) return;
 
@@ -126,17 +126,17 @@ void ComposeWholeSkeletonOP::translateSprite(const d2d::Vector& delta)
  	m_editPanel->Refresh();
 }
 
-void ComposeWholeSkeletonOP::rotateSprite(const d2d::Vector& dst)
+void ComposeWholeSkeletonOP::rotateSprite(const ee::Vector& dst)
 {
 	if (!m_selected) return;
 
 	if (m_selected->m_parent)
 	{
-		float angle = d2d::Math::getAngleInDirection(m_selected->getPosition(), m_lastPos, dst);
+		float angle = ee::Math::getAngleInDirection(m_selected->getPosition(), m_lastPos, dst);
 
-		d2d::Vector v0 = d2d::Math::rotateVector(m_selected->m_relativeCoords.from->pos, m_selected->getAngle());
-		d2d::Vector v1 = d2d::Math::rotateVector(v0, -angle);
-		d2d::Vector offset = v1 - v0;
+		ee::Vector v0 = ee::Math::rotateVector(m_selected->m_relativeCoords.from->pos, m_selected->getAngle());
+		ee::Vector v1 = ee::Math::rotateVector(v0, -angle);
+		ee::Vector offset = v1 - v0;
 		m_selected->translate(offset);
 
 		m_selected->rotate(angle);
@@ -145,7 +145,7 @@ void ComposeWholeSkeletonOP::rotateSprite(const d2d::Vector& dst)
 	}
 	else 
 	{
-		d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::rotateSprite(dst);
+		ee::ArrangeSpriteOP<ee::SelectSpritesOP>::rotateSprite(dst);
 	}
 
  	if (m_selected->m_parent)
@@ -202,7 +202,7 @@ void ComposeWholeSkeletonOP::translateToCenter()
 {
 	if (m_skeleton->m_root)
 	{
-		d2d::AbstractBV* bounding = d2d::BVFactory::createBV(d2d::e_obb);
+		ee::AbstractBV* bounding = ee::BVFactory::createBV(ee::e_obb);
 		m_skeleton->getBounding(*bounding);
 		m_skeleton->m_root->translate(-bounding->center());
 		m_skeleton->m_root->computePosterityAbsoluteCoords();
@@ -226,7 +226,7 @@ NearestNodeVisitor(WholeSkeleton::Sprite* sprite, WholeSkeleton::Sprite** pResul
 }
 
 void ComposeWholeSkeletonOP::NearestNodeVisitor::
-visit(d2d::ICloneable* object, bool& bFetchNext)
+visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	WholeSkeleton::Sprite* toSprite = static_cast<WholeSkeleton::Sprite*>(object);
 	if (toSprite == m_sprite)
@@ -241,9 +241,9 @@ visit(d2d::ICloneable* object, bool& bFetchNext)
 	{
 		for (size_t j = 0, m = to.size(); j < m; ++j)
 		{
-			d2d::Vector p0 = m_sprite->getNodeWorldCoords(from[i]),
+			ee::Vector p0 = m_sprite->getNodeWorldCoords(from[i]),
 				p1 = toSprite->getNodeWorldCoords(to[j]);
-			float dis = d2d::Math::getDistance(p0, p1);
+			float dis = ee::Math::getDistance(p0, p1);
 			if (dis < m_nearestDis)
 			{
 				m_nearestDis = dis;

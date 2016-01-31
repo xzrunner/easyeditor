@@ -15,7 +15,7 @@ LibraryComplexPage::LibraryComplexPage(wxWindow* parent)
 	initLayout();
 }
 
-bool LibraryComplexPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryComplexPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return dynamic_cast<complex::Symbol*>(symbol) != NULL;
 }
@@ -42,7 +42,7 @@ void LibraryComplexPage::initLayout(bool draggable /*= true*/)
 
 void LibraryComplexPage::onAddPress(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
+	wxString filter = ee::FileNameParser::getFileTag(ee::FileNameParser::e_complex);
 	filter = wxT("*_") + filter + wxT(".json");
  	wxFileDialog dlg(this, wxT("导入complex文件"), wxEmptyString, 
  		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

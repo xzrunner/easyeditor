@@ -3,7 +3,7 @@
 
 #include "PS.h"
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 struct p3d_emitter;
@@ -19,7 +19,7 @@ namespace eparticle3d
 class AnimRecorder;
 class InvertRecord;
 
-class ParticleSystem : public d2d::Object, public d2d::Cloneable, public d2d::UICallback
+class ParticleSystem : public ee::Object, public ee::Cloneable, public ee::UICallback
 {
 public:
 	ParticleSystem(p3d_emitter_cfg* cfg, bool record);
@@ -35,12 +35,12 @@ public:
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	virtual void Draw(const d2d::Matrix& mt, AnimRecorder* recorder = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, AnimRecorder* recorder = NULL) const;
 
-	bool Update(const d2d::Matrix& mat);
+	bool Update(const ee::Matrix& mat);
 
 	void SetDirection(float x, float y, float z);
 	void SetDirection(const Quaternion& dir);
@@ -71,7 +71,7 @@ public:
 
 	void SetOrientToMovement(bool open);
 
-	p3d_symbol* AddSymbol(d2d::Symbol* symbol);
+	p3d_symbol* AddSymbol(ee::Symbol* symbol);
 	void DelSymbol(int idx);
 	void DelAllSymbol();
 	p3d_symbol* GetSymbol(int idx);

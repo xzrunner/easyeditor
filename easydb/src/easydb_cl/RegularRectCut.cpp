@@ -35,10 +35,10 @@ void RegularRectCut::Run(int argc, char *argv[])
 
 void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_dir)
 {
-// 	d2d::ShaderMgr::Instance()->reload();
+// 	ee::ShaderMgr::Instance()->reload();
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(src_dir, files);
+	ee::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
@@ -46,11 +46,11 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::string filepath = filename.GetFullPath().ToStdString();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 
-			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->GetImage();
+			ee::Image* image = static_cast<ee::ImageSymbol*>(symbol)->GetImage();
 			eimage::RegularRectCut cut(*image);
 			cut.AutoCut();
 
@@ -58,7 +58,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			msg.Printf("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea());
 			std::cout << msg << std::endl;
 
-			wxString filename = d2d::FileHelper::GetRelativePath(src_dir, filepath);
+			wxString filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 			filename = filename.substr(0, filename.find_last_of('.'));
 			filename.Replace("\\", "%");
 
@@ -71,7 +71,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 
 				wxString out_path;
 				out_path.Printf("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);
-				d2d::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), d2d::ImageSaver::e_png);
+				ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), ee::ImageSaver::e_png);
 				delete[] pixels;
 			}
 

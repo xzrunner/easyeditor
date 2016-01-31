@@ -6,7 +6,7 @@
 
 using namespace ebuilder;
 
-ChangeScene::ChangeScene(Actor* actor, d2d::LibraryList* sceneList) 
+ChangeScene::ChangeScene(Actor* actor, ee::LibraryList* sceneList) 
 	: Behavior(e_ChangeScene, actor, INT_MAX)
 	, m_scenePage(NULL)
 {
@@ -19,7 +19,7 @@ ChangeScene::~ChangeScene()
 		m_scenePage->getListObserver()->removeListener(this);
 }
 
-void ChangeScene::update(const d2d::LibraryList& list) 
+void ChangeScene::update(const ee::LibraryList& list) 
 {
 	if (!isSymbolInList(selected, list))
 		selected = list.getSymbol(0);

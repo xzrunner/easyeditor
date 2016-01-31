@@ -4,15 +4,24 @@
 #include "TextureImgData.h"
 #include "Exception.h"
 #include "Config.h"
-
 #include "TextureFBO.h"
-
 #ifdef OPEN_SCREEN_CACHE
 #include "render/ScreenCache.h"
 #endif // OPEN_SCREEN_CACHE
-
-#include "render/BlendShader.h"
-#include "render/DrawCallBatching.h"
+#include "BlendShader.h"
+#include "EE_DTex.h"
+#include "SettingData.h"
+#include "ImageData.h"
+#include "TextureFactory.h"
+#include "FileHelper.h"
+#include "Sprite.h"
+#include "Math2D.h"
+#include "ShaderMgr.h"
+#include "SpriteRenderer.h"
+#include "ScreenCache.h"
+#include "Camera.h"
+#include "ImageClip.h"
+#include "ImageTrim.h"
 
 namespace ee
 {
@@ -27,8 +36,8 @@ Image::Image(ImageData* img_data)
 	m_tex = new TextureImgData;
 	m_tex->LoadFromMemory(img_data);
 
-	m_ori_w = m_tex->GetWidth();
-	m_ori_h = m_tex->GetHeight();
+	m_ori_w = static_cast<float>(m_tex->GetWidth());
+	m_ori_h = static_cast<float>(m_tex->GetHeight());
 	m_offset.Set(0, 0);
 }
 
@@ -51,7 +60,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 		return true;
 	}
 
-	if (!wxFileName::FileExists(filepath)) {
+	if (!FileHelper::IsFileExist(filepath)) {
 		throw Exception("Image File: %s don't exist!", filepath.c_str());
 	}
 
@@ -69,7 +78,7 @@ bool Image::LoadFromFile(const std::string& filepath)
 	}
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		DrawCallBatching* dcb = DrawCallBatching::Instance();
+		DTex* dcb = DTex::Instance();
 		dcb->LoadBegin();
 		dcb->Load(this);
 		dcb->LoadEnd();
@@ -83,7 +92,7 @@ void Image::ReloadTexture()
 	m_tex->Reload();
 
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		DrawCallBatching::Instance()->Reload(this);
+		DTex::Instance()->Reload(this);
 	}
 }
 
@@ -144,7 +153,7 @@ void Image::Draw(const Matrix& mt, const Sprite* spr, const Sprite* root) const
 	vertices[2] = Vector(hw - px, hh - py);
 	vertices[3] = Vector(-hw + px, hh + py);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = Math2D::transVector(vertices[i] + m_offset, mt);
+		vertices[i] = Math2D::TransVector(vertices[i] + m_offset, mt);
 	}
 
 	int texid;
@@ -152,7 +161,7 @@ void Image::Draw(const Matrix& mt, const Sprite* spr, const Sprite* root) const
 
 	float* c2_texcoords = NULL;
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
-		c2_texcoords = DrawCallBatching::Instance()->Query(this, &texid);
+		c2_texcoords = DTex::Instance()->Query(this, &texid);
 	}
  	if (c2_texcoords)
  	{
@@ -195,10 +204,10 @@ void Image::Draw(const Matrix& mt, const Sprite* spr, const Sprite* root) const
 		Vector vertices_scr[4];
 		float img_hw = m_tex->GetWidth() * 0.5f,
 			  img_hh = m_tex->GetHeight() * 0.5f;
- 		vertices_scr[0] = Math2D::transVector(Vector(-img_hw, -img_hh), mt);
- 		vertices_scr[1] = Math2D::transVector(Vector( img_hw, -img_hh), mt);
- 		vertices_scr[2] = Math2D::transVector(Vector( img_hw,  img_hh), mt);
- 		vertices_scr[3] = Math2D::transVector(Vector(-img_hw,  img_hh), mt);
+ 		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), mt);
+ 		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), mt);
+ 		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
+ 		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
 
 		Vector tex_coolds_base[4];
 		SpriteRenderer* rd = SpriteRenderer::Instance();
@@ -207,7 +216,7 @@ void Image::Draw(const Matrix& mt, const Sprite* spr, const Sprite* root) const
 		int w, h;
 		ScreenCache::Instance()->GetSize(w, h);
 		for (int i = 0; i < 4; ++i) {
-			tex_coolds_base[i] = cam->transPosProjectToScreen(vertices_scr[i], w, h);
+			tex_coolds_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
 			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
 			tex_coolds_base[i].x /= w;
 			tex_coolds_base[i].y /= h;
@@ -233,7 +242,7 @@ void Image::InvalidRect(const Matrix& mt) const
 
 	float xmin = FLT_MAX, ymin = FLT_MAX, xmax = -FLT_MAX, ymax = -FLT_MAX;
 	for (int i = 0; i < 4; ++i) {
-		Vector pos = Math2D::transVector(vertices[i] + m_offset, mt);
+		Vector pos = Math2D::TransVector(vertices[i] + m_offset, mt);
 		if (pos.x < xmin) xmin = pos.x;
 		if (pos.x > xmax) xmax = pos.x;
 		if (pos.y < ymin) ymin = pos.y;
@@ -261,22 +270,22 @@ void Image::LoadWithClip(const std::string& filepath)
 	} 
 	else 
 	{
-		eimage::ImageTrim trim(*img_data);
+		ImageTrim trim(*img_data);
 		Rect r = trim.Trim();
-		if (r.xLength() >= img_data->GetWidth() && r.yLength() >= img_data->GetHeight()) {
+		if (r.Width() >= img_data->GetWidth() && r.Height() >= img_data->GetHeight()) {
 			m_tex->LoadFromMemory(img_data);
 		} else {
 			int w = img_data->GetWidth(),
 				h = img_data->GetHeight();
 
-			eimage::ImageClip clip(*img_data);
+			ImageClip clip(*img_data);
 			const uint8_t* c_pixels = clip.Clip(r);
 
-			img_data->SetContent(c_pixels, r.xLength(), r.yLength());
+			img_data->SetContent(c_pixels, r.Width(), r.Height());
 			m_tex->LoadFromMemory(img_data);
 
-			m_offset.x = r.xCenter() - w * 0.5f;
-			m_offset.y = r.yCenter() - h * 0.5f;
+			m_offset.x = r.CenterX() - w * 0.5f;
+			m_offset.y = r.CenterY() - h * 0.5f;
 		}
 	}
 

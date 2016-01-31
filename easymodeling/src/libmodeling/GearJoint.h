@@ -11,8 +11,8 @@ namespace libmodeling
 	public:
 		GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2);
 
-		virtual bool isContain(const d2d::Vector& pos) const;
-		virtual bool isIntersect(const d2d::Rect& rect) const;
+		virtual bool isContain(const ee::Vector& pos) const;
+		virtual bool isIntersect(const ee::Rect& rect) const;
 
 		virtual void draw(DrawType type) const;
 

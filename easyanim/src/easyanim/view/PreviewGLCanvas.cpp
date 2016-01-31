@@ -14,13 +14,13 @@
 namespace eanim
 {
 
-BEGIN_EVENT_TABLE(PreviewGLCanvas, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(PreviewGLCanvas, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, PreviewGLCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewGLCanvas::PreviewGLCanvas(d2d::EditPanel* editPanel, LayersMgr* layers, 
+PreviewGLCanvas::PreviewGLCanvas(ee::EditPanel* editPanel, LayersMgr* layers, 
 								 int fps/* = 24*/)
-	: d2d::OrthoCanvas(editPanel)
+	: ee::OrthoCanvas(editPanel)
 	, m_timer(this, TIMER_ID)
 {
 	m_layersMgr = layers;
@@ -36,7 +36,7 @@ PreviewGLCanvas::PlaySetting& PreviewGLCanvas::getPlaySetting()
 
 void PreviewGLCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
 	Context::Instance()->library->reloadAllTexture();
 }
 
@@ -64,7 +64,7 @@ void PreviewGLCanvas::drawStageData()
 	std::vector<Sprite*> sprites;
 	getCurrSprites(sprites);
 	Render::drawSprites(sprites);
-	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::ISprite>());
+	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<ee::ISprite>());
 }
 
 void PreviewGLCanvas::getCurrSprites(std::vector<Sprite*>& sprites) const
@@ -132,7 +132,7 @@ bool PreviewGLCanvas::isTweenMatched(Sprite& s0, Sprite& s1) const
 
 void PreviewGLCanvas::getTweenSprite(Sprite* start, Sprite* end, Sprite* tween, float process) const
 {
-	d2d::Vector offset = (end->getPosition() - start->getPosition()) * process;
+	ee::Vector offset = (end->getPosition() - start->getPosition()) * process;
 	float delta = (end->getAngle() - start->getAngle()) * process;
 	tween->translate(offset);
 	tween->rotate(delta);

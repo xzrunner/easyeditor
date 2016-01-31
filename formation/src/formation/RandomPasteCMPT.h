@@ -1,15 +1,15 @@
 #ifndef FORMATION_RANDOM_PASTE_CMPT_H
 #define FORMATION_RANDOM_PASTE_CMPT_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {
-	class RandomPasteCMPT : public d2d::AbstractEditCMPT
+	class RandomPasteCMPT : public ee::AbstractEditCMPT
 	{
 	public:
 		RandomPasteCMPT(wxWindow* parent, const wxString& name, 
-			d2d::EditPanel* editPanel);
+			ee::EditPanel* editPanel);
 
 		void updateByLibrary();
 

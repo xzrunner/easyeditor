@@ -7,7 +7,7 @@ namespace eanim
 {
 
 StageGLCanvas::StageGLCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: ee::OrthoCanvas(editPanel)
 {
 }
 
@@ -15,7 +15,7 @@ void StageGLCanvas::onDraw()
 {
 	drawbackground();
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(DrawVisitor(), 
-		d2d::e_visible);
+		ee::e_visible);
 	m_editPanel->drawEditTemp();
 }
 
@@ -40,15 +40,15 @@ StageGLCanvas::DrawVisitor::DrawVisitor()
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-void StageGLCanvas::DrawVisitor::visit(d2d::ICloneable* object, bool& bFetchNext)
+void StageGLCanvas::DrawVisitor::visit(ee::ICloneable* object, bool& bFetchNext)
 {
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	ee::ISprite* sprite = static_cast<ee::ISprite*>(object);
 
-	const d2d::Vector& pos = sprite->getPosition();
+	const ee::Vector& pos = sprite->getPosition();
 
 	glPushMatrix();
 	glTranslatef(pos.x, pos.y, 0.0f);
-	glRotatef(sprite->getAngle() * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
+	glRotatef(sprite->getAngle() * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
 
 	Render::drawSpriteCenter(static_cast<Sprite*>(sprite));
 

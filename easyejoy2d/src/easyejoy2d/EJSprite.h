@@ -1,7 +1,7 @@
 #ifndef _EASYEJOY2D_EJSPRITE_H_
 #define _EASYEJOY2D_EJSPRITE_H_
 
-#include <drag2d.h>
+
 //#include <ejoy2d.h>
 
 #include <stdint.h>
@@ -11,7 +11,7 @@ struct dtex_package;
 namespace eejoy2d
 {
 
-class EJSprite : public d2d::Object
+class EJSprite : public ee::Object
 {
 public:
 	EJSprite(dtex_package* pkg, const char* name);

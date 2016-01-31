@@ -10,7 +10,7 @@ namespace eanim
 {
 
 LibrarySkeletonList::LibrarySkeletonList(wxWindow* parent)
-	: d2d::LibraryList(parent, LibraryPanel::SKELETON_LIST_NAME)
+	: ee::LibraryList(parent, LibraryPanel::SKELETON_LIST_NAME)
 {
 }
 

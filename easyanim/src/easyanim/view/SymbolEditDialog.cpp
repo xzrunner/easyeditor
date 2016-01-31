@@ -10,7 +10,7 @@
 #include <wx/colordlg.h>
 #include <wx/statline.h>
 #include <wx/spinctrl.h>
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -49,7 +49,7 @@ void SymbolEditDialog::buildToolBarSettings(wxSizer* topSizer)
 
 void SymbolEditDialog::buildEditPanel(wxSizer* topSizer)
 {
-	m_editPanel = new d2d::EditPanel(this);
+	m_editPanel = new ee::EditPanel(this);
 	m_editPanel->setCanvas(new SymbolEditGLCanvas(m_editPanel, m_symbol));
 	m_editPanel->getCamera()->setScale(0.5f);
 	topSizer->Add(m_editPanel, 1, wxEXPAND);
@@ -197,7 +197,7 @@ void SymbolEditDialog::buildWholeSkeletonModeToolBar(wxBoxSizer* toolSizer)
 void SymbolEditDialog::onSetName(wxCommandEvent& event)
 {
 	wxPoint pos(GetScreenPosition() + wxPoint(100, 200));
-	d2d::SetValueDialog dlg(this, wxT("Set symbol's name"), m_symbol->getName(), pos);
+	ee::SetValueDialog dlg(this, wxT("Set symbol's name"), m_symbol->getName(), pos);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		m_symbol->setName(dlg.getText().ToStdString());
@@ -213,7 +213,7 @@ void SymbolEditDialog::onSetColor(wxCommandEvent& event)
 	{
 		const wxColour& color = dlg.GetColourData().GetColour();
 		SymbolEditGLCanvas* canvas = static_cast<SymbolEditGLCanvas*>(m_editPanel->getCanvas());
-		canvas->setBgColor(d2d::Colorf(
+		canvas->setBgColor(ee::Colorf(
 			color.Red() / 255.0f,
 			color.Green() / 255.0f,
 			color.Blue() / 255.0f,
@@ -269,7 +269,7 @@ void SymbolEditDialog::onUpdateSetEditMode(wxUpdateUIEvent& event)
 		break;
 	case 1:
 		{
-			d2d::AbstractEditOP* op = new EditMeshNodeOP(m_editPanel, m_symbol->createMesh());
+			ee::AbstractEditOP* op = new EditMeshNodeOP(m_editPanel, m_symbol->createMesh());
 			m_editPanel->setEditOP(op);
 			op->release();
 		}
@@ -285,7 +285,7 @@ void SymbolEditDialog::onUpdateSetEditMode(wxUpdateUIEvent& event)
 		break;
 	case 2:
 		{
-			d2d::AbstractEditOP* op = new AddPartSkeletonJointOP(m_editPanel, m_symbol->createSkeleton());
+			ee::AbstractEditOP* op = new AddPartSkeletonJointOP(m_editPanel, m_symbol->createSkeleton());
 			m_editPanel->setEditOP(op);
 			op->release();
 		}
@@ -301,7 +301,7 @@ void SymbolEditDialog::onUpdateSetEditMode(wxUpdateUIEvent& event)
 		break;
 	case 3:
 		{
-			d2d::AbstractEditOP* op = new EditWholeSkeletonJointOP(m_editPanel, m_symbol->createSkeletonBody());
+			ee::AbstractEditOP* op = new EditWholeSkeletonJointOP(m_editPanel, m_symbol->createSkeletonBody());
 			m_editPanel->setEditOP(op);
 			op->release();
 		}
@@ -325,10 +325,10 @@ void SymbolEditDialog::onChooseSelectWay(wxCommandEvent& event)
 	SymbolEditGLCanvas* canvas = static_cast<SymbolEditGLCanvas*>(m_editPanel->getCanvas());
 	assert(canvas);
 
-	d2d::AbstractEditOP* op = new d2d::SelectPixelsOP(
+	ee::AbstractEditOP* op = new ee::SelectPixelsOP(
 		m_editPanel, 
 		canvas->getRawPixels(), 
-		d2d::SelectPixelsOP::e_Mode(event.GetInt()), 
+		ee::SelectPixelsOP::e_Mode(event.GetInt()), 
 		canvas->getSelectedPixels(),
 		m_isEditSelect,
 		m_magicMarkerDisSpin->GetValue()
@@ -354,7 +354,7 @@ void SymbolEditDialog::onChooseSelectWay(wxCommandEvent& event)
 void SymbolEditDialog::onChooseEditType(wxCommandEvent& event)
 {
 	m_isEditSelect = (event.GetInt() == 0);
-	d2d::SelectPixelsOP* op = dynamic_cast<d2d::SelectPixelsOP*>(m_editPanel->getEditOP());
+	ee::SelectPixelsOP* op = dynamic_cast<ee::SelectPixelsOP*>(m_editPanel->getEditOP());
 	if (op) 
 		op->setEditType(m_isEditSelect);
 	m_editPanel->SetFocus();
@@ -363,7 +363,7 @@ void SymbolEditDialog::onChooseEditType(wxCommandEvent& event)
 void SymbolEditDialog::onSetMagicMarkerDis(wxSpinEvent& event)
 {
 	m_isEditSelect = (event.GetInt() == 0);
-	d2d::SelectPixelsOP* op = dynamic_cast<d2d::SelectPixelsOP*>(m_editPanel->getEditOP());
+	ee::SelectPixelsOP* op = dynamic_cast<ee::SelectPixelsOP*>(m_editPanel->getEditOP());
 	if (op) 
 		op->setMagicMarkerDis(m_magicMarkerDisSpin->GetValue());
 	m_editPanel->SetFocus();
@@ -395,8 +395,8 @@ void SymbolEditDialog::onClearSelectedPixels(wxCommandEvent& event)
 {
 	SymbolEditGLCanvas* canvas = static_cast<SymbolEditGLCanvas*>(m_editPanel->getCanvas());
 	assert(canvas);
-	d2d::RawPixels::PixelBuf& buf = canvas->getSelectedPixels();
-	for_each(buf.begin(), buf.end(), DeletePointerFunctor<d2d::RawPixels::PixelsPos>());
+	ee::RawPixels::PixelBuf& buf = canvas->getSelectedPixels();
+	for_each(buf.begin(), buf.end(), DeletePointerFunctor<ee::RawPixels::PixelsPos>());
 	buf.clear();
 
 	m_editPanel->Refresh();
@@ -427,7 +427,7 @@ void SymbolEditDialog::onSetSkeletonEditMode(wxCommandEvent& event)
 	{
 	case 0:
 		{
-			d2d::AbstractEditOP* op = new AddPartSkeletonJointOP(m_editPanel, m_symbol->getSkeleton());
+			ee::AbstractEditOP* op = new AddPartSkeletonJointOP(m_editPanel, m_symbol->getSkeleton());
 			m_editPanel->setEditOP(op);
 			op->release();
 		}
@@ -436,7 +436,7 @@ void SymbolEditDialog::onSetSkeletonEditMode(wxCommandEvent& event)
 		break;
 	case 1:
 		{
-			d2d::AbstractEditOP* op = new EditPartSkeletonOP(m_editPanel, m_symbol->getSkeleton());
+			ee::AbstractEditOP* op = new EditPartSkeletonOP(m_editPanel, m_symbol->getSkeleton());
 			m_editPanel->setEditOP(op);
 			op->release();
 		}

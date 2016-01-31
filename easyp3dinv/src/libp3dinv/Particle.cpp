@@ -44,19 +44,19 @@ void Particle::Update(float dt, float gravity)
 	m_during += dt;
 }
 
-void Particle::Draw(const d2d::Matrix& mt) const
+void Particle::Draw(const ee::Matrix& mt) const
 {
 // 	if (m_during > m_life) {
 // 		return;
 // 	}
 
-	d2d::Matrix _mt(mt);
+	ee::Matrix _mt(mt);
 	_mt.Translate(0, 0);
 
 	float scale = m_during / m_life * (m_start_scale - m_end_scale) + m_end_scale;
 
-	d2d::Vector pos = eparticle3d::TransCoords3To2(m_position);
-	d2d::SpriteRenderer::Instance()->Draw(m_symbol, _mt, pos, m_angle, 
+	ee::Vector pos = eparticle3d::TransCoords3To2(m_position);
+	ee::SpriteRenderer::Instance()->Draw(m_symbol, _mt, pos, m_angle, 
 		scale, scale/*, 0, 0, multi*/);
 }
 
@@ -78,7 +78,7 @@ void Particle::LoadFromFile(const Json::Value& val)
 	m_rotate = val["rotate"].asDouble();
 	m_angle_old = m_angle = val["angle"].asDouble();
 
-	m_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(val["symbol"].asString());
+	m_symbol = ee::SymbolMgr::Instance()->FetchSymbol(val["symbol"].asString());
 	m_start_scale = val["start_scale"].asDouble();
 	m_end_scale = val["end_scale"].asDouble();
 }

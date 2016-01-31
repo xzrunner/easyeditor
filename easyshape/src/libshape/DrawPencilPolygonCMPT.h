@@ -1,22 +1,22 @@
 #ifndef _LIBSHAPE_DRAW_PENCIL_POLYGON_CMPT_H_
 #define _LIBSHAPE_DRAW_PENCIL_POLYGON_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
-class DrawPencilPolygonCMPT : public d2d::OneFloatValueCMPT
+class DrawPencilPolygonCMPT : public ee::OneFloatValueCMPT
 {
 public:
 	DrawPencilPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
-		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl);
+		ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl);
 
 	int GetSelected() const;
 	void SetSelection(const std::string& type);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxChoice* m_choice;

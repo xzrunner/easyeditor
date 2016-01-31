@@ -19,7 +19,7 @@ public:
 	Scale9Builder();
 	virtual ~Scale9Builder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	const IPackNode* Create(const escale9::Sprite* spr);
 

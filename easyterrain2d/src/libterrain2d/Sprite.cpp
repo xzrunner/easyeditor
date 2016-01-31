@@ -9,7 +9,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& s)
-	: d2d::Sprite(s)
+	: ee::Sprite(s)
 {
 	m_symbol = s.m_symbol->Clone();
 }
@@ -39,14 +39,14 @@ const Symbol& Sprite::GetSymbol() const
 	return *m_symbol;
 }
 
-void Sprite::SetSymbol(d2d::Symbol* symbol)
+void Sprite::SetSymbol(ee::Symbol* symbol)
 {
-	d2d::Sprite::SetSymbol(&m_symbol, symbol);
+	ee::Sprite::SetSymbol(&m_symbol, symbol);
 }
 
 void Sprite::Load(const Json::Value& val)
 {
-	d2d::Sprite::Load(val);
+	ee::Sprite::Load(val);
 //	rotate(-m_symbol->GetOceanAngle());
 }
 

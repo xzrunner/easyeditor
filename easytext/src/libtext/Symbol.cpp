@@ -19,10 +19,10 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
-	const d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
+	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
 		DrawBackground(spr, mt);
 	} 
@@ -31,15 +31,15 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
  	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
 	if (sprite) {
 		const Sprite* font = static_cast<const Sprite*>(sprite);
 		int w, h;
 		font->GetSize(w, h);
-		return d2d::Rect(w, h);
+		return ee::Rect(w, h);
 	} else {
-		return d2d::Rect(m_width, m_height);
+		return ee::Rect(m_width, m_height);
 	}
 }
 
@@ -71,7 +71,7 @@ void Symbol::LoadResources()
 	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
 }
 
-void Symbol::DrawBackground(const d2d::Sprite* sprite, const d2d::Matrix& mt) const
+void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) const
 {
 	if (!sprite) {
 		return;
@@ -80,12 +80,12 @@ void Symbol::DrawBackground(const d2d::Sprite* sprite, const d2d::Matrix& mt) co
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
 		int w, h;
 		font->GetSize(w, h);
-		d2d::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, m_bg_style);
+		ee::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, m_bg_style);
 	}
 }
 
-void Symbol::DrawText(const d2d::Sprite* sprite, const d2d::Matrix& mt,
-					  const d2d::Colorf& mul, const d2d::Colorf& add) const
+void Symbol::DrawText(const ee::Sprite* sprite, const ee::Matrix& mt,
+					  const ee::Colorf& mul, const ee::Colorf& add) const
 {
 	if (!sprite) {
 		return;

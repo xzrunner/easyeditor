@@ -1,10 +1,12 @@
-#ifndef _EASYIMAGE_IMAGE_TRIM_H_
-#define _EASYIMAGE_IMAGE_TRIM_H_
+#ifndef _EASYEDITOR_IMAGE_TRIM_H_
+#define _EASYEDITOR_IMAGE_TRIM_H_
 
-#include <drag2d.h>
+#include "Rect.h"
 
-namespace eimage
+namespace ee
 {
+
+class ImageData;
 
 class ImageTrim
 {

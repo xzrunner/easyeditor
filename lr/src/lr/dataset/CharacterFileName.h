@@ -1,7 +1,7 @@
 #ifndef _LR_CHARACTER_FILE_NAME_H_
 #define _LR_CHARACTER_FILE_NAME_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {

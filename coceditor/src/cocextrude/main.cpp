@@ -1,5 +1,5 @@
 #include <wx/dir.h>
-#include <drag2d.h>
+
 
 #include "../coceditor/ExtrudeImg.h"
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	wxDir dir(dirpath);
 	dir.Traverse(traverser);
 
-	std::map<std::string, d2d::Rect> map_name2rect;
+	std::map<std::string, ee::Rect> map_name2rect;
 
 	double size = 1;
 //	wxString(argv[2]).ToDouble(&size);
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 			filename.Normalize();
 			wxString filepath = filename.GetFullPath();
 			
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
+			if (ee::FileNameParser::isType(filepath, ee::FileNameParser::e_image))
 			{
 				coceditor::ExtrudeImg extrude(filepath.ToStdString());
 				extrude.Trigger((int)size);
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 			filename.Normalize();
 			wxString filepath = filename.GetFullPath();
 
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex))
+			if (ee::FileNameParser::isType(filepath, ee::FileNameParser::e_complex))
 			{
 				Json::Value value;
 				Json::Reader reader;
@@ -86,8 +86,8 @@ int main(int argc, char *argv[])
 				while (!spriteValue.isNull()) {
 
 					std::string path = spriteValue["filepath"].asString();
-					path = d2d::FilenameTools::getFilenameWithExtension(path);
-					std::map<std::string, d2d::Rect>::iterator itr = map_name2rect.find(path);
+					path = ee::FilenameTools::getFilenameWithExtension(path);
+					std::map<std::string, ee::Rect>::iterator itr = map_name2rect.find(path);
 					if (itr != map_name2rect.end()) {
 						dirty = true;
 
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-	} catch (d2d::Exception& e) {
+	} catch (ee::Exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
 

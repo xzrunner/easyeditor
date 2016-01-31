@@ -6,14 +6,14 @@ namespace eparticle2d
 {
 
 EditOP::EditOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_stage(stage)
 {
 }
 
 bool EditOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ParticleSystem* ps = m_stage->m_ps;
 	m_stage->SetPSMat(m_stage->TransPosScrToProj(x, y));
@@ -25,7 +25,7 @@ bool EditOP::OnMouseLeftDown(int x, int y)
 
 bool EditOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ParticleSystem* ps = m_stage->m_ps;
 	m_stage->SetPSMat(m_stage->TransPosScrToProj(x, y));

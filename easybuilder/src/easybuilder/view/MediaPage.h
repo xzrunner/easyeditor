@@ -2,20 +2,20 @@
 #ifndef EBUILDER_MEDIA_PAGE_H
 #define EBUILDER_MEDIA_PAGE_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class ListObserver;
 	class Behavior;
 
-	class MediaPage : public d2d::ILibraryPage
+	class MediaPage : public ee::ILibraryPage
 	{
 	public:
 		MediaPage(wxWindow* parent);
 		virtual ~MediaPage();
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 		ListObserver* getListObserver() {
 			return m_observer;

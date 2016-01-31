@@ -15,7 +15,7 @@
 using namespace ebuilder;
 
 LayersList::LayersList(LayersPage* page)
-	: d2d::LibraryList(page, "layer", false)
+	: ee::LibraryList(page, "layer", false)
 	, m_page(page)
 {
 }
@@ -51,7 +51,7 @@ void LayersList::onSelected(int index)
 
 	// property panel
 	LayerItem* item = static_cast<LayerItem*>(m_items[index]);
-	d2d::IPropertySetting* setting 
+	ee::IPropertySetting* setting 
 		= new LayerPropertySetting(item, m_page);
 	context->property->setPropertySetting(setting);
 

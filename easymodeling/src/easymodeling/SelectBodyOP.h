@@ -1,19 +1,19 @@
 #ifndef EMODELING_SELECT_BODY_OP_H
 #define EMODELING_SELECT_BODY_OP_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling { class Body; }
 
 namespace emodeling
 {
-	class SelectBodyOP : public d2d::SelectSpritesOP
+	class SelectBodyOP : public ee::SelectSpritesOP
 	{
 	public:
 		SelectBodyOP(wxWindow* stage_wnd,
-			d2d::EditPanelImpl* stage, 
-			d2d::MultiSpritesImpl* spritesImpl, 
-			d2d::AbstractEditCMPT* callback = NULL);
+			ee::EditPanelImpl* stage, 
+			ee::MultiSpritesImpl* spritesImpl, 
+			ee::EditCMPT* callback = NULL);
 
 		virtual bool OnKeyDown(int keyCode);
 		virtual bool OnMouseMove(int x, int y);
@@ -23,10 +23,10 @@ namespace emodeling
 		virtual bool Clear();
 
 	private:
-		class DrawSelectedVisitor : public d2d::Visitor
+		class DrawSelectedVisitor : public ee::Visitor
 		{
 		public:
-			virtual void Visit(d2d::Object* object, bool& next);
+			virtual void Visit(ee::Object* object, bool& next);
 		}; // DrawSelectedVisitor
 
 	private:

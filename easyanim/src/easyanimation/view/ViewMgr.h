@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_VIEW_MGR_H_
 #define _EASYANIM_VIEW_MGR_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -12,7 +12,7 @@ class LayersPanel;
 class KeysPanel;
 class KeyFrame;
 
-class ViewMgr : public d2d::Observer
+class ViewMgr : public ee::Observer
 {
 public:	
 	static ViewMgr* Instance();
@@ -32,10 +32,10 @@ private:
 
 public:
 	// left
-	d2d::LibraryPanel* library;
-	d2d::PropertySettingPanel* property;
+	ee::LibraryPanel* library;
+	ee::PropertySettingPanel* property;
 
-	d2d::ILibraryPage* img_page;
+	ee::LibraryPage* img_page;
 
 	// mid
 	ToolbarPanel* toolbar;
@@ -45,7 +45,7 @@ public:
 	KeysPanel* keys;
 
 	// right
-	d2d::ViewlistPanel* viewlist;
+	ee::ViewlistPanel* viewlist;
 
 private:
 	int m_layer, m_frame;

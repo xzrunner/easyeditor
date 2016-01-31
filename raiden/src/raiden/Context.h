@@ -1,7 +1,7 @@
 #ifndef RAIDEN_CONTEXT_H
 #define RAIDEN_CONTEXT_H
 
-#include <drag2d.h>
+
 
 namespace raiden
 {
@@ -11,12 +11,12 @@ namespace raiden
 	class Context
 	{
 	public:
-		d2d::PropertySettingPanel* property;
-		d2d::LibraryPanel* library;
+		ee::PropertySettingPanel* property;
+		ee::LibraryPanel* library;
 		StagePanel* stage;
 		ToolbarPanel* toolbar;
 
-		d2d::LayersMgrWidget* layers;
+		ee::LayersMgrWidget* layers;
 
 		int speed;
 

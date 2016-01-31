@@ -8,12 +8,12 @@ namespace eshader
 static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
-BEGIN_EVENT_TABLE(StageCanvas2D, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(StageCanvas2D, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas2D::OnTimer)
 END_EVENT_TABLE()
 
 StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_timer(this, TIMER_ID)
 	, m_stage(stage)
 	, m_start_time(0)
@@ -26,17 +26,17 @@ StageCanvas2D::~StageCanvas2D()
 {
 }
 
-void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
+void StageCanvas2D::OnMousePressed(const ee::Vector& pos)
 {
 	m_start_time = clock();
 
 	Shader* shader = m_stage->GetShader();
-	d2d::Sprite* sprite = m_stage->QuerySpriteByPos(pos);
+	ee::Sprite* sprite = m_stage->QuerySpriteByPos(pos);
 	if (shader && sprite) {
-		d2d::ShaderMgr::Instance()->sprite();
+		ee::ShaderMgr::Instance()->sprite();
 
-		d2d::Vector center = sprite->GetCenter();
-		d2d::Rect r = sprite->GetSymbol().GetSize();
+		ee::Vector center = sprite->GetCenter();
+		ee::Rect r = sprite->GetSymbol().GetSize();
 		float x = (pos.x - center.x) / r.Width() + 0.5f,
 			  y = (pos.y - center.y) / r.Width() + 0.5f;
 		static_cast<Shader2D*>(shader)->SetInputUniform(x, y);
@@ -52,20 +52,20 @@ void StageCanvas2D::OnDrawSprites() const
 
 void StageCanvas2D::DrawBackground() const
 {
-	d2d::PrimitiveDraw::DrawRect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
-		d2d::LIGHT_RED_LINE);
+	ee::PrimitiveDraw::DrawRect(ee::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
+		ee::LIGHT_RED_LINE);
 }
 
 void StageCanvas2D::DrawSprites() const
 {
-	std::vector<d2d::Sprite*> sprites;
-	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	static_cast<StagePanel2D*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
 }
 
@@ -79,7 +79,7 @@ void StageCanvas2D::OnTimer(wxTimerEvent& event)
 
 	Shader* shader = m_stage->GetShader();
 	if (shader) {
-		d2d::ShaderMgr::Instance()->sprite();
+		ee::ShaderMgr::Instance()->sprite();
 		static_cast<Shader2D*>(shader)->SetTimeUniform(time);
 		Refresh(true);
 	}

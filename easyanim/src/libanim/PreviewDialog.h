@@ -2,7 +2,7 @@
 #define _LIBANIM_PREVIEW_DIALOG_H_
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace libanim
 {
@@ -26,7 +26,7 @@ private:
 	void OnSetStop(wxCommandEvent& event);
 
 private:
-	d2d::EditPanel* m_stage;
+	ee::EditPanel* m_stage;
 
 	const Symbol* m_symbol;
 

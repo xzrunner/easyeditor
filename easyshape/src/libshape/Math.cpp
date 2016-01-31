@@ -5,19 +5,19 @@ namespace libshape
 {
 
 void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
-						  std::vector<d2d::Vector>& dst)
+						  std::vector<ee::Vector>& dst)
 {
-	const std::vector<d2d::Vector>& s0 = src0.GetVertices();
-	const std::vector<d2d::Vector>& s1 = src1.GetVertices();
+	const std::vector<ee::Vector>& s0 = src0.GetVertices();
+	const std::vector<ee::Vector>& s1 = src1.GetVertices();
 
 	dst.clear();
 	dst.reserve(s0.size() + s1.size());
 
 	float d[4];
-	d[0] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.front());
-	d[1] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.back());
-	d[2] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.front());
-	d[3] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.back());
+	d[0] = ee::Math2D::GetDistanceSquare(s0.back(), s1.front());
+	d[1] = ee::Math2D::GetDistanceSquare(s0.back(), s1.back());
+	d[2] = ee::Math2D::GetDistanceSquare(s0.front(), s1.front());
+	d[3] = ee::Math2D::GetDistanceSquare(s0.front(), s1.back());
 	float nearest = FLT_MAX;
 	for (size_t i = 0; i < 4; ++i)
 		if (d[i] < nearest)
@@ -45,7 +45,7 @@ void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
 	}
 }
 
-void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<d2d::Vector>& dst)
+void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<ee::Vector>& dst)
 {
 	if (src.size() == 0)
 	{
@@ -75,7 +75,7 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<d2d
 		int i0, i1;
 		findNearestPair(buffer, i0, i1);
 
-		std::vector<d2d::Vector> merged;
+		std::vector<ee::Vector> merged;
 		mergeTwoChains(*buffer[i0], *buffer[i1], merged);
 		
 		buffer[i0]->Release();
@@ -134,14 +134,14 @@ void Math::findNearestPair(const std::vector<ChainShape*>& chains, int& index0, 
 
 float Math::getDistanceOfChains(const ChainShape& chain0, const ChainShape& chain1)
 {
-	const std::vector<d2d::Vector>& s0 = chain0.GetVertices();
-	const std::vector<d2d::Vector>& s1 = chain1.GetVertices();
+	const std::vector<ee::Vector>& s0 = chain0.GetVertices();
+	const std::vector<ee::Vector>& s1 = chain1.GetVertices();
 
 	float d[4];
-	d[0] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.front());
-	d[1] = d2d::Math2D::GetDistanceSquare(s0.back(), s1.back());
-	d[2] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.front());
-	d[3] = d2d::Math2D::GetDistanceSquare(s0.front(), s1.back());
+	d[0] = ee::Math2D::GetDistanceSquare(s0.back(), s1.front());
+	d[1] = ee::Math2D::GetDistanceSquare(s0.back(), s1.back());
+	d[2] = ee::Math2D::GetDistanceSquare(s0.front(), s1.front());
+	d[3] = ee::Math2D::GetDistanceSquare(s0.front(), s1.back());
 	float nearest = FLT_MAX;
 	for (size_t i = 0; i < 4; ++i)
 		if (d[i] < nearest)

@@ -11,13 +11,13 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 	, m_is_2d(false)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -41,16 +41,16 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);

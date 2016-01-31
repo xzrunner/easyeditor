@@ -19,16 +19,16 @@ Code::Code(ebuilder::CodeGenerator& gen)
 
 struct Node
 {
-	const d2d::Sprite* sprite;
+	const ee::Sprite* sprite;
 	std::string path;
 	std::string name;
 
-	Node(const d2d::Sprite* s, const std::string& p) 
+	Node(const ee::Sprite* s, const std::string& p) 
 		: sprite(s), path(p) {}
 
 }; // Node
 
-void Code::ResolveUI(const std::vector<d2d::Sprite*>& sprites)
+void Code::ResolveUI(const std::vector<ee::Sprite*>& sprites)
 {
 	ebuilder::CodeGenerator *gen_init = new ebuilder::CodeGenerator(), 
 		*gen_path = new ebuilder::CodeGenerator();
@@ -47,7 +47,7 @@ void Code::ResolveUI(const std::vector<d2d::Sprite*>& sprites)
 		while (!buffer.empty()) 
 		{
 			Node parent = buffer.front(); buffer.pop();
-			const d2d::Sprite* spr = parent.sprite;
+			const ee::Sprite* spr = parent.sprite;
 
 			if (spr->name.empty() || spr->name[0] == '_') {
 				continue;
@@ -64,7 +64,7 @@ void Code::ResolveUI(const std::vector<d2d::Sprite*>& sprites)
 
 			gen_path->line(lua::assign("path."+name, "\""+path+"\""));
 
-			if (const d2d::FontBlankSprite* s = dynamic_cast<const d2d::FontBlankSprite*>(spr))
+			if (const ee::FontBlankSprite* s = dynamic_cast<const ee::FontBlankSprite*>(spr))
 			{
 				text_nodes.push_back(std::make_pair("path."+name, "i18n."+s->GetTextID()));
 			}
@@ -96,22 +96,22 @@ void Code::ResolveUI(const std::vector<d2d::Sprite*>& sprites)
 	m_gen.block(*gen_path);
 }
 
-void Code::ResolveText(const std::vector<d2d::Sprite*>& sprites)
+void Code::ResolveText(const std::vector<ee::Sprite*>& sprites)
 {
-	std::queue<d2d::Sprite*> buffer;
+	std::queue<ee::Sprite*> buffer;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		buffer.push(sprites[i]);
 	}
 
  	while (!buffer.empty()) 
  	{
-		d2d::Sprite* spr = buffer.front(); buffer.pop();
+		ee::Sprite* spr = buffer.front(); buffer.pop();
 
 		if (spr->name.empty() || spr->name[0] == '_') {
 			continue;
 		}
 
-		if (d2d::FontBlankSprite* s = dynamic_cast<d2d::FontBlankSprite*>(spr))
+		if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(spr))
 		{
 			std::string content = s->GetTextContext().ToStdString();
 			size_t pos = 0;

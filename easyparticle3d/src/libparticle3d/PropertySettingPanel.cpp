@@ -6,12 +6,12 @@ namespace eparticle3d
 {
 
 PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
-	: d2d::PropertySettingPanel(parent)
+	: ee::PropertySettingPanel(parent)
 	, m_stage(NULL)
 {
 }
 
-d2d::IPropertySetting* PropertySettingPanel::CreateDefaultProperty() const
+ee::PropertySetting* PropertySettingPanel::CreateDefaultProperty() const
 {
 	if (m_stage && m_stage->m_ps) {
 		return new SymbolPropertySetting(m_stage->m_ps);

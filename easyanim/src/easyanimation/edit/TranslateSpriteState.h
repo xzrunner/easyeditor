@@ -1,18 +1,18 @@
 #ifndef _EASYANIM_TRANSLATE_SPRITE_STATE_H_
 #define _EASYANIM_TRANSLATE_SPRITE_STATE_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-class TranslateSpriteState : public d2d::TranslateSpriteState
+class TranslateSpriteState : public ee::TranslateSpriteState
 {
 public:
-	TranslateSpriteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos);
+	TranslateSpriteState(ee::SpriteSelection* selection, const ee::Vector& first_pos);
 	
 protected:
-	virtual void Translate(const d2d::Vector& offset);
+	virtual void Translate(const ee::Vector& offset);
 
 }; // TranslateSpriteState 
 

@@ -2,7 +2,7 @@
 #ifndef EMODELING_TASK_H
 #define EMODELING_TASK_H
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace emodeling
@@ -18,7 +18,7 @@ namespace emodeling
 
 		virtual void onPreview() const;
 
-		d2d::IStageCanvas* getCanvas() const;
+		ee::StageCanvas* getCanvas() const;
 
 		static Task* create(wxFrame* parent)
 		{
@@ -34,7 +34,7 @@ namespace emodeling
 			wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
 
 	private:
-		void initLayout();
+		void InitLayout();
 
 	private:
 		wxWindow* m_root;

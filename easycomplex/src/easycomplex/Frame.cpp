@@ -14,7 +14,7 @@ enum MenuID
 	ID_CODE = 700
 };
 
-BEGIN_EVENT_TABLE(Frame, d2d::Frame)
+BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::onPreview)
 	EVT_MENU(ID_EJ_PREVIEW, Frame::OnEJPreview)
 	EVT_MENU(ID_SET_BG, Frame::onSetBackground)
@@ -22,7 +22,7 @@ BEGIN_EVENT_TABLE(Frame, d2d::Frame)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
-	: d2d::Frame(title, filetag)
+	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_view_menu->Append(ID_EJ_PREVIEW, wxT("EJ Preview"), wxT("Preview"));
@@ -42,15 +42,15 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			wxString ext = d2d::FileHelper::GetExtension(filename);
+			wxString ext = ee::FileHelper::GetExtension(filename);
 			if (ext == "png") {
 				SaveAsPNG(filename.ToStdString());
 			} else {
 				SaveAsJson(filename.ToStdString());
 			}
 		}
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
@@ -60,25 +60,25 @@ void Frame::OnSettings(wxCommandEvent& event)
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
 
-	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
-	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
+	const ee::Colorf& col = ee::Config::Instance()->GetSettings().bg_color;
+	const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 
 void Frame::onPreview(wxCommandEvent& event)
 {
-// 	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
+// 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol("default.ttf");
 // 	symbol->ReloadTexture();
 
-	std::vector<const d2d::Sprite*> sprites;
+	std::vector<const ee::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
-	d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
  	PreviewDialog dlg(this, canvas->GetGLContext(), sprites);
  	dlg.ShowModal();
 }
 
 void Frame::OnEJPreview(wxCommandEvent& event)
 {
-	std::vector<const d2d::Sprite*> sprites;
+	std::vector<const ee::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
 	//////////////////////////////////////////////////////////////////////////
@@ -109,11 +109,11 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	wxString formatFilter = wxT("*.png;*.jpg;*.json");
 	wxFileDialog dlg(this, wxT("Choose Background Symbol"), wxEmptyString, 
 		wxEmptyString, formatFilter, wxFD_OPEN);
-	d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 	if (dlg.ShowModal() == wxID_OK)
 	{
  		std::string filename = dlg.GetPath().ToStdString();
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
@@ -127,7 +127,7 @@ void Frame::onCode(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
 	StagePanel* stage = static_cast<StagePanel*>(
-		const_cast<d2d::EditPanel*>(m_task->GetEditPanel()));
+		const_cast<ee::EditPanel*>(m_task->GetEditPanel()));
 	// ui
 	{
 		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
@@ -166,19 +166,19 @@ void Frame::onCode(wxCommandEvent& event)
 // 	reader.parse(fin, value);
 // 	fin.close();
 // 
-// 	std::vector<d2d::Vector> outline, segments;
-// 	d2d::JsonIO::Load(value["outline"], outline);
-// 	d2d::JsonIO::Load(value["segments"], segments);
+// 	std::vector<ee::Vector> outline, segments;
+// 	ee::JsonIO::Load(value["outline"], outline);
+// 	ee::JsonIO::Load(value["segments"], segments);
 // 
-// 	std::vector<d2d::Vector> tris;
-// 	d2d::Triangulation::lines(outline, segments, tris);
+// 	std::vector<ee::Vector> tris;
+// 	ee::Triangulation::lines(outline, segments, tris);
 // 	
 // 	int zz = 0;
 }
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	d2d::Snapshoot ss;
+	ee::Snapshoot ss;
 	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->getSymbol();
 	symbol->InitBounding();
 	ss.OutputToImageFile(symbol, filepath);
@@ -186,7 +186,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
-	wxString fixed = d2d::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
+	wxString fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }

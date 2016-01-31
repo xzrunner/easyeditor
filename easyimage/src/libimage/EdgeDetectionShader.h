@@ -1,12 +1,12 @@
 #ifndef _EASYIMAGE_EDGE_DETECTION_SHADER_H_
 #define _EASYIMAGE_EDGE_DETECTION_SHADER_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
-class EdgeDetectionShader : public d2d::SpriteShader
+class EdgeDetectionShader : public ee::SpriteShader
 {
 public:
 	EdgeDetectionShader();

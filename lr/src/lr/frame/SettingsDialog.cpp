@@ -181,8 +181,8 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_terrain2d_anim = event.IsChecked();
 
-	std::vector<d2d::Sprite*> sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(sprites[i])) {
 			const_cast<eterrain2d::Symbol&>(terr->GetSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);
@@ -200,26 +200,26 @@ void SettingDialog::OnChangeSpecialLayerFlag(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_special_layer_flag = event.IsChecked();	
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void SettingDialog::OnChangeScreenMultiColor(wxCommandEvent& event)
 {
-	d2d::Colorf& col = m_stage->GetScreenMultiColor();
-	d2d::HSLColorSettingDlg dlg(this, NULL, col);
+	ee::Colorf& col = m_stage->GetScreenMultiColor();
+	ee::HSLColorSettingDlg dlg(this, NULL, col);
 	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 {
-	d2d::Colorf& col = m_stage->GetScreenAddColor();
-	d2d::HSLColorSettingDlg dlg(this, NULL, col);
+	ee::Colorf& col = m_stage->GetScreenAddColor();
+	ee::HSLColorSettingDlg dlg(this, NULL, col);
 	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

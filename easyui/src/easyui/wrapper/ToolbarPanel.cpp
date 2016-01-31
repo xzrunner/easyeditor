@@ -6,9 +6,9 @@ namespace wrapper
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, NULL)
+	: ee::ToolbarPanel(parent, NULL)
 {
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
 std::string ToolbarPanel::GetType() const
@@ -31,7 +31,7 @@ void ToolbarPanel::SetTag(const std::string& tag)
 	m_tag_text->SetValue(tag);
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);

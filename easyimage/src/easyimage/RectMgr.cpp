@@ -17,7 +17,7 @@ void RectMgr::load(const Json::Value& value)
 	int i = 0;
 	Json::Value val = value["rect"][i++];
 	while (!val.isNull()) {
-		d2d::Rect* r = new d2d::Rect;
+		ee::Rect* r = new ee::Rect;
 		r->xmin = val["xmin"].asDouble();
 		r->xmax = val["xmax"].asDouble();
 		r->ymin = val["ymin"].asDouble();
@@ -32,7 +32,7 @@ void RectMgr::store(Json::Value& value) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		const d2d::Rect* r = m_rects[i];
+		const ee::Rect* r = m_rects[i];
 		value["rect"][i]["xmin"] = r->xmin;
 		value["rect"][i]["xmax"] = r->xmax;
 		value["rect"][i]["ymin"] = r->ymin;
@@ -44,30 +44,30 @@ void RectMgr::draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		d2d::PrimitiveDraw::DrawRect(*m_rects[i], d2d::LIGHT_RED_FACE);
-		d2d::PrimitiveDraw::DrawRect(*m_rects[i], d2d::LIGHT_RED_THIN_LINE);
+		ee::PrimitiveDraw::DrawRect(*m_rects[i], ee::LIGHT_RED_FACE);
+		ee::PrimitiveDraw::DrawRect(*m_rects[i], ee::LIGHT_RED_THIN_LINE);
 	}
 }
 
-void RectMgr::insert(const d2d::Rect& rect, bool force)
+void RectMgr::insert(const ee::Rect& rect, bool force)
 {
 	if (!force) {
 		for (int i = 0, n = m_rects.size(); i < n; ++i) {
-			if (d2d::Math2D::IsRectIntersectRect(*m_rects[i], rect)) {
+			if (ee::Math2D::IsRectIntersectRect(*m_rects[i], rect)) {
 				return;
 			}
 		}
 	}
 
-	m_rects.push_back(new d2d::Rect(rect));
+	m_rects.push_back(new ee::Rect(rect));
 }
 
-bool RectMgr::remove(const d2d::Vector& pos)
+bool RectMgr::remove(const ee::Vector& pos)
 {
-	std::vector<d2d::Rect*>::iterator itr = m_rects.begin();
+	std::vector<ee::Rect*>::iterator itr = m_rects.begin();
 	for ( ; itr != m_rects.end(); ++itr)
 	{
-		if (d2d::Math2D::IsPointInRect(pos, **itr)) {
+		if (ee::Math2D::IsPointInRect(pos, **itr)) {
 			m_rects.erase(itr);
 			return true;
 		}
@@ -75,17 +75,17 @@ bool RectMgr::remove(const d2d::Vector& pos)
 	return false;
 }
 
-d2d::Vector RectMgr::queryNearestAxis(const d2d::Vector& pos,
-									  const d2d::Rect* except) const
+ee::Vector RectMgr::queryNearestAxis(const ee::Vector& pos,
+									  const ee::Rect* except) const
 {
-	d2d::Vector ret;
+	ee::Vector ret;
 	ret.SetInvalid();
 
 	float minx = FLT_MAX,
 		  miny = FLT_MAX;
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		const d2d::Rect* r = m_rects[i];
+		const ee::Rect* r = m_rects[i];
 		if (r == except) {
 			continue;
 		}
@@ -124,16 +124,16 @@ d2d::Vector RectMgr::queryNearestAxis(const d2d::Vector& pos,
 	return ret;
 }
 
-RectMgr::Node RectMgr::queryNode(const d2d::Vector& pos) const
+RectMgr::Node RectMgr::queryNode(const ee::Vector& pos) const
 {
 	Node ret;
 	ret.rect = NULL;
 
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		const d2d::Rect* r = m_rects[i];
+		const ee::Rect* r = m_rects[i];
 
-		d2d::Vector selected;
+		ee::Vector selected;
 		selected.SetInvalid();
 
 		if (fabs(pos.x - r->xmin) < RADIUS) {
@@ -158,24 +158,24 @@ RectMgr::Node RectMgr::queryNode(const d2d::Vector& pos) const
 	return ret;
 }
 
-d2d::Rect* RectMgr::queryRect(const d2d::Vector& pos) const
+ee::Rect* RectMgr::queryRect(const ee::Vector& pos) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		if (d2d::Math2D::IsPointInRect(pos, *m_rects[i])) {
+		if (ee::Math2D::IsPointInRect(pos, *m_rects[i])) {
 			return m_rects[i];
 		}
 	}
 	return NULL;
 }
 
-bool RectMgr::moveNode(const Node& node, const d2d::Vector& to)
+bool RectMgr::moveNode(const Node& node, const ee::Vector& to)
 {
 	if (!node.rect) {
 		return false;
 	}
 
-	d2d::Rect rect = *node.rect;
+	ee::Rect rect = *node.rect;
 
 	float* ptr_x = NULL;
 	if (rect.xmin == node.pos.x) {
@@ -209,19 +209,19 @@ bool RectMgr::moveNode(const Node& node, const d2d::Vector& to)
 	}
 	else
 	{
-		d2d::Rect* r = const_cast<d2d::Rect*>(node.rect);
+		ee::Rect* r = const_cast<ee::Rect*>(node.rect);
 		*r = rect;
 		return true;
 	}
 }
 
-void RectMgr::moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d::Vector& to)
+void RectMgr::moveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to)
 {
 	if (!rect) {
 		return;
 	}
 
-	d2d::Rect* r = const_cast<d2d::Rect*>(rect);
+	ee::Rect* r = const_cast<ee::Rect*>(rect);
 	float dx = to.x - from.x,
 		  dy = to.y - from.y;
 	r->xmin += dx;
@@ -232,7 +232,7 @@ void RectMgr::moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d
 
 void RectMgr::clear()
 {
-	for_each(m_rects.begin(), m_rects.end(), DeletePointerFunctor<d2d::Rect>());
+	for_each(m_rects.begin(), m_rects.end(), DeletePointerFunctor<ee::Rect>());
 	m_rects.clear();
 }
 

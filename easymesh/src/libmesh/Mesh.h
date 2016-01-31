@@ -16,7 +16,7 @@ class Mesh : public EditShape
 public:
 	Mesh(bool use_region = false);
 	Mesh(const Mesh& mesh);
-	Mesh(const d2d::Image& image, bool initBound = true, bool use_region = false);
+	Mesh(const ee::Image& image, bool initBound = true, bool use_region = false);
 
 	//
 	// Cloneable interface
@@ -35,14 +35,14 @@ public:
 	//
 	// EditShape interface
 	//
-	virtual void InsertNode(const d2d::Vector& p) {}
-	virtual void RemoveNode(const d2d::Vector& p) {}
-	virtual d2d::Vector* FindNode(const d2d::Vector& p) { return NULL; }
-	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst) {}
+	virtual void InsertNode(const ee::Vector& p) {}
+	virtual void RemoveNode(const ee::Vector& p) {}
+	virtual ee::Vector* FindNode(const ee::Vector& p) { return NULL; }
+	virtual void MoveNode(ee::Vector* src, const ee::Vector& dst) {}
 
-	virtual void TraverseShape(d2d::Visitor& visitor) const;
-	virtual bool RemoveShape(d2d::Shape* shape);
-	virtual bool InsertShape(d2d::Shape* shape);
+	virtual void TraverseShape(ee::Visitor& visitor) const;
+	virtual bool RemoveShape(ee::Shape* shape);
+	virtual bool InsertShape(ee::Shape* shape);
 	virtual bool ClearShape();
 
  	virtual void Reset();
@@ -53,17 +53,17 @@ public:
 private:
 	void RefreshTriangles();
 
-	void GetTriangulation(std::vector<d2d::Vector>& tris);
-	void LoadFromTriangulation(const std::vector<d2d::Vector>& tris);
+	void GetTriangulation(std::vector<ee::Vector>& tris);
+	void LoadFromTriangulation(const std::vector<ee::Vector>& tris);
 
-	void GetRegionBound(std::vector<d2d::Vector>& bound) const;
+	void GetRegionBound(std::vector<ee::Vector>& bound) const;
 
-//	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
+//	void getLinesCutByUVBounds(std::vector<ee::Vector>& lines);
 
 private:
 	struct Region
 	{
-		d2d::Rect rect;
+		ee::Rect rect;
 		std::vector<libshape::ChainShape*> loops;
 	};
 
@@ -72,7 +72,7 @@ private:
 
 	Region m_region;
 
-	d2d::Vector m_uv_offset;
+	ee::Vector m_uv_offset;
 
 }; // Mesh
 

@@ -13,14 +13,14 @@ ActorInfo::ActorInfo()
 
 void ActorInfo::resetOffset()
 {
-	if (libshape::Symbol* shape = dynamic_cast<libshape::Symbol*>(const_cast<d2d::ISymbol*>(symbol)))
+	if (libshape::Symbol* shape = dynamic_cast<libshape::Symbol*>(const_cast<ee::ISymbol*>(symbol)))
 	{
 		if (shape->shapes.empty())
 			return;
 
 		if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape->shapes[0]))
 		{
-			const std::vector<d2d::Vector>& vertices = chain->getVertices();
+			const std::vector<ee::Vector>& vertices = chain->getVertices();
 			if (vertices.front().y > vertices.back().y)
 				offset = -vertices.front();
 			else

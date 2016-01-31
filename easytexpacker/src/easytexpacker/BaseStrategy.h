@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_BASE_STRATEGY_H_
 #define _EASYTEXPACKER_BASE_STRATEGY_H_
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {
@@ -10,13 +10,13 @@ namespace etexpacker
 	public:
 		virtual ~BaseStrategy() {}
 
-		virtual void arrange(const std::vector<d2d::ImageSprite*>& sprites) = 0;
+		virtual void arrange(const std::vector<ee::ImageSprite*>& sprites) = 0;
 		virtual int GetTextureAccount() const = 0;
 
 	protected:
-		void sortByArea(std::vector<d2d::ImageSprite*>& sprites, bool isDescend = true) const;
-		void sortByMaxEdge(std::vector<d2d::ImageSprite*>& sprites, bool isDescend = true) const;
-		void sortByTotEdges(std::vector<d2d::ImageSprite*>& sprites, bool isDescend = true) const;
+		void sortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+		void sortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+		void sortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
 
 	protected:
 		enum SortStrategy
@@ -31,12 +31,12 @@ namespace etexpacker
 		public:
 			SpriteCmp(SortStrategy strategy, bool isDescend);
 
-			bool operator() (const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const;
+			bool operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
 
 		private:
-			bool isAreaLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const;
-			bool isEdgeLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const;
-			bool isTotEdgesLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const;
+			bool isAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+			bool isEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+			bool isTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
 
 		private:
 			SortStrategy m_strategy;

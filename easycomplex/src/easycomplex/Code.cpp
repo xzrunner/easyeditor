@@ -45,7 +45,7 @@ void Code::ResolveUI(const Symbol& symbol)
 			const Symbol& parent_symbol = parent.symbol;
 			for (int i = 0, n = parent_symbol.m_sprites.size(); i < n; ++i)
 			{
-				d2d::Sprite* child = parent_symbol.m_sprites[i];
+				ee::Sprite* child = parent_symbol.m_sprites[i];
 				if (child->name.empty() || child->name[0] == '_') {
 					continue;
 				}
@@ -67,7 +67,7 @@ void Code::ResolveUI(const Symbol& symbol)
 					next.name = name;
 					buffer.push(next);
 				} 
-				else if (d2d::FontBlankSprite* s = dynamic_cast<d2d::FontBlankSprite*>(child))
+				else if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(child))
 				{
 					text_nodes.push_back(std::make_pair("path."+name, "i18n."+s->GetTextID()));
 				}
@@ -102,12 +102,12 @@ void Code::ResolveText(const Symbol& symbol)
  		const Symbol* parent = buffer.front(); buffer.pop();
  		for (int i = 0, n = parent->m_sprites.size(); i < n; ++i)
  		{
- 			d2d::Sprite* child = parent->m_sprites[i];
+ 			ee::Sprite* child = parent->m_sprites[i];
  			if (child->name.empty() || child->name[0] == '_') {
  				continue;
  			}
  
- 			if (d2d::FontBlankSprite* s = dynamic_cast<d2d::FontBlankSprite*>(child))
+ 			if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(child))
  			{
 				std::string content = s->GetTextContext().ToStdString();
 				size_t pos = 0;

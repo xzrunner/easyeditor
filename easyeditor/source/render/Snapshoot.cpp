@@ -1,8 +1,7 @@
 #include "Snapshoot.h"
 #include "FBO.h"
-
-#include "dataset/Symbol.h"
-#include "dataset/ImageSaver.h"
+#include "Symbol.h"
+#include "ImageSaver.h"
 
 namespace ee
 {
@@ -34,8 +33,8 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 {
 	m_fbo->DrawSymbol(symbol, whitebg, scale);
 
-	int w = symbol->GetSize().Width() * scale,
-		h = symbol->GetSize().Height() * scale;
+	int w = static_cast<int>(symbol->GetSize().Width() * scale),
+		h = static_cast<int>(symbol->GetSize().Height() * scale);
 	size_t size = w*h*4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return NULL;
@@ -49,8 +48,8 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 void Snapshoot::OutputToImageFile(const Symbol* symbol, const std::string& filename,
 								  float scale) const
 {
-	int w = symbol->GetSize().Width() * scale,
-		h = symbol->GetSize().Height() * scale;
+	int w = static_cast<int>(symbol->GetSize().Width() * scale),
+		h = static_cast<int>(symbol->GetSize().Height() * scale);
 	unsigned char* pixels = OutputToMemory(symbol, false, scale);
 	ImageSaver::StoreToFile(pixels, w, h, 4, filename, ImageSaver::e_png, false);
 	delete[] pixels;

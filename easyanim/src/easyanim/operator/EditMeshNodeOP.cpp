@@ -4,8 +4,8 @@
 namespace eanim
 {
 
-EditMeshNodeOP::EditMeshNodeOP(d2d::EditPanel* editPanel, Mesh* mesh)
-	: d2d::ZoomViewOP(editPanel, false), EditMeshUtility(mesh)
+EditMeshNodeOP::EditMeshNodeOP(ee::EditPanel* editPanel, Mesh* mesh)
+	: ee::ZoomViewOP(editPanel, false), EditMeshUtility(mesh)
 {
 	m_mesh = mesh;
 	m_selected = NULL;
@@ -15,7 +15,7 @@ bool EditMeshNodeOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	MeshNode* selected = selectNodeByPos(pos);
 	if (selected)
 	{
@@ -37,7 +37,7 @@ bool EditMeshNodeOP::onMouseLeftUp(int x, int y)
 
 	if (m_selected)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		m_mesh->deleteNode(m_firstPos);
 		m_mesh->insertNode(pos);
 		m_selected = NULL;
@@ -54,7 +54,7 @@ bool EditMeshNodeOP::onMouseRightDown(int x, int y)
 	const std::vector<MeshTri*>& tris = m_mesh->getAllTris();
 	if (tris.size() <= 1) return false;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	MeshNode* selected = selectNodeByPos(pos);
 	if (selected)
 	{

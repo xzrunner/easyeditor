@@ -32,9 +32,9 @@ void TransToETC1::Run(int argc, char *argv[])
 
 void TransToETC1::Trigger(const std::string& path)
 {
-	if (d2d::FileHelper::IsDirExist(path)) {
+	if (ee::FileHelper::IsDirExist(path)) {
 		wxArrayString files;
-		d2d::FileHelper::FetchAllFiles(path, files);
+		ee::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i) {
 			wxFileName filename(files[i]);
 			filename.Normalize();
@@ -44,19 +44,19 @@ void TransToETC1::Trigger(const std::string& path)
 
 			Format(files[i].ToStdString());
 		}
-	} else if (d2d::FileHelper::IsFileExist(path)) {
+	} else if (ee::FileHelper::IsFileExist(path)) {
 		Format(path);
 	}
 }
 
 void TransToETC1::Format(const std::string& filepath)
 {
-	if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
+	if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 		return;		
 	}
 
 	int w, h, c, f;
-	uint8_t* pixels = d2d::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
+	uint8_t* pixels = ee::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
 	eimage::TransToETC1 trans(pixels, w, h, c);
 	//std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pkm";
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.'));

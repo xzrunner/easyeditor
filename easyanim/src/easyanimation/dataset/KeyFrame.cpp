@@ -25,7 +25,7 @@ KeyFrame::~KeyFrame()
 
 void KeyFrame::SetLayer(Layer* layer) 
 {
-	d2d::obj_assign(m_layer, layer);
+	ee::obj_assign(m_layer, layer);
 }
 
 
@@ -38,7 +38,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	// sprites
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* s = src->m_sprites[i]->Clone();
+		ee::Sprite* s = src->m_sprites[i]->Clone();
 		set_sprite_user_data(s, m_layer, this);
 		m_sprites.push_back(s);
 
@@ -53,7 +53,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	// todo spr's ud
 }
 
-void KeyFrame::Insert(d2d::Sprite* sprite)
+void KeyFrame::Insert(ee::Sprite* sprite)
 {
 	sprite->Retain();
 
@@ -65,14 +65,14 @@ void KeyFrame::Insert(d2d::Sprite* sprite)
 	}
 }
 
-bool KeyFrame::Remove(d2d::Sprite* sprite) 
+bool KeyFrame::Remove(ee::Sprite* sprite) 
 {
 	m_skeletonData.RemoveSprite(sprite);
 	if (m_layer) {
 		m_layer->GetSpriteObserver().remove(sprite);
 	}
 
-	std::vector<d2d::Sprite*>::iterator itr = m_sprites.begin();
+	std::vector<ee::Sprite*>::iterator itr = m_sprites.begin();
 	for ( ; itr != m_sprites.end(); ++itr) 
 	{
 		if (*itr != sprite) {
@@ -88,7 +88,7 @@ bool KeyFrame::Remove(d2d::Sprite* sprite)
 	return false;
 }
 
-bool KeyFrame::Reorder(const d2d::Sprite* sprite, bool up)
+bool KeyFrame::Reorder(const ee::Sprite* sprite, bool up)
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -110,7 +110,7 @@ bool KeyFrame::Reorder(const d2d::Sprite* sprite, bool up)
 	return false;
 }
 
-bool KeyFrame::ReorderMost(const d2d::Sprite* sprite, bool up)
+bool KeyFrame::ReorderMost(const ee::Sprite* sprite, bool up)
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -138,22 +138,22 @@ void KeyFrame::Clear()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 			m_layer->GetSpriteObserver().remove(m_sprites[i]);
 	}
-	for_each(m_sprites.begin(), m_sprites.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+	for_each(m_sprites.begin(), m_sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 	m_sprites.clear();
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
-							   std::vector<d2d::Sprite*>& tween, float process) const
+							   std::vector<ee::Sprite*>& tween, float process) const
 {
 // 	// old
 // 	for (int i = 0, n = start->Size(); i < n; ++i)
 // 	{
-// 		d2d::Sprite* s = start->m_sprites[i];
+// 		ee::Sprite* s = start->m_sprites[i];
 // 		for (int j = 0, m = end->Size(); j < m; ++j) {
-// 			d2d::Sprite* e = end->m_sprites[j];
+// 			ee::Sprite* e = end->m_sprites[j];
 // 			if (IsTweenMatched(s, e))
 // 			{
-// 				d2d::Sprite* mid = s->clone();
+// 				ee::Sprite* mid = s->clone();
 // 				GetTweenSprite(s, e, mid, process);
 // 				tween.push_back(mid);
 // 			}
@@ -179,8 +179,8 @@ void KeyFrame::OnActive()
 	}
 }
 
-void KeyFrame::GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end, 
-							  d2d::Sprite* tween, float process) const
+void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, 
+							  ee::Sprite* tween, float process) const
 {
 	libanim::TweenUtility::GetTweenSprite(start, end, tween, process);
 
@@ -192,10 +192,10 @@ void KeyFrame::GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end,
 	}
 }
 
-bool KeyFrame::IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1) const
+bool KeyFrame::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const
 {
 	if (libanim::TweenUtility::IsTweenMatched(s0, s1) &&
-		!m_skeletonData.IsContainSprite(const_cast<d2d::Sprite*>(s0))) {
+		!m_skeletonData.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
 		return true;
 	} else {
 		return false;

@@ -7,9 +7,8 @@ namespace ee
 {
 
 class Sprite;
-class MultiSpritesImpl;
 
-Sprite* draw_all_to_one_spr(const MultiSpritesImpl* sprites_impl, Sprite* except);
+Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites, Sprite* except);
 Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites);
 
 void gl_debug();

@@ -1,7 +1,7 @@
 #ifndef _LIBCOCO_SYMBOL_SET_H_
 #define _LIBCOCO_SYMBOL_SET_H_
 
-#include <drag2d.h>
+
 
 namespace libcoco
 {
@@ -10,17 +10,17 @@ class SymbolSet
 {
 public:
 
-	void Insert(const d2d::Symbol* symbol);
+	void Insert(const ee::Symbol* symbol);
 
-	const d2d::Symbol* Query(const std::string& filepath) const;
-	bool Query(const d2d::Symbol* symbol) const;
+	const ee::Symbol* Query(const std::string& filepath) const;
+	bool Query(const ee::Symbol* symbol) const;
 
-	const std::vector<const d2d::Symbol*>& GetOrdered() const { return m_symbol_ordered; }
+	const std::vector<const ee::Symbol*>& GetOrdered() const { return m_symbol_ordered; }
 
 private:
-	std::multimap<std::string, const d2d::Symbol*> m_symbol_map;
+	std::multimap<std::string, const ee::Symbol*> m_symbol_map;
 
-	std::vector<const d2d::Symbol*> m_symbol_ordered;
+	std::vector<const ee::Symbol*> m_symbol_ordered;
 
 }; // SymbolSet
 

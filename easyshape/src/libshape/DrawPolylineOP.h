@@ -1,15 +1,15 @@
 #ifndef _LIBSHAPE_DRAW_POLYLINE_OP_H_
 #define _LIBSHAPE_DRAW_POLYLINE_OP_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
-class DrawPolylineOP : public d2d::ZoomViewOP
+class DrawPolylineOP : public ee::ZoomViewOP
 {
 public:
-	DrawPolylineOP(wxWindow* wnd, d2d::EditPanelImpl* stage, bool isClosed);
+	DrawPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool isClosed);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);
@@ -27,8 +27,8 @@ private:
 	bool ShouldFixPos() const;
 
 protected:
-	mutable std::vector<d2d::Vector> m_polyline;
-	d2d::Vector m_currPos;
+	mutable std::vector<ee::Vector> m_polyline;
+	ee::Vector m_currPos;
 
 private:
 	bool m_isClosed;

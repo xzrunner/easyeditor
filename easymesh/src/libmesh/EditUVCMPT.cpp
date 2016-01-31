@@ -11,13 +11,13 @@ static const float SPEED_Y = -0.05f;
 
 EditUVCMPT::EditUVCMPT(wxWindow* parent, const wxString& name, 
 					   StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_editOP = new EditUVOP(stage);
 }
 
-wxSizer* EditUVCMPT::initLayout()
+wxSizer* EditUVCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
@@ -41,7 +41,7 @@ void EditUVCMPT::onMove(wxCommandEvent& event)
 {
 	if (Shape* shape = m_stage->GetShape()) {
 		m_stage->GetShape()->OffsetUV(0, SPEED_Y);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -49,7 +49,7 @@ void EditUVCMPT::onReset(wxCommandEvent& event)
 {
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Reset();
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_editOP->Clear();
 	}
 }

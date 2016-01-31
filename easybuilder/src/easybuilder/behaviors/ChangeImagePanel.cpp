@@ -9,7 +9,7 @@
 using namespace ebuilder;
 
 ChangeImagePanel::ChangeImagePanel(wxWindow* parent,
-								   d2d::LibraryList* mediaList, 
+								   ee::LibraryList* mediaList, 
 								   ChangeImage* behavior)
 	: BehaviorPanel(parent, CHANGE_IMAGE_NAME)
 	, m_list(mediaList)
@@ -17,7 +17,7 @@ ChangeImagePanel::ChangeImagePanel(wxWindow* parent,
 {
 }
 
-void ChangeImagePanel::update(const d2d::LibraryList& list)
+void ChangeImagePanel::update(const ee::LibraryList& list)
 {
 	initChoice();
 }
@@ -53,7 +53,7 @@ void ChangeImagePanel::onChoiceChanged(wxCommandEvent& event)
 void ChangeImagePanel::initChoice()
 {
 	std::vector<wxString> names;
-	m_list->traverse(d2d::GetNameVisitor<d2d::ListItem>(names));
+	m_list->traverse(ee::GetNameVisitor<ee::ListItem>(names));
 
 	m_choice->Clear();
 	if (!names.empty()) 

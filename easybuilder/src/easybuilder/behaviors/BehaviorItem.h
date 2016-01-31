@@ -6,7 +6,7 @@
 
 namespace ebuilder
 {
-	class BehaviorItem : public d2d::ListItem
+	class BehaviorItem : public ee::ListItem
 	{
 	public:
 		BehaviorItem(const wxString& name, BehaviorType type)

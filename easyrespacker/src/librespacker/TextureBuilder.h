@@ -19,7 +19,7 @@ public:
 	TextureBuilder();
 	virtual ~TextureBuilder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	bool CanHandle(const etexture::Symbol* symbol) const;
 

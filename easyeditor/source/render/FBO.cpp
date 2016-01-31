@@ -200,8 +200,8 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	}
 
 	Rect rect = symbol->GetSize();
-	int w = rect.Width() * scale,
-		h = rect.Height() * scale;
+	int w = static_cast<int>(rect.Width() * scale),
+		h = static_cast<int>(rect.Height() * scale);
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);

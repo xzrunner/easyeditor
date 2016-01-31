@@ -1,7 +1,7 @@
 #ifndef _ESHAPE_LIBRARY_PAGE_H_
 #define _ESHAPE_LIBRARY_PAGE_H_
 
-#include <drag2d.h>
+
 
 namespace eshape
 {
@@ -10,7 +10,7 @@ class StagePanel;
 class ToolbarPanel;
 class LibraryItem;
 
-class LibraryPage : public d2d::ILibraryPage
+class LibraryPage : public ee::ILibraryPage
 {
 public:
 	LibraryPage(wxWindow* parent, const char* name);

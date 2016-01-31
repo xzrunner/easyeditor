@@ -1,21 +1,21 @@
 #ifndef _SG_TOOLBAR_PANEL_H_
 #define _SG_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace sg
 {
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
-		d2d::PropertySettingPanel* property, StagePanel* stage);
+	ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library, 
+		ee::PropertySettingPanel* property, StagePanel* stage);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void initOptSetting(wxSizer* sizer);

@@ -5,14 +5,14 @@ namespace ecomplex
 {
 
 SymbolPropertySetting::SymbolPropertySetting(Symbol* symbol)
-	: d2d::SymbolPropertySetting(symbol)
+	: ee::SymbolPropertySetting(symbol)
 {
 	m_type = "ComplexSymbol";
 }
 
 void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	d2d::SymbolPropertySetting::OnPropertyGridChange(name, value);
+	ee::SymbolPropertySetting::OnPropertyGridChange(name, value);
 
 	if (value.IsNull())
 		return;
@@ -27,13 +27,13 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Clipbox") && m_symbol) 
 	{
 		std::vector<std::string> str;
-		d2d::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
+		ee::StringHelper::Split(wxANY_AS(value, wxString).ToStdString(), ";", str);
 		if (str.size() == 4) {
 			Symbol* c = static_cast<Symbol*>(m_symbol);
-			d2d::StringHelper::FromString(str[0], c->m_clipbox.xmin);
-			d2d::StringHelper::FromString(str[1], c->m_clipbox.xmax);
-			d2d::StringHelper::FromString(str[2], c->m_clipbox.ymin);
-			d2d::StringHelper::FromString(str[3], c->m_clipbox.ymax);
+			ee::StringHelper::FromString(str[0], c->m_clipbox.xmin);
+			ee::StringHelper::FromString(str[1], c->m_clipbox.xmax);
+			ee::StringHelper::FromString(str[2], c->m_clipbox.ymin);
+			ee::StringHelper::FromString(str[3], c->m_clipbox.ymax);
 		}
 	}
 	else if (name == wxT("Clipbox.xmin") && m_symbol)
@@ -60,8 +60,8 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		Symbol* c = static_cast<Symbol*>(m_symbol);
 		c->m_use_render_cache = wxANY_AS(value, bool);
-// 		if (d2d::Config::Instance()->IsUseDTex()) {
-// 			d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+// 		if (ee::Config::Instance()->IsUseDTex()) {
+// 			ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
 // 			if (c->m_use_render_cache) {
 // 				dtex->InsertSymbol(*c);
 // 			} else {
@@ -75,7 +75,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -146,7 +146,7 @@ void SymbolPropertySetting::SetGroupByNames(const wxString& names)
 
 void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	d2d::SymbolPropertySetting::UpdateProperties(pg);
+	ee::SymbolPropertySetting::UpdateProperties(pg);
 
 	if (m_symbol) {
 		pg->GetProperty(wxT("Groups"))->SetValue(GetGroupNames());
@@ -175,7 +175,7 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	d2d::SymbolPropertySetting::InitProperties(pg);
+	ee::SymbolPropertySetting::InitProperties(pg);
 
 	if (m_symbol) {
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, GetGroupNames()));

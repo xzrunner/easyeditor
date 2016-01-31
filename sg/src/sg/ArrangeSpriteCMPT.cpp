@@ -6,15 +6,15 @@ namespace sg
 {
 
 ArrangeSpriteCMPT::ArrangeSpriteCMPT(wxWindow* parent, const wxString& name,
-									 d2d::PropertySettingPanel* property, 
+									 ee::PropertySettingPanel* property, 
 									 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
 	m_editOP = new ArrangeSpriteOP(property, stage);
 }
 
-wxSizer* ArrangeSpriteCMPT::initLayout()
+wxSizer* ArrangeSpriteCMPT::InitLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("level"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);

@@ -2,14 +2,14 @@
 
 #include "dataset/WholeSkeleton.h"
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
-	class EditWholeSkeletonJointOP : public d2d::ZoomViewOP
+	class EditWholeSkeletonJointOP : public ee::ZoomViewOP
 	{
 	public:
-		EditWholeSkeletonJointOP(d2d::EditPanel* editPanel, WholeSkeleton::Body* body);
+		EditWholeSkeletonJointOP(ee::EditPanel* editPanel, WholeSkeleton::Body* body);
 
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);

@@ -11,9 +11,9 @@
 
 using namespace etexpacker;
 
-void RectBinArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
+void RectBinArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
-// 	std::vector<d2d::ImageSprite*> sorted(sprites);
+// 	std::vector<ee::ImageSprite*> sorted(sprites);
 // 	sortByMaxEdge(sorted);
 // 
 // 	std::vector<RectSize> input;
@@ -31,13 +31,13 @@ void RectBinArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 
 	m_tex_account = 0;
 
-	std::vector<d2d::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprites);
 	sortByMaxEdge(sorted);
 
 	int count = 0;
 
 	float x_offset = 0;
-	std::vector<d2d::ImageSprite*> remains(sorted);
+	std::vector<ee::ImageSprite*> remains(sorted);
 	while (!remains.empty())
 	{
 		std::vector<RectSize> input;
@@ -49,7 +49,7 @@ void RectBinArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 		// 	ShelfBinPackAlg(input, output);
 		// 	SkylineBinPackAlg(input, output);
 
-		std::vector<d2d::ImageSprite*> _remains;
+		std::vector<ee::ImageSprite*> _remains;
 		AfterPacking(x_offset, remains, output, _remains);
 		remains = _remains;
 
@@ -64,7 +64,7 @@ void RectBinArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 	}
 }
 
-void RectBinArrange::BeforePacking(const std::vector<d2d::ImageSprite*>& sorted, std::vector<RectSize>& input) const
+void RectBinArrange::BeforePacking(const std::vector<ee::ImageSprite*>& sorted, std::vector<RectSize>& input) const
 {
 	input.reserve(sorted.size());
 	const float s = Context::Instance()->scale,
@@ -79,9 +79,9 @@ void RectBinArrange::BeforePacking(const std::vector<d2d::ImageSprite*>& sorted,
 }
 
 void RectBinArrange::AfterPacking(float xoffset,
-								  std::vector<d2d::ImageSprite*>& sprites, 
+								  std::vector<ee::ImageSprite*>& sprites, 
 								  const std::vector<Rect>& output,
-								  std::vector<d2d::ImageSprite*>& remains) const
+								  std::vector<ee::ImageSprite*>& remains) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -89,11 +89,11 @@ void RectBinArrange::AfterPacking(float xoffset,
 	for (size_t i = 0, n = output.size(); i < n; ++i)
 	{
 		const Rect& rect = output[i];
-		d2d::ImageSprite* sprite = sprites[i];
+		ee::ImageSprite* sprite = sprites[i];
 		if (rect.height != 0)
 		{
-			d2d::Rect r = sprite->GetSymbol().GetSize();
-			d2d::Vector pos;
+			ee::Rect r = sprite->GetSymbol().GetSize();
+			ee::Vector pos;
 			float angle = 0;
 			if (r.Width() == rect.width && r.Height() == rect.height)
 			{
@@ -102,9 +102,9 @@ void RectBinArrange::AfterPacking(float xoffset,
 			}
 			else if (r.Width() == rect.height && r.Height() == rect.width)
 			{
-				angle = d2d::PI * 0.5f;
-				// 					pos.x = output.x + r.yLength() * 0.5f * s + p/* - r.yCenter()*/;
-				// 					pos.y = output.y + r.xLength() * 0.5f * s + p /*- r.xCenter()*/;
+				angle = ee::PI * 0.5f;
+				// 					pos.x = output.x + r.Height() * 0.5f * s + p/* - r.CenterY()*/;
+				// 					pos.y = output.y + r.Width() * 0.5f * s + p /*- r.CenterX()*/;
 
 				pos.x = rect.x + 0.5f * rect.width - r.CenterX();
 				pos.y = rect.y + 0.5f * rect.height - r.CenterY();

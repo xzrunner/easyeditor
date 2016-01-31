@@ -1,23 +1,23 @@
 #ifndef _LIBSHAPE_TOOLBAR_PANEL_H_
 #define _LIBSHAPE_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
+	ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 		StagePanel* stage);
 
 	void SelectSuitableEditOP();
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void OnClearShapes(wxCommandEvent& event);

@@ -1,17 +1,19 @@
 #include "LibraryPage.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+
 namespace etemplate
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Template"))
+	: ee::LibraryPage(parent, "Template")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return true;
 }

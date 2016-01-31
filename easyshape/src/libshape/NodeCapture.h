@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_NODE_CAPTURE_H_
 #define _LIBSHAPE_NODE_CAPTURE_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -14,8 +14,8 @@ class RectShape;
 
 struct NodeAddr
 {
-	d2d::Shape* shape;
-	d2d::Vector pos;
+	ee::Shape* shape;
+	ee::Vector pos;
 
 	NodeAddr() : shape(NULL) {}
 
@@ -28,18 +28,18 @@ struct NodeAddr
 class NodeCapture
 {
 public:
-	NodeCapture(d2d::MultiShapesImpl* shapesImpl, int tol);
+	NodeCapture(ee::MultiShapesImpl* shapesImpl, int tol);
 
-	void captureEditable(const d2d::Vector& pos, NodeAddr& result);
-	void captureSelectable(const d2d::Vector& pos, NodeAddr& result);
+	void captureEditable(const ee::Vector& pos, NodeAddr& result);
+	void captureSelectable(const ee::Vector& pos, NodeAddr& result);
 
 private:
-	class RectQueryVisitor : public d2d::Visitor
+	class RectQueryVisitor : public ee::Visitor
 	{
 	public:
-		RectQueryVisitor(const d2d::Vector& pos, float tolerance, NodeAddr& result);
+		RectQueryVisitor(const ee::Vector& pos, float tolerance, NodeAddr& result);
 
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
 		bool Visit(PointShape* point);
@@ -49,16 +49,16 @@ private:
 		bool Visit(RectShape* rect);
 
 	private:
-		const d2d::Vector& m_pos;
+		const ee::Vector& m_pos;
 		float m_tolerance;
 
-		d2d::Rect m_rect;
+		ee::Rect m_rect;
 		NodeAddr& m_result;
 
 	}; // RectQueryVisitor
 
 private:
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 	int m_tol;
 
 }; // NodeCapture

@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_REGULAR_RECT_MERGE_H_
 #define _EASYIMAGE_REGULAR_RECT_MERGE_H_
 
-#include <drag2d.h>
+
 
 #include "Rect.h"
 

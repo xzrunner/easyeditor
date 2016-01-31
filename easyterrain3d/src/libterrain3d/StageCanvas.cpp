@@ -8,17 +8,17 @@
 namespace libterrain3d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(StageCanvas, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
 END_EVENT_TABLE()
 
-StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
+StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 	: e3d::StageCanvas(stage_wnd, stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);
 
-	SetBgColor(d2d::BLACK);
+	SetBgColor(ee::BLACK);
 
 //	m_demo = new DemoTriNetwork(GetCamera3());
 //	m_demo = new DemoBruteForce(GetCamera3());
@@ -31,7 +31,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-//	e3d::DrawCross(vec3(0, 0, 0), vec3(100, 100, 100), d2d::LIGHT_RED);
+//	e3d::DrawCross(vec3(0, 0, 0), vec3(100, 100, 100), ee::LIGHT_RED);
 
 	m_demo->Update();
 	m_demo->Draw();

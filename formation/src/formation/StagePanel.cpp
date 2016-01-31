@@ -18,9 +18,9 @@ void StagePanel::clear()
 	SpritesPanelImpl::clearSprites();
 }
 
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+void StagePanel::insertSprite(ee::ISprite* sprite)
 {
-	d2d::SpritesPanelImpl::insertSprite(sprite);
+	ee::SpritesPanelImpl::insertSprite(sprite);
 
 	if (!sprite->getUserData())
 		sprite->setUserData(new ActorInfo);
@@ -28,13 +28,13 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 void StagePanel::resetAllSprites(float sx, float sy)
 {
-	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<ee::ISprite*> sprites;
+	traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		ee::ISprite* sprite = sprites[i];
 		float x = sprite->getPosition().x * sx,
 			y = sprite->getPosition().y * sy;
-		sprite->setTransform(d2d::Vector(x, y), sprite->getAngle());
+		sprite->setTransform(ee::Vector(x, y), sprite->getAngle());
 	}
 }

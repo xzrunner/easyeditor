@@ -6,7 +6,7 @@
 #include "IDemo.h"
 #include "image.h"
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace libterrain3d
@@ -35,7 +35,7 @@ private:
 private:
 	e3d::Camera& m_cam;
 
-	d2d::Image* m_image;
+	ee::Image* m_image;
 
 	mutable std::vector<Wave> m_waves;
 

@@ -4,6 +4,7 @@
 #include "ImageSprite.h"
 #include "FontBlankSprite.h"
 #include "ScriptsSprite.h"
+#include "StringHelper.h"
 
 namespace ee
 {
@@ -21,7 +22,7 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 {
 	Sprite* sprite = NULL;
 
-	wxString filepath = symbol->GetFilepath();
+	const std::string& filepath = symbol->GetFilepath();
 	if (filepath.empty())
 	{
 		// todo
@@ -32,7 +33,8 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 	}
 	else
 	{
-		wxString ext = FileHelper::getExtension(filepath).Lower();
+		std::string ext = FileHelper::GetExtension(filepath);
+		StringHelper::ToLower(ext);
 
 		if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr")
 		{
@@ -40,8 +42,8 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 		}
 		else if (ext == "json")
 		{
-			wxString type = FileType::getFileTag(FileType::GetType(filepath));
-			CallbackMap::iterator itr = m_creators.find(type.ToStdString());
+			std::string type = FileType::GetTag(FileType::GetType(filepath));
+			CallbackMap::iterator itr = m_creators.find(type);
 			if (itr != m_creators.end()) {
 				sprite = (itr->second)(symbol);
 			} else if (FileType::IsType(filepath, FileType::e_fontblank)) {
@@ -57,8 +59,8 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 	}
 
 	if (sprite) {
-		insert(sprite);
-		sprite->name = "_sprite"+wxString::FromDouble(m_id++);
+		Insert(sprite);
+		sprite->name = std::string("_sprite") + StringHelper::ToString(m_id++);
 	}
 
 	if (!symbol->tag.empty()) {

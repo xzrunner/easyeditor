@@ -5,7 +5,7 @@
 
 using namespace emodeling;
 
-SettingViewDlg::SettingViewDlg(wxWindow* parent, d2d::IStageCanvas* canvas)
+SettingViewDlg::SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas)
 	: wxDialog(parent, wxID_ANY, wxT("Display Setting"))
 	, m_canvas(canvas)
 	, m_ctlPointSize(NULL)
@@ -34,7 +34,7 @@ wxSizer* SettingViewDlg::initDisplayTypePanel()
 		wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
 	Connect(drawChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
 		wxCommandEventHandler(SettingViewDlg::onChangeDisplayType));
-	drawChoice->SetSelection(d2d::SettingData::draw_type);
+	drawChoice->SetSelection(ee::SettingData::draw_type);
 
 	sizer->Add(drawChoice);
 
@@ -53,7 +53,7 @@ wxSizer* SettingViewDlg::initStylePanel()
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("node size:")));
 
 			m_ctlPointSize = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
-				wxSP_ARROW_KEYS, 0, 30, d2d::SettingData::ctl_pos_sz);
+				wxSP_ARROW_KEYS, 0, 30, ee::SettingData::ctl_pos_sz);
 			Connect(m_ctlPointSize->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(SettingViewDlg::onChangeStyle));
 			sizer->Add(m_ctlPointSize);
 
@@ -67,14 +67,14 @@ wxSizer* SettingViewDlg::initStylePanel()
 		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
 			wxCheckBox* trisCheck = new wxCheckBox(this, wxID_ANY, wxT("triangle edge"));
-			trisCheck->SetValue(d2d::SettingData::draw_tris_edge);
+			trisCheck->SetValue(ee::SettingData::draw_tris_edge);
 			Connect(trisCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingViewDlg::onChangeDisplayTriangles));
 			sizer->Add(trisCheck);
 		}
 		topSizer->AddSpacer(5);
 		{
 			wxCheckBox* boundCheck = new wxCheckBox(this, wxID_ANY, wxT("bounding"));
-			boundCheck->SetValue(d2d::SettingData::draw_poly_bound);
+			boundCheck->SetValue(ee::SettingData::draw_poly_bound);
 			Connect(boundCheck->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingViewDlg::onChangeDisplayPolygonBound));
 			sizer->Add(boundCheck);
 		}
@@ -85,25 +85,25 @@ wxSizer* SettingViewDlg::initStylePanel()
 
 void SettingViewDlg::onChangeDisplayType(wxCommandEvent& event)
 {
-	d2d::SettingData::draw_type = static_cast<d2d::SettingData::DrawType>(event.GetSelection());
+	ee::SettingData::draw_type = static_cast<ee::SettingData::DrawType>(event.GetSelection());
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void SettingViewDlg::onChangeStyle(wxSpinEvent& event)
 {
-	d2d::SettingData::ctl_pos_sz = m_ctlPointSize->GetValue();
+	ee::SettingData::ctl_pos_sz = m_ctlPointSize->GetValue();
 	if (m_canvas) m_canvas->Refresh(true);
 }
 
 void SettingViewDlg::onChangeDisplayTriangles(wxCommandEvent& event)
 {
-	d2d::SettingData::draw_tris_edge = event.IsChecked();
+	ee::SettingData::draw_tris_edge = event.IsChecked();
 	if (m_canvas) m_canvas->Refresh(true);
 }
 
 void SettingViewDlg::onChangeDisplayPolygonBound(wxCommandEvent& event)
 {
-	d2d::SettingData::draw_poly_bound = event.IsChecked();
+	ee::SettingData::draw_poly_bound = event.IsChecked();
 	if (m_canvas) m_canvas->Refresh(true);
 }

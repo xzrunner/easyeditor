@@ -1,18 +1,18 @@
 #ifndef _LIBSHAPE_EDIT_POINT_OP_H_
 #define _LIBSHAPE_EDIT_POINT_OP_H_
 
-#include <drag2d.h>
+
 
 #include "NodeCapture.h"
 
 namespace libshape
 {
 
-class EditPointOP : public d2d::ZoomViewOP
+class EditPointOP : public ee::ZoomViewOP
 {
 public:
-	EditPointOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapes_impl, d2d::OneFloatValue* node_capture);
+	EditPointOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+		ee::MultiShapesImpl* shapes_impl, ee::OneFloatValue* node_capture);
 	
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -25,13 +25,13 @@ public:
 	virtual bool Clear();
 
 private:
-	d2d::MultiShapesImpl* m_shapes_impl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
-	d2d::OneFloatValue* m_node_capture;
+	ee::OneFloatValue* m_node_capture;
 
 	NodeAddr m_captured;
 
-	d2d::Vector m_pos;
+	ee::Vector m_pos;
 
 }; // EditPointOP
 

@@ -19,7 +19,7 @@ void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
 	
 	uint32_t color;
 	unpack(color, ptr);
-	shape->color = d2d::TransColor(color, d2d::PT_RGBA);
+	shape->color = ee::TransColor(color, ee::PT_RGBA);
 
 	uint16_t num;
 	unpack(num, ptr);
@@ -30,7 +30,7 @@ void ShapeFromBin::Unpack(uint8_t** ptr, PackShape* shape)
 		unpack(x, ptr);
 		unpack(y, ptr);
 
-		d2d::Vector pos;
+		ee::Vector pos;
 		pos.x = (float)x / SCALE;
 		pos.y =-(float)y / SCALE;
 

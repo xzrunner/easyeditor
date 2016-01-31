@@ -6,9 +6,9 @@ namespace ep3dinv
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, m_ps(NULL)
 {
 	SetEditOP(new EditOP(this));

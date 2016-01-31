@@ -14,7 +14,7 @@ BEGIN_EVENT_TABLE(LibraryPanel, wxPanel)
 END_EVENT_TABLE()
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 	, m_viewlist(NULL) 
 	, m_grouptree(NULL)
 	, m_stage(NULL)
@@ -24,10 +24,10 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 
 void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 {
-	d2d::LibraryPanel::OnPageChanged(event);
+	ee::LibraryPanel::OnPageChanged(event);
 
 	Layer* curr = static_cast<LibraryPage*>(GetCurrPage())->GetLayer();
-	d2d::ChangeLayerMgrSJ::Instance()->Change(curr->GetLayerMgr());
+	ee::ChangeLayerMgrSJ::Instance()->Change(curr->GetLayerMgr());
 	curr->SetEditable(true);
 	static_cast<LibraryPage*>(m_pages[event.GetSelection()])->UpdateStatusFromLayer();
 
@@ -36,7 +36,7 @@ void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 
 void LibraryPanel::OnPageChanging(wxBookCtrlEvent& event)
 {
-	d2d::LibraryPanel::OnPageChanging(event);
+	ee::LibraryPanel::OnPageChanging(event);
 
 	Layer* curr = static_cast<LibraryPage*>(GetCurrPage())->GetLayer();
 	curr->SetEditable(false);
@@ -52,19 +52,19 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			continue;
 		}
 
-		d2d::LibraryList* list = m_pages[i]->GetList();
+		ee::LibraryList* list = m_pages[i]->GetList();
 		int item_idx = 0;
 		Json::Value item_val = layer_val[item_idx++];
 		while (!item_val.isNull()) {
 			std::string item_path = item_val.asString();
-			std::string filepath = d2d::FileHelper::GetAbsolutePath(dir, item_path);
+			std::string filepath = ee::FileHelper::GetAbsolutePath(dir, item_path);
 			try {
-				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(symbol->GetFilepath());
 				list->Insert(symbol);
 				symbol->Release();
-			} catch (d2d::Exception& e) {
-				throw d2d::Exception("Create symbol %s fail!", item_path.c_str());
+			} catch (ee::Exception& e) {
+				throw ee::Exception("Create symbol %s fail!", item_path.c_str());
 			}
 			item_val = layer_val[item_idx++];
 		}
@@ -75,12 +75,12 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i)
 	{
-		d2d::LibraryList* list = m_pages[i]->GetList();
+		ee::LibraryList* list = m_pages[i]->GetList();
 		int j = 0;
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(list->GetItem(j++));
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(list->GetItem(j++));
 		while (symbol) {
-			value[i][j-1] = d2d::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
-			symbol = static_cast<d2d::Symbol*>(list->GetItem(j++));
+			value[i][j-1] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+			symbol = static_cast<ee::Symbol*>(list->GetItem(j++));
 		}
 	}
 }
@@ -91,7 +91,7 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 	for (int i = 0, n = layers.size(); i < n; ++i)
 	{
 		Layer* layer = layers[i];
-		d2d::ILibraryPage* page = m_pages[i];
+		ee::LibraryPage* page = m_pages[i];
 
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
 		layer->SetName(page->GetPageName().ToStdString());
@@ -106,30 +106,30 @@ void LibraryPanel::LoadSymbolFromLayer()
 	{
 		LibraryPage* page = static_cast<LibraryPage*>(m_pages[i]);
 
- 		std::vector<d2d::Sprite*> sprites;
- 		page->GetLayer()->TraverseSprite(d2d::FetchAllVisitor<d2d::Sprite>(sprites), true);
- 		std::set<d2d::Symbol*> symbol_set;
+ 		std::vector<ee::Sprite*> sprites;
+ 		page->GetLayer()->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
+ 		std::set<ee::Symbol*> symbol_set;
  		for (int i = 0, n = sprites.size(); i < n; ++i) {
- 			d2d::Symbol* symbol = const_cast<d2d::Symbol*>(&sprites[i]->GetSymbol());
+ 			ee::Symbol* symbol = const_cast<ee::Symbol*>(&sprites[i]->GetSymbol());
  			symbol_set.insert(symbol);
  		}
  
- 		std::set<d2d::Symbol*>::iterator itr = symbol_set.begin();
+ 		std::set<ee::Symbol*>::iterator itr = symbol_set.begin();
  		for ( ; itr != symbol_set.end(); ++itr) {
- 			d2d::Symbol* symbol = *itr;
+ 			ee::Symbol* symbol = *itr;
  			symbol->RefreshThumbnail(symbol->GetFilepath());
  			page->GetList()->Insert(symbol);
  		}
 	}
 }
 
-void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* property) 
+void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* property) 
 {
-	d2d::AbstractEditOP* paste_op = new d2d::PasteSymbolOP(stage, stage->GetStageImpl(), this);
+	ee::EditOP* paste_op = new ee::PasteSymbolOP(stage, stage->GetStageImpl(), this);
 
-	d2d::OneFloatValue* capture_val = new d2d::OneFloatValueStatic(10);
-	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
-	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	ee::OneFloatValue* capture_val = new ee::OneFloatValueStatic(10);
+	ee::EditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	ee::EditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
 
 	int id = 0;
 	{
@@ -218,8 +218,8 @@ void LibraryPanel::Refresh()
 {
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
 
-	std::vector<d2d::Sprite*> sprites;
-	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::Sprite>(sprites), true);
+	std::vector<ee::Sprite*> sprites;
+	layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(sprites), true);
 
 	// stage
 	m_stage->GetSpriteSelection()->Clear();
@@ -276,8 +276,8 @@ bool LibraryPanel::IsCurrLevelLayer()
 void LibraryPanel::GetAllPathName(std::vector<std::string>& names) const
 {
 	Layer* layer = static_cast<LibraryPage*>(m_path_page)->GetLayer();
-	std::vector<d2d::Shape*> shapes;
-	layer->TraverseShape(d2d::FetchAllVisitor<d2d::Shape>(shapes));
+	std::vector<ee::Shape*> shapes;
+	layer->TraverseShape(ee::FetchAllVisitor<ee::Shape>(shapes));
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		names.push_back(shapes[i]->name);
 	}

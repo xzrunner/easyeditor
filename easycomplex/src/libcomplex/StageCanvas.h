@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_STAGE_CANVAS_H_
 #define _DRAG2D_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace ecomplex
@@ -9,15 +9,15 @@ namespace ecomplex
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* editPanel, d2d::LibraryPanel* library, 
+	StageCanvas(StagePanel* editPanel, ee::LibraryPanel* library, 
 		wxGLContext* glctx = NULL);
 	
 	virtual ~StageCanvas();
 
-	void SetBackground(d2d::Symbol* symbol);
+	void SetBackground(ee::Symbol* symbol);
 
 protected:
 	virtual void OnSize(int w, int h);
@@ -30,13 +30,13 @@ private:
 	void drawBackground() const;
 
 private:
-	d2d::LibraryPanel* m_library;
+	ee::LibraryPanel* m_library;
 
-	d2d::ShapeStyle m_bgStyle, m_clipboxStyle;
+	ee::ShapeStyle m_bgStyle, m_clipboxStyle;
 
-	d2d::Symbol* m_background;
+	ee::Symbol* m_background;
 
-	mutable d2d::FPS m_fps;
+	mutable ee::FPS m_fps;
 
 	e3d::Camera m_camera3;
 

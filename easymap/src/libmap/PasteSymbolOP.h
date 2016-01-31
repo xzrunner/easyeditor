@@ -1,18 +1,18 @@
 #ifndef _EASYMAP_PASTE_SYMBOL_OP_H_
 #define _EASYMAP_PASTE_SYMBOL_OP_H_
 
-#include <drag2d.h>
+
 
 namespace emap
 {
 
 class StagePanel;
 
-class PasteSymbolOP : public d2d::PasteSymbolOP
+class PasteSymbolOP : public ee::PasteSymbolOP
 {
 public:
-	PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library, 
-		d2d::PropertySettingPanel* property);
+	PasteSymbolOP(StagePanel* stage, ee::LibraryPanel* library, 
+		ee::PropertySettingPanel* property);
 
 //	virtual bool OnMouseRightDown(int x, int y);
 
@@ -20,7 +20,7 @@ private:
 	void ChangeCurrOP();
 
 private:
-	d2d::PropertySettingPanel* m_property;
+	ee::PropertySettingPanel* m_property;
 
 }; // PasteSymbolOP
 

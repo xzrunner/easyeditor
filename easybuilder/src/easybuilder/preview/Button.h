@@ -13,7 +13,7 @@ namespace ebuilder
 		class Button : public Item
 		{
 		public:
-			Button(const d2d::ImageSprite& sprite);
+			Button(const ee::ImageSprite& sprite);
 
 		public:
 			std::vector<Behavior*> m_pressBehaviors;

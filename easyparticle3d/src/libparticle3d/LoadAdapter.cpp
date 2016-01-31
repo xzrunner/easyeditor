@@ -33,13 +33,13 @@ void LoadAdapter::Load(const std::string& filepath)
 	int min, max;
 	min = value["min_hori"].asInt();
 	max = value["max_hori"].asInt();
-	hori = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
-	hori_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+	hori = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	hori_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 
 	min = value["min_vert"].asInt();
 	max = value["max_vert"].asInt();
-	vert = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
-	vert_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+	vert = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	vert_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 
 	if (!value["radial_speed"].isNull()) {
 		radial_spd = value["radial_speed"]["center"].asInt();
@@ -63,14 +63,14 @@ void LoadAdapter::Load(const std::string& filepath)
 	radial_spd_var *= 0.25f;
 
 	if (!value["angular_speed"].isNull()) {
-		angular_spd = value["angular_speed"]["center"].asInt() * d2d::TRANS_DEG_TO_RAD;
-		angular_spd_var = value["angular_speed"]["offset"].asInt() * d2d::TRANS_DEG_TO_RAD;
+		angular_spd = value["angular_speed"]["center"].asInt() * ee::TRANS_DEG_TO_RAD;
+		angular_spd_var = value["angular_speed"]["offset"].asInt() * ee::TRANS_DEG_TO_RAD;
 	} else {
 		int min, max;
 		min = value["min_angular_spd"].asInt();
 		max = value["max_angular_spd"].asInt();
-		angular_spd = (min + max) * 0.5f * d2d::TRANS_DEG_TO_RAD;
-		angular_spd_var = (max - min) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		angular_spd = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
+		angular_spd_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 	}
 
 	dis_region = value["disturbance_radius"]["center"].asInt();
@@ -104,7 +104,7 @@ void LoadAdapter::Load(const std::string& filepath)
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	int i = 0;
 	Json::Value comp_val = value["components"][i++];
 	while (!comp_val.isNull()) {
@@ -118,12 +118,12 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	Component comp;
 
 	comp.filepath = comp_val["filepath"].asString();
-	comp.filepath = d2d::FileHelper::GetAbsolutePath(dir, comp.filepath);
+	comp.filepath = ee::FileHelper::GetAbsolutePath(dir, comp.filepath);
 
 	if (!comp_val["bind ps filepath"].isNull()) {
 		comp.bind_filepath = comp_val["bind ps filepath"].asString();
 		if (!comp.bind_filepath.empty()) {
-			comp.bind_filepath = d2d::FileHelper::GetAbsolutePath(dir, comp.bind_filepath);
+			comp.bind_filepath = ee::FileHelper::GetAbsolutePath(dir, comp.bind_filepath);
 		}
 	}
 

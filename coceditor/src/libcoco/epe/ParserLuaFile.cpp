@@ -122,10 +122,10 @@ void ParserLuaFile::transToMemory(const std::vector<std::string>& texfilenames)
 	transAniToMemory();
 }
 
-void ParserLuaFile::getAllSymbols(std::vector<d2d::Symbol*>& symbols) const
+void ParserLuaFile::getAllSymbols(std::vector<ee::Symbol*>& symbols) const
 {
 	symbols.reserve(m_mapSymbols.size());
-	std::map<int, d2d::Symbol*>::const_iterator itr = m_mapSymbols.begin();
+	std::map<int, ee::Symbol*>::const_iterator itr = m_mapSymbols.begin();
 	for ( ; itr != m_mapSymbols.end(); ++itr)
 		symbols.push_back(itr->second);
 }
@@ -293,10 +293,10 @@ void ParserLuaFile::parserAni(lua_State* L, int id)
 void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder)
 {
 	// pictures
-	std::vector<d2d::Image*> images;
+	std::vector<ee::Image*> images;
 	images.resize(texfilenames.size());
 	for (int i = 0, n = texfilenames.size(); i < n; ++i)
-		images[i] = d2d::ImageMgr::Instance()->GetItem(texfilenames[i]);
+		images[i] = ee::ImageMgr::Instance()->GetItem(texfilenames[i]);
 
 	// Picture to easycomplex
 	std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
@@ -311,7 +311,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		{
 			Picture::Part* part = pic->parts[i];
 
-			const d2d::ImageData* image = images[part->tex]->GetImageData();
+			const ee::ImageData* image = images[part->tex]->GetImageData();
 			eimage::ImageClip clip(*image);
 
 			const uint8_t* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
@@ -321,10 +321,10 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 					height = part->ymax-part->ymin;
 				std::string outfile = outfloder + "\\" + part->filename;
 				if (!wxFileExists(outfile))
-					d2d::ImageSaver::StoreToFile(pixels, width, height, 4, outfile, d2d::ImageSaver::e_png);
+					ee::ImageSaver::StoreToFile(pixels, width, height, 4, outfile, ee::ImageSaver::e_png);
 
 				std::string outpath = outfile + ".png";
-				d2d::Sprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outpath, width, height));
+				ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(outpath, width, height));
 				part->transform(sprite);
 				symbol->m_sprites.push_back(sprite);
 			}
@@ -337,7 +337,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			ss << symbol->name;
 		}
 		std::string filename = outfloder + "\\" + ss.str() 
-			+ "_" + d2d::FileType::GetTag(d2d::FileType::e_complex) + ".json";
+			+ "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
 		ecomplex::FileStorer::Store(filename.c_str(), symbol);
 
 		pic->filename = filename;
@@ -383,19 +383,19 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 			//					std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
 
 			Animation::Item* item = ani->frames[i][j];
-			d2d::Sprite* sprite = NULL;
+			ee::Sprite* sprite = NULL;
 			std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 			if (itr != m_mapPictures.end())
 			{
 				Picture* pic = itr->second;
-				sprite = new d2d::NullSprite(new d2d::NullSymbol(pic->filename, pic->width, pic->height));
+				sprite = new ee::NullSprite(new ee::NullSymbol(pic->filename, pic->width, pic->height));
 			}
 			else
 			{
 				std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
 				assert(itr != m_mapAnims.end());
 				Animation* ani = itr->second;
-				sprite = new d2d::NullSprite(new d2d::NullSymbol(ani->filename));
+				sprite = new ee::NullSprite(new ee::NullSymbol(ani->filename));
 			}
 			item->transform(sprite);
 			frame->sprites.push_back(sprite);
@@ -411,7 +411,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 		ss << symbol->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
-		+ "_" + d2d::FileType::GetTag(d2d::FileType::e_anim) + ".json";
+		+ "_" + ee::FileType::GetTag(ee::FileType::e_anim) + ".json";
 	libanim::FileSaver::store(filename.c_str(), *symbol);
 
 	ani->filename = filename;
@@ -428,19 +428,19 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 	for (int i = 0, n = ani->frames[0].size(); i < n; ++i)
 	{
 		Animation::Item* item = ani->frames[0][i];
-		d2d::Sprite* sprite = NULL;
+		ee::Sprite* sprite = NULL;
 		std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 		if (itr != m_mapPictures.end())
 		{
 			Picture* pic = itr->second;
-			sprite = new d2d::NullSprite(new d2d::NullSymbol(pic->filename, pic->width, pic->height));
+			sprite = new ee::NullSprite(new ee::NullSymbol(pic->filename, pic->width, pic->height));
 		}
 		else
 		{
 			std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
 			assert(itr != m_mapAnims.end());
 			Animation* ani = itr->second;
-			sprite = new d2d::NullSprite(new d2d::NullSymbol(ani->filename));
+			sprite = new ee::NullSprite(new ee::NullSymbol(ani->filename));
 		}
 		item->transform(sprite);
 		symbol->m_sprites.push_back(sprite);
@@ -453,7 +453,7 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 		ss << symbol->name;
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
-		+ "_" + d2d::FileType::GetTag(d2d::FileType::e_complex) + ".json";
+		+ "_" + ee::FileType::GetTag(ee::FileType::e_complex) + ".json";
 	ecomplex::FileStorer::Store(filename.c_str(), symbol);
 
 	ani->filename = filename;
@@ -464,10 +464,10 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilenames)
 {
 	// pictures
-	std::vector<d2d::Image*> images;
+	std::vector<ee::Image*> images;
 	images.resize(texfilenames.size());
 	for (int i = 0, n = texfilenames.size(); i < n; ++i)
-		images[i] = d2d::ImageMgr::Instance()->GetItem(texfilenames[i]);
+		images[i] = ee::ImageMgr::Instance()->GetItem(texfilenames[i]);
 
 	// Picture to easycomplex
 	std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
@@ -482,15 +482,15 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 		{
 			Picture::Part* part = pic->parts[i];
 
-			d2d::ImageSymbol* image = new d2d::ImageSymbol(images[part->tex], texfilenames[part->tex]);
-			d2d::Rect r;
+			ee::ImageSymbol* image = new ee::ImageSymbol(images[part->tex], texfilenames[part->tex]);
+			ee::Rect r;
 			r.xmin = part->xmin;
 			r.xmax = part->xmax;
 			r.ymin = part->ymin;
 			r.ymax = part->ymax;
 			image->SetRegion(r);
 
-			d2d::Sprite* sprite = new d2d::ImageSprite(image);
+			ee::Sprite* sprite = new ee::ImageSprite(image);
 			part->transform(sprite);
 			symbol->m_sprites.push_back(sprite);
 		}
@@ -535,21 +535,21 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 			// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
 
 			Animation::Item* item = ani->frames[i][j];
-			d2d::Sprite* sprite = NULL;
+			ee::Sprite* sprite = NULL;
 			std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 			if (itr != m_mapPictures.end())
 			{
-				std::map<int, d2d::Symbol*>::iterator itr 
+				std::map<int, ee::Symbol*>::iterator itr 
 					= m_mapSymbols.find(ani->component[item->index]);
 				assert(itr != m_mapSymbols.end());
-				sprite = d2d::SpriteFactory::Instance()->Create(itr->second);
+				sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 			}
 			else
 			{
-				std::map<int, d2d::Symbol*>::iterator itr 
+				std::map<int, ee::Symbol*>::iterator itr 
 					= m_mapSymbols.find(ani->component[item->index]);
 				assert(itr != m_mapSymbols.end());
-				sprite = d2d::SpriteFactory::Instance()->Create(itr->second);
+				sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 			}
 			item->transform(sprite);
 			frame->sprites.push_back(sprite);
@@ -574,21 +574,21 @@ void ParserLuaFile::transAniToComplexMemory(int id, Animation* ani)
 		// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
 
 		Animation::Item* item = ani->frames[0][i];
-		d2d::Sprite* sprite = NULL;
+		ee::Sprite* sprite = NULL;
 		std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 		if (itr != m_mapPictures.end())
 		{
-			std::map<int, d2d::Symbol*>::iterator itr 
+			std::map<int, ee::Symbol*>::iterator itr 
 				= m_mapSymbols.find(ani->component[item->index]);
 			assert(itr != m_mapSymbols.end());
-			sprite = d2d::SpriteFactory::Instance()->Create(itr->second);
+			sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 		}
 		else
 		{
-			std::map<int, d2d::Symbol*>::iterator itr 
+			std::map<int, ee::Symbol*>::iterator itr 
 				= m_mapSymbols.find(ani->component[item->index]);
 			assert(itr != m_mapSymbols.end());
-			sprite = d2d::SpriteFactory::Instance()->Create(itr->second);
+			sprite = ee::SpriteFactory::Instance()->Create(itr->second);
 		}
 		item->transform(sprite);
 		symbol->m_sprites.push_back(sprite);
@@ -624,7 +624,7 @@ void ParserLuaFile::Picture::Part::init()
 	filename = ss.str();
 }
 
-void ParserLuaFile::Picture::Part::transform(d2d::Sprite* sprite) const
+void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 {
 	bool xMirror = false, yMirror = false;
 	float angle = 0;
@@ -636,20 +636,20 @@ void ParserLuaFile::Picture::Part::transform(d2d::Sprite* sprite) const
 		buf.insert(dst[i].y);
 	}
 	float pre_rotate = 0;
-	d2d::Vector _dst[4];
-	memcpy(&_dst[0].x, &dst[0].x, sizeof(d2d::Vector)*4);
+	ee::Vector _dst[4];
+	memcpy(&_dst[0].x, &dst[0].x, sizeof(ee::Vector)*4);
 	if (buf.size() != 4)
 	{
-		d2d::Vector center(0, 0);
+		ee::Vector center(0, 0);
 		for (int i = 0; i < 4; ++i) {
 			center += dst[i];
 		}
 		center /= 4;
 
-		d2d::Vector other = (dst[0] + dst[1]) * 0.5f;
-		float angle = d2d::Math2D::GetLineAngle(center, other);
+		ee::Vector other = (dst[0] + dst[1]) * 0.5f;
+		float angle = ee::Math2D::GetLineAngle(center, other);
 		for (int i = 0; i < 4; ++i) {
-			_dst[i] = center + d2d::Math2D::RotateVector(dst[i] - center, -angle);
+			_dst[i] = center + ee::Math2D::RotateVector(dst[i] - center, -angle);
 		}
 		pre_rotate = -angle;
 	}
@@ -664,7 +664,7 @@ void ParserLuaFile::Picture::Part::transform(d2d::Sprite* sprite) const
 	else if (mode == "0321")
 	{
 		yMirror = true;
-		angle = -d2d::PI * 0.5f;
+		angle = -ee::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "1032")
@@ -673,31 +673,31 @@ void ParserLuaFile::Picture::Part::transform(d2d::Sprite* sprite) const
 	}
 	else if (mode == "1230")
 	{
-		angle = -d2d::PI * 0.5f;
+		angle = -ee::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "2103")
 	{
 		xMirror = true;
-		angle = -d2d::PI * 0.5f;
+		angle = -ee::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "2301")
 	{
-		angle = d2d::PI;
+		angle = ee::PI;
 	}
 	else if (mode == "3012")
 	{
-		angle = d2d::PI * 0.5f;
+		angle = ee::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "3210")
 	{
 		xMirror = true;
-		angle = d2d::PI;
+		angle = ee::PI;
 	}
 
-	d2d::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
+	ee::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
 		dcenter = (_dst[0] + _dst[1] + _dst[2] + _dst[3]) * 0.25f;
 	float sw = fabs(src[0].x - scenter.x), sh = fabs(src[0].y - scenter.y);
 	float dw = fabs(_dst[0].x - dcenter.x), dh = fabs(_dst[0].y - dcenter.y);
@@ -713,17 +713,17 @@ void ParserLuaFile::Picture::Part::transform(d2d::Sprite* sprite) const
 		sx = dw / 16.0f / sw;
 		sy = dh / 16.0f / sh;
 	}
-	sprite->SetScale(d2d::Vector(sx, sy));
+	sprite->SetScale(ee::Vector(sx, sy));
 
 	sprite->SetMirror(xMirror, yMirror);
 	angle = -angle;
-	sprite->SetTransform(d2d::Vector(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
+	sprite->SetTransform(ee::Vector(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
 }
 
-std::string ParserLuaFile::Picture::Part::dstMode(const d2d::Vector _dst[4]) const
+std::string ParserLuaFile::Picture::Part::dstMode(const ee::Vector _dst[4]) const
 {
 	int sm[4], dm[4];
-	d2d::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
+	ee::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
 		dcenter = (_dst[0] + _dst[1] + _dst[2] + _dst[3]) * 0.25f;
 	for (int i = 0; i < 4; ++i)
 		sm[i] = nodeMode(scenter, src[i]);
@@ -736,7 +736,7 @@ std::string ParserLuaFile::Picture::Part::dstMode(const d2d::Vector _dst[4]) con
 	return ss.str();
 }
 
-int ParserLuaFile::Picture::Part::nodeMode(const d2d::Vector& center, const d2d::Vector& node)
+int ParserLuaFile::Picture::Part::nodeMode(const ee::Vector& center, const ee::Vector& node)
 {
 	if (node.x < center.x)
 	{
@@ -763,7 +763,7 @@ int ParserLuaFile::Picture::Part::findInMode(int mode[4], int query)
 	return -1;
 }
 
-void ParserLuaFile::Animation::Item::transform(d2d::Sprite* sprite) const
+void ParserLuaFile::Animation::Item::transform(ee::Sprite* sprite) const
 {
 	bool valid = false;
 	for (int i = 0; i < 6; ++i)
@@ -777,19 +777,19 @@ void ParserLuaFile::Animation::Item::transform(d2d::Sprite* sprite) const
 
 	if (is_full && valid)
 	{
-		sprite->color.multi = d2d::TransColor(color, d2d::PT_BGRA);
-		sprite->color.add = d2d::TransColor(add, d2d::PT_ABGR);
+		sprite->color.multi = ee::TransColor(color, ee::PT_BGRA);
+		sprite->color.add = ee::TransColor(add, ee::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;
 		float ang1, ang2;
 		if (mat[0] == 0) {
-			ang1 = d2d::PI * 0.5f;
+			ang1 = ee::PI * 0.5f;
 		} else {
 			ang1 = atan(-(float)mat[2]/mat[0]);
 		}
 		if (mat[3] == 0) {
-			ang2 = d2d::PI * 0.5f;
+			ang2 = ee::PI * 0.5f;
 		} else {
 			ang2 = atan((float)mat[1]/mat[3]);
 		}
@@ -824,10 +824,10 @@ void ParserLuaFile::Animation::Item::transform(d2d::Sprite* sprite) const
 		angle = -angle;
 
 		sprite->Rotate(angle);
-		sprite->Translate(d2d::Vector(x, y));
-		const d2d::Vector& scale = sprite->GetScale();
-		sprite->SetScale(d2d::Vector(scale.x * sx, scale.y * sy));
-		sprite->SetShear(d2d::Vector(kx, ky));
+		sprite->Translate(ee::Vector(x, y));
+		const ee::Vector& scale = sprite->GetScale();
+		sprite->SetScale(ee::Vector(scale.x * sx, scale.y * sy));
+		sprite->SetShear(ee::Vector(kx, ky));
 	}
 }
 

@@ -4,13 +4,13 @@
 
 #include "BehaviorDefs.h"
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class Actor;
 
-	class Behavior : public d2d::ICloneable
+	class Behavior : public ee::ICloneable
 	{
 	public:
 		Behavior(BehaviorType type, Actor* actor, int order = 0) 
@@ -22,7 +22,7 @@ namespace ebuilder
 		//
 		virtual Behavior* clone() const { return NULL; }
 
-		virtual void update(const d2d::LibraryList& list) {}
+		virtual void update(const ee::LibraryList& list) {}
 
 		const BehaviorType& type() const {
 			return m_type;
@@ -65,10 +65,10 @@ namespace ebuilder
 		}; // Cmp
 
 	protected:
-		static bool isSymbolInList(const d2d::ISymbol* symbol,
-			const d2d::LibraryList& list) {
+		static bool isSymbolInList(const ee::ISymbol* symbol,
+			const ee::LibraryList& list) {
 				int index = 0;
-				d2d::ISymbol* s = list.getSymbol(index);
+				ee::ISymbol* s = list.getSymbol(index);
 				while (s) {
 					if (symbol == s)
 						return true;

@@ -190,6 +190,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\ej_sprite.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ej_sprite.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\matrix.c"
 			>
 		</File>
@@ -203,14 +211,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\shader.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\sprite.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\sprite.h"
 			>
 		</File>
 		<File

@@ -3,7 +3,7 @@
 
 #include <wx/wx.h>
 #include <json/json.h>
-#include <drag2d.h>
+
 #include <rapidxml.hpp>
 
 namespace eanim
@@ -31,21 +31,21 @@ private:
 		const std::string& dir);
 	static KeyFrame* LoadFrame(Layer* layer, const Json::Value& frameValue,
 		const std::string& dir);
-	static d2d::Sprite* LoadActor(const Json::Value& actorValue,
+	static ee::Sprite* LoadActor(const Json::Value& actorValue,
 		const std::string& dir);
 	static void LoadSkeleton(const Json::Value& skeletonValue, 
-		const std::vector<d2d::Sprite*>& sprites, SkeletonData& skeleton);
+		const std::vector<ee::Sprite*>& sprites, SkeletonData& skeleton);
 
 	static Layer* LoadLayer(rapidxml::xml_node<>* layerNode, 
 		const std::map<std::string, std::string>& mapNamePath);
 	static KeyFrame* LoadFrame(Layer* layer, rapidxml::xml_node<>* frameNode,
 		const std::map<std::string, std::string>& mapNamePath);
-	static d2d::Sprite* LoadActor(rapidxml::xml_node<>* actorNode,
+	static ee::Sprite* LoadActor(rapidxml::xml_node<>* actorNode,
 		const std::map<std::string, std::string>& mapNamePath);
 
 	static Json::Value StoreLayer(Layer* layer, const std::string& dir, bool single);
 	static Json::Value StoreFrame(KeyFrame* frame, const std::string& dir, bool single);
-	static Json::Value StoreActor(const d2d::Sprite* sprite, const std::string& dir, bool single);
+	static Json::Value StoreActor(const ee::Sprite* sprite, const std::string& dir, bool single);
 	static Json::Value StoreSkeleton(const SkeletonData& skeleton);
 
 private:

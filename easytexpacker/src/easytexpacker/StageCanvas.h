@@ -1,14 +1,14 @@
 #ifndef _EASYTEXPACKER_STAGE_CANVAS_H_
 #define _EASYTEXPACKER_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
@@ -22,7 +22,7 @@ private:
 private:
 	StagePanel* m_stage_panel;
 
-	d2d::MultiSpritesImpl* m_stage_impl;
+	ee::MultiSpritesImpl* m_stage_impl;
 
 }; // StageCanvas
 

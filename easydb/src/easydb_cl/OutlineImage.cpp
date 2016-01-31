@@ -1,7 +1,7 @@
 #include "OutlineImage.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 #include <easyimage.h>
 
 namespace edb
@@ -35,19 +35,19 @@ void OutlineImage::Run(int argc, char *argv[])
 void OutlineImage::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
+		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		d2d::Image* image = d2d::ImageMgr::Instance()->GetItem(filepath);
+		ee::Image* image = ee::ImageMgr::Instance()->GetItem(filepath);
 
 		eimage::ExtractOutlineRaw raw(*image);
 		raw.CreateBorderLineAndMerge();
@@ -55,19 +55,19 @@ void OutlineImage::Trigger(const std::string& dir) const
 		fine.Trigger(0.04f, 0.2f);
 
 		Json::Value value;
-		d2d::Vector offset(-0.5f*image->GetOriginWidth(), -0.5f*image->GetOriginHeight());
-		std::vector<d2d::Vector> vertices(fine.GetResult());
+		ee::Vector offset(-0.5f*image->GetOriginWidth(), -0.5f*image->GetOriginHeight());
+		std::vector<ee::Vector> vertices(fine.GetResult());
 
 		float src_area = image->GetClippedWidth() * image->GetClippedHeight();
-		float dst_area = d2d::Math2D::GetPolygonArea(vertices);
+		float dst_area = ee::Math2D::GetPolygonArea(vertices);
 		if (dst_area < src_area * 0.95f)
 		{
 			for (int i = 0, n = vertices.size(); i < n; ++i) {
 				vertices[i] += offset;
 			}
-			d2d::JsonSerializer::Store(vertices, value["normal"]);
+			ee::JsonSerializer::Store(vertices, value["normal"]);
 
-			wxString out_file = d2d::FileHelper::GetFilenameAddTag(filepath, 
+			wxString out_file = ee::FileHelper::GetFilenameAddTag(filepath, 
 				eimage::OUTLINE_FILE_TAG, "json");
 			Json::StyledStreamWriter writer;
 			std::locale::global(std::locale(""));

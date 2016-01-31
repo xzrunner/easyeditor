@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	Snapshoot() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -24,7 +24,7 @@ public:
 	static ICommand* Create() { return new Snapshoot(); }
 
 private:
-	void Run(d2d::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const;
+	void Run(ee::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const;
 
 }; // Snapshoot
 

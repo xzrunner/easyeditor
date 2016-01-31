@@ -20,7 +20,7 @@ public:
 	AnimBuilder(ExportNameSet& export_set);
 	virtual ~AnimBuilder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	const IPackNode* Create(const libanim::Symbol* symbol);
 

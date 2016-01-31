@@ -22,14 +22,14 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
 void Task::Load(const char* filepath)
 {
-	if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+	if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
 	}
@@ -47,12 +47,12 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-void Task::GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
 {
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<const d2d::Sprite>(sprites));
+	m_stage->TraverseSprites(ee::FetchAllVisitor<const ee::Sprite>(sprites));
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -102,10 +102,10 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_viewlist = new d2d::ViewlistPanel(split);
+	m_viewlist = new ee::ViewlistPanel(split);
 	m_viewlist->SetListImpl(new ViewlistListImpl(m_stage, m_stage->GetStageImpl(), m_stage));
 
-	m_grouptree = new d2d::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
+	m_grouptree = new ee::GroupTreePanel(split, m_stage, m_stage->GetKeyState());
 
 	split->SetSashGravity(0.5f);
 	split->SplitHorizontally(m_viewlist, m_grouptree);
@@ -126,8 +126,8 @@ void Task::LoadGroupTree(const char* filepath)
 	if (!value["group"].isNull()) {
 		m_grouptree->LoadFromFile(value["group"]);
 	} else {
-		std::map<std::string, std::vector<d2d::Sprite*> > map_actions;
-		std::vector<d2d::Sprite*> others;
+		std::map<std::string, std::vector<ee::Sprite*> > map_actions;
+		std::vector<ee::Sprite*> others;
 		libcoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
 		m_grouptree->InitGroups(map_actions);
 	}

@@ -27,7 +27,7 @@ UnpackNodeFactory::UnpackNodeFactory()
 {
 }
 
-void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
 {
 	std::string type = LuaDataHelper::GetStringField(L, "type");
 	int id = LuaDataHelper::GetIntField(L, "id");
@@ -46,7 +46,7 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 	} else if (type == "pannel") {
 		node = new PackClipbox(id);
 	} else {
-		throw d2d::Exception("UnpackNodeFactory::UnpackFromLua unknown type %s", type.c_str());
+		throw ee::Exception("UnpackNodeFactory::UnpackFromLua unknown type %s", type.c_str());
 	}
 
 	node->UnpackFromLua(L, images);
@@ -57,7 +57,7 @@ void UnpackNodeFactory::UnpackFromLua(lua_State* L, const std::vector<d2d::Image
 	}
 }
 
-const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images,
+const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images,
 												  const std::map<int, std::string>& map_export)
 {
 	uint16_t id;
@@ -80,7 +80,7 @@ const IPackNode* UnpackNodeFactory::UnpackFromBin(uint8_t** ptr, const std::vect
 	} else if (type == TYPE_PANNEL) {
 		node = new PackClipbox(id);
 	} else {
-		throw d2d::Exception("UnpackNodeFactory::UnpackFromBin unknown type %d", type);
+		throw ee::Exception("UnpackNodeFactory::UnpackFromBin unknown type %d", type);
 	}
 
 	node->UnpackFromBin(ptr, images);
@@ -146,7 +146,7 @@ void UnpackNodeFactory::UpdateMapName(IPackNode* node)
 		std::map<std::string, IPackNode*>::iterator itr
 			= m_map_name.find(node->export_name);
 		if (itr != m_map_name.end()) {
-			throw d2d::Exception("duplicate export name %s", node->export_name);
+			throw ee::Exception("duplicate export name %s", node->export_name);
 		} else {
 			m_map_name.insert(std::make_pair(node->export_name, node));
 		}

@@ -5,12 +5,12 @@
 
 using namespace formation;
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(PreviewCanvas, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+PreviewCanvas::PreviewCanvas(ee::EditPanel* editPanel)
+	: ee::OrthoCanvas(editPanel)
 	, m_timer(this, TIMER_ID)
 	, m_yOffset(0.0f)
 {
@@ -29,7 +29,7 @@ PreviewCanvas::~PreviewCanvas()
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
 
 	glTranslatef(-480 * 0.5f, 800 * 0.5f, 0.0f);
 
@@ -38,7 +38,7 @@ void PreviewCanvas::initGL()
 
 void PreviewCanvas::onDraw()
 {
-	Context::Instance()->stage->traverseSprites(DrawVisitor(m_yOffset, m_scale), d2d::e_visible);
+	Context::Instance()->stage->traverseSprites(DrawVisitor(m_yOffset, m_scale), ee::e_visible);
 }
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)
@@ -54,14 +54,14 @@ void PreviewCanvas::onTimer(wxTimerEvent& event)
 // class PreviewCanvas::DrawVisitor
 //////////////////////////////////////////////////////////////////////////
 
-void PreviewCanvas::DrawVisitor::visit(d2d::Object* object, bool& bFetchNext)
+void PreviewCanvas::DrawVisitor::visit(ee::Object* object, bool& bFetchNext)
 {
-	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
+	ee::ISprite* sprite = static_cast<ee::ISprite*>(object);
 
-	d2d::Vector new_pos = sprite->getPosition() * m_scale;
+	ee::Vector new_pos = sprite->getPosition() * m_scale;
 	const int tol = 100;
 	if (new_pos.y - m_yOffset < 0 + tol && new_pos.y - m_yOffset > -800 - tol)
-		d2d::SpriteDraw::drawSprite(m_scr, &sprite->getSymbol(), new_pos);
+		ee::SpriteDraw::drawSprite(m_scr, &sprite->getSymbol(), new_pos);
 
 	bFetchNext = true;
 }

@@ -1,7 +1,7 @@
 #ifndef RAIDEN_ACTOR_INFO_H
 #define RAIDEN_ACTOR_INFO_H
 
-#include <drag2d.h>
+
 
 namespace raiden
 {
@@ -11,8 +11,8 @@ namespace raiden
 
 		int speed;
 
-		const d2d::ISymbol* symbol;
-		d2d::Vector offset;
+		const ee::ISymbol* symbol;
+		ee::Vector offset;
 
 		ActorInfo();
 

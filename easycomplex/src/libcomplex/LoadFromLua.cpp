@@ -8,11 +8,11 @@ namespace ecomplex
 void LoadFromLua::Load(const Json::Value& value, const std::string& dir, 
 					   Symbol* symbol)
 {
-	std::vector<d2d::Image*> images;
-	std::string img_name = d2d::FileHelper::GetAbsolutePath(dir, value["image name"].asString());
+	std::vector<ee::Image*> images;
+	std::string img_name = ee::FileHelper::GetAbsolutePath(dir, value["image name"].asString());
 	LoadImages(img_name, images);
 
-	std::string lua_file = d2d::FileHelper::GetAbsolutePath(dir, value["lua desc"].asString());
+	std::string lua_file = ee::FileHelper::GetAbsolutePath(dir, value["lua desc"].asString());
 	librespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 
@@ -22,9 +22,9 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
 }
 
-void LoadFromLua::LoadImages(const std::string& name, std::vector<d2d::Image*>& images)
+void LoadFromLua::LoadImages(const std::string& name, std::vector<ee::Image*>& images)
 {
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool old_open_image_edge_clip = data.open_image_edge_clip;
 	data.open_image_edge_clip = false;
 	bool old_pre_multi_alpha = data.pre_multi_alpha;
@@ -33,9 +33,9 @@ void LoadFromLua::LoadImages(const std::string& name, std::vector<d2d::Image*>& 
 	int idx = 1;
 	while (true)
 	{
-		std::string filepath = name + d2d::StringHelper::ToString(idx++) + ".png";
-		if (d2d::FileHelper::IsFileExist(filepath)) {
-			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
+		std::string filepath = name + ee::StringHelper::ToString(idx++) + ".png";
+		if (ee::FileHelper::IsFileExist(filepath)) {
+			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);
 		} else {	
 			break;

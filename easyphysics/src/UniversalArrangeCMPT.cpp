@@ -7,9 +7,9 @@ namespace ephysics
 {
 
 UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
-										   d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
-										   d2d::PropertySettingPanel* propertyPanel)
-	: AbstractEditCMPT(parent, name, stage)
+										   ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
+										   ee::PropertySettingPanel* propertyPanel)
+	: EditCMPT(parent, name, stage)
 	, m_spritesImpl(spritesImpl)
 {
 	m_editOP = new UniversalArrangeOP(stage_wnd, stage, spritesImpl, propertyPanel, this);
@@ -17,7 +17,7 @@ UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const wxString& nam
 
 void UniversalArrangeCMPT::updateControlValue()
 {
-	d2d::SpriteSelection* selection = m_spritesImpl->GetSpriteSelection();
+	ee::SpriteSelection* selection = m_spritesImpl->GetSpriteSelection();
 	if (!selection->IsEmpty())
 	{
 		GetPhysicsStaticVisitor visitor;
@@ -47,7 +47,7 @@ void UniversalArrangeCMPT::addPhysicsEditOP(b2World* world, b2Body* ground)
 	op->addPhysicsEditOP(world, ground);
 }
 
-wxSizer* UniversalArrangeCMPT::initLayout()
+wxSizer* UniversalArrangeCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -61,10 +61,10 @@ wxSizer* UniversalArrangeCMPT::initLayout()
 
 void UniversalArrangeCMPT::onChangeStaticType(wxCommandEvent& event)
 {
-	d2d::SpriteSelection* selection = m_spritesImpl->GetSpriteSelection();
+	ee::SpriteSelection* selection = m_spritesImpl->GetSpriteSelection();
 	if (!selection->IsEmpty())
 		selection->Traverse(SetPhysicsStaticVisitor(event.IsChecked()));
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -78,9 +78,9 @@ GetPhysicsStaticVisitor()
 }
 
 void UniversalArrangeCMPT::GetPhysicsStaticVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
 	if (!body) {
 		next = true;
@@ -112,9 +112,9 @@ SetPhysicsStaticVisitor(bool bChecked)
 }
 
 void UniversalArrangeCMPT::SetPhysicsStaticVisitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
 	if (body) {
 		body->getBody()->SetType(m_bChecked ? b2_staticBody : b2_dynamicBody);

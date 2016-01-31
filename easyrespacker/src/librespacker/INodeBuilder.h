@@ -10,7 +10,7 @@ class INodeBuilder
 {
 public:
 	virtual ~INodeBuilder() {}
-	virtual void Traverse(d2d::Visitor& visitor) const = 0;
+	virtual void Traverse(ee::Visitor& visitor) const = 0;
 }; // INodeBuilder
 
 }

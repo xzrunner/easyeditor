@@ -1,7 +1,7 @@
 #ifndef FORMATION_PREVIEW_DIALOG_H
 #define FORMATION_PREVIEW_DIALOG_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {

@@ -1,7 +1,7 @@
 #ifndef _LR_PREVIEW_PATH_UTIL_H_
 #define _LR_PREVIEW_PATH_UTIL_H_
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -11,7 +11,7 @@ namespace preview
 class INetwork
 {
 public:
-	virtual d2d::Vector TransIDToPos(int id) const = 0;
+	virtual ee::Vector TransIDToPos(int id) const = 0;
 
 }; // INetwork
 

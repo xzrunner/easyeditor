@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_TRANSLATE_SPRITE_STATE_H_
 #define _EASYUI_WINDOW_TRANSLATE_SPRITE_STATE_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
@@ -11,20 +11,20 @@ namespace window
 class StagePanel;
 class AnchorMgr;
 
-class TranslateSpriteState : public d2d::TranslateSpriteState
+class TranslateSpriteState : public ee::TranslateSpriteState
 {
 public:
-	TranslateSpriteState(StagePanel* stage, d2d::SpriteSelection* selection, 
-		const d2d::Vector& first_pos, AnchorMgr* anchor_mgr);
+	TranslateSpriteState(StagePanel* stage, ee::SpriteSelection* selection, 
+		const ee::Vector& first_pos, AnchorMgr* anchor_mgr);
 
-	virtual void OnMouseRelease(const d2d::Vector& pos);
+	virtual void OnMouseRelease(const ee::Vector& pos);
 
 private:
-	class Visitor : public d2d::Visitor
+	class Visitor : public ee::Visitor
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 	private:
 		AnchorMgr* m_anchor_mgr;
 	}; // Visitor

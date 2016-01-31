@@ -52,4 +52,6 @@ public:
 
 }
 
+#include "Color.inl"
+
 #endif // _EASYEDITOR_COLOR_H_

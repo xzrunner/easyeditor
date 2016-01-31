@@ -10,7 +10,7 @@
 namespace lr
 {
 
-RightPopupMenu::RightPopupMenu(d2d::LibraryPanel* library, StagePanel* stage)
+RightPopupMenu::RightPopupMenu(ee::LibraryPanel* library, StagePanel* stage)
 	: m_library(library)
 	, m_stage(stage)
 	, m_sprite(NULL)
@@ -19,10 +19,10 @@ RightPopupMenu::RightPopupMenu(d2d::LibraryPanel* library, StagePanel* stage)
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
-	d2d::SpriteSelection* selection = m_stage->GetSpriteSelection();
+	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
 	if (selection->Size() == 1) {
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-		selection->Traverse(d2d::PointQueryVisitor(pos, &m_sprite));
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+		selection->Traverse(ee::PointQueryVisitor(pos, &m_sprite));
 		CreateShapeMenu(menu);
 		CreateAnimMenu(menu);
 		CreateLayerTagMenu(menu);
@@ -111,7 +111,7 @@ void RightPopupMenu::CreateLayerTagMenu(wxMenu& menu)
 void RightPopupMenu::CreateLayerMoveMenu(wxMenu& menu)
 {
 	Layer* layer = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
-	const std::vector<d2d::Layer*>& layers = layer->GetLayerMgr()->GetAllLayers();
+	const std::vector<ee::Layer*>& layers = layer->GetLayerMgr()->GetAllLayers();
 	wxMenu* sub_menu = new wxMenu;
 	for (int i = 0, n = layers.size(); i < n; ++i) {
 		int id = MENU_MOVE_TO_LAYER_BEGIN_ID + i;
@@ -123,8 +123,8 @@ void RightPopupMenu::CreateLayerMoveMenu(wxMenu& menu)
 
 void RightPopupMenu::HandleShapeMenu(int id)
 {
-	std::vector<d2d::Sprite*> selected;
-	m_stage->GetSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(selected));
+	std::vector<ee::Sprite*> selected;
+	m_stage->GetSpriteSelection()->Traverse(ee::FetchAllVisitor<ee::Sprite>(selected));
 	if (!selected.empty()) {
 		std::string cmd = "easyshape_new.exe " + selected[0]->GetSymbol().GetFilepath();
 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
@@ -149,7 +149,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 		if (dir == 0) { dir = 8; }
 		else if (dir == 9) { dir = 1; }
 
-		d2d::Symbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
+		ee::Symbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
 		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 
 
@@ -163,7 +163,7 @@ void RightPopupMenu::HandleAnimMenu(int id)
 	{
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(item.GetFilepath());
 		static_cast<ecomplex::Sprite*>(m_sprite)->SetSymbol(symbol);
 	}
 }
@@ -180,10 +180,10 @@ void RightPopupMenu::HandleLayerTagMenu(int id)
 
 	if (id == MENU_COVER_LAYER_TAG_ID) {
 		m_sprite->tag += std::string(COVER_LAYER_TAG) + ";";
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	} else if (id == MENU_TOP_LAYER_TAG_ID) {
 		m_sprite->tag += std::string(TOP_LAYER_TAG) + ";";
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
@@ -191,13 +191,13 @@ void RightPopupMenu::HandleMoveToLayerMenu(int id)
 {
 	int idx = id - MENU_MOVE_TO_LAYER_BEGIN_ID;	
 	Layer* from = static_cast<LibraryPage*>(m_library->GetCurrPage())->GetLayer();
-	d2d::Layer* to = from->GetLayerMgr()->GetLayer(idx);
+	ee::Layer* to = from->GetLayerMgr()->GetLayer(idx);
 	
-	d2d::SpriteSelection* selection = m_stage->GetSpriteSelection();
-	std::vector<d2d::Sprite*> sprites;
-	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	ee::SpriteSelection* selection = m_stage->GetSpriteSelection();
+	std::vector<ee::Sprite*> sprites;
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = sprites[i];
+		ee::Sprite* spr = sprites[i];
 		from->RemoveSprite(spr);
 		to->Insert(spr);
 	}
@@ -209,9 +209,9 @@ void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 
 	CharacterFileName name(filepath);
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files, d2d::FileType::e_complex);
+	ee::FileHelper::FetchAllFiles(dir, files, ee::FileType::e_complex);
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{

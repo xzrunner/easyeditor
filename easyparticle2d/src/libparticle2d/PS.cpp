@@ -1,7 +1,7 @@
 #include "PS.h"
 #include "ParticleSystem.h"
 
-#include <drag2d.h>
+
 
 #include <ps_2d.h>
 
@@ -43,9 +43,9 @@ static void
 render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
             struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
 {
-	d2d::Matrix mt;
+	ee::Matrix mt;
 	if (ud) {
-		mt = *(d2d::Matrix*)ud;
+		mt = *(ee::Matrix*)ud;
 	} else {
 		float* m = (float*)mt.GetElements();
 		m[0] = mat[0];
@@ -56,12 +56,12 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 		m[13] = mat[5];		
 	}
 
-	d2d::Symbol* sym = static_cast<d2d::Symbol*>(symbol);
-	d2d::ColorTrans color;
+	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
+	ee::ColorTrans color;
 	memcpy(&color.multi, mul_col, sizeof(*mul_col));
 	memcpy(&color.add, add_col, sizeof(*add_col));
 
-	d2d::SpriteRenderer::Instance()->Draw(sym, mt, d2d::Vector(x, y), angle, scale, scale, 0, 0, color);
+	ee::SpriteRenderer::Instance()->Draw(sym, mt, ee::Vector(x, y), angle, scale, scale, 0, 0, color);
 }
 
 void PS::Init()

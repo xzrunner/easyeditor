@@ -20,7 +20,7 @@ public:
 	Particle3DBuilder();
 	virtual ~Particle3DBuilder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	const IPackNode* Create(const eparticle3d::Symbol* symbol, P3dSprBuilder* spr_builder);
 

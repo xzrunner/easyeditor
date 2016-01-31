@@ -10,11 +10,11 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::Symbol(s)
+	: ee::Symbol(s)
 {
 	m_shapes.reserve(s.m_shapes.size());
 	for (int i = 0, n = s.m_shapes.size(); i < n; ++i) {
-		d2d::Shape* shape = s.m_shapes[i];
+		ee::Shape* shape = s.m_shapes[i];
 		m_shapes.push_back(shape);
 		shape->Retain();
 	}
@@ -37,19 +37,19 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->SetSpriteColor(color);
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
 		m_shapes[i]->Draw(mt, color);
 	}
 }
 
-d2d::Rect Symbol::GetSize(const d2d::Sprite* sprite) const
+ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 {
-	d2d::Rect rect;
+	ee::Rect rect;
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
 		rect.Combine(m_shapes[i]->GetRect());
 	}
@@ -68,12 +68,12 @@ void Symbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(m_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 
 	int i = 0;
 	Json::Value shape_val = value["shapes"][i++];
 	while (!shape_val.isNull()) {
-		d2d::Shape* shape = libshape::FileIO::LoadShape(dir, shape_val);
+		ee::Shape* shape = libshape::FileIO::LoadShape(dir, shape_val);
 		m_shapes.push_back(shape);
 		shape_val = value["shapes"][i++];
 	}

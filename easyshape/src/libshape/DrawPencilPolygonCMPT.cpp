@@ -5,8 +5,8 @@ namespace libshape
 {
 
 DrawPencilPolygonCMPT::DrawPencilPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
-											 d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl)
-	: d2d::OneFloatValueCMPT(parent, name, stage, "Simplify", 0, 100, 30, 0.1f)
+											 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl)
+	: ee::OneFloatValueCMPT(parent, name, stage, "Simplify", 0, 100, 30, 0.1f)
 {
 	m_editOP = new DrawPencilPolygonOP(stage_wnd, stage, shapesImpl, this, this); 
 }
@@ -27,9 +27,9 @@ void DrawPencilPolygonCMPT::SetSelection(const std::string& type)
 	}
 }
 
-wxSizer* DrawPencilPolygonCMPT::initLayout()
+wxSizer* DrawPencilPolygonCMPT::InitLayout()
 {
-	wxSizer* sizer = d2d::OneFloatValueCMPT::initLayout();
+	wxSizer* sizer = ee::OneFloatValueCMPT::InitLayout();
 
 	sizer->AddSpacer(10);
 

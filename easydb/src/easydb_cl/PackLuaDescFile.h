@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 #include <easycoco.h>
 
 namespace edb
@@ -16,7 +16,7 @@ public:
 	virtual ~PackLuaDescFile();
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -34,7 +34,7 @@ private:
 		const std::string& tp_dir);
 
 private:
-	std::vector<const d2d::Symbol*> m_symbols;
+	std::vector<const ee::Symbol*> m_symbols;
 
 	libcoco::epd::TextureMgr m_tex_mgr;
 

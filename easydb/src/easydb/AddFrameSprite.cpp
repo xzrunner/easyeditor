@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -36,22 +36,22 @@ void AddFrameSprite::Run(int argc, char *argv[])
 void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_path) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxString filename = files[i];
-		if (!d2d::FileType::IsType(filename, d2d::FileType::e_anim)) {
+		if (!ee::FileType::IsType(filename, ee::FileType::e_anim)) {
 			continue;
 		}
 
 		wxString json_file = filename;
 
-		d2d::NullSymbol symbol("");
-		d2d::NullSprite sprite(&symbol);
+		ee::NullSymbol symbol("");
+		ee::NullSprite sprite(&symbol);
 		Json::Value actor_val;
 		sprite.Store(actor_val);
-		wxString dir = d2d::FileHelper::GetFileDir(json_file);
-		actor_val["filepath"] = d2d::FileHelper::GetRelativePath(dir, sprite_path).ToStdString();
+		wxString dir = ee::FileHelper::GetFileDir(json_file);
+		actor_val["filepath"] = ee::FileHelper::GetRelativePath(dir, sprite_path).ToStdString();
 
 		Json::Value value;
 		Json::Reader reader;

@@ -5,13 +5,13 @@
 namespace sg
 {
 
-BEGIN_EVENT_TABLE(Frame, d2d::Frame)
+BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_CHANGE_PERSPECTIVE, Frame::onChangePerspective)
 	EVT_MENU(ID_SET_BG, Frame::onSetBackground)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
-	: d2d::Frame(title, filetag)
+	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_CHANGE_PERSPECTIVE, wxT("Perspective"), wxT("Perspective"));
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
@@ -21,7 +21,7 @@ void Frame::onChangePerspective(wxCommandEvent& event)
 {
 	const StagePanel* stage = static_cast<const StagePanel*>((m_task)->GetEditPanel());
 	const_cast<StagePanel*>(stage)->SetPerspective(!stage->GetPerspective());
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Frame::onSetBackground(wxCommandEvent& event)
@@ -32,8 +32,8 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		d2d::IStageCanvas* canvas = const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}

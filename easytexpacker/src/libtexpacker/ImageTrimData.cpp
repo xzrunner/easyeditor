@@ -1,6 +1,6 @@
 #include "ImageTrimData.h"
 
-#include <drag2d.h>
+
 
 #include <json/json.h>
 #include <fstream>
@@ -34,7 +34,7 @@ void ImageTrimData::Load(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value spr_val = value[i++];
@@ -57,7 +57,7 @@ void ImageTrimData::Load(const std::string& filepath)
 		trim.bound[7] = spr_val["bound"]["up"]["tot"].asInt();
 
 		std::string file_path = dir + "\\" + spr_val["filepath"].asString();
-		file_path = d2d::FileHelper::FormatFilepathAbsolute(file_path);
+		file_path = ee::FileHelper::FormatFilepathAbsolute(file_path);
 
 		m_trim_info.insert(std::make_pair(file_path, trim));
 

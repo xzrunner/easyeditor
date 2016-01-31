@@ -3,7 +3,7 @@
 
 #include "LoadAdapter.h"
 
-#include <drag2d.h>
+
 
 namespace eparticle2d
 {
@@ -11,17 +11,17 @@ namespace eparticle2d
 class StagePanel;
 class ComponentPanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback
+class ToolbarPanel : public ee::ToolbarPanel, public ee::UICallback
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
+	ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library,
 		StagePanel* stage);
 
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
 	void Load(const Json::Value& val);
 	void Store(Json::Value& val) const;
@@ -33,7 +33,7 @@ public:
 	void OnDelChild(ComponentPanel* child);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxSizer* CreateMainLayout();
@@ -54,20 +54,20 @@ private:
 private:
 	void Clear();
 
-	void OnAddChild(wxCommandEvent& event, d2d::Symbol* symbol);
+	void OnAddChild(wxCommandEvent& event, ee::Symbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
 
 private:
 	class DropTarget : public wxTextDropTarget
 	{
 	public:
-		DropTarget(d2d::LibraryPanel* library, StagePanel* stage,
+		DropTarget(ee::LibraryPanel* library, StagePanel* stage,
 			ToolbarPanel* toolbar);
 
 		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 
 	private:
-		d2d::LibraryPanel* m_library;
+		ee::LibraryPanel* m_library;
 		StagePanel* m_stage;
 		ToolbarPanel* m_toolbar;
 
@@ -80,8 +80,8 @@ private:
 	wxCheckBox* m_loop;
 	wxCheckBox* m_local_mode_draw;
 
-	std::vector<d2d::ISliderCtrl*> m_sliders;
-	std::vector<std::vector<d2d::ISliderCtrl*> > m_mode_sliders;
+	std::vector<ee::SliderCtrl*> m_sliders;
+	std::vector<std::vector<ee::SliderCtrl*> > m_mode_sliders;
 
 	wxChoice* m_mode_choice;
 

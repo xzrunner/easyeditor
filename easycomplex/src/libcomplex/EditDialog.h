@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_EDIT_DIALOG_H_
 #define _DRAG2D_EDIT_DIALOG_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
@@ -27,10 +27,10 @@ private:
 	void LoadSymbolInfo();
 
 private:
-	d2d::LibraryPanel* m_library;
+	ee::LibraryPanel* m_library;
 	PropertySettingPanel* m_property;
 	StagePanel* m_stage;
-	d2d::ViewlistPanel* m_viewlist;
+	ee::ViewlistPanel* m_viewlist;
 
 	Symbol* m_symbol;
 

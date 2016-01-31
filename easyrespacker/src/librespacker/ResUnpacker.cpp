@@ -6,12 +6,12 @@
 namespace librespacker
 {
 
-void ResUnpacker::UnpackLua(const std::string& filepath, const std::vector<d2d::Image*>& images)
+void ResUnpacker::UnpackLua(const std::string& filepath, const std::vector<ee::Image*>& images)
 {
 	UnpackFromLua::Unpack(filepath, images);
 }
 
-void ResUnpacker::UnpackBin(const std::string& filepath, const std::vector<d2d::Image*>& images)
+void ResUnpacker::UnpackBin(const std::string& filepath, const std::vector<ee::Image*>& images)
 {
 	UnpackFromBin::Unpack(filepath, images);
 }

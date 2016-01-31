@@ -13,8 +13,8 @@ ComplexPolygonShape::ComplexPolygonShape(const ComplexPolygonShape& poly)
 {
 }
 
-ComplexPolygonShape::ComplexPolygonShape(const std::vector<d2d::Vector>& outline, 
-										 const std::vector<std::vector<d2d::Vector> >& holes)
+ComplexPolygonShape::ComplexPolygonShape(const std::vector<ee::Vector>& outline, 
+										 const std::vector<std::vector<ee::Vector> >& holes)
 	: PolygonShape(outline)
 	, m_holes(holes)
 {
@@ -22,11 +22,11 @@ ComplexPolygonShape::ComplexPolygonShape(const std::vector<d2d::Vector>& outline
 	m_material->BuildEnd();
 }
 
-bool ComplexPolygonShape::IsContain(const d2d::Vector& pos) const
+bool ComplexPolygonShape::IsContain(const ee::Vector& pos) const
 {
 	if (PolygonShape::IsContain(pos)) {
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-			if (d2d::Math2D::IsPointInArea(pos, m_holes[i])) {
+			if (ee::Math2D::IsPointInArea(pos, m_holes[i])) {
 				return false;
 			}
 		}
@@ -35,12 +35,12 @@ bool ComplexPolygonShape::IsContain(const d2d::Vector& pos) const
 	return false;
 }
 
-bool ComplexPolygonShape::IsIntersect(const d2d::Rect& rect) const
+bool ComplexPolygonShape::IsIntersect(const ee::Rect& rect) const
 {
-	return d2d::Math2D::IsPolygonIntersectRect(m_vertices, rect);
+	return ee::Math2D::IsPolygonIntersectRect(m_vertices, rect);
 }
 
-void ComplexPolygonShape::Translate(const d2d::Vector& offset)
+void ComplexPolygonShape::Translate(const ee::Vector& offset)
 {
 	PolygonShape::Translate(offset);
 
@@ -51,15 +51,15 @@ void ComplexPolygonShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void ComplexPolygonShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
+void ComplexPolygonShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	PolygonShape::Draw(mt, color);
 
-	if (d2d::SettingData::draw_poly_bound) {
+	if (ee::SettingData::draw_poly_bound) {
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-			d2d::PrimitiveDraw::DrawPolyline(mt, m_holes[i], color.multi, m_isLoop);
-			if (d2d::SettingData::ctl_pos_sz != 0) {
-				d2d::PrimitiveDraw::DrawCircles(m_holes[i], d2d::SettingData::ctl_pos_sz, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
+			ee::PrimitiveDraw::DrawPolyline(mt, m_holes[i], color.multi, m_isLoop);
+			if (ee::SettingData::ctl_pos_sz != 0) {
+				ee::PrimitiveDraw::DrawCircles(m_holes[i], ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 			}
 		}
 	} 

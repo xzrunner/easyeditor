@@ -1,7 +1,7 @@
 #ifndef _EASYCOMPLEX_FILEIO_H_
 #define _EASYCOMPLEX_FILEIO_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {

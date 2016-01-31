@@ -1,20 +1,20 @@
 #ifndef _LIBSHAPE_EDIT_BEZIER_OP_H_
 #define _LIBSHAPE_EDIT_BEZIER_OP_H_
 
-#include <drag2d.h>
+
 
 #include "NodeCapture.h"
 
 namespace libshape
 {
 
-class d2d::OneFloatValue;
+class ee::OneFloatValue;
 
-class EditBezierOP : public d2d::ZoomViewOP
+class EditBezierOP : public ee::ZoomViewOP
 {
 public:
-	EditBezierOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel, d2d::OneFloatValue* node_capture);
+	EditBezierOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+		ee::PropertySettingPanel* propertyPanel, ee::OneFloatValue* node_capture);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -27,14 +27,14 @@ public:
 	virtual bool Clear();
 
 private:
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 
-	d2d::PropertySettingPanel* m_propertyPanel;
+	ee::PropertySettingPanel* m_propertyPanel;
 
-	d2d::OneFloatValue* m_node_capture;
+	ee::OneFloatValue* m_node_capture;
 
-	d2d::Vector m_firstPress;
-	d2d::Vector m_currPos;
+	ee::Vector m_firstPress;
+	ee::Vector m_currPos;
 
 	NodeAddr m_captured;
 

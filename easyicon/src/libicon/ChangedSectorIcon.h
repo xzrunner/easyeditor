@@ -16,7 +16,7 @@ public:
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
-	virtual void GetBound(float process, d2d::Vector bound[4]) const;
+	virtual void GetBound(float process, ee::Vector bound[4]) const;
 
 private:
 	float m_min, m_max;

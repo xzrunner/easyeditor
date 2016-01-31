@@ -12,7 +12,7 @@
 using namespace ebuilder;
 
 ScenesPage::ScenesPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Scenes"))
+	: ee::ILibraryPage(parent, wxT("Scenes"))
 {
 	initLayout();
 
@@ -24,7 +24,7 @@ ScenesPage::~ScenesPage()
 	delete m_observer;
 }
 
-bool ScenesPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool ScenesPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return dynamic_cast<SceneItem*>(symbol) != NULL;
 }

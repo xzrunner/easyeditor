@@ -17,7 +17,7 @@ BEGIN_EVENT_TABLE(EditDialogSimple, wxDialog)
 END_EVENT_TABLE()
 
 EditDialogSimple::EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
-								   d2d::Sprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
+								   ee::Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
@@ -26,15 +26,15 @@ EditDialogSimple::EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
 	InitLayout(glctx, edited, sprite_impl);
 	InitEditOP(edited);
 
-	d2d::SetWndDirtySJ::Instance()->SetDirty();
+	ee::SetWndDirtySJ::Instance()->SetDirty();
 }
 
 EditDialogSimple::~EditDialogSimple()
 {
 }
 
-void EditDialogSimple::InitLayout(wxGLContext* glctx, d2d::Sprite* edited, 
-								  const d2d::MultiSpritesImpl* sprite_impl)
+void EditDialogSimple::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+								  const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -44,9 +44,9 @@ void EditDialogSimple::InitLayout(wxGLContext* glctx, d2d::Sprite* edited,
 	SetSizer(sizer);
 }
 
-void EditDialogSimple::InitEditOP(d2d::Sprite* edited)
+void EditDialogSimple::InitEditOP(ee::Sprite* edited)
 {
-	d2d::AbstractEditOP* op = NULL;
+	ee::EditOP* op = NULL;
 
 	ShapeType type = static_cast<Sprite*>(edited)->GetSymbol().GetShapeType();
 	switch (type)
@@ -59,7 +59,7 @@ void EditDialogSimple::InitEditOP(d2d::Sprite* edited)
 		break;
 	case ST_CHAIN: case ST_POLYGON:
 		op = new EditPolylineOP<DrawPolygonOP, 
-			d2d::SelectShapesOP>(m_stage, m_stage->GetStageImpl(), m_stage, NULL, new d2d::OneFloatValueStatic(5), NULL); 
+			ee::SelectShapesOP>(m_stage, m_stage->GetStageImpl(), m_stage, NULL, new ee::OneFloatValueStatic(5), NULL); 
 		break;
 	case ST_BEZIER:
 		op = new EditBezierOP(m_stage, m_stage->GetStageImpl(), m_stage, NULL, &m_capture);
@@ -76,16 +76,16 @@ void EditDialogSimple::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	d2d::Symbol& symbol = const_cast<d2d::Symbol&>(m_stage->GetSymbol());
+	ee::Symbol& symbol = const_cast<ee::Symbol&>(m_stage->GetSymbol());
 	const std::string& filepath = symbol.GetFilepath();
 
-	d2d::ConfirmDialog dlg(this);
+	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
 		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->UpdateBoundings(symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

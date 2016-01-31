@@ -1,14 +1,14 @@
 #ifndef _EASYUI_CHANGE_WINDOW_VIEW_SIZE_SJ_H_
 #define _EASYUI_CHANGE_WINDOW_VIEW_SIZE_SJ_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
 namespace window
 {
 
-class ChangeWindowViewSizeSJ : public d2d::Subject
+class ChangeWindowViewSizeSJ : public ee::Subject
 {
 public:
 	struct Params

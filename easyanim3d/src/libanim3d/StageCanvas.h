@@ -1,7 +1,7 @@
 #ifndef _EASYANIM3D_STAGE_CANVAS_H_
 #define _EASYANIM3D_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace eanim3d
@@ -12,8 +12,8 @@ class StagePanel;
 class StageCanvas : public e3d::StageCanvas
 {
 public:
-	StageCanvas(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiSpritesImpl* sprites_impl);
+	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::MultiSpritesImpl* sprites_impl);
 
 protected:
 	virtual void OnSize(int w, int h);
@@ -24,7 +24,7 @@ private:
 	void DrawSprites() const;
 
 private:
-	d2d::MultiSpritesImpl* m_sprites_impl;
+	ee::MultiSpritesImpl* m_sprites_impl;
 
 }; // StageCanvas
 

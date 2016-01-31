@@ -1,14 +1,14 @@
 #ifndef _EASYCOMPLEX_PROPERTY_SETTING_H_
 #define _EASYCOMPLEX_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
 
 class Symbol;
 
-class SymbolPropertySetting : public d2d::SymbolPropertySetting
+class SymbolPropertySetting : public ee::SymbolPropertySetting
 {
 public:
 	SymbolPropertySetting(Symbol* symbol);

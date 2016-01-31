@@ -1,17 +1,17 @@
 #ifndef _LIBSHAPE_BEZIER_PROPERTY_SETTING_H_
 #define _LIBSHAPE_BEZIER_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
 class BezierShape;
 
-class BezierPropertySetting : public d2d::IPropertySetting
+class BezierPropertySetting : public ee::PropertySetting
 {
 public:
-	BezierPropertySetting(d2d::EditPanelImpl* stage, BezierShape* bezier);
+	BezierPropertySetting(ee::EditPanelImpl* stage, BezierShape* bezier);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -20,7 +20,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanelImpl* m_stage;
+	ee::EditPanelImpl* m_stage;
 
 	BezierShape* m_bezier;
 

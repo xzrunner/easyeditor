@@ -10,7 +10,7 @@
 namespace ecomplex
 {
 
-d2d::Sprite* NodeToSprite::Trans(const librespacker::IPackNode* node)
+ee::Sprite* NodeToSprite::Trans(const librespacker::IPackNode* node)
 {
 	if (const librespacker::PackPicture* pic = dynamic_cast<const librespacker::PackPicture*>(node)) {
 		return PictureToSpr::Trans(pic);
@@ -27,7 +27,7 @@ d2d::Sprite* NodeToSprite::Trans(const librespacker::IPackNode* node)
 	} else if (const librespacker::PackClipbox* cb = dynamic_cast<const librespacker::PackClipbox*>(node)) {
 		return NULL;
 	} else {
-		throw d2d::Exception("NodeToSprite::Node2Sprite unknown type.");
+		throw ee::Exception("NodeToSprite::Node2Sprite unknown type.");
 	}
 }
 

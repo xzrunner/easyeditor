@@ -2,7 +2,7 @@
 #ifndef EBUILDER_E2D_BUILDER_H
 #define EBUILDER_E2D_BUILDER_H
 
-#include <drag2d.h>
+
 #include <easybuilder.h>
 
 #include "../CodePageBuilder.h"
@@ -58,7 +58,7 @@ namespace e2d
 		std::string buildBehavior(const std::string& sprite, Behavior* behavior,
 			SceneContent& content) const;
 
-		static void buildPosition(const d2d::Vector& pos, std::string& x, std::string& y);
+		static void buildPosition(const ee::Vector& pos, std::string& x, std::string& y);
 
 	private:
 		static const int PAGE_OFFSET = 1;	// designer page

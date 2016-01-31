@@ -9,7 +9,7 @@ namespace eparticle3d
 {
 
 Frame::Frame(const wxString& title, const wxString& filetag)
-	: d2d::Frame(title, filetag)
+	: ee::Frame(title, filetag)
 {
 }
 
@@ -18,8 +18,8 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString anim_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_anim));
-		wxString inv_filter = GetJsonFileFilter(d2d::FileType::GetTag(d2d::FileType::e_p3dinv));
+		wxString anim_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim));
+		wxString inv_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_p3dinv));
 		wxString filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
@@ -33,18 +33,18 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 			} else if (idx == 2) {
 				SaveAsInvert(filename);
 			} else {
-				throw d2d::Exception("error filepath %s", filename.ToStdString().c_str());
+				throw ee::Exception("error filepath %s", filename.ToStdString().c_str());
 			}
 		}
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
 
 void Frame::SaveAsParticle3d(const wxString& filepath) const
 {
-	wxString fixed = d2d::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
+	wxString fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }

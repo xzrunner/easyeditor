@@ -7,10 +7,10 @@ namespace eanim3d
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 {
 	wxWindow* nb = GetNotebook();
-//	AddPage(new d2d::LibraryImagePage(nb));
+//	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new LibraryPage(nb));
 }
 

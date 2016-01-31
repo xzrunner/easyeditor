@@ -32,13 +32,13 @@ void TransOldTextFile::Run(int argc, char *argv[])
 void TransOldTextFile::Run(const std::string& folder)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(folder, files);
+	ee::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			TransComplex(filepath);
 		}
 	}
@@ -54,7 +54,7 @@ void TransOldTextFile::TransComplex(const std::string& filepath) const
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FileHelper::GetFileDir(filepath);
+	wxString dir = ee::FileHelper::GetFileDir(filepath);
 
 	bool dirty = false;
 	for (int i = 0, n = value["sprite"].size(); i < n; ++i) {

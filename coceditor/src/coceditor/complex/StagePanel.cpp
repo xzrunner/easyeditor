@@ -15,7 +15,7 @@ namespace complex
 						   LibraryPanel* library,
 						   complex::Symbol* complexSymbol)
 		: EditPanel(parent, frame)
-		, d2d::MultiSpritesImpl(this)
+		, ee::MultiSpritesImpl(this)
 		, m_library(library)
 		, m_complexSymbol(complexSymbol)
 	{
@@ -32,12 +32,12 @@ namespace complex
 		
 	}
 
-	void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::TraverseType type/* = d2d::e_allExisting*/, 
+	void StagePanel::traverseSprites(ee::IVisitor& visitor, ee::TraverseType type/* = ee::e_allExisting*/, 
 		bool order/* = true*/) const
 	{
 		if (order)
 		{
-			std::vector<d2d::ISprite*>::const_iterator itr = m_complexSymbol->m_sprites.begin();
+			std::vector<ee::ISprite*>::const_iterator itr = m_complexSymbol->m_sprites.begin();
 			for ( ; itr != m_complexSymbol->m_sprites.end(); ++itr)
 			{
 				bool hasNext;
@@ -47,7 +47,7 @@ namespace complex
 		}
 		else
 		{
-			std::vector<d2d::ISprite*>::const_reverse_iterator itr = m_complexSymbol->m_sprites.rbegin();
+			std::vector<ee::ISprite*>::const_reverse_iterator itr = m_complexSymbol->m_sprites.rbegin();
 			for ( ; itr != m_complexSymbol->m_sprites.rend(); ++itr)
 			{
 				bool hasNext;
@@ -57,15 +57,15 @@ namespace complex
 		}
 	}
 
-	void StagePanel::insertSprite(d2d::ISprite* sprite)
+	void StagePanel::insertSprite(ee::ISprite* sprite)
 	{
 		m_complexSymbol->m_sprites.push_back(sprite);
 		Refresh();
 	}
 
-	void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+	void StagePanel::resetSpriteOrder(ee::ISprite* sprite, bool up)
 	{
-//		d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
+//		ee::SpritesPanelImpl::resetSpriteOrder(sprite, up);
 	}
 
 // 	void StagePanel::onDraw()
@@ -85,9 +85,9 @@ namespace complex
 		wxString filepath = m_complexSymbol->getFilepath();
 		if (filepath.empty())
 		{
-			std::string ext = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
+			std::string ext = ee::FileNameParser::getFileTag(ee::FileNameParser::e_complex);
 			ext = "_" + ext + ".json";
-			filepath = d2d::Context::Instance()->getDir() + "\\" + m_complexSymbol->getName() + ext;
+			filepath = ee::Context::Instance()->getDir() + "\\" + m_complexSymbol->getName() + ext;
 		}
 
 		FileIO::store(filepath, m_complexSymbol);
@@ -113,16 +113,16 @@ namespace complex
  		long index;
  		sIndex.ToLong(&index);
  
-		d2d::ISymbol* symbol = NULL;
+		ee::ISymbol* symbol = NULL;
 		if (sType == "symbol")
-			symbol = static_cast<d2d::ISymbol*>(m_library->getImagePage()->getSymbol(index));
+			symbol = static_cast<ee::ISymbol*>(m_library->getImagePage()->getSymbol(index));
 		else if (sType == "complex")
-			symbol = static_cast<d2d::ISymbol*>(m_library->getComplexPage()->getSymbol(index));
+			symbol = static_cast<ee::ISymbol*>(m_library->getComplexPage()->getSymbol(index));
 
 		if (symbol)
 		{
-			d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+			ee::ISprite* sprite = ee::SpriteFactory::Instance()->create(symbol);
 			sprite->translate(pos);
 			m_stage->insertSprite(sprite);
 		}

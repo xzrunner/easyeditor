@@ -22,7 +22,7 @@ void LogViewer::Add(const std::string& msg)
 
 void LogViewer::Draw() const
 {
-	//d2d::Matrix t;
+	//ee::Matrix t;
 	//for (int i = 0, n = m_log.size(); i < n; ++i)
 	//{
 	//	etext::GTxt::Instance()->Draw(t, m_log[i]);

@@ -1,16 +1,16 @@
 #ifndef _ESHADER_SELECT_SPRITES_OP_H_
 #define _ESHADER_SELECT_SPRITES_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eshader
 {
 
-class SelectSpritesOP : public d2d::SelectSpritesOP
+class SelectSpritesOP : public ee::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiSpritesImpl* spritesImpl, d2d::AbstractEditCMPT* callback = NULL);
+	SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::MultiSpritesImpl* spritesImpl, ee::EditCMPT* callback = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 

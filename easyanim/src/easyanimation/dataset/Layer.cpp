@@ -12,7 +12,7 @@ Layer::Layer()
 	: m_sprite_observer(*this)
 {
 	static int count = 0;
-	m_name = "Layer" + d2d::StringHelper::ToString(count++);
+	m_name = "Layer" + ee::StringHelper::ToString(count++);
 
 	m_editable = m_visible = true;
 }
@@ -27,7 +27,7 @@ bool Layer::IsKeyFrame(int time) const
 	return m_frames.find(time) != m_frames.end();
 }
 
-d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
+ee::AtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 {
 	if (begin > end || begin < 1 || end < 1) {
 		return NULL;

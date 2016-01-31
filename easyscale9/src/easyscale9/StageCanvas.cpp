@@ -9,7 +9,7 @@ namespace escale9
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 	, m_toolbar(NULL)
 {
@@ -24,17 +24,17 @@ void StageCanvas::OnDrawSprites() const
 	if (m_toolbar->isComposeOP())
 	{
 		ComposeGrids::Draw();
-		d2d::Rect sr = m_screen.GetRegion();
-		m_stage_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-			d2d::DT_VISIBLE);
+		ee::Rect sr = m_screen.GetRegion();
+		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+			ee::DT_VISIBLE);
 	}
 	else
 	{
-		d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, d2d::LIGHT_GREY_LINE);
+		ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, ee::LIGHT_GREY_LINE);
 
-		d2d::Symbol* symbol = m_stage_panel->getPatchSymbol();
+		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)
-			symbol->Draw(d2d::Matrix());
+			symbol->Draw(ee::Matrix());
 	}
 	m_stage_panel->DrawEditOP();
 }

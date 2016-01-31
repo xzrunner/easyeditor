@@ -8,12 +8,12 @@ namespace eanim
 {
 
 SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, bool vertical)
-	: d2d::AbstractEditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 {
 	m_editOP = new SkeletonOP(ViewMgr::Instance()->stage, ViewMgr::Instance()->property);
 }
 
-wxSizer* SkeletonCMPT::initLayout()
+wxSizer* SkeletonCMPT::InitLayout()
 {
 	return NULL;
 }

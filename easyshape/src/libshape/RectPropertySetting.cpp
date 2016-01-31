@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-RectPropertySetting::RectPropertySetting(d2d::EditPanelImpl* stage, 
+RectPropertySetting::RectPropertySetting(ee::EditPanelImpl* stage, 
 										 RectShape* rect)
-	: d2d::IPropertySetting("Rect")
+	: ee::PropertySetting("Rect")
 	, m_stage(stage)
 	, m_rect(rect)
 {
@@ -56,7 +56,7 @@ void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

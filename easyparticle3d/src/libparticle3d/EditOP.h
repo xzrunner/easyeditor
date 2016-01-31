@@ -1,14 +1,14 @@
 #ifndef _EASYPARTICLE3D_EDIT_OP_H_
 #define _EASYPARTICLE3D_EDIT_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
 
 class StagePanel;
 
-class EditOP : public d2d::ZoomViewOP
+class EditOP : public ee::ZoomViewOP
 {
 public:
 	EditOP(StagePanel* stage);

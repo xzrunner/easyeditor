@@ -1,6 +1,6 @@
 #include "PackageMgr.h"
 
-#include <drag2d.h>
+
 #include <dtex.h>
 
 namespace eejoy2d
@@ -50,7 +50,7 @@ dtex_package* PackageMgr::Fetch(const std::string& filepath)
 void PackageMgr::Remove(const std::string& filepath)
 {
 	std::string lowerpath = filepath;
-	d2d::StringHelper::ToLower(lowerpath);
+	ee::StringHelper::ToLower(lowerpath);
 	std::map<std::string, dtex_package*>::iterator itr = m_pkgs.find(lowerpath);
 	if (itr != m_pkgs.end()) {
 		m_pkgs.erase(itr);

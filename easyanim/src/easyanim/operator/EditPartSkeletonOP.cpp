@@ -4,8 +4,8 @@
 namespace eanim
 {
 
-EditPartSkeletonOP::EditPartSkeletonOP(d2d::EditPanel* editPanel, PartSkeleton* skeleton)
-	: d2d::ZoomViewOP(editPanel, false)
+EditPartSkeletonOP::EditPartSkeletonOP(ee::EditPanel* editPanel, PartSkeleton* skeleton)
+	: ee::ZoomViewOP(editPanel, false)
 {
 	m_skeleton = skeleton;
 	m_selectedJoint = NULL;
@@ -16,7 +16,7 @@ bool EditPartSkeletonOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	m_selectedJoint = m_skeleton->queryJointByPos(pos);
 	if (!m_selectedJoint) 
 	{
@@ -44,13 +44,13 @@ bool EditPartSkeletonOP::onMouseDrag(int x, int y)
 
 	if (m_selectedJoint)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		m_skeleton->translateJoint(m_selectedJoint, pos);
 		m_editPanel->Refresh();
 	}
 	else if (m_selectedNode)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		m_skeleton->translateNode(m_selectedNode, pos);
 		m_editPanel->Refresh();
 	}

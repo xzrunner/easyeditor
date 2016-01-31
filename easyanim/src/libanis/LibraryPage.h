@@ -1,17 +1,17 @@
 #ifndef _LIBANIS_LIBRARY_PAGE_H_
 #define _LIBANIS_LIBRARY_PAGE_H_
 
-#include <drag2d.h>
+
 
 namespace libanis
 {
 
-class LibraryPage : public d2d::ILibraryPage
+class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(wxWindow* parent);
 
-	virtual bool IsHandleSymbol(d2d::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
 
 protected:
 	virtual void OnAddPress(wxCommandEvent& event);

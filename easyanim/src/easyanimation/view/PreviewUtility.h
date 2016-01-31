@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_PREVIEW_UTILITY_H_
 #define _EASYANIM_PREVIEW_UTILITY_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -9,7 +9,7 @@ namespace eanim
 class PreviewUtility
 {
 public:
-	static void GetCurrSprites(const d2d::PlayControl& ctrl, std::vector<d2d::Sprite*>& sprites);
+	static void GetCurrSprites(const ee::PlayControl& ctrl, std::vector<ee::Sprite*>& sprites);
 
 }; // PreviewUtility
 

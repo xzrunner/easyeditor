@@ -1,7 +1,7 @@
 #ifndef _LR_TASK_H_
 #define _LR_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace lr
@@ -11,7 +11,7 @@ class LibraryPanel;
 class StagePanel;
 class ToolBar;
 
-class Task : public d2d::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
@@ -22,9 +22,9 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const;
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const;
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 	void OnFullView();
 
@@ -43,11 +43,11 @@ private:
 	wxFrame* m_parent;
 
  	LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
-	d2d::LayerPanel* m_layer;
+	ee::PropertySettingPanel* m_property;
+	ee::LayerPanel* m_layer;
  	StagePanel* m_stage;
-	d2d::ViewlistPanel* m_viewlist;
-	d2d::GroupTreePanel* m_grouptree;
+	ee::ViewlistPanel* m_viewlist;
+	ee::GroupTreePanel* m_grouptree;
 
 }; // Task
 

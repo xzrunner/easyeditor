@@ -1,14 +1,14 @@
 #ifndef _EASYPARTICLE3D_SYMBOL_PROPERTY_SETTING_H_
 #define _EASYPARTICLE3D_SYMBOL_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
 
 class ParticleSystem;
 
-class SymbolPropertySetting : public d2d::SymbolPropertySetting
+class SymbolPropertySetting : public ee::SymbolPropertySetting
 {
 public:
 	SymbolPropertySetting(ParticleSystem* ps);

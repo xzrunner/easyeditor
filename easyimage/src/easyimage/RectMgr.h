@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_RECT_MGR_H_
 #define _EASYIMAGE_RECT_MGR_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
@@ -13,8 +13,8 @@ class RectMgr
 public:
 	struct Node
 	{
-		const d2d::Rect* rect;
-		d2d::Vector pos;
+		const ee::Rect* rect;
+		ee::Vector pos;
 
 		Node() : rect(NULL) {}
 	};
@@ -27,26 +27,26 @@ public:
 
 	void draw() const;
 
-	void insert(const d2d::Rect& rect, bool force = false);
-	bool remove(const d2d::Vector& pos);
+	void insert(const ee::Rect& rect, bool force = false);
+	bool remove(const ee::Vector& pos);
 
-	d2d::Vector queryNearestAxis(const d2d::Vector& pos, const d2d::Rect* except = NULL) const;
+	ee::Vector queryNearestAxis(const ee::Vector& pos, const ee::Rect* except = NULL) const;
 
-	Node queryNode(const d2d::Vector& pos) const;
+	Node queryNode(const ee::Vector& pos) const;
 
-	d2d::Rect* queryRect(const d2d::Vector& pos) const;
+	ee::Rect* queryRect(const ee::Vector& pos) const;
 
-	bool moveNode(const Node& node, const d2d::Vector& pos);
-	void moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d::Vector& to);
+	bool moveNode(const Node& node, const ee::Vector& pos);
+	void moveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to);
 
-	const std::vector<d2d::Rect*>& getAllRect() const {
+	const std::vector<ee::Rect*>& getAllRect() const {
 		return m_rects;
 	}
 
 	void clear();
 
 private:
-	std::vector<d2d::Rect*> m_rects;
+	std::vector<ee::Rect*> m_rects;
 
 }; // RectMgr
 

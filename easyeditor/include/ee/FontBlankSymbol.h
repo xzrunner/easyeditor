@@ -7,7 +7,6 @@
 namespace ee
 {
 
-class Font;
 class FontBlankSprite;
 
 class FontBlankSymbol : public Symbol
@@ -54,8 +53,6 @@ public:
 	std::string filename;
 
 private:
-	Font* m_font;
-
 	ShapeStyle m_style;
 
 }; // FontBlankSymbol

@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_KEYS_CONTENT_WIDGET_H_
 #define _EASYANIM_KEYS_CONTENT_WIDGET_H_
 
-#include <drag2d.h>
+
 
 #include "config.h"
 #include "KeysContentEdit.h"
@@ -16,7 +16,7 @@ class LayersMgr;
 class Layer;
 class KeyFrame;
 
-class KeysContentWidget : public wxPanel, public d2d::Observer
+class KeysContentWidget : public wxPanel, public ee::Observer
 {
 public:
 	KeysContentWidget(wxWindow* parent);
@@ -91,7 +91,7 @@ private:
 private:
 	KeysContentEdit m_editop;
 
-	d2d::KeysState m_keys_state;
+	ee::KeysState m_keys_state;
 
 	int m_layer_idx, m_frame_idx;
 	int m_valid_frame_idx;

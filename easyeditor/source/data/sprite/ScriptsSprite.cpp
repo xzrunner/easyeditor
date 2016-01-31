@@ -1,9 +1,8 @@
 #include "ScriptsSprite.h"
 #include "SpriteFactory.h"
+#include "scripts.h"
 
-#include "common/scripts.h"
-
-namespace d2d
+namespace ee
 {
 
 ScriptsSprite::ScriptsSprite()
@@ -15,7 +14,7 @@ ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 	: m_symbol(symbol)
 {
 	m_symbol->Retain();
-	scripts_do_string(symbol->getContent().c_str());
+	scripts_do_string(symbol->GetContent().c_str());
 }
 
 ScriptsSprite::~ScriptsSprite()

@@ -7,7 +7,7 @@ namespace eparticle3d
 {
 
 SymbolPropertySetting::SymbolPropertySetting(ParticleSystem* ps)
-	: d2d::SymbolPropertySetting(&ps->name, &m_tag)
+	: ee::SymbolPropertySetting(&ps->name, &m_tag)
 	, m_ps(ps)
 {
 	m_type = "Particle3DSymbol";
@@ -15,7 +15,7 @@ SymbolPropertySetting::SymbolPropertySetting(ParticleSystem* ps)
 
 void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	d2d::SymbolPropertySetting::OnPropertyGridChange(name, value);
+	ee::SymbolPropertySetting::OnPropertyGridChange(name, value);
 
 	if (name == "Loop") {
 		m_ps->SetLoop(wxANY_AS(value, bool));
@@ -23,12 +23,12 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		m_ps->SetLocalModeDraw(wxANY_AS(value, bool));
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	d2d::SymbolPropertySetting::UpdateProperties(pg);
+	ee::SymbolPropertySetting::UpdateProperties(pg);
 
 	pg->GetProperty("Loop")->SetValue(m_ps->GetEmitter()->loop);
 	pg->GetProperty("Local")->SetValue(m_ps->IsLocalModeDraw());
@@ -36,7 +36,7 @@ void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	d2d::SymbolPropertySetting::InitProperties(pg);
+	ee::SymbolPropertySetting::InitProperties(pg);
 
 	pg->Append(new wxPropertyCategory("State", wxPG_LABEL));
 

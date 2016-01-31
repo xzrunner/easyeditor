@@ -2,35 +2,35 @@
 #ifndef EBUILDER_SCENE_PROPERTY_SETTING_H
 #define EBUILDER_SCENE_PROPERTY_SETTING_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class SceneItem;
 	class ScenesPage;
 
-	class ScenePropertySetting : public d2d::IPropertySetting
+	class ScenePropertySetting : public ee::IPropertySetting
 	{
 	public:
 		ScenePropertySetting(SceneItem* scene, ScenesPage* page);
 
-		virtual void updatePanel(d2d::PropertySettingPanel* panel);
+		virtual void updatePanel(ee::PropertySettingPanel* panel);
 
 		virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-		virtual void updatePropertyGrid(d2d::PropertySettingPanel* panel);
-		virtual void enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable);
+		virtual void updatePropertyGrid(ee::PropertySettingPanel* panel);
+		virtual void enablePropertyGrid(ee::PropertySettingPanel* panel, bool bEnable);
 
 	private:
 		void updateSceneName(const wxString& name);
 
 	private:
-		class UpdateNameVisitor : public d2d::IVisitor
+		class UpdateNameVisitor : public ee::IVisitor
 		{
 		public:
 			UpdateNameVisitor(SceneItem* scene) 
 				: m_scene(scene) {}
 
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void visit(ee::Object* object, bool& bFetchNext);
 
 		private:
 			SceneItem* m_scene;

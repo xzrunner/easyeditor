@@ -1,14 +1,14 @@
 #ifndef _EASYTEXT_SYMBOL_H_
 #define _EASYTEXT_SYMBOL_H_
 
-#include <drag2d.h>
+
 
 #include "typedef.h"
 
 namespace etext
 {
 
-class Symbol : public d2d::Symbol
+class Symbol : public ee::Symbol
 {
 public:
 	Symbol();
@@ -23,18 +23,18 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color = d2d::ColorTrans(), 
-		const d2d::Sprite* spr = NULL, const d2d::Sprite* root = NULL) const;
-	virtual d2d::Rect GetSize(const d2d::Sprite* sprite = NULL) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
+		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
-	static d2d::Symbol* Create() { return new Symbol(); }
+	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void LoadResources();
 
 private:
-	void DrawBackground(const d2d::Sprite* sprite, const d2d::Matrix& mt) const;
-	void DrawText(const d2d::Sprite* sprite, const d2d::Matrix& mt, const d2d::Colorf& mul, const d2d::Colorf& add) const;
+	void DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) const;
+	void DrawText(const ee::Sprite* sprite, const ee::Matrix& mt, const ee::Colorf& mul, const ee::Colorf& add) const;
 
 private:
 	int m_width;
@@ -55,7 +55,7 @@ private:
 	float m_space_vert;
 
 private:
-	d2d::ShapeStyle m_bg_style;
+	ee::ShapeStyle m_bg_style;
 
 	friend class Sprite;
 

@@ -16,7 +16,7 @@ namespace librespacker
 {
 
 void UnpackFromLua::Unpack(const std::string& filepath, 
-						   const std::vector<d2d::Image*>& images)
+						   const std::vector<ee::Image*>& images)
 {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);

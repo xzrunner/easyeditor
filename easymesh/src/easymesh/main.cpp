@@ -8,15 +8,15 @@ IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
 {
-	d2d::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
 	InitSymbolCreators() ;
 
-	d2d::Frame* frame = new emesh::Frame("EasyMesh", emesh::FILE_TAG);
+	ee::Frame* frame = new emesh::Frame("EasyMesh", emesh::FILE_TAG);
 	emesh::Task* task = new emesh::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

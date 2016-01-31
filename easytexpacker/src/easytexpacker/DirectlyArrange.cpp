@@ -3,9 +3,9 @@
 
 using namespace etexpacker;
 
-void DirectlyArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
+void DirectlyArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
-	std::vector<d2d::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprites);
 	sortByArea(sorted);
 
 	int sx = 0, sy = 0;
@@ -14,13 +14,13 @@ void DirectlyArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 		p = Context::Instance()->padding;
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
-		d2d::ImageSprite* sprite = sorted[i];
+		ee::ImageSprite* sprite = sorted[i];
 		const float width = sprite->GetSymbol().GetSize().Width() * s + p,
 			height = sprite->GetSymbol().GetSize().Height() * s + p;
 
 		if (sx + width <= Context::Instance()->width)
 		{
-			sprite->SetTransform(d2d::Vector(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
+			sprite->SetTransform(ee::Vector(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
 
 			sx += width;
 			if (height > hMax)
@@ -31,7 +31,7 @@ void DirectlyArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 			sx = 0;
 			sy += hMax;
 			hMax = height;
-			sprite->SetTransform(d2d::Vector(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
+			sprite->SetTransform(ee::Vector(sx + width * 0.5f, sy + height * 0.5f), sprite->GetAngle());
 			sx = width;
 		}
 	}

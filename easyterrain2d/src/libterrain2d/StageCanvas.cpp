@@ -6,7 +6,7 @@ namespace eterrain2d
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
+	: ee::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -15,30 +15,32 @@ StageCanvas::StageCanvas(StagePanel* panel)
 }
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
-						 d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
+						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
+	: ee::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	std::vector<Sprite*> sprites;
+	m_sprite_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
+		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		ee::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
 	DrawBG();
 
-	d2d::Rect sr = m_screen.GetRegion();
-	m_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
-//	m_panel->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	ee::Rect sr = m_screen.GetRegion();
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		ee::DT_VISIBLE);
+//	m_panel->traverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();
 }
@@ -51,7 +53,7 @@ void StageCanvas::OnTimer()
 void StageCanvas::DrawBG() const
 {
 	const float EDGE = 100;
-	d2d::PrimitiveDraw::Cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+	ee::PrimitiveDraw::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
 }
 
 void StageCanvas::Update()

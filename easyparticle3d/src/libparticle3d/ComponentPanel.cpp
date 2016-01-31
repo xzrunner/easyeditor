@@ -25,7 +25,7 @@ ComponentPanel::ComponentPanel(wxWindow* parent, p3d_symbol* pc, ToolbarPanel* t
 	}
 }
 
-void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
+void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -34,8 +34,8 @@ void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
 		m_pc->scale_end = data.val1 * 0.01f;
 		break;
 	case PS_ROTATE:
-		m_pc->angle = (data.val0 + data.val1) * 0.5f * d2d::TRANS_DEG_TO_RAD;
-		m_pc->angle_var = (data.val1 - data.val0) * 0.5f * d2d::TRANS_DEG_TO_RAD;
+		m_pc->angle = (data.val0 + data.val1) * 0.5f * ee::TRANS_DEG_TO_RAD;
+		m_pc->angle_var = (data.val1 - data.val0) * 0.5f * ee::TRANS_DEG_TO_RAD;
 		break;
 	case PS_ALPHA:
 		m_pc->alpha_start = data.val0 * 0.01f;
@@ -44,7 +44,7 @@ void ComponentPanel::SetValue(int key, const d2d::UICallback::Data& data)
 	}
 }
 
-void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
+void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -53,8 +53,8 @@ void ComponentPanel::GetValue(int key, d2d::UICallback::Data& data)
 		data.val1 = m_pc->scale_end * 100;
 		break;
 	case PS_ROTATE:
-		data.val0 = (m_pc->angle + m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
-		data.val1 = (m_pc->angle - m_pc->angle_var) * d2d::TRANS_RAD_TO_DEG;
+		data.val0 = (m_pc->angle + m_pc->angle_var) * ee::TRANS_RAD_TO_DEG;
+		data.val1 = (m_pc->angle - m_pc->angle_var) * ee::TRANS_RAD_TO_DEG;
 		break;
 	case PS_ALPHA:
 		data.val0 = m_pc->alpha_start * 100;
@@ -83,8 +83,8 @@ void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
-	std::string name = static_cast<d2d::Symbol*>(m_pc->ud)->GetFilepath();
-	name = d2d::FileHelper::GetFilename(name);
+	std::string name = static_cast<ee::Symbol*>(m_pc->ud)->GetFilepath();
+	name = ee::FileHelper::GetFilename(name);
 
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, name); 
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -123,23 +123,23 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 		hori_sizer->AddSpacer(20);
 		// Right Icon
 		{
-			std::string filepath = static_cast<d2d::Symbol*>(m_pc->ud)->GetFilepath();
-			if (d2d::FileType::IsType(filepath, d2d::FileType::e_image)) {
-				d2d::ImagePanel* panel = new d2d::ImagePanel(this, filepath, 100);
+			std::string filepath = static_cast<ee::Symbol*>(m_pc->ud)->GetFilepath();
+			if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
+				ee::ImagePanel* panel = new ee::ImagePanel(this, filepath, 100);
 				hori_sizer->Add(panel);
 			}
 		}	
 		top_sizer->Add(hori_sizer);
 	}
 	// Scale
-	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
-		d2d::SliderItem(LANG[LK_START], "start", SCALE_START, 0, 2000), d2d::SliderItem(LANG[LK_END], "end", SCALE_END, 0, 2000));
+	ee::SliderCtrlTwo* s_scale = new ee::SliderCtrlTwo(this, LANG[LK_SCALE], "scale", this, PS_SCALE, 
+		ee::SliderItem(LANG[LK_START], "start", SCALE_START, 0, 2000), ee::SliderItem(LANG[LK_END], "end", SCALE_END, 0, 2000));
 	top_sizer->Add(s_scale);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_scale);
 	// Rotate
-	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, LANG[LK_ROTATE], "rotate", this, PS_ROTATE, 
-		d2d::SliderItem(LANG[LK_MIN], "min", ROTATE_MIN, -180, 180), d2d::SliderItem(LANG[LK_MAX], "max", ROTATE_MAX, -180, 180));
+	ee::SliderCtrlTwo* s_rotate = new ee::SliderCtrlTwo(this, LANG[LK_ROTATE], "rotate", this, PS_ROTATE, 
+		ee::SliderItem(LANG[LK_MIN], "min", ROTATE_MIN, -180, 180), ee::SliderItem(LANG[LK_MAX], "max", ROTATE_MAX, -180, 180));
 	top_sizer->Add(s_rotate);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_rotate);
@@ -170,8 +170,8 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 	}
 	top_sizer->Add(color_sz);
 	// Alpha
-	d2d::SliderCtrlTwo* s_alpha = new d2d::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
-		d2d::SliderItem(LANG[LK_START], "start", 100, 0, 100), d2d::SliderItem(LANG[LK_END], "end", 100, 0, 100));
+	ee::SliderCtrlTwo* s_alpha = new ee::SliderCtrlTwo(this, LANG[LK_ALPHA], "alpha", this, PS_ALPHA, 
+		ee::SliderItem(LANG[LK_START], "start", 100, 0, 100), ee::SliderItem(LANG[LK_END], "end", 100, 0, 100));
 	top_sizer->Add(s_alpha);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_alpha);
@@ -190,7 +190,7 @@ void ComponentPanel::OnDelete(wxCommandEvent& event)
 
 void ComponentPanel::OnBindPS(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileType::GetTag(d2d::FileType::e_particle3d);
+	wxString filter = ee::FileType::GetTag(ee::FileType::e_particle3d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
@@ -201,10 +201,10 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 
 //void ComponentPanel::OnSetMultiCol(wxCommandEvent& event)
 //{
-//	d2d::Colorf col;
+//	ee::Colorf col;
 //	memcpy(&col.r, &m_pc->col_mul.r, sizeof(m_pc->col_mul));
 //
-//	d2d::RGBColorSettingDlg dlg(this, NULL, col);
+//	ee::RGBColorSettingDlg dlg(this, NULL, col);
 //	if (!dlg.ShowModal() == wxID_OK) {
 //		return;
 //	}
@@ -215,10 +215,10 @@ void ComponentPanel::OnBindPS(wxCommandEvent& event)
 //
 //void ComponentPanel::OnSetAddCol(wxCommandEvent& event)
 //{
-//	d2d::Colorf col;
+//	ee::Colorf col;
 //	memcpy(&col.r, &m_pc->col_add.r, sizeof(m_pc->col_add));
 //
-//	d2d::RGBColorSettingDlg dlg(this, NULL, col);
+//	ee::RGBColorSettingDlg dlg(this, NULL, col);
 //	if (!dlg.ShowModal() == wxID_OK) {
 //		return;
 //	}

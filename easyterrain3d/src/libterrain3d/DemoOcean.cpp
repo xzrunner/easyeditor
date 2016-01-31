@@ -21,7 +21,7 @@ void DemoOcean::Load()
 	m_cam.SetPosition(vec3(0, -8, 8));
 	m_cam.Rotate(0, 40);
 
-	m_image = d2d::ImageMgr::Instance()->GetItem("ocean/water2_256.png");
+	m_image = ee::ImageMgr::Instance()->GetItem("ocean/water2_256.png");
 
 	Wave w;
 	w.len = 0.2f;
@@ -51,7 +51,7 @@ void DemoOcean::Draw() const
 	e3d::AABB aabb;
 	aabb.Combine(vec3(-5, -5, -5));
 	aabb.Combine(vec3(5, 5, 5));
-	e3d::DrawCube(aabb, d2d::WHITE);
+	e3d::DrawCube(aabb, ee::WHITE);
 
 	vec2 uv_left_low;
 	uv_left_low.x = m_uv_base.x - 1;

@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_CONST_H_
 #define _EASYTEXPACKER_CONST_H_
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {

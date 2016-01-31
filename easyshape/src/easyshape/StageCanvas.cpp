@@ -6,7 +6,7 @@ namespace eshape
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::ShapeStageCanvas(stage, stage, d2d::Colorf(1.0f, 0.0f, 0.0f))
+	: ee::ShapeStageCanvas(stage, stage, ee::Colorf(1.0f, 0.0f, 0.0f))
 	, m_stage(stage)
 {
 }
@@ -18,23 +18,23 @@ void StageCanvas::onDraw()
 	if (item) 
 	{
 		if (!item->getFilepath().empty() || 
-			d2d::FileNameParser::isType(item->getFilepath(), d2d::FileNameParser::e_shape)) {
+			ee::FileNameParser::isType(item->getFilepath(), ee::FileNameParser::e_shape)) {
 			drawGuideLines();
 		}
 		else {
-			item->draw(d2d::Matrix());
+			item->draw(ee::Matrix());
 		}
 	}
 
-	d2d::ShapeStageCanvas::onDraw();
+	ee::ShapeStageCanvas::onDraw();
 }
 
 void StageCanvas::drawGuideLines()
 {
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
-		d2d::HALF_S_WIDTH,
-		d2d::HALF_S_HEIGHT,
-		d2d::LIGHT_GREY_LINE);
+	ee::PrimitiveDraw::rect(ee::Vector(0, 0), 
+		ee::HALF_S_WIDTH,
+		ee::HALF_S_HEIGHT,
+		ee::LIGHT_GREY_LINE);
 }
 
 }

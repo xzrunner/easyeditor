@@ -11,10 +11,10 @@ namespace ebuilder
 	class ChangeImagePanel : public BehaviorPanel
 	{
 	public:
-		virtual void update(const d2d::LibraryList& list);
+		virtual void update(const ee::LibraryList& list);
 
 	private:
-		ChangeImagePanel(wxWindow* parent, d2d::LibraryList* mediaList, 
+		ChangeImagePanel(wxWindow* parent, ee::LibraryList* mediaList, 
 			ChangeImage* behavior);
 
 	protected:
@@ -28,7 +28,7 @@ namespace ebuilder
 		void initChoice();
 
 	private:
-		d2d::LibraryList* m_list;
+		ee::LibraryList* m_list;
 
 		ChangeImage* m_behavior;
 

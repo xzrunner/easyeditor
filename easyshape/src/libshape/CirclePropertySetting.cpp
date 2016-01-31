@@ -4,9 +4,9 @@
 namespace libshape
 {
 
-CirclePropertySetting::CirclePropertySetting(d2d::EditPanelImpl* stage, 
+CirclePropertySetting::CirclePropertySetting(ee::EditPanelImpl* stage, 
 											 CircleShape* circle)
-	: d2d::IPropertySetting("Circle")
+	: ee::PropertySetting("Circle")
 	, m_stage(stage)
 	, m_circle(circle)
 {
@@ -30,7 +30,7 @@ void CirclePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		dirty = false;
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

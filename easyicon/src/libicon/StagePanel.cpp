@@ -6,8 +6,8 @@ namespace eicon
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
 {
 	SetCanvas(new StageCanvas(this));
 	m_symbol = new Symbol;
@@ -16,9 +16,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   wxGLContext* glctx, d2d::Sprite* edited, 
-					   const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::EditPanel(parent, frame)
+					   wxGLContext* glctx, ee::Sprite* edited, 
+					   const ee::MultiSpritesImpl* bg_sprites)
+	: ee::EditPanel(parent, frame)
 {
 	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
 	m_symbol = (Symbol*)(&edited->GetSymbol());
@@ -50,7 +50,7 @@ Icon* StagePanel::GetIcon()
 	}
 }
 
-void StagePanel::SetImage(d2d::Image* img)
+void StagePanel::SetImage(ee::Image* img)
 {
 	if (m_symbol) {
 		m_symbol->SetImage(img);
@@ -62,19 +62,19 @@ void StagePanel::SetImage(d2d::Image* img)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(stage, stage->GetStageImpl(), library)
+StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::StageDropTarget(stage, stage->GetStageImpl(), library)
 	, m_stage(stage)
 {
 }
 
 bool StagePanel::StageDropTarget::
-OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos)
+OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
 {
-	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
+	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
 	{
 		m_stage->SetImage(image->GetImage());
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		return true;
 	}
 

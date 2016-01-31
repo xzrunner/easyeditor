@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_REGULAR_RECT_CUT_H_
 #define _EASYIMAGE_REGULAR_RECT_CUT_H_
 
-#include <drag2d.h>
+
 
 #include "Rect.h"
 
@@ -13,7 +13,7 @@ class PixelAreaLUT;
 class RegularRectCut
 {
 public:
-	RegularRectCut(const d2d::Image& image);
+	RegularRectCut(const ee::Image& image);
 	RegularRectCut(const uint8_t* pixels, int width, int height);
 	~RegularRectCut();
 

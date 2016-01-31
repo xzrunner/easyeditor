@@ -3,7 +3,7 @@
 
 #include "LoadAdapter.h"
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
@@ -11,29 +11,29 @@ namespace eparticle3d
 class StagePanel;
 class ComponentPanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel, public d2d::UICallback, public d2d::Observer
+class ToolbarPanel : public ee::ToolbarPanel, public ee::UICallback, public ee::Observer
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
+	ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library,
 		StagePanel* stage);
 
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
 	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
-	void Add(const LoadAdapter::Component& comp, d2d::LibraryPanel* library);
+	void Add(const LoadAdapter::Component& comp, ee::LibraryPanel* library);
 
 	void InitParticle();
 
 	void OnDelChild(ComponentPanel* child);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 	//
 	//	interface Observer
@@ -46,7 +46,7 @@ private:
 
 	void Clear();
 
-	void OnAddChild(wxCommandEvent& event, d2d::Symbol* symbol);
+	void OnAddChild(wxCommandEvent& event, ee::Symbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
 
 	void OnSetLoop(wxCommandEvent& event);
@@ -61,13 +61,13 @@ private:
 	class DropTarget : public wxTextDropTarget
 	{
 	public:
-		DropTarget(d2d::LibraryPanel* library, StagePanel* stage,
+		DropTarget(ee::LibraryPanel* library, StagePanel* stage,
 			ToolbarPanel* toolbar);
 
 		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 
 	private:
-		d2d::LibraryPanel* m_library;
+		ee::LibraryPanel* m_library;
 		StagePanel* m_stage;
 		ToolbarPanel* m_toolbar;
 
@@ -76,9 +76,9 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::Image* m_image;
+	ee::Image* m_image;
 
-	std::vector<d2d::ISliderCtrl*> m_sliders;
+	std::vector<ee::SliderCtrl*> m_sliders;
 
 	// move to property
 //	wxTextCtrl* m_name;

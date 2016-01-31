@@ -32,7 +32,7 @@ LayersContentWidget::LayersContentWidget(wxWindow* parent)
 
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
-	RegistSubject(d2d::RefreshPanelSJ::Instance());
+	RegistSubject(ee::RefreshPanelSJ::Instance());
 }
 
 wxCoord LayersContentWidget::OnGetRowHeight(size_t row) const
@@ -162,10 +162,10 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
 			if (layer && x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->SetEditable(!layer->IsEditable());
-				d2d::RefreshPanelSJ::Instance()->Refresh();
+				ee::RefreshPanelSJ::Instance()->Refresh();
 			} else if (layer && x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
 				layer->SetVisible(!layer->IsVisible());
-				d2d::RefreshPanelSJ::Instance()->Refresh();
+				ee::RefreshPanelSJ::Instance()->Refresh();
 			}
 		}
 
@@ -210,10 +210,10 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
-			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->GetName(), pos);
+			ee::SetValueDialog dlg(this, wxT("Set layer's name"), layer->GetName(), pos);
 			if (dlg.ShowModal() == wxID_OK)
 			{
-				layer->SetName(dlg.getText().ToStdString());
+				layer->SetName(dlg.GetText().ToStdString());
 				Refresh(true);
 			}
 		}
@@ -246,7 +246,7 @@ void LayersContentWidget::OnNotify(int sj_id, void* ud)
 		}
 		break;
 
-	case d2d::MSG_REFRESH_PANEL:
+	case ee::MSG_REFRESH_PANEL:
 		Refresh();
 		break;
 	}

@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_TOOLBAR_PANEL_H_
 #define _EASYANIM_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel
+class ToolbarPanel : public ee::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, bool vertical);
@@ -20,7 +20,7 @@ public:
 	void Clear();
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxSizer* InitTemplateLayout();

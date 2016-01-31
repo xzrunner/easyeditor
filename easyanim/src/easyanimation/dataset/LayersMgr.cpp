@@ -52,12 +52,12 @@ int LayersMgr::GetFrameCount() const
 bool LayersMgr::Clear()
 {
 	bool ret = !m_layers.empty();
-	for_each(m_layers.begin(), m_layers.end(), d2d::ReleaseObjectFunctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), ee::ReleaseObjectFunctor<Layer>());
 	m_layers.clear();
 	return ret;
 }
 
-// void LayersMgr::removeSprite(d2d::Sprite* sprite)
+// void LayersMgr::removeSprite(ee::Sprite* sprite)
 // {
 // 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 // 	{

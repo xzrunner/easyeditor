@@ -5,7 +5,7 @@
 #include "ComboBoxWidget.h"
 #include "CheckBoxWidget.h"
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -33,7 +33,7 @@ DynamicWidget* WidgetFactory::Create(const Json::Value& val) const
 	} else if (type == "check box") {
 		w = new CheckBoxWidget;
 	} else {
-		throw d2d::Exception("UnitCfg::LoadFromFile unknown type %s", type.c_str());
+		throw ee::Exception("UnitCfg::LoadFromFile unknown type %s", type.c_str());
 	}
 	w->LoadFromFile(val);
 	return w;

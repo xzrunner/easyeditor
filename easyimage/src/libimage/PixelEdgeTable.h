@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_PIXEL_EDGE_TABLE_H_
 #define _EASYIMAGE_PIXEL_EDGE_TABLE_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {

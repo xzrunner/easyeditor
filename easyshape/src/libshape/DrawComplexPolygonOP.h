@@ -11,16 +11,16 @@ class ComplexPolygonShape;
 class DrawComplexPolygonOP : public DrawPolylineOP
 {
 public:
-	DrawComplexPolygonOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapesImpl);
+	DrawComplexPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+		ee::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
-	ComplexPolygonShape* CreateComplexPoly(const std::vector<d2d::Vector>& polyline);
+	ComplexPolygonShape* CreateComplexPoly(const std::vector<ee::Vector>& polyline);
 
 protected:
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 
 }; // DrawComplexPolygonOP
 

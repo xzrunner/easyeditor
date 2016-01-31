@@ -11,8 +11,8 @@ void FileIO::StoreToFile(const char* filename, const Icon* icon)
 {
 	Json::Value value;
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
-	value["image"] = d2d::FileHelper::GetRelativePath(dir,
+	std::string dir = ee::FileHelper::GetFileDir(filename);
+	value["image"] = ee::FileHelper::GetRelativePath(dir,
 		icon->GetImage()->GetFilepath()).ToStdString();
 
 	value["type"] = icon->GetIconDesc();
@@ -37,9 +37,9 @@ Icon* FileIO::LoadFromFile(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
-	std::string path = d2d::FileHelper::GetAbsolutePath(dir, value["image"].asString());
-	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(path);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
+	std::string path = ee::FileHelper::GetAbsolutePath(dir, value["image"].asString());
+	ee::Image* img = ee::ImageMgr::Instance()->GetItem(path);
 
 	Icon* icon = IconFactory::CreateIconFromFile(value);
 	icon->SetImage(img);

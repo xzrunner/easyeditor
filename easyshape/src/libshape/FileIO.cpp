@@ -13,7 +13,7 @@ namespace libshape
 {
 
 void FileIO::LoadFromFile(const char* filename, 
-						  std::vector<d2d::Shape*>& shapes, 
+						  std::vector<ee::Shape*>& shapes, 
 						  std::string& bg_filepath)
 {
 	Json::Value value;
@@ -24,21 +24,21 @@ void FileIO::LoadFromFile(const char* filename,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 	bg_filepath = dir + "\\" + value["bg_symbol"].asString();
 
 	int i = 0;
 	Json::Value shapeValue = value["shapes"][i++];
 	while (!shapeValue.isNull()) {
-		d2d::Shape* shape = LoadShape(dir, shapeValue);
+		ee::Shape* shape = LoadShape(dir, shapeValue);
 		shapes.push_back(shape);
 		shapeValue = value["shapes"][i++];
 	}
 }
 
 void FileIO::LoadFromFile(const char* filename, 
-						  std::vector<d2d::Shape*>& shapes, 
-						  d2d::Symbol*& bg)
+						  std::vector<ee::Shape*>& shapes, 
+						  ee::Symbol*& bg)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -48,37 +48,37 @@ void FileIO::LoadFromFile(const char* filename,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value shapeValue = value["shapes"][i++];
 	while (!shapeValue.isNull()) {
-		d2d::Shape* shape = LoadShape(dir, shapeValue);
+		ee::Shape* shape = LoadShape(dir, shapeValue);
 		shapes.push_back(shape);
 		shapeValue = value["shapes"][i++];
 	}
 
 	if (!value["bg_symbol"].isNull()) {
-		std::string path = d2d::FileHelper::GetAbsolutePath(dir, value["bg_symbol"].asString());
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-		d2d::obj_assign<d2d::Symbol>(bg, symbol);
+		std::string path = ee::FileHelper::GetAbsolutePath(dir, value["bg_symbol"].asString());
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(path);
+		ee::obj_assign<ee::Symbol>(bg, symbol);
 		symbol->Release();
 	}
 }
 
 void FileIO::StoreToFile(const char* filename, 
-						 const std::vector<d2d::Shape*>& shapes, 
-						 const d2d::Symbol* bg)
+						 const std::vector<ee::Shape*>& shapes, 
+						 const ee::Symbol* bg)
 {
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 	Json::Value value;
 	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
 		value["shapes"][i] = StoreShape(dir, shapes[i]);
 	}
 
 	if (bg) {
-		wxString dir = d2d::FileHelper::GetFileDir(filename) + "\\";
-		value["bg_symbol"] = d2d::FileHelper::GetRelativePath(dir,
+		wxString dir = ee::FileHelper::GetFileDir(filename) + "\\";
+		value["bg_symbol"] = ee::FileHelper::GetRelativePath(dir,
 			bg->GetFilepath()).ToStdString();
 	}
 
@@ -90,9 +90,9 @@ void FileIO::StoreToFile(const char* filename,
 	fout.close();
 }
 
-d2d::Shape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
+ee::Shape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 {
-	d2d::Shape* shape = NULL;
+	ee::Shape* shape = NULL;
 
 // 	// old
 // 	if (value.isNull())
@@ -114,7 +114,7 @@ d2d::Shape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 	return shape;
 }
 
-Json::Value FileIO::StoreShape(const std::string& dir, d2d::Shape* shape)
+Json::Value FileIO::StoreShape(const std::string& dir, ee::Shape* shape)
 {
 	Json::Value value;
 
@@ -149,35 +149,35 @@ Json::Value FileIO::StoreShape(const std::string& dir, d2d::Shape* shape)
 	return value;
 }
 
-d2d::Shape* FileIO::LoadBezier(const Json::Value& value)
+ee::Shape* FileIO::LoadBezier(const Json::Value& value)
 {
 	BezierShape* bezier = new BezierShape();
 	bezier->LoadFromFile(value, "");
 	return bezier;
 }
 
-d2d::Shape* FileIO::LoadPolygon(const std::string& dir, const Json::Value& value)
+ee::Shape* FileIO::LoadPolygon(const std::string& dir, const Json::Value& value)
 {
 	PolygonShape* poly = new PolygonShape;
 	poly->LoadFromFile(value, dir);
 	return poly;
 }
 
-d2d::Shape* FileIO::LoadChain(const Json::Value& value)
+ee::Shape* FileIO::LoadChain(const Json::Value& value)
 {
 	ChainShape* chain = new ChainShape();
 	chain->LoadFromFile(value, "");
 	return chain;
 }
 
-d2d::Shape* FileIO::LoadRect(const Json::Value& value)
+ee::Shape* FileIO::LoadRect(const Json::Value& value)
 {
 	RectShape* rect = new RectShape();
 	rect->LoadFromFile(value, "");
 	return rect;
 }
 
-d2d::Shape* FileIO::LoadCircle(const Json::Value& value)
+ee::Shape* FileIO::LoadCircle(const Json::Value& value)
 {
 	CircleShape* circle = new CircleShape();
 	circle->LoadFromFile(value, "");

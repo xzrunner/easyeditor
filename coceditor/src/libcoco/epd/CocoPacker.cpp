@@ -20,7 +20,7 @@ namespace epd
 
 namespace lua = ebuilder::lua;
 
-CocoPacker::CocoPacker(const std::vector<const d2d::Symbol*>& symbols, 
+CocoPacker::CocoPacker(const std::vector<const ee::Symbol*>& symbols, 
 					   const TextureMgr& tex_mgr)
 	: m_gen(new ebuilder::CodeGenerator)
 	, m_parser(symbols, tex_mgr)
@@ -30,7 +30,7 @@ CocoPacker::CocoPacker(const std::vector<const d2d::Symbol*>& symbols,
 {
 }
 
-CocoPacker::CocoPacker(const std::vector<const d2d::Symbol*>& symbols, 
+CocoPacker::CocoPacker(const std::vector<const ee::Symbol*>& symbols, 
 					   const TextureMgr& tex_mgr, 
 					   const std::string& img_id_file, 
 					   float scale)
@@ -67,27 +67,27 @@ void CocoPacker::ResolveSymbols()
 {
 	m_gen->line("texture("+wxString::FromDouble(m_parser.GetTexSize()).ToStdString()+")");
 
-	const std::vector<const d2d::Symbol*>& symbols = m_parser.GetSymbolSet().GetOrdered();
+	const std::vector<const ee::Symbol*>& symbols = m_parser.GetSymbolSet().GetOrdered();
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		const d2d::Symbol* symbol = symbols[i];
+		const ee::Symbol* symbol = symbols[i];
 
 		wxString msg;
 		msg.Printf("[%d/%d] file: %s\n", i, n, symbol->GetFilepath());
 		std::cout << msg;
 
-		if (const d2d::ImageSymbol* image = dynamic_cast<const d2d::ImageSymbol*>(symbol))
+		if (const ee::ImageSymbol* image = dynamic_cast<const ee::ImageSymbol*>(symbol))
 		{
 		}
-		else if (const d2d::FontBlankSymbol* font = dynamic_cast<const d2d::FontBlankSymbol*>(symbol))
+		else if (const ee::FontBlankSymbol* font = dynamic_cast<const ee::FontBlankSymbol*>(symbol))
 		{
 		}
 		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 			{
-				d2d::Sprite* sprite = complex->m_sprites[i];
-				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+				ee::Sprite* sprite = complex->m_sprites[i];
+				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 
@@ -96,7 +96,7 @@ void CocoPacker::ResolveSymbols()
 					else
 						ParserPicture(image);
 				}
-				else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+				else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 				}
@@ -107,7 +107,7 @@ void CocoPacker::ResolveSymbols()
 				else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(sprite))
 				{
 					// todo multi mesh!
-					std::map<const d2d::Symbol*, std::vector<SpriteID> >::iterator itr
+					std::map<const ee::Symbol*, std::vector<SpriteID> >::iterator itr
 						= m_map_symbol2ids.find(&mesh->GetSymbol());
 					if (itr != m_map_symbol2ids.end()) {
 						bool find = false;
@@ -161,7 +161,7 @@ void CocoPacker::ResolveSymbols()
 				}
 				else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(sprite))
 				{
-					std::map<const d2d::Symbol*, std::vector<SpriteID> >::iterator itr
+					std::map<const ee::Symbol*, std::vector<SpriteID> >::iterator itr
 						= m_map_symbol2ids.find(&tex->GetSymbol());
 					if (itr != m_map_symbol2ids.end()) 
 					{
@@ -220,13 +220,13 @@ void CocoPacker::ResolveSymbols()
 			//		libanim::Symbol::Frame* frame = layer->frames[j];
 			//		for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 			//		{
-			//			d2d::Sprite* sprite = frame->sprites[k];
-			//			if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+			//			ee::Sprite* sprite = frame->sprites[k];
+			//			if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 			//			{
 			//				m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 			//				resolvePicture(image);
 			//			}
-			//			else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+			//			else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
 			//			{
 			//				m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 			//			}
@@ -241,7 +241,7 @@ void CocoPacker::ResolveSymbols()
 			// version 2: use mat instead of each picture
 			//////////////////////////////////////////////////////////////////////////
 
-			std::set<const d2d::ImageSymbol*, d2d::SymbolCmp> unique;
+			std::set<const ee::ImageSymbol*, ee::SymbolCmp> unique;
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
 				libanim::Symbol::Layer* layer = anim->m_layers[i];
@@ -250,10 +250,10 @@ void CocoPacker::ResolveSymbols()
 					libanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
-						d2d::Sprite* sprite = frame->sprites[k];
-						if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+						ee::Sprite* sprite = frame->sprites[k];
+						if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
 							unique.insert(&image->GetSymbol());
-						else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+						else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
 							m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 						else if (eicon::Sprite* icon = dynamic_cast<eicon::Sprite*>(sprite))
 							ParserIcon(icon);
@@ -261,14 +261,14 @@ void CocoPacker::ResolveSymbols()
 				}
 			}
 
-			std::set<const d2d::ImageSymbol*, d2d::SymbolCmp>::iterator itr = unique.begin();
+			std::set<const ee::ImageSymbol*, ee::SymbolCmp>::iterator itr = unique.begin();
 			for ( ; itr != unique.end(); ++itr)
 			{
-				std::map<const d2d::Symbol*, int>::iterator itrFind = m_mapSymbolID.find(*itr);
+				std::map<const ee::Symbol*, int>::iterator itrFind = m_mapSymbolID.find(*itr);
 				if (itrFind == m_mapSymbolID.end())
 				{
 					m_mapSymbolID.insert(std::make_pair(*itr, m_id++));
-					if ((*itr)->GetSize().xLength() <= 4)
+					if ((*itr)->GetSize().Width() <= 4)
 						ParserPicture(*itr, e_xfix);
 					else
 						ParserPicture(*itr);
@@ -277,7 +277,7 @@ void CocoPacker::ResolveSymbols()
 
 			for (int i = 0, n = anim->getMaxFrameIndex(); i < n; ++i)
 			{
-				std::vector<d2d::Sprite*> sprites;
+				std::vector<ee::Sprite*> sprites;
 				libanim::Utility::GetCurrSprites(anim, i + 1, sprites);
 				if (sprites.empty()) {
 					continue;
@@ -291,7 +291,7 @@ void CocoPacker::ResolveSymbols()
 						}
 					}
 				}
-				for_each(sprites.begin(), sprites.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+				for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 			}
 
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
@@ -299,7 +299,7 @@ void CocoPacker::ResolveSymbols()
 		}
 		else if (const escale9::Symbol* patch9 = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
- 			std::vector<d2d::Sprite*> sprites;
+ 			std::vector<ee::Sprite*> sprites;
 			const escale9::Scale9Data& data = patch9->GetScale9Data();
  			switch (data.GetType())
  			{
@@ -333,8 +333,8 @@ void CocoPacker::ResolveSymbols()
  
  			for (size_t i = 0, n = sprites.size(); i < n; ++i)
  			{
- 				d2d::Sprite* sprite = sprites[i];
- 				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+ 				ee::Sprite* sprite = sprites[i];
+ 				if (ee::ImageSprite* image = dynamic_cast<ee::ImageSprite*>(sprite))
  				{
  					PicFixType tsrc = e_null, tscreen = e_null;
  					switch (data.GetType())
@@ -385,7 +385,7 @@ void CocoPacker::ResolveSymbols()
  					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
  					ParserPicture(image, tsrc, tscreen);
  				}
- 				else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+ 				else if (ee::FontBlankSprite* font = dynamic_cast<ee::FontBlankSprite*>(sprite))
  				{
  					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
  				}
@@ -413,24 +413,24 @@ void CocoPacker::ResolveSymbols()
 	}
 }
 
-void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, PicFixType tscreen)
+void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, PicFixType tscreen)
 {
 	tsrc = tscreen = e_null;
 
 	TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
 	if (!picture) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 0!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	lua::TableAssign ta(*m_gen, "picture", false, false);
 
 	// id
 	{
-		std::map<const d2d::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
+		std::map<const ee::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr == m_mapSpriteID.end()) {
 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
-			throw d2d::Exception(str);
+			throw ee::Exception(str);
 		}
 		std::string sid = wxString::FromDouble(itr->second);
 		m_gen->line(lua::assign("id", sid) + ",");
@@ -492,7 +492,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	// screen
 	const float hw = picture->entry->sprite_source_size.w * 0.5f / picture->invscale * m_scale,
 		hh = picture->entry->sprite_source_size.h * 0.5f / picture->invscale * m_scale;
-	d2d::Vector screen[4];
+	ee::Vector screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
 	screen[2].Set(hw, -hh);
@@ -528,11 +528,11 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
  	// 4. rotate
  	for (size_t i = 0; i < 4; ++i)
  	{
- 		d2d::Vector rot = d2d::Math2D::RotateVector(screen[i], sprite->GetAngle());
+ 		ee::Vector rot = ee::Math2D::RotateVector(screen[i], sprite->GetAngle());
  		screen[i] = rot;
  	}
  	// 5. translate
- 	d2d::Vector offset = picture->offset;
+ 	ee::Vector offset = picture->offset;
  	offset.x *= sprite->GetScale().x / picture->invscale;
  	offset.y *= sprite->GetScale().y / picture->invscale;
 	if (xMirror) {
@@ -541,8 +541,8 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	if (yMirror) {
 		offset.y = -offset.y;
 	}
- 	d2d::Vector center = sprite->GetCenter();
- 	center += d2d::Math2D::RotateVector(offset, sprite->GetAngle());
+ 	ee::Vector center = sprite->GetCenter();
+ 	center += ee::Math2D::RotateVector(offset, sprite->GetAngle());
  	for (size_t i = 0; i < 4; ++i)
  		screen[i] += center;
 
@@ -596,7 +596,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	lua::tableassign(*m_gen, "", 3, assignTex, assignSrc, assignScreen);
 }
 
-void CocoPacker::ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc)
+void CocoPacker::ParserPicture(const ee::ImageSymbol* symbol, PicFixType tsrc)
 {
 	tsrc = e_null;
 
@@ -607,17 +607,17 @@ void CocoPacker::ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc)
 // 		printf("symbol pointer: %p \n", symbol);
 // 		m_parser.DebugInfo();
 
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	lua::TableAssign ta(*m_gen, "picture", false, false);
 
 	// id
 	{
-		std::map<const d2d::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 		if (itr == m_mapSymbolID.end()) {
 			std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID 0!";
-			throw d2d::Exception(str);
+			throw ee::Exception(str);
 		}
 		std::string sid = wxString::FromDouble(itr->second);
 		m_gen->line(lua::assign("id", sid) + ",");
@@ -679,7 +679,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc)
 	// screen
 	const float hw = picture->entry->sprite_source_size.w * 0.5f / picture->invscale * m_scale,
 		hh = picture->entry->sprite_source_size.h * 0.5f / picture->invscale * m_scale;
-	d2d::Vector screen[4];
+	ee::Vector screen[4];
 	screen[0].Set(-hw, hh);
 	screen[1].Set(-hw, -hh);
 	screen[2].Set(hw, -hh);
@@ -745,12 +745,12 @@ int CocoPacker::ParserIcon(const eicon::Sprite* sprite)
 
 void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 {
-	const d2d::Image* img = symbol->GetIcon()->GetImage();
-	d2d::Symbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
+	const ee::Image* img = symbol->GetIcon()->GetImage();
+	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in the texpacker file 2!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	lua::TableAssign ta(*m_gen, "picture", false, false);
@@ -765,7 +765,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 	std::string assignTex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
 
 	// src
-	d2d::Vector node[4];
+	ee::Vector node[4];
 	symbol->GetIcon()->GetTexCoords(process, node);
 	int left = picture->scr[1].x, bottom = picture->scr[1].y;
 	int width = picture->scr[2].x - left,
@@ -784,7 +784,7 @@ void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 	// screen
 	const float hw = picture->entry->sprite_source_size.w * 0.5f / picture->invscale * m_scale,
 		hh = picture->entry->sprite_source_size.h * 0.5f / picture->invscale * m_scale;
-	d2d::Vector screen[4];
+	ee::Vector screen[4];
 	for (int i = 0; i < 4; ++i) {
 		screen[i].x = -hw + hw * 2 * node[i].x;
 		screen[i].y = -hh + hh * 2 * node[i].y;
@@ -816,7 +816,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	ParserSymbolBase(symbol);
 
 	// clipbox
-	const d2d::Rect& cb = symbol->m_clipbox;
+	const ee::Rect& cb = symbol->m_clipbox;
 	if (cb.xmin != 0 || cb.xmax != 0 || cb.ymin != 0 || cb.ymax != 0)
 	{
 		std::string width = wxString::FromDouble(cb.xmax - cb.xmin);
@@ -837,12 +837,12 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	}
 
 	// children
-	std::map<std::string, std::vector<d2d::Sprite*> > map_actions;
-	std::vector<d2d::Sprite*> others;
+	std::map<std::string, std::vector<ee::Sprite*> > map_actions;
+	std::vector<ee::Sprite*> others;
 	Utility::GroupSpritesFromTag(symbol->m_sprites, map_actions, others);
 	if (!map_actions.empty())
 	{
-		std::map<std::string, std::vector<d2d::Sprite*> >::iterator itr;
+		std::map<std::string, std::vector<ee::Sprite*> >::iterator itr;
 		for (itr = map_actions.begin(); itr != map_actions.end(); ++itr)
 		{
 			lua::TableAssign ta(*m_gen, "", true);
@@ -914,7 +914,7 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
 		comp_idx = order.size();
 		for (int i = 0, n = symbol->getMaxFrameIndex(); i < n; ++i)
 		{
-			std::vector<d2d::Sprite*> sprites;
+			std::vector<ee::Sprite*> sprites;
 			libanim::Utility::GetCurrSprites(symbol, i + 1, sprites);
 			if (sprites.empty()) {
 				continue;
@@ -932,7 +932,7 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
 					}
 				}
 			}
-			for_each(sprites.begin(), sprites.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 		}
 	}	
  	// children
@@ -944,11 +944,11 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
  		{
  			lua::TableAssign ta(*m_gen, "", true);
 
-			std::vector<d2d::Sprite*> sprites;
+			std::vector<ee::Sprite*> sprites;
 			libanim::Utility::GetCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				ParserSpriteForFrame(sprites[j], order, map_id2idx);
-			for_each(sprites.begin(), sprites.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
  		}
  	}
 }
@@ -1025,7 +1025,7 @@ void CocoPacker::ParserScale9(const escale9::Symbol* symbol)
  	}
 }
 
-void CocoPacker::CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture)
+void CocoPacker::CalSrcFromUV(ee::Vector src[4], TPParser::Picture* picture)
 {
 	if (picture->entry->rotated)
 	{
@@ -1053,7 +1053,7 @@ void CocoPacker::CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture)
 	}
 }
 
-void CocoPacker::CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* picture)
+void CocoPacker::CalSrcFromUVFixed(ee::Vector src[4], TPParser::Picture* picture)
 {
 	if (picture->entry->rotated)
 	{
@@ -1081,21 +1081,21 @@ void CocoPacker::CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* pictur
 
 int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 {
-	d2d::Symbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(sprite->GetSymbol().getImage()->GetFilepath());
+	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(sprite->GetSymbol().getImage()->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 3!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// pictures
 	//////////////////////////////////////////////////////////////////////////
 	// id
-	std::map<const d2d::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
+	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
 	if (itr_sprite == m_mapSpriteID.end()) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 	int curr_id = itr_sprite->second;
 	// tex
@@ -1106,7 +1106,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 		frame = std::fabs(std::floor(1.0f / sprite->GetSpeed().y));
 	}
 	std::vector<int> frame_size;
-	d2d::Vector speed = sprite->GetSpeed();
+	ee::Vector speed = sprite->GetSpeed();
 	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->GetSymbol().getShape());
 	// 打包emesh::Strip做的流水
 	if (dynamic_cast<emesh::Strip*>(shape))
@@ -1129,7 +1129,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 				m_gen->line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
 
 				// src
-				d2d::Vector src[4];
+				ee::Vector src[4];
 				src[0] = left_up->nodes[2]->uv;
 				src[1] = left_up->nodes[0]->uv;
 				src[2] = right_down->nodes[1]->uv;
@@ -1143,7 +1143,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 					lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
 
 				// screen
-				d2d::Vector screen[4];
+				ee::Vector screen[4];
 				screen[0] = left_up->nodes[2]->xy;
 				screen[1] = left_up->nodes[0]->xy;
 				screen[2] = right_down->nodes[1]->xy;
@@ -1184,7 +1184,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 			m_gen->line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
 
 			// src
-			d2d::Vector src[4];
+			ee::Vector src[4];
 			src[0] = tri->nodes[0]->uv;
 			src[1] = tri->nodes[1]->uv;
 			src[2] = tri->nodes[2]->uv;
@@ -1198,7 +1198,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 				lua::tableassign("", 8, sx0, sy0, sx1, sy1, sx2, sy2, sx3, sy3));		
 
 			// screen
-			d2d::Vector screen[4];
+			ee::Vector screen[4];
 			screen[0] = tri->nodes[0]->xy;
 			screen[1] = tri->nodes[1]->xy;
 			screen[2] = tri->nodes[2]->xy;
@@ -1229,14 +1229,14 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	//////////////////////////////////////////////////////////////////////////
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const d2d::Symbol* symbol = &sprite->GetSymbol();
+	const ee::Symbol* symbol = &sprite->GetSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
  	// id
- 	std::map<const d2d::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
+ 	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
  	if (itr_mesh_symbol == m_mapSymbolID.end()) {
  		std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID 1!";
- 		throw d2d::Exception(str);
+ 		throw ee::Exception(str);
  	}
  	std::string sid = wxString::FromDouble(itr_mesh_symbol->second);
  	m_gen->line(lua::assign("id", sid) + ",");
@@ -1273,11 +1273,11 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 
 int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 {
-	const d2d::Symbol* symbol = &sprite->GetSymbol();
-	std::map<const d2d::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
+	const ee::Symbol* symbol = &sprite->GetSymbol();
+	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
 	if (itr_mesh_symbol == m_mapSymbolID.end()) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID 2!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	if (m_terrain2d_ids.find(itr_mesh_symbol->second) != m_terrain2d_ids.end()) {
@@ -1291,22 +1291,22 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 	const std::vector<eterrain2d::OceanMesh*> oceans = sprite->GetSymbol().GetOceans();
 	assert(oceans.size() == 1);
 	eterrain2d::OceanMesh* ocean = oceans[0];
-	const d2d::ImageSymbol* img = ocean->GetImage0();
-	d2d::Symbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
+	const ee::ImageSymbol* img = ocean->GetImage0();
+	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 4!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// pictures
 	//////////////////////////////////////////////////////////////////////////
 	// id
-	std::map<const d2d::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
+	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
 	if (itr_sprite == m_mapSpriteID.end()) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 	int curr_id = itr_sprite->second;
 	// tex
@@ -1349,7 +1349,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 					emesh::Triangle* tri = tris[k];
 
 					// src
-					d2d::Vector src[4];
+					ee::Vector src[4];
 					src[0] = tri->nodes[0]->uv;
 					src[1] = tri->nodes[1]->uv;
 					src[2] = tri->nodes[2]->uv;
@@ -1363,7 +1363,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 						sx1, sy1, sx2, sy2, sx3, sy3));		
 
 					// screen
-					d2d::Vector screen[4];
+					ee::Vector screen[4];
 					screen[0] = tri->nodes[0]->xy;
 					screen[1] = tri->nodes[1]->xy;
 					screen[2] = tri->nodes[2]->xy;
@@ -1441,34 +1441,34 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 
 int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 {
-	const std::vector<d2d::Shape*>& shapes = sprite->GetSymbol().GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = sprite->GetSymbol().GetAllShapes();
 	assert(shapes.size() == 1);
 	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
 	assert(poly);
 	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
 	assert(material);
-	const d2d::ImageSymbol* img_symbol = material->GetImage();
+	const ee::ImageSymbol* img_symbol = material->GetImage();
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 5!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// pictures
 	//////////////////////////////////////////////////////////////////////////
 	// id
-	std::map<const d2d::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
+	std::map<const ee::Sprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
 	if (itr_sprite == m_mapSpriteID.end()) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 	int curr_id = itr_sprite->second;
 	// tex
 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
 
-	const std::vector<d2d::Vector>& vertices = material->GetTriangles();
-	const std::vector<d2d::Vector>& texcoords = material->GetTexcoords();
+	const std::vector<ee::Vector>& vertices = material->GetTriangles();
+	const std::vector<ee::Vector>& texcoords = material->GetTexcoords();
 	assert(vertices.size() == texcoords.size() && vertices.size() % 3 == 0);
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
 	{
@@ -1477,7 +1477,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 		m_gen->line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
 		
 		// src
-		d2d::Vector src[4];
+		ee::Vector src[4];
 		for (int j = 0; j < 3; ++j) {
 			src[j] = texcoords[i+j];
 		}
@@ -1491,7 +1491,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 			sx1, sy1, sx2, sy2, sx3, sy3));		
 
 		// screen
-		d2d::Vector screen[4];
+		ee::Vector screen[4];
 		for (int j = 0; j < 3; ++j) {
 			screen[j] = vertices[i+j];
 		}
@@ -1518,14 +1518,14 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	//////////////////////////////////////////////////////////////////////////
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const d2d::Symbol* symbol = &sprite->GetSymbol();
+	const ee::Symbol* symbol = &sprite->GetSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
 	// id
-	std::map<const d2d::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
+	std::map<const ee::Symbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
 	if (itr_mesh_symbol == m_mapSymbolID.end()) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID 3!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 	std::string sid = wxString::FromDouble(itr_mesh_symbol->second);
 	m_gen->line(lua::assign("id", sid) + ",");
@@ -1556,24 +1556,24 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	return id;
 }
 
-void CocoPacker::ParserSymbolBase(const d2d::Symbol* symbol)
+void CocoPacker::ParserSymbolBase(const ee::Symbol* symbol)
 {
 	// export
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
 
 	// id
-	std::map<const d2d::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
+	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 	if (itr == m_mapSymbolID.end()) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in m_mapSymbolID 4!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}
 
 	std::string sid = wxString::FromDouble(itr->second);
 	m_gen->line(lua::assign("id", sid) + ",");
 }
 
-void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector<int>& ids, 
+void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<int>& ids, 
 										std::map<int, std::vector<std::string> >& unique, 
 										std::vector<std::pair<int, std::string> >& order)
 {
@@ -1581,9 +1581,9 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 
 	bool isFont = false;
 
-	if (const d2d::ImageSprite* image = dynamic_cast<const d2d::ImageSprite*>(sprite))
+	if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(sprite))
 	{
-		std::map<const d2d::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
+		std::map<const ee::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr != m_mapSpriteID.end())
 		{
 			id = itr->second;
@@ -1592,39 +1592,39 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 		{
 			// libanim::Symbol's sprites store unique
 
-			std::map<const d2d::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 			if (itr == m_mapSymbolID.end()) {
 				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID 5!";
-				throw d2d::Exception(str);
+				throw ee::Exception(str);
 			}
 			id = itr->second;
 		}
 	}
-	else if (const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite))
+	else if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(sprite))
 	{
 		isFont = true;
-		std::map<const d2d::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
+		std::map<const ee::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr == m_mapSpriteID.end()) {
 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSpriteID!";
-			throw d2d::Exception(str);
+			throw ee::Exception(str);
 		}
 		id = itr->second;
 	}
 	else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(sprite))
 	{
-		std::map<const d2d::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
+		std::map<const ee::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		if (itr == m_mapSpriteID.end()) {
 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSpriteID!";
-			throw d2d::Exception(str);
+			throw ee::Exception(str);
 		}
 		id = itr->second;
 	}
 	else
 	{
-		std::map<const d2d::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 		if (itr == m_mapSymbolID.end()) {
  			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID 6!";
- 			throw d2d::Exception(str);
+ 			throw ee::Exception(str);
 		}
 		id = itr->second;
 	}
@@ -1636,8 +1636,8 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 	{
 		if (isFont)
 		{
-			const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite);
-			bool is_mount_node = font && font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
+			const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(sprite);
+			bool is_mount_node = font && font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
 			if (is_mount_node)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1647,7 +1647,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", TransColor(font->font_color, d2d::PT_ARGB));
+				std::string aColor = lua::assign("color", TransColor(font->font_color, ee::PT_ARGB));
 
 //				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
 				int align_hori = font->align_hori;
@@ -1668,8 +1668,8 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 			bool is_mount_node = false;
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
-				const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_mount_node = font && font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
+				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+				is_mount_node = font && font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1703,8 +1703,8 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 			bool is_mount_node = false;
 			const ecomplex::Sprite* ecomplex = dynamic_cast<const ecomplex::Sprite*>(sprite);
 			if (ecomplex && ecomplex->GetSymbol().m_sprites.size() == 1) {
-				const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
-				is_mount_node = font && font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
+				const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(ecomplex->GetSymbol().m_sprites[0]);
+				is_mount_node = font && font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
 			}
 			if (is_mount_node) {
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -1731,7 +1731,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::Sprite* sprite, std::vector
 	}
 }
 
-void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite, int index,
+void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite, int index,
 									const std::vector<int>& ids, const std::vector<std::pair<int, std::string> >& order)
 {
 	int id = ids[index];
@@ -1744,19 +1744,19 @@ void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite, int index,
 		}
 	if (cindex == -1) {
 		std::string str = sprite->name + " not found in order!";
-		throw d2d::Exception(str);
+		throw ee::Exception(str);
 	}	
 
-	if (const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite))
+	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(sprite))
 		ParserFontForFrame(font, cindex);
 	else
 		ParserImageForFrame(sprite, cindex);
 
-// 	bool forceMat = dynamic_cast<const d2d::FontBlankSprite*>(sprite);
+// 	bool forceMat = dynamic_cast<const ee::FontBlankSprite*>(sprite);
 // 	resolveSpriteForFrame(sprite, cindex, forceMat);
 }
 
-void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite, 
+void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite, 
 									  const std::vector<std::pair<int, std::string> >& order,
 									  const std::map<int, int>& map_id2idx)
 {
@@ -1770,10 +1770,10 @@ void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite,
 	} 
 	else 
 	{
-		std::map<const d2d::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
+		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 		if (itr == m_mapSymbolID.end()) {
 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in m_mapSymbolID 7!";
-			throw d2d::Exception(str);
+			throw ee::Exception(str);
 		}
 		int id = itr->second;
 
@@ -1797,14 +1797,14 @@ void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite,
 
 		if (cindex == -1) {
 			std::string str = sprite->name + " not in order!";
-			throw d2d::Exception(str);
+			throw ee::Exception(str);
 		}
 
 		ParserSpriteForFrame(sprite, cindex, true);
 	}
 }
 
-void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite, int id, bool forceMat)
+void CocoPacker::ParserSpriteForFrame(const ee::Sprite* sprite, int id, bool forceMat)
 {
 	std::vector<std::string> params;
 
@@ -1827,7 +1827,7 @@ void CocoPacker::ParserSpriteForFrame(const d2d::Sprite* sprite, int id, bool fo
 	lua::tableassign(*m_gen, "", params);
 }
 
-void CocoPacker::ParserImageForFrame(const d2d::Sprite* sprite, int id)
+void CocoPacker::ParserImageForFrame(const ee::Sprite* sprite, int id)
 {
 	std::vector<std::string> params;
 
@@ -1854,14 +1854,14 @@ void CocoPacker::ParserImageForFrame(const d2d::Sprite* sprite, int id)
 	lua::tableassign(*m_gen, "", params);
 }
 
-void CocoPacker::ParserFontForFrame(const d2d::FontBlankSprite* sprite, int id)
+void CocoPacker::ParserFontForFrame(const ee::FontBlankSprite* sprite, int id)
 {
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
 
 	float mat[6];
 	TransToMat(sprite, mat, true);
 
-	bool isNullNode = sprite->font.empty() && sprite->font_color == d2d::Colorf(0, 0, 0, 0);
+	bool isNullNode = sprite->font.empty() && sprite->font_color == ee::Colorf(0, 0, 0, 0);
 	if (!isNullNode)
 	{
 		// move to left-top
@@ -1882,14 +1882,14 @@ void CocoPacker::ParserFontForFrame(const d2d::FontBlankSprite* sprite, int id)
 	lua::tableassign(*m_gen, "", 2, assignIndex, assignMat);
 }
 
-void CocoPacker::TransToMat(const d2d::Sprite* sprite, float mat[6], bool force /*= false*/) const
+void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /*= false*/) const
 {
 	mat[1] = mat[2] = mat[4] = mat[5] = 0;
 	mat[0] = mat[3] = 1;
 
 	if (!force &&
-		(dynamic_cast<const d2d::ImageSprite*>(sprite) ||
-		dynamic_cast<const d2d::FontBlankSprite*>(sprite)))
+		(dynamic_cast<const ee::ImageSprite*>(sprite) ||
+		dynamic_cast<const ee::FontBlankSprite*>(sprite)))
 	{
 	}
 	else
@@ -1902,16 +1902,16 @@ void CocoPacker::TransToMat(const d2d::Sprite* sprite, float mat[6], bool force 
 		bool xMirror, yMirror;
 		sprite->GetMirror(xMirror, yMirror);
 
-		d2d::Vector center = sprite->GetCenter();
-		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
+		ee::Vector center = sprite->GetCenter();
+		if (dynamic_cast<const ee::ImageSprite*>(sprite))
 		{
 			TPParser::Picture* picture = m_parser.FindPicture(&sprite->GetSymbol());
 			if (!picture) {
 				std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 6!";
-				throw d2d::Exception(str);
+				throw ee::Exception(str);
 			}
 
-			d2d::Vector offset = picture->offset;
+			ee::Vector offset = picture->offset;
 			if (xMirror) {
 				offset.x = -offset.x;
 			}
@@ -1920,7 +1920,7 @@ void CocoPacker::TransToMat(const d2d::Sprite* sprite, float mat[6], bool force 
 			}
 			offset.x *= sprite->GetScale().x / picture->invscale;
 			offset.y *= sprite->GetScale().y / picture->invscale;
-			center += d2d::Math2D::RotateVector(offset, sprite->GetAngle());
+			center += ee::Math2D::RotateVector(offset, sprite->GetAngle());
 		}
 		float sx = sprite->GetScale().x,
 			  sy = sprite->GetScale().y;
@@ -1947,25 +1947,25 @@ void CocoPacker::TransToMat(const d2d::Sprite* sprite, float mat[6], bool force 
 	mat[5] = -mat[5];
 }
 
-void CocoPacker::GetColorAssignParams(const d2d::Sprite* sprite, std::vector<std::string>& params) const
+void CocoPacker::GetColorAssignParams(const ee::Sprite* sprite, std::vector<std::string>& params) const
 {
-	if (sprite->color.multi != d2d::Colorf(1,1,1,1) || sprite->color.add != d2d::Colorf(0,0,0,0)) 
+	if (sprite->color.multi != ee::Colorf(1,1,1,1) || sprite->color.add != ee::Colorf(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", d2d::TransColor(sprite->color.multi, d2d::PT_BGRA));
+		std::string str_multi = lua::assign("color", ee::TransColor(sprite->color.multi, ee::PT_BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", d2d::TransColor(sprite->color.add, d2d::PT_ABGR));
+		std::string str_add = lua::assign("add", ee::TransColor(sprite->color.add, ee::PT_ABGR));
 		params.push_back(str_add);
 	}
 
-	if (sprite->color.r != d2d::Colorf(1, 0, 0, 1) || sprite->color.g != d2d::Colorf(0, 1, 0, 1) || sprite->color.b != d2d::Colorf(0, 0, 1, 1))
+	if (sprite->color.r != ee::Colorf(1, 0, 0, 1) || sprite->color.g != ee::Colorf(0, 1, 0, 1) || sprite->color.b != ee::Colorf(0, 0, 1, 1))
 	{
-		std::string str_r = lua::assign("r_map", d2d::TransColor(sprite->color.r, d2d::PT_RGBA));
+		std::string str_r = lua::assign("r_map", ee::TransColor(sprite->color.r, ee::PT_RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", d2d::TransColor(sprite->color.g, d2d::PT_RGBA));
+		std::string str_g = lua::assign("g_map", ee::TransColor(sprite->color.g, ee::PT_RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", d2d::TransColor(sprite->color.b, d2d::PT_RGBA));
+		std::string str_b = lua::assign("b_map", ee::TransColor(sprite->color.b, ee::PT_RGBA));
 		params.push_back(str_b);
 	}
 }

@@ -6,7 +6,7 @@ namespace etexture
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel, panel->GetStageImpl())
+	: ee::OrthoCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -15,30 +15,32 @@ StageCanvas::StageCanvas(StagePanel* panel)
 }
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
-						 d2d::Sprite* edited, const d2d::MultiSpritesImpl* bg_sprites)
-	: d2d::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
+						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
+	: ee::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	m_bg = d2d::draw_all_to_one_spr(m_sprite_impl, m_edited);
+	std::vector<Sprite*> sprites;
+	m_sprite_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		d2d::Matrix mat(m_edited->GetTransInvMatrix());
-		d2d::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
+		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		ee::SpriteRenderer::Instance()->Draw(m_bg, NULL, mat);
 	}
 
-	d2d::Rect sr = m_screen.GetRegion();
-	m_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
-	m_panel->TraverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	ee::Rect sr = m_screen.GetRegion();
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		ee::DT_VISIBLE);
+	m_panel->TraverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
-	d2d::PrimitiveDraw::Cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
 	m_stage->DrawEditOP();
 }

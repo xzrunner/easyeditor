@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_EDIT_NODES_CMPT_H_
 #define _LIBSHAPE_EDIT_NODES_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -12,7 +12,7 @@ class EditNodesCMPT : public AbstractEditCMPT
 {
 public:
 	EditNodesCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
+		ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl);
 
 protected:
 	virtual wxSizer* initLayout();

@@ -10,7 +10,7 @@ template <typename T>
 class GetNameVisitor : public Visitor
 {
 public:
-	GetNameVisitor(std::vector<wxString>& names)
+	GetNameVisitor(std::vector<std::string>& names)
 		: m_names(names) {}
 
 	virtual void Visit(Object* object, bool& next)
@@ -22,7 +22,7 @@ public:
 	}
 
 private:
-	std::vector<wxString>& m_names;
+	std::vector<std::string>& m_names;
 
 }; // GetNameVisitor
 

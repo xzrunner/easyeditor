@@ -1,9 +1,9 @@
-#ifndef _DRAG2D_SCENE_NODE_H_
-#define _DRAG2D_SCENE_NODE_H_
+#ifndef _EASYEDITOR_SCENE_NODE_H_
+#define _EASYEDITOR_SCENE_NODE_H_
 
 #include <set>
 
-namespace d2d
+namespace ee
 {
 
 class SceneNode
@@ -38,4 +38,4 @@ private:
 
 }
 
-#endif // _DRAG2D_SCENE_NODE_H_
+#endif // _EASYEDITOR_SCENE_NODE_H_

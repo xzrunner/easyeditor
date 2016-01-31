@@ -1,7 +1,7 @@
 #ifndef _LIBCOMPLEX_FILE_LOADER_H_
 #define _LIBCOMPLEX_FILE_LOADER_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {

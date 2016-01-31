@@ -4,7 +4,7 @@
 #include "interfaces.h"
 #include "RectMgr.h"
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
@@ -12,7 +12,7 @@ namespace eimage
 class RectCutCMPT;
 class StagePanel;
 
-class RectCutOP : public d2d::ZoomViewOP
+class RectCutOP : public ee::ZoomViewOP
 {
 public:
 	RectCutOP(RectCutCMPT* cmpt, StagePanel* stage);
@@ -38,19 +38,19 @@ public:
 private:
 	void drawCaptureLine() const;
 
-	void fixedPos(d2d::Vector& pos) const;
+	void fixedPos(ee::Vector& pos) const;
 
 private:
 	RectCutCMPT* m_cmpt;
 
 	StagePanel* m_stage;
 
-	d2d::Vector m_firstPos, m_currPos;
+	ee::Vector m_firstPos, m_currPos;
 
-	d2d::Vector m_captured;
+	ee::Vector m_captured;
 
 	RectMgr::Node m_nodeSelected;
-	d2d::Rect* m_rectSelected;
+	ee::Rect* m_rectSelected;
 
 	RectMgr m_rects;
 

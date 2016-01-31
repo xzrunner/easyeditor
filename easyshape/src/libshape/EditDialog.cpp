@@ -20,14 +20,14 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 {
 	InitLayout(symbol);
 
-	wxString filepath = d2d::FileHelper::GetFilenameAddTag(
+	wxString filepath = ee::FileHelper::GetFilenameAddTag(
 		symbol->GetFilepath(), libshape::FILE_TAG, "json");
-	if (d2d::FileHelper::IsFileExist(filepath)) {
+	if (ee::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.mb_str());
 		m_toolbar->SelectSuitableEditOP();
 	}
 
-	d2d::SetWndDirtySJ::Instance()->SetDirty();
+	ee::SetWndDirtySJ::Instance()->SetDirty();
 }
 
 EditDialog::~EditDialog()
@@ -46,7 +46,7 @@ void EditDialog::InitLayout(Symbol* symbol)
 	wxSplitterWindow* vertical = new wxSplitterWindow(this);
 	wxSplitterWindow* horizontal = new wxSplitterWindow(vertical);
 
-	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(horizontal);
+	ee::PropertySettingPanel* property = new ee::PropertySettingPanel(horizontal);
 	m_stage = new StagePanel(vertical, this, symbol);
 	property->SetEditPanel(m_stage->GetStageImpl());
 	m_toolbar = new ToolbarPanel(horizontal, property, m_stage);
@@ -65,16 +65,16 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	d2d::Symbol& symbol = const_cast<d2d::Symbol&>(m_stage->GetSymbol());
+	ee::Symbol& symbol = const_cast<ee::Symbol&>(m_stage->GetSymbol());
 	const std::string& filepath = symbol.GetFilepath();
 
-	d2d::ConfirmDialog dlg(this);
+	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
 		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->UpdateBoundings(symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

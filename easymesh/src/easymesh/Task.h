@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_TASK_H_
 #define _EASYMESH_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace emesh
@@ -9,7 +9,7 @@ namespace emesh
 
 class StagePanel;
 
-class Task : public d2d::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
@@ -20,9 +20,9 @@ public:
 
 	virtual bool IsDirty() const;
 
-	virtual void GetAllSprite(std::vector<const d2d::Sprite*>& sprites) const {}
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const {}
 
-	virtual const d2d::EditPanel* GetEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 	emesh::StagePanel* getStagePanel() { return m_stage; }
 
@@ -31,15 +31,15 @@ private:
 		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
 		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
 
-	void initLayout();
+	void InitLayout();
 
 private:
 	wxWindow* m_root;
 
 	wxFrame* m_parent;
 
-	d2d::LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
+	ee::LibraryPanel* m_library;
+	ee::PropertySettingPanel* m_property;
 	emesh::StagePanel* m_stage;
 
 }; // Task

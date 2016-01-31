@@ -16,8 +16,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -65,7 +65,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
 	m_top_pannels.library = new TopLibraryPanel(split);
-	m_top_pannels.property = new d2d::PropertySettingPanel(split);
+	m_top_pannels.property = new ee::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.6f);
 	split->SplitHorizontally(m_top_pannels.library, m_top_pannels.property);

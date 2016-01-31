@@ -1,7 +1,7 @@
 #ifndef _ESHAPE_LIBRARY_PANEL_H_
 #define _ESHAPE_LIBRARY_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eshape
 {
@@ -11,15 +11,15 @@ class ToolbarPanel;
 class LibraryShapePage;
 class LibraryImagePage;
 
-class LibraryPanel : public d2d::LibraryPanel
+class LibraryPanel : public ee::LibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);
 
 	virtual void onPageChanged(wxBookCtrlEvent& event);
 
-	d2d::ILibraryPage* getShapePage();
-	d2d::ILibraryPage* getImagePage();
+	ee::ILibraryPage* getShapePage();
+	ee::ILibraryPage* getImagePage();
 
 	void setContext(StagePanel* stage, ToolbarPanel* toolbar);
 

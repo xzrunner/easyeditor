@@ -4,7 +4,7 @@
 
 #include "CollapsiblePane.h"
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -17,7 +17,7 @@ namespace ebuilder
 			return NULL;
 		}
 
-		virtual void update(const d2d::LibraryList& list) {}
+		virtual void update(const ee::LibraryList& list) {}
 
 		void createPanel(wxWindow* parent);
 

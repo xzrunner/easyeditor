@@ -2,7 +2,7 @@
 #define _ESHAPE_FILE_IO_H_
 
 #include <json/json.h>
-#include <drag2d.h>
+
 
 namespace eshape
 {

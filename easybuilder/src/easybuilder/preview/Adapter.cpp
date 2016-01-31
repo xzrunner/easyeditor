@@ -102,7 +102,7 @@ Button* Adapter::builder2Button(const ebuilder::Actor& actor)
 	return button;
 }
 
-Behavior* Adapter::builder2Behavior(d2d::ISprite* sprite, const ebuilder::Behavior& behavior)
+Behavior* Adapter::builder2Behavior(ee::ISprite* sprite, const ebuilder::Behavior& behavior)
 {
 	Behavior* result = NULL;
 	switch (behavior.type())

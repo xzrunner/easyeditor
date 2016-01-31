@@ -10,7 +10,7 @@
 namespace eparticle3d
 {
 
-class Sprite : public d2d::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite();
@@ -28,18 +28,18 @@ public:
 	//
 	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::Symbol* symbol);
+	virtual void SetSymbol(ee::Symbol* symbol);
 
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
 	void Start();
 
-	void Draw(const d2d::Matrix& mt) const;
+	void Draw(const ee::Matrix& mt) const;
 
-	void SetMatrix(const d2d::Matrix& mat);
+	void SetMatrix(const ee::Matrix& mat);
 
 	Quaternion& GetDir() { return m_dir; }
 	const Quaternion& GetDir() const { return m_dir; }
@@ -60,7 +60,7 @@ public:
 
 	void OnActive();
 
-	static d2d::Sprite* Create(d2d::Symbol* symbol) {
+	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
@@ -73,7 +73,7 @@ protected:
 private:
 	p3d_sprite* m_spr;
 
-	d2d::Matrix m_mat;
+	ee::Matrix m_mat;
 
 	Quaternion m_dir;
 

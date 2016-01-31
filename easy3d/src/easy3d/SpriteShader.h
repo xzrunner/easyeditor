@@ -1,14 +1,14 @@
 #ifndef _E3D_SPRITE_SHADER_H_
 #define _E3D_SPRITE_SHADER_H_
 
-#include <drag2d.h>
+
 
 #include "Matrix.h"
 
 namespace e3d
 {
 
-class SpriteShader : public d2d::IShader
+class SpriteShader : public ee::IShader
 {
 public:
 	SpriteShader();

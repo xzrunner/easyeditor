@@ -14,7 +14,7 @@ Scene::~Scene()
 	m_behaviors.clear();
 }
 
-Button* Scene::queryButtonByPos(const d2d::Vector& pos) const
+Button* Scene::queryButtonByPos(const ee::Vector& pos) const
 {
 	for (size_t i = 0, n = m_items.size(); i < n; ++i)
 	{

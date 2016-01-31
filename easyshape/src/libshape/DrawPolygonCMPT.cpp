@@ -7,9 +7,9 @@ namespace libshape
 {
 
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
-								 d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-								 d2d::PropertySettingPanel* property)
-	: d2d::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)
+								 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+								 ee::PropertySettingPanel* property)
+	: ee::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)
 	, m_stage_wnd(stage_wnd)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
@@ -17,8 +17,8 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindo
 	m_editOP = NULL;
 	// draw polygon with pen, node capture
 	{
-		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>
+		ee::OneFloatValueCMPT* cmpt = new ee::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
+		ee::EditOP* op = new EditPolylineOP<DrawPolygonOP, ee::SelectShapesOP>
 			(stage_wnd, stage, shapesImpl, property, cmpt, /*cmpt*/this);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
@@ -32,19 +32,19 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindo
 void DrawPolygonCMPT::updateControlValue()
 {
 	bool empty;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::EmptyVerifyVisitor(empty));
+	m_shapesImpl->GetShapeSelection()->Traverse(ee::EmptyVerifyVisitor(empty));
 	m_btnTrigger->Enable(!empty);
 }
 
-wxSizer* DrawPolygonCMPT::initLayout()
+wxSizer* DrawPolygonCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	sizer->Add(d2d::OneFloatValueCMPT::initLayout());
+	sizer->Add(ee::OneFloatValueCMPT::InitLayout());
 
 	sizer->AddSpacer(20);
 
-	sizer->Add(initChildrenLayout());
+	sizer->Add(InitChildrenLayout());
 
 	sizer->AddSpacer(20);
 
@@ -87,24 +87,24 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 	{
 	case 0:
 // 		{
-// 			// todo trans between wxColor and d2d::Colorf
-// 			d2d::Colorf col;
+// 			// todo trans between wxColor and ee::Colorf
+// 			ee::Colorf col;
 // 			col.r = m_color.Red() / 255.0f;
 // 			col.g = m_color.Green() / 255.0f;
 // 			col.b = m_color.Blue() / 255.0f;
-// 			d2d::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
+// 			ee::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
 // 			if (dlg.ShowModal() == wxID_OK) {
 // 				col = dlg.GetColor();
 // 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
 // 			}
 // 		}
 		{
-			// todo trans between wxColor and d2d::Colorf
-			d2d::Colorf col;
+			// todo trans between wxColor and ee::Colorf
+			ee::Colorf col;
 			col.r = m_color.Red() / 255.0f;
 			col.g = m_color.Green() / 255.0f;
 			col.b = m_color.Blue() / 255.0f;
-			d2d::RGBColorSettingDlg dlg(m_stage_wnd, NULL, col);
+			ee::RGBColorSettingDlg dlg(m_stage_wnd, NULL, col);
 			if (dlg.ShowModal() == wxID_OK) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
@@ -133,7 +133,7 @@ void DrawPolygonCMPT::onChangeFillingType(wxCommandEvent& event)
 void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 {
 	std::vector<PolygonShape*> polys;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<PolygonShape>(polys));
+	m_shapesImpl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<PolygonShape>(polys));
 
 	for (size_t i = 0, n = polys.size(); i < n; ++i)
 	{
@@ -141,13 +141,13 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 		switch (m_fillingTypeChoice->GetSelection()) 
 		{
 		case 0:
-			poly->SetMaterialColor(d2d::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f));
+			poly->SetMaterialColor(ee::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f));
 			break;
 		case 1:
-			poly->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->FetchSymbol(m_filePath)));
+			poly->SetMaterialTexture(static_cast<ee::ImageSymbol*>(ee::SymbolMgr::Instance()->FetchSymbol(m_filePath)));
 			break;
 		}
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

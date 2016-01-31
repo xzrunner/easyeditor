@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	ChangeJsonFile() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -24,14 +24,14 @@ public:
 	static ICommand* Create() { return new ChangeJsonFile(); }
 
 private:
-	void Run(const std::string& dir/*, d2d::FileType::Type type*/);
+	void Run(const std::string& dir/*, ee::FileType::Type type*/);
 
 	void Scale(const std::string& key, float times);
 
 private:
 	wxArrayString m_files;
 
-//	d2d::FileType::Type m_type;
+//	ee::FileType::Type m_type;
 
 }; // ChangeJsonFile
 

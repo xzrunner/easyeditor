@@ -3,13 +3,13 @@
 namespace coceditor
 {
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(PreviewCanvas, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::LibraryPanel* library,
-							 const std::vector<d2d::ISprite*>& sprites)
-	: d2d::OrthoCanvas(stage)
+PreviewCanvas::PreviewCanvas(ee::EditPanel* stage, ee::LibraryPanel* library,
+							 const std::vector<ee::ISprite*>& sprites)
+	: ee::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_library(library)
 	, m_sprites(sprites)
@@ -19,13 +19,13 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::LibraryPanel* library,
 
 	m_maxFrame = 0;
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		if (d2d::AnimSprite* anim = dynamic_cast<d2d::AnimSprite*>(m_sprites[i]))
+		if (ee::AnimSprite* anim = dynamic_cast<ee::AnimSprite*>(m_sprites[i]))
 			m_maxFrame = std::max(m_maxFrame, anim->getSymbol().getMaxFrameIndex());
 }
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
 	m_library->reloadTexture();
 }
 
@@ -47,26 +47,26 @@ void PreviewCanvas::drawStageData()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		if (d2d::AnimSprite* anim = dynamic_cast<d2d::AnimSprite*>(m_sprites[i]))
+		if (ee::AnimSprite* anim = dynamic_cast<ee::AnimSprite*>(m_sprites[i]))
 		{
-			std::vector<d2d::ISprite*> sprites;
+			std::vector<ee::ISprite*> sprites;
 			getAnimChildren(anim, sprites);
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
-				d2d::SpriteDraw::drawSprite(sprites[i]);
+				ee::SpriteDraw::drawSprite(sprites[i]);
 		}
 		else
-			d2d::SpriteDraw::drawSprite(m_sprites[i]);
+			ee::SpriteDraw::drawSprite(m_sprites[i]);
 	}
 }
 
-void PreviewCanvas::getAnimChildren(d2d::AnimSprite* anim, std::vector<d2d::ISprite*>& sprites) const
+void PreviewCanvas::getAnimChildren(ee::AnimSprite* anim, std::vector<ee::ISprite*>& sprites) const
 {
-	const d2d::AnimSymbol& symbol = anim->getSymbol();
+	const ee::AnimSymbol& symbol = anim->getSymbol();
 	for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 	{
-		d2d::AnimSymbol::Layer* layer = symbol.m_layers[i];
+		ee::AnimSymbol::Layer* layer = symbol.m_layers[i];
 
-		d2d::AnimSymbol::Frame *currFrame = getCurrFrame(layer, m_currFrame);
+		ee::AnimSymbol::Frame *currFrame = getCurrFrame(layer, m_currFrame);
 		if (!currFrame)
 			continue;
 
@@ -75,11 +75,11 @@ void PreviewCanvas::getAnimChildren(d2d::AnimSprite* anim, std::vector<d2d::ISpr
 	}
 }
 
-d2d::AnimSymbol::Frame* PreviewCanvas::getCurrFrame(d2d::AnimSymbol::Layer* layer, int index)
+ee::AnimSymbol::Frame* PreviewCanvas::getCurrFrame(ee::AnimSymbol::Layer* layer, int index)
 {
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 	{
-		d2d::AnimSymbol::Frame* frame = layer->frames[i];
+		ee::AnimSymbol::Frame* frame = layer->frames[i];
 		if (frame->index > index)
 			return frame;
 	}

@@ -23,9 +23,9 @@ ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name,
 					 const std::string& tp_dir)
 	: m_tp(tp_dir)
 {
-	d2d::TextureFactory::Instance()->InitTexturePacker(tp_dir);
+	ee::TextureFactory::Instance()->InitTexturePacker(tp_dir);
 
-	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& data = ee::Config::Instance()->GetSettings();
 	bool old_cfg = data.load_image;
 	data.load_image = false;
 
@@ -56,7 +56,7 @@ void ResPacker::OutputEpt(const std::string& outfile, TextureType type, int LOD,
 
 void ResPacker::OutputUIExtra(const std::string& outfile) const
 {
-	std::string dir = d2d::FileHelper::GetFileDir(outfile);
+	std::string dir = ee::FileHelper::GetFileDir(outfile);
 
 	Json::Value value;
 
@@ -112,8 +112,8 @@ void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_
 
 	int i = 1;
 	while (true) {
-		std::string tp_path = tp_name + d2d::StringHelper::ToString(i) + ".json";
-		if (d2d::FileHelper::IsFileExist(tp_path)) {
+		std::string tp_path = tp_name + ee::StringHelper::ToString(i) + ".json";
+		if (ee::FileHelper::IsFileExist(tp_path)) {
 			Json::Value value;
 			Json::Reader reader;
 			std::locale::global(std::locale(""));
@@ -161,7 +161,7 @@ void ResPacker::OutputEptDesc(const std::string& outfile, const std::string& tp_
 void ResPacker::LoadJsonData(const std::string& dir)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) 
@@ -169,18 +169,18 @@ void ResPacker::LoadJsonData(const std::string& dir)
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex) || 
-			d2d::FileType::IsType(filepath, d2d::FileType::e_anim) ||
-			d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
+			ee::FileType::IsType(filepath, ee::FileType::e_anim) ||
+			ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
 			filepaths.push_back(filepath);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_ui)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_ui)) {
 			PackUI::Instance()->AddTask(filepath);
 		}
 	}
 
 	std::sort(filepaths.begin(), filepaths.end());
 	for (int i = 0, n = filepaths.size(); i < n; ++i) {
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepaths[i]);
 		m_symbols.push_back(symbol);
 	}
 }
@@ -189,10 +189,10 @@ void ResPacker::LoadTPData(const std::string& tp_name)
 {
 	int i = 1;
 	while (true) {
-		std::string tp_path = tp_name + d2d::StringHelper::ToString(i) + ".json";
-		if (d2d::FileHelper::IsFileExist(tp_path)) {
+		std::string tp_path = tp_name + ee::StringHelper::ToString(i) + ".json";
+		if (ee::FileHelper::IsFileExist(tp_path)) {
 			m_tp.Add(tp_path);
-			d2d::TextureFactory::Instance()->AddTextureFromConfig(tp_path);
+			ee::TextureFactory::Instance()->AddTextureFromConfig(tp_path);
 		} else {
 			break;
 		}
@@ -205,7 +205,7 @@ void ResPacker::Pack() const
 	PackNodeFactory* factory = PackNodeFactory::Instance();
 	for (int i = 0, n = m_symbols.size(); i < n; ++i) 
 	{
-		const d2d::Symbol* symbol = m_symbols[i];
+		const ee::Symbol* symbol = m_symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
 			factory->Create(complex);
 		} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol)) {
@@ -213,7 +213,7 @@ void ResPacker::Pack() const
 		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
 			factory->Create(p3d);
 		} else {
-			throw d2d::Exception("ResPacker::Pack unhandled type.");
+			throw ee::Exception("ResPacker::Pack unhandled type.");
 		}
 	}
 }

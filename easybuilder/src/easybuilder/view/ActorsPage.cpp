@@ -12,12 +12,12 @@
 using namespace ebuilder;
 
 ActorsPage::ActorsPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Actors"))
+	: ee::ILibraryPage(parent, wxT("Actors"))
 {
 	initLayout();
 }
 
-bool ActorsPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool ActorsPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return dynamic_cast<ActorItem*>(symbol) != NULL;
 }
@@ -48,7 +48,7 @@ void ActorsPage::onDelPress(wxCommandEvent& event)
 	designer->removeSprite(item->getActor());
 	designer->Refresh();
 
-	d2d::ILibraryPage::onDelPress(event);
+	ee::ILibraryPage::onDelPress(event);
 }
 
 void ActorsPage::initButtons(wxSizer* sizer)

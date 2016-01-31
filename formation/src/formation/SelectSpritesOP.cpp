@@ -3,22 +3,22 @@
 
 using namespace formation;
 
-SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
+SelectSpritesOP::SelectSpritesOP(ee::EditPanel* editPanel, ee::MultiSpritesImpl* spritesImpl, 
+								 ee::PropertySettingPanel* propertyPanel, ee::AbstractEditCMPT* callback/* = NULL*/)
+	: ee::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
 {
 }
 
-d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
+ee::IPropertySetting* SelectSpritesOP::createPropertySetting(ee::ISprite* sprite) const
 {
 	if (!sprite) return NULL;
 
-	std::vector<d2d::ISprite*> sprites;
+	std::vector<ee::ISprite*> sprites;
 	sprites.push_back(sprite);
 	return new ActorPropertySetting(m_editPanel, sprites);
 }
 
-d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<d2d::ISprite*>& sprites) const
+ee::IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<ee::ISprite*>& sprites) const
 {
 	return new ActorPropertySetting(m_editPanel, sprites);
 }

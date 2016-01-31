@@ -9,7 +9,7 @@ namespace eparticle3d
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage(editPanel)
 {
 }
@@ -20,14 +20,14 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
-	std::vector<d2d::Sprite*> sprites;
-	static_cast<StagePanel*>(m_stage)->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
 
 	if (m_stage->m_ps) {

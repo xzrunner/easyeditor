@@ -1,12 +1,12 @@
 #ifndef _EASYANIM_LAYERS_CONTENT_WIDGET_H_
 #define _EASYANIM_LAYERS_CONTENT_WIDGET_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-class LayersContentWidget : public wxPanel, public d2d::Observer
+class LayersContentWidget : public wxPanel, public ee::Observer
 {
 public:
 	LayersContentWidget(wxWindow* parent);

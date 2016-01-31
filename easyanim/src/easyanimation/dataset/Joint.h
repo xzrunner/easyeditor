@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_JOINT_H_
 #define _EASYANIM_JOINT_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -9,19 +9,19 @@ namespace eanim
 class Joint
 {
 public:
-	Joint(d2d::Sprite* sprite);
-	Joint(d2d::Sprite* sprite, const d2d::Vector& pos);
+	Joint(ee::Sprite* sprite);
+	Joint(ee::Sprite* sprite, const ee::Vector& pos);
 	~Joint();
 
 	void Draw() const;
 
-	bool Contain(const d2d::Vector& pos) const;
-	bool Intersect(const d2d::Vector& pos) const;
+	bool Contain(const ee::Vector& pos) const;
+	bool Intersect(const ee::Vector& pos) const;
 
-	void SetPosition(const d2d::Vector& pos);
+	void SetPosition(const ee::Vector& pos);
 
-	d2d::Vector GetWorldPos() const;
-	d2d::Vector GetRelativePos(const d2d::Vector& pos) const;
+	ee::Vector GetWorldPos() const;
+	ee::Vector GetRelativePos(const ee::Vector& pos) const;
 
 	bool Connect(Joint* joint);
 	void Deconnect();
@@ -32,9 +32,9 @@ private:
 private:
 	int m_id;
 
-	d2d::Sprite* m_sprite;
+	ee::Sprite* m_sprite;
 
-	d2d::Vector m_relative;
+	ee::Vector m_relative;
 	float m_relativeAngle;
 
 	Joint* m_parent;

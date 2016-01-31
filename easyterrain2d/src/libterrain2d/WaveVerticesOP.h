@@ -1,14 +1,14 @@
 #ifndef _EASYTERRAIN2D_WAVE_VERTICES_OP_H_
 #define _EASYTERRAIN2D_WAVE_VERTICES_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eterrain2d
 {
 
 class StagePanel;
 
-class WaveVerticesOP : public d2d::ZoomViewOP
+class WaveVerticesOP : public ee::ZoomViewOP
 {
 public:
 	WaveVerticesOP(StagePanel* stage);

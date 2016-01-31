@@ -1,7 +1,7 @@
 #ifndef _EASYEJOY2D_SCREEN_H_
 #define _EASYEJOY2D_SCREEN_H_
 
-#include <drag2d.h>
+
 
 typedef unsigned int GLuint;
 

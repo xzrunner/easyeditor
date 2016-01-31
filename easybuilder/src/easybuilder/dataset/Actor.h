@@ -2,21 +2,21 @@
 #ifndef EBUILDER_ACTOR_H
 #define EBUILDER_ACTOR_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class Behavior;
 
-	class Actor : public d2d::ImageSprite
+	class Actor : public ee::ImageSprite
 	{
 	public:
 		Actor(const Actor& actor);
-		Actor(d2d::ImageSymbol* symbol);
+		Actor(ee::ImageSymbol* symbol);
 		virtual ~Actor();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual Actor* clone();
 

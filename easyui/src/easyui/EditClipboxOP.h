@@ -1,16 +1,16 @@
 #ifndef _EASYUI_EDIT_CLIPBOX_OP_H_
 #define _EASYUI_EDIT_CLIPBOX_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
 
-class EditClipboxOP : public d2d::ZoomViewOP
+class EditClipboxOP : public ee::ZoomViewOP
 {
 public:
-	EditClipboxOP(wxWindow* wnd, d2d::EditPanelImpl* edit_impl, 
-		d2d::Rect& rect);
+	EditClipboxOP(wxWindow* wnd, ee::EditPanelImpl* edit_impl, 
+		ee::Rect& rect);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -22,7 +22,7 @@ private:
 	static const int NODE_RADIUS = 10;
 
 private:
-	d2d::Rect& m_rect;
+	ee::Rect& m_rect;
 
 	// 1 2
 	// 0 3

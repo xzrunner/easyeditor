@@ -2,7 +2,7 @@
 #include "BodyData.h"
 #include "const.h"
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
@@ -46,7 +46,7 @@ CircleBody::CircleBody(b2World* world, float radius)
 	m_body->CreateFixture(&fd);
 }
 
-void CircleBody::getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const
+void CircleBody::getRect(ee::Rect& rect, const ee::Vector& position, float angle) const
 {
 	b2Shape* shape = m_body->GetFixtureList()->GetShape();
 	b2CircleShape* circle = dynamic_cast<b2CircleShape*>(shape);

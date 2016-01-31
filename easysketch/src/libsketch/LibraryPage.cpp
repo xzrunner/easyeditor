@@ -6,13 +6,13 @@ namespace libsketch
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ILibraryPage(parent, wxT("3D"))
+	: LibraryPage(parent, wxT("3D"))
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
@@ -51,7 +51,7 @@ void LibraryPage::LoadDefaultSymbol()
 // 		dlg.GetPaths(filenames);
 // 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 // 		{
-//  			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+//  			ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 //  			m_list->insert(symbol);
 //  			symbol->Release();
 // 		}

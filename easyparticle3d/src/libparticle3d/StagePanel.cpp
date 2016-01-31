@@ -11,8 +11,8 @@ namespace eparticle3d
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, m_ps(NULL)
 {
 	xRot = yRot = 0;
@@ -35,7 +35,7 @@ bool StagePanel::Update(int version)
 	}
 }
 
-void StagePanel::SetPSMat(const d2d::Vector& pos)
+void StagePanel::SetPSMat(const ee::Vector& pos)
 {
 	m_ps_mat.SetTranslation(pos.x, pos.y);
 }

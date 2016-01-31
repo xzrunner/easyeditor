@@ -4,7 +4,7 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -14,24 +14,24 @@ namespace preview
 class PathNavMesh : public IPathfinding, public INetwork
 {
 public:
-	PathNavMesh(const d2d::Rect& region);
+	PathNavMesh(const ee::Rect& region);
 
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const d2d::Sprite* spr, bool disable);
-	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
+	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
+	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end);
 	virtual void DebugDraw() const;
 
 	//
 	// interface INetwork
 	//
-	virtual d2d::Vector TransIDToPos(int id) const;
+	virtual ee::Vector TransIDToPos(int id) const;
 
 private:
 	struct Node
 	{
-		d2d::Vector bound[3];
+		ee::Vector bound[3];
 
 		std::vector<Node*> connected;
 
@@ -40,16 +40,16 @@ private:
 	}; // Node
 
 private:
-	d2d::Rect m_region;
+	ee::Rect m_region;
 
 	Node* m_nodes;
 
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const d2d::Sprite*, std::vector<d2d::Vector> > m_bounds;
+	std::map<const ee::Sprite*, std::vector<ee::Vector> > m_bounds;
 
-	std::vector<d2d::Vector> m_tris;
+	std::vector<ee::Vector> m_tris;
 
 }; // PathNavMesh
 

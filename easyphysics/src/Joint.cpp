@@ -3,12 +3,12 @@
 //
 //#include <Box2D/Box2D.h>
 //
-//#include "common/d2d::Math.h"
+//#include "common/ee::Math.h"
 //
 //namespace ephysics
 //{
 //
-//Joint::Joint(b2World* world, const JointDef& params, const d2d::Vector& anchor, 
+//Joint::Joint(b2World* world, const JointDef& params, const ee::Vector& anchor, 
 //			 b2Body* b0, b2Body* b1, bool isMotor, float scale)
 //	: m_world(world), m_joint(NULL)
 //{
@@ -50,7 +50,7 @@
 //	m_joint->SetLimits(lower, upper);
 //}
 //
-//void Joint::initialize(const JointDef& params, const d2d::Vector& anchor, b2Body* b0, b2Body* b1, bool isMotor)
+//void Joint::initialize(const JointDef& params, const ee::Vector& anchor, b2Body* b0, b2Body* b1, bool isMotor)
 //{
 //	m_negativeSpeed = params.negative_speed;
 //	m_positiveSpeed = params.positive_speed;

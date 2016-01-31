@@ -5,7 +5,7 @@ namespace eanim
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage_panel(stage)
 	, m_background(NULL)
 {
@@ -18,28 +18,28 @@ StageCanvas::~StageCanvas()
 	}
 }
 
-void StageCanvas::SetBackground(d2d::Symbol* symbol)
+void StageCanvas::SetBackground(ee::Symbol* symbol)
 {
-	d2d::obj_assign<d2d::Symbol>(m_background, symbol);
+	ee::obj_assign<ee::Symbol>(m_background, symbol);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 
-	std::vector<d2d::Sprite*> sprites;
-	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<ee::Sprite*> sprites;
+	static_cast<StagePanel*>(m_stage_panel)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
 
-	d2d::SceneNodeMgr::Instance()->Draw();
+	ee::SceneNodeMgr::Instance()->Draw();
 
 	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->DebugDraw();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
 	}
 #endif
 }
@@ -47,12 +47,12 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		d2d::SpriteRenderer::Instance()->Draw(m_background);
+		ee::SpriteRenderer::Instance()->Draw(m_background);
 	}
 
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	d2d::PrimitiveDraw::Cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
+	ee::PrimitiveDraw::Cross(ee::Vector(0,0), xedge, yedge, ee::LIGHT_GREY);
 }
 
 } // eanim

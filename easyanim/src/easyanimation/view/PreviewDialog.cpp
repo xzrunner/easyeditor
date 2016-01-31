@@ -16,7 +16,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, wxGLContext* glctx)
 	m_control.SetDt(1.0f / fps);
 	InitLayout(glctx);
 
-	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
+	const ee::Colorf& col = ee::Config::Instance()->GetSettings().bg_color;
 	m_stage->GetCanvas()->SetBgColor(col);
 }
 

@@ -5,7 +5,7 @@
 #include "CodeStyle.h"
 #include "CodeGenerator.h"
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -129,7 +129,7 @@ namespace cpp
 			: m_gen(gen)
 		{
 			m_flag = project + "_" + file + "_h";
-			d2d::StringHelper::ToUpper(m_flag);
+			ee::StringHelper::ToUpper(m_flag);
 
 			m_gen.line("#ifndef " + m_flag);
 			m_gen.line("#define " + m_flag);

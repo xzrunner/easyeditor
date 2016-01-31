@@ -1,22 +1,22 @@
 #ifndef _EASYMESH_NODE_H_
 #define _EASYMESH_NODE_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
 
-class Node : public d2d::Object
+class Node : public ee::Object
 {
 public:
 	Node() : ud(NULL) {}
-	Node(const d2d::Vector& pos, int width, int height) 
+	Node(const ee::Vector& pos, int width, int height) 
 		: ud(NULL) {
 		xy = ori_xy = pos;
  		uv.x = pos.x / width + 0.5f;
  		uv.y = pos.y / height + 0.5f;
 	}
-	Node(const d2d::Vector& _xy, const d2d::Vector& _uv) 
+	Node(const ee::Vector& _xy, const ee::Vector& _uv) 
 		: ud(NULL) {
 		xy = ori_xy = _xy;
 		uv = _uv;
@@ -28,8 +28,8 @@ public:
 	}
 
 public:
-	d2d::Vector uv, xy;
-	d2d::Vector ori_xy;
+	ee::Vector uv, xy;
+	ee::Vector ori_xy;
 
 	void* ud;
 
@@ -44,7 +44,7 @@ public:
 	}
 }; // NodeCmp
 
-typedef d2d::SelectionSet<Node> NodeSelection;
+typedef ee::SelectionSet<Node> NodeSelection;
 
 }
 

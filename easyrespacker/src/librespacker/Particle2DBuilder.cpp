@@ -22,7 +22,7 @@ Particle2DBuilder::~Particle2DBuilder()
 	}
 }
 
-void Particle2DBuilder::Traverse(d2d::Visitor& visitor) const
+void Particle2DBuilder::Traverse(ee::Visitor& visitor) const
 {
 	std::map<const eparticle2d::Symbol*, const PackParticle2D*>::const_iterator 
 		itr = m_map_data.begin();
@@ -107,7 +107,7 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 	}
 	else
 	{
-		throw d2d::Exception("Particle2DBuilder::Load unknown mode type, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("Particle2DBuilder::Load unknown mode type, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
 
@@ -123,19 +123,19 @@ void Particle2DBuilder::Load(const eparticle2d::Symbol* symbol, PackParticle2D* 
 		comp.scale_start = p_symbol.scale_start;
 		comp.scale_end = p_symbol.scale_end;
 
-		d2d::Colorf col_mul_start(p_symbol.col_mul_start.r, p_symbol.col_mul_start.g, p_symbol.col_mul_start.b, p_symbol.col_mul_start.a);
-		comp.col_mul_start = d2d::color2int(col_mul_start, d2d::PT_ARGB);
+		ee::Colorf col_mul_start(p_symbol.col_mul_start.r, p_symbol.col_mul_start.g, p_symbol.col_mul_start.b, p_symbol.col_mul_start.a);
+		comp.col_mul_start = ee::color2int(col_mul_start, ee::PT_ARGB);
 
-		d2d::Colorf col_mul_end(p_symbol.col_mul_end.r, p_symbol.col_mul_end.g, p_symbol.col_mul_end.b, p_symbol.col_mul_end.a);
-		comp.col_mul_end = d2d::color2int(col_mul_end, d2d::PT_ARGB);
+		ee::Colorf col_mul_end(p_symbol.col_mul_end.r, p_symbol.col_mul_end.g, p_symbol.col_mul_end.b, p_symbol.col_mul_end.a);
+		comp.col_mul_end = ee::color2int(col_mul_end, ee::PT_ARGB);
 
-		d2d::Colorf col_add_start(p_symbol.col_add_start.r, p_symbol.col_add_start.g, p_symbol.col_add_start.b, p_symbol.col_add_start.a);
-		comp.col_add_start = d2d::color2int(col_add_start, d2d::PT_ARGB);
+		ee::Colorf col_add_start(p_symbol.col_add_start.r, p_symbol.col_add_start.g, p_symbol.col_add_start.b, p_symbol.col_add_start.a);
+		comp.col_add_start = ee::color2int(col_add_start, ee::PT_ARGB);
 
-		d2d::Colorf col_add_end(p_symbol.col_add_end.r, p_symbol.col_add_end.g, p_symbol.col_add_end.b, p_symbol.col_add_end.a);
-		comp.col_add_end = d2d::color2int(col_add_end, d2d::PT_ARGB);
+		ee::Colorf col_add_end(p_symbol.col_add_end.r, p_symbol.col_add_end.g, p_symbol.col_add_end.b, p_symbol.col_add_end.a);
+		comp.col_add_end = ee::color2int(col_add_end, ee::PT_ARGB);
 
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(p_symbol.ud);
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol.ud);
 		comp.node = PackNodeFactory::Instance()->Create(symbol);
 
 		ps->components.push_back(comp);

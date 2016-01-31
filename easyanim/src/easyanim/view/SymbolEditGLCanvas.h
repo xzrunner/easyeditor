@@ -1,11 +1,11 @@
 #pragma once
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class Symbol;
 
-	class SymbolEditGLCanvas : public d2d::OrthoCanvas
+	class SymbolEditGLCanvas : public ee::OrthoCanvas
 	{
 	public:
 		enum e_DrawMode
@@ -27,12 +27,12 @@ namespace eanim
 		};
 
 	public:
-		SymbolEditGLCanvas(d2d::EditPanel* parent, Symbol* symbol);
+		SymbolEditGLCanvas(ee::EditPanel* parent, Symbol* symbol);
 
 		void setDrawMode(e_DrawMode mode);
 
-		d2d::RawPixels* getRawPixels();
-		d2d::RawPixels::PixelBuf& getSelectedPixels();
+		ee::RawPixels* getRawPixels();
+		ee::RawPixels::PixelBuf& getSelectedPixels();
 
 		RenderSetting& getRenderSetting();
 
@@ -45,7 +45,7 @@ namespace eanim
 
 		e_DrawMode m_drawMode;
 
-		d2d::RawPixels::PixelBuf m_selectedPixels;
+		ee::RawPixels::PixelBuf m_selectedPixels;
 
 		RenderSetting m_renderSetting;
 

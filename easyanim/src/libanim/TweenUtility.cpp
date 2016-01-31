@@ -6,12 +6,12 @@
 namespace libanim
 {
 
-void TweenUtility::GetTweenSprites(const std::vector<d2d::Sprite*>& start, const std::vector<d2d::Sprite*>& end, 
-	std::vector<d2d::Sprite*>& tween, float process)
+void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start, const std::vector<ee::Sprite*>& end, 
+	std::vector<ee::Sprite*>& tween, float process)
 {
 	for (size_t i = 0, n = start.size(); i < n; ++i)
 	{
-		d2d::Sprite *start_spr = start[i], *end_spr = NULL;
+		ee::Sprite *start_spr = start[i], *end_spr = NULL;
 		for (size_t j = 0, m = end.size(); j < m; ++j)
 		{
 			if (IsTweenMatched(start_spr, end[j]))
@@ -23,7 +23,7 @@ void TweenUtility::GetTweenSprites(const std::vector<d2d::Sprite*>& start, const
 
 		if (end_spr)
 		{
-			d2d::Sprite* tween_spr = start_spr->Clone();
+			ee::Sprite* tween_spr = start_spr->Clone();
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
 			tween.push_back(tween_spr);
 		}
@@ -34,7 +34,7 @@ void TweenUtility::GetTweenSprites(const std::vector<d2d::Sprite*>& start, const
 	}
 }
 
-bool TweenUtility::IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1)
+bool TweenUtility::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1)
 {
 	bool auto_named = false;
 	if (!s0->name.empty() && s0->name[0] == '_' && !s1->name.empty() && s1->name[0] == '_') {
@@ -51,28 +51,28 @@ bool TweenUtility::IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1)
 	}
 }
 
-void TweenUtility::GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end, d2d::Sprite* tween, float process)
+void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process)
 {
 	float xscale = (end->GetScale().x - start->GetScale().x) * process + start->GetScale().x,
 		yscale = (end->GetScale().y - start->GetScale().y) * process + start->GetScale().y;
-	tween->SetScale(d2d::Vector(xscale, yscale));
+	tween->SetScale(ee::Vector(xscale, yscale));
 
-	d2d::Vector offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
+	ee::Vector offset = (end->GetOffset() - start->GetOffset()) * process + start->GetOffset();
 	tween->SetOffset(offset);
 
-	tween->SetTransform(d2d::Vector(0, 0), 0);
+	tween->SetTransform(ee::Vector(0, 0), 0);
 
-	d2d::Vector center_s = start->GetCenter(),
+	ee::Vector center_s = start->GetCenter(),
 		center_e = end->GetCenter();
 
 	float angle = (end->GetAngle() - start->GetAngle()) * process + start->GetAngle();
-	d2d::Vector base_s = start->GetPosition() + start->GetOffset(),
+	ee::Vector base_s = start->GetPosition() + start->GetOffset(),
 		base_e = end->GetPosition() + end->GetOffset();
-	d2d::Vector base_t = (base_e - base_s) * process + base_s;
-	d2d::Vector pos_t = base_t -  offset;
+	ee::Vector base_t = (base_e - base_s) * process + base_s;
+	ee::Vector pos_t = base_t -  offset;
 	tween->SetTransform(pos_t, angle);
 
-	d2d::Vector shear;
+	ee::Vector shear;
 	shear.x = (end->GetShear().x - start->GetShear().x) * process + start->GetShear().x;
 	shear.y = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
 	tween->SetShear(shear);

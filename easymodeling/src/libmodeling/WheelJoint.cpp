@@ -15,27 +15,27 @@ WheelJoint::WheelJoint(Body* b0, Body* b1)
 {
 }
 
-bool WheelJoint::isContain(const d2d::Vector& pos) const
+bool WheelJoint::isContain(const ee::Vector& pos) const
 {
-	return d2d::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| d2d::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
+	return ee::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
-bool WheelJoint::isIntersect(const d2d::Rect& rect) const
+bool WheelJoint::isIntersect(const ee::Rect& rect) const
 {
-	return d2d::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
-		|| d2d::Math2D::IsPointInRect(getWorldAnchorB(), rect);
+	return ee::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
+		|| ee::Math2D::IsPointInRect(getWorldAnchorB(), rect);
 }
 
 void WheelJoint::draw(DrawType type) const
 {
-	const d2d::Vector anchorA = getWorldAnchorA(),
+	const ee::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		drawAxisALine(anchorA);
 		drawFootBLine(anchorA, anchorB);
@@ -46,51 +46,51 @@ void WheelJoint::draw(DrawType type) const
 	drawAnchorB(anchorB, type);
 }
 
-d2d::Vector WheelJoint::getWorldAnchorA() const
+ee::Vector WheelJoint::getWorldAnchorA() const
 {
 	return transLocalToWorld(localAnchorA, bodyA->sprite);
 }
 
-d2d::Vector WheelJoint::getWorldAnchorB() const
+ee::Vector WheelJoint::getWorldAnchorB() const
 {
 	return transLocalToWorld(localAnchorB, bodyB->sprite);
 }
 
-void WheelJoint::setLocalAnchorA(const d2d::Vector& world)
+void WheelJoint::setLocalAnchorA(const ee::Vector& world)
 {
 	localAnchorA = transWorldToLocal(world, bodyA->sprite);
 }
 
-void WheelJoint::setLocalAnchorB(const d2d::Vector& world)
+void WheelJoint::setLocalAnchorB(const ee::Vector& world)
 {
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void WheelJoint::drawAxisALine(const d2d::Vector& worldAnchorA) const
+void WheelJoint::drawAxisALine(const ee::Vector& worldAnchorA) const
 {
-	d2d::Vector unit = localAxisA;
+	ee::Vector unit = localAxisA;
 	unit.Normalize();
 
-	const d2d::Vector start = worldAnchorA + unit * 150,
+	const ee::Vector start = worldAnchorA + unit * 150,
 		end = worldAnchorA - unit * 150;
 
-	d2d::PrimitiveDraw::DrawDotDashLine(start, end, d2d::Colorf(0.4f, 0.6f, 0.4f), 1);
+	ee::PrimitiveDraw::DrawDotDashLine(start, end, ee::Colorf(0.4f, 0.6f, 0.4f), 1);
 }
 
-void WheelJoint::drawFootBLine(const d2d::Vector& worldAnchorA, const d2d::Vector& worldAnchorB) const
+void WheelJoint::drawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const
 {
-	d2d::Vector otherA = worldAnchorA + localAxisA;
+	ee::Vector otherA = worldAnchorA + localAxisA;
 
-	d2d::Vector foot;
-	d2d::Math2D::GetFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
+	ee::Vector foot;
+	ee::Math2D::GetFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
-	d2d::PrimitiveDraw::DrawDashLine(worldAnchorB, foot, d2d::Colorf(1, 0, 0), 1);
-	d2d::PrimitiveDraw::DrawCircle(foot, JOINT_RADIUS_IN, true, 2, d2d::Colorf(1, 0, 0));
+	ee::PrimitiveDraw::DrawDashLine(worldAnchorB, foot, ee::Colorf(1, 0, 0), 1);
+	ee::PrimitiveDraw::DrawCircle(foot, JOINT_RADIUS_IN, true, 2, ee::Colorf(1, 0, 0));
 }
 
-void WheelJoint::drawAnchorA(const d2d::Vector& pos, DrawType type) const
+void WheelJoint::drawAnchorA(const ee::Vector& pos, DrawType type) const
 {
-	d2d::Colorf color;
+	ee::Colorf color;
 	switch (type)
 	{
 	case e_default:
@@ -104,13 +104,13 @@ void WheelJoint::drawAnchorA(const d2d::Vector& pos, DrawType type) const
 		break;
 	}
 
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::DrawRect(pos, JOINT_RADIUS_OUT, d2d::ShapeStyle(true, color));
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	ee::PrimitiveDraw::DrawRect(pos, JOINT_RADIUS_OUT, ee::ShapeStyle(true, color));
 }
 
-void WheelJoint::drawAnchorB(const d2d::Vector& pos, DrawType type) const
+void WheelJoint::drawAnchorB(const ee::Vector& pos, DrawType type) const
 {
-	d2d::Colorf color;
+	ee::Colorf color;
 	switch (type)
 	{
 	case e_default:
@@ -124,6 +124,6 @@ void WheelJoint::drawAnchorB(const d2d::Vector& pos, DrawType type) const
 		break;
 	}
 
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }

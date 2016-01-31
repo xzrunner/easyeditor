@@ -3,7 +3,7 @@
 
 #include "IScene.h"
 
-#include <drag2d.h>
+
 #include <easy3d.h>
 
 namespace epseudo3d
@@ -26,7 +26,7 @@ public:
 private:
 	StageCanvas3D* m_canvas;
 
-	d2d::Image* m_img;
+	ee::Image* m_img;
 
 	std::vector<vec3> m_vertices;
 	std::vector<vec2> m_texcoords;

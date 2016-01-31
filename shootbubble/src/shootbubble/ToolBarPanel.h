@@ -1,13 +1,13 @@
 #ifndef SHOOTBUBBLE_TOOLBAR_PANEL_H_
 #define SHOOTBUBBLE_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace shootbubble
 {
 	class StagePanel;
 
-	class ToolbarPanel : public d2d::ToolbarPanel
+	class ToolbarPanel : public ee::ToolbarPanel
 	{
 	public:
 		ToolbarPanel(wxWindow* parent);

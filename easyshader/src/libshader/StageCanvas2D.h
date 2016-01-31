@@ -1,20 +1,20 @@
 #ifndef _ESHADER_STAGE_CANVAS2D_H_
 #define _ESHADER_STAGE_CANVAS2D_H_
 
-#include <drag2d.h>
+
 
 namespace eshader
 {
 
 class StagePanel2D;
 
-class StageCanvas2D : public d2d::OrthoCanvas
+class StageCanvas2D : public ee::OrthoCanvas
 {
 public:
 	StageCanvas2D(StagePanel2D* stage);
 	virtual ~StageCanvas2D();
 
-	void OnMousePressed(const d2d::Vector& pos);
+	void OnMousePressed(const ee::Vector& pos);
 
 protected:
 	virtual void OnDrawSprites() const;

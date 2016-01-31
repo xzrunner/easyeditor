@@ -9,14 +9,14 @@ namespace eicon
 const float EditQuadOP::CTRL_NODE_RADIUS = 5.0f;
 
 EditQuadOP::EditQuadOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_selected(-1)
 {
 }
 
 bool EditQuadOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) {
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 	
@@ -27,11 +27,11 @@ bool EditQuadOP::OnMouseLeftDown(int x, int y)
 
 	m_selected = -1;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 
-	const d2d::Vector* screen = static_cast<QuadIcon*>(icon)->GetScreen();
+	const ee::Vector* screen = static_cast<QuadIcon*>(icon)->GetScreen();
 	for (int i = 0; i < 4; ++i) {
-		if (d2d::Math2D::GetDistance(screen[i], pos) < CTRL_NODE_RADIUS) {
+		if (ee::Math2D::GetDistance(screen[i], pos) < CTRL_NODE_RADIUS) {
 			m_selected = i;
 		}
 	}
@@ -41,7 +41,7 @@ bool EditQuadOP::OnMouseLeftDown(int x, int y)
 
 bool EditQuadOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) {
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) {
 		return true;
 	}
 
@@ -52,7 +52,7 @@ bool EditQuadOP::OnMouseLeftUp(int x, int y)
 
 bool EditQuadOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) {
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) {
 		return true;
 	}
 
@@ -63,20 +63,20 @@ bool EditQuadOP::OnMouseDrag(int x, int y)
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
 
-	d2d::Vector screen[4];
+	ee::Vector screen[4];
 	memcpy(screen, quad_icon->GetScreen(), sizeof(screen));	
 	screen[m_selected] = m_stage->TransPosScrToProj(x, y);
 
 	quad_icon->SetScreen(screen);
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
 
 bool EditQuadOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
@@ -95,7 +95,7 @@ bool EditQuadOP::OnActive()
 
 bool EditQuadOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) {
+	if (ee::ZoomViewOP::OnDraw()) {
 		return true;
 	}
 
@@ -104,26 +104,26 @@ bool EditQuadOP::OnDraw() const
 		return false;
 	}
 
-	const d2d::Image* img = icon->GetImage();
+	const ee::Image* img = icon->GetImage();
 	if (!img) {
 		return false;
 	}
 
 	float w = img->GetClippedWidth(),
 		h = img->GetClippedHeight();
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), w * 0.5f, h * 0.5f, 
-		d2d::LIGHT_RED_THIN_LINE);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
+		ee::LIGHT_RED_THIN_LINE);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
 
-	std::vector<d2d::Vector> screen;
+	std::vector<ee::Vector> screen;
 	for (int i = 0; i < 4; ++i) {
 		screen.push_back(quad_icon->GetScreen()[i]);
 	}
 
-	d2d::PrimitiveDraw::DrawPolyline(screen, d2d::LIGHT_GREEN, true);
+	ee::PrimitiveDraw::DrawPolyline(screen, ee::LIGHT_GREEN, true);
 	for (int i = 0; i < 4; ++i) {
-		d2d::PrimitiveDraw::DrawRect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
+		ee::PrimitiveDraw::DrawRect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;

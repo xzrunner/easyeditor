@@ -6,18 +6,18 @@
 using namespace emodeling;
 
 BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const wxString& name, 
-						   StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel->GetStageImpl())
+						   StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 {
-	d2d::ArrangeSpriteConfig cfg;
+	ee::ArrangeSpriteConfig cfg;
 	cfg.is_auto_align_open = false;
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new d2d::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, cfg);
+	m_editOP = new ee::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, cfg);
 }
 
-wxSizer* BodyEditCmpt::initLayout()
+wxSizer* BodyEditCmpt::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	return topSizer;

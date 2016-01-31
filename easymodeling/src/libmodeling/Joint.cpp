@@ -24,26 +24,26 @@ void Joint::drawBodyFlag() const
 	drawBodyFlag(bodyB->sprite->GetPosition());
 }
 
-d2d::Vector Joint::transWorldToLocal(const d2d::Vector& world, 
-									const d2d::Sprite* sprite)
+ee::Vector Joint::transWorldToLocal(const ee::Vector& world, 
+									const ee::Sprite* sprite)
 {
-	return d2d::Math2D::RotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
+	return ee::Math2D::RotateVector(world - sprite->GetPosition(), -sprite->GetAngle());
 }
 
-d2d::Vector Joint::transLocalToWorld(const d2d::Vector& local, 
-									const d2d::Sprite* sprite)
+ee::Vector Joint::transLocalToWorld(const ee::Vector& local, 
+									const ee::Sprite* sprite)
 {
-	return d2d::Math2D::RotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
+	return ee::Math2D::RotateVector(local, sprite->GetAngle()) + sprite->GetPosition();
 }
 
-void Joint::drawBodyFlag(const d2d::Vector& pos) const
+void Joint::drawBodyFlag(const ee::Vector& pos) const
 {
 	const float edge = 2.5f;
 
-	std::vector<d2d::Vector> vertices(4, pos);
+	std::vector<ee::Vector> vertices(4, pos);
 	vertices[0].x -= edge;
 	vertices[1].x += edge;
 	vertices[2].y -= edge;
 	vertices[3].y += edge;
-	d2d::PrimitiveDraw::DrawLines(vertices, d2d::Colorf(0.4f, 0.8f, 0.8f), 1);
+	ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.4f, 0.8f, 0.8f), 1);
 }

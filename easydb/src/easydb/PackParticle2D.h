@@ -12,7 +12,7 @@ public:
 	PackParticle2D() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;

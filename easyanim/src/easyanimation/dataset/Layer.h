@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_LAYER_H_
 #define _EASYANIM_LAYER_H_
 
-#include <drag2d.h>
+
 
 #include "SpriteObserver.h"
 
@@ -10,7 +10,7 @@ namespace eanim
 
 class KeyFrame;
 
-class Layer : public d2d::Object
+class Layer : public ee::Object
 {
 public:
 	Layer();
@@ -18,7 +18,7 @@ public:
 
 	bool IsKeyFrame(int time) const;
 
-	d2d::AbstractAtomicOP* RemoveFrameRegion(int begin, int end);
+	ee::AtomicOP* RemoveFrameRegion(int begin, int end);
 
 	void InsertNullFrame(int time);
 	void RemoveNullFrame(int time);

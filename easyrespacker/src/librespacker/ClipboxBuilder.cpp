@@ -18,7 +18,7 @@ ClipboxBuilder::~ClipboxBuilder()
 	}
 }
 
-void ClipboxBuilder::Traverse(d2d::Visitor& visitor) const
+void ClipboxBuilder::Traverse(ee::Visitor& visitor) const
 {
 	std::map<const ecomplex::Symbol*, const PackClipbox*>::const_iterator itr 
 		= m_map_clipbox.begin();
@@ -46,7 +46,7 @@ const IPackNode* ClipboxBuilder::Create(const ecomplex::Symbol* complex)
 		return NULL;
 	}
 
-	const d2d::Rect& r = complex->m_clipbox;
+	const ee::Rect& r = complex->m_clipbox;
 
 	PackClipbox* cb = new PackClipbox;
 	cb->x = r.xmin;

@@ -35,15 +35,15 @@ void TransOldAnchorFile::Run(int argc, char *argv[])
 void TransOldAnchorFile::Run(const std::string& folder)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(folder, files);
+	ee::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			TransComplex(filepath);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			TransAnimation(filepath);
 		}
 	}
@@ -51,11 +51,11 @@ void TransOldAnchorFile::Run(const std::string& folder)
 
 void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 {
-	d2d::Symbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	ecomplex::Symbol* complex = static_cast<ecomplex::Symbol*>(sym);
 	bool dirty = false;
 	for (int i = 0, n = complex->m_sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = complex->m_sprites[i];
+		ee::Sprite* spr = complex->m_sprites[i];
 		if (IsAnchor(spr)) {
 			spr->SetAnchor(true);
 			dirty = true;
@@ -69,7 +69,7 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 
 void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 {
-	d2d::Symbol* sym = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
 	bool dirty = false;
 	for (int i = 0, n = anim->m_layers.size(); i < n; ++i) {
@@ -77,7 +77,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
 			libanim::Symbol::Frame* frame = layer->frames[j];
 			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
-				d2d::Sprite* spr = frame->sprites[k];
+				ee::Sprite* spr = frame->sprites[k];
 				if (IsAnchor(spr)) {
 					spr->SetAnchor(true);
 					dirty = true;
@@ -91,10 +91,10 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 	sym->Release();
 }
 
-bool TransOldAnchorFile::IsAnchor(const d2d::Sprite* spr) const
+bool TransOldAnchorFile::IsAnchor(const ee::Sprite* spr) const
 {	
-	if (const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(spr)) {
-		return font->font.empty() && font->font_color == d2d::Colorf(0, 0, 0, 0);
+	if (const ee::FontBlankSprite* font = dynamic_cast<const ee::FontBlankSprite*>(spr)) {
+		return font->font.empty() && font->font_color == ee::Colorf(0, 0, 0, 0);
 	} else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
 		if (complex->GetSymbol().m_sprites.size() == 1) {
 			return IsAnchor(complex->GetSymbol().m_sprites[0]);

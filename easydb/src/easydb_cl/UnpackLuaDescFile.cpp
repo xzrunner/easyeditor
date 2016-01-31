@@ -1,7 +1,7 @@
 #include "UnpackLuaDescFile.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 #include <easyrespacker.h>
 
 namespace edb
@@ -32,21 +32,21 @@ void UnpackLuaDescFile::Run(int argc, char *argv[])
 
 void UnpackLuaDescFile::Trigger(const std::string& lua_file, const std::string& img_name)
 {
-	std::vector<d2d::Image*> images;
+	std::vector<ee::Image*> images;
 	LoadAllImages(img_name, images);
 
 	librespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 }
 
-void UnpackLuaDescFile::LoadAllImages(const std::string& img_name, std::vector<d2d::Image*>& images)
+void UnpackLuaDescFile::LoadAllImages(const std::string& img_name, std::vector<ee::Image*>& images)
 {
 	int idx = 1;
 	while (true)
 	{
-		std::string filepath = img_name + d2d::StringHelper::ToString(idx++) + ".png";
-		if (d2d::FileHelper::IsFileExist(filepath)) {
-			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
+		std::string filepath = img_name + ee::StringHelper::ToString(idx++) + ".png";
+		if (ee::FileHelper::IsFileExist(filepath)) {
+			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 			images.push_back(img);
 		} else {	
 			break;

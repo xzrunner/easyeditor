@@ -22,10 +22,10 @@ void Projection3DScene::Store(const char* filename) const
 
 void Projection3DScene::Load(const char* filename)
 {
-	m_images.push_back(d2d::ImageMgr::Instance()->GetItem("mmzb/1002_3_lv5.png"));
+	m_images.push_back(ee::ImageMgr::Instance()->GetItem("mmzb/1002_3_lv5.png"));
 	m_positions.push_back(vec2(0, 0));
 
-	m_images.push_back(d2d::ImageMgr::Instance()->GetItem("mmzb/1005_3_lv12.png"));
+	m_images.push_back(ee::ImageMgr::Instance()->GetItem("mmzb/1005_3_lv12.png"));
 	m_positions.push_back(vec2(0, 200));
 
 	e3d::Camera& cam = m_canvas->GetCamera3();
@@ -49,7 +49,7 @@ void Projection3DScene::DebugDraw() const
 
 }
 
-void Projection3DScene::DrawSprite(d2d::Image* img, int x, int y) const
+void Projection3DScene::DrawSprite(ee::Image* img, int x, int y) const
 {
 	x *= SCALE;
 	y *= SCALE;

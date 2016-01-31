@@ -11,7 +11,7 @@ namespace ebuilder
 		class Actor : public Item
 		{
 		public:
-			Actor(const d2d::ImageSprite& sprite);
+			Actor(const ee::ImageSprite& sprite);
 
 		}; // Actor
 	}

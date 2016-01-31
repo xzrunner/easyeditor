@@ -1,7 +1,7 @@
 #ifndef _ESHADER_SHADER_H_
 #define _ESHADER_SHADER_H_
 
-#include <drag2d.h>
+
 
 namespace eshader 
 {
@@ -22,7 +22,7 @@ public:
 
 	void AddUniform(Uniform* uniform);
 
-	d2d::IShader* GetShaderImpl() { return m_shader_impl; }
+	ee::IShader* GetShaderImpl() { return m_shader_impl; }
 
 protected:
 	class ShaderImpl
@@ -39,7 +39,7 @@ protected:
 	}; // ShaderImpl
 
 protected:
-	d2d::IShader* m_shader_impl;
+	ee::IShader* m_shader_impl;
 
 private:
 	std::vector<Uniform*> m_uniforms;

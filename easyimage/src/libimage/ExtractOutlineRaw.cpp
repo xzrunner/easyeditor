@@ -10,15 +10,15 @@ namespace eimage
 // 2   6
 // 1 0 7
 static const int NEARBY_COUNT = 8;
-static const d2d::Vector NEARBY_OFFSET[NEARBY_COUNT] = {
-	d2d::Vector( 0, -1),
-	d2d::Vector(-1, -1),
-	d2d::Vector(-1,  0),
-	d2d::Vector(-1,  1),
-	d2d::Vector( 0,  1),
-	d2d::Vector( 1,  1),
-	d2d::Vector( 1,  0),
-	d2d::Vector( 1, -1),
+static const ee::Vector NEARBY_OFFSET[NEARBY_COUNT] = {
+	ee::Vector( 0, -1),
+	ee::Vector(-1, -1),
+	ee::Vector(-1,  0),
+	ee::Vector(-1,  1),
+	ee::Vector( 0,  1),
+	ee::Vector( 1,  1),
+	ee::Vector( 1,  0),
+	ee::Vector( 1, -1),
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -29,11 +29,11 @@ static const d2d::Vector NEARBY_OFFSET[NEARBY_COUNT] = {
 //// 1   3
 ////   0
 //static const int QUERY_COUNT = 4;
-//static const d2d::Vector QUERY_OFFSET[NEARBY_COUNT] = {
-//	d2d::Vector( 0, -1),
-//	d2d::Vector(-1,  0),
-//	d2d::Vector( 0,  1),
-//	d2d::Vector( 1,  0),
+//static const ee::Vector QUERY_OFFSET[NEARBY_COUNT] = {
+//	ee::Vector( 0, -1),
+//	ee::Vector(-1,  0),
+//	ee::Vector( 0,  1),
+//	ee::Vector( 1,  0),
 //};
 
 //////////////////////////////////////////////////////////////////////////
@@ -44,18 +44,18 @@ static const d2d::Vector NEARBY_OFFSET[NEARBY_COUNT] = {
 // 2   6
 // 1 0 7
 static const int QUERY_COUNT = 8;
-static const d2d::Vector QUERY_OFFSET[NEARBY_COUNT] = {
-	d2d::Vector( 0, -1),
-	d2d::Vector(-1, -1),
-	d2d::Vector(-1,  0),
-	d2d::Vector(-1,  1),
-	d2d::Vector( 0,  1),
-	d2d::Vector( 1,  1),
-	d2d::Vector( 1,  0),
-	d2d::Vector( 1, -1),
+static const ee::Vector QUERY_OFFSET[NEARBY_COUNT] = {
+	ee::Vector( 0, -1),
+	ee::Vector(-1, -1),
+	ee::Vector(-1,  0),
+	ee::Vector(-1,  1),
+	ee::Vector( 0,  1),
+	ee::Vector( 1,  1),
+	ee::Vector( 1,  0),
+	ee::Vector( 1, -1),
 };
 
-ExtractOutlineRaw::ExtractOutlineRaw(const d2d::Image& image)
+ExtractOutlineRaw::ExtractOutlineRaw(const ee::Image& image)
 	: m_pixels(image.GetPixelData())
 	, m_width(image.GetOriginWidth())
 	, m_height(image.GetOriginHeight())
@@ -70,7 +70,7 @@ void ExtractOutlineRaw::CreateBorderPoints()
 		for (int x = 0; x < m_width; ++x) {
 			bool is_border = IsPixelBorder(x, y);
 			if (is_border) {
-				m_border_points.push_back(d2d::Vector(x+0.5f, y+0.5f));
+				m_border_points.push_back(ee::Vector(x+0.5f, y+0.5f));
 			}
 		}
 	}
@@ -84,7 +84,7 @@ void ExtractOutlineRaw::CreateBorderLineAndMerge()
 
 void ExtractOutlineRaw::CreateBorderConvexHull()
 {
-	d2d::ConvexHull::Do(m_border_line, m_convex_hull);
+	ee::ConvexHull::Do(m_border_line, m_convex_hull);
 }
 
 void ExtractOutlineRaw::CreateBorderLine()
@@ -93,7 +93,7 @@ void ExtractOutlineRaw::CreateBorderLine()
 
 	// find start, downmost and leftmost
 	bool* flag = new bool[m_width * m_height];
-	d2d::Vector first;
+	ee::Vector first;
 	first.SetInvalid();
 	for (int y = 0; y < m_height; ++y) {
 		for (int x = 0; x < m_width; ++x) {
@@ -111,17 +111,17 @@ void ExtractOutlineRaw::CreateBorderLine()
 		}
 	}
 
-	d2d::Vector curr_pos = first;
+	ee::Vector curr_pos = first;
 	int curr_dir = -1;
 	while (curr_pos.IsValid()) 
 	{
 		// finish
 		if (!m_border_line.empty() &&
 			curr_pos == first) {
-			m_border_axis_line.push_back(curr_pos + d2d::Vector(0.5f, 0.5f));
+			m_border_axis_line.push_back(curr_pos + ee::Vector(0.5f, 0.5f));
 			break;
 		}
-		m_border_axis_line.push_back(curr_pos + d2d::Vector(0.5f, 0.5f));
+		m_border_axis_line.push_back(curr_pos + ee::Vector(0.5f, 0.5f));
 
 		int next_dir;
 		if (curr_dir == -1) {
@@ -134,14 +134,14 @@ void ExtractOutlineRaw::CreateBorderLine()
 		// search in certain order
 		for (int i = 0; i < QUERY_COUNT; ++i) {
 			int dir = (i+next_dir)%QUERY_COUNT;
-			d2d::Vector nearby = curr_pos + QUERY_OFFSET[dir];
+			ee::Vector nearby = curr_pos + QUERY_OFFSET[dir];
 			// connect
 			if (!IsPixelTransparente(flag, nearby.x, nearby.y)) {
 				curr_dir = dir;
 				curr_pos = nearby;
 				break;
 			} else {
-				d2d::Vector new_pos = curr_pos;
+				ee::Vector new_pos = curr_pos;
 				if (dir == 0) {
 					new_pos.x += 0.5f;
 				} else if (dir == 1) {
@@ -177,7 +177,7 @@ void ExtractOutlineRaw::MergeBorderLine()
 {
 	m_border_line_merged.clear();
 	//	MergeRawBorder(border, border_merged);
-	d2d::DouglasPeucker::Do(m_border_line, 1.5f, m_border_line_merged);
+	ee::DouglasPeucker::Do(m_border_line, 1.5f, m_border_line_merged);
 }
 
 bool ExtractOutlineRaw::IsPixelBorder(int x, int y) const
@@ -220,12 +220,12 @@ bool ExtractOutlineRaw::IsPixelTransparente(bool* flag, int x, int y) const
 	return !flag[y*m_width+x];
 }
 
-bool ExtractOutlineRaw::IsNearby(const d2d::Vector& p0, const d2d::Vector& p1) const
+bool ExtractOutlineRaw::IsNearby(const ee::Vector& p0, const ee::Vector& p1) const
 {
 	return abs(p0.x - p1.x) <= 1 && abs(p0.y - p1.y) <= 1;
 }
 
-void ExtractOutlineRaw::MergeLine(const std::vector<d2d::Vector>& src, std::vector<d2d::Vector>& dst)
+void ExtractOutlineRaw::MergeLine(const std::vector<ee::Vector>& src, std::vector<ee::Vector>& dst)
 {
 	if (src.size() < 3) {
 		return;
@@ -235,8 +235,8 @@ void ExtractOutlineRaw::MergeLine(const std::vector<d2d::Vector>& src, std::vect
 	dst.push_back(src[1]);
 	for (int i = 2, n = src.size(); i < n; ++i)
 	{
-		const d2d::Vector& p = src[i];
-		if (d2d::Math2D::IsTwoLineParallel(dst[dst.size()-1], dst[dst.size()-2], dst[dst.size()-1], p)) {
+		const ee::Vector& p = src[i];
+		if (ee::Math2D::IsTwoLineParallel(dst[dst.size()-1], dst[dst.size()-2], dst[dst.size()-1], p)) {
 			dst.pop_back();
 		}
 		dst.push_back(p);

@@ -7,17 +7,17 @@
 namespace libshape
 {
 
-class DrawPolygonCMPT : public d2d::OneFloatValueCMPT
+class DrawPolygonCMPT : public ee::OneFloatValueCMPT
 {
 public:
 	DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
-		d2d::EditPanelImpl* stage, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* property);
+		ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+		ee::PropertySettingPanel* property);
 
 	virtual void updateControlValue();
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxSizer* initPreviewButtonPanel();
@@ -31,12 +31,12 @@ private:
 private:
 	wxWindow* m_stage_wnd;
 
-	d2d::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapesImpl;
 
 	wxColour m_color;
 //	wxColourData& m_colorData;
 
-	d2d::Bitmap m_bitmap;
+	ee::Bitmap m_bitmap;
 	std::string m_filePath;
 
 	wxButton* m_btnReview;

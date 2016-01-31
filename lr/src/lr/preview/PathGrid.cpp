@@ -5,17 +5,17 @@ namespace lr
 namespace preview
 {
 
-PathGrid::PathGrid(const d2d::Rect& region, int row, int col)
+PathGrid::PathGrid(const ee::Rect& region, int row, int col)
 	: m_nw(region, row, col)
 {
 }
 
-void PathGrid::DisableRegion(const d2d::Sprite* spr, bool disable)
+void PathGrid::DisableRegion(const ee::Sprite* spr, bool disable)
 {
 	m_nw.SetStatus(spr->GetRect(), !disable);
 }
 
-void PathGrid::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
+void PathGrid::QueryRoute(const ee::Vector& start, const ee::Vector& end)
 {
 	VisitedNode* node = m_nw.QueryRoute(start, end);
 	if (!node) {
@@ -28,7 +28,7 @@ void PathGrid::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 	while (node) {
 		int y = node->m_id / m_nw.m_col;
 		int x = node->m_id - y * m_nw.m_col;
-		m_routes.push_back(d2d::Vector((x+0.5f)*m_nw.m_width+dx, (y+0.5f)*m_nw.m_height+dy));
+		m_routes.push_back(ee::Vector((x+0.5f)*m_nw.m_width+dx, (y+0.5f)*m_nw.m_height+dy));
 		node = node->m_prev;
 	}
 }
@@ -36,7 +36,7 @@ void PathGrid::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 void PathGrid::DebugDraw() const
 {
 	m_nw.DebugDraw();	
-	d2d::PrimitiveDraw::DrawPolyline(m_routes, d2d::LIGHT_RED, false);
+	ee::PrimitiveDraw::DrawPolyline(m_routes, ee::LIGHT_RED, false);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ void PathGrid::DebugDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 PathGrid::Network::
-Network(const d2d::Rect& region, int row, int col)
+Network(const ee::Rect& region, int row, int col)
 	: m_region(region)
 	, m_row(row)
 	, m_col(col)
@@ -66,10 +66,10 @@ PathGrid::Network::
 	delete[] m_nodes;
 }
 
-d2d::Vector PathGrid::Network::
+ee::Vector PathGrid::Network::
 TransIDToPos(int id) const
 {
-	d2d::Vector ret;
+	ee::Vector ret;
 	ret.SetInvalid();
 
 	int y = id / m_col;
@@ -86,9 +86,9 @@ TransIDToPos(int id) const
 }
 
 void PathGrid::Network::
-SetStatus(const d2d::Rect& region, bool used)
+SetStatus(const ee::Rect& region, bool used)
 {
-	if (!d2d::Math2D::IsRectContainRect(m_region, region)) {
+	if (!ee::Math2D::IsRectContainRect(m_region, region)) {
 		return;
 	}
 
@@ -104,9 +104,9 @@ SetStatus(const d2d::Rect& region, bool used)
 }
 
 VisitedNode* PathGrid::Network::
-QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
+QueryRoute(const ee::Vector& start, const ee::Vector& end)
 {
-	if (!d2d::Math2D::IsPointInRect(start, m_region) || !d2d::Math2D::IsPointInRect(end, m_region)) {
+	if (!ee::Math2D::IsPointInRect(start, m_region) || !ee::Math2D::IsPointInRect(end, m_region)) {
 		return NULL;
 	}
 
@@ -142,9 +142,9 @@ DebugDraw() const
 			if (!m_nodes[idx++].m_used) {
 				continue;
 			}
-			d2d::Vector p0(x * m_width + dx, y * m_height + dy);
-			d2d::Vector p1(p0.x + m_width, p0.y + m_height);
-			d2d::PrimitiveDraw::DrawRect(d2d::Matrix(), p0, p1, d2d::LIGHT_GREEN_FACE);
+			ee::Vector p0(x * m_width + dx, y * m_height + dy);
+			ee::Vector p1(p0.x + m_width, p0.y + m_height);
+			ee::PrimitiveDraw::DrawRect(ee::Matrix(), p0, p1, ee::LIGHT_GREEN_FACE);
 		}
 	}
 
@@ -152,9 +152,9 @@ DebugDraw() const
 }
 
 PathGrid::Node* PathGrid::Network::
-QueryNode(const d2d::Vector& pos) const
+QueryNode(const ee::Vector& pos) const
 {
-	if (!d2d::Math2D::IsPointInRect(pos, m_region)) {
+	if (!ee::Math2D::IsPointInRect(pos, m_region)) {
 		return NULL;
 	}
 
@@ -166,7 +166,7 @@ QueryNode(const d2d::Vector& pos) const
 }
 
 void PathGrid::Network::
-Expand(VisitedNode* node, const d2d::Vector& end)
+Expand(VisitedNode* node, const ee::Vector& end)
 {
 	std::vector<Connection> connections;
 	GetConnections(node, connections);
@@ -187,7 +187,7 @@ Expand(VisitedNode* node, const d2d::Vector& end)
 		}
 		else
 		{
-			float to = d2d::Math2D::GetDistance(end, TransIDToPos(ct.n->id));
+			float to = ee::Math2D::GetDistance(end, TransIDToPos(ct.n->id));
 			VisitedNode* new_node = new VisitedNode(ct.n->id, node, node->m_from + ct.len, to);
 			m_visited.Push(new_node);
 			m_candidate.Push(new_node);

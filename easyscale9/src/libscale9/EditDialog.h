@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_EDIT_DIALOG_H_
 #define _EASYSCALE9_EDIT_DIALOG_H_
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
@@ -23,7 +23,7 @@ private:
 private:
 	Symbol* m_symbol;
 
-	d2d::EditPanel* m_stage;
+	ee::EditPanel* m_stage;
 
 	DECLARE_EVENT_TABLE()
 

@@ -3,8 +3,8 @@
 
 using namespace ebuilder::preview;
 
-Move::Move(d2d::ISprite* sprite, const d2d::Vector& start, 
-		   const d2d::Vector& end, float speed)
+Move::Move(ee::ISprite* sprite, const ee::Vector& start, 
+		   const ee::Vector& end, float speed)
 	: m_sprite(sprite)
 	, m_start(start)
 	, m_end(end)
@@ -26,7 +26,7 @@ void Move::onTick()
 	wxMilliClock_t curr = wxGetLocalTimeMillis();
 	double during = (curr - m_startTime).ToDouble() * 0.001;
 
-	float tot = d2d::Math::getDistance(m_start, m_end) / m_speed;
+	float tot = ee::Math::getDistance(m_start, m_end) / m_speed;
 	if (tot < during)
 	{
 		m_sprite->setTransform(m_end, m_sprite->getAngle());

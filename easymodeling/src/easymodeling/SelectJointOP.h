@@ -14,9 +14,9 @@ class SelectJointOP : public SelectBodyOP
 {
 public:
 	SelectJointOP(wxWindow* stage_wnd,
-		d2d::EditPanelImpl* stage, 
-		d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::AbstractEditCMPT* callback = NULL);
+		ee::EditPanelImpl* stage, 
+		ee::MultiSpritesImpl* spritesImpl, 
+		ee::EditCMPT* callback = NULL);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -27,27 +27,27 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	void SetPropertyPanel(d2d::PropertySettingPanel* property) { 
+	void SetPropertyPanel(ee::PropertySettingPanel* property) { 
 		m_property_panel = property; 
 	}
 
 private:
-	class DrawSelectedVisitor : public d2d::Visitor
+	class DrawSelectedVisitor : public ee::Visitor
 	{
 	public:
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 	}; // DrawSelectedVisitor
 
 private:
-	d2d::PropertySettingPanel* m_property_panel;
+	ee::PropertySettingPanel* m_property_panel;
 
 	libmodeling::Joint* m_selected;
 	libmodeling::Joint* m_mouseOn;
 
-	d2d::Vector m_first_pos;
+	ee::Vector m_first_pos;
 
 public:
-	d2d::SelectionSet<libmodeling::Joint> jointSelection;
+	ee::SelectionSet<libmodeling::Joint> jointSelection;
 
 //		std::vector<Joint*> selectedJoints;
 

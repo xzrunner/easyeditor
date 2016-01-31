@@ -3,8 +3,8 @@
 namespace emodeling
 {
 
-JointPropertySetting::JointPropertySetting(d2d::EditPanelImpl* stage, libmodeling::Joint* joint)
-	: d2d::IPropertySetting("Joint")
+JointPropertySetting::JointPropertySetting(ee::EditPanelImpl* stage, libmodeling::Joint* joint)
+	: ee::PropertySetting("Joint")
 	, m_stage(stage)
 {
 	m_joint = joint;
@@ -92,7 +92,7 @@ void JointPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 	}
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

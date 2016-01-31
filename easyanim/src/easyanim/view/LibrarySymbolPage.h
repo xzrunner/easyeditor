@@ -1,15 +1,15 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
-	class LibrarySymbolPage : public d2d::ILibraryPage
+	class LibrarySymbolPage : public ee::ILibraryPage
 	{
 	public:
 		LibrarySymbolPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 	protected:
 		virtual void onAddPress(wxCommandEvent& event);

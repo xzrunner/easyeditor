@@ -8,17 +8,17 @@
 namespace epseudo3d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas3D, d2d::OrthoCanvas)
+BEGIN_EVENT_TABLE(StageCanvas3D, ee::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas3D::OnTimer)
 END_EVENT_TABLE()
 
-StageCanvas3D::StageCanvas3D(wxWindow* stage_wnd, d2d::EditPanelImpl* stage)
+StageCanvas3D::StageCanvas3D(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 	: e3d::StageCanvas(stage_wnd, stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);
 
-	SetBgColor(d2d::BLACK);
+	SetBgColor(ee::BLACK);
 
 //	m_scene = new Mapping3DScene(this);
 	m_scene = new Projection3DScene(this);

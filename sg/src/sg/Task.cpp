@@ -18,8 +18,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -39,7 +39,7 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -66,9 +66,9 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	m_library = new d2d::LibraryPanel(split);
+	m_library = new ee::LibraryPanel(split);
 
-	m_property = new d2d::PropertySettingPanel(split);
+	m_property = new ee::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.75f);
 	split->SplitHorizontally(m_library, m_property);
@@ -93,7 +93,7 @@ void Task::FormatFiles()
 {
 	wxString dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir.ToStdString(), files);
+	ee::FileHelper::FetchAllFiles(dir.ToStdString(), files);
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
 		wxFileName filename(files[i]);

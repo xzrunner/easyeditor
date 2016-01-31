@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 
-namespace d2d
+namespace ee
 {
 
 SceneNodeMgr* SceneNodeMgr::m_instance = NULL;

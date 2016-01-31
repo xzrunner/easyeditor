@@ -1,11 +1,11 @@
 #ifndef FORMATION_LIBRARY_IMAGE_PAGE_H
 #define FORMATION_LIBRARY_IMAGE_PAGE_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {
-	class LibraryImagePage : public d2d::LibraryImagePage
+	class LibraryImagePage : public ee::LibraryImagePage
 	{
 	public:
 		LibraryImagePage(wxWindow* parent);

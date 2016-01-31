@@ -1,7 +1,7 @@
 #ifndef _E3D_SHADER_MGR_H_
 #define _E3D_SHADER_MGR_H_
 
-#include <drag2d.h>
+
 
 #include "Matrix.h"
 
@@ -13,7 +13,7 @@ class ModelShader;
 class ShapeShader;
 class SpriteShader;
 
-class ShaderMgr : public d2d::ShaderMgrBase
+class ShaderMgr : public ee::ShaderMgrBase
 {
 public:
 	static ShaderMgr* Instance();
@@ -28,10 +28,10 @@ public:
 
 	void DrawModel(const IModel* model, const mat4& m);
 	void DrawShape(int type, const float* vertices, int count, 
-		const d2d::Colorf& col, bool force);
+		const ee::Colorf& col, bool force);
 	void DrawShape(int type, const float* vertices, int count, 
-		d2d::Colorf* cols, bool force = true);
-	void DrawShape(int type, const float* vertices, int vcount, const d2d::Colorf& col,
+		ee::Colorf* cols, bool force = true);
+	void DrawShape(int type, const float* vertices, int vcount, const ee::Colorf& col,
 		unsigned short* indices, int icount);
 	void DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int texid);
 	void DrawTri(const float* vertices, const float* texcoords, int count, int texid);

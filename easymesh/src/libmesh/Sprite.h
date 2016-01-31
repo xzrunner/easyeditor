@@ -1,14 +1,14 @@
 #ifndef _EASYMESH_SPRITE_H_
 #define _EASYMESH_SPRITE_H_
 
-#include <drag2d.h>
+
 
 #include "Symbol.h"
 
 namespace emesh
 {
 
-class Sprite : public d2d::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite();
@@ -26,7 +26,7 @@ public:
 	//
 	virtual bool Update(int version) { return true; }
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::Symbol* symbol);
+	virtual void SetSymbol(ee::Symbol* symbol);
 
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
@@ -36,26 +36,26 @@ public:
 	Shape* getShape() {
 		return m_symbol ? m_symbol->getShape() : NULL; 
 	}
-	const d2d::Image* getImage() const {
+	const ee::Image* getImage() const {
 		return m_symbol ? m_symbol->getImage() : NULL;
 	}
-	d2d::Image* getImage() {
+	ee::Image* getImage() {
 		return m_symbol ? m_symbol->getImage() : NULL;
 	}
 
-	const d2d::Vector& GetSpeed() const { return m_speed; }
-	void SetSpeed(const d2d::Vector& spd) { m_speed = spd; }
+	const ee::Vector& GetSpeed() const { return m_speed; }
+	void SetSpeed(const ee::Vector& spd) { m_speed = spd; }
 
 	void SetTween(Sprite* begin, Sprite* end, float process);
 
-	static d2d::Sprite* Create(d2d::Symbol* symbol) {
+	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
 private:
 	Symbol* m_symbol;
 
-	d2d::Vector m_speed;
+	ee::Vector m_speed;
 
 }; // Sprite
 

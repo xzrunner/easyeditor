@@ -4,7 +4,7 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -14,19 +14,19 @@ namespace preview
 class PathVisibleSimple : public IPathfinding, public INetwork
 {
 public:
-	PathVisibleSimple(const d2d::Rect& region);
+	PathVisibleSimple(const ee::Rect& region);
 
 	//
 	// interface IPathfinding
 	//
-	virtual void DisableRegion(const d2d::Sprite* spr, bool disable);
-	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
+	virtual void DisableRegion(const ee::Sprite* spr, bool disable);
+	virtual void QueryRoute(const ee::Vector& start, const ee::Vector& end);
 	virtual void DebugDraw() const;
 
 	//
 	// interface INetwork
 	//
-	virtual d2d::Vector TransIDToPos(int id) const;
+	virtual ee::Vector TransIDToPos(int id) const;
 
 private:
 	struct Node;
@@ -42,12 +42,12 @@ private:
 
 	struct Node
 	{
-		Node(int id, const d2d::Vector& pos)
+		Node(int id, const ee::Vector& pos)
 			: id(id), pos(pos) {}
 
 		int id;
 
-		d2d::Vector pos;
+		ee::Vector pos;
 
 		std::vector<Connection> connections;
 
@@ -55,36 +55,36 @@ private:
 
 private:
 	// data struct
-	void InsertBoundary(const d2d::Sprite* spr);
-	void RemoveBoundary(std::map<const d2d::Sprite*, std::vector<Node*> >::iterator itr);
+	void InsertBoundary(const ee::Sprite* spr);
+	void RemoveBoundary(std::map<const ee::Sprite*, std::vector<Node*> >::iterator itr);
 
 	void BuildConnection(const std::vector<Node*>& nodes) const;
-	bool IsSegIntersectAllBound(const d2d::Vector& p0, const d2d::Vector& p1) const;
-	bool IsSegIntersectBound(const d2d::Vector& p0, const d2d::Vector& p1, 
+	bool IsSegIntersectAllBound(const ee::Vector& p0, const ee::Vector& p1) const;
+	bool IsSegIntersectBound(const ee::Vector& p0, const ee::Vector& p1, 
 		const std::vector<Node*>& bound) const;
 
-	Node* CreateNode(const d2d::Vector& pos);
+	Node* CreateNode(const ee::Vector& pos);
 	void RemoveNode(const Node* node);
 
 	// route
-	VisitedNode* QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end);
-	void Expand(VisitedNode* node, const d2d::Vector& end);
+	VisitedNode* QueryRouteImpl(const ee::Vector& start, const ee::Vector& end);
+	void Expand(VisitedNode* node, const ee::Vector& end);
 	void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 private:
-	d2d::Rect m_region;
+	ee::Rect m_region;
 
 	VisitedList m_visited;
 	CandidateList m_candidate;
 
-	std::map<const d2d::Sprite*, std::vector<Node*> > m_bounds;
+	std::map<const ee::Sprite*, std::vector<Node*> > m_bounds;
 	
 	int m_node_id;
 	std::map<int, Node*> m_nodes;
 
 	Node *m_last_start, *m_last_end;
 
-	std::vector<d2d::Vector> m_routes;
+	std::vector<ee::Vector> m_routes;
 
 }; // PathVisibleSimple
 

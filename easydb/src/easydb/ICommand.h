@@ -15,7 +15,7 @@ public:
 	virtual void Run(int argc, char *argv[]) = 0;
 	virtual ~ICommand() {}
 
-}; // ITask
+}; // Task
 
 }
 

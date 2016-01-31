@@ -3,12 +3,12 @@
 
 #include "Mesh.h"
 
-#include <drag2d.h>
+
 
 namespace e3d 
 {
 
-class IModel : public d2d::Object
+class IModel : public ee::Object
 {
 public:
 	virtual const std::vector<Mesh>& GetAllMeshes() const = 0;

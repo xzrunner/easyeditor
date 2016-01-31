@@ -1,7 +1,7 @@
 #ifndef _EPHYSICS_PHYSICS_QUERY_H_
 #define _EPHYSICS_PHYSICS_QUERY_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
@@ -10,8 +10,8 @@ namespace ephysics
 class PhysicsQuery
 {
 public:
-	static b2Body* queryOn(b2World* world, const d2d::Vector& pos);
-	static b2Body* queryNear(b2World* world, const d2d::Vector& pos);
+	static b2Body* queryOn(b2World* world, const ee::Vector& pos);
+	static b2Body* queryNear(b2World* world, const ee::Vector& pos);
 
 private:
 	class QueryCallback : public b2QueryCallback

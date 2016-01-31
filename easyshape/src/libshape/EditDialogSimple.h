@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
 #define _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -13,20 +13,20 @@ class EditDialogSimple : public wxDialog
 {
 public:
 	EditDialogSimple(wxWindow* parent, wxGLContext* glctx,
-		d2d::Sprite* edited, const d2d::MultiSpritesImpl* sprite_impl);
+		ee::Sprite* edited, const ee::MultiSpritesImpl* sprite_impl);
 	virtual ~EditDialogSimple();
 
 private:
-	void InitLayout(wxGLContext* glctx, d2d::Sprite* edited, 
-		const d2d::MultiSpritesImpl* sprite_impl);
-	void InitEditOP(d2d::Sprite* edited);
+	void InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+		const ee::MultiSpritesImpl* sprite_impl);
+	void InitEditOP(ee::Sprite* edited);
 
 	void OnCloseEvent(wxCloseEvent& event);
 
 private:
 	StagePanel* m_stage;
 
-	d2d::OneFloatValueStatic m_capture;
+	ee::OneFloatValueStatic m_capture;
 
 	DECLARE_EVENT_TABLE()
 

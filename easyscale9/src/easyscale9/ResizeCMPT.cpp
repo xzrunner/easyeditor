@@ -7,7 +7,7 @@ namespace escale9
 
 ResizeCMPT::ResizeCMPT(wxWindow* parent, const wxString& name, 
 					   StagePanel* stage, ToolbarPanel* toolbar)
-	: AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
 	m_editOP = new ResizeOP(stage, toolbar, this);
@@ -29,7 +29,7 @@ float ResizeCMPT::getHeight() const
 	return m_hSpin->GetValue();
 }
 
-wxSizer* ResizeCMPT::initLayout()
+wxSizer* ResizeCMPT::InitLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("size"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -54,7 +54,7 @@ wxSizer* ResizeCMPT::initLayout()
 void ResizeCMPT::onChangeSize(wxSpinEvent& event)
 {
 	m_stage->rebuildPatchSymbol();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 } // escale9

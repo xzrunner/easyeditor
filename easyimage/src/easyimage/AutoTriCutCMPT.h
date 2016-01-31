@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_
 #define _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
@@ -11,14 +11,14 @@ class StagePanel;
 class ExtractOutlineRaw;
 class ExtractOutlineFine;
 
-class AutoTriCutCMPT : public d2d::AbstractEditCMPT
+class AutoTriCutCMPT : public ee::EditCMPT
 {
 public:
 	AutoTriCutCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void Trigger(wxCommandEvent& event);

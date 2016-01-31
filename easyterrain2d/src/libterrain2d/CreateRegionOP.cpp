@@ -4,8 +4,8 @@
 namespace eterrain2d
 {
 
-CreateRegionOP::CreateRegionOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-							   d2d::MultiShapesImpl* shapesImpl)
+CreateRegionOP::CreateRegionOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+							   ee::MultiShapesImpl* shapesImpl)
 	: libshape::DrawPolygonOP(wnd, stage, shapesImpl)
 	, m_shapesImpl(shapesImpl)
 {
@@ -17,7 +17,7 @@ bool CreateRegionOP::OnDraw() const
 		return true;
 	}
 
-	m_shapesImpl->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
+	m_shapesImpl->TraverseShapes(ee::DrawShapesVisitor(ee::Rect()), ee::DT_VISIBLE);
 
 	return false;
 }

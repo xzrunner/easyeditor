@@ -1,14 +1,14 @@
 #ifndef _EASYPARTICLE3D_FRAME_H_
 #define _EASYPARTICLE3D_FRAME_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
 
 class Task;
 
-class Frame : public d2d::Frame
+class Frame : public ee::Frame
 {
 public:
 	Frame(const wxString& title, const wxString& filetag);

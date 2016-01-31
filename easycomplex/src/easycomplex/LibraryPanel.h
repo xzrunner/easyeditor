@@ -1,10 +1,10 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
-	class LibraryPanel : public d2d::LibraryPanel
+	class LibraryPanel : public ee::LibraryPanel
 	{
 	public:
 		LibraryPanel(wxWindow* parent);
@@ -16,18 +16,18 @@ namespace ecomplex
 		virtual void loadFromTextFile(std::ifstream& fin);
 		virtual void storeToTextFile(std::ofstream& fout) const;
 
-		d2d::ILibraryPage* getImagePage() { return m_imagePage; }
-		d2d::ILibraryPage* getComplexPage() { return m_complexPage; }
-		d2d::ILibraryPage* getAnimPage() { return m_animPage; }
-		d2d::ILibraryPage* get9PatchPage() { return m_scale9Page; }
-		d2d::ILibraryPage* getFontPage() { return m_fontPage; }
+		ee::ILibraryPage* getImagePage() { return m_imagePage; }
+		ee::ILibraryPage* getComplexPage() { return m_complexPage; }
+		ee::ILibraryPage* getAnimPage() { return m_animPage; }
+		ee::ILibraryPage* get9PatchPage() { return m_scale9Page; }
+		ee::ILibraryPage* getFontPage() { return m_fontPage; }
 
 	private:
-		d2d::LibraryImagePage* m_imagePage;
-		d2d::LibraryComplexPage* m_complexPage;
-		d2d::LibraryAnimPage* m_animPage;
-		d2d::Library9PatchPage* m_scale9Page;
-		d2d::LibraryFontBlankPage* m_fontPage;
+		ee::LibraryImagePage* m_imagePage;
+		ee::LibraryComplexPage* m_complexPage;
+		ee::LibraryAnimPage* m_animPage;
+		ee::Library9PatchPage* m_scale9Page;
+		ee::LibraryFontBlankPage* m_fontPage;
 
 	}; // LibraryPanel
 }

@@ -1,7 +1,7 @@
 #ifndef _ESHAPE_TASK_H_
 #define _ESHAPE_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace eshape
@@ -11,7 +11,7 @@ class LibraryPanel;
 class StagePanel;
 class ToolbarPanel;
 
-class Task : public d2d::ITask
+class Task : public ee::ITask
 {
 public:
 	Task(wxFrame* parent);
@@ -24,9 +24,9 @@ public:
 
 	virtual void clear();
 
-	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const {}
+	virtual void getAllSprite(std::vector<const ee::ISprite*>& sprites) const {}
 
-	virtual const d2d::EditPanel* getEditPanel() const;
+	virtual const ee::EditPanel* getEditPanel() const;
 
 private:
 	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
@@ -41,7 +41,7 @@ private:
 	wxFrame* m_parent;
 
 	LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
+	ee::PropertySettingPanel* m_property;
 	StagePanel* m_stage;
 	ToolbarPanel* m_toolbar;
 

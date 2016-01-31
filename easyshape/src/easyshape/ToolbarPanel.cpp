@@ -7,9 +7,9 @@
 namespace eshape
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
+ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 						   StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage)
+	: ee::ToolbarPanel(parent, stage)
 {
 	addChild(new libshape::NodeCaptureCMPT<libshape::EditRectOP>(this, wxT("rect"), stage, stage, property));
 	addChild(new libshape::NodeCaptureCMPT<libshape::EditCircleOP>(this, wxT("circle"), stage, stage, property));
@@ -24,11 +24,11 @@ void ToolbarPanel::changeCurrItem(LibraryItem* item)
 {
 	if (!item) return;
 
-	std::vector<d2d::IShape*>* shapes 
-		= static_cast<std::vector<d2d::IShape*>*>(item->getUserData());
+	std::vector<ee::IShape*>* shapes 
+		= static_cast<std::vector<ee::IShape*>*>(item->getUserData());
 	if (!shapes || shapes->empty()) return;
 
-	d2d::IShape* shape = (*shapes)[0];
+	ee::IShape* shape = (*shapes)[0];
 	if (dynamic_cast<libshape::RectShape*>(shape))
 		setChoice(0); 
 	else if (dynamic_cast<libshape::CircleShape*>(shape))

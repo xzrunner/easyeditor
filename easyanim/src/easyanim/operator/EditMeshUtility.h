@@ -1,5 +1,5 @@
 #pragma once
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -17,7 +17,7 @@ namespace eanim
 	protected:
 		void draw() const;
 
-		MeshNode* selectNodeByPos(const d2d::Vector& pos) const;
+		MeshNode* selectNodeByPos(const ee::Vector& pos) const;
 
 	protected:
 		Mesh* m_mesh;

@@ -1,7 +1,7 @@
 #ifndef _EASYTEXT_INPUT_PANEL_H_
 #define _EASYTEXT_INPUT_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace etext
 {
@@ -12,7 +12,7 @@ class InputPanel : public wxPanel
 {
 public:
 	InputPanel(wxWindow* parent, Sprite* spr,
-		d2d::EditPanelImpl* stage_impl);
+		ee::EditPanelImpl* stage_impl);
 	virtual ~InputPanel();
 
 private:
@@ -23,7 +23,7 @@ private:
 private:
 	Sprite* m_spr;
 
-	d2d::EditPanelImpl* m_stage_impl;
+	ee::EditPanelImpl* m_stage_impl;
 
 	wxTextCtrl* m_text_ctrl;
 

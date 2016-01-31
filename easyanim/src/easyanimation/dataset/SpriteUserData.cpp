@@ -10,7 +10,7 @@ SpriteUserData::SpriteUserData()
 	layer_idx = frame_idx = -1;
 }
 
-void set_sprite_user_data(d2d::Sprite* spr, Layer* layer, KeyFrame* frame)
+void set_sprite_user_data(ee::Sprite* spr, Layer* layer, KeyFrame* frame)
 {
 	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
 	{
@@ -26,7 +26,7 @@ void set_sprite_user_data(d2d::Sprite* spr, Layer* layer, KeyFrame* frame)
 	}
 }
 
-void set_sprite_user_data(d2d::Sprite* spr, int layer_idx, int frame_idx) 
+void set_sprite_user_data(ee::Sprite* spr, int layer_idx, int frame_idx) 
 {
 	if (SpriteUserData* old_ud = (SpriteUserData*)spr->GetUserData())
 	{

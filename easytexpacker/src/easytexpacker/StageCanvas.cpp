@@ -7,7 +7,7 @@ namespace etexpacker
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage_panel(stage)
 	, m_stage_impl(stage)
 {
@@ -15,9 +15,9 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	d2d::Rect sr = m_screen.GetRegion();
-	m_stage_impl->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
+	ee::Rect sr = m_screen.GetRegion();
+	m_stage_impl->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		ee::DT_VISIBLE);
 
 	DrawRegion();
 }
@@ -28,18 +28,18 @@ void StageCanvas::DrawRegion() const
 		height = Context::Instance()->height;
 
 	// bg
-	d2d::PrimitiveDraw::DrawRect(
-		d2d::Vector(0, 0), 
-		d2d::Vector(width, height), 
-		d2d::LIGHT_RED_LINE);
+	ee::PrimitiveDraw::DrawRect(
+		ee::Vector(0, 0), 
+		ee::Vector(width, height), 
+		ee::LIGHT_RED_LINE);
 
 	int x = 0, y = 0;
 	int count = m_stage_panel->GetTextureAccount();
 	for (int i = 0; i < count; ++i)
 	{
-		d2d::PrimitiveDraw::DrawRect(d2d::Vector(x, y), 
-			d2d::Vector(x + width, y + height), 
-			d2d::LIGHT_GREY_LINE);
+		ee::PrimitiveDraw::DrawRect(ee::Vector(x, y), 
+			ee::Vector(x + width, y + height), 
+			ee::LIGHT_GREY_LINE);
 		x += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
 	}
 

@@ -14,24 +14,24 @@ namespace eanim
 {
 
 SkeletonImpl::SkeletonImpl()
-	: d2d::ArrangeSpriteImpl(ViewMgr::Instance()->stage, 
+	: ee::ArrangeSpriteImpl(ViewMgr::Instance()->stage, 
 	                         ViewMgr::Instance()->stage->GetStageImpl(), 
 							 ViewMgr::Instance()->stage, 
 							 ViewMgr::Instance()->property, 
-							 d2d::ArrangeSpriteConfig())
+							 ee::ArrangeSpriteConfig())
 	, m_selected_joint(NULL)
 {
 }
 
 void SkeletonImpl::OnKeyDown(int keyCode)
 {
-	d2d::ArrangeSpriteImpl::OnKeyDown(keyCode);
+	ee::ArrangeSpriteImpl::OnKeyDown(keyCode);
 	KeyDownHandler::Instance()->Process(keyCode);
 }
 
 void SkeletonImpl::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_first_pos = pos;
 
 	SkeletonData* skeleton = get_curr_skeleton();
@@ -43,7 +43,7 @@ void SkeletonImpl::OnMouseLeftDown(int x, int y)
 	if (joint) {
 		m_selected_joint = joint;
 	} else {
-		d2d::ArrangeSpriteImpl::OnMouseLeftDown(x, y);
+		ee::ArrangeSpriteImpl::OnMouseLeftDown(x, y);
 	}
 }
 
@@ -55,12 +55,12 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 	}
 	else
 	{
-		d2d::ArrangeSpriteImpl::OnMouseLeftUp(x, y);
+		ee::ArrangeSpriteImpl::OnMouseLeftUp(x, y);
 
 		if (m_selection->Size() == 1)
 		{
-			std::vector<d2d::Sprite*> sprites;
-			m_selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+			std::vector<ee::Sprite*> sprites;
+			m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
@@ -72,7 +72,7 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 
 void SkeletonImpl::OnMouseRightDown(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::OnMouseRightDown(x, y);
+	ee::ArrangeSpriteImpl::OnMouseRightDown(x, y);
 	m_first_pos = m_stage->TransPosScrToProj(x, y);
 }
 
@@ -80,19 +80,19 @@ void SkeletonImpl::OnMouseDrag(int x, int y)
 {
 	if (m_selected_joint)
 	{
-		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_selected_joint->SetPosition(pos);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	else
 	{
-		d2d::ArrangeSpriteImpl::OnMouseDrag(x, y);
+		ee::ArrangeSpriteImpl::OnMouseDrag(x, y);
 	}
 }
 
 void SkeletonImpl::OnPopMenuSelected(int type)
 {
-	d2d::ArrangeSpriteImpl::OnPopMenuSelected(type);
+	ee::ArrangeSpriteImpl::OnPopMenuSelected(type);
 
 	switch(type)
 	{
@@ -100,7 +100,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 		{
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
-				d2d::Sprite* sprite = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
+				ee::Sprite* sprite = ViewMgr::Instance()->stage->QuerySpriteByPos(m_first_pos);
 				skeleton->InsertJoint(sprite, m_first_pos);
 			}
 		}
@@ -118,7 +118,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 
 void SkeletonImpl::OnDraw() const
 {
-	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
+	ee::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
 
 	SkeletonData* skeleton = get_curr_skeleton();
 	if (skeleton) {
@@ -128,7 +128,7 @@ void SkeletonImpl::OnDraw() const
 
 void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 {
-	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, x, y);
+	ee::ArrangeSpriteImpl::SetRightPopupMenu(menu, x, y);
 
 	SkeletonData* skeleton = get_curr_skeleton();
 	if (!skeleton) {
@@ -142,14 +142,14 @@ void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 		menu.Append(StagePanel::Menu_AddJointNode, "Del Joint");
 }
 
-d2d::IArrangeSpriteState* 
-SkeletonImpl::CreateTranslateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+ee::ArrangeSpriteState* 
+SkeletonImpl::CreateTranslateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
 {
 	return new TranslateSpriteState(selection, first_pos);
 }
 
-d2d::IArrangeSpriteState* 
-SkeletonImpl::CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+ee::ArrangeSpriteState* 
+SkeletonImpl::CreateRotateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
 {
 	return new RotateSpriteState(selection, first_pos);
 }

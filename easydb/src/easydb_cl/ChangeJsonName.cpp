@@ -3,7 +3,7 @@
 
 #include <wx/filename.h>
 #include <fstream>
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -36,7 +36,7 @@ void ChangeJsonName::Run(int argc, char *argv[])
 void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 
 	std::set<std::string> used_set;
 	for (int i = 0, n = files.size(); i < n; ++i)
@@ -45,12 +45,12 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
 
-		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_particle3d)) {
+		if (!ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
 			continue;
 		}
 
-		std::string name = d2d::FileHelper::GetFilename(filepath);
-		d2d::StringHelper::ToLower(name);
+		std::string name = ee::FileHelper::GetFilename(filepath);
+		ee::StringHelper::ToLower(name);
 		name = name.substr(0, name.find_last_of('_'));
 		used_set.insert(name);
 	}
@@ -61,7 +61,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
 
-		if (!d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (!ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			continue;
 		}
 
@@ -77,8 +77,8 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 			continue;
 		}
 
-		std::string name = d2d::FileHelper::GetFilename(filepath);
-		d2d::StringHelper::ToLower(name);
+		std::string name = ee::FileHelper::GetFilename(filepath);
+		ee::StringHelper::ToLower(name);
 		name = name.substr(0, name.find_last_of('_'));
 		if (used_set.find(name) != used_set.end()) {
 			value["name"] = name + postfix;

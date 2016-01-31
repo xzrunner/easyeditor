@@ -2,16 +2,16 @@
 #ifndef EBUILDER_BEHAVIORS_PAGE_H
 #define EBUILDER_BEHAVIORS_PAGE_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
-	class BehaviorsPage : public d2d::ILibraryPage
+	class BehaviorsPage : public ee::ILibraryPage
 	{
 	public:
 		BehaviorsPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 		virtual void clear();
 

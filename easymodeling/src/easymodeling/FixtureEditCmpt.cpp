@@ -6,13 +6,13 @@
 using namespace emodeling;
 
 FixtureEditCmpt::FixtureEditCmpt(wxWindow* parent, const wxString& name, 
-								 StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel->GetStageImpl())
+								 StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 {
 	m_editOP = new SelectFixtureOP(editPanel, propertyPanel);
 }
 
-wxSizer* FixtureEditCmpt::initLayout()
+wxSizer* FixtureEditCmpt::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	return topSizer;

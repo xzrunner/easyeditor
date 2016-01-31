@@ -3,7 +3,7 @@
 #include "Utility.h"
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -158,7 +158,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			Layer* layer = m_layersMgr->getLayer(layerIndex);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
-			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->getName(), pos);
+			ee::SetValueDialog dlg(this, wxT("Set layer's name"), layer->getName(), pos);
 			if (dlg.ShowModal() == wxID_OK)
 			{
 				layer->setName(dlg.getText().ToStdString());

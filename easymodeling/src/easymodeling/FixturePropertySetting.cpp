@@ -5,8 +5,8 @@
 namespace emodeling
 {
 
-FixturePropertySetting::FixturePropertySetting(d2d::EditPanelImpl* stage, libmodeling::Fixture* fixture)
-	: d2d::IPropertySetting("Fixture")
+FixturePropertySetting::FixturePropertySetting(ee::EditPanelImpl* stage, libmodeling::Fixture* fixture)
+	: ee::PropertySetting("Fixture")
 	, m_stage(stage)
 	, m_fixture(fixture)
 {
@@ -38,7 +38,7 @@ void FixturePropertySetting::OnPropertyGridChange(const wxString& name, const wx
 		dirty = false;
 
 	if (dirty) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

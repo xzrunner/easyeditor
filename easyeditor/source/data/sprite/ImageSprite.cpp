@@ -56,8 +56,8 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
 {
 	if (!m_symbol) return;
 
- 	const int width = m_symbol->GetSize().xLength(),
- 		height = m_symbol->GetSize().yLength();
+ 	int width = m_symbol->GetSize().Width(),
+ 		height = m_symbol->GetSize().Height();
  
  	delete m_bounding;
  	m_bounding = BBFactory::CreateBB(e_obb);
@@ -77,7 +77,7 @@ void ImageSprite::BuildBoundingFromTexCoords(float* texCoords)
  	rect.ymax = hHeight;
  
  	Vector offset = Math2D::RotateVector(center, m_angle);
- 	rect.translate(m_pos + offset);
+ 	rect.Translate(m_pos + offset);
  	m_bounding->InitFromRect(rect);
  	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }

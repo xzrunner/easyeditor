@@ -23,19 +23,19 @@ void StagePanel::clear()
 		m_toolbar->changeCurrItem(NULL);
 	}
 
-	d2d::EditPanel::clear();
+	ee::EditPanel::clear();
 	clearShapes();
 }
 
-void StagePanel::traverseShapes(d2d::IVisitor& visitor, 
-								d2d::TraverseType type/* = d2d::e_allExisting*/) const
+void StagePanel::traverseShapes(ee::IVisitor& visitor, 
+								ee::TraverseType type/* = ee::e_allExisting*/) const
 {
 	if (!m_item || !m_item->getUserData())
 		return;
 
-	std::vector<d2d::IShape*>* shapes 
-		= static_cast<std::vector<d2d::IShape*>*>(m_item->getUserData());
-	std::vector<d2d::IShape*>::const_iterator itr = shapes->begin();
+	std::vector<ee::IShape*>* shapes 
+		= static_cast<std::vector<ee::IShape*>*>(m_item->getUserData());
+	std::vector<ee::IShape*>::const_iterator itr = shapes->begin();
 	for ( ; itr != shapes->end(); ++itr)
 	{
 		bool hasNext;
@@ -44,14 +44,14 @@ void StagePanel::traverseShapes(d2d::IVisitor& visitor,
 	}
 }
 
-void StagePanel::removeShape(d2d::IShape* shape)
+void StagePanel::removeShape(ee::IShape* shape)
 {
 	if (!m_item || !m_item->getUserData())
 		return;
 
-	std::vector<d2d::IShape*>* shapes 
-		= static_cast<std::vector<d2d::IShape*>*>(m_item->getUserData());
-	std::vector<d2d::IShape*>::iterator itr = shapes->begin();
+	std::vector<ee::IShape*>* shapes 
+		= static_cast<std::vector<ee::IShape*>*>(m_item->getUserData());
+	std::vector<ee::IShape*>::iterator itr = shapes->begin();
 	for ( ; itr != shapes->end(); ++itr)
 	{
 		if (*itr == shape)
@@ -63,13 +63,13 @@ void StagePanel::removeShape(d2d::IShape* shape)
 	}
 }
 
-void StagePanel::insertShape(d2d::IShape* shape)
+void StagePanel::insertShape(ee::IShape* shape)
 {
 	if (!m_item || !m_item->getUserData())
 		return;
 
-	std::vector<d2d::IShape*>* shapes 
-		= static_cast<std::vector<d2d::IShape*>*>(m_item->getUserData());
+	std::vector<ee::IShape*>* shapes 
+		= static_cast<std::vector<ee::IShape*>*>(m_item->getUserData());
 //	static_cast<libshape::ChainShape*>(shape)->setClosed(Context::Instance()->isClosed);
 	shapes->push_back(shape);
 }
@@ -79,9 +79,9 @@ void StagePanel::clearShapes()
 	if (!m_item || !m_item->getUserData())
 		return;
 
-	std::vector<d2d::IShape*>* shapes 
-		= static_cast<std::vector<d2d::IShape*>*>(m_item->getUserData());
-	for_each(shapes->begin(), shapes->end(), DeletePointerFunctor<d2d::IShape>());
+	std::vector<ee::IShape*>* shapes 
+		= static_cast<std::vector<ee::IShape*>*>(m_item->getUserData());
+	for_each(shapes->begin(), shapes->end(), DeletePointerFunctor<ee::IShape>());
 	shapes->clear();
 }
 
@@ -90,7 +90,7 @@ void StagePanel::changeCurrItem(LibraryItem* item)
 	m_item = item;
 	if (m_item && !m_item->getUserData())
 	{
-		std::vector<d2d::IShape*>* shapes = new std::vector<d2d::IShape*>;
+		std::vector<ee::IShape*>* shapes = new std::vector<ee::IShape*>;
 		m_item->setUserData(shapes);
 	}
 	Refresh();

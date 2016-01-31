@@ -35,18 +35,18 @@ void TransOldShapeFile::Run(int argc, char *argv[])
 void TransOldShapeFile::Run(const std::string& folder)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(folder, files);
+	ee::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
 
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_shape)) {
-// 			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		if (ee::FileType::IsType(filepath, ee::FileType::e_shape)) {
+// 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
 // 			static_cast<libshape::Symbol*>(symbol)->StoreToFile(symbol->getFilepath());
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_texture)) {
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_texture)) {
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			etexture::FileSaver::Store(filepath.c_str(), static_cast<etexture::Symbol*>(symbol));
 		}
 	}

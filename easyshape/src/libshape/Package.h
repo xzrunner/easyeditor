@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_PACKAGE_H_
 #define _LIBSHAPE_PACKAGE_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -15,7 +15,7 @@ public:
 	};
 
 public:
-	static void packShape(d2d::Shape* shape, std::ofstream& fout);
+	static void packShape(ee::Shape* shape, std::ofstream& fout);
 
 }; // Paskage
 

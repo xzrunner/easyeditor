@@ -2,7 +2,7 @@
 #ifndef EBUILDER_THUMBNAIL_H
 #define EBUILDER_THUMBNAIL_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {

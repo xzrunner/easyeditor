@@ -6,7 +6,7 @@ namespace libsketch
 {
 
 TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
-										   const d2d::SpriteSelection& selection)
+										   const ee::SpriteSelection& selection)
 	: m_stage(stage)
 	, m_selection(selection)
 {
@@ -31,7 +31,7 @@ void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 	Translate(m_last_pos, pos);
 	m_last_pos = pos;
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
@@ -44,7 +44,7 @@ void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 

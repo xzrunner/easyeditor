@@ -2,13 +2,13 @@
 #ifndef LIBMODELING_JOINT_H
 #define LIBMODELING_JOINT_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling
 {
 	class Body;
 
-	class Joint : public d2d::Object
+	class Joint : public ee::Object
 	{
 	public:
 		enum Type
@@ -37,21 +37,21 @@ namespace libmodeling
 		Joint(Body* b0, Body* b1, Type type);
 		virtual ~Joint() {}
 		
-		virtual bool isContain(const d2d::Vector& pos) const = 0;
-		virtual bool isIntersect(const d2d::Rect& rect) const = 0;
+		virtual bool isContain(const ee::Vector& pos) const = 0;
+		virtual bool isIntersect(const ee::Rect& rect) const = 0;
 
 		virtual void draw(DrawType type) const = 0;
 
 	protected:
 		void drawBodyFlag() const;
 
-		static d2d::Vector transWorldToLocal(const d2d::Vector& world, 
-			const d2d::Sprite* sprite);
-		static d2d::Vector transLocalToWorld(const d2d::Vector& local, 
-			const d2d::Sprite* sprite);
+		static ee::Vector transWorldToLocal(const ee::Vector& world, 
+			const ee::Sprite* sprite);
+		static ee::Vector transLocalToWorld(const ee::Vector& local, 
+			const ee::Sprite* sprite);
 
 	private:
-		void drawBodyFlag(const d2d::Vector& pos) const;
+		void drawBodyFlag(const ee::Vector& pos) const;
 
 	protected:
 		static const float JOINT_RADIUS_OUT;

@@ -11,12 +11,12 @@ namespace eanim
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, bool vertical)
-	: d2d::ToolbarPanel(parent, ViewMgr::Instance()->stage->GetStageImpl(), vertical)
+	: ee::ToolbarPanel(parent, ViewMgr::Instance()->stage->GetStageImpl(), vertical)
 	, m_tl_anim_choice(NULL)
 {
 	addChild(new CommonCMPT(this, "Common", vertical));
 	addChild(new SkeletonCMPT(this, "Skeleton", vertical));
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 
 	ChangeTemplateMode(true);
 }
@@ -46,11 +46,11 @@ void ToolbarPanel::Clear()
 	ChangeTemplateMode(true);
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	{
-		sizer->Add(initChildrenLayout());
+		sizer->Add(InitChildrenLayout());
 	}
 	sizer->AddSpacer(10);
 	{
@@ -94,17 +94,17 @@ void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 	DataMgr::Instance()->GetTemplate().SetChoice(event.GetInt());
 
 	try {
-		d2d::ClearSpriteSJ::Instance()->Clear();
+		ee::ClearSpriteSJ::Instance()->Clear();
 		FileIO::Reload();
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_parent, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
 }
 
 void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 {
-	d2d::ZoomViewOP* op = static_cast<d2d::ZoomViewOP*>(m_stage->GetEditOP());
+	ee::ZoomViewOP* op = static_cast<ee::ZoomViewOP*>(m_stage->GetEditOP());
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Template Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);

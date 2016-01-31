@@ -1,7 +1,7 @@
 #ifndef EMODELING_STAGE_PANEL_H
 #define EMODELING_STAGE_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling
 {
@@ -12,25 +12,25 @@ namespace libmodeling
 namespace emodeling
 {
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
 
-	virtual d2d::Sprite* QuerySpriteByPos(const d2d::Vector& pos) const;
-	virtual void QuerySpritesByRect(const d2d::Rect& rect, std::vector<d2d::Sprite*>& result) const;		
+	virtual ee::Sprite* QuerySpriteByPos(const ee::Vector& pos) const;
+	virtual void QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite*>& result) const;		
 
-	libmodeling::Joint* queryJointByPos(const d2d::Vector& pos) const;
-	void queryJointsByRect(const d2d::Rect& rect, std::vector<libmodeling::Joint*>& result) const;
+	libmodeling::Joint* queryJointByPos(const ee::Vector& pos) const;
+	void queryJointsByRect(const ee::Rect& rect, std::vector<libmodeling::Joint*>& result) const;
 
 	void insertJoint(libmodeling::Joint* joint) {
 		m_joints.push_back(joint);
 	}
 	void removeJoint(libmodeling::Joint* joint);
 
-	void traverseBodies(d2d::Visitor& visitor) const;
-	void traverseJoints(d2d::Visitor& visitor) const;
+	void traverseBodies(ee::Visitor& visitor) const;
+	void traverseJoints(ee::Visitor& visitor) const;
 
 protected:
 	//
@@ -40,34 +40,34 @@ protected:
 
 private:
 	static void loadBody(const wxString& filepath, libmodeling::Body& body);
-	static void loadBody(d2d::Sprite* sprite, libmodeling::Body& body);
+	static void loadBody(ee::Sprite* sprite, libmodeling::Body& body);
 
-	void Insert(d2d::Sprite* spr);
-	void Remove(d2d::Sprite* spr);
+	void Insert(ee::Sprite* spr);
+	void Remove(ee::Sprite* spr);
 	void Clear();
 
 private:
-	class PointQueryVisitor : public d2d::Visitor
+	class PointQueryVisitor : public ee::Visitor
 	{
 	public:
-		PointQueryVisitor(const d2d::Vector& pos, d2d::Sprite** pResult);
-		virtual void Visit(d2d::Object* object, bool& next);
+		PointQueryVisitor(const ee::Vector& pos, ee::Sprite** pResult);
+		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
-		const d2d::Vector& m_pos;
-		d2d::Sprite** m_pResult;
+		const ee::Vector& m_pos;
+		ee::Sprite** m_pResult;
 
 	}; // PointQueryVisitor
 
-	class RectQueryVisitor : public d2d::Visitor
+	class RectQueryVisitor : public ee::Visitor
 	{
 	public:
-		RectQueryVisitor(const d2d::Rect& rect, std::vector<d2d::Sprite*>& result);
-		virtual void Visit(d2d::Object* object, bool& next);
+		RectQueryVisitor(const ee::Rect& rect, std::vector<ee::Sprite*>& result);
+		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
-		const d2d::Rect& m_rect;
-		std::vector<d2d::Sprite*>& m_result;
+		const ee::Rect& m_rect;
+		std::vector<ee::Sprite*>& m_result;
 
 	}; // RectQueryVisitor
 

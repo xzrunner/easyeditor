@@ -6,15 +6,15 @@
 namespace eanim
 {
 
-SpriteEditGLCanvas::SpriteEditGLCanvas(d2d::EditPanel* parent, Sprite* sprite)
-	: d2d::OrthoCanvas(parent)
+SpriteEditGLCanvas::SpriteEditGLCanvas(ee::EditPanel* parent, Sprite* sprite)
+	: ee::OrthoCanvas(parent)
 	, m_sprite(sprite)
 {
 }
 
 void SpriteEditGLCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
 	m_sprite->reloadTexture();
 }
 

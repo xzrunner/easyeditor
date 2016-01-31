@@ -11,19 +11,19 @@
 namespace eanim
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(wnd, stage, spritesImpl, callback)
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+								 ee::EditCMPT* callback/* = NULL*/)
+	: ee::SelectSpritesOP(wnd, stage, spritesImpl, callback)
 {
 }
 
 bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
+	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
 		return true;
 
-// 	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-// 	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+// 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+// 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 // 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 // 	{
 // 		emesh::EditDialog dlg(m_wnd, sprite);
@@ -33,18 +33,18 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	return false;
 }
 
-void SelectSpritesOP::PasteSprToClipboard(const d2d::Sprite* spr, Json::Value& value) const
+void SelectSpritesOP::PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const
 {
-	d2d::SelectSpritesOP::PasteSprToClipboard(spr, value);
+	ee::SelectSpritesOP::PasteSprToClipboard(spr, value);
 
 	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	value["anim"]["layer"] = DataMgr::Instance()->GetLayers().QueryIndex(ud->layer);
 	value["anim"]["frame"] = ud->frame->GetTime() - 1;
 }
 
-void SelectSpritesOP::CopySprFromClipboard(d2d::Sprite* spr, const Json::Value& value) const
+void SelectSpritesOP::CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const
 {
-	d2d::SelectSpritesOP::CopySprFromClipboard(spr, value);
+	ee::SelectSpritesOP::CopySprFromClipboard(spr, value);
 
 	int layer_idx = value["anim"]["layer"].asInt(),
 		frame_idx = value["anim"]["frame"].asInt();

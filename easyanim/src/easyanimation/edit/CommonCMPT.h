@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_COMMON_CMPT_H_
 #define _EASYANIM_COMMON_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -9,13 +9,13 @@ namespace eanim
 class LayersMgr;
 class StagePanel;
 
-class CommonCMPT : public d2d::AbstractEditCMPT
+class CommonCMPT : public ee::EditCMPT
 {
 public:
 	CommonCMPT(wxWindow* parent, const std::string& name, bool vertical);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	wxSizer* InitEditPanel();

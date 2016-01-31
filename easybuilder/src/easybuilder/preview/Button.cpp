@@ -3,7 +3,7 @@
 
 using namespace ebuilder::preview;
 
-Button::Button(const d2d::ImageSprite& sprite)
+Button::Button(const ee::ImageSprite& sprite)
 	: Item(e_button, sprite)
 {
 }

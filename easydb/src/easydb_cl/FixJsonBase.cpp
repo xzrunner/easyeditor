@@ -2,7 +2,7 @@
 
 #include <wx/filename.h>
 #include <fstream>
-#include <drag2d.h>
+
 
 namespace edb
 {

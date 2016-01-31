@@ -20,7 +20,7 @@ ShapeBuilder::~ShapeBuilder()
 	}
 }
 
-void ShapeBuilder::Traverse(d2d::Visitor& visitor) const
+void ShapeBuilder::Traverse(ee::Visitor& visitor) const
 {
 	std::map<const etexture::Symbol*, const PackShape*>::const_iterator 
 		itr = m_map_data.begin();
@@ -35,7 +35,7 @@ void ShapeBuilder::Traverse(d2d::Visitor& visitor) const
 
 bool ShapeBuilder::CanHandle(const etexture::Symbol* symbol) const
 {
-	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -66,22 +66,22 @@ const IPackNode* ShapeBuilder::Create(const etexture::Symbol* symbol)
 
 void ShapeBuilder::Load(const etexture::Symbol* symbol, PackShape* shape)
 {
-	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
-		throw d2d::Exception("ShapeBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
+		throw ee::Exception("ShapeBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
 	}
 	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
-		throw d2d::Exception("ShapeBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("ShapeBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
 	}
 	const libshape::ColorMaterial* material = dynamic_cast<const libshape::ColorMaterial*>(poly->GetMaterial());
 	if (!material) {
-		throw d2d::Exception("ShapeBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("ShapeBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
-	const std::vector<d2d::Vector>& vertices = material->GetTriangles();
+	const std::vector<ee::Vector>& vertices = material->GetTriangles();
 	if (vertices.size() % 3 != 0) {
-		throw d2d::Exception("ShapeBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("ShapeBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
 	shape->type = ST_TRIANGLES;

@@ -8,7 +8,7 @@ namespace eterrain2d
 {
 
 MoveTexcoordsCMPT::MoveTexcoordsCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
 	m_editOP = new WaveVerticesOP(stage);
@@ -22,7 +22,7 @@ void MoveTexcoordsCMPT::SetControlersValue(const OceanMesh* ocean)
 	m_speed_y->SetValue(ocean->GetUVMoveSpeed().y / 0.01f);
 }
 
-wxSizer* MoveTexcoordsCMPT::initLayout()
+wxSizer* MoveTexcoordsCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
@@ -71,7 +71,7 @@ void MoveTexcoordsCMPT::OnOpenMoveChanged(wxCommandEvent& event)
 
 void MoveTexcoordsCMPT::OnChangeUVSpeed(wxSpinEvent& event)
 {
-	d2d::Vector speed(m_speed_x->GetValue() * 0.01f, m_speed_y->GetValue() * 0.01f);
+	ee::Vector speed(m_speed_x->GetValue() * 0.01f, m_speed_y->GetValue() * 0.01f);
 	std::vector<OceanMesh*>& oceans = m_stage_panel->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetTexcoordsSpeed(speed);

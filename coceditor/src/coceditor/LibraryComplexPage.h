@@ -1,15 +1,15 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace coceditor
 {
-	class LibraryComplexPage : public d2d::ILibraryPage
+	class LibraryComplexPage : public ee::ILibraryPage
 	{
 	public:
 		LibraryComplexPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+		virtual bool isHandleSymbol(ee::ISymbol* symbol) const;
 
 	protected:
 		virtual void initLayout(bool draggable = true);

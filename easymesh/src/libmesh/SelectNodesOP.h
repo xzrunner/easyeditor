@@ -9,7 +9,7 @@ namespace emesh
 class Mesh;
 class StagePanel;
 
-class SelectNodesOP : public d2d::DrawRectangleOP
+class SelectNodesOP : public ee::DrawRectangleOP
 {
 public:
 	SelectNodesOP(StagePanel* stage);
@@ -28,7 +28,7 @@ protected:
 private:
 	StagePanel* m_stage;
 
-	d2d::Vector m_first_pos;
+	ee::Vector m_first_pos;
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;

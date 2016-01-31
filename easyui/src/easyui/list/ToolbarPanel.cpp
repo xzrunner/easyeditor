@@ -8,10 +8,10 @@ namespace list
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage_panel)
-	: d2d::ToolbarPanel(parent, NULL)
+	: ee::ToolbarPanel(parent, NULL)
 	, m_stage_panel(stage_panel)
 {
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
 void ToolbarPanel::EnableHori(bool enable)
@@ -24,7 +24,7 @@ void ToolbarPanel::EnableVert(bool enable)
 	m_vert_check->SetValue(enable);
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
@@ -36,12 +36,12 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	sizer->AddSpacer(20);
 	{
-		const d2d::Rect& r = m_stage_panel->GetList().GetClipbox();
+		const ee::Rect& r = m_stage_panel->GetList().GetClipbox();
 		{
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 			csizer->Add(new wxStaticText(this, wxID_ANY, "width"), 0, wxLEFT | wxRIGHT, 5);
 
-			m_width_text = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(r.Width()),
+			m_width_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(r.Width()),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_width_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 			csizer->Add(m_width_text);
@@ -53,7 +53,7 @@ wxSizer* ToolbarPanel::initLayout()
 			wxSizer* csizer = new wxBoxSizer(wxHORIZONTAL);
 			csizer->Add(new wxStaticText(this, wxID_ANY, "height"), 0, wxLEFT | wxRIGHT, 5);
 
-			m_height_text = new wxTextCtrl(this, wxID_ANY, d2d::StringHelper::ToString(r.Height()),
+			m_height_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(r.Height()),
 				wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
 			Connect(m_height_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 			csizer->Add(m_height_text);
@@ -84,22 +84,22 @@ void ToolbarPanel::OnItemFilling(wxCommandEvent& event)
 {
 	bool succ = m_stage_panel->GetList().ReFilling();
 	if (succ) {
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void ToolbarPanel::OnChangeSize(wxCommandEvent& event)
 {
-	int hw = d2d::StringHelper::FromString<float>(m_width_text->GetValue().ToStdString()) * 0.5f;
-	int hh = d2d::StringHelper::FromString<float>(m_height_text->GetValue().ToStdString()) * 0.5f;
+	int hw = ee::StringHelper::FromString<float>(m_width_text->GetValue().ToStdString()) * 0.5f;
+	int hh = ee::StringHelper::FromString<float>(m_height_text->GetValue().ToStdString()) * 0.5f;
 
-	d2d::Rect& r = m_stage_panel->GetList().GetClipbox();
+	ee::Rect& r = m_stage_panel->GetList().GetClipbox();
 	r.xmin = -hw;
 	r.xmax = hw;
 	r.ymin = -hh;
 	r.ymax = hh;
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ToolbarPanel::OnChangeHori(wxCommandEvent& event)

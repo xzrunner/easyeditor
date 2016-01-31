@@ -1,7 +1,7 @@
 #include "PackLuaDescFile.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 #include <easytexpacker.h>
 
 namespace edb
@@ -9,7 +9,7 @@ namespace edb
 
 PackLuaDescFile::~PackLuaDescFile()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), d2d::ReleaseObjectFunctor<d2d::Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), ee::ReleaseObjectFunctor<ee::Symbol>());
 }
 
 std::string PackLuaDescFile::Command() const
@@ -50,17 +50,17 @@ void PackLuaDescFile::Trigger(const std::string& json_dir, const std::string& tp
 void PackLuaDescFile::LoadJsonFiles(const std::string& dir)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex) || 
-			d2d::FileType::IsType(filepath, d2d::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
+			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_symbols.push_back(symbol);
 		}
 	}
@@ -74,7 +74,7 @@ void PackLuaDescFile::LoadTexPacker(const std::string& tp_json,
 	int i = 1;
 	while (true)
 	{
-		std::string path = tp_json + d2d::StringHelper::ToString(i) + ".json";
+		std::string path = tp_json + ee::StringHelper::ToString(i) + ".json";
 		if (wxFileName::FileExists(path)) {
 			m_tex_mgr.Add(path, i-1);
 		} else {

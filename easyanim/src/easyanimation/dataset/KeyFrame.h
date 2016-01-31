@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_KEY_FRAME_H_
 #define _EASYANIM_KEY_FRAME_H_
 
-#include <drag2d.h>
+
 
 #include "SkeletonData.h"
 
@@ -10,7 +10,7 @@ namespace eanim
 
 class Layer;
 
-class KeyFrame : public d2d::Object
+class KeyFrame : public ee::Object
 {
 public:
 	KeyFrame(int time);
@@ -24,17 +24,17 @@ public:
 		return m_sprites.empty();
 	}
 
-	void Insert(d2d::Sprite* sprite);
-	bool Remove(d2d::Sprite* sprite);
-	bool Reorder(const d2d::Sprite* sprite, bool up);
-	bool ReorderMost(const d2d::Sprite* sprite, bool up);
+	void Insert(ee::Sprite* sprite);
+	bool Remove(ee::Sprite* sprite);
+	bool Reorder(const ee::Sprite* sprite, bool up);
+	bool ReorderMost(const ee::Sprite* sprite, bool up);
 
 	int Size() const { return m_sprites.size(); }
-	const d2d::Sprite* GetSprite(int index) {
+	const ee::Sprite* GetSprite(int index) {
 		return index >= 0 && index < m_sprites.size() ? m_sprites[index] : NULL;
 	}
 
-	const std::vector<d2d::Sprite*>& GetAllSprites() const { return m_sprites; }
+	const std::vector<ee::Sprite*>& GetAllSprites() const { return m_sprites; }
 
 	bool HasClassicTween() const { return m_classic_tween; }
 	void SetClassicTween(bool tween = true) { m_classic_tween = tween; }
@@ -46,7 +46,7 @@ public:
 
 	SkeletonData& GetSkeletonData() { return m_skeletonData; }
 
-	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::Sprite*>& tween, float process) const;
+	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<ee::Sprite*>& tween, float process) const;
 
 	int GetID() const { return m_id; }
 	void SetID(int id) { m_id = id; }
@@ -54,14 +54,14 @@ public:
 	void OnActive();
 
 private:
-	void GetTweenSprite(d2d::Sprite* start, d2d::Sprite* end, d2d::Sprite* tween, float process) const;
+	void GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process) const;
 
-	bool IsTweenMatched(const d2d::Sprite* s0, const d2d::Sprite* s1) const;
+	bool IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const;
 
 private:
 	int m_time;
 
-	std::vector<d2d::Sprite*> m_sprites;
+	std::vector<ee::Sprite*> m_sprites;
 
 	bool m_classic_tween;
 

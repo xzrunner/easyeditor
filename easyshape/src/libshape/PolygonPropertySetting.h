@@ -1,17 +1,17 @@
 #ifndef _LIBSHAPE_POLYGON_PROPERTY_SETTING_H_
 #define _LIBSHAPE_POLYGON_PROPERTY_SETTING_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
 
 class PolygonShape;
 
-class PolygonPropertySetting : public d2d::IPropertySetting
+class PolygonPropertySetting : public ee::PropertySetting
 {
 public:
-	PolygonPropertySetting(d2d::EditPanelImpl* stage, PolygonShape* poly);
+	PolygonPropertySetting(ee::EditPanelImpl* stage, PolygonShape* poly);
 	virtual ~PolygonPropertySetting();
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
@@ -21,7 +21,7 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	d2d::EditPanelImpl* m_stage;
+	ee::EditPanelImpl* m_stage;
 
 	PolygonShape* m_poly;
 

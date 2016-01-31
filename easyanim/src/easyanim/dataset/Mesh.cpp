@@ -46,7 +46,7 @@ void Mesh::loadFromTextFile(std::ifstream& fin)
 	fin >> flag >> size;
 	for (size_t i = 0; i < size; ++i)
 	{
-		d2d::Vector pos;
+		ee::Vector pos;
 		fin >> pos;
 		insertNode(pos);
 	}
@@ -64,15 +64,15 @@ void Mesh::storeToTextFile(std::ofstream& fout) const
 	fout << '\n';
 }
 
-void Mesh::insertNode(const d2d::Vector& pos)
+void Mesh::insertNode(const ee::Vector& pos)
 {
 	if (!m_dt)
 	{
-		std::vector<d2d::Vector> bound;
-		bound.push_back(d2d::Vector(-m_halfWidth, -m_halfHeight));
-		bound.push_back(d2d::Vector( m_halfWidth, -m_halfHeight));
-		bound.push_back(d2d::Vector( m_halfWidth,  m_halfHeight));
-		bound.push_back(d2d::Vector(-m_halfWidth,  m_halfHeight));
+		std::vector<ee::Vector> bound;
+		bound.push_back(ee::Vector(-m_halfWidth, -m_halfHeight));
+		bound.push_back(ee::Vector( m_halfWidth, -m_halfHeight));
+		bound.push_back(ee::Vector( m_halfWidth,  m_halfHeight));
+		bound.push_back(ee::Vector(-m_halfWidth,  m_halfHeight));
 		m_dt = new DT(bound, false);
 	}
 
@@ -83,9 +83,9 @@ void Mesh::insertNode(const d2d::Vector& pos)
 	}
 }
 
-void Mesh::deleteNode(const d2d::Vector& pos)
+void Mesh::deleteNode(const ee::Vector& pos)
 {
-	std::vector<d2d::Vector> deletePos;
+	std::vector<ee::Vector> deletePos;
 	deletePos.push_back(pos);
 	m_dt->deleteNodes(deletePos);
 	loadTrisFromDT();
@@ -172,7 +172,7 @@ void Mesh::tween(const Mesh& start, const Mesh& end, float process)
 		m_tris[i]->getNodes(tNodes);
 		for (size_t j = 0; j < 3; ++j)
 		{
-			d2d::Vector offset = (eNodes[j]->projCoords - sNodes[j]->projCoords) * process;
+			ee::Vector offset = (eNodes[j]->projCoords - sNodes[j]->projCoords) * process;
 			tNodes[j]->projCoords = sNodes[j]->projCoords + offset;
 		}
 	}
@@ -191,11 +191,11 @@ void Mesh::loadTrisFromDT()
 
 	m_isMerged = true;
 
-	std::vector<d2d::Vector> bound;
-	bound.push_back(d2d::Vector(-m_halfWidth, -m_halfHeight));
-	bound.push_back(d2d::Vector( m_halfWidth, -m_halfHeight));
-	bound.push_back(d2d::Vector( m_halfWidth,  m_halfHeight));
-	bound.push_back(d2d::Vector(-m_halfWidth,  m_halfHeight));
+	std::vector<ee::Vector> bound;
+	bound.push_back(ee::Vector(-m_halfWidth, -m_halfHeight));
+	bound.push_back(ee::Vector( m_halfWidth, -m_halfHeight));
+	bound.push_back(ee::Vector( m_halfWidth,  m_halfHeight));
+	bound.push_back(ee::Vector(-m_halfWidth,  m_halfHeight));
 
 	for_each(m_tris.begin(), m_tris.end(), DeletePointerFunctor<MeshTri>());
 	m_tris.clear();
@@ -215,11 +215,11 @@ void Mesh::loadTrisFromDT()
 	for (size_t i = 0, n = trisSrc.size(); i < n; ++i)
 	{
 		DT::Triangle* src = trisSrc[i];
-		std::vector<d2d::Vector> triBound;
+		std::vector<ee::Vector> triBound;
 		src->getNodesPos(triBound);
 
-		d2d::Vector p = d2d::Math::getTriGravityCenter(triBound[0], triBound[1], triBound[2]);
-		if (d2d::Math::isPointInArea(p, bound))
+		ee::Vector p = ee::Math::getTriGravityCenter(triBound[0], triBound[1], triBound[2]);
+		if (ee::Math::isPointInArea(p, bound))
 		{
 			MeshTri* tri = new MeshTri;
 			for (size_t j = 0; j < 3; ++j)
@@ -289,7 +289,7 @@ MeshNode::MeshNode(const MeshNode& node)
 	projCoords = node.projCoords;
 }
 
-MeshNode::MeshNode(const d2d::Vector& pos, float hWidth, float hHeight)
+MeshNode::MeshNode(const ee::Vector& pos, float hWidth, float hHeight)
 {
 	initCoords(pos, hWidth, hHeight);
 }
@@ -311,7 +311,7 @@ void MeshNode::storeToTextFile(std::ofstream& fout) const
 	fout << texCoords << " " << projCoords;
 }
 
-void MeshNode::initCoords(const d2d::Vector& pos, float hWidth, float hHeight)
+void MeshNode::initCoords(const ee::Vector& pos, float hWidth, float hHeight)
 {
 	projCoords = pos;
 	texCoords.x = (pos.x + hWidth) / (hWidth * 2);

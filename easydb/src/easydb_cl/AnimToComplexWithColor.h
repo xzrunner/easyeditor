@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -14,7 +14,7 @@ public:
 	AnimToComplexWithColor() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -34,7 +34,7 @@ private:
 	struct Trans
 	{
 		int type;
-		d2d::Colori col_r, col_g, col_b;
+		ee::Colori col_r, col_g, col_b;
 		std::string ext;
 	};
 
@@ -43,7 +43,7 @@ private:
 
 private:
 	static std::string ParserTrans(const std::string& str, Trans& t);
-	static void TransSpr(const Trans& t, d2d::Sprite* spr);
+	static void TransSpr(const Trans& t, ee::Sprite* spr);
 
 }; // AnimToComplexWithColor
 

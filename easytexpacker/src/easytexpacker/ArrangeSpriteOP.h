@@ -1,18 +1,18 @@
 #ifndef _EASYTEXPACKER_ARRANGE_SPRITE_OP_H_
 #define _EASYTEXPACKER_ARRANGE_SPRITE_OP_H_
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {
 	class StagePanel;
 
-	class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>
+	class ArrangeSpriteOP : public ee::ArrangeSpriteOP<ee::SelectSpritesOP>
 	{
 	public:
 		ArrangeSpriteOP(StagePanel* editPanel, 
-			d2d::PropertySettingPanel* propertyPanel,
-			d2d::AbstractEditCMPT* callback = NULL);
+			ee::PropertySettingPanel* propertyPanel,
+			ee::EditCMPT* callback = NULL);
 	}; // ArrangeSpriteOP
 }
 

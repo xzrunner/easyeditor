@@ -1,7 +1,7 @@
 #ifndef _LIBRESPACKER_EXPORT_NAME_SET_H_
 #define _LIBRESPACKER_EXPORT_NAME_SET_H_
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -12,7 +12,7 @@ class ExportNameSet
 {
 public:
 	
-	void LoadExport(const d2d::Symbol* symbol, IPackNode* node);
+	void LoadExport(const ee::Symbol* symbol, IPackNode* node);
 
 	const std::map<std::string, int>& GetData() const { return m_map; }
 

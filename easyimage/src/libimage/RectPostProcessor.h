@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_RECT_MANAGER_H_
 #define _EASYIMAGE_RECT_MANAGER_H_
 
-#include <drag2d.h>
+
 
 #include "Rect.h"
 

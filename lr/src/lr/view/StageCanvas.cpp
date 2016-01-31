@@ -13,18 +13,18 @@ namespace lr
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::OrthoCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 }
 
 void StageCanvas::OnDrawSprites() const
 {
-	d2d::Rect sr = m_screen.GetRegion();
+	ee::Rect sr = m_screen.GetRegion();
 
 	DrawSprites();
 
-	m_stage->TraverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	m_stage->TraverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
 	DrawRegion();
 
@@ -35,20 +35,20 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 
-	if (d2d::Config::Instance()->IsUseDTex()) {
-		d2d::DrawCallBatching::Instance()->DebugDraw();
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
 	}
 #endif
 }
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<d2d::Sprite*> cover_layer, top_layer;
+	std::vector<ee::Sprite*> cover_layer, top_layer;
 
-	std::vector<d2d::Sprite*> all_sprites;
-	m_stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(all_sprites), d2d::DT_VISIBLE);
+	std::vector<ee::Sprite*> all_sprites;
+	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(all_sprites), ee::DT_VISIBLE);
 	for (int i = 0, n = all_sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = all_sprites[i];
+		ee::Sprite* spr = all_sprites[i];
 
 		const std::string& tag = spr->tag;
 		if (tag.find(TOP_LAYER_TAG) != std::string::npos) {
@@ -62,39 +62,39 @@ void StageCanvas::DrawSprites() const
 	}
 
 	bool draw_flag = SettingCfg::Instance()->m_special_layer_flag;
-	std::sort(cover_layer.begin(), cover_layer.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
+	std::sort(cover_layer.begin(), cover_layer.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
 	for (int i = 0, n = cover_layer.size(); i < n; ++i) {
-		d2d::Sprite* spr = cover_layer[i];
+		ee::Sprite* spr = cover_layer[i];
 		DrawSprite(spr, draw_flag);
 	}
 
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
-		d2d::Sprite* spr = top_layer[i];
+		ee::Sprite* spr = top_layer[i];
 		DrawSprite(spr, false);
 	}
 }
 
-void StageCanvas::DrawSprite(d2d::Sprite* spr, bool draw_edge) const
+void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 {
-	d2d::Rect screen_region = m_screen.GetRegion();
+	ee::Rect screen_region = m_screen.GetRegion();
 	if (screen_region.IsValid() &&
-		!d2d::Math2D::IsRectIntersectRect(spr->GetRect(), screen_region)) {
+		!ee::Math2D::IsRectIntersectRect(spr->GetRect(), screen_region)) {
 			return;
 	}
 
-	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
+	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
 
 	int filter_mode_idx = 0;
 	if (draw_edge) {
-		filter_mode_idx = d2d::FilterModes::Instance()->QueryShaderIdx(d2d::FilterMode::FM_EDGE_DETECTION);
+		filter_mode_idx = ee::FilterModes::Instance()->QueryShaderIdx(ee::FilterMode::FM_EDGE_DETECTION);
 	}
-	d2d::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
+	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	rd->Draw(spr);
 
-	d2d::SettingData& cfg = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
-		d2d::Matrix t;
+		ee::Matrix t;
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale;
 		t.Scale(s, s);
@@ -106,16 +106,16 @@ void StageCanvas::DrawRegion() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), 
+	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 
 		cfg->m_map_width * 0.5f,
 		cfg->m_map_height * 0.5f,
-		d2d::LIGHT_GREY_LINE);
+		ee::LIGHT_GREY_LINE);
 
-	d2d::PrimitiveDraw::DrawRect(
-		d2d::Vector(cfg->m_view_dx, cfg->m_view_dy), 
+	ee::PrimitiveDraw::DrawRect(
+		ee::Vector(cfg->m_view_dx, cfg->m_view_dy), 
 		cfg->m_view_width * 0.5f,
 		cfg->m_view_height * 0.5f,
-		d2d::LIGHT_RED_LINE);
+		ee::LIGHT_RED_LINE);
 
 	m_stage->DebugDraw();
 }

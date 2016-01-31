@@ -1,7 +1,7 @@
 #include "DistanceFieldFont.h"
 
 #include <stdexcept>
-#include <drag2d.h>
+
 #include <freetype/ftglyph.h>
 
 namespace edb
@@ -183,8 +183,8 @@ void DistanceFieldFont::genChar(int unicode)
 
 	unsigned char* result = genDistanceFieldData(expanded_data, extracted, width, height);
 	std::string filepath = "e:/text_" + wxString::FromDouble(unicode);
-//	d2d::ImageSaver::storeToFile(extracted, width, height, filepath, d2d::ImageSaver::e_png);
-	d2d::ImageSaver::StoreToFile(result, 32, 32, 4, filepath, d2d::ImageSaver::e_png);
+//	ee::ImageSaver::storeToFile(extracted, width, height, filepath, ee::ImageSaver::e_png);
+	ee::ImageSaver::StoreToFile(result, 32, 32, 4, filepath, ee::ImageSaver::e_png);
 
 	delete[] expanded_data;
 	delete[] extracted;		
@@ -355,7 +355,7 @@ float DistanceFieldFont::getDistanceToEdge(unsigned char* pixels, unsigned char*
 				float s_dis;
 				if (m_cache[pos] == 0) {
 					if (isEdge(edge_pixels, width, height, i, j)) {
-						s_dis = d2d::Math2D::GetDistanceSquare(d2d::Vector(x, y), d2d::Vector(i, j));
+						s_dis = ee::Math2D::GetDistanceSquare(ee::Vector(x, y), ee::Vector(i, j));
 						m_cache[pos] = s_dis + 1;
 					} else {
 						m_cache[pos] = -1;	// not edge

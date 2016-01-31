@@ -133,7 +133,7 @@ void Particle2DFromBin::Unpack(uint8_t** ptr, PackParticle2D* p2d)
 	}
 	else
 	{
-		throw d2d::Exception("Particle2DFromBin::Unpack unknown mode type.");
+		throw ee::Exception("Particle2DFromBin::Unpack unknown mode type.");
 
 	}
 }

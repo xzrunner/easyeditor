@@ -3,7 +3,7 @@
 #define EMODELING_PREVIEW_PANEL_H
 
 #include <Box2D/Box2D.h>
-#include <drag2d.h>
+
 #include <easyphysics.h>
 
 namespace libmodeling
@@ -14,7 +14,7 @@ namespace libmodeling
 
 namespace emodeling
 {
-	class PreviewPanel : public d2d::EditPanel, public ephysics::PhysicsPanelImpl
+	class PreviewPanel : public ee::EditPanel, public ephysics::PhysicsPanelImpl
 	{
 	public:
 		PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame);
@@ -23,11 +23,11 @@ namespace emodeling
 		void createGround();
 
 	private:
-		class LoadBodyVisitor : public d2d::Visitor
+		class LoadBodyVisitor : public ee::Visitor
 		{
 		public:
 			LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody);
-			virtual void Visit(d2d::Object* object, bool& next);
+			virtual void Visit(ee::Object* object, bool& next);
 
 		private:
 			b2World* m_world;
@@ -36,13 +36,13 @@ namespace emodeling
 
 		}; // LoadBodyVisitor
 
-		class LoadJointVisitor : public d2d::Visitor
+		class LoadJointVisitor : public ee::Visitor
 		{
 		public:
 			LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
 				std::map<libmodeling::Joint*, b2Joint*>& mapJoint);
 
-			virtual void Visit(d2d::Object* object, bool& next);
+			virtual void Visit(ee::Object* object, bool& next);
 
 		private:
 			b2World* m_world;
@@ -53,13 +53,13 @@ namespace emodeling
 
 		}; // LoadJointVisitor
 
-		class LoadGearJointVisitor : public d2d::Visitor
+		class LoadGearJointVisitor : public ee::Visitor
 		{
 		public:
 			LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
 				const std::map<libmodeling::Joint*, b2Joint*>& mapJoint);
 
-			virtual void Visit(d2d::Object* object, bool& next);
+			virtual void Visit(ee::Object* object, bool& next);
 
 		private:
 			b2World* m_world;

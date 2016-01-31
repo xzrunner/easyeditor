@@ -6,8 +6,8 @@ namespace lr
 CharacterFileName::CharacterFileName(const std::string& filepath)
 	: m_filepath(filepath)
 {
-	m_dir = d2d::FileHelper::GetFileDir(m_filepath);
-	std::string filename = d2d::FileHelper::GetFilename(m_filepath);
+	m_dir = ee::FileHelper::GetFileDir(m_filepath);
+	std::string filename = ee::FileHelper::GetFilename(m_filepath);
 
 	int pos = 0, last_pos = 0;
 	for (int i = 0; i < 4; ++i) 
@@ -73,11 +73,11 @@ std::string CharacterFileName::GetFilepathSwitchField(FieldType key, const std::
 
 bool CharacterFileName::IsValidFilepath(const std::string& filepath)
 {
-	if (!d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+	if (!ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 		return false;
 	}
 
-	std::string filename = d2d::FileHelper::GetFilename(filepath);
+	std::string filename = ee::FileHelper::GetFilename(filepath);
 	int count = 0;
 	for (int i = 0, n = filename.size(); i < n; ++i) {
 		if (filename[i] == '_') {

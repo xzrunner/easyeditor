@@ -2,7 +2,7 @@
 #include "check_params.h"
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -35,7 +35,7 @@ void FormatJsonFile::Run(int argc, char *argv[])
 void FormatJsonFile::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);

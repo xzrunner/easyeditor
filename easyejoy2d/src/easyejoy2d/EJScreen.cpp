@@ -69,9 +69,9 @@ void EJScreen::Bind()
 
 void EJScreen::UnBind()
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ee::ShaderMgr::Instance()->GetFboID());
 
-//	dtex_shader_target(d2d::ShaderMgr::Instance()->GetFboID());
+//	dtex_shader_target(ee::ShaderMgr::Instance()->GetFboID());
 
 	float w, h, s;
 	dtex_get_screen(&w, &h, &s);
@@ -143,10 +143,10 @@ void EJScreen::CreateRes()
 
 	GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 	if (status != GL_FRAMEBUFFER_COMPLETE_EXT) {
-		throw d2d::Exception("Create FBO error: %d", status);
+		throw ee::Exception("Create FBO error: %d", status);
 	}
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ee::ShaderMgr::Instance()->GetFboID());
 
 	m_fbo = fbo_id;
 }

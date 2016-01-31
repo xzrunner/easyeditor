@@ -48,7 +48,7 @@ void Mapping3DScene::Store(const char* filename) const
 	size_t size = w*h*4;
 	unsigned char* pixels = new unsigned char[size];
 	if (!pixels) {
-		throw d2d::Exception("OOM");
+		throw ee::Exception("OOM");
 	}
 	memset(&pixels[0], 0, size);	
 
@@ -60,8 +60,8 @@ void Mapping3DScene::Store(const char* filename) const
 	uint8_t* pixels_revert = revert.Revert();
 	delete[] pixels;
 
-	std::string img_path = d2d::FileHelper::GetFilePathExceptExtension(filename);
-	d2d::ImageSaver::StoreToFile(pixels_revert, w, h, 4, img_path, d2d::ImageSaver::e_png);
+	std::string img_path = ee::FileHelper::GetFilePathExceptExtension(filename);
+	ee::ImageSaver::StoreToFile(pixels_revert, w, h, 4, img_path, ee::ImageSaver::e_png);
 	delete[] pixels_revert;
 
 	value["texture filepath"] = img_path + ".png";
@@ -96,7 +96,7 @@ void Mapping3DScene::Load(const char* filename)
 	m_vertices.push_back(vec3(-5, -5, -5));
 
 #ifdef STORE_2D
- 	m_img = d2d::ImageMgr::Instance()->GetItem("box/crate.jpg");
+ 	m_img = ee::ImageMgr::Instance()->GetItem("box/crate.jpg");
  	return;
 #endif // STORE_2D
 
@@ -113,7 +113,7 @@ void Mapping3DScene::Load(const char* filename)
 	fin.close();
 
 	std::string img_path = value["texture filepath"].asString();
-	m_img = d2d::ImageMgr::Instance()->GetItem(img_path);
+	m_img = ee::ImageMgr::Instance()->GetItem(img_path);
 
 	int xmin = value["xmin"].asInt(),
 		xmax = value["xmax"].asInt(),
@@ -155,7 +155,7 @@ void Mapping3DScene::Draw() const
  	e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), m_img->GetTexID());
  	return;
 
-	//e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), d2d::WHITE);
+	//e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), ee::WHITE);
 #endif // STORE_2D
 
 	std::vector<vec3> vertices;

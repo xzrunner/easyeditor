@@ -5,13 +5,13 @@ namespace emap
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Template"))
+	: ee::LibraryPage(parent, wxT("Template"))
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return true;
 }

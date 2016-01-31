@@ -59,7 +59,7 @@ void LoadAdapter::Load(const std::string& filepath)
 	} 
 	else 
 	{
-		throw d2d::Exception("LoadAdapter::Load unknown mode type.");
+		throw ee::Exception("LoadAdapter::Load unknown mode type.");
 	}
 
 	emission_time = value["emission_time"].asDouble() * 0.001f;
@@ -74,10 +74,10 @@ void LoadAdapter::Load(const std::string& filepath)
 	position.y			= value["position_y"]["center"].asDouble();
 	position_var.y		= value["position_y"]["offset"].asDouble();
 
-	direction			= value["direction"]["center"].asDouble() * d2d::TRANS_DEG_TO_RAD;
-	direction_var		= value["direction"]["offset"].asDouble() * d2d::TRANS_DEG_TO_RAD;
+	direction			= value["direction"]["center"].asDouble() * ee::TRANS_DEG_TO_RAD;
+	direction_var		= value["direction"]["offset"].asDouble() * ee::TRANS_DEG_TO_RAD;
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	int idx = 0;
 	Json::Value comp_val = value["components"][idx++];
 	while (!comp_val.isNull()) {
@@ -115,7 +115,7 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 	comp.col_add_end.b		= comp_val["col_add_end"]["b"].asDouble();
 
 	comp.filepath = comp_val["filepath"].asString();
-	comp.filepath = d2d::FileHelper::GetAbsolutePath(dir, comp.filepath);
+	comp.filepath = ee::FileHelper::GetAbsolutePath(dir, comp.filepath);
 
 	components.push_back(comp);
 }

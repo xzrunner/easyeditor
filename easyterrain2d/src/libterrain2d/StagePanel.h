@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN2D_STAGE_PANEL_H_
 #define _EASYTERRAIN2D_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 #include <easyshape.h>
 
 namespace eterrain2d
@@ -11,21 +11,21 @@ class Symbol;
 class OceanMesh;
 class ToolbarPanel;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
-	public d2d::ShapesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, 
+	public ee::ShapesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, d2d::Sprite* edited, 
-		const d2d::MultiSpritesImpl* bg_sprites, d2d::LibraryPanel* library);
+		wxGLContext* glctx, ee::Sprite* edited, 
+		const ee::MultiSpritesImpl* bg_sprites, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	virtual bool Update(int version);
 
 	void Store(const std::string& dir, Json::Value& value) const;
 	void Load(const std::string& dir, const Json::Value& value, 
-		d2d::LibraryPanel* library, ToolbarPanel* toolbar);
+		ee::LibraryPanel* library, ToolbarPanel* toolbar);
 
 	const std::vector<OceanMesh*>& GetOceans() const {
 		return m_oceans;
@@ -35,15 +35,15 @@ public:
 	}
 
 private:
-	void AddOcean(const libshape::PolygonShape* shape, const d2d::ImageSymbol* image);
+	void AddOcean(const libshape::PolygonShape* shape, const ee::ImageSymbol* image);
 
  private:
- 	class StageDropTarget : public d2d::StageDropTarget
+ 	class StageDropTarget : public ee::StageDropTarget
  	{
  	public:
- 		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
+ 		StageDropTarget(StagePanel* stage, ee::LibraryPanel* library);
  
- 		virtual bool OnDropSymbol(d2d::Symbol* symbol, const d2d::Vector& pos);
+ 		virtual bool OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos);
  
  	private:
  		StagePanel* m_stage;

@@ -20,7 +20,7 @@ TextureBuilder::~TextureBuilder()
 	}
 }
 
-void TextureBuilder::Traverse(d2d::Visitor& visitor) const
+void TextureBuilder::Traverse(ee::Visitor& visitor) const
 {
 	std::map<const etexture::Symbol*, const PackPicture*>::const_iterator 
 		itr = m_map_data.begin();
@@ -35,7 +35,7 @@ void TextureBuilder::Traverse(d2d::Visitor& visitor) const
 
 bool TextureBuilder::CanHandle(const etexture::Symbol* symbol) const
 {
-	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
 		return false;
 	}
@@ -66,23 +66,23 @@ const IPackNode* TextureBuilder::Create(const etexture::Symbol* symbol)
 
 void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 {
-	const std::vector<d2d::Shape*>& shapes = symbol->GetAllShapes();
+	const std::vector<ee::Shape*>& shapes = symbol->GetAllShapes();
 	if (shapes.size() != 1) {
-		throw d2d::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
 	}
 	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
-		throw d2d::Exception("TextureBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
 	}
 	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
 	if (!material) {
-		throw d2d::Exception("TextureBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
 	}
 
-	const std::vector<d2d::Vector>& vertices = material->GetTriangles();
-	const std::vector<d2d::Vector>& texcoords = material->GetTexcoords();
+	const std::vector<ee::Vector>& vertices = material->GetTriangles();
+	const std::vector<ee::Vector>& texcoords = material->GetTexcoords();
 	if ((vertices.size() != texcoords.size()) || (vertices.size() % 3 != 0)) {
-		throw d2d::Exception("TextureBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
+		throw ee::Exception("TextureBuilder::Load err meaterial, filepath: %s", symbol->GetFilepath().c_str());
 	}
 	for (int i = 0, n = vertices.size(); i < n; i += 3)
 	{

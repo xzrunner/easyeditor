@@ -9,34 +9,34 @@ namespace libshape
 class TextureMaterial : public Material
 {
 public:
-	TextureMaterial(const std::vector<d2d::Vector>& vertices, d2d::ImageSymbol* image);
+	TextureMaterial(const std::vector<ee::Vector>& vertices, ee::ImageSymbol* image);
 	virtual ~TextureMaterial();
 
 	virtual Json::Value Store(const std::string& dirpath) const;
 
-	virtual void Translate(const d2d::Vector& offset);
-	virtual void Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const;	
+	virtual void Translate(const ee::Vector& offset);
+	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const;	
 
 	virtual void ReloadTexture();
 
-	const std::vector<d2d::Vector>& GetTexcoords() const { return m_tris_texcoord; }
+	const std::vector<ee::Vector>& GetTexcoords() const { return m_tris_texcoord; }
 
-	const d2d::ImageSymbol* GetImage() const { return m_image; }
+	const ee::ImageSymbol* GetImage() const { return m_image; }
 
 protected:
 	virtual void BuildEnd();
 
 private:
-	d2d::Rect GetBoundingRegion(const std::vector<d2d::Vector>& bounding) const;
+	ee::Rect GetBoundingRegion(const std::vector<ee::Vector>& bounding) const;
 
-	void GetTexBoundarySegments(const d2d::Rect& rect, std::vector<d2d::Vector>& segments);
+	void GetTexBoundarySegments(const ee::Rect& rect, std::vector<ee::Vector>& segments);
 
-	void CalTexcoords(const d2d::Rect& rect);
+	void CalTexcoords(const ee::Rect& rect);
 
 private:
-	d2d::ImageSymbol* m_image;
+	ee::ImageSymbol* m_image;
 
-	std::vector<d2d::Vector> m_tris_texcoord;
+	std::vector<ee::Vector> m_tris_texcoord;
 
 }; // TextureMaterial
 

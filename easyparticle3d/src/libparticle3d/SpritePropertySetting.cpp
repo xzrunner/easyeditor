@@ -4,8 +4,8 @@
 namespace eparticle3d
 {
 
-SpritePropertySetting::SpritePropertySetting(d2d::EditPanelImpl* edit_impl, Sprite* sprite)
-	: d2d::SpritePropertySetting(edit_impl, sprite)
+SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* edit_impl, Sprite* sprite)
+	: ee::SpritePropertySetting(edit_impl, sprite)
 	, m_parent(edit_impl->GetEditPanel())
 {
 	m_type = "P3D";
@@ -17,7 +17,7 @@ SpritePropertySetting::~SpritePropertySetting()
 
 void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	d2d::SpritePropertySetting::OnPropertyGridChange(name, value);
+	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 	if (name == "Loop") {
@@ -40,14 +40,14 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 		}
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	m_pg = pg;
 
-	d2d::SpritePropertySetting::UpdateProperties(pg);
+	ee::SpritePropertySetting::UpdateProperties(pg);
 
 	Sprite* spr = static_cast<Sprite*>(GetSprite());
 
@@ -61,7 +61,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	m_pg = pg;
 
-	d2d::SpritePropertySetting::InitProperties(pg);
+	ee::SpritePropertySetting::InitProperties(pg);
 
 	pg->Append(new wxPropertyCategory("P3D", wxPG_LABEL));
 

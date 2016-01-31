@@ -7,7 +7,7 @@ namespace eanim
 {
 
 LibrarySymbolPage::LibrarySymbolPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, "Symbol")
+	: ee::ILibraryPage(parent, "Symbol")
 {
 	initLayout();
 
@@ -17,7 +17,7 @@ LibrarySymbolPage::LibrarySymbolPage(wxWindow* parent)
 	SetSizer(sizer);
 }
 
-bool LibrarySymbolPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibrarySymbolPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }

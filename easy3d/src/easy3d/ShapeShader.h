@@ -1,14 +1,14 @@
 #ifndef _E3D_SHAPE_SHADER_H_
 #define _E3D_SHAPE_SHADER_H_
 
-#include <drag2d.h>
+
 
 #include "Matrix.h"
 
 namespace e3d
 {
 
-class ShapeShader : public d2d::IShader
+class ShapeShader : public ee::IShader
 {
 public:
 	ShapeShader();
@@ -29,22 +29,22 @@ public:
 	void SetModelView(const mat4& mat);
 
 	void Draw(int type, const float* vertices, int count, 
-		const d2d::Colorf& col, bool force = true);
+		const ee::Colorf& col, bool force = true);
 	void Draw(int type, const float* vertices, int count, 
-		d2d::Colorf* cols, bool force = true);
+		ee::Colorf* cols, bool force = true);
 	void Draw(int type, const float* vertices, int vcount, 
-		const d2d::Colorf& col, unsigned short* indices, int icount);
+		const ee::Colorf& col, unsigned short* indices, int icount);
 
 protected:
 	virtual void BindAttrib(GLuint prog);
 
 private:
 	void CopyVertex(const float* vertices, int count, int color);
-	void CopyVertex(const float* vertices, int count, d2d::Colorf* cols);
+	void CopyVertex(const float* vertices, int count, ee::Colorf* cols);
 
 	void Commit(int type, unsigned short* indices, int count);
 
-	static int PackColor(const d2d::Colorf& col);
+	static int PackColor(const ee::Colorf& col);
 
 private:
 	GLuint m_model_view, m_projection;

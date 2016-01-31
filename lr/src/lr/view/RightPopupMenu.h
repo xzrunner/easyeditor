@@ -11,7 +11,7 @@ class StagePanel;
 class RightPopupMenu
 {
 public:
-	RightPopupMenu(d2d::LibraryPanel* library, StagePanel* stage);
+	RightPopupMenu(ee::LibraryPanel* library, StagePanel* stage);
 
 	void SetRightPopupMenu(wxMenu& menu, int x, int y);
 	void OnRightPopupMenu(int id);
@@ -44,11 +44,11 @@ private:
 	static const int MENU_MOVE_TO_LAYER_END_ID	= 280;
 
 private:
-	d2d::LibraryPanel* m_library;
+	ee::LibraryPanel* m_library;
 
 	StagePanel* m_stage;
 
-	d2d::Sprite* m_sprite;
+	ee::Sprite* m_sprite;
 
 	std::vector<CharacterFileName> m_anim_files;
 

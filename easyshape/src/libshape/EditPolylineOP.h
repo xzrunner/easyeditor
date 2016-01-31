@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_EDIT_POLYLINE_OP_H_
 #define _LIBSHAPE_EDIT_POLYLINE_OP_H_
 
-#include <drag2d.h>
+
 
 #include "IOperaterBase.h"
 
@@ -16,11 +16,11 @@ class EditPolylineOP : public TBase, public IOperaterBase
 {
 public:
 	EditPolylineOP(wxWindow* wnd, 
-		d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapesImpl, 
-		d2d::PropertySettingPanel* propertyPanel,
-		d2d::OneFloatValue* node_capture,
-		d2d::AbstractEditCMPT* cmpt);
+		ee::EditPanelImpl* stage, 
+		ee::MultiShapesImpl* shapesImpl, 
+		ee::PropertySettingPanel* propertyPanel,
+		ee::OneFloatValue* node_capture,
+		ee::EditCMPT* cmpt);
 	virtual ~EditPolylineOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -48,7 +48,7 @@ private:
 
 	TSelected* m_select_op;
 
-	d2d::OneFloatValue* m_node_capture;
+	ee::OneFloatValue* m_node_capture;
 
 }; // EditPolylineOP
 

@@ -31,12 +31,12 @@ namespace tdtex
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(GetStageImpl(), library)
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, m_test(NULL)
 {
-	SetEditOP(new d2d::ZoomViewOP(this, GetStageImpl(), true));
+	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
 	SetCanvas(new StageCanvas(this));
 }
 

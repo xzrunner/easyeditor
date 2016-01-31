@@ -2,7 +2,7 @@
 #ifndef EBUILDER_DESIGNER_PANEL_H
 #define EBUILDER_DESIGNER_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -12,26 +12,26 @@ namespace ebuilder
 	class Actor;
 	class Layer;
 
-	class DesignerPage : public d2d::EditPanel, public d2d::MultiSpritesImpl
+	class DesignerPage : public ee::EditPanel, public ee::MultiSpritesImpl
 	{
 	public:
 		DesignerPage(wxWindow* parent, wxTopLevelWindow* frame);
 
 		//
-		// d2d::MultiSpritesImpl interface
+		// ee::MultiSpritesImpl interface
 		//
-		virtual void traverseSprites(d2d::IVisitor& visitor, 
-			d2d::TraverseType type = d2d::e_allExisting, bool order = true) const;
-		virtual void removeSprite(d2d::ISprite* sprite);
-		virtual void insertSprite(d2d::ISprite* sprite);
+		virtual void traverseSprites(ee::IVisitor& visitor, 
+			ee::TraverseType type = ee::e_allExisting, bool order = true) const;
+		virtual void removeSprite(ee::ISprite* sprite);
+		virtual void insertSprite(ee::ISprite* sprite);
 		virtual void clearSprites();
 
-		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
+		virtual void resetSpriteOrder(ee::ISprite* sprite, bool up);
 
 		void updateCodePage();
 
 	private:
-		class Canvas : public d2d::SpriteStageCanvas
+		class Canvas : public ee::SpriteStageCanvas
 		{
 		public:
 			Canvas(DesignerPage* panelscr);
@@ -57,13 +57,13 @@ namespace ebuilder
 
 		}; // DragActorTarget
 
-		class SelectActorOP : public d2d::SelectSpritesOP
+		class SelectActorOP : public ee::SelectSpritesOP
 		{
 		public:
-			SelectActorOP(d2d::EditPanel* editPanel, 
-				d2d::MultiSpritesImpl* spritesImpl,
-				d2d::PropertySettingPanel* propertyPanel,
-				d2d::AbstractEditCMPT* callback = NULL);
+			SelectActorOP(ee::EditPanel* editPanel, 
+				ee::MultiSpritesImpl* spritesImpl,
+				ee::PropertySettingPanel* propertyPanel,
+				ee::AbstractEditCMPT* callback = NULL);
 			virtual ~SelectActorOP();
 
 			virtual bool onKeyDown(int keyCode);
@@ -71,8 +71,8 @@ namespace ebuilder
 
 			virtual bool clear();
 
-			virtual d2d::IPropertySetting* 
-				createPropertySetting(d2d::ISprite* sprite) const;
+			virtual ee::IPropertySetting* 
+				createPropertySetting(ee::ISprite* sprite) const;
 
 		private:
 			void clearBackstage();
@@ -85,40 +85,40 @@ namespace ebuilder
 
 		//////////////////////////////////////////////////////////////////////////
 
-		class TranslateActorState : public d2d::TranslateSpriteState
+		class TranslateActorState : public ee::TranslateSpriteState
 		{
 		public:
-			TranslateActorState(d2d::SpriteSelection* selection, 
-				const d2d::Vector& first_pos)
-				: d2d::TranslateSpriteState(selection, first_pos) {}
+			TranslateActorState(ee::SpriteSelection* selection, 
+				const ee::Vector& first_pos)
+				: ee::TranslateSpriteState(selection, first_pos) {}
 
 		protected:
-			virtual void Translate(const d2d::Vector& offset);
+			virtual void Translate(const ee::Vector& offset);
 		}; // TranslateActorState
 
-		class RotateActorState : public d2d::RotateSpriteState
+		class RotateActorState : public ee::RotateSpriteState
 		{
 		public:
-			RotateActorState(d2d::SpriteSelection* selection, 
-				const d2d::Vector& first_pos)
-				: d2d::RotateSpriteState(selection, first_pos) {}
+			RotateActorState(ee::SpriteSelection* selection, 
+				const ee::Vector& first_pos)
+				: ee::RotateSpriteState(selection, first_pos) {}
 
 		protected:
-			virtual void Rotate(const d2d::Vector& dst);
+			virtual void Rotate(const ee::Vector& dst);
 		}; // RotateActorState 
 
-		class ScaleActorState : public d2d::ScaleSpriteState
+		class ScaleActorState : public ee::ScaleSpriteState
 		{
 		public:
-			ScaleActorState(d2d::ISprite* sprite, 
-				const d2d::SpriteCtrlNode::Node& ctrl_node)
-				: d2d::ScaleSpriteState(sprite, ctrl_node) {}
+			ScaleActorState(ee::ISprite* sprite, 
+				const ee::SpriteCtrlNode::Node& ctrl_node)
+				: ee::ScaleSpriteState(sprite, ctrl_node) {}
 
 		protected:
-			void Scale(const d2d::Vector& curr);
+			void Scale(const ee::Vector& curr);
 		}; // ScaleActorState 
 
-		class ArrangeActorImpl : public d2d::ArrangeSpriteImpl
+		class ArrangeActorImpl : public ee::ArrangeSpriteImpl
 		{
 		public:
 			ArrangeActorImpl(DesignerPage* editPanel);
@@ -127,19 +127,19 @@ namespace ebuilder
 			virtual void onMouseRightUp(int x, int y);
 
 		protected:
-			virtual d2d::IArrangeSpriteState* CreateTransalteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const;
-			virtual d2d::IArrangeSpriteState* CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const;
-			virtual d2d::IArrangeSpriteState* CreateScaleState(d2d::ISprite* sprite, const d2d::SpriteCtrlNode::Node& ctrl_node) const;
+			virtual ee::IArrangeSpriteState* CreateTransalteState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const;
+			virtual ee::IArrangeSpriteState* CreateRotateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const;
+			virtual ee::IArrangeSpriteState* CreateScaleState(ee::ISprite* sprite, const ee::SpriteCtrlNode::Node& ctrl_node) const;
 
 		private:
 			DesignerPage* m_editPanel;
 
 		}; // ArrangeActorImpl
 
-		class ArrangeActorOP : public d2d::ArrangeSpriteOP<SelectActorOP>
+		class ArrangeActorOP : public ee::ArrangeSpriteOP<SelectActorOP>
 		{
 		public:
-			ArrangeActorOP(DesignerPage* editPanel, d2d::AbstractEditCMPT* callback);
+			ArrangeActorOP(DesignerPage* editPanel, ee::AbstractEditCMPT* callback);
 		}; // ArrangeActorOP
 
 		//////////////////////////////////////////////////////////////////////////

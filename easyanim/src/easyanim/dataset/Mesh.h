@@ -1,27 +1,27 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
-	typedef d2d::DelaunayTriangulation DT;
+	typedef ee::DelaunayTriangulation DT;
 
-	struct MeshNode : public d2d::Object, public d2d::ISerializable
+	struct MeshNode : public ee::Object, public ee::ISerializable
 	{
-		d2d::Vector texCoords, projCoords;
+		ee::Vector texCoords, projCoords;
 
 		MeshNode();
 		MeshNode(const MeshNode& node);
-		MeshNode(const d2d::Vector& pos, float hWidth, float hHeight);
+		MeshNode(const ee::Vector& pos, float hWidth, float hHeight);
 		MeshNode& operator = (const MeshNode& node);
 
 		//
-		// d2d::ISerializable interface
+		// ee::ISerializable interface
 		//
 		virtual void loadFromTextFile(std::ifstream& fin);
 		virtual void storeToTextFile(std::ofstream& fout) const;
 
-		void initCoords(const d2d::Vector& pos, float hWidth, float hHeight);
+		void initCoords(const ee::Vector& pos, float hWidth, float hHeight);
 	};
 
 	class MeshNodeCmp
@@ -33,7 +33,7 @@ namespace eanim
 		}
 	}; // MeshNodeCmp
 
-	class MeshTri : public d2d::ICloneable
+	class MeshTri : public ee::ICloneable
 	{
 	public:
 		MeshTri();
@@ -41,7 +41,7 @@ namespace eanim
 		~MeshTri();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual MeshTri* clone() const;
 
@@ -55,7 +55,7 @@ namespace eanim
 
 	}; // MeshTri
 
-	class Mesh : public d2d::ICloneable, public d2d::ISerializable
+	class Mesh : public ee::ICloneable, public ee::ISerializable
 	{
 	public:
 		Mesh(float width, float height);
@@ -63,18 +63,18 @@ namespace eanim
 		~Mesh();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual Mesh* clone() const;
 
 		//
-		// d2d::ISerializable interface
+		// ee::ISerializable interface
 		//
 		virtual void loadFromTextFile(std::ifstream& fin);
 		virtual void storeToTextFile(std::ofstream& fout) const;
 
-		void insertNode(const d2d::Vector& pos);
-		void deleteNode(const d2d::Vector& pos);
+		void insertNode(const ee::Vector& pos);
+		void deleteNode(const ee::Vector& pos);
 		const std::vector<MeshTri*>& getAllTris() const;
 
 		bool isMerged() const;

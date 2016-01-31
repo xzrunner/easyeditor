@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_TASK_H_
 #define _EASYTEXPACKER_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace etexpacker
@@ -29,7 +29,7 @@ namespace etexpacker
 			wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
 
 	private:
-		void initLayout();
+		void InitLayout();
 
 	private:
 		wxWindow* m_root;

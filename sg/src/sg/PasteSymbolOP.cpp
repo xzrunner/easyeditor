@@ -7,15 +7,15 @@
 namespace sg
 {
 
-PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::PasteSymbolOP(stage, stage->GetStageImpl(), library)
+PasteSymbolOP::PasteSymbolOP(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::PasteSymbolOP(stage, stage->GetStageImpl(), library)
 {
 }
 
 bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 {
 	if (isCurrSymbolValid()) {
-		return d2d::PasteSymbolOP::OnMouseLeftDown(x, y);
+		return ee::PasteSymbolOP::OnMouseLeftDown(x, y);
 	} else {
 		return false;
 	}
@@ -24,7 +24,7 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 bool PasteSymbolOP::OnMouseDrag(int x, int y)
 {
 	if (isCurrSymbolValid() && isCurrSymbolIsWall()) {
-		return d2d::PasteSymbolOP::OnMouseLeftDown(x, y);
+		return ee::PasteSymbolOP::OnMouseLeftDown(x, y);
 	} else {
 		return false;
 	}
@@ -38,7 +38,7 @@ bool PasteSymbolOP::OnDraw() const
 
 	bool ret;
 
-	d2d::Symbol* symbol = m_libraryPanel->GetSymbol();
+	ee::Symbol* symbol = m_libraryPanel->GetSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
 	StagePanel* stage = static_cast<StagePanel*>(m_wnd);
@@ -49,7 +49,7 @@ bool PasteSymbolOP::OnDraw() const
 	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
 	render->DrawGrids(*symbol, m_pos, valid, is_flat);
 
-	ret = d2d::PasteSymbolOP::OnDraw();
+	ret = ee::PasteSymbolOP::OnDraw();
 
 	if (!is_flat) {
 		render->DrawArrow(*symbol, m_pos);
@@ -60,7 +60,7 @@ bool PasteSymbolOP::OnDraw() const
 
 bool PasteSymbolOP::isCurrSymbolValid() const
 {
-// 	d2d::Symbol* symbol = m_libraryPanel->getSymbol();
+// 	ee::Symbol* symbol = m_libraryPanel->getSymbol();
 // 	if (!symbol) {
 // 		return false;
 // 	}
@@ -79,7 +79,7 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 
 bool PasteSymbolOP::isCurrSymbolIsWall() const
 {
-	d2d::Symbol* symbol = m_libraryPanel->GetSymbol();
+	ee::Symbol* symbol = m_libraryPanel->GetSymbol();
 	return IsSymbolWall(*symbol);
 }
 

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class LibraryPanel;
 	class Symbol;
 
-	class SkeletonSymbolList : public d2d::VerticalImageList
+	class SkeletonSymbolList : public ee::VerticalImageList
 	{
 	public:
 		SkeletonSymbolList(wxWindow* parent, LibraryPanel* library);

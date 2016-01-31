@@ -1,7 +1,7 @@
 #include "TransToPVR.h"
 #include "check_params.h"
 
-#include <drag2d.h>
+
 #include <easyimage.h>
 //#include <dtex_pvr.h>
 
@@ -34,16 +34,16 @@ void TransToPVR::Run(int argc, char *argv[])
 
 void TransToPVR::Trigger(const std::string& path)
 {
-	if (d2d::FileHelper::IsDirExist(path)) 
+	if (ee::FileHelper::IsDirExist(path)) 
 	{
 		wxArrayString files;
-		d2d::FileHelper::FetchAllFiles(path, files);
+		ee::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
 			wxFileName filename(files[i]);
 			filename.Normalize();
 			std::string filepath = filename.GetFullPath();
-			if (d2d::FileType::IsType(filepath, d2d::FileType::e_image))
+			if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 			{
 				std::cout << i << " / " << n << " : " << filepath << "\n";
 				EncodeByPvrTexTool(filepath);
@@ -51,9 +51,9 @@ void TransToPVR::Trigger(const std::string& path)
 		}
 
 	} 
-	else if (d2d::FileHelper::IsFileExist(path))
+	else if (ee::FileHelper::IsFileExist(path))
 	{
-		if (d2d::FileType::IsType(path, d2d::FileType::e_image)) {
+		if (ee::FileType::IsType(path, ee::FileType::e_image)) {
 			EncodeByPvrTexTool(path);
 		}
 	}
@@ -61,7 +61,7 @@ void TransToPVR::Trigger(const std::string& path)
 
 void TransToPVR::EncodeByDtexPvr(const std::string& filepath) const
 {
-// 	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
+// 	ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);
 // 
 // 	int w, h, c, f;
 // 	uint8_t* src_buf = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
@@ -81,7 +81,7 @@ void TransToPVR::EncodeByDtexPvr(const std::string& filepath) const
 void TransToPVR::EncodeByPvrTexTool(const std::string& filepath) const
 {
 	int w, h, c, f;
-	uint8_t* pixels = d2d::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
+	uint8_t* pixels = ee::LibpngAdapter::Read(filepath.c_str(), w, h, c, f);
 	eimage::TransToPVR trans(pixels, w, h, c);
 
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pvr";

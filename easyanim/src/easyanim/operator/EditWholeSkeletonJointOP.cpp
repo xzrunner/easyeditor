@@ -4,9 +4,9 @@
 namespace eanim
 {
 
-EditWholeSkeletonJointOP::EditWholeSkeletonJointOP(d2d::EditPanel* editPanel, 
+EditWholeSkeletonJointOP::EditWholeSkeletonJointOP(ee::EditPanel* editPanel, 
 												   WholeSkeleton::Body* body)
-	: d2d::ZoomViewOP(editPanel, false)
+	: ee::ZoomViewOP(editPanel, false)
 {
 	m_body = body;
 	m_selected = NULL;
@@ -16,7 +16,7 @@ bool EditWholeSkeletonJointOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	WholeSkeleton::Node* node = m_body->queryNodeByPos(pos);
 	if (node) 
 	{
@@ -50,7 +50,7 @@ bool EditWholeSkeletonJointOP::onMouseRightDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseRightDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	WholeSkeleton::Node* node = m_body->queryNodeByPos(pos);
 	if (node) 
 	{
@@ -82,8 +82,8 @@ bool EditWholeSkeletonJointOP::onDraw() const
 
 	if (m_selected)
 	{
-		d2d::PrimitiveDraw::drawCircle(m_selected->pos, 
-			WholeSkeleton::Body::NODE_RADIUS, true, 2, d2d::Colorf(0.0f, 1.0f, 1.0f));
+		ee::PrimitiveDraw::drawCircle(m_selected->pos, 
+			WholeSkeleton::Body::NODE_RADIUS, true, 2, ee::Colorf(0.0f, 1.0f, 1.0f));
 	}
 
 	return false;

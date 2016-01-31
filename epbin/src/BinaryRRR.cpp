@@ -107,7 +107,7 @@ void BinaryRRR::LoadPictures(const std::vector<std::string>& src_files,
 BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 {
 	int sw, sh, sc, sf;
-	uint8_t* src_pixels = d2d::LibpngAdapter::Read(filepath.c_str(), sw, sh, sc, sf);
+	uint8_t* src_pixels = ee::LibpngAdapter::Read(filepath.c_str(), sw, sh, sc, sf);
 
 	// cut
 	eimage::RegularRectCut cut(src_pixels, sw, sh);

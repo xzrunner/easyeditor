@@ -1,30 +1,30 @@
 #ifndef _ESHAPE_STAGE_PANEL_H_
 #define _ESHAPE_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eshape
 {
 	class LibraryItem;
 	class ToolbarPanel;
 
-	class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
+	class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
 		//
-		// d2d::EditPanel interface
+		// ee::EditPanel interface
 		//
 		virtual void clear();
 
 		//
-		// d2d::MultiShapesImpl interface
+		// ee::MultiShapesImpl interface
 		//
-		virtual void traverseShapes(d2d::IVisitor& visitor, 
-			d2d::TraverseType type = d2d::e_allExisting) const;
-		virtual void removeShape(d2d::IShape* shape);
-		virtual void insertShape(d2d::IShape* shape);
+		virtual void traverseShapes(ee::IVisitor& visitor, 
+			ee::TraverseType type = ee::e_allExisting) const;
+		virtual void removeShape(ee::IShape* shape);
+		virtual void insertShape(ee::IShape* shape);
 		virtual void clearShapes();
 
 		void changeCurrItem(LibraryItem* item);

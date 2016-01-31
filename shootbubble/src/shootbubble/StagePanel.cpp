@@ -17,14 +17,14 @@ void StagePanel::clear()
 	SpritesPanelImpl::clearSprites();
 }
 
-void StagePanel::insertSprite(d2d::ISprite* sprite)
+void StagePanel::insertSprite(ee::ISprite* sprite)
 {
 	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), 0);
 	if (sprite->getPosition().isValid())
-		d2d::SpritesPanelImpl::insertSprite(sprite);
+		ee::SpritesPanelImpl::insertSprite(sprite);
 }
 
-void StagePanel::transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
+void StagePanel::transCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const
 {
 	Context* context = Context::Instance();
 
@@ -32,21 +32,21 @@ void StagePanel::transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col
 	computeParams(hEdge, posOffset, posOffset1, rowOffset);
 
 	row = (int) ((-pos.y - posOffset1) / rowOffset + 0.5f);
-	assert(fabs(-posOffset1 - rowOffset * row - pos.y) < d2d::LARGE_EPSILON);
+	assert(fabs(-posOffset1 - rowOffset * row - pos.y) < ee::LARGE_EPSILON);
 
 	if (row % 2)
 	{
 		col = (int) (pos.x / context->edge + 0.5) - 1;
-		assert(fabs(context->edge * (col + 1) - pos.x) < d2d::LARGE_EPSILON);
+		assert(fabs(context->edge * (col + 1) - pos.x) < ee::LARGE_EPSILON);
 	}
 	else
 	{
 		col = (int) ((pos.x + hEdge) / context->edge + 0.5f) - 1;
-		assert(fabs(hEdge + context->edge * col - pos.x) < d2d::LARGE_EPSILON);
+		assert(fabs(hEdge + context->edge * col - pos.x) < ee::LARGE_EPSILON);
 	}
 }
 
-void StagePanel::transGridPosToCoords(int row, int col, d2d::Vector& pos) const
+void StagePanel::transGridPosToCoords(int row, int col, ee::Vector& pos) const
 {
 	float hEdge, posOffset, posOffset1, rowOffset;
 	computeParams(hEdge, posOffset, posOffset1, rowOffset);
@@ -69,17 +69,17 @@ void StagePanel::computeParams(float& hEdge, float& posOffset,
 
 void StagePanel::updateAllSpritesLocation()
 {
-	std::vector<d2d::ISprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<ee::ISprite*> sprites;
+	traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		sprites[i]->setTransform(fixSpriteLocation(sprites[i]->getPosition()), 0);
 }
 
-d2d::Vector StagePanel::fixSpriteLocation(const d2d::Vector& pos) const
+ee::Vector StagePanel::fixSpriteLocation(const ee::Vector& pos) const
 {
 	Context* context = Context::Instance();
 
-	d2d::Vector fixed;
+	ee::Vector fixed;
 
 	float hEdge, posOffset, posOffset1, rowOffset;
 	computeParams(hEdge, posOffset, posOffset1, rowOffset);
@@ -102,7 +102,7 @@ d2d::Vector StagePanel::fixSpriteLocation(const d2d::Vector& pos) const
 		{
 			int row = (int) ((-pos.y - posOffset1) / rowOffset);
 
-			d2d::Vector c0, c1;
+			ee::Vector c0, c1;
 			c0.y = -posOffset1 - rowOffset * row;
 			c1.y = -posOffset1 - rowOffset * (row + 1);
 			if (row % 2)
@@ -116,7 +116,7 @@ d2d::Vector StagePanel::fixSpriteLocation(const d2d::Vector& pos) const
 				c1.x = context->edge + (int)((pos.x - hEdge) / context->edge) * Context::Instance()->edge;
 			}
 
-			if (d2d::Math::getDistanceSquare(pos, c0) < d2d::Math::getDistanceSquare(pos, c1))
+			if (ee::Math::getDistanceSquare(pos, c0) < ee::Math::getDistanceSquare(pos, c1))
 				fixed = c0;
 			else
 				fixed = c1;

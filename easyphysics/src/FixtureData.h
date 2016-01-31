@@ -2,7 +2,7 @@
 #define _EPHYSICS_FIXTURE_DATA_H_
 
 #include <wx/string.h>
-#include <drag2d.h>
+
 
 namespace ephysics
 {
@@ -10,7 +10,7 @@ namespace ephysics
 struct FixtureDataInfo
 {
 	std::string filepath;
-	d2d::Vector pos;
+	ee::Vector pos;
 	float angle;
 	float scale;
 

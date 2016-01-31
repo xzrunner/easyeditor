@@ -8,7 +8,7 @@ namespace eterrain2d
 {
 
 BlendTextureCMPT::BlendTextureCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
 	m_editOP = new WaveVerticesOP(stage);
@@ -21,7 +21,7 @@ void BlendTextureCMPT::SetControlersValue(const OceanMesh* ocean)
 	m_speed->SetValue(ocean->GetTexBlendSpeed() / 0.01f);
 }
 
-wxSizer* BlendTextureCMPT::initLayout()
+wxSizer* BlendTextureCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);

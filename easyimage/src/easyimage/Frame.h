@@ -1,12 +1,12 @@
 #ifndef _EASYIMAGE_FRAME_H_
 #define _EASYIMAGE_FRAME_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
-class Frame : public d2d::Frame
+class Frame : public ee::Frame
 {
 public:
 	Frame(const wxString& title);

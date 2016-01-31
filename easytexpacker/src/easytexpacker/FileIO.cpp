@@ -10,8 +10,8 @@ void FileIO::load(const char* filename)
 {
 	Context* context = Context::Instance();
 
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 
 	wxString ext = wxT("_") + wxString(FILE_TAG) + wxT(".json");
 	if (wxString(filename).Contains(ext)) {
@@ -20,7 +20,7 @@ void FileIO::load(const char* filename)
 		loadFromTexPackerFile(filename);
 	}
 
-	context->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	context->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename)
@@ -37,22 +37,22 @@ void FileIO::loadFromEasypackerFile(const char* filename)
 {
 	Context* context = Context::Instance();
 
-	d2d::TexPackerAdapter adapter;
+	ee::TexPackerAdapter adapter;
 	adapter.load(filename);
 	context->toolbar->setSize(adapter.width, adapter.height);
 
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
-		d2d::TexPackerAdapter::Texture tex = adapter.textures[i];
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::TexPackerAdapter::Texture tex = adapter.textures[i];
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		symbol->Release();
 
-		d2d::Vector pos;
+		ee::Vector pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
 		pos.y = tex.region.low + tex.region.height * 0.5f;
 		if (tex.bRotate)
-			sprite->SetTransform(pos, d2d::PI * 0.5f);
+			sprite->SetTransform(pos, ee::PI * 0.5f);
 		else
 			sprite->SetTransform(pos, 0);
 
@@ -72,29 +72,29 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	d2d::SettingData& settings = d2d::Config::Instance()->GetSettings();
+	ee::SettingData& settings = ee::Config::Instance()->GetSettings();
 	bool old_open_image_edge_clip = settings.open_image_edge_clip;
 	settings.open_image_edge_clip = false;
 
 	context->width = value["meta"]["size"]["w"].asInt();
 	context->height = value["meta"]["size"]["h"].asInt();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value frame_val = value["frames"][i++];
 	while (!frame_val.isNull()) {
 		std::string filepath = frame_val["filename"].asString();
-		if (!d2d::FileHelper::IsFileExist(filepath))
-			filepath = d2d::FileHelper::GetAbsolutePath(dir, filepath);
+		if (!ee::FileHelper::IsFileExist(filepath))
+			filepath = ee::FileHelper::GetAbsolutePath(dir, filepath);
 
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		symbol->Release();
 
 		int width = frame_val["sourceSize"]["w"].asInt();
 		int height = frame_val["sourceSize"]["h"].asInt();
-		d2d::Vector pos;
+		ee::Vector pos;
 		float angle = 0;
 		if (frame_val["rotated"].asBool())
 		{
@@ -102,7 +102,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 			int top = frame_val["frame"]["y"].asInt() - frame_val["spriteSourceSize"]["x"].asInt();
  			pos.x = left + height * 0.5f;
  			pos.y = context->height - (top + width * 0.5f);
-			angle = -d2d::PI*0.5f;
+			angle = -ee::PI*0.5f;
 		}
 		else
 		{
@@ -157,12 +157,12 @@ void FileIO::storeImage(const char* filename)
 	unsigned char* dst_data = (unsigned char*) malloc(channel * width * height);
 	memset(dst_data, 0, channel * width * height);
 
-	std::vector<d2d::Sprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::Sprite* sprite = sprites[i];
-		const d2d::Vector& center = sprite->GetPosition();
+		ee::Sprite* sprite = sprites[i];
+		const ee::Vector& center = sprite->GetPosition();
 
 		float sw, sh;
 		if (sprite->GetAngle() == 0)
@@ -183,7 +183,7 @@ void FileIO::storeImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		uint8_t* src_data = d2d::ImageLoader::FileToPixels(sprite->GetSymbol().GetFilepath(), w, h, c, f);
+		uint8_t* src_data = ee::ImageLoader::FileToPixels(sprite->GetSymbol().GetFilepath(), w, h, c, f);
 
 		if (sprite->GetAngle() != 0)
 		{
@@ -248,7 +248,7 @@ void FileIO::storeImage(const char* filename)
 	}
 
 	wxString imgFile(filename);
-	imgFile = d2d::FileHelper::GetFilePathExceptExtension(imgFile);
+	imgFile = ee::FileHelper::GetFilePathExceptExtension(imgFile);
 
 	switch (type)
 	{
@@ -257,18 +257,18 @@ void FileIO::storeImage(const char* filename)
 		break;
 	case e_jpg:
 		{
-			d2d::LibjpegAdapter::ImageData data;
+			ee::LibjpegAdapter::ImageData data;
 			data.width = width;
 			data.height = height;
 			data.pixels = dst_data;
 
-			d2d::LibjpegAdapter::Write((imgFile + ".jpg").c_str(), 80, data);
+			ee::LibjpegAdapter::Write((imgFile + ".jpg").c_str(), 80, data);
 		}
 		break;
 	case e_png:
 //		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
-		d2d::ImageSaver::StoreToFile(dst_data, width, height, 4, imgFile.ToStdString(), 
-			d2d::ImageSaver::e_png);
+		ee::ImageSaver::StoreToFile(dst_data, width, height, 4, imgFile.ToStdString(), 
+			ee::ImageSaver::e_png);
 		break;
 	}
 
@@ -282,8 +282,8 @@ void FileIO::storeEasypackerPosition(const char* filename)
 	value["width"] = Context::Instance()->width;
 	value["height"] = Context::Instance()->height;
 
-	std::vector<d2d::Sprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["image"][i] = store(sprites[i]);
 
@@ -301,10 +301,10 @@ void FileIO::storeTexpackerPosition(const char* filename)
 
 	value["meta"] = Context::Instance()->tp_meta;
 
-	std::vector<d2d::Sprite*> sprites;
-	Context::Instance()->stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::Sprite* sprite = sprites[i];
+		ee::Sprite* sprite = sprites[i];
 		if (sprite->GetUserData()) 
 		{
 			Json::Value* val = static_cast<Json::Value*>(sprite->GetUserData());
@@ -313,21 +313,21 @@ void FileIO::storeTexpackerPosition(const char* filename)
 		else 
 		{
 			// todo
-// 			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->GetSymbol()).getImage();
+// 			ee::Image* img = static_cast<const ee::ImageSymbol&>(sprite->GetSymbol()).getImage();
 // 			Json::Value val;
-// 			val["filename"] = d2d::FileHelper::getFilenameWithExtension(img->GetFilepath()).ToStdString();
+// 			val["filename"] = ee::FileHelper::getFilenameWithExtension(img->GetFilepath()).ToStdString();
 // 			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
 // 			val["trimmed"] = true;
 // 			val["sourceSize"]["w"] = img->GetOriginWidth();
 // 			val["sourceSize"]["h"] = img->GetOriginHeight();
 // 
-// 			d2d::Rect r = img->GetClippedRegion();
-// 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
-// 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
+// 			ee::Rect r = img->GetClippedRegion();
+// 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.Width();
+// 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.Height();
 // 			val["spriteSourceSize"]["x"] = r.xmin + 0.5f * img->GetOriginWidth();
 // 			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.ymax + 0.5f * img->GetOriginHeight());
 // 			
-// 			const d2d::Vector& pos = sprite->GetPosition();
+// 			const ee::Vector& pos = sprite->GetPosition();
 // 			val["frame"]["x"] = pos.x + r.xmin;
 // 			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.ymax);
 // 
@@ -343,14 +343,14 @@ void FileIO::storeTexpackerPosition(const char* filename)
 	fout.close();
 }
 
-Json::Value FileIO::store(const d2d::Sprite* sprite)
+Json::Value FileIO::store(const ee::Sprite* sprite)
 {
 	Json::Value value;
 
-	const d2d::Symbol& symbol = sprite->GetSymbol();
+	const ee::Symbol& symbol = sprite->GetSymbol();
 	const float w = symbol.GetSize().Width(),
 		h = symbol.GetSize().Height();
-	const d2d::Vector& pos = sprite->GetPosition();
+	const ee::Vector& pos = sprite->GetPosition();
 
 	bool bRotate = sprite->GetAngle() != 0;
 	float left, low, width, height;

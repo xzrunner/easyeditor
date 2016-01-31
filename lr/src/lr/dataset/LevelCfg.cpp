@@ -1,7 +1,7 @@
 #include "LevelCfg.h"
 #include "WidgetFactory.h"
 
-#include <drag2d.h>
+
 
 #include <wx/stdpaths.h>
 
@@ -22,13 +22,13 @@ LevelCfg* LevelCfg::Instance()
 
 LevelCfg::LevelCfg()
 {
-	if (d2d::FileHelper::IsFileExist(FILENAME)) {
+	if (ee::FileHelper::IsFileExist(FILENAME)) {
 		LoadFromFile(FILENAME);
 	} else {
 		wxStandardPathsBase& stdp = wxStandardPaths::Get();
 		wxString exe_path = stdp.GetExecutablePath();
-		wxString cfg_path = d2d::FileHelper::GetFileDir(exe_path) + "\\" + FILENAME;
-		if (d2d::FileHelper::IsFileExist(cfg_path)) {
+		wxString cfg_path = ee::FileHelper::GetFileDir(exe_path) + "\\" + FILENAME;
+		if (ee::FileHelper::IsFileExist(cfg_path)) {
 			LoadFromFile(cfg_path);
 		}
 	}

@@ -11,7 +11,7 @@
 
 #define CHARACTER
 
-std::vector<const d2d::Symbol*> SYMBOLS;
+std::vector<const ee::Symbol*> SYMBOLS;
 
 libcoco::epd::TextureMgr TEX_MGR;
 
@@ -19,32 +19,32 @@ std::set<std::string> IGNORE_LIST;
 
 static void InitSymbolCreators() 
 {
-	d2d::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 }
 
 void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sorted)
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
@@ -63,11 +63,11 @@ void LoadFromDir(const std::string& dir)
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (d2d::FileType::IsType(*itr, d2d::FileType::e_complex)
-			|| d2d::FileType::IsType(*itr, d2d::FileType::e_anim))
+		if (ee::FileType::IsType(*itr, ee::FileType::e_complex)
+			|| ee::FileType::IsType(*itr, ee::FileType::e_anim))
 		{
 			// todo release symbol
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
 			SYMBOLS.push_back(symbol);
 		}
 	}
@@ -77,7 +77,7 @@ void LoadFromList(const std::string& list)
 {
 	std::set<std::string> names;
 
-	wxString ext = d2d::FileHelper::GetExtension(list).Lower();
+	wxString ext = ee::FileHelper::GetExtension(list).Lower();
 	if (ext == "txt")
 	{
 		std::locale::global(std::locale(""));
@@ -115,7 +115,7 @@ void LoadFromList(const std::string& list)
 		return;
 	}
 
-	wxString dir = d2d::FileHelper::GetFileDir(list);
+	wxString dir = ee::FileHelper::GetFileDir(list);
 
 	std::set<std::string> files_sorted;
 	LoadAllFilesSorted(dir.ToStdString(), files_sorted);
@@ -123,11 +123,11 @@ void LoadFromList(const std::string& list)
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (d2d::FileType::IsType(*itr, d2d::FileType::e_complex)
-			|| d2d::FileType::IsType(*itr, d2d::FileType::e_anim))
+		if (ee::FileType::IsType(*itr, ee::FileType::e_complex)
+			|| ee::FileType::IsType(*itr, ee::FileType::e_anim))
 		{
 			// todo release symbol
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
 			std::set<std::string>::iterator itr = names.find(symbol->name);
 			if (itr == names.end()) {
 //					symbol->release();
@@ -179,7 +179,7 @@ void ParamsDetection(int argc, char *argv[], float& scale, std::string& ignore_f
 
 void LoadIgnoreList(const std::string& filename)
 {
-	wxString ext = d2d::FileHelper::GetExtension(filename).Lower();
+	wxString ext = ee::FileHelper::GetExtension(filename).Lower();
 
 	std::set<std::string> list;
 
@@ -211,8 +211,8 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	d2d::Config::Instance()->EnableUseDTex(false);
-	d2d::Config::Instance()->EnableRender(false);
+	ee::Config::Instance()->EnableUseDTex(false);
+	ee::Config::Instance()->EnableRender(false);
 
 	InitSymbolCreators();
 
@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
 	}
 
 	std::string tp_path = argv[2];
-	d2d::SearcherPathMgr::Instance()->ResetPackRes(tp_path);
+	ee::SearcherPathMgr::Instance()->ResetPackRes(tp_path);
 
 	std::string path = argv[1];
 	bool is_dir = false;
@@ -253,7 +253,7 @@ int main(int argc, char *argv[])
 		libcoco::epd::CocoPacker packer(SYMBOLS, TEX_MGR);
 		packer.Parser();
 		packer.Output(argv[4]);
-	} catch (d2d::Exception& e) {
+	} catch (ee::Exception& e) {
 		std::cerr << e.What() << std::endl;
 		return 1;
 	}

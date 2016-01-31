@@ -18,7 +18,7 @@ int PictureToBin::Size(const PackPicture* pic)
 }
 
 void PictureToBin::Pack(const PackPicture* pic, uint8_t** ptr, 
-						const d2d::TexturePacker& tp, float scale)
+						const ee::TexturePacker& tp, float scale)
 {
 	uint16_t id = pic->GetSprID();
 	pack(id, ptr);
@@ -42,7 +42,7 @@ int PictureToBin::SizeQuad()
 }
 
 void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
-							 const d2d::TexturePacker& tp, float scale)
+							 const ee::TexturePacker& tp, float scale)
 {
 	uint8_t idx = tp.QueryIdx(quad.img->GetFilepath());
 	pack(idx, ptr);

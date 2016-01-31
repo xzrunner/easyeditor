@@ -1,12 +1,12 @@
 #ifndef _EASYTEXTURE_LIBRARY_PANEL_H_
 #define _EASYTEXTURE_LIBRARY_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace etexture
 {
 
-class LibraryPanel : public d2d::LibraryPanel
+class LibraryPanel : public ee::LibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);

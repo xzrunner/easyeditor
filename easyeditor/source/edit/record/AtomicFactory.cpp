@@ -1,0 +1,106 @@
+#include "AtomicFactory.h"
+#include "AtomicType.h"
+#include "TranslateSpriteAOP.h"
+#include "RotateSpriteAOP.h"
+
+namespace ee
+{
+
+AtomicOP* AtomicFactory::Create(const Json::Value& val,
+								const std::vector<Sprite*>& sprites)
+{
+	AtomicType type = AtomicType(val["type"].asInt());
+
+	AtomicOP* ret = NULL;
+
+	switch (type) 
+	{
+		case AT_MOVE:
+			{
+				float dx = static_cast<float>(val["dx"].asDouble()),
+					  dy = static_cast<float>(val["dy"].asDouble());
+				ret = new TranslateSpriteAOP(sprites, Vector(dx, dy));
+			}
+			break;
+		case AT_ROTATE:
+			{
+				Vector start, end;
+				start.x = static_cast<float>(val["xstart"].asDouble());
+				start.y = static_cast<float>(val["ystart"].asDouble());
+				end.x = static_cast<float>(val["xend"].asDouble());
+				end.y = static_cast<float>(val["yend"].asDouble());
+
+				float angle = static_cast<float>(val["angle"].asDouble());
+
+				if (start.IsValid() && end.IsValid()) {
+					ret = new RotateSpriteAOP(sprites, start, end);
+				} else {
+					ret = new RotateSpriteAOP(sprites, angle);
+				}
+			}
+			break;
+		case AT_DELETE:
+			{
+				// todo:
+			}
+			break;
+		case AT_SCALE:
+			{
+				float xscale = static_cast<float>(val["xscale"].asDouble());
+				float yscale = static_cast<float>(val["yscale"].asDouble());
+
+				std::vector<Vector> oldScales;
+				int i = 0;
+				Json::Value pair_val = val["old"][i++];
+				while (!pair_val.isNull()) {
+					float x = static_cast<float>(pair_val["x"].asDouble());
+					float y = static_cast<float>(pair_val["y"].asDouble());
+					oldScales.push_back(Vector(x, y));
+					pair_val = val["old"][i++];
+				}
+
+//				ret = new arrange_sprite::ScaleSpritesAOP(sprites, Vector(xscale, yscale), oldScales);
+			}
+			break;
+		case AT_SHEAR:
+			{
+				float xshear = static_cast<float>(val["xshear"].asDouble());
+				float yshear = static_cast<float>(val["yshear"].asDouble());
+
+				std::vector<Vector> oldShears;
+				int i = 0;
+				Json::Value pair_val = val["old"][i++];
+				while (!pair_val.isNull()) {
+					float x = static_cast<float>(pair_val["x"].asDouble());
+					float y = static_cast<float>(pair_val["y"].asDouble());
+					oldShears.push_back(Vector(x, y));
+					pair_val = val["old"][i++];
+				}
+
+//				ret = new arrange_sprite::ShearSpritesAOP(sprites, Vector(xshear, yshear), oldShears);
+			}
+			break;
+		case AT_MIRROR:
+			{
+				float xscale = static_cast<float>(val["xmirror"].asDouble());
+				float yscale = static_cast<float>(val["ymirror"].asDouble());
+
+				std::vector<std::pair<bool, bool> > oldMirrors;
+				int i = 0;
+				Json::Value pair_val = val["old"][i++];
+				while (!pair_val.isNull()) {
+					bool x = pair_val["x"].asBool();
+					bool y = pair_val["y"].asBool();
+					oldMirrors.push_back(std::make_pair(x, y));
+					pair_val = val["old"][i++];
+				}
+
+//				ret = new arrange_sprite::MirrorSpritesAOP(sprites, xscale, yscale, oldMirrors);
+			}
+			break;
+	}
+
+	return ret;
+}
+
+}

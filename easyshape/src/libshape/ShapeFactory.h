@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_SHAPE_FACTORY_H_
 #define _LIBSHAPE_SHAPE_FACTORY_H_
 
-#include <drag2d.h>
+
 #include <json/json.h>
 
 namespace libshape
@@ -10,7 +10,7 @@ namespace libshape
 class ShapeFactory
 {
 public:
-	static d2d::Shape* CreateShapeFromFile(const Json::Value& value,
+	static ee::Shape* CreateShapeFromFile(const Json::Value& value,
 		const std::string& dir);
 
 }; // ShapeFactory

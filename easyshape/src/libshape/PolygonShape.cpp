@@ -21,11 +21,11 @@ PolygonShape::PolygonShape(const PolygonShape& polygon)
 	}
 }
 
-PolygonShape::PolygonShape(const std::vector<d2d::Vector>& vertices)
+PolygonShape::PolygonShape(const std::vector<ee::Vector>& vertices)
 	: ChainShape(vertices, true)
 	, m_material(NULL)
 {
-	SetMaterialColor(d2d::LIGHT_GREEN);
+	SetMaterialColor(ee::LIGHT_GREEN);
 }
 
 PolygonShape::~PolygonShape()
@@ -41,17 +41,17 @@ PolygonShape* PolygonShape::Clone() const
 	return new PolygonShape(*this);
 }
 
-bool PolygonShape::IsContain(const d2d::Vector& pos) const
+bool PolygonShape::IsContain(const ee::Vector& pos) const
 {
-	return d2d::Math2D::IsPointInRect(pos, m_rect) 
-		&& d2d::Math2D::IsPointInArea(pos, m_vertices);
+	return ee::Math2D::IsPointInRect(pos, m_rect) 
+		&& ee::Math2D::IsPointInArea(pos, m_vertices);
 }
 
-// bool PolygonShape::isIntersect(const d2d::Rect& rect) const
+// bool PolygonShape::isIntersect(const ee::Rect& rect) const
 // {
 // }
 
-void PolygonShape::Translate(const d2d::Vector& offset)
+void PolygonShape::Translate(const ee::Vector& offset)
 {
 	ChainShape::Translate(offset);
 	if (m_material) {
@@ -59,28 +59,28 @@ void PolygonShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void PolygonShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
+void PolygonShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	if (m_material) {
 		m_material->Draw(mt, color);
-		if (d2d::SettingData::draw_tris_edge) {
+		if (ee::SettingData::draw_tris_edge) {
 			m_material->DebugDrawTris(mt);
 		}
 	}
 
-	if (d2d::Config::Instance()->GetSettings().visible_tex_edge) {
+	if (ee::Config::Instance()->GetSettings().visible_tex_edge) {
 		ChainShape::Draw(mt, color);
 	}
 }
 
-d2d::IPropertySetting* PolygonShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
+ee::PropertySetting* PolygonShape::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new PolygonPropertySetting(stage, this);
 }
 
 void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::Shape::LoadFromFile(value, dir);
+	ee::Shape::LoadFromFile(value, dir);
 
 	size_t num = value["vertices"]["x"].size();
 	m_vertices.resize(num);
@@ -98,7 +98,7 @@ void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir
 
 void PolygonShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::Shape::StoreToFile(value, dir);
+	ee::Shape::StoreToFile(value, dir);
 
 	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
 		value["vertices"]["x"][i] = m_vertices[i].x;
@@ -120,7 +120,7 @@ void PolygonShape::refresh()
 	}
 }
 
-void PolygonShape::SetMaterialColor(const d2d::Colorf& color)
+void PolygonShape::SetMaterialColor(const ee::Colorf& color)
 {
 	if (m_material) {
 		m_material->Release();
@@ -128,7 +128,7 @@ void PolygonShape::SetMaterialColor(const d2d::Colorf& color)
 	m_material = new ColorMaterial(m_vertices, color);
 }
 
-void PolygonShape::SetMaterialTexture(d2d::ImageSymbol* image)
+void PolygonShape::SetMaterialTexture(ee::ImageSymbol* image)
 {
 	if (m_material) {
 		m_material->Release();
@@ -162,13 +162,13 @@ void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& v
 
 	std::string type = val["type"].asString();
 	if (type == "color") {
-		d2d::Colorf col;
+		ee::Colorf col;
 		col.Unpack(val["color"].asUInt());
 		m_material = new ColorMaterial(m_vertices, col);
 	} else if (type == "texture") {
 		std::string path = val["texture path"].asString();
-		d2d::ImageSymbol* symbol = static_cast<d2d::ImageSymbol*>(
-			d2d::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
+		ee::ImageSymbol* symbol = static_cast<ee::ImageSymbol*>(
+			ee::SymbolMgr::Instance()->FetchSymbol(dirpath + "\\" + path));
 		m_material = new TextureMaterial(m_vertices, symbol);
 		symbol->Release();
 	}

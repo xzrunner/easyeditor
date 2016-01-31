@@ -5,10 +5,10 @@
 namespace libshape
 {
 
-EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-								 d2d::MultiShapesImpl* shapesImpl,
+EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+								 ee::MultiShapesImpl* shapesImpl,
 								 EditPolylinesCMPT* cmpt)
-	: d2d::SelectShapesOP(wnd, stage, shapesImpl, cmpt)
+	: ee::SelectShapesOP(wnd, stage, shapesImpl, cmpt)
 	, m_cmpt(cmpt)
 	, m_bDirty(false)
 {
@@ -19,7 +19,7 @@ EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 
 bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_first_pos.IsValid())
 		m_lastPos = m_stage->TransPosScrToProj(x, y);
@@ -31,7 +31,7 @@ bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 
 bool EditPolylinesOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::SelectShapesOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::SelectShapesOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_bDirty)
 		m_selection->Traverse(UpdateChainVisitor());
@@ -44,17 +44,17 @@ bool EditPolylinesOP::OnMouseLeftUp(int x, int y)
 
 bool EditPolylinesOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::SelectShapesOP::OnMouseDrag(x, y)) return true;
+	if (ee::SelectShapesOP::OnMouseDrag(x, y)) return true;
 
 	if (m_lastPos.IsValid())
 	{
-		d2d::Vector currPos = m_stage->TransPosScrToProj(x, y);
-		d2d::Vector offset = currPos - m_lastPos;
+		ee::Vector currPos = m_stage->TransPosScrToProj(x, y);
+		ee::Vector offset = currPos - m_lastPos;
 		m_selection->Traverse(OffsetVisitor(offset));
 		m_lastPos = currPos;
 
 		m_bDirty = true;
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
@@ -62,15 +62,15 @@ bool EditPolylinesOP::OnMouseDrag(int x, int y)
 
 bool EditPolylinesOP::OnDraw() const
 {
-	if (d2d::SelectShapesOP::OnDraw()) return true;
+	if (ee::SelectShapesOP::OnDraw()) return true;
 
-	d2d::ColorTrans color;
+	ee::ColorTrans color;
 	color.multi.Set(0.8f, 0.8f, 0.2f);
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr) {
-		itr->second->Draw(d2d::Matrix(), color);
-		d2d::PrimitiveDraw::DrawCircles(itr->second->GetVertices(), d2d::SettingData::ctl_pos_sz, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		itr->second->Draw(ee::Matrix(), color);
+		ee::PrimitiveDraw::DrawCircles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;
@@ -78,7 +78,7 @@ bool EditPolylinesOP::OnDraw() const
 
 bool EditPolylinesOP::Clear()
 {
-	if (d2d::SelectShapesOP::Clear()) return true;
+	if (ee::SelectShapesOP::Clear()) return true;
 
 	clearBuffer();
 
@@ -90,12 +90,12 @@ void EditPolylinesOP::simplify()
 	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
-		std::vector<d2d::Vector> simplified;
-		d2d::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->getSimplifyThreshold(), simplified);
+		std::vector<ee::Vector> simplified;
+		ee::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->getSimplifyThreshold(), simplified);
 		itr->second->Load(simplified);
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void EditPolylinesOP::updateFromSimplified()
@@ -104,7 +104,7 @@ void EditPolylinesOP::updateFromSimplified()
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 		itr->first->Load(itr->second->GetVertices());
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void EditPolylinesOP::clearBuffer()
@@ -156,7 +156,7 @@ Visit(Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 EditPolylinesOP::OffsetVisitor::
-OffsetVisitor(const d2d::Vector& offset)
+OffsetVisitor(const ee::Vector& offset)
 	: m_offset(offset)
 {
 }

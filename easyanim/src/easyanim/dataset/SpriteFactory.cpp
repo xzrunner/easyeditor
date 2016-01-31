@@ -20,7 +20,7 @@ Sprite* SpriteFactory::Instance()->createSprite(SPRITE_TYPE type)
 	return sprite;
 }
 
-Sprite* SpriteFactory::Instance()->createMorphingSprite(Symbol* symbol, const d2d::Vector& pos, bool isCopyMesh)
+Sprite* SpriteFactory::Instance()->createMorphingSprite(Symbol* symbol, const ee::Vector& pos, bool isCopyMesh)
 {
 	return new MorphingSprite(symbol, pos, isCopyMesh);
 }

@@ -1,24 +1,24 @@
 #ifndef FORMATION_STAGE_PANEL_H
 #define FORMATION_STAGE_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {
-	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+	class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
 		//
-		// d2d::EditPanel interface
+		// ee::EditPanel interface
 		//
 		virtual void clear();
 
 		//
-		// d2d::SpritesPanelImpl interface
+		// ee::SpritesPanelImpl interface
 		//
-		virtual void insertSprite(d2d::ISprite* sprite);
+		virtual void insertSprite(ee::ISprite* sprite);
 
 		void resetAllSprites(float sx, float sy);
 

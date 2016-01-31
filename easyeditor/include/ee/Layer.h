@@ -1,15 +1,14 @@
-#ifndef _DRAG2D_LAYER_H_
-#define _DRAG2D_LAYER_H_
+#ifndef _EASYEDITOR_LAYER_H_
+#define _EASYEDITOR_LAYER_H_
 
-#include "common/Object.h"
-#include "view/ObjectVector.h"
-
+#include "Object.h"
+#include "ObjectVector.h"
 #include "Sprite.h"
 #include "Shape.h"
 
 #include <json/json.h>
 
-namespace d2d
+namespace ee
 {	
 
 class Layer : public Object
@@ -18,11 +17,11 @@ public:
 	Layer();
 	~Layer();
 
-	void TraverseSprite(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
+	void TraverseSprite(Visitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const;
 	bool Insert(Sprite* sprite);
 	bool Remove(Sprite* sprite);
 
-	void TraverseShape(IVisitor& visitor, bool order = true) const;
+	void TraverseShape(Visitor& visitor, bool order = true) const;
 	bool Insert(Shape* shape);
 	bool Remove(Shape* shape);
 
@@ -45,4 +44,4 @@ private:
 
 }
 
-#endif // _DRAG2D_LAYER_H_
+#endif // _EASYEDITOR_LAYER_H_

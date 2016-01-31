@@ -16,7 +16,7 @@
 using namespace ebuilder;
 
 ScenesList::ScenesList(ScenesPage* page)
-	: d2d::LibraryList(page, "scene", false)
+	: ee::LibraryList(page, "scene", false)
 	, m_page(page)
 {
 }
@@ -39,7 +39,7 @@ void ScenesList::onSelected(int index)
 
 	// property panel
 	SceneItem* item = static_cast<SceneItem*>(m_items[index]);
-	d2d::IPropertySetting* setting 
+	ee::IPropertySetting* setting 
 		= new ScenePropertySetting(item, m_page);
 	context->property->setPropertySetting(setting);
 
@@ -54,7 +54,7 @@ void ScenesList::onSelected(int index)
 		->loadFromScene(item->getScene());
 	
 	const std::vector<Layer*>& layers = item->getScene()->getAllLayers();
-	d2d::LibraryList* list = library->getActorList();
+	ee::LibraryList* list = library->getActorList();
 	if (layers.empty())
 		list->clear();
 	else

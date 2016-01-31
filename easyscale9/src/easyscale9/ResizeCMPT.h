@@ -1,13 +1,13 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
 	class StagePanel;
 	class ToolbarPanel;
 
-	class ResizeCMPT : public d2d::AbstractEditCMPT
+	class ResizeCMPT : public ee::EditCMPT
 	{
 	public:
 		ResizeCMPT(wxWindow* parent, const wxString& name,
@@ -18,7 +18,7 @@ namespace escale9
 		float getHeight() const;
 
 	protected:
-		virtual wxSizer* initLayout();
+		virtual wxSizer* InitLayout();
 
 	private:
 		void onChangeSize(wxSpinEvent& event);

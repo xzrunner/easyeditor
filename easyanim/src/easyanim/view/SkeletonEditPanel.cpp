@@ -25,13 +25,13 @@ SkeletonEditPanel::SkeletonEditPanel(wxWindow* parent, WholeSkeleton* skeleton,
 	m_camera->setScale(0.5f);
 }
 
-void SkeletonEditPanel::traverseSprites(d2d::IVisitor& visitor, d2d::TraverseType type/* = e_allExisting*/,
+void SkeletonEditPanel::traverseSprites(ee::IVisitor& visitor, ee::TraverseType type/* = e_allExisting*/,
 										bool order/* = true*/) const
 {
 	m_skeleton->traverse(visitor);
 }
 
-void SkeletonEditPanel::removeSprite(d2d::ISprite* sprite)
+void SkeletonEditPanel::removeSprite(ee::ISprite* sprite)
 {
 	WholeSkeleton::Sprite* bone = dynamic_cast<WholeSkeleton::Sprite*>(sprite);
 	assert(bone);
@@ -44,7 +44,7 @@ void SkeletonEditPanel::insertSprite(int symbolIndex, wxCoord x, wxCoord y)
 	Symbol* symbol = m_symbolList->getSymbol(symbolIndex);
 	assert(symbol && symbol->getSkeletonBody());
 
-	d2d::Vector pos = transPosScreenToProject(x, y);
+	ee::Vector pos = transPosScreenToProject(x, y);
 	WholeSkeleton::Sprite* sprite = new WholeSkeleton::Sprite(symbol->getSkeletonBody(), pos);
 
 	ComposeWholeSkeletonOP* editOP = dynamic_cast<ComposeWholeSkeletonOP*>(m_editOP);

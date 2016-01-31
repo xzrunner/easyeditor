@@ -5,8 +5,8 @@ namespace eimage
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
 	, m_image(NULL)
 {
 	m_left = m_right = NULL;
@@ -28,23 +28,23 @@ void StagePanel::setImage(const std::string& filepath)
 		m_image->Release();
 	}
 
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (symbol) {
 		setImage(symbol);
 		symbol->Release();
 	}
 }
 
-void StagePanel::setImage(d2d::Symbol* symbol)
+void StagePanel::setImage(ee::Symbol* symbol)
 {
-	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
-	d2d::Vector off;
+	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+	ee::Vector off;
 	off.x = sprite->GetSymbol().GetSize().Width() * 0.5f;
 	off.y = sprite->GetSymbol().GetSize().Height() * 0.5f;
 	sprite->Translate(off);
 	m_image = sprite;
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	GetEditOP()->Clear();
 }
@@ -54,8 +54,8 @@ void StagePanel::setImage(d2d::Symbol* symbol)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::CombinedDropTarget(stage)
+StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
+	: ee::CombinedDropTarget(stage)
 	, m_stage(stage)
 	, m_library(library)
 {
@@ -70,21 +70,21 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	long index;
 	sIndex.ToLong(&index);
 
-	d2d::Symbol* symbol = m_library->GetSymbol(index);
+	ee::Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol) {
 		m_stage->setImage(symbol);
 	}
 
 // 	// todo for diff
 // 	// fixme
-// 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-// 	d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
-// 	d2d::Rect r = sprite->getSymbol().getSize();
+// 	ee::Vector pos = m_stage->transPosScreenToProject(x, y);
+// 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
+// 	ee::Rect r = sprite->getSymbol().getSize();
 // 	if (pos.x < 0) {
-// 		sprite->setTransform(d2d::Vector(-r.xLength() * 0.5f - 10, 0.0f), 0);
+// 		sprite->setTransform(ee::Vector(-r.Width() * 0.5f - 10, 0.0f), 0);
 // 		m_stage->m_left = sprite;
 // 	} else {
-// 		sprite->setTransform(d2d::Vector(r.xLength() * 0.5f + 10, 0.0f), 0);
+// 		sprite->setTransform(ee::Vector(r.Width() * 0.5f + 10, 0.0f), 0);
 // 		m_stage->m_right = sprite;
 // 	}
 }
@@ -97,7 +97,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	std::string filename = filenames[0].ToStdString();
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	m_stage->setImage(symbol);
 	symbol->Release();
 }

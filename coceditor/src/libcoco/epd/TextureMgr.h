@@ -1,7 +1,7 @@
 #ifndef _LIBCOCO_EPD_TEXTURE_MANAGER_H_
 #define _LIBCOCO_EPD_TEXTURE_MANAGER_H_
 
-#include <drag2d.h>
+
 
 #include "TPAdapter.h"
 

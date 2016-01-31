@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_COMPONENT_PANEL_H_
 #define _EASYPARTICLE2D_COMPONENT_PANEL_H_
 
-#include <drag2d.h>
+
 #include <ps_2d.h>
 
 namespace eparticle2d
@@ -9,7 +9,7 @@ namespace eparticle2d
 
 class ToolbarPanel;
 
-class ComponentPanel : public wxPanel, public d2d::UICallback
+class ComponentPanel : public wxPanel, public ee::UICallback
 {
 public:
 	ComponentPanel(wxWindow* parent, p2d_symbol* component, 
@@ -18,8 +18,8 @@ public:
 	//
 	// UICallback interface
 	//
-	virtual void SetValue(int key, const d2d::UICallback::Data& data);
-	virtual void GetValue(int key, d2d::UICallback::Data& data);
+	virtual void SetValue(int key, const ee::UICallback::Data& data);
+	virtual void GetValue(int key, ee::UICallback::Data& data);
 
 private:
 	void InitLayout();
@@ -39,7 +39,7 @@ private:
 
 	ToolbarPanel* m_toolbar;
 
-	std::vector<d2d::ISliderCtrl*> m_sliders;
+	std::vector<ee::SliderCtrl*> m_sliders;
 
 	friend class FileIO;
 

@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_TOOLBAR_PANEL_H_
 #define _EASYUI_WINDOW_TOOLBAR_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
@@ -10,7 +10,7 @@ namespace window
 
 class StagePanel;
 
-class ToolbarPanel : public d2d::ToolbarPanel, public d2d::Observer
+class ToolbarPanel : public ee::ToolbarPanel, public ee::Observer
 {
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage_panel);
@@ -19,7 +19,7 @@ public:
 	void SetWindowName(const std::string& name);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 	//
 	//	interface Observer

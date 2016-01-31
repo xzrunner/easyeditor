@@ -1,6 +1,5 @@
 #include "Camera.h"
-
-//#include "render/RenderContextStack.h"
+#include "RenderContextStack.h"
 
 namespace ee
 {
@@ -53,7 +52,7 @@ Vector Camera::TransPosProjectToScreen(const Vector& proj, int width, int height
 
 void Camera::UpdateModelView() const
 {
-//	RenderContextStack::Instance()->SetModelView(-m_center, 1/m_scale);
+	RenderContextStack::Instance()->SetModelView(-m_center, 1/m_scale);
 }
 
 }

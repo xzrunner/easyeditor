@@ -6,15 +6,15 @@ namespace e3d
 
 static const float MOUSE_SENSITIVITY = 0.3f;
 
-ControlCameraOP::ControlCameraOP(wxWindow* wnd, d2d::EditPanelImpl* stage)
-	: d2d::AbstractEditOP(wnd, stage)
+ControlCameraOP::ControlCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage)
+	: ee::EditOP(wnd, stage)
 {
 	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());
 }
 
 bool ControlCameraOP::OnKeyDown(int keyCode)
 {
-	if (d2d::AbstractEditOP::OnKeyDown(keyCode)) { return true; }
+	if (ee::EditOP::OnKeyDown(keyCode)) { return true; }
 
 	Camera& cam = m_canvas->GetCamera3();
 	switch (keyCode)
@@ -46,7 +46,7 @@ bool ControlCameraOP::OnKeyDown(int keyCode)
 
 bool ControlCameraOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::AbstractEditOP::OnMouseLeftDown(x, y)) {
+	if (ee::EditOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 	m_last_pos.x = x;
@@ -56,7 +56,7 @@ bool ControlCameraOP::OnMouseLeftDown(int x, int y)
 
 bool ControlCameraOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::AbstractEditOP::OnMouseDrag(x, y)) {
+	if (ee::EditOP::OnMouseDrag(x, y)) {
 		return true;
 	}
 
@@ -74,7 +74,7 @@ bool ControlCameraOP::OnMouseDrag(int x, int y)
 
 bool ControlCameraOP::OnMouseMove(int x, int y)
 {
-	if (d2d::AbstractEditOP::OnMouseMove(x, y)) {
+	if (ee::EditOP::OnMouseMove(x, y)) {
 		return true;
 	}
 	m_stage->SetFocus();

@@ -2,7 +2,7 @@
 #ifndef LIBMODELING_FILE_ADAPTER_H
 #define LIBMODELING_FILE_ADAPTER_H
 
-#include <drag2d.h>
+
 #include <json/json.h>
 
 namespace libmodeling

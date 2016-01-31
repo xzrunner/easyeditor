@@ -1,14 +1,14 @@
 #ifndef _EASYUI_QUERY_WINDOW_VIEW_SIZE_SJ_H_
 #define _EASYUI_QUERY_WINDOW_VIEW_SIZE_SJ_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
 namespace window
 {
 
-class QueryWindowViewSizeSJ : public d2d::Subject
+class QueryWindowViewSizeSJ : public ee::Subject
 {
 public:
 	struct Params

@@ -5,7 +5,7 @@
 #include <wx/wx.h>
 #include <json/json.h>
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -31,7 +31,7 @@ namespace ebuilder
 			std::vector<std::pair<Behavior*, wxString> >& buffer);
 		static Actor* loadActor(const Json::Value& actorValue,
 			std::vector<std::pair<Behavior*, wxString> >& buffer);
-		static d2d::TextSprite* loadText(const Json::Value& textValue);
+		static ee::TextSprite* loadText(const Json::Value& textValue);
 		static Behavior* loadBehavior(const Json::Value& behaviorValue,
 			Actor* actor, std::vector<std::pair<Behavior*, wxString> >& buffer);
 		static void loadBehaviorsValue(
@@ -41,7 +41,7 @@ namespace ebuilder
 		static Json::Value store(Scene* scene, const wxString& filepath);
 		static Json::Value store(Layer* layer, const wxString& filepath);
 		static Json::Value store(Actor* actor, const wxString& filepath);
-		static Json::Value store(d2d::TextSprite* text, const wxString& filepath);
+		static Json::Value store(ee::TextSprite* text, const wxString& filepath);
 		static Json::Value store(Behavior* behavior);
 		static void store(Json::Value& value, Behavior* behavior);
 

@@ -7,13 +7,13 @@
 using namespace raiden;
 
 LibraryShapeList::LibraryShapeList(wxWindow* parent)
-	: d2d::LibraryList(parent)
+	: ee::LibraryList(parent)
 {
 }
 
 void LibraryShapeList::onListDoubleClicked(wxCommandEvent& event)
 {
-	d2d::ISymbol* symbol = getSymbol(event.GetInt());
+	ee::ISymbol* symbol = getSymbol(event.GetInt());
 
 	{
 		libshape::MainDialog<libshape::StagePanel> dlg(this, symbol);

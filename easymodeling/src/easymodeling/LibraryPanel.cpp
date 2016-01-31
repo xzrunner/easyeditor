@@ -5,7 +5,7 @@
 using namespace emodeling;
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 {
 	AddPage(new LibraryPage(GetNotebook()));
 }

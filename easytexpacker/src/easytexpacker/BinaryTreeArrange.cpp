@@ -13,9 +13,9 @@ BinaryTreeArrange::~BinaryTreeArrange()
 	delete m_root;
 }
 
-void BinaryTreeArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
+void BinaryTreeArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
-	std::vector<d2d::ImageSprite*> sorted(sprites);
+	std::vector<ee::ImageSprite*> sorted(sprites);
 	sortByMaxEdge(sorted);
 
 	int maxArranged = -1, maxFlag = 0;
@@ -58,8 +58,8 @@ void BinaryTreeArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 			{
 				for (size_t j = i; j < n; ++j)
 				{
-					d2d::Rect r = sorted[j]->GetSymbol().GetSize();
-					d2d::Vector pos;
+					ee::Rect r = sorted[j]->GetSymbol().GetSize();
+					ee::Vector pos;
 					pos.x = -SPACING - r.Width() * 0.5f - r.CenterX();
 					pos.y = -SPACING - r.Height() * 0.5f - r.CenterY();
 					sorted[j]->SetTransform(pos, 0);
@@ -92,7 +92,7 @@ BinaryTreeArrange::Node::~Node()
 }
 
 BinaryTreeArrange::Node* 
-BinaryTreeArrange::Node::insert(d2d::ImageSprite* sprite, int flag)
+BinaryTreeArrange::Node::insert(ee::ImageSprite* sprite, int flag)
 {
 	if (child[0])
 	{
@@ -132,12 +132,12 @@ BinaryTreeArrange::Node::insert(d2d::ImageSprite* sprite, int flag)
 			child[0]->rc.ymax = rc.ymin + height;
 			child[1]->rc.ymin = rc.ymin + height;
 		}
-		d2d::Vector center;
+		ee::Vector center;
 		center.x = child[0]->rc.xmin + width * 0.5f;
 		center.y = child[0]->rc.ymin + height * 0.5f;
 		sprite->SetTransform(center, sprite->GetAngle());
 
-		if (child[0]->rc.xLength() > width)
+		if (child[0]->rc.Width() > width)
 		{
 			child[0]->child[0] = new Node();
 			child[0]->child[1] = new Node();

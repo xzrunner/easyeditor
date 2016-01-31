@@ -1,18 +1,18 @@
 #ifndef _EASYANIM3D_STAGE_PANEL_H_
 #define _EASYANIM3D_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace eanim3d
 {
 
 class StageCanvas;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
+		ee::LibraryPanel* library, ee::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
 protected:

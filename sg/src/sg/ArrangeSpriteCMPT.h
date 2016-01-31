@@ -1,21 +1,21 @@
 #ifndef _SG_ARRANGE_SPRITE_CMPT_H_
 #define _SG_ARRANGE_SPRITE_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace sg
 {
 
 class StagePanel;
 
-class ArrangeSpriteCMPT : public d2d::AbstractEditCMPT
+class ArrangeSpriteCMPT : public ee::EditCMPT
 {
 public:
 	ArrangeSpriteCMPT(wxWindow* parent, const wxString& name, 
-		d2d::PropertySettingPanel* property, StagePanel* stage);
+		ee::PropertySettingPanel* property, StagePanel* stage);
 	
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void onUpLevelPress(wxCommandEvent& event);

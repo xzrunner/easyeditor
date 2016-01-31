@@ -3,7 +3,7 @@
 
 #include "INodeBuilder.h"
 
-#include <drag2d.h>
+
 
 namespace ecomplex { class Symbol; }
 
@@ -21,7 +21,7 @@ public:
 	ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_builder);
 	virtual ~ComplexBuilder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	const IPackNode* Create(const ecomplex::Symbol* symbol);
 
@@ -30,9 +30,9 @@ private:
 
 	IPackNode* LoadAnchor(const ecomplex::Symbol* symbol);
 
-	static void GroupFromTag(const std::vector<d2d::Sprite*>& src, 
-		std::map<std::string, std::vector<d2d::Sprite*> >& dst,
-		std::vector<d2d::Sprite*>& others);
+	static void GroupFromTag(const std::vector<ee::Sprite*>& src, 
+		std::map<std::string, std::vector<ee::Sprite*> >& dst,
+		std::vector<ee::Sprite*>& others);
 
 private:
 	ExportNameSet& m_export_set;

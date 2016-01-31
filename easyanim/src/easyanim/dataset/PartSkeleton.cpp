@@ -101,7 +101,7 @@ void PartSkeleton::storeToTextFile(std::ofstream& fout) const
 	}
 }
 
-void PartSkeleton::pushJoint(const d2d::Vector& pos)
+void PartSkeleton::pushJoint(const ee::Vector& pos)
 {
 	m_joints.push_back(new Joint(pos, m_halfWidth, m_halfHeight));
 
@@ -109,7 +109,7 @@ void PartSkeleton::pushJoint(const d2d::Vector& pos)
 	{
 		PartSkeleton::Joint *start = m_joints[m_joints.size() - 2],
 			*end = m_joints[m_joints.size() - 1];
-		float len = d2d::Math::getDistance(start->projCoords, end->projCoords);
+		float len = ee::Math::getDistance(start->projCoords, end->projCoords);
 		PartSkeleton::Bone* bone = new PartSkeleton::Bone(start, end, len, m_halfWidth, m_halfHeight);
 		start->m_to = bone;
 		end->m_from = bone;
@@ -119,7 +119,7 @@ void PartSkeleton::pushJoint(const d2d::Vector& pos)
 		if (m_joints.size() > 2)
 		{
 			Joint* last = m_joints[m_joints.size() - 2];
-			d2d::Vector pLeft, pRight;
+			ee::Vector pLeft, pRight;
 			last->getNodesPos(pLeft, pRight);
 			last->m_left.initCoords(pLeft, m_halfWidth, m_halfHeight);
 			last->m_right.initCoords(pRight, m_halfWidth, m_halfHeight);
@@ -138,11 +138,11 @@ void PartSkeleton::popJoint()
 	}
 }
 
-d2d::Vector PartSkeleton::topJoint() const
+ee::Vector PartSkeleton::topJoint() const
 {
 	if (m_joints.empty())
 	{
-		d2d::Vector p;
+		ee::Vector p;
 		p.setInvalid();
 		return p;
 	}
@@ -152,14 +152,14 @@ d2d::Vector PartSkeleton::topJoint() const
 	}
 }
 
-PartSkeleton::Joint* PartSkeleton::queryJointByPos(const d2d::Vector& pos)
+PartSkeleton::Joint* PartSkeleton::queryJointByPos(const ee::Vector& pos)
 {
 	PartSkeleton::Joint* nearest = NULL;
 	float nearestDis = FLT_MAX;
 
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
-		float dis = d2d::Math::getDistance(pos, m_joints[i]->projCoords);
+		float dis = ee::Math::getDistance(pos, m_joints[i]->projCoords);
 		if (dis < nearestDis) 
 		{
 			nearest = m_joints[i];
@@ -170,7 +170,7 @@ PartSkeleton::Joint* PartSkeleton::queryJointByPos(const d2d::Vector& pos)
 	return nearestDis < JOINT_RADIUS ? nearest : NULL;
 }
 
-PartSkeleton::Node* PartSkeleton::queryNodeByPos(const d2d::Vector& pos)
+PartSkeleton::Node* PartSkeleton::queryNodeByPos(const ee::Vector& pos)
 {
 	PartSkeleton::Node* nearest = NULL;
 	float nearestDis = FLT_MAX;
@@ -183,15 +183,15 @@ PartSkeleton::Node* PartSkeleton::queryNodeByPos(const d2d::Vector& pos)
 
 		float dis;
 
-		d2d::Vector pLeft, pRight;
+		ee::Vector pLeft, pRight;
 		bone->getNodesPos(pLeft, pRight);
-		dis = d2d::Math::getDistance(pLeft, pos);
+		dis = ee::Math::getDistance(pLeft, pos);
 		if (dis < nearestDis)
 		{
 			nearest = &bone->m_left;
 			nearestDis = dis;
 		}
-		dis = d2d::Math::getDistance(pRight, pos);
+		dis = ee::Math::getDistance(pRight, pos);
 		if (dis < nearestDis)
 		{
 			nearest = &bone->m_right;
@@ -201,13 +201,13 @@ PartSkeleton::Node* PartSkeleton::queryNodeByPos(const d2d::Vector& pos)
 		if (i != 0)
 		{
 			joint->getNodesPos(pLeft, pRight);
-			dis = d2d::Math::getDistance(pLeft, pos);
+			dis = ee::Math::getDistance(pLeft, pos);
 			if (dis < nearestDis)
 			{
 				nearest = &joint->m_left;
 				nearestDis = dis;
 			}
-			dis = d2d::Math::getDistance(pRight, pos);
+			dis = ee::Math::getDistance(pRight, pos);
 			if (dis < nearestDis)
 			{
 				nearest = &joint->m_right;
@@ -219,12 +219,12 @@ PartSkeleton::Node* PartSkeleton::queryNodeByPos(const d2d::Vector& pos)
 	return nearest;
 }
 
-void PartSkeleton::translateJoint(Joint* joint, const d2d::Vector& newPos)
+void PartSkeleton::translateJoint(Joint* joint, const ee::Vector& newPos)
 {
 	joint->initConnectedCoords(newPos, m_halfWidth, m_halfHeight);
 }
 
-void PartSkeleton::translateNode(Node* node, const d2d::Vector& newPos)
+void PartSkeleton::translateNode(Node* node, const ee::Vector& newPos)
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
@@ -232,47 +232,47 @@ void PartSkeleton::translateNode(Node* node, const d2d::Vector& newPos)
 		PartSkeleton::Bone* bone = joint->m_to;
 		if (!bone) continue;
 
-		d2d::Vector center = bone->getCenter();
-		d2d::Vector vector = bone->getVector();
+		ee::Vector center = bone->getCenter();
+		ee::Vector vector = bone->getVector();
 		if (&bone->m_left == node)
 		{
-			bone->m_left.local = d2d::Math::transCoordsWorldToLocal(center, vector, newPos);
+			bone->m_left.local = ee::Math::transCoordsWorldToLocal(center, vector, newPos);
 			bone->m_left.initCoords(newPos, m_halfWidth, m_halfHeight);
 		}
 		else if (&bone->m_right == node)
 		{
-			bone->m_right.local = d2d::Math::transCoordsWorldToLocal(center, vector, newPos);
+			bone->m_right.local = ee::Math::transCoordsWorldToLocal(center, vector, newPos);
 			bone->m_right.initCoords(newPos, m_halfWidth, m_halfHeight);
 		}
 
 		if (i != 0)
 		{
-			d2d::Vector center = joint->projCoords;
-			d2d::Vector vector = (joint->m_from->getVector() + joint->m_to->getVector()) * 0.5f;
+			ee::Vector center = joint->projCoords;
+			ee::Vector vector = (joint->m_from->getVector() + joint->m_to->getVector()) * 0.5f;
 			if (&joint->m_left == node)
 			{
-				joint->m_left.local = d2d::Math::transCoordsWorldToLocal(center, vector, newPos);
+				joint->m_left.local = ee::Math::transCoordsWorldToLocal(center, vector, newPos);
 				joint->m_left.initCoords(newPos, m_halfWidth, m_halfHeight);
 			}
 			else if (&joint->m_right == node)
 			{
-				joint->m_right.local = d2d::Math::transCoordsWorldToLocal(center, vector, newPos);
+				joint->m_right.local = ee::Math::transCoordsWorldToLocal(center, vector, newPos);
 				joint->m_right.initCoords(newPos, m_halfWidth, m_halfHeight);
 			}
 		}
 	}
 }
 
-void PartSkeleton::rotateJoint(PartSkeleton::Joint* joint, const d2d::Vector& newPos)
+void PartSkeleton::rotateJoint(PartSkeleton::Joint* joint, const ee::Vector& newPos)
 {
 	if (!joint->m_from) return;
 
 	float oldLen = joint->m_from->getLength();
-	const d2d::Vector& start = joint->m_from->m_start->projCoords;
-	float newLen = d2d::Math::getDistance(start, newPos);
-	d2d::Vector dest = start + (newPos - start) * oldLen / newLen;
+	const ee::Vector& start = joint->m_from->m_start->projCoords;
+	float newLen = ee::Math::getDistance(start, newPos);
+	ee::Vector dest = start + (newPos - start) * oldLen / newLen;
 
-	d2d::Vector offset = dest - joint->projCoords;
+	ee::Vector offset = dest - joint->projCoords;
 	while (true)
 	{
 		joint->projCoords += offset;
@@ -292,12 +292,12 @@ void PartSkeleton::onDraw() const
 		if (joint->m_to)
 		{
 			PartSkeleton::Bone* bone = joint->m_to;
-			const d2d::Vector& s = bone->m_start->projCoords,
+			const ee::Vector& s = bone->m_start->projCoords,
 				&e = bone->m_end->projCoords;
 
-			d2d::Vector offset = (e - s) * WIDTH_LENGTH_RATIO;
-			d2d::Vector pLeft = s + d2d::Math::rotateVectorRightAngle(offset, true),
-				pRight = s + d2d::Math::rotateVectorRightAngle(offset, false);
+			ee::Vector offset = (e - s) * WIDTH_LENGTH_RATIO;
+			ee::Vector pLeft = s + ee::Math::rotateVectorRightAngle(offset, true),
+				pRight = s + ee::Math::rotateVectorRightAngle(offset, false);
 			glBegin(GL_LINE_LOOP);
 				glVertex2f(pLeft.x, pLeft.y);
 				glVertex2f(pRight.x, pRight.y);
@@ -322,7 +322,7 @@ void PartSkeleton::onDraw() const
 		PartSkeleton::Bone* bone = joint->m_to;
 		if (!bone) continue;
 
-		d2d::Vector pLeft, pRight;
+		ee::Vector pLeft, pRight;
 		bone->getNodesPos(pLeft, pRight);
 		Render::drawPos(pLeft, NODE_RADIUS);
 		Render::drawPos(pRight, NODE_RADIUS);
@@ -343,7 +343,7 @@ void PartSkeleton::onDraw() const
 		PartSkeleton::Bone* bone = joint->m_to;
 		if (!bone) continue;
 
-		d2d::Vector pLeft, pRight;
+		ee::Vector pLeft, pRight;
 		bone->getNodesPos(pLeft, pRight);
 		drawTriangle(bone->m_start->projCoords, bone->m_end->projCoords, pLeft);
 		drawTriangle(bone->m_start->projCoords, bone->m_end->projCoords, pRight);
@@ -352,10 +352,10 @@ void PartSkeleton::onDraw() const
 		{
 			PartSkeleton::Bone* fBone = joint->m_from;
 
-			d2d::Vector fbLeft, fbRight;
+			ee::Vector fbLeft, fbRight;
 			fBone->getNodesPos(fbLeft, fbRight);
 
-			d2d::Vector nLeft, nRight;
+			ee::Vector nLeft, nRight;
 			joint->getNodesPos(nLeft, nRight);
 
 			drawTriangle(fbLeft, joint->projCoords, nLeft);
@@ -374,7 +374,7 @@ void PartSkeleton::drawMeshes() const
 		PartSkeleton::Bone* bone = joint->m_to;
 		if (!bone) continue;
 
-		d2d::Vector pLeft, pRight;
+		ee::Vector pLeft, pRight;
 		bone->getNodesPos(pLeft, pRight);
 		drawTriangle(bone->m_start->projCoords, bone->m_end->projCoords, pLeft,
 			bone->m_start->texCoords, bone->m_end->texCoords, bone->m_left.texCoords);
@@ -385,10 +385,10 @@ void PartSkeleton::drawMeshes() const
 		{
 			PartSkeleton::Bone* fBone = joint->m_from;
 
-			d2d::Vector fbLeft, fbRight;
+			ee::Vector fbLeft, fbRight;
 			fBone->getNodesPos(fbLeft, fbRight);
 
-			d2d::Vector nLeft, nRight;
+			ee::Vector nLeft, nRight;
 			joint->getNodesPos(nLeft, nRight);
 
 			drawTriangle(fbLeft, joint->projCoords, nLeft,
@@ -407,7 +407,7 @@ void PartSkeleton::tween(const PartSkeleton& start, const PartSkeleton& end, flo
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
-		d2d::Vector offset = (end.m_joints[i]->projCoords - start.m_joints[i]->projCoords) * process;
+		ee::Vector offset = (end.m_joints[i]->projCoords - start.m_joints[i]->projCoords) * process;
 		m_joints[i]->projCoords = start.m_joints[i]->projCoords + offset;
 	}
 }
@@ -422,7 +422,7 @@ void PartSkeleton::clear()
 	m_joints.clear();
 }
 
-void PartSkeleton::drawTriangle(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2) const
+void PartSkeleton::drawTriangle(const ee::Vector& p0, const ee::Vector& p1, const ee::Vector& p2) const
 {
 	glBegin(GL_LINE_LOOP);
 		glVertex2f(p0.x, p0.y);
@@ -431,8 +431,8 @@ void PartSkeleton::drawTriangle(const d2d::Vector& p0, const d2d::Vector& p1, co
 	glEnd();
 }
 
-void PartSkeleton::drawTriangle(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2,
-							const d2d::Vector& c0, const d2d::Vector& c1, const d2d::Vector& c2) const
+void PartSkeleton::drawTriangle(const ee::Vector& p0, const ee::Vector& p1, const ee::Vector& p2,
+							const ee::Vector& c0, const ee::Vector& c1, const ee::Vector& c2) const
 {
 	glBegin(GL_TRIANGLES);
 		glTexCoord2f(c0.x, c0.y);	glVertex2f(p0.x, p0.y);
@@ -472,7 +472,7 @@ PartSkeleton::Joint::Joint()
 	m_from = m_to = NULL;
 }
 
-PartSkeleton::Joint::Joint(const d2d::Vector& p, float hWidth, float hHeight)
+PartSkeleton::Joint::Joint(const ee::Vector& p, float hWidth, float hHeight)
 {
 	initCoords(p, hWidth, hHeight);
 	m_from = m_to = NULL;
@@ -507,13 +507,13 @@ void PartSkeleton::Joint::initNodesLocalCoords(float length)
 	m_right.local.y = - length * 0.5f;
 }
 
-void PartSkeleton::Joint::initConnectedCoords(const d2d::Vector& pos, float hWidth, float hHeight)
+void PartSkeleton::Joint::initConnectedCoords(const ee::Vector& pos, float hWidth, float hHeight)
 {
 	initCoords(pos, hWidth, hHeight);
 
 	if (m_from && m_to)
 	{
-		d2d::Vector pLeft, pRight;
+		ee::Vector pLeft, pRight;
 		getNodesPos(pLeft, pRight);
 		m_left.initCoords(pLeft, hWidth, hHeight);
 		m_right.initCoords(pRight, hWidth, hHeight);
@@ -523,12 +523,12 @@ void PartSkeleton::Joint::initConnectedCoords(const d2d::Vector& pos, float hWid
 	if (m_to) m_to->initCoords(hWidth, hHeight, this);
 }
 
-void PartSkeleton::Joint::getNodesPos(d2d::Vector& left, d2d::Vector& right) const
+void PartSkeleton::Joint::getNodesPos(ee::Vector& left, ee::Vector& right) const
 {
-	d2d::Vector center = projCoords;
-	d2d::Vector vector = (m_from->getVector() + m_to->getVector()) * 0.5f;
-	left = d2d::Math::transCoordsLocalToWorld(center, vector, m_left.local);
-	right = d2d::Math::transCoordsLocalToWorld(center, vector, m_right.local);
+	ee::Vector center = projCoords;
+	ee::Vector vector = (m_from->getVector() + m_to->getVector()) * 0.5f;
+	left = ee::Math::transCoordsLocalToWorld(center, vector, m_left.local);
+	right = ee::Math::transCoordsLocalToWorld(center, vector, m_right.local);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -547,7 +547,7 @@ PartSkeleton::Bone::Bone(Joint* start, Joint* end, float length, float hWidth, f
 
 	initNodesLocalCoords(length);
 
-	d2d::Vector pLeft, pRight;
+	ee::Vector pLeft, pRight;
 	getNodesPos(pLeft, pRight);
 	m_left.initCoords(pLeft, hWidth, hHeight);
 	m_right.initCoords(pRight, hWidth, hHeight);
@@ -574,25 +574,25 @@ void PartSkeleton::Bone::storeToTextFile(std::ofstream& fout) const
 
 float PartSkeleton::Bone::getLength() const
 {
-	return d2d::Math::getDistance(m_start->projCoords, m_end->projCoords);
+	return ee::Math::getDistance(m_start->projCoords, m_end->projCoords);
 }
 
-d2d::Vector PartSkeleton::Bone::getCenter() const
+ee::Vector PartSkeleton::Bone::getCenter() const
 {
 	return (m_start->projCoords + m_end->projCoords) * 0.5f;
 }
 
-d2d::Vector PartSkeleton::Bone::getVector() const
+ee::Vector PartSkeleton::Bone::getVector() const
 {
 	return m_end->projCoords - m_start->projCoords;
 }
 
-void PartSkeleton::Bone::getNodesPos(d2d::Vector& left, d2d::Vector& right) const
+void PartSkeleton::Bone::getNodesPos(ee::Vector& left, ee::Vector& right) const
 {
-	d2d::Vector center = getCenter();
-	d2d::Vector vector = getVector();
-	left = d2d::Math::transCoordsLocalToWorld(center, vector, m_left.local);
-	right= d2d::Math::transCoordsLocalToWorld(center, vector, m_right.local);
+	ee::Vector center = getCenter();
+	ee::Vector vector = getVector();
+	left = ee::Math::transCoordsLocalToWorld(center, vector, m_left.local);
+	right= ee::Math::transCoordsLocalToWorld(center, vector, m_right.local);
 }
 
 void PartSkeleton::Bone::initNodesLocalCoords(float length)
@@ -606,7 +606,7 @@ void PartSkeleton::Bone::initNodesLocalCoords(float length)
 
 void PartSkeleton::Bone::initCoords(float hWidth, float hHeight, Joint* except)
 {
-	d2d::Vector pLeft, pRight;
+	ee::Vector pLeft, pRight;
 	getNodesPos(pLeft, pRight);
 	m_left.initCoords(pLeft, hWidth, hHeight);
 	m_right.initCoords(pRight, hWidth, hHeight);

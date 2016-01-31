@@ -4,7 +4,7 @@
 namespace librespacker
 {
 
-void PictureFromLua::Unpack(lua_State* L, const std::vector<d2d::Image*>& images, 
+void PictureFromLua::Unpack(lua_State* L, const std::vector<ee::Image*>& images, 
 							PackPicture* pic)
 {
 	int len = lua_rawlen(L, -1);

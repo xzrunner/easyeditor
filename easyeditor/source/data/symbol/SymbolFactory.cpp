@@ -2,26 +2,28 @@
 #include "ImageSymbol.h"
 #include "FontBlankSymbol.h"
 #include "ScriptsSymbol.h"
+#include "FileHelper.h"
+#include "StringHelper.h"
 
 namespace ee
 {
 
 SymbolFactory::CallbackMap SymbolFactory::m_creators;
 
-Symbol* SymbolFactory::create(const wxString& filepath)
+Symbol* SymbolFactory::create(const std::string& filepath)
 {
 	Symbol* symbol = NULL;
 
-	wxString ext = FileHelper::GetExtension(filepath).Lower();
-
+	std::string ext = FileHelper::GetExtension(filepath);
+	StringHelper::ToLower(ext);
 	if (ext == "png" || ext == "jpg" || ext == "bmp" || ext == "pvr")
 	{
 		symbol = new ImageSymbol;
 	}
 	else if (ext == "json")
 	{
-		wxString type = FileType::GetTag(FileType::GetType(filepath));
-		CallbackMap::iterator itr = m_creators.find(type.ToStdString());
+		std::string type = FileType::GetTag(FileType::GetType(filepath));
+		CallbackMap::iterator itr = m_creators.find(type);
 		if (itr != m_creators.end()) {
 			symbol = (itr->second)();
 		}

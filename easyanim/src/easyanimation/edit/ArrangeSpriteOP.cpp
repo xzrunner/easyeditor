@@ -8,7 +8,7 @@ namespace eanim
 {
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
-	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, ViewMgr::Instance()->property)
+	: ee::ArrangeSpriteOP<SelectSpritesOP>(stage, stage->GetStageImpl(), stage, ViewMgr::Instance()->property)
 	, m_selected(NULL)
 {
 }
@@ -20,7 +20,7 @@ ArrangeSpriteOP::~ArrangeSpriteOP()
 
 bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnKeyDown(keyCode)) 
+	if (ee::ArrangeSpriteOP<SelectSpritesOP>::OnKeyDown(keyCode)) 
 		return true;
 
 	return KeyDownHandler::Instance()->Process(keyCode);
@@ -28,10 +28,10 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 
 bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftDown(x, y)) 
+	if (ee::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftDown(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
 		if (m_crosses[i]->Contain(pos)) {
 			m_selected = m_crosses[i];
@@ -43,7 +43,7 @@ bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 
 bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftUp(x, y)) 
+	if (ee::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftUp(x, y)) 
 		return true;
 
 	m_selected = NULL;
@@ -56,11 +56,11 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 	if (m_selected)
 	{
 		m_selected->pos = m_stage->TransPosScrToProj(x, y);
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 	else
 	{
-		if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseDrag(x, y)) 
+		if (ee::ArrangeSpriteOP<SelectSpritesOP>::OnMouseDrag(x, y)) 
 			return true;
 	}
 
@@ -69,7 +69,7 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 
 bool ArrangeSpriteOP::OnDraw() const
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnDraw()) 
+	if (ee::ArrangeSpriteOP<SelectSpritesOP>::OnDraw()) 
 		return true;
 
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
@@ -82,7 +82,7 @@ bool ArrangeSpriteOP::OnDraw() const
 void ArrangeSpriteOP::AddCross()
 {
 	m_crosses.push_back(new Cross());
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ArrangeSpriteOP::DelCross()
@@ -102,7 +102,7 @@ void ArrangeSpriteOP::DelCross()
 	}
 	delete del;
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -116,13 +116,13 @@ ArrangeSpriteOP::Cross::Cross()
 
 void ArrangeSpriteOP::Cross::Draw() const
 {
-	d2d::PrimitiveDraw::DrawCircle(pos, RADIUS, false, 1, d2d::LIGHT_RED);
-	d2d::PrimitiveDraw::Cross(pos, LENGTH, d2d::LIGHT_RED, 1);
+	ee::PrimitiveDraw::DrawCircle(pos, RADIUS, false, 1, ee::LIGHT_RED);
+	ee::PrimitiveDraw::Cross(pos, LENGTH, ee::LIGHT_RED, 1);
 }
 
-bool ArrangeSpriteOP::Cross::Contain(const d2d::Vector& p) const
+bool ArrangeSpriteOP::Cross::Contain(const ee::Vector& p) const
 {
-	return d2d::Math2D::GetDistance(pos, p) < RADIUS;
+	return ee::Math2D::GetDistance(pos, p) < RADIUS;
 }
 
 } // eanim

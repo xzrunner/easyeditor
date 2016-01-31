@@ -30,8 +30,8 @@ void StagePanel::clear()
 	clearSprites();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, 
-								 d2d::TraverseType type/* = d2d::e_allExisting*/,
+void StagePanel::traverseSprites(ee::IVisitor& visitor, 
+								 ee::TraverseType type/* = ee::e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	std::vector<Sprite*>::const_iterator itr = m_sprites.begin();
@@ -43,7 +43,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 	}
 }
 
-void StagePanel::removeSprite(d2d::ISprite* sprite)
+void StagePanel::removeSprite(ee::ISprite* sprite)
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -74,7 +74,7 @@ void StagePanel::insertSymbol(int index, wxCoord x, wxCoord y)
 	Layer* layer = context->timeline->getCurrLayer();
 	if (!layer) return;
 
-	d2d::Vector pos = transPosScreenToProject(x, y);
+	ee::Vector pos = transPosScreenToProject(x, y);
 	Sprite* sprite = SpriteFactory::Instance()->createMorphingSprite(symbol, pos, true);
 	bool success = layer->insertSprite(sprite, context->timeline->getCurrFrame());
 	if (!success) delete sprite;

@@ -3,12 +3,12 @@
 #include "Context.h"
 #include "ActorInfo.h"
 
-static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
+static const ee::Colorf LIGHT_GRAY = ee::Colorf(0.8f, 0.8f, 0.8f);
 
 using namespace raiden;
 
 StageCanvas::StageCanvas(StagePanel* parent)
-	: d2d::SpriteStageCanvas(parent, parent)
+	: ee::SpriteStageCanvas(parent, parent)
 {
 }
 
@@ -16,17 +16,17 @@ void StageCanvas::onDraw()
 {
 	drawGuideLines();
 
-	std::vector<d2d::ISprite*> sprites;
-	m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), 
-		d2d::e_visible);
+	std::vector<ee::ISprite*> sprites;
+	m_spritesImpl->traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites), 
+		ee::e_visible);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
-		d2d::SpriteDraw::drawSprite(sprite);
+		ee::ISprite* sprite = sprites[i];
+		ee::SpriteDraw::drawSprite(sprite);
 
 		ActorInfo* info = static_cast<ActorInfo*>(sprite->getUserData());
 		if (info->symbol)
-			d2d::SpriteDraw::drawSprite(info->symbol, sprite->getPosition() + info->offset);
+			ee::SpriteDraw::drawSprite(info->symbol, sprite->getPosition() + info->offset);
 	}
 
 	m_editPanel->drawEditTemp();

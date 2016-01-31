@@ -21,7 +21,7 @@ public:
 	void AddInputUniform(Uniform* uniform);
 
 private:
-	class ShaderImpl : public d2d::SpriteShader, private Shader::ShaderImpl
+	class ShaderImpl : public ee::SpriteShader, private Shader::ShaderImpl
 	{
 	public:
 		ShaderImpl(const std::string& vert_filepath, const std::string& frag_filepath);

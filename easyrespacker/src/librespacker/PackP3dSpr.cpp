@@ -15,13 +15,13 @@ PackP3dSpr::PackP3dSpr(int id)
 }
 
 void PackP3dSpr::PackToLuaString(ebuilder::CodeGenerator& gen, 
-									 const d2d::TexturePacker& tp,
+									 const ee::TexturePacker& tp,
 									 float scale) const
 {
 	return P3dSprToLuaString::Pack(this, gen);
 }
 
-void PackP3dSpr::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+void PackP3dSpr::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
 {
 	P3dSprFromLua::Unpack(L, this);
 }
@@ -32,7 +32,7 @@ int PackP3dSpr::SizeOfPackToBin() const
 }
 
 void PackP3dSpr::PackToBin(uint8_t** ptr, 
-							   const d2d::TexturePacker& tp,
+							   const ee::TexturePacker& tp,
 							   float scale) const
 {
 	P3dSprToBin::Pack(this, ptr);
@@ -43,7 +43,7 @@ int PackP3dSpr::SizeOfUnpackFromBin() const
 	return P3dSprFromBin::Size();
 }
 
-void PackP3dSpr::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+void PackP3dSpr::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
 {
 	P3dSprFromBin::Unpack(ptr, this);
 }

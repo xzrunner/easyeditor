@@ -8,29 +8,29 @@
 namespace sg
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
-						   d2d::PropertySettingPanel* property, 
+ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library, 
+						   ee::PropertySettingPanel* property, 
 						   StagePanel* stage)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	addChild(new d2d::UniversalCMPT(this, wxT("paste"), stage->GetStageImpl(), 
+	addChild(new ee::UniversalCMPT(this, wxT("paste"), stage->GetStageImpl(), 
 		new PasteSymbolOP(stage, library)));
-	addChild(new d2d::PasteSpriteCMPT(this, wxT("batch"), stage, stage->GetStageImpl(), stage));
+	addChild(new ee::PasteSpriteCMPT(this, wxT("batch"), stage, stage->GetStageImpl(), stage));
 	addChild(new ArrangeSpriteCMPT(this, wxT("arrange"), property, stage));
 
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 
 	stage->SetLayoutInfo(ROW, COL, EDGE);
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(10);
 	initOptSetting(sizer);
 	sizer->AddSpacer(20);
-	sizer->Add(initChildrenLayout());
+	sizer->Add(InitChildrenLayout());
 	return sizer;
 }
 
@@ -95,7 +95,7 @@ void ToolbarPanel::onParamsChanged(wxSpinEvent& event)
 	stage->SetLayoutInfo(m_row->GetValue(), 
 		m_col->GetValue(), m_edge->GetValue());
 	stage->UpdateAllSpritesLocation();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void ToolbarPanel::onLevelChanged(wxCommandEvent& event)

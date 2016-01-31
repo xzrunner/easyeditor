@@ -12,7 +12,7 @@ class StagePanel3D : public libsketch::StagePanel
 {
 public:
 	StagePanel3D(wxWindow* parent, wxTopLevelWindow* frame,
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 
 	void SetShader(Shader* shader) {
 		m_shader = shader;

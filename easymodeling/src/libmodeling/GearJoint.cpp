@@ -11,12 +11,12 @@ GearJoint::GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2)
 {
 }
 
-bool GearJoint::isContain(const d2d::Vector& pos) const
+bool GearJoint::isContain(const ee::Vector& pos) const
 {
 	return joint1->isContain(pos) || joint2->isContain(pos);
 }
 
-bool GearJoint::isIntersect(const d2d::Rect& rect) const
+bool GearJoint::isIntersect(const ee::Rect& rect) const
 {
 	return joint1->isIntersect(rect) || joint2->isIntersect(rect);
 }

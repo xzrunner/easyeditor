@@ -1,6 +1,6 @@
 #include "RectCutLoader.h"
 
-#include <drag2d.h>
+
 #include <easyimage.h>
 
 #include <json/json.h>
@@ -17,17 +17,17 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
 		const Picture& s = pictures[i];
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(s.filepath.ToStdString());
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath.ToStdString());
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 
-		d2d::Vector pos;
+		ee::Vector pos;
 		pos.x = s.src.x + s.src.w * 0.5f;
 		pos.y = s.src.y + s.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
 		sprite->SetTransform(pos, sprite->GetAngle());
 
-		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 
 		sprite->Release();
 		symbol->Release();
@@ -39,8 +39,8 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	std::vector<Picture> pictures;
 	LoadJsonFile(pack_file, img_name, pictures);
 
-	std::string dir = d2d::FileHelper::GetFileDir(pack_file);
-	d2d::ImageData* img = d2d::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
+	std::string dir = ee::FileHelper::GetFileDir(pack_file);
+	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
 
 	eimage::ImageClip clip(*img);
 	for (int i = 0, n = pictures.size(); i < n; ++i)
@@ -48,25 +48,25 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 		const Picture& pic = pictures[i];
 		const uint8_t* pixels = clip.Clip(pic.dst.x, pic.dst.x + pic.dst.w, 1024 - pic.dst.y - pic.dst.h, 1024 - pic.dst.y);
 
-		d2d::ImageData* img_data = new d2d::ImageData(pixels, pic.dst.w, pic.dst.h, 4);
-		d2d::Image* spr_img = new d2d::Image(img_data);
-		d2d::ImageSymbol* spr_symbol = new d2d::ImageSymbol(spr_img, "test");
-		d2d::ImageSprite* spr_sprite = new d2d::ImageSprite(spr_symbol);
+		ee::ImageData* img_data = new ee::ImageData(pixels, pic.dst.w, pic.dst.h, 4);
+		ee::Image* spr_img = new ee::Image(img_data);
+		ee::ImageSymbol* spr_symbol = new ee::ImageSymbol(spr_img, "test");
+		ee::ImageSprite* spr_sprite = new ee::ImageSprite(spr_symbol);
 
 		float angle = 0;
 		if (pic.src.h != pic.dst.h) {
 			assert(pic.src.h == pic.dst.w);
-			angle = -d2d::PI * 0.5f;
+			angle = -ee::PI * 0.5f;
 		}
 
-		d2d::Vector pos;
+		ee::Vector pos;
 		pos.x = pic.src.x + pic.src.w * 0.5f;
 		pos.y = pic.src.y + pic.src.h * 0.5f;
 		pos.x += 400;
 		pos.y += 400;
 		spr_sprite->SetTransform(pos, angle);
 
-		d2d::InsertSpriteSJ::Instance()->Insert(spr_sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(spr_sprite);
 
 		img_data->Release();
 		spr_sprite->Release();
@@ -83,19 +83,19 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 ////	LoadJsonFile(pack_file, img_name, pictures);
 //	LoadRRPFile(pack_file, 5837, pictures);
 //
-//	std::string dir = d2d::FileHelper::getFileDir(pack_file);
-//	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
+//	std::string dir = ee::FileHelper::getFileDir(pack_file);
+//	ee::Image* img = ee::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
 //
 ////	eimage::ImageClip clip(*img_data);
-//	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+//	ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
 //	for (int i = 0, n = pictures.size(); i < n; ++i)
 //	{
 //		const Picture& pic = pictures[i];
-//		d2d::Rect r_src, r_dst;
-//		r_src.combine(d2d::Vector(pic.src.x, pic.src.y));
-//		r_src.combine(d2d::Vector(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
-//		r_dst.combine(d2d::Vector(pic.dst.x, pic.dst.y));
-//		r_dst.combine(d2d::Vector(pic.dst.x+pic.dst.w, pic.dst.y+pic.dst.h));
+//		ee::Rect r_src, r_dst;
+//		r_src.combine(ee::Vector(pic.src.x, pic.src.y));
+//		r_src.combine(ee::Vector(pic.src.x+pic.src.w, pic.src.y+pic.src.h));
+//		r_dst.combine(ee::Vector(pic.dst.x, pic.dst.y));
+//		r_dst.combine(ee::Vector(pic.dst.x+pic.dst.w, pic.dst.y+pic.dst.h));
 //		dtex->AddImageWithRegion(img, r_src, r_dst, pic.src.h != pic.dst.h);
 //	}
 //	dtex->EndImageWithRegion();

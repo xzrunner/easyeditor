@@ -4,8 +4,8 @@ namespace ecomplex
 {
 
 PreviewStage::PreviewStage(wxWindow* parent, wxTopLevelWindow* frame, 
-						   d2d::PlayControl& control)
-	: d2d::EditPanel(parent, frame)
+						   ee::PlayControl& control)
+	: ee::EditPanel(parent, frame)
 	, m_control(control)
 {
 }

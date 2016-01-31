@@ -17,8 +17,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	ee::SymbolMgr::Instance()->clear();
+	ee::BitmapMgr::Instance()->clear();
 	delete m_root;
 }
 
@@ -43,7 +43,7 @@ void Task::clear()
 	m_stage->clear();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const ee::EditPanel* Task::getEditPanel() const
 {
 	return m_stage;
 }
@@ -56,7 +56,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 {
 	library = m_library = new LibraryPanel(leftHorizontalSplitter);
 
-	property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	property = m_property = new ee::PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent);
 

@@ -1,17 +1,17 @@
 #ifndef _SG_LIBRARY_PAGE_H_
 #define _SG_LIBRARY_PAGE_H_
 
-#include <drag2d.h>
+
 
 namespace sg
 {
 
-class LibraryPage : public d2d::ILibraryPage
+class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(wxWindow* parent, const char* name);
 
-	virtual bool IsHandleSymbol(d2d::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
 
 }; // LibraryPage 
 

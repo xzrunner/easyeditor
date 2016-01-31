@@ -6,23 +6,23 @@ namespace libsketch
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(GetStageImpl())
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiSpritesImpl(GetStageImpl())
 {
 	StageCanvas* canvas = new StageCanvas(this, GetStageImpl(), this, library);
 	SetCanvas(canvas);
 
 	SetEditOP(new ArrangeSpriteOP(this));
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
+	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::RemoveSpriteSJ::Instance());
-	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::RemoveSpriteSJ::Instance());
+	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type, 
+void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type, 
 								 bool order) const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -48,36 +48,36 @@ vec3 StagePanel::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+	ee::MultiSpritesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
-	case d2d::MSG_INSERT_SPRITE:
-		Insert(((d2d::InsertSpriteSJ::Params*)ud)->spr);
+	case ee::MSG_INSERT_SPRITE:
+		Insert(((ee::InsertSpriteSJ::Params*)ud)->spr);
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::Sprite*)ud);
+	case ee::MSG_REMOVE_SPRITE:
+		Remove((ee::Sprite*)ud);
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		Clear();
 		break;
 	}
 }
 
-void StagePanel::Insert(d2d::Sprite* spr)
+void StagePanel::Insert(ee::Sprite* spr)
 {
 	spr->Retain();
 	m_sprites.push_back(spr);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(d2d::Sprite* spr)
+void StagePanel::Remove(ee::Sprite* spr)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (m_sprites[i] == spr) {
 			spr->Release();
 			m_sprites.erase(m_sprites.begin() + i);
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			return;
 		}
 	}
@@ -89,7 +89,7 @@ void StagePanel::Clear()
 		m_sprites[i]->Release();
 	}
 	m_sprites.clear();
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

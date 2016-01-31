@@ -7,8 +7,8 @@ namespace libshape
 {
 
 EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const wxString& name,
-									 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl)
-	: d2d::AbstractEditCMPT(parent, name, editPanel->GetStageImpl())
+									 ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl)
+	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 	, m_shapesImpl(shapesImpl)
 	, m_simplifySpin(NULL)
 	, m_btnMerge(NULL)
@@ -19,7 +19,7 @@ EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const wxString& name,
 void EditPolylinesCMPT::updateControlValue()
 {
 	bool valid;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::CountVerifyVisitor(valid, 2));
+	m_shapesImpl->GetShapeSelection()->Traverse(ee::CountVerifyVisitor(valid, 2));
 	m_btnMerge->Enable(valid);
 }
 
@@ -28,7 +28,7 @@ float EditPolylinesCMPT::getSimplifyThreshold() const
 	return m_simplifySpin->GetValue() * 0.1f;
 }
 
-wxSizer* EditPolylinesCMPT::initLayout()
+wxSizer* EditPolylinesCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -95,33 +95,33 @@ void EditPolylinesCMPT::onUpdateFromSimplified(wxCommandEvent& event)
 
 void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 {
-	std::vector<d2d::Shape*> shapes;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::Shape>(shapes));
+	std::vector<ee::Shape*> shapes;
+	m_shapesImpl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 	if (shapes.size() == 2)
 	{
 		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
 			*chain1 = static_cast<ChainShape*>(shapes[1]);
 
-		std::vector<d2d::Vector> merged;
+		std::vector<ee::Vector> merged;
 		Math::mergeTwoChains(*chain0, *chain1, merged);
 
 		chain0->Load(merged);
 		chain0->refresh();
-		d2d::RemoveShapeSJ::Instance()->Remove(chain1);
+		ee::RemoveShapeSJ::Instance()->Remove(chain1);
 		m_shapesImpl->GetShapeSelection()->Clear();
 
 		m_shapesImpl->GetShapeSelection()->Clear();
 
 		m_btnMerge->Enable(false);
 
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 {
-	std::vector<d2d::Shape*> shapes;
-	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::Shape>(shapes));
+	std::vector<ee::Shape*> shapes;
+	m_shapesImpl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 
 	float leftmost = FLT_MAX;
 	std::vector<ChainShape*> chains;
@@ -136,12 +136,12 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 		}
 	}
 
-	const d2d::Vector offset(-leftmost, 0.0f);
+	const ee::Vector offset(-leftmost, 0.0f);
 	for (size_t i = 0, n = chains.size(); i < n; ++i) {
 		chains[i]->Translate(offset);
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

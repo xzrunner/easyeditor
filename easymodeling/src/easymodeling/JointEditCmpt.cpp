@@ -8,22 +8,22 @@
 using namespace emodeling;
 
 JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name, 
-							 StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel->GetStageImpl())
+							 StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
-	d2d::ArrangeSpriteConfig cfg;
+	ee::ArrangeSpriteConfig cfg;
 	cfg.is_auto_align_open = false;
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new d2d::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, this, cfg);
+	m_editOP = new ee::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, this, cfg);
 	static_cast<SelectJointOP*>(m_editOP)->SetPropertyPanel(propertyPanel);
 }
 
 void JointEditCmpt::updateControlValue()
 {
-	d2d::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
+	ee::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
 
 	if (selection->Size() != 2)
 		m_btnOK->Enable(false);
@@ -35,7 +35,7 @@ void JointEditCmpt::updateControlValue()
 			if (op->jointSelection.Size() == 2)
 			{
 				std::vector<libmodeling::Joint*> joints;
-				op->jointSelection.Traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
+				op->jointSelection.Traverse(ee::FetchAllVisitor<libmodeling::Joint>(joints));
 				const libmodeling::Joint *j0 = joints[0], *j1 = joints[1];
 				if ((j0->type == libmodeling::Joint::e_revoluteJoint || j0->type == libmodeling::Joint::e_prismaticJoint) &&
 					(j1->type == libmodeling::Joint::e_revoluteJoint || j1->type == libmodeling::Joint::e_prismaticJoint))
@@ -51,7 +51,7 @@ void JointEditCmpt::updateControlValue()
 	}
 }
 
-wxSizer* JointEditCmpt::initLayout()
+wxSizer* JointEditCmpt::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	{
@@ -93,9 +93,9 @@ wxSizer* JointEditCmpt::initLayout()
 
 void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 {
-	std::vector<d2d::Sprite*> sprites;
-	d2d::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
-	selection->Traverse(d2d::FetchAllVisitor<d2d::Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	ee::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
+	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	assert(sprites.size() == 2);
 	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->GetUserData()),
 		*body1 = static_cast<libmodeling::Body*>(sprites[1]->GetUserData());
@@ -115,7 +115,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 		SelectJointOP* op = static_cast<SelectJointOP*>(m_editOP);
 		assert(op->jointSelection.Size() == 2);
 		std::vector<libmodeling::Joint*> joints;
-		op->jointSelection.Traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
+		op->jointSelection.Traverse(ee::FetchAllVisitor<libmodeling::Joint>(joints));
 		m_stage_panel->insertJoint(new libmodeling::GearJoint(body0, body1, joints[0], joints[1]));
 	}	
 	else if (type == wxT("Wheel"))
@@ -138,7 +138,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	else if (type == wxT("Motor"))
 		m_stage_panel->insertJoint(new libmodeling::MotorJoint(body0, body1));
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void JointEditCmpt::onTypeChanged(wxCommandEvent& event)
@@ -154,11 +154,11 @@ JointEditCmpt::SelectWheelDialog::
 SelectWheelDialog(wxWindow* parent, const wxString& title, const wxString& body0, const wxString& body1)
 	: wxDialog(parent, wxID_ANY, title)
 {
-	initLayout(body0, body1);
+	InitLayout(body0, body1);
 }
 
 void JointEditCmpt::SelectWheelDialog::
-initLayout(const wxString& body0, const wxString& body1)
+InitLayout(const wxString& body0, const wxString& body1)
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);	
 	{

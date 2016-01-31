@@ -1,12 +1,12 @@
 #ifndef _EASYIMAGE_RELIEF_SHADER_H_
 #define _EASYIMAGE_RELIEF_SHADER_H_
 
-#include <drag2d.h>
+
 
 namespace eimage
 {
 
-class ReliefShader : public d2d::SpriteShader
+class ReliefShader : public ee::SpriteShader
 {
 public:
 	ReliefShader();

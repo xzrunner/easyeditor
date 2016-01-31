@@ -10,14 +10,14 @@
 namespace libshape
 {
 
-void Paskage::packShape(d2d::Shape* shape, std::ofstream& fout)
+void Paskage::packShape(ee::Shape* shape, std::ofstream& fout)
 {
 	if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
 	{
 		int type = e_polygon;
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-		const std::vector<d2d::Vector>& vertices = poly->GetVertices();
+		const std::vector<ee::Vector>& vertices = poly->GetVertices();
 		int size = vertices.size();
 		fout.write(reinterpret_cast<const char*>(&size), sizeof(int));
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)

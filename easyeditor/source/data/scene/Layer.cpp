@@ -3,13 +3,12 @@
 #include "SymbolSearcher.h"
 #include "SymbolMgr.h"
 #include "SpriteFactory.h"
+#include "StringHelper.h"
+#include "FileHelper.h"
+#include "Exception.h"
+#include "FetchAllVisitor.h"
 
-#include "common/StringTools.h"
-#include "common/visitors.h"
-#include "common/FileNameTools.h"
-#include "common/Exception.h"
-
-namespace d2d
+namespace ee
 {
 
 Layer::Layer()
@@ -25,7 +24,7 @@ Layer::~Layer()
 	Clear();
 }
 
-void Layer::TraverseSprite(IVisitor& visitor, DataTraverseType type, bool order) const
+void Layer::TraverseSprite(Visitor& visitor, DataTraverseType type, bool order) const
 {
 	if (type == DT_EDITABLE && editable ||
 		type == DT_VISIBLE && visible ||
@@ -49,7 +48,7 @@ bool Layer::Remove(Sprite* sprite)
 	return m_sprites.Remove(sprite);
 }
 
-void Layer::TraverseShape(IVisitor& visitor, bool order) const
+void Layer::TraverseShape(Visitor& visitor, bool order) const
 {
 	m_shapes.Traverse(visitor, order);
 }
@@ -117,8 +116,8 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 		Sprite* spr = sprites[i];
 
 		Json::Value spr_val;
-		spr_val["filepath"] = FileHelper::getRelativePath(dir,
-			spr->GetSymbol().GetFilepath()).ToStdString();
+		spr_val["filepath"] = FileHelper::GetRelativePath(dir,
+			spr->GetSymbol().GetFilepath());
 		spr->Store(spr_val);
 
 		val["sprite"][i] = spr_val;

@@ -21,16 +21,16 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	void translasteNode(const d2d::Vector& offset);
-	void rotateNode(const d2d::Vector& dst);
+	void translasteNode(const ee::Vector& offset);
+	void rotateNode(const ee::Vector& dst);
 
 private:
 	StagePanel* m_stage;
 
-	d2d::Vector m_lastPos;
+	ee::Vector m_lastPos;
 
 	bool m_bRightPress;
-	d2d::Vector m_center;
+	ee::Vector m_center;
 
 	bool m_selCenter;
 

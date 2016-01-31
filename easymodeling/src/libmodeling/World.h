@@ -2,14 +2,14 @@
 #ifndef LIBMODELING_WORLD_H
 #define LIBMODELING_WORLD_H
 
-#include <drag2d.h>
+
 
 namespace libmodeling
 {
 	class World
 	{
 	public:
-		d2d::Vector gravity;
+		ee::Vector gravity;
 		bool allowSleep;
 
 		bool warmStarting;

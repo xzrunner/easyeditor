@@ -4,7 +4,7 @@ namespace eterrain3d
 {
 
 Frame::Frame(const wxString& title)
-	: d2d::Frame(title, "")
+	: ee::Frame(title, "")
 {
 #ifdef _DEBUG
 	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));

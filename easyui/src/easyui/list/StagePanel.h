@@ -1,7 +1,7 @@
 #ifndef _EASYUI_LIST_STAGE_PANEL_H_
 #define _EASYUI_LIST_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 #include "UIList.h"
 #include "UIStagePage.h"
@@ -16,17 +16,17 @@ namespace list
 
 class ToolbarPanel;
 
-class StagePanel : public UIStagePage, public d2d::MultiSpritesImpl
+class StagePanel : public UIStagePage, public ee::MultiSpritesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx,
 		TopPannels* top_pannels);
 
 	//
-	// d2d::MultiSpritesImpl interface
+	// ee::MultiSpritesImpl interface
 	//
-	virtual void TraverseSprites(d2d::Visitor& visitor, 
-		d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual void TraverseSprites(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	//
 	// UIStagePage interface

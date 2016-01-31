@@ -3,7 +3,7 @@
 
 #include "IPackNode.h"
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -24,25 +24,25 @@ class PackShape : public IPackNode
 public:
 	ShapeType type;
 
-	d2d::Colorf color;
+	ee::Colorf color;
 
-	std::vector<d2d::Vector> vertices;
+	std::vector<ee::Vector> vertices;
 
 public:
 	PackShape() {}
 	PackShape(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp, float scale) const;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<d2d::Image*>& images);
+		const std::vector<ee::Image*>& images);
 
 	virtual int SizeOfPackToBin() const;
 	virtual void PackToBin(uint8_t** ptr,
-		const d2d::TexturePacker& tp, float scale) const;
+		const ee::TexturePacker& tp, float scale) const;
 	virtual int SizeOfUnpackFromBin() const;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<d2d::Image*>& images);
+		const std::vector<ee::Image*>& images);
 
 }; // PackShape
 

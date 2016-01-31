@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN2D_MOVE_TEXCOORDS_CMPT_H_
 #define _EASYTERRAIN2D_MOVE_TEXCOORDS_CMPT_H_
 
-#include <drag2d.h>
+
 
 namespace eterrain2d
 {
@@ -9,7 +9,7 @@ namespace eterrain2d
 class StagePanel;
 class OceanMesh;
 
-class MoveTexcoordsCMPT : public d2d::AbstractEditCMPT
+class MoveTexcoordsCMPT : public ee::EditCMPT
 {
 public:
 	MoveTexcoordsCMPT(wxWindow* parent, const wxString& name,
@@ -18,7 +18,7 @@ public:
 	void SetControlersValue(const OceanMesh* ocean);
 
 protected:
-	virtual wxSizer* initLayout();
+	virtual wxSizer* InitLayout();
 
 private:
 	void OnOpenMoveChanged(wxCommandEvent& event);

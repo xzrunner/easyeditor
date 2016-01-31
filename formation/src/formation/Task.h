@@ -1,7 +1,7 @@
 #ifndef FORMATION_TASK_H
 #define FORMATION_TASK_H
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace formation

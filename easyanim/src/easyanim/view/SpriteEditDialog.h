@@ -1,7 +1,7 @@
 #pragma once
 
 #include <wx/wx.h>
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -25,7 +25,7 @@ namespace eanim
 
 	private:
 		Sprite* m_sprite;
-		d2d::EditPanel* m_editPanel;
+		ee::EditPanel* m_editPanel;
 
 		wxButton *m_btnMerge, *m_btnSeparate;
 

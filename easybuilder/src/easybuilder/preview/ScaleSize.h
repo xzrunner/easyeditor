@@ -4,7 +4,7 @@
 
 #include "Behavior.h"
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {	
@@ -13,12 +13,12 @@ namespace ebuilder
 		class ScaleSize : public Behavior
 		{
 		public:
-			ScaleSize(d2d::ISprite* sprite, float scale);
+			ScaleSize(ee::ISprite* sprite, float scale);
 
 			virtual void trigger();
 
 		private:
-			d2d::ISprite* m_sprite;
+			ee::ISprite* m_sprite;
 
 			float m_scale;
 

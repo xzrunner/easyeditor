@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "BoundingBox.h"
 
-namespace d2d
+namespace ee
 {
 
 float get_spr_left(const Sprite* spr)

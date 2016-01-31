@@ -37,15 +37,15 @@ void PackEPT::Run(int argc, char* argv[])
 void PackEPT::Trigger(const std::string& tp_json, const std::string& tp_dir, 
 					  const std::string& out_file, librespacker::TextureType type)
 {
-	d2d::TexturePacker tp(tp_dir);
+	ee::TexturePacker tp(tp_dir);
 
 	// load tp data
 	int i = 1;
 	while (true) {
-		std::string tp_path = tp_json + d2d::StringHelper::ToString(i) + ".json";
-		if (d2d::FileHelper::IsFileExist(tp_path)) {
+		std::string tp_path = tp_json + ee::StringHelper::ToString(i) + ".json";
+		if (ee::FileHelper::IsFileExist(tp_path)) {
 			tp.Add(tp_path);
-			d2d::TextureFactory::Instance()->AddTextureFromConfig(tp_path);
+			ee::TextureFactory::Instance()->AddTextureFromConfig(tp_path);
 		} else {
 			break;
 		}

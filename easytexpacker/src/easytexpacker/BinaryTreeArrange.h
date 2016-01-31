@@ -11,7 +11,7 @@ namespace etexpacker
 		BinaryTreeArrange();
 		virtual ~BinaryTreeArrange();
 
-		virtual void arrange(const std::vector<d2d::ImageSprite*>& sprites);
+		virtual void arrange(const std::vector<ee::ImageSprite*>& sprites);
 		virtual int GetTextureAccount() const { return 1; }
 
 	private:
@@ -21,13 +21,13 @@ namespace etexpacker
 		struct Node
 		{
 			Node* child[2];
-			d2d::Sprite* texture;
-			d2d::Rect rc;
+			ee::Sprite* texture;
+			ee::Rect rc;
 
 			Node();
 			~Node();
 
-			Node* insert(d2d::ImageSprite* sprite, int flag);
+			Node* insert(ee::ImageSprite* sprite, int flag);
 		};
 
 		static const int REINSERT_MAX = 128;

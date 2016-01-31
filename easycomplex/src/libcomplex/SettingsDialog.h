@@ -1,18 +1,18 @@
 #ifndef _EASYCOMPLEX_SETTINGS_DIALOG_H_
 #define _EASYCOMPLEX_SETTINGS_DIALOG_H_
 
-#include <drag2d.h>
+
 
 namespace ecomplex
 {
 
-class SettingsDialog : public d2d::SettingsDialog
+class SettingsDialog : public ee::SettingsDialog
 {
 public:
 	SettingsDialog(wxWindow* parent);
 
 private:
-	void initLayout();
+	void InitLayout();
 
 	wxSizer* initViewPanel();
 

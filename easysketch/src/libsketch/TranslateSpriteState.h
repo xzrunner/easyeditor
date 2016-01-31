@@ -13,7 +13,7 @@ class StagePanel;
 class TranslateSpriteState : public IEditState
 {
 public:
-	TranslateSpriteState(StagePanel* stage, const d2d::SpriteSelection& selection);
+	TranslateSpriteState(StagePanel* stage, const ee::SpriteSelection& selection);
 
 	virtual void OnMousePress(const ivec2& pos);
 	virtual void OnMouseRelease(const ivec2& pos);
@@ -23,12 +23,12 @@ private:
 	void Translate(const ivec2& first, const ivec2& curr);
 
 private:
-	class Visitor : public d2d::Visitor
+	class Visitor : public ee::Visitor
 	{
 	public:
 		Visitor(StagePanel* stage, const ivec2& last, const ivec2& curr) 
 			: m_stage(stage), m_last(last), m_curr(curr) {}
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 	private:
 		StagePanel* m_stage;
 		ivec2 m_last, m_curr;
@@ -37,7 +37,7 @@ private:
 
 private:
 	StagePanel* m_stage;
-	const d2d::SpriteSelection& m_selection;
+	const ee::SpriteSelection& m_selection;
 
 	ivec2 m_first_pos, m_last_pos;
 

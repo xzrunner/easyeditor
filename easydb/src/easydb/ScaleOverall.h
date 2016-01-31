@@ -18,7 +18,7 @@ public:
 	ScaleOverall() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;
@@ -28,17 +28,17 @@ public:
 	static ICommand* Create() { return new ScaleOverall(); }
 
 private:
-	void Scale(d2d::Snapshoot& ss, const std::string& dir, float scale) const;
+	void Scale(ee::Snapshoot& ss, const std::string& dir, float scale) const;
 
-	void ScaleImage(const std::string& filepath, float scale, d2d::Snapshoot& ss,
-		std::map<std::string, d2d::Vector>& mapImg2Center) const;
+	void ScaleImage(const std::string& filepath, float scale, ee::Snapshoot& ss,
+		std::map<std::string, ee::Vector>& mapImg2Center) const;
 	void ScaleComplex(const std::string& filepath, float scale,
-		const std::map<std::string, d2d::Vector>& mapImg2Center) const;
+		const std::map<std::string, ee::Vector>& mapImg2Center) const;
 	void ScaleAnim(const std::string& filepath, float scale,
-		const std::map<std::string, d2d::Vector>& mapImg2Center) const;
+		const std::map<std::string, ee::Vector>& mapImg2Center) const;
 
-	d2d::Vector GetScaledPos(Json::Value& sprite_val, float scale, 
-		const d2d::Vector& img_offset) const;
+	ee::Vector GetScaledPos(Json::Value& sprite_val, float scale, 
+		const ee::Vector& img_offset) const;
 
 }; // ScaleOverall
 

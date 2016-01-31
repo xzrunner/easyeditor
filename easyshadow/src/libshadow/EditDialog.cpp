@@ -14,7 +14,7 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
-					   Sprite* edited, const d2d::MultiSpritesImpl* sprite_impl)
+					   Sprite* edited, const ee::MultiSpritesImpl* sprite_impl)
 	: wxDialog(parent, wxID_ANY, "Edit Shadow", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_symbol(NULL)
 	, m_stage(NULL)
@@ -29,7 +29,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 
 	InitLayout(glctx, edited, sprite_impl);
 
-	d2d::SetWndDirtySJ::Instance()->SetDirty();
+	ee::SetWndDirtySJ::Instance()->SetDirty();
 }
 
 EditDialog::~EditDialog()
@@ -39,8 +39,8 @@ EditDialog::~EditDialog()
 	}
 }
 
-void EditDialog::InitLayout(wxGLContext* glctx, d2d::Sprite* edited, 
-							const d2d::MultiSpritesImpl* sprite_impl)
+void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, 
+							const ee::MultiSpritesImpl* sprite_impl)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(this);
 
@@ -62,14 +62,14 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	d2d::ConfirmDialog dlg(this);
+	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
 		const std::string& filepath = m_symbol->GetFilepath();
 //			FileSaver::Store(filepath, m_symbol);
 		m_symbol->RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)
@@ -79,15 +79,15 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 }
 
-void EditDialog::InitCamera(d2d::Camera* cam, d2d::Sprite* spr) const
+void EditDialog::InitCamera(ee::Camera* cam, ee::Sprite* spr) const
 {
-	d2d::Rect r = spr->GetRect();
+	ee::Rect r = spr->GetRect();
 
 	wxSize sz = GetSize();
 	float scale = std::min(sz.GetWidth() / r.Width(), sz.GetHeight() / r.Height());
 	cam->SetScale(1 / scale);
 
-	cam->SetPosition(d2d::Vector(0, 0));
+	cam->SetPosition(ee::Vector(0, 0));
 }
 
 }

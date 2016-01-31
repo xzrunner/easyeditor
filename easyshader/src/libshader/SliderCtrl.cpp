@@ -8,7 +8,7 @@ namespace eshader
 SliderCtrl::SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name, 
 					   Shader* shader, Uniform* uniform, 
 					   const std::vector<SliderItemInt>& items, float slider_accuracy,
-					   d2d::IStageCanvas* canvas)
+					   ee::StageCanvas* canvas)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
 	, m_slider_accuracy(slider_accuracy)
@@ -22,7 +22,7 @@ SliderCtrl::SliderCtrl(wxPanel* parent, const std::string& title, const std::str
 SliderCtrl::SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name, 
 					   Shader* shader, Uniform* uniform, 
 					   const std::vector<SliderItemFloat>& items, float slider_accuracy,
-					   d2d::IStageCanvas* canvas)
+					   ee::StageCanvas* canvas)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
 	, m_slider_accuracy(slider_accuracy)
@@ -129,10 +129,10 @@ void SliderCtrl::UpdateUniformValue()
 		break;
 	}
 
-	d2d::ShaderMgr::Instance()->sprite();
+	ee::ShaderMgr::Instance()->sprite();
 	m_uniform->Load();
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

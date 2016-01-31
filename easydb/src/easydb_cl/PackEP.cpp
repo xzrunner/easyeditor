@@ -5,7 +5,7 @@
 
 #include <glfw.h>
 
-#include <drag2d.h>
+
 #include <easyrespacker.h>
 
 namespace edb
@@ -54,7 +54,7 @@ void PackEP::Run(int argc, char *argv[])
 			return;
 		}
 
-		d2d::ShaderMgr::Instance()->reload();
+		ee::ShaderMgr::Instance()->reload();
 	}
 
 // 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], LOD, scale);

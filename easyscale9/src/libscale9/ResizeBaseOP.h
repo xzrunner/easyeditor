@@ -1,15 +1,15 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
 	class Symbol;
 
-	class ResizeBaseOP : public d2d::ZoomViewOP
+	class ResizeBaseOP : public ee::ZoomViewOP
 	{
 	public:
-		ResizeBaseOP(wxWindow* wnd, d2d::EditPanelImpl* stage, Symbol* symbol);
+		ResizeBaseOP(wxWindow* wnd, ee::EditPanelImpl* stage, Symbol* symbol);
 
 		virtual bool OnMouseLeftDown(int x, int y);
 		virtual bool OnMouseLeftUp(int x, int y);
@@ -39,9 +39,9 @@ namespace escale9
 	private:
 		mutable Symbol* m_symbol;
 
-		d2d::Vector m_firstPos;
+		ee::Vector m_firstPos;
 
-		d2d::ShapeStyle m_style;
+		ee::ShapeStyle m_style;
 
 	}; // ResizeBaseOP
 }

@@ -8,25 +8,25 @@ namespace ecomplex
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Complex"))
+	: ee::LibraryPage(parent, wxT("Complex"))
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
 bool LibraryPage::LoadFromConfig()
 {
-	return ILibraryPage::LoadFromConfig("library_complex");
+	return LibraryPage::LoadFromConfig("library_complex");
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	std::string tag = d2d::FileType::GetTag(d2d::FileType::e_complex);
+	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
 	std::string filter = "*_" + tag + ".json";
 	filter += ";*_" + tag + "[gen].json";
 	filter += "; *.lua";
@@ -40,15 +40,15 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			std::string filename = filenames[i].ToStdString();
 			std::string type = filename.substr(filename.find_last_of(".") + 1);
-			d2d::StringHelper::ToLower(type);
+			ee::StringHelper::ToLower(type);
 			try {
 				if (type == "json") {
 					loadFromJsonFile(filename);
 				} else if (type == "lua") {
 					loadFromLuaFile(filename);
 				}
-			} catch (d2d::Exception& e) {
-				d2d::ExceptionDlg dlg(m_parent, e);
+			} catch (ee::Exception& e) {
+				ee::ExceptionDlg dlg(m_parent, e);
 				dlg.ShowModal();
 			}
 		}
@@ -57,7 +57,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 
 void LibraryPage::loadFromJsonFile(const std::string& filename)
 {
-	d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
+	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
 	m_list->Insert(symbol);
 	symbol->Release();
@@ -73,7 +73,7 @@ void LibraryPage::loadFromLuaFile(const std::string& filename)
 // 	parser.parser(filename);
 // 	parser.transToMemory(texfilenames);
 // 
-// 	std::vector<d2d::Symbol*> symbols;
+// 	std::vector<ee::Symbol*> symbols;
 // 	parser.getAllSymbols(symbols);
 // 	for (int i = 0, n = symbols.size(); i < n; ++i)
 // 		if (IsHandleSymbol(symbols[i]))

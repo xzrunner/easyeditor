@@ -30,7 +30,7 @@ namespace love2d
 
 		std::vector<SceneItem*> scenes;
 		Context::Instance()->library->getSceneList()->traverse(
-			d2d::FetchAllVisitor<SceneItem>(scenes));
+			ee::FetchAllVisitor<SceneItem>(scenes));
 
 		for (size_t i = 0, n = scenes.size(); i < n; ++i)
 			insertPage(*scenes[i]);
@@ -88,7 +88,7 @@ namespace love2d
 			// scenes
 			std::vector<SceneItem*> scenes;
 			Context::Instance()->library->getSceneList()->traverse(
-				d2d::FetchAllVisitor<SceneItem>(scenes));
+				ee::FetchAllVisitor<SceneItem>(scenes));
 
 			// require("Scene")
 			std::string firstScene;
@@ -354,7 +354,7 @@ namespace love2d
 				std::string ex, ey;
 				transCoords(move->end, ex, ey);
 
-				const float duration = d2d::Math::getDistance(move->start, move->end) / move->speed;
+				const float duration = ee::Math::getDistance(move->start, move->end) / move->speed;
 				std::string _duration = wxString::FromDouble(duration, 1);
 
 				// vector(sx, sy)
@@ -376,8 +376,8 @@ namespace love2d
 
 				Rotate* rotate = static_cast<Rotate*>(behavior);
 
-				std::string start = wxString::FromDouble(rotate->start*180/d2d::PI, 1);
-				std::string end = wxString::FromDouble(rotate->end*180/d2d::PI, 1);
+				std::string start = wxString::FromDouble(rotate->start*180/ee::PI, 1);
+				std::string end = wxString::FromDouble(rotate->end*180/ee::PI, 1);
 
 				const float duration = fabs(rotate->end - rotate->start) / rotate->speed;
 				std::string _duration = wxString::FromDouble(duration, 1);
@@ -393,7 +393,7 @@ namespace love2d
 
 	std::string Builder::buildImage(const std::string& filepath, SceneContent& content)
 	{
-		std::string filename = "\"media/"+d2d::FilenameTools::getRelativePath(Game::DLG_PATH, filepath)+"\"";
+		std::string filename = "\"media/"+ee::FilenameTools::getRelativePath(Game::DLG_PATH, filepath)+"\"";
 
 		// loadImage(filename)
 		std::string loadImg = lua::call("", "loadImage", 1, filename.c_str());
@@ -406,7 +406,7 @@ namespace love2d
 		return image;
 	}
 
-	void Builder::transCoords(const d2d::Vector& pos, std::string& x, std::string& y)
+	void Builder::transCoords(const ee::Vector& pos, std::string& x, std::string& y)
 	{
 		float px = pos.x + Game::WIDTH * 0.5f;
 		float py = -pos.y + Game::HEIGHT * 0.5f;

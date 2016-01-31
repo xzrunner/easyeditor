@@ -1,24 +1,24 @@
 #ifndef _EASYTEXTURE_SYMBOL_CONTAINER_H_
 #define _EASYTEXTURE_SYMBOL_CONTAINER_H_
 
-#include <drag2d.h>
+
 
 namespace etexture
 {
 
 class Symbol;
 
-class SymbolContainer : public d2d::IDataContainer
+class SymbolContainer : public ee::DataContainer
 {
 public:
 	SymbolContainer(Symbol* symbol);
 	virtual ~SymbolContainer();
 
 	//
-	// IDataContainer interface
+	// DataContainer interface
 	//
-	virtual void Traverse(d2d::Visitor& visitor, bool order = true) const;
-	virtual void Traverse(d2d::Visitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual void Traverse(ee::Visitor& visitor, bool order = true) const;
+	virtual void Traverse(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 	virtual bool Remove(Object* obj);
 	virtual bool Insert(Object* obj);
 	virtual bool Insert(Object* obj, int idx);

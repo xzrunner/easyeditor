@@ -1,7 +1,7 @@
 #ifndef _LIBRESPACKER_UTILITY_NEW_H_
 #define _LIBRESPACKER_UTILITY_NEW_H_
 
-#include <drag2d.h>
+
 
 namespace librespacker
 {
@@ -9,7 +9,7 @@ namespace librespacker
 class Utility
 {
 public:
-	static bool IsAnchor(const d2d::Sprite* spr);
+	static bool IsAnchor(const ee::Sprite* spr);
 
 	static bool IsNameValid(const std::string& name);
 

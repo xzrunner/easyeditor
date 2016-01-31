@@ -14,7 +14,7 @@ namespace librespacker
 {
 
 void PackToBin::PackEPE(const std::string& filepath, 
-						const d2d::TexturePacker& tp, 
+						const ee::TexturePacker& tp, 
 						bool compress, float scale)
 {
 	PackNodeFactory* factory = PackNodeFactory::Instance();
@@ -99,7 +99,7 @@ void PackToBin::PackEPE(const std::string& filepath,
 	fout.close();
 }
 
-void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& tp, 
+void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp, 
 						TextureType type, int LOD, float scale)
 {
 	std::string ext;
@@ -132,7 +132,7 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		packer = new PackPKM();
 		break;
 	default:
-		throw d2d::Exception("PackToBin::PackEPT unknown type: %d\n", type);
+		throw ee::Exception("PackToBin::PackEPT unknown type: %d\n", type);
 	}
 
 	std::vector<std::string> filenames;
@@ -147,10 +147,10 @@ void PackToBin::PackEPT(const std::string& filepath, const d2d::TexturePacker& t
 		float pack_scale = scale;
 		for (int lod = 0; lod <= LOD; ++lod) 
 		{
-			std::string idx_str = "." + d2d::StringHelper::ToString(i + 1);
+			std::string idx_str = "." + ee::StringHelper::ToString(i + 1);
 			std::string scale_str = "";
 			if (LOD != 0 && pack_scale != 1) {
-				scale_str = "." + d2d::StringHelper::ToString((int)(pack_scale * 100));
+				scale_str = "." + ee::StringHelper::ToString((int)(pack_scale * 100));
 			}
 			std::string fmt_str = ".ept";
 

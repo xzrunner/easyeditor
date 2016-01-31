@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -18,7 +18,7 @@ namespace eanim
 		bool isEmpty() const;
 
 		void insertSprite(Sprite* sprite);
-		bool removeSprite(d2d::ISprite* sprite);
+		bool removeSprite(ee::ISprite* sprite);
 		const std::vector<Sprite*>& getAllSprites() const;
 
 		bool hasClassicTween() const;

@@ -31,7 +31,7 @@ void ExtrudeImg::Trigger(int extrude)
 
 std::string ExtrudeImg::GetFileName() const
 {
-	return d2d::FilenameTools::getFilenameWithExtension(_filename);
+	return ee::FilenameTools::getFilenameWithExtension(_filename);
 }
 
 void ExtrudeImg::Load()
@@ -46,7 +46,7 @@ void ExtrudeImg::Load()
 
 	char* buffer = new char[length];
 	fin.read (buffer,length);
-	_pixels = d2d::ImageLoader::loadData(_filename.c_str(), _width, _height, _format);
+	_pixels = ee::ImageLoader::loadData(_filename.c_str(), _width, _height, _format);
 
 	delete[] buffer;
 }
@@ -127,7 +127,7 @@ void ExtrudeImg::Trim()
 		memcpy(&_trimed[to], &_pixels[from], size);
 	}
 
-// 	std::string outpath = d2d::FilenameTools::getFilePathExceptExtension(_filename) + "_trimed.png";
+// 	std::string outpath = ee::FilenameTools::getFilePathExceptExtension(_filename) + "_trimed.png";
 // 	stbi_write_png(outpath.c_str(), width, height, channels, _trimed, 0);
 
 	stbi_write_png(_filename.c_str(), width, height, channels, _trimed, 0);
@@ -192,7 +192,7 @@ void ExtrudeImg::Extrude(int extrude)
 			memcpy(&_extruded[to+j*channels], &_trimed[from], channels);
 	}
 
-// 	std::string outpath = d2d::FilenameTools::getFilePathExceptExtension(_filename) + "_extrude.png";
+// 	std::string outpath = ee::FilenameTools::getFilePathExceptExtension(_filename) + "_extrude.png";
 // 	stbi_write_png(outpath.c_str(), width, height, channels, _extruded, 0);
 
 	stbi_write_png(_filename.c_str(), width, height, channels, _extruded, 0);

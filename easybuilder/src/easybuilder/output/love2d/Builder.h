@@ -2,7 +2,7 @@
 #ifndef EBUILDER_LOVE2D_BUILDER_H
 #define EBUILDER_LOVE2D_BUILDER_H
 
-#include <drag2d.h>
+
 #include <easybuilder.h>
 
 #include "../CodePageBuilder.h"
@@ -61,7 +61,7 @@ namespace love2d
 			Behavior* behavior, SceneContent& content);
 		std::string buildImage(const std::string& filepath, SceneContent& content);
 
-		static void transCoords(const d2d::Vector& pos, std::string& x, std::string& y);
+		static void transCoords(const ee::Vector& pos, std::string& x, std::string& y);
 		static void transScale(const Actor& actor, std::string& sx, std::string& sy);
 
 	private:

@@ -61,7 +61,7 @@ void WholeSkeleton::storeToTextFile(std::ofstream& fout, const std::vector<Node*
 		sprites[i]->storeToTextFile(fout, nodes, bodies, sprites);
 }
 
-void WholeSkeleton::traverse(d2d::IVisitor& visitor)
+void WholeSkeleton::traverse(ee::IVisitor& visitor)
 {
 	if (m_root) m_root->traverse(visitor);
 }
@@ -71,12 +71,12 @@ void WholeSkeleton::onDraw()
 	if (m_root) m_root->drawPosterity();
 }
 
-void WholeSkeleton::getBounding(d2d::AbstractBV& bounding)
+void WholeSkeleton::getBounding(ee::AbstractBV& bounding)
 {
 	traverse(ComputeBoundingVisitor(bounding));
 }
 
-WholeSkeleton::Sprite* WholeSkeleton::queryByPos(const d2d::Vector& pos)
+WholeSkeleton::Sprite* WholeSkeleton::queryByPos(const ee::Vector& pos)
 {
 	WholeSkeleton::Sprite* sprite = NULL;
 	traverse(PointQueryVisitor(pos, &sprite));
@@ -119,7 +119,7 @@ WholeSkeleton::Node::Node()
 {
 }
 
-WholeSkeleton::Node::Node(const d2d::Vector& p) 
+WholeSkeleton::Node::Node(const ee::Vector& p) 
 	: pos(p) 
 {}
 
@@ -170,20 +170,20 @@ void WholeSkeleton::Body::onDraw() const
 {
 	for (size_t i = 0, n = m_nodes.size(); i < n; ++i)
 	{
-		const d2d::Vector& pos = m_nodes[i]->pos;
-		d2d::PrimitiveDraw::drawRect(pos, NODE_RADIUS * 0.5f, true, 2, d2d::Colorf(1.0f, 0.0f, 0.0f));
-		d2d::PrimitiveDraw::drawCircle(pos, NODE_RADIUS, false, 2, d2d::Colorf(0.0f, 1.0f, 0.0f));
+		const ee::Vector& pos = m_nodes[i]->pos;
+		ee::PrimitiveDraw::drawRect(pos, NODE_RADIUS * 0.5f, true, 2, ee::Colorf(1.0f, 0.0f, 0.0f));
+		ee::PrimitiveDraw::drawCircle(pos, NODE_RADIUS, false, 2, ee::Colorf(0.0f, 1.0f, 0.0f));
 	}
 }
 
-WholeSkeleton::Node* WholeSkeleton::Body::queryNodeByPos(const d2d::Vector& pos)
+WholeSkeleton::Node* WholeSkeleton::Body::queryNodeByPos(const ee::Vector& pos)
 {
 	WholeSkeleton::Node* nearest = NULL;
 	float nearestDis = FLT_MAX;
 
 	for (size_t i = 0, n = m_nodes.size(); i < n; ++i)
 	{
-		float dis = d2d::Math::getDistance(pos, m_nodes[i]->pos);
+		float dis = ee::Math::getDistance(pos, m_nodes[i]->pos);
 		if (dis < nearestDis) 
 		{
 			nearest = m_nodes[i];
@@ -194,7 +194,7 @@ WholeSkeleton::Node* WholeSkeleton::Body::queryNodeByPos(const d2d::Vector& pos)
 	return nearestDis < NODE_RADIUS ? nearest : NULL;
 }
 
-void WholeSkeleton::Body::insertNode(const d2d::Vector& pos)
+void WholeSkeleton::Body::insertNode(const ee::Vector& pos)
 {
 	m_nodes.push_back(new Node(pos));
 }
@@ -229,7 +229,7 @@ WholeSkeleton::Sprite::Sprite()
 	m_parent = NULL;
 }
 
-WholeSkeleton::Sprite::Sprite(Body* body, const d2d::Vector& pos)
+WholeSkeleton::Sprite::Sprite(Body* body, const ee::Vector& pos)
 {
 	m_pos = pos;
 	m_body = body;
@@ -239,7 +239,7 @@ WholeSkeleton::Sprite::Sprite(Body* body, const d2d::Vector& pos)
 }
 
 WholeSkeleton::Sprite::Sprite(const WholeSkeleton::Sprite& sprite, WholeSkeleton::Sprite* parent/* = NULL*/)
-	: d2d::ImageSprite(sprite), m_relativeCoords(sprite.m_relativeCoords)
+	: ee::ImageSprite(sprite), m_relativeCoords(sprite.m_relativeCoords)
 {
 	m_body = sprite.m_body;
 	m_layer = sprite.m_layer;
@@ -317,7 +317,7 @@ void WholeSkeleton::Sprite::storeToTextFile(std::ofstream& fout) const
 	fout << m_relativeCoords.delta << '\n';
 }
 
-void WholeSkeleton::Sprite::traverse(d2d::IVisitor& visitor)
+void WholeSkeleton::Sprite::traverse(ee::IVisitor& visitor)
 {
 	std::queue<Sprite*> buffer;
 	buffer.push(this);
@@ -367,8 +367,8 @@ void WholeSkeleton::Sprite::onDraw() const
 
  	glPushMatrix();
  	glTranslatef(m_pos.x, m_pos.y, 0.0f);
- 	glRotatef(m_angle * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
- 	d2d::SpriteDraw::drawSprite(this);
+ 	glRotatef(m_angle * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
+ 	ee::SpriteDraw::drawSprite(this);
  	m_body->onDraw();
  	glPopMatrix();
 }
@@ -404,9 +404,9 @@ Symbol* WholeSkeleton::Sprite::getSymbol()
 	return m_body->getSymbol();
 }
 
-d2d::Vector WholeSkeleton::Sprite::getNodeWorldCoords(Node* node) const
+ee::Vector WholeSkeleton::Sprite::getNodeWorldCoords(Node* node) const
 {
-	return m_pos + d2d::Math::rotateVector(node->pos, m_angle);
+	return m_pos + ee::Math::rotateVector(node->pos, m_angle);
 }
 
 void WholeSkeleton::Sprite::clear()
@@ -420,8 +420,8 @@ void WholeSkeleton::Sprite::initBounding()
 	const float hWidth = getSymbol()->getWidth() * 0.5f,
 		hHeight = getSymbol()->getHeight() * 0.5f;
 
-	m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
-	d2d::Rect aabb;
+	m_bounding = ee::BVFactory::createBV(ee::e_obb);
+	ee::Rect aabb;
 	aabb.xMin = -hWidth;
 	aabb.xMax = hWidth;
 	aabb.yMin = -hHeight;
@@ -440,11 +440,11 @@ void WholeSkeleton::Sprite::drawBone(const Sprite* bone, const Sprite* curr, con
 		{
 			glPushMatrix();
 		
-			d2d::Vector offset = d2d::Math::rotateVector(curr->m_relativeCoords.from->pos, curr->m_relativeCoords.delta);
+			ee::Vector offset = ee::Math::rotateVector(curr->m_relativeCoords.from->pos, curr->m_relativeCoords.delta);
 			glTranslatef(-offset.x, -offset.y, 0.0f);
 
-			glRotatef(curr->m_relativeCoords.delta * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
-			d2d::SpriteDraw::drawSprite(bone);
+			glRotatef(curr->m_relativeCoords.delta * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
+			ee::SpriteDraw::drawSprite(bone);
 			bone->m_body->onDraw();
 			glPopMatrix();
 
@@ -455,9 +455,9 @@ void WholeSkeleton::Sprite::drawBone(const Sprite* bone, const Sprite* curr, con
 		{
 			++times;
 			glPushMatrix();
-			d2d::Vector offset = d2d::Math::rotateVector(currChild->m_relativeCoords.to->pos - curr->m_relativeCoords.from->pos, curr->m_relativeCoords.delta);
+			ee::Vector offset = ee::Math::rotateVector(currChild->m_relativeCoords.to->pos - curr->m_relativeCoords.from->pos, curr->m_relativeCoords.delta);
 			glTranslatef(offset.x, offset.y, 0.0f);
-			glRotatef(curr->m_relativeCoords.delta * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
+			glRotatef(curr->m_relativeCoords.delta * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
 		}
 	}
 	else
@@ -466,8 +466,8 @@ void WholeSkeleton::Sprite::drawBone(const Sprite* bone, const Sprite* curr, con
 		{
 			glPushMatrix();
 			glTranslatef(bone->getPosition().x, bone->getPosition().y, 0.0f);
-			glRotatef(bone->getAngle() * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
-			d2d::SpriteDraw::drawSprite(bone);
+			glRotatef(bone->getAngle() * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
+			ee::SpriteDraw::drawSprite(bone);
 			bone->m_body->onDraw();
 			glPopMatrix();
 
@@ -478,10 +478,10 @@ void WholeSkeleton::Sprite::drawBone(const Sprite* bone, const Sprite* curr, con
 		{
 			++times;
 			glPushMatrix();
-			d2d::Vector offset = curr->getPosition() + 
-				d2d::Math::rotateVector(currChild->m_relativeCoords.to->pos, curr->getAngle());
+			ee::Vector offset = curr->getPosition() + 
+				ee::Math::rotateVector(currChild->m_relativeCoords.to->pos, curr->getAngle());
 			glTranslatef(offset.x, offset.y, 0.0f);
-			glRotatef(curr->getAngle() * d2d::TRANS_RAD_TO_DEG, 0, 0, 1);
+			glRotatef(curr->getAngle() * ee::TRANS_RAD_TO_DEG, 0, 0, 1);
 		}
 	}
 }
@@ -517,7 +517,7 @@ storeToTextFile(std::ofstream& fout, const std::vector<Node*>& nodes) const
 //////////////////////////////////////////////////////////////////////////
 
 void WholeSkeleton::Sprite::PosterityAbsoluteCoordsVisitor::
-visit(d2d::ICloneable* object, bool& bFetchNext)
+visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	WholeSkeleton::Sprite* bone = static_cast<WholeSkeleton::Sprite*>(object);
 	if (bone->m_parent)
@@ -529,8 +529,8 @@ visit(d2d::ICloneable* object, bool& bFetchNext)
 
 		bone->translate(
 			bone->m_parent->getPosition()
-			+ d2d::Math::rotateVector(bone->m_relativeCoords.to->pos, bone->m_parent->getAngle())
-			- d2d::Math::rotateVector(bone->m_relativeCoords.from->pos, bone->getAngle())
+			+ ee::Math::rotateVector(bone->m_relativeCoords.to->pos, bone->m_parent->getAngle())
+			- ee::Math::rotateVector(bone->m_relativeCoords.from->pos, bone->getAngle())
 			);
 	}
 
@@ -555,7 +555,7 @@ WholeSkeleton::FetchAllBonesVisitor::FetchAllBonesVisitor(std::vector<Sprite*>& 
 {
 }
 
-void WholeSkeleton::FetchAllBonesVisitor::visit(d2d::ICloneable* object, bool& bFetchNext)
+void WholeSkeleton::FetchAllBonesVisitor::visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	WholeSkeleton::Sprite* bone = static_cast<WholeSkeleton::Sprite*>(object);
 	m_bones.push_back(bone);
@@ -571,7 +571,7 @@ WholeSkeleton::DrawVisitor::DrawVisitor()
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-void WholeSkeleton::DrawVisitor::visit(d2d::ICloneable* object, bool& bFetchNext)
+void WholeSkeleton::DrawVisitor::visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	WholeSkeleton::Sprite* bone = static_cast<WholeSkeleton::Sprite*>(object);
 	bone->onDraw();
@@ -582,16 +582,16 @@ void WholeSkeleton::DrawVisitor::visit(d2d::ICloneable* object, bool& bFetchNext
 // class WholeSkeleton::ComputeBoundingVisitor
 //////////////////////////////////////////////////////////////////////////
 
-WholeSkeleton::ComputeBoundingVisitor::ComputeBoundingVisitor(d2d::AbstractBV& bounding)
+WholeSkeleton::ComputeBoundingVisitor::ComputeBoundingVisitor(ee::AbstractBV& bounding)
 	: m_bounding(bounding)
 {
 }
 
-void WholeSkeleton::ComputeBoundingVisitor::visit(d2d::ICloneable* object, bool& bFetchNext)
+void WholeSkeleton::ComputeBoundingVisitor::visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 
-	d2d::Rect aabb;
+	ee::Rect aabb;
 	aabb.xMin = aabb.xMax = sprite->getSymbol()->getWidth() * 0.5f;
 	aabb.yMin = aabb.yMax = sprite->getSymbol()->getHeight() * 0.5f;
 	aabb.xMin = -aabb.xMin;
@@ -608,7 +608,7 @@ void WholeSkeleton::ComputeBoundingVisitor::visit(d2d::ICloneable* object, bool&
 //////////////////////////////////////////////////////////////////////////
 
 WholeSkeleton::PointQueryVisitor::
-PointQueryVisitor(const d2d::Vector& pos, WholeSkeleton::Sprite** pSelected)
+PointQueryVisitor(const ee::Vector& pos, WholeSkeleton::Sprite** pSelected)
 	: m_pos(pos)
 {
 	m_pSelected = pSelected;
@@ -616,7 +616,7 @@ PointQueryVisitor(const d2d::Vector& pos, WholeSkeleton::Sprite** pSelected)
 }
 
 void WholeSkeleton::PointQueryVisitor::
-visit(d2d::ICloneable* object, bool& bFetchNext)
+visit(ee::ICloneable* object, bool& bFetchNext)
 {
 	WholeSkeleton::Sprite* sprite = static_cast<WholeSkeleton::Sprite*>(object);
 	if (sprite->isContain(m_pos))

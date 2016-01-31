@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;..\..\..\..\dtex\src"
+				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;..\..\..\..\dtex\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;..\..\..\..\dtex\src"
+				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;..\..\..\..\dtex\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -261,9 +261,69 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\include\ee\PointMultiQueryVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\PointQueryVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\RectQueryVisitor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\include\ee\Visitor.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="selection"
+				>
+				<File
+					RelativePath="..\..\..\include\ee\ObjSelectionSet.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ObjSelectionSet.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\SelectionSet.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\SelectionSet.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\data\primitive\wrap_SelectionSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\wrap_SelectionSet.h"
+					>
+				</File>
+				<Filter
+					Name="set"
+					>
+					<File
+						RelativePath="..\..\..\source\data\primitive\ShapeSelection.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\ee\ShapeSelection.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\source\data\primitive\SpriteSelection.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\include\ee\SpriteSelection.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -314,6 +374,14 @@
 			Name="common"
 			>
 			<File
+				RelativePath="..\..\..\source\data\common\AnimatedGifSaver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\AnimatedGifSaver.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\data\common\Bitmap.cpp"
 				>
 			</File>
@@ -330,6 +398,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\include\ee\DataTraverseType.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\data\common\KeysState.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\KeysState.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\data\common\ListItem.cpp"
 				>
 			</File>
@@ -338,11 +418,39 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\include\ee\ObjectVector.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\ObjectVector.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\PointerPool.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\include\ee\ResourcesMgr.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\ResourcesMgr.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\data\common\TexPackerAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\TexPackerAdapter.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\data\common\TPNode.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\TPNode.h"
 				>
 			</File>
 			<File

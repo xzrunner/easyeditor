@@ -5,9 +5,9 @@
 namespace ephysics
 {
 
-DragPhysicsOP::DragPhysicsOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
+DragPhysicsOP::DragPhysicsOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
 							 b2World* world, b2Body* ground)
-	: d2d::ZoomViewOP(wnd, stage, true)
+	: ee::ZoomViewOP(wnd, stage, true)
 	, m_world(world)
 	, m_ground(ground)
 	, m_mouseJoint(NULL)
@@ -17,11 +17,11 @@ DragPhysicsOP::DragPhysicsOP(wxWindow* wnd, d2d::EditPanelImpl* stage,
 
 bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (m_mouseJoint) return false;
 
-	const d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	const ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	b2Body* body = PhysicsQuery::queryOn(m_world, pos);
 	if (body && body != m_ground)
 	{
@@ -39,7 +39,7 @@ bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
 
 bool DragPhysicsOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_mouseJoint)
 	{
@@ -53,7 +53,7 @@ bool DragPhysicsOP::OnMouseLeftUp(int x, int y)
 
 bool DragPhysicsOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_mouseJoint)
 	{

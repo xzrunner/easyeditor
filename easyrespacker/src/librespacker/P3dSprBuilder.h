@@ -17,7 +17,7 @@ public:
 	P3dSprBuilder(ExportNameSet& export_set);
 	virtual ~P3dSprBuilder();
 
-	virtual void Traverse(d2d::Visitor& visitor) const;
+	virtual void Traverse(ee::Visitor& visitor) const;
 
 	const IPackNode* Create(const eparticle3d::Sprite* spr);
 	void Create(const eparticle3d::Symbol* sym, const IPackNode* p3d);

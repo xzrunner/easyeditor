@@ -9,7 +9,7 @@ using namespace ebuilder::preview;
 
 Panel::Panel(wxWindow* parent, wxTopLevelWindow* frame,
 			 ebuilder::LibraryPanel* libraryPanel)
-	: d2d::EditPanel(parent, frame)
+	: ee::EditPanel(parent, frame)
 	, m_scene(NULL)
 {
 	setEditOP(new MouseActionOP(this));
@@ -40,7 +40,7 @@ void Panel::setScene(Scene* scene)
 
 Panel::MouseActionOP::
 MouseActionOP(Panel* panel)
-	: d2d::AbstractEditOP(panel)
+	: ee::AbstractEditOP(panel)
 	, m_panel(panel)
 {
 }
@@ -48,7 +48,7 @@ MouseActionOP(Panel* panel)
 bool Panel::MouseActionOP::
 onMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	
 	Button* button = m_panel->getScene()->queryButtonByPos(pos);
 	if (button)
@@ -65,7 +65,7 @@ onMouseLeftDown(int x, int y)
 bool Panel::MouseActionOP::
 onMouseLeftUp(int x, int y)
 {
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 
 	Button* button = m_panel->getScene()->queryButtonByPos(pos);
 	if (button)

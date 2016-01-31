@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <drag2d.h>
+
 #include <easyrespacker.h>
 
 namespace edb
@@ -15,7 +15,7 @@ public:
 	PackEPT() {}
 
 	//
-	// interface ITask
+	// interface ICommand
 	//
 	virtual std::string Command() const;
 	virtual std::string Description() const;

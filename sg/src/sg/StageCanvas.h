@@ -1,23 +1,23 @@
 #ifndef _SG_STAGE_CANVAS_H_
 #define _SG_STAGE_CANVAS_H_
 
-#include <drag2d.h>
+
 
 namespace sg
 {
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void SetBackground(d2d::Symbol* background);
+	void SetBackground(ee::Symbol* background);
 
-	static d2d::Vector TransToBirdView(const d2d::Vector& pos);
-	static d2d::Vector TransToFlatView(const d2d::Vector& pos);
+	static ee::Vector TransToBirdView(const ee::Vector& pos);
+	static ee::Vector TransToFlatView(const ee::Vector& pos);
 
 protected:
 	virtual void OnDrawSprites() const;
@@ -34,7 +34,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	d2d::Sprite* m_background;
+	ee::Sprite* m_background;
 
 }; // StageCanvas
 

@@ -1,14 +1,14 @@
 #ifndef _LIBANIMATION_SPRITE_H_
 #define _LIBANIMATION_SPRITE_H_
 
-#include <drag2d.h>
+
 
 #include "Symbol.h"
 
 namespace libanim
 {
 
-class Sprite : public d2d::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite();
@@ -26,9 +26,9 @@ public:
 	//
 	virtual bool Update(int version);
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::Symbol* symbol);
+	virtual void SetSymbol(ee::Symbol* symbol);
 
-	static d2d::Sprite* Create(d2d::Symbol* symbol) {
+	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 

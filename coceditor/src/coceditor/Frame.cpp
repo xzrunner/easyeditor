@@ -64,7 +64,7 @@ void Frame::onOpen(wxCommandEvent& event)
 	{
 		m_task->clear();
 		m_currFilename = dlg.GetPath();
-		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
+		SetTitle(ee::FilenameTools::getFilename(dlg.GetPath()));
 		m_task->loadFromTextFile(dlg.GetPath());
 	}
 }
@@ -73,7 +73,7 @@ void Frame::onSave(wxCommandEvent& event)
 {
 	if (!m_currFilename.empty())
 	{
-		SetTitle(d2d::FilenameTools::getFilename(m_currFilename));
+		SetTitle(ee::FilenameTools::getFilename(m_currFilename));
 		m_task->storeToTextFile(m_currFilename);
 	}
 }
@@ -84,7 +84,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
+		wxString fixed = ee::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
 		m_currFilename = fixed;
 		m_task->storeToTextFile(fixed);
 	}
@@ -99,8 +99,8 @@ void Frame::onPreview(wxCommandEvent& event)
 {
 	Context* context = Context::Instance();
 
-	std::vector<d2d::ISprite*> sprites;
-	context->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<ee::ISprite*> sprites;
+	context->stage->traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites));
 
 	PreviewDialog dlg(context->stage, context->library, sprites);
 	dlg.ShowModal();
@@ -220,7 +220,7 @@ void Frame::setCurrFilename()
 			wxString::FromDouble(id++) + 
 			wxT(".json");
 
-		if (!d2d::FilenameTools::isExist(str))
+		if (!ee::FilenameTools::isExist(str))
 		{
 			m_currFilename = str;
 			break;

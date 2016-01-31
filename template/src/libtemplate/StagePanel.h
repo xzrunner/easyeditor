@@ -1,18 +1,21 @@
 #ifndef _EASYTEMPLATE_STAGE_PANEL_H_
 #define _EASYTEMPLATE_STAGE_PANEL_H_
 
-#include <drag2d.h>
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace etemplate
 {
 
 class StageCanvas;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
+		ee::LibraryPanel* library, ee::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
 protected:

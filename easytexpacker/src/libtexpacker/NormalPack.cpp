@@ -42,8 +42,8 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 
 			Json::Value frame_val;
 
-			//std::string filepath = d2d::FileHelper::FormatFilepath(m_filepaths[idx]);	
-			std::string filepath = d2d::FileHelper::GetRelativePath(dir, m_filepaths[idx]);	
+			//std::string filepath = ee::FileHelper::FormatFilepath(m_filepaths[idx]);	
+			std::string filepath = ee::FileHelper::GetRelativePath(dir, m_filepaths[idx]);	
 			frame_val["filename"] = filepath;
 
 			const RectSize& src_sz = m_src_sizes[idx];
@@ -59,7 +59,7 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 			{
 				const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[idx]);
 				if (!t) {
-					throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
+					throw ee::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
 				}
 
 				int e_left, e_right, e_bottom, e_up;
@@ -136,7 +136,7 @@ void NormalPack::OutputInfo(const std::string& dir, const std::string& dst_file)
 		value["meta"] = meta_val;
 
 		std::string out_filepath = dst_file;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringHelper::ToString(m_start_id + i));
+		out_filepath.insert(out_filepath.find_last_of("."), ee::StringHelper::ToString(m_start_id + i));
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
@@ -170,13 +170,13 @@ void NormalPack::OutputImage(const std::string& filepath) const
 				rot = true;
 			}
 
-			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(m_filepaths[idx]);
+			ee::Image* img = ee::ImageMgr::Instance()->GetItem(m_filepaths[idx]);
 
 			int e_left, e_right, e_bottom, e_up;
 			if (m_trim_info) {
 				const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[idx]);
 				if (!t) {
-					throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
+					throw ee::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[idx]);
 				}
 
 				assert(t->w == img->GetOriginWidth() && t->h == img->GetOriginHeight());
@@ -201,7 +201,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 		}
 
 		std::string out_filepath = filepath;
-		out_filepath.insert(out_filepath.find_last_of("."), d2d::StringHelper::ToString(m_start_id + i));
+		out_filepath.insert(out_filepath.find_last_of("."), ee::StringHelper::ToString(m_start_id + i));
 		pack.OutputToFile(out_filepath);
 	}
 }
@@ -212,12 +212,12 @@ void NormalPack::Pack(PACK_STRATEGY strategy, int static_size, int max_size, int
 		const std::string& path = m_filepaths[i];		
 
 		RectSize sz;
-		d2d::LibpngAdapter::ReadHeader(path.c_str(), sz.width, sz.height);
+		ee::LibpngAdapter::ReadHeader(path.c_str(), sz.width, sz.height);
 
 		if (m_trim_info) {
 			const ImageTrimData::Trim* t = m_trim_info->Query(m_filepaths[i]);
 			if (!t) {
-				throw d2d::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[i]);
+				throw ee::Exception("NormalPack::OutputInfo didn't find trim_info info: %s\n", m_filepaths[i]);
 			}
 			int e_left, e_right, e_bottom, e_up;
 			assert(t->w == sz.width && t->h == sz.height);

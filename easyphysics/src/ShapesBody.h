@@ -13,7 +13,7 @@ class ShapesBody : public IBody
 public:
 	ShapesBody(b2World* world, const BodyData& bodyData, float scale = 1.0f);
 
-	virtual void getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const;
+	virtual void getRect(ee::Rect& rect, const ee::Vector& position, float angle) const;
 
 }; // ShapesBody
 

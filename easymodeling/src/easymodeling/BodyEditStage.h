@@ -2,7 +2,7 @@
 #ifndef EMODELING_BODY_EDIT_STAGE_H
 #define EMODELING_BODY_EDIT_STAGE_H
 
-#include <drag2d.h>
+
 #include <easyshape.h>
 
 namespace emodeling

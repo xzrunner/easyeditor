@@ -1,14 +1,14 @@
 #ifndef RAIDEN_PREVIEW_CANVAS_H
 #define RAIDEN_PREVIEW_CANVAS_H
 
-#include <drag2d.h>
+
 
 namespace raiden
 {
-	class PreviewCanvas : public d2d::OrthoCanvas
+	class PreviewCanvas : public ee::OrthoCanvas
 	{
 	public:
-		PreviewCanvas(d2d::EditPanel* editPanel);
+		PreviewCanvas(ee::EditPanel* editPanel);
 		virtual ~PreviewCanvas();
 
 	protected:
@@ -28,18 +28,18 @@ namespace raiden
 	private:
 		struct Sprite
 		{
-			d2d::ISprite* s;
+			ee::ISprite* s;
 
-			std::vector<d2d::Vector> lines;
+			std::vector<ee::Vector> lines;
 			float speed;
 
-			d2d::Vector base;
-			d2d::Vector offset;
+			ee::Vector base;
+			ee::Vector offset;
 			float curr;
 
 			bool finish;
 
-			Sprite(d2d::ISprite* sprite);
+			Sprite(ee::ISprite* sprite);
 		};
 
 	private:

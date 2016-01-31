@@ -3,20 +3,20 @@
 
 #include "TestBase.h"
 
-#include <drag2d.h>
+
 
 namespace tdtex
 {
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
-	// d2d::EditPanel interface
+	// ee::EditPanel interface
 	//
 	virtual bool Update(int version) { return true; }
 

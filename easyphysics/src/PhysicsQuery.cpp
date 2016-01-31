@@ -4,7 +4,7 @@
 namespace ephysics
 {
 
-b2Body* PhysicsQuery::queryOn(b2World* world, const d2d::Vector& pos)
+b2Body* PhysicsQuery::queryOn(b2World* world, const ee::Vector& pos)
 {
 	const b2Vec2 b2Pos(pos.x / BOX2D_SCALE_FACTOR, pos.y / BOX2D_SCALE_FACTOR);
 
@@ -25,7 +25,7 @@ b2Body* PhysicsQuery::queryOn(b2World* world, const d2d::Vector& pos)
 		return NULL;
 }
 
-b2Body* PhysicsQuery::queryNear(b2World* world, const d2d::Vector& pos)
+b2Body* PhysicsQuery::queryNear(b2World* world, const ee::Vector& pos)
 {
 	b2Body* onBody = queryOn(world, pos);
 	if (onBody)
@@ -39,7 +39,7 @@ b2Body* PhysicsQuery::queryNear(b2World* world, const d2d::Vector& pos)
 		for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 		{
 			b2Vec2 bPos = b->GetPosition();
-			const float dis = d2d::Math2D::GetDistance(pos, d2d::Vector(bPos.x, bPos.y));
+			const float dis = ee::Math2D::GetDistance(pos, ee::Vector(bPos.x, bPos.y));
 			if (dis < nearDis)
 			{
 				nearDis = dis;

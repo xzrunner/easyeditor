@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_STAGE_PANEL_H_
 #define _LIBSHAPE_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace libshape
 {
@@ -9,23 +9,23 @@ namespace libshape
 class Symbol;
 class ToolbarPanel;
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
+class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		ee::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		wxGLContext* glctx, d2d::Sprite* edited, 
-		const d2d::MultiSpritesImpl* bg_sprites);
+		wxGLContext* glctx, ee::Sprite* edited, 
+		const ee::MultiSpritesImpl* bg_sprites);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		Symbol* symbol/*, d2d::LibraryPanel* library*/);
+		Symbol* symbol/*, ee::LibraryPanel* library*/);
 	virtual ~StagePanel();
 
 	//
-	// d2d::MultiShapesImpl interface
+	// ee::MultiShapesImpl interface
 	//
-	virtual void TraverseShapes(d2d::Visitor& visitor, 
-		d2d::DataTraverseType type = d2d::DT_ALL) const;
+	virtual void TraverseShapes(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL) const;
 
 	void LoadFromFile(const char* filename);
 	void StoreToFile(const char* filename) const;
@@ -33,13 +33,13 @@ public:
 	//virtual void loadShapes();
 	//virtual void storeShapes() const;
 
-	const d2d::Symbol& GetSymbol() const;
+	const ee::Symbol& GetSymbol() const;
 
 	void SetToolbarPanel(ToolbarPanel* toolbar) {
 		m_toolbar = toolbar;
 	}
 
-	void SetSymbolBG(d2d::Symbol* symbol);
+	void SetSymbolBG(ee::Symbol* symbol);
 
 protected:
 	//
@@ -51,17 +51,17 @@ private:
 	void InitSubjects();
 
 private:
-	class DropTarget : public d2d::CombinedDropTarget
+	class DropTarget : public ee::CombinedDropTarget
 	{
 	public:
-		DropTarget(StagePanel* stage, d2d::LibraryPanel* library);
+		DropTarget(StagePanel* stage, ee::LibraryPanel* library);
 
 		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& data);
 		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
 
 	private:
 		StagePanel* m_stage;
-		d2d::LibraryPanel* m_library;
+		ee::LibraryPanel* m_library;
 
 	}; // DragSymbolTarget
 

@@ -7,7 +7,7 @@
 namespace ecomplex
 {
 
-d2d::Sprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
+ee::Sprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
 {
 	eparticle3d::Symbol* symbol = new eparticle3d::Symbol;
 	symbol->SetEmitterCfg(LoadConfig(p3d));
@@ -75,8 +75,8 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D*
 		dst.angle = src.angle;
 		dst.angle_var = src.angle_var;
 
-		d2d::Colorf col_mul = d2d::TransColor(src.col_mul, d2d::PT_ARGB),
-			col_add = d2d::TransColor(src.col_add, d2d::PT_ARGB);
+		ee::Colorf col_mul = ee::TransColor(src.col_mul, ee::PT_ARGB),
+			col_add = ee::TransColor(src.col_add, ee::PT_ARGB);
 		memcpy(&dst.col_mul.r, &col_mul.r, sizeof(col_mul));
 		memcpy(&dst.col_add.r, &col_add.r, sizeof(col_add));
 		
@@ -85,8 +85,8 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D*
 
 		// todo bind ps
 
-		d2d::Sprite* spr = NodeToSprite::Trans(src.node);
-		dst.ud = const_cast<d2d::Symbol*>(&spr->GetSymbol());
+		ee::Sprite* spr = NodeToSprite::Trans(src.node);
+		dst.ud = const_cast<ee::Symbol*>(&spr->GetSymbol());
 	}
 
 	return cfg;

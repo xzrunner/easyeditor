@@ -21,8 +21,8 @@ using namespace ebuilder;
 
 DesignerPage::DesignerPage(wxWindow* parent,
 						   wxTopLevelWindow* frame)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(this)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiSpritesImpl(this)
 {
 	m_editOP = new ArrangeActorOP(this, NULL);
 	m_canvas = new Canvas(this);
@@ -30,8 +30,8 @@ DesignerPage::DesignerPage(wxWindow* parent,
 	SetDropTarget(new DragActorTarget(this));
 }
 
-void DesignerPage::traverseSprites(d2d::IVisitor& visitor, 
-								   d2d::TraverseType type/* = e_allExisting*/, 
+void DesignerPage::traverseSprites(ee::IVisitor& visitor, 
+								   ee::TraverseType type/* = e_allExisting*/, 
 								   bool order/* = true*/) const
 {
 	SceneItem* scene = dynamic_cast<SceneItem*>(Context::Instance()->library->getSceneList()->getItem());
@@ -43,8 +43,8 @@ void DesignerPage::traverseSprites(d2d::IVisitor& visitor,
 	{
 		Layer* layer = layers[i];
 
-		if ((type == d2d::e_editable && !layer->isEditable) ||
-			(type == d2d::e_visible && !layer->isVisible))
+		if ((type == ee::e_editable && !layer->isEditable) ||
+			(type == ee::e_visible && !layer->isVisible))
 			continue;
 
 		const std::vector<Actor*>& actors = layer->getActors();
@@ -69,7 +69,7 @@ void DesignerPage::traverseSprites(d2d::IVisitor& visitor,
 			}
 		}
 
-		const std::vector<d2d::TextSprite*>& texts = layer->getTexts();
+		const std::vector<ee::TextSprite*>& texts = layer->getTexts();
 		for (size_t i = 0, n = texts.size(); i < n; ++i)
 		{
 			bool hasNext;
@@ -79,7 +79,7 @@ void DesignerPage::traverseSprites(d2d::IVisitor& visitor,
 	}
 }
 
-void DesignerPage::removeSprite(d2d::ISprite* sprite)
+void DesignerPage::removeSprite(ee::ISprite* sprite)
 {
 	LayerItem* layer = dynamic_cast<LayerItem*>(Context::Instance()->library->getLayerList()->getItem());
 	if (!layer) return;
@@ -89,7 +89,7 @@ void DesignerPage::removeSprite(d2d::ISprite* sprite)
 	updateCodePage();
 }
 
-void DesignerPage::insertSprite(d2d::ISprite* sprite)
+void DesignerPage::insertSprite(ee::ISprite* sprite)
 {
 	LayerItem* layer = dynamic_cast<LayerItem*>(Context::Instance()->library->getLayerList()->getItem());
 	if (!layer) return;
@@ -104,7 +104,7 @@ void DesignerPage::insertSprite(d2d::ISprite* sprite)
 		Context::Instance()->library->getLayerList()->getItem()->refresh();
 		Context::Instance()->library->getSceneList()->getItem()->refresh();
 	}
-	else if (d2d::TextSprite* text = dynamic_cast<d2d::TextSprite*>(sprite))
+	else if (ee::TextSprite* text = dynamic_cast<ee::TextSprite*>(sprite))
 	{
 		text->retain();
 		layer->getLayer()->insert(text);
@@ -117,7 +117,7 @@ void DesignerPage::clearSprites()
 {
 }
 
-void DesignerPage::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+void DesignerPage::resetSpriteOrder(ee::ISprite* sprite, bool up)
 {
 	LayerItem* layer = dynamic_cast<LayerItem*>(Context::Instance()->library->getLayerList()->getItem());
 	if (!layer) return;
@@ -137,35 +137,35 @@ void DesignerPage::updateCodePage()
 //////////////////////////////////////////////////////////////////////////
 
 DesignerPage::Canvas::Canvas(DesignerPage* panel)
-	: d2d::SpriteStageCanvas(panel, panel)
+	: ee::SpriteStageCanvas(panel, panel)
 {
-	setBgColor(d2d::Colorf(0.8f, 0.8f, 0.8f));
+	setBgColor(ee::Colorf(0.8f, 0.8f, 0.8f));
 }
 
 void DesignerPage::Canvas::onDraw()
 {
 	drawBackground();	
 
-	d2d::SpriteStageCanvas::onDraw();
+	ee::SpriteStageCanvas::onDraw();
 
 	drawCenter();
 }
 
 void DesignerPage::Canvas::drawBackground()
 {
-	d2d::PrimitiveDraw::rect(d2d::Vector(), 
+	ee::PrimitiveDraw::rect(ee::Vector(), 
 		Game::WIDTH * 0.5f, 
 		Game::HEIGHT * 0.5f, 
-		d2d::BLACK_RECT_FACE);
+		ee::BLACK_RECT_FACE);
 }
 
 void DesignerPage::Canvas::drawCenter()
 {
 	const int hEdge = 15;
-	d2d::PrimitiveDraw::drawLine(d2d::Vector(-hEdge, 0), d2d::Vector(hEdge, 0), 
-		d2d::Colorf(1, 0, 0), 2);
-	d2d::PrimitiveDraw::drawLine(d2d::Vector(0, -hEdge), d2d::Vector(0, hEdge), 
-		d2d::Colorf(1, 0, 0), 2);
+	ee::PrimitiveDraw::drawLine(ee::Vector(-hEdge, 0), ee::Vector(hEdge, 0), 
+		ee::Colorf(1, 0, 0), 2);
+	ee::PrimitiveDraw::drawLine(ee::Vector(0, -hEdge), ee::Vector(0, hEdge), 
+		ee::Colorf(1, 0, 0), 2);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -187,10 +187,10 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
- 	if (d2d::ImageSymbol* symbol = dynamic_cast<d2d::ImageSymbol*>
+ 	if (ee::ImageSymbol* symbol = dynamic_cast<ee::ImageSymbol*>
 		(Context::Instance()->library->getSymbol(index)))
  	{
- 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+ 		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 
 		Actor* actor = new Actor(symbol);
  		actor->translate(pos);
@@ -200,8 +200,8 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
  	}
 	else
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(
+		ee::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		ee::ISprite* sprite = ee::SpriteFactory::Instance()->create(
 			Context::Instance()->library->getSymbol(index));
 		sprite->translate(pos);
 		m_editPanel->insertSprite(sprite);
@@ -216,11 +216,11 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 //////////////////////////////////////////////////////////////////////////
 
 DesignerPage::SelectActorOP::
-SelectActorOP(d2d::EditPanel* editPanel, 
-			  d2d::MultiSpritesImpl* spritesImpl,
-			  d2d::PropertySettingPanel* propertyPanel,
-			  d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
+SelectActorOP(ee::EditPanel* editPanel, 
+			  ee::MultiSpritesImpl* spritesImpl,
+			  ee::PropertySettingPanel* propertyPanel,
+			  ee::AbstractEditCMPT* callback/* = NULL*/)
+	: ee::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
 {
 }
 
@@ -233,7 +233,7 @@ DesignerPage::SelectActorOP::
 bool DesignerPage::SelectActorOP::
 onKeyDown(int keyCode)
 {
-	if (d2d::SelectSpritesOP::onKeyDown(keyCode))
+	if (ee::SelectSpritesOP::onKeyDown(keyCode))
 		return true;
 
 	if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -241,7 +241,7 @@ onKeyDown(int keyCode)
 		clearClipboard();
 
 		std::vector<Actor*> actors;
-		m_selection->traverse(d2d::FetchAllVisitor<Actor>(actors));
+		m_selection->traverse(ee::FetchAllVisitor<Actor>(actors));
 		for (size_t i = 0, n = actors.size(); i < n; ++i)
 			m_clipboard.push_back(actors[i]->clone());
 	}
@@ -261,7 +261,7 @@ onKeyDown(int keyCode)
 bool DesignerPage::SelectActorOP::
 onMouseLeftUp(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftUp(x, y))
+	if (ee::SelectSpritesOP::onMouseLeftUp(x, y))
 		return true;
 
 	if (m_selection->size() != 1)
@@ -273,7 +273,7 @@ onMouseLeftUp(int x, int y)
 bool DesignerPage::SelectActorOP::
 clear()
 {
-	if (d2d::SelectSpritesOP::clear())
+	if (ee::SelectSpritesOP::clear())
 		return true;
 
 	clearBackstage();
@@ -282,12 +282,12 @@ clear()
 	return false;
 }
 
-d2d::IPropertySetting* DesignerPage::SelectActorOP::
-createPropertySetting(d2d::ISprite* sprite) const
+ee::IPropertySetting* DesignerPage::SelectActorOP::
+createPropertySetting(ee::ISprite* sprite) const
 {
-	if (d2d::TextSprite* text = dynamic_cast<d2d::TextSprite*>(sprite))
+	if (ee::TextSprite* text = dynamic_cast<ee::TextSprite*>(sprite))
 	{
-		return new d2d::TextPropertySetting(m_editPanel, text);
+		return new ee::TextPropertySetting(m_editPanel, text);
 	}
 	else if (sprite)
 	{
@@ -323,9 +323,9 @@ clearClipboard()
 //////////////////////////////////////////////////////////////////////////
 
 void DesignerPage::TranslateActorState::
-Translate(const d2d::Vector& offset) 
+Translate(const ee::Vector& offset) 
 {
-	d2d::TranslateSpriteState::Translate(offset);
+	ee::TranslateSpriteState::Translate(offset);
 
 	LibraryPanel* library = Context::Instance()->library;
 	library->getScenePage()->refreshThumbnail();
@@ -337,9 +337,9 @@ Translate(const d2d::Vector& offset)
 //////////////////////////////////////////////////////////////////////////
 
 void DesignerPage::RotateActorState::
-Rotate(const d2d::Vector& dst) 
+Rotate(const ee::Vector& dst) 
 {
-	d2d::RotateSpriteState::Rotate(dst);
+	ee::RotateSpriteState::Rotate(dst);
 
 	LibraryPanel* library = Context::Instance()->library;
 	library->getScenePage()->refreshThumbnail();
@@ -351,9 +351,9 @@ Rotate(const d2d::Vector& dst)
 //////////////////////////////////////////////////////////////////////////
 
 void DesignerPage::ScaleActorState::
-Scale(const d2d::Vector& curr) 
+Scale(const ee::Vector& curr) 
 {
-	d2d::ScaleSpriteState::Scale(curr);
+	ee::ScaleSpriteState::Scale(curr);
 
 	LibraryPanel* library = Context::Instance()->library;
 	library->getScenePage()->refreshThumbnail();
@@ -366,7 +366,7 @@ Scale(const d2d::Vector& curr)
 
 DesignerPage::ArrangeActorImpl::
 ArrangeActorImpl(DesignerPage* editPanel)
-	: d2d::ArrangeSpriteImpl(editPanel, editPanel, Context::Instance()->property)
+	: ee::ArrangeSpriteImpl(editPanel, editPanel, Context::Instance()->property)
 	, m_editPanel(editPanel)
 {
 }
@@ -374,31 +374,31 @@ ArrangeActorImpl(DesignerPage* editPanel)
 void DesignerPage::ArrangeActorImpl::
 onMouseLeftUp(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::onMouseLeftUp(x, y);
+	ee::ArrangeSpriteImpl::onMouseLeftUp(x, y);
 	static_cast<DesignerPage*>(m_editPanel)->updateCodePage();
 }
 
 void DesignerPage::ArrangeActorImpl::
 onMouseRightUp(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::onMouseRightUp(x, y);
+	ee::ArrangeSpriteImpl::onMouseRightUp(x, y);
 	static_cast<DesignerPage*>(m_editPanel)->updateCodePage();
 }
 
-d2d::IArrangeSpriteState* DesignerPage::ArrangeActorImpl::
-CreateTransalteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+ee::IArrangeSpriteState* DesignerPage::ArrangeActorImpl::
+CreateTransalteState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
 {
 	return new TranslateActorState(selection, first_pos);
 }
 
-d2d::IArrangeSpriteState* DesignerPage::ArrangeActorImpl::
-CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+ee::IArrangeSpriteState* DesignerPage::ArrangeActorImpl::
+CreateRotateState(ee::SpriteSelection* selection, const ee::Vector& first_pos) const
 {
 	return new RotateActorState(selection, first_pos);
 }
 
-d2d::IArrangeSpriteState* DesignerPage::
-ArrangeActorImpl::CreateScaleState(d2d::ISprite* sprite, const d2d::SpriteCtrlNode::Node& ctrl_node) const
+ee::IArrangeSpriteState* DesignerPage::
+ArrangeActorImpl::CreateScaleState(ee::ISprite* sprite, const ee::SpriteCtrlNode::Node& ctrl_node) const
 {
 	return new ScaleActorState(sprite, ctrl_node);
 }
@@ -408,8 +408,8 @@ ArrangeActorImpl::CreateScaleState(d2d::ISprite* sprite, const d2d::SpriteCtrlNo
 //////////////////////////////////////////////////////////////////////////
 
 DesignerPage::ArrangeActorOP::
-ArrangeActorOP(DesignerPage* editPanel, d2d::AbstractEditCMPT* callback)
-	: d2d::ArrangeSpriteOP<SelectActorOP>(editPanel, editPanel, Context::Instance()->property, 
+ArrangeActorOP(DesignerPage* editPanel, ee::AbstractEditCMPT* callback)
+	: ee::ArrangeSpriteOP<SelectActorOP>(editPanel, editPanel, Context::Instance()->property, 
 	callback, false, true, new ArrangeActorImpl(editPanel))
 {
 }

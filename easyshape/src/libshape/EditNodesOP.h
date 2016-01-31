@@ -9,8 +9,8 @@ namespace libshape
 class EditNodesOP : public SelectNodesOP
 {
 public:
-	EditNodesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapesImpl);
+	EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
+		ee::MultiShapesImpl* shapesImpl);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -27,11 +27,11 @@ private:
 	struct Modified
 	{
 		SelectNodesOP::ChainSelectedNodes* src;
-		std::vector<d2d::Vector> dst;
+		std::vector<ee::Vector> dst;
 	};
 
 private:
-	d2d::Vector m_lastPos;
+	ee::Vector m_lastPos;
 
 	std::vector<Modified> m_buffer;
 

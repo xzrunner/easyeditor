@@ -1,12 +1,12 @@
 #ifndef _EASYANIM_KEYS_CONTENT_EDIT_H_
 #define _EASYANIM_KEYS_CONTENT_EDIT_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
-	class KeysContentEdit : public d2d::Observer
+	class KeysContentEdit : public ee::Observer
 {
 public:
 	KeysContentEdit();

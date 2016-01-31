@@ -14,8 +14,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -36,7 +36,7 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -62,7 +62,7 @@ const d2d::EditPanel* Task::GetEditPanel() const
 
 void Task::InitLayout()
 {
-	m_stage = new d2d::EditPanel(m_parent, m_parent);
+	m_stage = new ee::EditPanel(m_parent, m_parent);
 
 //	m_stage->SetCanvas(new epseudo3d::StageCanvas3D(m_stage));
 //	m_stage->setEditOP(new e3d::ControlCameraOP(m_stage));

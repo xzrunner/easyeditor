@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_FPS_MSG_H_
 #define _EASYANIM_FPS_MSG_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -24,7 +24,7 @@ enum MSG_ID {
 
 class Layer;
 
-class InsertLayerSJ : public d2d::Subject
+class InsertLayerSJ : public ee::Subject
 {
 public:
 	void Insert();
@@ -32,14 +32,14 @@ public:
 	SUBJECT_DECLARATION(InsertLayerSJ)
 }; // InsertLayerSJ
 
-class RemoveLayerSJ : public d2d::Subject
+class RemoveLayerSJ : public ee::Subject
 {
 public:
 	void Remove(int layer);
 	SUBJECT_DECLARATION(RemoveLayerSJ)
 }; // RemoveLayerSJ
 
-class ReorderLayerSJ : public d2d::Subject
+class ReorderLayerSJ : public ee::Subject
 {
 public:
 	struct Params
@@ -55,14 +55,14 @@ public:
 // fps
 //////////////////////////////////////////////////////////////////////////
 
-class GetFpsSJ : public d2d::Subject
+class GetFpsSJ : public ee::Subject
 {
 public:
 	int Get();
 	SUBJECT_DECLARATION(GetFpsSJ)
 }; // GetFpsSJ
 
-class SetFpsSJ : public d2d::Subject
+class SetFpsSJ : public ee::Subject
 {
 public:
 	void Set(int fps);
@@ -73,7 +73,7 @@ public:
 // selected
 //////////////////////////////////////////////////////////////////////////
 
-class SetSelectedSJ : public d2d::Subject
+class SetSelectedSJ : public ee::Subject
 {
 public:
 	struct Position
@@ -86,7 +86,7 @@ public:
 	SUBJECT_DECLARATION(SetSelectedSJ)
 }; // SetSelectedSJ
 
-class SetSelectedRegionSJ : public d2d::Subject
+class SetSelectedRegionSJ : public ee::Subject
 {
 public:
 	void Set(int col);

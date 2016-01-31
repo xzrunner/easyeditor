@@ -8,13 +8,13 @@
 using namespace ebuilder;
 
 BehaviorsPage::BehaviorsPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Behaviors"))
+	: ee::ILibraryPage(parent, wxT("Behaviors"))
 {
 	initLayout();
 	initBehaviors();
 }
 
-bool BehaviorsPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool BehaviorsPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return false;
 }
@@ -28,7 +28,7 @@ void BehaviorsPage::initLayout(bool draggable /*= true*/)
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	if (!m_list)
-		m_list = new d2d::LibraryList(this, wxT("behaviors"), /*false*/true);
+		m_list = new ee::LibraryList(this, wxT("behaviors"), /*false*/true);
 	sizer->Add(m_list, 1, wxEXPAND);
 
 	SetSizer(sizer);

@@ -7,12 +7,12 @@ namespace eimage
 
 PixelDiffCMPT::PixelDiffCMPT(wxWindow* parent, const wxString& name, 
 							 StagePanel* stage)
-	: d2d::AbstractEditCMPT(parent, name, stage->GetStageImpl())
+	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 {
 	m_editOP = new PixelDiffOP(stage);	
 }
 
-wxSizer* PixelDiffCMPT::initLayout()
+wxSizer* PixelDiffCMPT::InitLayout()
 {
 	return new wxBoxSizer(wxVERTICAL);
 }

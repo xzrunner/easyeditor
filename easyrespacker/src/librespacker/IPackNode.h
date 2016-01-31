@@ -1,14 +1,14 @@
 #ifndef _LIBRESPACKER_IPACK_NODE_H_
 #define _LIBRESPACKER_IPACK_NODE_H_
 
-#include <drag2d.h>
+
 
 namespace ebuilder { class CodeGenerator; }
 
 namespace librespacker
 {
 
-class IPackNode : public d2d::Object
+class IPackNode : public ee::Object
 {
 public:
 	IPackNode();
@@ -17,17 +17,17 @@ public:
 
 	// lua
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
-		const d2d::TexturePacker& tp, float scale) const = 0;
+		const ee::TexturePacker& tp, float scale) const = 0;
 	virtual void UnpackFromLua(lua_State* L,
-		const std::vector<d2d::Image*>& images) = 0;
+		const std::vector<ee::Image*>& images) = 0;
 
 	// bin
 	virtual int SizeOfPackToBin() const = 0;
 	virtual void PackToBin(uint8_t** ptr,
-		const d2d::TexturePacker& tp, float scale) const = 0;
+		const ee::TexturePacker& tp, float scale) const = 0;
 	virtual int SizeOfUnpackFromBin() const = 0;
 	virtual void UnpackFromBin(uint8_t** ptr, 
-		const std::vector<d2d::Image*>& images) = 0;
+		const std::vector<ee::Image*>& images) = 0;
 
 	int GetPkgID() const { return m_pkg_id; }
 	int GetSprID() const { return m_spr_id; }

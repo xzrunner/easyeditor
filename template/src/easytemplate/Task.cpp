@@ -1,5 +1,9 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/PropertySettingPanel.h>
+
 #include <easytemplate.h>
 
 namespace etemplate
@@ -17,8 +21,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -35,7 +39,7 @@ bool Task::IsDirty() const
 	return false;
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
@@ -64,7 +68,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 	m_library = new LibraryPanel(split);
 
-	m_property = new d2d::PropertySettingPanel(split);
+	m_property = new ee::PropertySettingPanel(split);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_library, m_property);

@@ -5,11 +5,11 @@
 namespace ephysics
 {
 
-UniversalArrangeOP::UniversalArrangeOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
-									   d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::ZoomViewOP(wnd, stage, true)
+UniversalArrangeOP::UniversalArrangeOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
+									   ee::PropertySettingPanel* propertyPanel, ee::EditCMPT* callback/* = NULL*/)
+	: ee::ZoomViewOP(wnd, stage, true)
 {
-	m_noPhysics = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(wnd, stage, spritesImpl, propertyPanel, callback);
+	m_noPhysics = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(wnd, stage, spritesImpl, propertyPanel, callback);
 	m_editOP = m_noPhysics;
 }
 
@@ -34,7 +34,7 @@ bool UniversalArrangeOP::OnMouseLeftDown(int x, int y)
 {
 	m_editOP = m_noPhysics;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
 	{
 		if (PhysicsQuery::queryOn(m_physics[i].world, pos))

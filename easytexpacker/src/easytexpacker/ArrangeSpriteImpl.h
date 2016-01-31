@@ -1,18 +1,18 @@
 #ifndef _EASYTEXPACKER_ARRANGE_SPRITE_IMPL_H_
 #define _EASYTEXPACKER_ARRANGE_SPRITE_IMPL_H_
 
-#include <drag2d.h>
+
 
 namespace etexpacker
 {
 
 class StagePanel;
 
-class ArrangeSpriteImpl : public d2d::ArrangeSpriteImpl
+class ArrangeSpriteImpl : public ee::ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(StagePanel* editPanel, 
-		d2d::PropertySettingPanel* propertyPanel);
+		ee::PropertySettingPanel* propertyPanel);
 
 	virtual void OnMouseLeftUp(int x, int y);
 	virtual void OnMouseRightDown(int x, int y);
@@ -21,10 +21,10 @@ public:
 	virtual void OnDraw() const;
 
 private:
-	class FixCoordsVisitor : public d2d::Visitor
+	class FixCoordsVisitor : public ee::Visitor
 	{
 	public:
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 	}; // FixCoordsVisitor
 
 private:

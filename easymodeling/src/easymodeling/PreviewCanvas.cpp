@@ -6,10 +6,10 @@ namespace emodeling
 {
 
 PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
-	: d2d::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
-	SetBgColor(d2d::Colorf(0, 0, 0));
+	SetBgColor(ee::Colorf(0, 0, 0));
 }
 
 PreviewCanvas::~PreviewCanvas()
@@ -24,14 +24,14 @@ void PreviewCanvas::OnDrawSprites() const
  	if (op->m_mouseJoint)
  	{
  		b2Vec2 target = op->m_mouseJoint->GetAnchorB();
- 		d2d::Vector first(target.x * ephysics::BOX2D_SCALE_FACTOR, target.y * ephysics::BOX2D_SCALE_FACTOR);
+ 		ee::Vector first(target.x * ephysics::BOX2D_SCALE_FACTOR, target.y * ephysics::BOX2D_SCALE_FACTOR);
  
  		if (op->currPos.IsValid())
  		{
- 			d2d::PrimitiveDraw::DrawLine(first, op->currPos, d2d::Colorf(1, 1, 1), 1);
- 			d2d::PrimitiveDraw::DrawCircle(op->currPos, 2, true, 2, d2d::Colorf(0, 1, 0));
+ 			ee::PrimitiveDraw::DrawLine(first, op->currPos, ee::Colorf(1, 1, 1), 1);
+ 			ee::PrimitiveDraw::DrawCircle(op->currPos, 2, true, 2, ee::Colorf(0, 1, 0));
  		}
- 		d2d::PrimitiveDraw::DrawCircle(first, 2, true, 2, d2d::Colorf(0, 1, 0));
+ 		ee::PrimitiveDraw::DrawCircle(first, 2, true, 2, ee::Colorf(0, 1, 0));
  	}
 }
 

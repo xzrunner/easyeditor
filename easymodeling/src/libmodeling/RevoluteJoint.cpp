@@ -14,33 +14,33 @@ RevoluteJoint::RevoluteJoint(Body* b0, Body* b1)
 	, maxMotorTorque(0.0f)
 	, motorSpeed(0.0f)
 {
-	d2d::Vector center = (b0->sprite->GetPosition() + b1->sprite->GetPosition()) * 0.5f;
+	ee::Vector center = (b0->sprite->GetPosition() + b1->sprite->GetPosition()) * 0.5f;
 	setLocalAnchorA(center);
 	setLocalAnchorB(center);
 }
 
-bool RevoluteJoint::isContain(const d2d::Vector& pos) const
+bool RevoluteJoint::isContain(const ee::Vector& pos) const
 {
-	return d2d::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| d2d::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
+	return ee::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT;
 }
 
-bool RevoluteJoint::isIntersect(const d2d::Rect& rect) const
+bool RevoluteJoint::isIntersect(const ee::Rect& rect) const
 {
-	return d2d::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
-		|| d2d::Math2D::IsPointInRect(getWorldAnchorB(), rect);
+	return ee::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
+		|| ee::Math2D::IsPointInRect(getWorldAnchorB(), rect);
 }
 
 void RevoluteJoint::draw(DrawType type) const
 {
-	const d2d::Vector anchorA = getWorldAnchorA(),
+	const ee::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::DrawDashLine(anchorA, anchorB, d2d::Colorf(1, 0, 0), 2);
-		d2d::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, anchorB, ee::Colorf(1, 0, 0), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		drawBodyFlag();
 	}
@@ -49,29 +49,29 @@ void RevoluteJoint::draw(DrawType type) const
 	drawAnchor(anchorB, type);
 }
 
-d2d::Vector RevoluteJoint::getWorldAnchorA() const
+ee::Vector RevoluteJoint::getWorldAnchorA() const
 {
 	return transLocalToWorld(localAnchorA, bodyA->sprite);
 }
 
-d2d::Vector RevoluteJoint::getWorldAnchorB() const
+ee::Vector RevoluteJoint::getWorldAnchorB() const
 {
 	return transLocalToWorld(localAnchorB, bodyB->sprite);
 }
 
-void RevoluteJoint::setLocalAnchorA(const d2d::Vector& world)
+void RevoluteJoint::setLocalAnchorA(const ee::Vector& world)
 {
 	localAnchorA = transWorldToLocal(world, bodyA->sprite);
 }
 
-void RevoluteJoint::setLocalAnchorB(const d2d::Vector& world)
+void RevoluteJoint::setLocalAnchorB(const ee::Vector& world)
 {
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void RevoluteJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
+void RevoluteJoint::drawAnchor(const ee::Vector& pos, DrawType type) const
 {
-	d2d::Colorf color;
+	ee::Colorf color;
 	switch (type)
 	{
 	case e_default:
@@ -85,6 +85,6 @@ void RevoluteJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 		break;
 	}
 
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }

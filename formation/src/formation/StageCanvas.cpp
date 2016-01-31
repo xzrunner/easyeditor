@@ -2,19 +2,19 @@
 #include "StagePanel.h"
 #include "Context.h"
 
-static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
+static const ee::Colorf LIGHT_GRAY = ee::Colorf(0.8f, 0.8f, 0.8f);
 
 using namespace formation;
 
 StageCanvas::StageCanvas(StagePanel* parent)
-	: d2d::SpriteStageCanvas(parent, parent)
+	: ee::SpriteStageCanvas(parent, parent)
 {
 }
 
 void StageCanvas::onDraw()
 {
 	drawGuideLines();
-	d2d::SpriteStageCanvas::onDraw();
+	ee::SpriteStageCanvas::onDraw();
 }
 
 void StageCanvas::drawGuideLines()

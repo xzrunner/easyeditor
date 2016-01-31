@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_STAGE_PANEL_H_
 #define _EASYP3DINV_STAGE_PANEL_H_
 
-#include <drag2d.h>
+
 
 namespace ep3dinv
 {
@@ -9,10 +9,10 @@ namespace ep3dinv
 class StageCanvas;
 class ParticleSystem;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
 protected:

@@ -15,18 +15,18 @@ void Love2dCode::resolve()
 {
 	Context* context = Context::Instance();
 
-	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<ee::ISprite*> sprites;
+	Context::Instance()->stage->traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites));
 
-	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y));
+	std::sort(sprites.begin(), sprites.end(), ee::SpriteCmp(ee::SpriteCmp::e_y));
 
 	lua::TableAssign ta(m_gen, "");
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::ISprite* sprite = sprites[i];
+		ee::ISprite* sprite = sprites[i];
 
-		std::string name = d2d::FilenameTools::getFilename(sprite->getSymbol().getFilepath());
+		std::string name = ee::FilenameTools::getFilename(sprite->getSymbol().getFilepath());
 		name = lua::assign("name", "\""+name+"\"");
 
 		std::string time = wxString::FromDouble(sprite->getPosition().y / context->height * context->time, 2);

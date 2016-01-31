@@ -7,20 +7,20 @@ namespace escale9
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
-						   d2d::PropertySettingPanel* property)
-	: d2d::ToolbarPanel(parent, stage->GetStageImpl())
+						   ee::PropertySettingPanel* property)
+	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
- 	addChild(new d2d::UniversalCMPT(this, wxT("compose"), stage->GetStageImpl(), 
+ 	addChild(new ee::UniversalCMPT(this, wxT("compose"), stage->GetStageImpl(), 
 		new ComposeOP(stage, this)));
 	addChild(m_resizeCmpt = new ResizeCMPT(this, wxT("resize"), stage, this));
 
-	SetSizer(initLayout());	
+	SetSizer(InitLayout());	
 }
 
-wxSizer* ToolbarPanel::initLayout()
+wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
-	topSizer->Add(initChildrenLayout());
+	topSizer->Add(InitChildrenLayout());
 	return topSizer;
 }
 

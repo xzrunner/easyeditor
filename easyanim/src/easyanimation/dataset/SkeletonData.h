@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_SKELETON_DATA_H_
 #define _EASYANIM_SKELETON_DATA_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -14,35 +14,35 @@ public:
 	~SkeletonData();
 
 	void CopyFrom(const SkeletonData& skeleton);
-	void CopyFrom(const std::vector<d2d::Sprite*>& sprites,
+	void CopyFrom(const std::vector<ee::Sprite*>& sprites,
 		const SkeletonData& skeleton);
 
-	void RemoveSprite(d2d::Sprite* sprite);
-	bool IsContainSprite(d2d::Sprite* sprite) const;
+	void RemoveSprite(ee::Sprite* sprite);
+	bool IsContainSprite(ee::Sprite* sprite) const;
 
-	void InsertJoint(d2d::Sprite* sprite, const d2d::Vector& pos);
-	void RemoveJoint(d2d::Vector& pos);
+	void InsertJoint(ee::Sprite* sprite, const ee::Vector& pos);
+	void RemoveJoint(ee::Vector& pos);
 
-	Joint* QueryJointByPos(const d2d::Vector& pos);
+	Joint* QueryJointByPos(const ee::Vector& pos);
 
 	void Draw() const;
 
-	void Absorb(d2d::Sprite* sprite);
-	void FixJoint(d2d::Sprite* sprite);
-	void UpdateJoint(d2d::Sprite* sprite, float dAngle = 0);
+	void Absorb(ee::Sprite* sprite);
+	void FixJoint(ee::Sprite* sprite);
+	void UpdateJoint(ee::Sprite* sprite, float dAngle = 0);
 
 	static void GetTweenSprites(SkeletonData& start, SkeletonData& end, 
-		std::vector<d2d::Sprite*>& tween, float process);
+		std::vector<ee::Sprite*>& tween, float process);
 
 private:
 	void Clean();
 
-	void Translate(d2d::Sprite* sprite, const d2d::Vector& offset);
+	void Translate(ee::Sprite* sprite, const ee::Vector& offset);
 
-	static d2d::Sprite* GetSpriteByName(const std::vector<d2d::Sprite*>& sprites, const std::string& name);
+	static ee::Sprite* GetSpriteByName(const std::vector<ee::Sprite*>& sprites, const std::string& name);
 
 private:
-	std::map<d2d::Sprite*, std::vector<Joint*> > m_map_joints;
+	std::map<ee::Sprite*, std::vector<Joint*> > m_map_joints;
 
 	friend class FileIO;
 

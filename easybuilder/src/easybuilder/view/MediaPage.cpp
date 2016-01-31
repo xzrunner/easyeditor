@@ -9,7 +9,7 @@
 using namespace ebuilder;
 
 MediaPage::MediaPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Media"))
+	: ee::ILibraryPage(parent, wxT("Media"))
 {
 	initLayout();
 
@@ -21,10 +21,10 @@ MediaPage::~MediaPage()
 	delete m_observer;
 }
 
-bool MediaPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool MediaPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
-	return dynamic_cast<d2d::ImageSymbol*>(symbol) != NULL 
-		|| dynamic_cast<d2d::FontSymbol*>(symbol) != NULL;
+	return dynamic_cast<ee::ImageSymbol*>(symbol) != NULL 
+		|| dynamic_cast<ee::FontSymbol*>(symbol) != NULL;
 }
 
 void MediaPage::onAddPress(wxCommandEvent& event)
@@ -41,7 +41,7 @@ void MediaPage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+			ee::ISymbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
 			symbol->release();
 		}
@@ -52,6 +52,6 @@ void MediaPage::onAddPress(wxCommandEvent& event)
 
 void MediaPage::onDelPress(wxCommandEvent& event)
 {
-	d2d::ILibraryPage::onDelPress(event);
+	ee::ILibraryPage::onDelPress(event);
 	m_observer->updateListeners();
 }

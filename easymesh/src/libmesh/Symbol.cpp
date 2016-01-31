@@ -15,7 +15,7 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
-	: d2d::Symbol(s)
+	: ee::Symbol(s)
 {
 	s.m_image->Retain();
 	m_image = s.m_image;
@@ -23,7 +23,7 @@ Symbol::Symbol(const Symbol& s)
 	m_shape = s.m_shape->Clone();
 }
 
-Symbol::Symbol(d2d::Image* image)
+Symbol::Symbol(ee::Image* image)
 {
 	image->Retain();
 	m_image = image;
@@ -57,14 +57,14 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color, 
-				  const d2d::Sprite* spr, const d2d::Sprite* root) const
+void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
+				  const ee::Sprite* spr, const ee::Sprite* root) const
 {
 	if (!m_shape) {
 		return;
 	}
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->sprite();
 	shader->SetSpriteColor(color);
 
@@ -72,14 +72,14 @@ void Symbol::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color,
 	if (!m_pause && spr) 
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);
-		d2d::Vector spd = s->GetSpeed();
+		ee::Vector spd = s->GetSpeed();
 		if (spd.x != 0 || spd.y != 0) {
 			m_shape->OffsetUV(spd.x, spd.y);
 		}
 	}
 }
 
-// d2d::Rect Symbol::getSize(const d2d::Sprite* sprite) const
+// ee::Rect Symbol::getSize(const ee::Sprite* sprite) const
 // {
 // //	return m_image->getRegion();
 // }
@@ -100,8 +100,8 @@ std::string Symbol::GetImagePath() const
 
 void Symbol::LoadImage(const std::string& filepath)
 {
-//	d2d::BitmapMgr::Instance()->GetItem(filepath, &m_bitmap);
-	d2d::ImageMgr::Instance()->GetItem(filepath, &m_image);
+//	ee::BitmapMgr::Instance()->GetItem(filepath, &m_bitmap);
+	ee::ImageMgr::Instance()->GetItem(filepath, &m_image);
 }
 
 void Symbol::CreateShape()

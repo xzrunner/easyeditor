@@ -1,19 +1,23 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <ee/Camera.h>
+#include <ee/RenderContextStack.h>
+#include <ee/DrawSpritesVisitor.h>
+
 namespace etemplate
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-//	: d2d::OrthoCanvas(stage)
-	: d2d::TwoPassCanvas(stage, stage->GetStageImpl())
+//	: ee::OrthoCanvas(stage)
+	: ee::TwoPassCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 }
 
 void StageCanvas::OnSize(int w, int h)
 {
-	d2d::TwoPassCanvas::OnSize(w, h);
+	ee::TwoPassCanvas::OnSize(w, h);
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -26,14 +30,14 @@ void StageCanvas::OnSize(int w, int h)
 
 	m_camera->UpdateModelView();
 
-	d2d::RenderContextStack::Instance()->SetProjection(w, h);
+	ee::RenderContextStack::Instance()->SetProjection(w, h);
 }
 
 void StageCanvas::OnDrawSprites() const
 {
-	d2d::Rect sr = m_screen.GetRegion();
-	m_stage->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
+	ee::Rect sr = m_screen.GetRegion();
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();
 }

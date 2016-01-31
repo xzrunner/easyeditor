@@ -23,19 +23,19 @@ void Thumbnail::draw(const std::vector<Actor*>& actors, wxMemoryDC& memDC)
 		float xMin, yMin;
 		xMin = yMin = FLT_MAX;
 
-		d2d::Vector p = d2d::Math::rotateVector(d2d::Vector(-hWidth, -hHeight), actor->getAngle());
+		ee::Vector p = ee::Math::rotateVector(ee::Vector(-hWidth, -hHeight), actor->getAngle());
 		if (p.x < xMin) xMin = p.x;
 		if (p.y < yMin) yMin = p.y;
 
-		p = d2d::Math::rotateVector(d2d::Vector(-hWidth, hHeight), actor->getAngle());
+		p = ee::Math::rotateVector(ee::Vector(-hWidth, hHeight), actor->getAngle());
 		if (p.x < xMin) xMin = p.x;
 		if (p.y < yMin) yMin = p.y;
 
-		p = d2d::Math::rotateVector(d2d::Vector(hWidth, -hHeight), actor->getAngle());
+		p = ee::Math::rotateVector(ee::Vector(hWidth, -hHeight), actor->getAngle());
 		if (p.x < xMin) xMin = p.x;
 		if (p.y < yMin) yMin = p.y;
 
-		p = d2d::Math::rotateVector(d2d::Vector(hWidth, hHeight), actor->getAngle());
+		p = ee::Math::rotateVector(ee::Vector(hWidth, hHeight), actor->getAngle());
 		if (p.x < xMin) xMin = p.x;
 		if (p.y < yMin) yMin = p.y;
 

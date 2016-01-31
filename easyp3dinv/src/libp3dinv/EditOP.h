@@ -1,14 +1,14 @@
 #ifndef _EASYP3DINV_EDIT_OP_H_
 #define _EASYP3DINV_EDIT_OP_H_
 
-#include <drag2d.h>
+
 
 namespace ep3dinv
 {
 
 class StagePanel;
 
-class EditOP : public d2d::ZoomViewOP
+class EditOP : public ee::ZoomViewOP
 {
 public:
 	EditOP(StagePanel* stage);

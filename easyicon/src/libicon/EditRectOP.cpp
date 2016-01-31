@@ -9,14 +9,14 @@ namespace eicon
 const float EditRectOP::CTRL_NODE_RADIUS = 5.0f;
 
 EditRectOP::EditRectOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, stage->GetStageImpl(), true)
+	: ee::ZoomViewOP(stage, stage->GetStageImpl(), true)
 	, m_selected(PT_NULL)
 {
 }
 
 bool EditRectOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) {
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -27,16 +27,16 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 	m_selected = PT_NULL;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 
-	d2d::Rect r = icon->GetRegion(1);
-	if (d2d::Math2D::GetDistance(d2d::Vector(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
+	ee::Rect r = icon->GetRegion(1);
+	if (ee::Math2D::GetDistance(ee::Vector(r.xmin, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_LOW;
-	} else if (d2d::Math2D::GetDistance(d2d::Vector(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(ee::Vector(r.xmin, r.ymax), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_LEFT_TOP;
-	} else if (d2d::Math2D::GetDistance(d2d::Vector(r.xmax, r.ymax), pos) < CTRL_NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(ee::Vector(r.xmax, r.ymax), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_RIGHT_TOP;
-	} else if (d2d::Math2D::GetDistance(d2d::Vector(r.xmax, r.ymin), pos) < CTRL_NODE_RADIUS) {
+	} else if (ee::Math2D::GetDistance(ee::Vector(r.xmax, r.ymin), pos) < CTRL_NODE_RADIUS) {
 		m_selected = PT_RIGHT_LOW;
 	}
 
@@ -45,7 +45,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 bool EditRectOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) {
+	if (ee::ZoomViewOP::OnMouseLeftUp(x, y)) {
 		return true;
 	}
 
@@ -56,7 +56,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 bool EditRectOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) {
+	if (ee::ZoomViewOP::OnMouseDrag(x, y)) {
 		return true;
 	}
 
@@ -65,9 +65,9 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	d2d::Rect r = icon->GetRegion(1);
+	ee::Rect r = icon->GetRegion(1);
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_selected == PT_LEFT_LOW) {
 		r.xmin = pos.x;
 		r.ymin = pos.y;
@@ -84,14 +84,14 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 
 	static_cast<RectIcon*>(icon)->SetRegion(r);
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
 
 bool EditRectOP::OnActive()
 {
-	if (d2d::ZoomViewOP::OnActive()) {
+	if (ee::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
@@ -110,7 +110,7 @@ bool EditRectOP::OnActive()
 
 bool EditRectOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) {
+	if (ee::ZoomViewOP::OnDraw()) {
 		return true;
 	}
 
@@ -119,22 +119,22 @@ bool EditRectOP::OnDraw() const
 		return false;
 	}
 
-	const d2d::Image* img = icon->GetImage();
+	const ee::Image* img = icon->GetImage();
 	if (!img) {
 		return false;
 	}
 
 	float w = img->GetClippedWidth(),
 		h = img->GetClippedHeight();
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(0, 0), w * 0.5f, h * 0.5f, 
-		d2d::LIGHT_RED_THIN_LINE);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
+		ee::LIGHT_RED_THIN_LINE);
 
-	d2d::Rect r = icon->GetRegion(1);
-	d2d::PrimitiveDraw::DrawRect(r, d2d::LIGHT_GREEN_THIN_LINE);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
-	d2d::PrimitiveDraw::DrawRect(d2d::Vector(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, d2d::LIGHT_GREEN_FACE);
+	ee::Rect r = icon->GetRegion(1);
+	ee::PrimitiveDraw::DrawRect(r, ee::LIGHT_GREEN_THIN_LINE);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
 	
 	return false;
 }

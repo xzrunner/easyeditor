@@ -1,14 +1,14 @@
 #ifndef _EASYICON_EDIT_CHANGED_SECTOR_OP_H_
 #define _EASYICON_EDIT_CHANGED_SECTOR_OP_H_
 
-#include <drag2d.h>
+
 
 namespace eicon
 {
 
 class StagePanel;
 
-class EditChangedSectorOP : public d2d::ZoomViewOP
+class EditChangedSectorOP : public ee::ZoomViewOP
 {
 public:
 	EditChangedSectorOP(StagePanel* stage);

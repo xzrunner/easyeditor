@@ -1,14 +1,14 @@
 #ifndef FORMATION_PREVIEW_CANVAS_H
 #define FORMATION_PREVIEW_CANVAS_H
 
-#include <drag2d.h>
+
 
 namespace formation
 {
-	class PreviewCanvas : public d2d::OrthoCanvas
+	class PreviewCanvas : public ee::OrthoCanvas
 	{
 	public:
-		PreviewCanvas(d2d::EditPanel* editPanel);
+		PreviewCanvas(ee::EditPanel* editPanel);
 		virtual ~PreviewCanvas();
 
 	protected:
@@ -26,13 +26,13 @@ namespace formation
 		static const int FRAME_RATE = 24;
 
 	private:
-		class DrawVisitor : public d2d::IVisitor
+		class DrawVisitor : public ee::IVisitor
 		{
 		public:
 			DrawVisitor(float yOffset, float scale) 
 				: m_yOffset(yOffset), m_scale(scale) {}
 
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void visit(ee::Object* object, bool& bFetchNext);
 
 		private:
 			float m_yOffset;

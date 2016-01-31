@@ -2,7 +2,7 @@
 #ifndef EBUILDER_LIBRARY_PANEL_H
 #define EBUILDER_LIBRARY_PANEL_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
@@ -13,7 +13,7 @@ namespace ebuilder
 	class MediaPage;
 	class BehaviorsPage;
 
-	class LibraryPanel : public d2d::LibraryPanel
+	class LibraryPanel : public ee::LibraryPanel
 	{
 	public:
 		LibraryPanel(wxWindow* parent);
@@ -22,11 +22,11 @@ namespace ebuilder
 
 		void clearUIListeners();
 
-		d2d::LibraryList* getSceneList();
-		d2d::LibraryList* getLayerList();
-		d2d::LibraryList* getActorList();
-		d2d::LibraryList* getMediaList();
-		d2d::LibraryList* getBehaviorList();
+		ee::LibraryList* getSceneList();
+		ee::LibraryList* getLayerList();
+		ee::LibraryList* getActorList();
+		ee::LibraryList* getMediaList();
+		ee::LibraryList* getBehaviorList();
 
 		LayersPage* getLayerPage() { return m_layerPage; }
 		ScenesPage* getScenePage() { return m_scenePage; }

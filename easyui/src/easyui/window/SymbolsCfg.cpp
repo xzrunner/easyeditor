@@ -7,7 +7,7 @@ namespace eui
 namespace window
 {
 
-SymbolsCfg::SymbolsCfg(StagePanel* stage, d2d::LibraryPanel* library)
+SymbolsCfg::SymbolsCfg(StagePanel* stage, ee::LibraryPanel* library)
 	: m_stage(stage)
 	, m_library(library)
 {
@@ -32,8 +32,8 @@ void SymbolsCfg::LoadConfig()
 
 	try {
 		InitLibrarySymbols(value);
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(m_stage, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(m_stage, e);
 		dlg.ShowModal();	
 	}
 }
@@ -83,7 +83,7 @@ void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol
 	{
 		const Symbol* src = symbols[i];
 
-		d2d::Symbol* dst = d2d::SymbolMgr::Instance()->FetchSymbol(src->filepath);
+		ee::Symbol* dst = ee::SymbolMgr::Instance()->FetchSymbol(src->filepath);
 		dst->RefreshThumbnail(dst->GetFilepath());
 		library->GetList()->Insert(dst);
 		dst->Release();

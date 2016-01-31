@@ -20,7 +20,7 @@ AnimRecorder::~AnimRecorder()
 }
 
 void AnimRecorder::AddItem(const std::string& filepath, float x, float y, float angle, 
-						   float scale, const d2d::Colorf& mul_col, const d2d::Colorf& add_col)
+						   float scale, const ee::Colorf& mul_col, const ee::Colorf& add_col)
 {
 	while (!m_curr_frame) {
 		m_curr_frame = m_frame_pool.GetPointer();
@@ -79,11 +79,11 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 		for (int j = 0, m = record_frame->items.size(); j < m; ++j)
 		{
 			Item* item = record_frame->items[j];
-			d2d::Sprite* sprite = new d2d::NullSprite(
-				new d2d::NullSymbol(item->filepath));
+			ee::Sprite* sprite = new ee::NullSprite(
+				new ee::NullSymbol(item->filepath));
 
-			sprite->SetTransform(d2d::Vector(item->x, item->y), item->angle);
-			sprite->SetScale(d2d::Vector(item->scale, item->scale));
+			sprite->SetTransform(ee::Vector(item->x, item->y), item->angle);
+			sprite->SetScale(ee::Vector(item->scale, item->scale));
 			sprite->color.multi = item->mul_col;
 
 			frame->sprites.push_back(sprite);

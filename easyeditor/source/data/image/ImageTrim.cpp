@@ -1,6 +1,7 @@
 #include "ImageTrim.h"
+#include "ImageData.h"
 
-namespace eimage
+namespace ee
 {
 
 ImageTrim::ImageTrim(const ImageData& img_data)
@@ -42,7 +43,7 @@ Rect ImageTrim::Trim() const
 		}
 	}
 	// up
-	sub.ymax = height;
+	sub.ymax = static_cast<float>(height);
 	for (int i = height - 1; i >= 0; --i)
 	{
 		int j = 0;
@@ -74,7 +75,7 @@ Rect ImageTrim::Trim() const
 		}
 	}
 	// right
-	sub.xmax = width;
+	sub.xmax = static_cast<float>(width);
 	for (int i = width - 1; i >= 0; --i)
 	{
 		int j = 0;
@@ -97,8 +98,8 @@ Rect ImageTrim::Trim() const
 
 // 		const Rect& r = m_image->getRegion();
 // 		ret.xmin = ret.ymin = 0;
-// 		ret.xmax = r.xLength();
-// 		ret.ymax = r.yLength();
+// 		ret.xmax = r.Width();
+// 		ret.ymax = r.Height();
 
 		ret.xmin = ret.ymin = 0;
 		ret.xmax = ret.ymax = 1;

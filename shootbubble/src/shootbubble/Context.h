@@ -1,7 +1,7 @@
 #ifndef SHOOTBUBBLE_CONTEXT_H
 #define SHOOTBUBBLE_CONTEXT_H
 
-#include <drag2d.h>
+
 
 namespace shootbubble
 {
@@ -11,8 +11,8 @@ namespace shootbubble
 	class Context
 	{
 	public:
-		d2d::PropertySettingPanel* property;
-		d2d::LibraryPanel* library;
+		ee::PropertySettingPanel* property;
+		ee::LibraryPanel* library;
 		StagePanel* stage;
 		ToolbarPanel* toolbar;
 

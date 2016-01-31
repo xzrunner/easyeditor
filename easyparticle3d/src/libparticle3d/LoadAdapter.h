@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_LOAD_ADAPTER_H_
 #define _EASYPARTICLE3D_LOAD_ADAPTER_H_
 
-#include <drag2d.h>
+
 
 namespace eparticle3d
 {
@@ -26,7 +26,7 @@ public:
 
 		float angle, angle_var;
 
-		d2d::Colorf col_mul, col_add;
+		ee::Colorf col_mul, col_add;
 		float alpha_start, alpha_end;
 
 		float start_z;

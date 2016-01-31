@@ -11,8 +11,8 @@ template <typename T>
 class EditPolylineWithCopyNodeOP : public EditPolylineOP<T, SelectNodesOP>
 {
 public:
-	EditPolylineWithCopyNodeOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-		d2d::MultiShapesImpl* shapesImpl)
+	EditPolylineWithCopyNodeOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+		ee::MultiShapesImpl* shapesImpl)
 		: EditPolylineOP<T, SelectNodesOP>(editPanel, shapesImpl, NULL, NULL)
 	{}
 

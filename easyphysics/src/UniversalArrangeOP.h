@@ -1,22 +1,22 @@
 #ifndef _EPHYSICS_UNIVERSAL_ARRANGE_OP_H_
 #define _EPHYSICS_UNIVERSAL_ARRANGE_OP_H_
 
-#include <drag2d.h>
+
 #include <Box2D/Box2D.h>
 
 namespace ephysics
 {
 
-class d2d::MultiSpritesImpl;
+class ee::MultiSpritesImpl;
 class DragPhysicsOP;
 class PropertySettingPanel;
-class AbstractEditCMPT;
+class EditCMPT;
 
-class UniversalArrangeOP : public d2d::ZoomViewOP
+class UniversalArrangeOP : public ee::ZoomViewOP
 {
 public:
-	UniversalArrangeOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl,
-		d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback = NULL);
+	UniversalArrangeOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
+		ee::PropertySettingPanel* propertyPanel, ee::EditCMPT* callback = NULL);
 	virtual ~UniversalArrangeOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -40,9 +40,9 @@ private:
 
 private:
 	std::vector<PhysicsOP> m_physics;
-	d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>* m_noPhysics;
+	ee::ArrangeSpriteOP<ee::SelectSpritesOP>* m_noPhysics;
 
-	d2d::AbstractEditOP* m_editOP;
+	ee::EditOP* m_editOP;
 
 }; // UniversalArrangeOP
 

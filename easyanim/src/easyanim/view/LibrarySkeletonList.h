@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 #include "dataset/WholeSkeleton.h"
 
@@ -10,13 +10,13 @@ namespace eanim
 	class StagePanel;
 	class WholeSkeleton;
 
-	class LibrarySkeletonList : public d2d::LibraryList
+	class LibrarySkeletonList : public ee::LibraryList
 	{
 	public:
 		LibrarySkeletonList(wxWindow* parent);
 	
 		//
-		// d2d::ISerializable interface
+		// ee::ISerializable interface
 		//
 		virtual void loadFromTextFile(std::ifstream& fin);
 		virtual void storeToTextFile(std::ofstream& fout) const;

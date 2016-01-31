@@ -5,9 +5,9 @@
 namespace ephysics
 {
 
-PasteSymbolPhysicsRandomOP::PasteSymbolPhysicsRandomOP(wxWindow* stage_wnd, d2d::EditPanelImpl* stage, 
-													   d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
-													   d2d::PasteSymbolRandomWidget* randomWidget)
+PasteSymbolPhysicsRandomOP::PasteSymbolPhysicsRandomOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
+													   ee::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, 
+													   ee::PasteSymbolRandomWidget* randomWidget)
 	: PasteSymbolPhysicsOP(stage_wnd, stage, libraryPanel, physicsImpl)
 	, m_randomWidget(randomWidget)
 {
@@ -16,20 +16,20 @@ PasteSymbolPhysicsRandomOP::PasteSymbolPhysicsRandomOP(wxWindow* stage_wnd, d2d:
 
 bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
+	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::Symbol* symbol = m_randomValue.symbol;
+	ee::Symbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
 		symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->TransPosScrToProj(x, y);
 
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(m_pos);
 
 		if (m_randomValue.scale != 1.0f) {
-			sprite->SetScale(d2d::Vector(m_randomValue.scale, m_randomValue.scale));
+			sprite->SetScale(ee::Vector(m_randomValue.scale, m_randomValue.scale));
 		}
 		if (m_randomValue.angle != 0.0f) {
 			sprite->SetTransform(m_pos, m_randomValue.angle);
@@ -39,7 +39,7 @@ bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 			body->getBody()->SetType(m_bStatic ? b2_staticBody : b2_dynamicBody);
 		}
 
-		d2d::InsertSpriteSJ::Instance()->Insert(sprite);
+		ee::InsertSpriteSJ::Instance()->Insert(sprite);
 
 		sprite->Release();
 	}
@@ -60,14 +60,14 @@ bool PasteSymbolPhysicsRandomOP::OnMouseRightDown(int x, int y)
 
 bool PasteSymbolPhysicsRandomOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::OnDraw()) return true;
+	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	d2d::Symbol* symbol = m_randomValue.symbol;
+	ee::Symbol* symbol = m_randomValue.symbol;
 	if (!symbol)  {
 		symbol = m_libraryPanel->GetSymbol();
 	}
 	if (symbol && m_pos.IsValid()) {
-		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
+		ee::SpriteRenderer::Instance()->Draw(symbol, ee::Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
 	}
 
 	return false;

@@ -14,9 +14,9 @@ TexturePacker::TexturePacker(int padding, int extrude)
 	m_xCurr = m_yCurr = m_width = 0;
 }
 
-void TexturePacker::pack(const std::set<d2d::Image*>& images)
+void TexturePacker::pack(const std::set<ee::Image*>& images)
 {
-	std::vector<d2d::Image*> sorted;
+	std::vector<ee::Image*> sorted;
 	copy(images.begin(), images.end(), back_inserter(sorted));
 	std::sort(sorted.begin(), sorted.end(), ImageCmp());
 
@@ -24,8 +24,8 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 	int extra_tot = (extra_half << 1);
 	for (int i = 0, n = sorted.size(); i < n; ++i)
 	{
-		d2d::Image* img = sorted[i];
-		d2d::Rect r;
+		ee::Image* img = sorted[i];
+		ee::Rect r;
 		int w = img->GetClippedWidth() + extra_tot,
 			h = img->GetClippedHeight() + extra_tot;
 		assert(w < m_edge && h < m_edge);
@@ -61,13 +61,13 @@ void TexturePacker::storeToMemory()
 	m_pixels = new uint8_t[size];
 	memset(&m_pixels[0], 0, size);
 
-	std::map<d2d::Image*, d2d::Rect>::iterator itr 
+	std::map<ee::Image*, ee::Rect>::iterator itr 
 		= m_mapImg2Rect.begin();
 	int size_line = m_edge * channels;
 	for ( ; itr != m_mapImg2Rect.end(); ++itr)
 	{
 		const unsigned char* pixels = itr->first->GetPixelData();
-		const d2d::Rect& r = itr->second;
+		const ee::Rect& r = itr->second;
 		//////////////////////////////////////////////////////////////////////////
 		int src_line_size = r.Width() * channels;
 		for (int i = 0, n = r.Height(); i < n ;++i)
@@ -94,15 +94,15 @@ void TexturePacker::storeToMemory()
 	}
 }
 
-void TexturePacker::storeToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type)
+void TexturePacker::storeToFile(const std::string& floder, const std::string& filename, ee::ImageSaver::Type type)
 {
 	std::string filepath = floder + "\\" + filename;
-	d2d::ImageSaver::StoreToFile(m_pixels, m_edge, m_edge, 4, filepath, type);
+	ee::ImageSaver::StoreToFile(m_pixels, m_edge, m_edge, 4, filepath, type);
 }
 
-const d2d::Rect* TexturePacker::query(d2d::Image* image) const
+const ee::Rect* TexturePacker::query(ee::Image* image) const
 {
-	std::map<d2d::Image*, d2d::Rect>::const_iterator itr 
+	std::map<ee::Image*, ee::Rect>::const_iterator itr 
 		= m_mapImg2Rect.find(image);
 	if (itr != m_mapImg2Rect.end())
 		return &itr->second;

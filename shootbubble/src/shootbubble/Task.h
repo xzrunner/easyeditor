@@ -1,7 +1,7 @@
 #ifndef SHOOTBUBBLE_TASK_H_
 #define SHOOTBUBBLE_TASK_H_
 
-#include <drag2d.h>
+
 #include <wx/splitter.h>
 
 namespace shootbubble

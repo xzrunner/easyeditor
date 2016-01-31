@@ -1,6 +1,6 @@
 #include "DynamicInfo.h"
 
-#include <drag2d.h>
+
 
 namespace lr
 {
@@ -50,7 +50,7 @@ void DynamicInfo::SetValue(const std::string& key, const std::string& val,
 void DynamicInfo::LoadFromString(const std::string& str, const std::string& tag)
 {
 	std::vector<std::string> pairs;
-	d2d::StringHelper::Split(str, ";", pairs);
+	ee::StringHelper::Split(str, ";", pairs);
 
 	for (int i = 0, n = pairs.size(); i < n; ++i) {
 		const std::string& pair = pairs[i];

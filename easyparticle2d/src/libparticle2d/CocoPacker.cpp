@@ -1,7 +1,7 @@
 #include "CocoPacker.h"
 #include "item_string.h"
 
-#include <drag2d.h>
+
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
@@ -17,13 +17,13 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 	gen.tab();
 
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(srcdir.ToStdString(), files);
+	ee::FileHelper::FetchAllFiles(srcdir.ToStdString(), files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_particle2d))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_particle2d))
 		{
 			pack(filepath, gen);
 		}
@@ -57,7 +57,7 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 	gen.line(s + " = {");
 	gen.tab();
 
-	wxString dir = d2d::FileHelper::GetFileDir(filepath) + "\\";
+	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	pack(val, gen, dir);
 
 	gen.detab();
@@ -111,9 +111,9 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	//lua::assign_with_end(gen, "finishColorVarianceAlpha", 0);
 
 	//// scale
-	//std::string path = d2d::FileHelper::getAbsolutePath(dir, val["symbol_path"].asString());
-	//d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
-	//float width = symbol->GetSize().xLength();
+	//std::string path = ee::FileHelper::GetAbsolutePath(dir, val["symbol_path"].asString());
+	//ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(path);
+	//float width = symbol->GetSize().Width();
 	//symbol->Release();
 	//float size_start = width * val[ITEM_SCALE][ITEM_ATTR_START].asInt() * 0.01f;
 	//float size_finish = width * val[ITEM_SCALE][ITEM_ATTR_END].asInt() * 0.01f;

@@ -3,14 +3,14 @@
 
 using namespace formation;
 
-ActorPropertySetting::ActorPropertySetting(d2d::EditPanel* editPanel, 
-										   const std::vector<d2d::ISprite*>& sprites)
+ActorPropertySetting::ActorPropertySetting(ee::EditPanel* editPanel, 
+										   const std::vector<ee::ISprite*>& sprites)
 	: IPropertySetting(editPanel, wxT("Actor"))
 	, m_sprites(sprites)
 {
 }
 
-void ActorPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
+void ActorPropertySetting::updatePanel(ee::PropertySettingPanel* panel)
 {
 	wxPropertyGrid* pg = panel->getPG();
 
@@ -42,12 +42,12 @@ void ActorPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	}
 }
 
-void ActorPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void ActorPropertySetting::updatePropertyGrid(ee::PropertySettingPanel* panel)
 {
 	updatePanel(panel);
 }
 
-void ActorPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void ActorPropertySetting::enablePropertyGrid(ee::PropertySettingPanel* panel, bool bEnable)
 {
 	wxPropertyGrid* pg = panel->getPG();
 

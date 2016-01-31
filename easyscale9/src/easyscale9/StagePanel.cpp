@@ -10,9 +10,9 @@ namespace escale9
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::LibraryPanel* library)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiSpritesImpl(GetStageImpl())
+					   ee::LibraryPanel* library)
+	: ee::EditPanel(parent, frame)
+	, ee::MultiSpritesImpl(GetStageImpl())
 	, m_symbol(NULL)
 	, m_library(library)
 	, m_toolbar(NULL)
@@ -21,14 +21,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	SetDropTarget(new d2d::StageDropTarget(this, GetStageImpl(), library));
+	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
-	RegistSubject(d2d::InsertSpriteSJ::Instance());
-	RegistSubject(d2d::RemoveSpriteSJ::Instance());
-	RegistSubject(d2d::ClearSpriteSJ::Instance());
+	RegistSubject(ee::InsertSpriteSJ::Instance());
+	RegistSubject(ee::RemoveSpriteSJ::Instance());
+	RegistSubject(ee::ClearSpriteSJ::Instance());
 }
 
-void StagePanel::TraverseSprites(d2d::Visitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
+void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type/* = ee::e_allExisting*/, 
 								 bool order/* = true*/) const
 {
 	for (size_t i = 0; i < 3; ++i) 
@@ -76,28 +76,28 @@ void StagePanel::setToolbarPanel(ToolbarPanel* toolbar)
 
 void StagePanel::OnNotify(int sj_id, void* ud)
 {
-	d2d::MultiSpritesImpl::OnNotify(sj_id, ud);
+	ee::MultiSpritesImpl::OnNotify(sj_id, ud);
 
 	switch (sj_id)
 	{
-	case d2d::MSG_INSERT_SPRITE:
+	case ee::MSG_INSERT_SPRITE:
 		{
-			d2d::InsertSpriteSJ::Params* p = (d2d::InsertSpriteSJ::Params*)ud;
+			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
 			Insert(p->spr);
 		}
 		break;
-	case d2d::MSG_REMOVE_SPRITE:
-		Remove((d2d::Sprite*)ud);
+	case ee::MSG_REMOVE_SPRITE:
+		Remove((ee::Sprite*)ud);
 		break;
-	case d2d::MSG_CLEAR_SPRITE:
+	case ee::MSG_CLEAR_SPRITE:
 		Clear();
 		break;
 	}
 }
 
-void StagePanel::Insert(d2d::Sprite* spr)
+void StagePanel::Insert(ee::Sprite* spr)
 {
-	const d2d::Vector& pos = spr->GetPosition();
+	const ee::Vector& pos = spr->GetPosition();
 	int col, row;
 	ComposeGrids::Query(pos, &col, &row);
 	if (col == -1 || row == -1) {
@@ -114,10 +114,10 @@ void StagePanel::Insert(d2d::Sprite* spr)
 
 	rebuildPatchSymbol();
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void StagePanel::Remove(d2d::Sprite* spr)
+void StagePanel::Remove(ee::Sprite* spr)
 {
 	for (size_t i = 0; i < 3; ++i) 
 	{
@@ -127,7 +127,7 @@ void StagePanel::Remove(d2d::Sprite* spr)
 			{
 				m_sprites[i][j] = NULL;
 				spr->Release();
-				d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 				return;
 			}
 		}
@@ -147,7 +147,7 @@ void StagePanel::Clear()
 
 	delete m_symbol, m_symbol = NULL;
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 }
 

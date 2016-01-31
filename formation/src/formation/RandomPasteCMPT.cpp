@@ -6,8 +6,8 @@
 using namespace formation;
 
 RandomPasteCMPT::RandomPasteCMPT(wxWindow* parent, const wxString& name, 
-								 d2d::EditPanel* editPanel)
-	: d2d::AbstractEditCMPT(parent, name, editPanel)
+								 ee::EditPanel* editPanel)
+	: ee::AbstractEditCMPT(parent, name, editPanel)
 {
 	m_editOP = new RandomPasteOP(editPanel, this);
 }
@@ -49,7 +49,7 @@ void RandomPasteCMPT::initChoice()
 	std::map<wxString, int> mapNameToNum;
 
 	std::vector<wxString> names;
-	Context::Instance()->library->traverse(d2d::GetNameVisitor<d2d::ListItem>(names));
+	Context::Instance()->library->traverse(ee::GetNameVisitor<ee::ListItem>(names));
 
 	m_choice->Clear();
 	for (size_t i = 0, n = names.size(); i < n; ++i)

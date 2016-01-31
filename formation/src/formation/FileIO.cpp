@@ -8,8 +8,8 @@ using namespace formation;
 
 void FileIO::load(const char* filename)
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	ee::SymbolMgr::Instance()->clear();
+	ee::BitmapMgr::Instance()->clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -26,17 +26,17 @@ void FileIO::load(const char* filename)
 	context->time = value["time"].asInt();
 	context->toolbar->initFromContext();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = ee::FilenameTools::getFileDir(filename);
 
 	int i = 0;
 	Json::Value actorValue = value["actor"][i++];
 	while (!actorValue.isNull()) {
-		d2d::ISprite* sprite = load(actorValue, dir);
+		ee::ISprite* sprite = load(actorValue, dir);
 		context->stage->insertSprite(sprite);
 		actorValue = value["actor"][i++];
 	}
 
-	context->library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	context->library->loadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename)
@@ -49,10 +49,10 @@ void FileIO::store(const char* filename)
 	value["height"] = context->height;
 	value["time"] = context->time;
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = ee::FilenameTools::getFileDir(filename);
 
-	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	std::vector<ee::ISprite*> sprites;
+	Context::Instance()->stage->traverseSprites(ee::FetchAllVisitor<ee::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["actor"][i] = store(sprites[i], dir);
 
@@ -64,18 +64,18 @@ void FileIO::store(const char* filename)
 	fout.close();
 }
 
-d2d::ISprite* FileIO::load(const Json::Value& value,
+ee::ISprite* FileIO::load(const Json::Value& value,
 						   const std::string& dir)
 {
 	std::string filepath = value["filepath"].asString();
-	filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+	filepath = ee::FilenameTools::getAbsolutePath(dir, filepath);
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	ee::ISymbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
+	ee::ISprite* sprite = ee::SpriteFactory::Instance()->create(symbol);
 	symbol->release();
 	const float x = value["position"]["x"].asDouble(),
 		y = value["position"]["y"].asDouble();
-	sprite->setTransform(d2d::Vector(x, y), 0);
+	sprite->setTransform(ee::Vector(x, y), 0);
 
 	ActorInfo* info = new ActorInfo;
  	info->id = value["id"].asInt();
@@ -84,12 +84,12 @@ d2d::ISprite* FileIO::load(const Json::Value& value,
 	return sprite;
 }
 
-Json::Value FileIO::store(const d2d::ISprite* sprite,
+Json::Value FileIO::store(const ee::ISprite* sprite,
 						  const std::string& dir)
 {
 	Json::Value value;
 	
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
+	value["filepath"] = ee::FilenameTools::getRelativePath(dir, 
 		sprite->getSymbol().getFilepath()).ToStdString();
 
 	value["position"]["x"] = sprite->getPosition().x;

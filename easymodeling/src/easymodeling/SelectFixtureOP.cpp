@@ -7,8 +7,8 @@
 
 using namespace emodeling;
 
-SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::DrawRectangleOP(editPanel, editPanel->GetStageImpl(), true)
+SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+	: ee::DrawRectangleOP(editPanel, editPanel->GetStageImpl(), true)
 	, m_selected(NULL)
 	, m_mouseOn(NULL)
 	, m_stagePanel(editPanel)
@@ -24,10 +24,10 @@ SelectFixtureOP::~SelectFixtureOP()
 
 bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::Sprite* sprite = m_stagePanel->QuerySpriteByPos(pos);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Sprite* sprite = m_stagePanel->QuerySpriteByPos(pos);
 
-	d2d::IPropertySetting* setting = NULL;
+	ee::PropertySetting* setting = NULL;
 	if (sprite)
 	{
 		m_selected = NULL;
@@ -46,9 +46,9 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 		}
 		else
 		{
-			d2d::DrawRectangleOP::OnMouseLeftDown(x, y);
+			ee::DrawRectangleOP::OnMouseLeftDown(x, y);
 			m_first_pos = pos;
-			d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
 
@@ -61,12 +61,12 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 
 bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
+	if (ee::DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_first_pos.IsValid())
 	{
-		d2d::Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
-		std::vector<d2d::Sprite*> sprites;
+		ee::Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
+		std::vector<ee::Sprite*> sprites;
 		m_stagePanel->QuerySpritesByRect(rect, sprites);
 
 		m_selected = NULL;
@@ -96,12 +96,12 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 
 bool SelectFixtureOP::OnMouseMove(int x, int y)
 {
-	if (d2d::DrawRectangleOP::OnMouseMove(x, y)) return true;
+	if (ee::DrawRectangleOP::OnMouseMove(x, y)) return true;
 
 	m_mouseOn = NULL;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::Sprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Sprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
 	if (sprite)
 	{
 		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
@@ -118,14 +118,14 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 		}
 	}
 
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
 }
 
 bool SelectFixtureOP::OnDraw() const
 {
-	if (d2d::DrawRectangleOP::OnDraw()) return true;
+	if (ee::DrawRectangleOP::OnDraw()) return true;
 
 	if (m_selected)
 		DrawUtils::drawFixture(m_selected, DrawUtils::e_selected, true);
@@ -137,7 +137,7 @@ bool SelectFixtureOP::OnDraw() const
 
 bool SelectFixtureOP::Clear()
 {
-	if (d2d::DrawRectangleOP::Clear()) return true;
+	if (ee::DrawRectangleOP::Clear()) return true;
 
 	m_first_pos.SetInvalid();
 

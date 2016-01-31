@@ -9,13 +9,13 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->Clear();
-	d2d::BitmapMgr::Instance()->Clear();
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -32,21 +32,21 @@ bool Task::IsDirty() const
 	return m_stage->IsEditDirty();
 }
 
-const d2d::EditPanel* Task::GetEditPanel() const
+const ee::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
 	wxSplitterWindow* rightVerSplitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* leftVerSplitter = new wxSplitterWindow(rightVerSplitter);
 	wxSplitterWindow* leftHorSplitter = new wxSplitterWindow(leftVerSplitter);
 
-	m_library = new d2d::LibraryPanel(leftHorSplitter);
-	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
+	m_library = new ee::LibraryPanel(leftHorSplitter);
+	m_library->AddPage(new ee::LibraryImagePage(m_library->GetNotebook()));
 
-	m_property = new d2d::PropertySettingPanel(leftHorSplitter);
+	m_property = new ee::PropertySettingPanel(leftHorSplitter);
 
 	m_stage = new StagePanel(leftVerSplitter, m_parent, m_library);
 	m_property->SetEditPanel(m_stage->GetStageImpl());

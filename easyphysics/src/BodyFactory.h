@@ -16,7 +16,7 @@ class BodyFactory
 {
 public:
 	static IBody* createBody(const std::string& filename, float scale = 1.0f);
-	static IBody* createBody(const std::vector<d2d::Vector>& triangles, float scale = 1.0f);
+	static IBody* createBody(const std::vector<ee::Vector>& triangles, float scale = 1.0f);
 	static IBody* createBody(const std::vector<FixtureDataInfo>& fixtures, float scale = 1.0f);
 
 	static void setWorld(b2World* world);

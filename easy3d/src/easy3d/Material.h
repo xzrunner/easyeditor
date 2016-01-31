@@ -3,7 +3,7 @@
 
 #include "Vector.h"
 
-#include <drag2d.h>
+
 
 namespace e3d 
 {
@@ -20,7 +20,7 @@ struct Material
 	vec3 diffuse;
 	vec3 specular;
 
-	d2d::TextureImgData m_diffuse_tex;
+	ee::TextureImgData m_diffuse_tex;
 };
 
 }

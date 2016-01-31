@@ -6,8 +6,8 @@
 namespace eanim
 {
 
-SymbolEditGLCanvas::SymbolEditGLCanvas(d2d::EditPanel* parent, Symbol* symbol)
-	: d2d::OrthoCanvas(parent)
+SymbolEditGLCanvas::SymbolEditGLCanvas(ee::EditPanel* parent, Symbol* symbol)
+	: ee::OrthoCanvas(parent)
 	, m_symbol(symbol)
 	, m_drawMode(DrawInPixels)
 {
@@ -18,12 +18,12 @@ void SymbolEditGLCanvas::setDrawMode(e_DrawMode mode)
 	m_drawMode = mode;
 }
 
-d2d::RawPixels* SymbolEditGLCanvas::getRawPixels()
+ee::RawPixels* SymbolEditGLCanvas::getRawPixels()
 {
 	return m_symbol->getRawPixels();
 }
 
-d2d::RawPixels::PixelBuf& SymbolEditGLCanvas::getSelectedPixels()
+ee::RawPixels::PixelBuf& SymbolEditGLCanvas::getSelectedPixels()
 {
 	return m_selectedPixels;
 }
@@ -35,7 +35,7 @@ SymbolEditGLCanvas::RenderSetting& SymbolEditGLCanvas::getRenderSetting()
 
 void SymbolEditGLCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	ee::OrthoCanvas::initGL();
 	m_symbol->reloadTexture();
 }
 
@@ -45,8 +45,8 @@ void SymbolEditGLCanvas::onDraw()
 	{
 	case DrawInTexture:
 		{
-			MorphingSprite sprite(m_symbol, d2d::Vector(0, 0), false);
-			d2d::SpriteDraw::drawSprite(&sprite);
+			MorphingSprite sprite(m_symbol, ee::Vector(0, 0), false);
+			ee::SpriteDraw::drawSprite(&sprite);
 		}
 		break;
 	case DrawInPixels:

@@ -1,7 +1,7 @@
 #ifndef _EASYUI_SYMBOL_CONFIG_H_
 #define _EASYUI_SYMBOL_CONFIG_H_
 
-#include <drag2d.h>
+
 
 namespace eui
 {
@@ -9,7 +9,7 @@ namespace eui
 class SymbolCfg
 {
 public:
-	void QueryType(const d2d::Symbol* sym, std::string& type) const;
+	void QueryType(const ee::Symbol* sym, std::string& type) const;
 
 	static SymbolCfg* Instance();
 

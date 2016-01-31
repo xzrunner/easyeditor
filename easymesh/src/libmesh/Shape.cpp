@@ -20,7 +20,7 @@ Shape::Shape(const Shape& shape)
 {
 }
 
-Shape::Shape(const d2d::Image& image)
+Shape::Shape(const ee::Image& image)
 {
 	m_texid = image.GetTexID();
 	m_tex_filepath = image.GetFilepath();
@@ -36,27 +36,27 @@ Shape::~Shape()
 	ClearTriangles();
 }
 
-void Shape::QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes)
+void Shape::QueryNode(const ee::Vector& p, std::vector<Node*>& nodes)
 {
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j) {
-			if (d2d::Math2D::GetDistance(tri->nodes[j]->xy, p) < m_node_radius) {
+			if (ee::Math2D::GetDistance(tri->nodes[j]->xy, p) < m_node_radius) {
 				nodes.push_back(tri->nodes[j]);
 			}
 		}
 	}
 }
 
-void Shape::QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes)
+void Shape::QueryNode(const ee::Rect& r, std::vector<Node*>& nodes)
 {
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j)
 		{
-			if (d2d::Math2D::IsPointInRect(tri->nodes[j]->xy, r))
+			if (ee::Math2D::IsPointInRect(tri->nodes[j]->xy, r))
 				nodes.push_back(tri->nodes[j]);
 		}
 	}
@@ -64,8 +64,8 @@ void Shape::QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes)
 
 void Shape::DrawInfoUV() const
 {
-	std::set<d2d::Vector, d2d::VectorCmp> unique;
-	std::vector<d2d::Vector> tmp(3);
+	std::set<ee::Vector, ee::VectorCmp> unique;
+	std::vector<ee::Vector> tmp(3);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
@@ -75,17 +75,17 @@ void Shape::DrawInfoUV() const
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::DrawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		ee::PrimitiveDraw::DrawPolyline(tmp, ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
-	std::vector<d2d::Vector> nodes;
+	std::vector<ee::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::DrawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::PrimitiveDraw::DrawCircles(nodes, m_node_radius, true, 2, ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
 void Shape::DrawInfoXY() const
 {
-	std::set<d2d::Vector, d2d::VectorCmp> unique;
-	std::vector<d2d::Vector> tmp(3);
+	std::set<ee::Vector, ee::VectorCmp> unique;
+	std::vector<ee::Vector> tmp(3);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
@@ -94,45 +94,45 @@ void Shape::DrawInfoXY() const
 			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::DrawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		ee::PrimitiveDraw::DrawPolyline(tmp, ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
-	std::vector<d2d::Vector> nodes;
+	std::vector<ee::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::DrawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::PrimitiveDraw::DrawCircles(nodes, m_node_radius, true, 2, ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Shape::DrawTexture(const d2d::Matrix& mt,
-						const d2d::Colorf& mul, 
-						const d2d::Colorf& add) const
+void Shape::DrawTexture(const ee::Matrix& mt,
+						const ee::Colorf& mul, 
+						const ee::Colorf& add) const
 {
 	DrawTexture(mt, mul, add, m_texid);
 }
 
-void Shape::DrawTexture(const d2d::Matrix& mt, 
-						const d2d::Colorf& mul, 
-						const d2d::Colorf& add,
+void Shape::DrawTexture(const ee::Matrix& mt, 
+						const ee::Colorf& mul, 
+						const ee::Colorf& add,
 						unsigned int texid) const
 {
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	shader->sprite();
-	d2d::ColorTrans color;
+	ee::ColorTrans color;
 	color.multi = mul;
 	color.add = add;
 	shader->SetSpriteColor(color);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
-		d2d::Vector vertices[4], texcoords[4];
+		ee::Vector vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
-			vertices[i] = d2d::Math2D::TransVector(tri->nodes[i]->xy, mt);
+			vertices[i] = ee::Math2D::TransVector(tri->nodes[i]->xy, mt);
 			texcoords[i] = tri->nodes[i]->uv;
 		}
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
 
-// 		if (d2d::Config::Instance()->IsUseDTex()) {
-// 			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
+// 		if (ee::Config::Instance()->IsUseDTex()) {
+// 			ee::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
 // 				m_tex_filepath, m_texid);
 // 		} else {
 			shader->Draw(vertices, texcoords, m_texid);
@@ -140,9 +140,9 @@ void Shape::DrawTexture(const d2d::Matrix& mt,
 	}
 }
 
-d2d::Rect Shape::GetRegion() const
+ee::Rect Shape::GetRegion() const
 {
-	d2d::Rect r;
+	ee::Rect r;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
@@ -161,8 +161,8 @@ void Shape::SetTween(Shape* begin, Shape* end, float process)
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j)
 		{
-			const d2d::Vector& p0 = begin->m_tris[i]->nodes[j]->xy;
-			const d2d::Vector& p1 = end->m_tris[i]->nodes[j]->xy;
+			const ee::Vector& p0 = begin->m_tris[i]->nodes[j]->xy;
+			const ee::Vector& p1 = end->m_tris[i]->nodes[j]->xy;
 			m_tris[i]->nodes[j]->xy = p0 + (p1 - p0) * process;
 		}
 	}
@@ -176,20 +176,20 @@ void Shape::ClearTriangles()
 
 void Shape::StoreTriangles(Json::Value& value) const
 {
-	std::vector<d2d::Vector> transform;
+	std::vector<ee::Vector> transform;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
 		for (int i = 0; i < 3; ++i)
 			transform.push_back(tri->nodes[i]->xy);
 	}
-	d2d::JsonSerializer::Store(transform, value);
+	ee::JsonSerializer::Store(transform, value);
 }
 
 void Shape::LoadTriangles(const Json::Value& value)
 {
-	std::vector<d2d::Vector> transform;
-	d2d::JsonSerializer::Load(value, transform);
+	std::vector<ee::Vector> transform;
+	ee::JsonSerializer::Load(value, transform);
 	int itr = 0;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{

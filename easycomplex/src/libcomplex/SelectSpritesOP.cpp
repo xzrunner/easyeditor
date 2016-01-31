@@ -7,16 +7,16 @@
 namespace ecomplex
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(wnd, stage, spritesImpl, callback)
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+								 ee::EditCMPT* callback/* = NULL*/)
+	: ee::SelectSpritesOP(wnd, stage, spritesImpl, callback)
 	, m_open_symbol(wnd, stage, spritesImpl)
 {
 }
 
 // bool SelectSpritesOP::OnKeyDown(int keyCode)
 // {
-// 	if (d2d::SelectSpritesOP::OnKeyDown(keyCode)) {
+// 	if (ee::SelectSpritesOP::OnKeyDown(keyCode)) {
 // 		return true;
 // 	}
 // 
@@ -41,10 +41,10 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, d2d::EditPanelImpl* stage, d2d::
 
 bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
+	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-	d2d::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected) {
 		m_open_symbol.Open(selected);
 	}

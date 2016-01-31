@@ -13,14 +13,14 @@
 namespace lr
 {
 
-BEGIN_EVENT_TABLE(Frame, d2d::Frame)
+BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::OnPreview)
 	EVT_MENU(ID_SETING_EXTEND, Frame::OnExtendSetting)
 	EVT_MENU_RANGE(ID_TOOLBAR+1, ID_TOOLBAR+9, Frame::OnToolBarClick)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
-	: d2d::Frame(title, filetag)
+	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_setting_menu->Append(ID_SETING_EXTEND, wxT("Extend"), wxT("Extend"));
@@ -38,15 +38,15 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			wxString ext = d2d::FileHelper::GetExtension(filename);
+			wxString ext = ee::FileHelper::GetExtension(filename);
 			if (ext == "png") {
 				SaveAsPNG(filename.ToStdString());
 			} else {
 				SaveAsJson(filename.ToStdString());
 			}
 		}
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
@@ -66,7 +66,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	std::vector<const d2d::Sprite*> sprites;
+	std::vector<const ee::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
 	preview::MainDialog dlg(this, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
@@ -82,22 +82,22 @@ void Frame::OnExtendSetting(wxCommandEvent& event)
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
-	d2d::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
+	ee::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
 	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
-	std::vector<d2d::Sprite*> sprites;
-	stage->TraverseSprites(d2d::FetchAllVisitor<d2d::Sprite>(sprites), d2d::DT_VISIBLE);
+	std::vector<ee::Sprite*> sprites;
+	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i]);
 	}
 
-	std::vector<d2d::Shape*> shapes;
-	stage->TraverseShapes(d2d::FetchAllVisitor<d2d::Shape>(shapes), d2d::DT_VISIBLE);
+	std::vector<ee::Shape*> shapes;
+	stage->TraverseShapes(ee::FetchAllVisitor<ee::Shape>(shapes), ee::DT_VISIBLE);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		ss.DrawShape(shapes[i]);		
 	}
 
-	libshape::RectShape rect(d2d::Vector(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
+	libshape::RectShape rect(ee::Vector(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
 	ss.DrawShape(&rect);
 
 	ss.SaveToFile(filepath);
@@ -105,7 +105,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
-	wxString fixed = d2d::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
+	wxString fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }

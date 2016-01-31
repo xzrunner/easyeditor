@@ -5,10 +5,10 @@ using namespace emodeling;
 
 void DrawUtils::drawBody(libmodeling::Body* body, DrawType dType)
 {
-	d2d::Colorf cFace, cEdge;
+	ee::Colorf cFace, cEdge;
 	getBodyColor(body->type, dType, cFace, cEdge);
 
-	d2d::Matrix mt;
+	ee::Matrix mt;
 	body->sprite->GetTransMatrix(mt);
 	body->draw(mt, cFace, cEdge);
 }
@@ -16,19 +16,19 @@ void DrawUtils::drawBody(libmodeling::Body* body, DrawType dType)
 void DrawUtils::drawFixture(libmodeling::Fixture* fixture, 
 							DrawType dType, bool onlyFixture)
 {
-	d2d::Colorf cFace, cEdge;
+	ee::Colorf cFace, cEdge;
 	if (onlyFixture)
 		getFixtureColor(dType, cFace, cEdge);
 	else
 		getBodyColor(fixture->body->type, dType, cFace, cEdge);
 
-	d2d::Matrix mt;
+	ee::Matrix mt;
 	fixture->body->sprite->GetTransMatrix(mt);
 	fixture->draw(mt, cFace, cEdge);
 }
 
 void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
-							 d2d::Colorf& cFace, d2d::Colorf& cEdge)
+							 ee::Colorf& cFace, ee::Colorf& cEdge)
 {
 	switch (type)
 	{
@@ -57,7 +57,7 @@ void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
 		break;
 	case e_selected:
 		{
-			d2d::Colorf c = cFace;
+			ee::Colorf c = cFace;
 			c.r *= rScale;
 			c.g *= gScale;
 			c.b *= bScale;
@@ -69,7 +69,7 @@ void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
 	cEdge = colorEnlarge(cFace, 1.05f);
 }
 
-void DrawUtils::getFixtureColor(DrawType type, d2d::Colorf& cFace, d2d::Colorf& cEdge)
+void DrawUtils::getFixtureColor(DrawType type, ee::Colorf& cFace, ee::Colorf& cEdge)
 {
 	cFace.Set(0.6f, 0.35f, 0.6f, 0.5f);
 	switch (type)
@@ -85,9 +85,9 @@ void DrawUtils::getFixtureColor(DrawType type, d2d::Colorf& cFace, d2d::Colorf& 
 	cEdge = colorEnlarge(cFace, 1.1f);
 }
 
-d2d::Colorf DrawUtils::colorEnlarge(const d2d::Colorf& color, float factor)
+ee::Colorf DrawUtils::colorEnlarge(const ee::Colorf& color, float factor)
 {
-	d2d::Colorf ret = color;
+	ee::Colorf ret = color;
 	ret.r = std::min(color.r * factor, 1.0f);
 	ret.g = std::min(color.g * factor, 1.0f);
 	ret.b = std::min(color.b * factor, 1.0f);

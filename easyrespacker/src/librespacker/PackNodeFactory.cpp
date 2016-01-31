@@ -84,7 +84,7 @@ PackNodeFactory::PackNodeFactory()
 	m_builders.push_back(m_shape_builder = new ShapeBuilder);
 }
 
-const IPackNode* PackNodeFactory::Create(const d2d::Sprite* spr)
+const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 {
 	const IPackNode* node = NULL;
 
@@ -94,7 +94,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::Sprite* spr)
 	}
 	
 	// picture
-	else if (const d2d::ImageSprite* image = dynamic_cast<const d2d::ImageSprite*>(spr)) {
+	else if (const ee::ImageSprite* image = dynamic_cast<const ee::ImageSprite*>(spr)) {
 		node = m_img_builder->Create(image);
 	} else if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(spr)) {
 		node = m_scale9_builder->Create(scale9);
@@ -107,7 +107,7 @@ const IPackNode* PackNodeFactory::Create(const d2d::Sprite* spr)
 		} else if (m_shape_builder->CanHandle(sym)) {
 			node = m_shape_builder->Create(sym);
 		} else {
-			throw d2d::Exception("PackNodeFactory::Create unknown etexture.");
+			throw ee::Exception("PackNodeFactory::Create unknown etexture.");
 		}
 	}
 
@@ -136,25 +136,25 @@ const IPackNode* PackNodeFactory::Create(const d2d::Sprite* spr)
 	}
 
 	else {
-		throw d2d::Exception("PackNodeFactory::Create unknown sprite type.");
+		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 	
-	node->SetFilepath(d2d::FileHelper::GetRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
 
 	if (node->GetSprID() > ANCHOR_ID) {
-		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
+		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
 
 	return node;
 }
 
-const IPackNode* PackNodeFactory::Create(const d2d::Symbol* symbol)
+const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 {
 	const IPackNode* node = NULL;
 
 	// picture
-	if (const d2d::ImageSymbol* img_symbol = dynamic_cast<const d2d::ImageSymbol*>(symbol)) {
-		d2d::ImageSprite* img_spr = new d2d::ImageSprite(const_cast<d2d::ImageSymbol*>(img_symbol));
+	if (const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(symbol)) {
+		ee::ImageSprite* img_spr = new ee::ImageSprite(const_cast<ee::ImageSymbol*>(img_symbol));
 		node = m_img_builder->Create(img_spr);
 		img_spr->Release();
 	} else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(symbol)) {
@@ -181,13 +181,13 @@ const IPackNode* PackNodeFactory::Create(const d2d::Symbol* symbol)
 	}
 
 	else {
-		throw d2d::Exception("PackNodeFactory::Create unknown symbol type.");
+		throw ee::Exception("PackNodeFactory::Create unknown symbol type.");
 	}
 
-	node->SetFilepath(d2d::FileHelper::GetRelativePath(m_files_dir, symbol->GetFilepath()).ToStdString());
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, symbol->GetFilepath()).ToStdString());
 
 	if (node->GetSprID() > ANCHOR_ID) {
-		throw d2d::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
+		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
 	}
 
 	PackUI::Instance()->OnKnownPackID(symbol->GetFilepath(), node->GetSprID());
@@ -199,7 +199,7 @@ void PackNodeFactory::GetAllNodes(std::vector<IPackNode*>& nodes) const
 {
 	nodes.clear();
 	for (int i = 0, n = m_builders.size(); i < n; ++i) {
-		m_builders[i]->Traverse(d2d::FetchAllVisitor<IPackNode>(nodes));
+		m_builders[i]->Traverse(ee::FetchAllVisitor<IPackNode>(nodes));
 	}
 }
 

@@ -7,7 +7,7 @@ namespace eshape
 {
 
 LibraryPage::LibraryPage(wxWindow* parent, const char* name)
-	: d2d::ILibraryPage(parent, name)
+	: ee::ILibraryPage(parent, name)
 	, m_stage(NULL)
 	, m_toolbar(NULL)
 {
@@ -36,7 +36,7 @@ void LibraryPage::setContext(StagePanel* stage, ToolbarPanel* toolbar)
 
 void LibraryPage::onDelPress(wxCommandEvent& event)
 {
-	d2d::ILibraryPage::onDelPress(event);
+	ee::ILibraryPage::onDelPress(event);
 
 	if (m_stage && m_toolbar)
 	{

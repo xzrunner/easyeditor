@@ -20,7 +20,7 @@ static const float TRY_FACTOR = 0.95f;
 static const int TRY_MIN_EDGE = 1;
 static const int TRY_MIN_LIMIT = 2;
 
-RegularRectCut::RegularRectCut(const d2d::Image& image)
+RegularRectCut::RegularRectCut(const ee::Image& image)
 {
 	LoadPixels(image.GetPixelData(), image.GetOriginWidth(), image.GetOriginHeight());
 

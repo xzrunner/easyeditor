@@ -14,12 +14,12 @@
 using namespace ebuilder;
 
 LayersPage::LayersPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Layers"))
+	: ee::ILibraryPage(parent, wxT("Layers"))
 {
 	initLayout();
 }
 
-bool LayersPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LayersPage::isHandleSymbol(ee::ISymbol* symbol) const
 {
 	return dynamic_cast<LayerItem*>(symbol) != NULL;
 }

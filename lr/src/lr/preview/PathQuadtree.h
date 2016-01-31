@@ -4,7 +4,7 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-#include <drag2d.h>
+
 
 namespace lr
 {

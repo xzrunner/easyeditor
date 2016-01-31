@@ -6,12 +6,12 @@
 namespace emesh
 {
 
-BEGIN_EVENT_TABLE(Frame, d2d::Frame)
+BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_SET_BG, Frame::OnSetBackground)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
-	: d2d::Frame(title, filetag)
+	: ee::Frame(title, filetag)
 {
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
 }
@@ -26,23 +26,23 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString filename = dlg.GetPath();
-			wxString ext = d2d::FileHelper::GetExtension(filename);
+			wxString ext = ee::FileHelper::GetExtension(filename);
 			if (ext == "png")
 			{
-				d2d::Snapshoot ss;
-				d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
+				ee::Snapshoot ss;
+				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(m_curr_filename);
 				ss.OutputToImageFile(symbol, filename.ToStdString());
 				symbol->Release();
 			}
 			else
 			{
-				wxString fixed = d2d::FileHelper::GetFilenameAddTag(dlg.GetPath(), m_filetag, "json");
+				wxString fixed = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), m_filetag, "json");
 				m_curr_filename = fixed;
 				m_task->Store(fixed);
 			}
 		}
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
+	} catch (ee::Exception& e) {
+		ee::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
 }
@@ -56,13 +56,13 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 
-		d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		d2d::Sprite* sprite = d2d::SpriteFactory::Instance()->Create(symbol);
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
+		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
 		stage->SetBackground(sprite);
 		sprite->Release();
 		symbol->Release();
-		d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 

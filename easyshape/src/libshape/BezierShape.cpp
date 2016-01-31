@@ -14,21 +14,21 @@ BezierShape::BezierShape(const BezierShape& bezier)
 	createCurve();
 }
 
-BezierShape::BezierShape(const d2d::Vector points[4])
+BezierShape::BezierShape(const ee::Vector points[4])
 {
 	CopyCtrlNodes(points);
 	createCurve();
 }
 
-BezierShape::BezierShape(const d2d::Vector& start, const d2d::Vector& end)
+BezierShape::BezierShape(const ee::Vector& start, const ee::Vector& end)
 {
 	m_control_nodes[0] = start;
 	m_control_nodes[3] = end;
 
-	d2d::Vector mid = (start + end) * 0.5f;
-	d2d::Vector offset = (end - start) * 0.5f;
-	m_control_nodes[1] = mid + d2d::Math2D::RotateVectorRightAngle(offset, true);
-	m_control_nodes[2] = mid + d2d::Math2D::RotateVectorRightAngle(offset, false);
+	ee::Vector mid = (start + end) * 0.5f;
+	ee::Vector offset = (end - start) * 0.5f;
+	m_control_nodes[1] = mid + ee::Math2D::RotateVectorRightAngle(offset, true);
+	m_control_nodes[2] = mid + ee::Math2D::RotateVectorRightAngle(offset, false);
 
 	createCurve();
 }
@@ -43,11 +43,11 @@ BezierShape* BezierShape::Clone() const
 	return new BezierShape(*this);
 }
 
-bool BezierShape::IsContain(const d2d::Vector& pos) const
+bool BezierShape::IsContain(const ee::Vector& pos) const
 {
 	bool ret = false;
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
-		if (d2d::Math2D::GetDistance(pos, m_control_nodes[i]) < RADIUS) {
+		if (ee::Math2D::GetDistance(pos, m_control_nodes[i]) < RADIUS) {
 			ret = true;
 			break;
 		}
@@ -55,7 +55,7 @@ bool BezierShape::IsContain(const d2d::Vector& pos) const
 	return ret;
 }
 
-void BezierShape::Translate(const d2d::Vector& offset)
+void BezierShape::Translate(const ee::Vector& offset)
 {
 	ChainShape::Translate(offset);
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
@@ -63,26 +63,26 @@ void BezierShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void BezierShape::Draw(const d2d::Matrix& mt, const d2d::ColorTrans& color) const
+void BezierShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	ChainShape::Draw(mt, color);
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
-		d2d::Vector pos = d2d::Math2D::TransVector(m_control_nodes[i], mt);
-		d2d::PrimitiveDraw::DrawRect(pos, (float)RADIUS, (float)RADIUS, m_style);
+		ee::Vector pos = ee::Math2D::TransVector(m_control_nodes[i], mt);
+		ee::PrimitiveDraw::DrawRect(pos, (float)RADIUS, (float)RADIUS, m_style);
 	}
 }
 
-d2d::IPropertySetting* BezierShape::CreatePropertySetting(d2d::EditPanelImpl* stage)
+ee::PropertySetting* BezierShape::CreatePropertySetting(ee::EditPanelImpl* stage)
 {
 	return new BezierPropertySetting(stage, this);
 }
 
 void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
-	d2d::Shape::LoadFromFile(value, dir);
+	ee::Shape::LoadFromFile(value, dir);
 
-	d2d::Vector points[4];
+	ee::Vector points[4];
 	for (size_t i = 0; i < 4; ++i)
 	{
 		points[i].x = value["points"]["x"][i].asDouble();
@@ -95,7 +95,7 @@ void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 
 void BezierShape::StoreToFile(Json::Value& value, const std::string& dir) const
 {
-	d2d::Shape::StoreToFile(value, dir);
+	ee::Shape::StoreToFile(value, dir);
 
 	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
 		value["points"]["x"][i] = m_control_nodes[i].x;
@@ -105,9 +105,9 @@ void BezierShape::StoreToFile(Json::Value& value, const std::string& dir) const
 
 void BezierShape::createCurve()
 {
-	const size_t num = std::max(20, (int)(d2d::Math2D::GetDistance(m_control_nodes[0], m_control_nodes[3]) / 10));
+	const size_t num = std::max(20, (int)(ee::Math2D::GetDistance(m_control_nodes[0], m_control_nodes[3]) / 10));
 	float dt = 1.0f / (num - 1);
-	std::vector<d2d::Vector> vertices(num);
+	std::vector<ee::Vector> vertices(num);
 	for (size_t i = 0; i < num; ++i)
 		vertices[i] = pointOnCubicBezier(i * dt);
 	Load(vertices);
@@ -127,7 +127,7 @@ void BezierShape::Mirror(bool x, bool y)
 	}
 }
 
-void BezierShape::MoveCtrlNode(const d2d::Vector& from, const d2d::Vector& to)
+void BezierShape::MoveCtrlNode(const ee::Vector& from, const ee::Vector& to)
 {
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		if (m_control_nodes[i] == from) {
@@ -137,19 +137,19 @@ void BezierShape::MoveCtrlNode(const d2d::Vector& from, const d2d::Vector& to)
 	}
 }
 
-void BezierShape::CopyCtrlNodes(const d2d::Vector ctrl_points[])
+void BezierShape::CopyCtrlNodes(const ee::Vector ctrl_points[])
 {
 	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
 		m_control_nodes[i] = ctrl_points[i];
 	}
 }
 
-d2d::Vector BezierShape::pointOnCubicBezier(float t)
+ee::Vector BezierShape::pointOnCubicBezier(float t)
 {
 	float ax, bx, cx;
 	float ay, by, cy;
 	float tSquared, tCubed;
-	d2d::Vector result;
+	ee::Vector result;
 
 	cx = 3.0f * (m_control_nodes[1].x - m_control_nodes[0].x);
 	bx = 3.0f * (m_control_nodes[2].x - m_control_nodes[1].x) - cx;

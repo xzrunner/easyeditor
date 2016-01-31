@@ -1,7 +1,7 @@
 #ifndef _LR_LIBRARY_PAGE_H_
 #define _LR_LIBRARY_PAGE_H_
 
-#include <drag2d.h>
+
 
 #include "dataset/layer_type.h"
 
@@ -11,7 +11,7 @@ namespace lr
 class LibraryPanel;
 class Layer;
 
-class LibraryPage : public d2d::ILibraryPage
+class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(LibraryPanel* library, const std::string& name, 
@@ -19,17 +19,17 @@ public:
 	virtual ~LibraryPage();
 
 	//
-	//	interface d2d::ILibraryPage
+	//	interface ee::LibraryPage
 	//
-	virtual bool IsHandleSymbol(d2d::Symbol* symbol) const;
+	virtual bool IsHandleSymbol(ee::Symbol* symbol) const;
 
 	void UpdateStatusFromLayer();
 
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
 
-	void AddEditOP(d2d::AbstractEditOP* editop);
-	d2d::AbstractEditOP* GetNextEditOP();
+	void AddEditOP(ee::EditOP* editop);
+	ee::EditOP* GetNextEditOP();
 
 	LayerType GetLayerType() const { return m_layer_type; }
 
@@ -54,7 +54,7 @@ private:
 	wxCheckBox* m_editable_ctrl;
 
 	int m_curr_op_idx;
-	std::vector<d2d::AbstractEditOP*> m_editops;
+	std::vector<ee::EditOP*> m_editops;
 
 }; // LibraryPage 
 

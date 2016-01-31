@@ -1,12 +1,12 @@
 #ifndef _EASYTEMPLATE_LIBRARY_PANEL_H_
 #define _EASYTEMPLATE_LIBRARY_PANEL_H_
 
-#include <drag2d.h>
+#include <ee/LibraryPanel.h>
 
 namespace etemplate
 {
 
-class LibraryPanel : public d2d::LibraryPanel
+class LibraryPanel : public ee::LibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);

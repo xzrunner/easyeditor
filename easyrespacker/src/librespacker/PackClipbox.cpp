@@ -15,13 +15,13 @@ PackClipbox::PackClipbox(int id)
 }
 
 void PackClipbox::PackToLuaString(ebuilder::CodeGenerator& gen,
-								  const d2d::TexturePacker& tp,
+								  const ee::TexturePacker& tp,
 								  float scale) const
 {
 	ClipboxToLuaString::Pack(this, gen);
 }
 
-void PackClipbox::UnpackFromLua(lua_State* L, const std::vector<d2d::Image*>& images)
+void PackClipbox::UnpackFromLua(lua_State* L, const std::vector<ee::Image*>& images)
 {
 	ClipboxFromLua::Unpack(L, this);
 }
@@ -32,7 +32,7 @@ int PackClipbox::SizeOfPackToBin() const
 }
 
 void PackClipbox::PackToBin(uint8_t** ptr, 
-							const d2d::TexturePacker& tp,
+							const ee::TexturePacker& tp,
 							float scale) const
 {
 	ClipboxToBin::Pack(this, ptr);
@@ -43,7 +43,7 @@ int PackClipbox::SizeOfUnpackFromBin() const
 	return ClipboxFromBin::Size();
 }
 
-void PackClipbox::UnpackFromBin(uint8_t** ptr, const std::vector<d2d::Image*>& images)
+void PackClipbox::UnpackFromBin(uint8_t** ptr, const std::vector<ee::Image*>& images)
 {
 	ClipboxFromBin::Unpack(ptr, this);
 }

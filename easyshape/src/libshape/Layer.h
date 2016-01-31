@@ -7,7 +7,7 @@
 namespace libshape
 {	
 
-class Layer : public d2d::Object
+class Layer : public ee::Object
 {
 public:
 	Layer();
@@ -17,8 +17,8 @@ public:
 	void setName(const wxString& name);
 
 	// use IVisitor if has other implementation
-	const std::vector<d2d::ISprite*>& getSprites() const { return m_sprites; }
-	const std::vector<d2d::IShape*>& getShapes() const { return m_shapes; }
+	const std::vector<ee::ISprite*>& getSprites() const { return m_sprites; }
+	const std::vector<ee::IShape*>& getShapes() const { return m_shapes; }
 
 	void traverseSprites(IVisitor& visitor) const;
 	void traverseShapes(IVisitor& visitor) const;
@@ -35,8 +35,8 @@ public:
 private:
 	wxString m_name;
 
-	std::vector<d2d::ISprite*> m_sprites;
-	std::vector<d2d::IShape*> m_shapes;
+	std::vector<ee::ISprite*> m_sprites;
+	std::vector<ee::IShape*> m_shapes;
 
 }; // Layer
 

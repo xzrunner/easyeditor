@@ -8,7 +8,7 @@ namespace tdtex
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OnePassCanvas(panel, panel->GetStageImpl())
+	: ee::OnePassCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 {
 	m_panel->Load();
@@ -26,7 +26,7 @@ void StageCanvas::OnSize(int w, int h)
 
 	m_camera->UpdateModelView();
 
-	d2d::RenderContextStack::Instance()->SetProjection(w, h);
+	ee::RenderContextStack::Instance()->SetProjection(w, h);
 	//////////////////////////////////////////////////////////////////////////
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
@@ -35,10 +35,10 @@ void StageCanvas::OnSize(int w, int h)
 
 void StageCanvas::OnDrawSprites() const
 {
-	d2d::Rect sr = m_screen.GetRegion();
-  	m_panel->TraverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		d2d::DT_VISIBLE);
-//  	m_panel->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	ee::Rect sr = m_screen.GetRegion();
+  	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		ee::DT_VISIBLE);
+//  	m_panel->traverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
   
   	m_stage->DrawEditOP();
 
@@ -63,7 +63,7 @@ void StageCanvas::OnDrawSprites() const
 	// turn to easy2d shader
 	{
 		// reset
-		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+		ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 		shader->SetTexture(0);
 		shader->null();
 
@@ -91,7 +91,7 @@ void StageCanvas::DrawEJScreen() const
 	vb[8] = right, vb[9] = up;
 	vb[12] = right, vb[13] = down;
 
-	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
  	shader->sprite();
  	shader->Draw(vb, scr->GetTexID());
 }

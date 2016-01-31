@@ -26,9 +26,9 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 {
 	wxSplitterWindow* splitter = new wxSplitterWindow(this);
 	
-	m_stage = new d2d::EditPanel(splitter, this);
+	m_stage = new ee::EditPanel(splitter, this);
 	m_stage->SetEditOP(new ResizeBaseOP(m_stage, m_stage->GetStageImpl(), m_symbol));
-	m_stage->SetCanvas(new d2d::DialogStageCanvas(m_stage, m_stage->GetStageImpl(), m_symbol, glctx));
+	m_stage->SetCanvas(new ee::DialogStageCanvas(m_stage, m_stage->GetStageImpl(), m_symbol, glctx));
 
 	ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_stage, m_symbol);
 	
@@ -43,14 +43,14 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 		return;
 	}
 
-	d2d::ConfirmDialog dlg(this);
+	ee::ConfirmDialog dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
 		const std::string& filepath = m_symbol->GetFilepath();
 		FileSaver::store(filepath.c_str(), *m_symbol);
 		m_symbol->RefreshThumbnail(filepath);
-		d2d::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
+		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)

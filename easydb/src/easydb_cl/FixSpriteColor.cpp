@@ -3,7 +3,7 @@
 
 #include <wx/filename.h>
 #include <fstream>
-#include <drag2d.h>
+
 
 namespace edb
 {
@@ -43,8 +43,8 @@ bool FixSpriteColor::FixSprite(const wxString& filepath, Json::Value& sprite_val
 		return false;
 	}
 
-	d2d::Colorf col = d2d::TransColor(str, d2d::PT_ARGB);
-	sprite_val["add color"] = d2d::TransColor(col, d2d::PT_ABGR);
+	ee::Colorf col = ee::TransColor(str, ee::PT_ARGB);
+	sprite_val["add color"] = ee::TransColor(col, ee::PT_ABGR);
 
 	return true;
 }
@@ -52,15 +52,15 @@ bool FixSpriteColor::FixSprite(const wxString& filepath, Json::Value& sprite_val
 void FixSpriteColor::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
-	d2d::FileHelper::FetchAllFiles(dir, files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (d2d::FileType::IsType(filepath, d2d::FileType::e_complex)) {
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			FixComplex(filepath);
-		} else if (d2d::FileType::IsType(filepath, d2d::FileType::e_anim)) {
+		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			FixAnim(filepath);
 		}
 	}

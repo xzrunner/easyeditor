@@ -12,12 +12,12 @@ namespace eanim
 	{
 	public:
 		MorphingSprite();
-		MorphingSprite(Symbol* symbol, const d2d::Vector& pos, bool isCopyMesh);
+		MorphingSprite(Symbol* symbol, const ee::Vector& pos, bool isCopyMesh);
 		MorphingSprite(const MorphingSprite& sprite);
 		virtual ~MorphingSprite();
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual MorphingSprite* clone() const;
 

@@ -8,14 +8,14 @@ namespace eterrain2d
 void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json::Value& value)
 {
 	if (const libshape::PolygonShape* shape = ocean->GetBounding()) {
-		d2d::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
+		ee::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
 	}
-	if (const d2d::ImageSymbol* img = ocean->GetImage0()) {
-		value["tex0"] = d2d::FileHelper::GetRelativePath(dir,
+	if (const ee::ImageSymbol* img = ocean->GetImage0()) {
+		value["tex0"] = ee::FileHelper::GetRelativePath(dir,
 			img->GetFilepath()).ToStdString();
 	}
-	if (const d2d::ImageSymbol* img = ocean->GetImage1()) {
-		value["tex1"] = d2d::FileHelper::GetRelativePath(dir,
+	if (const ee::ImageSymbol* img = ocean->GetImage1()) {
+		value["tex1"] = ee::FileHelper::GetRelativePath(dir,
 			img->GetFilepath()).ToStdString();
 	}
 
@@ -41,20 +41,20 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 		return NULL;
 	}
 
-	std::vector<d2d::Vector> bounding;
-	d2d::JsonSerializer::Load(value["bound"], bounding);
+	std::vector<ee::Vector> bounding;
+	ee::JsonSerializer::Load(value["bound"], bounding);
 	libshape::PolygonShape* shape = new libshape::PolygonShape(bounding);
 
 	std::string tex0_path = dir + "\\" + value["tex0"].asString();
-	d2d::Symbol* tex0 = d2d::SymbolMgr::Instance()->FetchSymbol(tex0_path);
-	shape->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(tex0));
+	ee::Symbol* tex0 = ee::SymbolMgr::Instance()->FetchSymbol(tex0_path);
+	shape->SetMaterialTexture(static_cast<ee::ImageSymbol*>(tex0));
 
-	OceanMesh* ocean = new OceanMesh(shape, static_cast<d2d::ImageSymbol*>(tex0));
+	OceanMesh* ocean = new OceanMesh(shape, static_cast<ee::ImageSymbol*>(tex0));
 
 	if (!value["tex1"].isNull()) {
 		std::string tex1_path = dir + "\\" + value["tex1"].asString();
-		d2d::Symbol* tex1 = d2d::SymbolMgr::Instance()->FetchSymbol(tex1_path);
-		ocean->SetImage1(static_cast<d2d::ImageSymbol*>(tex1));
+		ee::Symbol* tex1 = ee::SymbolMgr::Instance()->FetchSymbol(tex1_path);
+		ocean->SetImage1(static_cast<ee::ImageSymbol*>(tex1));
 	}
 
 	ocean->OpenWave(value["wave"]["open"].asBool());
@@ -64,7 +64,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	ocean->OpenUVMove(value["uv_move"]["open"].asBool());
 	float x = value["uv_move"]["speed"]["x"].asDouble() * 0.01f,
 		y = value["uv_move"]["speed"]["y"].asDouble() * 0.01f;
-	ocean->SetTexcoordsSpeed(d2d::Vector(x, y));
+	ocean->SetTexcoordsSpeed(ee::Vector(x, y));
 
 	ocean->OpenBlend(value["tex_blend"]["open"].asBool());
 	ocean->SetBlendSpeed(value["tex_blend"]["speed"].asDouble() * 0.01f);
@@ -86,7 +86,7 @@ void FileIO::StoreSymbol(const char* filepath, const Symbol* symbol)
 	Json::Value dst_value;
 	dst_value["bg"] = src_value["bg"];
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath).ToStdString();
+	std::string dir = ee::FileHelper::GetFileDir(filepath).ToStdString();
 	std::vector<OceanMesh*> meshes = symbol->GetOceans();
 	for (int i = 0, n = meshes.size(); i < n; ++i) {
 		FileIO::StoreOceanMesh(meshes[i], dir, dst_value["ocean"][i]);

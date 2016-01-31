@@ -9,8 +9,8 @@ PreviewDialog::PreviewDialog(wxWindow* parent)
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	d2d::EditPanel* editPanel = new d2d::EditPanel(this, this);
-	editPanel->setEditOP(new d2d::NullEditOP(editPanel));
+	ee::EditPanel* editPanel = new ee::EditPanel(this, this);
+	editPanel->setEditOP(new ee::NullEditOP(editPanel));
 	editPanel->setCanvas(new PreviewCanvas(editPanel));
 
 	sizer->Add(editPanel, 1, wxEXPAND);

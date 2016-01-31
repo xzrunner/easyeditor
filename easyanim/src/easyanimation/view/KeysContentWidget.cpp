@@ -58,7 +58,7 @@ KeysContentWidget::KeysContentWidget(wxWindow* parent)
 	RegistSubject(SetSelectedSJ::Instance());
 	RegistSubject(SetSelectedRegionSJ::Instance());
 	RegistSubject(RemoveLayerSJ::Instance());
-	RegistSubject(d2d::SetCanvasDirtySJ::Instance());
+	RegistSubject(ee::SetCanvasDirtySJ::Instance());
 }
 
 void KeysContentWidget::OnSize(wxSizeEvent& event)
@@ -118,9 +118,9 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'z' || key_code == 'Z')) {
-		d2d::EditUndoSJ::Instance()->Undo();
+		ee::EditUndoSJ::Instance()->Undo();
 	} else if (m_keys_state.GetKeyState(WXK_CONTROL) && (key_code == 'y' || key_code == 'Y')) {
-		d2d::EditRedoSJ::Instance()->Redo();
+		ee::EditRedoSJ::Instance()->Redo();
 	}
 }
 
@@ -201,7 +201,7 @@ void KeysContentWidget::OnNotify(int sj_id, void* ud)
 			}
 		}
 		break;
-	case d2d::MSG_SET_CANVAS_DIRTY:
+	case ee::MSG_SET_CANVAS_DIRTY:
 		Refresh();
 		break;
 	}

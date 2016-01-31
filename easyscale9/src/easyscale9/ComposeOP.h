@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_COMPOSE_OP_H_
 #define _EASYSCALE9_COMPOSE_OP_H_
 
-#include <drag2d.h>
+
 
 namespace escale9
 {
@@ -9,7 +9,7 @@ namespace escale9
 class StagePanel;
 class ToolbarPanel;
 
-class ComposeOP : public d2d::ZoomViewOP
+class ComposeOP : public ee::ZoomViewOP
 {
 public:
 	ComposeOP(StagePanel* stage, ToolbarPanel* toolbar);
@@ -22,7 +22,7 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	d2d::Sprite* SelectByPos(int x, int y);
+	ee::Sprite* SelectByPos(int x, int y);
 
 private:
 	ToolbarPanel* m_toolbar;

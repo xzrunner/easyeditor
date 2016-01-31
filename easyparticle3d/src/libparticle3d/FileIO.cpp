@@ -35,20 +35,20 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 //	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
-	std::string dir = d2d::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
 		p3d_symbol* pc = cp->m_pc;
 
-		d2d::Symbol* symbol = static_cast<d2d::Symbol*>(pc->ud);
+		ee::Symbol* symbol = static_cast<ee::Symbol*>(pc->ud);
 		value["components"][i]["filepath"] = 
-			d2d::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+			ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
 
 		if (pc->bind_ps_cfg) {
 			std::string filepath = PSConfigMgr::Instance()->GetFilepath(pc->bind_ps_cfg);
 			value["components"][i]["bind ps filepath"] = 
-				d2d::FileHelper::GetRelativePath(dir, filepath).ToStdString();
+				ee::FileHelper::GetRelativePath(dir, filepath).ToStdString();
 		}
 
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
@@ -77,7 +77,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 }
 
 void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
-				  ToolbarPanel* toolbar, d2d::LibraryPanel* library)
+				  ToolbarPanel* toolbar, ee::LibraryPanel* library)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -105,12 +105,12 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 //	toolbar->m_name->SetValue(adapter.name);
 
-	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
-	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * d2d::TRANS_RAD_TO_DEG);
+	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * ee::TRANS_RAD_TO_DEG);
+	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * ee::TRANS_RAD_TO_DEG);
 	ps->SetHori(toolbar->m_min_hori->GetValue(), toolbar->m_max_hori->GetValue());
 
-	toolbar->m_min_vert->SetValue((adapter.vert - adapter.vert_var) * d2d::TRANS_RAD_TO_DEG);
-	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * d2d::TRANS_RAD_TO_DEG);
+	toolbar->m_min_vert->SetValue((adapter.vert - adapter.vert_var) * ee::TRANS_RAD_TO_DEG);
+	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * ee::TRANS_RAD_TO_DEG);
 	ps->SetVert(toolbar->m_min_vert->GetValue(), toolbar->m_max_vert->GetValue());
 
 	toolbar->m_ground->SetSelection(adapter.ground);
@@ -208,11 +208,11 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		dst.alpha_start = src.alpha_start * 0.01f;
 		dst.alpha_end = src.alpha_end * 0.01f;
 
-		if (d2d::FileHelper::IsFileExist(src.bind_filepath)) {
+		if (ee::FileHelper::IsFileExist(src.bind_filepath)) {
 			dst.bind_ps_cfg = PSConfigMgr::Instance()->GetConfig(src.bind_filepath);
 		}
 
-		dst.ud = d2d::SymbolMgr::Instance()->FetchSymbol(src.filepath);
+		dst.ud = ee::SymbolMgr::Instance()->FetchSymbol(src.filepath);
 	}
 
 	return cfg;

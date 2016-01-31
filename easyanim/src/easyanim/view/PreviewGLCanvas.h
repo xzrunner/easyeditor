@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 #include <wx/wx.h>
 
 namespace eanim
@@ -8,7 +8,7 @@ namespace eanim
 	class Sprite;
 	class LayersMgr;
 
-	class PreviewGLCanvas : public d2d::OrthoCanvas
+	class PreviewGLCanvas : public ee::OrthoCanvas
 	{
 	public:
 		struct PlaySetting
@@ -24,7 +24,7 @@ namespace eanim
 		};
 
 	public:
-		PreviewGLCanvas(d2d::EditPanel* editPanel, LayersMgr* layers, int fps = 24);
+		PreviewGLCanvas(ee::EditPanel* editPanel, LayersMgr* layers, int fps = 24);
 
 		PlaySetting& getPlaySetting();
 

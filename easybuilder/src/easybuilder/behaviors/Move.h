@@ -12,7 +12,7 @@ namespace ebuilder
 		Move(Actor* actor);
 
 	public:
-		d2d::Vector start, end;
+		ee::Vector start, end;
 
 		float speed;
 

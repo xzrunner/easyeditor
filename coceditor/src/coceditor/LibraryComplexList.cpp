@@ -8,7 +8,7 @@ namespace coceditor
 {
 
 LibraryComplexList::LibraryComplexList(wxWindow* parent)
-	: d2d::LibraryList(parent, wxT("complex"))
+	: ee::LibraryList(parent, wxT("complex"))
 {
 }
 

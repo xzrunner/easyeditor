@@ -1,14 +1,14 @@
 #ifndef _EASYANIM_LAYERS_MGR_H_
 #define _EASYANIM_LAYERS_MGR_H_
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 
 class Layer;
 
-class LayersMgr : public d2d::Observer
+class LayersMgr : public ee::Observer
 {
 public:
 	LayersMgr();
@@ -25,7 +25,7 @@ public:
 
 	bool Clear();
 
-//		void removeSprite(d2d::Sprite* sprite);
+//		void removeSprite(ee::Sprite* sprite);
 
 	const std::vector<Layer*>& CetAllLayers() const {
 		return m_layers;

@@ -15,7 +15,7 @@ class RotateSpriteState : public IEditState
 {
 public:
 	RotateSpriteState(StagePanel* stage,
-		const d2d::SpriteSelection& selection);
+		const ee::SpriteSelection& selection);
 
 	virtual void OnMousePress(const ivec2& pos);
 	virtual void OnMouseRelease(const ivec2& pos);
@@ -25,12 +25,12 @@ private:
 	void Rotate(const e3d::Camera& cam, const ivec2& start, const ivec2& end);
 
 private:
-	class Visitor : public d2d::Visitor
+	class Visitor : public ee::Visitor
 	{
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const ivec2& start, const ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
-		virtual void Visit(d2d::Object* object, bool& next);
+		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
 		StagePanel* m_stage;
@@ -41,7 +41,7 @@ private:
 
 private:
 	StagePanel* m_stage;
-	const d2d::SpriteSelection& m_selection;
+	const ee::SpriteSelection& m_selection;
 
 	ivec2 m_last_pos;
 

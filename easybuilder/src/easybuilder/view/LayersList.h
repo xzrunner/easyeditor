@@ -2,14 +2,14 @@
 #ifndef EBUILDER_LAYERS_LIST_H
 #define EBUILDER_LAYERS_LIST_H
 
-#include <drag2d.h>
+
 
 namespace ebuilder
 {
 	class Scene;
 	class LayersPage;
 
-	class LayersList : public d2d::LibraryList
+	class LayersList : public ee::LibraryList
 	{
 	public:
 		LayersList(LayersPage* page);

@@ -42,8 +42,8 @@ void PreviewDialog::buildToolBar(wxSizer* topSizer)
 
 void PreviewDialog::buildEditPanel(wxSizer* topSizer, LayersMgr* layers, int fps)
 {
-	m_editPanel = new d2d::EditPanel(this);
-	m_editPanel->setEditOP(new d2d::ZoomViewOP(m_editPanel, false));
+	m_editPanel = new ee::EditPanel(this);
+	m_editPanel->setEditOP(new ee::ZoomViewOP(m_editPanel, false));
 	m_editPanel->setCanvas(new PreviewGLCanvas(m_editPanel, layers, fps));
 	topSizer->Add(m_editPanel, 1, wxEXPAND);
 }

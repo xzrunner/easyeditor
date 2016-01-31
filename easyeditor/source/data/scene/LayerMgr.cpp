@@ -1,12 +1,11 @@
 #include "LayerMgr.h"
 #include "Layer.h"
 
-#include "message/panel_msg.h"
-#include "message/SetCanvasDirtySJ.h"
-
 #include <algorithm>
 
-namespace d2d
+#include <assert.h>
+
+namespace ee
 {
 
 LayerMgr::LayerMgr()
@@ -19,14 +18,14 @@ LayerMgr::~LayerMgr()
 	Clear();
 }
 
-void LayerMgr::TraverseSprite(IVisitor& visitor, DataTraverseType type, bool order) const
+void LayerMgr::TraverseSprite(Visitor& visitor, DataTraverseType type, bool order) const
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->TraverseSprite(visitor, type, order);
 	}
 }
 
-void LayerMgr::TraverseShape(IVisitor& visitor, bool order) const
+void LayerMgr::TraverseShape(Visitor& visitor, bool order) const
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->TraverseShape(visitor, order);
@@ -45,7 +44,7 @@ void LayerMgr::Insert(Layer* layer)
 
 void LayerMgr::Remove(int idx)
 {
-	assert(idx >= 0 && idx < m_layers.size());
+	assert(idx >= 0 && idx < static_cast<int>(m_layers.size()));
 
 	m_layers[idx]->Release();
 	m_layers.erase(m_layers.begin() + idx);
@@ -53,7 +52,7 @@ void LayerMgr::Remove(int idx)
 
 Layer* LayerMgr::GetLayer(int idx)
 {
-	if (idx >= 0 && idx < m_layers.size()) {
+	if (idx >= 0 && idx < static_cast<int>(m_layers.size())) {
 		return m_layers[idx];
 	} else {
 		return NULL;

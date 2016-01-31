@@ -1,6 +1,6 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
@@ -9,14 +9,14 @@ namespace eanim
 	class PartSkeleton;
 	class WholeSkeleton;
 
-	class Sprite : public d2d::ImageSprite
+	class Sprite : public ee::ImageSprite
 	{
 	public:
 
 		virtual ~Sprite() {}
 
 		//
-		// d2d::ICloneable interface
+		// ee::ICloneable interface
 		//
 		virtual Sprite* clone() const { return NULL; }
 

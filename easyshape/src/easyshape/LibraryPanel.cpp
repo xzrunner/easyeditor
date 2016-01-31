@@ -11,7 +11,7 @@ namespace eshape
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
-	: d2d::LibraryPanel(parent)
+	: ee::LibraryPanel(parent)
 	, m_stage(NULL)
 	, m_toolbar(NULL)
 {
@@ -24,7 +24,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 {
-	d2d::LibraryPanel::onPageChanged(event);
+	ee::LibraryPanel::onPageChanged(event);
 	
 	if (m_stage && m_toolbar)
 	{
@@ -38,12 +38,12 @@ void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 		m_imagePage->clickListSelection();
 }
 
-d2d::ILibraryPage* LibraryPanel::getShapePage() 
+ee::ILibraryPage* LibraryPanel::getShapePage() 
 { 
 	return m_shapePage; 
 }
 
-d2d::ILibraryPage* LibraryPanel::getImagePage() 
+ee::ILibraryPage* LibraryPanel::getImagePage() 
 { 
 	return m_imagePage; 
 }

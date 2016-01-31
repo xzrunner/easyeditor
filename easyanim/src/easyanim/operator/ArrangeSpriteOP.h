@@ -1,12 +1,12 @@
 #pragma once
 
-#include <drag2d.h>
+
 
 namespace eanim
 {
 	class StagePanel;
 
-	class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>
+	class ArrangeSpriteOP : public ee::ArrangeSpriteOP<ee::SelectSpritesOP>
 	{
 	public:
 		ArrangeSpriteOP(StagePanel* editPanel);

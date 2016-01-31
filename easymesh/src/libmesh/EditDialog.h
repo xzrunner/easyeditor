@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_EDIT_DIALOG_H_
 #define _EASYMESH_EDIT_DIALOG_H_
 
-#include <drag2d.h>
+
 
 namespace emesh
 {
@@ -20,7 +20,7 @@ private:
 	void OnCloseEvent(wxCloseEvent& event);
 
 private:
-	d2d::EditPanel* m_stage;
+	ee::EditPanel* m_stage;
 
 	Sprite* m_sprite;
 

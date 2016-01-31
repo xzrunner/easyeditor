@@ -20,7 +20,7 @@ UIList::UIList()
 	m_item_spr = NULL;
 }
 
-bool UIList::InsertSprite(d2d::Sprite* sprite, int idx)
+bool UIList::InsertSprite(ee::Sprite* sprite, int idx)
 {
 	if (!sprite) {
 		return false;
@@ -41,8 +41,8 @@ bool UIList::InsertSprite(d2d::Sprite* sprite, int idx)
 		return true;
 	}
 
-	d2d::Vector base_pos = m_items[0]->GetPosition();
-	d2d::Vector new_pos = sprite->GetPosition();
+	ee::Vector base_pos = m_items[0]->GetPosition();
+	ee::Vector new_pos = sprite->GetPosition();
 	if (m_vert_count == 1 && m_hori_count == 1) {
 		if (base_pos == new_pos) {
 			return false;
@@ -83,13 +83,13 @@ bool UIList::ClearAllSprite()
 		m_item_spr = NULL;
 	}
 
-	for_each(m_items.begin(), m_items.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 	m_items.clear();
 
 	return ret;
 }
 
-void UIList::TraverseSprites(d2d::Visitor& visitor) const
+void UIList::TraverseSprites(ee::Visitor& visitor) const
 {
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		bool has_next;
@@ -103,15 +103,15 @@ void UIList::StoreToFile(const char* filename) const
 	std::string name = filename;
 	name = name.substr(0, name.find_last_of('_'));
 
-	std::string dir = d2d::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	// items complex
 	ecomplex::Symbol items_complex;
-	for_each(m_items.begin(), m_items.end(), d2d::RetainObjectFunctor<d2d::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::RetainObjectFunctor<ee::Sprite>());
 	items_complex.m_sprites = m_items;
 	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = items_complex.m_sprites[i];
-		spr->name = "item" + d2d::StringHelper::ToString(i+1);
+		ee::Sprite* spr = items_complex.m_sprites[i];
+		spr->name = "item" + ee::StringHelper::ToString(i+1);
 		spr->Retain();
 	}
 	std::string items_path = name + "_items_complex[gen].json";
@@ -132,8 +132,8 @@ void UIList::StoreToFile(const char* filename) const
 	// ui
 	std::string ui_path = filename;
 	Json::Value value;
-	value["items filepath"] = d2d::FileHelper::GetRelativePath(dir, items_path).ToStdString();
-	value["wrapper filepath"] = d2d::FileHelper::GetRelativePath(dir, top_path).ToStdString();
+	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path).ToStdString();
+	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path).ToStdString();
 	value["type"] = get_widget_desc(ID_LIST);
 	value["horizontal"] = m_horizontal;
 	value["vertical"] = m_vertical;
@@ -184,11 +184,11 @@ void UIList::LoadFromFile(const char* filename)
 	m_vert_space = value["vert space"].asDouble();
 
 	std::string items_filepath = value["items filepath"].asString();
-	items_filepath = d2d::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
+	items_filepath = ee::FileHelper::GetAbsolutePathFromFile(filename, items_filepath);
 	ecomplex::Symbol items_complex;
 	items_complex.LoadFromFile(items_filepath);
 	for (int i = 0, n = items_complex.m_sprites.size(); i < n; ++i) {
-		d2d::Sprite* spr = items_complex.m_sprites[i];
+		ee::Sprite* spr = items_complex.m_sprites[i];
 		spr->Retain();
 		m_items.push_back(spr);
 	}
@@ -204,7 +204,7 @@ bool UIList::ReFilling()
 		return false;
 	}
 
-	for_each(m_items.begin(), m_items.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 	m_items.clear();
 
 	m_items.push_back(m_item_spr->Clone());
@@ -216,7 +216,7 @@ bool UIList::ReFilling()
 	return true;
 }
 
-bool UIList::Arrange(const d2d::Sprite* spr)
+bool UIList::Arrange(const ee::Sprite* spr)
 {
 	if (m_items.empty()) {
 		return false;
@@ -275,15 +275,15 @@ bool UIList::Filling()
 		((m_hori_count == 1 || m_vert_count == 1) &&
 		(m_hori_count > 1 || m_vert_count > 1)));
 
-	for_each(m_items.begin(), m_items.end(), d2d::ReleaseObjectFunctor<d2d::Sprite>());
+	for_each(m_items.begin(), m_items.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 	m_items.clear();
 
-	d2d::Vector base = m_item_spr->GetPosition();
-	d2d::Rect item_r = m_item_spr->GetRect();
+	ee::Vector base = m_item_spr->GetPosition();
+	ee::Rect item_r = m_item_spr->GetRect();
 	float hw = item_r.Width() * 0.5f;
 	float hh = item_r.Height() * 0.5f;
 
-	d2d::Rect region = m_clipbox;
+	ee::Rect region = m_clipbox;
 	if (m_horizontal) {
 		region.xmax += m_hori_space * 2;
 	}
@@ -291,7 +291,7 @@ bool UIList::Filling()
 		region.ymin -= m_vert_space * 2;
 	}
 
-	d2d::Vector pos = base;
+	ee::Vector pos = base;
 	m_hori_count = m_vert_count = 0;
 	while (true) {
 		bool new_line = false;
@@ -306,7 +306,7 @@ bool UIList::Filling()
 				break;
 			} else {
 				new_line = true;
-				d2d::Sprite* spr = m_item_spr->Clone();
+				ee::Sprite* spr = m_item_spr->Clone();
 				spr->SetTransform(pos, spr->GetAngle());
 				m_items.push_back(spr);
 				ret = true;
@@ -340,11 +340,11 @@ bool UIList::Arrange(float hori_space, float vert_space)
 
 	m_hori_space = hori_space;
 	m_vert_space = vert_space;
-	d2d::Vector pos = m_items[0]->GetPosition();
+	ee::Vector pos = m_items[0]->GetPosition();
 	float x_base = pos.x;
 	int count = 0;
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		d2d::Sprite* spr = m_items[i];
+		ee::Sprite* spr = m_items[i];
 		spr->SetTransform(pos, spr->GetAngle());
 		pos.x += m_hori_space;
 

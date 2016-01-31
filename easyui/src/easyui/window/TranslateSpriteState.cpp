@@ -8,20 +8,20 @@ namespace window
 {
 
 TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
-										   d2d::SpriteSelection* selection, 
-										   const d2d::Vector& first_pos, 
+										   ee::SpriteSelection* selection, 
+										   const ee::Vector& first_pos, 
 										   AnchorMgr* anchor_mgr)
-	: d2d::TranslateSpriteState(selection, first_pos)
+	: ee::TranslateSpriteState(selection, first_pos)
 	, m_stage(stage)
 	, m_anchor_mgr(anchor_mgr)
 {
 }
 
-void TranslateSpriteState::OnMouseRelease(const d2d::Vector& pos)
+void TranslateSpriteState::OnMouseRelease(const ee::Vector& pos)
 {
 	GetSelection()->Traverse(Visitor(m_anchor_mgr));
-	d2d::TranslateSpriteState::OnMouseRelease(pos);
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::TranslateSpriteState::OnMouseRelease(pos);
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -29,9 +29,9 @@ void TranslateSpriteState::OnMouseRelease(const d2d::Vector& pos)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-Visit(d2d::Object* object, bool& next)
+Visit(ee::Object* object, bool& next)
 {
-	d2d::Sprite* sprite = static_cast<d2d::Sprite*>(object);
+	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
 	m_anchor_mgr->OnSprPosChanged(sprite);
 	next = true;
 }

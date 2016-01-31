@@ -9,7 +9,7 @@ namespace lr
 
 LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
 						 LayerType type, int id)
-	: d2d::ILibraryPage(library->GetNotebook(), name)
+	: ee::LibraryPage(library->GetNotebook(), name)
 	, m_layer_type(type)
 	, m_curr_op_idx(-1)
 {
@@ -21,10 +21,10 @@ LibraryPage::~LibraryPage()
 {
 	m_layer->Release();
 
-	for_each(m_editops.begin(), m_editops.end(), d2d::ReleaseObjectFunctor<d2d::AbstractEditOP>());
+	for_each(m_editops.begin(), m_editops.end(), ee::ReleaseObjectFunctor<ee::EditOP>());
 }
 
-bool LibraryPage::IsHandleSymbol(d2d::Symbol* symbol) const
+bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 {
 	return true;
 }
@@ -44,7 +44,7 @@ void LibraryPage::SetLayer(Layer* layer)
 	}
 }
 
-void LibraryPage::AddEditOP(d2d::AbstractEditOP* editop)
+void LibraryPage::AddEditOP(ee::EditOP* editop)
 {
 	editop->Retain();
 	m_editops.push_back(editop);
@@ -53,7 +53,7 @@ void LibraryPage::AddEditOP(d2d::AbstractEditOP* editop)
 	}
 }
 
-d2d::AbstractEditOP* LibraryPage::GetNextEditOP()
+ee::EditOP* LibraryPage::GetNextEditOP()
 {
 	if (m_editops.empty()) {
 		return NULL;
@@ -96,7 +96,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			std::string filepath = filenames[i].ToStdString();
-			d2d::Symbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
+			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
 			m_list->Insert(symbol);
 			symbol->Release();
@@ -107,7 +107,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 void LibraryPage::OnChangeVisible(wxCommandEvent& event)
 {
 	m_layer->SetVisible(event.IsChecked());
-	d2d::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void LibraryPage::OnChangeEditable(wxCommandEvent& event)

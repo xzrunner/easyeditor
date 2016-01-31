@@ -6,7 +6,7 @@
 namespace eicon
 {
 
-class Sprite : public d2d::Sprite
+class Sprite : public ee::Sprite
 {
 public:
 	Sprite();
@@ -24,12 +24,12 @@ public:
 	//
 	virtual bool Update(int version) { return true; }
 	virtual const Symbol& GetSymbol() const;
-	virtual void SetSymbol(d2d::Symbol* symbol);
+	virtual void SetSymbol(ee::Symbol* symbol);
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
-	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanelImpl* stage);
+	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	static d2d::Sprite* Create(d2d::Symbol* symbol) {
+	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
