@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libtemplate"
+	Name="5.libtemplate"
 	ProjectGUID="{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
 	RootNamespace="libtemplate"
 	Keyword="Win32Proj"

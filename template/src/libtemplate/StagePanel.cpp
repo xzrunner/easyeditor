@@ -13,17 +13,17 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 {
-	SetEditOP(new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this, property));
-	SetCanvas(new StageCanvas(this));
+	ee::EditOP* op = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, GetStageImpl(), this, property);
+	SetEditOP(op);
+	op->Release();
+
+	ee::StageCanvas* canvas = new StageCanvas(this);
+	SetCanvas(canvas);
+	canvas->Release();
 }
 
 StagePanel::~StagePanel()
 {	
-}
-
-void StagePanel::OnSizeDebug(wxSizeEvent& event)
-{
-	m_canvas->SetSize(event.GetSize()); 
 }
 
 }

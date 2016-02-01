@@ -18,12 +18,6 @@ public:
 		ee::LibraryPanel* library, ee::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
-protected:
-	virtual void OnSizeDebug(wxSizeEvent& event);
-
-private:
-	StageCanvas* m_canvas;
-
 }; // StagePanel
 
 }

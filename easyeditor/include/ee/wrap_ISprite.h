@@ -1,7 +1,9 @@
 #ifndef _EASYEDITOR_WRAP_ISPRITE_H_
 #define _EASYEDITOR_WRAP_ISPRITE_H_
 
-#include <lua.h>
+extern "C" {
+	#include <lua.h>
+};
 
 namespace ee
 {
