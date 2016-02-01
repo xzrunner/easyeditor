@@ -1,7 +1,10 @@
 #ifndef _EASYSHAPE_DRAW_LINE_UTILITY_H_
 #define _EASYSHAPE_DRAW_LINE_UTILITY_H_
 
+#include <ee/Vector.h>
+#include <ee/KeysState.h>
 
+#include <vector>
 
 namespace eshape
 {

@@ -96,9 +96,9 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		dlg.ShowModal();
 		UpdateShapeFromETexture(tex);
 	}
-	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(spr))
+	else if (eshape::Sprite* shape = dynamic_cast<eshape::Sprite*>(spr))
 	{
-		libshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
+		eshape::EditDialogSimple dlg(m_wnd, m_stage->GetCanvas()->GetGLContext(), shape, m_sprites_impl);
 		dlg.ShowModal();
 	}
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr))

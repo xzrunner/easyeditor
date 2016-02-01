@@ -1,7 +1,9 @@
 #ifndef _EASYSHAPE_DRAW_RECTANGLE_OP_H_
 #define _EASYSHAPE_DRAW_RECTANGLE_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
+#include <ee/Vector.h>
+#include <ee/ShapeStyle.h>
 
 namespace eshape
 {
@@ -19,7 +21,7 @@ public:
 	virtual bool Clear();
 
 protected:
-	ee::Vector m_firstPos, m_currPos;
+	ee::Vector m_first_pos, m_curr_pos;
 
 	ee::ShapeStyle m_style;
 

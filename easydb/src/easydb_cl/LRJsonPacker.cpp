@@ -169,7 +169,7 @@ void LRJsonPacker::ParserShapeFromSprite(const Json::Value& src_val, const lr::G
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 		sprite->Load(spr_val);
 
-		libshape::Sprite* shape_spr = dynamic_cast<libshape::Sprite*>(sprite);
+		eshape::Sprite* shape_spr = dynamic_cast<eshape::Sprite*>(sprite);
 		assert(shape_spr);
 		const std::vector<ee::Shape*>& shapes = shape_spr->GetSymbol().GetShapes();
 		for (int i = 0, n = shapes.size(); i < n; ++i) {
@@ -192,7 +192,7 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 	int idx = 0;
 	Json::Value shape_val = src_val["shape"][idx++];
 	while (!shape_val.isNull()) {
-		ee::Shape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, m_dir);
+		ee::Shape* shape = eshape::ShapeFactory::CreateShapeFromFile(shape_val, m_dir);
 
 		Json::Value dst_val;
 		dst_val["name"] = shape_val["name"];
@@ -210,7 +210,7 @@ void LRJsonPacker::ParserShapeFromShape(const Json::Value& src_val, const lr::Gr
 void LRJsonPacker::ParserShape(ee::Shape* shape, const ee::Vector& offset, float angle,
 							   const lr::Grids& grids, bool force_grids, Json::Value& out_val)
 {
-	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
+	if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape))
 	{
 		std::vector<int> grid_idx;
 
@@ -225,7 +225,7 @@ void LRJsonPacker::ParserShape(ee::Shape* shape, const ee::Vector& offset, float
 			out_val["grid"][sz] = grid_idx[i];
 		}
 	}
-	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
 	{
 		std::vector<ee::Vector> bound = chain->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
@@ -370,11 +370,11 @@ void LRJsonPacker::ParserCharacterFromSprite(const Json::Value& src_val, const l
 		std::string tag_ext;
 		if (ee::FileHelper::IsFileExist(shape_filepath)) {
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-			const std::vector<ee::Shape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
+			const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(symbol)->GetShapes();
 			if (!shapes.empty()) {
 				tag_ext = shapes[0]->name;
 
-				if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0])) {
+				if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0])) {
 					float x = spr_val["position"]["x"].asDouble(),
 						y = spr_val["position"]["y"].asDouble();
 					float ang = spr_val["angle"].asDouble();					

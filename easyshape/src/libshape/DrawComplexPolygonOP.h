@@ -3,6 +3,8 @@
 
 #include "DrawPolylineOP.h"
 
+namespace ee { class MultiShapesImpl; }
+
 namespace eshape
 {
 
@@ -12,7 +14,7 @@ class DrawComplexPolygonOP : public DrawPolylineOP
 {
 public:
 	DrawComplexPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-		ee::MultiShapesImpl* shapesImpl);
+		ee::MultiShapesImpl* shapes_impl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
 
@@ -20,7 +22,7 @@ private:
 	ComplexPolygonShape* CreateComplexPoly(const std::vector<ee::Vector>& polyline);
 
 protected:
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
 }; // DrawComplexPolygonOP
 

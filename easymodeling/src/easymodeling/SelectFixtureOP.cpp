@@ -7,12 +7,12 @@
 
 using namespace emodeling;
 
-SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::DrawRectangleOP(editPanel, editPanel->GetStageImpl(), true)
 	, m_selected(NULL)
 	, m_mouseOn(NULL)
 	, m_stagePanel(editPanel)
-	, m_propertyPanel(propertyPanel)
+	, m_property(property)
 {
 	m_first_pos.SetInvalid();
 }
@@ -54,7 +54,7 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 
 	if (!setting)
 		setting = new WorldPropertySetting(m_stage);
-	m_propertyPanel->SetPropertySetting(setting);
+	m_property->SetPropertySetting(setting);
 
 	return false;
 }
@@ -84,9 +84,9 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 		}
 
 		if (m_selected)
-			m_propertyPanel->SetPropertySetting(new FixturePropertySetting(m_stage, m_selected));
+			m_property->SetPropertySetting(new FixturePropertySetting(m_stage, m_selected));
 		else
-			m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
+			m_property->SetPropertySetting(new WorldPropertySetting(m_stage));
 
 		m_first_pos.SetInvalid();
 	}

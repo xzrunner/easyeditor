@@ -66,15 +66,15 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		}
 
 		wxString shape_path = ee::FileHelper::GetFilenameAddTag(
-			filepath, libshape::FILE_TAG, "json");
+			filepath, eshape::FILE_TAG, "json");
 
 		std::vector<ee::Shape*> shapes;
-		libshape::PolygonShape poly(vertices);
+		eshape::PolygonShape poly(vertices);
 		shapes.push_back(&poly);
 
 		ee::NullSymbol bg(filepath.ToStdString());
 
-		libshape::FileIO::StoreToFile(shape_path.mb_str(), shapes, &bg);
+		eshape::FileIO::StoreToFile(shape_path.mb_str(), shapes, &bg);
 	}
 }
 

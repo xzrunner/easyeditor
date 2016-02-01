@@ -35,7 +35,7 @@ public:
 	}
 
 private:
-	void AddOcean(const libshape::PolygonShape* shape, const ee::ImageSymbol* image);
+	void AddOcean(const eshape::PolygonShape* shape, const ee::ImageSymbol* image);
 
  private:
  	class StageDropTarget : public ee::StageDropTarget

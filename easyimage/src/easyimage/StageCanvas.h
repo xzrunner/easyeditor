@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_STAGE_CANVAS_H_
 #define _EASYIMAGE_STAGE_CANVAS_H_
 
-
+#include <ee/OrthoCanvas.h>
 
 namespace eimage
 {

@@ -23,7 +23,7 @@ class ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
+		PropertySettingPanel* property, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 	~ArrangeSpriteImpl();
 
 	virtual void OnKeyDown(int keyCode);

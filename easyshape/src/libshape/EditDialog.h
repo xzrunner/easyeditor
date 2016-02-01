@@ -1,9 +1,7 @@
 #ifndef _EASYSHAPE_ETID_DIALOG_H_
 #define _EASYSHAPE_ETID_DIALOG_H_
 
-//
-
-#include <wx/wx.h>
+#include <wx/dialog.h>
 
 namespace eshape
 {

@@ -14,7 +14,7 @@ EditUVCMPT::EditUVCMPT(wxWindow* parent, const wxString& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editOP = new EditUVOP(stage);
+	m_editop = new EditUVOP(stage);
 }
 
 wxSizer* EditUVCMPT::InitLayout()
@@ -50,7 +50,7 @@ void EditUVCMPT::onReset(wxCommandEvent& event)
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Reset();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-		m_editOP->Clear();
+		m_editop->Clear();
 	}
 }
 

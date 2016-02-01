@@ -4,17 +4,22 @@
 
 #include <easyimage.h>
 
+#include <ee/ShaderMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/panel_msg.h>
+
 namespace eimage
 {
 
-ImageProcessCMPT::ImageProcessCMPT(wxWindow* parent, const wxString& name, 
+ImageProcessCMPT::ImageProcessCMPT(wxWindow* parent, const std::string& name, 
 								   StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_edge_shader(NULL)
 {
-//	m_editOP = new ImageProcessOP(stage);
+//	m_editop = new ImageProcessOP(stage);
 
-	m_editOP = new ee::ZoomViewOP(stage, stage->GetStageImpl(), true);
+	m_editop = new ee::ZoomViewOP(stage, stage->GetStageImpl(), true);
 }
 
 wxSizer* ImageProcessCMPT::InitLayout()

@@ -3,6 +3,11 @@
 
 #include <easyimage.h>
 
+#include <ee/Rect.h>
+#include <ee/Sprite.h>
+#include <ee/Symbol.h>
+#include <ee/ShaderMgr.h>
+
 namespace eimage
 {
 
@@ -18,7 +23,7 @@ bool ImageProcessOP::OnActive()
 		return true;
 	}
 
-	if (const ee::Sprite* sprite = m_stage->getImage())
+	if (const ee::Sprite* sprite = m_stage->GetImage())
 	{
 		ee::Rect r = sprite->GetSymbol().GetSize();
 

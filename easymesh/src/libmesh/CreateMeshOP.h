@@ -10,7 +10,7 @@ namespace emesh
 class StagePanel;
 class Shape;
 
-class CreateMeshOP : public libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>
+class CreateMeshOP : public eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>
 {
 public:
 	CreateMeshOP(StagePanel* stage);

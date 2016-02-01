@@ -28,12 +28,12 @@ Fixture::~Fixture()
 
 bool Fixture::isContain(const ee::Vector& pos) const
 {
-	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
+	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shape))
 	{
 		return ee::Math2D::GetDistance(circle->center + body->sprite->GetPosition(), pos) 
 			< circle->radius;
 	}
-	else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shape))
+	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(shape))
 	{
 		std::vector<ee::Vector> boundary(4);
 		boundary[0].Set(rect->m_rect.xmin, rect->m_rect.ymin);
@@ -45,13 +45,13 @@ bool Fixture::isContain(const ee::Vector& pos) const
 		transLocalToWorld(boundary, fixed);
 		return ee::Math2D::IsPointInArea(pos, fixed);
 	}
-	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
+	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shape))
 	{
 		std::vector<ee::Vector> fixed;
 		transLocalToWorld(polygon->GetVertices(), fixed);
 		return ee::Math2D::IsPointInArea(pos, fixed);
 	}
-	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
 	{
 		std::vector<ee::Vector> fixed;
 		transLocalToWorld(chain->GetVertices(), fixed);
@@ -63,12 +63,12 @@ bool Fixture::isContain(const ee::Vector& pos) const
 
 bool Fixture::isIntersect(const ee::Rect& rect) const
 {
-	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
+	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shape))
 	{
 		return ee::Math2D::IsCircleIntersectRect(circle->center + body->sprite->GetPosition(), 
 			circle->radius, rect);
 	}
-	else if (libshape::RectShape* r = dynamic_cast<libshape::RectShape*>(shape))
+	else if (eshape::RectShape* r = dynamic_cast<eshape::RectShape*>(shape))
 	{
 		std::vector<ee::Vector> boundary(4);
 		boundary[0].Set(r->m_rect.xmin, r->m_rect.ymin);
@@ -80,13 +80,13 @@ bool Fixture::isIntersect(const ee::Rect& rect) const
 		transLocalToWorld(boundary, fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
 	}
-	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
+	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shape))
 	{
 		std::vector<ee::Vector> fixed;
 		transLocalToWorld(polygon->GetVertices(), fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
 	}
-	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
 	{
 		std::vector<ee::Vector> fixed;
 		transLocalToWorld(chain->GetVertices(), fixed);
@@ -98,26 +98,26 @@ bool Fixture::isIntersect(const ee::Rect& rect) const
 
 void Fixture::draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colorf& cEdge) const
 {
-	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
+	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shape))
 	{
 		ee::PrimitiveDraw::DrawCircle(mt, circle->center, circle->radius, true, 2, cFace);
 		ee::PrimitiveDraw::DrawCircle(mt, circle->center, circle->radius, false, 2, cEdge, 32);
 	}
-	else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shape))
+	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(shape))
 	{
 		const ee::Vector p0(rect->m_rect.xmin, rect->m_rect.ymin),
 			p1(rect->m_rect.xmax, rect->m_rect.ymax);
 		ee::PrimitiveDraw::DrawRect(mt, p0, p1, ee::ShapeStyle(true, cFace));
 		ee::PrimitiveDraw::DrawRect(mt, p0, p1, ee::ShapeStyle(false, cFace));
 	}
-	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
+	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
 		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
 		ee::PrimitiveDraw::DrawPolyline(vertices, cEdge, true, 2);
 	}
-	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);

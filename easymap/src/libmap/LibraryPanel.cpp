@@ -16,7 +16,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new ee::LibraryImagePage(nb));
 	AddPage(new ecomplex::LibraryPage(nb));
 	AddPage(new etexture::LibraryPage(nb));
-	AddPage(new libshape::LibraryPage(nb));
+	AddPage(new eshape::LibraryPage(nb));
 }
 
 }

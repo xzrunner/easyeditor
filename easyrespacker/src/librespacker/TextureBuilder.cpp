@@ -39,11 +39,11 @@ bool TextureBuilder::CanHandle(const etexture::Symbol* symbol) const
 	if (shapes.size() != 1) {
 		return false;
 	}
-	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
 		return false;
 	}
-	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
+	const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 	if (!material) {
 		return false;
 	}
@@ -70,11 +70,11 @@ void TextureBuilder::Load(const etexture::Symbol* symbol, PackPicture* pic)
 	if (shapes.size() != 1) {
 		throw ee::Exception("TextureBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
 	}
-	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
 		throw ee::Exception("TextureBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
 	}
-	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
+	const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 	if (!material) {
 		throw ee::Exception("TextureBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
 	}

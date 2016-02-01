@@ -219,7 +219,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		libmodeling::Fixture* fData = body->fixtures[i];
 
 		std::string newShape;
-		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
+		if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(fData->shape))
 		{
 			std::string radius = wxString::FromDouble(circle->radius, 1);
 			if (circle->center.x == 0 && circle->center.y == 0)
@@ -235,7 +235,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				newShape = lua::call("", "love.physics.newCircleShape", 3, x, y, radius);
 			}
 		}
-		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
+		else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(fData->shape))
 		{
 			// love.physics.newRectangleShape(x, y, w, h)
 			std::string x = wxString::FromDouble((rect->m_rect.xmax + rect->m_rect.xmin) * 0.5f, 1),
@@ -244,7 +244,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				h = wxString::FromDouble(rect->m_rect.ymax - rect->m_rect.ymin, 1);
 			newShape = lua::call("", "love.physics.newRectangleShape", 4, x, y, w, h);
 		}
-		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
+		else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(fData->shape))
 		{
 			// love.physics.newPolygonShape(size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
 			const std::vector<ee::Vector>& vertices = polygon->GetVertices();
@@ -260,7 +260,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 			}
 			newShape = lua::call("", "love.physics.newPolygonShape", 1, strParams);
 		}
-		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
+		else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(fData->shape))
 		{
 			// love.physics.newChainShape(loop, size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
 			std::string strParams = chain->IsClosed() ? "true" : "false";

@@ -1,13 +1,18 @@
 #include "DrawComplexPolygonOP.h"
 #include "ComplexPolygonShape.h"
 
+#include <ee/shape_msg.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Math2D.h>
+
 namespace eshape
 {
 
 DrawComplexPolygonOP::DrawComplexPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-										   ee::MultiShapesImpl* shapesImpl)
+										   ee::MultiShapesImpl* shapes_impl)
 	: DrawPolylineOP(wnd, stage, false)
-	, m_shapesImpl(shapesImpl)
+	, m_shapes_impl(shapes_impl)
 {
 }
 
@@ -26,7 +31,7 @@ bool DrawComplexPolygonOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	m_polyline.clear();
-	m_currPos.SetInvalid();
+	m_curr_pos.SetInvalid();
 
 	return false;
 }
@@ -34,7 +39,7 @@ bool DrawComplexPolygonOP::OnMouseLeftDClick(int x, int y)
 ComplexPolygonShape* DrawComplexPolygonOP::CreateComplexPoly(const std::vector<ee::Vector>& polyline)
 {
 	std::vector<PolygonShape*> polygon_shapes;
-	m_shapesImpl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(polygon_shapes));
+	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(polygon_shapes));
 
 	for (int i = 0, n = polygon_shapes.size(); i < n; ++i)
 	{

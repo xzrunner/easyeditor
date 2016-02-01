@@ -1,6 +1,10 @@
 #include "DrawPolylineOP.h"
 #include "DrawLineUtility.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/panel_msg.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace eshape
 {
 
@@ -10,7 +14,7 @@ DrawPolylineOP::DrawPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool isC
 	m_cursor = wxCursor(wxCURSOR_RIGHT_ARROW);
 
 	m_isClosed = isClosed;
-	m_currPos.SetInvalid();
+	m_curr_pos.SetInvalid();
 }
 
 bool DrawPolylineOP::OnMouseLeftDown(int x, int y)
@@ -34,7 +38,7 @@ bool DrawPolylineOP::OnMouseRightDown(int x, int y)
 	if (!m_polyline.empty())
 	{
 		m_polyline.pop_back();
-		if (m_polyline.empty()) m_currPos.SetInvalid();
+		if (m_polyline.empty()) m_curr_pos.SetInvalid();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -51,7 +55,7 @@ bool DrawPolylineOP::OnMouseMove(int x, int y)
 	if (DrawLineUtility::IsStraightOpen(m_polyline, m_stage->GetKeyState())) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
-	m_currPos = pos;
+	m_curr_pos = pos;
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 	return false;
@@ -74,9 +78,9 @@ bool DrawPolylineOP::OnDraw() const
 
 	if (!m_polyline.empty())
 	{
-		if (m_currPos.IsValid())
+		if (m_curr_pos.IsValid())
 		{
-			m_polyline.push_back(m_currPos);
+			m_polyline.push_back(m_curr_pos);
 			ee::PrimitiveDraw::DrawPolyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
 			m_polyline.pop_back();
 		}
@@ -94,7 +98,7 @@ bool DrawPolylineOP::Clear()
 	if (ee::ZoomViewOP::Clear()) return true;
 
 	m_polyline.clear();
-	m_currPos.SetInvalid();
+	m_curr_pos.SetInvalid();
 
 	return false;
 }

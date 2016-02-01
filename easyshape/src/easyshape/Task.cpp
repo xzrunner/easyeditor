@@ -77,10 +77,10 @@ void Task::InitLayout(wxFrame* parent)
 
 	ee::PropertySettingPanel* property = new ee::PropertySettingPanel(left_hori);
 
-	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
+	m_stage = new eshape::StagePanel(left_vert, parent, m_library);
 	property->SetEditPanel(m_stage->GetStageImpl());
 
-	ee::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, m_stage);
+	ee::ToolbarPanel* toolbar = new eshape::ToolbarPanel(right_vert, property, m_stage);
 
 	left_hori->SetSashGravity(0.8f);
 	left_hori->SplitHorizontally(m_library, property);

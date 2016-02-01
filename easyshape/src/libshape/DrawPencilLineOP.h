@@ -3,6 +3,8 @@
 
 #include "DrawCurveOP.h"
 
+namespace ee { class OneFloatValue; }
+
 namespace eshape
 {
 

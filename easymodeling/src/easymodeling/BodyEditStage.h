@@ -8,14 +8,14 @@
 namespace emodeling
 {
 
-class BodyEditStage : public libshape::StagePanel
+class BodyEditStage : public eshape::StagePanel
 {
 public:
 	BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
-		libshape::Symbol* symbol);
+		eshape::Symbol* symbol);
 
 	//
-	// libshape::StagePanel interface
+	// eshape::StagePanel interface
 	//
 	virtual void loadShapes();
 

@@ -1,7 +1,9 @@
 #ifndef _EASYSHAPE_MATH_H_
 #define _EASYSHAPE_MATH_H_
 
+#include <ee/Vector.h>
 
+#include <vector>
 
 namespace eshape
 {

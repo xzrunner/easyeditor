@@ -1,7 +1,8 @@
 #ifndef _EASYSHAPE_EDIT_NODES_ATOMIC_OP_H_
 #define _EASYSHAPE_EDIT_NODES_ATOMIC_OP_H_
 
-
+#include <ee/AtomicOP.h>
+#include <ee/Vector.h>
 
 namespace eshape
 {

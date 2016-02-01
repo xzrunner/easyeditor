@@ -15,7 +15,7 @@ StagePanel::StagePanel(wxWindow* parent,
 	: EditPanel(parent, frame)
 	, SpritesPanelImpl(GetStageImpl(), Context::Instance()->library)
 {
-//	m_editOP = new ArrangeSpriteOP(this, Context::Instance()->property);
+//	m_editop = new ArrangeSpriteOP(this, Context::Instance()->property);
 	b2Body* ground = CreateGround();
 	SetEditOP(new ephysics::DragPhysicsOP(this, GetStageImpl(), m_world, ground));
 

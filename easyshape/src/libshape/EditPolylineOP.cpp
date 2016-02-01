@@ -5,21 +5,21 @@
 #include "EditPolylineImpl.h"
 
 template <typename TBase, typename TSelected>
-libshape::EditPolylineOP<TBase, TSelected>::
+eshape::EditPolylineOP<TBase, TSelected>::
 EditPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-			   ee::MultiShapesImpl* shapesImpl,
-			   ee::PropertySettingPanel* propertyPanel,
+			   ee::MultiShapesImpl* shapes_impl,
+			   ee::PropertySettingPanel* property,
 			   ee::OneFloatValue* node_capture,
 			   ee::EditCMPT* cmpt)
-	: TBase(wnd, stage, shapesImpl)
+	: TBase(wnd, stage, shapes_impl)
 	, m_node_capture(node_capture)
 {
-	m_select_op = new TSelected(wnd, stage, shapesImpl, cmpt);
-	m_impl = new EditPolylineImpl(wnd, stage, shapesImpl, propertyPanel, m_node_capture, this, m_select_op, this);
+	m_select_op = new TSelected(wnd, stage, shapes_impl, cmpt);
+	m_impl = new EditPolylineImpl(wnd, stage, shapes_impl, property, m_node_capture, this, m_select_op, this);
 }
 
 template <typename TBase, typename TSelected>
-libshape::EditPolylineOP<TBase, TSelected>::
+eshape::EditPolylineOP<TBase, TSelected>::
 ~EditPolylineOP() 
 {
 	delete m_impl;
@@ -27,21 +27,21 @@ libshape::EditPolylineOP<TBase, TSelected>::
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnKeyDown(int keyCode) 
 {
 	return m_impl->OnKeyDown(keyCode);
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseLeftDown(int x, int y) 
 {
 	return m_impl->OnMouseLeftDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseLeftUp(int x, int y) 
 {
 	if (TBase::OnMouseLeftUp(x, y)) return true;
@@ -49,14 +49,14 @@ OnMouseLeftUp(int x, int y)
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseRightDown(int x, int y) 
 {
 	return m_impl->OnMouseRightDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseMove(int x, int y) 
 {
 	if (TBase::OnMouseMove(x, y)) return true;
@@ -64,7 +64,7 @@ OnMouseMove(int x, int y)
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseDrag(int x, int y) 
 {
 	if (TBase::OnMouseDrag(x, y)) return true;
@@ -72,7 +72,7 @@ OnMouseDrag(int x, int y)
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnDraw() const 
 {
 	if (TBase::OnDraw()) return true;
@@ -81,7 +81,7 @@ OnDraw() const
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 clear() 
 {
 	if (TBase::Clear()) return true;
@@ -90,28 +90,28 @@ clear()
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseLeftDownBase(int x, int y)
 {
 	return TBase::OnMouseLeftDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 OnMouseRightDownBase(int x, int y)
 {
 	return TBase::OnMouseRightDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
-bool libshape::EditPolylineOP<TBase, TSelected>::
+bool eshape::EditPolylineOP<TBase, TSelected>::
 IsDirty() const
 {
 	return m_impl->IsDirty();
 }
 
 template <typename TBase, typename TSelected>
-void libshape::EditPolylineOP<TBase, TSelected>::
+void eshape::EditPolylineOP<TBase, TSelected>::
 ResetDirty()
 {
 	return m_impl->ResetDirty();

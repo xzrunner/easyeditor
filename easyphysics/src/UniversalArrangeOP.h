@@ -16,7 +16,7 @@ class UniversalArrangeOP : public ee::ZoomViewOP
 {
 public:
 	UniversalArrangeOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
-		ee::PropertySettingPanel* propertyPanel, ee::EditCMPT* callback = NULL);
+		ee::PropertySettingPanel* property, ee::EditCMPT* callback = NULL);
 	virtual ~UniversalArrangeOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -42,7 +42,7 @@ private:
 	std::vector<PhysicsOP> m_physics;
 	ee::ArrangeSpriteOP<ee::SelectSpritesOP>* m_noPhysics;
 
-	ee::EditOP* m_editOP;
+	ee::EditOP* m_editop;
 
 }; // UniversalArrangeOP
 

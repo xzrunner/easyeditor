@@ -4,6 +4,9 @@
 #include "EditPolylineOP.h"
 #include "DrawPolygonOP.h"
 
+#include <ee/OneFloatValueCMPT.h>
+#include <ee/Bitmap.h>
+
 namespace eshape
 {
 
@@ -11,39 +14,39 @@ class DrawPolygonCMPT : public ee::OneFloatValueCMPT
 {
 public:
 	DrawPolygonCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd,
-		ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+		ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 		ee::PropertySettingPanel* property);
 
-	virtual void updateControlValue();
+	virtual void UpdateControlValue();
 
 protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	wxSizer* initPreviewButtonPanel();
+	wxSizer* InitPreviewButtonPanel();
 
-	void onSetColor(wxCommandEvent& event);
-	void onChangeFillingType(wxCommandEvent& event);
-	void onTriggerFillingColor(wxCommandEvent& event);
+	void OnSetColor(wxCommandEvent& event);
+	void OnChangeFillingType(wxCommandEvent& event);
+	void OnTriggerFillingColor(wxCommandEvent& event);
 
-	void fillingButton();
+	void FillingButton();
 
 private:
 	wxWindow* m_stage_wnd;
 
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
 	wxColour m_color;
 //	wxColourData& m_colorData;
 
 	ee::Bitmap m_bitmap;
-	std::string m_filePath;
+	std::string m_filepath;
 
-	wxButton* m_btnReview;
+	wxButton* m_btn_review;
 
-	wxRadioBox* m_fillingTypeChoice;
+	wxRadioBox* m_filling_type_choice;
 
-	wxButton* m_btnTrigger;
+	wxButton* m_btn_trigger;
 
 }; // DrawPolygonCMPT
 

@@ -2,13 +2,15 @@
 #include "FileIO.h"
 #include "PolygonShape.h"
 
-//#include <easyimage.h>
+#include <easyimage.h>
 
 #include <ee/Config.h>
 #include <ee/FileHelper.h>
 #include <ee/SettingData.h>
 #include <ee/Visitor.h>
 #include <ee/JsonSerializer.h>
+
+#include <fstream>
 
 namespace eshape
 {
@@ -212,7 +214,7 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();

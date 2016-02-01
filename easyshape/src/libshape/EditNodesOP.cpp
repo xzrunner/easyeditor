@@ -1,24 +1,30 @@
 #include "EditNodesOP.h"
 #include "ChainShape.h"
 #include "EditNodesAtomicOP.h"
-#include "message/panel_msg.h"
+
+#include <ee/panel_msg.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/CosineSmooth.h>
+#include <ee/SettingData.h>
+#include <ee/DouglasPeucker.h>
 
 namespace eshape
 {
 
-EditNodesOP::EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl)
-	: SelectNodesOP(wnd, stage, shapesImpl, NULL)
+EditNodesOP::EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl)
+	: SelectNodesOP(wnd, stage, shapes_impl, NULL)
 {
-	m_lastPos.SetInvalid();
+	m_last_pos.SetInvalid();
 }
 
 bool EditNodesOP::OnKeyDown(int keyCode)
 {
 	if (keyCode == WXK_DELETE)
 	{
-		for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
+		for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 		{
-			SelectNodesOP::ChainSelectedNodes* selected = m_nodeSelection[i];
+			SelectNodesOP::ChainSelectedNodes* selected = m_node_selection[i];
 			for (size_t j = 0, m = selected->selectedNodes.size(); j < m; ++j)
 				selected->chain->Remove(selected->selectedNodes[j]);
 		}
@@ -35,10 +41,10 @@ bool EditNodesOP::OnMouseLeftDown(int x, int y)
 
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
-	if (m_nodeSelection.empty())
-		m_lastPos.SetInvalid();
+	if (m_node_selection.empty())
+		m_last_pos.SetInvalid();
 	else
-		m_lastPos = m_stage->TransPosScrToProj(x, y);
+		m_last_pos = m_stage->TransPosScrToProj(x, y);
 
 	return false;
 }
@@ -49,13 +55,13 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 
 	if (m_stage->GetKeyState(WXK_CONTROL)) return false;
 
-	if (m_lastPos.IsValid())
+	if (m_last_pos.IsValid())
 	{
 		ee::Vector currPos = m_stage->TransPosScrToProj(x, y);
-		ee::Vector offset = currPos - m_lastPos;
-		for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
+		ee::Vector offset = currPos - m_last_pos;
+		for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 		{
-			SelectNodesOP::ChainSelectedNodes* selected = m_nodeSelection[i];
+			SelectNodesOP::ChainSelectedNodes* selected = m_node_selection[i];
 			for (size_t j = 0, m = selected->selectedNodes.size(); j < m; ++j)
 			{
 				const ee::Vector& from = selected->selectedNodes[j];
@@ -65,7 +71,7 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 			}
 			selected->chain->refresh();
 		}
-		m_lastPos = currPos;
+		m_last_pos = currPos;
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -91,37 +97,37 @@ bool EditNodesOP::Clear()
 {
 	if (SelectNodesOP::Clear()) return true;
 
-	m_lastPos.SetInvalid();
+	m_last_pos.SetInvalid();
 	m_buffer.clear();
 
 	return false;
 }
 
-void EditNodesOP::simplify(float threshold)
+void EditNodesOP::Simplify(float threshold)
 {
 	m_buffer.clear();
-	for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
+	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 	{
 		Modified modified;
-		modified.src = m_nodeSelection[i];
+		modified.src = m_node_selection[i];
 		ee::DouglasPeucker::Do(modified.src->selectedNodes, threshold, modified.dst);
 		m_buffer.push_back(modified);
 	}
 }
 
-void EditNodesOP::smooth(float samplingWidth)
+void EditNodesOP::Smooth(float samplingWidth)
 {
 	m_buffer.clear();
-	for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
+	for (size_t i = 0, n = m_node_selection.size(); i < n; ++i)
 	{
 		Modified modified;
-		modified.src = m_nodeSelection[i];
+		modified.src = m_node_selection[i];
 		ee::CosineSmooth::Do(modified.src->selectedNodes, samplingWidth, modified.dst);
 		m_buffer.push_back(modified);
 	}
 }
 
-void EditNodesOP::updateModified()
+void EditNodesOP::UpdateModified()
 {
 	std::vector<ChainShape*> chains;
 	std::vector<std::vector<ee::Vector> > chainsDst;
@@ -165,7 +171,7 @@ void EditNodesOP::updateModified()
 	ee::EditAddRecordSJ::Instance()->Add(new edit_nodes::ModifyNodesAOP(chains, chainsDst));
 
 	m_buffer.clear();
-	clearSelectedNodes();
+	ClearSelectedNodes();
 }
 
 }

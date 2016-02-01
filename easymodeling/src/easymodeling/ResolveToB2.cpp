@@ -50,7 +50,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		fd.filter.maskBits = fData->maskBits;
 		fd.filter.groupIndex = fData->groupIndex;
 
-		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
+		if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(fData->shape))
 		{
 			b2CircleShape shape;
 			shape.m_radius = circle->radius / ephysics::BOX2D_SCALE_FACTOR;
@@ -60,7 +60,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			fd.shape = &shape;
 			body->CreateFixture(&fd);
 		}
-		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
+		else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(fData->shape))
 		{
 			const float hx = (rect->m_rect.xmax - rect->m_rect.xmin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
 				hy = (rect->m_rect.ymax - rect->m_rect.ymin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
@@ -73,7 +73,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			fd.shape = &shape;
 			body->CreateFixture(&fd);
 		}
-		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
+		else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(fData->shape))
 		{
 // 			const std::vector<ee::Vector>& src = polygon->GetVertices();
 // 			const size_t size = src.size();
@@ -107,7 +107,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 				body->CreateFixture(&fd);
 			}
 		}
-		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
+		else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(fData->shape))
 		{
 			const std::vector<ee::Vector>& src = chain->GetVertices();
 			const size_t size = src.size();

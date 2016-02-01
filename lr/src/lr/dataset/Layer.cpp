@@ -225,7 +225,7 @@ void Layer::LoadShapes(const Json::Value& val, const std::string& dir,
 	Json::Value shape_val = val[idx++];
 	while (!shape_val.isNull()) 
 	{
-		ee::Shape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
+		ee::Shape* shape = eshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
 		if (!base_path.empty()) {
 			BaseFileUD* ud = new BaseFileUD(base_path);
 			shape->SetUserData(ud);
@@ -375,7 +375,7 @@ ee::Sprite* Layer::LoadSprite(const Json::Value& val, const std::string& dir, co
 	std::string spr_tag;
 	if (ee::FileHelper::IsFileExist(shape_filepath)) {
 		symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
-		const std::vector<ee::Shape*>& shapes = static_cast<libshape::Symbol*>(symbol)->GetShapes();
+		const std::vector<ee::Shape*>& shapes = static_cast<eshape::Symbol*>(symbol)->GetShapes();
 		if (!shapes.empty()) {
 			spr_tag = shapes[0]->name;
 		}

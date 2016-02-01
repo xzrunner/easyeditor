@@ -111,7 +111,7 @@ void CreateMeshCMPT::onClear(wxCommandEvent& event)
 	}
 	ee::ClearShapeSJ::Instance()->Clear();
 
-	m_editOP->Clear();
+	m_editop->Clear();
 }
 
 }

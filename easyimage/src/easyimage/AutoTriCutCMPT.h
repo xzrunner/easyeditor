@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_
 #define _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace eimage
 {
@@ -14,7 +14,7 @@ class ExtractOutlineFine;
 class AutoTriCutCMPT : public ee::EditCMPT
 {
 public:
-	AutoTriCutCMPT(wxWindow* parent, const wxString& name,
+	AutoTriCutCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
 protected:

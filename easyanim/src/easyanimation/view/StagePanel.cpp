@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	, m_frame(NULL)
 	, m_refresh(false)
 {
-//	m_editOP = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, this);
+//	m_editop = new ee::ArrangeSpriteOP<ee::SelectSpritesOP>(this, this);
 	SetEditOP(new ArrangeSpriteOP(this));
 	SetCanvas(new StageCanvas(this)); 
 

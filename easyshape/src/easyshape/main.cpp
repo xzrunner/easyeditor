@@ -24,7 +24,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	ee::Frame* frame = new ee::Frame("EasyShape", libshape::FILE_TAG);
+	ee::Frame* frame = new ee::Frame("EasyShape", eshape::FILE_TAG);
 	eshape::Task* task = new eshape::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);

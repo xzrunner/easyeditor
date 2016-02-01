@@ -15,9 +15,9 @@ PasteSymbolPhysicsCMPT::PasteSymbolPhysicsCMPT(wxWindow* parent, const wxString&
 	, m_worldReverse(worldReverse)
 {
 	if (!randomWidget)
-		m_editOP = new PasteSymbolPhysicsOP(stage_wnd, stage, libraryPanel, physicsImpl, pScale);
+		m_editop = new PasteSymbolPhysicsOP(stage_wnd, stage, libraryPanel, physicsImpl, pScale);
 	else
-		m_editOP = new PasteSymbolPhysicsRandomOP(stage_wnd, stage, libraryPanel, physicsImpl, randomWidget);
+		m_editop = new PasteSymbolPhysicsRandomOP(stage_wnd, stage, libraryPanel, physicsImpl, randomWidget);
 }
 
 wxSizer* PasteSymbolPhysicsCMPT::InitLayout()
@@ -51,7 +51,7 @@ void PasteSymbolPhysicsCMPT::onChangeGravity(wxCommandEvent& event)
 
 void PasteSymbolPhysicsCMPT::onChangeStaticType(wxCommandEvent& event)
 {
-	PasteSymbolPhysicsOP* editOP = static_cast<PasteSymbolPhysicsOP*>(m_editOP);
+	PasteSymbolPhysicsOP* editOP = static_cast<PasteSymbolPhysicsOP*>(m_editop);
 	editOP->setStatic(event.IsChecked());
 }
 

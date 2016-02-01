@@ -6,11 +6,6 @@
 #include "libimage/ExtractOutlineFine.h"
 #include "libimage/RegularRectCut.h"
 #include "libimage/config.h"
-#include "libimage/ImageClip.h"
-#include "libimage/ImageTrim.h"
-#include "libimage/ImageTrim.h"
-#include "libimage/ImagePack.h"
-#include "libimage/ImageVerticalFlip.h"
 
 #include "libimage/TransToPVR.h"
 #include "libimage/TransToETC1.h"

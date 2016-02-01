@@ -6,11 +6,11 @@ namespace etexpacker
 {
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* editPanel, 
-	ee::PropertySettingPanel* propertyPanel,
+	ee::PropertySettingPanel* property,
 	ee::EditCMPT* callback/* = NULL*/)
-	: ee::ArrangeSpriteOP<ee::SelectSpritesOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, 
+	: ee::ArrangeSpriteOP<ee::SelectSpritesOP>(editPanel, editPanel->GetStageImpl(), editPanel, property, 
 	callback, ee::ArrangeSpriteConfig(false, false, false, false), 
-	new ArrangeSpriteImpl(editPanel, propertyPanel))
+	new ArrangeSpriteImpl(editPanel, property))
 {
 }
 

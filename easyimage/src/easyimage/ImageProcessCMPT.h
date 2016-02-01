@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_IMAGE_PROCESS_CMPT_H_
 #define _EASYIMAGE_IMAGE_PROCESS_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace eimage
 {
@@ -13,7 +13,7 @@ class BlurShader;
 class ImageProcessCMPT : public ee::EditCMPT
 {
 public:
-	ImageProcessCMPT(wxWindow* parent, const wxString& name,
+	ImageProcessCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
 protected:

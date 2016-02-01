@@ -12,9 +12,9 @@ class UniversalArrangeCMPT : public ee::EditCMPT
 public:
 	UniversalArrangeCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
 		ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
-		ee::PropertySettingPanel* propertyPanel);
+		ee::PropertySettingPanel* property);
 
-	virtual void updateControlValue();
+	virtual void UpdateControlValue();
 
 	void addPhysicsEditOP(b2World* world, b2Body* ground);
 

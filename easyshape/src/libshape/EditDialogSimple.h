@@ -1,9 +1,9 @@
 #ifndef _EASYSHAPE_ETID_DIALOG_SIMPLE_H_
 #define _EASYSHAPE_ETID_DIALOG_SIMPLE_H_
 
-#include <wx/dialog.h>
-
 #include <ee/OneFloatValueStatic.h>
+
+#include <wx/dialog.h>
 
 class wxGLContext;
 

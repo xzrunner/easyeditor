@@ -1,6 +1,11 @@
 #include "DrawPencilLineOP.h"
 #include "ChainShape.h"
 
+#include <ee/DouglasPeucker.h>
+#include <ee/OneFloatValue.h>
+#include <ee/shape_msg.h>
+#include <ee/panel_msg.h>
+
 namespace eshape
 {
 

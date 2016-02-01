@@ -8,12 +8,22 @@
 
 #include "IOperaterBase.h"
 
+#include <ee/OneFloatValue.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/Math2D.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/panel_msg.h>
+#include <ee/ShapeSelection.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/shape_msg.h>
+
 namespace eshape
 {
 
 EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
-								   ee::MultiShapesImpl* shapesImpl,
-								   ee::PropertySettingPanel* propertyPanel, 
+								   ee::MultiShapesImpl* shapes_impl,
+								   ee::PropertySettingPanel* property, 
 								   ee::OneFloatValue* node_capture, 
 								   DrawPolylineOP* draw_op,
 								   ee::EditOP* select_op,
@@ -21,9 +31,9 @@ EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
 {
 	m_stage = stage;
 
-	m_shapesImpl = shapesImpl;
+	m_shapes_impl = shapes_impl;
 
-	m_propertyPanel = propertyPanel;
+	m_property = property;
 
 	m_node_capture = node_capture;
 
@@ -59,7 +69,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 		if (tolerance != 0)
 		{	
-			NodeCapture capture(m_shapesImpl, tolerance);
+			NodeCapture capture(m_shapes_impl, tolerance);
 			ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 			capture.captureEditable(pos, m_capturedEditable);
 			if (!m_capturedEditable.shape)
@@ -92,7 +102,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 			{
 				ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
-				m_shapesImpl->TraverseShapes(interrupt, ee::DT_EDITABLE);
+				m_shapes_impl->TraverseShapes(interrupt, ee::DT_EDITABLE);
 				if (interrupt.getInterruptedChain())
 				{
 					m_capturedEditable.shape = interrupt.getInterruptedChain();
@@ -103,10 +113,10 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				}
 				else
 				{
-					int sz = m_shapesImpl->GetShapeSelection()->Size();
+					int sz = m_shapes_impl->GetShapeSelection()->Size();
 
 					ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-					ee::Shape* shape = m_shapesImpl->QueryShapeByPos(pos);
+					ee::Shape* shape = m_shapes_impl->QueryShapeByPos(pos);
 
 					return m_base_op->OnMouseLeftDownBase(x, y);
 				}
@@ -128,7 +138,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	{	
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
-		m_shapesImpl->TraverseShapes(nearest, ee::DT_VISIBLE);
+		m_shapes_impl->TraverseShapes(nearest, ee::DT_VISIBLE);
 		float dis = ee::Math2D::GetDistance(nearest.getNearestNode(), pos);
 		if (dis < tolerance)
 		{
@@ -145,8 +155,8 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 
 		if (m_capturedEditable.shape)
 		{
-			if (m_propertyPanel) {
-				m_propertyPanel->EnablePropertyGrid(true);
+			if (m_property) {
+				m_property->EnablePropertyGrid(true);
 			}
 			checkActiveShape(m_capturedEditable);
 		}
@@ -170,7 +180,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 		int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 		if (tolerance != 0)
 		{
-			NodeCapture capture(m_shapesImpl, tolerance);
+			NodeCapture capture(m_shapes_impl, tolerance);
 			capture.captureEditable(m_stage->TransPosScrToProj(x, y), m_capturedEditable);
 			if (m_capturedEditable.shape)
 			{
@@ -184,7 +194,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 				else
 				{
 					ee::RemoveShapeSJ::Instance()->Remove(m_capturedEditable.shape);
-					m_shapesImpl->GetShapeSelection()->Clear();
+					m_shapes_impl->GetShapeSelection()->Clear();
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
 					m_dirty = true;
@@ -209,7 +219,7 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 	if (tolerance != 0)
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		NodeCapture capture(m_shapesImpl, tolerance);
+		NodeCapture capture(m_shapes_impl, tolerance);
 		{
 			ee::Shape* old = m_capturedEditable.shape;
 			capture.captureEditable(pos, m_capturedEditable);
@@ -264,8 +274,8 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			m_dirty = true;
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
-			if (m_propertyPanel) {
-				m_propertyPanel->EnablePropertyGrid(false);
+			if (m_property) {
+				m_property->EnablePropertyGrid(false);
 			}
 		}
 	}
@@ -321,7 +331,7 @@ void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 {
 	ee::SelectShapeSJ::Instance()->Select(captured.shape);
 
-	ee::ShapeSelection* selection = m_shapesImpl->GetShapeSelection();
+	ee::ShapeSelection* selection = m_shapes_impl->GetShapeSelection();
 	selection->Clear();
 	selection->Add(captured.shape);
 }

@@ -1,5 +1,9 @@
 #include "DrawLineUtility.h"
 
+#include <ee/Math2D.h>
+
+#include <wx/defs.h>
+
 namespace eshape
 {
 

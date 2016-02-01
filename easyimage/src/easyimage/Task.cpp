@@ -2,6 +2,12 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/LibraryPanel.h>
+#include <ee/Bitmap.h>
+#include <ee/LibraryImagePage.h>
+#include <ee/PropertySettingPanel.h>
+
 namespace eimage
 {
 

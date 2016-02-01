@@ -8,7 +8,7 @@
 using namespace emodeling;
 
 JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name, 
-							 StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+							 StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
@@ -17,11 +17,11 @@ JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new ee::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, this, cfg);
-	static_cast<SelectJointOP*>(m_editOP)->SetPropertyPanel(propertyPanel);
+	m_editop = new ee::ArrangeSpriteOP<SelectJointOP>(editPanel, editPanel->GetStageImpl(), editPanel, property, this, cfg);
+	static_cast<SelectJointOP*>(m_editop)->SetPropertyPanel(property);
 }
 
-void JointEditCmpt::updateControlValue()
+void JointEditCmpt::UpdateControlValue()
 {
 	ee::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
 
@@ -31,7 +31,7 @@ void JointEditCmpt::updateControlValue()
 	{
 		if (m_typeChoice->GetString(m_typeChoice->GetSelection()) == wxT("Gear"))
 		{
-			SelectJointOP* op = static_cast<SelectJointOP*>(m_editOP);
+			SelectJointOP* op = static_cast<SelectJointOP*>(m_editop);
 			if (op->jointSelection.Size() == 2)
 			{
 				std::vector<libmodeling::Joint*> joints;
@@ -112,7 +112,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 		m_stage_panel->insertJoint(new libmodeling::PulleyJoint(body0, body1));
 	else if (type == wxT("Gear"))
 	{
-		SelectJointOP* op = static_cast<SelectJointOP*>(m_editOP);
+		SelectJointOP* op = static_cast<SelectJointOP*>(m_editop);
 		assert(op->jointSelection.Size() == 2);
 		std::vector<libmodeling::Joint*> joints;
 		op->jointSelection.Traverse(ee::FetchAllVisitor<libmodeling::Joint>(joints));
@@ -143,7 +143,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 
 void JointEditCmpt::onTypeChanged(wxCommandEvent& event)
 {
-	updateControlValue();
+	UpdateControlValue();
 }
 
 //////////////////////////////////////////////////////////////////////////

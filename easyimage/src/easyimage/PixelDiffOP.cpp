@@ -1,6 +1,12 @@
 #include "PixelDiffOP.h"
 #include "StagePanel.h"
 
+#include <ee/Image.h>
+#include <ee/ImageSymbol.h>
+#include <ee/ImageSprite.h>
+#include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
+
 namespace eimage
 {
 
@@ -14,17 +20,17 @@ bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	if (!m_stage->getLeft() || !m_stage->getRight()) {
+	if (!m_stage->GetLeft() || !m_stage->GetRight()) {
 		return false;
 	}
 
-	const ee::Sprite* s_left = m_stage->getLeft();
-	const ee::Sprite* s_right = m_stage->getRight();
+	const ee::Sprite* s_left = m_stage->GetLeft();
+	const ee::Sprite* s_right = m_stage->GetRight();
 	ee::Image* left = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_left)->GetSymbol()).GetImage();
 	ee::Image* right = static_cast<const ee::ImageSymbol&>(static_cast<const ee::ImageSprite*>(s_right)->GetSymbol()).GetImage();
 	ee::Vector p = m_stage->TransPosScrToProj(x, y);
 
-	m_stage->getLeft()->GetSymbol().GetSize();
+	m_stage->GetLeft()->GetSymbol().GetSize();
 
 	int row, col;
 	row = (p.y - left->GetOriginHeight() * 0.5f) / left->GetOriginHeight();

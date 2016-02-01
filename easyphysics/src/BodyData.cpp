@@ -78,7 +78,7 @@ void BodyData::loadFromShapeFile(const std::string& filename)
 // 	m_type = e_shapes;
 // 
 // 	std::vector<Shape*> shapes;
-// 	libshape::FileAdapter adapter(shapes);
+// 	eshape::FileAdapter adapter(shapes);
 // 
 // 	adapter.load(filename.c_str());
 // 	for (size_t i = 0, n = shapes.size();  i< n; ++i)

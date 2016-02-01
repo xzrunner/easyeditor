@@ -1,6 +1,9 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <ee/SpriteRenderer.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace eimage
 {
 
@@ -12,7 +15,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-	if (const ee::Sprite* s = m_stage->getImage())
+	if (const ee::Sprite* s = m_stage->GetImage())
 	{
 		ee::SpriteRenderer::Instance()->Draw(s);
 	}

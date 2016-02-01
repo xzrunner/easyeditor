@@ -12,12 +12,12 @@ void create_shapes_from_etxture(etexture::Sprite* spr,
 	output.clear();
 	const std::vector<ee::Shape*>& shapes = spr->GetSymbol().GetAllShapes();
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
-		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[i])) {
+		if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[i])) {
 			std::vector<ee::Vector> bound = poly->GetVertices();
 			for (int i = 0, n = bound.size(); i < n; ++i) {
 				bound[i] += spr->GetPosition();
 			}
-			ee::Shape* shape = new libshape::PolygonShape(bound);
+			ee::Shape* shape = new eshape::PolygonShape(bound);
 			output.push_back(shape);
 		}		
 	}

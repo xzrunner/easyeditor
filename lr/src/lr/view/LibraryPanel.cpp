@@ -128,8 +128,8 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 	ee::EditOP* paste_op = new ee::PasteSymbolOP(stage, stage->GetStageImpl(), this);
 
 	ee::OneFloatValue* capture_val = new ee::OneFloatValueStatic(10);
-	ee::EditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
-	ee::EditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	ee::EditOP* draw_line_op = new eshape::EditPolylineOP<eshape::DrawPenLineOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
+	ee::EditOP* draw_poly_op = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, property, capture_val, NULL);
 
 	int id = 0;
 	{

@@ -67,7 +67,7 @@ private:
 	struct Region
 	{
 		ee::Rect rect;
-		std::vector<libshape::ChainShape*> loops;
+		std::vector<eshape::ChainShape*> loops;
 	};
 
 private:

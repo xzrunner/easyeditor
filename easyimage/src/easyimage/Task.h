@@ -1,8 +1,11 @@
 #ifndef _EASYIMAGE_TASK_H_
 #define _EASYIMAGE_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace eimage
 {

@@ -10,7 +10,7 @@ class EditNodesOP : public SelectNodesOP
 {
 public:
 	EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-		ee::MultiShapesImpl* shapesImpl);
+		ee::MultiShapesImpl* shapes_impl);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -19,9 +19,9 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	void simplify(float threshold);
-	void smooth(float samplingWidth);
-	void updateModified();
+	void Simplify(float threshold);
+	void Smooth(float samplingWidth);
+	void UpdateModified();
 
 private:
 	struct Modified
@@ -31,7 +31,7 @@ private:
 	};
 
 private:
-	ee::Vector m_lastPos;
+	ee::Vector m_last_pos;
 
 	std::vector<Modified> m_buffer;
 

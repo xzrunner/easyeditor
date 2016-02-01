@@ -37,7 +37,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 
 	int dx = static_cast<int>(r.CenterX()),
 		dy = static_cast<int>(r.CenterY());
-	Snapshoot ss(r.Width(), r.Height());
+	Snapshoot ss(static_cast<int>(r.Width()), static_cast<int>(r.Height()));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i], false, dx, dy);
 	}

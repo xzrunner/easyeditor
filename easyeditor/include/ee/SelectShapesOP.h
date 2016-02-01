@@ -18,7 +18,7 @@ class ShapeSelection;
 class SelectShapesOP : public DrawRectangleOP
 {
 public:
-	SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesImpl* shapesImpl, 
+	SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesImpl* shapes_impl, 
 		EditCMPT* callback = NULL);
 	virtual ~SelectShapesOP();
 
@@ -54,7 +54,7 @@ private:
 private:
 	EditCMPT* m_callback;
 
-	MultiShapesImpl* m_shapeImpl;
+	MultiShapesImpl* m_shape_impl;
 
 	mutable std::vector<Shape*> m_clipboard;
 

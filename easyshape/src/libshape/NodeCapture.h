@@ -1,7 +1,11 @@
 #ifndef _EASYSHAPE_NODE_CAPTURE_H_
 #define _EASYSHAPE_NODE_CAPTURE_H_
 
+#include <ee/Vector.h>
+#include <ee/Visitor.h>
+#include <ee/Rect.h>
 
+namespace ee { class Shape; class MultiShapesImpl; }
 
 namespace eshape
 {
@@ -28,7 +32,7 @@ struct NodeAddr
 class NodeCapture
 {
 public:
-	NodeCapture(ee::MultiShapesImpl* shapesImpl, int tol);
+	NodeCapture(ee::MultiShapesImpl* shapes_impl, int tol);
 
 	void captureEditable(const ee::Vector& pos, NodeAddr& result);
 	void captureSelectable(const ee::Vector& pos, NodeAddr& result);
@@ -58,7 +62,7 @@ private:
 	}; // RectQueryVisitor
 
 private:
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 	int m_tol;
 
 }; // NodeCapture

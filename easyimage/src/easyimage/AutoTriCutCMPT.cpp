@@ -4,6 +4,14 @@
 
 #include <easyimage.h>
 
+#include <ee/ImageSprite.h>
+#include <ee/JsonSerializer.h>
+#include <ee/Image.h>
+#include <ee/FileHelper.h>
+#include <ee/panel_msg.h>
+
+#include <fstream>
+
 namespace eimage
 {
 
@@ -12,14 +20,14 @@ static const float PERIMETER_TOLERANCE = 0.2f;
 
 #define TRIGGER_STEP		// step by step
 
-AutoTriCutCMPT::AutoTriCutCMPT(wxWindow* parent, const wxString& name, 
+AutoTriCutCMPT::AutoTriCutCMPT(wxWindow* parent, const std::string& name, 
 						 StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_raw(NULL)
 	, m_fine(NULL)
 {
-	m_editOP = new AutoTriCutOP(stage, stage->GetStageImpl());
+	m_editop = new AutoTriCutOP(stage, stage->GetStageImpl());
 }
 
 wxSizer* AutoTriCutCMPT::InitLayout()
@@ -79,14 +87,14 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 {
 	Trigger();
 
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol().GetImage();
 
 	Json::Value value;
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 
 	ee::Vector offset(-0.5f*img->GetOriginWidth(), -0.5f*img->GetOriginHeight());
 	std::vector<ee::Vector> vertices(op->m_fine_bound_line);
@@ -95,11 +103,11 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	}
 	ee::JsonSerializer::Store(vertices, value["normal"]);
 
-	wxString filepath = ee::FileHelper::GetFilenameAddTag(img->GetFilepath(), 
+	std::string filepath = ee::FileHelper::GetFilenameAddTag(img->GetFilepath(), 
 		OUTLINE_FILE_TAG, "json");
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
@@ -110,13 +118,13 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	// step by step
 	static int max_step = 5;
 
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol().GetImage();
 
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	m_raw = new ExtractOutlineRaw(*img);
 	m_raw->CreateBorderLineAndMerge();
 	op->m_raw_bound_line = m_raw->GetBorderLine();
@@ -135,7 +143,7 @@ void AutoTriCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
 	if (m_fine)
 	{
 		m_fine->ReduceOutlineCount(AREA_TOLERANCE, PERIMETER_TOLERANCE);
-		AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
+		AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 		op->m_fine_bound_line = m_fine->GetResult();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -146,13 +154,13 @@ void AutoTriCutCMPT::Trigger()
 #ifdef TRIGGER_STEP
 	static int max_step = 5;
 #endif
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol().GetImage();
 
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(*img);
 	raw.CreateBorderLineAndMerge();
 	op->m_raw_bound_line = raw.GetBorderLine();
@@ -172,13 +180,13 @@ void AutoTriCutCMPT::Trigger()
 
 void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
 	const ee::Image* img = img_sprite->GetSymbol().GetImage();
 
-	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editop);
 	ExtractOutlineRaw raw(*img);
 	raw.CreateBorderLineAndMerge();
 	raw.CreateBorderConvexHull();

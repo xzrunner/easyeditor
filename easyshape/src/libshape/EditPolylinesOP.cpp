@@ -2,13 +2,21 @@
 #include "EditPolylinesCMPT.h"
 #include "ChainShape.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/ShapeSelection.h>
+#include <ee/Matrix.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/panel_msg.h>
+#include <ee/SettingData.h>
+#include <ee/DouglasPeucker.h>
+
 namespace eshape
 {
 
 EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-								 ee::MultiShapesImpl* shapesImpl,
+								 ee::MultiShapesImpl* shapes_impl,
 								 EditPolylinesCMPT* cmpt)
-	: ee::SelectShapesOP(wnd, stage, shapesImpl, cmpt)
+	: ee::SelectShapesOP(wnd, stage, shapes_impl, cmpt)
 	, m_cmpt(cmpt)
 	, m_bDirty(false)
 {
@@ -91,7 +99,7 @@ void EditPolylinesOP::simplify()
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
 		std::vector<ee::Vector> simplified;
-		ee::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->getSimplifyThreshold(), simplified);
+		ee::DouglasPeucker::Do(itr->first->GetVertices(), m_cmpt->GetSimplifyThreshold(), simplified);
 		itr->second->Load(simplified);
 	}
 

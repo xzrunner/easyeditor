@@ -15,11 +15,11 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library,
 						   StagePanel* stage)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
-	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));
-	addChild(new AutoTriCutCMPT(this, wxT("Auto Tri Cut"), stage));
-	addChild(new AutoRectCutCMPT(this, wxT("Auto Rect Cut"), stage));
-	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
-	addChild(new ImageProcessCMPT(this, wxT("Image Process"), stage));
+	AddChild(new RectCutCMPT(this, "Rect Cut", stage));
+	AddChild(new AutoTriCutCMPT(this, "Auto Tri Cut", stage));
+	AddChild(new AutoRectCutCMPT(this, "Auto Rect Cut", stage));
+	AddChild(new PixelDiffCMPT(this, "Pixel Diff", stage));
+	AddChild(new ImageProcessCMPT(this, "Image Process", stage));
 	SetSizer(InitLayout());	
 }
 

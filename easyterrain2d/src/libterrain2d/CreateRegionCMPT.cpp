@@ -8,7 +8,7 @@ namespace eterrain2d
 CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
 	: ee::OneFloatValueCMPT(parent, name, stage->GetStageImpl(), "node capture", 5, 30, 10)
 {
-	m_editOP = new libshape::EditPolylineOP<CreateRegionOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, NULL, this, this);
+	m_editop = new eshape::EditPolylineOP<CreateRegionOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, NULL, this, this);
 }
 
 // float CreateRegionCMPT::GetValue() const

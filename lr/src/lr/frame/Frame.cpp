@@ -97,7 +97,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 		ss.DrawShape(shapes[i]);		
 	}
 
-	libshape::RectShape rect(ee::Vector(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
+	eshape::RectShape rect(ee::Vector(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
 	ss.DrawShape(&rect);
 
 	ss.SaveToFile(filepath);

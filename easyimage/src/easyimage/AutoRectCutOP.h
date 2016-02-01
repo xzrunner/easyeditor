@@ -1,10 +1,9 @@
 #ifndef _EASYIMAGE_AUTO_RECT_CUT_OP_H_
 #define _EASYIMAGE_AUTO_RECT_CUT_OP_H_
 
-#include "interfaces.h"
 #include "RectMgr.h"
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace eimage
 {

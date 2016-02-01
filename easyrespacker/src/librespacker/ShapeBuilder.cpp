@@ -39,11 +39,11 @@ bool ShapeBuilder::CanHandle(const etexture::Symbol* symbol) const
 	if (shapes.size() != 1) {
 		return false;
 	}
-	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
 		return false;
 	}
-	const libshape::ColorMaterial* material = dynamic_cast<const libshape::ColorMaterial*>(poly->GetMaterial());
+	const eshape::ColorMaterial* material = dynamic_cast<const eshape::ColorMaterial*>(poly->GetMaterial());
 	if (!material) {
 		return false;
 	}
@@ -70,11 +70,11 @@ void ShapeBuilder::Load(const etexture::Symbol* symbol, PackShape* shape)
 	if (shapes.size() != 1) {
 		throw ee::Exception("ShapeBuilder::Load shapes.size(): %d filepath: %s", shapes.size(), symbol->GetFilepath().c_str());
 	}
-	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
 	if (!poly) {
 		throw ee::Exception("ShapeBuilder::Load !poly, filepath: %s", symbol->GetFilepath().c_str());
 	}
-	const libshape::ColorMaterial* material = dynamic_cast<const libshape::ColorMaterial*>(poly->GetMaterial());
+	const eshape::ColorMaterial* material = dynamic_cast<const eshape::ColorMaterial*>(poly->GetMaterial());
 	if (!material) {
 		throw ee::Exception("ShapeBuilder::Load !material, filepath: %s", symbol->GetFilepath().c_str());
 	}

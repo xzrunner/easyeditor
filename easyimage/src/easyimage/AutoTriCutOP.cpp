@@ -1,5 +1,10 @@
 #include "AutoTriCutOP.h"
 
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+
 namespace eimage
 {
 

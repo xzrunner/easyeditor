@@ -1,6 +1,12 @@
 #include "AutoRectCutOP.h"
 #include "StagePanel.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/Rect.h>
+#include <ee/panel_msg.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+
 namespace eimage
 {
 
@@ -15,8 +21,7 @@ bool AutoRectCutOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_last_pos = m_stage->TransPosScrToProj(x, y);
-	m_selected = m_rects.queryRect(m_last_pos);
-
+	m_selected = m_rects.QueryRect(m_last_pos);
 
 	return false;
 }
@@ -41,7 +46,7 @@ bool AutoRectCutOP::OnMouseRightDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-	bool removed = m_rects.remove(pos);
+	bool removed = m_rects.Remove(pos);
 	if (removed) {
 		m_selected = NULL;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -57,7 +62,7 @@ bool AutoRectCutOP::OnMouseDrag(int x, int y)
 	if (m_selected)
 	{
 		ee::Vector curr = m_stage->TransPosScrToProj(x, y);
-		m_rects.moveRect(m_selected, m_last_pos, curr);
+		m_rects.MoveRect(m_selected, m_last_pos, curr);
 		m_last_pos = curr;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -70,9 +75,9 @@ bool AutoRectCutOP::OnMouseLeftDClick(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
 
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-	ee::Rect* r = m_rects.queryRect(pos);
+	ee::Rect* r = m_rects.QueryRect(pos);
 	if (r) {
-		m_rects.insert(ee::Rect(*r), true);
+		m_rects.Insert(ee::Rect(*r), true);
 		m_last_pos = pos;
 		m_selected = r;
 	}
@@ -86,7 +91,7 @@ bool AutoRectCutOP::OnDraw() const
 
 	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
-	m_rects.draw();
+	m_rects.Draw();
 
 	if (m_selected) {
 		ee::PrimitiveDraw::DrawRect(*m_selected, ee::LIGHT_GREEN_FACE);
@@ -99,7 +104,7 @@ bool AutoRectCutOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_rects.clear();
+	m_rects.Clear();
 
 	return false;
 }

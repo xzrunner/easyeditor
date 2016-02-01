@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_RECT_CUT_CMPT_H_
 #define _EASYIMAGE_RECT_CUT_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace eimage
 {
@@ -11,24 +11,24 @@ class StagePanel;
 class RectCutCMPT : public ee::EditCMPT
 {
 public:
-	RectCutCMPT(wxWindow* parent, const wxString& name,
+	RectCutCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
-	void onSaveEditOP(wxCommandEvent& event);
-	void onLoadEditOP(wxCommandEvent& event);
+	void OnSaveEditOP(wxCommandEvent& event);
+	void OnLoadEditOP(wxCommandEvent& event);
 
 protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	wxSizer* initEditIOLayout();
-	wxSizer* initDataOutputLayout();
-	wxSizer* initAddRectLayout();
+	wxSizer* InitEditIOLayout();
+	wxSizer* InitDataOutputLayout();
+	wxSizer* InitAddRectLayout();
 
-	void onSetImagesPath(wxCommandEvent& event);
-	void onSetJsonPath(wxCommandEvent& event);
-	void onOutputData(wxCommandEvent& event);
-	void onAddRect(wxCommandEvent& event);
+	void OnSetImagesPath(wxCommandEvent& event);
+	void OnSetJsonPath(wxCommandEvent& event);
+	void OnOutputData(wxCommandEvent& event);
+	void OnAddRect(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;

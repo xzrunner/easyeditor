@@ -11,7 +11,7 @@ MoveTexcoordsCMPT::MoveTexcoordsCMPT(wxWindow* parent, const wxString& name, Sta
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
-	m_editOP = new WaveVerticesOP(stage);
+	m_editop = new WaveVerticesOP(stage);
 }
 
 void MoveTexcoordsCMPT::SetControlersValue(const OceanMesh* ocean)

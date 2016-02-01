@@ -1,11 +1,13 @@
 #include "DrawLoopOP.h"
 #include "ChainShape.h"
 
+#include <ee/shape_msg.h>
+
 namespace eshape
 {
 
 DrawLoopOP::DrawLoopOP(wxWindow* wnd, ee::EditPanelImpl* stage,
-					   ee::MultiShapesImpl* shapesImpl)
+					   ee::MultiShapesImpl* shapes_impl)
 	: DrawPolylineOP(wnd, stage, false)
 {
 }
@@ -19,7 +21,7 @@ bool DrawLoopOP::OnMouseLeftDClick(int x, int y)
 	shape->Release();
 
 	m_polyline.clear();
-	m_currPos.SetInvalid();
+	m_curr_pos.SetInvalid();
 
 	return false;
 }

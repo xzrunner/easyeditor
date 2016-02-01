@@ -1,23 +1,24 @@
 #ifndef _EASYSHAPE_EDIT_POLYLINE_IMPL_H_
 #define _EASYSHAPE_EDIT_POLYLINE_IMPL_H_
 
-
-
 #include "NodeCapture.h"
+
+namespace ee { class EditOP; class EditPanelImpl; class PropertySettingPanel; class OneFloatValue; }
+
+class wxWindow;
 
 namespace eshape
 {
 
 class ChainShape;
 class DrawPolylineOP;
-class ee::OneFloatValue;
 class IOperaterBase;
 
 class EditPolylineImpl
 {
 public:
-	EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl, 
-		ee::PropertySettingPanel* propertyPanel, ee::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
+	EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl, 
+		ee::PropertySettingPanel* property, ee::OneFloatValue* node_capture, DrawPolylineOP* draw_op, 
 		ee::EditOP* select_op, IOperaterBase* base_op);
 
 	bool OnKeyDown(int keyCode);
@@ -79,9 +80,9 @@ private:
 	static const int DRAG_SELECT_TOL = 5;
 
 private:
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
-	ee::PropertySettingPanel* m_propertyPanel;
+	ee::PropertySettingPanel* m_property;
 
 	//		NodeAddr m_captured;
 

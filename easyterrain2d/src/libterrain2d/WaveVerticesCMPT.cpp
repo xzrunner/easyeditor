@@ -11,7 +11,7 @@ WaveVerticesCMPT::WaveVerticesCMPT(wxWindow* parent, const wxString& name, Stage
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {
-	m_editOP = new WaveVerticesOP(stage);
+	m_editop = new WaveVerticesOP(stage);
 }
 
 void WaveVerticesCMPT::SetControlersValue(const OceanMesh* ocean)
@@ -144,7 +144,7 @@ void WaveVerticesCMPT::OnChangeWaveParams(wxSpinEvent& event)
 
 void WaveVerticesCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
-	static_cast<WaveVerticesOP*>(m_editOP)->m_draw_tris = event.IsChecked();
+	static_cast<WaveVerticesOP*>(m_editop)->m_draw_tris = event.IsChecked();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

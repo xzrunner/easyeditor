@@ -1,9 +1,12 @@
 #ifndef _EASYSHAPE_EDIT_RECT_OP_H_
 #define _EASYSHAPE_EDIT_RECT_OP_H_
 
-
-
 #include "NodeCapture.h"
+
+#include <ee/ZoomViewOP.h>
+#include <ee/ShapeStyle.h>
+
+namespace ee { class OneFloatValue; class PropertySettingPanel; }
 
 namespace eshape
 {
@@ -13,8 +16,8 @@ class ee::OneFloatValue;
 class EditRectOP : public ee::ZoomViewOP
 {
 public:
-	EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
-		ee::PropertySettingPanel* propertyPanel, ee::OneFloatValue* node_capture);
+	EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
+		ee::PropertySettingPanel* property, ee::OneFloatValue* node_capture);
 
 	virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
@@ -27,14 +30,14 @@ public:
 	virtual bool Clear();
 
 private:
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
-	ee::PropertySettingPanel* m_propertyPanel;
+	ee::PropertySettingPanel* m_property;
 
 	ee::OneFloatValue* m_node_capture;
 
-	ee::Vector m_firstPress;
-	ee::Vector m_currPos;
+	ee::Vector m_first_press;
+	ee::Vector m_curr_pos;
 
 	NodeAddr m_captured;
 

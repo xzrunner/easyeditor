@@ -3,6 +3,15 @@
 
 #include "DrawRectangleOP.h"
 
+#include <ee/common_type.h>
+#include <ee/Vector.h>
+#include <ee/Visitor.h>
+#include <ee/Rect.h>
+
+#include <vector>
+
+namespace ee { class MultiShapesImpl; class EditCMPT; }
+
 namespace eshape
 {
 
@@ -11,7 +20,7 @@ class ChainShape;
 class SelectNodesOP : public DrawRectangleOP
 {
 public:
-	SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl, 
+	SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl, 
 		ee::EditCMPT* callback = NULL);
 	virtual ~SelectNodesOP();
 
@@ -22,12 +31,12 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	void fetchSelectedNode(std::vector<ee::Vector>& nodes) const;
+	void FetchSelectedNode(std::vector<ee::Vector>& nodes) const;
 
-	static int getThreshold();
+	static int GetThreshold();
 
 protected:
-	void clearSelectedNodes();
+	void ClearSelectedNodes();
 
 private:
 	void OnDirectionKeyDown(ee::DirectionType type);
@@ -67,12 +76,12 @@ private:
 	}; // RectQueryVisitor
 
 protected:
-	std::vector<ChainSelectedNodes*> m_nodeSelection;
+	std::vector<ChainSelectedNodes*> m_node_selection;
 
 private:
-	ee::MultiShapesImpl* m_shapeImpl;
+	ee::MultiShapesImpl* m_shape_impl;
 
-	ee::Vector m_firstPos;
+	ee::Vector m_first_pos;
 
 }; // SelectNodesOP
 

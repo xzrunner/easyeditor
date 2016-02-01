@@ -1,6 +1,10 @@
 #include "Math.h"
 #include "ChainShape.h"
 
+#include <ee/Math2D.h>
+
+#include <assert.h>
+
 namespace eshape
 {
 

@@ -3,29 +3,39 @@
 #include "ChainShape.h"
 #include "Math.h"
 
+#include <ee/EditPanel.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/ShapeSelection.h>
+#include <ee/CountVerifyVisitor.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/shape_msg.h>
+#include <ee/panel_msg.h>
+
+#include <wx/spinctrl.h>
+
 namespace eshape
 {
 
 EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const std::string& name,
-									 ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl)
+									 ee::EditPanel* editPanel, ee::MultiShapesImpl* shapes_impl)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
-	, m_shapesImpl(shapesImpl)
-	, m_simplifySpin(NULL)
-	, m_btnMerge(NULL)
+	, m_shapes_impl(shapes_impl)
+	, m_simplify_spin(NULL)
+	, m_btn_merge(NULL)
 {
-	m_editOP = new EditPolylinesOP(editPanel, editPanel->GetStageImpl(), shapesImpl, this);
+	m_editop = new EditPolylinesOP(editPanel, editPanel->GetStageImpl(), shapes_impl, this);
 }
 
-void EditPolylinesCMPT::updateControlValue()
+void EditPolylinesCMPT::UpdateControlValue()
 {
 	bool valid;
-	m_shapesImpl->GetShapeSelection()->Traverse(ee::CountVerifyVisitor(valid, 2));
-	m_btnMerge->Enable(valid);
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::CountVerifyVisitor(valid, 2));
+	m_btn_merge->Enable(valid);
 }
 
-float EditPolylinesCMPT::getSimplifyThreshold() const 
+float EditPolylinesCMPT::GetSimplifyThreshold() const 
 {
-	return m_simplifySpin->GetValue() * 0.1f;
+	return m_simplify_spin->GetValue() * 0.1f;
 }
 
 wxSizer* EditPolylinesCMPT::InitLayout()
@@ -44,10 +54,10 @@ wxSizer* EditPolylinesCMPT::initSimplifyPanel()
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("化简"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-	m_simplifySpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
+	m_simplify_spin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, 
 		wxSize(70, -1), wxSP_ARROW_KEYS, 0, 1000, 30);
-	Connect(m_simplifySpin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(EditPolylinesCMPT::onSimplifyThresholdChanged));
-	sizer->Add(m_simplifySpin);
+	Connect(m_simplify_spin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(EditPolylinesCMPT::onSimplifyThresholdChanged));
+	sizer->Add(m_simplify_spin);
 
 	wxButton* btnOK = new wxButton(this, wxID_ANY, wxT("确定"), wxDefaultPosition, wxSize(70, -1));
 	Connect(btnOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::onUpdateFromSimplified));
@@ -69,10 +79,10 @@ wxSizer* EditPolylinesCMPT::initEditPanel()
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT(""));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
-		m_btnMerge = new wxButton(this, wxID_ANY, wxT("合并"));
-		m_btnMerge->Enable(false);
-		Connect(m_btnMerge->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::onMergeTwoChain));
-		sizer->Add(m_btnMerge);
+		m_btn_merge = new wxButton(this, wxID_ANY, wxT("合并"));
+		m_btn_merge->Enable(false);
+		Connect(m_btn_merge->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(EditPolylinesCMPT::onMergeTwoChain));
+		sizer->Add(m_btn_merge);
 	}
 	sizer->AddSpacer(10);
 	{
@@ -85,18 +95,18 @@ wxSizer* EditPolylinesCMPT::initEditPanel()
 
 void EditPolylinesCMPT::onSimplifyThresholdChanged(wxSpinEvent& event)
 {
-	static_cast<EditPolylinesOP*>(m_editOP)->simplify();
+	static_cast<EditPolylinesOP*>(m_editop)->simplify();
 }
 
 void EditPolylinesCMPT::onUpdateFromSimplified(wxCommandEvent& event)
 {
-	static_cast<EditPolylinesOP*>(m_editOP)->updateFromSimplified();
+	static_cast<EditPolylinesOP*>(m_editop)->updateFromSimplified();
 }
 
 void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 {
 	std::vector<ee::Shape*> shapes;
-	m_shapesImpl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 	if (shapes.size() == 2)
 	{
 		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
@@ -108,11 +118,11 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 		chain0->Load(merged);
 		chain0->refresh();
 		ee::RemoveShapeSJ::Instance()->Remove(chain1);
-		m_shapesImpl->GetShapeSelection()->Clear();
+		m_shapes_impl->GetShapeSelection()->Clear();
 
-		m_shapesImpl->GetShapeSelection()->Clear();
+		m_shapes_impl->GetShapeSelection()->Clear();
 
-		m_btnMerge->Enable(false);
+		m_btn_merge->Enable(false);
 
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -121,7 +131,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 {
 	std::vector<ee::Shape*> shapes;
-	m_shapesImpl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<ee::Shape>(shapes));
 
 	float leftmost = FLT_MAX;
 	std::vector<ChainShape*> chains;

@@ -5,14 +5,14 @@ namespace emodeling
 {
 
 BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
-							 libshape::Symbol* symbol)
-	: libshape::StagePanel(parent, frame, symbol)
+							 eshape::Symbol* symbol)
+	: eshape::StagePanel(parent, frame, symbol)
 {
 }
 
 //bool BodyEditStage::InsertShape(ee::Shape* shape)
 //{
-//	return libshape::StagePanel::InsertShape(shape);
+//	return eshape::StagePanel::InsertShape(shape);
 //
 // 	if (m_sprite && m_sprite->GetUserData())
 // 	{
@@ -27,7 +27,7 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 //
 //bool BodyEditStage::RemoveShape(ee::Shape* shape)
 //{
-//	return libshape::StagePanel::RemoveShape(shape);
+//	return eshape::StagePanel::RemoveShape(shape);
 //
 //	 	if (m_sprite && m_sprite->GetUserData())
 //	 	{
@@ -46,7 +46,7 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 
 void BodyEditStage::loadShapes()
 {
-// 	libshape::StagePanel::loadShapes();
+// 	eshape::StagePanel::loadShapes();
 // 
 // 	if (m_sprite && m_sprite->GetUserData())
 // 	{

@@ -14,8 +14,8 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, bool vertical)
 	: ee::ToolbarPanel(parent, ViewMgr::Instance()->stage->GetStageImpl(), vertical)
 	, m_tl_anim_choice(NULL)
 {
-	addChild(new CommonCMPT(this, "Common", vertical));
-	addChild(new SkeletonCMPT(this, "Skeleton", vertical));
+	AddChild(new CommonCMPT(this, "Common", vertical));
+	AddChild(new SkeletonCMPT(this, "Skeleton", vertical));
 	SetSizer(InitLayout());	
 
 	ChangeTemplateMode(true);

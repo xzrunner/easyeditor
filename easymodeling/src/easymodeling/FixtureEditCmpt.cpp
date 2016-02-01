@@ -6,10 +6,10 @@
 using namespace emodeling;
 
 FixtureEditCmpt::FixtureEditCmpt(wxWindow* parent, const wxString& name, 
-								 StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+								 StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 {
-	m_editOP = new SelectFixtureOP(editPanel, propertyPanel);
+	m_editop = new SelectFixtureOP(editPanel, property);
 }
 
 wxSizer* FixtureEditCmpt::InitLayout()

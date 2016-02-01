@@ -37,12 +37,12 @@ const float ArrangeSpriteImpl::MAX_CTRL_NODE_RADIUS = 10.0f;
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
 									 MultiSpritesImpl* spritesImpl,
-									 PropertySettingPanel* propertyPanel,
+									 PropertySettingPanel* property,
 									 const ArrangeSpriteConfig& cfg) 
 	: m_wnd(wnd)
 	, m_stage(stage)
 	, m_sprites_impl(spritesImpl)
-	, m_property_panel(propertyPanel)
+	, m_property_panel(property)
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)

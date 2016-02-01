@@ -13,9 +13,9 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent)
 {
 	Context* context = Context::Instance();
 
-	addChild(new BodyEditCmpt(this, wxT("Body"), context->stage, context->property));
-	addChild(new FixtureEditCmpt(this, wxT("Fixture"), context->stage, context->property));
-	addChild(new JointEditCmpt(this, wxT("Joint"), context->stage, context->property));
+	AddChild(new BodyEditCmpt(this, wxT("Body"), context->stage, context->property));
+	AddChild(new FixtureEditCmpt(this, wxT("Fixture"), context->stage, context->property));
+	AddChild(new JointEditCmpt(this, wxT("Joint"), context->stage, context->property));
 
 	SetSizer(InitLayout());	
 }

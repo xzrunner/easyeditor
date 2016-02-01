@@ -11,10 +11,10 @@ namespace eterrain2d
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
-	addChild(new CreateRegionCMPT(this, wxT("创建区域"), stage));
-	addChild(m_wave_cmpt = new WaveVerticesCMPT(this, wxT("顶点波动"), stage));
-	addChild(m_move_uv_cmpt = new MoveTexcoordsCMPT(this, wxT("纹理移动"), stage));
-	addChild(m_blend_tex_cmpt = new BlendTextureCMPT(this, wxT("纹理混合"), stage));
+	AddChild(new CreateRegionCMPT(this, wxT("创建区域"), stage));
+	AddChild(m_wave_cmpt = new WaveVerticesCMPT(this, wxT("顶点波动"), stage));
+	AddChild(m_move_uv_cmpt = new MoveTexcoordsCMPT(this, wxT("纹理移动"), stage));
+	AddChild(m_blend_tex_cmpt = new BlendTextureCMPT(this, wxT("纹理混合"), stage));
 	SetSizer(InitLayout());
 }
 

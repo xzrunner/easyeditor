@@ -1,5 +1,4 @@
 #include "Package.h"
-
 #include "BezierShape.h"
 #include "ChainShape.h"
 #include "CircleShape.h"
@@ -10,7 +9,7 @@
 namespace eshape
 {
 
-void Paskage::packShape(ee::Shape* shape, std::ofstream& fout)
+void Paskage::PackShape(ee::Shape* shape, std::ofstream& fout)
 {
 	if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
 	{

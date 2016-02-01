@@ -19,11 +19,11 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 
 	// get bound
 	std::vector<ee::Vector> bound;
-	const libshape::Sprite* shape = dynamic_cast<const libshape::Sprite*>(spr);
-	if (shape && shape->GetSymbol().GetShapeType() == libshape::ST_POLYGON)
+	const eshape::Sprite* shape = dynamic_cast<const eshape::Sprite*>(spr);
+	if (shape && shape->GetSymbol().GetShapeType() == eshape::ST_POLYGON)
 	{
 		const std::vector<ee::Shape*>& shapes = shape->GetSymbol().GetShapes();
-		const libshape::PolygonShape* poly = static_cast<const libshape::PolygonShape*>(shapes[0]);
+		const eshape::PolygonShape* poly = static_cast<const eshape::PolygonShape*>(shapes[0]);
 		bound = poly->GetVertices();
 	}
 	else

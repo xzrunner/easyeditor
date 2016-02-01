@@ -15,10 +15,10 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 {
 	if (full)
 	{
-		addChild(new CreateMeshCMPT(this, wxT("Create"), stage));
+		AddChild(new CreateMeshCMPT(this, wxT("Create"), stage));
 	}
-	addChild(new EditMeshCMPT(this, wxT("Edit"), stage));
-	addChild(new EditUVCMPT(this, wxT("UV"), stage));
+	AddChild(new EditMeshCMPT(this, wxT("Edit"), stage));
+	AddChild(new EditUVCMPT(this, wxT("UV"), stage));
 	SetSizer(InitLayout());	
 }
 

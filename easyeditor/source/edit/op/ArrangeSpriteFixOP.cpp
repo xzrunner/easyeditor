@@ -9,10 +9,10 @@ namespace ee
 
 ArrangeSpriteFixOP::ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage, 
 									   MultiSpritesImpl* spritesImpl,
-									   PropertySettingPanel* propertyPanel/* = NULL*/, 
+									   PropertySettingPanel* property/* = NULL*/, 
 									   EditCMPT* callback/* = NULL*/, 
 									   const ArrangeSpriteConfig& cfg/* = NULL*/)
-	: ArrangeSpriteOP(wnd, stage, spritesImpl, propertyPanel, callback, cfg)
+	: ArrangeSpriteOP(wnd, stage, spritesImpl, property, callback, cfg)
 {
 }
 

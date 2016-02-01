@@ -215,7 +215,7 @@ void LRSeparateComplex::FixPosWithShape(ee::Vector& pos, const std::string& file
 	}
 
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(shape_path);
-	libshape::Symbol* shape_symbol = dynamic_cast<libshape::Symbol*>(symbol);
+	eshape::Symbol* shape_symbol = dynamic_cast<eshape::Symbol*>(symbol);
 	if (!shape_symbol) {
 		throw ee::Exception("shape file err:%s", filepath);
 	}
@@ -225,7 +225,7 @@ void LRSeparateComplex::FixPosWithShape(ee::Vector& pos, const std::string& file
 		throw ee::Exception("shape file empty:%s", filepath);
 	}
 
-	if (libshape::PointShape* point = dynamic_cast<libshape::PointShape*>(shapes[0])) {
+	if (eshape::PointShape* point = dynamic_cast<eshape::PointShape*>(shapes[0])) {
 		pos += point->GetPos();
 	} else {
 		throw ee::Exception("shape file is not point:%s", filepath);

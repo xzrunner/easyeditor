@@ -16,6 +16,13 @@
 
 #include <easyimage.h>
 
+#include <ee/OneFloatValueCMPT.h>
+#include <ee/SelectShapesOP.h>
+#include <ee/shape_msg.h>
+#include <ee/ImageSymbol.h>
+#include <ee/Image.h>
+#include <ee/FetchAllVisitor.h>
+
 namespace eshape
 {
 
@@ -30,26 +37,26 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "点", stage->GetStageImpl(), "node capture", 5, 30, 10);
 		ee::EditOP* op = new EditPointOP(stage, stage->GetStageImpl(), stage, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
-		addChild(capture_cmpt);
+		AddChild(capture_cmpt);
 	}
 	// rect
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "矩形", stage->GetStageImpl(), "node capture", 5, 30, 10);
 		ee::EditOP* op = new EditRectOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
-		addChild(capture_cmpt);
+		AddChild(capture_cmpt);
 	}
 	// circle
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "圆形", stage->GetStageImpl(), "node capture", 5, 30, 10);
 		ee::EditOP* op = new EditCircleOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
-		addChild(capture_cmpt);
+		AddChild(capture_cmpt);
 	}
 	// chain
-	addChild(new DrawLineCMPT(this, wxT("折线"), stage, stage->GetStageImpl(), stage, property));
+	AddChild(new DrawLineCMPT(this, "折线", stage, stage->GetStageImpl(), stage, property));
 	// polygon
-	addChild(new DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, property));
+	AddChild(new DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, property));
 	// complex polygon
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "复杂多边形", stage->GetStageImpl(), "node capture", 5, 30, 10);
@@ -59,14 +66,14 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,
 			(stage, stage->GetStageImpl(), stage, property, capture_cmpt, capture_cmpt);
 
 		capture_cmpt->SetEditOP(op);
-		addChild(capture_cmpt);
+		AddChild(capture_cmpt);
 	}
 	// bezier
 	{
 		ee::OneFloatValueCMPT* capture_cmpt = new ee::OneFloatValueCMPT(this, "贝塞尔曲线", stage->GetStageImpl(), "node capture", 5, 30, 10);
 		ee::EditOP* op = new EditBezierOP(stage, stage->GetStageImpl(), stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
-		addChild(capture_cmpt);
+		AddChild(capture_cmpt);
 	}
 	SetSizer(InitLayout());	
 }
@@ -100,7 +107,7 @@ void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 {
-	const ee::Symbol* bg = static_cast<const libshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
+	const ee::Symbol* bg = static_cast<const eshape::Symbol&>(m_stage_panel->GetSymbol()).GetBG();
 	const ee::ImageSymbol* img_symbol = dynamic_cast<const ee::ImageSymbol*>(bg);
 	if (!img_symbol) {
 		return;
@@ -119,9 +126,9 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
 	}
-	ee::InsertShapeSJ::Instance()->Insert(new libshape::PolygonShape(bounding));
+	ee::InsertShapeSJ::Instance()->Insert(new eshape::PolygonShape(bounding));
 
-	setChoice(3);
+	SetChoice(3);
 }
 
 void ToolbarPanel::SelectSuitableEditOP()
@@ -134,19 +141,19 @@ void ToolbarPanel::SelectSuitableEditOP()
 	switch (type)
 	{
 	case ST_CIRCLE:
-		setChoice(1);
+		SetChoice(1);
 		break;
 	case ST_RECT:
-		setChoice(0); 
+		SetChoice(0); 
 		break;
 	case ST_BEZIER:
-		setChoice(4);
+		SetChoice(4);
 		break;
 	case ST_POLYGON:
-		setChoice(3); 
+		SetChoice(3); 
 		break;
 	case ST_CHAIN:
-		setChoice(2); 
+		SetChoice(2); 
 		break;
 	}
 }

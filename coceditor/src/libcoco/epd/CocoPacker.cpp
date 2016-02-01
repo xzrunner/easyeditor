@@ -1443,9 +1443,9 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 {
 	const std::vector<ee::Shape*>& shapes = sprite->GetSymbol().GetAllShapes();
 	assert(shapes.size() == 1);
-	libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shapes[0]);
 	assert(poly);
-	const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
+	const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 	assert(material);
 	const ee::ImageSymbol* img_symbol = material->GetImage();
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);

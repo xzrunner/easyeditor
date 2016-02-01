@@ -4,6 +4,12 @@
 #include "StagePanel.h"
 #include "ToolBarPanel.h"
 
+#include <ee/FileHelper.h>
+#include <ee/panel_msg.h>
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
+#include <ee/PropertySettingPanel.h>
+
 #include <wx/splitter.h>
 
 namespace eshape
@@ -21,9 +27,9 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 	InitLayout(symbol);
 
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
-		symbol->GetFilepath(), libshape::FILE_TAG, "json");
+		symbol->GetFilepath(), eshape::FILE_TAG, "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
-		m_stage->LoadFromFile(filepath.mb_str());
+		m_stage->LoadFromFile(filepath.c_str());
 		m_toolbar->SelectSuitableEditOP();
 	}
 

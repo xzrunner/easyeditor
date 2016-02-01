@@ -14,10 +14,10 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library,
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	addChild(new ee::UniversalCMPT(this, wxT("paste"), stage->GetStageImpl(), 
+	AddChild(new ee::UniversalCMPT(this, wxT("paste"), stage->GetStageImpl(), 
 		new PasteSymbolOP(stage, library)));
-	addChild(new ee::PasteSpriteCMPT(this, wxT("batch"), stage, stage->GetStageImpl(), stage));
-	addChild(new ArrangeSpriteCMPT(this, wxT("arrange"), property, stage));
+	AddChild(new ee::PasteSpriteCMPT(this, wxT("batch"), stage, stage->GetStageImpl(), stage));
+	AddChild(new ArrangeSpriteCMPT(this, wxT("arrange"), property, stage));
 
 	SetSizer(InitLayout());	
 

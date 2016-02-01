@@ -15,7 +15,7 @@ void FileSaver::Store(const char* filepath, const Symbol* symbol)
 	Json::Value value;
 	for (size_t i = 0; i < shapes.size(); ++i) {
 		ee::Shape* shape = shapes[i];
-		value["shapes"][i] = libshape::FileIO::StoreShape(dir, shape);
+		value["shapes"][i] = eshape::FileIO::StoreShape(dir, shape);
 	}
 
 	Json::StyledStreamWriter writer;

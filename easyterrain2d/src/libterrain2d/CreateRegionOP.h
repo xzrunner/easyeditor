@@ -8,17 +8,17 @@ namespace eterrain2d
 
 class StagePanel;
 
-class CreateRegionOP : public libshape::DrawPolygonOP
+class CreateRegionOP : public eshape::DrawPolygonOP
 {
 public:
-	CreateRegionOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl);
+	CreateRegionOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl);
 
 	virtual bool OnDraw() const;
 
 private:
 	StagePanel* m_stage;
 
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
 }; // CreateRegionOP
 

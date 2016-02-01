@@ -299,9 +299,9 @@ void SymbolDependanceSorter::sort()
 				for (int i = 0, n = shapes.size(); i < n; ++i)
 				{
 					ee::Shape* shape = shapes[i];
-					libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape);
+					eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape);
 					assert(poly);
-					const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
+					const eshape::TextureMaterial* material = dynamic_cast<const eshape::TextureMaterial*>(poly->GetMaterial());
 					assert(material);
 					ee::ImageSymbol* image = const_cast<ee::ImageSymbol*>(material->GetImage());
 					m_symbol_set.Insert(image);

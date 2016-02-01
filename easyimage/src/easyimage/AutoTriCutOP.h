@@ -1,7 +1,10 @@
 #ifndef _EASYIMAGE_AUTO_TRI_CUT_OP_H_
 #define _EASYIMAGE_AUTO_TRI_CUT_OP_H_
 
+#include <ee/ZoomViewOP.h>
+#include <ee/Vector.h>
 
+#include <vector>
 
 namespace eimage
 {

@@ -11,12 +11,12 @@ class MeshShape;
 class OceanMesh : public ee::Object
 {
 public:
-	OceanMesh(const libshape::PolygonShape* shape, const ee::ImageSymbol* image);
+	OceanMesh(const eshape::PolygonShape* shape, const ee::ImageSymbol* image);
 	virtual ~OceanMesh();
 
 	void Build();
 
-	const libshape::PolygonShape* GetBounding() const { return m_shape; }
+	const eshape::PolygonShape* GetBounding() const { return m_shape; }
 	const ee::ImageSymbol* GetImage0() const { return m_image0; }
 	const ee::ImageSymbol* GetImage1() const { return m_image1; }
 	bool IsWaveOpen() const { return m_wave_open; }
@@ -38,7 +38,7 @@ public:
 	void Draw(const ee::Matrix& mt, const ee::Colorf& mul, 
 		const ee::Colorf& add, bool draw_tris) const;
 
-	const libshape::PolygonShape* GetShape() const {
+	const eshape::PolygonShape* GetShape() const {
 		return m_shape;
 	}
 
@@ -74,7 +74,7 @@ private:
 	void UpdateBlend(float dt);
 
 private:
-	libshape::PolygonShape* m_shape;
+	eshape::PolygonShape* m_shape;
 	const ee::ImageSymbol *m_image0, *m_image1;
 
 	std::vector<MeshShape*> m_grids;

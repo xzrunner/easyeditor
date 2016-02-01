@@ -72,7 +72,7 @@ private:
 	}; // DragSymbolTarget
 
 private:
-	libshape::Symbol* m_symbol;
+	eshape::Symbol* m_symbol;
 
 	ToolbarPanel* m_toolbar;
 

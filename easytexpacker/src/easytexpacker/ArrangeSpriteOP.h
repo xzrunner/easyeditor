@@ -11,7 +11,7 @@ namespace etexpacker
 	{
 	public:
 		ArrangeSpriteOP(StagePanel* editPanel, 
-			ee::PropertySettingPanel* propertyPanel,
+			ee::PropertySettingPanel* property,
 			ee::EditCMPT* callback = NULL);
 	}; // ArrangeSpriteOP
 }

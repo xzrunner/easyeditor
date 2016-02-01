@@ -1,6 +1,10 @@
 #include "DrawCurveOP.h"
 #include "DrawLineUtility.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/panel_msg.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace eshape
 {
 

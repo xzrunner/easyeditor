@@ -2,6 +2,16 @@
 #include "PointShape.h"
 #include "ShapeType.h"
 
+#include <ee/MultiShapesImpl.h>
+#include <ee/OneFloatValue.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/ShapeSelection.h>
+#include <ee/shape_msg.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/panel_msg.h>
+
 namespace eshape
 {
 

@@ -12,14 +12,14 @@
 namespace ee
 {
 
-SelectShapesOP::SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesImpl* shapesImpl,
+SelectShapesOP::SelectShapesOP(wxWindow* wnd, EditPanelImpl* stage, MultiShapesImpl* shapes_impl,
 							   EditCMPT* callback/* = NULL*/)
 	: DrawRectangleOP(wnd, stage)
 	, m_callback(callback)
-	, m_shapeImpl(shapesImpl)
+	, m_shape_impl(shapes_impl)
 	, m_bDraggable(true)
 {
-	m_selection = shapesImpl->GetShapeSelection();
+	m_selection = shapes_impl->GetShapeSelection();
 	m_selection->Retain();
 
 	m_first_pos.SetInvalid();
@@ -39,13 +39,13 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapeImpl->ClearSelectedShape();
+		m_shape_impl->ClearSelectedShape();
 		Clear();
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'x' || keyCode == 'X'))
 	{
 		PasteToSelection();
-		m_shapeImpl->ClearSelectedShape();
+		m_shape_impl->ClearSelectedShape();
 	}
 	else if (m_stage->GetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
@@ -73,7 +73,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 	m_move_last_pos.SetInvalid();
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-	Shape* selected = m_shapeImpl->QueryShapeByPos(pos);
+	Shape* selected = m_shape_impl->QueryShapeByPos(pos);
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -83,7 +83,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			} else {
 				m_selection->Add(selected);
 			}
-			SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shapeImpl);
+			SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shape_impl);
 		}
 		else
 		{
@@ -91,7 +91,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
-				SelectShapeSJ::Instance()->Select(selected, m_shapeImpl);
+				SelectShapeSJ::Instance()->Select(selected, m_shape_impl);
 			} else {
 				m_move_last_pos = pos;
 			}
@@ -124,11 +124,11 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 	{
 		Rect rect(m_first_pos, m_stage->TransPosScrToProj(x, y));
 		std::vector<Shape*> shapes;
-		m_shapeImpl->QueryShapesByRect(rect, shapes);
+		m_shape_impl->QueryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_selection->Add(shapes[i]);
 
-		SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shapeImpl);
+		SelectShapeSetSJ::Instance()->Selecte(m_selection, m_shape_impl);
 
 		m_first_pos.SetInvalid();
 

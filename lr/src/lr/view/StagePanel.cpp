@@ -234,18 +234,18 @@ void StagePanel::OnMouseHook(wxMouseEvent& event)
 
 void StagePanel::ChangeEditOP()
 {
-// 	if (!m_editOP->IsEmpty()) {
+// 	if (!m_editop->IsEmpty()) {
 // 		return;
 // 	}
 // 
-// 	m_editOP->Release();
-// 	if (m_editOP == m_arrange_op) {
+// 	m_editop->Release();
+// 	if (m_editop == m_arrange_op) {
 // 		ee::LibraryPage* curr_page = m_library->GetCurrPage();
-// 		m_editOP = static_cast<LibraryPage*>(curr_page)->GetEditOP();
+// 		m_editop = static_cast<LibraryPage*>(curr_page)->GetEditOP();
 // 	} else {
-// 		m_editOP = m_arrange_op;
+// 		m_editop = m_arrange_op;
 // 	}
-// 	m_editOP->Retain();
+// 	m_editop->Retain();
 }
 
 void StagePanel::OnKeyHook(int key_code)
@@ -410,9 +410,9 @@ void StagePanel::InsertShape(ee::Shape* shape)
 	bool dirty = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
 
 	if (m_grids) {
-		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
+		if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape)) {
 			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolygon(poly->GetVertices()));
-		} else if (libshape::ChainShape* path = dynamic_cast<libshape::ChainShape*>(shape)) {
+		} else if (eshape::ChainShape* path = dynamic_cast<eshape::ChainShape*>(shape)) {
 			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolyline(path->GetVertices()));		
 		}
 	}

@@ -8,11 +8,11 @@ namespace ee
 
 LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const std::string& name, 
 							 wxWindow* stage_wnd, EditPanelImpl* stage, 
-							 MultiShapesImpl* shapesImpl)
+							 MultiShapesImpl* shapes_impl)
 	: EditCMPT(parent, name, stage)
 	, m_layersMgr(NULL)
 {
-	m_editop = new SelectShapesOP(stage_wnd, stage, shapesImpl);
+	m_editop = new SelectShapesOP(stage_wnd, stage, shapes_impl);
 
 	m_layersMgr = new LayersMgrWidget(this);
 	m_sizer = new wxBoxSizer(wxVERTICAL);

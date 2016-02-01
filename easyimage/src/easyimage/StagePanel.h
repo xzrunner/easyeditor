@@ -1,7 +1,10 @@
 #ifndef _EASYIMAGE_STAGE_PANEL_H_
 #define _EASYIMAGE_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/CombinedDropTarget.h>
 
+namespace ee { class LibraryPanel; class Symbol; }
 
 namespace eimage
 {
@@ -13,16 +16,16 @@ public:
 		ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	const ee::Sprite* getImage() const {
+	const ee::Sprite* GetImage() const {
 		return m_image;
 	}
-	void setImage(const std::string& filepath);
+	void SetImage(const std::string& filepath);
 
-	const ee::Sprite* getLeft() const { return m_left; }
-	const ee::Sprite* getRight() const { return m_right; }
+	const ee::Sprite* GetLeft() const { return m_left; }
+	const ee::Sprite* GetRight() const { return m_right; }
 
 private:
-	void setImage(ee::Symbol* symbol);
+	void SetImage(ee::Symbol* symbol);
 
 private:
 	class StageDropTarget : public ee::CombinedDropTarget

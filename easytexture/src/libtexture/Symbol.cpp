@@ -73,7 +73,7 @@ void Symbol::LoadResources()
 	int i = 0;
 	Json::Value shape_val = value["shapes"][i++];
 	while (!shape_val.isNull()) {
-		ee::Shape* shape = libshape::FileIO::LoadShape(dir, shape_val);
+		ee::Shape* shape = eshape::FileIO::LoadShape(dir, shape_val);
 		m_shapes.push_back(shape);
 		shape_val = value["shapes"][i++];
 	}

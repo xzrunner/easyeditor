@@ -38,7 +38,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
  		OceanMesh* ocean = m_oceans[i];
  		ocean->Retain();
 		ee::InsertShapeSJ::Instance()->Insert(
-			const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+			const_cast<eshape::PolygonShape*>(ocean->GetBounding()));
 	}
 
 	SetDropTarget(new StageDropTarget(this, library));
@@ -95,7 +95,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		if (ocean) {
 			m_oceans.push_back(ocean);
 			ee::InsertShapeSJ::Instance()->Insert(
-				const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+				const_cast<eshape::PolygonShape*>(ocean->GetBounding()));
 			library->AddSymbol(const_cast<ee::ImageSymbol*>(ocean->GetImage0()));
 			if (const ee::Symbol* tex1 = ocean->GetImage1()) {
 				library->AddSymbol(const_cast<ee::Symbol*>(tex1));
@@ -116,7 +116,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 // 	return m_symbol->GetOceans();
 // }
 
-void StagePanel::AddOcean(const libshape::PolygonShape* shape, const ee::ImageSymbol* image)
+void StagePanel::AddOcean(const eshape::PolygonShape* shape, const ee::ImageSymbol* image)
 {
 	bool is_new = true;
 	std::vector<OceanMesh*>::iterator itr = m_oceans.begin();
@@ -158,7 +158,7 @@ OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
 	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
 	{
 		ee::Shape* shape = m_stage->QueryShapeByPos(pos);
-		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
+		if (eshape::PolygonShape* poly = dynamic_cast<eshape::PolygonShape*>(shape)) {
 			poly->SetMaterialTexture(image);
 			m_stage->AddOcean(poly, image);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();

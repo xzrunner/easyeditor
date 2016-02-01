@@ -3,7 +3,6 @@
 
 #include "color_config.h"
 #include "ShapeStyle.h"
-#include "ShapeType.h"
 
 namespace ee
 {

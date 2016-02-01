@@ -9,23 +9,26 @@
 #include "PolygonShape.h"
 #include "RectShape.h"
 
+#include <ee/MultiShapesImpl.h>
+#include <ee/Math2D.h>
+
 namespace eshape
 {
 
-NodeCapture::NodeCapture(ee::MultiShapesImpl* shapesImpl, int tol)
-	: m_shapesImpl(shapesImpl)
+NodeCapture::NodeCapture(ee::MultiShapesImpl* shapes_impl, int tol)
+	: m_shapes_impl(shapes_impl)
 	, m_tol(tol)
 {
 }
 
 void NodeCapture::captureEditable(const ee::Vector& pos, NodeAddr& result)
 {
-	m_shapesImpl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), ee::DT_EDITABLE);
+	m_shapes_impl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), ee::DT_EDITABLE);
 }
 
 void NodeCapture::captureSelectable(const ee::Vector& pos, NodeAddr& result)
 {
-	m_shapesImpl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), ee::DT_SELECTABLE);
+	m_shapes_impl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), ee::DT_SELECTABLE);
 }
 
 //////////////////////////////////////////////////////////////////////////

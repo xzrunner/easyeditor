@@ -1,9 +1,11 @@
 #ifndef _EASYSHAPE_EDIT_POLYLINE_OP_H_
 #define _EASYSHAPE_EDIT_POLYLINE_OP_H_
 
-
-
 #include "IOperaterBase.h"
+
+namespace ee { class EditPanelImpl; class MultiShapesImpl; class PropertySettingPanel; class OneFloatValue; class EditCMPT; }
+
+class wxWindow;
 
 namespace eshape
 {
@@ -17,8 +19,8 @@ class EditPolylineOP : public TBase, public IOperaterBase
 public:
 	EditPolylineOP(wxWindow* wnd, 
 		ee::EditPanelImpl* stage, 
-		ee::MultiShapesImpl* shapesImpl, 
-		ee::PropertySettingPanel* propertyPanel,
+		ee::MultiShapesImpl* shapes_impl, 
+		ee::PropertySettingPanel* property,
 		ee::OneFloatValue* node_capture,
 		ee::EditCMPT* cmpt);
 	virtual ~EditPolylineOP();

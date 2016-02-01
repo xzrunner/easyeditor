@@ -185,7 +185,7 @@ Json::Value FileIO::b2j(const libmodeling::Fixture* fixture)
 	value["groupIndex"] = fixture->groupIndex;
 
 	// todo
-//	value["shape"] = libshape::FileIO::StoreShape(fixture->shape);
+//	value["shape"] = eshape::FileIO::StoreShape(fixture->shape);
 
 	return value;
 }

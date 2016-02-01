@@ -3,6 +3,8 @@
 
 #include <ee/OrthoCanvas.h>
 
+namespace ee { class Sprite; class MultiSpritesImpl; class MultiShapesImpl; }
+
 namespace eshape
 {
 

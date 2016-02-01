@@ -2,68 +2,81 @@
 #include "RectCutOP.h"
 #include "StagePanel.h"
 
-#include <easycomplex.h>
+//#include <easycomplex.h>
 #include <easyimage.h>
+
+#include <ee/FileHelper.h>
+#include <ee/ImageSprite.h>
+#include <ee/Image.h>
+#include <ee/Rect.h>
+#include <ee/StringHelper.h>
+#include <ee/panel_msg.h>
+#include <ee/ImageSaver.h>
+#include <ee/NullSprite.h>
+#include <ee/NullSymbol.h>
+#include <ee/FinishDialog.h>
+
+#include <fstream>
 
 namespace eimage
 {
 
 static const std::string FILTER = "rectcut";
 
-RectCutCMPT::RectCutCMPT(wxWindow* parent, const wxString& name,
+RectCutCMPT::RectCutCMPT(wxWindow* parent, const std::string& name,
 						 StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editOP = new RectCutOP(this, stage);
+	m_editop = new RectCutOP(this, stage);
 }
 
-void RectCutCMPT::onSaveEditOP(wxCommandEvent& event)
+void RectCutCMPT::OnSaveEditOP(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
 		wxT("*_") + FILTER + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
+		RectCutOP* op = static_cast<RectCutOP*>(m_editop);
 
 		Json::Value value;
 
-		std::string filepath = op->getImageFilepath();
-		std::string dir = ee::FileHelper::GetFileDir(dlg.GetPath());
-		value["image filepath"] = ee::FileHelper::GetRelativePath(dir, filepath).ToStdString();
-		op->getRectMgr().store(value);
+		std::string filepath = op->GetImageFilepath();
+		std::string dir = ee::FileHelper::GetFileDir(dlg.GetPath().ToStdString());
+		value["image filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
+		op->GetRectMgr().Store(value);
 
-		wxString filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILTER, "json");
+		std::string filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILTER, "json");
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filename.fn_str());
+		std::ofstream fout(filename.c_str());
 		std::locale::global(std::locale("C"));
 		writer.write(fout, value);
 		fout.close();
 	}
 }
 
-void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
+void RectCutCMPT::OnLoadEditOP(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
 		wxT("*_") + FILTER + wxT(".json"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILTER, "json");
+		std::string filename = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILTER, "json");
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(filename.fn_str());
+		std::ifstream fin(filename.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 
-		RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-		wxString dlgpath = ee::FileHelper::GetFileDir(filename);
-		wxString path = value["image filepath"].asString();
-		wxString absolutePath = ee::FileHelper::GetAbsolutePath(dlgpath, path);
-		op->loadImageFromFile(absolutePath.ToStdString());
-		op->getRectMgr().load(value);
+		RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+		std::string dlgpath = ee::FileHelper::GetFileDir(filename);
+		std::string path = value["image filepath"].asString();
+		std::string absolutePath = ee::FileHelper::GetAbsolutePath(dlgpath, path);
+		op->LoadImageFromFile(absolutePath);
+		op->GetRectMgr().Load(value);
 	}
 }
 
@@ -72,33 +85,33 @@ wxSizer* RectCutCMPT::InitLayout()
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 // 	sizer->Add(initEditIOLayout());
 // 	sizer->AddSpacer(10);
-	sizer->Add(initDataOutputLayout());
+	sizer->Add(InitDataOutputLayout());
 	sizer->AddSpacer(10);
-	sizer->Add(initAddRectLayout());
+	sizer->Add(InitAddRectLayout());
 	return sizer;
 }
 
-wxSizer* RectCutCMPT::initEditIOLayout()
+wxSizer* RectCutCMPT::InitEditIOLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Edit I/O"));
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 	// save
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Save"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onSaveEditOP));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnSaveEditOP));
 		sizer->Add(btn);
 	}
 	sizer->AddSpacer(5);
 	// load
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Load"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onLoadEditOP));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnLoadEditOP));
 		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-wxSizer* RectCutCMPT::initDataOutputLayout()
+wxSizer* RectCutCMPT::InitDataOutputLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Data Output"));
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -113,7 +126,7 @@ wxSizer* RectCutCMPT::initDataOutputLayout()
 		sz->AddSpacer(5);
 
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onSetImagesPath));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnSetImagesPath));
 		sz->Add(btn);
 
 		sizer->Add(sz);
@@ -130,7 +143,7 @@ wxSizer* RectCutCMPT::initDataOutputLayout()
 		sz->AddSpacer(5);
 
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onSetJsonPath));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnSetJsonPath));
 		sz->Add(btn);
 
 		sizer->Add(sz);
@@ -139,13 +152,13 @@ wxSizer* RectCutCMPT::initDataOutputLayout()
 	// output
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Output"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onOutputData));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnOutputData));
 		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-wxSizer* RectCutCMPT::initAddRectLayout()
+wxSizer* RectCutCMPT::InitAddRectLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Add Rect"));
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -165,15 +178,15 @@ wxSizer* RectCutCMPT::initAddRectLayout()
 	sizer->AddSpacer(5);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Add"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onAddRect));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::OnAddRect));
 		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-void RectCutCMPT::onSetImagesPath(wxCommandEvent& event)
+void RectCutCMPT::OnSetImagesPath(wxCommandEvent& event)
 {
-	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
+	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Images Path", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -185,9 +198,9 @@ void RectCutCMPT::onSetImagesPath(wxCommandEvent& event)
 	op->SetMouseMoveFocus(true);
 }
 
-void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
+void RectCutCMPT::OnSetJsonPath(wxCommandEvent& event)
 {
-	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
+	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Json Path", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -199,15 +212,15 @@ void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
 	op->SetMouseMoveFocus(true);
 }
 
-void RectCutCMPT::onOutputData(wxCommandEvent& event)
+void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 {
-	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	const std::vector<ee::Rect*>& rects = op->getRectMgr().getAllRect();
+	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+	const std::vector<ee::Rect*>& rects = op->GetRectMgr().GetAllRect();
 	if (rects.empty()) {
 		return;
 	}
 
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	if (!sprite) {
 		return;
 	}
@@ -219,10 +232,10 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 
 	ee::Image* image = imgSprite->GetSymbol().GetImage();
 
-	wxString imageDir = m_imagePath->GetValue();
-	wxString jsonDir = m_jsonPath->GetValue();
+	std::string imageDir = m_imagePath->GetValue();
+	std::string jsonDir = m_jsonPath->GetValue();
 
-	wxString imageName = ee::FileHelper::GetFilename(image->GetFilepath());
+	std::string imageName = ee::FileHelper::GetFilename(image->GetFilepath());
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
@@ -233,11 +246,11 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		float width = r.Width();
 		float height = r.Height();
 
-		wxString img_filename = imageDir + "\\" + imageName + "_" + wxString::FromDouble(i);
-		ee::ImageSaver::StoreToFile(pixels, width, height, 4, img_filename.ToStdString(), ee::ImageSaver::e_png);
+		std::string img_filename = imageDir + "\\" + imageName + "_" + ee::StringHelper::ToString(i);
+		ee::ImageSaver::StoreToFile(pixels, width, height, 4, img_filename, ee::ImageSaver::e_png);
 
-		wxString img_fullname = img_filename + ".png";
-		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(img_fullname.ToStdString(), width, height));
+		std::string img_fullname = img_filename + ".png";
+		ee::Sprite* sprite = new ee::NullSprite(new ee::NullSymbol(img_fullname, width, height));
 		ee::Vector off;
 		off.x = r.CenterX() - image->GetClippedWidth() * 0.5f;
 		off.y = r.CenterY() - image->GetClippedHeight() * 0.5f;
@@ -245,8 +258,8 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		complex->m_sprites.push_back(sprite);
 	}
 
-	wxString tag = ee::FileType::GetTag(ee::FileType::e_complex);
-	wxString json_filename = jsonDir + "\\" + imageName + "_" + tag + ".json";
+	std::string tag = ee::FileType::GetTag(ee::FileType::e_complex);
+	std::string json_filename = jsonDir + "\\" + imageName + "_" + tag + ".json";
 	ecomplex::FileStorer::Store(json_filename.c_str(), complex);
 	delete complex;
 
@@ -254,14 +267,14 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
-void RectCutCMPT::onAddRect(wxCommandEvent& event)
+void RectCutCMPT::OnAddRect(wxCommandEvent& event)
 {
 	double width, height;
 	m_widthCtrl->GetValue().ToDouble(&width);
 	m_heightCtrl->GetValue().ToDouble(&height);
 	
-	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	op->getRectMgr().insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
+	RectCutOP* op = static_cast<RectCutOP*>(m_editop);
+	op->GetRectMgr().Insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

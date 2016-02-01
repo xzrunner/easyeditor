@@ -6,8 +6,8 @@ namespace etexpacker
 {
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel, 
-									 ee::PropertySettingPanel* propertyPanel)
-	: ee::ArrangeSpriteImpl(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, 
+									 ee::PropertySettingPanel* property)
+	: ee::ArrangeSpriteImpl(editPanel, editPanel->GetStageImpl(), editPanel, property, 
 	ee::ArrangeSpriteConfig(false, false, false, false))
 	, m_stage(editPanel)
 {

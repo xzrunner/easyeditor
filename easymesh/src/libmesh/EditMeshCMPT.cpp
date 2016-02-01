@@ -11,7 +11,7 @@ EditMeshCMPT::EditMeshCMPT(wxWindow* parent, const wxString& name,
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editOP = new EditMeshOP(stage);
+	m_editop = new EditMeshOP(stage);
 }
 
 wxSizer* EditMeshCMPT::InitLayout()
@@ -31,7 +31,7 @@ void EditMeshCMPT::onReset(wxCommandEvent& event)
 		shape->Reset();
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
-	m_editOP->Clear();
+	m_editop->Clear();
 }
 
 }

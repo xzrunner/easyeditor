@@ -8,14 +8,14 @@ namespace ephysics
 
 UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
 										   ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl,
-										   ee::PropertySettingPanel* propertyPanel)
+										   ee::PropertySettingPanel* property)
 	: EditCMPT(parent, name, stage)
 	, m_spritesImpl(spritesImpl)
 {
-	m_editOP = new UniversalArrangeOP(stage_wnd, stage, spritesImpl, propertyPanel, this);
+	m_editop = new UniversalArrangeOP(stage_wnd, stage, spritesImpl, property, this);
 }
 
-void UniversalArrangeCMPT::updateControlValue()
+void UniversalArrangeCMPT::UpdateControlValue()
 {
 	ee::SpriteSelection* selection = m_spritesImpl->GetSpriteSelection();
 	if (!selection->IsEmpty())
@@ -43,7 +43,7 @@ void UniversalArrangeCMPT::updateControlValue()
 
 void UniversalArrangeCMPT::addPhysicsEditOP(b2World* world, b2Body* ground)
 {
-	UniversalArrangeOP* op = static_cast<UniversalArrangeOP*>(m_editOP);
+	UniversalArrangeOP* op = static_cast<UniversalArrangeOP*>(m_editop);
 	op->addPhysicsEditOP(world, ground);
 }
 

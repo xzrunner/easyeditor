@@ -1,11 +1,13 @@
 #include "DrawPolygonOP.h"
 #include "PolygonShape.h"
 
+#include <ee/shape_msg.h>
+
 namespace eshape
 {
 
 DrawPolygonOP::DrawPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage,
-							 ee::MultiShapesImpl* shapesImpl)
+							 ee::MultiShapesImpl* shapes_impl)
 	: DrawPolylineOP(wnd, stage, false)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
@@ -19,7 +21,7 @@ bool DrawPolygonOP::OnMouseLeftDClick(int x, int y)
 	{
 		ee::InsertShapeSJ::Instance()->Insert(new PolygonShape(m_polyline));
 		m_polyline.clear();
-		m_currPos.SetInvalid();
+		m_curr_pos.SetInvalid();
 	}
 
 	return false;

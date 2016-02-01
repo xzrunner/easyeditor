@@ -1,12 +1,8 @@
 #ifndef _EASYEDITOR_VECTOR_INL_
 #define _EASYEDITOR_VECTOR_INL_
 
-#include <float.h>
-
 namespace ee
 {
-
-static const float FLT_INVALID = FLT_MAX;
 
 inline 
 Vector::Vector() 

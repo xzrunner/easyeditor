@@ -5,11 +5,11 @@
 namespace eimage
 {
 
-PixelDiffCMPT::PixelDiffCMPT(wxWindow* parent, const wxString& name, 
+PixelDiffCMPT::PixelDiffCMPT(wxWindow* parent, const std::string& name, 
 							 StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 {
-	m_editOP = new PixelDiffOP(stage);	
+	m_editop = new PixelDiffOP(stage);	
 }
 
 wxSizer* PixelDiffCMPT::InitLayout()

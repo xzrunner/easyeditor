@@ -9,6 +9,12 @@
 #include "PolygonShape.h"
 #include "RectShape.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Symbol.h>
+
+#include <fstream>
+
 namespace eshape
 {
 
@@ -78,8 +84,7 @@ void FileIO::StoreToFile(const char* filename,
 
 	if (bg) {
 		std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
-		value["bg_symbol"] = ee::FileHelper::GetRelativePath(dir,
-			bg->GetFilepath()).ToStdString();
+		value["bg_symbol"] = ee::FileHelper::GetRelativePath(dir, bg->GetFilepath());
 	}
 
 	Json::StyledStreamWriter writer;

@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_PIXEL_DIFF_OP_H_
 #define _EASYIMAGE_PIXEL_DIFF_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace eimage
 {

@@ -1,7 +1,9 @@
 #ifndef _EASYSHAPE_PACKAGE_H_
 #define _EASYSHAPE_PACKAGE_H_
 
+namespace ee { class Shape; }
 
+#include <fstream>
 
 namespace eshape
 {
@@ -15,7 +17,7 @@ public:
 	};
 
 public:
-	static void packShape(ee::Shape* shape, std::ofstream& fout);
+	static void PackShape(ee::Shape* shape, std::ofstream& fout);
 
 }; // Paskage
 

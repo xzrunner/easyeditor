@@ -18,14 +18,14 @@ namespace ee
 
 template <typename TBase>
 ArrangeSpriteOP<TBase>::ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-	PropertySettingPanel* propertyPanel/* = NULL*/, EditCMPT* callback/* = NULL*/, 
+	PropertySettingPanel* property/* = NULL*/, EditCMPT* callback/* = NULL*/, 
 	const ArrangeSpriteConfig& cfg, ArrangeSpriteImpl* impl /*= NULL*/)
 	: TBase(wnd, stage, spritesImpl, callback)
 {
 	if (impl) {
 		m_impl = impl;
 	} else {
-		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, propertyPanel, cfg);
+		m_impl = new ArrangeSpriteImpl(wnd, stage, spritesImpl, property, cfg);
 	}
 }
 

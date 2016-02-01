@@ -5,10 +5,10 @@ namespace eshape
 {
 
 DrawPencilPolygonCMPT::DrawPencilPolygonCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd, 
-											 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl)
+											 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl)
 	: ee::OneFloatValueCMPT(parent, name, stage, "Simplify", 0, 100, 30, 0.1f)
 {
-	m_editOP = new DrawPencilPolygonOP(stage_wnd, stage, shapesImpl, this, this); 
+	m_editop = new DrawPencilPolygonOP(stage_wnd, stage, shapes_impl, this, this); 
 }
 
 int DrawPencilPolygonCMPT::GetSelected() const

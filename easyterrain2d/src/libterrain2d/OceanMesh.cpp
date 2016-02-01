@@ -5,7 +5,7 @@
 namespace eterrain2d
 {
 
-OceanMesh::OceanMesh(const libshape::PolygonShape* shape, 
+OceanMesh::OceanMesh(const eshape::PolygonShape* shape, 
 					 const ee::ImageSymbol* image)
 	 : m_shape(shape->Clone())
 	 , m_image0(image)

@@ -28,7 +28,7 @@ private:
 private:
 	ee::LibraryPanel* m_library;
 
-	libshape::StagePanel* m_stage;
+	eshape::StagePanel* m_stage;
 
 }; // Task
 

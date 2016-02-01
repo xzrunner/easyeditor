@@ -3,6 +3,8 @@
 
 #include "DrawPolylineOP.h"
 
+namespace ee { class MultiShapesImpl; }
+
 namespace eshape
 {
 
@@ -10,7 +12,7 @@ class DrawPolygonOP : public DrawPolylineOP
 {
 public:
 	DrawPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage,
-		ee::MultiShapesImpl* shapesImpl);
+		ee::MultiShapesImpl* shapes_impl);
 
 	virtual bool OnMouseLeftDClick(int x, int y);
 

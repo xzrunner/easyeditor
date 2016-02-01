@@ -20,7 +20,7 @@ class ArrangeSpriteOP : public TBase
 {
 public:
 	ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel = NULL, EditCMPT* callback = NULL, 
+		PropertySettingPanel* property = NULL, EditCMPT* callback = NULL, 
 		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), 
 		ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();

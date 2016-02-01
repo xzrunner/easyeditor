@@ -17,7 +17,7 @@ CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name, bool vertical)
 	: ee::EditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 	, m_vertical(vertical)
 {
-	m_editOP = new ArrangeSpriteOP(ViewMgr::Instance()->stage);
+	m_editop = new ArrangeSpriteOP(ViewMgr::Instance()->stage);
 }
 
 wxSizer* CommonCMPT::InitLayout()
@@ -105,7 +105,7 @@ wxSizer* CommonCMPT::InitSettingsPanel()
 
 void CommonCMPT::OnLoadFromFolder(wxCommandEvent& event)
 {
-	ArrangeSpriteOP* op = static_cast<ArrangeSpriteOP*>(m_editOP);
+	ArrangeSpriteOP* op = static_cast<ArrangeSpriteOP*>(m_editop);
 	op->SetMouseMoveFocus(false);
 
 	wxDirDialog dlg(NULL, "Images", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -248,13 +248,13 @@ void CommonCMPT::OnChangeAnim(wxCommandEvent& event)
 
 void CommonCMPT::OnAddCross(wxCommandEvent& event)
 {
-	static_cast<ArrangeSpriteOP*>(m_editOP)->AddCross();
+	static_cast<ArrangeSpriteOP*>(m_editop)->AddCross();
 
 }
 
 void CommonCMPT::OnDelCross(wxCommandEvent& event)
 {
-	static_cast<ArrangeSpriteOP*>(m_editOP)->DelCross();
+	static_cast<ArrangeSpriteOP*>(m_editop)->DelCross();
 }
 
 }

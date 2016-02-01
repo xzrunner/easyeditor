@@ -2,16 +2,26 @@
 #include "RectShape.h"
 #include "RectPropertySetting.h"
 
+#include <ee/MultiShapesImpl.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/shape_msg.h>
+#include <ee/ShapeSelection.h>
+#include <ee/OneFloatValue.h>
+#include <ee/panel_msg.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Math2D.h>
+#include <ee/PropertySettingPanel.h>
+
 namespace eshape
 {
 
 EditRectOP::EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-					   ee::MultiShapesImpl* shapesImpl,
-					   ee::PropertySettingPanel* propertyPanel,
+					   ee::MultiShapesImpl* shapes_impl,
+					   ee::PropertySettingPanel* property,
 					   ee::OneFloatValue* node_capture)
 	: ee::ZoomViewOP(wnd, stage, true)
-	, m_propertyPanel(propertyPanel)
-	, m_shapesImpl(shapesImpl)
+	, m_property(property)
+	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
@@ -25,7 +35,7 @@ bool EditRectOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapesImpl->ClearSelectedShape();
+		m_shapes_impl->ClearSelectedShape();
 		m_captured.clear();
 		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
@@ -37,19 +47,19 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	m_firstPress = m_currPos = m_stage->TransPosScrToProj(x, y);
+	m_first_press = m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-	m_shapesImpl->GetShapeSelection()->Clear();
+	m_shapes_impl->GetShapeSelection()->Clear();
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
-		NodeCapture capture(m_shapesImpl, tolerance);
-		capture.captureEditable(m_firstPress, m_captured);
+		NodeCapture capture(m_shapes_impl, tolerance);
+		capture.captureEditable(m_first_press, m_captured);
 
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			m_shapesImpl->GetShapeSelection()->Add(rect);
+			m_shapes_impl->GetShapeSelection()->Add(rect);
 			ee::SelectShapeSJ::Instance()->Select(rect);
 		}
 	}
@@ -67,14 +77,14 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 
 	if (!m_captured.shape)
 	{
-		if (m_firstPress.IsValid())
+		if (m_first_press.IsValid())
 		{
-			m_currPos = m_stage->TransPosScrToProj(x, y);
+			m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-			const float dis = ee::Math2D::GetDistance(m_firstPress, m_currPos);
+			const float dis = ee::Math2D::GetDistance(m_first_press, m_curr_pos);
 			if (dis > 1)
 			{
-				RectShape* rect = new RectShape(m_firstPress, m_currPos);
+				RectShape* rect = new RectShape(m_first_press, m_curr_pos);
 				ee::SelectShapeSJ::Instance()->Select(rect);
 				ee::InsertShapeSJ::Instance()->Insert(NULL);
 			}
@@ -82,7 +92,7 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 	}
 	else
 	{
-		m_propertyPanel->EnablePropertyGrid(true);
+		m_property->EnablePropertyGrid(true);
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape)) {
 			ee::SelectShapeSJ::Instance()->Select(rect);
 		}
@@ -101,14 +111,14 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		m_currPos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-		NodeCapture capture(m_shapesImpl, tolerance);
-		capture.captureEditable(m_currPos, m_captured);
+		NodeCapture capture(m_shapes_impl, tolerance);
+		capture.captureEditable(m_curr_pos, m_captured);
 		if (m_captured.shape)
 		{
 			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
-			m_shapesImpl->GetShapeSelection()->Clear();
+			m_shapes_impl->GetShapeSelection()->Clear();
 			m_captured.clear();
 			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
@@ -129,7 +139,7 @@ bool EditRectOP::OnMouseMove(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
-		NodeCapture capture(m_shapesImpl, tolerance);
+		NodeCapture capture(m_shapes_impl, tolerance);
 		ee::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
@@ -144,7 +154,7 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 {
 	if (ee::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	m_currPos = m_stage->TransPosScrToProj(x, y);
+	m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
 	if (m_captured.shape)
 	{
@@ -155,24 +165,24 @@ bool EditRectOP::OnMouseDrag(int x, int y)
 			// move
 			if (!m_captured.pos.IsValid())
 			{
-				rect->m_rect.Translate(m_currPos - center);
+				rect->m_rect.Translate(m_curr_pos - center);
 			}
 			// change size
 			else 
 			{
 				if (m_captured.pos.x > center.x)
-					rect->m_rect.xmax = m_currPos.x;
+					rect->m_rect.xmax = m_curr_pos.x;
 				else
-					rect->m_rect.xmin = m_currPos.x;
+					rect->m_rect.xmin = m_curr_pos.x;
 				if (m_captured.pos.y > center.y)
-					rect->m_rect.ymax = m_currPos.y;
+					rect->m_rect.ymax = m_curr_pos.y;
 				else
-					rect->m_rect.ymin = m_currPos.y;
+					rect->m_rect.ymin = m_curr_pos.y;
 
-				m_captured.pos = m_currPos;
+				m_captured.pos = m_curr_pos;
 			}
 
-			m_propertyPanel->EnablePropertyGrid(false);
+			m_property->EnablePropertyGrid(false);
 
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
@@ -203,8 +213,8 @@ bool EditRectOP::OnDraw() const
 	}
 	else
 	{
-		if (m_firstPress.IsValid() && m_currPos.IsValid())
-			ee::PrimitiveDraw::DrawRect(m_firstPress, m_currPos, m_style);
+		if (m_first_press.IsValid() && m_curr_pos.IsValid())
+			ee::PrimitiveDraw::DrawRect(m_first_press, m_curr_pos, m_style);
 	}
 
 	return false;
@@ -214,8 +224,8 @@ bool EditRectOP::Clear()
 {
 	if (ee::ZoomViewOP::Clear()) return true;
 
-	m_firstPress.SetInvalid();
-	m_currPos.SetInvalid();
+	m_first_press.SetInvalid();
+	m_curr_pos.SetInvalid();
 
 	return false;
 }

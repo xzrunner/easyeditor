@@ -12,7 +12,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	addChild(new libshape::DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, NULL));
+	AddChild(new eshape::DrawPolygon2CMPT(this, "多边形", stage, stage->GetStageImpl(), stage, NULL));
 	SetSizer(InitLayout());
 }
 

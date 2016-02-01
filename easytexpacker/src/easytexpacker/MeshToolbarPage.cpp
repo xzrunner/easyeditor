@@ -169,10 +169,10 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 
 		std::vector<ee::Shape*> shapes;
 		std::string bg_filepath;
-		libshape::FileIO::LoadFromFile(filepath, shapes, bg_filepath);
+		eshape::FileIO::LoadFromFile(filepath, shapes, bg_filepath);
 		for (int i = 0, n = shapes.size(); i < n; ++i)
 		{
-			libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shapes[i]);
+			eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shapes[i]);
 			if (!polygon) {
 				continue;
 			}

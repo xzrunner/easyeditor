@@ -53,9 +53,9 @@ bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 // 	ee::Sprite* selected = m_spritesImpl->querySpriteByPos(pos);
 // 	if (selected)
 // 	{
-// 		libshape::Symbol symbol;
+// 		eshape::Symbol symbol;
 // 		symbol.SetBG(&const_cast<ee::Symbol&>(selected->getSymbol()));
-// 		libshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
+// 		eshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
 // 		dlg.ShowModal();
 // 		Context::Instance()->stage->resetCanvas();
 // 	}

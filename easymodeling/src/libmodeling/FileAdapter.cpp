@@ -96,7 +96,7 @@ Fixture* FileApapter::j2bFixture(const Json::Value& fixtureValue)
 	fixture->groupIndex = fixtureValue["groupIndex"].asInt();
 
 	// todo
-//	fixture->shape = libshape::FileIO::LoadShape(fixtureValue["shape"]);
+//	fixture->shape = eshape::FileIO::LoadShape(fixtureValue["shape"]);
 
 	return fixture;
 }

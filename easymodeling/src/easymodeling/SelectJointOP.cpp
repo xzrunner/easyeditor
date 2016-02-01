@@ -58,7 +58,7 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 		}
 
 		if (m_callback)
-			m_callback->updateControlValue();
+			m_callback->UpdateControlValue();
 	}
 	else
 	{

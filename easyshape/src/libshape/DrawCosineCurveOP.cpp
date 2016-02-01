@@ -1,6 +1,8 @@
 #include "DrawCosineCurveOP.h"
 #include "CosineShape.h"
 
+#include <ee/shape_msg.h>
+
 namespace eshape
 {
 
@@ -19,7 +21,7 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 	ee::InsertShapeSJ::Instance()->Insert(curve);
 
 	m_polyline.clear();
-	m_currPos.SetInvalid();
+	m_curr_pos.SetInvalid();
 
 	return false;
 }

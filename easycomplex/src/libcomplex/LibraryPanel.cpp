@@ -31,7 +31,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eparticle3d::LibraryPage(nb));
 	AddPage(new etexture::LibraryPage(nb));
 	AddPage(new eicon::LibraryPage(nb));
-	AddPage(new libshape::LibraryPage(nb));
+	AddPage(new eshape::LibraryPage(nb));
 
 	AddPage(new ee::LibraryFontBlankPage(nb));
 	AddPage(new emesh::LibraryPage(nb));

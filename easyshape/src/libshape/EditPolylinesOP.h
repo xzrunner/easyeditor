@@ -1,7 +1,9 @@
 #ifndef _EASYSHAPE_EDIT_POLYLINES_OP_H_
 #define _EASYSHAPE_EDIT_POLYLINES_OP_H_
 
+#include <ee/SelectShapesOP.h>
 
+#include <map>
 
 namespace eshape
 {
@@ -12,7 +14,7 @@ class EditPolylinesCMPT;
 class EditPolylinesOP : public ee::SelectShapesOP
 {
 public:
-	EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+	EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 		EditPolylinesCMPT* cmpt);
 
 	virtual bool OnMouseLeftDown(int x, int y);

@@ -54,7 +54,7 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 	ee::EditPanel::Refresh(eraseBackground, rect);
 
 	if (m_loop) {
-		libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(m_loop);
+		eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(m_loop);
 		m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 	}	
 }
@@ -74,7 +74,7 @@ void StagePanel::LoadFromShadow()
 	if (m_loop) {
 		m_loop->Release();
 	}
-	m_loop = new libshape::PolygonShape(loop);
+	m_loop = new eshape::PolygonShape(loop);
 }
 
 void StagePanel::OnNotify(int sj_id, void* ud)
@@ -88,14 +88,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 
 void StagePanel::InsertShape(ee::Shape* shape)
 {
-	if (libshape::get_shape_type(shape->GetShapeDesc()) != libshape::ST_POLYGON) {
+	if (eshape::get_shape_type(shape->GetShapeDesc()) != eshape::ST_POLYGON) {
 		return;
 	}
 
 	m_loop = shape;
 	m_loop->Retain();
 
-	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shape);
+	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

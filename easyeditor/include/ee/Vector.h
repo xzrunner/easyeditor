@@ -4,9 +4,12 @@
 #include <iostream>
 
 #include <math.h>
+#include <float.h>
 
 namespace ee
 {
+
+static const float FLT_INVALID = FLT_MAX;
 
 class Vector
 {

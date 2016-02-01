@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_AUTO_RECT_CUT_CMPT_H_
 #define _EASYIMAGE_AUTO_RECT_CUT_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace eimage
 {
@@ -11,7 +11,7 @@ class StagePanel;
 class AutoRectCutCMPT : public ee::EditCMPT
 {
 public:
-	AutoRectCutCMPT(wxWindow* parent, const wxString& name,
+	AutoRectCutCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
 protected:

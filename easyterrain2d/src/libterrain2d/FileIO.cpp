@@ -7,7 +7,7 @@ namespace eterrain2d
 
 void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json::Value& value)
 {
-	if (const libshape::PolygonShape* shape = ocean->GetBounding()) {
+	if (const eshape::PolygonShape* shape = ocean->GetBounding()) {
 		ee::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
 	}
 	if (const ee::ImageSymbol* img = ocean->GetImage0()) {
@@ -43,7 +43,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 
 	std::vector<ee::Vector> bounding;
 	ee::JsonSerializer::Load(value["bound"], bounding);
-	libshape::PolygonShape* shape = new libshape::PolygonShape(bounding);
+	eshape::PolygonShape* shape = new eshape::PolygonShape(bounding);
 
 	std::string tex0_path = dir + "\\" + value["tex0"].asString();
 	ee::Symbol* tex0 = ee::SymbolMgr::Instance()->FetchSymbol(tex0_path);

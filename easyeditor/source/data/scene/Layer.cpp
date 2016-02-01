@@ -96,7 +96,7 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 // 	i = 0;
 // 	Json::Value shape_val = val["shape"][i++];
 // 	while (!shape_val.isNull()) {
-// 		Shape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
+// 		Shape* shape = eshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
 // 		m_shapes.Insert(shape);
 // 		shape->Release();
 // 

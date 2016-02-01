@@ -1,6 +1,8 @@
 #include "PolygonPropertySetting.h"
 #include "PolygonShape.h"
 
+#include <ee/panel_msg.h>
+
 namespace eshape
 {
 

@@ -1,7 +1,11 @@
 #ifndef _EASYIMAGE_RECT_MGR_H_
 #define _EASYIMAGE_RECT_MGR_H_
 
+#include <ee/Vector.h>
 
+#include <json/json.h>
+
+namespace ee { class Rect; }
 
 namespace eimage
 {
@@ -22,28 +26,28 @@ public:
 public:
 	~RectMgr();
 
-	void load(const Json::Value& value);
-	void store(Json::Value& value) const;
+	void Load(const Json::Value& value);
+	void Store(Json::Value& value) const;
 
-	void draw() const;
+	void Draw() const;
 
-	void insert(const ee::Rect& rect, bool force = false);
-	bool remove(const ee::Vector& pos);
+	void Insert(const ee::Rect& rect, bool force = false);
+	bool Remove(const ee::Vector& pos);
 
-	ee::Vector queryNearestAxis(const ee::Vector& pos, const ee::Rect* except = NULL) const;
+	ee::Vector QueryNearestAxis(const ee::Vector& pos, const ee::Rect* except = NULL) const;
 
-	Node queryNode(const ee::Vector& pos) const;
+	Node QueryNode(const ee::Vector& pos) const;
 
-	ee::Rect* queryRect(const ee::Vector& pos) const;
+	ee::Rect* QueryRect(const ee::Vector& pos) const;
 
-	bool moveNode(const Node& node, const ee::Vector& pos);
-	void moveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to);
+	bool MoveNode(const Node& node, const ee::Vector& pos);
+	void MoveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to);
 
-	const std::vector<ee::Rect*>& getAllRect() const {
+	const std::vector<ee::Rect*>& GetAllRect() const {
 		return m_rects;
 	}
 
-	void clear();
+	void Clear();
 
 private:
 	std::vector<ee::Rect*> m_rects;

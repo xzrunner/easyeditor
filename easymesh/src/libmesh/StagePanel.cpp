@@ -86,8 +86,8 @@ void StagePanel::LoadFromSymbol(const ee::Symbol* symbol)
 void StagePanel::UpdateSymbol()
 {
 	if (Shape* shape = m_symbol->getShape()) {
-		std::vector<const libshape::ChainShape*> polylines;
-		TraverseShapes(ee::FetchAllVisitor<const libshape::ChainShape>(polylines));
+		std::vector<const eshape::ChainShape*> polylines;
+		TraverseShapes(ee::FetchAllVisitor<const eshape::ChainShape>(polylines));
 		shape->Refresh();
 	}
 }

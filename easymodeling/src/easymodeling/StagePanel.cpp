@@ -116,7 +116,7 @@ void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 {
 	ee::Symbol* bg = NULL;
 	std::vector<ee::Shape*> shapes;
-	libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
+	eshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
 	for (size_t i = 0, n = shapes.size();  i< n; ++i)
 	{
 		libmodeling::Fixture* fixture = new libmodeling::Fixture;
@@ -124,11 +124,11 @@ void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 
 		fixture->shape = shapes[i];
 
-		// 		if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shapes[i]))
+		// 		if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shapes[i]))
 		// 		{
-		// 			fixture->shape = new libshape::ChainShape(chain->getVertices(), true);
+		// 			fixture->shape = new eshape::ChainShape(chain->getVertices(), true);
 		// 		}
-		// 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shapes[i]))
+		// 		else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(shapes[i]))
 		// 		{
 		// 			std::vector<ee::Vector> vertices(4);
 		//  			vertices[0] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymin);
@@ -136,11 +136,11 @@ void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 		//  			vertices[2] = ee::Vector(rect->m_rect.xmax, rect->m_rect.ymax);
 		//  			vertices[3] = ee::Vector(rect->m_rect.xmin, rect->m_rect.ymax);
 		// 
-		// 			fixture->shape = new libshape::ChainShape(vertices, true);
+		// 			fixture->shape = new eshape::ChainShape(vertices, true);
 		// 		}
-		// 		else if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shapes[i]))
+		// 		else if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shapes[i]))
 		// 		{
-		// 			fixture->shape = new libshape::CircleShape(ee::Vector(), circle->radius);
+		// 			fixture->shape = new eshape::CircleShape(ee::Vector(), circle->radius);
 		// 		}
 		body.fixtures.push_back(fixture);
 
@@ -155,7 +155,7 @@ void StagePanel::loadBody(ee::Sprite* sprite, libmodeling::Body& body)
 
 	const float width = sprite->GetSymbol().GetSize().Width(),
 		height = sprite->GetSymbol().GetSize().Height();
-	fixture->shape = new libshape::RectShape(ee::Vector(0, 0), width * 0.5f, height * 0.5f);
+	fixture->shape = new eshape::RectShape(ee::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 	body.fixtures.push_back(fixture);
 }
@@ -163,14 +163,14 @@ void StagePanel::loadBody(ee::Sprite* sprite, libmodeling::Body& body)
 void StagePanel::Insert(ee::Sprite* spr)
 {
 	wxString filepath = ee::FileHelper::GetFilenameAddTag(
-		spr->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
+		spr->GetSymbol().GetFilepath(), eshape::FILE_TAG, "json");
 	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
 	}
 
 	ee::Symbol* bg = NULL;
 	std::vector<ee::Shape*> shapes;
-	libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
+	eshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
 	libmodeling::Body* body = new libmodeling::Body;
 	for (int i = 0, n = shapes.size(); i< n; ++i)
 	{

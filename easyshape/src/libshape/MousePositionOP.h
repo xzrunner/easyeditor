@@ -1,9 +1,9 @@
 #ifndef _EASYSHAPE_MOUSE_POSITION_OP_H_
 #define _EASYSHAPE_MOUSE_POSITION_OP_H_
 
-
-
 #include "DrawPolylineOP.h"
+
+#include <ee/MousePositionOP.h>
 
 namespace eshape
 {

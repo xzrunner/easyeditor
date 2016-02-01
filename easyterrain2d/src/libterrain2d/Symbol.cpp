@@ -94,7 +94,7 @@ void Symbol::LoadResources()
 			ocean->Rotate(m_angle);
 
 			m_oceans.push_back(ocean);
-// 			insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+// 			insertShape(const_cast<eshape::PolygonShape*>(ocean->GetBounding()));
 // 			library->AddSymbol(const_cast<ee::ImageSymbol*>(ocean->GetImage0()));
 // 			if (const ee::Symbol* tex1 = ocean->GetImage1()) {
 // 				library->AddSymbol(const_cast<ee::Symbol*>(tex1));

@@ -13,7 +13,7 @@ namespace emodeling
 	class SelectFixtureOP : public ee::DrawRectangleOP
 	{
 	public:
-		SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel);
+		SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* property);
 		virtual ~SelectFixtureOP();
 
 		virtual bool OnMouseLeftDown(int x, int y);
@@ -26,7 +26,7 @@ namespace emodeling
 	private:
 		StagePanel* m_stagePanel;
 
-		ee::PropertySettingPanel* m_propertyPanel;
+		ee::PropertySettingPanel* m_property;
 
 		ee::Vector m_first_pos;
 

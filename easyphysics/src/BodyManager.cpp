@@ -76,7 +76,7 @@ void BodyManager::Update()
 IBody* BodyManager::CreateBody(ee::Sprite* sprite)
 {
 	std::string filepath = ee::FileHelper::GetFilenameAddTag(
-		sprite->GetSymbol().GetFilepath(), libshape::FILE_TAG, "json");
+		sprite->GetSymbol().GetFilepath(), eshape::FILE_TAG, "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, sprite->GetScale().x);
 		ee::Vector pos = sprite->GetPosition() / BOX2D_SCALE_FACTOR;

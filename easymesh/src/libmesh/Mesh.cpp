@@ -69,7 +69,7 @@ void Mesh::Load(const Json::Value& value)
 	while (!loop_val.isNull()) {
 		std::vector<ee::Vector> nodes;
 		ee::JsonSerializer::Load(loop_val, nodes);
-		libshape::ChainShape* shape = new libshape::ChainShape(nodes, true);
+		eshape::ChainShape* shape = new eshape::ChainShape(nodes, true);
 		m_region.loops.push_back(shape);
 		loop_val = loops_val[i++];
 	}
@@ -122,7 +122,7 @@ void Mesh::Store(Json::Value& value) const
 #ifndef OPEN_MESH_INV
 	Json::Value& loops_val = value["loops"];
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-		const libshape::ChainShape* loop = m_region.loops[i];
+		const eshape::ChainShape* loop = m_region.loops[i];
 		ee::JsonSerializer::Store(loop->GetVertices(), loops_val[i]);
 	}
 
@@ -130,7 +130,7 @@ void Mesh::Store(Json::Value& value) const
 #else
 	Json::Value& loops_val = value["loops"];
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-		const libshape::ChainShape* loop = m_region.loops[i];
+		const eshape::ChainShape* loop = m_region.loops[i];
 		const std::vector<ee::Vector>& src = loop->GetVertices();
 		std::vector<ee::Vector> dst;
 		for (int i = 0, n = src.size(); i < n; ++i) {
@@ -313,8 +313,8 @@ void Mesh::TraverseShape(ee::Visitor& visitor) const
 {
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 	{
-		libshape::ChainShape* shape 
-			= const_cast<libshape::ChainShape*>(m_region.loops[i]);
+		eshape::ChainShape* shape 
+			= const_cast<eshape::ChainShape*>(m_region.loops[i]);
 
 		bool has_next;
 		visitor.Visit(shape, has_next);
@@ -342,7 +342,7 @@ bool Mesh::RemoveShape(ee::Shape* shape)
 
 bool Mesh::InsertShape(ee::Shape* shape)
 {
-	libshape::ChainShape* loop = dynamic_cast<libshape::ChainShape*>(shape);
+	eshape::ChainShape* loop = dynamic_cast<eshape::ChainShape*>(shape);
 	if (loop) {
 		loop->Retain();
 		m_region.loops.push_back(loop);
@@ -398,7 +398,7 @@ void Mesh::GetTriangulation(std::vector<ee::Vector>& tris)
 		std::vector<ee::Vector> points;
 		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 		{
-			const libshape::ChainShape* chain = m_region.loops[i];
+			const eshape::ChainShape* chain = m_region.loops[i];
 			const std::vector<ee::Vector>& loop = chain->GetVertices();
 			std::copy(loop.begin(), loop.end(), back_inserter(points));
 		}
@@ -408,7 +408,7 @@ void Mesh::GetTriangulation(std::vector<ee::Vector>& tris)
 	{
  		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
  		{
- 			const libshape::ChainShape* chain = m_region.loops[i];
+ 			const eshape::ChainShape* chain = m_region.loops[i];
  			const std::vector<ee::Vector>& loop = chain->GetVertices();
  			ee::Triangulation::Normal(loop, tris);
  		}

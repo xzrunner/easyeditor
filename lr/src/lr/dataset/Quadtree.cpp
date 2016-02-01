@@ -172,13 +172,13 @@ IsContain(const ee::Vector& pos) const
 bool Quadtree::Node::
 IsContain(const ee::Sprite* spr) const
 {
-	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->GetSymbol();
-	assert(shape.GetShapeType() == libshape::ST_POLYGON);
+	const eshape::Symbol& shape = static_cast<const eshape::Sprite*>(spr)->GetSymbol();
+	assert(shape.GetShapeType() == eshape::ST_POLYGON);
 
 	const std::vector<ee::Shape*>& shapes = shape.GetShapes();
 	assert(!shapes.empty());
 
-	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
 
 	ee::Matrix mt;
 	spr->GetTransMatrix(mt);
@@ -238,13 +238,13 @@ Split()
 float Quadtree::Node::
 GetContainArea(const ee::Sprite* spr) const
 {
-	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->GetSymbol();
-	assert(shape.GetShapeType() == libshape::ST_POLYGON);
+	const eshape::Symbol& shape = static_cast<const eshape::Sprite*>(spr)->GetSymbol();
+	assert(shape.GetShapeType() == eshape::ST_POLYGON);
 
 	const std::vector<ee::Shape*>& shapes = shape.GetShapes();
 	assert(!shapes.empty());
 
-	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shapes[0]);
+	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
 
 	ee::Matrix mt;
 	spr->GetTransMatrix(mt);

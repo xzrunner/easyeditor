@@ -37,7 +37,7 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 		fout.write(reinterpret_cast<const char*>(&fData->friction), sizeof(float));
 		fout.write(reinterpret_cast<const char*>(&fData->restitution), sizeof(float));
 
-		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
+		if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(fData->shape))
 		{
 			int type = e_circle;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
@@ -46,7 +46,7 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			fout.write(reinterpret_cast<const char*>(&circle->center.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&circle->center.y), sizeof(float));
 		}
-		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
+		else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(fData->shape))
 		{
 			int type = e_rect;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
@@ -56,9 +56,9 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			fout.write(reinterpret_cast<const char*>(&rect->m_rect.ymin), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&rect->m_rect.ymax), sizeof(float));
 		}
-		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
+		else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(fData->shape))
 		{
-			int type = dynamic_cast<libshape::PolygonShape*>(chain) ? e_polygon : e_chain;
+			int type = dynamic_cast<eshape::PolygonShape*>(chain) ? e_polygon : e_chain;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
 			const std::vector<ee::Vector>& vertices = chain->GetVertices();

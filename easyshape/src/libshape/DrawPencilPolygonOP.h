@@ -3,6 +3,8 @@
 
 #include "DrawCurveOP.h"
 
+namespace ee { class MultiShapesImpl; class OneFloatValue; }
+
 namespace eshape
 {
 
@@ -11,7 +13,7 @@ class DrawPencilPolygonCMPT;
 class DrawPencilPolygonOP : public DrawCurveOP
 {
 public:
-	DrawPencilPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+	DrawPencilPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 		ee::OneFloatValue* simplify, DrawPencilPolygonCMPT* cmpt);
 
 	virtual bool OnKeyDown(int keyCode);
@@ -39,7 +41,7 @@ private:
 	};
 
 private:
-	ee::MultiShapesImpl* m_shapesImpl;
+	ee::MultiShapesImpl* m_shapes_impl;
 
 	ee::OneFloatValue* m_simplify;
 

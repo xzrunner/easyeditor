@@ -4,6 +4,14 @@
 #include "Symbol.h"
 #include "ToolBarPanel.h"
 
+#include <ee/Sprite.h>
+#include <ee/panel_msg.h>
+#include <ee/subject_id.h>
+#include <ee/shape_msg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/LibraryPanel.h>
+#include <ee/SymbolMgr.h>
+
 namespace eshape
 {
 
@@ -111,7 +119,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* symbol)
 // 
 // 		if (ee::FileHelper::isExist(filepath))
 // 		{
-// 			libshape::FileAdapter adapter(m_shapes);
+// 			eshape::FileAdapter adapter(m_shapes);
 // 			adapter.load(filepath.c_str());
 // 		}
 // 	}
@@ -148,7 +156,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* symbol)
 //
 ////		if (ee::FileHelper::isExist(filepath))
 //		{
-//			libshape::FileAdapter adapter(m_shapes);
+//			eshape::FileAdapter adapter(m_shapes);
 //			adapter.store(filepath.c_str());
 //		}
 //	}

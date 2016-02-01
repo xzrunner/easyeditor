@@ -44,7 +44,7 @@ void TransOldShapeFile::Run(const std::string& folder)
 
 		if (ee::FileType::IsType(filepath, ee::FileType::e_shape)) {
 // 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
-// 			static_cast<libshape::Symbol*>(symbol)->StoreToFile(symbol->getFilepath());
+// 			static_cast<eshape::Symbol*>(symbol)->StoreToFile(symbol->getFilepath());
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_texture)) {
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			etexture::FileSaver::Store(filepath.c_str(), static_cast<etexture::Symbol*>(symbol));

@@ -15,9 +15,9 @@ void LibraryList::OnListDoubleClicked(wxCommandEvent& event)
 {
 	// todo
 
-// 	libshape::Symbol symbol;
+// 	eshape::Symbol symbol;
 // 	symbol.SetBG(getSymbol(event.GetInt()));
-// 	libshape::EditDialog<BodyEditStage> dlg(this, &symbol);
+// 	eshape::EditDialog<BodyEditStage> dlg(this, &symbol);
 // 	dlg.ShowModal();
 // 	Context::Instance()->stage->resetCanvas();
 }

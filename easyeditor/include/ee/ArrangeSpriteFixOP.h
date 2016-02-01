@@ -11,7 +11,7 @@ class ArrangeSpriteFixOP : public ArrangeSpriteOP<SelectSpritesOP>
 {
 public:
 	ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
-		PropertySettingPanel* propertyPanel = NULL, EditCMPT* callback = NULL, 
+		PropertySettingPanel* property = NULL, EditCMPT* callback = NULL, 
 		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 
 	virtual bool OnMouseLeftUp(int x, int y);

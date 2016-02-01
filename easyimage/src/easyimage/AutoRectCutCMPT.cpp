@@ -4,15 +4,22 @@
 
 #include <easyimage.h>
 
+#include <ee/ImageSprite.h>
+#include <ee/panel_msg.h>
+#include <ee/FileHelper.h>
+#include <ee/Image.h>
+#include <ee/ImageClip.h>
+#include <ee/ImageSaver.h>
+
 namespace eimage
 {
 
-AutoRectCutCMPT::AutoRectCutCMPT(wxWindow* parent, const wxString& name, 
+AutoRectCutCMPT::AutoRectCutCMPT(wxWindow* parent, const std::string& name, 
 								 StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editOP = new AutoRectCutOP(stage, stage->GetStageImpl());
+	m_editop = new AutoRectCutOP(stage, stage->GetStageImpl());
 }
 
 wxSizer* AutoRectCutCMPT::InitLayout()
@@ -72,7 +79,7 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 // 	int width = wxVariant(m_width_choice->GetString(m_width_choice->GetSelection())).GetInteger();
 // 	int height = wxVariant(m_height_choice->GetString(m_height_choice->GetSelection())).GetInteger();
 // 
-// 	AutoRectCutOP* op = static_cast<AutoRectCutOP*>(m_editOP);
+// 	AutoRectCutOP* op = static_cast<AutoRectCutOP*>(m_editop);
 // 	op->getRectMgr().insert(ee::Rect(ee::Vector(0, 0), ee::Vector((float)width, (float)height)));
 // 
 // 	m_stage->Refresh();
@@ -80,7 +87,7 @@ wxSizer* AutoRectCutCMPT::InitLayout()
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
@@ -90,13 +97,13 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 	cut.AutoCut();
 
 	const std::vector<Rect>& result = cut.GetResult();
-	RectMgr& rects = static_cast<AutoRectCutOP*>(m_editOP)->getRectMgr();
+	RectMgr& rects = static_cast<AutoRectCutOP*>(m_editop)->getRectMgr();
 	for (int i = 0, n = result.size(); i < n; ++i) {
 		int x = result[i].x,
 			y = result[i].y,
 			w = result[i].w,
 			h = result[i].h;
-		rects.insert(ee::Rect(ee::Vector(x, y), ee::Vector(x+w, y+h)), true);
+		rects.Insert(ee::Rect(ee::Vector(x, y), ee::Vector(x+w, y+h)), true);
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
@@ -108,7 +115,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 {
-	const ee::Sprite* sprite = m_stage->getImage();
+	const ee::Sprite* sprite = m_stage->GetImage();
 	const ee::ImageSprite* img_sprite 
 		= dynamic_cast<const ee::ImageSprite*>(sprite);
 	assert(img_sprite);
@@ -121,10 +128,11 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
-	wxString ori_path = ee::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
-	eimage::ImageClip img_cut(*img->GetImageData());
+	std::string ori_path = ee::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
+	ee::ImageClip img_cut(*img->GetImageData());
 	const std::vector<Rect>& result = cut.GetResult();
-	for (int i = 0, n = result.size(); i < n; ++i) {
+	for (int i = 0, n = result.size(); i < n; ++i) 
+	{
 		const eimage::Rect& r = result[i];
 		const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 

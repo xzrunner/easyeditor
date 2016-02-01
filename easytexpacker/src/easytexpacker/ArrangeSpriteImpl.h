@@ -12,7 +12,7 @@ class ArrangeSpriteImpl : public ee::ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(StagePanel* editPanel, 
-		ee::PropertySettingPanel* propertyPanel);
+		ee::PropertySettingPanel* property);
 
 	virtual void OnMouseLeftUp(int x, int y);
 	virtual void OnMouseRightDown(int x, int y);

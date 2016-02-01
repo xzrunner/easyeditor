@@ -3,37 +3,47 @@
 #include "PolygonShape.h"
 #include "DrawPencilPolygonCMPT.h"
 
+#include <ee/SelectShapesOP.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/ShapeSelection.h>
+#include <ee/EmptyVerifyVisitor.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/RGBColorSettingDlg.h>
+#include <ee/SymbolMgr.h>
+#include <ee/panel_msg.h>
+#include <ee/ImageSymbol.h>
+
 namespace eshape
 {
 
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd,
-								 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
+								 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapes_impl,
 								 ee::PropertySettingPanel* property)
 	: ee::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)
 	, m_stage_wnd(stage_wnd)
-	, m_shapesImpl(shapesImpl)
+	, m_shapes_impl(shapes_impl)
 	, m_color(*wxBLACK)
 {
-	m_editOP = NULL;
+	m_editop = NULL;
 	// draw polygon with pen, node capture
 	{
 		ee::OneFloatValueCMPT* cmpt = new ee::OneFloatValueCMPT(this, "pen", stage, "node capture", 5, 30, 10);
 		ee::EditOP* op = new EditPolylineOP<DrawPolygonOP, ee::SelectShapesOP>
-			(stage_wnd, stage, shapesImpl, property, cmpt, /*cmpt*/this);
+			(stage_wnd, stage, shapes_impl, property, cmpt, /*cmpt*/this);
 		cmpt->SetEditOP(op);
-		addChild(cmpt);
+		AddChild(cmpt);
 	}
 	// draw polygon with pencil, simplify threshold
 	{
-		addChild(new DrawPencilPolygonCMPT(this, wxT("pencil"), stage_wnd, stage, shapesImpl));
+		AddChild(new DrawPencilPolygonCMPT(this, "pencil", stage_wnd, stage, shapes_impl));
 	}
 }
 
-void DrawPolygonCMPT::updateControlValue()
+void DrawPolygonCMPT::UpdateControlValue()
 {
 	bool empty;
-	m_shapesImpl->GetShapeSelection()->Traverse(ee::EmptyVerifyVisitor(empty));
-	m_btnTrigger->Enable(!empty);
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::EmptyVerifyVisitor(empty));
+	m_btn_trigger->Enable(!empty);
 }
 
 wxSizer* DrawPolygonCMPT::InitLayout()
@@ -48,42 +58,42 @@ wxSizer* DrawPolygonCMPT::InitLayout()
 
 	sizer->AddSpacer(20);
 
-	sizer->Add(initPreviewButtonPanel());
+	sizer->Add(InitPreviewButtonPanel());
 
 	sizer->AddSpacer(10);
 
-	m_btnTrigger = new wxButton(this, wxID_ANY, wxT("设置"));
-	Connect(m_btnTrigger->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DrawPolygonCMPT::onTriggerFillingColor));
-	sizer->Add(m_btnTrigger);
-	m_btnTrigger->Enable(false);
+	m_btn_trigger = new wxButton(this, wxID_ANY, wxT("设置"));
+	Connect(m_btn_trigger->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DrawPolygonCMPT::OnTriggerFillingColor));
+	sizer->Add(m_btn_trigger);
+	m_btn_trigger->Enable(false);
 
 	return sizer;
 }
 
-wxSizer* DrawPolygonCMPT::initPreviewButtonPanel()
+wxSizer* DrawPolygonCMPT::InitPreviewButtonPanel()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	wxArrayString choices;
 	choices.Add(wxT("颜色"));
 	choices.Add(wxT("纹理"));
-	m_fillingTypeChoice = new wxRadioBox(this, wxID_ANY, wxT("填充方式"), wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
-	Connect(m_fillingTypeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(DrawPolygonCMPT::onChangeFillingType));
-	sizer->Add(m_fillingTypeChoice);
+	m_filling_type_choice = new wxRadioBox(this, wxID_ANY, wxT("填充方式"), wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
+	Connect(m_filling_type_choice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(DrawPolygonCMPT::OnChangeFillingType));
+	sizer->Add(m_filling_type_choice);
 
 	sizer->AddSpacer(10);
 
-	m_btnReview = new wxButton(this, wxID_ANY);	
-	Connect(m_btnReview->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DrawPolygonCMPT::onSetColor));
-	sizer->Add(m_btnReview);
-	fillingButton();
+	m_btn_review = new wxButton(this, wxID_ANY);	
+	Connect(m_btn_review->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DrawPolygonCMPT::OnSetColor));
+	sizer->Add(m_btn_review);
+	FillingButton();
 
 	return sizer;
 }
 
-void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
+void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 {
-	switch (m_fillingTypeChoice->GetSelection()) 
+	switch (m_filling_type_choice->GetSelection()) 
 	{
 	case 0:
 // 		{
@@ -116,56 +126,56 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			wxFileDialog dlg(this, wxT("选择纹理"), wxEmptyString, wxEmptyString, wxT("*.png;*.jpg"), wxFD_OPEN);
 			if (dlg.ShowModal() == wxID_OK)
 			{
-				m_filePath = dlg.GetPath();
-				m_bitmap.LoadFromFile(m_filePath);
+				m_filepath = dlg.GetPath();
+				m_bitmap.LoadFromFile(m_filepath);
 			}
 		}
 		break;
 	}
-	fillingButton();
+	FillingButton();
 }
 
-void DrawPolygonCMPT::onChangeFillingType(wxCommandEvent& event)
+void DrawPolygonCMPT::OnChangeFillingType(wxCommandEvent& event)
 {
-	fillingButton();
+	FillingButton();
 }
 
-void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
+void DrawPolygonCMPT::OnTriggerFillingColor(wxCommandEvent& event)
 {
 	std::vector<PolygonShape*> polys;
-	m_shapesImpl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<PolygonShape>(polys));
+	m_shapes_impl->GetShapeSelection()->Traverse(ee::FetchAllVisitor<PolygonShape>(polys));
 
 	for (size_t i = 0, n = polys.size(); i < n; ++i)
 	{
 		PolygonShape* poly = polys[i];
-		switch (m_fillingTypeChoice->GetSelection()) 
+		switch (m_filling_type_choice->GetSelection()) 
 		{
 		case 0:
 			poly->SetMaterialColor(ee::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f));
 			break;
 		case 1:
-			poly->SetMaterialTexture(static_cast<ee::ImageSymbol*>(ee::SymbolMgr::Instance()->FetchSymbol(m_filePath)));
+			poly->SetMaterialTexture(static_cast<ee::ImageSymbol*>(ee::SymbolMgr::Instance()->FetchSymbol(m_filepath)));
 			break;
 		}
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
-void DrawPolygonCMPT::fillingButton()
+void DrawPolygonCMPT::FillingButton()
 {
-	switch (m_fillingTypeChoice->GetSelection()) 
+	switch (m_filling_type_choice->GetSelection()) 
 	{
 	case 0:
 		{
-			wxImage img(m_btnReview->GetSize().GetWidth(), m_btnReview->GetSize().GetHeight());
-			img.SetRGB(wxRect(m_btnReview->GetSize()), m_color.Red(), m_color.Green(), m_color.Blue());
+			wxImage img(m_btn_review->GetSize().GetWidth(), m_btn_review->GetSize().GetHeight());
+			img.SetRGB(wxRect(m_btn_review->GetSize()), m_color.Red(), m_color.Green(), m_color.Blue());
 			wxBitmap bitmap(img);
-			m_btnReview->SetBitmap(bitmap);
+			m_btn_review->SetBitmap(bitmap);
 		}
 		break;
 	case 1:
 		if (const wxBitmap* bmp = m_bitmap.GetLargeBmp()) {
-			m_btnReview->SetBitmap(*bmp);
+			m_btn_review->SetBitmap(*bmp);
 		}
 		break;
 	}

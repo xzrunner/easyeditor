@@ -9,6 +9,12 @@
 #include "DrawPolygonOP.h"
 #include "EditBezierOP.h"
 
+#include <ee/panel_msg.h>
+#include <ee/shape_msg.h>
+#include <ee/SpriteFactory.h>
+#include <ee/SelectShapesOP.h>
+#include <ee/ConfirmDialog.h>
+
 namespace eshape
 {
 

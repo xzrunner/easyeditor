@@ -1,5 +1,13 @@
 #include "RectMgr.h"
 
+#include <ee/Rect.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/Math2D.h>
+#include <ee/std_functor.h>
+
+#include <algorithm>
+
 namespace eimage
 {
 
@@ -7,28 +15,28 @@ static const int RADIUS = 5;
 
 RectMgr::~RectMgr()
 {
-	clear();
+	Clear();
 }
 
-void RectMgr::load(const Json::Value& value)
+void RectMgr::Load(const Json::Value& value)
 {
-	clear();
+	Clear();
 
 	int i = 0;
 	Json::Value val = value["rect"][i++];
 	while (!val.isNull()) {
 		ee::Rect* r = new ee::Rect;
-		r->xmin = val["xmin"].asDouble();
-		r->xmax = val["xmax"].asDouble();
-		r->ymin = val["ymin"].asDouble();
-		r->ymax = val["ymax"].asDouble();
+		r->xmin = static_cast<float>(val["xmin"].asDouble());
+		r->xmax = static_cast<float>(val["xmax"].asDouble());
+		r->ymin = static_cast<float>(val["ymin"].asDouble());
+		r->ymax = static_cast<float>(val["ymax"].asDouble());
 		m_rects.push_back(r);
 
 		val = value["rect"][i++];
 	}
 }
 
-void RectMgr::store(Json::Value& value) const
+void RectMgr::Store(Json::Value& value) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
@@ -40,7 +48,7 @@ void RectMgr::store(Json::Value& value) const
 	}
 }
 
-void RectMgr::draw() const
+void RectMgr::Draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
@@ -49,7 +57,7 @@ void RectMgr::draw() const
 	}
 }
 
-void RectMgr::insert(const ee::Rect& rect, bool force)
+void RectMgr::Insert(const ee::Rect& rect, bool force)
 {
 	if (!force) {
 		for (int i = 0, n = m_rects.size(); i < n; ++i) {
@@ -62,7 +70,7 @@ void RectMgr::insert(const ee::Rect& rect, bool force)
 	m_rects.push_back(new ee::Rect(rect));
 }
 
-bool RectMgr::remove(const ee::Vector& pos)
+bool RectMgr::Remove(const ee::Vector& pos)
 {
 	std::vector<ee::Rect*>::iterator itr = m_rects.begin();
 	for ( ; itr != m_rects.end(); ++itr)
@@ -75,7 +83,7 @@ bool RectMgr::remove(const ee::Vector& pos)
 	return false;
 }
 
-ee::Vector RectMgr::queryNearestAxis(const ee::Vector& pos,
+ee::Vector RectMgr::QueryNearestAxis(const ee::Vector& pos,
 									  const ee::Rect* except) const
 {
 	ee::Vector ret;
@@ -124,7 +132,7 @@ ee::Vector RectMgr::queryNearestAxis(const ee::Vector& pos,
 	return ret;
 }
 
-RectMgr::Node RectMgr::queryNode(const ee::Vector& pos) const
+RectMgr::Node RectMgr::QueryNode(const ee::Vector& pos) const
 {
 	Node ret;
 	ret.rect = NULL;
@@ -158,7 +166,7 @@ RectMgr::Node RectMgr::queryNode(const ee::Vector& pos) const
 	return ret;
 }
 
-ee::Rect* RectMgr::queryRect(const ee::Vector& pos) const
+ee::Rect* RectMgr::QueryRect(const ee::Vector& pos) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
@@ -169,7 +177,7 @@ ee::Rect* RectMgr::queryRect(const ee::Vector& pos) const
 	return NULL;
 }
 
-bool RectMgr::moveNode(const Node& node, const ee::Vector& to)
+bool RectMgr::MoveNode(const Node& node, const ee::Vector& to)
 {
 	if (!node.rect) {
 		return false;
@@ -215,7 +223,7 @@ bool RectMgr::moveNode(const Node& node, const ee::Vector& to)
 	}
 }
 
-void RectMgr::moveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to)
+void RectMgr::MoveRect(const ee::Rect* rect, const ee::Vector& from, const ee::Vector& to)
 {
 	if (!rect) {
 		return;
@@ -230,9 +238,9 @@ void RectMgr::moveRect(const ee::Rect* rect, const ee::Vector& from, const ee::V
 	r->ymax += dy;
 }
 
-void RectMgr::clear()
+void RectMgr::Clear()
 {
-	for_each(m_rects.begin(), m_rects.end(), DeletePointerFunctor<ee::Rect>());
+	for_each(m_rects.begin(), m_rects.end(), ee::DeletePointerFunctor<ee::Rect>());
 	m_rects.clear();
 }
 

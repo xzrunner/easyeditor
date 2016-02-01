@@ -1,6 +1,14 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
+#include <ee/Sprite.h>
+#include <ee/SymbolMgr.h>
+#include <ee/EditOP.h>
+#include <ee/Symbol.h>
+#include <ee/LibraryPanel.h>
+#include <ee/SpriteFactory.h>
+#include <ee/panel_msg.h>
+
 namespace eimage
 {
 
@@ -22,7 +30,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::setImage(const std::string& filepath)
+void StagePanel::SetImage(const std::string& filepath)
 {
 	if (m_image) {
 		m_image->Release();
@@ -30,12 +38,12 @@ void StagePanel::setImage(const std::string& filepath)
 
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (symbol) {
-		setImage(symbol);
+		SetImage(symbol);
 		symbol->Release();
 	}
 }
 
-void StagePanel::setImage(ee::Symbol* symbol)
+void StagePanel::SetImage(ee::Symbol* symbol)
 {
 	ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 	ee::Vector off;
@@ -72,7 +80,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& text)
 
 	ee::Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol) {
-		m_stage->setImage(symbol);
+		m_stage->SetImage(symbol);
 	}
 
 // 	// todo for diff
@@ -96,9 +104,9 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 		return;
 	}
 
-	std::string filename = filenames[0].ToStdString();
+	std::string filename = filenames[0];
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
-	m_stage->setImage(symbol);
+	m_stage->SetImage(symbol);
 	symbol->Release();
 }
 

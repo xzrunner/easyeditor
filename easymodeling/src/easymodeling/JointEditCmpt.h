@@ -12,9 +12,9 @@ namespace emodeling
 	{
 	public:
 		JointEditCmpt(wxWindow* parent, const wxString& name,
-			StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel);
+			StagePanel* editPanel, ee::PropertySettingPanel* property);
 
-		virtual void updateControlValue();
+		virtual void UpdateControlValue();
 
 	protected:
 		virtual wxSizer* InitLayout();

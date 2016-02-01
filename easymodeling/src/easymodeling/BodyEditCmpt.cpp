@@ -6,7 +6,7 @@
 using namespace emodeling;
 
 BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const wxString& name, 
-						   StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel)
+						   StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 {
 	ee::ArrangeSpriteConfig cfg;
@@ -14,7 +14,7 @@ BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const wxString& name,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new ee::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, propertyPanel, NULL, cfg);
+	m_editop = new ee::ArrangeSpriteOP<SelectBodyOP>(editPanel, editPanel->GetStageImpl(), editPanel, property, NULL, cfg);
 }
 
 wxSizer* BodyEditCmpt::InitLayout()

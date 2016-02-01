@@ -12,7 +12,7 @@ namespace emodeling
 	{
 	public:
 		BodyEditCmpt(wxWindow* parent, const wxString& name,
-			StagePanel* editPanel, ee::PropertySettingPanel* propertyPanel);
+			StagePanel* editPanel, ee::PropertySettingPanel* property);
 
 	protected:
 		virtual wxSizer* InitLayout();

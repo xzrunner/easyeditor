@@ -1,7 +1,10 @@
 #ifndef _EASYSHAPE_DRAW_POLYLINE_OP_H_
 #define _EASYSHAPE_DRAW_POLYLINE_OP_H_
 
+#include <ee/ZoomViewOP.h>
+#include <ee/Vector.h>
 
+#include <vector>
 
 namespace eshape
 {
@@ -28,7 +31,7 @@ private:
 
 protected:
 	mutable std::vector<ee::Vector> m_polyline;
-	ee::Vector m_currPos;
+	ee::Vector m_curr_pos;
 
 private:
 	bool m_isClosed;

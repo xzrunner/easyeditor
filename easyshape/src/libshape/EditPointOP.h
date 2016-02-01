@@ -1,9 +1,11 @@
 #ifndef _EASYSHAPE_EDIT_POINT_OP_H_
 #define _EASYSHAPE_EDIT_POINT_OP_H_
 
-
-
 #include "NodeCapture.h"
+
+#include <ee/ZoomViewOP.h>
+
+namespace ee { class OneFloatValue; }
 
 namespace eshape
 {

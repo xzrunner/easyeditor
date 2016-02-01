@@ -2,15 +2,22 @@
 #include "DrawPencilPolygonCMPT.h"
 #include "PolygonShape.h"
 
+#include <ee/DouglasPeucker.h>
+#include <ee/panel_msg.h>
+#include <ee/shape_msg.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/PolygonClipper.h>
+#include <ee/FetchAllVisitor.h>
+
 namespace eshape
 {
 
 DrawPencilPolygonOP::DrawPencilPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-										 ee::MultiShapesImpl* shapesImpl,
+										 ee::MultiShapesImpl* shapes_impl,
 										 ee::OneFloatValue* simplify,
 										 DrawPencilPolygonCMPT* cmpt)
 	: DrawCurveOP(wnd, stage)
-	, m_shapesImpl(shapesImpl)
+	, m_shapes_impl(shapes_impl)
 	, m_simplify(simplify)
 	, m_cmpt(cmpt)
 {
@@ -118,7 +125,7 @@ void DrawPencilPolygonOP::XorPolygon(const std::vector<ee::Vector>& poly)
 void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<ee::Vector> >& paths) const
 {
 	std::vector<PolygonShape*> shapes;
-	m_shapesImpl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(shapes));
+	m_shapes_impl->TraverseShapes(ee::FetchAllVisitor<PolygonShape>(shapes));
 
 	paths.clear();
 	paths.resize(shapes.size());

@@ -2,16 +2,27 @@
 #include "CircleShape.h"
 #include "CirclePropertySetting.h"
 
+#include <ee/MultiShapesImpl.h>
+#include <ee/shape_msg.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/OneFloatValue.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/ShapeSelection.h>
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/panel_msg.h>
+
 namespace eshape
 {
 
 EditCircleOP::EditCircleOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-						   ee::MultiShapesImpl* shapesImpl, 
-						   ee::PropertySettingPanel* propertyPanel, 
+						   ee::MultiShapesImpl* shapes_impl, 
+						   ee::PropertySettingPanel* property, 
 						   ee::OneFloatValue* node_capture)
 	: ZoomViewOP(wnd, stage, true)
-	, m_propertyPanel(propertyPanel)
-	, m_shapesImpl(shapesImpl)
+	, m_property(property)
+	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
 {
 	m_cursor = wxCursor(wxCURSOR_PENCIL);
@@ -25,7 +36,7 @@ bool EditCircleOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapesImpl->ClearSelectedShape();
+		m_shapes_impl->ClearSelectedShape();
 		m_captured.clear();
 		ee::SelectShapeSJ::Instance()->Select(NULL);
 	}
@@ -37,19 +48,19 @@ bool EditCircleOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	m_firstPress = m_currPos = m_stage->TransPosScrToProj(x, y);
+	m_firstPress = m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-	m_shapesImpl->GetShapeSelection()->Clear();
+	m_shapes_impl->GetShapeSelection()->Clear();
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		NodeCapture capture(m_shapesImpl, tolerance);
+		NodeCapture capture(m_shapes_impl, tolerance);
 		capture.captureEditable(m_firstPress, m_captured);
 
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
-			m_shapesImpl->GetShapeSelection()->Add(circle);
+			m_shapes_impl->GetShapeSelection()->Add(circle);
 			ee::SelectShapeSJ::Instance()->Select(circle);
 		}
 	}
@@ -69,9 +80,9 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 	{
 		if (m_firstPress.IsValid())
 		{
-			m_currPos = m_stage->TransPosScrToProj(x, y);
+			m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-			const float radius = ee::Math2D::GetDistance(m_firstPress, m_currPos);
+			const float radius = ee::Math2D::GetDistance(m_firstPress, m_curr_pos);
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
@@ -82,8 +93,8 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 	}
 	else
 	{
-		if (m_propertyPanel) {
-			m_propertyPanel->EnablePropertyGrid(true);
+		if (m_property) {
+			m_property->EnablePropertyGrid(true);
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape)) {
 				ee::SelectShapeSJ::Instance()->Select(circle);
 			}
@@ -103,14 +114,14 @@ bool EditCircleOP::OnMouseRightDown(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		m_currPos = m_stage->TransPosScrToProj(x, y);
+		m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
-		NodeCapture capture(m_shapesImpl, tolerance);
-		capture.captureEditable(m_currPos, m_captured);
+		NodeCapture capture(m_shapes_impl, tolerance);
+		capture.captureEditable(m_curr_pos, m_captured);
 		if (m_captured.shape)
 		{
 			ee::RemoveShapeSJ::Instance()->Remove(m_captured.shape);
-			m_shapesImpl->GetShapeSelection()->Clear();
+			m_shapes_impl->GetShapeSelection()->Clear();
 			m_captured.clear();
 			ee::SelectShapeSJ::Instance()->Select(NULL);
 		}
@@ -131,7 +142,7 @@ bool EditCircleOP::OnMouseMove(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
-		NodeCapture capture(m_shapesImpl, tolerance);
+		NodeCapture capture(m_shapes_impl, tolerance);
 		ee::Shape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape) {
@@ -146,7 +157,7 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 {
 	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	m_currPos = m_stage->TransPosScrToProj(x, y);
+	m_curr_pos = m_stage->TransPosScrToProj(x, y);
 
 	if (m_captured.shape)
 	{
@@ -154,13 +165,13 @@ bool EditCircleOP::OnMouseDrag(int x, int y)
 		{
 			// move  
 			if (m_captured.pos.IsValid())
-				circle->center = m_currPos;
+				circle->center = m_curr_pos;
 			// change size
 			else
-				circle->radius = ee::Math2D::GetDistance(m_currPos, circle->center);
+				circle->radius = ee::Math2D::GetDistance(m_curr_pos, circle->center);
 
-			if (m_propertyPanel) {
-				m_propertyPanel->EnablePropertyGrid(false);
+			if (m_property) {
+				m_property->EnablePropertyGrid(false);
 			}
 		}
 	}
@@ -192,8 +203,8 @@ bool EditCircleOP::OnDraw() const
 	}
 	else
 	{
-		if (m_firstPress.IsValid() && m_currPos.IsValid()) {
-			ee::PrimitiveDraw::DrawCircle(m_firstPress, ee::Math2D::GetDistance(m_firstPress, m_currPos), 
+		if (m_firstPress.IsValid() && m_curr_pos.IsValid()) {
+			ee::PrimitiveDraw::DrawCircle(m_firstPress, ee::Math2D::GetDistance(m_firstPress, m_curr_pos), 
 				false, 3, ee::Colorf(0, 0, 0), 32);
 		}
 	}
@@ -206,7 +217,7 @@ bool EditCircleOP::Clear()
 	if (ZoomViewOP::Clear()) return true;
 
 	m_firstPress.SetInvalid();
-	m_currPos.SetInvalid();
+	m_curr_pos.SetInvalid();
 
 	return false;
 }
