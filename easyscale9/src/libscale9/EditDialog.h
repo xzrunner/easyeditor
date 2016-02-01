@@ -1,7 +1,11 @@
 #ifndef _EASYSCALE9_EDIT_DIALOG_H_
 #define _EASYSCALE9_EDIT_DIALOG_H_
 
+namespace ee { class EditPanel; }
 
+#include <wx/dialog.h>
+
+class wxGLContext;
 
 namespace escale9
 {

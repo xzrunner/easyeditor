@@ -3,6 +3,8 @@
 #include "Icon.h"
 #include "FileIO.h"
 
+#include <ee/ShaderMgr.h>
+
 namespace eicon
 {
 

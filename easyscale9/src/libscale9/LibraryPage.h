@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_LIBRARY_PAGE_H_
 #define _EASYSCALE9_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace escale9
 {

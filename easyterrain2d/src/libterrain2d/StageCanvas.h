@@ -1,8 +1,6 @@
 #ifndef _EASYTERRAIN2D_STAGE_CANVAS_H_
 #define _EASYTERRAIN2D_STAGE_CANVAS_H_
 
-#include "drag2d.h"
-
 namespace eterrain2d
 {
 

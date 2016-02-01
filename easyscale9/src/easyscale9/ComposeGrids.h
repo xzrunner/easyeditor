@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_COMPOSE_GRIDS_H_
 #define _EASYSCALE9_COMPOSE_GRIDS_H_
 
-
+#include <ee/Vector.h>
 
 namespace escale9
 {

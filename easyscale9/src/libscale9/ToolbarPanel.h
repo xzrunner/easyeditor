@@ -1,29 +1,35 @@
-#pragma once
+#ifndef _EASYSCALE9_TOOLBAR_PANEL_H_
+#define _EASYSCALE9_TOOLBAR_PANEL_H_
 
 #include <wx/wx.h>
 
+namespace ee { class EditPanel; }
 
 namespace escale9
 {
-	class Symbol;
 
-	class ToolbarPanel : public wxPanel
-	{
-	public:
-		ToolbarPanel(wxWindow* parent, ee::EditPanel* stage,
-			Symbol* symbol);
+class Symbol;
 
-	private:
-		void InitLayout();
+class ToolbarPanel : public wxPanel
+{
+public:
+	ToolbarPanel(wxWindow* parent, ee::EditPanel* stage,
+		Symbol* symbol);
 
-		void onChangeSize(wxSpinEvent& event);
+private:
+	void InitLayout();
 
-	private:
-		ee::EditPanel* m_stage;
+	void onChangeSize(wxSpinEvent& event);
 
-		Symbol* m_symbol;
+private:
+	ee::EditPanel* m_stage;
 
-		wxSpinCtrl *m_wSpin, *m_hSpin;
+	Symbol* m_symbol;
 
-	}; // ToolbarPanel
+	wxSpinCtrl *m_wSpin, *m_hSpin;
+
+}; // ToolbarPanel
+
 }
+
+#endif // _EASYSCALE9_TOOLBAR_PANEL_H_

@@ -1,8 +1,11 @@
-#ifndef _ESCALE9_TASK_H_
-#define _ESCALE9_TASK_H_
-
+#ifndef _EASYSCALE9_TASK_H_
+#define _EASYSCALE9_TASK_H_
 
 #include <wx/splitter.h>
+
+#include <ee/Task.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace escale9
 {
@@ -45,4 +48,4 @@ private:
 
 }
 
-#endif // _ESCALE9_TASK_H_
+#endif // _EASYSCALE9_TASK_H_

@@ -1,7 +1,9 @@
 #ifndef _EASYICON_SYMBOL_H_
 #define _EASYICON_SYMBOL_H_
 
+#include <ee/Symbol.h>
 
+namespace ee { class Image; }
 
 namespace eicon
 {

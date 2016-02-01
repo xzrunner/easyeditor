@@ -2,15 +2,19 @@
 #include "ResizeOP.h"
 #include "StagePanel.h"
 
+#include <wx/spinctrl.h>
+
+#include <ee/panel_msg.h>
+
 namespace escale9
 {
 
-ResizeCMPT::ResizeCMPT(wxWindow* parent, const wxString& name, 
+ResizeCMPT::ResizeCMPT(wxWindow* parent, const std::string& name, 
 					   StagePanel* stage, ToolbarPanel* toolbar)
 	: EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editOP = new ResizeOP(stage, toolbar, this);
+	m_editop = new ResizeOP(stage, toolbar, this);
 }
 
 void ResizeCMPT::setSize(int width, int height)

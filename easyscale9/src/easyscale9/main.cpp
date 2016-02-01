@@ -3,6 +3,8 @@
 
 #include <easyscale9.h>
 
+#include <ee/Frame.h>
+
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()

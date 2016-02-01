@@ -3,6 +3,13 @@
 #include "RectIcon.h"
 #include "IconType.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/Math2D.h>
+#include <ee/panel_msg.h>
+#include <ee/Image.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+
 namespace eicon
 {
 
@@ -125,7 +132,7 @@ bool EditRectOP::OnDraw() const
 	}
 
 	float w = img->GetClippedWidth(),
-		h = img->GetClippedHeight();
+		  h = img->GetClippedHeight();
 	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
 		ee::LIGHT_RED_THIN_LINE);
 

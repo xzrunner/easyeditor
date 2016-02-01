@@ -1,9 +1,9 @@
 #ifndef _EASYICON_TOOLBAR_PANEL_H_
 #define _EASYICON_TOOLBAR_PANEL_H_
 
-
-
 #include "IconType.h"
+
+#include <ee/ToolbarPanel.h>
 
 namespace eicon
 {

@@ -5,11 +5,14 @@
 #include "Icon.h"
 #include "IconType.h"
 #include "FileIO.h"
-
 #include "EditRectOP.h"
 #include "EditQuadOP.h"
 #include "EditChangedRectOP.h"
 #include "EditChangedSectorOP.h"
+
+#include <ee/panel_msg.h>
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
 
 namespace eicon
 {

@@ -3,6 +3,14 @@
 #include "ToolbarPanel.h"
 #include "ComposeGrids.h"
 
+#include <ee/Sprite.h>
+#include <ee/Math2D.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteSelection.h>
+#include <ee/DrawSelectedSpriteVisitor.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/sprite_msg.h>
+
 namespace escale9
 {
 

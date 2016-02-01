@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_SYMBOL_H_
 #define _EASYSCALE9_SYMBOL_H_
 
-
+#include <ee/Symbol.h>
 
 #include "Scale9Data.h"
 

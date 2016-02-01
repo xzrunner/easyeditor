@@ -1,36 +1,40 @@
-#pragma once
+#ifndef _EASYSCALE9_CONTEXT_H_
+#define _EASYSCALE9_CONTEXT_H_
 
-
+namespace ee { class PropertySettingPanel; class LibraryPanel; }
 
 namespace escale9
 {
-	class StagePanel;
-	class ToolbarPanel;
-	class ResizeCMPT;
 
-	class Context
-	{
-	public:
-		ee::PropertySettingPanel* property;
-		ee::LibraryPanel* library;
-		StagePanel* stage;
-		ToolbarPanel* toolbar;
+class StagePanel;
+class ToolbarPanel;
+class ResizeCMPT;
 
-		bool isComposeOP;
+class Context
+{
+public:
+	ee::PropertySettingPanel* property;
+	ee::LibraryPanel* library;
+	StagePanel* stage;
+	ToolbarPanel* toolbar;
 
-		ResizeCMPT* resizeCMPT;
+	bool isComposeOP;
 
-		float width, height;
+	ResizeCMPT* resizeCMPT;
 
-	public:
-		static Context* Instance();
+	float width, height;
 
-	private:
-		Context();
+public:
+	static Context* Instance();
 
-	private:
-		static Context* m_instance;
+private:
+	Context();
 
-	}; // Context
+private:
+	static Context* m_instance;
+
+}; // Context
+
 }
 
+#endif // _EASYSCALE9_CONTEXT_H_

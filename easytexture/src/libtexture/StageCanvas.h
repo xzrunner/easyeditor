@@ -1,8 +1,6 @@
 #ifndef _EASYTEXTURE_STAGE_CANVAS_H_
 #define _EASYTEXTURE_STAGE_CANVAS_H_
 
-#include "drag2d.h"
-
 namespace etexture
 {
 

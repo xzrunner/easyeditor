@@ -5,6 +5,12 @@
 
 #include <easyscale9.h>
 
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Camera.h>
+#include <ee/Matrix.h>
+#include <ee/style_config.h>
+
 namespace escale9
 {
 

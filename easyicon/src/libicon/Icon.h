@@ -1,7 +1,13 @@
 #ifndef _EASYICON_ICON_H_
 #define _EASYICON_ICON_H_
 
+#include <json/json.h>
 
+#include <ee/Object.h>
+#include <ee/Vector.h>
+#include <ee/Rect.h>
+
+namespace ee { class Image; class Matrix; }
 
 namespace eicon
 {

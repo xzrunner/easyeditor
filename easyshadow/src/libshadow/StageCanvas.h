@@ -1,8 +1,6 @@
 #ifndef _EASYSHADOW_STAGE_CANVAS_H_
 #define _EASYSHADOW_STAGE_CANVAS_H_
 
-#include "drag2d.h"
-
 namespace eshadow
 {
 

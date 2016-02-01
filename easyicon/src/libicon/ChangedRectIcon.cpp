@@ -1,5 +1,7 @@
 #include "ChangedRectIcon.h"
 
+#include <ee/JsonSerializer.h>
+
 namespace eicon
 {
 

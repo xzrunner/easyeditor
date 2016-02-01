@@ -2,6 +2,10 @@
 #include "StageCanvas.h"
 #include "Symbol.h"
 
+#include <ee/Sprite.h>
+#include <ee/ImageSymbol.h>
+#include <ee/panel_msg.h>
+
 namespace eicon
 {
 

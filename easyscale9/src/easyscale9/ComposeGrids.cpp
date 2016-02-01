@@ -1,6 +1,7 @@
 #include "ComposeGrids.h"
 
-
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
 
 namespace escale9
 {

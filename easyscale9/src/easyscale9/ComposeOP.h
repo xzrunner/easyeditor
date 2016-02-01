@@ -1,7 +1,9 @@
 #ifndef _EASYSCALE9_COMPOSE_OP_H_
 #define _EASYSCALE9_COMPOSE_OP_H_
 
+#include <ee/ZoomViewOP.h>
 
+namespace ee { class Sprite; }
 
 namespace escale9
 {

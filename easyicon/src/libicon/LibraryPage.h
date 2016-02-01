@@ -1,7 +1,7 @@
 #ifndef _EASYICON_LIBRARY_PAGE_H_
 #define _EASYICON_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace eicon
 {

@@ -1,8 +1,11 @@
 #ifndef _EASYICON_TASK_H_
 #define _EASYICON_TASK_H_
 
-
 #include <wx/splitter.h>
+
+#include <ee/Task.h>
+
+namespace ee { class LibraryPanel; }
 
 namespace eicon
 {

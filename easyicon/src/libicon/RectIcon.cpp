@@ -1,5 +1,7 @@
 #include "RectIcon.h"
 
+#include <ee/Image.h>
+
 namespace eicon
 {
 
@@ -11,10 +13,10 @@ RectIcon::RectIcon()
 
 void RectIcon::LoadFromFile(const Json::Value& value)
 {
-	m_min.x = value["xmin"].asDouble();
-	m_min.y = value["ymin"].asDouble();
-	m_max.x = value["xmax"].asDouble();
-	m_max.y = value["ymax"].asDouble();
+	m_min.x = static_cast<float>(value["xmin"].asDouble());
+	m_min.y = static_cast<float>(value["ymin"].asDouble());
+	m_max.x = static_cast<float>(value["xmax"].asDouble());
+	m_max.y = static_cast<float>(value["ymax"].asDouble());
 }
 
 void RectIcon::StoreToFile(Json::Value& value) const
@@ -35,8 +37,8 @@ void RectIcon::GetBound(float process, ee::Vector bound[4]) const
 
 void RectIcon::SetRegion(const ee::Rect& r)
 {
-	float w = m_img->GetClippedWidth(),
-		h = m_img->GetClippedHeight();
+	float w = static_cast<float>(m_img->GetClippedWidth()),
+		  h = static_cast<float>(m_img->GetClippedHeight());
 	m_min.x = r.xmin / w + 0.5f;
 	m_min.y = r.ymin / h + 0.5f;
 	m_max.x = r.xmax / w + 0.5f;

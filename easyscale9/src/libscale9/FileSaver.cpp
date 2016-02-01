@@ -1,10 +1,12 @@
 #include "FileSaver.h"
 #include "Symbol.h"
 
+#include <fstream>
+
 namespace escale9
 {
 
-void FileSaver::store(const char* filepath, const Symbol& symbol)
+void FileSaver::Store(const char* filepath, const Symbol& symbol)
 {
 	Json::Value value;
 	Json::Reader reader;

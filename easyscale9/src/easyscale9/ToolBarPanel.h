@@ -1,7 +1,9 @@
-#ifndef _ESCALE9_TOOLBAR_PANEL_H_
-#define _ESCALE9_TOOLBAR_PANEL_H_
+#ifndef _EASYSCALE9_TOOLBAR_PANEL_H_
+#define _EASYSCALE9_TOOLBAR_PANEL_H_
 
+#include <ee/ToolbarPanel.h>
 
+namespace ee { class PropertySettingPanel; }
 
 namespace escale9
 {
@@ -38,4 +40,4 @@ private:
 
 }
 
-#endif // _ESCALE9_TOOLBAR_PANEL_H_
+#endif // _EASYSCALE9_TOOLBAR_PANEL_H_

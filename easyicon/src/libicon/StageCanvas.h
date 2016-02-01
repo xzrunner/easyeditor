@@ -1,7 +1,9 @@
 #ifndef _EASYICON_STAGE_CANVAS_H_
 #define _EASYICON_STAGE_CANVAS_H_
 
-#include "drag2d.h"
+#include <ee/OrthoCanvas.h>
+
+namespace ee { class Sprite; class MultiSpritesImpl; }
 
 namespace eicon
 {

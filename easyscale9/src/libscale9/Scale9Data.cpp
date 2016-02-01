@@ -1,6 +1,18 @@
 #include "Scale9Data.h"
 #include "Sprite.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/ImageSymbol.h>
+#include <ee/Image.h>
+#include <ee/Math2D.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/SpriteFactory.h>
+
+#include <fstream>
+
 namespace escale9
 {
 

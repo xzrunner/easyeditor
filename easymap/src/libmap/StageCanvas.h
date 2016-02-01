@@ -1,8 +1,6 @@
 #ifndef _EASYMAP_STAGE_CANVAS_H_
 #define _EASYMAP_STAGE_CANVAS_H_
 
-#include "drag2d.h"
-
 namespace emap
 {
 

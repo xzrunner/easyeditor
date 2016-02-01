@@ -1,8 +1,6 @@
 #ifndef _TEST_DTEX_STAGE_CANVAS_H_
 #define _TEST_DTEX_STAGE_CANVAS_H_
 
-#include "drag2d.h"
-
 namespace tdtex
 {
 

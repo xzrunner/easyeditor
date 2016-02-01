@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_STAGE_CANVAS_H_
 #define _EASYSCALE9_STAGE_CANVAS_H_
 
-
+#include <ee/OrthoCanvas.h>
 
 namespace escale9
 {

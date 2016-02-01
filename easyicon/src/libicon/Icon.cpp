@@ -1,5 +1,9 @@
 #include "Icon.h"
 
+#include <ee/Image.h>
+#include <ee/Math2D.h>
+#include <ee/ShaderMgr.h>
+
 namespace eicon
 {
 
@@ -84,8 +88,8 @@ void Icon::GetTexCoords(float process, ee::Vector* tex_coords) const
 void Icon::GetScreenCoords(float process, const ee::Vector* tex_coords, 
 						   ee::Vector* screen_coords) const
 {
-	float w = m_img->GetClippedWidth(),
-		h = m_img->GetClippedHeight();	
+	float w = static_cast<float>(m_img->GetClippedWidth()),
+		  h = static_cast<float>(m_img->GetClippedHeight());	
 	for (int i = 0; i < 4; ++i) {
 		screen_coords[i].x = (tex_coords[i].x - 0.5f) * w;
 		screen_coords[i].y = (tex_coords[i].y - 0.5f) * h;

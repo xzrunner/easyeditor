@@ -6,6 +6,12 @@
 
 #include <easyscale9.h>
 
+#include <ee/StageDropTarget.h>
+#include <ee/sprite_msg.h>
+#include <ee/panel_msg.h>
+#include <ee/subject_id.h>
+#include <ee/Visitor.h>
+
 namespace escale9
 {
 

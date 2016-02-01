@@ -1,7 +1,12 @@
 #ifndef _EASYICON_STAGE_PANEL_H_
 #define _EASYICON_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/StageDropTarget.h>
 
+class wxGLContext;
+
+namespace ee { class LibraryPanel; class MultiSpritesImpl; class Image; }
 
 namespace eicon
 {

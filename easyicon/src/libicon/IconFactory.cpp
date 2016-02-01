@@ -1,6 +1,5 @@
 #include "IconFactory.h"
 #include "IconType.h"
-
 #include "RectIcon.h"
 #include "QuadIcon.h"
 #include "ChangedRectIcon.h"

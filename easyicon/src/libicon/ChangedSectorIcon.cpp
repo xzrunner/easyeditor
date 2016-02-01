@@ -1,5 +1,10 @@
 #include "ChangedSectorIcon.h"
 
+#include <ee/Math2D.h>
+#include <ee/Image.h>
+
+#include <assert.h>
+
 namespace eicon
 {
 
@@ -23,10 +28,10 @@ void ChangedSectorIcon::GetBound(float process, ee::Vector bound[4]) const
 	bound[1].Set(0, 1);
 
 	float angle = m_min + (m_max - m_min) * process;
-	float tan_val = std::tan(angle);
+	float tan_val = tan(angle);
 
-	float w = m_img->GetClippedWidth(),
-		h = m_img->GetClippedHeight();
+	float w = static_cast<float>(m_img->GetClippedWidth()),
+		  h = static_cast<float>(m_img->GetClippedHeight());
 	float x = h / tan_val;
 	if (x < w) {
 		bound[2].Set(x / w, 1.0f);

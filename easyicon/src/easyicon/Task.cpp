@@ -2,6 +2,10 @@
 
 #include <easyicon.h>
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/panel_msg.h>
+
 namespace eicon
 {
 

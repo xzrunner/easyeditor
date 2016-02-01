@@ -1,7 +1,10 @@
 #ifndef _EASYSCALE9_STAGE_PANEL_H_
 #define _EASYSCALE9_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/MultiSpritesImpl.h>
 
+namespace ee { class LibraryPanel; }
 
 namespace escale9
 {

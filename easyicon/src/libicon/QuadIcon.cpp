@@ -1,5 +1,9 @@
 #include "QuadIcon.h"
 
+#include <ee/Math2D.h>
+#include <ee/Image.h>
+#include <ee/ShaderMgr.h>
+
 namespace eicon
 {
 
@@ -20,10 +24,10 @@ QuadIcon::QuadIcon(ee::Image* img, const ee::Vector* src,
 void QuadIcon::LoadFromFile(const Json::Value& value)
 {	
 	for (int i = 0; i < 4; ++i) {
-		m_src[i].x = value["src"][i]["x"].asDouble();
-		m_src[i].y = value["src"][i]["y"].asDouble();
-		m_screen[i].x = value["screen"][i]["x"].asDouble();
-		m_screen[i].y = value["screen"][i]["y"].asDouble();
+		m_src[i].x    = static_cast<float>(value["src"][i]["x"].asDouble());
+		m_src[i].y    = static_cast<float>(value["src"][i]["y"].asDouble());
+		m_screen[i].x = static_cast<float>(value["screen"][i]["x"].asDouble());
+		m_screen[i].y = static_cast<float>(value["screen"][i]["y"].asDouble());
 	}
 }
 
@@ -76,8 +80,8 @@ ee::Rect QuadIcon::GetRegion(float process) const
 
 void QuadIcon::SetScreen(const ee::Vector* screen)
 {
-	float w = m_img->GetClippedWidth(),
-		h = m_img->GetClippedHeight();
+	float w = static_cast<float>(m_img->GetClippedWidth()),
+		  h = static_cast<float>(m_img->GetClippedHeight());
 	memcpy(m_screen, screen, sizeof(m_screen));
 	for (int i = 0; i < 4; ++i) {
 		m_src[i].x = m_screen[i].x / w + 0.5f;

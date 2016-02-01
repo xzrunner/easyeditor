@@ -2,6 +2,12 @@
 #include "StagePanel.h"
 #include "Sprite.h"
 
+#include <ee/MultiSpritesImpl.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/render_utility.h>
+
 namespace eicon
 {
 
@@ -25,8 +31,8 @@ StageCanvas::StageCanvas(StagePanel* stage,
 	, m_bg(NULL)
 {
 	if (m_sprite_impl) {
-		std::vector<Sprite*> sprites;
-		m_sprite_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+		std::vector<ee::Sprite*> sprites;
+		m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 		m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 	}
 }

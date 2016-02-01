@@ -4,6 +4,11 @@
 
 #include <json/json.h>
 
+#include <fstream>
+
+#include <ee/FileHelper.h>
+#include <ee/Image.h>
+
 namespace eicon
 {
 
@@ -13,7 +18,7 @@ void FileIO::StoreToFile(const char* filename, const Icon* icon)
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 	value["image"] = ee::FileHelper::GetRelativePath(dir,
-		icon->GetImage()->GetFilepath()).ToStdString();
+		icon->GetImage()->GetFilepath());
 
 	value["type"] = icon->GetIconDesc();
 

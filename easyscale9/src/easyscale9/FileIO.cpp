@@ -3,7 +3,18 @@
 #include "ResizeCMPT.h"
 #include "ToolbarPanel.h"
 
+#include <fstream>
+
 #include <easyscale9.h>
+
+#include <ee/FileHelper.h>
+#include <ee/sprite_msg.h>
+#include <ee/LibraryPanel.h>
+#include <ee/SymbolMgr.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/Exception.h>
+#include <ee/SpriteFactory.h>
 
 namespace escale9
 {
@@ -11,7 +22,7 @@ namespace escale9
 static const int OFFSET_VERSION = 2;
 static const int VERSION = OFFSET_VERSION;
 
-void FileIO::load(const char* filename, ee::LibraryPanel* library, 
+void FileIO::Load(const char* filename, ee::LibraryPanel* library, 
 				  ee::MultiSpritesImpl* stage, ToolbarPanel* toolbar)
 {
 	Json::Value value;
@@ -22,7 +33,7 @@ void FileIO::load(const char* filename, ee::LibraryPanel* library,
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = ee::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	bool need_offset = true;
 	if (!value["version"].isNull() && value["version"].asInt() >= OFFSET_VERSION) {
@@ -32,7 +43,7 @@ void FileIO::load(const char* filename, ee::LibraryPanel* library,
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
-		ee::Sprite* sprite = load(spriteValue, dir);
+		ee::Sprite* sprite = Load(spriteValue, dir);
 		if (need_offset) {
 			sprite->Translate(ee::Vector(-150, -150));
 		}
@@ -47,7 +58,7 @@ void FileIO::load(const char* filename, ee::LibraryPanel* library,
 	library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
-void FileIO::store(const char* filename, StagePanel* stage, 
+void FileIO::Store(const char* filename, StagePanel* stage, 
 				   ToolbarPanel* toolbar)
 {
 	Json::Value value;
@@ -62,7 +73,7 @@ void FileIO::store(const char* filename, StagePanel* stage,
  	std::vector<ee::Sprite*> sprites;
 	stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
-	wxString dir = ee::FileHelper::GetFileDir(filename);
+	std::string dir = ee::FileHelper::GetFileDir(filename);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		value["sprite"][i] = StoreNew(sprites[i], dir);
 	}
@@ -90,13 +101,13 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	fout.close();
 }
 
-ee::Sprite* FileIO::load(const Json::Value& value, const wxString& dir)
+ee::Sprite* FileIO::Load(const Json::Value& value, const std::string& dir)
 {
 	std::string filepath = ee::SymbolSearcher::GetSymbolPath(dir, value);
 	if (!ee::FileHelper::IsFileExist(filepath)) {
 		std::string filepath = value["filepath"].asString();
 		throw ee::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
-			dir.ToStdString().c_str(), filepath.c_str());
+			dir.c_str(), filepath.c_str());
 	}
 
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
@@ -108,14 +119,14 @@ ee::Sprite* FileIO::load(const Json::Value& value, const wxString& dir)
 	return sprite;
 }
 
-Json::Value FileIO::store(ee::Sprite* sprite, const wxString& dir)
+Json::Value FileIO::Store(ee::Sprite* sprite, const std::string& dir)
 {
 	Json::Value value;
 	const ee::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		symbol.GetFilepath()).ToStdString();
+		symbol.GetFilepath());
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
@@ -128,14 +139,14 @@ Json::Value FileIO::store(ee::Sprite* sprite, const wxString& dir)
 	return value;
 }
 
-Json::Value FileIO::StoreNew(ee::Sprite* sprite, const wxString& dir)
+Json::Value FileIO::StoreNew(ee::Sprite* sprite, const std::string& dir)
 {
 	Json::Value value;
 	const ee::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		symbol.GetFilepath()).ToStdString();
+		symbol.GetFilepath());
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

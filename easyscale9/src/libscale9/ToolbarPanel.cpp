@@ -3,8 +3,11 @@
 
 #include <wx/spinctrl.h>
 
+#include <ee/panel_msg.h>
+
 namespace escale9
 {
+
 ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::EditPanel* stage, Symbol* symbol)
 	: wxPanel(parent)
 	, m_stage(stage)

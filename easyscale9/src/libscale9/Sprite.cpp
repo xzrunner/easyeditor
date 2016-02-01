@@ -1,6 +1,8 @@
 #include "Sprite.h"
 #include "SpritePropertySetting.h"
 
+#include <ee/SpriteFactory.h>
+
 namespace escale9
 {
 
@@ -52,7 +54,7 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	Sprite::Load(val);
+	ee::Sprite::Load(val);
 
 	if (val["scale9"].isNull()) {
 		return;
@@ -74,7 +76,7 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	Sprite::Store(val);
+	ee::Sprite::Store(val);
 
 	float w, h;
 	m_data.GetSize(w, h);

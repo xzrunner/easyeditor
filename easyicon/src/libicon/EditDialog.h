@@ -1,7 +1,11 @@
 #ifndef _EASYICON_EDIT_DIALOG_H_
 #define _EASYICON_EDIT_DIALOG_H_
 
+#include <wx/dialog.h>
 
+class wxGLContext;
+
+namespace ee { class Sprite; class MultiSpritesImpl; }
 
 namespace eicon
 {

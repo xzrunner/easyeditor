@@ -2,6 +2,12 @@
 #include "ResizeAtomicOP.h"
 #include "Symbol.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/Math2D.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace escale9
 {
 

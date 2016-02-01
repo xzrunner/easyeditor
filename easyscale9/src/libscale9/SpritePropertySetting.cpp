@@ -10,7 +10,7 @@ SpritePropertySetting::SpritePropertySetting(ee::EditPanelImpl* stage, Sprite* s
 	m_type = "Scale9Sprite";
 }
 
-void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 

@@ -3,6 +3,8 @@
 #include "ComposeOP.h"
 #include "ResizeCMPT.h"
 
+#include <ee/UniversalCMPT.h>
+
 namespace escale9
 {
 
@@ -10,9 +12,9 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 						   ee::PropertySettingPanel* property)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
- 	addChild(new ee::UniversalCMPT(this, wxT("compose"), stage->GetStageImpl(), 
+ 	AddChild(new ee::UniversalCMPT(this, "compose", stage->GetStageImpl(), 
 		new ComposeOP(stage, this)));
-	addChild(m_resizeCmpt = new ResizeCMPT(this, wxT("resize"), stage, this));
+	AddChild(m_resizeCmpt = new ResizeCMPT(this, "resize", stage, this));
 
 	SetSizer(InitLayout());	
 }

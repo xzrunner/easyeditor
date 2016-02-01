@@ -1,33 +1,37 @@
-#pragma once
+#ifndef _EASYSCALE9_RESIZECMPT_H_
+#define _EASYSCALE9_RESIZECMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace escale9
 {
-	class StagePanel;
-	class ToolbarPanel;
 
-	class ResizeCMPT : public ee::EditCMPT
-	{
-	public:
-		ResizeCMPT(wxWindow* parent, const wxString& name,
-			StagePanel* stage, ToolbarPanel* toolbar);
+class StagePanel;
+class ToolbarPanel;
 
-		void setSize(int width, int height);
-		float getWidth() const;
-		float getHeight() const;
+class ResizeCMPT : public ee::EditCMPT
+{
+public:
+	ResizeCMPT(wxWindow* parent, const std::string& name,
+		StagePanel* stage, ToolbarPanel* toolbar);
 
-	protected:
-		virtual wxSizer* InitLayout();
+	void setSize(int width, int height);
+	float getWidth() const;
+	float getHeight() const;
 
-	private:
-		void onChangeSize(wxSpinEvent& event);
+protected:
+	virtual wxSizer* InitLayout();
 
-	private:
-		StagePanel* m_stage;
+private:
+	void onChangeSize(wxSpinEvent& event);
 
-		wxSpinCtrl *m_wSpin, *m_hSpin;
+private:
+	StagePanel* m_stage;
 
-	}; // ResizeCMPT
+	wxSpinCtrl *m_wSpin, *m_hSpin;
+
+}; // ResizeCMPT
+
 }
 
+#endif / _EASYSCALE9_RESIZECMPT_H_

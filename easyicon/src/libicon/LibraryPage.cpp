@@ -2,11 +2,17 @@
 #include "config.h"
 #include "Symbol.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace eicon
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Icon"))
+	: ee::LibraryPage(parent, "Icon")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
@@ -19,7 +25,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FileType::e_icon);
+	std::string filter = ee::FileType::GetTag(ee::FileType::e_icon);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入icon文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

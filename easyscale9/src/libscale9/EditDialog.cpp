@@ -6,6 +6,11 @@
 
 #include <wx/splitter.h>
 
+#include <ee/EditPanel.h>
+#include <ee/DialogStageCanvas.h>
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
+
 namespace escale9
 {
 
@@ -48,7 +53,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	if (val == wxID_YES)
 	{
 		const std::string& filepath = m_symbol->GetFilepath();
-		FileSaver::store(filepath.c_str(), *m_symbol);
+		FileSaver::Store(filepath.c_str(), *m_symbol);
 		m_symbol->RefreshThumbnail(filepath);
 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();

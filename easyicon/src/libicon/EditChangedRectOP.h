@@ -1,7 +1,7 @@
 #ifndef _EASYICON_EDIT_CHANGED_RECT_OP_H_
 #define _EASYICON_EDIT_CHANGED_RECT_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace eicon
 {

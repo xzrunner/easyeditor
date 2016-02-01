@@ -2,13 +2,15 @@
 #include "Sprite.h"
 #include "config.h"
 
+#include <ee/StringHelper.h>
+
 namespace escale9
 {
 
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = FILE_TAG + wxVariant(id++);
+	m_name = FILE_TAG + ee::StringHelper::ToString(id++);
 }
 
 Symbol::Symbol(const Symbol& symbol)

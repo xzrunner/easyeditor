@@ -1,26 +1,31 @@
-#pragma once
-
+#ifndef _EASYSCALE9_FILE_IO_H_
+#define _EASYSCALE9_FILE_IO_H_
 
 #include <json/json.h>
 
+namespace ee { class LibraryPanel; class Sprite; class MultiSpritesImpl; }
+
 namespace escale9
 {
-	class StagePanel;
-	class ToolbarPanel;
 
-	class FileIO
-	{
-	public:
-		static void load(const char* filename, ee::LibraryPanel* library, 
-			ee::MultiSpritesImpl* stage, ToolbarPanel* toolbar);
-		static void store(const char* filename, StagePanel* stage, 
-			ToolbarPanel* toolbar);
+class StagePanel;
+class ToolbarPanel;
 
-	private:
-		static ee::Sprite* load(const Json::Value& value, const wxString& dir);
-		static Json::Value store(ee::Sprite* sprite, const wxString& dir);
-		static Json::Value StoreNew(ee::Sprite* sprite, const wxString& dir);
+class FileIO
+{
+public:
+	static void Load(const char* filename, ee::LibraryPanel* library, 
+		ee::MultiSpritesImpl* stage, ToolbarPanel* toolbar);
+	static void Store(const char* filename, StagePanel* stage, 
+		ToolbarPanel* toolbar);
 
-	}; // FileIO
+private:
+	static ee::Sprite* Load(const Json::Value& value, const std::string& dir);
+	static Json::Value Store(ee::Sprite* sprite, const std::string& dir);
+	static Json::Value StoreNew(ee::Sprite* sprite, const std::string& dir);
+
+}; // FileIO
+
 }
 
+#endif // _EASYSCALE9_FILE_IO_H_

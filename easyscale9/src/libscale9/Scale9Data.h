@@ -1,7 +1,14 @@
 #ifndef _EASYSCALE9_SCALE9_DATA_H_
 #define _EASYSCALE9_SCALE9_DATA_H_
 
+namespace ee { class Matrix; class Sprite; class Vector; }
 
+#include <ee/ColorTrans.h>
+
+#include <json/json.h>
+
+#include <string>
+#include <vector>
 
 namespace escale9
 {

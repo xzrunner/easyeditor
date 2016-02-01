@@ -1,6 +1,8 @@
 #include "Sprite.h"
 #include "SpritePropertySetting.h"
 
+#include <ee/SpriteFactory.h>
+
 namespace eicon
 {
 
@@ -11,7 +13,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_process(sprite.m_process)
 {
@@ -52,13 +54,13 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	Sprite::Load(val);
+	ee::Sprite::Load(val);
 	SetProcess(val["process"].asDouble());
 }
 
 void Sprite::Store(Json::Value& val) const
 {
-	Sprite::Store(val);
+	ee::Sprite::Store(val);
 	val["process"] = m_process;
 }
 

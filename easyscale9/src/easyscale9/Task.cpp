@@ -3,6 +3,13 @@
 #include "ToolbarPanel.h"
 #include "FileIO.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/FileType.h>
+#include <ee/LibraryPanel.h>
+#include <ee/LibraryImagePage.h>
+#include <ee/PropertySettingPanel.h>
+
 namespace escale9
 {
 
@@ -23,13 +30,13 @@ Task::~Task()
 void Task::Load(const char* filepath)
 {
 	if (ee::FileType::IsType(filepath, ee::FileType::e_scale9)) {
-		FileIO::load(filepath, m_library, m_stage, m_toolbar);
+		FileIO::Load(filepath, m_library, m_stage, m_toolbar);
 	}
 }
 
 void Task::Store(const char* filepath) const
 {
-	FileIO::store(filepath, m_stage, m_toolbar);
+	FileIO::Store(filepath, m_stage, m_toolbar);
 }
 
 bool Task::IsDirty() const

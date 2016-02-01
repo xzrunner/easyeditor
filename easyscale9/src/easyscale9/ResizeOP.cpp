@@ -3,6 +3,8 @@
 #include "ResizeCMPT.h"
 #include "ToolbarPanel.h"
 
+#include <ee/panel_msg.h>
+
 namespace escale9
 {
 
