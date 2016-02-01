@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_EDIT_NODES_ATOMIC_OP_H_
-#define _LIBSHAPE_EDIT_NODES_ATOMIC_OP_H_
+#ifndef _EASYSHAPE_EDIT_NODES_ATOMIC_OP_H_
+#define _EASYSHAPE_EDIT_NODES_ATOMIC_OP_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class ChainShape;
@@ -32,4 +32,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_EDIT_NODES_ATOMIC_OP_H_
+#endif // _EASYSHAPE_EDIT_NODES_ATOMIC_OP_H_

@@ -2,7 +2,7 @@
 #include "RectShape.h"
 #include "RectPropertySetting.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditRectOP::EditRectOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

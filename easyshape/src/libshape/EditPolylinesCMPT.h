@@ -1,15 +1,15 @@
-#ifndef _LIBSHAPE_POLYLINES_CMPT_H_
-#define _LIBSHAPE_POLYLINES_CMPT_H_
+#ifndef _EASYSHAPE_POLYLINES_CMPT_H_
+#define _EASYSHAPE_POLYLINES_CMPT_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class EditPolylinesCMPT : public ee::EditCMPT
 {
 public:
-	EditPolylinesCMPT(wxWindow* parent, const wxString& name,
+	EditPolylinesCMPT(wxWindow* parent, const std::string& name,
 		ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl);
 
 	virtual void updateControlValue();
@@ -41,4 +41,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_POLYLINES_CMPT_H_
+#endif // _EASYSHAPE_POLYLINES_CMPT_H_

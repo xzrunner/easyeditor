@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_MATH_H_
-#define _LIBSHAPE_MATH_H_
+#ifndef _EASYSHAPE_MATH_H_
+#define _EASYSHAPE_MATH_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class ChainShape;
@@ -26,4 +26,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_MATH_H_
+#endif // _EASYSHAPE_MATH_H_

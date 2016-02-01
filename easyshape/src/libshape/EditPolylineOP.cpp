@@ -1,5 +1,5 @@
-#ifndef _LIBSHAPE_EDIT_POLYLINE_OP_CPP_
-#define _LIBSHAPE_EDIT_POLYLINE_OP_CPP_
+#ifndef _EASYSHAPE_EDIT_POLYLINE_OP_CPP_
+#define _EASYSHAPE_EDIT_POLYLINE_OP_CPP_
 
 #include "EditPolylineOP.h"
 #include "EditPolylineImpl.h"
@@ -117,4 +117,4 @@ ResetDirty()
 	return m_impl->ResetDirty();
 }
 
-#endif // _LIBSHAPE_EDIT_POLYLINE_OP_CPP_
+#endif // _EASYSHAPE_EDIT_POLYLINE_OP_CPP_

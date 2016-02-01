@@ -1,7 +1,10 @@
 #include "RectShape.h"
 #include "RectPropertySetting.h"
 
-namespace libshape
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+
+namespace eshape
 {
 
 RectShape::RectShape()

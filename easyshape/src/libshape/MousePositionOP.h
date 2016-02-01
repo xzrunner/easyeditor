@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_MOUSE_POSITION_OP_H_
-#define _LIBSHAPE_MOUSE_POSITION_OP_H_
+#ifndef _EASYSHAPE_MOUSE_POSITION_OP_H_
+#define _EASYSHAPE_MOUSE_POSITION_OP_H_
 
 
 
 #include "DrawPolylineOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 class MousePositionOP : public ee::MousePositionOP 
@@ -30,4 +30,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_MOUSE_POSITION_OP_H_
+#endif // _EASYSHAPE_MOUSE_POSITION_OP_H_

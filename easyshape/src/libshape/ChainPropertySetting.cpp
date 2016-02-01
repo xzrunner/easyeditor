@@ -1,7 +1,9 @@
 #include "ChainPropertySetting.h"
 #include "ChainShape.h"
 
-namespace libshape
+#include <ee/panel_msg.h>
+
+namespace eshape
 {
 
 ChainPropertySetting::ChainPropertySetting(ee::EditPanelImpl* stage, 
@@ -12,7 +14,7 @@ ChainPropertySetting::ChainPropertySetting(ee::EditPanelImpl* stage,
 {
 }
 
-void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void ChainPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;

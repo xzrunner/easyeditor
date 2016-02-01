@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_LANCZOS_RESAMPLING_SHADER_H_
 #define _EASYIMAGE_LANCZOS_RESAMPLING_SHADER_H_
 
-
+#include <ee/SpriteShader.h>
 
 namespace eimage
 {

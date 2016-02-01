@@ -1,7 +1,9 @@
 #ifndef _EASYMESH_NODE_H_
 #define _EASYMESH_NODE_H_
 
-
+#include <ee/Object.h>
+#include <ee/Vector.h>
+#include <ee/SelectionSet.h>
 
 namespace emesh
 {

@@ -1,10 +1,10 @@
 #include "DrawPencilPolygonCMPT.h"
 #include "DrawPencilPolygonOP.h"
 
-namespace libshape
+namespace eshape
 {
 
-DrawPencilPolygonCMPT::DrawPencilPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd, 
+DrawPencilPolygonCMPT::DrawPencilPolygonCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd, 
 											 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl)
 	: ee::OneFloatValueCMPT(parent, name, stage, "Simplify", 0, 100, 30, 0.1f)
 {

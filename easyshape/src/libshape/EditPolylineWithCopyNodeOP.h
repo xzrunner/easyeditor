@@ -1,10 +1,10 @@
-#ifndef _LIBSHAPE_EDIT_POLYLINE_WITH_COPY_NODE_OP_H_
-#define _LIBSHAPE_EDIT_POLYLINE_WITH_COPY_NODE_OP_H_
+#ifndef _EASYSHAPE_EDIT_POLYLINE_WITH_COPY_NODE_OP_H_
+#define _EASYSHAPE_EDIT_POLYLINE_WITH_COPY_NODE_OP_H_
 
 #include "EditPolylineOP.h"
 #include "SelectNodesOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 template <typename T>
@@ -34,4 +34,4 @@ public:
 
 #include "EditPolylineWithCopyNodeOP.h"
 
-#endif // _LIBSHAPE_EDIT_POLYLINE_WITH_COPY_NODE_OP_H_
+#endif // _EASYSHAPE_EDIT_POLYLINE_WITH_COPY_NODE_OP_H_

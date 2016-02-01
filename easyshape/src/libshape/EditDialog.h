@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_ETID_DIALOG_H_
-#define _LIBSHAPE_ETID_DIALOG_H_
+#ifndef _EASYSHAPE_ETID_DIALOG_H_
+#define _EASYSHAPE_ETID_DIALOG_H_
 
 //
 
 #include <wx/wx.h>
 
-namespace libshape
+namespace eshape
 {
 
 class StagePanel;
@@ -36,4 +36,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_ETID_DIALOG_H_
+#endif // _EASYSHAPE_ETID_DIALOG_H_

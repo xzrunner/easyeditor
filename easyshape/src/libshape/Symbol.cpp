@@ -1,11 +1,16 @@
 #include "Symbol.h"
 #include "FileIO.h"
-
 #include "PolygonShape.h"
 
-#include <easyimage.h>
+//#include <easyimage.h>
 
-namespace libshape
+#include <ee/Config.h>
+#include <ee/FileHelper.h>
+#include <ee/SettingData.h>
+#include <ee/Visitor.h>
+#include <ee/JsonSerializer.h>
+
+namespace eshape
 {
 
 Symbol::Symbol()
@@ -172,7 +177,7 @@ void Symbol::LoadBGOutline(ee::Symbol* bg)
 		return;
 	}
 
-	wxString filepath = ee::FileHelper::GetFilenameAddTag(
+	std::string filepath = ee::FileHelper::GetFilenameAddTag(
 		bg->GetFilepath(), eimage::OUTLINE_FILE_TAG, "json");
 	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
@@ -181,7 +186,7 @@ void Symbol::LoadBGOutline(ee::Symbol* bg)
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -198,7 +203,7 @@ void Symbol::LoadBGTriStrip(ee::Symbol* bg)
 {
 	m_bg_tri_strips.clear();
 
-	wxString filepath = ee::FileHelper::GetFilenameAddTag(
+	std::string filepath = ee::FileHelper::GetFilenameAddTag(
 		bg->GetFilepath(), eimage::TRI_STRIP_FILE_TAG, "json");
 	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;

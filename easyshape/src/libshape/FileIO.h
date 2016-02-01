@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_FILE_IO_H_
-#define _LIBSHAPE_FILE_IO_H_
+#ifndef _EASYSHAPE_FILE_IO_H_
+#define _EASYSHAPE_FILE_IO_H_
 
+#include <json/json.h>
 
+namespace ee { class Shape; class Symbol; }
 
-namespace libshape
+namespace eshape
 {
 
 class BezierShape;
@@ -36,4 +38,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_FILE_IO_H_
+#endif // _EASYSHAPE_FILE_IO_H_

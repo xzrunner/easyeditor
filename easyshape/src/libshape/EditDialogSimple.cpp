@@ -9,7 +9,7 @@
 #include "DrawPolygonOP.h"
 #include "EditBezierOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 BEGIN_EVENT_TABLE(EditDialogSimple, wxDialog)

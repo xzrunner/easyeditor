@@ -16,7 +16,7 @@
 
 #include <easyimage.h>
 
-namespace libshape
+namespace eshape
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::PropertySettingPanel* property,

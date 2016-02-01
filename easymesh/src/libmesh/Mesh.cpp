@@ -2,7 +2,11 @@
 #include "Triangle.h"
 #include "config.h"
 
-#include <easyshape.h>
+#include <ee/JsonSerializer.h>
+
+//#include <easyshape.h>
+
+#include <assert.h>
 
 namespace emesh
 {
@@ -54,10 +58,10 @@ Mesh* Mesh::Clone() const
 void Mesh::Load(const Json::Value& value)
 {
 	ee::Rect& r = m_region.rect;
-	r.xmin = value["bound"]["xmin"].asDouble();
-	r.xmax = value["bound"]["xmax"].asDouble();
-	r.ymin = value["bound"]["ymin"].asDouble();
-	r.ymax = value["bound"]["ymax"].asDouble();
+	r.xmin = static_cast<float>(value["bound"]["xmin"].asDouble());
+	r.xmax = static_cast<float>(value["bound"]["xmax"].asDouble());
+	r.ymin = static_cast<float>(value["bound"]["ymin"].asDouble());
+	r.ymax = static_cast<float>(value["bound"]["ymax"].asDouble());
 
 	Json::Value loops_val = value["loops"];
 	int i = 0;

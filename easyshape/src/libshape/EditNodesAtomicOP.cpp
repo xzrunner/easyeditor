@@ -1,7 +1,7 @@
 #include "EditNodesAtomicOP.h"
 #include "ChainShape.h"
 
-namespace libshape
+namespace eshape
 {
 namespace edit_nodes
 {

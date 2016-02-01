@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="easyshape"
-	ProjectGUID="{F1B5F5B7-18EF-49F2-A095-CDCC6359B02C}"
+	Name="6.easyshape"
+	ProjectGUID="{D6627E9A-314A-4554-AB5C-C8BF6151148D}"
 	RootNamespace="easyshape"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easyshape;..\..\..\..\easybuilder\src;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easytexture\src;..\..\..\..\easyanim\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib SOIL.lib freetype250_D.lib lua.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib libpng.lib lzma.lib cjson.lib pthreadVC2.lib"
 				OutputFile="..\easyshape\x86\Debug\easyshape.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easyshape\x86\Debug\easyshape.pdb"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easyshape;..\..\..\..\easybuilder\src;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easyeditor\include;..\..\..\..\easy3d\src\easy3d;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easycomplex\src;..\..\..\..\easytexture\src;..\..\..\..\easyanim\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -143,10 +143,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib libpng.lib lzma.lib cjson.lib pthreadVC2.lib"
 				OutputFile="..\easyshape\x86\Release\easyshape.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easyshape\x86\Release\easyshape.pdb"
@@ -181,145 +181,41 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="frame"
-			>
-			<File
-				RelativePath="..\..\..\src\easyshape\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\main.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\Task.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\Task.h"
-				>
-			</File>
-			<Filter
-				Name="fileio"
-				>
-				<File
-					RelativePath="..\..\..\src\easyshape\FileIO.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyshape\FileIO.h"
-					>
-				</File>
-				<Filter
-					Name="code"
-					>
-					<File
-						RelativePath="..\..\..\src\easyshape\Love2dCode.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easyshape\Love2dCode.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="stage"
-			>
-			<File
-				RelativePath="..\..\..\src\easyshape\StageCanvas.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\StageCanvas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\StagePanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\StagePanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="toolbar"
-			>
-			<File
-				RelativePath="..\..\..\src\easyshape\ToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\ToolBarPanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="library"
-			>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryItem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryList.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryList.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryPage.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryPage.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\LibraryPanel.h"
-				>
-			</File>
-			<Filter
-				Name="image"
-				>
-				<File
-					RelativePath="..\..\..\src\easyshape\LibraryImagePage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyshape\LibraryImagePage.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="shape"
-				>
-				<File
-					RelativePath="..\..\..\src\easyshape\LibraryShapePage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyshape\LibraryShapePage.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
 		<File
-			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"
+			RelativePath="..\..\..\src\easyshape\main.cpp"
 			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyshape\main.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyshape\Task.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyshape\Task.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCResourceCompilerTool"
+					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCResourceCompilerTool"
+					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
+				/>
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

@@ -2,7 +2,7 @@
 #include "ChainShape.h"
 #include "Math.h"
 
-namespace libshape
+namespace eshape
 {
 
 SelectNodesOP::SelectNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

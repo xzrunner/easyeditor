@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_SPRITE_H_
-#define _LIBSHAPE_SPRITE_H_
+#ifndef _EASYSHAPE_SPRITE_H_
+#define _EASYSHAPE_SPRITE_H_
 
 #include "Symbol.h"
 
-namespace libshape
+#include <ee/Sprite.h>
+
+namespace eshape
 {
 
 class Sprite : public ee::Sprite
@@ -37,4 +39,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_SPRITE_H_
+#endif // _EASYSHAPE_SPRITE_H_

@@ -1,9 +1,14 @@
-#ifndef _LIBSHAPE_TEXTURE_MATERIAL_H_
-#define _LIBSHAPE_TEXTURE_MATERIAL_H_
+#ifndef _EASYSHAPE_TEXTURE_MATERIAL_H_
+#define _EASYSHAPE_TEXTURE_MATERIAL_H_
 
 #include "Material.h"
 
-namespace libshape
+#include <ee/Vector.h>
+#include <ee/Rect.h>
+
+namespace ee { class ImageSymbol; }
+
+namespace eshape
 {
 
 class TextureMaterial : public Material
@@ -42,4 +47,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_TEXTURE_MATERIAL_H_
+#endif // _EASYSHAPE_TEXTURE_MATERIAL_H_

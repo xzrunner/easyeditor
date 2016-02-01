@@ -3,10 +3,10 @@
 #include "PolygonShape.h"
 #include "DrawPencilPolygonCMPT.h"
 
-namespace libshape
+namespace eshape
 {
 
-DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd,
 								 ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,
 								 ee::PropertySettingPanel* property)
 	: ee::OneFloatValueCMPT(parent, name, stage, "node capture", 5, 30, 10)

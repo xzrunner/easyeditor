@@ -3,10 +3,10 @@
 #include "DrawPolygonOP.h"
 #include "DrawPencilPolygonCMPT.h"
 
-namespace libshape
+namespace eshape
 {
 
-DrawPolygon2CMPT::DrawPolygon2CMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,
+DrawPolygon2CMPT::DrawPolygon2CMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd,
 								   ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl, 
 								   ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, stage, wxT("Tools"))

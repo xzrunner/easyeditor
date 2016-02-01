@@ -1,6 +1,6 @@
 #include "DrawRectangleOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawRectangleOP::DrawRectangleOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool bOpenRightTap)

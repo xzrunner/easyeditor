@@ -2,6 +2,8 @@
 #define _EASYEDITOR_STYLE_CONFIG_H_
 
 #include "color_config.h"
+#include "ShapeStyle.h"
+#include "ShapeType.h"
 
 namespace ee
 {

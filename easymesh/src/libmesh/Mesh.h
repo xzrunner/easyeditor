@@ -3,6 +3,9 @@
 
 #include "EditShape.h"
 
+#include <ee/Rect.h>
+#include <ee/Vector.h>
+
 namespace libshape { class ChainShape; }
 
 namespace emesh

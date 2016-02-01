@@ -1,9 +1,13 @@
 #ifndef _EASYIMAGE_REGULAR_RECT_CUT_H_
 #define _EASYIMAGE_REGULAR_RECT_CUT_H_
 
-
-
 #include "Rect.h"
+
+namespace ee { class Image; }
+
+#include <vector>
+
+#include <stdint.h>
 
 namespace eimage
 {

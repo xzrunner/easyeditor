@@ -1,99 +1,95 @@
 #include "Task.h"
-#include "LibraryPanel.h"
-#include "StagePanel.h"
-#include "ToolbarPanel.h"
-#include "FileIO.h"
+
+#include <easyshape.h>
+#include <easycomplex.h>
+#include <easyanim.h>
+#include <easytexture.h>
+
+#include <wx/splitter.h>
 
 namespace eshape
 {
 
 Task::Task(wxFrame* parent)
-	: m_root(NULL)
-	, m_parent(parent)
-	, m_stage(NULL)
 {
-	initLayout();
+	InitLayout(parent);
 }
 
 Task::~Task()
 {
-	ee::SymbolMgr::Instance()->clear();
-	ee::BitmapMgr::Instance()->clear();
-	delete m_root;
+	ee::SymbolMgr::Instance()->Clear();
+	ee::BitmapMgr::Instance()->Clear();
+//	delete m_root;
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filepath)
 {
-	FileIO::load(filename, m_library);
-}
-
-void Task::store(const char* filename) const
-{
-	FileIO::store(filename, m_library);
-}
-
-bool Task::isDirty() const
-{
-	return false;
-}
-
-void Task::clear()
-{
-	m_library->clear();
-	m_stage->clear();
-}
-
-const ee::EditPanel* Task::getEditPanel() const
-{
-	return m_stage;
-}
-
-void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-					   wxSplitterWindow* leftVerticalSplitter, 
-					   wxSplitterWindow* rightVerticalSplitter, 
-					   wxWindow*& library, wxWindow*& property, 
-					   wxWindow*& stage, wxWindow*& toolbar)
-{
-	library = m_library = new LibraryPanel(leftHorizontalSplitter);
-
-	property = m_property = new ee::PropertySettingPanel(leftHorizontalSplitter);
-
-	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent);
-
-	toolbar = m_toolbar = new ToolbarPanel(rightVerticalSplitter, m_property, m_stage);
-
-	m_library->setContext(m_stage, m_toolbar);
-	m_stage->setToolbar(m_toolbar);
-}
-
-void Task::initLayout()
-{
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
-	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
-
-	wxWindow *library, *property, *stage, *toolbar;
-	initWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
-		library, property, stage, toolbar);
-
-	if (library || property)
-	{
-		if (library && property)
-		{
-			leftHorizontalSplitter->SetSashGravity(0.8f);
-			leftHorizontalSplitter->SplitHorizontally(library, property);
-		}
-		leftVerticalSplitter->SetSashGravity(0.15f);
-		leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
+	ee::FileType::Type type = ee::FileType::GetType(filepath);
+	if (type == ee::FileType::e_shape) {
+		m_stage->LoadFromFile(filepath);		
+	} else if (type == ee::FileType::e_image 
+		|| type == ee::FileType::e_complex
+		|| type == ee::FileType::e_texture) {
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
+		m_stage->SetSymbolBG(symbol);
+		symbol->Release();
 	}
+}
 
-	if (toolbar)
-	{
-		rightVerticalSplitter->SetSashGravity(0.85f);
-		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
+void Task::Store(const char* filepath) const
+{
+	std::string fixed = filepath;
+	ee::FileType::Type type = ee::FileType::GetType(fixed);
+	if (type != ee::FileType::e_shape) {
+		wxString tag = ee::FileType::GetTag(ee::FileType::e_shape);
+		fixed = ee::FileHelper::GetFilenameAddTag(fixed, tag, "json");
 	}
+	m_stage->StoreToFile(fixed.c_str());
+}
 
-	m_root = rightVerticalSplitter;
+bool Task::IsDirty() const
+{
+	return true;
+}
+
+void Task::GetAllSprite(std::vector<const ee::Sprite*>& sprites) const
+{
+
+}
+
+const ee::EditPanel* Task::GetEditPanel() const
+{
+	return NULL;
+}
+
+void Task::InitLayout(wxFrame* parent)
+{
+	wxSplitterWindow* right_vert = new wxSplitterWindow(parent);
+	wxSplitterWindow* left_vert = new wxSplitterWindow(right_vert);
+	wxSplitterWindow* left_hori = new wxSplitterWindow(left_vert);
+
+	m_library = new ee::LibraryPanel(left_hori);
+	wxWindow* nb = m_library->GetNotebook();
+	m_library->AddPage(new ee::LibraryImagePage(nb));
+	m_library->AddPage(new ecomplex::LibraryPage(nb));
+	m_library->AddPage(new libanim::LibraryPage(nb));
+	m_library->AddPage(new etexture::LibraryPage(nb));
+
+	ee::PropertySettingPanel* property = new ee::PropertySettingPanel(left_hori);
+
+	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
+	property->SetEditPanel(m_stage->GetStageImpl());
+
+	ee::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, m_stage);
+
+	left_hori->SetSashGravity(0.8f);
+	left_hori->SplitHorizontally(m_library, property);
+
+	left_vert->SetSashGravity(0.15f);
+	left_vert->SplitVertically(left_hori, m_stage);
+
+	right_vert->SetSashGravity(0.85f);
+	right_vert->SplitVertically(left_vert, toolbar);
 }
 
 }

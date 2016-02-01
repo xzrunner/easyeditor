@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_COSINE_SHAPE_H_
-#define _LIBSHAPE_COSINE_SHAPE_H_
+#ifndef _EASYSHAPE_COSINE_SHAPE_H_
+#define _EASYSHAPE_COSINE_SHAPE_H_
 
 #include "ChainShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 class CosineShape : public ChainShape
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_COSINE_SHAPE_H_
+#endif // _EASYSHAPE_COSINE_SHAPE_H_

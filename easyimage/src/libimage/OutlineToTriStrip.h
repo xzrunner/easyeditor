@@ -1,7 +1,9 @@
 #ifndef _EASYIMAGE_OUTLINE_TO_TRI_STRIP_H_
 #define _EASYIMAGE_OUTLINE_TO_TRI_STRIP_H_
 
+#include <ee/Image.h>
 
+#include <vector>
 
 namespace eimage
 {

@@ -3,10 +3,10 @@
 #include "EditPolylineOP.h"
 #include "DrawPencilLineCMPT.h"
 
-namespace libshape
+namespace eshape
 {
 
-DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, wxWindow* stage_wnd,ee::EditPanelImpl* stage, 
+DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd,ee::EditPanelImpl* stage, 
 						   ee::MultiShapesImpl* shapesImpl, ee::PropertySettingPanel* propertyPanel)
 	: ee::EditCMPT(parent, name, stage, wxT("Tools"))
 {

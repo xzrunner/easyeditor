@@ -2,7 +2,7 @@
 #include "BezierShape.h"
 #include "BezierPropertySetting.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditBezierOP::EditBezierOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl,

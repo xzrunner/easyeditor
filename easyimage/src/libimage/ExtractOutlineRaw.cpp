@@ -1,6 +1,13 @@
 #include "ExtractOutlineRaw.h"
 
+#include <ee/Image.h>
+#include <ee/ConvexHull.h>
+#include <ee/DouglasPeucker.h>
+#include <ee/Math2D.h>
+
 #include <queue>
+
+#include <assert.h>
 
 namespace eimage
 {
@@ -102,10 +109,10 @@ void ExtractOutlineRaw::CreateBorderLine()
 			if (is_border) {
 				if (first.IsValid()) {
 					if (y < first.y || y == first.y && x < first.x) {
-						first.Set(x, y);
+						first.Set(static_cast<float>(x), static_cast<float>(y));
 					}
 				} else {
-					first.Set(x, y);
+					first.Set(static_cast<float>(x), static_cast<float>(y));
 				}
 			}
 		}
@@ -136,7 +143,7 @@ void ExtractOutlineRaw::CreateBorderLine()
 			int dir = (i+next_dir)%QUERY_COUNT;
 			ee::Vector nearby = curr_pos + QUERY_OFFSET[dir];
 			// connect
-			if (!IsPixelTransparente(flag, nearby.x, nearby.y)) {
+			if (!IsPixelTransparente(flag, static_cast<int>(nearby.x), static_cast<int>(nearby.y))) {
 				curr_dir = dir;
 				curr_pos = nearby;
 				break;
@@ -192,7 +199,8 @@ bool ExtractOutlineRaw::IsPixelBorder(int x, int y) const
 	}
 
 	for (int i = 0; i < NEARBY_COUNT; ++i) {
-		if (IsPixelTransparente(x+NEARBY_OFFSET[i].x, y+NEARBY_OFFSET[i].y)) {
+		if (IsPixelTransparente(static_cast<int>(x+NEARBY_OFFSET[i].x), 
+			static_cast<int>(y+NEARBY_OFFSET[i].y))) {
 			return true;
 		}
 	}

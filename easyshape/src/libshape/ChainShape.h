@@ -1,9 +1,10 @@
-#ifndef _LIBSHAPE_CHAIN_SHAPE_H_
-#define _LIBSHAPE_CHAIN_SHAPE_H_
+#ifndef _EASYSHAPE_CHAIN_SHAPE_H_
+#define _EASYSHAPE_CHAIN_SHAPE_H_
 
+#include <ee/Shape.h>
+#include <ee/Rect.h>
 
-
-namespace libshape
+namespace eshape
 {
 
 class ChainShape : public ee::Shape
@@ -59,4 +60,4 @@ protected:
 
 }
 
-#endif // _LIBSHAPE_CHAIN_SHAPE_H_
+#endif // _EASYSHAPE_CHAIN_SHAPE_H_

@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_TOOLBAR_PANEL_H_
-#define _LIBSHAPE_TOOLBAR_PANEL_H_
+#ifndef _EASYSHAPE_TOOLBAR_PANEL_H_
+#define _EASYSHAPE_TOOLBAR_PANEL_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class StagePanel;
@@ -30,4 +30,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_TOOLBAR_PANEL_H_
+#endif // _EASYSHAPE_TOOLBAR_PANEL_H_

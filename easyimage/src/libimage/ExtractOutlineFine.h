@@ -1,7 +1,9 @@
 #ifndef _EASYIMAGE_EXTRACT_OUTLINE_FINE_H_
 #define _EASYIMAGE_EXTRACT_OUTLINE_FINE_H_
 
+#include <ee/Vector.h>
 
+#include <vector>
 
 namespace eimage
 {

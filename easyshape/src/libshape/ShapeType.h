@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_SHAPE_TYPE_H_
-#define _LIBSHAPE_SHAPE_TYPE_H_
+#ifndef _EASYSHAPE_SHAPE_TYPE_H_
+#define _EASYSHAPE_SHAPE_TYPE_H_
 
 #include <string>
 
-namespace libshape
+namespace eshape
 {
 
 enum ShapeType
@@ -23,4 +23,4 @@ ShapeType get_shape_type(const std::string& desc);
 
 }
 
-#endif // _LIBSHAPE_SHAPE_TYPE_H_
+#endif // _EASYSHAPE_SHAPE_TYPE_H_

@@ -1,11 +1,16 @@
-#ifndef _LIBSHAPE_SYMBOL_H_
-#define _LIBSHAPE_SYMBOL_H_
-
-
+#ifndef _EASYSHAPE_SYMBOL_H_
+#define _EASYSHAPE_SYMBOL_H_
 
 #include "ShapeType.h"
 
-namespace libshape
+#include <ee/Symbol.h>
+#include <ee/Vector.h>
+
+#include <vector>
+
+namespace ee { class Shape; }
+
+namespace eshape
 {
 
 class Symbol : public ee::Symbol
@@ -63,4 +68,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_SYMBOL_H_
+#endif // _EASYSHAPE_SYMBOL_H_

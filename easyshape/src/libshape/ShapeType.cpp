@@ -1,6 +1,6 @@
 #include "ShapeType.h"
 
-namespace libshape
+namespace eshape
 {
 
 ShapeType get_shape_type(const std::string& desc)

@@ -1,7 +1,7 @@
 #include "DrawPolylineOP.h"
 #include "DrawLineUtility.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawPolylineOP::DrawPolylineOP(wxWindow* wnd, ee::EditPanelImpl* stage, bool isClosed)

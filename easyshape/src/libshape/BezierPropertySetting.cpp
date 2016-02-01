@@ -1,7 +1,9 @@
 #include "BezierPropertySetting.h"
 #include "BezierShape.h"
 
-namespace libshape
+#include <ee/panel_msg.h>
+
+namespace eshape
 {
 
 BezierPropertySetting::BezierPropertySetting(ee::EditPanelImpl* stage, 
@@ -12,7 +14,7 @@ BezierPropertySetting::BezierPropertySetting(ee::EditPanelImpl* stage,
 {
 }
 
-void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void BezierPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;

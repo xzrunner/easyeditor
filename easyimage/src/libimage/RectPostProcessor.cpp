@@ -1,6 +1,10 @@
 #include "RectPostProcessor.h"
 #include "PixelCoveredLUT.h"
 
+#include <cmath>
+
+#include <assert.h>
+
 namespace eimage
 {
 
@@ -722,7 +726,7 @@ void RectPostProcessor::MergeRect(Item* remove, Item* newone)
 		newr.w = std::max(r.x+r.w, newr.x+newr.w) - x;
 		// fix to times of 4
 		if (newr.w % 4 != 0) {
-			newr.w = 4 * std::ceil(newr.w / 4.0f);
+			newr.w = static_cast<int>(4 * std::ceil(newr.w / 4.0f));
 		}
 		newr.x = x;
 	} else {
@@ -731,7 +735,7 @@ void RectPostProcessor::MergeRect(Item* remove, Item* newone)
 		newr.h = std::max(r.y+r.h, newr.y+newr.h) - y;
 		// fix to times of 4
 		if (newr.h % 4 != 0) {
-			newr.h = 4 * std::ceil(newr.h / 4.0f);
+			newr.h = static_cast<int>(4 * std::ceil(newr.h / 4.0f));
 		}
 		newr.y = y;
 	}
@@ -951,8 +955,8 @@ void RectPostProcessor::CondenseCovered(const Rect& r, PixelCoveredLUT* covered)
 
 				std::vector<Item*> items;
 				std::copy(p->m_items.begin(), p->m_items.end(), back_inserter(items));
-				for (int i = 0; i < items.size(); ++i) {
-					for (int j = 0; j < items.size(); ++j) {
+				for (int i = 0, n = items.size(); i < n; ++i) {
+					for (int j = 0, m = items.size(); j < m; ++j) {
 						if (i == j) {
 							continue;
 						}

@@ -1,7 +1,7 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
-namespace libshape
+namespace eshape
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)

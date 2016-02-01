@@ -2,7 +2,7 @@
 #include "Symbol.h"
 #include "config.h"
 
-namespace libshape
+namespace eshape
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
@@ -19,7 +19,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = "*_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
+	std::string filter = "*_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
 	wxFileDialog dlg(this, wxT("choose shape files"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)

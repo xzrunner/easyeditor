@@ -1,9 +1,15 @@
-#ifndef _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
-#define _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
+#ifndef _EASYSHAPE_ETID_DIALOG_SIMPLE_H_
+#define _EASYSHAPE_ETID_DIALOG_SIMPLE_H_
 
+#include <wx/dialog.h>
 
+#include <ee/OneFloatValueStatic.h>
 
-namespace libshape
+class wxGLContext;
+
+namespace ee { class Sprite; class MultiSpritesImpl; }
+
+namespace eshape
 {
 
 class Symbol;
@@ -34,4 +40,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
+#endif // _EASYSHAPE_ETID_DIALOG_SIMPLE_H_

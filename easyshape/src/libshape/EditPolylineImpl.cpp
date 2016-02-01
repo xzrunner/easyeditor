@@ -8,7 +8,7 @@
 
 #include "IOperaterBase.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditPolylineImpl::EditPolylineImpl(wxWindow* wnd, ee::EditPanelImpl* stage,

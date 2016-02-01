@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_POLYGON_PROPERTY_SETTING_H_
-#define _LIBSHAPE_POLYGON_PROPERTY_SETTING_H_
+#ifndef _EASYSHAPE_POLYGON_PROPERTY_SETTING_H_
+#define _EASYSHAPE_POLYGON_PROPERTY_SETTING_H_
 
+#include <ee/PropertySetting.h>
 
+namespace ee { class EditPanelImpl; }
 
-namespace libshape
+namespace eshape
 {
 
 class PolygonShape;
@@ -14,7 +16,7 @@ public:
 	PolygonPropertySetting(ee::EditPanelImpl* stage, PolygonShape* poly);
 	virtual ~PolygonPropertySetting();
 
-	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
 protected:
 	virtual void UpdateProperties(wxPropertyGrid* pg);
@@ -29,4 +31,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_POLYGON_PROPERTY_SETTING_H_
+#endif // _EASYSHAPE_POLYGON_PROPERTY_SETTING_H_

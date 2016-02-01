@@ -2,7 +2,7 @@
 #include "PointShape.h"
 #include "ShapeType.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditPointOP::EditPointOP(wxWindow* wnd, ee::EditPanelImpl* stage,

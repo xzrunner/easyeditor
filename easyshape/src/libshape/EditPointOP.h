@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_EDIT_POINT_OP_H_
-#define _LIBSHAPE_EDIT_POINT_OP_H_
+#ifndef _EASYSHAPE_EDIT_POINT_OP_H_
+#define _EASYSHAPE_EDIT_POINT_OP_H_
 
 
 
 #include "NodeCapture.h"
 
-namespace libshape
+namespace eshape
 {
 
 class EditPointOP : public ee::ZoomViewOP
@@ -37,4 +37,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_EDIT_POINT_OP_H_
+#endif // _EASYSHAPE_EDIT_POINT_OP_H_

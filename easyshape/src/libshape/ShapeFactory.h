@@ -1,10 +1,11 @@
-#ifndef _LIBSHAPE_SHAPE_FACTORY_H_
-#define _LIBSHAPE_SHAPE_FACTORY_H_
+#ifndef _EASYSHAPE_SHAPE_FACTORY_H_
+#define _EASYSHAPE_SHAPE_FACTORY_H_
 
+namespace ee { class Shape; }
 
 #include <json/json.h>
 
-namespace libshape
+namespace eshape
 {
 
 class ShapeFactory
@@ -17,4 +18,4 @@ public:
 
 }
 
-#endif // _LIBSHAPE_SHAPE_FACTORY_H_
+#endif // _EASYSHAPE_SHAPE_FACTORY_H_

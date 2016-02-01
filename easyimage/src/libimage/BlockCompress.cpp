@@ -1,6 +1,12 @@
 #include "BlockCompress.h"
 
+#include <ee/std_functor.h>
+#include <ee/LibpngAdapter.h>
 
+#include <algorithm>
+#include <fstream>
+
+#include <assert.h>
 
 namespace eimage
 {
@@ -16,13 +22,13 @@ BlockCompress::BlockCompress(const std::vector<std::string>& image_files)
 
 BlockCompress::~BlockCompress()
 {
-	for_each(m_blocks.begin(), m_blocks.end(), DeletePointerFunctor<Block>());
-	for_each(m_debug_pic.begin(), m_debug_pic.end(), DeletePointerFunctor<Picture>());
+	for_each(m_blocks.begin(), m_blocks.end(), ee::DeletePointerFunctor<Block>());
+	for_each(m_debug_pic.begin(), m_debug_pic.end(), ee::DeletePointerFunctor<Picture>());
 }
 
 void BlockCompress::Compress()
 {
-	for (int i = 0; i < m_image_files.size(); ++i) {
+	for (int i = 0, n = m_image_files.size(); i < n; ++i) {
 		printf("Compress [%d/%d]\n", i, m_image_files.size());
 		Compress(m_image_files[i]);
 
@@ -31,17 +37,15 @@ void BlockCompress::Compress()
 
 	PrintStatistics();
 
-
-
 	std::ofstream fout("block_compress.txt");
-	float used = m_used_block * 16;
+	float used = static_cast<float>(m_used_block * 16);
 	fout << used / m_tot_area << " " << used / (m_tot_block * 16) << std::endl;
 	fout.close();
 }
 
 void BlockCompress::Uncompress(const std::string& dir) const
 {
-	for (int i = 0; i < m_debug_pic.size(); ++i) {
+	for (int i = 0, n = m_debug_pic.size(); i < n; ++i) {
 		Uncompress(dir, *m_debug_pic[i]);
 	}
 }
@@ -68,7 +72,7 @@ void BlockCompress::Compress(const std::string& filepath)
 
 			Block* b = new Block(pixels, w, h, x, y);
 			Block* same = NULL;
-			for (int i = 0; i < m_blocks.size(); ++i) {
+			for (int i = 0, n = m_blocks.size(); i < n; ++i) {
 				if (b->IsSame(m_blocks[i])) {
 					same = m_blocks[i];
 					break;
@@ -119,7 +123,7 @@ void BlockCompress::PrintStatistics() const
 	printf("tot_area:%d\n", m_tot_area);
 	printf("tot_block:%d, used:%d, saved:%d\n", m_tot_block, m_used_block, m_saved_block);
 
-	float used = m_used_block * 16;
+	float used = static_cast<float>(m_used_block * 16);
 	printf("after percent:%0.2f %0.2f\n", used / m_tot_area, used / (m_tot_block * 16));
 }
 

@@ -2,6 +2,8 @@
 #include "PixelUncoveredLUT.h"
 #include "RegularRectCondense.h"
 
+#include <assert.h>
+
 namespace eimage
 {
 

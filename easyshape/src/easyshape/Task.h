@@ -1,52 +1,37 @@
-#ifndef _ESHAPE_TASK_H_
-#define _ESHAPE_TASK_H_
+#ifndef _EASYSHAPE_TASK_H_
+#define _EASYSHAPE_TASK_H_
 
 
-#include <wx/splitter.h>
+#include <easyshape.h>
 
 namespace eshape
 {
 
-class LibraryPanel;
-class StagePanel;
-class ToolbarPanel;
-
-class Task : public ee::ITask
+class Task : public ee::Task
 {
 public:
 	Task(wxFrame* parent);
-	~Task();
+	virtual ~Task();
 
-	virtual void load(const char* filename);
-	virtual void store(const char* filename) const;
+	virtual void Load(const char* filepath);
+	virtual void Store(const char* filepath) const;
 
-	virtual bool isDirty() const;
+	virtual bool IsDirty() const;
 
-	virtual void clear();
+	virtual void GetAllSprite(std::vector<const ee::Sprite*>& sprites) const;
 
-	virtual void getAllSprite(std::vector<const ee::ISprite*>& sprites) const {}
-
-	virtual const ee::EditPanel* getEditPanel() const;
+	virtual const ee::EditPanel* GetEditPanel() const;
 
 private:
-	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
-
-	void initLayout();
+	void InitLayout(wxFrame* parent);
 
 private:
-	wxWindow* m_root;
+	ee::LibraryPanel* m_library;
 
-	wxFrame* m_parent;
-
-	LibraryPanel* m_library;
-	ee::PropertySettingPanel* m_property;
-	StagePanel* m_stage;
-	ToolbarPanel* m_toolbar;
+	libshape::StagePanel* m_stage;
 
 }; // Task
 
 }
 
-#endif // _ESHAPE_TASK_H_
+#endif // _EASYSHAPE_TASK_H_

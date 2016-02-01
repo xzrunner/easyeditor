@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_PACKAGE_H_
-#define _LIBSHAPE_PACKAGE_H_
+#ifndef _EASYSHAPE_PACKAGE_H_
+#define _EASYSHAPE_PACKAGE_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class Paskage
@@ -21,4 +21,4 @@ public:
 
 }
 
-#endif // _LIBSHAPE_PACKAGE_H_
+#endif // _EASYSHAPE_PACKAGE_H_

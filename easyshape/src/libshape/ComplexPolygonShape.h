@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_COMPLEX_POLYGOIN_SHAPE_H_
-#define _LIBSHAPE_COMPLEX_POLYGOIN_SHAPE_H_
+#ifndef _EASYSHAPE_COMPLEX_POLYGOIN_SHAPE_H_
+#define _EASYSHAPE_COMPLEX_POLYGOIN_SHAPE_H_
 
 #include "PolygonShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 class Material;
@@ -40,4 +40,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_COMPLEX_POLYGOIN_SHAPE_H_
+#endif // _EASYSHAPE_COMPLEX_POLYGOIN_SHAPE_H_

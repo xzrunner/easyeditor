@@ -1,6 +1,19 @@
 #include "Shape.h"
 #include "Triangle.h"
 
+#include <ee/Image.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Math2D.h>
+#include <ee/ShaderMgr.h>
+#include <ee/ColorTrans.h>
+#include <ee/std_functor.h>
+#include <ee/JsonSerializer.h>
+
+#include <set>
+#include <algorithm>
+
+#include <assert.h>
+
 namespace emesh
 {
 
@@ -25,8 +38,8 @@ Shape::Shape(const ee::Image& image)
 	m_texid = image.GetTexID();
 	m_tex_filepath = image.GetFilepath();
 
-	m_width = image.GetOriginWidth();
-	m_height = image.GetOriginHeight();
+	m_width  = static_cast<float>(image.GetOriginWidth());
+	m_height = static_cast<float>(image.GetOriginHeight());
 
 	m_node_radius = std::min(m_width * 0.1f, 5.0f);
 }
@@ -170,7 +183,7 @@ void Shape::SetTween(Shape* begin, Shape* end, float process)
 
 void Shape::ClearTriangles()
 {
-	for_each(m_tris.begin(), m_tris.end(), DeletePointerFunctor<Triangle>());
+	for_each(m_tris.begin(), m_tris.end(), ee::DeletePointerFunctor<Triangle>());
 	m_tris.clear();
 }
 

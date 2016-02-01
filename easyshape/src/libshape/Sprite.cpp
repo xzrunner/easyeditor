@@ -1,9 +1,10 @@
 #include "Sprite.h"
 #include "Symbol.h"
-
 #include "PolygonShape.h"
 
-namespace libshape
+#include <ee/SpriteFactory.h>
+
+namespace eshape
 {
 
 Sprite::Sprite()

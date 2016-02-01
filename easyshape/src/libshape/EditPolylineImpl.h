@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_EDIT_POLYLINE_IMPL_H_
-#define _LIBSHAPE_EDIT_POLYLINE_IMPL_H_
+#ifndef _EASYSHAPE_EDIT_POLYLINE_IMPL_H_
+#define _EASYSHAPE_EDIT_POLYLINE_IMPL_H_
 
 
 
 #include "NodeCapture.h"
 
-namespace libshape
+namespace eshape
 {
 
 class ChainShape;
@@ -109,4 +109,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_EDIT_POLYLINE_IMPL_H_
+#endif // _EASYSHAPE_EDIT_POLYLINE_IMPL_H_

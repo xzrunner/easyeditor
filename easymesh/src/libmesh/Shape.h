@@ -1,7 +1,13 @@
 #ifndef _EASYMESH_SHAPE_H_
 #define _EASYMESH_SHAPE_H_
 
+#include <json/json.h>
 
+#include <ee/Object.h>
+#include <ee/Cloneable.h>
+#include <ee/Color.h>
+
+namespace ee { class Image; class Vector; class Rect; class Matrix; }
 
 namespace emesh
 {

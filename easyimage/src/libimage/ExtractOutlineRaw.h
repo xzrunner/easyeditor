@@ -1,7 +1,13 @@
 #ifndef _EASYIMAGE_EXTRACT_OUTLINE_RAW_H_
 #define _EASYIMAGE_EXTRACT_OUTLINE_RAW_H_
 
+#include <ee/Vector.h>
 
+namespace ee { class Image; }
+
+#include <vector>
+
+#include <stdint.h>
 
 namespace eimage
 {

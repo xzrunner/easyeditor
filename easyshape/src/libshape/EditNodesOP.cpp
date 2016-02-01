@@ -3,7 +3,7 @@
 #include "EditNodesAtomicOP.h"
 #include "message/panel_msg.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditNodesOP::EditNodesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiShapesImpl* shapesImpl)

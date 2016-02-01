@@ -1,7 +1,7 @@
 #include "PolygonPropertySetting.h"
 #include "PolygonShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 PolygonPropertySetting::PolygonPropertySetting(ee::EditPanelImpl* stage, 
@@ -18,7 +18,7 @@ PolygonPropertySetting::~PolygonPropertySetting()
 	m_poly->Release();	
 }
 
-void PolygonPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void PolygonPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;

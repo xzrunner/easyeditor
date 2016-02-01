@@ -1,7 +1,11 @@
 #include "ChainShape.h"
 #include "ChainPropertySetting.h"
 
-namespace libshape
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/SettingData.h>
+
+namespace eshape
 {
 
 ChainShape::ChainShape()

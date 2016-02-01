@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_POINT_SHAPE_H_
-#define _LIBSHAPE_POINT_SHAPE_H_
+#ifndef _EASYSHAPE_POINT_SHAPE_H_
+#define _EASYSHAPE_POINT_SHAPE_H_
 
+#include <ee/Shape.h>
+#include <ee/Vector.h>
+#include <ee/Rect.h>
 
-
-namespace libshape
+namespace eshape
 {
 
 class PointShape : public ee::Shape
@@ -36,9 +38,6 @@ public:
 	void SetPos(const ee::Vector& pos) { m_pos = pos; }
 
 private:
-	static const int RADIUS = 5;
-
-private:
 	ee::Vector m_pos;
 
 	ee::Rect m_rect;
@@ -47,4 +46,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_POINT_SHAPE_H_
+#endif // _EASYSHAPE_POINT_SHAPE_H_

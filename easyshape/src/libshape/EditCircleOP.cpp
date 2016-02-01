@@ -2,7 +2,7 @@
 #include "CircleShape.h"
 #include "CirclePropertySetting.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditCircleOP::EditCircleOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

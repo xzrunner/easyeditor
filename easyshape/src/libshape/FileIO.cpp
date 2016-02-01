@@ -9,7 +9,7 @@
 #include "PolygonShape.h"
 #include "RectShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 void FileIO::LoadFromFile(const char* filename, 
@@ -77,7 +77,7 @@ void FileIO::StoreToFile(const char* filename,
 	}
 
 	if (bg) {
-		wxString dir = ee::FileHelper::GetFileDir(filename) + "\\";
+		std::string dir = ee::FileHelper::GetFileDir(filename) + "\\";
 		value["bg_symbol"] = ee::FileHelper::GetRelativePath(dir,
 			bg->GetFilepath()).ToStdString();
 	}

@@ -1,9 +1,14 @@
-#ifndef _LIBSHAPE_COLOR_MATERIAL_H_
-#define _LIBSHAPE_COLOR_MATERIAL_H_
+#ifndef _EASYSHAPE_COLOR_MATERIAL_H_
+#define _EASYSHAPE_COLOR_MATERIAL_H_
 
 #include "Material.h"
 
-namespace libshape
+#include <ee/Vector.h>
+#include <ee/Color.h>
+
+namespace ee { class Matrix; }
+
+namespace eshape
 {
 
 class ColorMaterial : public Material
@@ -30,4 +35,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_COLOR_MATERIAL_H_
+#endif // _EASYSHAPE_COLOR_MATERIAL_H_

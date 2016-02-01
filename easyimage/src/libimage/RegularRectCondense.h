@@ -1,9 +1,9 @@
 #ifndef _EASYIMAGE_REGULAR_RECT_CONDENSE_H_
 #define _EASYIMAGE_REGULAR_RECT_CONDENSE_H_
 
-
-
 #include "Rect.h"
+
+#include <vector>
 
 namespace eimage
 {

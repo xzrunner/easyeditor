@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_STAGE_CANVAS_H_
-#define _LIBSHAPE_STAGE_CANVAS_H_
+#ifndef _EASYSHAPE_STAGE_CANVAS_H_
+#define _EASYSHAPE_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
-
-namespace libshape
+namespace eshape
 {
 
 class StagePanel;
@@ -35,4 +35,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_STAGE_CANVAS_H_
+#endif // _EASYSHAPE_STAGE_CANVAS_H_

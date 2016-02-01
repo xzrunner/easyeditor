@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libimage"
+	Name="5.libimage"
 	ProjectGUID="{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
 	RootNamespace="libimage"
 	Keyword="Win32Proj"

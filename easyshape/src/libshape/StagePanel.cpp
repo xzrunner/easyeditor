@@ -4,7 +4,7 @@
 #include "Symbol.h"
 #include "ToolBarPanel.h"
 
-namespace libshape
+namespace eshape
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -102,7 +102,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* symbol)
 //{
 // 	if (!m_sprite)
 // 	{
-// 		wxString filepath = m_symbol.getFilepath();
+// 		std::string filepath = m_symbol.getFilepath();
 // 		if (!ee::FileType::isType(filepath, ee::FileType::e_shape))
 // 		{
 // 			filepath = ee::FileHelper::getFilePathExceptExtension(filepath);
@@ -123,7 +123,7 @@ void StagePanel::SetSymbolBG(ee::Symbol* symbol)
 //
 //	if (!m_sprite)
 //	{
-//		wxString filepath = m_symbol.getFilepath();
+//		std::string filepath = m_symbol.getFilepath();
 //		if (filepath.empty())
 //			filepath = m_symbol.getName() + "_" + ee::FileType::GetTag(ee::FileType::e_shape) + ".json";
 //		if (!ee::FileType::isType(filepath, ee::FileType::e_shape))

@@ -2,7 +2,7 @@
 #include "DrawPencilPolygonCMPT.h"
 #include "PolygonShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawPencilPolygonOP::DrawPencilPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

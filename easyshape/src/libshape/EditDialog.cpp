@@ -6,7 +6,7 @@
 
 #include <wx/splitter.h>
 
-namespace libshape
+namespace eshape
 {
 
 BEGIN_EVENT_TABLE(EditDialog, wxDialog)
@@ -20,7 +20,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 {
 	InitLayout(symbol);
 
-	wxString filepath = ee::FileHelper::GetFilenameAddTag(
+	std::string filepath = ee::FileHelper::GetFilenameAddTag(
 		symbol->GetFilepath(), libshape::FILE_TAG, "json");
 	if (ee::FileHelper::IsFileExist(filepath)) {
 		m_stage->LoadFromFile(filepath.mb_str());

@@ -1,9 +1,9 @@
-//#ifndef _LIBSHAPE_MULTI_COLOR_MATERIAL_H_
-//#define _LIBSHAPE_MULTI_COLOR_MATERIAL_H_
+//#ifndef _EASYSHAPE_MULTI_COLOR_MATERIAL_H_
+//#define _EASYSHAPE_MULTI_COLOR_MATERIAL_H_
 //
 //#include "Material.h"
 //
-//namespace libshape
+//namespace eshape
 //{
 //
 //class MultiColorMaterial : public Material
@@ -30,4 +30,4 @@
 //
 //}
 //
-//#endif // _LIBSHAPE_MULTI_COLOR_MATERIAL_H_
+//#endif // _EASYSHAPE_MULTI_COLOR_MATERIAL_H_

@@ -1,7 +1,10 @@
 #include "CircleShape.h"
 #include "CirclePropertySetting.h"
 
-namespace libshape
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+
+namespace eshape
 {
 
 CircleShape::CircleShape()

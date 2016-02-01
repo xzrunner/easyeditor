@@ -7,7 +7,7 @@
 #include "PolygonShape.h"
 #include "RectShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 void Paskage::packShape(ee::Shape* shape, std::ofstream& fout)

@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_DRAW_LOOP_OP_H_
-#define _LIBSHAPE_DRAW_LOOP_OP_H_
+#ifndef _EASYSHAPE_DRAW_LOOP_OP_H_
+#define _EASYSHAPE_DRAW_LOOP_OP_H_
 
 #include "DrawPolylineOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 class DrawLoopOP : public DrawPolylineOP
@@ -18,4 +18,4 @@ public:
 
 }
 
-#endif // _LIBSHAPE_DRAW_LOOP_OP_H_
+#endif // _EASYSHAPE_DRAW_LOOP_OP_H_

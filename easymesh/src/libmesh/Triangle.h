@@ -3,6 +3,8 @@
 
 #include "Node.h"
 
+#include <ee/Object.h>
+
 namespace emesh
 {
 

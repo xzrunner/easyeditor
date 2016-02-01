@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_CIRCLE_PROPERTY_SETTING_H_
-#define _LIBSHAPE_CIRCLE_PROPERTY_SETTING_H_
+#ifndef _EASYSHAPE_CIRCLE_PROPERTY_SETTING_H_
+#define _EASYSHAPE_CIRCLE_PROPERTY_SETTING_H_
 
+#include <ee/PropertySetting.h>
 
+namespace ee { class EditPanelImpl; }
 
-namespace libshape
+namespace eshape
 {
 
 class CircleShape;
@@ -13,7 +15,7 @@ class CirclePropertySetting : public ee::PropertySetting
 public:
 	CirclePropertySetting(ee::EditPanelImpl* stage, CircleShape* circle);
 
-	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
 protected:
 	virtual void UpdateProperties(wxPropertyGrid* pg);
@@ -28,4 +30,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_CIRCLE_PROPERTY_SETTING_H_
+#endif // _EASYSHAPE_CIRCLE_PROPERTY_SETTING_H_

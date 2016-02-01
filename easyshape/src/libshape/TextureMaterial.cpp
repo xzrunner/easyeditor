@@ -1,6 +1,12 @@
 #include "TextureMaterial.h"
 
-namespace libshape
+#include <ee/ImageSymbol.h>
+#include <ee/FileHelper.h>
+#include <ee/ShaderMgr.h>
+#include <ee/Math2D.h>
+#include <ee/Triangulation.h>
+
+namespace eshape
 {
 
 TextureMaterial::TextureMaterial(const std::vector<ee::Vector>& vertices, ee::ImageSymbol* image)
@@ -21,7 +27,7 @@ Json::Value TextureMaterial::Store(const std::string& dirpath) const
 {
 	Json::Value val;
 	val["type"] = "texture";
-	val["texture path"] = ee::FileHelper::GetRelativePath(dirpath, m_image->GetFilepath()).ToStdString();
+	val["texture path"] = ee::FileHelper::GetRelativePath(dirpath, m_image->GetFilepath());
 	return val;
 }
 

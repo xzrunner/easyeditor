@@ -1,9 +1,10 @@
 #ifndef _EASYIMAGE_RECT_MANAGER_H_
 #define _EASYIMAGE_RECT_MANAGER_H_
 
-
-
 #include "Rect.h"
+
+#include <vector>
+#include <set>
 
 namespace eimage
 {

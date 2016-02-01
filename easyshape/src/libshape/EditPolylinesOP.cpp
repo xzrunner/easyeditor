@@ -2,7 +2,7 @@
 #include "EditPolylinesCMPT.h"
 #include "ChainShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 EditPolylinesOP::EditPolylinesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

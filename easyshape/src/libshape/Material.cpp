@@ -1,6 +1,8 @@
 #include "Material.h"
 
-namespace libshape
+#include <ee/PrimitiveDraw.h>
+
+namespace eshape
 {
 
 void Material::Translate(const ee::Vector& offset)

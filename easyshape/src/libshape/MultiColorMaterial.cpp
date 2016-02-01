@@ -1,6 +1,6 @@
 //#include "MultiColorMaterial.h"
 //
-//namespace libshape
+//namespace eshape
 //{
 //
 //MultiColorMaterial::MultiColorMaterial(const std::vector<ee::Vector>& vertices, 

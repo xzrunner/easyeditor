@@ -3,6 +3,8 @@
 
 #include "Shape.h"
 
+namespace ee { class Visitor; class Shape; class Vector; }
+
 namespace emesh
 {
 

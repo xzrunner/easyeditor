@@ -1,7 +1,7 @@
 #include "DrawPolygonOP.h"
 #include "PolygonShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawPolygonOP::DrawPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage,

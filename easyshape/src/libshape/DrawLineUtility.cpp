@@ -1,6 +1,6 @@
 #include "DrawLineUtility.h"
 
-namespace libshape
+namespace eshape
 {
 
 bool DrawLineUtility::IsStraightOpen(const std::vector<ee::Vector>& lines, 

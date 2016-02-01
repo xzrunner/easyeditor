@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_LIBRARY_PAGE_H_
-#define _LIBSHAPE_LIBRARY_PAGE_H_
+#ifndef _EASYSHAPE_LIBRARY_PAGE_H_
+#define _EASYSHAPE_LIBRARY_PAGE_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class LibraryPage : public ee::LibraryPage
@@ -20,4 +20,4 @@ protected:
 
 }
 
-#endif // _LIBSHAPE_LIBRARY_PAGE_H_
+#endif // _EASYSHAPE_LIBRARY_PAGE_H_

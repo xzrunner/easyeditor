@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_IOPERATER_BASE_H_
 #define _DRAG2D_IOPERATER_BASE_H_
 
-namespace libshape
+namespace eshape
 {
 
 class IOperaterBase

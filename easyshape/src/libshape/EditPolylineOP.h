@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_EDIT_POLYLINE_OP_H_
-#define _LIBSHAPE_EDIT_POLYLINE_OP_H_
+#ifndef _EASYSHAPE_EDIT_POLYLINE_OP_H_
+#define _EASYSHAPE_EDIT_POLYLINE_OP_H_
 
 
 
 #include "IOperaterBase.h"
 
-namespace libshape
+namespace eshape
 {
 
 class ChainShape;
@@ -56,4 +56,4 @@ private:
 
 #include "EditPolylineOP.cpp"
 
-#endif // _LIBSHAPE_EDIT_POLYLINE_OP_H_
+#endif // _EASYSHAPE_EDIT_POLYLINE_OP_H_

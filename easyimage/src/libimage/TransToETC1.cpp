@@ -1,8 +1,14 @@
 #include "TransToETC1.h"
-#include "ImagePack.h"
+
+#include <ee/math_common.h>
+#include <ee/ImagePack.h>
 
 //#include <rg_etc1.h>
 #include <etcpack_lib.h>
+
+#include <fstream>
+
+#include <assert.h>
 
 namespace eimage
 {
@@ -63,8 +69,8 @@ uint8_t* TransToETC1::GetPixelsData(int& width, int& height) const
 void TransToETC1::InitSrcImage(const uint8_t* pixels, int width, int height, int channels)
 {
 	assert(channels == 4);
-	if (is_power_of_two(width) &&
-		is_power_of_two(height) &&
+	if (ee::is_power_of_two(width) &&
+		ee::is_power_of_two(height) &&
 		width == height) 
 	{
 		m_width = width;
@@ -78,10 +84,10 @@ void TransToETC1::InitSrcImage(const uint8_t* pixels, int width, int height, int
 	}
 	else
 	{
-		int nw = next_p2(width),
-			nh = next_p2(height);
-		ImagePack pack(nw, nh);
-		pack.AddImage(pixels, width, height, 0, 0, ImagePack::PT_NORMAL);
+		int nw = ee::next_p2(width),
+			nh = ee::next_p2(height);
+		ee::ImagePack pack(nw, nh);
+		pack.AddImage(pixels, width, height, 0, 0, ee::ImagePack::PT_NORMAL);
 
 		size_t sz = sizeof(uint8_t) * nw * nh * channels;
 		m_pixels = new uint8_t[sz];
@@ -169,7 +175,7 @@ void TransToETC1::EncodeETC1ByEtcPack()
 	assert(m_width % 4 == 0 && m_height % 4 == 0);
 
 	// prepare alpha
-	size_t sz = m_width * m_height;
+	int sz = m_width * m_height;
 	uint8_t* rgb_rgb = new uint8_t[sz * 3];
 	uint8_t* rgb_dec = new uint8_t[sz * 3];
 	for (int i = 0; i < sz; ++i) {

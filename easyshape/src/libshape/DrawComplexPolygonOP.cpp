@@ -1,7 +1,7 @@
 #include "DrawComplexPolygonOP.h"
 #include "ComplexPolygonShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawComplexPolygonOP::DrawComplexPolygonOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

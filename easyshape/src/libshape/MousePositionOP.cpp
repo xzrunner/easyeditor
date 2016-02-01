@@ -1,6 +1,6 @@
 #include "MousePositionOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 MousePositionOP::MousePositionOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_CIRCLE_SHAPE_H_
-#define _LIBSHAPE_CIRCLE_SHAPE_H_
+#ifndef _EASYSHAPE_CIRCLE_SHAPE_H_
+#define _EASYSHAPE_CIRCLE_SHAPE_H_
 
+#include <ee/Shape.h>
+#include <ee/Vector.h>
+#include <ee/Rect.h>
 
-
-namespace libshape
+namespace eshape
 {
 
 class CircleShape : public ee::Shape
@@ -44,4 +46,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_CIRCLE_SHAPE_H_
+#endif // _EASYSHAPE_CIRCLE_SHAPE_H_

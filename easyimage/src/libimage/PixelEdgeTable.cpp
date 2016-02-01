@@ -1,5 +1,7 @@
 #include "PixelEdgeTable.h"
 
+#include <assert.h>
+
 namespace eimage
 {
 

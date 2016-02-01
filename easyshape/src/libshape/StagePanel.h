@@ -1,9 +1,15 @@
-#ifndef _LIBSHAPE_STAGE_PANEL_H_
-#define _LIBSHAPE_STAGE_PANEL_H_
+#ifndef _EASYSHAPE_STAGE_PANEL_H_
+#define _EASYSHAPE_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/CombinedDropTarget.h>
 
+namespace ee { class LibraryPanel; class Sprite; class MultiSpritesImpl; class Symbol; }
 
-namespace libshape
+class wxGLContext;
+
+namespace eshape
 {
 
 class Symbol;
@@ -74,4 +80,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_STAGE_PANEL_H_
+#endif // _EASYSHAPE_STAGE_PANEL_H_

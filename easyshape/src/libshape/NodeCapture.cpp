@@ -9,7 +9,7 @@
 #include "PolygonShape.h"
 #include "RectShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 NodeCapture::NodeCapture(ee::MultiShapesImpl* shapesImpl, int tol)

@@ -1,7 +1,9 @@
 #include "RectPropertySetting.h"
 #include "RectShape.h"
 
-namespace libshape
+#include <ee/panel_msg.h>
+
+namespace eshape
 {
 
 RectPropertySetting::RectPropertySetting(ee::EditPanelImpl* stage, 
@@ -12,7 +14,7 @@ RectPropertySetting::RectPropertySetting(ee::EditPanelImpl* stage,
 {
 }
 
-void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void RectPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;

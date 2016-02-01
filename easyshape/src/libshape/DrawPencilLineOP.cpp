@@ -1,7 +1,7 @@
 #include "DrawPencilLineOP.h"
 #include "ChainShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawPencilLineOP::DrawPencilLineOP(wxWindow* wnd, ee::EditPanelImpl* stage, 

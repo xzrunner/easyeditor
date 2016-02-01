@@ -1,7 +1,7 @@
 #include "DrawCurveOP.h"
 #include "DrawLineUtility.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawCurveOP::DrawCurveOP(wxWindow* wnd, ee::EditPanelImpl* stage)

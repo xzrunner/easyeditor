@@ -1,7 +1,7 @@
 #include "Math.h"
 #include "ChainShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,

@@ -3,10 +3,10 @@
 #include "ChainShape.h"
 #include "Math.h"
 
-namespace libshape
+namespace eshape
 {
 
-EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const wxString& name,
+EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const std::string& name,
 									 ee::EditPanel* editPanel, ee::MultiShapesImpl* shapesImpl)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 	, m_shapesImpl(shapesImpl)

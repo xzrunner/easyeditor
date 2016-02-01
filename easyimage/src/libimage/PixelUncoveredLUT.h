@@ -1,9 +1,9 @@
 #ifndef _EASYIMAGE_PIXEL_UNCOVERED_LUT_H_
 #define _EASYIMAGE_PIXEL_UNCOVERED_LUT_H_
 
-
-
 #include "Rect.h"
+
+#include <vector>
 
 namespace eimage
 {

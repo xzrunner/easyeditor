@@ -1,6 +1,11 @@
 #include "ColorMaterial.h"
 
-namespace libshape
+#include <ee/ColorTrans.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Math2D.h>
+#include <ee/Triangulation.h>
+
+namespace eshape
 {
 
 ColorMaterial::ColorMaterial(const std::vector<ee::Vector>& vertices, 

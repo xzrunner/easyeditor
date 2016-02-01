@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_NODE_CAPTURE_H_
-#define _LIBSHAPE_NODE_CAPTURE_H_
+#ifndef _EASYSHAPE_NODE_CAPTURE_H_
+#define _EASYSHAPE_NODE_CAPTURE_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class PointShape;
@@ -65,4 +65,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_NODE_CAPTURE_H_
+#endif // _EASYSHAPE_NODE_CAPTURE_H_

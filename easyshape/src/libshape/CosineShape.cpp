@@ -1,6 +1,11 @@
 #include "CosineShape.h"
 
-namespace libshape
+#include <ee/PrimitiveDraw.h>
+#include <ee/DouglasPeucker.h>
+#include <ee/SettingData.h>
+#include <ee/CosineSmooth.h>
+
+namespace eshape
 {
 
 #define SIMPLIFY
@@ -47,7 +52,7 @@ void CosineShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 
 	ee::PrimitiveDraw::DrawPolyline(m_midPoints, color.multi, m_isLoop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
-		ee::PrimitiveDraw::DrawCircles(m_vertices, ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawCircles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 	}
 	if (ee::SettingData::ctl_pos_sz != 0) {
 		ee::PrimitiveDraw::DrawCircles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true, 2, ee::Colorf(0.8f, 0.8f, 0.4f));

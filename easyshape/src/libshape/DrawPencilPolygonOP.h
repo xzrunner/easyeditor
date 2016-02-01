@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_DRAW_PENCIL_POLYGON_OP_H_
-#define _LIBSHAPE_DRAW_PENCIL_POLYGON_OP_H_
+#ifndef _EASYSHAPE_DRAW_PENCIL_POLYGON_OP_H_
+#define _EASYSHAPE_DRAW_PENCIL_POLYGON_OP_H_
 
 #include "DrawCurveOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 class DrawPencilPolygonCMPT;
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_DRAW_PENCIL_POLYGON_OP_H_
+#endif // _EASYSHAPE_DRAW_PENCIL_POLYGON_OP_H_

@@ -1,7 +1,7 @@
 #include "DrawLoopOP.h"
 #include "ChainShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawLoopOP::DrawLoopOP(wxWindow* wnd, ee::EditPanelImpl* stage,

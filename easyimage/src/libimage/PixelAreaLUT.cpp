@@ -1,5 +1,11 @@
 #include "PixelAreaLUT.h"
 
+#include <cmath>
+
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
 namespace eimage
 {
 
@@ -69,8 +75,8 @@ void PixelAreaLUT::CutByRect(int _x, int _y, int _w, int _h, int& left_area)
 
 void PixelAreaLUT::FixPixelsToBlock4()
 {
-	int bw = std::ceil(m_width / 4.0f),
-		bh = std::ceil(m_height / 4.0f);
+	int bw = static_cast<int>(std::ceil(m_width / 4.0f)),
+		bh = static_cast<int>(std::ceil(m_height / 4.0f));
 	bool* bpixels = new bool[bw * bh];
 	memset(bpixels, 0, sizeof(bool) * bw * bh);
 	

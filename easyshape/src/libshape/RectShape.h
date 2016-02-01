@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_RECT_SHAPE_H_
-#define _LIBSHAPE_RECT_SHAPE_H_
+#ifndef _EASYSHAPE_RECT_SHAPE_H_
+#define _EASYSHAPE_RECT_SHAPE_H_
 
+#include <ee/Shape.h>
+#include <ee/Rect.h>
+#include <ee/ShapeStyle.h>
 
-
-namespace libshape
+namespace eshape
 {
 
 class RectShape : public ee::Shape
@@ -42,4 +44,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_RECT_SHAPE_H_
+#endif // _EASYSHAPE_RECT_SHAPE_H_

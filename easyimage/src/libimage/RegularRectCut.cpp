@@ -1,8 +1,9 @@
 #include "RegularRectCut.h"
 #include "PixelAreaLUT.h"
 #include "RegularRectCondense.h"
-
 #include "RegularRectMerge.h"
+
+#include <ee/Image.h>
 
 namespace eimage
 {

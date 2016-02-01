@@ -1,7 +1,10 @@
- #include "BezierShape.h"
+#include "BezierShape.h"
 #include "BezierPropertySetting.h"
 
-namespace libshape
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+
+namespace eshape
 {
 
 BezierShape::BezierShape()

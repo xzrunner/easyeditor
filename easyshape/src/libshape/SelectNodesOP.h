@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_SELECT_NODES_OP_H_
-#define _LIBSHAPE_SELECT_NODES_OP_H_
+#ifndef _EASYSHAPE_SELECT_NODES_OP_H_
+#define _EASYSHAPE_SELECT_NODES_OP_H_
 
 #include "DrawRectangleOP.h"
 
-namespace libshape
+namespace eshape
 {
 
 class ChainShape;
@@ -78,4 +78,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_SELECT_NODES_OP_H_
+#endif // _EASYSHAPE_SELECT_NODES_OP_H_

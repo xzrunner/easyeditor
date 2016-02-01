@@ -1,8 +1,6 @@
 #ifndef _EASYIMAGE_PIXEL_AREA_LUT_H_
 #define _EASYIMAGE_PIXEL_AREA_LUT_H_
 
-
-
 namespace eimage
 {
 

@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_BEZIER_SHAPE_H_
-#define _LIBSHAPE_BEZIER_SHAPE_H_
+#ifndef _EASYSHAPE_BEZIER_SHAPE_H_
+#define _EASYSHAPE_BEZIER_SHAPE_H_
 
 #include "ChainShape.h"
 
+#include <ee/ShapeStyle.h>
 
-
-namespace libshape
+namespace eshape
 {
 
 class BezierShape : public ChainShape
@@ -64,4 +64,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_BEZIER_SHAPE_H_
+#endif // _EASYSHAPE_BEZIER_SHAPE_H_

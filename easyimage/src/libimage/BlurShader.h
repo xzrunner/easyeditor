@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_BLUR_SHADER_H_
 #define _EASYIMAGE_BLUR_SHADER_H_
 
-
+#include <ee/SpriteShader.h>
 
 namespace eimage
 {

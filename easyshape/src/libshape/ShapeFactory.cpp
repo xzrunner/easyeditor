@@ -10,7 +10,7 @@
 #include "PolygonShape.h"
 #include "RectShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 ee::Shape* ShapeFactory::CreateShapeFromFile(const Json::Value& value, 

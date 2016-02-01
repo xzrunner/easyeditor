@@ -1,11 +1,11 @@
-#ifndef _LIBSHAPE_EDIT_BEZIER_OP_H_
-#define _LIBSHAPE_EDIT_BEZIER_OP_H_
+#ifndef _EASYSHAPE_EDIT_BEZIER_OP_H_
+#define _EASYSHAPE_EDIT_BEZIER_OP_H_
 
 
 
 #include "NodeCapture.h"
 
-namespace libshape
+namespace eshape
 {
 
 class ee::OneFloatValue;
@@ -42,4 +42,4 @@ private:
 
 }
 
-#endif // _LIBSHAPE_EDIT_BEZIER_OP_H_
+#endif // _EASYSHAPE_EDIT_BEZIER_OP_H_

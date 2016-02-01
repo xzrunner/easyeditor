@@ -1,7 +1,16 @@
 #include "TransToPVR.h"
-#include "ImagePack.h"
+
+#include <ee/math_common.h>
+#include <ee/ImagePack.h>
 
 #include <PVRTextureUtilities.h>
+
+#include <fstream>
+#include <algorithm>
+
+#include <assert.h>
+
+#define NO
 
 namespace eimage
 {
@@ -46,8 +55,8 @@ uint8_t* TransToPVR::GetPixelsData(int& width, int& height) const
 void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int channels, bool align_bottom)
 {
 	assert(channels == 4);
-	if (is_power_of_two(width) &&
-		is_power_of_two(height) &&
+	if (ee::is_power_of_two(width) &&
+		ee::is_power_of_two(height) &&
 		width == height) 
 	{
 		m_width = width;
@@ -59,12 +68,12 @@ void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int 
 	}
 	else
 	{
-		int nw = next_p2(width),
-			nh = next_p2(height);
-		nw = nh = std::max(nw, nh);
-		ImagePack pack(nw, nh);
+		int nw = ee::next_p2(width),
+			nh = ee::next_p2(height);
+		nw = nh = (std::max)(nw, nh);
+		ee::ImagePack pack(nw, nh);
 		int h = align_bottom ? nh - height : 0;
-		pack.AddImage(pixels, width, height, 0, h, ImagePack::PT_NORMAL);
+		pack.AddImage(pixels, width, height, 0, h, ee::ImagePack::PT_NORMAL);
 
 //		pack.AddImage(pixels, width, height, 0, nh - height, ImagePack::PT_NORMAL);
 //		pack.AddImage(pixels, width, height, 0, 0, ImagePack::PT_NORMAL);
@@ -85,7 +94,7 @@ void TransToPVR::InitPVRHeader()
 	m_header.width = m_width;
 	m_header.height = m_height;
 	m_header.flags = 32793;
-	m_header.dataLength = m_width * m_height * 0.5f;
+	m_header.dataLength = static_cast<uint32_t>(m_width * m_height * 0.5f);
 	m_header.bpp = 4;
 	m_header.bitmaskAlpha = 1;
 	m_header.pvrTag = 559044176;

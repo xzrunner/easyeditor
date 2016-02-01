@@ -1,9 +1,14 @@
-#ifndef _LIBSHAPE_INTERFACE_MATERIAL_H_
-#define _LIBSHAPE_INTERFACE_MATERIAL_H_
+#ifndef _EASYSHAPE_INTERFACE_MATERIAL_H_
+#define _EASYSHAPE_INTERFACE_MATERIAL_H_
 
+#include <json/json.h>
 
+#include <ee/Object.h>
+#include <ee/Vector.h>
 
-namespace libshape
+namespace ee { class Matrix; struct ColorTrans; }
+
+namespace eshape
 {
 
 class Material : public ee::Object
@@ -42,4 +47,4 @@ protected:
 
 }
 
-#endif // _LIBSHAPE_INTERFACE_MATERIAL_H_
+#endif // _EASYSHAPE_INTERFACE_MATERIAL_H_

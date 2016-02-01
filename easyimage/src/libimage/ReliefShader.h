@@ -1,7 +1,7 @@
 #ifndef _EASYIMAGE_RELIEF_SHADER_H_
 #define _EASYIMAGE_RELIEF_SHADER_H_
 
-
+#include <ee/SpriteShader.h>
 
 namespace eimage
 {

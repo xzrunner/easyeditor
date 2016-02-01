@@ -1,7 +1,9 @@
 #ifndef _EASYIMAGE_TRANS_TO_PVR_H_
 #define _EASYIMAGE_TRANS_TO_PVR_H_
 
+#include <string>
 
+#include <stdint.h>
 
 namespace eimage
 {

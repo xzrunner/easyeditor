@@ -1,9 +1,9 @@
 #ifndef _EASYMESH_SHAPE_FACTORY_H_
 #define _EASYMESH_SHAPE_FACTORY_H_
 
-
-
 #include "config.h"
+
+namespace ee { class Image; }
 
 namespace emesh
 {

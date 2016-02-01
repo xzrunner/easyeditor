@@ -1,9 +1,11 @@
-#ifndef _LIBSHAPE_POLYGON_SHAPE_H_
-#define _LIBSHAPE_POLYGON_SHAPE_H_
+#ifndef _EASYSHAPE_POLYGON_SHAPE_H_
+#define _EASYSHAPE_POLYGON_SHAPE_H_
 
 #include "ChainShape.h"
 
-namespace libshape
+namespace ee { class ImageSymbol; }
+
+namespace eshape
 {
 
 class Material;
@@ -55,4 +57,4 @@ protected:
 
 }
 
-#endif // _LIBSHAPE_POLYGON_SHAPE_H_
+#endif // _EASYSHAPE_POLYGON_SHAPE_H_

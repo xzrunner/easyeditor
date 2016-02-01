@@ -1,5 +1,7 @@
 #include "OutlineToTriStrip.h"
 
+#include <ee/Triangulation.h>
+
 namespace eimage
 {
 

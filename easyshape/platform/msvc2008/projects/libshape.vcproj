@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libshape"
+	Name="5.libshape"
 	ProjectGUID="{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
 	RootNamespace="libshape"
 	Keyword="Win32Proj"

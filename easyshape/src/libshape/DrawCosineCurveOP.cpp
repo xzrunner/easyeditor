@@ -1,7 +1,7 @@
 #include "DrawCosineCurveOP.h"
 #include "CosineShape.h"
 
-namespace libshape
+namespace eshape
 {
 
 DrawCosineCurveOP::DrawCosineCurveOP(wxWindow* wnd, ee::EditPanelImpl* stage)

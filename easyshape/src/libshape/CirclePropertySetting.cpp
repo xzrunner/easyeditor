@@ -1,7 +1,9 @@
 #include "CirclePropertySetting.h"
 #include "CircleShape.h"
 
-namespace libshape
+#include <ee/panel_msg.h>
+
+namespace eshape
 {
 
 CirclePropertySetting::CirclePropertySetting(ee::EditPanelImpl* stage, 
@@ -12,7 +14,7 @@ CirclePropertySetting::CirclePropertySetting(ee::EditPanelImpl* stage,
 {
 }
 
-void CirclePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void CirclePropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;

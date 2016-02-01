@@ -1,10 +1,10 @@
 #include "MousePositionCMPT.h"
 #include "MousePositionOP.h"
 
-namespace libshape
+namespace eshape
 {
 
-MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const wxString& name, 
+MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const std::string& name, 
 									 wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 	: ee::MousePositionCMPT(parent, name, stage_wnd, stage, false)
 {

@@ -1,7 +1,12 @@
 #include "PointShape.h"
 
-namespace libshape
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+
+namespace eshape
 {
+
+static const float RADIUS = 5;
 
 PointShape::PointShape()
 {
@@ -54,8 +59,8 @@ void PointShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 {
 	ee::Shape::LoadFromFile(value, dir);
 
-	m_pos.x = value["x"].asDouble();
-	m_pos.y = value["y"].asDouble();
+	m_pos.x = static_cast<float>(value["x"].asDouble());
+	m_pos.y = static_cast<float>(value["y"].asDouble());
 }
 
 void PointShape::StoreToFile(Json::Value& value, const std::string& dir) const

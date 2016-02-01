@@ -1,19 +1,19 @@
-#ifndef _LIBSHAPE_DRAW_PENCIL_LINE_CMPT_H_
-#define _LIBSHAPE_DRAW_PENCIL_LINE_CMPT_H_
+#ifndef _EASYSHAPE_DRAW_PENCIL_LINE_CMPT_H_
+#define _EASYSHAPE_DRAW_PENCIL_LINE_CMPT_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class DrawPencilLineCMPT : public ee::OneFloatValueCMPT
 {
 public:
-	DrawPencilLineCMPT(wxWindow* parent, const wxString& name, 
+	DrawPencilLineCMPT(wxWindow* parent, const std::string& name, 
 		wxWindow* stage_wnd, ee::EditPanelImpl* stage);
 
 }; // DrawPencilLineCMPT
 	
 }
 
-#endif // _LIBSHAPE_DRAW_PENCIL_LINE_CMPT_H_
+#endif // _EASYSHAPE_DRAW_PENCIL_LINE_CMPT_H_

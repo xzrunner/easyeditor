@@ -1,9 +1,9 @@
-#ifndef _LIBSHAPE_DRAW_LINE_UTILITY_H_
-#define _LIBSHAPE_DRAW_LINE_UTILITY_H_
+#ifndef _EASYSHAPE_DRAW_LINE_UTILITY_H_
+#define _EASYSHAPE_DRAW_LINE_UTILITY_H_
 
 
 
-namespace libshape
+namespace eshape
 {
 
 class DrawLineUtility
@@ -18,4 +18,4 @@ public:
 
 }
 
-#endif // _LIBSHAPE_DRAW_LINE_UTILITY_H_
+#endif // _EASYSHAPE_DRAW_LINE_UTILITY_H_
