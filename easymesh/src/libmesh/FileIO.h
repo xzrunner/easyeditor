@@ -8,8 +8,8 @@ class Symbol;
 class FileIO
 {
 public:
-	static void store(const char* filepath, const Symbol* symbol);
-	static void load(const char* filepath, Symbol* symbol);
+	static void Store(const char* filepath, const Symbol* symbol);
+	static void Load(const char* filepath, Symbol* symbol);
 }; // FileIO
 
 }

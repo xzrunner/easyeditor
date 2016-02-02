@@ -1,6 +1,8 @@
 #ifndef _EASYMESH_STAGE_CANVAS_H_
 #define _EASYMESH_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+
 namespace emesh
 {
 

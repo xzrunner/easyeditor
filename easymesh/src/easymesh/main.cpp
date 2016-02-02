@@ -4,6 +4,9 @@
 
 #include <easymesh.h>
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+
 IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
@@ -22,7 +25,7 @@ bool MyApp::OnInit()
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
-		wxString path(wxGetApp().argv[1]);
+		std::string path(wxGetApp().argv[1]);
 		frame->InitWithFile(path);
 	}
 

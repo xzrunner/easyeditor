@@ -2,11 +2,17 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace emesh
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Mesh"))
+	: ee::LibraryPage(parent, "Mesh")
 {
 	InitLayout();
 	m_list->SetFileter(emesh::FILE_TAG);
@@ -19,7 +25,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FileType::e_mesh);
+	std::string filter = ee::FileType::GetTag(ee::FileType::e_mesh);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入mesh文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

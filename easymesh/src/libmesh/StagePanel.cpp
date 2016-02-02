@@ -5,6 +5,12 @@
 
 #include <easyshape.h>
 
+#include <ee/FetchAllVisitor.h>
+#include <ee/panel_msg.h>
+#include <ee/shape_msg.h>
+#include <ee/subject_id.h>
+#include <ee/ImageSymbol.h>
+
 namespace emesh
 {
 

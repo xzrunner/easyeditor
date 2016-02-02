@@ -1,7 +1,6 @@
 #ifndef _EASYMESH_CREATE_MESH_OP_H_
 #define _EASYMESH_CREATE_MESH_OP_H_
 
-
 #include <easyshape.h>
 
 namespace emesh

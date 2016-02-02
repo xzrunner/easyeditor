@@ -1,8 +1,11 @@
 #ifndef _EASYMESH_TASK_H_
 #define _EASYMESH_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace emesh
 {

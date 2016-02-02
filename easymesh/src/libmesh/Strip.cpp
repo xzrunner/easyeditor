@@ -1,6 +1,15 @@
 #include "Strip.h"
 #include "Triangle.h"
 
+#include <ee/JsonSerializer.h>
+#include <ee/Math2D.h>
+
+#include <set>
+#include <algorithm>
+
+#include <assert.h>
+#include <math.h>
+
 namespace emesh
 {
 
@@ -31,8 +40,8 @@ Strip* Strip::Clone() const
 
 void Strip::Load(const Json::Value& value)
 {
-	m_width = value["width"].asDouble();
-	m_height = value["height"].asDouble();
+	m_width  = static_cast<float>(value["width"].asDouble());
+	m_height = static_cast<float>(value["height"].asDouble());
 
 	m_left_nodes.m_ori.clear();
 	m_right_nodes.m_ori.clear();
@@ -63,7 +72,7 @@ void Strip::OffsetUV(float dx, float dy)
 {
 	// update uv base
 	m_uv_offset += dy;
-	m_uv_offset = m_uv_offset - std::floor(m_uv_offset);
+	m_uv_offset = m_uv_offset - floor(m_uv_offset);
 
 	std::vector<std::pair<ee::Vector, ee::Vector> > trans_list;
 	GetTransList(trans_list);
@@ -97,15 +106,15 @@ void Strip::OffsetUV(float dx, float dy)
 		}
 
 		Triangle* tri = new Triangle;
-		tri->nodes[0] = new Node(left[i], m_width, m_height);
-		tri->nodes[1] = new Node(right[i], m_width, m_height);
-		tri->nodes[2] = new Node(right[i+1], m_width, m_height);
+		tri->nodes[0] = new Node(left[i], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[1] = new Node(right[i], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[2] = new Node(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
 		m_tris.push_back(tri);
 
 		tri = new Triangle;
-		tri->nodes[0] = new Node(left[i], m_width, m_height);
-		tri->nodes[1] = new Node(right[i+1], m_width, m_height);
-		tri->nodes[2] = new Node(left[i+1], m_width, m_height);
+		tri->nodes[0] = new Node(left[i], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[1] = new Node(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
+		tri->nodes[2] = new Node(left[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
 		m_tris.push_back(tri);
 	}
 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
@@ -128,7 +137,7 @@ void Strip::OffsetUV(float dx, float dy)
 		{
 			Node* n = tri->nodes[i];
 			float y = n->uv.y - m_uv_offset;
-			y = y - std::floor(y);
+			y = y - floor(y);
 			if (fabs(y - 0) < 0.0001f && n->uv.y == r.ymax) {
 				y = 1;
 			}
@@ -230,12 +239,12 @@ void Strip::RefreshTriangles()
 	assert(m_left_nodes.Size() == m_right_nodes.Size());
 	const std::vector<ee::Vector>& left = m_left_nodes.m_ext;
 	const std::vector<ee::Vector>& right = m_right_nodes.m_ext;
-	Node* last_left = new Node(left[0], m_width, m_height);
-	Node* last_right = new Node(right[0], m_width, m_height);
+	Node* last_left = new Node(left[0], static_cast<int>(m_width), static_cast<int>(m_height));
+	Node* last_right = new Node(right[0], static_cast<int>(m_width), static_cast<int>(m_height));
 	for (int i = 0, n = left.size() - 1; i < n; ++i)
 	{
-		Node* next_left = new Node(left[i+1], m_width, m_height);
-		Node* next_right = new Node(right[i+1], m_width, m_height);
+		Node* next_left = new Node(left[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
+		Node* next_right = new Node(right[i+1], static_cast<int>(m_width), static_cast<int>(m_height));
 
 		Triangle* tri = new Triangle;
 		tri->nodes[0] = last_left;

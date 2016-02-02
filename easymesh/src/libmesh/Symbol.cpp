@@ -4,6 +4,9 @@
 #include "Sprite.h"
 #include "ShapeFactory.h"
 
+#include <ee/Image.h>
+#include <ee/ShaderMgr.h>
+
 namespace emesh
 {
 
@@ -114,7 +117,7 @@ void Symbol::CreateShape()
 
 void Symbol::LoadResources()
 {
-	FileIO::load(m_filepath.c_str(), this);
+	FileIO::Load(m_filepath.c_str(), this);
 	InitBounding();
 }
 

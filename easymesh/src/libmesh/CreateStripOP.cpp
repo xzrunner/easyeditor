@@ -3,6 +3,10 @@
 #include "EditShape.h"
 #include "Symbol.h"
 
+#include <ee/panel_msg.h>
+#include <ee/Matrix.h>
+#include <ee/Image.h>
+
 namespace emesh
 {
 

@@ -1,7 +1,10 @@
 #ifndef _EASYMESH_STAGE_PANEL_H_
 #define _EASYMESH_STAGE_PANEL_H_
 
-
+#include <ee/EditPanel.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/StageDropTarget.h>
+#include <ee/Sprite.h>
 
 namespace emesh
 {

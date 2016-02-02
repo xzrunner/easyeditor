@@ -6,11 +6,13 @@
 #include "ShapeFactory.h"
 #include "EditShape.h"
 
+#include <ee/shape_msg.h>
+
 namespace emesh
 {
 
-CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
-					   StagePanel* stage)
+CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const std::string& name,
+							   StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {

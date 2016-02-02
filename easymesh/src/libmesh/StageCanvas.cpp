@@ -2,6 +2,10 @@
 #include "StagePanel.h"
 #include "Sprite.h"
 
+#include <ee/SpriteRenderer.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/DrawShapesVisitor.h>
+
 namespace emesh
 {
 

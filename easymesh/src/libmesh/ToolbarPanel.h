@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_TOOLBAR_PANEL_H_
 #define _EASYMESH_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
 
 namespace emesh
 {

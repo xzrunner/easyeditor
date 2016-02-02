@@ -1,7 +1,8 @@
 #ifndef _EASYMESH_CREATE_STRIP_OP_H_
 #define _EASYMESH_CREATE_STRIP_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
+#include <ee/Vector.h>
 
 namespace emesh
 {

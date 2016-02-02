@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_EDIT_UV_OP_H_
 #define _EASYMESH_EDIT_UV_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace emesh
 {

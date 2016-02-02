@@ -6,6 +6,9 @@
 #include "FileIO.h"
 #include "Shape.h"
 
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
+
 #include <wx/splitter.h>
 
 namespace emesh
@@ -64,7 +67,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	if (val == wxID_YES)
 	{
 		const std::string& filepath = symbol.GetFilepath();
-		FileIO::store(symbol.GetFilepath().c_str(), &symbol);
+		FileIO::Store(symbol.GetFilepath().c_str(), &symbol);
 		symbol.RefreshThumbnail(filepath);
 
 		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);

@@ -1,9 +1,10 @@
 #ifndef _EASYMESH_SPRITE_H_
 #define _EASYMESH_SPRITE_H_
 
-
-
 #include "Symbol.h"
+
+#include <ee/Sprite.h>
+#include <ee/Vector.h>
 
 namespace emesh
 {

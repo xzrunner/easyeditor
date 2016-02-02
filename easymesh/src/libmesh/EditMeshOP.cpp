@@ -3,6 +3,12 @@
 #include "Triangle.h"
 #include "Shape.h"
 
+#include <ee/Math2D.h>
+#include <ee/panel_msg.h>
+#include <ee/Matrix.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/FetchAllVisitor.h>
+
 namespace emesh
 {
 

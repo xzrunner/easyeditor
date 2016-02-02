@@ -2,6 +2,9 @@
 #include "FileIO.h"
 #include "Shape.h"
 
+#include <ee/BBFactory.h>
+#include <ee/BoundingBox.h>
+
 namespace emesh
 {
 
@@ -51,9 +54,9 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	Sprite::Load(val);
-	m_speed.x = val["speed"]["x"].asDouble();
-	m_speed.y = val["speed"]["y"].asDouble();
+	ee::Sprite::Load(val);
+	m_speed.x = static_cast<float>(val["speed"]["x"].asDouble());
+	m_speed.y = static_cast<float>(val["speed"]["y"].asDouble());
 
 // 	// ºÊ»›¿œ ˝æ›
 // 	if (!val["left nodes"].isNull()) {
@@ -63,7 +66,7 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	Sprite::Store(val);
+	ee::Sprite::Store(val);
 	val["speed"]["x"] = m_speed.x;
 	val["speed"]["y"] = m_speed.y;
 

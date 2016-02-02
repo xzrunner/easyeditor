@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_EDIT_MESH_CMPT_H_
 #define _EASYMESH_EDIT_MESH_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace emesh
 {
@@ -10,7 +10,7 @@ class StagePanel;
 class EditMeshCMPT : public ee::EditCMPT
 {
 public:
-	EditMeshCMPT(wxWindow* parent, const wxString& name,
+	EditMeshCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
 protected:

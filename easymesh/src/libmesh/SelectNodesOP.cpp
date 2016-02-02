@@ -2,6 +2,10 @@
 #include "StagePanel.h"
 #include "Mesh.h"
 
+#include <ee/panel_msg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace emesh
 {
 

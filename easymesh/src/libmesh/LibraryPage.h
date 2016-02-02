@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_LIBRARY_PAGE_H_
 #define _EASYMESH_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace emesh
 {

@@ -3,6 +3,9 @@
 #include "Symbol.h"
 #include "Shape.h"
 
+#include <ee/Matrix.h>
+#include <ee/Image.h>
+
 namespace emesh
 {
 

@@ -3,8 +3,9 @@
 #include "config.h"
 
 #include <ee/JsonSerializer.h>
+#include <ee/Triangulation.h>
 
-//#include <easyshape.h>
+#include <easyshape.h>
 
 #include <assert.h>
 

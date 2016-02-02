@@ -3,6 +3,8 @@
 
 #include "Node.h"
 
+#include <ee/DrawRectangleOP.h>
+
 namespace emesh
 {
 

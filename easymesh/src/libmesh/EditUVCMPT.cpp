@@ -3,13 +3,15 @@
 #include "EditUVOP.h"
 #include "EditShape.h"
 
+#include <ee/panel_msg.h>
+
 namespace emesh
 {
 
 static const float SPEED_X = 0;
 static const float SPEED_Y = -0.05f;
 
-EditUVCMPT::EditUVCMPT(wxWindow* parent, const wxString& name, 
+EditUVCMPT::EditUVCMPT(wxWindow* parent, const std::string& name, 
 					   StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)

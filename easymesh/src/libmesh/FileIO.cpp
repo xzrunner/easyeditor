@@ -3,10 +3,14 @@
 #include "Strip.h"
 #include "Mesh.h"
 
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace emesh
 {
 
-void FileIO::store(const char* filepath, const Symbol* symbol)
+void FileIO::Store(const char* filepath, const Symbol* symbol)
 {
 	Json::Value value;
 
@@ -19,8 +23,8 @@ void FileIO::store(const char* filepath, const Symbol* symbol)
 		return;
 	}
 
-	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	value["image"] = ee::FileHelper::GetRelativePath(dir, symbol->GetImagePath()).ToStdString();
+	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	value["image"] = ee::FileHelper::GetRelativePath(dir, symbol->GetImagePath());
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -30,7 +34,7 @@ void FileIO::store(const char* filepath, const Symbol* symbol)
 	fout.close();
 }
 
-void FileIO::load(const char* filepath, Symbol* symbol)
+void FileIO::Load(const char* filepath, Symbol* symbol)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -42,7 +46,7 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 
 	if (!value["image"].isNull())
 	{
-		wxString dir = ee::FileHelper::GetFileDir(filepath);
+		std::string dir = ee::FileHelper::GetFileDir(filepath);
 		std::string path = ee::FileHelper::GetAbsolutePath(dir, value["image"].asString());
 		// todo Release symbol
 		//symbol = ee::SymbolMgr::Instance()->fetchSymbol(path);

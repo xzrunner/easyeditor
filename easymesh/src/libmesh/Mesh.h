@@ -6,7 +6,7 @@
 #include <ee/Rect.h>
 #include <ee/Vector.h>
 
-namespace libshape { class ChainShape; }
+namespace eshape { class ChainShape; }
 
 namespace emesh
 {

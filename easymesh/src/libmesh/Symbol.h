@@ -1,7 +1,10 @@
 #ifndef _EASYMESH_SYMBOL_H_
 #define _EASYMESH_SYMBOL_H_
 
+#include <ee/Symbol.h>
+#include <ee/Rect.h>
 
+namespace ee { class Image; }
 
 namespace emesh
 {

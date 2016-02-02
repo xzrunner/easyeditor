@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_CREATE_MESH_CMPT_H_
 #define _EASYMESH_CREATE_MESH_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace emesh
 {
@@ -10,7 +10,7 @@ class StagePanel;
 class CreateMeshCMPT : public ee::EditCMPT
 {
 public:
-	CreateMeshCMPT(wxWindow* parent, const wxString& name,
+	CreateMeshCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 	virtual ~CreateMeshCMPT();
 

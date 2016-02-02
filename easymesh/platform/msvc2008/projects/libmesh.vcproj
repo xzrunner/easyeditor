@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libmesh"
+	Name="5.libmesh"
 	ProjectGUID="{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}"
 	RootNamespace="libmesh"
 	Keyword="Win32Proj"

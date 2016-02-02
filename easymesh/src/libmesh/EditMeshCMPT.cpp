@@ -3,10 +3,13 @@
 #include "StagePanel.h"
 #include "EditShape.h"
 
+#include <ee/DrawRectangleOP.h>
+#include <ee/panel_msg.h>
+
 namespace emesh
 {
 
-EditMeshCMPT::EditMeshCMPT(wxWindow* parent, const wxString& name,
+EditMeshCMPT::EditMeshCMPT(wxWindow* parent, const std::string& name,
 						   StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)

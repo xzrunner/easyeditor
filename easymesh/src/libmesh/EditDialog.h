@@ -1,7 +1,11 @@
 #ifndef _EASYMESH_EDIT_DIALOG_H_
 #define _EASYMESH_EDIT_DIALOG_H_
 
+#include <wx/dialog.h>
 
+namespace ee { class EditPanel; }
+
+class wxGLContext;
 
 namespace emesh
 {

@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "Shape.h"
 
+#include <ee/Matrix.h>
+
 namespace emesh
 {
 
