@@ -5,6 +5,8 @@
 
 #include <easyshape.h>
 
+#include <ee/SelectShapesOP.h>
+
 namespace etexture
 {
 

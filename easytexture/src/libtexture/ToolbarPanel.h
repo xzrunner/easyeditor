@@ -1,7 +1,7 @@
 #ifndef _EASYTEXTURE_TOOLBAR_PANEL_H_
 #define _EASYTEXTURE_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
 
 namespace etexture
 {

@@ -2,11 +2,17 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace etexture
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Texture"))
+	: ee::LibraryPage(parent, "Texture")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);

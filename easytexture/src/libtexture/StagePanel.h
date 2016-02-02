@@ -1,7 +1,11 @@
 #ifndef _EASYTEXTURE_STAGE_PANEL_H_
 #define _EASYTEXTURE_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+#include <ee/ShapesPanelImpl.h>
 
+class wxGLContext;
 
 namespace etexture
 {

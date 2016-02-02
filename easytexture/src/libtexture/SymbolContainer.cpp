@@ -1,6 +1,9 @@
 #include "SymbolContainer.h"
 #include "Symbol.h"
 
+#include <ee/ObjectVector.h>
+#include <ee/Shape.h>
+
 namespace etexture
 {
 

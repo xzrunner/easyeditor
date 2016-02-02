@@ -1,6 +1,10 @@
 #ifndef _EASYTEXTURE_STAGE_CANVAS_H_
 #define _EASYTEXTURE_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+
+namespace ee { class Sprite; class MultiSpritesImpl; }
+
 namespace etexture
 {
 

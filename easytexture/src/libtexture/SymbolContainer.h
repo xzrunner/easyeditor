@@ -1,7 +1,7 @@
 #ifndef _EASYTEXTURE_SYMBOL_CONTAINER_H_
 #define _EASYTEXTURE_SYMBOL_CONTAINER_H_
 
-
+#include <ee/DataContainer.h>
 
 namespace etexture
 {

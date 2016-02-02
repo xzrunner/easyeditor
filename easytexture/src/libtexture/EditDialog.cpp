@@ -6,6 +6,13 @@
 #include "ToolbarPanel.h"
 #include "FileSaver.h"
 
+#include <ee/panel_msg.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Camera.h>
+
 #include <wx/splitter.h>
 
 namespace etexture

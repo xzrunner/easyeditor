@@ -2,6 +2,9 @@
 
 #include <easyshape.h>
 
+#include <ee/ShaderMgr.h>
+#include <ee/FileHelper.h>
+
 namespace etexture
 {
 

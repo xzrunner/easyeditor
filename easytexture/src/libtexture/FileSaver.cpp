@@ -1,8 +1,10 @@
 #include "FileSaver.h"
 #include "Symbol.h"
 
-
 #include <easyshape.h>
+
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
 
 namespace etexture
 {

@@ -1,5 +1,7 @@
 #include "LibraryPanel.h"
 
+#include <ee/LibraryImagePage.h>
+
 #include <wx/notebook.h>
 
 namespace etexture

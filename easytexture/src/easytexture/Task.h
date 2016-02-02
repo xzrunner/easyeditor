@@ -1,8 +1,11 @@
 #ifndef _EASYTEXTURE_TASK_H_
 #define _EASYTEXTURE_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; class ToolbarPanel; }
 
 namespace etexture
 {

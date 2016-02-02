@@ -1,7 +1,11 @@
 #ifndef _EASYTEXTURE_SYMBOL_H_
 #define _EASYTEXTURE_SYMBOL_H_
 
+#include <ee/Symbol.h>
 
+#include <vector>
+
+namespace ee { class Shape; }
 
 namespace etexture
 {

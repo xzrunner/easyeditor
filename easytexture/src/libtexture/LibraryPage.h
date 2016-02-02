@@ -1,7 +1,7 @@
 #ifndef _EASYTEXTURE_LIBRARY_PAGE_H_
 #define _EASYTEXTURE_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace etexture
 {

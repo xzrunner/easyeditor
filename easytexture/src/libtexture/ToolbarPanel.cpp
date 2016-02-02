@@ -9,7 +9,7 @@ namespace etexture
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 {
-	AddChild(new eshape::DrawPolygonCMPT(this, wxT("polygon"), stage, stage->GetStageImpl(), stage, NULL));
+	AddChild(new eshape::DrawPolygonCMPT(this, "polygon", stage, stage->GetStageImpl(), stage, NULL));
 	SetSizer(InitLayout());	
 }
 

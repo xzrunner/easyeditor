@@ -2,6 +2,12 @@
 
 #include <easytexture.h>
 
+#include <ee/Config.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/SettingData.h>
+
 namespace etexture
 {
 
