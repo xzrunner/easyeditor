@@ -2,6 +2,10 @@
 #include "StagePanel.h"
 #include "Sprite.h"
 
+#include <ee/StringHelper.h>
+#include <ee/Config.h>
+#include <ee/RGBColorSettingDlg.h>
+
 namespace etext
 {
 

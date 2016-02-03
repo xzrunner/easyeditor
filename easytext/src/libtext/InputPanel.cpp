@@ -1,6 +1,10 @@
 #include "InputPanel.h"
 #include "Sprite.h"
 
+#include <ee/panel_msg.h>
+
+#include <wx/wx.h>
+
 namespace etext
 {
 

@@ -1,7 +1,10 @@
 #ifndef _EASYTEXT_STAGE_PANEL_H_
 #define _EASYTEXT_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
 
+class wxGLContext;
 
 namespace etext
 {

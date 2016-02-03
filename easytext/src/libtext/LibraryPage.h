@@ -1,7 +1,7 @@
 #ifndef _EASYTEXT_LIBRARY_PAGE_H_
 #define _EASYTEXT_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace etext
 {

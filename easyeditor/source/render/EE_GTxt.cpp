@@ -10,6 +10,7 @@
 #include "SpriteRenderer.h"
 #include "EE_DTex.h"
 #include "Config.h"
+#include "StringHelper.h"
 
 #include <gtxt.h>
 
@@ -185,37 +186,17 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	SpriteRenderer::Instance()->Draw(sym, *mt, Vector(x, y));
 }
 
-//void GTxt::Draw(const Sprite* spr, const Matrix& mt,
-//				const Colorf& mul, const Colorf& add) const
-//{
-//	if (spr->GetText().empty()) {
-//		return;
-//	}
-//
-//	gtxt_label_style style;
-//
-//	spr->GetSize(style.width, style.height);
-//	spr->GetAlign(style.align_h, style.align_v);
-//	spr->GetSpace(style.space_h, style.space_v);
-//
-//	style.gs.font = spr->GetFont();
-//	style.gs.font_size = spr->GetFontSize();
-//	style.gs.font_color.integer = color2int(spr->GetFontColor(), PT_RGBA);
-//
-//	style.gs.edge = spr->GetEdge();
-//	style.gs.edge_size = spr->GetEdgeSize();
-//	style.gs.edge_color.integer = color2int(spr->GetEdgeColor(), PT_RGBA);
-//
-//	render_params rp;
-//	rp.mt = &mt;
-//	rp.mul = &mul;
-//	rp.add = &add;
-//
-//	std::string utf8 = StringHelper::ToUtf8(spr->GetText());
-//	gtxt_label_draw_richtext(utf8.c_str(), &style, spr->GetTime(), render, (void*)&rp);
-//
-//	spr->UpdateTime();
-//}
+void GTxt::Draw(const gtxt_label_style& style, const Matrix& mt, const Colorf& mul, 
+				const Colorf& add, const std::string& text, int time) const
+{
+	render_params rp;
+	rp.mt = &mt;
+	rp.mul = &mul;
+	rp.add = &add;
+
+	std::string utf8 = StringHelper::ToUtf8(text);
+	gtxt_label_draw_richtext(utf8.c_str(), &style, time, render, (void*)&rp);
+}
 
 void GTxt::Draw(const Matrix& mt, const std::string& str) const
 {

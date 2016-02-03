@@ -2,6 +2,13 @@
 #include "Sprite.h"
 #include "ColorConfig.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/EditPanel.h>
+#include <ee/panel_msg.h>
+#include <ee/Config.h>
+#include <ee/SysColorProperty.h>
+#include <ee/PropertyColorMonitor.h>
+
 #include <wx/propgrid/advprops.h>
 
 namespace etext
@@ -26,7 +33,7 @@ PropertySetting::~PropertySetting()
 	ColorConfig::Instance()->StoreToFile();
 }
 
-void PropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void PropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 

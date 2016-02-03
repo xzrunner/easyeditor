@@ -1,6 +1,15 @@
 #include "Symbol.h"
 #include "Sprite.h"
-#include "GTxt.h"
+
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/EE_GTxt.h>
+#include <ee/trans_color.h>
+
+#include <gtxt.h>
+
+#include <fstream>
 
 namespace etext
 {
@@ -37,9 +46,9 @@ ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const
 		const Sprite* font = static_cast<const Sprite*>(sprite);
 		int w, h;
 		font->GetSize(w, h);
-		return ee::Rect(w, h);
+		return ee::Rect(static_cast<float>(w), static_cast<float>(h));
 	} else {
-		return ee::Rect(m_width, m_height);
+		return ee::Rect(static_cast<float>(m_width), static_cast<float>(m_height));
 	}
 }
 
@@ -61,11 +70,11 @@ void Symbol::LoadResources()
 	m_font_color = value["font_color"].asString();
 
 	m_edge = value["edge"].asBool();
-	m_edge_size = value["edge_size"].asDouble();
+	m_edge_size = static_cast<float>(value["edge_size"].asDouble());
 	m_edge_color = value["edge_color"].asString();
 
-	m_space_hori = value["space_hori"].asDouble();
-	m_space_vert = value["space_vert"].asDouble();
+	m_space_hori = static_cast<float>(value["space_hori"].asDouble());
+	m_space_vert = static_cast<float>(value["space_vert"].asDouble());
 
 	m_align_hori = (HoriAlignType)(value["align_hori"].asInt());
 	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
@@ -92,7 +101,26 @@ void Symbol::DrawText(const ee::Sprite* sprite, const ee::Matrix& mt,
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		GTxt::Instance()->Draw(font, mt, mul, add);
+		if (font->GetText().empty()) {
+			return;
+		}
+
+		gtxt_label_style style;
+
+		font->GetSize(style.width, style.height);
+		font->GetAlign(style.align_h, style.align_v);
+		font->GetSpace(style.space_h, style.space_v);
+
+		style.gs.font = font->GetFont();
+		style.gs.font_size = font->GetFontSize();
+		style.gs.font_color.integer = color2int(font->GetFontColor(), ee::PT_RGBA);
+
+		style.gs.edge = font->GetEdge();
+		style.gs.edge_size = font->GetEdgeSize();
+		style.gs.edge_color.integer = color2int(font->GetEdgeColor(), ee::PT_RGBA);
+
+		ee::GTxt::Instance()->Draw(style, mt, mul, add, font->GetText(), font->GetTime());
+		font->UpdateTime();
 	}
 }
 

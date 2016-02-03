@@ -1,7 +1,11 @@
 #ifndef _EASYTEXT_EDIT_DIALOG_H_
 #define _EASYTEXT_EDIT_DIALOG_H_
 
+#include <wx/dialog.h>
 
+class wxGLContext;
+
+namespace ee { class MultiSpritesImpl; class LibraryPanel; }
 
 namespace etext
 {

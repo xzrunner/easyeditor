@@ -1,7 +1,12 @@
 #ifndef _EASYTEXT_INPUT_PANEL_H_
 #define _EASYTEXT_INPUT_PANEL_H_
 
+#include <wx/panel.h>
 
+namespace ee { class EditPanelImpl; }
+
+class wxTextCtrl;
+class wxButton;
 
 namespace etext
 {

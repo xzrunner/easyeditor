@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libtext"
+	Name="5.libtext"
 	ProjectGUID="{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
 	RootNamespace="libtext"
 	Keyword="Win32Proj"

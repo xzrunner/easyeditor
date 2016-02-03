@@ -1,7 +1,7 @@
 #ifndef _EASYTEXT_TOOLBAR_PANEL_H_
 #define _EASYTEXT_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
 
 namespace etext
 {

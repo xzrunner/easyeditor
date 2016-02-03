@@ -2,6 +2,9 @@
 #include "config.h"
 #include "Symbol.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+
 namespace etext
 {
 

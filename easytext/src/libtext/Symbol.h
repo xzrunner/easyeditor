@@ -1,9 +1,10 @@
 #ifndef _EASYTEXT_SYMBOL_H_
 #define _EASYTEXT_SYMBOL_H_
 
-
-
 #include "typedef.h"
+
+#include <ee/Symbol.h>
+#include <ee/ShapeStyle.h>
 
 namespace etext
 {

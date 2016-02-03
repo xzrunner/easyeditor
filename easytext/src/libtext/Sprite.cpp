@@ -1,6 +1,9 @@
 #include "Sprite.h"
 #include "PropertySetting.h"
 
+#include <ee/trans_color.h>
+#include <ee/SpriteFactory.h>
+
 namespace etext
 {
 
@@ -28,7 +31,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
 	m_symbol->Retain();
@@ -111,7 +114,7 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	Sprite::Load(val);
+	ee::Sprite::Load(val);
 
 	const Json::Value& text_val = val["text"];
 
@@ -140,7 +143,7 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	Sprite::Store(val);
+	ee::Sprite::Store(val);
 
 	Json::Value text_val;
 
