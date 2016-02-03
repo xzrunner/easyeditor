@@ -235,8 +235,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easytexpacker", "..\easytex
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtexpacker", "..\easytexpacker\platform\msvc2008\projects\libtexpacker.vcproj", "{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "librender", "..\easyrender\platform\msvc2008\projects\easyrender.vcproj", "{A0E879BC-7449-41DD-88DA-07909827D497}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocpackage", "..\coceditor\platform\msvc2008\projects\cocpackage.vcproj", "{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA} = {B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}
@@ -565,7 +563,7 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.gtxt", "..\gtxt\platform\
 		{17BC84E5-4CEC-4E1E-B09D-858B89643592} = {17BC84E5-4CEC-4E1E-B09D-858B89643592}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtext", "..\easytext\platform\msvc2008\projects\libtext.vcproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5.libtext", "..\easytext\platform\msvc2008\projects\libtext.vcproj", "{FC9B43D6-8D2B-4D57-A976-9379F87A366C}"
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.sidx", "..\sidx\platform\msvc2008\projects\sidx.icproj", "{594D7A78-858A-4B09-AE88-68C817B6EF61}"
 EndProject
@@ -706,10 +704,6 @@ Global
 		{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}.Debug|Win32.Build.0 = Debug|Win32
 		{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}.Release|Win32.ActiveCfg = Release|Win32
 		{E66ECF2B-05F4-42CC-91B2-B6F8604CA1A8}.Release|Win32.Build.0 = Release|Win32
-		{A0E879BC-7449-41DD-88DA-07909827D497}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A0E879BC-7449-41DD-88DA-07909827D497}.Debug|Win32.Build.0 = Debug|Win32
-		{A0E879BC-7449-41DD-88DA-07909827D497}.Release|Win32.ActiveCfg = Release|Win32
-		{A0E879BC-7449-41DD-88DA-07909827D497}.Release|Win32.Build.0 = Release|Win32
 		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Debug|Win32.ActiveCfg = Debug|Win32
 		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Debug|Win32.Build.0 = Debug|Win32
 		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Release|Win32.ActiveCfg = Release|Win32
