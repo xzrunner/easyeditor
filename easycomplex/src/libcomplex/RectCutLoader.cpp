@@ -1,15 +1,28 @@
 #include "RectCutLoader.h"
 
+#include <ee/Symbol.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Sprite.h>
+#include <ee/sprite_msg.h>
+#include <ee/FileHelper.h>
+#include <ee/ImageClip.h>
+#include <ee/ImageData.h>
+#include <ee/Image.h>
+#include <ee/ImageSymbol.h>
+#include <ee/ImageSprite.h>
+#include <ee/Math2D.h>
 
 #include <easyimage.h>
 
 #include <json/json.h>
+
 #include <fstream>
 
 namespace ecomplex
 {
 
-void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_name)
+void RectCutLoader::LoadOnlyJson(const std::string& pack_file, const std::string& img_name)
 {
 	std::vector<Picture> pictures;
 	LoadJsonFile(pack_file, img_name, pictures);
@@ -17,7 +30,7 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
 		const Picture& s = pictures[i];
-		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath.ToStdString());
+		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(s.filepath);
 		ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 
 		ee::Vector pos;
@@ -34,7 +47,7 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 	}
 }
 
-void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& img_name)
+void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::string& img_name)
 {
 	std::vector<Picture> pictures;
 	LoadJsonFile(pack_file, img_name, pictures);
@@ -42,7 +55,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	std::string dir = ee::FileHelper::GetFileDir(pack_file);
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(dir + "\\pack.png");
 
-	eimage::ImageClip clip(*img);
+	ee::ImageClip clip(*img);
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{		
 		const Picture& pic = pictures[i];
@@ -77,7 +90,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	img->Release();
 }
 
-//void RectCutLoader::LoadToDtex(const wxString& pack_file, const wxString& img_name)
+//void RectCutLoader::LoadToDtex(const std::string& pack_file, const std::string& img_name)
 //{
 //	std::vector<Picture> pictures;
 ////	LoadJsonFile(pack_file, img_name, pictures);
@@ -86,7 +99,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 //	std::string dir = ee::FileHelper::getFileDir(pack_file);
 //	ee::Image* img = ee::ImageMgr::Instance()->GetItem(dir + "\\pack.png");
 //
-////	eimage::ImageClip clip(*img_data);
+////	ee::ImageClip clip(*img_data);
 //	ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
 //	for (int i = 0, n = pictures.size(); i < n; ++i)
 //	{
@@ -103,13 +116,13 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 //	img->Release();
 //}
 
-void RectCutLoader::LoadJsonFile(const wxString& pack_file, const wxString& img_name,
+void RectCutLoader::LoadJsonFile(const std::string& pack_file, const std::string& img_name,
 								 std::vector<Picture>& pictures)
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(pack_file.mb_str());
+	std::ifstream fin(pack_file.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -117,8 +130,8 @@ void RectCutLoader::LoadJsonFile(const wxString& pack_file, const wxString& img_
 	int i = 0;
 	Json::Value val = value["parts"][i++];
 	while (!val.isNull()) {
-		wxString path = val["filepath"].asString();
-		if (path.Contains(img_name)) {
+		std::string path = val["filepath"].asString();
+		if (path.find(img_name) != std::string::npos) {
 			Picture s;
 
 			s.src.x = val["src"]["x"].asInt();
@@ -139,12 +152,12 @@ void RectCutLoader::LoadJsonFile(const wxString& pack_file, const wxString& img_
 	}
 }
 
-void RectCutLoader::LoadRRPFile(const wxString& pack_file, int img_id,
+void RectCutLoader::LoadRRPFile(const std::string& pack_file, int img_id,
 								std::vector<Picture>& pictures)
 {
 	pictures.clear();
 
-	std::ifstream fin(pack_file.mb_str(), std::ios::binary);
+	std::ifstream fin(pack_file.c_str(), std::ios::binary);
 
 	int pic_sz = 0;
 	fin.read(reinterpret_cast<char*>(&pic_sz), sizeof(int32_t));

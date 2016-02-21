@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_PROPERTY_SETTING_PANEL_H_
 #define _EASYANIM_PROPERTY_SETTING_PANEL_H_
 
-
+#include <ee/PropertySettingPanel.h>
 
 namespace eanim
 {

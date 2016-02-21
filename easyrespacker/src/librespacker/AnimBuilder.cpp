@@ -2,9 +2,11 @@
 #include "PackAnimation.h"
 #include "PackNodeFactory.h"
 
+#include <ee/Visitor.h>
+
 #include <easyanim.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 AnimBuilder::AnimBuilder(ExportNameSet& export_set)
@@ -14,7 +16,7 @@ AnimBuilder::AnimBuilder(ExportNameSet& export_set)
 
 AnimBuilder::~AnimBuilder()
 {
-	std::map<const libanim::Symbol*, const PackAnimation*>::iterator
+	std::map<const eanim::Symbol*, const PackAnimation*>::iterator
 		itr = m_map_data.begin();
 	for ( ; itr != m_map_data.end(); ++itr) {
 		delete itr->second;
@@ -23,7 +25,7 @@ AnimBuilder::~AnimBuilder()
 
 void AnimBuilder::Traverse(ee::Visitor& visitor) const
 {
- 	std::map<const libanim::Symbol*, const PackAnimation*>::const_iterator 
+ 	std::map<const eanim::Symbol*, const PackAnimation*>::const_iterator 
  		itr = m_map_data.begin();
  	for ( ; itr != m_map_data.end(); ++itr) {
 		bool has_next;
@@ -34,9 +36,9 @@ void AnimBuilder::Traverse(ee::Visitor& visitor) const
  	}
 }
 
-const IPackNode* AnimBuilder::Create(const libanim::Symbol* symbol)
+const IPackNode* AnimBuilder::Create(const eanim::Symbol* symbol)
 {
-	std::map<const libanim::Symbol*, const PackAnimation*>::iterator 
+	std::map<const eanim::Symbol*, const PackAnimation*>::iterator 
 		itr = m_map_data.find(symbol);
 	if (itr != m_map_data.end()) {
 		return itr->second;
@@ -48,7 +50,7 @@ const IPackNode* AnimBuilder::Create(const libanim::Symbol* symbol)
 	return node;
 }
 
-void AnimBuilder::Load(const libanim::Symbol* symbol, PackAnimation* anim)
+void AnimBuilder::Load(const eanim::Symbol* symbol, PackAnimation* anim)
 {
 	m_export_set.LoadExport(symbol, anim);
 
@@ -57,7 +59,7 @@ void AnimBuilder::Load(const libanim::Symbol* symbol, PackAnimation* anim)
 		PackAnimation::Frame frame;
 
 		std::vector<ee::Sprite*> sprites;
-		libanim::Utility::GetCurrSprites(symbol, i, sprites);
+		eanim::Utility::GetCurrSprites(symbol, i, sprites);
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			anim->CreateFramePart(sprites[i], frame);
 		}

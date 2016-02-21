@@ -1,8 +1,11 @@
 #include "AddFrameSprite.h"
 #include "check_params.h"
 
-#include <wx/wx.h>
+#include <ee/FileHelper.h>
+#include <ee/NullSymbol.h>
+#include <ee/NullSprite.h>
 
+#include <fstream>
 
 namespace edb
 {
@@ -39,24 +42,24 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxString filename = files[i];
+		std::string filename = files[i].ToStdString();
 		if (!ee::FileType::IsType(filename, ee::FileType::e_anim)) {
 			continue;
 		}
 
-		wxString json_file = filename;
+		std::string json_file = filename;
 
 		ee::NullSymbol symbol("");
 		ee::NullSprite sprite(&symbol);
 		Json::Value actor_val;
 		sprite.Store(actor_val);
-		wxString dir = ee::FileHelper::GetFileDir(json_file);
-		actor_val["filepath"] = ee::FileHelper::GetRelativePath(dir, sprite_path).ToStdString();
+		std::string dir = ee::FileHelper::GetFileDir(json_file);
+		actor_val["filepath"] = ee::FileHelper::GetRelativePath(dir, sprite_path);
 
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(files[i].fn_str());
+		std::ifstream fin(filename.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -83,7 +86,7 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 
  		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
- 		std::ofstream fout(json_file.fn_str());
+ 		std::ofstream fout(json_file.c_str());
 		std::locale::global(std::locale("C"));
  		writer.write(fout, value);
  		fout.close();

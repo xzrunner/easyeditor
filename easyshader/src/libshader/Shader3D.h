@@ -1,9 +1,11 @@
-#ifndef _ESHADER_SHADER3D_H_
-#define _ESHADER_SHADER3D_H_
+#ifndef _EASYSHADER_SHADER3D_H_
+#define _EASYSHADER_SHADER3D_H_
 
 #include "Shader.h"
 
 #include <easy3d.h>
+
+#include <ee/Matrix3D.h>
 
 namespace eshader 
 {
@@ -24,7 +26,7 @@ private:
 	protected:
 		virtual void LoadShader();
 
-		virtual void SetNormalMatrix(const mat3& noraml_mat);
+		virtual void SetNormalMatrix(const ee::mat3& noraml_mat);
 
 	private:
 		GLuint m_normal_matrix;
@@ -35,4 +37,4 @@ private:
 
 }
 
-#endif // _ESHADER_SHADER3D_H_
+#endif // _EASYSHADER_SHADER3D_H_

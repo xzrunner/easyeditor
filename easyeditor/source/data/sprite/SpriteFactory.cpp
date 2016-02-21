@@ -28,8 +28,8 @@ Sprite* SpriteFactory::Create(Symbol* symbol)
 		// todo
 // 		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(symbol))
 // 			sprite = new ecomplex::Sprite(s);
-// 		else if (libanim::Symbol* s = dynamic_cast<libanim::Symbol*>(symbol))
-// 			sprite = new libanim::Sprite(s);
+// 		else if (eanim::Symbol* s = dynamic_cast<eanim::Symbol*>(symbol))
+// 			sprite = new eanim::Sprite(s);
 	}
 	else
 	{

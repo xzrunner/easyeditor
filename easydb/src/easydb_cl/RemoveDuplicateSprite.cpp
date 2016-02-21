@@ -1,6 +1,11 @@
 #include "RemoveDuplicateSprite.h"
 #include "check_params.h"
 
+#include <ee/std_functor.h>
+
+#include <fstream>
+#include <algorithm>
+
 namespace edb
 {
 
@@ -96,7 +101,7 @@ void RemoveDuplicateSprite::RemoveDuplicate(const Json::Value& old_val, Json::Va
 		new_val[i] = removed[i]->json_val;
 	}
 
-	for_each(removed.begin(), removed.end(), DeletePointerFunctor<Sprite>());
+	for_each(removed.begin(), removed.end(), ee::DeletePointerFunctor<Sprite>());
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -1,12 +1,12 @@
 #include "LuaDataHelper.h"
 
 extern "C" {
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
+	#include <lua.h>
+	#include <lualib.h>
+	#include <lauxlib.h>
 };
 
-namespace librespacker
+namespace erespacker
 {
 
 std::string LuaDataHelper::GetStringField(lua_State* L, const char* name)

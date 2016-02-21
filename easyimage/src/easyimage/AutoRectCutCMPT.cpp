@@ -10,6 +10,7 @@
 #include <ee/Image.h>
 #include <ee/ImageClip.h>
 #include <ee/ImageSaver.h>
+#include <ee/StringHelper.h>
 
 namespace eimage
 {
@@ -108,8 +109,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	wxString msg;
-	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
+	std::string msg = ee::StringHelper::Format("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 }
 
@@ -124,8 +124,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	RegularRectCut cut(*img);
 	cut.AutoCut();
 
-	wxString msg;
-	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
+	std::string msg = ee::StringHelper::Format("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
 	std::string ori_path = ee::FileHelper::GetFilePathExceptExtension(img->GetFilepath());
@@ -136,9 +135,8 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 		const eimage::Rect& r = result[i];
 		const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
-		wxString out_path;
-		out_path.Printf("%s#%d#%d#%d#%d#", ori_path, r.x, r.y, r.w, r.h);
-		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), ee::ImageSaver::e_png);
+		std::string out_path = ee::StringHelper::Format("%s#%d#%d#%d#%d#", ori_path, r.x, r.y, r.w, r.h);
+		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path, ee::ImageSaver::e_png);
 		delete[] pixels;
 	}
 }

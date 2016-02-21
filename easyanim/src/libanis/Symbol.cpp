@@ -2,6 +2,12 @@
 
 #include "../libanim/Symbol.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+
+#include <fstream>
+#include <algorithm>
+
 namespace libanis
 {
 
@@ -51,7 +57,7 @@ void Symbol::LoadResources()
 	while (!temp_val.isNull()) {
 		std::string dirpath = temp_val["path"].asString();
 
-		libanim::Symbol* symbol = new libanim::Symbol();
+		eanim::Symbol* symbol = new eanim::Symbol();
 		symbol->SetFilepath(m_filepath);
 		Loader loader(dirpath);
 		symbol->LoadFromFile(loader);
@@ -66,7 +72,7 @@ void Symbol::LoadResources()
 
 void Symbol::Clear()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), ee::ReleaseObjectFunctor<libanim::Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), ee::ReleaseObjectFunctor<eanim::Symbol>());
 	m_symbols.clear();
 }
 

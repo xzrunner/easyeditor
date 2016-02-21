@@ -3,16 +3,22 @@
 #include "Utility.h"
 #include "LayersLoader.h"
 
+#include <ee/BoundingBox.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolSearcher.h>
+
 #include <easycomplex.h>
 
-namespace libanim
+#include <fstream>
+
+namespace eanim
 {
 
 Symbol::Symbol()
 	: m_index(0)
 {
 	static int id = 0;
-	m_name = libanim::FILE_TAG + wxVariant(id++);
+	m_name = eanim::FILE_TAG + wxVariant(id++);
 }
 
 Symbol::~Symbol()
@@ -121,7 +127,7 @@ void Symbol::LoadResources()
 		virtual std::string GetSymbolPath(const std::string& dir, 
 			const Json::Value& json_val) const
 		{
-			return ee::SymbolSearcher::GetSymbolPath(dir, json_val).ToStdString();
+			return ee::SymbolSearcher::GetSymbolPath(dir, json_val);
 		}
 	};
 

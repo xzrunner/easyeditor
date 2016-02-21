@@ -16,7 +16,7 @@ public:
 	LayersMgrCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd, 
 		EditPanelImpl* stage, MultiShapesImpl* shapes_impl);
 	LayersMgrCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd, 
-		EditPanelImpl* stage, MultiSpritesImpl* spritesImpl);
+		EditPanelImpl* stage, MultiSpritesImpl* sprites_impl);
 
 	LayersMgrWidget* getLayersMgr() { return m_layersMgr; }
 

@@ -1,6 +1,9 @@
 #include "PackLuaDescFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/StringHelper.h>
 
 #include <easytexpacker.h>
 
@@ -42,7 +45,7 @@ void PackLuaDescFile::Trigger(const std::string& json_dir, const std::string& tp
 	LoadJsonFiles(json_dir);
 	LoadTexPacker(tp_json, tp_dir);
 	
-	libcoco::epd::CocoPacker packer(m_symbols, m_tex_mgr);
+	ecoco::epd::CocoPacker packer(m_symbols, m_tex_mgr);
 	packer.Parser();
 	packer.Output(out_file.c_str());
 }
@@ -54,9 +57,7 @@ void PackLuaDescFile::LoadJsonFiles(const std::string& dir)
 
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
 			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
@@ -75,7 +76,7 @@ void PackLuaDescFile::LoadTexPacker(const std::string& tp_json,
 	while (true)
 	{
 		std::string path = tp_json + ee::StringHelper::ToString(i) + ".json";
-		if (wxFileName::FileExists(path)) {
+		if (ee::FileHelper::IsFileExist(path)) {
 			m_tex_mgr.Add(path, i-1);
 		} else {
 			break;

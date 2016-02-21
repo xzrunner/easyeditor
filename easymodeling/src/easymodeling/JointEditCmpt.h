@@ -1,56 +1,59 @@
+#ifndef _EASYMODELING_JOINT_EDIT_CMPT_H_
+#define _EASYMODELING_JOINT_EDIT_CMPT_H_
 
-#ifndef EMODELING_JOINT_EDIT_CMPT_H
-#define EMODELING_JOINT_EDIT_CMPT_H
+#include <ee/EditCMPT.h>
 
-
+namespace ee { class PropertySettingPanel; }
 
 namespace emodeling
 {
-	class StagePanel;
 
-	class JointEditCmpt : public ee::EditCMPT
+class StagePanel;
+
+class JointEditCmpt : public ee::EditCMPT
+{
+public:
+	JointEditCmpt(wxWindow* parent, const std::string& name,
+		StagePanel* editPanel, ee::PropertySettingPanel* property);
+
+	virtual void UpdateControlValue();
+
+protected:
+	virtual wxSizer* InitLayout();
+
+private:
+	void onCreateJoint(wxCommandEvent& event);
+
+	void onTypeChanged(wxCommandEvent& event);
+
+private:
+	class SelectWheelDialog : public wxDialog
 	{
 	public:
-		JointEditCmpt(wxWindow* parent, const wxString& name,
-			StagePanel* editPanel, ee::PropertySettingPanel* property);
+		SelectWheelDialog(wxWindow* parent, const std::string& title, 
+			const std::string& body0, const std::string& body1);
 
-		virtual void UpdateControlValue();
-
-	protected:
-		virtual wxSizer* InitLayout();
-
-	private:
-		void onCreateJoint(wxCommandEvent& event);
-
-		void onTypeChanged(wxCommandEvent& event);
+		int getChoice() const {
+			return m_wheelChoice->GetSelection();
+		}
 
 	private:
-		class SelectWheelDialog : public wxDialog
-		{
-		public:
-			SelectWheelDialog(wxWindow* parent, const wxString& title, 
-				const wxString& body0, const wxString& body1);
-
-			int getChoice() const {
-				return m_wheelChoice->GetSelection();
-			}
-
-		private:
-			void InitLayout(const wxString& body0, const wxString& body1);
-
-		private:
-			wxChoice* m_wheelChoice;
-
-		}; // SelectWheelDialog
+		void InitLayout(const std::string& body0, const std::string& body1);
 
 	private:
-		StagePanel* m_stage_panel;
+		wxChoice* m_wheelChoice;
 
-		wxChoice* m_typeChoice;
+	}; // SelectWheelDialog
 
-		wxButton* m_btnOK;
+private:
+	StagePanel* m_stage_panel;
 
-	}; // JointEditCmpt
+	wxChoice* m_typeChoice;
+
+	wxButton* m_btnOK;
+
+}; // JointEditCmpt
+
 }
 
-#endif // EMODELING_JOINT_EDIT_CMPT_H
+#endif // _EASYMODELING_JOINT_EDIT_CMPT_H_

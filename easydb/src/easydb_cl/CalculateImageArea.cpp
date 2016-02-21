@@ -1,8 +1,13 @@
 #include "CalculateImageArea.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Image.h>
+
 #include <glfw.h>
 #include <easyimage.h>
+
+#include <wx/arrstr.h>
 
 namespace edb
 {
@@ -40,10 +45,7 @@ void CalImageArea::Trigger(const std::string& dir)
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
-
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
 			ee::Image* img = ee::ImageMgr::Instance()->GetItem(filepath);

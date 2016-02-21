@@ -3,8 +3,6 @@
 
 #include "ICommand.h"
 
-#include <wx/wx.h>
-
 namespace edb
 {
 
@@ -26,7 +24,7 @@ public:
 private:
 	void AddNameFromFile(const std::string& dir) const;
 
-	void AddName(const wxString& filename) const;
+	void AddName(const std::string& filename) const;
 
 private:
 	bool m_do_complex;

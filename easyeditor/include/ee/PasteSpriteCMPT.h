@@ -12,7 +12,7 @@ class PasteSpriteCMPT : public EditCMPT
 {
 public:
 	PasteSpriteCMPT(wxWindow* parent, const std::string& name, wxWindow* stage_wnd, 
-		EditPanelImpl* stage, MultiSpritesImpl* spritesImpl);
+		EditPanelImpl* stage, MultiSpritesImpl* sprites_impl);
 
 	bool isHorMirror() const { return m_xMirror->IsChecked(); }
 	bool isVerMirror() const { return m_yMirror->IsChecked(); }

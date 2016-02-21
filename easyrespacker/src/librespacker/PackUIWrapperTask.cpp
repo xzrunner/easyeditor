@@ -2,9 +2,9 @@
 #include "PackUI.h"
 #include "pack_ui_cfg.h"
 
+#include <ee/FileHelper.h>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 PackUIWrapperTask::PackUIWrapperTask(const std::string& filepath, const Json::Value& value)
@@ -31,7 +31,7 @@ void PackUIWrapperTask::OnKnownPackID(const std::string& filepath, int id)
 void PackUIWrapperTask::Output(const std::string& dir, Json::Value& value) const
 {
 	Json::Value item_val;
-	item_val["filepath"] = ee::FileHelper::GetRelativePath(dir, m_filepath).ToStdString();
+	item_val["filepath"] = ee::FileHelper::GetRelativePath(dir, m_filepath);
 	item_val["wrapper id"] = m_id;
 	item_val["type"] = m_type;
 	item_val["clipbox"]["w"] = m_cb_w;

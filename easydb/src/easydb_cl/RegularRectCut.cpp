@@ -1,8 +1,20 @@
 #include "RegularRectCut.h"
 #include "check_params.h"
 
-#include <glfw.h>
+#include <ee/FileHelper.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/StringHelper.h>
+#include <ee/ImageSymbol.h>
+#include <ee/ImageClip.h>
+#include <ee/Image.h>
+#include <ee/ImageSaver.h>
+
 #include <easyimage.h>
+
+#include <glfw.h>
+
+#include <wx/arrstr.h>
 
 namespace edb
 {
@@ -41,9 +53,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
@@ -54,24 +64,21 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			eimage::RegularRectCut cut(*image);
 			cut.AutoCut();
 
-			wxString msg;
-			msg.Printf("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea());
-			std::cout << msg << std::endl;
+			std::cout << ee::StringHelper::Format("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea()) << std::endl;
 
-			wxString filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
+			std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 			filename = filename.substr(0, filename.find_last_of('.'));
-			filename.Replace("\\", "%");
-
+			ee::StringHelper::ReplaceAll(filename, "\\", "%");
+			
 			const std::vector<eimage::Rect>& result = cut.GetResult();
-			eimage::ImageClip img_cut(*image->GetImageData(), true);
+			ee::ImageClip img_cut(*image->GetImageData(), true);
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::Rect& r = result[i];
 				const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
-				wxString out_path;
-				out_path.Printf("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);
-				ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path.ToStdString(), ee::ImageSaver::e_png);
+				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);
+				ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path, ee::ImageSaver::e_png);
 				delete[] pixels;
 			}
 

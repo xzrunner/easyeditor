@@ -1,37 +1,40 @@
-
-#ifndef LIBMODELING_ROPE_JOINT_H
-#define LIBMODELING_ROPE_JOINT_H
+#ifndef _EASYMODELING_ROPE_JOINT_H_
+#define _EASYMODELING_ROPE_JOINT_H_
 
 #include "Joint.h"
 
-namespace libmodeling
+#include <ee/Vector.h>
+
+namespace emodeling
 {
-	class RopeJoint : public Joint
-	{
-	public:
-		RopeJoint(Body* b0, Body* b1);
 
-		virtual bool isContain(const ee::Vector& pos) const;
-		virtual bool isIntersect(const ee::Rect& rect) const;
+class RopeJoint : public Joint
+{
+public:
+	RopeJoint(Body* b0, Body* b1);
 
-		virtual void draw(DrawType type) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
 
-		ee::Vector getWorldAnchorA() const;
-		ee::Vector getWorldAnchorB() const;
+	virtual void Draw(DrawType type) const;
 
-		void setLocalAnchorA(const ee::Vector& world);
-		void setLocalAnchorB(const ee::Vector& world);
+	ee::Vector GetWorldAnchorA() const;
+	ee::Vector GetWorldAnchorB() const;
 
-	private:
-		void drawAnchor(const ee::Vector& pos, DrawType type) const;
+	void SetLocalAnchorA(const ee::Vector& world);
+	void SetLocalAnchorB(const ee::Vector& world);
 
-	public:
-		ee::Vector localAnchorA;
-		ee::Vector localAnchorB;
+private:
+	void DrawAnchor(const ee::Vector& pos, DrawType type) const;
 
-		float maxLength;
+public:
+	ee::Vector m_local_anchor_a;
+	ee::Vector m_local_anchor_b;
 
-	}; // RopeJoint
+	float m_max_length;
+
+}; // RopeJoint
+
 }
 
-#endif // LIBMODELING_ROPE_JOINT_H
+#endif // _EASYMODELING_ROPE_JOINT_H_

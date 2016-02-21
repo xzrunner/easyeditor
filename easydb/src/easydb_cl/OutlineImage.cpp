@@ -1,8 +1,16 @@
 #include "OutlineImage.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Image.h>
+#include <ee/JsonSerializer.h>
+#include <ee/Math2D.h>
 
 #include <easyimage.h>
+
+#include <wx/arrstr.h>
+
+#include <fstream>
 
 namespace edb
 {
@@ -38,9 +46,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
@@ -67,11 +73,11 @@ void OutlineImage::Trigger(const std::string& dir) const
 			}
 			ee::JsonSerializer::Store(vertices, value["normal"]);
 
-			wxString out_file = ee::FileHelper::GetFilenameAddTag(filepath, 
+			std::string out_file = ee::FileHelper::GetFilenameAddTag(filepath, 
 				eimage::OUTLINE_FILE_TAG, "json");
 			Json::StyledStreamWriter writer;
 			std::locale::global(std::locale(""));
-			std::ofstream fout(out_file.fn_str());
+			std::ofstream fout(out_file.c_str());
 			std::locale::global(std::locale("C"));	
 			writer.write(fout, value);
 			fout.close();	

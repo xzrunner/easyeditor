@@ -1,10 +1,10 @@
 #include "UniqueImage.h"
 #include "check_params.h"
-
-#include <wx/wx.h>
-
-
 #include "filetools.h"
+
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/Exception.h>
 
 namespace edb
 {
@@ -46,9 +46,7 @@ void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 	ee::FileHelper::FetchAllFiles(imgdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
 			std::string imgpath(filepath.c_str());
@@ -86,11 +84,9 @@ void UniqueImage::ProcessJsonFiles(const std::string& jsondir)
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
-			std::string filename = filepath.ToStdString();
+			std::string filename = filepath;
 			FixImagePath(filename);
 		}
 	}
@@ -98,9 +94,8 @@ void UniqueImage::ProcessJsonFiles(const std::string& jsondir)
 
 void UniqueImage::RemoveImages()
 {
-	for (int i = 0, n = m_to_remove.size(); i < n; ++i)
-	{
-		wxRemoveFile(m_to_remove[i]);
+	for (int i = 0, n = m_to_remove.size(); i < n; ++i) {
+		ee::FileHelper::RmFile(m_to_remove[i]);
 	}
 }
 
@@ -120,7 +115,7 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 	Json::Value outValue = value;
 	bool dirty = false;
 
-	wxString dir = ee::FileHelper::GetFileDir(animpath);
+	std::string dir = ee::FileHelper::GetFileDir(animpath);
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
@@ -150,9 +145,9 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 					{
 						dirty = true;
 
-  						const wxString& absolute = itr_md5->second;
-  						wxString relative = ee::FileHelper::GetRelativePath(dir, absolute);
-  						outValue["layer"][i-1]["frame"][j-1]["actor"][k-1]["filepath"] = relative.ToStdString();
+  						const std::string& absolute = itr_md5->second;
+  						std::string relative = ee::FileHelper::GetRelativePath(dir, absolute);
+  						outValue["layer"][i-1]["frame"][j-1]["actor"][k-1]["filepath"] = relative;
 					}
 				}
 				entryValue = frameValue["actor"][k++];

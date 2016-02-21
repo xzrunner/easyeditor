@@ -6,7 +6,7 @@
 #include "ClipboxToBin.h"
 #include "ClipboxFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 PackClipbox::PackClipbox(int id)

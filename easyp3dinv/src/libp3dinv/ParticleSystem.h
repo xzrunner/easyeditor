@@ -1,8 +1,6 @@
 #ifndef _EASYP3DINV_PARTICLE_SYSTEM_H_
 #define _EASYP3DINV_PARTICLE_SYSTEM_H_
 
-
-
 #include "Particle.h"
 
 namespace ep3dinv

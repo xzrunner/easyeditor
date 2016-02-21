@@ -1,6 +1,9 @@
 #include "Utility.h"
 
-namespace libcoco
+#include <ee/Sprite.h>
+#include <ee/StringHelper.h>
+
+namespace ecoco
 {
 
 void Utility::GroupSpritesFromTag(const std::vector<ee::Sprite*>& src, 

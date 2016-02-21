@@ -1,6 +1,8 @@
 #include "main.h"
 #include "Task.h"
 
+#include <ee/Frame.h>
+
 #include <easypseudo3d.h>
 
 IMPLEMENT_APP(MyApp)

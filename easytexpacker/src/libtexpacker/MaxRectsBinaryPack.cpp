@@ -1,10 +1,12 @@
 #include "MaxRectsBinaryPack.h"
 
+#include <ee/math_common.h>
 
 #include <algorithm>
+
 #include <math.h>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 static const float SCALE = 1.0f;
@@ -55,7 +57,7 @@ void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Re
 	for (int i = 0; i < sz; ++i) {
 		area += rects[i].width * rects[i].height;
 	}
-	int edge = next_p2((int)ceil(sqrt(area)));
+	int edge = ee::next_p2((int)ceil(sqrt(area)));
 
 	// insert
 	bool success = false;

@@ -15,10 +15,10 @@ public:
 public:
 	Rect() { MakeInfinite(); }
 	Rect(const Vector& p0, const Vector& p1) {
-		xmin = std::min(p0.x, p1.x);
-		ymin = std::min(p0.y, p1.y);
-		xmax = std::max(p0.x, p1.x);
-		ymax = std::max(p0.y, p1.y);
+		xmin = (std::min)(p0.x, p1.x);
+		ymin = (std::min)(p0.y, p1.y);
+		xmax = (std::max)(p0.x, p1.x);
+		ymax = (std::max)(p0.y, p1.y);
 	}
 	Rect(const Vector& center, float hWidth, float hHeight) {
 		xmin = center.x - hWidth;

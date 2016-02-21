@@ -1,9 +1,9 @@
 #ifndef _EASYTERRAIN3D_INTERFACE_DEMO_H_
 #define _EASYTERRAIN3D_INTERFACE_DEMO_H_
 
+#include <ee/Timer.h>
 
-
-namespace libterrain3d
+namespace eterrain3d
 {
 
 class IDemo

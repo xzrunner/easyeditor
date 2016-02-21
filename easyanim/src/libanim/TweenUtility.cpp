@@ -3,7 +3,7 @@
 #include <easyscale9.h>
 #include <easyicon.h>
 
-namespace libanim
+namespace eanim
 {
 
 void TweenUtility::GetTweenSprites(const std::vector<ee::Sprite*>& start, const std::vector<ee::Sprite*>& end, 

@@ -1,7 +1,9 @@
 #ifndef _LR_PASTE_SYMBOL_OP_H_
 #define _LR_PASTE_SYMBOL_OP_H_
 
+#include <ee/PasteSymbolOP.h>
 
+namespace ee { class PropertySettingPanel; }
 
 namespace lr
 {

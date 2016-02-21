@@ -1,8 +1,11 @@
 #ifndef _EASYPSEUDO3D_TASK_H_
 #define _EASYPSEUDO3D_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class LibraryPanel; class EditPanel; }
 
 namespace epseudo3d
 {

@@ -6,6 +6,11 @@
 #include "view/KeysPanel.h"
 #include "dataset/DataMgr.h"
 
+#include <ee/StringHelper.h>
+
+#include <wx/spinctrl.h>
+#include <wx/wx.h>
+
 namespace eanim
 {
 
@@ -59,7 +64,7 @@ void LayersPropertyWidget::InitLayout()
 
  	wxStaticText* fps_text = new wxStaticText(this, wxID_ANY, wxT("fps:"));
  	sizer->Add(fps_text, 0, wxLEFT);
-	m_fps = new wxSpinCtrl(this, wxID_ANY, wxString::FromDouble(DEFAULT_FPS), 
+	m_fps = new wxSpinCtrl(this, wxID_ANY, ee::StringHelper::ToString(DEFAULT_FPS), 
 		wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxTE_PROCESS_ENTER, 1, 60, DEFAULT_FPS);
 	Connect(m_fps->GetId(), wxEVT_SPINCTRL, wxSpinEventHandler(LayersPropertyWidget::OnChangeFps));
 	sizer->Add(m_fps, 0, wxLEFT, 5);

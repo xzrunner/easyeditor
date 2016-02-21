@@ -6,7 +6,7 @@
 #include "Particle3DToBin.h"
 #include "Particle3DFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 PackParticle3D::PackParticle3D(int id)

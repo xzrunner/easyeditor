@@ -1,6 +1,7 @@
 #ifndef _EASYPARTICLE3D_TASK_H_
 #define _EASYPARTICLE3D_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
 
@@ -27,8 +28,8 @@ public:
 
 	virtual const ee::EditPanel* GetEditPanel() const;
 
-	void StoreAsAnim(const wxString& filepath) const;
-	void StoreAsInvert(const wxString& filepath) const;
+	void StoreAsAnim(const std::string& filepath) const;
+	void StoreAsInvert(const std::string& filepath) const;
 
 private:
 	void InitLayout();

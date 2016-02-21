@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_EXPORT_NAME_SET_H_
-#define _LIBRESPACKER_EXPORT_NAME_SET_H_
+#ifndef _EASYRESPACKER_EXPORT_NAME_SET_H_
+#define _EASYRESPACKER_EXPORT_NAME_SET_H_
 
+#include <ee/Symbol.h>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_EXPORT_NAME_SET_H_
+#endif // _EASYRESPACKER_EXPORT_NAME_SET_H_

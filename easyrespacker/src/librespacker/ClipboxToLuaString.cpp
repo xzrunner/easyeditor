@@ -4,7 +4,7 @@
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void ClipboxToLuaString::Pack(const PackClipbox* cb, ebuilder::CodeGenerator& gen)

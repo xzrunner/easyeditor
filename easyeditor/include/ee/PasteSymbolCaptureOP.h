@@ -13,7 +13,7 @@ class LibraryPanel;
 class PasteSymbolCaptureOP : public PasteSymbolOP
 {
 public:
-	PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* libraryPanel, 
+	PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* library, 
 		PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
 
 	virtual bool OnMouseLeftDown(int x, int y);

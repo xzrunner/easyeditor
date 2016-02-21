@@ -1,9 +1,11 @@
 #ifndef _EASYANIM_LAYER_H_
 #define _EASYANIM_LAYER_H_
 
-
-
 #include "SpriteObserver.h"
+
+#include <ee/Object.h>
+
+namespace ee { class AtomicOP; }
 
 namespace eanim
 {

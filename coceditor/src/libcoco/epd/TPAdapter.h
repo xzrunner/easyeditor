@@ -1,9 +1,9 @@
-#ifndef _LIBCOCO_EPD_TEXTURE_PACKER_ADAPTER_H_
-#define _LIBCOCO_EPD_TEXTURE_PACKER_ADAPTER_H_
+#ifndef _ECOCO_EPD_TEXTURE_PACKER_ADAPTER_H_
+#define _ECOCO_EPD_TEXTURE_PACKER_ADAPTER_H_
 
 #include <json/json.h>
 
-namespace libcoco
+namespace ecoco
 {
 namespace epd
 {
@@ -65,4 +65,4 @@ private:
 }
 }
 
-#endif // _LIBCOCO_EPD_TEXTURE_PACKER_ADAPTER_H_
+#endif // _ECOCO_EPD_TEXTURE_PACKER_ADAPTER_H_

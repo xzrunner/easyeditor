@@ -1,7 +1,6 @@
-#ifndef _E3D_H_
-#define _E3D_H_
+#ifndef _EASY3D_H_
+#define _EASY3D_H_
 
-#include "Quaternion.h"
 #include "AABB.h"
 #include "Ray.h"
 #include "Math3.h"
@@ -24,4 +23,4 @@
 
 #include "AssimpHelper.h"
 
-#endif // _E3D_H_
+#endif // _EASY3D_H_

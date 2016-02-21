@@ -1,9 +1,11 @@
 #include "ChangeJsonName.h"
 #include "check_params.h"
 
-#include <wx/filename.h>
-#include <fstream>
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
 
+#include <fstream>
+#include <set>
 
 namespace edb
 {
@@ -41,10 +43,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 	std::set<std::string> used_set;
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
 			continue;
 		}
@@ -57,10 +56,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			continue;
 		}
@@ -68,7 +64,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.fn_str());
+		std::ifstream fin(filepath.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -88,7 +84,7 @@ void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix)
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filepath.fn_str());
+		std::ofstream fout(filepath.c_str());
 		std::locale::global(std::locale("C"));	
 		writer.write(fout, value);
 		fout.close();

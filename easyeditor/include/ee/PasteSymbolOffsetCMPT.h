@@ -16,7 +16,7 @@ class PasteSymbolOffsetCMPT : public EditCMPT
 public:
 	PasteSymbolOffsetCMPT(wxWindow* parent, const std::string& name,
 		wxWindow* stage_wnd, EditPanelImpl* stage, 
-		MultiSpritesImpl* spritesImpl, LibraryPanel* libraryPanel);
+		MultiSpritesImpl* sprites_impl, LibraryPanel* library);
 
 	Vector GetOffset() const;
 

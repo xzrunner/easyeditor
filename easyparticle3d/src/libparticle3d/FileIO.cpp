@@ -7,7 +7,17 @@
 #include "ps_config.h"
 #include "config.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Symbol.h>
+#include <ee/SliderCtrl.h>
+#include <ee/Math2D.h>
+#include <ee/SymbolMgr.h>
+
 #include <ps_3d.h>
+
+#include <wx/spinctrl.h>
+
+#include <fstream>
 
 namespace eparticle3d
 {
@@ -20,7 +30,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 	toolbar->Store(value);
 	value["version"] = VERSION;
 
-//	value["name"] = toolbar->m_name->GetValue().ToStdString();
+//	value["name"] = toolbar->m_name->GetValue();
 
 	value["min_hori"] = toolbar->m_min_hori->GetValue();
 	value["max_hori"] = toolbar->m_max_hori->GetValue();
@@ -43,12 +53,12 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(pc->ud);
 		value["components"][i]["filepath"] = 
-			ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+			ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
 
 		if (pc->bind_ps_cfg) {
 			std::string filepath = PSConfigMgr::Instance()->GetFilepath(pc->bind_ps_cfg);
 			value["components"][i]["bind ps filepath"] = 
-				ee::FileHelper::GetRelativePath(dir, filepath).ToStdString();
+				ee::FileHelper::GetRelativePath(dir, filepath);
 		}
 
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();

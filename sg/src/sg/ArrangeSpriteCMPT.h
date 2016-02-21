@@ -1,7 +1,9 @@
 #ifndef _SG_ARRANGE_SPRITE_CMPT_H_
 #define _SG_ARRANGE_SPRITE_CMPT_H_
 
+#include <ee/EditCMPT.h>
 
+namespace ee { class PropertySettingPanel; }
 
 namespace sg
 {
@@ -11,7 +13,7 @@ class StagePanel;
 class ArrangeSpriteCMPT : public ee::EditCMPT
 {
 public:
-	ArrangeSpriteCMPT(wxWindow* parent, const wxString& name, 
+	ArrangeSpriteCMPT(wxWindow* parent, const std::string& name, 
 		ee::PropertySettingPanel* property, StagePanel* stage);
 	
 protected:

@@ -2,7 +2,13 @@
 #include "check_params.h"
 #include "lr_typedef.h"
 
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+
 #include <easyshape.h>
+
 #include <wx/stdpaths.h>
 
 namespace edb
@@ -133,14 +139,14 @@ void LRSeparateComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 
 void LRSeparateComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
 {
-	wxString relative_path = ee::FileHelper::GetRelativePath(m_output_dir, 
+	std::string relative_path = ee::FileHelper::GetRelativePath(m_output_dir, 
 		m_dir + "\\" + dst["filepath"].asString());
-	dst["filepath"] = relative_path.ToStdString();
+	dst["filepath"] = relative_path;
 }
 
 std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) const
 {
-	std::string name = wxString::Format("name_%d", m_count++).ToStdString();
+	std::string name = std::string("name_") + ee::StringHelper::ToString(m_count++);
 
 	Json::Value out_val;
 
@@ -153,9 +159,9 @@ std::string LRSeparateComplex::CreateNewComplexFile(const Json::Value& value) co
 
 	Json::Value spr_val = value;
 
-	wxString relative_path = ee::FileHelper::GetRelativePath(m_output_dir, 
+	std::string relative_path = ee::FileHelper::GetRelativePath(m_output_dir, 
 		m_dir + "\\" + spr_val["filepath"].asString());
-	spr_val["filepath"] = relative_path.ToStdString();
+	spr_val["filepath"] = relative_path;
 
 	ee::Vector pos;
 	pos.x = spr_val["position"]["x"].asDouble();

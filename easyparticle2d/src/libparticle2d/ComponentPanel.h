@@ -1,8 +1,15 @@
 #ifndef _EASYPARTICLE2D_COMPONENT_PANEL_H_
 #define _EASYPARTICLE2D_COMPONENT_PANEL_H_
 
+#include <wx/panel.h>
+
+#include <ee/UICallback.h>
 
 #include <ps_2d.h>
+
+#include <vector>
+
+namespace ee { class SliderCtrl; }
 
 namespace eparticle2d
 {

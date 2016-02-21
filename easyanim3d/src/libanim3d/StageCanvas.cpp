@@ -1,6 +1,11 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteRenderer.h>
+
 namespace eanim3d
 {
 
@@ -28,8 +33,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), ee::LIGHT_RED);
-	//  	e3d::DrawGrids(vec3(-10, -10, 0), vec3(10, 10, 0), vec3(0.5f, 0.5f, FLT_MAX), 
+	e3d::DrawCross(ee::vec3(0, 0, 0), ee::vec3(10, 10, 10), ee::LIGHT_RED);
+	//  	e3d::DrawGrids(ee::vec3(-10, -10, 0), ee::vec3(10, 10, 0), ee::vec3(0.5f, 0.5f, FLT_MAX), 
 	//  		ee::LIGHT_RED);
 }
 

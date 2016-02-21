@@ -67,7 +67,7 @@ inline
 float Math2D::FindXOnSeg(float x1, float y1, float x2, float y2, float y)
 {
 	if (y1 == y2)  {
-		return std::min(x1, x2);
+		return (std::min)(x1, x2);
 	} else {
 		return (y - y2) * (x1 - x2) / (y1 - y2) + x2;
 	}
@@ -77,7 +77,7 @@ inline
 float Math2D::FindYOnSeg(float x1, float y1, float x2, float y2, float x)
 {
 	if (x1 == x2)  {
-		return std::min(y1, y2);
+		return (std::min)(y1, y2);
 	} else {
 		return (x - x2) * (y1 - y2) / (x1 - x2) + y2;
 	}

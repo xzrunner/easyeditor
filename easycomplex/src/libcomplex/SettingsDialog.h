@@ -1,7 +1,7 @@
-#ifndef _EASYCOMPLEX_SETTINGS_DIALOG_H_
-#define _EASYCOMPLEX_SETTINGS_DIALOG_H_
+#ifndef _EASY_EASYCOMPLEX_SETTINGS_DIALOG_H_
+#define _EASY_EASYCOMPLEX_SETTINGS_DIALOG_H_
 
-
+#include <ee/SettingsDialog.h>
 
 namespace ecomplex
 {
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_SETTINGS_DIALOG_H_
+#endif // _EASY_EASYCOMPLEX_SETTINGS_DIALOG_H_

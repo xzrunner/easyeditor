@@ -1,6 +1,7 @@
 #include "PreviewCanvas.h"
 
-#include <easyanim.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/Sprite.h>
 
 namespace ecomplex
 {

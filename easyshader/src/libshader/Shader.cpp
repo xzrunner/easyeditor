@@ -1,6 +1,13 @@
 #include "Shader.h"
 #include "Uniform.h"
 
+#include <ee/IShader.h>
+#include <ee/std_functor.h>
+
+#include <algorithm>
+#include <fstream>
+#include <sstream>
+
 namespace eshader
 {
 
@@ -12,7 +19,7 @@ Shader::Shader()
 Shader::~Shader()
 {
 	delete m_shader_impl;
-	for_each(m_uniforms.begin(), m_uniforms.end(), DeletePointerFunctor<Uniform>());
+	for_each(m_uniforms.begin(), m_uniforms.end(), ee::DeletePointerFunctor<Uniform>());
 }
 
 void Shader::LoadShader()

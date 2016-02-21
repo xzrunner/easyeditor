@@ -1,5 +1,8 @@
 #include "Particle.h"
 
+#include <ee/SpriteRenderer.h>
+#include <ee/SymbolMgr.h>
+
 #include <easyparticle3d.h>
 
 namespace ep3dinv

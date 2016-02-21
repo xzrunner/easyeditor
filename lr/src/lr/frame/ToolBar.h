@@ -1,7 +1,10 @@
 #ifndef _LR_TOOL_BAR_H_
 #define _LR_TOOL_BAR_H_
 
+namespace ee { class LibraryPanel; }
 
+class wxFrame;
+class wxToolBarBase;
 
 namespace lr
 {

@@ -1,5 +1,11 @@
 #include "PathGrid.h"
 
+#include <ee/Sprite.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/Math2D.h>
+#include <ee/Matrix.h>
+
 namespace lr
 {
 namespace preview
@@ -92,10 +98,10 @@ SetStatus(const ee::Rect& region, bool used)
 		return;
 	}
 
-	int xs = std::floor((region.xmin - m_region.xmin) / m_width),
-		xe = std::ceil((region.xmax - m_region.xmin) / m_width);
-	int ys = std::floor((region.ymin - m_region.ymin) / m_height),
-		ye = std::ceil((region.ymax - m_region.ymin) / m_height);
+	int xs = floor((region.xmin - m_region.xmin) / m_width),
+		xe = ceil((region.xmax - m_region.xmin) / m_width);
+	int ys = floor((region.ymin - m_region.ymin) / m_height),
+		ye = ceil((region.ymax - m_region.ymin) / m_height);
 	for (int y = ys; y < ye; ++y) {
 		for (int x = xs; x < xe; ++x) {
 			m_nodes[y * m_col + x].m_used = used;
@@ -160,8 +166,8 @@ QueryNode(const ee::Vector& pos) const
 
 	float dx = m_region.Width() * 0.5f,
 		dy = m_region.Height() * 0.5f;
-	int x = std::floor((pos.x+dx) / m_width),
-		y = std::floor((pos.y+dy) / m_height);
+	int x = floor((pos.x+dx) / m_width),
+		y = floor((pos.y+dy) / m_height);
 	return &m_nodes[y * m_col + x];
 }
 

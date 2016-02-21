@@ -1,9 +1,9 @@
-#ifndef _EASYCOMPLEX_SELECT_SPRITES_OP_H_
-#define _EASYCOMPLEX_SELECT_SPRITES_OP_H_
-
-
+#ifndef _EASY_EASYCOMPLEX_SELECT_SPRITES_OP_H_
+#define _EASY_EASYCOMPLEX_SELECT_SPRITES_OP_H_
 
 #include "OpenSymbolDialog.h"
+
+#include <ee/SelectSpritesOP.h>
 
 namespace ecomplex
 {
@@ -12,7 +12,7 @@ class SelectSpritesOP : public ee::SelectSpritesOP
 {
 public:
 	SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, 
-		ee::MultiSpritesImpl* spritesImpl, ee::EditCMPT* callback = NULL);
+		ee::MultiSpritesImpl* sprites_impl, ee::EditCMPT* callback = NULL);
 
 //		virtual bool OnKeyDown(int keyCode);
 	virtual bool OnMouseLeftDClick(int x, int y);
@@ -24,4 +24,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_SELECT_SPRITES_OP_H_
+#endif // _EASY_EASYCOMPLEX_SELECT_SPRITES_OP_H_

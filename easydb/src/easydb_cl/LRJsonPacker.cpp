@@ -3,6 +3,14 @@
 #include "lr_typedef.h"
 #include "lr_tools.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/SpriteFactory.h>
+#include <ee/JsonSerializer.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/StringHelper.h>
+
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
 
@@ -517,13 +525,13 @@ void LRJsonPacker::ParserSpecialLayer(const Json::Value& spr_val, const std::str
 
 	std::string s_name;
 	std::string export_name;
-	wxString spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
-	if (spr_path.Contains(".json")) 
+	std::string spr_path = ee::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
+	if (spr_path.find(".json") != std::string::npos) 
 	{
 		Json::Value val;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(spr_path.fn_str());
+		std::ifstream fin(spr_path.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, val);
 		fin.close();

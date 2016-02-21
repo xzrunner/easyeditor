@@ -2,6 +2,11 @@
 #include "NodeToSprite.h"
 #include "Symbol.h"
 
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/ImageData.h>
+#include <ee/Image.h>
+
 #include <easyrespacker.h>
 
 namespace ecomplex
@@ -17,12 +22,12 @@ void LoadFromBin::Load(const Json::Value& value, const std::string& dir,
 	LoadImages(ept_path, images);
 
 	std::string epe_path = filename + ".epe";
-	librespacker::ResUnpacker unpacker;
+	erespacker::ResUnpacker unpacker;
 	unpacker.UnpackBin(epe_path, images);
 
 	std::string export_name = value["export name"].asString();
 
-	librespacker::IPackNode* node = librespacker::UnpackNodeFactory::Instance()->Query(export_name);
+	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
 	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
 }
 
@@ -50,7 +55,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::Image*
 		assert(!fin.fail());
 
 		int32_t sz;
-		librespacker::unpack(sz, fin);
+		erespacker::unpack(sz, fin);
 
 		if (sz < 0) 
 		{
@@ -70,7 +75,7 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::Image*
 			size_t guess_sz = uc_sz;
 			uint8_t* uc_buf = new uint8_t[uc_sz];
 			size_t c_sz = sz - sizeof(block->size) - LZMA_PROPS_SIZE;
-			librespacker::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
+			erespacker::Lzma::Uncompress(uc_buf, &uc_sz, block->data, &c_sz, block->prop, LZMA_PROPS_SIZE);
 			if (guess_sz == uc_sz) {
 				throw ee::Exception("ecomplex LoadFromBin::LoadImages no enough space.");
 			}
@@ -87,11 +92,11 @@ void LoadFromBin::LoadImages(const std::string& filepath, std::vector<ee::Image*
 void LoadFromBin::LoadImage(uint8_t** ptr, std::vector<ee::Image*>& images)
 {
 	int8_t type;
-	librespacker::unpack(type, ptr);
+	erespacker::unpack(type, ptr);
 
 	int16_t w, h;
-	librespacker::unpack(w, ptr);
-	librespacker::unpack(h, ptr);
+	erespacker::unpack(w, ptr);
+	erespacker::unpack(h, ptr);
 
 	const int c = 4;
 	int buf_sz = w * h * c;

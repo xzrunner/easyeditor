@@ -4,7 +4,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int AnimToBin::Size(const PackAnimation* anim)

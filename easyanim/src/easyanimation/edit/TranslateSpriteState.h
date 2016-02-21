@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_TRANSLATE_SPRITE_STATE_H_
 #define _EASYANIM_TRANSLATE_SPRITE_STATE_H_
 
-
+#include <ee/TranslateSpriteState.h>
 
 namespace eanim
 {

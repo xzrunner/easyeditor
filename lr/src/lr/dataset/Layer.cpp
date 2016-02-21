@@ -6,6 +6,15 @@
 #include "view/LibraryPanel.h"
 #include "view/typedef.h"
 
+#include <ee/Layer.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/StringHelper.h>
+#include <ee/Exception.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/SpriteFactory.h>
+#include <ee/SymbolMgr.h>
+
 #include <easyshape.h>
 #include <easycomplex.h>
 
@@ -264,7 +273,7 @@ void Layer::CheckSpriteName(ee::Sprite* spr)
 		= m_name_set.find(spr->name);
 	if (itr != m_name_set.end()) 
 	{
-		spr->name = "_sprite"+wxString::FromDouble(++m_next_id);
+		spr->name = "_sprite" + ee::StringHelper::ToString(++m_next_id);
 		assert(m_name_set.find(spr->name) == m_name_set.end());
 	}
 	else
@@ -428,7 +437,7 @@ bool Layer::StoreSprite(ee::Sprite* spr, Json::Value& val, const std::string& di
 	} else {
 		std::string filepath = spr->GetSymbol().GetFilepath();
 		assert(!filepath.empty());
-		val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath).ToStdString();
+		val["filepath"] = ee::FileHelper::GetRelativePath(dir, filepath);
 		spr->Store(val);
 		StoreShapesUD(spr, val);
 	}

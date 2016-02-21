@@ -3,7 +3,12 @@
 #include "Symbol.h"
 #include "config.h"
 
-namespace libsketch
+#include <ee/EditPanelImpl.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteRenderer.h>
+
+namespace esketch
 {
 
 StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
@@ -14,19 +19,19 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 {
 }
 
-ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
+ee::ivec2 StageCanvas::TransPos3ProjectToScreen(const ee::vec3& proj) const
 {
-	vec3 pos = GetCamera3().GetModelViewMat() * proj;
+	ee::vec3 pos = GetCamera3().GetModelViewMat() * proj;
 	return e3d::ViewFrustum::TransPos3ProjectToScreen(pos, m_screen_width, m_screen_height);
 }
 
-vec3 StageCanvas::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
+ee::vec3 StageCanvas::TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const
 {
-	vec3 pos = GetCamera3().GetModelViewMat() * vec3(0, 0, proj_z);
+	ee::vec3 pos = GetCamera3().GetModelViewMat() * ee::vec3(0, 0, proj_z);
 	return e3d::ViewFrustum::TransPos3ScreenToProject(scr, pos.z, m_screen_width, m_screen_height);
 }
 
-vec3 StageCanvas::TransPos3ScreenToDir(const ivec2& screen) const
+ee::vec3 StageCanvas::TransPos3ScreenToDir(const ee::ivec2& screen) const
 {
 	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_screen_width, m_screen_height);
 }
@@ -49,8 +54,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), ee::LIGHT_RED);
-//  	e3d::DrawGrids(vec3(-10, -10, 0), vec3(10, 10, 0), vec3(0.5f, 0.5f, FLT_MAX), 
+	e3d::DrawCross(ee::vec3(0, 0, 0), ee::vec3(10, 10, 10), ee::LIGHT_RED);
+//  	e3d::DrawGrids(ee::vec3(-10, -10, 0), ee::vec3(10, 10, 0), ee::vec3(0.5f, 0.5f, FLT_MAX), 
 //  		ee::LIGHT_RED);
 }
 

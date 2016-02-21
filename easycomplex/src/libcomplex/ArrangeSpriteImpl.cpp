@@ -2,6 +2,9 @@
 #include "StagePanel.h"
 #include "SphereRotateState.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+
 #include <easyparticle3d.h>
 
 namespace ecomplex
@@ -13,7 +16,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(ee::SpriteSelection* selection, 
-															   const ee::Vector& first_pos) const
+															 const ee::Vector& first_pos) const
 {
 	std::vector<ee::Sprite*> sprites;
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));

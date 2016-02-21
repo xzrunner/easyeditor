@@ -6,10 +6,10 @@ namespace ee
 
 PasteSpriteCMPT::PasteSpriteCMPT(wxWindow* parent, const std::string& name, 
 								 wxWindow* stage_wnd, EditPanelImpl* stage, 
-								 MultiSpritesImpl* spritesImpl)
+								 MultiSpritesImpl* sprites_impl)
 	: EditCMPT(parent, name, stage)
 {
-	m_editop = new PasteSpriteOP(stage_wnd, stage, spritesImpl, this);
+	m_editop = new PasteSpriteOP(stage_wnd, stage, sprites_impl, this);
 }
 
 wxSizer* PasteSpriteCMPT::InitLayout()

@@ -1,16 +1,15 @@
-#ifndef EMODELING_STAGE_PANEL_H
-#define EMODELING_STAGE_PANEL_H
+#ifndef _EASYMODELING_STAGE_PANEL_H_
+#define _EASYMODELING_STAGE_PANEL_H_
 
-
-
-namespace libmodeling
-{
-	class Body;
-	class Joint;
-}
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+#include <ee/Visitor.h>
 
 namespace emodeling
 {
+
+class Body;
+class Joint;
 
 class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 {
@@ -21,13 +20,13 @@ public:
 	virtual ee::Sprite* QuerySpriteByPos(const ee::Vector& pos) const;
 	virtual void QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite*>& result) const;		
 
-	libmodeling::Joint* queryJointByPos(const ee::Vector& pos) const;
-	void queryJointsByRect(const ee::Rect& rect, std::vector<libmodeling::Joint*>& result) const;
+	Joint* queryJointByPos(const ee::Vector& pos) const;
+	void queryJointsByRect(const ee::Rect& rect, std::vector<Joint*>& result) const;
 
-	void insertJoint(libmodeling::Joint* joint) {
+	void insertJoint(Joint* joint) {
 		m_joints.push_back(joint);
 	}
-	void removeJoint(libmodeling::Joint* joint);
+	void removeJoint(Joint* joint);
 
 	void traverseBodies(ee::Visitor& visitor) const;
 	void traverseJoints(ee::Visitor& visitor) const;
@@ -39,8 +38,8 @@ protected:
 	virtual void OnNotify(int sj_id, void* ud);
 
 private:
-	static void loadBody(const wxString& filepath, libmodeling::Body& body);
-	static void loadBody(ee::Sprite* sprite, libmodeling::Body& body);
+	static void loadBody(const std::string& filepath, Body& body);
+	static void loadBody(ee::Sprite* sprite, Body& body);
 
 	void Insert(ee::Sprite* spr);
 	void Remove(ee::Sprite* spr);
@@ -72,11 +71,11 @@ private:
 	}; // RectQueryVisitor
 
 private:
-	std::vector<libmodeling::Body*> m_bodies;
-	std::vector<libmodeling::Joint*> m_joints;
+	std::vector<Body*> m_bodies;
+	std::vector<Joint*> m_joints;
 
 }; // StagePanel
 
 }
 
-#endif // EMODELING_STAGE_PANEL_H
+#endif // _EASYMODELING_STAGE_PANEL_H_

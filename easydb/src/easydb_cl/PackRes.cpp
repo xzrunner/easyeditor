@@ -1,14 +1,19 @@
 #include "PackRes.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
+#include <ee/LibpngAdapter.h>
+#include <ee/StringHelper.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/SymbolMgr.h>
 
 #include <easytexpacker.h>
 #include <easyrespacker.h>
 #include <epbin.h>
 #include <easycoco.h>
 #include <easyimage.h>
-
-#include <wx/dir.h>
 
 namespace edb
 {
@@ -52,7 +57,7 @@ void PackRes::Trigger(const std::string& config_path)
 		ee::FileHelper::FormatFilepathAbsolute(config_path));
 
  	std::string trim_file = ConnectCfgDir(config_dir, value["trim file"].asString());
-// 	libtexpacker::ImageTrimData trim(trim_file);
+// 	etexpacker::ImageTrimData trim(trim_file);
 
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
@@ -79,7 +84,7 @@ void PackRes::Prepare(const Json::Value& pkg_val, const std::string& config_dir)
 }
 
 void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
-						   const libtexpacker::ImageTrimData* trim) const
+						   const etexpacker::ImageTrimData* trim) const
 {
 	ee::SettingData& sd = ee::Config::Instance()->GetSettings();
 	bool ori_cfg = sd.open_image_edge_clip;
@@ -99,11 +104,11 @@ void PackRes::PackTexture(const Json::Value& pkg_val, const std::string& config_
 	std::vector<std::string> images;
 	GetAllImages(pkg_val, config_dir, images);
 
-	libtexpacker::NormalPack* tex_packer = NULL;
+	etexpacker::NormalPack* tex_packer = NULL;
 	if (extrude != 0) {
-		tex_packer = new libtexpacker::NormalPack(images, trim, extrude, extrude);
+		tex_packer = new etexpacker::NormalPack(images, trim, extrude, extrude);
 	} else {
-		tex_packer = new libtexpacker::NormalPack(images, trim);
+		tex_packer = new etexpacker::NormalPack(images, trim);
 	}
 	tex_packer->Pack(0);
 	std::string json_path = dst_name + ".json";
@@ -161,7 +166,7 @@ void PackRes::GetImagesFromJson(const Json::Value& pkg_val, const std::string& c
 		Json::Value src_val = pkg_val["json list"][i++];
 		while (!src_val.isNull()) {
 			std::string path = ConnectCfgDir(config_dir, src_val.asString());
-			if (wxFileName::DirExists(path)) {
+			if (ee::FileHelper::IsDirExist(path)) {
 				ee::StringHelper::ToLower(path);
 				src_dirs.push_back(path);
 			}
@@ -175,13 +180,13 @@ void PackRes::GetImagesFromJson(const Json::Value& pkg_val, const std::string& c
 	Json::Value src_val = pkg_val["json list"][i++];
 	while (!src_val.isNull()) {
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
-		if (wxFileName::DirExists(path)) {
+		if (ee::FileHelper::IsDirExist(path)) {
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				GetImagesFromJson(src_dirs, files[i].ToStdString(), img_set);
 			}
-		} else if (wxFileName::FileExists(path)) {
+		} else if (ee::FileHelper::IsFileExist(path)) {
 			GetImagesFromJson(src_dirs, path, img_set);
 		} else {
 			throw ee::Exception("PackRes::GetImagesFromJson: unknown json path %s", path.c_str());
@@ -354,15 +359,15 @@ void PackRes::GetImagesFromCfg(const Json::Value& pkg_val, const std::string& co
 	Json::Value src_val = pkg_val["image list"][i++];
 	while (!src_val.isNull()) {
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
-		if (wxFileName::DirExists(path)) {
+		if (ee::FileHelper::IsDirExist(path)) {
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (ee::FileType::IsType(files[i], ee::FileType::e_image)) {
+				if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
 					images.push_back(ee::FileHelper::FormatFilepath(files[i].ToStdString()));
 				}
 			}
-		} else if (wxFileName::FileExists(path)) {
+		} else if (ee::FileHelper::IsFileExist(path)) {
 			if (ee::FileType::IsType(path, ee::FileType::e_image)) {
 				images.push_back(ee::FileHelper::FormatFilepath(path));
 			}
@@ -386,7 +391,7 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 	std::string dst_folder = pkg_val["output dir"].asString();
 	std::string dst_name = ConnectCfgDir(config_dir, dst_folder + "\\" + name);
 
-	libcoco::epd::TextureMgr tex_mgr;
+	ecoco::epd::TextureMgr tex_mgr;
 	tex_mgr.SetSrcDataDir(config_dir);
 	int i = 1;
 	while (true) {
@@ -399,12 +404,12 @@ void PackRes::PackLuaFile(const Json::Value& pkg_val, const std::string& config_
 		++i;
 	}
 
-	libcoco::epd::CocoPacker* data_packer = NULL;
+	ecoco::epd::CocoPacker* data_packer = NULL;
 	if (!pkg_val["rrp"].isNull() || !pkg_val["rrr"].isNull() || !pkg_val["b4r"].isNull()) {
 		std::string id_filepath = ConnectCfgDir(config_dir, pkg_val["id file"].asString());
-		data_packer = new libcoco::epd::CocoPacker(symbols, tex_mgr, id_filepath);	
+		data_packer = new ecoco::epd::CocoPacker(symbols, tex_mgr, id_filepath);	
 	} else {
-		data_packer = new libcoco::epd::CocoPacker(symbols, tex_mgr);
+		data_packer = new ecoco::epd::CocoPacker(symbols, tex_mgr);
 	}
 
 	data_packer->Parser();
@@ -429,13 +434,13 @@ void PackRes::GetAllDataFiles(const Json::Value& pkg_val, const std::string& con
 	Json::Value src_val = pkg_val["json list"][i++];
 	while (!src_val.isNull()) {
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
-		if (wxFileName::DirExists(path)) {
+		if (ee::FileHelper::IsDirExist(path)) {
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				AddJsonFile(files[i].ToStdString(), filter, unique_files);
 			}
-		} else if (wxFileName::FileExists(path)) {
+		} else if (ee::FileHelper::IsFileExist(path)) {
 			AddJsonFile(path, filter, unique_files);
 		} else {
 			throw ee::Exception("PackRes::GetAllDataFiles: unknown json path %s", path.c_str());
@@ -534,10 +539,10 @@ void PackRes::PackLuaAndBinFiles(const Json::Value& pkg_val, const std::string& 
 	std::string output_dir = ConnectCfgDir(config_dir, pkg_val["output dir"].asString());
 	std::string output_name = output_dir + "\\" + name;
 
-	librespacker::ResPacker packer(config_dir, output_name, output_dir);
+	erespacker::ResPacker packer(config_dir, output_name, output_dir);
 	packer.OutputEpe(output_name, true);
-	packer.OutputEpt(output_name, librespacker::TT_PNG8, LOD);
-	librespacker::ResPacker::OutputEptDesc(output_name, output_name);
+	packer.OutputEpt(output_name, erespacker::TT_PNG8, LOD);
+	erespacker::ResPacker::OutputEptDesc(output_name, output_name);
 
 	// debug
 	packer.OutputLua(output_name + ".lua");
@@ -550,18 +555,18 @@ void PackRes::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& conf
 	Json::Value src_val = pkg_val["image list"][i++];
 	while (!src_val.isNull()) {
 		std::string path = ConnectCfgDir(config_dir, src_val.asString());
-		if (wxFileName::DirExists(path)) {
+		if (ee::FileHelper::IsDirExist(path)) {
 			wxArrayString files;
 			ee::FileHelper::FetchAllFiles(path, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
-				if (ee::FileType::IsType(files[i], ee::FileType::e_image)) {
+				if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
 					std::string pts_path = files[i].substr(0, files[i].find(".png")) + "_strip.json";
 					if (ee::FileHelper::IsFileExist(pts_path)) {
 						pts_files.push_back(pts_path);
 					}
 				}
 			}
-		} else if (wxFileName::FileExists(path)) {
+		} else if (ee::FileHelper::IsFileExist(path)) {
 			if (ee::FileType::IsType(path, ee::FileType::e_image)) {
 				std::string pts_path = path.substr(0, path.find(".png")) + "_strip.json";
 				if (ee::FileHelper::IsFileExist(pts_path)) {

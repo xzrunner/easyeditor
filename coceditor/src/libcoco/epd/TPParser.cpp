@@ -1,6 +1,10 @@
 #include "TPParser.h"
 
-namespace libcoco
+#include <ee/Symbol.h>
+
+#include <fstream>
+
+namespace ecoco
 {
 namespace epd
 {
@@ -75,14 +79,14 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		float left, right, up, down;
 		if (entry.rotated)
 		{
-			left = entry.frame.x;
-			right = entry.frame.x + entry.frame.h;
+			left = static_cast<float>(entry.frame.x);
+			right = static_cast<float>(entry.frame.x + entry.frame.h);
 			if (flip_y) {
-				up = adapter.GetHeight() - entry.frame.y;
-				down = adapter.GetHeight() - (entry.frame.y + entry.frame.w);
+				up = static_cast<float>(adapter.GetHeight() - entry.frame.y);
+				down = static_cast<float>(adapter.GetHeight() - (entry.frame.y + entry.frame.w));
 			} else {
-				up = entry.frame.y;
-				down = entry.frame.y + entry.frame.w;
+				up = static_cast<float>(entry.frame.y);
+				down = static_cast<float>(entry.frame.y + entry.frame.w);
 			}
 
 			picture->scr[0].Set(right, up);
@@ -92,14 +96,14 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		}
 		else
 		{
-			left = entry.frame.x;
-			right = entry.frame.x + entry.frame.w;
+			left = static_cast<float>(entry.frame.x);
+			right = static_cast<float>(entry.frame.x + entry.frame.w);
 			if (flip_y) {
-				up = adapter.GetHeight() - entry.frame.y;
-				down = adapter.GetHeight() - (entry.frame.y + entry.frame.h);
+				up = static_cast<float>(adapter.GetHeight() - entry.frame.y);
+				down = static_cast<float>(adapter.GetHeight() - (entry.frame.y + entry.frame.h));
 			} else {
-				up = entry.frame.y;
-				down = entry.frame.y + entry.frame.h;
+				up = static_cast<float>(entry.frame.y);
+				down = static_cast<float>(entry.frame.y + entry.frame.h);
 			}
 
 			picture->scr[0].Set(left, up);

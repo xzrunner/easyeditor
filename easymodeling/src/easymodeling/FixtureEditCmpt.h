@@ -1,23 +1,26 @@
+#ifndef _EASYMODELING_FIXTURE_EDIT_CMPT_H_
+#define _EASYMODELING_FIXTURE_EDIT_CMPT_H_
 
-#ifndef EMODELING_FIXTURE_EDIT_CMPT_H
-#define EMODELING_FIXTURE_EDIT_CMPT_H
+#include <ee/EditCMPT.h>
 
-
+namespace ee { class PropertySettingPanel; }
 
 namespace emodeling
 {
-	class StagePanel;
 
-	class FixtureEditCmpt : public ee::EditCMPT
-	{
-	public:
-		FixtureEditCmpt(wxWindow* parent, const wxString& name,
-			StagePanel* editPanel, ee::PropertySettingPanel* property);
+class StagePanel;
 
-	protected:
-		virtual wxSizer* InitLayout();
+class FixtureEditCmpt : public ee::EditCMPT
+{
+public:
+	FixtureEditCmpt(wxWindow* parent, const std::string& name,
+		StagePanel* editPanel, ee::PropertySettingPanel* property);
 
-	}; // FixtureEditCmpt
+protected:
+	virtual wxSizer* InitLayout();
+
+}; // FixtureEditCmpt
+
 }
 
-#endif // EMODELING_FIXTURE_EDIT_CMPT_H
+#endif // _EASYMODELING_FIXTURE_EDIT_CMPT_H_

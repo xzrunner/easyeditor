@@ -14,12 +14,12 @@ namespace ee
 {
 
 PasteSpriteOP::PasteSpriteOP(wxWindow* wnd, EditPanelImpl* stage, 
-							 MultiSpritesImpl* spritesImpl,
+							 MultiSpritesImpl* sprites_impl,
 							 PasteSpriteCMPT* cmpt)
-	: SelectSpritesOP(wnd, stage, spritesImpl)
+	: SelectSpritesOP(wnd, stage, sprites_impl)
 	, m_cmpt(cmpt)
 {
-	m_selection = spritesImpl->GetSpriteSelection();
+	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
 
 	m_pos.SetInvalid();
@@ -184,7 +184,7 @@ insertToSpritesImpl(const Vector& pos, bool isHorMirror, bool isVerMirror)
 		if (isVerMirror)
 			fixed.y += (m_center.y - sprite->GetPosition().y) * 2;
 
-//		spritesImpl->insertSprite(sprite->getSymbol(), fixed + pos);
+//		sprites_impl->insertSprite(sprite->getSymbol(), fixed + pos);
 
 		Sprite* newOne = sprite->Clone();
 		newOne->SetTransform(fixed + pos, newOne->GetAngle());

@@ -1,6 +1,9 @@
 #include "TransToETC1.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/LibpngAdapter.h>
+
 #include <easyimage.h>
 
 namespace edb
@@ -36,12 +39,8 @@ void TransToETC1::Trigger(const std::string& path)
 		wxArrayString files;
 		ee::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i) {
-			wxFileName filename(files[i]);
-			filename.Normalize();
-			std::string filepath = filename.GetFullPath();
-
+			std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 			std::cout << i << " / " << n << " : " << filepath << "\n";
-
 			Format(files[i].ToStdString());
 		}
 	} else if (ee::FileHelper::IsFileExist(path)) {

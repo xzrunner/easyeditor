@@ -1,7 +1,7 @@
 #ifndef _EASYUI_UI_STAGE_PAGE_H_
 #define _EASYUI_UI_STAGE_PAGE_H_
 
-
+#include <ee/EditPanel.h>
 
 namespace eui
 {

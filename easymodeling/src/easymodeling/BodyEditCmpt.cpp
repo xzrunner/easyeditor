@@ -1,11 +1,14 @@
-
 #include "BodyEditCmpt.h"
 #include "StagePanel.h"
 #include "SelectBodyOP.h"
 
-using namespace emodeling;
+#include <ee/ArrangeSpriteConfig.h>
+#include <ee/ArrangeSpriteOP.h>
 
-BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const wxString& name, 
+namespace emodeling
+{
+
+BodyEditCmpt::BodyEditCmpt(wxWindow* parent, const std::string& name, 
 						   StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 {
@@ -21,4 +24,6 @@ wxSizer* BodyEditCmpt::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	return topSizer;
+}
+
 }

@@ -1,7 +1,19 @@
 #include "TrimImage.h"
 #include "check_params.h"
 
+#include <ee/SettingData.h>
+#include <ee/FileHelper.h>
+#include <ee/Config.h>
+#include <ee/ImageData.h>
+#include <ee/Rect.h>
+#include <ee/ImageTrim.h>
+#include <ee/StringHelper.h>
+#include <ee/ImageClip.h>
+#include <ee/ImageSaver.h>
+
 #include <easyimage.h>
+
+#include <wx/filename.h>
 
 namespace edb
 {
@@ -54,7 +66,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = filename.GetFullPath();
 
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
@@ -62,7 +74,7 @@ void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		int64_t img_ori_time = m_json_cfg.QueryTime(ee::FileHelper::GetRelativePath(m_src_dir, filepath).ToStdString()),
+		int64_t img_ori_time = m_json_cfg.QueryTime(ee::FileHelper::GetRelativePath(m_src_dir, filepath)),
 			img_new_time = GetFileModifyTime(filepath);
 
 		if (img_new_time != img_ori_time) {
@@ -163,7 +175,7 @@ void TrimImage::Trim(const std::string& filepath)
 {
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);
 
-	eimage::ImageTrim trim(*img);
+	ee::ImageTrim trim(*img);
 	ee::Rect r = trim.Trim();
 	bool trimed = r.IsValid();
 	if (!r.IsValid()) {
@@ -192,7 +204,7 @@ void TrimImage::Trim(const std::string& filepath)
 	ee::FileHelper::MkDir(out_dir, false);
 
 	if (trimed) {
-		eimage::ImageClip clip(*img);
+		ee::ImageClip clip(*img);
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
 		ee::ImageSaver::StoreToFile(pixels, r.Width(), r.Height(), img->GetChannels(), 
 			out_filepath, ee::ImageSaver::e_png);

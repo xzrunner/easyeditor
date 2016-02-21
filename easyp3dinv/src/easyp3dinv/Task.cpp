@@ -1,5 +1,8 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+
 #include <easyp3dinv.h>
 
 namespace ep3dinv

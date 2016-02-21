@@ -1,20 +1,22 @@
 #include "Particle2DToSpr.h"
 #include "NodeToSprite.h"
 
+#include <ee/trans_color.h>
+
 #include <easyparticle2d.h>
 #include <ps_2d.h>
 
 namespace ecomplex
 {
 
-ee::Sprite* Particle2DToSpr::Trans(const librespacker::PackParticle2D* p2d)
+ee::Sprite* Particle2DToSpr::Trans(const erespacker::PackParticle2D* p2d)
 {
 	eparticle2d::Symbol* symbol = new eparticle2d::Symbol;
 	symbol->SetEmitterCfg(LoadConfig(p2d));
 	return new eparticle2d::Sprite(symbol);
 }
 
-p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D* p2d)
+p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const erespacker::PackParticle2D* p2d)
 {
 	int sz = SIZEOF_P2D_EMITTER_CFG + SIZEOF_P2D_SYMBOL * eparticle2d::MAX_COMPONENTS;
 	p2d_emitter_cfg* cfg = (p2d_emitter_cfg*) operator new(sz);
@@ -80,7 +82,7 @@ p2d_emitter_cfg* Particle2DToSpr::LoadConfig(const librespacker::PackParticle2D*
 	cfg->symbols = (p2d_symbol*)(cfg+1);
 	for (int i = 0, n = p2d->components.size(); i < n; ++i)
 	{
-		const librespacker::PackParticle2D::Component& src = p2d->components[i];
+		const erespacker::PackParticle2D::Component& src = p2d->components[i];
 		p2d_symbol& dst = cfg->symbols[i];
 
 		dst.angle_start = src.angle_start;

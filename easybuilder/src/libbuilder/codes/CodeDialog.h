@@ -1,27 +1,29 @@
+#ifndef _EASYBUILDER_CODE_DIALOG_H_
+#define _EASYBUILDER_CODE_DIALOG_H_
 
-#ifndef LIBBUILDER_CODE_DIALOG_H
-#define LIBBUILDER_CODE_DIALOG_H
-
-
+#include <wx/dialog.h>
+#include <wx/notebook.h>
 
 namespace ebuilder
 {
-	class CodeDialog : public wxDialog
-	{
-	public:
-		CodeDialog(wxWindow* parent);
 
-	public:
-		wxNotebook* notebook;
+class CodeDialog : public wxDialog
+{
+public:
+	CodeDialog(wxWindow* parent);
 
-	}; // CodeDialog
+public:
+	wxNotebook* notebook;
 
-	class CodePanel : public wxPanel
-	{
-	public:
-		CodePanel(CodeDialog* dlg);
+}; // CodeDialog
 
-	}; // CodePanel
+class CodePanel : public wxPanel
+{
+public:
+	CodePanel(CodeDialog* dlg);
+
+}; // CodePanel
+
 }
 
-#endif // LIBBUILDER_CODE_DIALOG_H
+#endif // _EASYBUILDER_CODE_DIALOG_H_

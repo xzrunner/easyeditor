@@ -2,12 +2,14 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <ee/Image.h>
+
 #include <easyicon.h>
 
 namespace ecomplex
 {
 
-ee::Sprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
+ee::Sprite* PictureToSpr::Trans(const erespacker::PackPicture* pic)
 {
 	if (pic->quads.size() == 1) {
 		return TransQuad(&pic->quads[0]);
@@ -23,7 +25,7 @@ ee::Sprite* PictureToSpr::Trans(const librespacker::PackPicture* pic)
 	}
 }
 
-ee::Sprite* PictureToSpr::TransQuad(const librespacker::PackPicture::Quad* quad)
+ee::Sprite* PictureToSpr::TransQuad(const erespacker::PackPicture::Quad* quad)
 {
 	float w = quad->img->GetOriginWidth(),
 		h = quad->img->GetOriginHeight();

@@ -6,6 +6,12 @@
 #include "TopLibraryPanel.h"
 #include "TopToolbarPanel.h"
 
+#include <ee/SpriteDropTarget.h>
+#include <ee/sprite_msg.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteSelection.h>
+#include <ee/subject_id.h>
+
 namespace eui
 {
 namespace list

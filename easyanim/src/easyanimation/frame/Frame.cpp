@@ -8,6 +8,16 @@
 #include "view/StageCanvas.h"
 #include "view/StagePanel.h"
 
+#include <ee/FileType.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/panel_msg.h>
+#include <ee/SymbolMgr.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Snapshoot.h>
+#include <ee/BoundingBox.h>
+#include <ee/FileHelper.h>
+
 #include <easybuilder.h>
 
 namespace eanim
@@ -20,7 +30,7 @@ BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_LOVE2D, Frame::OnCodeLove2d)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title, const wxString& filetag)
+Frame::Frame(const std::string& title, const std::string& filetag)
 	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
@@ -123,7 +133,7 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
 
-	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("main.lua"));
+	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "main.lua");
 
 	ebuilder::CodeGenerator gen;
 	Love2dCode code(gen);

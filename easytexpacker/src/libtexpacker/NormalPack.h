@@ -1,14 +1,15 @@
-#ifndef _LIBTEXPACKER_NORMAL_PACK_H_
-#define _LIBTEXPACKER_NORMAL_PACK_H_
-
-#include <vector>
-#include <map>
-#include <wx/string.h>
+#ifndef _EASYTEXPACKER_NORMAL_PACK_H_
+#define _EASYTEXPACKER_NORMAL_PACK_H_
 
 #include "Rect.h"
 #include "typedef.h"
 
-namespace libtexpacker
+//#include <wx/string.h>
+
+#include <vector>
+#include <map>
+
+namespace etexpacker
 {
 
 class ImageTrimData;
@@ -39,7 +40,7 @@ private:
 
 	std::vector<Rect> m_dst_pos;
 
-	std::vector<libtexpacker::RectSize> m_dst_img_sz;
+	std::vector<RectSize> m_dst_img_sz;
 
 	std::vector<std::vector<int> > m_dst_img_idx;
 
@@ -51,4 +52,4 @@ private:
 
 }
 
-#endif // _LIBTEXPACKER_NORMAL_PACK_H_
+#endif // _EASYTEXPACKER_NORMAL_PACK_H_

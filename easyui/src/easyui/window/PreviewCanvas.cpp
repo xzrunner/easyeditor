@@ -1,6 +1,10 @@
 #include "PreviewCanvas.h"
 #include "QueryWindowViewSizeSJ.h"
 
+#include <ee/Sprite.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/PlayControl.h>
+
 namespace eui
 {
 namespace window

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libcoco"
+	Name="5.libcoco"
 	ProjectGUID="{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
 	RootNamespace="libcoco"
 	Keyword="Win32Proj"

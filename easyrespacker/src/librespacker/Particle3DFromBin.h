@@ -1,10 +1,10 @@
-#ifndef _LIBRESPACKER_PARTICLE3D_FROM_BIN_H_
-#define _LIBRESPACKER_PARTICLE3D_FROM_BIN_H_
+#ifndef _EASYRESPACKER_PARTICLE3D_FROM_BIN_H_
+#define _EASYRESPACKER_PARTICLE3D_FROM_BIN_H_
 
 #include "NodeFromBin.h"
 #include "PackParticle3D.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class Particle3DFromBin : private NodeFromBin
@@ -21,4 +21,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PARTICLE3D_FROM_BIN_H_
+#endif // _EASYRESPACKER_PARTICLE3D_FROM_BIN_H_

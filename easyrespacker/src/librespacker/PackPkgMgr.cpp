@@ -1,6 +1,12 @@
 #include "PackPkgMgr.h"
 
-namespace librespacker
+#include <ee/std_functor.h>
+#include <ee/FileHelper.h>
+
+#include <algorithm>
+#include <fstream>
+
+namespace erespacker
 {
 
 PackPkgMgr::PackPkgMgr(const std::string& filepath)
@@ -10,7 +16,7 @@ PackPkgMgr::PackPkgMgr(const std::string& filepath)
 
 PackPkgMgr::~PackPkgMgr()
 {
-	for_each(m_pkgs.begin(), m_pkgs.end(), DeletePointerFunctor<Package>());
+	for_each(m_pkgs.begin(), m_pkgs.end(), ee::DeletePointerFunctor<Package>());
 }
 
 void PackPkgMgr::LoadPackage(const Json::Value& val, const std::string& dir)

@@ -4,7 +4,13 @@
 #include "FileIO.h"
 #include "StageCanvas.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/FileHelper.h>
+
 #include <easycomplex.h>
+
+#include <wx/splitter.h>
 
 namespace sg
 {
@@ -79,7 +85,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
-	m_property->SetEditPanel(m_stage);
+	m_property->SetEditPanel(m_stage->GetStageImpl());
 	return m_stage;
 }
 
@@ -91,18 +97,16 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 
 void Task::FormatFiles()
 {
-	wxString dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
+	std::string dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
 	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(dir.ToStdString(), files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i) 
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-		if (filepath.Contains("_sg.json")) {
-			FileIO::load(filepath, m_stage);
-			FileIO::store(filepath, m_stage);
-			Clear();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
+		if (filepath.find("_sg.json") != std::string::npos) {
+			FileIO::load(filepath.c_str(), m_stage);
+			FileIO::store(filepath.c_str(), m_stage);
+//			Clear();
 		}
 	}
 }

@@ -1,6 +1,9 @@
 #include "SymbolPropertySetting.h"
 #include "Symbol.h"
 
+#include <ee/StringHelper.h>
+#include <ee/panel_msg.h>
+
 namespace ecomplex
 {
 
@@ -10,7 +13,7 @@ SymbolPropertySetting::SymbolPropertySetting(Symbol* symbol)
 	m_type = "ComplexSymbol";
 }
 
-void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	ee::SymbolPropertySetting::OnPropertyGridChange(name, value);
 
@@ -21,7 +24,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	if (name == wxT("Groups"))
 	{
 		if (m_symbol) {
-			SetGroupByNames(wxANY_AS(value, wxString));
+			SetGroupByNames(wxANY_AS(value, wxString).ToStdString());
 		}
 	}
 	else if (name == wxT("Clipbox") && m_symbol) 
@@ -90,24 +93,22 @@ std::string SymbolPropertySetting::GetGroupNames() const
 	return ret;
 }
 
-void SymbolPropertySetting::SetGroupByNames(const wxString& names)
+void SymbolPropertySetting::SetGroupByNames(const std::string& names)
 {
-	std::string str = names.ToStdString();
-
 	// parser names
 	std::set<std::string> set_names;
 
 	std::size_t begin = 0;
-	std::size_t end = str.find_first_of(";");
+	std::size_t end = names.find_first_of(";");
 	while (end != std::string::npos) {
-		std::string name = str.substr(begin, end - begin);
+		std::string name = names.substr(begin, end - begin);
 		if (!name.empty())
 			set_names.insert(name);
 
 		begin = end+1;
-		end = str.find_first_of(";", begin + 1);
+		end = names.find_first_of(";", begin + 1);
 	}
-	std::string name = str.substr(begin, end - begin);
+	std::string name = names.substr(begin, end - begin);
 	if (!name.empty())
 		set_names.insert(name);
 
@@ -129,8 +130,8 @@ void SymbolPropertySetting::SetGroupByNames(const wxString& names)
 	std::set<std::string>::iterator set_itr = set_names.begin();
 	for ( ; set_itr != set_names.end(); ++set_itr)
 	{
-		int i;
-		for (i = 0; i < groups.size(); ++i)
+		int i, n;
+		for (i = 0, n = groups.size(); i < n; ++i)
 		{
 			if (groups[i].name == *set_itr)
 				break;

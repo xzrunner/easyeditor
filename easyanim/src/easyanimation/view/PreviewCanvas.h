@@ -1,8 +1,13 @@
 #ifndef _EASYANIM_PREVIEW_CANVAS_H_
 #define _EASYANIM_PREVIEW_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
 #include <wx/wx.h>
+
+namespace ee { class PlayControl; }
+
+class PlaySettings;
 
 namespace eanim
 {

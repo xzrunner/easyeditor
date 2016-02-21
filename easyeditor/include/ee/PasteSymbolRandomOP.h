@@ -11,7 +11,7 @@ class PasteSymbolRandomOP : public PasteSymbolOP
 {
 public:
 	PasteSymbolRandomOP(wxWindow* wnd, EditPanelImpl* stage, 
-		LibraryPanel* libraryPanel, PasteSymbolRandomWidget* randomWidget);
+		LibraryPanel* library, PasteSymbolRandomWidget* randomWidget);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);

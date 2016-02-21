@@ -1,7 +1,7 @@
-#ifndef _ECOMPLEX_SYMBOL_CONTAINER_H_
-#define _ECOMPLEX_SYMBOL_CONTAINER_H_
+#ifndef _E_EASYCOMPLEX_SYMBOL_CONTAINER_H_
+#define _E_EASYCOMPLEX_SYMBOL_CONTAINER_H_
 
-
+#include <ee/DataContainer.h>
 
 namespace ecomplex
 {
@@ -33,4 +33,4 @@ private:
 
 }
 
-#endif // _ECOMPLEX_SYMBOL_CONTAINER_H_
+#endif // _E_EASYCOMPLEX_SYMBOL_CONTAINER_H_

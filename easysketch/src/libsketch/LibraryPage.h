@@ -1,10 +1,11 @@
-#ifndef _LIBSKETCH_LIBRARY_PAGE_H_
-#define _LIBSKETCH_LIBRARY_PAGE_H_
+#ifndef _EASYSKETCH_LIBRARY_PAGE_H_
+#define _EASYSKETCH_LIBRARY_PAGE_H_
 
+#include <ee/LibraryPage.h>
 
 #include <easy3d.h>
 
-namespace libsketch
+namespace esketch
 {
 
 class LibraryPage : public ee::LibraryPage
@@ -26,4 +27,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_LIBRARY_PAGE_H_
+#endif // _EASYSKETCH_LIBRARY_PAGE_H_

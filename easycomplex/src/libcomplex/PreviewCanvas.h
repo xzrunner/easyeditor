@@ -1,7 +1,9 @@
-#ifndef _EASYCOMPLEX_PREVIEW_CANVAS_H_
-#define _EASYCOMPLEX_PREVIEW_CANVAS_H_
+#ifndef _EASY_EASYCOMPLEX_PREVIEW_CANVAS_H_
+#define _EASY_EASYCOMPLEX_PREVIEW_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
+namespace ee { class Sprite; }
 
 namespace ecomplex
 {
@@ -27,4 +29,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_PREVIEW_CANVAS_H_
+#endif // _EASY_EASYCOMPLEX_PREVIEW_CANVAS_H_

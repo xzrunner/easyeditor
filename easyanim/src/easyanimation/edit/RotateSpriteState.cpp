@@ -3,6 +3,10 @@
 #include "dataset/SkeletonData.h"
 #include "dataset/data_utility.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Math2D.h>
+
 namespace eanim
 {
 

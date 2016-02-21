@@ -1,11 +1,22 @@
-#ifndef _LIBRESPACKER_IPACK_NODE_H_
-#define _LIBRESPACKER_IPACK_NODE_H_
+#ifndef _EASYRESPACKER_IPACK_NODE_H_
+#define _EASYRESPACKER_IPACK_NODE_H_
 
+#include <ee/Object.h>
 
+extern "C" {
+	#include <lua.h>
+	#include <lualib.h>
+	#include <lauxlib.h>
+};
+
+#include <vector>
+
+#include <stdint.h>
 
 namespace ebuilder { class CodeGenerator; }
+namespace ee { class TexturePacker; class Image; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode : public ee::Object
@@ -60,4 +71,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_IPACK_NODE_H_
+#endif // _EASYRESPACKER_IPACK_NODE_H_

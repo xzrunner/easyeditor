@@ -8,6 +8,7 @@
 #include "EditOP.h"
 #include "InsertSpriteAOP.h"
 #include "sprite_msg.h"
+#include "StringHelper.h"
 
 #include <fstream>
 
@@ -115,8 +116,7 @@ void EditPanelImpl::OnMouse(wxMouseEvent& event)
 	if (wxFrame* frame = dynamic_cast<wxFrame*>(m_frame)) 
 	{
 		Vector pos = TransPosScrToProj(event.GetX(), event.GetY());
-		wxString msg;
-		msg.Printf("Mouse: %.1f, %.1f", pos.x, pos.y);
+		std::string msg = ee::StringHelper::Format("Mouse: %.1f, %.1f", pos.x, pos.y);
 		static_cast<wxFrame*>(m_frame)->SetStatusText(msg);
 	}
 #endif

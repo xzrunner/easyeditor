@@ -1,7 +1,15 @@
-#ifndef _EASYCOMPLEX_PREVIEW_DIALOG_H_
-#define _EASYCOMPLEX_PREVIEW_DIALOG_H_
+#ifndef _EASY_EASYCOMPLEX_PREVIEW_DIALOG_H_
+#define _EASY_EASYCOMPLEX_PREVIEW_DIALOG_H_
 
+#include <ee/PlayControl.h>
 
+#include <wx/dialog.h>
+
+#include <vector>
+
+class wxGLContext;
+
+namespace ee { class Sprite; }
 
 namespace ecomplex
 {
@@ -27,4 +35,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_PREVIEW_DIALOG_H_
+#endif // _EASY_EASYCOMPLEX_PREVIEW_DIALOG_H_

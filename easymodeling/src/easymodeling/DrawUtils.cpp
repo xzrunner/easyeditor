@@ -1,44 +1,47 @@
-
 #include "DrawUtils.h"
 
-using namespace emodeling;
+#include <ee/Matrix.h>
+#include <ee/Sprite.h>
 
-void DrawUtils::drawBody(libmodeling::Body* body, DrawType dType)
+namespace emodeling
+{
+
+void DrawUtils::DrawBody(Body* body, DrawType dType)
 {
 	ee::Colorf cFace, cEdge;
-	getBodyColor(body->type, dType, cFace, cEdge);
+	GetBodyColor(body->m_type, dType, cFace, cEdge);
 
 	ee::Matrix mt;
-	body->sprite->GetTransMatrix(mt);
-	body->draw(mt, cFace, cEdge);
+	body->m_sprite->GetTransMatrix(mt);
+	body->Draw(mt, cFace, cEdge);
 }
 
-void DrawUtils::drawFixture(libmodeling::Fixture* fixture, 
+void DrawUtils::DrawFixture(Fixture* fixture, 
 							DrawType dType, bool onlyFixture)
 {
 	ee::Colorf cFace, cEdge;
 	if (onlyFixture)
-		getFixtureColor(dType, cFace, cEdge);
+		GetFixtureColor(dType, cFace, cEdge);
 	else
-		getBodyColor(fixture->body->type, dType, cFace, cEdge);
+		GetBodyColor(fixture->m_body->m_type, dType, cFace, cEdge);
 
 	ee::Matrix mt;
-	fixture->body->sprite->GetTransMatrix(mt);
-	fixture->draw(mt, cFace, cEdge);
+	fixture->m_body->m_sprite->GetTransMatrix(mt);
+	fixture->Draw(mt, cFace, cEdge);
 }
 
-void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
+void DrawUtils::GetBodyColor(Body::Type type, DrawType dType,
 							 ee::Colorf& cFace, ee::Colorf& cEdge)
 {
 	switch (type)
 	{
-	case libmodeling::Body::e_static:
+	case Body::e_static:
 		cFace.Set(0.5f, 0.9f, 0.5f, 0.2f);
 		break;
-	case libmodeling::Body::e_kinematic:
+	case Body::e_kinematic:
 		cFace.Set(0.5f, 0.5f, 0.9f, 0.2f);
 		break;
-	case libmodeling::Body::e_dynamic:
+	case Body::e_dynamic:
 		cFace.Set(0.5f, 0.5f, 0.3f, 0.2f);
 		break;
 	}
@@ -61,31 +64,31 @@ void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,
 			c.r *= rScale;
 			c.g *= gScale;
 			c.b *= bScale;
-			cFace = colorEnlarge(c, 1.1f);
+			cFace = ColorEnlarge(c, 1.1f);
 		}
 		break;
 	}
 
-	cEdge = colorEnlarge(cFace, 1.05f);
+	cEdge = ColorEnlarge(cFace, 1.05f);
 }
 
-void DrawUtils::getFixtureColor(DrawType type, ee::Colorf& cFace, ee::Colorf& cEdge)
+void DrawUtils::GetFixtureColor(DrawType type, ee::Colorf& cFace, ee::Colorf& cEdge)
 {
 	cFace.Set(0.6f, 0.35f, 0.6f, 0.5f);
 	switch (type)
 	{
 	case e_mouseOn:
-		cFace = colorEnlarge(cFace, 1.1f);
+		cFace = ColorEnlarge(cFace, 1.1f);
 		break;
 	case e_selected:
-		cFace = colorEnlarge(cFace, 1.2f);
+		cFace = ColorEnlarge(cFace, 1.2f);
 		break;
 	}
 
-	cEdge = colorEnlarge(cFace, 1.1f);
+	cEdge = ColorEnlarge(cFace, 1.1f);
 }
 
-ee::Colorf DrawUtils::colorEnlarge(const ee::Colorf& color, float factor)
+ee::Colorf DrawUtils::ColorEnlarge(const ee::Colorf& color, float factor)
 {
 	ee::Colorf ret = color;
 	ret.r = std::min(color.r * factor, 1.0f);
@@ -94,4 +97,6 @@ ee::Colorf DrawUtils::colorEnlarge(const ee::Colorf& color, float factor)
 	ret.a = color.a;
 
 	return ret;
+}
+
 }

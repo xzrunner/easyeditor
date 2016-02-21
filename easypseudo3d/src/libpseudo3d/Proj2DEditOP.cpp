@@ -1,5 +1,12 @@
 #include "Proj2DEditOP.h"
 
+#include <ee/Symbol.h>
+#include <ee/Camera.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/SymbolMgr.h>
+
 namespace epseudo3d
 {
 

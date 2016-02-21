@@ -1,11 +1,11 @@
 #ifndef _EASYANIM_UTILITY_H_
 #define _EASYANIM_UTILITY_H_
 
-
-
 #include "Symbol.h"
 
-namespace libanim
+#include <ee/Matrix.h>
+
+namespace eanim
 {
 
 class Utility

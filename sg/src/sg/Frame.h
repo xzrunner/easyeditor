@@ -1,7 +1,7 @@
 #ifndef _SG_FRAME_H_
 #define _SG_FRAME_H_
 
-
+#include <ee/Frame.h>
 
 namespace sg
 {
@@ -9,7 +9,7 @@ namespace sg
 class Frame : public ee::Frame
 {
 public:
-	Frame(const wxString& title, const wxString& filetag);
+	Frame(const std::string& title, const std::string& filetag);
 
 private:
 	void onChangePerspective(wxCommandEvent& event);

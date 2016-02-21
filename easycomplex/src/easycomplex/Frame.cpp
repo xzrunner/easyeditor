@@ -2,6 +2,14 @@
 #include "Task.h"
 #include "Code.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/Config.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SettingData.h>
+#include <ee/Snapshoot.h>
+
 #include <easycomplex.h>
 #include <easycoco.h>
 #include <easybuilder.h>
@@ -21,7 +29,7 @@ BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_CODE, Frame::onCode)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title, const wxString& filetag)
+Frame::Frame(const std::string& title, const std::string& filetag)
 	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
@@ -37,16 +45,16 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString filter = GetFileFilter() + "|PNG files (*.png)|*.png";
+		std::string filter = GetFileFilter() + "|PNG files (*.png)|*.png";
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
-			wxString filename = dlg.GetPath();
-			wxString ext = ee::FileHelper::GetExtension(filename);
+			std::string filename = dlg.GetPath();
+			std::string ext = ee::FileHelper::GetExtension(filename);
 			if (ext == "png") {
-				SaveAsPNG(filename.ToStdString());
+				SaveAsPNG(filename);
 			} else {
-				SaveAsJson(filename.ToStdString());
+				SaveAsJson(filename);
 			}
 		}
 	} catch (ee::Exception& e) {
@@ -91,11 +99,11 @@ void Frame::OnEJPreview(wxCommandEvent& event)
 	const char* folder = "_tmp_ejoy2d_preview";
 	ee::FileHelper::MkDir(folder);
 
-	libcoco::epe::PackLuaFile pack;
+	ecoco::epe::PackLuaFile pack;
 	pack.pack(sprites, folder);
 
 #ifdef _DEBUG
-	wxString cwd = wxFileName::GetCwd();
+	std::string cwd = wxFileName::GetCwd();
 	std::string workpath = cwd + "\\..\\..\\..\\..\\..\\editor_bin\\";
 	std::string cmd = workpath + "ejoy2d.exe " + workpath + "ejoy2d\\preview\\play.lua";
 #else
@@ -106,7 +114,7 @@ void Frame::OnEJPreview(wxCommandEvent& event)
 
 void Frame::onSetBackground(wxCommandEvent& event)
 {
-	wxString formatFilter = wxT("*.png;*.jpg;*.json");
+	std::string formatFilter = "*.png;*.jpg;*.json";
 	wxFileDialog dlg(this, wxT("Choose Background Symbol"), wxEmptyString, 
 		wxEmptyString, formatFilter, wxFD_OPEN);
 	ee::StageCanvas* canvas = const_cast<ee::EditPanel*>(m_task->GetEditPanel())->GetCanvas();
@@ -130,7 +138,7 @@ void Frame::onCode(wxCommandEvent& event)
 		const_cast<ee::EditPanel*>(m_task->GetEditPanel()));
 	// ui
 	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "ui.lua");
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
@@ -143,7 +151,7 @@ void Frame::onCode(wxCommandEvent& event)
 	}
 	// tid
 	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("texts.lua"));
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "texts.lua");
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
@@ -186,9 +194,9 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
-	wxString fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
+	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
-	m_task->Store(fixed);
+	m_task->Store(fixed.c_str());
 }
 
 }

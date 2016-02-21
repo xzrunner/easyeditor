@@ -4,6 +4,11 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 
+#include <ee/PlayControl.h>
+#include <ee/Sprite.h>
+
+#include <assert.h>
+
 namespace eanim
 {
 

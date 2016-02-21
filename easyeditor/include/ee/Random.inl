@@ -6,7 +6,7 @@
 namespace ee
 {
 
-inline template<class T>
+template<class T>
 void Random::RandomPermutation(std::vector<T>& src)
 {
 	srand((unsigned)time(NULL));

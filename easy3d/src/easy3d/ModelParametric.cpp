@@ -22,7 +22,9 @@ ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 	std::vector<float> vertices;
 	surface->GenerateVertices(vertices, flag);
 
-	glGenBuffers(1, &mesh.vertex_buffer);
+	GLuint buf_id;
+	glGenBuffers(1, &buf_id);
+	mesh.vertex_buffer = buf_id;
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
 	glBufferData(
 		GL_ARRAY_BUFFER,
@@ -35,7 +37,8 @@ ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 	int index_count = surface->GetTriangleIndexCount();
 	std::vector<GLushort> indices(index_count);
 	surface->GenerateTriangleIndices(indices);
-	glGenBuffers(1, &mesh.index_buffer);
+	glGenBuffers(1, &buf_id);
+	mesh.index_buffer = buf_id;
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.index_buffer);
 	glBufferData(
 		GL_ELEMENT_ARRAY_BUFFER,
@@ -57,7 +60,7 @@ ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 	}
 	for (int i = 0, n = vertices.size(); i < n; )
 	{
-		vec3 pos;
+		ee::vec3 pos;
 		pos.x = vertices[i];
 		pos.y = vertices[i+1];
 		pos.z = vertices[i+2];

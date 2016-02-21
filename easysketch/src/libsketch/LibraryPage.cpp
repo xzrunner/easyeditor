@@ -2,11 +2,13 @@
 #include "Symbol.h"
 #include "config.h"
 
-namespace libsketch
+#include <ee/LibraryList.h>
+
+namespace esketch
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: LibraryPage(parent, wxT("3D"))
+	: ee::LibraryPage(parent, "3D")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
@@ -72,7 +74,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			e3d::AssimpHelper loader;
 			e3d::AABB aabb;
 			loader.LoadFile(filenames[i], *model, aabb);
-			libsketch::Symbol* symbol = new libsketch::Symbol();
+			Symbol* symbol = new Symbol();
 			symbol->SetModel(model);
 
 			std::string filepath = FILE_TAG;
@@ -90,7 +92,7 @@ void LibraryPage::LoadSymbol(e3d::ISurface* surface, const char* name)
 	e3d::AABB aabb;
 	e3d::ModelParametric* model = new e3d::ModelParametric(surface, aabb);
 
-	libsketch::Symbol* symbol = new libsketch::Symbol();
+	Symbol* symbol = new Symbol();
 	symbol->SetAABB(aabb);
 	symbol->SetName(name);
 	symbol->SetModel(model);

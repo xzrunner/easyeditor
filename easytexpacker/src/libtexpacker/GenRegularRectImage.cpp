@@ -1,16 +1,25 @@
 #include "GenRegularRectImage.h"
 
+#include <ee/StringHelper.h>
+#include <ee/FileHelper.h>
+#include <ee/ImagePack.h>
+#include <ee/Image.h>
+
 #include <easyimage.h>
 
-namespace libtexpacker
+#include <json/json.h>
+
+#include <fstream>
+
+namespace etexpacker
 {
 
-void GenRegularRectImage::CreateMulti(const wxString& filepath)
+void GenRegularRectImage::CreateMulti(const std::string& filepath)
 {
 	int i = 1;
 	while (true) {
-		wxString path = filepath + wxString::FromDouble(i) + ".json";
-		if (wxFileName::FileExists(path)) {
+		std::string path = filepath + ee::StringHelper::ToString(i) + ".json";
+		if (ee::FileHelper::IsFileExist(path)) {
 			CreateSingle(path);
 		} else {
 			break;
@@ -19,19 +28,19 @@ void GenRegularRectImage::CreateMulti(const wxString& filepath)
 	}
 }
 
-void GenRegularRectImage::CreateSingle(const wxString& filepath)
+void GenRegularRectImage::CreateSingle(const std::string& filepath)
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.mb_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
 	int width = value["width"].asInt(),
 		height = value["height"].asInt();
-	eimage::ImagePack pack(width, height);
+	ee::ImagePack pack(width, height);
 
 	int i = 0;
 	Json::Value spr_val = value["parts"][i++];
@@ -51,8 +60,8 @@ void GenRegularRectImage::CreateSingle(const wxString& filepath)
 		spr_val = value["parts"][i++];
 	}
 
-	wxString out_file = filepath;
-	out_file.Replace(".json", ".png");
+	std::string out_file = filepath;
+	ee::StringHelper::Replace(out_file, ".json", ".png");
 	pack.OutputToFile(out_file);
 }
 

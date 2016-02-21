@@ -3,7 +3,7 @@
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 void P3dSprFromLua::Unpack(lua_State* L, PackP3dSpr* spr)

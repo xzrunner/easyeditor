@@ -1,6 +1,8 @@
+#ifndef _EASYBUILDER_CODE_STYLE_H_
+#define _EASYBUILDER_CODE_STYLE_H_
 
-#ifndef LIBBUILDER_CODE_STYLE_H
-#define LIBBUILDER_CODE_STYLE_H
+#include <vadefs.h>
+#include <stdarg.h>
 
 namespace ebuilder
 {
@@ -20,4 +22,4 @@ namespace ebuilder
 
 }
 
-#endif // LIBBUILDER_CODE_STYLE_H
+#endif // _EASYBUILDER_CODE_STYLE_H_

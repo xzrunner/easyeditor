@@ -20,4 +20,6 @@ public:
 
 }
 
+#include "Random.inl"
+
 #endif // _EASYEDITOR_RANDOM_H_

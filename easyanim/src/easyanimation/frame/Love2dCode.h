@@ -1,6 +1,8 @@
 #ifndef _EASYANIM_LOVE2D_CODE_H_
 #define _EASYANIM_LOVE2D_CODE_H_
 
+#include <ee/TexPackerAdapter.h>
+
 #include <easybuilder.h>
 
 namespace eanim

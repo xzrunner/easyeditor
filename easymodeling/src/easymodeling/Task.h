@@ -1,47 +1,49 @@
-
-#ifndef EMODELING_TASK_H
-#define EMODELING_TASK_H
-
+#ifndef _EASYMODELING_TASK_H_
+#define _EASYMODELING_TASK_H_
 
 #include <wx/splitter.h>
 
+namespace ee { class StageCanvas; }
+
 namespace emodeling
 {
-	class Task
+
+class Task
+{
+public:
+
+	virtual void LoadFromFile(const char* filename);
+	virtual void StoreToFile(const char* filename) const;
+
+	virtual void Clear();
+
+	virtual void OnPreview() const;
+
+	ee::StageCanvas* GetCanvas() const;
+
+	static Task* Create(wxFrame* parent)
 	{
-	public:
+		return new Task(parent);
+	}
 
-		virtual void loadFromFile(const char* filename);
-		virtual void storeToFile(const char* filename) const;
+protected:
+	Task(wxFrame* parent);
+	~Task();
 
-		virtual void clear();
+	virtual void InitWindows(wxSplitterWindow* leftHorizontalSplitter, 
+		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
+		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
 
-		virtual void onPreview() const;
+private:
+	void InitLayout();
 
-		ee::StageCanvas* getCanvas() const;
+private:
+	wxWindow* m_root;
 
-		static Task* create(wxFrame* parent)
-		{
-			return new Task(parent);
-		}
+	wxFrame* m_parent;
 
-	protected:
-		Task(wxFrame* parent);
-		~Task();
+}; // Task
 
-		virtual void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-			wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-			wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
-
-	private:
-		void InitLayout();
-
-	private:
-		wxWindow* m_root;
-
-		wxFrame* m_parent;
-
-	}; // Task
 }
 
-#endif // EMODELING_TASK_H
+#endif // _EASYMODELING_TASK_H_

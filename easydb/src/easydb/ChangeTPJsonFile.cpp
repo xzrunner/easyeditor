@@ -1,6 +1,10 @@
 #include "ChangeTPJsonFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace edb
 {
 
@@ -53,10 +57,8 @@ void ChangeTPJsonFile::TranslateFrameXY(int dx, int dy)
 {
 	for (int i = 0, n = m_files.size(); i < n; ++i)
 	{
-		wxFileName filename(m_files[i]);
-		//filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-		wxString ext = filename.GetExt();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(m_files[i].ToStdString());
+		std::string ext = ee::FileHelper::GetExtension(filepath);
 		if (ext != "json") {
 			continue;
 		}
@@ -64,19 +66,19 @@ void ChangeTPJsonFile::TranslateFrameXY(int dx, int dy)
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.fn_str());
+		std::ifstream fin(filepath.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 
-		if (!check_json_key(value, "frames", filepath.ToStdString())) break;
+		if (!check_json_key(value, "frames", filepath)) break;
 
  		int j = 0;
  		Json::Value itemValue = value["frames"][j++];
  		while (!itemValue.isNull()) {
-			if (!check_json_key(itemValue, "frame", filepath.ToStdString())) break;
-			if (!check_json_key(itemValue["frame"], "x", filepath.ToStdString())) break;
-			if (!check_json_key(itemValue["frame"], "y", filepath.ToStdString())) break;
+			if (!check_json_key(itemValue, "frame", filepath)) break;
+			if (!check_json_key(itemValue["frame"], "x", filepath)) break;
+			if (!check_json_key(itemValue["frame"], "y", filepath)) break;
 
  			int x = itemValue["frame"]["x"].asInt();
  			int y = itemValue["frame"]["y"].asInt();
@@ -87,7 +89,7 @@ void ChangeTPJsonFile::TranslateFrameXY(int dx, int dy)
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filepath.fn_str());
+		std::ofstream fout(filepath.c_str());
 		std::locale::global(std::locale("C"));
 		writer.write(fout, value);
 		fout.close();

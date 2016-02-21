@@ -2,9 +2,13 @@
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
 
+#include <ee/Exception.h>
+
 #include <spritepack.h>
 
-namespace librespacker
+#include <assert.h>
+
+namespace erespacker
 {
 
 void AnimFromLua::Unpack(lua_State* L, PackAnimation* anim)
@@ -104,7 +108,7 @@ void AnimFromLua::UnpackFrame(lua_State* L, PackAnimation::Frame& frame)
 void AnimFromLua::UnpackPart(lua_State* L, PackAnimation::Part& part)
 {
 	if (lua_isnumber(L, -1)) {
-		part.comp_idx = lua_tointeger(L, -1);
+		part.comp_idx = static_cast<int>(lua_tointeger(L, -1));
 	} else if (lua_istable(L, -1)) {
 		part.comp_idx = LuaDataHelper::GetIntField(L, "index");
 		if (LuaDataHelper::HasField(L, "mat")) {
@@ -116,7 +120,7 @@ void AnimFromLua::UnpackPart(lua_State* L, PackAnimation::Part& part)
 			{
 				lua_pushinteger(L, i);
 				lua_gettable(L, -2);
-				part.t.mat[i - 1] = lua_tointeger(L, -1);
+				part.t.mat[i - 1] = static_cast<int>(lua_tointeger(L, -1));
 				lua_pop(L, 1);
 			}
 			lua_pop(L, 1);

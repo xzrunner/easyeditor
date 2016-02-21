@@ -4,9 +4,12 @@
 #include "ResolveToB2.h"
 #include "Context.h"
 
+#include <ee/DragPhysicsOP.h>
+
 #include <easymodeling.h>
 
-using namespace emodeling;
+namespace emodeling
+{
 
 PreviewPanel::PreviewPanel(wxWindow* parent,
 						   wxTopLevelWindow* frame)
@@ -15,15 +18,15 @@ PreviewPanel::PreviewPanel(wxWindow* parent,
 	createGround();
 
 	SetCanvas(new PreviewCanvas(this));
-	SetEditOP(new ephysics::DragPhysicsOP(this, GetStageImpl(), m_world, m_ground));
+	SetEditOP(new ee::DragPhysicsOP(this, GetStageImpl(), m_world, m_ground));
 
-	std::map<libmodeling::Body*, b2Body*> mapBody;
+	std::map<Body*, b2Body*> mapBody;
 	Context::Instance()->stage->traverseBodies(LoadBodyVisitor(m_world, mapBody));
-	std::map<libmodeling::Joint*, b2Joint*> mapJoint;
+	std::map<Joint*, b2Joint*> mapJoint;
 	Context::Instance()->stage->traverseJoints(LoadJointVisitor(m_world, mapBody, mapJoint));
 	Context::Instance()->stage->traverseJoints(LoadGearJointVisitor(m_world, mapBody, mapJoint));
 
-	const libmodeling::World* world = Context::Instance()->world;
+	const World* world = Context::Instance()->world;
 	m_world->SetGravity(b2Vec2(world->gravity.x, world->gravity.y));
 	m_world->SetAllowSleeping(world->allowSleep);
 	m_world->SetWarmStarting(world->warmStarting);
@@ -61,7 +64,7 @@ void PreviewPanel::createGround()
 //////////////////////////////////////////////////////////////////////////
 
 PreviewPanel::LoadBodyVisitor::
-LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody) 
+LoadBodyVisitor(b2World* world, std::map<Body*, b2Body*>& mapBody) 
 	: m_world(world)
 	, m_mapBody(mapBody)
 {}
@@ -69,9 +72,9 @@ LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody)
 void PreviewPanel::LoadBodyVisitor::
 Visit(ee::Object* object, bool& next)
 {
-	libmodeling::Body* data = static_cast<libmodeling::Body*>(object);
+	Body* data = static_cast<Body*>(object);
 
-	b2Body* body = ResolveToB2::createBody(*data, m_world, m_mapBody);
+	b2Body* body = ResolveToB2::CreateBody(*data, m_world, m_mapBody);
 
 	next = true;
 }
@@ -81,8 +84,8 @@ Visit(ee::Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 PreviewPanel::LoadJointVisitor::
-LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
-				 std::map<libmodeling::Joint*, b2Joint*>& mapJoint) 
+LoadJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
+				 std::map<Joint*, b2Joint*>& mapJoint) 
 	: m_world(world) 
 	, m_mapBody(mapBody)
 	, m_mapJoint(mapJoint)
@@ -91,9 +94,9 @@ LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& ma
 void PreviewPanel::LoadJointVisitor::
 Visit(ee::Object* object, bool& next)
 {
-	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
+	Joint* data = static_cast<Joint*>(object);
 
-	b2Joint* joint = ResolveToB2::createJoint(*data, m_world, m_mapBody);
+	b2Joint* joint = ResolveToB2::CreateJoint(*data, m_world, m_mapBody);
 	if (joint)
 		m_mapJoint.insert(std::make_pair(data, joint));
 
@@ -105,8 +108,8 @@ Visit(ee::Object* object, bool& next)
 //////////////////////////////////////////////////////////////////////////
 
 PreviewPanel::LoadGearJointVisitor::
-LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
-					 const std::map<libmodeling::Joint*, b2Joint*>& mapJoint) 
+LoadGearJointVisitor(b2World* world, const std::map<Body*, b2Body*>& mapBody,
+					 const std::map<Joint*, b2Joint*>& mapJoint) 
 	: m_world(world) 
 	, m_mapBody(mapBody)
 	, m_mapJoint(mapJoint)
@@ -115,10 +118,11 @@ LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>
 void PreviewPanel::LoadGearJointVisitor::
 Visit(ee::Object* object, bool& next)
 {
-	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
+	Joint* data = static_cast<Joint*>(object);
 
-	ResolveToB2::createJoint(*data, m_world, m_mapBody, m_mapJoint);
+	ResolveToB2::CreateJoint(*data, m_world, m_mapBody, m_mapJoint);
 
 	next = true;
 }
 
+}

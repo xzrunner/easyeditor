@@ -1,11 +1,13 @@
-#ifndef _LIBRESPACKER_PACK_TO_BIN_H_
-#define _LIBRESPACKER_PACK_TO_BIN_H_
-
-
+#ifndef _EASYRESPACKER_PACK_TO_BIN_H_
+#define _EASYRESPACKER_PACK_TO_BIN_H_
 
 #include "typedef.h"
 
-namespace librespacker
+#include <string>
+
+namespace ee { class TexturePacker; }
+
+namespace erespacker
 {
 
 class PackToBin
@@ -21,4 +23,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_TO_BIN_H_
+#endif // _EASYRESPACKER_PACK_TO_BIN_H_

@@ -1,9 +1,9 @@
 #include "ScaleJson.h"
 #include "check_params.h"
 
-#include <wx/filename.h>
-#include <fstream>
+#include <ee/FileHelper.h>
 
+#include <fstream>
 
 namespace edb
 {
@@ -39,9 +39,7 @@ void ScaleJson::Trigger(const std::string& dir, float scale, const std::string& 
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			ScaleComplex(filepath, scale, sprite_filename);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
@@ -50,21 +48,19 @@ void ScaleJson::Trigger(const std::string& dir, float scale, const std::string& 
 	}
 }
 
-void ScaleJson::ScaleComplex(const wxString& path, float scale, const std::string& sprite_filename) const
+void ScaleJson::ScaleComplex(const std::string& path, float scale, const std::string& sprite_filename) const
 {
-	wxFileName filename(path);
-	filename.Normalize();
-	wxString filepath = filename.GetFullPath();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = ee::FileHelper::GetFileDir(path);
+	std::string dir = ee::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value spriteVal = value["sprite"][i++];
@@ -78,27 +74,25 @@ void ScaleJson::ScaleComplex(const wxString& path, float scale, const std::strin
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
 
-void ScaleJson::ScaleAnim(const wxString& path, float scale, const std::string& sprite_filename) const
+void ScaleJson::ScaleAnim(const std::string& path, float scale, const std::string& sprite_filename) const
 {
-	wxFileName filename(path);
-	filename.Normalize();
-	wxString filepath = filename.GetFullPath();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = ee::FileHelper::GetFileDir(path);
+	std::string dir = ee::FileHelper::GetFileDir(path);
 
 	int i = 0;
 	Json::Value layerVal = value["layer"][i++];
@@ -124,7 +118,7 @@ void ScaleJson::ScaleAnim(const wxString& path, float scale, const std::string& 
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();

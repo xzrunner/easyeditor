@@ -1,7 +1,13 @@
 #ifndef _LR_MAIN_DIALOG_H_
 #define _LR_MAIN_DIALOG_H_
 
+#include <ee/PlayControl.h>
 
+#include <wx/dialog.h>
+
+#include <vector>
+
+namespace ee { class Sprite; }
 
 namespace lr
 {

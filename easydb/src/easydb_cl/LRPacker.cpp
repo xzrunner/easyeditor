@@ -11,6 +11,10 @@
 #include "LRJsonPacker.h"
 #include "PackRes.h"
 
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/ShaderMgr.h>
+
 #include <glfw.h>
 
 #include <wx/stdpaths.h>

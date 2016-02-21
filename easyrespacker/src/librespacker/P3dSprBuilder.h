@@ -1,12 +1,12 @@
-#ifndef _LIBRESPACKER_P3D_SPR_BUILDER_H_
-#define _LIBRESPACKER_P3D_SPR_BUILDER_H_
+#ifndef _EASYRESPACKER_P3D_SPR_BUILDER_H_
+#define _EASYRESPACKER_P3D_SPR_BUILDER_H_
 
 #include "INodeBuilder.h"
 #include "PackP3dSpr.h"
 
 namespace eparticle3d { class Sprite; class Symbol; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class ExportNameSet;
@@ -31,4 +31,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_P3D_SPR_BUILDER_H_
+#endif // _EASYRESPACKER_P3D_SPR_BUILDER_H_

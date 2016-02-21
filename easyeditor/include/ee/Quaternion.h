@@ -26,6 +26,7 @@ struct QuaternionT {
 	QuaternionT<T> operator+(const QuaternionT<T>& q) const;
 	bool operator==(const QuaternionT<T>& q) const;
 	bool operator!=(const QuaternionT<T>& q) const;
+	QuaternionT<T> operator - () const;
 
 	void Normalize();
 	void Rotate(const QuaternionT<T>& q);

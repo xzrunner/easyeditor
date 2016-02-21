@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_P3D_SPR_TO_LUA_STRING_H_
-#define _LIBRESPACKER_P3D_SPR_TO_LUA_STRING_H_
+#ifndef _EASYRESPACKER_P3D_SPR_TO_LUA_STRING_H_
+#define _EASYRESPACKER_P3D_SPR_TO_LUA_STRING_H_
 
 #include "NodeToLua.h"
 
 namespace ebuilder { class CodeGenerator; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackP3dSpr;
@@ -19,4 +19,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_P3D_SPR_TO_LUA_STRING_H_
+#endif // _EASYRESPACKER_P3D_SPR_TO_LUA_STRING_H_

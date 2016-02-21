@@ -1,9 +1,12 @@
-#ifndef _LIBRESPACKER_PACK_PKG_MGR_H_
-#define _LIBRESPACKER_PACK_PKG_MGR_H_
+#ifndef _EASYRESPACKER_PACK_PKG_MGR_H_
+#define _EASYRESPACKER_PACK_PKG_MGR_H_
 
+#include <json/json.h>
 
+#include <string>
+#include <map>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackPkgMgr
@@ -31,4 +34,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_PKG_MGR_H_
+#endif // _EASYRESPACKER_PACK_PKG_MGR_H_

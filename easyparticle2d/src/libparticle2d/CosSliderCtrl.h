@@ -1,12 +1,15 @@
 #ifndef _EASYPARTICLE2D_COS_SLIDER_CTRL_H_
 #define _EASYPARTICLE2D_COS_SLIDER_CTRL_H_
 
+#include <ee/SliderCtrl.h>
+#include <ee/UICallback.h>
 
+#include <wx/panel.h>
+
+namespace ee { class SliderCtrlTwo; }
 
 namespace eparticle2d
 {
-
-class ee::SliderCtrlTwo;
 
 class CosSliderCtrl : public ee::SliderCtrl, public wxPanel, public ee::UICallback
 {

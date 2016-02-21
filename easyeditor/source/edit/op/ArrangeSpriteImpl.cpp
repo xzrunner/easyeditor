@@ -36,21 +36,21 @@ const float ArrangeSpriteImpl::CTRL_NODE_RADIUS = 10.0f;
 const float ArrangeSpriteImpl::MAX_CTRL_NODE_RADIUS = 10.0f;
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage,
-									 MultiSpritesImpl* spritesImpl,
+									 MultiSpritesImpl* sprites_impl,
 									 PropertySettingPanel* property,
 									 const ArrangeSpriteConfig& cfg) 
 	: m_wnd(wnd)
 	, m_stage(stage)
-	, m_sprites_impl(spritesImpl)
+	, m_sprites_impl(sprites_impl)
 	, m_property_panel(property)
-	, m_align(spritesImpl)
+	, m_align(sprites_impl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)
-	, m_popup(wnd, stage, spritesImpl, spritesImpl->GetSpriteSelection())
+	, m_popup(wnd, stage, sprites_impl, sprites_impl->GetSpriteSelection())
 {
 	m_align.SetOpen(cfg.is_auto_align_open);
 
-	m_selection = spritesImpl->GetSpriteSelection();
+	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
 
 	m_left_down_pos.SetInvalid();

@@ -10,7 +10,7 @@ namespace ee
 class ArrangeSpriteFixOP : public ArrangeSpriteOP<SelectSpritesOP>
 {
 public:
-	ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
+	ArrangeSpriteFixOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl,
 		PropertySettingPanel* property = NULL, EditCMPT* callback = NULL, 
 		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 

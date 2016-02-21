@@ -1,9 +1,11 @@
 #ifndef _EASYUI_LIST_UI_LIST_H_
 #define _EASYUI_LIST_UI_LIST_H_
 
-
+#include <ee/Rect.h>
 
 #include <json/json.h>
+
+namespace ee { class Sprite; class Visitor; }
 
 namespace eui
 {

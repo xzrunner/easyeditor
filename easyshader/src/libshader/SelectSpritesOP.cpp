@@ -1,13 +1,15 @@
 #include "SelectSpritesOP.h"
 #include "StageCanvas2D.h"
 
+#include <ee/EditPanelImpl.h>
+
 namespace eshader
 {
 
 SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-								 ee::MultiSpritesImpl* spritesImpl, 
+								 ee::MultiSpritesImpl* sprites_impl, 
 								 ee::EditCMPT* callback/* = NULL*/)
-	: ee::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
+	: ee::SelectSpritesOP(stage_wnd, stage, sprites_impl, callback)
 {
 }
 

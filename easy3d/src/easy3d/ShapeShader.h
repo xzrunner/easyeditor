@@ -1,9 +1,9 @@
-#ifndef _E3D_SHAPE_SHADER_H_
-#define _E3D_SHAPE_SHADER_H_
+#ifndef _EASY3D_SHAPE_SHADER_H_
+#define _EASY3D_SHAPE_SHADER_H_
 
-
-
-#include "Matrix.h"
+#include <ee/Matrix3D.h>
+#include <ee/IShader.h>
+#include <ee/Color.h>
 
 namespace e3d
 {
@@ -26,7 +26,7 @@ public:
 
 	virtual void Reset() {}
 
-	void SetModelView(const mat4& mat);
+	void SetModelView(const ee::mat4& mat);
 
 	void Draw(int type, const float* vertices, int count, 
 		const ee::Colorf& col, bool force = true);
@@ -51,7 +51,7 @@ private:
 
 	GLuint m_vertex_buffer;
 
-	mat4 m_mat_modelview, m_mat_projection;
+	ee::mat4 m_mat_modelview, m_mat_projection;
 
 	int m_type;
 	int m_count;
@@ -61,4 +61,4 @@ private:
 
 }
 
-#endif // _E3D_SHAPE_SHADER_H_
+#endif // _EASY3D_SHAPE_SHADER_H_

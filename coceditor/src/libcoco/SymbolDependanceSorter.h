@@ -1,14 +1,15 @@
-#ifndef _LIBCOCO_SYMBOL_DEPENDANCE_SORTER_H_
-#define _LIBCOCO_SYMBOL_DEPENDANCE_SORTER_H_
+#ifndef _ECOCO_SYMBOL_DEPENDANCE_SORTER_H_
+#define _ECOCO_SYMBOL_DEPENDANCE_SORTER_H_
 
 #include "SymbolSet.h"
 
-
 #include <queue>
+#include <set>
 
 namespace escale9 { class Symbol; }
+namespace ee { class Sprite; }
 
-namespace libcoco
+namespace ecoco
 {
 
 class SymbolDependanceSorter
@@ -42,4 +43,4 @@ private:
 
 }
 
-#endif // _LIBCOCO_SYMBOL_DEPENDANCE_SORTER_H_
+#endif // _ECOCO_SYMBOL_DEPENDANCE_SORTER_H_

@@ -1,7 +1,10 @@
 #ifndef _EASYPARTICLE3D_ANIM_RECORDER_H_
 #define _EASYPARTICLE3D_ANIM_RECORDER_H_
 
+#include <ee/Color.h>
+#include <ee/PointerPool.h>
 
+#include <vector>
 
 namespace eparticle3d
 {

@@ -3,7 +3,10 @@
 #include "PS.h"
 #include "SpritePropertySetting.h"
 
+#include <ee/SpriteFactory.h>
+
 #include <ps_3d.h>
+#include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
 
 namespace eparticle3d
@@ -18,7 +21,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_alone(sprite.m_alone)
 	, m_reuse(sprite.m_reuse)
@@ -116,7 +119,7 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	Sprite::Load(val);
+	ee::Sprite::Load(val);
 
 	const Json::Value& p_val = val["particle3d"];
 
@@ -125,7 +128,7 @@ void Sprite::Load(const Json::Value& val)
 		  y = d_val["y"].asDouble(),
 		  z = d_val["z"].asDouble(),
 		  w = d_val["w"].asDouble();
-	m_dir = Quaternion(x, y, z, w);
+	m_dir = ee::Quaternion(x, y, z, w);
 
 	if (p_val["alone"].isNull()) {
 		m_alone = false;
@@ -165,11 +168,11 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	Sprite::Store(val);
+	ee::Sprite::Store(val);
 
 	Json::Value p_val;
 
-	vec4 dir = m_dir.ToVector();
+	ee::vec4 dir = m_dir.ToVector();
 	Json::Value d_val;
 	d_val["x"] = dir.x;
 	d_val["y"] = dir.y;

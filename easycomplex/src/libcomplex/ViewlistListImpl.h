@@ -1,9 +1,9 @@
-#ifndef _EASYCOMPLEX_VIEWLIST_LIST_IMPL_H_
-#define _EASYCOMPLEX_VIEWLIST_LIST_IMPL_H_
-
-
+#ifndef _EASY_EASYCOMPLEX_VIEWLIST_LIST_IMPL_H_
+#define _EASY_EASYCOMPLEX_VIEWLIST_LIST_IMPL_H_
 
 #include "OpenSymbolDialog.h"
+
+#include <ee/ViewlistListImpl.h>
 
 namespace ecomplex
 {
@@ -24,4 +24,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_VIEWLIST_LIST_IMPL_H_
+#endif // _EASY_EASYCOMPLEX_VIEWLIST_LIST_IMPL_H_

@@ -2,7 +2,10 @@
 
 #include <easymodeling.h>
 
-using namespace emodeling;
+#include <stddef.h>
+
+namespace emodeling
+{
 
 Context* Context::m_instance = NULL;
 
@@ -13,7 +16,7 @@ Context::Context()
 	stage = NULL;
 	toolbar = NULL;
 
-	world = new libmodeling::World;
+	world = new World;
 }
 
 Context::~Context()
@@ -28,4 +31,6 @@ Context* Context::Instance()
 		m_instance = new Context();
 	}
 	return m_instance;
+}
+
 }

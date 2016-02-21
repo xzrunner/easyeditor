@@ -1,6 +1,14 @@
 #include "Shadow.h"
 #include "ShadowShader.h"
 
+#include <ee/JsonSerializer.h>
+#include <ee/ShaderMgr.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Triangulation.h>
+#include <ee/Math2D.h>
+
+#include <assert.h>
+
 namespace eshadow
 {
 
@@ -29,7 +37,7 @@ void Shadow::LoadFromFile(const Json::Value& value)
 {
 	ee::JsonSerializer::Load(value["inner color"], m_inner_color);
 	ee::JsonSerializer::Load(value["outer color"], m_outer_color);
-	m_radius = value["radius"].asDouble();
+	m_radius = static_cast<float>(value["radius"].asDouble());
 
 	std::vector<ee::Vector> loop;
 	ee::JsonSerializer::Load(value["inner loop"], loop);

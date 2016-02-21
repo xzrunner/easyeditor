@@ -1,30 +1,30 @@
-#ifndef EDB_CONTEXT_H
-#define EDB_CONTEXT_H
-
-
+#ifndef _EASYDB_CONTEXT_H_
+#define _EASYDB_CONTEXT_H_
 
 namespace edb
 {
-	class TreeCtrl;
-	class StagePanel;
 
-	class Context
-	{
-	public:
-		TreeCtrl* tree;
+class TreeCtrl;
+class StagePanel;
 
-		StagePanel* stage;
+class Context
+{
+public:
+	TreeCtrl* tree;
 
-	public:
-		static Context* Instance();
+	StagePanel* stage;
 
-	private:
-		Context();
+public:
+	static Context* Instance();
 
-	private:
-		static Context* m_instance;
+private:
+	Context();
 
-	}; // Context
+private:
+	static Context* m_instance;
+
+}; // Context
+
 }
 
-#endif // EDB_CONTEXT_H
+#endif // _EASYDB_CONTEXT_H_

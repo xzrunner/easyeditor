@@ -1,7 +1,10 @@
-#ifndef _ESHADER_SHADER_H_
-#define _ESHADER_SHADER_H_
+#ifndef _EASYSHADER_SHADER_H_
+#define _EASYSHADER_SHADER_H_
 
+#include <string>
+#include <vector>
 
+namespace ee { class IShader; }
 
 namespace eshader 
 {
@@ -48,4 +51,4 @@ private:
 
 }
 
-#endif // _ESHADER_SHADER_H_
+#endif // _EASYSHADER_SHADER_H_

@@ -1,7 +1,11 @@
 #ifndef _EASYUI_SYMBOL_CONFIG_H_
 #define _EASYUI_SYMBOL_CONFIG_H_
 
+namespace ee { class Symbol; }
 
+#include <string>
+#include <set>
+#include <vector>
 
 namespace eui
 {

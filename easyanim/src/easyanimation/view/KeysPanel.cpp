@@ -10,6 +10,8 @@
 #include "message/messages.h"
 #include "view/ViewMgr.h"
 
+#include <ee/ViewlistPanel.h>
+
 namespace eanim
 {
 

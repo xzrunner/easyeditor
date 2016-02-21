@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_PICTURE_FROM_BIN_H_
-#define _LIBRESPACKER_PICTURE_FROM_BIN_H_
+#ifndef _EASYRESPACKER_PICTURE_FROM_BIN_H_
+#define _EASYRESPACKER_PICTURE_FROM_BIN_H_
 
 #include "PackPicture.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class PictureFromBin
@@ -22,4 +22,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PICTURE_FROM_BIN_H_
+#endif // _EASYRESPACKER_PICTURE_FROM_BIN_H_

@@ -1,8 +1,9 @@
 #include "FormatTIDString.h"
 #include "check_params.h"
 
-#include <wx/wx.h>
+#include <ee/FileHelper.h>
 
+#include <fstream>
 
 namespace edb
 {
@@ -38,13 +39,11 @@ void FormatTIDString::Trigger(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 
 		// read
 		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath.fn_str());
+		std::ifstream fin(filepath.c_str());
 		std::locale::global(std::locale("C"));
 		std::vector<std::string> lines;
 		std::string str;
@@ -55,7 +54,7 @@ void FormatTIDString::Trigger(const std::string& dir) const
 
 		// write
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filepath.fn_str());
+		std::ofstream fout(filepath.c_str());
 		std::locale::global(std::locale("C"));
 		for (int i = 0, n = lines.size(); i < n; ++i){
 			fout << lines[i] << "\\n";

@@ -4,7 +4,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int Particle3DFromBin::Size(const PackParticle3D* p3d)
@@ -147,8 +147,8 @@ void Particle3DFromBin::UnpackComponent(uint8_t** ptr, PackParticle3D* p3d)
 	uint16_t alpha_start, alpha_end;
 	unpack(alpha_start, ptr);
 	unpack(alpha_end, ptr);
-	comp.alpha_start = alpha_start;
-	comp.alpha_end = alpha_end;
+	comp.alpha_start = static_cast<int>(alpha_start);
+	comp.alpha_end = static_cast<int>(alpha_end);
 }
 
 }

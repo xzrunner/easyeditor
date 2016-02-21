@@ -1,13 +1,16 @@
-#ifndef EMODELING_SELECT_JOINT_OP_H
-#define EMODELING_SELECT_JOINT_OP_H
+#ifndef _EASYMODELING_SELECT_JOINT_OP_H_
+#define _EASYMODELING_SELECT_JOINT_OP_H_
 
 #include "SelectBodyOP.h"
 
-namespace libmodeling { class Joint; }
+#include <ee/SelectionSet.h>
+
+namespace ee { class PropertySettingPanel; }
 
 namespace emodeling
 {
 
+class Joint;
 class StagePanel;
 
 class SelectJointOP : public SelectBodyOP
@@ -15,7 +18,7 @@ class SelectJointOP : public SelectBodyOP
 public:
 	SelectJointOP(wxWindow* stage_wnd,
 		ee::EditPanelImpl* stage, 
-		ee::MultiSpritesImpl* spritesImpl, 
+		ee::MultiSpritesImpl* sprites_impl, 
 		ee::EditCMPT* callback = NULL);
 
 	virtual bool OnKeyDown(int keyCode);
@@ -41,13 +44,13 @@ private:
 private:
 	ee::PropertySettingPanel* m_property_panel;
 
-	libmodeling::Joint* m_selected;
-	libmodeling::Joint* m_mouseOn;
+	Joint* m_selected;
+	Joint* m_mouseOn;
 
 	ee::Vector m_first_pos;
 
 public:
-	ee::SelectionSet<libmodeling::Joint> jointSelection;
+	ee::SelectionSet<Joint> jointSelection;
 
 //		std::vector<Joint*> selectedJoints;
 
@@ -55,4 +58,4 @@ public:
 
 }
 
-#endif // EMODELING_SELECT_JOINT_OP_H
+#endif // _EASYMODELING_SELECT_JOINT_OP_H_

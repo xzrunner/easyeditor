@@ -1,11 +1,11 @@
-#ifndef _LIBTEXPACKER_RECTANGLE_BIN_PACK_H_
-#define _LIBTEXPACKER_RECTANGLE_BIN_PACK_H_
+#ifndef _EASYTEXPACKER_RECTANGLE_BIN_PACK_H_
+#define _EASYTEXPACKER_RECTANGLE_BIN_PACK_H_
 
 #include "Rect.h"
 
 #include <vector>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 class RectangleBinPack
@@ -22,4 +22,4 @@ public:
 
 }
 
-#endif // _LIBTEXPACKER_RECTANGLE_BIN_PACK_H_
+#endif // _EASYTEXPACKER_RECTANGLE_BIN_PACK_H_

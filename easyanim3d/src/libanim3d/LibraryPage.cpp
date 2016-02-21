@@ -2,13 +2,15 @@
 #include "config.h"
 #include "Symbol.h"
 
+#include <ee/LibraryList.h>
+
 #include <easy3d.h>
 
 namespace eanim3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("3D"))
+	: ee::LibraryPage(parent, "3D")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);

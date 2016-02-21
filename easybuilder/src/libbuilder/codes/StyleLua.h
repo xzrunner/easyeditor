@@ -1,9 +1,10 @@
-
-#ifndef LIBBUILDER_STYLE_LUA_H
-#define LIBBUILDER_STYLE_LUA_H
+#ifndef _EASYBUILDER_STYLE_LUA_H_
+#define _EASYBUILDER_STYLE_LUA_H_
 
 #include "CodeStyle.h"
 #include "CodeGenerator.h"
+
+#include <ee/StringHelper.h>
 
 namespace ebuilder
 {
@@ -40,7 +41,7 @@ static void assign_with_end(CodeGenerator& gen,
 static void assign_with_end(CodeGenerator& gen, 
 	const std::string& name, float val)
 {
-	gen.line(name+" = "+wxString::FromDouble(val).ToStdString()+",");
+	gen.line(name+" = "+ee::StringHelper::ToString(val)+",");
 }
 
 // 	static std::string assign(const std::string& name, const std::string& val)
@@ -269,4 +270,4 @@ private:
 }
 }
 
-#endif // LIBBUILDER_STYLE_LUA_H
+#endif // _EASYBUILDER_STYLE_LUA_H_

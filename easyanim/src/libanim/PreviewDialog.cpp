@@ -2,7 +2,12 @@
 #include "PreviewCanvas.h"
 #include "Symbol.h"
 
-namespace libanim
+#include <ee/EditPanel.h>
+#include <ee/ZoomViewOP.h>
+
+#include <wx/wx.h>
+
+namespace eanim
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* symbol,

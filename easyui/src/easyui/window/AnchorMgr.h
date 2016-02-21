@@ -1,7 +1,12 @@
 #ifndef _EASYUI_WINDOW_ANCHOR_MGR_H_
 #define _EASYUI_WINDOW_ANCHOR_MGR_H_
 
+#include <ee/Observer.h>
+#include <ee/Vector.h>
 
+#include <json/json.h>
+
+namespace ee { class Sprite; }
 
 namespace eui
 {

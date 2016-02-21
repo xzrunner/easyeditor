@@ -1,6 +1,9 @@
 #include "SymbolSet.h"
 
-namespace libcoco
+#include <ee/FileHelper.h>
+#include <ee/Symbol.h>
+
+namespace ecoco
 {
 
 void SymbolSet::Insert(const ee::Symbol* symbol)

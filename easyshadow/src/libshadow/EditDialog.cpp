@@ -4,6 +4,11 @@
 #include "StagePanel.h"
 #include "ToolBarPanel.h"
 
+#include <ee/panel_msg.h>
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Camera.h>
+
 #include <wx/splitter.h>
 
 namespace eshadow

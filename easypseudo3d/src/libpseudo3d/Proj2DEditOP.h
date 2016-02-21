@@ -1,7 +1,9 @@
 #ifndef _EASYPSEUDO3D_PROJ_2D_EDIT_OP_H_
 #define _EASYPSEUDO3D_PROJ_2D_EDIT_OP_H_
 
+#include <ee/EditOP.h>
 
+namespace ee { class Symbol; }
 
 namespace epseudo3d
 {

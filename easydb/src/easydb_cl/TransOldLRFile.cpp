@@ -1,6 +1,11 @@
 #include "TransOldLRFile.h"
 #include "check_params.h"
 
+#include <ee/std_functor.h>
+
+#include <fstream>
+#include <algorithm>
+
 namespace edb
 {
 
@@ -83,7 +88,7 @@ void TransOldLRFile::Run(const std::string& filepath)
 		 layers[i]->BuildNewJsonVal(new_val["layer"][i]);
 	}
 
-	for_each(layers.begin(), layers.end(), DeletePointerFunctor<Layer>());
+	for_each(layers.begin(), layers.end(), ee::DeletePointerFunctor<Layer>());
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

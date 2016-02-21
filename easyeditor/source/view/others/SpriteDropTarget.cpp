@@ -12,9 +12,9 @@ namespace ee
 {
 
 SpriteDropTarget::SpriteDropTarget(EditPanelImpl* stage, 
-								   LibraryPanel* libraryPanel)
+								   LibraryPanel* library)
 	: m_stage(stage)
-	, m_libraryPanel(libraryPanel)
+	, m_library(library)
 {
 }
 
@@ -25,7 +25,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 
 	int index;
 	StringHelper::FromString(sIndex, index);
-	Symbol* symbol = m_libraryPanel->GetSymbol(index);
+	Symbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
 		Vector pos = m_stage->TransPosScrToProj(x, y);

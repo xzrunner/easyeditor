@@ -1,7 +1,10 @@
 #include "LibraryPanel.h"
 
-#include <wx/notebook.h>
 #include <easysketch.h>
+
+#include <ee/LibraryImagePage.h>
+
+#include <wx/notebook.h>
 
 namespace eshader
 {
@@ -13,7 +16,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent, bool is_2d)
 	if (is_2d) {
 		AddPage(new ee::LibraryImagePage(nb));
 	} else {
-		AddPage(new libsketch::LibraryPage(nb));
+		AddPage(new esketch::LibraryPage(nb));
 	}
 }
 

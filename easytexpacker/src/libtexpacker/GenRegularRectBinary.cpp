@@ -1,16 +1,22 @@
 #include "GenRegularRectBinary.h"
 
-
+#include <ee/FileHelper.h>
+#include <ee/Rect.h>
+#include <ee/StringHelper.h>
+#include <ee/Exception.h>
 
 #include <json/json.h>
+
 #include <fstream>
 #include <algorithm>
 
-namespace libtexpacker
+#include <stdint.h>
+
+namespace etexpacker
 {
 
-GenRegularRectBinary::GenRegularRectBinary(const wxString& json_file, 
-										   const wxString& img_id_file)
+GenRegularRectBinary::GenRegularRectBinary(const std::string& json_file, 
+										   const std::string& img_id_file)
 	: m_filepath(json_file)
 {
 	LoadRegularRectPackFile(json_file, img_id_file);
@@ -29,10 +35,10 @@ GenRegularRectBinary::~GenRegularRectBinary()
 
 void GenRegularRectBinary::PackToBinary() const
 {
-	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
-	wxString filepath = dir + "\\pack.rrp";
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
+	std::string filepath = dir + "\\pack.rrp";
 
-	std::ofstream fout(filepath.mb_str(), std::ios::binary);
+	std::ofstream fout(filepath.c_str(), std::ios::binary);
 	int pic_sz = m_pics.size();
 	fout.write(reinterpret_cast<const char*>(&pic_sz), sizeof(int32_t));
 	for (int i = 0, n = m_pics.size(); i < n; ++i)
@@ -67,14 +73,14 @@ void GenRegularRectBinary::PackToBinary() const
 	fout.close();
 }
 
-void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file, 
-												   const wxString& img_id_file)
+void GenRegularRectBinary::LoadRegularRectPackFile(const std::string& json_file, 
+												   const std::string& img_id_file)
 {
 	// load file
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(json_file.mb_str());
+	std::ifstream fin(json_file.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -84,7 +90,7 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 	int i = 0;
 	Json::Value val = value["parts"][i++];
 	while (!val.isNull()) {
-		wxString path = val["filepath"].asString();
+		std::string path = val["filepath"].asString();
 		Part* p = new Part;
 
 		p->src.x = val["src"]["x"].asInt();
@@ -116,7 +122,7 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 	for (int i = 1, n = parts.size(); i < n; ++i)
 	{
 		Part* p = parts[i];
-		if (p->filepath.Contains(pic->path)) {
+		if (p->filepath.find(pic->path) != std::string::npos) {
 			pic->parts.push_back(p);
 		} else {
 			m_pics.push_back(pic);
@@ -144,20 +150,21 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 
 	// set picture id
 	std::map<std::string, int> image_map;
-	std::ifstream fin_id_file(img_id_file.mb_str());
+	std::ifstream fin_id_file(img_id_file.c_str());
 	std::string line;
 	int id = 1;
 	while (std::getline(fin_id_file, line)) {
-		wxString key = line.substr(0, line.find_last_of('.'));
-		key.Replace("\\", "_");
+		std::string key = line.substr(0, line.find_last_of('.'));
+		std::replace(key.begin(), key.end(), '\\', '_');
 		image_map.insert(std::make_pair(key, id++));
 	}
 	fin_id_file.close();
 
 	for (int i = 0, n = m_pics.size(); i < n; ++i) {
 		Picture* pic = m_pics[i];
-		std::map<std::string, int>::iterator itr 
-			= image_map.find(pic->path.Lower().ToStdString());
+		std::string path = pic->path;
+		ee::StringHelper::ToLower(path);
+		std::map<std::string, int>::iterator itr = image_map.find(path);
 		if (itr == image_map.end()) {
 			throw ee::Exception("Cannot find image %s in %s\n", 
 				pic->path, img_id_file);

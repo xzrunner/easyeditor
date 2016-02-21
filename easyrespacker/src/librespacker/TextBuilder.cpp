@@ -1,9 +1,15 @@
 #include "TextBuilder.h"
 #include "PackLabel.h"
 
+#include <ee/std_functor.h>
+#include <ee/Visitor.h>
+#include <ee/StringHelper.h>
+
 #include <easytext.h>
 
-namespace librespacker
+#include <algorithm>
+
+namespace erespacker
 {
 
 TextBuilder::TextBuilder()
@@ -13,7 +19,7 @@ TextBuilder::TextBuilder()
 
 TextBuilder::~TextBuilder()
 {
-	for_each(m_labels.begin(), m_labels.end(), DeletePointerFunctor<const PackLabel>());
+	for_each(m_labels.begin(), m_labels.end(), ee::DeletePointerFunctor<const PackLabel>());
 }
 
 void TextBuilder::Traverse(ee::Visitor& visitor) const

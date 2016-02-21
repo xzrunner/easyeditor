@@ -8,9 +8,20 @@
 #include "ComponentPanel.h"
 #include "language.h"
 
+#include <ee/panel_msg.h>
+#include <ee/SliderCtrl.h>
+#include <ee/SymbolMgr.h>
+#include <ee/LibraryPanel.h>
+#include <ee/panel_msg.h>
+#include <ee/subject_id.h>
+#include <ee/SliderCtrlOne.h>
+#include <ee/SliderCtrlTwo.h>
+
 #include <ps_3d.h>
 
 #include <easyanim.h>
+
+#include <wx/spinctrl.h>
 
 namespace eparticle3d
 {

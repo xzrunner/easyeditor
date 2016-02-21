@@ -2,6 +2,16 @@
 
 #include "window/QueryWindowViewSizeSJ.h"
 
+#include <ee/sprite_msg.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/Sprite.h>
+#include <ee/subject_id.h>
+#include <ee/Math2D.h>
+#include <ee/Symbol.h>
+
+#include <algorithm>
+
 namespace eui
 {
 namespace window

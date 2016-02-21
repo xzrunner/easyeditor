@@ -1,7 +1,7 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 
-namespace libsketch
+namespace esketch
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)

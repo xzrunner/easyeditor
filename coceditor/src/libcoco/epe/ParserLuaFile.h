@@ -1,12 +1,16 @@
 #ifndef _COCO_EPE_PARSER_LUA_FILE_H_
 #define _COCO_EPE_PARSER_LUA_FILE_H_
 
+#include <ee/std_functor.h>
+#include <ee/Symbol.h>
+ 
 #include <string>
-
+#include <vector>
+#include <algorithm>
 
 struct lua_State;
 
-namespace libcoco
+namespace ecoco
 {
 namespace epe
 {
@@ -54,7 +58,7 @@ private:
 
 		~Picture()
 		{
-			for_each(parts.begin(), parts.end(), DeletePointerFunctor<Part>());
+			for_each(parts.begin(), parts.end(), ee::DeletePointerFunctor<Part>());
 		}
 	};
 
@@ -86,7 +90,7 @@ private:
 		~Animation()
 		{
 			for (int i = 0, n = frames.size(); i < n; ++i)
-				for_each(frames[i].begin(), frames[i].end(), DeletePointerFunctor<Item>());
+				for_each(frames[i].begin(), frames[i].end(), ee::DeletePointerFunctor<Item>());
 		}
 	};
 

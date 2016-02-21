@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_ANIM_FROM_LUA_H_
-#define _LIBRESPACKER_ANIM_FROM_LUA_H_
+#ifndef _EASYRESPACKER_ANIM_FROM_LUA_H_
+#define _EASYRESPACKER_ANIM_FROM_LUA_H_
 
 #include "PackAnimation.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class AnimFromLua
@@ -22,4 +22,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_ANIM_FROM_LUA_H_
+#endif // _EASYRESPACKER_ANIM_FROM_LUA_H_

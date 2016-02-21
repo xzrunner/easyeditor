@@ -6,7 +6,7 @@
 #include "Particle2DToBin.h"
 #include "Particle2DFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 PackParticle2D::PackParticle2D(int id)

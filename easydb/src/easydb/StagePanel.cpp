@@ -5,26 +5,41 @@
 #include "SelectSpritesOP.h"
 #include "TreeCtrl.h"
 
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/sprite_msg.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/sprite_msg.h>
+#include <ee/Random.h>
+
 #include <easycomplex.h>
 #include <easyanim.h>
 
-using namespace edb;
+namespace edb
+{
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
-	, ee::ShapesPanelImpl(GetStageImpl())
+	, ee::ShapesPanelImpl()
 {
-	m_edit_op = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, this);
-	m_canvas = new StageCanvas(this);
+	ee::EditOP* editop = new ee::ArrangeSpriteOP<SelectSpritesOP>(this, this->GetStageImpl(), this);
+	SetEditOP(editop);
+	editop->Release();
+
+	ee::StageCanvas* canvas = new StageCanvas(this);
+	SetCanvas(canvas);
+	canvas->Release();
 }
 
 StagePanel::~StagePanel()
 {
 }
 
-void StagePanel::loadFromDir(const std::string& dirpath)
+void StagePanel::LoadFromDir(const std::string& dirpath)
 {
 	ee::ClearSpriteSJ::Instance()->Clear();
 
@@ -34,23 +49,23 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
 		std::string filepath = files[i].ToStdString();
-		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)
-			|| ee::FileType::IsType(filepath, ee::FileType::e_anim))
+		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
+			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 			symbol->Release();
-			ee::InsertSpriteSJ::Insert(sprite);
+			ee::InsertSpriteSJ::Instance()->Insert(sprite);
 		}
 	}
 
-	initConnection();
-	initPosition();
+	InitConnection();
+	InitPosition();
 
 	Context::Instance()->tree->init(m_graphics);
 }
 
-void StagePanel::loadFromDirFast(const std::string& dirpath)
+void StagePanel::LoadFromDirFast(const std::string& dirpath)
 {
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(dirpath, files);
@@ -58,9 +73,9 @@ void StagePanel::loadFromDirFast(const std::string& dirpath)
 	Context::Instance()->tree->init(files);
 }
 
-void StagePanel::initConnection()
+void StagePanel::InitConnection()
 {
-	m_graphics.clear();
+	m_graphics.Clear();
 
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
@@ -75,24 +90,24 @@ void StagePanel::initConnection()
 				ee::Sprite* child = symbol.m_sprites[i];
 				for (size_t i = 0, n = sprites.size(); i < n; ++i)
 					if (&child->GetSymbol() == &sprites[i]->GetSymbol())
-						m_graphics.connect(from, sprites[i]);
+						m_graphics.Connect(from, sprites[i]);
 			}
 		}
-		else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(from))
+		else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(from))
 		{
-			const libanim::Symbol& symbol = anim->GetSymbol();
+			const eanim::Symbol& symbol = anim->GetSymbol();
 			for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 			{
-				libanim::Symbol::Layer* layer = symbol.m_layers[i];
+				eanim::Symbol::Layer* layer = symbol.m_layers[i];
 				for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 				{
-					libanim::Symbol::Frame* frame = layer->frames[i];
+					eanim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 					{
 						ee::Sprite* child = frame->sprites[i];
 						for (size_t i = 0, n = sprites.size(); i < n; ++i)
 							if (&child->GetSymbol() == &sprites[i]->GetSymbol())
-								m_graphics.connect(from, sprites[i]);
+								m_graphics.Connect(from, sprites[i]);
 					}
 				}
 			}
@@ -100,7 +115,7 @@ void StagePanel::initConnection()
 	}
 }
 
-void StagePanel::initPosition()
+void StagePanel::InitPosition()
 {
 	std::vector<ee::Sprite*> sprites;
 	TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
@@ -110,7 +125,7 @@ void StagePanel::initPosition()
 	{
 		ee::Sprite* sprite = sprites[i];
 
-		Node* node = m_graphics.query(sprite);
+		Node* node = m_graphics.Query(sprite);
 		if (!node || node->in.empty())
 		{
 			ee::Vector pos;
@@ -127,7 +142,7 @@ void StagePanel::initPosition()
 	{
 		ee::Sprite* sprite = sprites[i];
 
-		Node* node = m_graphics.query(sprite);
+		Node* node = m_graphics.Query(sprite);
 //		if (node && node->in.empty())
 		if (node)
 		{
@@ -144,8 +159,10 @@ void StagePanel::initPosition()
 // 					pos = (pos + to->getPosition()) * 0.5f;
 
 			//	to->setTransform(pos, 0);
-				m_graphics.move(to, pos - to->GetPosition());
+				m_graphics.Move(to, pos - to->GetPosition());
 			}
 		}
 	}
+}
+
 }

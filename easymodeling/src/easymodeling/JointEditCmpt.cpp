@@ -1,13 +1,19 @@
-
 #include "JointEditCmpt.h"
 #include "StagePanel.h"
 #include "SelectJointOP.h"
 
+#include <ee/ArrangeSpriteConfig.h>
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/panel_msg.h>
+
 #include <easymodeling.h>
 
-using namespace emodeling;
+namespace emodeling
+{
 
-JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name, 
+JointEditCmpt::JointEditCmpt(wxWindow* parent, const std::string& name, 
 							 StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
@@ -34,11 +40,11 @@ void JointEditCmpt::UpdateControlValue()
 			SelectJointOP* op = static_cast<SelectJointOP*>(m_editop);
 			if (op->jointSelection.Size() == 2)
 			{
-				std::vector<libmodeling::Joint*> joints;
-				op->jointSelection.Traverse(ee::FetchAllVisitor<libmodeling::Joint>(joints));
-				const libmodeling::Joint *j0 = joints[0], *j1 = joints[1];
-				if ((j0->type == libmodeling::Joint::e_revoluteJoint || j0->type == libmodeling::Joint::e_prismaticJoint) &&
-					(j1->type == libmodeling::Joint::e_revoluteJoint || j1->type == libmodeling::Joint::e_prismaticJoint))
+				std::vector<Joint*> joints;
+				op->jointSelection.Traverse(ee::FetchAllVisitor<Joint>(joints));
+				const Joint *j0 = joints[0], *j1 = joints[1];
+				if ((j0->m_type == Joint::e_revoluteJoint || j0->m_type == Joint::e_prismaticJoint) &&
+					(j1->m_type == Joint::e_revoluteJoint || j1->m_type == Joint::e_prismaticJoint))
 					m_btnOK->Enable(true);
 				else
 					m_btnOK->Enable(false);
@@ -97,46 +103,46 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	ee::SpriteSelection* selection = m_stage_panel->GetSpriteSelection();
 	selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	assert(sprites.size() == 2);
-	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->GetUserData()),
-		*body1 = static_cast<libmodeling::Body*>(sprites[1]->GetUserData());
+	Body *body0 = static_cast<Body*>(sprites[0]->GetUserData()),
+		*body1 = static_cast<Body*>(sprites[1]->GetUserData());
 
-	libmodeling::Joint* joint = NULL;
-	wxString type = m_typeChoice->GetString(m_typeChoice->GetSelection());
+	Joint* joint = NULL;
+	std::string type = m_typeChoice->GetString(m_typeChoice->GetSelection());
 	if (type == wxT("Revolute"))
-		m_stage_panel->insertJoint(new libmodeling::RevoluteJoint(body0, body1));
+		m_stage_panel->insertJoint(new RevoluteJoint(body0, body1));
 	else if (type == wxT("Prismatic"))
-		m_stage_panel->insertJoint(new libmodeling::PrismaticJoint(body0, body1));
+		m_stage_panel->insertJoint(new PrismaticJoint(body0, body1));
 	else if (type == wxT("Distance"))
-		m_stage_panel->insertJoint(new libmodeling::DistanceJoint(body0, body1));
+		m_stage_panel->insertJoint(new DistanceJoint(body0, body1));
 	else if (type == wxT("Pulley"))
-		m_stage_panel->insertJoint(new libmodeling::PulleyJoint(body0, body1));
+		m_stage_panel->insertJoint(new PulleyJoint(body0, body1));
 	else if (type == wxT("Gear"))
 	{
 		SelectJointOP* op = static_cast<SelectJointOP*>(m_editop);
 		assert(op->jointSelection.Size() == 2);
-		std::vector<libmodeling::Joint*> joints;
-		op->jointSelection.Traverse(ee::FetchAllVisitor<libmodeling::Joint>(joints));
-		m_stage_panel->insertJoint(new libmodeling::GearJoint(body0, body1, joints[0], joints[1]));
+		std::vector<Joint*> joints;
+		op->jointSelection.Traverse(ee::FetchAllVisitor<Joint>(joints));
+		m_stage_panel->insertJoint(new GearJoint(body0, body1, joints[0], joints[1]));
 	}	
 	else if (type == wxT("Wheel"))
 	{
-		SelectWheelDialog dlg(this, wxT("Choose Wheel"), body0->name, body1->name);
+		SelectWheelDialog dlg(this, "Choose Wheel", body0->m_name, body1->m_name);
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			if (dlg.getChoice() == 0)
-				m_stage_panel->insertJoint(new libmodeling::WheelJoint(body1, body0));
+				m_stage_panel->insertJoint(new WheelJoint(body1, body0));
 			else
-				m_stage_panel->insertJoint(new libmodeling::WheelJoint(body0, body1));
+				m_stage_panel->insertJoint(new WheelJoint(body0, body1));
 		}
 	}
 	else if (type == wxT("Weld"))
-		m_stage_panel->insertJoint(new libmodeling::WeldJoint(body0, body1));
+		m_stage_panel->insertJoint(new WeldJoint(body0, body1));
 	else if (type == wxT("Friction"))
-		m_stage_panel->insertJoint(new libmodeling::FrictionJoint(body0, body1));
+		m_stage_panel->insertJoint(new FrictionJoint(body0, body1));
 	else if (type == wxT("Rope"))
-		m_stage_panel->insertJoint(new libmodeling::RopeJoint(body0, body1));
+		m_stage_panel->insertJoint(new RopeJoint(body0, body1));
 	else if (type == wxT("Motor"))
-		m_stage_panel->insertJoint(new libmodeling::MotorJoint(body0, body1));
+		m_stage_panel->insertJoint(new MotorJoint(body0, body1));
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
@@ -151,14 +157,14 @@ void JointEditCmpt::onTypeChanged(wxCommandEvent& event)
 //////////////////////////////////////////////////////////////////////////
 
 JointEditCmpt::SelectWheelDialog::
-SelectWheelDialog(wxWindow* parent, const wxString& title, const wxString& body0, const wxString& body1)
+SelectWheelDialog(wxWindow* parent, const std::string& title, const std::string& body0, const std::string& body1)
 	: wxDialog(parent, wxID_ANY, title)
 {
 	InitLayout(body0, body1);
 }
 
 void JointEditCmpt::SelectWheelDialog::
-InitLayout(const wxString& body0, const wxString& body1)
+InitLayout(const std::string& body0, const std::string& body1)
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);	
 	{
@@ -183,4 +189,6 @@ InitLayout(const wxString& body0, const wxString& body1)
 	}
 	SetSizer(topSizer);
 	topSizer->Fit(this);
+}
+
 }

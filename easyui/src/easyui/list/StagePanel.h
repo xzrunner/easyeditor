@@ -1,10 +1,12 @@
 #ifndef _EASYUI_LIST_STAGE_PANEL_H_
 #define _EASYUI_LIST_STAGE_PANEL_H_
 
-
-
 #include "UIList.h"
 #include "UIStagePage.h"
+
+#include <ee/MultiSpritesImpl.h>
+
+class wxGLContext;
 
 namespace eui
 {

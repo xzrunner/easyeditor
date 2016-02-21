@@ -1,7 +1,8 @@
-#ifndef _E3D_LOG_VIEWER_H_
-#define _E3D_LOG_VIEWER_H_
+#ifndef _EASY3D_LOG_VIEWER_H_
+#define _EASY3D_LOG_VIEWER_H_
 
-
+#include <string>
+#include <vector>
 
 namespace e3d
 {
@@ -30,4 +31,4 @@ private:
 
 }
 
-#endif // _E3D_LOG_VIEWER_H_
+#endif // _EASY3D_LOG_VIEWER_H_

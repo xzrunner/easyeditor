@@ -21,11 +21,11 @@ LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const std::string& name,
 
 LayersMgrCMPT::LayersMgrCMPT(wxWindow* parent, const std::string& name, 
 							 wxWindow* stage_wnd, EditPanelImpl* stage, 
-							 MultiSpritesImpl* spritesImpl)
+							 MultiSpritesImpl* sprites_impl)
 	 : EditCMPT(parent, name, stage)
 	 , m_layersMgr(NULL)
 {
-	m_editop = new SelectSpritesOP(stage_wnd, stage, spritesImpl);
+	m_editop = new SelectSpritesOP(stage_wnd, stage, sprites_impl);
 
 	m_layersMgr = new LayersMgrWidget(this);
 	m_sizer = new wxBoxSizer(wxVERTICAL);

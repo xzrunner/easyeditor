@@ -2,10 +2,15 @@
 #include "PackParticle2D.h"
 #include "PackNodeFactory.h"
 
+#include <ee/Visitor.h>
+#include <ee/Exception.h>
+#include <ee/trans_color.h>
+
 #include <easyparticle2d.h>
+
 #include <ps_2d.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 Particle2DBuilder::Particle2DBuilder(ExportNameSet& export_set)

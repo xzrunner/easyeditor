@@ -3,11 +3,17 @@
 #include "Symbol.h"
 #include "Settings.h"
 
+#include <ee/dev_config.h>
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/SceneNode.h>
+#include <ee/Config.h>
+#include <ee/EE_DTex.h>
+#include <ee/SpriteRenderer.h>
+
 #include <easyanim.h>
 #include <easytext.h>
-
-// todo
-#include <common/dev_config.h>
 
 namespace ecomplex
 {
@@ -41,11 +47,11 @@ void StageCanvas::OnSize(int w, int h)
 {
 	ee::OrthoCanvas::OnSize(w, h);
 
-	m_camera3.SetScreenSize(w, h);
-
-	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
-	shader_mgr->SetProjection(w, h);
-	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
+// 	m_camera3.SetScreenSize(w, h);
+// 
+// 	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
+// 	shader_mgr->SetProjection(w, h);
+// 	shader_mgr->SetModelView(m_camera3.GetModelViewMat());
 }
 
 #ifdef OPEN_SCREEN_CACHE

@@ -1,7 +1,11 @@
 #ifndef _EASYUI_TOP_STAGE_PANEL_H_
 #define _EASYUI_TOP_STAGE_PANEL_H_
 
+#include <wx/notebook.h>
+#include <wx/panel.h>
+#include <wx/toplevel.h>
 
+#include <vector>
 
 namespace eui
 {

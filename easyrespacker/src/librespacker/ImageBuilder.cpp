@@ -1,7 +1,15 @@
 #include "ImageBuilder.h"
 #include "IPackNode.h"
 
-namespace librespacker
+#include <ee/std_functor.h>
+#include <ee/Visitor.h>
+#include <ee/ImageSprite.h>
+#include <ee/Image.h>
+#include <ee/Math2D.h>
+
+#include <algorithm>
+
+namespace erespacker
 {
 
 ImageBuilder::ImageBuilder()
@@ -10,7 +18,7 @@ ImageBuilder::ImageBuilder()
 
 ImageBuilder::~ImageBuilder()
 {
-	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
+	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
 }
 
 void ImageBuilder::Traverse(ee::Visitor& visitor) const

@@ -2,7 +2,9 @@
 #include "IPackNode.h"
 #include "Utility.h"
 
-namespace librespacker
+#include <ee/Exception.h>
+
+namespace erespacker
 {
 
 void ExportNameSet::LoadExport(const ee::Symbol* symbol, IPackNode* node)

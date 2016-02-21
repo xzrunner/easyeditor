@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_PROPERTY_SETTING_PANEL_H_
 #define _EASYPARTICLE3D_PROPERTY_SETTING_PANEL_H_
 
-
+#include <ee/PropertySettingPanel.h>
 
 namespace eparticle3d
 {

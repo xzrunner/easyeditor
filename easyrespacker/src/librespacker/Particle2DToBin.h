@@ -1,10 +1,10 @@
-#ifndef _LIBRESPACKER_PARTICLE2D_TO_BIN_H_
-#define _LIBRESPACKER_PARTICLE2D_TO_BIN_H_
+#ifndef _EASYRESPACKER_PARTICLE2D_TO_BIN_H_
+#define _EASYRESPACKER_PARTICLE2D_TO_BIN_H_
 
 #include "NodeToBin.h"
 #include "PackParticle2D.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class Particle2DToBin : private NodeToBin
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PARTICLE2D_TO_BIN_H_
+#endif // _EASYRESPACKER_PARTICLE2D_TO_BIN_H_

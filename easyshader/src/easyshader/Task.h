@@ -1,7 +1,9 @@
 #ifndef _ESHADER_TASK_H_
 #define _ESHADER_TASK_H_
 
+#include <ee/Task.h>
 
+#include <wx/wx.h>
 
 namespace eshader 
 {

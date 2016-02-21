@@ -1,5 +1,5 @@
-#ifndef _EASYCOMPLEX_SETTINGS_H_
-#define _EASYCOMPLEX_SETTINGS_H_
+#ifndef _EASY_EASYCOMPLEX_SETTINGS_H_
+#define _EASY_EASYCOMPLEX_SETTINGS_H_
 
 namespace ecomplex
 {
@@ -14,4 +14,4 @@ public:
 
 }
 
-#endif // _EASYCOMPLEX_SETTINGS_H_
+#endif // _EASY_EASYCOMPLEX_SETTINGS_H_

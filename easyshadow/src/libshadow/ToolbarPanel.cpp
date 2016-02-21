@@ -3,6 +3,11 @@
 #include "Shadow.h"
 #include "Symbol.h"
 
+#include <ee/panel_msg.h>
+#include <ee/SliderItem.h>
+#include <ee/SliderCtrlOne.h>
+#include <ee/RGBColorSettingDlg.h>
+
 #include <easyshape.h>
 
 namespace eshadow

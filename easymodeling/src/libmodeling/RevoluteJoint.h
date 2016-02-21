@@ -1,46 +1,49 @@
-
-#ifndef LIBMODELING_REVOLUTE_JOINT_H
-#define LIBMODELING_REVOLUTE_JOINT_H
+#ifndef _EASYMODELING_REVOLUTE_JOINT_H_
+#define _EASYMODELING_REVOLUTE_JOINT_H_
 
 #include "Joint.h"
 
-namespace libmodeling
+#include <ee/Vector.h>
+
+namespace emodeling
 {
-	class RevoluteJoint : public Joint
-	{
-	public:
-		RevoluteJoint(Body* b0, Body* b1);
 
-		virtual bool isContain(const ee::Vector& pos) const;
-		virtual bool isIntersect(const ee::Rect& rect) const;
+class RevoluteJoint : public Joint
+{
+public:
+	RevoluteJoint(Body* b0, Body* b1);
 
-		virtual void draw(DrawType type) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
 
-		ee::Vector getWorldAnchorA() const;
-		ee::Vector getWorldAnchorB() const;
+	virtual void Draw(DrawType type) const;
 
-		void setLocalAnchorA(const ee::Vector& world);
-		void setLocalAnchorB(const ee::Vector& world);
+	ee::Vector GetWorldAnchorA() const;
+	ee::Vector GetWorldAnchorB() const;
 
-	private:
-		void drawAnchor(const ee::Vector& pos, DrawType type) const;
+	void SetLocalAnchorA(const ee::Vector& world);
+	void SetLocalAnchorB(const ee::Vector& world);
 
-	public:
-		ee::Vector localAnchorA;
-		ee::Vector localAnchorB;
+private:
+	void DrawAnchor(const ee::Vector& pos, DrawType type) const;
 
-		float referenceAngle;
+public:
+	ee::Vector m_local_anchor_a;
+	ee::Vector m_local_anchor_b;
 
-		bool enableLimit;
-		float lowerAngle;
-		float upperAngle;
+	float m_reference_angle;
 
-		bool enableMotor;
-		float maxMotorTorque;
+	bool m_enable_limit;
+	float m_lower_angle;
+	float m_upper_angle;
 
-		float motorSpeed;
+	bool m_enable_motor;
+	float m_max_motor_torque;
 
-	}; // RevoluteJoint
+	float m_motor_speed;
+
+}; // RevoluteJoint
+
 }
 
-#endif // LIBMODELING_REVOLUTE_JOINT_H
+#endif // _EASYMODELING_REVOLUTE_JOINT_H_

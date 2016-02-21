@@ -1,37 +1,37 @@
+#ifndef _EASYMODELING_CONTEXT_H_
+#define _EASYMODELING_CONTEXT_H_
 
-#ifndef EMODELING_CONTEXT_H
-#define EMODELING_CONTEXT_H
-
-
-
-namespace libmodeling { class World; }
+namespace ee { class PropertySettingPanel; class LibraryPanel; }
 
 namespace emodeling
 {
-	class StagePanel;
-	class ToolbarPanel;
 
-	class Context
-	{
-	public:
-		ee::PropertySettingPanel* property;
-		ee::LibraryPanel* library;
-		StagePanel* stage;
-		ToolbarPanel* toolbar;
+class World;
+class StagePanel;
+class ToolbarPanel;
 
-		libmodeling::World* world;
+class Context
+{
+public:
+	ee::PropertySettingPanel* property;
+	ee::LibraryPanel* library;
+	StagePanel* stage;
+	ToolbarPanel* toolbar;
 
-	public:
-		static Context* Instance();
+	World* world;
 
-	private:
-		Context();
-		~Context();
+public:
+	static Context* Instance();
 
-	private:
-		static Context* m_instance;
+private:
+	Context();
+	~Context();
 
-	}; // Context
+private:
+	static Context* m_instance;
+
+}; // Context
+
 }
 
-#endif // EMODELING_CONTEXT_H
+#endif // _EASYMODELING_CONTEXT_H_

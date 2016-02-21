@@ -6,6 +6,9 @@
 #include "message/messages.h"
 #include "view/KeyFramePropertySetting.h"
 
+#include <ee/ViewlistPanel.h>
+#include <ee/PropertySettingPanel.h>
+
 namespace eanim
 {
 

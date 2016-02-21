@@ -1,25 +1,28 @@
-#ifndef EDB_FILE_IO_H
-#define EDB_FILE_IO_H
-
+#ifndef _EASYDB_FILE_IO_H_
+#define _EASYDB_FILE_IO_H_
 
 #include <json/json.h>
 
+namespace ee { class Sprite; class Shape; class Vector; }
+
 namespace edb
 {
-	class FileIO
-	{
-	public:
-		static void load(const char* filename);
-		static void store(const char* filename);
 
-	private:
-		static ee::Sprite* loadSprite(const Json::Value& value);
-		static ee::Shape* loadShape(const Json::Value& value);
+class FileIO
+{
+public:
+	static void Load(const char* filename);
+	static void Store(const char* filename);
 
-		static Json::Value store(ee::Sprite* sprite, const ee::Vector& offset);
-		static Json::Value store(ee::Shape* shape, const ee::Vector& offset);
+private:
+	static ee::Sprite* LoadSprite(const Json::Value& value);
+	static ee::Shape* LoadShape(const Json::Value& value);
 
-	}; // FileIO
+	static Json::Value Store(ee::Sprite* sprite, const ee::Vector& offset);
+	static Json::Value Store(ee::Shape* shape, const ee::Vector& offset);
+
+}; // FileIO
+
 }
 
-#endif // EDB_FILE_IO_H
+#endif // _EASYDB_FILE_IO_H_

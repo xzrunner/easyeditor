@@ -5,7 +5,20 @@
 #include "SymbolExt.h"
 #include "SymbolRender.h"
 
+#include <ee/Exception.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Symbol.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Sprite.h>
+#include <ee/Math2D.h>
+#include <ee/LibraryPanel.h>
+#include <ee/LibraryImagePage.h>
+#include <ee/LibraryList.h>
+#include <ee/StringHelper.h>
+
 #include <JSON/json.h>
+
+#include <fstream>
 
 namespace sg
 {
@@ -241,7 +254,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 			info->remain = QueryAmountLimit(pItem->building->name, m_stage->GetBaseLevel());
 			info->level = level;
 			s->RefreshThumbnail(filepath);
- 			s->SetInfo(wxString::FromDouble(info->remain).ToStdString());
+			s->SetInfo(ee::StringHelper::ToString(info->remain));
 			library->GetList()->Insert(s);
 			s->Release();
 		}
@@ -275,7 +288,7 @@ void BuildingCfg::LoadSymbolUserData(const std::vector<Building*>& buildings)
 			try {
 				ee::Symbol* s = ee::SymbolMgr::Instance()->FetchSymbol(item.res_snapshoot_path);
 				s->RefreshThumbnail(item.res_snapshoot_path);
-				s->SetInfo(wxString::FromDouble(info->remain).ToStdString());
+				s->SetInfo(ee::StringHelper::ToString(info->remain));
 				s->SetUserData(info);
 			} catch (ee::Exception& e) {
 				std::cerr << e.What() << std::endl;

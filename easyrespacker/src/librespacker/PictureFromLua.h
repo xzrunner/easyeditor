@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_PICTURE_FROM_LUA_H_
-#define _LIBRESPACKER_PICTURE_FROM_LUA_H_
+#ifndef _EASYRESPACKER_PICTURE_FROM_LUA_H_
+#define _EASYRESPACKER_PICTURE_FROM_LUA_H_
 
 #include "PackPicture.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class PictureFromLua
@@ -16,4 +16,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PICTURE_FROM_LUA_H_
+#endif // _EASYRESPACKER_PICTURE_FROM_LUA_H_

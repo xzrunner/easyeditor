@@ -1,7 +1,9 @@
-#ifndef _LIBCOMPLEX_FILE_STORER_H_
-#define _LIBCOMPLEX_FILE_STORER_H_
+#ifndef _EASYCOMPLEX_FILE_STORER_H_
+#define _EASYCOMPLEX_FILE_STORER_H_
 
+#include <json/json.h>
 
+namespace ee { class Sprite; }
 
 namespace ecomplex
 {
@@ -16,10 +18,10 @@ public:
 
 private:
 	static void CenterSymbol(Symbol* symbol);
-	static Json::Value Store(ee::Sprite* sprite, const wxString& dir);
+	static Json::Value Store(ee::Sprite* sprite, const std::string& dir);
 
 }; // FileStorer
 
 }
 
-#endif // _LIBCOMPLEX_FILE_STORER_H_
+#endif // _EASYCOMPLEX_FILE_STORER_H_

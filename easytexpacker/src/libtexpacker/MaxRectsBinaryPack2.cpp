@@ -1,7 +1,12 @@
 #include "MaxRectsBinaryPack2.h"
 #include "math.h"
 
-namespace libtexpacker
+#include <ee/std_functor.h>
+#include <ee/math_common.h>
+
+#include <assert.h>
+
+namespace etexpacker
 {
 
 static const float SCALE = 1.0f;
@@ -13,7 +18,7 @@ MaxRectsBinaryPack2::MaxRectsBinaryPack2()
 
 MaxRectsBinaryPack2::~MaxRectsBinaryPack2()
 {
-	for_each(m_roots.begin(), m_roots.end(), DeletePointerFunctor<ee::TPNode>());
+	for_each(m_roots.begin(), m_roots.end(), ee::DeletePointerFunctor<ee::TPNode>());
 }
 
 void MaxRectsBinaryPack2::GetSize(std::vector<RectSize>& sizes) const
@@ -76,11 +81,11 @@ ee::TPNode* MaxRectsBinaryPack2::NewRoot(int w, int h)
 	return root;
 }
 
-bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const libtexpacker::Sprite* sprite, int tex_id) const
+bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const Sprite* sprite, int tex_id) const
 {
 	ee::TPNode* n = NULL;
-	int w = sprite->size->width * SCALE + PADDING * 2,
-		h = sprite->size->height * SCALE + PADDING * 2;
+	int w = static_cast<int>(sprite->size->width * SCALE + PADDING * 2),
+		h = static_cast<int>(sprite->size->height * SCALE + PADDING * 2);
 	float scale = 1.0f;
 
 	bool rot = false;
@@ -126,7 +131,7 @@ bool MaxRectsBinaryPack2::Insert(ee::TPNode* root, const libtexpacker::Sprite* s
 
 void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprites, int area)
 {
-	int edge = next_p2((int)ceil(sqrt((float)area)));
+	int edge = ee::next_p2((int)ceil(sqrt((float)area)));
 	int w = edge, h = (edge >> 1);
 
 	bool success = false;
@@ -160,7 +165,7 @@ void MaxRectsBinaryPack2::PackAuto(const std::vector<Sprite>& sprites, int area)
 
 void MaxRectsBinaryPack2::PackSquare(const std::vector<Sprite>& sprites, int area)
 {
-	int edge = next_p2((int)ceil(sqrt((float)area)));
+	int edge = ee::next_p2((int)ceil(sqrt((float)area)));
 	bool success = false;
 	while (!success)
 	{
@@ -231,7 +236,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 
 	float area_scale_limit = AREA_SCALE_LIMIT;
 
-	int edge = std::max(std::min(next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
+	int edge = std::max(std::min(ee::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 
 	std::vector<Sprite> curr_list = sprites;
 
@@ -273,7 +278,7 @@ void MaxRectsBinaryPack2::PackSquareMultiAuto(std::vector<Sprite>& sprites, int 
 			area_scale_limit = std::min(area_scale_limit * (1 + AREA_SCALE_LIMIT_STEP), AREA_SCALE_LIMIT);
 			curr_list = fail_list;
 			area = area - used_area;
-			edge = std::max(std::min(next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
+			edge = std::max(std::min(ee::next_p2((int)ceil(sqrt((float)area))), max_size), min_size);
 			m_roots.push_back(root);
 			++curr_tex;
 		} 

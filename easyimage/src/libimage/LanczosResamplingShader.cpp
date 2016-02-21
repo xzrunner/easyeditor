@@ -1,4 +1,3 @@
-#define NOMINMAX
 #include <gl/glew.h>
 
 #include "LanczosResamplingShader.h"

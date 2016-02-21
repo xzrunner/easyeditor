@@ -1,7 +1,9 @@
 #ifndef _EASYPARTICLE3D_LOAD_ADAPTER_H_
 #define _EASYPARTICLE3D_LOAD_ADAPTER_H_
 
+#include <ee/Color.h>
 
+#include <json/json.h>
 
 namespace eparticle3d
 {

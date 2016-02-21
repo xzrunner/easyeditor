@@ -3,7 +3,9 @@
 
 #include "ICommand.h"
 
+#include <ee/Vector.h>
 
+#include <json/json.h>
 
 namespace edb
 {

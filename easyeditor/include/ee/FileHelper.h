@@ -19,6 +19,8 @@ public:
 
 	static bool MkDir(const std::string& dir, bool rm = true);
 
+	static bool RmFile(const std::string& filepath);
+
 	static bool IsFileExist(const std::string& filepath);
 	static bool IsDirExist(const std::string& filepath);
 

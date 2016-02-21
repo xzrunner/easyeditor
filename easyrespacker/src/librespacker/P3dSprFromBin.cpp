@@ -5,7 +5,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int P3dSprFromBin::Size()

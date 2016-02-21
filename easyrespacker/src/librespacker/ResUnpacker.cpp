@@ -3,7 +3,7 @@
 #include "UnpackFromLua.h"
 #include "UnpackFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 void ResUnpacker::UnpackLua(const std::string& filepath, const std::vector<ee::Image*>& images)

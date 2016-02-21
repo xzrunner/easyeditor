@@ -1,6 +1,11 @@
 #include "OutlineToPolygon.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/FileType.h>
+#include <ee/JsonSerializer.h>
+#include <ee/NullSymbol.h>
+
 #include <easyimage.h>
 #include <easyshape.h>
 
@@ -38,14 +43,12 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
 
-		wxString outline_path = ee::FileHelper::GetFilenameAddTag(
+		std::string outline_path = ee::FileHelper::GetFilenameAddTag(
 			filepath, eimage::OUTLINE_FILE_TAG, "json");
 		if (!ee::FileHelper::IsFileExist(filepath)) {
 			continue;
@@ -54,7 +57,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(outline_path.fn_str());
+		std::ifstream fin(outline_path.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -65,16 +68,16 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 			continue;
 		}
 
-		wxString shape_path = ee::FileHelper::GetFilenameAddTag(
+		std::string shape_path = ee::FileHelper::GetFilenameAddTag(
 			filepath, eshape::FILE_TAG, "json");
 
 		std::vector<ee::Shape*> shapes;
 		eshape::PolygonShape poly(vertices);
 		shapes.push_back(&poly);
 
-		ee::NullSymbol bg(filepath.ToStdString());
+		ee::NullSymbol bg(filepath);
 
-		eshape::FileIO::StoreToFile(shape_path.mb_str(), shapes, &bg);
+		eshape::FileIO::StoreToFile(shape_path.c_str(), shapes, &bg);
 	}
 }
 

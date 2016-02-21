@@ -11,9 +11,15 @@
 #include "PackParticle3D.h"
 #include "PackParticle2D.h"
 
+#include <ee/std_functor.h>
+#include <ee/Visitor.h>
+#include <ee/StringHelper.h>
+
 #include <easycomplex.h>
 
-namespace librespacker
+#include <algorithm>
+
+namespace erespacker
 {
 
 ComplexBuilder::ComplexBuilder(ExportNameSet& export_set, ClipboxBuilder* cb_builder)
@@ -30,7 +36,7 @@ ComplexBuilder::~ComplexBuilder()
 		delete itr->second;
 	}
 
-	for_each(m_gen_nodes.begin(), m_gen_nodes.end(), DeletePointerFunctor<PackAnimation>());
+	for_each(m_gen_nodes.begin(), m_gen_nodes.end(), ee::DeletePointerFunctor<PackAnimation>());
 }
 
 void ComplexBuilder::Traverse(ee::Visitor& visitor) const

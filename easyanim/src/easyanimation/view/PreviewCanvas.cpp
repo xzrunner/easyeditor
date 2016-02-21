@@ -6,6 +6,12 @@
 #include "dataset/LayersMgr.h"
 #include "message/messages.h"
 
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/PlayControl.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteRenderer.h>
+
 #include <easyanim.h>
 #include <easyparticle3d.h>
 

@@ -1,7 +1,11 @@
-#ifndef _DRAG2D_EDIT_DIALOG_H_
-#define _DRAG2D_EDIT_DIALOG_H_
+#ifndef _EASYCOMPLEX_EDIT_DIALOG_H_
+#define _EASYCOMPLEX_EDIT_DIALOG_H_
 
+#include <wx/dialog.h>
 
+class wxGLContext;
+
+namespace ee { class LibraryPanel; class ViewlistPanel; }
 
 namespace ecomplex
 {
@@ -40,4 +44,4 @@ private:
 
 }
 
-#endif // _DRAG2D_EDIT_DIALOG_H_
+#endif // _EASYCOMPLEX_EDIT_DIALOG_H_

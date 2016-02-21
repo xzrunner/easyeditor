@@ -1,14 +1,15 @@
-#ifndef _LIBRESPACKER_TEXT_BUILDER_H_
-#define _LIBRESPACKER_TEXT_BUILDER_H_
+#ifndef _EASYRESPACKER_TEXT_BUILDER_H_
+#define _EASYRESPACKER_TEXT_BUILDER_H_
 
 #include "INodeBuilder.h"
 
-#include <vector>
 #include <json/json.h>
+
+#include <vector>
 
 namespace etext { class Sprite; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -42,4 +43,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_TEXT_BUILDER_H_
+#endif // _EASYRESPACKER_TEXT_BUILDER_H_

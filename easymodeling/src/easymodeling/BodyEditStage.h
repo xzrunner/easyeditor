@@ -1,7 +1,5 @@
-
-#ifndef EMODELING_BODY_EDIT_STAGE_H
-#define EMODELING_BODY_EDIT_STAGE_H
-
+#ifndef _EASYMODELING_BODY_EDIT_STAGE_H_
+#define _EASYMODELING_BODY_EDIT_STAGE_H_
 
 #include <easyshape.h>
 
@@ -23,4 +21,4 @@ public:
 
 }
 
-#endif // EMODELING_BODY_EDIT_STAGE_H
+#endif // _EASYMODELING_BODY_EDIT_STAGE_H_

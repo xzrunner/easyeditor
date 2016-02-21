@@ -1,11 +1,12 @@
-#ifndef _DRAG2D_FILE_IO_H_
-#define _DRAG2D_FILE_IO_H_
-
-
-#include <JSON/value.h>
+#ifndef _EASYSHADER_FILE_IO_H_
+#define _EASYSHADER_FILE_IO_H_
 
 #include "Uniform.h"
 #include "SliderItem.h"
+
+#include <JSON/value.h>
+
+namespace ee { class StageCanvas; }
 
 namespace eshader
 {
@@ -16,12 +17,12 @@ class Shader;
 class FileIO
 {
 public:
-	static Shader* LoadShader(const wxString& filepath, ee::StageCanvas* canvas,
+	static Shader* LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
 		ToolbarPanel* toolbar, bool is_2d);
-	static void StoreShader(const wxString& filepath, const ToolbarPanel* toolbar);
+	static void StoreShader(const std::string& filepath, const ToolbarPanel* toolbar);
 
 private:
-	static Shader* LoadShader(const wxString& dir, const Json::Value& value,
+	static Shader* LoadShader(const std::string& dir, const Json::Value& value,
 		ToolbarPanel* toolbar, bool is_2d);
 	static Uniform* LoadUniform(const Json::Value& value, ToolbarPanel* toolbar,
 		Shader* shader);
@@ -42,4 +43,4 @@ private:
 
 }
 
-#endif // _DRAG2D_FILE_IO_H_
+#endif // _EASYSHADER_FILE_IO_H_

@@ -1,8 +1,8 @@
 #include "VerifyImage.h"
 #include "check_params.h"
 
-#include <wx/wx.h>
-
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
 
 namespace edb 
 {
@@ -51,21 +51,16 @@ void VerifyImage::InitFiles(const std::string& dirpath)
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
-			std::string filename = filepath.ToStdString();
-			ee::StringHelper::ToLower(filename);
-			_complex_files.push_back(filename);
+			ee::StringHelper::ToLower(filepath);
+			_complex_files.push_back(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
-			std::string filename = filepath.ToStdString();
-			ee::StringHelper::ToLower(filename);
-			_anim_files.push_back(filename);
+			ee::StringHelper::ToLower(filepath);
+			_anim_files.push_back(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
-			std::string filename = filepath.ToStdString();
-			ee::StringHelper::ToLower(filename);
-			_map_images.insert(std::make_pair(filename, false));
+			ee::StringHelper::ToLower(filepath);
+			_map_images.insert(std::make_pair(filepath, false));
 		}
 	}
 }
@@ -87,7 +82,7 @@ void VerifyImage::VerifyLack()
 		while (!spriteValue.isNull()) {
 			std::string base = _complex_files[i];
 			std::string relative = spriteValue["filepath"].asString();
-			std::string filepath = ee::FileHelper::GetAbsolutePathFromFile(base, relative).ToStdString();
+			std::string filepath = ee::FileHelper::GetAbsolutePathFromFile(base, relative);
 			ee::StringHelper::ToLower(filepath);
 			HandleSpritePath(filepath);
 
@@ -116,7 +111,7 @@ void VerifyImage::VerifyLack()
 				Json::Value entryValue = frameValue["actor"][j++];
 				while (!entryValue.isNull()) {
 					std::string relative = entryValue["filepath"].asString();
-					std::string filepath = ee::FileHelper::GetAbsolutePathFromFile(anim, relative).ToStdString();
+					std::string filepath = ee::FileHelper::GetAbsolutePathFromFile(anim, relative);
 					ee::StringHelper::ToLower(filepath);
 					HandleSpritePath(filepath);
 

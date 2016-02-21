@@ -1,57 +1,61 @@
+#ifndef _EASYMODELING_BODY_H_
+#define _EASYMODELING_BODY_H_
 
-#ifndef LIBMODELING_BODY_H
-#define LIBMODELING_BODY_H
-
-
+#include <ee/Color.h>
+#include <ee/Object.h>
 
 #include <vector>
 
-namespace libmodeling
+namespace ee { class Matrix; class Vector; class Rect; class Sprite; }
+
+namespace emodeling
 {
-	class Fixture;
 
-	class Body : public ee::Object
+class Fixture;
+
+class Body : public ee::Object
+{
+public:
+	enum Type
 	{
-	public:
-		enum Type
-		{
-			e_static = 0,
-			e_kinematic,
-			e_dynamic
-		};
+		e_static = 0,
+		e_kinematic,
+		e_dynamic
+	};
 
-	public:
-		Body();
-		~Body();
+public:
+	Body();
+	~Body();
 
-		bool isContain(const ee::Vector& pos) const;
-		bool isIntersect(const ee::Rect& rect) const;
+	bool IsContain(const ee::Vector& pos) const;
+	bool IsIntersect(const ee::Rect& rect) const;
 
-		void draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
-			const ee::Colorf& cEdge) const;
+	void Draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
+		const ee::Colorf& cEdge) const;
 
-	public:
-		wxString name;
+public:
+	std::string m_name;
 
-		Type type;
+	Type m_type;
 
-		float linearDamping;
+	float m_linear_damping;
 
-		float angularDamping;
+	float m_angular_damping;
 
-		bool allowSleep;
+	bool m_allow_sleep;
 
-		bool bullet;
+	bool m_bullet;
 
-		bool active;
+	bool m_active;
 
-		float gravityScale;
+	float m_gravity_scale;
 
-		ee::Sprite* sprite;
+	ee::Sprite* m_sprite;
 
-		std::vector<Fixture*> fixtures;
+	std::vector<Fixture*> m_fixtures;
 
-	}; // Body
+}; // Body
+
 }
 
-#endif // LIBMODELING_BODY_H
+#endif // _EASYMODELING_BODY_H_

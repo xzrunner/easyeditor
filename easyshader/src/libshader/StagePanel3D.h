@@ -1,5 +1,5 @@
-#ifndef _ESHADER_STAGE_PANEL3D_H_
-#define _ESHADER_STAGE_PANEL3D_H_
+#ifndef _EASYSHADER_STAGE_PANEL3D_H_
+#define _EASYSHADER_STAGE_PANEL3D_H_
 
 #include <easysketch.h>
 
@@ -8,7 +8,7 @@ namespace eshader
 
 class Shader;
 
-class StagePanel3D : public libsketch::StagePanel
+class StagePanel3D : public esketch::StagePanel
 {
 public:
 	StagePanel3D(wxWindow* parent, wxTopLevelWindow* frame,
@@ -26,4 +26,4 @@ private:
 
 }
 
-#endif // _ESHADER_STAGE_PANEL3D_H_
+#endif // _EASYSHADER_STAGE_PANEL3D_H_

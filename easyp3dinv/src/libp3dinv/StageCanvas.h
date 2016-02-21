@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_STAGE_CANVAS_H_
 #define _EASYP3DINV_STAGE_CANVAS_H_
 
-
+#include <ee/OrthoCanvas.h>
 
 namespace ep3dinv
 {

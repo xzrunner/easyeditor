@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_SPRITE_USER_DATA_H_
 #define _EASYANIM_SPRITE_USER_DATA_H_
 
-
+namespace ee { class Sprite; }
 
 namespace eanim
 {

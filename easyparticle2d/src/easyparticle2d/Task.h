@@ -1,7 +1,10 @@
 #ifndef _EASYPARTICLE2D_TASK_H_
 #define _EASYPARTICLE2D_TASK_H_
 
+#include <ee/Task.h>
 
+class wxFrame;
+class wxWindow;
 
 namespace eparticle2d
 {

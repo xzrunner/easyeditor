@@ -1,6 +1,17 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <ee/Symbol.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/SceneNode.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Config.h>
+#include <ee/EE_DTex.h>
+#include <ee/style_config.h>
+#include <ee/Sprite.h>
+
 namespace eanim
 {
 

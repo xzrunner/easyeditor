@@ -1,7 +1,8 @@
 #ifndef _EASYP3DINV_STAGE_PANEL_H_
 #define _EASYP3DINV_STAGE_PANEL_H_
 
-
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
 
 namespace ep3dinv
 {

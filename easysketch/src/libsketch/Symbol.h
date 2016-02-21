@@ -1,10 +1,13 @@
-#ifndef _LIBSKETCH_SYMBOL_H_
-#define _LIBSKETCH_SYMBOL_H_
+#ifndef _EASYSKETCH_SYMBOL_H_
+#define _EASYSKETCH_SYMBOL_H_
 
+#include <ee/Symbol.h>
 
 #include <easy3d.h>
 
-namespace libsketch
+namespace e3d { class IModel; }
+
+namespace esketch
 {
 
 class Symbol : public ee::Symbol
@@ -45,4 +48,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_SYMBOL_H_
+#endif // _EASYSKETCH_SYMBOL_H_

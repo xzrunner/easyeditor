@@ -3,6 +3,10 @@
 #include "SymbolExt.h"
 #include "tools.h"
 
+#include <ee/PrimitiveDraw.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Visitor.h>
+
 #include <string>
 
 namespace sg
@@ -12,6 +16,16 @@ CheckerBoard::CheckerBoard(StagePanel* stage)
 	: m_stage(stage)
 {
 	Clear();
+}
+
+void CheckerBoard::Traverse(ee::Visitor& visitor) const
+{
+	bool next;
+	std::map<ee::Sprite*, ee::Vector>::const_iterator itr 
+		= m_map_sprite2pos.begin();
+	for ( ; itr != m_map_sprite2pos.end(); ++itr) {
+		visitor.Visit(itr->first, next);
+	}
 }
 
 void CheckerBoard::AddSprite(ee::Sprite* sprite)
@@ -31,7 +45,7 @@ void CheckerBoard::AddSprite(ee::Sprite* sprite)
 		}
 	}
 
-	m_mapSprite2Pos.insert(std::make_pair(sprite, sprite->GetPosition()));
+	m_map_sprite2pos.insert(std::make_pair(sprite, sprite->GetPosition()));
 }
 
 void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
@@ -41,8 +55,8 @@ void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
 	}
 
 	std::map<ee::Sprite*, ee::Vector>::iterator itr 
-		= m_mapSprite2Pos.find(sprite);
-	assert(itr != m_mapSprite2Pos.end());
+		= m_map_sprite2pos.find(sprite);
+	assert(itr != m_map_sprite2pos.end());
 
 	int row, col;
 	m_stage->TransCoordsToGridPos(itr->second, row, col);
@@ -59,8 +73,8 @@ void CheckerBoard::RemoveSprite(ee::Sprite* sprite)
 		}
 	}
 
-	m_mapRemoved.insert(std::make_pair(itr->first, itr->second));
-	m_mapSprite2Pos.erase(itr);
+	m_map_removed.insert(std::make_pair(itr->first, itr->second));
+	m_map_sprite2pos.erase(itr);
 }
 
 void CheckerBoard::Clear()
@@ -130,8 +144,8 @@ void CheckerBoard::DebugDraw() const
 bool CheckerBoard::SetCachedPos(ee::Sprite* sprite) const
 {
 	std::map<ee::Sprite*, ee::Vector>::const_iterator itr 
-		= m_mapRemoved.find(sprite);
-	if (itr != m_mapRemoved.end()) {
+		= m_map_removed.find(sprite);
+	if (itr != m_map_removed.end()) {
 		sprite->SetTransform(itr->second, sprite->GetAngle());
 		return true;
 	} else {

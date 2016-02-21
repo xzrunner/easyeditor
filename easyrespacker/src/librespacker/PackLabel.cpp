@@ -6,7 +6,7 @@
 #include "LabelToBin.h"
 #include "LabelFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 PackLabel::PackLabel(int id)

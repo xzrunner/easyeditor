@@ -1,7 +1,10 @@
 #ifndef _EASYSHADOW_TOOLBAR_PANEL_H_
 #define _EASYSHADOW_TOOLBAR_PANEL_H_
 
+#include <ee/ToolbarPanel.h>
+#include <ee/UICallback.h>
 
+namespace ee { class SliderCtrlOne; }
 
 namespace eshadow
 {

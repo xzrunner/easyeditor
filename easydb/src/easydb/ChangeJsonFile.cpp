@@ -1,6 +1,10 @@
 #include "ChangeJsonFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace edb
 {
 
@@ -54,27 +58,25 @@ void ChangeJsonFile::Scale(const std::string& key, float times)
 {
 	for (int i = 0, n = m_files.size(); i < n; ++i)
 	{
-		wxFileName filename(m_files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(m_files[i].ToStdString());
 //		if (ee::FileType::isType(filepath, m_type))
 		{
 			Json::Value value;
 			Json::Reader reader;
 			std::locale::global(std::locale(""));
-			std::ifstream fin(filepath.fn_str());
+			std::ifstream fin(filepath.c_str());
 			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
 
-			if (check_json_key(value, key, filepath.ToStdString()))
+			if (check_json_key(value, key, filepath))
 			{
 				float old = value[key].asDouble();
 				value[key] = (int)old * times;
 
 				Json::StyledStreamWriter writer;
 				std::locale::global(std::locale(""));
-				std::ofstream fout(filepath.fn_str());
+				std::ofstream fout(filepath.c_str());
 				std::locale::global(std::locale("C"));
 				writer.write(fout, value);
 				fout.close();

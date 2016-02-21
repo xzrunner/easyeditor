@@ -2,7 +2,14 @@
 #include "StageCanvas.h"
 #include "ArrangeSpriteOP.h"
 
-namespace libsketch
+#include <ee/StageDropTarget.h>
+#include <ee/sprite_msg.h>
+#include <ee/Visitor.h>
+#include <ee/Sprite.h>
+#include <ee/subject_id.h>
+#include <ee/panel_msg.h>
+
+namespace esketch
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -34,13 +41,13 @@ void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type
 	}
 }
 
-ivec2 StagePanel::TransPos3ProjectToScreen(const vec3& proj) const
+ee::ivec2 StagePanel::TransPos3ProjectToScreen(const ee::vec3& proj) const
 {
 	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ProjectToScreen(proj);
 }
 
-vec3 StagePanel::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
+ee::vec3 StagePanel::TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const
 {
 	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ScreenToProject(scr, proj_z);	

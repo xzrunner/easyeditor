@@ -2,6 +2,9 @@
 #include "AnchorMgr.h"
 #include "StagePanel.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/panel_msg.h>
+
 namespace eui
 {
 namespace window

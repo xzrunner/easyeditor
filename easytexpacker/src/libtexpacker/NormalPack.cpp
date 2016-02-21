@@ -2,10 +2,20 @@
 #include "MaxRectsBinaryPack2.h"
 #include "ImageTrimData.h"
 
-#include <easyimage.h>
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/StringHelper.h>
+#include <ee/ImagePack.h>
+#include <ee/Image.h>
+#include <ee/LibpngAdapter.h>
+
+#include <json/json.h>
+
 #include <string>
 
-namespace libtexpacker
+#include <assert.h>
+
+namespace etexpacker
 {
 
 static const bool CLOCKWISE_ROT = true;
@@ -153,7 +163,7 @@ void NormalPack::OutputImage(const std::string& filepath) const
 
 	for (int i = 0, n = m_dst_img_idx.size(); i < n; ++i) 
 	{
-		eimage::ImagePack pack(m_dst_img_sz[i].width, m_dst_img_sz[i].height);
+		ee::ImagePack pack(m_dst_img_sz[i].width, m_dst_img_sz[i].height);
 
 		for (int j = 0, m = m_dst_img_idx[i].size(); j < m; ++j) 
 		{

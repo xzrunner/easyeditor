@@ -1,9 +1,12 @@
 #include "AnchorToSpr.h"
 
+#include <ee/FontBlankSymbol.h>
+#include <ee/FontBlankSprite.h>
+
 namespace ecomplex
 {
 
-ee::Sprite* AnchorToSpr::Trans(const librespacker::PackAnchor* anchor)
+ee::Sprite* AnchorToSpr::Trans(const erespacker::PackAnchor* anchor)
 {
 	ee::FontBlankSymbol* symbol = new ee::FontBlankSymbol();
 

@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_SCRIPT_TYPE_H_
 #define _EASYEDITOR_SCRIPT_TYPE_H_
 
+#include <stdint.h>
+
 namespace ee
 {
 

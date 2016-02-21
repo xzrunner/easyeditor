@@ -5,6 +5,15 @@
 #include "dataset/Layer.h"
 #include "view/LibraryPage.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/PointQueryVisitor.h>
+#include <ee/SpriteSelection.h>
+#include <ee/Layer.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/panel_msg.h>
+#include <ee/SymbolMgr.h>
+#include <ee/FileHelper.h>
+
 #include <easycomplex.h>
 
 namespace lr

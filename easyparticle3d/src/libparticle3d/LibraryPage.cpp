@@ -2,11 +2,17 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace eparticle3d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Particle3D"))
+	: ee::LibraryPage(parent, "Particle3D")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
@@ -19,7 +25,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FileType::e_particle3d);
+	std::string filter = ee::FileType::GetTag(ee::FileType::e_particle3d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);
@@ -29,7 +35,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			std::string filepath = filenames[i].ToStdString();
+			std::string filepath = filenames[i];
 			try {
 				ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(filepath);

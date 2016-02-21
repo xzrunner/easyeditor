@@ -1,6 +1,8 @@
 #ifndef _EASYANIM_CONFIG_H_
 #define _EASYANIM_CONFIG_H_
 
+#include <wx/colour.h>
+
 namespace eanim
 {
 

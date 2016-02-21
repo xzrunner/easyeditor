@@ -1,7 +1,15 @@
 #include "AnimToComplexWithColor.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/NullSprite.h>
+#include <ee/NullSymbol.h>
+#include <ee/StringHelper.h>
+#include <ee/convert_color.h>
+
 #include <easycomplex.h>
+
+#include <fstream>
 
 namespace edb
 {

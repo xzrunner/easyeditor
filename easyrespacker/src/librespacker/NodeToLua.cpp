@@ -1,25 +1,25 @@
 #include "NodeToLua.h"
 
+#include <ee/Math2D.h>
+
 #include <math.h>
 
-
-
-namespace librespacker
+namespace erespacker
 {
 
 int NodeToLua::TransTime(float time)
 {
-	return floor(time * 1000 + 0.5f);
+	return static_cast<int>(floor(time * 1000 + 0.5f));
 }
 
 int NodeToLua::TransRadian(float r)
 {
-	return floor(r * ee::TRANS_RAD_TO_DEG + 0.5f);
+	return static_cast<int>(floor(r * ee::TRANS_RAD_TO_DEG + 0.5f));
 }
 
 int NodeToLua::TransFloat(float f)
 {
-	return floor(f + 0.5f);
+	return static_cast<int>(floor(f + 0.5f));
 }
 
 int NodeToLua::TransFloatX100(float f)

@@ -1,5 +1,5 @@
-#ifndef _LIBRESPACKER_ICON_BUILDER_H_
-#define _LIBRESPACKER_ICON_BUILDER_H_
+#ifndef _EASYRESPACKER_ICON_BUILDER_H_
+#define _EASYRESPACKER_ICON_BUILDER_H_
 
 #include "INodeBuilder.h"
 
@@ -7,7 +7,7 @@
 
 namespace eicon { class Sprite; class Symbol; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -42,4 +42,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_ICON_BUILDER_H_
+#endif // _EASYRESPACKER_ICON_BUILDER_H_

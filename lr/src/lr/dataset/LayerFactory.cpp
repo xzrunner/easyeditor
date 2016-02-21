@@ -2,6 +2,8 @@
 #include "Layer.h"
 #include "ShapeLayer.h"
 
+#include <assert.h>
+
 namespace lr
 {
 

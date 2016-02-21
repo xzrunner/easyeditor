@@ -1,20 +1,23 @@
-
 #include "Frame.h"
 
-//#include "SettingOperatingDlg.h"
 #include "SettingViewDlg.h"
 
 #include "Task.h"
 
 #include "Love2dCode.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 #include <easybuilder.h>
 
-using namespace emodeling;
+namespace emodeling
+{
 
-static const wxString VERSION = wxT("0.13.0515");
+static const std::string VERSION = "0.13.0515";
 
-static const wxString FILE_TAG = wxT("modeling");
+static const std::string FILE_TAG = "modeling";
 
 enum MenuID
 {
@@ -35,10 +38,10 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(ID_LOVE2D, Frame::onCodeLove2d)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title)
+Frame::Frame(const std::string& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
 {
-	m_task = Task::create(this);
+	m_task = Task::Create(this);
 	initMenuBar();
 }
 
@@ -47,7 +50,7 @@ void Frame::onNew(wxCommandEvent& event)
 	if (!m_task) return;
 
 	setCurrFilename();
-	m_task->clear();
+	m_task->Clear();
 }
 
 void Frame::onOpen(wxCommandEvent& event)
@@ -58,11 +61,11 @@ void Frame::onOpen(wxCommandEvent& event)
 		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_task->clear();
-		m_currFilename = dlg.GetPath();
-		SetTitle(ee::FileHelper::GetFilename(dlg.GetPath()));
+		m_task->Clear();
+		m_filename = dlg.GetPath();
+		SetTitle(ee::FileHelper::GetFilename(dlg.GetPath().ToStdString()));
 		try {
-			m_task->loadFromFile(dlg.GetPath());
+			m_task->LoadFromFile(dlg.GetPath());
 		} catch (ee::Exception& e) {
 			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
@@ -74,10 +77,10 @@ void Frame::onSave(wxCommandEvent& event)
 {
 	if (!m_task) return;
 
-	if (!m_currFilename.empty())
+	if (!m_filename.empty())
 	{
-		SetTitle(ee::FileHelper::GetFilename(m_currFilename));
-		m_task->storeToFile(m_currFilename);
+		SetTitle(ee::FileHelper::GetFilename(m_filename));
+		m_task->StoreToFile(m_filename.c_str());
 	}
 }
 
@@ -89,9 +92,9 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString fixed = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
-		m_currFilename = fixed;
-		m_task->storeToFile(fixed);
+		std::string fixed = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILE_TAG, "json");
+		m_filename = fixed;
+		m_task->StoreToFile(fixed.c_str());
 	}
 }
 
@@ -102,9 +105,8 @@ void Frame::onQuit(wxCommandEvent& event)
 
 void Frame::onAbout(wxCommandEvent& event)
 {
-	wxString msg;
-	msg.Printf(wxT("Version: ") + VERSION);
-	wxMessageBox(msg, wxT("About EasyModeling"), wxOK | wxICON_INFORMATION, this);
+	std::string msg = ee::StringHelper::Format();
+	wxMessageBox(std::string("Version: ") + VERSION, wxT("About EasyModeling"), wxOK | wxICON_INFORMATION, this);
 }
 
 // void Frame::onSettingOperatingMenu(wxCommandEvent& event)
@@ -117,7 +119,7 @@ void Frame::onSettingViewMenu(wxCommandEvent& event)
 {
 	if (m_task)
 	{
-		SettingViewDlg dlg(this, m_task->getCanvas());
+		SettingViewDlg dlg(this, m_task->GetCanvas());
 		dlg.ShowModal();
 	}
 }
@@ -125,18 +127,18 @@ void Frame::onSettingViewMenu(wxCommandEvent& event)
 void Frame::onPreview(wxCommandEvent& event)
 {
 	if (m_task)
-		m_task->onPreview();
+		m_task->OnPreview();
 }
 
 void Frame::onCodeLove2d(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
 
-	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("main.lua"));
+	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "main.lua");
 
 	ebuilder::CodeGenerator gen;
 	Love2dCode code(gen);
-	code.resolve();
+	code.Resolve();
 	page->SetReadOnly(false);
 	page->SetText(gen.toText());
 	page->SetReadOnly(true);
@@ -217,17 +219,19 @@ void Frame::setCurrFilename()
 	int id = 0;
 	while (true)
 	{
-		wxString str = 
-			wxT("new") + 
-			wxString::FromDouble(id++) + 
-			wxT("_") + 
+		std::string str = 
+			std::string("new") + 
+			ee::StringHelper::ToString(id++) + 
+			"_" + 
 			FILE_TAG + 
-			wxT(".json");
+			".json";
 
 		if (!ee::FileHelper::IsFileExist(str))
 		{
-			m_currFilename = str;
+			m_filename = str;
 			break;
 		}
 	}
+}
+
 }

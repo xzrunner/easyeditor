@@ -1,6 +1,7 @@
 #ifndef _EASYP3DINV_TASK_H_
 #define _EASYP3DINV_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
 

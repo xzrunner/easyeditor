@@ -1,24 +1,23 @@
-#ifndef _LIBTEXPACKER_GEN_REGULAR_RECT_BINARARY_H_
-#define _LIBTEXPACKER_GEN_REGULAR_RECT_BINARARY_H_
+#ifndef _EASYTEXPACKER_GEN_REGULAR_RECT_BINARARY_H_
+#define _EASYTEXPACKER_GEN_REGULAR_RECT_BINARARY_H_
 
-#include <wx/wx.h>
 #include <vector>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 class GenRegularRectBinary
 {
 public:
-	GenRegularRectBinary(const wxString& json_file, 
-		const wxString& img_id_file);
+	GenRegularRectBinary(const std::string& json_file, 
+		const std::string& img_id_file);
 	~GenRegularRectBinary();
 
 	void PackToBinary() const;
 
 private:
-	void LoadRegularRectPackFile(const wxString& json_file, 
-		const wxString& img_id_file);
+	void LoadRegularRectPackFile(const std::string& json_file, 
+		const std::string& img_id_file);
 
 private:
 	struct Rect
@@ -30,7 +29,7 @@ private:
 	struct Part
 	{
 		Rect src, dst;
-		wxString filepath;
+		std::string filepath;
 	};
 
 	struct PartCmp
@@ -45,12 +44,12 @@ private:
 		std::vector<Part*> parts;
 		int w, h;
 
-		wxString path;
+		std::string path;
 		int id;
 	};
 
 private:
-	wxString m_filepath;
+	std::string m_filepath;
 
 	std::vector<Picture*> m_pics;
 
@@ -58,4 +57,4 @@ private:
 
 }
 
-#endif // _LIBTEXPACKER_GEN_REGULAR_RECT_BINARARY_H_
+#endif // _EASYTEXPACKER_GEN_REGULAR_RECT_BINARARY_H_

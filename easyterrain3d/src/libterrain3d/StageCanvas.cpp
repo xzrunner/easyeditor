@@ -5,7 +5,9 @@
 #include "DemoBruteForceTex.h"
 #include "DemoOcean.h"
 
-namespace libterrain3d
+#include <ee/OrthoCanvas.h>
+
+namespace eterrain3d
 {
 
 BEGIN_EVENT_TABLE(StageCanvas, ee::OrthoCanvas)
@@ -31,7 +33,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
 
 void StageCanvas::OnDrawSprites() const
 {
-//	e3d::DrawCross(vec3(0, 0, 0), vec3(100, 100, 100), ee::LIGHT_RED);
+//	e3d::DrawCross(ee::vec3(0, 0, 0), ee::vec3(100, 100, 100), ee::LIGHT_RED);
 
 	m_demo->Update();
 	m_demo->Draw();

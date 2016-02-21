@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <easycoco.h>
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -9,11 +7,22 @@
 #include <easytexture.h>
 #include <easyicon.h>
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/StringHelper.h>
+#include <ee/Config.h>
+#include <ee/SearcherPathMgr.h>
+#include <ee/Exception.h>
+
+#include <iostream>
+
 #define CHARACTER
 
 std::vector<const ee::Symbol*> SYMBOLS;
 
-libcoco::epd::TextureMgr TEX_MGR;
+ecoco::epd::TextureMgr TEX_MGR;
 
 std::set<std::string> IGNORE_LIST;
 
@@ -22,8 +31,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
@@ -50,8 +59,8 @@ void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sor
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-		files_sorted.insert(filepath.ToStdString());
+		std::string filepath = filename.GetFullPath();
+		files_sorted.insert(filepath);
 	}
 }
 
@@ -77,7 +86,8 @@ void LoadFromList(const std::string& list)
 {
 	std::set<std::string> names;
 
-	wxString ext = ee::FileHelper::GetExtension(list).Lower();
+	std::string ext = ee::FileHelper::GetExtension(list);
+	ee::StringHelper::ToLower(ext);
 	if (ext == "txt")
 	{
 		std::locale::global(std::locale(""));
@@ -115,16 +125,16 @@ void LoadFromList(const std::string& list)
 		return;
 	}
 
-	wxString dir = ee::FileHelper::GetFileDir(list);
+	std::string dir = ee::FileHelper::GetFileDir(list);
 
 	std::set<std::string> files_sorted;
-	LoadAllFilesSorted(dir.ToStdString(), files_sorted);
+	LoadAllFilesSorted(dir, files_sorted);
 
 	std::set<std::string>::iterator itr = files_sorted.begin();
 	for ( ; itr != files_sorted.end(); ++itr) 
 	{
-		if (ee::FileType::IsType(*itr, ee::FileType::e_complex)
-			|| ee::FileType::IsType(*itr, ee::FileType::e_anim))
+		if (ee::FileType::IsType(*itr, ee::FileType::e_complex) || 
+			ee::FileType::IsType(*itr, ee::FileType::e_anim))
 		{
 			// todo release symbol
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(*itr);
@@ -143,7 +153,7 @@ void LoadTexturePacker(std::string texpackerpath)
 	size_t i = 1;
 	while (true)
 	{
-		std::string path = texpackerpath + wxString::FromDouble(i) + ".json";
+		std::string path = texpackerpath + ee::StringHelper::ToString(i) + ".json";
 		if (wxFileName::FileExists(path))
 			TEX_MGR.Add(path, i-1);
 		else
@@ -179,7 +189,8 @@ void ParamsDetection(int argc, char *argv[], float& scale, std::string& ignore_f
 
 void LoadIgnoreList(const std::string& filename)
 {
-	wxString ext = ee::FileHelper::GetExtension(filename).Lower();
+	std::string ext = ee::FileHelper::GetExtension(filename);
+	ee::StringHelper::ToLower(ext);
 
 	std::set<std::string> list;
 
@@ -250,7 +261,7 @@ int main(int argc, char *argv[])
 		TEX_MGR.SetSrcDataDir(tp_dir);
 
 		LoadTexturePacker(tp_path);
-		libcoco::epd::CocoPacker packer(SYMBOLS, TEX_MGR);
+		ecoco::epd::CocoPacker packer(SYMBOLS, TEX_MGR);
 		packer.Parser();
 		packer.Output(argv[4]);
 	} catch (ee::Exception& e) {

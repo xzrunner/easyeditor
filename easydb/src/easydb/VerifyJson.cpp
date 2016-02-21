@@ -1,8 +1,11 @@
 #include "VerifyJson.h"
 #include "check_params.h"
 
-#include <wx/wx.h>
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/Exception.h>
 
+#include <fstream>
 
 namespace edb 
 {
@@ -47,16 +50,14 @@ void VerifyJson::InitFiles(const std::string& dirpath)
 
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-		std::string name = ee::FileHelper::GetFilenameWithExtension(filepath).ToStdString();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
+		std::string name = ee::FileHelper::GetFilenameWithExtension(filepath);
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
-			_complex_files.push_back(filepath.ToStdString());
-			_map_name2node.insert(std::make_pair(name, new Node(filepath.ToStdString())));
+			_complex_files.push_back(filepath);
+			_map_name2node.insert(std::make_pair(name, new Node(filepath)));
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
-			_anim_files.push_back(filepath.ToStdString());
-			_map_name2node.insert(std::make_pair(name, new Node(filepath.ToStdString())));
+			_anim_files.push_back(filepath);
+			_map_name2node.insert(std::make_pair(name, new Node(filepath)));
 		}
 	}
 }
@@ -158,12 +159,12 @@ void VerifyJson::HandleSpritePath(const std::string& parent,
 								   const std::string& child)
 {
  	if (!ee::FileType::IsType(child, ee::FileType::e_complex) &&
-		!ee::FileType::IsType(child, ee::FileType::e_anim))
+		!ee::FileType::IsType(child, ee::FileType::e_anim)) {
  		return;
+	}
  
-	wxFileName filename(child);
-	filename.Normalize();
-	std::string childname = ee::FileHelper::GetFilenameWithExtension(filename.GetFullPath());
+	std::string childpath = ee::FileHelper::GetAbsolutePath(child);
+	std::string childname = ee::FileHelper::GetFilenameWithExtension(childpath);
 	ee::StringHelper::ToLower(childname);
 	
 	std::map<std::string, Node*>::iterator itr = _map_name2node.find(childname);

@@ -7,6 +7,9 @@
 #include "list/StagePanel.h"
 #include "wrapper/StagePanel.h"
 
+#include <ee/StageCanvas.h>
+#include <ee/EditPanelImpl.h>
+
 namespace eui
 {
 

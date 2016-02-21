@@ -1,7 +1,15 @@
 #include "AverageRectCut.h"
 #include "check_params.h"
 
-#include <easyimage.h>
+#include <ee/FileHelper.h>
+#include <ee/ImageData.h>
+#include <ee/ImageTrim.h>
+#include <ee/ImageClip.h>
+#include <ee/StringHelper.h>
+#include <ee/ImageSaver.h>
+#include <ee/NullSprite.h>
+#include <ee/NullSymbol.h>
+
 #include <easycomplex.h>
 
 namespace edb
@@ -48,7 +56,7 @@ void AverageRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = filename.GetFullPath();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
@@ -71,7 +79,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
 
-	eimage::ImageTrim trim(*img);
+	ee::ImageTrim trim(*img);
 	ee::Rect img_r = trim.Trim();
 	if (!img_r.IsValid()) {
 		img_r.xmin = img_r.ymin = 0;
@@ -79,16 +87,16 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 		img_r.ymax = img->GetHeight();
 	}
 
-	eimage::ImageClip clip(*img);
+	ee::ImageClip clip(*img);
 	const uint8_t* pixels = clip.Clip(img_r.xmin, img_r.xmax, img_r.ymin, img_r.ymax);
 	ee::ImageData* img_trimed = new ee::ImageData(pixels, img_r.Width(), img_r.Height(), 4);
 
-	wxString filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
+	std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 	filename = filename.substr(0, filename.find_last_of('.'));
-	filename.Replace("\\", "%");
+	ee::StringHelper::ReplaceAll(filename, "\\", "%");
 
 	ecomplex::Symbol complex;
-	eimage::ImageClip img_cut(*img_trimed, false);
+	ee::ImageClip img_cut(*img_trimed, false);
 
 	int row = std::ceil(img_r.Height() / min_edge),
 		col = std::ceil(img_r.Width() / min_edge);
@@ -111,8 +119,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 				h = ymax - ymin;
 			const uint8_t* pixels = img_cut.Clip(xmin, xmax, ymin, ymax);
 
-			wxString img_name;
-			img_name.Printf("%s#%d#%d#%d#%d#.png", filename, xmin, ymin, w, h);
+			std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename, xmin, ymin, w, h);
 			std::string img_out_path = out_img_dir + "\\" + img_name;
 			ee::ImageSaver::StoreToFile(pixels, w, h, 4, img_out_path, ee::ImageSaver::e_png);
 			delete[] pixels;
@@ -255,7 +262,7 @@ void AverageRectCut::FixSpriteValue(const std::string& src_dir, const std::strin
 
 	std::string out_json_dir = dst_dir + "\\" + JSON_DIR;
 	std::string fixed_filepath = out_json_dir + "\\" + filename;
-	sprite_val["filepath"] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath).ToStdString();
+	sprite_val["filepath"] = ee::FileHelper::GetRelativePath(file_dir, fixed_filepath);
 }
 
 }

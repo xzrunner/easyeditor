@@ -1,5 +1,5 @@
-#ifndef _LIBRESPACKER_PACK_UI_H_
-#define _LIBRESPACKER_PACK_UI_H_
+#ifndef _EASYRESPACKER_PACK_UI_H_
+#define _EASYRESPACKER_PACK_UI_H_
 
 // #include <map>
 // #include <vector>
@@ -8,7 +8,7 @@
 
 #include <json/json.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackUITask;
@@ -41,4 +41,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_UI_H_
+#endif // _EASYRESPACKER_PACK_UI_H_

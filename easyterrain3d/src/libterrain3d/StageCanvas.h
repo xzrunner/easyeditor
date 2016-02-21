@@ -1,10 +1,9 @@
 #ifndef _EASYTERRAIN3D_STAGE_CANVAS_H_
 #define _EASYTERRAIN3D_STAGE_CANVAS_H_
 
-
 #include <easy3d.h>
 
-namespace libterrain3d
+namespace eterrain3d
 {
 
 class IDemo;

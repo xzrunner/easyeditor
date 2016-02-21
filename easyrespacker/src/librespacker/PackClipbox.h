@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_CLIPBOX_H_
-#define _LIBRESPACKER_PACK_CLIPBOX_H_
+#ifndef _EASYRESPACKER_PACK_CLIPBOX_H_
+#define _EASYRESPACKER_PACK_CLIPBOX_H_
 
 #include "IPackNode.h"
 
 
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackClipbox : public IPackNode
@@ -34,4 +34,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_CLIPBOX_H_
+#endif // _EASYRESPACKER_PACK_CLIPBOX_H_

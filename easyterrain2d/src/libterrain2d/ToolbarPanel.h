@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN2D_TOOLBAR_PANEL_H_
 #define _EASYTERRAIN2D_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
 
 namespace eterrain2d
 {

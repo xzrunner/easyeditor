@@ -4,6 +4,19 @@
 
 #include "dataset/Layer.h"
 
+#include <ee/panel_msg.h>
+#include <ee/FileHelper.h>
+#include <ee/LibraryList.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/PasteSymbolOP.h>
+#include <ee/SelectShapesOP.h>
+#include <ee/SpriteSelection.h>
+#include <ee/ShapeSelection.h>
+#include <ee/ViewlistPanel.h>
+#include <ee/GroupTreePanel.h>
+
 #include <easyshape.h>
 
 namespace lr
@@ -79,7 +92,7 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 		int j = 0;
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(list->GetItem(j++));
 		while (symbol) {
-			value[i][j-1] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+			value[i][j-1] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
 			symbol = static_cast<ee::Symbol*>(list->GetItem(j++));
 		}
 	}
@@ -94,7 +107,7 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 		ee::LibraryPage* page = m_pages[i];
 
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
-		layer->SetName(page->GetPageName().ToStdString());
+		layer->SetName(page->GetPageName());
 
 		static_cast<LibraryPage*>(page)->UpdateStatusFromLayer();
 	}

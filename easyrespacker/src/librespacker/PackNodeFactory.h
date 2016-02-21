@@ -1,9 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_NODE_FACTORY_H_
-#define _LIBRESPACKER_PACK_NODE_FACTORY_H_
+#ifndef _EASYRESPACKER_PACK_NODE_FACTORY_H_
+#define _EASYRESPACKER_PACK_NODE_FACTORY_H_
 
 #include "ExportNameSet.h"
 
-namespace librespacker
+#include <vector>
+
+namespace erespacker
 {
 
 class IPackNode;
@@ -113,4 +115,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_NODE_FACTORY_H_
+#endif // _EASYRESPACKER_PACK_NODE_FACTORY_H_

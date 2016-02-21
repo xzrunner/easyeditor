@@ -1,6 +1,10 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+
 #include <easyshader.h>
+
 #include <wx/splitter.h>
 
 namespace eshader

@@ -1,5 +1,7 @@
 #include "MeshShape.h"
 
+#include <ee/Math2D.h>
+
 namespace eterrain2d
 {
 

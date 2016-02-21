@@ -3,7 +3,11 @@
 
 #include "ICommand.h"
 
+#include <json/json.h>
 
+#include <stdint.h>
+
+namespace ee { class Rect; class ImageData; }
 
 namespace edb
 {

@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_STAGE_CANVAS_H_
 #define _EASYANIM_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
+namespace ee { class Symbol; }
 
 namespace eanim
 {

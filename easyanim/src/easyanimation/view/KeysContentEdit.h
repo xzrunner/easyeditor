@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_KEYS_CONTENT_EDIT_H_
 #define _EASYANIM_KEYS_CONTENT_EDIT_H_
 
-
+#include <ee/Observer.h>
 
 namespace eanim
 {

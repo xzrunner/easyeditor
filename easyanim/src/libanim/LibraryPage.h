@@ -1,9 +1,9 @@
-#ifndef _LIBANIMATION_LIBRARY_PAGE_H_
-#define _LIBANIMATION_LIBRARY_PAGE_H_
+#ifndef _EASYANIM_LIBRARY_PAGE_H_
+#define _EASYANIM_LIBRARY_PAGE_H_
 
+#include <ee/LibraryPage.h>
 
-
-namespace libanim
+namespace eanim
 {
 
 class LibraryPage : public ee::LibraryPage
@@ -17,11 +17,11 @@ protected:
 	virtual void OnAddPress(wxCommandEvent& event);
 
 private:
-	void loadFromJsonFile(const std::string& filename);
-	void loadFromLuaFile(const std::string& filename);
+	void LoadFromJsonFile(const std::string& filename);
+	void LoadFromLuaFile(const std::string& filename);
 
 }; // LibraryPage
 
 }
 
-#endif // _LIBANIMATION_LIBRARY_PAGE_H_
+#endif // _EASYANIM_LIBRARY_PAGE_H_

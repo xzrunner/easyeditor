@@ -1,5 +1,5 @@
-#ifndef _E3D_MODEL_PARAMETRIC_H_
-#define _E3D_MODEL_PARAMETRIC_H_
+#ifndef _EASY3D_MODEL_PARAMETRIC_H_
+#define _EASY3D_MODEL_PARAMETRIC_H_
 
 #include "IModel.h"
 
@@ -30,4 +30,4 @@ private:
 
 }
 
-#endif // _E3D_MODEL_PARAMETRIC_H_
+#endif // _EASY3D_MODEL_PARAMETRIC_H_

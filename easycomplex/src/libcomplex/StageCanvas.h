@@ -1,8 +1,12 @@
-#ifndef _DRAG2D_STAGE_CANVAS_H_
-#define _DRAG2D_STAGE_CANVAS_H_
+#ifndef _EASYCOMPLEX_STAGE_CANVAS_H_
+#define _EASYCOMPLEX_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+#include <ee/ShapeStyle.h>
+#include <ee/FPS.h>
+#include <ee/Camera.h>
 
-#include <easy3d.h>
+namespace ee { class LibraryPanel; class Symbol; }
 
 namespace ecomplex
 {
@@ -38,10 +42,10 @@ private:
 
 	mutable ee::FPS m_fps;
 
-	e3d::Camera m_camera3;
+	ee::Camera m_camera3;
 
 }; // StageCanvas
 
 }
 
-#endif // _DRAG2D_STAGE_CANVAS_H_
+#endif // _EASYCOMPLEX_STAGE_CANVAS_H_

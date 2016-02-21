@@ -2,6 +2,11 @@
 #include "PreviewPanel.h"
 #include "Context.h"
 
+#include <ee/DragPhysicsOP.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/physics_const.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace emodeling
 {
 
@@ -20,11 +25,11 @@ void PreviewCanvas::OnDrawSprites() const
 {
  	m_stage_panel->drawPhysics();
  
- 	ephysics::DragPhysicsOP* op = static_cast<ephysics::DragPhysicsOP*>(m_stage->GetEditOP());
+ 	ee::DragPhysicsOP* op = static_cast<ee::DragPhysicsOP*>(m_stage->GetEditOP());
  	if (op->m_mouseJoint)
  	{
  		b2Vec2 target = op->m_mouseJoint->GetAnchorB();
- 		ee::Vector first(target.x * ephysics::BOX2D_SCALE_FACTOR, target.y * ephysics::BOX2D_SCALE_FACTOR);
+ 		ee::Vector first(target.x * ee::BOX2D_SCALE_FACTOR, target.y * ee::BOX2D_SCALE_FACTOR);
  
  		if (op->currPos.IsValid())
  		{

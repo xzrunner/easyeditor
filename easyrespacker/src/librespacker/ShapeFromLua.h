@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_SHAPE_FROM_LUA_H_
-#define _LIBRESPACKER_SHAPE_FROM_LUA_H_
+#ifndef _EASYRESPACKER_SHAPE_FROM_LUA_H_
+#define _EASYRESPACKER_SHAPE_FROM_LUA_H_
 
 #include "PackShape.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class ShapeFromLua
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_SHAPE_FROM_LUA_H_
+#endif // _EASYRESPACKER_SHAPE_FROM_LUA_H_

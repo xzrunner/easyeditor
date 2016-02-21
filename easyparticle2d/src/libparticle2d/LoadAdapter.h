@@ -1,7 +1,10 @@
 #ifndef _EASYPARTICLE2D_LOAD_ADAPTER_H_
 #define _EASYPARTICLE2D_LOAD_ADAPTER_H_
 
+#include <ee/Color.h>
+#include <ee/Vector.h>
 
+#include <json/json.h>
 
 namespace eparticle2d
 {

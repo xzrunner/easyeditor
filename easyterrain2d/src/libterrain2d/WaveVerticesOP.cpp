@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "OceanMesh.h"
 
+#include <ee/Matrix.h>
+
 namespace eterrain2d
 {
 

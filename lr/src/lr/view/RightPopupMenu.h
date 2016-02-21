@@ -3,6 +3,12 @@
 
 #include "dataset/CharacterFileName.h"
 
+#include <wx/menu.h>
+
+#include <vector>
+
+namespace ee { class LibraryPanel; class Sprite; }
+
 namespace lr
 {
 

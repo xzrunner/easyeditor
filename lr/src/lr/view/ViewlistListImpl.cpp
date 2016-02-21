@@ -1,5 +1,7 @@
 #include "ViewlistListImpl.h"
 
+#include <ee/ViewlistList.h>
+
 namespace lr
 {
 

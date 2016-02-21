@@ -1,10 +1,13 @@
-#ifndef _ESHADER_SLIDER_CTRL_H_
-#define _ESHADER_SLIDER_CTRL_H_
+#ifndef _EASYSHADER_SLIDER_CTRL_H_
+#define _EASYSHADER_SLIDER_CTRL_H_
+
+#include "SliderItem.h"
 
 #include <wx/wx.h>
 
+#include <vector>
 
-#include "SliderItem.h"
+namespace ee { class StageCanvas; }
 
 namespace eshader 
 {
@@ -57,4 +60,4 @@ private:
 
 }
 
-#endif // _ESHADER_SLIDER_CTRL_H_
+#endif // _EASYSHADER_SLIDER_CTRL_H_

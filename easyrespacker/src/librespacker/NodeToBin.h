@@ -1,7 +1,7 @@
-#ifndef _LIBRESPACKER_NODE_TO_BIN_H_
-#define _LIBRESPACKER_NODE_TO_BIN_H_
+#ifndef _EASYRESPACKER_NODE_TO_BIN_H_
+#define _EASYRESPACKER_NODE_TO_BIN_H_
 
-namespace librespacker
+namespace erespacker
 {
 
 class NodeToBin
@@ -17,4 +17,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_NODE_TO_BIN_H_
+#endif // _EASYRESPACKER_NODE_TO_BIN_H_

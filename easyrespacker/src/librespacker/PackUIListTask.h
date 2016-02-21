@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_PACK_UI_LIST_TASK_H_
-#define _LIBRESPACKER_PACK_UI_LIST_TASK_H_
+#ifndef _EASYRESPACKER_PACK_UI_LIST_TASK_H_
+#define _EASYRESPACKER_PACK_UI_LIST_TASK_H_
 
 #include "PackUITask.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackUIListTask : public PackUITask
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_UI_LIST_TASK_H_
+#endif // _EASYRESPACKER_PACK_UI_LIST_TASK_H_

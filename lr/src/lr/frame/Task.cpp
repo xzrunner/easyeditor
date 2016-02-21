@@ -8,6 +8,18 @@
 #include "view/ViewlistListImpl.h"
 #include "dataset/Layer.h"
 
+#include <ee/panel_msg.h>
+#include <ee/EditOP.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/ViewlistPanel.h>
+#include <ee/LayerPanel.h>
+#include <ee/GroupTreePanel.h>
+#include <ee/Sprite.h>
+#include <ee/Shape.h>
+
 namespace lr
 {
 

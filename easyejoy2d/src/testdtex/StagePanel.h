@@ -3,7 +3,8 @@
 
 #include "TestBase.h"
 
-
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
 
 namespace tdtex
 {

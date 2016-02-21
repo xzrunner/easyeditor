@@ -1,10 +1,10 @@
-#ifndef _LIBTEXPACKER_IMAGE_TRIM_DATA_H_
-#define _LIBTEXPACKER_IMAGE_TRIM_DATA_H_
+#ifndef _EASYTEXPACKER_IMAGE_TRIM_DATA_H_
+#define _EASYTEXPACKER_IMAGE_TRIM_DATA_H_
 
 #include <string>
 #include <map>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 class ImageTrimData
@@ -33,4 +33,4 @@ private:
 
 }
 
-#endif // _LIBTEXPACKER_IMAGE_TRIM_DATA_H_
+#endif // _EASYTEXPACKER_IMAGE_TRIM_DATA_H_

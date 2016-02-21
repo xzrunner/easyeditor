@@ -1,6 +1,10 @@
 #include "PreviewDialog.h"
 #include "PreviewCanvas.h"
 
+#include <ee/EditPanel.h>
+
+#include <wx/sizer.h>
+
 namespace eui
 {
 namespace window

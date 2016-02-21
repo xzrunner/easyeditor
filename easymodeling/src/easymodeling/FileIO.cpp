@@ -1,15 +1,21 @@
-
 #include "FileIO.h"
 #include "Context.h"
 
 #include "StagePanel.h"
+
+#include <ee/FileHelper.h>
+#include <ee/sprite_msg.h>
+#include <ee/LibraryPanel.h>
+#include <ee/SymbolMgr.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Math2D.h>
 
 #include <easyshape.h>
 
 namespace emodeling
 {
 
-void FileIO::load(const char* filename)
+void FileIO::Load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -21,28 +27,28 @@ void FileIO::load(const char* filename)
 
 	Context* context = Context::Instance();
 
-	std::vector<libmodeling::Body*> bodies;
+	std::vector<Body*> bodies;
 
 	delete context->world;
-	context->world = libmodeling::FileApapter::j2World(value["world"]);
+	context->world = FileApapter::ToWorld(value["world"]);
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
-		libmodeling::Body* body = libmodeling::FileApapter::j2bBody(bodyValue, dir);
-		ee::InsertSpriteSJ::Instance()->Insert(body->sprite);
+		Body* body = FileApapter::ToBody(bodyValue, dir);
+		ee::InsertSpriteSJ::Instance()->Insert(body->m_sprite);
 		bodies.push_back(body);
 
 		bodyValue = value["body"][i++];
 	}
 
 	i = 0;
-	std::vector<libmodeling::Joint*> joints;
+	std::vector<Joint*> joints;
 	Json::Value jointValue = value["joint"][i++];
 	while (!jointValue.isNull()) {
-		libmodeling::Joint* joint = libmodeling::FileApapter::j2bJoint(jointValue, bodies);
+		Joint* joint = FileApapter::ToJoint(jointValue, bodies);
 		joints.push_back(joint);
 		context->stage->insertJoint(joint);
 		jointValue = value["joint"][i++];
@@ -50,52 +56,52 @@ void FileIO::load(const char* filename)
 
 	for (size_t i = 0, n = joints.size(); i < n; ++i)
 	{
-		if (joints[i]->type == libmodeling::Joint::e_gearJoint)
+		if (joints[i]->m_type == Joint::e_gearJoint)
 		{
-			libmodeling::GearJoint* joint = static_cast<libmodeling::GearJoint*>(joints[i]);
-			joint->joint1 = joints[value["joint"][i]["joint1"].asInt()];
-			joint->joint2 = joints[value["joint"][i]["joint2"].asInt()];
+			GearJoint* joint = static_cast<GearJoint*>(joints[i]);
+			joint->m_joint1 = joints[value["joint"][i]["joint1"].asInt()];
+			joint->m_joint2 = joints[value["joint"][i]["joint2"].asInt()];
 		}
 	}
 
 	context->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
-void FileIO::store(const char* filename)
+void FileIO::Store(const char* filename)
 {
-	std::vector<libmodeling::Body*> bodies;
-	Context::Instance()->stage->traverseBodies(ee::FetchAllVisitor<libmodeling::Body>(bodies));
+	std::vector<Body*> bodies;
+	Context::Instance()->stage->traverseBodies(ee::FetchAllVisitor<Body>(bodies));
 
-	std::vector<libmodeling::Joint*> joints;
-	Context::Instance()->stage->traverseJoints(ee::FetchAllVisitor<libmodeling::Joint>(joints));
+	std::vector<Joint*> joints;
+	Context::Instance()->stage->traverseJoints(ee::FetchAllVisitor<Joint>(joints));
 
 	Json::Value value;
 
 	std::string dir = ee::FileHelper::GetFileDir(filename);
 
-	value["world"] = b2j(Context::Instance()->world);
+	value["world"] = B2J(Context::Instance()->world);
 
-	std::map<libmodeling::Body*, int> bodyIndexMap;
+	std::map<Body*, int> bodyIndexMap;
 	for (size_t i = 0, n = bodies.size(); i < n; ++i)
 	{
 		bodyIndexMap[bodies[i]] = i;
-		value["body"][i] = b2j(bodies[i], dir);
+		value["body"][i] = B2J(bodies[i], dir);
 	}
 
-	std::map<libmodeling::Joint*, int> jointIndexMap;
+	std::map<Joint*, int> jointIndexMap;
 	for (size_t i = 0, n = joints.size(); i < n; ++i)
 	{
 		jointIndexMap[joints[i]] = i;
-		value["joint"][i] = b2j(joints[i], bodyIndexMap);
+		value["joint"][i] = B2J(joints[i], bodyIndexMap);
 	}
 
 	for (size_t i = 0, n = joints.size(); i < n; ++i)
 	{
-		if (joints[i]->type == libmodeling::Joint::e_gearJoint)
+		if (joints[i]->m_type == Joint::e_gearJoint)
 		{
-			libmodeling::GearJoint* joint = static_cast<libmodeling::GearJoint*>(joints[i]);
-			value["joint"][i]["joint1"] = jointIndexMap.find(joint->joint1)->second;
-			value["joint"][i]["joint2"] = jointIndexMap.find(joint->joint2)->second;
+			GearJoint* joint = static_cast<GearJoint*>(joints[i]);
+			value["joint"][i]["joint1"] = jointIndexMap.find(joint->m_joint1)->second;
+			value["joint"][i]["joint2"] = jointIndexMap.find(joint->m_joint2)->second;
 		}
 	}
 
@@ -107,7 +113,7 @@ void FileIO::store(const char* filename)
 	fout.close();
 }
 
-Json::Value FileIO::b2j(const libmodeling::World* world)
+Json::Value FileIO::B2J(const World* world)
 {
 	Json::Value value;
 
@@ -125,64 +131,64 @@ Json::Value FileIO::b2j(const libmodeling::World* world)
 	return value;
 }
 
-Json::Value FileIO::b2j(const libmodeling::Body* body, const std::string& dlg)
+Json::Value FileIO::B2J(const Body* body, const std::string& dlg)
 {
 	Json::Value value;
 
-	value["name"] = body->name.ToStdString();
+	value["name"] = body->m_name;
 
 	value["filepath"] = ee::FileHelper::GetRelativePath(dlg, 
-		body->sprite->GetSymbol().GetFilepath()).ToStdString();
+		body->m_sprite->GetSymbol().GetFilepath());
 
-	value["type"] = body->type;
-	switch (body->type)
+	value["type"] = body->m_type;
+	switch (body->m_type)
 	{
-	case libmodeling::Body::e_static:
+	case Body::e_static:
 		value["type"].setComment("//static", Json::commentAfterOnSameLine);
 		break;
-	case libmodeling::Body::e_dynamic:
+	case Body::e_dynamic:
 		value["type"].setComment("//dynamic", Json::commentAfterOnSameLine);
 		break;
-	case libmodeling::Body::e_kinematic:
+	case Body::e_kinematic:
 		value["type"].setComment("//kinematic", Json::commentAfterOnSameLine);
 		break;
 	}
 
-	value["linearDamping"] = body->linearDamping;
+	value["linearDamping"] = body->m_linear_damping;
 
-	value["angularDamping"] = body->angularDamping;
+	value["angularDamping"] = body->m_angular_damping;
 
-	value["allowSleep"] = body->allowSleep;
+	value["allowSleep"] = body->m_allow_sleep;
 
-	value["bullet"] = body->bullet;
+	value["bullet"] = body->m_bullet;
 
-	value["active"] = body->active;
+	value["active"] = body->m_active;
 
-	value["gravityScale"] = body->gravityScale;
+	value["gravityScale"] = body->m_gravity_scale;
 
-	value["position"]["x"] = body->sprite->GetPosition().x;
-	value["position"]["y"] = body->sprite->GetPosition().y;
+	value["position"]["x"] = body->m_sprite->GetPosition().x;
+	value["position"]["y"] = body->m_sprite->GetPosition().y;
 
-	value["angle"] = body->sprite->GetAngle();
+	value["angle"] = body->m_sprite->GetAngle();
 
-	for (size_t i = 0, n = body->fixtures.size(); i < n; ++i)
-		value["fixture"][i] = b2j(body->fixtures[i]);
+	for (size_t i = 0, n = body->m_fixtures.size(); i < n; ++i)
+		value["fixture"][i] = B2J(body->m_fixtures[i]);
 
 	return value;
 }
 
-Json::Value FileIO::b2j(const libmodeling::Fixture* fixture)
+Json::Value FileIO::B2J(const Fixture* fixture)
 {
 	Json::Value value;
 
-	value["name"] = fixture->name.ToStdString();
-	value["density"] = fixture->density;
-	value["friction"] = fixture->friction;
-	value["restitution"] = fixture->restitution;
-	value["isSensor"] = fixture->isSensor;
-	value["categoryBits"] = fixture->categoryBits;
-	value["maskBits"] = fixture->maskBits;
-	value["groupIndex"] = fixture->groupIndex;
+	value["name"] = fixture->m_name;
+	value["density"] = fixture->m_density;
+	value["friction"] = fixture->m_friction;
+	value["restitution"] = fixture->m_restitution;
+	value["isSensor"] = fixture->m_is_sensor;
+	value["categoryBits"] = fixture->m_category_bits;
+	value["maskBits"] = fixture->m_mask_bits;
+	value["groupIndex"] = fixture->m_group_index;
 
 	// todo
 //	value["shape"] = eshape::FileIO::StoreShape(fixture->shape);
@@ -190,184 +196,184 @@ Json::Value FileIO::b2j(const libmodeling::Fixture* fixture)
 	return value;
 }
 
-Json::Value FileIO::b2j(libmodeling::Joint* joint, const std::map<libmodeling::Body*, int>& bodyIndexMap)
+Json::Value FileIO::B2J(Joint* joint, const std::map<Body*, int>& bodyIndexMap)
 {
 	Json::Value value;
 
-	value["name"] = joint->m_name.ToStdString();
+	value["name"] = joint->m_name;
 	
-	std::map<libmodeling::Body*, int>::const_iterator itrA = bodyIndexMap.find(joint->bodyA);
+	std::map<Body*, int>::const_iterator itrA = bodyIndexMap.find(joint->m_body_a);
 	assert(itrA != bodyIndexMap.end());
-	value["bodyA"] = itrA->second;
+	value["body_a"] = itrA->second;
 
-	std::map<libmodeling::Body*, int>::const_iterator itrB = bodyIndexMap.find(joint->bodyB);
+	std::map<Body*, int>::const_iterator itrB = bodyIndexMap.find(joint->m_body_b);
 	assert(itrB != bodyIndexMap.end());
-	value["bodyB"] = itrB->second;
+	value["body_b"] = itrB->second;
 
-	value["collideConnected"] = joint->collideConnected;
+	value["collideConnected"] = joint->m_collide_connected;
 
-	switch (joint->type)
+	switch (joint->m_type)
 	{
-	case libmodeling::Joint::e_revoluteJoint:
+	case Joint::e_revoluteJoint:
 		{
 			value["type"] = "revolute";
 
-			libmodeling::RevoluteJoint* rJoint = static_cast<libmodeling::RevoluteJoint*>(joint);
+			RevoluteJoint* rJoint = static_cast<RevoluteJoint*>(joint);
 
-			value["anchorA"]["x"] = rJoint->localAnchorA.x;
-			value["anchorA"]["y"] = rJoint->localAnchorA.y;
-			value["anchorB"]["x"] = rJoint->localAnchorB.x;
-			value["anchorB"]["y"] = rJoint->localAnchorB.y;
+			value["anchorA"]["x"] = rJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = rJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = rJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = rJoint->m_local_anchor_b.y;
 
-			value["refAngle"] = rJoint->referenceAngle;
+			value["refAngle"] = rJoint->m_reference_angle;
 
-			value["enableLimit"] = rJoint->enableLimit;
-			value["lowerAngle"] = rJoint->lowerAngle;
-			value["upperAngle"] = rJoint->upperAngle;
+			value["enableLimit"] = rJoint->m_enable_limit;
+			value["lowerAngle"] = rJoint->m_lower_angle;
+			value["upperAngle"] = rJoint->m_upper_angle;
 
-			value["enableMotor"] = rJoint->enableMotor;
-			value["maxMotorTorque"] = rJoint->maxMotorTorque;
+			value["enableMotor"] = rJoint->m_enable_motor;
+			value["maxMotorTorque"] = rJoint->m_max_motor_torque;
 
-			value["motorSpeed"] = rJoint->motorSpeed;
+			value["motorSpeed"] = rJoint->m_motor_speed;
 		}
 		break;
-	case libmodeling::Joint::e_prismaticJoint:
+	case Joint::e_prismaticJoint:
 		{
 			value["type"] = "prismatic";
 
-			libmodeling::PrismaticJoint* rJoint = static_cast<libmodeling::PrismaticJoint*>(joint);
+			PrismaticJoint* rJoint = static_cast<PrismaticJoint*>(joint);
 
-			value["anchorA"]["x"] = rJoint->localAnchorA.x;
-			value["anchorA"]["y"] = rJoint->localAnchorA.y;
-			value["anchorB"]["x"] = rJoint->localAnchorB.x;
-			value["anchorB"]["y"] = rJoint->localAnchorB.y;
+			value["anchorA"]["x"] = rJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = rJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = rJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = rJoint->m_local_anchor_b.y;
 
-			value["localAxisA"]["x"] = rJoint->localAxisA.x;
-			value["localAxisA"]["y"] = rJoint->localAxisA.y;
+			value["localAxisA"]["x"] = rJoint->m_local_axis_a.x;
+			value["localAxisA"]["y"] = rJoint->m_local_axis_a.y;
 
-			value["refAngle"] = rJoint->referenceAngle;
+			value["refAngle"] = rJoint->m_reference_angle;
 
-			value["enableLimit"] = rJoint->enableLimit;
-			value["lowerTranslation"] = rJoint->lowerTranslation;
-			value["upperTranslation"] = rJoint->upperTranslation;
+			value["enableLimit"] = rJoint->m_enable_limit;
+			value["lowerTranslation"] = rJoint->m_lower_translation;
+			value["upperTranslation"] = rJoint->m_upper_translation;
 
-			value["enableMotor"] = rJoint->enableMotor;
-			value["maxMotorForce"] = rJoint->maxMotorForce;
+			value["enableMotor"] = rJoint->m_enable_motor;
+			value["maxMotorForce"] = rJoint->m_max_motor_force;
 
-			value["motorSpeed"] = rJoint->motorSpeed;
+			value["motorSpeed"] = rJoint->m_motor_speed;
 		}
 		break;
-	case libmodeling::Joint::e_distanceJoint:
+	case Joint::e_distanceJoint:
 		{
 			value["type"] = "distance";
 
-			libmodeling::DistanceJoint* dJoint = static_cast<libmodeling::DistanceJoint*>(joint);
+			DistanceJoint* dJoint = static_cast<DistanceJoint*>(joint);
 
-			value["anchorA"]["x"] = dJoint->localAnchorA.x;
-			value["anchorA"]["y"] = dJoint->localAnchorA.y;
-			value["anchorB"]["x"] = dJoint->localAnchorB.x;
-			value["anchorB"]["y"] = dJoint->localAnchorB.y;
+			value["anchorA"]["x"] = dJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = dJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = dJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = dJoint->m_local_anchor_b.y;
 
-			value["frequencyHz"] = dJoint->frequencyHz;
-			value["dampingRatio"] = dJoint->dampingRatio;
+			value["frequencyHz"] = dJoint->m_frequency_hz;
+			value["dampingRatio"] = dJoint->m_damping_ratio;
 		}
 		break;
-	case libmodeling::Joint::e_pulleyJoint:
+	case Joint::e_pulleyJoint:
 		{
 			value["type"] = "pulley";
 
-			libmodeling::PulleyJoint* pJoint = static_cast<libmodeling::PulleyJoint*>(joint);
+			PulleyJoint* pJoint = static_cast<PulleyJoint*>(joint);
 
-			value["ratio"] = pJoint->ratio;
+			value["ratio"] = pJoint->m_ratio;
 		}
 		break;
-	case libmodeling::Joint::e_gearJoint:
+	case Joint::e_gearJoint:
 		{
 			value["type"] = "gear";
 
-			libmodeling::GearJoint* gJoint = static_cast<libmodeling::GearJoint*>(joint);
+			GearJoint* gJoint = static_cast<GearJoint*>(joint);
 
-			value["ratio"] = gJoint->ratio;
+			value["ratio"] = gJoint->m_ratio;
 		}
 		break;
-	case libmodeling::Joint::e_wheelJoint:
+	case Joint::e_wheelJoint:
 		{
 			value["type"] = "wheel";
 
-			libmodeling::WheelJoint* wJoint = static_cast<libmodeling::WheelJoint*>(joint);
+			WheelJoint* wJoint = static_cast<WheelJoint*>(joint);
 
-			value["anchorA"]["x"] = wJoint->localAnchorA.x;
-			value["anchorA"]["y"] = wJoint->localAnchorA.y;
-			value["anchorB"]["x"] = wJoint->localAnchorB.x;
-			value["anchorB"]["y"] = wJoint->localAnchorB.y;
+			value["anchorA"]["x"] = wJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = wJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = wJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = wJoint->m_local_anchor_b.y;
 
-			float len = ee::Math2D::GetDistance(wJoint->localAxisA, ee::Vector());
-			value["AxisA"]["x"] = wJoint->localAxisA.x / len;
-			value["AxisA"]["y"] = wJoint->localAxisA.y / len;
+			float len = ee::Math2D::GetDistance(wJoint->m_local_axis_a, ee::Vector());
+			value["AxisA"]["x"] = wJoint->m_local_axis_a.x / len;
+			value["AxisA"]["y"] = wJoint->m_local_axis_a.y / len;
 
-			value["enableMotor"] = wJoint->enableMotor;
-			value["maxMotorTorque"] = wJoint->maxMotorTorque;
+			value["enableMotor"] = wJoint->m_enable_motor;
+			value["maxMotorTorque"] = wJoint->m_max_motor_torque;
 
-			value["motorSpeed"] = wJoint->motorSpeed;
+			value["motorSpeed"] = wJoint->m_motor_speed;
 
-			value["frequencyHz"] = wJoint->frequencyHz;
-			value["dampingRatio"] = wJoint->dampingRatio;
+			value["frequencyHz"] = wJoint->m_frequency_hz;
+			value["dampingRatio"] = wJoint->m_damping_ratio;
 		}
 		break;
-	case libmodeling::Joint::e_weldJoint:
+	case Joint::e_weldJoint:
 		{
 			value["type"] = "weld";
 
-			libmodeling::WeldJoint* wJoint = static_cast<libmodeling::WeldJoint*>(joint);
+			WeldJoint* wJoint = static_cast<WeldJoint*>(joint);
 
-			value["anchorA"]["x"] = wJoint->localAnchorA.x;
-			value["anchorA"]["y"] = wJoint->localAnchorA.y;
-			value["anchorB"]["x"] = wJoint->localAnchorB.x;
-			value["anchorB"]["y"] = wJoint->localAnchorB.y;
+			value["anchorA"]["x"] = wJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = wJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = wJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = wJoint->m_local_anchor_b.y;
 
-			value["referenceAngle"] = wJoint->dampingRatio;
-			value["frequencyHz"] = wJoint->frequencyHz;
-			value["dampingRatio"] = wJoint->dampingRatio;
+			value["referenceAngle"] = wJoint->m_damping_ratio;
+			value["frequencyHz"] = wJoint->m_frequency_hz;
+			value["dampingRatio"] = wJoint->m_damping_ratio;
 		}
 		break;
-	case libmodeling::Joint::e_frictionJoint:
+	case Joint::e_frictionJoint:
 		{
 			value["type"] = "friction";
 
-			libmodeling::FrictionJoint* fJoint = static_cast<libmodeling::FrictionJoint*>(joint);
+			FrictionJoint* fJoint = static_cast<FrictionJoint*>(joint);
 
-			value["anchorA"]["x"] = fJoint->localAnchorA.x;
-			value["anchorA"]["y"] = fJoint->localAnchorA.y;
-			value["anchorB"]["x"] = fJoint->localAnchorB.x;
-			value["anchorB"]["y"] = fJoint->localAnchorB.y;
+			value["anchorA"]["x"] = fJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = fJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = fJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = fJoint->m_local_anchor_b.y;
 
-			value["maxForce"] = fJoint->maxForce;
-			value["maxTorque"] = fJoint->maxTorque;
+			value["maxForce"] = fJoint->m_max_force;
+			value["maxTorque"] = fJoint->m_max_torque;
 		}
 		break;
-	case libmodeling::Joint::e_ropeJoint:
+	case Joint::e_ropeJoint:
 		{
 			value["type"] = "rope";
 
-			libmodeling::RopeJoint* rJoint = static_cast<libmodeling::RopeJoint*>(joint);
+			RopeJoint* rJoint = static_cast<RopeJoint*>(joint);
 
-			value["anchorA"]["x"] = rJoint->localAnchorA.x;
-			value["anchorA"]["y"] = rJoint->localAnchorA.y;
-			value["anchorB"]["x"] = rJoint->localAnchorB.x;
-			value["anchorB"]["y"] = rJoint->localAnchorB.y;
+			value["anchorA"]["x"] = rJoint->m_local_anchor_a.x;
+			value["anchorA"]["y"] = rJoint->m_local_anchor_a.y;
+			value["anchorB"]["x"] = rJoint->m_local_anchor_b.x;
+			value["anchorB"]["y"] = rJoint->m_local_anchor_b.y;
 
-			value["maxLength"] = rJoint->maxLength;
+			value["maxLength"] = rJoint->m_max_length;
 		}
 		break;
-	case libmodeling::Joint::e_motorJoint:
+	case Joint::e_motorJoint:
 		{
 			value["type"] = "motor";
 
-			libmodeling::MotorJoint* mJoint = static_cast<libmodeling::MotorJoint*>(joint);
+			MotorJoint* mJoint = static_cast<MotorJoint*>(joint);
 
-			value["maxForce"] = mJoint->maxForce;
-			value["maxTorque"] = mJoint->maxTorque;
-			value["correctionFactor"] = mJoint->correctionFactor;
+			value["maxForce"] = mJoint->m_max_force;
+			value["maxTorque"] = mJoint->m_max_torque;
+			value["correctionFactor"] = mJoint->m_correction_factor;
 		}
 		break;
 	}

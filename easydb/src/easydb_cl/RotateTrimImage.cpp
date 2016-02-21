@@ -3,8 +3,24 @@
 #include "RotateTrimImage.h"
 #include "check_params.h"
 
+#include <ee/ShaderMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/ImageSymbol.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Sprite.h>
+#include <ee/Image.h>
+#include <ee/Math2D.h>
+#include <ee/MinBoundingBox.h>
+
 #include <glfw.h>
+#include <wx/arrstr.h>
 #include <easyimage.h>
+
+#include <fstream>
 
 namespace edb
 {
@@ -78,10 +94,7 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
-
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
@@ -105,15 +118,15 @@ void RotateTrimImage::RotateTrim(ee::Snapshoot& ss, const std::string& dir)
 			sprite->Release();
 			symbol->Release();
 
-			//wxString dir = ee::FileHelper::getFileDir(filepath);
-			//wxString name = ee::FileHelper::getFilename(filepath);
- 		//	wxString outpath = dir + "\\test_" + name + ".png";
- 		//	ss.SaveToFile(outpath.ToStdString(), width, height);
+			//std::string dir = ee::FileHelper::getFileDir(filepath);
+			//std::string name = ee::FileHelper::getFilename(filepath);
+ 		//	std::string outpath = dir + "\\test_" + name + ".png";
+ 		//	ss.SaveToFile(outpath, width, height);
 
 			ss.SaveToFile(filepath, width, height);
 
 			// output info
-			wxString path = ee::FileHelper::GetRelativePath(dir, filepath);
+			std::string path = ee::FileHelper::GetRelativePath(dir, filepath);
 			fout << path << " " << center.x << " " << center.y << " " << angle << "\n";
 		}
 	}

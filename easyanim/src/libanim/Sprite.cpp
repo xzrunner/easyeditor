@@ -1,6 +1,8 @@
 #include "Sprite.h"
 
-namespace libanim
+#include <ee/SpriteFactory.h>
+
+namespace eanim
 {
 
 Sprite::Sprite()
@@ -9,7 +11,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
 	m_symbol->Retain();

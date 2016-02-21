@@ -1,10 +1,12 @@
 #ifndef _EASYANIM_KEYS_CONTENT_WIDGET_H_
 #define _EASYANIM_KEYS_CONTENT_WIDGET_H_
 
-
-
 #include "config.h"
 #include "KeysContentEdit.h"
+
+#include <ee/KeysState.h>
+
+#include <wx/panel.h>
 
 class wxBufferedPaintDC;
 

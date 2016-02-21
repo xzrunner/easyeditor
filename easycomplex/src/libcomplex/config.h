@@ -1,5 +1,5 @@
-#ifndef _COMPLEX_CONFIG_H_
-#define _COMPLEX_CONFIG_H_
+#ifndef __EASYCOMPLEX_CONFIG_H_
+#define __EASYCOMPLEX_CONFIG_H_
 
 namespace ecomplex
 {
@@ -8,4 +8,4 @@ static const char* FILE_TAG = "complex";
 
 }
 
-#endif // _COMPLEX_CONFIG_H_
+#endif // __EASYCOMPLEX_CONFIG_H_

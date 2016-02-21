@@ -2,6 +2,9 @@
 #include "UIList.h"
 #include "StagePanel.h"
 
+#include <ee/StringHelper.h>
+#include <ee/panel_msg.h>
+
 namespace eui
 {
 namespace list

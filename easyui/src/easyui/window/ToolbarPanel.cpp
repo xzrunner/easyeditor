@@ -4,6 +4,8 @@
 #include "QueryWindowViewSizeSJ.h"
 #include "ChangeWindowViewSizeSJ.h"
 
+#include <ee/StringHelper.h>
+
 namespace eui
 {
 namespace window
@@ -51,7 +53,7 @@ wxSizer* ToolbarPanel::InitLayout()
 			wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 			sz->Add(new wxStaticText(this, wxID_ANY, "width"));
 
-			m_width_text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(width), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+			m_width_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(width), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 			Connect(m_width_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 			sz->Add(m_width_text);
 
@@ -62,7 +64,7 @@ wxSizer* ToolbarPanel::InitLayout()
 			wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 			sz->Add(new wxStaticText(this, wxID_ANY, "height"));
 
-			m_height_text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(height), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+			m_height_text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(height), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 			Connect(m_height_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(ToolbarPanel::OnChangeSize));
 			sz->Add(m_height_text);
 

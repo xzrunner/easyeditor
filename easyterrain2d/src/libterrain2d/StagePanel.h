@@ -1,8 +1,11 @@
 #ifndef _EASYTERRAIN2D_STAGE_PANEL_H_
 #define _EASYTERRAIN2D_STAGE_PANEL_H_
 
-
 #include <easyshape.h>
+
+#include <ee/SpritesPanelImpl.h>
+#include <ee/ShapesPanelImpl.h>
+#include <ee/StageDropTarget.h>
 
 namespace eterrain2d
 {

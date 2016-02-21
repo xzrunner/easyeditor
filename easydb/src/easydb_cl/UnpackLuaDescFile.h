@@ -3,6 +3,7 @@
 
 #include "ICommand.h"
 
+#include <ee/Image.h>
 
 #include <easycoco.h>
 

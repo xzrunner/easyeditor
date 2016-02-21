@@ -1,50 +1,52 @@
-#ifndef EDB_FRAME_H
-#define EDB_FRAME_H
+#ifndef _EASYDB_FRAME_H_
+#define _EASYDB_FRAME_H_
 
-#include <wx/wx.h>
+#include <wx/frame.h>
 
 namespace edb
 {
-	class Task;
 
-	class Frame : public wxFrame
+class Task;
+
+class Frame : public wxFrame
+{
+public:
+	Frame(const std::string& title);
+
+private:
+	void OnNew(wxCommandEvent& event);
+	void OnOpen(wxCommandEvent& event);
+	void OnSave(wxCommandEvent& event);
+	void OnSaveAs(wxCommandEvent& event);
+
+	void OnConnect(wxCommandEvent& event);
+
+	void OnQuit(wxCommandEvent& event);
+
+	void InitMenuBar();
+
+	wxMenu* InitFileBar();
+	wxMenu* InitHelpBar();
+
+	void Clear();
+
+	void SetCurrFilename();
+
+private:
+	enum
 	{
-	public:
-		Frame(const wxString& title);
+		ID_CONNECT = 1000
+	};
 
-	private:
-		void onNew(wxCommandEvent& event);
-		void onOpen(wxCommandEvent& event);
-		void onSave(wxCommandEvent& event);
-		void onSaveAs(wxCommandEvent& event);
+private:
+	Task* m_task;
 
-		void onConnect(wxCommandEvent& event);
+	std::string m_curr_filename;
 
-		void onQuit(wxCommandEvent& event);
+	DECLARE_EVENT_TABLE()
 
-		void initMenuBar();
+}; // Frame
 
-		wxMenu* initFileBar();
-		wxMenu* initHelpBar();
-
-		void clear();
-
-		void setCurrFilename();
-
-	private:
-		enum
-		{
-			ID_CONNECT = 1000
-		};
-
-	private:
-		Task* m_task;
-
-		wxString m_currFilename;
-
-		DECLARE_EVENT_TABLE()
-
-	}; // Frame
 }
 
-#endif // EDB_FRAME_H
+#endif // _EASYDB_FRAME_H_

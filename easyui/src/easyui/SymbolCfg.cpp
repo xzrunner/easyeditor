@@ -1,6 +1,13 @@
 #include "SymbolCfg.h"
 
+#include <ee/Symbol.h>
+#include <ee/FileHelper.h>
+
+#include <json/json.h>
+
 #include <wx/stdpaths.h>
+
+#include <fstream>
 
 namespace eui
 {
@@ -61,7 +68,7 @@ SymbolCfg* SymbolCfg::Instance()
 		std::string filepath = FILENAME;
 		if (!ee::FileHelper::IsFileExist(filepath)) {
 			wxStandardPathsBase& stdp = wxStandardPaths::Get();
-			wxString exe_path = stdp.GetExecutablePath();
+			std::string exe_path = stdp.GetExecutablePath();
 			filepath = ee::FileHelper::GetFileDir(exe_path) + "\\" + FILENAME;
 		}
 		m_instance->LoadFromFile(filepath.c_str());

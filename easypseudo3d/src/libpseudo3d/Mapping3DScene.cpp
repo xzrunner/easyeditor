@@ -1,8 +1,17 @@
 #include "Mapping3DScene.h"
 #include "StageCanvas3D.h"
 
+#include <ee/Image.h>
+#include <ee/Exception.h>
+#include <ee/ImageVerticalFlip.h>
+#include <ee/FileHelper.h>
+#include <ee/ImageSaver.h>
+
 #include <easy3d.h>
-#include <easyimage.h>
+
+#include <fstream>
+
+#include <json/json.h>
 
 #define STORE_2D
 
@@ -25,9 +34,9 @@ void Mapping3DScene::Store(const char* filename) const
 	Json::Value value;
 
 	// store vertices
-	ivec2 min(INT_MAX, INT_MAX), max(-INT_MAX, -INT_MAX);
+	ee::ivec2 min(INT_MAX, INT_MAX), max(-INT_MAX, -INT_MAX);
 	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
-		ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
+		ee::ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
 
 		value["vertices"][i]["x"] = v.x;
 		value["vertices"][i]["y"] = v.y;
@@ -56,7 +65,7 @@ void Mapping3DScene::Store(const char* filename) const
 	m_canvas->GetScreenSize(&sw, &sh);
 	glReadPixels(min.x, sh - max.y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-	eimage::ImageVerticalFlip revert(pixels, w, h);
+	ee::ImageVerticalFlip revert(pixels, w, h);
 	uint8_t* pixels_revert = revert.Revert();
 	delete[] pixels;
 
@@ -68,7 +77,7 @@ void Mapping3DScene::Store(const char* filename) const
 
 	// store camera
 	const e3d::Camera& cam = m_canvas->GetCamera3();
-	const vec3& pos = cam.GetPosition();
+	const ee::vec3& pos = cam.GetPosition();
 	value["cam"]["x"] = pos.x;
 	value["cam"]["y"] = pos.y;
 	value["cam"]["z"] = pos.z;
@@ -86,14 +95,14 @@ void Mapping3DScene::Store(const char* filename) const
 
 void Mapping3DScene::Load(const char* filename)
 {
-	m_vertices.push_back(vec3(5, 5, 5));
-	m_vertices.push_back(vec3(5, 5, -5));
-	m_vertices.push_back(vec3(5, -5, 5));
-	m_vertices.push_back(vec3(5, -5, -5));
-	m_vertices.push_back(vec3(-5, 5, 5));
-	m_vertices.push_back(vec3(-5, 5, -5));
-	m_vertices.push_back(vec3(-5, -5, 5));
-	m_vertices.push_back(vec3(-5, -5, -5));
+	m_vertices.push_back(ee::vec3(5, 5, 5));
+	m_vertices.push_back(ee::vec3(5, 5, -5));
+	m_vertices.push_back(ee::vec3(5, -5, 5));
+	m_vertices.push_back(ee::vec3(5, -5, -5));
+	m_vertices.push_back(ee::vec3(-5, 5, 5));
+	m_vertices.push_back(ee::vec3(-5, 5, -5));
+	m_vertices.push_back(ee::vec3(-5, -5, 5));
+	m_vertices.push_back(ee::vec3(-5, -5, -5));
 
 #ifdef STORE_2D
  	m_img = ee::ImageMgr::Instance()->GetItem("box/crate.jpg");
@@ -128,7 +137,7 @@ void Mapping3DScene::Load(const char* filename)
 	while (!vertex_val.isNull()) {
 		int x = vertex_val["x"].asInt(),
 			y = vertex_val["y"].asInt();
-		vec2 texcoords;
+		ee::vec2 texcoords;
 		texcoords.x = (float)(x - xmin) / w;
 		texcoords.y = 1 - (float)(y - ymin) / h;
 		m_texcoords.push_back(texcoords);
@@ -136,7 +145,7 @@ void Mapping3DScene::Load(const char* filename)
 	}
 
 	e3d::Camera& cam = m_canvas->GetCamera3();
-	vec3 pos;
+	ee::vec3 pos;
 	pos.x = value["cam"]["x"].asDouble();
 	pos.y = value["cam"]["y"].asDouble();
 	pos.z = value["cam"]["z"].asDouble();
@@ -152,14 +161,14 @@ void Mapping3DScene::Draw() const
 	}
 
 #ifdef STORE_2D
- 	e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), m_img->GetTexID());
+ 	e3d::DrawCube(ee::vec3(-5, -5, -5), ee::vec3(5, 5, 5), m_img->GetTexID());
  	return;
 
-	//e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), ee::WHITE);
+	//e3d::DrawCube(ee::vec3(-5, -5, -5), ee::vec3(5, 5, 5), ee::WHITE);
 #endif // STORE_2D
 
-	std::vector<vec3> vertices;
-	std::vector<vec2> texcoords;
+	std::vector<ee::vec3> vertices;
+	std::vector<ee::vec2> texcoords;
 
 	// front
 	vertices.push_back(m_vertices[7]);
@@ -264,7 +273,7 @@ void Mapping3DScene::DebugDraw() const
 // 	dc.SetPen(*wxWHITE_PEN);
 // 	dc.SetBrush(*wxWHITE_BRUSH);
 // 	for (int i = 0, n= m_vertices.size(); i < n; ++i) {
-// 		ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
+// 		ee::ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
 // 		dc.DrawRectangle(v.x, v.y, 10, 10);
 // 	}
 }

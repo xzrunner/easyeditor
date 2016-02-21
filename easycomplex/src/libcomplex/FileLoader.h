@@ -1,7 +1,7 @@
-#ifndef _LIBCOMPLEX_FILE_LOADER_H_
-#define _LIBCOMPLEX_FILE_LOADER_H_
+#ifndef _EASYCOMPLEX_FILE_LOADER_H_
+#define _EASYCOMPLEX_FILE_LOADER_H_
 
-
+#include <string>
 
 namespace ecomplex
 {
@@ -17,4 +17,4 @@ public:
 
 }
 
-#endif // _LIBCOMPLEX_FILE_LOADER_H_
+#endif // _EASYCOMPLEX_FILE_LOADER_H_

@@ -3,7 +3,7 @@
 
 #include <time.h>
 
-namespace d2d
+namespace ee
 {
 
 class PlayControl

@@ -1,5 +1,11 @@
 #include "PathVisibleSimple.h"
 
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/BoundingBox.h>
+#include <ee/Math2D.h>
+#include <ee/Matrix.h>
+
 #include <easyshape.h>
 
 namespace lr

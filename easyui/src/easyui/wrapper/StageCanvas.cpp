@@ -1,6 +1,10 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/Camera.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace eui
 {
 namespace wrapper

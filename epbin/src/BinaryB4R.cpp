@@ -3,9 +3,16 @@
 #include "Lzma.h"
 #include "tools.h"
 
+#include <ee/LibpngAdapter.h>
+#include <ee/StringHelper.h>
+
 #include <easyimage.h>
 // #include <dtex_pvr.h>
 // #include <dtex_b4r.h>
+
+#include <algorithm>
+
+#include <wx/string.h>
 
 namespace epbin
 {
@@ -91,9 +98,7 @@ void BinaryB4R::LoadPictures(const std::vector<std::string>& src_files, const st
 	ImageIDer ider(img_id_file);
 	for (int i = 0, n = src_files.size(); i < n; ++i)
 	{
-		wxString str;
-		str.Printf("BinaryB4R load pic [%d/%d]\n", i, n);
-		std::cout << str;
+		std::cout << ee::StringHelper::Format("BinaryB4R load pic [%d/%d]\n", i, n);
 
 		const std::string& filepath = src_files[i];
 

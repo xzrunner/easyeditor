@@ -1,5 +1,11 @@
 #include "EditClipboxOP.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/Math2D.h>
+#include <ee/panel_msg.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+
 namespace eui
 {
 

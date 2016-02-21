@@ -4,7 +4,11 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
-namespace libsketch
+#include <ee/SpriteSelection.h>
+#include <ee/panel_msg.h>
+#include <ee/FetchAllVisitor.h>
+
+namespace esketch
 {
 
 SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
@@ -19,7 +23,7 @@ bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) return true;
 
-	ee::Sprite* selected = SelectByPos(ivec2(x, y));
+	ee::Sprite* selected = SelectByPos(ee::ivec2(x, y));
 	if (selected && selected->editable)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL)) 
@@ -57,8 +61,8 @@ bool SelectSpriteOP::OnDraw() const
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
-		mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
-			mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
+		ee::mat4 mat = ee::mat4(s->GetOri3().ToMatrix()) * 
+			ee::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 		e3d::DrawCube(mat, s->GetSymbol().GetAABB(), ee::MID_RED);
 	}
 
@@ -67,7 +71,7 @@ bool SelectSpriteOP::OnDraw() const
 
 // 以sprite的中心和方向，旋转ray的坐标系
 // 即AABB不变
-ee::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
+ee::Sprite* SelectSpriteOP::SelectByPos(const ee::ivec2& pos) const
 {
 	ee::Sprite* selected = NULL;
 
@@ -75,10 +79,10 @@ ee::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
-	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
-	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
+	ee::vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
+	e3d::Ray ray(ee::vec3(0, 0, 0), ray_dir);
 
-	mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
+	ee::mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		ee::Sprite* sprite = sprites[i];
@@ -87,9 +91,9 @@ ee::Sprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 		const e3d::AABB& aabb = symbol.GetAABB();
 		Sprite* s = static_cast<Sprite*>(sprite);
 		
-		vec3 offset = cam_mat * s->GetPos3();
+		ee::vec3 offset = cam_mat * s->GetPos3();
 
-		vec3 cross;
+		ee::vec3 cross;
 		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
 		if (intersect) {
 			return sprite;

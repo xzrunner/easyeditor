@@ -3,6 +3,8 @@
 
 #include <ps_3d.h>
 
+#include <ee/panel_msg.h>
+
 namespace eparticle3d
 {
 
@@ -13,7 +15,7 @@ SymbolPropertySetting::SymbolPropertySetting(ParticleSystem* ps)
 	m_type = "Particle3DSymbol";
 }
 
-void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	ee::SymbolPropertySetting::OnPropertyGridChange(name, value);
 

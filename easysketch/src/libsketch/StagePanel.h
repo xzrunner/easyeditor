@@ -1,10 +1,14 @@
-#ifndef _LIBSKETCH_STAGE_PANEL_H_
-#define _LIBSKETCH_STAGE_PANEL_H_
+#ifndef _EASYSKETCH_STAGE_PANEL_H_
+#define _EASYSKETCH_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/MultiSpritesImpl.h>
 
 #include <easy3d.h>
 
-namespace libsketch
+namespace ee { class LibraryPanel; }
+
+namespace esketch
 {
 
 class StagePanel : public ee::EditPanel, public ee::MultiSpritesImpl
@@ -19,8 +23,8 @@ public:
 	virtual void TraverseSprites(ee::Visitor& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
-	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
-	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;
+	ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj) const;
+	ee::vec3 TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const;
 
 protected:
 	//
@@ -40,4 +44,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_STAGE_PANEL_H_
+#endif // _EASYSKETCH_STAGE_PANEL_H_

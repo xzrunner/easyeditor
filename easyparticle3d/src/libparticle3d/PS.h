@@ -1,7 +1,9 @@
 #ifndef _EASYPARTICLE3D_PS_H_
 #define _EASYPARTICLE3D_PS_H_
 
-
+#include <ee/Matrix.h>
+#include <ee/ColorTrans.h>
+#include <ee/SceneNode.h>
 
 struct p3d_sprite;
 

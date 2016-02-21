@@ -1,4 +1,3 @@
-#define NOMINMAX
 #include <gl/glew.h>
 
 #include "EJScreen.h"
@@ -7,8 +6,13 @@
 #include "SpriteShader.vert"
 #include "SpriteShader.frag"
 
+#include <ee/ShaderMgr.h>
+#include <ee/Exception.h>
+
 #include <ejoy2d.h>
 #include <dtex.h>
+
+#include <assert.h>
 
 struct ej_package;
 

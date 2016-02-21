@@ -1,10 +1,10 @@
-#ifndef _LIBSKETCH_EDIT_CAMERA_OP_H_
-#define _LIBSKETCH_EDIT_CAMERA_OP_H_
+#ifndef _EASYSKETCH_EDIT_CAMERA_OP_H_
+#define _EASYSKETCH_EDIT_CAMERA_OP_H_
 
 
 #include <easy3d.h>
 
-namespace libsketch
+namespace esketch
 {
 
 class IEditState;
@@ -35,4 +35,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_EDIT_CAMERA_OP_H_
+#endif // _EASYSKETCH_EDIT_CAMERA_OP_H_

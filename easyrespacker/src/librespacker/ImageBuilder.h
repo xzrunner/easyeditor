@@ -1,12 +1,12 @@
-#ifndef _LIBRESPACKER_IMAGE_BUILDER_H_
-#define _LIBRESPACKER_IMAGE_BUILDER_H_
+#ifndef _EASYRESPACKER_IMAGE_BUILDER_H_
+#define _EASYRESPACKER_IMAGE_BUILDER_H_
 
 #include "INodeBuilder.h"
 #include "PackPicture.h"
 
+namespace ee { class ImageSprite; class Sprite; }
 
-
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -32,4 +32,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_IMAGE_BUILDER_H_
+#endif // _EASYRESPACKER_IMAGE_BUILDER_H_

@@ -3,6 +3,7 @@
 
 #include <json/json.h>
 
+namespace ee { class Matrix; class Symbol; }
 
 namespace ep3dinv
 {

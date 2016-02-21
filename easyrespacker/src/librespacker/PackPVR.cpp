@@ -4,7 +4,7 @@
 
 #include <assert.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 #define PVR_TEXTURE_FLAG_TYPE_MASK  0xff

@@ -1,7 +1,13 @@
 #include "Task.h"
 
+#include <ee/Config.h>
+#include <ee/SettingData.h>
+#include <ee/SymbolMgr.h>
+#include <ee/FileHelper.h>
 
 #include <easyterrain2d.h>
+
+#include <wx/splitter.h>
 
 namespace eterrain2d
 {
@@ -30,13 +36,13 @@ void Task::Load(const char* filename)
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
-	m_stage->Load(ee::FileHelper::GetFileDir(filename).ToStdString(), value, m_library, m_toolbar);
+	m_stage->Load(ee::FileHelper::GetFileDir(filename), value, m_library, m_toolbar);
 }
 
 void Task::Store(const char* filename) const
 {
 	Json::Value value;
-	m_stage->Store(ee::FileHelper::GetFileDir(filename).ToStdString(), value);
+	m_stage->Store(ee::FileHelper::GetFileDir(filename), value);
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);

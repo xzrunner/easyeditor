@@ -22,7 +22,7 @@ class SpriteSelection;
 class ArrangeSpriteImpl
 {
 public:
-	ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
+	ArrangeSpriteImpl(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl, 
 		PropertySettingPanel* property, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 	~ArrangeSpriteImpl();
 

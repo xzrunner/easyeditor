@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libcomplex"
+	Name="5.libcomplex"
 	ProjectGUID="{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
 	RootNamespace="libcomplex"
 	Keyword="Win32Proj"

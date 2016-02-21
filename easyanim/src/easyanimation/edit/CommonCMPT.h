@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_COMMON_CMPT_H_
 #define _EASYANIM_COMMON_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace eanim
 {

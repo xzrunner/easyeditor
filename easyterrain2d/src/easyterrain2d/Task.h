@@ -1,8 +1,11 @@
 #ifndef _EASYTERRAIN2D_TASK_H_
 #define _EASYTERRAIN2D_TASK_H_
 
+#include <ee/Task.h>
 
-#include <wx/splitter.h>
+#include <wx/wx.h>
+
+namespace ee { class LibraryPanel; }
 
 namespace eterrain2d
 {

@@ -1,8 +1,12 @@
 #ifndef _EASYSKETCH_TASK_H_
 #define _EASYSKETCH_TASK_H_
 
+#include <ee/Task.h>
 
-#include <wx/splitter.h>
+class wxFrame;
+class wxWindow;
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; class ToolbarPanel; }
 
 namespace esketch
 {

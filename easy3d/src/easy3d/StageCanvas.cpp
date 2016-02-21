@@ -4,6 +4,11 @@
 #include "ShaderMgr.h"
 #include "ViewFrustum.h"
 
+#include <ee/panel_msg.h>
+#include <ee/ShaderContext.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace e3d
 {
 
@@ -19,12 +24,12 @@ void StageCanvas::Refresh()
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
+ee::ivec2 StageCanvas::TransPos3ProjectToScreen(const ee::vec3& proj) const
 {
-	mat4 mat_modelview = GetCamera3().GetModelViewMat();
-	vec3 v0 = mat_modelview * proj;
+	ee::mat4 mat_modelview = GetCamera3().GetModelViewMat();
+	ee::vec3 v0 = mat_modelview * proj;
 
-	vec3 v1 = m_mat_projection * v0;
+	ee::vec3 v1 = m_mat_projection * v0;
 	v1.z = v0.z;
 
 	return ViewFrustum::TransPos3ProjectToScreen(v1, m_width, m_height);
@@ -71,7 +76,7 @@ void StageCanvas::OnSize(int w, int h)
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 
 	float hh = 1.0f * h / w;
-	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
+	m_mat_projection = ee::mat4::Perspective(-1, 1, -hh, hh, 
 		e3d::Camera::CAM_NEAR, e3d::Camera::CAM_FAR);
 }
 

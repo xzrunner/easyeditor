@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_PICTURE_TO_LUA_STRING_H_
-#define _LIBRESPACKER_PICTURE_TO_LUA_STRING_H_
+#ifndef _EASYRESPACKER_PICTURE_TO_LUA_STRING_H_
+#define _EASYRESPACKER_PICTURE_TO_LUA_STRING_H_
 
 #include "PackPicture.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class PictureToLuaString
@@ -20,4 +20,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PICTURE_TO_LUA_STRING_H_
+#endif // _EASYRESPACKER_PICTURE_TO_LUA_STRING_H_

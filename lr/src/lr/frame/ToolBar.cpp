@@ -1,5 +1,9 @@
 #include "ToolBar.h"
 
+#include <ee/LibraryPanel.h>
+
+#include <wx/wx.h>
+
 namespace lr
 {
 

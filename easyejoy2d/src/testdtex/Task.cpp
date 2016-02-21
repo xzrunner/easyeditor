@@ -3,6 +3,11 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+
+#include <wx/splitter.h>
+
 namespace tdtex
 {
 

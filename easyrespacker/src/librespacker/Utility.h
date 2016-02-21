@@ -1,9 +1,11 @@
-#ifndef _LIBRESPACKER_UTILITY_NEW_H_
-#define _LIBRESPACKER_UTILITY_NEW_H_
+#ifndef _EASYRESPACKER_UTILITY_NEW_H_
+#define _EASYRESPACKER_UTILITY_NEW_H_
 
+#include <string>
 
+namespace ee { class Sprite; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class Utility
@@ -17,4 +19,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_UTILITY_NEW_H_
+#endif // _EASYRESPACKER_UTILITY_NEW_H_

@@ -1,6 +1,12 @@
 #include "ToolBarPanel.h"
 #include "SliderCtrl.h"
 
+#include <ee/EditPanel.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/std_functor.h>
+
+#include <algorithm>
+
 namespace eshader
 {
 
@@ -42,7 +48,7 @@ wxSizer* ToolbarPanel::InitLayout()
 
 void ToolbarPanel::Clear()
 {
-	for_each(m_sliders.begin(), m_sliders.end(), DeletePointerFunctor<SliderCtrl>());
+	for_each(m_sliders.begin(), m_sliders.end(), ee::DeletePointerFunctor<SliderCtrl>());
 	m_sliders.clear();
 
 	GetSizer()->Clear();

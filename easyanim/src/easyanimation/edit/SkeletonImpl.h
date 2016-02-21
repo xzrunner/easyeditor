@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_SKELETON_IMPL_H_
 #define _EASYANIM_SKELETON_IMPL_H_
 
-
+#include <ee/ArrangeSpriteImpl.h>
 
 namespace eanim
 {

@@ -1,39 +1,43 @@
-
 #include "Fixture.h"
 #include "Body.h"
 
 #include <easyshape.h>
 
-using namespace libmodeling;
+#include <ee/StringHelper.h>
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+
+namespace emodeling
+{
 
 Fixture::Fixture()
-	: body(NULL)
-	, shape(NULL)
-	, density(1.0f)
-	, friction(0.2f)
-	, restitution(0.0f)
-	, isSensor(false)
-	, categoryBits(0x0001)
-	, maskBits(0xFFFF)
-	, groupIndex(0)
+	: m_body(NULL)
+	, m_shape(NULL)
+	, m_density(1.0f)
+	, m_friction(0.2f)
+	, m_restitution(0.0f)
+	, m_is_sensor(false)
+	, m_category_bits(0x0001)
+	, m_mask_bits(0xFFFF)
+	, m_group_index(0)
 {
 	static int count = 0;
-	name = wxT("fixture") + wxString::FromDouble(count++);
+	m_name = std::string("fixture") + ee::StringHelper::ToString(count++);
 }
 
 Fixture::~Fixture()
 {
-	shape->Release();
+	m_shape->Release();
 }
 
-bool Fixture::isContain(const ee::Vector& pos) const
+bool Fixture::IsContain(const ee::Vector& pos) const
 {
-	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shape))
+	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		return ee::Math2D::GetDistance(circle->center + body->sprite->GetPosition(), pos) 
+		return ee::Math2D::GetDistance(circle->center + m_body->m_sprite->GetPosition(), pos) 
 			< circle->radius;
 	}
-	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(shape))
+	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
 		std::vector<ee::Vector> boundary(4);
 		boundary[0].Set(rect->m_rect.xmin, rect->m_rect.ymin);
@@ -42,33 +46,33 @@ bool Fixture::isContain(const ee::Vector& pos) const
 		boundary[3].Set(rect->m_rect.xmin, rect->m_rect.ymax);
 
 		std::vector<ee::Vector> fixed;
-		transLocalToWorld(boundary, fixed);
+		TransLocalToWorld(boundary, fixed);
 		return ee::Math2D::IsPointInArea(pos, fixed);
 	}
-	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shape))
+	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<ee::Vector> fixed;
-		transLocalToWorld(polygon->GetVertices(), fixed);
+		TransLocalToWorld(polygon->GetVertices(), fixed);
 		return ee::Math2D::IsPointInArea(pos, fixed);
 	}
-	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<ee::Vector> fixed;
-		transLocalToWorld(chain->GetVertices(), fixed);
+		TransLocalToWorld(chain->GetVertices(), fixed);
 		return ee::Math2D::GetDisPointToPolyline(pos, fixed) < 1;
 	}
 	else
 		return false;
 }
 
-bool Fixture::isIntersect(const ee::Rect& rect) const
+bool Fixture::IsIntersect(const ee::Rect& rect) const
 {
-	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shape))
+	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		return ee::Math2D::IsCircleIntersectRect(circle->center + body->sprite->GetPosition(), 
+		return ee::Math2D::IsCircleIntersectRect(circle->center + m_body->m_sprite->GetPosition(), 
 			circle->radius, rect);
 	}
-	else if (eshape::RectShape* r = dynamic_cast<eshape::RectShape*>(shape))
+	else if (eshape::RectShape* r = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
 		std::vector<ee::Vector> boundary(4);
 		boundary[0].Set(r->m_rect.xmin, r->m_rect.ymin);
@@ -77,47 +81,47 @@ bool Fixture::isIntersect(const ee::Rect& rect) const
 		boundary[3].Set(r->m_rect.xmin, r->m_rect.ymax);
 		
 		std::vector<ee::Vector> fixed;
-		transLocalToWorld(boundary, fixed);
+		TransLocalToWorld(boundary, fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
 	}
-	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shape))
+	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<ee::Vector> fixed;
-		transLocalToWorld(polygon->GetVertices(), fixed);
+		TransLocalToWorld(polygon->GetVertices(), fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, true, rect);
 	}
-	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<ee::Vector> fixed;
-		transLocalToWorld(chain->GetVertices(), fixed);
+		TransLocalToWorld(chain->GetVertices(), fixed);
 		return ee::Math2D::IsPolylineIntersectRect(fixed, false, rect);
 	}
 	else
 		return false;
 }
 
-void Fixture::draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colorf& cEdge) const
+void Fixture::Draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colorf& cEdge) const
 {
-	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(shape))
+	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
 		ee::PrimitiveDraw::DrawCircle(mt, circle->center, circle->radius, true, 2, cFace);
 		ee::PrimitiveDraw::DrawCircle(mt, circle->center, circle->radius, false, 2, cEdge, 32);
 	}
-	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(shape))
+	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
 		const ee::Vector p0(rect->m_rect.xmin, rect->m_rect.ymin),
 			p1(rect->m_rect.xmax, rect->m_rect.ymax);
 		ee::PrimitiveDraw::DrawRect(mt, p0, p1, ee::ShapeStyle(true, cFace));
 		ee::PrimitiveDraw::DrawRect(mt, p0, p1, ee::ShapeStyle(false, cFace));
 	}
-	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shape))
+	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
 		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
 		ee::PrimitiveDraw::DrawPolyline(vertices, cEdge, true, 2);
 	}
-	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shape))
+	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);
@@ -125,10 +129,12 @@ void Fixture::draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colo
 	}
 }
 
-void Fixture::transLocalToWorld(const std::vector<ee::Vector>& local, 
+void Fixture::TransLocalToWorld(const std::vector<ee::Vector>& local, 
 								std::vector<ee::Vector>& world) const
 {
 	world.resize(local.size());
 	for (size_t i = 0, n = local.size(); i < n ; ++i)
-		world[i] = ee::Math2D::RotateVector(local[i], body->sprite->GetAngle()) + body->sprite->GetPosition();
+		world[i] = ee::Math2D::RotateVector(local[i], m_body->m_sprite->GetAngle()) + m_body->m_sprite->GetPosition();
+}
+
 }

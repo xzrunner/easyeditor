@@ -1,7 +1,9 @@
 #ifndef _LR_STAGE_CANVAS_H_
 #define _LR_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
+namespace ee { class Sprite; }
 
 namespace lr
 {

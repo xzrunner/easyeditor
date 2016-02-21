@@ -1,5 +1,9 @@
 #include "SpriteUserData.h"
 
+#include <ee/Sprite.h>
+
+#include <stddef.h>
+
 namespace eanim
 {
 

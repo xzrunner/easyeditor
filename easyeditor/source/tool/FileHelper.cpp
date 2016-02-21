@@ -24,6 +24,11 @@ bool FileHelper::MkDir(const std::string& dir, bool rm)
 	return ret;
 }
 
+bool FileHelper::RmFile(const std::string& filepath)
+{
+	return wxRemoveFile(filepath);
+}
+
 bool FileHelper::IsFileExist(const std::string& filepath)
 {
 	return wxFileName::FileExists(filepath);

@@ -2,10 +2,14 @@
 #include "StagePanel.h"
 #include "CreateRegionOP.h"
 
+#include <ee/SelectShapesOP.h>
+#include <ee/SettingData.h>
+#include <ee/panel_msg.h>
+
 namespace eterrain2d
 {
 
-CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
+CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const std::string& name, StagePanel* stage)
 	: ee::OneFloatValueCMPT(parent, name, stage->GetStageImpl(), "node capture", 5, 30, 10)
 {
 	m_editop = new eshape::EditPolylineOP<CreateRegionOP, ee::SelectShapesOP>(stage, stage->GetStageImpl(), stage, NULL, this, this);

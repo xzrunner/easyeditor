@@ -1,9 +1,10 @@
 #ifndef _EASYUI_LIST_EDIT_OP_H_
 #define _EASYUI_LIST_EDIT_OP_H_
 
-
-
 #include "EditClipboxOP.h"
+
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/SelectSpritesOP.h>
 
 namespace eui
 {

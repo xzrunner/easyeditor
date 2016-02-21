@@ -1,5 +1,5 @@
-#ifndef _EASYPARTICLE3D_COCO_PACKER_H_
-#define _EASYPARTICLE3D_COCO_PACKER_H_
+#ifndef _EASYPARTICLE2D_COCO_PACKER_H_
+#define _EASYPARTICLE2D_COCO_PACKER_H_
 
 #include <wx/wx.h>
 #include <json/json.h>
@@ -12,11 +12,11 @@ namespace eparticle2d
 class CocoPacker
 {
 public:
-	static void pack(const wxString& srcdir, const wxString& dstfilename);
+	static void pack(const std::string& srcdir, const std::string& dstfilename);
 
 private:
-	static void pack(const wxString& filepath, ebuilder::CodeGenerator& gen);
-	static void pack(const Json::Value& val, ebuilder::CodeGenerator& gen, const wxString& dir);
+	static void pack(const std::string& filepath, ebuilder::CodeGenerator& gen);
+	static void pack(const Json::Value& val, ebuilder::CodeGenerator& gen, const std::string& dir);
 
 //	static void PackFloat(const );
 
@@ -24,4 +24,4 @@ private:
 
 }
 
-#endif // _EASYPARTICLE3D_COCO_PACKER_H_
+#endif // _EASYPARTICLE2D_COCO_PACKER_H_

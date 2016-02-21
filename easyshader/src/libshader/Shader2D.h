@@ -1,7 +1,9 @@
-#ifndef _ESHADER_SHADER2D_H_
-#define _ESHADER_SHADER2D_H_
+#ifndef _EASYSHADER_SHADER2D_H_
+#define _EASYSHADER_SHADER2D_H_
 
 #include "Shader.h"
+
+#include <ee/SpriteShader.h>
 
 namespace eshader 
 {
@@ -39,4 +41,4 @@ private:
 
 }
 
-#endif // _ESHADER_SHADER2D_H_
+#endif // _EASYSHADER_SHADER2D_H_

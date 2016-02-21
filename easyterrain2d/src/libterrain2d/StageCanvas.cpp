@@ -2,6 +2,16 @@
 #include "StagePanel.h"
 #include "OceanMesh.h"
 
+#include <ee/FetchAllVisitor.h>
+#include <ee/render_utility.h>
+#include <ee/Matrix.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Camera.h>
+#include <ee/style_config.h>
+#include <ee/EditPanelImpl.h>
+
 namespace eterrain2d
 {
 
@@ -22,8 +32,8 @@ StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
 	, m_sprite_impl(bg_sprites)
 	, m_bg(NULL)
 {
-	std::vector<Sprite*> sprites;
-	m_sprite_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	std::vector<ee::Sprite*> sprites;
+	m_sprite_impl->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	m_bg = ee::draw_all_to_one_spr(sprites, m_edited);
 }
 

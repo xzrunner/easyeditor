@@ -1,7 +1,7 @@
 #ifndef _EASYUI_LIST_TRANSLATE_SPRITE_STATE_H_
 #define _EASYUI_LIST_TRANSLATE_SPRITE_STATE_H_
 
-
+#include <ee/TranslateSpriteState.h>
 
 namespace eui
 {

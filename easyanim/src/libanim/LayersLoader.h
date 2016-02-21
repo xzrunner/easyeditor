@@ -1,9 +1,11 @@
-#ifndef _LIBANIM_LAYERS_LOADER_H_
-#define _LIBANIM_LAYERS_LOADER_H_
+#ifndef _EASYANIM_LAYERS_LOADER_H_
+#define _EASYANIM_LAYERS_LOADER_H_
 
 #include "Symbol.h"
 
-namespace libanim
+#include <json/json.h>
+
+namespace eanim
 {
 
 class LayersLoader
@@ -20,4 +22,4 @@ protected:
 
 }
 
-#endif // _LIBANIM_LAYERS_LOADER_H_
+#endif // _EASYANIM_LAYERS_LOADER_H_

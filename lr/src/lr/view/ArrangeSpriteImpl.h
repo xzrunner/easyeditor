@@ -1,9 +1,10 @@
 #ifndef _LR_ARRANGE_SPRITE_IMPL_H_
 #define _LR_ARRANGE_SPRITE_IMPL_H_
 
-
-
 #include "RightPopupMenu.h"
+
+#include <ee/ArrangeSpriteImpl.h>
+#include <ee/RotateSpriteState.h>
 
 namespace lr
 {

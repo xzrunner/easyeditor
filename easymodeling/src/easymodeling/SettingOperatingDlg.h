@@ -1,6 +1,6 @@
 //
-//#ifndef EMODELING_SETTING_OPERATING_DLG_H
-//#define EMODELING_SETTING_OPERATING_DLG_H
+//#ifndef _EASYMODELING_SETTING_OPERATING_DLG_H_
+//#define _EASYMODELING_SETTING_OPERATING_DLG_H_
 //
 //#include <wx/wx.h>
 //
@@ -17,4 +17,4 @@
 //	}; // SettingOperatingDlg
 //}
 //
-//#endif // EMODELING_SETTING_OPERATING_DLG_H
+//#endif // _EASYMODELING_SETTING_OPERATING_DLG_H_

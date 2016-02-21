@@ -1,6 +1,8 @@
 #include "PreviewOP.h"
 #include "PreviewSettings.h"
 
+#include <ee/PlayControl.h>
+
 #include <easyanim.h>
 
 namespace eanim

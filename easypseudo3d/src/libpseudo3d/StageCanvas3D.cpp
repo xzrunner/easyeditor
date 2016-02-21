@@ -3,6 +3,8 @@
 //#include "Mapping3DScene.h"
 #include "Projection3DScene.h"
 
+#include <ee/OrthoCanvas.h>
+
 #include <wx/dcbuffer.h>
 
 namespace epseudo3d

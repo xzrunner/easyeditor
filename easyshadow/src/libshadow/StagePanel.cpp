@@ -3,6 +3,10 @@
 #include "Symbol.h"
 #include "Shadow.h"
 
+#include <ee/shape_msg.h>
+#include <ee/subject_id.h>
+#include <ee/panel_msg.h>
+
 #include <easyshape.h>
 
 namespace eshadow

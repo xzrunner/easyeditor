@@ -1,9 +1,14 @@
-
 #include "SettingViewDlg.h"
 
+#include <ee/SettingData.h>
+#include <ee/panel_msg.h>
+#include <ee/StageCanvas.h>
+
+#include <wx/wx.h>
 #include <wx/spinctrl.h>
 
-using namespace emodeling;
+namespace emodeling
+{
 
 SettingViewDlg::SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas)
 	: wxDialog(parent, wxID_ANY, wxT("Display Setting"))
@@ -106,4 +111,6 @@ void SettingViewDlg::onChangeDisplayPolygonBound(wxCommandEvent& event)
 {
 	ee::SettingData::draw_poly_bound = event.IsChecked();
 	if (m_canvas) m_canvas->Refresh(true);
+}
+
 }

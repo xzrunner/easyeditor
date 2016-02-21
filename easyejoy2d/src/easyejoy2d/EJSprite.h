@@ -1,8 +1,7 @@
 #ifndef _EASYEJOY2D_EJSPRITE_H_
 #define _EASYEJOY2D_EJSPRITE_H_
 
-
-//#include <ejoy2d.h>
+#include <ee/Object.h>
 
 #include <stdint.h>
 

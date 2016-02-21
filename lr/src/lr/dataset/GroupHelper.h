@@ -1,7 +1,9 @@
 #ifndef _LR_GROUP_HELPER_H_
 #define _LR_GROUP_HELPER_H_
 
+#include <vector>
 
+namespace ee { class Sprite; }
 
 namespace lr
 {

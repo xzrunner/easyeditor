@@ -4,6 +4,10 @@
 #include "TopLibraryPanel.h"
 #include "TopToolbarPanel.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/PropertySettingPanel.h>
+
 namespace eui
 {
 

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libeasy3d"
+	Name="5.libeasy3d"
 	ProjectGUID="{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 	RootNamespace="easy3d"
 	Keyword="Win32Proj"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\external\assimp\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include"
+				AdditionalIncludeDirectories="..\..\..\..\editor-external\assimp\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\external\assimp\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include"
+				AdditionalIncludeDirectories="..\..\..\..\editor-external\include;..\..\..\..\easyeditor\include;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -161,23 +161,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easy3d\Matrix.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\Quaternion.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easy3d\Ray.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\easy3d\Ray.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\Vector.h"
 				>
 			</File>
 		</Filter>

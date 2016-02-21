@@ -1,8 +1,11 @@
 #include "FormatJsonFile.h"
 #include "check_params.h"
 
-#include <wx/wx.h>
+#include <ee/FileHelper.h>
 
+#include <wx/arrstr.h>
+
+#include <fstream>
 
 namespace edb
 {
@@ -38,9 +41,7 @@ void FormatJsonFile::Trigger(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 
 		int pos = filepath.rfind('.');
 		if (pos == -1) {
@@ -53,14 +54,14 @@ void FormatJsonFile::Trigger(const std::string& dir) const
 			Json::Value value;
 			Json::Reader reader;
 			std::locale::global(std::locale(""));
-			std::ifstream fin(filepath.fn_str());
+			std::ifstream fin(filepath.c_str());
 			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
 
 			Json::StyledStreamWriter writer;
 			std::locale::global(std::locale(""));
-			std::ofstream fout(filepath.fn_str());
+			std::ofstream fout(filepath.c_str());
 			std::locale::global(std::locale("C"));
 			writer.write(fout, value);
 			fout.close();

@@ -11,6 +11,9 @@
 #include <easyicon.h>
 #include <easytext.h>
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+
 IMPLEMENT_APP(MyApp)
 
 static void InitSymbolCreators() 
@@ -18,8 +21,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
@@ -41,7 +44,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eanim::Frame* frame = new eanim::Frame("easyanim", libanim::FILE_TAG);
+	eanim::Frame* frame = new eanim::Frame("easyanim", eanim::FILE_TAG);
 	eanim::Task* task = new eanim::Task(frame);
 	frame->SetTask(task);
 	frame->Show(true);
@@ -49,7 +52,7 @@ bool MyApp::OnInit()
 	if (wxGetApp().argc > 1) {
 		const_cast<ee::EditPanel*>(task->GetEditPanel())->GetCanvas()->SetCurrentCanvas();
 
-		wxString path(wxGetApp().argv[1]);
+		std::string path(wxGetApp().argv[1]);
 		frame->InitWithFile(path);
 	}
 

@@ -1,6 +1,7 @@
 #include "PackRegularRect.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
 
 #include <easytexpacker.h>
 
@@ -39,15 +40,15 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 
-	wxString filepath = dst_dir + "\\" + name;
+	std::string filepath = dst_dir + "\\" + name;
 
   	// pack
-  	libtexpacker::RegularRectPack rrp(files);
+  	etexpacker::RegularRectPack rrp(files);
   	rrp.Pack();
   	rrp.OutputToText(filepath);
   
   	// gen image
-  	libtexpacker::GenRegularRectImage::CreateMulti(filepath);
+  	etexpacker::GenRegularRectImage::CreateMulti(filepath);
 }
 
 }

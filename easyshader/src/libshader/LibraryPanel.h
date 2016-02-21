@@ -1,7 +1,7 @@
-#ifndef _ESHADER_LIBRARY_PANEL_H_
-#define _ESHADER_LIBRARY_PANEL_H_
+#ifndef _EASYSHADER_LIBRARY_PANEL_H_
+#define _EASYSHADER_LIBRARY_PANEL_H_
 
-
+#include <ee/LibraryPanel.h>
 
 namespace eshader
 {
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _ESHADER_LIBRARY_PANEL_H_
+#endif // _EASYSHADER_LIBRARY_PANEL_H_

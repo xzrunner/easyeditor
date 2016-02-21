@@ -3,7 +3,15 @@
 #include "Snapshoot.h"
 #include "check_params.h"
 
+#include <ee/ShaderMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Symbol.h>
+
 #include <glfw.h>
+#include <fstream>
+#include <wx/arrstr.h>
 
 namespace edb
 {
@@ -55,9 +63,7 @@ void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::str
 	ee::FileHelper::FetchAllFiles(srcdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) || 
 			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{

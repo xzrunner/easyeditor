@@ -4,7 +4,10 @@
 #include <easyshape.h>
 #include <easytexture.h>
 
-namespace librespacker
+#include <ee/Exception.h>
+#include <ee/ImageSymbol.h>
+
+namespace erespacker
 {
 
 TextureBuilder::TextureBuilder()

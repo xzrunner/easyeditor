@@ -1,7 +1,8 @@
-#ifndef _EASYCOMPLEX_PREVIEW_STAGE_H_
-#define _EASYCOMPLEX_PREVIEW_STAGE_H_
+#ifndef _EASY_EASYCOMPLEX_PREVIEW_STAGE_H_
+#define _EASY_EASYCOMPLEX_PREVIEW_STAGE_H_
 
-
+#include <ee/EditPanel.h>
+#include <ee/PlayControl.h>
 
 namespace ecomplex
 {
@@ -21,4 +22,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_PREVIEW_STAGE_H_
+#endif // _EASY_EASYCOMPLEX_PREVIEW_STAGE_H_

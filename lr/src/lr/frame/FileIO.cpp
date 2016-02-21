@@ -7,6 +7,15 @@
 #include "view/LibraryPage.h"
 #include "view/StagePanel.h"
 
+#include <ee/Camera.h>
+#include <ee/panel_msg.h>
+#include <ee/trans_color.h>
+#include <ee/FileHelper.h>
+#include <ee/Sprite.h>
+#include <ee/Shape.h>
+
+#include <fstream>
+
 namespace lr
 {
 

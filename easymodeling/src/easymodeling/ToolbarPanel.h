@@ -1,20 +1,21 @@
+#ifndef _EASYMODELING_TOOLBAR_PANEL_H_
+#define _EASYMODELING_TOOLBAR_PANEL_H_
 
-#ifndef EMODELING_TOOLBAR_PANEL_H
-#define EMODELING_TOOLBAR_PANEL_H
-
-
+#include <ee/ToolbarPanel.h>
 
 namespace emodeling
 {
-	class ToolbarPanel : public ee::ToolbarPanel
-	{
-	public:
-		ToolbarPanel(wxWindow* parent);
 
-	protected:
-		virtual wxSizer* InitLayout();
+class ToolbarPanel : public ee::ToolbarPanel
+{
+public:
+	ToolbarPanel(wxWindow* parent);
 
-	}; // ToolbarPanel
+protected:
+	virtual wxSizer* InitLayout();
+
+}; // ToolbarPanel
+
 }
 
-#endif // EMODELING_TOOLBAR_PANEL_H
+#endif // _EASYMODELING_TOOLBAR_PANEL_H_

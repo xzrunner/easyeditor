@@ -1,5 +1,7 @@
-#ifndef _ESHADER_SLIDER_ITEM_H_
-#define _ESHADER_SLIDER_ITEM_H_
+#ifndef _EASYSHADER_SLIDER_ITEM_H_
+#define _EASYSHADER_SLIDER_ITEM_H_
+
+#include <string>
 
 namespace eshader 
 {
@@ -22,4 +24,4 @@ typedef SliderItem<int> SliderItemInt;
 
 }
 
-#endif // _ESHADER_SLIDER_ITEM_H_
+#endif // _EASYSHADER_SLIDER_ITEM_H_

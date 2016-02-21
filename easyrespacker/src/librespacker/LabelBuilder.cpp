@@ -2,7 +2,7 @@
 //#include "PackLabel.h"
 //#include "Utility.h"
 //
-//namespace librespacker
+//namespace erespacker
 //{
 //
 //LabelBuilder::LabelBuilder()

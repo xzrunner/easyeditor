@@ -1,7 +1,7 @@
 #ifndef _EASYCOMPLEX_FRAME_H_
 #define _EASYCOMPLEX_FRAME_H_
 
-
+#include <ee/Frame.h>
 
 namespace ecomplex
 {
@@ -9,7 +9,7 @@ namespace ecomplex
 class Frame : public ee::Frame
 {
 public:
-	Frame(const wxString& title, const wxString& filetag);
+	Frame(const std::string& title, const std::string& filetag);
 
 protected:
 	virtual void OnSaveAs(wxCommandEvent& event);

@@ -1,39 +1,41 @@
+#ifndef _EASYMODELING_SELECT_FIXTURE_OP_H_
+#define _EASYMODELING_SELECT_FIXTURE_OP_H_
 
-#ifndef EMODELING_SELECT_FIXTURE_OP_H
-#define EMODELING_SELECT_FIXTURE_OP_H
+#include <ee/DrawRectangleOP.h>
 
-
-
-namespace libmodeling { class Fixture; }
+namespace ee { class PropertySettingPanel; }
 
 namespace emodeling
 {
-	class StagePanel;
 
-	class SelectFixtureOP : public ee::DrawRectangleOP
-	{
-	public:
-		SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* property);
-		virtual ~SelectFixtureOP();
+class Fixture;
+class StagePanel;
 
-		virtual bool OnMouseLeftDown(int x, int y);
-		virtual bool OnMouseLeftUp(int x, int y);
-		virtual bool OnMouseMove(int x, int y);
+class SelectFixtureOP : public ee::DrawRectangleOP
+{
+public:
+	SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* property);
+	virtual ~SelectFixtureOP();
 
-		virtual bool OnDraw() const;
-		virtual bool Clear();
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
 
-	private:
-		StagePanel* m_stagePanel;
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
-		ee::PropertySettingPanel* m_property;
+private:
+	StagePanel* m_stagePanel;
 
-		ee::Vector m_first_pos;
+	ee::PropertySettingPanel* m_property;
 
-		libmodeling::Fixture* m_selected;
-		libmodeling::Fixture* m_mouseOn;
+	ee::Vector m_first_pos;
 
-	}; // SelectFixtureOP
+	Fixture* m_selected;
+	Fixture* m_mouseOn;
+
+}; // SelectFixtureOP
+
 }
 
-#endif // EMODELING_SELECT_FIXTURE_OP_H
+#endif // _EASYMODELING_SELECT_FIXTURE_OP_H_

@@ -1,7 +1,9 @@
 #ifndef _SG_STAGE_CANVAS_H_
 #define _SG_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
+namespace ee { class Symbol; class Sprite; }
 
 namespace sg
 {

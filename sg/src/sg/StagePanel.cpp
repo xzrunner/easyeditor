@@ -5,6 +5,15 @@
 #include "SpriteExt.h"
 #include "tools.h"
 
+#include <ee/sprite_msg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteSelection.h>
+#include <ee/subject_id.h>
+#include <ee/SymbolMgr.h>
+#include <ee/LibraryPanel.h>
+#include <ee/StringHelper.h>
+
 namespace sg
 {
 
@@ -25,6 +34,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	RegistSubject(ee::InsertSpriteSJ::Instance());
 	RegistSubject(ee::RemoveSpriteSJ::Instance());
 	RegistSubject(ee::ClearSpriteSJ::Instance());
+}
+
+void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type/* = e_allExisting*/,
+								 bool order/* = true*/) const
+{
+	m_checkboard.Traverse(visitor);
 }
 
 void StagePanel::TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const
@@ -213,7 +228,7 @@ void StagePanel::ChangeSymbolRemain(ee::Sprite* sprite, bool increase) const
 		--info->remain;
 	}
 	ee::Symbol& symbol = const_cast<ee::Symbol&>(sprite->GetSymbol());
-	symbol.SetInfo(wxString::FromDouble(info->remain).ToStdString());
+	symbol.SetInfo(ee::StringHelper::ToString(info->remain));
 	m_library->Refresh(true);
 }
 

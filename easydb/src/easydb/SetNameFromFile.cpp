@@ -1,8 +1,9 @@
 #include "SetNameFromFile.h"
 #include "check_params.h"
 
-#include <wx/wx.h>
+#include <ee/FileHelper.h>
 
+#include <fstream>
 
 namespace edb
 {
@@ -47,9 +48,7 @@ void SetNameFromFile::AddNameFromFile(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
 			AddName(filepath);
 		} else if (m_do_complex && 
@@ -59,12 +58,12 @@ void SetNameFromFile::AddNameFromFile(const std::string& dir) const
 	}
 }
 
-void SetNameFromFile::AddName(const wxString& filepath) const
+void SetNameFromFile::AddName(const std::string& filepath) const
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -81,7 +80,7 @@ void SetNameFromFile::AddName(const wxString& filepath) const
 
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filepath.fn_str());
+		std::ofstream fout(filepath.c_str());
 		std::locale::global(std::locale("C"));
 		writer.write(fout, value);
 		fout.close();

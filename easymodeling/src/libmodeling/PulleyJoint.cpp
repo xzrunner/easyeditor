@@ -1,85 +1,89 @@
-
 #include "PulleyJoint.h"
 #include "Body.h"
 
-using namespace libmodeling;
+#include <ee/Sprite.h>
+#include <ee/Math2D.h>
+#include <ee/PrimitiveDraw.h>
+
+namespace emodeling
+{
 
 PulleyJoint::PulleyJoint(Body* b0, Body* b1)
 	: Joint(b0, b1, e_pulleyJoint)
-	, ratio(1.0f)
+	, m_ratio(1.0f)
 {
-	groundAnchorA = b0->sprite->GetPosition();
-	groundAnchorB = b1->sprite->GetPosition();
-	groundAnchorA.y += 10;
-	groundAnchorB.y += 10;
+	m_ground_anchor_a = b0->m_sprite->GetPosition();
+	m_ground_anchor_b = b1->m_sprite->GetPosition();
+	m_ground_anchor_a.y += 10;
+	m_ground_anchor_b.y += 10;
 
-	ee::Vector center = (b0->sprite->GetPosition() + b1->sprite->GetPosition()) * 0.5f;
-	setLocalAnchorA(center);
-	setLocalAnchorB(center);
+	ee::Vector center = (b0->m_sprite->GetPosition() + b1->m_sprite->GetPosition()) * 0.5f;
+	SetLocalAnchorA(center);
+	SetLocalAnchorB(center);
 }
 
-bool PulleyJoint::isContain(const ee::Vector& pos) const
+bool PulleyJoint::IsContain(const ee::Vector& pos) const
 {
-	return ee::Math2D::GetDistance(getWorldAnchorA(), pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(getWorldAnchorB(), pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(groundAnchorA, pos) < JOINT_RADIUS_OUT
-		|| ee::Math2D::GetDistance(groundAnchorB, pos) < JOINT_RADIUS_OUT;
+	return ee::Math2D::GetDistance(GetWorldAnchorA(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(GetWorldAnchorB(), pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(m_ground_anchor_a, pos) < JOINT_RADIUS_OUT
+		|| ee::Math2D::GetDistance(m_ground_anchor_b, pos) < JOINT_RADIUS_OUT;
 }
 
-bool PulleyJoint::isIntersect(const ee::Rect& rect) const
+bool PulleyJoint::IsIntersect(const ee::Rect& rect) const
 {
-	return ee::Math2D::IsPointInRect(getWorldAnchorA(), rect) 
-		|| ee::Math2D::IsPointInRect(getWorldAnchorB(), rect)
-		|| ee::Math2D::IsPointInRect(groundAnchorA, rect) 
-		|| ee::Math2D::IsPointInRect(groundAnchorB, rect);
+	return ee::Math2D::IsPointInRect(GetWorldAnchorA(), rect) 
+		|| ee::Math2D::IsPointInRect(GetWorldAnchorB(), rect)
+		|| ee::Math2D::IsPointInRect(m_ground_anchor_a, rect) 
+		|| ee::Math2D::IsPointInRect(m_ground_anchor_b, rect);
 }
 
-void PulleyJoint::draw(DrawType type) const
+void PulleyJoint::Draw(DrawType type) const
 {
-	const ee::Vector anchorA = getWorldAnchorA(),
-		anchorB = getWorldAnchorB();
+	const ee::Vector anchorA = GetWorldAnchorA(),
+		anchorB = GetWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
 		ee::PrimitiveDraw::DrawDashLine(anchorA, anchorB, ee::Colorf(1, 0, 0), 2);
-		ee::PrimitiveDraw::DrawDashLine(anchorA, bodyA->sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
-		ee::PrimitiveDraw::DrawDashLine(anchorB, bodyB->sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorA, m_body_a->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
+		ee::PrimitiveDraw::DrawDashLine(anchorB, m_body_b->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
 
-		ee::PrimitiveDraw::DrawLine(anchorA, groundAnchorA, ee::Colorf(0.8f, 0.8f, 0.4f));
-		ee::PrimitiveDraw::DrawLine(anchorB, groundAnchorB, ee::Colorf(0.8f, 0.8f, 0.4f));
-		ee::PrimitiveDraw::DrawLine(groundAnchorA, groundAnchorB, ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawLine(anchorA, m_ground_anchor_a, ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawLine(anchorB, m_ground_anchor_b, ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::PrimitiveDraw::DrawLine(m_ground_anchor_a, m_ground_anchor_b, ee::Colorf(0.8f, 0.8f, 0.4f));
 
-		drawBodyFlag();
+		DrawBodyFlag();
 	}
 
-	drawAnchor(anchorA, type);
-	drawAnchor(anchorB, type);
-	drawAnchor(groundAnchorA, type);
-	drawAnchor(groundAnchorB, type);
+	DrawAnchor(anchorA, type);
+	DrawAnchor(anchorB, type);
+	DrawAnchor(m_ground_anchor_a, type);
+	DrawAnchor(m_ground_anchor_b, type);
 }
 
 
-ee::Vector PulleyJoint::getWorldAnchorA() const
+ee::Vector PulleyJoint::GetWorldAnchorA() const
 {
-	return transLocalToWorld(localAnchorA, bodyA->sprite);
+	return TransLocalToWorld(m_local_anchor_a, m_body_a->m_sprite);
 }
 
-ee::Vector PulleyJoint::getWorldAnchorB() const
+ee::Vector PulleyJoint::GetWorldAnchorB() const
 {
-	return transLocalToWorld(localAnchorB, bodyB->sprite);
+	return TransLocalToWorld(m_local_anchor_b, m_body_b->m_sprite);
 }
 
-void PulleyJoint::setLocalAnchorA(const ee::Vector& world)
+void PulleyJoint::SetLocalAnchorA(const ee::Vector& world)
 {
-	localAnchorA = transWorldToLocal(world, bodyA->sprite);
+	m_local_anchor_a = TransWorldToLocal(world, m_body_a->m_sprite);
 }
 
-void PulleyJoint::setLocalAnchorB(const ee::Vector& world)
+void PulleyJoint::SetLocalAnchorB(const ee::Vector& world)
 {
-	localAnchorB = transWorldToLocal(world, bodyB->sprite);
+	m_local_anchor_b = TransWorldToLocal(world, m_body_b->m_sprite);
 }
 
-void PulleyJoint::drawAnchor(const ee::Vector& pos, DrawType type) const
+void PulleyJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
 {
 	ee::Colorf color;
 	switch (type)
@@ -97,4 +101,6 @@ void PulleyJoint::drawAnchor(const ee::Vector& pos, DrawType type) const
 
 	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
 	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+}
+
 }

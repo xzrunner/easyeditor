@@ -1,7 +1,11 @@
 #ifndef _EASYANIM_TASK_H_
 #define _EASYANIM_TASK_H_
 
+#include <ee/Task.h>
+#include <ee/Observer.h>
 
+class wxFrame;
+class wxWindow;
 
 namespace eanim
 {

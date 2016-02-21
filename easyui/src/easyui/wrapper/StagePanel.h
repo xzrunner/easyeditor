@@ -1,9 +1,12 @@
 #ifndef _EASYUI_WRAPPER_STAGE_PANEL_H_
 #define _EASYUI_WRAPPER_STAGE_PANEL_H_
 
-
-
 #include "UIStagePage.h"
+
+#include <ee/SpritesPanelImpl.h>
+#include <ee/Rect.h>
+
+class wxGLContext;
 
 namespace eui
 {

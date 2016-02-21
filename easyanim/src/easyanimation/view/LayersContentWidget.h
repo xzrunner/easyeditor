@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_LAYERS_CONTENT_WIDGET_H_
 #define _EASYANIM_LAYERS_CONTENT_WIDGET_H_
 
+#include <ee/Observer.h>
 
+#include <wx/panel.h>
 
 namespace eanim
 {

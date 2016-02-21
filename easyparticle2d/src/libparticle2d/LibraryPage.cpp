@@ -2,11 +2,17 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace eparticle2d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Particle2D"))
+	: ee::LibraryPage(parent, "Particle2D")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
@@ -19,7 +25,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FileType::e_particle2d);
+	std::string filter = ee::FileType::GetTag(ee::FileType::e_particle2d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle2D文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

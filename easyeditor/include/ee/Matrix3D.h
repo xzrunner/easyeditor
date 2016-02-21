@@ -337,8 +337,9 @@ struct Matrix4 {
 		det = 1.0 / det;
 
 		Matrix4 m;
-		for (i = 0; i < 16; i++)
-			m.x[i] = inv[i] * det;
+		for (i = 0; i < 16; i++) {
+			m.x[i] = static_cast<float>(inv[i] * det);
+		}
 		return m;
 	}
 

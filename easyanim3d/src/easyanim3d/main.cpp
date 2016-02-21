@@ -1,6 +1,10 @@
 #include "main.h"
 #include "Task.h"
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Frame.h>
+
 #include <easyanim3d.h>
 
 IMPLEMENT_APP(MyApp)

@@ -3,9 +3,19 @@
 #include "ScaleOverall.h"
 #include "check_params.h"
 
-#include <wx/filename.h>
+#include <ee/ShaderMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/FileHelper.h>
+#include <ee/Config.h>
+#include <ee/SymbolMgr.h>
+#include <ee/ImageSymbol.h>
+#include <ee/Math2D.h>
 
 #include <glfw.h>
+
+#include <fstream>
 
 namespace edb
 {
@@ -68,9 +78,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			ScaleImage(filepath, scale, ss, mapImg2Center);
 		}
@@ -78,9 +86,7 @@ void ScaleOverall::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			ScaleComplex(filepath, scale, mapImg2Center);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
@@ -108,9 +114,7 @@ void ScaleOverall::ScaleImage(const std::string& filepath, float scale, ee::Snap
 void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 								const std::map<std::string, ee::Vector>& mapImg2Center) const
 {
-	wxFileName filename(path);
-	filename.Normalize();
-	std::string filepath = filename.GetFullPath();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
 	Json::Value value;
 	Json::Reader reader;
@@ -153,9 +157,7 @@ void ScaleOverall::ScaleComplex(const std::string& path, float scale,
 void ScaleOverall::ScaleAnim(const std::string& path, float scale,
 							 const std::map<std::string, ee::Vector>& mapImg2Center) const
 {
-	wxFileName filename(path);
-	filename.Normalize();
-	std::string filepath = filename.GetFullPath();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
 	Json::Value value;
 	Json::Reader reader;

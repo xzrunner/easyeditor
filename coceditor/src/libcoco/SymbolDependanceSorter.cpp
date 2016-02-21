@@ -8,7 +8,12 @@
 #include <easytexture.h>
 #include <easyicon.h>
 
-namespace libcoco
+#include <ee/ImageSymbol.h>
+#include <ee/FontBlankSymbol.h>
+#include <ee/Image.h>
+#include <ee/SymbolMgr.h>
+
+namespace ecoco
 {
 
 void SymbolDependanceSorter::prepare(const std::vector<const ee::Symbol*>& symbols)
@@ -41,14 +46,14 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
 				buffer.push(&complex->m_sprites[j]->GetSymbol());
 		}
-		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol))
+		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				libanim::Symbol::Layer* layer = anim->m_layers[i];
+				eanim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					libanim::Symbol::Frame* frame = layer->frames[j];
+					eanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						buffer.push(&frame->sprites[k]->GetSymbol());
 				}
@@ -117,17 +122,17 @@ void SymbolDependanceSorter::fetch(const std::vector<const ee::Symbol*>& symbols
 				}
 			}
 		}
-		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol))
+		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			if (m_unique.find(anim) == m_unique.end())
 			{
 				m_unique.insert(anim);
 				for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 				{
-					libanim::Symbol::Layer* layer = anim->m_layers[i];
+					eanim::Symbol::Layer* layer = anim->m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 					{
-						libanim::Symbol::Frame* frame = layer->frames[j];
+						eanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						{
 							ee::Sprite* child = frame->sprites[k];
@@ -204,15 +209,15 @@ void SymbolDependanceSorter::sort()
 					break;
 				}
 			}
-			else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(symbol))
+			else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = anim->m_layers.size(); i < n && prepared; ++i)
 				{
-					libanim::Symbol::Layer* layer = anim->m_layers[i];
+					eanim::Symbol::Layer* layer = anim->m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m && prepared; ++j)
 					{
-						libanim::Symbol::Frame* frame = layer->frames[j];
+						eanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k)
 							if (!IsSymbolPrepared(frame->sprites[k]))
 								prepared = false;

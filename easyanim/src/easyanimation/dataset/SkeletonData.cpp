@@ -2,7 +2,11 @@
 
 #include "dataset/Joint.h"
 
+#include <ee/Sprite.h>
+
 #include <queue>
+
+#include <assert.h>
 
 namespace eanim
 {

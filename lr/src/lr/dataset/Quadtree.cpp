@@ -1,5 +1,12 @@
 #include "Quadtree.h"
 
+#include <ee/PrimitiveDraw.h>
+#include <ee/Matrix.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/Math2D.h>
+#include <ee/style_config.h>
+#include <ee/Triangulation.h>
+
 #include <queue>
 #include <easyshape.h>
 

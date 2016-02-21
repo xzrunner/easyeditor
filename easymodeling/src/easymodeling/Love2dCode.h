@@ -1,47 +1,47 @@
+#ifndef _EASYMODELING_LOVE2D_CODE_H_
+#define _EASYMODELING_LOVE2D_CODE_H_
 
-#ifndef EMODELING_LOVE2D_CODE_H
-#define EMODELING_LOVE2D_CODE_H
+#include <vector>
 
-#include <easybuilder.h>
-
-namespace libmodeling
-{
-	class Body;
-	class Joint;
-}
+namespace ebuilder { class CodeGenerator; }
 
 namespace emodeling
 {
-	class Love2dCode
-	{
-	public:
-		Love2dCode(ebuilder::CodeGenerator& gen);
 
-		void resolve();
+class Body;
+class Joint;
 
-	private:
-		void resolveHeader();
+class Love2dCode
+{
+public:
+	Love2dCode(ebuilder::CodeGenerator& gen);
 
-		void resolveLoad();
-		void resolveLoadImages();
-		void resolveLoadWorld();
-		void resolveLoadBodies();
-		void resolveLoadFixtures(libmodeling::Body* body);
-		void resolveLoadJoints();
-		void resolveLoadJoint(const std::vector<libmodeling::Joint*>& joints, 
-			size_t index, const std::vector<libmodeling::Body*>& bodies);
+	void Resolve();
 
-		void resolveUpdate();
+private:
+	void ResolveHeader();
 
-		void resolveDraw();
+	void ResolveLoad();
+	void ResolveLoadImages();
+	void ResolveLoadWorld();
+	void ResolveLoadBodies();
+	void ResolveLoadFixtures(Body* body);
+	void ResolveLoadJoints();
+	void ResolveLoadJoint(const std::vector<Joint*>& joints, 
+		size_t index, const std::vector<Body*>& bodies);
 
-	private:
-		ebuilder::CodeGenerator& m_gen;
-		
-		ebuilder::CodeGenerator *m_genHeader, *m_genLoad, 
-			*m_genUpdate, *m_genDraw;
+	void ResolveUpdate();
 
-	}; // Love2dCode
+	void ResolveDraw();
+
+private:
+	ebuilder::CodeGenerator& m_gen;
+	
+	ebuilder::CodeGenerator *m_gen_header, *m_gen_load, 
+		*m_gen_update, *m_gen_draw;
+
+}; // Love2dCode
+
 }
 
-#endif // EMODELING_LOVE2D_CODE_H
+#endif // _EASYMODELING_LOVE2D_CODE_H_

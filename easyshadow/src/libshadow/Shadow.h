@@ -1,7 +1,13 @@
 #ifndef _EASYSHADOW_SHADOW_H_
 #define _EASYSHADOW_SHADOW_H_
 
+#include <ee/Object.h>
+#include <ee/Matrix.h>
+#include <ee/Vector.h>
+#include <ee/Rect.h>
+#include <ee/Color.h>
 
+#include <json/json.h>
 
 namespace eshadow
 {

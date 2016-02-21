@@ -1,11 +1,15 @@
-#ifndef _LIBRESPACKER_PACK_UNPACK_H_
-#define _LIBRESPACKER_PACK_UNPACK_H_
+#ifndef _EASYRESPACKER_PACK_UNPACK_H_
+#define _EASYRESPACKER_PACK_UNPACK_H_
 
-#include <stdint.h>
+#include <ee/Exception.h>
+
 #include <fstream>
 #include <string>
 
-namespace librespacker
+#include <stdint.h>
+#include <assert.h>
+
+namespace erespacker
 {
 
 // template <class T>
@@ -86,4 +90,4 @@ inline void unpack_str(std::string& str, uint8_t** ptr) {
 
 }
 
-#endif // _LIBRESPACKER_PACK_UNPACK_H_
+#endif // _EASYRESPACKER_PACK_UNPACK_H_

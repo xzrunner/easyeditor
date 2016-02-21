@@ -3,6 +3,8 @@
 
 #include "SelectSpritesOP.h"
 
+#include <ee/ArrangeSpriteOP.h>
+
 namespace eanim
 {
 

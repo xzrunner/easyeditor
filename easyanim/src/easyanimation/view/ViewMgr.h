@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_VIEW_MGR_H_
 #define _EASYANIM_VIEW_MGR_H_
 
+#include <ee/Observer.h>
 
+namespace ee { class LibraryPanel; class PropertySettingPanel; class LibraryPage; class ViewlistPanel; }
 
 namespace eanim
 {

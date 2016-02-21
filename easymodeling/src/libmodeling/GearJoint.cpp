@@ -1,28 +1,30 @@
-
 #include "GearJoint.h"
 
-using namespace libmodeling;
+namespace emodeling
+{
 
 GearJoint::GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2)
 	: Joint(b0, b1, e_gearJoint)
-	, joint1(j1)
-	, joint2(j2)
-	, ratio(1.0f)
+	, m_joint1(j1)
+	, m_joint2(j2)
+	, m_ratio(1.0f)
 {
 }
 
-bool GearJoint::isContain(const ee::Vector& pos) const
+bool GearJoint::IsContain(const ee::Vector& pos) const
 {
-	return joint1->isContain(pos) || joint2->isContain(pos);
+	return m_joint1->IsContain(pos) || m_joint2->IsContain(pos);
 }
 
-bool GearJoint::isIntersect(const ee::Rect& rect) const
+bool GearJoint::IsIntersect(const ee::Rect& rect) const
 {
-	return joint1->isIntersect(rect) || joint2->isIntersect(rect);
+	return m_joint1->IsIntersect(rect) || m_joint2->IsIntersect(rect);
 }
 
-void GearJoint::draw(DrawType type) const
+void GearJoint::Draw(DrawType type) const
 {
-	joint1->draw(type);
-	joint2->draw(type);
+	m_joint1->Draw(type);
+	m_joint2->Draw(type);
+}
+
 }

@@ -1,15 +1,18 @@
 #include "CocoPacker.h"
 #include "item_string.h"
 
+#include <ee/FileHelper.h>
 
 #include <easybuilder.h>
+
+#include <wx/filename.h>
 
 namespace lua = ebuilder::lua;
 
 namespace eparticle2d
 {
 
-void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
+void CocoPacker::pack(const std::string& srcdir, const std::string& dstfilename)
 {
 	ebuilder::CodeGenerator gen;
 
@@ -17,12 +20,12 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 	gen.tab();
 
 	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(srcdir.ToStdString(), files);
+	ee::FileHelper::FetchAllFiles(srcdir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath();
 		if (ee::FileType::IsType(filepath, ee::FileType::e_particle2d))
 		{
 			pack(filepath, gen);
@@ -33,7 +36,7 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 	gen.line("}");
 
 	std::locale::global(std::locale(""));
-	std::ofstream fout(dstfilename.fn_str());
+	std::ofstream fout(dstfilename.c_str());
 	std::locale::global(std::locale("C"));
 	if (!fout.fail())
 	{
@@ -42,12 +45,12 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 	}
 }
 
-void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
+void CocoPacker::pack(const std::string& filepath, ebuilder::CodeGenerator& gen)
 {
 	Json::Value val;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, val);
 	fin.close();
@@ -57,14 +60,14 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 	gen.line(s + " = {");
 	gen.tab();
 
-	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	pack(val, gen, dir);
 
 	gen.detab();
 	gen.line("},");
 }
 
-void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, const wxString& dir)
+void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, const std::string& dir)
 {
 	//lua::assign_with_end(gen, "texId", 0); // no use
 

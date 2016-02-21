@@ -1,6 +1,8 @@
 #include "CreateRegionOP.h"
 #include "StagePanel.h"
 
+#include <ee/DrawShapesVisitor.h>
+
 namespace eterrain2d
 {
 

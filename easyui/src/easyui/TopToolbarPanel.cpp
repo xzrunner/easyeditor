@@ -1,5 +1,9 @@
 #include "TopToolbarPanel.h"
 
+#include <ee/ToolbarPanel.h>
+
+#include <wx/sizer.h>
+
 namespace eui
 {
 

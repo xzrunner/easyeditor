@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_PREVIEW_PANEL_H_
 #define _EASYANIM_PREVIEW_PANEL_H_
 
+#include <ee/EditPanel.h>
 
+namespace ee { class PlayControl; }
 
 namespace eanim
 {

@@ -1,7 +1,7 @@
 #ifndef _EASYMODELING_PROPERTY_SETTING_PANEL_H_
 #define _EASYMODELING_PROPERTY_SETTING_PANEL_H_
 
-
+#include <ee/PropertySettingPanel.h>
 
 namespace emodeling
 {

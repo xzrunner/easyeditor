@@ -1,7 +1,7 @@
 #ifndef _EASYSHADOW_LIBRARY_PANEL_H_
 #define _EASYSHADOW_LIBRARY_PANEL_H_
 
-
+#include <ee/LibraryPanel.h>
 
 namespace eshadow
 {

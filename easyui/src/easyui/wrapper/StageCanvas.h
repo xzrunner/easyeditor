@@ -1,6 +1,10 @@
 #ifndef _EASYUI_WRAPPER_STAGE_CANVAS_H_
 #define _EASYUI_WRAPPER_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+
+class wxGLContext;
+
 namespace eui
 {
 namespace wrapper

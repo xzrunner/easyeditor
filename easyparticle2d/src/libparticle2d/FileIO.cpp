@@ -6,7 +6,16 @@
 #include "ps_config.h"
 
 #include <ps_2d.h>
+
+#include <ee/FileHelper.h>
+#include <ee/Symbol.h>
+#include <ee/Math2D.h>
+#include <ee/SymbolMgr.h>
+
 #include <json/json.h>
+
+#include <string>
+#include <fstream>
 
 namespace eparticle2d
 {
@@ -32,7 +41,7 @@ void FileIO::Store(const std::string& filepath, ToolbarPanel* toolbar)
 		Json::Value cval;
 
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(p_symbol->ud);
-		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath()).ToStdString();
+		cval["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol->GetFilepath());
 
 		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
 			cp->m_sliders[j]->Store(cval);

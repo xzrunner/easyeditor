@@ -1,14 +1,20 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace libanis
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Anis"))
+	: ee::LibraryPage(parent, "Anis")
 {
 	InitLayout();
-	m_list->SetFileter(ee::FileType::GetTag(ee::FileType::e_anis).ToStdString());
+	m_list->SetFileter(ee::FileType::GetTag(ee::FileType::e_anis));
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const

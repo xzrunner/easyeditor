@@ -2,6 +2,10 @@
 #include "StagePanel.h"
 #include "ParticleSystem.h"
 
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/Camera.h>
+#include <ee/Matrix.h>
+
 namespace ep3dinv
 {
 

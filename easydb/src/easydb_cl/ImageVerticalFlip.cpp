@@ -1,6 +1,12 @@
 #include "ImageVerticalFlip.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/FileType.h>
+#include <ee/ImageData.h>
+#include <ee/ImageVerticalFlip.h>
+#include <ee/ImageSaver.h>
+
 #include <glfw.h>
 
 #include <easyanim.h>
@@ -43,9 +49,7 @@ void ImageVerticalFlip::Trigger(const std::string& path) const
 		ee::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
-			wxFileName filename(files[i]);
-			filename.Normalize();
-			std::string filepath = filename.GetFullPath().ToStdString();
+			std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 			if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 				continue;
 			}
@@ -59,7 +63,7 @@ void ImageVerticalFlip::VerticalFlip(const std::string& filepath) const
 {
 	ee::ImageData* img = ee::ImageDataMgr::Instance()->GetItem(filepath);		
 
-	eimage::ImageVerticalFlip revert(img->GetPixelData(), img->GetWidth(), img->GetHeight());
+	ee::ImageVerticalFlip revert(img->GetPixelData(), img->GetWidth(), img->GetHeight());
 	uint8_t* pixels_revert = revert.Revert();		
 	ee::ImageSaver::StoreToFile(pixels_revert, img->GetWidth(), img->GetHeight(), 
 		img->GetChannels(), filepath, ee::ImageSaver::e_png);

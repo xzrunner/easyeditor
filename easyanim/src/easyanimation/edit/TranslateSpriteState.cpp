@@ -4,6 +4,9 @@
 #include "dataset/data_utility.h"
 #include "view/StagePanel.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+
 namespace eanim
 {
 

@@ -1,7 +1,10 @@
 #ifndef _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 #define _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+#include <ee/Matrix.h>
 
+namespace ee { class PlayControl; class Sprite; }
 
 namespace eui
 {

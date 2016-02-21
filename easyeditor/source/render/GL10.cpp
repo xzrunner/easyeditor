@@ -1,7 +1,6 @@
 #include "GL10.h"
 #include "Shader.h"
 
-#define NOMINMAX
 #include <gl/glew.h>
 
 namespace ee

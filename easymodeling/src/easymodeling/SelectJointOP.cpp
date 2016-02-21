@@ -1,17 +1,24 @@
-
 #include "SelectJointOP.h"
 #include "DrawUtils.h"
 #include "StagePanel.h"
 #include "JointPropertySetting.h"
 #include "WorldPropertySetting.h"
 
-using namespace emodeling;
+#include <ee/panel_msg.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/EditCMPT.h>
+#include <ee/SpriteSelection.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/Math2D.h>
+
+namespace emodeling
+{
 
 SelectJointOP::SelectJointOP(wxWindow* stage_wnd,
 							 ee::EditPanelImpl* stage, 
-							 ee::MultiSpritesImpl* spritesImpl, 
+							 ee::MultiSpritesImpl* sprites_impl, 
 							 ee::EditCMPT* callback /*= NULL*/)
-	: SelectBodyOP(stage_wnd, stage, spritesImpl, callback)
+	: SelectBodyOP(stage_wnd, stage, sprites_impl, callback)
 	, m_property_panel(NULL)
 	, m_mouseOn(NULL)
 	, m_selected(NULL)
@@ -36,7 +43,7 @@ bool SelectJointOP::OnKeyDown(int keyCode)
 bool SelectJointOP::OnMouseLeftDown(int x, int y)
 {
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-	libmodeling::Joint* selected = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
+	Joint* selected = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
 	if (selected && !m_selected || !selected && m_selected)
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	if (selected)
@@ -107,7 +114,7 @@ bool SelectJointOP::OnMouseMove(int x, int y)
 		return true;
 
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-	libmodeling::Joint* joint = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
+	Joint* joint = static_cast<StagePanel*>(m_wnd)->queryJointByPos(pos);
 	if (joint && !m_mouseOn || !joint && m_mouseOn)
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -124,109 +131,109 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 	if (m_selected)
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		switch (m_selected->type)
+		switch (m_selected->m_type)
 		{
-		case libmodeling::Joint::e_revoluteJoint:
+		case Joint::e_revoluteJoint:
 			{
-				libmodeling::RevoluteJoint* joint = static_cast<libmodeling::RevoluteJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				RevoluteJoint* joint = static_cast<RevoluteJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_prismaticJoint:
+		case Joint::e_prismaticJoint:
 			{
-				libmodeling::PrismaticJoint* joint = static_cast<libmodeling::PrismaticJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				PrismaticJoint* joint = static_cast<PrismaticJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_distanceJoint:
+		case Joint::e_distanceJoint:
 			{
-				libmodeling::DistanceJoint* joint = static_cast<libmodeling::DistanceJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				DistanceJoint* joint = static_cast<DistanceJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_pulleyJoint:
+		case Joint::e_pulleyJoint:
 			{
-				libmodeling::PulleyJoint* joint = static_cast<libmodeling::PulleyJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
-				const float disGA = ee::Math2D::GetDistance(pos, joint->groundAnchorA),
-					disGB = ee::Math2D::GetDistance(pos, joint->groundAnchorB);
+				PulleyJoint* joint = static_cast<PulleyJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
+				const float disGA = ee::Math2D::GetDistance(pos, joint->m_ground_anchor_a),
+					disGB = ee::Math2D::GetDistance(pos, joint->m_ground_anchor_b);
 
 				float dis = std::min(std::min(disA, disB), std::min(disGA, disGB));
 				if (dis == disA)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else if (dis == disB)
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 				else if (dis == disGA)
-					joint->groundAnchorA = pos;
+					joint->m_ground_anchor_a = pos;
 				else
-					joint->groundAnchorB = pos;					
+					joint->m_ground_anchor_b = pos;					
 			}
 			break;
-		case libmodeling::Joint::e_gearJoint:
+		case Joint::e_gearJoint:
 			{
 			}
 			break;
-		case libmodeling::Joint::e_wheelJoint:
+		case Joint::e_wheelJoint:
 			{
-				libmodeling::WheelJoint* joint = static_cast<libmodeling::WheelJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				WheelJoint* joint = static_cast<WheelJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_weldJoint:
+		case Joint::e_weldJoint:
 			{
-				libmodeling::WeldJoint* joint = static_cast<libmodeling::WeldJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				WeldJoint* joint = static_cast<WeldJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_frictionJoint:
+		case Joint::e_frictionJoint:
 			{
-				libmodeling::FrictionJoint* joint = static_cast<libmodeling::FrictionJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				FrictionJoint* joint = static_cast<FrictionJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_ropeJoint:
+		case Joint::e_ropeJoint:
 			{
-				libmodeling::RopeJoint* joint = static_cast<libmodeling::RopeJoint*>(m_selected);
-				const float disA = ee::Math2D::GetDistance(pos, joint->getWorldAnchorA()),
-					disB = ee::Math2D::GetDistance(pos, joint->getWorldAnchorB());
+				RopeJoint* joint = static_cast<RopeJoint*>(m_selected);
+				const float disA = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorA()),
+					disB = ee::Math2D::GetDistance(pos, joint->GetWorldAnchorB());
 				if (disA < disB)
-					joint->setLocalAnchorA(pos);
+					joint->SetLocalAnchorA(pos);
 				else
-					joint->setLocalAnchorB(pos);
+					joint->SetLocalAnchorB(pos);
 			}
 			break;
-		case libmodeling::Joint::e_motorJoint:
+		case Joint::e_motorJoint:
 			{
 			}
 			break;
@@ -246,9 +253,9 @@ bool SelectJointOP::OnDraw() const
 	m_selection->Traverse(DrawSelectedVisitor());
 
 	if (m_mouseOn)
-		m_mouseOn->draw(libmodeling::Joint::e_mouseOn);
+		m_mouseOn->Draw(Joint::e_mouseOn);
 	if (m_selected) 
-		m_selected->draw(libmodeling::Joint::e_selected);
+		m_selected->Draw(Joint::e_selected);
 
 	return false;
 }
@@ -268,7 +275,9 @@ Visit(ee::Object* object, bool& next)
 {
 	std::vector<ee::Vector> bound;
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
-	DrawUtils::drawBody(body, DrawUtils::e_selected);
+	Body* body = static_cast<Body*>(sprite->GetUserData());
+	DrawUtils::DrawBody(body, DrawUtils::e_selected);
 	next = true;
+}
+
 }

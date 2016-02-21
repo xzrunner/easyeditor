@@ -2,6 +2,9 @@
 #include "Task.h"
 #include "Frame.h"
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
@@ -24,8 +27,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
@@ -57,8 +60,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(eshadow::FILE_TAG, &eshadow::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eshadow::FILE_TAG, &eshadow::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(libsketch::FILE_TAG, &libsketch::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(libsketch::FILE_TAG, &libsketch::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(esketch::FILE_TAG, &esketch::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(esketch::FILE_TAG, &esketch::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
@@ -76,7 +79,7 @@ bool MyApp::OnInit()
 	if (wxGetApp().argc > 1) {
 		const_cast<ee::EditPanel*>(task->GetEditPanel())->GetCanvas()->SetCurrentCanvas();
 
-		wxString path(wxGetApp().argv[1]);
+		std::string path(wxGetApp().argv[1]);
 		frame->InitWithFile(path);
 	}
 

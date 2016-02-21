@@ -13,7 +13,7 @@ class PasteSymbolScaleCMPT : public EditCMPT
 public:
 	PasteSymbolScaleCMPT(wxWindow* parent, const std::string& name,
 		wxWindow* stage_wnd, EditPanelImpl* stage, 
-		LibraryPanel* libraryPanel);
+		LibraryPanel* library);
 
 protected:
 	virtual wxSizer* InitLayout();

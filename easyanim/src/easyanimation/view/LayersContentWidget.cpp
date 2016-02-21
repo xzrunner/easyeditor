@@ -7,6 +7,12 @@
 #include "dataset/DataMgr.h"
 #include "message/messages.h"
 
+#include <ee/panel_msg.h>
+#include <ee/SetValueDialog.h>
+#include <ee/subject_id.h>
+
+#include <wx/dcclient.h>
+
 namespace eanim
 {
 
@@ -210,10 +216,10 @@ void LayersContentWidget::OnMouse(wxMouseEvent& event)
 			Layer* layer = DataMgr::Instance()->GetLayers().GetLayer(layer_idx);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
-			ee::SetValueDialog dlg(this, wxT("Set layer's name"), layer->GetName(), pos);
+			ee::SetValueDialog dlg(this, "Set layer's name", layer->GetName(), pos);
 			if (dlg.ShowModal() == wxID_OK)
 			{
-				layer->SetName(dlg.GetText().ToStdString());
+				layer->SetName(dlg.GetText());
 				Refresh(true);
 			}
 		}

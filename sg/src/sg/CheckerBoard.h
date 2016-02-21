@@ -3,7 +3,9 @@
 
 #include "config.h"
 
+#include <map>
 
+namespace ee { class Sprite; class Symbol; class Vector; class Visitor; }
 
 namespace sg
 {
@@ -15,6 +17,8 @@ class CheckerBoard
 public:
 	CheckerBoard(StagePanel* stage);
 
+	void Traverse(ee::Visitor& visitor) const;
+
 	void AddSprite(ee::Sprite* sprite);
 	void RemoveSprite(ee::Sprite* sprite);
 	void Clear();
@@ -25,7 +29,7 @@ public:
 	void DebugDraw() const;
 
 	void ClearRemovedCache() {
-		m_mapRemoved.clear();
+		m_map_removed.clear();
 	}
 	bool SetCachedPos(ee::Sprite* sprite) const;
 
@@ -36,9 +40,9 @@ private:
 
 	ee::Sprite* m_grid[ROW][COL];
 
-	std::map<ee::Sprite*, ee::Vector> m_mapSprite2Pos;
+	std::map<ee::Sprite*, ee::Vector> m_map_sprite2pos;
 
-	std::map<ee::Sprite*, ee::Vector> m_mapRemoved;
+	std::map<ee::Sprite*, ee::Vector> m_map_removed;
 
 }; // CheckerBoard
 

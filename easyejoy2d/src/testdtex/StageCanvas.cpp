@@ -1,6 +1,12 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <ee/Camera.h>
+#include <ee/RenderContextStack.h>
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/ShaderMgr.h>
+#include <ee/EditPanelImpl.h>
+
 #include <easyejoy2d.h>
 #include <dtex.h>
 

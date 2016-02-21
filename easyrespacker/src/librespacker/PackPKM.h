@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_PKM_H_
-#define _LIBRESPACKER_PACK_PKM_H_
+#ifndef _EASYRESPACKER_PACK_PKM_H_
+#define _EASYRESPACKER_PACK_PKM_H_
 
 #include "PackImage.h"
 
 #include <stdint.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackPKM : public PackImage
@@ -31,4 +31,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_PKM_H_
+#endif // _EASYRESPACKER_PACK_PKM_H_

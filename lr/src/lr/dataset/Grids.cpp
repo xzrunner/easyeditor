@@ -1,5 +1,9 @@
 #include "Grids.h"
 
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/Math2D.h>
+
 namespace lr
 {
 
@@ -36,8 +40,8 @@ void Grids::Build(int width, int height)
 	m_grids.clear();
 	m_flat_bound.clear();
 
-	m_col = std::ceil((width + BIRD_HW) / (BIRD_HW*2));
-	m_row = std::ceil((height + BIRD_HH) / BIRD_HH);
+	m_col = ceil((width + BIRD_HW) / (BIRD_HW*2));
+	m_row = ceil((height + BIRD_HH) / BIRD_HH);
 
 	float left = -width * 0.5f,
 		right = -left,

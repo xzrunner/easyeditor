@@ -1,9 +1,10 @@
 #ifndef _OPEN_SYMBOL_DIALOG_H_
 #define _OPEN_SYMBOL_DIALOG_H_
 
-
-
 namespace etexture { class Sprite; }
+namespace ee { class EditPanelImpl; class MultiSpritesImpl; class Sprite; }
+
+class wxWindow;
 
 namespace lr
 {

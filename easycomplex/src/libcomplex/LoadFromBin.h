@@ -1,7 +1,11 @@
-#ifndef _LIBCOMPLEX_LOAD_FROM_BIN_H_
-#define _LIBCOMPLEX_LOAD_FROM_BIN_H_
+#ifndef _EASYCOMPLEX_LOAD_FROM_BIN_H_
+#define _EASYCOMPLEX_LOAD_FROM_BIN_H_
 
+#include <json/json.h>
 
+#include <stdint.h>
+
+namespace ee { class Image; }
 
 namespace ecomplex
 {
@@ -23,4 +27,4 @@ private:
 
 }
 
-#endif // _LIBCOMPLEX_LOAD_FROM_BIN_H_
+#endif // _EASYCOMPLEX_LOAD_FROM_BIN_H_

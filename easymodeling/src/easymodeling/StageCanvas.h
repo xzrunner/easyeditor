@@ -1,7 +1,8 @@
 #ifndef _EASYMODELING_STAGE_CANVAS_H_
 #define _EASYMODELING_STAGE_CANVAS_H_
 
-
+#include <ee/OrthoCanvas.h>
+#include <ee/Visitor.h>
 
 namespace emodeling
 {

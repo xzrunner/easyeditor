@@ -1,7 +1,14 @@
 #include "CocoPacker.h"
 #include "../Utility.h"
 
-#include <queue>
+#include <ee/ImageSymbol.h>
+#include <ee/ImageSprite.h>
+#include <ee/FontBlankSymbol.h>
+#include <ee/FontBlankSprite.h>
+#include <ee/Exception.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Image.h>
+#include <ee/trans_color.h>
 
 #include <easybuilder.h>
 #include <easycomplex.h>
@@ -13,7 +20,9 @@
 #include <easyicon.h>
 #include <epbin.h>
 
-namespace libcoco
+#include <queue>
+
+namespace ecoco
 {
 namespace epd
 {
@@ -65,16 +74,14 @@ void CocoPacker::Output(const char* filepath) const
 
 void CocoPacker::ResolveSymbols()
 {
-	m_gen->line("texture("+wxString::FromDouble(m_parser.GetTexSize()).ToStdString()+")");
+	m_gen->line("texture("+ee::StringHelper::ToString(m_parser.GetTexSize())+")");
 
 	const std::vector<const ee::Symbol*>& symbols = m_parser.GetSymbolSet().GetOrdered();
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
 		const ee::Symbol* symbol = symbols[i];
 
-		wxString msg;
-		msg.Printf("[%d/%d] file: %s\n", i, n, symbol->GetFilepath());
-		std::cout << msg;
+		std::cout << ee::StringHelper::Format("[%d/%d] file: %s\n", i, n, symbol->GetFilepath());
 
 		if (const ee::ImageSymbol* image = dynamic_cast<const ee::ImageSymbol*>(symbol))
 		{
@@ -206,7 +213,7 @@ void CocoPacker::ResolveSymbols()
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			ParserComplex(complex);
 		}
-		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol))
+		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			////////////////////////////////////////////////////////////////////////////
 			//// version 1: parser all sprites to picture
@@ -214,10 +221,10 @@ void CocoPacker::ResolveSymbols()
 
 			//for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			//{
-			//	libanim::Symbol::Layer* layer = anim->m_layers[i];
+			//	eanim::Symbol::Layer* layer = anim->m_layers[i];
 			//	for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 			//	{
-			//		libanim::Symbol::Frame* frame = layer->frames[j];
+			//		eanim::Symbol::Frame* frame = layer->frames[j];
 			//		for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 			//		{
 			//			ee::Sprite* sprite = frame->sprites[k];
@@ -244,10 +251,10 @@ void CocoPacker::ResolveSymbols()
 			std::set<const ee::ImageSymbol*, ee::SymbolCmp> unique;
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				libanim::Symbol::Layer* layer = anim->m_layers[i];
+				eanim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					libanim::Symbol::Frame* frame = layer->frames[j];
+					eanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
 						ee::Sprite* sprite = frame->sprites[k];
@@ -278,7 +285,7 @@ void CocoPacker::ResolveSymbols()
 			for (int i = 0, n = anim->getMaxFrameIndex(); i < n; ++i)
 			{
 				std::vector<ee::Sprite*> sprites;
-				libanim::Utility::GetCurrSprites(anim, i + 1, sprites);
+				eanim::Utility::GetCurrSprites(anim, i + 1, sprites);
 				if (sprites.empty()) {
 					continue;
 				}
@@ -432,12 +439,12 @@ void CocoPacker::ParserPicture(const ee::ImageSprite* sprite, PicFixType tsrc, P
 			std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the m_mapSpriteID!";
 			throw ee::Exception(str);
 		}
-		std::string sid = wxString::FromDouble(itr->second);
+		std::string sid = ee::StringHelper::ToString(itr->second);
 		m_gen->line(lua::assign("id", sid) + ",");
 	}
 
 	// tex
-	std::string assignTex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
+	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(picture->tex));
 
 	// src
 	int x0 = picture->scr[0].x, y0 = picture->scr[0].y;
@@ -879,7 +886,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	}
 }
 
-void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
+void CocoPacker::ParserAnimation(const eanim::Symbol* symbol)
 {
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 
@@ -900,10 +907,10 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
 		{			
 			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
 			{
-				libanim::Symbol::Layer* layer = symbol->m_layers[j];
+				eanim::Symbol::Layer* layer = symbol->m_layers[j];
 				if (i < layer->frames.size())
 				{
-					libanim::Symbol::Frame* frame = layer->frames[i];
+					eanim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						ParserSpriteForComponent(frame->sprites[k], ids, unique, order);
 				}
@@ -915,7 +922,7 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
 		for (int i = 0, n = symbol->getMaxFrameIndex(); i < n; ++i)
 		{
 			std::vector<ee::Sprite*> sprites;
-			libanim::Utility::GetCurrSprites(symbol, i + 1, sprites);
+			eanim::Utility::GetCurrSprites(symbol, i + 1, sprites);
 			if (sprites.empty()) {
 				continue;
 			}
@@ -945,7 +952,7 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
  			lua::TableAssign ta(*m_gen, "", true);
 
 			std::vector<ee::Sprite*> sprites;
-			libanim::Utility::GetCurrSprites(symbol, i, sprites);
+			eanim::Utility::GetCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				ParserSpriteForFrame(sprites[j], order, map_id2idx);
 			for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
@@ -1590,7 +1597,7 @@ void CocoPacker::ParserSpriteForComponent(const ee::Sprite* sprite, std::vector<
 		}
 		else
 		{
-			// libanim::Symbol's sprites store unique
+			// eanim::Symbol's sprites store unique
 
 			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 			if (itr == m_mapSymbolID.end()) {

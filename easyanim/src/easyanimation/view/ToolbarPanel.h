@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_TOOLBAR_PANEL_H_
 #define _EASYANIM_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
 
 namespace eanim
 {

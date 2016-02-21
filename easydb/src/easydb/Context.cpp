@@ -1,6 +1,9 @@
 #include "Context.h"
 
-using namespace edb;
+#include <stddef.h>
+
+namespace edb
+{
 
 Context* Context::m_instance = NULL;
 
@@ -16,4 +19,6 @@ Context* Context::Instance()
 		m_instance = new Context();
 	}
 	return m_instance;
+}
+
 }

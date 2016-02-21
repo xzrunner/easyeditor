@@ -4,7 +4,16 @@
 #include "Context.h"
 #include "TreeCtrl.h"
 
-using namespace edb;
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/Exception.h>
+#include <ee/FileHelper.h>
+#include <ee/panel_msg.h>
+
+#include <wx/splitter.h>
+
+namespace edb
+{
 
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
@@ -20,21 +29,21 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::loadFromFile(const char* filename)
+void Task::LoadFromFile(const char* filename)
 {
-	if (!wxFileName::FileExists(filename)) {
+	if (!ee::FileHelper::IsFileExist(filename)) {
 		throw ee::Exception("File: %s don't exist!", filename);
 	}
 
-	FileIO::load(filename);
+	FileIO::Load(filename);
 }
 
-void Task::storeToFile(const char* filename) const
+void Task::StoreToFile(const char* filename) const
 {
-	FileIO::store(filename);
+	FileIO::Store(filename);
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	ee::ClearPanelSJ::Instance()->Clear();
 }
@@ -50,4 +59,6 @@ void Task::InitLayout()
 
 	splitter->SetSashGravity(0.2f);
 	splitter->SplitVertically(tree, stage);
+}
+
 }

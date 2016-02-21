@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_LUA_DATA_HELPER_H_
-#define _LIBRESPACKER_LUA_DATA_HELPER_H_
+#ifndef _EASYRESPACKER_LUA_DATA_HELPER_H_
+#define _EASYRESPACKER_LUA_DATA_HELPER_H_
 
 #include <string>
 
 struct lua_State;
 
-namespace librespacker
+namespace erespacker
 {
 
 class LuaDataHelper
@@ -22,4 +22,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_LUA_DATA_HELPER_H_
+#endif // _EASYRESPACKER_LUA_DATA_HELPER_H_

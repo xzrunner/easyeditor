@@ -5,6 +5,9 @@
 
 #include "message/messages.h"
 
+#include <ee/Config.h>
+#include <ee/SettingData.h>
+
 namespace eanim
 {
 

@@ -4,6 +4,11 @@
 
 #include <ps_2d.h>
 
+#include <ee/Math2D.h>
+#include <ee/Symbol.h>
+
+#include <assert.h>
+
 namespace eparticle2d
 {
 
@@ -32,7 +37,7 @@ void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_COUNT:
-		m_et->cfg->count = data.val0;
+		m_et->cfg->count = static_cast<int>(data.val0);
 		break;
 	case PS_EMISSION_TIME:
 		m_et->cfg->emission_time = data.val0 * 0.001f;
@@ -100,7 +105,7 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_COUNT:
-		data.val0 = m_et->cfg->count;
+		data.val0 = static_cast<float>(m_et->cfg->count);
 		break;
 	case PS_EMISSION_TIME:
 		data.val0 = m_et->cfg->emission_time * 1000;

@@ -2,9 +2,20 @@
 #include "StagePanel.h"
 #include "Context.h"
 
-using namespace edb;
+#include <ee/sprite_msg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Rect.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteFactory.h>
+#include <ee/BoundingBox.h>
+#include <ee/SymbolMgr.h>
 
-void FileIO::load(const char* filename)
+#include <fstream>
+
+namespace edb
+{
+
+void FileIO::Load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -17,13 +28,13 @@ void FileIO::load(const char* filename)
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
-		ee::Sprite* sprite = loadSprite(spriteValue);
+		ee::Sprite* sprite = LoadSprite(spriteValue);
 		ee::InsertSpriteSJ::Instance()->Insert(sprite);
  		spriteValue = value["sprite"][i++];
  	}
 }
 
-void FileIO::store(const char* filename)
+void FileIO::Store(const char* filename)
 {
 	Json::Value value;
 
@@ -41,7 +52,7 @@ void FileIO::store(const char* filename)
  	ee::Vector offset(-rect.CenterX(), -rect.CenterY());
  
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["sprite"][i] = store(sprites[i], offset);
+		value["sprite"][i] = Store(sprites[i], offset);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -51,7 +62,7 @@ void FileIO::store(const char* filename)
 	fout.close();
 }
 
-ee::Sprite* FileIO::loadSprite(const Json::Value& value)
+ee::Sprite* FileIO::LoadSprite(const Json::Value& value)
 {
 	ee::Sprite* sprite = NULL;
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(
@@ -64,13 +75,13 @@ ee::Sprite* FileIO::loadSprite(const Json::Value& value)
 	return sprite;
 }
 
-ee::Shape* FileIO::loadShape(const Json::Value& value)
+ee::Shape* FileIO::LoadShape(const Json::Value& value)
 {
 	ee::Shape* shape = NULL;
 	return shape;
 }
 
-Json::Value FileIO::store(ee::Sprite* sprite, const ee::Vector& offset)
+Json::Value FileIO::Store(ee::Sprite* sprite, const ee::Vector& offset)
 {
 	Json::Value value;
 	value["filepath"] = sprite->GetSymbol().GetFilepath();
@@ -78,9 +89,11 @@ Json::Value FileIO::store(ee::Sprite* sprite, const ee::Vector& offset)
 	return value;
 }
 
-Json::Value FileIO::store(ee::Shape* shape, const ee::Vector& offset)
+Json::Value FileIO::Store(ee::Shape* shape, const ee::Vector& offset)
 {
 	Json::Value value;
 
 	return value;
+}
+
 }

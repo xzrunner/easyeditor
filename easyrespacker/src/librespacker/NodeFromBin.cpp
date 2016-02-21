@@ -1,8 +1,8 @@
 #include "NodeFromBin.h"
 
+#include <ee/Math2D.h>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 float NodeFromBin::TransTime(int time)

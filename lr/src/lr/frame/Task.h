@@ -1,8 +1,12 @@
 #ifndef _LR_TASK_H_
 #define _LR_TASK_H_
 
+#include <ee/Task.h>
 
+#include <wx/wx.h>
 #include <wx/splitter.h>
+
+namespace ee { class PropertySettingPanel; class LayerPanel; class ViewlistPanel; class GroupTreePanel; }
 
 namespace lr
 {

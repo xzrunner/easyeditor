@@ -1,9 +1,13 @@
 #ifndef _LR_LIBRARY_PANEL_H_
 #define _LR_LIBRARY_PANEL_H_
 
-
-
 #include "dataset/layer_type.h"
+
+#include <ee/LibraryPanel.h>
+
+#include <json/json.h>
+
+namespace ee { class ViewlistPanel; class GroupTreePanel; class PropertySettingPanel; }
 
 namespace lr
 {

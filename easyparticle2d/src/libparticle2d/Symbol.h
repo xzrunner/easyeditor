@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_SYMBOL_H_
 #define _EASYPARTICLE2D_SYMBOL_H_
 
-
+#include <ee/Symbol.h>
 
 struct p2d_emitter_cfg;
 

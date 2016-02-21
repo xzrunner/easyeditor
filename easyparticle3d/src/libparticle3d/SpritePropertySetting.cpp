@@ -1,6 +1,10 @@
 #include "SpritePropertySetting.h"
 #include "Sprite.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/EditPanel.h>
+#include <ee/panel_msg.h>
+
 namespace eparticle3d
 {
 
@@ -15,7 +19,7 @@ SpritePropertySetting::~SpritePropertySetting()
 {
 }
 
-void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	ee::SpritePropertySetting::OnPropertyGridChange(name, value);
 

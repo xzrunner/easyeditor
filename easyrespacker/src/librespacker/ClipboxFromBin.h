@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_CLIPBOX_FROM_BIN_H_
-#define _LIBRESPACKER_CLIPBOX_FROM_BIN_H_
+#ifndef _EASYRESPACKER_CLIPBOX_FROM_BIN_H_
+#define _EASYRESPACKER_CLIPBOX_FROM_BIN_H_
 
 #include "PackClipbox.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class ClipboxFromBin
@@ -17,4 +17,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_CLIPBOX_FROM_BIN_H_
+#endif // _EASYRESPACKER_CLIPBOX_FROM_BIN_H_

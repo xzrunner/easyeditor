@@ -1,7 +1,7 @@
 #ifndef _TEST_DTEX_LIBRARY_PANEL_H_
 #define _TEST_DTEX_LIBRARY_PANEL_H_
 
-
+#include <ee/LibraryPanel.h>
 
 namespace tdtex
 {

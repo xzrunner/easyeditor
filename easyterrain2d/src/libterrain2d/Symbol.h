@@ -1,7 +1,11 @@
 #ifndef _EASYTERRAIN2D_SYMBOL_H_
 #define _EASYTERRAIN2D_SYMBOL_H_
 
+#include <ee/Symbol.h>
 
+#include <vector>
+
+#include <time.h>
 
 namespace eterrain2d
 {

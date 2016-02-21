@@ -3,15 +3,17 @@
 
 #include "PS.h"
 
-
-#include <easy3d.h>
+#include <ee/Object.h>
+#include <ee/Cloneable.h>
+#include <ee/UICallback.h>
+#include <ee/Quaternion.h>
 
 struct p3d_emitter;
 struct p3d_emitter_cfg;
 struct p3d_symbol;
 struct p3d_particle;
 
-namespace d3d { class Quaternion; }
+namespace ee { class Symbol; }
 
 namespace eparticle3d
 {
@@ -43,7 +45,7 @@ public:
 	bool Update(const ee::Matrix& mat);
 
 	void SetDirection(float x, float y, float z);
-	void SetDirection(const Quaternion& dir);
+	void SetDirection(const ee::Quaternion& dir);
 
 	void Start();
 	void Stop();

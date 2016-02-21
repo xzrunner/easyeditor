@@ -1,4 +1,3 @@
-
 #include "FileAdapter.h"
 
 #include "World.h"
@@ -17,11 +16,16 @@
 #include "RopeJoint.h"
 #include "MotorJoint.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+
 #include <easyshape.h>
 
-using namespace libmodeling;
+namespace emodeling
+{
 
-World* FileApapter::j2World(const Json::Value& worldValue)
+World* FileApapter::ToWorld(const Json::Value& worldValue)
 {
 	World* world = new World;
 
@@ -39,7 +43,7 @@ World* FileApapter::j2World(const Json::Value& worldValue)
 	return world;
 }
 
-Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
+Body* FileApapter::ToBody(const Json::Value& bodyValue, const std::string& dlg)
 {
 	std::string filepath = bodyValue["filepath"].asString();
 	filepath = ee::FileHelper::GetAbsolutePath(dlg, filepath);
@@ -56,24 +60,24 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 	sprite->SetTransform(pos, angle);
 
 	Body* body = new Body;
-	body->name = bodyValue["name"].asString();
-	body->type = Body::Type(bodyValue["type"].asInt());
-	body->linearDamping = bodyValue["linearDamping"].asDouble();
-	body->angularDamping = bodyValue["angularDamping"].asDouble();
-	body->allowSleep = bodyValue["allowSleep"].asBool();
-	body->bullet = bodyValue["bullet"].asBool();
-	body->active = bodyValue["active"].asBool();
-	body->gravityScale = bodyValue["gravityScale"].asDouble();
-	body->sprite = sprite;
+	body->m_name = bodyValue["name"].asString();
+	body->m_type = Body::Type(bodyValue["type"].asInt());
+	body->m_linear_damping = bodyValue["linearDamping"].asDouble();
+	body->m_angular_damping = bodyValue["angularDamping"].asDouble();
+	body->m_allow_sleep = bodyValue["allowSleep"].asBool();
+	body->m_bullet = bodyValue["bullet"].asBool();
+	body->m_active = bodyValue["active"].asBool();
+	body->m_gravity_scale = bodyValue["gravityScale"].asDouble();
+	body->m_sprite = sprite;
 
 	sprite->SetUserData(body);
 
 	int i = 0;
 	Json::Value fixtureValue = bodyValue["fixture"][i++];
 	while (!fixtureValue.isNull()) {
-		Fixture* fixture = j2bFixture(fixtureValue);
-		fixture->body = body;
-		body->fixtures.push_back(fixture);
+		Fixture* fixture = ToFixture(fixtureValue);
+		fixture->m_body = body;
+		body->m_fixtures.push_back(fixture);
 
 		fixtureValue = bodyValue["fixture"][i++];
 	}
@@ -81,19 +85,19 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 	return body;
 }
 
-Fixture* FileApapter::j2bFixture(const Json::Value& fixtureValue)
+Fixture* FileApapter::ToFixture(const Json::Value& fixtureValue)
 {
 	Fixture* fixture = new Fixture;
 
-	fixture->name = fixtureValue["name"].asString();
+	fixture->m_name = fixtureValue["name"].asString();
 
-	fixture->density = fixtureValue["density"].asDouble();
-	fixture->friction = fixtureValue["friction"].asDouble();
-	fixture->restitution = fixtureValue["restitution"].asDouble();
-	fixture->isSensor = fixtureValue["isSensor"].asBool();
-	fixture->categoryBits = fixtureValue["categoryBits"].asInt();
-	fixture->maskBits = fixtureValue["maskBits"].asInt();
-	fixture->groupIndex = fixtureValue["groupIndex"].asInt();
+	fixture->m_density = fixtureValue["density"].asDouble();
+	fixture->m_friction = fixtureValue["friction"].asDouble();
+	fixture->m_restitution = fixtureValue["restitution"].asDouble();
+	fixture->m_is_sensor = fixtureValue["isSensor"].asBool();
+	fixture->m_category_bits = fixtureValue["categoryBits"].asInt();
+	fixture->m_mask_bits = fixtureValue["maskBits"].asInt();
+	fixture->m_group_index = fixtureValue["groupIndex"].asInt();
 
 	// todo
 //	fixture->shape = eshape::FileIO::LoadShape(fixtureValue["shape"]);
@@ -101,7 +105,7 @@ Fixture* FileApapter::j2bFixture(const Json::Value& fixtureValue)
 	return fixture;
 }
 
-Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
+Joint* FileApapter::ToJoint(const Json::Value& jointValue,
 							 const std::vector<Body*>& bodies)
 {
 	Joint* joint = NULL;
@@ -115,21 +119,21 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		RevoluteJoint* rJoint = new RevoluteJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		rJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		rJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		rJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		rJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		rJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		rJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		rJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		rJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		rJoint->referenceAngle = jointValue["refAngle"].asDouble();
+		rJoint->m_reference_angle = jointValue["refAngle"].asDouble();
 
-		rJoint->enableLimit = jointValue["enableLimit"].asBool();
-		rJoint->lowerAngle = jointValue["lowerAngle"].asDouble();
-		rJoint->upperAngle = jointValue["upperAngle"].asDouble();
+		rJoint->m_enable_limit = jointValue["enableLimit"].asBool();
+		rJoint->m_lower_angle = jointValue["lowerAngle"].asDouble();
+		rJoint->m_upper_angle = jointValue["upperAngle"].asDouble();
 
-		rJoint->enableMotor = jointValue["enableMotor"].asBool();
-		rJoint->maxMotorTorque = jointValue["maxMotorTorque"].asDouble();
+		rJoint->m_enable_motor = jointValue["enableMotor"].asBool();
+		rJoint->m_max_motor_torque = jointValue["maxMotorTorque"].asDouble();
 
-		rJoint->motorSpeed = jointValue["motorSpeed"].asDouble();
+		rJoint->m_motor_speed = jointValue["motorSpeed"].asDouble();
 
 		joint = rJoint;
 	}
@@ -137,24 +141,24 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		PrismaticJoint* pJoint = new PrismaticJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		pJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		pJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		pJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		pJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		pJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		pJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		pJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		pJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		pJoint->localAxisA.x = jointValue["localAxisA"]["x"].asDouble();
-		pJoint->localAxisA.y = jointValue["localAxisA"]["y"].asDouble();
+		pJoint->m_local_axis_a.x = jointValue["localAxisA"]["x"].asDouble();
+		pJoint->m_local_axis_a.y = jointValue["localAxisA"]["y"].asDouble();
 
-		pJoint->referenceAngle = jointValue["refAngle"].asDouble();
+		pJoint->m_reference_angle = jointValue["refAngle"].asDouble();
 
-		pJoint->enableLimit = jointValue["enableLimit"].asBool();
-		pJoint->lowerTranslation = jointValue["lowerTranslation"].asDouble();
-		pJoint->upperTranslation = jointValue["upperTranslation"].asDouble();
+		pJoint->m_enable_limit = jointValue["enableLimit"].asBool();
+		pJoint->m_lower_translation = jointValue["lowerTranslation"].asDouble();
+		pJoint->m_upper_translation = jointValue["upperTranslation"].asDouble();
 
-		pJoint->enableMotor = jointValue["enableMotor"].asBool();
-		pJoint->maxMotorForce = jointValue["maxMotorForce"].asDouble();
+		pJoint->m_enable_motor = jointValue["enableMotor"].asBool();
+		pJoint->m_max_motor_force = jointValue["maxMotorForce"].asDouble();
 
-		pJoint->motorSpeed = jointValue["motorSpeed"].asDouble();
+		pJoint->m_motor_speed = jointValue["motorSpeed"].asDouble();
 
 		joint = pJoint;
 	}
@@ -162,13 +166,13 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		DistanceJoint* dJoint = new DistanceJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		dJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		dJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		dJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		dJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		dJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		dJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		dJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		dJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		dJoint->frequencyHz = jointValue["frequencyHz"].asDouble();
-		dJoint->dampingRatio = jointValue["dampingRatio"].asDouble();
+		dJoint->m_frequency_hz = jointValue["frequencyHz"].asDouble();
+		dJoint->m_damping_ratio = jointValue["dampingRatio"].asDouble();
 
 		joint = dJoint;
 	}
@@ -176,17 +180,17 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		PulleyJoint* pJoint = new PulleyJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		pJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		pJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		pJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		pJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		pJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		pJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		pJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		pJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		pJoint->groundAnchorA.x = jointValue["groundAnchorA"]["x"].asDouble();
-		pJoint->groundAnchorA.y = jointValue["groundAnchorA"]["y"].asDouble();
-		pJoint->groundAnchorB.x = jointValue["groundAnchorB"]["x"].asDouble();
-		pJoint->groundAnchorB.y = jointValue["groundAnchorB"]["y"].asDouble();
+		pJoint->m_ground_anchor_a.x = jointValue["groundAnchorA"]["x"].asDouble();
+		pJoint->m_ground_anchor_a.y = jointValue["groundAnchorA"]["y"].asDouble();
+		pJoint->m_ground_anchor_b.x = jointValue["groundAnchorB"]["x"].asDouble();
+		pJoint->m_ground_anchor_b.y = jointValue["groundAnchorB"]["y"].asDouble();
 
-		pJoint->ratio = jointValue["ratio"].asDouble();
+		pJoint->m_ratio = jointValue["ratio"].asDouble();
 
 		joint = pJoint;
 	}
@@ -194,7 +198,7 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		GearJoint* gJoint = new GearJoint(bodies[bodyIndexA], bodies[bodyIndexB], NULL, NULL);
 
-		gJoint->ratio = jointValue["ratio"].asDouble();
+		gJoint->m_ratio = jointValue["ratio"].asDouble();
 
 		joint = gJoint;
 	}
@@ -202,21 +206,21 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		WheelJoint* wJoint = new WheelJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		wJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		wJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		wJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		wJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		wJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		wJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		wJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		wJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		wJoint->localAxisA.x = jointValue["AxisA"]["x"].asDouble();
-		wJoint->localAxisA.y = jointValue["AxisA"]["y"].asDouble();
+		wJoint->m_local_axis_a.x = jointValue["AxisA"]["x"].asDouble();
+		wJoint->m_local_axis_a.y = jointValue["AxisA"]["y"].asDouble();
 
-		wJoint->enableMotor = jointValue["enableMotor"].asBool();
-		wJoint->maxMotorTorque = jointValue["maxMotorTorque"].asDouble();
+		wJoint->m_enable_motor = jointValue["enableMotor"].asBool();
+		wJoint->m_max_motor_torque = jointValue["maxMotorTorque"].asDouble();
 
-		wJoint->motorSpeed = jointValue["motorSpeed"].asDouble();
+		wJoint->m_motor_speed = jointValue["motorSpeed"].asDouble();
 
-		wJoint->frequencyHz = jointValue["frequencyHz"].asDouble();
-		wJoint->dampingRatio = jointValue["dampingRatio"].asDouble();
+		wJoint->m_frequency_hz = jointValue["frequencyHz"].asDouble();
+		wJoint->m_damping_ratio = jointValue["dampingRatio"].asDouble();
 
 		joint = wJoint;
 	}
@@ -224,14 +228,14 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		WeldJoint* wJoint = new WeldJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		wJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		wJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		wJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		wJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		wJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		wJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		wJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		wJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		wJoint->referenceAngle = jointValue["referenceAngle"].asDouble();
-		wJoint->frequencyHz = jointValue["frequencyHz"].asDouble();
-		wJoint->dampingRatio = jointValue["dampingRatio"].asDouble();
+		wJoint->m_reference_angle = jointValue["referenceAngle"].asDouble();
+		wJoint->m_frequency_hz = jointValue["frequencyHz"].asDouble();
+		wJoint->m_damping_ratio = jointValue["dampingRatio"].asDouble();
 
 		joint = wJoint;
 	}
@@ -239,13 +243,13 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		FrictionJoint* fJoint = new FrictionJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		fJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		fJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		fJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		fJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		fJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		fJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		fJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		fJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		fJoint->maxForce = jointValue["maxForce"].asDouble();
-		fJoint->maxTorque = jointValue["maxTorque"].asDouble();
+		fJoint->m_max_force = jointValue["m_max_force"].asDouble();
+		fJoint->m_max_torque = jointValue["m_max_torque"].asDouble();
 
 		joint = fJoint;
 	}
@@ -253,12 +257,12 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		RopeJoint* rJoint = new RopeJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		rJoint->localAnchorA.x = jointValue["anchorA"]["x"].asDouble();
-		rJoint->localAnchorA.y = jointValue["anchorA"]["y"].asDouble();
-		rJoint->localAnchorB.x = jointValue["anchorB"]["x"].asDouble();
-		rJoint->localAnchorB.y = jointValue["anchorB"]["y"].asDouble();
+		rJoint->m_local_anchor_a.x = jointValue["anchorA"]["x"].asDouble();
+		rJoint->m_local_anchor_a.y = jointValue["anchorA"]["y"].asDouble();
+		rJoint->m_local_anchor_b.x = jointValue["anchorB"]["x"].asDouble();
+		rJoint->m_local_anchor_b.y = jointValue["anchorB"]["y"].asDouble();
 
-		rJoint->maxLength = jointValue["maxLength"].asDouble();
+		rJoint->m_max_length = jointValue["maxLength"].asDouble();
 
 		joint = rJoint;
 	}
@@ -266,45 +270,45 @@ Joint* FileApapter::j2bJoint(const Json::Value& jointValue,
 	{
 		MotorJoint* mJoint = new MotorJoint(bodies[bodyIndexA], bodies[bodyIndexB]);
 
-		mJoint->maxForce = jointValue["maxForce"].asDouble();
-		mJoint->maxTorque = jointValue["maxTorque"].asDouble();
-		mJoint->correctionFactor = jointValue["correctionFactor"].asDouble();
+		mJoint->m_max_force = jointValue["m_max_force"].asDouble();
+		mJoint->m_max_torque = jointValue["m_max_torque"].asDouble();
+		mJoint->m_correction_factor = jointValue["correctionFactor"].asDouble();
 
 		joint = mJoint;
 	}
 
 	joint->m_name = jointValue["name"].asString();
-	joint->collideConnected = jointValue["collideConnected"].asBool();
+	joint->m_collide_connected = jointValue["collideConnected"].asBool();
 
 	return joint;
 }
 
 FileApapter::~FileApapter()
 {
-	clear();
+	Clear();
 }
 
-void FileApapter::resolve(const wxString& filepath)
+void FileApapter::Resolve(const std::string& filepath)
 {
-	clear();
+	Clear();
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	j2World(value["world"]);
+	ToWorld(value["world"]);
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
-		Body* body = j2bBody(bodyValue, dir);
-		m_nameBodyMap.insert(std::make_pair(body->name, body));
+		Body* body = ToBody(bodyValue, dir);
+		m_name_body_map.insert(std::make_pair(body->m_name, body));
 		m_bodies.push_back(body);
 
 		bodyValue = value["body"][i++];
@@ -313,14 +317,14 @@ void FileApapter::resolve(const wxString& filepath)
 	i = 0;
 	Json::Value jointValue = value["joint"][i++];
 	while (!jointValue.isNull()) {
-		Joint* joint = j2bJoint(jointValue, m_bodies);
-		m_nameJointMap.insert(std::make_pair(joint->m_name, joint));
+		Joint* joint = ToJoint(jointValue, m_bodies);
+		m_name_joint_map.insert(std::make_pair(joint->m_name, joint));
 
 		jointValue = value["joint"][i++];
 	}
 }
 
-Body* FileApapter::queryBody(size_t index) const
+Body* FileApapter::QueryBody(size_t index) const
 {
 	if (index >= 0 && index < m_bodies.size())
 		return m_bodies[index];
@@ -328,35 +332,37 @@ Body* FileApapter::queryBody(size_t index) const
 		return NULL;
 }
 
-Body* FileApapter::queryBody(const wxString& name) const
+Body* FileApapter::QueryBody(const std::string& name) const
 {
-	std::map<wxString, Body*>::const_iterator itr
-		= m_nameBodyMap.find(name);
-	if (itr != m_nameBodyMap.end())
+	std::map<std::string, Body*>::const_iterator itr
+		= m_name_body_map.find(name);
+	if (itr != m_name_body_map.end())
 		return itr->second;
 	else
 		return NULL;
 }
 
-Joint* FileApapter::queryJoint(const wxString& name) const
+Joint* FileApapter::QueryJoint(const std::string& name) const
 {
-	std::map<wxString, Joint*>::const_iterator itr
-		= m_nameJointMap.find(name);
-	if (itr != m_nameJointMap.end())
+	std::map<std::string, Joint*>::const_iterator itr
+		= m_name_joint_map.find(name);
+	if (itr != m_name_joint_map.end())
 		return itr->second;
 	else
 		return NULL;
 }
 
-void FileApapter::clear()
+void FileApapter::Clear()
 {
-	std::map<wxString, Body*>::iterator itr = m_nameBodyMap.begin();
-	for ( ; itr != m_nameBodyMap.end(); ++itr)
+	std::map<std::string, Body*>::iterator itr = m_name_body_map.begin();
+	for ( ; itr != m_name_body_map.end(); ++itr)
 		delete itr->second;
-	m_nameBodyMap.clear();
+	m_name_body_map.clear();
 
-	std::map<wxString, Joint*>::iterator itr2 = m_nameJointMap.begin();
-	for ( ; itr2 != m_nameJointMap.end(); ++itr2)
+	std::map<std::string, Joint*>::iterator itr2 = m_name_joint_map.begin();
+	for ( ; itr2 != m_name_joint_map.end(); ++itr2)
 		delete itr2->second;
-	m_nameJointMap.clear();
+	m_name_joint_map.clear();
+}
+
 }

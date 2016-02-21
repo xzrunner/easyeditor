@@ -1,6 +1,9 @@
 #include "SymbolContainer.h"
 #include "Symbol.h"
 
+#include <ee/ObjectVector.h>
+#include <ee/Sprite.h>
+
 namespace ecomplex
 {
 

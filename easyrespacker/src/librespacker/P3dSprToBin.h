@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_P3D_SPR_TO_BIN_H_
-#define _LIBRESPACKER_P3D_SPR_TO_BIN_H_
+#ifndef _EASYRESPACKER_P3D_SPR_TO_BIN_H_
+#define _EASYRESPACKER_P3D_SPR_TO_BIN_H_
 
 #include "NodeToBin.h"
 
 #include <stdint.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackP3dSpr;
@@ -21,4 +21,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_P3D_SPR_TO_BIN_H_
+#endif // _EASYRESPACKER_P3D_SPR_TO_BIN_H_

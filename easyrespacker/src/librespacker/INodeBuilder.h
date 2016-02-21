@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_INODE_BUILDER_H_
-#define _LIBRESPACKER_INODE_BUILDER_H_
+#ifndef _EASYRESPACKER_INODE_BUILDER_H_
+#define _EASYRESPACKER_INODE_BUILDER_H_
 
-namespace d2d { class Visitor;}
+namespace ee { class Visitor;}
 
-namespace librespacker
+namespace erespacker
 {
 
 class INodeBuilder
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_INODE_BUILDER_H_
+#endif // _EASYRESPACKER_INODE_BUILDER_H_

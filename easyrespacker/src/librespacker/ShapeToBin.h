@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_SHAPE_TO_BIN_H_
-#define _LIBRESPACKER_SHAPE_TO_BIN_H_
+#ifndef _EASYRESPACKER_SHAPE_TO_BIN_H_
+#define _EASYRESPACKER_SHAPE_TO_BIN_H_
 
 #include "PackShape.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class ShapeToBin
@@ -17,4 +17,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_SHAPE_TO_BIN_H_
+#endif // _EASYRESPACKER_SHAPE_TO_BIN_H_

@@ -30,6 +30,11 @@ public:
 
 	static std::string ToUtf8(const std::string& str);
 
+	static bool Replace(std::string& str, const std::string& from, const std::string& to);
+	static void ReplaceAll(std::string& str, const std::string& from, const std::string& to);
+
+	static std::string Format(const std::string str, ...);
+
 }; // StringHelper
 
 }

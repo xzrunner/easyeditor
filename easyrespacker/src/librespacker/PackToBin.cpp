@@ -8,9 +8,14 @@
 #include "PackPVR.h"
 #include "PackPKM.h"
 
+#include <ee/TexturePacker.h>
+#include <ee/StringHelper.h>
+
 #include <spritepack.h>
 
-namespace librespacker
+#include <algorithm>
+
+namespace erespacker
 {
 
 void PackToBin::PackEPE(const std::string& filepath, 

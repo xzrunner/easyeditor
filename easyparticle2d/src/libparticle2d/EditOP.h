@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_EDIT_OP_H_
 #define _EASYPARTICLE2D_EDIT_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace eparticle2d
 {

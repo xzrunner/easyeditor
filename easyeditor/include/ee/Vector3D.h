@@ -6,9 +6,6 @@
 namespace ee
 {
 
-const float Pi = 4 * atan(1.0f);
-const float TwoPi = 2 * Pi;
-
 template <typename T>
 struct Vector2 {
 	Vector2() : x(0), y(0) {}
@@ -55,7 +52,7 @@ struct Vector2 {
 	}
 	operator Vector2<float>() const
 	{
-		return Vector2<float>(x, y);
+		return Vector2<float>(static_cast<float>(x), static_cast<float>(y));
 	}
 	bool operator==(const Vector2& v) const
 	{
@@ -83,7 +80,7 @@ struct Vector3 {
 	Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
 	void Normalize()
 	{
-		float s = 1.0f / std::sqrt(x * x + y * y + z * z);
+		float s = 1.0f / sqrt(x * x + y * y + z * z);
 		x *= s;
 		y *= s;
 		z *= s;

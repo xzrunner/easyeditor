@@ -1,19 +1,20 @@
+#ifndef _EASYMODELING_LIBRARY_LIST_H_
+#define _EASYMODELING_LIBRARY_LIST_H_
 
-#ifndef EMODELING_LIBRARY_LIST_H
-#define EMODELING_LIBRARY_LIST_H
-
-
+#include <ee/LibraryList.h>
 
 namespace emodeling
 {
-	class LibraryList : public ee::LibraryList
-	{
-	public:
-		LibraryList(ee::LibraryPage* page);
 
-		virtual void OnListDoubleClicked(wxCommandEvent& event);
+class LibraryList : public ee::LibraryList
+{
+public:
+	LibraryList(ee::LibraryPage* page);
 
-	}; // LibraryPage
+	virtual void OnListDoubleClicked(wxCommandEvent& event);
+
+}; // LibraryPage
+
 }
 
-#endif // EMODELING_LIBRARY_LIST_H
+#endif // _EASYMODELING_LIBRARY_LIST_H_

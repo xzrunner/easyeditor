@@ -3,6 +3,7 @@
 
 #include <json/json.h>
 
+namespace ee { class Sprite; class Symbol; }
 
 namespace sg
 {

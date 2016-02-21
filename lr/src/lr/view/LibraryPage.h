@@ -1,9 +1,13 @@
 #ifndef _LR_LIBRARY_PAGE_H_
 #define _LR_LIBRARY_PAGE_H_
 
-
-
 #include "dataset/layer_type.h"
+
+#include <ee/LibraryPage.h>
+
+#include <vector>
+
+namespace ee { class EditOP; }
 
 namespace lr
 {

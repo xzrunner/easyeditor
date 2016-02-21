@@ -1,6 +1,10 @@
 #include "Terrain.h"
 
-namespace libterrain3d
+#include <ee/Random.h>
+
+#include <fstream>
+
+namespace eterrain3d
 {
 
 Terrain::Terrain()

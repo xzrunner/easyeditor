@@ -241,7 +241,7 @@ void RectCutCMPT::OnOutputData(wxCommandEvent& event)
 	{
 		const ee::Rect& r = *rects[i];
 
-		eimage::ImageClip clip(*image->GetImageData());
+		ee::ImageClip clip(*image->GetImageData());
 		const uint8_t* pixels = clip.Clip(r.xmin, r.xmax, r.ymin, r.ymax);
 		float width = r.Width();
 		float height = r.Height();

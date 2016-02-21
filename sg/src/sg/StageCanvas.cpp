@@ -5,6 +5,17 @@
 #include "SymbolRender.h"
 #include "tools.h"
 
+#include <ee/SpriteFactory.h>
+#include <ee/BoundingBox.h>
+#include <ee/Math2D.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteSelection.h>
+
+#include <algorithm>
+
 namespace sg
 {
 

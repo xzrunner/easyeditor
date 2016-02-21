@@ -1,7 +1,7 @@
 #ifndef _SG_LIBRARY_PAGE_H_
 #define _SG_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace sg
 {

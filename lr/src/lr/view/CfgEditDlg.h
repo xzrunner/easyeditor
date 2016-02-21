@@ -1,9 +1,10 @@
 #ifndef _LR_CFG_EDIT_DIALOG_H_
 #define _LR_CFG_EDIT_DIALOG_H_
 
-
-
 #include "dataset/DynamicInfo.h"
+
+#include <ee/BaseDialog.h>
+#include <ee/Sprite.h>
 
 namespace lr
 {

@@ -1,11 +1,11 @@
 #ifndef _EASYUI_WINDOW_STAGE_PANEL_H_
 #define _EASYUI_WINDOW_STAGE_PANEL_H_
 
-
-
 #include "SymbolsCfg.h"
 #include "AnchorMgr.h"
 #include "UIStagePage.h"
+
+#include <ee/SpritesPanelImpl.h>
 
 namespace eui
 {

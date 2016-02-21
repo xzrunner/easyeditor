@@ -1,6 +1,6 @@
 #include "lr_tools.h"
 
-
+#include <ee/FileHelper.h>
 
 namespace edb
 {

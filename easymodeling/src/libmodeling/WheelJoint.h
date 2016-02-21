@@ -1,49 +1,52 @@
-
-#ifndef LIBMODELING_WHEEL_JOINT_H
-#define LIBMODELING_WHEEL_JOINT_H
+#ifndef _EASYMODELING_WHEEL_JOINT_H_
+#define _EASYMODELING_WHEEL_JOINT_H_
 
 #include "Joint.h"
 
-namespace libmodeling
+#include <ee/Vector.h>
+
+namespace emodeling
 {
-	class WheelJoint : public Joint
-	{
-	public:
-		WheelJoint(Body* b0, Body* b1);
 
-		virtual bool isContain(const ee::Vector& pos) const;
-		virtual bool isIntersect(const ee::Rect& rect) const;
+class WheelJoint : public Joint
+{
+public:
+	WheelJoint(Body* b0, Body* b1);
 
-		virtual void draw(DrawType type) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
 
-		ee::Vector getWorldAnchorA() const;
-		ee::Vector getWorldAnchorB() const;
+	virtual void Draw(DrawType type) const;
 
-		void setLocalAnchorA(const ee::Vector& world);
-		void setLocalAnchorB(const ee::Vector& world);
+	ee::Vector GetWorldAnchorA() const;
+	ee::Vector GetWorldAnchorB() const;
 
-	private:
-		void drawAxisALine(const ee::Vector& worldAnchorA) const;
-		void drawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const;
+	void SetLocalAnchorA(const ee::Vector& world);
+	void SetLocalAnchorB(const ee::Vector& world);
 
-		void drawAnchorA(const ee::Vector& pos, DrawType type) const;
-		void drawAnchorB(const ee::Vector& pos, DrawType type) const;
+private:
+	void DrawAxisALine(const ee::Vector& worldAnchorA) const;
+	void DrawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const;
 
-	public:
-		ee::Vector localAnchorA;
-		ee::Vector localAnchorB;
+	void DrawAnchorA(const ee::Vector& pos, DrawType type) const;
+	void DrawAnchorB(const ee::Vector& pos, DrawType type) const;
 
-		ee::Vector localAxisA;
+public:
+	ee::Vector m_local_anchor_a;
+	ee::Vector m_local_anchor_b;
 
-		bool enableMotor;
-		float maxMotorTorque;
+	ee::Vector m_local_axis_a;
 
-		float motorSpeed;
+	bool m_enable_motor;
+	float m_max_motor_torque;
 
-		float frequencyHz;
-		float dampingRatio;
+	float m_motor_speed;
 
-	}; // WheelJoint
+	float m_frequency_hz;
+	float m_damping_ratio;
+
+}; // WheelJoint
+
 }
 
-#endif // LIBMODELING_WHEEL_JOINT_H
+#endif // _EASYMODELING_WHEEL_JOINT_H_

@@ -3,6 +3,13 @@
 #include "language.h"
 #include "ps_config.h"
 
+#include <ee/Math2D.h>
+#include <ee/Symbol.h>
+#include <ee/FileHelper.h>
+#include <ee/ImagePanel.h>
+#include <ee/SliderCtrlTwo.h>
+#include <ee/RGBColorSettingDlg.h>
+
 namespace eparticle2d
 {
 

@@ -1,9 +1,12 @@
 #ifndef _EASYCOCO_UTILITY_H_
 #define _EASYCOCO_UTILITY_H_
 
+#include <vector>
+#include <map>
 
+namespace ee { class Sprite; }
 
-namespace libcoco
+namespace ecoco
 {
 
 class Utility

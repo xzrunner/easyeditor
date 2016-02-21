@@ -1,9 +1,11 @@
-#ifndef _LIBRESPACKER_UNPACKE_FROM_LUA_H_
-#define _LIBRESPACKER_UNPACKE_FROM_LUA_H_
+#ifndef _EASYRESPACKER_UNPACKE_FROM_LUA_H_
+#define _EASYRESPACKER_UNPACKE_FROM_LUA_H_
 
+#include <vector>
 
+namespace ee { class Image; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class UnpackFromLua
@@ -16,4 +18,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_UNPACKE_FROM_LUA_H_
+#endif // _EASYRESPACKER_UNPACKE_FROM_LUA_H_

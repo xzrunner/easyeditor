@@ -2,6 +2,7 @@
 #define _EASYEDITOR_NULL_SPRITE_H_
 
 #include "Sprite.h"
+#include "Symbol.h"
 
 namespace ee
 {

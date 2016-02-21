@@ -7,6 +7,11 @@
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
 
+#include <ee/Math2D.h>
+#include <ee/Symbol.h>
+
+#include <assert.h>
+
 namespace eparticle3d
 {
 
@@ -47,7 +52,7 @@ void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_COUNT:
-		cfg->count = data.val0;
+		cfg->count = static_cast<int>(data.val0);
 		break;
 	case PS_EMISSION_TIME:
 		cfg->emission_time = data.val0 * 0.001f; 
@@ -101,7 +106,7 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_COUNT:
-		data.val0 = m_spr->et->cfg->count;
+		data.val0 = static_cast<float>(m_spr->et->cfg->count);
 		break;
 	case PS_EMISSION_TIME:
 		data.val0 = m_spr->et->cfg->emission_time * 1000;
@@ -184,12 +189,12 @@ bool ParticleSystem::Update(const ee::Matrix& mat)
 
 void ParticleSystem::SetDirection(float x, float y, float z)
 {
-	vec3 start(0, 0, 1), end(x, y, z);
+	ee::vec3 start(0, 0, 1), end(x, y, z);
 	end.Normalize();
-	SetDirection(Quaternion::CreateFromVectors(start, end));
+	SetDirection(ee::Quaternion::CreateFromVectors(start, end));
 }
 
-void ParticleSystem::SetDirection(const Quaternion& dir)
+void ParticleSystem::SetDirection(const ee::Quaternion& dir)
 {
 	// todo
 //	direction = dir.ToMatrix();

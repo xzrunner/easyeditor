@@ -3,6 +3,10 @@
 #include "lr_typedef.h"
 #include "lr_tools.h"
 
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace edb
 {
 

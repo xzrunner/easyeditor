@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_KEYS_PANEL_H_
 #define _EASYANIM_KEYS_PANEL_H_
 
+#include <ee/Observer.h>
 
+#include <wx/scrolwin.h>
 
 namespace eanim
 {

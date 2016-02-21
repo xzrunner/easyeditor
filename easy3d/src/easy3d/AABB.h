@@ -1,8 +1,8 @@
-#ifndef _E3D_AABB_H_
-#define _E3D_AABB_H_
+#ifndef _EASY3D_AABB_H_
+#define _EASY3D_AABB_H_
 
-#include "Vector.h"
-#include "Matrix.h"
+#include <ee/Vector3D.h>
+#include <ee/Matrix3D.h>
 
 #include <float.h>
 
@@ -16,16 +16,16 @@ public:
 
 	void MakeInfinite();
 
-	void Combine(const vec3& pos);
+	void Combine(const ee::vec3& pos);
 
-	void Translate(const vec3& offset);
-	void Rotate(const mat4& mat);
+	void Translate(const ee::vec3& offset);
+	void Rotate(const ee::mat4& mat);
 
-	const vec3 Max() const;
-	const vec3 Min() const;
+	const ee::vec3 Max() const;
+	const ee::vec3 Min() const;
 
 private:
-	vec3 m_min, m_max;
+	ee::vec3 m_min, m_max;
 
 }; // AABB
 
@@ -42,7 +42,7 @@ inline void AABB::MakeInfinite()
 	}
 }
 
-inline void AABB::Combine(const vec3& pos) 
+inline void AABB::Combine(const ee::vec3& pos) 
 {
 	for (int i = 0; i < 3; ++i) {
 		if (pos[i] < m_min[i]) {
@@ -54,28 +54,28 @@ inline void AABB::Combine(const vec3& pos)
 	}
 }
 
-inline void AABB::Translate(const vec3& offset)
+inline void AABB::Translate(const ee::vec3& offset)
 {
 	m_min += offset;
 	m_max += offset;
 }
 
-inline void AABB::Rotate(const mat4& mat)
+inline void AABB::Rotate(const ee::mat4& mat)
 {
 	m_min = mat * m_min;
 	m_max = mat * m_max;
 }
 
-inline const vec3 AABB::Max() const 
+inline const ee::vec3 AABB::Max() const 
 { 
 	return m_max; 
 }
 
-inline const vec3 AABB::Min() const 
+inline const ee::vec3 AABB::Min() const 
 { 
 	return m_min; 
 }
 
 }
 
-#endif // _E3D_AABB_H_
+#endif // _EASY3D_AABB_H_

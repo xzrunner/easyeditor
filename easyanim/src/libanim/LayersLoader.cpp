@@ -1,6 +1,12 @@
 #include "LayersLoader.h"
 
-namespace libanim
+#include <ee/SymbolSearcher.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Sprite.h>
+
+namespace eanim
 {
 
 void LayersLoader::LoadLayers(const Json::Value& value, 

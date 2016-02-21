@@ -8,6 +8,8 @@
 #include "view/StagePanel.h"
 #include "message/messages.h"
 
+#include <ee/panel_msg.h>
+
 namespace eanim
 {
 

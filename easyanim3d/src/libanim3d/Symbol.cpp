@@ -1,6 +1,10 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace eanim3d
 {
 
@@ -27,8 +31,8 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 
 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
 
-	mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
-		mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
+	ee::mat4 mat = ee::mat4(s->GetOri3().ToMatrix()) * 
+		ee::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 
 	// 	e3d::DrawCube(mat, m_aabb, ee::BLACK);
 
@@ -55,7 +59,7 @@ void Symbol::LoadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["filepath"].asString());
 	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
 }

@@ -1,7 +1,11 @@
 #ifndef _EASYSHADOW_EDIT_DIALOG_H_
 #define _EASYSHADOW_EDIT_DIALOG_H_
 
+#include <wx/dialog.h>
 
+class wxGLContext;
+
+namespace ee { class MultiSpritesImpl; class Sprite; class Camera; class EditPanel; }
 
 namespace eshadow
 {

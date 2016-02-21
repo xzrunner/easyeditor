@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="easyshader"
+	Name="6.easyshader"
 	ProjectGUID="{DA5638BA-C581-4E52-95ED-3BF6DEEF9B12}"
 	RootNamespace="easyshader"
 	Keyword="Win32Proj"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib lua.lib glew32s.lib libpngd.lib assimpd.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib freetype250_D.lib lua.lib glew32s.lib libpngd.lib assimpd.lib cjsond.lib lzmad.lib pthreadVC2.lib"
 				OutputFile="..\easyshader\x86\Debug\easyshader.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\easy3d\external\assimp\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;..\..\..\..\editor-external\assimp\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easyshader\x86\Debug\easyshader.pdb"
@@ -143,10 +143,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib libpng.lib assimp.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib freetype250.lib lua.lib libpng.lib assimp.lib cjson.lib lzma.lib pthreadVC2.lib"
 				OutputFile="..\easyshader\x86\Release\easyshader.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\easy3d\external\assimp\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;;..\..\..\..\editor-external\assimp\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easyshader\x86\Release\easyshader.pdb"

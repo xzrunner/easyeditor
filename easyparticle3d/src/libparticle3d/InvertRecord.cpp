@@ -1,7 +1,13 @@
 #include "InvertRecord.h"
 #include "ParticleSystem.h"
 
+#include <ee/std_functor.h>
+#include <ee/Symbol.h>
+
 #include <ps_3d.h>
+
+#include <fstream>
+#include <algorithm>
 
 namespace eparticle3d
 {
@@ -41,7 +47,7 @@ void InvertRecord::StoreToFile(const std::string& filepath) const
 
 void InvertRecord::Clear()
 {
-	for_each(m_items.begin(), m_items.end(), DeletePointerFunctor<Item>());
+	for_each(m_items.begin(), m_items.end(), ee::DeletePointerFunctor<Item>());
 	m_items.clear();
 }
 

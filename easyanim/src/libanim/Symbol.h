@@ -1,9 +1,11 @@
-#ifndef _LIBANIMATION_SYMBOL_H_
-#define _LIBANIMATION_SYMBOL_H_
+#ifndef _EASYANIM_SYMBOL_H_
+#define _EASYANIM_SYMBOL_H_
 
+#include <ee/Symbol.h>
 
+#include <vector>
 
-namespace libanim
+namespace eanim
 {
 
 class LayersLoader;
@@ -80,4 +82,4 @@ private:
 
 }
 
-#endif // _LIBANIMATION_SYMBOL_H_
+#endif // _EASYANIM_SYMBOL_H_

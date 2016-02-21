@@ -36,7 +36,7 @@ private:
 private:
 	std::vector<const ee::Symbol*> m_symbols;
 
-	libcoco::epd::TextureMgr m_tex_mgr;
+	ecoco::epd::TextureMgr m_tex_mgr;
 
 }; // PackLuaDescFile
 

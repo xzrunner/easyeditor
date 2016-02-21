@@ -3,6 +3,10 @@
 #include "dataset/LevelCfg.h"
 #include "dataset/DynamicWidget.h"
 
+#include <ee/Symbol.h>
+#include <ee/ViewlistList.h>
+#include <ee/EditPanelImpl.h>
+
 namespace lr
 {
 

@@ -2,9 +2,11 @@
 #include "pack_unpack.h"
 #include "typedef.h"
 
+#include <ee/trans_color.h>
+
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int ShapeFromBin::Size(const PackShape* shape)

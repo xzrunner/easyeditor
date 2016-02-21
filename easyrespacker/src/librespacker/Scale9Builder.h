@@ -1,5 +1,5 @@
-#ifndef _LIBRESPACKER_SCALE9_BUILDER_H_
-#define _LIBRESPACKER_SCALE9_BUILDER_H_
+#ifndef _EASYRESPACKER_SCALE9_BUILDER_H_
+#define _EASYRESPACKER_SCALE9_BUILDER_H_
 
 #include "INodeBuilder.h"
 
@@ -7,7 +7,7 @@
 
 namespace escale9 { class Sprite; class Symbol; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -42,4 +42,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_SCALE9_BUILDER_H_
+#endif // _EASYRESPACKER_SCALE9_BUILDER_H_

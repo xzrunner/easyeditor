@@ -1,6 +1,6 @@
 #include "SettingCfg.h"
 
-
+#include <ee/cfg_const.h>
 
 #include <stdio.h>
 

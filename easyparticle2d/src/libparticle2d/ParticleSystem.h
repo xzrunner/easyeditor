@@ -1,11 +1,16 @@
 #ifndef _EASYPARTICLE2D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE2D_PARTICLE_SYSTEM_H_
 
-
+#include <ee/Object.h>
+#include <ee/UICallback.h>
+#include <ee/Matrix.h>
+#include <ee/Vector.h>
 
 struct p2d_emitter_cfg;
 struct p2d_emitter;
 struct p2d_symbol;
+
+namespace ee { class Symbol; }
 
 namespace eparticle2d
 {

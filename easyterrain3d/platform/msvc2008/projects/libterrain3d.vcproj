@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libterrain3d"
+	Name="5.libterrain3d"
 	ProjectGUID="{69347FE7-98F6-4E63-A22F-EFEA9FE82C9E}"
 	RootNamespace="libterrain3d"
 	Keyword="Win32Proj"

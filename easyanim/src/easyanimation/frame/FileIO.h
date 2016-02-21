@@ -6,6 +6,8 @@
 
 #include <rapidxml.hpp>
 
+namespace ee { class Sprite; }
+
 namespace eanim
 {
 

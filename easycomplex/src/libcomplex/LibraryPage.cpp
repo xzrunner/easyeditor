@@ -2,13 +2,20 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/StringHelper.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/Exception.h>
+#include <ee/SymbolMgr.h>
+
 #include <easycoco.h>
 
 namespace ecomplex
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Complex"))
+	: ee::LibraryPage(parent, "Complex")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);
@@ -21,7 +28,7 @@ bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
 
 bool LibraryPage::LoadFromConfig()
 {
-	return LibraryPage::LoadFromConfig("library_complex");
+	return ee::LibraryPage::LoadFromConfig("library_complex");
 }
 
 void LibraryPage::OnAddPress(wxCommandEvent& event)
@@ -69,7 +76,7 @@ void LibraryPage::loadFromLuaFile(const std::string& filename)
 // 	std::string name = filename.substr(0, filename.find_last_of("."));
 // 	texfilenames.push_back(name + ".1.ppm");
 // 
-// 	libcoco::epe::ParserLuaFile parser;
+// 	ecoco::epe::ParserLuaFile parser;
 // 	parser.parser(filename);
 // 	parser.transToMemory(texfilenames);
 // 

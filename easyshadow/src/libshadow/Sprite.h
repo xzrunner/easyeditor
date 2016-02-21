@@ -3,6 +3,8 @@
 
 #include "Symbol.h"
 
+#include <ee/Sprite.h>
+
 namespace eshadow
 {
 

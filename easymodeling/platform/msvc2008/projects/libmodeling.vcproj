@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libmodeling"
+	Name="5.libmodeling"
 	ProjectGUID="{2E27AFD7-BDC5-464C-A0A8-15D3665FD13D}"
 	RootNamespace="libmodeling"
 	Keyword="Win32Proj"

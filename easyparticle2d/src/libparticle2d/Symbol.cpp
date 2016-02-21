@@ -6,6 +6,8 @@
 
 #include <ps_2d.h>
 
+#include <ee/ShaderMgr.h>
+
 namespace eparticle2d
 {
 

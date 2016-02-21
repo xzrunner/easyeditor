@@ -1,7 +1,11 @@
 #include "AnchorBuilder.h"
 #include "PackAnchor.h"
 
-namespace librespacker
+#include <ee/std_functor.h>
+
+#include <algorithm>
+
+namespace erespacker
 {
 
 AnchorBuilder::AnchorBuilder()
@@ -10,7 +14,7 @@ AnchorBuilder::AnchorBuilder()
 
 AnchorBuilder::~AnchorBuilder()
 {
-	for_each(m_anchors.begin(), m_anchors.end(), DeletePointerFunctor<const PackAnchor>());
+	for_each(m_anchors.begin(), m_anchors.end(), ee::DeletePointerFunctor<const PackAnchor>());
 }
 
 void AnchorBuilder::Traverse(ee::Visitor& visitor) const

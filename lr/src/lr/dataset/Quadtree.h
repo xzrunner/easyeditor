@@ -1,7 +1,11 @@
 #ifndef _LR_QUADTREE_H_
 #define _LR_QUADTREE_H_
 
+#include <ee/Rect.h>
 
+#include <vector>
+
+namespace ee { class Rect; class Sprite; class Vector; }
 
 namespace lr
 {

@@ -3,6 +3,9 @@
 #include "view/ViewMgr.h"
 #include "view/ToolbarPanel.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Observer.h>
+
 namespace eanim
 {
 
@@ -46,8 +49,8 @@ void AnimTemplate::PreparePaths(const std::string& filepath)
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	for (int i = 0; i < dirs.size(); ++i) {
-		std::string path = ee::FileHelper::GetRelativePath(dir, dirs[i]),
-			name = ee::FileHelper::GetDirName(dirs[i]);
+		std::string path = ee::FileHelper::GetRelativePath(dir, dirs[i].ToStdString()),
+			name = ee::FileHelper::GetDirName(dirs[i].ToStdString());
 		Add(path, name);
 	}
 }

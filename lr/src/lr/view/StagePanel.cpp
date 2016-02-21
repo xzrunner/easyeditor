@@ -13,7 +13,20 @@
 #include "preview/PathNavMesh.h"
 #include "preview/PathVisibleSimple.h"
 
+#include <ee/SpriteDropTarget.h>
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/sprite_msg.h>
+#include <ee/shape_msg.h>
+#include <ee/std_functor.h>
+#include <ee/Config.h>
+#include <ee/LibraryPanel.h>
+#include <ee/SettingData.h>
+#include <ee/subject_id.h>
+#include <ee/panel_msg.h>
+
 #include <easyshape.h>
+
+#include <algorithm>
 
 namespace lr
 {
@@ -75,7 +88,7 @@ StagePanel::~StagePanel()
 	}
 	m_arrange_op->Release();
 
-	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), ee::DeletePointerFunctor<Layer>());
 }
 
 // void StagePanel::Clear()

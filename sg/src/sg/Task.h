@@ -1,8 +1,11 @@
 #ifndef _SG_TASK_H_
 #define _SG_TASK_H_
 
+#include <ee/Task.h>
 
-#include <wx/splitter.h>
+#include <wx/wx.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace sg
 {

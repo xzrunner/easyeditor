@@ -5,7 +5,7 @@
 #include "ComboBoxWidget.h"
 #include "CheckBoxWidget.h"
 
-
+#include <ee/Exception.h>
 
 namespace lr
 {

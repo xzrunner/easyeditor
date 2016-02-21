@@ -1,12 +1,12 @@
-#ifndef _ESHADER_STAGE_CANVAS3D_H_
-#define _ESHADER_STAGE_CANVAS3D_H_
+#ifndef _EASYSHADER_STAGE_CANVAS3D_H_
+#define _EASYSHADER_STAGE_CANVAS3D_H_
 
 #include <easysketch.h>
 
 namespace eshader
 {
 
-class StageCanvas3D : public libsketch::StageCanvas
+class StageCanvas3D : public esketch::StageCanvas
 {
 public:
 	StageCanvas3D(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
@@ -30,4 +30,4 @@ private:
 
 }
 
-#endif // _ESHADER_STAGE_CANVAS3D_H_
+#endif // _EASYSHADER_STAGE_CANVAS3D_H_

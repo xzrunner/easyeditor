@@ -8,9 +8,16 @@
 #include "view/StagePanel.h"
 #include "view/ViewMgr.h"
 #include "message/messages.h"
-#include "message/panel_msg.h"
+
+#include <ee/panel_msg.h>
+#include <ee/Sprite.h>
+#include <ee/Symbol.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
 
 #include <wx/clipbrd.h>
+
+#include <sstream>
 
 namespace eanim
 {

@@ -4,7 +4,7 @@
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenerator& gen)

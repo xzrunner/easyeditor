@@ -1,5 +1,9 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/Exception.h>
+
 #include <easyparticle3d.h>
 
 namespace eparticle3d
@@ -91,14 +95,14 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 	return m_toolbar;
 }
 
-void Task::StoreAsAnim(const wxString& filepath) const
+void Task::StoreAsAnim(const std::string& filepath) const
 {
-	m_stage->m_ps->StoreAnimRecord(filepath.ToStdString());
+	m_stage->m_ps->StoreAnimRecord(filepath);
 }
 
-void Task::StoreAsInvert(const wxString& filepath) const
+void Task::StoreAsInvert(const std::string& filepath) const
 {
-	m_stage->m_ps->StoreInvertRecord(filepath.ToStdString());
+	m_stage->m_ps->StoreInvertRecord(filepath);
 }
 
 }

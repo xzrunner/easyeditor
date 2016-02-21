@@ -2,6 +2,8 @@
 #include "KeyFrame.h"
 #include "Layer.h"
 
+#include <ee/Sprite.h>
+
 namespace eanim
 {
 

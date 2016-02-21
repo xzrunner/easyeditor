@@ -1,9 +1,13 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <ee/FileHelper.h>
+
 #include <easy3d.h>
 
-namespace libsketch
+#include <fstream>
+
+namespace esketch
 {
 
 Symbol::Symbol()
@@ -34,8 +38,8 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 
 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
 
-	mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
-		mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
+	ee::mat4 mat = ee::mat4(s->GetOri3().ToMatrix()) * 
+		ee::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 
 // 	e3d::DrawCube(mat, m_aabb, ee::BLACK);
 
@@ -75,7 +79,7 @@ void Symbol::LoadResources()
   	fin.close();
   
   	wxString dir = ee::FileHelper::GetFileDir(m_filepath);
-  	std::string filepath = ee::FileHelper::GetAbsolutePath(dir, value["filepath"].asString());
+  	std::string filepath = ee::FileHelper::GetAbsolutePath(dir.ToStdString(), value["filepath"].asString());
   	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
 }
 

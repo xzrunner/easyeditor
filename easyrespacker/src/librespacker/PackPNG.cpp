@@ -2,10 +2,19 @@
 #include "Lzma.h"
 #include "typedef.h"
 
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/ImageLoader.h>
+#include <ee/Exception.h>
+#include <ee/ImageData.h>
+#include <ee/Image.h>
+#include <ee/ImageSymbol.h>
+#include <ee/Snapshoot.h>
+#include <ee/ImageVerticalFlip.h>
 
 #include <easyimage.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 PackPNG::PackPNG(bool png8)
@@ -64,8 +73,8 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 		ee::Image img(&img_data);
 		ee::ImageSymbol symbol(&img, "");
 
-		int width = m_width * scale,
-			height = m_height * scale;
+		int width = static_cast<int>(m_width * scale),
+			height= static_cast<int>(m_height * scale);
 		ee::Snapshoot ss;
 		uint8_t* buffer = ss.OutputToMemory(&symbol, false, scale);
 		RevertAndStore(fout, buffer, width, height);
@@ -77,7 +86,7 @@ void PackPNG::Store(const std::string& filepath, float scale) const
 
 void PackPNG::RevertAndStore(std::ofstream& fout, uint8_t* buffer, int width, int height) const
 {
-	eimage::ImageVerticalFlip revert(buffer, width, height);
+	ee::ImageVerticalFlip revert(buffer, width, height);
 	uint8_t* buf_revert = revert.Revert();		
 	Store(fout, buf_revert, width, height);
 	delete[] buf_revert;

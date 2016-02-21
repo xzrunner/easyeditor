@@ -2,6 +2,8 @@
 #include "Symbol.h"
 #include "Shadow.h"
 
+#include <fstream>
+
 namespace eshadow
 {
 

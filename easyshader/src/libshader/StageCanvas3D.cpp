@@ -3,13 +3,13 @@
 namespace eshader
 {
 
-BEGIN_EVENT_TABLE(StageCanvas3D, libsketch::StageCanvas)
+BEGIN_EVENT_TABLE(StageCanvas3D, esketch::StageCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas3D::OnTimer)
 END_EVENT_TABLE()
 
 StageCanvas3D::StageCanvas3D(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 							 ee::MultiSpritesImpl* sprite_impl, ee::LibraryPanel* library)
-	: libsketch::StageCanvas(stage_wnd, stage, sprite_impl, library)
+	: esketch::StageCanvas(stage_wnd, stage, sprite_impl, library)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);

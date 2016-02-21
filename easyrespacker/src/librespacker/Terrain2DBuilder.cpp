@@ -2,9 +2,12 @@
 #include "PackAnimation.h"
 #include "PackPicture.h"
 
+#include <ee/Exception.h>
+#include <ee/ImageSymbol.h>
+
 #include <easyterrain2d.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 Terrain2DBuilder::Terrain2DBuilder()

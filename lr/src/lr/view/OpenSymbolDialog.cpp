@@ -8,6 +8,11 @@
 #include "dataset/Layer.h"
 #include "dataset/data_utility.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/FontBlankSprite.h>
+#include <ee/TextDialog.h>
+#include <ee/SpriteDialog.h>
+
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easyanim.h>
@@ -69,9 +74,9 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 		// 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 		// 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(spr))
+	else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(spr))
 	{
-		libanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol(), m_stage->GetCanvas()->GetGLContext());
+		eanim::PreviewDialog dlg(m_wnd, &anim->GetSymbol(), m_stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(spr))

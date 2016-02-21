@@ -10,6 +10,11 @@
 #include "view/StagePanel.h"
 #include "view/ViewMgr.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/panel_msg.h>
+
 namespace eanim
 {
 

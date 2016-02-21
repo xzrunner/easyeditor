@@ -1,7 +1,9 @@
 #ifndef _LR_GRIDS_H_
 #define _LR_GRIDS_H_
 
+#include <ee/Rect.h>
 
+#include <vector>
 
 namespace lr
 {

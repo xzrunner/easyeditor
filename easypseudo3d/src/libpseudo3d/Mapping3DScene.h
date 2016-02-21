@@ -3,8 +3,9 @@
 
 #include "IScene.h"
 
-
 #include <easy3d.h>
+
+namespace ee { class Image; }
 
 namespace epseudo3d
 {
@@ -28,8 +29,8 @@ private:
 
 	ee::Image* m_img;
 
-	std::vector<vec3> m_vertices;
-	std::vector<vec2> m_texcoords;
+	std::vector<ee::vec3> m_vertices;
+	std::vector<ee::vec2> m_texcoords;
 
 }; // Mapping3DScene
 

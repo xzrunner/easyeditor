@@ -1,9 +1,11 @@
-#ifndef _ESHADER_TOOLBAR_PANEL_H_
-#define _ESHADER_TOOLBAR_PANEL_H_
-
-
+#ifndef _EASYSHADER_TOOLBAR_PANEL_H_
+#define _EASYSHADER_TOOLBAR_PANEL_H_
 
 #include "SliderItem.h"
+
+#include <ee/ToolbarPanel.h>
+
+namespace ee { class EditPanel; }
 
 namespace eshader
 {
@@ -40,4 +42,4 @@ private:
 
 }
 
-#endif // _ESHADER_TOOLBAR_PANEL_H_
+#endif // _EASYSHADER_TOOLBAR_PANEL_H_

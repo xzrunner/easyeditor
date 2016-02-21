@@ -13,7 +13,7 @@ class PasteSymbolOP : public ZoomViewOP
 {
 public:
 	PasteSymbolOP(wxWindow* wnd, EditPanelImpl* stage, 
-		LibraryPanel* libraryPanel, float* pScale = NULL);
+		LibraryPanel* library, float* pScale = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseMove(int x, int y);

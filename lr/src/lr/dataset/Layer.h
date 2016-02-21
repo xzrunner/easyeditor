@@ -1,7 +1,20 @@
 #ifndef _LR_LAYER_H_
 #define _LR_LAYER_H_
 
+#include <ee/Object.h>
+#include <ee/Visitor.h>
+#include <ee/DataTraverseType.h>
+#include <ee/ObjectVector.h>
+#include <ee/LayerMgr.h>
+#include <ee/Sprite.h>
+#include <ee/Shape.h>
 
+#include <json/json.h>
+
+#include <string>
+#include <set>
+
+namespace ee { class Sprite; class Shape; class LayerMgr; }
 
 namespace lr
 {

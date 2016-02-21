@@ -1,6 +1,6 @@
 #include "IPackNode.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 IPackNode::IPackNode() 

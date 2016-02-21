@@ -1,7 +1,9 @@
 #include "PictureFromLua.h"
 #include "typedef.h"
 
-namespace librespacker
+#include <assert.h>
+
+namespace erespacker
 {
 
 void PictureFromLua::Unpack(lua_State* L, const std::vector<ee::Image*>& images, 
@@ -31,7 +33,7 @@ void PictureFromLua::Unpack(lua_State* L, const std::vector<ee::Image*>& images,
 		{
 			lua_pushinteger(L, i);
 			lua_gettable(L, -2);
-			int src = lua_tonumber(L, -1);
+			float src = static_cast<float>(lua_tonumber(L, -1));
 			if (i % 2) {
 				quad.texture_coord[(i - 1) / 2].x = src;
 			} else {
@@ -48,7 +50,7 @@ void PictureFromLua::Unpack(lua_State* L, const std::vector<ee::Image*>& images,
 		{
 			lua_pushinteger(L, i);
 			lua_gettable(L, -2);
-			int screen = lua_tonumber(L, -1);
+			float screen = static_cast<float>(lua_tonumber(L, -1));
 			if (i % 2) {
 				quad.screen_coord[(i - 1) / 2].x = screen / SCALE;
 			} else {

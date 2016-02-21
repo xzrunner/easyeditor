@@ -16,6 +16,17 @@
 #include <easyicon.h>
 #include <easyparticle3d.h>
 
+#include <ee/panel_msg.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/FileType.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/subject_id.h>
+#include <ee/LibraryImagePage.h>
+#include <ee/ViewlistPanel.h>
+
 #include <wx/splitter.h>
 
 namespace eanim
@@ -127,7 +138,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	wxWindow* nb = library->GetNotebook();
 	library->AddPage(ViewMgr::Instance()->img_page = new ee::LibraryImagePage(nb));
 	library->AddPage(new ecomplex::LibraryPage(nb));
-	library->AddPage(new libanim::LibraryPage(nb));
+	library->AddPage(new eanim::LibraryPage(nb));
 	library->AddPage(new emesh::LibraryPage(nb));
 	library->AddPage(new escale9::LibraryPage(nb));
 	library->AddPage(new eicon::LibraryPage(nb));

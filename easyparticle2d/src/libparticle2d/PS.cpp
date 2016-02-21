@@ -1,9 +1,12 @@
 #include "PS.h"
 #include "ParticleSystem.h"
 
-
+#include <ee/ColorTrans.h>
+#include <ee/SpriteRenderer.h>
 
 #include <ps_2d.h>
+
+#include <time.h>
 
 namespace eparticle2d
 {

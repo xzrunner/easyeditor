@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_ROTATE_SPRITE_STATE_H_
 #define _EASYANIM_ROTATE_SPRITE_STATE_H_
 
-
+#include <ee/RotateSpriteState.h>
 
 namespace eanim
 {

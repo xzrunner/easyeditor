@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_PARTICLE3D_H_
-#define _LIBRESPACKER_PACK_PARTICLE3D_H_
+#ifndef _EASYRESPACKER_PACK_PARTICLE3D_H_
+#define _EASYRESPACKER_PACK_PARTICLE3D_H_
 
 #include "IPackNode.h"
 
 
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackParticle3D : public IPackNode
@@ -73,4 +73,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_PARTICLE3D_H_
+#endif // _EASYRESPACKER_PACK_PARTICLE3D_H_

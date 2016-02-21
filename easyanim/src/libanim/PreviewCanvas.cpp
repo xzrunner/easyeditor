@@ -1,6 +1,9 @@
 #include "PreviewCanvas.h"
 
-namespace libanim
+#include <ee/SpriteRenderer.h>
+#include <ee/panel_msg.h>
+
+namespace eanim
 {
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,

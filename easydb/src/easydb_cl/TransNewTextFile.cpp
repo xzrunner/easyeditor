@@ -1,6 +1,9 @@
 #include "TransNewTextFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+
 #include <easycomplex.h>
 #include <easytext.h>
 
@@ -40,7 +43,7 @@ void TransNewTextFile::Run(const std::string& folder)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = filename.GetFullPath();
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 			if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(sym)) {

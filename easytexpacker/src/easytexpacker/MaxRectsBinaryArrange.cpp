@@ -8,21 +8,21 @@ namespace etexpacker
 void MaxRectsBinaryArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 	int sz = sprites.size();
-	std::vector<libtexpacker::RectSize> rects;
+	std::vector<etexpacker::RectSize> rects;
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
 		ee::Rect r = sprites[i]->GetSymbol().GetSize();
-		rects.push_back(libtexpacker::RectSize(r.Width(), r.Height()));
+		rects.push_back(etexpacker::RectSize(r.Width(), r.Height()));
 	}
-	std::vector<libtexpacker::Rect> output;
+	std::vector<etexpacker::Rect> output;
 
-	libtexpacker::MaxRectsBinaryPack2 pack;
-	pack.Pack(libtexpacker::PACK_AUTO, 2048, 2048, 2048, rects, output);
+	etexpacker::MaxRectsBinaryPack2 pack;
+	pack.Pack(etexpacker::PACK_AUTO, 2048, 2048, 2048, rects, output);
 
 	assert(sprites.size() == output.size());
 	for (int i = 0; i < sz; ++i) {
 		ee::Sprite* sprite = sprites[i];
-		const libtexpacker::Rect& r = output[i];
+		const etexpacker::Rect& r = output[i];
 		ee::Vector pos;
 		pos.x = r.x + r.width * 0.5f;
 		pos.y = r.y + r.height * 0.5f;

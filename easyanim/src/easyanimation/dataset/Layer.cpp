@@ -5,6 +5,8 @@
 #include "view/EditKeyFramesAOP.h"
 #include "message/messages.h"
 
+#include <ee/StringHelper.h>
+
 namespace eanim
 {
 

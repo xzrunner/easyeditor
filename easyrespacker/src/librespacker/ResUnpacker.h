@@ -1,9 +1,11 @@
-#ifndef _LIBRESPACKER_RES_UNPACKER_H_
-#define _LIBRESPACKER_RES_UNPACKER_H_
+#ifndef _EASYRESPACKER_RES_UNPACKER_H_
+#define _EASYRESPACKER_RES_UNPACKER_H_
 
+#include <vector>
 
+namespace ee { class Image; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class ResUnpacker
@@ -20,4 +22,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_RES_UNPACKER_H_
+#endif // _EASYRESPACKER_RES_UNPACKER_H_

@@ -3,9 +3,10 @@
 
 #include "ICommand.h"
 
-
+#include <json/json.h>
 
 namespace lr { class Grids; }
+namespace ee { class Shape; class Vector; }
 
 namespace edb
 {

@@ -4,7 +4,7 @@
 
 #include <easybuilder.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 void PackToLuaString::Pack(const std::string& filepath,

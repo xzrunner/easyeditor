@@ -1,5 +1,5 @@
-#ifndef _LIBRESPACKER_PARTICLE2D_BUILDER_H_
-#define _LIBRESPACKER_PARTICLE2D_BUILDER_H_
+#ifndef _EASYRESPACKER_PARTICLE2D_BUILDER_H_
+#define _EASYRESPACKER_PARTICLE2D_BUILDER_H_
 
 #include "INodeBuilder.h"
 
@@ -7,7 +7,7 @@
 
 namespace eparticle2d { class Symbol; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -36,4 +36,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PARTICLE2D_BUILDER_H_
+#endif // _EASYRESPACKER_PARTICLE2D_BUILDER_H_

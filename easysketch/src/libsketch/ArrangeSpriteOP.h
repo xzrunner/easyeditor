@@ -1,9 +1,9 @@
-#ifndef _LIBSKETCH_ARRANGE_SPRITE_OP_H_
-#define _LIBSKETCH_ARRANGE_SPRITE_OP_H_
+#ifndef _EASYSKETCH_ARRANGE_SPRITE_OP_H_
+#define _EASYSKETCH_ARRANGE_SPRITE_OP_H_
 
 #include "SelectSpriteOP.h"
 
-namespace libsketch
+namespace esketch
 {
 
 class IEditState;
@@ -32,4 +32,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_ARRANGE_SPRITE_OP_H_
+#endif // _EASYSKETCH_ARRANGE_SPRITE_OP_H_

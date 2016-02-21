@@ -1,8 +1,8 @@
 #ifndef _EASYPARTICLE3D_UTILITY_H_
 #define _EASYPARTICLE3D_UTILITY_H_
 
-
-#include <easy3d.h>
+#include <ee/Vector.h>
+#include <ee/Matrix3D.h>
 
 namespace eparticle3d
 {
@@ -16,9 +16,9 @@ inline ee::Vector TransCoords3To2(const float position[3])
 	return ee::Vector(x, y);
 }
 
-inline ee::Vector TransCoords3To2(const float position[3], const mat4& direction)
+inline ee::Vector TransCoords3To2(const float position[3], const ee::mat4& direction)
 {
-	vec3 trans_pos3 = direction * vec3(position[0], position[1], position[2]);
+	ee::vec3 trans_pos3 = direction * ee::vec3(position[0], position[1], position[2]);
 	float gx = trans_pos3.x * 0.01f,
 		gy = trans_pos3.y * 0.01f;
 	float x = (gx - gy) * 36,

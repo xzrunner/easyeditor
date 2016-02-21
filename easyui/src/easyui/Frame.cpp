@@ -10,7 +10,7 @@ BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_CODE, Frame::OnCode)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title, const wxString& filetag)
+Frame::Frame(const std::string& title, const std::string& filetag)
 	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));

@@ -1,5 +1,5 @@
-#ifndef _E3D_ISURFACE_H_
-#define _E3D_ISURFACE_H_
+#ifndef _EASY3D_ISURFACE_H_
+#define _EASY3D_ISURFACE_H_
 
 #include <vector>
 
@@ -25,4 +25,4 @@ public:
 
 }
 
-#endif // _E3D_ISURFACE_H_
+#endif // _EASY3D_ISURFACE_H_

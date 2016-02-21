@@ -1,6 +1,9 @@
 #ifndef _SG_TOOLS_H_
 #define _SG_TOOLS_H_
 
+#include <ee/Symbol.h>
+#include <ee/Sprite.h>
+
 namespace sg
 {
 

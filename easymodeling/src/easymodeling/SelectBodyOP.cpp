@@ -6,13 +6,18 @@
 #include "BodyEditStage.h"
 #include "Context.h"
 
-using namespace emodeling;
+#include <ee/EditPanelImpl.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteSelection.h>
+
+namespace emodeling
+{
 
 SelectBodyOP::SelectBodyOP(wxWindow* stage_wnd,
 						   ee::EditPanelImpl* stage, 
-						   ee::MultiSpritesImpl* spritesImpl, 
+						   ee::MultiSpritesImpl* sprites_impl, 
 						   ee::EditCMPT* callback/* = NULL*/)
-	: ee::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
+	: ee::SelectSpritesOP(stage_wnd, stage, sprites_impl, callback)
 	, m_mouseOn(NULL)
 {
 }
@@ -36,7 +41,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
 	if (selected)
-		m_mouseOn = static_cast<libmodeling::Body*>(selected->GetUserData());
+		m_mouseOn = static_cast<Body*>(selected->GetUserData());
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
@@ -70,7 +75,7 @@ bool SelectBodyOP::OnDraw() const
 	m_selection->Traverse(DrawSelectedVisitor());
 
 	if (m_mouseOn)
-		DrawUtils::drawBody(m_mouseOn, DrawUtils::e_mouseOn);
+		DrawUtils::DrawBody(m_mouseOn, DrawUtils::e_mouseOn);
 
 	return false;
 }
@@ -93,7 +98,9 @@ Visit(ee::Object* object, bool& next)
 {
 	std::vector<ee::Vector> bound;
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
-	DrawUtils::drawBody(body, DrawUtils::e_selected);
+	Body* body = static_cast<Body*>(sprite->GetUserData());
+	DrawUtils::DrawBody(body, DrawUtils::e_selected);
 	next = true;
+}
+
 }

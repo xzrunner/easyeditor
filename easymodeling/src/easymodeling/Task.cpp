@@ -8,7 +8,13 @@
 #include "Context.h"
 #include "WorldPropertySetting.h"
 
-using namespace emodeling;
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/Exception.h>
+#include <ee/panel_msg.h>
+
+namespace emodeling
+{
 
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
@@ -26,31 +32,31 @@ Task::~Task()
 	m_parent->SetTitle("EasyMoodeling");
 }
 
-void Task::loadFromFile(const char* filename)
+void Task::LoadFromFile(const char* filename)
 {
 	if (!wxFileName::FileExists(filename)) {
 		throw ee::Exception("File: %s don't exist!", filename);
 	}
-  	FileIO::load(filename);
+  	FileIO::Load(filename);
 }
 
-void Task::storeToFile(const char* filename) const
+void Task::StoreToFile(const char* filename) const
 {
-  	FileIO::store(filename);
+  	FileIO::Store(filename);
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	ee::ClearPanelSJ::Instance()->Clear();
 }
 
-void Task::onPreview() const
+void Task::OnPreview() const
 {
 	PreviewDialog dlg;
 	dlg.ShowModal();
 }
 
-ee::StageCanvas* Task::getCanvas() const
+ee::StageCanvas* Task::GetCanvas() const
 {
 	if (ee::EditPanel* stage = Context::Instance()->stage)
 		return stage->GetCanvas();
@@ -58,7 +64,7 @@ ee::StageCanvas* Task::getCanvas() const
 		return NULL;
 }
 
-void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
+void Task::InitWindows(wxSplitterWindow* leftHorizontalSplitter, 
 					   wxSplitterWindow* leftVerticalSplitter, 
 					   wxSplitterWindow* rightVerticalSplitter, 
 					   wxWindow*& library, wxWindow*& property, 
@@ -85,7 +91,7 @@ void Task::InitLayout()
 	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
 
 	wxWindow *library, *property, *stage, *toolbar;
-	initWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
+	InitWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
 		library, property, stage, toolbar);
 
 	assert(stage);
@@ -108,4 +114,6 @@ void Task::InitLayout()
 	}
 
 	m_root = rightVerticalSplitter;
+}
+
 }

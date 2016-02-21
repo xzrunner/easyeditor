@@ -1,7 +1,7 @@
 #ifndef _EASYUI_TOP_PANNELS_H_
 #define _EASYUI_TOP_PANNELS_H_
 
-
+namespace ee { class PropertySettingPanel; }
 
 namespace eui
 {

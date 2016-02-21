@@ -1,6 +1,9 @@
 #include "PreviewPanel.h"
 #include "PreviewUtility.h"
 
+#include <ee/SceneNode.h>
+#include <ee/Sprite.h>
+
 namespace eanim
 {
 

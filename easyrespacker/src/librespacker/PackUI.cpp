@@ -5,10 +5,11 @@
 #include "PackUIWindowTask.h"
 #include "PackUIWrapperTask.h"
 
+#include <ee/FileHelper.h>
+
 #include <fstream>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 PackUI* PackUI::m_instance = NULL;

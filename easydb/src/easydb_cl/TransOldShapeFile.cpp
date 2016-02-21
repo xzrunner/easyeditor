@@ -1,6 +1,9 @@
 #include "TransOldShapeFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+
 #include <easyshape.h>
 #include <easytexture.h>
 
@@ -38,10 +41,7 @@ void TransOldShapeFile::Run(const std::string& folder)
 	ee::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
-
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_shape)) {
 // 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);
 // 			static_cast<eshape::Symbol*>(symbol)->StoreToFile(symbol->getFilepath());

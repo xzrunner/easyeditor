@@ -1,6 +1,8 @@
 #include "Utility.h"
 
-namespace librespacker
+#include <ee/FontBlankSprite.h>
+
+namespace erespacker
 {
 
 bool Utility::IsAnchor(const ee::Sprite* spr)

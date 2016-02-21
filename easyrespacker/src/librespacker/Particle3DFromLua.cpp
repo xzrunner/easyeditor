@@ -2,7 +2,9 @@
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
 
-namespace librespacker
+#include <assert.h>
+
+namespace erespacker
 {
 
 void Particle3DFromLua::Unpack(lua_State* L, PackParticle3D* p3d)
@@ -42,8 +44,8 @@ void Particle3DFromLua::UnpackComponents(lua_State* L, PackParticle3D* p3d)
 		comp.scale_start = TransFloatX100(LuaDataHelper::GetIntField(L, "scale_start"));
 		comp.scale_end = TransFloatX100(LuaDataHelper::GetIntField(L, "scale_end"));
 
-		comp.angle = LuaDataHelper::GetIntField(L, "angle");
-		comp.angle_var = LuaDataHelper::GetIntField(L, "angle_var");
+		comp.angle = static_cast<float>(LuaDataHelper::GetIntField(L, "angle"));
+		comp.angle_var = static_cast<float>(LuaDataHelper::GetIntField(L, "angle_var"));
 
 		comp.col_mul = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_mul");
 		comp.col_add = (uint32_t)LuaDataHelper::GetDoubleField(L, "col_add");
@@ -68,29 +70,29 @@ void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 	p3d->vert = TransDegree(LuaDataHelper::GetIntField(L, "vert"));
 	p3d->vert_var = TransDegree(LuaDataHelper::GetIntField(L, "vert_var"));
 
-	p3d->radial_spd = LuaDataHelper::GetIntField(L, "radial_spd");
-	p3d->radial_spd_var = LuaDataHelper::GetIntField(L, "radial_spd_var");
-	p3d->tangential_spd = LuaDataHelper::GetIntField(L, "tangential_spd");
-	p3d->tangential_spd_var = LuaDataHelper::GetIntField(L, "tangential_spd_var");
+	p3d->radial_spd = static_cast<float>(LuaDataHelper::GetIntField(L, "radial_spd"));
+	p3d->radial_spd_var = static_cast<float>(LuaDataHelper::GetIntField(L, "radial_spd_var"));
+	p3d->tangential_spd = static_cast<float>(LuaDataHelper::GetIntField(L, "tangential_spd"));
+	p3d->tangential_spd_var = static_cast<float>(LuaDataHelper::GetIntField(L, "tangential_spd_var"));
 	p3d->angular_spd = TransDegree(LuaDataHelper::GetIntField(L, "angular_spd"));
 	p3d->angular_spd_var = TransDegree(LuaDataHelper::GetIntField(L, "angular_spd_var"));
 
-	p3d->dis_region = LuaDataHelper::GetIntField(L, "dis_region");
-	p3d->dis_region_var = LuaDataHelper::GetIntField(L, "dis_region_var");
-	p3d->dis_spd = LuaDataHelper::GetIntField(L, "dis_spd");
-	p3d->dis_spd_var = LuaDataHelper::GetIntField(L, "dis_spd_var");
+	p3d->dis_region = static_cast<float>(LuaDataHelper::GetIntField(L, "dis_region"));
+	p3d->dis_region_var = static_cast<float>(LuaDataHelper::GetIntField(L, "dis_region_var"));
+	p3d->dis_spd = static_cast<float>(LuaDataHelper::GetIntField(L, "dis_spd"));
+	p3d->dis_spd_var = static_cast<float>(LuaDataHelper::GetIntField(L, "dis_spd_var"));
 
-	p3d->gravity = LuaDataHelper::GetIntField(L, "gravity");
+	p3d->gravity = static_cast<float>(LuaDataHelper::GetIntField(L, "gravity"));
 
-	p3d->linear_acc = LuaDataHelper::GetIntField(L, "linear_acc");
-	p3d->linear_acc_var = LuaDataHelper::GetIntField(L, "linear_acc_var");
+	p3d->linear_acc = static_cast<float>(LuaDataHelper::GetIntField(L, "linear_acc"));
+	p3d->linear_acc_var = static_cast<float>(LuaDataHelper::GetIntField(L, "linear_acc_var"));
 
 	p3d->fadeout_time = TransTime(LuaDataHelper::GetIntField(L, "fadeout_time"));
 
 	p3d->ground = LuaDataHelper::GetIntField(L, "ground");
 
-	p3d->start_radius = LuaDataHelper::GetIntField(L, "start_radius");
-	p3d->start_height = LuaDataHelper::GetIntField(L, "start_height");
+	p3d->start_radius = static_cast<float>(LuaDataHelper::GetIntField(L, "start_radius"));
+	p3d->start_height = static_cast<float>(LuaDataHelper::GetIntField(L, "start_height"));
 
 	p3d->orient_to_movement = LuaDataHelper::GetBoolField(L, "orient_to_movement");
 }

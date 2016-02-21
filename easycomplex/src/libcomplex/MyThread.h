@@ -1,5 +1,5 @@
-#ifndef MYTHREAD_H
-#define MYTHREAD_H
+#ifndef MYTHREAD_H_
+#define MYTHREAD_H_
 
 #include <wx/thread.h>
 #include <wx/event.h>

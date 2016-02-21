@@ -1,7 +1,9 @@
-#ifndef _LIBCOMPLEX_LOAD_FROM_LUA_H_
-#define _LIBCOMPLEX_LOAD_FROM_LUA_H_
+#ifndef _EASYCOMPLEX_LOAD_FROM_LUA_H_
+#define _EASYCOMPLEX_LOAD_FROM_LUA_H_
 
+namespace ee { class Image; }
 
+#include <json/json.h>
 
 namespace ecomplex
 {
@@ -21,4 +23,4 @@ private:
 
 }
 
-#endif // _LIBCOMPLEX_LOAD_FROM_LUA_H_
+#endif // _EASYCOMPLEX_LOAD_FROM_LUA_H_

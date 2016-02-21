@@ -3,6 +3,18 @@
 #include "RotateImage.h"
 #include "check_params.h"
 
+#include <ee/ShaderMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/SettingData.h>
+#include <ee/FileHelper.h>
+#include <ee/Config.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Rect.h>
+#include <ee/Math2D.h>
+#include <ee/Sprite.h>
+#include <ee/StringHelper.h>
+
 #include <glfw.h>
 #include <easyimage.h>
 
@@ -65,9 +77,7 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 		{
 			ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
@@ -80,10 +90,9 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 				int height = ee::Math2D::RotateVector(ee::Vector(r.xmin, r.ymax), -rad).y * 2;
 				ss.DrawSprite(sprite, true, width, height);
 
-				wxString name = ee::FileHelper::GetFilename(filepath);
-				wxString outpath;
-				outpath.Printf("%s\\%s_%d.png", dst_dir, name, deg);
-				ss.SaveToFile(outpath.ToStdString(), width, height);
+				std::string name = ee::FileHelper::GetFilename(filepath);
+				std::string outpath = ee::StringHelper::Format("%s\\%s_%d.png", dst_dir, name, deg);
+				ss.SaveToFile(outpath, width, height);
 			}
 
 			sprite->Release();

@@ -1,6 +1,8 @@
 #include "main.h"
 #include "Task.h"
 
+#include <ee/Frame.h>
+
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()

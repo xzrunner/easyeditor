@@ -1,7 +1,12 @@
 #ifndef _EASYSHADOW_STAGE_PANEL_H_
 #define _EASYSHADOW_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/MultiShapesImpl.h>
 
+namespace ee { class LibraryPanel; class MultiSpritesImpl; }
+
+class wxGLContext;
 
 namespace eshadow
 {

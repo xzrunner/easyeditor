@@ -3,7 +3,7 @@
 namespace esketch
 {
 
-Frame::Frame(const wxString& title)
+Frame::Frame(const std::string& title)
 	: ee::Frame(title, "")
 {
 #ifdef _DEBUG

@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN2D_WAVE_VERTICES_OP_H_
 #define _EASYTERRAIN2D_WAVE_VERTICES_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace eterrain2d
 {

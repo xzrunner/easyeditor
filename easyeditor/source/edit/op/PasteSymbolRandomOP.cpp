@@ -10,9 +10,9 @@
 namespace ee
 {
 
-PasteSymbolRandomOP::PasteSymbolRandomOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* libraryPanel, 
+PasteSymbolRandomOP::PasteSymbolRandomOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* library, 
 										 PasteSymbolRandomWidget* randomWidget)
-	: PasteSymbolOP(wnd, stage, libraryPanel)
+	: PasteSymbolOP(wnd, stage, library)
 	, m_random_widget(randomWidget)
 {
 	ChangeRandomValue();

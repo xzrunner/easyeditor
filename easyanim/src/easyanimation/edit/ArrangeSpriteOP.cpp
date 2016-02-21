@@ -4,6 +4,13 @@
 #include "view/StagePanel.h"
 #include "view/ViewMgr.h"
 
+#include <ee/std_functor.h>
+#include <ee/panel_msg.h>
+#include <ee/style_config.h>
+#include <ee/Math2D.h>
+
+#include <algorithm>
+
 namespace eanim
 {
 
@@ -15,7 +22,7 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 
 ArrangeSpriteOP::~ArrangeSpriteOP()
 {
-	for_each(m_crosses.begin(), m_crosses.end(), DeletePointerFunctor<Cross>());
+	for_each(m_crosses.begin(), m_crosses.end(), ee::DeletePointerFunctor<Cross>());
 }
 
 bool ArrangeSpriteOP::OnKeyDown(int keyCode)

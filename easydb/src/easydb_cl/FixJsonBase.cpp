@@ -1,22 +1,20 @@
 #include "FixJsonBase.h"
 
-#include <wx/filename.h>
-#include <fstream>
+#include <ee/FileHelper.h>
 
+#include <fstream>
 
 namespace edb
 {
 
-void FixJsonBase::FixComplex(const wxString& path) const
+void FixJsonBase::FixComplex(const std::string& path) const
 {
-	wxFileName filename(path);
-	filename.Normalize();
-	wxString filepath = filename.GetFullPath();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -36,23 +34,21 @@ void FixJsonBase::FixComplex(const wxString& path) const
 	if (dirty) {
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filepath.fn_str());
+		std::ofstream fout(filepath.c_str());
 		std::locale::global(std::locale("C"));	
 		writer.write(fout, value);
 		fout.close();
 	}
 }
 
-void FixJsonBase::FixAnim(const wxString& path) const
+void FixJsonBase::FixAnim(const std::string& path) const
 {
-	wxFileName filename(path);
-	filename.Normalize();
-	wxString filepath = filename.GetFullPath();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(path);
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -84,7 +80,7 @@ void FixJsonBase::FixAnim(const wxString& path) const
 	if (dirty) {
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(filepath.fn_str());
+		std::ofstream fout(filepath.c_str());
 		std::locale::global(std::locale("C"));	
 		writer.write(fout, value);
 		fout.close();

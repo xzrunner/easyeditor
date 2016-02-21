@@ -1,10 +1,12 @@
 #include "ShapeBuilder.h"
 #include "PackShape.h"
 
+#include <ee/Exception.h>
+
 #include <easytexture.h>
 #include <easyshape.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 ShapeBuilder::ShapeBuilder()

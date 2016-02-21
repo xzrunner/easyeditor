@@ -7,6 +7,11 @@
 #include "PSConfigMgr.h"
 #include "ComponentPanel.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/SliderCtrlOne.h>
+#include <ee/SliderCtrlTwo.h>
+#include <ee/LibraryPanel.h>
+
 #include <ps_2d.h>
 
 namespace eparticle2d

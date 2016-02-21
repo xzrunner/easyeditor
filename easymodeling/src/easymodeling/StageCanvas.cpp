@@ -2,6 +2,12 @@
 #include "StagePanel.h"
 #include "DrawUtils.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/Sprite.h>
+#include <ee/PrimitiveDraw.h>
+
 namespace emodeling
 {
 
@@ -37,7 +43,7 @@ void StageCanvas::DrawSprites() const
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
-		DrawUtils::drawBody(static_cast<libmodeling::Body*>(sprites[i]->GetUserData()), DrawUtils::e_default);
+		DrawUtils::DrawBody(static_cast<Body*>(sprites[i]->GetUserData()), DrawUtils::e_default);
 	}
 }
 
@@ -93,8 +99,8 @@ void StageCanvas::DrawLines() const
 
 void StageCanvas::DrawJointVisitor::Visit(ee::Object* object, bool& next)
 {
-	libmodeling::Joint* joint = static_cast<libmodeling::Joint*>(object);
-	joint->draw(libmodeling::Joint::e_default);
+	Joint* joint = static_cast<Joint*>(object);
+	joint->Draw(Joint::e_default);
 	next = true;
 }
 

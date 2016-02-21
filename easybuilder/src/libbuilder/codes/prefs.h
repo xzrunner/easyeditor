@@ -79,7 +79,7 @@
 #define mySTC_STYLE_BOLD 1
 #define mySTC_STYLE_ITALIC 2
 #define mySTC_STYLE_UNDERL 4
-#define mySTC_STYLE_HIDDEN 8
+#define mySTC_STYLE_H_IDDEN 8
 
 //----------------------------------------------------------------------------
 //! general folding types
@@ -87,8 +87,8 @@
 #define mySTC_FOLD_COMPACT 2
 #define mySTC_FOLD_PREPROC 4
 
-#define mySTC_FOLD_HTML 16
-#define mySTC_FOLD_HTMLPREP 32
+#define mySTC_FOLD_H_TML 16
+#define mySTC_FOLD_H_TMLPREP 32
 
 #define mySTC_FOLD_COMMENTPY 64
 #define mySTC_FOLD_QUOTESPY 128

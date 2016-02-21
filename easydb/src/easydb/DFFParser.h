@@ -1,7 +1,9 @@
 #ifndef _EASYDB_DISTANCE_FIELD_FONT_PARSER_H_
 #define _EASYDB_DISTANCE_FIELD_FONT_PARSER_H_
 
+#include <string>
 
+#include <stdint.h>
 
 namespace edb
 {

@@ -4,7 +4,10 @@
 #include "IPathfinding.h"
 #include "PathUtil.h"
 
-
+#include <ee/Rect.h>
+ 
+#include <vector>
+#include <map>
 
 namespace lr
 {

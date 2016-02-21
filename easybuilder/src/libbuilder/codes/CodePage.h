@@ -1,6 +1,5 @@
-
-#ifndef LIBBUILDER_CODE_PAGE_H
-#define LIBBUILDER_CODE_PAGE_H
+#ifndef _EASYBUILDER_CODE_PAGE_H_
+#define _EASYBUILDER_CODE_PAGE_H_
 
 #include <wx/stc/stc.h>
 
@@ -8,33 +7,35 @@ struct LanguageInfo;
 
 namespace ebuilder
 {
-	class CodePage : public wxStyledTextCtrl
-	{
-	public:
-		CodePage(wxWindow* parent, const wxString& name);
-		virtual ~CodePage() {}
 
-		const wxString& getName() const;
+class CodePage : public wxStyledTextCtrl
+{
+public:
+	CodePage(wxWindow* parent, const std::string& name);
+	virtual ~CodePage() {}
 
-	protected:
-		//! language/lexer
-		wxString DeterminePrefs (const wxString &filename);
-		bool InitializePrefs (const wxString &filename);
+	const std::string& getName() const;
 
-	private:
-		wxString m_name;
+protected:
+	//! language/lexer
+	wxString DeterminePrefs (const wxString& filename);
+	bool InitializePrefs (const std::string& filename);
 
-		// lanugage properties
-		const LanguageInfo* m_language;
+private:
+	std::string m_name;
 
-		// margin variables
-		int m_LineNrID;
-		int m_LineNrMargin;
-		int m_FoldingID;
-		int m_FoldingMargin;
-		int m_DividerID;
+	// lanugage properties
+	const LanguageInfo* m_language;
 
-	}; // CodePage
+	// margin variables
+	int m_LineNrID;
+	int m_LineNrMargin;
+	int m_FoldingID;
+	int m_FoldingMargin;
+	int m_DividerID;
+
+}; // CodePage
+
 }
 
-#endif // LIBBUILDER_CODE_PAGE_H
+#endif // _EASYBUILDER_CODE_PAGE_H_

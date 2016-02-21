@@ -1,47 +1,52 @@
+#ifndef _EASYMODELING_FIXTURE_H_
+#define _EASYMODELING_FIXTURE_H_
 
-#ifndef LIBMODELING_FIXTURE_H
-#define LIBMODELING_FIXTURE_H
+#include <ee/Color.h>
 
+#include <vector>
 
+namespace ee { class Shape; class Vector; class Rect; class Matrix; }
 
-namespace libmodeling
+namespace emodeling
 {
-	class Body;
 
-	class Fixture
-	{
-	public:
-		Fixture();
-		~Fixture();
+class Body;
 
-		bool isContain(const ee::Vector& pos) const;
-		bool isIntersect(const ee::Rect& rect) const;
+class Fixture
+{
+public:
+	Fixture();
+	~Fixture();
 
-		void draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
-			const ee::Colorf& cEdge) const;
+	bool IsContain(const ee::Vector& pos) const;
+	bool IsIntersect(const ee::Rect& rect) const;
 
-	private:
-		void transLocalToWorld(const std::vector<ee::Vector>& local, std::vector<ee::Vector>& world) const;
+	void Draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
+		const ee::Colorf& cEdge) const;
 
-	public:
-		wxString name;
+private:
+	void TransLocalToWorld(const std::vector<ee::Vector>& local, std::vector<ee::Vector>& world) const;
 
-		Body* body;
+public:
+	std::string m_name;
 
-		ee::Shape* shape;
+	Body* m_body;
 
-		float density;
+	ee::Shape* m_shape;
 
-		float friction;
-		float restitution;
+	float m_density;
 
-		bool isSensor;
+	float m_friction;
+	float m_restitution;
 
-		unsigned short categoryBits;
-		unsigned short maskBits;
-		short groupIndex;
+	bool m_is_sensor;
 
-	}; // Fixture
+	unsigned short m_category_bits;
+	unsigned short m_mask_bits;
+	short m_group_index;
+
+}; // Fixture
+
 }
 
-#endif // LIBMODELING_FIXTURE_H
+#endif // _EASYMODELING_FIXTURE_H_

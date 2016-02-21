@@ -1,31 +1,34 @@
+#ifndef _EASYMODELING_SETTING_VIEW_DLG_H_
+#define _EASYMODELING_SETTING_VIEW_DLG_H_
 
-#ifndef EMODELING_SETTING_VIEW_DLG_H
-#define EMODELING_SETTING_VIEW_DLG_H
+#include <wx/dialog.h>
 
-
+namespace ee { class StageCanvas; }
 
 namespace emodeling
 {
-	class SettingViewDlg : public wxDialog
-	{
-	public:
-		SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas);
 
-	private:
-		wxSizer* initDisplayTypePanel();
-		wxSizer* initStylePanel();
+class SettingViewDlg : public wxDialog
+{
+public:
+	SettingViewDlg(wxWindow* parent, ee::StageCanvas* canvas);
 
-		void onChangeDisplayType(wxCommandEvent& event);
-		void onChangeStyle(wxSpinEvent& event);
-		void onChangeDisplayTriangles(wxCommandEvent& event);
-		void onChangeDisplayPolygonBound(wxCommandEvent& event);
+private:
+	wxSizer* initDisplayTypePanel();
+	wxSizer* initStylePanel();
 
-	private:
-		ee::StageCanvas* m_canvas;
+	void onChangeDisplayType(wxCommandEvent& event);
+	void onChangeStyle(wxSpinEvent& event);
+	void onChangeDisplayTriangles(wxCommandEvent& event);
+	void onChangeDisplayPolygonBound(wxCommandEvent& event);
 
-		wxSpinCtrl* m_ctlPointSize;
+private:
+	ee::StageCanvas* m_canvas;
 
-	}; // SettingViewDlg
+	wxSpinCtrl* m_ctlPointSize;
+
+}; // SettingViewDlg
+
 }
 
-#endif // EMODELING_SETTING_VIEW_DLG_H
+#endif // _EASYMODELING_SETTING_VIEW_DLG_H_

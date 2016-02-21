@@ -7,12 +7,12 @@ namespace ee
 
 PasteSymbolRandomCMPT::PasteSymbolRandomCMPT(wxWindow* parent, const std::string& name, 
 											 wxWindow* stage_wnd, EditPanelImpl* stage, 
-											 MultiSpritesImpl* spritesImpl, 
-											 LibraryPanel* libraryPanel)
+											 MultiSpritesImpl* sprites_impl, 
+											 LibraryPanel* library)
 	: EditCMPT(parent, name, stage)
 {
-	m_random_widget = new PasteSymbolRandomWidget(this, libraryPanel);
-	m_editop = new PasteSymbolRandomOP(stage_wnd, stage, libraryPanel, m_random_widget);
+	m_random_widget = new PasteSymbolRandomWidget(this, library);
+	m_editop = new PasteSymbolRandomOP(stage_wnd, stage, library, m_random_widget);
 }
 
 wxSizer* PasteSymbolRandomCMPT::InitLayout()

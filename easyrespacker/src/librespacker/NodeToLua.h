@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_NODE_TO_LUA_H_
-#define _LIBRESPACKER_NODE_TO_LUA_H_
+#ifndef _EASYRESPACKER_NODE_TO_LUA_H_
+#define _EASYRESPACKER_NODE_TO_LUA_H_
 
 #include <string>
 
-namespace librespacker
+namespace erespacker
 {
 
 class NodeToLua
@@ -19,4 +19,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_NODE_TO_LUA_H_
+#endif // _EASYRESPACKER_NODE_TO_LUA_H_

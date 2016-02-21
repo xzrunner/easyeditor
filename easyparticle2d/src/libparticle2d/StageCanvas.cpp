@@ -2,6 +2,12 @@
 #include "StagePanel.h"
 #include "ParticleSystem.h"
 
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/Sprite.h>
+
 namespace eparticle2d
 {
 

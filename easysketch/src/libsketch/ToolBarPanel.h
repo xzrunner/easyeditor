@@ -1,9 +1,9 @@
-#ifndef _LIBSKETCH_TOOLBAR_PANEL_H_
-#define _LIBSKETCH_TOOLBAR_PANEL_H_
+#ifndef _EASYSKETCH_TOOLBAR_PANEL_H_
+#define _EASYSKETCH_TOOLBAR_PANEL_H_
 
+#include <ee/ToolbarPanel.h>
 
-
-namespace libsketch
+namespace esketch
 {
 
 class StagePanel;
@@ -20,4 +20,4 @@ protected:
 
 }
 
-#endif // _LIBSKETCH_TOOLBAR_PANEL_H_
+#endif // _EASYSKETCH_TOOLBAR_PANEL_H_

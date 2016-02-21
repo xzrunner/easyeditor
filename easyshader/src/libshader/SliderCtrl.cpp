@@ -2,6 +2,10 @@
 #include "Uniform.h"
 #include "Shader.h"
 
+#include <ee/StringHelper.h>
+#include <ee/ShaderMgr.h>
+#include <ee/panel_msg.h>
+
 namespace eshader
 {
 
@@ -59,7 +63,7 @@ void SliderCtrl::InitLayout(const std::string& title,
 		Connect(dst.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrl::OnSetValue));
 		sizer->Add(dst.slider);
 
-		dst.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(src.default), 
+		dst.text = new wxTextCtrl(this, wxID_ANY, ee::StringHelper::ToString(src.default), 
 			wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
 		Connect(dst.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrl::OnSetValue));
 		sizer->Add(dst.text);
@@ -77,7 +81,7 @@ void SliderCtrl::OnSetValue(wxScrollEvent& event)
 		const Item& item = m_items[i];
 		int ival = item.slider->GetValue();
 		float fval = ival * m_slider_accuracy;
-		item.text->SetValue(wxString::FromDouble(fval));
+		item.text->SetValue(ee::StringHelper::ToString(fval));
 	}
 
 	UpdateUniformValue();

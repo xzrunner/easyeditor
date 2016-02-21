@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_LIBRARY_PANEL_H_
 #define _EASYP3DINV_LIBRARY_PANEL_H_
 
-
+#include <ee/LibraryPanel.h>
 
 namespace ep3dinv
 {

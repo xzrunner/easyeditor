@@ -1,10 +1,13 @@
-#ifndef _LIBSKETCH_STAGE_CANVAS_H_
-#define _LIBSKETCH_STAGE_CANVAS_H_
-
+#ifndef _EASYSKETCH_STAGE_CANVAS_H_
+#define _EASYSKETCH_STAGE_CANVAS_H_
 
 #include <easy3d.h>
 
-namespace libsketch
+#include <ee/MultiSpritesImpl.h>
+
+namespace ee { class LibraryPanel; }
+
+namespace esketch
 {
 
 class StageCanvas : public e3d::StageCanvas
@@ -13,10 +16,10 @@ public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 		ee::MultiSpritesImpl* sprites_impl, ee::LibraryPanel* library);
 
-	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
-	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;
+	ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj) const;
+	ee::vec3 TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const;
 
-	vec3 TransPos3ScreenToDir(const ivec2& screen) const;
+	ee::vec3 TransPos3ScreenToDir(const ee::ivec2& screen) const;
 
 protected:
 	virtual void OnSize(int w, int h);
@@ -36,4 +39,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_STAGE_CANVAS_H_
+#endif // _EASYSKETCH_STAGE_CANVAS_H_

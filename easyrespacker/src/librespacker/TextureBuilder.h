@@ -1,5 +1,5 @@
-#ifndef _LIBRESPACKER_ETEXTURE_BUILDER_H_
-#define _LIBRESPACKER_ETEXTURE_BUILDER_H_
+#ifndef _EASYRESPACKER_ETEXTURE_BUILDER_H_
+#define _EASYRESPACKER_ETEXTURE_BUILDER_H_
 
 #include "INodeBuilder.h"
 
@@ -7,7 +7,7 @@
 
 namespace etexture { class Symbol; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -35,4 +35,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_ETEXTURE_BUILDER_H_
+#endif // _EASYRESPACKER_ETEXTURE_BUILDER_H_

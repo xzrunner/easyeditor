@@ -3,10 +3,14 @@
 #include "PackNodeFactory.h"
 #include "P3dSprBuilder.h"
 
+#include <ee/Visitor.h>
+#include <ee/trans_color.h>
+
 #include <easyparticle3d.h>
+
 #include <ps_3d.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 Particle3DBuilder::Particle3DBuilder()

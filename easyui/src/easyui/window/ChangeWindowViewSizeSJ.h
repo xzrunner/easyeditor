@@ -1,7 +1,7 @@
 #ifndef _EASYUI_CHANGE_WINDOW_VIEW_SIZE_SJ_H_
 #define _EASYUI_CHANGE_WINDOW_VIEW_SIZE_SJ_H_
 
-
+#include <ee/Subject.h>
 
 namespace eui
 {

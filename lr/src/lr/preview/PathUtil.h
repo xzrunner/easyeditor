@@ -1,7 +1,10 @@
 #ifndef _LR_PREVIEW_PATH_UTIL_H_
 #define _LR_PREVIEW_PATH_UTIL_H_
 
+#include <ee/Vector.h>
 
+#include <functional>
+#include <set>
 
 namespace lr
 {

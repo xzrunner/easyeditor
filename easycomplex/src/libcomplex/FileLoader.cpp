@@ -5,12 +5,18 @@
 #include "LoadFromLua.h"
 #include "LoadFromBin.h"
 
+#include <ee/Config.h>
+#include <ee/EE_DTex.h>
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace ecomplex
 {
 
 //void Symbol::loadResources()
 //{
-//	bool use_dtex = ee::Config::Instance()->IsUseDTex();
+//	bool use_dtex = ee::Config::Instance()->AIsUseDTex();
 //	ee::DynamicTexAndFont* dtex = NULL;
 //	if (use_dtex) {
 //		dtex = ee::DynamicTexAndFont::Instance();
@@ -36,11 +42,11 @@ namespace ecomplex
 //
 //	m_use_render_cache = value["use_render_cache"].asBool();
 //
-// 	wxString dir = ee::FileHelper::getFileDir(m_filepath);
+// 	std::string dir = ee::FileHelper::getFileDir(m_filepath);
 //	int i = 0;
 //	Json::Value spriteValue = value["sprite"][i++];
 //	while (!spriteValue.isNull()) {
-//		wxString path = ee::FileHelper::GetAbsolutePath(dir, spriteValue["filepath"].asString());
+//		std::string path = ee::FileHelper::GetAbsolutePath(dir, spriteValue["filepath"].asString());
 //		Symbol* symbol = NULL;
 //		std::string real_filepath = path;
 //		try {
@@ -54,7 +60,7 @@ namespace ecomplex
 // 				Json::Value filepath_val = filepaths_val[j++];
 // 				while (!filepath_val.isNull() && !symbol) {
 //					real_filepath = filepath_val.asString();
-// 					wxString filepath = ee::FileHelper::GetAbsolutePath(dir, real_filepath);
+// 					std::string filepath = ee::FileHelper::GetAbsolutePath(dir, real_filepath);
 //					filepath_val = filepaths_val[j++];
 // 					try {
 // 						symbol = ee::SymbolMgr::Instance()->fetchSymbol(filepath);

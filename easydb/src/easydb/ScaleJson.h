@@ -27,8 +27,8 @@ public:
 private:
 	void Trigger(const std::string& dir, float scale, const std::string& sprite_filename) const;
 
-	void ScaleComplex(const wxString& filepath, float scale, const std::string& sprite_filename) const;
-	void ScaleAnim(const wxString& filepath, float scale, const std::string& sprite_filename) const;
+	void ScaleComplex(const std::string& filepath, float scale, const std::string& sprite_filename) const;
+	void ScaleAnim(const std::string& filepath, float scale, const std::string& sprite_filename) const;
 
 	void ScaleSprite(Json::Value& sprite_val, float scale) const;
 

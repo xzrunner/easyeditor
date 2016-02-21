@@ -1,9 +1,11 @@
 #include "FixSpriteColor.h"
 #include "check_params.h"
 
-#include <wx/filename.h>
-#include <fstream>
+#include <ee/Color.h>
+#include <ee/trans_color.h>
+#include <ee/FileHelper.h>
 
+#include <fstream>
 
 namespace edb
 {
@@ -33,7 +35,7 @@ void FixSpriteColor::Run(int argc, char *argv[])
 	Trigger(argv[2]);
 }
 
-bool FixSpriteColor::FixSprite(const wxString& filepath, Json::Value& sprite_val) const
+bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_val) const
 {
 	if (sprite_val["add color"].isNull()) {
 		return false;
@@ -55,9 +57,7 @@ void FixSpriteColor::Trigger(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			FixComplex(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {

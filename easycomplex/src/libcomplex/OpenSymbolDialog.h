@@ -1,7 +1,9 @@
-#ifndef _EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
-#define _EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
+#ifndef _EASY_EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
+#define _EASY_EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
 
+namespace ee { class EditPanelImpl; class MultiSpritesImpl; class Sprite; }
 
+class wxWindow;
 
 namespace ecomplex
 {
@@ -25,4 +27,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_
+#endif // _EASY_EASYCOMPLEX_OPEN_SYMBOL_DIALOG_H_

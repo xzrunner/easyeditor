@@ -1,5 +1,6 @@
 #include "PackageMgr.h"
 
+#include <ee/StringHelper.h>
 
 #include <dtex.h>
 

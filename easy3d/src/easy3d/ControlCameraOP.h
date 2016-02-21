@@ -1,9 +1,8 @@
-#ifndef _E3D_CONTROL_CAMERA_OP_H_
-#define _E3D_CONTROL_CAMERA_OP_H_
+#ifndef _EASY3D_CONTROL_CAMERA_OP_H_
+#define _EASY3D_CONTROL_CAMERA_OP_H_
 
-
-
-#include "Vector.h"
+#include <ee/EditOP.h>
+#include <ee/Vector3D.h>
 
 namespace e3d
 {
@@ -23,10 +22,10 @@ public:
 private:
 	StageCanvas* m_canvas;
 
-	ivec2 m_last_pos;
+	ee::ivec2 m_last_pos;
 
 }; // ControlCameraOP
 
 }
 
-#endif // _E3D_CONTROL_CAMERA_OP_H_
+#endif // _EASY3D_CONTROL_CAMERA_OP_H_

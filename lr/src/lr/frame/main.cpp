@@ -3,6 +3,9 @@
 #include "Task.h"
 #include "config.h"
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+
 #include <easytexture.h>
 #include <easycomplex.h>
 #include <easyshape.h>
@@ -24,8 +27,8 @@ static void InitSymbolCreators()
 	ee::SymbolFactory::RegisterCreator(eshape::FILE_TAG, &eshape::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eshape::FILE_TAG, &eshape::Sprite::Create);
 
-	ee::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
+	ee::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);

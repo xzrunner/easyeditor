@@ -3,7 +3,13 @@
 
 #include "LoadAdapter.h"
 
+#include <ee/ToolbarPanel.h>
+#include <ee/UICallback.h>
+#include <ee/Observer.h>
 
+#include <wx/dnd.h>
+
+namespace ee { class LibraryPanel; class Symbol; class Image; class SliderCtrl; }
 
 namespace eparticle3d
 {

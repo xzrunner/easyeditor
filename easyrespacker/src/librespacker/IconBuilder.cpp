@@ -6,9 +6,11 @@
 #include "IPackNode.h"
 #include "PackPicture.h"
 
+#include <ee/Visitor.h>
+
 #include <easyicon.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 IconBuilder::IconBuilder()

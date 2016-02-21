@@ -1,10 +1,13 @@
 #ifndef _SG_STAGE_PANEL_H_
 #define _SG_STAGE_PANEL_H_
 
-
-
 #include "BuildingCfg.h"
 #include "CheckerBoard.h"
+
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+
+namespace ee { Visitor; }
 
 namespace sg
 {
@@ -16,6 +19,12 @@ class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		ee::LibraryPanel* library);
+
+	//
+	// MultiSpritesImpl interface
+	//
+	virtual void TraverseSprites(ee::Visitor& visitor, 
+		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
 	void TransCoordsToGridPos(const ee::Vector& pos, int& row, int& col) const;
 	void TransGridPosToCoords(int row, int col, ee::Vector& pos) const;

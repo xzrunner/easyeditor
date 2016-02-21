@@ -5,6 +5,9 @@
 
 #include <ps_2d.h>
 
+#include <ee/Sprite.h>
+#include <ee/SpriteFactory.h>
+
 namespace eparticle2d
 {
 
@@ -15,7 +18,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& sprite)
-	: Sprite(sprite)
+	: ee::Sprite(sprite)
 	, m_symbol(sprite.m_symbol)
 	, m_ps(NULL)
 {
@@ -79,7 +82,7 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 
 void Sprite::Load(const Json::Value& val)
 {
-	Sprite::Load(val);
+	ee::Sprite::Load(val);
 
 	const Json::Value& p_val = val["particle2d"];
 	m_ps->SetLoop(p_val["loop"].asBool());
@@ -88,7 +91,7 @@ void Sprite::Load(const Json::Value& val)
 
 void Sprite::Store(Json::Value& val) const
 {
-	Sprite::Store(val);
+	ee::Sprite::Store(val);
 
 	Json::Value p_val;
 	const p2d_emitter* et = m_ps->GetEmitter();

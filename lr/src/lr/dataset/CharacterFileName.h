@@ -1,7 +1,7 @@
 #ifndef _LR_CHARACTER_FILE_NAME_H_
 #define _LR_CHARACTER_FILE_NAME_H_
 
-
+#include <string>
 
 namespace lr
 {
@@ -33,7 +33,7 @@ public:
 	std::string GetOutputName() const;
 
 	bool FieldSame(const CharacterFileName& name, FieldType field) const {
-		m_fields[field] == name.m_filepath[field];
+		m_fields[field] == name.m_fields[field];
 	}
 	bool FieldSameExcept(const CharacterFileName& name, FieldType field) const;
 

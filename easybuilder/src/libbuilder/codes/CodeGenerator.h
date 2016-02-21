@@ -1,80 +1,81 @@
-
-#ifndef LIBBUILDER_CODE_GENERATOR_H
-#define LIBBUILDER_CODE_GENERATOR_H
+#ifndef _EASYBUILDER_CODE_GENERATOR_H_
+#define _EASYBUILDER_CODE_GENERATOR_H_
 
 #include <vector>
 #include <string>
 
 namespace ebuilder
 {
-	class CodeNode
-	{
-	public:
-		virtual ~CodeNode() {}
 
-		virtual bool existLine(const std::string& line) const = 0;
+class CodeNode
+{
+public:
+	virtual ~CodeNode() {}
 
-		virtual void toText(std::string& text) const = 0;
-	};
+	virtual bool existLine(const std::string& line) const = 0;
 
-	class CodeLine : public CodeNode
-	{
-	public:
-		CodeLine(const std::string& line) : str(line) {}
+	virtual void toText(std::string& text) const = 0;
+};
 
-		virtual bool existLine(const std::string& line) const {
-			return str == line;
-		}
+class CodeLine : public CodeNode
+{
+public:
+	CodeLine(const std::string& line) : str(line) {}
 
-		virtual void toText(std::string& text) const {
-			text += str + "\n";
-		}
+	virtual bool existLine(const std::string& line) const {
+		return str == line;
+	}
 
-	private:
-		std::string str;
-	};
+	virtual void toText(std::string& text) const {
+		text += str + "\n";
+	}
 
-	class CodeBlock : public CodeNode
-	{
-	public:
-		virtual ~CodeBlock();
+private:
+	std::string str;
+};
 
-		virtual bool existLine(const std::string& line) const;
+class CodeBlock : public CodeNode
+{
+public:
+	virtual ~CodeBlock();
 
-		virtual void toText(std::string& text) const;
+	virtual bool existLine(const std::string& line) const;
 
-		void push_back(const CodeNode* node) {
-			children.push_back(node);
-		}
+	virtual void toText(std::string& text) const;
 
-		void setHeader(const std::string& header) {
-			m_header = header;
-		}
+	void push_back(const CodeNode* node) {
+		children.push_back(node);
+	}
 
-	private:
-		std::vector<const CodeNode*> children;
+	void setHeader(const std::string& header) {
+		m_header = header;
+	}
 
-		std::string m_header;
-	};
+private:
+	std::vector<const CodeNode*> children;
 
-	class CodeGenerator
-	{
-	public:
-		void line(const std::string& s = "");
-		void block(CodeGenerator& gen);
+	std::string m_header;
+};
 
-		bool existLine(const std::string& line) const;
+class CodeGenerator
+{
+public:
+	void line(const std::string& s = "");
+	void block(CodeGenerator& gen);
 
-		void tab();
-		void detab();
+	bool existLine(const std::string& line) const;
 
-		std::string toText() const;
+	void tab();
+	void detab();
 
-	private:
-		CodeBlock m_block;
+	std::string toText() const;
 
-		std::string m_header;
-	};
+private:
+	CodeBlock m_block;
+
+	std::string m_header;
+};
+
 }
 
-#endif // LIBBUILDER_CODE_GENERATOR_H
+#endif // _EASYBUILDER_CODE_GENERATOR_H_

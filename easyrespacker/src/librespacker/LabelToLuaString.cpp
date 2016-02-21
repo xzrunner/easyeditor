@@ -1,10 +1,12 @@
 #include "LabelToLuaString.h"
 
+#include <ee/trans_color.h>
+
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void LabelToLuaString::Pack(const PackLabel* label, ebuilder::CodeGenerator& gen)

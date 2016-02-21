@@ -1,7 +1,13 @@
 #include "UIList.h"
 #include "widget_id.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Visitor.h>
+#include <ee/StringHelper.h>
+
 #include <easycomplex.h>
+
+#include <algorithm>
 
 namespace eui
 {
@@ -132,8 +138,8 @@ void UIList::StoreToFile(const char* filename) const
 	// ui
 	std::string ui_path = filename;
 	Json::Value value;
-	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path).ToStdString();
-	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path).ToStdString();
+	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path);
+	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path);
 	value["type"] = get_widget_desc(ID_LIST);
 	value["horizontal"] = m_horizontal;
 	value["vertical"] = m_vertical;

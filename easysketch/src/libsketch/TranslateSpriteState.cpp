@@ -2,7 +2,10 @@
 #include "Sprite.h"
 #include "StagePanel.h"
 
-namespace libsketch
+#include <ee/SpriteSelection.h>
+#include <ee/panel_msg.h>
+
+namespace esketch
 {
 
 TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
@@ -12,17 +15,17 @@ TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
 {
 }
 
-void TranslateSpriteState::OnMousePress(const ivec2& pos)
+void TranslateSpriteState::OnMousePress(const ee::ivec2& pos)
 {
 	m_first_pos = m_last_pos = pos;
 }
 
-void TranslateSpriteState::OnMouseRelease(const ivec2& pos)
+void TranslateSpriteState::OnMouseRelease(const ee::ivec2& pos)
 {
 	// todo history
 }
 
-void TranslateSpriteState::OnMouseMove(const ivec2& pos)
+void TranslateSpriteState::OnMouseMove(const ee::ivec2& pos)
 {
 	if (m_selection.IsEmpty()) {
 		return;
@@ -34,7 +37,7 @@ void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
+void TranslateSpriteState::Translate(const ee::ivec2& first, const ee::ivec2& curr)
 {
 	m_selection.Traverse(Visitor(m_stage, first, curr));
 }
@@ -48,9 +51,9 @@ Visit(ee::Object* object, bool& next)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 
-	const vec3& old = sprite->GetPos3();
-	vec3 last = m_stage->TransPos3ScreenToProject(m_last, old.z);
-	vec3 curr = m_stage->TransPos3ScreenToProject(m_curr, old.z);
+	const ee::vec3& old = sprite->GetPos3();
+	ee::vec3 last = m_stage->TransPos3ScreenToProject(m_last, old.z);
+	ee::vec3 curr = m_stage->TransPos3ScreenToProject(m_curr, old.z);
 	sprite->Translate3(curr - last);
 
 	next = true;

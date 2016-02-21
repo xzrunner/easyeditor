@@ -1,10 +1,10 @@
 #include "TPAdapter.h"
 
+#include <ee/FileHelper.h>
+
 #include <fstream>
 
-
-
-namespace libcoco
+namespace ecoco
 {
 namespace epd
 {
@@ -23,7 +23,7 @@ void TPAdapter::Load(const char* filename)
 	m_height = value["meta"]["size"]["h"].asInt();
 
 	std::string scale = value["meta"]["scale"].asString();
-	m_invscale = atof(scale.c_str());
+	m_invscale = static_cast<float>(atof(scale.c_str()));
 
 	std::string app = value["meta"]["app"].asString();
 	m_is_easydb = app.compare("easydb") == 0;
@@ -41,12 +41,8 @@ void TPAdapter::Load(const char* filename)
 void TPAdapter::Load(const Json::Value& value, Entry& entry)
 {
 	std::string filepath = value["filename"].asString();
-
-	wxFileName filename(filepath);
-	filename.MakeAbsolute(m_src_data_dir);
-	filename.Normalize();
-	filepath = ee::FileHelper::FormatFilepath(filename.GetFullPath().ToStdString());
-
+	filepath = ee::FileHelper::GetAbsolutePath(m_src_data_dir, filepath);
+	filepath = ee::FileHelper::FormatFilepath(filepath);
 	entry.filename = filepath;
 
 	Load(value["frame"], entry.frame);

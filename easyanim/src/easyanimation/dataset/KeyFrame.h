@@ -1,9 +1,9 @@
 #ifndef _EASYANIM_KEY_FRAME_H_
 #define _EASYANIM_KEY_FRAME_H_
 
-
-
 #include "SkeletonData.h"
+
+#include <ee/Object.h>
 
 namespace eanim
 {

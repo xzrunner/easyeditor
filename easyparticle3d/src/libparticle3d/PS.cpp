@@ -5,6 +5,11 @@
 #include <ps_3d_sprite.h>
 #include <ps_3d_buffer.h>
 
+#include <ee/SpriteRenderer.h>
+
+#include <time.h>
+#include <assert.h>
+
 namespace eparticle3d
 {
 

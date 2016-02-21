@@ -1,13 +1,13 @@
-#ifndef _LIBCOCO_EPD_TP_PARSER_H_
-#define _LIBCOCO_EPD_TP_PARSER_H_
-
-
+#ifndef _ECOCO_EPD_TP_PARSER_H_
+#define _ECOCO_EPD_TP_PARSER_H_
 
 #include "TPAdapter.h"
 #include "TextureMgr.h"
 #include "../SymbolDependanceSorter.h"
 
-namespace libcoco
+#include <ee/Vector.h>
+
+namespace ecoco
 {
 namespace epd
 {
@@ -67,4 +67,4 @@ private:
 }
 }
 
-#endif // _LIBCOCO_EPD_TP_PARSER_H_
+#endif // _ECOCO_EPD_TP_PARSER_H_

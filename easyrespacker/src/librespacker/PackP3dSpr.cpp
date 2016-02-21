@@ -6,7 +6,7 @@
 #include "P3dSprToBin.h"
 #include "P3dSprFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 PackP3dSpr::PackP3dSpr(int id)

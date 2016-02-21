@@ -15,8 +15,8 @@ class Sprite;
 class PasteSymbolTileOP : public PasteSymbolOP
 {
 public:
-	PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
-		LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt);
+	PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl, 
+		LibraryPanel* library, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);

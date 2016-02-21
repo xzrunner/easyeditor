@@ -1,11 +1,14 @@
 #include "PictureToLuaString.h"
 #include "typedef.h"
 
+#include <ee/TexturePacker.h>
+#include <ee/Image.h>
+
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void PictureToLuaString::Pack(const PackPicture* pic, 

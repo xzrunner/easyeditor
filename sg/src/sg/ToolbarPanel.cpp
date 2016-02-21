@@ -5,6 +5,13 @@
 #include "BuildingCfg.h"
 #include "config.h"
 
+#include <ee/UniversalCMPT.h>
+#include <ee/PasteSpriteCMPT.h>
+#include <ee/StringHelper.h>
+#include <ee/panel_msg.h>
+
+#include <wx/spinctrl.h>
+
 namespace sg
 {
 
@@ -14,10 +21,10 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, ee::LibraryPanel* library,
 	: ee::ToolbarPanel(parent, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	AddChild(new ee::UniversalCMPT(this, wxT("paste"), stage->GetStageImpl(), 
+	AddChild(new ee::UniversalCMPT(this, "paste", stage->GetStageImpl(), 
 		new PasteSymbolOP(stage, library)));
-	AddChild(new ee::PasteSpriteCMPT(this, wxT("batch"), stage, stage->GetStageImpl(), stage));
-	AddChild(new ArrangeSpriteCMPT(this, wxT("arrange"), property, stage));
+	AddChild(new ee::PasteSpriteCMPT(this, "batch", stage, stage->GetStageImpl(), stage));
+	AddChild(new ArrangeSpriteCMPT(this, "arrange", property, stage));
 
 	SetSizer(InitLayout());	
 
@@ -38,7 +45,7 @@ void ToolbarPanel::initOptSetting(wxSizer* sizer)
 {
 	wxChoice* choice = new wxChoice(this, wxID_ANY);
 	for (int i = 1; i <= 10; ++i) {
-		std::string str = "Townhall " + wxString::FromDouble(i);
+		std::string str = "Townhall " + ee::StringHelper::ToString(i);
 		choice->Append(str);	
 	}
 	sizer->Add(choice, 0, wxALIGN_LEFT);

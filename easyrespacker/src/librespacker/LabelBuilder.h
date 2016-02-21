@@ -1,11 +1,11 @@
-//#ifndef _LIBRESPACKER_LABEL_BUILDER_H_
-//#define _LIBRESPACKER_LABEL_BUILDER_H_
+//#ifndef _EASYRESPACKER_LABEL_BUILDER_H_
+//#define _EASYRESPACKER_LABEL_BUILDER_H_
 //
 //#include "INodeBuilder.h"
 //
 //
 //
-//namespace librespacker
+//namespace erespacker
 //{
 //
 //class IPackNode;
@@ -30,4 +30,4 @@
 //
 //}
 //
-//#endif // _LIBRESPACKER_LABEL_BUILDER_H_
+//#endif // _EASYRESPACKER_LABEL_BUILDER_H_

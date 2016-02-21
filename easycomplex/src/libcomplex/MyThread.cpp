@@ -1,6 +1,6 @@
 #include "MyThread.h"
 
-
+#include <ee/ImageLoader.h>
 
 DEFINE_EVENT_TYPE(wxEVT_MYTHREAD)
 MyThread::MyThread() : wxThread(wxTHREAD_DETACHED)

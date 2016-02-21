@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_PREVIEW_OP_H_
 #define _EASYANIM_PREVIEW_OP_H_
 
+#include <ee/ZoomViewOP.h>
 
+namespace ee { class PlayControl; }
 
 namespace eanim
 {

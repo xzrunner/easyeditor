@@ -1,8 +1,11 @@
 #ifndef _EASYSHADOW_TASK_H_
 #define _EASYSHADOW_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class LibraryPanel; }
 
 namespace eshadow
 {

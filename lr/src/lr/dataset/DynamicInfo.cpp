@@ -1,6 +1,9 @@
 #include "DynamicInfo.h"
 
+#include <ee/Exception.h>
+#include <ee/StringHelper.h>
 
+#include <vector>
 
 namespace lr
 {

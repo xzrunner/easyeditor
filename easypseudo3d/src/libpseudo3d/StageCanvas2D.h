@@ -1,7 +1,7 @@
 #ifndef _EASYPSEUDO3D_STAGE_CANVAS_2D_H_
 #define _EASYPSEUDO3D_STAGE_CANVAS_2D_H_
 
-
+#include <ee/OrthoCanvas.h>
 
 namespace epseudo3d
 {

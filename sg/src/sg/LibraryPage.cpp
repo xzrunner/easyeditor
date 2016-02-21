@@ -1,5 +1,7 @@
 #include "LibraryPage.h"
 
+#include <ee/ImageSymbol.h>
+
 #include <easycomplex.h>
 
 namespace sg

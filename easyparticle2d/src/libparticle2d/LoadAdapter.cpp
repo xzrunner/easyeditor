@@ -1,6 +1,12 @@
 #include "LoadAdapter.h"
 
+#include <ee/Exception.h>
+#include <ee/Math2D.h>
+#include <ee/FileHelper.h>
+
 #include <ps_2d.h>
+
+#include <fstream>
 
 namespace eparticle2d
 {
@@ -21,61 +27,61 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	if (mode_type == P2D_MODE_GRAVITY) 
 	{
-		A.gravity.x				= value["gravity"]["x"].asDouble();
-		A.gravity.y				= value["gravity"]["y"].asDouble();
+		A.gravity.x				= static_cast<float>(value["gravity"]["x"].asDouble());
+		A.gravity.y				= static_cast<float>(value["gravity"]["y"].asDouble());
 
-		A.speed					= value["speed"]["center"].asDouble();
-		A.speed_var				= value["speed"]["offset"].asDouble();
+		A.speed					= static_cast<float>(value["speed"]["center"].asDouble());
+		A.speed_var				= static_cast<float>(value["speed"]["offset"].asDouble());
 
-		A.tangential_accel		= value["tangential_accel"]["center"].asDouble();
-		A.tangential_accel_var	= value["tangential_accel"]["offset"].asDouble();
+		A.tangential_accel		= static_cast<float>(value["tangential_accel"]["center"].asDouble());
+		A.tangential_accel_var	= static_cast<float>(value["tangential_accel"]["offset"].asDouble());
 
-		A.radial_accel			= value["radial_accel"]["center"].asDouble();
-		A.radial_accel_var		= value["radial_accel"]["offset"].asDouble();
+		A.radial_accel			= static_cast<float>(value["radial_accel"]["center"].asDouble());
+		A.radial_accel_var		= static_cast<float>(value["radial_accel"]["offset"].asDouble());
 
 		A.rotation_is_dir		= value["rotation_is_dir"].asBool();
 	}
 	else if (mode_type == P2D_MODE_RADIUS) 
 	{
-		B.start_radius			= value["start_radius"]["center"].asDouble();
-		B.start_radius_var		= value["start_radius"]["offset"].asDouble();
+		B.start_radius			= static_cast<float>(value["start_radius"]["center"].asDouble());
+		B.start_radius_var		= static_cast<float>(value["start_radius"]["offset"].asDouble());
 
-		B.end_radius			= value["end_radius"]["center"].asDouble();
-		B.end_radius_var		= value["end_radius"]["offset"].asDouble();
+		B.end_radius			= static_cast<float>(value["end_radius"]["center"].asDouble());
+		B.end_radius_var		= static_cast<float>(value["end_radius"]["offset"].asDouble());
 
-		B.direction_delta		= value["direction_delta"]["center"].asDouble();
-		B.direction_delta_var	= value["direction_delta"]["offset"].asDouble();		
+		B.direction_delta		= static_cast<float>(value["direction_delta"]["center"].asDouble());
+		B.direction_delta_var	= static_cast<float>(value["direction_delta"]["offset"].asDouble());		
 	}
 	else if (mode_type == P2D_MODE_SPD_COS) 
 	{
-		C.speed					= value["speed"]["center"].asDouble();
-		C.speed_var				= value["speed"]["offset"].asDouble();
+		C.speed					= static_cast<float>(value["speed"]["center"].asDouble());
+		C.speed_var				= static_cast<float>(value["speed"]["offset"].asDouble());
 
-		C.cos_amplitude			= value["cos_amplitude"]["center"].asDouble();
-		C.cos_amplitude_var		= value["cos_amplitude"]["offset"].asDouble();
+		C.cos_amplitude			= static_cast<float>(value["cos_amplitude"]["center"].asDouble());
+		C.cos_amplitude_var		= static_cast<float>(value["cos_amplitude"]["offset"].asDouble());
 
-		C.cos_frequency			= value["cos_frequency"]["center"].asDouble();
-		C.cos_frequency_var		= value["cos_frequency"]["offset"].asDouble();
+		C.cos_frequency			= static_cast<float>(value["cos_frequency"]["center"].asDouble());
+		C.cos_frequency_var		= static_cast<float>(value["cos_frequency"]["offset"].asDouble());
 	} 
 	else 
 	{
 		throw ee::Exception("LoadAdapter::Load unknown mode type.");
 	}
 
-	emission_time = value["emission_time"].asDouble() * 0.001f;
+	emission_time = static_cast<float>(value["emission_time"].asDouble() * 0.001f);
 
 	count = value["count"].asInt();
 
-	life				= value["life"]["center"].asDouble() * 0.001f;
-	life_var			= value["life"]["offset"].asDouble() * 0.001f;
+	life				= static_cast<float>(value["life"]["center"].asDouble() * 0.001f);
+	life_var			= static_cast<float>(value["life"]["offset"].asDouble() * 0.001f);
 
-	position.x			= value["position_x"]["center"].asDouble();
-	position_var.x		= value["position_x"]["offset"].asDouble();
-	position.y			= value["position_y"]["center"].asDouble();
-	position_var.y		= value["position_y"]["offset"].asDouble();
+	position.x			= static_cast<float>(value["position_x"]["center"].asDouble());
+	position_var.x		= static_cast<float>(value["position_x"]["offset"].asDouble());
+	position.y			= static_cast<float>(value["position_y"]["center"].asDouble());
+	position_var.y		= static_cast<float>(value["position_y"]["offset"].asDouble());
 
-	direction			= value["direction"]["center"].asDouble() * ee::TRANS_DEG_TO_RAD;
-	direction_var		= value["direction"]["offset"].asDouble() * ee::TRANS_DEG_TO_RAD;
+	direction			= static_cast<float>(value["direction"]["center"].asDouble() * ee::TRANS_DEG_TO_RAD);
+	direction_var		= static_cast<float>(value["direction"]["offset"].asDouble() * ee::TRANS_DEG_TO_RAD);
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	int idx = 0;

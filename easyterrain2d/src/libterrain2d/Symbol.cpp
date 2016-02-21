@@ -2,6 +2,12 @@
 #include "OceanMesh.h"
 #include "FileIO.h"
 
+#include <ee/ImageSymbol.h>
+#include <ee/ShaderMgr.h>
+#include <ee/FileHelper.h>
+
+#include <algorithm>
+
 namespace eterrain2d
 {
 
@@ -84,7 +90,7 @@ void Symbol::LoadResources()
 
 	Clear();
 
-	std::string dir = ee::FileHelper::GetFileDir(m_filepath).ToStdString();
+	std::string dir = ee::FileHelper::GetFileDir(m_filepath);
 	int i = 0;
 	Json::Value ocean_val = value["ocean"][i++];
 	while (!ocean_val.isNull()) {

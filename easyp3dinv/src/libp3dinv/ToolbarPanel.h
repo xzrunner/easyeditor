@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_TOOLBAR_PANEL_H_
 #define _EASYP3DINV_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
 
 namespace ep3dinv
 {

@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE2D_LIBRARY_PAGE_H_
 #define _EASYPARTICLE2D_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace eparticle2d
 {

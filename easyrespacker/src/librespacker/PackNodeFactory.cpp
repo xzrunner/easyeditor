@@ -1,6 +1,11 @@
 #include "PackNodeFactory.h"
 #include "PackUI.h"
 
+#include <ee/ImageSprite.h>
+#include <ee/Exception.h>
+#include <ee/FileHelper.h>
+#include <ee/FetchAllVisitor.h>
+
 // picture
 #include "ImageBuilder.h"
 #include "Scale9Builder.h"
@@ -44,7 +49,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 PackNodeFactory* PackNodeFactory::m_instance = NULL;
@@ -119,7 +124,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 	// animation
 	else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(spr)) {
 		node = m_complex_builder->Create(&complex->GetSymbol());
-	} else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(spr)) {
+	} else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(spr)) {
 		node = m_anim_builder->Create(&anim->GetSymbol());
 	} else if (const eterrain2d::Sprite* terr2d = dynamic_cast<const eterrain2d::Sprite*>(spr)) {
 		node = m_terrain2d_builder->Create(&terr2d->GetSymbol());
@@ -139,7 +144,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Sprite* spr)
 		throw ee::Exception("PackNodeFactory::Create unknown sprite type.");
 	}
 	
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()).ToStdString());
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, spr->GetSymbol().GetFilepath()));
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");
@@ -164,7 +169,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 	// animation
 	else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
 		node = m_complex_builder->Create(complex);
-	} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol)) {
+	} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol)) {
 		node = m_anim_builder->Create(anim);
 	} else if (const eterrain2d::Symbol* terr2d = dynamic_cast<const eterrain2d::Symbol*>(symbol)) {
 		node = m_terrain2d_builder->Create(terr2d);
@@ -184,7 +189,7 @@ const IPackNode* PackNodeFactory::Create(const ee::Symbol* symbol)
 		throw ee::Exception("PackNodeFactory::Create unknown symbol type.");
 	}
 
-	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, symbol->GetFilepath()).ToStdString());
+	node->SetFilepath(ee::FileHelper::GetRelativePath(m_files_dir, symbol->GetFilepath()));
 
 	if (node->GetSprID() > ANCHOR_ID) {
 		throw ee::Exception("PackNodeFactory::Create node id over ANCHOR_ID.");

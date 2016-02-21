@@ -2,6 +2,11 @@
 #include "MeshShape.h"
 #include "config.h"
 
+#include <ee/Math2D.h>
+#include <ee/Triangulation.h>
+#include <ee/ShaderMgr.h>
+#include <ee/ImageSymbol.h>
+
 namespace eterrain2d
 {
 

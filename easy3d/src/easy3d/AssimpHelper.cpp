@@ -74,7 +74,7 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* material, M
 	LoadMaterial(ai_mesh, material, mesh.material);
 
 	// Create the VBO for the vertices.
-	std::vector<vec3> vertices;
+	std::vector<ee::vec3> vertices;
 	bool has_texcoords = ai_mesh->HasTextureCoords(0);
 	if (has_texcoords) {
 		vertices.reserve(ai_mesh->mNumVertices * 3);
@@ -83,24 +83,26 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* material, M
 	}
 	for (int i = 0; i < ai_mesh->mNumVertices; ++i) {
 		const aiVector3D& p = ai_mesh->mVertices[i];
-		vec3 _p(p.x, p.y, p.z);
+		ee::vec3 _p(p.x, p.y, p.z);
 		vertices.push_back(_p);
 		aabb.Combine(_p);
 
 		const aiVector3D& n = ai_mesh->mNormals[i];
-		vertices.push_back(vec3(n.x, n.y, n.z));
+		vertices.push_back(ee::vec3(n.x, n.y, n.z));
 
 		if (has_texcoords) {
 			const aiVector3D& t = ai_mesh->mTextureCoords[0][i];
-			vertices.push_back(vec3(t.x, t.y, t.z));
+			vertices.push_back(ee::vec3(t.x, t.y, t.z));
 		}
 	}
 
-	glGenBuffers(1, &mesh.vertex_buffer);
+	GLuint buf_id;
+	glGenBuffers(1, &buf_id);
+	mesh.vertex_buffer = buf_id;
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
 	glBufferData(
 		GL_ARRAY_BUFFER,
-		vertices.size() * sizeof(vec3),
+		vertices.size() * sizeof(ee::vec3),
 		&vertices[0].x,
 		GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -113,7 +115,8 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* material, M
 			indices.push_back(face.mIndices[j]);
 		}
 	}
-	glGenBuffers(1, &mesh.index_buffer);
+	glGenBuffers(1, &buf_id);
+	mesh.index_buffer = buf_id;
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.index_buffer);
 	glBufferData(
 		GL_ELEMENT_ARRAY_BUFFER,

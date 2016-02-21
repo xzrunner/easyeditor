@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-
+namespace ee { class Snapshoot; class Image; class Vector; }
 
 namespace edb
 {

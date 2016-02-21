@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_PICTURE_H_
-#define _LIBRESPACKER_PACK_PICTURE_H_
+#ifndef _EASYRESPACKER_PACK_PICTURE_H_
+#define _EASYRESPACKER_PACK_PICTURE_H_
 
 #include "IPackNode.h"
 
+#include <ee/Vector.h>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 class PackPicture : public IPackNode
@@ -48,4 +48,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_PICTURE_H_
+#endif // _EASYRESPACKER_PACK_PICTURE_H_

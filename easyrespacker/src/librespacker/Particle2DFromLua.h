@@ -1,10 +1,10 @@
-#ifndef _LIBRESPACKER_PARTICLE2D_FROM_LUA_H_
-#define _LIBRESPACKER_PARTICLE2D_FROM_LUA_H_
+#ifndef _EASYRESPACKER_PARTICLE2D_FROM_LUA_H_
+#define _EASYRESPACKER_PARTICLE2D_FROM_LUA_H_
 
 #include "NodeFromLua.h"
 #include "PackParticle2D.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class Particle2DFromLua : public NodeFromLua
@@ -20,4 +20,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PARTICLE2D_FROM_LUA_H_
+#endif // _EASYRESPACKER_PARTICLE2D_FROM_LUA_H_

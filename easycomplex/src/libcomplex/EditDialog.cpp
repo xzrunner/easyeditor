@@ -6,6 +6,11 @@
 #include "Symbol.h"
 #include "ViewlistListImpl.h"
 
+#include <ee/ViewlistPanel.h>
+#include <ee/ConfirmDialog.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Sprite.h>
+
 #include <wx/splitter.h>
 
 namespace ecomplex

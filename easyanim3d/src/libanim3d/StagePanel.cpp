@@ -1,6 +1,9 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/SelectSpritesOP.h>
+
 namespace eanim3d
 {
 

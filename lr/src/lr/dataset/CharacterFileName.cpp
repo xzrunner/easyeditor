@@ -1,5 +1,7 @@
 #include "CharacterFileName.h"
 
+#include <ee/FileHelper.h>
+
 namespace lr
 {
 

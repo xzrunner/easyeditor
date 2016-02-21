@@ -1,9 +1,11 @@
 #ifndef _EASYANIM_TWEEN_UTILITY_H_
 #define _EASYANIM_TWEEN_UTILITY_H_
 
+#include <vector>
 
+namespace ee { class Sprite; }
 
-namespace libanim
+namespace eanim
 {
 
 class TweenUtility

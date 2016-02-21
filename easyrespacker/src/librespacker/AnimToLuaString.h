@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_ANIM_TO_LUA_STRING_H_
-#define _LIBRESPACKER_ANIM_TO_LUA_STRING_H_
+#ifndef _EASYRESPACKER_ANIM_TO_LUA_STRING_H_
+#define _EASYRESPACKER_ANIM_TO_LUA_STRING_H_
 
 #include "PackAnimation.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class AnimToLuaString
@@ -18,4 +18,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_ANIM_TO_LUA_STRING_H_
+#endif // _EASYRESPACKER_ANIM_TO_LUA_STRING_H_

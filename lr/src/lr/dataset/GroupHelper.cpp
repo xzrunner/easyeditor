@@ -2,6 +2,9 @@
 
 #include "view/typedef.h"
 
+#include <ee/StringHelper.h>
+#include <ee/Matrix.h>
+
 #include <easycomplex.h>
 
 namespace lr

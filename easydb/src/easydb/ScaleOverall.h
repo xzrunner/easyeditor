@@ -6,7 +6,7 @@
 #include <wx/wx.h>
 #include <map>
 
-namespace d2d { class Snapshoot; class Vector; }
+namespace ee { class Snapshoot; class Vector; }
 namespace Json { class Value; }
 
 namespace edb

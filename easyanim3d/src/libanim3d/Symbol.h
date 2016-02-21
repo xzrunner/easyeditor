@@ -1,6 +1,7 @@
 #ifndef _EASYANIM3D_SYMBOL_H_
 #define _EASYANIM3D_SYMBOL_H_
 
+#include <ee/Symbol.h>
 
 #include <easy3d.h>
 

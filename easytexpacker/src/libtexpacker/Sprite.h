@@ -1,9 +1,9 @@
-#ifndef _LIBTEXPACKER_SPRITE_H_
-#define _LIBTEXPACKER_SPRITE_H_
+#ifndef _EASYTEXPACKER_SPRITE_H_
+#define _EASYTEXPACKER_SPRITE_H_
 
 #include <algorithm>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 struct Sprite
@@ -45,4 +45,4 @@ struct SpriteCmp
 
 }
 
-#endif // _LIBTEXPACKER_SPRITE_H_
+#endif // _EASYTEXPACKER_SPRITE_H_

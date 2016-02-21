@@ -1,9 +1,9 @@
 #include "LuaDataHelper.h"
 
 extern "C" {
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
+	#include <lua.h>
+	#include <lualib.h>
+	#include <lauxlib.h>
 };
 
 namespace epbin
@@ -20,7 +20,7 @@ std::string LuaDataHelper::GetStringField(lua_State* L, const char* name)
 int LuaDataHelper::GetIntField(lua_State* L, const char* name)
 {
 	lua_getfield(L, -1, name);
-	int id = lua_tointeger(L, -1);
+	int id = static_cast<int>(lua_tointeger(L, -1));
 	lua_pop(L,1);
 	return id;
 }
@@ -36,7 +36,7 @@ double LuaDataHelper::GetDoubleField(lua_State* L, const char* name)
 bool LuaDataHelper::GetBoolField(lua_State* L, const char* name)
 {
 	lua_getfield(L, -1, name);
-	bool ret = (bool)lua_toboolean(L, -1);
+	bool ret = static_cast<bool>(lua_toboolean(L, -1));
 	lua_pop(L, 1);
 	return ret;
 }

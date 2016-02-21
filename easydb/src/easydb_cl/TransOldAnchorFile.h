@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-
+namespace ee { class Sprite; }
 
 namespace edb
 {

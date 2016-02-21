@@ -5,14 +5,14 @@
 #include "trans_ejoy2d_data.lua"
 
 extern "C" {
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
+	#include <lua.h>
+	#include <lualib.h>
+	#include <lauxlib.h>
 };
 
 #include <iostream>
 
-namespace librespacker
+namespace erespacker
 {
 
 void UnpackFromLua::Unpack(const std::string& filepath, 

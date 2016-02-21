@@ -1,7 +1,7 @@
 #ifndef _EASYSHADOW_SYMBOL_H_
 #define _EASYSHADOW_SYMBOL_H_
 
-
+#include <ee/Symbol.h>
 
 namespace eshadow
 {

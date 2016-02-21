@@ -7,7 +7,7 @@
 
 #include "BruteForceTex.h"
 
-namespace libterrain3d
+namespace eterrain3d
 {
 
 class DemoBruteForceTex : public IDemo

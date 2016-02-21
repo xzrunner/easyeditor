@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_QUATERNION_INL_
 #define _EASYEDITOR_QUATERNION_INL_
 
+#include "Math2D.h"
+
 namespace ee
 {
 
@@ -117,17 +119,23 @@ bool QuaternionT<T>::operator!=(const QuaternionT<T>& q) const
 	return !(*this == q);
 }
 
+template <typename T>
+QuaternionT<T> QuaternionT<T>::operator - () const
+{
+	return QuaternionT<T>(-x, -y, -z, -w);
+}
+
 // Compute the quaternion that rotates from a to b, avoiding numerical instability.
 // Taken from "The Shortest Arc Quaternion" by Stan Melax in "Game Programming Gems".
 template <typename T>
 inline QuaternionT<T> QuaternionT<T>::CreateFromVectors(const Vector3<T>& v0, const Vector3<T>& v1)
 {
 	if (v0 == -v1)
-		return QuaternionT<T>::CreateFromAxisAngle(vec3(1, 0, 0), Pi);
+		return QuaternionT<T>::CreateFromAxisAngle(vec3(1, 0, 0), PI);
 
 	Vector3<T> c = v0.Cross(v1);
 	T d = v0.Dot(v1);
-	T s = std::sqrt((1 + d) * 2);
+	T s = sqrt((1 + d) * 2);
 
 	QuaternionT<T> q;
 	q.x = c.x / s;
@@ -141,8 +149,8 @@ template <typename T>
 inline QuaternionT<T>  QuaternionT<T>::CreateFromAxisAngle(const Vector3<T>& axis, float radians)
 {
 	QuaternionT<T> q;
-	q.w = std::cos(radians / 2);
-	q.x = q.y = q.z = std::sin(radians / 2);
+	q.w = cos(radians / 2);
+	q.x = q.y = q.z = sin(radians / 2);
 	q.x *= axis.x;
 	q.y *= axis.y;
 	q.z *= axis.z;
@@ -152,7 +160,7 @@ inline QuaternionT<T>  QuaternionT<T>::CreateFromAxisAngle(const Vector3<T>& axi
 template <typename T>
 inline void QuaternionT<T>::Normalize()
 {
-	*this = Scaled(1 / std::sqrt(Dot(*this)));
+	*this = Scaled(1 / sqrt(Dot(*this)));
 }
 
 template <typename T>

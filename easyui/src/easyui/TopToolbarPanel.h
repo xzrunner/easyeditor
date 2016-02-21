@@ -1,7 +1,11 @@
 #ifndef _EASYUI_TOP_TOOLBAR_PANEL_H_
 #define _EASYUI_TOP_TOOLBAR_PANEL_H_
 
+#include <wx/panel.h>
 
+#include <vector>
+
+namespace ee { class ToolbarPanel; }
 
 namespace eui
 {

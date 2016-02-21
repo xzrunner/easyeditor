@@ -1,28 +1,29 @@
-
-#ifndef LIBMODELING_GEAR_JOINT_H
-#define LIBMODELING_GEAR_JOINT_H
+#ifndef _EASYMODELING_GEAR_JOINT_H_
+#define _EASYMODELING_GEAR_JOINT_H_
 
 #include "Joint.h"
 
-namespace libmodeling
+namespace emodeling
 {
-	class GearJoint : public Joint
-	{
-	public:
-		GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2);
 
-		virtual bool isContain(const ee::Vector& pos) const;
-		virtual bool isIntersect(const ee::Rect& rect) const;
+class GearJoint : public Joint
+{
+public:
+	GearJoint(Body* b0, Body* b1, Joint* j1, Joint* j2);
 
-		virtual void draw(DrawType type) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
 
-	public:
-		Joint* joint1;
-		Joint* joint2;
+	virtual void Draw(DrawType type) const;
 
-		float ratio;
+public:
+	Joint* m_joint1;
+	Joint* m_joint2;
 
-	}; // GearJoint
+	float m_ratio;
+
+}; // GearJoint
+
 }
 
-#endif // LIBMODELING_GEAR_JOINT_H
+#endif // _EASYMODELING_GEAR_JOINT_H_

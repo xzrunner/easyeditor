@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_EDIT_EKY_FRAMES_AOP_H_
 #define _EASYANIM_EDIT_EKY_FRAMES_AOP_H_
 
-
+#include <ee/AtomicOP.h>
 
 namespace eanim
 {

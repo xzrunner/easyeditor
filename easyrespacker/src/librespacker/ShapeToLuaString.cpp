@@ -1,11 +1,13 @@
 #include "ShapeToLuaString.h"
 #include "typedef.h"
 
+#include <ee/trans_color.h>
+
 #include <easybuilder.h>
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void ShapeToLuaString::Pack(const PackShape* shape, ebuilder::CodeGenerator& gen)

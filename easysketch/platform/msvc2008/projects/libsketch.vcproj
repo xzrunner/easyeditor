@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libsketch"
+	Name="5.libsketch"
 	ProjectGUID="{584F5852-C8C5-4381-8FE5-D0E76FB81B51}"
 	RootNamespace="libsketch"
 	Keyword="Win32Proj"

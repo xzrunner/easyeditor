@@ -1,7 +1,11 @@
 #include "BlockCompress.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+
 #include <easyimage.h>
+
+#include <wx/arrstr.h>
 
 namespace edb
 {
@@ -38,7 +42,7 @@ void BlockCompress::Trigger(const std::string& src_dir, const std::string& dst_d
 	ee::FileHelper::FetchAllFiles(src_dir, files);
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i], ee::FileType::e_image)) {
+		if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
 			filepaths.push_back(files[i].ToStdString());
 		}
 	}

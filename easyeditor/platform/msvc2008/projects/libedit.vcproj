@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\include\ee;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -585,6 +585,42 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="physics"
+				>
+				<File
+					RelativePath="..\..\..\source\edit\op\DragPhysicsOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\DragPhysicsOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\edit\op\PasteSymbolPhysicsOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\PasteSymbolPhysicsOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\edit\op\PasteSymbolPhysicsRandomOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\PasteSymbolPhysicsRandomOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\edit\op\UniversalArrangeOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\UniversalArrangeOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
@@ -658,6 +694,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\MousePositionCMPT.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="physics"
+				>
+				<File
+					RelativePath="..\..\..\source\edit\view\PasteSymbolPhysicsCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\PasteSymbolPhysicsCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\edit\view\UniversalArrangeCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\UniversalArrangeCMPT.h"
 					>
 				</File>
 			</Filter>

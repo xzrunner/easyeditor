@@ -3,6 +3,13 @@
 #include "TidCfg.h"
 #include "QueryWindowViewSizeSJ.h"
 
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/Camera.h>
+#include <ee/EE_DTex.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Config.h>
+#include <ee/style_config.h>
+
 namespace eui
 {
 namespace window

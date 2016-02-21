@@ -1,7 +1,7 @@
 #ifndef _EASYEJOY2D_LIBRARY_PAGE_H_
 #define _EASYEJOY2D_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace eejoy2d
 {

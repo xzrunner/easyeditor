@@ -1,6 +1,8 @@
 #include "Sprite.h"
 
-namespace libsketch
+#include <ee/SpriteFactory.h>
+
+namespace esketch
 {
 
 Sprite::Sprite()

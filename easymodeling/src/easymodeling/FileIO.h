@@ -1,27 +1,28 @@
+#ifndef _EASYMODELING_FILE_IO_H_
+#define _EASYMODELING_FILE_IO_H_
 
-#ifndef EMODELING_FILE_IO_H
-#define EMODELING_FILE_IO_H
-
+#include <easymodeling.h>
 
 #include <json/json.h>
-#include <easymodeling.h>
 
 namespace emodeling
 {
-	class FileIO
-	{
-	public:
-		static void load(const char* filename);
-		static void store(const char* filename);
 
-	private:
-		static Json::Value b2j(const libmodeling::World* world);
-		static Json::Value b2j(const libmodeling::Body* body, const std::string& dlg);
-		static Json::Value b2j(const libmodeling::Fixture* fixture);
-		static Json::Value b2j(libmodeling::Joint* joint, 
-			const std::map<libmodeling::Body*, int>& bodyIndexMap);
+class FileIO
+{
+public:
+	static void Load(const char* filename);
+	static void Store(const char* filename);
 
-	}; // FileIO
+private:
+	static Json::Value B2J(const World* world);
+	static Json::Value B2J(const Body* body, const std::string& dlg);
+	static Json::Value B2J(const Fixture* fixture);
+	static Json::Value B2J(Joint* joint, 
+		const std::map<Body*, int>& bodyIndexMap);
+
+}; // FileIO
+
 }
 
-#endif // EMODELING_FILE_IO_H
+#endif // _EASYMODELING_FILE_IO_H_

@@ -3,7 +3,11 @@
 
 #include "IScene.h"
 
+#include <ee/Vector.h>
 
+#include <vector>
+
+namespace ee { class EditPanelImpl; class Symbol; }
 
 namespace epseudo3d
 {

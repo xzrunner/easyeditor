@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_PACK_IMAGE_H_
-#define _LIBRESPACKER_PACK_IMAGE_H_
+#ifndef _EASYRESPACKER_PACK_IMAGE_H_
+#define _EASYRESPACKER_PACK_IMAGE_H_
 
 #include <fstream>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackImage
@@ -24,4 +24,4 @@ protected:
 
 }
 
-#endif // _LIBRESPACKER_PACK_IMAGE_H_
+#endif // _EASYRESPACKER_PACK_IMAGE_H_

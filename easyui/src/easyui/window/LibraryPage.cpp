@@ -1,5 +1,8 @@
 #include "LibraryPage.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/LibraryList.h>
+
 #include <easycomplex.h>
 
 namespace eui

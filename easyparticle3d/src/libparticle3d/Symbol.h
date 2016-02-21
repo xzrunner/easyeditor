@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_SYMBOL_H_
 #define _EASYPARTICLE3D_SYMBOL_H_
 
-
+#include <ee/Symbol.h>
 
 struct p3d_emitter_cfg;
 struct p3d_emitter;

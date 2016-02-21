@@ -1,7 +1,9 @@
 #ifndef _SG_TOOLBAR_PANEL_H_
 #define _SG_TOOLBAR_PANEL_H_
 
+#include <ee/ToolbarPanel.h>
 
+namespace ee { class LibraryPanel; class PropertySettingPanel; }
 
 namespace sg
 {

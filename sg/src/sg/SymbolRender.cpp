@@ -2,6 +2,13 @@
 #include "StagePanel.h"
 #include "SymbolExt.h"
 
+#include <ee/Sprite.h>
+#include <ee/Symbol.h>
+#include <ee/Matrix.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+#include <ee/SpriteRenderer.h>
+
 namespace sg
 {
 	

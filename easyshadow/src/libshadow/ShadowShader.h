@@ -1,7 +1,7 @@
 #ifndef _EASYSHADOW_SHADOW_SHADER_H_
 #define _EASYSHADOW_SHADOW_SHADER_H_
 
-
+#include <ee/ShapeShader.h>
 
 namespace eshadow
 {

@@ -4,6 +4,12 @@
 
 #include "frame/config.h"
 
+#include <ee/EditPanel.h>
+#include <ee/Camera.h>
+#include <ee/panel_msg.h>
+
+#include <wx/sizer.h>
+
 namespace lr
 {
 namespace preview

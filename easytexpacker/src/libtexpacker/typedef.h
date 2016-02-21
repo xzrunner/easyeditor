@@ -1,7 +1,7 @@
-#ifndef _LIBTEXPACKER_TYPEDEF_H_
-#define _LIBTEXPACKER_TYPEDEF_H_
+#ifndef _EASYTEXPACKER_TYPEDEF_H_
+#define _EASYTEXPACKER_TYPEDEF_H_
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 enum PACK_STRATEGY
@@ -14,4 +14,4 @@ enum PACK_STRATEGY
 
 }
 
-#endif // _LIBTEXPACKER_TYPEDEF_H_
+#endif // _EASYTEXPACKER_TYPEDEF_H_

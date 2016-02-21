@@ -1,9 +1,10 @@
 #ifndef _EASYUI_WINDOW_CODE_H_
 #define _EASYUI_WINDOW_CODE_H_
 
-
+#include <vector>
 
 namespace ebuilder { class CodeGenerator; }
+namespace ee { class Sprite; }
 
 namespace eui 
 {

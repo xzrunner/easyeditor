@@ -7,6 +7,8 @@
 #include <easyanim.h>
 #include <easyparticle3d.h>
 
+#include <algorithm>
+
 namespace eanim
 {
 
@@ -161,7 +163,7 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 // 	}
 
 	// new
-	libanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
+	eanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
 
   	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
   		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
@@ -182,7 +184,7 @@ void KeyFrame::OnActive()
 void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, 
 							  ee::Sprite* tween, float process) const
 {
-	libanim::TweenUtility::GetTweenSprite(start, end, tween, process);
+	eanim::TweenUtility::GetTweenSprite(start, end, tween, process);
 
 	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
 		*mid = dynamic_cast<emesh::Sprite*>(tween),
@@ -194,7 +196,7 @@ void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end,
 
 bool KeyFrame::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const
 {
-	if (libanim::TweenUtility::IsTweenMatched(s0, s1) &&
+	if (eanim::TweenUtility::IsTweenMatched(s0, s1) &&
 		!m_skeletonData.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
 		return true;
 	} else {

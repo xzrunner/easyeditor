@@ -1,9 +1,13 @@
-#ifndef _LIBCOCO_SYMBOL_SET_H_
-#define _LIBCOCO_SYMBOL_SET_H_
+#ifndef _ECOCO_SYMBOL_SET_H_
+#define _ECOCO_SYMBOL_SET_H_
 
+#include <string>
+#include <vector>
+#include <map>
 
+namespace ee { class Symbol; }
 
-namespace libcoco
+namespace ecoco
 {
 
 class SymbolSet
@@ -26,4 +30,4 @@ private:
 
 }
 
-#endif // _LIBCOCO_SYMBOL_SET_H_
+#endif // _ECOCO_SYMBOL_SET_H_

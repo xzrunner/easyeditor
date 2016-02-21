@@ -11,7 +11,7 @@ KeyFramePropertySetting::KeyFramePropertySetting(KeyFrame* frame)
 {
 }
 
-void KeyFramePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void KeyFramePropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;

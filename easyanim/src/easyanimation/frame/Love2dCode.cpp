@@ -5,6 +5,10 @@
 #include "dataset/LayersMgr.h"
 #include "dataset/DataMgr.h"
 
+#include <ee/Sprite.h>
+#include <ee/Symbol.h>
+#include <ee/FileHelper.h>
+
 namespace eanim
 {
 namespace lua = ebuilder::lua;
@@ -35,15 +39,15 @@ void Love2dCode::Resolve()
 			int index = Query(sprite->GetSymbol().GetFilepath());
 			if (index != -1)
 			{
-				std::string time = wxString::FromDouble(frame->GetTime(), 0);
+				std::string time = ee::StringHelper::ToString(frame->GetTime());
 
-				std::string x = wxString::FromDouble(sprite->GetPosition().x, 1),
-					y = wxString::FromDouble(sprite->GetPosition().y, 1);
+				std::string x = ee::StringHelper::ToString(sprite->GetPosition().x),
+					y = ee::StringHelper::ToString(sprite->GetPosition().y);
 
-				std::string left = wxString::FromDouble(m_tp_adapter.textures[index].region.left, 1),
-					low = wxString::FromDouble(m_tp_adapter.textures[index].region.low, 1),
-					width = wxString::FromDouble(m_tp_adapter.textures[index].region.width, 1),
-					height = wxString::FromDouble(m_tp_adapter.textures[index].region.height, 1);
+				std::string left = ee::StringHelper::ToString(m_tp_adapter.textures[index].region.left),
+					low = ee::StringHelper::ToString(m_tp_adapter.textures[index].region.low),
+					width = ee::StringHelper::ToString(m_tp_adapter.textures[index].region.width),
+					height = ee::StringHelper::ToString(m_tp_adapter.textures[index].region.height);
 
 				lua::call(m_gen, "", "Frame", 7, time, x, y, left, low, width, height);
 			}
@@ -60,7 +64,7 @@ int Love2dCode::Query(const std::string& filepath) const
 	}
 	for (size_t i = 0, n = m_tp_adapter.textures.size(); i < n; ++i)
 	{
-		std::string filename = wxFileName(filepath).GetName();
+		std::string filename = ee::FileHelper::GetFilename(filepath);
 		if (filepath.find(filename) != std::string::npos)
 			return i;
 	}

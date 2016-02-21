@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "SymbolPropertySetting.h"
 
+#include <ee/EditPanelImpl.h>
+
 namespace ecomplex
 {
 

@@ -1,7 +1,7 @@
-
 #include "CodeGenerator.h"
 
-using namespace ebuilder;
+namespace ebuilder
+{
 
 CodeBlock::~CodeBlock()
 {
@@ -68,4 +68,6 @@ std::string CodeGenerator::toText() const
 	std::string str;
 	m_block.toText(str);
 	return str;
+}
+
 }

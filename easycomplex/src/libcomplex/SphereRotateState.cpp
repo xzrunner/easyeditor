@@ -1,10 +1,14 @@
 #include "SphereRotateState.h"
 
+#include <ee/Vector.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/StageCanvas.h>
+
 namespace ecomplex
 {
 
 SphereRotateState::SphereRotateState(ee::EditPanelImpl* stage, const ee::Vector& first_pos,
-									 Quaternion& dir)
+									 ee::Quaternion& dir)
 	: m_stage(stage)
 	, m_dir(dir)
 {
@@ -15,7 +19,7 @@ SphereRotateState::SphereRotateState(ee::EditPanelImpl* stage, const ee::Vector&
 
 void SphereRotateState::OnMouseRelease(const ee::Vector& pos)
 {
-	m_last_pos.x = m_last_pos.y = INT_MAX;
+	m_last_pos.x = m_last_pos.y = static_cast<float>(INT_MAX);
 }
 
 bool SphereRotateState::OnMouseDrag(const ee::Vector& pos)
@@ -26,9 +30,9 @@ bool SphereRotateState::OnMouseDrag(const ee::Vector& pos)
 
 	ee::Vector p = m_stage->TransPosProjToScr(pos);
 
-	vec3 start = MapToSphere(m_last_pos.x, m_last_pos.y),
+	ee::vec3 start = MapToSphere(m_last_pos.x, m_last_pos.y),
 		end = MapToSphere(p.x, p.y);
-	Quaternion delta = Quaternion::CreateFromVectors(start, end);
+	ee::Quaternion delta = ee::Quaternion::CreateFromVectors(start, end);
 	//	m_dir.Rotate(delta);
 	m_dir = delta.Rotated(m_dir);
 
@@ -38,14 +42,14 @@ bool SphereRotateState::OnMouseDrag(const ee::Vector& pos)
 	return true;
 }
 
-vec3 SphereRotateState::MapToSphere(int x, int y)
+ee::vec3 SphereRotateState::MapToSphere(int x, int y)
 {
 	int w = m_stage->GetCanvas()->GetWidth(),
 		h = m_stage->GetCanvas()->GetHeight();
 	const float trackball_radius = w / 3;
-	const vec2 center_point(w*0.5f, h*0.5f);
+	const ee::vec2 center_point(w*0.5f, h*0.5f);
 
-	vec2 p = vec2(x, y) - center_point;
+	ee::vec2 p = ee::vec2(x, y) - center_point;
 
 	// Flip the Y axis because pixel coords increase towards the bottom.
 	p.y = -p.y;
@@ -60,7 +64,7 @@ vec3 SphereRotateState::MapToSphere(int x, int y)
 	}
 
 	float z = sqrt(radius * radius - p.LengthSquared());
-	vec3 mapped = vec3(p.x, p.y, z);
+	ee::vec3 mapped = ee::vec3(p.x, p.y, z);
 	return mapped / radius;
 }
 

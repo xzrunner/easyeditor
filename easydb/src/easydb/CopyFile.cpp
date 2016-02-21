@@ -1,7 +1,10 @@
 #include "CopyFile.h"
 #include "check_params.h"
 
+#include <ee/FetchAllVisitor.h>
+#include <ee/FileHelper.h>
 
+#include <fstream>
 
 namespace edb
 {
@@ -60,16 +63,14 @@ void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) cons
 	std::set<std::string> files;
 	for (int i = 0, n = m_files.size(); i < n; ++i)
 	{
-		wxFileName filename(m_files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::FormatFilepath(m_files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex) ||
 			ee::FileType::IsType(filepath, ee::FileType::e_anim))
 		{
 			Json::Value value;
 			Json::Reader reader;
 			std::locale::global(std::locale(""));
-			std::ifstream fin(filepath.fn_str());
+			std::ifstream fin(filepath.c_str());
 			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
@@ -78,7 +79,7 @@ void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) cons
 			if (export_names.find(name) != export_names.end())
 			{
 				GetDependFiles(filepath, files);
-				files.insert(filepath.ToStdString());
+				files.insert(filepath);
 			}
 		}
 	}
@@ -86,9 +87,9 @@ void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) cons
 	Copy(files);
 }
 
-void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& files) const
+void CopyFile::GetDependFiles(const std::string& filepath, std::set<std::string>& files) const
 {
-	if (files.find(filepath.ToStdString()) != files.end()) {
+	if (files.find(filepath) != files.end()) {
 		return;
 	}
 
@@ -96,9 +97,9 @@ void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& f
 	{
 		Json::Value value;
 		Json::Reader reader;
-		wxString fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
+		std::string fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
 		std::locale::global(std::locale(""));
-		std::ifstream fin(fullpath.fn_str());
+		std::ifstream fin(fullpath.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -120,9 +121,9 @@ void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& f
 	{
 		Json::Value value;
 		Json::Reader reader;
-		wxString fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
+		std::string fullpath = ee::FileHelper::GetAbsolutePath(m_src_dir, filepath);
 		std::locale::global(std::locale(""));
-		std::ifstream fin(fullpath.fn_str());
+		std::ifstream fin(fullpath.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -157,9 +158,9 @@ void CopyFile::Copy(const std::set<std::string>& files) const
 	std::set<std::string>::const_iterator itr = files.begin();
 	for ( ; itr != files.end(); ++itr)
 	{
-		wxString filename = ee::FileHelper::GetFilenameWithExtension(*itr);
-		wxString src = m_src_dir + "\\" + filename;
-		wxString dst = m_dst_dir + "\\" + filename;
+		std::string filename = ee::FileHelper::GetFilenameWithExtension(*itr);
+		std::string src = m_src_dir + "\\" + filename;
+		std::string dst = m_dst_dir + "\\" + filename;
 		wxCopyFile(src, dst, true);
 	}
 }

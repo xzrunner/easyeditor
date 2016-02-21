@@ -4,7 +4,15 @@
 #include "ToolBarPanel.h"
 #include "SliderCtrl.h"
 
+#include <ee/FileHelper.h>
+#include <ee/ShaderMgr.h>
+#include <ee/Exception.h>
+
 #include <easy3d.h>
+
+#include <json/json.h>
+
+#include <fstream>
 
 namespace eshader
 {
@@ -23,7 +31,7 @@ static const std::string STR_MAT4	= "mat4";
 static const std::string STR_TIME	= "time";
 static const std::string STR_INPUT	= "input";
 
-Shader* FileIO::LoadShader(const wxString& filepath, ee::StageCanvas* canvas,
+Shader* FileIO::LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
 						   ToolbarPanel* toolbar, bool is_2d)
 {
 	toolbar->Clear();
@@ -31,12 +39,12 @@ Shader* FileIO::LoadShader(const wxString& filepath, ee::StageCanvas* canvas,
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.mb_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = ee::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	Shader* shader = LoadShader(dir, value, toolbar, is_2d);
 	if (is_2d) {
 		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
@@ -54,12 +62,12 @@ Shader* FileIO::LoadShader(const wxString& filepath, ee::StageCanvas* canvas,
 	return shader;
 }
 
-void FileIO::StoreShader(const wxString& filepath, const ToolbarPanel* toolbar)
+void FileIO::StoreShader(const std::string& filepath, const ToolbarPanel* toolbar)
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.mb_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -68,13 +76,13 @@ void FileIO::StoreShader(const wxString& filepath, const ToolbarPanel* toolbar)
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.mb_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
 
-Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
+Shader* FileIO::LoadShader(const std::string& dir, const Json::Value& value,
 						   ToolbarPanel* toolbar, bool is_2d)
 {
 	std::string vert_path = dir + "\\" + value["vert_path"].asString(),
@@ -300,8 +308,7 @@ void FileIO::LoadValue(const Json::Value& value, int count,
 					   Uniform* uniform)
 {
 	if (value["value"].size() != count) {
-		wxString msg;
-		msg.Printf("uniform [%s] value not fit type [%s]\n", 
+		std::string msg = ee::StringHelper::Format("uniform [%s] value not fit type [%s]\n", 
 			uniform->GetName(), TransUTypeToStr(uniform->GetType()));
 		throw ee::Exception(msg);
 	}

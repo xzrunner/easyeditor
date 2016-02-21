@@ -1,5 +1,5 @@
-#ifndef _LIBRESPACKER_PACK_ANCHOR_H_
-#define _LIBRESPACKER_PACK_ANCHOR_H_
+#ifndef _EASYRESPACKER_PACK_ANCHOR_H_
+#define _EASYRESPACKER_PACK_ANCHOR_H_
 
 #include "IPackNode.h"
 
@@ -7,7 +7,7 @@
 
 
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackAnchor : public IPackNode
@@ -32,4 +32,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_ANCHOR_H_
+#endif // _EASYRESPACKER_PACK_ANCHOR_H_

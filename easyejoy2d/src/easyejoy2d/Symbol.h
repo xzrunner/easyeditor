@@ -1,7 +1,7 @@
 #ifndef _EASYEJOY2D_SYMBOL_H_
 #define _EASYEJOY2D_SYMBOL_H_
 
-
+#include <ee/Symbol.h>
 
 namespace eejoy2d
 {

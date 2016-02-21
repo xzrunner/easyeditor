@@ -1,6 +1,11 @@
 #include "DFFParser.h"
 
+#include <ee/ImageLoader.h>
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/ImageSaver.h>
 
+#include <assert.h>
 
 namespace edb
 {
@@ -38,7 +43,7 @@ void DFFParser::outputImage(int width, int height)
 		}
 	}
 
-	std::string filepath = m_dir + "_" + wxString::FromDouble(width) + "_" + wxString::FromDouble(height);
+	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height);
 	ee::ImageSaver::StoreToFile(pixels, width, height, 4, filepath, ee::ImageSaver::e_png);
 	delete[] pixels;
 }
@@ -142,7 +147,7 @@ void DFFParser::outputImageFast(int width, int height)
 
 	fillingAlphaNew(pixels, width, height);
 
-	std::string filepath = m_dir + "_" + wxString::FromDouble(width) + "_" + wxString::FromDouble(height);
+	std::string filepath = m_dir + "_" + ee::StringHelper::ToString(width) + "_" + ee::StringHelper::ToString(height);
 	ee::ImageSaver::StoreToFile(pixels, width, height, 4, filepath, ee::ImageSaver::e_png);
 	delete[] pixels;
 }

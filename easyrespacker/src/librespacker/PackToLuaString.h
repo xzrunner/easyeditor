@@ -1,9 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_TO_LUA_STRING_H_
-#define _LIBRESPACKER_PACK_TO_LUA_STRING_H_
+#ifndef _EASYRESPACKER_PACK_TO_LUA_STRING_H_
+#define _EASYRESPACKER_PACK_TO_LUA_STRING_H_
 
+#include <string>
 
+namespace ee { class TexturePacker; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackToLuaString
@@ -16,4 +18,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_TO_LUA_STRING_H_
+#endif // _EASYRESPACKER_PACK_TO_LUA_STRING_H_

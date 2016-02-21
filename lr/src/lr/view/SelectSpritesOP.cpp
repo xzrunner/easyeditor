@@ -4,13 +4,19 @@
 #include "dataset/GroupHelper.h"
 #include "view/typedef.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/sprite_msg.h>
+#include <ee/Symbol.h>
+
 namespace lr
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
 								 ee::EditCMPT* callback/* = NULL*/)
-	: ee::SelectSpritesOP(stage_wnd, stage, spritesImpl, callback)
-	, m_open_symbol(stage_wnd, stage, spritesImpl)
+	: ee::SelectSpritesOP(stage_wnd, stage, sprites_impl, callback)
+	, m_open_symbol(stage_wnd, stage, sprites_impl)
 {
 	stage->SetCursor(wxCursor(wxCURSOR_PENCIL));
 

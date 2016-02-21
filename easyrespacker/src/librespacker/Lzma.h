@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_LZMA_H_
-#define _LIBRESPACKER_LZMA_H_
+#ifndef _EASYRESPACKER_LZMA_H_
+#define _EASYRESPACKER_LZMA_H_
 
 #include <stdint.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class Lzma
@@ -20,4 +20,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_LZMA_H_
+#endif // _EASYRESPACKER_LZMA_H_

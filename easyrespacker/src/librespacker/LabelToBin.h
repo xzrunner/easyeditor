@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_LABEL_TO_BIN_H_
-#define _LIBRESPACKER_LABEL_TO_BIN_H_
+#ifndef _EASYRESPACKER_LABEL_TO_BIN_H_
+#define _EASYRESPACKER_LABEL_TO_BIN_H_
 
 #include "PackLabel.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class LabelToBin
@@ -17,4 +17,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_LABEL_TO_BIN_H_
+#endif // _EASYRESPACKER_LABEL_TO_BIN_H_

@@ -1,7 +1,8 @@
-#ifndef _ESHADER_STAGE_PANEL2D_H_
-#define _ESHADER_STAGE_PANEL2D_H_
+#ifndef _EASYSHADER_STAGE_PANEL2D_H_
+#define _EASYSHADER_STAGE_PANEL2D_H_
 
-
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
 
 namespace eshader
 {
@@ -26,4 +27,4 @@ private:
 
 }
 
-#endif // _ESHADER_STAGE_PANEL2D_H_
+#endif // _EASYSHADER_STAGE_PANEL2D_H_

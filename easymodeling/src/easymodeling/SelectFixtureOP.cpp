@@ -1,11 +1,17 @@
-
 #include "SelectFixtureOP.h"
 #include "StagePanel.h"
 #include "FixturePropertySetting.h"
 #include "WorldPropertySetting.h"
 #include "DrawUtils.h"
 
-using namespace emodeling;
+#include <ee/EditPanelImpl.h>
+#include <ee/Sprite.h>
+#include <ee/panel_msg.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/Rect.h>
+
+namespace emodeling
+{
 
 SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::DrawRectangleOP(editPanel, editPanel->GetStageImpl(), true)
@@ -31,12 +37,12 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 	if (sprite)
 	{
 		m_selected = NULL;
-		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
-		for (size_t i = 0, n = body->fixtures.size(); i < n; ++i)
+		Body* body = static_cast<Body*>(sprite->GetUserData());
+		for (size_t i = 0, n = body->m_fixtures.size(); i < n; ++i)
 		{
-			if (body->fixtures[i]->isContain(pos))
+			if (body->m_fixtures[i]->IsContain(pos))
 			{
-				m_selected = body->fixtures[i];
+				m_selected = body->m_fixtures[i];
 				break;
 			}
 		}
@@ -72,12 +78,12 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 		m_selected = NULL;
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
-			libmodeling::Body* body = static_cast<libmodeling::Body*>(sprites[i]->GetUserData());
-			for (size_t j = 0, m = body->fixtures.size(); j < m; ++j)
+			Body* body = static_cast<Body*>(sprites[i]->GetUserData());
+			for (size_t j = 0, m = body->m_fixtures.size(); j < m; ++j)
 			{
-				if (body->fixtures[j]->isIntersect(rect))
+				if (body->m_fixtures[j]->IsIntersect(rect))
 				{
-					m_selected = body->fixtures[i];
+					m_selected = body->m_fixtures[i];
 					break;
 				}
 			}
@@ -104,14 +110,14 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 	ee::Sprite* sprite = static_cast<StagePanel*>(m_wnd)->QuerySpriteByPos(pos);
 	if (sprite)
 	{
-		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
+		Body* body = static_cast<Body*>(sprite->GetUserData());
 		if (body)
 		{
-			for (size_t i = 0, n = body->fixtures.size(); i < n; ++i)
+			for (size_t i = 0, n = body->m_fixtures.size(); i < n; ++i)
 			{
-				if (body->fixtures[i]->isContain(pos))
+				if (body->m_fixtures[i]->IsContain(pos))
 				{
-					m_mouseOn = body->fixtures[i];
+					m_mouseOn = body->m_fixtures[i];
 					break;
 				}
 			}
@@ -128,9 +134,9 @@ bool SelectFixtureOP::OnDraw() const
 	if (ee::DrawRectangleOP::OnDraw()) return true;
 
 	if (m_selected)
-		DrawUtils::drawFixture(m_selected, DrawUtils::e_selected, true);
+		DrawUtils::DrawFixture(m_selected, DrawUtils::e_selected, true);
 	if (m_mouseOn)
-		DrawUtils::drawFixture(m_mouseOn, DrawUtils::e_mouseOn, true);
+		DrawUtils::DrawFixture(m_mouseOn, DrawUtils::e_mouseOn, true);
 
 	return false;
 }
@@ -144,4 +150,6 @@ bool SelectFixtureOP::Clear()
 	m_selected = m_mouseOn = NULL;
 
 	return false;
+}
+
 }

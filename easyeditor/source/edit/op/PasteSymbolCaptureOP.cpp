@@ -11,9 +11,9 @@
 namespace ee
 {
 
-PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* libraryPanel, 
+PasteSymbolCaptureOP::PasteSymbolCaptureOP(wxWindow* wnd, EditPanelImpl* stage, LibraryPanel* library, 
 										   PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt)
-	: PasteSymbolOP(wnd, stage, libraryPanel)
+	: PasteSymbolOP(wnd, stage, library)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 {

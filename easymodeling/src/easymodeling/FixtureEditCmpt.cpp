@@ -1,11 +1,11 @@
-
 #include "FixtureEditCmpt.h"
 #include "StagePanel.h"
 #include "SelectFixtureOP.h"
 
-using namespace emodeling;
+namespace emodeling
+{
 
-FixtureEditCmpt::FixtureEditCmpt(wxWindow* parent, const wxString& name, 
+FixtureEditCmpt::FixtureEditCmpt(wxWindow* parent, const std::string& name, 
 								 StagePanel* editPanel, ee::PropertySettingPanel* property)
 	: ee::EditCMPT(parent, name, editPanel->GetStageImpl())
 {
@@ -16,4 +16,6 @@ wxSizer* FixtureEditCmpt::InitLayout()
 {
 	wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	return topSizer;
+}
+
 }

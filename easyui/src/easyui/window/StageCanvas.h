@@ -1,6 +1,8 @@
 #ifndef _EASYUI_WINDOW_STAGE_CANVAS_H_
 #define _EASYUI_WINDOW_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+
 namespace eui
 {
 namespace window

@@ -3,6 +3,8 @@
 #include "SpriteShader.h"
 #include "Camera.h"
 
+#include <wx/log.h>
+
 namespace e3d
 {
 
@@ -33,14 +35,14 @@ void SpriteShader::Load()
 {
 	static const char* vs =
 		FLOAT_PRECISION
-		"attribute vec4 position;  \n"
-		"attribute vec2 texcoord;  \n"
+		"attribute ee::vec4 position;  \n"
+		"attribute ee::vec2 texcoord;  \n"
 		"\n"
-		"varying vec2 v_texcoord;  \n"
+		"varying ee::vec2 v_texcoord;  \n"
 		"\n"
 		"\n"
-		"uniform mat4 u_projection; \n"
-		"uniform mat4 u_modelview; \n"
+		"uniform ee::mat4 u_projection; \n"
+		"uniform ee::mat4 u_modelview; \n"
 		"\n"
 		"void main()  \n"
 		"{  \n"
@@ -51,7 +53,7 @@ void SpriteShader::Load()
 
 	static const char* fs =
 		FLOAT_PRECISION
-		"varying vec2 v_texcoord;  \n"
+		"varying ee::vec2 v_texcoord;  \n"
 		"uniform sampler2D texture0;  \n"
 		"\n"
 		"void main()  \n"
@@ -106,7 +108,7 @@ void SpriteShader::Unbind()
 	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
 }
 
-void SpriteShader::SetModelView(const mat4& mat)
+void SpriteShader::SetModelView(const ee::mat4& mat)
 {
 	m_mat_modelview = mat;
 }
@@ -114,7 +116,7 @@ void SpriteShader::SetModelView(const mat4& mat)
 void SpriteShader::SetProjection(int width, int height)
 {
 	float hh = 1.0f * height / width;
-	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
+	m_mat_projection = ee::mat4::Perspective(-1, 1, -hh, hh, 
 		Camera::CAM_NEAR, Camera::CAM_FAR);
 }
 
@@ -155,7 +157,7 @@ void SpriteShader::SetTexID(int tex)
 	}
 }
 
-void SpriteShader::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int texid)
+void SpriteShader::DrawTri(const ee::vec3 vertices[3], const ee::vec2 texcoords[3], int texid)
 {
 	SetTexID(texid);
 
@@ -223,20 +225,20 @@ void SpriteShader::BindAttrib(GLuint prog)
 	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
 }
 
-void SpriteShader::CopyVertex(const vec3 vertices[3], const vec2 texcoords[3])
+void SpriteShader::CopyVertex(const ee::vec3 vertices[3], const ee::vec2 texcoords[3])
 {
 	float* ptr = m_vb + VERTEX_FLOAT_SIZE * m_count;
-	memcpy(ptr, &vertices[0].x, sizeof(vec3));
+	memcpy(ptr, &vertices[0].x, sizeof(ee::vec3));
 	ptr += 3;
-	memcpy(ptr, &texcoords[0].x, sizeof(vec2));
+	memcpy(ptr, &texcoords[0].x, sizeof(ee::vec2));
 	ptr += 2;
-	memcpy(ptr, &vertices[1].x, sizeof(vec3));
+	memcpy(ptr, &vertices[1].x, sizeof(ee::vec3));
 	ptr += 3;
-	memcpy(ptr, &texcoords[1].x, sizeof(vec2));
+	memcpy(ptr, &texcoords[1].x, sizeof(ee::vec2));
 	ptr += 2;
-	memcpy(ptr, &vertices[2].x, sizeof(vec3));
+	memcpy(ptr, &vertices[2].x, sizeof(ee::vec3));
 	ptr += 3;
-	memcpy(ptr, &texcoords[2].x, sizeof(vec2));
+	memcpy(ptr, &texcoords[2].x, sizeof(ee::vec2));
 	ptr += 2;
 	m_count += 3;
 }
@@ -246,9 +248,9 @@ void SpriteShader::CopyVertex(const float* vertices, const float* texcoords, int
 	float* ptr = m_vb + VERTEX_FLOAT_SIZE * m_count;
 	for (int i = 0; i < count; ++i)
 	{
-		memcpy(ptr, &vertices[i*3], sizeof(vec3));
+		memcpy(ptr, &vertices[i*3], sizeof(ee::vec3));
 		ptr += 3;
-		memcpy(ptr, &texcoords[i*2], sizeof(vec2));
+		memcpy(ptr, &texcoords[i*2], sizeof(ee::vec2));
 		ptr += 2;
 		++m_count;
 	}

@@ -12,10 +12,10 @@ namespace edb
 class FixJsonBase
 {
 protected:
-	virtual bool FixSprite(const wxString& filepath, Json::Value& sprite_val) const = 0;
+	virtual bool FixSprite(const std::string& filepath, Json::Value& sprite_val) const = 0;
 
-	void FixComplex(const wxString& filepath) const;
-	void FixAnim(const wxString& filepath) const;
+	void FixComplex(const std::string& filepath) const;
+	void FixAnim(const std::string& filepath) const;
 
 }; // FixJsonBase
 

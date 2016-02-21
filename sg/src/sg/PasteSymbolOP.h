@@ -1,7 +1,7 @@
 #ifndef _SG_PASTE_SPRITE_OP_H_
 #define _SG_PASTE_SPRITE_OP_H_
 
-
+#include <ee/PasteSymbolOP.h>
 
 namespace sg
 {

@@ -7,6 +7,12 @@
 #include "dataset/DataMgr.h"
 #include "frame/FileIO.h"
 
+#include <ee/sprite_msg.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/ZoomViewOP.h>
+#include <ee/EditPanelImpl.h>
+
 namespace eanim
 {
 
@@ -109,9 +115,9 @@ void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 
 	wxDirDialog dlg(NULL, "Template Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK) {
-		wxString dir = dlg.GetPath();
+		std::string dir = dlg.GetPath();
 		m_tl_dir_text->SetValue(dir);
-		DataMgr::Instance()->GetTemplate().SetTemplateDir(dir.ToStdString());
+		DataMgr::Instance()->GetTemplate().SetTemplateDir(dir);
 	}
 
 	op->SetMouseMoveFocus(true);

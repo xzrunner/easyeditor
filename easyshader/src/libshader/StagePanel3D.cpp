@@ -6,7 +6,7 @@ namespace eshader
 
 StagePanel3D::StagePanel3D(wxWindow* parent, wxTopLevelWindow* frame, 
 						   ee::LibraryPanel* library)
-	: libsketch::StagePanel(parent, frame, library)
+	: esketch::StagePanel(parent, frame, library)
 	, m_shader(NULL)
 {
 }

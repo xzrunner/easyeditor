@@ -1,8 +1,7 @@
 #ifndef _EASYPARTICLE3D_STAGE_CANVAS_H_
 #define _EASYPARTICLE3D_STAGE_CANVAS_H_
 
-
-#include <easyanim.h>
+#include <ee/OrthoCanvas.h>
 
 namespace eparticle3d
 {

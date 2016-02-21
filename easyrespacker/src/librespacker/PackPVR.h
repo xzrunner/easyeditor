@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_PVR_H_
-#define _LIBRESPACKER_PACK_PVR_H_
+#ifndef _EASYRESPACKER_PACK_PVR_H_
+#define _EASYRESPACKER_PACK_PVR_H_
 
 #include "PackImage.h"
 
 #include <stdint.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackPVR : public PackImage
@@ -47,4 +47,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_PVR_H_
+#endif // _EASYRESPACKER_PACK_PVR_H_

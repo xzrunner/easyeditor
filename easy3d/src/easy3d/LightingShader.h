@@ -1,5 +1,5 @@
-#ifndef _E3D_LIGHTING_SHADER_H_
-#define _E3D_LIGHTING_SHADER_H_
+#ifndef _EASY3D_LIGHTING_SHADER_H_
+#define _EASY3D_LIGHTING_SHADER_H_
 
 #include "ModelShader.h"
 
@@ -17,7 +17,7 @@ public:
 protected:
 	virtual void LoadShader();
 
-	virtual void SetNormalMatrix(const mat3& noraml_mat);
+	virtual void SetNormalMatrix(const ee::mat3& noraml_mat);
 	virtual void SetMaterial(const Material& material);
 
 private:
@@ -32,4 +32,4 @@ private:
 
 }
 
-#endif // _E3D_LIGHTING_SHADER_H_
+#endif // _EASY3D_LIGHTING_SHADER_H_

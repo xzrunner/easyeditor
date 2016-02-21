@@ -1,10 +1,18 @@
 #ifndef _EASYPARTICLE3D_COMPONENT_PANEL_H_
 #define _EASYPARTICLE3D_COMPONENT_PANEL_H_
 
+#include <ee/UICallback.h>
 
+#include <wx/panel.h>
+
+#include <vector>
+
+namespace ee { class SliderCtrl; }
 
 struct p3d_symbol;
 struct ps_color4f;
+class wxTextCtrl;
+class wxButton;
 
 namespace eparticle3d
 {

@@ -15,7 +15,7 @@ class PasteSymbolRandomCMPT : public EditCMPT
 public:
 	PasteSymbolRandomCMPT(wxWindow* parent, const std::string& name,
 		wxWindow* stage_wnd, EditPanelImpl* stage, 
-		MultiSpritesImpl* spritesImpl, LibraryPanel* libraryPanel);
+		MultiSpritesImpl* sprites_impl, LibraryPanel* library);
 
 protected:
 	virtual wxSizer* InitLayout();

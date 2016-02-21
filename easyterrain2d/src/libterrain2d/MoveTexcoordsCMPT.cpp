@@ -4,10 +4,12 @@
 #include "OceanMesh.h"
 #include "config.h"
 
+#include <wx/spinctrl.h>
+
 namespace eterrain2d
 {
 
-MoveTexcoordsCMPT::MoveTexcoordsCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
+MoveTexcoordsCMPT::MoveTexcoordsCMPT(wxWindow* parent, const std::string& name, StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {

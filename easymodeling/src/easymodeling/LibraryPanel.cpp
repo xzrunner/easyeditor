@@ -1,11 +1,13 @@
-
 #include "LibraryPanel.h"
 #include "LibraryPage.h"
 
-using namespace emodeling;
+namespace emodeling
+{
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: ee::LibraryPanel(parent)
 {
 	AddPage(new LibraryPage(GetNotebook()));
+}
+
 }

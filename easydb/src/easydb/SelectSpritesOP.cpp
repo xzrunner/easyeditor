@@ -2,15 +2,19 @@
 #include "Context.h"
 #include "StagePanel.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/EditPanelImpl.h>
+
 #include <easycomplex.h>
 
 namespace edb
 {
 
 SelectSpritesOP::SelectSpritesOP(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
-								 ee::MultiSpritesImpl* spritesImpl, 
+								 ee::MultiSpritesImpl* sprites_impl, 
 								 ee::EditCMPT* callback/* = NULL*/)
-	: ee::SelectSpritesOP(stage_wnd, stage, spritesImpl, NULL, callback)
+	: ee::SelectSpritesOP(stage_wnd, stage, sprites_impl, callback)
 {
 }
 
@@ -30,7 +34,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 			if (!complex) continue;
 
 			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
-			ecomplex::EditDialog dlg(m_stage, &symbol);
+			ecomplex::EditDialog dlg(m_stage->GetEditPanel(), &symbol, NULL);
 			dlg.ShowModal();
 		}
 	}
@@ -47,12 +51,12 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
 		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->GetSymbol());
-		ecomplex::EditDialog dlg(m_stage, &symbol);
+		ecomplex::EditDialog dlg(m_stage->GetEditPanel(), &symbol, NULL);
 		dlg.ShowModal();
 	}
-	//else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
+	//else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(selected))
 	//{
-	//		libanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
+	//		eanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
 	//		dlg.ShowModal();
 	//		Context::Instance()->stage->resetCanvas();
 	//}

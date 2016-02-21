@@ -1,10 +1,11 @@
-#ifndef _LIBSKETCH_SELECT_SPRITE_OP_H_
-#define _LIBSKETCH_SELECT_SPRITE_OP_H_
-
+#ifndef _EASYSKETCH_SELECT_SPRITE_OP_H_
+#define _EASYSKETCH_SELECT_SPRITE_OP_H_
 
 #include <easy3d.h>
 
-namespace libsketch
+namespace ee { class SpriteSelection; class Sprite; }
+
+namespace esketch
 {
 
 class StagePanel;
@@ -26,7 +27,7 @@ public:
 	}
 
 private:
-	ee::Sprite* SelectByPos(const ivec2& pos) const;
+	ee::Sprite* SelectByPos(const ee::ivec2& pos) const;
 
 protected:
 	StagePanel* m_stage;
@@ -38,4 +39,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_SELECT_SPRITE_OP_H_
+#endif // _EASYSKETCH_SELECT_SPRITE_OP_H_

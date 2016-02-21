@@ -1,7 +1,7 @@
 #ifndef _EASYTERRAIN2D_BLEND_TEXTURE_CMPT_H_
 #define _EASYTERRAIN2D_BLEND_TEXTURE_CMPT_H_
 
-
+#include <ee/EditCMPT.h>
 
 namespace eterrain2d
 {
@@ -12,7 +12,7 @@ class OceanMesh;
 class BlendTextureCMPT : public ee::EditCMPT
 {
 public:
-	BlendTextureCMPT(wxWindow* parent, const wxString& name,
+	BlendTextureCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
 	void SetControlersValue(const OceanMesh* ocean);

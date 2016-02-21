@@ -4,7 +4,9 @@
 #include "RotateCameraState.h"
 #include "ZoomCameraState.h"
 
-namespace libsketch
+#include <ee/EditPanelImpl.h>
+
+namespace esketch
 {
 
 EditCameraOP::EditCameraOP(wxWindow* wnd, ee::EditPanelImpl* stage)
@@ -46,14 +48,14 @@ bool EditCameraOP::OnMouseLeftDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftDown(x, y)) { return true; }
 	m_curr = m_translate;
-	m_curr->OnMousePress(ivec2(x, y));
+	m_curr->OnMousePress(ee::ivec2(x, y));
 	return false;
 }
 
 bool EditCameraOP::OnMouseLeftUp(int x, int y)
 {
 	if (ee::EditOP::OnMouseLeftUp(x, y)) { return true; }
-	m_curr->OnMouseRelease(ivec2(x, y));
+	m_curr->OnMouseRelease(ee::ivec2(x, y));
 	return false;
 }
 
@@ -61,14 +63,14 @@ bool EditCameraOP::OnMouseRightDown(int x, int y)
 {
 	if (ee::EditOP::OnMouseRightDown(x, y)) { return true; }
 	m_curr = m_rotate;
-	m_curr->OnMousePress(ivec2(x, y));
+	m_curr->OnMousePress(ee::ivec2(x, y));
 	return false;
 }
 
 bool EditCameraOP::OnMouseRightUp(int x, int y)
 {
 	if (ee::EditOP::OnMouseRightUp(x, y)) { return true; }
-	m_curr->OnMouseRelease(ivec2(x, y));
+	m_curr->OnMouseRelease(ee::ivec2(x, y));
 	return false;
 }
 
@@ -81,14 +83,14 @@ bool EditCameraOP::OnMouseMove(int x, int y)
 bool EditCameraOP::OnMouseDrag(int x, int y)
 {
 	if (ee::EditOP::OnMouseDrag(x, y)) { return true; }
-	m_curr->OnMouseMove(ivec2(x, y));
+	m_curr->OnMouseMove(ee::ivec2(x, y));
 	return false;
 }
 
 bool EditCameraOP::OnMouseWheelRotation(int x, int y, int direction)
 {
 	if (ee::EditOP::OnMouseWheelRotation(x, y, direction)) { return true; }
-	m_zoom->OnMouseWheelRotation(ivec2(x, y), direction);
+	m_zoom->OnMouseWheelRotation(ee::ivec2(x, y), direction);
 	return false;}
 
 }

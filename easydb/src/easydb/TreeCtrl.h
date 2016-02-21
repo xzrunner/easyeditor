@@ -1,49 +1,57 @@
-#pragma once
+#ifndef _EASYDB_TREE_CTRL_H_
+#define _EASYDB_TREE_CTRL_H_
 
 #include <wx/treectrl.h>
 
+#include <map>
+
+namespace ee { class Sprite; }
 
 namespace edb
 {
-	class Graphics;
-	struct Node;
 
-	class TreeCtrl : public wxTreeCtrl
+class Graphics;
+struct Node;
+
+class TreeCtrl : public wxTreeCtrl
+{
+public:
+	TreeCtrl(wxWindow* parent);
+
+	void test();
+
+	void init(const Graphics& graph);
+	void init(const wxArrayString& files);
+
+	void clear();
+
+private:
+	enum
 	{
-	public:
-		TreeCtrl(wxWindow* parent);
+		ID_CTRL
+	};
 
-		void test();
+private:
+	void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
 
-		void init(const Graphics& graph);
-		void init(const wxArrayString& files);
+	std::string getItemName(const ee::Sprite& sprite) const;
 
-		void clear();
+	void onSelChanged(wxTreeEvent& event);
+	void onItemClick(wxTreeEvent& event);
 
-	private:
-		enum
-		{
-			ID_CTRL
-		};
+	ee::Sprite* querySpriteByID(wxTreeItemId id) const;
 
-	private:
-		void addNode(const Graphics& graph, const Node& node, wxTreeItemId parent);
+private:
+	wxTreeItemId m_root;
 
-		wxString getItemName(const ee::Sprite& sprite) const;
+	std::map<wxTreeItemId, ee::Sprite*> m_mapID2Sprite;
 
-		void onSelChanged(wxTreeEvent& event);
-		void onItemClick(wxTreeEvent& event);
+	std::map<wxTreeItemId, std::string> m_mapID2Path;
 
-		ee::Sprite* querySpriteByID(wxTreeItemId id) const;
+	DECLARE_EVENT_TABLE()
 
-	private:
-		wxTreeItemId m_root;
+}; // TreeCtrl
 
-		std::map<wxTreeItemId, ee::Sprite*> m_mapID2Sprite;
-
-		std::map<wxTreeItemId, wxString> m_mapID2Path;
-
-		DECLARE_EVENT_TABLE()
-
-	}; // TreeCtrl
 }
+
+#endif // _EASYDB_TREE_CTRL_H_s

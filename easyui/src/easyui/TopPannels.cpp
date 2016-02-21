@@ -1,5 +1,7 @@
 #include "TopPannels.h"
 
+#include <stddef.h>
+
 namespace eui
 {
 

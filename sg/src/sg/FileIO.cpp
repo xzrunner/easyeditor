@@ -3,6 +3,17 @@
 #include "SymbolExt.h"
 #include "SpriteExt.h"
 
+#include <ee/FileHelper.h>
+#include <ee/sprite_msg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Sprite.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+
+#include <fstream>
+
 namespace sg
 {
 
@@ -102,7 +113,7 @@ Json::Value FileIO::store(const ee::Sprite* sprite, StagePanel* stage,
 	Json::Value value;
 
 	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		sprite->GetSymbol().GetFilepath()).ToStdString();
+		sprite->GetSymbol().GetFilepath());
 
 	int row, col;
 	stage->TransCoordsToGridPosNew(sprite->GetPosition(), row, col);
@@ -137,8 +148,8 @@ void FileIO::SetSymbolUserData(ee::Symbol* symbol)
 		return;
 	}
 
-	wxString filepath = symbol->GetFilepath();
-	if (!filepath.Contains("wall")) {
+	std::string filepath = symbol->GetFilepath();
+	if (!filepath.find("wall") != std::string::npos) {
 		return;
 	}
 

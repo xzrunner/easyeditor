@@ -12,9 +12,9 @@ namespace ee
 {
 
 PasteSymbolOP::PasteSymbolOP(wxWindow* wnd, EditPanelImpl* stage,
-							 LibraryPanel* libraryPanel, float* pScale/* = NULL*/)
+							 LibraryPanel* library, float* pScale/* = NULL*/)
 	: ZoomViewOP(wnd, stage, true)
-	, m_library(libraryPanel)
+	, m_library(library)
 	, m_scale(pScale)
 {
 	m_cursor = wxCursor(wxCURSOR_PAINT_BRUSH);

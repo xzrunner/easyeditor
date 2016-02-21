@@ -47,7 +47,7 @@ void RegularToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 
 		wxArrayString files;
 		ee::FileHelper::FetchAllFiles(dir.ToStdString(), files);
-		libtexpacker::RegularRectPack rrp(files);
+		etexpacker::RegularRectPack rrp(files);
 
 		m_src_dir->SetValue(dir);
 	}

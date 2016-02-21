@@ -1,7 +1,7 @@
 #ifndef _EASYPSEUDO3D_LIBRARY_PANEL_H_
 #define _EASYPSEUDO3D_LIBRARY_PANEL_H_
 
-
+#include <ee/LibraryPanel.h>
 
 namespace epseudo3d
 {

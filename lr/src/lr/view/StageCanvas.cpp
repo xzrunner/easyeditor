@@ -6,8 +6,22 @@
 #include "frame/config.h"
 #include "frame/SettingCfg.h"
 
+#include <ee/DrawShapesVisitor.h>
+#include <ee/EE_DTex.h>
+#include <ee/Config.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/ShaderMgr.h>
+#include <ee/EE_GTxt.h>
+#include <ee/SettingData.h>
+#include <ee/Camera.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+
 #include <easyparticle3d.h>
 #include <easytext.h>
+
+#include <algorithm>
 
 namespace lr
 {
@@ -98,7 +112,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale;
 		t.Scale(s, s);
-		etext::GTxt::Instance()->Draw(t, spr->name);
+		ee::GTxt::Instance()->Draw(t, spr->name);
 	}
 }
 

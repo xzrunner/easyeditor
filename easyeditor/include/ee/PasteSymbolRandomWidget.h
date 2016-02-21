@@ -24,7 +24,7 @@ public:
 	};
 
 public:
-	PasteSymbolRandomWidget(wxWindow* parent, LibraryPanel* libraryPanel);
+	PasteSymbolRandomWidget(wxWindow* parent, LibraryPanel* library);
 
 	void GetRandomValue(RandomValue& val) const;
 

@@ -1,7 +1,7 @@
 #ifndef _LR_PREVIEW_CTRL_CAM_OP_H_
 #define _LR_PREVIEW_CTRL_CAM_OP_H_
 
-
+#include <ee/EditOP.h>
 
 namespace lr
 {

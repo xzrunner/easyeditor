@@ -1,7 +1,7 @@
 #ifndef _EASYUI_FRAME_H_
 #define _EASYUI_FRAME_H_
 
-
+#include <ee/Frame.h>
 
 namespace eui
 {
@@ -9,7 +9,7 @@ namespace eui
 class Frame : public ee::Frame
 {
 public:
-	Frame(const wxString& title, const wxString& filetag);
+	Frame(const std::string& title, const std::string& filetag);
 
 private:
 	void OnPreview(wxCommandEvent& event);

@@ -1,6 +1,6 @@
 #include "PlayControl.h"
 
-namespace d2d
+namespace ee
 {
 
 PlayControl::PlayControl(float dt) 

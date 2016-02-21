@@ -2,7 +2,11 @@
 #include "LuaDataHelper.h"
 #include "typedef.h"
 
-namespace librespacker
+#include <ee/trans_color.h>
+
+#include <assert.h>
+
+namespace erespacker
 {
 
 void ShapeFromLua::Unpack(lua_State* L, PackShape* shape)
@@ -19,7 +23,7 @@ void ShapeFromLua::Unpack(lua_State* L, PackShape* shape)
 	{
 		lua_pushinteger(L, i);
 		lua_gettable(L, -2);
-		int screen = lua_tonumber(L, -1);
+		int screen = static_cast<int>(lua_tonumber(L, -1));
 		if (i % 2) {
 			shape->vertices[(i - 1) / 2].x = screen / SCALE;
 		} else {

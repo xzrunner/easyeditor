@@ -5,7 +5,7 @@
 
 struct p3d_emitter_cfg;
 
-namespace d2d { class LibraryPanel; }
+namespace ee { class LibraryPanel; }
 
 namespace eparticle3d
 {

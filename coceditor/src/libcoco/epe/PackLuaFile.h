@@ -1,9 +1,11 @@
 #ifndef _COCO_EPE_PACK_LUA_FILE_H_
 #define _COCO_EPE_PACK_LUA_FILE_H_
 
+#include <vector>
 
+namespace ee { class Sprite; }
 
-namespace libcoco
+namespace ecoco
 {
 namespace epe
 {

@@ -1,10 +1,11 @@
 #ifndef _EASYUI_TASK_H_
 #define _EASYUI_TASK_H_
 
+#include "TopPannels.h"
+
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
-
-#include "TopPannels.h"
 
 namespace eui
 {

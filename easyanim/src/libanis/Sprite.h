@@ -1,9 +1,9 @@
 #ifndef _LIBANIS_SPRITE_H_
 #define _LIBANIS_SPRITE_H_
 
-
-
 #include "Symbol.h"
+
+#include <ee/Sprite.h>
 
 namespace libanis
 {

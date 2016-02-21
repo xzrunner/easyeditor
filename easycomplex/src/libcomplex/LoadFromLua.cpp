@@ -2,6 +2,12 @@
 #include "NodeToSprite.h"
 #include "Symbol.h"
 
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+#include <ee/Image.h>
+
 namespace ecomplex
 {
 
@@ -13,12 +19,12 @@ void LoadFromLua::Load(const Json::Value& value, const std::string& dir,
 	LoadImages(img_name, images);
 
 	std::string lua_file = ee::FileHelper::GetAbsolutePath(dir, value["lua desc"].asString());
-	librespacker::ResUnpacker unpacker;
+	erespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 
 	std::string export_name = value["export name"].asString();
 
-	librespacker::IPackNode* node = librespacker::UnpackNodeFactory::Instance()->Query(export_name);
+	erespacker::IPackNode* node = erespacker::UnpackNodeFactory::Instance()->Query(export_name);
 	symbol->m_sprites.push_back(NodeToSprite::Trans(node));
 }
 

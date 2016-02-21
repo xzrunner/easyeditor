@@ -1,5 +1,9 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/PropertySettingPanel.h>
+
 #include <easyanim3d.h>
 
 namespace eanim3d

@@ -2,9 +2,13 @@
 #include "Lzma.h"
 #include "typedef.h"
 
+#include <ee/Exception.h>
 
+#include <string>
 
-namespace librespacker
+#include <assert.h>
+
+namespace erespacker
 {
 
 struct PKMHeader
@@ -38,11 +42,10 @@ void PackPKM::Load(const std::string& filepath)
 	Clear();
 
 	std::string filename = filepath.substr(0, filepath.find_last_of("."));
-
-	LoadCompressed(filename+".pkm", m_rgb_buf, m_width, m_height);
+	LoadCompressed(filename + ".pkm", m_rgb_buf, m_width, m_height);
 
 	int w, h;
-	LoadCompressed(filename+"_alpha.pkm", m_alpha_buf, w, h);	
+	LoadCompressed(filename + "_alpha.pkm", m_alpha_buf, w, h);	
 	assert(w == m_width && h == m_height);
 }
 

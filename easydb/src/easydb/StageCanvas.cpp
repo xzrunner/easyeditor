@@ -2,12 +2,16 @@
 #include "StagePanel.h"
 #include "Context.h"
 
-using namespace edb;
+#include <ee/DrawShapesVisitor.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Sprite.h>
+
+namespace edb
+{
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
-	, m_batch(100, ee::SpriteBatch::USAGE_STATIC)
 {
 }
 
@@ -41,4 +45,6 @@ void StageCanvas::drawConnection() const
 				ee::Colorf(0.8f, 0.8f, 0.8f));
 		}
 	}
+}
+
 }

@@ -5,7 +5,7 @@
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void P3dSprToLuaString::Pack(const PackP3dSpr* spr, ebuilder::CodeGenerator& gen)

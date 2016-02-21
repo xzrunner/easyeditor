@@ -8,6 +8,12 @@
 #include "preview/MainDialog.h"
 #include "view/StagePanel.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/Snapshoot.h>
+#include <ee/FetchAllVisitor.h>
+
 #include <easyshape.h>
 
 namespace lr
@@ -19,7 +25,7 @@ BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU_RANGE(ID_TOOLBAR+1, ID_TOOLBAR+9, Frame::OnToolBarClick)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title, const wxString& filetag)
+Frame::Frame(const std::string& title, const std::string& filetag)
 	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
@@ -33,16 +39,16 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString filter = GetFileFilter() + "|PNG files (*.png)|*.png";
+		std::string filter = GetFileFilter() + "|PNG files (*.png)|*.png";
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
-			wxString filename = dlg.GetPath();
-			wxString ext = ee::FileHelper::GetExtension(filename);
+			std::string filename = dlg.GetPath();
+			std::string ext = ee::FileHelper::GetExtension(filename);
 			if (ext == "png") {
-				SaveAsPNG(filename.ToStdString());
+				SaveAsPNG(filename);
 			} else {
-				SaveAsJson(filename.ToStdString());
+				SaveAsJson(filename);
 			}
 		}
 	} catch (ee::Exception& e) {
@@ -105,9 +111,9 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
-	wxString fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
+	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
-	m_task->Store(fixed);
+	m_task->Store(fixed.c_str());
 }
 
 }

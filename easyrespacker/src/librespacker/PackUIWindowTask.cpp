@@ -2,9 +2,13 @@
 #include "PackUI.h"
 #include "pack_ui_cfg.h"
 
+#include <ee/FileHelper.h>
+#include <ee/std_functor.h>
+#include <ee/StringHelper.h>
 
+#include <algorithm>
 
-namespace librespacker
+namespace erespacker
 {
 
 PackUIWindowTask::PackUIWindowTask(const std::string& filepath, const Json::Value& value)
@@ -69,7 +73,7 @@ PackUIWindowTask::PackUIWindowTask(const std::string& filepath, const Json::Valu
 
 PackUIWindowTask::~PackUIWindowTask()
 {
-	for_each(m_items.begin(), m_items.end(), DeletePointerFunctor<Item>());
+	for_each(m_items.begin(), m_items.end(), ee::DeletePointerFunctor<Item>());
 }
 
 void PackUIWindowTask::OnKnownPackID(const std::string& filepath, int id)

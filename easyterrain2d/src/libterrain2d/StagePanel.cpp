@@ -5,6 +5,16 @@
 #include "ToolBarPanel.h"
 #include "Sprite.h"
 
+#include <ee/shape_msg.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/sprite_msg.h>
+#include <ee/LibraryPanel.h>
+#include <ee/panel_msg.h>
+#include <ee/ImageSymbol.h>
+
 #include <easyshape.h>
 
 namespace eterrain2d
@@ -63,7 +73,7 @@ void StagePanel::Store(const std::string& dir, Json::Value& value) const
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
 		ee::Sprite* bg = bg_sprites[i];
 		value["bg"][i]["filepath"] = ee::FileHelper::GetRelativePath(
-			dir, bg->GetSymbol().GetFilepath()).ToStdString();
+			dir, bg->GetSymbol().GetFilepath());
 		bg->Store(value["bg"][i]);
 	}
 

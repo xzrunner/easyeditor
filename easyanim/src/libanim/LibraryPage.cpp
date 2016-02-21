@@ -2,17 +2,24 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/StringHelper.h>
+#include <ee/SymbolMgr.h>
+
 #include <easycomplex.h>
 #include <easycoco.h>
 
-namespace libanim
+namespace eanim
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Anim"))
+	: ee::LibraryPage(parent, "Anim")
 {
 	InitLayout();
-	m_list->SetFileter(libanim::FILE_TAG);
+	m_list->SetFileter(eanim::FILE_TAG);
 }
 
 bool LibraryPage::IsHandleSymbol(ee::Symbol* symbol) const
@@ -38,9 +45,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			ee::StringHelper::ToLower(type);
 			try {
 				if (type == "json") {
-					loadFromJsonFile(filename);
+					LoadFromJsonFile(filename);
 				} else if (type == "lua") {
-					loadFromLuaFile(filename);
+					LoadFromLuaFile(filename);
 				}
 			} catch (ee::Exception& e) {
 				ee::ExceptionDlg dlg(m_parent, e);
@@ -50,7 +57,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 	}
 }
 
-void LibraryPage::loadFromJsonFile(const std::string& filename)
+void LibraryPage::LoadFromJsonFile(const std::string& filename)
 {
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
@@ -58,13 +65,13 @@ void LibraryPage::loadFromJsonFile(const std::string& filename)
 	symbol->Release();
 }
 
-void LibraryPage::loadFromLuaFile(const std::string& filename)
+void LibraryPage::LoadFromLuaFile(const std::string& filename)
 {
  	std::vector<std::string> texfilenames;
  	std::string name = filename.substr(0, filename.find_last_of("."));
  	texfilenames.push_back(name + ".1.ppm");
  
-	libcoco::epe::ParserLuaFile parser;
+	ecoco::epe::ParserLuaFile parser;
  	parser.parser(filename);
  	parser.transToMemory(texfilenames);
  

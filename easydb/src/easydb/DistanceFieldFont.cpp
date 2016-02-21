@@ -1,8 +1,18 @@
 #include "DistanceFieldFont.h"
 
-#include <stdexcept>
+#include <ee/math_common.h>
+#include <ee/StringHelper.h>
+#include <ee/ImageSaver.h>
+#include <ee/Math2D.h>
 
 #include <freetype/ftglyph.h>
+#include <gl/glew.h>
+
+#include <locale>
+#include <fstream>
+
+#include <assert.h>
+#include <float.h>
 
 namespace edb
 {
@@ -128,8 +138,8 @@ void DistanceFieldFont::genChar(int unicode)
 	//Use our helper function to get the widths of
 	//the bitmap data that we will need in order to create
 	//our texture.
-	int width = next_p2( bitmap.width );
-	int height = next_p2( bitmap.rows );
+	int width = ee::next_p2( bitmap.width );
+	int height = ee::next_p2( bitmap.rows );
 
 	//Allocate memory for the texture data.
 	GLubyte* expanded_data = new GLubyte[4 * width * height];
@@ -182,7 +192,7 @@ void DistanceFieldFont::genChar(int unicode)
 	}
 
 	unsigned char* result = genDistanceFieldData(expanded_data, extracted, width, height);
-	std::string filepath = "e:/text_" + wxString::FromDouble(unicode);
+	std::string filepath = "e:/text_" + ee::StringHelper::ToString(unicode);
 //	ee::ImageSaver::storeToFile(extracted, width, height, filepath, ee::ImageSaver::e_png);
 	ee::ImageSaver::StoreToFile(result, 32, 32, 4, filepath, ee::ImageSaver::e_png);
 

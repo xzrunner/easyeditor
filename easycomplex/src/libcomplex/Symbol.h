@@ -1,7 +1,10 @@
-#ifndef COMPLEX_SYMBOL_H
-#define COMPLEX_SYMBOL_H
+#ifndef _EASYCOMPLEX_SYMBOL_H_
+#define _EASYCOMPLEX_SYMBOL_H_
 
+#include <ee/ShapeStyle.h>
+#include <ee/Symbol.h>
 
+#include <vector>
 
 namespace ecomplex
 {
@@ -73,4 +76,4 @@ private:
 
 }
 
-#endif // COMPLEX_SYMBOL_H
+#endif // _EASYCOMPLEX_SYMBOL_H_

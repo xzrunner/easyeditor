@@ -1,7 +1,9 @@
-
 #include "CodeDialog.h"
 
-using namespace ebuilder;
+#include <wx/sizer.h>
+
+namespace ebuilder
+{
 
 CodeDialog::CodeDialog(wxWindow* parent)
 	: wxDialog(parent, wxID_ANY, wxT("Codes"), wxDefaultPosition, 
@@ -24,4 +26,6 @@ CodePanel::CodePanel(CodeDialog* dlg)
 	dlg->notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_BOTTOM);
 	sizer->Add(dlg->notebook, 1, wxEXPAND);
 	SetSizer(sizer);
+}
+
 }

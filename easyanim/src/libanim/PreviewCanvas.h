@@ -1,12 +1,12 @@
-#ifndef _LIBANIM_PREVIEW_CANVAS_H_
-#define _LIBANIM_PREVIEW_CANVAS_H_
-
-
-#include <wx/wx.h>
+#ifndef _EASYANIM_PREVIEW_CANVAS_H_
+#define _EASYANIM_PREVIEW_CANVAS_H_
 
 #include "Symbol.h"
 
-namespace libanim
+#include <ee/OrthoCanvas.h>
+#include <ee/PlayControl.h>
+
+namespace eanim
 {
 
 class PreviewCanvas : public ee::OrthoCanvas
@@ -47,4 +47,4 @@ private:
 
 }
 
-#endif // _LIBANIM_PREVIEW_CANVAS_H_
+#endif // _EASYANIM_PREVIEW_CANVAS_H_

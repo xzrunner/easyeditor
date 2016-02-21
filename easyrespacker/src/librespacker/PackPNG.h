@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_PNG_H_
-#define _LIBRESPACKER_PACK_PNG_H_
+#ifndef _EASYRESPACKER_PACK_PNG_H_
+#define _EASYRESPACKER_PACK_PNG_H_
 
 #include "PackImage.h"
 
 #include <stdint.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackPNG : public PackImage
@@ -36,4 +36,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_PACK_PNG_H_
+#endif // _EASYRESPACKER_PACK_PNG_H_

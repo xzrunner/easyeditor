@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_OBJECT_H_
 #define _EASYEDITOR_OBJECT_H_
 
+#include <stddef.h>
+
 namespace ee
 {
 

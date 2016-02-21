@@ -2,7 +2,12 @@
 #include "PackClipbox.h"
 #include "Utility.h"
 
-namespace librespacker
+#include <ee/Visitor.h>
+#include <ee/Exception.h>
+
+#include <easycomplex.h>
+
+namespace erespacker
 {
 
 ClipboxBuilder::ClipboxBuilder()

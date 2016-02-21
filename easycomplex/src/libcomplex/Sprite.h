@@ -1,5 +1,7 @@
-#ifndef COMPLEX_SPRITE_H
-#define COMPLEX_SPRITE_H
+#ifndef _EASYCOMPLEX_SPRITE_H_
+#define _EASYCOMPLEX_SPRITE_H_
+
+#include <ee/Sprite.h>
 
 #include "Symbol.h"
 
@@ -37,4 +39,4 @@ protected:
 
 }
 
-#endif // COMPLEX_SPRITE_H
+#endif // _EASYCOMPLEX_SPRITE_H_

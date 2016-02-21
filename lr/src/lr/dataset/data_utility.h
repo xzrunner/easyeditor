@@ -1,9 +1,10 @@
 #ifndef _LR_DATA_UTILITY_H_
 #define _LR_DATA_UTILITY_H_
 
-
+#include <vector>
 
 namespace etexture { class Sprite; }
+namespace ee { class Shape; }
 
 namespace lr
 {

@@ -72,7 +72,7 @@ void Task::InitLayout(wxFrame* parent)
 	wxWindow* nb = m_library->GetNotebook();
 	m_library->AddPage(new ee::LibraryImagePage(nb));
 	m_library->AddPage(new ecomplex::LibraryPage(nb));
-	m_library->AddPage(new libanim::LibraryPage(nb));
+	m_library->AddPage(new eanim::LibraryPage(nb));
 	m_library->AddPage(new etexture::LibraryPage(nb));
 
 	ee::PropertySettingPanel* property = new ee::PropertySettingPanel(left_hori);

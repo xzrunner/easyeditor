@@ -1,6 +1,12 @@
 #include "FileStorer.h"
 #include "Symbol.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/Sprite.h>
+
+#include <fstream>
+
 namespace ecomplex
 {
 
@@ -20,7 +26,7 @@ void FileStorer::Store(const char* filepath, const Symbol* symbol)
 
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
-	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
@@ -46,7 +52,7 @@ void FileStorer::StoreWithHistory(const char* filepath, const Symbol* symbol)
 
 	value["use_render_cache"] = symbol->m_use_render_cache;
 
-	wxString dir = ee::FileHelper::GetFileDir(filepath) + "\\";
+	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = Store(symbol->m_sprites[i], dir);
 
@@ -76,14 +82,13 @@ void FileStorer::CenterSymbol(Symbol* symbol)
 	symbol->m_rect.Translate(-offset);
 }
 
-Json::Value FileStorer::Store(ee::Sprite* sprite, const wxString& dir)
+Json::Value FileStorer::Store(ee::Sprite* sprite, const std::string& dir)
 {
 	Json::Value value;
 	const ee::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir,
-		symbol.GetFilepath()).ToStdString();
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol.GetFilepath());
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

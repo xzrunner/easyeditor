@@ -7,9 +7,19 @@
 #include "TopToolbarPanel.h"
 #include "widget_id.h"
 
+#include <ee/wrap_StagePanel.h>
+#include <ee/FileHelper.h>
+#include <ee/sprite_msg.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+
 #include <easycomplex.h>
 
-extern ee::StageModule MODULE_STAGE;
+#include <fstream>
+#include <algorithm>
+
+namespace ee { extern StageModule MODULE_STAGE; }
 
 namespace eui
 {
@@ -35,7 +45,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_clipbox.xmin = m_clipbox.ymin = -200;
 	m_clipbox.xmax = m_clipbox.ymax =  200;
 
-	MODULE_STAGE.impl = this;
+	ee::MODULE_STAGE.impl = this;
 }
 
 void StagePanel::LoadFromFile(const char* filename)
@@ -106,8 +116,8 @@ void StagePanel::StoreToFile(const char* filename) const
 	std::string ui_path = filename;
 	Json::Value value;
 	value["type"] = get_widget_desc(ID_WRAPPER);
-	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path).ToStdString();
-	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path).ToStdString();
+	value["items filepath"] = ee::FileHelper::GetRelativePath(dir, items_path);
+	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, top_path);
 	value["user type"] = m_toolbar->GetType();
 	value["tag"] = m_toolbar->GetTag();
 	value["clipbox"]["w"] = m_clipbox.Width();

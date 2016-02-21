@@ -1,13 +1,13 @@
-#ifndef _LIBRESPACKER_ANIM_BUILDER_H_
-#define _LIBRESPACKER_ANIM_BUILDER_H_
+#ifndef _EASYRESPACKER_ANIM_BUILDER_H_
+#define _EASYRESPACKER_ANIM_BUILDER_H_
 
 #include "INodeBuilder.h"
 
 #include <map>
 
-namespace libanim { class Symbol; }
+namespace eanim { class Symbol; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -22,18 +22,18 @@ public:
 
 	virtual void Traverse(ee::Visitor& visitor) const;
 
-	const IPackNode* Create(const libanim::Symbol* symbol);
+	const IPackNode* Create(const eanim::Symbol* symbol);
 
 private:
-	void Load(const libanim::Symbol* symbol, PackAnimation* anim);
+	void Load(const eanim::Symbol* symbol, PackAnimation* anim);
 
 private:
 	ExportNameSet& m_export_set;
 
-	std::map<const libanim::Symbol*, const PackAnimation*> m_map_data;
+	std::map<const eanim::Symbol*, const PackAnimation*> m_map_data;
 
 }; // AnimBuilder
 
 }
 
-#endif // _LIBRESPACKER_ANIM_BUILDER_H_
+#endif // _EASYRESPACKER_ANIM_BUILDER_H_

@@ -1,5 +1,13 @@
 #include "TidCfg.h"
 
+#include <ee/StringHelper.h>
+
+extern "C" {
+	#include <lua.h>
+ 	#include <lualib.h>
+ 	#include <lauxlib.h>
+};
+
 namespace eui
 {
 
@@ -46,8 +54,9 @@ void TidCfg::LoadConfig()
 		if(lua_isstring(L, -1))
 		{
 			std::string key = lua_tostring(L, -2);
-			wxString val = wxString::FromUTF8(lua_tostring(L, -1));
-			m_map_tid.insert(std::make_pair(key, val.ToStdString()));
+			std::string val = lua_tostring(L, -1);
+			ee::StringHelper::ToUtf8(val);
+			m_map_tid.insert(std::make_pair(key, val));
 		}
 		lua_pop(L, 1);
 	}

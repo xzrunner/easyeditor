@@ -1,7 +1,16 @@
 #include "OutlineToTriStrip.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/FileType.h>
+#include <ee/JsonSerializer.h>
+#include <ee/Triangulation.h>
+
+#include <wx/arrstr.h>
+
 #include <easyimage.h>
+
+#include <fstream>
 
 namespace edb
 {
@@ -37,14 +46,12 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
 
-		wxString outline_path = ee::FileHelper::GetFilenameAddTag(
+		std::string outline_path = ee::FileHelper::GetFilenameAddTag(
 			filepath, eimage::OUTLINE_FILE_TAG, "json");
 		if (!ee::FileHelper::IsFileExist(filepath)) {
 			continue;
@@ -53,7 +60,7 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(outline_path.fn_str());
+		std::ifstream fin(outline_path.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -75,11 +82,11 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 			ee::JsonSerializer::Store(strips[i], value_out["strips"][i]);
 		}
 
-		wxString out_file = ee::FileHelper::GetFilenameAddTag(filepath, 
+		std::string out_file = ee::FileHelper::GetFilenameAddTag(filepath, 
 			eimage::TRI_STRIP_FILE_TAG, "json");
 		Json::StyledStreamWriter writer;
 		std::locale::global(std::locale(""));
-		std::ofstream fout(out_file.fn_str());
+		std::ofstream fout(out_file.c_str());
 		std::locale::global(std::locale("C"));	
 		writer.write(fout, value_out);
 		fout.close();	

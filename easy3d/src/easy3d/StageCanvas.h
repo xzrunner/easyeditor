@@ -1,10 +1,11 @@
-#ifndef _E3D_STAGE_CANVAS_H_
-#define _E3D_STAGE_CANVAS_H_
+#ifndef _EASY3D_STAGE_CANVAS_H_
+#define _EASY3D_STAGE_CANVAS_H_
 
-
-
-#include "Matrix.h"
 #include "Camera.h"
+
+#include <ee/OnePassCanvas.h>
+#include <ee/Matrix3D.h>
+#include <ee/Camera.h>
 
 namespace e3d
 {
@@ -19,7 +20,7 @@ public:
 	Camera& GetCamera3() { return m_camera3; }
 	const Camera& GetCamera3() const { return m_camera3; }
 
-	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
+	ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj) const;
 
 protected:
 	virtual void InitGL();
@@ -28,10 +29,10 @@ protected:
 private:
 	Camera m_camera3;
 
-	mat4 m_mat_projection;
+	ee::mat4 m_mat_projection;
 
 }; // StageCanvas
 
 }
 
-#endif // _E3D_S TAGE_CANVAS_H_
+#endif // _EASY3D_S TAGE_CANVAS_H_

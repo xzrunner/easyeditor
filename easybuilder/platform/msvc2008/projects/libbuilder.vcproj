@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libbuilder"
+	Name="5.libbuilder"
 	ProjectGUID="{11082ADE-13CA-49C7-9F6D-C82F69333AD7}"
 	RootNamespace="libbuilder"
 	Keyword="Win32Proj"

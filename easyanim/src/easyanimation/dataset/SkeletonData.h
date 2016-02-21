@@ -1,7 +1,12 @@
 #ifndef _EASYANIM_SKELETON_DATA_H_
 #define _EASYANIM_SKELETON_DATA_H_
 
+#include <ee/Vector.h>
 
+#include <vector>
+#include <map>
+
+namespace ee { class Sprite; }
 
 namespace eanim
 {

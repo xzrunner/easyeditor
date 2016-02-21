@@ -1,7 +1,7 @@
 #ifndef _SG_SYMBOL_RENDER_H_
 #define _SG_SYMBOL_RENDER_H_
 
-
+namespace ee { class Sprite; class Symbol; class Vector; }
 
 namespace sg
 {

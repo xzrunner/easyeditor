@@ -1,6 +1,10 @@
 #include "PackEPT.h"
 #include "check_params.h"
 
+#include <ee/StringHelper.h>
+#include <ee/FileHelper.h>
+#include <ee/TextureFactory.h>
+
 namespace edb
 {
 
@@ -24,18 +28,18 @@ void PackEPT::Run(int argc, char* argv[])
 	if (!check_number(this, argc, 4)) return;
 	if (!check_folder(argv[3])) return;
 
-	librespacker::TextureType type = librespacker::TT_PNG8;
+	erespacker::TextureType type = erespacker::TT_PNG8;
 	char* stype = argv[5];
 	if (strcmp(stype, "png") == 0) {
-		type = librespacker::TT_PNG8;
+		type = erespacker::TT_PNG8;
 	} else if (strcmp(stype, "pvr") == 0) {
-		type = librespacker::TT_PVR;
+		type = erespacker::TT_PVR;
 	}	
 	Trigger(argv[2], argv[3], argv[4], type);
 }
 
 void PackEPT::Trigger(const std::string& tp_json, const std::string& tp_dir, 
-					  const std::string& out_file, librespacker::TextureType type)
+					  const std::string& out_file, erespacker::TextureType type)
 {
 	ee::TexturePacker tp(tp_dir);
 
@@ -53,7 +57,7 @@ void PackEPT::Trigger(const std::string& tp_json, const std::string& tp_dir,
 	}
 
 	// pack
-	librespacker::PackToBin::PackEPT(out_file, tp, type, 0, 1);
+	erespacker::PackToBin::PackEPT(out_file, tp, type, 0, 1);
 }
 
 }

@@ -2,9 +2,14 @@
 #include "IPackNode.h"
 #include "PackNodeFactory.h"
 
+#include <ee/std_functor.h>
+#include <ee/Visitor.h>
+
 #include <easyparticle3d.h>
 
-namespace librespacker
+#include <algorithm>
+
+namespace erespacker
 {
 
 P3dSprBuilder::P3dSprBuilder(ExportNameSet& export_set)
@@ -14,7 +19,7 @@ P3dSprBuilder::P3dSprBuilder(ExportNameSet& export_set)
 
 P3dSprBuilder::~P3dSprBuilder()
 {
-	for_each(m_nodes.begin(), m_nodes.end(), DeletePointerFunctor<IPackNode>());	
+	for_each(m_nodes.begin(), m_nodes.end(), ee::DeletePointerFunctor<IPackNode>());	
 }
 
 void P3dSprBuilder::Traverse(ee::Visitor& visitor) const

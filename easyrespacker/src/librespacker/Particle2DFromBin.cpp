@@ -5,7 +5,7 @@
 #include <ps_2d.h>
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int Particle2DFromBin::Size(const PackParticle2D* p2d)

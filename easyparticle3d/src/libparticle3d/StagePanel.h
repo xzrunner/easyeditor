@@ -1,7 +1,9 @@
 #ifndef _EASYPARTICLE3D_STAGEPANEL_H_
 #define _EASYPARTICLE3D_STAGEPANEL_H_
 
-
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+#include <ee/Matrix.h>
 
 namespace eparticle3d
 {

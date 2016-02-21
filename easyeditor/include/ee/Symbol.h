@@ -15,7 +15,7 @@ namespace ee
 class Sprite;
 class Matrix;
 
-class Symbol : public ListItem, private UserDataImpl
+class Symbol : public ListItem, public UserDataImpl
 {
 public:
 	virtual ~Symbol();

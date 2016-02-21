@@ -1,19 +1,21 @@
 #ifndef _EASYMODELING_BODY_PROPERTY_SETTING_H_
 #define _EASYMODELING_BODY_PROPERTY_SETTING_H_
 
+#include <ee/PropertySetting.h>
 
-
-namespace libmodeling { class Body; }
+namespace ee { class EditPanelImpl; class Sprite; }
 
 namespace emodeling
 {
+
+class Body;
 
 class BodyPropertySetting : public ee::PropertySetting
 {
 public:
 	BodyPropertySetting(ee::EditPanelImpl* stage, ee::Sprite* sprite);
 
-	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
 protected:
 	virtual void UpdateProperties(wxPropertyGrid* pg);
@@ -22,7 +24,7 @@ protected:
 private:
 	ee::EditPanelImpl* m_stage;
 
-	libmodeling::Body* m_body;
+	Body* m_body;
 
 }; // BodyPropertySetting
 

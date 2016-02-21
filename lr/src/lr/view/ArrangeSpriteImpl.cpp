@@ -4,6 +4,10 @@
 
 #include "dataset/CharacterAllDirections.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Sprite.h>
+
 #include <easycomplex.h>
 #include <easyparticle3d.h>
 

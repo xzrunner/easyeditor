@@ -5,7 +5,12 @@
 #include "PSConfigMgr.h"
 #include "PS.h"
 
+#include <ee/ShaderMgr.h>
+
 #include <ps_3d.h>
+#include <ps_3d_sprite.h>
+
+#include <fstream>
 
 namespace eparticle3d
 {

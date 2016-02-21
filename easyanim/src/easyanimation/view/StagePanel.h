@@ -1,7 +1,10 @@
 #ifndef _EASYANIM_STAGE_PANEL_H_
 #define _EASYANIM_STAGE_PANEL_H_
 
-
+#include <ee/EditPanel.h>
+#include <ee/MultiSpritesImpl.h>
+#include <ee/Visitor.h>
+#include <ee/StageDropTarget.h>
 
 namespace eanim
 {

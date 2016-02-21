@@ -4,7 +4,17 @@
 #include "PSConfigMgr.h"
 #include "language.h"
 
+#include <ee/SliderCtrl.h>
+#include <ee/Math2D.h>
+#include <ee/Symbol.h>
+#include <ee/FileHelper.h>
+#include <ee/ImagePanel.h>
+#include <ee/SliderCtrlTwo.h>
+
 #include <ps_3d.h>
+
+#include <wx/colourdata.h>
+#include <wx/colordlg.h>
 
 namespace eparticle3d
 {
@@ -190,7 +200,7 @@ void ComponentPanel::OnDelete(wxCommandEvent& event)
 
 void ComponentPanel::OnBindPS(wxCommandEvent& event)
 {
-	wxString filter = ee::FileType::GetTag(ee::FileType::e_particle3d);
+	std::string filter = ee::FileType::GetTag(ee::FileType::e_particle3d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)

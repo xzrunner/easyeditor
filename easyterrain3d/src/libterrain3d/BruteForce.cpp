@@ -1,6 +1,6 @@
 #include "BruteForce.h"
 
-namespace libterrain3d
+namespace eterrain3d
 {
 
 void BruteForce::Draw() const
@@ -20,19 +20,19 @@ void BruteForce::Draw() const
 		int size = (m_data.size - 1) * 2;
 		std::vector<ee::Colorf> colors;
 		colors.reserve(size);
-		std::vector<vec3> vertices;
+		std::vector<ee::vec3> vertices;
 		vertices.reserve(size);
 		for (int x = 0; x < m_data.size - 1; ++x)
 		{
 			col = GetTrueHeightAtPoint(x, y) / 255.0f;
 			colors.push_back(ee::Colorf(col, col, col));
 			height = GetScaledHeightAtPoint(x, y);
-			vertices.push_back(vec3(scale*x, scale*y, height));
+			vertices.push_back(ee::vec3(scale*x, scale*y, height));
 
 			col = GetTrueHeightAtPoint(x, y+1) / 255.0f;
 			colors.push_back(ee::Colorf(col, col, col));
 			height = GetScaledHeightAtPoint(x, y+1);
-			vertices.push_back(vec3(scale*x, scale*(y+1), height));
+			vertices.push_back(ee::vec3(scale*x, scale*(y+1), height));
 		}
 
 		shader->DrawShape(GL_TRIANGLE_STRIP, &vertices[0].x, size, &colors[0], true);	

@@ -1,8 +1,11 @@
 #ifndef _EASYCOMPLEX_TASK_H_
 #define _EASYCOMPLEX_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class ViewlistPanel; class GroupTreePanel; }
 
 namespace ecomplex 
 {

@@ -1,11 +1,17 @@
-
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "Context.h"
 
+#include <ee/sprite_msg.h>
+#include <ee/panel_msg.h>
+#include <ee/subject_id.h>
+#include <ee/FileHelper.h>
+#include <ee/std_functor.h>
+
 #include <easymodeling.h>
 #include <easyshape.h>
-#include <easyphysics.h>
+
+#include <algorithm>
 
 namespace emodeling
 {
@@ -39,24 +45,24 @@ void StagePanel::QuerySpritesByRect(const ee::Rect& rect, std::vector<ee::Sprite
 	TraverseSprites(RectQueryVisitor(rect, result), ee::DT_EDITABLE);
 }
 
-libmodeling::Joint* StagePanel::queryJointByPos(const ee::Vector& pos) const
+Joint* StagePanel::queryJointByPos(const ee::Vector& pos) const
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
-		if (m_joints[i]->isContain(pos))
+		if (m_joints[i]->IsContain(pos))
 			return m_joints[i];
 	return NULL;
 }
 
-void StagePanel::queryJointsByRect(const ee::Rect& rect, std::vector<libmodeling::Joint*>& result) const
+void StagePanel::queryJointsByRect(const ee::Rect& rect, std::vector<Joint*>& result) const
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
-		if (m_joints[i]->isIntersect(rect))
+		if (m_joints[i]->IsIntersect(rect))
 			result.push_back(m_joints[i]);
 	}
 }
 
-void StagePanel::removeJoint(libmodeling::Joint* joint)
+void StagePanel::removeJoint(Joint* joint)
 {
 	for (size_t i = 0, n = m_joints.size(); i < n; ++i)
 	{
@@ -71,7 +77,7 @@ void StagePanel::removeJoint(libmodeling::Joint* joint)
 
 void StagePanel::traverseBodies(ee::Visitor& visitor) const
 {
-	std::vector<libmodeling::Body*>::const_iterator itr = m_bodies.begin();
+	std::vector<Body*>::const_iterator itr = m_bodies.begin();
 	for ( ; itr != m_bodies.end(); ++itr)
 	{
 		bool next;
@@ -82,7 +88,7 @@ void StagePanel::traverseBodies(ee::Visitor& visitor) const
 
 void StagePanel::traverseJoints(ee::Visitor& visitor) const
 {
-	std::vector<libmodeling::Joint*>::const_iterator itr = m_joints.begin();
+	std::vector<Joint*>::const_iterator itr = m_joints.begin();
 	for ( ; itr != m_joints.end(); ++itr)
 	{
 		bool next;
@@ -112,17 +118,17 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	}
 }
 
-void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
+void StagePanel::loadBody(const std::string& filepath, Body& body)
 {
 	ee::Symbol* bg = NULL;
 	std::vector<ee::Shape*> shapes;
-	eshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
+	eshape::FileIO::LoadFromFile(filepath.c_str(), shapes, bg);
 	for (size_t i = 0, n = shapes.size();  i< n; ++i)
 	{
-		libmodeling::Fixture* fixture = new libmodeling::Fixture;
-		fixture->body = &body;
+		Fixture* fixture = new Fixture;
+		fixture->m_body = &body;
 
-		fixture->shape = shapes[i];
+		fixture->m_shape = shapes[i];
 
 		// 		if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(shapes[i]))
 		// 		{
@@ -142,27 +148,27 @@ void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 		// 		{
 		// 			fixture->shape = new eshape::CircleShape(ee::Vector(), circle->radius);
 		// 		}
-		body.fixtures.push_back(fixture);
+		body.m_fixtures.push_back(fixture);
 
 		//		shapes[i]->Release();
 	}
 }
 
-void StagePanel::loadBody(ee::Sprite* sprite, libmodeling::Body& body)
+void StagePanel::loadBody(ee::Sprite* sprite, Body& body)
 {
-	libmodeling::Fixture* fixture = new libmodeling::Fixture;
-	fixture->body = &body;
+	Fixture* fixture = new Fixture;
+	fixture->m_body = &body;
 
 	const float width = sprite->GetSymbol().GetSize().Width(),
 		height = sprite->GetSymbol().GetSize().Height();
-	fixture->shape = new eshape::RectShape(ee::Vector(0, 0), width * 0.5f, height * 0.5f);
+	fixture->m_shape = new eshape::RectShape(ee::Vector(0, 0), width * 0.5f, height * 0.5f);
 
-	body.fixtures.push_back(fixture);
+	body.m_fixtures.push_back(fixture);
 }
 
 void StagePanel::Insert(ee::Sprite* spr)
 {
-	wxString filepath = ee::FileHelper::GetFilenameAddTag(
+	std::string filepath = ee::FileHelper::GetFilenameAddTag(
 		spr->GetSymbol().GetFilepath(), eshape::FILE_TAG, "json");
 	if (!ee::FileHelper::IsFileExist(filepath)) {
 		return;
@@ -170,18 +176,18 @@ void StagePanel::Insert(ee::Sprite* spr)
 
 	ee::Symbol* bg = NULL;
 	std::vector<ee::Shape*> shapes;
-	eshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
-	libmodeling::Body* body = new libmodeling::Body;
+	eshape::FileIO::LoadFromFile(filepath.c_str(), shapes, bg);
+	Body* body = new Body;
 	for (int i = 0, n = shapes.size(); i< n; ++i)
 	{
-		libmodeling::Fixture* fixture = new libmodeling::Fixture;
-		fixture->body = body;
+		Fixture* fixture = new Fixture;
+		fixture->m_body = body;
 
-		fixture->shape = shapes[i];
-		body->fixtures.push_back(fixture);
+		fixture->m_shape = shapes[i];
+		body->m_fixtures.push_back(fixture);
 	}
 
-	body->sprite = spr;
+	body->m_sprite = spr;
 	spr->SetUserData(body);
 	m_bodies.push_back(body);
 }
@@ -190,7 +196,7 @@ void StagePanel::Remove(ee::Sprite* spr)
 {
 	for (size_t i = 0, n = m_bodies.size(); i < n; ++i)
 	{
-		if (m_bodies[i]->sprite == spr)
+		if (m_bodies[i]->m_sprite == spr)
 		{
 			delete m_bodies[i];
 			m_bodies.erase(m_bodies.begin() + i);
@@ -201,9 +207,9 @@ void StagePanel::Remove(ee::Sprite* spr)
 
 void StagePanel::Clear()
 {
-	for_each(m_bodies.begin(), m_bodies.end(), DeletePointerFunctor<libmodeling::Body>());
+	for_each(m_bodies.begin(), m_bodies.end(), ee::DeletePointerFunctor<Body>());
 	m_bodies.clear();
-	for_each(m_joints.begin(), m_joints.end(), DeletePointerFunctor<libmodeling::Joint>());
+	for_each(m_joints.begin(), m_joints.end(), ee::DeletePointerFunctor<Joint>());
 	m_joints.clear();
 }
 
@@ -223,8 +229,8 @@ void StagePanel::PointQueryVisitor::
 	Visit(ee::Object* object, bool& next)
 {
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->GetUserData());
-	if (data->isContain(m_pos))
+	Body* data = static_cast<Body*>(sprite->GetUserData());
+	if (data->IsContain(m_pos))
 	{
 		*m_pResult = sprite;
 		next = false;
@@ -249,8 +255,8 @@ void StagePanel::RectQueryVisitor::
 	Visit(ee::Object* object, bool& next)
 {
 	ee::Sprite* sprite = static_cast<ee::Sprite*>(object);
-	libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->GetUserData());
-	if (data->isIntersect(m_rect))
+	Body* data = static_cast<Body*>(sprite->GetUserData());
+	if (data->IsIntersect(m_rect))
 		m_result.push_back(sprite);
 	next = true;
 }

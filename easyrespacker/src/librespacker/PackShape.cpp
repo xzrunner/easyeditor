@@ -6,7 +6,7 @@
 #include "ShapeToBin.h"
 #include "ShapeFromBin.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 PackShape::PackShape(int id)

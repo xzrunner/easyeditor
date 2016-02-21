@@ -2,6 +2,8 @@
 
 #include "dataset/DataMgr.h"
 
+#include <ee/SymbolPropertySetting.h>
+
 namespace eanim
 {
 

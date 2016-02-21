@@ -1,7 +1,8 @@
 #ifndef _EASYUI_WINDOW_TOOLBAR_PANEL_H_
 #define _EASYUI_WINDOW_TOOLBAR_PANEL_H_
 
-
+#include <ee/ToolbarPanel.h>
+#include <ee/Observer.h>
 
 namespace eui
 {

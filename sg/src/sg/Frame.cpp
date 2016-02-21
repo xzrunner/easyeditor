@@ -2,6 +2,11 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
+#include <ee/Task.h>
+#include <ee/SymbolMgr.h>
+#include <ee/panel_msg.h>
+#include <ee/Symbol.h>
+
 namespace sg
 {
 
@@ -10,7 +15,7 @@ BEGIN_EVENT_TABLE(Frame, ee::Frame)
 	EVT_MENU(ID_SET_BG, Frame::onSetBackground)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title, const wxString& filetag)
+Frame::Frame(const std::string& title, const std::string& filetag)
 	: ee::Frame(title, filetag)
 {
 	m_view_menu->Append(ID_CHANGE_PERSPECTIVE, wxT("Perspective"), wxT("Perspective"));
@@ -26,7 +31,7 @@ void Frame::onChangePerspective(wxCommandEvent& event)
 
 void Frame::onSetBackground(wxCommandEvent& event)
 {
-	wxString filter = wxT("*.png;*.jpg;*.json");
+	std::string filter = "*.png;*.jpg;*.json";
 	wxFileDialog dlg(this, wxT("Choose Background"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)

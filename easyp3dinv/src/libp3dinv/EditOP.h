@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_EDIT_OP_H_
 #define _EASYP3DINV_EDIT_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
 
 namespace ep3dinv
 {

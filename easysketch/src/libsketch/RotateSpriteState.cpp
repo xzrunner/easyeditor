@@ -3,7 +3,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 
-namespace libsketch
+namespace esketch
 {
 
 RotateSpriteState::RotateSpriteState(StagePanel* stage,
@@ -13,16 +13,16 @@ RotateSpriteState::RotateSpriteState(StagePanel* stage,
 {
 }
 
-void RotateSpriteState::OnMousePress(const ivec2& pos)
+void RotateSpriteState::OnMousePress(const ee::ivec2& pos)
 {
 	m_last_pos = pos;
 }
 
-void RotateSpriteState::OnMouseRelease(const ivec2& pos)
+void RotateSpriteState::OnMouseRelease(const ee::ivec2& pos)
 {
 }
 
-void RotateSpriteState::OnMouseMove(const ivec2& pos)
+void RotateSpriteState::OnMouseMove(const ee::ivec2& pos)
 {
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 
@@ -33,7 +33,7 @@ void RotateSpriteState::OnMouseMove(const ivec2& pos)
 	canvas->Refresh();
 }
 
-void RotateSpriteState::Rotate(const e3d::Camera& cam, const ivec2& start, const ivec2& end)
+void RotateSpriteState::Rotate(const e3d::Camera& cam, const ee::ivec2& start, const ee::ivec2& end)
 {
 	m_selection.Traverse(Visitor(m_stage, cam, start, end));
 }
@@ -47,12 +47,12 @@ Visit(ee::Object* object, bool& next)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 
-	ivec2 center = m_stage->TransPos3ProjectToScreen(sprite->GetPos3());
-	ivec2 base = m_stage->TransPos3ProjectToScreen(vec3(0, 0, 0));
+	ee::ivec2 center = m_stage->TransPos3ProjectToScreen(sprite->GetPos3());
+	ee::ivec2 base = m_stage->TransPos3ProjectToScreen(ee::vec3(0, 0, 0));
 
-   	vec3 start = m_cam.MapToSphere(base + m_start -  center);
-   	vec3 end = m_cam.MapToSphere(base + m_end - center);
-   	Quaternion delta = Quaternion::CreateFromVectors(start, end);
+   	ee::vec3 start = m_cam.MapToSphere(base + m_start -  center);
+   	ee::vec3 end = m_cam.MapToSphere(base + m_end - center);
+   	ee::Quaternion delta = ee::Quaternion::CreateFromVectors(start, end);
 
  	sprite->Rotate3(delta);
 	next = true;

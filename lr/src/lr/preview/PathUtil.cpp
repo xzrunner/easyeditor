@@ -1,5 +1,8 @@
 #include "PathUtil.h"
 
+#include <ee/PrimitiveDraw.h>
+#include <ee/style_config.h>
+
 namespace lr
 {
 namespace preview

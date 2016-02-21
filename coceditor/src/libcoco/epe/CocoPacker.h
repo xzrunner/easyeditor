@@ -1,14 +1,17 @@
 #ifndef _COCO_EPE_COCO_PACKER_H_
 #define _COCO_EPE_COCO_PACKER_H_
 
-
 #include <easybuilder.h>
 
+#include <map>
+
 namespace ecomplex { class Symbol; }
-namespace libanim { class Symbol; }
+namespace eanim { class Symbol; }
 namespace escale9 { class Symbol; }
 
-namespace libcoco
+namespace ee { class Symbol; class ImageSprite; class ImageSymbol; class FontBlankSprite; class Sprite; }
+
+namespace ecoco
 {
 namespace epe
 {
@@ -30,7 +33,7 @@ private:
 	void resolveFont(const ee::FontBlankSprite* sprite);
 
 	void resolveAnimation(const ecomplex::Symbol* symbol);
-	void resolveAnimation(const libanim::Symbol* symbol);
+	void resolveAnimation(const eanim::Symbol* symbol);
 	void resolveAnimation(const escale9::Symbol* symbol);
 
 	void resolveSpriteForComponent(const ee::Sprite* sprite, 

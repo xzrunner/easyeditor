@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_SPRITE_OBSERVER_H_
 #define _EASYANIM_SPRITE_OBSERVER_H_
 
+#include <ee/SpriteObserver.h>
 
+#include <map>
 
 namespace eanim
 {

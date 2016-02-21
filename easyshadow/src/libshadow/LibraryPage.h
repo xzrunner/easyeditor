@@ -1,7 +1,7 @@
 #ifndef _EASYSHADOW_LIBRARY_PAGE_H_
 #define _EASYSHADOW_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace eshadow
 {

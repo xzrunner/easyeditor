@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="easyp3dinv"
+	Name="6.easyp3dinv"
 	ProjectGUID="{842597BE-1418-44CF-91EE-819E94B96D08}"
 	RootNamespace="easyp3dinv"
 	Keyword="Win32Proj"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib SOIL.lib freetype250_D.lib luad.lib libpngd.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib freetype250_D.lib luad.lib libpngd.lib cjsond.lib lzmad.lib pthreadVC2.lib"
 				OutputFile="..\easyp3dinv\x86\Debug\easyp3dinv.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easyp3dinv\x86\Debug\easyp3dinv.pdb"
@@ -143,10 +143,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib SOIL.lib freetype250.lib lua.lib libpng.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib freetype250.lib lua.lib libpng.lib cjson.lib lzma.lib pthreadVC2.lib"
 				OutputFile="..\easyp3dinv\x86\Release\easyp3dinv.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\soil\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\cjson\lib&quot;;&quot;..\..\..\..\editor-external\pthread\lib\x86&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easyp3dinv\x86\Release\easyp3dinv.pdb"

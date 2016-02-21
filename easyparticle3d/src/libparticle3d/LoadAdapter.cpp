@@ -1,6 +1,11 @@
 #include "LoadAdapter.h"
 
+#include <ee/Math2D.h>
+#include <ee/FileHelper.h>
+
 #include <ps_3d.h>
+
+#include <fstream>
 
 namespace eparticle3d
 {
@@ -21,8 +26,8 @@ void LoadAdapter::Load(const std::string& filepath)
 	emission_time = value["emission_time"].asInt() * 0.001f;
 
 	if (!value["life"].isNull()) {
-		life = value["life"]["center"].asInt();
-		life_var = value["life"]["offset"].asInt();
+		life = static_cast<float>(value["life"]["center"].asInt());
+		life_var = static_cast<float>(value["life"]["offset"].asInt());
 	} else {
 		int min = value["min_life"].asInt(),
 			max = value["max_life"].asInt();
@@ -42,11 +47,11 @@ void LoadAdapter::Load(const std::string& filepath)
 	vert_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 
 	if (!value["radial_speed"].isNull()) {
-		radial_spd = value["radial_speed"]["center"].asInt();
-		radial_spd_var = value["radial_speed"]["offset"].asInt();
+		radial_spd = static_cast<float>(value["radial_speed"]["center"].asInt());
+		radial_spd_var = static_cast<float>(value["radial_speed"]["offset"].asInt());
 	} else if (!value["speed"].isNull()) {
-		radial_spd = value["speed"]["center"].asInt();
-		radial_spd_var = value["speed"]["offset"].asInt();
+		radial_spd = static_cast<float>(value["speed"]["center"].asInt());
+		radial_spd_var = static_cast<float>(value["speed"]["offset"].asInt());
 	} else {
 		int min, max;
 		min = value["min_spd"].asInt();
@@ -55,8 +60,8 @@ void LoadAdapter::Load(const std::string& filepath)
 		radial_spd_var = (max - min) * 0.5f;
 	}
 
-	tangential_spd = value["tangential_spd"]["center"].asInt();
-	tangential_spd_var = value["tangential_spd"]["offset"].asInt();
+	tangential_spd = static_cast<float>(value["tangential_spd"]["center"].asInt());
+	tangential_spd_var = static_cast<float>(value["tangential_spd"]["offset"].asInt());
 
 	// todo
 	radial_spd *= 0.25f;
@@ -73,20 +78,20 @@ void LoadAdapter::Load(const std::string& filepath)
 		angular_spd_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
 	}
 
-	dis_region = value["disturbance_radius"]["center"].asInt();
-	dis_region_var = value["disturbance_radius"]["offset"].asInt();
+	dis_region = static_cast<float>(value["disturbance_radius"]["center"].asInt());
+	dis_region_var = static_cast<float>(value["disturbance_radius"]["offset"].asInt());
 
-	dis_spd = value["disturbance_spd"]["center"].asInt();
-	dis_spd_var = value["disturbance_spd"]["offset"].asInt();
+	dis_spd = static_cast<float>(value["disturbance_spd"]["center"].asInt());
+	dis_spd_var = static_cast<float>(value["disturbance_spd"]["offset"].asInt());
 
-	gravity = value["gravity"].asInt();
+	gravity = static_cast<float>(value["gravity"].asInt());
 	// todo
 	gravity *= 0.3f;
 
-	linear_acc = value["linear_acc"]["center"].asInt();
-	linear_acc_var = value["linear_acc"]["offset"].asInt();
+	linear_acc = static_cast<float>(value["linear_acc"]["center"].asInt());
+	linear_acc_var = static_cast<float>(value["linear_acc"]["offset"].asInt());
 
-	inertia = value["inertia"].asInt();
+	inertia = static_cast<float>(value["inertia"].asInt());
 
 	fadeout_time = value["fadeout_time"].asInt() * 0.001f;
 
@@ -98,8 +103,8 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	additive_blend = value["additive_blend"].asBool();
 
-	start_radius = abs(value["start_pos"]["radius"].asInt());
-	start_height = value["start_pos"]["height"].asInt();
+	start_radius = abs(static_cast<float>(value["start_pos"]["radius"].asInt()));
+	start_height = static_cast<float>(value["start_pos"]["height"].asInt());
 
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();

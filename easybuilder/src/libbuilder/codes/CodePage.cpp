@@ -1,11 +1,11 @@
-
 #include "CodePage.h"
 #include "defsext.h"
 #include "prefs.h"
 
-using namespace ebuilder;
+namespace ebuilder
+{
 
-CodePage::CodePage(wxWindow* parent, const wxString& name)
+CodePage::CodePage(wxWindow* parent, const std::string& name)
 	: wxStyledTextCtrl(parent), m_name(name) 
 {
 	m_LineNrID = 0;
@@ -26,9 +26,9 @@ CodePage::CodePage(wxWindow* parent, const wxString& name)
 	StyleSetForeground(wxSTC_STYLE_INDENTGUIDE, wxColour (wxT("DARK GREY")));
 
 	// set visibility
- 	SetVisiblePolicy (wxSTC_VISIBLE_STRICT|wxSTC_VISIBLE_SLOP, 1);
- 	SetXCaretPolicy (wxSTC_CARET_EVEN|wxSTC_VISIBLE_STRICT|wxSTC_CARET_SLOP, 1);
- 	SetYCaretPolicy (wxSTC_CARET_EVEN|wxSTC_VISIBLE_STRICT|wxSTC_CARET_SLOP, 1);
+	SetVisiblePolicy (wxSTC_VISIBLE_STRICT|wxSTC_VISIBLE_SLOP, 1);
+	SetXCaretPolicy (wxSTC_CARET_EVEN|wxSTC_VISIBLE_STRICT|wxSTC_CARET_SLOP, 1);
+	SetYCaretPolicy (wxSTC_CARET_EVEN|wxSTC_VISIBLE_STRICT|wxSTC_CARET_SLOP, 1);
 
 	// markers
 	MarkerDefine (wxSTC_MARKNUM_FOLDER,        wxSTC_MARK_DOTDOTDOT, wxT("BLACK"), wxT("BLACK"));
@@ -46,12 +46,12 @@ CodePage::CodePage(wxWindow* parent, const wxString& name)
 	SetLayoutCache (wxSTC_CACHE_PAGE);
 }
 
-const wxString& CodePage::getName() const 
+const std::string& CodePage::getName() const 
 { 
 	return m_name; 
 }
 
-wxString CodePage::DeterminePrefs (const wxString &filename) 
+wxString CodePage::DeterminePrefs (const wxString& filename) 
 {
 	LanguageInfo const* curInfo;
 
@@ -74,7 +74,7 @@ wxString CodePage::DeterminePrefs (const wxString &filename)
 	return wxEmptyString;
 }
 
-bool CodePage::InitializePrefs (const wxString &name) 
+bool CodePage::InitializePrefs (const std::string &name) 
 {
 	// initialize styles
 	StyleClearAll();
@@ -135,7 +135,7 @@ bool CodePage::InitializePrefs (const wxString &name)
 			StyleSetBold (Nr, (curType.fontstyle & mySTC_STYLE_BOLD) > 0);
 			StyleSetItalic (Nr, (curType.fontstyle & mySTC_STYLE_ITALIC) > 0);
 			StyleSetUnderline (Nr, (curType.fontstyle & mySTC_STYLE_UNDERL) > 0);
-			StyleSetVisible (Nr, (curType.fontstyle & mySTC_STYLE_HIDDEN) == 0);
+			StyleSetVisible (Nr, (curType.fontstyle & mySTC_STYLE_H_IDDEN) == 0);
 			StyleSetCase (Nr, curType.lettercase);
 			const char *pwords = curInfo->styles[Nr].words;
 			if (pwords) {
@@ -156,25 +156,25 @@ bool CodePage::InitializePrefs (const wxString &name)
 	StyleSetBackground (m_FoldingID, *wxWHITE);
 	SetMarginWidth (m_FoldingID, 0);
 	SetMarginSensitive (m_FoldingID, false);
- 	if (g_CommonPrefs.foldEnable) {
-  		SetMarginWidth (m_FoldingID, curInfo->folds != 0? m_FoldingMargin: 0);
-  		SetMarginSensitive (m_FoldingID, curInfo->folds != 0);
-  		SetProperty (wxT("fold"), curInfo->folds != 0? wxT("1"): wxT("0"));
-   		SetProperty (wxT("fold.comment"),
-   			(curInfo->folds & mySTC_FOLD_COMMENT) > 0? wxT("1"): wxT("0"));
-   		SetProperty (wxT("fold.compact"),
-   			(curInfo->folds & mySTC_FOLD_COMPACT) > 0? wxT("1"): wxT("0"));
-   		SetProperty (wxT("fold.preprocessor"),
-   			(curInfo->folds & mySTC_FOLD_PREPROC) > 0? wxT("1"): wxT("0"));
-   		SetProperty (wxT("fold.html"),
-   			(curInfo->folds & mySTC_FOLD_HTML) > 0? wxT("1"): wxT("0"));
-  		SetProperty (wxT("fold.html.preprocessor"),
-  			(curInfo->folds & mySTC_FOLD_HTMLPREP) > 0? wxT("1"): wxT("0"));
-   		SetProperty (wxT("fold.comment.python"),
-   			(curInfo->folds & mySTC_FOLD_COMMENTPY) > 0? wxT("1"): wxT("0"));
-   		SetProperty (wxT("fold.quotes.python"),
-   			(curInfo->folds & mySTC_FOLD_QUOTESPY) > 0? wxT("1"): wxT("0"));
- 	}
+	if (g_CommonPrefs.foldEnable) {
+		SetMarginWidth (m_FoldingID, curInfo->folds != 0? m_FoldingMargin: 0);
+		SetMarginSensitive (m_FoldingID, curInfo->folds != 0);
+		SetProperty (wxT("fold"), curInfo->folds != 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.comment"),
+			(curInfo->folds & mySTC_FOLD_COMMENT) > 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.compact"),
+			(curInfo->folds & mySTC_FOLD_COMPACT) > 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.preprocessor"),
+			(curInfo->folds & mySTC_FOLD_PREPROC) > 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.html"),
+			(curInfo->folds & mySTC_FOLD_H_TML) > 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.html.preprocessor"),
+			(curInfo->folds & mySTC_FOLD_H_TMLPREP) > 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.comment.python"),
+			(curInfo->folds & mySTC_FOLD_COMMENTPY) > 0? wxT("1"): wxT("0"));
+		SetProperty (wxT("fold.quotes.python"),
+			(curInfo->folds & mySTC_FOLD_QUOTESPY) > 0? wxT("1"): wxT("0"));
+	}
 	SetFoldFlags (wxSTC_FOLDFLAG_LINEBEFORE_CONTRACTED |
 		wxSTC_FOLDFLAG_LINEAFTER_CONTRACTED);
 
@@ -198,4 +198,6 @@ wxSTC_WS_VISIBLEALWAYS: wxSTC_WS_INVISIBLE);
 wxSTC_WRAP_WORD: wxSTC_WRAP_NONE);
 
 	return true;
+}
+
 }

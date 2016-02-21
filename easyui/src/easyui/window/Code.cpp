@@ -1,9 +1,11 @@
 #include "Code.h"
 
-#include <queue>
+#include <ee/FontBlankSprite.h>
 
 #include <easycomplex.h>
 #include <easybuilder.h>
+
+#include <queue>
 
 namespace eui
 {
@@ -113,7 +115,7 @@ void Code::ResolveText(const std::vector<ee::Sprite*>& sprites)
 
 		if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(spr))
 		{
-			std::string content = s->GetTextContext().ToStdString();
+			std::string content = s->GetTextContext();
 			size_t pos = 0;
 			std::string replace("\\n");
 			while ((pos = content.find('\n', pos)) != std::string::npos) {

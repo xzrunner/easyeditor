@@ -1,11 +1,11 @@
-#ifndef _LIBRESPACKER_PACK_LABEL_H_
-#define _LIBRESPACKER_PACK_LABEL_H_
+#ifndef _EASYRESPACKER_PACK_LABEL_H_
+#define _EASYRESPACKER_PACK_LABEL_H_
 
 #include "IPackNode.h"
 
+#include <ee/Color.h>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 class PackLabel : public IPackNode
@@ -51,4 +51,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_LABEL_H_
+#endif // _EASYRESPACKER_PACK_LABEL_H_

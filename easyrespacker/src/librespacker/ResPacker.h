@@ -1,12 +1,17 @@
-#ifndef _LIBRESPACKER_RES_PACKER_H_
-#define _LIBRESPACKER_RES_PACKER_H_
+#ifndef _EASYRESPACKER_RES_PACKER_H_
+#define _EASYRESPACKER_RES_PACKER_H_
 
+#include <ee/TexturePacker.h>
 
+#include <string>
+#include <vector>
 
 #include "typedef.h"
 //#include "PackPkgMgr.h"
 
-namespace librespacker
+namespace ee { class Symbol; }
+
+namespace erespacker
 {
 
 class ResPacker
@@ -45,4 +50,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_RES_PACKER_H_
+#endif // _EASYRESPACKER_RES_PACKER_H_

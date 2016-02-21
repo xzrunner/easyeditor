@@ -1,5 +1,12 @@
 #include "PathNavMesh.h"
 
+#include <ee/BoundingBox.h>
+#include <ee/Math2D.h>
+#include <ee/Matrix.h>
+#include <ee/style_config.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Triangulation.h>
+
 #include <easyshape.h>
 
 namespace lr

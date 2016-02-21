@@ -1,5 +1,9 @@
 #include "StageCanvas.h"
 
+#include <ee/SpriteRenderer.h>
+#include <ee/Sprite.h>
+#include <ee/PlayControl.h>
+
 namespace lr
 {
 namespace preview

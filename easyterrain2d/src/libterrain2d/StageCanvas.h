@@ -1,6 +1,10 @@
 #ifndef _EASYTERRAIN2D_STAGE_CANVAS_H_
 #define _EASYTERRAIN2D_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
+
+namespace ee { class Sprite; class MultiSpritesImpl; }
+
 namespace eterrain2d
 {
 

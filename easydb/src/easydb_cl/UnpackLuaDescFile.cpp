@@ -1,6 +1,8 @@
 #include "UnpackLuaDescFile.h"
 #include "check_params.h"
 
+#include <ee/StringHelper.h>
+#include <ee/FileHelper.h>
 
 #include <easyrespacker.h>
 
@@ -35,7 +37,7 @@ void UnpackLuaDescFile::Trigger(const std::string& lua_file, const std::string& 
 	std::vector<ee::Image*> images;
 	LoadAllImages(img_name, images);
 
-	librespacker::ResUnpacker unpacker;
+	erespacker::ResUnpacker unpacker;
 	unpacker.UnpackLua(lua_file, images);
 }
 

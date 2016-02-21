@@ -1,13 +1,12 @@
-#ifndef _LIBRESPACKER_PACK_ANIMATION_H_
-#define _LIBRESPACKER_PACK_ANIMATION_H_
+#ifndef _EASYRESPACKER_PACK_ANIMATION_H_
+#define _EASYRESPACKER_PACK_ANIMATION_H_
 
 #include "IPackNode.h"
 
-
-
 namespace ebuilder { class CodeGenerator; }
+namespace ee { class Sprite; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackClipbox;
@@ -111,4 +110,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_ANIMATION_H_
+#endif // _EASYRESPACKER_PACK_ANIMATION_H_

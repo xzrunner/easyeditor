@@ -1,11 +1,13 @@
 #include "AnimToLuaString.h"
 
+#include <ee/Exception.h>
+
 #include <easybuilder.h>
 #include <spritepack.h>
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void AnimToLuaString::Pack(const PackAnimation* anim, ebuilder::CodeGenerator& gen)

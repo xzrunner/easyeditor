@@ -2,7 +2,12 @@
 #include "RotateTrimImage.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Vector.h>
+#include <ee/Math2D.h>
 
+#include <fstream>
+#include <sstream>
 
 namespace edb
 {
@@ -42,9 +47,7 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			FixComplex(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
@@ -53,17 +56,17 @@ void FixRotateTrimJson::Trigger(const std::string& dir)
 	}
 }
 
-bool FixRotateTrimJson::FixSprite(const wxString& filepath, Json::Value& sprite_val) const
+bool FixRotateTrimJson::FixSprite(const std::string& filepath, Json::Value& sprite_val) const
 {
 	std::string spr_path = sprite_val["filepath"].asString();
 	if (!ee::FileType::IsType(spr_path, ee::FileType::e_image)) {
 		return false;
 	}
 
-	wxString spr_abs_path = ee::FileHelper::GetAbsolutePathFromFile(filepath, spr_path);
-	wxString spr_rel_path = ee::FileHelper::GetRelativePath(m_dir, spr_abs_path);
+	std::string spr_abs_path = ee::FileHelper::GetAbsolutePathFromFile(filepath, spr_path);
+	std::string spr_rel_path = ee::FileHelper::GetRelativePath(m_dir, spr_abs_path);
 	std::map<std::string, TrimInfo>::const_iterator itr 
-		= m_trim_info.find(spr_rel_path.ToStdString());
+		= m_trim_info.find(spr_rel_path);
 	if (itr == m_trim_info.end()) {
 		return false;
 	}

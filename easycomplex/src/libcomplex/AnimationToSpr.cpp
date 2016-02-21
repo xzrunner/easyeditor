@@ -3,12 +3,14 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
+#include <ee/trans_color.h>
+
 #include <easyanim.h>
 
 namespace ecomplex
 {
 
-ee::Sprite* AnimationToSpr::Trans(const librespacker::PackAnimation* anim)
+ee::Sprite* AnimationToSpr::Trans(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 	if (anim->actions[0].size == 1) {
@@ -18,15 +20,15 @@ ee::Sprite* AnimationToSpr::Trans(const librespacker::PackAnimation* anim)
 	}
 }
 
-ee::Sprite* AnimationToSpr::TransComplex(const librespacker::PackAnimation* anim)
+ee::Sprite* AnimationToSpr::TransComplex(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size == 1);
 
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
-	const librespacker::PackAnimation::Frame& src = anim->frames[0];
+	const erespacker::PackAnimation::Frame& src = anim->frames[0];
 	ecomplex::Symbol* dst = new ecomplex::Symbol;
-	for (int i = 0; i < src.parts.size(); ++i) {
-		const librespacker::PackAnimation::Part& part = src.parts[i];
+	for (int i = 0, n = src.parts.size(); i < n; ++i) {
+		const erespacker::PackAnimation::Part& part = src.parts[i];
 		ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 		TransSprite(spr, part.t);
 		dst->m_sprites.push_back(spr);
@@ -37,19 +39,19 @@ ee::Sprite* AnimationToSpr::TransComplex(const librespacker::PackAnimation* anim
 	return new Sprite(complex);
 }
 
-ee::Sprite* AnimationToSpr::TransAnim(const librespacker::PackAnimation* anim)
+ee::Sprite* AnimationToSpr::TransAnim(const erespacker::PackAnimation* anim)
 {
 	assert(!anim->actions.empty() && anim->actions[0].size >= 1);
 
-	libanim::Symbol* anim_symbol = new libanim::Symbol;
-	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
+	eanim::Symbol* anim_symbol = new eanim::Symbol;
+	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
 	for (int i = 0; i < anim->actions[0].size; ++i) {
-		const librespacker::PackAnimation::Frame& src = anim->frames[i];
-		libanim::Symbol::Frame* frame = new libanim::Symbol::Frame;
+		const erespacker::PackAnimation::Frame& src = anim->frames[i];
+		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
 		frame->index = i;
 		frame->bClassicTween = false;
-		for (int j = 0; j < src.parts.size(); ++j) {
-			const librespacker::PackAnimation::Part& part = src.parts[j];
+		for (int j = 0, m = src.parts.size(); j < m; ++j) {
+			const erespacker::PackAnimation::Part& part = src.parts[j];
 			ee::Sprite* spr = NodeToSprite::Trans(anim->components[part.comp_idx].node);
 			TransSprite(spr, part.t);
 			frame->sprites.push_back(spr);
@@ -59,18 +61,18 @@ ee::Sprite* AnimationToSpr::TransAnim(const librespacker::PackAnimation* anim)
 	anim_symbol->setFPS(30);
 	anim_symbol->m_layers.push_back(layer);
 	anim_symbol->InitBounding();
-	return new libanim::Sprite(anim_symbol);
+	return new eanim::Sprite(anim_symbol);
 }
 
-void AnimationToSpr::TransSprite(ee::Sprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	if (!librespacker::PackAnimation::IsMatrixIdentity(t.mat)) {
+	if (!erespacker::PackAnimation::IsMatrixIdentity(t.mat)) {
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
 }
 
-void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
 	float dx = t.mat[4] / 16.0f,
 		dy = -t.mat[5] / 16.0f;
@@ -128,7 +130,7 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const librespacker::PackAni
 	spr->SetTransform(ee::Vector(dx, dy), angle);
 }
 
-void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const librespacker::PackAnimation::SpriteTrans& t)
+void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
 	spr->color.multi = ee::TransColor(t.color, ee::PT_ARGB);
 	spr->color.add = ee::TransColor(t.additive, ee::PT_ARGB);

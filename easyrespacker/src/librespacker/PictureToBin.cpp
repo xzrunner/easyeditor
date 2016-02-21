@@ -2,9 +2,12 @@
 #include "pack_unpack.h"
 #include "typedef.h"
 
+#include <ee/TexturePacker.h>
+#include <ee/Image.h>
+
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int PictureToBin::Size(const PackPicture* pic)
@@ -50,13 +53,13 @@ void PictureToBin::PackQuad(const PackPicture::Quad& quad, uint8_t** ptr,
 	int src[8];
 	PackPicture::GetImgSrcPos(tp, quad.img, quad.texture_coord, src);
 	for (int i = 0; i < 8; ++i) {
-		uint16_t p = src[i] * scale;
+		uint16_t p = static_cast<int>(src[i] * scale);
 		pack(p, ptr);
 	}
 
 	for (int i = 0; i < 4; ++i) {
-		int32_t x = floor(quad.screen_coord[i].x * SCALE + 0.5f),
-			y = -floor(quad.screen_coord[i].y * SCALE + 0.5f);
+		int32_t x = static_cast<int>(floor(quad.screen_coord[i].x * SCALE + 0.5f)),
+			    y =-static_cast<int>(floor(quad.screen_coord[i].y * SCALE + 0.5f));
 		pack(x, ptr);
 		pack(y, ptr);
 	}

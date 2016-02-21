@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_NODE_FROMI_BIN_H_
-#define _LIBRESPACKER_NODE_FROMI_BIN_H_
+#ifndef _EASYRESPACKER_NODE_FROMI_BIN_H_
+#define _EASYRESPACKER_NODE_FROMI_BIN_H_
 
 #include <string>
 
-namespace librespacker
+namespace erespacker
 {
 
 class NodeFromBin
@@ -18,4 +18,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_NODE_FROMI_BIN_H_
+#endif // _EASYRESPACKER_NODE_FROMI_BIN_H_

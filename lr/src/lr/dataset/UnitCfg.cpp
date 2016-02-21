@@ -1,8 +1,11 @@
 #include "UnitCfg.h"
 #include "WidgetFactory.h"
 
+#include <ee/FileHelper.h>
 
 #include <wx/stdpaths.h>
+
+#include <fstream>
 
 namespace lr
 {
@@ -25,10 +28,10 @@ UnitCfg::UnitCfg()
 		LoadFromFile(FILENAME);
 	} else {
 		wxStandardPathsBase& stdp = wxStandardPaths::Get();
-		wxString exe_path = stdp.GetExecutablePath();
-		wxString cfg_path = ee::FileHelper::GetFileDir(exe_path) + "\\" + FILENAME;
+		std::string exe_path = stdp.GetExecutablePath();
+		std::string cfg_path = ee::FileHelper::GetFileDir(exe_path) + "\\" + FILENAME;
 		if (ee::FileHelper::IsFileExist(cfg_path)) {
-			LoadFromFile(cfg_path);
+			LoadFromFile(cfg_path.c_str());
 		}
 	}
 }

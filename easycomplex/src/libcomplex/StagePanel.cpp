@@ -6,7 +6,15 @@
 #include "LibraryPanel.h"
 #include "Symbol.h"
 
-extern ee::StageModule MODULE_STAGE;
+#include <ee/wrap_StagePanel.h>
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/StageDropTarget.h>
+#include <ee/panel_msg.h>
+#include <ee/SceneNode.h>
+#include <ee/sprite_msg.h>
+#include <ee/subject_id.h>
+
+namespace ee { extern StageModule MODULE_STAGE; }
 
 namespace ecomplex
 {
@@ -29,7 +37,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	SetDropTarget(new ee::StageDropTarget(this, GetStageImpl(), library));
 
-	MODULE_STAGE.impl = this;
+	ee::MODULE_STAGE.impl = this;
 
 	RegistSubject(ee::ClearSpriteSJ::Instance());
 }

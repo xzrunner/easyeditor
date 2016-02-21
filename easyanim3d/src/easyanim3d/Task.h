@@ -1,8 +1,11 @@
 #ifndef _EASYANIM3D_TASK_H_
 #define _EASYANIM3D_TASK_H_
 
+#include <ee/Task.h>
 
 #include <wx/splitter.h>
+
+namespace ee { class LibraryPanel; class PropertySettingPanel; class EditPanel; }
 
 namespace eanim3d
 {

@@ -1,7 +1,11 @@
 #ifndef _EASYPARTICLE3D_INVERT_RECORDER_H_
 #define _EASYPARTICLE3D_INVERT_RECORDER_H_
 
+#include <ee/Color.h>
 
+#include <json/json.h>
+
+#include <time.h>
 
 struct p3d_particle;
 

@@ -2,6 +2,14 @@
 #include "StagePanel2D.h"
 #include "Shader2D.h"
 
+#include <ee/ShaderMgr.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/Symbol.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/style_config.h>
+
 namespace eshader
 {
 

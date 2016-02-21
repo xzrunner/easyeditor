@@ -3,6 +3,9 @@
 #include "PreviewCanvas.h"
 #include "PreviewEditOP.h"
 
+#include <ee/SettingData.h>
+#include <ee/Config.h>
+
 namespace ecomplex
 {
 

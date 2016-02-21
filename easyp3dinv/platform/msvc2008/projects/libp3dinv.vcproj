@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libp3dinv"
+	Name="5.libp3dinv"
 	ProjectGUID="{B80A41C3-5168-43A8-AC9D-C110C6140C86}"
 	RootNamespace="libp3dinv"
 	Keyword="Win32Proj"

@@ -20,7 +20,7 @@ class SelectSpritesOP : public DrawSelectRectOP
 {
 public:
 	SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage, 
-		MultiSpritesImpl* spritesImpl, EditCMPT* callback = NULL);
+		MultiSpritesImpl* sprites_impl, EditCMPT* callback = NULL);
 	virtual ~SelectSpritesOP();
 
 	virtual bool OnKeyDown(int keyCode);

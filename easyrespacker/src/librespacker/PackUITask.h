@@ -1,10 +1,10 @@
-#ifndef _LIBRESPACKER_PACK_UI_TASK_H_
-#define _LIBRESPACKER_PACK_UI_TASK_H_
+#ifndef _EASYRESPACKER_PACK_UI_TASK_H_
+#define _EASYRESPACKER_PACK_UI_TASK_H_
 
 #include <string>
 #include <json/json.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 class PackUITask
@@ -22,4 +22,4 @@ protected:
 
 }
 
-#endif // _LIBRESPACKER_PACK_UI_TASK_H_
+#endif // _EASYRESPACKER_PACK_UI_TASK_H_

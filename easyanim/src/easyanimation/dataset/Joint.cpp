@@ -1,5 +1,11 @@
 #include "Joint.h"
 
+#include <ee/Sprite.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Math2D.h>
+
+#include <assert.h>
+
 namespace eanim
 {
 

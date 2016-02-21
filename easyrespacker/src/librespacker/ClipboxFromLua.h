@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_CLIPBOX_FROM_LUA_H_
-#define _LIBRESPACKER_CLIPBOX_FROM_LUA_H_
+#ifndef _EASYRESPACKER_CLIPBOX_FROM_LUA_H_
+#define _EASYRESPACKER_CLIPBOX_FROM_LUA_H_
 
 #include "PackClipbox.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class ClipboxFromLua
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_CLIPBOX_FROM_LUA_H_
+#endif // _EASYRESPACKER_CLIPBOX_FROM_LUA_H_

@@ -3,7 +3,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int Particle3DToBin::Size(const PackParticle3D* p3d)

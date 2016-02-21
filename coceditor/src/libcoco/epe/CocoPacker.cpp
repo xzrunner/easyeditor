@@ -3,11 +3,16 @@
 
 #include "../Utility.h"
 
+#include <ee/ImageSprite.h>
+#include <ee/FontBlankSprite.h>
+#include <ee/trans_color.h>
+#include <ee/Exception.h>
+
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
 
-namespace libcoco
+namespace ecoco
 {
 namespace epe
 {
@@ -47,15 +52,15 @@ void CocoPacker::pack(const std::vector<const ee::Symbol*>& symbols)
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			resolveAnimation(complex);
 		}
-		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol))
+		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			std::set<const ee::ImageSymbol*> unique;
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				libanim::Symbol::Layer* layer = anim->m_layers[i];
+				eanim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					libanim::Symbol::Frame* frame = layer->frames[j];
+					eanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
 						ee::Sprite* sprite = frame->sprites[k];
@@ -164,7 +169,7 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	// tex
 	// todo: specify only 1 texture
 	std::string assignTex = lua::assign("tex", wxString::FromDouble(1).ToStdString());
-	const ee::Rect* pr = m_tex.query(sprite->GetSymbol().GetImage());
+	const ee::Rect* pr = m_tex.Query(sprite->GetSymbol().GetImage());
 
 	// src
 	int x0 = pr->xmin, y0 = pr->ymax;
@@ -260,7 +265,7 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 	// tex
 	// todo: specify only 1 texture
 	std::string assignTex = lua::assign("tex", wxString::FromDouble(1).ToStdString());
-	const ee::Rect* pr = m_tex.query(symbol->GetImage());
+	const ee::Rect* pr = m_tex.Query(symbol->GetImage());
 
 	// src
 	int x0 = pr->xmin, y0 = pr->ymax;
@@ -414,7 +419,7 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 	}
 }
 
-void CocoPacker::resolveAnimation(const libanim::Symbol* symbol)
+void CocoPacker::resolveAnimation(const eanim::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -441,10 +446,10 @@ void CocoPacker::resolveAnimation(const libanim::Symbol* symbol)
 		{
 			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
 			{
-				libanim::Symbol::Layer* layer = symbol->m_layers[j];
+				eanim::Symbol::Layer* layer = symbol->m_layers[j];
 				if (i < layer->frames.size())
 				{
-					libanim::Symbol::Frame* frame = layer->frames[i];
+					eanim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						resolveSpriteForComponent(frame->sprites[k], ids, unique, order);
 				}
@@ -461,7 +466,7 @@ void CocoPacker::resolveAnimation(const libanim::Symbol* symbol)
 			lua::TableAssign ta(m_gen, "", true);
 
 			std::vector<ee::Sprite*> sprites;
-			libanim::Utility::GetCurrSprites(symbol, i, sprites);
+			eanim::Utility::GetCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				resolveSpriteForFrame(sprites[j], order);
 		}
@@ -568,7 +573,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 		}
 		else
 		{
-			// libanim::Symbol's sprites store unique
+			// eanim::Symbol's sprites store unique
 			std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->GetSymbol());
 			assert(itr != m_mapSymbolID.end());
 			id = itr->second;

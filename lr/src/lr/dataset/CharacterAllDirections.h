@@ -3,6 +3,10 @@
 
 #include "CharacterFileName.h"
 
+#include <map>
+
+namespace ee { class Symbol; }
+
 namespace lr
 {
 

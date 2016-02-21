@@ -1,17 +1,18 @@
+#ifndef _EASYMODELING_PREVIEW_DIALOG_H_
+#define _EASYMODELING_PREVIEW_DIALOG_H_
 
-#ifndef EMODELING_PREVIEW_DIALOG_H
-#define EMODELING_PREVIEW_DIALOG_H
-
-
+#include <wx/dialog.h>
 
 namespace emodeling
 {
-	class PreviewDialog : public wxDialog
-	{
-	public:
-		PreviewDialog();
 
-	}; // PreviewDialog
+class PreviewDialog : public wxDialog
+{
+public:
+	PreviewDialog();
+
+}; // PreviewDialog
+
 }
 
-#endif // EMODELING_PREVIEW_DIALOG_H
+#endif // _EASYMODELING_PREVIEW_DIALOG_H_

@@ -1,7 +1,7 @@
-#ifndef COMPLEX_LIBRARY_PAGE_H
-#define COMPLEX_LIBRARY_PAGE_H
+#ifndef _EASYCOMPLEX_LIBRARY_PAGE_H_
+#define _EASYCOMPLEX_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace ecomplex
 {
@@ -26,4 +26,4 @@ private:
 
 }
 
-#endif // COMPLEX_LIBRARY_PAGE_H
+#endif // _EASYCOMPLEX_LIBRARY_PAGE_H_

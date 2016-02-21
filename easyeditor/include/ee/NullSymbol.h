@@ -11,7 +11,7 @@ class NullSymbol : public Symbol
 public:
 	NullSymbol(const std::string& filename) { m_filepath = filename; }
 	NullSymbol(const std::string& filename, int width, int height)
-		: m_size(width, height) { m_filepath = filename; }
+		: m_size(static_cast<float>(width), static_cast<float>(height)) { m_filepath = filename; }
 
 	//
 	// IObject interface

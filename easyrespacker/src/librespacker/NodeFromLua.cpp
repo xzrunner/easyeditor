@@ -1,10 +1,10 @@
 #include "NodeFromLua.h"
 
+#include <ee/Math2D.h>
+
 #include <math.h>
 
-
-
-namespace librespacker
+namespace erespacker
 {
 
 float NodeFromLua::TransTime(int time)

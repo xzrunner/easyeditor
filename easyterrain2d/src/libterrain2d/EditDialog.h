@@ -1,7 +1,13 @@
 #ifndef _EASYTERRAIN2D_EDIT_DIALOG_H_
 #define _EASYTERRAIN2D_EDIT_DIALOG_H_
 
+#include <wx/dialog.h>
 
+#include <ee/EditPanel.h>
+
+class wxGLContext;
+
+namespace ee { class MultiSpritesImpl; class Sprite; class Camera; }
 
 namespace eterrain2d
 {

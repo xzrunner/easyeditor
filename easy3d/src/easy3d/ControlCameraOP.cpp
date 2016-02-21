@@ -1,6 +1,8 @@
 #include "ControlCameraOP.h"
 #include "StageCanvas.h"
 
+#include <ee/EditPanelImpl.h>
+
 namespace e3d
 {
 

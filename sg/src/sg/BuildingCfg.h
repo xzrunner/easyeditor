@@ -3,6 +3,7 @@
 
 #include <JSON/json.h>
 
+namespace ee { class LibraryPanel; }
 
 namespace sg
 {

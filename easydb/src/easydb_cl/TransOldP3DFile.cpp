@@ -1,6 +1,12 @@
 #include "TransOldP3DFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+
+#include <wx/arrstr.h>
+
+#include <fstream>
+
 namespace edb
 {
 
@@ -35,9 +41,7 @@ void TransOldP3DFile::Run(const std::string& folder)
 	ee::FileHelper::FetchAllFiles(folder, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (ee::FileType::IsType(filepath, ee::FileType::e_particle3d)) {
 			Trans(filepath);
 		}
@@ -54,7 +58,7 @@ void TransOldP3DFile::Trans(const std::string& filepath) const
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = ee::FileHelper::GetFileDir(filepath);
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 
 	bool dirty = false;
 

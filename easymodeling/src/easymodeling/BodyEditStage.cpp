@@ -1,4 +1,3 @@
-
 #include "BodyEditStage.h"
 
 namespace emodeling
@@ -16,8 +15,8 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 //
 // 	if (m_sprite && m_sprite->GetUserData())
 // 	{
-// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->GetUserData());
-// 		libmodeling::Fixture* fixture = new libmodeling::Fixture;
+// 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
+// 		Fixture* fixture = new Fixture;
 // 		fixture->body = bd;
 // 		shape->Retain();
 // 		fixture->shape = shape;
@@ -31,7 +30,7 @@ BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
 //
 //	 	if (m_sprite && m_sprite->GetUserData())
 //	 	{
-//	 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->GetUserData());
+//	 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
 //	 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 //	 		{
 //	 			if (bd->fixtures[i]->shape == shape)
@@ -50,7 +49,7 @@ void BodyEditStage::loadShapes()
 // 
 // 	if (m_sprite && m_sprite->GetUserData())
 // 	{
-// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->GetUserData());
+// 		Body* bd = static_cast<Body*>(m_sprite->GetUserData());
 // 		m_shapes.reserve(bd->fixtures.size());
 // 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 // 		{

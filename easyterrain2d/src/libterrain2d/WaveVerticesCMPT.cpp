@@ -4,10 +4,15 @@
 #include "OceanMesh.h"
 #include "config.h"
 
+#include <ee/SettingData.h>
+#include <ee/panel_msg.h>
+
+#include <wx/spinctrl.h>
+
 namespace eterrain2d
 {
 
-WaveVerticesCMPT::WaveVerticesCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
+WaveVerticesCMPT::WaveVerticesCMPT(wxWindow* parent, const std::string& name, StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage_panel(stage)
 {

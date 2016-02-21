@@ -1,14 +1,19 @@
 #include "Frame.h"
 #include "Task.h"
 
-#include <wx/splitter.h>
+#include <ee/FileType.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/FileHelper.h>
 
 #include <easyparticle3d.h>
+
+#include <wx/splitter.h>
 
 namespace eparticle3d
 {
 
-Frame::Frame(const wxString& title, const wxString& filetag)
+Frame::Frame(const std::string& title, const std::string& filetag)
 	: ee::Frame(title, filetag)
 {
 }
@@ -18,13 +23,13 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString anim_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim));
-		wxString inv_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_p3dinv));
-		wxString filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
+		std::string anim_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_anim));
+		std::string inv_filter = GetJsonFileFilter(ee::FileType::GetTag(ee::FileType::e_p3dinv));
+		std::string filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
-			wxString filename = dlg.GetPath();
+			std::string filename = dlg.GetPath();
 			int idx = dlg.GetFilterIndex();
 			if (idx == 0) {
 				SaveAsParticle3d(filename);
@@ -33,7 +38,7 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 			} else if (idx == 2) {
 				SaveAsInvert(filename);
 			} else {
-				throw ee::Exception("error filepath %s", filename.ToStdString().c_str());
+				throw ee::Exception("error filepath %s", filename.c_str());
 			}
 		}
 	} catch (ee::Exception& e) {
@@ -42,19 +47,19 @@ void Frame::OnSaveAs(wxCommandEvent& event)
 	}
 }
 
-void Frame::SaveAsParticle3d(const wxString& filepath) const
+void Frame::SaveAsParticle3d(const std::string& filepath) const
 {
-	wxString fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
+	std::string fixed = ee::FileHelper::GetFilenameAddTag(filepath, m_filetag, "json");
 	m_curr_filename = fixed;
-	m_task->Store(fixed);
+	m_task->Store(fixed.c_str());
 }
 
-void Frame::SaveAsAnim(const wxString& filepath) const
+void Frame::SaveAsAnim(const std::string& filepath) const
 {
 	static_cast<Task*>(m_task)->StoreAsAnim(filepath);
 }
 
-void Frame::SaveAsInvert(const wxString& filepath) const
+void Frame::SaveAsInvert(const std::string& filepath) const
 {
 	static_cast<Task*>(m_task)->StoreAsInvert(filepath);	
 }

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libparticle2d"
+	Name="5.libparticle2d"
 	ProjectGUID="{54C54BE5-7708-41F3-9375-8BA4B9AA983C}"
 	RootNamespace="libparticle2d"
 	Keyword="Win32Proj"

@@ -10,7 +10,7 @@
 
 #include "image.h"
 
-namespace libterrain3d
+namespace eterrain3d
 {
 
 

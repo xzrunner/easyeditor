@@ -1,7 +1,7 @@
-#ifndef _E3D_VIEW_FRUSTUM_H_
-#define _E3D_VIEW_FRUSTUM_H_
+#ifndef _EASY3D_VIEW_FRUSTUM_H_
+#define _EASY3D_VIEW_FRUSTUM_H_
 
-#include "Vector.h"
+#include <ee/Vector3D.h>
 
 namespace e3d
 {
@@ -9,13 +9,13 @@ namespace e3d
 class ViewFrustum
 {
 public:
-	static ivec2 TransPos3ProjectToScreen(const vec3& proj, float screen_width, float screen_height);
-	static vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z, float screen_width, float screen_height);
+	static ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj, float screen_width, float screen_height);
+	static ee::vec3 TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z, float screen_width, float screen_height);
 
-	static vec3 TransPos3ScreenToDir(const ivec2& screen, float screen_width, float screen_height);
+	static ee::vec3 TransPos3ScreenToDir(const ee::ivec2& screen, float screen_width, float screen_height);
 
 }; // ViewFrustum
 
 }
 
-#endif // _E3D_VIEW_FRUSTUM_H_
+#endif // _EASY3D_VIEW_FRUSTUM_H_

@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_FPS_MSG_H_
 #define _EASYANIM_FPS_MSG_H_
 
-
+#include <ee/Subject.h>
 
 namespace eanim
 {

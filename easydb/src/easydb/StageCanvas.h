@@ -1,30 +1,30 @@
-#ifndef EDB_STAGE_CANVAS_H
-#define EDB_STAGE_CANVAS_H
+#ifndef _EASYDB_STAGE_CANVAS_H_
+#define _EASYDB_STAGE_CANVAS_H_
 
-
+#include <ee/OrthoCanvas.h>
 
 namespace edb
 {
-	class StagePanel;
 
-	class StageCanvas : public ee::OrthoCanvas
-	{
-	public:
-		StageCanvas(StagePanel* editPanel);
-		virtual ~StageCanvas();
+class StagePanel;
 
-	protected:
-		virtual void OnDrawSprites() const;
+class StageCanvas : public ee::OrthoCanvas
+{
+public:
+	StageCanvas(StagePanel* editPanel);
+	virtual ~StageCanvas();
 
-	private:
-		void drawConnection() const;
+protected:
+	virtual void OnDrawSprites() const;
 
-	private:
-		StagePanel* m_stage_panel;
+private:
+	void drawConnection() const;
 
-		ee::SpriteBatch m_batch;
+private:
+	StagePanel* m_stage_panel;
 
-	}; // StageCanvas
+}; // StageCanvas
+
 }
 
-#endif // EDB_STAGE_CANVAS_H
+#endif // _EASYDB_STAGE_CANVAS_H_

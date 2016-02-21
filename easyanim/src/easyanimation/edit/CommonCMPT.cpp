@@ -10,6 +10,17 @@
 #include "dataset/DataMgr.h"
 #include "message/messages.h"
 
+#include <ee/LibraryPanel.h>
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/LibraryList.h>
+#include <ee/LibraryPage.h>
+#include <ee/FetchAllVisitor.h>
+
+#include <wx/spinctrl.h>
+
 namespace eanim
 {
 

@@ -1,7 +1,7 @@
 #ifndef _LIBANIS_LIBRARY_PAGE_H_
 #define _LIBANIS_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace libanis
 {

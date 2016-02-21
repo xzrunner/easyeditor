@@ -2,6 +2,10 @@
 
 #include "frame/SettingCfg.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/Camera.h>
+#include <ee/panel_msg.h>
+
 namespace lr
 {
 namespace preview

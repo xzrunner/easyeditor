@@ -1,26 +1,34 @@
-#pragma once
+#ifndef _EASYDB_GRAPHICS_H_
+#define _EASYDB_GRAPHICS_H_
 
+#include <vector>
+#include <map>
 
+namespace ee { class Sprite; class Vector; }
 
 namespace edb
 {
-	struct Node
-	{
-		std::vector<ee::Sprite*> out, in;
-	};
 
-	class Graphics
-	{
-	public:
-		void connect(ee::Sprite* from, ee::Sprite* to);
+struct Node
+{
+	std::vector<ee::Sprite*> out, in;
+};
 
-		void move(ee::Sprite* sprite, const ee::Vector& offset);
+class Graphics
+{
+public:
+	void Connect(ee::Sprite* from, ee::Sprite* to);
 
-		Node* query(ee::Sprite* sprite) const;
+	void Move(ee::Sprite* sprite, const ee::Vector& offset);
 
-		void clear();
+	Node* Query(ee::Sprite* sprite) const;
 
-	public:
-		std::map<ee::Sprite*, Node*> connection;
-	};
+	void Clear();
+
+public:
+	std::map<ee::Sprite*, Node*> connection;
+};
+
 }
+
+#endif // _EASYDB_GRAPHICS_H_

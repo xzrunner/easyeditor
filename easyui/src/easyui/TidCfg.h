@@ -1,7 +1,8 @@
 #ifndef _EASYUI_TID_CFG_H_
 #define _EASYUI_TID_CFG_H_
 
-
+#include <string>
+#include <map>
 
 namespace eui
 {

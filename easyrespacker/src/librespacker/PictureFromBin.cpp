@@ -4,7 +4,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int PictureFromBin::Size(const PackPicture* pic)

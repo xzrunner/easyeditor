@@ -4,13 +4,16 @@
 //#include "MyThread.h"
 #include "RectCutLoader.h"
 
+#include <ee/EditPanelImpl.h>
+#include <ee/MultiSpritesImpl.h>
+
 namespace ecomplex
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
 								 ee::EditCMPT* callback/* = NULL*/)
-	: ee::SelectSpritesOP(wnd, stage, spritesImpl, callback)
-	, m_open_symbol(wnd, stage, spritesImpl)
+	: ee::SelectSpritesOP(wnd, stage, sprites_impl, callback)
+	, m_open_symbol(wnd, stage, sprites_impl)
 {
 }
 

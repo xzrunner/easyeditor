@@ -1,7 +1,7 @@
 #include "ClipboxFromLua.h"
 #include "LuaDataHelper.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 void ClipboxFromLua::Unpack(lua_State* L, PackClipbox* cb)

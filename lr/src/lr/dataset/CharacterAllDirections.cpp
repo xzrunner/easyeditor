@@ -1,5 +1,8 @@
 #include "CharacterAllDirections.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+
 namespace lr
 {
 

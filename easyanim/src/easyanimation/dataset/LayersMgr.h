@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_LAYERS_MGR_H_
 #define _EASYANIM_LAYERS_MGR_H_
 
-
+#include <ee/Observer.h>
 
 namespace eanim
 {

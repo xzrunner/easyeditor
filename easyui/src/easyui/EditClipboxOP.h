@@ -1,7 +1,8 @@
 #ifndef _EASYUI_EDIT_CLIPBOX_OP_H_
 #define _EASYUI_EDIT_CLIPBOX_OP_H_
 
-
+#include <ee/ZoomViewOP.h>
+#include <ee/Rect.h>
 
 namespace eui
 {

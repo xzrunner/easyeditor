@@ -1,6 +1,11 @@
 #include "TranslateSpriteState.h"
 #include "UIList.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+
+#include <assert.h>
+
 namespace eui
 {
 namespace list

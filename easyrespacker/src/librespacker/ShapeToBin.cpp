@@ -2,9 +2,11 @@
 #include "pack_unpack.h"
 #include "typedef.h"
 
+#include <ee/trans_color.h>
+
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int ShapeToBin::Size(const PackShape* shape)
@@ -41,8 +43,8 @@ void ShapeToBin::Pack(const PackShape* shape, uint8_t** ptr)
 	
 	for (int i = 0, n = shape->vertices.size(); i < n; ++i) {
 		const ee::Vector& pos = shape->vertices[i];
-		int32_t x = floor(pos.x * SCALE + 0.5f),
-			    y =-floor(pos.y * SCALE + 0.5f);
+		int32_t x = static_cast<int>(floor(pos.x * SCALE + 0.5f)),
+			    y =-static_cast<int>(floor(pos.y * SCALE + 0.5f));
 		pack(x, ptr);
 		pack(y, ptr);
 	}

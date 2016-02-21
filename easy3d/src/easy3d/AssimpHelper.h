@@ -1,5 +1,5 @@
-#ifndef _E3D_ASSIMP_HELPER_H_
-#define _E3D_ASSIMP_HELPER_H_
+#ifndef _EASY3D_ASSIMP_HELPER_H_
+#define _EASY3D_ASSIMP_HELPER_H_
 
 struct aiScene;
 struct aiNode;
@@ -30,4 +30,4 @@ private:
 
 }
 
-#endif // _E3D_ASSIMP_HELPER_H_
+#endif // _EASY3D_ASSIMP_HELPER_H_

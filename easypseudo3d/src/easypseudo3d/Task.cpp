@@ -1,5 +1,9 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/EditPanel.h>
+
 #include <easypseudo3d.h>
 
 namespace epseudo3d

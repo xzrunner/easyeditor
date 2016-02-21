@@ -2,6 +2,17 @@
 #include "LibraryPage.h"
 #include "StagePanel.h"
 
+#include <ee/std_functor.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/LibraryPanel.h>
+#include <ee/LibraryList.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Symbol.h>
+
+#include <algorithm>
+#include <fstream>
+
 namespace eui
 {
 namespace window
@@ -15,7 +26,7 @@ SymbolsCfg::SymbolsCfg(StagePanel* stage, ee::LibraryPanel* library)
 
 SymbolsCfg::~SymbolsCfg()
 {
-	for_each(m_symbols.begin(), m_symbols.end(), DeletePointerFunctor<Symbol>());
+	for_each(m_symbols.begin(), m_symbols.end(), ee::DeletePointerFunctor<Symbol>());
 }
 
 void SymbolsCfg::LoadConfig()

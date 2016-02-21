@@ -1,36 +1,38 @@
+#ifndef _EASYMODELING_PACKAGE_H_
+#define _EASYMODELING_PACKAGE_H_
 
-#ifndef LIBMODELING_PACKAGE_H
-#define LIBMODELING_PACKAGE_H
+#include <fstream>
+#include <vector>
 
-
-
-namespace libmodeling
+namespace emodeling
 {
-	class Body;
-	class Joint;
 
-	class Paskage
+class Body;
+class Joint;
+
+class Paskage
+{
+public:
+	enum ShapeType
 	{
-	public:
-		enum ShapeType
-		{
-			e_circle = 0,
-			e_rect,
-			e_chain,
-			e_polygon
-		};
+		e_circle = 0,
+		e_rect,
+		e_chain,
+		e_polygon
+	};
 
-	public:
-		static void packBody(const Body& data, std::ofstream& fout);
+public:
+	static void PackBody(const Body& data, std::ofstream& fout);
 
-		static void packJoint(const Joint& data, std::ofstream& fout,
-			const std::vector<Body*>& bodies);
+	static void PackJoint(const Joint& data, std::ofstream& fout,
+		const std::vector<Body*>& bodies);
 
-	private:
-		static int queryBodyIndex(const Body* body, 
-			const std::vector<Body*>& bodies);
+private:
+	static int QueryBodyIndex(const Body* body, 
+		const std::vector<Body*>& bodies);
 
-	}; // Paskage
+}; // Paskage
+
 }
 
-#endif // LIBMODELING_PACKAGE_H
+#endif // _EASYMODELING_PACKAGE_H_

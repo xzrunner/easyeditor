@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_SYMBOL_H_
 #define _EASYP3DINV_SYMBOL_H_
 
-
+#include <ee/Symbol.h>
 
 namespace ep3dinv
 {

@@ -3,6 +3,13 @@
 #include "config.h"
 #include "FileLoader.h"
 
+#include <ee/EE_GTxt.h>
+#include <ee/TPNode.h>
+#include <ee/Config.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/BoundingBox.h>
+
 #include <easytext.h>
 
 #include <queue>
@@ -45,15 +52,16 @@ void Symbol::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (etext::Sprite* text = dynamic_cast<etext::Sprite*>(m_sprites[i])) {
-			etext::GTxt::Instance()->Reload(text);
+//			// todo
+//			ee::GTxt::Instance()->Reload(text);
 		}
 	}
 
-	std::set<const Symbol*> symbols;
+	std::set<const ee::Symbol*> symbols;
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		symbols.insert(&m_sprites[i]->GetSymbol());
 	}
-	std::set<const Symbol*>::iterator itr = symbols.begin();
+	std::set<const ee::Symbol*>::iterator itr = symbols.begin();
 	for ( ; itr != symbols.end(); ++itr) {
 		(*itr)->ReloadTexture();
 	}

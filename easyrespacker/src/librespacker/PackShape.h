@@ -1,11 +1,12 @@
-#ifndef _LIBRESPACKER_PACK_SHAPE_H_
-#define _LIBRESPACKER_PACK_SHAPE_H_
+#ifndef _EASYRESPACKER_PACK_SHAPE_H_
+#define _EASYRESPACKER_PACK_SHAPE_H_
 
 #include "IPackNode.h"
 
+#include <ee/Color.h>
+#include <ee/Vector.h>
 
-
-namespace librespacker
+namespace erespacker
 {
 
 enum ShapeType
@@ -48,4 +49,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_PACK_SHAPE_H_
+#endif // _EASYRESPACKER_PACK_SHAPE_H_

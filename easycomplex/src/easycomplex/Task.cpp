@@ -1,8 +1,17 @@
 #include "Task.h"
 #include "FileIO.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/FileType.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/ViewlistPanel.h>
+#include <ee/GroupTreePanel.h>
+
 #include <easycomplex.h>
 #include <easycoco.h>
+
+#include <fstream>
 
 namespace ecomplex
 {
@@ -128,7 +137,7 @@ void Task::LoadGroupTree(const char* filepath)
 	} else {
 		std::map<std::string, std::vector<ee::Sprite*> > map_actions;
 		std::vector<ee::Sprite*> others;
-		libcoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
+		ecoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
 		m_grouptree->InitGroups(map_actions);
 	}
 }

@@ -4,7 +4,7 @@
 #include "IPackNode.h"
 #include "Lzma.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 #define LZMA_PROPS_SIZE 5

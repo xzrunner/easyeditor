@@ -11,7 +11,12 @@
 #include "AnimToBin.h"
 #include "AnimFromBin.h"
 
-namespace librespacker
+#include <ee/Sprite.h>
+#include <ee/FileType.h>
+#include <ee/ImageSprite.h>
+#include <ee/trans_color.h>
+
+namespace erespacker
 {
 
 PackAnimation::PackAnimation(int id)
@@ -77,8 +82,8 @@ void PackAnimation::CreateClipboxFramePart(const PackClipbox* cb, Frame& frame)
 
 	part.t.mat[0] = part.t.mat[3] = 1024;
 	part.t.mat[1] = part.t.mat[2] = 0;
-	part.t.mat[4] = cb->x * SCALE;
-	part.t.mat[5] = - cb->y * SCALE;
+	part.t.mat[4] = static_cast<int>(cb->x * SCALE);
+	part.t.mat[5] =-static_cast<int>(cb->y * SCALE);
 
 	frame.parts.push_back(part);
 }
@@ -188,10 +193,12 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 	mat[4] = center.x/* * m_scale*/;
 	mat[5] = center.y/* * m_scale*/;
 
-	for (size_t i = 0; i < 4; ++i)
-		trans.mat[i] = floor(mat[i] * 1024 + 0.5f);
-	for (size_t i = 4; i < 6; ++i)
-		trans.mat[i] = floor(mat[i] * 16 + 0.5f);
+	for (size_t i = 0; i < 4; ++i) {
+		trans.mat[i] = static_cast<int>(floor(mat[i] * 1024 + 0.5f));
+	}
+	for (size_t i = 4; i < 6; ++i) {
+		trans.mat[i] = static_cast<int>(floor(mat[i] * 16 + 0.5f));
+	}
 	// flip y
 	trans.mat[5] = -trans.mat[5];
 }

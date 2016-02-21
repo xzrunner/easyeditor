@@ -11,7 +11,7 @@ class StagePanel;
 class CreateRegionCMPT : public ee::OneFloatValueCMPT
 {
 public:
-	CreateRegionCMPT(wxWindow* parent, const wxString& name,
+	CreateRegionCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
 
 // 	//

@@ -1,6 +1,6 @@
 #include "TextureMgr.h"
 
-namespace libcoco
+namespace ecoco
 {
 namespace epd
 {

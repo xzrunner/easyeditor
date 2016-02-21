@@ -8,8 +8,8 @@ namespace e3d
 
 struct Mesh
 {
-	GLuint vertex_buffer;
-	GLuint index_buffer;
+	int vertex_buffer;
+	int index_buffer;
 	int index_count;
 
 	Material material;

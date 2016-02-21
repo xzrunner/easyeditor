@@ -3,45 +3,52 @@
 #include "Context.h"
 #include "StagePanel.h"
 
-using namespace edb;
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+#include <ee/ZoomViewOP.h>
+#include <ee/StringHelper.h>
+
+namespace edb
+{
 
 BEGIN_EVENT_TABLE(Frame, wxFrame)
-	EVT_MENU(wxID_NEW, Frame::onNew)
-	EVT_MENU(wxID_OPEN, Frame::onOpen)
-	EVT_MENU(wxID_SAVE, Frame::onSave)
-	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
+	EVT_MENU(wxID_NEW, Frame::OnNew)
+	EVT_MENU(wxID_OPEN, Frame::OnOpen)
+	EVT_MENU(wxID_SAVE, Frame::OnSave)
+	EVT_MENU(wxID_SAVEAS, Frame::OnSaveAs)
 
-	EVT_MENU(ID_CONNECT, Frame::onConnect)
+	EVT_MENU(ID_CONNECT, Frame::OnConnect)
 
-	EVT_MENU(wxID_EXIT, Frame::onQuit)
+	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 END_EVENT_TABLE()
 
-static const wxString FILE_TAG = wxT("edb");
+static const std::string FILE_TAG = "edb";
 
-Frame::Frame(const wxString& title)
+Frame::Frame(const std::string& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
 {
-	m_task = Task::create(this);
-	initMenuBar();
+	m_task = Task::Create(this);
+	InitMenuBar();
 }
 
-void Frame::onNew(wxCommandEvent& event)
+void Frame::OnNew(wxCommandEvent& event)
 {
-	setCurrFilename();
-	m_task->clear();
+	SetCurrFilename();
+	m_task->Clear();
 }
 
-void Frame::onOpen(wxCommandEvent& event)
+void Frame::OnOpen(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
 		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_task->clear();
-		m_currFilename = dlg.GetPath();
-		SetTitle(ee::FileHelper::GetFilename(dlg.GetPath()));
+		m_task->Clear();
+		m_curr_filename = dlg.GetPath();
+		SetTitle(ee::FileHelper::GetFilename(dlg.GetPath().ToStdString()));
 		try {
-			m_task->loadFromFile(dlg.GetPath());
+			m_task->LoadFromFile(dlg.GetPath());
 		} catch (ee::Exception& e) {
 			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
@@ -49,28 +56,28 @@ void Frame::onOpen(wxCommandEvent& event)
 	}
 }
 
-void Frame::onSave(wxCommandEvent& event)
+void Frame::OnSave(wxCommandEvent& event)
 {
-	if (!m_currFilename.empty())
+	if (!m_curr_filename.empty())
 	{
-		SetTitle(ee::FileHelper::GetFilename(m_currFilename));
-		m_task->storeToFile(m_currFilename);
+		SetTitle(ee::FileHelper::GetFilename(m_curr_filename));
+		m_task->StoreToFile(m_curr_filename.c_str());
 	}
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
 		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString fixed = ee::FileHelper::GetFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
-		m_currFilename = fixed;
-		m_task->storeToFile(fixed);
+		std::string fixed = ee::FileHelper::GetFilenameAddTag(dlg.GetPath().ToStdString(), FILE_TAG, "json");
+		m_curr_filename = fixed;
+		m_task->StoreToFile(fixed.c_str());
 	}
 }
 
-void Frame::onConnect(wxCommandEvent& event)
+void Frame::OnConnect(wxCommandEvent& event)
 {
 	ee::ZoomViewOP* op = dynamic_cast<ee::ZoomViewOP*>
 		(Context::Instance()->stage->GetEditOP());
@@ -84,7 +91,7 @@ void Frame::onConnect(wxCommandEvent& event)
 	{
 		try {
 //			Context::Instance()->stage->loadFromDir(dlg.GetPath().ToStdString());
-			Context::Instance()->stage->loadFromDirFast(dlg.GetPath().ToStdString());
+			Context::Instance()->stage->LoadFromDirFast(dlg.GetPath().ToStdString());
 		} catch (ee::Exception& e) {
 			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
@@ -96,19 +103,19 @@ void Frame::onConnect(wxCommandEvent& event)
 	}
 }
 
-void Frame::onQuit(wxCommandEvent& event)
+void Frame::OnQuit(wxCommandEvent& event)
 {
 	Close(true);
 }
 
-void Frame::initMenuBar()
+void Frame::InitMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
-	menuBar->Append(initFileBar(), "&File");
+	menuBar->Append(InitFileBar(), "&File");
 	SetMenuBar(menuBar);
 }
 
-wxMenu* Frame::initFileBar()
+wxMenu* Frame::InitFileBar()
 {
 	wxMenu* fileMenu = new wxMenu;
 	fileMenu->Append(wxID_NEW, wxT("&New\tCtrl+N"), wxT("Create a project"));
@@ -123,27 +130,29 @@ wxMenu* Frame::initFileBar()
 	return fileMenu;
 }
 
-wxMenu* Frame::initHelpBar()
+wxMenu* Frame::InitHelpBar()
 {
 	wxMenu* helpMenu = new wxMenu;
 	helpMenu->Append(wxID_HELP, wxT("&About...\tF1"), wxT("Show about dialog"));
 	return helpMenu;
 }
 
-void Frame::setCurrFilename()
+void Frame::SetCurrFilename()
 {
 	int id = 0;
 	while (true)
 	{
-		wxString str = 
-			wxT("new") + 
-			wxString::FromDouble(id++) + 
-			wxT(".json");
+		std::string str = 
+			std::string("new") + 
+			ee::StringHelper::ToString(id++) + 
+			std::string(".json");
 
 		if (!ee::FileHelper::IsFileExist(str))
 		{
-			m_currFilename = str;
+			m_curr_filename = str;
 			break;
 		}
 	}
+}
+
 }

@@ -1,9 +1,9 @@
 #ifndef _LR_VIEWLIST_IMPL_H_
 #define _LR_VIEWLIST_IMPL_H_
 
-
-
 #include "OpenSymbolDialog.h"
+
+#include <ee/ViewlistListImpl.h>
 
 namespace lr
 {

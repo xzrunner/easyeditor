@@ -8,11 +8,21 @@
 
 #include "TextBuilder.h"
 
+#include <ee/TextureFactory.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
+#include <ee/FileHelper.h>
+#include <ee/StringHelper.h>
+#include <ee/Exception.h>
+#include <ee/SymbolMgr.h>
+
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyparticle3d.h>
 
-namespace librespacker
+#include <fstream>
+
+namespace erespacker
 {
 
 // ResPacker::ResPacker(const std::string& json_dir, const std::string& tp_name, 
@@ -208,7 +218,7 @@ void ResPacker::Pack() const
 		const ee::Symbol* symbol = m_symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol)) {
 			factory->Create(complex);
-		} else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol)) {
+		} else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol)) {
 			factory->Create(anim);
 		} else if (const eparticle3d::Symbol* p3d = dynamic_cast<const eparticle3d::Symbol*>(symbol)) {
 			factory->Create(p3d);

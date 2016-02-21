@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="librespacker"
+	Name="5.librespacker"
 	ProjectGUID="{E5C07F5D-F889-4FC2-8DA8-194023914BBE}"
 	RootNamespace="librespacker"
 	Keyword="Win32Proj"
@@ -165,7 +165,7 @@
 				>
 			</File>
 			<Filter
-				Name="1. picture"
+				Name="01.picture"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\IconBuilder.cpp"
@@ -201,7 +201,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="2. label"
+				Name="02.label"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\LabelBuilder.cpp"
@@ -221,7 +221,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="3. animation"
+				Name="03.animation"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\AnimBuilder.cpp"
@@ -249,7 +249,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="5. particle3d"
+				Name="05.particle3d"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\Particle3DBuilder.cpp"
@@ -261,7 +261,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="6. particle2d"
+				Name="06.particle2d"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\Particle2DBuilder.cpp"
@@ -273,7 +273,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="9. clipbox"
+				Name="09.clipbox"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\ClipboxBuilder.cpp"
@@ -285,7 +285,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="4. anchor"
+				Name="04.anchor"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\AnchorBuilder.cpp"
@@ -297,7 +297,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="10. shape"
+				Name="10.shape"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\ShapeBuilder.cpp"
@@ -309,7 +309,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="7. p3d_spr"
+				Name="07.p3d_spr"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\P3dSprBuilder.cpp"
@@ -321,7 +321,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="8. p2d_spr"
+				Name="08.p2d_spr"
 				>
 			</Filter>
 		</Filter>
@@ -329,7 +329,7 @@
 			Name="nodes"
 			>
 			<Filter
-				Name="1. picture"
+				Name="01.picture"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackPicture.cpp"
@@ -381,7 +381,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="2. label"
+				Name="02.label"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackLabel.cpp"
@@ -433,7 +433,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="3. anim"
+				Name="03.anim"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackAnimation.cpp"
@@ -485,7 +485,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="5. particle3d"
+				Name="05.particle3d"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackParticle3D.cpp"
@@ -537,7 +537,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="6. particle2d"
+				Name="06.particle2d"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackParticle2D.cpp"
@@ -589,7 +589,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="4. anchor"
+				Name="04.anchor"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackAnchor.h"
@@ -597,7 +597,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="9. clipbox"
+				Name="09.clipbox"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackClipbox.cpp"
@@ -649,7 +649,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="10. shape"
+				Name="10.shape"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackShape.cpp"
@@ -701,7 +701,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="7. p3d_spr"
+				Name="07.p3d_spr"
 				>
 				<File
 					RelativePath="..\..\..\src\librespacker\PackP3dSpr.cpp"
@@ -753,7 +753,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="8. p2d_spr"
+				Name="08.p2d_spr"
 				>
 			</Filter>
 			<Filter

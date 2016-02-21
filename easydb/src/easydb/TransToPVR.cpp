@@ -1,6 +1,8 @@
 #include "TransToPVR.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/LibpngAdapter.h>
 
 #include <easyimage.h>
 //#include <dtex_pvr.h>
@@ -40,9 +42,7 @@ void TransToPVR::Trigger(const std::string& path)
 		ee::FileHelper::FetchAllFiles(path, files);
 		for (int i = 0, n = files.size(); i < n; ++i)
 		{
-			wxFileName filename(files[i]);
-			filename.Normalize();
-			std::string filepath = filename.GetFullPath();
+			std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 			if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 			{
 				std::cout << i << " / " << n << " : " << filepath << "\n";

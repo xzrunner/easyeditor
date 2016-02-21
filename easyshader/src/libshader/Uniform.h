@@ -1,5 +1,5 @@
-#ifndef _ESHADER_UNIFORM_H_
-#define _ESHADER_UNIFORM_H_
+#ifndef _EASYSHADER_UNIFORM_H_
+#define _EASYSHADER_UNIFORM_H_
 
 #include <string>
 
@@ -67,4 +67,4 @@ private:
 
 }
 
-#endif // _ESHADER_UNIFORM_H_
+#endif // _EASYSHADER_UNIFORM_H_

@@ -1,20 +1,22 @@
 #include "Particle3DToSpr.h"
 #include "NodeToSprite.h"
 
+#include <ee/trans_color.h>
+
 #include <easyparticle3d.h>
 #include <ps_3d.h>
 
 namespace ecomplex
 {
 
-ee::Sprite* Particle3DToSpr::Trans(const librespacker::PackParticle3D* p3d)
+ee::Sprite* Particle3DToSpr::Trans(const erespacker::PackParticle3D* p3d)
 {
 	eparticle3d::Symbol* symbol = new eparticle3d::Symbol;
 	symbol->SetEmitterCfg(LoadConfig(p3d));
 	return new eparticle3d::Sprite(symbol);
 }
 
-p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D* p3d)
+p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p3d)
 {
 	int sz = SIZEOF_P3D_EMITTER_CFG + SIZEOF_P3D_SYMBOL * eparticle3d::MAX_COMPONENTS;
 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
@@ -66,7 +68,7 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const librespacker::PackParticle3D*
 	cfg->symbols = (p3d_symbol*)(cfg+1);
 	for (int i = 0, n = p3d->components.size(); i < n; ++i)
 	{
-		const librespacker::PackParticle3D::Component& src = p3d->components[i];
+		const erespacker::PackParticle3D::Component& src = p3d->components[i];
 		p3d_symbol& dst = cfg->symbols[i];
 
 		dst.scale_start = src.scale_start;

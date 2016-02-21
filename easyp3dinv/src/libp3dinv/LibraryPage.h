@@ -1,7 +1,7 @@
 #ifndef _EASYP3DINV_LIBRARY_PAGE_H_
 #define _EASYP3DINV_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace ep3dinv
 {

@@ -3,6 +3,9 @@
 
 #include "Symbol.h"
 
+#include <ee/Sprite.h>
+#include <ee/Matrix.h>
+
 namespace eparticle2d
 {
 

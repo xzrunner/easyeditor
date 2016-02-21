@@ -12,13 +12,13 @@ class LibraryPanel;
 class SpriteDropTarget : public wxTextDropTarget
 {
 public:
-	SpriteDropTarget(EditPanelImpl* stage, LibraryPanel* libraryPanel);
+	SpriteDropTarget(EditPanelImpl* stage, LibraryPanel* library);
 
 	virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 
 private:
 	EditPanelImpl* m_stage;
-	LibraryPanel* m_libraryPanel;
+	LibraryPanel* m_library;
 
 }; // SpriteDropTarget
 

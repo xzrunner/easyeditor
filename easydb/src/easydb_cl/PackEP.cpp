@@ -3,8 +3,9 @@
 #include "PackEP.h"
 #include "check_params.h"
 
-#include <glfw.h>
+#include <ee/ShaderMgr.h>
 
+#include <glfw.h>
 
 #include <easyrespacker.h>
 
@@ -70,17 +71,17 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 					 const std::string& type, int LOD, float scale)
 {
 	if (type == "ept_desc") {
-		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
+		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 		return;
 	}
 
-	librespacker::ResPacker packer(json_dir, tp_json, tp_dir);
+	erespacker::ResPacker packer(json_dir, tp_json, tp_dir);
 	if (type == "lua") {
 		packer.OutputLua(out_file + ".lua", scale);
 	} else if (type == "ep") {
 		packer.OutputEpe(out_file, true, scale);
-		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
-		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
+		packer.OutputEpt(out_file, erespacker::TT_PNG8, LOD, scale);
+		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);
 	} else if (type == "epe") {
@@ -88,8 +89,8 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);
 	} else if (type == "ept") {
-		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
-		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
+		packer.OutputEpt(out_file, erespacker::TT_PNG8, LOD, scale);
+		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 	} else if (type == "debug") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
@@ -98,8 +99,8 @@ void PackEP::Trigger(const std::string& json_dir, const std::string& tp_json,
 	} else if (type == "all") {
 		packer.OutputLua(out_file + ".lua", scale);
 		packer.OutputEpe(out_file, true, scale);
-		packer.OutputEpt(out_file, librespacker::TT_PNG8, LOD, scale);
-		librespacker::ResPacker::OutputEptDesc(out_file, tp_json);
+		packer.OutputEpt(out_file, erespacker::TT_PNG8, LOD, scale);
+		erespacker::ResPacker::OutputEptDesc(out_file, tp_json);
 		packer.OutputUIExtra(out_file);
 		packer.OutputSprID(out_file);
 	}

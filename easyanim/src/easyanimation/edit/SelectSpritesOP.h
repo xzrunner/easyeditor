@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_SELECT_SPRITES_OP_H_
 #define _EASYANIM_SELECT_SPRITES_OP_H_
 
-
+#include <ee/SelectSpritesOP.h>
 
 namespace eanim
 {
@@ -9,7 +9,7 @@ namespace eanim
 class SelectSpritesOP : public ee::SelectSpritesOP
 {
 public:
-	SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+	SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
 		ee::EditCMPT* callback = NULL);
 
 	virtual bool OnMouseLeftDClick(int x, int y);

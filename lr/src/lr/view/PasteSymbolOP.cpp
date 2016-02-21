@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "SelectSpritesOP.h"
 
+#include <ee/ArrangeSpriteOP.h>
+
 namespace lr
 {
 

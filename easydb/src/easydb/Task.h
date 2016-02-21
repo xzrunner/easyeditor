@@ -1,38 +1,40 @@
-#ifndef EDB_TASK_H
-#define EDB_TASK_H
+#ifndef _EASYDB_TASK_H_
+#define _EASYDB_TASK_H_
 
-
-#include <wx/splitter.h>
+class wxFrame;
+class wxWindow;
 
 namespace edb
 {
-	class Task
+
+class Task
+{
+public:
+	
+	virtual void LoadFromFile(const char* filename);
+	virtual void StoreToFile(const char* filename) const;
+
+	virtual void Clear();
+
+	static Task* Create(wxFrame* parent)
 	{
-	public:
-		
-		virtual void loadFromFile(const char* filename);
-		virtual void storeToFile(const char* filename) const;
+		return new Task(parent);
+	}
 
-		virtual void clear();
+protected:
+	Task(wxFrame* parent);
+	~Task();
 
-		static Task* create(wxFrame* parent)
-		{
-			return new Task(parent);
-		}
+private:
+	void InitLayout();
 
-	protected:
-		Task(wxFrame* parent);
-		~Task();
+private:
+	wxWindow* m_root;
 
-	private:
-		void InitLayout();
+	wxFrame* m_parent;
 
-	private:
-		wxWindow* m_root;
+}; // Task
 
-		wxFrame* m_parent;
-
-	}; // Task
 }
 
-#endif // EDB_TASK_H
+#endif // _EASYDB_TASK_H_

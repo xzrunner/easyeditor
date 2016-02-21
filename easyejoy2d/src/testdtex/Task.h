@@ -1,8 +1,12 @@
 #ifndef _TEST_DTEX_TASK_H_
 #define _TEST_DTEX_TASK_H_
 
+#include <ee/Task.h>
 
-#include <wx/splitter.h>
+class wxFrame;
+class wxWindow;
+
+namespace ee { class LibraryPanel; class EditPanel; }
 
 namespace tdtex
 {

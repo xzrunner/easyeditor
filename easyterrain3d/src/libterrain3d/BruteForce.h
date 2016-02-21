@@ -3,7 +3,7 @@
 
 #include "Terrain.h"
 
-namespace libterrain3d
+namespace eterrain3d
 {
 
 class BruteForce : public Terrain

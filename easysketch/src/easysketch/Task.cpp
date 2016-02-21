@@ -1,6 +1,13 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/LibraryPanel.h>
+#include <ee/PropertySettingPanel.h>
+
 #include <easysketch.h>
+
+#include <wx/splitter.h>
 
 namespace esketch
 {
@@ -44,14 +51,14 @@ void Task::InitLayout()
 	wxSplitterWindow* leftHorSplitter = new wxSplitterWindow(leftVerSplitter);
 
 	m_library = new ee::LibraryPanel(leftHorSplitter);
-	m_library->AddPage(new libsketch::LibraryPage(m_library->GetNotebook()));
+	m_library->AddPage(new esketch::LibraryPage(m_library->GetNotebook()));
 
 	m_property = new ee::PropertySettingPanel(leftHorSplitter);
 
-	libsketch::StagePanel* stage = new libsketch::StagePanel(leftVerSplitter, m_parent, m_library);
+	esketch::StagePanel* stage = new esketch::StagePanel(leftVerSplitter, m_parent, m_library);
 	m_stage = stage;
 
-	m_toolbar = new libsketch::ToolbarPanel(rightVerSplitter, stage);
+	m_toolbar = new esketch::ToolbarPanel(rightVerSplitter, stage);
 
 	leftHorSplitter->SetSashGravity(0.8f);
 	leftHorSplitter->SplitHorizontally(m_library, m_property);

@@ -1,6 +1,10 @@
 #include "TransOldAnchorFile.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/FontBlankSprite.h>
+
 #include <easycomplex.h>
 #include <easyanim.h>
 
@@ -40,7 +44,7 @@ void TransOldAnchorFile::Run(const std::string& folder)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		std::string filepath = filename.GetFullPath().ToStdString();
+		std::string filepath = filename.GetFullPath();
 		if (ee::FileType::IsType(filepath, ee::FileType::e_complex)) {
 			TransComplex(filepath);
 		} else if (ee::FileType::IsType(filepath, ee::FileType::e_anim)) {
@@ -70,12 +74,12 @@ void TransOldAnchorFile::TransComplex(const std::string& filepath) const
 void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 {
 	ee::Symbol* sym = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
-	libanim::Symbol* anim = static_cast<libanim::Symbol*>(sym);
+	eanim::Symbol* anim = static_cast<eanim::Symbol*>(sym);
 	bool dirty = false;
 	for (int i = 0, n = anim->m_layers.size(); i < n; ++i) {
-		libanim::Symbol::Layer* layer = anim->m_layers[i];
+		eanim::Symbol::Layer* layer = anim->m_layers[i];
 		for (int j = 0, m = layer->frames.size(); j < m; ++j) {
-			libanim::Symbol::Frame* frame = layer->frames[j];
+			eanim::Symbol::Frame* frame = layer->frames[j];
 			for (int k = 0, l = frame->sprites.size(); k < l; ++k) {
 				ee::Sprite* spr = frame->sprites[k];
 				if (IsAnchor(spr)) {
@@ -86,7 +90,7 @@ void TransOldAnchorFile::TransAnimation(const std::string& filepath) const
 		}
 	}
 	if (dirty) {
-		libanim::FileSaver::store(filepath, *anim);
+		eanim::FileSaver::Store(filepath, *anim);
 	}
 	sym->Release();
 }

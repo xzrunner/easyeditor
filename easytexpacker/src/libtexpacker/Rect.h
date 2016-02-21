@@ -1,7 +1,7 @@
-#ifndef _LIBTEXPACKER_RECT_H_
-#define _LIBTEXPACKER_RECT_H_
+#ifndef _EASYTEXPACKER_RECT_H_
+#define _EASYTEXPACKER_RECT_H_
 
-namespace libtexpacker
+namespace etexpacker
 {
 	
 struct RectSize
@@ -30,4 +30,4 @@ struct Rect
 
 }
 
-#endif // _LIBTEXPACKER_RECT_H_
+#endif // _EASYTEXPACKER_RECT_H_

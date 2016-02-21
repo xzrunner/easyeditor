@@ -1,7 +1,11 @@
 #ifndef _EASYANIM_JOINT_H_
 #define _EASYANIM_JOINT_H_
 
+#include <ee/Vector.h>
 
+#include <set>
+
+namespace ee { class Sprite; }
 
 namespace eanim
 {

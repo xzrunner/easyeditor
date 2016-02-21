@@ -1,5 +1,9 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/EditPanel.h>
+
 #include <easyterrain3d.h>
 
 namespace eterrain3d
@@ -40,7 +44,7 @@ const ee::EditPanel* Task::GetEditPanel() const
 void Task::InitLayout()
 {
 	ee::EditPanel* stage = new ee::EditPanel(m_parent, m_parent);
-	stage->SetCanvas(new libterrain3d::StageCanvas(stage, stage->GetStageImpl()));
+	stage->SetCanvas(new eterrain3d::StageCanvas(stage, stage->GetStageImpl()));
 	stage->SetEditOP(new e3d::ControlCameraOP(stage, stage->GetStageImpl()));
 }
 

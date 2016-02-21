@@ -1,7 +1,9 @@
 #ifndef _EASYANIM_KEYS_SCALE_WIDGET_H_
 #define _EASYANIM_KEYS_SCALE_WIDGET_H_
 
+#include <ee/Observer.h>
 
+#include <wx/panel.h>
 
 namespace eanim
 {

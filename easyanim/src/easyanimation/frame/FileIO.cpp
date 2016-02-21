@@ -9,6 +9,17 @@
 #include "view/StagePanel.h"
 #include "message/messages.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/FileType.h>
+#include <ee/LibraryPanel.h>
+#include <ee/Exception.h>
+#include <ee/SpriteFactory.h>
+#include <ee/StringHelper.h>
+#include <ee/AnimatedGifSaver.h>
+#include <ee/SymbolSearcher.h>
+
 #include <rapidxml_utils.hpp>
 #include <easyanim.h>
 #include <easyimage.h>
@@ -176,7 +187,7 @@ void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 
 	ee::Snapshoot ss;
 	ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(src);
-	libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
+	eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
 	int width = symbol->GetSize().Width();
@@ -436,15 +447,15 @@ ee::Sprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	std::string stx = matrixNode->first_attribute("tx")->value();
 	std::string sty = matrixNode->first_attribute("ty")->value();
 	double tx, ty;
-	wxString(stx).ToDouble(&tx);
-	wxString(sty).ToDouble(&ty);
+	ee::StringHelper::FromString(stx, tx);
+	ee::StringHelper::FromString(sty, ty);
 
 	rapidxml::xml_node<>* pointNode = actorNode->first_node("transformationPoint")->first_node("Point");
 	std::string sx = pointNode->first_attribute("x")->value();
 	std::string sy = pointNode->first_attribute("y")->value();
 	double x, y;
-	wxString(sx).ToDouble(&x);
-	wxString(sy).ToDouble(&y);
+	ee::StringHelper::FromString(sx, x);
+	ee::StringHelper::FromString(sy, y);
 
 	sprite->SetTransform(ee::Vector(float(tx+x), float(ty+y)), 0);
 
@@ -497,13 +508,13 @@ Json::Value FileIO::StoreActor(const ee::Sprite* sprite, const std::string& dir,
 	const ee::Symbol& symbol = sprite->GetSymbol();
 	// filepath
 	std::string relative_path = ee::FileHelper::GetRelativePath(dir, 
-		symbol.GetFilepath()).ToStdString();
+		symbol.GetFilepath());
 	if (single) {
 		value["filepath"] = relative_path;
 	} else {
 		if (DataMgr::Instance()->GetTemplate().ContainPath(relative_path)) {
 			value["filepath"] = ee::FileHelper::GetFilenameWithExtension(
-				symbol.GetFilepath()).ToStdString();
+				symbol.GetFilepath());
 		} else {
 			value["filepath"] = relative_path;
 		}

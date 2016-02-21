@@ -26,7 +26,7 @@ public:
 	static ICommand* Create() { return new FixRotateTrimJson(); }
 
 protected:
-	virtual bool FixSprite(const wxString& filepath, Json::Value& sprite_val) const;
+	virtual bool FixSprite(const std::string& filepath, Json::Value& sprite_val) const;
 
 private:
 	void Trigger(const std::string& dir);

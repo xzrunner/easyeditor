@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libshadow"
+	Name="5.libshadow"
 	ProjectGUID="{C839A952-9F01-48D5-9649-BCAE9AA758F8}"
 	RootNamespace="libshadow"
 	Keyword="Win32Proj"

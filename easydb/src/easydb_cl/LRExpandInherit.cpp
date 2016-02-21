@@ -1,6 +1,10 @@
 #include "LRExpandInherit.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+
+#include <fstream>
+
 namespace edb
 {
 

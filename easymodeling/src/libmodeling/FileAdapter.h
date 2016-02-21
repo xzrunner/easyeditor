@@ -1,46 +1,46 @@
-
-#ifndef LIBMODELING_FILE_ADAPTER_H
-#define LIBMODELING_FILE_ADAPTER_H
-
+#ifndef _EASYMODELING_FILE_ADAPTER_H_
+#define _EASYMODELING_FILE_ADAPTER_H_
 
 #include <json/json.h>
 
-namespace libmodeling
+namespace emodeling
 {
-	class World;
-	class Body;
-	class Fixture;
-	class Joint;
 
-	class FileApapter
-	{
-	public:
-		static World* j2World(const Json::Value& worldValue);
-		static Body* j2bBody(const Json::Value& bodyValue, const std::string& dlg);
-		static Fixture* j2bFixture(const Json::Value& fixtureValue);
-		static Joint* j2bJoint(const Json::Value& jointValue, 
-			const std::vector<Body*>& bodies);
+class World;
+class Body;
+class Fixture;
+class Joint;
 
-	public:
-		~FileApapter();
+class FileApapter
+{
+public:
+	static World* ToWorld(const Json::Value& worldValue);
+	static Body* ToBody(const Json::Value& bodyValue, const std::string& dlg);
+	static Fixture* ToFixture(const Json::Value& fixtureValue);
+	static Joint* ToJoint(const Json::Value& jointValue, 
+		const std::vector<Body*>& bodies);
 
-		void resolve(const wxString& filepath);
+public:
+	~FileApapter();
 
-		Body* queryBody(size_t index) const;
+	void Resolve(const std::string& filepath);
 
-		Body* queryBody(const wxString& name) const;
-		Joint* queryJoint(const wxString& name) const;
+	Body* QueryBody(size_t index) const;
 
-	private:
-		void clear();
+	Body* QueryBody(const std::string& name) const;
+	Joint* QueryJoint(const std::string& name) const;
 
-	private:
-		std::vector<Body*> m_bodies;
+private:
+	void Clear();
 
-		std::map<wxString, Body*> m_nameBodyMap;
-		std::map<wxString, Joint*> m_nameJointMap;
+private:
+	std::vector<Body*> m_bodies;
 
-	}; // FileApapter
+	std::map<std::string, Body*> m_name_body_map;
+	std::map<std::string, Joint*> m_name_joint_map;
+
+}; // FileApapter
+
 }
 
-#endif // LIBMODELING_FILE_ADAPTER_H
+#endif // _EASYMODELING_FILE_ADAPTER_H_

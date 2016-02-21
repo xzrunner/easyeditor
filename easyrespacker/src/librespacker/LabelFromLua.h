@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_LABEL_FROM_LUA_H_
-#define _LIBRESPACKER_LABEL_FROM_LUA_H_
+#ifndef _EASYRESPACKER_LABEL_FROM_LUA_H_
+#define _EASYRESPACKER_LABEL_FROM_LUA_H_
 
 #include "PackLabel.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class LabelFromLua
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_LABEL_FROM_LUA_H_
+#endif // _EASYRESPACKER_LABEL_FROM_LUA_H_

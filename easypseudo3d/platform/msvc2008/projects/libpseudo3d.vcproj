@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libpseudo3d"
+	Name="5.libpseudo3d"
 	ProjectGUID="{A984288F-7FF0-4BFB-BB8F-AC632F48A3E5}"
 	RootNamespace="libpseudo3d"
 	Keyword="Win32Proj"

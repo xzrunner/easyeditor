@@ -1,11 +1,11 @@
-#ifndef _LIBSKETCH_CONFIG_H_
-#define _LIBSKETCH_CONFIG_H_
+#ifndef _EASYSKETCH_CONFIG_H_
+#define _EASYSKETCH_CONFIG_H_
 
-namespace libsketch
+namespace esketch
 {
 
 static const char* FILE_TAG = "sketch";
 
 }
 
-#endif // _LIBSKETCH_CONFIG_H_
+#endif // _EASYSKETCH_CONFIG_H_

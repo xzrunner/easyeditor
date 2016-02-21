@@ -5,7 +5,11 @@
 
 #include <easyscale9.h>
 
-namespace librespacker
+#include <ee/Visitor.h>
+#include <ee/Exception.h>
+#include <ee/ImageSprite.h>
+
+namespace erespacker
 {
 
 Scale9Builder::Scale9Builder()

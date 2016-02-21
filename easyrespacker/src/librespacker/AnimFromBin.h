@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_ANIM_FROM_BIN_H_
-#define _LIBRESPACKER_ANIM_FROM_BIN_H_
+#ifndef _EASYRESPACKER_ANIM_FROM_BIN_H_
+#define _EASYRESPACKER_ANIM_FROM_BIN_H_
 
 #include "PackAnimation.h"
 
-namespace librespacker
+namespace erespacker
 {
 
 class AnimFromBin
@@ -27,4 +27,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_ANIM_FROM_BIN_H_
+#endif // _EASYRESPACKER_ANIM_FROM_BIN_H_

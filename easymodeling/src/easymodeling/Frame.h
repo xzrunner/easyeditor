@@ -1,53 +1,54 @@
-
-#ifndef EMODELING_FRAME_H
-#define EMODELING_FRAME_H
+#ifndef _EASYMODELING_FRAME_H_
+#define _EASYMODELING_FRAME_H_
 
 #include <wx/wx.h>
 
 namespace emodeling
 {
-	class Task;
 
-	class Frame : public wxFrame
-	{
-	public:
-		Frame(const wxString& title);
+class Task;
 
-	private:
-		void onNew(wxCommandEvent& event);
-		void onOpen(wxCommandEvent& event);
-		void onSave(wxCommandEvent& event);
-		void onSaveAs(wxCommandEvent& event);
+class Frame : public wxFrame
+{
+public:
+	Frame(const std::string& title);
 
-		void onQuit(wxCommandEvent& event);
-		void onAbout(wxCommandEvent& event);
+private:
+	void onNew(wxCommandEvent& event);
+	void onOpen(wxCommandEvent& event);
+	void onSave(wxCommandEvent& event);
+	void onSaveAs(wxCommandEvent& event);
 
-		void onSettingOperatingMenu(wxCommandEvent& event);
-		void onSettingViewMenu(wxCommandEvent& event);
+	void onQuit(wxCommandEvent& event);
+	void onAbout(wxCommandEvent& event);
 
-		void onPreview(wxCommandEvent& event);
+	void onSettingOperatingMenu(wxCommandEvent& event);
+	void onSettingViewMenu(wxCommandEvent& event);
 
-		void onCodeLove2d(wxCommandEvent& event);
+	void onPreview(wxCommandEvent& event);
 
-		void initMenuBar();
+	void onCodeLove2d(wxCommandEvent& event);
 
-		wxMenu* initFileBar();
+	void initMenuBar();
 
-		wxMenu* initViewBar();
-		wxMenu* initCodesBar();
-		wxMenu* initSettingsBar();
-		wxMenu* initHelpBar();
+	wxMenu* initFileBar();
 
-		void setCurrFilename();
+	wxMenu* initViewBar();
+	wxMenu* initCodesBar();
+	wxMenu* initSettingsBar();
+	wxMenu* initHelpBar();
 
-	private:
-		Task* m_task;
+	void setCurrFilename();
 
-		wxString m_currFilename;
+private:
+	Task* m_task;
 
-		DECLARE_EVENT_TABLE()
+	std::string m_filename;
 
-	}; // Frame
+	DECLARE_EVENT_TABLE()
+
+}; // Frame
+
 }
 
-#endif // EMODELING_FRAME_H
+#endif // _EASYMODELING_FRAME_H_

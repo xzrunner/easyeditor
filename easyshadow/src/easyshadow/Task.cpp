@@ -1,5 +1,9 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/panel_msg.h>
+
 #include <easyshadow.h>
 
 namespace eshadow
@@ -67,7 +71,8 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	return new StagePanel(parent, m_parent, m_library);
+	m_stage = new StagePanel(parent, m_parent, m_library);
+	return m_stage;
 }
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)

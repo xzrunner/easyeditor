@@ -5,7 +5,7 @@
 namespace sg
 {
 
-ArrangeSpriteCMPT::ArrangeSpriteCMPT(wxWindow* parent, const wxString& name,
+ArrangeSpriteCMPT::ArrangeSpriteCMPT(wxWindow* parent, const std::string& name,
 									 ee::PropertySettingPanel* property, 
 									 StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())

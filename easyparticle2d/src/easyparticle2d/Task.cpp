@@ -1,6 +1,12 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/Exception.h>
+
 #include <easyparticle2d.h>
+
 #include <wx/splitter.h>
 
 namespace eparticle2d

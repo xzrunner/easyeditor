@@ -5,7 +5,7 @@
 
 
 
-namespace libanim { class Symbol; }
+namespace eanim { class Symbol; }
 
 namespace libanis
 {
@@ -33,7 +33,7 @@ protected:
 	virtual void LoadResources();
 
 private:
-	class Loader : public libanim::LayersLoader
+	class Loader : public eanim::LayersLoader
 	{
 	public:
 		Loader(const std::string& dirpath) : m_dirpath(dirpath) {}
@@ -53,7 +53,7 @@ private:
 private:
 	ee::Rect m_rect;
 
-	std::vector<libanim::Symbol*> m_symbols;	
+	std::vector<eanim::Symbol*> m_symbols;	
 
 }; // Symbol
 

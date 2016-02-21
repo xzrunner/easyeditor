@@ -7,7 +7,7 @@
 namespace eanim
 {
 
-SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, bool vertical)
+SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const std::string& name, bool vertical)
 	: ee::EditCMPT(parent, name, ViewMgr::Instance()->stage->GetStageImpl())
 {
 	m_editop = new SkeletonOP(ViewMgr::Instance()->stage, ViewMgr::Instance()->property);

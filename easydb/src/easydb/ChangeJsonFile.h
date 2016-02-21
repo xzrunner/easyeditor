@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-
+#include <wx/arrstr.h>
 
 namespace edb
 {

@@ -3,6 +3,8 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 
+#include <algorithm>
+
 namespace eanim
 {
 

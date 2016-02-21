@@ -4,6 +4,13 @@
 #include "EJScreen.h"
 #include "EJShader.h"
 
+#include <ee/FileHelper.h>
+#include <ee/ShaderMgr.h>
+
+#include <json/json.h>
+
+#include <fstream>
+
 namespace eejoy2d
 {
 

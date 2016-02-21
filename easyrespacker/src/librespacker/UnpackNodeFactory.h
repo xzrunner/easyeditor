@@ -1,14 +1,20 @@
-#ifndef _LIBRESPACKER_UNPACK_NODE_FACTORY_H_
-#define _LIBRESPACKER_UNPACK_NODE_FACTORY_H_
+#ifndef _EASYRESPACKER_UNPACK_NODE_FACTORY_H_
+#define _EASYRESPACKER_UNPACK_NODE_FACTORY_H_
 
-// struct lua_State;
-// 
-// #include <map>
-// #include <vector>
+extern "C" {
+	#include <lua.h>
+	#include <lualib.h>
+	#include <lauxlib.h>
+};
 
+#include <map>
+#include <vector>
 
+#include <stdint.h>
 
-namespace librespacker
+namespace ee { class Image; }
+
+namespace erespacker
 {
 
 class IPackNode;
@@ -48,4 +54,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_UNPACK_NODE_FACTORY_H_
+#endif // _EASYRESPACKER_UNPACK_NODE_FACTORY_H_

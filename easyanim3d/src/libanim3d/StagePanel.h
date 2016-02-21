@@ -1,7 +1,10 @@
 #ifndef _EASYANIM3D_STAGE_PANEL_H_
 #define _EASYANIM3D_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
 
+namespace ee { class PropertySettingPanel; }
 
 namespace eanim3d
 {

@@ -1,11 +1,12 @@
 #include "ImageTrimData.h"
 
-
+#include <ee/FileHelper.h>
 
 #include <json/json.h>
+
 #include <fstream>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 ImageTrimData::ImageTrimData(const std::string& filepath)

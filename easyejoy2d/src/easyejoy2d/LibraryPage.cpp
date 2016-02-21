@@ -2,11 +2,17 @@
 #include "Symbol.h"
 #include "config.h"
 
+#include <ee/LibraryList.h>
+#include <ee/FileType.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 namespace eejoy2d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: ee::LibraryPage(parent, wxT("Ejoy2D"))
+	: ee::LibraryPage(parent, "Ejoy2D")
 {
 	InitLayout();
 	m_list->SetFileter(FILE_TAG);

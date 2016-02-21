@@ -1,5 +1,12 @@
 #include "ParticleSystem.h"
 
+#include <ee/std_functor.h>
+
+#include <fstream>
+#include <algorithm>
+
+#include <time.h>
+
 namespace ep3dinv
 {
 
@@ -55,7 +62,7 @@ void ParticleSystem::LoadFromFile(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	m_gravity = value["ps"]["gravity"].asDouble();
+	m_gravity = static_cast<float>(value["ps"]["gravity"].asDouble());
 
 	int i = 0;
 	Json::Value val = value["sprite"][i++];
@@ -80,7 +87,7 @@ void ParticleSystem::LoadFromFile(const std::string& filepath)
 
 void ParticleSystem::Clear()
 {
-	for_each(m_particles.begin(), m_particles.end(), DeletePointerFunctor<Particle>());
+	for_each(m_particles.begin(), m_particles.end(), ee::DeletePointerFunctor<Particle>());
 	m_particles.clear();
 }
 

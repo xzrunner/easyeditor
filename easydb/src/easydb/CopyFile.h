@@ -29,7 +29,7 @@ private:
 
 	void CopyByExportNames(const std::set<std::string>& export_names) const;
 
-	void GetDependFiles(const wxString& filepath, std::set<std::string>& files) const;
+	void GetDependFiles(const std::string& filepath, std::set<std::string>& files) const;
 
 	void Copy(const std::set<std::string>& files) const;
 

@@ -1,13 +1,15 @@
-#ifndef _LIBTEXPACKER_MAX_RECTS_BINARY_PACK2_H_
-#define _LIBTEXPACKER_MAX_RECTS_BINARY_PACK2_H_
+#ifndef _EASYTEXPACKER_MAX_RECTS_BINARY_PACK2_H_
+#define _EASYTEXPACKER_MAX_RECTS_BINARY_PACK2_H_
 
 #include "Rect.h"
 #include "Sprite.h"
 #include "typedef.h"
 
+#include <ee/TPNode.h>
 
+#include <vector>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 class MaxRectsBinaryPack2
@@ -26,7 +28,7 @@ private:
 
 	ee::TPNode* NewRoot(int w, int h);
 
-	bool Insert(ee::TPNode* root, const libtexpacker::Sprite* sprite, int tex_id = 0) const;
+	bool Insert(ee::TPNode* root, const Sprite* sprite, int tex_id = 0) const;
 
 	void PackAuto(const std::vector<Sprite>& sprites, int area);
 	void PackSquare(const std::vector<Sprite>& sprites, int area);
@@ -51,4 +53,4 @@ private:
 
 }
 
-#endif // _LIBTEXPACKER_MAX_RECTS_BINARY_PACK2_H_
+#endif // _EASYTEXPACKER_MAX_RECTS_BINARY_PACK2_H_

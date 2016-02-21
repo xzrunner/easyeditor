@@ -1,6 +1,8 @@
 #include "WorldPropertySetting.h"
 #include "Context.h"
 
+#include <ee/panel_msg.h>
+
 #include <easymodeling.h>
 
 namespace emodeling
@@ -12,12 +14,12 @@ WorldPropertySetting::WorldPropertySetting(ee::EditPanelImpl* stage)
 {
 }
 
-void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
+void WorldPropertySetting::OnPropertyGridChange(const std::string& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
 
-	libmodeling::World* world = Context::Instance()->world;
+	World* world = Context::Instance()->world;
 
 	bool dirty = true;
 	if (name == wxT("Gravity X"))
@@ -46,7 +48,7 @@ void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAn
 
 void WorldPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	const libmodeling::World* world = Context::Instance()->world;
+	const World* world = Context::Instance()->world;
 
 	pg->GetProperty(wxT("Gravity X"))->SetValue(world->gravity.x);
 	pg->GetProperty(wxT("Gravity Y"))->SetValue(world->gravity.y);
@@ -62,7 +64,7 @@ void WorldPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 void WorldPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	const libmodeling::World* world = Context::Instance()->world;
+	const World* world = Context::Instance()->world;
 
 	pg->Clear();
 

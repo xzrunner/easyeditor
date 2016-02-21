@@ -11,9 +11,9 @@
 namespace eanim
 {
 
-SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* spritesImpl, 
+SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
 								 ee::EditCMPT* callback/* = NULL*/)
-	: ee::SelectSpritesOP(wnd, stage, spritesImpl, callback)
+	: ee::SelectSpritesOP(wnd, stage, sprites_impl, callback)
 {
 }
 

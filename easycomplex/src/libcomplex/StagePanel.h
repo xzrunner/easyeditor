@@ -1,7 +1,12 @@
-#ifndef _DRAG2D_STAGE_PANEL_H_
-#define _DRAG2D_STAGE_PANEL_H_
+#ifndef _EASYCOMPLEX_STAGE_PANEL_H_
+#define _EASYCOMPLEX_STAGE_PANEL_H_
 
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
 
+namespace ee { class PropertySettingPanel; }
+
+class wxGLContext;
 
 namespace ecomplex
 {
@@ -44,4 +49,4 @@ private:
 
 }
 
-#endif // _DRAG2D_STAGE_PANEL_H_
+#endif // _EASYCOMPLEX_STAGE_PANEL_H_

@@ -1,11 +1,13 @@
 #include "Particle2DToLuaString.h"
 
+#include <ee/Exception.h>
+
 #include <easybuilder.h>
 #include <ps_2d.h>
 
 namespace lua = ebuilder::lua;
 
-namespace librespacker
+namespace erespacker
 {
 
 void Particle2DToLuaString::Pack(const PackParticle2D* p2d, ebuilder::CodeGenerator& gen)

@@ -23,14 +23,14 @@ namespace ee
 {
 
 SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage, 
-								 MultiSpritesImpl* spritesImpl, 
+								 MultiSpritesImpl* sprites_impl, 
 								 EditCMPT* callback)
 	: DrawSelectRectOP(wnd, stage)
 	, m_callback(callback)
-	, m_spritesImpl(spritesImpl)
+	, m_spritesImpl(sprites_impl)
 	, m_draggable(true)
 {
-	m_selection = spritesImpl->GetSpriteSelection();
+	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
 
 	m_left_first_pos.SetInvalid();

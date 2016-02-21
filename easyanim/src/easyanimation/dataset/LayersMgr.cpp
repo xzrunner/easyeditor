@@ -6,6 +6,8 @@
 #include "view/KeysPanel.h"
 #include "dataset/DataMgr.h"
 
+#include <algorithm>
+
 namespace eanim
 {
 

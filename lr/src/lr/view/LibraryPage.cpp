@@ -4,6 +4,16 @@
 #include "dataset/Layer.h"
 #include "dataset/LayerFactory.h"
 
+#include <ee/EditOP.h>
+#include <ee/SymbolMgr.h>
+#include <ee/panel_msg.h>
+#include <ee/Symbol.h>
+#include <ee/Sprite.h>
+#include <ee/Shape.h>
+#include <ee/LibraryList.h>
+
+#include <algorithm>
+
 namespace lr
 {
 

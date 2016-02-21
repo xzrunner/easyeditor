@@ -35,7 +35,7 @@ void BinRRP::Run(int argc, char *argv[])
 void BinRRP::Trigger(const std::string& json_file, 
 					 const std::string& image_id_file)
 {
-	libtexpacker::GenRegularRectBinary pack(json_file, image_id_file);
+	etexpacker::GenRegularRectBinary pack(json_file, image_id_file);
 	pack.PackToBinary();
 }
 

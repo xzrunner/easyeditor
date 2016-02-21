@@ -2,6 +2,12 @@
 #include "item_string.h"
 #include "ps_config.h"
 
+#include <ee/SliderItem.h>
+#include <ee/SliderCtrlTwo.h>
+
+#include <wx/statbox.h>
+#include <wx/sizer.h>
+
 namespace eparticle2d
 {
 

@@ -4,6 +4,8 @@
 
 #include "view/LibraryPanel.h"
 
+#include <ee/Shape.h>
+
 #include <easytexture.h>
 
 namespace lr

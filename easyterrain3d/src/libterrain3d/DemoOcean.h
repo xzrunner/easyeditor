@@ -1,15 +1,14 @@
 #ifndef _EASYTERRAIN3D_DEMO_OCEAN_H_
 #define _EASYTERRAIN3D_DEMO_OCEAN_H_
 
-#define NOMINMAX 
-
 #include "IDemo.h"
 #include "image.h"
 
-
 #include <easy3d.h>
 
-namespace libterrain3d
+namespace ee { class Image; }
+
+namespace eterrain3d
 {
 
 class DemoOcean : public IDemo
@@ -28,7 +27,7 @@ private:
 private:
 	struct Wave
 	{
-		vec2 pos, speed;
+		ee::vec2 pos, speed;
 		float len;
 	};
 
@@ -39,7 +38,7 @@ private:
 
 	mutable std::vector<Wave> m_waves;
 
-	mutable vec2 m_uv_base, m_uv_spd;
+	mutable ee::vec2 m_uv_base, m_uv_spd;
 
 }; // DemoOcean
 

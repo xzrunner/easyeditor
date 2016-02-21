@@ -2,6 +2,11 @@
 #include "OceanMesh.h"
 #include "Symbol.h"
 
+#include <ee/JsonSerializer.h>
+#include <ee/FileHelper.h>
+#include <ee/ImageSymbol.h>
+#include <ee/SymbolMgr.h>
+
 namespace eterrain2d
 {
 
@@ -11,12 +16,10 @@ void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json
 		ee::JsonSerializer::Store(shape->GetVertices(), value["bound"]);
 	}
 	if (const ee::ImageSymbol* img = ocean->GetImage0()) {
-		value["tex0"] = ee::FileHelper::GetRelativePath(dir,
-			img->GetFilepath()).ToStdString();
+		value["tex0"] = ee::FileHelper::GetRelativePath(dir, img->GetFilepath());
 	}
 	if (const ee::ImageSymbol* img = ocean->GetImage1()) {
-		value["tex1"] = ee::FileHelper::GetRelativePath(dir,
-			img->GetFilepath()).ToStdString();
+		value["tex1"] = ee::FileHelper::GetRelativePath(dir, img->GetFilepath());
 	}
 
 	value["wave"]["open"] = ocean->IsWaveOpen();
@@ -86,7 +89,7 @@ void FileIO::StoreSymbol(const char* filepath, const Symbol* symbol)
 	Json::Value dst_value;
 	dst_value["bg"] = src_value["bg"];
 
-	std::string dir = ee::FileHelper::GetFileDir(filepath).ToStdString();
+	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	std::vector<OceanMesh*> meshes = symbol->GetOceans();
 	for (int i = 0, n = meshes.size(); i < n; ++i) {
 		FileIO::StoreOceanMesh(meshes[i], dir, dst_value["ocean"][i]);

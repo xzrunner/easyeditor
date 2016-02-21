@@ -1,9 +1,11 @@
 #include "LabelToBin.h"
 #include "pack_unpack.h"
 
+#include <ee/trans_color.h>
+
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int LabelToBin::Size(const PackLabel* label)

@@ -1,7 +1,7 @@
-#ifndef _LIBRESPACKER_PACK_UI_CFG_H_
-#define _LIBRESPACKER_PACK_UI_CFG_H_
+#ifndef _EASYRESPACKER_PACK_UI_CFG_H_
+#define _EASYRESPACKER_PACK_UI_CFG_H_
 
-namespace librespacker
+namespace erespacker
 {
 
 static const char* UI_WINDOW	= "window";
@@ -10,4 +10,4 @@ static const char* UI_WRAPPER	= "wrapper";
 
 }
 
-#endif // _LIBRESPACKER_PACK_UI_CFG_H_
+#endif // _EASYRESPACKER_PACK_UI_CFG_H_

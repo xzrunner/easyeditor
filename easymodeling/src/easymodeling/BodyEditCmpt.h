@@ -1,23 +1,26 @@
+#ifndef _EASYMODELING_BODY_EDIT_CMPT_H_
+#define _EASYMODELING_BODY_EDIT_CMPT_H_
 
-#ifndef EMODELING_BODY_EDIT_CMPT_H
-#define EMODELING_BODY_EDIT_CMPT_H
+#include <ee/EditCMPT.h>
 
-
+namespace ee { class PropertySettingPanel; }
 
 namespace emodeling
 {
-	class StagePanel;
 
-	class BodyEditCmpt : public ee::EditCMPT
-	{
-	public:
-		BodyEditCmpt(wxWindow* parent, const wxString& name,
-			StagePanel* editPanel, ee::PropertySettingPanel* property);
+class StagePanel;
 
-	protected:
-		virtual wxSizer* InitLayout();
+class BodyEditCmpt : public ee::EditCMPT
+{
+public:
+	BodyEditCmpt(wxWindow* parent, const std::string& name,
+		StagePanel* editPanel, ee::PropertySettingPanel* property);
 
-	}; // BodyEditCmpt
+protected:
+	virtual wxSizer* InitLayout();
+
+}; // BodyEditCmpt
+
 }
 
-#endif // EMODELING_BODY_EDIT_CMPT_H
+#endif // _EASYMODELING_BODY_EDIT_CMPT_H_

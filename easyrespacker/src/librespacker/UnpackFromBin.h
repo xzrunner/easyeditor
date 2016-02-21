@@ -1,9 +1,14 @@
-#ifndef _LIBRESPACKER_UNPACKE_FROM_BIN_H_
-#define _LIBRESPACKER_UNPACKE_FROM_BIN_H_
+#ifndef _EASYRESPACKER_UNPACKE_FROM_BIN_H_
+#define _EASYRESPACKER_UNPACKE_FROM_BIN_H_
 
+#include <string>
+#include <vector>
 
+#include <stdint.h>
 
-namespace librespacker
+namespace ee { class Image; }
+
+namespace erespacker
 {
 
 class UnpackFromBin
@@ -19,4 +24,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_UNPACKE_FROM_BIN_H_
+#endif // _EASYRESPACKER_UNPACKE_FROM_BIN_H_

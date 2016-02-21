@@ -1,9 +1,11 @@
-#ifndef EDB_STAGE_PANEL_H
-#define EDB_STAGE_PANEL_H
-
-
+#ifndef _EASYDB_STAGE_PANEL_H_
+#define _EASYDB_STAGE_PANEL_H_
 
 #include "Graphics.h"
+
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+#include <ee/ShapesPanelImpl.h>
 
 namespace edb
 {
@@ -15,13 +17,13 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, ee::LibraryPanel* library);
 	virtual ~StagePanel();
 
-	void loadFromDir(const std::string& dirpath);
-	void loadFromDirFast(const std::string& dirpath);
+	void LoadFromDir(const std::string& dirpath);
+	void LoadFromDirFast(const std::string& dirpath);
 
 private:
-	void initConnection();
+	void InitConnection();
 
-	void initPosition();
+	void InitPosition();
 
 private:
 	Graphics m_graphics;
@@ -32,4 +34,4 @@ private:
 
 }
 
-#endif // EDB_STAGE_PANEL_H
+#endif // _EASYDB_STAGE_PANEL_H_

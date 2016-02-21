@@ -1,11 +1,17 @@
 #ifndef _EASYANIM_PREVIEW_DIALOG_H_
 #define _EASYANIM_PREVIEW_DIALOG_H_
 
-#include <wx/wx.h>
+#include <ee/PlayControl.h>
 
 #include <easyanim.h>
 
+#include <wx/wx.h>
+
 #include "PreviewSettings.h"
+
+namespace ee { class EditPanel; }
+
+class wxGLContext;
 
 namespace eanim
 {

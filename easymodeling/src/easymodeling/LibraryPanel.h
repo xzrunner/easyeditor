@@ -1,17 +1,18 @@
+#ifndef _EASYMODELING_LIBRARY_PANEL_H_
+#define _EASYMODELING_LIBRARY_PANEL_H_
 
-#ifndef EMODELING_LIBRARY_PANEL_H
-#define EMODELING_LIBRARY_PANEL_H
-
-
+#include <ee/LibraryPanel.h>
 
 namespace emodeling
 {
-	class LibraryPanel : public ee::LibraryPanel
-	{
-	public:
-		LibraryPanel(wxWindow* parent);
 
-	}; // LibraryPanel
+class LibraryPanel : public ee::LibraryPanel
+{
+public:
+	LibraryPanel(wxWindow* parent);
+
+}; // LibraryPanel
+
 }
 
-#endif // EMODELING_LIBRARY_PANEL_H
+#endif // _EASYMODELING_LIBRARY_PANEL_H_

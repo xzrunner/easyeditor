@@ -1,38 +1,39 @@
+#ifndef _EASYMODELING_WORLD_H_
+#define _EASYMODELING_WORLD_H_
 
-#ifndef LIBMODELING_WORLD_H
-#define LIBMODELING_WORLD_H
+#include <ee/Vector.h>
 
-
-
-namespace libmodeling
+namespace emodeling
 {
-	class World
-	{
-	public:
-		ee::Vector gravity;
-		bool allowSleep;
 
-		bool warmStarting;
-		bool continuousPhysics;
-		bool subStepping;
+class World
+{
+public:
+	ee::Vector gravity;
+	bool allowSleep;
 
-		int velocityIterations;
-		int positionIterations;
+	bool warmStarting;
+	bool continuousPhysics;
+	bool subStepping;
 
-	public:
-		World() {
-			gravity.Set(0, -10);
-			allowSleep = true;
+	int velocityIterations;
+	int positionIterations;
 
-			warmStarting = true;
-			continuousPhysics = true;
-			subStepping = false;
+public:
+	World() {
+		gravity.Set(0, -10);
+		allowSleep = true;
 
-			velocityIterations = 8;
-			positionIterations = 3;
-		}
+		warmStarting = true;
+		continuousPhysics = true;
+		subStepping = false;
 
-	}; // World
+		velocityIterations = 8;
+		positionIterations = 3;
+	}
+
+}; // World
+
 }
 
-#endif // LIBMODELING_WORLD_H
+#endif // _EASYMODELING_WORLD_H_

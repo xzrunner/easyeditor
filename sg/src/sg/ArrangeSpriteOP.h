@@ -1,7 +1,7 @@
 #ifndef _SG_ARRANGE_SPRITE_OP_H_
 #define _SG_ARRANGE_SPRITE_OP_H_
 
-
+#include <ee/ArrangeSpriteFixOP.h>
 
 namespace sg
 {

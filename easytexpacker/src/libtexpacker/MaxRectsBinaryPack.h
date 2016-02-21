@@ -1,12 +1,12 @@
-#ifndef _LIBTEXPACKER_MAX_RECTS_BINARY_PACK_H_
-#define _LIBTEXPACKER_MAX_RECTS_BINARY_PACK_H_
+#ifndef _EASYTEXPACKER_MAX_RECTS_BINARY_PACK_H_
+#define _EASYTEXPACKER_MAX_RECTS_BINARY_PACK_H_
 
 #include "Rect.h"
 #include "Sprite.h"
 
 #include <vector>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 class MaxRectsBinaryPack
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif // _LIBTEXPACKER_MAX_RECTS_BINARY_PACK_H_
+#endif // _EASYTEXPACKER_MAX_RECTS_BINARY_PACK_H_

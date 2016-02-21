@@ -1,13 +1,15 @@
-#ifndef _LIBRESPACKER_COMPLEX_BUILDER_H_
-#define _LIBRESPACKER_COMPLEX_BUILDER_H_
+#ifndef _EASYRESPACKER_COMPLEX_BUILDER_H_
+#define _EASYRESPACKER_COMPLEX_BUILDER_H_
 
 #include "INodeBuilder.h"
 
-
+#include <vector>
+#include <map>
 
 namespace ecomplex { class Symbol; }
+namespace ee { class Sprite; }
 
-namespace librespacker
+namespace erespacker
 {
 
 class IPackNode;
@@ -47,4 +49,4 @@ private:
 
 }
 
-#endif // _LIBRESPACKER_COMPLEX_BUILDER_H_
+#endif // _EASYRESPACKER_COMPLEX_BUILDER_H_

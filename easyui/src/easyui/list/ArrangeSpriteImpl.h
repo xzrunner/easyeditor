@@ -1,7 +1,7 @@
 #ifndef _EASYUI_LIST_ARRANGE_SPRITE_IMPL_H_
 #define _EASYUI_LIST_ARRANGE_SPRITE_IMPL_H_
 
-
+#include <ee/ArrangeSpriteImpl.h>
 
 namespace eui
 {

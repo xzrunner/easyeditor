@@ -1,8 +1,8 @@
-#ifndef _E3D_CAMERA_H_
-#define _E3D_CAMERA_H_
+#ifndef _EASY3D_CAMERA_H_
+#define _EASY3D_CAMERA_H_
 
-#include "Vector.h"
-#include "Matrix.h"
+#include <ee/Vector3D.h>
+#include <ee/Matrix3D.h>
 
 namespace e3d
 {
@@ -12,13 +12,13 @@ class Camera
 public:
 	Camera();
 
-	void Translate(const vec3& offset);
+	void Translate(const ee::vec3& offset);
 	void Zoom(bool zoomin);
 
-	mat4 GetModelViewMat() const;
+	ee::mat4 GetModelViewMat() const;
 
-	const vec3& GetPosition() const { return m_pos; }
-	void SetPosition(const vec3& pos) { m_pos = pos; }
+	const ee::vec3& GetPosition() const { return m_pos; }
+	void SetPosition(const ee::vec3& pos) { m_pos = pos; }
 
 	float GetRotHeading() const { return m_rot_heading; }
 	void SetRotHeading(float rot_heading) { m_rot_heading = rot_heading; }
@@ -27,13 +27,13 @@ public:
 
 	void Rotate(float dheading, float delevation);
 
-	vec3 GetLeft() const;		// U
-	vec3 GetUp() const;			// V
-	vec3 GetToward() const;		// N
+	ee::vec3 GetLeft() const;		// U
+	ee::vec3 GetUp() const;			// V
+	ee::vec3 GetToward() const;		// N
 
 	void SetScreenSize(int width, int height);
 
-	vec3 MapToSphere(ivec2 touchpoint) const;
+	ee::vec3 MapToSphere(ee::ivec2 touchpoint) const;
 
 	void Reset();
 
@@ -42,10 +42,10 @@ public:
 	static const float CAM_FAR;
 
 private:
-	mat4 GetModelViewRotMat() const;
+	ee::mat4 GetModelViewRotMat() const;
 
 private:
-	vec3 m_pos;
+	ee::vec3 m_pos;
 	
 	// use UVN model
 	// in degree
@@ -58,4 +58,4 @@ private:
 
 }
 
-#endif // _E3D_CAMERA_H_
+#endif // _EASY3D_CAMERA_H_

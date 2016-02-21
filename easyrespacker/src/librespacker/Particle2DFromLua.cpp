@@ -2,9 +2,13 @@
 #include "UnpackNodeFactory.h"
 #include "LuaDataHelper.h"
 
+#include <ee/Exception.h>
+
 #include <ps_2d.h>
 
-namespace librespacker
+#include <assert.h>
+
+namespace erespacker
 {
 
 void Particle2DFromLua::Unpack(lua_State* L, PackParticle2D* p2d)
@@ -65,10 +69,10 @@ void Particle2DFromLua::UnpackBody(lua_State* L, PackParticle2D* p2d)
 	p2d->life = TransTime(LuaDataHelper::GetIntField(L, "life"));
 	p2d->life_var = TransTime(LuaDataHelper::GetIntField(L, "life_var"));
 
-	p2d->position.x = LuaDataHelper::GetIntField(L, "position_x");
-	p2d->position.y = LuaDataHelper::GetIntField(L, "position_y");
-	p2d->position_var.x = LuaDataHelper::GetIntField(L, "position_var_x");
-	p2d->position_var.y = LuaDataHelper::GetIntField(L, "position_var_y");
+	p2d->position.x = static_cast<float>(LuaDataHelper::GetIntField(L, "position_x"));
+	p2d->position.y = static_cast<float>(LuaDataHelper::GetIntField(L, "position_y"));
+	p2d->position_var.x = static_cast<float>(LuaDataHelper::GetIntField(L, "position_var_x"));
+	p2d->position_var.y = static_cast<float>(LuaDataHelper::GetIntField(L, "position_var_y"));
 
 	p2d->direction = TransDegree(LuaDataHelper::GetIntField(L, "direction"));
 	p2d->direction_var = TransDegree(LuaDataHelper::GetIntField(L, "direction_var"));
@@ -77,38 +81,38 @@ void Particle2DFromLua::UnpackBody(lua_State* L, PackParticle2D* p2d)
 
 	if (p2d->mode_type == P2D_MODE_GRAVITY) 
 	{
-		p2d->A.gravity.x = LuaDataHelper::GetIntField(L, "gravity_x");
-		p2d->A.gravity.y = LuaDataHelper::GetIntField(L, "gravity_y");
+		p2d->A.gravity.x = static_cast<float>(LuaDataHelper::GetIntField(L, "gravity_x"));
+		p2d->A.gravity.y = static_cast<float>(LuaDataHelper::GetIntField(L, "gravity_y"));
 
-		p2d->A.speed = LuaDataHelper::GetIntField(L, "speed");
-		p2d->A.speed_var = LuaDataHelper::GetIntField(L, "speed_var");
+		p2d->A.speed = static_cast<float>(LuaDataHelper::GetIntField(L, "speed"));
+		p2d->A.speed_var = static_cast<float>(LuaDataHelper::GetIntField(L, "speed_var"));
 
-		p2d->A.tangential_accel = LuaDataHelper::GetIntField(L, "tangential_accel");
-		p2d->A.tangential_accel_var = LuaDataHelper::GetIntField(L, "tangential_accel_var");
-		p2d->A.radial_accel = LuaDataHelper::GetIntField(L, "radial_accel");
-		p2d->A.radial_accel_var = LuaDataHelper::GetIntField(L, "radial_accel_var");
+		p2d->A.tangential_accel = static_cast<float>(LuaDataHelper::GetIntField(L, "tangential_accel"));
+		p2d->A.tangential_accel_var = static_cast<float>(LuaDataHelper::GetIntField(L, "tangential_accel_var"));
+		p2d->A.radial_accel = static_cast<float>(LuaDataHelper::GetIntField(L, "radial_accel"));
+		p2d->A.radial_accel_var = static_cast<float>(LuaDataHelper::GetIntField(L, "radial_accel_var"));
 
 		p2d->A.rotation_is_dir = LuaDataHelper::GetBoolField(L, "rotation_is_dir");
 	}
 	else if (p2d->mode_type == P2D_MODE_RADIUS)
 	{
-		p2d->B.start_radius = LuaDataHelper::GetIntField(L, "start_radius");
-		p2d->B.start_radius_var = LuaDataHelper::GetIntField(L, "start_radius_var");
-		p2d->B.end_radius = LuaDataHelper::GetIntField(L, "end_radius");
-		p2d->B.end_radius_var = LuaDataHelper::GetIntField(L, "end_radius_var");
+		p2d->B.start_radius = static_cast<float>(LuaDataHelper::GetIntField(L, "start_radius"));
+		p2d->B.start_radius_var = static_cast<float>(LuaDataHelper::GetIntField(L, "start_radius_var"));
+		p2d->B.end_radius = static_cast<float>(LuaDataHelper::GetIntField(L, "end_radius"));
+		p2d->B.end_radius_var = static_cast<float>(LuaDataHelper::GetIntField(L, "end_radius_var"));
 
-		p2d->B.direction_delta = LuaDataHelper::GetIntField(L, "direction_delta");
-		p2d->B.direction_delta_var = LuaDataHelper::GetIntField(L, "direction_delta_var");
+		p2d->B.direction_delta = static_cast<float>(LuaDataHelper::GetIntField(L, "direction_delta"));
+		p2d->B.direction_delta_var = static_cast<float>(LuaDataHelper::GetIntField(L, "direction_delta_var"));
 	}
 	else if (p2d->mode_type == P2D_MODE_SPD_COS)
 	{
-		p2d->C.speed = LuaDataHelper::GetIntField(L, "speed");
-		p2d->C.speed_var = LuaDataHelper::GetIntField(L, "speed_var");
+		p2d->C.speed = static_cast<float>(LuaDataHelper::GetIntField(L, "speed"));
+		p2d->C.speed_var = static_cast<float>(LuaDataHelper::GetIntField(L, "speed_var"));
 
-		p2d->C.cos_amplitude = LuaDataHelper::GetIntField(L, "cos_amplitude");
-		p2d->C.cos_amplitude_var = LuaDataHelper::GetIntField(L, "cos_amplitude_var");
-		p2d->C.cos_frequency = LuaDataHelper::GetIntField(L, "cos_frequency");
-		p2d->C.cos_frequency_var = LuaDataHelper::GetIntField(L, "cos_frequency_var");
+		p2d->C.cos_amplitude = static_cast<float>(LuaDataHelper::GetIntField(L, "cos_amplitude"));
+		p2d->C.cos_amplitude_var = static_cast<float>(LuaDataHelper::GetIntField(L, "cos_amplitude_var"));
+		p2d->C.cos_frequency = static_cast<float>(LuaDataHelper::GetIntField(L, "cos_frequency"));
+		p2d->C.cos_frequency_var = static_cast<float>(LuaDataHelper::GetIntField(L, "cos_frequency_var"));
 	}
 	else 
 	{

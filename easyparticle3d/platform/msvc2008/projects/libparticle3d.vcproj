@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libparticle3d"
+	Name="5.libparticle3d"
 	ProjectGUID="{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}"
 	RootNamespace="libparticle3d"
 	Keyword="Win32Proj"

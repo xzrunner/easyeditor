@@ -1,9 +1,15 @@
 #ifndef _COCO_EPE_TEXTURE_PACKER_H_
 #define _COCO_EPE_TEXTURE_PACKER_H_
 
+#include <ee/ImageSaver.h>
+#include <ee/Image.h>
 
+#include <set>
+#include <map>
 
-namespace libcoco
+namespace ee { class Image; class Rect; }
+
+namespace ecoco
 {
 namespace epe
 {
@@ -20,19 +26,19 @@ public:
 public:
 	TexturePacker(int padding = 1, int extrude = 1);
 
-	void pack(const std::set<ee::Image*>& images);
+	void Pack(const std::set<ee::Image*>& images);
 
-	void storeToMemory();
-	void storeToFile(const std::string& floder, const std::string& filename, ee::ImageSaver::Type type);
+	void StoreToMemory();
+	void StoreToFile(const std::string& floder, const std::string& filename, ee::ImageSaver::Type type);
 
-	const ee::Rect* query(ee::Image* image) const;
+	const ee::Rect* Query(ee::Image* image) const;
 
 private:
-	std::map<ee::Image*, ee::Rect> m_mapImg2Rect;
+	std::map<ee::Image*, ee::Rect> m_map_img2rect;
 	
 	int m_edge;
 
-	int m_xCurr, m_yCurr, m_width;
+	int m_xcurr, m_ycurr, m_width;
 
 	uint8_t* m_pixels;
 

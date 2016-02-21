@@ -1,7 +1,7 @@
-#ifndef _LIBRESPACKER_NODE_FROMI_LUA_H_
-#define _LIBRESPACKER_NODE_FROMI_LUA_H_
+#ifndef _EASYRESPACKER_NODE_FROMI_LUA_H_
+#define _EASYRESPACKER_NODE_FROMI_LUA_H_
 
-namespace librespacker
+namespace erespacker
 {
 
 class NodeFromLua
@@ -15,4 +15,4 @@ public:
 
 }
 
-#endif // _LIBRESPACKER_NODE_FROMI_LUA_H_
+#endif // _EASYRESPACKER_NODE_FROMI_LUA_H_

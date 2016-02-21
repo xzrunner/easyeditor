@@ -1,48 +1,53 @@
-
 #include "Body.h"
 #include "Fixture.h"
 
-using namespace libmodeling;
+#include <ee/StringHelper.h>
+#include <ee/std_functor.h>
+
+namespace emodeling
+{
 
 Body::Body()
-	: type(e_static)
-	, linearDamping(0.0f)
-	, angularDamping(0.0f)
-	, allowSleep(true)
-	, bullet(false)
-	, active(true)
-	, gravityScale(1.0f)
-	, sprite(NULL)
+	: m_type(e_static)
+	, m_linear_damping(0.0f)
+	, m_angular_damping(0.0f)
+	, m_allow_sleep(true)
+	, m_bullet(false)
+	, m_active(true)
+	, m_gravity_scale(1.0f)
+	, m_sprite(NULL)
 {
 	static int count = 0;
-	name = wxT("body") + wxString::FromDouble(count++);
+	m_name = std::string("body") + ee::StringHelper::ToString(count++);
 }
 
 Body::~Body()
 {
-	for_each(fixtures.begin(), fixtures.end(), DeletePointerFunctor<Fixture>());
-	fixtures.clear();
+	for_each(m_fixtures.begin(), m_fixtures.end(), ee::DeletePointerFunctor<Fixture>());
+	m_fixtures.clear();
 }
 
-bool Body::isContain(const ee::Vector& pos) const
+bool Body::IsContain(const ee::Vector& pos) const
 {
-	for (size_t i = 0, n = fixtures.size(); i < n; ++i)
-		if (fixtures[i]->isContain(pos))
+	for (size_t i = 0, n = m_fixtures.size(); i < n; ++i)
+		if (m_fixtures[i]->IsContain(pos))
 			return true;
 	return false;
 }
 
-bool Body::isIntersect(const ee::Rect& rect) const
+bool Body::IsIntersect(const ee::Rect& rect) const
 {
-	for (size_t i = 0, n = fixtures.size(); i < n; ++i)
-		if (fixtures[i]->isIntersect(rect))
+	for (size_t i = 0, n = m_fixtures.size(); i < n; ++i)
+		if (m_fixtures[i]->IsIntersect(rect))
 			return true;
 	return false;
 }
 
-void Body::draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colorf& cEdge) const
+void Body::Draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colorf& cEdge) const
 {
-	for (size_t i = 0, n = fixtures.size(); i < n; ++i) {
-		fixtures[i]->draw(mt, cFace, cEdge);
+	for (size_t i = 0, n = m_fixtures.size(); i < n; ++i) {
+		m_fixtures[i]->Draw(mt, cFace, cEdge);
 	}
+}
+
 }

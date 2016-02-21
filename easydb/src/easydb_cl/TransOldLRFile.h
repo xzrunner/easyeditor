@@ -3,7 +3,9 @@
 
 #include "ICommand.h"
 
+#include <json/json.h>
 
+#include <set>
 
 namespace edb
 {

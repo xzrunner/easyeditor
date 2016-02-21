@@ -1,10 +1,18 @@
 #include "RegularRectPack.h"
 #include "MaxRectsBinaryPack2.h"
 
-#include <wx/tokenzr.h>
+#include <ee/StringHelper.h>
+#include <ee/std_functor.h>
+#include <ee/math_common.h>
+#include <ee/Rect.h>
+#include <ee/FileType.h>
+
+#include <json/json.h>
+
+//#include <wx/tokenzr.h>
 #include <iostream>
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 RegularRectPack::RegularRectPack(const wxArrayString& files)
@@ -32,15 +40,15 @@ void RegularRectPack::Pack()
 	PackWithMaxRectAlg();
 }
 
-void RegularRectPack::OutputToText(const wxString& filepath) const
+void RegularRectPack::OutputToText(const std::string& filepath) const
 {
 	if (m_sizes.empty()) {
 		return;
 	}
 
 	struct Part {
-		Rect src;
-		libtexpacker::Rect dst;
+		RegularRectPack::Rect src;
+		etexpacker::Rect dst;
 	};
 
 	struct Picture {
@@ -56,7 +64,7 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 		pictures.push_back(pic);
 	}
 
-	std::vector<std::pair<Rect, libtexpacker::Rect> >::const_iterator itr;
+	std::vector<std::pair<RegularRectPack::Rect, etexpacker::Rect> >::const_iterator itr;
 	for (itr = m_result.begin(); itr != m_result.end(); ++itr) {
 		Part* p = new Part;
 		p->src = itr->first;
@@ -73,7 +81,7 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 
 			Json::Value rect_val;
 
-			rect_val["filepath"] = part->src.file.ToStdString();
+			rect_val["filepath"] = part->src.file;
 			if (part->src.rot) {
 				rect_val["src"]["w"] = part->src.h;
 				rect_val["src"]["h"] = part->src.w;
@@ -94,17 +102,17 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
-		wxString out_file = filepath + wxString::FromDouble(i+1) + ".json";
+		std::string out_file = filepath + ee::StringHelper::ToString(i+1) + ".json";
  	 	Json::StyledStreamWriter writer;
  	 	std::locale::global(std::locale(""));
- 	 	std::ofstream fout(out_file.fn_str());
+ 	 	std::ofstream fout(out_file.c_str());
  	 	std::locale::global(std::locale("C"));	
  	 	writer.write(fout, pictures[i]->value);
 	}
 
 	for (int i = 0, n = pictures.size(); i < n; ++i) {
 		Picture* pic = pictures[i];
-		for_each(pic->parts.begin(), pic->parts.end(), DeletePointerFunctor<Part>());
+		for_each(pic->parts.begin(), pic->parts.end(), ee::DeletePointerFunctor<Part>());
 		delete pic;
 	}
 }
@@ -116,7 +124,7 @@ void RegularRectPack::PackPowerOfTwo()
 	{
 		CombineArray* ca = *itr;
 		// power of 2, w == h
-		if (ca->w == ca->h && is_power_of_two(ca->w))
+		if (ca->w == ca->h && ee::is_power_of_two(ca->w))
 		{
 			int next_sz = ca->w << 1;
 			// compose 4 to a larger one
@@ -130,7 +138,7 @@ void RegularRectPack::PackPowerOfTwo()
 			}		
 		}
 		// power of 2, w == h * 2
-		else if (ca->w == ca->h * 2 && is_power_of_two(ca->w))
+		else if (ca->w == ca->h * 2 && ee::is_power_of_two(ca->w))
 		{
 			int next_sz = ca->w;
 			// compose 2 to a larger one
@@ -142,7 +150,7 @@ void RegularRectPack::PackPowerOfTwo()
 			}
 		}
 		// power of 2, h == w * 2
-		else if (ca->h == ca->w * 2 && is_power_of_two(ca->w))
+		else if (ca->h == ca->w * 2 && ee::is_power_of_two(ca->w))
 		{
 			int next_sz = ca->h;
 			// compose 2 to a larger one
@@ -180,10 +188,10 @@ void RegularRectPack::PackNotPowerOfTwo()
 				continue;
 			}
 
-			if (!is_power_of_two(ca->h)) 
+			if (!ee::is_power_of_two(ca->h)) 
 			{
 				while (ca->Size() >= 1) {
-					int sub_h = next_p2(ca->h) - ca->h;
+					int sub_h = ee::next_p2(ca->h) - ca->h;
 					if (ComposeTwo(ca, ca->w, sub_h, false) ||
 						ComposeTwo(ca, ca->w, 4, false)) {
 						success = true;
@@ -218,7 +226,7 @@ void RegularRectPack::PackNotPowerOfTwo()
 				continue;
 			}
 
-			if (is_power_of_two(ca->h) && ca->w < ca->h)
+			if (ee::is_power_of_two(ca->h) && ca->w < ca->h)
 			{
 				while (ca->Size() >= 1) {
 					int sub_w = ca->h - ca->w;
@@ -261,11 +269,11 @@ void RegularRectPack::PackWithMaxRectAlg()
 		}
 	}
 
-	std::vector<libtexpacker::Rect> output;
+	std::vector<etexpacker::Rect> output;
 
 	// pack
 	MaxRectsBinaryPack2 packer;
-	packer.Pack(libtexpacker::PACK_SQUARE_MULTI_AUTO, 0, 2048, 0, rects, output);
+	packer.Pack(PACK_SQUARE_MULTI_AUTO, 0, 2048, 0, rects, output);
 	packer.GetSize(m_sizes);
 
 	// parser result
@@ -275,7 +283,7 @@ void RegularRectPack::PackWithMaxRectAlg()
 		CombineArray* ca = *itr;
 		while (!ca->combines.empty()) {
 			Combine cb = ca->combines.front(); ca->combines.pop();
-			const libtexpacker::Rect& r = output[idx++];
+			const etexpacker::Rect& r = output[idx++];
 			ParserPackResult(cb, r);
 		}
 	}
@@ -283,16 +291,11 @@ void RegularRectPack::PackWithMaxRectAlg()
 
 void RegularRectPack::PrintStatics() const
 {
-	wxString msg;
-	msg.Printf("before: %d, after: %d \n", m_ori_count, GetCombineCount());
-	std::cout << msg;
-
+	std::cout << ee::StringHelper::Format("before: %d, after: %d \n", m_ori_count, GetCombineCount());
 	std::set<CombineArray*, CombineArrayCmp>::const_iterator itr;
 	for (itr = m_data.begin(); itr != m_data.end(); ++itr) {
 		const CombineArray* ca = *itr;
-		wxString msg;
-		msg.Printf("w: %d, h: %d, count: %d\n", ca->w, ca->h, ca->Size());
-		std::cout << msg;
+		std::cout << ee::StringHelper::Format("w: %d, h: %d, count: %d\n", ca->w, ca->h, ca->Size());
 	}
 }
 
@@ -300,7 +303,7 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 {
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		const wxString& filepath = files[i];
+		std::string filepath = files[i];
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_image)) {
 			continue;
 		}
@@ -308,23 +311,12 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 		Rect r;
 		r.file = filepath;
 
-		wxStringTokenizer tkz(filepath, wxT("#"));
-		int idx = 0;
-		while (tkz.HasMoreTokens())
-		{
-			wxString token = tkz.GetNextToken();
-			if (idx == 1) {
-				r.x = wxAtoi(token);
-			} else if (idx == 2) {
-				r.y = wxAtoi(token);
-			} else if (idx == 3) {
-				r.w = wxAtoi(token);
-			} else if (idx == 4) {
-				r.h = wxAtoi(token);
-			}
-			++idx;
-		}
-
+		std::vector<std::string> tokens;
+		ee::StringHelper::Split(filepath, "#", tokens);
+		ee::StringHelper::FromString(tokens[1], r.x);
+		ee::StringHelper::FromString(tokens[2], r.y);
+		ee::StringHelper::FromString(tokens[3], r.w);
+		ee::StringHelper::FromString(tokens[4], r.h);
 		if (r.w > r.h) {
 			std::swap(r.w, r.h);
 			r.rot = true;
@@ -386,7 +378,7 @@ bool RegularRectPack::ComposeTwo(CombineArray* ca, int width, int height, bool i
 	return true;
 }
 
-void RegularRectPack::ParserPackResult(const Combine& cb, const libtexpacker::Rect& r)
+void RegularRectPack::ParserPackResult(const Combine& cb, const etexpacker::Rect& r)
 {
 	assert(cb.w == r.width && cb.h == r.height
 		|| cb.h == r.width && cb.w == r.height);
@@ -397,7 +389,7 @@ void RegularRectPack::ParserPackResult(const Combine& cb, const libtexpacker::Re
 		for (int i = 0, n = cb.children.size(); i < n; ++i) {
 			const Combine& child = cb.children[i];
 
-			libtexpacker::Rect cr;
+			etexpacker::Rect cr;
 			cr.tex_id = r.tex_id;
 			if (cb.w <= r.width && cb.h <= r.height) {
 				cr.x = r.x + child.x;

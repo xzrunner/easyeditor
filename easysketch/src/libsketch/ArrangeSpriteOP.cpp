@@ -8,7 +8,9 @@
 #include "TranslateCameraState.h"
 #include "RotateCameraState.h"
 
-namespace libsketch
+#include <ee/FetchAllVisitor.h>
+
+namespace esketch
 {
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
@@ -47,8 +49,8 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 			GetSelection().Traverse(ee::FetchAllVisitor<Sprite>(sprites));
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
 				Sprite* sprite = sprites[i];
-				sprite->SetPos3(vec3(0, 0, 0));
-				sprite->SetOri3(Quaternion());
+				sprite->SetPos3(ee::vec3(0, 0, 0));
+				sprite->SetOri3(ee::Quaternion());
 			}
 
 			e3d::StageCanvas* canvas 
@@ -74,7 +76,7 @@ bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMousePress(ivec2(x, y));
+		m_state->OnMousePress(ee::ivec2(x, y));
 	}
 
 	return false;
@@ -87,7 +89,7 @@ bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMouseRelease(ivec2(x, y));
+		m_state->OnMouseRelease(ee::ivec2(x, y));
 	}
 
 	return false;
@@ -107,7 +109,7 @@ bool ArrangeSpriteOP::OnMouseRightDown(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMousePress(ivec2(x, y));
+		m_state->OnMousePress(ee::ivec2(x, y));
 	}
 
 	return false;
@@ -120,7 +122,7 @@ bool ArrangeSpriteOP::OnMouseRightUp(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMouseRelease(ivec2(x, y));
+		m_state->OnMouseRelease(ee::ivec2(x, y));
 	}
 
 	return false;
@@ -144,7 +146,7 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMouseMove(ivec2(x, y));
+		m_state->OnMouseMove(ee::ivec2(x, y));
 	}
 
 	return false;

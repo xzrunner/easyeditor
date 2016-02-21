@@ -1,6 +1,15 @@
 #include "ParserLuaFile.h"
 
-#include <sstream>
+#include <ee/Image.h>
+#include <ee/ImageClip.h>
+#include <ee/ImageSaver.h>
+#include <ee/NullSprite.h>
+#include <ee/NullSymbol.h>
+#include <ee/FileType.h>
+#include <ee/ImageSymbol.h>
+#include <ee/ImageSprite.h>
+#include <ee/SpriteFactory.h>
+#include <ee/trans_color.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -12,7 +21,9 @@ extern "C" {
 	#include <lauxlib.h>
 };
 
-namespace libcoco
+#include <sstream>
+
+namespace ecoco
 {
 namespace epe
 {
@@ -312,7 +323,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			Picture::Part* part = pic->parts[i];
 
 			const ee::ImageData* image = images[part->tex]->GetImageData();
-			eimage::ImageClip clip(*image);
+			ee::ImageClip clip(*image);
 
 			const uint8_t* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
 			if (pixels) 
@@ -367,15 +378,15 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
-	libanim::Symbol* symbol = new libanim::Symbol;
-	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
+	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
 	symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		libanim::Symbol::Frame* frame = new libanim::Symbol::Frame;
+		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
 		frame->index = i+1;
 		frame->bClassicTween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
@@ -412,7 +423,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + ee::FileType::GetTag(ee::FileType::e_anim) + ".json";
-	libanim::FileSaver::store(filename.c_str(), *symbol);
+	eanim::FileSaver::Store(filename.c_str(), *symbol);
 
 	ani->filename = filename;
 
@@ -519,15 +530,15 @@ void ParserLuaFile::transAniToMemory()
 
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
-	libanim::Symbol* symbol = new libanim::Symbol;
-	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
+	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
 	symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		libanim::Symbol::Frame* frame = new libanim::Symbol::Frame;
+		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
 		frame->index = i + 1;
 		frame->bClassicTween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)

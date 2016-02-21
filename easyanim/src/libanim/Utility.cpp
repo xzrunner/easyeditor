@@ -1,7 +1,15 @@
 #include "Utility.h"
 #include "TweenUtility.h"
 
-namespace libanim
+#include <ee/SpriteRenderer.h>
+#include <ee/std_functor.h>
+#include <ee/Sprite.h>
+
+#include <algorithm>
+
+#include <assert.h>
+
+namespace eanim
 {
 
 void Utility::DrawAnimSymbol(const Symbol* symbol, 
@@ -16,7 +24,7 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 		ee::SpriteRenderer::Instance()->Draw(sprites[i], NULL, mt, color);
 	}
 
-	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<ee::Sprite>());
+	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());
 }
 
 void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites)

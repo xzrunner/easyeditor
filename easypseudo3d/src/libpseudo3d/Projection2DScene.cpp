@@ -2,6 +2,13 @@
 #include "StageCanvas2D.h"
 #include "Proj2DEditOP.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/SpriteRenderer.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/Camera.h>
+#include <ee/panel_msg.h>
+
 namespace epseudo3d
 {
 

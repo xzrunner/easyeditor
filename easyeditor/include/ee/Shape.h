@@ -18,7 +18,7 @@ class Matrix;
 class EditPanelImpl;
 struct ColorTrans;
 
-class Shape : public Cloneable, private UserDataImpl, public Object
+class Shape : public Cloneable, public UserDataImpl, public Object
 {
 public:
 	Shape();

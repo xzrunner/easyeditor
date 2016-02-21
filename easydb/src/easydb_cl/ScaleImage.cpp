@@ -3,7 +3,19 @@
 #include "ScaleImage.h"
 #include "check_params.h"
 
+#include <ee/ShaderMgr.h>
+#include <ee/SettingData.h>
+#include <ee/Snapshoot.h>
+#include <ee/Config.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Rect.h>
+#include <ee/Sprite.h>
+#include <ee/Symbol.h>
+#include <ee/SpriteFactory.h>
+
 #include <glfw.h>
+#include <wx/arrstr.h>
 
 #include <easyimage.h>
 
@@ -74,9 +86,7 @@ void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& dir, float scale)
 
 void ScaleImage::Scale(ee::Snapshoot& ss, const std::string& src, const std::string& dst, float scale)
 {
-	wxFileName filename(src);
-	filename.Normalize();
-	std::string filepath = filename.GetFullPath().ToStdString();
+	std::string filepath = ee::FileHelper::GetAbsolutePath(src);
 	if (ee::FileType::IsType(filepath, ee::FileType::e_image))
 	{
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);

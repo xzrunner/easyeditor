@@ -4,9 +4,11 @@
 
 #include "../SymbolDependanceSorter.h"
 
+#include <ee/ImageSymbol.h>
+
 #include <easycomplex.h>
 
-namespace libcoco
+namespace ecoco
 {
 namespace epe
 {
@@ -39,9 +41,9 @@ void PackLuaFile::pack(const std::vector<const ee::Sprite*>& sprites,
 	}
 
 	TexturePacker textures;
-	textures.pack(setImages);
-	textures.storeToMemory();
-	textures.storeToFile(outfloder, "tmp.1", ee::ImageSaver::e_ppm);
+	textures.Pack(setImages);
+	textures.StoreToMemory();
+	textures.StoreToFile(outfloder, "tmp.1", ee::ImageSaver::e_ppm);
 
 	// pack lua file
 	CocoPacker code(textures);

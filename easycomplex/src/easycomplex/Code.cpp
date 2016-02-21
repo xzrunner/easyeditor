@@ -1,9 +1,11 @@
 #include "Code.h"
 
-#include <queue>
+#include <ee/FontBlankSprite.h>
 
 #include <easycomplex.h>
 #include <easybuilder.h>
+
+#include <queue>
 
 namespace ecomplex
 {
@@ -109,7 +111,7 @@ void Code::ResolveText(const Symbol& symbol)
  
  			if (ee::FontBlankSprite* s = dynamic_cast<ee::FontBlankSprite*>(child))
  			{
-				std::string content = s->GetTextContext().ToStdString();
+				std::string content = s->GetTextContext();
 				size_t pos = 0;
 				std::string replace("\\n");
 				while ((pos = content.find('\n', pos)) != std::string::npos) {

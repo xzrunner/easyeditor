@@ -6,6 +6,8 @@
 #include "ShadowShader.vert"
 #include "ShadowShader.frag"
 
+#include <string>
+
 namespace eshadow
 {
 

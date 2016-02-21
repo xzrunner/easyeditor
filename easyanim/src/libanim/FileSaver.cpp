@@ -1,9 +1,14 @@
 #include "FileSaver.h"
 
-namespace libanim
+#include <ee/FileHelper.h>
+#include <ee/Sprite.h>
+
+#include <fstream>
+
+namespace eanim
 {
 
-void FileSaver::store(const std::string& filepath, const Symbol& symbol)
+void FileSaver::Store(const std::string& filepath, const Symbol& symbol)
 {
 	Json::Value value;
 
@@ -13,7 +18,7 @@ void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
-		store(value["layer"][i], symbol.m_layers[i], dir);
+		Store(value["layer"][i], symbol.m_layers[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -23,27 +28,26 @@ void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 	fout.close();
 }
 
-void FileSaver::store(Json::Value& value, Symbol::Layer* layer, const wxString& dir)
+void FileSaver::Store(Json::Value& value, Symbol::Layer* layer, const std::string& dir)
 {
 	value["name"] = layer->name;
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
-		store(value["frame"][i], layer->frames[i], dir);
+		Store(value["frame"][i], layer->frames[i], dir);
 }
 
-void FileSaver::store(Json::Value& value, Symbol::Frame* frame, const wxString& dir)
+void FileSaver::Store(Json::Value& value, Symbol::Frame* frame, const std::string& dir)
 {
 	value["time"] = frame->index;
 	for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
-		store(value["actor"][i], frame->sprites[i], dir);
+		Store(value["actor"][i], frame->sprites[i], dir);
 }
 
-void FileSaver::store(Json::Value& value, ee::Sprite* sprite, const wxString& dir)
+void FileSaver::Store(Json::Value& value, ee::Sprite* sprite, const std::string& dir)
 {
 	const ee::Symbol& symbol = sprite->GetSymbol();
 
 	// filepath
-	value["filepath"] = ee::FileHelper::GetRelativePath(dir, 
-		symbol.GetFilepath()).ToStdString();
+	value["filepath"] = ee::FileHelper::GetRelativePath(dir, symbol.GetFilepath());
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

@@ -1,35 +1,40 @@
-
-#ifndef LIBMODELING_MOTOR_JOINT_H
-#define LIBMODELING_MOTOR_JOINT_H
+#ifndef _EASYMODELING_MOTOR_JOINT_H_
+#define _EASYMODELING_MOTOR_JOINT_H_
 
 #include "Joint.h"
 
-namespace libmodeling
+#include <ee/Vector.h>
+
+#include <vector>
+
+namespace emodeling
 {
-	class MotorJoint : public Joint
-	{
-	public:
-		MotorJoint(Body* b0, Body* b1);
 
-		virtual bool isContain(const ee::Vector& pos) const;
-		virtual bool isIntersect(const ee::Rect& rect) const;
+class MotorJoint : public Joint
+{
+public:
+	MotorJoint(Body* b0, Body* b1);
 
-		virtual void draw(DrawType type) const;
+	virtual bool IsContain(const ee::Vector& pos) const;
+	virtual bool IsIntersect(const ee::Rect& rect) const;
 
-	private:
-		void drawAnchor(const ee::Vector& pos, DrawType type) const;
+	virtual void Draw(DrawType type) const;
 
-	public:
-		ee::Vector linearOffset;
-		float angularOffset;
+private:
+	void DrawAnchor(const ee::Vector& pos, DrawType type) const;
 
-		float maxForce;
+public:
+	ee::Vector m_linear_offset;
+	float m_angular_offset;
 
-		float maxTorque;
+	float m_max_force;
 
-		float correctionFactor;
+	float m_max_torque;
 
-	}; // MotorJoint
+	float m_correction_factor;
+
+}; // MotorJoint
+
 }
 
-#endif // LIBMODELING_MOTOR_JOINT_H
+#endif // _EASYMODELING_MOTOR_JOINT_H_

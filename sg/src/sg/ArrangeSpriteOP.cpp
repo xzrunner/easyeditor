@@ -2,6 +2,10 @@
 #include "StagePanel.h"
 #include "SpriteExt.h"
 
+#include <ee/FetchAllVisitor.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteSelection.h>
+
 namespace sg
 {
 

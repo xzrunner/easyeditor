@@ -1,7 +1,9 @@
 #ifndef _EASYUI_WINDOW_SYMBOL_CFG_H_
 #define _EASYUI_WINDOW_SYMBOL_CFG_H_
 
+#include <json/json.h>
 
+namespace ee { class LibraryPanel; }
 
 namespace eui
 {

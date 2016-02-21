@@ -1,7 +1,11 @@
 #include "FileIO.h"
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/ViewlistPanel.h>
+
 #include <easycomplex.h>
+
 #include <queue>
 
 namespace ecomplex

@@ -1,7 +1,7 @@
-#ifndef _EASYCOMPLEX_PROPERTY_SETTING_H_
-#define _EASYCOMPLEX_PROPERTY_SETTING_H_
+#ifndef _EASY_EASYCOMPLEX_PROPERTY_SETTING_H_
+#define _EASY_EASYCOMPLEX_PROPERTY_SETTING_H_
 
-
+#include <ee/SymbolPropertySetting.h>
 
 namespace ecomplex
 {
@@ -13,7 +13,7 @@ class SymbolPropertySetting : public ee::SymbolPropertySetting
 public:
 	SymbolPropertySetting(Symbol* symbol);
 
-	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
 protected:
 	virtual void UpdateProperties(wxPropertyGrid* pg);
@@ -21,7 +21,7 @@ protected:
 
 private:
 	std::string GetGroupNames() const;
-	void SetGroupByNames(const wxString& names);
+	void SetGroupByNames(const std::string& names);
 
 	void InitEachGroup(wxPropertyGrid* pg);
 
@@ -29,4 +29,4 @@ private:
 
 }
 
-#endif // _EASYCOMPLEX_PROPERTY_SETTING_H_
+#endif // _EASY_EASYCOMPLEX_PROPERTY_SETTING_H_

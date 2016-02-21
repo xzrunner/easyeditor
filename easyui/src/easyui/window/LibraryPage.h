@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_LIBRARY_PAGE_H_
 #define _EASYUI_WINDOW_LIBRARY_PAGE_H_
 
-
+#include <ee/LibraryPage.h>
 
 namespace eui
 {

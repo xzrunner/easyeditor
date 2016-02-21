@@ -19,7 +19,7 @@ template <typename TBase>
 class ArrangeSpriteOP : public TBase
 {
 public:
-	ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl, 
+	ArrangeSpriteOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl, 
 		PropertySettingPanel* property = NULL, EditCMPT* callback = NULL, 
 		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), 
 		ArrangeSpriteImpl* impl = NULL);

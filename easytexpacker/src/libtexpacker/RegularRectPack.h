@@ -1,5 +1,5 @@
-#ifndef _LIBTEXPACKER_REGULAR_RECT_PACK_H_
-#define _LIBTEXPACKER_REGULAR_RECT_PACK_H_
+#ifndef _EASYTEXPACKER_REGULAR_RECT_PACK_H_
+#define _EASYTEXPACKER_REGULAR_RECT_PACK_H_
 
 #include <queue>
 #include <set>
@@ -8,7 +8,7 @@
 
 #include "Rect.h"
 
-namespace libtexpacker
+namespace etexpacker
 {
 
 class RegularRectPack
@@ -19,7 +19,7 @@ public:
 
 	void Pack();
 
-	void OutputToText(const wxString& filepath) const;
+	void OutputToText(const std::string& filepath) const;
 
 private:
 	void PrintStatics() const;
@@ -38,11 +38,13 @@ private:
 	{
 		Rect() : w(-1), h(-1), rot(false) {}
 
-		bool HasFilepath() const { return !file.IsEmpty(); }
+		bool HasFilepath() const { return !file.empty(); }
 
 		int x, y;
 		int w, h;
-		wxString file;
+		std::string file;
+
+		int tex_id;
 
 		bool rot;
 
@@ -116,19 +118,19 @@ private:
 
 	bool ComposeTwo(CombineArray* ca, int width, int height, bool is_right_side);
 
-	void ParserPackResult(const Combine& cb, const libtexpacker::Rect& r);
+	void ParserPackResult(const Combine& cb, const etexpacker::Rect& r);
 
 private:
 	std::set<CombineArray*, CombineArrayCmp> m_data;
 
 	int m_ori_count;
 
-	std::vector<std::pair<Rect, libtexpacker::Rect> > m_result;
+	std::vector<std::pair<RegularRectPack::Rect, etexpacker::Rect> > m_result;
 
-	std::vector<libtexpacker::RectSize> m_sizes;
+	std::vector<RectSize> m_sizes;
 
 }; // RegularRectPack
 
 }
 
-#endif // _LIBTEXPACKER_REGULAR_RECT_PACK_H_
+#endif // _EASYTEXPACKER_REGULAR_RECT_PACK_H_

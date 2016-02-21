@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_SYMBOL_PROPERTY_SETTING_H_
 #define _EASYPARTICLE3D_SYMBOL_PROPERTY_SETTING_H_
 
-
+#include <ee/SymbolPropertySetting.h>
 
 namespace eparticle3d
 {
@@ -13,7 +13,7 @@ class SymbolPropertySetting : public ee::SymbolPropertySetting
 public:
 	SymbolPropertySetting(ParticleSystem* ps);
 
-	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
+	virtual void OnPropertyGridChange(const std::string& name, const wxAny& value);
 
 protected:
 	virtual void UpdateProperties(wxPropertyGrid* pg);

@@ -23,7 +23,7 @@ class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
 
-class Sprite : public Cloneable, private UserDataImpl, public Object
+class Sprite : public Cloneable, public UserDataImpl, public Object
 {
 public:
 	Sprite();

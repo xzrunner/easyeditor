@@ -1,5 +1,8 @@
 #include "TopLibraryPanel.h"
 
+#include <ee/LibraryImagePage.h>
+#include <ee/LibraryScriptsPage.h>
+
 #include <easycomplex.h>
 #include <easytext.h>
 

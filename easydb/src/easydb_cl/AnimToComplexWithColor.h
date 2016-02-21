@@ -3,7 +3,9 @@
 
 #include "ICommand.h"
 
+#include <ee/Color.h>
 
+namespace ee { class Sprite; }
 
 namespace edb
 {

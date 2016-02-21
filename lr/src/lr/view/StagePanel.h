@@ -1,10 +1,15 @@
 #ifndef _LR_STAGE_PANEL_H_
 #define _LR_STAGE_PANEL_H_
 
-
-
 #include "dataset/CharacterAllDirections.h"
 #include "preview/IPathfinding.h"
+
+#include <ee/EditPanel.h>
+#include <ee/MultiSpritesImpl.h>
+#include <ee/MultiShapesImpl.h>
+#include <ee/Color.h>
+
+namespace ee { class PropertySettingPanel; class LibraryPanel; }
 
 namespace lr
 {

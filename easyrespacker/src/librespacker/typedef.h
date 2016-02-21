@@ -1,9 +1,9 @@
-#ifndef _LIBRESPACKER_TYPEDEF_H_
-#define _LIBRESPACKER_TYPEDEF_H_
+#ifndef _EASYRESPACKER_TYPEDEF_H_
+#define _EASYRESPACKER_TYPEDEF_H_
 
 #include <stdint.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 static const float SCALE = 16;
@@ -26,4 +26,4 @@ enum TextureType
 
 }
 
-#endif // _LIBRESPACKER_TYPEDEF_H_
+#endif // _EASYRESPACKER_TYPEDEF_H_

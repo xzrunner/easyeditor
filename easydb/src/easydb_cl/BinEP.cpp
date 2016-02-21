@@ -1,8 +1,9 @@
 #include "BinEP.h"
 #include "check_params.h"
 
-#include <epbin.h>
+#include <ee/Exception.h>
 
+#include <epbin.h>
 
 namespace edb
 {

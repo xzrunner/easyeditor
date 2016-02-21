@@ -1,7 +1,7 @@
 #ifndef _LR_FRAME_H_
 #define _LR_FRAME_H_
 
-
+#include <ee/Frame.h>
 
 namespace lr
 {
@@ -11,7 +11,7 @@ class ToolBar;
 class Frame : public ee::Frame
 {
 public:
-	Frame(const wxString& title, const wxString& filetag);
+	Frame(const std::string& title, const std::string& filetag);
 
 	ToolBar* GetToolBar() { return m_toolbar; }
 

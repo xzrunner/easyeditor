@@ -251,9 +251,7 @@ std::string Frame::GetFileFilter() const
 
 std::string Frame::GetJsonFileFilter(const std::string& file_tag)
 {
-	wxString fliter;
-	fliter.Printf("JSON files (*_%s.json)|*_%s.json", file_tag, file_tag);
-	return fliter.ToStdString();
+	return ee::StringHelper::Format("JSON files (*_%s.json)|*_%s.json", file_tag, file_tag);
 }
 
 void Frame::OnQuit(wxCommandEvent& event)

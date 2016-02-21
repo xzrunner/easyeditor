@@ -1,37 +1,37 @@
-
-#ifndef EMODELING_DRAW_UTILS_H
-#define EMODELING_DRAW_UTILS_H
-
-
+#ifndef _EASYMODELING_DRAW_UTILS_H_
+#define _EASYMODELING_DRAW_UTILS_H_
 
 #include <easymodeling.h>
 
 namespace emodeling
 {
-	class DrawUtils
+
+class Fixture;
+
+class DrawUtils
+{
+public:
+	enum DrawType
 	{
-	public:
-		enum DrawType
-		{
-			e_default,
-			e_mouseOn,
-			e_selected
-		};
+		e_default,
+		e_mouseOn,
+		e_selected
+	};
 
-	public:
-		static void drawBody(libmodeling::Body* body, DrawType dType);
-		static void drawFixture(libmodeling::Fixture* fixture, 
-			DrawType dType, bool onlyFixture);
+public:
+	static void DrawBody(Body* body, DrawType dType);
+	static void DrawFixture(Fixture* fixture, DrawType dType, bool onlyFixture);
 
-	private:
-		static void getBodyColor(libmodeling::Body::Type type, DrawType dType,
-			ee::Colorf& cFace, ee::Colorf& cEdge);
-		static void getFixtureColor(DrawType type, ee::Colorf& cFace, 
-			ee::Colorf& cEdge);
+private:
+	static void GetBodyColor(Body::Type type, DrawType dType,
+		ee::Colorf& cFace, ee::Colorf& cEdge);
+	static void GetFixtureColor(DrawType type, ee::Colorf& cFace, 
+		ee::Colorf& cEdge);
 
-		static ee::Colorf colorEnlarge(const ee::Colorf& color, float factor);
+	static ee::Colorf ColorEnlarge(const ee::Colorf& color, float factor);
 
-	}; // DrawUtils
+}; // DrawUtils
+
 }
 
-#endif // EMODELING_DRAW_UTILS_H
+#endif // _EASYMODELING_DRAW_UTILS_H_

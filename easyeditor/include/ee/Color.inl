@@ -39,10 +39,10 @@ bool Colorf::operator != (const Colorf& color) const
 inline
 void Colorf::Valid() 
 {
-	r = std::max(0.0f, std::min(r, 1.0f));
-	g = std::max(0.0f, std::min(g, 1.0f));
-	b = std::max(0.0f, std::min(b, 1.0f));
-	a = std::max(0.0f, std::min(a, 1.0f));
+	r = (std::max)(0.0f, (std::min)(r, 1.0f));
+	g = (std::max)(0.0f, (std::min)(g, 1.0f));
+	b = (std::max)(0.0f, (std::min)(b, 1.0f));
+	a = (std::max)(0.0f, (std::min)(a, 1.0f));
 }
 
 inline
@@ -106,10 +106,10 @@ inline
 Colorf col_add(const Colorf& a, const Colorf& b)
 {
 	Colorf ret;
-	ret.r = std::min(a.r + b.r, 1.0f);
-	ret.g = std::min(a.g + b.g, 1.0f);
-	ret.b = std::min(a.b + b.b, 1.0f);
-	ret.a = std::min(a.a + b.a, 1.0f);
+	ret.r = (std::min)(a.r + b.r, 1.0f);
+	ret.g = (std::min)(a.g + b.g, 1.0f);
+	ret.b = (std::min)(a.b + b.b, 1.0f);
+	ret.a = (std::min)(a.a + b.a, 1.0f);
 	return ret;
 }
 

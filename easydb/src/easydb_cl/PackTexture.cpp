@@ -1,8 +1,13 @@
 #include "PackTexture.h"
 #include "check_params.h"
 
+#include <ee/FileHelper.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
 
 #include <easytexpacker.h>
+
+#include <fstream>
 
 namespace edb
 {
@@ -31,12 +36,12 @@ void PackTexture::Run(int argc, char *argv[])
 	if (argc == 3) {
 		RunFromConfig(argv[2]);
 	} else {
-		libtexpacker::ImageTrimData* trim = NULL;
+		etexpacker::ImageTrimData* trim = NULL;
 		if (argc > 6) {
 			if (strcmp(argv[6], "null") == 0) {
 				trim = NULL;
 			} else {
-				trim = new libtexpacker::ImageTrimData(argv[6]);
+				trim = new etexpacker::ImageTrimData(argv[6]);
 			}
 		}
 		int extrude = 1;
@@ -70,10 +75,10 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
 	std::string src_dir = ee::FileHelper::GetAbsolutePath(dir, value["src"].asString());
 	std::string dst_file = ee::FileHelper::GetAbsolutePath(dir, value["dst"].asString());
 
- 	libtexpacker::ImageTrimData* trim = NULL;
+ 	etexpacker::ImageTrimData* trim = NULL;
  	if (!value["trim file"].isNull()) {
  		std::string trim_file = ee::FileHelper::GetAbsolutePath(dir, value["trim file"].asString());
- 		trim = new libtexpacker::ImageTrimData(trim_file);
+ 		trim = new etexpacker::ImageTrimData(trim_file);
  	}
 
  	int static_size = value["static size"].asInt(),
@@ -87,7 +92,7 @@ void PackTexture::RunFromConfig(const std::string& cfg_file)
 	delete trim;
 }
 
-void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& src_ignore,
+void PackTexture::RunFromCmd(etexpacker::ImageTrimData* trim, const std::string& src_dir, const std::string& src_ignore,
 							 const std::string& dst_file, int static_size, int max_size, int min_size, int extrude_min, int extrude_max,
 							 int start_id) 
 {
@@ -96,7 +101,7 @@ void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::strin
 	wxArrayString files;
 	ee::FileHelper::FetchAllFiles(src_dir, src_ignore, files);
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		if (ee::FileType::IsType(files[i], ee::FileType::e_image)) {
+		if (ee::FileType::IsType(files[i].ToStdString(), ee::FileType::e_image)) {
 			std::string filepath = ee::FileHelper::FormatFilepathAbsolute(files[i].ToStdString());
 			images.push_back(filepath);
 		}
@@ -109,7 +114,7 @@ void PackTexture::RunFromCmd(libtexpacker::ImageTrimData* trim, const std::strin
 	bool ori_cfg = sd.open_image_edge_clip;
 	sd.open_image_edge_clip = false;
 
-	libtexpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max, start_id);
+	etexpacker::NormalPack tex_packer(images, trim, extrude_min, extrude_max, start_id);
 	tex_packer.Pack(static_size, max_size, min_size);
 	tex_packer.OutputInfo(src_dir, dst_file + ".json");
 	tex_packer.OutputImage(dst_file + ".png");

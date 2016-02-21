@@ -1,21 +1,20 @@
-#ifndef _LIBCOCO_EPD_COCO_PACKER_H_
-#define _LIBCOCO_EPD_COCO_PACKER_H_
-
-
+#ifndef _ECOCO_EPD_COCO_PACKER_H_
+#define _ECOCO_EPD_COCO_PACKER_H_
 
 #include "TPParser.h"
 
 namespace ebuilder { class CodeGenerator; }
 namespace ecomplex { class Symbol; }
-namespace libanim { class Symbol; }
+namespace eanim { class Symbol; }
 namespace escale9 { class Symbol; }
 namespace emesh { class Symbol; class Sprite; }
 namespace eterrain2d { class Symbol; class Sprite; }
 namespace etexture { class Symbol; class Sprite; }
 namespace eicon { class Symbol; class Sprite; }
 namespace epbin { class ImageIDer; }
+namespace ee { class ImageSprite; class ImageSymbol; class FontBlankSprite; }
 
-namespace libcoco
+namespace ecoco
 {
 namespace epd
 {
@@ -51,7 +50,7 @@ private:
 	int ParserIcon(const eicon::Sprite* sprite);
 	void ParserIcon(const eicon::Symbol* symbol, float process, int id);
 	void ParserComplex(const ecomplex::Symbol* symbol);
-	void ParserAnimation(const libanim::Symbol* symbol);
+	void ParserAnimation(const eanim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
 
 	void CalSrcFromUV(ee::Vector src[4], TPParser::Picture* picture);
@@ -109,4 +108,4 @@ private:
 }
 }
 
-#endif // _LIBCOCO_EPD_COCO_PACKER_H_
+#endif // _ECOCO_EPD_COCO_PACKER_H_

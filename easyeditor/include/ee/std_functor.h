@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_STD_FUNCTOR_H_
 #define _EASYEDITOR_STD_FUNCTOR_H_
 
+#include <stddef.h>
+
 namespace ee
 {
 

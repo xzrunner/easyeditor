@@ -13,10 +13,10 @@
 namespace ee
 {
 
-PasteSymbolTileOP::PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* spritesImpl,
-									 LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt)
-	: PasteSymbolOP(wnd, stage, libraryPanel)
-	, m_spritesImpl(spritesImpl)
+PasteSymbolTileOP::PasteSymbolTileOP(wxWindow* wnd, EditPanelImpl* stage, MultiSpritesImpl* sprites_impl,
+									 LibraryPanel* library, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt)
+	: PasteSymbolOP(wnd, stage, library)
+	, m_spritesImpl(sprites_impl)
 	, m_cmpt(cmpt)
 	, m_bCaptured(false)
 	, m_rotate(0)

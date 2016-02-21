@@ -13,6 +13,17 @@
 #include "widget_id.h"
 #include "SymbolCfg.h"
 
+#include <ee/ArrangeSpriteOP.h>
+#include <ee/FileHelper.h>
+#include <ee/SymbolSearcher.h>
+#include <ee/SymbolMgr.h>
+#include <ee/SpriteFactory.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/sprite_msg.h>
+#include <ee/panel_msg.h>
+#include <ee/SpriteSelection.h>
+#include <ee/subject_id.h>
+
 #include <easycomplex.h>
 #include <easybuilder.h>
 
@@ -107,7 +118,7 @@ void StagePanel::StoreToFile(const char* filename) const
 
 		Json::Value spr_val;
 		spr_val["filepath"] = ee::FileHelper::GetRelativePath(dir,
-			spr->GetSymbol().GetFilepath()).ToStdString();
+			spr->GetSymbol().GetFilepath());
 		spr->Store(spr_val);
 
 		value["sprite"][i] = spr_val;
@@ -129,7 +140,7 @@ void StagePanel::StoreToFile(const char* filename) const
 	value["view"]["width"] = m_view_width;
 	value["view"]["height"] = m_view_height;
 
-	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, wrapper_path).ToStdString();;
+	value["wrapper filepath"] = ee::FileHelper::GetRelativePath(dir, wrapper_path);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -183,7 +194,7 @@ void StagePanel::OnCode() const
 
 	// ui
 	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "ui.lua");
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
@@ -196,7 +207,7 @@ void StagePanel::OnCode() const
 	}
 	// tid
 	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("texts.lua"));
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "texts.lua");
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);

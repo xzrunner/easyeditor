@@ -8,7 +8,11 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+#include <ee/TexturePacker.h>
+#include <ee/Image.h>
+#include <ee/Exception.h>
+
+namespace erespacker
 {
 
 PackPicture::PackPicture(int id)
@@ -59,20 +63,22 @@ void PackPicture::GetImgSrcPos(const ee::TexturePacker& tp, const ee::Image* img
 		throw ee::Exception("Image can't find in tp, %s", str.c_str());
 	}
 	if (!tp_frame->src.rotated) {
-		int left = tp_frame->dst.tex_coords[0].x, bottom = tp_frame->dst.tex_coords[0].y;
-		int width = tp_frame->dst.tex_coords[3].x - left,
-			height = tp_frame->dst.tex_coords[1].y - bottom;
+		int left   = static_cast<int>(tp_frame->dst.tex_coords[0].x), 
+			bottom = static_cast<int>(tp_frame->dst.tex_coords[0].y);
+		int width  = static_cast<int>(tp_frame->dst.tex_coords[3].x) - left,
+			height = static_cast<int>(tp_frame->dst.tex_coords[1].y) - bottom;
 		for (int i = 0; i < 4; ++i) {
-			src[i*2] = floor(left + width * texture_coord[i].x + 0.5f);
-			src[i*2+1] = floor(bottom + height * texture_coord[i].y + 0.5f);
+			src[i*2]   = static_cast<int>(floor(left + width * texture_coord[i].x + 0.5f));
+			src[i*2+1] = static_cast<int>(floor(bottom + height * texture_coord[i].y + 0.5f));
 		}
 	} else {
-		int left = tp_frame->dst.tex_coords[0].y, bottom = tp_frame->dst.tex_coords[0].x;
-		int width = tp_frame->dst.tex_coords[3].y - left,
-			height = tp_frame->dst.tex_coords[1].x - bottom;
+		int left   = static_cast<int>(tp_frame->dst.tex_coords[0].y), 
+			bottom = static_cast<int>(tp_frame->dst.tex_coords[0].x);
+		int width  = static_cast<int>(tp_frame->dst.tex_coords[3].y - left),
+			height = static_cast<int>(tp_frame->dst.tex_coords[1].x - bottom);
 		for (int i = 0; i < 4; ++i) {
-			src[i*2] = floor(bottom + height * texture_coord[i].y + 0.5f);
-			src[i*2+1] = floor(left + width * texture_coord[i].x + 0.5f);
+			src[i*2]   = static_cast<int>(floor(bottom + height * texture_coord[i].y + 0.5f));
+			src[i*2+1] = static_cast<int>(floor(left + width * texture_coord[i].x + 0.5f));
 		}
 	}
 

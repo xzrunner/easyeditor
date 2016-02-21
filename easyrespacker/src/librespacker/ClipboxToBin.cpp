@@ -3,7 +3,7 @@
 
 #include <spritepack.h>
 
-namespace librespacker
+namespace erespacker
 {
 
 int ClipboxToBin::Size()

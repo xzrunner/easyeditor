@@ -2,7 +2,10 @@
 #include "StagePanel.h"
 #include "ParticleSystem.h"
 
-#include <easyanim.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Sprite.h>
+#include <ee/SpriteRenderer.h>
+
 #include <ps_3d.h>
 
 namespace eparticle3d

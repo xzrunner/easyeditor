@@ -9,6 +9,9 @@
 #include "view/ViewMgr.h"
 #include "message/messages.h"
 
+#include <ee/panel_msg.h>
+#include <ee/subject_id.h>
+
 #include <wx/dcbuffer.h>
 
 namespace eanim
