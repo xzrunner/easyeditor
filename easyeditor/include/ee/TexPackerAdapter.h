@@ -28,7 +28,7 @@ public:
 	};
 
 private:
-	void load(const Json::Value& value, const std::string& dir);
+	void Load(const Json::Value& value, const std::string& dir);
 
 public:
 	int width, height;

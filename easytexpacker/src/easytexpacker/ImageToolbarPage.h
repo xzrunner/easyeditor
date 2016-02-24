@@ -1,9 +1,9 @@
 #ifndef _EASYTEXPACKER_IMAGE_TOOLBAR_PAGE_H_
 #define _EASYTEXPACKER_IMAGE_TOOLBAR_PAGE_H_
 
-
-
 #include "const.h"
+
+#include <wx/wx.h>
 
 namespace etexpacker
 {
@@ -15,31 +15,31 @@ class ImageToolbarPage : public wxPanel
 public:
 	ImageToolbarPage(wxWindow* parent, StagePanel* stage);
 
-	IMG_TYPE getImgType() const;
+	IMG_TYPE GetImgType() const;
 
-	void setSize(int width, int height);
+	void SetSize(int width, int height);
 
 private:
 	void InitLayout();
 
-	void initSizeSettingPanel(wxSizer* topSizer);
-	void initSettingsPanel(wxSizer* topSizer);
-	void initFormatChoicePanel(wxSizer* topSizer);
+	void InitSizeSettingPanel(wxSizer* topSizer);
+	void InitSettingsPanel(wxSizer* topSizer);
+	void InitFormatChoicePanel(wxSizer* topSizer);
 
-	void onChangeOutputImageSize(wxCommandEvent& event);
-	void onChangePadding(wxSpinEvent& event);
-	void onChangeScale(wxSpinEvent& event);
-	void onChangeExtrude(wxSpinEvent& event);
-	void onRearrange(wxCommandEvent& event);
-	void onLoadLibraryList(wxCommandEvent& event);
-	void onChangeAutoArrange(wxCommandEvent& event);
-	void onChangePremultipliedAlpha(wxCommandEvent& event);
+	void OnChangeOutputImageSize(wxCommandEvent& event);
+	void OnChangePadding(wxSpinEvent& event);
+	void OnChangeScale(wxSpinEvent& event);
+	void OnChangeExtrude(wxSpinEvent& event);
+	void OnRearrange(wxCommandEvent& event);
+	void OnLoadLibraryList(wxCommandEvent& event);
+	void OnChangeAutoArrange(wxCommandEvent& event);
+	void OnChangePremultipliedAlpha(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;
 
-	wxChoice *m_widthChoice, *m_heightChoice;
-	wxRadioBox* m_formatChoice;
+	wxChoice *m_width_choice, *m_height_choice;
+	wxRadioBox* m_format_choice;
 
 	wxCheckBox* m_auto_arrage;
 

@@ -3,6 +3,11 @@
 #include "Context.h"
 #include "config.h"
 
+#include <ee/DrawSpritesVisitor.h>
+#include <ee/PrimitiveDraw.h>
+#include <ee/Camera.h>
+#include <ee/style_config.h>
+
 namespace etexpacker
 {
 

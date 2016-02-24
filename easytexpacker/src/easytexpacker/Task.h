@@ -1,42 +1,39 @@
 #ifndef _EASYTEXPACKER_TASK_H_
 #define _EASYTEXPACKER_TASK_H_
 
-
-#include <wx/splitter.h>
+class wxFrame;
+class wxWindow;
 
 namespace etexpacker
 {
-	class Task
+
+class Task
+{
+public:
+
+	virtual void LoadFromFile(const char* filename);
+	virtual void StoreToFile(const char* filename) const;
+
+	virtual void Clear();
+
+	static Task* Create(wxFrame* parent)
 	{
-	public:
+		return new Task(parent);
+	}
 
-		virtual void loadFromFile(const char* filename);
-		virtual void storeToFile(const char* filename) const;
+protected:Task(wxFrame* parent);
+	~Task();
 
-		virtual void clear();
+private:
+	void InitLayout();
 
-		static Task* create(wxFrame* parent)
-		{
-			return new Task(parent);
-		}
+private:
+	wxWindow* m_root;
 
-	protected:
-		Task(wxFrame* parent);
-		~Task();
+	wxFrame* m_parent;
 
-		virtual void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-			wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-			wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
+}; // Task
 
-	private:
-		void InitLayout();
-
-	private:
-		wxWindow* m_root;
-
-		wxFrame* m_parent;
-
-	}; // Task
 }
 
 #endif // _EASYTEXPACKER_TASK_H_

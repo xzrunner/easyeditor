@@ -3,11 +3,16 @@
 #include "Love2dCode.h"
 #include "config.h"
 
+#include <ee/FileHelper.h>
+#include <ee/Exception.h>
+#include <ee/ExceptionDlg.h>
+
 #include <wx/splitter.h>
 
-using namespace etexpacker;
+namespace etexpacker
+{
 
-//static const wxString VERSION = wxT("0.13.0514");
+//static const std::string VERSION = wxT("0.13.0514");
 
 enum MenuID
 {
@@ -15,44 +20,44 @@ enum MenuID
 };
 
 BEGIN_EVENT_TABLE(Frame, wxFrame)
-	EVT_MENU(wxID_NEW, Frame::onNew)
-	EVT_MENU(wxID_OPEN, Frame::onOpen)
-	EVT_MENU(wxID_SAVE, Frame::onSave)
-	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
+	EVT_MENU(wxID_NEW, Frame::OnNew)
+	EVT_MENU(wxID_OPEN, Frame::OnOpen)
+	EVT_MENU(wxID_SAVE, Frame::OnSave)
+	EVT_MENU(wxID_SAVEAS, Frame::OnSaveAs)
 
-	EVT_MENU(wxID_EXIT, Frame::onQuit)
+	EVT_MENU(wxID_EXIT, Frame::OnQuit)
 	//	EVT_MENU(wxID_H_ELP, Frame::onAbout)
-	EVT_MENU(ID_LOVE2D, Frame::onCodeLove2d)
+	EVT_MENU(ID_LOVE2D, Frame::OnCodeLove2d)
 END_EVENT_TABLE()
 
-Frame::Frame(const wxString& title)
+Frame::Frame(const std::string& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
 {
-	m_task = Task::create(this);
-	initMenuBar();
+	m_task = Task::Create(this);
+	InitMenuBar();
 #ifdef _DEBUG
-	initStatueBar();
+	InitStatueBar();
 #endif
 }
 
-void Frame::onNew(wxCommandEvent& event)
+void Frame::OnNew(wxCommandEvent& event)
 {
-	setCurrFilename();
-	m_task->clear();
+	SetCurrFilename();
+	m_task->Clear();
 }
 
-void Frame::onOpen(wxCommandEvent& event)
+void Frame::OnOpen(wxCommandEvent& event)
 {
- 	wxString ext = wxT("*_") + wxString(FILE_TAG) + wxT(".json");
- 	wxString filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
+ 	std::string ext = std::string("*_") + FILE_TAG + ".json";
+ 	std::string filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_task->clear();
-		m_currFilename = dlg.GetPath();
-		SetTitle(ee::FileHelper::GetFilename(dlg.GetPath()));
+		m_task->Clear();
+		m_curr_filename = dlg.GetPath();
+		SetTitle(ee::FileHelper::GetFilename(dlg.GetPath().ToStdString()));
 		try {
-			m_task->loadFromFile(dlg.GetPath());
+			m_task->LoadFromFile(dlg.GetPath());
 		} catch (ee::Exception& e) {
 			ee::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
@@ -60,31 +65,31 @@ void Frame::onOpen(wxCommandEvent& event)
 	}
 }
 
-void Frame::onSave(wxCommandEvent& event)
+void Frame::OnSave(wxCommandEvent& event)
 {
-	if (!m_currFilename.empty())
+	if (!m_curr_filename.empty())
 	{
-		SetTitle(ee::FileHelper::GetFilename(m_currFilename));
-		m_task->storeToFile(m_currFilename);
+		SetTitle(ee::FileHelper::GetFilename(m_curr_filename).c_str());
+		m_task->StoreToFile(m_curr_filename.c_str());
 	}
 }
 
-void Frame::onSaveAs(wxCommandEvent& event)
+void Frame::OnSaveAs(wxCommandEvent& event)
 {
-	wxString ext = wxT("*_") + wxString(FILE_TAG) + wxT(".json");
-	wxString filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
+	std::string ext = std::string("*_") + FILE_TAG + ".json";
+	std::string filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-// 		wxString fixed = ee::FileHelper::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
+// 		std::string fixed = ee::FileHelper::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
 // 		m_currFilename = fixed;
 // 		m_task->storeToFile(fixed);
 
-		m_task->storeToFile(dlg.GetPath());
+		m_task->StoreToFile(dlg.GetPath());
 	}
 }
 
-void Frame::onQuit(wxCommandEvent& event)
+void Frame::OnQuit(wxCommandEvent& event)
 {
 	Close(true);
 }
@@ -96,15 +101,15 @@ void Frame::onQuit(wxCommandEvent& event)
 // 	wxMessageBox(msg, wxT("About"), wxOK | wxICON_INFORMATION, this);
 // }
 
-void Frame::onCodeLove2d(wxCommandEvent& event)
+void Frame::OnCodeLove2d(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
 
-	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("packer.lua"));
+	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, "packer.lua");
 
 	ebuilder::CodeGenerator gen;
 	Love2dCode code(gen);
-	code.resolve();
+	code.Resolve();
 	page->SetReadOnly(false);
 	page->SetText(gen.toText());
 	page->SetReadOnly(true);
@@ -114,22 +119,22 @@ void Frame::onCodeLove2d(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
-void Frame::initMenuBar()
+void Frame::InitMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
-	menuBar->Append(initFileBar(), "&File");
-	menuBar->Append(initCodesBar(), "&Codes");
+	menuBar->Append(InitFileBar(), "&File");
+	menuBar->Append(InitCodesBar(), "&Codes");
 	//	menuBar->Append(initHelpBar(), "&Help");	
 	SetMenuBar(menuBar);
 }
 
-void Frame::initStatueBar()
+void Frame::InitStatueBar()
 {
 	CreateStatusBar();
 	SetStatusText( "Welcome to wxWidgets!" );
 }
 
-wxMenu* Frame::initFileBar()
+wxMenu* Frame::InitFileBar()
 {
 	wxMenu* fileMenu = new wxMenu;
 	fileMenu->Append(wxID_NEW, wxT("&New\tCtrl+N"), wxT("Create a project"));
@@ -142,7 +147,7 @@ wxMenu* Frame::initFileBar()
 	return fileMenu;
 }
 
-wxMenu* Frame::initCodesBar()
+wxMenu* Frame::InitCodesBar()
 {
 	wxMenu* menu = new wxMenu;
 	menu->Append(ID_LOVE2D, wxT("love2d"), wxEmptyString);
@@ -150,27 +155,29 @@ wxMenu* Frame::initCodesBar()
 	return menu;
 }
 
-wxMenu* Frame::initHelpBar()
+wxMenu* Frame::InitHelpBar()
 {
 	wxMenu* helpMenu = new wxMenu;
 	helpMenu->Append(wxID_HELP, wxT("&About...\tF1"), wxT("Show about dialog"));
 	return helpMenu;
 }
 
-void Frame::setCurrFilename()
+void Frame::SetCurrFilename()
 {
 	int id = 0;
 	while (true)
 	{
-		wxString str = 
-			wxT("new") + 
-			wxString::FromDouble(id++) + 
-			wxT(".json");
+		std::string str = 
+			std::string("new") + 
+			ee::StringHelper::ToString(id++) + 
+			".json";
 
 		if (!ee::FileHelper::IsFileExist(str))
 		{
-			m_currFilename = str;
+			m_curr_filename = str;
 			break;
 		}
 	}
+}
+
 }

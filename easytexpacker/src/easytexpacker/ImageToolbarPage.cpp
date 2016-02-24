@@ -2,6 +2,13 @@
 #include "Context.h"
 #include "StagePanel.h"
 
+#include <ee/panel_msg.h>
+#include <ee/StringHelper.h>
+#include <ee/Sprite.h>
+#include <ee/FetchAllVisitor.h>
+
+#include <wx/spinctrl.h>
+
 namespace etexpacker
 {
 
@@ -14,7 +21,7 @@ ImageToolbarPage::ImageToolbarPage(wxWindow* parent, StagePanel* stage)
 {
 	InitLayout();
 
-	onChangeOutputImageSize(wxCommandEvent());
+	OnChangeOutputImageSize(wxCommandEvent());
 }
 
 void ImageToolbarPage::InitLayout()
@@ -22,21 +29,21 @@ void ImageToolbarPage::InitLayout()
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	sizer->AddSpacer(10);
-	initSizeSettingPanel(sizer);
+	InitSizeSettingPanel(sizer);
 	sizer->AddSpacer(20);
-	initSettingsPanel(sizer);
+	InitSettingsPanel(sizer);
 	sizer->AddSpacer(20);
-	initFormatChoicePanel(sizer);
+	InitFormatChoicePanel(sizer);
 	sizer->AddSpacer(20);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Reset"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImageToolbarPage::onRearrange));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImageToolbarPage::OnRearrange));
 		sizer->Add(btn);
 	}
 	sizer->AddSpacer(10);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Load All"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImageToolbarPage::onLoadLibraryList));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ImageToolbarPage::OnLoadLibraryList));
 		sizer->Add(btn);
 	}
 	sizer->AddSpacer(10);
@@ -44,9 +51,9 @@ void ImageToolbarPage::InitLayout()
 	SetSizer(sizer);
 }
 
-IMG_TYPE ImageToolbarPage::getImgType() const
+IMG_TYPE ImageToolbarPage::GetImgType() const
 {
-	switch (m_formatChoice->GetSelection())
+	switch (m_format_choice->GetSelection())
 	{
 	case 0:
 		return e_png;
@@ -71,48 +78,48 @@ inline int selection(int a)
 	return rval;
 }
 
-void ImageToolbarPage::setSize(int width, int height)
+void ImageToolbarPage::SetSize(int width, int height)
 {
 	Context::Instance()->width = width;
 	Context::Instance()->height = height;
 
-	m_widthChoice->SetSelection(selection(width));
-	m_heightChoice->SetSelection(selection(height));
-	m_stage->arrangeAllSprites(true);
+	m_width_choice->SetSelection(selection(width));
+	m_height_choice->SetSelection(selection(height));
+	m_stage->ArrangeAllSprites(true);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ImageToolbarPage::initSizeSettingPanel(wxSizer* topSizer)
+void ImageToolbarPage::InitSizeSettingPanel(wxSizer* topSizer)
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Size"));
 	wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
 	wxString choices[TOTLE_EDGE_TYPES];
 	for (size_t i = 0; i < TOTLE_EDGE_TYPES; ++i)
-		choices[i] = wxString::FromDouble(BASE_EDGE * pow(2.0f, float(i)));
+		choices[i] = ee::StringHelper::ToString(BASE_EDGE * pow(2.0f, float(i)));
 
 	wxSizer* widthSizer = new wxBoxSizer(wxHORIZONTAL);
 	widthSizer->Add(new wxStaticText(this, wxID_ANY, wxT("Width: ")));
-	m_widthChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, TOTLE_EDGE_TYPES, choices);
-	m_widthChoice->SetSelection(3);
-	Connect(m_widthChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, 
-		wxCommandEventHandler(ImageToolbarPage::onChangeOutputImageSize));
-	widthSizer->Add(m_widthChoice);
+	m_width_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, TOTLE_EDGE_TYPES, choices);
+	m_width_choice->SetSelection(3);
+	Connect(m_width_choice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, 
+		wxCommandEventHandler(ImageToolbarPage::OnChangeOutputImageSize));
+	widthSizer->Add(m_width_choice);
 	sizer->Add(widthSizer);
 
 	wxSizer* heightSizer = new wxBoxSizer(wxHORIZONTAL);
 	heightSizer->Add(new wxStaticText(this, wxID_ANY, wxT("Height: ")));
-	m_heightChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, TOTLE_EDGE_TYPES, choices);
-	m_heightChoice->SetSelection(3);
-	Connect(m_heightChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, 
-		wxCommandEventHandler(ImageToolbarPage::onChangeOutputImageSize));
-	heightSizer->Add(m_heightChoice);
+	m_height_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, TOTLE_EDGE_TYPES, choices);
+	m_height_choice->SetSelection(3);
+	Connect(m_height_choice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, 
+		wxCommandEventHandler(ImageToolbarPage::OnChangeOutputImageSize));
+	heightSizer->Add(m_height_choice);
 	sizer->Add(heightSizer);
 
 	topSizer->Add(sizer);
 }
 
-void ImageToolbarPage::initSettingsPanel(wxSizer* topSizer)
+void ImageToolbarPage::InitSettingsPanel(wxSizer* topSizer)
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Settings"));
 	wxBoxSizer* settingsSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -122,7 +129,7 @@ void ImageToolbarPage::initSettingsPanel(wxSizer* topSizer)
 
 		wxSpinCtrl* padding = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
 			wxSP_ARROW_KEYS, 0, 100, 0);
-		Connect(padding->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ImageToolbarPage::onChangePadding));
+		Connect(padding->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ImageToolbarPage::OnChangePadding));
 		sizer->Add(padding);
 
 		settingsSizer->Add(sizer);
@@ -134,7 +141,7 @@ void ImageToolbarPage::initSettingsPanel(wxSizer* topSizer)
 
 		wxSpinCtrl* scale = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
 			wxSP_ARROW_KEYS, 10, 200, 100);
-		Connect(scale->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ImageToolbarPage::onChangeScale));
+		Connect(scale->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ImageToolbarPage::OnChangeScale));
 		sizer->Add(scale);
 
 		settingsSizer->Add(sizer);
@@ -146,7 +153,7 @@ void ImageToolbarPage::initSettingsPanel(wxSizer* topSizer)
 
 		wxSpinCtrl* extrude = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
 			wxSP_ARROW_KEYS, 0, 10, 0);
-		Connect(extrude->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ImageToolbarPage::onChangeScale));
+		Connect(extrude->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ImageToolbarPage::OnChangeScale));
 		sizer->Add(extrude);
 
 		settingsSizer->Add(sizer);
@@ -156,7 +163,7 @@ void ImageToolbarPage::initSettingsPanel(wxSizer* topSizer)
 		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Auto Arrange"));
 		check->SetValue(Context::Instance()->auto_arrange);
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-			wxCommandEventHandler(ImageToolbarPage::onChangeAutoArrange));
+			wxCommandEventHandler(ImageToolbarPage::OnChangeAutoArrange));
 		settingsSizer->Add(check);
 	}
 	settingsSizer->AddSpacer(10);
@@ -164,39 +171,39 @@ void ImageToolbarPage::initSettingsPanel(wxSizer* topSizer)
 		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Premultiplied Alpha"));
 		check->SetValue(Context::Instance()->premultiplied_alpha);
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-			wxCommandEventHandler(ImageToolbarPage::onChangePremultipliedAlpha));
+			wxCommandEventHandler(ImageToolbarPage::OnChangePremultipliedAlpha));
 		settingsSizer->Add(check);
 	}
 	topSizer->Add(settingsSizer);
 }
 
-void ImageToolbarPage::initFormatChoicePanel(wxSizer* topSizer)
+void ImageToolbarPage::InitFormatChoicePanel(wxSizer* topSizer)
 {
 	wxArrayString choices;
 	choices.Add(wxT("png"));
 	choices.Add(wxT("jpg"));
 //	choices.Add(wxT("bmp"));	
-	m_formatChoice = new wxRadioBox(this, wxID_ANY, wxT("Format"), 
+	m_format_choice = new wxRadioBox(this, wxID_ANY, wxT("Format"), 
 		wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_COLS);
-	topSizer->Add(m_formatChoice);
+	topSizer->Add(m_format_choice);
 }
 
-void ImageToolbarPage::onChangeOutputImageSize(wxCommandEvent& event)
+void ImageToolbarPage::OnChangeOutputImageSize(wxCommandEvent& event)
 {
-	Context::Instance()->width = wxVariant(m_widthChoice->GetString(m_widthChoice->GetSelection())).GetInteger();
-	Context::Instance()->height = wxVariant(m_heightChoice->GetString(m_heightChoice->GetSelection())).GetInteger();
-	m_stage->arrangeAllSprites(true);
+	Context::Instance()->width = wxVariant(m_width_choice->GetString(m_width_choice->GetSelection())).GetInteger();
+	Context::Instance()->height = wxVariant(m_height_choice->GetString(m_height_choice->GetSelection())).GetInteger();
+	m_stage->ArrangeAllSprites(true);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ImageToolbarPage::onChangePadding(wxSpinEvent& event)
+void ImageToolbarPage::OnChangePadding(wxSpinEvent& event)
 {
 	Context::Instance()->padding = event.GetValue();
-	m_stage->arrangeAllSprites(true);
+	m_stage->ArrangeAllSprites(true);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ImageToolbarPage::onChangeScale(wxSpinEvent& event)
+void ImageToolbarPage::OnChangeScale(wxSpinEvent& event)
 {
 	float scale = Context::Instance()->scale = event.GetValue() * 0.01f;
 
@@ -206,33 +213,33 @@ void ImageToolbarPage::onChangeScale(wxSpinEvent& event)
 		sprites[i]->SetScale(ee::Vector(scale, scale));
 	}
 
-	m_stage->arrangeAllSprites(true);
+	m_stage->ArrangeAllSprites(true);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ImageToolbarPage::onChangeExtrude(wxSpinEvent& event)
+void ImageToolbarPage::OnChangeExtrude(wxSpinEvent& event)
 {
 	Context::Instance()->extrude = event.GetValue();
 }
 
-void ImageToolbarPage::onRearrange(wxCommandEvent& event)
+void ImageToolbarPage::OnRearrange(wxCommandEvent& event)
 {
-	m_stage->arrangeAllSprites(true);
+	m_stage->ArrangeAllSprites(true);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ImageToolbarPage::onLoadLibraryList(wxCommandEvent& event)
+void ImageToolbarPage::OnLoadLibraryList(wxCommandEvent& event)
 {
-	m_stage->loadFromLibrary();
+	m_stage->LoadFromLibrary();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-void ImageToolbarPage::onChangeAutoArrange(wxCommandEvent& event)
+void ImageToolbarPage::OnChangeAutoArrange(wxCommandEvent& event)
 {
 	Context::Instance()->auto_arrange = event.IsChecked();
 }
 
-void ImageToolbarPage::onChangePremultipliedAlpha(wxCommandEvent& event)
+void ImageToolbarPage::OnChangePremultipliedAlpha(wxCommandEvent& event)
 {
 	Context::Instance()->premultiplied_alpha = event.IsChecked();
 }

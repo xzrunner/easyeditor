@@ -4,6 +4,8 @@
 #include "MeshToolbarPage.h"
 #include "RegularToolbarPage.h"
 
+#include <wx/notebook.h>
+
 namespace etexpacker
 {
 
@@ -14,14 +16,14 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	SetSizer(InitLayout());
 }
 
-IMG_TYPE ToolbarPanel::getImgType() const
+IMG_TYPE ToolbarPanel::GetImgType() const
 {
-	return m_image_page->getImgType();
+	return m_image_page->GetImgType();
 }
 
-void ToolbarPanel::setSize(int width, int height)
+void ToolbarPanel::SetSize(int width, int height)
 {
-	m_image_page->setSize(width, height);
+	m_image_page->SetSize(width, height);
 }
 
 wxSizer* ToolbarPanel::InitLayout()

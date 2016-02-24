@@ -1,8 +1,9 @@
 #ifndef _EPBIN_BINARY_EPD_H_
 #define _EPBIN_BINARY_EPD_H_
 
-#include <stdint.h>
 #include <vector>
+
+#include <stdint.h>
 
 struct lua_State;
 

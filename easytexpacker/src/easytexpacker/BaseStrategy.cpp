@@ -1,19 +1,24 @@
 #include "BaseStrategy.h"
 #include "Context.h"
 
-using namespace etexpacker;
+#include <ee/ImageSprite.h>
 
-void BaseStrategy::sortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+#include <algorithm>
+
+namespace etexpacker
+{
+
+void BaseStrategy::SortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {
 	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_area, isDescend));
 }
 
-void BaseStrategy::sortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::SortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {
 	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_maxEdge, isDescend));
 }
 
-void BaseStrategy::sortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
+void BaseStrategy::SortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend/* = true*/) const
 {
 	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_totEdges, isDescend));
 }
@@ -21,7 +26,7 @@ void BaseStrategy::sortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool i
 BaseStrategy::SpriteCmp::SpriteCmp(SortStrategy strategy, bool isDescend)
 {
 	m_strategy = strategy;
-	m_isDescend = isDescend;
+	m_is_descend = isDescend;
 }
 
 bool BaseStrategy::SpriteCmp::operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
@@ -31,21 +36,21 @@ bool BaseStrategy::SpriteCmp::operator() (const ee::ImageSprite* s0, const ee::I
 	switch (m_strategy)
 	{
 	case e_area:
-		isLess = isAreaLess(s0, s1);
+		isLess = IsAreaLess(s0, s1);
 		break;
 	case e_maxEdge:
-		isLess = isEdgeLess(s0, s1);
+		isLess = IsEdgeLess(s0, s1);
 		break;
 	case e_totEdges:
-		isLess = isTotEdgesLess(s0, s1);
+		isLess = IsTotEdgesLess(s0, s1);
 		break;
 	}
 
-	if (m_isDescend) return !isLess;
+	if (m_is_descend) return !isLess;
 	else return isLess;
 }
 
-bool BaseStrategy::SpriteCmp::isAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::IsAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -54,7 +59,7 @@ bool BaseStrategy::SpriteCmp::isAreaLess(const ee::ImageSprite* s0, const ee::Im
 		<= (s1->GetSymbol().GetSize().Width() * s + p) * (s1->GetSymbol().GetSize().Height() * s + p);
 }
 
-bool BaseStrategy::SpriteCmp::isEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::IsEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
@@ -63,11 +68,13 @@ bool BaseStrategy::SpriteCmp::isEdgeLess(const ee::ImageSprite* s0, const ee::Im
 		<= std::max((s1->GetSymbol().GetSize().Width() * s + p), (s1->GetSymbol().GetSize().Height() * s + p));
 }
 
-bool BaseStrategy::SpriteCmp::isTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
+bool BaseStrategy::SpriteCmp::IsTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const
 {
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
 	return (s0->GetSymbol().GetSize().Width() * s + p) + (s0->GetSymbol().GetSize().Height() * s + p)
 		<= (s1->GetSymbol().GetSize().Width() * s + p) + (s1->GetSymbol().GetSize().Height() * s + p);
+}
+
 }

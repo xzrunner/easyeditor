@@ -5,43 +5,45 @@
 
 namespace etexpacker
 {
-	class Task;
 
-	class Frame : public wxFrame
-	{
-	public:
-		Frame(const wxString& title);
+class Task;
 
-	private:
-		void onNew(wxCommandEvent& event);
-		void onOpen(wxCommandEvent& event);
-		void onSave(wxCommandEvent& event);
-		void onSaveAs(wxCommandEvent& event);
+class Frame : public wxFrame
+{
+public:
+	Frame(const std::string& title);
 
-		void onQuit(wxCommandEvent& event);
-		//		void onAbout(wxCommandEvent& event);
+private:
+	void OnNew(wxCommandEvent& event);
+	void OnOpen(wxCommandEvent& event);
+	void OnSave(wxCommandEvent& event);
+	void OnSaveAs(wxCommandEvent& event);
 
-		void onCodeLove2d(wxCommandEvent& event);
+	void OnQuit(wxCommandEvent& event);
+	//		void onAbout(wxCommandEvent& event);
 
-		void initMenuBar();
-		void initStatueBar();
+	void OnCodeLove2d(wxCommandEvent& event);
 
-		wxMenu* initFileBar();
-		wxMenu* initCodesBar();
-		wxMenu* initHelpBar();
+	void InitMenuBar();
+	void InitStatueBar();
 
-		void clear();
+	wxMenu* InitFileBar();
+	wxMenu* InitCodesBar();
+	wxMenu* InitHelpBar();
 
-		void setCurrFilename();
+	void Clear();
 
-	private:
-		Task* m_task;
+	void SetCurrFilename();
 
-		wxString m_currFilename;
+private:
+	Task* m_task;
 
-		DECLARE_EVENT_TABLE()
+	std::string m_curr_filename;
 
-	}; // Frame
+	DECLARE_EVENT_TABLE()
+
+}; // Frame
+
 }
 
 #endif // _EASYTEXPACKER_FRAME_H_

@@ -4,7 +4,19 @@
 #include "FileIO.h"
 #include "Context.h"
 
-using namespace etexpacker;
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/Exception.h>
+#include <ee/FileHelper.h>
+#include <ee/panel_msg.h>
+#include <ee/LibraryPanel.h>
+#include <ee/PropertySettingPanel.h>
+#include <ee/LibraryImagePage.h>
+
+#include <wx/splitter.h>
+
+namespace etexpacker
+{
 
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
@@ -20,69 +32,60 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::loadFromFile(const char* filename)
+void Task::LoadFromFile(const char* filename)
 {
-	if (!wxFileName::FileExists(filename)) {
+	if (!ee::FileHelper::IsFileExist(filename)) {
 		throw ee::Exception("File: %s don't exist!", filename);
 	}
-	FileIO::load(filename);
+	FileIO::Load(filename);
 }
 
-void Task::storeToFile(const char* filename) const
+void Task::StoreToFile(const char* filename) const
 {
-	FileIO::store(filename);
+	FileIO::Store(filename);
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	ee::ClearPanelSJ::Instance()->Clear();
 }
 
-void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-					   wxSplitterWindow* leftVerticalSplitter, 
-					   wxSplitterWindow* rightVerticalSplitter, 
-					   wxWindow*& library, wxWindow*& property, 
-					   wxWindow*& stage, wxWindow*& toolbar)
-{
-	Context* context = Context::Instance();
-
-	library = context->library = new ee::LibraryPanel(leftHorizontalSplitter);
-	context->library->AddPage(new ee::LibraryImagePage(context->library->GetNotebook()));
-
-	property = context->property = new ee::PropertySettingPanel(leftHorizontalSplitter);
-
-	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
-	context->property->SetEditPanel(context->stage->GetStageImpl());
-
-	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage);
-}
-
 void Task::InitLayout()
 {
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
-	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
+	wxSplitterWindow* right_splitter = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_vert_splitter = new wxSplitterWindow(right_splitter);
+	wxSplitterWindow* left_hori_splitter = new wxSplitterWindow(left_vert_splitter);
 
-	wxWindow *library, *property, *stage, *toolbar;
-	initWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
-		library, property, stage, toolbar);
+	Context* context = Context::Instance();
+
+	wxWindow* library = context->library = new ee::LibraryPanel(left_hori_splitter);
+	context->library->AddPage(new ee::LibraryImagePage(context->library->GetNotebook()));
+
+	wxWindow* property = context->property = new ee::PropertySettingPanel(left_hori_splitter);
+
+	wxWindow* stage = context->stage = new StagePanel(left_vert_splitter, m_parent);
+	context->property->SetEditPanel(context->stage->GetStageImpl());
+
+	wxWindow* toolbar = context->toolbar = new ToolbarPanel(right_splitter, context->stage);
 
 	if (library || property)
 	{
 		if (library && property)
 		{
-			leftHorizontalSplitter->SetSashGravity(0.8f);
-			leftHorizontalSplitter->SplitHorizontally(library, property);
+			left_hori_splitter->SetSashGravity(0.8f);
+			left_hori_splitter->SplitHorizontally(library, property);
 		}
-		leftVerticalSplitter->SetSashGravity(0.15f);
-		leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
+		left_vert_splitter->SetSashGravity(0.15f);
+		left_vert_splitter->SplitVertically(left_hori_splitter, stage);
 	}
 
 	if (toolbar)
 	{
-		rightVerticalSplitter->SetSashGravity(0.83f);
-		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
+		right_splitter->SetSashGravity(0.83f);
+		right_splitter->SplitVertically(left_vert_splitter, toolbar);
 	}
 
-	m_root = rightVerticalSplitter;
+	m_root = right_splitter;
+}
+
 }

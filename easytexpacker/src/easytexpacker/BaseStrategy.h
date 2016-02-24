@@ -1,50 +1,54 @@
 #ifndef _EASYTEXPACKER_BASE_STRATEGY_H_
 #define _EASYTEXPACKER_BASE_STRATEGY_H_
 
+#include <vector>
 
+namespace ee { class ImageSprite; }
 
 namespace etexpacker
 {
-	class BaseStrategy
+
+class BaseStrategy
+{
+public:
+	virtual ~BaseStrategy() {}
+
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites) = 0;
+	virtual int GetTextureAccount() const = 0;
+
+protected:
+	void SortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+	void SortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+	void SortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+
+protected:
+	enum SortStrategy
+	{
+		e_area,
+		e_maxEdge,
+		e_totEdges
+	};
+
+	class SpriteCmp
 	{
 	public:
-		virtual ~BaseStrategy() {}
+		SpriteCmp(SortStrategy strategy, bool isDescend);
 
-		virtual void arrange(const std::vector<ee::ImageSprite*>& sprites) = 0;
-		virtual int GetTextureAccount() const = 0;
+		bool operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
 
-	protected:
-		void sortByArea(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
-		void sortByMaxEdge(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
-		void sortByTotEdges(std::vector<ee::ImageSprite*>& sprites, bool isDescend = true) const;
+	private:
+		bool IsAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+		bool IsEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+		bool IsTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
 
-	protected:
-		enum SortStrategy
-		{
-			e_area,
-			e_maxEdge,
-			e_totEdges
-		};
+	private:
+		SortStrategy m_strategy;
+		bool m_is_descend;
 
-		class SpriteCmp
-		{
-		public:
-			SpriteCmp(SortStrategy strategy, bool isDescend);
+	}; // SpriteCmp
 
-			bool operator() (const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
+}; // BaseStrategy
 
-		private:
-			bool isAreaLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
-			bool isEdgeLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
-			bool isTotEdgesLess(const ee::ImageSprite* s0, const ee::ImageSprite* s1) const;
-
-		private:
-			SortStrategy m_strategy;
-			bool m_isDescend;
-
-		}; // SpriteCmp
-
-	}; // BaseStrategy
 }
 
 #endif // _EASYTEXPACKER_BASE_STRATEGY_H_

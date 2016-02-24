@@ -2,6 +2,12 @@
 #include "StagePanel.h"
 #include "Context.h"
 
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/Math2D.h>
+#include <ee/DrawSelectedSpriteVisitor.h>
+#include <ee/Symbol.h>
+
 namespace etexpacker
 {
 

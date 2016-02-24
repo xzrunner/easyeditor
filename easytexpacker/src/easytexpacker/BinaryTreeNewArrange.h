@@ -3,6 +3,10 @@
 
 #include "BaseStrategy.h"
 
+#include <map>
+
+namespace ee { class TPNode; }
+
 namespace etexpacker
 {
 
@@ -12,7 +16,7 @@ public:
 	BinaryTreeNewArrange();
 	virtual ~BinaryTreeNewArrange();
 
-	virtual void arrange(const std::vector<ee::ImageSprite*>& sprites);
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites);
 	virtual int GetTextureAccount() const {
 		return m_tex_account;
 	}
@@ -29,7 +33,7 @@ private:
 private:
 	ee::TPNode* m_root;
 
-	std::map<std::string, ee::TPNode*> m_mapImages;
+	std::map<std::string, ee::TPNode*> m_map_images;
 
 	int m_tex_account;
 

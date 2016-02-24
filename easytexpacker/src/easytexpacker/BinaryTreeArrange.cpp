@@ -1,7 +1,10 @@
 #include "BinaryTreeArrange.h"
 #include "Context.h"
 
-using namespace etexpacker;
+#include <ee/ImageSprite.h>
+
+namespace etexpacker
+{
 
 BinaryTreeArrange::BinaryTreeArrange()
 {
@@ -13,22 +16,22 @@ BinaryTreeArrange::~BinaryTreeArrange()
 	delete m_root;
 }
 
-void BinaryTreeArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
+void BinaryTreeArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 	std::vector<ee::ImageSprite*> sorted(sprites);
-	sortByMaxEdge(sorted);
+	SortByMaxEdge(sorted);
 
 	int maxArranged = -1, maxFlag = 0;
 
 	int flag = 0;
 	while (flag < REINSERT_MAX)
 	{
-		resetRoot();
+		ResetRoot();
 
 		size_t i = 0, n = sorted.size();
 		for ( ; i < n; ++i)
 		{
-			Node* result = m_root->insert(sorted[i], flag);
+			Node* result = m_root->Insert(sorted[i], flag);
 			if (!result)
 			{
 				++flag;
@@ -49,11 +52,11 @@ void BinaryTreeArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 
 	if (flag >= REINSERT_MAX)
 	{
-		resetRoot();
+		ResetRoot();
 
 		for (size_t i = 0, n = sorted.size(); i < n; ++i)
 		{
-			Node* result = m_root->insert(sorted[i], maxFlag);
+			Node* result = m_root->Insert(sorted[i], maxFlag);
 			if (!result)
 			{
 				for (size_t j = i; j < n; ++j)
@@ -70,7 +73,7 @@ void BinaryTreeArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 	}
 }
 
-void BinaryTreeArrange::resetRoot()
+void BinaryTreeArrange::ResetRoot()
 {
 	delete m_root;
 	m_root = new Node;
@@ -92,13 +95,13 @@ BinaryTreeArrange::Node::~Node()
 }
 
 BinaryTreeArrange::Node* 
-BinaryTreeArrange::Node::insert(ee::ImageSprite* sprite, int flag)
+BinaryTreeArrange::Node::Insert(ee::ImageSprite* sprite, int flag)
 {
 	if (child[0])
 	{
-		Node* newNode = child[0]->insert(sprite, flag / 2);
+		Node* newNode = child[0]->Insert(sprite, flag / 2);
 		if (newNode) return newNode;
-		return child[1]->insert(sprite, flag / 4);
+		return child[1]->Insert(sprite, flag / 4);
 	}
 	else
 	{
@@ -169,4 +172,6 @@ BinaryTreeArrange::Node::insert(ee::ImageSprite* sprite, int flag)
 			return child[0];
 		}
 	}
+}
+
 }

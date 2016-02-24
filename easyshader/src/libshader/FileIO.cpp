@@ -7,6 +7,7 @@
 #include <ee/FileHelper.h>
 #include <ee/ShaderMgr.h>
 #include <ee/Exception.h>
+#include <ee/StringHelper.h>
 
 #include <easy3d.h>
 

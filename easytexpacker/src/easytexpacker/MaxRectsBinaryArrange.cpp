@@ -1,11 +1,14 @@
 #include "MaxRectsBinaryArrange.h"
 
+#include <ee/Rect.h>
+#include <ee/ImageSprite.h>
+
 #include <easytexpacker.h>
 
 namespace etexpacker
 {
 
-void MaxRectsBinaryArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
+void MaxRectsBinaryArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 	int sz = sprites.size();
 	std::vector<etexpacker::RectSize> rects;

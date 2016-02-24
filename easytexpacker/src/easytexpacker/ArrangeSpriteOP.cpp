@@ -14,5 +14,4 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* editPanel,
 {
 }
 
-
 }

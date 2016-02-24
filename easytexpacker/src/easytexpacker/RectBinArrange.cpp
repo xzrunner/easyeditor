@@ -9,9 +9,15 @@
 #include <ShelfBinPack.h>
 #include <SkylineBinPack.h>
 
-using namespace etexpacker;
+#include <ee/ImageSprite.h>
+#include <ee/Math2D.h>
 
-void RectBinArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
+#include <assert.h>
+
+namespace etexpacker
+{
+
+void RectBinArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 // 	std::vector<ee::ImageSprite*> sorted(sprites);
 // 	sortByMaxEdge(sorted);
@@ -32,7 +38,7 @@ void RectBinArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 	m_tex_account = 0;
 
 	std::vector<ee::ImageSprite*> sorted(sprites);
-	sortByMaxEdge(sorted);
+	SortByMaxEdge(sorted);
 
 	int count = 0;
 
@@ -206,4 +212,6 @@ void RectBinArrange::SkylineBinPackAlg(std::vector<RectSize>& input, std::vector
 {
   	SkylineBinPack bin(Context::Instance()->width, Context::Instance()->height, true);
   	bin.Insert(input, output, SkylineBinPack::LevelMinWasteFit);
+}
+
 }

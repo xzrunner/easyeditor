@@ -1,7 +1,9 @@
 #ifndef _EASYTEXPACKER_STAGE_CANVAS_H_
 #define _EASYTEXPACKER_STAGE_CANVAS_H_
 
+#include <ee/OrthoCanvas.h>
 
+namespace ee { class MultiSpritesImpl; }
 
 namespace etexpacker
 {

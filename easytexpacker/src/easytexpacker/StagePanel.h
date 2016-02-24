@@ -1,28 +1,29 @@
 #ifndef _EASYTEXPACKER_STAGE_PANEL_H_
 #define _EASYTEXPACKER_STAGE_PANEL_H_
 
-
-#include <easyphysics.h>
+#include <ee/EditPanel.h>
+#include <ee/SpritesPanelImpl.h>
+#include <ee/PhysicsPanelImpl.h>
 
 namespace etexpacker
 {
 
 class BaseStrategy;
 
-class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, public ephysics::PhysicsPanelImpl
+class StagePanel : public ee::EditPanel, public ee::SpritesPanelImpl, public ee::PhysicsPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 
-	void insertSpriteNoArrange(ee::Sprite* sprite);
+	void InsertSpriteNoArrange(ee::Sprite* sprite);
 
-	void arrangeAllSprites(bool bClearSelection);
-	void loadFromLibrary();
+	void ArrangeAllSprites(bool bClearSelection);
+	void LoadFromLibrary();
 
 	int GetTextureAccount() const;
 
 public:
-	static void fixCoords(ee::Sprite* sprite);
+	static void FixCoords(ee::Sprite* sprite);
 
 protected:
 	//

@@ -3,31 +3,31 @@
 
 #include "ToolbarPanel.h"
 
-
-
 namespace etexpacker
 {
-	class FileAdapter
+
+class FileAdapter
+{
+public:
+	FileAdapter();
+	~FileAdapter();
+
+	void Resolve(const std::string& filepath);
+
+public:
+	struct Item
 	{
-	public:
-		FileAdapter();
-		~FileAdapter();
+		std::string filepath;
+		int left, top;
+		int width, height;
+	};
 
-		void resolve(const wxString& filepath);
+public:
+	int m_width, m_height;
+	std::vector<Item> m_data;
 
-	public:
-		struct Item
-		{
-			wxString filepath;
-			int left, top;
-			int width, height;
-		};
+}; // FileAdapter
 
-	public:
-		int m_width, m_height;
-		std::vector<Item> m_data;
-
-	}; // FileAdapter
 }
 
 #endif // _EASYTEXPACKER_FILE_ADAPTER_H_

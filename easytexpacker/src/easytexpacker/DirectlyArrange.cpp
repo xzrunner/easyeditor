@@ -1,12 +1,16 @@
 #include "DirectlyArrange.h"
 #include "Context.h"
 
-using namespace etexpacker;
+#include <ee/ImageSprite.h>
+#include <ee/Vector.h>
 
-void DirectlyArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
+namespace etexpacker
+{
+
+void DirectlyArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 	std::vector<ee::ImageSprite*> sorted(sprites);
-	sortByArea(sorted);
+	SortByArea(sorted);
 
 	int sx = 0, sy = 0;
 	int hMax = 0;
@@ -35,4 +39,6 @@ void DirectlyArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 			sx = width;
 		}
 	}
+}
+
 }

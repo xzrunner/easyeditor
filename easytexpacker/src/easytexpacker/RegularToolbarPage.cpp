@@ -1,6 +1,9 @@
 #include "RegularToolbarPage.h"
 #include "StagePanel.h"
 
+#include <ee/ZoomViewOP.h>
+#include <ee/FileHelper.h>
+
 #include <easytexpacker.h>
 
 namespace etexpacker
@@ -43,10 +46,10 @@ void RegularToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 
 	wxDirDialog dlg(NULL, "Src Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK) {
-		wxString dir = dlg.GetPath();
+		std::string dir = dlg.GetPath();
 
 		wxArrayString files;
-		ee::FileHelper::FetchAllFiles(dir.ToStdString(), files);
+		ee::FileHelper::FetchAllFiles(dir, files);
 		etexpacker::RegularRectPack rrp(files);
 
 		m_src_dir->SetValue(dir);

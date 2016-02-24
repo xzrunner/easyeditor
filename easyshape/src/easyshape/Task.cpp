@@ -1,5 +1,10 @@
 #include "Task.h"
 
+#include <ee/SymbolMgr.h>
+#include <ee/FileType.h>
+#include <ee/FileHelper.h>
+#include <ee/LibraryImagePage.h>
+
 #include <easyshape.h>
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -41,7 +46,7 @@ void Task::Store(const char* filepath) const
 	std::string fixed = filepath;
 	ee::FileType::Type type = ee::FileType::GetType(fixed);
 	if (type != ee::FileType::e_shape) {
-		wxString tag = ee::FileType::GetTag(ee::FileType::e_shape);
+		std::string tag = ee::FileType::GetTag(ee::FileType::e_shape);
 		fixed = ee::FileHelper::GetFilenameAddTag(fixed, tag, "json");
 	}
 	m_stage->StoreToFile(fixed.c_str());

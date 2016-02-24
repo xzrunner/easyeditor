@@ -1,7 +1,9 @@
 #ifndef _EASYTEXPACKER_REGULAR_TOOLBAR_PAGE_H_
 #define _EASYTEXPACKER_REGULAR_TOOLBAR_PAGE_H_
 
+#include <wx/panel.h>
 
+class wxTextCtrl;
 
 namespace etexpacker
 {

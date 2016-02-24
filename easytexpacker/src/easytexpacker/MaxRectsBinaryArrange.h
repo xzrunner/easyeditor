@@ -9,7 +9,7 @@ namespace etexpacker
 class MaxRectsBinaryArrange : public BaseStrategy
 {
 public:
-	virtual void arrange(const std::vector<ee::ImageSprite*>& sprites);
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites);
 	virtual int GetTextureAccount() const { return 1; }
 
 }; // MaxRectsBianryArrange

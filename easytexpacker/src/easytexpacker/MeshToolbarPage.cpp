@@ -2,6 +2,13 @@
 #include "StagePanel.h"
 #include "const.h"
 
+#include <ee/physics_const.h>
+#include <ee/SymbolMgr.h>
+#include <ee/Snapshoot.h>
+#include <ee/SpriteFactory.h>
+#include <ee/FileHelper.h>
+#include <ee/Random.h>
+
 #include <easyshape.h>
 
 namespace etexpacker
@@ -57,7 +64,7 @@ void MeshToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 
 	wxDirDialog dlg(NULL, "Src Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK) {
-		wxString dir = dlg.GetPath();
+		std::string dir = dlg.GetPath();
 		LoadBodies(dir);
 		m_src_dir->SetValue(dir);
 	}
@@ -76,18 +83,18 @@ void MeshToolbarPage::OnSaveToFile(wxCommandEvent& event)
 		if (filepath) {
 			Json::Value item_val;
 			item_val["filepath"] = filepath;
-			item_val["pos"]["x"] = (b->GetPosition().x + HALF_WIDTH) * ephysics::BOX2D_SCALE_FACTOR;
-			item_val["pos"]["y"] = (b->GetPosition().y + HALF_H_EIGHT) * ephysics::BOX2D_SCALE_FACTOR;
+			item_val["pos"]["x"] = (b->GetPosition().x + HALF_WIDTH) * ee::BOX2D_SCALE_FACTOR;
+			item_val["pos"]["y"] = (b->GetPosition().y + HALF_H_EIGHT) * ee::BOX2D_SCALE_FACTOR;
 			item_val["angle"] = b->GetAngle();
 			value[idx++] = item_val;
 		}
 		b = b->GetNext();
 	}
 
-	wxString filepath = m_src_dir->GetValue() + "//position.json";
+	std::string filepath = m_src_dir->GetValue() + "//position.json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
@@ -97,12 +104,12 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Open Physics Result"), wxEmptyString, wxEmptyString, "*.json", wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK) {
-		wxString physics_filepath = dlg.GetPath();
+		std::string physics_filepath = dlg.GetPath();
 
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(physics_filepath.fn_str());
+		std::ifstream fin(physics_filepath.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -131,12 +138,12 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 			item_val = value[i++];
 		}
 
-		wxString outpath = ee::FileHelper::GetFileDir(physics_filepath) + "\\image.png";
-		ss.SaveToFile(outpath.ToStdString());
+		std::string outpath = ee::FileHelper::GetFileDir(physics_filepath) + "\\image.png";
+		ss.SaveToFile(outpath);
 	}
 }
 
-void MeshToolbarPage::LoadBodies(const wxString& dir)
+void MeshToolbarPage::LoadBodies(const std::string& dir)
 {
 	b2BodyDef bd;
 	bd.type = b2_dynamicBody;
@@ -157,19 +164,17 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
  	fd.filter.groupIndex = 0;
 
 	wxArrayString files;
-	ee::FileHelper::FetchAllFiles(dir.ToStdString(), files);
+	ee::FileHelper::FetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
-		wxFileName filename(files[i]);
-		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = ee::FileHelper::GetAbsolutePath(files[i].ToStdString());
 		if (!ee::FileType::IsType(filepath, ee::FileType::e_shape)) {
 			continue;
 		}
 
 		std::vector<ee::Shape*> shapes;
 		std::string bg_filepath;
-		eshape::FileIO::LoadFromFile(filepath, shapes, bg_filepath);
+		eshape::FileIO::LoadFromFile(filepath.c_str(), shapes, bg_filepath);
 		for (int i = 0, n = shapes.size(); i < n; ++i)
 		{
 			eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(shapes[i]);
@@ -186,8 +191,8 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 			for (int i = 0, n = src.size(); i < n; i += 3) {
 				b2Vec2 dst[3];
 				for (int j = 0; j < 3; ++j) {
-					dst[j].x = src[i+j].x / ephysics::BOX2D_SCALE_FACTOR;
-					dst[j].y = src[i+j].y / ephysics::BOX2D_SCALE_FACTOR;
+					dst[j].x = src[i+j].x / ee::BOX2D_SCALE_FACTOR;
+					dst[j].y = src[i+j].y / ee::BOX2D_SCALE_FACTOR;
 				}
 
 				b2PolygonShape shape;

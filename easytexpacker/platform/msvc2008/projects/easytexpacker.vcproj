@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easyphysics\external\box2d\include"
+				AdditionalIncludeDirectories="..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\box2d\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib freetype250_D.lib luad.lib box2d.lib libpngd.lib cjsond.lib pthreadVC2.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib glew32s.lib jsond.lib freetype250_D.lib luad.lib box2d.lib libpngd.lib cjsond.lib pthreadVC2.lib lzmad.lib"
 				OutputFile="..\easytexpacker\x86\Debug\easytexpacker.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\easyphysics\external\box2d\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib\x86"
+				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\box2d\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib\x86"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easytexpacker\x86\Debug\easytexpacker.pdb"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\easyphysics\external\box2d\include"
+				AdditionalIncludeDirectories="..\..\..\src\easytexpacker;..\..\..\external\RectangleBinPack;..\..\..\..\easyeditor\include;..\..\..\..\easybuilder\src;..\..\..\..\easyshape\src;..\..\..\..\easytexpacker\src;..\..\..\..\editor-external\wx\include;..\..\..\..\editor-external\json\include;..\..\..\..\editor-external\freetype\include;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\box2d\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -143,10 +143,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib freetype250.lib lua.lib box2d.lib libpngd.lib cjson.lib pthreadVC2.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib glew32s.lib json.lib freetype250.lib lua.lib box2d.lib libpngd.lib cjson.lib pthreadVC2.lib lzma.lib"
 				OutputFile="..\easytexpacker\x86\Release\easytexpacker.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\easyphysics\external\box2d\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib\x86"
+				AdditionalLibraryDirectories="..\..\..\..\editor-external\wx\lib;..\..\..\..\editor-external\gl\lib;..\..\..\..\editor-external\json\lib;..\..\..\..\editor-external\freetype\lib;..\..\..\..\editor-external\libpng\lib;..\..\..\..\editor-external\box2d\lib;..\..\..\..\editor-external\lua\lib;..\..\..\..\editor-external\intel;..\..\..\..\editor-external\lzma\lib;..\..\..\..\editor-external\cjson\lib;..\..\..\..\editor-external\pthread\lib\x86"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easytexpacker\x86\Release\easytexpacker.pdb"
@@ -285,6 +285,10 @@
 				Name="fileio"
 				>
 				<File
+					RelativePath="..\..\..\src\easytexpacker\ArrangeSpriteOP.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easytexpacker\FileAdapter.cpp"
 					>
 				</File>
@@ -323,10 +327,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easytexpacker\ArrangeSpriteImpl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easytexpacker\ArrangeSpriteOP.cpp"
 				>
 			</File>
 			<File

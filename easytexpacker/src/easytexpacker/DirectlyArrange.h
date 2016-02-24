@@ -5,13 +5,15 @@
 
 namespace etexpacker
 {
-	class DirectlyArrange : public BaseStrategy
-	{
-	public:
-		virtual void arrange(const std::vector<ee::ImageSprite*>& sprites);
-		virtual int GetTextureAccount() const { return 1; }
 
-	}; // DirectlyArrange
+class DirectlyArrange : public BaseStrategy
+{
+public:
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites);
+	virtual int GetTextureAccount() const { return 1; }
+
+}; // DirectlyArrange
+
 }
 
 #endif // _EASYTEXPACKER_DIRECTLY_ARRANGE_H_

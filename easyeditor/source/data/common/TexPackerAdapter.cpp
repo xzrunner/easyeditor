@@ -24,12 +24,12 @@ void TexPackerAdapter::Load(const char* filename)
 	int i = 0;
 	Json::Value texValue = value["image"][i++];
 	while (!texValue.isNull()) {
-		load(texValue, dir);
+		Load(texValue, dir);
 		texValue = value["image"][i++];
 	}
 }
 
-void TexPackerAdapter::load(const Json::Value& value, const std::string& dir)
+void TexPackerAdapter::Load(const Json::Value& value, const std::string& dir)
 {
 	Texture texture;
 

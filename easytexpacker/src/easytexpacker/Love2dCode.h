@@ -5,17 +5,19 @@
 
 namespace etexpacker
 {
-	class Love2dCode
-	{
-	public:
-		Love2dCode(ebuilder::CodeGenerator& gen);
 
-		void resolve();
+class Love2dCode
+{
+public:
+	Love2dCode(ebuilder::CodeGenerator& gen);
 
-	private:
-		ebuilder::CodeGenerator& m_gen;
+	void Resolve();
 
-	}; // Love2dCode
+private:
+	ebuilder::CodeGenerator& m_gen;
+
+}; // Love2dCode
+
 }
 
 #endif // _EASYTEXPACKER_LOVE2D_CODE_H_

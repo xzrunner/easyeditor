@@ -3,8 +3,15 @@
 #include "Context.h"
 #include "StagePanel.h"
 
-using namespace etexpacker;
+#include <ee/FetchAllVisitor.h>
+#include <ee/FileHelper.h>
+#include <ee/Symbol.h>
+#include <ee/Sprite.h>
+
 using namespace ebuilder;
+
+namespace etexpacker
+{
 
 Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen)
 	: m_gen(gen)
@@ -12,10 +19,10 @@ Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen)
 	
 }
 
-void Love2dCode::resolve()
+void Love2dCode::Resolve()
 {
-	std::string sw = wxString::FromDouble(Context::Instance()->width),
-		sh = wxString::FromDouble(Context::Instance()->height);
+	std::string sw = ee::StringHelper::ToString(Context::Instance()->width),
+		sh = ee::StringHelper::ToString(Context::Instance()->height);
 
 	lua::TableAssign ta(m_gen, "quads");
 
@@ -33,22 +40,22 @@ void Love2dCode::resolve()
 		std::string x, y, w, h, px, py, a;
 		if (sprite->GetAngle() != 0)
 		{
-			x = wxString::FromDouble(pos.x - symbol.GetSize().Height() * 0.5f);
-			y = wxString::FromDouble(pos.y - symbol.GetSize().Width() * 0.5f);
-			w = wxString::FromDouble(symbol.GetSize().Height());
-			h = wxString::FromDouble(symbol.GetSize().Width());
+			x = ee::StringHelper::ToString(pos.x - symbol.GetSize().Height() * 0.5f);
+			y = ee::StringHelper::ToString(pos.y - symbol.GetSize().Width() * 0.5f);
+			w = ee::StringHelper::ToString(symbol.GetSize().Height());
+			h = ee::StringHelper::ToString(symbol.GetSize().Width());
 			a = "1.57";
 		}
 		else
 		{
-			x = wxString::FromDouble(pos.x - symbol.GetSize().Width() * 0.5f);
-			y = wxString::FromDouble(pos.y - symbol.GetSize().Height() * 0.5f);
-			w = wxString::FromDouble(symbol.GetSize().Width());
-			h = wxString::FromDouble(symbol.GetSize().Height());
+			x = ee::StringHelper::ToString(pos.x - symbol.GetSize().Width() * 0.5f);
+			y = ee::StringHelper::ToString(pos.y - symbol.GetSize().Height() * 0.5f);
+			w = ee::StringHelper::ToString(symbol.GetSize().Width());
+			h = ee::StringHelper::ToString(symbol.GetSize().Height());
 			a = "0";
 		}
-		px = wxString::FromDouble(symbol.GetSize().Width() * 0.5f);
-		py = wxString::FromDouble(480 - symbol.GetSize().Height() * 0.5f);
+		px = ee::StringHelper::ToString(symbol.GetSize().Width() * 0.5f);
+		py = ee::StringHelper::ToString(480 - symbol.GetSize().Height() * 0.5f);
 
 		// q = love.graphics.newQuad(x, y, w, h, sw, sh)
 		std::string aq = lua::assign("q", lua::call("", "love.graphics.newQuad", 6, x, y, w, h, sw, sh));
@@ -59,4 +66,6 @@ void Love2dCode::resolve()
 		// name = { q = love.graphics.newQuad(x, y, w, h, sw, sh), 	x = px, y = py, a = a },
 		m_gen.line(lua::assign(name, "{ " + aq + ", " + ax + ", " + ay + ", " + aa + " }") + ",");		
 	}
+}
+
 }

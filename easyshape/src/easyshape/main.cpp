@@ -1,6 +1,11 @@
 #include "main.h"
 #include "Task.h"
 
+#include <ee/SymbolFactory.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Frame.h>
+#include <ee/Config.h>
+
 #include <easyshape.h>
 #include <easycomplex.h>
 #include <easytexture.h>
@@ -32,7 +37,7 @@ bool MyApp::OnInit()
 	if (wxGetApp().argc > 1) {
 		ee::Config::Instance()->EnableUseDTex(false);
 		ee::Config::Instance()->EnableRender(false);
-		wxString path(wxGetApp().argv[1]);
+		std::string path(wxGetApp().argv[1]);
 		frame->InitWithFile(path);
 		ee::Config::Instance()->EnableUseDTex(true);
 		ee::Config::Instance()->EnableRender(true);

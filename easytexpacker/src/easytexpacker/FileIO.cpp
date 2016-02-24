@@ -4,42 +4,62 @@
 #include "Context.h"
 #include "config.h"
 
-using namespace etexpacker;
+#include <ee/SymbolMgr.h>
+#include <ee/Bitmap.h>
+#include <ee/LibraryPanel.h>
+#include <ee/TexPackerAdapter.h>
+#include <ee/SpriteFactory.h>
+#include <ee/Symbol.h>
+#include <ee/Sprite.h>
+#include <ee/Math2D.h>
+#include <ee/SettingData.h>
+#include <ee/FileHelper.h>
+#include <ee/Config.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/ImageLoader.h>
+#include <ee/LibjpegAdapter.h>
+#include <ee/ImageData.h>
+#include <ee/ImageSaver.h>
 
-void FileIO::load(const char* filename)
+#include <fstream>
+
+namespace etexpacker
+{
+
+void FileIO::Load(const char* filename)
 {
 	Context* context = Context::Instance();
 
 	ee::SymbolMgr::Instance()->Clear();
 	ee::BitmapMgr::Instance()->Clear();
 
-	wxString ext = wxT("_") + wxString(FILE_TAG) + wxT(".json");
-	if (wxString(filename).Contains(ext)) {
-		loadFromEasypackerFile(filename);
+	std::string ext = std::string("_") + FILE_TAG + ".json";
+	if (std::string(filename).find(ext) != std::string::npos) {
+		LoadFromEasypackerFile(filename);
 	} else {
-		loadFromTexPackerFile(filename);
+		LoadFromTexPackerFile(filename);
 	}
 
 	context->library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 }
 
-void FileIO::store(const char* filename)
+void FileIO::Store(const char* filename)
 {
-	wxString ext = wxT("_") + wxString(FILE_TAG) + wxT(".json");
-	if (wxString(filename).Contains(ext)) {
-		storeToEasypackerFile(filename);
+	std::string ext = std::string("_") + FILE_TAG + ".json";
+	if (std::string(filename).find(ext) != std::string::npos) {
+		StoreToEasypackerFile(filename);
 	} else {
-		storeToTexPackerFile(filename);
+		StoreToTexPackerFile(filename);
 	}
 }
 
-void FileIO::loadFromEasypackerFile(const char* filename)
+void FileIO::LoadFromEasypackerFile(const char* filename)
 {
 	Context* context = Context::Instance();
 
 	ee::TexPackerAdapter adapter;
-	adapter.load(filename);
-	context->toolbar->setSize(adapter.width, adapter.height);
+	adapter.Load(filename);
+	context->toolbar->SetSize(adapter.width, adapter.height);
 
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
@@ -56,11 +76,11 @@ void FileIO::loadFromEasypackerFile(const char* filename)
 		else
 			sprite->SetTransform(pos, 0);
 
-		context->stage->insertSpriteNoArrange(sprite);
+		context->stage->InsertSpriteNoArrange(sprite);
 	}
 }
 
-void FileIO::loadFromTexPackerFile(const char* filename)
+void FileIO::LoadFromTexPackerFile(const char* filename)
 {
 	Context* context = Context::Instance();
 
@@ -119,7 +139,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 		*val = frame_val;
 		sprite->SetUserData(val);
 
-		context->stage->insertSpriteNoArrange(sprite);
+		context->stage->InsertSpriteNoArrange(sprite);
 
 		frame_val = value["frames"][i++];
 	}
@@ -129,19 +149,19 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 	settings.open_image_edge_clip = old_open_image_edge_clip;
 }
 
-void FileIO::storeToEasypackerFile(const char* filename)
+void FileIO::StoreToEasypackerFile(const char* filename)
 {
-	storeImage(filename);
-	storeEasypackerPosition(filename);
+	StoreImage(filename);
+	StoreEasypackerPosition(filename);
 }
 
-void FileIO::storeToTexPackerFile(const char* filename)
+void FileIO::StoreToTexPackerFile(const char* filename)
 {
-	storeImage(filename);
-	storeTexpackerPosition(filename);
+	StoreImage(filename);
+	StoreTexpackerPosition(filename);
 }
 
-void FileIO::storeImage(const char* filename)
+void FileIO::StoreImage(const char* filename)
 {
 	StagePanel* stage = Context::Instance()->stage;
 
@@ -150,7 +170,7 @@ void FileIO::storeImage(const char* filename)
 	const int width = Context::Instance()->width,
 		height = Context::Instance()->height;
 	int channel = 4;
-	IMG_TYPE type = Context::Instance()->toolbar->getImgType();
+	IMG_TYPE type = Context::Instance()->toolbar->GetImgType();
 	if (type == e_bmp || type == e_jpg) 
 		channel = 3;
 
@@ -247,7 +267,7 @@ void FileIO::storeImage(const char* filename)
 		delete[] src_data;
 	}
 
-	wxString imgFile(filename);
+	std::string imgFile(filename);
 	imgFile = ee::FileHelper::GetFilePathExceptExtension(imgFile);
 
 	switch (type)
@@ -256,18 +276,11 @@ void FileIO::storeImage(const char* filename)
 //		stbi_write_bmp((imgFile + ".bmp").c_str(), width, height, channel, dst_data);
 		break;
 	case e_jpg:
-		{
-			ee::LibjpegAdapter::ImageData data;
-			data.width = width;
-			data.height = height;
-			data.pixels = dst_data;
-
-			ee::LibjpegAdapter::Write((imgFile + ".jpg").c_str(), 80, data);
-		}
+		ee::LibjpegAdapter::Write(dst_data, width, height, (imgFile + ".jpg").c_str(), 80);
 		break;
 	case e_png:
 //		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
-		ee::ImageSaver::StoreToFile(dst_data, width, height, 4, imgFile.ToStdString(), 
+		ee::ImageSaver::StoreToFile(dst_data, width, height, 4, imgFile, 
 			ee::ImageSaver::e_png);
 		break;
 	}
@@ -275,7 +288,7 @@ void FileIO::storeImage(const char* filename)
 	free((void*)dst_data);
 }
 
-void FileIO::storeEasypackerPosition(const char* filename)
+void FileIO::StoreEasypackerPosition(const char* filename)
 {
 	Json::Value value;
 
@@ -285,7 +298,7 @@ void FileIO::storeEasypackerPosition(const char* filename)
 	std::vector<ee::Sprite*> sprites;
 	Context::Instance()->stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["image"][i] = store(sprites[i]);
+		value["image"][i] = Store(sprites[i]);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -295,7 +308,7 @@ void FileIO::storeEasypackerPosition(const char* filename)
 	fout.close();
 }
 
-void FileIO::storeTexpackerPosition(const char* filename)
+void FileIO::StoreTexpackerPosition(const char* filename)
 {
 	Json::Value value;
 
@@ -315,7 +328,7 @@ void FileIO::storeTexpackerPosition(const char* filename)
 			// todo
 // 			ee::Image* img = static_cast<const ee::ImageSymbol&>(sprite->GetSymbol()).getImage();
 // 			Json::Value val;
-// 			val["filename"] = ee::FileHelper::getFilenameWithExtension(img->GetFilepath()).ToStdString();
+// 			val["filename"] = ee::FileHelper::getFilenameWithExtension(img->GetFilepath());
 // 			val["rotated"] = sprite->GetAngle() == 0 ? false : true;
 // 			val["trimmed"] = true;
 // 			val["sourceSize"]["w"] = img->GetOriginWidth();
@@ -343,7 +356,7 @@ void FileIO::storeTexpackerPosition(const char* filename)
 	fout.close();
 }
 
-Json::Value FileIO::store(const ee::Sprite* sprite)
+Json::Value FileIO::Store(const ee::Sprite* sprite)
 {
 	Json::Value value;
 
@@ -377,4 +390,6 @@ Json::Value FileIO::store(const ee::Sprite* sprite)
 	value["rotate"] = bRotate;
 
 	return value;
+}
+
 }

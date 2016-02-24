@@ -105,7 +105,6 @@ void Frame::onQuit(wxCommandEvent& event)
 
 void Frame::onAbout(wxCommandEvent& event)
 {
-	std::string msg = ee::StringHelper::Format();
 	wxMessageBox(std::string("Version: ") + VERSION, wxT("About EasyModeling"), wxOK | wxICON_INFORMATION, this);
 }
 

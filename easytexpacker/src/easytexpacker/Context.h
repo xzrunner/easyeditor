@@ -1,40 +1,44 @@
 #ifndef _EASYTEXPACKER_CONTEXT_H_
 #define _EASYTEXPACKER_CONTEXT_H_
 
+#include <json/json.h>
 
+namespace ee { class PropertySettingPanel; class LibraryPanel; }
 
 namespace etexpacker
 {
-	class StagePanel;
-	class ToolbarPanel;
 
-	class Context
-	{
-	public:
-		ee::PropertySettingPanel* property;
-		ee::LibraryPanel* library;
-		StagePanel* stage;
-		ToolbarPanel* toolbar;
+class StagePanel;
+class ToolbarPanel;
 
-		int width, height;
-		int padding;
-		int extrude;
-		float scale;
-		bool auto_arrange;
-		bool premultiplied_alpha;
+class Context
+{
+public:
+	ee::PropertySettingPanel* property;
+	ee::LibraryPanel* library;
+	StagePanel* stage;
+	ToolbarPanel* toolbar;
 
-		Json::Value tp_meta;
+	int width, height;
+	int padding;
+	int extrude;
+	float scale;
+	bool auto_arrange;
+	bool premultiplied_alpha;
 
-	public:
-		static Context* Instance();
+	Json::Value tp_meta;
 
-	private:
-		Context();
+public:
+	static Context* Instance();
 
-	private:
-		static Context* m_instance;
+private:
+	Context();
 
-	}; // Context
+private:
+	static Context* m_instance;
+
+}; // Context
+
 }
 
 #endif // _EASYTEXPACKER_CONTEXT_H_

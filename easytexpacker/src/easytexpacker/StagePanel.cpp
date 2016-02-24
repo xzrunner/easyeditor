@@ -8,7 +8,17 @@
 #include "Context.h"
 #include "const.h"
 
-using namespace etexpacker;
+#include <ee/sprite_msg.h>
+#include <ee/DragPhysicsOP.h>
+#include <ee/SpriteSelection.h>
+#include <ee/FetchAllVisitor.h>
+#include <ee/SpriteFactory.h>
+#include <ee/LibraryPanel.h>
+#include <ee/subject_id.h>
+#include <ee/ImageSprite.h>
+
+namespace etexpacker
+{
 
 StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)
@@ -17,7 +27,7 @@ StagePanel::StagePanel(wxWindow* parent,
 {
 //	m_editop = new ArrangeSpriteOP(this, Context::Instance()->property);
 	b2Body* ground = CreateGround();
-	SetEditOP(new ephysics::DragPhysicsOP(this, GetStageImpl(), m_world, ground));
+	SetEditOP(new ee::DragPhysicsOP(this, GetStageImpl(), m_world, ground));
 
 	SetCanvas(new StageCanvas(this));
 
@@ -32,13 +42,13 @@ StagePanel::StagePanel(wxWindow* parent,
 	RegistSubject(ee::RemoveSpriteSJ::Instance());
 }
 
-void StagePanel::insertSpriteNoArrange(ee::Sprite* sprite)
+void StagePanel::InsertSpriteNoArrange(ee::Sprite* sprite)
 {
 //	fixCoords(sprite);
 	ee::InsertSpriteSJ::Instance()->Insert(sprite);
 }
 
-void StagePanel::arrangeAllSprites(bool bClearSelection)
+void StagePanel::ArrangeAllSprites(bool bClearSelection)
 {
 	if (!Context::Instance()->auto_arrange) {
 		return;
@@ -50,10 +60,10 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 
 	std::vector<ee::ImageSprite*> sprites;
 	TraverseSprites(ee::FetchAllVisitor<ee::ImageSprite>(sprites), ee::DT_EDITABLE);
-	m_strategy->arrange(sprites);
+	m_strategy->Arrange(sprites);
 }
 
-void StagePanel::loadFromLibrary()
+void StagePanel::LoadFromLibrary()
 {
 	ee::Symbol* symbol = NULL;
 	int index = 0;
@@ -69,7 +79,7 @@ void StagePanel::loadFromLibrary()
 		}
 	}
 
-	arrangeAllSprites(true);
+	ArrangeAllSprites(true);
 }
 
 int StagePanel::GetTextureAccount() const
@@ -77,7 +87,7 @@ int StagePanel::GetTextureAccount() const
 	return m_strategy->GetTextureAccount();
 }
 
-void StagePanel::fixCoords(ee::Sprite* sprite)
+void StagePanel::FixCoords(ee::Sprite* sprite)
 {
 	const ee::Vector& pos = sprite->GetPosition();
 
@@ -121,14 +131,14 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SPRITE:
 		{
 			ee::InsertSpriteSJ::Params* p = (ee::InsertSpriteSJ::Params*)ud;
-			fixCoords(p->spr);
+			FixCoords(p->spr);
 			// todo
 			// SpritesPanelImpl::OnNotify(sj_id, ud);
-			arrangeAllSprites(false);
+			ArrangeAllSprites(false);
 		}
 		break;
 	case ee::MSG_REMOVE_SPRITE:
-		arrangeAllSprites(false);
+		ArrangeAllSprites(false);
 		break;
 	}
 }
@@ -156,4 +166,6 @@ b2Body* StagePanel::CreateGround()
 	ground->CreateFixture(&fd);
 
 	return ground;
+}
+
 }

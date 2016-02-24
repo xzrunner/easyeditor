@@ -1,9 +1,9 @@
 #ifndef _EASYTEXPACKER_TOOLBAR_PANEL_H_
 #define _EASYTEXPACKER_TOOLBAR_PANEL_H_
 
-
-
 #include "const.h"
+
+#include <ee/ToolbarPanel.h>
 
 namespace etexpacker
 {
@@ -16,9 +16,9 @@ class ToolbarPanel : public ee::ToolbarPanel
 public:
 	ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
-	IMG_TYPE getImgType() const;
+	IMG_TYPE GetImgType() const;
 
-	void setSize(int width, int height);
+	void SetSize(int width, int height);
 
 protected:
 	virtual wxSizer* InitLayout();

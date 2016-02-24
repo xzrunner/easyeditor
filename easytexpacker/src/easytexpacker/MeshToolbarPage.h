@@ -1,7 +1,9 @@
 #ifndef _EASYTEXPACKER_MESH_TOOLBAR_PAGE_H_
 #define _EASYTEXPACKER_MESH_TOOLBAR_PAGE_H_
 
+#include <wx/panel.h>
 
+class wxTextCtrl;
 
 namespace etexpacker
 {
@@ -20,7 +22,7 @@ private:
 	void OnSaveToFile(wxCommandEvent& event);
 	void OnSaveImage(wxCommandEvent& event);
 
-	void LoadBodies(const wxString& dir);
+	void LoadBodies(const std::string& dir);
 
 private:
 	wxTextCtrl* m_src_dir;

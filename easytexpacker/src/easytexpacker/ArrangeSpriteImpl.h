@@ -1,7 +1,8 @@
 #ifndef _EASYTEXPACKER_ARRANGE_SPRITE_IMPL_H_
 #define _EASYTEXPACKER_ARRANGE_SPRITE_IMPL_H_
 
-
+#include <ee/ArrangeSpriteImpl.h>
+#include <ee/Visitor.h>
 
 namespace etexpacker
 {

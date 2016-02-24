@@ -1,8 +1,6 @@
 #ifndef _EASYTEXPACKER_CONST_H_
 #define _EASYTEXPACKER_CONST_H_
 
-
-
 namespace etexpacker
 {
 

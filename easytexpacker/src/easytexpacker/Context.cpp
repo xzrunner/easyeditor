@@ -2,7 +2,8 @@
 
 #include <stdio.h>
 
-using namespace etexpacker;
+namespace etexpacker
+{
 
 Context* Context::m_instance = NULL;
 
@@ -29,4 +30,6 @@ Context* Context::Instance()
 		m_instance = new Context();
 	}
 	return m_instance;
+}
+
 }

@@ -2,9 +2,6 @@
 #include "RectCutOP.h"
 #include "StagePanel.h"
 
-//#include <easycomplex.h>
-#include <easyimage.h>
-
 #include <ee/FileHelper.h>
 #include <ee/ImageSprite.h>
 #include <ee/Image.h>
@@ -15,6 +12,10 @@
 #include <ee/NullSprite.h>
 #include <ee/NullSymbol.h>
 #include <ee/FinishDialog.h>
+#include <ee/ImageClip.h>
+
+#include <easycomplex.h>
+#include <easyimage.h>
 
 #include <fstream>
 

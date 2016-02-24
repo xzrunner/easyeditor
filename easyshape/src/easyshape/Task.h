@@ -1,11 +1,16 @@
 #ifndef _EASYSHAPE_TASK_H_
 #define _EASYSHAPE_TASK_H_
 
+#include <ee/Task.h>
 
-#include <easyshape.h>
+class wxFrame;
+
+namespace ee { class LibraryPanel; }
 
 namespace eshape
 {
+
+class StagePanel;
 
 class Task : public ee::Task
 {

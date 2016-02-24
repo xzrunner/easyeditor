@@ -1,5 +1,7 @@
 #include "IDemo.h"
 
+#include <ee/StringHelper.h>
+
 #include <easy3d.h>
 
 namespace eterrain3d

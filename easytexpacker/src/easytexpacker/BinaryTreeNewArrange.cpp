@@ -2,6 +2,12 @@
 #include "Context.h"
 #include "config.h"
 
+#include <ee/Rect.h>
+#include <ee/ImageSprite.h>
+#include <ee/TPNode.h>
+#include <ee/Image.h>
+#include <ee/Math2D.h>
+
 namespace etexpacker
 {
 
@@ -16,10 +22,10 @@ BinaryTreeNewArrange::BinaryTreeNewArrange()
 BinaryTreeNewArrange::~BinaryTreeNewArrange()
 {
 	delete m_root;
-	m_mapImages.clear();
+	m_map_images.clear();
 }
 
-void BinaryTreeNewArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
+void BinaryTreeNewArrange::Arrange(const std::vector<ee::ImageSprite*>& sprites)
 {
 	m_tex_account = 0;
 
@@ -28,7 +34,7 @@ void BinaryTreeNewArrange::arrange(const std::vector<ee::ImageSprite*>& sprites)
 	float scale = 1;
 
 	std::vector<ee::ImageSprite*> sorted(sprites);
-	sortByMaxEdge(sorted);
+	SortByMaxEdge(sorted);
 
 	float x_offset = 0;
 	while (!sorted.empty())
@@ -81,8 +87,8 @@ bool BinaryTreeNewArrange::
 Insert(ee::ImageSprite& img) const
 {
 	std::map<std::string, ee::TPNode*>::const_iterator itr 
-		= m_mapImages.find(img.GetSymbol().GetFilepath());
-	if (itr != m_mapImages.end()) {
+		= m_map_images.find(img.GetSymbol().GetFilepath());
+	if (itr != m_map_images.end()) {
 		return false;
 	}
 

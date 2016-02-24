@@ -1,6 +1,11 @@
 #include "FileAdapter.h"
 
-using namespace etexpacker;
+#include <ee/StringHelper.h>
+
+#include <fstream>
+
+namespace etexpacker
+{
 
 FileAdapter::FileAdapter()
 {
@@ -13,10 +18,10 @@ FileAdapter::~FileAdapter()
 	m_data.clear();
 }
 
-void FileAdapter::resolve(const wxString& filepath)
+void FileAdapter::Resolve(const std::string& filepath)
 {
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	
 	fin >> m_width >> m_height;
@@ -34,4 +39,6 @@ void FileAdapter::resolve(const wxString& filepath)
 	}
 
 	fin.close();
+}
+
 }

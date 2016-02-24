@@ -3,40 +3,46 @@
 
 #include "BaseStrategy.h"
 
+#include <ee/Rect.h>
+
+namespace ee { class Sprite; }
+
 namespace etexpacker
 {
-	class BinaryTreeArrange : public BaseStrategy
+
+class BinaryTreeArrange : public BaseStrategy
+{
+public:
+	BinaryTreeArrange();
+	virtual ~BinaryTreeArrange();
+
+	virtual void Arrange(const std::vector<ee::ImageSprite*>& sprites);
+	virtual int GetTextureAccount() const { return 1; }
+
+private:
+	void ResetRoot();
+
+private:
+	struct Node
 	{
-	public:
-		BinaryTreeArrange();
-		virtual ~BinaryTreeArrange();
+		Node* child[2];
+		ee::Sprite* texture;
+		ee::Rect rc;
 
-		virtual void arrange(const std::vector<ee::ImageSprite*>& sprites);
-		virtual int GetTextureAccount() const { return 1; }
+		Node();
+		~Node();
 
-	private:
-		void resetRoot();
+		Node* Insert(ee::ImageSprite* sprite, int flag);
+	};
 
-	private:
-		struct Node
-		{
-			Node* child[2];
-			ee::Sprite* texture;
-			ee::Rect rc;
+	static const int REINSERT_MAX = 128;
+	static const int SPACING = 128;
 
-			Node();
-			~Node();
+private:
+	Node* m_root;
 
-			Node* insert(ee::ImageSprite* sprite, int flag);
-		};
+}; // BinaryTreeArrange
 
-		static const int REINSERT_MAX = 128;
-		static const int SPACING = 128;
-
-	private:
-		Node* m_root;
-
-	}; // BinaryTreeArrange
 }
 
 #endif // _EASYTEXPACKER_BINARY_TREE_ARRANGE_H_

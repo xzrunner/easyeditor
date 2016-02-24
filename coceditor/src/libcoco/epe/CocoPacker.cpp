@@ -162,13 +162,13 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	{
 		std::map<const ee::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		assert(itr != m_mapSpriteID.end());
-		std::string sid = wxString::FromDouble(itr->second);
+		std::string sid = ee::StringHelper::ToString(itr->second);
 		m_gen.line(lua::assign("id", sid) + ",");
 	}
 
 	// tex
 	// todo: specify only 1 texture
-	std::string assignTex = lua::assign("tex", wxString::FromDouble(1).ToStdString());
+	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(1));
 	const ee::Rect* pr = m_tex.Query(sprite->GetSymbol().GetImage());
 
 	// src
@@ -177,10 +177,10 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	int x2 = pr->xmax, y2 = pr->ymin;
 	int x3 = pr->xmax, y3 = pr->ymax;
 
-	std::string sx0 = wxString::FromDouble(x0), sy0 = wxString::FromDouble(y0);
-	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
-	std::string sx2 = wxString::FromDouble(x2), sy2 = wxString::FromDouble(y2);
-	std::string sx3 = wxString::FromDouble(x3), sy3 = wxString::FromDouble(y3);
+	std::string sx0 = ee::StringHelper::ToString(x0), sy0 = ee::StringHelper::ToString(y0);
+	std::string sx1 = ee::StringHelper::ToString(x1), sy1 = ee::StringHelper::ToString(y1);
+	std::string sx2 = ee::StringHelper::ToString(x2), sy2 = ee::StringHelper::ToString(y2);
+	std::string sx3 = ee::StringHelper::ToString(x3), sy3 = ee::StringHelper::ToString(y3);
 	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0, sy0, 
 		sx1, sy1, sx2, sy2, sx3, sy3));
 
@@ -233,14 +233,14 @@ void CocoPacker::resolvePicture(const ee::ImageSprite* sprite)
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] *= SCALE;
 
-	sx0 = wxString::FromDouble(screen[0].x);
-	sy0 = wxString::FromDouble(screen[0].y);
-	sx1 = wxString::FromDouble(screen[1].x);
-	sy1 = wxString::FromDouble(screen[1].y);
-	sx2 = wxString::FromDouble(screen[2].x);
-	sy2 = wxString::FromDouble(screen[2].y);
-	sx3 = wxString::FromDouble(screen[3].x);
-	sy3 = wxString::FromDouble(screen[3].y);
+	sx0 = ee::StringHelper::ToString(screen[0].x);
+	sy0 = ee::StringHelper::ToString(screen[0].y);
+	sx1 = ee::StringHelper::ToString(screen[1].x);
+	sy1 = ee::StringHelper::ToString(screen[1].y);
+	sx2 = ee::StringHelper::ToString(screen[2].x);
+	sy2 = ee::StringHelper::ToString(screen[2].y);
+	sx3 = ee::StringHelper::ToString(screen[3].x);
+	sy3 = ee::StringHelper::ToString(screen[3].y);
 	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0, sy0, 
 		sx1, sy1, sx2, sy2, sx3, sy3));
 
@@ -258,13 +258,13 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 	{
 		std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 		assert(itr != m_mapSymbolID.end());
-		std::string sid = wxString::FromDouble(itr->second);
+		std::string sid = ee::StringHelper::ToString(itr->second);
 		m_gen.line(lua::assign("id", sid) + ",");
 	}
 
 	// tex
 	// todo: specify only 1 texture
-	std::string assignTex = lua::assign("tex", wxString::FromDouble(1).ToStdString());
+	std::string assignTex = lua::assign("tex", ee::StringHelper::ToString(1));
 	const ee::Rect* pr = m_tex.Query(symbol->GetImage());
 
 	// src
@@ -273,10 +273,10 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 	int x2 = pr->xmax, y2 = pr->ymin;
 	int x3 = pr->xmax, y3 = pr->ymax;
 
-	std::string sx0 = wxString::FromDouble(x0), sy0 = wxString::FromDouble(y0);
-	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
-	std::string sx2 = wxString::FromDouble(x2), sy2 = wxString::FromDouble(y2);
-	std::string sx3 = wxString::FromDouble(x3), sy3 = wxString::FromDouble(y3);
+	std::string sx0 = ee::StringHelper::ToString(x0), sy0 = ee::StringHelper::ToString(y0);
+	std::string sx1 = ee::StringHelper::ToString(x1), sy1 = ee::StringHelper::ToString(y1);
+	std::string sx2 = ee::StringHelper::ToString(x2), sy2 = ee::StringHelper::ToString(y2);
+	std::string sx3 = ee::StringHelper::ToString(x3), sy3 = ee::StringHelper::ToString(y3);
 	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0, sy0, 
 		sx1, sy1, sx2, sy2, sx3, sy3));
 
@@ -297,14 +297,14 @@ void CocoPacker::resolvePicture(const ee::ImageSymbol* symbol)
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] *= SCALE;
 	//
-	sx0 = wxString::FromDouble(screen[0].x);
-	sy0 = wxString::FromDouble(screen[0].y);
-	sx1 = wxString::FromDouble(screen[1].x);
-	sy1 = wxString::FromDouble(screen[1].y);
-	sx2 = wxString::FromDouble(screen[2].x);
-	sy2 = wxString::FromDouble(screen[2].y);
-	sx3 = wxString::FromDouble(screen[3].x);
-	sy3 = wxString::FromDouble(screen[3].y);
+	sx0 = ee::StringHelper::ToString(screen[0].x);
+	sy0 = ee::StringHelper::ToString(screen[0].y);
+	sx1 = ee::StringHelper::ToString(screen[1].x);
+	sy1 = ee::StringHelper::ToString(screen[1].y);
+	sx2 = ee::StringHelper::ToString(screen[2].x);
+	sy2 = ee::StringHelper::ToString(screen[2].y);
+	sx3 = ee::StringHelper::ToString(screen[3].x);
+	sy3 = ee::StringHelper::ToString(screen[3].y);
 	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0, sy0, 
 		sx1, sy1, sx2, sy2, sx3, sy3));
 
@@ -322,17 +322,17 @@ void CocoPacker::resolveFont(const ee::FontBlankSprite* sprite)
 	{
 		std::map<const ee::Sprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
 		assert(itr != m_mapSpriteID.end());
-		std::string sid = wxString::FromDouble(itr->second);
+		std::string sid = ee::StringHelper::ToString(itr->second);
 		m_gen.line(lua::assign("id", sid) + ",");
 	}
 
 	std::string aFont = lua::assign("font", "\""+sprite->font+"\"");
 	std::string aColor = lua::assign("color", TransColor(sprite->font_color, ee::PT_ARGB));
-//	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align).ToStdString());
-	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align_hori).ToStdString());
-	std::string aSize = lua::assign("size", wxString::FromDouble(sprite->size).ToStdString());
-	std::string aWidth = lua::assign("width", wxString::FromDouble(sprite->width).ToStdString());
-	std::string aHeight = lua::assign("height", wxString::FromDouble(sprite->height).ToStdString());
+//	std::string aAlign = lua::assign("align", ee::StringHelper::ToString(sprite->align));
+	std::string aAlign = lua::assign("align", ee::StringHelper::ToString(sprite->align_hori));
+	std::string aSize = lua::assign("size", ee::StringHelper::ToString(sprite->size));
+	std::string aWidth = lua::assign("width", ee::StringHelper::ToString(sprite->width));
+	std::string aHeight = lua::assign("height", ee::StringHelper::ToString(sprite->height));
 	std::string aEdge = lua::assign("noedge", "false");
 
 	m_gen.line(aFont + ", " + aColor + ", " + aAlign + ", " + aSize + ", " + aWidth + ", " + aHeight + ", " + aEdge);
@@ -352,17 +352,17 @@ void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 	// id
 	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 	assert(itr != m_mapSymbolID.end());
-	std::string sid = wxString::FromDouble(itr->second);
+	std::string sid = ee::StringHelper::ToString(itr->second);
 	m_gen.line(lua::assign("id", sid) + ",");
 
 	// clipbox
 	const ee::Rect& cb = symbol->m_clipbox;
 	if (cb.xmin != 0 || cb.xmax != 0 || cb.ymin != 0 || cb.ymax != 0)
 	{
-		std::string width = wxString::FromDouble(cb.xmax - cb.xmin);
-		std::string height = wxString::FromDouble(cb.ymax - cb.ymin);
-		std::string left = wxString::FromDouble(cb.xmin);
-		std::string top = wxString::FromDouble(-cb.ymax);
+		std::string width = ee::StringHelper::ToString(cb.xmax - cb.xmin);
+		std::string height = ee::StringHelper::ToString(cb.ymax - cb.ymin);
+		std::string left = ee::StringHelper::ToString(cb.xmin);
+		std::string top = ee::StringHelper::ToString(-cb.ymax);
 		lua::tableassign(m_gen, "clipbox", 4, width, height, left, top);
 	}
 
@@ -433,7 +433,7 @@ void CocoPacker::resolveAnimation(const eanim::Symbol* symbol)
 	// id
 	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
 	assert(itr != m_mapSymbolID.end());
-	std::string sid = wxString::FromDouble(itr->second);
+	std::string sid = ee::StringHelper::ToString(itr->second);
 	m_gen.line(lua::assign("id", sid) + ",");
 
 	// component
@@ -490,7 +490,7 @@ void CocoPacker::resolveAnimation(const escale9::Symbol* symbol)
  	// id
  	std::map<const ee::Symbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
  	assert(itr != m_mapSymbolID.end());
- 	std::string sid = wxString::FromDouble(itr->second);
+ 	std::string sid = ee::StringHelper::ToString(itr->second);
  	m_gen.line(lua::assign("id", sid) + ",");
  
  	// component
@@ -598,7 +598,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 	std::map<int, std::vector<std::string> >::iterator itr = unique.find(id);
 	if (unique.find(id) == unique.end())
 	{
-		std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
+		std::string aID = lua::assign("id", ee::StringHelper::ToString(id));
 		if (!sprite->name.empty() && sprite->name[0] != '_')
 		{
 			std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -622,7 +622,7 @@ void CocoPacker::resolveSpriteForComponent(const ee::Sprite* sprite, std::vector
 				break;
 		if (i == itr->second.size() && !isFont)
 		{
-			std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
+			std::string aID = lua::assign("id", ee::StringHelper::ToString(id));
 			if (!sprite->name.empty() && sprite->name[0] != '_')
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -693,14 +693,14 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, const std::vect
 
 void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int id, bool forceMat)
 {
-	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
+	std::string assignIndex = lua::assign("index", ee::StringHelper::ToString(id));
 
 	float mat[6];
 	transToMat(sprite, mat, forceMat);
 
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
-		m[i] = wxString::FromDouble(mat[i]);
+		m[i] = ee::StringHelper::ToString(mat[i]);
 	std::string smat = lua::tableassign("", 6, m[0], m[1], m[2], 
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
@@ -717,14 +717,14 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int id, bool fo
 
 void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* sprite, int id)
 {
-	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
+	std::string assignIndex = lua::assign("index", ee::StringHelper::ToString(id));
 
 	float mat[6];
 	transToMat(sprite, mat, false);
 
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
-		m[i] = wxString::FromDouble(mat[i]);
+		m[i] = ee::StringHelper::ToString(mat[i]);
 	std::string smat = lua::tableassign("", 6, m[0], m[1], m[2], 
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
@@ -749,7 +749,7 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* sprite, int id)
 
 void CocoPacker::resolveSpriteForFrameFont(const ee::FontBlankSprite* sprite, int id)
 {
-	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
+	std::string assignIndex = lua::assign("index", ee::StringHelper::ToString(id));
 
 	float mat[6];
 	transToMat(sprite, mat, true);
@@ -768,7 +768,7 @@ void CocoPacker::resolveSpriteForFrameFont(const ee::FontBlankSprite* sprite, in
 
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
-		m[i] = wxString::FromDouble(mat[i]);
+		m[i] = ee::StringHelper::ToString(mat[i]);
 	std::string smat = lua::tableassign("", 6, m[0], m[1], m[2], 
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);

@@ -3,34 +3,34 @@
 
 #include <json/json.h>
 
-
+namespace ee { class Sprite; }
 
 namespace etexpacker
 {
-	class StagePanel;
 
-	class FileIO
-	{
-	public:
-		static void load(const char* filename);
-		static void store(const char* filename);
+class StagePanel;
 
-	private:
-		static void loadFromEasypackerFile(const char* filename);
-		static void loadFromTexPackerFile(const char* filename);
+class FileIO
+{
+public:
+	static void Load(const char* filename);
+	static void Store(const char* filename);
 
-		static void storeToEasypackerFile(const char* filename);
-		static void storeToTexPackerFile(const char* filename);
+private:
+	static void LoadFromEasypackerFile(const char* filename);
+	static void LoadFromTexPackerFile(const char* filename);
 
-		static void storeImage(const char* filename);
-		static void storeEasypackerPosition(const char* filename);
-		static void storeTexpackerPosition(const char* filename);
+	static void StoreToEasypackerFile(const char* filename);
+	static void StoreToTexPackerFile(const char* filename);
 
-		static Json::Value store(const ee::Sprite* sprite);
+	static void StoreImage(const char* filename);
+	static void StoreEasypackerPosition(const char* filename);
+	static void StoreTexpackerPosition(const char* filename);
 
+	static Json::Value Store(const ee::Sprite* sprite);
 
+}; // FileIO
 
-	}; // FileIO
 }
 
 #endif // _EASYTEXPACKER_FILE_IO_H_
