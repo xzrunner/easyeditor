@@ -12,7 +12,9 @@ class Matrix;
 class Vector;
 class Rect;
 
+#ifndef PI
 static const float PI = 3.1415926f;
+#endif // PI
 static const float TWO_PI = 2 * PI;
 //	static const float FLOAT_MAX = FLT_MAX;
 //	static const float FLT_EPSILON = FLT_EPSILON;
