@@ -4,6 +4,9 @@
 
 #include <wx/dir.h>
 #include <wx/filename.h>
+#ifndef _DEBUG
+#include <wx/stdpaths.h>
+#endif // _DEBUG
 
 #include <set>
 
