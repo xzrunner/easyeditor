@@ -61,6 +61,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 
 		spr->SetScale(_scale);
 		spr->SetTransform(_pos, _angle);
+		spr->SetMirror(group->GetMirrorX(), group->GetMirrorY());
 	}
 }
 
