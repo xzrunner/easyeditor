@@ -592,6 +592,10 @@
 				Name="04.anchor"
 				>
 				<File
+					RelativePath="..\..\..\src\librespacker\PackAnchor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\librespacker\PackAnchor.h"
 					>
 				</File>

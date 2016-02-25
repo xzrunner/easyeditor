@@ -3,18 +3,14 @@
 
 #include "IPackNode.h"
 
-#include <spritepack.h>
-
-
-
 namespace erespacker
 {
 
 class PackAnchor : public IPackNode
 {
 public:
-	PackAnchor() { m_spr_id = ANCHOR_ID; }
-	PackAnchor(int id) { m_spr_id = ANCHOR_ID; }
+	PackAnchor();
+	PackAnchor(int id);
 
 	virtual void PackToLuaString(ebuilder::CodeGenerator& gen,
 		const ee::TexturePacker& tp, float scale) const {}
