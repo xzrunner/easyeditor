@@ -560,8 +560,27 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	Vector screen_pos = m_stage->TransPosProjToScr(proj_pos);
 	wxPoint pos(screen_pos.x, screen_pos.y);
 
+	// editable
+	if (keycode == 'e' || keycode == 'E')
+	{
+		bool editable = !sprites[0]->editable;
+		for (int i = 0, n = sprites.size(); i < n; ++i) {
+			ISprite* spr = sprites[i];
+			spr->editable = editable;
+		}
+	}
+	// visible
+	else if (keycode == 's' || keycode == 'S')
+	{
+		bool visible = !sprites[0]->visiable;
+		for (int i = 0, n = sprites.size(); i < n; ++i) {
+			ISprite* spr = sprites[i];
+			spr->visiable = visible;
+		}
+		SetCanvasDirtySJ::Instance()->SetDirty();
+	}
 	// hori mirror
-	if (keycode == 'h' || keycode == 'H') 
+	else if (keycode == 'h' || keycode == 'H') 
 	{
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			Sprite* spr = sprites[i];
