@@ -565,7 +565,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		bool editable = !sprites[0]->editable;
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ISprite* spr = sprites[i];
+			ee::Sprite* spr = sprites[i];
 			spr->editable = editable;
 		}
 	}
@@ -574,7 +574,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	{
 		bool visible = !sprites[0]->visiable;
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
-			ISprite* spr = sprites[i];
+			ee::Sprite* spr = sprites[i];
 			spr->visiable = visible;
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
