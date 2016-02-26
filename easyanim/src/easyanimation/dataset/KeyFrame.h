@@ -53,10 +53,9 @@ public:
 
 	void OnActive();
 
-private:
-	void GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process) const;
-
-	bool IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const;
+// private:
+// 	void GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite* tween, float process) const;
+// 	bool IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const;
 
 private:
 	int m_time;

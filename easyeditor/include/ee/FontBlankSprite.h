@@ -47,8 +47,6 @@ public:
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	virtual void BuildBounding();
-
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage);
 
 	void LoadFont(const std::string& filename);

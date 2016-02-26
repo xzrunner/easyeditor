@@ -6,6 +6,8 @@
 #include <ee/StageDropTarget.h>
 #include <ee/Sprite.h>
 
+class wxGLContext;
+
 namespace emesh
 {
 
@@ -15,11 +17,7 @@ class Shape;
 class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		ee::LibraryPanel* library);
-// 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-// 		ee::LibraryPanel* library, Sprite* sprite);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx);
 	virtual ~StagePanel();
 
 	//

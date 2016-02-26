@@ -14,40 +14,27 @@
 namespace emesh
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx)
 	: ee::EditPanel(parent, frame)
 	, ee::MultiShapesImpl()
 	, m_background(NULL)
 {
 	m_symbol = new Symbol;
-	Init(NULL);
+
+	ee::EditOP* editop = new ee::ZoomViewOP(this, GetStageImpl(), true);
+	SetEditOP(editop);
+	editop->Release();
+
+	ee::StageCanvas* canvas = new StageCanvas(this, glctx);
+	SetCanvas(canvas);
+	canvas->Release();
+
+// 	if (library) {
+// 		SetDropTarget(new StageDropTarget(this, library));
+// 	}
 
 	InitSubjects();
 }
-
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   ee::LibraryPanel* library)
-	: ee::EditPanel(parent, frame)
-	, ee::MultiShapesImpl()
-	, m_background(NULL)
-{
-	m_symbol = new Symbol;
-	Init(library);
-
-	InitSubjects();
-}
-
-// StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-// 					   ee::LibraryPanel* library, Sprite* sprite)
-// 	: ee::EditPanel(parent, frame)
-// 	, ee::MultiShapesImpl()
-// 	, m_background(NULL)
-// {
-// 	sprite->Retain();
-// 	m_sprite = sprite;
-// 
-// 	init(library);
-// }
 
 StagePanel::~StagePanel()
 {
@@ -107,12 +94,7 @@ void StagePanel::CreateShape()
 
 void StagePanel::Init(ee::LibraryPanel* library)
 {
-	SetEditOP(new ee::ZoomViewOP(this, GetStageImpl(), true));
-	SetCanvas(new StageCanvas(this));
 
-	if (library) {
-		SetDropTarget(new StageDropTarget(this, library));
-	}
 }
 
 void StagePanel::InitSubjects()

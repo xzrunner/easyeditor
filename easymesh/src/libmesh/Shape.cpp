@@ -30,6 +30,7 @@ Shape::Shape(const Shape& shape)
 	, m_tex_filepath(shape.m_tex_filepath)
 	, m_width(shape.m_width)
 	, m_height(shape.m_height)
+	, m_node_radius(shape.m_node_radius)
 {
 }
 

@@ -41,7 +41,7 @@ void EditDialog::InitLayout(wxGLContext* glctx)
 {
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
- 	StagePanel* stage = new StagePanel(splitter, this);
+ 	StagePanel* stage = new StagePanel(splitter, this, glctx);
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
 	stage->SetSymbol(&symbol);
  	m_stage = stage;

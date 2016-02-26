@@ -154,21 +154,6 @@ void FontBlankSprite::Store(Json::Value& val) const
 	val["tid"] = m_tid;
 }
 
-void FontBlankSprite::BuildBounding()
-{
-	if (!m_bounding) {
-		m_bounding = BBFactory::CreateBB(e_obb);
-	}
-	Rect rect(static_cast<float>(width), static_cast<float>(height));
-	if (m_offset.x == 0 && m_offset.y == 0) {
-		m_offset.Set(rect.CenterX(), rect.CenterY());
-	}
-	rect.Scale(m_scale.x, m_scale.y);
-	rect.Shear(m_shear.x, m_shear.y);
-	m_bounding->InitFromRect(rect);
-	m_bounding->SetTransform(m_pos, m_offset, m_angle);
-}
-
 PropertySetting* FontBlankSprite::CreatePropertySetting(EditPanelImpl* stage)
 {
 	return new FontBlankPropertySetting(stage, this);

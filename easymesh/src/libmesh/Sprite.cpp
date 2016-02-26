@@ -73,21 +73,6 @@ void Sprite::Store(Json::Value& val) const
 //	m_symbol->getShape()->Store(val);
 }
 
-void Sprite::BuildBounding()
-{
-	if (!m_bounding) 
-		m_bounding = ee::BBFactory::CreateBB(ee::e_obb);
-	const ee::Symbol& symbol = GetSymbol();
-
-	ee::Rect rect = m_symbol->GetSize();
-	if (m_offset.x == 0 && m_offset.y == 0)
-		m_offset.Set(rect.CenterX(), rect.CenterY());
-	rect.Scale(m_scale.x, m_scale.y);
-	rect.Shear(m_shear.x, m_shear.y);
-	m_bounding->InitFromRect(rect);
-	m_bounding->SetTransform(m_pos, m_offset, m_angle);
-}
-
 void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
 {
 	getShape()->SetTween(begin->getShape(), end->getShape(), process);

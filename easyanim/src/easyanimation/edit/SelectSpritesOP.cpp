@@ -5,8 +5,9 @@
 #include "dataset/KeyFrame.h"
 #include "dataset/DataMgr.h"
 
-#include <easymesh.h>
-#include <easyicon.h>
+#include <ee/EditPanelImpl.h>
+#include <ee/MultiSpritesImpl.h>
+#include <ee/Sprite.h>
 
 namespace eanim
 {
@@ -14,6 +15,7 @@ namespace eanim
 SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, ee::EditPanelImpl* stage, ee::MultiSpritesImpl* sprites_impl, 
 								 ee::EditCMPT* callback/* = NULL*/)
 	: ee::SelectSpritesOP(wnd, stage, sprites_impl, callback)
+	, m_open_symbol(wnd, stage, sprites_impl)
 {
 }
 
@@ -22,13 +24,11 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
 		return true;
 
-// 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-// 	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
-// 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
-// 	{
-// 		emesh::EditDialog dlg(m_wnd, sprite);
-// 		dlg.ShowModal();
-// 	}
+	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
+	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+	if (selected) {
+		m_open_symbol.Open(selected);
+	}
 
 	return false;
 }

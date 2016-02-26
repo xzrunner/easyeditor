@@ -4,6 +4,7 @@
 #include "Mesh.h"
 
 #include <ee/FileHelper.h>
+#include <ee/panel_msg.h>
 
 #include <fstream>
 
@@ -71,6 +72,8 @@ void FileIO::Load(const char* filepath, Symbol* symbol)
 		symbol->SetShape(shape);
 		shape->Release();
 	}
+
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 }

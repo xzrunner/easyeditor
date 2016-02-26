@@ -11,7 +11,7 @@ class StagePanel;
 class StageCanvas : public ee::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* panel);
+	StageCanvas(StagePanel* panel, wxGLContext* glctx = NULL);
 
 protected:
 	virtual void OnDrawSprites() const;

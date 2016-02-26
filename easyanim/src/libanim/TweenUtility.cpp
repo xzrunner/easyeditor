@@ -2,6 +2,7 @@
 
 #include <easyscale9.h>
 #include <easyicon.h>
+#include <easymesh.h>
 
 namespace eanim
 {
@@ -99,6 +100,13 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 		assert(icon_e && icon_t);
 		float proc = (icon_e->GetProcess() - icon_s->GetProcess()) * process + icon_s->GetProcess();
 		icon_t->SetProcess(proc);
+	}
+	else if (emesh::Sprite* mesh_s = dynamic_cast<emesh::Sprite*>(start))
+	{
+		emesh::Sprite* mesh_e = dynamic_cast<emesh::Sprite*>(end);
+		emesh::Sprite* mesh_t = dynamic_cast<emesh::Sprite*>(tween);
+		assert(mesh_e && mesh_t);
+		mesh_t->SetTween(mesh_e, mesh_t, process);
 	}
 }
 

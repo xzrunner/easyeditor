@@ -183,27 +183,27 @@ void KeyFrame::OnActive()
 	}
 }
 
-void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, 
-							  ee::Sprite* tween, float process) const
-{
-	eanim::TweenUtility::GetTweenSprite(start, end, tween, process);
-
-	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
-		*mid = dynamic_cast<emesh::Sprite*>(tween),
-		*e = static_cast<emesh::Sprite*>(end);
-	if (s && mid && e) {
-		mid->SetTween(s, e, process);
-	}
-}
-
-bool KeyFrame::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const
-{
-	if (eanim::TweenUtility::IsTweenMatched(s0, s1) &&
-		!m_skeleton.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
-		return true;
-	} else {
-		return false;
-	}
-}
+//void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, 
+//							  ee::Sprite* tween, float process) const
+//{
+//	eanim::TweenUtility::GetTweenSprite(start, end, tween, process);
+//
+//	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
+//		*mid = dynamic_cast<emesh::Sprite*>(tween),
+//		*e = static_cast<emesh::Sprite*>(end);
+//	if (s && mid && e) {
+//		mid->SetTween(s, e, process);
+//	}
+//}
+//
+//bool KeyFrame::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const
+//{
+//	if (eanim::TweenUtility::IsTweenMatched(s0, s1) &&
+//		!m_skeleton.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
+//		return true;
+//	} else {
+//		return false;
+//	}
+//}
 
 } // eanim

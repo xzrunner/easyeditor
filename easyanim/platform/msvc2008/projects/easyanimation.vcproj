@@ -631,6 +631,14 @@
 					RelativePath="..\..\..\src\easyanimation\edit\KeyDownHandler.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\OpenSymbolDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\OpenSymbolDialog.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

@@ -1,6 +1,8 @@
 #ifndef _EASYANIM_SELECT_SPRITES_OP_H_
 #define _EASYANIM_SELECT_SPRITES_OP_H_
 
+#include "OpenSymbolDialog.h"
+
 #include <ee/SelectSpritesOP.h>
 
 namespace eanim
@@ -17,6 +19,9 @@ public:
 protected:
 	virtual void PasteSprToClipboard(const ee::Sprite* spr, Json::Value& value) const;
 	virtual void CopySprFromClipboard(ee::Sprite* spr, const Json::Value& value) const;
+
+private:
+	OpenSymbolDialog m_open_symbol;
 
 }; // SelectSpritesOP
 
