@@ -139,6 +139,7 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	case ee::MSG_INSERT_SHAPE:
 		if (Shape* shape = m_symbol->getShape()) {
 			if (static_cast<EditShape*>(shape)->InsertShape((ee::Shape*)ud)) {
+				UpdateSymbol();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}

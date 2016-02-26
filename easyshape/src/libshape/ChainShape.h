@@ -12,7 +12,7 @@ class ChainShape : public ee::Shape
 public:
 	ChainShape();
 	ChainShape(const ChainShape& chain);
-	ChainShape(const std::vector<ee::Vector>& vertices, bool isLoop);
+	ChainShape(const std::vector<ee::Vector>& vertices, bool loop);
 
 	//
 	// IObject interface
@@ -42,8 +42,8 @@ public:
 	virtual void Load(const std::vector<ee::Vector>& vertices);
 	virtual void refresh() {}
 
-	void SetClosed(bool isClose) { m_isLoop = isClose; }
-	bool IsClosed() const { return m_isLoop; }
+	void SetClosed(bool Close) { m_loop = Close; }
+	bool IsClosed() const { return m_loop; }
 
 	const std::vector<ee::Vector>& GetVertices() const { return m_vertices; }
 
@@ -52,7 +52,9 @@ protected:
 
 protected:
 	std::vector<ee::Vector> m_vertices;
-	bool m_isLoop;
+	bool m_loop;
+
+	bool m_draw_dir;
 
 	ee::Rect m_rect;
 

@@ -16,12 +16,15 @@ namespace eshape
 PolygonShape::PolygonShape()
 	: m_material(NULL)
 {
+	m_draw_dir = false;
 }
 
 PolygonShape::PolygonShape(const PolygonShape& polygon)
 	: ChainShape(polygon)
 	, m_material(NULL)
 {
+	m_draw_dir = false;
+
 	if (polygon.m_material) {
 		m_material = polygon.m_material;
 		polygon.m_material->Retain();
@@ -32,6 +35,8 @@ PolygonShape::PolygonShape(const std::vector<ee::Vector>& vertices)
 	: ChainShape(vertices, true)
 	, m_material(NULL)
 {
+	m_draw_dir = false;
+
 	SetMaterialColor(ee::LIGHT_GREEN);
 }
 
@@ -96,7 +101,7 @@ void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir
 		m_vertices[i].y = value["vertices"]["y"][i].asDouble();
 	}
 
-	m_isLoop = true;
+	m_loop = true;
 
 	ChainShape::InitBounding();
 

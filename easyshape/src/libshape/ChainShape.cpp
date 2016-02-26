@@ -10,20 +10,23 @@ namespace eshape
 
 ChainShape::ChainShape()
 {
-	m_isLoop = false;
+	m_loop = false;
+	m_draw_dir = true;
 }
 
 ChainShape::ChainShape(const ChainShape& chain)
 {
 	copy(chain.m_vertices.begin(), chain.m_vertices.end(), back_inserter(m_vertices));
-	m_isLoop = chain.m_isLoop;
+	m_loop = chain.m_loop;
+	m_draw_dir = chain.m_draw_dir;
 	m_rect = chain.m_rect;
 }
 
-ChainShape::ChainShape(const std::vector<ee::Vector>& vertices, bool isLoop)
+ChainShape::ChainShape(const std::vector<ee::Vector>& vertices, bool loop)
 	: m_vertices(vertices)
 {
-	m_isLoop = isLoop;
+	m_loop = loop;
+	m_draw_dir = !loop;
 	InitBounding();
 }
 
@@ -75,7 +78,7 @@ bool ChainShape::IsIntersect(const ee::Rect& rect) const
 			return true;
 	}
 
-	if (m_isLoop && ee::Math2D::IsSegmentIntersectRect(m_vertices.front(), m_vertices.back(), rect))
+	if (m_loop && ee::Math2D::IsSegmentIntersectRect(m_vertices.front(), m_vertices.back(), rect))
 		return true;
 
 	return false;
@@ -93,11 +96,13 @@ void ChainShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	if (m_vertices.empty()) return;
 
-	ee::PrimitiveDraw::DrawPolyline(mt, m_vertices, color.multi, m_isLoop);
+	ee::PrimitiveDraw::DrawPolyline(mt, m_vertices, color.multi, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
 		ee::PrimitiveDraw::DrawCircles(m_vertices, ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 	}
-	ee::PrimitiveDraw::DrawCircle(m_vertices[0], 10, true, 2, color.multi);
+	if (m_draw_dir) {
+		ee::PrimitiveDraw::DrawCircle(m_vertices[0], 10, true, 2, color.multi);
+	}
 }
 
 ee::PropertySetting* ChainShape::CreatePropertySetting(ee::EditPanelImpl* stage)
@@ -116,7 +121,8 @@ void ChainShape::LoadFromFile(const Json::Value& value, const std::string& dir)
 		m_vertices[i].y = value["vertices"]["y"][i].asDouble();
 	}
 
-	m_isLoop = value["closed"].asBool();
+	m_loop = value["closed"].asBool();
+	m_draw_dir = !m_loop;
 
 	InitBounding();
 }

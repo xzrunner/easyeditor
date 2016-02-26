@@ -35,8 +35,8 @@ public:
 	virtual void Update() {}
 	virtual void Refresh() {}
 
-	void QueryNode(const ee::Vector& p, std::vector<Node*>& nodes);
-	void QueryNode(const ee::Rect& r, std::vector<Node*>& nodes);
+	Node* PointQueryNode(const ee::Vector& p);
+	void RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes);
 
 	void DrawInfoUV() const;
 	void DrawInfoXY() const;

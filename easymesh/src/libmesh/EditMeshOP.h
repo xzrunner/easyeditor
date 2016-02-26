@@ -21,18 +21,16 @@ public:
 	virtual bool OnDraw() const;
 
 private:
-	void translasteNode(const ee::Vector& offset);
-	void rotateNode(const ee::Vector& dst);
+	void TranslasteNode(const ee::Vector& offset);
+	void RotateNode(const ee::Vector& dst);
 
 private:
-	StagePanel* m_stage;
+	ee::Vector m_last_pos;
 
-	ee::Vector m_lastPos;
-
-	bool m_bRightPress;
+	bool m_right_press;
 	ee::Vector m_center;
 
-	bool m_selCenter;
+	bool m_select_center;
 
 }; // EditMeshOP
 

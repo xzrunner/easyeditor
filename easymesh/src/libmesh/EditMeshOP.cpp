@@ -8,6 +8,7 @@
 #include <ee/Matrix.h>
 #include <ee/PrimitiveDraw.h>
 #include <ee/FetchAllVisitor.h>
+#include <ee/EditPanelImpl.h>
 
 namespace emesh
 {
@@ -17,27 +18,26 @@ static const int CENTER_EDGE = 10;
 
 EditMeshOP::EditMeshOP(StagePanel* stage)
 	: SelectNodesOP(stage)
-	, m_stage(stage)
-	, m_bRightPress(false)
-	, m_selCenter(false)
+	, m_right_press(false)
+	, m_select_center(false)
 {
-	m_lastPos.SetInvalid();
+	m_last_pos.SetInvalid();
 	m_center.Set(0, 0);
 }
 
 bool EditMeshOP::OnMouseLeftDown(int x, int y)
 {
-	m_lastPos = m_stage->TransPosScrToProj(x, y);
-	if (ee::Math2D::GetDistance(m_lastPos, m_center) < CENTER_RADIUS)
+	m_last_pos = m_stage->TransPosScrToProj(x, y);
+	if (ee::Math2D::GetDistance(m_last_pos, m_center) < CENTER_RADIUS)
 	{
-		m_selCenter = true;
+		m_select_center = true;
 		return false;
 	}
 
 	if (SelectNodesOP::OnMouseLeftDown(x, y))
 		return true;
 
-	m_bRightPress = false;
+	m_right_press = false;
 
 	return false;
 }
@@ -47,7 +47,7 @@ bool EditMeshOP::OnMouseLeftUp(int x, int y)
 	if (SelectNodesOP::OnMouseLeftUp(x, y))
 		return true;
 
-	m_selCenter = false;
+	m_select_center = false;
 
 	return false;
 }
@@ -57,16 +57,16 @@ bool EditMeshOP::OnMouseRightDown(int x, int y)
 	if (SelectNodesOP::OnMouseRightDown(x, y))
 		return true;
 
-	m_lastPos = m_stage->TransPosScrToProj(x, y);
+	m_last_pos = m_stage->TransPosScrToProj(x, y);
 
-	m_bRightPress = true;
+	m_right_press = true;
 
 	return false;
 }
 
 bool EditMeshOP::OnMouseDrag(int x, int y)
 {
-	if (m_selCenter)
+	if (m_select_center)
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_center = pos;
@@ -77,17 +77,17 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 	if (SelectNodesOP::OnMouseDrag(x, y))
 		return true;
 
-	Shape* shape = m_stage->GetShape();
+	Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape();
 	if (!shape) return false;
 
 	if (!m_selection.IsEmpty())
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		if (m_bRightPress)
-			rotateNode(pos);
+		if (m_right_press)
+			RotateNode(pos);
 		else
-			translasteNode(pos - m_lastPos);
-		m_lastPos = pos;
+			TranslasteNode(pos - m_last_pos);
+		m_last_pos = pos;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -96,7 +96,7 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 
 bool EditMeshOP::OnDraw() const
 {
-	if (Shape* shape = m_stage->GetShape())
+	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape())
 	{
 		shape->DrawTexture(ee::Matrix());
 		shape->DrawInfoXY();
@@ -111,7 +111,7 @@ bool EditMeshOP::OnDraw() const
 	return false;
 }
 
-void EditMeshOP::translasteNode(const ee::Vector& offset)
+void EditMeshOP::TranslasteNode(const ee::Vector& offset)
 {
 	std::vector<Node*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
@@ -121,9 +121,9 @@ void EditMeshOP::translasteNode(const ee::Vector& offset)
 	}
 }
 
-void EditMeshOP::rotateNode(const ee::Vector& dst)
+void EditMeshOP::RotateNode(const ee::Vector& dst)
 {
-	float angle = ee::Math2D::GetAngleInDirection(m_center, m_lastPos, dst);
+	float angle = ee::Math2D::GetAngleInDirection(m_center, m_last_pos, dst);
 	std::vector<Node*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)

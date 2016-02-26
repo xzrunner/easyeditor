@@ -49,28 +49,37 @@ Shape::~Shape()
 	ClearTriangles();
 }
 
-void Shape::QueryNode(const ee::Vector& p, std::vector<Node*>& nodes)
+Node* Shape::PointQueryNode(const ee::Vector& p)
 {
+	Node* node = NULL;
+	float nearest = FLT_MAX;
+	for (int i = 0, n = m_tris.size(); i < n; ++i) {
+		Triangle* tri = m_tris[i];
+		for (int j = 0; j < 3; ++j) {
+			float dis = ee::Math2D::GetDistance(tri->nodes[j]->xy, p);
+			if (dis < m_node_radius && dis < nearest) {
+				nearest = dis;
+				node = tri->nodes[j];
+			}
+		}
+	}
+
+	return node;
+}
+
+void Shape::RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes)
+{
+	std::set<Node*> unique;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j) {
-			if (ee::Math2D::GetDistance(tri->nodes[j]->xy, p) < m_node_radius) {
-				nodes.push_back(tri->nodes[j]);
+			Node* node = tri->nodes[j];
+			if (ee::Math2D::IsPointInRect(node->xy, r) &&
+				unique.find(node) == unique.end()) {
+				nodes.push_back(node);
+				unique.insert(node);
 			}
-		}
-	}
-}
-
-void Shape::QueryNode(const ee::Rect& r, std::vector<Node*>& nodes)
-{
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int j = 0; j < 3; ++j)
-		{
-			if (ee::Math2D::IsPointInRect(tri->nodes[j]->xy, r))
-				nodes.push_back(tri->nodes[j]);
 		}
 	}
 }

@@ -19,12 +19,16 @@ CosineShape::CosineShape()
 CosineShape::CosineShape(const CosineShape& curve)
 	: ChainShape(curve)
 {
+	m_draw_dir = false;
+
 	m_midPoints = curve.m_midPoints;
 }
 
 CosineShape::CosineShape(const std::vector<ee::Vector>& vertices)
 	: ChainShape(vertices, false)
 {
+	m_draw_dir = false;
+
 	setMidPoints();
 }
 
@@ -50,7 +54,7 @@ void CosineShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	if (m_vertices.empty()) return;
 
-	ee::PrimitiveDraw::DrawPolyline(m_midPoints, color.multi, m_isLoop);
+	ee::PrimitiveDraw::DrawPolyline(m_midPoints, color.multi, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
 		ee::PrimitiveDraw::DrawCircles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 	}

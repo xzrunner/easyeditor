@@ -28,12 +28,10 @@ protected:
 	NodeSelection m_selection;
 
 private:
-	StagePanel* m_stage;
-
 	ee::Vector m_first_pos;
 
 	// To disable mouse able when press ctrl and window query
-	bool m_bDraggable;
+	bool m_draggable;
 
 }; // SelectNodesOP
 

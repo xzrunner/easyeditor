@@ -372,7 +372,7 @@ void Mesh::Reset()
 void Mesh::Clear()
 {
 	//	m_region.nodes.clear();
-	RefreshTriangles();
+	ClearTriangles();
 }
 
 void Mesh::RefreshTriangles()
@@ -448,8 +448,11 @@ void Mesh::LoadFromTriangulation(const std::vector<ee::Vector>& tris)
 			std::map<ee::Vector, Node*, ee::VectorCmp>::iterator itr 
 				= map2Node.find(tris[ptr++]);
 			assert(itr != map2Node.end());
-			if (itr->second == &null)
+			if (itr->second == &null) {
 				itr->second = new Node(itr->first, m_width, m_height);
+			} else {
+				itr->second->Retain();
+			}
 			tri->nodes[j] = itr->second;
 		}
 		m_tris.push_back(tri);

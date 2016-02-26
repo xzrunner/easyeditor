@@ -9,22 +9,29 @@ namespace eshape
 
 BezierShape::BezierShape()
 {
+	m_draw_dir = false;
 }
 
 BezierShape::BezierShape(const BezierShape& bezier)
 {
+	m_draw_dir = false;
+
 	CopyCtrlNodes(bezier.m_control_nodes);
 	createCurve();
 }
 
 BezierShape::BezierShape(const ee::Vector points[4])
 {
+	m_draw_dir = false;
+
 	CopyCtrlNodes(points);
 	createCurve();
 }
 
 BezierShape::BezierShape(const ee::Vector& start, const ee::Vector& end)
 {
+	m_draw_dir = false;
+
 	m_control_nodes[0] = start;
 	m_control_nodes[3] = end;
 
