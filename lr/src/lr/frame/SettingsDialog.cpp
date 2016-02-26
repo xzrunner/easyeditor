@@ -9,6 +9,7 @@
 #include <ee/HSLColorSettingDlg.h>
 
 #include <easyterrain2d.h>
+#include <easycomplex.h>
 
 namespace lr
 {
@@ -189,9 +190,7 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 	std::vector<ee::Sprite*> sprites;
 	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(sprites[i])) {
-			const_cast<eterrain2d::Symbol&>(terr->GetSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);
-		}
+		SetTerrain2dUpdate(sprites[i], cfg->m_terrain2d_anim);
 	}
 }
 
@@ -225,6 +224,17 @@ void SettingDialog::OnChangeScreenAddColor(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK) {
 		col = dlg.GetColor();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+}
+
+void SettingDialog::SetTerrain2dUpdate(ee::Sprite* spr, bool open)
+{
+	if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(spr)) {
+		const_cast<eterrain2d::Symbol&>(terr->GetSymbol()).SetUpdateOpen(open);
+	} else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(spr)) {
+		for (int i = 0, n = complex->GetSymbol().m_sprites.size(); i < n; ++i) {
+			SetTerrain2dUpdate(complex->GetSymbol().m_sprites[i], open);
+		}
 	}
 }
 

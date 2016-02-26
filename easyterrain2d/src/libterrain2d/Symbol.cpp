@@ -13,7 +13,7 @@ namespace eterrain2d
 
 Symbol::Symbol()
 	: m_time(0)
-	, m_update(true)
+	, m_update(false)
 	, m_angle(0)
 {	
 }

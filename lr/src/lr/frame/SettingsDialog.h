@@ -3,6 +3,8 @@
 
 #include <wx/wx.h>
 
+namespace ee { class Sprite; }
+
 namespace lr
 {
 
@@ -24,6 +26,8 @@ private:
 
 	void OnChangeScreenMultiColor(wxCommandEvent& event);
 	void OnChangeScreenAddColor(wxCommandEvent& event);
+
+	void SetTerrain2dUpdate(ee::Sprite* spr, bool open);
 
 private:
 	StagePanel* m_stage;
