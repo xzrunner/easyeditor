@@ -51,7 +51,7 @@ void KeyFrame::CopyFromOther(const KeyFrame* src)
 	}
 
 	// skeleton
-	m_skeletonData.CopyFrom(m_sprites, src->m_skeletonData);
+	m_skeleton.CopyFrom(m_sprites, src->m_skeleton);
 	// todo spr's ud
 }
 
@@ -69,7 +69,7 @@ void KeyFrame::Insert(ee::Sprite* sprite)
 
 bool KeyFrame::Remove(ee::Sprite* sprite) 
 {
-	m_skeletonData.RemoveSprite(sprite);
+	m_skeleton.RemoveSprite(sprite);
 	if (m_layer) {
 		m_layer->GetSpriteObserver().remove(sprite);
 	}
@@ -145,7 +145,7 @@ void KeyFrame::Clear()
 }
 
 void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
-							   std::vector<ee::Sprite*>& tween, float process) const
+							  std::vector<ee::Sprite*>& tween, float process) const
 {
 // 	// old
 // 	for (int i = 0, n = start->Size(); i < n; ++i)
@@ -162,12 +162,14 @@ void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end,
 // 		}
 // 	}
 
-	// new
-	eanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
-
   	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
   		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
-	SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
+	if (!s_skeleton.Empty() && !e_skeleton.Empty()) {
+		SkeletonData::GetTweenSprites(s_skeleton, e_skeleton, tween, process);
+	} else {
+		// new
+		eanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
+	}
 }
 
 void KeyFrame::OnActive()
@@ -197,7 +199,7 @@ void KeyFrame::GetTweenSprite(ee::Sprite* start, ee::Sprite* end,
 bool KeyFrame::IsTweenMatched(const ee::Sprite* s0, const ee::Sprite* s1) const
 {
 	if (eanim::TweenUtility::IsTweenMatched(s0, s1) &&
-		!m_skeletonData.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
+		!m_skeleton.IsContainSprite(const_cast<ee::Sprite*>(s0))) {
 		return true;
 	} else {
 		return false;

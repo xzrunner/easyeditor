@@ -36,6 +36,8 @@ public:
 	void FixJoint(ee::Sprite* sprite);
 	void UpdateJoint(ee::Sprite* sprite, float dAngle = 0);
 
+	bool Empty() const { return m_map_joints.empty(); }
+
 	static void GetTweenSprites(SkeletonData& start, SkeletonData& end, 
 		std::vector<ee::Sprite*>& tween, float process);
 

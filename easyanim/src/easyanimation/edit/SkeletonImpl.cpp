@@ -121,7 +121,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 	}
 }
 
-void SkeletonImpl::OnDraw() const
+void SkeletonImpl::OnDraw(const ee::Camera& cam) const
 {
 	ee::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
 
@@ -141,10 +141,11 @@ void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, int x, int y)
 	}
 
 	Joint* joint = skeleton->QueryJointByPos(m_first_pos);
-	if (joint)
-		menu.Append(StagePanel::Menu_DelJointNode, "Add Joint");
-	else
-		menu.Append(StagePanel::Menu_AddJointNode, "Del Joint");
+	if (joint) {
+		menu.Append(StagePanel::Menu_DelJointNode, "Del Joint");
+	} else {
+		menu.Append(StagePanel::Menu_AddJointNode, "Add Joint");
+	}
 }
 
 ee::ArrangeSpriteState* 

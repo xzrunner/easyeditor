@@ -3,6 +3,7 @@
 #include "dataset/Joint.h"
 
 #include <ee/Sprite.h>
+#include <ee/panel_msg.h>
 
 #include <queue>
 
@@ -219,6 +220,7 @@ void SkeletonData::Absorb(ee::Sprite* sprite)
 					bool success = p->Connect(c);
 					if (success) {
 						Translate(c->m_sprite, pp - cp);
+						ee::SetCanvasDirtySJ::Instance()->SetDirty();
 						return;
 					}
 				}

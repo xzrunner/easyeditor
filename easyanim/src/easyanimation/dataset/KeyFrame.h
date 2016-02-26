@@ -44,7 +44,7 @@ public:
 
 	void Clear();
 
-	SkeletonData& GetSkeletonData() { return m_skeletonData; }
+	SkeletonData& GetSkeletonData() { return m_skeleton; }
 
 	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<ee::Sprite*>& tween, float process) const;
 
@@ -67,7 +67,7 @@ private:
 
 	Layer* m_layer;
 
-	SkeletonData m_skeletonData;
+	SkeletonData m_skeleton;
 
 	int m_id;
 

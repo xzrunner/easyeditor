@@ -102,6 +102,8 @@ void RightPopupMenu::CreateDebugMenu(wxMenu& menu)
 	menu.Append(MENU_INSERT_TO_DTEX, "Insert To DTex");
 	m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_REMOVE_FROM_DTEX);
 	menu.Append(MENU_REMOVE_FROM_DTEX, "Remove From DTex");
+
+	menu.AppendSeparator();
 #endif
 }
 
