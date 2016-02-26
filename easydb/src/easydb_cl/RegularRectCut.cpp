@@ -64,7 +64,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			eimage::RegularRectCut cut(*image);
 			cut.AutoCut();
 
-			std::cout << ee::StringHelper::Format("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea()) << std::endl;
+			std::cout << ee::StringHelper::Format("File: %s, Left: %d, Used: %d", filepath.c_str(), cut.GetLeftArea(), cut.GetUseArea()) << std::endl;
 
 			std::string filename = ee::FileHelper::GetRelativePath(src_dir, filepath);
 			filename = filename.substr(0, filename.find_last_of('.'));
@@ -77,7 +77,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 				const eimage::Rect& r = result[i];
 				const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
-				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);
+				std::string out_path = ee::StringHelper::Format("%s\\%s#%d#%d#%d#%d#", dst_dir.c_str(), filename.c_str(), r.x, r.y, r.w, r.h);
 				ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, out_path, ee::ImageSaver::e_png);
 				delete[] pixels;
 			}

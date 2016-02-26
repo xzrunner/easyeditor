@@ -91,7 +91,7 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 				ss.DrawSprite(sprite, true, width, height);
 
 				std::string name = ee::FileHelper::GetFilename(filepath);
-				std::string outpath = ee::StringHelper::Format("%s\\%s_%d.png", dst_dir, name, deg);
+				std::string outpath = ee::StringHelper::Format("%s\\%s_%d.png", dst_dir.c_str(), name.c_str(), deg);
 				ss.SaveToFile(outpath, width, height);
 			}
 

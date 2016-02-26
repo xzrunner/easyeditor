@@ -310,7 +310,7 @@ void FileIO::LoadValue(const Json::Value& value, int count,
 {
 	if (value["value"].size() != count) {
 		std::string msg = ee::StringHelper::Format("uniform [%s] value not fit type [%s]\n", 
-			uniform->GetName(), TransUTypeToStr(uniform->GetType()));
+			uniform->GetName().c_str(), TransUTypeToStr(uniform->GetType()).c_str());
 		throw ee::Exception(msg);
 	}
 

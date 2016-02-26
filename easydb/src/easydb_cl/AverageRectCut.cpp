@@ -119,7 +119,7 @@ void AverageRectCut::RectCutImage(const std::string& src_dir, const std::string&
 				h = ymax - ymin;
 			const uint8_t* pixels = img_cut.Clip(xmin, xmax, ymin, ymax);
 
-			std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename, xmin, ymin, w, h);
+			std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), xmin, ymin, w, h);
 			std::string img_out_path = out_img_dir + "\\" + img_name;
 			ee::ImageSaver::StoreToFile(pixels, w, h, 4, img_out_path, ee::ImageSaver::e_png);
 			delete[] pixels;

@@ -81,7 +81,7 @@ void CocoPacker::ResolveSymbols()
 	{
 		const ee::Symbol* symbol = symbols[i];
 
-		std::cout << ee::StringHelper::Format("[%d/%d] file: %s\n", i, n, symbol->GetFilepath());
+		std::cout << ee::StringHelper::Format("[%d/%d] file: %s\n", i, n, symbol->GetFilepath().c_str());
 
 		if (const ee::ImageSymbol* image = dynamic_cast<const ee::ImageSymbol*>(symbol))
 		{

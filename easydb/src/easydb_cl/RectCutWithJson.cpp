@@ -109,7 +109,7 @@ void RectCutWithJson::RectCutImage(const std::string& src_dir, const std::string
 		const eimage::Rect& r = rects[i];
 		const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
-		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename, r.x, r.y, r.w, r.h);
+		std::string img_name = ee::StringHelper::Format("%s#%d#%d#%d#%d#.png", filename.c_str(), r.x, r.y, r.w, r.h);
 		std::string img_out_path = out_img_dir + "\\" + img_name;
 		ee::ImageSaver::StoreToFile(pixels, r.w, r.h, 4, img_out_path, ee::ImageSaver::e_png);
 		delete[] pixels;
