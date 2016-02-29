@@ -87,23 +87,24 @@ void TwoPassCanvas::OnDrawWhole() const
 		// Draw to Target
 		//////////////////////////////////////////////////////////////////////////
 		if (IsDirty()) {
-			ScreenCache::Instance()->Bind();
+//			ScreenCache::Instance()->Bind();
 
-			glClearColor(0, 0, 0, 0);
+//			glClearColor(0, 0, 0, 0);
+			glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			OnDrawSprites();
 
-			ScreenCache::Instance()->Unbind();
+//			ScreenCache::Instance()->Unbind();
 		}
 
 		//////////////////////////////////////////////////////////////////////////
 		// Draw to Screen
 		//////////////////////////////////////////////////////////////////////////
-		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		ScreenCache::Instance()->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
+// 		glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, m_bg_color.a);
+// 		glClear(GL_COLOR_BUFFER_BIT);
+// 
+// 		ScreenCache::Instance()->DrawToScreen(&_before_draw, (ScreenStyle*)(&m_scr_style));
  	} 
  	//else 
  	//{

@@ -7,6 +7,8 @@
 #include "SpriteShader.frag"
 #include "SpriteFasterShader.frag"
 
+#include <sl_sprite.h>
+
 #include <gl/glew.h>
 
 #include <string>
@@ -52,115 +54,144 @@ SpriteShader::~SpriteShader()
 
 void SpriteShader::Load()
 {
-	LoadShader();
+	//////////////////////////////////////////////////////////////////////////
+ 	sl_sprite_load();
+// 	sl_sprite_modelview(0, 0, 1, 1);
+	//////////////////////////////////////////////////////////////////////////
 
-	m_projection = glGetUniformLocation(m_prog, "u_projection");
-	m_model_view = glGetUniformLocation(m_prog, "u_modelview");
-
-	InitBuffers();
-
-	if (!m_vb) {
-		m_vb = new float[m_quad_size * m_max_commbine];
-	}
+// 	LoadShader();
+// 
+// 	m_projection = glGetUniformLocation(m_prog, "u_projection");
+// 	m_model_view = glGetUniformLocation(m_prog, "u_modelview");
+// 
+// 	InitBuffers();
+// 
+// 	if (!m_vb) {
+// 		m_vb = new float[m_quad_size * m_max_commbine];
+// 	}
 }
 
 void SpriteShader::Unload()
 {
-	glDeleteBuffers(1, &m_vertex_buffer);
-	glDeleteBuffers(1, &m_index_buffer);
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_unload();
+	//////////////////////////////////////////////////////////////////////////
 
-	delete[] m_vb;
-	m_vb = NULL;
+// 	glDeleteBuffers(1, &m_vertex_buffer);
+// 	glDeleteBuffers(1, &m_index_buffer);
+// 
+// 	delete[] m_vb;
+// 	m_vb = NULL;
 }
 
 void SpriteShader::Bind()
 {
-	glUseProgram(m_prog);
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_bind();
+	//////////////////////////////////////////////////////////////////////////
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_index_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
-
-	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(0));
-
-	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(8));
-
-	glEnableVertexAttribArray(ATTRIB_COLOR);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(16));
-
-	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
-	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(20));  
-
-	glEnableVertexAttribArray(ATTRIB_R_TRANS);
-	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(24));  
-
-	glEnableVertexAttribArray(ATTRIB_G_TRANS);
-	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(28));  
-
-	glEnableVertexAttribArray(ATTRIB_B_TRANS);
-	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(32));  
+// 	glUseProgram(m_prog);
+// 
+// 	glEnable(GL_BLEND);
+// 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+// 
+// 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_index_buffer);
+// 	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
+// 
+// 	glEnableVertexAttribArray(ATTRIB_VERTEX);
+// 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(0));
+// 
+// 	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
+// 	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, m_vertex_size, BUFFER_OFFSET(8));
+// 
+// 	glEnableVertexAttribArray(ATTRIB_COLOR);
+// 	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(16));
+// 
+// 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
+// 	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(20));  
+// 
+// 	glEnableVertexAttribArray(ATTRIB_R_TRANS);
+// 	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(24));  
+// 
+// 	glEnableVertexAttribArray(ATTRIB_G_TRANS);
+// 	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(28));  
+// 
+// 	glEnableVertexAttribArray(ATTRIB_B_TRANS);
+// 	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, m_vertex_size, BUFFER_OFFSET(32));  
 }
 
 void SpriteShader::Unbind()
 {
-// 	SetTexID(0);
-// 	SetFboID(0);
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_unbind();
+	//////////////////////////////////////////////////////////////////////////
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glDisableVertexAttribArray(ATTRIB_VERTEX);
-	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glDisableVertexAttribArray(ATTRIB_COLOR);
-	glDisableVertexAttribArray(ATTRIB_ADDITIVE);
-	glDisableVertexAttribArray(ATTRIB_R_TRANS);
-	glDisableVertexAttribArray(ATTRIB_G_TRANS);
-	glDisableVertexAttribArray(ATTRIB_B_TRANS);
+//// 	SetTexID(0);
+//// 	SetFboID(0);
+//
+//	glBindBuffer(GL_ARRAY_BUFFER, 0);
+//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//	glDisableVertexAttribArray(ATTRIB_VERTEX);
+//	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
+//	glDisableVertexAttribArray(ATTRIB_COLOR);
+//	glDisableVertexAttribArray(ATTRIB_ADDITIVE);
+//	glDisableVertexAttribArray(ATTRIB_R_TRANS);
+//	glDisableVertexAttribArray(ATTRIB_G_TRANS);
+//	glDisableVertexAttribArray(ATTRIB_B_TRANS);
 }
 
 void SpriteShader::SetModelView(const Vector& offset, float scale)
 {
-	m_mat_modelview.SetScale(scale, scale);
-	m_mat_modelview.Translate(offset.x, offset.y);
-	m_is_mat_dirty = true;
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_modelview(offset.x, offset.y, scale, scale);
+	//////////////////////////////////////////////////////////////////////////
+
+// 	m_mat_modelview.SetScale(scale, scale);
+// 	m_mat_modelview.Translate(offset.x, offset.y);
+// 	m_is_mat_dirty = true;
 }
 
 void SpriteShader::SetProjection(int width, int height)
 {
-	float hw = width * 0.5f;
-	float hh = height * 0.5f;
-	m_mat_projection.Orthographic(-hw, hw, -hh, hh, 1, -1);
-	m_is_mat_dirty = true;
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_projection(width, height);
+	//////////////////////////////////////////////////////////////////////////
+
+// 	float hw = width * 0.5f;
+// 	float hh = height * 0.5f;
+// 	m_mat_projection.Orthographic(-hw, hw, -hh, hh, 1, -1);
+// 	m_is_mat_dirty = true;
 }
 
 void SpriteShader::Commit()
 {
-	if (m_count == 0) {
-		return;
-	}
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_commit();
+	//////////////////////////////////////////////////////////////////////////
 
-	if (m_is_mat_dirty) {
-		glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.GetElements());
-		glUniformMatrix4fv(m_projection, 1, 0, m_mat_projection.GetElements());
-		m_is_mat_dirty = false;
-	}
-
-	static int last_count = 0;
-	if (m_open_buffer_data) {
-		last_count = m_count;
-		glBufferData(GL_ARRAY_BUFFER, m_count * m_quad_size * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
-	}
-
-	if (!m_open_buffer_data) {
-		glDrawElements(GL_TRIANGLES, 6 * last_count, GL_UNSIGNED_SHORT, 0);
-	} else {
-		glDrawElements(GL_TRIANGLES, 6 * m_count, GL_UNSIGNED_SHORT, 0);
-	}
-
-	m_count = 0;
+// 	if (m_count == 0) {
+// 		return;
+// 	}
+// 
+// 	if (m_is_mat_dirty) {
+// 		glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.GetElements());
+// 		glUniformMatrix4fv(m_projection, 1, 0, m_mat_projection.GetElements());
+// 		m_is_mat_dirty = false;
+// 	}
+// 
+// 	static int last_count = 0;
+// 	if (m_open_buffer_data) {
+// 		last_count = m_count;
+// 		glBufferData(GL_ARRAY_BUFFER, m_count * m_quad_size * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+// 	}
+// 
+// 	if (!m_open_buffer_data) {
+// 		glDrawElements(GL_TRIANGLES, 6 * last_count, GL_UNSIGNED_SHORT, 0);
+// 	} else {
+// 		glDrawElements(GL_TRIANGLES, 6 * m_count, GL_UNSIGNED_SHORT, 0);
+// 	}
+// 
+// 	m_count = 0;
 }
 
 void SpriteShader::Reset()
@@ -246,94 +277,98 @@ void SpriteShader::SetColor(const ColorTrans& color)
 
 void SpriteShader::Draw(const float vb[16], int texid)
 {
-	SetTexID(texid);
-
-	CopyVertex(vb);
-	if (++m_count >= m_max_commbine) {
-		Commit();
-	}
+// 	SetTexID(texid);
+// 
+// 	CopyVertex(vb);
+// 	if (++m_count >= m_max_commbine) {
+// 		Commit();
+// 	}
 }
 
 void SpriteShader::Draw(const Vector vertices[4], const Vector texcoords[4], int texid)
 {
-	if (!m_open_buffer_data) {
-		return;
-	}
+	//////////////////////////////////////////////////////////////////////////
+	sl_sprite_draw(&vertices[0].x, &texcoords[0].x, texid);
+	//////////////////////////////////////////////////////////////////////////
 
-	float vb[16];
-	for (int j = 0; j < 4; ++j)
-	{
-		vb[j*4] = vertices[j].x;
-		vb[j*4+1] = vertices[j].y;
-		vb[j*4+2] = texcoords[j].x;
-		vb[j*4+3] = texcoords[j].y;
-	}
-	Draw(vb, texid);
+// 	if (!m_open_buffer_data) {
+// 		return;
+// 	}
+// 
+// 	float vb[16];
+// 	for (int j = 0; j < 4; ++j)
+// 	{
+// 		vb[j*4] = vertices[j].x;
+// 		vb[j*4+1] = vertices[j].y;
+// 		vb[j*4+2] = texcoords[j].x;
+// 		vb[j*4+3] = texcoords[j].y;
+// 	}
+// 	Draw(vb, texid);
 }
 
 void SpriteShader::BindAttribLocation(GLuint prog)
 {
-  	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
-  	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
-  	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
-  	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
-	glBindAttribLocation(prog, ATTRIB_R_TRANS, "r_trans");
-	glBindAttribLocation(prog, ATTRIB_G_TRANS, "g_trans");
-	glBindAttribLocation(prog, ATTRIB_B_TRANS, "b_trans");
+//   	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
+//   	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
+//   	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
+//   	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
+// 	glBindAttribLocation(prog, ATTRIB_R_TRANS, "r_trans");
+// 	glBindAttribLocation(prog, ATTRIB_G_TRANS, "g_trans");
+// 	glBindAttribLocation(prog, ATTRIB_B_TRANS, "b_trans");
 }
 
 void SpriteShader::LoadShader()
 {
-	static const std::string header(FLOAT_PRECISION);
-	static const std::string vert(header + std::string(SpriteVertShader));
-	static const std::string frag(header + SpriteFragShader);
-
-	InitShader(vert.c_str(), frag.c_str());
+// 	static const std::string header(FLOAT_PRECISION);
+// 	static const std::string vert(header + std::string(SpriteVertShader));
+// 	static const std::string frag(header + SpriteFragShader);
+// 
+// 	InitShader(vert.c_str(), frag.c_str());
 }
 
 void SpriteShader::InitBuffers()
 {
-	glGenBuffers(1, &m_index_buffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_index_buffer);
-
-	size_t size = m_max_commbine * 6 * sizeof(GLushort);
-	GLushort* idxs = new GLushort[size];
-	for (int i = 0; i < m_max_commbine; ++i) 
-	{
-		idxs[i*6] = i*4;
-		idxs[i*6+1] = i*4+1;
-		idxs[i*6+2] = i*4+2;
-		idxs[i*6+3] = i*4;
-		idxs[i*6+4] = i*4+2;
-		idxs[i*6+5] = i*4+3;
-	}
-
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, idxs, GL_STATIC_DRAW);
-	delete[] idxs;
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	glGenBuffers(1, &m_vertex_buffer);
+// 	glGenBuffers(1, &m_index_buffer);
+// 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_index_buffer);
+// 
+// 	size_t size = m_max_commbine * 6 * sizeof(GLushort);
+// 	GLushort* idxs = new GLushort[size];
+// 	for (int i = 0; i < m_max_commbine; ++i) 
+// 	{
+// 		idxs[i*6] = i*4;
+// 		idxs[i*6+1] = i*4+1;
+// 		idxs[i*6+2] = i*4+2;
+// 		idxs[i*6+3] = i*4;
+// 		idxs[i*6+4] = i*4+2;
+// 		idxs[i*6+5] = i*4+3;
+// 	}
+// 
+// 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, idxs, GL_STATIC_DRAW);
+// 	delete[] idxs;
+// 
+// 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+// 
+// 	glGenBuffers(1, &m_vertex_buffer);
 }
 
 void SpriteShader::CopyVertex(const float vb[16])
 {
-	float* ptr = m_vb + m_quad_size * m_count;
-	for (int i = 0; i < 4; ++i)
-	{
-		memcpy(ptr, &vb[i*4], 4 * sizeof(float));
-		ptr += 4;
-		memcpy(ptr, &m_color, sizeof(int));
-		ptr += 1;
-		memcpy(ptr, &m_additive, sizeof(int));
-		ptr += 1;
-		memcpy(ptr, &m_r_trans, sizeof(int));
-		ptr += 1;
-		memcpy(ptr, &m_g_trans, sizeof(int));
-		ptr += 1;
-		memcpy(ptr, &m_b_trans, sizeof(int));
-		ptr += 1;
-	}	
+// 	float* ptr = m_vb + m_quad_size * m_count;
+// 	for (int i = 0; i < 4; ++i)
+// 	{
+// 		memcpy(ptr, &vb[i*4], 4 * sizeof(float));
+// 		ptr += 4;
+// 		memcpy(ptr, &m_color, sizeof(int));
+// 		ptr += 1;
+// 		memcpy(ptr, &m_additive, sizeof(int));
+// 		ptr += 1;
+// 		memcpy(ptr, &m_r_trans, sizeof(int));
+// 		ptr += 1;
+// 		memcpy(ptr, &m_g_trans, sizeof(int));
+// 		ptr += 1;
+// 		memcpy(ptr, &m_b_trans, sizeof(int));
+// 		ptr += 1;
+// 	}	
 }
 
 }

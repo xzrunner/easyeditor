@@ -43,6 +43,8 @@ void TestMulti::Draw() const
 		spr->GetSymbol().Draw(mt);	
 	}
 
+	glue::ShaderMgr::Instance()->Flush();
+
 	//////////////////////////////////////////////////////////////////////////
 
 	glue::ShaderMgr::Instance()->ShapeDraw();

@@ -76,7 +76,8 @@ void Config::LoadFromFile(const char* filename)
 	reader.parse(fin, m_value);
 	fin.close();
 
-	m_use_dtex = m_value["use_dtex"].asBool();
+//	m_use_dtex = m_value["use_dtex"].asBool();
+	m_use_dtex = false;
 
 	LoadFontCfg(m_value["font"]);
 

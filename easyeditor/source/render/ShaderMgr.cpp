@@ -7,6 +7,8 @@
 #include "BlendShader.h"
 #include "ShaderContext.h"
 
+#include <sl_shader.h>
+
 #include <stdio.h>
 
 namespace ee
@@ -18,6 +20,8 @@ ShaderMgr* ShaderMgr::Instance()
 {
 	if (!m_instance)
 	{
+		sl_shader_mgr_create();
+
 		m_instance = new ShaderMgr();
 		ShaderContext::SetShader2DMgr(m_instance);
 	}
@@ -41,9 +45,10 @@ ShaderMgr::ShaderMgr()
 	m_rvg_shader = new RVGShader;
 	m_shaders.push_back(m_rvg_shader);
 
-	m_blend_shader = new BlendShader;
-	m_shaders.push_back(m_blend_shader);
-	m_all_sprite_shader.push_back(m_blend_shader);
+	m_blend_shader = NULL;
+// 	m_blend_shader = new BlendShader;
+// 	m_shaders.push_back(m_blend_shader);
+// 	m_all_sprite_shader.push_back(m_blend_shader);
 }
 
 ShaderMgr::~ShaderMgr()

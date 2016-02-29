@@ -2,13 +2,14 @@
 #include "Math2D.h"
 
 #include <rvg.h>
+#include <sl_shape.h>
 
 namespace ee
 {
 
 void PrimitiveDrawRVG::SetColor(int color)
 {
-	rvg_shader_color(color);
+	sl_shape_color(color);
 }
 
 void PrimitiveDrawRVG::Line(const Matrix& mt, const Vector& p0, const Vector& p1)
@@ -27,11 +28,11 @@ void PrimitiveDrawRVG::Rect(const Matrix& mt, const Vector& min, const Vector& m
 
 void PrimitiveDrawRVG::Triangles(const Matrix& mt, const std::vector<Vector>& triangles)
 {
-	std::vector<Vector> coords(triangles);
-	for (int i = 0, n = coords.size(); i < n; ++i) {
-		coords[i] = Math2D::TransVector(coords[i], mt);
-	}
-	rvg_triangles(&coords[0].x, coords.size());
+// 	std::vector<Vector> coords(triangles);
+// 	for (int i = 0, n = coords.size(); i < n; ++i) {
+// 		coords[i] = Math2D::TransVector(coords[i], mt);
+// 	}
+// 	rvg_triangles(&coords[0].x, coords.size());
 }
 
 }

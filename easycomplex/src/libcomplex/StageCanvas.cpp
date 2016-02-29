@@ -12,6 +12,9 @@
 #include <ee/EE_DTex.h>
 #include <ee/SpriteRenderer.h>
 
+// debug
+#include <ee/ShaderMgr.h>
+
 #include <easyanim.h>
 #include <easytext.h>
 
@@ -100,7 +103,10 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
 		ee::DT_VISIBLE);
 
-	ee::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+	const ee::Rect& clipbox = m_stage->getSymbol()->m_clipbox;
+	if (clipbox.Width() != 0 && clipbox.Height() != 0) {
+		ee::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+	}
 
 	if (Settings::bVisibleBGCross)
 	{
@@ -114,11 +120,13 @@ void StageCanvas::OnDrawSprites() const
 
 	m_fps.End();
 
-#ifdef _DEBUG 
-	if (ee::Config::Instance()->IsUseDTex()) {
-		ee::DTex::Instance()->DebugDraw();
-	}
-#endif
+// #ifdef _DEBUG 
+// 	if (ee::Config::Instance()->IsUseDTex()) {
+// 		ee::DTex::Instance()->DebugDraw();
+// 	}
+// #endif
+
+	ee::ShaderMgr::Instance()->sprite();
 
 	m_fps.DrawTime(m_screen);
 }

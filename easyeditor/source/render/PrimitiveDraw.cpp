@@ -9,6 +9,9 @@
 #include "Math2D.h"
 #include "ShaderMgr.h"
 
+#include <rvg.h>
+#include <sl_shader.h>
+
 #include <assert.h>
 
 namespace ee
@@ -34,28 +37,33 @@ void PrimitiveDraw::DrawRect(const Rect& r, const ShapeStyle& style)
 
 void PrimitiveDraw::DrawRect(const Vector& p0, const Vector& p1, const ShapeStyle& style)
 {
-	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
-	if (!style.fill) {
-		PrimitiveDrawNew::SetLineWidth(style.size);
-	}
+	//////////////////////////////////////////////////////////////////////////
+	rvg_rect(p0.x, p0.y, p1.x, p1.y, false);
+	sl_shader_flush();
+	//////////////////////////////////////////////////////////////////////////
 
-	int idx = 0;
-	VERTICES[idx++] = p0.x;
-	VERTICES[idx++] = p0.y;
-
-	VERTICES[idx++] = p0.x;
-	VERTICES[idx++] = p1.y;
-
-	VERTICES[idx++] = p1.x;
-	VERTICES[idx++] = p1.y;
-
-	VERTICES[idx++] = p1.x;
-	VERTICES[idx++] = p0.y;
-
-	PrimitiveDrawNew::SetColor(style.color);
-	PrimitiveDrawNew::LineStypeBegin(style.lineStyle);
-	PrimitiveDrawNew::Draw(type, VERTICES, 4);
-	PrimitiveDrawNew::LineStypeEnd(style.lineStyle);
+// 	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
+// 	if (!style.fill) {
+// 		PrimitiveDrawNew::SetLineWidth(style.size);
+// 	}
+// 
+// 	int idx = 0;
+// 	VERTICES[idx++] = p0.x;
+// 	VERTICES[idx++] = p0.y;
+// 
+// 	VERTICES[idx++] = p0.x;
+// 	VERTICES[idx++] = p1.y;
+// 
+// 	VERTICES[idx++] = p1.x;
+// 	VERTICES[idx++] = p1.y;
+// 
+// 	VERTICES[idx++] = p1.x;
+// 	VERTICES[idx++] = p0.y;
+// 
+// 	PrimitiveDrawNew::SetColor(style.color);
+// 	PrimitiveDrawNew::LineStypeBegin(style.lineStyle);
+// 	PrimitiveDrawNew::Draw(type, VERTICES, 4);
+// 	PrimitiveDrawNew::LineStypeEnd(style.lineStyle);
 }
 
 void PrimitiveDraw::DrawCircle(const Vector& center, float radius, bool isFill/* = false*/, 
