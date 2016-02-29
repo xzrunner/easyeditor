@@ -506,6 +506,14 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreatePerspectiveState(Sprite* sprite, co
 	return new PerspectiveSpriteState(sprite, ctrl_node);
 }
 
+void ArrangeSpriteImpl::ChangeOPState(ArrangeSpriteState* state)
+{
+	if (m_op_state) {
+		delete m_op_state;
+	}
+	m_op_state = state;
+}
+
 void ArrangeSpriteImpl::OnDeleteKeyDown()
 {
 	// add to history
@@ -538,14 +546,6 @@ Vector ArrangeSpriteImpl::GetSprOffset(const Sprite* spr) const
 {
 	Vector offset = spr->GetPosition() + spr->GetOffset();
 	return offset;
-}
-
-void ArrangeSpriteImpl::ChangeOPState(ArrangeSpriteState* state)
-{
-	if (m_op_state) {
-		delete m_op_state;
-	}
-	m_op_state = state;
 }
 
 void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)

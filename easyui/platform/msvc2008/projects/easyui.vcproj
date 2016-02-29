@@ -492,6 +492,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyui\window\MoveSpriteCenterState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\window\MoveSpriteCenterState.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\window\TranslateSpriteState.cpp"
 					>
 					<FileConfiguration

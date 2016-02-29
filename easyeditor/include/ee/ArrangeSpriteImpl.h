@@ -59,6 +59,9 @@ protected:
 	virtual ArrangeSpriteState* CreatePerspectiveState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 
 protected:
+	void ChangeOPState(ArrangeSpriteState* state);
+
+protected:
 	SpriteSelection* m_selection;
 
 private:
@@ -68,8 +71,6 @@ private:
 	void DownOneLayer();
 
 	Vector GetSprOffset(const Sprite* spr) const;
-
-	void ChangeOPState(ArrangeSpriteState* state);
 
 	void OnSpriteShortcutKey(int keycode);
 

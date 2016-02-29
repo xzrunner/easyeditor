@@ -15,12 +15,22 @@ class ArrangeSpriteImpl : public ee::ArrangeSpriteImpl
 public:
 	ArrangeSpriteImpl(StagePanel* stage, ee::PropertySettingPanel* property);
 
+	virtual void OnMouseLeftDown(int x, int y);
+	virtual void OnMouseLeftUp(int x, int y);
+
+	virtual void OnDraw(const ee::Camera& cam) const;
+
 private:
 	virtual ee::ArrangeSpriteState* CreateTranslateState(ee::SpriteSelection* selection, 
 		const ee::Vector& first_pos) const;
 
 private:
 	StagePanel* m_stage;
+
+	mutable float m_center_node_radius;
+
+	bool m_move_center;
+	mutable ee::Sprite* m_selected;
 
 }; // ArrangeSpriteImpl
 
