@@ -9,7 +9,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/ShapeSelection.h>
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
 
@@ -192,11 +192,9 @@ bool EditCircleOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
-				ee::PrimitiveDraw::DrawCircle(circle->center, tolerance, 
-					true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Circle(circle->center, tolerance, true, ee::Colorf(0.4f, 1.0f, 0.4f));
 				if (!m_captured.pos.IsValid()) {
-					ee::PrimitiveDraw::DrawCircle(circle->center, circle->radius,
-						false, tolerance, ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Circle(circle->center, circle->radius, false, ee::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
@@ -204,8 +202,7 @@ bool EditCircleOP::OnDraw() const
 	else
 	{
 		if (m_firstPress.IsValid() && m_curr_pos.IsValid()) {
-			ee::PrimitiveDraw::DrawCircle(m_firstPress, ee::Math2D::GetDistance(m_firstPress, m_curr_pos), 
-				false, 3, ee::Colorf(0, 0, 0), 32);
+			ee::RVG::Circle(m_firstPress, ee::Math2D::GetDistance(m_firstPress, m_curr_pos), false, ee::Colorf(0, 0, 0), 32);
 		}
 	}
 

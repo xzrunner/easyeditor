@@ -864,6 +864,13 @@ Vector Math2D::RotateVectorRightAngle(const Vector& v, bool isTurnLeft)
 	return ret;
 }
 
+float Math2D::TransLen(float len, const Matrix& m)
+{
+	Vector pos(len, 0.0f);
+	pos = TransVector(pos, m);
+	return pos.Length();
+}
+
 Vector Math2D::TransVector(const Vector& v, const Matrix& m)
 {
 	Vector ret;

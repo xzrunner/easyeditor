@@ -1,7 +1,7 @@
 #include "PathGrid.h"
 
 #include <ee/Sprite.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/Math2D.h>
 #include <ee/Matrix.h>
@@ -42,7 +42,7 @@ void PathGrid::QueryRoute(const ee::Vector& start, const ee::Vector& end)
 void PathGrid::DebugDraw() const
 {
 	m_nw.DebugDraw();	
-	ee::PrimitiveDraw::DrawPolyline(m_routes, ee::LIGHT_RED, false);
+	ee::RVG::Polyline(m_routes, ee::LIGHT_RED, false);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -150,7 +150,7 @@ DebugDraw() const
 			}
 			ee::Vector p0(x * m_width + dx, y * m_height + dy);
 			ee::Vector p1(p0.x + m_width, p0.y + m_height);
-			ee::PrimitiveDraw::DrawRect(ee::Matrix(), p0, p1, ee::LIGHT_GREEN_FACE);
+			ee::RVG::Rect(p0, p1, ee::LIGHT_GREEN_FACE);
 		}
 	}
 

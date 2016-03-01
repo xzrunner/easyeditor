@@ -5,7 +5,7 @@
 
 #include <ee/StringHelper.h>
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace emodeling
 {
@@ -104,28 +104,33 @@ void Fixture::Draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colo
 {
 	if (eshape::CircleShape* circle = dynamic_cast<eshape::CircleShape*>(m_shape))
 	{
-		ee::PrimitiveDraw::DrawCircle(mt, circle->center, circle->radius, true, 2, cFace);
-		ee::PrimitiveDraw::DrawCircle(mt, circle->center, circle->radius, false, 2, cEdge, 32);
+		ee::Vector c = ee::Math2D::TransVector(circle->center, mt);
+		float r = ee::Math2D::TransLen(circle->radius, mt);
+		ee::RVG::Circle(c, r, true, cFace);
+		ee::RVG::Circle(c, r, false, cEdge, 32);
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
-		const ee::Vector p0(rect->m_rect.xmin, rect->m_rect.ymin),
-			p1(rect->m_rect.xmax, rect->m_rect.ymax);
-		ee::PrimitiveDraw::DrawRect(mt, p0, p1, ee::ShapeStyle(true, cFace));
-		ee::PrimitiveDraw::DrawRect(mt, p0, p1, ee::ShapeStyle(false, cFace));
+		ee::Vector min(rect->m_rect.xmin, rect->m_rect.ymin),
+			max(rect->m_rect.xmax, rect->m_rect.ymax);
+		min = ee::Math2D::TransVector(min, mt);
+		max = ee::Math2D::TransVector(max, mt);
+		ee::RVG::Rect(min, max, ee::ShapeStyle(true, 2, cFace));
+		ee::RVG::Rect(min, max, ee::ShapeStyle(false, 2, cFace));
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
-		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
-		ee::PrimitiveDraw::DrawPolyline(vertices, cEdge, true, 2);
+		// todo draw with triangles
+//		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
+		ee::RVG::Polyline(vertices, cEdge, true, 2);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);
-		ee::PrimitiveDraw::DrawPolyline(vertices, cEdge, chain->IsClosed(), 2);
+		ee::RVG::Polyline(vertices, cEdge, chain->IsClosed(), 2);
 	}
 }
 

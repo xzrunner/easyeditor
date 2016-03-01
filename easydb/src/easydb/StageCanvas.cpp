@@ -3,7 +3,7 @@
 #include "Context.h"
 
 #include <ee/DrawShapesVisitor.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
 
 namespace edb
@@ -41,7 +41,7 @@ void StageCanvas::drawConnection() const
 		for (size_t i = 0, n = itr->second->out.size(); i < n; ++i)
 		{
 			ee::Sprite* to = itr->second->out[i];
-			ee::PrimitiveDraw::DrawLine(from->GetPosition(), to->GetPosition(), 
+			ee::RVG::Line(from->GetPosition(), to->GetPosition(), 
 				ee::Colorf(0.8f, 0.8f, 0.8f));
 		}
 	}

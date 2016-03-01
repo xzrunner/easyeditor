@@ -1,6 +1,6 @@
 #include "Material.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -43,7 +43,7 @@ void Material::DebugDrawTris(const ee::Matrix& mt) const
 		buf.push_back(m_tris[i]);
 		if (buf.size() == 3)
 		{
-			ee::PrimitiveDraw::DrawPolyline(mt, buf, ee::Colorf(0, 1, 0), true);
+			ee::RVG::Polyline(mt, buf, ee::Colorf(0, 1, 0), true);
 			buf.clear();
 		}
 	}

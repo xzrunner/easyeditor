@@ -7,7 +7,8 @@
 #include "Config.h"
 #include "SettingData.h"
 #include "StringHelper.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
+#include "Math2D.h"
 
 #include <json/json.h>
 
@@ -25,7 +26,7 @@ FontBlankSymbol::FontBlankSymbol()
 	size = 0;
 	width = height = 100;
 
-	m_style.fill = true;
+	m_style.filling = true;
 	m_style.color.Set(0.7f, 0.7f, 0.7f, 0.7f);
 }
 
@@ -115,8 +116,10 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const Matrix& mt
 		hw = fb->width * 0.5f;
 		hh = fb->height * 0.5f;
 	}
+	hw = Math2D::TransLen(hw, mt);
+	hh = Math2D::TransLen(hh, mt);
 
-	PrimitiveDraw::DrawRect(mt, hw, hh, m_style);
+	RVG::Rect(Vector(0, 0), hw, hh, m_style);
 }
 
 void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const Matrix& mt) const

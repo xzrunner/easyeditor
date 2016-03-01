@@ -6,7 +6,7 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace escale9
 {
@@ -83,10 +83,10 @@ bool ResizeBaseOP::OnDraw() const
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;
 	const float r = REGION;
-	ee::PrimitiveDraw::DrawRect(ee::Vector(-hw, -hh), r, r, m_style);
-	ee::PrimitiveDraw::DrawRect(ee::Vector( hw, -hh), r, r, m_style);
-	ee::PrimitiveDraw::DrawRect(ee::Vector( hw,  hh), r, r, m_style);
-	ee::PrimitiveDraw::DrawRect(ee::Vector(-hw,  hh), r, r, m_style);
+	ee::RVG::Rect(ee::Vector(-hw, -hh), r, r, m_style);
+	ee::RVG::Rect(ee::Vector( hw, -hh), r, r, m_style);
+	ee::RVG::Rect(ee::Vector( hw,  hh), r, r, m_style);
+	ee::RVG::Rect(ee::Vector(-hw,  hh), r, r, m_style);
 
 	return false;
 }

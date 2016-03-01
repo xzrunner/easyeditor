@@ -5,7 +5,7 @@
 #include "Math2D.h"
 #include "Color.h"
 #include "BoundingBox.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 #include "color_config.h"
 
 namespace ee
@@ -115,9 +115,9 @@ void SpriteRenderer::DrawImpl(const Sprite* sprite,
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = Math2D::TransVector(bound[i], mt);
 		}
-		PrimitiveDraw::DrawPolyline(bound, BLACK, true, 4);
-		PrimitiveDraw::DrawLine(bound[0], bound[2], BLACK, 4);
-		PrimitiveDraw::DrawLine(bound[1], bound[3], BLACK, 4);
+		RVG::Polyline(bound, BLACK, true, 4);
+		RVG::Line(bound[0], bound[2], BLACK, 4);
+		RVG::Line(bound[1], bound[3], BLACK, 4);
 	}
 }
 

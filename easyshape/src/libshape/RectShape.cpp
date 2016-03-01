@@ -2,7 +2,7 @@
 #include "RectPropertySetting.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -49,7 +49,11 @@ void RectShape::Translate(const ee::Vector& offset)
 
 void RectShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
-	ee::PrimitiveDraw::DrawRect(mt, m_rect, m_style);
+	ee::Vector min(m_rect.xmin, m_rect.ymin),
+		max(m_rect.xmax, m_rect.ymax);
+	min = ee::Math2D::TransVector(min, mt);
+	max = ee::Math2D::TransVector(max, mt);
+	ee::RVG::Rect(min, max, m_style);
 }
 
 ee::PropertySetting* RectShape::CreatePropertySetting(ee::EditPanelImpl* stage)

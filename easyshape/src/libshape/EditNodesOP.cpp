@@ -4,7 +4,7 @@
 
 #include <ee/panel_msg.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/CosineSmooth.h>
 #include <ee/SettingData.h>
 #include <ee/DouglasPeucker.h>
@@ -86,8 +86,8 @@ bool EditNodesOP::OnDraw() const
 	const float radius = ee::SettingData::ctl_pos_sz == 0 ? 3 : ee::SettingData::ctl_pos_sz;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		ee::PrimitiveDraw::DrawPolyline(m_buffer[i].dst, ee::Colorf(0.8f, 0.2f, 0.2f), false);
-		ee::PrimitiveDraw::DrawCircles(m_buffer[i].dst, radius, true, 2, ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Polyline(m_buffer[i].dst, ee::Colorf(0.8f, 0.2f, 0.2f), false);
+		ee::RVG::Circles(m_buffer[i].dst, radius, true, 2, ee::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;

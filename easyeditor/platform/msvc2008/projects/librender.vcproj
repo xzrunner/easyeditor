@@ -170,6 +170,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\include\ee\EE_RVG.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\EE_ShaderLab.cpp"
 				>
 			</File>

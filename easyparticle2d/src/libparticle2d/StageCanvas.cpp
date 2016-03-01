@@ -4,7 +4,7 @@
 
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/Sprite.h>
 
@@ -47,8 +47,7 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	ee::PrimitiveDraw::DrawRect(ee::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
-		ee::LIGHT_RED_LINE);
+	ee::RVG::Rect(ee::Vector(0, 0), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, ee::LIGHT_RED_LINE);
 }
 
 }

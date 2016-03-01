@@ -6,7 +6,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/SceneNode.h>
 #include <ee/EditPanelImpl.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
 #include <ee/style_config.h>
@@ -63,7 +63,7 @@ void StageCanvas::DrawBackground() const
 
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	ee::PrimitiveDraw::Cross(ee::Vector(0,0), xedge, yedge, ee::LIGHT_GREY);
+	ee::RVG::Cross(ee::Vector(0,0), xedge, yedge, ee::LIGHT_GREY);
 }
 
 } // eanim

@@ -1,6 +1,6 @@
 #include "Grids.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/Math2D.h>
 
@@ -21,14 +21,14 @@ void Grids::Draw() const
 	for (int i = 0, n = m_grids.size(); i < n; ++i)
 	{
 		const Grid& g = m_grids[i];
-		ee::PrimitiveDraw::DrawPolyline(g.m_bird_bound, ee::LIGHT_GREY, true);
-//		ee::PrimitiveDraw::DrawRect(g.m_flat_bound, ee::LIGHT_GREY_LINE);
+		ee::RVG::Polyline(g.m_bird_bound, ee::LIGHT_GREY, true);
+//		ee::RVG::Rect(g.m_flat_bound, ee::LIGHT_GREY_LINE);
 	}
-//	ee::PrimitiveDraw::DrawPolyline(m_flat_bound, ee::LIGHT_GREY, true);
+//	ee::RVG::Polyline(m_flat_bound, ee::LIGHT_GREY, true);
 
 	for (int i = 0, n = m_debug_draw_grids.size(); i < n; ++i) {
 		const Grid& g = m_grids[m_debug_draw_grids[i]];
-		ee::PrimitiveDraw::DrawPolyline(g.m_bird_bound, ee::BLUE, true);
+		ee::RVG::Polyline(g.m_bird_bound, ee::BLUE, true);
 	}
 }
 

@@ -4,7 +4,7 @@
 #include <ee/Math2D.h>
 #include <ee/Matrix.h>
 #include <ee/style_config.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
 
 #include <easyshape.h>
@@ -74,7 +74,13 @@ void PathNavMesh::QueryRoute(const ee::Vector& start, const ee::Vector& end)
 
 void PathNavMesh::DebugDraw() const
 {
-	ee::PrimitiveDraw::DrawTrianglesLine(m_tris, ee::LIGHT_RED);
+	for (int i = 0, n = m_tris.size(); i < n; ) {
+		std::vector<ee::Vector> polyline;
+		polyline.push_back(m_tris[i++]);
+		polyline.push_back(m_tris[i++]);
+		polyline.push_back(m_tris[i++]);
+		ee::RVG::Polyline(polyline, ee::LIGHT_RED, true);
+	}
 }
 
 ee::Vector PathNavMesh::TransIDToPos(int id) const

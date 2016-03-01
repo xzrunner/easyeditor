@@ -123,8 +123,8 @@ ArrangeSpriteOP::Cross::Cross()
 
 void ArrangeSpriteOP::Cross::Draw() const
 {
-	ee::PrimitiveDraw::DrawCircle(pos, RADIUS, false, 1, ee::LIGHT_RED);
-	ee::PrimitiveDraw::Cross(pos, LENGTH, ee::LIGHT_RED, 1);
+	ee::RVG::Circle(pos, RADIUS, false, ee::LIGHT_RED);
+	ee::RVG::Cross(pos, LENGTH, ee::LIGHT_RED, 1);
 }
 
 bool ArrangeSpriteOP::Cross::Contain(const ee::Vector& p) const

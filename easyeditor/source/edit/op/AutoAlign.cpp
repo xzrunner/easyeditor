@@ -4,7 +4,7 @@
 #include "Sprite.h"
 #include "sprite_utility.h"
 #include "MultiSpritesImpl.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 #include "FetchAllVisitor.h"
 
 namespace ee
@@ -202,10 +202,10 @@ void AutoAlign::Draw() const
 	if (m_open)
 	{
 		if (m_hor[0] != m_hor[1]) {
-			PrimitiveDraw::DrawDashLine(m_hor[0], m_hor[1], Colorf(0, 0, 0));
+			RVG::DashLine(m_hor[0], m_hor[1], Colorf(0, 0, 0));
 		}
 		if (m_ver[0] != m_ver[1]) {
-			PrimitiveDraw::DrawDashLine(m_ver[0], m_ver[1], Colorf(0, 0, 0));
+			RVG::DashLine(m_ver[0], m_ver[1], Colorf(0, 0, 0));
 		}
 	}
 }

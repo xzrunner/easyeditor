@@ -1,7 +1,7 @@
 #include "ColorMaterial.h"
 
 #include <ee/ColorTrans.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
 
@@ -27,7 +27,7 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 void ColorMaterial::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	ee::Colorf c = ee::col_mul(m_color, color.multi);
-	ee::PrimitiveDraw::DrawTriangles(mt, m_tris, c);
+	ee::RVG::Triangles(mt, m_tris, c);
 
 	//ee::ShaderMgr::Instance()->RVG();
 	//ee::Colorf c = ee::cMul(m_color, color.multi);

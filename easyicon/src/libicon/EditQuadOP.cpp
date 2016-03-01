@@ -6,7 +6,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/Image.h>
 
@@ -118,7 +118,7 @@ bool EditQuadOP::OnDraw() const
 
 	float w = img->GetClippedWidth(),
 		h = img->GetClippedHeight();
-	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
+	ee::RVG::Rect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
 		ee::LIGHT_RED_THIN_LINE);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
@@ -128,9 +128,9 @@ bool EditQuadOP::OnDraw() const
 		screen.push_back(quad_icon->GetScreen()[i]);
 	}
 
-	ee::PrimitiveDraw::DrawPolyline(screen, ee::LIGHT_GREEN, true);
+	ee::RVG::Polyline(screen, ee::LIGHT_GREEN, true);
 	for (int i = 0; i < 4; ++i) {
-		ee::PrimitiveDraw::DrawRect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;

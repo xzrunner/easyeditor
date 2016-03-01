@@ -3,7 +3,7 @@
 #include "SymbolExt.h"
 #include "tools.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Visitor.h>
 
@@ -135,7 +135,7 @@ void CheckerBoard::DebugDraw() const
 			if (m_grid[i][j]) {
 				ee::Vector pos;
 				m_stage->TransGridPosToCoords(i, j, pos);
-				ee::PrimitiveDraw::DrawCircle(pos, 10, true, 2, ee::Colorf(0, 0, 0));
+				ee::RVG::Circle(pos, 10, true, ee::Colorf(0, 0, 0));
 			}
 		}
 	}

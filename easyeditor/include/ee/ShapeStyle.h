@@ -6,40 +6,32 @@
 namespace ee
 {
 
-enum LineStyle
-{
-	LS_DEFAULT = 0,
-	LS_DOT,
-	LS_DASH,
-	LS_DOT_DASH
-};
-
 struct ShapeStyle
 {
-	bool fill;
+	bool filling;
 	float size;
 	Colorf color;
-	LineStyle lineStyle;
+	int line_style;
 
 	ShapeStyle() 
-		: fill(false)
+		: filling(false)
 		, size(2)
 		, color(0,0,0,1)
-		, lineStyle(LS_DEFAULT) 
+		, line_style(0) 
 	{}
 
-	ShapeStyle(bool _fill, const Colorf& _color) 
-		: fill(_fill)
-		, size(2)
-		, color(_color)
-		, lineStyle(LS_DEFAULT) 
-	{}
-
-	ShapeStyle(bool _fill, float _size, const Colorf& _color, LineStyle _stype) 
-		: fill(_fill)
+	ShapeStyle(bool _fill, float _size, const Colorf& _color) 
+		: filling(_fill)
 		, size(_size)
 		, color(_color)
-		, lineStyle(_stype) 
+		, line_style(0) 
+	{}
+
+	ShapeStyle(bool _fill, float _size, const Colorf& _color, int _stype) 
+		: filling(_fill)
+		, size(_size)
+		, color(_color)
+		, line_style(_stype) 
 	{}
 
 }; // ShapeStyle

@@ -3,7 +3,7 @@
 
 #include <ee/JsonSerializer.h>
 #include <ee/ShaderMgr.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
 #include <ee/Math2D.h>
 
@@ -57,10 +57,10 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
 	shader->SetAlpha(alpha);
 
-	ee::PrimitiveDraw::DrawTriangles(mt, m_tris, m_colors);
+	ee::RVG::Triangles(mt, m_tris, m_colors);
 
-// 	ee::PrimitiveDraw::DrawPolyline(mt, m_inner_loop, ee::LIGHT_RED, true);
-// 	ee::PrimitiveDraw::DrawPolyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
+// 	ee::RVG::Polyline(mt, m_inner_loop, ee::LIGHT_RED, true);
+// 	ee::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
 
 	shader_mgr->SetShapeShader(0);
 	shader_mgr->shape();

@@ -19,7 +19,7 @@
 //
 //void MultiColorMaterial::Draw(const ee::Matrix& mt) const
 //{
-//	ee::PrimitiveDraw::DrawTriangles(mt, m_tris, m_color);
+//	ee::RVG::Triangles(mt, m_tris, m_color);
 //}
 //
 //void MultiColorMaterial::Build(const std::vector<ee::Vector>& vertices)

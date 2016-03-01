@@ -11,7 +11,7 @@
 #include "EditPanelImpl.h"
 #include "MultiSpritesImpl.h"
 #include "PropertySettingPanel.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 
 namespace ee
 {

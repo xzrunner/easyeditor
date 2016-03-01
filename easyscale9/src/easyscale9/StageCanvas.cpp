@@ -6,7 +6,7 @@
 #include <easyscale9.h>
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/Matrix.h>
 #include <ee/style_config.h>
@@ -36,7 +36,7 @@ void StageCanvas::OnDrawSprites() const
 	}
 	else
 	{
-		ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, ee::LIGHT_GREY_LINE);
+		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, ee::LIGHT_GREY_LINE);
 
 		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)

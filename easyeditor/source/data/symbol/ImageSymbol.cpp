@@ -5,7 +5,7 @@
 #include "ImageData.h"
 #include "Shader.h"
 #include "ShaderMgr.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 
 namespace ee
 {

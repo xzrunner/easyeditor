@@ -2,7 +2,7 @@
 #include "BezierPropertySetting.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -79,7 +79,7 @@ void BezierShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
 		ee::Vector pos = ee::Math2D::TransVector(m_control_nodes[i], mt);
-		ee::PrimitiveDraw::DrawRect(pos, (float)RADIUS, (float)RADIUS, m_style);
+		ee::RVG::Rect(pos, (float)RADIUS, (float)RADIUS, m_style);
 	}
 }
 

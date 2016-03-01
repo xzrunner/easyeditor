@@ -46,7 +46,7 @@ bool PixelDiffOP::OnDraw() const
 {
 // 	if (ee::ZoomViewOP::OnDraw()) return true;
 // 
-// 	ee::PrimitiveDraw::DrawLine(ee::Vector(0, -1024), ee::Vector(0, 1024), ee::LIGHT_GREY);
+// 	ee::RVG::Line(ee::Vector(0, -1024), ee::Vector(0, 1024), ee::LIGHT_GREY);
 
 	return false;
 }

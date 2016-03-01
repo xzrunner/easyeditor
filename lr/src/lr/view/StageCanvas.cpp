@@ -15,7 +15,7 @@
 #include <ee/EE_GTxt.h>
 #include <ee/SettingData.h>
 #include <ee/Camera.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 
 #include <easyparticle3d.h>
@@ -120,12 +120,12 @@ void StageCanvas::DrawRegion() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 
+	ee::RVG::Rect(ee::Vector(0, 0), 
 		cfg->m_map_width * 0.5f,
 		cfg->m_map_height * 0.5f,
 		ee::LIGHT_GREY_LINE);
 
-	ee::PrimitiveDraw::DrawRect(
+	ee::RVG::Rect(
 		ee::Vector(cfg->m_view_dx, cfg->m_view_dy), 
 		cfg->m_view_width * 0.5f,
 		cfg->m_view_height * 0.5f,

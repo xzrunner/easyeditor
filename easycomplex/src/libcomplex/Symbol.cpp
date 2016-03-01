@@ -4,11 +4,12 @@
 #include "FileLoader.h"
 
 #include <ee/EE_GTxt.h>
+#include <ee/EE_RVG.h>
 #include <ee/TPNode.h>
 #include <ee/Config.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/PrimitiveDraw.h>
 #include <ee/BoundingBox.h>
+#include <ee/Math2D.h>
 
 #include <easytext.h>
 
@@ -135,7 +136,9 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 			ee::SpriteRenderer::Instance()->Draw(m_sprites[i], root, mt, color);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
-			ee::PrimitiveDraw::DrawRect(mt, m_clipbox, m_style);
+			ee::Vector min(m_clipbox.xmin, m_clipbox.ymin), 
+				max(m_clipbox.xmax, m_clipbox.ymax);
+			ee::RVG::Rect(ee::Math2D::TransVector(min, mt), ee::Math2D::TransVector(max, mt), m_style);
 		}
 	}
 }

@@ -5,7 +5,7 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/render_utility.h>
 
 namespace eicon
@@ -51,7 +51,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->GetSymbol().Draw(ee::Matrix(), ee::ColorTrans(), &sprite);
 
-	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));;
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));;
 
 	m_stage->DrawEditOP();
 }

@@ -5,7 +5,7 @@
 #include <ee/DragPhysicsOP.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/physics_const.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace emodeling
 {
@@ -33,10 +33,10 @@ void PreviewCanvas::OnDrawSprites() const
  
  		if (op->currPos.IsValid())
  		{
- 			ee::PrimitiveDraw::DrawLine(first, op->currPos, ee::Colorf(1, 1, 1), 1);
- 			ee::PrimitiveDraw::DrawCircle(op->currPos, 2, true, 2, ee::Colorf(0, 1, 0));
+ 			ee::RVG::Line(first, op->currPos, ee::Colorf(1, 1, 1), 1);
+ 			ee::RVG::Circle(op->currPos, 2, true, ee::Colorf(0, 1, 0));
  		}
- 		ee::PrimitiveDraw::DrawCircle(first, 2, true, 2, ee::Colorf(0, 1, 0));
+ 		ee::RVG::Circle(first, 2, true, ee::Colorf(0, 1, 0));
  	}
 }
 

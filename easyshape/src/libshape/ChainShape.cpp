@@ -2,7 +2,7 @@
 #include "ChainPropertySetting.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/SettingData.h>
 
 namespace eshape
@@ -96,12 +96,12 @@ void ChainShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	if (m_vertices.empty()) return;
 
-	ee::PrimitiveDraw::DrawPolyline(mt, m_vertices, color.multi, m_loop);
+	ee::RVG::Polyline(mt, m_vertices, color.multi, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
-		ee::PrimitiveDraw::DrawCircles(m_vertices, ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Circles(m_vertices, ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 	}
 	if (m_draw_dir) {
-		ee::PrimitiveDraw::DrawCircle(m_vertices[0], 10, true, 2, color.multi);
+		ee::RVG::Circle(m_vertices[0], 10, true, color.multi);
 	}
 }
 

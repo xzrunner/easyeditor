@@ -4,7 +4,7 @@
 
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/EditPanelImpl.h>
 
 namespace emesh
@@ -118,7 +118,7 @@ bool SelectNodesOP::OnDraw() const
 		points.push_back(nodes[i]->xy);
 
 	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape()) {
-		ee::PrimitiveDraw::DrawCircles(points, shape->GetNodeRegion(), 
+		ee::RVG::Circles(points, shape->GetNodeRegion(), 
 			true, 2, ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
 	}
 

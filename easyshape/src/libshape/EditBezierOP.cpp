@@ -9,7 +9,7 @@
 #include <ee/ShapeSelection.h>
 #include <ee/OneFloatValue.h>
 #include <ee/PropertySettingPanel.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/panel_msg.h>
 #include <ee/Matrix.h>
 
@@ -186,10 +186,11 @@ bool EditBezierOP::OnDraw() const
 			int tolerance = m_node_capture->GetValue();
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
-				ee::PrimitiveDraw::DrawCircle(ee::Vector(bezier->GetRect().CenterX(), bezier->GetRect().CenterY()), 
-					tolerance, true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::Vector c(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
+				
+				ee::RVG::Circle(c, tolerance, true, ee::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.IsValid()) {
-					ee::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Circle(m_captured.pos, tolerance, true, ee::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
@@ -201,7 +202,6 @@ bool EditBezierOP::OnDraw() const
 			BezierShape bezier(m_firstPress, m_curr_pos);
 			bezier.Draw(ee::Matrix());
 		}
-//			PrimitiveDraw::drawRect(m_firstPress, m_curr_pos);
 	}
 
 	return false;

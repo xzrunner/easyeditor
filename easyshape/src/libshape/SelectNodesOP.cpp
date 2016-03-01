@@ -5,7 +5,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/MultiShapesImpl.h>
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/SettingData.h>
 #include <ee/std_functor.h>
 #include <ee/panel_msg.h>
@@ -157,7 +157,7 @@ bool SelectNodesOP::OnDraw() const
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
-	ee::PrimitiveDraw::DrawCircles(nodes, GetThreshold(), true, 2, ee::Colorf(0.8f, 0.4f, 0.4f));
+	ee::RVG::Circles(nodes, GetThreshold(), true, 2, ee::Colorf(0.8f, 0.4f, 0.4f));
 
 	return false;
 }

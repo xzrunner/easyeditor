@@ -3,9 +3,10 @@
 
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/EE_GTxt.h>
 #include <ee/trans_color.h>
+#include <ee/Math2D.h>
 
 #include <gtxt.h>
 
@@ -16,7 +17,7 @@ namespace etext
 
 Symbol::Symbol()
 {
-	m_bg_style.fill = true;
+	m_bg_style.filling = true;
 	m_bg_style.color.Set(0.7f, 0.7f, 0.7f, 0.7f);
 }
 
@@ -87,9 +88,11 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) cons
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		int w, h;
-		font->GetSize(w, h);
-		ee::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, m_bg_style);
+		int hw, hh;
+		font->GetSize(hw, hh);
+		hw = ee::Math2D::TransLen(hw * 0.5f, mt);
+		hh = ee::Math2D::TransLen(hh * 0.5f, mt);
+		ee::RVG::Rect(ee::Vector(0, 0), hw, hh, m_bg_style);
 	}
 }
 

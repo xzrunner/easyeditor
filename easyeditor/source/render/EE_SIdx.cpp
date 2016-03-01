@@ -4,7 +4,7 @@
 #include "Matrix.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 #include "style_config.h"
 
 #include <sidx_null.h>
@@ -69,7 +69,7 @@ void SIdx::Query(const Rect& region, std::vector<const Sprite*>& result) const
 
 static void _render(float xmin, float ymin, float xmax, float ymax) 
 {
-	PrimitiveDraw::DrawRect(Vector(xmin, ymin), Vector(xmax, ymax), LIGHT_GREEN_LINE);
+	RVG::Rect(Vector(xmin, ymin), Vector(xmax, ymax), LIGHT_GREEN_LINE);
 }
 
 void SIdx::DebugDraw() const

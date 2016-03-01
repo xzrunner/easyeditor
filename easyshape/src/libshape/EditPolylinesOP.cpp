@@ -5,7 +5,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/ShapeSelection.h>
 #include <ee/Matrix.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/panel_msg.h>
 #include <ee/SettingData.h>
 #include <ee/DouglasPeucker.h>
@@ -78,7 +78,7 @@ bool EditPolylinesOP::OnDraw() const
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr) {
 		itr->second->Draw(ee::Matrix(), color);
-		ee::PrimitiveDraw::DrawCircles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true, 2, ee::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;

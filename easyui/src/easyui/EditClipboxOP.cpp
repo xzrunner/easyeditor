@@ -3,7 +3,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 
 namespace eui
@@ -76,12 +76,12 @@ bool EditClipboxOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::PrimitiveDraw::DrawRect(m_rect, ee::LIGHT_GREEN_LINE);
+	ee::RVG::Rect(m_rect, ee::LIGHT_GREEN_LINE);
 
-	ee::PrimitiveDraw::DrawCircle(ee::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true, 2, ee::LIGHT_GREY);
-	ee::PrimitiveDraw::DrawCircle(ee::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true, 2, ee::LIGHT_GREY);
-	ee::PrimitiveDraw::DrawCircle(ee::Vector(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true, 2, ee::LIGHT_GREY);
-	ee::PrimitiveDraw::DrawCircle(ee::Vector(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true, 2, ee::LIGHT_GREY);
+	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true, ee::LIGHT_GREY);
+	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true, ee::LIGHT_GREY);
+	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true, ee::LIGHT_GREY);
+	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true, ee::LIGHT_GREY);
 
 	return false;
 }

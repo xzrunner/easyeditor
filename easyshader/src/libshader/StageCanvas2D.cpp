@@ -3,7 +3,7 @@
 #include "Shader2D.h"
 
 #include <ee/ShaderMgr.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Symbol.h>
@@ -60,8 +60,7 @@ void StageCanvas2D::OnDrawSprites() const
 
 void StageCanvas2D::DrawBackground() const
 {
-	ee::PrimitiveDraw::DrawRect(ee::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
-		ee::LIGHT_RED_LINE);
+	ee::RVG::Rect(ee::Vector(0, 0), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, ee::LIGHT_RED_LINE);
 }
 
 void StageCanvas2D::DrawSprites() const

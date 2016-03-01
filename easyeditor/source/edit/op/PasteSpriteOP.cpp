@@ -1,6 +1,5 @@
 #include "PasteSpriteOP.h"
 #include "PasteSpriteCMPT.h"
-#include "GL10.h"
 #include "MultiSpritesImpl.h"
 #include "StageCanvas.h"
 #include "SpriteSelection.h"
@@ -211,10 +210,9 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 			if (isVerMirror)
 				y += (m_center.y - pos.y) * 2;
 
-			GL10::PushMatrix();
-			GL10::Translatef(x, y, 0.0f);
-			SpriteRenderer::Instance()->Draw(m_selected[i]);
-			GL10::PopMatrix();
+			Matrix mt;
+			mt.SetTranslation(x, y);
+			SpriteRenderer::Instance()->Draw(m_selected[i], NULL, mt);
 		}
 	}
 }

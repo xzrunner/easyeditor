@@ -5,11 +5,11 @@
 
 #include <ee/dev_config.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/PrimitiveDraw.h>
 #include <ee/style_config.h>
 #include <ee/SceneNode.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
+#include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
 
 // debug
@@ -69,12 +69,12 @@ void StageCanvas::OnDrawSprites() const
 
 	ee::ScreenCache::Instance()->Draw(m_camera);
 
-	ee::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+	ee::RVG::Rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		ee::PrimitiveDraw::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
+		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
 	}
 
 	m_stage->DrawEditOP();
@@ -105,13 +105,13 @@ void StageCanvas::OnDrawSprites() const
 
 	const ee::Rect& clipbox = m_stage->getSymbol()->m_clipbox;
 	if (clipbox.Width() != 0 && clipbox.Height() != 0) {
-		ee::PrimitiveDraw::DrawRect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+		ee::RVG::Rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 	}
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		ee::PrimitiveDraw::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
+		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();
@@ -140,7 +140,7 @@ void StageCanvas::drawBackground() const
 	}
 
 	if (Settings::bVisibleBGRect) {
-		ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 	}
 }
 

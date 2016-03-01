@@ -3,7 +3,7 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -81,12 +81,12 @@ bool DrawPolylineOP::OnDraw() const
 		if (m_curr_pos.IsValid())
 		{
 			m_polyline.push_back(m_curr_pos);
-			ee::PrimitiveDraw::DrawPolyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
+			ee::RVG::Polyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
 			m_polyline.pop_back();
 		}
 		else
 		{
-			ee::PrimitiveDraw::DrawPolyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
+			ee::RVG::Polyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
 		}
 	}
 

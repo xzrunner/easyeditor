@@ -4,7 +4,7 @@
 #include <ee/panel_msg.h>
 #include <ee/Rect.h>
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
@@ -177,7 +177,7 @@ bool RectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
 	if (!m_stage->GetImage()) return false;
 
@@ -185,16 +185,16 @@ bool RectCutOP::OnDraw() const
 
 	if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 	{
-		ee::PrimitiveDraw::DrawRect(m_first_pos, m_curr_pos, ee::LIGHT_RED_LINE);
+		ee::RVG::Rect(m_first_pos, m_curr_pos, ee::LIGHT_RED_LINE);
 	}
 
 	DrawCaptureLine();
 
 	if (m_rect_selected) {
-		ee::PrimitiveDraw::DrawRect(*m_rect_selected, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(*m_rect_selected, ee::LIGHT_GREEN_FACE);
 	}
 	if (m_node_selected.rect) {
-		ee::PrimitiveDraw::DrawRect(*m_node_selected.rect, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(*m_node_selected.rect, ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;
@@ -238,14 +238,14 @@ void RectCutOP::DrawCaptureLine() const
 	{
 		ee::Vector p0(m_captured.x, -EDGE);
 		ee::Vector p1(m_captured.x, EDGE);
-		ee::PrimitiveDraw::DrawDashLine(p0, p1, ee::Colorf(0, 0, 0));
+		ee::RVG::DashLine(p0, p1, ee::Colorf(0, 0, 0));
 	}
 
 	if (m_captured.y != ee::FLT_INVALID)
 	{
 		ee::Vector p0(-EDGE, m_captured.y);
 		ee::Vector p1(EDGE, m_captured.y);
-		ee::PrimitiveDraw::DrawDashLine(p0, p1, ee::Colorf(0, 0, 0));
+		ee::RVG::DashLine(p0, p1, ee::Colorf(0, 0, 0));
 	}
 }
 

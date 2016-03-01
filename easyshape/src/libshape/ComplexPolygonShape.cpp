@@ -2,7 +2,7 @@
 #include "Material.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/SettingData.h>
 
 namespace eshape
@@ -61,9 +61,9 @@ void ComplexPolygonShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color
 
 	if (ee::SettingData::draw_poly_bound) {
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-			ee::PrimitiveDraw::DrawPolyline(mt, m_holes[i], color.multi, m_loop);
+			ee::RVG::Polyline(mt, m_holes[i], color.multi, m_loop);
 			if (ee::SettingData::ctl_pos_sz != 0) {
-				ee::PrimitiveDraw::DrawCircles(m_holes[i], static_cast<float>(ee::SettingData::ctl_pos_sz), true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
+				ee::RVG::Circles(m_holes[i], static_cast<float>(ee::SettingData::ctl_pos_sz), true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
 			}
 		}
 	} 

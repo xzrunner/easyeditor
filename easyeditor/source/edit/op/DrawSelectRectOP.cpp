@@ -1,5 +1,5 @@
 #include "DrawSelectRectOP.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 #include "style_config.h"
 #include "StageCanvas.h"
 #include "EditPanelImpl.h"
@@ -58,13 +58,13 @@ bool DrawSelectRectOP::OnDraw() const
 
 	if (m_last_pos.x > m_first_pos.x)
 	{
-		PrimitiveDraw::DrawRect(m_first_pos, m_last_pos, SELECT_ALL);
-		PrimitiveDraw::DrawRect(m_first_pos, m_last_pos, SELECT_BOUND);
+		RVG::Rect(m_first_pos, m_last_pos, SELECT_ALL);
+		RVG::Rect(m_first_pos, m_last_pos, SELECT_BOUND);
 	}
 	else
 	{
-		PrimitiveDraw::DrawRect(m_first_pos, m_last_pos, SELECT_PART);
-		PrimitiveDraw::DrawRect(m_first_pos, m_last_pos, SELECT_BOUND);
+		RVG::Rect(m_first_pos, m_last_pos, SELECT_PART);
+		RVG::Rect(m_first_pos, m_last_pos, SELECT_BOUND);
 	}
 
 	return false;

@@ -2,7 +2,7 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -51,7 +51,7 @@ bool DrawRectangleOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (m_first_pos.IsValid() && m_curr_pos.IsValid()) {
-		ee::PrimitiveDraw::DrawRect(m_first_pos, m_curr_pos, m_style);
+		ee::RVG::Rect(m_first_pos, m_curr_pos, m_style);
 	}
 
 	return false;

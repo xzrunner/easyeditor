@@ -1,6 +1,6 @@
 #include "Quadtree.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Math2D.h>
@@ -64,8 +64,9 @@ void Quadtree::DebugDraw() const
 	while (!buffer.empty())
 	{
 		Node* node = buffer.front(); buffer.pop();
-
-		ee::PrimitiveDraw::DrawRect(ee::Matrix(), node->m_rect, ee::LIGHT_GREY_THIN_LINE);
+		ee::RVG::Rect(ee::Vector(node->m_rect.xmin, node->m_rect.ymin), 
+			ee::Vector(node->m_rect.xmax, node->m_rect.ymax),
+			ee::LIGHT_GREY_THIN_LINE);
 
 		if (!node->IsLeaf()) 
 		{
@@ -77,7 +78,9 @@ void Quadtree::DebugDraw() const
 	}
 
 	if (m_selected) {
-		ee::PrimitiveDraw::DrawRect(ee::Matrix(), m_selected->m_rect, ee::LIGHT_RED_THIN_LINE);
+		ee::RVG::Rect(ee::Vector(m_selected->m_rect.xmin, m_selected->m_rect.ymin), 
+			ee::Vector(m_selected->m_rect.xmax, m_selected->m_rect.ymax), 
+			ee::LIGHT_RED_THIN_LINE);
 		ee::ColorTrans color;
 		color.multi = ee::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {

@@ -1,6 +1,6 @@
 #include "PathUtil.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 
 namespace lr
@@ -40,7 +40,7 @@ void VisitedList::DebugDraw() const
 		= m_data.begin();
 	for ( ; itr != m_data.end(); ++itr) {
 		ee::Vector pos = m_nw->TransIDToPos((*itr)->m_id);
-		ee::PrimitiveDraw::DrawPoint(pos, ee::MID_RED, 5);
+		ee::RVG::Point(pos, ee::MID_RED, 5);
 	}
 }
 

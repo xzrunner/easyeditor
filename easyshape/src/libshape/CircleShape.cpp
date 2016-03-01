@@ -2,7 +2,7 @@
 #include "CirclePropertySetting.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -79,7 +79,9 @@ void CircleShape::Translate(const ee::Vector& offset)
 
 void CircleShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
-	ee::PrimitiveDraw::DrawCircle(mt, center, radius, false, 3, color.multi, 32);
+	ee::Vector c = ee::Math2D::TransVector(center, mt);
+	float r = ee::Math2D::TransLen(radius);
+	ee::RVG::Circle(c, r, false, color.multi, 32);
 }
 
 ee::PropertySetting* CircleShape::CreatePropertySetting(ee::EditPanelImpl* stage)

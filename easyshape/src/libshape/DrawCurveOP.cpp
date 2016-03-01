@@ -3,7 +3,7 @@
 
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -66,7 +66,7 @@ bool DrawCurveOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (!m_curve.empty()) {
-		ee::PrimitiveDraw::DrawPolyline(m_curve, ee::Colorf(0, 0, 0), false, 1);
+		ee::RVG::Polyline(m_curve, ee::Colorf(0, 0, 0), false, 1);
 	}
 
 	return false;

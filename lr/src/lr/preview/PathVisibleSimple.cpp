@@ -1,6 +1,6 @@
 #include "PathVisibleSimple.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
@@ -64,12 +64,12 @@ void PathVisibleSimple::DebugDraw() const
 			Node* node = itr->second[i];
 			for (int j = 0, m = node->connections.size(); j < m; ++j) {
 				const Connection& conn = node->connections[j];
-				ee::PrimitiveDraw::DrawLine(node->pos, conn.n->pos, ee::BLACK);
+				ee::RVG::Line(node->pos, conn.n->pos, ee::BLACK);
 			}
 		}
 	}
 
-	ee::PrimitiveDraw::DrawPolyline(m_routes, ee::SELECT_RED, false);
+	ee::RVG::Polyline(m_routes, ee::SELECT_RED, false);
 }
 
 ee::Vector PathVisibleSimple::TransIDToPos(int id) const

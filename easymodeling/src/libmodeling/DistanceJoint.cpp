@@ -2,7 +2,7 @@
 #include "Body.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
 
 namespace emodeling
@@ -34,8 +34,8 @@ void DistanceJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		ee::PrimitiveDraw::DrawDashLine(anchorA, m_body_a->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
-		ee::PrimitiveDraw::DrawDashLine(anchorB, m_body_b->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
+		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
 
 		DrawBodyFlag();
 	}
@@ -82,8 +82,8 @@ void DistanceJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
 		break;
 	}
 
-	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	ee::PrimitiveDraw::DrawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true, color);
+	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false, color);
 }
 
 void DistanceJoint::DrawConnection(const ee::Vector& worldAnchorA, 
@@ -103,7 +103,7 @@ void DistanceJoint::DrawConnection(const ee::Vector& worldAnchorA,
 		break;
 	}
 
-	ee::PrimitiveDraw::DrawLine(worldAnchorA, worldAnchorB, color, 1);
+	ee::RVG::Line(worldAnchorA, worldAnchorB, color, 1);
 }
 
 }

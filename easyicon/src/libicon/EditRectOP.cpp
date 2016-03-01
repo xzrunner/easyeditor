@@ -7,7 +7,7 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/Image.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 
 namespace eicon
@@ -133,15 +133,15 @@ bool EditRectOP::OnDraw() const
 
 	float w = img->GetClippedWidth(),
 		  h = img->GetClippedHeight();
-	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
+	ee::RVG::Rect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
 		ee::LIGHT_RED_THIN_LINE);
 
 	ee::Rect r = icon->GetRegion(1);
-	ee::PrimitiveDraw::DrawRect(r, ee::LIGHT_GREEN_THIN_LINE);
-	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
-	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
-	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
-	ee::PrimitiveDraw::DrawRect(ee::Vector(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::RVG::Rect(r, ee::LIGHT_GREEN_THIN_LINE);
+	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::RVG::Rect(ee::Vector(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::RVG::Rect(ee::Vector(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+	ee::RVG::Rect(ee::Vector(r.xmax, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
 	
 	return false;
 }

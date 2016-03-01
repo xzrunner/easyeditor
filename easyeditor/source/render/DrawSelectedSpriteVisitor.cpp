@@ -2,13 +2,14 @@
 #include "Vector.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 #include "Config.h"
 #include "SettingData.h"
 #include "ImageSprite.h"
 #include "Matrix.h"
 #include "Image.h"
 #include "style_config.h"
+#include "Math2D.h"
 
 #include <vector>
 
@@ -25,7 +26,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 	Sprite* sprite = static_cast<Sprite*>(object);
 	sprite->GetBounding()->GetBoundPos(bound);
 
-	PrimitiveDraw::DrawPolyline(bound, m_color, true);
+	RVG::Polyline(bound, m_color, true);
 
 	// todo: bad
 	if (Config::Instance()->GetSettings().visible_image_edge)
@@ -36,8 +37,9 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 			s->GetTransMatrix(mt);
 
 			Image* img = s->GetSymbol().GetImage();
-			PrimitiveDraw::DrawRect(mt, img->GetOriginWidth() * 0.5f, 
-				img->GetOriginHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
+			int hw = Math2D::TransLen(img->GetOriginWidth() * 0.5f, mt),
+				hh = Math2D::TransLen(img->GetOriginHeight() * 0.5f, mt);
+			RVG::Rect(ee::Vector(0, 0), hw, hh, LIGHT_GREY_THIN_LINE);
 		}
 	}
 

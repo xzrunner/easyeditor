@@ -8,7 +8,7 @@
 #include <ee/ShapeSelection.h>
 #include <ee/OneFloatValue.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/PropertySettingPanel.h>
 
@@ -204,9 +204,9 @@ bool EditRectOP::OnDraw() const
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
 				ee::Vector pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
-				ee::PrimitiveDraw::DrawCircle(pos, tolerance, true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Circle(pos, tolerance, true, ee::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.IsValid()) {
-					ee::PrimitiveDraw::DrawCircle(m_captured.pos, tolerance, true, 2, ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Circle(m_captured.pos, tolerance, true, ee::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
 		}
@@ -214,7 +214,7 @@ bool EditRectOP::OnDraw() const
 	else
 	{
 		if (m_first_press.IsValid() && m_curr_pos.IsValid())
-			ee::PrimitiveDraw::DrawRect(m_first_press, m_curr_pos, m_style);
+			ee::RVG::Rect(m_first_press, m_curr_pos, m_style);
 	}
 
 	return false;

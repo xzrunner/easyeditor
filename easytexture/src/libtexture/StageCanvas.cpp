@@ -7,7 +7,7 @@
 #include <ee/Sprite.h>
 #include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Camera.h>
 #include <ee/DrawShapesVisitor.h>
@@ -51,7 +51,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::DT_VISIBLE);
 	m_panel->TraverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
-	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
 	m_stage->DrawEditOP();
 }

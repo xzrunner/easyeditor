@@ -1,7 +1,7 @@
 #include "RectMgr.h"
 
 #include <ee/Rect.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>
@@ -52,8 +52,8 @@ void RectMgr::Draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		ee::PrimitiveDraw::DrawRect(*m_rects[i], ee::LIGHT_RED_FACE);
-		ee::PrimitiveDraw::DrawRect(*m_rects[i], ee::LIGHT_RED_THIN_LINE);
+		ee::RVG::Rect(*m_rects[i], ee::LIGHT_RED_FACE);
+		ee::RVG::Rect(*m_rects[i], ee::LIGHT_RED_THIN_LINE);
 	}
 }
 

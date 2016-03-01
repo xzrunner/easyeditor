@@ -14,11 +14,11 @@ public:
 
 	static void SetColor(const Colorf& col);
 
-	static void SetLineWidth(float width);
-	static void SetPointSize(float size);
-
-	static void LineStypeBegin(const LineStyle& style);
-	static void LineStypeEnd(const LineStyle& style);
+// 	static void SetLineWidth(float width);
+// 	static void SetPointSize(float size);
+// 
+// 	static void LineStypeBegin(const LineStyle& style);
+// 	static void LineStypeEnd(const LineStyle& style);
 
 }; // PrimitiveDrawNew
 

@@ -4,7 +4,7 @@
 #include <ee/MultiSpritesImpl.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/render_utility.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/cfg_const.h>
 #include <ee/style_config.h>
 #include <ee/Sprite.h>
@@ -46,7 +46,7 @@ StageCanvas::StageCanvas(StagePanel* stage,
 
 void StageCanvas::DrawGuideLines() const
 {
-	ee::PrimitiveDraw::DrawRect(ee::Vector(0, 0), 
+	ee::RVG::Rect(ee::Vector(0, 0), 
 		ee::HALF_S_WIDTH,
 		ee::HALF_S_HEIGHT,
 		ee::LIGHT_GREY_LINE);

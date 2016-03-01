@@ -12,7 +12,7 @@
 #include "TranslateSpriteAOP.h"
 #include "ScaleSpriteAOP.h"
 #include "ShearSpriteAOP.h"
-#include "PrimitiveDraw.h"
+#include "EE_RVG.h"
 #include "panel_msg.h"
 #include "RGBColorSettingDlg.h"
 #include "HSLColorSettingDlg.h"
@@ -354,22 +354,22 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 				Vector ctrl_nodes[4];
 				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i)
-					PrimitiveDraw::DrawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true, Colorf(0.2f, 0.8f, 0.2f));
 			}
 			else
 			{
 				Vector ctrl_nodes[8];
 				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
 				for (int i = 0; i < 4; ++i)
-					PrimitiveDraw::DrawCircle(ctrl_nodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false, Colorf(0.2f, 0.8f, 0.2f));
 				for (int i = 4; i < 8; ++i)
-					PrimitiveDraw::DrawCircle(ctrl_nodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true, Colorf(0.2f, 0.8f, 0.2f));
 			}
 
 			if (m_cfg.is_offset_open)
 			{
 				Vector offset = GetSprOffset(selected);
-				PrimitiveDraw::DrawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+				RVG::Circle(offset, m_ctrl_node_radius, true, Colorf(0.8f, 0.2f, 0.2f));
 			}
 		}
 	}

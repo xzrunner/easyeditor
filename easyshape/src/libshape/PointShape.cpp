@@ -1,7 +1,7 @@
 #include "PointShape.h"
 
 #include <ee/Math2D.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace eshape
 {
@@ -47,7 +47,9 @@ void PointShape::Translate(const ee::Vector& offset)
 
 void PointShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
-	ee::PrimitiveDraw::DrawCircle(mt, m_pos, RADIUS, true, 2, color.multi);
+	ee::Vector c = ee::Math2D::TransVector(m_pos, mt);
+	float r = ee::Math2D::TransLen(RADIUS);
+	ee::RVG::Circle(c, r, true, color.multi);
 }
 
 ee::PropertySetting* PointShape::CreatePropertySetting(ee::EditPanelImpl* stage)

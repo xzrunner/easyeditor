@@ -4,7 +4,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/Rect.h>
 #include <ee/panel_msg.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 
 namespace eimage
@@ -89,12 +89,12 @@ bool AutoRectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::PrimitiveDraw::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
 
 	m_rects.Draw();
 
 	if (m_selected) {
-		ee::PrimitiveDraw::DrawRect(*m_selected, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(*m_selected, ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;

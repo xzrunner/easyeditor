@@ -15,7 +15,7 @@
 #include <ee/PropertySettingPanel.h>
 #include <ee/panel_msg.h>
 #include <ee/ShapeSelection.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/shape_msg.h>
 
 namespace eshape
@@ -317,13 +317,13 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (captured.pos.IsValid()) {
-			ee::PrimitiveDraw::DrawCircle(captured.pos, m_node_capture->GetValue(), true, 2, ee::Colorf(1.0f, 0.4f, 0.4f));
+			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true, ee::Colorf(1.0f, 0.4f, 0.4f));
 		}
 
 		ee::Vector center;
 		center.x = chain->GetRect().CenterX();
 		center.y = chain->GetRect().CenterY();
-		ee::PrimitiveDraw::DrawCircle(center, m_node_capture->GetValue(), true, 2, ee::Colorf(0.4f, 1.0f, 0.4f));
+		ee::RVG::Circle(center, m_node_capture->GetValue(), true, ee::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
 

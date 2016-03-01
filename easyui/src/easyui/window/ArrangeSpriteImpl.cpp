@@ -3,7 +3,7 @@
 #include "StagePanel.h"
 #include "MoveSpriteCenterState.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Camera.h>
@@ -65,8 +65,8 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 
 	ee::Vector pos = m_selected->GetPosition();
 	m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
-	ee::PrimitiveDraw::DrawCircle(pos, m_center_node_radius, false, 2, ee::RED);
-	ee::PrimitiveDraw::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2, ee::GREEN);
+	ee::RVG::Circle(pos, m_center_node_radius, false, ee::RED);
+	ee::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2, ee::GREEN);
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::

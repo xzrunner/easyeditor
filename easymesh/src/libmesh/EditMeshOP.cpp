@@ -6,7 +6,7 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/Matrix.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>
 
@@ -102,8 +102,8 @@ bool EditMeshOP::OnDraw() const
 		shape->DrawInfoXY();
 	}
 
-	ee::PrimitiveDraw::Cross(m_center, CENTER_EDGE, ee::Colorf(0.2f, 0.8f, 0.4f));
-	ee::PrimitiveDraw::DrawCircle(m_center, CENTER_RADIUS, true, 2, ee::Colorf(0.2f, 0.4f, 0.8f));
+	ee::RVG::Cross(m_center, CENTER_EDGE, ee::Colorf(0.2f, 0.8f, 0.4f));
+	ee::RVG::Circle(m_center, CENTER_RADIUS, true, ee::Colorf(0.2f, 0.4f, 0.8f));
 
 	if (SelectNodesOP::OnDraw())
 		return true;

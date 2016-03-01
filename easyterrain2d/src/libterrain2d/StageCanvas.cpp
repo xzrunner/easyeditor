@@ -7,7 +7,7 @@
 #include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/style_config.h>
 #include <ee/EditPanelImpl.h>
@@ -63,7 +63,7 @@ void StageCanvas::OnTimer()
 void StageCanvas::DrawBG() const
 {
 	const float EDGE = 100;
-	ee::PrimitiveDraw::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
+	ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
 }
 
 void StageCanvas::Update()

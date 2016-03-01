@@ -5,7 +5,7 @@
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 #include <ee/Matrix.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 #include <ee/SpriteRenderer.h>
 
@@ -71,7 +71,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 
 		ee::Matrix mat;
 		mat.Translate(p.x, p.y);
-		ee::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(mat, half_edge, half_edge, ee::LIGHT_GREEN_FACE);
 	}
 	else
 	{
@@ -108,7 +108,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 		ee::ShapeStyle style = ee::LIGHT_GREEN_FACE;
 		style.color = color;
 
- 		ee::PrimitiveDraw::DrawRect(mat, half_edge, half_edge, style);
+ 		ee::RVG::Rect(mat, half_edge, half_edge, style);
 	}
 	else
 	{

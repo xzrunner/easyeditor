@@ -170,6 +170,7 @@ public:
 
 	static Vector RotateVectorRightAngle(const Vector& v, bool isTurnLeft);
 
+	static float TransLen(float len, const Matrix& m);
 	static Vector TransVector(const Vector& v, const Matrix& m);
 	static void TransVertices(const Matrix& mt, const std::vector<Vector>& src,
 		std::vector<Vector>& dst);

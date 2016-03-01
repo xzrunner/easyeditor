@@ -1,6 +1,6 @@
 #include "ComposeGrids.h"
 
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/style_config.h>
 
 namespace escale9
@@ -18,7 +18,7 @@ void ComposeGrids::Draw()
 			p0.x = X + EDGE*i;
 			p0.y = Y + EDGE*j;
 			ee::Vector p1(p0.x + EDGE, p0.y + EDGE);
-			ee::PrimitiveDraw::DrawRect(p0, p1, ee::LIGHT_GREY_LINE);
+			ee::RVG::Rect(p0, p1, ee::LIGHT_GREY_LINE);
 		}
 	}
 }

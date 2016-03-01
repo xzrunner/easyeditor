@@ -36,7 +36,7 @@ void GL10::Color4f(float red, float green, float blue, float alpha)
 
 void GL10::ColorPointer(int size, int type, int stride, const void* pointer)
 {
-	glColorPointer(size, type, stride, pointer);
+//	glColorPointer(size, type, stride, pointer);
 }
 
 void GL10::Disable(int cap)

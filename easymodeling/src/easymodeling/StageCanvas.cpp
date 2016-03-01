@@ -6,7 +6,7 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Sprite.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 
 namespace emodeling
 {
@@ -55,7 +55,7 @@ void StageCanvas::DrawCrossLine() const
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
+	ee::RVG::Lines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
 }
 
 void StageCanvas::DrawLines() const
@@ -76,7 +76,7 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(ee::Vector(-halfEdge, y));
 			vertices.push_back(ee::Vector(halfEdge, y));
 		}
-		ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
+		ee::RVG::Lines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
 	}
 	// red
 	{
@@ -93,7 +93,7 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(ee::Vector(-halfEdge, y));
 			vertices.push_back(ee::Vector(halfEdge, y));
 		}
-		ee::PrimitiveDraw::DrawLines(vertices, ee::Colorf(0.9f, 0.7f, 0.7f), 1);
+		ee::RVG::Lines(vertices, ee::Colorf(0.9f, 0.7f, 0.7f), 1);
 	}
 }
 

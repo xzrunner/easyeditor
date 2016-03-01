@@ -4,7 +4,7 @@
 #include "config.h"
 
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/style_config.h>
 
@@ -33,7 +33,7 @@ void StageCanvas::DrawRegion() const
 		height = Context::Instance()->height;
 
 	// bg
-	ee::PrimitiveDraw::DrawRect(
+	ee::RVG::Rect(
 		ee::Vector(0, 0), 
 		ee::Vector(width, height), 
 		ee::LIGHT_RED_LINE);
@@ -42,7 +42,7 @@ void StageCanvas::DrawRegion() const
 	int count = m_stage_panel->GetTextureAccount();
 	for (int i = 0; i < count; ++i)
 	{
-		ee::PrimitiveDraw::DrawRect(ee::Vector(x, y), 
+		ee::RVG::Rect(ee::Vector(x, y), 
 			ee::Vector(x + width, y + height), 
 			ee::LIGHT_GREY_LINE);
 		x += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;

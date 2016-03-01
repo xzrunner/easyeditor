@@ -1,7 +1,7 @@
 #include "Joint.h"
 
 #include <ee/Sprite.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 
 #include <assert.h>
@@ -44,8 +44,8 @@ Joint::~Joint()
 
 void Joint::Draw() const
 {
-	ee::PrimitiveDraw::DrawCircle(GetWorldPos(), REGION, true, 2, ee::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
-	ee::PrimitiveDraw::DrawCircle(GetWorldPos(), REGION, false, 2, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+	ee::RVG::Circle(GetWorldPos(), REGION, true, ee::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
+	ee::RVG::Circle(GetWorldPos(), REGION, false, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 	if (m_parent)
 	{
 		ee::Vector s = GetWorldPos();
@@ -56,10 +56,10 @@ void Joint::Draw() const
 		ee::Vector left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
 		ee::Vector right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
 
-		ee::PrimitiveDraw::DrawLine(s, left, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		ee::PrimitiveDraw::DrawLine(left, e, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		ee::PrimitiveDraw::DrawLine(e, right, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		ee::PrimitiveDraw::DrawLine(right, s, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Line(s, left, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Line(left, e, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Line(e, right, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Line(right, s, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 	}
 }
 

@@ -9,7 +9,8 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
-#include <ee/PrimitiveDraw.h>
+#include <ee/EE_RVG.h>
+#include <ee/Math2D.h>
 
 namespace etext
 {
@@ -63,14 +64,16 @@ void StageCanvas::DrawSprBound() const
 	m_edited->GetTransMatrix(mt);
 
 	const Sprite* font = static_cast<const Sprite*>(m_edited);
-	int w, h;
-	font->GetSize(w, h);
+	int hw, hh;
+	font->GetSize(hw, hh);
+	hw = ee::Math2D::TransLen(hw * 0.5f, mt);
+	hh = ee::Math2D::TransLen(hh * 0.5f, mt);
 
 	ee::ShapeStyle style;
-	style.fill = false;
+	style.filling = false;
 	style.color.Set(0.8f, 0.4f, 0.4f);
 
-	ee::PrimitiveDraw::DrawRect(mt, w * 0.5f, h * 0.5f, style);
+	ee::RVG::Rect(ee::Vector(0, 0), hw, hh, style);
 }
 
 }
