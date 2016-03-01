@@ -47,6 +47,7 @@ private:
 
 	void Select(Sprite* spr, bool clear);
 	void Reorder(const Sprite* sprite, bool up);
+	void ReorderMost(const Sprite* sprite, bool up);
 	void Remove(Sprite* sprite);
 	void RemoveSelected();
 

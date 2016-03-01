@@ -20,6 +20,7 @@ ViewlistList::ViewlistList(wxWindow* parent)
 {
 	RegistSubject(SelectSpriteSJ::Instance());
 	RegistSubject(ReorderSpriteSJ::Instance());
+	RegistSubject(ReorderSpriteMostSJ::Instance());
 	RegistSubject(InsertSpriteSJ::Instance());
 	RegistSubject(RemoveSpriteSJ::Instance());
 	RegistSubject(ClearSpriteSJ::Instance());
@@ -123,6 +124,12 @@ void ViewlistList::OnNotify(int sj_id, void* ud)
 		{
 			ReorderSpriteSJ::Params* p = (ReorderSpriteSJ::Params*)ud;
 			Reorder(p->spr, p->up);
+		}
+		break;
+	case MSG_REORDER_SPRITE_MOST:
+		{
+			ReorderSpriteMostSJ::Params* p = (ReorderSpriteMostSJ::Params*)ud;
+			ReorderMost(p->spr, p->up);
 		}
 		break;
 	case MSG_INSERT_SPRITE:
@@ -238,6 +245,37 @@ void ViewlistList::Reorder(const Sprite* sprite, bool up)
 			std::swap(m_sprites[i], m_sprites[pos]);
 			Swap(i, pos);
 			SetSelection(pos);
+		}
+	}
+}
+
+void ViewlistList::ReorderMost(const Sprite* sprite, bool up)
+{
+	int i = QuerySprIdx(sprite);
+	if (i < 0) {
+		return;
+	}
+
+	ListItem* item = const_cast<Symbol*>(&sprite->GetSymbol());
+	if (up) {
+		if (i != 0) {
+			m_sprites.erase(m_sprites.begin() + i);
+			m_sprites.insert(m_sprites.begin(), const_cast<Sprite*>(sprite));
+
+			VerticalImageList::Insert(item, 0);
+			VerticalImageList::Remove(i + 1);
+
+			SetSelection(0);
+		}
+	} else {
+		if (i != m_sprites.size() - 1) {
+			m_sprites.erase(m_sprites.begin() + i);
+			m_sprites.push_back(const_cast<Sprite*>(sprite));
+
+			VerticalImageList::Remove(i);
+			VerticalImageList::Insert(item);
+
+			SetSelection(m_sprites.size() - 1);
 		}
 	}
 }
