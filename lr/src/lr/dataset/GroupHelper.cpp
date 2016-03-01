@@ -59,9 +59,18 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 		group->GetTransMatrix(mt);
 		_pos = ee::Math2D::TransVector(_pos, mt);
 
+		bool xmirror, ymirror;
+		spr->GetMirror(xmirror, ymirror);
+		if (group->GetMirrorX()) {
+			xmirror = !xmirror;
+		}
+		if (group->GetMirrorY()) {
+			ymirror= !ymirror;
+		}
+
 		spr->SetScale(_scale);
 		spr->SetTransform(_pos, _angle);
-		spr->SetMirror(group->GetMirrorX(), group->GetMirrorY());
+		spr->SetMirror(xmirror, ymirror);
 	}
 }
 
