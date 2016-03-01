@@ -170,6 +170,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\render\EE_ShaderLab.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\EE_ShaderLab.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\EE_SIdx.cpp"
 				>
 			</File>

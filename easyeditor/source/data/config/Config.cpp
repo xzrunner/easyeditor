@@ -17,8 +17,8 @@ static const char* FILENAME = "config.json";
 
 Config::Config()
 {
-	m_use_dtex = true;
-	//m_use_dtex = false;
+	//m_use_dtex = true;
+	m_use_dtex = false;
 
 	m_use_render = true;
 

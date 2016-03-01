@@ -6,6 +6,7 @@
 #include "LibpngAdapter.h"
 #include "PPMAdapter.h"
 #include "ShaderMgr.h"
+#include "EE_ShaderLab.h"
 
 #include <dtex_pvr.h>
 
@@ -87,62 +88,66 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 
 void ImageLoader::PixelsToTexture(unsigned int& texture, const uint8_t* pixel, int width, int height, int channels, int format)
 {
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+	texture = ShaderLab::Instance()->CreateTexture(pixel, width, height, format);
 
-	if (texture == 0)
-	{
-		glGenTextures(1,(GLuint*)&texture);
-		//assert(texture);
-	}
+	//////////////////////////////////////////////////////////////////////////
 
-	glBindTexture(GL_TEXTURE_2D, texture);
- 	if (Config::Instance()->GetSettings().linear_filter) {
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	} else {
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-	}
- 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
- 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
- 	if (format == GL_RGB) {
- 		format = GL_RGBA;
- 		
- 		uint8_t* fixed = new uint8_t[width * height * 4];
- 		int size = width * height;
- 		int ptr_src = 0, ptr_dst = 0;
- 		for (int i = 0; i < size; ++i) {
- 			for (int i = 0; i < 3; ++i) {
- 				fixed[ptr_dst++] = pixel[ptr_src++];
- 			}
- 			fixed[ptr_dst++] = 255;
- 		}
- 
- 		glTexImage2D(GL_TEXTURE_2D,
- 			0,
- 			format,
- 			(GLsizei)width,
- 			(GLsizei)height,
- 			0,
- 			format,
- 			GL_UNSIGNED_BYTE,
- 			fixed);
- 
- 		delete[] fixed;
- 	} else {
-		glTexImage2D(GL_TEXTURE_2D,
-			0,
-			format,
-			(GLsizei)width,
-			(GLsizei)height,
-			0,
-			format,
-			GL_UNSIGNED_BYTE,
-			pixel);
-	}
-
-	glBindTexture(GL_TEXTURE_2D, ShaderMgr::Instance()->GetTexID());
+// 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+// 
+// 	if (texture == 0)
+// 	{
+// 		glGenTextures(1,(GLuint*)&texture);
+// 		//assert(texture);
+// 	}
+// 
+// 	glBindTexture(GL_TEXTURE_2D, texture);
+//  	if (Config::Instance()->GetSettings().linear_filter) {
+// 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+// 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+// 	} else {
+// 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+// 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+// 	}
+//  	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//  	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+// 
+//  	if (format == GL_RGB) {
+//  		format = GL_RGBA;
+//  		
+//  		uint8_t* fixed = new uint8_t[width * height * 4];
+//  		int size = width * height;
+//  		int ptr_src = 0, ptr_dst = 0;
+//  		for (int i = 0; i < size; ++i) {
+//  			for (int i = 0; i < 3; ++i) {
+//  				fixed[ptr_dst++] = pixel[ptr_src++];
+//  			}
+//  			fixed[ptr_dst++] = 255;
+//  		}
+//  
+//  		glTexImage2D(GL_TEXTURE_2D,
+//  			0,
+//  			format,
+//  			(GLsizei)width,
+//  			(GLsizei)height,
+//  			0,
+//  			format,
+//  			GL_UNSIGNED_BYTE,
+//  			fixed);
+//  
+//  		delete[] fixed;
+//  	} else {
+// 		glTexImage2D(GL_TEXTURE_2D,
+// 			0,
+// 			format,
+// 			(GLsizei)width,
+// 			(GLsizei)height,
+// 			0,
+// 			format,
+// 			GL_UNSIGNED_BYTE,
+// 			pixel);
+// 	}
+// 
+// 	glBindTexture(GL_TEXTURE_2D, ShaderMgr::Instance()->GetTexID());
 }
 
 void ImageLoader::FormatPixelsAlpha(uint8_t* pixels, int width, int height, int val)

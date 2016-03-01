@@ -222,6 +222,14 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="macro"
+			>
+			<File
+				RelativePath="..\..\..\include\ee\singleton.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\source\tool\Exception.cpp"
 			>

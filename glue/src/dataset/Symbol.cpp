@@ -41,7 +41,7 @@ void Symbol::Draw(const mat4& mt) const
 void Symbol::Load()
 {
 	m_tex = new glue::Texture();
-	m_tex->Load("coin_00.png");
+	m_tex->Load(m_filepath);
 }
 
 }
