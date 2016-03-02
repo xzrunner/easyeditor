@@ -52,20 +52,32 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 		_scale.x *= scale.x;
 		_scale.y *= scale.y;
 
-		float _angle = spr->GetAngle() + angle;
+//		float _angle = angle + spr->GetAngle();
+		float _angle = angle;
 
 		ee::Vector _pos = spr->GetPosition();
 		ee::Matrix mt;
 		group->GetTransMatrix(mt);
 		_pos = ee::Math2D::TransVector(_pos, mt);
 
+		bool pxmirror, pymirror;
+		group->GetMirror(pxmirror, pymirror);
+
 		bool xmirror, ymirror;
 		spr->GetMirror(xmirror, ymirror);
-		if (group->GetMirrorX()) {
+
+		if (pxmirror) {
 			xmirror = !xmirror;
 		}
-		if (group->GetMirrorY()) {
+		if (pymirror) {
 			ymirror= !ymirror;
+		}
+
+		if (pxmirror && !pymirror ||
+			!pxmirror && pymirror) {
+			_angle -= spr->GetAngle();
+		} else {
+			_angle += spr->GetAngle();
 		}
 
 		spr->SetScale(_scale);
