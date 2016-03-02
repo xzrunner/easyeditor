@@ -105,7 +105,9 @@ void StageCanvas::OnDrawSprites() const
 
 	const ee::Rect& clipbox = m_stage->getSymbol()->m_clipbox;
 	if (clipbox.Width() != 0 && clipbox.Height() != 0) {
-		ee::RVG::Rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+		ee::RVG::Rect(ee::Vector(clipbox.xmin, clipbox.ymin), 
+			ee::Vector(clipbox.xmax, clipbox.ymax), 
+			m_clipboxStyle);
 	}
 
 	if (Settings::bVisibleBGCross)

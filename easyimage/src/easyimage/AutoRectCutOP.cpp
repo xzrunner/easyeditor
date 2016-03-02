@@ -94,7 +94,10 @@ bool AutoRectCutOP::OnDraw() const
 	m_rects.Draw();
 
 	if (m_selected) {
-		ee::RVG::Rect(*m_selected, ee::LIGHT_GREEN_FACE);
+		
+		ee::RVG::Rect(ee::Vector(m_selected->xmin, m_selected->ymin), 
+			ee::Vector(m_selected->xmax, m_selected->ymax),
+			ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;

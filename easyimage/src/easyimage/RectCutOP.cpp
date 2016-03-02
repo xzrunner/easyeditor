@@ -191,10 +191,14 @@ bool RectCutOP::OnDraw() const
 	DrawCaptureLine();
 
 	if (m_rect_selected) {
-		ee::RVG::Rect(*m_rect_selected, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(ee::Vector(m_rect_selected->xmin, m_rect_selected->ymin), 
+			ee::Vector(m_rect_selected->xmax, m_rect_selected->ymax),
+			ee::LIGHT_GREEN_FACE);
 	}
 	if (m_node_selected.rect) {
-		ee::RVG::Rect(*m_node_selected.rect, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(ee::Vector(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
+			ee::Vector(m_node_selected.rect->ymin, m_node_selected.rect->ymax),
+			ee::LIGHT_GREEN_FACE);
 	}
 
 	return false;

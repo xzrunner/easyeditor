@@ -170,6 +170,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\render\EE_RVG.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\include\ee\EE_RVG.h"
 				>
 			</File>
@@ -431,22 +435,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\DrawShapesVisitor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\PrimitiveDraw.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\PrimitiveDraw.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\render\PrimitiveDrawNew.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\PrimitiveDrawNew.h"
 				>
 			</File>
 			<File

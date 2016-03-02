@@ -1,6 +1,8 @@
 #include "Material.h"
 
 #include <ee/EE_RVG.h>
+#include <ee/Math2D.h>
+#include <ee/Color.h>
 
 namespace eshape
 {
@@ -43,7 +45,9 @@ void Material::DebugDrawTris(const ee::Matrix& mt) const
 		buf.push_back(m_tris[i]);
 		if (buf.size() == 3)
 		{
-			ee::RVG::Polyline(mt, buf, ee::Colorf(0, 1, 0), true);
+			std::vector<ee::Vector> vertices;
+			ee::Math2D::TransVertices(mt, buf, vertices);
+			ee::RVG::Polyline(vertices, ee::Colorf(0, 1, 0), true);
 			buf.clear();
 		}
 	}

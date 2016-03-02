@@ -4,6 +4,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
+#include <ee/Color.h>
 
 namespace eshape
 {

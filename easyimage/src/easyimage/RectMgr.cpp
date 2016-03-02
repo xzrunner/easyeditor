@@ -52,8 +52,10 @@ void RectMgr::Draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		ee::RVG::Rect(*m_rects[i], ee::LIGHT_RED_FACE);
-		ee::RVG::Rect(*m_rects[i], ee::LIGHT_RED_THIN_LINE);
+		ee::Vector min(m_rects[i]->xmin, m_rects[i]->ymin),
+			max(m_rects[i]->xmax, m_rects[i]->ymax);
+		ee::RVG::Rect(min, max, ee::LIGHT_RED_FACE);
+		ee::RVG::Rect(min, max, ee::LIGHT_RED_THIN_LINE);
 	}
 }
 

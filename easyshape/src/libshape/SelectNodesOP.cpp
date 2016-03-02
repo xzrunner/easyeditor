@@ -157,7 +157,7 @@ bool SelectNodesOP::OnDraw() const
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
-	ee::RVG::Circles(nodes, GetThreshold(), true, 2, ee::Colorf(0.8f, 0.4f, 0.4f));
+	ee::RVG::Circles(nodes, GetThreshold(), true, ee::Colorf(0.8f, 0.4f, 0.4f));
 
 	return false;
 }

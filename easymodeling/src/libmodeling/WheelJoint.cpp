@@ -4,6 +4,7 @@
 #include <ee/Math2D.h>
 #include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
+#include <ee/ShapeStyle.h>
 
 namespace emodeling
 {
@@ -109,7 +110,7 @@ void WheelJoint::DrawAnchorA(const ee::Vector& pos, DrawType type) const
 	}
 
 	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true, color);
-	ee::RVG::Rect(pos, JOINT_RADIUS_OUT, ee::ShapeStyle(true, color));
+	ee::RVG::Rect(pos, JOINT_RADIUS_OUT, ee::ShapeStyle(true, 2, color));
 }
 
 void WheelJoint::DrawAnchorB(const ee::Vector& pos, DrawType type) const

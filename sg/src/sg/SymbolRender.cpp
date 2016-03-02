@@ -68,10 +68,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 		ee::Rect r = grass->GetSymbol().GetSize();
 
 		float half_edge = info->size * EDGE * 0.5f;
-
-		ee::Matrix mat;
-		mat.Translate(p.x, p.y);
-		ee::RVG::Rect(mat, half_edge, half_edge, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Rect(p, half_edge, half_edge, ee::LIGHT_GREEN_FACE);
 	}
 	else
 	{
@@ -100,15 +97,13 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col, pos);
-		ee::Matrix mat;
-		mat.Translate(pos.x, pos.y);
 
 		float half_edge = info->size * EDGE * 0.5f;
 
 		ee::ShapeStyle style = ee::LIGHT_GREEN_FACE;
 		style.color = color;
 
- 		ee::RVG::Rect(mat, half_edge, half_edge, style);
+ 		ee::RVG::Rect(pos, half_edge, half_edge, style);
 	}
 	else
 	{

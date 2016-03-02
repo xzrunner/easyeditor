@@ -137,7 +137,7 @@ bool EditRectOP::OnDraw() const
 		ee::LIGHT_RED_THIN_LINE);
 
 	ee::Rect r = icon->GetRegion(1);
-	ee::RVG::Rect(r, ee::LIGHT_GREEN_THIN_LINE);
+	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), ee::Vector(r.xmax, r.ymax), ee::LIGHT_GREEN_THIN_LINE);
 	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
 	ee::RVG::Rect(ee::Vector(r.xmin, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
 	ee::RVG::Rect(ee::Vector(r.xmax, r.ymax), CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);

@@ -118,8 +118,7 @@ bool SelectNodesOP::OnDraw() const
 		points.push_back(nodes[i]->xy);
 
 	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape()) {
-		ee::RVG::Circles(points, shape->GetNodeRegion(), 
-			true, 2, ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
+		ee::RVG::Circles(points, shape->GetNodeRegion(), true, ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
 	}
 
 	return false;

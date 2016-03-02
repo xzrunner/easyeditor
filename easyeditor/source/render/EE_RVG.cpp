@@ -3,6 +3,7 @@
 #include "Color.h"
 #include "trans_color.h"
 #include "ShapeStyle.h"
+#include "ShaderMgr.h"
 
 #include <rvg.h>
 #include <shaderlab.h>
@@ -17,14 +18,14 @@ void RVG::Init()
 
 void RVG::Point(const Vector& vertex, const Colorf& color, float size)
 {
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_point_size(size);
 	rvg_point(vertex.x, vertex.y, size);
 }
 
 void RVG::Points(const std::vector<Vector>& vertices, const Colorf& color, float size)
 {
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_point_size(size);
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		rvg_point(vertices[i].x, vertices[i].y, size);
@@ -33,7 +34,7 @@ void RVG::Points(const std::vector<Vector>& vertices, const Colorf& color, float
 
 static void _line(const Vector& p0, const Vector& p1, const Colorf& color, float width)
 {
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_line_width(width);
 	rvg_line(p0.x, p0.y, p1.x, p1.y);
 }
@@ -69,7 +70,7 @@ void RVG::Lines(const std::vector<Vector>& vertices, const Colorf& color, float 
 	}
 
 	rvg_line_style(LS_DEFAULT);
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_line_width(width);
 
 	rvg_lines(&vertices[0].x, vertices.size());
@@ -82,7 +83,7 @@ void RVG::Polyline(const std::vector<Vector>& vertices, const Colorf& color, boo
 	}
 
 	rvg_line_style(LS_DEFAULT);
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_line_width(width);
 
 	rvg_polyline(&vertices[0].x, vertices.size(), loop);
@@ -94,8 +95,13 @@ void RVG::Triangles(const std::vector<Vector>& triangles, const Colorf& color)
 		return;
 	}
 
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_triangles(&triangles[0].x, triangles.size());
+}
+
+void RVG::Triangles(const std::vector<Vector>& triangles, const std::vector<Colorf>& colors)
+{
+	// todo
 }
 
 void RVG::Rect(const Vector& center, float radius, const ShapeStyle& style)
@@ -110,15 +116,19 @@ void RVG::Rect(const Vector& center, float hw, float hh, const ShapeStyle& style
 
 void RVG::Rect(const Vector& p0, const Vector& p1, const ShapeStyle& style)
 {
+	ShaderMgr::Instance()->shape();
+
 	rvg_line_style((RVG_LINE_STYLE)(style.line_style));
-	sl_shape_color(color2int(style.color, PT_RGBA));
+	sl_shape_color(color2int(style.color, PT_ABGR));
 	rvg_line_width(style.size);
 	rvg_rect(p0.x, p0.y, p1.x, p1.y, style.filling);
+
+	sl_shader_flush();
 }
 
 void RVG::Circle(const Vector& center, float radius, bool filling, const Colorf& color, int segments)
 {
-	sl_shape_color(color2int(color, PT_RGBA));
+	sl_shape_color(color2int(color, PT_ABGR));
 	rvg_circle(center.x, center.y, radius, filling, segments);
 }
 

@@ -87,7 +87,7 @@ bool EditNodesOP::OnDraw() const
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
 		ee::RVG::Polyline(m_buffer[i].dst, ee::Colorf(0.8f, 0.2f, 0.2f), false);
-		ee::RVG::Circles(m_buffer[i].dst, radius, true, 2, ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Circles(m_buffer[i].dst, radius, true, ee::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;

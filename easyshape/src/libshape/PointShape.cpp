@@ -48,7 +48,7 @@ void PointShape::Translate(const ee::Vector& offset)
 void PointShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	ee::Vector c = ee::Math2D::TransVector(m_pos, mt);
-	float r = ee::Math2D::TransLen(RADIUS);
+	float r = ee::Math2D::TransLen(RADIUS, mt);
 	ee::RVG::Circle(c, r, true, color.multi);
 }
 

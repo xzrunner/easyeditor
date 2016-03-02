@@ -60,10 +60,13 @@ void ComplexPolygonShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color
 	PolygonShape::Draw(mt, color);
 
 	if (ee::SettingData::draw_poly_bound) {
+		float len = ee::Math2D::TransLen(ee::SettingData::ctl_pos_sz, mt);
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
-			ee::RVG::Polyline(mt, m_holes[i], color.multi, m_loop);
-			if (ee::SettingData::ctl_pos_sz != 0) {
-				ee::RVG::Circles(m_holes[i], static_cast<float>(ee::SettingData::ctl_pos_sz), true, 2, ee::Colorf(0.4f, 0.8f, 0.4f));
+			std::vector<ee::Vector> vertices;
+			ee::Math2D::TransVertices(mt, m_holes[i], vertices);
+			ee::RVG::Polyline(vertices, color.multi, m_loop);
+			if (len != 0) {
+				ee::RVG::Circles(vertices, len, true, ee::Colorf(0.4f, 0.8f, 0.4f));
 			}
 		}
 	} 

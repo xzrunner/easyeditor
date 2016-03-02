@@ -76,7 +76,7 @@ bool EditClipboxOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Rect(m_rect, ee::LIGHT_GREEN_LINE);
+	ee::RVG::Rect(ee::Vector(m_rect.xmin, m_rect.ymin), ee::Vector(m_rect.xmax, m_rect.ymax), ee::LIGHT_GREEN_LINE);
 
 	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true, ee::LIGHT_GREY);
 	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true, ee::LIGHT_GREY);

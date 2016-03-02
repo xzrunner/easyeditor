@@ -57,7 +57,9 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
 	shader->SetAlpha(alpha);
 
-	ee::RVG::Triangles(mt, m_tris, m_colors);
+	std::vector<ee::Vector> tris;
+	ee::Math2D::TransVertices(mt, m_tris, tris);
+	ee::RVG::Triangles(tris, m_colors);
 
 // 	ee::RVG::Polyline(mt, m_inner_loop, ee::LIGHT_RED, true);
 // 	ee::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
