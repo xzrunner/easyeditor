@@ -5,7 +5,7 @@
 #include <ee/Rect.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace eimage
 {
@@ -89,15 +89,14 @@ bool AutoRectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
 
 	m_rects.Draw();
 
 	if (m_selected) {
-		
-		ee::RVG::Rect(ee::Vector(m_selected->xmin, m_selected->ymin), 
-			ee::Vector(m_selected->xmax, m_selected->ymax),
-			ee::LIGHT_GREEN_FACE);
+		ee::RVG::Color(ee::LIGHT_GREEN);
+		ee::RVG::Rect(ee::Vector(m_selected->xmin, m_selected->ymin), ee::Vector(m_selected->xmax, m_selected->ymax), true);
 	}
 
 	return false;

@@ -9,7 +9,7 @@
 #include <ee/ShapeSelection.h>
 #include <ee/shape_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/panel_msg.h>
 
 namespace eshape
@@ -149,7 +149,8 @@ bool EditPointOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (m_pos.IsValid()) {
-		ee::RVG::Circle(m_pos, m_node_capture->GetValue(), true, ee::LIGHT_RED);
+		ee::RVG::Color(ee::LIGHT_RED);
+		ee::RVG::Circle(m_pos, m_node_capture->GetValue(), true);
 	}
 
 	return false;

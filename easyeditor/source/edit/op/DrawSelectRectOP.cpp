@@ -1,6 +1,6 @@
 #include "DrawSelectRectOP.h"
 #include "EE_RVG.h"
-#include "style_config.h"
+#include "color_config.h"
 #include "StageCanvas.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
@@ -58,13 +58,17 @@ bool DrawSelectRectOP::OnDraw() const
 
 	if (m_last_pos.x > m_first_pos.x)
 	{
-		RVG::Rect(m_first_pos, m_last_pos, SELECT_ALL);
-		RVG::Rect(m_first_pos, m_last_pos, SELECT_BOUND);
+		RVG::Color(LIGHT_GREEN);
+		RVG::Rect(m_first_pos, m_last_pos, true);
+		RVG::Color(SELECT_RED);
+		RVG::Rect(m_first_pos, m_last_pos, false);
 	}
 	else
 	{
-		RVG::Rect(m_first_pos, m_last_pos, SELECT_PART);
-		RVG::Rect(m_first_pos, m_last_pos, SELECT_BOUND);
+		RVG::Color(LIGHT_BLUE);
+		RVG::Rect(m_first_pos, m_last_pos, true);
+		RVG::Color(SELECT_RED);
+		RVG::Rect(m_first_pos, m_last_pos, false);
 	}
 
 	return false;

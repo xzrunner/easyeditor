@@ -2,7 +2,7 @@
 
 #include <ee/Rect.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Math2D.h>
 #include <ee/std_functor.h>
 
@@ -54,8 +54,11 @@ void RectMgr::Draw() const
 	{
 		ee::Vector min(m_rects[i]->xmin, m_rects[i]->ymin),
 			max(m_rects[i]->xmax, m_rects[i]->ymax);
-		ee::RVG::Rect(min, max, ee::LIGHT_RED_FACE);
-		ee::RVG::Rect(min, max, ee::LIGHT_RED_THIN_LINE);
+		ee::RVG::Color(ee::LIGHT_RED);
+		ee::RVG::Rect(min, max, true);
+		ee::RVG::LineWidth(1);
+		ee::RVG::Rect(min, max, true);
+		ee::RVG::LineWidth(2);
 	}
 }
 

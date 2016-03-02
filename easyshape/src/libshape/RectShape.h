@@ -3,7 +3,6 @@
 
 #include <ee/Shape.h>
 #include <ee/Rect.h>
-#include <ee/ShapeStyle.h>
 
 namespace eshape
 {
@@ -36,9 +35,6 @@ public:
 
 public:
 	ee::Rect m_rect;
-
-private:
-	ee::ShapeStyle m_style;
 
 }; // RectShape
 

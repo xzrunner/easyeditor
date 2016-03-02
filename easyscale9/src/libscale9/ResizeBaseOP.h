@@ -3,7 +3,6 @@
 
 #include <ee/ZoomViewOP.h>
 #include <ee/Vector.h>
-#include <ee/ShapeStyle.h>
 
 namespace escale9
 {
@@ -44,8 +43,6 @@ private:
 	mutable Symbol* m_symbol;
 
 	ee::Vector m_firstPos;
-
-	ee::ShapeStyle m_style;
 
 }; // ResizeBaseOP
 

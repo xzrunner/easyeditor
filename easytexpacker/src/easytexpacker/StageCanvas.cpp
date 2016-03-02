@@ -6,7 +6,7 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/EE_RVG.h>
 #include <ee/Camera.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace etexpacker
 {
@@ -33,18 +33,15 @@ void StageCanvas::DrawRegion() const
 		height = Context::Instance()->height;
 
 	// bg
-	ee::RVG::Rect(
-		ee::Vector(0, 0), 
-		ee::Vector(width, height), 
-		ee::LIGHT_RED_LINE);
+	ee::RVG::Color(ee::LIGHT_RED);
+	ee::RVG::Rect(ee::Vector(0, 0), ee::Vector(width, height), false);
 
 	int x = 0, y = 0;
 	int count = m_stage_panel->GetTextureAccount();
+	ee::RVG::Color(ee::LIGHT_GREY);
 	for (int i = 0; i < count; ++i)
 	{
-		ee::RVG::Rect(ee::Vector(x, y), 
-			ee::Vector(x + width, y + height), 
-			ee::LIGHT_GREY_LINE);
+		ee::RVG::Rect(ee::Vector(x, y), ee::Vector(x + width, y + height), false);
 		x += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
 	}
 

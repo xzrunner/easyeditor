@@ -43,9 +43,12 @@ void PrismaticJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		ee::RVG::DashLine(anchorA, anchorB, ee::Colorf(1, 0, 0), 2);
-		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
-		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::RVG::Color(ee::Colorf(1, 0, 0));
+		ee::RVG::DashLine(anchorA, anchorB);
+		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
+		ee::RVG::Color(ee::Colorf(0.4f, 0.4f, 0.8f));
+		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
 
 		DrawBodyFlag();
 	}
@@ -90,8 +93,9 @@ void PrismaticJoint::DrawAnchor(const ee::Vector& pos, DrawType type) const
 		break;
 	}
 
-	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true, color);
-	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false, color);
+	ee::RVG::Color(color);
+	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true);
+	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false);
 }
 
 }

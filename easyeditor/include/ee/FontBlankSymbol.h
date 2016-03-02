@@ -2,7 +2,6 @@
 #define _EASYEDITOR_FONT_BLANK_SYMBOL_H_
 
 #include "Symbol.h"
-#include "ShapeStyle.h"
 
 namespace ee
 {
@@ -51,9 +50,6 @@ public:
 	float width, height;
 
 	std::string filename;
-
-private:
-	ShapeStyle m_style;
 
 }; // FontBlankSymbol
 

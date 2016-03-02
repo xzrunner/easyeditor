@@ -1,7 +1,7 @@
 #include "PathUtil.h"
 
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace lr
 {
@@ -40,7 +40,9 @@ void VisitedList::DebugDraw() const
 		= m_data.begin();
 	for ( ; itr != m_data.end(); ++itr) {
 		ee::Vector pos = m_nw->TransIDToPos((*itr)->m_id);
-		ee::RVG::Point(pos, ee::MID_RED, 5);
+		ee::RVG::Color(ee::MID_RED);
+		ee::RVG::PointSize(5);
+		ee::RVG::Point(pos);
 	}
 }
 

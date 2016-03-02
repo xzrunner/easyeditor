@@ -102,8 +102,10 @@ bool EditMeshOP::OnDraw() const
 		shape->DrawInfoXY();
 	}
 
-	ee::RVG::Cross(m_center, CENTER_EDGE, ee::Colorf(0.2f, 0.8f, 0.4f));
-	ee::RVG::Circle(m_center, CENTER_RADIUS, true, ee::Colorf(0.2f, 0.4f, 0.8f));
+	ee::RVG::Color(ee::Colorf(0.2f, 0.8f, 0.4f));
+	ee::RVG::Cross(m_center, CENTER_EDGE);
+	ee::RVG::Color(ee::Colorf(0.2f, 0.4f, 0.8f));
+	ee::RVG::Circle(m_center, CENTER_RADIUS, true);
 
 	if (SelectNodesOP::OnDraw())
 		return true;

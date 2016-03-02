@@ -3,7 +3,7 @@
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
 #include <ee/Matrix.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
 
@@ -79,7 +79,8 @@ void PathNavMesh::DebugDraw() const
 		polyline.push_back(m_tris[i++]);
 		polyline.push_back(m_tris[i++]);
 		polyline.push_back(m_tris[i++]);
-		ee::RVG::Polyline(polyline, ee::LIGHT_RED, true);
+		ee::RVG::Color(ee::LIGHT_RED);
+		ee::RVG::Polyline(polyline, true);
 	}
 }
 

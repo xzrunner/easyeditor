@@ -3,8 +3,6 @@
 
 #include "ChainShape.h"
 
-#include <ee/ShapeStyle.h>
-
 namespace eshape
 {
 
@@ -56,9 +54,6 @@ private:
 private:
 	// [0] start, [1] ctrl1, [2] ctrl2, [3] end
 	ee::Vector m_control_nodes[CTRL_NODE_COUNT];
-
-private:
-	ee::ShapeStyle m_style;
 
 }; // BezierShape
 

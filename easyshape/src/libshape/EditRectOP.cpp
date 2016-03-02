@@ -204,9 +204,11 @@ bool EditRectOP::OnDraw() const
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
 				ee::Vector pos(rect->m_rect.CenterX(), rect->m_rect.CenterY());
-				ee::RVG::Circle(pos, tolerance, true, ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Circle(pos, tolerance, true);
 				if (m_captured.pos.IsValid()) {
-					ee::RVG::Circle(m_captured.pos, tolerance, true, ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
 			}
 		}
@@ -214,7 +216,7 @@ bool EditRectOP::OnDraw() const
 	else
 	{
 		if (m_first_press.IsValid() && m_curr_pos.IsValid())
-			ee::RVG::Rect(m_first_press, m_curr_pos, m_style);
+			ee::RVG::Rect(m_first_press, m_curr_pos, false);
 	}
 
 	return false;

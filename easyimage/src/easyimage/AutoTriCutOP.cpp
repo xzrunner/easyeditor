@@ -3,7 +3,7 @@
 #include <ee/SettingData.h>
 #include <ee/Config.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace eimage
 {
@@ -35,8 +35,10 @@ bool AutoTriCutOP::OnDraw() const
 // 	ee::RVG::Polyline(m_raw_bound_line, ee::LIGHT_RED, false);
 // 	ee::RVG::Points(m_raw_bound_points, ee::LIGHT_RED, 5);
 
- 	ee::RVG::Polyline(m_raw_bound_line_merged, ee::LIGHT_RED, false);
- 	ee::RVG::Polyline(m_fine_bound_line, ee::LIGHT_BLUE, true);
+	ee::RVG::Color(ee::LIGHT_RED);
+ 	ee::RVG::Polyline(m_raw_bound_line_merged, false);
+	ee::RVG::Color(ee::LIGHT_BLUE);
+ 	ee::RVG::Polyline(m_fine_bound_line, true);
 
 	return false;
 }

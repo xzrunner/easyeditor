@@ -8,7 +8,7 @@
 #include "ImageSprite.h"
 #include "Matrix.h"
 #include "Image.h"
-#include "style_config.h"
+#include "color_config.h"
 #include "Math2D.h"
 
 #include <vector>
@@ -26,7 +26,8 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 	Sprite* sprite = static_cast<Sprite*>(object);
 	sprite->GetBounding()->GetBoundPos(bound);
 
-	RVG::Polyline(bound, m_color, true);
+	RVG::Color(m_color);
+	RVG::Polyline(bound, true);
 
 	// todo: bad
 	if (Config::Instance()->GetSettings().visible_image_edge)
@@ -39,7 +40,10 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 			Image* img = s->GetSymbol().GetImage();
 			int hw = Math2D::TransLen(img->GetOriginWidth() * 0.5f, mt),
 				hh = Math2D::TransLen(img->GetOriginHeight() * 0.5f, mt);
-			RVG::Rect(ee::Vector(0, 0), hw, hh, LIGHT_GREY_THIN_LINE);
+			RVG::Color(LIGHT_GREY);
+			ee::RVG::LineWidth(1);
+			RVG::Rect(ee::Vector(0, 0), hw, hh, false);
+			ee::RVG::LineWidth(2);
 		}
 	}
 

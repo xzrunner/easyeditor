@@ -98,11 +98,13 @@ void Shape::DrawInfoUV() const
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
 			unique.insert(tmp[i]);
 		}
-		ee::RVG::Polyline(tmp, ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f));
+		ee::RVG::Polyline(tmp, true);
 	}
 	std::vector<ee::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Circles(nodes, m_node_radius, true, ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::RVG::Color(ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::RVG::Circles(nodes, m_node_radius, true);
 }
 
 void Shape::DrawInfoXY() const
@@ -117,11 +119,13 @@ void Shape::DrawInfoXY() const
 			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
-		ee::RVG::Polyline(tmp, ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f));
+		ee::RVG::Polyline(tmp, true);
 	}
 	std::vector<ee::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Circles(nodes, m_node_radius, true, ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::RVG::Color(ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::RVG::Circles(nodes, m_node_radius, true);
 }
 
 void Shape::DrawTexture(const ee::Matrix& mt,

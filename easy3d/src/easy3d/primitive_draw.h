@@ -3,7 +3,7 @@
 
 #include <ee/Vector3D.h>
 #include <ee/Color.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Matrix3D.h>
 
 #include <vector>

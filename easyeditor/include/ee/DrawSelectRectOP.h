@@ -3,7 +3,6 @@
 
 #include "ZoomViewOP.h"
 #include "Vector.h"
-#include "ShapeStyle.h"
 
 namespace ee
 {
@@ -23,8 +22,6 @@ public:
 
 protected:
 	Vector m_first_pos, m_last_pos;
-
-	ShapeStyle m_style;
 
 }; // DrawSelectRectOP
 

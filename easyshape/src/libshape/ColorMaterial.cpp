@@ -26,10 +26,10 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 
 void ColorMaterial::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
-	ee::Colorf c = ee::col_mul(m_color, color.multi);
 	std::vector<ee::Vector> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
-	ee::RVG::Triangles(tris, c);
+	ee::RVG::Color(ee::col_mul(m_color, color.multi));
+	ee::RVG::Triangles(tris);
 
 	//ee::ShaderMgr::Instance()->RVG();
 	//ee::Colorf c = ee::cMul(m_color, color.multi);

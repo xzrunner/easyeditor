@@ -14,8 +14,6 @@ SelectNodesOP::SelectNodesOP(StagePanel* stage)
 	: ee::DrawRectangleOP(stage, stage->GetStageImpl(), false)
 	, m_draggable(true)
 {
-	m_style.color = ee::Colorf(0.8f, 0.2f, 0.2f);
-
 	m_first_pos.SetInvalid();
 }
 
@@ -118,7 +116,8 @@ bool SelectNodesOP::OnDraw() const
 		points.push_back(nodes[i]->xy);
 
 	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape()) {
-		ee::RVG::Circles(points, shape->GetNodeRegion(), true, ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
+		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
+		ee::RVG::Circles(points, shape->GetNodeRegion(), true);
 	}
 
 	return false;

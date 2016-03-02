@@ -9,7 +9,7 @@
 #include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/Matrix.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace escale9
 {
@@ -36,7 +36,8 @@ void StageCanvas::OnDrawSprites() const
 	}
 	else
 	{
-		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, ee::LIGHT_GREY_LINE);
+		ee::RVG::Color(ee::LIGHT_GREY);
+		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, false);
 
 		ee::Symbol* symbol = m_stage_panel->getPatchSymbol();
 		if (symbol)

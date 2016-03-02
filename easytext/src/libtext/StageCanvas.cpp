@@ -69,11 +69,8 @@ void StageCanvas::DrawSprBound() const
 	hw = ee::Math2D::TransLen(hw * 0.5f, mt);
 	hh = ee::Math2D::TransLen(hh * 0.5f, mt);
 
-	ee::ShapeStyle style;
-	style.filling = false;
-	style.color.Set(0.8f, 0.4f, 0.4f);
-
-	ee::RVG::Rect(ee::Vector(0, 0), hw, hh, style);
+	ee::RVG::Color(ee::Colorf(0.8f, 0.4f, 0.4f));
+	ee::RVG::Rect(ee::Vector(0, 0), hw, hh, false);
 }
 
 }

@@ -4,7 +4,7 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace eui
 {
@@ -75,13 +75,15 @@ bool EditClipboxOP::OnMouseDrag(int x, int y)
 bool EditClipboxOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
+	
+	ee::RVG::Color(ee::LIGHT_GREEN);
 
-	ee::RVG::Rect(ee::Vector(m_rect.xmin, m_rect.ymin), ee::Vector(m_rect.xmax, m_rect.ymax), ee::LIGHT_GREEN_LINE);
+	ee::RVG::Rect(ee::Vector(m_rect.xmin, m_rect.ymin), ee::Vector(m_rect.xmax, m_rect.ymax), false);
 
-	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true, ee::LIGHT_GREY);
-	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true, ee::LIGHT_GREY);
-	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true, ee::LIGHT_GREY);
-	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true, ee::LIGHT_GREY);
+	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymin), NODE_RADIUS, true);
+	ee::RVG::Circle(ee::Vector(m_rect.xmin, m_rect.ymax), NODE_RADIUS, true);
+	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymax), NODE_RADIUS, true);
+	ee::RVG::Circle(ee::Vector(m_rect.xmax, m_rect.ymin), NODE_RADIUS, true);
 
 	return false;
 }

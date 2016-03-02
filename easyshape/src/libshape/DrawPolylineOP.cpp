@@ -79,15 +79,16 @@ bool DrawPolylineOP::OnDraw() const
 
 	if (!m_polyline.empty())
 	{
+		ee::RVG::Color(ee::Colorf(0, 0, 0));
 		if (m_curr_pos.IsValid())
 		{
 			m_polyline.push_back(m_curr_pos);
-			ee::RVG::Polyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
+			ee::RVG::Polyline(m_polyline, false);
 			m_polyline.pop_back();
 		}
 		else
 		{
-			ee::RVG::Polyline(m_polyline, ee::Colorf(0, 0, 0), false, 2);
+			ee::RVG::Polyline(m_polyline, false);
 		}
 	}
 

@@ -6,7 +6,7 @@
 #include <ee/Symbol.h>
 #include <ee/Matrix.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/SpriteRenderer.h>
 
 namespace sg
@@ -68,7 +68,8 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 		ee::Rect r = grass->GetSymbol().GetSize();
 
 		float half_edge = info->size * EDGE * 0.5f;
-		ee::RVG::Rect(p, half_edge, half_edge, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Color(ee::LIGHT_GREEN);
+		ee::RVG::Rect(p, half_edge, half_edge, true);
 	}
 	else
 	{
@@ -99,11 +100,8 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 		m_stage->TransGridPosToCoords(row, col, pos);
 
 		float half_edge = info->size * EDGE * 0.5f;
-
-		ee::ShapeStyle style = ee::LIGHT_GREEN_FACE;
-		style.color = color;
-
- 		ee::RVG::Rect(pos, half_edge, half_edge, style);
+		ee::RVG::Color(color);
+ 		ee::RVG::Rect(pos, half_edge, half_edge, true);
 	}
 	else
 	{

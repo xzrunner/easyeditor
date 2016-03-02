@@ -6,7 +6,7 @@
 
 #include <ee/std_functor.h>
 #include <ee/panel_msg.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Math2D.h>
 
 #include <algorithm>
@@ -123,8 +123,9 @@ ArrangeSpriteOP::Cross::Cross()
 
 void ArrangeSpriteOP::Cross::Draw() const
 {
-	ee::RVG::Circle(pos, RADIUS, false, ee::LIGHT_RED);
-	ee::RVG::Cross(pos, LENGTH, ee::LIGHT_RED, 1);
+	ee::RVG::Color(ee::LIGHT_RED);
+	ee::RVG::Circle(pos, RADIUS, false);
+	ee::RVG::Cross(pos, LENGTH);
 }
 
 bool ArrangeSpriteOP::Cross::Contain(const ee::Vector& p) const

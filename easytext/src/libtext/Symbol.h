@@ -4,7 +4,6 @@
 #include "typedef.h"
 
 #include <ee/Symbol.h>
-#include <ee/ShapeStyle.h>
 
 namespace etext
 {
@@ -56,8 +55,6 @@ private:
 	float m_space_vert;
 
 private:
-	ee::ShapeStyle m_bg_style;
-
 	friend class Sprite;
 
 }; // Symbol

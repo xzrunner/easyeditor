@@ -4,7 +4,7 @@
 
 #include <ee/sprite_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/subject_id.h>
 #include <ee/Math2D.h>
@@ -59,9 +59,10 @@ void AnchorMgr::OnSprPosChanged(ee::Sprite* spr)
 
 void AnchorMgr::Draw() const
 {
+	ee::RVG::Color(ee::LIGHT_GREY);
 	for (int i = 0; i < ANCHOR_COUNT; ++i) {
 		const Anchor& anchor = m_anchors[i];
-		ee::RVG::Circle(anchor.pos, RADIUS, true, ee::LIGHT_GREY);
+		ee::RVG::Circle(anchor.pos, RADIUS, true);
 	}
 }
 

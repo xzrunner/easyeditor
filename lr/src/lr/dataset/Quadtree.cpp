@@ -4,7 +4,7 @@
 #include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Math2D.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Triangulation.h>
 
 #include <queue>
@@ -64,9 +64,10 @@ void Quadtree::DebugDraw() const
 	while (!buffer.empty())
 	{
 		Node* node = buffer.front(); buffer.pop();
-		ee::RVG::Rect(ee::Vector(node->m_rect.xmin, node->m_rect.ymin), 
-			ee::Vector(node->m_rect.xmax, node->m_rect.ymax),
-			ee::LIGHT_GREY_THIN_LINE);
+		ee::RVG::Color(ee::LIGHT_GREY);
+		ee::RVG::LineWidth(1);
+		ee::RVG::Rect(ee::Vector(node->m_rect.xmin, node->m_rect.ymin), ee::Vector(node->m_rect.xmax, node->m_rect.ymax), false);
+		ee::RVG::LineWidth(2);
 
 		if (!node->IsLeaf()) 
 		{
@@ -78,9 +79,11 @@ void Quadtree::DebugDraw() const
 	}
 
 	if (m_selected) {
-		ee::RVG::Rect(ee::Vector(m_selected->m_rect.xmin, m_selected->m_rect.ymin), 
-			ee::Vector(m_selected->m_rect.xmax, m_selected->m_rect.ymax), 
-			ee::LIGHT_RED_THIN_LINE);
+		ee::RVG::Color(ee::LIGHT_RED);
+		ee::RVG::LineWidth(1);
+		ee::RVG::Rect(ee::Vector(m_selected->m_rect.xmin, m_selected->m_rect.ymin), ee::Vector(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
+		ee::RVG::LineWidth(2);
+
 		ee::ColorTrans color;
 		color.multi = ee::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {

@@ -78,7 +78,8 @@ bool EditPolylinesOP::OnDraw() const
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr) {
 		itr->second->Draw(ee::Matrix(), color);
-		ee::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true, ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Color(ee::Colorf(0.2f, 0.2f, 0.8f));
+		ee::RVG::Circles(itr->second->GetVertices(), ee::SettingData::ctl_pos_sz, true);
 	}
 
 	return false;

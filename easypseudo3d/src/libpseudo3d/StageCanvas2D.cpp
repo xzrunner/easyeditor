@@ -2,7 +2,7 @@
 
 #include "Projection2DScene.h"
 
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/EditPanelImpl.h>
 
 namespace epseudo3d

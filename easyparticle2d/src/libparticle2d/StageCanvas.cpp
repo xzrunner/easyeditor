@@ -5,7 +5,7 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Sprite.h>
 
 namespace eparticle2d
@@ -47,7 +47,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	ee::RVG::Rect(ee::Vector(0, 0), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, ee::LIGHT_RED_LINE);
+	ee::RVG::Color(ee::LIGHT_RED);
+	ee::RVG::Rect(ee::Vector(0, 0), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, false);
 }
 
 }

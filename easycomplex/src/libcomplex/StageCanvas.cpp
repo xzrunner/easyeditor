@@ -5,12 +5,12 @@
 
 #include <ee/dev_config.h>
 #include <ee/DrawSpritesVisitor.h>
-#include <ee/style_config.h>
 #include <ee/SceneNode.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
 #include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
+#include <ee/color_config.h>
 
 // debug
 #include <ee/ShaderMgr.h>
@@ -30,8 +30,6 @@ StageCanvas::StageCanvas(StagePanel* editPanel,
 	, m_background(NULL)
 	, m_fps(1)
 {
-	m_bgStyle.color.Set(0.8f, 0.8f, 0.8f);
-	m_clipboxStyle.color.Set(0, 0.8f, 0);
 }
 
 StageCanvas::~StageCanvas()
@@ -69,12 +67,15 @@ void StageCanvas::OnDrawSprites() const
 
 	ee::ScreenCache::Instance()->Draw(m_camera);
 
-	ee::RVG::Rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
+	ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
+	const ee::Rect& r = m_stage->getSymbol()->m_clipbox;
+	ee::RVG::Rect(ee::Vector(r.xmin, r.ymin), ee::Vector(r.xmax, r.ymax), m_clipboxStyle.filling);
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
+		ee::RVG::Color(ee::LIGHT_GREY);
+		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE);
 	}
 
 	m_stage->DrawEditOP();
@@ -105,15 +106,15 @@ void StageCanvas::OnDrawSprites() const
 
 	const ee::Rect& clipbox = m_stage->getSymbol()->m_clipbox;
 	if (clipbox.Width() != 0 && clipbox.Height() != 0) {
-		ee::RVG::Rect(ee::Vector(clipbox.xmin, clipbox.ymin), 
-			ee::Vector(clipbox.xmax, clipbox.ymax), 
-			m_clipboxStyle);
+		ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
+		ee::RVG::Rect(ee::Vector(clipbox.xmin, clipbox.ymin), ee::Vector(clipbox.xmax, clipbox.ymax), false);
 	}
 
 	if (Settings::bVisibleBGCross)
 	{
 		const float EDGE = 100;
-		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE, ee::LIGHT_GREY);
+		ee::RVG::Color(ee::LIGHT_GREY);
+		ee::RVG::Cross(ee::Vector(0,0), EDGE, EDGE);
 	}
 
 	ee::SceneNodeMgr::Instance()->Draw();
@@ -142,7 +143,8 @@ void StageCanvas::drawBackground() const
 	}
 
 	if (Settings::bVisibleBGRect) {
-		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
+		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, false);
 	}
 }
 

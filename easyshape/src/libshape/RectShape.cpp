@@ -53,7 +53,7 @@ void RectShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 		max(m_rect.xmax, m_rect.ymax);
 	min = ee::Math2D::TransVector(min, mt);
 	max = ee::Math2D::TransVector(max, mt);
-	ee::RVG::Rect(min, max, m_style);
+	ee::RVG::Rect(min, max, false);
 }
 
 ee::PropertySetting* RectShape::CreatePropertySetting(ee::EditPanelImpl* stage)

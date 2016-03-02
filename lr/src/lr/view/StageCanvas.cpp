@@ -16,7 +16,7 @@
 #include <ee/SettingData.h>
 #include <ee/Camera.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 #include <easyparticle3d.h>
 #include <easytext.h>
@@ -120,16 +120,11 @@ void StageCanvas::DrawRegion() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
-	ee::RVG::Rect(ee::Vector(0, 0), 
-		cfg->m_map_width * 0.5f,
-		cfg->m_map_height * 0.5f,
-		ee::LIGHT_GREY_LINE);
+	ee::RVG::Color(ee::LIGHT_GREY);
+	ee::RVG::Rect(ee::Vector(0, 0), cfg->m_map_width * 0.5f, cfg->m_map_height * 0.5f, false);
 
-	ee::RVG::Rect(
-		ee::Vector(cfg->m_view_dx, cfg->m_view_dy), 
-		cfg->m_view_width * 0.5f,
-		cfg->m_view_height * 0.5f,
-		ee::LIGHT_RED_LINE);
+	ee::RVG::Color(ee::LIGHT_RED);
+	ee::RVG::Rect(ee::Vector(cfg->m_view_dx, cfg->m_view_dy), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f, false);
 
 	m_stage->DebugDraw();
 }

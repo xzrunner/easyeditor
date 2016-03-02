@@ -8,7 +8,7 @@
 #include <ee/EE_DTex.h>
 #include <ee/EE_RVG.h>
 #include <ee/Config.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 
 namespace eui
 {
@@ -52,10 +52,8 @@ void StageCanvas::DrawGuideLines() const
 	int width, height;
 	window::QueryWindowViewSizeSJ::Instance()->Query(width, height);
 
-	ee::RVG::Rect(ee::Vector(0, 0), 
-		width * 0.5f,
-		height * 0.5f,
-		ee::LIGHT_GREY_LINE);
+	ee::RVG::Color(ee::LIGHT_GREY);
+	ee::RVG::Rect(ee::Vector(0, 0), width * 0.5f, height * 0.5f, false);
 }
 
 }

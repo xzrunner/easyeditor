@@ -33,10 +33,16 @@ void PreviewCanvas::OnDrawSprites() const
  
  		if (op->currPos.IsValid())
  		{
- 			ee::RVG::Line(first, op->currPos, ee::Colorf(1, 1, 1), 1);
- 			ee::RVG::Circle(op->currPos, 2, true, ee::Colorf(0, 1, 0));
+			ee::RVG::Color(ee::Colorf(1, 1, 1));
+			ee::RVG::LineWidth(1);
+ 			ee::RVG::Line(first, op->currPos);
+			ee::RVG::LineWidth(2);
+
+			ee::RVG::Color(ee::Colorf(0, 1, 0));
+ 			ee::RVG::Circle(op->currPos, 2, true);
  		}
- 		ee::RVG::Circle(first, 2, true, ee::Colorf(0, 1, 0));
+		ee::RVG::Color(ee::Colorf(0, 1, 0));
+ 		ee::RVG::Circle(first, 2, true);
  	}
 }
 

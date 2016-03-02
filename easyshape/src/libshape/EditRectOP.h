@@ -4,7 +4,6 @@
 #include "NodeCapture.h"
 
 #include <ee/ZoomViewOP.h>
-#include <ee/ShapeStyle.h>
 
 namespace ee { class OneFloatValue; class PropertySettingPanel; }
 
@@ -40,8 +39,6 @@ private:
 	ee::Vector m_curr_pos;
 
 	NodeAddr m_captured;
-
-	ee::ShapeStyle m_style;
 
 }; // EditRectOP
 

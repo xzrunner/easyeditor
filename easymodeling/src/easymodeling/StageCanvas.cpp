@@ -55,7 +55,10 @@ void StageCanvas::DrawCrossLine() const
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	ee::RVG::Lines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
+	ee::RVG::Color(ee::Colorf(0.7f, 0.9f, 0.7f));
+	ee::RVG::LineWidth(1);
+	ee::RVG::Lines(vertices);
+	ee::RVG::LineWidth(2);
 }
 
 void StageCanvas::DrawLines() const
@@ -76,7 +79,10 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(ee::Vector(-halfEdge, y));
 			vertices.push_back(ee::Vector(halfEdge, y));
 		}
-		ee::RVG::Lines(vertices, ee::Colorf(0.7f, 0.9f, 0.7f), 1);
+		ee::RVG::Color(ee::Colorf(0.7f, 0.9f, 0.7f));
+		ee::RVG::LineWidth(1);
+		ee::RVG::Lines(vertices);
+		ee::RVG::LineWidth(2);
 	}
 	// red
 	{
@@ -93,7 +99,10 @@ void StageCanvas::DrawLines() const
 			vertices.push_back(ee::Vector(-halfEdge, y));
 			vertices.push_back(ee::Vector(halfEdge, y));
 		}
-		ee::RVG::Lines(vertices, ee::Colorf(0.9f, 0.7f, 0.7f), 1);
+		ee::RVG::Color(ee::Colorf(0.9f, 0.7f, 0.7f));
+		ee::RVG::LineWidth(1);
+		ee::RVG::Lines(vertices);
+		ee::RVG::LineWidth(2);
 	}
 }
 

@@ -188,9 +188,11 @@ bool EditBezierOP::OnDraw() const
 			{
 				ee::Vector c(bezier->GetRect().CenterX(), bezier->GetRect().CenterY());
 				
-				ee::RVG::Circle(c, tolerance, true, ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
+				ee::RVG::Circle(c, tolerance, true);
 				if (m_captured.pos.IsValid()) {
-					ee::RVG::Circle(m_captured.pos, tolerance, true, ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
+					ee::RVG::Circle(m_captured.pos, tolerance, true);
 				}
 			}
 		}

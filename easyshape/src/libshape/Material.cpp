@@ -47,7 +47,8 @@ void Material::DebugDrawTris(const ee::Matrix& mt) const
 		{
 			std::vector<ee::Vector> vertices;
 			ee::Math2D::TransVertices(mt, buf, vertices);
-			ee::RVG::Polyline(vertices, ee::Colorf(0, 1, 0), true);
+			ee::RVG::Color(ee::Colorf(0, 1, 0));
+			ee::RVG::Polyline(vertices, true);
 			buf.clear();
 		}
 	}

@@ -67,7 +67,9 @@ bool DrawCurveOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
 	if (!m_curve.empty()) {
-		ee::RVG::Polyline(m_curve, ee::Colorf(0, 0, 0), false, 1);
+		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::LineWidth(1);
+		ee::RVG::Polyline(m_curve, false);
 	}
 
 	return false;

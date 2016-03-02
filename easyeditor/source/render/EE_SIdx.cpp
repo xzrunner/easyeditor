@@ -5,7 +5,7 @@
 #include "Sprite.h"
 #include "BoundingBox.h"
 #include "EE_RVG.h"
-#include "style_config.h"
+#include "color_config.h"
 
 #include <sidx_null.h>
 #include <sidx_region.h>
@@ -69,7 +69,8 @@ void SIdx::Query(const Rect& region, std::vector<const Sprite*>& result) const
 
 static void _render(float xmin, float ymin, float xmax, float ymax) 
 {
-	RVG::Rect(Vector(xmin, ymin), Vector(xmax, ymax), LIGHT_GREEN_LINE);
+	RVG::Color(LIGHT_GREEN);
+	RVG::Rect(Vector(xmin, ymin), Vector(xmax, ymax), false);
 }
 
 void SIdx::DebugDraw() const

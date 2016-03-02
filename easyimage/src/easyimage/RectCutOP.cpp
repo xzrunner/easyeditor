@@ -5,7 +5,7 @@
 #include <ee/Rect.h>
 #include <ee/Math2D.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 
@@ -177,7 +177,8 @@ bool RectCutOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
 
 	if (!m_stage->GetImage()) return false;
 
@@ -185,20 +186,21 @@ bool RectCutOP::OnDraw() const
 
 	if (m_first_pos.IsValid() && m_curr_pos.IsValid())
 	{
-		ee::RVG::Rect(m_first_pos, m_curr_pos, ee::LIGHT_RED_LINE);
+		ee::RVG::Color(ee::LIGHT_RED);
+		ee::RVG::Rect(m_first_pos, m_curr_pos, false);
 	}
 
 	DrawCaptureLine();
 
 	if (m_rect_selected) {
+		ee::RVG::Color(ee::LIGHT_GREEN);
 		ee::RVG::Rect(ee::Vector(m_rect_selected->xmin, m_rect_selected->ymin), 
-			ee::Vector(m_rect_selected->xmax, m_rect_selected->ymax),
-			ee::LIGHT_GREEN_FACE);
+			ee::Vector(m_rect_selected->xmax, m_rect_selected->ymax), true);
 	}
 	if (m_node_selected.rect) {
+		ee::RVG::Color(ee::LIGHT_GREEN);
 		ee::RVG::Rect(ee::Vector(m_node_selected.rect->xmin, m_node_selected.rect->ymin), 
-			ee::Vector(m_node_selected.rect->ymin, m_node_selected.rect->ymax),
-			ee::LIGHT_GREEN_FACE);
+			ee::Vector(m_node_selected.rect->ymin, m_node_selected.rect->ymax), true);
 	}
 
 	return false;
@@ -242,14 +244,16 @@ void RectCutOP::DrawCaptureLine() const
 	{
 		ee::Vector p0(m_captured.x, -EDGE);
 		ee::Vector p1(m_captured.x, EDGE);
-		ee::RVG::DashLine(p0, p1, ee::Colorf(0, 0, 0));
+		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::DashLine(p0, p1);
 	}
 
 	if (m_captured.y != ee::FLT_INVALID)
 	{
 		ee::Vector p0(-EDGE, m_captured.y);
 		ee::Vector p1(EDGE, m_captured.y);
-		ee::RVG::DashLine(p0, p1, ee::Colorf(0, 0, 0));
+		ee::RVG::Color(ee::Colorf(0, 0, 0));
+		ee::RVG::DashLine(p0, p1);
 	}
 }
 

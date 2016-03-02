@@ -98,13 +98,16 @@ void ChainShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 
 	std::vector<ee::Vector> vertices;
 	ee::Math2D::TransVertices(mt, m_vertices, vertices);
-	ee::RVG::Polyline(vertices, color.multi, m_loop);
+	ee::RVG::Color(color.multi);
+	ee::RVG::Polyline(vertices, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
 		float len = ee::Math2D::TransLen(ee::SettingData::ctl_pos_sz, mt);
-		ee::RVG::Circles(vertices, len, true, ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Circles(vertices, len, true);
 	}
 	if (m_draw_dir) {
-		ee::RVG::Circle(vertices[0], 10, true, color.multi);
+		ee::RVG::Color(color.multi);
+		ee::RVG::Circle(vertices[0], 10, true);
 	}
 }
 

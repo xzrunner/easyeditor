@@ -115,9 +115,11 @@ void SpriteRenderer::DrawImpl(const Sprite* sprite,
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] = Math2D::TransVector(bound[i], mt);
 		}
-		RVG::Polyline(bound, BLACK, true, 4);
-		RVG::Line(bound[0], bound[2], BLACK, 4);
-		RVG::Line(bound[1], bound[3], BLACK, 4);
+		RVG::Color(BLACK);
+		RVG::LineWidth(4);
+		RVG::Polyline(bound, true);
+		RVG::Line(bound[0], bound[2]);
+		RVG::Line(bound[1], bound[3]);
 	}
 }
 

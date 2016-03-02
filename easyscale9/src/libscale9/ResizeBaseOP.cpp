@@ -83,11 +83,12 @@ bool ResizeBaseOP::OnDraw() const
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;
 	const float r = REGION;
-	ee::RVG::Rect(ee::Vector(-hw, -hh), r, r, m_style);
-	ee::RVG::Rect(ee::Vector( hw, -hh), r, r, m_style);
-	ee::RVG::Rect(ee::Vector( hw,  hh), r, r, m_style);
-	ee::RVG::Rect(ee::Vector(-hw,  hh), r, r, m_style);
+	ee::RVG::Rect(ee::Vector(-hw, -hh), r, r, false);
+	ee::RVG::Rect(ee::Vector( hw, -hh), r, r, false);
+	ee::RVG::Rect(ee::Vector( hw,  hh), r, r, false);
+	ee::RVG::Rect(ee::Vector(-hw,  hh), r, r, false);
 
 	return false;
 }
+
 } // escale9

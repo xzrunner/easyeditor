@@ -29,7 +29,6 @@ Symbol::Symbol()
 	m_name = FILE_TAG + wxVariant(id++);
 
 	m_clipbox.xmin = m_clipbox.xmax = m_clipbox.ymin = m_clipbox.ymax = 0;
-	m_style.color.Set(0, 0.8f, 0);
 }
 
 Symbol::~Symbol()
@@ -138,7 +137,8 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			ee::Vector min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
-			ee::RVG::Rect(ee::Math2D::TransVector(min, mt), ee::Math2D::TransVector(max, mt), m_style);
+			ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
+			ee::RVG::Rect(ee::Math2D::TransVector(min, mt), ee::Math2D::TransVector(max, mt), false);
 		}
 	}
 }

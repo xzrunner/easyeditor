@@ -317,13 +317,15 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (captured.pos.IsValid()) {
-			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true, ee::Colorf(1.0f, 0.4f, 0.4f));
+			ee::RVG::Color(ee::Colorf(1.0f, 0.4f, 0.4f));
+			ee::RVG::Circle(captured.pos, m_node_capture->GetValue(), true);
 		}
 
 		ee::Vector center;
 		center.x = chain->GetRect().CenterX();
 		center.y = chain->GetRect().CenterY();
-		ee::RVG::Circle(center, m_node_capture->GetValue(), true, ee::Colorf(0.4f, 1.0f, 0.4f));
+		ee::RVG::Color(ee::Colorf(0.4f, 1.0f, 0.4f));
+		ee::RVG::Circle(center, m_node_capture->GetValue(), true);
 	}
 }
 

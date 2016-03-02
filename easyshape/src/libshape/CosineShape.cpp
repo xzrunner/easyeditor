@@ -54,12 +54,15 @@ void CosineShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	if (m_vertices.empty()) return;
 
-	ee::RVG::Polyline(m_midPoints, color.multi, m_loop);
+	ee::RVG::Color(color.multi);
+	ee::RVG::Polyline(m_midPoints, m_loop);
 	if (ee::SettingData::ctl_pos_sz != 0) {
-		ee::RVG::Circles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true, ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::Circles(m_vertices, static_cast<float>(ee::SettingData::ctl_pos_sz), true);
 	}
 	if (ee::SettingData::ctl_pos_sz != 0) {
-		ee::RVG::Circles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true, ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.4f));
+		ee::RVG::Circles(m_midPoints, ee::SettingData::ctl_pos_sz * 0.5f, true);
 	}
 }
 

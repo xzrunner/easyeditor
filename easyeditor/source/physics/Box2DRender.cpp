@@ -1,6 +1,5 @@
 #include "Box2DRender.h"
 #include "EE_RVG.h"
-#include "ShapeStyle.h"
 
 namespace ee
 {
@@ -14,36 +13,48 @@ void Box2DRender::DrawPolygon(const b2Vec2* vertices, int vertexCount, const b2C
 {
 	std::vector<Vector> _vertices;
 	TransVertices(vertices, vertexCount, _vertices);
-	RVG::Polyline(_vertices, TransColor(color), true, 1);
+
+	RVG::Color(TransColor(color));
+	RVG::LineWidth(1);
+	RVG::Polyline(_vertices, true);
 }
 
 void Box2DRender::DrawSolidPolygon(const b2Vec2* vertices, int vertexCount, const b2Color& color)
 {
 	std::vector<Vector> _vertices;
 	TransVertices(vertices, vertexCount, _vertices);
+
 	// todo draw with triangles
 //	RVG::Polygon(_vertices, TransColor(color, 0.5f));
-	RVG::Polyline(_vertices, TransColor(color), true, 1);
+
+	RVG::Color(TransColor(color));
+	RVG::LineWidth(1);
+	RVG::Polyline(_vertices, true);
 }
 
 void Box2DRender::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
 {
-	RVG::Circle(TransVertex(center), radius * m_ratio, true, TransColor(color));
+	RVG::Color(TransColor(color));
+	RVG::Circle(TransVertex(center), radius * m_ratio, true);
 }
 
 void Box2DRender::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
 	Vector _center = TransVertex(center);
 	float _radius = radius * m_ratio;
-	RVG::Circle(_center, _radius, true, TransColor(color, 0.5f));
-	RVG::Circle(_center, _radius, false, TransColor(color));
+	RVG::Color(TransColor(color, 0.5f));
+	RVG::Circle(_center, _radius, true);
+	RVG::Color(TransColor(color));
+	RVG::Circle(_center, _radius, false);
 
 	DrawSegment(center, center+radius*axis, color);
 }
 
 void Box2DRender::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
 {
-	RVG::Line(TransVertex(p1), TransVertex(p2), TransColor(color), 1);
+	RVG::Color(TransColor(color));
+	RVG::LineWidth(1);
+	RVG::Line(TransVertex(p1), TransVertex(p2));
 }
 
 void Box2DRender::DrawTransform(const b2Transform& xf)
@@ -60,7 +71,9 @@ void Box2DRender::DrawTransform(const b2Transform& xf)
 
 void Box2DRender::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color)
 {
-	RVG::Point(TransVertex(p), TransColor(color), size);
+	RVG::Color(TransColor(color));
+	RVG::PointSize(size);
+	RVG::Point(TransVertex(p));
 }
 
 void Box2DRender::DrawString(int x, int y, const char *string, ...)
@@ -69,11 +82,9 @@ void Box2DRender::DrawString(int x, int y, const char *string, ...)
 
 void Box2DRender::DrawAABB(b2AABB* aabb, const b2Color& c)
 {
-	ShapeStyle style;
-	style.filling = false;
-	style.color = TransColor(c);
-	style.size = 1;
-	RVG::Rect(TransVertex(aabb->lowerBound), TransVertex(aabb->upperBound), style);
+	RVG::Color(TransColor(c));
+	RVG::LineWidth(1);
+	RVG::Rect(TransVertex(aabb->lowerBound), TransVertex(aabb->upperBound), false);
 }
 
 Vector Box2DRender::TransVertex(const b2Vec2& vertex) const

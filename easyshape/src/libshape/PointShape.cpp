@@ -49,7 +49,8 @@ void PointShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	ee::Vector c = ee::Math2D::TransVector(m_pos, mt);
 	float r = ee::Math2D::TransLen(RADIUS, mt);
-	ee::RVG::Circle(c, r, true, color.multi);
+	ee::RVG::Color(color.multi);
+	ee::RVG::Circle(c, r, true);
 }
 
 ee::PropertySetting* PointShape::CreatePropertySetting(ee::EditPanelImpl* stage)

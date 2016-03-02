@@ -10,7 +10,7 @@
 #include <ee/Math2D.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteSelection.h>
 
@@ -106,13 +106,14 @@ void StageCanvas::DrawGuideLines() const
 	int width = col * edge;
 	int height = row * edge;
 
+	ee::RVG::Color(ee::LIGHT_GREY);
 	if (is_flat)
 	{
 		for (int i = 0; i <= row; ++i) {
-			ee::RVG::Line(ee::Vector(0, i*edge), ee::Vector(width, i*edge), ee::LIGHT_GREY);
+			ee::RVG::Line(ee::Vector(0, i*edge), ee::Vector(width, i*edge));
 		}
 		for (int i = 0; i <= col; ++i) {
-			ee::RVG::Line(ee::Vector(i*edge, 0), ee::Vector(i*edge, height), ee::LIGHT_GREY);
+			ee::RVG::Line(ee::Vector(i*edge, 0), ee::Vector(i*edge, height));
 		}
 	}
 	else
@@ -120,12 +121,12 @@ void StageCanvas::DrawGuideLines() const
 		for (int i = 0; i <= row; ++i) {
 			ee::Vector s = TransToBirdView(ee::Vector(0, i*edge));
 			ee::Vector e = TransToBirdView(ee::Vector(width, i*edge));
-			ee::RVG::Line(s, e, ee::LIGHT_GREY);
+			ee::RVG::Line(s, e);
 		}
 		for (int i = 0; i <= col; ++i) {
 			ee::Vector s = TransToBirdView(ee::Vector(i*edge, 0));
 			ee::Vector e = TransToBirdView(ee::Vector(i*edge, height));
-			ee::RVG::Line(s, e, ee::LIGHT_GREY);
+			ee::RVG::Line(s, e);
 		}
 	}
 }

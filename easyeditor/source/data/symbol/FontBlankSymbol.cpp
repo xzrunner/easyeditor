@@ -25,9 +25,6 @@ FontBlankSymbol::FontBlankSymbol()
 	align_hori = align_vert = 0;
 	size = 0;
 	width = height = 100;
-
-	m_style.filling = true;
-	m_style.color.Set(0.7f, 0.7f, 0.7f, 0.7f);
 }
 
 FontBlankSymbol::~FontBlankSymbol()
@@ -119,7 +116,8 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const Matrix& mt
 	hw = Math2D::TransLen(hw, mt);
 	hh = Math2D::TransLen(hh, mt);
 
-	RVG::Rect(Vector(0, 0), hw, hh, m_style);
+	RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+	RVG::Rect(Vector(0, 0), hw, hh, true);
 }
 
 void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const Matrix& mt) const

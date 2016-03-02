@@ -106,8 +106,10 @@ void Fixture::Draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colo
 	{
 		ee::Vector c = ee::Math2D::TransVector(circle->center, mt);
 		float r = ee::Math2D::TransLen(circle->radius, mt);
-		ee::RVG::Circle(c, r, true, cFace);
-		ee::RVG::Circle(c, r, false, cEdge, 32);
+		ee::RVG::Color(cFace);
+		ee::RVG::Circle(c, r, true);
+		ee::RVG::Color(cEdge);
+		ee::RVG::Circle(c, r, false, 32);
 	}
 	else if (eshape::RectShape* rect = dynamic_cast<eshape::RectShape*>(m_shape))
 	{
@@ -115,8 +117,9 @@ void Fixture::Draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colo
 			max(rect->m_rect.xmax, rect->m_rect.ymax);
 		min = ee::Math2D::TransVector(min, mt);
 		max = ee::Math2D::TransVector(max, mt);
-		ee::RVG::Rect(min, max, ee::ShapeStyle(true, 2, cFace));
-		ee::RVG::Rect(min, max, ee::ShapeStyle(false, 2, cFace));
+		ee::RVG::Color(cFace);
+		ee::RVG::Rect(min, max, true);
+		ee::RVG::Rect(min, max, false);
 	}
 	else if (eshape::PolygonShape* polygon = dynamic_cast<eshape::PolygonShape*>(m_shape))
 	{
@@ -124,13 +127,15 @@ void Fixture::Draw(const ee::Matrix& mt, const ee::Colorf& cFace, const ee::Colo
 		ee::Math2D::TransVertices(mt, polygon->GetVertices(), vertices);
 		// todo draw with triangles
 //		ee::PrimitiveDraw::DrawPolygon(vertices, cFace);
-		ee::RVG::Polyline(vertices, cEdge, true, 2);
+		ee::RVG::Color(cEdge);
+		ee::RVG::Polyline(vertices, true);
 	}
 	else if (eshape::ChainShape* chain = dynamic_cast<eshape::ChainShape*>(m_shape))
 	{
 		std::vector<ee::Vector> vertices;
 		ee::Math2D::TransVertices(mt, chain->GetVertices(), vertices);
-		ee::RVG::Polyline(vertices, cEdge, chain->IsClosed(), 2);
+		ee::RVG::Color(cEdge);
+		ee::RVG::Polyline(vertices, chain->IsClosed());
 	}
 }
 

@@ -65,8 +65,10 @@ void ArrangeSpriteImpl::OnDraw(const ee::Camera& cam) const
 
 	ee::Vector pos = m_selected->GetPosition();
 	m_center_node_radius = std::min(CENTER_NODE_RADIUS * cam.GetScale(), MAX_CENTER_NODE_RADIUS);
-	ee::RVG::Circle(pos, m_center_node_radius, false, ee::RED);
-	ee::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2, ee::GREEN);
+	ee::RVG::Color(ee::RED);
+	ee::RVG::Circle(pos, m_center_node_radius, false);
+	ee::RVG::Color(ee::GREEN);
+	ee::RVG::Cross(pos, m_center_node_radius * 2, m_center_node_radius * 2);
 }
 
 ee::ArrangeSpriteState* ArrangeSpriteImpl::

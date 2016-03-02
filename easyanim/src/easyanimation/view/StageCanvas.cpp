@@ -9,7 +9,7 @@
 #include <ee/EE_RVG.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Sprite.h>
 
 namespace eanim
@@ -63,7 +63,8 @@ void StageCanvas::DrawBackground() const
 
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	ee::RVG::Cross(ee::Vector(0,0), xedge, yedge, ee::LIGHT_GREY);
+	ee::RVG::Color(ee::LIGHT_GREY);
+	ee::RVG::Cross(ee::Vector(0,0), xedge, yedge);
 }
 
 } // eanim

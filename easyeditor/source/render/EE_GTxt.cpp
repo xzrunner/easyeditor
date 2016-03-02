@@ -4,15 +4,16 @@
 #include "Vector.h"
 #include "Math2D.h"
 #include "ColorTrans.h"
-#include "PrimitiveDrawRVG.h"
 #include "Symbol.h"
 #include "SymbolMgr.h"
 #include "SpriteRenderer.h"
 #include "EE_DTex.h"
 #include "Config.h"
 #include "StringHelper.h"
+#include "EE_RVG.h"
 
 #include <gtxt.h>
+#include <shaderlab.h>
 
 namespace ee
 {
@@ -82,8 +83,9 @@ render_decoration(const Matrix& mat, float x, float y, float w, float h, struct 
 		return;
 	}
 
-	ShaderMgr::Instance()->RVG();
-	PrimitiveDrawRVG::SetColor(d->color);
+//	ShaderMgr::Instance()->RVG();
+	sl_shape_color(d->color);
+//	PrimitiveDrawRVG::SetColor(d->color);
 
 	float hw = w * 0.5f,
 		  hh = h * 0.5f;
@@ -101,20 +103,22 @@ render_decoration(const Matrix& mat, float x, float y, float w, float h, struct 
 			left.y = right.y = ds->row_y + ds->row_h * 0.5f;
 			break;
 		}
-		PrimitiveDrawRVG::Line(mat, left, right);
+		RVG::Line(Math2D::TransVector(left, mat), Math2D::TransVector(right, mat));
 	} else if (d->type == GRDT_BORDER || d->type == GRDT_BG) {
-		Vector min(x - hw, ds->row_y),
-			        max(x + hw, ds->row_y + ds->row_h);
+		Vector min(x - hw, ds->row_y), 
+			   max(x + hw, ds->row_y + ds->row_h);
+		min = Math2D::TransVector(min, mat);
+		max = Math2D::TransVector(max, mat);
 		if (d->type == GRDT_BG) {
-			PrimitiveDrawRVG::Rect(mat, min, max, true);
+			RVG::Rect(min, max, true);
 		} else if (ds->pos_type != GRPT_NULL) {
-			PrimitiveDrawRVG::Line(mat, min, Vector(max.x, min.y));
-			PrimitiveDrawRVG::Line(mat, Vector(min.x, max.y), max);
+			RVG::Line(min, Vector(max.x, min.y));
+			RVG::Line(Vector(min.x, max.y), max);
 			if (ds->pos_type == GRPT_BEGIN) {
-				PrimitiveDrawRVG::Line(mat, min, Vector(min.x, max.y));
+				RVG::Line(min, Vector(min.x, max.y));
 			}
 			if (ds->pos_type == GRPT_END) {
-				PrimitiveDrawRVG::Line(mat, Vector(max.x, min.y), max);
+				RVG::Line(Vector(max.x, min.y), max);
 			}
 		}
 	}

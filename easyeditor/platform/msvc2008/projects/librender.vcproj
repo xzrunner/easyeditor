@@ -438,14 +438,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\render\PrimitiveDrawRVG.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\PrimitiveDrawRVG.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\include\ee\ShapeStyle.h"
 				>
 			</File>

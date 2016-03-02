@@ -20,7 +20,8 @@ void StageCanvas::OnDrawSprites() const
 		ee::SpriteRenderer::Instance()->Draw(s);
 	}
 
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
 
 	m_stage->DrawEditOP();
 }

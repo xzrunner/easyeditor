@@ -41,8 +41,8 @@ void StageCanvas::drawConnection() const
 		for (size_t i = 0, n = itr->second->out.size(); i < n; ++i)
 		{
 			ee::Sprite* to = itr->second->out[i];
-			ee::RVG::Line(from->GetPosition(), to->GetPosition(), 
-				ee::Colorf(0.8f, 0.8f, 0.8f));
+			ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
+			ee::RVG::Line(from->GetPosition(), to->GetPosition());
 		}
 	}
 }

@@ -50,7 +50,10 @@ void Joint::DrawBodyFlag(const ee::Vector& pos) const
 	vertices[1].x += edge;
 	vertices[2].y -= edge;
 	vertices[3].y += edge;
-	ee::RVG::Lines(vertices, ee::Colorf(0.4f, 0.8f, 0.8f), 1);
+	ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.8f));
+	ee::RVG::LineWidth(1);
+	ee::RVG::Lines(vertices);
+	ee::RVG::LineWidth(2);
 }
 
 }

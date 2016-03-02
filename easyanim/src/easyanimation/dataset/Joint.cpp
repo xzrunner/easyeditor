@@ -44,8 +44,10 @@ Joint::~Joint()
 
 void Joint::Draw() const
 {
-	ee::RVG::Circle(GetWorldPos(), REGION, true, ee::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
-	ee::RVG::Circle(GetWorldPos(), REGION, false, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+	ee::RVG::Color(ee::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
+	ee::RVG::Circle(GetWorldPos(), REGION, true);
+	ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+	ee::RVG::Circle(GetWorldPos(), REGION, false);
 	if (m_parent)
 	{
 		ee::Vector s = GetWorldPos();
@@ -56,10 +58,11 @@ void Joint::Draw() const
 		ee::Vector left = mid + ee::Math2D::RotateVectorRightAngle(s - mid, false);
 		ee::Vector right = mid + ee::Math2D::RotateVectorRightAngle(s - mid, true);
 
-		ee::RVG::Line(s, left, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		ee::RVG::Line(left, e, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		ee::RVG::Line(e, right, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
-		ee::RVG::Line(right, s, ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		ee::RVG::Line(s, left);
+		ee::RVG::Line(left, e);
+		ee::RVG::Line(e, right);
+		ee::RVG::Line(right, s);
 	}
 }
 

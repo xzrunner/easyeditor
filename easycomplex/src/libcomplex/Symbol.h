@@ -1,7 +1,6 @@
 #ifndef _EASYCOMPLEX_SYMBOL_H_
 #define _EASYCOMPLEX_SYMBOL_H_
 
-#include <ee/ShapeStyle.h>
 #include <ee/Symbol.h>
 
 #include <vector>
@@ -64,7 +63,6 @@ public:
 	ee::Rect m_rect;
 
 	ee::Rect m_clipbox;
-	ee::ShapeStyle m_style;
 
 	bool m_use_render_cache;
 

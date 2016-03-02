@@ -17,8 +17,6 @@ namespace etext
 
 Symbol::Symbol()
 {
-	m_bg_style.filling = true;
-	m_bg_style.color.Set(0.7f, 0.7f, 0.7f, 0.7f);
 }
 
 Symbol::~Symbol()
@@ -92,7 +90,8 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) cons
 		font->GetSize(hw, hh);
 		hw = ee::Math2D::TransLen(hw * 0.5f, mt);
 		hh = ee::Math2D::TransLen(hh * 0.5f, mt);
-		ee::RVG::Rect(ee::Vector(0, 0), hw, hh, m_bg_style);
+		ee::RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+		ee::RVG::Rect(ee::Vector(0, 0), hw, hh, true);
 	}
 }
 

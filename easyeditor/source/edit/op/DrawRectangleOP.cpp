@@ -51,7 +51,7 @@ bool DrawRectangleOP::OnDraw() const
 	if (ZoomViewOP::OnDraw()) return true;
 
 	if (m_first_pos.IsValid() && m_last_pos.IsValid()) {
-		RVG::Rect(m_first_pos, m_last_pos, m_style);
+		RVG::Rect(m_first_pos, m_last_pos, false);
 	}
 
 	return false;

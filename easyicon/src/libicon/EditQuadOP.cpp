@@ -7,7 +7,7 @@
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Image.h>
 
 namespace eicon
@@ -118,8 +118,10 @@ bool EditQuadOP::OnDraw() const
 
 	float w = img->GetClippedWidth(),
 		h = img->GetClippedHeight();
-	ee::RVG::Rect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, 
-		ee::LIGHT_RED_THIN_LINE);
+	ee::RVG::Color(ee::LIGHT_RED);
+	ee::RVG::LineWidth(1);
+	ee::RVG::Rect(ee::Vector(0, 0), w * 0.5f, h * 0.5f, false);
+	ee::RVG::LineWidth(2);
 
 	QuadIcon* quad_icon = static_cast<QuadIcon*>(icon);
 
@@ -128,9 +130,11 @@ bool EditQuadOP::OnDraw() const
 		screen.push_back(quad_icon->GetScreen()[i]);
 	}
 
-	ee::RVG::Polyline(screen, ee::LIGHT_GREEN, true);
+	ee::RVG::Color(ee::LIGHT_GREEN);
+	ee::RVG::Polyline(screen, true);
 	for (int i = 0; i < 4; ++i) {
-		ee::RVG::Rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, ee::LIGHT_GREEN_FACE);
+		ee::RVG::Color(ee::LIGHT_GREEN);
+		ee::RVG::Rect(screen[i], CTRL_NODE_RADIUS, CTRL_NODE_RADIUS, true);
 	}
 
 	return false;

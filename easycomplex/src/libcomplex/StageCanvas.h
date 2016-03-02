@@ -2,7 +2,6 @@
 #define _EASYCOMPLEX_STAGE_CANVAS_H_
 
 #include <ee/OrthoCanvas.h>
-#include <ee/ShapeStyle.h>
 #include <ee/FPS.h>
 #include <ee/Camera.h>
 
@@ -35,8 +34,6 @@ private:
 
 private:
 	ee::LibraryPanel* m_library;
-
-	ee::ShapeStyle m_bgStyle, m_clipboxStyle;
 
 	ee::Symbol* m_background;
 

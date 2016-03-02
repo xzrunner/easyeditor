@@ -64,9 +64,11 @@ void ComplexPolygonShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color
 		for (int i = 0, n = m_holes.size(); i < n; ++i) {
 			std::vector<ee::Vector> vertices;
 			ee::Math2D::TransVertices(mt, m_holes[i], vertices);
-			ee::RVG::Polyline(vertices, color.multi, m_loop);
+			ee::RVG::Color(color.multi);
+			ee::RVG::Polyline(vertices, m_loop);
 			if (len != 0) {
-				ee::RVG::Circles(vertices, len, true, ee::Colorf(0.4f, 0.8f, 0.4f));
+				ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+				ee::RVG::Circles(vertices, len, true);
 			}
 		}
 	} 

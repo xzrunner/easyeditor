@@ -201,11 +201,12 @@ void AutoAlign::Draw() const
 {
 	if (m_open)
 	{
+		RVG::Color(Colorf(0, 0, 0));
 		if (m_hor[0] != m_hor[1]) {
-			RVG::DashLine(m_hor[0], m_hor[1], Colorf(0, 0, 0));
+			RVG::DashLine(m_hor[0], m_hor[1]);
 		}
 		if (m_ver[0] != m_ver[1]) {
-			RVG::DashLine(m_ver[0], m_ver[1], Colorf(0, 0, 0));
+			RVG::DashLine(m_ver[0], m_ver[1]);
 		}
 	}
 }

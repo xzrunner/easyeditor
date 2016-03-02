@@ -6,7 +6,7 @@
 #include <ee/render_utility.h>
 #include <ee/EE_RVG.h>
 #include <ee/cfg_const.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/Sprite.h>
 #include <ee/Matrix.h>
 #include <ee/DrawShapesVisitor.h>
@@ -46,10 +46,8 @@ StageCanvas::StageCanvas(StagePanel* stage,
 
 void StageCanvas::DrawGuideLines() const
 {
-	ee::RVG::Rect(ee::Vector(0, 0), 
-		ee::HALF_S_WIDTH,
-		ee::HALF_S_HEIGHT,
-		ee::LIGHT_GREY_LINE);
+	ee::RVG::Color(ee::LIGHT_GREY);
+	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_S_WIDTH, ee::HALF_S_HEIGHT, false);
 }
 
 void StageCanvas::OnDrawSprites() const

@@ -4,7 +4,6 @@
 #include <ee/Math2D.h>
 #include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
-#include <ee/ShapeStyle.h>
 
 namespace emodeling
 {
@@ -39,8 +38,10 @@ void WheelJoint::Draw(DrawType type) const
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.8f, 0.4f), 2);
-		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition(), ee::Colorf(0.4f, 0.4f, 0.8f), 2);
+		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.4f));
+		ee::RVG::DashLine(anchorA, m_body_a->m_sprite->GetPosition());
+		ee::RVG::Color(ee::Colorf(0.4f, 0.4f, 0.8f));
+		ee::RVG::DashLine(anchorB, m_body_b->m_sprite->GetPosition());
 
 		DrawAxisALine(anchorA);
 		DrawFootBLine(anchorA, anchorB);
@@ -79,7 +80,10 @@ void WheelJoint::DrawAxisALine(const ee::Vector& worldAnchorA) const
 	const ee::Vector start = worldAnchorA + unit * 150,
 		end = worldAnchorA - unit * 150;
 
-	ee::RVG::DotDashLine(start, end, ee::Colorf(0.4f, 0.6f, 0.4f), 1);
+	ee::RVG::Color(ee::Colorf(0.4f, 0.6f, 0.4f));
+	ee::RVG::LineWidth(1);
+	ee::RVG::DotDashLine(start, end);
+	ee::RVG::LineWidth(2);	
 }
 
 void WheelJoint::DrawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector& worldAnchorB) const
@@ -89,8 +93,12 @@ void WheelJoint::DrawFootBLine(const ee::Vector& worldAnchorA, const ee::Vector&
 	ee::Vector foot;
 	ee::Math2D::GetFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
-	ee::RVG::DashLine(worldAnchorB, foot, ee::Colorf(1, 0, 0), 1);
-	ee::RVG::Circle(foot, JOINT_RADIUS_IN, true, ee::Colorf(1, 0, 0));
+	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::LineWidth(1);
+	ee::RVG::DashLine(worldAnchorB, foot);
+	ee::RVG::LineWidth(2);	
+
+	ee::RVG::Circle(foot, JOINT_RADIUS_IN, true);
 }
 
 void WheelJoint::DrawAnchorA(const ee::Vector& pos, DrawType type) const
@@ -109,8 +117,9 @@ void WheelJoint::DrawAnchorA(const ee::Vector& pos, DrawType type) const
 		break;
 	}
 
-	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true, color);
-	ee::RVG::Rect(pos, JOINT_RADIUS_OUT, ee::ShapeStyle(true, 2, color));
+	ee::RVG::Color(color);
+	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true);
+	ee::RVG::Rect(pos, JOINT_RADIUS_OUT, JOINT_RADIUS_OUT, true);
 }
 
 void WheelJoint::DrawAnchorB(const ee::Vector& pos, DrawType type) const
@@ -129,8 +138,9 @@ void WheelJoint::DrawAnchorB(const ee::Vector& pos, DrawType type) const
 		break;
 	}
 
-	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true, color);
-	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false, color);
+	ee::RVG::Color(color);
+	ee::RVG::Circle(pos, JOINT_RADIUS_IN, true);
+	ee::RVG::Circle(pos, JOINT_RADIUS_OUT, false);
 }
 
 }

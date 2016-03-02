@@ -29,7 +29,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawGuideLines() const
 {
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));
+	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
 }
 
 }

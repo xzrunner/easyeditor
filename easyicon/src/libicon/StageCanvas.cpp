@@ -51,7 +51,8 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->GetSymbol().Draw(ee::Matrix(), ee::ColorTrans(), &sprite);
 
-	ee::RVG::Cross(ee::Vector(0, 0), 100, 100, ee::Colorf(1, 0, 0));;
+	ee::RVG::Color(ee::Colorf(1, 0, 0));
+	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);
 
 	m_stage->DrawEditOP();
 }

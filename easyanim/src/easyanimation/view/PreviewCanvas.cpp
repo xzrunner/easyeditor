@@ -7,7 +7,7 @@
 #include "message/messages.h"
 
 #include <ee/EE_RVG.h>
-#include <ee/style_config.h>
+#include <ee/color_config.h>
 #include <ee/PlayControl.h>
 #include <ee/panel_msg.h>
 #include <ee/SpriteRenderer.h>
@@ -31,7 +31,8 @@ void PreviewCanvas::OnDrawSprites() const
 {
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	ee::RVG::Cross(ee::Vector(0,0), xedge, yedge, ee::LIGHT_GREY);
+	ee::RVG::Color(ee::LIGHT_GREY);
+	ee::RVG::Cross(ee::Vector(0,0), xedge, yedge);
 
 	DrawStageData();
 }

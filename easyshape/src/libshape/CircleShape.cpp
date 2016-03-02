@@ -81,7 +81,8 @@ void CircleShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
 {
 	ee::Vector c = ee::Math2D::TransVector(center, mt);
 	float r = ee::Math2D::TransLen(radius, mt);
-	ee::RVG::Circle(c, r, false, color.multi, 32);
+	ee::RVG::Color(color.multi);
+	ee::RVG::Circle(c, r, false, 32);
 }
 
 ee::PropertySetting* CircleShape::CreatePropertySetting(ee::EditPanelImpl* stage)

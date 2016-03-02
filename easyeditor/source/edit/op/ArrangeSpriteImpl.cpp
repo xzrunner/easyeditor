@@ -353,23 +353,30 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 			{
 				Vector ctrl_nodes[4];
 				SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
-				for (int i = 0; i < 4; ++i)
-					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true, Colorf(0.2f, 0.8f, 0.2f));
+				for (int i = 0; i < 4; ++i) {
+					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+				}
 			}
 			else
 			{
 				Vector ctrl_nodes[8];
 				SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
-				for (int i = 0; i < 4; ++i)
-					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false, Colorf(0.2f, 0.8f, 0.2f));
-				for (int i = 4; i < 8; ++i)
-					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true, Colorf(0.2f, 0.8f, 0.2f));
+				for (int i = 0; i < 4; ++i) {
+					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, false);
+				}
+				for (int i = 4; i < 8; ++i) {
+					RVG::Color(Colorf(0.2f, 0.8f, 0.2f));
+					RVG::Circle(ctrl_nodes[i], m_ctrl_node_radius, true);
+				}
 			}
 
 			if (m_cfg.is_offset_open)
 			{
 				Vector offset = GetSprOffset(selected);
-				RVG::Circle(offset, m_ctrl_node_radius, true, Colorf(0.8f, 0.2f, 0.2f));
+				RVG::Color(Colorf(0.8f, 0.2f, 0.2f));
+				RVG::Circle(offset, m_ctrl_node_radius, true);
 			}
 		}
 	}

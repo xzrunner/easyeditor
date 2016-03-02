@@ -3,12 +3,12 @@
 #include "ColorMaterial.h"
 #include "TextureMaterial.h"
 
-#include <ee/style_config.h>
 #include <ee/Math2D.h>
 #include <ee/SymbolMgr.h>
 #include <ee/SettingData.h>
 #include <ee/ImageSymbol.h>
 #include <ee/Config.h>
+#include <ee/color_config.h>
 
 namespace eshape
 {
