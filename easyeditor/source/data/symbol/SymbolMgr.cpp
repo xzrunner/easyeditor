@@ -31,10 +31,8 @@ SymbolMgr* SymbolMgr::Instance()
 
 Symbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 {
-	std::string fixed_path = filepath;
+	std::string fixed_path = FileHelper::GetAbsolutePath(filepath);
 	StringHelper::ToLower(fixed_path);
-	fixed_path = FileHelper::GetExistFilepath(fixed_path);
-	fixed_path = FileHelper::FormatFilepath(fixed_path);
 
 	std::map<std::string, Symbol*>::iterator itr = m_symbols.find(fixed_path);
 	if (itr == m_symbols.end())
