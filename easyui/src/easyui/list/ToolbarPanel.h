@@ -18,6 +18,8 @@ public:
 	void EnableHori(bool enable);
 	void EnableVert(bool enable);
 
+	void SetSizeText(int width, int height);
+
 protected:
 	virtual wxSizer* InitLayout();
 

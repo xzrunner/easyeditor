@@ -50,6 +50,9 @@ void StagePanel::LoadFromFile(const char* filename)
 	m_toolbar->EnableHori(m_list.IsHoriEnable());
 	m_toolbar->EnableVert(m_list.IsVertEnable());
 
+	const ee::Rect& cb = m_list.GetClipbox();
+	m_toolbar->SetSizeText(cb.Width(), cb.Height());
+
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

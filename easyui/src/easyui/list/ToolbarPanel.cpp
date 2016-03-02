@@ -27,6 +27,12 @@ void ToolbarPanel::EnableVert(bool enable)
 	m_vert_check->SetValue(enable);
 }
 
+void ToolbarPanel::SetSizeText(int width, int height)
+{
+	m_width_text->SetValue(ee::StringHelper::ToString(width));
+	m_height_text->SetValue(ee::StringHelper::ToString(height));
+}
+
 wxSizer* ToolbarPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
