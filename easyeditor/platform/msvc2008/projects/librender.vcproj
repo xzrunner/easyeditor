@@ -349,18 +349,6 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="rvg"
-					>
-					<File
-						RelativePath="..\..\..\source\render\RVGShader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\RVGShader.h"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="screen"
 					>
 					<File
@@ -380,15 +368,7 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\source\render\ShapeShader.frag"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\include\ee\ShapeShader.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\source\render\ShapeShader.vert"
 						>
 					</File>
 				</Filter>
@@ -396,23 +376,11 @@
 					Name="sprite"
 					>
 					<File
-						RelativePath="..\..\..\source\render\SpriteFasterShader.frag"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\source\render\SpriteShader.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\source\render\SpriteShader.frag"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\include\ee\SpriteShader.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\source\render\SpriteShader.vert"
 						>
 					</File>
 				</Filter>
@@ -435,10 +403,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\DrawShapesVisitor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\ShapeStyle.h"
 				>
 			</File>
 		</Filter>

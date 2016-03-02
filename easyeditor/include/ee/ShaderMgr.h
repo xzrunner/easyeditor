@@ -15,8 +15,6 @@ class IShader;
 class ShapeShader;
 class SpriteShader;
 class ScreenShader;
-class RVGShader;
-class BlendShader;
 
 class ShaderMgr : public ShaderMgrBase
 {
@@ -33,7 +31,7 @@ public:
 	void shape();
 	void Screen();
 	void RVG();
-	void SpriteBlend();
+//	void SpriteBlend();
 	void null();
 
 	int GetTexID() const;
@@ -42,7 +40,7 @@ public:
 	void SetTexture(int tex);
 	void SetFBO(int fbo);
 
-	void Draw(const float vb[16], int texid);
+//	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 	void DrawScreen(int texid);
 
@@ -62,7 +60,7 @@ public:
 
 	ShapeShader* GetShapeShader() { return m_shape_shader; }
 	SpriteShader* GetSpriteShader() { return m_sprite_shader; }
-	BlendShader* GetBlendShader() { return m_blend_shader; }
+//	BlendShader* GetBlendShader() { return m_blend_shader; }
 
 private:
 	ShaderMgr();
@@ -75,8 +73,7 @@ private:
 	ShapeShader* m_shape_shader;
 	SpriteShader* m_sprite_shader;
 	ScreenShader* m_screen_shader;
-	RVGShader* m_rvg_shader;
-	BlendShader* m_blend_shader;
+//	BlendShader* m_blend_shader;
 
 	std::vector<SpriteShader*> m_all_sprite_shader;
 	std::vector<ShapeShader*> m_all_shape_shader;

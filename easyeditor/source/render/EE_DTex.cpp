@@ -85,7 +85,16 @@ static void _draw_begin()
 static void _draw(const float vb[16])
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Draw(vb, TEX_ID);
+
+	Vector vertices[4], texcoords[4];
+	for (int i = 0; i < 4; ++i) {
+		vertices[i].x  = vb[i * 4];
+		vertices[i].y  = vb[i * 4 + 1];
+		texcoords[i].x = vb[i * 4 + 2];
+		texcoords[i].y = vb[i * 4 + 2];
+	}
+
+	shader->Draw(vertices, texcoords, TEX_ID);
 }
 
 static void _draw_end()

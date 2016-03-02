@@ -1,10 +1,7 @@
 #include "ShaderMgr.h"
 #include "ShapeShader.h"
 #include "SpriteShader.h"
-#include "BlendShader.h"
 #include "ScreenShader.h"
-#include "RVGShader.h"
-#include "BlendShader.h"
 #include "ShaderContext.h"
 
 #include <sl_shader.h>
@@ -42,10 +39,6 @@ ShaderMgr::ShaderMgr()
 	m_screen_shader = new ScreenShader;
 	m_shaders.push_back(m_screen_shader);
 
-	m_rvg_shader = new RVGShader;
-	m_shaders.push_back(m_rvg_shader);
-
-	m_blend_shader = NULL;
 // 	m_blend_shader = new BlendShader;
 // 	m_shaders.push_back(m_blend_shader);
 // 	m_all_sprite_shader.push_back(m_blend_shader);
@@ -76,10 +69,10 @@ void ShaderMgr::SetShapeColor(const Colorf& col)
 
 void ShaderMgr::SetBlendMode(BlendMode mode)
 {
-	BlendShader* blend = dynamic_cast<BlendShader*>(m_sprite_shader);
-	if (blend) {
-		blend->SetBlendMode(BlendModes::Instance()->GetNameENFromID(mode));
-	}
+// 	BlendShader* blend = dynamic_cast<BlendShader*>(m_sprite_shader);
+// 	if (blend) {
+// 		blend->SetBlendMode(BlendModes::Instance()->GetNameENFromID(mode));
+// 	}
 }
 
 void ShaderMgr::sprite()
@@ -100,18 +93,12 @@ void ShaderMgr::Screen()
 	Switch(m_screen_shader);
 }
 
-void ShaderMgr::RVG()
-{
-	ShaderContext::Bind2d();
-	Switch(m_rvg_shader);
-}
-
-void ShaderMgr::SpriteBlend()
-{
-	ShaderContext::Bind2d();
-	Switch(m_blend_shader);
-	m_sprite_shader = m_blend_shader;
-}
+//void ShaderMgr::SpriteBlend()
+//{
+//	ShaderContext::Bind2d();
+//	Switch(m_blend_shader);
+//	m_sprite_shader = m_blend_shader;
+//}
 
 void ShaderMgr::null()
 {
@@ -121,37 +108,29 @@ void ShaderMgr::null()
 
 int ShaderMgr::GetTexID() const 
 { 
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	return shader->GetTexID();
+	return sl_shader_get_texture();
 }
 
 int ShaderMgr::GetFboID() const 
 { 
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	return shader->GetFboID();
+	return sl_shader_get_target();
 }
 
 void ShaderMgr::SetTexture(int tex)
 {
-	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
-	 	SpriteShader* shader = static_cast<SpriteShader*>(m_all_sprite_shader[i]);
-	 	shader->SetTexID(tex);
-	}
+	sl_shader_set_texture(tex, 0);
 }
 
 void ShaderMgr::SetFBO(int fbo)
 {
-	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
-		SpriteShader* shader = static_cast<SpriteShader*>(m_all_sprite_shader[i]);
-		shader->SetFboID(fbo);
-	}
+	sl_shader_set_target(fbo);
 }
 
-void ShaderMgr::Draw(const float vb[16], int texid)
-{
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	shader->Draw(vb, texid);
-}
+// void ShaderMgr::Draw(const float vb[16], int texid)
+// {
+// 	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
+// 	shader->Draw(vb, texid);
+// }
 
 void ShaderMgr::Draw(const Vector vertices[4], const Vector texcoords[4], int texid)
 {
@@ -171,14 +150,16 @@ int ShaderMgr::GetVersion() const
 
 void ShaderMgr::SetBufferData(bool open) 
 {
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	shader->SetBufferData(open);
+// 	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
+// 	shader->SetBufferData(open);
 }
 
 bool ShaderMgr::IsOpenBufferData() const 
 { 
-	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
-	return shader->IsOpenBufferData();
+// 	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
+// 	return shader->IsOpenBufferData();
+
+	return false;
 }
 
 void ShaderMgr::SetModelView(const Vector& offset, float scale)
@@ -189,7 +170,6 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
 		m_all_sprite_shader[i]->SetModelView(offset, scale);
 	}
-	m_rvg_shader->SetModelView(offset, scale);
 }
 
 int ShaderMgr::AddShapeShader(ShapeShader* shader)

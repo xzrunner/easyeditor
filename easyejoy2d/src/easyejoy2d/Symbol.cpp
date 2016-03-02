@@ -101,12 +101,12 @@ void Symbol::DrawToEJScreen() const
 
 void Symbol::DrawFromEJScreen() const
 {
-	float vb[16];
+	ee::Vector vertices[4], texcoords[4];
 
-	vb[2] = 0, vb[3] = 0;
-	vb[6] = 0, vb[7] = 1;
-	vb[10] = 1, vb[11] = 1;
-	vb[14] = 1, vb[15] = 0;
+	texcoords[0].x = 0, texcoords[0].y = 0;
+	texcoords[1].x = 0, texcoords[1].y = 1;
+	texcoords[2].x = 1, texcoords[2].y = 1;
+	texcoords[3].x = 1, texcoords[3].y = 0;
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
 	assert(scr);
@@ -114,10 +114,10 @@ void Symbol::DrawFromEJScreen() const
 	int left = 0, right = scr->GetWidth();
 	int down = 0, up = scr->GetHeight();
 
-	vb[0] = left, vb[1] = down;
-	vb[4] = left, vb[5] = up;
-	vb[8] = right, vb[9] = up;
-	vb[12] = right, vb[13] = down;
+	vertices[0].x = left,  vertices[0].y = down;
+	vertices[1].x = left,  vertices[1].y = up;
+	vertices[2].x = right, vertices[2].y = up;
+	vertices[3].x = right, vertices[3].y = down;
 
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	// reset
@@ -125,7 +125,7 @@ void Symbol::DrawFromEJScreen() const
 	shader->null();
 
 	shader->sprite();
-	shader->Draw(vb, scr->GetTexID());
+	shader->Draw(vertices, texcoords, scr->GetTexID());
 }
 
 }

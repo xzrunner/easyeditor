@@ -2,11 +2,11 @@
 #define _EASYEDITOR_SHAPE_SHADER_H_
 
 #include "IShader.h"
-#include "Matrix.h"
-#include "Color.h"
 
 namespace ee
 {
+
+class Colorf;
 
 class ShapeShader : public IShader
 {
@@ -28,20 +28,9 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 
 	void SetColor(const Colorf& col);
-	const Colorf& GetColor() const { return m_color; }
 
 protected:
-	virtual void LoadShader();
-
-private:
-	GLuint m_model_view, m_projection;
-
-	GLuint m_color_loc;
-
-	Matrix m_mat_modelview, m_mat_projection;
-	bool m_is_mat_dirty;
-
-	Colorf m_color;
+	virtual void LoadShader() {}
 
 }; // ShapeShader
 

@@ -8,7 +8,7 @@
 #ifdef OPEN_SCREEN_CACHE
 #include "render/ScreenCache.h"
 #endif // OPEN_SCREEN_CACHE
-#include "BlendShader.h"
+//#include "BlendShader.h"
 #include "EE_DTex.h"
 #include "SettingData.h"
 #include "ImageData.h"
@@ -191,42 +191,42 @@ void Image::Draw(const Matrix& mt, const Sprite* spr, const Sprite* root) const
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	mgr->sprite();
 
-	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(mgr->GetSpriteShader())) {
-		assert(spr);
-
-		if (root) {
-			Vector offset = root->GetPosition();
-			for (int i = 0; i < 4; ++i) {
-				vertices[i] -= offset;
-			}
-		}
-
-		Vector vertices_scr[4];
-		float img_hw = m_tex->GetWidth() * 0.5f,
-			  img_hh = m_tex->GetHeight() * 0.5f;
- 		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), mt);
- 		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), mt);
- 		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
- 		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
-
-		Vector tex_coolds_base[4];
-		SpriteRenderer* rd = SpriteRenderer::Instance();
-		const Camera* cam = rd->GetCamera();
-		assert(cam);
-		int w, h;
-		ScreenCache::Instance()->GetSize(w, h);
-		for (int i = 0; i < 4; ++i) {
-			tex_coolds_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
-			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
-			tex_coolds_base[i].x /= w;
-			tex_coolds_base[i].y /= h;
-			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
-			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
-		}
-		blend_shader->DrawBlend(vertices, texcoords, tex_coolds_base, texid);
-	} else {
+// 	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(mgr->GetSpriteShader())) {
+// 		assert(spr);
+// 
+// 		if (root) {
+// 			Vector offset = root->GetPosition();
+// 			for (int i = 0; i < 4; ++i) {
+// 				vertices[i] -= offset;
+// 			}
+// 		}
+// 
+// 		Vector vertices_scr[4];
+// 		float img_hw = m_tex->GetWidth() * 0.5f,
+// 			  img_hh = m_tex->GetHeight() * 0.5f;
+//  		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), mt);
+//  		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), mt);
+//  		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
+//  		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
+// 
+// 		Vector tex_coolds_base[4];
+// 		SpriteRenderer* rd = SpriteRenderer::Instance();
+// 		const Camera* cam = rd->GetCamera();
+// 		assert(cam);
+// 		int w, h;
+// 		ScreenCache::Instance()->GetSize(w, h);
+// 		for (int i = 0; i < 4; ++i) {
+// 			tex_coolds_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
+// 			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
+// 			tex_coolds_base[i].x /= w;
+// 			tex_coolds_base[i].y /= h;
+// 			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
+// 			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
+// 		}
+// 		blend_shader->DrawBlend(vertices, texcoords, tex_coolds_base, texid);
+// 	} else {
 		mgr->Draw(vertices, texcoords, texid);
-	}
+//	}
 }
 
 void Image::InvalidRect(const Matrix& mt) const
