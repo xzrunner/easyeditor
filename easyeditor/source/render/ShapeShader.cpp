@@ -1,7 +1,7 @@
 #include "ShapeShader.h"
 #include "trans_color.h"
 
-#include <sl_shape.h>
+#include <shaderlab.h>
 
 #include <gl/glew.h>
 
@@ -47,6 +47,7 @@ void ShapeShader::SetProjection(int width, int height)
 
 void ShapeShader::Commit()
 {
+	sl_shape_commit();
 }
 
 void ShapeShader::SetColor(const Colorf& col)

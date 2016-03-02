@@ -108,8 +108,6 @@ void RVG::Rect(const Vector& p0, const Vector& p1, bool filling)
 	ShaderMgr::Instance()->shape();
 
 	rvg_rect(p0.x, p0.y, p1.x, p1.y, filling);
-
-	sl_shader_flush();
 }
 
 void RVG::Circle(const Vector& center, float radius, bool filling, int segments)

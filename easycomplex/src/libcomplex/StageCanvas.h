@@ -30,7 +30,7 @@ protected:
 	StagePanel* m_stage;
 
 private:
-	void drawBackground() const;
+	void DrawBackground() const;
 
 private:
 	ee::LibraryPanel* m_library;

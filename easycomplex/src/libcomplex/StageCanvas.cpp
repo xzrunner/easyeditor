@@ -63,7 +63,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_fps.Begin();
 
-	drawBackground();
+	DrawBackground();
 
 	ee::ScreenCache::Instance()->Draw(m_camera);
 
@@ -99,7 +99,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	m_fps.Begin();
 
-	drawBackground();
+	DrawBackground();
 
 	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
 		ee::DT_VISIBLE);
@@ -107,6 +107,7 @@ void StageCanvas::OnDrawSprites() const
 	const ee::Rect& clipbox = m_stage->getSymbol()->m_clipbox;
 	if (clipbox.Width() != 0 && clipbox.Height() != 0) {
 		ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
+		ee::RVG::LineWidth(2);
 		ee::RVG::Rect(ee::Vector(clipbox.xmin, clipbox.ymin), ee::Vector(clipbox.xmax, clipbox.ymax), false);
 	}
 
@@ -136,7 +137,7 @@ void StageCanvas::OnDrawSprites() const
 
 #endif // OPEN_SCREEN_CACHE
 
-void StageCanvas::drawBackground() const
+void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
 		ee::SpriteRenderer::Instance()->Draw(m_background);
@@ -144,6 +145,7 @@ void StageCanvas::drawBackground() const
 
 	if (Settings::bVisibleBGRect) {
 		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
+		ee::RVG::LineWidth(2);
 		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, false);
 	}
 }

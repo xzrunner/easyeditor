@@ -56,6 +56,7 @@ bool DrawSelectRectOP::OnDraw() const
 		return false;
 	}
 
+	RVG::LineWidth(2);
 	if (m_last_pos.x > m_first_pos.x)
 	{
 		RVG::Color(LIGHT_GREEN);
