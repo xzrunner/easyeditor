@@ -17,7 +17,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites, Sprite* except)
 			_sprites.push_back(sprites[i]);
 		}
 	}
-	return draw_all_to_one_spr(sprites);
+	return draw_all_to_one_spr(_sprites);
 }
 
 Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
@@ -39,7 +39,7 @@ Sprite* draw_all_to_one_spr(const std::vector<Sprite*>& sprites)
 		dy = static_cast<int>(r.CenterY());
 	Snapshoot ss(static_cast<int>(r.Width()), static_cast<int>(r.Height()));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		ss.DrawSprite(sprites[i], false, dx, dy);
+		ss.DrawSprite(sprites[i], false, r.Width(), r.Height(), dx, dy);
 	}
 
 	Image* img = new Image(ss.GetFBO());
@@ -57,7 +57,7 @@ void gl_debug()
 	GLenum err;
 	while ( ( err = glGetError() ) != GL_NO_ERROR) {
 		int zz = err;
-		std::cerr << err;        
+		std::cerr << err;
 	}
 }
 
