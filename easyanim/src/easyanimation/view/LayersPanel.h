@@ -8,7 +8,7 @@ namespace eanim
 
 class LayersPropertyWidget;
 
-class LayersPanel : public wxPanel
+class LayersPanel : public wxScrolledWindow
 {
 public:
 	LayersPanel(wxWindow* parent);

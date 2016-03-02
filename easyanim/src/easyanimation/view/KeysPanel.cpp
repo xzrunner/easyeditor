@@ -70,15 +70,19 @@ void KeysPanel::OnNotify(int sj_id, void* ud)
 
 void KeysPanel::InitLayout()
 {
-	SetScrollbars(1,1, 200, 100, 0, 0);
+	SetScrollbars(1, 1, 20, 10, 0, 0);
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(new KeysScaleWidget(this), 0, wxEXPAND);
-	sizer->Add(new KeysContentWidget(this), 1, wxEXPAND);
+	sizer->Add(new KeysScaleWidget(this), 1, wxEXPAND);
+	sizer->Add(new KeysContentWidget(this), 999, wxEXPAND);
 
-	wxBoxSizer* horSizer = new wxBoxSizer(wxHORIZONTAL);
-	horSizer->AddSpacer(6000);
-	sizer->Add(horSizer);
+	wxBoxSizer* hori_sizer = new wxBoxSizer(wxHORIZONTAL);
+	hori_sizer->AddSpacer(6000);
+	sizer->Add(hori_sizer);
+
+// 	wxBoxSizer* vert_sizer = new wxBoxSizer(wxVERTICAL);
+// 	vert_sizer->AddSpacer(50);
+// 	sizer->Add(vert_sizer);
 
 	SetSizer(sizer);
 }

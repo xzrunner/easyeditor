@@ -10,7 +10,7 @@ namespace eanim
 {
 
 LayersPanel::LayersPanel(wxWindow* parent)
-	: wxPanel(parent)
+	: wxScrolledWindow(parent)
 {
 	InitLayout();
 }
@@ -28,9 +28,12 @@ LayersPanel::LayersPanel(wxWindow* parent)
 
 void LayersPanel::InitLayout()
 {
+	SetScrollbars(0, 1, 0, 10, 0, 0);
+
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(m_layersProperty = new LayersPropertyWidget(this), 0, wxALIGN_LEFT);
-	sizer->Add(m_contentPanel = new LayersContentWidget(this), 1, wxEXPAND);
+	sizer->Add(m_layersProperty = new LayersPropertyWidget(this), 1, wxEXPAND);
+	sizer->Add(m_contentPanel = new LayersContentWidget(this), 999, wxEXPAND);
+
 	SetSizer(sizer);
 }
 
