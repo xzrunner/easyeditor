@@ -9,6 +9,10 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/sprite_msg.h>
 #include <ee/Symbol.h>
+#include <ee/panel_msg.h>
+#include <ee/DeleteSpriteAOP.h>
+#include <ee/InsertSpriteAOP.h>
+#include <ee/CombineAOP.h>
 
 namespace lr
 {
@@ -86,14 +90,24 @@ void SelectSpritesOP::GroupSelection()
 
 	ee::Sprite* group = GroupHelper::Group(sprites);
 
+	std::vector<ee::Sprite*> removed;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = sprites[i];
 		ee::RemoveSpriteSJ::Instance()->Remove(spr);
+		spr->Retain();
+		removed.push_back(spr);
 		spr->Release();
 	}
+	ee::AtomicOP* del_op = new ee::DeleteSpriteAOP(removed);
 
 	ee::InsertSpriteSJ::Instance()->Insert(group);
+	ee::AtomicOP* add_op = new ee::InsertSpriteAOP(group);
 	group->Release();
+
+	ee::CombineAOP* combine = new ee::CombineAOP;
+	combine->Insert(del_op);
+	combine->Insert(add_op);
+	ee::EditAddRecordSJ::Instance()->Add(combine);
 }
 
 void SelectSpritesOP::BreakUpSelection()
