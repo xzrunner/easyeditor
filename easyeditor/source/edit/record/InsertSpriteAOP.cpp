@@ -10,6 +10,12 @@
 namespace ee
 {
 
+InsertSpriteAOP::InsertSpriteAOP(Sprite* spr)
+{
+	spr->Retain();
+	m_sprites.push_back(spr);
+}
+
 InsertSpriteAOP::InsertSpriteAOP(const std::vector<Sprite*>& sprites)
 {	
 	for_each(sprites.begin(), sprites.end(), RetainObjectFunctor<Sprite>());

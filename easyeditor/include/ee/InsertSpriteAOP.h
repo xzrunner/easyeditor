@@ -9,6 +9,7 @@ namespace ee
 class InsertSpriteAOP : public AtomicOP
 {
 public:
+	InsertSpriteAOP(Sprite* spr);
 	InsertSpriteAOP(const std::vector<Sprite*>& sprites);
 	virtual ~InsertSpriteAOP();
 

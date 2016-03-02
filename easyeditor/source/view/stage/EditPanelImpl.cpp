@@ -6,7 +6,6 @@
 #include "panel_msg.h"
 #include "subject_id.h"
 #include "EditOP.h"
-#include "InsertSpriteAOP.h"
 #include "sprite_msg.h"
 #include "StringHelper.h"
 
@@ -337,15 +336,6 @@ void EditPanelImpl::OnNotify(int sj_id, void* ud)
 {
 	switch (sj_id) 
 	{
-	case MSG_INSERT_SPRITE:
-		{
-			InsertSpriteSJ::Params* p = (InsertSpriteSJ::Params*)ud;
-			std::vector<Sprite*> sprites;
-			sprites.push_back(p->spr);
-			AddOpRecord(new InsertSpriteAOP(sprites));
-		}
-		break;
-
 	case MSG_CLEAR_SPRITE: case MSG_CLEAR_PANEL:
 		Clear();
 		break;

@@ -7,6 +7,8 @@
 #include "EditPanelImpl.h"
 #include "sprite_msg.h"
 #include "StringHelper.h"
+#include "panel_msg.h"
+#include "InsertSpriteAOP.h"
 
 namespace ee
 {
@@ -32,6 +34,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
 		sprite->Translate(pos);
 		InsertSpriteSJ::Instance()->Insert(sprite);
+		EditAddRecordSJ::Instance()->Add(new InsertSpriteAOP(sprite));
 		sprite->Release();
 	}
 
