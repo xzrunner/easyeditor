@@ -107,17 +107,20 @@ void FontBlankSymbol::LoadResources()
 
 void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const Matrix& mt) const
 {
+	RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+
 	float hw = width * 0.5f,
 		  hh = height * 0.5f;
 	if (fb) {
 		hw = fb->width * 0.5f;
 		hh = fb->height * 0.5f;
 	}
-	hw = Math2D::TransLen(hw, mt);
-	hh = Math2D::TransLen(hh, mt);
 
-	RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
-	RVG::Rect(Vector(0, 0), hw, hh, true);
+	ee::Vector min(-hw, -hh), max(hw, hh);
+	min = ee::Math2D::TransVector(min, mt);
+	max = ee::Math2D::TransVector(max, mt);
+
+	RVG::Rect(min, max, true);
 }
 
 void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const Matrix& mt) const

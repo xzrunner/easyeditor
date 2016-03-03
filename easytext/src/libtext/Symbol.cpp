@@ -86,12 +86,18 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) cons
 	}
 
 	if (const Sprite* font = dynamic_cast<const Sprite*>(sprite)) {
-		int hw, hh;
-		font->GetSize(hw, hh);
-		hw = ee::Math2D::TransLen(hw * 0.5f, mt);
-		hh = ee::Math2D::TransLen(hh * 0.5f, mt);
 		ee::RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
-		ee::RVG::Rect(ee::Vector(0, 0), hw, hh, true);
+
+		int w, h;
+		font->GetSize(w, h);
+		float hw = w * 0.5f,
+			hh = h * 0.5f;
+
+		ee::Vector min(-hw, -hh), max(hw, hh);
+		min = ee::Math2D::TransVector(min, mt);
+		max = ee::Math2D::TransVector(max, mt);
+
+		ee::RVG::Rect(min, max, true);
 	}
 }
 

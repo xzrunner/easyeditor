@@ -60,17 +60,21 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawSprBound() const
 {
-	ee::Matrix mt;
-	m_edited->GetTransMatrix(mt);
+	ee::RVG::Color(ee::Colorf(0.8f, 0.4f, 0.4f));
 
 	const Sprite* font = static_cast<const Sprite*>(m_edited);
-	int hw, hh;
-	font->GetSize(hw, hh);
-	hw = ee::Math2D::TransLen(hw * 0.5f, mt);
-	hh = ee::Math2D::TransLen(hh * 0.5f, mt);
+	int w, h;
+	font->GetSize(w, h);
+	float hw = w * 0.5f,
+		hh = h * 0.5f;
 
-	ee::RVG::Color(ee::Colorf(0.8f, 0.4f, 0.4f));
-	ee::RVG::Rect(ee::Vector(0, 0), hw, hh, false);
+	ee::Matrix mt;
+	m_edited->GetTransMatrix(mt);
+	ee::Vector min(-hw, -hh), max(hw, hh);
+	min = ee::Math2D::TransVector(min, mt);
+	max = ee::Math2D::TransVector(max, mt);
+
+	ee::RVG::Rect(min, max, false);
 }
 
 }

@@ -34,15 +34,21 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 	{
 		if (ImageSprite* s = dynamic_cast<ImageSprite*>(sprite))
 		{
-			Matrix mt;
-			s->GetTransMatrix(mt);
-
-			Image* img = s->GetSymbol().GetImage();
-			int hw = Math2D::TransLen(img->GetOriginWidth() * 0.5f, mt),
-				hh = Math2D::TransLen(img->GetOriginHeight() * 0.5f, mt);
 			RVG::Color(LIGHT_GREY);
 			ee::RVG::LineWidth(1);
-			RVG::Rect(ee::Vector(0, 0), hw, hh, false);
+
+			Image* img = s->GetSymbol().GetImage();
+			float hw = img->GetOriginWidth() * 0.5f,
+				hh = img->GetOriginHeight() * 0.5f;
+
+			Matrix mt;
+			s->GetTransMatrix(mt);
+			ee::Vector min(-hw, -hh), max(hw, hh);
+			min = ee::Math2D::TransVector(min, mt);
+			max = ee::Math2D::TransVector(max, mt);
+
+			RVG::Rect(min, max, false);
+
 			ee::RVG::LineWidth(2);
 		}
 	}
