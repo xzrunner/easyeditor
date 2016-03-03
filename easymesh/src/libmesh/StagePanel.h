@@ -17,7 +17,8 @@ class Shape;
 class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx, 
+		ee::LibraryPanel* library = NULL);
 	virtual ~StagePanel();
 
 	//

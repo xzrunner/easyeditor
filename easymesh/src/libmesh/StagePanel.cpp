@@ -14,7 +14,8 @@
 namespace emesh
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* glctx,
+					   ee::LibraryPanel* library)
 	: ee::EditPanel(parent, frame)
 	, ee::MultiShapesImpl()
 	, m_background(NULL)
@@ -29,9 +30,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, wxGLContext* g
 	SetCanvas(canvas);
 	canvas->Release();
 
-// 	if (library) {
-// 		SetDropTarget(new StageDropTarget(this, library));
-// 	}
+	if (library) {
+		SetDropTarget(new StageDropTarget(this, library));
+	}
 
 	InitSubjects();
 }
