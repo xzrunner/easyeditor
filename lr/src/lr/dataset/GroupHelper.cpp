@@ -38,15 +38,13 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 {
 	ecomplex::Symbol* comp = &dynamic_cast<ecomplex::Symbol&>(const_cast<ee::Symbol&>(group->GetSymbol()));
 	assert(comp);
-	sprites = comp->m_sprites;
-	for_each(sprites.begin(), sprites.end(), ee::RetainObjectFunctor<ee::Sprite>());
 
 	const ee::Vector& pos = group->GetPosition();
 	const ee::Vector& scale = group->GetScale();
 	float angle = group->GetAngle();
-	for (int i = 0, n = sprites.size(); i < n; ++i) 
+	for (int i = 0, n = comp->m_sprites.size(); i < n; ++i) 
 	{
-		ee::Sprite* spr = sprites[i];
+		ee::Sprite* spr = comp->m_sprites[i]->Clone();
 
 		ee::Vector _scale = spr->GetScale();
 		_scale.x *= scale.x;
@@ -83,6 +81,8 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 		spr->SetScale(_scale);
 		spr->SetTransform(_pos, _angle);
 		spr->SetMirror(xmirror, ymirror);
+
+		sprites.push_back(spr);
 	}
 }
 
