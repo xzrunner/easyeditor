@@ -5,6 +5,8 @@
 
 #include <glue.h>
 
+#include <vector>
+
 namespace test
 {
 
@@ -17,8 +19,8 @@ public:
 	virtual void Update();
 
 private:
-	glue::Sprite* m_spr;
-	
+	std::vector<glue::Sprite*> m_sprites;
+
 }; // TestSprite
 
 }

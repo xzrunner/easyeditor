@@ -252,6 +252,14 @@
 			Name="utility"
 			>
 			<File
+				RelativePath="..\..\..\src\utility\color_trans.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\utility\color_trans.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\utility\Exception.cpp"
 				>
 			</File>
@@ -260,7 +268,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\render\macro.h"
+				RelativePath="..\..\..\src\utility\macro.h"
 				>
 			</File>
 			<File

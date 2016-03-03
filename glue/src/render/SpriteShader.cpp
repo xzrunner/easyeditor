@@ -58,14 +58,14 @@ void SpriteShader::SetModelView(const vec2& offset, float scale)
 	sl_sprite_modelview(offset.x, offset.y, scale, scale);
 }
 
-void SpriteShader::SetColor(const Colorf& color, const Colorf& additive)
+void SpriteShader::SetColor(uint32_t color, uint32_t additive)
 {
-//	sl_sprite_set_color();
+	sl_sprite_set_color(color, additive);
 }
 
-void SpriteShader::SetMapColor(const Colorf& rmap, const Colorf& gmap, const Colorf& bmap)
+void SpriteShader::SetMapColor(uint32_t rmap, uint32_t gmap, uint32_t bmap)
 {
-	
+	sl_sprite_set_map_color(rmap, gmap, bmap);
 }
 
 void SpriteShader::Draw(const vec2 vertices[4], const vec2 texcoords[4], int texid)

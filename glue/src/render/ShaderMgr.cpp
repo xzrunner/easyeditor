@@ -60,6 +60,16 @@ void ShaderMgr::ShapeDraw()
 	m_curr_shader = m_shape;
 }
 
+void ShaderMgr::SetSpriteColor(uint32_t color, uint32_t additive)
+{
+	m_sprite->SetColor(color, additive);
+}
+
+void ShaderMgr::SetSpriteMapColor(uint32_t rmap, uint32_t gmap, uint32_t bmap)
+{
+	m_sprite->SetMapColor(rmap, gmap, bmap);
+}
+
 void ShaderMgr::Flush()
 {
 	if (m_curr_shader) {

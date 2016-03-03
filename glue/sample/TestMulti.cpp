@@ -1,6 +1,6 @@
 #include "TestMulti.h"
 
-#include <rvg_render.h>
+#include <rvg.h>
 #include <sl_shape.h>
 
 namespace test
@@ -43,24 +43,22 @@ void TestMulti::Draw() const
 		spr->GetSymbol().Draw(mt);	
 	}
 
-	glue::ShaderMgr::Instance()->Flush();
-
 	//////////////////////////////////////////////////////////////////////////
 
 	glue::ShaderMgr::Instance()->ShapeDraw();
 
 	sl_shape_color(0xff0000ff);
-	rvg_point(0, 0, 5);
+	rvg_point_size(5);
+	rvg_point(0, 0);
 	sl_shape_color(0xffff00ff);
 	rvg_line(-100, -100, -50, -80);
 	sl_shape_color(0xffffffff);
 	rvg_rect(10, 10, 100, 100, true);
 
-	rvg_circle(100, -100, 50, false);
+	rvg_circle(100, -100, 50, false, 16);
 
 	sl_shape_color(0xff00ffff);
-	rvg_set_circle_segments(32);
-	rvg_circle(200, -100, 50, true);
+	rvg_circle(200, -100, 50, true, 32);
 
 	//////////////////////////////////////////////////////////////////////////
 }
