@@ -312,16 +312,18 @@ void SelectSpritesOP::CopyFromSelection()
 	Json::Value sval = value["sprite"][i++];
 	while (!sval.isNull()) {
 		std::string filepath = sval["filename"].asString();
-		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
-		// for snapshoot
-		symbol->RefreshThumbnail(filepath);
-		Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
-		sprites.push_back(sprite);
-		symbol->Release();
-		CopySprFromClipboard(sprite, sval);
-		InsertSpriteSJ::Instance()->Insert(sprite);
-		last_spr = sprite;
-
+		// fixme
+		if (filepath != "group") {
+			Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
+			// for snapshoot
+			symbol->RefreshThumbnail(filepath);
+			Sprite* sprite = SpriteFactory::Instance()->Create(symbol);
+			sprites.push_back(sprite);
+			symbol->Release();
+			CopySprFromClipboard(sprite, sval);
+			InsertSpriteSJ::Instance()->Insert(sprite);
+			last_spr = sprite;
+		}
 		sval = value["sprite"][i++];
 	}
 
