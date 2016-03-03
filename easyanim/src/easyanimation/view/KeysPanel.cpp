@@ -74,10 +74,10 @@ void KeysPanel::InitLayout()
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(new KeysScaleWidget(this), 1, wxEXPAND);
-	sizer->Add(new KeysContentWidget(this), 999, wxEXPAND);
+	sizer->Add(new KeysContentWidget(this), 99, wxEXPAND);
 
 	wxBoxSizer* hori_sizer = new wxBoxSizer(wxHORIZONTAL);
-	hori_sizer->AddSpacer(6000);
+	hori_sizer->AddSpacer(2000);	// todo
 	sizer->Add(hori_sizer);
 
 // 	wxBoxSizer* vert_sizer = new wxBoxSizer(wxVERTICAL);

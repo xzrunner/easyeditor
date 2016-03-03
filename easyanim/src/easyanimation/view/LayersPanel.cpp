@@ -32,7 +32,7 @@ void LayersPanel::InitLayout()
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->Add(m_layersProperty = new LayersPropertyWidget(this), 1, wxEXPAND);
-	sizer->Add(m_contentPanel = new LayersContentWidget(this), 999, wxEXPAND);
+	sizer->Add(m_contentPanel = new LayersContentWidget(this), 99, wxEXPAND);
 
 	SetSizer(sizer);
 }
