@@ -124,11 +124,11 @@ void StageCanvas::OnDrawSprites() const
 
 	m_fps.End();
 
-// #ifdef _DEBUG 
-// 	if (ee::Config::Instance()->IsUseDTex()) {
-// 		ee::DTex::Instance()->DebugDraw();
-// 	}
-// #endif
+#ifdef _DEBUG 
+	if (ee::Config::Instance()->IsUseDTex()) {
+		ee::DTex::Instance()->DebugDraw();
+	}
+#endif
 
 	ee::ShaderMgr::Instance()->sprite();
 
