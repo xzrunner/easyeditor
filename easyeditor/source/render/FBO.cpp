@@ -45,13 +45,13 @@ void FBO::ChangeSize(int width, int height)
 
 void FBO::DrawSprite(const Sprite* sprite, bool clear, float dx, float dy)
 {
-	DrawFBO(sprite, clear, m_width, m_height, dx, dy);
+	DrawFBO(sprite, clear, m_width, m_height, dx, dy, 1);
 }
 
 void FBO::DrawSprite(const Sprite* sprite, bool clear, int width, int height, 
-					 float dx, float dy)
+					 float dx, float dy, float scale)
 {
-	DrawFBO(sprite, clear, width, height, dx, dy);
+	DrawFBO(sprite, clear, width, height, dx, dy, scale);
 }
 
 void FBO::DrawShape(const Shape* shape, bool clear, int width, int height)
@@ -225,7 +225,8 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	}
 }
 
-void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height, float dx, float dy)
+void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height, 
+				  float dx, float dy, float scale)
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(m_fbo);
@@ -256,7 +257,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height, float
 	GL::Viewport(0, 0, width, height);
 
 	Matrix mt;
-	mt.SetScale(1, -1);
+	mt.SetScale(scale, -scale);
 	mt.Translate(-dx, -dy);
 	SpriteRenderer::Instance()->Draw(sprite, NULL, mt, ColorTrans(), false);
 

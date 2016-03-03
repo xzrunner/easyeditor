@@ -26,7 +26,7 @@ public:
 	void DrawSprite(const Sprite* sprite, bool clear = false,
 		float dx = 0, float dy = 0) const;
 	void DrawSprite(const Sprite* sprite, bool clear, int width, int height,
-		float dx = 0, float dy = 0) const;
+		float dx = 0, float dy = 0, float scale = 1) const;
 
 	void DrawShape(const Shape* shape, bool clear = false) const;
 

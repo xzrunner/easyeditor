@@ -62,9 +62,9 @@ void Snapshoot::DrawSprite(const Sprite* sprite, bool clear,
 }
 
 void Snapshoot::DrawSprite(const Sprite* sprite, bool clear, int width, int height,
-						   float dx, float dy) const
+						   float dx, float dy, float scale) const
 {
-	m_fbo->DrawSprite(sprite, clear, width, height, dx, dy);
+	m_fbo->DrawSprite(sprite, clear, width, height, dx, dy, scale);
 }
 
 void Snapshoot::DrawShape(const Shape* shape, bool clear) const
