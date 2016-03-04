@@ -2,32 +2,48 @@
 #include "Sprite.h"
 #include "SpriteSelection.h"
 #include "sprite_msg.h"
+#include "FetchAllVisitor.h"
+
+#include <algorithm>
 
 namespace ee
 {
 
-CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection, Sprite* selected)
-	: m_selection(selection)
-	, m_spr(NULL)
+CopyPasteSpriteState::CopyPasteSpriteState(SpriteSelection* selection)
 {
-	if (selected) {
-		m_spr = selected->Clone();
-		InsertSpriteSJ::Instance()->Insert(m_spr);
-		m_selection->Clear();
-		m_selection->Add(m_spr);
+	std::vector<Sprite*> sprites;
+	selection->Traverse(FetchAllVisitor<Sprite>(sprites));
+
+	m_sprites.reserve(sprites.size());
+	selection->Clear();
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		Sprite* spr = sprites[i]->Clone();
+		m_sprites.push_back(spr);
+		selection->Add(spr);
+	}
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		InsertSpriteSJ::Instance()->Insert(m_sprites[i]);
 	}
 }
 
 CopyPasteSpriteState::~CopyPasteSpriteState()
 {
-	if (m_spr) {
-		m_spr->Release();
-	}
+	for_each(m_sprites.begin(), m_sprites.end(), ReleaseObjectFunctor<Sprite>());
+}
+
+void CopyPasteSpriteState::OnMousePress(const Vector& pos)
+{
+	m_last_pos = pos;
 }
 
 bool CopyPasteSpriteState::OnMouseDrag(const Vector& pos)
 {
-	m_spr->SetTransform(pos, m_spr->GetAngle());
+	Vector offset = pos - m_last_pos;
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		Sprite* spr = m_sprites[i];
+		spr->SetTransform(spr->GetPosition() + offset, spr->GetAngle());
+	}
+	m_last_pos = pos;
 	return true;
 }
 

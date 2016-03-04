@@ -134,6 +134,19 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 
 	m_align.SetInvisible();
 
+	if (m_selection->IsEmpty()) {
+		if (m_op_state) {
+			m_op_state->OnMousePress(pos);
+		}
+		return;
+	}
+
+	// copy & paste
+	if (m_stage->GetKeyState(WXK_ALT))
+	{
+		ChangeOPState(new CopyPasteSpriteState(m_selection));
+	}
+
 	Sprite* selected = NULL;
 	if (m_selection->Size() == 1)
 	{
@@ -146,12 +159,6 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 			m_op_state->OnMousePress(pos);
 		}
 		return;
-	}
-
-	// copy & paste
-	if (m_stage->GetKeyState(WXK_ALT))
-	{
-		ChangeOPState(new CopyPasteSpriteState(m_selection, selected));
 	}
 
 	// offset
