@@ -2,6 +2,7 @@
 #define _EASYEDITOR_SHADERLAB_H_
 
 #include "singleton.h"
+#include "texture_format.h"
 
 #include <stdint.h>
 
@@ -13,8 +14,9 @@ class ShaderLab
 public:
 	void Init();
 
-	int CreateTexture(const uint8_t* data, int width, int height, int format);
+	int CreateTexture(const uint8_t* data, int width, int height, EE_TEXTURE_FORMAT format);
 	void ReleaseTexture(int id);
+	void UpdateTexture(const uint8_t* data, int x, int y, int w, int h, int id);
 	
 	SINGLETON_DECLARATION(ShaderLab)
 

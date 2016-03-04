@@ -469,6 +469,10 @@
 				RelativePath="..\..\..\include\ee\Snapshoot.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\include\ee\texture_format.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\source\render\BlendModes.cpp"

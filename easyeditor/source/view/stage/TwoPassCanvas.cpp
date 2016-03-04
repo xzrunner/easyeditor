@@ -89,12 +89,10 @@ void TwoPassCanvas::OnDrawWhole() const
 		if (IsDirty()) {
 			ScreenCache::Instance()->Bind();
 
-			glClearColor(1, 0, 0, 1);
+			glClearColor(0, 0, 0, 0);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			OnDrawSprites();
-
-			ShaderMgr::Instance()->Flush();
 
 			ScreenCache::Instance()->Unbind();
 		}

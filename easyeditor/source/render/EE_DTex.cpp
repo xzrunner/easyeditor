@@ -4,8 +4,10 @@
 #include "ShaderMgr.h"
 #include "RenderContextStack.h"
 #include "ShaderContext.h"
+#include "EE_ShaderLab.h"
 
 #include <dtex.h>
+#include <render/render.h>
 
 #include <gl/glew.h>
 
@@ -91,7 +93,7 @@ static void _draw(const float vb[16])
 		vertices[i].x  = vb[i * 4];
 		vertices[i].y  = vb[i * 4 + 1];
 		texcoords[i].x = vb[i * 4 + 2];
-		texcoords[i].y = vb[i * 4 + 2];
+		texcoords[i].y = vb[i * 4 + 3];
 	}
 
 	shader->Draw(vertices, texcoords, TEX_ID);
@@ -116,108 +118,29 @@ static void _draw_flush()
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)
 
 static int _texture_create(int type, int width, int height, const void* data, int channel,unsigned int id) {
-	assert(type == DTEX_TF_RGBA8);
-
-	// todo
-	if ((type == DTEX_TF_RGBA8) || (IS_POT(width) && IS_POT(height))) {
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-	} else {
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	}
-
-	GLint _format = GL_RGBA;
-	GLenum _type = GL_UNSIGNED_BYTE;
-
-	bool is_compressed = false;
-	unsigned int size = 0;
-	uint8_t* uncompressed = NULL;
-
+	EE_TEXTURE_FORMAT t = EE_TEXTURE_RGBA8;
 	switch (type) {
 	case DTEX_TF_RGBA8:
-		is_compressed = false;
-		_format = GL_RGBA;
-		_type = GL_UNSIGNED_BYTE;
-		break;
-	case DTEX_TF_RGBA4:
-		is_compressed = false;
-		_format = GL_RGBA;
-		_type = GL_UNSIGNED_SHORT_4_4_4_4;
-		break;
-	case DTEX_TF_PVR2:
-#ifdef __APPLE__
-		is_compressed = true;
-		_type = COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
-		size = width * height * 8 * _type / 16;
-#endif // __APPLE__
+		t = EE_TEXTURE_RGBA8;
 		break;
 	case DTEX_TF_PVR4:
-#ifdef __APPLE__
-		is_compressed = true;
-		_type = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
-		size = width * height * 8 * _type / 16;
-#else
-// 		is_compressed = false;
-// 		_format = GL_RGBA;
-// 		_type = GL_UNSIGNED_BYTE;
-// 		uncompressed = dtex_pvr_decode(data, width, height);
-#endif // __APPLE__
-		break;
-	case DTEX_TF_ETC1:
-#ifdef __ANDROID__
-		is_compressed = true;
-		_type = GL_ETC1_RGB8_OES;
-		size = width * height * 4 / 8;
-#else
-		is_compressed = false;
-		_format = GL_RGBA;
-		_type = GL_UNSIGNED_BYTE;
-#ifdef USED_IN_EDITOR
-//		uncompressed = dtex_etc1_decode(data, width, height);
-#endif // USED_IN_EDITOR
-#endif // __ANDROID__
+		t = EE_TEXTURE_PVR4;
 		break;
 	default:
-		dtex_fault("dtex_gl_create_texture: unknown texture type.");
+		assert(0);
 	}
 
-	glActiveTexture(GL_TEXTURE0 + channel);
-	if (id == 0) {
-		glGenTextures(1, (GLuint*)&id);	
-	}
-	glBindTexture(GL_TEXTURE_2D, id);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-	if (is_compressed) {
-		glCompressedTexImage2D(GL_TEXTURE_2D, 0, _type, width, height, 0, size, data);	
-	} else {
-		if (uncompressed) {
-			glTexImage2D(GL_TEXTURE_2D, 0, _format, (GLsizei)width, (GLsizei)height, 0, _format, _type, uncompressed);
-			free(uncompressed);
-		} else {
-			glTexImage2D(GL_TEXTURE_2D, 0, _format, (GLsizei)width, (GLsizei)height, 0, _format, _type, data);
-		}
-	}
-
-	return id;
+	return ShaderLab::Instance()->CreateTexture(static_cast<const uint8_t*>(data), width, height, t);
 }
 
 static void 
-_texture_release(int id) { 
-	GLuint texid = (GLuint)id;
- 	glActiveTexture(GL_TEXTURE0);
- 	glDeleteTextures(1, &texid);
+_texture_release(int id) {
+	ShaderLab::Instance()->ReleaseTexture(id);
 }
 
 static void
 _texture_update(const void* pixels, int x, int y, int w, int h, unsigned int id) {
-	int old_id = ShaderMgr::Instance()->GetTexID();
- 	glBindTexture(GL_TEXTURE_2D, id);
- 	glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
- 	glBindTexture(GL_TEXTURE_2D, old_id);
+	ShaderLab::Instance()->UpdateTexture(static_cast<const uint8_t*>(pixels), x, y, w, h, id);
 }
 
 static int
@@ -236,7 +159,7 @@ static const char* CFG =
 	"	\"open_cg\" : true,		\n"
 	"	\"open_cs\" : true,		\n"
 	"	\"c1_tex_size\" : 1024, \n"
-	"	\"c2_tex_size\" : 4096	\n"
+	"	\"c2_tex_size\" : 1024	\n"
 	"} \n"
 	;
 

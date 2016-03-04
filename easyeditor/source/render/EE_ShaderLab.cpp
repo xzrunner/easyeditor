@@ -26,22 +26,22 @@ void ShaderLab::Init()
 	sl_shader_mgr_create();
 }
 
-int ShaderLab::CreateTexture(const uint8_t* data, int width, int height, int format)
+int ShaderLab::CreateTexture(const uint8_t* data, int width, int height, EE_TEXTURE_FORMAT format)
 {
 	TEXTURE_FORMAT ej_fmt;
 	switch (format)
 	{
-	case GL_RGBA:
+	case EE_TEXTURE_RGBA8:
 		ej_fmt = TEXTURE_RGBA8;
 		break;
-	case GL_RGB:
+	case EE_TEXTURE_RGB:
 		ej_fmt = TEXTURE_RGB;
 		break;
-	case GL_LUMINANCE:
+	case EE_TEXTURE_A8:
 		ej_fmt = TEXTURE_A8;
 		break;
-	default:
-		throw ee::Exception("Unknown format %d", format);
+ 	default:
+ 		throw ee::Exception("Unknown format %d", format);
 	}
 
 	render* r = sl_shader_get_render();
@@ -54,6 +54,12 @@ void ShaderLab::ReleaseTexture(int id)
 {
 	render* r = sl_shader_get_render();
 	render_release(r, TEXTURE, id);
+}
+
+void ShaderLab::UpdateTexture(const uint8_t* data, int x, int y, int w, int h, int id)
+{
+	render* r = sl_shader_get_render();
+	render_texture_subupdate(r, id, data, x, y, w, h);
 }
 
 }

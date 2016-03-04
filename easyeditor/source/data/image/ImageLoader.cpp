@@ -88,7 +88,23 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 
 void ImageLoader::PixelsToTexture(unsigned int& texture, const uint8_t* pixel, int width, int height, int channels, int format)
 {
-	texture = ShaderLab::Instance()->CreateTexture(pixel, width, height, format);
+	EE_TEXTURE_FORMAT ee_fmt;
+	switch (format)
+	{
+	case GL_RGBA:
+		ee_fmt = EE_TEXTURE_RGBA8;
+		break;
+	case GL_RGB:
+		ee_fmt = EE_TEXTURE_RGB;
+		break;
+	case GL_LUMINANCE:
+		ee_fmt = EE_TEXTURE_A8;
+		break;
+	default:
+		throw ee::Exception("ImageLoader::PixelsToTexture Unknown format %d", format);
+	}
+
+	texture = ShaderLab::Instance()->CreateTexture(pixel, width, height, ee_fmt);
 
 	//////////////////////////////////////////////////////////////////////////
 
