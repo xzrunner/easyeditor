@@ -20,8 +20,6 @@ DTex* DTex::m_instance = NULL;
 
 //////////////////////////////////////////////////////////////////////////
 
-static int TEX_ID = 0;
-
 static void _program(int n) 
 {
 	switch (n) 
@@ -45,7 +43,6 @@ static void _blend(int mode)
 
 static void _set_texture(int id)
 {
-	TEX_ID = id;
 	ShaderMgr::Instance()->SetTexture(id);
 }
 
@@ -84,7 +81,7 @@ static void _draw_begin()
 // 	glViewport(0, 0, 2, 2);
 }
 
-static void _draw(const float vb[16])
+static void _draw(const float vb[16], int texid)
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
 
@@ -96,7 +93,7 @@ static void _draw(const float vb[16])
 		texcoords[i].y = vb[i * 4 + 3];
 	}
 
-	shader->Draw(vertices, texcoords, TEX_ID);
+	shader->Draw(vertices, texcoords, texid);
 }
 
 static void _draw_end()
