@@ -12,6 +12,7 @@ struct Vector2 {
 	{
 		return x * v.x + y * v.y;
 	}
+
 	Vector2 operator+(const Vector2& v) const
 	{
 		return Vector2(x + v.x, y + v.y);
@@ -20,14 +21,34 @@ struct Vector2 {
 	{
 		return Vector2(x - v.x, y - v.y);
 	}
-	Vector2 operator/(float s) const
-	{
-		return Vector2(x / s, y / s);
-	}
 	Vector2 operator*(float s) const
 	{
 		return Vector2(x * s, y * s);
 	}
+	Vector2 operator/(float s) const
+	{
+		return Vector2(x / s, y / s);
+	}
+
+	void operator += (const Vector2& v) {
+		x += v.x;
+		y += v.y;
+	}
+	void operator -= (const Vector2& v) {
+		x -= v.x;
+		y -= v.y;
+	}
+	void operator *= (float f) {
+		x *= f;
+		y *= f;
+	}
+	void operator /= (float f) {
+		if (f != 0) {
+			x /= f;
+			y /= f;
+		}
+	}
+
 	void Normalize()
 	{
 		float s = 1.0f / Length();

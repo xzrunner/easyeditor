@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -107,7 +107,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -152,6 +152,18 @@
 			Name="render"
 			>
 			<File
+				RelativePath="..\..\..\src\render\BlendMode.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\render\Camera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\render\Camera.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\render\IShader.h"
 				>
 			</File>
@@ -161,6 +173,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\render\RenderContext.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\render\ScreenCache.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\render\ScreenCache.h"
 				>
 			</File>
 			<File
@@ -174,6 +194,14 @@
 			<Filter
 				Name="shader"
 				>
+				<File
+					RelativePath="..\..\..\src\render\BlendShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\BlendShader.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\render\ShapeShader.cpp"
 					>

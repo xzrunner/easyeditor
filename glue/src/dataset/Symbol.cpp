@@ -35,7 +35,23 @@ void Symbol::Draw(const mat4& mt) const
 	texcoords[2] = vec2(1, 1);
 	texcoords[3] = vec2(0, 1);
 
-	ShaderMgr::Instance()->SpriteDraw(positions, texcoords, texid);
+	ShaderMgr* smgr = ShaderMgr::Instance();
+	if (smgr->IsBlendShader())
+	{
+		vec2 vertices_scr[4];
+		float img_hw = m_tex->GetWidth() * 0.5f,
+			  img_hh = m_tex->GetHeight() * 0.5f;
+		vertices_scr[0] = Math::TransVector(vec2(-img_hw, -img_hh), mt);
+		vertices_scr[1] = Math::TransVector(vec2( img_hw, -img_hh), mt);
+		vertices_scr[2] = Math::TransVector(vec2( img_hw,  img_hh), mt);
+		vertices_scr[3] = Math::TransVector(vec2(-img_hw,  img_hh), mt);
+
+		vec2 tex_coords_base[4];
+	}
+	else
+	{
+		smgr->SpriteDraw(positions, texcoords, texid);
+	}
 }
 
 void Symbol::Load()
