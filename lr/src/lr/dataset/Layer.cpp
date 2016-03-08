@@ -343,6 +343,7 @@ ee::Sprite* Layer::LoadGroup(const Json::Value& val, const std::string& dir, con
 	}
 
 	ee::Sprite* group = GroupHelper::Group(sprites);
+	ee::SpriteFactory::Instance()->Insert(group);
 	group->Load(val);
 	for_each(sprites.begin(), sprites.end(), ee::ReleaseObjectFunctor<ee::Sprite>());
 	return group;

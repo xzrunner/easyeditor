@@ -13,6 +13,7 @@
 #include <ee/DeleteSpriteAOP.h>
 #include <ee/InsertSpriteAOP.h>
 #include <ee/CombineAOP.h>
+#include <ee/SpriteFactory.h>
 
 namespace lr
 {
@@ -89,6 +90,7 @@ void SelectSpritesOP::GroupSelection()
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
 	ee::Sprite* group = GroupHelper::Group(sprites);
+	ee::SpriteFactory::Instance()->Insert(group);
 
 	std::vector<ee::Sprite*> removed;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {

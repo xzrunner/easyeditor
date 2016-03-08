@@ -87,10 +87,12 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES) 
 	{
-		m_symbol->InitBounding();
 		const std::string& filepath = m_symbol->GetFilepath();
-		FileStorer::Store(filepath.c_str(), m_symbol);
-		m_symbol->RefreshThumbnail(filepath, true);
+		if (filepath != "group") {
+			FileStorer::Store(filepath.c_str(), m_symbol);
+			m_symbol->RefreshThumbnail(filepath, true);
+		}
+		m_symbol->InitBounding();
 		ee::SpriteFactory::Instance()->UpdateBoundings(*m_symbol);
 		Destroy();
 	} 

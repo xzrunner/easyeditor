@@ -12,6 +12,7 @@
 #include <ee/FontBlankSprite.h>
 #include <ee/TextDialog.h>
 #include <ee/SpriteDialog.h>
+#include <ee/panel_msg.h>
 
 #include <easyscale9.h>
 #include <easymesh.h>
@@ -127,6 +128,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 
 	stage->SetUpdateState(true);
 	stage->EnableObserve(true);
+
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void OpenSymbolDialog::UpdateShapeFromETexture(etexture::Sprite* spr)
