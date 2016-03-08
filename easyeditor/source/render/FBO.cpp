@@ -7,6 +7,7 @@
 #include "SpriteRenderer.h"
 #include "RenderContextStack.h"
 #include "GL.h"
+#include "EE_ShaderLab.h"
 
 #include <gl/glew.h>
 
@@ -77,29 +78,10 @@ void FBO::CreateFBO(int w, int h)
 		return;
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	mgr->sprite();
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-
-	GLuint tex = 0;
-	glGenTextures(1, &tex);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, tex);
-//	mgr->SetTexture(tex);
-	m_tex = tex;
-
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)w, (GLsizei)h, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	unsigned char* empty_data = new unsigned char[w*h*4];
 	if(!empty_data) return;
 	memset(empty_data, 0x00, w*h*4);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)w, (GLsizei)h, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
-	delete[] empty_data;
+	int tex = ShaderLab::Instance()->CreateTexture(empty_data, w, h, EE_TEXTURE_RGBA8);
 
 	glGenFramebuffersEXT(1, &m_fbo);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
@@ -115,7 +97,7 @@ void FBO::CreateFBO(int w, int h)
 // 	mgr->SetTexture(0);
 // 	mgr->SetFBO(0);
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mgr->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
