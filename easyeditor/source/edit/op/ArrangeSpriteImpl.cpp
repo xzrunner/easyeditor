@@ -536,6 +536,8 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	EditAddRecordSJ::Instance()->Add(new DeleteSpriteAOP(sprites));
 
 	m_sprites_impl->ClearSelectedSprite();
+
+	ClearSpriteSelectionSJ::Instance()->Clear();
 }
 
 void ArrangeSpriteImpl::UpOneLayer()

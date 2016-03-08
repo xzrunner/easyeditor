@@ -39,6 +39,7 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage,
 SelectSpritesOP::~SelectSpritesOP()
 {
 	m_selection->Clear();
+	ClearSpriteSelectionSJ::Instance()->Clear();
 	m_selection->Release();
 }
 
@@ -89,6 +90,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			if (!m_selection->IsExist(selected) && !m_stage->GetKeyState(WXK_SPACE))
 			{
 				m_selection->Clear();
+				ClearSpriteSelectionSJ::Instance()->Clear();
 				m_selection->Add(selected);
 
 				bool add = m_stage->GetKeyState(WXK_CONTROL);
@@ -114,6 +116,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			m_draggable = false;
 		} else {
 			m_selection->Clear();
+			ClearSpriteSelectionSJ::Instance()->Clear();
 		}
 	}
 
@@ -216,6 +219,8 @@ bool SelectSpritesOP::Clear()
 	if (DrawSelectRectOP::Clear()) return true;
 
 	m_selection->Clear();
+	ClearSpriteSelectionSJ::Instance()->Clear();
+
 	m_left_first_pos.SetInvalid();
 
 	return false;
@@ -303,6 +308,7 @@ void SelectSpritesOP::CopyFromSelection()
 	}
  
 	m_selection->Clear();
+	ClearSpriteSelectionSJ::Instance()->Clear();
 
 	Sprite* last_spr = NULL;
 

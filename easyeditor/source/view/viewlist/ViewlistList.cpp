@@ -19,6 +19,7 @@ ViewlistList::ViewlistList(wxWindow* parent)
 	, m_selected_spr(NULL)
 {
 	RegistSubject(SelectSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSelectionSJ::Instance());
 	RegistSubject(ReorderSpriteSJ::Instance());
 	RegistSubject(ReorderSpriteMostSJ::Instance());
 	RegistSubject(InsertSpriteSJ::Instance());
@@ -118,6 +119,11 @@ void ViewlistList::OnNotify(int sj_id, void* ud)
 		{
 			SelectSpriteSJ::Params* p = (SelectSpriteSJ::Params*)ud;
 			Select(p->spr, p->clear);
+		}
+		break;
+	case MSG_CLEAR_SPRITE_SELECTION:
+		{
+			SetSelection(-1);
 		}
 		break;
 	case MSG_REORDER_SPRITE:

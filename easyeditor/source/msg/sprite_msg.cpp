@@ -75,6 +75,12 @@ void SelectSpriteSJ::Select(Sprite* spr, bool clear, Observer* except)
 	Notify((void*)&p, except);
 }
 
+SUBJECT_DEFINITION(ClearSpriteSelectionSJ, MSG_CLEAR_SPRITE_SELECTION)
+void ClearSpriteSelectionSJ::Clear()
+{
+	Notify(NULL);
+}
+
 SUBJECT_DEFINITION(SpriteNameChangeSJ, MSG_SPRITE_NAME_CHANGE)
 void SpriteNameChangeSJ::OnSpriteNameChanged(const Sprite* spr, Observer* except)
 {

@@ -84,6 +84,13 @@ public:
 	SUBJECT_DECLARATION(SelectSpriteSJ)
 }; // SelectSpriteSJ
 
+class ClearSpriteSelectionSJ : public Subject
+{
+public:
+	void Clear();
+	SUBJECT_DECLARATION(ClearSpriteSelectionSJ)
+}; // ClearSpriteSelectionSJ
+
 class SpriteNameChangeSJ : public Subject
 {
 public:
