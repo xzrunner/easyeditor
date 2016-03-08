@@ -120,6 +120,8 @@ void StageCanvas::DrawRegion() const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 
+	ee::RVG::LineWidth(2);
+
 	ee::RVG::Color(ee::LIGHT_GREY);
 	ee::RVG::Rect(ee::Vector(0, 0), cfg->m_map_width * 0.5f, cfg->m_map_height * 0.5f, false);
 
