@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="1.sidx"
+	Name="1.sp"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
-	RootNamespace="sidx"
+	RootNamespace="sp"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\sidx\x86\Debug"
-			IntermediateDirectory="..\sidx\x86\Debug\obj"
+			OutputDirectory="..\sp\x86\Debug"
+			IntermediateDirectory="..\sp\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\sidx\x86\Release"
-			IntermediateDirectory="..\sidx\x86\Release\obj"
+			OutputDirectory="..\sp\x86\Release"
+			IntermediateDirectory="..\sp\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -149,23 +149,23 @@
 			Name="rtree"
 			>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_rnode.c"
+				RelativePath="..\..\..\src\sp\sp_rnode.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_rnode.h"
+				RelativePath="..\..\..\src\sp\sp_rnode.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_rtree.c"
+				RelativePath="..\..\..\src\sp\sp_rtree.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_rtree.h"
+				RelativePath="..\..\..\src\sp\sp_rtree.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_rtree_cfg.h"
+				RelativePath="..\..\..\src\sp\sp_rtree_cfg.h"
 				>
 			</File>
 		</Filter>
@@ -173,11 +173,11 @@
 			Name="quadtree"
 			>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_quadtree.c"
+				RelativePath="..\..\..\src\sp\sp_quadtree.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_quadtree.h"
+				RelativePath="..\..\..\src\sp\sp_quadtree.h"
 				>
 			</File>
 		</Filter>
@@ -185,24 +185,24 @@
 			Name="null"
 			>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_null.cpp"
+				RelativePath="..\..\..\src\sp\sp_null.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sidx\sidx_null.h"
+				RelativePath="..\..\..\src\sp\sp_null.h"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\sidx\sidx_region.c"
+			RelativePath="..\..\..\src\sp\sp_region.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\sidx\sidx_region.h"
+			RelativePath="..\..\..\src\sp\sp_region.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\sidx\sidx_typedef.h"
+			RelativePath="..\..\..\src\sp\sp_typedef.h"
 			>
 		</File>
 	</Files>

@@ -7,7 +7,7 @@
 #include "SpriteRenderer.h"
 #include "ShaderContext.h"
 #include "EE_DTex.h"
-#include "EE_SIdx.h"
+#include "EE_SP.h"
 #include "ScreenCache.h"
 #include "Camera.h"
 
@@ -61,7 +61,7 @@ void TwoPassCanvas::OnDrawWhole() const
 
 	OnDrawSprites();
 
-	SIdx::Instance()->DebugDraw();
+	SpatialPartition::Instance()->DebugDraw();
 
 	sc->Unbind();
 

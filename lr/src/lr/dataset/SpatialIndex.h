@@ -6,11 +6,11 @@
 namespace lr
 {
 
-class SIdx
+class SpatialPartition
 {
 public:
 	
-}; // SIdx
+}; // SpatialPartition
 
 }
 

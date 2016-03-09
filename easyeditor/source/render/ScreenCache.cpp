@@ -1,5 +1,5 @@
 #include "ScreenCache.h"
-#include "EE_SIdx.h"
+#include "EE_SP.h"
 #include "Rect.h"
 #include "Matrix.h"
 #include "Sprite.h"
@@ -88,7 +88,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	rq.ymax = r->ymax;
 
 	std::vector<const Sprite*> sprites;
-	SIdx::Instance()->Query(rq, sprites);
+	SpatialPartition::Instance()->Query(rq, sprites);
 
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* spr = sprites[i];

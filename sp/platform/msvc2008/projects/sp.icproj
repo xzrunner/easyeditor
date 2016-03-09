@@ -2,10 +2,10 @@
 <VisualStudioProject
 	ProjectType="Intel C++ Project"
 	Version="11.1"
-	Name="1.sidx"
+	Name="1.sp"
 	ProjectGUID="{594D7A78-858A-4B09-AE88-68C817B6EF61}"
 	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
-	VCNestedProjectFileName="sidx.vcproj">
+	VCNestedProjectFileName="sp.vcproj">
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32">

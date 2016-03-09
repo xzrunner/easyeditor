@@ -42,7 +42,7 @@ void LoadFromJson::Load(const Json::Value& value, const std::string& dir, Symbol
 
 		static_cast<Symbol*>(complex)->m_sprites.push_back(sprite);
 #ifdef OPEN_SCREEN_CACHE
-		ee::SIdx::Instance()->Insert(sprite);
+		ee::SpatialPartition::Instance()->Insert(sprite);
 		ee::SpriteRenderer::Instance()->InvalidRect(sprite);
 #endif // OPEN_SCREEN_CACHE
 

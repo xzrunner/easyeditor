@@ -3,12 +3,12 @@ extern "C"
 {
 #endif
 
-#ifndef spatial_index_region_h
-#define spatial_index_region_h
+#ifndef spatial_partition_region_h
+#define spatial_partition_region_h
 
-#include "sidx_typedef.h"
+#include "sp_typedef.h"
 
-struct sidx_region {
+struct sp_region {
 	float xmin, ymin;
 	float xmax, ymax;
 };
@@ -33,7 +33,7 @@ struct sidx_region {
 
 #define REGION_INTERSECT(a, b) (!((a).xmin > (b).xmax || (a).xmax < (b).xmin || (a).ymin > (b).ymax || (a).ymax < (b).ymin))
 
-#endif // spatial_index_region_h
+#endif // spatial_partition_region_h
 
 #ifdef __cplusplus
 }

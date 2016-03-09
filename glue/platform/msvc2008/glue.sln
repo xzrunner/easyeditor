@@ -23,7 +23,7 @@ Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.rapidvg", "..\..\..\rapid
 EndProject
 Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.shaderlab", "..\..\..\shaderlab\platform\msvc2008\projects\shaderlab.icproj", "{4A75EE84-4487-4506-BBAB-42F1924A1DD5}"
 EndProject
-Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.sidx", "..\..\..\sidx\platform\msvc2008\projects\sidx.icproj", "{594D7A78-858A-4B09-AE88-68C817B6EF61}"
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.sp", "..\..\..\sp\platform\msvc2008\projects\sp.icproj", "{594D7A78-858A-4B09-AE88-68C817B6EF61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

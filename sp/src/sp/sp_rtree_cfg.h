@@ -3,8 +3,8 @@ extern "C"
 {
 #endif
 
-#ifndef spatial_index_rtree_cfg_h
-#define spatial_index_rtree_cfg_h
+#ifndef spatial_partition_rtree_cfg_h
+#define spatial_partition_rtree_cfg_h
 
 //#define SIDX_RTREE_MAX_DEPTH 32
 
@@ -17,7 +17,7 @@ enum RTreeStrategy
 
 #define RTREE_STRATEGY LINEAR
 
-#endif // spatial_index_rtree_cfg_h
+#endif // spatial_partition_rtree_cfg_h
 
 #ifdef __cplusplus
 }

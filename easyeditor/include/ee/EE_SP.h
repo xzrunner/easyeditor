@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_SIDX_H_
-#define _EASYEDITOR_SIDX_H_
+#ifndef _EASYEDITOR_SP_H_
+#define _EASYEDITOR_SP_H_
 
 #include <vector>
 
@@ -10,7 +10,7 @@ class Sprite;
 class Matrix;
 class Rect;
 
-class SIdx
+class SpatialPartition
 {
 public:
 	void Insert(const Sprite* spr);
@@ -20,16 +20,16 @@ public:
 
 	void DebugDraw() const;
 
-	static SIdx* Instance();
+	static SpatialPartition* Instance();
 
 private:
-	SIdx();
+	SpatialPartition();
 
 private:
-	static SIdx* m_instance;
+	static SpatialPartition* m_instance;
 
-}; // SIdx
+}; // SpatialPartition
 
 }
 
-#endif // _EASYEDITOR_SIDX_H_
+#endif // _EASYEDITOR_SP_H_

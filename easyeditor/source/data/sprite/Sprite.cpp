@@ -15,7 +15,7 @@
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
-#include "render/EE_SIdx.h"
+#include "render/EE_SP.h"
 #endif // OPEN_SCREEN_CACHE
 
 namespace ee
@@ -350,7 +350,7 @@ bool Sprite::IsIntersect(const Rect& rect) const
 void Sprite::Translate(const Vector& offset)
 {
 #ifdef OPEN_SCREEN_CACHE
-	bool find = SIdx::Instance()->Remove(this);
+	bool find = SpatialPartition::Instance()->Remove(this);
 	if (find) {
 		SpriteRenderer::Instance()->InvalidRect(this);
 	}
@@ -367,7 +367,7 @@ void Sprite::Translate(const Vector& offset)
 #ifdef OPEN_SCREEN_CACHE
 	if (find) {
 		SpriteRenderer::Instance()->InvalidRect(this);
-		SIdx::Instance()->Insert(this);
+		SpatialPartition::Instance()->Insert(this);
 	}
 #endif // OPEN_SCREEN_CACHE
 }
@@ -375,7 +375,7 @@ void Sprite::Translate(const Vector& offset)
 void Sprite::Rotate(float delta)
 {
 #ifdef OPEN_SCREEN_CACHE
-	SIdx::Instance()->Remove(this);
+	SpatialPartition::Instance()->Remove(this);
 #endif // OPEN_SCREEN_CACHE
 
 	if (m_observer)
@@ -388,7 +388,7 @@ void Sprite::Rotate(float delta)
 	}
 
 #ifdef OPEN_SCREEN_CACHE
-	SIdx::Instance()->Insert(this);
+	SpatialPartition::Instance()->Insert(this);
 #endif // OPEN_SCREEN_CACHE
 }
 
