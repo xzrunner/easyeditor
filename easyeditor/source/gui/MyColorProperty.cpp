@@ -39,7 +39,7 @@ wxVariant MyColorProperty::ChildChanged(wxVariant& thisValue,
 //	}
 }
 
-bool MyColorProperty::OnButtonClick( wxPropertyGrid* propGrid, std::string& value )
+bool MyColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 {
 	if (!m_lsn) {
 		return false;
