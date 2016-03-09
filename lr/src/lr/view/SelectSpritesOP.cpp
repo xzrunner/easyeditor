@@ -15,6 +15,7 @@
 #include <ee/CombineAOP.h>
 #include <ee/SpriteFactory.h>
 #include <ee/PointQueryVisitor.h>
+#include <ee/TranslateSpriteAOP.h>
 
 namespace lr
 {
@@ -98,6 +99,8 @@ void SelectSpritesOP::GroupSelection()
 	ee::Sprite* group = GroupHelper::Group(sprites);
 	ee::SpriteFactory::Instance()->Insert(group);
 
+	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprites, -group->GetPosition());
+
 	std::vector<ee::Sprite*> removed;
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = sprites[i];
@@ -113,6 +116,7 @@ void SelectSpritesOP::GroupSelection()
 	group->Release();
 
 	ee::CombineAOP* combine = new ee::CombineAOP;
+	combine->Insert(move_op);
 	combine->Insert(del_op);
 	combine->Insert(add_op);
 	ee::EditAddRecordSJ::Instance()->Add(combine);
