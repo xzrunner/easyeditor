@@ -29,6 +29,7 @@ SelectSpritesOP::SelectSpritesOP(wxWindow* wnd, EditPanelImpl* stage,
 	, m_callback(callback)
 	, m_spritesImpl(sprites_impl)
 	, m_draggable(true)
+	, m_rect_select(false)
 {
 	m_selection = sprites_impl->GetSpriteSelection();
 	m_selection->Retain();
@@ -63,6 +64,30 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 		CopyFromSelection();
 		return true;
 	}
+	else if (keyCode ==  WXK_SHIFT)
+	{
+		if (!m_rect_select) {
+			m_rect_select = true;
+			m_stage->SetCursor(wxCURSOR_RIGHT_ARROW);
+		}
+	}
+
+	return false;
+}
+
+bool SelectSpritesOP::OnKeyUp(int keyCode)
+{
+	if (DrawSelectRectOP::OnKeyDown(keyCode)) return true;
+
+	switch (keyCode)
+	{
+	case WXK_SHIFT:
+		if (m_rect_select) {
+			m_rect_select = false;
+			m_stage->SetCursor(wxCURSOR_ARROW);
+		}
+		break;
+	}
 
 	return false;
 }
@@ -72,7 +97,10 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
  	m_draggable = true;
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-	Sprite* selected = SelectByPos(pos);
+	Sprite* selected = NULL;
+	if (!m_rect_select) {
+		selected = SelectByPos(pos);
+	}
 	if (selected)
 	{
 		assert(selected->editable);
