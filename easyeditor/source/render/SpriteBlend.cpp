@@ -5,7 +5,6 @@
 #include "RenderContextStack.h"
 #include "Sprite.h"
 #include "ImageSymbol.h"
-#include "Camera.h"
 #include "GL.h"
 #include "Math2D.h"
 

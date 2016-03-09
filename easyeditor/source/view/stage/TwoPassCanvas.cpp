@@ -79,8 +79,6 @@ void TwoPassCanvas::OnDrawWhole() const
 
 void TwoPassCanvas::OnDrawWhole() const
 {
-	SpriteRenderer::Instance()->SetCamera(GetCamera());
-
  	//if (ScreenCache::IsOpen()) 
  	{
 		//////////////////////////////////////////////////////////////////////////

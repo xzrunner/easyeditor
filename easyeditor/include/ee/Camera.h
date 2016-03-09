@@ -9,27 +9,17 @@ namespace ee
 class Camera
 {
 public:
-	Camera(float scale = 1.0f);
+	virtual ~Camera() {}
 
-	void Reset();
+	virtual void Reset() = 0;
 
-	void Translate(const Vector& offset);
-	void Scale(float scale, int x, int y, int width, int height);
+	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const = 0;
+	virtual Vector TransPosProjectToScreen(const Vector& proj, int width, int height) const = 0;
 
-	Vector TransPosScreenToProject(int x, int y, int width, int height) const;
-	Vector TransPosProjectToScreen(const Vector& proj, int width, int height) const;
+	virtual void UpdateModelView() const = 0;
 
-	void UpdateModelView() const;
-
-	float GetScale() const { return m_scale; }
-	void SetScale(float s) { m_scale = s; }
-
-	const Vector& GetPosition() const { return m_center; }
-	void SetPosition(const Vector& pos) { m_center = pos; } 
-
-private:
-	Vector m_center;
-	float m_scale;
+	virtual float GetScale() const = 0;
+	virtual const Vector& GetPosition() const = 0;
 
 }; // Camera
 

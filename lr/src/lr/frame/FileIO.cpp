@@ -7,7 +7,7 @@
 #include "view/LibraryPage.h"
 #include "view/StagePanel.h"
 
-#include <ee/Camera.h>
+#include <ee/OrthoCamera.h>
 #include <ee/panel_msg.h>
 #include <ee/trans_color.h>
 #include <ee/FileHelper.h>
@@ -58,7 +58,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	float s = value["camera"]["scale"].asDouble();
 	float x = value["camera"]["x"].asDouble(),
 		y = value["camera"]["y"].asDouble();
-	ee::Camera* cam = stage->GetCamera();
+	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(stage->GetCamera());
 	cam->SetScale(s);
 	cam->SetPosition(ee::Vector(x, y));
 

@@ -474,20 +474,40 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="camera"
+			>
+			<File
+				RelativePath="..\..\..\source\render\Camera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\OrthoCamera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\OrthoCamera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\PerspectCamera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\PerspectCamera.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\source\render\BlendModes.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\include\ee\BlendModes.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\render\Camera.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\Camera.h"
 			>
 		</File>
 		<File

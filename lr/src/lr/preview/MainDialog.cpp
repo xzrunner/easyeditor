@@ -5,8 +5,8 @@
 #include "frame/config.h"
 
 #include <ee/EditPanel.h>
-#include <ee/Camera.h>
 #include <ee/panel_msg.h>
+#include <ee/OrthoCamera.h>
 
 #include <wx/sizer.h>
 
@@ -30,7 +30,7 @@ void MainDialog::InitLayout()
 
 	ee::EditPanel* stage = new ee::EditPanel(this, this);
 
-	ee::Camera* cam = stage->GetCamera();
+	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(stage->GetCamera());
 	float old_scale = cam->GetScale();
 	cam->SetScale(old_scale / PREVIEW_SCALE);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

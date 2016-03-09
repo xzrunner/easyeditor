@@ -13,7 +13,6 @@ class Symbol;
 class SpriteBatch;
 class Vector;
 class Matrix;
-class Camera;
 class FBO;
 
 class SpriteRenderer
@@ -38,9 +37,6 @@ public:
 			  float yShear = 0.0f, 
 			  const ColorTrans& color = ColorTrans()) const;
 
-	void SetCamera(const Camera* cam) { m_cam = cam; }
-	const Camera* GetCamera() const { return m_cam; }
-
 	static SpriteRenderer* Instance();
 
 private:
@@ -50,9 +46,6 @@ private:
 		          const Sprite* root = NULL,
   				  const Matrix& mt = Matrix(),
   				  const ColorTrans& color = ColorTrans()) const;
-
-private:
-	const Camera* m_cam;
 
 private:
 	static SpriteRenderer* m_instance;

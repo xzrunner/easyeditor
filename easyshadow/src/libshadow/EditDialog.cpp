@@ -7,7 +7,7 @@
 #include <ee/panel_msg.h>
 #include <ee/ConfirmDialog.h>
 #include <ee/SpriteFactory.h>
-#include <ee/Camera.h>
+#include <ee/OrthoCamera.h>
 
 #include <wx/splitter.h>
 
@@ -90,9 +90,9 @@ void EditDialog::InitCamera(ee::Camera* cam, ee::Sprite* spr) const
 
 	wxSize sz = GetSize();
 	float scale = std::min(sz.GetWidth() / r.Width(), sz.GetHeight() / r.Height());
-	cam->SetScale(1 / scale);
+	static_cast<ee::OrthoCamera*>(cam)->SetScale(1 / scale);
 
-	cam->SetPosition(ee::Vector(0, 0));
+	static_cast<ee::OrthoCamera*>(cam)->SetPosition(ee::Vector(0, 0));
 }
 
 }

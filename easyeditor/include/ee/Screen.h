@@ -12,9 +12,6 @@ class Camera;
 class Screen
 {
 public:
-//	Screen() : m_scale(1, 1) {}
-// 	Screen(int width, int height) 
-// 		: m_size(width, height) , m_scale(1, 1) {}
 	Screen(Camera* cam) : m_cam(cam) {}
 
 	const Vector& GetSize() const { return m_size; }

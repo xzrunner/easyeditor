@@ -1,6 +1,6 @@
 #include "EditPanelImpl.h"
 #include "EditPanel.h"
-#include "Camera.h"
+#include "OrthoCamera.h"
 #include "Frame.h"
 #include "StageCanvas.h"
 #include "panel_msg.h"
@@ -21,7 +21,7 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 {
 	m_edit_op = NULL;
 	m_canvas = NULL;
-	m_camera = new Camera;
+	m_camera = new OrthoCamera;
 
 	InitSubjects();
 }
@@ -197,7 +197,7 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 	const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
 	const float cx = static_cast<float>(x),
 		cy = static_cast<float>(h - y);
-	m_camera->Scale(scale, cx, cy, w, h);
+	static_cast<OrthoCamera*>(m_camera)->Scale(scale, cx, cy, w, h);
 }
 
 void EditPanelImpl::Undo()

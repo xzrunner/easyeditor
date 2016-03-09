@@ -39,7 +39,7 @@ private:
 
 	mutable ee::FPS m_fps;
 
-	ee::Camera m_camera3;
+//	ee::Camera m_camera3;
 
 }; // StageCanvas
 

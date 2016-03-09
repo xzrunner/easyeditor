@@ -1,7 +1,7 @@
 #include "PanViewState.h"
-#include "Camera.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
+#include "OrthoCamera.h"
 
 namespace ee
 {
@@ -43,7 +43,7 @@ bool PanViewState::OnMouseDrag(int x, int y)
 	if (m_last_pos.IsValid()) {
 		Vector offset(m_last_pos.x - x, m_last_pos.y - y);
 		offset.y = -offset.y;
-		m_stage->GetCamera()->Translate(offset);
+		static_cast<OrthoCamera*>(m_stage->GetCamera())->Translate(offset);
 
 		m_last_pos.Set(x, y);
 

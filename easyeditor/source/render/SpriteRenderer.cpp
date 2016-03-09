@@ -22,7 +22,6 @@ SpriteRenderer* SpriteRenderer::Instance()
 }
 
 SpriteRenderer::SpriteRenderer()
-	: m_cam(NULL)
 {
 }
 
