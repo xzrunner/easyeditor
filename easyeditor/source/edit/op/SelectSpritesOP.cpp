@@ -77,7 +77,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 
 bool SelectSpritesOP::OnKeyUp(int keyCode)
 {
-	if (DrawSelectRectOP::OnKeyDown(keyCode)) return true;
+	if (DrawSelectRectOP::OnKeyUp(keyCode)) return true;
 
 	switch (keyCode)
 	{
