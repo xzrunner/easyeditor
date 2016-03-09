@@ -24,7 +24,7 @@ public:
 	const wxBitmap* GetSmallBmp() const { return m_bmp_small; }
 
 private:
-	void InitBmp(const wxImage& image);
+	void InitBmp(const wxImage& image, bool scale);
 
 	static unsigned char* TransRGBA2RGB(unsigned char* rgba, int width, int height);
 

@@ -33,14 +33,17 @@ unsigned char* Snapshoot::OutputToMemory(const Symbol* symbol, bool whitebg,
 {
 	m_fbo->DrawSymbol(symbol, whitebg, scale);
 
-	int w = static_cast<int>(symbol->GetSize().Width() * scale),
-		h = static_cast<int>(symbol->GetSize().Height() * scale);
-	size_t size = w*h*4;
+	float w = symbol->GetSize().Width(),
+		h = symbol->GetSize().Height();
+	w *= scale;
+	h *= scale;
+
+	size_t size = static_cast<int>(w) * static_cast<int>(h) * 4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return NULL;
 	memset(&pixels[0], 0, size);	
 
-	m_fbo->ReadPixels(pixels, w, h);
+	m_fbo->ReadPixels(pixels, static_cast<int>(w), static_cast<int>(h));
 
 	return pixels;
 }

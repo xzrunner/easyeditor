@@ -192,7 +192,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	Matrix mt;
 	float dx = -symbol->GetSize().CenterX();
 	float dy = symbol->GetSize().CenterY();
-	mt.Translate(dx, dy);
+	mt.Translate(dx * scale, dy * scale);
 	SpriteRenderer::Instance()->Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。

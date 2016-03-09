@@ -21,6 +21,9 @@ namespace ee
 
 static const int SMALL_SIZE = 24;
 
+static const float MAX_WIDTH = 150.0f;
+static const float SCALE = 0.5f;
+
 Bitmap::Bitmap()
 	: m_bmp_large(NULL)
 	, m_bmp_small(NULL)
@@ -61,13 +64,13 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 		ImageData* img_data = ImageDataMgr::Instance()->GetItem(filepath);
 		wxImage image(img_data->GetWidth(), img_data->GetHeight(), (unsigned char*)(img_data->GetPixelData()), true);
 //		image.SetData((unsigned char*)(img_data->GetPixelData()), img_data->GetWidth(), img_data->GetHeight());
-		InitBmp(image);
+		InitBmp(image, true);
 	}
 	else if (FileType::IsType(filepath, FileType::e_image))
 	{
 		wxImage image;
 		GetImage(filepath, image);
-		InitBmp(image);
+		InitBmp(image, true);
 	}
 	else if (FileType::IsType(filepath, FileType::e_terrain2d))
 	{
@@ -77,20 +80,19 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	{
 		Symbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 		Rect rect = symbol->GetSize();
-		int w = std::max(1.0f, rect.Width()),
+		float w = std::max(1.0f, rect.Width()),
 			h = std::max(1.0f, rect.Height());
-
- 		if (w > 2048 || h > 2048) {
- 			return true;
- 		}
+		float scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
+		w *= scale;
+		h *= scale;
 
 		Snapshoot ss(w, h);
-		unsigned char* rgba = ss.OutputToMemory(symbol, true);
+		unsigned char* rgba = ss.OutputToMemory(symbol, true, scale);
 		unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
 		delete[] rgba;
 
 		wxImage image(w, h, rgb, true);
-		InitBmp(image);
+		InitBmp(image, false);
 		delete[] rgb;
 		symbol->Release();
 	}
@@ -98,25 +100,31 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	return true;
 }
 
-void Bitmap::InitBmp(const wxImage& image)
+void Bitmap::InitBmp(const wxImage& image, bool need_scale)
 {
-	int width = image.GetWidth();
 	{
 		if (m_bmp_large) {
 			delete m_bmp_large;
 		}
-		float scale_large = width > 300 ? 150.0f / width : 0.5f;
-		int w = std::max(1.0f, image.GetWidth() * scale_large);
-		int h = std::max(1.0f, image.GetHeight() * scale_large);
+		float w = image.GetWidth(),
+			h = image.GetHeight();
+		float scale = 1;
+		if (need_scale) {
+			scale = w > (MAX_WIDTH / SCALE) ? (MAX_WIDTH / w) : SCALE; 
+		}
+		w = std::max(1.0f, w * scale);
+		h = std::max(1.0f, h * scale);
 		m_bmp_large = new wxBitmap(image.Scale(w, h));
 	}
 	{
 		if (m_bmp_small) {
 			delete m_bmp_small;
 		}
-		float scale_small = (float)SMALL_SIZE / width;
-		int w = std::max(1.0f, image.GetWidth() * scale_small);
-		int h = std::max(1.0f, image.GetHeight() * scale_small);
+		float w = image.GetWidth(),
+			h = image.GetHeight();
+		float scale = (float)SMALL_SIZE / w;
+		w = std::max(1.0f, w * scale);
+		h = std::max(1.0f, h * scale);
 		m_bmp_small = new wxBitmap(image.Scale(w, h));
 	}
 }
