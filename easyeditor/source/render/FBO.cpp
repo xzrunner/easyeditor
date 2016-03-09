@@ -156,6 +156,7 @@ int FBO::CheckFramebufferStatus(std::string& msg) const
 void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
+	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
@@ -197,6 +198,9 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	shader->Commit();
 
+	ShaderLab::Instance()->Flush();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	shader->SetFBO(0);
 	shader->SetTexture(0);
 

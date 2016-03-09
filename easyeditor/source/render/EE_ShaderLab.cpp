@@ -62,4 +62,9 @@ void ShaderLab::UpdateTexture(const uint8_t* data, int x, int y, int w, int h, i
 	render_texture_subupdate(r, id, data, x, y, w, h);
 }
 
+void ShaderLab::Flush()
+{
+	sl_shader_flush();
+}
+
 }
