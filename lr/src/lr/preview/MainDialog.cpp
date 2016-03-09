@@ -15,16 +15,16 @@ namespace lr
 namespace preview
 {
 
-MainDialog::MainDialog(wxWindow* parent, int width, int height,
-					   const std::vector<const ee::Sprite*>& sprites)
+MainDialog::MainDialog(wxWindow* parent, wxGLContext* glctx, int width, 
+					   int height, const std::vector<const ee::Sprite*>& sprites)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(width, height), wxCLOSE_BOX | wxCAPTION)
 	, m_sprites(sprites)
 	, m_control(0.033f)
 {
-	InitLayout();
+	InitLayout(glctx);
 }
 
-void MainDialog::InitLayout()
+void MainDialog::InitLayout(wxGLContext* glctx)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -35,8 +35,13 @@ void MainDialog::InitLayout()
 	cam->SetScale(old_scale / PREVIEW_SCALE);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
-	stage->SetCanvas(new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites));
-	stage->SetEditOP(new CtrlCamOP(stage, stage->GetStageImpl()));
+	StageCanvas* canvas = new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites, glctx);
+	stage->SetCanvas(canvas);
+	canvas->Release();
+
+	ee::EditOP* op = new CtrlCamOP(stage, stage->GetStageImpl());
+	stage->SetEditOP(op);
+
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);

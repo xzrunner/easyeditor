@@ -7,6 +7,8 @@
 
 #include <vector>
 
+class wxGLContext;
+
 namespace ee { class Sprite; }
 
 namespace lr
@@ -17,11 +19,11 @@ namespace preview
 class MainDialog : public wxDialog
 {
 public:
-	MainDialog(wxWindow* parent, int width, int height, 
-		const std::vector<const ee::Sprite*>& sprites);
+	MainDialog(wxWindow* parent, wxGLContext* glctx, int width, 
+		int height, const std::vector<const ee::Sprite*>& sprites);
 
 private:
-	void InitLayout();
+	void InitLayout(wxGLContext* glctx);
 
 private:
 	std::vector<const ee::Sprite*> m_sprites;

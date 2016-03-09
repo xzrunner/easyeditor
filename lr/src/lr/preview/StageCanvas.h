@@ -14,7 +14,7 @@ class StageCanvas : public ee::OrthoCanvas
 {
 public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::PlayControl& control,
-		const std::vector<const ee::Sprite*>& sprites);
+		const std::vector<const ee::Sprite*>& sprites, wxGLContext* glctx);
 
 protected:
 	virtual void OnDrawSprites() const;

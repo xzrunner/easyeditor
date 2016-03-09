@@ -13,6 +13,7 @@
 #include <ee/ExceptionDlg.h>
 #include <ee/Snapshoot.h>
 #include <ee/FetchAllVisitor.h>
+#include <ee/StageCanvas.h>
 
 #include <easyshape.h>
 
@@ -75,7 +76,8 @@ void Frame::OnPreview(wxCommandEvent& event)
 	std::vector<const ee::Sprite*> sprites;
 	m_task->GetAllSprite(sprites);
 
-	preview::MainDialog dlg(this, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
+	wxGLContext* ctx = m_task->GetEditPanel()->GetCanvas()->GetGLContext();
+	preview::MainDialog dlg(this, ctx, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
 	dlg.ShowModal();
 }
 

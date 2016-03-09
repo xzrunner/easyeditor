@@ -37,7 +37,7 @@ public:
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
 
-	wxGLContext* GetGLContext() { return m_gl_context; }
+	wxGLContext* GetGLContext() const { return m_gl_context; }
 
 protected:
 	virtual void OnSize(int w, int h) = 0;
