@@ -30,7 +30,7 @@ void TestMulti::Init()
 
 void TestMulti::Resize(int width, int height)
 {
-	glue::ShaderMgr::Instance()->OnSize(width, height);
+	glue::RenderContext::Instance()->OnSize(width, height);
 }
 
 void TestMulti::Draw() const

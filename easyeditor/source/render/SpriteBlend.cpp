@@ -7,6 +7,7 @@
 #include "ImageSymbol.h"
 #include "GL.h"
 #include "Math2D.h"
+#include "BlendShader.h"
 
 #include <dtex_facade.h>
 
@@ -60,22 +61,22 @@ void SpriteBlend::Draw(const Sprite* sprite, const Matrix& mt) const
 
 void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 {
-// 	ShaderMgr* mgr = ShaderMgr::Instance();
-// 
-// 	dtexf_c1_clear();
-// 	dtexf_c1_bind();
-// 
-// 	mgr->SpriteBlend();
-// 	mgr->SetBlendMode(sprite->GetBlendMode());
-// 
-// 	BlendShader* blend_shader = mgr->GetBlendShader();
-// 	blend_shader->SetBaseTexID(ScreenCache::Instance()->GetTexID());
-// 
-// 	SpriteRenderer::Instance()->DrawWithoutBlend(sprite, sprite, mt);
-// 
-// 	dtexf_c1_unbind();
-// 
-// 	mgr->SetSpriteShader(0);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+
+	dtexf_c1_clear();
+	dtexf_c1_bind();
+
+	mgr->SpriteBlend();
+	mgr->SetBlendMode(sprite->GetBlendMode());
+
+	BlendShader* blend_shader = mgr->GetBlendShader();
+//	blend_shader->SetBaseTexID(ScreenCache::Instance()->GetTexID());
+
+	SpriteRenderer::Instance()->DrawWithoutBlend(sprite, sprite, mt);
+
+	dtexf_c1_unbind();
+
+	mgr->SetSpriteShader(0);
 }
 
 void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const

@@ -2,6 +2,7 @@
 #include "SpriteShader.h"
 #include "ShapeShader.h"
 #include "BlendShader.h"
+#include "ScreenCache.h"
 
 #include <sl_shader.h>
 
@@ -49,6 +50,8 @@ void ShaderMgr::Init()
 
 void ShaderMgr::OnSize(int width, int height)
 {
+	ScreenCache::Instance()->SetSize(width, height);
+
 	m_sprite->OnSize(width, height);
 	m_shape->OnSize(width, height);
 	m_blend->OnSize(width, height);

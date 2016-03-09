@@ -8,13 +8,27 @@
 namespace glue
 {
 
+class Camera;
+
 class RenderContext
 {
 public:
 	void Init();
 
+	void OnSize(int w, int h);
+
+	int GetWidth() const { return m_width; }
+	int GetHeight() const { return m_height; }
+
 	RID CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format);
 	void ReleaseTexture(RID id);
+
+	const Camera* GetCamera() const { return m_cam; }
+
+private:
+	Camera* m_cam;
+
+	int m_width, m_height;
 
 	SINGLETON_DECLARATION(RenderContext)
 	

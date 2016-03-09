@@ -3,6 +3,8 @@
 
 #include "math/Math.h"
 #include "render/ShaderMgr.h"
+#include "render/RenderContext.h"
+#include "render/Camera.h"
 
 namespace glue
 {
@@ -46,7 +48,19 @@ void Symbol::Draw(const mat4& mt) const
 		vertices_scr[2] = Math::TransVector(vec2( img_hw,  img_hh), mt);
 		vertices_scr[3] = Math::TransVector(vec2(-img_hw,  img_hh), mt);
 
+		RenderContext* ctx = RenderContext::Instance();
 		vec2 tex_coords_base[4];
+		int w = ctx->GetWidth(),
+			h = ctx->GetHeight();
+ 		for (int i = 0; i < 4; ++i) {
+ 			tex_coords_base[i] = ctx->GetCamera()->TransPosProjectToScreen(vertices_scr[i], w, h);
+ 			tex_coords_base[i].y = h - 1 - tex_coords_base[i].y;
+ 			tex_coords_base[i].x /= w;
+ 			tex_coords_base[i].y /= h;
+ 			tex_coords_base[i].x = std::min(std::max(0.0f, tex_coords_base[i].x), 1.0f);
+ 			tex_coords_base[i].y = std::min(std::max(0.0f, tex_coords_base[i].y), 1.0f);
+ 		}
+		smgr->BlendDraw(vertices_scr, texcoords, tex_coords_base, texid, );
 	}
 	else
 	{

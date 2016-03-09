@@ -260,15 +260,7 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\source\render\BlendShader.frag"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\include\ee\BlendShader.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\source\render\BlendShader.vert"
 						>
 					</File>
 				</Filter>
