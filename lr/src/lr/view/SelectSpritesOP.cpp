@@ -14,6 +14,7 @@
 #include <ee/InsertSpriteAOP.h>
 #include <ee/CombineAOP.h>
 #include <ee/SpriteFactory.h>
+#include <ee/PointQueryVisitor.h>
 
 namespace lr
 {
@@ -72,7 +73,12 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (ee::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-	ee::Sprite* selected = m_spritesImpl->QuerySpriteByPos(pos);
+
+	ee::Sprite* selected = NULL;
+	m_selection->Traverse(ee::PointQueryVisitor(pos, &selected));
+	if (!selected) {
+		selected = m_spritesImpl->QuerySpriteByPos(pos);
+	}
 	if (selected) {
 		m_open_symbol.Open(selected);
 	}
