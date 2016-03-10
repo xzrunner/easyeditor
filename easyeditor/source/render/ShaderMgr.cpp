@@ -12,13 +12,15 @@
 namespace ee
 {
 
+static const int MAX_TEXTURE = 4096;
+
 ShaderMgr* ShaderMgr::m_instance = NULL;
 
 ShaderMgr* ShaderMgr::Instance()
 {
 	if (!m_instance)
 	{
-		sl_shader_mgr_create();
+		sl_shader_mgr_create(MAX_TEXTURE);
 
 		m_instance = new ShaderMgr();
 		ShaderContext::SetShader2DMgr(m_instance);
