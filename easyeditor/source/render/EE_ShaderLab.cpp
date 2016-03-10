@@ -21,11 +21,6 @@ ShaderLab::~ShaderLab()
 {
 }
 
-void ShaderLab::Init()
-{
-	sl_shader_mgr_create();
-}
-
 int ShaderLab::CreateTexture(const uint8_t* data, int width, int height, EE_TEXTURE_FORMAT format)
 {
 	TEXTURE_FORMAT ej_fmt;
