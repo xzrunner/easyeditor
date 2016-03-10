@@ -66,7 +66,7 @@ bool PixelDiffOP::OnActive()
 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 	ee::SpriteShader* shader = new ee::SpriteShader;
 	shader->Load();
-	shader_mgr->SetSpriteShader(shader);
+//	shader_mgr->SetSpriteShader(shader);
 
 	return false;
 }

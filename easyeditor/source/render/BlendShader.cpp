@@ -1,4 +1,7 @@
 #include "BlendShader.h"
+#include "BlendModes.h"
+#include "ColorTrans.h"
+#include "trans_color.h"
 
 #include <sl_blend.h>
 
@@ -52,11 +55,19 @@ void BlendShader::SetModelView(const Vector& offset, float scale)
 	sl_blend_modelview(offset.x, offset.y, scale, scale);
 }
 
-// 	void SetBaseTexID(int tex);
-// 
-// 	void SetBlendMode(const std::string& mode);
+void BlendShader::SetBlendMode(const std::string& str)
+{
+	BlendMode mode = BlendModes::Instance()->GetIDFromNameEN(str);
+	sl_blend_set_mode(SL_BLEND_MODE(mode));
+}
 
-void BlendShader::DrawBlend(const Vector vertices[4], const Vector texcoords[4], 
+void BlendShader::SetColor(const ColorTrans& color)
+{
+	sl_blend_set_color(color2int(color.multi, PT_ABGR), 
+		color2int(color.add, PT_ABGR));
+}
+
+void BlendShader::Draw(const Vector vertices[4], const Vector texcoords[4], 
 							const Vector texcoords_base[4], int texid, int texid_base)
 {
 	sl_blend_draw(&vertices[0].x, &texcoords[0].x, &texcoords_base[0].x, texid, texid_base);

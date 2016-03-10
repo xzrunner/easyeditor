@@ -102,7 +102,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 	if (draw_edge) {
 		filter_mode_idx = ee::FilterModes::Instance()->QueryShaderIdx(ee::FilterMode::FM_EDGE_DETECTION);
 	}
-	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
+//	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	rd->Draw(spr);
 

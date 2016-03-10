@@ -80,7 +80,7 @@ void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	shader_mgr->SetSpriteShader(shader);
+//	shader_mgr->SetSpriteShader(shader);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -94,7 +94,7 @@ void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	shader_mgr->SetSpriteShader(m_edge_shader);
+//	shader_mgr->SetSpriteShader(m_edge_shader);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -117,7 +117,7 @@ void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	shader_mgr->SetSpriteShader(shader);
+//	shader_mgr->SetSpriteShader(shader);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -131,7 +131,7 @@ void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
 		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	shader_mgr->SetSpriteShader(shader);
+//	shader_mgr->SetSpriteShader(shader);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
@@ -145,7 +145,7 @@ void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 		ee::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	shader_mgr->SetSpriteShader(m_blur_shader);
+//	shader_mgr->SetSpriteShader(m_blur_shader);
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
 

@@ -211,7 +211,17 @@ compile(struct render *R, const char * source, int type) {
 	GLint status;
 	
 	GLuint shader = glCreateShader(type);
-	glShaderSource(shader, 1, &source, NULL);
+
+	//////////////////////////////////////////////////////////////////////////
+
+	// todo
+	const char* sources[2] = { "#version 100\nprecision highp float;\n", source };
+	glShaderSource(shader, 2, sources, NULL);
+
+//	glShaderSource(shader, 1, &source, NULL);
+
+	//////////////////////////////////////////////////////////////////////////
+
 	glCompileShader(shader);
 	
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);

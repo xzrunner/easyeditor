@@ -26,6 +26,7 @@ public:
 
 	void SetSpriteColor(const ColorTrans& color);
 	void SetShapeColor(const Colorf& col);
+	void SetBlendColor(const ColorTrans& color);
 	void SetBlendMode(BlendMode mode);
 
 	void sprite();
@@ -44,6 +45,8 @@ public:
 //	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 	void DrawScreen(int texid);
+	void DrawBlend(const Vector vertices[4], const Vector texcoords[4], 
+		const Vector texcoords_base[4], int texid, int texid_base);
 
 	int GetVersion() const;
 
@@ -52,17 +55,18 @@ public:
 
 	void SetModelView(const Vector& offset, float scale);
 
-	int AddShapeShader(ShapeShader* shader);
-	void SetShapeShader(int idx);
+//	int AddShapeShader(ShapeShader* shader);
+//	void SetShapeShader(int idx);
 
-	int AddSpriteShader(SpriteShader* shader);
-	void SetSpriteShader(int idx);
-	void SetSpriteShader(SpriteShader* shader, bool delete_old = true);
+//	int AddSpriteShader(SpriteShader* shader);
+//	void SetSpriteShader(int idx);
+//	void SetSpriteShader(SpriteShader* shader, bool delete_old = true);
 
 	ShapeShader* GetShapeShader() { return m_shape_shader; }
 	SpriteShader* GetSpriteShader() { return m_sprite_shader; }
-	BlendShader* GetBlendShader() { return m_blend_shader; }
 
+	bool IsCurrentBlendShader() const;
+	
 private:
 	ShaderMgr();
 	~ShaderMgr();
@@ -76,8 +80,8 @@ private:
 	ScreenShader* m_screen_shader;
 	BlendShader* m_blend_shader;
 
-	std::vector<SpriteShader*> m_all_sprite_shader;
-	std::vector<ShapeShader*> m_all_shape_shader;
+// 	std::vector<SpriteShader*> m_all_sprite_shader;
+// 	std::vector<ShapeShader*> m_all_shape_shader;
 
 	int m_version;
 

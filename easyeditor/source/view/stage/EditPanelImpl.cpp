@@ -8,6 +8,7 @@
 #include "EditOP.h"
 #include "sprite_msg.h"
 #include "StringHelper.h"
+#include "SpriteRenderer.h"
 
 #include <fstream>
 
@@ -22,6 +23,8 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 	m_edit_op = NULL;
 	m_canvas = NULL;
 	m_camera = new OrthoCamera;
+	
+	SpriteRenderer::Instance()->SetCamera(m_camera);
 
 	InitSubjects();
 }

@@ -4,6 +4,7 @@
 #include "ResourcesMgr.h"
 #include "Vector.h"
 #include "Object.h"
+#include "ColorTrans.h"
 
 #include <stdint.h>
 
@@ -15,6 +16,7 @@ class Sprite;
 class Texture;
 class ImageData;
 class FBO;
+struct ColorTrans;
 
 class Image : public Object
 {
@@ -36,7 +38,8 @@ public:
 	int GetClippedHeight() const;
 	const uint8_t* GetPixelData() const;
 
-	void Draw(const Matrix& mt, const Sprite* spr = NULL, const Sprite* root = NULL) const;
+	void Draw(const Matrix& mt, const ColorTrans& col = ColorTrans(), 
+		const Sprite* spr = NULL, const Sprite* root = NULL) const;
 	void InvalidRect(const Matrix& mt) const;
 
 	const Vector& GetOffset() const { return m_offset; }

@@ -47,9 +47,7 @@ void ImageSymbol::ReloadTexture() const
 void ImageSymbol::Draw(const Matrix& mt, const ColorTrans& col, 
 					   const Sprite* spr, const Sprite* root) const
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->SetSpriteColor(col);
-	m_image->Draw(mt, spr, root);
+	m_image->Draw(mt, col, spr, root);
 }
 
 Rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const

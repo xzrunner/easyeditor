@@ -27,7 +27,7 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 	SpriteRenderer* rd = SpriteRenderer::Instance();
 
 	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->GetFilterMode());
-	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
+//	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
 	DrawSprite(rd, spr);
 

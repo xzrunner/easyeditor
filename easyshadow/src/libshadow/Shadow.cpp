@@ -51,7 +51,7 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 	}
 
 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-	shader_mgr->SetShapeShader(m_shader_idx);
+//	shader_mgr->SetShapeShader(m_shader_idx);
 	shader_mgr->shape();
 
 	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
@@ -64,7 +64,7 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 // 	ee::RVG::Polyline(mt, m_inner_loop, ee::LIGHT_RED, true);
 // 	ee::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
 
-	shader_mgr->SetShapeShader(0);
+//	shader_mgr->SetShapeShader(0);
 	shader_mgr->shape();
 }
 
@@ -142,7 +142,7 @@ void Shadow::InitShader()
 {
 	ShadowShader* shader = new ShadowShader;
 	shader->Load();
-	m_shader_idx = ee::ShaderMgr::Instance()->AddShapeShader(shader);
+//	m_shader_idx = ee::ShaderMgr::Instance()->AddShapeShader(shader);
 }
 
 void Shadow::BuildInnerLoop(const std::vector<ee::Vector>& loop)

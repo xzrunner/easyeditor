@@ -50,7 +50,7 @@ Shader* FileIO::LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
 	if (is_2d) {
 		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 		shader_mgr->null();
-		shader_mgr->SetSpriteShader(static_cast<ee::SpriteShader*>(shader->GetShaderImpl()));
+//		shader_mgr->SetSpriteShader(static_cast<ee::SpriteShader*>(shader->GetShaderImpl()));
 		shader_mgr->sprite();
 	} else {
 		e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();

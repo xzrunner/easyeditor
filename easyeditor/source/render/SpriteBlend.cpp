@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "SpriteBlend.h"
 #include "ShaderMgr.h"
 #include "SpriteRenderer.h"
@@ -8,6 +10,7 @@
 #include "GL.h"
 #include "Math2D.h"
 #include "BlendShader.h"
+#include "EE_ShaderLab.h"
 
 #include <dtex_facade.h>
 
@@ -31,7 +34,7 @@ SpriteBlend::SpriteBlend()
 }
 
 void SpriteBlend::Draw(const Sprite* sprite, const Matrix& mt) const
-{ 
+{
 	assert(sprite->GetBlendMode() != BM_NORMAL);
 
 	ShaderMgr::Instance()->Flush();
@@ -69,14 +72,12 @@ void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 	mgr->SpriteBlend();
 	mgr->SetBlendMode(sprite->GetBlendMode());
 
-	BlendShader* blend_shader = mgr->GetBlendShader();
-//	blend_shader->SetBaseTexID(ScreenCache::Instance()->GetTexID());
-
 	SpriteRenderer::Instance()->DrawWithoutBlend(sprite, sprite, mt);
 
-	dtexf_c1_unbind();
+	mgr->Commit();
+	ShaderLab::Instance()->Flush();
 
-	mgr->SetSpriteShader(0);
+	dtexf_c1_unbind();
 }
 
 void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const

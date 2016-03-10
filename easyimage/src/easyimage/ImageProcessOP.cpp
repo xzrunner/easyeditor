@@ -32,7 +32,7 @@ bool ImageProcessOP::OnActive()
 		shader->Load();
 // 		shader->SetTexelSize(1/r.Width(), 1/r.Height());
 		shader->SetTexelSize(1.0f/4096, 1.0f/4096);
-		shader_mgr->SetSpriteShader(shader);
+//		shader_mgr->SetSpriteShader(shader);
 	}
 
 	return false;
