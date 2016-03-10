@@ -61,6 +61,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(stage->GetCamera());
 	cam->SetScale(s);
 	cam->SetPosition(ee::Vector(x, y));
+	cam->UpdateModelView();
 
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
