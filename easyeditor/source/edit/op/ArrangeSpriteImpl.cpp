@@ -70,7 +70,6 @@ void ArrangeSpriteImpl::OnKeyDown(int keycode)
 {
 	if (m_stage->GetKeyState(WXK_SHIFT)) {
 		OnSpriteShortcutKey(keycode);
-		m_stage->GetEditOP()->OnKeyUp(WXK_SHIFT);
 		return;
 	}
 
