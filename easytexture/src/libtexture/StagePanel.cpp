@@ -28,9 +28,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, ee::SpritesPanelImpl(GetStageImpl(), library)
 	, ee::ShapesPanelImpl(new SymbolContainer((Symbol*)(&edited->GetSymbol())))
 {
-	SetEditOP(new eshape::EditPolylineOP<eshape::DrawPolygonOP, 
-		ee::SelectShapesOP>(this, GetStageImpl(), this, NULL, new ee::OneFloatValueStatic(5), NULL));
-	SetCanvas(new StageCanvas(this, glctx, edited, bg_sprites));
+	ee::EditOP* op = new eshape::EditPolylineOP<eshape::DrawPolygonOP, ee::SelectShapesOP>(this, 
+		GetStageImpl(), this, NULL, new ee::OneFloatValueStatic(5), NULL);
+	SetEditOP(op);
+	op->Release();
+
+	StageCanvas* canvas = new StageCanvas(this, glctx, edited, bg_sprites);
+	SetCanvas(canvas);
 
 	m_symbol = (Symbol*)(&edited->GetSymbol());
 	if (m_symbol) {
