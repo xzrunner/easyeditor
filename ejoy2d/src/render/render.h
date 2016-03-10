@@ -166,6 +166,7 @@ void render_draw_elements(struct render *R, enum DRAW_MODE mode, int fromidx, in
 void render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int ni);
 
 int render_query_target();
+int render_query_tex_glid(struct render *R, int tex);
 
 #endif
 

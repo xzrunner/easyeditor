@@ -81,12 +81,13 @@ void FBO::CreateFBO(int w, int h)
 	unsigned char* empty_data = new unsigned char[w*h*4];
 	if(!empty_data) return;
 	memset(empty_data, 0x00, w*h*4);
-	int tex = ShaderLab::Instance()->CreateTexture(empty_data, w, h, EE_TEXTURE_RGBA8);
+	m_tex = ShaderLab::Instance()->CreateTexture(empty_data, w, h, EE_TEXTURE_RGBA8);
+	int gl_id = ShaderLab::Instance()->GetTexGLID(m_tex);
 
 	glGenFramebuffersEXT(1, &m_fbo);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 //	mgr->SetFBO(m_fbo);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, gl_id, 0);
 
 	std::string msg;
 	int status = CheckFramebufferStatus(msg);
@@ -103,10 +104,7 @@ void FBO::CreateFBO(int w, int h)
 
 void FBO::ReleaseFBO()
 {
-	if (m_tex != 0) {
-		glDeleteTextures(1, (GLuint*)(&m_tex));
-		m_tex = 0;
-	}
+	ShaderLab::Instance()->ReleaseTexture(m_tex);
 
 	if (m_fbo != 0) {
 		glDeleteFramebuffersEXT(1, &m_fbo);
@@ -215,6 +213,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 				  float dx, float dy, float scale)
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
+	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
@@ -248,7 +247,13 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	SpriteRenderer::Instance()->Draw(sprite, NULL, mt, ColorTrans(), false);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
+
+	
+
 	shader->Commit();
+	ShaderLab::Instance()->Flush();
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
 
 	shader->SetFBO(0);
 	shader->SetTexture(0);

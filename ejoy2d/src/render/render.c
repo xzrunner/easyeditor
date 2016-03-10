@@ -1126,3 +1126,9 @@ render_query_target() {
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &fbo);
 	return fbo;
 }
+
+int 
+render_query_tex_glid(struct render *R, int id) {
+	struct texture* tex = (struct texture *)array_ref(&R->texture, id);
+	return tex ? tex->glid : 0;
+}

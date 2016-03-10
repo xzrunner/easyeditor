@@ -18,6 +18,8 @@ public:
 	void ReleaseTexture(int id);
 	void UpdateTexture(const uint8_t* data, int x, int y, int w, int h, int id);
 
+	int GetTexGLID(int tex);
+	
 	void Flush();
 	
 	SINGLETON_DECLARATION(ShaderLab)

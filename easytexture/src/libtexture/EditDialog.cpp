@@ -33,7 +33,7 @@ EditDialog::EditDialog(wxWindow* parent, wxGLContext* glctx,
 	Symbol* symbol = const_cast<Symbol*>(&edited->GetSymbol());
 	symbol->Retain();
 	m_symbol = symbol;
-	m_symbol->ReloadTexture();
+//	m_symbol->ReloadTexture();
 	SetTitle(symbol->GetFilepath());
 
 	InitLayout(glctx, edited, sprite_impl);

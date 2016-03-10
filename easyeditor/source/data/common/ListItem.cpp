@@ -14,7 +14,6 @@ void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 		}
 	}
 	m_bitmap = BitmapMgr::Instance()->GetItem(filepath);
-	m_bitmap->LoadFromFile(filepath);
 }
 
 }

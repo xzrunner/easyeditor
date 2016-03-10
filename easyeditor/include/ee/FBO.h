@@ -54,7 +54,7 @@ private:
 private:
 	int m_width, m_height;
 
-	GLuint m_tex;
+	int m_tex;
 	GLuint m_fbo;
 
 }; // FBO
