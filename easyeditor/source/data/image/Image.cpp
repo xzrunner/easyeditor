@@ -221,8 +221,6 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
  			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
  			tex_coolds_base[i].x /= w;
  			tex_coolds_base[i].y /= h;
- 			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
- 			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
  		}
  		mgr->DrawBlend(vertices, texcoords, tex_coolds_base, texid, ScreenCache::Instance()->GetTexID());
  	}
