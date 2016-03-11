@@ -78,6 +78,11 @@ void ShaderMgr::SetBlendMode(BlendMode mode)
 	m_blend_shader->SetBlendMode(BlendModes::Instance()->GetNameENFromID(mode));
 }
 
+void ShaderMgr::OnSize(int width, int height)
+{
+	m_blend_shader->OnSize(width, height);
+}
+
 void ShaderMgr::sprite()
 {
 	ShaderContext::Bind2d();

@@ -31,6 +31,7 @@ void TwoPassCanvas::OnSize(int w, int h)
 		DTex::Instance();
 	}
 	ScreenCache::Instance()->SetSize(w, h);
+	ShaderMgr::Instance()->OnSize(w, h);
 }
 
 static void

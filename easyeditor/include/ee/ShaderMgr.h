@@ -29,6 +29,8 @@ public:
 	void SetBlendColor(const ColorTrans& color);
 	void SetBlendMode(BlendMode mode);
 
+	void OnSize(int width, int height);
+
 	void sprite();
 	void shape();
 	void Screen();
