@@ -31,7 +31,7 @@ BlendModes::BlendModes()
 	m_modes.push_back(Item(BM_OVERLAY, "overlay", "叠加"));
 	m_modes.push_back(Item(BM_SOFT_LIGHT, "soft light", "柔光"));
 	m_modes.push_back(Item(BM_HARD_LIGHT, "hard light", "强光"));
-	m_modes.push_back(Item(BM_VIVID_LIGHT, "vivid light", "艳光"));
+	m_modes.push_back(Item(BM_VIVID_LIGHT, "vivid light", "亮光"));
 	m_modes.push_back(Item(BM_LINEAR_LIGHT, "linear light", "线性光"));
 	m_modes.push_back(Item(BM_PIN_LIGHT, "pin light", "固定光"));
 	m_modes.push_back(Item(BM_HARD_MIX, "hard mix", "实色混合"));
