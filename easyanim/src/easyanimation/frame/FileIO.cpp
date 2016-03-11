@@ -337,8 +337,8 @@ void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<ee
 		while (!jointVal.isNull()) {
 			Joint* joint = new Joint(sprite);			
 			joint->m_id = jointVal["id"].asInt();
-			joint->m_relative.x = jointVal["rx"].asDouble();
-			joint->m_relative.y = jointVal["ry"].asDouble();
+			joint->m_relative_pos.x = jointVal["rx"].asDouble();
+			joint->m_relative_pos.y = jointVal["ry"].asDouble();
 			mapJoint.insert(std::make_pair(joint->m_id, joint));
 
 			jointVal = jointsVal["joints"][j++];
@@ -546,8 +546,8 @@ Json::Value FileIO::StoreSkeleton(const SkeletonData& skeleton)
 
 			Json::Value jointVal;
 			jointVal["id"] = joint->m_id;
-			jointVal["rx"] = joint->m_relative.x;
-			jointVal["ry"] = joint->m_relative.y;
+			jointVal["rx"] = joint->m_relative_pos.x;
+			jointVal["ry"] = joint->m_relative_pos.y;
 			if (joint->m_parent)
 				jointVal["parent"] = joint->m_parent->m_id;
 			std::set<Joint*>::iterator itr_child = joint->m_children.begin();

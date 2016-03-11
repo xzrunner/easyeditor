@@ -33,13 +33,15 @@ public:
 private:
 	void CreateId();
 
+	ee::Vector GetRelativePos() const;
+
 private:
 	int m_id;
 
 	ee::Sprite* m_sprite;
 
-	ee::Vector m_relative;
-	float m_relativeAngle;
+	ee::Vector m_relative_pos;
+	float m_relative_angle;
 
 	Joint* m_parent;
 	std::set<Joint*> m_children;

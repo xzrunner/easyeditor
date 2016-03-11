@@ -55,8 +55,8 @@ void SkeletonData::CopyFrom(const std::vector<ee::Sprite*>& sprites,
 				continue;
 
 			Joint* dst = new Joint(sprite);
-			dst->m_relative = src->m_relative;
-			dst->m_relativeAngle = src->m_relativeAngle;
+			dst->m_relative_pos = src->m_relative_pos;
+			dst->m_relative_angle = src->m_relative_angle;
 			mapCovJoint.insert(std::make_pair(src, dst));
 		}
 	}
@@ -220,7 +220,6 @@ void SkeletonData::Absorb(ee::Sprite* sprite)
 					bool success = p->Connect(c);
 					if (success) {
 						Translate(c->m_sprite, pp - cp);
-						ee::SetCanvasDirtySJ::Instance()->SetDirty();
 						return;
 					}
 				}
@@ -271,7 +270,7 @@ void SkeletonData::UpdateJoint(ee::Sprite* sprite, float dAngle)
 }
 
 void SkeletonData::GetTweenSprites(SkeletonData& start, SkeletonData& end, 
-	std::vector<ee::Sprite*>& tween, float process)
+								   std::vector<ee::Sprite*>& tween, float process)
 {
 	SkeletonData mid;
 	mid.CopyFrom(start);

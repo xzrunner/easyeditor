@@ -15,7 +15,7 @@ Joint::Joint(ee::Sprite* sprite)
 	: m_sprite(sprite)
 	, m_parent(NULL)
 {
-	m_relativeAngle = 0;
+	m_relative_angle = 0;
 	CreateId();
 }
 
@@ -24,7 +24,7 @@ Joint::Joint(ee::Sprite* sprite, const ee::Vector& pos)
 	, m_parent(NULL)
 {
 	SetPosition(pos);
-	m_relativeAngle = sprite->GetAngle();
+	m_relative_angle = sprite->GetAngle();
 	CreateId();
 }
 
@@ -78,12 +78,12 @@ bool Joint::Intersect(const ee::Vector& pos) const
 
 void Joint::SetPosition(const ee::Vector& pos) 
 {
-	m_relative = GetRelativePos(pos);
+	m_relative_pos = GetRelativePos(pos);
 }
 
 ee::Vector Joint::GetWorldPos() const
 {
-	return m_sprite->GetPosition() + ee::Math2D::RotateVector(m_relative, m_sprite->GetAngle());
+	return m_sprite->GetPosition() + ee::Math2D::RotateVector(GetRelativePos(), m_sprite->GetAngle());
 }
 
 ee::Vector Joint::GetRelativePos(const ee::Vector& pos) const
@@ -119,6 +119,14 @@ void Joint::CreateId()
 {
 	static int id = 0;
 	m_id = ++id;
+}
+
+ee::Vector Joint::GetRelativePos() const
+{
+	ee::Vector pos = m_relative_pos;
+	pos.x *= m_sprite->GetScale().x;
+	pos.y *= m_sprite->GetScale().y;
+	return pos;
 }
 
 }

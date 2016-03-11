@@ -70,6 +70,8 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 			SkeletonData* skeleton = get_curr_skeleton();
 			if (skeleton) {
 				skeleton->Absorb(sprites[0]);
+				skeleton->UpdateJoint(sprites[0]);
+				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 	}
