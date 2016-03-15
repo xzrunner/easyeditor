@@ -203,6 +203,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\render\ModelShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\ModelShader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\render\ShapeShader.cpp"
 					>
 				</File>

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\editor-external\c99"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -282,6 +282,26 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\shaderlab\sl_filter.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="model"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model_simple.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model_simple.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_model.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_model.h"
 				>
 			</File>
 		</Filter>

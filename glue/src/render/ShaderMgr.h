@@ -6,15 +6,14 @@
 #include "utility/macro.h"
 #include "math/Vector.h"
 
+#include <vector>
+
 #include <stdint.h>
 
 namespace glue
 {
 
 class IShader;
-class SpriteShader;
-class ShapeShader;
-class BlendShader;
 
 class ShaderMgr
 {
@@ -27,7 +26,8 @@ public:
 	void ShapeDraw();
 	void BlendDraw(const vec2 vertices[4], const vec2 texcoords[4], 
 		const vec2 texcoords_base[4], int tex_blend, int tex_base);
-
+	void ModelDraw(const std::vector<vec3>& vertices, const std::vector<vec2>& texcoords, int texid);
+	
 	void SetSpriteColor(uint32_t color, uint32_t additive);
 	void SetSpriteMapColor(uint32_t rmap, uint32_t gmap, uint32_t bmap);
 
@@ -39,15 +39,13 @@ public:
 	void Flush();
 
 private:
-	void ChangeShader(IShader* shader);
+	void ChangeShader(int idx);
 
 private:
-	IShader* m_curr_shader;
+	std::vector<IShader*> m_shaders;
 
-	SpriteShader* m_sprite;
-	ShapeShader* m_shape;
-	BlendShader* m_blend;
-
+	int m_curr_shader;
+	
 	SINGLETON_DECLARATION(ShaderMgr)
 
 }; // ShaderMgr

@@ -13,8 +13,8 @@
 #include "TestMulti.h"
 
 //test::TestTask* task = new test::TestShape;
-test::TestTask* task = new test::TestSprite;
-//test::TestTask* task = new test::TestMulti;
+//test::TestTask* task = new test::TestSprite;
+test::TestTask* task = new test::TestMulti;
 
 void 
 display(void) {

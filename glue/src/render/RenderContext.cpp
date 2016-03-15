@@ -26,7 +26,7 @@ void RenderContext::Init()
 {
 	m_cam = new Camera();
 
-	sl_shader_mgr_create();
+	sl_shader_mgr_create(4096);
 }
 
 void RenderContext::OnSize(int w, int h)

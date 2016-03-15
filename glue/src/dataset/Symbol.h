@@ -17,6 +17,9 @@ public:
 
 	virtual void Draw(const mat4& mt) const;
 
+	// debug
+	void ModelDraw(const mat4& mt) const;
+
 private:
 	void Load();
 

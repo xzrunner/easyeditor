@@ -6,6 +6,9 @@
 #include "render/RenderContext.h"
 #include "render/Camera.h"
 
+// debug
+#include "math/Matrix.h"
+
 namespace glue
 {
 
@@ -38,34 +41,90 @@ void Symbol::Draw(const mat4& mt) const
 	texcoords[3] = vec2(0, 1);
 
 	ShaderMgr* smgr = ShaderMgr::Instance();
-	if (smgr->IsBlendShader())
-	{
-		vec2 vertices_scr[4];
-		float img_hw = m_tex->GetWidth() * 0.5f,
-			  img_hh = m_tex->GetHeight() * 0.5f;
-		vertices_scr[0] = Math::TransVector(vec2(-img_hw, -img_hh), mt);
-		vertices_scr[1] = Math::TransVector(vec2( img_hw, -img_hh), mt);
-		vertices_scr[2] = Math::TransVector(vec2( img_hw,  img_hh), mt);
-		vertices_scr[3] = Math::TransVector(vec2(-img_hw,  img_hh), mt);
-
-		RenderContext* ctx = RenderContext::Instance();
-		vec2 tex_coords_base[4];
-		int w = ctx->GetWidth(),
-			h = ctx->GetHeight();
- 		for (int i = 0; i < 4; ++i) {
- 			tex_coords_base[i] = ctx->GetCamera()->TransPosProjectToScreen(vertices_scr[i], w, h);
- 			tex_coords_base[i].y = h - 1 - tex_coords_base[i].y;
- 			tex_coords_base[i].x /= w;
- 			tex_coords_base[i].y /= h;
- 			tex_coords_base[i].x = std::min(std::max(0.0f, tex_coords_base[i].x), 1.0f);
- 			tex_coords_base[i].y = std::min(std::max(0.0f, tex_coords_base[i].y), 1.0f);
- 		}
-		smgr->BlendDraw(vertices_scr, texcoords, tex_coords_base, texid, );
-	}
-	else
-	{
+// 	if (smgr->IsBlendShader())
+// 	{
+// 		vec2 vertices_scr[4];
+// 		float img_hw = m_tex->GetWidth() * 0.5f,
+// 			  img_hh = m_tex->GetHeight() * 0.5f;
+// 		vertices_scr[0] = Math::TransVector(vec2(-img_hw, -img_hh), mt);
+// 		vertices_scr[1] = Math::TransVector(vec2( img_hw, -img_hh), mt);
+// 		vertices_scr[2] = Math::TransVector(vec2( img_hw,  img_hh), mt);
+// 		vertices_scr[3] = Math::TransVector(vec2(-img_hw,  img_hh), mt);
+// 
+// 		RenderContext* ctx = RenderContext::Instance();
+// 		vec2 tex_coords_base[4];
+// 		int w = ctx->GetWidth(),
+// 			h = ctx->GetHeight();
+//  		for (int i = 0; i < 4; ++i) {
+//  			tex_coords_base[i] = ctx->GetCamera()->TransPosProjectToScreen(vertices_scr[i], w, h);
+//  			tex_coords_base[i].y = h - 1 - tex_coords_base[i].y;
+//  			tex_coords_base[i].x /= w;
+//  			tex_coords_base[i].y /= h;
+//  			tex_coords_base[i].x = std::min(std::max(0.0f, tex_coords_base[i].x), 1.0f);
+//  			tex_coords_base[i].y = std::min(std::max(0.0f, tex_coords_base[i].y), 1.0f);
+//  		}
+// 		smgr->BlendDraw(vertices_scr, texcoords, tex_coords_base, texid, );
+// 	}
+// 	else
+// 	{
 		smgr->SpriteDraw(positions, texcoords, texid);
+//	}
+}
+
+void Symbol::ModelDraw(const mat4& mt) const
+{
+	RID texid = m_tex->GetID(); 
+
+	vec2 positions[4];
+	float hw = m_tex->GetWidth() * 0.5f,
+		hh = m_tex->GetHeight() * 0.5f;
+	positions[0] = vec2(-hw, -hh);
+	positions[1] = vec2( hw, -hh);
+	positions[2] = vec2( hw,  hh);
+	positions[3] = vec2(-hw,  hh);
+	for (int i = 0; i < 4; ++i) {
+		positions[i] = Math::TransVector(positions[i], mt);
 	}
+
+	float z = 5;
+
+	std::vector<vec3> positions3;
+	positions3.push_back(vec3(positions[0].x, positions[0].y, z));
+	positions3.push_back(vec3(positions[1].x, positions[1].y, z));
+	positions3.push_back(vec3(positions[2].x, positions[2].y, z));
+	positions3.push_back(vec3(positions[0].x, positions[0].y, z));
+	positions3.push_back(vec3(positions[2].x, positions[2].y, z));
+	positions3.push_back(vec3(positions[3].x, positions[3].y, z));
+
+	//////////////////////////////////////////////////////////////////////////
+
+	int w = 800, h = 480;
+
+ 	float _hw = w * 0.5f;
+ 	float _hh = h * 0.5f;
+
+//	mat4 mat = Matrix4<float>::Orthographic(-_hw, _hw, -_hh, _hh, 1, -1);
+
+	mat4 mat = Matrix4<float>::Perspective(-_hw, _hw, -_hh, _hh, -2, -10);
+
+	for (int i = 0, n = positions3.size(); i < n; ++i) {
+		positions3[i] = mat * positions3[i];
+
+		positions3[i].z = -0.1f;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+	std::vector<vec2> texcoords;
+	texcoords.push_back(vec2(0, 0));
+	texcoords.push_back(vec2(1, 0));
+	texcoords.push_back(vec2(1, 1));
+	texcoords.push_back(vec2(0, 0));
+	texcoords.push_back(vec2(1, 1));
+	texcoords.push_back(vec2(0, 1));
+
+	ShaderMgr* smgr = ShaderMgr::Instance();
+	smgr->ModelDraw(positions3, texcoords, texid);
 }
 
 void Symbol::Load()
