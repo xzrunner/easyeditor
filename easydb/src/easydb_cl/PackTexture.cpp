@@ -1,11 +1,16 @@
+#include <gl/glew.h>
+
 #include "PackTexture.h"
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/ShaderMgr.h>
 
 #include <easytexpacker.h>
+
+#include <glfw.h>
 
 #include <fstream>
 
@@ -32,6 +37,19 @@ std::string PackTexture::Usage() const
 void PackTexture::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 3)) return;
+
+	glfwInit();
+	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+	{
+		glfwTerminate();
+		return;
+	}
+
+	if (glewInit() != GLEW_OK) {
+		return;
+	}
+
+	ee::ShaderMgr::Instance();
 
 	if (argc == 3) {
 		RunFromConfig(argv[2]);
