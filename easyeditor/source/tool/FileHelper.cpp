@@ -249,11 +249,6 @@ std::string FileHelper::GetAbsolutePath(const std::string& dir, const std::strin
 std::string FileHelper::GetAbsolutePath(const std::string& filepath)
 {
 	wxFileName filename(filepath);
-#ifndef _DEBUG
-	wxStandardPathsBase& stdp = wxStandardPaths::Get();
-	std::string exe_path = stdp.GetExecutablePath();
-	filename.MakeAbsolute(GetFileDir(exe_path));
-#endif
 	filename.Normalize();
 	return filename.GetFullPath().ToStdString();
 }
