@@ -9,6 +9,8 @@
 #include <ee/ImageSaver.h>
 #include <ee/NullSprite.h>
 #include <ee/NullSymbol.h>
+#include <ee/SettingData.h>
+#include <ee/Config.h>
 
 #include <easycomplex.h>
 
@@ -40,7 +42,11 @@ void AverageRectCut::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 4)) return;
 	if (!check_folder(argv[2])) return;
 
+	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
+	bool old = setting.pre_multi_alpha;
+	setting.pre_multi_alpha = false;
 	Trigger(argv[2], argv[3], atoi(argv[4]));
+	setting.pre_multi_alpha = old;
 }
 
 void AverageRectCut::Trigger(const std::string& src_dir, const std::string& dst_dir, int min_edge)
