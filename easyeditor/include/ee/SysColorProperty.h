@@ -19,7 +19,7 @@ public:
 		const wxString& name = wxPG_LABEL);
 	virtual ~SysColorProperty();
 
-	virtual bool OnButtonClick( wxPropertyGrid* propgrid, std::string& value );
+	virtual bool OnButtonClick( wxPropertyGrid* propgrid, wxString& value );
 
 	void SetParent(wxWindow* parent) { m_parent = parent; }
 	void SetListener(ColorMonitor* lsn);

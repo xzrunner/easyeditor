@@ -19,7 +19,7 @@ SysColorProperty::SysColorProperty(const wxString& label, const wxString& name)
 SysColorProperty::~SysColorProperty() 
 {}
 
-bool SysColorProperty::OnButtonClick( wxPropertyGrid* propGrid, std::string& value )
+bool SysColorProperty::OnButtonClick( wxPropertyGrid* propGrid, wxString& value )
 {
 	if (!m_lsn) {
 		return false;
