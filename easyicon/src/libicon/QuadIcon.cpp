@@ -58,7 +58,7 @@ void QuadIcon::Draw(const ee::Matrix& mt, float process) const
 	}
 
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->sprite();
+	shader->Sprite();
 	shader->Draw(vertices, m_src, m_img->GetTexID());
 }
 

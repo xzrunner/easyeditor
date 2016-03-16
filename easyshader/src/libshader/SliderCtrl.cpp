@@ -133,7 +133,7 @@ void SliderCtrl::UpdateUniformValue()
 		break;
 	}
 
-	ee::ShaderMgr::Instance()->sprite();
+	ee::ShaderMgr::Instance()->Sprite();
 	m_uniform->Load();
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

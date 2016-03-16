@@ -41,7 +41,7 @@ void StageCanvas2D::OnMousePressed(const ee::Vector& pos)
 	Shader* shader = m_stage->GetShader();
 	ee::Sprite* sprite = m_stage->QuerySpriteByPos(pos);
 	if (shader && sprite) {
-		ee::ShaderMgr::Instance()->sprite();
+		ee::ShaderMgr::Instance()->Sprite();
 
 		ee::Vector center = sprite->GetCenter();
 		ee::Rect r = sprite->GetSymbol().GetSize();
@@ -87,7 +87,7 @@ void StageCanvas2D::OnTimer(wxTimerEvent& event)
 
 	Shader* shader = m_stage->GetShader();
 	if (shader) {
-		ee::ShaderMgr::Instance()->sprite();
+		ee::ShaderMgr::Instance()->Sprite();
 		static_cast<Shader2D*>(shader)->SetTimeUniform(time);
 		Refresh(true);
 	}

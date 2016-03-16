@@ -29,7 +29,7 @@ GTxt* GTxt::m_instance = NULL;
 
 GTxt::GTxt()
 {
-	ShaderMgr::Instance()->sprite();
+	ShaderMgr::Instance()->Sprite();
 	Init();
 }
 
@@ -70,7 +70,7 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
-	mgr->sprite();
+	mgr->Sprite();
 	mgr->SetSpriteColor(color);
 	mgr->Draw(vertices, texcoords, id);
 }

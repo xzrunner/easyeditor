@@ -25,10 +25,10 @@ static void _program(int n)
 	switch (n) 
 	{
 	case DTEX_PROGRAM_NULL:
-		ShaderMgr::Instance()->null();
+		ShaderMgr::Instance()->Null();
 		break;
 	case DTEX_PROGRAM_NORMAL:
-		ShaderMgr::Instance()->sprite();
+		ShaderMgr::Instance()->Sprite();
 		break;
 	default:
 		assert(0);

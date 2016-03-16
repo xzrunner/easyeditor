@@ -141,7 +141,7 @@ void Shape::DrawTexture(const ee::Matrix& mt,
 						unsigned int texid) const
 {
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->sprite();
+	shader->Sprite();
 	ee::ColorTrans color;
 	color.multi = mul;
 	color.add = add;

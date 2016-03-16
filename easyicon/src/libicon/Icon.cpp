@@ -46,7 +46,7 @@ void Icon::Draw(const ee::Matrix& mt, float process) const
 	}
 
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->sprite();
+	shader->Sprite();
 	shader->Draw(scr_coords, tex_coords, texid);
 }
 

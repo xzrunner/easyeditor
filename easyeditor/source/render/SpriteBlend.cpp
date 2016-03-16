@@ -107,7 +107,7 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
 
-	mgr->sprite();
+	mgr->Sprite();
 	mgr->SetSpriteColor(ColorTrans());
 	mgr->Draw(vertices, texcoords, dtexf_c1_get_texture_id());
 }

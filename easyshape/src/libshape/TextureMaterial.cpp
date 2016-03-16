@@ -48,7 +48,7 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) co
 		&& m_tris.size() % 3 == 0);
 
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->sprite();
+	shader->Sprite();
 	for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 		ee::Vector vertices[4], texcoords[4];
 		for (int j = 0; j < 3; ++j) {

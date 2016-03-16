@@ -21,7 +21,7 @@ Shader2D::~Shader2D()
 
 void Shader2D::BindShader()
 {
-	ee::ShaderMgr::Instance()->sprite();
+	ee::ShaderMgr::Instance()->Sprite();
 }
 
 void Shader2D::SetTimeUniform(float time)

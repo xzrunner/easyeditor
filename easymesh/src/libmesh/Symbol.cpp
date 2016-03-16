@@ -68,7 +68,7 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 	}
 
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->sprite();
+	shader->Sprite();
 	shader->SetSpriteColor(color);
 
 	m_shape->DrawTexture(mt, color.multi, color.add);

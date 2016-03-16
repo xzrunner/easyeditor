@@ -156,7 +156,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	ShaderMgr* shader = ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
 	shader->SetFBO(m_fbo);
-	shader->sprite();
+	shader->Sprite();
 
 	if (whitebg) {
 		glClearColor(1, 1, 1, 1);
@@ -215,7 +215,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	ShaderMgr* shader = ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
 	shader->SetFBO(m_fbo);
-	shader->sprite();
+	shader->Sprite();
 
 	if (clear) {
 		glClearColor(0, 0, 0, 0);

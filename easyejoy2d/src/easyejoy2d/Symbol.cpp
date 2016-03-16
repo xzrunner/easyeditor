@@ -122,9 +122,9 @@ void Symbol::DrawFromEJScreen() const
 	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
 	// reset
 	shader->SetTexture(0);
-	shader->null();
+	shader->Null();
 
-	shader->sprite();
+	shader->Sprite();
 	shader->Draw(vertices, texcoords, scr->GetTexID());
 }
 
