@@ -3,6 +3,7 @@
 #include "SpriteShader.h"
 #include "BlendShader.h"
 #include "ScreenShader.h"
+#include "ModelShader.h"
 #include "ShaderContext.h"
 
 #include <sl_shader.h>
@@ -31,19 +32,17 @@ ShaderMgr* ShaderMgr::Instance()
 ShaderMgr::ShaderMgr()
 	: m_version(0)
 {
-	m_shape_shader = new ShapeShader;
-	m_shaders.push_back(m_shape_shader);
+	m_shaders.push_back(m_shape_shader = new ShapeShader);
 //	m_all_shape_shader.push_back(m_shape_shader);
 
- 	m_sprite_shader = new SpriteShader;
- 	m_shaders.push_back(m_sprite_shader);
+ 	m_shaders.push_back(m_sprite_shader = new SpriteShader);
 //	m_all_sprite_shader.push_back(m_sprite_shader);
 
-	m_screen_shader = new ScreenShader;
-	m_shaders.push_back(m_screen_shader);
+	m_shaders.push_back(m_screen_shader = new ScreenShader);
 
-  	m_blend_shader = new BlendShader;
-  	m_shaders.push_back(m_blend_shader);
+  	m_shaders.push_back(m_blend_shader = new BlendShader);
+
+	m_shaders.push_back(m_model_shader = new ModelShader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -55,7 +54,7 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::NullProg()
 {
-	null();
+	Null();
 }
 
 void ShaderMgr::SetSpriteColor(const ColorTrans& color)
@@ -83,13 +82,13 @@ void ShaderMgr::OnSize(int width, int height)
 	m_blend_shader->OnSize(width, height);
 }
 
-void ShaderMgr::sprite()
+void ShaderMgr::Sprite()
 {
 	ShaderContext::Bind2d();
 	Switch(m_sprite_shader);
 }
 
-void ShaderMgr::shape()
+void ShaderMgr::Shape()
 {
 	ShaderContext::Bind2d();
 	Switch(m_shape_shader);
@@ -107,7 +106,13 @@ void ShaderMgr::SpriteBlend()
 	Switch(m_blend_shader);
 }
 
-void ShaderMgr::null()
+void ShaderMgr::Model()
+{
+	ShaderContext::Bind2d();
+	Switch(m_model_shader);	
+}
+
+void ShaderMgr::Null()
 {
 	ShaderContext::Bind2d();
 	Switch(NULL);
@@ -156,6 +161,11 @@ void ShaderMgr::DrawBlend(const Vector vertices[4], const Vector texcoords[4],
 	m_blend_shader->Draw(vertices, texcoords, texcoords_base, texid, texid_base);
 }
 
+void ShaderMgr::DrawModel(const std::vector<vec3>& positions, const std::vector<Vector>& texcoords, int texid)
+{
+	m_model_shader->Draw(positions, texcoords, texid);
+}
+
 int ShaderMgr::GetVersion() const 
 {
 	return m_version; 
@@ -187,6 +197,7 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	m_shape_shader->SetModelView(offset, scale);
 	m_sprite_shader->SetModelView(offset, scale);
 	m_blend_shader->SetModelView(offset, scale);
+	m_model_shader->SetModelView(offset, scale);
 }
 
 // int ShaderMgr::AddShapeShader(ShapeShader* shader)

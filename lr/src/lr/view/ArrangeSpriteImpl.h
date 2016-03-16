@@ -19,6 +19,8 @@ public:
 	ArrangeSpriteImpl(ee::LibraryPanel* library, ee::PropertySettingPanel* property,
 		StagePanel* stage, CharacterAllDirections* dirs);
 
+	virtual void OnKeyDown(int keyCode);
+
 	virtual void OnPopMenuSelected(int type);
 
 protected:

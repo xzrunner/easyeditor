@@ -121,9 +121,19 @@ struct Matrix4 {
 	Vector3<T> operator * (const Vector3<T>& b) const
 	{
 		Vector3<T> v;
+		float w = 1;
+
 		v.x = b.x * c[0][0] + b.y * c[1][0] + b.z * c[2][0] + c[3][0];
 		v.y = b.x * c[0][1] + b.y * c[1][1] + b.z * c[2][1] + c[3][1];
 		v.z = b.x * c[0][2] + b.y * c[1][2] + b.z * c[2][2] + c[3][2];
+		w   = b.x * c[0][3] + b.y * c[1][3] + b.z * c[2][3] + c[3][3];
+
+		// 		v.x = b.x * c[0][0] + b.y * c[0][1] + b.z * c[0][2] + c[0][3];
+		// 		v.y = b.x * c[1][0] + b.y * c[1][1] + b.z * c[1][2] + c[1][3];
+		// 		v.z = b.x * c[2][0] + b.y * c[2][1] + b.z * c[2][2] + c[2][3];
+		// 		w   = b.x * c[3][0] + b.y * c[3][1] + b.z * c[3][2] + c[3][3];
+
+		v /= w;
 		return v;
 	}
 	Matrix4 Transposed() const

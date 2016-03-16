@@ -252,18 +252,46 @@
 			<Filter
 				Name="shaders"
 				>
-				<Filter
-					Name="blend"
+				<File
+					RelativePath="..\..\..\source\render\BlendShader.cpp"
 					>
-					<File
-						RelativePath="..\..\..\source\render\BlendShader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\BlendShader.h"
-						>
-					</File>
-				</Filter>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\BlendShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\ModelShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ModelShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\ScreenShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ScreenShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\ShapeShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\ShapeShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\SpriteShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\SpriteShader.h"
+					>
+				</File>
 				<Filter
 					Name="filter"
 					>
@@ -331,42 +359,6 @@
 							>
 						</File>
 					</Filter>
-				</Filter>
-				<Filter
-					Name="screen"
-					>
-					<File
-						RelativePath="..\..\..\source\render\ScreenShader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\ScreenShader.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="shape"
-					>
-					<File
-						RelativePath="..\..\..\source\render\ShapeShader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\ShapeShader.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="sprite"
-					>
-					<File
-						RelativePath="..\..\..\source\render\SpriteShader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\SpriteShader.h"
-						>
-					</File>
 				</Filter>
 			</Filter>
 		</Filter>

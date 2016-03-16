@@ -60,6 +60,9 @@ public:
 	// widget
 	COL_SET_DLG_TYPE color_setting_dlg_type;
 
+	// projection transformation
+	bool orthogonal;
+
 public:
 	SettingData();
 

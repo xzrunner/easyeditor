@@ -36,6 +36,10 @@ public:
 
 	void Draw(const std::vector<vec3>& vertices, const std::vector<vec2>& texcoords, int texid);
 
+public:
+	static const int FAR = 50;
+	static const int NEAR = 2;
+
 }; // ModelShader
 
 }

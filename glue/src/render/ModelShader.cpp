@@ -38,7 +38,7 @@ void ModelShader::Unbind()
 
 void ModelShader::OnSize(int width, int height)
 {
-	sl_model_projection(width, height);
+	sl_model_projection(width, height, NEAR, FAR);
 }
 
 void ModelShader::Commit()
@@ -52,7 +52,7 @@ void ModelShader::Reset()
 
 void ModelShader::SetProjection(int width, int height)
 {
-	sl_model_projection(width, height);
+	sl_model_projection(width, height, NEAR, FAR);
 }
 
 void ModelShader::SetModelView(const vec2& offset, float scale)

@@ -36,6 +36,8 @@ SettingData::SettingData()
 	load_image = true;
 
 	color_setting_dlg_type = CSDT_DEFAULT;
+
+	orthogonal = true;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)

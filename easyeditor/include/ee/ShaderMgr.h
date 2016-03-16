@@ -4,6 +4,7 @@
 #include "Color.h"
 #include "ShaderMgrBase.h"
 #include "BlendModes.h"
+#include "Vector3D.h"
 
 namespace ee
 {
@@ -16,6 +17,7 @@ class ShapeShader;
 class SpriteShader;
 class ScreenShader;
 class BlendShader;
+class ModelShader;
 
 class ShaderMgr : public ShaderMgrBase
 {
@@ -31,12 +33,13 @@ public:
 
 	void OnSize(int width, int height);
 
-	void sprite();
-	void shape();
+	void Sprite();
+	void Shape();
 	void Screen();
 	void RVG();
 	void SpriteBlend();
-	void null();
+	void Model();
+	void Null();
 
 	int GetTexID() const;
 	int GetFboID() const;
@@ -49,6 +52,8 @@ public:
 	void DrawScreen(int texid);
 	void DrawBlend(const Vector vertices[4], const Vector texcoords[4], 
 		const Vector texcoords_base[4], int texid, int texid_base);
+	void DrawModel(const std::vector<vec3>& positions, 
+		const std::vector<Vector>& texcoords, int texid);
 
 	int GetVersion() const;
 
@@ -81,6 +86,7 @@ private:
 	SpriteShader* m_sprite_shader;
 	ScreenShader* m_screen_shader;
 	BlendShader* m_blend_shader;
+	ModelShader* m_model_shader;
 
 // 	std::vector<SpriteShader*> m_all_sprite_shader;
 // 	std::vector<ShapeShader*> m_all_shape_shader;

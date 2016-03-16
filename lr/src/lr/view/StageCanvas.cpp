@@ -90,10 +90,12 @@ void StageCanvas::DrawSprites() const
 
 void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 {
-	ee::Rect screen_region = m_screen.GetRegion();
-	if (screen_region.IsValid() &&
-		!ee::Math2D::IsRectIntersectRect(spr->GetRect(), screen_region)) {
+	if (ee::Config::Instance()->GetSettings().orthogonal) {
+		ee::Rect screen_region = m_screen.GetRegion();
+		if (screen_region.IsValid() &&
+			!ee::Math2D::IsRectIntersectRect(spr->GetRect(), screen_region)) {
 			return;
+		}
 	}
 
 	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();

@@ -5,6 +5,7 @@
 #include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
 #include "render/Camera.h"
+#include "render/ModelShader.h"
 
 // debug
 #include "math/Matrix.h"
@@ -86,32 +87,33 @@ void Symbol::ModelDraw(const mat4& mt) const
 		positions[i] = Math::TransVector(positions[i], mt);
 	}
 
-	float z = 5;
+	float z[4];
+	z[0] = -4;
+	z[1] = -2;
+	z[2] = -2;
+	z[3] = -4;
 
 	std::vector<vec3> positions3;
-	positions3.push_back(vec3(positions[0].x, positions[0].y, z));
-	positions3.push_back(vec3(positions[1].x, positions[1].y, z));
-	positions3.push_back(vec3(positions[2].x, positions[2].y, z));
-	positions3.push_back(vec3(positions[0].x, positions[0].y, z));
-	positions3.push_back(vec3(positions[2].x, positions[2].y, z));
-	positions3.push_back(vec3(positions[3].x, positions[3].y, z));
+	positions3.push_back(vec3(positions[0].x, positions[0].y, z[0]));
+	positions3.push_back(vec3(positions[1].x, positions[1].y, z[1]));
+	positions3.push_back(vec3(positions[2].x, positions[2].y, z[2]));
+	positions3.push_back(vec3(positions[0].x, positions[0].y, z[0]));
+	positions3.push_back(vec3(positions[2].x, positions[2].y, z[2]));
+	positions3.push_back(vec3(positions[3].x, positions[3].y, z[3]));
 
 	//////////////////////////////////////////////////////////////////////////
 
-	int w = 800, h = 480;
-
- 	float _hw = w * 0.5f;
- 	float _hh = h * 0.5f;
-
-//	mat4 mat = Matrix4<float>::Orthographic(-_hw, _hw, -_hh, _hh, 1, -1);
-
-	mat4 mat = Matrix4<float>::Perspective(-_hw, _hw, -_hh, _hh, -2, -10);
-
-	for (int i = 0, n = positions3.size(); i < n; ++i) {
-		positions3[i] = mat * positions3[i];
-
-		positions3[i].z = -0.1f;
-	}
+// 	int w = 800, h = 480;
+// 
+// 	float _hw = w * 0.5f;
+// 	float _hh = h * 0.5f;
+// 
+// 	mat4 mat = Matrix4<float>::Perspective(-_hw, _hw, -_hh, _hh, ModelShader::NEAR, ModelShader::FAR);
+// 
+// 	std::vector<vec3> test;
+// 	for (int i = 0, n = positions3.size(); i < n; ++i) {
+// 		test.push_back(mat * positions3[i]);
+// 	}
 
 	//////////////////////////////////////////////////////////////////////////
 

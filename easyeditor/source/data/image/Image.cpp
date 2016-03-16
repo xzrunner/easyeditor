@@ -1,5 +1,6 @@
 #include "dev_config.h"
 
+#include "Vector3D.h"
 #include "Image.h"
 #include "TextureImgData.h"
 #include "Exception.h"
@@ -147,7 +148,7 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 		py = spr->GetPerspective().y;
 	}
 
- 	Vector vertices[4];
+	Vector vertices[4];
 	vertices[0] = Vector(-hw - px, -hh - py);
 	vertices[1] = Vector(hw + px, -hh + py);
 	vertices[2] = Vector(hw - px, hh - py);
@@ -163,8 +164,8 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 	if (Config::Instance()->IsUseDTex() && CanUseDTex()) {
 		c2_texcoords = DTex::Instance()->Query(this, &texid);
 	}
- 	if (c2_texcoords)
- 	{
+	if (c2_texcoords)
+	{
 		texcoords[0].x = c2_texcoords[0];
 		texcoords[0].y = c2_texcoords[1];
 		texcoords[1].x = c2_texcoords[2];
@@ -173,8 +174,8 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 		texcoords[2].y = c2_texcoords[5];
 		texcoords[3].x = c2_texcoords[6];
 		texcoords[3].y = c2_texcoords[7];
- 	}
- 	else
+	}
+	else
 	{
 		texid = m_tex->GetTexID();
 
@@ -189,47 +190,93 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
- 	if (mgr->IsCurrentBlendShader()) 
+	if (mgr->IsCurrentBlendShader()) 
 	{
 		mgr->SetBlendColor(col);
 
- 		assert(spr);
- 
- 		if (root) {
- 			Vector offset = root->GetPosition();
- 			for (int i = 0; i < 4; ++i) {
- 				vertices[i] -= offset;
- 			}
- 		}
- 
- 		Vector vertices_scr[4];
- 		float img_hw = m_tex->GetWidth() * 0.5f,
- 			  img_hh = m_tex->GetHeight() * 0.5f;
-  		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), mt);
-  		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), mt);
-  		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
-  		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
- 
- 		Vector tex_coolds_base[4];
- 		SpriteRenderer* rd = SpriteRenderer::Instance();
- 		const Camera* cam = rd->GetCamera();
- 		assert(cam);
- 		int w, h;
- 		ScreenCache::Instance()->GetSize(w, h);
- 		for (int i = 0; i < 4; ++i) {
- 			tex_coolds_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
- 			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
- 			tex_coolds_base[i].x /= w;
- 			tex_coolds_base[i].y /= h;
- 		}
- 		mgr->DrawBlend(vertices, texcoords, tex_coolds_base, texid, ScreenCache::Instance()->GetTexID());
- 	}
+		assert(spr);
+
+		if (root) {
+			Vector offset = root->GetPosition();
+			for (int i = 0; i < 4; ++i) {
+				vertices[i] -= offset;
+			}
+		}
+
+		Vector vertices_scr[4];
+		float img_hw = m_tex->GetWidth() * 0.5f,
+			  img_hh = m_tex->GetHeight() * 0.5f;
+ 		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), mt);
+ 		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), mt);
+ 		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
+ 		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
+
+		Vector tex_coolds_base[4];
+		SpriteRenderer* rd = SpriteRenderer::Instance();
+		const Camera* cam = rd->GetCamera();
+		assert(cam);
+		int w, h;
+		ScreenCache::Instance()->GetSize(w, h);
+		for (int i = 0; i < 4; ++i) {
+			tex_coolds_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
+			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
+			tex_coolds_base[i].x /= w;
+			tex_coolds_base[i].y /= h;
+		}
+		mgr->DrawBlend(vertices, texcoords, tex_coolds_base, texid, ScreenCache::Instance()->GetTexID());
+	}
 	else 
 	{
-		mgr->SetSpriteColor(col);
+		if (Config::Instance()->GetSettings().orthogonal) 
+		{
+			mgr->SetSpriteColor(col);
 
-		mgr->sprite();
-		mgr->Draw(vertices, texcoords, texid);
+			mgr->Sprite();
+			mgr->Draw(vertices, texcoords, texid);
+		} 
+		else 
+		{
+			const float NEAR = -2, FAR = -10;
+
+			std::vector<vec3> _vertices;
+			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, 0));
+			_vertices.push_back(vec3(vertices[1].x, vertices[1].y, 0));
+			_vertices.push_back(vec3(vertices[2].x, vertices[2].y, 0));
+			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, 0));
+			_vertices.push_back(vec3(vertices[2].x, vertices[2].y, 0));
+			_vertices.push_back(vec3(vertices[3].x, vertices[3].y, 0));
+
+			float min_y = FLT_MAX, max_y = -FLT_MAX;
+			for (int i = 0; i < 6; ++i) {
+				if (_vertices[i].y < min_y) {
+					min_y = _vertices[i].y;
+				}
+				if (_vertices[i].y > max_y) {
+					max_y = _vertices[i].y;
+				}
+			}
+			float base_z = NEAR + (min_y - (-1000)) / 2000 * (FAR - NEAR);
+			float dz;
+			if (max_y - min_y > 500) {
+				dz = (FAR - NEAR) * (max_y - min_y) / 500;
+			} else {
+				dz = (NEAR - FAR) * (max_y - min_y) / 500;
+			}
+			for (int i = 0; i < 6; ++i) {
+				_vertices[i].z = base_z + (_vertices[i].y - min_y) / (max_y - min_y) * dz;
+			}
+
+			std::vector<Vector> _texcoords;
+			_texcoords.push_back(texcoords[0]);
+			_texcoords.push_back(texcoords[1]);
+			_texcoords.push_back(texcoords[2]);
+			_texcoords.push_back(texcoords[0]);
+			_texcoords.push_back(texcoords[2]);
+			_texcoords.push_back(texcoords[3]);
+
+			mgr->Model();
+			mgr->DrawModel(_vertices, _texcoords, texid);
+		}
 	}
 }
 

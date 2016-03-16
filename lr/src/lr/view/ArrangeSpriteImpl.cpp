@@ -7,6 +7,10 @@
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
+#include <ee/panel_msg.h>
+#include <ee/EditPanelImpl.h>
 
 #include <easycomplex.h>
 #include <easyparticle3d.h>
@@ -22,6 +26,24 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(ee::LibraryPanel* library,
 	, m_popup(library, stage)
 	, m_dirs(dirs)
 {
+}
+
+void ArrangeSpriteImpl::OnKeyDown(int keyCode)
+{
+	ee::ArrangeSpriteImpl::OnKeyDown(keyCode);
+
+	if (m_stage->GetKeyState(WXK_SHIFT))
+	{
+		if (keyCode == 'o' || keyCode == 'O') {
+			ee::SettingData& data = ee::Config::Instance()->GetSettings();
+			data.orthogonal = true;
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		} else if (keyCode == 'p' || keyCode == 'P') {
+			ee::SettingData& data = ee::Config::Instance()->GetSettings();
+			data.orthogonal = false;
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		}
+	}
 }
 
 void ArrangeSpriteImpl::OnPopMenuSelected(int type)
