@@ -231,7 +231,9 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 		{
 			mgr->SetSpriteColor(col);
 
-			mgr->Sprite();
+			if (!mgr->IsCurrentFilterShader()) {
+				mgr->Sprite();
+			}
 			mgr->Draw(vertices, texcoords, texid);
 		} 
 		else 

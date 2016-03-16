@@ -24,7 +24,6 @@ public:
 			  const Matrix& mt = Matrix(),
 			  const ColorTrans& color = ColorTrans(),
 			  bool multi_draw = true) const;
-	void DrawWithoutBlend(const Sprite* sprite, const Sprite* root, const Matrix& mt) const;
 
 	void InvalidRect(const Sprite* sprite, const Matrix& mt = Matrix());
 

@@ -13,13 +13,13 @@ FilterModes* FilterModes::m_instance = NULL;
 
 FilterModes::FilterModes()
 {
-// 	InitAllShaders();
-// 
-// 	m_modes.push_back(Item(FM_NORMAL, "normal", "正常"));
-// 	m_modes.push_back(Item(FM_EDGE_DETECTION, "edge detection", "边界检测"));
-// 	m_modes.push_back(Item(FM_RELIEF, "relief", "浮雕"));
-// 	m_modes.push_back(Item(FM_OUTLINE, "outline", "包围"));
-// 	m_modes.push_back(Item(FM_BLUR, "blur", "模糊"));
+//	InitAllShaders();
+
+	m_modes.push_back(Item(FM_NORMAL, "normal", "正常"));
+	m_modes.push_back(Item(FM_EDGE_DETECTION, "edge detection", "边界检测"));
+	m_modes.push_back(Item(FM_RELIEF, "relief", "浮雕"));
+	m_modes.push_back(Item(FM_OUTLINE, "outline", "包围"));
+	m_modes.push_back(Item(FM_BLUR, "blur", "模糊"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const

@@ -261,6 +261,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\render\FilterShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\FilterShader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\render\ModelShader.cpp"
 					>
 				</File>

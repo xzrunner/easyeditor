@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_BLEND_SHADER_H_
-#define _EASYEDITOR_BLEND_SHADER_H_
+#ifndef _EASYEDITOR_FILTER_SHADER_H_
+#define _EASYEDITOR_FILTER_SHADER_H_
 
 #include "IShader.h"
 
@@ -8,11 +8,11 @@ namespace ee
 
 struct ColorTrans;
 
-class BlendShader : public IShader
+class FilterShader : public IShader
 {
 public:
-	BlendShader();
-	virtual ~BlendShader();
+	FilterShader();
+	virtual ~FilterShader();
 
 	virtual void Load();
 	virtual void Unload();	
@@ -30,20 +30,15 @@ public:
 
 	void SetMode(const std::string& mode);
 
-	void SetColor(const ColorTrans& color);
-
-	void Draw(const Vector vertices[4], const Vector texcoords[4], 
-		const Vector texcoords_base[4], int texid, int texid_base);
-
-	void OnSize(int width, int height);
+	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 
 protected:
 	virtual void BindAttribLocation(GLuint prog) {}
 
 	virtual void LoadShader() {}
 
-}; // BlendShader
+}; // FilterShader
 
 }
 
-#endif // _EASYEDITOR_BLEND_SHADER_H_
+#endif // _EASYEDITOR_FILTER_SHADER_H_

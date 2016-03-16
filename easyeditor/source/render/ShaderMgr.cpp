@@ -4,6 +4,7 @@
 #include "BlendShader.h"
 #include "ScreenShader.h"
 #include "ModelShader.h"
+#include "FilterShader.h"
 #include "ShaderContext.h"
 
 #include <sl_shader.h>
@@ -43,6 +44,8 @@ ShaderMgr::ShaderMgr()
   	m_shaders.push_back(m_blend_shader = new BlendShader);
 
 	m_shaders.push_back(m_model_shader = new ModelShader);
+
+	m_shaders.push_back(m_filter_shader = new FilterShader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -74,7 +77,12 @@ void ShaderMgr::SetBlendColor(const ColorTrans& color)
 
 void ShaderMgr::SetBlendMode(BlendMode mode)
 {
-	m_blend_shader->SetBlendMode(BlendModes::Instance()->GetNameENFromID(mode));
+	m_blend_shader->SetMode(BlendModes::Instance()->GetNameENFromID(mode));
+}
+
+void ShaderMgr::SetFilterMode(FilterMode mode)
+{
+	m_filter_shader->SetMode(FilterModes::Instance()->GetNameENFromID(mode));
 }
 
 void ShaderMgr::OnSize(int width, int height)
@@ -100,7 +108,7 @@ void ShaderMgr::Screen()
 	Switch(m_screen_shader);
 }
 
-void ShaderMgr::SpriteBlend()
+void ShaderMgr::Blend()
 {
 	ShaderContext::Bind2d();
 	Switch(m_blend_shader);
@@ -110,6 +118,12 @@ void ShaderMgr::Model()
 {
 	ShaderContext::Bind2d();
 	Switch(m_model_shader);	
+}
+
+void ShaderMgr::Filter()
+{
+	ShaderContext::Bind2d();
+	Switch(m_filter_shader);	
 }
 
 void ShaderMgr::Null()
@@ -166,6 +180,11 @@ void ShaderMgr::DrawModel(const std::vector<vec3>& positions, const std::vector<
 	m_model_shader->Draw(positions, texcoords, texid);
 }
 
+void ShaderMgr::DrawFilter(const Vector vertices[4], const Vector texcoords[4], int texid)
+{
+	m_filter_shader->Draw(vertices, texcoords, texid);
+}
+
 int ShaderMgr::GetVersion() const 
 {
 	return m_version; 
@@ -198,6 +217,7 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	m_sprite_shader->SetModelView(offset, scale);
 	m_blend_shader->SetModelView(offset, scale);
 	m_model_shader->SetModelView(offset, scale);
+	m_filter_shader->SetModelView(offset, scale);
 }
 
 // int ShaderMgr::AddShapeShader(ShapeShader* shader)
@@ -258,6 +278,11 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 bool ShaderMgr::IsCurrentBlendShader() const
 {
 	return m_curr_shader == m_blend_shader;
+}
+
+bool ShaderMgr::IsCurrentFilterShader() const
+{
+	return m_curr_shader == m_filter_shader;
 }
 
 }

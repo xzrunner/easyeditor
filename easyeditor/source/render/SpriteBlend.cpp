@@ -69,10 +69,13 @@ void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 	dtexf_c1_clear();
 	dtexf_c1_bind();
 
-	mgr->SpriteBlend();
-	mgr->SetBlendMode(sprite->GetBlendMode());
+	mgr->Blend();
+	BlendMode mode = sprite->GetBlendMode();
+	mgr->SetBlendMode(mode);
 
-	SpriteRenderer::Instance()->DrawWithoutBlend(sprite, sprite, mt);
+	const_cast<Sprite*>(sprite)->SetBlendMode(BM_NORMAL);
+	SpriteRenderer::Instance()->Draw(sprite, sprite, mt);
+	const_cast<Sprite*>(sprite)->SetBlendMode(mode);
 
 	mgr->Commit();
 	ShaderLab::Instance()->Flush();

@@ -4,6 +4,7 @@
 #include "Color.h"
 #include "ShaderMgrBase.h"
 #include "BlendModes.h"
+#include "FilterModes.h"
 #include "Vector3D.h"
 
 namespace ee
@@ -18,6 +19,7 @@ class SpriteShader;
 class ScreenShader;
 class BlendShader;
 class ModelShader;
+class FilterShader;
 
 class ShaderMgr : public ShaderMgrBase
 {
@@ -30,6 +32,7 @@ public:
 	void SetShapeColor(const Colorf& col);
 	void SetBlendColor(const ColorTrans& color);
 	void SetBlendMode(BlendMode mode);
+	void SetFilterMode(FilterMode mode);
 
 	void OnSize(int width, int height);
 
@@ -37,8 +40,9 @@ public:
 	void Shape();
 	void Screen();
 	void RVG();
-	void SpriteBlend();
+	void Blend();
 	void Model();
+	void Filter();
 	void Null();
 
 	int GetTexID() const;
@@ -54,6 +58,7 @@ public:
 		const Vector texcoords_base[4], int texid, int texid_base);
 	void DrawModel(const std::vector<vec3>& positions, 
 		const std::vector<Vector>& texcoords, int texid);
+	void DrawFilter(const Vector vertices[4], const Vector texcoords[4], int texid);
 
 	int GetVersion() const;
 
@@ -73,6 +78,7 @@ public:
 	SpriteShader* GetSpriteShader() { return m_sprite_shader; }
 
 	bool IsCurrentBlendShader() const;
+	bool IsCurrentFilterShader() const;
 	
 private:
 	ShaderMgr();
@@ -87,6 +93,7 @@ private:
 	ScreenShader* m_screen_shader;
 	BlendShader* m_blend_shader;
 	ModelShader* m_model_shader;
+	FilterShader* m_filter_shader;
 
 // 	std::vector<SpriteShader*> m_all_sprite_shader;
 // 	std::vector<ShapeShader*> m_all_shape_shader;

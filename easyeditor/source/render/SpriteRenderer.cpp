@@ -7,6 +7,7 @@
 #include "BoundingBox.h"
 #include "EE_RVG.h"
 #include "color_config.h"
+#include "ShaderMgr.h"
 
 namespace ee
 {
@@ -36,20 +37,16 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 		return;
 	}
 
-	if (!multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	if (multi_draw && sprite->GetBlendMode() != BM_NORMAL) {
+		SpriteBlend::Instance()->Draw(sprite, mt);
+	} else if (sprite->GetFilterMode() != FM_NORMAL) {
+		mgr->Filter();
+		mgr->SetFilterMode(sprite->GetFilterMode());
 		DrawImpl(sprite, root, mt, color);
 	} else {
-		SpriteBlend::Instance()->Draw(sprite, mt);
+		DrawImpl(sprite, root, mt, color);
 	}
-}
-
-void SpriteRenderer::DrawWithoutBlend(const Sprite* sprite, const Sprite* root, const Matrix& mt) const
-{
-	if (!sprite->visiable) {
-		return;
-	}
-
-	DrawImpl(sprite, root, mt);
 }
 
 void SpriteRenderer::InvalidRect(const Sprite* sprite, const Matrix& mt)
