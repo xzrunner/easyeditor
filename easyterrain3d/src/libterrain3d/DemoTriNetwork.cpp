@@ -61,15 +61,15 @@ void DemoTriNetwork::DrawTriByLevel(const ee::vec3& v0, const ee::vec3& v1, cons
 
 //	e3d::DrawTriLine(v0, v1, v2);
 
- 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
- 	shader->Sprite();
+ 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+ 	mgr->Sprite();
  	ee::vec3 vertices[] = {v0, v1, v2};
   	ee::vec2 texcoords[] = {
 		ee::vec2(1, 0),
   		ee::vec2(0, 0),
   		ee::vec2(1, 1),
   	};
- 	shader->DrawTri(vertices, texcoords, m_tex);
+ 	mgr->DrawTri(vertices, texcoords, m_tex);
 
 	m_verts_per_frame += 3;
 	m_tris_per_frame += 1;

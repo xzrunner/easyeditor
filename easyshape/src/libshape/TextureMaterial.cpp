@@ -5,6 +5,7 @@
 #include <ee/ShaderMgr.h>
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
+#include <ee/SpriteShader.h>
 
 namespace eshape
 {
@@ -47,8 +48,9 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) co
 	assert(m_tris.size() == m_tris_texcoord.size()
 		&& m_tris.size() % 3 == 0);
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->Sprite();
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	mgr->SetShader(ee::ShaderMgr::SPRITE);
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
 	for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 		ee::Vector vertices[4], texcoords[4];
 		for (int j = 0; j < 3; ++j) {

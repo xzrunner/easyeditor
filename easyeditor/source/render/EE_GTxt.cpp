@@ -11,6 +11,7 @@
 #include "Config.h"
 #include "StringHelper.h"
 #include "EE_RVG.h"
+#include "SpriteShader.h"
 
 #include <gtxt.h>
 #include <shaderlab.h>
@@ -29,7 +30,7 @@ GTxt* GTxt::m_instance = NULL;
 
 GTxt::GTxt()
 {
-	ShaderMgr::Instance()->Sprite();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SPRITE);
 	Init();
 }
 
@@ -70,9 +71,10 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
-	mgr->Sprite();
-	mgr->SetSpriteColor(color);
-	mgr->Draw(vertices, texcoords, id);
+	mgr->SetShader(ShaderMgr::SPRITE);
+	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+	shader->SetColor(color);
+	shader->Draw(vertices, texcoords, id);
 }
 
 static void 

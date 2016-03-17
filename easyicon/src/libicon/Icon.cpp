@@ -3,6 +3,7 @@
 #include <ee/Image.h>
 #include <ee/Math2D.h>
 #include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
 
 namespace eicon
 {
@@ -45,8 +46,9 @@ void Icon::Draw(const ee::Matrix& mt, float process) const
 		scr_coords[i] = ee::Math2D::TransVector(scr_coords[i], mt);
 	}
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->Sprite();
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	mgr->SetShader(ee::ShaderMgr::SPRITE);
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
 	shader->Draw(scr_coords, tex_coords, texid);
 }
 

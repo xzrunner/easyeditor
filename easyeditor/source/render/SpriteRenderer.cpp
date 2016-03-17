@@ -8,6 +8,7 @@
 #include "EE_RVG.h"
 #include "color_config.h"
 #include "ShaderMgr.h"
+#include "FilterShader.h"
 
 namespace ee
 {
@@ -41,12 +42,13 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 	if (multi_draw && sprite->GetBlendMode() != BM_NORMAL) {
 		SpriteBlend::Instance()->Draw(sprite, mt);
 	} else if (sprite->GetFilterMode() != FM_NORMAL) {
-		mgr->Filter();
-		mgr->SetFilterMode(sprite->GetFilterMode());
+		mgr->SetShader(ShaderMgr::FILTER);
+		FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
+		shader->SetMode(FilterModes::Instance()->GetNameENFromID(sprite->GetFilterMode()));
 		DrawImpl(sprite, root, mt, color);
 	} else {
-		if (mgr->IsCurrentFilterShader()) {
-			mgr->Sprite();
+		if (mgr->GetShader() == ShaderMgr::FILTER) {
+			mgr->SetShader(ShaderMgr::SPRITE);
 		}
 		DrawImpl(sprite, root, mt, color);
 	}

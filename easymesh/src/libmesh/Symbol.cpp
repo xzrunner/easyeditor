@@ -6,6 +6,7 @@
 
 #include <ee/Image.h>
 #include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
 
 namespace emesh
 {
@@ -67,9 +68,10 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 		return;
 	}
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->Sprite();
-	shader->SetSpriteColor(color);
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	mgr->SetShader(ee::ShaderMgr::SPRITE);
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+	shader->SetColor(color);
 
 	m_shape->DrawTexture(mt, color.multi, color.add);
 	if (!m_pause && spr) 

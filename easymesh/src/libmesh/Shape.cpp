@@ -8,6 +8,7 @@
 #include <ee/ColorTrans.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
+#include <ee/SpriteShader.h>
 
 #include <set>
 #include <algorithm>
@@ -140,12 +141,13 @@ void Shape::DrawTexture(const ee::Matrix& mt,
 						const ee::Colorf& add,
 						unsigned int texid) const
 {
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->Sprite();
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	mgr->SetShader(ee::ShaderMgr::SPRITE);
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
 	ee::ColorTrans color;
 	color.multi = mul;
 	color.add = add;
-	shader->SetSpriteColor(color);
+	shader->SetColor(color);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];

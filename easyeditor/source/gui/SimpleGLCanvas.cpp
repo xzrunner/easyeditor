@@ -31,9 +31,9 @@ void SimpleGLCanvas::OnSize(wxSizeEvent& event)
 // 	
 // 	glViewport(0, 0, w, h);
 // 
-// 	ShaderMgr* shader = ShaderMgr::Instance();
-// 	shader->SetModelView(Vector(0, 0), 1);
-// 	shader->SetProjection(w, h);
+// 	ShaderMgr* mgr = ShaderMgr::Instance();
+// 	mgr->SetModelView(Vector(0, 0), 1);
+// 	mgr->SetProjection(w, h);
 }
 
 void SimpleGLCanvas::OnPaint(wxPaintEvent& event)

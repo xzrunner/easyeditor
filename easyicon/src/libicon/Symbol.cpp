@@ -4,6 +4,7 @@
 #include "FileIO.h"
 
 #include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
 
 namespace eicon
 {
@@ -34,8 +35,9 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 		return;
 	}
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->SetSpriteColor(color);
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+	shader->SetColor(color);
 
 	float process = 1;
 	if (spr) {

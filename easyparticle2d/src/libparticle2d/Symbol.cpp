@@ -7,6 +7,7 @@
 #include <ps_2d.h>
 
 #include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
 
 namespace eparticle2d
 {
@@ -45,8 +46,9 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
 	p2d_spr->SetMatrix(mt);
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->SetSpriteColor(color);
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+	shader->SetColor(color);
 
 	p2d_spr->Draw(mt);		
 }

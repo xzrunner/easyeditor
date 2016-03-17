@@ -74,9 +74,9 @@ void Projection3DScene::DrawSprite(ee::Image* img, int x, int y) const
 	vertices.push_back(ee::vec3(x+w, 0, y+w));
 	texcoords.push_back(ee::vec2(1, 0));
 
-	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
-	shader->Sprite();
-	shader->DrawTri(&vertices[0].x, &texcoords[0].x, 6, img->GetTexID());
+	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+	mgr->Sprite();
+	mgr->DrawTri(&vertices[0].x, &texcoords[0].x, 6, img->GetTexID());
 }
 
 }

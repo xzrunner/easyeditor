@@ -32,13 +32,13 @@ void RVG::LineWidth(float width)
 
 void RVG::Point(const Vector& vertex)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_point(vertex.x, vertex.y);
 }
 
 void RVG::Points(const std::vector<Vector>& vertices)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		rvg_point(vertices[i].x, vertices[i].y);
 	}
@@ -46,28 +46,28 @@ void RVG::Points(const std::vector<Vector>& vertices)
 
 void RVG::Line(const Vector& p0, const Vector& p1)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_line_style(LS_DEFAULT);
 	rvg_line(p0.x, p0.y, p1.x, p1.y);
 }
 
 void RVG::DotLine(const Vector& p0, const Vector& p1)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_line_style(LS_DOT);
 	rvg_line(p0.x, p0.y, p1.x, p1.y);
 }
 
 void RVG::DashLine(const Vector& p0, const Vector& p1)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_line_style(LS_DASH);
 	rvg_line(p0.x, p0.y, p1.x, p1.y);
 }
 
 void RVG::DotDashLine(const Vector& p0, const Vector& p1)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_line_style(LS_DOT_DASH);
 	rvg_line(p0.x, p0.y, p1.x, p1.y);
 }
@@ -78,7 +78,7 @@ void RVG::Lines(const std::vector<Vector>& vertices)
 		return;
 	}
 
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_line_style(LS_DEFAULT);
 	rvg_lines(&vertices[0].x, vertices.size());
 }
@@ -89,7 +89,7 @@ void RVG::Polyline(const std::vector<Vector>& vertices, bool loop)
 		return;
 	}
 
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_line_style(LS_DEFAULT);
 	rvg_polyline(&vertices[0].x, vertices.size(), loop);
 }
@@ -97,7 +97,7 @@ void RVG::Polyline(const std::vector<Vector>& vertices, bool loop)
 void RVG::Triangles(const std::vector<Vector>& triangles)
 {
 	if (triangles.size() >= 3) {
-		ShaderMgr::Instance()->Shape();
+		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 		rvg_triangles(&triangles[0].x, triangles.size());
 	}
 }
@@ -114,13 +114,13 @@ void RVG::Rect(const Vector& center, float hw, float hh, bool filling)
 
 void RVG::Rect(const Vector& p0, const Vector& p1, bool filling)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_rect(p0.x, p0.y, p1.x, p1.y, filling);
 }
 
 void RVG::Circle(const Vector& center, float radius, bool filling, int segments)
 {
-	ShaderMgr::Instance()->Shape();
+	ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
 	rvg_circle(center.x, center.y, radius, filling, segments);
 }
 

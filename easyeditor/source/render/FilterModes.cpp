@@ -1,11 +1,6 @@
 #include "FilterModes.h"
 #include "ShaderMgr.h"
 
-#include "EdgeDetectionShader.h"
-#include "ReliefShader.h"
-#include "OutlineShader.h"
-#include "BlurShader.h"
-
 namespace ee
 {
 
@@ -13,8 +8,6 @@ FilterModes* FilterModes::m_instance = NULL;
 
 FilterModes::FilterModes()
 {
-//	InitAllShaders();
-
 	m_modes.push_back(Item(FM_NORMAL, "normal", "Õý³£"));
 	m_modes.push_back(Item(FM_EDGE_DETECTION, "edge detection", "±ß½ç¼ì²â"));
 	m_modes.push_back(Item(FM_RELIEF, "relief", "¸¡µñ"));
@@ -84,38 +77,6 @@ int FilterModes::QueryShaderIdx(FilterMode mode) const
 	} else {
 		return itr->second;
 	}
-}
-
-void FilterModes::InitAllShaders()
-{
-// 	m_map2idx.insert(std::make_pair(FM_NORMAL, 0));
-// 
-// 	ShaderMgr* mgr = ShaderMgr::Instance();
-// 	{
-// 		EdgeDetectionShader* shader = new EdgeDetectionShader;
-// 		shader->Load();
-// 		int idx = mgr->AddSpriteShader(shader);
-// 		m_map2idx.insert(std::make_pair(FM_EDGE_DETECTION, idx));
-// 	}
-// 	{
-// 		ReliefShader* shader = new ReliefShader;
-// 		shader->Load();
-// 		int idx = mgr->AddSpriteShader(shader);
-// 		m_map2idx.insert(std::make_pair(FM_RELIEF, idx));
-// 	}
-// 	{
-// 		OutlineShader* shader = new OutlineShader;
-// 		shader->Load();
-// 		int idx = mgr->AddSpriteShader(shader);
-// 		m_map2idx.insert(std::make_pair(FM_OUTLINE, idx));
-// 	}
-// 	{
-// 		BlurShader* shader = new BlurShader;
-// 		shader->Load();
-// 		int idx = mgr->AddSpriteShader(shader);
-// 		m_map2idx.insert(std::make_pair(FM_BLUR, idx));
-// 	}
-// 	mgr->null();
 }
 
 FilterModes* FilterModes::Instance()

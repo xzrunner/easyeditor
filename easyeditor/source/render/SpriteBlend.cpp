@@ -11,6 +11,7 @@
 #include "Math2D.h"
 #include "BlendShader.h"
 #include "EE_ShaderLab.h"
+#include "SpriteShader.h"
 
 #include <dtex_facade.h>
 
@@ -65,13 +66,14 @@ void SpriteBlend::Draw(const Sprite* sprite, const Matrix& mt) const
 void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 {
 	ShaderMgr* mgr = ShaderMgr::Instance();
+	BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
 
 	dtexf_c1_clear();
 	dtexf_c1_bind();
 
-	mgr->Blend();
+	mgr->SetShader(ShaderMgr::BLEND);
 	BlendMode mode = sprite->GetBlendMode();
-	mgr->SetBlendMode(mode);
+	shader->SetMode(BlendModes::Instance()->GetNameENFromID(mode));
 
 	const_cast<Sprite*>(sprite)->SetBlendMode(BM_NORMAL);
 	SpriteRenderer::Instance()->Draw(sprite, sprite, mt);
@@ -109,10 +111,10 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
-
-	mgr->Sprite();
-	mgr->SetSpriteColor(ColorTrans());
-	mgr->Draw(vertices, texcoords, dtexf_c1_get_texture_id());
+	mgr->SetShader(ShaderMgr::SPRITE);
+	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+	shader->SetColor(ColorTrans());
+	shader->Draw(vertices, texcoords, dtexf_c1_get_texture_id());
 }
 
 }

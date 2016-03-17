@@ -14,8 +14,8 @@ void BruteForceTex::Draw() const
 
 	const float scale = 0.1f;
 
-	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
-	shader->Sprite();
+	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+	mgr->Sprite();
 
 	float height;
 	for (int y = 0; y < m_data.size - 1; ++y)
@@ -41,7 +41,7 @@ void BruteForceTex::Draw() const
 			texcoords.push_back(ee::vec2(tex_left, tex_top));
 		}
 
-		shader->DrawTriStrip(&vertices[0].x, &texcoords[0].x, size, m_texture.GetID());
+		mgr->DrawTriStrip(&vertices[0].x, &texcoords[0].x, size, m_texture.GetID());
 	}
 }
 

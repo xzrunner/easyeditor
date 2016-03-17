@@ -23,6 +23,10 @@
 #include "Camera.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
+#include "SpriteShader.h"
+#include "FilterShader.h"
+#include "BlendShader.h"
+#include "ModelShader.h"
 
 namespace ee
 {
@@ -190,9 +194,10 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
-	if (mgr->IsCurrentBlendShader()) 
+	if (mgr->GetShader() == ShaderMgr::BLEND) 
 	{
-		mgr->SetBlendColor(col);
+		BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
+		shader->SetColor(col);
 
 		assert(spr);
 
@@ -223,18 +228,21 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 			tex_coolds_base[i].x /= w;
 			tex_coolds_base[i].y /= h;
 		}
-		mgr->DrawBlend(vertices, texcoords, tex_coolds_base, texid, ScreenCache::Instance()->GetTexID());
+		shader->Draw(vertices, texcoords, tex_coolds_base, texid, ScreenCache::Instance()->GetTexID());
 	}
 	else 
 	{
 		if (Config::Instance()->GetSettings().orthogonal) 
 		{
-			mgr->SetSpriteColor(col);
-			if (mgr->IsCurrentFilterShader()) {
-				mgr->DrawFilter(vertices, texcoords, texid);
+			SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+			shader->SetColor(col);
+			if (mgr->GetShader() == ShaderMgr::FILTER) {
+				FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
+				shader->Draw(vertices, texcoords, texid);
 			} else {
-				mgr->Sprite();
-				mgr->Draw(vertices, texcoords, texid);
+				mgr->SetShader(ShaderMgr::SPRITE);
+				SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+				shader->Draw(vertices, texcoords, texid);
 			}
 		} 
 		else 
@@ -277,8 +285,9 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 			_texcoords.push_back(texcoords[2]);
 			_texcoords.push_back(texcoords[3]);
 
-			mgr->Model();
-			mgr->DrawModel(_vertices, _texcoords, texid);
+			mgr->SetShader(ShaderMgr::MODEL);
+			ModelShader* shader = static_cast<ModelShader*>(mgr->GetShader(ShaderMgr::MODEL));
+			shader->Draw(_vertices, _texcoords, texid);
 		}
 	}
 }

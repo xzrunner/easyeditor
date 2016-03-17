@@ -52,10 +52,10 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 
 	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
 //	shader_mgr->SetShapeShader(m_shader_idx);
-	shader_mgr->Shape();
+	shader_mgr->SetShader(ee::ShaderMgr::SHAPE);
 
-	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
-	shader->SetAlpha(alpha);
+//	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
+//	shader->SetAlpha(alpha);
 
 	std::vector<ee::Vector> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);
@@ -65,7 +65,7 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 // 	ee::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
 
 //	shader_mgr->SetShapeShader(0);
-	shader_mgr->Shape();
+	shader_mgr->SetShader(ee::ShaderMgr::SHAPE);
 }
 
 void Shadow::BuildFace()

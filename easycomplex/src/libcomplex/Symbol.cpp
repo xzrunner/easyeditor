@@ -81,14 +81,14 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
  	{
 		//ee::DynamicTexAndFont* dtex = ee::DynamicTexAndFont::Instance();
 
-		//ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-		//if (shader->GetVersion() != m_render_version)
+		//ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+		//if (mgr->GetVersion() != m_render_version)
 		//{
 		//	m_render_cache_open = false;
 		//	dtex->RefreshSymbol(*this, *n);
 		//	m_render_cache_open = true;
 
-		//	m_render_version = shader->GetVersion();
+		//	m_render_version = mgr->GetVersion();
 		//}
 
 		//ee::Vector vertices[4];
@@ -126,8 +126,8 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 		//texcoords[2].set(txmax, tymax);
 		//texcoords[3].set(txmin, tymax);
 
-		//shader->sprite();
-		//shader->Draw(vertices, texcoords, texid);
+		//mgr->sprite();
+		//mgr->Draw(vertices, texcoords, texid);
  	}
  	else
 	{

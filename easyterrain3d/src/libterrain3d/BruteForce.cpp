@@ -11,8 +11,8 @@ void BruteForce::Draw() const
 
 	const float scale = 0.1f;
 
-	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
-	shader->Shape();
+	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+	mgr->Shape();
 
 	float col, height;
 	for (int y = 0; y < m_data.size - 1; ++y)
@@ -35,7 +35,7 @@ void BruteForce::Draw() const
 			vertices.push_back(ee::vec3(scale*x, scale*(y+1), height));
 		}
 
-		shader->DrawShape(GL_TRIANGLE_STRIP, &vertices[0].x, size, &colors[0], true);	
+		mgr->DrawShape(GL_TRIANGLE_STRIP, &vertices[0].x, size, &colors[0], true);	
 	}
 }
 

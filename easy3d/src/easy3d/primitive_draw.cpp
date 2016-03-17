@@ -12,18 +12,18 @@ void DrawLine(const ee::vec3& p0, const ee::vec3& p1, ee::Colorf color)
 {
 	ee::vec3 vertices[] = {p0, p1};
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Shape();
-	shader->DrawShape(GL_LINES, &vertices[0].x, 2, color, true);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->Shape();
+	mgr->DrawShape(GL_LINES, &vertices[0].x, 2, color, true);
 }
 
 void DrawTriLine(const ee::vec3& p0, const ee::vec3& p1, const ee::vec3& p2, ee::Colorf color)
 {
 	ee::vec3 vertices[] = {p0, p1, p2};
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Shape();
-	shader->DrawShape(GL_LINE_LOOP, &vertices[0].x, 3, color, true);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->Shape();
+	mgr->DrawShape(GL_LINE_LOOP, &vertices[0].x, 3, color, true);
 }
 
 void DrawCube(const AABB& aabb, ee::Colorf color)
@@ -75,9 +75,9 @@ void DrawCube(const ee::mat4& mat, const AABB& aabb, ee::Colorf color)
 	indices[idx++] = 3;
 	indices[idx++] = 7;
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Shape();
-	shader->DrawShape(GL_LINES, &vertices[0].x, 8, color, indices, 24);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->Shape();
+	mgr->DrawShape(GL_LINES, &vertices[0].x, 8, color, indices, 24);
 }
 
 void DrawCube(const ee::vec3& min, const ee::vec3& max, ee::Colorf color)
@@ -146,9 +146,9 @@ void DrawCube(const ee::vec3& min, const ee::vec3& max, ee::Colorf color)
 	indices[idx++] = 3;
 	indices[idx++] = 7;
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Shape();
-	shader->DrawShape(GL_LINES, vertices, 8, color, indices, 24);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->Shape();
+	mgr->DrawShape(GL_LINES, vertices, 8, color, indices, 24);
 }
 
 void DrawCube(const ee::vec3& min, const ee::vec3& max, int texid)
@@ -249,10 +249,10 @@ void DrawCube(const ee::vec3& min, const ee::vec3& max, int texid)
 	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
 	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;	
 
-	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
-	shader->Sprite();
+	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+	mgr->Sprite();
 
-	shader->DrawTri(vertices, texcoords, 2 * 6 * 3, texid);
+	mgr->DrawTri(vertices, texcoords, 2 * 6 * 3, texid);
 }
 
 void DrawCross(const ee::vec3& center, const ee::vec3& size, ee::Colorf color)
@@ -281,9 +281,9 @@ void DrawCross(const ee::vec3& center, const ee::vec3& size, ee::Colorf color)
 	vertices[idx++] = center.y;
 	vertices[idx++] = center.z + size.z;
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Shape();
-	shader->DrawShape(GL_LINES, vertices, 6, color, true);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->Shape();
+	mgr->DrawShape(GL_LINES, vertices, 6, color, true);
 }
 
 void DrawGrids(const ee::vec3& min, const ee::vec3& max, const ee::vec3& size, ee::Colorf color)
@@ -314,16 +314,16 @@ void DrawGrids(const ee::vec3& min, const ee::vec3& max, const ee::vec3& size, e
 		}
 	}
 
- 	ShaderMgr* shader = ShaderMgr::Instance();
- 	shader->Shape();
-	shader->DrawShape(GL_LINES, &lines[0].x, lines.size(), color, true);
+ 	ShaderMgr* mgr = ShaderMgr::Instance();
+ 	mgr->Shape();
+	mgr->DrawShape(GL_LINES, &lines[0].x, lines.size(), color, true);
 }
 
 void DrawPoints(const std::vector<ee::vec3>& points, ee::Colorf color)
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Shape();
-	shader->DrawShape(GL_POINTS, &points[0].x, points.size(), color, true);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->Shape();
+	mgr->DrawShape(GL_POINTS, &points[0].x, points.size(), color, true);
 }
 
 }

@@ -4,12 +4,14 @@
 #include "Config.h"
 #include "color_config.h"
 #include "ShaderMgr.h"
+#include "SpriteShader.h"
 #include "SpriteRenderer.h"
 #include "ShaderContext.h"
 #include "EE_DTex.h"
 #include "EE_SP.h"
 #include "ScreenCache.h"
 #include "Camera.h"
+#include "BlendShader.h"
 
 namespace ee
 {
@@ -31,7 +33,10 @@ void TwoPassCanvas::OnSize(int w, int h)
 		DTex::Instance();
 	}
 	ScreenCache::Instance()->SetSize(w, h);
-	ShaderMgr::Instance()->OnSize(w, h);
+
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
+	shader->OnSize(w, h);
 }
 
 static void
@@ -40,7 +45,9 @@ _before_draw(void* ud) {
 	ColorTrans color;
 	color.multi = stype->multi_col;
 	color.add = stype->add_col;
-	ShaderMgr::Instance()->SetSpriteColor(color);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+	shader->SetColor(color);
 }
 
 #ifdef OPEN_SCREEN_CACHE

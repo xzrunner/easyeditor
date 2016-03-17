@@ -260,10 +260,10 @@ void Mapping3DScene::Draw() const
 	vertices.push_back(m_vertices[0]);
 	texcoords.push_back(m_texcoords[0]);
 
-	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
-	shader->Sprite();
+	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+	mgr->Sprite();
 
-	shader->DrawTri(&vertices[0].x, &texcoords[0].x, 2 * 6 * 3, m_img->GetTexID());
+	mgr->DrawTri(&vertices[0].x, &texcoords[0].x, 2 * 6 * 3, m_img->GetTexID());
 }
 
 void Mapping3DScene::DebugDraw() const

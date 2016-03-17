@@ -277,14 +277,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\render\ScreenShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\ScreenShader.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\source\render\ShapeShader.cpp"
 					>
 				</File>

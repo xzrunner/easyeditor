@@ -36,15 +36,15 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 	}
 	const Sprite* s = static_cast<const Sprite*>(spr);
 
-	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
+	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
 
 	ee::mat4 mat = ee::mat4(s->GetOri3().ToMatrix()) * 
 		ee::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 
 // 	e3d::DrawCube(mat, m_aabb, ee::BLACK);
 
-	shader->Model();
-	shader->DrawModel(m_model, mat);
+	mgr->Model();
+	mgr->DrawModel(m_model, mat);
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const

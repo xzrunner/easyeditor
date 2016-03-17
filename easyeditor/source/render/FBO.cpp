@@ -153,10 +153,10 @@ int FBO::CheckFramebufferStatus(std::string& msg) const
 
 void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
+	ShaderMgr* mgr = ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
-	shader->SetFBO(m_fbo);
-	shader->Sprite();
+	mgr->SetFBO(m_fbo);
+	mgr->SetShader(ShaderMgr::SPRITE);
 
 	if (whitebg) {
 		glClearColor(1, 1, 1, 1);
@@ -194,13 +194,13 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	SpriteRenderer::Instance()->Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-	shader->Commit();
+	mgr->Commit();
 
 	ShaderLab::Instance()->Flush();
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-	shader->SetFBO(0);
-	shader->SetTexture(0);
+	mgr->SetFBO(0);
+	mgr->SetTexture(0);
 
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
@@ -212,10 +212,10 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height, 
 				  float dx, float dy, float scale)
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
+	ShaderMgr* mgr = ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
-	shader->SetFBO(m_fbo);
-	shader->Sprite();
+	mgr->SetFBO(m_fbo);
+	mgr->SetShader(ShaderMgr::SPRITE);
 
 	if (clear) {
 		glClearColor(0, 0, 0, 0);
@@ -250,13 +250,13 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 
 	
 
-	shader->Commit();
+	mgr->Commit();
 	ShaderLab::Instance()->Flush();
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
 
-	shader->SetFBO(0);
-	shader->SetTexture(0);
+	mgr->SetFBO(0);
+	mgr->SetTexture(0);
 
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
@@ -289,7 +289,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 		has_context = false;
 	}
 
-	ShaderMgr* shader = ShaderMgr::Instance();
+	ShaderMgr* mgr = ShaderMgr::Instance();
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
@@ -301,7 +301,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-	shader->Commit();
+	mgr->Commit();
 
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);

@@ -40,9 +40,6 @@ private:
 	FilterModes();
 
 private:
-	void InitAllShaders();
-
-private:
 	struct Item
 	{
 		Item(FilterMode id, const std::string& name_en, const std::string& name_cn)

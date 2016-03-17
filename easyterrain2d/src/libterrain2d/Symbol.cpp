@@ -4,6 +4,7 @@
 
 #include <ee/ImageSymbol.h>
 #include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
 #include <ee/FileHelper.h>
 
 #include <algorithm>
@@ -54,8 +55,9 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 		return;
 	}
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->SetSpriteColor(color);
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+	shader->SetColor(color);
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {

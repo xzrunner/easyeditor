@@ -5,6 +5,7 @@
 #include "RenderContextStack.h"
 #include "ShaderContext.h"
 #include "EE_ShaderLab.h"
+#include "SpriteShader.h"
 
 #include <dtex.h>
 #include <render/render.h>
@@ -25,10 +26,10 @@ static void _program(int n)
 	switch (n) 
 	{
 	case DTEX_PROGRAM_NULL:
-		ShaderMgr::Instance()->Null();
+		ShaderMgr::Instance()->SetShader(ShaderMgr::COUNT);
 		break;
 	case DTEX_PROGRAM_NORMAL:
-		ShaderMgr::Instance()->Sprite();
+		ShaderMgr::Instance()->SetShader(ShaderMgr::SPRITE);
 		break;
 	default:
 		assert(0);
@@ -75,16 +76,15 @@ static void _draw_begin()
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(2, 2);
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->SetSpriteColor(ColorTrans());
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+	shader->SetColor(ColorTrans());
 
 // 	glViewport(0, 0, 2, 2);
 }
 
 static void _draw(const float vb[16], int texid)
 {
-	ShaderMgr* shader = ShaderMgr::Instance();
-
 	Vector vertices[4], texcoords[4];
 	for (int i = 0; i < 4; ++i) {
 		vertices[i].x  = vb[i * 4];
@@ -93,7 +93,9 @@ static void _draw(const float vb[16], int texid)
 		texcoords[i].y = vb[i * 4 + 3];
 	}
 
-	shader->Draw(vertices, texcoords, texid);
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
+	shader->Draw(vertices, texcoords, texid);	
 }
 
 static void _draw_end()

@@ -3,6 +3,7 @@
 #include <ee/Math2D.h>
 #include <ee/Image.h>
 #include <ee/ShaderMgr.h>
+#include <ee/SpriteShader.h>
 
 namespace eicon
 {
@@ -57,8 +58,9 @@ void QuadIcon::Draw(const ee::Matrix& mt, float process) const
 		vertices[i] = ee::Math2D::TransVector(m_screen[i], mt);
 	}
 
-	ee::ShaderMgr* shader = ee::ShaderMgr::Instance();
-	shader->Sprite();
+	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	mgr->SetShader(ee::ShaderMgr::SPRITE);
+	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
 	shader->Draw(vertices, m_src, m_img->GetTexID());
 }
 

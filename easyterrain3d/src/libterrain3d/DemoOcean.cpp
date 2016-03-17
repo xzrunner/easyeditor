@@ -59,8 +59,8 @@ void DemoOcean::Draw() const
 	uv_left_low.x = m_uv_base.x - 1;
 	uv_left_low.y = m_uv_base.y - 1;
 
- 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
- 	shader->Sprite();
+ 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
+ 	mgr->Sprite();
 	for (int y = 0; y < ROW; ++y) {
 		for (int x = 0; x < COL; ++x) {
 			float vx_min = EDGE * x / COL - 0.5f*EDGE, vx_max = EDGE * (x+1) / COL - 0.5f*EDGE,
@@ -83,7 +83,7 @@ void DemoOcean::Draw() const
 					texcoords[i] = texcoords[i] - base;
 				}
 
-				shader->DrawTri(vertices, texcoords, m_image->GetTexID());
+				mgr->DrawTri(vertices, texcoords, m_image->GetTexID());
 			}
 			{
 				ee::vec3 vertices[] = {ee::vec3(vx_max, vy_max, h_maxmax), ee::vec3(vx_max, vy_min, h_maxmin), ee::vec3(vx_min, vy_min, h_minmin)};
@@ -99,7 +99,7 @@ void DemoOcean::Draw() const
 					texcoords[i] = texcoords[i] - base;
 				}
 
-				shader->DrawTri(vertices, texcoords, m_image->GetTexID());
+				mgr->DrawTri(vertices, texcoords, m_image->GetTexID());
 			}
 		}
 	}	
