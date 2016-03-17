@@ -45,6 +45,9 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 		mgr->SetFilterMode(sprite->GetFilterMode());
 		DrawImpl(sprite, root, mt, color);
 	} else {
+		if (mgr->IsCurrentFilterShader()) {
+			mgr->Sprite();
+		}
 		DrawImpl(sprite, root, mt, color);
 	}
 }

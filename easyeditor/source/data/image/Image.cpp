@@ -230,11 +230,12 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 		if (Config::Instance()->GetSettings().orthogonal) 
 		{
 			mgr->SetSpriteColor(col);
-
-			if (!mgr->IsCurrentFilterShader()) {
+			if (mgr->IsCurrentFilterShader()) {
+				mgr->DrawFilter(vertices, texcoords, texid);
+			} else {
 				mgr->Sprite();
+				mgr->Draw(vertices, texcoords, texid);
 			}
-			mgr->Draw(vertices, texcoords, texid);
 		} 
 		else 
 		{
