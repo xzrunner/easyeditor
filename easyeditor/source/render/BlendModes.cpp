@@ -49,6 +49,10 @@ BlendModes::BlendModes()
 
 BlendMode BlendModes::GetIDFromNameEN(const std::string& name) const
 {
+	if (name.empty()) {
+		return BM_NORMAL;
+	}
+
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		const Item& item = m_modes[i];
 		if (item.name_en == name) {
