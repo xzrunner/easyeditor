@@ -186,6 +186,22 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\sample\TestImage.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestImage.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestImage25.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestImage25.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\sample\TestMulti.cpp"
 			>
 		</File>
@@ -199,14 +215,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\sample\TestShape.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\sample\TestSprite.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\sample\TestSprite.h"
 			>
 		</File>
 		<File

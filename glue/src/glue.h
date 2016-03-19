@@ -2,8 +2,8 @@
 #define _GLUE_H_
 
 #include "dataset/Texture.h"
-#include "dataset/Symbol.h"
 #include "dataset/Sprite.h"
+#include "dataset/ImageSymbol.h"
 
 #include "render/RenderContext.h"
 #include "render/ShaderMgr.h"

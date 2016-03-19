@@ -1,5 +1,5 @@
-#ifndef _TEST_SPRITE_H_
-#define _TEST_SPRITE_H_
+#ifndef _TEST_IMAGE_H_
+#define _TEST_IMAGE_H_
 
 #include "TestTask.h"
 
@@ -10,7 +10,7 @@
 namespace test
 {
 
-class TestSprite : public TestTask
+class TestImage : public TestTask
 {
 public:
 	virtual void Init();
@@ -21,8 +21,8 @@ public:
 private:
 	std::vector<glue::Sprite*> m_sprites;
 
-}; // TestSprite
+}; // TestImage
 
 }
 
-#endif // _TEST_SPRITE_H_
+#endif // _TEST_IMAGE_H_

@@ -1,15 +1,15 @@
-#include "TestSprite.h"
+#include "TestImage.h"
 
 #include <rvg_render.h>
 
 namespace test
 {
 
-void TestSprite::Init()
+void TestImage::Init()
 {
 	glue::ShaderMgr::Instance()->Init();
 
-	glue::Symbol* sym = new glue::Symbol("coin_00.png");
+	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
 	{
 		glue::Sprite* spr = new glue::Sprite(sym);
 		spr->SetPositioin(glue::vec2(0, 0));
@@ -37,12 +37,12 @@ void TestSprite::Init()
 	}
 }
 
-void TestSprite::Resize(int width, int height)
+void TestImage::Resize(int width, int height)
 {
 	glue::ShaderMgr::Instance()->OnSize(width, height);
 }
 
-void TestSprite::Draw() const
+void TestImage::Draw() const
 {
 // 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 // 		glue::Sprite* spr = m_sprites[i];
@@ -82,7 +82,7 @@ void TestSprite::Draw() const
 	}
 }
 
-void TestSprite::Update()
+void TestImage::Update()
 {
 }
 

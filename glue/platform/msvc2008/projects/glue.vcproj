@@ -203,19 +203,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\render\ModelShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\ModelShader.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\render\ShapeShader.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\render\ShapeShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\Sprite3Shader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\Sprite3Shader.h"
 					>
 				</File>
 				<File
@@ -252,14 +252,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\dataset\PngLoader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dataset\PngLoader.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\dataset\Sprite.cpp"
 				>
 			</File>
@@ -275,14 +267,46 @@
 				RelativePath="..\..\..\src\dataset\Symbol.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\dataset\Texture.cpp"
+			<Filter
+				Name="model3"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\dataset\Texture.h"
+				<File
+					RelativePath="..\..\..\src\dataset\Model3Symbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\Model3Symbol.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="image"
 				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\dataset\ImageSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\ImageSymbol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\PngLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\PngLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\Texture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\dataset\Texture.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"

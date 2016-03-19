@@ -9,12 +9,14 @@
 #include <iostream>
 
 #include "TestShape.h"
-#include "TestSprite.h"
+#include "TestImage.h"
 #include "TestMulti.h"
+#include "TestImage25.h"
 
 //test::TestTask* task = new test::TestShape;
-//test::TestTask* task = new test::TestSprite;
+//test::TestTask* task = new test::TestImage;
 test::TestTask* task = new test::TestMulti;
+//test::TestTask* task = new test::TestImage25;
 
 void 
 display(void) {

@@ -1,5 +1,5 @@
-#ifndef _GLUE_MODEL_SHADER_H_
-#define _GLUE_MODEL_SHADER_H_
+#ifndef _GLUE_SPRITE3_SHADER_H_
+#define _GLUE_SPRITE3_SHADER_H_
 
 #include "IShader.h"
 #include "BlendMode.h"
@@ -13,11 +13,11 @@
 namespace glue
 {
 
-class ModelShader : public IShader
+class Sprite3Shader : public IShader
 {
 public:
-	ModelShader();
-	virtual ~ModelShader();
+	Sprite3Shader();
+	virtual ~Sprite3Shader();
 
 	virtual void Load();
 	virtual void Unload();	
@@ -40,8 +40,8 @@ public:
 	static const int FAR = 50;
 	static const int NEAR = 2;
 
-}; // ModelShader
+}; // Sprite3Shader
 
 }
 
-#endif // _GLUE_MODEL_SHADER_H_
+#endif // _GLUE_SPRITE3_SHADER_H_

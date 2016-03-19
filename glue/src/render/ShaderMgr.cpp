@@ -2,7 +2,7 @@
 #include "SpriteShader.h"
 #include "ShapeShader.h"
 #include "BlendShader.h"
-#include "ModelShader.h"
+#include "Sprite3Shader.h"
 //#include "ScreenCache.h"
 
 #include <sl_shader.h>
@@ -42,7 +42,7 @@ void ShaderMgr::Init()
 	m_shaders.push_back(new SpriteShader);
 	m_shaders.push_back(new ShapeShader);
 	m_shaders.push_back(new BlendShader);
-	m_shaders.push_back(new ModelShader);
+	m_shaders.push_back(new Sprite3Shader);
 	for (int i = 0, n = m_shaders.size(); i < n; ++i) {
 		m_shaders[i]->Load();
 	}
@@ -77,7 +77,7 @@ void ShaderMgr::BlendDraw(const vec2 vertices[4], const vec2 texcoords[4],
 void ShaderMgr::ModelDraw(const std::vector<vec3>& vertices, const std::vector<vec2>& texcoords, int texid)
 {
 	ChangeShader(MODEL_IDX);
-	static_cast<ModelShader*>(m_shaders[MODEL_IDX])->Draw(vertices, texcoords, texid);
+	static_cast<Sprite3Shader*>(m_shaders[MODEL_IDX])->Draw(vertices, texcoords, texid);
 }
 
 void ShaderMgr::SetSpriteColor(uint32_t color, uint32_t additive)

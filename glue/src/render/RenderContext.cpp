@@ -22,11 +22,16 @@ RenderContext::~RenderContext()
 {
 }
 
+static void _commit() 
+{
+	ShaderMgr::Instance()->Flush();
+}
+
 void RenderContext::Init()
 {
 	m_cam = new Camera();
 
-	sl_shader_mgr_create(4096);
+	sl_shader_mgr_create(4096, _commit);
 }
 
 void RenderContext::OnSize(int w, int h)
