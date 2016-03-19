@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\libpng\include\libpng;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\libpng\include\libpng;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\libpng\include\libpng;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\ds\src\ds;..\..\..\..\editor-external\rg_etc1;..\..\..\..\editor-external\libpng\include\libpng;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\gl\include;..\..\..\..\editor-external\lua\include;..\..\..\..\editor-external\cjson\include;..\..\..\..\editor-external\lzma\include;..\..\..\..\editor-external\pthread\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -528,34 +528,6 @@
 				RelativePath="..\..\..\src\dtex_utility.h"
 				>
 			</File>
-			<Filter
-				Name="ds"
-				>
-				<File
-					RelativePath="..\..\..\src\dtex_array.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_array.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_hash.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_hash.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_stack.c"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\dtex_stack.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="render"

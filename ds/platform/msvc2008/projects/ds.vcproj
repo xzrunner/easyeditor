@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="1.gtxt"
+	Name="0.ds"
 	ProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
-	RootNamespace="gtxt"
+	RootNamespace="ds"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\gtxt\x86\Debug"
-			IntermediateDirectory="..\gtxt\x86\Debug\obj"
+			OutputDirectory="..\ds\x86\Debug"
+			IntermediateDirectory="..\ds\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\ds\src\ds;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
+				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\gtxt\x86\Release"
-			IntermediateDirectory="..\gtxt\x86\Release\obj"
+			OutputDirectory="..\ds\x86\Release"
+			IntermediateDirectory="..\ds\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -105,8 +105,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\ejoy2d\src;..\..\..\..\ejoy2d\src\render;..\..\..\..\ds\src\ds;..\..\..\..\dtex\src;..\..\..\..\editor-external\c99;..\..\..\..\editor-external\freetype\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
+				AdditionalIncludeDirectories="..\..\..\..\editor-external\c99"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -146,59 +146,27 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt.h"
+			RelativePath="..\..\..\src\ds\ds_array.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_adapter.c"
+			RelativePath="..\..\..\src\ds\ds_array.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_adapter.h"
+			RelativePath="..\..\..\src\ds\ds_hash.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_freetype.c"
+			RelativePath="..\..\..\src\ds\ds_hash.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_freetype.h"
+			RelativePath="..\..\..\src\ds\ds_stack.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_glyph.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_glyph.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_label.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_label.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_layout.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_layout.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_richtext.c"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_richtext.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gtxt\gtxt_typedef.h"
+			RelativePath="..\..\..\src\ds\ds_stack.h"
 			>
 		</File>
 	</Files>
