@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_MODEL_SHADER_H_
-#define _EASYEDITOR_MODEL_SHADER_H_
+#ifndef _EASYEDITOR_SPRITE3_SHADER_H_
+#define _EASYEDITOR_SPRITE3_SHADER_H_
 
 #include "IShader.h"
 #include "Vector3D.h"
@@ -12,11 +12,11 @@ namespace ee
 class Vector;
 struct ColorTrans;
 
-class ModelShader : public IShader
+class Sprite3Shader : public IShader
 {
 public:
-	ModelShader();
-	virtual ~ModelShader();
+	Sprite3Shader();
+	virtual ~Sprite3Shader();
 
 	virtual void Load();
 	virtual void Unload();	
@@ -45,8 +45,8 @@ protected:
 
 	virtual void LoadShader() {}
 
-}; // ModelShader
+}; // Sprite3Shader
 
 }
 
-#endif // _EASYEDITOR_MODEL_SHADER_H_
+#endif // _EASYEDITOR_SPRITE3_SHADER_H_

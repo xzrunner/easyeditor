@@ -26,7 +26,7 @@
 #include "SpriteShader.h"
 #include "FilterShader.h"
 #include "BlendShader.h"
-#include "ModelShader.h"
+#include "Sprite3Shader.h"
 
 namespace ee
 {
@@ -286,7 +286,7 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 			_texcoords.push_back(texcoords[3]);
 
 			mgr->SetShader(ShaderMgr::MODEL);
-			ModelShader* shader = static_cast<ModelShader*>(mgr->GetShader(ShaderMgr::MODEL));
+			Sprite3Shader* shader = static_cast<Sprite3Shader*>(mgr->GetShader(ShaderMgr::MODEL));
 			shader->Draw(_vertices, _texcoords, texid);
 		}
 	}

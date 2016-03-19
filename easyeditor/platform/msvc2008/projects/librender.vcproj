@@ -269,19 +269,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\source\render\ModelShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\include\ee\ModelShader.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\source\render\ShapeShader.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\include\ee\ShapeShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\Sprite3Shader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\Sprite3Shader.h"
 					>
 				</File>
 				<File

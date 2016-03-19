@@ -2,7 +2,7 @@
 #include "ShapeShader.h"
 #include "SpriteShader.h"
 #include "BlendShader.h"
-#include "ModelShader.h"
+#include "Sprite3Shader.h"
 #include "FilterShader.h"
 #include "ShaderContext.h"
 
@@ -17,11 +17,16 @@ static const int MAX_TEXTURE = 4096;
 
 ShaderMgr* ShaderMgr::m_instance = NULL;
 
+static void
+_commit() {
+	ShaderMgr::Instance()->Commit();
+}
+
 ShaderMgr* ShaderMgr::Instance()
 {
 	if (!m_instance)
 	{
-		sl_shader_mgr_create(MAX_TEXTURE);
+		sl_shader_mgr_create(MAX_TEXTURE, _commit);
 
 		m_instance = new ShaderMgr();
 		ShaderContext::SetShader2DMgr(m_instance);
@@ -36,7 +41,7 @@ ShaderMgr::ShaderMgr()
 	m_shaders.push_back(new SpriteShader);
 	m_shaders.push_back(new BlendShader);
 	m_shaders.push_back(new FilterShader);
-	m_shaders.push_back(new ModelShader);
+	m_shaders.push_back(new Sprite3Shader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -114,7 +119,7 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	static_cast<SpriteShader*>(m_shaders[SPRITE])->SetModelView(offset, scale);
 	static_cast<BlendShader*>(m_shaders[BLEND])->SetModelView(offset, scale);
 	static_cast<FilterShader*>(m_shaders[FILTER])->SetModelView(offset, scale);
-	static_cast<ModelShader*>(m_shaders[MODEL])->SetModelView(offset, scale);
+	static_cast<Sprite3Shader*>(m_shaders[MODEL])->SetModelView(offset, scale);
 }
 
 }
