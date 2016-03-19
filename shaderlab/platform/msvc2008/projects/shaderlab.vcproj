@@ -205,6 +205,14 @@
 			Name="utility"
 			>
 			<File
+				RelativePath="..\..\..\src\shaderlab\sl_buffer.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_buffer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\sl_matrix.c"
 				>
 			</File>
@@ -222,14 +230,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\shaderlab\sl_utility.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_vertexbuffer.h"
 				>
 			</File>
 		</Filter>
@@ -286,22 +286,42 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="model"
+			Name="sprite3"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\model_simple.frag"
+				RelativePath="..\..\..\src\shaderlab\sl_sprite3.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\model_simple.vert"
+				RelativePath="..\..\..\src\shaderlab\sl_sprite3.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_model.c"
+				RelativePath="..\..\..\src\shaderlab\sprite3.frag"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_model.h"
+				RelativePath="..\..\..\src\shaderlab\sprite3.vert"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="lighting"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\lighting.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\lighting.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_lighting.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_lighting.h"
 				>
 			</File>
 		</Filter>
