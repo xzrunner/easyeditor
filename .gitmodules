@@ -1,6 +1,6 @@
 [submodule "editor-external"]
 	path = editor-external
-	url = ssh://zz@tea.ejoy.com:3222/zz/external.git
+	url = ssh://tea.ejoy.com:3222/zz/external.git
 [submodule "particle/src"]
 	path = particle/src
 	url = ssh://tea.ejoy.com:3222/LR/ps.git
