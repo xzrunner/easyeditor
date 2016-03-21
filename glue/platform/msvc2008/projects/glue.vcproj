@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\particle\src;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\model3\src\model3;&quot;..\..\..\..\editor-external\cjson\include&quot;;&quot;..\..\..\..\editor-external\lzma\include&quot;;&quot;..\..\..\..\editor-external\pthread\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -200,6 +200,22 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\render\BlendShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\FilterShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\FilterShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\LightingShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\LightingShader.h"
 					>
 				</File>
 				<File

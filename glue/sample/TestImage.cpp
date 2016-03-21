@@ -50,31 +50,35 @@ void TestImage::Draw() const
 // 		spr->GetSymbol().Draw(mt);	
 // 	}
 
-	glue::ShaderMgr::Instance()->SetSpriteColor(0xffff00ff, 0);
+	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
+	glue::SpriteShader* shader = static_cast<glue::SpriteShader*>(
+		mgr->GetShader(glue::ShaderMgr::SPRITE));
+
+	shader->SetColor(0xffff00ff, 0);
 	{
 		glue::Sprite* spr = m_sprites[0];
 		glue::mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	glue::ShaderMgr::Instance()->SetSpriteColor(0xffffffff, 0);
+	shader->SetColor(0xffffffff, 0);
 	{
 		glue::Sprite* spr = m_sprites[1];
 		glue::mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	glue::ShaderMgr::Instance()->SetSpriteColor(0xffffff00, 0);
+	shader->SetColor(0xffffff00, 0);
 	{
 		glue::Sprite* spr = m_sprites[2];
 		glue::mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	glue::ShaderMgr::Instance()->SetSpriteMapColor(0x000000ff, 0x00002288, 0x00ff0000);
+	shader->SetMapColor(0x000000ff, 0x00002288, 0x00ff0000);
 	{
 		glue::Sprite* spr = m_sprites[3];
 		glue::mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	glue::ShaderMgr::Instance()->SetSpriteMapColor(0x000000ff, 0x00880022, 0x00ff0000);
+	shader->SetMapColor(0x000000ff, 0x00880022, 0x00ff0000);
 	{
 		glue::Sprite* spr = m_sprites[4];
 		glue::mat4 mt = spr->GetTransMatrix();

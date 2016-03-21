@@ -45,7 +45,8 @@ void TestMulti::Draw() const
 
 	//////////////////////////////////////////////////////////////////////////
 
-	glue::ShaderMgr::Instance()->ShapeDraw();
+	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
+	mgr->SetShader(glue::ShaderMgr::SHAPE);
 
 	sl_shape_color(0xff0000ff);
 	rvg_point_size(5);

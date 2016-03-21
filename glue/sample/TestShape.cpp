@@ -19,7 +19,8 @@ void TestShape::Resize(int width, int height)
 
 void TestShape::Draw() const
 {
-	glue::ShaderMgr::Instance()->ShapeDraw();
+	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
+	mgr->SetShader(glue::ShaderMgr::SHAPE);
 
 	//////////////////////////////////////////////////////////////////////////
 

@@ -12,11 +12,13 @@
 #include "TestImage.h"
 #include "TestMulti.h"
 #include "TestImage25.h"
+#include "TestLighting.h"
 
 //test::TestTask* task = new test::TestShape;
 //test::TestTask* task = new test::TestImage;
-test::TestTask* task = new test::TestMulti;
+//test::TestTask* task = new test::TestMulti;
 //test::TestTask* task = new test::TestImage25;
+test::TestTask* task = new test::TestLighting;
 
 void 
 display(void) {

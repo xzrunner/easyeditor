@@ -7,5 +7,7 @@
 
 #include "render/RenderContext.h"
 #include "render/ShaderMgr.h"
+#include "render/SpriteShader.h"
+#include "render/LightingShader.h"
 
 #endif // _GLUE_H_

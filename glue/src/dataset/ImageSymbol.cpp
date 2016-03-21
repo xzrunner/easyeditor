@@ -5,6 +5,7 @@
 #include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
 #include "render/Camera.h"
+#include "render/SpriteShader.h"
 #include "render/Sprite3Shader.h"
 
 // debug
@@ -68,7 +69,9 @@ void ImageSymbol::Draw(const mat4& mt) const
 // 	}
 // 	else
 // 	{
-		smgr->SpriteDraw(positions, texcoords, texid);
+		smgr->SetShader(ShaderMgr::SPRITE);
+		SpriteShader* shader = static_cast<SpriteShader*>(smgr->GetShader(ShaderMgr::SPRITE));
+		shader->Draw(positions, texcoords, texid);
 //	}
 }
 
@@ -126,7 +129,9 @@ void ImageSymbol::ModelDraw(const mat4& mt) const
 	texcoords.push_back(vec2(0, 1));
 
 	ShaderMgr* smgr = ShaderMgr::Instance();
-	smgr->ModelDraw(positions3, texcoords, texid);
+	smgr->SetShader(ShaderMgr::SPRITE3);
+	Sprite3Shader* shader = static_cast<Sprite3Shader*>(smgr->GetShader(ShaderMgr::SPRITE3));
+	shader->Draw(positions3, texcoords, texid);
 }
 
 void ImageSymbol::Load()
