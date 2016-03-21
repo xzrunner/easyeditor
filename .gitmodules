@@ -1,12 +1,12 @@
 [submodule "editor-external"]
 	path = editor-external
-	url = ssh://git@oa.ejoy.com/users/zz/editor-external.git
+	url = ssh://zz@tea.ejoy.com:3222/zz/external.git
 [submodule "particle/src"]
 	path = particle/src
-	url = ssh://git@oa.ejoy.com/users/zz/ps.git
+	url = ssh://tea.ejoy.com:3222/LR/ps.git
 [submodule "dtex/src"]
 	path = dtex/src
-	url = ssh://git@oa.ejoy.com/users/zz/dtex.git
+	url = ssh://tea.ejoy.com:3222/LR/dtex.git
 [submodule "gtxt/src/gtxt"]
 	path = gtxt/src/gtxt
 	url = ssh://tea.ejoy.com:3222/LR/gtxt.git
@@ -15,4 +15,4 @@
 	url = ssh://tea.ejoy.com:3222/LR/RapidVG.git
 [submodule "shaderlab/src/shaderlab"]
 	path = shaderlab/src/shaderlab
-	url = ssh://zz@tea.ejoy.com:3222/LR/ShaderLab.git
+	url = ssh://tea.ejoy.com:3222/LR/ShaderLab.git
