@@ -19,3 +19,6 @@
 [submodule "ds/src/ds"]
 	path = ds/src/ds
 	url = ssh://tea.ejoy.com:3222/LR/ds.git
+[submodule "model3/src/model3"]
+	path = model3/src/model3
+	url = ssh://tea.ejoy.com:3222/LR/model3.git
