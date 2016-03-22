@@ -140,6 +140,9 @@ void AnimFromLua::UnpackPart(lua_State* L, PackAnimation::Part& part)
 		if (LuaDataHelper::HasField(L, "bmap")) {
 			part.t.bmap = (uint32_t)LuaDataHelper::GetDoubleField(L, "bmap");
 		}
+		if (LuaDataHelper::HasField(L, "blend")) {
+			part.t.blend = (uint32_t)LuaDataHelper::GetDoubleField(L, "blend");
+		}
 	} else {
 		throw ee::Exception("PackAnimation::UnpackFromLua unknown item type.");
 	}

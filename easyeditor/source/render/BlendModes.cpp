@@ -47,7 +47,7 @@ BlendModes::BlendModes()
 // 	m_modes.push_back(Item(BM_LUMINOSITY, "luminosity", "Ã÷¶È"));
 }
 
-BlendMode BlendModes::GetIDFromNameEN(const std::string& name) const
+BlendMode BlendModes::GetModeFromNameEN(const std::string& name) const
 {
 	if (name.empty()) {
 		return BM_NORMAL;
@@ -56,17 +56,17 @@ BlendMode BlendModes::GetIDFromNameEN(const std::string& name) const
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		const Item& item = m_modes[i];
 		if (item.name_en == name) {
-			return item.id;
+			return item.mode;
 		}
 	}
 	return BM_UNKNOWN;
 }
 
-std::string BlendModes::GetNameENFromID(BlendMode id) const
+std::string BlendModes::GetNameENFromMode(BlendMode mode) const
 {
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		const Item& item = m_modes[i];
-		if (item.id == id) {
+		if (item.mode == mode) {
 			return item.name_en;
 		}
 	}
@@ -78,14 +78,14 @@ BlendMode BlendModes::GetIDFromIdx(int idx) const
 	if (idx < 0 || idx >= static_cast<int>(m_modes.size())) {
 		return BM_UNKNOWN;
 	} else {
-		return m_modes[idx].id;
+		return m_modes[idx].mode;
 	}
 }
 
 int BlendModes::GetIdxFromID(BlendMode mode) const
 {
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
-		if (m_modes[i].id == mode) {
+		if (m_modes[i].mode == mode) {
 			return i;
 		}
 	}

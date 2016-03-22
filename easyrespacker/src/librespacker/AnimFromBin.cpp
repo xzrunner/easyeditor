@@ -147,6 +147,11 @@ void AnimFromBin::UnpackFrame(uint8_t** ptr, PackAnimation::Frame& frame)
 			unpack(c, ptr);
 			part.t.bmap = c;
 		}
+		if (type & TAG_BLEND) {
+			uint16_t blend;
+			unpack(blend, ptr);
+			part.t.blend = blend;
+		}
 
 		frame.parts.push_back(part);
 	}

@@ -57,7 +57,7 @@ void BlendShader::SetModelView(const Vector& offset, float scale)
 
 void BlendShader::SetMode(const std::string& str)
 {
-	BlendMode mode = BlendModes::Instance()->GetIDFromNameEN(str);
+	BlendMode mode = BlendModes::Instance()->GetModeFromNameEN(str);
 	sl_blend_set_mode(SL_BLEND_MODE(mode));
 }
 

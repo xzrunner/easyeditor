@@ -15,6 +15,7 @@ static const uint8_t TAG_MATRIX		= 8;
 static const uint8_t TAG_TOUCH		= 16;
 static const uint8_t TAG_MATRIXREF	= 32;
 static const uint8_t TAG_COLMAP		= 64;
+static const uint8_t TAG_BLEND		= 128;
 
 enum TextureType
 {

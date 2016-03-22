@@ -110,6 +110,9 @@ void AnimToLuaString::PackFrame(const PackAnimation::Frame& frame, ebuilder::Cod
 			params.push_back(lua::assign("gmap", ee::StringHelper::ToString(t.gmap)));
 			params.push_back(lua::assign("bmap", ee::StringHelper::ToString(t.bmap)));
 		}
+		if (t.blend != 0) {
+			params.push_back(lua::assign("blend", ee::StringHelper::ToString(t.blend)));
+		}
 
 		if (params.size() > 1) {
 			lua::tableassign(gen, "", params);

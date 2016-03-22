@@ -193,7 +193,7 @@ void Sprite::Load(const Json::Value& val)
 	if (!val["blend"].isNull()) {
 		std::string disc = val["blend"].asString();
 		if (Config::Instance()->IsRenderOpen()) {
-			m_blend_mode = BlendModes::Instance()->GetIDFromNameEN(disc);
+			m_blend_mode = BlendModes::Instance()->GetModeFromNameEN(disc);
 		}
 	}
 
@@ -242,7 +242,7 @@ void Sprite::Store(Json::Value& val) const
 	val["y perspective"] = m_perspective.y;
 
 	if (Config::Instance()->IsRenderOpen()) {
-		val["blend"] = BlendModes::Instance()->GetNameENFromID(m_blend_mode);
+		val["blend"] = BlendModes::Instance()->GetNameENFromMode(m_blend_mode);
 		val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
 	}
 

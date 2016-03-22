@@ -14,6 +14,7 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/ShaderMgr.h>
+#include <ee/Config.h>
 
 #include <glfw.h>
 
@@ -76,21 +77,22 @@ void LRPacker::Run(int argc, char *argv[])
 
 	// 5
 	if (only_json != 1) {
-		int LOD = ee::StringHelper::FromString<int>(argv[6]);
-		if (LOD != 0) {
-			glfwInit();
-			if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
-			{
-				glfwTerminate();
-				return;
-			}
-
-			if (glewInit() != GLEW_OK) {
-				return;
-			}
-
-			ee::ShaderMgr::Instance()->reload();
+		glfwInit();
+		if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+		{
+			glfwTerminate();
+			return;
 		}
+
+		if (glewInit() != GLEW_OK) {
+			return;
+		}
+
+		ee::ShaderMgr::Instance()->reload();
+
+		ee::Config::Instance()->EnableRender(true);
+
+		int LOD = ee::StringHelper::FromString<int>(argv[6]);
 		PackEP(tmp_dir, tmp_lr_file, out_dir, LOD);
 	}
 

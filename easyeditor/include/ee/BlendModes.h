@@ -52,8 +52,8 @@ enum BlendMode
 class BlendModes
 {
 public:
-	BlendMode GetIDFromNameEN(const std::string& name) const;
-	std::string GetNameENFromID(BlendMode id) const;
+	BlendMode GetModeFromNameEN(const std::string& name) const;
+	std::string GetNameENFromMode(BlendMode mode) const;
 
 	BlendMode GetIDFromIdx(int idx) const;
 	int GetIdxFromID(BlendMode mode) const;
@@ -68,10 +68,10 @@ private:
 private:
 	 struct Item
 	 {
-		Item(BlendMode id, const std::string& name_en, const std::string& name_cn)
-			: id(id), name_en(name_en), name_cn(name_cn) {}
+		Item(BlendMode mode, const std::string& name_en, const std::string& name_cn)
+			: mode(mode), name_en(name_en), name_cn(name_cn) {}
 
-	 	BlendMode id;
+	 	BlendMode mode;
 	 	std::string name_en;
 	 	std::string name_cn;
 	 };

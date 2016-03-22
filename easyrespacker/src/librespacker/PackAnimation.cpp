@@ -150,6 +150,7 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
+	trans.blend = int(spr->GetBlendMode());
 }
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)

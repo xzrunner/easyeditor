@@ -42,14 +42,15 @@ public:
 		uint32_t additive;
 		uint32_t rmap, gmap, bmap;
 
-		int program;
+		int blend;
 
 		SpriteTrans() 
 			: color(0xffffffff)
 			, additive(0)
 			, rmap(0xff0000ff)
 			, gmap(0x00ff00ff) 
-			, bmap(0x0000ffff) {
+			, bmap(0x0000ffff)
+			, blend(0) {
 			mat[1] = mat[2] = mat[4] = mat[5] = 0;
 			mat[0] = mat[3] = 1024;
 		}
