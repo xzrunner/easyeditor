@@ -216,19 +216,19 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
  		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
  		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
 
-		Vector tex_coolds_base[4];
+		Vector tex_coords_base[4];
 		SpriteRenderer* rd = SpriteRenderer::Instance();
 		const Camera* cam = rd->GetCamera();
 		assert(cam);
 		int w, h;
 		ScreenCache::Instance()->GetSize(w, h);
 		for (int i = 0; i < 4; ++i) {
-			tex_coolds_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
-			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
-			tex_coolds_base[i].x /= w;
-			tex_coolds_base[i].y /= h;
+			tex_coords_base[i] = cam->TransPosProjectToScreen(vertices_scr[i], w, h);
+			tex_coords_base[i].y = h - 1 - tex_coords_base[i].y;
+			tex_coords_base[i].x /= w;
+			tex_coords_base[i].y /= h;
 		}
-		shader->Draw(vertices, texcoords, tex_coolds_base, texid, ScreenCache::Instance()->GetTexID());
+		shader->Draw(vertices, texcoords, tex_coords_base, texid, ScreenCache::Instance()->GetTexID());
 	}
 	else 
 	{
