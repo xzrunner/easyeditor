@@ -40,10 +40,10 @@ std::string LRPacker::Usage() const
 	return usage;
 }
 
-void LRPacker::Run(int argc, char *argv[])
+int LRPacker::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 5)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 5)) return -1;
+	if (!check_file(argv[2])) return -1;
 //	if (!check_file(argv[6])) return;
 
 	std::string tmp_dir = argv[3];
@@ -60,11 +60,11 @@ void LRPacker::Run(int argc, char *argv[])
 	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
-		return;
+		return -2;
 	}
 
 	if (glewInit() != GLEW_OK) {
-		return;
+		return -2;
 	}
 
 	ee::ShaderMgr::Instance()->reload();
@@ -74,14 +74,16 @@ void LRPacker::Run(int argc, char *argv[])
 	// 0
 	LRExpandGroup ex_group;
 	ex_group.Run(argv[2]);
+	std::string group_outfile = ex_group.GetOutputFilepath(argv[2]);
 
 	// 1
 	LRExpandInherit ex_inherit;
-	ex_inherit.Run(argv[2]);
+	ex_inherit.Run(group_outfile);
+	std::string file_outfile = ex_inherit.GetOutputFilepath(group_outfile);
 
 	// 2
 	LRSeparateComplex sep;
-	sep.Run(ex_inherit.GetOutputFilepath(argv[2]), "", tmp_lr_file);
+	sep.Run(file_outfile, "", tmp_lr_file);
 
 	// 3
 	LRToComplex tocomplex;
@@ -98,7 +100,10 @@ void LRPacker::Run(int argc, char *argv[])
 	}
 
 	// end
-	wxRemoveFile(ex_inherit.GetOutputFilepath(argv[2]));
+	wxRemoveFile(group_outfile);
+	wxRemoveFile(file_outfile);
+
+	return 0;
 }
 
 void LRPacker::PackEP(const std::string& tmp_dir, const std::string& tmp_lr_file,

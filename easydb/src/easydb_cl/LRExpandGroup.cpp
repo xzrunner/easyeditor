@@ -25,12 +25,14 @@ std::string LRExpandGroup::Usage() const
 	return usage;
 }
 
-void LRExpandGroup::Run(int argc, char *argv[])
+int LRExpandGroup::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void LRExpandGroup::Run(const std::string& filepath)
@@ -54,12 +56,20 @@ void LRExpandGroup::Run(const std::string& filepath)
 		layer_val = lr_val["layer"][idx++];
 	}
 
+	std::string out_path = GetOutputFilepath(filepath);
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.c_str());
+	std::ofstream fout(out_path.c_str());
 	std::locale::global(std::locale("C"));
 	writer.write(fout, new_lr_val);
 	fout.close();
+}
+
+std::string LRExpandGroup::GetOutputFilepath(const std::string& filepath) const
+{
+	std::string out_path = filepath;
+	out_path.insert(filepath.find("_lr.json"), "_group");
+	return out_path;
 }
 
 void LRExpandGroup::Expand(const Json::Value& src_val, Json::Value& dst_val)
