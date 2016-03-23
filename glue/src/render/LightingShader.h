@@ -34,7 +34,7 @@ public:
 	virtual void Reset();
 
 	void SetProjection(int width, int height);
-	void SetModelView(const vec2& offset, float scale);
+	void SetModelView(const mat4& mat);
 
 	void SetMaterial(const vec3& ambient, const vec3& diffuse, 
 		const vec3& specular, float shininess);
@@ -43,9 +43,8 @@ public:
 
 	void Draw(m3_mesh* mesh);
 
-public:
-	static const int VIEW_FAR = 50;
-	static const int VIEW_NEAR = 2;
+private:
+	mat4 m_mat;
 
 }; // LightingShader
 

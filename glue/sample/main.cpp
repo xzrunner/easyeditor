@@ -33,6 +33,12 @@ display(void) {
 	std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++\n";
 }
 
+void
+update(void) {
+	task->Update();
+	glutPostRedisplay();
+}
+
 void 
 init(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -66,6 +72,7 @@ main(int argc, char** argv) {
 	init();
 
 	glutDisplayFunc(display);
+	glutIdleFunc(update);
 	glutReshapeFunc(resize);
 
 	glutMainLoop();

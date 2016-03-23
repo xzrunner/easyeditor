@@ -3,6 +3,8 @@
 
 #include "TestTask.h"
 
+#include <glue.h>
+
 struct m3_mesh;
 
 namespace test
@@ -18,6 +20,9 @@ public:
 
 private:
 	m3_mesh* m_mesh;
+
+	float m_angle;
+	float m_z;
 
 }; // TestLighting
 

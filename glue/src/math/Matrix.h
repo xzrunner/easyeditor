@@ -3,6 +3,8 @@
 
 #include "Vector.h"
 
+#include <math.h>
+
 namespace glue
 {
 

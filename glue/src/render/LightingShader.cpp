@@ -9,6 +9,9 @@
 namespace glue
 {
 
+static const float VIEW_FAR = 5000;
+static const float VIEW_NEAR = 0.1f;
+
 LightingShader::LightingShader()
 {
 }
@@ -20,7 +23,10 @@ LightingShader::~LightingShader()
 void LightingShader::Load()
 {
 	sl_lighting_load();
-	sl_lighting_modelview(0, 0, 1, 1);
+
+	sl_mat4 mat;
+	memcpy(mat.x, m_mat.x, sizeof(mat));
+	sl_lighting_modelview(&mat);
 }
 
 void LightingShader::Unload()
@@ -57,9 +63,12 @@ void LightingShader::SetProjection(int width, int height)
 	sl_lighting_projection(width, height, VIEW_NEAR, VIEW_FAR);
 }
 
-void LightingShader::SetModelView(const vec2& offset, float scale)
+void LightingShader::SetModelView(const mat4& mat)
 {
-	sl_lighting_modelview(offset.x, offset.y, scale, scale);
+	m_mat = mat;
+	sl_mat4 sl_mat;
+	memcpy(sl_mat.x, m_mat.x, sizeof(sl_mat));
+	sl_lighting_modelview(&sl_mat);
 }
 
 void LightingShader::SetMaterial(const vec3& ambient, const vec3& diffuse, 
