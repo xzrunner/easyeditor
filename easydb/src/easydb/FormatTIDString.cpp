@@ -25,12 +25,14 @@ std::string FormatTIDString::Usage() const
 	return Command() + " [dir path]";
 }
 
-void FormatTIDString::Run(int argc, char *argv[])
+int FormatTIDString::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void FormatTIDString::Trigger(const std::string& dir) const

@@ -35,18 +35,20 @@ std::string TrimImage::Usage() const
 	return Command() + " [src dir] [dst dir]";
 }
 
-void TrimImage::Run(int argc, char *argv[])
+int TrimImage::Run(int argc, char *argv[])
 {
 	// trim-image e:/test2/1001 e:/test2/output
 
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	bool old = setting.pre_multi_alpha;
 	setting.pre_multi_alpha = false;
 	Trigger(argv[2], argv[3]);
 	setting.pre_multi_alpha = old;
+
+	return 0;
 }
 
 void TrimImage::Trigger(const std::string& src_dir, const std::string& dst_dir)

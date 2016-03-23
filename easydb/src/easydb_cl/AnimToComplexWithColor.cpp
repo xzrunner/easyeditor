@@ -31,12 +31,14 @@ std::string AnimToComplexWithColor::Usage() const
 	return usage;
 }
 
-void AnimToComplexWithColor::Run(int argc, char *argv[])
+int AnimToComplexWithColor::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void AnimToComplexWithColor::Run(const std::string& cfg_filepath)

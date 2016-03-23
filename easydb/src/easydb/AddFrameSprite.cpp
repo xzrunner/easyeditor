@@ -27,13 +27,15 @@ std::string AddFrameSprite::Usage() const
 	return Command() + " [dir path] [sprite path]";
 }
 
-void AddFrameSprite::Run(int argc, char *argv[])
+int AddFrameSprite::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_file(argv[3])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_file(argv[3])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_path) const

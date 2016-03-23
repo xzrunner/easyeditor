@@ -42,22 +42,22 @@ std::string RotateTrimImage::Usage() const
 	return Command() + " [dir path]";
 }
 
-void RotateTrimImage::Run(int argc, char *argv[])
+int RotateTrimImage::Run(int argc, char *argv[])
 {
 	// rotate-trim e:/test2/1001
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	glfwInit();
 	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
-		return;
+		return -2;
 	}
 
 	if (glewInit() != GLEW_OK) {
-		return;
+		return -2;
 	}
 
 	ee::ShaderMgr::Instance()->reload();
@@ -74,6 +74,8 @@ void RotateTrimImage::Run(int argc, char *argv[])
 
 	data.open_image_edge_clip = ori_clip_cfg;
 	data.pre_multi_alpha = ori_alpha_cfg;
+
+	return 0;
 }
 
 const char* RotateTrimImage::GetOutputFileName()

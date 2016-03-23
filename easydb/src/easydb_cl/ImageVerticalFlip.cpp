@@ -32,12 +32,14 @@ std::string ImageVerticalFlip::Usage() const
 	return Command() + " [path]";
 }
 
-void ImageVerticalFlip::Run(int argc, char *argv[])
+int ImageVerticalFlip::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
+	if (!check_number(this, argc, 3)) return -1;
 //	if (!check_folder(argv[2])) return;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void ImageVerticalFlip::Trigger(const std::string& path) const

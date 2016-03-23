@@ -33,14 +33,16 @@ std::string PackRes::Usage() const
 	return Command() + " [config file path]";
 }
 
-void PackRes::Run(int argc, char *argv[])
+int PackRes::Run(int argc, char *argv[])
 {
 	// pack-coco E:\debug\rpack\config.json
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void PackRes::Trigger(const std::string& config_path)

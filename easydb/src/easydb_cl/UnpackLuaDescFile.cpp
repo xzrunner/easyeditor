@@ -24,12 +24,14 @@ std::string UnpackLuaDescFile::Usage() const
 	return Command() + " [lua file] [img name]";
 }
 
-void UnpackLuaDescFile::Run(int argc, char *argv[])
+int UnpackLuaDescFile::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void UnpackLuaDescFile::Trigger(const std::string& lua_file, const std::string& img_name)

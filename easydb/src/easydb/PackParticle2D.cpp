@@ -23,12 +23,14 @@ std::string PackParticle2D::Usage() const
 	return Command() + " [dir path] [output file]";
 }
 
-void PackParticle2D::Run(int argc, char *argv[])
+int PackParticle2D::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void PackParticle2D::Trigger(const std::string& dir, const std::string& out)

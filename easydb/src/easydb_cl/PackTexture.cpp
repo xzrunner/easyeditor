@@ -34,19 +34,19 @@ std::string PackTexture::Usage() const
 	return cmd0 + " or " + cmd1;
 }
 
-void PackTexture::Run(int argc, char *argv[])
+int PackTexture::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
+	if (!check_number(this, argc, 3)) return -1;
 
 	glfwInit();
 	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
-		return;
+		return -2;
 	}
 
 	if (glewInit() != GLEW_OK) {
-		return;
+		return -2;
 	}
 
 	ee::ShaderMgr::Instance();
@@ -76,6 +76,8 @@ void PackTexture::Run(int argc, char *argv[])
 		}
 		RunFromCmd(trim, argv[2], ignore, argv[3], -1, atof(argv[5]), atof(argv[4]), extrude, extrude, start_id);
 	}
+
+	return 0;
 }
 
 void PackTexture::RunFromConfig(const std::string& cfg_file)

@@ -23,13 +23,15 @@ std::string BinEP::Usage() const
 	return Command() + " [filename] [type] [output]";
 }
 
-void BinEP::Run(int argc, char *argv[])
+int BinEP::Run(int argc, char *argv[])
 {
 	// epbin E:\debug\sg_ui\ui2 png E:\debug\sg_ui\ui2
 
-	if (!check_number(this, argc, 5)) return;
+	if (!check_number(this, argc, 5)) return -1;
 
 	Trigger(argv[2], argv[3], argv[4]);
+
+	return 0;
 }
 
 void BinEP::Trigger(const std::string& filename, const std::string& type, 

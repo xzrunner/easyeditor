@@ -21,7 +21,7 @@ public:
 	virtual std::string Command() const;
 	virtual std::string Description() const;
 	virtual std::string Usage() const;
-	virtual void Run(int argc, char *argv[]);
+	virtual int Run(int argc, char *argv[]);
 
 	static ICommand* Create() { return new FixRotateTrimJson(); }
 

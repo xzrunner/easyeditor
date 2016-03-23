@@ -36,14 +36,16 @@ std::string RectCutWithJson::Usage() const
 	return Command() + " [src dir] [dst dir]";
 }
 
-void RectCutWithJson::Run(int argc, char *argv[])
+int RectCutWithJson::Run(int argc, char *argv[])
 {
 	// rect-cut-with-json e:/test2/1001 e:/test2/1002
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void RectCutWithJson::Trigger(const std::string& src_dir, const std::string& dst_dir)

@@ -25,12 +25,14 @@ std::string LRExpandInherit::Usage() const
 	return usage;
 }
 
-void LRExpandInherit::Run(int argc, char *argv[])
+int LRExpandInherit::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void LRExpandInherit::Run(const std::string& filepath)
@@ -68,7 +70,7 @@ void LRExpandInherit::Run(const std::string& filepath)
 std::string LRExpandInherit::GetOutputFilepath(const std::string& filepath) const
 {
 	std::string out_path = filepath;
-	out_path.insert(filepath.find("_lr.json"), "_ext");
+	out_path.insert(filepath.find("_lr.json"), "_file");
 	return out_path;
 }
 

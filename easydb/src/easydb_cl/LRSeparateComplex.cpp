@@ -31,16 +31,18 @@ std::string LRSeparateComplex::Usage() const
 	return usage;
 }
 
-void LRSeparateComplex::Run(int argc, char *argv[])
+int LRSeparateComplex::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	m_point_dir = argv[3];
 	m_output_dir = ee::FileHelper::GetFileDir(argv[4]);
 	m_output_name = ee::FileHelper::GetFilenameWithExtension(argv[4]);
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void LRSeparateComplex::Run(const std::string& lr_file, const std::string& point_dir, 

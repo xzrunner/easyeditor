@@ -26,14 +26,16 @@ std::string NumberImages::Usage() const
 	return Command() + " [dir src] [dst file]";
 }
 
-void NumberImages::Run(int argc, char *argv[])
+int NumberImages::Run(int argc, char *argv[])
 {
 	// num-imgs E:\debug\character E:\debug\character\num_image.txt
 
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void NumberImages::Trigger(const std::string& src_dir, const std::string& dst_file)

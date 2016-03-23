@@ -27,12 +27,14 @@ std::string LRToComplex::Usage() const
 	return usage;
 }
 
-void LRToComplex::Run(int argc, char *argv[])
+int LRToComplex::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void LRToComplex::Run(const std::string& filepath)

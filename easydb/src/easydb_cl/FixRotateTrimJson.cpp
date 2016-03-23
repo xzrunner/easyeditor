@@ -27,14 +27,16 @@ std::string FixRotateTrimJson::Usage() const
 	return Command() + " [dir]";
 }
 
-void FixRotateTrimJson::Run(int argc, char *argv[])
+int FixRotateTrimJson::Run(int argc, char *argv[])
 {
 	// fix-rotate-trim D:\projects\ejoy\coco-tools\sg_particle\data\json_and_pngs
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void FixRotateTrimJson::Trigger(const std::string& dir)

@@ -24,13 +24,15 @@ std::string UniqueImage::Usage() const
 	return Command() + " [img path] [json path]";
 }
 
-void UniqueImage::Run(int argc, char *argv[])
+int UniqueImage::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void UniqueImage::Trigger(const std::string& imgdir, const std::string& jsondir)

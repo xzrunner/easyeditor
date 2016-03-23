@@ -22,10 +22,10 @@ std::string VerifyImage::Usage() const
 	return Command() + " [dir path] (-r)or(--remove)";
 }
 
-void VerifyImage::Run(int argc, char *argv[])
+int VerifyImage::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 	
 	if (argc >= 4) {
 		_delete_surplus = check_params(argv[3], "-r", "--remove");
@@ -34,6 +34,8 @@ void VerifyImage::Run(int argc, char *argv[])
 	}
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void VerifyImage::Trigger(const std::string& dirpath)

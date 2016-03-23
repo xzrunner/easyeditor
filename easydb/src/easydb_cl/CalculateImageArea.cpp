@@ -27,14 +27,16 @@ std::string CalImageArea::Usage() const
 	return Command() + " [dir path]";
 }
 
-void CalImageArea::Run(int argc, char *argv[])
+int CalImageArea::Run(int argc, char *argv[])
 {
 	// image-area e:/test2/1001
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void CalImageArea::Trigger(const std::string& dir)

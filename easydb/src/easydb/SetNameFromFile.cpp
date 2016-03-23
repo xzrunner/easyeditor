@@ -30,16 +30,18 @@ std::string SetNameFromFile::Usage() const
 	return Command() + " [dir path] (-c)or(--complex)";
 }
 
-void SetNameFromFile::Run(int argc, char *argv[])
+int SetNameFromFile::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	if (argc >= 4) {
 		m_do_complex = check_params(argv[3], "-c", "--complex");
 	}
 
 	AddNameFromFile(argv[2]);
+
+	return 0;
 }
 
 void SetNameFromFile::AddNameFromFile(const std::string& dir) const

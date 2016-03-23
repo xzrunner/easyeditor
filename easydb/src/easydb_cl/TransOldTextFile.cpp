@@ -27,12 +27,14 @@ std::string TransOldTextFile::Usage() const
 	return usage;
 }
 
-void TransOldTextFile::Run(int argc, char *argv[])
+int TransOldTextFile::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void TransOldTextFile::Run(const std::string& folder)

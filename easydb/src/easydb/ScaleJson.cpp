@@ -23,14 +23,16 @@ std::string ScaleJson::Usage() const
 	return Command() + " [dir path] [scale] [sprite filename]";
 }
 
-void ScaleJson::Run(int argc, char *argv[])
+int ScaleJson::Run(int argc, char *argv[])
 {
 	// scale-json E:\test2\2000cunminnan 0.5f shadow.png
 
-	if (!check_number(this, argc, 5)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 5)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2], atof(argv[3]), argv[4]);
+
+	return 0;
 }
 
 void ScaleJson::Trigger(const std::string& dir, float scale, const std::string& sprite_filename) const

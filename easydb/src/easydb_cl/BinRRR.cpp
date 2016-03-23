@@ -25,15 +25,17 @@ std::string BinRRR::Usage() const
 	return Command() + " [src dir] [img id file] [dst file] [tex format]";
 }
 
-void BinRRR::Run(int argc, char *argv[])
+int BinRRR::Run(int argc, char *argv[])
 {
 	// bin-rrr e:\debug\cut e:\debug\cut\imgid.txt e:\debug\pack\2013baji.rrr pvr
 
-	if (!check_number(this, argc, 6)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_file(argv[3])) return;
+	if (!check_number(this, argc, 6)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_file(argv[3])) return -1;
 
 	Trigger(argv[2], argv[3], argv[4], argv[5]);
+
+	return 0;
 }
 
 void BinRRR::Trigger(const std::string& src_dir, const std::string& img_id_file, 

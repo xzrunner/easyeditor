@@ -25,14 +25,16 @@ std::string ChangeJsonName::Usage() const
 	return Command() + " [dir path] [postfix]";
 }
 
-void ChangeJsonName::Run(int argc, char *argv[])
+int ChangeJsonName::Run(int argc, char *argv[])
 {
 	// rename-json E:\test2\2000cunminnan particle
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void ChangeJsonName::Trigger(const std::string& dir, const std::string& postfix) const

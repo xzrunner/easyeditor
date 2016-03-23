@@ -25,14 +25,16 @@ std::string FixSpriteColor::Usage() const
 	return Command() + " [dir]";
 }
 
-void FixSpriteColor::Run(int argc, char *argv[])
+int FixSpriteColor::Run(int argc, char *argv[])
 {
 	// fix-color D:\projects\ejoy\coco-tools\sg_particle\data\json_and_pngs
 
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 bool FixSpriteColor::FixSprite(const std::string& filepath, Json::Value& sprite_val) const

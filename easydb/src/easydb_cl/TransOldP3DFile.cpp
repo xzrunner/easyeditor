@@ -27,12 +27,14 @@ std::string TransOldP3DFile::Usage() const
 	return usage;
 }
 
-void TransOldP3DFile::Run(int argc, char *argv[])
+int TransOldP3DFile::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Run(argv[2]);
+
+	return 0;
 }
 
 void TransOldP3DFile::Run(const std::string& folder)

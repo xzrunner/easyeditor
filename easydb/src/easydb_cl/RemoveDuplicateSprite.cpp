@@ -26,12 +26,14 @@ std::string RemoveDuplicateSprite::Usage() const
 	return usage;
 }
 
-void RemoveDuplicateSprite::Run(int argc, char *argv[])
+int RemoveDuplicateSprite::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_file(argv[2])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_file(argv[2])) return -1;
 
 	Run(argv[2], argv[3]);
+
+	return 0;
 }
 
 void RemoveDuplicateSprite::Run(const std::string& filepath, const std::string& key)

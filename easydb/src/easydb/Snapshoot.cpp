@@ -33,21 +33,21 @@ std::string Snapshoot::Usage() const
 	return Command() + " [src path] [dst path]";
 }
 
-void Snapshoot::Run(int argc, char *argv[])
+int Snapshoot::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	glfwInit();
 	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
-		return;
+		return -2;
 	}
 
 	if (glewInit() != GLEW_OK) {
-		return;
+		return -2;
 	}
 
 	ee::ShaderMgr::Instance()->reload();
@@ -55,6 +55,8 @@ void Snapshoot::Run(int argc, char *argv[])
 	ee::Snapshoot ss;
 
 	Run(ss, argv[2], argv[3]);
+
+	return 0;
 }
 
 void Snapshoot::Run(ee::Snapshoot& ss, const std::string& srcdir, const std::string& dstdir) const

@@ -36,23 +36,23 @@ std::string RotateImage::Usage() const
 	return Command() + " [src dir] [dst dir]";
 }
 
-void RotateImage::Run(int argc, char *argv[])
+int RotateImage::Run(int argc, char *argv[])
 {
 	// rotate-image e:/test2/1001 e:/test2/1001
 
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	glfwInit();
 	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 	{
 		glfwTerminate();
-		return;
+		return -2;
 	}
 
 	if (glewInit() != GLEW_OK) {
-		return;
+		return -2;
 	}
 
 	ee::ShaderMgr::Instance()->reload();
@@ -69,6 +69,8 @@ void RotateImage::Run(int argc, char *argv[])
 
 	data.open_image_edge_clip = ori_clip_cfg;
 	data.pre_multi_alpha = ori_alpha_cfg;
+
+	return 0;
 }
 
 void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const std::string& dst_dir)

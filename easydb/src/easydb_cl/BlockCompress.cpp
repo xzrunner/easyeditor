@@ -26,13 +26,15 @@ std::string BlockCompress::Usage() const
 	return Command() + " [src dir] [dst dir]";
 }
 
-void BlockCompress::Run(int argc, char *argv[])
+int BlockCompress::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 

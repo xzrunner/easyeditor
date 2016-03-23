@@ -35,18 +35,20 @@ std::string AverageRectCut::Usage() const
 	return Command() + " [src dir] [dst dir]";
 }
 
-void AverageRectCut::Run(int argc, char *argv[])
+int AverageRectCut::Run(int argc, char *argv[])
 {
 	// average-rect-cut e:/test2/1001 e:/test2/1001 256
 
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	bool old = setting.pre_multi_alpha;
 	setting.pre_multi_alpha = false;
 	Trigger(argv[2], argv[3], atoi(argv[4]));
 	setting.pre_multi_alpha = old;
+
+	return 0;
 }
 
 void AverageRectCut::Trigger(const std::string& src_dir, const std::string& dst_dir, int min_edge)

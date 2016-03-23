@@ -25,13 +25,15 @@ std::string TransToPVR::Usage() const
 	return Command() + " [path]";
 }
 
-void TransToPVR::Run(int argc, char *argv[])
+int TransToPVR::Run(int argc, char *argv[])
 {
 	// trans2pvr e:/test2/1001
 
-	if (!check_number(this, argc, 3)) return;
+	if (!check_number(this, argc, 3)) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void TransToPVR::Trigger(const std::string& path)

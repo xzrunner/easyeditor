@@ -27,11 +27,11 @@ std::string PackEP::Usage() const
 	return Command() + " [json dir] [tp json] [tp dir] [output file] [output type] [LOD] [SCALE]";
 }
 
-void PackEP::Run(int argc, char *argv[])
+int PackEP::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 7)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[4])) return;
+	if (!check_number(this, argc, 7)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[4])) return -1;
 
 	int LOD = 0;
 	if (argc >= 8) {
@@ -48,11 +48,11 @@ void PackEP::Run(int argc, char *argv[])
 		if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
 		{
 			glfwTerminate();
-			return;
+			return -2;
 		}
 
 		if (glewInit() != GLEW_OK) {
-			return;
+			return -2;
 		}
 
 		ee::ShaderMgr::Instance()->reload();
@@ -60,6 +60,8 @@ void PackEP::Run(int argc, char *argv[])
 
 // 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], LOD, scale);
 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);
+
+	return 0;
 }
 
 // void PackEP::Trigger(const std::string& pkgs_cfg_file,

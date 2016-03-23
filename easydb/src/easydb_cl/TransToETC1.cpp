@@ -24,13 +24,15 @@ std::string TransToETC1::Usage() const
 	return Command() + " [path]";
 }
 
-void TransToETC1::Run(int argc, char *argv[])
+int TransToETC1::Run(int argc, char *argv[])
 {
 	// trans2etc1 e:/test2/1001
 
-	if (!check_number(this, argc, 3)) return;
+	if (!check_number(this, argc, 3)) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 void TransToETC1::Trigger(const std::string& path)

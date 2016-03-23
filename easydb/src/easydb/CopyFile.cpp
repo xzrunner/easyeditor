@@ -26,18 +26,18 @@ std::string CopyFile::Usage() const
 	return usage;
 }
 
-void CopyFile::Run(int argc, char *argv[])
+int CopyFile::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 6)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 6)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	// todo
 	std::string opt = argv[3];
 	if (opt != "-l" || opt != "--list") {
 		std::cerr << "error opt" << std::endl;
 		std::cerr << Usage() << std::endl;
-		return;
+		return -1;
 	}
 
 //	Trigger(argv[2]);
@@ -46,8 +46,11 @@ void CopyFile::Run(int argc, char *argv[])
 	if (opt == "-s" || opt == "--scale") {
 //		CopyByExportNames(argv[4], atof(argv[5]));
 	} else {
-		std::cerr << "unknown option" << std::endl;
+		std::cout << "unknown option" << std::endl;
+		return -1;
 	}
+
+	return 0;
 }
 
 void CopyFile::Init(const std::string& src_dir, const std::string& dst_dir)

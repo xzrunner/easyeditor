@@ -21,15 +21,17 @@ std::string BinRRP::Usage() const
 	return Command() + " [json file] [images id file]";
 }
 
-void BinRRP::Run(int argc, char *argv[])
+int BinRRP::Run(int argc, char *argv[])
 {
 	// bin-rrp E:\debug\character\pack.json E:\debug\character\id_images.txt
 
-	if (!check_number(this, argc, 4)) return;
-	if (!check_file(argv[2])) return;
-	if (!check_file(argv[3])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_file(argv[2])) return -1;
+	if (!check_file(argv[3])) return -1;
 
 	Trigger(argv[2], argv[3]);
+
+	return 0;
 }
 
 void BinRRP::Trigger(const std::string& json_file, 

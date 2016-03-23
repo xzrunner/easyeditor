@@ -31,12 +31,14 @@ std::string OutlineImage::Usage() const
 	return Command() + " [dir]";
 }
 
-void OutlineImage::Run(int argc, char *argv[])
+int OutlineImage::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 3)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 3)) return -1;
+	if (!check_folder(argv[2])) return -1;
 
 	Trigger(argv[2]);
+
+	return 0;
 }
 
 

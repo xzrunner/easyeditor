@@ -23,15 +23,17 @@ std::string PackRegularRect::Usage() const
 	return Command() + " [src dir] [dst dir] [name]";
 }
 
-void PackRegularRect::Run(int argc, char *argv[])
+int PackRegularRect::Run(int argc, char *argv[])
 {
 	// pack-rect e:\debug\cut e:\debug\pack 2013baji
 
-	if (!check_number(this, argc, 5)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 5)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	Trigger(argv[2], argv[3], argv[4]);
+
+	return 0;
 }
 
 void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst_dir,

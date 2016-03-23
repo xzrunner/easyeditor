@@ -23,10 +23,10 @@ std::string PackEPT::Usage() const
 	return Command() + " [tp json] [tp dir] [output file] [output type]";
 }
 
-void PackEPT::Run(int argc, char* argv[])
+int PackEPT::Run(int argc, char* argv[])
 {
-	if (!check_number(this, argc, 4)) return;
-	if (!check_folder(argv[3])) return;
+	if (!check_number(this, argc, 4)) return -1;
+	if (!check_folder(argv[3])) return -1;
 
 	erespacker::TextureType type = erespacker::TT_PNG8;
 	char* stype = argv[5];
@@ -36,6 +36,8 @@ void PackEPT::Run(int argc, char* argv[])
 		type = erespacker::TT_PVR;
 	}	
 	Trigger(argv[2], argv[3], argv[4], type);
+
+	return 0;
 }
 
 void PackEPT::Trigger(const std::string& tp_json, const std::string& tp_dir, 

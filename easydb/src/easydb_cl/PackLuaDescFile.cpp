@@ -30,13 +30,15 @@ std::string PackLuaDescFile::Usage() const
 	return Command() + " [json dir] [tp json] [tp dir] [output file]";
 }
 
-void PackLuaDescFile::Run(int argc, char *argv[])
+int PackLuaDescFile::Run(int argc, char *argv[])
 {
-	if (!check_number(this, argc, 6)) return;
-	if (!check_folder(argv[2])) return;
-	if (!check_folder(argv[4])) return;
+	if (!check_number(this, argc, 6)) return -1;
+	if (!check_folder(argv[2])) return -1;
+	if (!check_folder(argv[4])) return -1;
 
 	Trigger(argv[2], argv[3], argv[4], argv[5]);
+
+	return 0;
 }
 
 void PackLuaDescFile::Trigger(const std::string& json_dir, const std::string& tp_json,
