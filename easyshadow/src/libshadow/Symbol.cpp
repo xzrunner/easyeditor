@@ -3,6 +3,8 @@
 #include "config.h"
 #include "FileIO.h"
 
+#include <ee/SpriteTrans.h>
+
 namespace eshadow
 {
 
@@ -33,11 +35,11 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (m_shadow) {
-		m_shadow->Draw(mt, color.multi.a);
+		m_shadow->Draw(trans.mt, trans.color.multi.a);
 	}
 }
 

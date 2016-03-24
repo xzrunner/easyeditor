@@ -3,6 +3,7 @@
 #include "Shape.h"
 
 #include <ee/Matrix.h>
+#include <ee/SpriteTrans.h>
 
 namespace emesh
 {
@@ -17,7 +18,7 @@ bool EditUVOP::OnDraw() const
 {
 	if (Shape* shape = m_stage->GetShape())
 	{
-		shape->DrawTexture(ee::Matrix());
+		shape->DrawTexture(ee::SpriteTrans());
 		shape->DrawInfoXY();
 	}
 

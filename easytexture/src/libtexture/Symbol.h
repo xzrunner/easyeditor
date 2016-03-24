@@ -26,8 +26,8 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
-		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual void Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr = NULL, 
+		const ee::Sprite* root = NULL) const;
 	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	const std::vector<ee::Shape*>& GetAllShapes() const { return m_shapes; }

@@ -28,8 +28,8 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (!spr) {
 		return;

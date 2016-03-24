@@ -6,6 +6,7 @@
 #include <ee/panel_msg.h>
 #include <ee/Matrix.h>
 #include <ee/Image.h>
+#include <ee/SpriteTrans.h>
 
 namespace emesh
 {
@@ -111,8 +112,7 @@ bool CreateStripOP::OnDraw() const
 {
  	if (const ee::Image* image = m_stage->GetSymbol()->getImage())
   	{
- 		ee::Matrix mt;
- 		image->Draw(mt);
+		image->Draw(ee::SpriteTrans());
   	}
 
 	if (Shape* shape = m_stage->GetShape())

@@ -7,7 +7,7 @@
 #include <ee/Cloneable.h>
 #include <ee/Color.h>
 
-namespace ee { class Image; class Vector; class Rect; class Matrix; }
+namespace ee { class Image; class Vector; class Rect; class Matrix; class SpriteTrans; }
 
 namespace emesh
 {
@@ -40,10 +40,8 @@ public:
 
 	void DrawInfoUV() const;
 	void DrawInfoXY() const;
-	void DrawTexture(const ee::Matrix& mt, const ee::Colorf& mul = ee::Colorf(1, 1, 1, 1), 
-		const ee::Colorf& add = ee::Colorf(0, 0, 0, 0)) const;
-	void DrawTexture(const ee::Matrix& mt, const ee::Colorf& mul, 
-		const ee::Colorf& add, unsigned int texid) const;
+	void DrawTexture(const ee::SpriteTrans& trans) const;
+	void DrawTexture(const ee::SpriteTrans& trans, unsigned int texid) const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 

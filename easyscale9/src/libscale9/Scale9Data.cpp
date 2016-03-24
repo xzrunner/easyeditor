@@ -65,14 +65,14 @@ void Scale9Data::ReloadTexture() const
 	}
 }
 
-void Scale9Data::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-					  const ee::Sprite* spr, const ee::Sprite* root) const
+void Scale9Data::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+					  const ee::Sprite* root) const
 {
 	if (spr) {
 		const Sprite* _spr = static_cast<const Sprite*>(spr);
-		_spr->Draw(mt, color);
+		_spr->Draw(trans);
 	} else {
-		DrawScale9(m_type, m_sprites, mt, color, root);
+		DrawScale9(m_type, m_sprites, trans, root);
 	}
 }
 
@@ -178,8 +178,8 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 	ResizeScale9(m_type, m_sprites, m_width, m_height);
 }
 
-void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], const ee::Matrix& mt,
-							const ee::ColorTrans& color, const ee::Sprite* root)
+void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
+							const ee::SpriteTrans& trans, const ee::Sprite* root)
 {
 	switch (type)
 	{
@@ -187,7 +187,7 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], co
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, mt, color);
+				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, trans);
 			}
 		}
 		break;
@@ -196,27 +196,27 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], co
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, mt, color);
+				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, trans);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[1][i]) continue;
-			ee::SpriteRenderer::Instance()->Draw(sprites[1][i], root, mt, color);
+			ee::SpriteRenderer::Instance()->Draw(sprites[1][i], root, trans);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[i][1]) continue;
-			ee::SpriteRenderer::Instance()->Draw(sprites[i][1], root, mt, color);
+			ee::SpriteRenderer::Instance()->Draw(sprites[i][1], root, trans);
 		}
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, mt, color);
+				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, trans);
 			}
 		}
 		break;

@@ -6,6 +6,7 @@
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
 #include <ee/FileHelper.h>
+#include <ee/SpriteTrans.h>
 
 #include <algorithm>
 
@@ -46,8 +47,8 @@ void Symbol::ReloadTexture() const
 	}	
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	clock_t curr = clock();
 	if (m_time == 0) {
@@ -57,7 +58,7 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
 	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(color);
+	shader->SetColor(trans.color);
 
 	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -65,7 +66,7 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 		if (m_update) {
 			ocean->Update(dt);
 		}
-		ocean->Draw(mt, color.multi, color.add, false);
+		ocean->Draw(trans, false);
 	}
 
 	m_time = curr;

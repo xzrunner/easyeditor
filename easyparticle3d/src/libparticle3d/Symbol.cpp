@@ -7,6 +7,7 @@
 
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
+#include <ee/SpriteTrans.h>
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
@@ -42,24 +43,24 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (!spr) {
 		return;
 	}
 
 	Sprite* p3d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
-	p3d_spr->SetMatrix(mt);
+	p3d_spr->SetMatrix(trans.mt);
 	if (p3d_spr->IsAlone()) {
 		p3d_sprite* p3d = p3d_spr->GetP3D();
 		if (!p3d) {
 			return;
 		}
 		RenderParams* rp = static_cast<RenderParams*>(p3d->draw_params);
-		rp->mat = mt;
-		rp->ct = color;
-		const float* src = mt.GetElements();
+		rp->mat = trans.mt;
+		rp->ct = trans.color;
+		const float* src = trans.mt.GetElements();
 		p3d->mat[0] = src[0];
 		p3d->mat[1] = src[1];
 		p3d->mat[2] = src[4];
@@ -71,9 +72,9 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
 	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(color);
+	shader->SetColor(trans.color);
 
-	p3d_spr->Draw(mt);
+	p3d_spr->Draw(trans.mt);
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

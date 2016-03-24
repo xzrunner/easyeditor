@@ -7,6 +7,7 @@
 #include <ee/Image.h>
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
+#include <ee/SpriteTrans.h>
 
 namespace emesh
 {
@@ -61,8 +62,8 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (!m_shape) {
 		return;
@@ -71,9 +72,9 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
 	mgr->SetShader(ee::ShaderMgr::SPRITE);
 	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(color);
+	shader->SetColor(trans.color);
 
-	m_shape->DrawTexture(mt, color.multi, color.add);
+	m_shape->DrawTexture(trans);
 	if (!m_pause && spr) 
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);

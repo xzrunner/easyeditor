@@ -34,7 +34,7 @@ public:
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);
 
-	void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans()) const;
+	void Draw(const ee::SpriteTrans& trans) const;
 
 	Scale9Type GetScale9Type() const { return m_data.GetType(); }
 

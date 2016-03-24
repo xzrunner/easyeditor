@@ -101,7 +101,7 @@ void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 void ImageProcessCMPT::OnSetEdgeBlend(wxScrollEvent& event)
 {
 	if (m_edge_shader) {
-		ee::ShaderMgr::Instance()->Sprite();
+		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 		m_edge_shader->SetBlend(event.GetInt() * 0.01f);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
@@ -152,7 +152,7 @@ void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 void ImageProcessCMPT::OnSetBlurRadius(wxScrollEvent& event)
 {
 	if (m_blur_shader) {
-		ee::ShaderMgr::Instance()->Sprite();
+		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 		m_blur_shader->SetRadius(event.GetInt() * 0.1f);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}

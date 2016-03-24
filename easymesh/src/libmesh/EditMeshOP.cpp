@@ -9,6 +9,7 @@
 #include <ee/EE_RVG.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>
+#include <ee/SpriteTrans.h>
 
 namespace emesh
 {
@@ -98,7 +99,7 @@ bool EditMeshOP::OnDraw() const
 {
 	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape())
 	{
-		shape->DrawTexture(ee::Matrix());
+		shape->DrawTexture(ee::SpriteTrans());
 		shape->DrawInfoXY();
 	}
 

@@ -6,6 +6,7 @@
 #include <ee/BoundingBox.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolSearcher.h>
+#include <ee/SpriteTrans.h>
 
 #include <easycomplex.h>
 
@@ -40,21 +41,21 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (m_index != 0) {
-		Utility::DrawAnimSymbol(this, mt, m_index, color);
+		Utility::DrawAnimSymbol(this, trans.mt, m_index, trans.color);
 	} else {
 		static clock_t init = 0;
 		if (init == 0) {
 			init = clock();
-			Utility::DrawAnimSymbol(this, mt, 1, color);
+			Utility::DrawAnimSymbol(this, trans.mt, 1, trans.color);
 		} else {
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;
 			int index = during / (1.0f / m_fps);
-			Utility::DrawAnimSymbol(this, mt, index % getMaxFrameIndex() + 1, color);
+			Utility::DrawAnimSymbol(this, trans.mt, index % getMaxFrameIndex() + 1, trans.color);
 		}
 	}
 }

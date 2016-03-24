@@ -35,8 +35,7 @@ public:
 	void SetBlendSpeed(float spd);
 
 	void Update(float dt);
-	void Draw(const ee::Matrix& mt, const ee::Colorf& mul, 
-		const ee::Colorf& add, bool draw_tris) const;
+	void Draw(const ee::SpriteTrans& trans, bool draw_tris) const;
 
 	const eshape::PolygonShape* GetShape() const {
 		return m_shape;

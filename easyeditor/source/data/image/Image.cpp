@@ -27,6 +27,7 @@
 #include "FilterShader.h"
 #include "BlendShader.h"
 #include "Sprite3Shader.h"
+#include "SpriteTrans.h"
 
 namespace ee
 {
@@ -141,10 +142,11 @@ const uint8_t* Image::GetPixelData() const
 	return m_tex->GetPixelData(); 
 }
 
-void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, const Sprite* root) const
+void Image::Draw(const SpriteTrans& trans, const Sprite* spr, 
+				 const Sprite* root) const
 {
 	float hw = m_tex->GetWidth() * 0.5f,
-		hh = m_tex->GetHeight() * 0.5f;
+		  hh = m_tex->GetHeight() * 0.5f;
 
 	float px = 0, py = 0;
 	if (spr) {
@@ -154,11 +156,11 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 
 	Vector vertices[4];
 	vertices[0] = Vector(-hw - px, -hh - py);
-	vertices[1] = Vector(hw + px, -hh + py);
-	vertices[2] = Vector(hw - px, hh - py);
-	vertices[3] = Vector(-hw + px, hh + py);
+	vertices[1] = Vector( hw + px, -hh + py);
+	vertices[2] = Vector( hw - px,  hh - py);
+	vertices[3] = Vector(-hw + px,  hh + py);
 	for (int i = 0; i < 4; ++i) {
-		vertices[i] = Math2D::TransVector(vertices[i] + m_offset, mt);
+		vertices[i] = Math2D::TransVector(vertices[i] + m_offset, trans.mt);
 	}
 
 	int texid;
@@ -197,7 +199,7 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 	if (mgr->GetShader() == ShaderMgr::BLEND) 
 	{
 		BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
-		shader->SetColor(col);
+		shader->SetColor(trans.color);
 
 		assert(spr);
 
@@ -211,10 +213,10 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 		Vector vertices_scr[4];
 		float img_hw = m_tex->GetWidth() * 0.5f,
 			  img_hh = m_tex->GetHeight() * 0.5f;
- 		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), mt);
- 		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), mt);
- 		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), mt);
- 		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), mt);
+ 		vertices_scr[0] = Math2D::TransVector(Vector(-img_hw, -img_hh), trans.mt);
+ 		vertices_scr[1] = Math2D::TransVector(Vector( img_hw, -img_hh), trans.mt);
+ 		vertices_scr[2] = Math2D::TransVector(Vector( img_hw,  img_hh), trans.mt);
+ 		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), trans.mt);
 
 		Vector tex_coords_base[4];
 		SpriteRenderer* rd = SpriteRenderer::Instance();
@@ -235,7 +237,7 @@ void Image::Draw(const Matrix& mt, const ColorTrans& col, const Sprite* spr, con
 		if (Config::Instance()->GetSettings().orthogonal) 
 		{
 			SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-			shader->SetColor(col);
+			shader->SetColor(trans.color);
 			if (mgr->GetShader() == ShaderMgr::FILTER) {
 				FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
 				shader->Draw(vertices, texcoords, texid);

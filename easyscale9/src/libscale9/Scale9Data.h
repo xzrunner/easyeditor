@@ -1,9 +1,7 @@
 #ifndef _EASYSCALE9_SCALE9_DATA_H_
 #define _EASYSCALE9_SCALE9_DATA_H_
 
-namespace ee { class Matrix; class Sprite; class Vector; }
-
-#include <ee/ColorTrans.h>
+namespace ee { class Matrix; class Sprite; class Vector; class SpriteTrans; }
 
 #include <json/json.h>
 
@@ -32,8 +30,8 @@ public:
 
 	void ReloadTexture() const;
 
-	void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
-		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	void Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr = NULL, 
+		const ee::Sprite* root = NULL) const;
 
 	void GetSize(float& width, float& height) const;
 
@@ -46,8 +44,8 @@ public:
 	
 	ee::Sprite* GetSprite(int i, int j) const { return m_sprites[i][j]; }
 
-	static void DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], const ee::Matrix& mt, 
-		const ee::ColorTrans& color = ee::ColorTrans(), const ee::Sprite* root = NULL);
+	static void DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
+		const ee::SpriteTrans& trans, const ee::Sprite* root = NULL);
 
 	static void ResizeScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		float width, float height);

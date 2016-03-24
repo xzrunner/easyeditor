@@ -9,6 +9,7 @@
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
 #include <ee/SpriteShader.h>
+#include <ee/SpriteTrans.h>
 
 #include <set>
 #include <algorithm>
@@ -129,32 +130,25 @@ void Shape::DrawInfoXY() const
 	ee::RVG::Circles(nodes, m_node_radius, true);
 }
 
-void Shape::DrawTexture(const ee::Matrix& mt,
-						const ee::Colorf& mul, 
-						const ee::Colorf& add) const
+void Shape::DrawTexture(const ee::SpriteTrans& trans) const
 {
-	DrawTexture(mt, mul, add, m_texid);
+	DrawTexture(trans, m_texid);
 }
 
-void Shape::DrawTexture(const ee::Matrix& mt, 
-						const ee::Colorf& mul, 
-						const ee::Colorf& add,
+void Shape::DrawTexture(const ee::SpriteTrans& trans,
 						unsigned int texid) const
 {
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
 	mgr->SetShader(ee::ShaderMgr::SPRITE);
 	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	ee::ColorTrans color;
-	color.multi = mul;
-	color.add = add;
-	shader->SetColor(color);
+	shader->SetColor(trans.color);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
 		ee::Vector vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
-			vertices[i] = ee::Math2D::TransVector(tri->nodes[i]->xy, mt);
+			vertices[i] = ee::Math2D::TransVector(tri->nodes[i]->xy, trans.mt);
 			texcoords[i] = tri->nodes[i]->uv;
 		}
 		vertices[3] = vertices[2];

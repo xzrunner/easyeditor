@@ -100,10 +100,9 @@ void Sprite::SetSize(float w, float h)
 	BuildBounding();
 }
 
-void Sprite::Draw(const ee::Matrix& mt,
-				  const ee::ColorTrans& color) const
+void Sprite::Draw(const ee::SpriteTrans& trans) const
 {
-	m_data.Draw(mt, color);
+	m_data.Draw(trans);
 }
 
 }

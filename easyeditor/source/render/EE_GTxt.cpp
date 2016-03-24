@@ -187,9 +187,8 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 		return;
 	}
 
-	Symbol* sym = (Symbol*)ext_sym;
-	Matrix* mt = (Matrix*)ud;
-	SpriteRenderer::Instance()->Draw(sym, *mt, Vector(x, y));
+	SpriteRenderer::Instance()->Draw((Symbol*)ext_sym, 
+		SpriteTrans(*((Matrix*)ud)), Vector(x, y));
 }
 
 void GTxt::Draw(const gtxt_label_style& style, const Matrix& mt, const Colorf& mul, 

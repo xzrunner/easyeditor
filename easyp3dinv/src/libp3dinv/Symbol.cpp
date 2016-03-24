@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
 
+#include <ee/SpriteTrans.h>
+
 namespace ep3dinv
 {
 
@@ -22,12 +24,12 @@ void Symbol::ReloadTexture() const
 	// fixme
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (m_ps) {
 		m_ps->Update(1.0f / 30);
-		m_ps->Draw(mt);
+		m_ps->Draw(trans.mt);
 	}
 }
 

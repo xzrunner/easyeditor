@@ -9,6 +9,7 @@
 #include <ee/SettingData.h>
 #include <ee/Visitor.h>
 #include <ee/JsonSerializer.h>
+#include <ee/SpriteTrans.h>
 
 #include <fstream>
 
@@ -56,19 +57,19 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
  	if (m_bg) {
- 		m_bg->Draw(mt, color, spr);
+ 		m_bg->Draw(trans, spr);
  	}
 	if (ee::Config::Instance()->GetSettings().visible_shape)
 	{
 		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-			m_bg_outline[i]->Draw(mt);
+			m_bg_outline[i]->Draw(trans.mt);
 		}
 		for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
-			m_shapes[i]->Draw(mt);
+			m_shapes[i]->Draw(trans.mt);
 		}
 	}
 }

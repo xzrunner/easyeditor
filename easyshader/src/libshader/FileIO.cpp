@@ -49,9 +49,9 @@ Shader* FileIO::LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
 	Shader* shader = LoadShader(dir, value, toolbar, is_2d);
 	if (is_2d) {
 		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-		shader_mgr->Null();
+		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::COUNT);
 //		shader_mgr->SetSpriteShader(static_cast<ee::SpriteShader*>(shader->GetShaderImpl()));
-		shader_mgr->Sprite();
+		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 	} else {
 		e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
 		shader_mgr->Null();

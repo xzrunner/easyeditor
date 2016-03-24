@@ -5,15 +5,15 @@
 #include "UserDataImpl.h"
 #include "ResourcesMgr.h"
 #include "Rect.h"
-#include "ColorTrans.h"
 
 #include <set>
 
 namespace ee
 {
 
-class Sprite;
 class Matrix;
+class Sprite;
+class SpriteTrans;
 
 class Symbol : public ListItem, public UserDataImpl
 {
@@ -31,8 +31,8 @@ public:
 	virtual void ClearUserData(bool deletePtr);
 
 	virtual void ReloadTexture() const = 0;
-	virtual void Draw(const Matrix& mt, const ColorTrans& col = ColorTrans(), 
-		const Sprite* spr = NULL, const Sprite* root = NULL) const = 0;
+	virtual void Draw(const SpriteTrans& trans, const Sprite* spr = NULL, 
+		const Sprite* root = NULL) const = 0;
 	virtual Rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const Matrix& mt) const {}
 

@@ -7,6 +7,7 @@
 #include <ee/EE_GTxt.h>
 #include <ee/trans_color.h>
 #include <ee/Math2D.h>
+#include <ee/SpriteTrans.h>
 
 #include <gtxt.h>
 
@@ -27,15 +28,15 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
-		DrawBackground(spr, mt);
+		DrawBackground(spr, trans.mt);
 	} 
  	if (setting.visible_label_text) {
- 		DrawText(spr, mt, color.multi, color.add);
+ 		DrawText(spr, trans);
  	}
 }
 
@@ -101,8 +102,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) cons
 	}
 }
 
-void Symbol::DrawText(const ee::Sprite* sprite, const ee::Matrix& mt,
-					  const ee::Colorf& mul, const ee::Colorf& add) const
+void Symbol::DrawText(const ee::Sprite* sprite, const ee::SpriteTrans& trans) const
 {
 	if (!sprite) {
 		return;
@@ -127,7 +127,7 @@ void Symbol::DrawText(const ee::Sprite* sprite, const ee::Matrix& mt,
 		style.gs.edge_size = font->GetEdgeSize();
 		style.gs.edge_color.integer = color2int(font->GetEdgeColor(), ee::PT_RGBA);
 
-		ee::GTxt::Instance()->Draw(style, mt, mul, add, font->GetText(), font->GetTime());
+		ee::GTxt::Instance()->Draw(style, trans.mt, trans.color.multi, trans.color.add, font->GetText(), font->GetTime());
 		font->UpdateTime();
 	}
 }

@@ -23,8 +23,8 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color = ee::ColorTrans(), 
-		const ee::Sprite* spr = NULL, const ee::Sprite* root = NULL) const;
+	virtual void Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr = NULL, 
+		const ee::Sprite* root = NULL) const;
 	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
 	static ee::Symbol* Create() { return new Symbol(); }
@@ -34,7 +34,7 @@ protected:
 
 private:
 	void DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) const;
-	void DrawText(const ee::Sprite* sprite, const ee::Matrix& mt, const ee::Colorf& mul, const ee::Colorf& add) const;
+	void DrawText(const ee::Sprite* sprite, const ee::SpriteTrans& trans) const;
 
 private:
 	int m_width;

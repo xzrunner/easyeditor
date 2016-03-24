@@ -9,6 +9,7 @@
 #include "StringHelper.h"
 #include "EE_RVG.h"
 #include "Math2D.h"
+#include "SpriteTrans.h"
 
 #include <json/json.h>
 
@@ -35,16 +36,16 @@ void FontBlankSymbol::ReloadTexture() const
 {
 }
 
-void FontBlankSymbol::Draw(const Matrix& mt, const ColorTrans& col, 
-						   const Sprite* spr, const Sprite* root) const
+void FontBlankSymbol::Draw(const SpriteTrans& trans, const Sprite* spr, 
+						   const Sprite* root) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();
 	const FontBlankSprite* fb = (const FontBlankSprite*)spr;
 	if (setting.visible_label_bg) {
- 		DrawBackground(fb, mt);
+ 		DrawBackground(fb, trans.mt);
  	} 
 	if (setting.visible_label_text) {
-		DrawText(fb, mt);
+		DrawText(fb, trans.mt);
 	}
 }
 

@@ -24,10 +24,10 @@ void Symbol::ReloadTexture() const
 	m_data.ReloadTexture();
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
-	m_data.Draw(mt, color, spr, root);
+	m_data.Draw(trans, spr, root);
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite/* = NULL*/) const

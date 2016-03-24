@@ -67,8 +67,8 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
  	const ee::TPNode* n = NULL;
 	if (ee::Config::Instance()->IsUseDTex() && 
@@ -132,13 +132,13 @@ void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Instance()->Draw(m_sprites[i], root, mt, color);
+			ee::SpriteRenderer::Instance()->Draw(m_sprites[i], root, trans);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			ee::Vector min(m_clipbox.xmin, m_clipbox.ymin), 
 				max(m_clipbox.xmax, m_clipbox.ymax);
 			ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
-			ee::RVG::Rect(ee::Math2D::TransVector(min, mt), ee::Math2D::TransVector(max, mt), false);
+			ee::RVG::Rect(ee::Math2D::TransVector(min, trans.mt), ee::Math2D::TransVector(max, trans.mt), false);
 		}
 	}
 }

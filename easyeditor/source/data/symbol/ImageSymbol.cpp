@@ -44,10 +44,10 @@ void ImageSymbol::ReloadTexture() const
 	m_image->ReloadTexture();
 }
 
-void ImageSymbol::Draw(const Matrix& mt, const ColorTrans& col, 
-					   const Sprite* spr, const Sprite* root) const
+void ImageSymbol::Draw(const SpriteTrans& trans, const Sprite* spr, 
+					   const Sprite* root) const
 {
-	m_image->Draw(mt, col, spr, root);
+	m_image->Draw(trans, spr, root);
 }
 
 Rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const

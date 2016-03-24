@@ -4,6 +4,7 @@
 #include "Symbol.h"
 
 #include <ee/Matrix.h>
+#include <ee/ColorTrans.h>
 
 namespace eanim
 {

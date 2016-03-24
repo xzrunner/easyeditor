@@ -8,6 +8,7 @@
 
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
+#include <ee/SpriteTrans.h>
 
 namespace eparticle2d
 {
@@ -36,21 +37,21 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::Matrix& mt, const ee::ColorTrans& color, 
-				  const ee::Sprite* spr, const ee::Sprite* root) const
+void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+				  const ee::Sprite* root) const
 {
 	if (!spr) {
 		return;
 	}
 
 	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
-	p2d_spr->SetMatrix(mt);
+	p2d_spr->SetMatrix(trans.mt);
 
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
 	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(color);
+	shader->SetColor(trans.color);
 
-	p2d_spr->Draw(mt);		
+	p2d_spr->Draw(trans.mt);		
 }
 
 ee::Rect Symbol::GetSize(const ee::Sprite* sprite) const

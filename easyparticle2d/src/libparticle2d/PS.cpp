@@ -60,11 +60,13 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	}
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
-	ee::ColorTrans color;
-	memcpy(&color.multi, mul_col, sizeof(*mul_col));
-	memcpy(&color.add, add_col, sizeof(*add_col));
 
-	ee::SpriteRenderer::Instance()->Draw(sym, mt, ee::Vector(x, y), angle, scale, scale, 0, 0, color);
+	ee::SpriteTrans trans;
+	trans.mt = mt;
+	memcpy(&trans.color.multi, mul_col, sizeof(*mul_col));
+	memcpy(&trans.color.add, add_col, sizeof(*add_col));
+
+	ee::SpriteRenderer::Instance()->Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
 }
 
 void PS::Init()

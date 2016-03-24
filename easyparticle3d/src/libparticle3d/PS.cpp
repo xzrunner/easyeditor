@@ -71,11 +71,12 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	assert(rp->p3d);
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
-	ee::ColorTrans ct;
-	memcpy(&ct.multi, mul_col, sizeof(*mul_col));
-	memcpy(&ct.add, add_col, sizeof(*add_col));
-	ct.multi = col_mul(ct.multi, rp->ct.multi);
-	ct.add = col_add(ct.add, rp->ct.add);
+
+	ee::SpriteTrans trans;
+	memcpy(&trans.color.multi, mul_col, sizeof(*mul_col));
+	memcpy(&trans.color.add, add_col, sizeof(*add_col));
+	trans.color.multi = col_mul(trans.color.multi, rp->ct.multi);
+	trans.color.add = col_add(trans.color.add, rp->ct.add);
 	// todo color trans
 
 	ee::Matrix mt = rp->mat;
@@ -88,7 +89,9 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 		src[12]= mat[4];
 		src[13]= mat[5];
 	}
-	ee::SpriteRenderer::Instance()->Draw(sym, mt, ee::Vector(x, y), angle, scale, scale, 0, 0, ct);
+	trans.mt = mt;
+
+	ee::SpriteRenderer::Instance()->Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
 
 	// todo bind
 	// 	if (p->bind_ps) {
