@@ -99,12 +99,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Blend")
 	{
 		int idx = wxANY_AS(value, int);
-		spr->SetBlendMode(BlendModes::Instance()->GetIDFromIdx(idx));
+		spr->shader.blend = BlendModes::Instance()->GetIDFromIdx(idx);
 	}
 	else if (name == "Filter")
 	{
 		int idx = wxANY_AS(value, int);
-		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
+		spr->shader.filter = FilterModes::Instance()->GetIDFromIdx(idx);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -226,11 +226,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
-	BlendMode blend = spr->GetBlendMode();
-	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(blend));
+	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(spr->shader.blend));
 
-	FilterMode filter = spr->GetFilterMode();
-	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromID(filter));
+	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromID(spr->shader.filter));
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new PropertyColorListener(&spr->color.r));
@@ -347,13 +345,13 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	std::vector<std::string> names;
 	BlendModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, TransToWXStringArray(names));
-	int idx = BlendModes::Instance()->GetIdxFromID(spr->GetBlendMode());
+	int idx = BlendModes::Instance()->GetIdxFromID(spr->shader.blend);
 	blend_prop->SetValue(idx);
 	pg->Append(blend_prop);
 
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty(wxT("Filter"), wxPG_LABEL, TransToWXStringArray(names));
-	idx = FilterModes::Instance()->GetIdxFromID(spr->GetFilterMode());
+	idx = FilterModes::Instance()->GetIdxFromID(spr->shader.filter);
 	filter_prop->SetValue(idx);
 	pg->Append(filter_prop);
 

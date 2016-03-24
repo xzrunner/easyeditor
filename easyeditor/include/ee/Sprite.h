@@ -5,9 +5,8 @@
 #include "UserDataImpl.h"
 #include "Object.h"
 #include "Vector.h"
-#include "BlendModes.h"
-#include "FilterModes.h"
 #include "ColorTrans.h"
+#include "ShaderTrans.h"
 
 #include <json/json.h>
 
@@ -86,12 +85,6 @@ public:
 	}
 	Rect GetRect() const;
 
-	BlendMode GetBlendMode() const { return m_blend_mode; }
-	void SetBlendMode(BlendMode mode) { m_blend_mode = mode; }
-
-	FilterMode GetFilterMode() const { return m_filter_mode; } 
-	void SetFilterMode(FilterMode mode) { m_filter_mode = mode; }
-
 	void SetObserver(SpriteObserver* observer) {
 		m_observer = observer;
 	}
@@ -109,9 +102,11 @@ protected:
 public:
 	// info
 	std::string name;
-	ColorTrans color;
 	std::string tag;
 	bool clip;
+
+	ColorTrans color;
+	ShaderTrans shader;
 
 	// edit
 	bool visiable;
@@ -127,9 +122,6 @@ protected:
 	bool m_xMirror, m_yMirror;
 
 	Vector m_perspective;
-
-	BlendMode m_blend_mode;
-	FilterMode m_filter_mode;
 
 	BoundingBox* m_bounding;
 	

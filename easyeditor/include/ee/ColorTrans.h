@@ -3,26 +3,24 @@
 
 #include "Color.h"
 
+#include <json/json.h>
+
 namespace ee
 {
 
-struct ColorTrans
+class ColorTrans
 {
+public:
+	ColorTrans();
+
+	void LoadFromFile(const Json::Value& val);
+	void StoreToFile(Json::Value& val) const;
+
+public:
 	Colorf multi, add;
 	Colorf r, g, b;
 
-	ColorTrans();
-
 }; // ColorTrans
-
-inline ColorTrans::ColorTrans()
-	: multi(1, 1, 1, 1)
-	, add(0, 0, 0, 0)
-	, r(1, 0, 0, 0)
-	, g(0, 1, 0, 0)
-	, b(0, 0, 1, 0)
-{
-}
 
 }
 

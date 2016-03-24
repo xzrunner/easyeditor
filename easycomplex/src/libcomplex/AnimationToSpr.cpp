@@ -70,7 +70,7 @@ void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimatio
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
-	spr->SetBlendMode(ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
+	spr->shader.blend = (ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
 }
 
 void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)

@@ -6,7 +6,7 @@
 namespace ee
 {
 
-struct ColorTrans;
+class ColorTrans;
 
 class SpriteShader : public IShader
 {

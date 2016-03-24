@@ -3,9 +3,7 @@
 #include "Symbol.h"
 #include "Math2D.h"
 #include "Matrix.h"
-#include "trans_color.h"
 #include "Exception.h"
-#include "config.h"
 #include "BBFactory.h"
 #include "BoundingBox.h"
 #include "SpriteFactory.h"
@@ -36,9 +34,6 @@ Sprite::Sprite()
 	m_perspective.Set(0, 0);
 	m_bounding = NULL;
 
-	m_blend_mode = BM_NORMAL;
-	m_filter_mode = FM_NORMAL;
-
 	m_is_anchor = false;
 }
 
@@ -62,9 +57,6 @@ Sprite::Sprite(const Sprite& sprite)
 	m_yMirror = sprite.m_yMirror;
 	m_perspective = sprite.m_perspective;
 	m_bounding = sprite.m_bounding->Clone();
-
-	m_blend_mode = sprite.m_blend_mode;
-	m_filter_mode = sprite.m_filter_mode;
 
 	m_is_anchor = sprite.m_is_anchor;
 }
@@ -93,37 +85,7 @@ void Sprite::Load(const Json::Value& val)
 	clip = val["clip"].asBool();
 
 	// color
-	std::string str = val["multi color"].asString();
-	if (str.empty()) {
-		color.multi = Colorf(1, 1, 1, 1);
-	} else {
-		color.multi = TransColor(str, PT_BGRA);
-	}
-	str = val["add color"].asString();
-	if (str.empty()) {
-		color.add = Colorf(0, 0, 0, 0);
-	} else {
-		color.add = TransColor(str, PT_ABGR);
-	}
-
-	str = val["r trans"].asString();
-	if (str.empty()) {
-		color.r = Colorf(1, 0, 0, 1);
-	} else {
-		color.r = TransColor(str, PT_RGBA);
-	}
-	str = val["g trans"].asString();
-	if (str.empty()) {
-		color.g = Colorf(0, 1, 0, 1);
-	} else {
-		color.g = TransColor(str, PT_RGBA);
-	}
-	str = val["b trans"].asString();
-	if (str.empty()) {
-		color.b = Colorf(0, 0, 1, 1);
-	} else {
-		color.b = TransColor(str, PT_RGBA);
-	}
+	color.LoadFromFile(val);
 
 	// scale
 	Vector scale;
@@ -189,21 +151,8 @@ void Sprite::Load(const Json::Value& val)
 	float angle = static_cast<float>(val["angle"].asDouble());
 	SetTransform(Vector(x, y), angle);
 
-	// blend
-	if (!val["blend"].isNull()) {
-		std::string disc = val["blend"].asString();
-		if (Config::Instance()->IsRenderOpen()) {
-			m_blend_mode = BlendModes::Instance()->GetModeFromNameEN(disc);
-		}
-	}
-
-	// filter
-	if (!val["filter"].isNull()) {
-		std::string disc = val["filter"].asString();
-		if (Config::Instance()->IsRenderOpen()) {
-			m_filter_mode = FilterModes::Instance()->GetIDFromNameEN(disc);
-		}
-	}
+	// shader
+	shader.LoadFromFile(val);
 
 	// anchor
 	m_is_anchor = val["anchor"].asBool();
@@ -215,11 +164,7 @@ void Sprite::Store(Json::Value& val) const
 	val["tag"] = tag;
 	val["clip"] = clip;
 
-	val["multi color"] = TransColor(color.multi, PT_BGRA);
-	val["add color"] = TransColor(color.add, PT_ABGR);
-	val["r trans"] = TransColor(color.r, PT_RGBA);
-	val["g trans"] = TransColor(color.g, PT_RGBA);
-	val["b trans"] = TransColor(color.b, PT_RGBA);
+	color.StoreToFile(val);
 
 	val["position"]["x"] = m_pos.x;
 	val["position"]["y"] = m_pos.y;
@@ -241,10 +186,7 @@ void Sprite::Store(Json::Value& val) const
 	val["x perspective"] = m_perspective.x;
 	val["y perspective"] = m_perspective.y;
 
-	if (Config::Instance()->IsRenderOpen()) {
-		val["blend"] = BlendModes::Instance()->GetNameENFromMode(m_blend_mode);
-		val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
-	}
+	shader.StoreToFile(val);
 
 	val["anchor"] = m_is_anchor;
 }

@@ -39,17 +39,17 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
-	if (multi_draw && sprite->GetBlendMode() != BM_NORMAL) {
+	if (multi_draw && sprite->shader.blend != BM_NORMAL) {
 		SpriteBlend::Instance()->Draw(sprite, mt);
-	} else if (sprite->GetFilterMode() != FM_NORMAL) {
+	} else if (sprite->shader.filter != FM_NORMAL) {
 		mgr->SetShader(ShaderMgr::FILTER);
 		FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
-		shader->SetMode(FilterModes::Instance()->GetNameENFromID(sprite->GetFilterMode()));
+		shader->SetMode(FilterModes::Instance()->GetNameENFromID(sprite->shader.filter));
 		DrawImpl(sprite, root, mt, color);
 	} else {
-		if (mgr->GetShader() == ShaderMgr::FILTER) {
-			mgr->SetShader(ShaderMgr::SPRITE);
-		}
+// 		if (mgr->GetShader() == ShaderMgr::FILTER) {
+// 			mgr->SetShader(ShaderMgr::SPRITE);
+// 		}
 		DrawImpl(sprite, root, mt, color);
 	}
 }

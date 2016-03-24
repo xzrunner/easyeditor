@@ -16,7 +16,7 @@ class Rect;
 class PropertySetting;
 class Matrix;
 class EditPanelImpl;
-struct ColorTrans;
+class ColorTrans;
 
 class Shape : public Cloneable, public UserDataImpl, public Object
 {

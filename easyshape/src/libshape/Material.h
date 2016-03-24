@@ -6,7 +6,7 @@
 #include <ee/Object.h>
 #include <ee/Vector.h>
 
-namespace ee { class Matrix; struct ColorTrans; }
+namespace ee { class Matrix; class ColorTrans; }
 
 namespace eshape
 {

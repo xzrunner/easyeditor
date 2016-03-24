@@ -16,7 +16,7 @@ class Sprite;
 class Texture;
 class ImageData;
 class FBO;
-struct ColorTrans;
+class ColorTrans;
 
 class Image : public Object
 {

@@ -10,7 +10,7 @@ namespace ee
 {
 
 class Vector;
-struct ColorTrans;
+class ColorTrans;
 
 class Sprite3Shader : public IShader
 {
