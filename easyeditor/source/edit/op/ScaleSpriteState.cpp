@@ -7,12 +7,15 @@
 #include "ScaleSpriteAOP.h"
 #include "panel_msg.h"
 #include "Math2D.h"
+#include "EditPanelImpl.h"
 
 namespace ee
 {
 
-ScaleSpriteState::ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node)
-	: m_ctrl_node(ctrl_node)
+ScaleSpriteState::ScaleSpriteState(EditPanelImpl* stage, Sprite* sprite, 
+								   const SpriteCtrlNode::Node& ctrl_node)
+	: m_stage(stage)
+	, m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
 	m_sprite->Retain();
@@ -46,24 +49,42 @@ void ScaleSpriteState::Scale(const Vector& curr)
 {
 	Vector ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
-	
-	Vector ori = ctrls[m_ctrl_node.type];
-	Vector center = m_sprite->GetPosition() + m_sprite->GetOffset();
-	Vector fix;
-	Math2D::GetFootOfPerpendicular(center, ori, curr, &fix);
 
-	float scale_times = Math2D::GetDistance(center, fix) / Math2D::GetDistance(center, ori);
-	if (fabs(scale_times - 1) < FLT_EPSILON) {
+	Vector ori = ctrls[m_ctrl_node.type];
+	Vector other;
+	switch (m_ctrl_node.type)
+	{
+	case SpriteCtrlNode::LEFT_UP:
+		other = ctrls[SpriteCtrlNode::RIGHT_DOWN];
+		break;
+	case SpriteCtrlNode::RIGHT_UP:
+		other = ctrls[SpriteCtrlNode::LEFT_DOWN];
+		break;
+	case SpriteCtrlNode::LEFT_DOWN:
+		other = ctrls[SpriteCtrlNode::RIGHT_UP];
+		break;
+	case SpriteCtrlNode::RIGHT_DOWN:
+		other = ctrls[SpriteCtrlNode::LEFT_UP];
+		break;
+	default:
+		return;
+	}
+
+	if (ori.x == other.x ||
+		ori.y == other.y) {
 		return;
 	}
 
 	Vector scale = m_sprite->GetScale();
-	if (m_ctrl_node.type == SpriteCtrlNode::UP || m_ctrl_node.type == SpriteCtrlNode::DOWN) {
-		scale.y *= scale_times;
-	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT || m_ctrl_node.type == SpriteCtrlNode::RIGHT) {
-		scale.x *= scale_times;
+	float dx = (curr.x - other.x) / (ori.x - other.x),
+		  dy = (curr.y - other.y) / (ori.y - other.y);
+	if (m_stage->GetKeyState(WXK_SHIFT)) {
+		float ds = fabs(dx) < fabs(dy) ? dx : dy;
+		scale.x *= ds;
+		scale.y *= ds;		
 	} else {
-		scale *= scale_times;
+		scale.x *= dx;
+		scale.y *= dy;
 	}
 	m_sprite->SetScale(scale);
 }

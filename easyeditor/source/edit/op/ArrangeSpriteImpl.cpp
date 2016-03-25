@@ -173,7 +173,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	}
 
 	// scale
-	if (m_cfg.is_deform_open && !m_stage->GetKeyState(WXK_SHIFT))
+	if (m_cfg.is_deform_open)
 	{
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
@@ -190,21 +190,21 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 		}
 	}
 
-	// perspective
-	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
-	{
-		Vector ctrl_node[4];
-		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
-		for (int i = 0; i < 4; ++i) {
-			if (Math2D::GetDistance(ctrl_node[i], pos) < m_ctrl_node_radius) {
-				SpriteCtrlNode::Node cn;
-				cn.pos = ctrl_node[i];
-				cn.type = SpriteCtrlNode::Type(i);
-				ChangeOPState(CreatePerspectiveState(selected, cn));
-				return;
-			}
-		}
-	}
+// 	// perspective
+// 	if (m_cfg.is_deform_open && m_stage->GetKeyState(WXK_SHIFT))
+// 	{
+// 		Vector ctrl_node[4];
+// 		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
+// 		for (int i = 0; i < 4; ++i) {
+// 			if (Math2D::GetDistance(ctrl_node[i], pos) < m_ctrl_node_radius) {
+// 				SpriteCtrlNode::Node cn;
+// 				cn.pos = ctrl_node[i];
+// 				cn.type = SpriteCtrlNode::Type(i);
+// 				ChangeOPState(CreatePerspectiveState(selected, cn));
+// 				return;
+// 			}
+// 		}
+// 	}
 
 	// translate
 	ChangeOPState(CreateTranslateState(m_selection, pos));
@@ -503,7 +503,7 @@ ArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* select
 
 ArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
 {
-	return new ScaleSpriteState(sprite, ctrl_node);
+	return new ScaleSpriteState(m_stage, sprite, ctrl_node);
 }
 
 ArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const

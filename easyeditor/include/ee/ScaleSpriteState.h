@@ -7,10 +7,13 @@
 namespace ee
 {
 
+class EditPanelImpl;
+
 class ScaleSpriteState : public ArrangeSpriteState
 {
 public:
-	ScaleSpriteState(Sprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
+	ScaleSpriteState(EditPanelImpl* stage, Sprite* sprite, 
+		const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ScaleSpriteState();
 
 	virtual void OnMouseRelease(const Vector& pos);
@@ -20,6 +23,8 @@ protected:
 	virtual void Scale(const Vector& curr);
 
 private:
+	EditPanelImpl* m_stage;
+
 	Sprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
