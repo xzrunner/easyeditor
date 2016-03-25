@@ -74,6 +74,9 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_BLUR:
 		sl_mode = SLFM_BLUR;
 		break;
+	case FM_GRAY:
+		sl_mode = SLFM_GRAY;
+		break;
 	}
 	assert(sl_mode != SLFM_MAX_COUNT);
 

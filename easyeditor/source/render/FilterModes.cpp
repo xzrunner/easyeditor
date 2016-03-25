@@ -13,6 +13,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(FM_RELIEF, "relief", "¸¡µñ"));
 	m_modes.push_back(Item(FM_OUTLINE, "outline", "°üÎ§"));
 	m_modes.push_back(Item(FM_BLUR, "blur", "Ä£ºý"));
+	m_modes.push_back(Item(FM_GRAY, "gray", "»Ò¶È"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const

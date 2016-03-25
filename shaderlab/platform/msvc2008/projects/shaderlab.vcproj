@@ -269,6 +269,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\shaderlab\gray.frag"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\outline.frag"
 				>
 			</File>

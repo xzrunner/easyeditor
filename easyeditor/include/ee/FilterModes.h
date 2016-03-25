@@ -16,6 +16,7 @@ enum FilterMode
 	FM_RELIEF,
 	FM_OUTLINE,
 	FM_BLUR,
+	FM_GRAY,
 
 	FM_UNKNOWN = 99,
 
