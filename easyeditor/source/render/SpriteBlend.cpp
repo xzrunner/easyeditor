@@ -68,8 +68,8 @@ void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
 
-	dtexf_c1_clear();
 	dtexf_c1_bind();
+	dtexf_c1_clear(0, -2, 2, 0);
 
 	mgr->SetShader(ShaderMgr::BLEND);
 	BlendMode mode = sprite->shader.blend;

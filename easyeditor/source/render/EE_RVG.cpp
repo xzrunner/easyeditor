@@ -107,6 +107,14 @@ void RVG::Triangles(const std::vector<Vector>& triangles, const std::vector<Colo
 	// todo
 }
 
+void RVG::TriangleStrip(const std::vector<Vector>& triangles)
+{
+	if (triangles.size() >= 3) {
+		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		rvg_triangle_strip(&triangles[0].x, triangles.size());		
+	}
+}
+
 void RVG::Rect(const Vector& center, float hw, float hh, bool filling)
 {
 	Rect(center - Vector(hw, hh), center + Vector(hw, hh), filling);

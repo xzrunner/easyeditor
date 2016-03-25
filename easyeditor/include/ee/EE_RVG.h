@@ -36,6 +36,7 @@ public:
 	// face
 	static void Triangles(const std::vector<Vector>& triangles);
 	static void Triangles(const std::vector<Vector>& triangles, const std::vector<Colorf>& colors);
+	static void TriangleStrip(const std::vector<Vector>& triangles);
 
 	static void Rect(const Vector& center, float hw, float hh, bool filling);
 	static void Rect(const Vector& p0, const Vector& p1, bool filling);

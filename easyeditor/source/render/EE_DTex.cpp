@@ -5,7 +5,9 @@
 #include "RenderContextStack.h"
 #include "ShaderContext.h"
 #include "EE_ShaderLab.h"
+#include "EE_RVG.h"
 #include "SpriteShader.h"
+#include "ShapeShader.h"
 
 #include <dtex.h>
 #include <render/render.h>
@@ -147,6 +149,33 @@ _texture_id(int id) {
 	return id;
 }
 
+static void 
+_clear_color(float xmin, float ymin, float xmax, float ymax) {
+	glDisable(GL_BLEND);
+	//	glBlendFunc(GL_ONE, GL_ZERO);
+
+	ShaderMgr* mgr = ShaderMgr::Instance();
+
+	mgr->SetShader(ShaderMgr::SHAPE);
+	ShapeShader* shader = static_cast<ShapeShader*>(mgr->GetShader(ShaderMgr::SHAPE));
+	
+	shader->SetColor(Colorf(0, 0, 0, 0));
+
+	std::vector<Vector> triangles;
+	triangles.push_back(Vector(xmin, ymin));
+	triangles.push_back(Vector(xmin, ymax));
+	triangles.push_back(Vector(xmax, ymin));
+	triangles.push_back(Vector(xmax, ymax));
+
+	RVG::TriangleStrip(triangles);
+
+	mgr->Commit();
+	ShaderLab::Instance()->Flush();
+
+	//	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 static const char* CFG =
@@ -167,6 +196,7 @@ DTex::DTex()
 	dtex_shader_init(&_program, &_blend, &_set_texture, &_get_texture, &_set_target, &_get_target,
 		&_draw_begin, &_draw, &_draw_end, &_draw_flush);
 
+	dtex_gl_init(&_clear_color);
 	dtex_gl_texture_init(&_texture_create, &_texture_release, &_texture_update, &_texture_id);
 
 	dtexf_create(CFG);
