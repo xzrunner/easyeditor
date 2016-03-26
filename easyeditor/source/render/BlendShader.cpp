@@ -73,9 +73,4 @@ void BlendShader::Draw(const Vector vertices[4], const Vector texcoords[4],
 	sl_blend_draw(&vertices[0].x, &texcoords[0].x, &texcoords_base[0].x, texid, texid_base);
 }
 
-void BlendShader::OnSize(int width, int height)
-{
-	sl_blend_on_size(width, height);
-}
-
 }

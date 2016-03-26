@@ -13,6 +13,8 @@
 #include "Camera.h"
 #include "BlendShader.h"
 
+#include <shaderlab.h>
+
 namespace ee
 {
 
@@ -34,9 +36,8 @@ void TwoPassCanvas::OnSize(int w, int h)
 	}
 	ScreenCache::Instance()->SetSize(w, h);
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
-	shader->OnSize(w, h);
+	sl_blend_on_size(w, h);
+	sl_filter_on_size(w, h);
 }
 
 static void

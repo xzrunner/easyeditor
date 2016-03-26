@@ -9,6 +9,7 @@ namespace ee
 {
 
 FilterShader::FilterShader()
+	: m_update(false)
 {
 }
 
@@ -19,6 +20,8 @@ FilterShader::~FilterShader()
 void FilterShader::Load()
 {
 	sl_filter_load();
+
+	sl_filter_set_heat_haze_tex(4);
 }
 
 void FilterShader::Unload()
@@ -43,6 +46,9 @@ void FilterShader::SetProjection(int width, int height)
 
 void FilterShader::Commit()
 {
+	if (m_update) {
+		Update(0.03f);
+	}
 	sl_filter_commit();
 }
 
@@ -77,14 +83,24 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_GRAY:
 		sl_mode = SLFM_GRAY;
 		break;
+	case FM_HEAT_HAZE:
+		sl_mode = SLFM_HEAT_HAZE;
+		break;
 	}
 	assert(sl_mode != SLFM_MAX_COUNT);
 
 	sl_filter_set_mode(sl_mode);
 }
 
+void FilterShader::Update(float dt)
+{
+	sl_filter_update(dt);
+}
+
 void FilterShader::Draw(const Vector vertices[4], const Vector texcoords[4], int texid)
 {
+	m_update = true;
+
 	sl_filter_draw(&vertices[0].x, &texcoords[0].x, texid);
 }
 

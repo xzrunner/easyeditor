@@ -42,6 +42,11 @@ ImageSprite* ImageSprite::Clone() const
 	return sprite;
 }
 
+bool ImageSprite::Update(int version)
+{
+	return shader.filter == FM_HEAT_HAZE;
+}
+
 const ImageSymbol& ImageSprite::GetSymbol() const
 {
 	return *m_symbol;

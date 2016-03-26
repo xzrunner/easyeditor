@@ -14,6 +14,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(FM_OUTLINE, "outline", "包围"));
 	m_modes.push_back(Item(FM_BLUR, "blur", "模糊"));
 	m_modes.push_back(Item(FM_GRAY, "gray", "灰度"));
+	m_modes.push_back(Item(FM_HEAT_HAZE, "heat haze", "热霾"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const

@@ -25,7 +25,7 @@ public:
 	//
 	// Sprite interface
 	//
-	virtual bool Update(int version) { return false; }
+	virtual bool Update(int version);
 	virtual const ImageSymbol& GetSymbol() const;
 	virtual void SetSymbol(Symbol* symbol);
 

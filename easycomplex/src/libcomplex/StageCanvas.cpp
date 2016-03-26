@@ -130,8 +130,6 @@ void StageCanvas::OnDrawSprites() const
 	}
 #endif
 
-	ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
-
 	m_fps.DrawTime(m_screen);
 }
 

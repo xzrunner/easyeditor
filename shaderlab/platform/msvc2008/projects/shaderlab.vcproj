@@ -273,6 +273,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\shaderlab\heat_haze.frag"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\outline.frag"
 				>
 			</File>

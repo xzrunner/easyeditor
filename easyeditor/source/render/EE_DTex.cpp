@@ -151,29 +151,33 @@ _texture_id(int id) {
 
 static void 
 _clear_color(float xmin, float ymin, float xmax, float ymax) {
-	glDisable(GL_BLEND);
-	//	glBlendFunc(GL_ONE, GL_ZERO);
+// 	glDisable(GL_BLEND);
+// 	//	glBlendFunc(GL_ONE, GL_ZERO);
+// 
+// 	ShaderMgr* mgr = ShaderMgr::Instance();
+// 
+// 	mgr->SetShader(ShaderMgr::SHAPE);
+// 	ShapeShader* shader = static_cast<ShapeShader*>(mgr->GetShader(ShaderMgr::SHAPE));
+// 	
+// 	shader->SetColor(Colorf(0, 0, 0, 0));
+// 
+// 	std::vector<Vector> triangles;
+// 	triangles.push_back(Vector(xmin, ymin));
+// 	triangles.push_back(Vector(xmin, ymax));
+// 	triangles.push_back(Vector(xmax, ymin));
+// 	triangles.push_back(Vector(xmax, ymax));
+// 
+// 	RVG::TriangleStrip(triangles);
+// 
+// 	mgr->Commit();
+// 	ShaderLab::Instance()->Flush();
+// 
+// 	//	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+// 	glEnable(GL_BLEND);
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
+	//////////////////////////////////////////////////////////////////////////
 
-	mgr->SetShader(ShaderMgr::SHAPE);
-	ShapeShader* shader = static_cast<ShapeShader*>(mgr->GetShader(ShaderMgr::SHAPE));
-	
-	shader->SetColor(Colorf(0, 0, 0, 0));
-
-	std::vector<Vector> triangles;
-	triangles.push_back(Vector(xmin, ymin));
-	triangles.push_back(Vector(xmin, ymax));
-	triangles.push_back(Vector(xmax, ymin));
-	triangles.push_back(Vector(xmax, ymax));
-
-	RVG::TriangleStrip(triangles);
-
-	mgr->Commit();
-	ShaderLab::Instance()->Flush();
-
-	//	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+	dtex_gl_clear_color(0, 0, 0, 0);
 }
 
 //////////////////////////////////////////////////////////////////////////

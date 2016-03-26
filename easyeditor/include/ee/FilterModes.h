@@ -17,6 +17,7 @@ enum FilterMode
 	FM_OUTLINE,
 	FM_BLUR,
 	FM_GRAY,
+	FM_HEAT_HAZE,
 
 	FM_UNKNOWN = 99,
 

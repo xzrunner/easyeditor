@@ -45,17 +45,17 @@ void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr,
 				  const ee::Sprite* root) const
 {
 	if (m_index != 0) {
-		Utility::DrawAnimSymbol(this, trans.mt, m_index, trans.color);
+		Utility::DrawAnimSymbol(this, trans, m_index);
 	} else {
 		static clock_t init = 0;
 		if (init == 0) {
 			init = clock();
-			Utility::DrawAnimSymbol(this, trans.mt, 1, trans.color);
+			Utility::DrawAnimSymbol(this, trans, 1);
 		} else {
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;
 			int index = during / (1.0f / m_fps);
-			Utility::DrawAnimSymbol(this, trans.mt, index % getMaxFrameIndex() + 1, trans.color);
+			Utility::DrawAnimSymbol(this, trans, index % getMaxFrameIndex() + 1);
 		}
 	}
 }

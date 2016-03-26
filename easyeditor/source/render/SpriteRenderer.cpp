@@ -31,24 +31,44 @@ SpriteRenderer::SpriteRenderer()
 void SpriteRenderer::Draw(const Sprite* sprite, 
 						  const Sprite* root,
 						  const SpriteTrans& trans,
-						  bool multi_draw) const
+						  bool set_shader) const
 {
 	if (!sprite->visiable) {
 		return;
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	if (multi_draw && sprite->shader.blend != BM_NORMAL) {
-		SpriteBlend::Instance()->Draw(sprite, trans.mt);
-	} else if (sprite->shader.filter != FM_NORMAL) {
-		mgr->SetShader(ShaderMgr::FILTER);
-		FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
-		shader->SetMode(FilterModes::Instance()->GetNameENFromID(sprite->shader.filter));
-		DrawImpl(sprite, root, trans);
+	BlendMode blend;
+	if (trans.shader.blend != BM_NORMAL) {
+		blend = trans.shader.blend;
 	} else {
-// 		if (mgr->GetShader() == ShaderMgr::FILTER) {
-// 			mgr->SetShader(ShaderMgr::SPRITE);
-// 		}
+		blend = sprite->shader.blend;
+	}
+
+	FilterMode filter;
+	if (trans.shader.filter != FM_NORMAL) {
+		filter = trans.shader.filter;
+	} else {
+		filter = sprite->shader.filter;
+	}
+
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	if (blend != BM_NORMAL) {
+		SpriteBlend::Instance()->Draw(sprite, trans.mt);
+	} else if (filter != FM_NORMAL) {
+		if (set_shader) {
+			mgr->SetShader(ShaderMgr::FILTER);
+		}
+		FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
+		shader->SetMode(FilterModes::Instance()->GetNameENFromID(filter));
+		SpriteTrans t = trans;
+		t.shader.filter = filter;
+		DrawImpl(sprite, root, t);
+	} else {
+		if (set_shader) {
+			mgr->SetShader(ShaderMgr::SPRITE);
+		}
+		SpriteTrans t = trans;
+		t.shader.blend = blend;
 		DrawImpl(sprite, root, trans);
 	}
 }

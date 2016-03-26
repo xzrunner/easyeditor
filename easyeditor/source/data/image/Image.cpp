@@ -241,8 +241,7 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 			if (mgr->GetShader() == ShaderMgr::FILTER) {
 				FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
 				shader->Draw(vertices, texcoords, texid);
-			} else {
-				mgr->SetShader(ShaderMgr::SPRITE);
+			} else if (mgr->GetShader() == ShaderMgr::SPRITE) {
 				SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
 				shader->Draw(vertices, texcoords, texid);
 			}

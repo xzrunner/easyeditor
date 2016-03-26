@@ -35,8 +35,6 @@ public:
 	void Draw(const Vector vertices[4], const Vector texcoords[4], 
 		const Vector texcoords_base[4], int texid, int texid_base);
 
-	void OnSize(int width, int height);
-
 protected:
 	virtual void BindAttribLocation(GLuint prog) {}
 

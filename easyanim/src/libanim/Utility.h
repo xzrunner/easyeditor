@@ -3,8 +3,7 @@
 
 #include "Symbol.h"
 
-#include <ee/Matrix.h>
-#include <ee/ColorTrans.h>
+#include <ee/SpriteTrans.h>
 
 namespace eanim
 {
@@ -14,9 +13,8 @@ class Utility
 public:
 	static void DrawAnimSymbol(
 		const Symbol* symbol, 
-		const ee::Matrix& mt = ee::Matrix(),
-		int index = 1, 
-		const ee::ColorTrans& color = ee::ColorTrans());
+		const ee::SpriteTrans& trans = ee::SpriteTrans(),
+		int index = 1);
 
 	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);
 

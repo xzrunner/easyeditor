@@ -30,12 +30,16 @@ public:
 
 	void SetMode(const std::string& mode);
 
+	void Update(float dt);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 
 protected:
 	virtual void BindAttribLocation(GLuint prog) {}
 
 	virtual void LoadShader() {}
+
+private:
+	bool m_update;
 
 }; // FilterShader
 

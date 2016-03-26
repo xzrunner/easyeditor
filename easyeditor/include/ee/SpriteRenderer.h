@@ -23,7 +23,7 @@ public:
 	void Draw(const Sprite* sprite, 
 		      const Sprite* root = NULL,
 			  const SpriteTrans& trans = SpriteTrans(),
-			  bool multi_draw = true) const;
+			  bool set_shader = true) const;
 
 	void InvalidRect(const Sprite* sprite, const Matrix& mt = Matrix());
 
