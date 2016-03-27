@@ -5,12 +5,12 @@
 #include "DemoBruteForceTex.h"
 #include "DemoOcean.h"
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace eterrain3d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, ee::OrthoCanvas)
+BEGIN_EVENT_TABLE(StageCanvas, ee::CameraCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
 END_EVENT_TABLE()
 

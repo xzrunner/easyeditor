@@ -11,7 +11,7 @@ namespace wrapper
 {
 
 StageCanvas::StageCanvas(StagePanel* stage, wxGLContext* glctx)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl(), glctx, false)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), glctx, false)
 	, m_stage(stage)
 {
 }

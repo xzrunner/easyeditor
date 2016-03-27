@@ -8,7 +8,7 @@ namespace etemplate
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 }

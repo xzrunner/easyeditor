@@ -1,7 +1,7 @@
 #ifndef _EASYTEXPACKER_STAGE_CANVAS_H_
 #define _EASYTEXPACKER_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace ee { class MultiSpritesImpl; }
 
@@ -10,7 +10,7 @@ namespace etexpacker
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

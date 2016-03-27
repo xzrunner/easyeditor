@@ -8,7 +8,7 @@ namespace eanim
 
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 							 const Symbol* symbol, wxGLContext* glctx)
-	: ee::OrthoCanvas(stage_wnd, stage, glctx)
+	: ee::CameraCanvas(stage_wnd, stage, glctx)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->getFPS())
 {

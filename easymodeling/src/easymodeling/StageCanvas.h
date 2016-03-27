@@ -1,7 +1,7 @@
 #ifndef _EASYMODELING_STAGE_CANVAS_H_
 #define _EASYMODELING_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 #include <ee/Visitor.h>
 
 namespace emodeling
@@ -9,7 +9,7 @@ namespace emodeling
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* editPanel);

@@ -3,14 +3,14 @@
 //#include "Mapping3DScene.h"
 #include "Projection3DScene.h"
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 #include <wx/dcbuffer.h>
 
 namespace epseudo3d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas3D, ee::OrthoCanvas)
+BEGIN_EVENT_TABLE(StageCanvas3D, ee::CameraCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas3D::OnTimer)
 END_EVENT_TABLE()
 

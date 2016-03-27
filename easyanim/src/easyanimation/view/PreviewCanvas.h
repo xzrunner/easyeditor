@@ -1,7 +1,7 @@
 #ifndef _EASYANIM_PREVIEW_CANVAS_H_
 #define _EASYANIM_PREVIEW_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 #include <wx/wx.h>
 
@@ -14,7 +14,7 @@ namespace eanim
 
 struct PlaySettings;
 
-class PreviewCanvas : public ee::OrthoCanvas
+class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 

@@ -1,14 +1,14 @@
 #ifndef _EASYSHADER_STAGE_CANVAS2D_H_
 #define _EASYSHADER_STAGE_CANVAS2D_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace eshader
 {
 
 class StagePanel2D;
 
-class StageCanvas2D : public ee::OrthoCanvas
+class StageCanvas2D : public ee::CameraCanvas
 {
 public:
 	StageCanvas2D(StagePanel2D* stage);

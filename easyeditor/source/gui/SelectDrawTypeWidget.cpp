@@ -1,13 +1,13 @@
 #include "SelectDrawTypeWidget.h"
 #include "SettingData.h"
-#include "OrthoCanvas.h"
+#include "CameraCanvas.h"
 
 #include <wx/wx.h>
 
 namespace ee
 {
 
-SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, OrthoCanvas* canvas)
+SelectDrawTypeWidget::SelectDrawTypeWidget(wxWindow* parent, CameraCanvas* canvas)
 	: Widget(parent)
 	, m_canvas(canvas)
 {

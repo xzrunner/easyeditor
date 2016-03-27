@@ -24,7 +24,7 @@ namespace ecomplex
 StageCanvas::StageCanvas(StagePanel* editPanel,
 						 ee::LibraryPanel* library,
 						 wxGLContext* glctx)
-	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl(), glctx)
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl(), glctx)
 	, m_stage(editPanel)
 	, m_library(library)
 	, m_background(NULL)
@@ -46,7 +46,7 @@ void StageCanvas::SetBackground(ee::Symbol* symbol)
 
 void StageCanvas::OnSize(int w, int h)
 {
-	ee::OrthoCanvas::OnSize(w, h);
+	ee::CameraCanvas::OnSize(w, h);
 
 // 	m_camera3.SetScreenSize(w, h);
 // 

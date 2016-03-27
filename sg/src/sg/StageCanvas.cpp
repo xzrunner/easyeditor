@@ -22,7 +22,7 @@ namespace sg
 static const float VIEW_TRANS = 0.75f;
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_background(NULL)
 {

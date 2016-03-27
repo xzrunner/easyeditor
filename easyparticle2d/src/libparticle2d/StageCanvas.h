@@ -1,14 +1,14 @@
 #ifndef _EASYPARTICLE2D_STAGE_CANVAS_H_
 #define _EASYPARTICLE2D_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace eparticle2d
 {
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

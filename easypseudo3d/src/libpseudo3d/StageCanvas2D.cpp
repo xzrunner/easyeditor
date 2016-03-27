@@ -9,7 +9,7 @@ namespace epseudo3d
 {
 
 StageCanvas2D::StageCanvas2D(wxWindow* stage_wnd, ee::EditPanelImpl* stage)
-	: ee::OrthoCanvas(stage_wnd, stage)
+	: ee::CameraCanvas(stage_wnd, stage)
 {
 	SetBgColor(ee::BLACK);
 

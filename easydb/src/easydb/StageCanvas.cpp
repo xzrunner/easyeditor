@@ -10,7 +10,7 @@ namespace edb
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
 }

@@ -17,7 +17,7 @@ namespace etexture
 {
 
 StageCanvas::StageCanvas(StagePanel* panel)
-	: ee::OrthoCanvas(panel, panel->GetStageImpl())
+	: ee::CameraCanvas(panel, panel->GetStageImpl())
 	, m_panel(panel)
 	, m_edited(NULL)
 	, m_sprite_impl(NULL)
@@ -27,7 +27,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 StageCanvas::StageCanvas(StagePanel* panel, wxGLContext* glctx,
 						 ee::Sprite* edited, const ee::MultiSpritesImpl* bg_sprites)
-	: ee::OrthoCanvas(panel, panel->GetStageImpl(), glctx)
+	: ee::CameraCanvas(panel, panel->GetStageImpl(), glctx)
 	, m_panel(panel)
 	, m_edited(edited)
 	, m_sprite_impl(bg_sprites)

@@ -1,14 +1,14 @@
 #ifndef _EASYMODELING_PREVIEW_CANVAS_H_
 #define _EASYMODELING_PREVIEW_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace emodeling
 {
 
 class PreviewPanel;
 
-class PreviewCanvas : public ee::OrthoCanvas
+class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	PreviewCanvas(PreviewPanel* editPanel);

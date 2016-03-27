@@ -1,14 +1,14 @@
 #ifndef _EASYEDITOR_DIALOG_STAGE_CANVAS_H_
 #define _EASYEDITOR_DIALOG_STAGE_CANVAS_H_
 
-#include "OrthoCanvas.h"
+#include "CameraCanvas.h"
 
 namespace ee
 {
 
 class Symbol;
 
-class DialogStageCanvas : public OrthoCanvas
+class DialogStageCanvas : public CameraCanvas
 {
 public:
 	DialogStageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage, 

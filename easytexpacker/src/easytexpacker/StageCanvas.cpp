@@ -12,7 +12,7 @@ namespace etexpacker
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl())
 	, m_stage_panel(stage)
 	, m_stage_impl(stage)
 {

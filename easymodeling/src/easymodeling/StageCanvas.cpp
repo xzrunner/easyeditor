@@ -12,7 +12,7 @@ namespace emodeling
 {
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
 	m_bg_color.Set(0, 0, 0, 1);

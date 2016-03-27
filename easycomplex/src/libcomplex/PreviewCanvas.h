@@ -1,14 +1,14 @@
 #ifndef _EASY_EASYCOMPLEX_PREVIEW_CANVAS_H_
 #define _EASY_EASYCOMPLEX_PREVIEW_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace ee { class Sprite; }
 
 namespace ecomplex
 {
 
-class PreviewCanvas : public ee::OrthoCanvas
+class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 

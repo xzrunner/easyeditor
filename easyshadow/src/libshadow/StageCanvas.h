@@ -1,7 +1,7 @@
 #ifndef _EASYSHADOW_STAGE_CANVAS_H_
 #define _EASYSHADOW_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace ee { class Sprite; class MultiSpritesImpl; }
 
@@ -10,7 +10,7 @@ namespace eshadow
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

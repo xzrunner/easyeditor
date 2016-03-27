@@ -17,7 +17,7 @@ namespace eshape
 {
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 	, m_shape_impl(stage)
 	, m_edited(NULL)
@@ -30,7 +30,7 @@ StageCanvas::StageCanvas(StagePanel* stage,
 						 wxGLContext* glctx,
 						 ee::Sprite* edited,
 						 const ee::MultiSpritesImpl* bg_sprites)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl(), glctx)
+	: ee::CameraCanvas(stage, stage->GetStageImpl(), glctx)
 	, m_stage(stage)
 	, m_shape_impl(stage)
 	, m_edited(edited)

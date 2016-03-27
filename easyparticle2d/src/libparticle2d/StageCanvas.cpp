@@ -15,7 +15,7 @@ static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl())
 	, m_stage(stage)
 {
 }

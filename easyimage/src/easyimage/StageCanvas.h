@@ -1,14 +1,14 @@
 #ifndef _EASYIMAGE_STAGE_CANVAS_H_
 #define _EASYIMAGE_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace eimage
 {
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

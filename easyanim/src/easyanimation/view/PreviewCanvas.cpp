@@ -21,7 +21,7 @@ namespace eanim
 PreviewCanvas::PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 							 const PlaySettings& settings, ee::PlayControl& control,
 							 wxGLContext* glctx)
-	: ee::OrthoCanvas(stage_wnd, stage, glctx)
+	: ee::CameraCanvas(stage_wnd, stage, glctx)
 	, m_control(control)
 	, m_settings(settings)
 {

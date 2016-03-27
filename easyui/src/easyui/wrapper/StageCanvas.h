@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WRAPPER_STAGE_CANVAS_H_
 #define _EASYUI_WRAPPER_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 class wxGLContext;
 
@@ -12,7 +12,7 @@ namespace wrapper
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage, wxGLContext* glctx);

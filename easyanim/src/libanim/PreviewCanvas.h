@@ -3,13 +3,13 @@
 
 #include "Symbol.h"
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 #include <ee/PlayControl.h>
 
 namespace eanim
 {
 
-class PreviewCanvas : public ee::OrthoCanvas
+class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	struct PlaySetting

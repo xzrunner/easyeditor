@@ -6,18 +6,18 @@
 namespace ee
 {
 
-class OrthoCanvas;
+class CameraCanvas;
 
 class SelectDrawTypeWidget : public Widget
 {
 public:
-	SelectDrawTypeWidget(wxWindow* parent, OrthoCanvas* canvas);
+	SelectDrawTypeWidget(wxWindow* parent, CameraCanvas* canvas);
 
 private:
 	void OnSetDrawType(wxCommandEvent& event);
 
 private:
-	OrthoCanvas* m_canvas;
+	CameraCanvas* m_canvas;
 
 }; // SelectDrawTypeWidget
 

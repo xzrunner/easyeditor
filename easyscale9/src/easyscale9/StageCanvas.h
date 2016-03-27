@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_STAGE_CANVAS_H_
 #define _EASYSCALE9_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace escale9
 {
@@ -9,7 +9,7 @@ namespace escale9
 class StagePanel;
 class ToolbarPanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* editPanel);

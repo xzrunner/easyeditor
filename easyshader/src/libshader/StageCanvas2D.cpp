@@ -16,12 +16,12 @@ namespace eshader
 static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
-BEGIN_EVENT_TABLE(StageCanvas2D, ee::OrthoCanvas)
+BEGIN_EVENT_TABLE(StageCanvas2D, ee::CameraCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas2D::OnTimer)
 END_EVENT_TABLE()
 
 StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
-	: ee::OrthoCanvas(stage, stage->GetStageImpl())
+	: ee::CameraCanvas(stage, stage->GetStageImpl())
 	, m_timer(this, TIMER_ID)
 	, m_stage(stage)
 	, m_start_time(0)

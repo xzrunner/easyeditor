@@ -11,7 +11,7 @@ namespace emodeling
 {
 
 PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
-	: ee::OrthoCanvas(editPanel, editPanel->GetStageImpl())
+	: ee::CameraCanvas(editPanel, editPanel->GetStageImpl())
 	, m_stage_panel(editPanel)
 {
 	SetBgColor(ee::Colorf(0, 0, 0));

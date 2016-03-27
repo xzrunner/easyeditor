@@ -6,16 +6,16 @@
 namespace ee
 {
 
-class OrthoCanvas : public TwoPassCanvas
+class CameraCanvas : public TwoPassCanvas
 {
 public:
-	OrthoCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
+	CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 		wxGLContext* glctx = NULL, bool use_context_stack = true);
 
 protected:
 	virtual void OnSize(int w, int h);
 
-}; // OrthoCanvas
+}; // CameraCanvas
 
 }
 

@@ -1,14 +1,14 @@
 #ifndef _EASYTEMPLATE_STAGE_CANVAS_H_
 #define _EASYTEMPLATE_STAGE_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 
 namespace etemplate
 {
 
 class StagePanel;
 
-class StageCanvas : public ee::OrthoCanvas
+class StageCanvas : public ee::CameraCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

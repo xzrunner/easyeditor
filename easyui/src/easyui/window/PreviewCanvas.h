@@ -1,7 +1,7 @@
 #ifndef _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 #define _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 
-#include <ee/OrthoCanvas.h>
+#include <ee/CameraCanvas.h>
 #include <ee/Matrix.h>
 
 namespace ee { class PlayControl; class Sprite; }
@@ -11,7 +11,7 @@ namespace eui
 namespace window
 {
 
-class PreviewCanvas : public ee::OrthoCanvas
+class PreviewCanvas : public ee::CameraCanvas
 {
 public:
 	PreviewCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, ee::PlayControl& control, 
