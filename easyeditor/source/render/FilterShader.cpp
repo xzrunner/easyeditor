@@ -86,6 +86,9 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_HEAT_HAZE:
 		sl_mode = SLFM_HEAT_HAZE;
 		break;
+	case FM_SHOCK_WAVE:
+		sl_mode = SLFM_SHOCK_WAVE;
+		break;
 	}
 	assert(sl_mode != SLFM_MAX_COUNT);
 
