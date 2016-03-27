@@ -7,12 +7,10 @@
 namespace ee
 {
 
-class Camera;
-
 class Screen
 {
 public:
-	Screen(Camera* cam) : m_cam(cam) {}
+	Screen() {}
 
 	const Vector& GetSize() const { return m_size; }
 	void SetSize(int width, int height) { m_size.Set(static_cast<float>(width), static_cast<float>(height)); }
@@ -42,8 +40,6 @@ private:
 	Vector m_size;
 	Vector m_offset;
 	Vector m_scale;
-
-	Camera* m_cam;
 
 }; // Screen
 

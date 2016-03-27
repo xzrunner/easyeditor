@@ -2,6 +2,7 @@
 #include "ZoomViewState.h"
 #include "PanViewState.h"
 #include "Camera.h"
+#include "CameraMgr.h"
 #include "EditPanelImpl.h"
 #include "SettingData.h"
 #include "Config.h"
@@ -45,8 +46,7 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 		break;
 	case WXK_ESCAPE:
 		{
-			Camera* cam = m_stage->GetCamera();
-			cam->Reset();
+			CameraMgr::Instance()->GetCamera()->Reset();
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 		break;

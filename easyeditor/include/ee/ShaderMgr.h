@@ -3,6 +3,7 @@
 
 #include "Color.h"
 #include "ShaderMgrBase.h"
+#include "Vector3D.h"
 
 namespace ee
 {
@@ -18,7 +19,7 @@ public:
 		SPRITE,
 		BLEND,
 		FILTER,
-		MODEL,
+		SPRITE3,
 
 		COUNT,
 	};
@@ -42,6 +43,7 @@ public:
 	bool IsOpenBufferData() const;
 
 	void SetModelView(const Vector& offset, float scale);
+	void SetModelView(const vec3& pos, float angle);	// sprite3
 
 private:
 	ShaderMgr();

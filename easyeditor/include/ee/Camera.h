@@ -11,6 +11,7 @@ class Camera
 public:
 	virtual ~Camera() {}
 
+	virtual std::string Type() const = 0;
 	virtual void Reset() = 0;
 
 	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const = 0;

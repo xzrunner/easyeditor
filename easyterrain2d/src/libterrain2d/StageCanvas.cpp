@@ -9,6 +9,7 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/EE_RVG.h>
 #include <ee/Camera.h>
+#include <ee/CameraMgr.h>
 #include <ee/color_config.h>
 #include <ee/EditPanelImpl.h>
 
@@ -48,8 +49,8 @@ void StageCanvas::OnDrawSprites() const
 	DrawBG();
 
 	ee::Rect sr = m_screen.GetRegion();
-	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		ee::DT_VISIBLE);
+	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
+	m_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
 //	m_panel->traverseShapes(ee::DrawShapesVisitor(sr), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();

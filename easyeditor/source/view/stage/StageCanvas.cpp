@@ -39,8 +39,6 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	, m_share_context(false)
 	, m_use_context_stack(use_context_stack)
 	, m_stage(stage)
- 	, m_camera(stage->GetCamera())
-	, m_screen(stage->GetCamera())
  	, m_width(0), m_height(0)
 	, m_dirty(false)
 	, m_cam_dirty(false)

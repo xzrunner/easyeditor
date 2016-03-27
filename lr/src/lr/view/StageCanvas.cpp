@@ -15,6 +15,7 @@
 #include <ee/EE_GTxt.h>
 #include <ee/SettingData.h>
 #include <ee/Camera.h>
+#include <ee/CameraMgr.h>
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 
@@ -90,7 +91,7 @@ void StageCanvas::DrawSprites() const
 
 void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 {
-	if (ee::Config::Instance()->GetSettings().orthogonal) {
+	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
 		ee::Rect screen_region = m_screen.GetRegion();
 		if (screen_region.IsValid() &&
 			!ee::Math2D::IsRectIntersectRect(spr->GetRect(), screen_region)) {
@@ -112,7 +113,7 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
 		ee::Matrix t;
 		spr->GetTransMatrix(t);
-		float s = std::max(1.0f, m_camera->GetScale()) * cfg.node_name_scale;
+		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
 		t.Scale(s, s);
 		ee::GTxt::Instance()->Draw(t, spr->name);
 	}

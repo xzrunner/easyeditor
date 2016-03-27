@@ -7,6 +7,7 @@
 #include "view/LibraryPage.h"
 #include "view/StagePanel.h"
 
+#include <ee/CameraMgr.h>
 #include <ee/OrthoCamera.h>
 #include <ee/panel_msg.h>
 #include <ee/trans_color.h>
@@ -55,13 +56,16 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	stage->BuildGrids(cfg->m_map_width, cfg->m_map_height);
 
 	// camera
-	float s = value["camera"]["scale"].asDouble();
-	float x = value["camera"]["x"].asDouble(),
-		y = value["camera"]["y"].asDouble();
-	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(stage->GetCamera());
-	cam->SetScale(s);
-	cam->SetPosition(ee::Vector(x, y));
-	cam->UpdateModelView();
+	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) 
+	{
+		float s = value["camera"]["scale"].asDouble();
+		float x = value["camera"]["x"].asDouble(),
+			  y = value["camera"]["y"].asDouble();
+		ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
+		cam->SetScale(s);
+		cam->SetPosition(ee::Vector(x, y));
+		cam->UpdateModelView();
+	}
 
 	// screen
 	if (!value["screen"]["multi_col"].isNull()) {
@@ -112,7 +116,7 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["size"]["view offset y"] = cfg->m_view_dy;
 
 	// camera
-	ee::Camera* cam = stage->GetCamera();
+	ee::Camera* cam = ee::CameraMgr::Instance()->GetCamera();
 	value["camera"]["scale"] = cam->GetScale();
 	value["camera"]["x"] = cam->GetPosition().x;
 	value["camera"]["y"] = cam->GetPosition().y;

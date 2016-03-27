@@ -428,6 +428,22 @@
 			<Filter
 				Name="canvas"
 				>
+				<File
+					RelativePath="..\..\..\source\view\stage\CameraCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\CameraCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\view\stage\DialogStageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\DialogStageCanvas.h"
+					>
+				</File>
 				<Filter
 					Name="base"
 					>
@@ -453,38 +469,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\include\ee\TwoPassCanvas.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="camera"
-					>
-					<File
-						RelativePath="..\..\..\source\view\stage\OrthoCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\OrthoCanvas.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\source\view\stage\PerspectCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\PerspectCanvas.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="extend"
-					>
-					<File
-						RelativePath="..\..\..\source\view\stage\DialogStageCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\include\ee\DialogStageCanvas.h"
 						>
 					</File>
 				</Filter>

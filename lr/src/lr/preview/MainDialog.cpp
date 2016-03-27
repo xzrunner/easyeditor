@@ -7,6 +7,7 @@
 #include <ee/EditPanel.h>
 #include <ee/panel_msg.h>
 #include <ee/OrthoCamera.h>
+#include <ee/CameraMgr.h>
 
 #include <wx/sizer.h>
 
@@ -30,10 +31,12 @@ void MainDialog::InitLayout(wxGLContext* glctx)
 
 	ee::EditPanel* stage = new ee::EditPanel(this, this);
 
-	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(stage->GetCamera());
-	float old_scale = cam->GetScale();
-	cam->SetScale(old_scale / PREVIEW_SCALE);
-	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
+		ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
+		float old_scale = cam->GetScale();
+		cam->SetScale(old_scale / PREVIEW_SCALE);
+		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	}
 
 	StageCanvas* canvas = new StageCanvas(stage, stage->GetStageImpl(), m_control, m_sprites, glctx);
 	stage->SetCanvas(canvas);

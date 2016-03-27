@@ -14,7 +14,6 @@ namespace ee
 
 class EditPanelImpl;
 class RenderContext;
-class Camera;
 
 class StageCanvas : public wxGLCanvas, public Object, public Observer
 {
@@ -26,9 +25,6 @@ public:
 	void SetBgColor(const Colorf& color);
 
 	void SetCurrentCanvas();
-
-	Camera* GetCamera() { return m_camera; }
-	const Camera* GetCamera() const { return m_camera; }
 
 	bool IsDirty() const { return m_dirty; }
 
@@ -74,7 +70,6 @@ protected:
 	int m_width, m_height;
 
 	Screen m_screen;
-	Camera* m_camera;
 
 private:
 	enum

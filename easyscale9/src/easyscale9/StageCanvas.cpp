@@ -8,6 +8,7 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/EE_RVG.h>
 #include <ee/Camera.h>
+#include <ee/CameraMgr.h>
 #include <ee/Matrix.h>
 #include <ee/color_config.h>
 #include <ee/SpriteTrans.h>
@@ -32,8 +33,8 @@ void StageCanvas::OnDrawSprites() const
 	{
 		ComposeGrids::Draw();
 		ee::Rect sr = m_screen.GetRegion();
-		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-			ee::DT_VISIBLE);
+		float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
+		m_stage_panel->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
 	}
 	else
 	{

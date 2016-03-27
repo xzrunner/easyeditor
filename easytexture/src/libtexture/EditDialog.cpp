@@ -12,6 +12,7 @@
 #include <ee/ConfirmDialog.h>
 #include <ee/SpriteFactory.h>
 #include <ee/OrthoCamera.h>
+#include <ee/CameraMgr.h>
 
 #include <wx/splitter.h>
 
@@ -62,7 +63,7 @@ void EditDialog::InitLayout(wxGLContext* glctx, ee::Sprite* edited, const ee::Mu
 	StagePanel* stage = new StagePanel(left_splitter, this, glctx, edited, sprite_impl, library);
 	m_stage = stage;
 
-	InitCamera(m_stage->GetCamera(), edited);
+	InitCamera(edited);
 
 	left_splitter->SetSashGravity(0.15f);
 	left_splitter->SplitVertically(library, stage);
@@ -97,15 +98,19 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	}
 }
 
-void EditDialog::InitCamera(ee::Camera* cam, ee::Sprite* spr) const
+void EditDialog::InitCamera(ee::Sprite* spr) const
 {
-	ee::Rect r = spr->GetRect();
+	if (!ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
+		return;
+	}
 
 	wxSize sz = GetSize();
+	ee::Rect r = spr->GetRect();
 	float scale = std::min(sz.GetWidth() / r.Width(), sz.GetHeight() / r.Height());
-	static_cast<ee::OrthoCamera*>(cam)->SetScale(1 / scale);
 
-	static_cast<ee::OrthoCamera*>(cam)->SetPosition(ee::Vector(0, 0));
+	ee::OrthoCamera* cam = static_cast<ee::OrthoCamera*>(ee::CameraMgr::Instance()->GetCamera());
+	cam->SetScale(1 / scale);
+	cam->SetPosition(ee::Vector(0, 0));
 }
 
 }

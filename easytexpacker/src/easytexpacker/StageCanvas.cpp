@@ -7,6 +7,7 @@
 #include <ee/EE_RVG.h>
 #include <ee/Camera.h>
 #include <ee/color_config.h>
+#include <ee/CameraMgr.h>
 
 namespace etexpacker
 {
@@ -21,8 +22,8 @@ StageCanvas::StageCanvas(StagePanel* stage)
 void StageCanvas::OnDrawSprites() const
 {
 	ee::Rect sr = m_screen.GetRegion();
-	m_stage_impl->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		ee::DT_VISIBLE);
+	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
+	m_stage_impl->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
 
 	DrawRegion();
 }

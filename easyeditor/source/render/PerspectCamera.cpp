@@ -3,36 +3,36 @@
 namespace ee
 {
 
-PerspectCamera::PerspectCamera(float scale)
+PerspectiveCamera::PerspectiveCamera(float scale)
 {
 
 }
 
-void PerspectCamera::Reset()
+void PerspectiveCamera::Reset()
 {
 
 }
 
-Vector PerspectCamera::TransPosScreenToProject(int x, int y, int width, int height) const
-{
-	return Vector();
-}
-
-Vector PerspectCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
+Vector PerspectiveCamera::TransPosScreenToProject(int x, int y, int width, int height) const
 {
 	return Vector();
 }
 
-void PerspectCamera::UpdateModelView() const
+Vector PerspectiveCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
+{
+	return Vector();
+}
+
+void PerspectiveCamera::UpdateModelView() const
 {
 }
 
-float PerspectCamera::GetScale() const
+float PerspectiveCamera::GetScale() const
 {
 	return 1;
 }
 
-const Vector& PerspectCamera::GetPosition() const
+const Vector& PerspectiveCamera::GetPosition() const
 {
 	return Vector();
 }

@@ -21,6 +21,7 @@
 #include "SpriteRenderer.h"
 #include "ScreenCache.h"
 #include "Camera.h"
+#include "CameraMgr.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
 #include "SpriteShader.h"
@@ -220,7 +221,7 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 
 		Vector tex_coords_base[4];
 		SpriteRenderer* rd = SpriteRenderer::Instance();
-		const Camera* cam = rd->GetCamera();
+		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		assert(cam);
 		int w, h;
 		ScreenCache::Instance()->GetSize(w, h);
@@ -234,7 +235,8 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 	}
 	else 
 	{
-		if (Config::Instance()->GetSettings().orthogonal) 
+		const Camera* cam = CameraMgr::Instance()->GetCamera();
+		if (cam->Type() == "ortho") 
 		{
 			SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
 			shader->SetColor(trans.color);
@@ -246,10 +248,52 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 				shader->Draw(vertices, texcoords, texid);
 			}
 		} 
-		else 
-		{
-			const float NEAR = -2, FAR = -10;
+		//else 
+		//{
+		//	const float NEAR = -2, FAR = -10;
 
+		//	std::vector<vec3> _vertices;
+		//	_vertices.push_back(vec3(vertices[0].x, vertices[0].y, 0));
+		//	_vertices.push_back(vec3(vertices[1].x, vertices[1].y, 0));
+		//	_vertices.push_back(vec3(vertices[2].x, vertices[2].y, 0));
+		//	_vertices.push_back(vec3(vertices[0].x, vertices[0].y, 0));
+		//	_vertices.push_back(vec3(vertices[2].x, vertices[2].y, 0));
+		//	_vertices.push_back(vec3(vertices[3].x, vertices[3].y, 0));
+
+		//	float min_y = FLT_MAX, max_y = -FLT_MAX;
+		//	for (int i = 0; i < 6; ++i) {
+		//		if (_vertices[i].y < min_y) {
+		//			min_y = _vertices[i].y;
+		//		}
+		//		if (_vertices[i].y > max_y) {
+		//			max_y = _vertices[i].y;
+		//		}
+		//	}
+		//	float base_z = NEAR + (min_y - (-1000)) / 2000 * (FAR - NEAR);
+		//	float dz;
+		//	if (max_y - min_y > 500) {
+		//		dz = (FAR - NEAR) * (max_y - min_y) / 500;
+		//	} else {
+		//		dz = (NEAR - FAR) * (max_y - min_y) / 500;
+		//	}
+		//	for (int i = 0; i < 6; ++i) {
+		//		_vertices[i].z = base_z + (_vertices[i].y - min_y) / (max_y - min_y) * dz;
+		//	}
+
+		//	std::vector<Vector> _texcoords;
+		//	_texcoords.push_back(texcoords[0]);
+		//	_texcoords.push_back(texcoords[1]);
+		//	_texcoords.push_back(texcoords[2]);
+		//	_texcoords.push_back(texcoords[0]);
+		//	_texcoords.push_back(texcoords[2]);
+		//	_texcoords.push_back(texcoords[3]);
+
+		//	mgr->SetShader(ShaderMgr::MODEL);
+		//	Sprite3Shader* shader = static_cast<Sprite3Shader*>(mgr->GetShader(ShaderMgr::MODEL));
+		//	shader->Draw(_vertices, _texcoords, texid);
+		//}
+		else
+		{
 			std::vector<vec3> _vertices;
 			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, 0));
 			_vertices.push_back(vec3(vertices[1].x, vertices[1].y, 0));
@@ -257,26 +301,6 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, 0));
 			_vertices.push_back(vec3(vertices[2].x, vertices[2].y, 0));
 			_vertices.push_back(vec3(vertices[3].x, vertices[3].y, 0));
-
-			float min_y = FLT_MAX, max_y = -FLT_MAX;
-			for (int i = 0; i < 6; ++i) {
-				if (_vertices[i].y < min_y) {
-					min_y = _vertices[i].y;
-				}
-				if (_vertices[i].y > max_y) {
-					max_y = _vertices[i].y;
-				}
-			}
-			float base_z = NEAR + (min_y - (-1000)) / 2000 * (FAR - NEAR);
-			float dz;
-			if (max_y - min_y > 500) {
-				dz = (FAR - NEAR) * (max_y - min_y) / 500;
-			} else {
-				dz = (NEAR - FAR) * (max_y - min_y) / 500;
-			}
-			for (int i = 0; i < 6; ++i) {
-				_vertices[i].z = base_z + (_vertices[i].y - min_y) / (max_y - min_y) * dz;
-			}
 
 			std::vector<Vector> _texcoords;
 			_texcoords.push_back(texcoords[0]);
@@ -286,8 +310,8 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 			_texcoords.push_back(texcoords[2]);
 			_texcoords.push_back(texcoords[3]);
 
-			mgr->SetShader(ShaderMgr::MODEL);
-			Sprite3Shader* shader = static_cast<Sprite3Shader*>(mgr->GetShader(ShaderMgr::MODEL));
+			mgr->SetShader(ShaderMgr::SPRITE3);
+			Sprite3Shader* shader = static_cast<Sprite3Shader*>(mgr->GetShader(ShaderMgr::SPRITE3));
 			shader->Draw(_vertices, _texcoords, texid);
 		}
 	}

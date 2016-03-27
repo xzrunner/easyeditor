@@ -30,15 +30,15 @@ public:
 
 	virtual void Reset();
 
-	void SetModelView(const Vector& offset, float scale);
+	void SetModelView(const vec3& pos, float angle);
 
 	void SetColor(const ColorTrans& color);
 
 	void Draw(const std::vector<vec3>& positions, const std::vector<Vector>& texcoords, int texid);
 
 public:
-	static const int FAR = 50;
-	static const int NEAR = 2;
+	static const int FAR = 150;
+	static const int NEAR = 50;
 
 protected:
 	virtual void BindAttribLocation(GLuint prog) {}

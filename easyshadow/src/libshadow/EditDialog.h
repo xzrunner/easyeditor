@@ -26,7 +26,7 @@ private:
 
 	void OnCloseEvent(wxCloseEvent& event);
 
-	void InitCamera(ee::Camera* cam, ee::Sprite* spr) const;
+	void InitCamera(ee::Sprite* spr) const;
 
 private:
 	Symbol* m_symbol;

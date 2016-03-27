@@ -402,6 +402,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\render\CameraMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\CameraMgr.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\render\OrthoCamera.cpp"
 				>
 			</File>
@@ -415,6 +423,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\include\ee\PerspectCamera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\source\render\Pseudo3DCamera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\Pseudo3DCamera.h"
 				>
 			</File>
 		</Filter>

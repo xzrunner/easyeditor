@@ -1,23 +1,25 @@
 #include "Screen.h"
 #include "Camera.h"
+#include "CameraMgr.h"
 
 namespace ee
 {
 
 float Screen::GetScale() const
 {
-	return m_cam->GetScale();
+	return CameraMgr::Instance()->GetCamera()->GetScale();
 }
 
 void Screen::UpdateModelView() const
 {
-	m_cam->UpdateModelView();
+	CameraMgr::Instance()->GetCamera()->UpdateModelView();
 }
 
 Rect Screen::GetRegion() const
 {
-	Rect r(m_size.x * m_cam->GetScale(), m_size.y * m_cam->GetScale());
-	r.Translate(m_cam->GetPosition());
+	Camera* cam = CameraMgr::Instance()->GetCamera();
+	Rect r(m_size.x * cam->GetScale(), m_size.y * cam->GetScale());
+	r.Translate(cam->GetPosition());
 	return r;
 }
 

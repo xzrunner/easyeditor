@@ -66,11 +66,6 @@ void EditPanel::SetCanvas(StageCanvas* canvas)
 	m_impl->SetCanvas(canvas);
 }
 
-Camera* EditPanel::GetCamera() const 
-{ 
-	return m_impl->GetCamera();
-}
-
 void EditPanel::OnMouse(wxMouseEvent& event)
 {
 	m_impl->OnMouse(event);

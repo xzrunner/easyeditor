@@ -11,6 +11,7 @@
 #include <ee/EE_RVG.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/color_config.h>
+#include <ee/CameraMgr.h>
 
 // debug
 #include <ee/ShaderMgr.h>
@@ -65,7 +66,7 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawBackground();
 
-	ee::ScreenCache::Instance()->Draw(m_camera);
+	ee::ScreenCache::Instance()->Draw(ee::CameraMgr::Instance()->GetCamera());
 
 	ee::RVG::Color(ee::Colorf(0, 0.8f, 0));
 	const ee::Rect& r = m_stage->getSymbol()->m_clipbox;
@@ -101,8 +102,8 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawBackground();
 
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), m_camera->GetScale()), 
-		ee::DT_VISIBLE);
+	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(m_screen.GetRegion(), scale), ee::DT_VISIBLE);
 
 	const ee::Rect& clipbox = m_stage->getSymbol()->m_clipbox;
 	if (clipbox.Width() != 0 && clipbox.Height() != 0) {

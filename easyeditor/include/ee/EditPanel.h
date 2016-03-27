@@ -45,8 +45,6 @@ public:
 	StageCanvas* GetCanvas();
 	void SetCanvas(StageCanvas* canvas);
 
-	Camera* GetCamera() const;
-
 	// In Stage, class StagePanel can't get focus, only its class StageCanvas has the focus, so 
 	// these two func should be called by StageCanvas.
 	// While in SymbolEdit, class SymbolEditPanel can get focus.

@@ -3,6 +3,7 @@
 
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Camera.h>
+#include <ee/CameraMgr.h>
 #include <ee/EE_RVG.h>
 
 namespace eui
@@ -21,8 +22,8 @@ void StageCanvas::OnDrawSprites() const
 	DrawGuideLines();
 
 	ee::Rect sr = m_screen.GetRegion();
-	m_stage->TraverseSprites(ee::DrawSpritesVisitor(sr, m_camera->GetScale()), 
-		ee::DT_VISIBLE);
+	float scale = ee::CameraMgr::Instance()->GetCamera()->GetScale();
+	m_stage->TraverseSprites(ee::DrawSpritesVisitor(sr, scale), ee::DT_VISIBLE);
 
 	m_stage->DrawEditOP();
 }

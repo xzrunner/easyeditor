@@ -15,7 +15,6 @@ class SpriteBatch;
 class Vector;
 class Matrix;
 class FBO;
-class Camera;
 
 class SpriteRenderer
 {
@@ -36,10 +35,6 @@ public:
 			  float xShear = 0.0f, 
 			  float yShear = 0.0f) const;
 
-	// fixme: for Image's Draw
-	void SetCamera(const Camera* cam) { m_cam = cam; }
-	const Camera* GetCamera() const { return m_cam; }
-
 	static SpriteRenderer* Instance();
 
 private:
@@ -48,9 +43,6 @@ private:
 	void DrawImpl(const Sprite* sprite, 
 		          const Sprite* root,
   				  const SpriteTrans& trans) const;
-
-private:
-	const Camera* m_cam;
 
 private:
 	static SpriteRenderer* m_instance;

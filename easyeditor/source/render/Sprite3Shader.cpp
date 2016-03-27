@@ -36,9 +36,9 @@ void Sprite3Shader::Unbind()
 	sl_sprite3_unbind();
 }
 
-void Sprite3Shader::SetModelView(const Vector& offset, float scale)
+void Sprite3Shader::SetModelView(const vec3& pos, float angle)
 {
-	sl_sprite3_modelview(offset.x, offset.y, scale, scale);
+	sl_sprite3_modelview(pos.x, pos.y, pos.z, angle);
 }
 
 void Sprite3Shader::SetProjection(int width, int height)

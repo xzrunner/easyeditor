@@ -1,16 +1,17 @@
-#ifndef _EASYEDITOR_PERSPECT_CAMERA_H_
-#define _EASYEDITOR_PERSPECT_CAMERA_H_
+#ifndef _EASYEDITOR_PERSPECTIVE_CAMERA_H_
+#define _EASYEDITOR_PERSPECTIVE_CAMERA_H_
 
 #include "Camera.h"
 
 namespace ee
 {
 
-class PerspectCamera : public Camera
+class PerspectiveCamera : public Camera
 {
 public:
-	PerspectCamera(float scale = 1.0f);
+	PerspectiveCamera(float scale = 1.0f);
 
+	virtual std::string Type() const { return "perspective"; }
 	virtual void Reset();
 
 	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const;
@@ -21,8 +22,8 @@ public:
 	virtual float GetScale() const;
 	virtual const Vector& GetPosition() const;
 
-}; // PerspectCamera
+}; // PerspectiveCamera
 
 }
 
-#endif // _EASYEDITOR_PERSPECT_CAMERA_H_
+#endif // _EASYEDITOR_PERSPECTIVE_CAMERA_H_

@@ -119,7 +119,11 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 	static_cast<SpriteShader*>(m_shaders[SPRITE])->SetModelView(offset, scale);
 	static_cast<BlendShader*>(m_shaders[BLEND])->SetModelView(offset, scale);
 	static_cast<FilterShader*>(m_shaders[FILTER])->SetModelView(offset, scale);
-	static_cast<Sprite3Shader*>(m_shaders[MODEL])->SetModelView(offset, scale);
+}
+
+void ShaderMgr::SetModelView(const vec3& pos, float angle)
+{
+	static_cast<Sprite3Shader*>(m_shaders[SPRITE3])->SetModelView(pos, angle);	
 }
 
 }

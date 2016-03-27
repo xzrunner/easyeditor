@@ -1,6 +1,5 @@
 #include "EditPanelImpl.h"
 #include "EditPanel.h"
-#include "OrthoCamera.h"
 #include "Frame.h"
 #include "StageCanvas.h"
 #include "panel_msg.h"
@@ -9,6 +8,8 @@
 #include "sprite_msg.h"
 #include "StringHelper.h"
 #include "SpriteRenderer.h"
+#include "CameraMgr.h"
+#include "OrthoCamera.h"
 
 #include <fstream>
 
@@ -22,10 +23,6 @@ EditPanelImpl::EditPanelImpl(wxTopLevelWindow* frame,
 {
 	m_edit_op = NULL;
 	m_canvas = NULL;
-	m_camera = new OrthoCamera;
-	
-	SpriteRenderer::Instance()->SetCamera(m_camera);
-
 	InitSubjects();
 }
 
@@ -33,7 +30,6 @@ EditPanelImpl::~EditPanelImpl()
 {
 	Clear();
 
-	delete m_camera;
 	if (m_edit_op) {
 		m_edit_op->Release();
 	}
@@ -65,7 +61,7 @@ Vector EditPanelImpl::TransPosScrToProj(int x, int y) const
 
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
-	return m_camera->TransPosScreenToProject(x, y, w, h);
+	return CameraMgr::Instance()->GetCamera()->TransPosScreenToProject(x, y, w, h);
 }
 
 Vector EditPanelImpl::TransPosProjToScr(const Vector& proj) const
@@ -76,7 +72,7 @@ Vector EditPanelImpl::TransPosProjToScr(const Vector& proj) const
 
 	int w = m_stage->GetSize().GetWidth(),
 		h = m_stage->GetSize().GetHeight();
-	return m_camera->TransPosProjectToScreen(proj, w, h);
+	return CameraMgr::Instance()->GetCamera()->TransPosProjectToScreen(proj, w, h);
 }
 
 void EditPanelImpl::DrawEditOP() const
@@ -191,7 +187,7 @@ void EditPanelImpl::OnKeyUp(wxKeyEvent& event)
 
 void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 {
-	if (!m_stage) {
+	if (!m_stage || !CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
 		return;
 	}
 
@@ -200,7 +196,7 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 	const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
 	const float cx = static_cast<float>(x),
 		cy = static_cast<float>(h - y);
-	static_cast<OrthoCamera*>(m_camera)->Scale(scale, cx, cy, w, h);
+	static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera())->Scale(scale, cx, cy, w, h);
 }
 
 void EditPanelImpl::Undo()

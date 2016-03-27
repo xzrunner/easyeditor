@@ -7,7 +7,7 @@
 
 class wxGLContext;
 
-namespace ee { class MultiSpritesImpl; class Sprite; class Camera; }
+namespace ee { class MultiSpritesImpl; class Sprite; }
 
 namespace eterrain2d
 {
@@ -28,7 +28,7 @@ private:
 
 	void OnCloseEvent(wxCloseEvent& event);
 
-	void InitCamera(ee::Camera* cam, ee::Sprite* spr) const;
+	void InitCamera(ee::Sprite* spr) const;
 
 private:
 	Symbol* m_symbol;

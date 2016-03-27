@@ -12,6 +12,7 @@
 #include "MultiSpritesImpl.h"
 #include "PropertySettingPanel.h"
 #include "EE_RVG.h"
+#include "CameraMgr.h"
 
 namespace ee
 {
@@ -111,7 +112,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::OnDraw() const
 {
 	if (TBase::OnDraw()) return true;
-	m_impl->OnDraw(*m_stage->GetCamera());
+	m_impl->OnDraw(*CameraMgr::Instance()->GetCamera());
 	return false;
 }
 

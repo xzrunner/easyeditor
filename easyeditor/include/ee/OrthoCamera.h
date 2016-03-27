@@ -11,6 +11,7 @@ class OrthoCamera : public Camera
 public:
 	OrthoCamera(float scale = 1.0f);
 
+	virtual std::string Type() const { return "ortho"; }
 	virtual void Reset();
 
 	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const;

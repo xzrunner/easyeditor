@@ -12,6 +12,7 @@ class Pseudo3DCamera : public Camera
 public:
 	Pseudo3DCamera();
 
+	virtual std::string Type() const { return "pseudo3d"; }
 	virtual void Reset();
 
 	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const;

@@ -55,8 +55,6 @@ _before_draw(void* ud) {
 
 void TwoPassCanvas::OnDrawWhole() const
 {
-	SpriteRenderer::Instance()->SetCamera(GetCamera());
-
 	ScreenCache* sc = ScreenCache::Instance();
 
 	//////////////////////////////////////////////////////////////////////////

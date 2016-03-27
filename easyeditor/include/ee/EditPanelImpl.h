@@ -16,7 +16,6 @@ class EditPanel;
 class AtomicOP;
 class EditOP;
 class StageCanvas;
-class Camera;
 class Sprite;
 
 class EditPanelImpl : public Object, public Observer
@@ -41,8 +40,6 @@ public:
 	const StageCanvas* GetCanvas() const { return m_canvas; }
 	StageCanvas* GetCanvas() { return m_canvas; }
 	void SetCanvas(StageCanvas* canvas);
-
-	Camera* GetCamera() const { return m_camera; }
 
 	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
@@ -96,7 +93,6 @@ protected:
 	EditOP* m_edit_op;
 
 	StageCanvas* m_canvas;
-	Camera* m_camera;
 
 	wxTopLevelWindow* m_frame;
 

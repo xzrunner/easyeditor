@@ -1,19 +1,20 @@
-#include "OrthoCanvas.h"
+#include "CameraCanvas.h"
 #include "Camera.h"
 #include "ShaderMgr.h"
 #include "GL.h"
 #include "RenderContextStack.h"
+#include "CameraMgr.h"
 
 namespace ee
 {
 
-OrthoCanvas::OrthoCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
+CameraCanvas::CameraCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 						 wxGLContext* glctx, bool use_context_stack)
 	: TwoPassCanvas(stage_wnd, stage, glctx, use_context_stack)
 {
 }
 
-void OrthoCanvas::OnSize(int w, int h)
+void CameraCanvas::OnSize(int w, int h)
 {
 //  	glViewport(0, 0, w, h);
 //  
@@ -49,7 +50,7 @@ void OrthoCanvas::OnSize(int w, int h)
  	m_screen.SetSize(w, h);
  	m_screen.SetCamera();
 
-	m_camera->UpdateModelView();
+	CameraMgr::Instance()->GetCamera()->UpdateModelView();
 
 	RenderContextStack::Instance()->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);

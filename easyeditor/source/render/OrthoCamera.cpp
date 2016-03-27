@@ -5,8 +5,11 @@ namespace ee
 {
 
 OrthoCamera::OrthoCamera(float scale/* = 1.0f*/)
+	: m_scale(scale)
 {
 	m_scale = scale;
+
+	UpdateModelView();
 }
 
 void OrthoCamera::Reset()

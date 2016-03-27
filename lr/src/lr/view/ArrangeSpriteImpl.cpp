@@ -11,6 +11,7 @@
 #include <ee/SettingData.h>
 #include <ee/panel_msg.h>
 #include <ee/EditPanelImpl.h>
+#include <ee/CameraMgr.h>
 
 #include <easycomplex.h>
 #include <easyparticle3d.h>
@@ -35,12 +36,10 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 	if (m_stage->GetKeyState(WXK_SHIFT))
 	{
 		if (keyCode == 'o' || keyCode == 'O') {
-			ee::SettingData& data = ee::Config::Instance()->GetSettings();
-			data.orthogonal = true;
+			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::ORTHO);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (keyCode == 'p' || keyCode == 'P') {
-			ee::SettingData& data = ee::Config::Instance()->GetSettings();
-			data.orthogonal = false;
+			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::PSEUDO3D);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}
