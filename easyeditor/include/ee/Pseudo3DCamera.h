@@ -23,6 +23,11 @@ public:
 	virtual float GetScale() const;
 	virtual const Vector& GetPosition() const;
 
+	void TranslationX(float dx);
+	void TranslationY(float dy);
+	void TranslationZ(float dz);
+	void Rotate(float da);
+
 private:
 	vec3 m_position;
 

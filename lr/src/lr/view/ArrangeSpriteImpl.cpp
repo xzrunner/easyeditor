@@ -12,6 +12,7 @@
 #include <ee/panel_msg.h>
 #include <ee/EditPanelImpl.h>
 #include <ee/CameraMgr.h>
+#include <ee/Pseudo3DCamera.h>
 
 #include <easycomplex.h>
 #include <easyparticle3d.h>
@@ -29,18 +30,52 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(ee::LibraryPanel* library,
 {
 }
 
-void ArrangeSpriteImpl::OnKeyDown(int keyCode)
+void ArrangeSpriteImpl::OnKeyDown(int key_code)
 {
-	ee::ArrangeSpriteImpl::OnKeyDown(keyCode);
+	ee::ArrangeSpriteImpl::OnKeyDown(key_code);
 
 	if (m_stage->GetKeyState(WXK_SHIFT))
 	{
-		if (keyCode == 'o' || keyCode == 'O') {
+		if (key_code == 'o' || key_code == 'O') {
 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::ORTHO);
-			ee::SetCanvasDirtySJ::Instance()->SetDirty();
-		} else if (keyCode == 'p' || keyCode == 'P') {
+			ee::SetCanvasDirtySJ::Instance()->SetDirty();			
+		} else if (key_code == 'p' || key_code == 'P') {
 			ee::CameraMgr::Instance()->SetCamera(ee::CameraMgr::PSEUDO3D);
 			ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		}
+	}
+	else
+	{
+		if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::PSEUDO3D))
+		{
+			ee::Pseudo3DCamera* cam = static_cast<ee::Pseudo3DCamera*>(ee::CameraMgr::Instance()->GetCamera());
+			switch (key_code)
+			{
+			case 'a' : case 'A':
+				cam->TranslationX(5);
+				break;
+			case 'd' : case 'D':
+				cam->TranslationX(-5);
+				break;
+			case 's' : case 'S':
+				cam->TranslationY(5);
+				break;
+			case 'w' : case 'W':
+				cam->TranslationY(-5);
+				break;
+			case 'k' : case 'K':
+				cam->TranslationZ(5);
+				break;
+			case 'i' : case 'I':
+				cam->TranslationZ(-5);
+				break;
+			case 'j' : case 'J':
+				cam->Rotate(1);
+				break;
+			case 'l' : case 'L':
+				cam->Rotate(-1);
+				break;
+			}
 		}
 	}
 }
