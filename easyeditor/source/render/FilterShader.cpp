@@ -92,6 +92,9 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_SWIRL:
 		sl_mode = SLFM_SWIRL;
 		break;
+	case FM_GAUSSIAN_BLUR:
+		sl_mode = SLFM_GAUSSIAN_BLUR;
+		break;
 	}
 	assert(sl_mode != SLFM_MAX_COUNT);
 

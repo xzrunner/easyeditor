@@ -269,6 +269,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\shaderlab\gaussian_blur.frag"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\gray.frag"
 				>
 			</File>

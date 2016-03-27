@@ -17,6 +17,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(FM_HEAT_HAZE, "heat haze", "热霾"));
 	m_modes.push_back(Item(FM_SHOCK_WAVE, "shock wave", "冲击波"));
 	m_modes.push_back(Item(FM_SWIRL, "swirl", "漩涡"));
+	m_modes.push_back(Item(FM_GAUSSIAN_BLUR, "gaussian blur", "高斯模糊"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const

@@ -20,6 +20,7 @@ enum FilterMode
 	FM_HEAT_HAZE,
 	FM_SHOCK_WAVE,
 	FM_SWIRL,
+	FM_GAUSSIAN_BLUR,
 
 	FM_UNKNOWN = 99,
 
