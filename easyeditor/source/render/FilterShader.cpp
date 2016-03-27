@@ -89,6 +89,9 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_SHOCK_WAVE:
 		sl_mode = SLFM_SHOCK_WAVE;
 		break;
+	case FM_SWIRL:
+		sl_mode = SLFM_SWIRL;
+		break;
 	}
 	assert(sl_mode != SLFM_MAX_COUNT);
 

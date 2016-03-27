@@ -296,6 +296,10 @@
 				RelativePath="..\..\..\src\shaderlab\sl_filter.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\swirl.frag"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="sprite3"

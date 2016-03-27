@@ -16,6 +16,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(FM_GRAY, "gray", "»Ò¶È"));
 	m_modes.push_back(Item(FM_HEAT_HAZE, "heat haze", "ÈÈö²"));
 	m_modes.push_back(Item(FM_SHOCK_WAVE, "shock wave", "³å»÷²¨"));
+	m_modes.push_back(Item(FM_SWIRL, "swirl", "äöÎÐ"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const
