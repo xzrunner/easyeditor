@@ -28,6 +28,8 @@ public:
 	void TranslationZ(float dz);
 	void Rotate(float da);
 
+	float GetAngle() const { return m_angle; }
+
 private:
 	vec3 m_position;
 

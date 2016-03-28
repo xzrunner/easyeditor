@@ -18,7 +18,6 @@ Sprite3Shader::~Sprite3Shader()
 void Sprite3Shader::Load()
 {
  	sl_sprite3_load();
-// 	sl_sprite3_modelview(0, 0, 1, 1);
 }
 
 void Sprite3Shader::Unload()

@@ -64,10 +64,10 @@ void ArrangeSpriteImpl::OnKeyDown(int key_code)
 				cam->TranslationY(-5);
 				break;
 			case 'k' : case 'K':
-				cam->TranslationZ(5);
+				cam->TranslationZ(-5);
 				break;
 			case 'i' : case 'I':
-				cam->TranslationZ(-5);
+				cam->TranslationZ(5);
 				break;
 			case 'j' : case 'J':
 				cam->Rotate(1);

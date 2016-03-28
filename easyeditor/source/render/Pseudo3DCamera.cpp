@@ -6,8 +6,8 @@ namespace ee
 {
 
 Pseudo3DCamera::Pseudo3DCamera()
-	: m_position(0, 0, -100)
-	, m_angle(-5)
+	: m_position(0, 0, -110)
+	, m_angle(-2)
 {
 	UpdateModelView();
 }
