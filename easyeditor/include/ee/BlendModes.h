@@ -9,25 +9,25 @@ namespace ee
 enum BlendMode
 {
 	// normal
-	BM_NULL			= 0,
+	BM_NULL				= 0,
 	BM_DISSOLVE,		// todo
 
 	// darken modes
-	BM_DARKEN		= 10,
+	BM_DARKEN			= 10,
 	BM_MULTIPLY,
 	BM_COLOR_BURN,
 	BM_LINEAR_BURN,
 	BM_DARKER_COLOR,	// todo
 
 	// lighten modes
-	BM_LIGHTEN		= 20,
+	BM_LIGHTEN			= 20,
 	BM_SCREEN,
 	BM_COLOR_DODGE,
 	BM_LINEAR_DODGE,
 	BM_LIGHTER_COLOR,	// todo
 
 	// saturation modes
-	BM_OVERLAY		= 30,
+	BM_OVERLAY			= 30,
 	BM_SOFT_LIGHT,
 	BM_HARD_LIGHT,
 	BM_VIVID_LIGHT,
@@ -36,7 +36,7 @@ enum BlendMode
 	BM_HARD_MIX,
 
 	// substraction modes
-	BM_DIFFERENCE	= 40,
+	BM_DIFFERENCE		= 40,
 	BM_EXCLUSION,
 
 	// color modes 
@@ -44,9 +44,6 @@ enum BlendMode
 	BM_SATURATION,		// todo
 	BM_COLOR,			// todo
 	BM_LUMINOSITY,		// todo
-
-	// others
-	BM_UNKNOWN		= 99,
 };
 
 class BlendModes

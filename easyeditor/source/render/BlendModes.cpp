@@ -59,7 +59,7 @@ BlendMode BlendModes::GetModeFromNameEN(const std::string& name) const
 			return item.mode;
 		}
 	}
-	return BM_UNKNOWN;
+	return BM_NULL;
 }
 
 std::string BlendModes::GetNameENFromMode(BlendMode mode) const
@@ -76,7 +76,7 @@ std::string BlendModes::GetNameENFromMode(BlendMode mode) const
 BlendMode BlendModes::GetIDFromIdx(int idx) const
 {
 	if (idx < 0 || idx >= static_cast<int>(m_modes.size())) {
-		return BM_UNKNOWN;
+		return BM_NULL;
 	} else {
 		return m_modes[idx].mode;
 	}
