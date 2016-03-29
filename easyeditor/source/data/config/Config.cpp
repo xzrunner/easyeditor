@@ -17,8 +17,8 @@ static const char* FILENAME = "config.json";
 
 Config::Config()
 {
-//	m_use_dtex = true;
-	m_use_dtex = false;
+	m_use_dtex = true;
+//	m_use_dtex = false;
 
 	m_use_render = true;
 
@@ -76,7 +76,7 @@ void Config::LoadFromFile(const char* filename)
 	reader.parse(fin, m_value);
 	fin.close();
 
-// 	m_use_dtex = m_value["use_dtex"].asBool();
+ 	m_use_dtex = m_value["use_dtex"].asBool();
 
 	LoadFontCfg(m_value["font"]);
 
