@@ -24,7 +24,7 @@ class LibraryPanel;
 class Layer : public ee::Object
 {
 public:
-	Layer(int id, LibraryPanel* library);
+	Layer(int id, LibraryPanel* library, bool enable_perspective);
 	
 	virtual void TraverseSprite(ee::Visitor& visitor, bool order = true) const;
 	virtual void TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
@@ -99,6 +99,8 @@ protected:
 
 private:
 	int m_id;
+
+	bool m_enable_perspective;
 
 	std::string m_name;
 

@@ -4,6 +4,7 @@
 #include "Matrix.h"
 #include "ColorTrans.h"
 #include "ShaderTrans.h"
+#include "CameraTrans.h"
 
 namespace ee
 {
@@ -24,6 +25,8 @@ public:
 	ColorTrans color;
 
 	ShaderTrans shader;
+
+	CameraTrans camera;
 
 }; // SpriteTrans
 

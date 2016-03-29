@@ -18,12 +18,13 @@ namespace lr
 {
 
 LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
-						 LayerType type, int id)
+						 LayerType type, int id, bool perspective)
 	: ee::LibraryPage(library->GetNotebook(), name)
 	, m_layer_type(type)
+	, m_perspective(perspective)
 	, m_curr_op_idx(-1)
 {
-	m_layer = LayerFactory::Create(id, library, type);
+	m_layer = LayerFactory::Create(id, library, type, perspective);
 	InitLayout();
 }
 

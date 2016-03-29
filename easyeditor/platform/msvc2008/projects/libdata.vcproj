@@ -778,6 +778,14 @@
 			Name="complex"
 			>
 			<File
+				RelativePath="..\..\..\source\data\complex\CameraTrans.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\CameraTrans.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\data\complex\ColorTrans.cpp"
 				>
 			</File>

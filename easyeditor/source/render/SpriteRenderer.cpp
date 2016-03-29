@@ -50,6 +50,13 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 		filter = sprite->shader.filter;
 	}
 
+	bool perspective = true;
+	if (!trans.camera.enable_perspective) {
+		perspective = false;
+	} else {
+		perspective = sprite->camera.enable_perspective;
+	}
+
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	if (blend != BM_NULL) {
 		SpriteBlend::Instance()->Draw(sprite, trans.mt);
@@ -61,14 +68,15 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 		shader->SetMode(FilterModes::Instance()->GetNameENFromID(filter));
 		SpriteTrans t = trans;
 		t.shader.filter = filter;
+		t.camera.enable_perspective = perspective;
 		DrawImpl(sprite, root, t);
 	} else {
 		if (set_shader) {
 			mgr->SetShader(ShaderMgr::SPRITE);
 		}
 		SpriteTrans t = trans;
-		t.shader.blend = blend;
-		DrawImpl(sprite, root, trans);
+		t.camera.enable_perspective = perspective;
+		DrawImpl(sprite, root, t);
 	}
 }
 

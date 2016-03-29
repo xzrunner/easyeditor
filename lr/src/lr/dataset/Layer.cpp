@@ -21,9 +21,10 @@
 namespace lr
 {
 
-Layer::Layer(int id, LibraryPanel* library)
+Layer::Layer(int id, LibraryPanel* library, bool enable_perspective)
 	: m_id(id)
 	, m_library(library)
+	, m_enable_perspective(enable_perspective)
 	, m_editable(true)
 	, m_visible(true)
 	, m_next_id(0)
@@ -60,6 +61,8 @@ bool Layer::InsertSprite(Object* obj, int idx)
 {
 	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
 	CheckSpriteName(spr);
+
+	spr->camera.enable_perspective = m_enable_perspective;
 
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(spr);

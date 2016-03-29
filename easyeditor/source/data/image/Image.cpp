@@ -237,7 +237,7 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 	else 
 	{
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
-		if (cam->Type() == "ortho") 
+		if (cam->Type() == "ortho" || !trans.camera.enable_perspective) 
 		{
 			SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
 			shader->SetColor(trans.color);

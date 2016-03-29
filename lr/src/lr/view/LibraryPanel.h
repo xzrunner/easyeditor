@@ -46,6 +46,8 @@ public:
 	Layer* GetTerrainLayer();
 
 	LayerType GetLayerType(int idx) const;
+	bool GetLayerPerspective(int idx) const;
+
 	Layer* GetLayer(int idx);
 
 	bool IsCurrUnitLayer();

@@ -7,6 +7,7 @@
 #include "Vector.h"
 #include "ColorTrans.h"
 #include "ShaderTrans.h"
+#include "CameraTrans.h"
 
 #include <json/json.h>
 
@@ -107,6 +108,7 @@ public:
 
 	ColorTrans color;
 	ShaderTrans shader;
+	CameraTrans camera;
 
 	// edit
 	bool visiable;

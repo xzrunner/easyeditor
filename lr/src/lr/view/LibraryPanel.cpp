@@ -146,7 +146,7 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 
 	int id = 0;
 	{
-		LibraryPage* page = new LibraryPage(this, "地形", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "地形", LT_DEFAULT, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
@@ -154,14 +154,14 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		m_terrain_page = page;
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "装饰", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "装饰", LT_DEFAULT, id++, true);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "单位", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "单位", LT_DEFAULT, id++, true);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
@@ -169,14 +169,14 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		m_unit_page = page;
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "点", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "点", LT_DEFAULT, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "路径", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "路径", LT_DEFAULT, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_line_op);
@@ -184,14 +184,14 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		m_path_page = page;
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "区域", LT_SHAPE, id++);
+		LibraryPage* page = new LibraryPage(this, "区域", LT_SHAPE, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "碰撞区域", LT_SHAPE, id++);
+		LibraryPage* page = new LibraryPage(this, "碰撞区域", LT_SHAPE, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(draw_poly_op);
@@ -199,14 +199,14 @@ void LibraryPanel::InitPages(StagePanel* stage, ee::PropertySettingPanel* proper
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "摄像机", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "摄像机", LT_DEFAULT, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
 		AddPage(page);
 	}
 	{
-		LibraryPage* page = new LibraryPage(this, "关卡", LT_DEFAULT, id++);
+		LibraryPage* page = new LibraryPage(this, "关卡", LT_DEFAULT, id++, false);
 		Layer* layer = page->GetLayer();
 		page->AddEditOP(m_stage->GetBaseOP());
 		page->AddEditOP(paste_op);
@@ -265,6 +265,15 @@ LayerType LibraryPanel::GetLayerType(int idx) const
 	} else {
 		return static_cast<LibraryPage*>(m_pages[idx])->GetLayerType();
 	}
+}
+
+bool LibraryPanel::GetLayerPerspective(int idx) const
+{
+	if (idx < 0 || idx >= m_pages.size()) {
+		return false;
+	} else {
+		return static_cast<LibraryPage*>(m_pages[idx])->GetLayerPerspective();
+	}	
 }
 
 Layer* LibraryPanel::GetLayer(int idx)
