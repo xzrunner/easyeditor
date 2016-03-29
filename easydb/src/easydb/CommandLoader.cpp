@@ -61,6 +61,7 @@
 #include "AverageRectCut.h"
 #include "PackEPT.h"
 #include "LRExpandGroup.h"
+#include "PackImageEPT.h"
 
 namespace edb
 {
@@ -127,6 +128,7 @@ void CommandLoader::Init()
 	fc->Register(AverageRectCut::Create());
 	fc->Register(PackEPT::Create());
 	fc->Register(LRExpandGroup::Create());
+	fc->Register(PackImageEPT::Create());
 }
 
 }

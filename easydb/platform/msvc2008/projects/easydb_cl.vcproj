@@ -365,6 +365,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\PackImageEPT.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\PackImageEPT.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\PackLuaDescFile.cpp"
 						>
 					</File>

@@ -168,4 +168,45 @@ void PackToBin::PackEPT(const std::string& filepath, const ee::TexturePacker& tp
 	delete packer;
 }
 
+void PackToBin::PackEPT(const std::string& src_file, const std::string& dst_file, TextureType type)
+{
+	std::string ext;
+	switch (type) 
+	{
+	case TT_PNG4: case TT_PNG8:
+		ext = ".png";
+		break;
+	case TT_PVR:
+		ext = ".pvr";
+		break;
+	case TT_PKM:
+		ext = ".pkm";
+		break;
+	}
+
+	PackImage* packer;
+	switch (type)
+	{
+	case TT_PNG4:
+		packer = new PackPNG(false);
+		break;
+	case TT_PNG8:
+		packer = new PackPNG(true);
+		break;
+	case TT_PVR:
+		packer = new PackPVR();
+		break;
+	case TT_PKM:
+		packer = new PackPKM();
+		break;
+	default:
+		throw ee::Exception("PackToBin::PackEPT unknown type: %d\n", type);
+	}
+
+	packer->Load(src_file);
+	packer->Store(dst_file, 1);
+
+	delete packer;
+}
+
 }
