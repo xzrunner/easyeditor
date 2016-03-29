@@ -14,6 +14,7 @@
 #include <ee/SpriteSelection.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/panel_msg.h>
+#include <ee/CameraMgr.h>
 
 namespace eanim
 {
@@ -125,7 +126,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 
 void SkeletonImpl::OnDraw(const ee::Camera& cam) const
 {
-	ee::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
+	ee::ArrangeSpriteImpl::OnDraw(*ee::CameraMgr::Instance()->GetCamera());
 
 	SkeletonData* skeleton = get_curr_skeleton();
 	if (skeleton) {
