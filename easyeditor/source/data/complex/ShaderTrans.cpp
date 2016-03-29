@@ -5,8 +5,8 @@ namespace ee
 {
 
 ShaderTrans::ShaderTrans()
-	: blend(BM_NORMAL)
-	, filter(FM_NORMAL)
+	: blend(BM_NULL)
+	, filter(FM_NULL)
 {
 }
 

@@ -151,6 +151,7 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
 	trans.blend = static_cast<int>(spr->shader.blend);
+	trans.filter = static_cast<int>(spr->shader.filter);
 }
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)

@@ -113,6 +113,9 @@ void AnimToLuaString::PackFrame(const PackAnimation::Frame& frame, ebuilder::Cod
 		if (t.blend != 0) {
 			params.push_back(lua::assign("blend", ee::StringHelper::ToString(t.blend)));
 		}
+		if (t.filter != 0) {
+			params.push_back(lua::assign("filter", ee::StringHelper::ToString(t.filter)));
+		}
 
 		if (params.size() > 1) {
 			lua::tableassign(gen, "", params);

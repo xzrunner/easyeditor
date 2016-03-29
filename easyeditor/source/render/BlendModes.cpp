@@ -10,7 +10,7 @@ BlendModes* BlendModes::m_instance = NULL;
 BlendModes::BlendModes()
 {
 	// normal
-	m_modes.push_back(Item(BM_NORMAL, "normal", "正常"));
+	m_modes.push_back(Item(BM_NULL, "null", "无"));
 //	m_modes.push_back(Item(BM_DISSOLVE, "dissolve", "溶解"));
 
 	// darken modes
@@ -50,7 +50,7 @@ BlendModes::BlendModes()
 BlendMode BlendModes::GetModeFromNameEN(const std::string& name) const
 {
 	if (name.empty()) {
-		return BM_NORMAL;
+		return BM_NULL;
 	}
 
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {

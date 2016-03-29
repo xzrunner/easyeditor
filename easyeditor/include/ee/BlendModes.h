@@ -9,7 +9,7 @@ namespace ee
 enum BlendMode
 {
 	// normal
-	BM_NORMAL		= 0,
+	BM_NULL			= 0,
 	BM_DISSOLVE,		// todo
 
 	// darken modes

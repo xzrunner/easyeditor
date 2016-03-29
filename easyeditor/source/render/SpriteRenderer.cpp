@@ -37,23 +37,23 @@ void SpriteRenderer::Draw(const Sprite* sprite,
 	}
 
 	BlendMode blend;
-	if (trans.shader.blend != BM_NORMAL) {
+	if (trans.shader.blend != BM_NULL) {
 		blend = trans.shader.blend;
 	} else {
 		blend = sprite->shader.blend;
 	}
 
 	FilterMode filter;
-	if (trans.shader.filter != FM_NORMAL) {
+	if (trans.shader.filter != FM_NULL) {
 		filter = trans.shader.filter;
 	} else {
 		filter = sprite->shader.filter;
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
-	if (blend != BM_NORMAL) {
+	if (blend != BM_NULL) {
 		SpriteBlend::Instance()->Draw(sprite, trans.mt);
-	} else if (filter != FM_NORMAL) {
+	} else if (filter != FM_NULL) {
 		if (set_shader) {
 			mgr->SetShader(ShaderMgr::FILTER);
 		}

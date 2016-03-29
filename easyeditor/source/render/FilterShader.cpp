@@ -1,5 +1,6 @@
 #include "FilterShader.h"
 #include "FilterModes.h"
+#include "Exception.h"
 
 #include <sl_filter.h>
 
@@ -65,7 +66,7 @@ void FilterShader::SetMode(const std::string& str)
 {
 	FilterMode mode = FilterModes::Instance()->GetIDFromNameEN(str);
 
-	SL_FILTER_MODE sl_mode = SLFM_MAX_COUNT;
+	SL_FILTER_MODE sl_mode = SLFM_NULL;
 	switch (mode)
 	{
 	case FM_EDGE_DETECTION:
@@ -77,12 +78,17 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_OUTLINE:
 		sl_mode = SLFM_OUTLINE;
 		break;
-	case FM_BLUR:
-		sl_mode = SLFM_BLUR;
-		break;
+
 	case FM_GRAY:
 		sl_mode = SLFM_GRAY;
 		break;
+	case FM_BLUR:
+		sl_mode = SLFM_BLUR;
+		break;
+	case FM_GAUSSIAN_BLUR:
+		sl_mode = SLFM_GAUSSIAN_BLUR;
+		break;
+
 	case FM_HEAT_HAZE:
 		sl_mode = SLFM_HEAT_HAZE;
 		break;
@@ -92,11 +98,10 @@ void FilterShader::SetMode(const std::string& str)
 	case FM_SWIRL:
 		sl_mode = SLFM_SWIRL;
 		break;
-	case FM_GAUSSIAN_BLUR:
-		sl_mode = SLFM_GAUSSIAN_BLUR;
-		break;
+
+	default:
+		throw Exception("FilterShader::SetMode unknown type.");
 	}
-	assert(sl_mode != SLFM_MAX_COUNT);
 
 	sl_filter_set_mode(sl_mode);
 }

@@ -8,22 +8,25 @@ FilterModes* FilterModes::m_instance = NULL;
 
 FilterModes::FilterModes()
 {
-	m_modes.push_back(Item(FM_NORMAL, "normal", "正常"));
+	m_modes.push_back(Item(FM_NULL, "null", "无"));
+
 	m_modes.push_back(Item(FM_EDGE_DETECTION, "edge detection", "边界检测"));
 	m_modes.push_back(Item(FM_RELIEF, "relief", "浮雕"));
 	m_modes.push_back(Item(FM_OUTLINE, "outline", "包围"));
-	m_modes.push_back(Item(FM_BLUR, "blur", "模糊"));
+
 	m_modes.push_back(Item(FM_GRAY, "gray", "灰度"));
+	m_modes.push_back(Item(FM_BLUR, "blur", "模糊"));
+	m_modes.push_back(Item(FM_GAUSSIAN_BLUR, "gaussian blur", "高斯模糊"));
+
 	m_modes.push_back(Item(FM_HEAT_HAZE, "heat haze", "热霾"));
 	m_modes.push_back(Item(FM_SHOCK_WAVE, "shock wave", "冲击波"));
 	m_modes.push_back(Item(FM_SWIRL, "swirl", "漩涡"));
-	m_modes.push_back(Item(FM_GAUSSIAN_BLUR, "gaussian blur", "高斯模糊"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const
 {
 	if (name.empty()) {
-		return FM_NORMAL;
+		return FM_NULL;
 	}
 
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
@@ -32,7 +35,7 @@ FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const
 			return item.id;
 		}
 	}
-	return FM_UNKNOWN;
+	return FM_NULL;
 }
 
 std::string FilterModes::GetNameENFromID(FilterMode id) const
@@ -49,7 +52,7 @@ std::string FilterModes::GetNameENFromID(FilterMode id) const
 FilterMode FilterModes::GetIDFromIdx(int idx) const
 {
 	if (idx < 0 || idx >= static_cast<int>(m_modes.size())) {
-		return FM_UNKNOWN;
+		return FM_NULL;
 	} else {
 		return m_modes[idx].id;
 	}

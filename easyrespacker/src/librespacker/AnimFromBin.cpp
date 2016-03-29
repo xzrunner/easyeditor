@@ -152,6 +152,11 @@ void AnimFromBin::UnpackFrame(uint8_t** ptr, PackAnimation::Frame& frame)
 			unpack(blend, ptr);
 			part.t.blend = blend;
 		}
+		if (type & TAG_FILTER) {
+			uint16_t filter;
+			unpack(filter, ptr);
+			part.t.filter = filter;
+		}
 
 		frame.parts.push_back(part);
 	}

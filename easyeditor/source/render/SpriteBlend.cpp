@@ -36,7 +36,7 @@ SpriteBlend::SpriteBlend()
 
 void SpriteBlend::Draw(const Sprite* sprite, const Matrix& mt) const
 {
-	assert(sprite->shader.blend != BM_NORMAL);
+	assert(sprite->shader.blend != BM_NULL);
 
 	ShaderMgr::Instance()->Flush();
 
@@ -75,7 +75,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 	BlendMode mode = sprite->shader.blend;
 	shader->SetMode(BlendModes::Instance()->GetNameENFromMode(mode));
 
-	const_cast<Sprite*>(sprite)->shader.blend = BM_NORMAL;
+	const_cast<Sprite*>(sprite)->shader.blend = BM_NULL;
 	SpriteRenderer::Instance()->Draw(sprite, sprite, SpriteTrans(mt), false);
 	const_cast<Sprite*>(sprite)->shader.blend = mode;
 

@@ -41,12 +41,14 @@ Sprite::Sprite(const Sprite& sprite)
 	: m_observer(NULL)
 {
 	name = sprite.name;
-	color = sprite.color;
+	tag = sprite.tag;
 	clip = sprite.clip;
+
+	color = sprite.color;
+	shader = sprite.shader;
 
 	visiable = sprite.visiable;
 	editable = sprite.editable;
-	tag = sprite.tag;
 
 	m_pos = sprite.m_pos;
 	m_angle = sprite.m_angle;

@@ -4,6 +4,7 @@
 #include "check_params.h"
 
 #include <ee/ShaderMgr.h>
+#include <ee/Config.h>
 
 #include <glfw.h>
 
@@ -43,20 +44,21 @@ int PackEP::Run(int argc, char *argv[])
 		scale = atof(argv[8]);
 	}
 
-	if (LOD != 0 || scale != 1) {
-		glfwInit();
-		if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
-		{
-			glfwTerminate();
-			return -2;
-		}
-
-		if (glewInit() != GLEW_OK) {
-			return -2;
-		}
-
-		ee::ShaderMgr::Instance()->reload();
+	// prepare
+	glfwInit();
+	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
+	{
+		glfwTerminate();
+		return -2;
 	}
+
+	if (glewInit() != GLEW_OK) {
+		return -2;
+	}
+
+	ee::ShaderMgr::Instance()->reload();
+
+	ee::Config::Instance()->EnableRender(true);
 
 // 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], argv[7], LOD, scale);
 	Trigger(argv[2], argv[3], argv[4], argv[5], argv[6], LOD, scale);

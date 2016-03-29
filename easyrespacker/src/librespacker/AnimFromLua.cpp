@@ -143,6 +143,9 @@ void AnimFromLua::UnpackPart(lua_State* L, PackAnimation::Part& part)
 		if (LuaDataHelper::HasField(L, "blend")) {
 			part.t.blend = (uint32_t)LuaDataHelper::GetDoubleField(L, "blend");
 		}
+		if (LuaDataHelper::HasField(L, "filter")) {
+			part.t.filter = (uint32_t)LuaDataHelper::GetDoubleField(L, "filter");
+		}
 	} else {
 		throw ee::Exception("PackAnimation::UnpackFromLua unknown item type.");
 	}

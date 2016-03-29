@@ -10,19 +10,19 @@ namespace ee
 
 enum FilterMode
 {
-	FM_NORMAL = 0,
+	FM_NULL					= 0,
 
-	FM_EDGE_DETECTION,
+	FM_EDGE_DETECTION		= 10,
 	FM_RELIEF,
 	FM_OUTLINE,
+
+	FM_GRAY					= 20,
 	FM_BLUR,
-	FM_GRAY,
-	FM_HEAT_HAZE,
-	FM_SHOCK_WAVE,
-	FM_SWIRL,
 	FM_GAUSSIAN_BLUR,
 
-	FM_UNKNOWN = 99,
+	FM_HEAT_HAZE			= 30,
+	FM_SHOCK_WAVE,
+	FM_SWIRL,
 
 }; // FilterMode
 

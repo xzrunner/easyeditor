@@ -94,6 +94,9 @@ int AnimToBin::FrameSize(const PackAnimation::Frame& frame)
 		if (t.blend != 0) {
 			ret += sizeof(uint16_t);
 		}
+		if (t.filter != 0) {
+			ret += sizeof(uint16_t);
+		}
 	}
 	return ret;
 }
@@ -119,12 +122,14 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 		if (t.additive != 0) {
 			type |= TAG_ADDITIVE;
 		}
-		// todo TAG_TOUCH
 		if (t.rmap != 0xff0000ff || t.gmap != 0x00ff00ff || t.bmap != 0x0000ffff) {
 			type |= TAG_COLMAP;
 		}
 		if (t.blend != 0) {
 			type |= TAG_BLEND;
+		}
+		if (t.filter != 0) {
+			type |= TAG_FILTER;
 		}
 
 		pack(type, ptr);
@@ -157,6 +162,10 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 		if (type & TAG_BLEND) {
 			uint16_t blend = t.blend;
 			pack(blend, ptr);
+		}
+		if (type & TAG_FILTER) {
+			uint16_t filter = t.filter;
+			pack(filter, ptr);
 		}
 	}
 }
