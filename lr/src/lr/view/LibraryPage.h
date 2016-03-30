@@ -4,6 +4,7 @@
 #include "dataset/layer_type.h"
 
 #include <ee/LibraryPage.h>
+#include <ee/CameraModes.h>
 
 #include <vector>
 
@@ -19,7 +20,7 @@ class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(LibraryPanel* library, const std::string& name, 
-		LayerType type, int id, bool has_height);
+		LayerType type, int id, ee::CameraMode cam);
 	virtual ~LibraryPage();
 
 	//
@@ -36,7 +37,7 @@ public:
 	ee::EditOP* GetNextEditOP();
 
 	LayerType GetLayerType() const { return m_layer_type; }
-	bool GetLayerPerspective() const { return m_has_height; }
+	ee::CameraMode GetLayerCameraMode() const { return m_cam_mode; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
@@ -52,7 +53,7 @@ private:
 
 private:
 	LayerType m_layer_type;
-	bool m_has_height;
+	ee::CameraMode m_cam_mode;
 
 	Layer* m_layer;
 

@@ -8,6 +8,7 @@
 #include <ee/LayerMgr.h>
 #include <ee/Sprite.h>
 #include <ee/Shape.h>
+#include <ee/CameraModes.h>
 
 #include <json/json.h>
 
@@ -24,7 +25,7 @@ class LibraryPanel;
 class Layer : public ee::Object
 {
 public:
-	Layer(int id, LibraryPanel* library, bool has_height);
+	Layer(int id, LibraryPanel* library, ee::CameraMode cam);
 	
 	virtual void TraverseSprite(ee::Visitor& visitor, bool order = true) const;
 	virtual void TraverseSprite(ee::Visitor& visitor, ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
@@ -100,7 +101,7 @@ protected:
 private:
 	int m_id;
 
-	bool m_has_height;
+	ee::CameraMode m_cam_mode;
 
 	std::string m_name;
 

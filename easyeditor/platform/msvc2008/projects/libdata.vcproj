@@ -774,42 +774,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="complex"
-			>
-			<File
-				RelativePath="..\..\..\source\data\complex\RenderCamera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\RenderCamera.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\data\complex\RenderColor.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\RenderColor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\data\complex\RenderParams.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\RenderParams.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\data\complex\RenderShader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\RenderShader.h"
-				>
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -10,7 +10,7 @@ namespace ee
 static const float HEIGHT_VAL = 1.414f;
 
 RenderCamera::RenderCamera()
-	: has_height(true)
+	: mode(CM_ORTHO)
 	, base_y(FLT_MAX)
 {
 }
@@ -18,7 +18,7 @@ RenderCamera::RenderCamera()
 void RenderCamera::CalculateZ(const Pseudo3DCamera* cam, 
 							  Vector vertices[4], float z[4]) const
 {
-	if (!has_height) {
+	if (mode == CM_ORTHO || mode == CM_PERSPECTIVE_NO_HEIGHT) {
 		memset(z, 0, sizeof(float) * 4);
 		return;
 	}

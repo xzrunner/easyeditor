@@ -3,6 +3,8 @@
 
 #include "layer_type.h"
 
+#include <ee/CameraModes.h>
+
 namespace lr
 {
 
@@ -12,7 +14,7 @@ class LibraryPanel;
 class LayerFactory
 {
 public:
-	static Layer* Create(int id, LibraryPanel* library, LayerType type, bool has_height);
+	static Layer* Create(int id, LibraryPanel* library, LayerType type, ee::CameraMode cam);
 
 }; // LayerFactory
 

@@ -2,6 +2,7 @@
 #define _EASYEDITOR_RENDER_CAMERA_H_
 
 #include "Vector.h"
+#include "CameraModes.h"
 
 namespace ee
 {
@@ -16,7 +17,7 @@ public:
 	void CalculateZ(const Pseudo3DCamera* cam, Vector vertices[4], float z[4]) const;
 
 public:
-	bool has_height;
+	CameraMode mode;
 
 	float base_y;
 

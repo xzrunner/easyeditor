@@ -4,6 +4,7 @@
 #include "dataset/layer_type.h"
 
 #include <ee/LibraryPanel.h>
+#include <ee/CameraModes.h>
 
 #include <json/json.h>
 
@@ -46,7 +47,7 @@ public:
 	Layer* GetTerrainLayer();
 
 	LayerType GetLayerType(int idx) const;
-	bool GetLayerPerspective(int idx) const;
+	ee::CameraMode GetLayerCameraMode(int idx) const;
 
 	Layer* GetLayer(int idx);
 

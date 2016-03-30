@@ -7,10 +7,10 @@
 namespace lr
 {
 
-Layer* LayerFactory::Create(int id, LibraryPanel* library, LayerType type, bool has_height)
+Layer* LayerFactory::Create(int id, LibraryPanel* library, LayerType type, ee::CameraMode cam)
 {
 	if (type == LT_DEFAULT) {
-		return new Layer(id, library, has_height);
+		return new Layer(id, library, cam);
 	} else if (type == LT_SHAPE) {
 		return new ShapeLayer(id, library);
 	} else {

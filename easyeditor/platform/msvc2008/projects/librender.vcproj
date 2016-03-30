@@ -349,6 +349,70 @@
 				RelativePath="..\..\..\include\ee\SpriteRenderer.h"
 				>
 			</File>
+			<Filter
+				Name="modes"
+				>
+				<File
+					RelativePath="..\..\..\source\render\BlendModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\BlendModes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\CameraModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\CameraModes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\FilterModes.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\FilterModes.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="params"
+				>
+				<File
+					RelativePath="..\..\..\source\render\RenderCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\RenderCamera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\RenderColor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\RenderColor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\RenderParams.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\RenderParams.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\RenderShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\include\ee\RenderShader.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="utility"
@@ -434,22 +498,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\source\render\BlendModes.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\BlendModes.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\source\render\FilterModes.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\include\ee\FilterModes.h"
-			>
-		</File>
 		<File
 			RelativePath="..\..\..\source\render\FPS.cpp"
 			>

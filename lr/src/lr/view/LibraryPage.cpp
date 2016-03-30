@@ -18,13 +18,13 @@ namespace lr
 {
 
 LibraryPage::LibraryPage(LibraryPanel* library, const std::string& name, 
-						 LayerType type, int id, bool has_height)
+						 LayerType type, int id, ee::CameraMode cam)
 	: ee::LibraryPage(library->GetNotebook(), name)
 	, m_layer_type(type)
-	, m_has_height(has_height)
+	, m_cam_mode(cam)
 	, m_curr_op_idx(-1)
 {
-	m_layer = LayerFactory::Create(id, library, type, has_height);
+	m_layer = LayerFactory::Create(id, library, type, cam);
 	InitLayout();
 }
 

@@ -54,11 +54,13 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		filter = spr->rp->shader.filter;
 	}
 
-	RenderCamera ct;
-	if (!trans.camera.has_height) {
-		ct.has_height = false;
+ 	RenderCamera ct;
+	if (trans.camera.mode != CM_ORTHO) {
+		ct.mode = trans.camera.mode;
 	} else {
-		ct.has_height = spr->rp->camera.has_height;
+		ct.mode = spr->rp->camera.mode;
+	}
+	if (ct.mode == CM_PERSPECTIVE_AUTO_HEIGHT) {
 		if (trans.camera.base_y == FLT_MAX) {
 			ct.base_y = trans.camera.base_y;
 			std::vector<Vector> bound;
