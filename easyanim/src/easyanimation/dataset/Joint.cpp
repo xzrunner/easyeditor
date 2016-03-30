@@ -3,6 +3,7 @@
 #include <ee/Sprite.h>
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
+#include <ee/Color.h>
 
 #include <assert.h>
 
