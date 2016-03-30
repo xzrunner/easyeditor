@@ -11,6 +11,8 @@
 #include "FilterShader.h"
 #include "CameraMgr.h"
 #include "Camera.h"
+#include "Config.h"
+#include "SettingData.h"
 
 namespace ee
 {
@@ -160,7 +162,8 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 
 	spr->GetSymbol().Draw(_trans, spr, root);
 
-	if (spr->IsAnchor()) {
+	if (spr->IsAnchor() && Config::Instance()->GetSettings().draw_anchor) 
+	{
 		std::vector<Vector> bound;
 		spr->GetBounding()->GetBoundPos(bound);
 		for (int i = 0, n = bound.size(); i < n; ++i) {

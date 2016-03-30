@@ -36,6 +36,8 @@ SettingData::SettingData()
 	load_image = true;
 
 	color_setting_dlg_type = CSDT_DEFAULT;
+
+	draw_anchor = true;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)
@@ -94,6 +96,10 @@ void SettingData::LoadFromFile(const Json::Value& value)
 		} else if (type == "hsl") {
 			color_setting_dlg_type = CSDT_HSL;
 		}
+	}
+
+	if (!value["draw_anchor"].isNull()) {
+		draw_anchor = value["draw_anchor"].asBool();
 	}
 }
 

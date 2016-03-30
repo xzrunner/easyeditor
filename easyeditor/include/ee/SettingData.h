@@ -60,6 +60,9 @@ public:
 	// widget
 	COL_SET_DLG_TYPE color_setting_dlg_type;
 
+	// draw
+	bool draw_anchor;
+
 public:
 	SettingData();
 
