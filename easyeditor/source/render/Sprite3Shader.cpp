@@ -56,11 +56,8 @@ void Sprite3Shader::Reset()
 
 void Sprite3Shader::SetColor(const RenderColor& color)
 {
-// 	sl_sprite3_set_color(color2int(color.multi, PT_ABGR), 
-// 		color2int(color.add, PT_ABGR));
-// 	sl_sprite3_set_map_color(color2int(color.r, PT_ABGR), 
-// 		color2int(color.g, PT_ABGR), 
-// 		color2int(color.b, PT_ABGR));
+	sl_sprite3_set_color(color2int(color.multi, PT_ABGR), 
+		color2int(color.add, PT_ABGR));
 }
 
 void Sprite3Shader::Draw(const std::vector<vec3>& positions, const std::vector<Vector>& texcoords, int texid)

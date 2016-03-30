@@ -273,6 +273,7 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 
 			mgr->SetShader(ShaderMgr::SPRITE3);
 			Sprite3Shader* shader = static_cast<Sprite3Shader*>(mgr->GetShader(ShaderMgr::SPRITE3));
+			shader->SetColor(trans.color);
 			shader->Draw(_vertices, _texcoords, texid);
 		}
 	}
