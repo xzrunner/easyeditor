@@ -6,7 +6,7 @@
 namespace ee
 {
 
-class ColorTrans;
+class RenderColor;
 
 class BlendShader : public IShader
 {
@@ -30,7 +30,7 @@ public:
 
 	void SetMode(const std::string& mode);
 
-	void SetColor(const ColorTrans& color);
+	void SetColor(const RenderColor& color);
 
 	void Draw(const Vector vertices[4], const Vector texcoords[4], 
 		const Vector texcoords_base[4], int texid, int texid_base);

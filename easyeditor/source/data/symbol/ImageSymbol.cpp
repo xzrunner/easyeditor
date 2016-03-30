@@ -44,7 +44,7 @@ void ImageSymbol::ReloadTexture() const
 	m_image->ReloadTexture();
 }
 
-void ImageSymbol::Draw(const SpriteTrans& trans, const Sprite* spr, 
+void ImageSymbol::Draw(const RenderParams& trans, const Sprite* spr, 
 					   const Sprite* root) const
 {
 	m_image->Draw(trans, spr, root);

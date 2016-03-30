@@ -13,7 +13,7 @@ namespace ee
 
 class Matrix;
 class Sprite;
-class SpriteTrans;
+class RenderParams;
 
 class Symbol : public ListItem, public UserDataImpl
 {
@@ -31,7 +31,7 @@ public:
 	virtual void ClearUserData(bool deletePtr);
 
 	virtual void ReloadTexture() const = 0;
-	virtual void Draw(const SpriteTrans& trans, const Sprite* spr = NULL, 
+	virtual void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
 		const Sprite* root = NULL) const = 0;
 	virtual Rect GetSize(const Sprite* sprite = NULL) const = 0;
 	virtual void InvalidRect(const Matrix& mt) const {}

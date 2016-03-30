@@ -20,6 +20,7 @@
 #include "FetchAllVisitor.h"
 #include "sprite_msg.h"
 #include "EditOP.h"
+#include "RenderParams.h"
 
 #include "TranslateSpriteState.h"
 #include "RotateSpriteState.h"
@@ -618,20 +619,20 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'm' || keycode == 'M') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.multi, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				Colorf col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->color.multi = col;
+					sprites[i]->rp->color.multi = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.multi, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.multi, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				Colorf col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->color.multi = col;
+					sprites[i]->rp->color.multi = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -641,20 +642,20 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	else if (keycode == 'a' || keycode == 'A') 
 	{
 		if (Config::Instance()->GetSettings().color_setting_dlg_type == CSDT_RGB) {
-			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add, pos);
+			RGBColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				Colorf col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->color.add = col;
+					sprites[i]->rp->color.add = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		} else {
-			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->color.add, pos);
+			HSLColorSettingDlg dlg(m_wnd, NULL, sprites[0]->rp->color.add, pos);
 			if (dlg.ShowModal() == wxID_OK) {
 				Colorf col = dlg.GetColor();
 				for (int i = 0, n = sprites.size(); i < n; ++i) {
-					sprites[i]->color.add = col;
+					sprites[i]->rp->color.add = col;
 				}
 				SetCanvasDirtySJ::Instance()->SetDirty();
 			}
@@ -663,17 +664,17 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 	// alpha
 	else if (keycode == 't' || keycode == 'T') 
 	{
-		AlphaSettingDlg dlg(m_wnd, sprites[0]->color.multi, pos);
-		float old_alpha = sprites[0]->color.multi.a;
+		AlphaSettingDlg dlg(m_wnd, sprites[0]->rp->color.multi, pos);
+		float old_alpha = sprites[0]->rp->color.multi.a;
 		int state = dlg.ShowModal();
 		if (state == wxID_OK) {
 			float alpha = dlg.GetColor().a;
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				sprites[i]->color.multi.a = alpha;
+				sprites[i]->rp->color.multi.a = alpha;
 			}
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		} else if (state == wxID_CANCEL) {
-			sprites[0]->color.multi.a = old_alpha;
+			sprites[0]->rp->color.multi.a = old_alpha;
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
 	}

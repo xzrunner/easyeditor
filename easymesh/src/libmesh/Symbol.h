@@ -27,7 +27,7 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr = NULL, 
+	virtual void Draw(const ee::RenderParams& trans, const ee::Sprite* spr = NULL, 
 		const ee::Sprite* root = NULL) const;
 	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const {
 		return m_region;

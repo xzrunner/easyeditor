@@ -1,5 +1,7 @@
 #include "TweenUtility.h"
 
+#include <ee/RenderParams.h>
+
 #include <easyscale9.h>
 #include <easyicon.h>
 #include <easymesh.h>
@@ -78,8 +80,8 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 	shear.y = (end->GetShear().y - start->GetShear().y) * process + start->GetShear().y;
 	tween->SetShear(shear);
 
-	tween->color.add = col_interpolate(start->color.add, end->color.add, process);
-	tween->color.multi = col_interpolate(start->color.multi, end->color.multi, process);
+	tween->rp->color.add = col_interpolate(start->rp->color.add, end->rp->color.add, process);
+	tween->rp->color.multi = col_interpolate(start->rp->color.multi, end->rp->color.multi, process);
 
 	if (escale9::Sprite* s9_s = dynamic_cast<escale9::Sprite*>(start))
 	{

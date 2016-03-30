@@ -70,7 +70,7 @@ void AnimationToSpr::TransSprite(ee::Sprite* spr, const erespacker::PackAnimatio
 		TransSpriteMat(spr, t);
 	}
 	TransSpriteCol(spr, t);
-	spr->shader.blend = (ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
+	spr->rp->shader.blend = (ee::BlendModes::Instance()->GetIDFromIdx(t.blend));
 }
 
 void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
@@ -133,12 +133,12 @@ void AnimationToSpr::TransSpriteMat(ee::Sprite* spr, const erespacker::PackAnima
 
 void AnimationToSpr::TransSpriteCol(ee::Sprite* spr, const erespacker::PackAnimation::SpriteTrans& t)
 {
-	spr->color.multi = ee::TransColor(t.color, ee::PT_ARGB);
-	spr->color.add = ee::TransColor(t.additive, ee::PT_ARGB);
+	spr->rp->color.multi = ee::TransColor(t.color, ee::PT_ARGB);
+	spr->rp->color.add = ee::TransColor(t.additive, ee::PT_ARGB);
 
-	spr->color.r = ee::TransColor(t.rmap, ee::PT_RGBA);
-	spr->color.g = ee::TransColor(t.gmap, ee::PT_RGBA);
-	spr->color.b = ee::TransColor(t.bmap, ee::PT_RGBA);
+	spr->rp->color.r = ee::TransColor(t.rmap, ee::PT_RGBA);
+	spr->rp->color.g = ee::TransColor(t.gmap, ee::PT_RGBA);
+	spr->rp->color.b = ee::TransColor(t.bmap, ee::PT_RGBA);
 }
 
 

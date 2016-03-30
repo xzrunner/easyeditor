@@ -4,6 +4,7 @@
 #include "Symbol.h"
 
 #include <ee/Sprite.h>
+#include <ee/Color.h>
 
 namespace etext
 {

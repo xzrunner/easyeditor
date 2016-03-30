@@ -152,7 +152,7 @@ void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage,
 	Json::Value layer_val = value[idx++];
 	while (!layer_val.isNull()) {
 		LayerType type = library->GetLayerType(idx-1);
-		Layer* layer = LayerFactory::Create(idx-1, library, type, idx != 1);
+		Layer* layer = LayerFactory::Create(idx-1, library, type, library->GetLayerPerspective(idx-1));
 		layer->LoadFromFile(layer_val, dir, idx-1);
 		layers.push_back(layer);
 

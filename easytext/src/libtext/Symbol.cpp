@@ -7,7 +7,7 @@
 #include <ee/EE_GTxt.h>
 #include <ee/trans_color.h>
 #include <ee/Math2D.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 #include <gtxt.h>
 
@@ -28,7 +28,7 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	const ee::SettingData& setting = ee::Config::Instance()->GetSettings();
@@ -102,7 +102,7 @@ void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) cons
 	}
 }
 
-void Symbol::DrawText(const ee::Sprite* sprite, const ee::SpriteTrans& trans) const
+void Symbol::DrawText(const ee::Sprite* sprite, const ee::RenderParams& trans) const
 {
 	if (!sprite) {
 		return;

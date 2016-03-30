@@ -24,7 +24,7 @@ void Symbol::ReloadTexture() const
 	m_data.ReloadTexture();
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	m_data.Draw(trans, spr, root);

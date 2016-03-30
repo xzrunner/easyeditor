@@ -1,6 +1,6 @@
 #include "BlendShader.h"
 #include "BlendModes.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "trans_color.h"
 
 #include <sl_blend.h>
@@ -61,7 +61,7 @@ void BlendShader::SetMode(const std::string& str)
 	sl_blend_set_mode(SL_BLEND_MODE(mode));
 }
 
-void BlendShader::SetColor(const ColorTrans& color)
+void BlendShader::SetColor(const RenderColor& color)
 {
 	sl_blend_set_color(color2int(color.multi, PT_ABGR), 
 		color2int(color.add, PT_ABGR));

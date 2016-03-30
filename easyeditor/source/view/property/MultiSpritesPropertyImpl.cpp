@@ -9,6 +9,7 @@
 #include "SetSpriteColorAOP.h"
 #include "SetSpritePosAOP.h"
 #include "TranslateSpriteAOP.h"
+#include "RenderParams.h"
 
 #include <wx/string.h>
 
@@ -97,9 +98,9 @@ Colorf MultiSpritesPropertyImpl::GetMultiColor() const
 		return WHITE;
 	}
 
-	Colorf col = m_sprites[0]->color.multi;
+	Colorf col = m_sprites[0]->rp->color.multi;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->color.multi) {
+		if (col != m_sprites[i]->rp->color.multi) {
 			return WHITE;
 		}
 	}
@@ -112,9 +113,9 @@ Colorf MultiSpritesPropertyImpl::GetAddColor() const
 		return BLACK;
 	}
 	
-	Colorf col = m_sprites[0]->color.add;
+	Colorf col = m_sprites[0]->rp->color.add;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->color.add) {
+		if (col != m_sprites[i]->rp->color.add) {
 			return BLACK;
 		}
 	}
@@ -127,9 +128,9 @@ Colorf MultiSpritesPropertyImpl::GetTransColorR() const
 		return RED;
 	}
 
-	Colorf col = m_sprites[0]->color.r;
+	Colorf col = m_sprites[0]->rp->color.r;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->color.r) {
+		if (col != m_sprites[i]->rp->color.r) {
 			return RED;
 		}
 	}
@@ -142,9 +143,9 @@ Colorf MultiSpritesPropertyImpl::GetTransColorG() const
 		return GREEN;
 	}
 
-	Colorf col = m_sprites[0]->color.g;
+	Colorf col = m_sprites[0]->rp->color.g;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->color.g) {
+		if (col != m_sprites[i]->rp->color.g) {
 			return GREEN;
 		}
 	}
@@ -157,9 +158,9 @@ Colorf MultiSpritesPropertyImpl::GetTransColorB() const
 		return BLUE;
 	}
 
-	Colorf col = m_sprites[0]->color.b;
+	Colorf col = m_sprites[0]->rp->color.b;
 	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
-		if (col != m_sprites[i]->color.b) {
+		if (col != m_sprites[i]->rp->color.b) {
 			return BLUE;
 		}
 	}
@@ -296,9 +297,9 @@ void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
 	SetWndDirtySJ::Instance()->SetDirty();
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		float alpha = m_sprites[i]->color.multi.a;
-		m_sprites[i]->color.multi = col;
-		m_sprites[i]->color.multi.a = alpha;
+		float alpha = m_sprites[i]->rp->color.multi.a;
+		m_sprites[i]->rp->color.multi = col;
+		m_sprites[i]->rp->color.multi.a = alpha;
 	}
 }
 
@@ -307,9 +308,9 @@ void MultiSpritesPropertyImpl::SetColorAdd(const Colorf& col)
 	SetWndDirtySJ::Instance()->SetDirty();
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		float alpha = m_sprites[i]->color.add.a;
-		m_sprites[i]->color.add = col;
-		m_sprites[i]->color.add.a = alpha;
+		float alpha = m_sprites[i]->rp->color.add.a;
+		m_sprites[i]->rp->color.add = col;
+		m_sprites[i]->rp->color.add.a = alpha;
 	}
 }
 
@@ -318,7 +319,7 @@ void MultiSpritesPropertyImpl::SetColorAlpha(float alpha)
 	SetWndDirtySJ::Instance()->SetDirty();
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->color.multi.a = alpha;
+		m_sprites[i]->rp->color.multi.a = alpha;
 	}
 }
 

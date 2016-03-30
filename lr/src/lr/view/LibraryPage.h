@@ -19,7 +19,7 @@ class LibraryPage : public ee::LibraryPage
 {
 public:
 	LibraryPage(LibraryPanel* library, const std::string& name, 
-		LayerType type, int id, bool perspective);
+		LayerType type, int id, bool has_height);
 	virtual ~LibraryPage();
 
 	//
@@ -36,7 +36,7 @@ public:
 	ee::EditOP* GetNextEditOP();
 
 	LayerType GetLayerType() const { return m_layer_type; }
-	bool GetLayerPerspective() const { return m_perspective; }
+	bool GetLayerPerspective() const { return m_has_height; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
@@ -52,7 +52,7 @@ private:
 
 private:
 	LayerType m_layer_type;
-	bool m_perspective;
+	bool m_has_height;
 
 	Layer* m_layer;
 

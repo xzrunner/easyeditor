@@ -5,6 +5,7 @@
 #include "BBFactory.h"
 #include "trans_color.h"
 #include "FontBlankPropertySetting.h"
+#include "RenderParams.h"
 
 namespace ee
 {
@@ -29,7 +30,7 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	m_symbol->Retain();
 	font = sprite.font;
 	has_edge = sprite.has_edge;
-	color = sprite.color;
+	font_color = sprite.rp->color.multi;
 	align_hori = sprite.align_hori;
 	align_vert = sprite.align_vert;
 	size = sprite.size;

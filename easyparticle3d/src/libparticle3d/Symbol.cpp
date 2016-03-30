@@ -7,7 +7,7 @@
 
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
@@ -43,7 +43,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	if (!spr) {

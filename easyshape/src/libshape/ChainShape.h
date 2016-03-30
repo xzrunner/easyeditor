@@ -28,7 +28,7 @@ public:
 	virtual void Translate(const ee::Vector& offset);
 	virtual const ee::Rect& GetRect() const { return m_rect; }
 	virtual void Draw(const ee::Matrix& mt,
-		const ee::ColorTrans& color = ee::ColorTrans()) const;
+		const ee::RenderColor& color = ee::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
 	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;

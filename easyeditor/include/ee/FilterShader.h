@@ -6,7 +6,7 @@
 namespace ee
 {
 
-class ColorTrans;
+class RenderColor;
 
 class FilterShader : public IShader
 {

@@ -1,16 +1,16 @@
-#include "ShaderTrans.h"
+#include "RenderShader.h"
 #include "Config.h"
 
 namespace ee
 {
 
-ShaderTrans::ShaderTrans()
+RenderShader::RenderShader()
 	: blend(BM_NULL)
 	, filter(FM_NULL)
 {
 }
 
-void ShaderTrans::LoadFromFile(const Json::Value& val)
+void RenderShader::LoadFromFile(const Json::Value& val)
 {
 	if (!val["blend"].isNull()) {
 		std::string disc = val["blend"].asString();
@@ -27,7 +27,7 @@ void ShaderTrans::LoadFromFile(const Json::Value& val)
 	}
 }
 
-void ShaderTrans::StoreToFile(Json::Value& val) const
+void RenderShader::StoreToFile(Json::Value& val) const
 {
 	if (Config::Instance()->IsRenderOpen()) {
 		val["blend"] = BlendModes::Instance()->GetNameENFromMode(blend);

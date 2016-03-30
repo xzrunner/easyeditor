@@ -14,6 +14,7 @@
 #include <ee/SymbolSearcher.h>
 #include <ee/SpriteFactory.h>
 #include <ee/SymbolMgr.h>
+#include <ee/RenderParams.h>
 
 #include <easyshape.h>
 #include <easycomplex.h>
@@ -21,10 +22,10 @@
 namespace lr
 {
 
-Layer::Layer(int id, LibraryPanel* library, bool enable_perspective)
+Layer::Layer(int id, LibraryPanel* library, bool has_height)
 	: m_id(id)
 	, m_library(library)
-	, m_enable_perspective(enable_perspective)
+	, m_has_height(has_height)
 	, m_editable(true)
 	, m_visible(true)
 	, m_next_id(0)
@@ -62,7 +63,7 @@ bool Layer::InsertSprite(Object* obj, int idx)
 	ee::Sprite* spr = static_cast<ee::Sprite*>(obj);
 	CheckSpriteName(spr);
 
-	spr->camera.enable_perspective = m_enable_perspective;
+	spr->rp->camera.has_height = m_has_height;
 
 	if (m_layer_mgr.selected) {
 		return m_layer_mgr.selected->Insert(spr);
@@ -224,6 +225,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	Json::Value spr_val = val[idx++];
 	while (!spr_val.isNull()) {
 		ee::Sprite* spr = LoadSprite(spr_val, dir, base_path);
+		spr->rp->camera.has_height = m_has_height;
 		m_sprites.Insert(spr);
 		spr->Release();
 		spr_val = val[idx++];

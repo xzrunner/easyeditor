@@ -1,5 +1,5 @@
 #include "SpriteShader.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "trans_color.h"
 
 #include <sl_sprite.h>
@@ -65,7 +65,7 @@ void SpriteShader::Reset()
 //	return m_open_buffer_data; 
 //}
 
-void SpriteShader::SetColor(const ColorTrans& color)
+void SpriteShader::SetColor(const RenderColor& color)
 {
 	sl_sprite_set_color(color2int(color.multi, PT_ABGR), 
 		color2int(color.add, PT_ABGR));

@@ -778,31 +778,35 @@
 			Name="complex"
 			>
 			<File
-				RelativePath="..\..\..\source\data\complex\CameraTrans.cpp"
+				RelativePath="..\..\..\source\data\complex\RenderCamera.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\CameraTrans.h"
+				RelativePath="..\..\..\include\ee\RenderCamera.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\complex\ColorTrans.cpp"
+				RelativePath="..\..\..\source\data\complex\RenderColor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\ColorTrans.h"
+				RelativePath="..\..\..\include\ee\RenderColor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\data\complex\ShaderTrans.cpp"
+				RelativePath="..\..\..\source\data\complex\RenderParams.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\ShaderTrans.h"
+				RelativePath="..\..\..\include\ee\RenderParams.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\include\ee\SpriteTrans.h"
+				RelativePath="..\..\..\source\data\complex\RenderShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\include\ee\RenderShader.h"
 				>
 			</File>
 		</Filter>

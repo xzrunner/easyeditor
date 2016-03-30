@@ -7,9 +7,10 @@
 #include "BBFactory.h"
 #include "BoundingBox.h"
 #include "SpriteFactory.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "SpriteObserver.h"
 #include "SpritePropertySetting.h"
+#include "RenderParams.h"
 
 #ifdef OPEN_SCREEN_CACHE
 #include "render/SpriteRenderer.h"
@@ -23,6 +24,8 @@ Sprite::Sprite()
 	: m_observer(NULL)
 {
 	clip = false;
+
+	rp = new RenderParams;
 
 	visiable = editable = true;
 
@@ -44,8 +47,7 @@ Sprite::Sprite(const Sprite& sprite)
 	tag = sprite.tag;
 	clip = sprite.clip;
 
-	color = sprite.color;
-	shader = sprite.shader;
+	rp = new RenderParams(*sprite.rp);
 
 	visiable = sprite.visiable;
 	editable = sprite.editable;
@@ -65,6 +67,7 @@ Sprite::Sprite(const Sprite& sprite)
 
 Sprite::~Sprite()
 {
+	delete rp;
 	delete m_bounding;
 	SpriteFactory::Instance()->Remove(this);
 }
@@ -86,8 +89,8 @@ void Sprite::Load(const Json::Value& val)
 	tag = val["tag"].asString();
 	clip = val["clip"].asBool();
 
-	// color
-	color.LoadFromFile(val);
+	// trans
+	rp->LoadFromFile(val);
 
 	// scale
 	Vector scale;
@@ -153,9 +156,6 @@ void Sprite::Load(const Json::Value& val)
 	float angle = static_cast<float>(val["angle"].asDouble());
 	SetTransform(Vector(x, y), angle);
 
-	// shader
-	shader.LoadFromFile(val);
-
 	// anchor
 	m_is_anchor = val["anchor"].asBool();
 }
@@ -166,7 +166,7 @@ void Sprite::Store(Json::Value& val) const
 	val["tag"] = tag;
 	val["clip"] = clip;
 
-	color.StoreToFile(val);
+	rp->StoreToFile(val);
 
 	val["position"]["x"] = m_pos.x;
 	val["position"]["y"] = m_pos.y;
@@ -187,8 +187,6 @@ void Sprite::Store(Json::Value& val) const
 
 	val["x perspective"] = m_perspective.x;
 	val["y perspective"] = m_perspective.y;
-
-	shader.StoreToFile(val);
 
 	val["anchor"] = m_is_anchor;
 }

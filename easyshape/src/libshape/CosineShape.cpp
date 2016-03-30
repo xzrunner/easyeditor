@@ -50,7 +50,7 @@ void CosineShape::Translate(const ee::Vector& offset)
 	}
 }
 
-void CosineShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
+void CosineShape::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
 {
 	if (m_vertices.empty()) return;
 

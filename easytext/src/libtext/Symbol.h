@@ -23,7 +23,7 @@ public:
 	// Symbol interfaces
 	//
 	virtual void ReloadTexture() const;
-	virtual void Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr = NULL, 
+	virtual void Draw(const ee::RenderParams& trans, const ee::Sprite* spr = NULL, 
 		const ee::Sprite* root = NULL) const;
 	virtual ee::Rect GetSize(const ee::Sprite* sprite = NULL) const;
 
@@ -34,7 +34,7 @@ protected:
 
 private:
 	void DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) const;
-	void DrawText(const ee::Sprite* sprite, const ee::SpriteTrans& trans) const;
+	void DrawText(const ee::Sprite* sprite, const ee::RenderParams& trans) const;
 
 private:
 	int m_width;

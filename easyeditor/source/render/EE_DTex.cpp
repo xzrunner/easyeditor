@@ -1,6 +1,6 @@
 #include "EE_DTex.h"
 #include "Image.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "ShaderMgr.h"
 #include "RenderContextStack.h"
 #include "ShaderContext.h"
@@ -80,7 +80,7 @@ static void _draw_begin()
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->SetColor(ColorTrans());
+	shader->SetColor(RenderColor());
 
 // 	glViewport(0, 0, 2, 2);
 }

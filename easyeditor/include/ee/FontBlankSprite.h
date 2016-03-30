@@ -3,6 +3,7 @@
 
 #include "Sprite.h"
 #include "FontBlankSymbol.h"
+#include "Color.h"
 
 namespace ee
 {

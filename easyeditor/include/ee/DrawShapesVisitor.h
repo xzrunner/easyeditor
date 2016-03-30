@@ -3,7 +3,7 @@
 
 #include "Visitor.h"
 #include "Rect.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 
 namespace ee
 {
@@ -18,7 +18,7 @@ public:
 private:
 	Rect m_screen_region;
 
-	ColorTrans m_ct;
+	RenderColor m_ct;
 
 }; // DrawShapesVisitor
 

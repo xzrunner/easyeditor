@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "ParticleSystem.h"
 
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 namespace ep3dinv
 {
@@ -24,7 +24,7 @@ void Symbol::ReloadTexture() const
 	// fixme
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	if (m_ps) {

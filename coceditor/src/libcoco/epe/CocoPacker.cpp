@@ -691,12 +691,12 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, const std::vect
 		resolveSpriteForFrame(sprite, cindex, true);
 }
 
-void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int id, bool forceMat)
+void CocoPacker::resolveSpriteForFrame(const ee::Sprite* spr, int id, bool forceMat)
 {
 	std::string assignIndex = lua::assign("index", ee::StringHelper::ToString(id));
 
 	float mat[6];
-	transToMat(sprite, mat, forceMat);
+	transToMat(spr, mat, forceMat);
 
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
@@ -705,22 +705,22 @@ void CocoPacker::resolveSpriteForFrame(const ee::Sprite* sprite, int id, bool fo
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (sprite->color.multi != ee::Colorf(1,1,1,1) || sprite->color.add != ee::Colorf(0,0,0,0))
+	if (spr->rp->color.multi != ee::Colorf(1,1,1,1) || spr->rp->color.add != ee::Colorf(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", ee::TransColor(sprite->color.multi, ee::PT_BGRA));
-		std::string assignAdd = lua::assign("add", ee::TransColor(sprite->color.add, ee::PT_ABGR));
+		std::string assignColor = lua::assign("color", ee::TransColor(spr->rp->color.multi, ee::PT_BGRA));
+		std::string assignAdd = lua::assign("add", ee::TransColor(spr->rp->color.add, ee::PT_ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
 		lua::tableassign(m_gen, "", 2, assignIndex, assignMat);
 }
 
-void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* sprite, int id)
+void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* spr, int id)
 {
 	std::string assignIndex = lua::assign("index", ee::StringHelper::ToString(id));
 
 	float mat[6];
-	transToMat(sprite, mat, false);
+	transToMat(spr, mat, false);
 
 	std::string m[6];
 	for (size_t i = 0; i < 6; ++i)
@@ -729,18 +729,18 @@ void CocoPacker::resolveSpriteForFrameImage(const ee::Sprite* sprite, int id)
 		m[3], m[4], m[5]);
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (sprite->color.multi != ee::Colorf(1,1,1,1) || sprite->color.add != ee::Colorf(0,0,0,0))
+	if (spr->rp->color.multi != ee::Colorf(1,1,1,1) || spr->rp->color.add != ee::Colorf(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", ee::TransColor(sprite->color.multi, ee::PT_BGRA));
-		std::string assignAdd = lua::assign("add", ee::TransColor(sprite->color.add, ee::PT_ABGR));
-		if (sprite->clip)
+		std::string assignColor = lua::assign("color", ee::TransColor(spr->rp->color.multi, ee::PT_BGRA));
+		std::string assignAdd = lua::assign("add", ee::TransColor(spr->rp->color.add, ee::PT_ABGR));
+		if (spr->clip)
 			lua::tableassign(m_gen, "", 5, assignIndex, assignColor, assignAdd, assignMat, "clip=true");
 		else
 			lua::tableassign(m_gen, "", 4, assignIndex, assignColor, assignAdd, assignMat);
 	}
 	else
 	{
-		if (sprite->clip)
+		if (spr->clip)
 			lua::tableassign(m_gen, "", 3, assignIndex, assignMat, "clip=true");
 		else
 			lua::tableassign(m_gen, "", 2, assignIndex, assignMat);

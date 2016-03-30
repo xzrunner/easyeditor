@@ -46,7 +46,7 @@ private:
 		int m[6];
 	};
 
-	struct SpriteTrans 
+	struct RenderParams 
 	{
 		int matref;
 		Matrix mat;
@@ -64,7 +64,7 @@ private:
 
 		uint8_t type;
 
-		SpriteTrans t;
+		RenderParams t;
 		uint16_t component_id;
 		int8_t touchable;
 	};

@@ -72,7 +72,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
 
-	ee::SpriteTrans trans;
+	ee::RenderParams trans;
 	memcpy(&trans.color.multi, mul_col, sizeof(*mul_col));
 	memcpy(&trans.color.add, add_col, sizeof(*add_col));
 	trans.color.multi = col_mul(trans.color.multi, rp->ct.multi);

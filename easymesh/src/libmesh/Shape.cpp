@@ -5,11 +5,11 @@
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/ShaderMgr.h>
-#include <ee/ColorTrans.h>
+#include <ee/RenderColor.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
 #include <ee/SpriteShader.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 #include <set>
 #include <algorithm>
@@ -130,12 +130,12 @@ void Shape::DrawInfoXY() const
 	ee::RVG::Circles(nodes, m_node_radius, true);
 }
 
-void Shape::DrawTexture(const ee::SpriteTrans& trans) const
+void Shape::DrawTexture(const ee::RenderParams& trans) const
 {
 	DrawTexture(trans, m_texid);
 }
 
-void Shape::DrawTexture(const ee::SpriteTrans& trans,
+void Shape::DrawTexture(const ee::RenderParams& trans,
 						unsigned int texid) const
 {
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();

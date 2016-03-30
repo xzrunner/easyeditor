@@ -5,7 +5,7 @@
 
 #include <ee/Matrix.h>
 #include <ee/Image.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 namespace emesh
 {
@@ -97,7 +97,7 @@ bool CreateMeshOP::OnDraw() const
 
 	if (const ee::Image* image = m_stage->GetSymbol()->getImage())
  	{
-		image->Draw(ee::SpriteTrans());
+		image->Draw(ee::RenderParams());
  	}
 
 	if (Shape* shape = m_stage->GetShape())

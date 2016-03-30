@@ -12,7 +12,7 @@ class LibraryPanel;
 class LayerFactory
 {
 public:
-	static Layer* Create(int id, LibraryPanel* library, LayerType type, bool perspective);
+	static Layer* Create(int id, LibraryPanel* library, LayerType type, bool has_height);
 
 }; // LayerFactory
 

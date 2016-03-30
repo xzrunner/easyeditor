@@ -6,6 +6,7 @@
 #include <ee/NullSymbol.h>
 #include <ee/StringHelper.h>
 #include <ee/convert_color.h>
+#include <ee/RenderParams.h>
 
 #include <easycomplex.h>
 
@@ -128,13 +129,13 @@ std::string AnimToComplexWithColor::ParserTrans(const std::string& str, struct T
 void AnimToComplexWithColor::TransSpr(const Trans& t, ee::Sprite* spr)
 {
 	if (t.type & CC_R) {
-		spr->color.r = ee::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
+		spr->rp->color.r = ee::hsl2rgb(t.col_r.r, t.col_r.g, t.col_r.b);
 	}
 	if (t.type & CC_G) {
-		spr->color.g = ee::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
+		spr->rp->color.g = ee::hsl2rgb(t.col_g.r, t.col_g.g, t.col_g.b);
 	}
 	if (t.type & CC_B) {
-		spr->color.b = ee::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
+		spr->rp->color.b = ee::hsl2rgb(t.col_b.r, t.col_b.g, t.col_b.b);
 	}
 }
 

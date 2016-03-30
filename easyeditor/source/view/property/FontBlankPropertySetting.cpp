@@ -3,6 +3,7 @@
 #include "FontBlankSprite.h"
 #include "EditPanelImpl.h"
 #include "panel_msg.h"
+#include "RenderParams.h"
 
 #include <wx/propgrid/advprops.h>
 
@@ -95,13 +96,13 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("FONT", wxPG_LABEL));
 
-	FontBlankSprite* sprite = static_cast<FontBlankSprite*>(GetSprite());
-	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
+	FontBlankSprite* spr = static_cast<FontBlankSprite*>(GetSprite());
+	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, spr->font));
 
-	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, sprite->has_edge));
+	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, spr->has_edge));
 	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	wxColour col = wxColour(sprite->color.add.r*255, sprite->color.add.g*255, sprite->color.add.b*255, sprite->color.add.a*255);
+	wxColour col = wxColour(spr->rp->color.add.r*255, spr->rp->color.add.g*255, spr->rp->color.add.b*255, spr->rp->color.add.a*255);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
 
@@ -109,23 +110,23 @@ void FontBlankPropertySetting::InitProperties(wxPropertyGrid* pg)
 	alignProp->SetExpanded(false);
 
 	wxEnumProperty* horiAlignProp = new wxEnumProperty(wxT("Hori"), wxPG_LABEL, HORI_ALIGN_LABELS);
-	horiAlignProp->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
+	horiAlignProp->SetValue(HORI_ALIGN_LABELS[spr->align_hori]);
 	pg->AppendIn(alignProp, horiAlignProp);
 
 	wxEnumProperty* vertAlignProp = new wxEnumProperty(wxT("Vert"), wxPG_LABEL, VERT_ALIGN_LABELS);
-	vertAlignProp->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
+	vertAlignProp->SetValue(VERT_ALIGN_LABELS[spr->align_vert]);
 	pg->AppendIn(alignProp, vertAlignProp);
 
-	pg->Append(new wxFloatProperty(wxT("FontSize"), wxPG_LABEL, sprite->size));
+	pg->Append(new wxFloatProperty(wxT("FontSize"), wxPG_LABEL, spr->size));
 
 	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("LabelSize"), wxPG_LABEL, wxT("<composed>")));
 	sizeProp->SetExpanded(false);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, sprite->width));
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, sprite->height));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, spr->width));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, spr->height));
 
-	pg->Append(new wxStringProperty(wxT("Filename"), wxPG_LABEL, sprite->filename));
-	pg->Append(new wxStringProperty(wxT("TextContent"), wxPG_LABEL, sprite->GetTextContext()));
-	pg->Append(new wxStringProperty(wxT("TextID"), wxPG_LABEL, sprite->GetTextID()));
+	pg->Append(new wxStringProperty(wxT("Filename"), wxPG_LABEL, spr->filename));
+	pg->Append(new wxStringProperty(wxT("TextContent"), wxPG_LABEL, spr->GetTextContext()));
+	pg->Append(new wxStringProperty(wxT("TextID"), wxPG_LABEL, spr->GetTextID()));
 }
 
 }

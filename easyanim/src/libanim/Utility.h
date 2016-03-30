@@ -3,7 +3,7 @@
 
 #include "Symbol.h"
 
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 namespace eanim
 {
@@ -13,7 +13,7 @@ class Utility
 public:
 	static void DrawAnimSymbol(
 		const Symbol* symbol, 
-		const ee::SpriteTrans& trans = ee::SpriteTrans(),
+		const ee::RenderParams& trans = ee::RenderParams(),
 		int index = 1);
 
 	static void GetCurrSprites(const Symbol* symbol, int index, std::vector<ee::Sprite*>& sprites);

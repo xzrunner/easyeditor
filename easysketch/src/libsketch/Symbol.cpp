@@ -28,7 +28,7 @@ void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	if (!spr) {

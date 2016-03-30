@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_COLOR_TRANS_H_
-#define _EASYEDITOR_COLOR_TRANS_H_
+#ifndef _EASYEDITOR_RENDER_COLOR_H_
+#define _EASYEDITOR_RENDER_COLOR_H_
 
 #include "Color.h"
 
@@ -8,10 +8,10 @@
 namespace ee
 {
 
-class ColorTrans
+class RenderColor
 {
 public:
-	ColorTrans();
+	RenderColor();
 
 	void LoadFromFile(const Json::Value& val);
 	void StoreToFile(Json::Value& val) const;
@@ -20,8 +20,8 @@ public:
 	Colorf multi, add;
 	Colorf r, g, b;
 
-}; // ColorTrans
+}; // RenderColor
 
 }
 
-#endif // _EASYEDITOR_COLOR_TRANS_H_
+#endif // _EASYEDITOR_RENDER_COLOR_H_

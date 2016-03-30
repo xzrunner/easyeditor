@@ -1,10 +1,10 @@
 #ifndef _EASYEDITOR_SPRITE_RENDERER_H_
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "Matrix.h"
 #include "Vector.h"
-#include "SpriteTrans.h"
+#include "RenderParams.h"
 
 namespace ee
 {
@@ -21,13 +21,13 @@ class SpriteRenderer
 public:
 	void Draw(const Sprite* sprite, 
 		      const Sprite* root = NULL,
-			  const SpriteTrans& trans = SpriteTrans(),
+			  const RenderParams& trans = RenderParams(),
 			  bool set_shader = true) const;
 
 	void InvalidRect(const Sprite* sprite, const Matrix& mt = Matrix());
 
 	void Draw(const Symbol* symbol, 
-			  const SpriteTrans& trans = SpriteTrans(),
+			  const RenderParams& trans = RenderParams(),
 			  const Vector& pos = Vector(0, 0),
 			  float angle = 0.0f, 
 			  float xScale = 1.0f, 
@@ -42,7 +42,7 @@ private:
 
 	void DrawImpl(const Sprite* sprite, 
 		          const Sprite* root,
-  				  const SpriteTrans& trans) const;
+  				  const RenderParams& trans) const;
 
 private:
 	static SpriteRenderer* m_instance;

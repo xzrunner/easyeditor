@@ -77,7 +77,7 @@ void CircleShape::Translate(const ee::Vector& offset)
 	center += offset;
 }
 
-void CircleShape::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
+void CircleShape::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
 {
 	ee::Vector c = ee::Math2D::TransVector(center, mt);
 	float r = ee::Math2D::TransLen(radius, mt);

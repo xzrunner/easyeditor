@@ -1954,25 +1954,25 @@ void CocoPacker::TransToMat(const ee::Sprite* sprite, float mat[6], bool force /
 	mat[5] = -mat[5];
 }
 
-void CocoPacker::GetColorAssignParams(const ee::Sprite* sprite, std::vector<std::string>& params) const
+void CocoPacker::GetColorAssignParams(const ee::Sprite* spr, std::vector<std::string>& params) const
 {
-	if (sprite->color.multi != ee::Colorf(1,1,1,1) || sprite->color.add != ee::Colorf(0,0,0,0)) 
+	if (spr->rp->color.multi != ee::Colorf(1,1,1,1) || spr->rp->color.add != ee::Colorf(0,0,0,0)) 
 	{
-		std::string str_multi = lua::assign("color", ee::TransColor(sprite->color.multi, ee::PT_BGRA));
+		std::string str_multi = lua::assign("color", ee::TransColor(spr->rp->color.multi, ee::PT_BGRA));
 		params.push_back(str_multi);
-		std::string str_add = lua::assign("add", ee::TransColor(sprite->color.add, ee::PT_ABGR));
+		std::string str_add = lua::assign("add", ee::TransColor(spr->rp->color.add, ee::PT_ABGR));
 		params.push_back(str_add);
 	}
 
-	if (sprite->color.r != ee::Colorf(1, 0, 0, 1) || sprite->color.g != ee::Colorf(0, 1, 0, 1) || sprite->color.b != ee::Colorf(0, 0, 1, 1))
+	if (spr->rp->color.r != ee::Colorf(1, 0, 0, 1) || spr->rp->color.g != ee::Colorf(0, 1, 0, 1) || spr->rp->color.b != ee::Colorf(0, 0, 1, 1))
 	{
-		std::string str_r = lua::assign("r_map", ee::TransColor(sprite->color.r, ee::PT_RGBA));
+		std::string str_r = lua::assign("r_map", ee::TransColor(spr->rp->color.r, ee::PT_RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", ee::TransColor(sprite->color.g, ee::PT_RGBA));
+		std::string str_g = lua::assign("g_map", ee::TransColor(spr->rp->color.g, ee::PT_RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", ee::TransColor(sprite->color.b, ee::PT_RGBA));
+		std::string str_b = lua::assign("b_map", ee::TransColor(spr->rp->color.b, ee::PT_RGBA));
 		params.push_back(str_b);
 	}
 }

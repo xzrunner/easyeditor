@@ -49,7 +49,7 @@ void StageCanvas::OnDrawSprites() const
 	sprite.SetSymbol(&m_stage->GetSymbol());
 	sprite.SetProcess(0.5f);
 
-	m_stage->GetSymbol().Draw(ee::SpriteTrans(), &sprite);
+	m_stage->GetSymbol().Draw(ee::RenderParams(), &sprite);
 
 	ee::RVG::Color(ee::Colorf(1, 0, 0));
 	ee::RVG::Cross(ee::Vector(0, 0), 100, 100);

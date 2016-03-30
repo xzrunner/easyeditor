@@ -2,7 +2,7 @@
 #define _EASYPARTICLE3D_PS_H_
 
 #include <ee/Matrix.h>
-#include <ee/ColorTrans.h>
+#include <ee/RenderColor.h>
 #include <ee/SceneNode.h>
 
 struct p3d_sprite;
@@ -14,7 +14,7 @@ class RenderParams
 {
 public:
 	ee::Matrix mat;
-	ee::ColorTrans ct;
+	ee::RenderColor ct;
 	p3d_sprite* p3d;
 
 	RenderParams() : p3d(NULL) {}

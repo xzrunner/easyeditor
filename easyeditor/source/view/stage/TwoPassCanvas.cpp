@@ -43,7 +43,7 @@ void TwoPassCanvas::OnSize(int w, int h)
 static void
 _before_draw(void* ud) {
 	TwoPassCanvas::ScreenStyle* stype = (TwoPassCanvas::ScreenStyle*)ud;
-	ColorTrans color;
+	RenderColor color;
 	color.multi = stype->multi_col;
 	color.add = stype->add_col;
 	ShaderMgr* mgr = ShaderMgr::Instance();

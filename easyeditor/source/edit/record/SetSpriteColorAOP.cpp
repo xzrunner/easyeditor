@@ -1,5 +1,6 @@
 #include "SetSpriteColorAOP.h"
 #include "Sprite.h"
+#include "RenderParams.h"
 
 #include <algorithm>
 
@@ -15,7 +16,7 @@ namespace ee
 	{ \
 		sprite->Retain(); \
 		m_sprites.push_back(sprite); \
-		m_old_color.push_back(sprite->color.##var##); \
+		m_old_color.push_back(sprite->rp->color.##var##); \
 	} \
 	\
 	SetSprite##name##ColorAOP::SetSprite##name##ColorAOP(const std::vector<Sprite*>& sprites, const Colorf& color) \
@@ -25,7 +26,7 @@ namespace ee
 		m_sprites = sprites; \
 	\
 		for (int i = 0, n = sprites.size(); i < n; ++i) { \
-			m_old_color.push_back(m_sprites[i]->color.##var##); \
+			m_old_color.push_back(m_sprites[i]->rp->color.##var##); \
 		} \
 	} \
 	\
@@ -38,14 +39,14 @@ namespace ee
 	{ \
 		assert(m_sprites.size() == m_old_color.size()); \
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) { \
-			m_sprites[i]->color.##var## = m_old_color[i]; \
+			m_sprites[i]->rp->color.##var## = m_old_color[i]; \
 		} \
 	} \
 	\
 	void SetSprite##name##ColorAOP::Redo() \
 	{ \
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) { \
-			m_sprites[i]->color.##var## = m_new_color; \
+			m_sprites[i]->rp->color.##var## = m_new_color; \
 		} \
 	} \
 	\

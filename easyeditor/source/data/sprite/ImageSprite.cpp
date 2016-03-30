@@ -5,6 +5,7 @@
 #include "Math2D.h"
 #include "BBFactory.h"
 #include "BoundingBox.h"
+#include "RenderParams.h"
 
 namespace ee
 {
@@ -44,7 +45,7 @@ ImageSprite* ImageSprite::Clone() const
 
 bool ImageSprite::Update(int version)
 {
-	return shader.filter == FM_HEAT_HAZE || shader.filter == FM_SHOCK_WAVE || shader.filter == FM_SWIRL;
+	return rp->shader.filter == FM_HEAT_HAZE || rp->shader.filter == FM_SHOCK_WAVE || rp->shader.filter == FM_SWIRL;
 }
 
 const ImageSymbol& ImageSprite::GetSymbol() const

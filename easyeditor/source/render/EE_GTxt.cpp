@@ -3,7 +3,7 @@
 #include "ShaderMgr.h"
 #include "Vector.h"
 #include "Math2D.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "Symbol.h"
 #include "SymbolMgr.h"
 #include "SpriteRenderer.h"
@@ -60,7 +60,7 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 	texcoords[2].Set(_texcoords[4], _texcoords[5]);
 	texcoords[3].Set(_texcoords[6], _texcoords[7]);
 
-	ColorTrans color;
+	RenderColor color;
 	if (rp->mul) {
 		Colorf multi_col = *rp->mul;
 		multi_col.a *= ds->alpha;
@@ -188,7 +188,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	}
 
 	SpriteRenderer::Instance()->Draw((Symbol*)ext_sym, 
-		SpriteTrans(*((Matrix*)ud)), Vector(x, y));
+		RenderParams(*((Matrix*)ud)), Vector(x, y));
 }
 
 void GTxt::Draw(const gtxt_label_style& style, const Matrix& mt, const Colorf& mul, 

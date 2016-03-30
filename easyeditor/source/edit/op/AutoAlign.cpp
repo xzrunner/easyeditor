@@ -6,6 +6,7 @@
 #include "MultiSpritesImpl.h"
 #include "EE_RVG.h"
 #include "FetchAllVisitor.h"
+#include "Color.h"
 
 namespace ee
 {

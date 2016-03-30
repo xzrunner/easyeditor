@@ -15,6 +15,7 @@
 #include <ee/FileType.h>
 #include <ee/ImageSprite.h>
 #include <ee/trans_color.h>
+#include <ee/RenderParams.h>
 
 namespace erespacker
 {
@@ -150,8 +151,8 @@ void PackAnimation::LoadSprTrans(const ee::Sprite* spr, SpriteTrans& trans, bool
 {
 	LoadSprMat(spr, trans, force_mat);
 	LoadSprColor(spr, trans);
-	trans.blend = static_cast<int>(spr->shader.blend);
-	trans.filter = static_cast<int>(spr->shader.filter);
+	trans.blend = static_cast<int>(spr->rp->shader.blend);
+	trans.filter = static_cast<int>(spr->rp->shader.filter);
 }
 
 void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool force)
@@ -207,12 +208,12 @@ void PackAnimation::LoadSprMat(const ee::Sprite* spr, SpriteTrans& trans, bool f
 
 void PackAnimation::LoadSprColor(const ee::Sprite* spr, SpriteTrans& trans)
 {
-	trans.color = ee::color2int(spr->color.multi, ee::PT_ARGB);
-	trans.additive = ee::color2int(spr->color.add, ee::PT_ARGB);
+	trans.color = ee::color2int(spr->rp->color.multi, ee::PT_ARGB);
+	trans.additive = ee::color2int(spr->rp->color.add, ee::PT_ARGB);
 
-	trans.rmap = ee::color2int(spr->color.r, ee::PT_RGBA);
-	trans.gmap = ee::color2int(spr->color.g, ee::PT_RGBA);
-	trans.bmap = ee::color2int(spr->color.b, ee::PT_RGBA);	
+	trans.rmap = ee::color2int(spr->rp->color.r, ee::PT_RGBA);
+	trans.gmap = ee::color2int(spr->rp->color.g, ee::PT_RGBA);
+	trans.bmap = ee::color2int(spr->rp->color.b, ee::PT_RGBA);	
 }
 
 bool PackAnimation::IsMatrixIdentity(const int* mat)

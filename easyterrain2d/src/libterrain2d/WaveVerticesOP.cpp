@@ -3,7 +3,7 @@
 #include "OceanMesh.h"
 
 #include <ee/Matrix.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 namespace eterrain2d
 {
@@ -23,7 +23,7 @@ bool WaveVerticesOP::OnDraw() const
 
 	const std::vector<OceanMesh*>& oceans = m_stage->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
-		oceans[i]->Draw(ee::SpriteTrans(), m_draw_tris);
+		oceans[i]->Draw(ee::RenderParams(), m_draw_tris);
 	}
 
 	return false;

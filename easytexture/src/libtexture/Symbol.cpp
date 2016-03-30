@@ -5,7 +5,7 @@
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
 #include <ee/FileHelper.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 namespace etexture
 {
@@ -42,7 +42,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();

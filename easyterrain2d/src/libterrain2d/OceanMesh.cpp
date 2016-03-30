@@ -112,12 +112,12 @@ void OceanMesh::Update(float dt)
 	}
 }
 
-void OceanMesh::Draw(const ee::SpriteTrans& trans, bool draw_tris) const
+void OceanMesh::Draw(const ee::RenderParams& trans, bool draw_tris) const
 {
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
 	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
 	if (m_blend_open && m_image1) {
-		ee::ColorTrans color;
+		ee::RenderColor color;
 		color.multi = ee::Colorf(1, 1, 1, m_blend_base);
 		shader->SetColor(color);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
@@ -129,7 +129,7 @@ void OceanMesh::Draw(const ee::SpriteTrans& trans, bool draw_tris) const
 			m_grids[i]->DrawTexture(trans, m_image1->GetTexID());
 		}
 	} else {
-		shader->SetColor(ee::ColorTrans());
+		shader->SetColor(ee::RenderColor());
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(trans);
 		}

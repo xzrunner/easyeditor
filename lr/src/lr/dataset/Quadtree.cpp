@@ -84,10 +84,10 @@ void Quadtree::DebugDraw() const
 		ee::RVG::Rect(ee::Vector(m_selected->m_rect.xmin, m_selected->m_rect.ymin), ee::Vector(m_selected->m_rect.xmax, m_selected->m_rect.ymax), false);
 		ee::RVG::LineWidth(2);
 
-		ee::ColorTrans color;
+		ee::RenderColor color;
 		color.multi = ee::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Instance()->Draw(m_selected->m_sprites[i], NULL, ee::SpriteTrans(ee::Matrix(), color));
+			ee::SpriteRenderer::Instance()->Draw(m_selected->m_sprites[i], NULL, ee::RenderParams(ee::Matrix(), color));
 		}
 	}
 }

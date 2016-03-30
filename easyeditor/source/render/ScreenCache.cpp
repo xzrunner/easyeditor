@@ -6,7 +6,7 @@
 #include "Symbol.h"
 #include "Camera.h"
 #include "ShaderContext.h"
-#include "SpriteTrans.h"
+#include "RenderParams.h"
 
 #include <dtex_cs.h>
 #include <dtex_screen.h>
@@ -96,7 +96,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 
 		Matrix t;
 		spr->GetTransMatrix(t);
-		spr->GetSymbol().Draw(SpriteTrans(t));
+		spr->GetSymbol().Draw(RenderParams(t));
 	}
 
 	ShaderContext::Flush();

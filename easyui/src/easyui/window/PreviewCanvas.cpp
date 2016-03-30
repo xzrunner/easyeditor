@@ -27,18 +27,18 @@ void PreviewCanvas::OnDrawSprites() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		const ee::Sprite* sprite = m_sprites[i];
+		const ee::Sprite* spr = m_sprites[i];
 		// 		if (!sprite->visiable)
 		// 			continue;
 
-		const ee::Vector& pos = sprite->GetPosition();
+		const ee::Vector& pos = spr->GetPosition();
 
-		ee::Matrix inv_mt = sprite->GetTransInvMatrix();
+		ee::Matrix inv_mt = spr->GetTransInvMatrix();
 		ee::Matrix translate_mt;
 		translate_mt.Translate(pos.x, pos.y);
 		ee::Matrix mt = translate_mt * (m_scale_mt * inv_mt);
 
-		ee::SpriteRenderer::Instance()->Draw(sprite, NULL, ee::SpriteTrans(mt, sprite->color));
+		ee::SpriteRenderer::Instance()->Draw(spr, NULL, ee::RenderParams(mt, spr->rp->color));
 	}
 }
 

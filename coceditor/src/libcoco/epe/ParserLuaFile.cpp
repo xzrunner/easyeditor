@@ -774,7 +774,7 @@ int ParserLuaFile::Picture::Part::findInMode(int mode[4], int query)
 	return -1;
 }
 
-void ParserLuaFile::Animation::Item::transform(ee::Sprite* sprite) const
+void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 {
 	bool valid = false;
 	for (int i = 0; i < 6; ++i)
@@ -788,8 +788,8 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* sprite) const
 
 	if (is_full && valid)
 	{
-		sprite->color.multi = ee::TransColor(color, ee::PT_BGRA);
-		sprite->color.add = ee::TransColor(add, ee::PT_ABGR);
+		spr->rp->color.multi = ee::TransColor(color, ee::PT_BGRA);
+		spr->rp->color.add = ee::TransColor(add, ee::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;
@@ -834,11 +834,11 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* sprite) const
 		y = -y;
 		angle = -angle;
 
-		sprite->Rotate(angle);
-		sprite->Translate(ee::Vector(x, y));
-		const ee::Vector& scale = sprite->GetScale();
-		sprite->SetScale(ee::Vector(scale.x * sx, scale.y * sy));
-		sprite->SetShear(ee::Vector(kx, ky));
+		spr->Rotate(angle);
+		spr->Translate(ee::Vector(x, y));
+		const ee::Vector& scale = spr->GetScale();
+		spr->SetScale(ee::Vector(scale.x * sx, scale.y * sy));
+		spr->SetShear(ee::Vector(kx, ky));
 	}
 }
 

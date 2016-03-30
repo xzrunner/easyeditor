@@ -72,7 +72,7 @@ bool EditPolylinesOP::OnDraw() const
 {
 	if (ee::SelectShapesOP::OnDraw()) return true;
 
-	ee::ColorTrans color;
+	ee::RenderColor color;
 	color.multi.Set(0.8f, 0.8f, 0.2f);
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();

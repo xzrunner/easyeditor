@@ -34,9 +34,9 @@ SpriteBlend::SpriteBlend()
 {
 }
 
-void SpriteBlend::Draw(const Sprite* sprite, const Matrix& mt) const
+void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt) const
 {
-	assert(sprite->shader.blend != BM_NULL);
+	assert(spr->rp->shader.blend != BM_NULL);
 
 	ShaderMgr::Instance()->Flush();
 
@@ -54,16 +54,16 @@ void SpriteBlend::Draw(const Sprite* sprite, const Matrix& mt) const
 	rc->SetProjection(edge, edge);
 	GL::Viewport(0, 0, edge, edge);
 
-	DrawSprToTmp(sprite, mt);
+	DrawSprToTmp(spr, mt);
 
 	rc->SetModelView(ori_offset, ori_scale);
 	rc->SetProjection(ori_width, ori_height);
 	GL::Viewport(0, 0, ori_width, ori_height);
 
-	DrawTmpToScreen(sprite, mt);
+	DrawTmpToScreen(spr, mt);
 }
 
-void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
+void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt) const
 {
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
@@ -72,12 +72,12 @@ void SpriteBlend::DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const
 	dtexf_c1_clear(0, -2, 2, 0);
 
 	mgr->SetShader(ShaderMgr::BLEND);
-	BlendMode mode = sprite->shader.blend;
+	BlendMode mode = spr->rp->shader.blend;
 	shader->SetMode(BlendModes::Instance()->GetNameENFromMode(mode));
 
-	const_cast<Sprite*>(sprite)->shader.blend = BM_NULL;
-	SpriteRenderer::Instance()->Draw(sprite, sprite, SpriteTrans(mt), false);
-	const_cast<Sprite*>(sprite)->shader.blend = mode;
+	const_cast<Sprite*>(spr)->rp->shader.blend = BM_NULL;
+	SpriteRenderer::Instance()->Draw(spr, spr, RenderParams(mt), false);
+	const_cast<Sprite*>(spr)->rp->shader.blend = mode;
 
 	mgr->Commit();
 	ShaderLab::Instance()->Flush();
@@ -113,7 +113,7 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	mgr->SetShader(ShaderMgr::SPRITE);
 	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->SetColor(ColorTrans());
+	shader->SetColor(RenderColor());
 	shader->Draw(vertices, texcoords, dtexf_c1_get_texture_id());
 }
 

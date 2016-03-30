@@ -29,7 +29,7 @@
 #include "FilterShader.h"
 #include "BlendShader.h"
 #include "Sprite3Shader.h"
-#include "SpriteTrans.h"
+#include "RenderParams.h"
 
 namespace ee
 {
@@ -144,7 +144,7 @@ const uint8_t* Image::GetPixelData() const
 	return m_tex->GetPixelData(); 
 }
 
-void Image::Draw(const SpriteTrans& trans, const Sprite* spr, 
+void Image::Draw(const RenderParams& trans, const Sprite* spr, 
 				 const Sprite* root) const
 {
 	float hw = m_tex->GetWidth() * 0.5f,
@@ -237,7 +237,7 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 	else 
 	{
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
-		if (cam->Type() == "ortho" || !trans.camera.enable_perspective) 
+		if (cam->Type() == "ortho") 
 		{
 			SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
 			shader->SetColor(trans.color);
@@ -252,25 +252,8 @@ void Image::Draw(const SpriteTrans& trans, const Sprite* spr,
 		else
 		{
 			const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
-			float zs = sin(pcam->GetAngle() * ee::TRANS_DEG_TO_RAD);
-
-			float ymin = FLT_MAX, ymax = -FLT_MAX;
-			for (int i = 0; i < 4; ++i) {
-				float y = vertices[i].y;
-				if (y < ymin) ymin = y;
-				if (y > ymax) ymax = y;
-			}
-			
-			float height = (ymax - ymin) * 1.414f;
 			float z[4];
-			if (height > 1024) {
-				memset(z, 0, sizeof(z));
-			} else {
-				for (int i = 0; i < 4; ++i) {
-					float y = vertices[i].y;
-					z[i] = -(y - ymin) / (ymax - ymin) * height * zs;
-				}
-			}
+			trans.camera.CalculateZ(pcam, vertices, z);
 
 			std::vector<vec3> _vertices;
 			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, z[0]));

@@ -1,10 +1,10 @@
-#include "ColorTrans.h"
+#include "RenderColor.h"
 #include "trans_color.h"
 
 namespace ee
 {
 
-ColorTrans::ColorTrans()
+RenderColor::RenderColor()
 	: multi(1, 1, 1, 1)
 	, add(0, 0, 0, 0)
 	, r(1, 0, 0, 0)
@@ -13,7 +13,7 @@ ColorTrans::ColorTrans()
 {
 }
 
-void ColorTrans::LoadFromFile(const Json::Value& val)
+void RenderColor::LoadFromFile(const Json::Value& val)
 {
 	std::string str = val["multi color"].asString();
 	if (str.empty()) {
@@ -48,7 +48,7 @@ void ColorTrans::LoadFromFile(const Json::Value& val)
 	}
 }
 
-void ColorTrans::StoreToFile(Json::Value& val) const
+void RenderColor::StoreToFile(Json::Value& val) const
 {
 	val["multi color"] = TransColor(multi, PT_BGRA);
 	val["add color"] = TransColor(add, PT_ABGR);

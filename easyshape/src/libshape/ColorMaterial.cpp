@@ -1,6 +1,6 @@
 #include "ColorMaterial.h"
 
-#include <ee/ColorTrans.h>
+#include <ee/RenderColor.h>
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
@@ -24,7 +24,7 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 	return val;
 }
 
-void ColorMaterial::Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const
+void ColorMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
 {
 	std::vector<ee::Vector> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);

@@ -13,7 +13,7 @@ namespace eanim
 {
 
 void Utility::DrawAnimSymbol(const Symbol* symbol, 
-							 const ee::SpriteTrans& trans,
+							 const ee::RenderParams& trans,
 							 int index)
 {
 	std::vector<ee::Sprite*> sprites;

@@ -65,7 +65,7 @@ void Scale9Data::ReloadTexture() const
 	}
 }
 
-void Scale9Data::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Scale9Data::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 					  const ee::Sprite* root) const
 {
 	if (spr) {
@@ -179,7 +179,7 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 }
 
 void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3], 
-							const ee::SpriteTrans& trans, const ee::Sprite* root)
+							const ee::RenderParams& trans, const ee::Sprite* root)
 {
 	switch (type)
 	{

@@ -6,7 +6,7 @@
 #include <ee/Object.h>
 #include <ee/Vector.h>
 
-namespace ee { class Matrix; class ColorTrans; }
+namespace ee { class Matrix; class RenderColor; }
 
 namespace eshape
 {
@@ -20,7 +20,7 @@ public:
 	virtual Json::Value Store(const std::string& dirpath) const = 0;
 
 	virtual void Translate(const ee::Vector& offset);
-	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const = 0;
+	virtual void Draw(const ee::Matrix& mt, const ee::RenderColor& color) const = 0;
 
 	virtual void ReloadTexture() = 0;
 

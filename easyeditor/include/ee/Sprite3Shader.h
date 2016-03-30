@@ -10,7 +10,7 @@ namespace ee
 {
 
 class Vector;
-class ColorTrans;
+class RenderColor;
 
 class Sprite3Shader : public IShader
 {
@@ -32,7 +32,7 @@ public:
 
 	void SetModelView(const vec3& pos, float angle);
 
-	void SetColor(const ColorTrans& color);
+	void SetColor(const RenderColor& color);
 
 	void Draw(const std::vector<vec3>& positions, const std::vector<Vector>& texcoords, int texid);
 

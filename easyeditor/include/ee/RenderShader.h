@@ -1,5 +1,5 @@
-#ifndef _EASYEDITOR_SHADER_TRANS_H_
-#define _EASYEDITOR_SHADER_TRANS_H_
+#ifndef _EASYEDITOR_RENDER_SHADER_H_
+#define _EASYEDITOR_RENDER_SHADER_H_
 
 #include "BlendModes.h"
 #include "FilterModes.h"
@@ -9,10 +9,10 @@
 namespace ee
 {
 
-class ShaderTrans
+class RenderShader
 {
 public:
-	ShaderTrans();
+	RenderShader();
 
 	void LoadFromFile(const Json::Value& val);
 	void StoreToFile(Json::Value& val) const;
@@ -21,8 +21,8 @@ public:
 	BlendMode blend;
 	FilterMode filter;
 
-}; // ShaderTrans
+}; // RenderShader
 
 }
 
-#endif // _EASYEDITOR_SHADER_TRANS_H_
+#endif // _EASYEDITOR_RENDER_SHADER_H_

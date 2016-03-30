@@ -110,9 +110,9 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 				ee::Vector pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->SetTransform(pos, m_grid->GetAngle());
-				ee::ColorTrans ct;
+				ee::RenderColor ct;
 				ct.multi = color;
-				ee::SpriteRenderer::Instance()->Draw(m_grid, NULL, ee::SpriteTrans(ee::Matrix(), ct));
+				ee::SpriteRenderer::Instance()->Draw(m_grid, NULL, ee::RenderParams(ee::Matrix(), ct));
 			}
 		}
 	}
@@ -172,9 +172,9 @@ void SymbolRender::DrawRegion(const ee::Symbol& symbol, const ee::Vector& pos)
 
 	float s = (float)(max_reg) / m_region_size;
 	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
-	ee::ColorTrans ct;
+	ee::RenderColor ct;
 	ct.multi = ee::Colorf(1, 0, 0);
-	rd->Draw(m_region, ee::SpriteTrans(ee::Matrix(), ct), pos, 0, s, s, 0, 0);
+	rd->Draw(m_region, ee::RenderParams(ee::Matrix(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
 		rd->Draw(m_region, ee::Matrix(), pos, 0, s, s);

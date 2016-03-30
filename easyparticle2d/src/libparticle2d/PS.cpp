@@ -1,7 +1,7 @@
 #include "PS.h"
 #include "ParticleSystem.h"
 
-#include <ee/ColorTrans.h>
+#include <ee/RenderColor.h>
 #include <ee/SpriteRenderer.h>
 
 #include <ps_2d.h>
@@ -61,7 +61,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);
 
-	ee::SpriteTrans trans;
+	ee::RenderParams trans;
 	trans.mt = mt;
 	memcpy(&trans.color.multi, mul_col, sizeof(*mul_col));
 	memcpy(&trans.color.add, add_col, sizeof(*add_col));

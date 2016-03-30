@@ -21,12 +21,12 @@ void StageCanvas::OnDrawSprites() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		const ee::Sprite* sprite = m_sprites[i];
+		const ee::Sprite* spr = m_sprites[i];
 		// 		if (!sprite->visiable)
 		// 			continue;
-		ee::SpriteTrans trans;
-		trans.color = sprite->color;
-		ee::SpriteRenderer::Instance()->Draw(sprite, NULL, trans);
+		ee::RenderParams trans;
+		trans.color = spr->rp->color;
+		ee::SpriteRenderer::Instance()->Draw(spr, NULL, trans);
 	}
 }
 

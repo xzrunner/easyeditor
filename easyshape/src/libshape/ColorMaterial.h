@@ -19,7 +19,7 @@ public:
 
 	virtual Json::Value Store(const std::string& dirpath) const;
 
-	virtual void Draw(const ee::Matrix& mt, const ee::ColorTrans& color) const;
+	virtual void Draw(const ee::Matrix& mt, const ee::RenderColor& color) const;
 
 	virtual void ReloadTexture() {}
 

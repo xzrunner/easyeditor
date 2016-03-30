@@ -9,7 +9,7 @@
 #include <ee/SettingData.h>
 #include <ee/Visitor.h>
 #include <ee/JsonSerializer.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 #include <fstream>
 
@@ -57,7 +57,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
  	if (m_bg) {

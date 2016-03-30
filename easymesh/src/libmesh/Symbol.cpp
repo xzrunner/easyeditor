@@ -7,7 +7,7 @@
 #include <ee/Image.h>
 #include <ee/ShaderMgr.h>
 #include <ee/SpriteShader.h>
-#include <ee/SpriteTrans.h>
+#include <ee/RenderParams.h>
 
 namespace emesh
 {
@@ -62,7 +62,7 @@ void Symbol::ReloadTexture() const
 	}
 }
 
-void Symbol::Draw(const ee::SpriteTrans& trans, const ee::Sprite* spr, 
+void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
 	if (!m_shape) {

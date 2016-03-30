@@ -82,14 +82,14 @@ void AnimRecorder::StoreToFile(const std::string& filepath) const
 		for (int j = 0, m = record_frame->items.size(); j < m; ++j)
 		{
 			Item* item = record_frame->items[j];
-			ee::Sprite* sprite = new ee::NullSprite(
+			ee::Sprite* spr = new ee::NullSprite(
 				new ee::NullSymbol(item->filepath));
 
-			sprite->SetTransform(ee::Vector(item->x, item->y), item->angle);
-			sprite->SetScale(ee::Vector(item->scale, item->scale));
-			sprite->color.multi = item->mul_col;
+			spr->SetTransform(ee::Vector(item->x, item->y), item->angle);
+			spr->SetScale(ee::Vector(item->scale, item->scale));
+			spr->rp->color.multi = item->mul_col;
 
-			frame->sprites.push_back(sprite);
+			frame->sprites.push_back(spr);
 		}
 		layer->frames.push_back(frame);
 	}

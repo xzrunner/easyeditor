@@ -4,7 +4,7 @@
 #include "Cloneable.h"
 #include "UserDataImpl.h"
 #include "Object.h"
-#include "ColorTrans.h"
+#include "RenderColor.h"
 
 #include <json/json.h>
 
@@ -16,7 +16,7 @@ class Rect;
 class PropertySetting;
 class Matrix;
 class EditPanelImpl;
-class ColorTrans;
+class RenderColor;
 
 class Shape : public Cloneable, public UserDataImpl, public Object
 {
@@ -45,7 +45,7 @@ public:
 	virtual const Rect& GetRect() const = 0;
 
 	virtual void Draw(const Matrix& mt, 
-		const ColorTrans& color = ColorTrans()) const = 0;
+		const RenderColor& color = RenderColor()) const = 0;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;
 

@@ -100,7 +100,7 @@ void Sprite::SetSize(float w, float h)
 	BuildBounding();
 }
 
-void Sprite::Draw(const ee::SpriteTrans& trans) const
+void Sprite::Draw(const ee::RenderParams& trans) const
 {
 	m_data.Draw(trans);
 }

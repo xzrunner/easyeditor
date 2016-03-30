@@ -5,9 +5,6 @@
 #include "UserDataImpl.h"
 #include "Object.h"
 #include "Vector.h"
-#include "ColorTrans.h"
-#include "ShaderTrans.h"
-#include "CameraTrans.h"
 
 #include <json/json.h>
 
@@ -22,6 +19,7 @@ class Matrix;
 class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
+class RenderParams;
 
 class Sprite : public Cloneable, public UserDataImpl, public Object
 {
@@ -106,9 +104,12 @@ public:
 	std::string tag;
 	bool clip;
 
-	ColorTrans color;
-	ShaderTrans shader;
-	CameraTrans camera;
+	// render
+	RenderParams* rp;
+
+// 	RenderColor color;
+// 	RenderShader shader;
+// 	RenderCamera camera;
 
 	// edit
 	bool visiable;
