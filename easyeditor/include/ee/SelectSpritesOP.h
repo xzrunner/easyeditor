@@ -15,7 +15,6 @@ class EditCMPT;
 class IPropertySetting;
 class SpriteSelection;
 class Sprite;
-class Rect;
 
 class SelectSpritesOP : public DrawSelectRectOP
 {
@@ -25,6 +24,7 @@ public:
 	virtual ~SelectSpritesOP();
 
 	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyUp(int keyCode);
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);
@@ -43,9 +43,6 @@ protected:
 private:
 	void PasteToSelection() const;
 	void CopyFromSelection();
-
-	void PointQuery(const Vector& pos) const;
-	void RegionQuery(const Rect& rect, bool contain) const;
 
 protected:
 	SpriteSelection* m_selection;

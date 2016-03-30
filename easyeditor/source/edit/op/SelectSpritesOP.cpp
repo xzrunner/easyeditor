@@ -64,9 +64,29 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 		CopyFromSelection();
 		return true;
 	}
-	else if (m_stage->GetKeyState(WXK_SHIFT)) 
+	else if (keyCode ==  WXK_SHIFT)
 	{
-		ClearSpriteSelectionSJ::Instance()->Clear();
+		if (!m_rect_select) {
+			m_rect_select = true;
+			m_stage->SetCursor(wxCURSOR_RIGHT_ARROW);
+		}
+	}
+
+	return false;
+}
+
+bool SelectSpritesOP::OnKeyUp(int keyCode)
+{
+	if (DrawSelectRectOP::OnKeyUp(keyCode)) return true;
+
+	switch (keyCode)
+	{
+	case WXK_SHIFT:
+		if (m_rect_select) {
+			m_rect_select = false;
+			m_stage->SetCursor(wxCURSOR_ARROW);
+		}
+		break;
 	}
 
 	return false;
@@ -77,7 +97,10 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
  	m_draggable = true;
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-	Sprite* selected = SelectByPos(pos);
+	Sprite* selected = NULL;
+	if (!m_rect_select) {
+		selected = SelectByPos(pos);
+	}
 	if (selected)
 	{
 		assert(selected->editable);
@@ -139,7 +162,29 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 	}
 
 	Vector end = m_stage->TransPosScrToProj(x, y);
-	RegionQuery(Rect(m_left_first_pos, end), m_left_first_pos.x < end.x);
+	Rect rect(m_left_first_pos, end);
+	std::vector<Sprite*> sprites;
+	m_spritesImpl->QuerySpritesByRect(rect, m_left_first_pos.x < end.x, sprites);
+	if (m_stage->GetKeyState(WXK_CONTROL))
+	{
+		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
+		{
+			Sprite* sprite = sprites[i];
+			if (m_selection->IsExist(sprite)) {
+				m_selection->Remove(sprites[i]);
+			} else {
+				m_selection->Add(sprites[i]);
+			}
+		}
+	}
+	else
+	{
+		for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+			m_selection->Add(sprites[i]);
+		}
+	}
+
+	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 
 	m_left_first_pos.SetInvalid();
 
@@ -154,65 +199,27 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 
 bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 {
-	//m_right_first_pos.Set(x, y);
+	m_right_first_pos.Set(x, y);
 
-	//SetRightPan(m_selection->IsEmpty());
-	//if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;
-
-	//////////////////////////////////////////////////////////////////////////
-
-	if (m_stage->GetKeyState(WXK_SHIFT)) {
-		if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;	
-
-		m_rect_select = true;
-		m_stage->SetCursor(wxCURSOR_RIGHT_ARROW);
-	} else {
-		m_right_first_pos.Set(x, y);
-	}
+	SetRightPan(m_selection->IsEmpty());
+	if (DrawSelectRectOP::OnMouseRightDown(x, y)) return true;
 
 	return false;
 }
 
 bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 {
-// 	// select
-// 	if (m_right_first_pos == Vector(x, y))
-// 	{
-// 		Vector pos = m_stage->TransPosScrToProj(x, y);
-// 		PointMultiQueryVisitor visitor(pos);
-// 		m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
-// 		const std::vector<Sprite*>& sprites = visitor.GetResult();
-// 		SetRightPan(sprites.empty());
-// 	}
-// 
-// 	if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;
-
-	//////////////////////////////////////////////////////////////////////////
-
-	if (m_rect_select) 
+	// select
+	if (m_right_first_pos == Vector(x, y))
 	{
-		if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;
-
-		Vector start = m_stage->TransPosScrToProj(m_right_first_pos.x, m_right_first_pos.y),
-			end = m_stage->TransPosScrToProj(x, y);
-		RegionQuery(Rect(start, end), m_right_first_pos.x < x);
-
-		m_rect_select = false;
-		m_stage->SetCursor(wxCURSOR_ARROW);
+		Vector pos = m_stage->TransPosScrToProj(x, y);
+		PointMultiQueryVisitor visitor(pos);
+		m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
+		const std::vector<Sprite*>& sprites = visitor.GetResult();
+		SetRightPan(sprites.empty());
 	}
-	else
-	{
-		if (m_right_first_pos == Vector(x, y))
-		{
-			Vector pos = m_stage->TransPosScrToProj(x, y);
-			PointMultiQueryVisitor visitor(pos);
-			m_spritesImpl->TraverseSprites(visitor, DT_EDITABLE);
-			const std::vector<Sprite*>& sprites = visitor.GetResult();
-//			SetRightPan(sprites.empty());
-		}
 
-		if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;
-	}
+	if (DrawSelectRectOP::OnMouseRightUp(x, y)) return true;
 
 	return false;
 }
@@ -362,37 +369,6 @@ void SelectSpritesOP::CopyFromSelection()
 	SelectSpriteSJ::Instance()->Select(last_spr, !add);
 
 	wxTheClipboard->Close();
-}
-
-void SelectSpritesOP::PointQuery(const Vector& pos) const
-{
-
-}
-
-void SelectSpritesOP::RegionQuery(const Rect& rect, bool contain) const
-{
-	std::vector<Sprite*> sprites;
-	m_spritesImpl->QuerySpritesByRect(rect, contain, sprites);
-	if (m_stage->GetKeyState(WXK_CONTROL))
-	{
-		for (size_t i = 0, n = sprites.size(); i < n; ++i) 
-		{
-			Sprite* sprite = sprites[i];
-			if (m_selection->IsExist(sprite)) {
-				m_selection->Remove(sprites[i]);
-			} else {
-				m_selection->Add(sprites[i]);
-			}
-		}
-	}
-	else
-	{
-		for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-			m_selection->Add(sprites[i]);
-		}
-	}
-
-	SelectSpriteSetSJ::Instance()->Select(m_selection, m_spritesImpl);
 }
 
 }
