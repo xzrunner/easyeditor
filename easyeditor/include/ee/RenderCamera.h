@@ -15,12 +15,10 @@ public:
 	
 	void CalculateZ(const Pseudo3DCamera* cam, Vector vertices[4], float z[4]) const;
 
-	float CalculateDZ(const Pseudo3DCamera* cam, float offy);
-
 public:
 	bool has_height;
 
-	float start_height;
+	float base_y;
 
 }; // RenderCamera
 

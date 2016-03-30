@@ -132,9 +132,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-			ee::Sprite* c = m_sprites[i];
-			
-			ee::SpriteRenderer::Instance()->Draw(c, root, trans);
+			ee::SpriteRenderer::Instance()->Draw(m_sprites[i], root, trans);
 		}
 		if (m_clipbox.Width() > 0 && m_clipbox.Height() > 0) {
 			ee::Vector min(m_clipbox.xmin, m_clipbox.ymin), 

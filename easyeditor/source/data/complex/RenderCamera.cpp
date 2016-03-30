@@ -2,17 +2,21 @@
 #include "Pseudo3DCamera.h"
 #include "Math2D.h"
 
+#include <assert.h>
+
 namespace ee
 {
 
+static const float HEIGHT_VAL = 1.414f;
+
 RenderCamera::RenderCamera()
 	: has_height(true)
-	, start_height(0)
+	, base_y(FLT_MAX)
 {
 }
 
 void RenderCamera::CalculateZ(const Pseudo3DCamera* cam, 
-							 Vector vertices[4], float z[4]) const
+							  Vector vertices[4], float z[4]) const
 {
 	if (!has_height) {
 		memset(z, 0, sizeof(float) * 4);
@@ -28,18 +32,20 @@ void RenderCamera::CalculateZ(const Pseudo3DCamera* cam,
 		if (y > ymax) ymax = y;
 	}
 
-	float height = (ymax - ymin) * 1.414f;
+//	float zoff = 0;
+	if (base_y != FLT_MAX) {
+// 		assert(ymin >= base_y);
+// 		zoff = (ymin - base_y) * HEIGHT_VAL;
+
+		ymin -= (ymin - base_y);
+	}
+
+	float height = (ymax - ymin) * HEIGHT_VAL;
 //	float height = ymax - ymin;
 	for (int i = 0; i < 4; ++i) {
 		float y = vertices[i].y;
-		z[i] = -(y - ymin) / (ymax - ymin) * height * zs/* + start_height*/;
+		z[i] = -(y - ymin) / (ymax - ymin) * height * zs;
 	}
-}
-
-float RenderCamera::CalculateDZ(const Pseudo3DCamera* cam, float offy)
-{
-//	return sin(cam->GetAngle() )
-	return 0;
 }
 
 }

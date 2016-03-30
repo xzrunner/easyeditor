@@ -9,6 +9,8 @@
 #include "color_config.h"
 #include "ShaderMgr.h"
 #include "FilterShader.h"
+#include "CameraMgr.h"
+#include "Camera.h"
 
 namespace ee
 {
@@ -55,12 +57,26 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		ct.has_height = false;
 	} else {
 		ct.has_height = spr->rp->camera.has_height;
-//		ct.start_height = sprite->camera.start_height + 
+		if (trans.camera.base_y == FLT_MAX) {
+			ct.base_y = trans.camera.base_y;
+			std::vector<Vector> bound;
+			spr->GetBounding()->GetBoundPos(bound);
+			for (int i = 0, n = bound.size(); i < n; ++i) {
+				if (bound[i].y < ct.base_y) {
+					ct.base_y = bound[i].y;
+				}
+			}
+		} else {
+			ct.base_y = trans.camera.base_y;
+		}
 	}
 
 	ShaderMgr* mgr = ShaderMgr::Instance();
 	if (blend != BM_NULL) {
-		SpriteBlend::Instance()->Draw(spr, trans.mt);
+		const Camera* cam = CameraMgr::Instance()->GetCamera();
+		if (cam->Type() == "ortho") {
+			SpriteBlend::Instance()->Draw(spr, trans.mt);
+		}
 	} else if (filter != FM_NULL) {
 		if (set_shader) {
 			mgr->SetShader(ShaderMgr::FILTER);

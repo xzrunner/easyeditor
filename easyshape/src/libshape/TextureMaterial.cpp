@@ -6,6 +6,10 @@
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
 #include <ee/SpriteShader.h>
+#include <ee/Camera.h>
+#include <ee/CameraMgr.h>
+#include <ee/Pseudo3DCamera.h>
+#include <ee/Sprite3Shader.h>
 
 namespace eshape
 {
@@ -49,23 +53,45 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) c
 		&& m_tris.size() % 3 == 0);
 
 	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	mgr->SetShader(ee::ShaderMgr::SPRITE);
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	for (int i = 0, n = m_tris.size(); i < n; i += 3) {
-		ee::Vector vertices[4], texcoords[4];
-		for (int j = 0; j < 3; ++j) {
-			vertices[j] = ee::Math2D::TransVector(m_tris[i+j], mt);
-			texcoords[j] = m_tris_texcoord[i+j];
-		}
-		vertices[3] = vertices[2];
-		texcoords[3] = texcoords[2];
+	const ee::Camera* cam = ee::CameraMgr::Instance()->GetCamera();
+	if (cam->Type() == "ortho") 
+	{
+		mgr->SetShader(ee::ShaderMgr::SPRITE);
+		ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
+			ee::Vector vertices[4], texcoords[4];
+			for (int j = 0; j < 3; ++j) {
+				vertices[j] = ee::Math2D::TransVector(m_tris[i+j], mt);
+				texcoords[j] = m_tris_texcoord[i+j];
+			}
+			vertices[3] = vertices[2];
+			texcoords[3] = texcoords[2];
 
-// 		if (ee::Config::Instance()->IsUseDTex()) {
-// 			ee::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
-// 				m_image->GetFilepath(), m_image->GetTexID());
-// 		} else {
+			// 		if (ee::Config::Instance()->IsUseDTex()) {
+			// 			ee::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
+			// 				m_image->GetFilepath(), m_image->GetTexID());
+			// 		} else {
 			shader->Draw(vertices, texcoords, m_image->GetTexID());
-//		}
+			//		}
+		}
+	}
+	else
+	{
+		const ee::Pseudo3DCamera* pcam = static_cast<const ee::Pseudo3DCamera*>(cam);
+		mgr->SetShader(ee::ShaderMgr::SPRITE3);
+		ee::Sprite3Shader* shader = static_cast<ee::Sprite3Shader*>(mgr->GetShader(ee::ShaderMgr::SPRITE3));
+		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
+			std::vector<ee::vec3> vertices; 
+			vertices.resize(3);
+			std::vector<ee::Vector> texcoords;
+			texcoords.resize(3);
+			for (int j = 0; j < 3; ++j) {
+				ee::Vector v = ee::Math2D::TransVector(m_tris[i+j], mt);
+				vertices[j] = ee::vec3(v.x, v.y, 0);
+				texcoords[j] = m_tris_texcoord[i+j];
+			}
+			shader->Draw(vertices, texcoords, m_image->GetTexID());
+		}
 	}
 }
 
