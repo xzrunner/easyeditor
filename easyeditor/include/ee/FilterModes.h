@@ -29,11 +29,11 @@ enum FilterMode
 class FilterModes
 {
 public:
-	FilterMode GetIDFromNameEN(const std::string& name) const;
-	std::string GetNameENFromID(FilterMode id) const;
+	FilterMode GetModeFromNameEN(const std::string& name) const;
+	std::string GetNameENFromMode(FilterMode id) const;
 
-	FilterMode GetIDFromIdx(int idx) const;
-	int GetIdxFromID(FilterMode mode) const;
+	FilterMode GetModeFromIdx(int idx) const;
+	int GetIdxFromMode(FilterMode mode) const;
 
 	void GetAllNameCN(std::vector<std::string>& names) const;
 

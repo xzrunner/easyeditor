@@ -105,7 +105,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == "Filter")
 	{
 		int idx = wxANY_AS(value, int);
-		spr->rp->shader.filter = FilterModes::Instance()->GetIDFromIdx(idx);
+		spr->rp->shader.filter = FilterModes::Instance()->GetModeFromIdx(idx);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -229,7 +229,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(spr->rp->shader.blend));
 
-	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromID(spr->rp->shader.filter));
+	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromMode(spr->rp->shader.filter));
 
 	MyColorProperty* rp = static_cast<MyColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new PropertyColorListener(&spr->rp->color.r));
@@ -352,7 +352,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	FilterModes::Instance()->GetAllNameCN(names);
 	wxEnumProperty* filter_prop = new wxEnumProperty(wxT("Filter"), wxPG_LABEL, TransToWXStringArray(names));
-	idx = FilterModes::Instance()->GetIdxFromID(spr->rp->shader.filter);
+	idx = FilterModes::Instance()->GetIdxFromMode(spr->rp->shader.filter);
 	filter_prop->SetValue(idx);
 	pg->Append(filter_prop);
 

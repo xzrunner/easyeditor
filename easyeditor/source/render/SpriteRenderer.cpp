@@ -86,7 +86,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 			mgr->SetShader(ShaderMgr::FILTER);
 		}
 		FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
-		shader->SetMode(FilterModes::Instance()->GetNameENFromID(filter));
+		shader->SetMode(FilterModes::Instance()->GetNameENFromMode(filter));
 		RenderParams t = trans;
 		t.shader.filter = filter;
 		t.camera = ct;

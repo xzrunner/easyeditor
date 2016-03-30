@@ -116,6 +116,9 @@ void AnimToLuaString::PackFrame(const PackAnimation::Frame& frame, ebuilder::Cod
 		if (t.filter != 0) {
 			params.push_back(lua::assign("filter", ee::StringHelper::ToString(t.filter)));
 		}
+		if (t.camera != 0) {
+			params.push_back(lua::assign("camera", ee::StringHelper::ToString(t.camera)));
+		}
 
 		if (params.size() > 1) {
 			lua::tableassign(gen, "", params);

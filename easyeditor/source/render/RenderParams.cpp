@@ -26,12 +26,17 @@ void RenderParams::LoadFromFile(const Json::Value& val)
 {
 	color.LoadFromFile(val);
 	shader.LoadFromFile(val);
+
+	std::string disc = val["camera"].asString();
+	camera.mode = CameraModes::Instance()->GetModeFromNameEN(disc);
 }
 
 void RenderParams::StoreToFile(Json::Value& val) const
 {
 	color.StoreToFile(val);
 	shader.StoreToFile(val);
+
+	val["camera"] = CameraModes::Instance()->GetNameENFromMode(camera.mode);
 }
 
 }

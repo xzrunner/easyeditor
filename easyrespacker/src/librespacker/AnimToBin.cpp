@@ -97,6 +97,9 @@ int AnimToBin::FrameSize(const PackAnimation::Frame& frame)
 		if (t.filter != 0) {
 			ret += sizeof(uint16_t);
 		}
+		if (t.camera != 0) {
+			ret += sizeof(uint16_t);
+		}
 	}
 	return ret;
 }
@@ -114,7 +117,6 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 		uint8_t type = TAG_ID;
 		if (!PackAnimation::IsMatrixIdentity(t.mat)) {
 			type |= TAG_MATRIX;
-			// todo TAG_MATRIXREF
 		}
 		if (t.color != 0xffffffff) {
 			type |= TAG_COLOR;
@@ -130,6 +132,9 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 		}
 		if (t.filter != 0) {
 			type |= TAG_FILTER;
+		}
+		if (t.camera != 0) {
+			type |= TAG_CAMERA;
 		}
 
 		pack(type, ptr);
@@ -166,6 +171,10 @@ void AnimToBin::PackFrame(const PackAnimation::Frame& frame, uint8_t** ptr)
 		if (type & TAG_FILTER) {
 			uint16_t filter = t.filter;
 			pack(filter, ptr);
+		}
+		if (type & TAG_CAMERA) {
+			uint16_t camera = t.camera;
+			pack(camera, ptr);
 		}
 	}
 }

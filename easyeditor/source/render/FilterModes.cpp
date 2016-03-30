@@ -23,7 +23,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(FM_SWIRL, "swirl", "äöÎÐ"));
 }
 
-FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const
+FilterMode FilterModes::GetModeFromNameEN(const std::string& name) const
 {
 	if (name.empty()) {
 		return FM_NULL;
@@ -38,7 +38,7 @@ FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const
 	return FM_NULL;
 }
 
-std::string FilterModes::GetNameENFromID(FilterMode id) const
+std::string FilterModes::GetNameENFromMode(FilterMode id) const
 {
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		const Item& item = m_modes[i];
@@ -49,7 +49,7 @@ std::string FilterModes::GetNameENFromID(FilterMode id) const
 	return "";
 }
 
-FilterMode FilterModes::GetIDFromIdx(int idx) const
+FilterMode FilterModes::GetModeFromIdx(int idx) const
 {
 	if (idx < 0 || idx >= static_cast<int>(m_modes.size())) {
 		return FM_NULL;
@@ -58,7 +58,7 @@ FilterMode FilterModes::GetIDFromIdx(int idx) const
 	}
 }
 
-int FilterModes::GetIdxFromID(FilterMode mode) const
+int FilterModes::GetIdxFromMode(FilterMode mode) const
 {
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		if (m_modes[i].id == mode) {

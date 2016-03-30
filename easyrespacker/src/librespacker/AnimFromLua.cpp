@@ -141,10 +141,13 @@ void AnimFromLua::UnpackPart(lua_State* L, PackAnimation::Part& part)
 			part.t.bmap = (uint32_t)LuaDataHelper::GetDoubleField(L, "bmap");
 		}
 		if (LuaDataHelper::HasField(L, "blend")) {
-			part.t.blend = (uint32_t)LuaDataHelper::GetDoubleField(L, "blend");
+			part.t.blend = (uint16_t)LuaDataHelper::GetDoubleField(L, "blend");
 		}
 		if (LuaDataHelper::HasField(L, "filter")) {
-			part.t.filter = (uint32_t)LuaDataHelper::GetDoubleField(L, "filter");
+			part.t.filter = (uint16_t)LuaDataHelper::GetDoubleField(L, "filter");
+		}
+		if (LuaDataHelper::HasField(L, "camera")) {
+			part.t.camera = (uint16_t)LuaDataHelper::GetDoubleField(L, "camera");
 		}
 	} else {
 		throw ee::Exception("PackAnimation::UnpackFromLua unknown item type.");

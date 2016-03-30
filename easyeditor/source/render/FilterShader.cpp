@@ -64,7 +64,7 @@ void FilterShader::SetModelView(const Vector& offset, float scale)
 
 void FilterShader::SetMode(const std::string& str)
 {
-	FilterMode mode = FilterModes::Instance()->GetIDFromNameEN(str);
+	FilterMode mode = FilterModes::Instance()->GetModeFromNameEN(str);
 
 	SL_FILTER_MODE sl_mode = SLFM_NULL;
 	switch (mode)

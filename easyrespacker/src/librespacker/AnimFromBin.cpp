@@ -157,6 +157,11 @@ void AnimFromBin::UnpackFrame(uint8_t** ptr, PackAnimation::Frame& frame)
 			unpack(filter, ptr);
 			part.t.filter = filter;
 		}
+		if (type & TAG_CAMERA) {
+			uint16_t camera;
+			unpack(camera, ptr);
+			part.t.camera = camera;			
+		}
 
 		frame.parts.push_back(part);
 	}

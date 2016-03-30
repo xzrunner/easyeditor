@@ -22,7 +22,7 @@ void RenderShader::LoadFromFile(const Json::Value& val)
 	if (!val["filter"].isNull()) {
 		std::string disc = val["filter"].asString();
 		if (Config::Instance()->IsRenderOpen()) {
-			filter = FilterModes::Instance()->GetIDFromNameEN(disc);
+			filter = FilterModes::Instance()->GetModeFromNameEN(disc);
 		}
 	}
 }
@@ -31,7 +31,7 @@ void RenderShader::StoreToFile(Json::Value& val) const
 {
 	if (Config::Instance()->IsRenderOpen()) {
 		val["blend"] = BlendModes::Instance()->GetNameENFromMode(blend);
-		val["filter"] = FilterModes::Instance()->GetNameENFromID(filter);
+		val["filter"] = FilterModes::Instance()->GetNameENFromMode(filter);
 	}
 }
 
