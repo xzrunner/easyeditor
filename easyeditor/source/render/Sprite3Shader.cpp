@@ -1,6 +1,7 @@
 #include "Sprite3Shader.h"
 #include "RenderColor.h"
 #include "trans_color.h"
+#include "Pseudo3DCamera.h"
 
 #include <sl_sprite3.h>
 
@@ -42,7 +43,7 @@ void Sprite3Shader::SetModelView(const vec3& pos, float angle)
 
 void Sprite3Shader::SetProjection(int width, int height)
 {
-	sl_sprite3_projection(width, height, NEAR, FAR);
+	sl_sprite3_projection(width, height, Pseudo3DCamera::NEAR_CLIP, Pseudo3DCamera::FAR_CLIP);
 }
 
 void Sprite3Shader::Commit()

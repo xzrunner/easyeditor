@@ -52,10 +52,10 @@ void ArrangeSpriteImpl::OnKeyDown(int key_code)
 			switch (key_code)
 			{
 			case WXK_PAGEDOWN:
-				cam->Rotate(0.1f);
+				cam->Rotate(1);
 				break;
 			case WXK_PAGEUP:
-				cam->Rotate(-0.1f);
+				cam->Rotate(-1);
 				break;
 			}
 		}

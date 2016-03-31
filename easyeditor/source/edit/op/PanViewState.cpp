@@ -4,6 +4,7 @@
 #include "OrthoCamera.h"
 #include "Pseudo3DCamera.h"
 #include "CameraMgr.h"
+#include "ScreenCache.h"
 
 namespace ee
 {
@@ -49,9 +50,14 @@ bool PanViewState::OnMouseDrag(int x, int y)
 	Vector offset(m_last_pos.x - x, m_last_pos.y - y);
 	offset.y = -offset.y;
 	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
-		static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera())->Translate(offset);
+		OrthoCamera* cam = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera());
+		cam->Translate(offset);
 	} else if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D)) {
-		static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera())->Translate(vec3(-offset.x, -offset.y, 0));
+		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());		
+		int w, h;
+		ScreenCache::Instance()->GetSize(w, h);
+		float z = cam->GetZ();
+		cam->Translate(vec3(offset.x / w * z, offset.y / h * z, 0));
 	}
 
 	m_last_pos.Set(x, y);

@@ -36,10 +36,6 @@ public:
 
 	void Draw(const std::vector<vec3>& positions, const std::vector<Vector>& texcoords, int texid);
 
-public:
-	static const int FAR = 800;
-	static const int NEAR = 50;
-
 protected:
 	virtual void BindAttribLocation(GLuint prog) {}
 
