@@ -192,7 +192,12 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 	{
 		int w = m_stage->GetSize().GetWidth(),
 			h = m_stage->GetSize().GetHeight();
-		const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
+		float scale = 1;
+		if (GetKeyState(WXK_CONTROL)) {
+			scale = direction > 0 ? 1 / 1.01f : 1.01f;
+		} else {
+			scale = direction > 0 ? 1 / 1.1f : 1.1f;
+		}
 		const float cx = static_cast<float>(x),
 			        cy = static_cast<float>(h - y);
 		OrthoCamera* cam = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera());
