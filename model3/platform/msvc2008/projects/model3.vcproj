@@ -154,10 +154,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\model3\m3_math.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\model3\m3_mesh.c"
 			>
 		</File>
