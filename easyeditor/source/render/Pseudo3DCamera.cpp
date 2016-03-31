@@ -41,25 +41,10 @@ const Vector& Pseudo3DCamera::GetPosition() const
 	return Vector(0, 0);
 }
 
-void Pseudo3DCamera::TranslationX(float dx)
+void Pseudo3DCamera::Translate(const vec3& offset)
 {
-	m_position.x += dx;
+	m_position += offset;
 	UpdateModelView();
-	SetCanvasDirtySJ::Instance()->SetDirty();
-}
-
-void Pseudo3DCamera::TranslationY(float dy)
-{
-	m_position.y += dy;
-	UpdateModelView();
-	SetCanvasDirtySJ::Instance()->SetDirty();
-}
-
-void Pseudo3DCamera::TranslationZ(float dz)
-{
-	m_position.z += dz;
-	UpdateModelView();
-	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
 void Pseudo3DCamera::Rotate(float da)

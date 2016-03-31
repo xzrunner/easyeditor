@@ -10,6 +10,7 @@
 #include "SpriteRenderer.h"
 #include "CameraMgr.h"
 #include "OrthoCamera.h"
+#include "Pseudo3DCamera.h"
 
 #include <fstream>
 
@@ -187,16 +188,22 @@ void EditPanelImpl::OnKeyUp(wxKeyEvent& event)
 
 void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 {
-	if (!m_stage || !CameraMgr::Instance()->IsType(CameraMgr::ORTHO)) {
-		return;
+	if (CameraMgr::Instance()->IsType(CameraMgr::ORTHO) && m_stage) 
+	{
+		int w = m_stage->GetSize().GetWidth(),
+			h = m_stage->GetSize().GetHeight();
+		const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
+		const float cx = static_cast<float>(x),
+			        cy = static_cast<float>(h - y);
+		OrthoCamera* cam = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera());
+		cam->Scale(scale, cx, cy, w, h);
+	} 
+	else if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D))
+	{
+		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());
+		float dz = direction > 0 ? 5 : -5;
+		cam->Translate(vec3(0, 0, dz));
 	}
-
-	int w = m_stage->GetSize().GetWidth(),
-		h = m_stage->GetSize().GetHeight();
-	const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
-	const float cx = static_cast<float>(x),
-		cy = static_cast<float>(h - y);
-	static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera())->Scale(scale, cx, cy, w, h);
 }
 
 void EditPanelImpl::Undo()

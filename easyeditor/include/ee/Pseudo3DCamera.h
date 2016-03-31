@@ -23,9 +23,7 @@ public:
 	virtual float GetScale() const;
 	virtual const Vector& GetPosition() const;
 
-	void TranslationX(float dx);
-	void TranslationY(float dy);
-	void TranslationZ(float dz);
+	void Translate(const vec3& offset);
 	void Rotate(float da);
 
 	float GetAngle() const { return m_angle; }

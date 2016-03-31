@@ -51,29 +51,11 @@ void ArrangeSpriteImpl::OnKeyDown(int key_code)
 			ee::Pseudo3DCamera* cam = static_cast<ee::Pseudo3DCamera*>(ee::CameraMgr::Instance()->GetCamera());
 			switch (key_code)
 			{
-			case 'a' : case 'A':
-				cam->TranslationX(5);
+			case WXK_PAGEDOWN:
+				cam->Rotate(0.1f);
 				break;
-			case 'd' : case 'D':
-				cam->TranslationX(-5);
-				break;
-			case 's' : case 'S':
-				cam->TranslationY(5);
-				break;
-			case 'w' : case 'W':
-				cam->TranslationY(-5);
-				break;
-			case 'k' : case 'K':
-				cam->TranslationZ(-5);
-				break;
-			case 'i' : case 'I':
-				cam->TranslationZ(5);
-				break;
-			case 'j' : case 'J':
-				cam->Rotate(1);
-				break;
-			case 'l' : case 'L':
-				cam->Rotate(-1);
+			case WXK_PAGEUP:
+				cam->Rotate(-0.1f);
 				break;
 			}
 		}
