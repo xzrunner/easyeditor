@@ -38,10 +38,6 @@ public:
 	const sm_mat4* GetModelViewMat() const;
 	const sm_mat4* GetProjectMat() const;
 
-public:
-	static const int FAR_CLIP = 800;
-	static const int NEAR_CLIP = 50;
-
 private:
 	c25_camera* m_cam;
 

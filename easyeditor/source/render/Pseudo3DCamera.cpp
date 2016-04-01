@@ -122,7 +122,7 @@ float Pseudo3DCamera::GetZ() const
 
 const sm_mat4* Pseudo3DCamera::GetModelViewMat() const
 {
-	return c25_cam_get_movelview_mat(m_cam);
+	return c25_cam_get_modelview_mat(m_cam);
 }
 
 const sm_mat4* Pseudo3DCamera::GetProjectMat() const
