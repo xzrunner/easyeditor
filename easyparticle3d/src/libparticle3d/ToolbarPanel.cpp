@@ -109,8 +109,6 @@ void ToolbarPanel::Add(const LoadAdapter::Component& comp, ee::LibraryPanel* lib
 	p3d_symbol* pc = m_stage->m_ps->AddSymbol(symbol);
 	ComponentPanel* cp = new ComponentPanel(this, pc, this);
 
-	cp->SetCount(comp.count);
-
 	cp->m_name->SetValue(comp.name);
 
 	cp->SetValue(PS_SCALE, ee::UICallback::Data(comp.scale_start, comp.scale_end));
@@ -186,26 +184,17 @@ wxSizer* ToolbarPanel::CreateMainLayout()
 // 		top_sizer->Add(sizer);
 // 	}
 // 	top_sizer->AddSpacer(10);
-
-	// Mode
-	m_static_mode = new wxCheckBox(this, wxID_ANY, LANG[LK_STATIC_MODE]);
-	Connect(m_static_mode->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetStaticMode));
-	top_sizer->Add(m_static_mode);
-
 	// Count
 	ee::SliderCtrlOne* s_count = new ee::SliderCtrlOne(this, LANG[LK_COUNT], 
 		"count", this, PS_COUNT, ee::SliderItem("", "", COUNT, 1, 500));
 	top_sizer->Add(s_count);
 	m_sliders.push_back(s_count);
-	m_count_ctrl = s_count;
 	// Emission Time
 	ee::SliderCtrlOne* s_emission_time = new ee::SliderCtrlOne(this, LANG[LK_EMISSION_TIME], 
 		"emission_time", this, PS_EMISSION_TIME, ee::SliderItem("", "", EMISSION_TIME, 10, 5000));
 	top_sizer->Add(s_emission_time);
 	top_sizer->AddSpacer(10);
 	m_sliders.push_back(s_emission_time);
-	m_time_ctrl = s_emission_time;
-
 	// Life
 	ee::SliderCtrlTwo* s_life = new ee::SliderCtrlTwo(this, LANG[LK_LIFE], "life", this, PS_LIFE_TIME, 
 		ee::SliderItem(LANG[LK_CENTER], ITEM_ATTR_CENTER, LIFE_CENTER, 0, 5000), ee::SliderItem(LANG[LK_OFFSET], ITEM_ATTR_OFFSET, LIFE_OFFSET, 0, 2500));
@@ -426,14 +415,6 @@ void ToolbarPanel::OnDelChild(ComponentPanel* child)
 	}
 }
 
-void ToolbarPanel::OnSetStaticMode(bool static_mode)
-{
-	m_static_mode->SetValue(static_mode);
-	m_count_ctrl->Enable(!static_mode);
-	m_time_ctrl->Enable(!static_mode);
-	m_stage->m_ps->SetStaticMode(static_mode);
-}
-
 void ToolbarPanel::Clear()
 {
 	OnDelAllChild(wxCommandEvent());
@@ -447,14 +428,6 @@ void ToolbarPanel::OnAddChild(wxCommandEvent& event, ee::Symbol* symbol)
 	m_comp_sizer->AddSpacer(10);
 	m_children.push_back(cp);
 	this->Layout();
-}
-
-void ToolbarPanel::OnSetStaticMode(wxCommandEvent& event)
-{
-	bool static_mode = event.IsChecked();
-	m_count_ctrl->Enable(!static_mode);
-	m_time_ctrl->Enable(!static_mode);
-	m_stage->m_ps->SetStaticMode(static_mode);
 }
 
 void ToolbarPanel::OnDelAllChild(wxCommandEvent& event)

@@ -16,9 +16,7 @@ enum {
 	LK_RADIUS,
 	LK_HEIGHT,
 
-	LK_STATIC_MODE,
 	LK_NAME,
-	LK_CONST_COUNT,
 	LK_STATE,
 	LK_LOOP,
 	LK_LOCAL_DRAW,
@@ -68,9 +66,7 @@ static const char* EN[] = {
 	"radius",
 	"height",
 
-	"Static Mode",
 	"Name",
-	"Const Count",
 	"State",
 	"Loop",
 	"Local Draw",
@@ -120,9 +116,7 @@ static const char* CN[] = {
 	"半径",
 	"高度",
 
-	"静态模式",
 	"名字",
-	"固定数量",
 	"播放状态",
 	"连续播放",
 	"局部坐标",

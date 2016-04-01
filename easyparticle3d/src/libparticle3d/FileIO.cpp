@@ -32,8 +32,6 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 
 //	value["name"] = toolbar->m_name->GetValue();
 
-	value["static_mode"] = toolbar->m_static_mode->GetValue();
-
 	value["min_hori"] = toolbar->m_min_hori->GetValue();
 	value["max_hori"] = toolbar->m_max_hori->GetValue();
 	value["min_vert"] = toolbar->m_min_vert->GetValue();
@@ -52,8 +50,6 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 	{
 		ComponentPanel* cp = toolbar->m_children[i];
 		p3d_symbol* pc = cp->m_pc;
-
-		value["components"][i]["count"] = pc->count;
 
 		ee::Symbol* symbol = static_cast<ee::Symbol*>(pc->ud);
 		value["components"][i]["filepath"] = 
@@ -103,7 +99,7 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 
 	LoadAdapter adapter;
 	adapter.Load(filepath);
-	
+
 	int version = value["version"].asInt();
 	if (version == 0) {
 		value["life"]["center"] = adapter.life;
@@ -118,12 +114,6 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	toolbar->Load(value, version);
 
 //	toolbar->m_name->SetValue(adapter.name);
-
-	bool static_mode = false;
-	if (!value["static_mode"].isNull()) {
-		static_mode = value["static_mode"].asBool();
-	}
-	toolbar->OnSetStaticMode(static_mode);
 
 	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * ee::TRANS_RAD_TO_DEG);
 	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * ee::TRANS_RAD_TO_DEG);

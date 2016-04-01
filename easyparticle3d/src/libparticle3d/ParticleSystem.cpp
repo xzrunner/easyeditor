@@ -187,12 +187,6 @@ bool ParticleSystem::Update(const ee::Matrix& mat)
 	return true;
 }
 
-void ParticleSystem::SetStaticMode(bool is_static)
-{
-	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	cfg->static_mode = is_static;
-}
-
 void ParticleSystem::SetDirection(float x, float y, float z)
 {
 	ee::vec3 start(0, 0, 1), end(x, y, z);

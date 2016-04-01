@@ -43,8 +43,6 @@ public:
 	virtual void Draw(const ee::Matrix& mt, AnimRecorder* recorder = NULL) const;
 
 	bool Update(const ee::Matrix& mat);
-	
-	void SetStaticMode(bool is_static);
 
 	void SetDirection(float x, float y, float z);
 	void SetDirection(const ee::Quaternion& dir);

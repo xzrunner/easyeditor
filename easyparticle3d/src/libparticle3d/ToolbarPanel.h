@@ -38,8 +38,6 @@ public:
 
 	void OnDelChild(ComponentPanel* child);
 
-	void OnSetStaticMode(bool static_mode);
-
 protected:
 	virtual wxSizer* InitLayout();
 
@@ -56,8 +54,6 @@ private:
 
 	void OnAddChild(wxCommandEvent& event, ee::Symbol* symbol);
 	void OnDelAllChild(wxCommandEvent& event);
-
-	void OnSetStaticMode(wxCommandEvent& event);
 
 	void OnSetLoop(wxCommandEvent& event);
 	void OnSetLocalModeDraw(wxCommandEvent& event);
@@ -89,10 +85,6 @@ private:
 	ee::Image* m_image;
 
 	std::vector<ee::SliderCtrl*> m_sliders;
-
-	wxCheckBox* m_static_mode;
-
-	wxPanel *m_count_ctrl, *m_time_ctrl;
 
 	// move to property
 //	wxTextCtrl* m_name;
