@@ -25,3 +25,6 @@
 [submodule "sm/src/sm"]
 	path = sm/src/sm
 	url = git@github.com:xzrunner/sm.git
+[submodule "camera25/src/camera25"]
+	path = camera25/src/camera25
+	url = ssh://tea.ejoy.com:3222/LR/camera25.git

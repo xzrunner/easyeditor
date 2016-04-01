@@ -1,8 +1,10 @@
 #include "Pseudo3DCamera.h"
 #include "ShaderMgr.h"
 #include "panel_msg.h"
+#include "ScreenCache.h"
 
 #include <sm.h>
+#include <c25_camera.h>
 
 #include <wx/log.h>
 
@@ -10,104 +12,75 @@ namespace ee
 {
 
 static const float Z = -1000;
-//static const float ANGLE = 0;
 static const float ANGLE = -20;
 
+// static const float Z = -193.5f;
+// static const float ANGLE = -45;
+
 Pseudo3DCamera::Pseudo3DCamera()
-	: m_position(0, 0, Z)
-	, m_angle(ANGLE)
 {
+	sm_vec3 pos;
+	pos.x = pos.y = 0;
+	pos.z = Z;
+
+	int w, h;
+	ScreenCache::Instance()->GetSize(w, h);
+	m_cam = c25_cam_create(&pos, ANGLE, (float)w / h);
+
 	UpdateModelView();
+}
+
+Pseudo3DCamera::~Pseudo3DCamera()
+{
+	c25_cam_release(m_cam);
 }
 
 void Pseudo3DCamera::Reset()
 {
-	m_position.x = m_position.y = 0;
-	m_position.z = Z;
-	m_angle = ANGLE;
+	sm_vec3 pos;
+	pos.x = pos.y = 0;
+	pos.z = Z;
+
+	c25_cam_reset(m_cam, &pos, ANGLE);
+
 	UpdateModelView();
 }
 
 Vector Pseudo3DCamera::TransPosScreenToProject(int x, int y, int width, int height) const
 {
-// 	Vector proj;
-// 	proj.x = 2.0f * x / width - 1;
-// 	proj.y = 2.0f * (height - y) / height - 1;
-// 	proj.x = - proj.x * m_position.z - m_position.x;
-// 	proj.y = - proj.y * m_position.z * height / width - m_position.y;
-// 	return proj;
+	sm_ivec2 screen;
+	screen.x = x;
+	screen.y = y;
 
-	//////////////////////////////////////////////////////////////////////////
+	sm_vec2 world;
+	c25_screen_to_world(m_cam, &world, &screen, width, height);
 
-// 	float top_z = m_position.z,
-// 		  bottom_z = m_position.z;
-// 
-// 	float rad = -m_angle * SM_DEG_TO_RAD;
-// 	float tan_rad = tanf(rad);
-// 	float a = m_position.z / (1 / tan_rad + 1);
-// 	float b = m_position.z / (1 / tan_rad - 1);
-// 	
-// 	top_z += b;
-// 	bottom_z -= a;
-// 
-// //	float z = bottom_z + (top_z - bottom_z) * (height - y) / y;
-// 
-// 	float y = (height - y) / height;
-// 
-// 	fabs(y - 0.5f) * m_position.z
-// 
-// // 	if (y <= 0.5f) {
-// // 		a / sinf(rad);
-// // 	} else {
-// // 
-// // 	}
-// 
-// 	Vector proj;
-// 	proj.x = 2.0f * x / width - 1;
-// 	proj.y = 2.0f * (height - y) / height - 1;
-// 
-// 	proj.x = - proj.x * z - m_position.x;
-// 	proj.y = - proj.y * z * height / width - m_position.y;
-// 	return proj;
-
-	//////////////////////////////////////////////////////////////////////////
-
-	return Vector(0, 0);
+	return Vector(world.x, world.y);
 }
 
 Vector Pseudo3DCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
 {
-	sm_mat4 mat = GetMatrix(width, height);
-
-	sm_vec3 vec3;
-	vec3.x = proj.x;
-	vec3.y = proj.y;
-	vec3.z = 0;
-	sm_vec3_mul(&vec3, &mat);
-
-	wxLogDebug("to screen: %f, %f, %f", vec3.x, vec3.y, vec3.z);
-
-	return Vector(vec3.x, vec3.y);
+	return TransPosProjectToScreen(vec3(proj.x, proj.y, 0), width, height);
 }
 
 Vector Pseudo3DCamera::TransPosProjectToScreen(const vec3& proj, int width, int height) const
 {
-	sm_mat4 mat = GetMatrix(width, height);
+	sm_vec3 world;
+	world.x = proj.x;
+	world.y = proj.y;
+	world.z = proj.z;
 
-	sm_vec3 vec3;
-	vec3.x = proj.x;
-	vec3.y = proj.y;
-	vec3.z = proj.z;
-	sm_vec3_mul(&vec3, &mat);
+	sm_ivec2 screen;
+	c25_world_to_screen(m_cam, &screen, &world, width, height);
 
-	wxLogDebug("to screen: %f, %f, %f", vec3.x, vec3.y, vec3.z);
-
-	return Vector(vec3.x, vec3.y);
+	return Vector(screen.x, screen.y);
 }
 
 void Pseudo3DCamera::UpdateModelView() const
 {
-	ShaderMgr::Instance()->SetModelView(m_position, m_angle);
+	const sm_vec3* p = c25_cam_get_pos(m_cam);
+	float angle = c25_cam_get_angle(m_cam);
+	ShaderMgr::Instance()->SetModelView(vec3(p->x, p->y, p->z), angle);
 }
 
 float Pseudo3DCamera::GetScale() const
@@ -122,38 +95,29 @@ const Vector& Pseudo3DCamera::GetPosition() const
 
 void Pseudo3DCamera::Translate(const vec3& offset)
 {
-	m_position += offset;
+	sm_vec3 vec;
+	vec.x = offset.x;
+	vec.y = offset.y;
+	vec.z = offset.z;
+	c25_cam_translate(m_cam, &vec);
 	UpdateModelView();
 }
 
 void Pseudo3DCamera::Rotate(float da)
 {
-	m_angle += da;
+	c25_cam_rotate(m_cam, da);
 	UpdateModelView();
 	SetCanvasDirtySJ::Instance()->SetDirty();
 }
 
-sm_mat4 Pseudo3DCamera::GetMatrix(int width, int height) const
+float Pseudo3DCamera::GetAngle() const 
 {
-	union sm_mat4 rmat;
-	sm_mat4_rotxmat(&rmat, m_angle);
+	return c25_cam_get_angle(m_cam);
+}
 
-	union sm_mat4 tmat;
-	sm_mat4_identity(&tmat);
-	sm_mat4_trans(&tmat, m_position.x, m_position.y, m_position.z);
-
-	union sm_mat4 mv_mat;
-	sm_mat4_mul(&mv_mat, &rmat, &tmat);
-
-	union sm_mat4 proj_mat;
-	float hw = width * 0.5f;
-	float hh = height * 0.5f;
-	sm_mat4_perspective(&proj_mat, -hw, hw, -hh, hh, NEAR_CLIP, FAR_CLIP);
-
-	union sm_mat4 mat;
-	sm_mat4_mul(&mat, &proj_mat, &mv_mat);
-
-	return mat;
+float Pseudo3DCamera::GetZ() const 
+{ 
+	return c25_cam_get_pos(m_cam)->z;
 }
 
 }

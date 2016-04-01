@@ -43,7 +43,7 @@ void Sprite3Shader::SetModelView(const vec3& pos, float angle)
 
 void Sprite3Shader::SetProjection(int width, int height)
 {
-	sl_sprite3_projection(width, height, Pseudo3DCamera::NEAR_CLIP, Pseudo3DCamera::FAR_CLIP);
+	sl_sprite3_projection(width, height);
 }
 
 void Sprite3Shader::Commit()

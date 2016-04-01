@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="1.camera25"
+	ProjectGUID="{7FD22229-07E7-4EB7-9BC7-F64A04F9F76D}"
+	VCNestedProjectGUID="{EE2229A3-AD5F-46E7-AFAB-729F8AA18036}"
+	VCNestedProjectFileName="camera25.vcproj">
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+	</Configurations>
+	<Files/>
+</VisualStudioProject>

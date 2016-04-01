@@ -5,6 +5,7 @@
 #include "Vector3D.h"
 
 union sm_mat4;
+struct c25_camera;
 
 namespace ee
 {
@@ -13,6 +14,7 @@ class Pseudo3DCamera : public Camera
 {
 public:
 	Pseudo3DCamera();
+	~Pseudo3DCamera();
 
 	virtual std::string Type() const { return "pseudo3d"; }
 	virtual void Reset();
@@ -30,20 +32,15 @@ public:
 	void Translate(const vec3& offset);
 	void Rotate(float da);
 
-	float GetAngle() const { return m_angle; }
-	float GetZ() const { return m_position.z; }
+	float GetAngle() const;
+	float GetZ() const;
 
 public:
 	static const int FAR_CLIP = 800;
 	static const int NEAR_CLIP = 50;
 
 private:
-	sm_mat4 GetMatrix(int width, int height) const;
-
-private:
-	vec3 m_position;
-
-	float m_angle;
+	c25_camera* m_cam;
 
 }; // Pseudo3DCamera
 
