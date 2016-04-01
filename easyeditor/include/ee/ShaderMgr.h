@@ -43,7 +43,7 @@ public:
 	bool IsOpenBufferData() const;
 
 	void SetModelView(const Vector& offset, float scale);
-	void SetModelView(const vec3& pos, float angle);	// sprite3
+	void SetModelView();	// sprite3
 
 private:
 	ShaderMgr();

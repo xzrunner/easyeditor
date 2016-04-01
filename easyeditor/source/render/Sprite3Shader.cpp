@@ -2,6 +2,7 @@
 #include "RenderColor.h"
 #include "trans_color.h"
 #include "Pseudo3DCamera.h"
+#include "CameraMgr.h"
 
 #include <sl_sprite3.h>
 
@@ -36,14 +37,20 @@ void Sprite3Shader::Unbind()
 	sl_sprite3_unbind();
 }
 
-void Sprite3Shader::SetModelView(const vec3& pos, float angle)
+void Sprite3Shader::SetModelView()
 {
-	sl_sprite3_modelview(pos.x, pos.y, pos.z, angle);
+	if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D)) {
+		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());
+		sl_sprite3_modelview(cam->GetModelViewMat());
+	}
 }
 
 void Sprite3Shader::SetProjection(int width, int height)
 {
-	sl_sprite3_projection(width, height);
+	if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D)) {
+		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());
+		sl_sprite3_projection(cam->GetProjectMat());
+	}
 }
 
 void Sprite3Shader::Commit()

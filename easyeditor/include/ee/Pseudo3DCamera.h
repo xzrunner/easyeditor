@@ -35,6 +35,9 @@ public:
 	float GetAngle() const;
 	float GetZ() const;
 
+	const sm_mat4* GetModelViewMat() const;
+	const sm_mat4* GetProjectMat() const;
+
 public:
 	static const int FAR_CLIP = 800;
 	static const int NEAR_CLIP = 50;

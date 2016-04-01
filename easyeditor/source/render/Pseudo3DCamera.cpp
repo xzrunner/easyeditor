@@ -80,7 +80,7 @@ void Pseudo3DCamera::UpdateModelView() const
 {
 	const sm_vec3* p = c25_cam_get_pos(m_cam);
 	float angle = c25_cam_get_angle(m_cam);
-	ShaderMgr::Instance()->SetModelView(vec3(p->x, p->y, p->z), angle);
+	ShaderMgr::Instance()->SetModelView();
 }
 
 float Pseudo3DCamera::GetScale() const
@@ -118,6 +118,16 @@ float Pseudo3DCamera::GetAngle() const
 float Pseudo3DCamera::GetZ() const 
 { 
 	return c25_cam_get_pos(m_cam)->z;
+}
+
+const sm_mat4* Pseudo3DCamera::GetModelViewMat() const
+{
+	return c25_cam_get_movelview_mat(m_cam);
+}
+
+const sm_mat4* Pseudo3DCamera::GetProjectMat() const
+{
+	return c25_cam_get_project_mat(m_cam);
 }
 
 }

@@ -30,7 +30,7 @@ public:
 
 	virtual void Reset();
 
-	void SetModelView(const vec3& pos, float angle);
+	void SetModelView();
 
 	void SetColor(const RenderColor& color);
 
