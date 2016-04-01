@@ -43,7 +43,7 @@ void TestLighting::Draw() const
 
 void TestLighting::Update()
 {
-// 	glue::mat4 mat = glue::mat4::RotateX(m_angle) * glue::mat4::Translate(m_z, 0, 0);
+// 	sm_mat4 mat = sm_mat4::RotateX(m_angle) * sm_mat4::Translate(m_z, 0, 0);
 // 	
 // 	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
 // 	glue::LightingShader* shader = static_cast<glue::LightingShader*>(

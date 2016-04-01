@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\model3\src\model3;..\..\..\..\ejoy2d\src"
+				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\model3\src\model3;..\..\..\..\ejoy2d\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\model3\src\model3;..\..\..\..\ejoy2d\src"
+				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\model3\src\model3;..\..\..\..\ejoy2d\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

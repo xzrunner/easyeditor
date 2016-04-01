@@ -4,7 +4,8 @@
 #include "IShader.h"
 
 #include "math/Vector.h"
-#include "math/Matrix.h"
+
+#include <sm.h>
 
 #include <vector>
 
@@ -34,17 +35,17 @@ public:
 	virtual void Reset();
 
 	void SetProjection(int width, int height);
-	void SetModelView(const mat4& mat);
+	void SetModelView(const sm_mat4& mat);
 
 	void SetMaterial(const vec3& ambient, const vec3& diffuse, 
 		const vec3& specular, float shininess);
-	void SetNormalMatrix(const mat3& mat);
+	void SetNormalMatrix(const sm_mat3& mat);
 	void SetLightPosition(const vec3& pos);
 
 	void Draw(m3_mesh* mesh);
 
 private:
-	mat4 m_mat;
+	sm_mat4 m_mat;
 
 }; // LightingShader
 

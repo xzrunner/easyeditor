@@ -46,7 +46,7 @@ void TestImage::Draw() const
 {
 // 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 // 		glue::Sprite* spr = m_sprites[i];
-// 		glue::mat4 mt = spr->GetTransMatrix();
+// 		sm_mat4 mt = spr->GetTransMatrix();
 // 		spr->GetSymbol().Draw(mt);	
 // 	}
 
@@ -57,31 +57,31 @@ void TestImage::Draw() const
 	shader->SetColor(0xffff00ff, 0);
 	{
 		glue::Sprite* spr = m_sprites[0];
-		glue::mat4 mt = spr->GetTransMatrix();
+		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
 	shader->SetColor(0xffffffff, 0);
 	{
 		glue::Sprite* spr = m_sprites[1];
-		glue::mat4 mt = spr->GetTransMatrix();
+		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
 	shader->SetColor(0xffffff00, 0);
 	{
 		glue::Sprite* spr = m_sprites[2];
-		glue::mat4 mt = spr->GetTransMatrix();
+		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
 	shader->SetMapColor(0x000000ff, 0x00002288, 0x00ff0000);
 	{
 		glue::Sprite* spr = m_sprites[3];
-		glue::mat4 mt = spr->GetTransMatrix();
+		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
 	shader->SetMapColor(0x000000ff, 0x00880022, 0x00ff0000);
 	{
 		glue::Sprite* spr = m_sprites[4];
-		glue::mat4 mt = spr->GetTransMatrix();
+		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
 }

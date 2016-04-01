@@ -39,7 +39,7 @@ void TestMulti::Draw() const
 	
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		glue::Sprite* spr = m_sprites[i];
-		glue::mat4 mt = spr->GetTransMatrix();
+		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
 

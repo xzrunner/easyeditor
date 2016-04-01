@@ -1,15 +1,13 @@
 #include "ImageSymbol.h"
 #include "Texture.h"
 
-#include "math/Math.h"
 #include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
 #include "render/Camera.h"
 #include "render/SpriteShader.h"
 #include "render/Sprite3Shader.h"
 
-// debug
-#include "math/Matrix.h"
+#include <sm.h>
 
 namespace glue
 {
@@ -21,7 +19,7 @@ ImageSymbol::ImageSymbol(const std::string& filepath)
 	Load();
 }
 
-void ImageSymbol::Draw(const mat4& mt) const
+void ImageSymbol::Draw(const sm_mat4& mt) const
 {
 	RID texid = m_tex->GetID();
 
@@ -33,7 +31,9 @@ void ImageSymbol::Draw(const mat4& mt) const
 	positions[2] = vec2( hw,  hh);
 	positions[3] = vec2(-hw,  hh);
 	for (int i = 0; i < 4; ++i) {
-		positions[i] = Math::TransVector(positions[i], mt);
+		sm_vec2 v;
+		memcpy(&v, &positions[i], sizeof(v));
+		sm_vec2_mul(&v, &mt);
 	}
 
 	vec2 texcoords[4];
@@ -75,7 +75,7 @@ void ImageSymbol::Draw(const mat4& mt) const
 //	}
 }
 
-void ImageSymbol::ModelDraw(const mat4& mt) const
+void ImageSymbol::Draw25(const sm_mat4& mt) const
 {
 	RID texid = m_tex->GetID(); 
 
@@ -87,7 +87,9 @@ void ImageSymbol::ModelDraw(const mat4& mt) const
 	positions[2] = vec2( hw,  hh);
 	positions[3] = vec2(-hw,  hh);
 	for (int i = 0; i < 4; ++i) {
-		positions[i] = Math::TransVector(positions[i], mt);
+		sm_vec2 v;
+		memcpy(&v, &positions[i], sizeof(v));
+		sm_vec2_mul(&v, &mt);
 	}
 
 	float z[4];
@@ -103,22 +105,6 @@ void ImageSymbol::ModelDraw(const mat4& mt) const
 	positions3.push_back(vec3(positions[0].x, positions[0].y, z[0]));
 	positions3.push_back(vec3(positions[2].x, positions[2].y, z[2]));
 	positions3.push_back(vec3(positions[3].x, positions[3].y, z[3]));
-
-	//////////////////////////////////////////////////////////////////////////
-
-// 	int w = 800, h = 480;
-// 
-// 	float _hw = w * 0.5f;
-// 	float _hh = h * 0.5f;
-// 
-// 	mat4 mat = Matrix4<float>::Perspective(-_hw, _hw, -_hh, _hh, Sprite3Shader::NEAR, Sprite3Shader::FAR);
-// 
-// 	std::vector<vec3> test;
-// 	for (int i = 0, n = positions3.size(); i < n; ++i) {
-// 		test.push_back(mat * positions3[i]);
-// 	}
-
-	//////////////////////////////////////////////////////////////////////////
 
 	std::vector<vec2> texcoords;
 	texcoords.push_back(vec2(0, 0));

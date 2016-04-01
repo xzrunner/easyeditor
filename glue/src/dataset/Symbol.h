@@ -1,7 +1,7 @@
 #ifndef _GLUE_SYMBOL_H_
 #define _GLUE_SYMBOL_H_
 
-#include "math/Matrix.h"
+union sm_mat4;
 
 namespace glue
 {
@@ -10,7 +10,7 @@ class Symbol
 {
 public:
 	virtual ~Symbol() {}
-	virtual void Draw(const mat4& mt) const = 0;
+	virtual void Draw(const sm_mat4& mt) const = 0;
 
 }; // Symbol
 

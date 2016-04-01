@@ -17,8 +17,8 @@
 //test::TestTask* task = new test::TestShape;
 //test::TestTask* task = new test::TestImage;
 //test::TestTask* task = new test::TestMulti;
-//test::TestTask* task = new test::TestImage25;
-test::TestTask* task = new test::TestLighting;
+test::TestTask* task = new test::TestImage25;
+//test::TestTask* task = new test::TestLighting;
 
 void 
 display(void) {
@@ -29,8 +29,6 @@ display(void) {
 	glue::ShaderMgr::Instance()->Flush();
 
 	glFlush();
-
-	std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++\n";
 }
 
 void

@@ -17,9 +17,11 @@ void Sprite::Update()
 {
 }
 
-mat4 Sprite::GetTransMatrix() const
+sm_mat4 Sprite::GetTransMatrix() const
 {
-	return mat4::Translate(m_pos.x, m_pos.y, 0);
+	sm_mat4 mat;
+	sm_mat4_transmat(&mat, m_pos.x, m_pos.y, 0);
+	return mat;
 }
 
 }

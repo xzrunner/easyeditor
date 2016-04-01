@@ -39,20 +39,20 @@ void TestImage25::Draw() const
 	
 // 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 // 		glue::Sprite* spr = m_sprites[i];
-// 		glue::mat4 mt = spr->GetTransMatrix();
+// 		sm_mat4 mt = spr->GetTransMatrix();
 // 		spr->GetSymbol().Draw(mt);	
 // 	}
 
 	{
-		glue::mat4 mt = m_sprites[0]->GetTransMatrix();
-		static_cast<const glue::ImageSymbol*>(&m_sprites[0]->GetSymbol())->ModelDraw(mt);	
+		sm_mat4 mt = m_sprites[0]->GetTransMatrix();
+		static_cast<const glue::ImageSymbol*>(&m_sprites[0]->GetSymbol())->Draw25(mt);	
 	}
 // 	{
-// 		glue::mat4 mt = m_sprites[1]->GetTransMatrix();
+// 		sm_mat4 mt = m_sprites[1]->GetTransMatrix();
 // 		m_sprites[1]->GetSymbol().ModelDraw(mt);	
 // 	}
 // 	{
-// 		glue::mat4 mt = m_sprites[2]->GetTransMatrix();
+// 		sm_mat4 mt = m_sprites[2]->GetTransMatrix();
 // 		m_sprites[2]->GetSymbol().Draw(mt);	
 // 	}
 	//////////////////////////////////////////////////////////////////////////
