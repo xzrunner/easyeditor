@@ -36,6 +36,8 @@ public:
 
 	void Flush();
 
+	void Clear();
+
 private:
 	std::vector<IShader*> m_shaders;
 

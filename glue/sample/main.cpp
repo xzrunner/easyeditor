@@ -17,16 +17,16 @@
 //test::TestTask* task = new test::TestShape;
 //test::TestTask* task = new test::TestImage;
 //test::TestTask* task = new test::TestMulti;
-test::TestTask* task = new test::TestImage25;
-//test::TestTask* task = new test::TestLighting;
+//test::TestTask* task = new test::TestImage25;
+test::TestTask* task = new test::TestLighting;
 
 void 
 display(void) {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
 
+	mgr->Clear();
 	task->Draw();
-
-	glue::ShaderMgr::Instance()->Flush();
+	mgr->Flush();
 
 	glFlush();
 }

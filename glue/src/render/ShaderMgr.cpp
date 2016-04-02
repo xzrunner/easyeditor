@@ -97,4 +97,9 @@ void ShaderMgr::Flush()
 	sl_shader_flush();
 }
 
+void ShaderMgr::Clear()
+{
+	sl_shader_clear(0);
+}
+
 }
