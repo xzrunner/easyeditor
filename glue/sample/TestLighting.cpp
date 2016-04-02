@@ -11,11 +11,11 @@ void TestLighting::Init()
 	glue::ShaderMgr::Instance()->Init();
 
 	m_mesh = new m3_mesh;
+//	m3_create_cone(200, 100, m_mesh);
 //	m3_create_sphere(100, m_mesh);
+//	m3_create_torus(100, 50, m_mesh);
 //	m3_create_mobius_strip(100, m_mesh);
-	m3_create_cone(200, 100, m_mesh);
-//	m3_create_torus(100, 10, m_mesh);
-//	m3_create_trefoil_knot(100, m_mesh);
+	m3_create_trefoil_knot(100, m_mesh);
 
 	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
 	glue::LightingShader* shader = static_cast<glue::LightingShader*>(
@@ -24,7 +24,7 @@ void TestLighting::Init()
 	shader->SetLightPosition(glue::vec3(0.25, 0.25, 1));
 
 	m_angle = 0;
-	m_z = 0;
+	m_z = -300;
 }
 
 void TestLighting::Resize(int width, int height)
@@ -43,16 +43,20 @@ void TestLighting::Draw() const
 
 void TestLighting::Update()
 {
-// 	sm_mat4 mat = sm_mat4::RotateX(m_angle) * sm_mat4::Translate(m_z, 0, 0);
-// 	
-// 	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
-// 	glue::LightingShader* shader = static_cast<glue::LightingShader*>(
-// 		mgr->GetShader(glue::ShaderMgr::LIGHTING));
-// 	shader->SetModelView(mat);
+	sm_mat4 rot_mat;
+	sm_mat4_rotymat(&rot_mat, m_angle);
 
-//	m_angle += 1;
+	sm_mat4 trans_mat;
+	sm_mat4_transmat(&trans_mat, 0, 0, m_z);
 
-	m_z -= 0.1f;
+	sm_mat4 mv_mat;
+	sm_mat4_mul(&mv_mat, &trans_mat, &rot_mat);
+
+	glue::LightingShader* shader = static_cast<glue::LightingShader*>(
+		glue::ShaderMgr::Instance()->GetShader(glue::ShaderMgr::LIGHTING));
+	shader->SetModelView(mv_mat);
+
+ 	m_angle += 0.01;
 }
 
 }
