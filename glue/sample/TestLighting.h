@@ -5,7 +5,7 @@
 
 #include <glue.h>
 
-struct m3_mesh;
+struct m3_model;
 
 namespace test
 {
@@ -19,10 +19,14 @@ public:
 	virtual void Update();
 
 private:
-	m3_mesh* m_mesh;
+	void LoadParametricSurface();
+	void LoadFromFile(const char* filepath);
+
+private:
+	m3_model* m_model;
 
 	float m_angle;
-	float m_z;
+	sm_vec3 m_pos;	
 
 }; // TestLighting
 

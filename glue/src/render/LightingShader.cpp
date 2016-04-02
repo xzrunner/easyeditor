@@ -1,7 +1,8 @@
 #include "LightingShader.h"
 
 #include <sl_lighting.h>
-#include <m3_mesh.h>
+#include <m3_model.h>
+#include <ds_array.h>
 
 #include <assert.h>
 
@@ -62,16 +63,6 @@ void LightingShader::SetModelView(const sm_mat4& mat)
 	sl_lighting_modelview(&m_mat);
 }
 
-void LightingShader::SetMaterial(const vec3& ambient, const vec3& diffuse, 
-								 const vec3& specular, float shininess)
-{
-	sm_vec3 sm_ambient, sm_diffuse, sm_specular;
-	memcpy(&sm_ambient.x, ambient.xyz, sizeof(sm_ambient));
-	memcpy(&sm_diffuse.x, diffuse.xyz, sizeof(sm_diffuse));
-	memcpy(&sm_specular.x, specular.xyz, sizeof(sm_specular));
-	sl_lighting_set_material(&sm_ambient, &sm_diffuse, &sm_specular, shininess);
-}
-
 void LightingShader::SetNormalMatrix(const sm_mat3& mat)
 {
 	sl_lighting_set_normal_matrix(&mat);
@@ -84,9 +75,13 @@ void LightingShader::SetLightPosition(const vec3& pos)
 	sl_lighting_set_light_position(&sm_pos);
 }
 
-void LightingShader::Draw(m3_mesh* mesh)
+void LightingShader::Draw(m3_model* model)
 {
-	sl_lighting_draw(mesh->vertices, mesh->indices);
+	for (int i = 0, n = ds_array_size(model->meshes); i < n; ++i) {
+		m3_mesh* mesh = *(m3_mesh**)ds_array_fetch(model->meshes, i);
+		sl_lighting_set_material(&mesh->material.ambient, &mesh->material.diffuse, &mesh->material.specular, mesh->material.shininess);
+		sl_lighting_draw(mesh->vertices, mesh->indices);
+	}
 }
 
 }

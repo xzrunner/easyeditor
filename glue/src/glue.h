@@ -10,4 +10,6 @@
 #include "render/SpriteShader.h"
 #include "render/LightingShader.h"
 
+#include "utility/AssimpHelper.h"
+
 #endif // _GLUE_H_

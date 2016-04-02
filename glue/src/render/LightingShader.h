@@ -11,7 +11,7 @@
 
 #include <stdint.h>
 
-struct m3_mesh;
+struct m3_model;
 
 namespace glue
 {
@@ -37,12 +37,10 @@ public:
 	void SetProjection(int width, int height);
 	void SetModelView(const sm_mat4& mat);
 
-	void SetMaterial(const vec3& ambient, const vec3& diffuse, 
-		const vec3& specular, float shininess);
 	void SetNormalMatrix(const sm_mat3& mat);
 	void SetLightPosition(const vec3& pos);
 
-	void Draw(m3_mesh* mesh);
+	void Draw(m3_model* model);
 
 private:
 	sm_mat4 m_mat;
