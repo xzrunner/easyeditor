@@ -64,10 +64,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32sd.lib libpngd.lib zlibd.lib assimpd.lib"
+				AdditionalDependencies="glew32sd.lib libjpegd.lib libpngd.lib zlibd.lib assimpd.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
@@ -144,10 +144,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="glew32s.lib libpng.lib zlib.lib"
+				AdditionalDependencies="glew32s.lib libjpeg.lib libpng.lib zlib.lib"
 				OutputFile="..\test\x86\Debug\test.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\freeglut\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\libjpeg\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\assimp\lib&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\test\x86\Debug\test.pdb"
 				SubSystem="1"

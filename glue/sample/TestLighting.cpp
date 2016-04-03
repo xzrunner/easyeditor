@@ -54,11 +54,11 @@ void TestLighting::LoadParametricSurface()
 	m_model = m3_model_create(16);
 
 	m3_mesh* mesh = new m3_mesh;
-	//	m3_create_cone(200, 100, mesh);
-	//	m3_create_sphere(100, mesh);
-	//	m3_create_torus(100, 50, mesh);
-	//	m3_create_mobius_strip(100, mesh);
-	m3_create_trefoil_knot(100, mesh);
+	//m3_create_cone(200, 100, mesh);
+	//m3_create_sphere(100, mesh);
+	m3_create_torus(100, 50, mesh);
+	//m3_create_mobius_strip(100, mesh);
+	//m3_create_trefoil_knot(100, mesh);
 	ds_array_add(m_model->meshes, &mesh);
 
 	mesh->material.ambient.x = 0.04f;
@@ -75,7 +75,7 @@ void TestLighting::LoadParametricSurface()
 	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
 	glue::LightingShader* shader = static_cast<glue::LightingShader*>(
 		mgr->GetShader(glue::ShaderMgr::LIGHTING));
-	shader->SetLightPosition(glue::vec3(0.25, 0.25, 1));
+	shader->SetLightPosition(glue::vec3(0, 0, 0));
 
 	m_angle = 0;
 	m_pos.x = m_pos.y = 0;
@@ -93,7 +93,7 @@ void TestLighting::LoadFromFile(const char* filepath)
 
 	m_angle = 0;
 	m_pos.x = 0;
-	m_pos.y = -0.5f;
+	m_pos.y = -0.8f;
 	m_pos.z = -2;
 }
 

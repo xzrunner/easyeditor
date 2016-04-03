@@ -36,7 +36,7 @@ void RenderContext::Init()
 
 void RenderContext::OnSize(int w, int h)
 {
-	glue::ShaderMgr::Instance()->OnSize(w, h);
+	ShaderMgr::Instance()->OnSize(w, h);
 }
 
 RID RenderContext::CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format)

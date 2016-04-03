@@ -1,4 +1,5 @@
 #include "AssimpHelper.h"
+#include "dataset/Texture.h"
 
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/scene.h>           // Output data structure
@@ -6,10 +7,13 @@
 
 #include <m3_model.h>
 #include <m3_material.h>
+#include <m3_typedef.h>
 #include <ds_array.h>
 
 namespace glue
 {
+
+std::map<std::string, Texture*> AssimpHelper::m_tex_cache;
 
 // default pp steps
 unsigned int ppsteps = aiProcess_CalcTangentSpace | // calculate tangents and bitangents if possible
@@ -45,19 +49,27 @@ m3_model* AssimpHelper::Load(const char* filename)
 
 	m3_model* model = m3_model_create(16);
 
-	LoadNode(scene, scene->mRootNode, model);
+	std::string dir = filename;
+	int pos = dir.find_last_of('/');
+	if (pos != std::string::npos) {
+		dir = dir.substr(0, pos);
+	} else {
+		dir = "";
+	}
+	LoadNode(scene, scene->mRootNode, model, dir);
 
 	// todo: load lights and cameras
 
 	return model;
 }
 
-void AssimpHelper::LoadNode(const aiScene* ai_scene, const aiNode* ai_node, m3_model* model)
+void AssimpHelper::LoadNode(const aiScene* ai_scene, const aiNode* ai_node, 
+							m3_model* model, const std::string& dir)
 {
 	if (ai_node->mNumChildren) 
 	{
 		for (int i = 0; i < ai_node->mNumChildren; ++i) {
-			LoadNode(ai_scene, ai_node->mChildren[i], model);
+			LoadNode(ai_scene, ai_node->mChildren[i], model, dir);
 		}
 	} 
 	else 
@@ -70,20 +82,32 @@ void AssimpHelper::LoadNode(const aiScene* ai_scene, const aiNode* ai_node, m3_m
 				const aiMaterial* material = ai_scene->mMaterials[mesh->mMaterialIndex];
 
 				m3_mesh* dst_mesh = new m3_mesh;
-				LoadMesh(mesh, material, dst_mesh);
+				LoadMesh(mesh, material, dst_mesh, dir);
 				ds_array_add(model->meshes, &dst_mesh);
 			}
 		}
 	}
 }
 
-void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material, m3_mesh* mesh)
+void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material, 
+							m3_mesh* mesh, const std::string& dir)
 {
-	LoadMaterial(ai_mesh, ai_material, &mesh->material);
+	LoadMaterial(ai_mesh, ai_material, &mesh->material, dir);
 
-	const int floats_per_vertex = 3 + 3;		// vertex + normal
+	int floats_per_vertex = 3;
+	bool has_normal = ai_mesh->HasNormals();
+	if (has_normal) {
+		floats_per_vertex += 3;
+		mesh->vertex_type |= M3_VERTEX_FLAG_NORMALS;
+	}
+	bool has_texcoord = ai_mesh->HasTextureCoords(0);
+	if (has_texcoord) {
+		floats_per_vertex += 2;
+		mesh->vertex_type |= M3_VERTEX_FLAG_TEXCOORDS;
+	}
+
 	mesh->vertices = ds_array_create(ai_mesh->mNumVertices, floats_per_vertex * sizeof(float));
-	float vertex[floats_per_vertex];
+	float vertex[3 + 3 + 2];
 	float* vertex_ptr = vertex;
 	for (int i = 0; i < ai_mesh->mNumVertices; ++i) 
 	{
@@ -94,14 +118,27 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material
 		position.z = p.z;
 		memcpy(vertex_ptr, &position, sizeof(position));
 		vertex_ptr += 3;
-		
-		const aiVector3D& n = ai_mesh->mNormals[i];
-		struct sm_vec3 normal;
-		normal.x = n.x;
-		normal.y = n.y;
-		normal.z = n.z;
-		memcpy(vertex_ptr, &normal, sizeof(normal));
-		vertex_ptr += 3;
+	
+		if (has_normal) 
+		{
+			const aiVector3D& n = ai_mesh->mNormals[i];
+			struct sm_vec3 normal;
+			normal.x = n.x;
+			normal.y = n.y;
+			normal.z = n.z;
+			memcpy(vertex_ptr, &normal, sizeof(normal));
+			vertex_ptr += 3;
+		}
+
+		if (has_texcoord)
+		{
+			const aiVector3D& t = ai_mesh->mTextureCoords[0][i];
+			struct sm_vec2 texcoord;
+			texcoord.x = t.x;
+			texcoord.y = t.y;
+			memcpy(vertex_ptr, &texcoord, sizeof(texcoord));
+			vertex_ptr += 2;
+		}
 
 		ds_array_add(mesh->vertices, &vertex);
 		vertex_ptr = vertex;
@@ -121,7 +158,8 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material
 	}
 }
 
-void AssimpHelper::LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_material, m3_material* material)
+void AssimpHelper::LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_material, 
+								m3_material* material, const std::string& dir)
 {
 	aiColor4D col;
 
@@ -150,22 +188,23 @@ void AssimpHelper::LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_mate
 	}
 	material->shininess = 50;
 
-// 	material->ambient.x = 0.04f;
-// 	material->ambient.y = 0.04f;
-// 	material->ambient.z = 0.04f;
-// 	material->diffuse.x = 0.75f;
-// 	material->diffuse.y = 0.25f;
-// 	material->diffuse.z = 0;
-// 	material->specular.x = 0.5f;
-// 	material->specular.y = 0.5f;
-// 	material->specular.z = 0.5f;
-
+	material->tex = -1;
 	if (ai_mesh->mTextureCoords[0]) 
 	{
 		aiString path;
-		if (aiGetMaterialString(ai_material, AI_MATKEY_TEXTURE_DIFFUSE(0), &path) == AI_SUCCESS) {
-//			material->m_diffuse_tex.LoadFromFile(path.data);
-			int zz = 0;
+		if (aiGetMaterialString(ai_material, AI_MATKEY_TEXTURE_DIFFUSE(0), &path) == AI_SUCCESS) 
+		{
+			std::string img_path = dir + '/' + path.data;
+			std::map<std::string, Texture*>::iterator itr = m_tex_cache.find(img_path);
+			Texture* tex = NULL;
+			if (itr == m_tex_cache.end()) {
+				tex = new Texture;
+				tex->Load(img_path);
+				m_tex_cache.insert(std::make_pair(img_path, tex));
+			} else {
+				tex = itr->second;
+			}
+			material->tex = tex->GetID();
 		}
 	}
 }

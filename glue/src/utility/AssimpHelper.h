@@ -9,8 +9,12 @@ struct aiNode;
 struct aiMesh;
 struct aiMaterial;
 
+#include <map>
+
 namespace glue
 {
+
+class Texture;
 
 class AssimpHelper
 {
@@ -18,11 +22,14 @@ public:
 	static m3_model* Load(const char* filename);
 
 private:
-	static void LoadNode(const aiScene* scene, const aiNode* node, m3_model* model);
+	static void LoadNode(const aiScene* scene, const aiNode* node, m3_model* model, const std::string& dir);
 
-	static void LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material, m3_mesh* mesh);
+	static void LoadMesh(const aiMesh* ai_mesh, const aiMaterial* ai_material, m3_mesh* mesh, const std::string& dir);
 
-	static void LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_material, m3_material* material);
+	static void LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_material, m3_material* material, const std::string& dir);
+
+private:
+	static std::map<std::string, Texture*> m_tex_cache;
 
 }; // AssimpHelper
 

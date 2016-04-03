@@ -122,7 +122,7 @@ void ImageSymbol::Draw25(const sm_mat4& mt) const
 
 void ImageSymbol::Load()
 {
-	m_tex = new glue::Texture();
+	m_tex = new Texture();
 	m_tex->Load(m_filepath);
 }
 

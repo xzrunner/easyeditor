@@ -321,11 +321,35 @@
 			Name="model3"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\model3.frag"
+				RelativePath="..\..\..\src\shaderlab\model3_both.frag"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\model3.vert"
+				RelativePath="..\..\..\src\shaderlab\model3_both.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model3_normal.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model3_normal.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model3_plain.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model3_plain.vert"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model3_texture.frag"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\model3_texture.vert"
 				>
 			</File>
 			<File

@@ -37,7 +37,6 @@ public:
 	void SetProjection(int width, int height);
 	void SetModelView(const sm_mat4& mat);
 
-	void SetNormalMatrix(const sm_mat3& mat);
 	void SetLightPosition(const vec3& pos);
 
 	void Draw(m3_model* model);
