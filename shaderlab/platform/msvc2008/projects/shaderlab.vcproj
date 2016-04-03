@@ -318,22 +318,22 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="lighting"
+			Name="model3"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\lighting.frag"
+				RelativePath="..\..\..\src\shaderlab\model3.frag"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\lighting.vert"
+				RelativePath="..\..\..\src\shaderlab\model3.vert"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_lighting.c"
+				RelativePath="..\..\..\src\shaderlab\sl_model3.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_lighting.h"
+				RelativePath="..\..\..\src\shaderlab\sl_model3.h"
 				>
 			</File>
 		</Filter>
