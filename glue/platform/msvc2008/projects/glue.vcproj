@@ -248,10 +248,6 @@
 			Name="math"
 			>
 			<File
-				RelativePath="..\..\..\src\math\Matrix.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\math\Vector.h"
 				>
 			</File>
