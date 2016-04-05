@@ -41,7 +41,7 @@ void Pseudo3DCamera::Reset()
 	pos.x = pos.y = 0;
 	pos.z = Z;
 
-	c25_cam_reset(m_cam, &pos, ANGLE);
+	c25_cam_set_modelview(m_cam, &pos, ANGLE);
 
 	UpdateModelView();
 }
