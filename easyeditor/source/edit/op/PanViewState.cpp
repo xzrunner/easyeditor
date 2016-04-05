@@ -56,8 +56,9 @@ bool PanViewState::OnMouseDrag(int x, int y)
 		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());		
 		int w, h;
 		ScreenCache::Instance()->GetSize(w, h);
-		float z = cam->GetZ();
-		cam->Translate(vec3(offset.x / w * z, offset.y / h * z, 0));
+		Vector last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
+		Vector curr = cam->TransPosScreenToProject(x, y, w, h);
+		cam->Translate(vec3(curr.x - last.x, curr.y - last.y, 0));
 	}
 
 	m_last_pos.Set(x, y);
