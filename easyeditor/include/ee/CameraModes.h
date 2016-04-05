@@ -10,8 +10,7 @@ namespace ee
 enum CameraMode
 {
 	CM_ORTHO					= 0,
-
-	CM_PERSPECTIVE_NO_HEIGHT	=  10,
+	CM_PERSPECTIVE_NO_HEIGHT,
 	CM_PERSPECTIVE_AUTO_HEIGHT,
 };
 
