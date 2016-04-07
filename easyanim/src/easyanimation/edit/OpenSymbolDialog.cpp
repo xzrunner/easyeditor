@@ -33,6 +33,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	}
 
 	m_sprites_impl->EnableObserve(false);
+	m_stage->EnableObserve(false);
 	m_stage->GetCanvas()->EnableObserve(false);
 
 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(spr))
@@ -42,6 +43,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	}
 
 	m_sprites_impl->EnableObserve(true);
+	m_stage->EnableObserve(true);
 	m_stage->GetCanvas()->EnableObserve(true);
 }
 
