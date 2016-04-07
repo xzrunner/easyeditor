@@ -173,10 +173,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sprite_map_fast.frag"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\shaderlab\sprite_plain.frag"
 				>
 			</File>
