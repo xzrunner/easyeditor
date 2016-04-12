@@ -9,12 +9,10 @@
 #include <ee/Symbol.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/color_config.h>
+#include <ee/cfg_const.h>
 
 namespace eshader
 {
-
-static const int SCREEN_WIDTH = 1024;
-static const int SCREEN_HEIGHT = 768;
 
 BEGIN_EVENT_TABLE(StageCanvas2D, ee::CameraCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas2D::OnTimer)
@@ -61,7 +59,7 @@ void StageCanvas2D::OnDrawSprites() const
 void StageCanvas2D::DrawBackground() const
 {
 	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(ee::Vector(0, 0), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, false);
+	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 void StageCanvas2D::DrawSprites() const

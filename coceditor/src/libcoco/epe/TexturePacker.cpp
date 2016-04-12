@@ -1,6 +1,7 @@
 #include "TexturePacker.h"
 
 #include <ee/Rect.h>
+#include <ee/cfg_const.h>
 
 #include <vector>
 #include <algorithm>
@@ -13,7 +14,7 @@ namespace epe
 {
 
 TexturePacker::TexturePacker(int padding, int extrude)
-	: m_edge(768)
+	: m_edge(ee::SCREEN_HEIGHT)
 	, m_pixels(NULL)
 	, m_padding(padding)
 	, m_extrude(extrude)

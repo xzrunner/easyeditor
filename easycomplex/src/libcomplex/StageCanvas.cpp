@@ -12,6 +12,7 @@
 #include <ee/SpriteRenderer.h>
 #include <ee/color_config.h>
 #include <ee/CameraMgr.h>
+#include <ee/cfg_const.h>
 
 // debug
 #include <ee/ShaderMgr.h>
@@ -145,7 +146,7 @@ void StageCanvas::DrawBackground() const
 	if (Settings::bVisibleBGRect) {
 		ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
 		ee::RVG::LineWidth(2);
-		ee::RVG::Rect(ee::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, false);
+		ee::RVG::Rect(ee::Vector(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
 	}
 }
 

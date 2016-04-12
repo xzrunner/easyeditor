@@ -11,8 +11,8 @@ SettingCfg* SettingCfg::m_instance = NULL;
 
 SettingCfg::SettingCfg()
 {
-	m_map_width = ee::HALF_S_WIDTH * 2;
-	m_map_height = ee::HALF_S_HEIGHT * 2;
+	m_map_width = ee::SCREEN_WIDTH;
+	m_map_height = ee::SCREEN_HEIGHT;
 
 	m_view_dx = m_view_dy = 0;
 	m_view_width = m_map_width;

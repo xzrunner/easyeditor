@@ -4,11 +4,11 @@
 namespace ee
 {
 
-static const int S_WIDTH = 800;
-static const int S_HEIGHT = 480;
-static const int HALF_S_WIDTH = (S_WIDTH >> 1);
-static const int HALF_S_HEIGHT = (S_HEIGHT >> 1);
-
+static const int SCREEN_WIDTH		= 1024;
+static const int SCREEN_HEIGHT		= 768;
+static const int HALF_SCREEN_WIDTH	= (SCREEN_WIDTH >> 1);
+static const int HALF_SCREEN_HEIGHT	= (SCREEN_HEIGHT >> 1);
+	
 static const char* CONFIG_FILEPATH = "config.json";
 
 }

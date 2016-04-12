@@ -5,6 +5,8 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>
+#include <ee/EE_RVG.h>
+#include <ee/cfg_const.h>
 
 #include <ps_3d.h>
 
@@ -23,6 +25,8 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::OnDrawSprites() const
 {
+	DrawBackground();
+
 	std::vector<ee::Sprite*> sprites;
 	static_cast<StagePanel*>(m_stage)->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
@@ -38,6 +42,13 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	m_stage->DrawEditOP();
+}
+
+void StageCanvas::DrawBackground() const
+{
+	ee::RVG::Color(ee::Colorf(0.8f, 0.8f, 0.8f));
+	ee::RVG::LineWidth(2);
+	ee::RVG::Rect(ee::Vector(0, 0), ee::SCREEN_WIDTH, ee::SCREEN_HEIGHT, false);
 }
 
 }

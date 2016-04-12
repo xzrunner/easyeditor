@@ -47,7 +47,7 @@ StageCanvas::StageCanvas(StagePanel* stage,
 void StageCanvas::DrawGuideLines() const
 {
 	ee::RVG::Color(ee::LIGHT_GREY);
-	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_S_WIDTH, ee::HALF_S_HEIGHT, false);
+	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 void StageCanvas::OnDrawSprites() const

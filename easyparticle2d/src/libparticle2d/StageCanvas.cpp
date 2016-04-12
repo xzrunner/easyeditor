@@ -7,12 +7,10 @@
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
+#include <ee/cfg_const.h>
 
 namespace eparticle2d
 {
-
-static const int SCREEN_WIDTH = 1024;
-static const int SCREEN_HEIGHT = 768;
 
 StageCanvas::StageCanvas(StagePanel* stage)
 	: ee::CameraCanvas(stage, stage->GetStageImpl())
@@ -48,7 +46,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	ee::RVG::Color(ee::LIGHT_RED);
-	ee::RVG::Rect(ee::Vector(0, 0), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, false);
+	ee::RVG::Rect(ee::Vector(0, 0), ee::HALF_SCREEN_WIDTH, ee::HALF_SCREEN_HEIGHT, false);
 }
 
 }
