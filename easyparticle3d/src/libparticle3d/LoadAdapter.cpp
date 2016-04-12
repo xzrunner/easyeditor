@@ -125,6 +125,12 @@ void LoadAdapter::LoadComponent(const std::string& dir, const Json::Value& comp_
 {
 	Component comp;
 
+	if (comp_val["count"].isNull()) {
+		comp.count = 0;
+	} else {
+		comp.count = comp_val["count"].asInt();
+	}
+
 	comp.filepath = comp_val["filepath"].asString();
 	comp.filepath = ee::FileHelper::GetAbsolutePath(dir, comp.filepath);
 

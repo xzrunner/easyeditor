@@ -15,6 +15,7 @@
 
 #include <wx/colourdata.h>
 #include <wx/colordlg.h>
+#include <wx/spinctrl.h>
 
 namespace eparticle3d
 {
@@ -89,6 +90,12 @@ void ComponentPanel::SetBtnColor()
 	m_add_col_btn->SetBackgroundColour(wxColour(m_pc->col_add.r * 255, m_pc->col_add.g * 255, m_pc->col_add.b * 255));
 }
 
+void ComponentPanel::SetCount(int count)
+{
+	m_pc->count = count;
+	m_count->SetValue(count);
+}
+
 void ComponentPanel::InitLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
@@ -116,16 +123,29 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 			wxSizer* vert_sizer = new wxBoxSizer(wxVERTICAL);
 			// Del
 			{
-				wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE], wxDefaultPosition, wxSize(50, 50));
+//				wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE], wxDefaultPosition, wxSize(50, 50));
+				wxButton* btn = new wxButton(this, wxID_ANY, LANG[LK_REMOVE]);
 				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ComponentPanel::OnDelete));
 				vert_sizer->Add(btn);
 			}
-			vert_sizer->AddSpacer(20);
+			vert_sizer->AddSpacer(8);
 			// Name
 			{
 				wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
 				sz->Add(new wxStaticText(this, wxID_ANY, LANG[LK_NAME]));
 				sz->Add(m_name = new wxTextCtrl(this, wxID_ANY));
+				vert_sizer->Add(sz);
+			}
+			vert_sizer->AddSpacer(8);
+			// Count
+			{
+				wxSizer* sz = new wxBoxSizer(wxHORIZONTAL);
+				sz->Add(new wxStaticText(this, wxID_ANY, LANG[LK_CONST_COUNT]));
+
+				m_count = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), wxSP_ARROW_KEYS, 0, 100, 0);
+				Connect(m_count->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ComponentPanel::OnSetCount));
+				sz->Add(m_count);
+
 				vert_sizer->Add(sz);
 			}
 			hori_sizer->Add(vert_sizer);
@@ -196,6 +216,11 @@ void ComponentPanel::InitLayout(wxSizer* top_sizer)
 void ComponentPanel::OnDelete(wxCommandEvent& event)
 {
 	m_toolbar->OnDelChild(this);
+}
+
+void ComponentPanel::OnSetCount(wxSpinEvent& event)
+{
+	m_pc->count = event.GetValue();
 }
 
 void ComponentPanel::OnBindPS(wxCommandEvent& event)

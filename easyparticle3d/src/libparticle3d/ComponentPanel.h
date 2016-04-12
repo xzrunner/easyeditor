@@ -35,11 +35,15 @@ public:
 
 	void SetBtnColor();
 
+	void SetCount(int count);
+
 private:
 	void InitLayout();
 	void InitLayout(wxSizer* sizer);
 
 	void OnDelete(wxCommandEvent& event);
+
+	void OnSetCount(wxSpinEvent& event);
 
 	void OnBindPS(wxCommandEvent& event);
 
@@ -54,6 +58,8 @@ private:
 	std::vector<ee::SliderCtrl*> m_sliders;
 
 	wxTextCtrl* m_name;
+
+	wxSpinCtrl* m_count;
 
 	wxButton *m_mul_col_btn, *m_add_col_btn;
 

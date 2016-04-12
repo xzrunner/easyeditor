@@ -19,6 +19,8 @@ private:
 public:
 	struct Component
 	{
+		int count;
+
 		std::string filepath;
 		std::string bind_filepath;
 
