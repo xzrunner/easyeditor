@@ -42,6 +42,7 @@ void FileIO::Store(const std::string& filepath, ParticleSystem* ps,
 	value["orient_to_movement"] = ps->GetEmitter()->cfg->orient_to_movement;
 
 	value["loop"] = ps->GetEmitter()->loop;
+	value["local"] = ps->IsLocalModeDraw();
 
 //	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
@@ -110,6 +111,9 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 		value["radial_speed"]["center"] = adapter.radial_spd * 4;
 		value["radial_speed"]["offset"] = adapter.radial_spd_var * 4;
 	}
+
+	ps->SetLoop(adapter.loop);
+	ps->SetLocalModeDraw(adapter.local);
 
 	toolbar->Load(value, version);
 

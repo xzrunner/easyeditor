@@ -33,6 +33,7 @@ void Task::Load(const char* filepath)
 		throw ee::Exception("File: %s don't exist!", filepath);
 	}
 	FileIO::Load(filepath, m_stage->m_ps, m_toolbar, m_library);
+	m_property->SetPropertySetting(new SymbolPropertySetting(m_stage->m_ps));
 	m_stage->m_ps->Start();
 }
 

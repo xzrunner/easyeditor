@@ -37,6 +37,8 @@ public:
 public:
 	std::string name;
 
+	bool loop, local;
+
 	int count;
 	float emission_time;
 

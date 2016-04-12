@@ -22,6 +22,9 @@ void LoadAdapter::Load(const std::string& filepath)
 
 	name = value["name"].asString();
 
+	loop = value["loop"].asBool();
+	local = value["local"].asBool();
+
 	count = value["count"].asInt();
 	emission_time = value["emission_time"].asInt() * 0.001f;
 
