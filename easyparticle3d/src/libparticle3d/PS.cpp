@@ -6,6 +6,7 @@
 #include <ps_3d_buffer.h>
 
 #include <ee/SpriteRenderer.h>
+#include <ee/ShaderMgr.h>
 
 #include <time.h>
 #include <assert.h>
@@ -91,6 +92,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	}
 	trans.mt = mt;
 
+	ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 	ee::SpriteRenderer::Instance()->Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
 
 	// todo bind
