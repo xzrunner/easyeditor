@@ -325,7 +325,9 @@ void Sprite::CreatePS()
 	}
 
 	m_spr = p3d_sprite_create();
+	m_spr->local_mode_draw = m_symbol->IsLocal();
 	m_spr->et = p3d_emitter_create(cfg);
+	m_spr->et->loop = m_symbol->IsLoop();
 	p3d_emitter_start(m_spr->et);
 	m_spr->ptr_self = &m_spr;
 }

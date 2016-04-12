@@ -35,6 +35,9 @@ public:
 
 	p3d_emitter* GetEmitter() { return m_et; }
 
+	bool IsLoop() const { return m_loop; }
+	bool IsLocal() const { return m_local; }
+
 	static ee::Symbol* Create() { return new Symbol(); }
 
 protected:
@@ -44,6 +47,8 @@ private:
 	p3d_emitter_cfg* m_et_cfg;
 
 	p3d_emitter* m_et;
+
+	bool m_loop, m_local;
 	
 }; // ParticleSystem
 

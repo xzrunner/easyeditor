@@ -19,6 +19,8 @@ namespace eparticle3d
 
 Symbol::Symbol()
 	: m_et_cfg(NULL)
+	, m_loop(true)
+	, m_local(true)
 {
 	PS::Instance();
 }
@@ -96,6 +98,9 @@ void Symbol::LoadResources()
 	fin.close();
 
 	name = value["name"].asString();
+
+	m_loop = value["loop"].asBool();
+	m_local = value["local"].asBool();
 }
 
 }
