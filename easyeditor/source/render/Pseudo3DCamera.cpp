@@ -40,8 +40,9 @@ void Pseudo3DCamera::Reset()
 	sm_vec3 pos;
 	pos.x = pos.y = 0;
 	pos.z = Z;
+	c25_cam_set_pos(m_cam, &pos);
 
-	c25_cam_set_modelview(m_cam, &pos, ANGLE);
+	c25_cam_set_angle(m_cam, ANGLE);
 
 	UpdateModelView();
 }
@@ -78,7 +79,6 @@ Vector Pseudo3DCamera::TransPosProjectToScreen(const vec3& proj, int width, int 
 
 void Pseudo3DCamera::UpdateModelView() const
 {
-	const sm_vec3* p = c25_cam_get_pos(m_cam);
 	float angle = c25_cam_get_angle(m_cam);
 	ShaderMgr::Instance()->SetModelView();
 }
@@ -115,9 +115,9 @@ float Pseudo3DCamera::GetAngle() const
 	return c25_cam_get_angle(m_cam);
 }
 
-float Pseudo3DCamera::GetZ() const 
-{ 
-	return c25_cam_get_pos(m_cam)->z;
+const sm_vec3* Pseudo3DCamera::GetPos() const
+{
+	return c25_cam_get_pos(m_cam);
 }
 
 const sm_mat4* Pseudo3DCamera::GetModelViewMat() const

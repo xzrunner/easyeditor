@@ -5,6 +5,7 @@
 #include "Vector3D.h"
 
 union sm_mat4;
+struct sm_vec3;
 struct c25_camera;
 
 namespace ee
@@ -33,7 +34,7 @@ public:
 	void Rotate(float da);
 
 	float GetAngle() const;
-	float GetZ() const;
+	const sm_vec3* GetPos() const;
 
 	const sm_mat4* GetModelViewMat() const;
 	const sm_mat4* GetProjectMat() const;

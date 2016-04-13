@@ -12,6 +12,8 @@
 #include "OrthoCamera.h"
 #include "Pseudo3DCamera.h"
 
+#include <sm.h>
+
 #include <fstream>
 
 namespace ee
@@ -206,7 +208,8 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 	else if (CameraMgr::Instance()->IsType(CameraMgr::PSEUDO3D))
 	{
 		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());
-		float dz = direction < 0 ? cam->GetZ() * 0.05f : - cam->GetZ() * 0.05f;
+		const sm_vec3* pos = cam->GetPos();
+		float dz = direction < 0 ? pos->z * 0.05f : - pos->z * 0.05f;
 		cam->Translate(vec3(0, 0, dz));
 	}
 }
