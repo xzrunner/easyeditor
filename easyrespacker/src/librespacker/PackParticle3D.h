@@ -23,6 +23,8 @@ public:
 		const IPackNode* node;
 	};
 
+	bool static_mode;
+
 	float emission_time;
 	int count;
 

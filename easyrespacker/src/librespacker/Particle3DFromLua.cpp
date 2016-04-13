@@ -59,6 +59,8 @@ void Particle3DFromLua::UnpackComponents(lua_State* L, PackParticle3D* p3d)
 
 void Particle3DFromLua::UnpackBody(lua_State* L, PackParticle3D* p3d)
 {
+	p3d->static_mode = LuaDataHelper::GetBoolField(L, "static_mode");
+
 	p3d->emission_time = TransTime(LuaDataHelper::GetIntField(L, "emission_time"));
 	p3d->count = LuaDataHelper::GetIntField(L, "count");
 

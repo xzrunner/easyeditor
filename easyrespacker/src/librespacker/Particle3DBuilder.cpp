@@ -57,6 +57,8 @@ const IPackNode* Particle3DBuilder::Create(const eparticle3d::Symbol* symbol, P3
 void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* ps)
 {
 	const p3d_emitter_cfg* cfg = symbol->GetEmitterCfg();
+	
+	ps->static_mode = cfg->static_mode;
 
 	ps->emission_time = cfg->emission_time;
 	ps->count = cfg->count;

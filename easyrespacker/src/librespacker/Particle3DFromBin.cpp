@@ -28,6 +28,9 @@ void Particle3DFromBin::Unpack(uint8_t** ptr, PackParticle3D* p3d)
 
 	// body
 
+	uint8_t static_mode;
+	unpack(static_mode, ptr);
+
 	uint16_t emission_time, count;
 	unpack(emission_time, ptr);
 	unpack(count, ptr);

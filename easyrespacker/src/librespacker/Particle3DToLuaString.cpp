@@ -34,7 +34,8 @@ void Particle3DToLuaString::Pack(const PackParticle3D* p3d, ebuilder::CodeGenera
 
 void Particle3DToLuaString::PackPS(const PackParticle3D* p3d, ebuilder::CodeGenerator& gen)
 {
-	lua::connect(gen, 2, 
+	lua::connect(gen, 3, 
+		lua::assign("static_mode", TransBool(p3d->static_mode)), 
 		lua::assign("emission_time", TransTime(p3d->emission_time)), 
 		lua::assign("count", p3d->count));
 

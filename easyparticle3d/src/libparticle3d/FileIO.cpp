@@ -173,6 +173,8 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 	p3d_emitter_cfg* cfg = (p3d_emitter_cfg*) operator new(sz);
 	memset(cfg, 0, sz);
 	
+	cfg->static_mode = adapter.static_mode;
+
 	cfg->emission_time = adapter.emission_time;
 	cfg->count = adapter.count;
 

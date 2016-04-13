@@ -13,6 +13,7 @@ int Particle3DToBin::Size(const PackParticle3D* p3d)
 	sz += sizeof(uint8_t);						// type
 	sz += sizeof(uint16_t);						// component size
 	sz += ComponentSize() * p3d->components.size();
+	sz += sizeof(uint8_t);						// static_mode
 	sz += sizeof(uint16_t) * 2;					// emission_time, count
 	sz += sizeof(uint16_t) * 2;					// life
 	sz += sizeof(uint16_t) * 4;					// dir
@@ -46,6 +47,9 @@ void Particle3DToBin::Pack(const PackParticle3D* p3d, uint8_t** ptr)
 	}
 
 	// body
+
+	uint8_t static_mode = TransBool(p3d->static_mode);
+	pack(static_mode, ptr);
 
 	uint16_t emission_time = TransTime(p3d->emission_time);
 	pack(emission_time, ptr);

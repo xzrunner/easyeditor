@@ -41,6 +41,8 @@ public:
 
 	bool loop, local;
 
+	bool static_mode;
+
 	int count;
 	float emission_time;
 
