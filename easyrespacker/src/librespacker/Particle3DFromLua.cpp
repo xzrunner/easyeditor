@@ -41,6 +41,8 @@ void Particle3DFromLua::UnpackComponents(lua_State* L, PackParticle3D* p3d)
 			factory->AddUnassigned(id, &comp.node);
 		}
 
+		comp.count = LuaDataHelper::GetIntField(L, "count");
+
 		comp.scale_start = TransFloatX100(LuaDataHelper::GetIntField(L, "scale_start"));
 		comp.scale_end = TransFloatX100(LuaDataHelper::GetIntField(L, "scale_end"));
 

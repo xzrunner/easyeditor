@@ -223,6 +223,8 @@ p3d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		const LoadAdapter::Component& src = adapter.components[i];
 		p3d_symbol& dst = cfg->symbols[i];
 
+		dst.count = src.count;
+
 		dst.scale_start = src.scale_start * 0.01f;
 		dst.scale_end = src.scale_end * 0.01f;
 

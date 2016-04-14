@@ -121,6 +121,7 @@ int Particle3DToBin::ComponentSize()
 {
 	int sz = 0;
 	sz += sizeof(uint16_t);			// id
+	sz += sizeof(uint16_t);			// count
 	sz += sizeof(uint16_t) * 2;		// scale
 	sz += sizeof(uint16_t) * 2;		// angle
 	sz += sizeof(uint32_t) * 2;		// color
@@ -133,6 +134,9 @@ void Particle3DToBin::PackComponent(const PackParticle3D::Component& comp,
 {
 	uint16_t id = comp.node->GetSprID();
 	pack(id, ptr);
+
+	uint16_t count = comp.count;
+	pack(count, ptr);
 
 	uint16_t scale_start = TransFloatX100(comp.scale_start);
 	pack(scale_start, ptr);

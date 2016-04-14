@@ -92,6 +92,9 @@ void Particle3DToLuaString::PackComponent(const PackParticle3D::Component& comp,
 	lua::connect(gen, 1, 
 		lua::assign("id", comp.node->GetSprID()));
 
+	lua::connect(gen, 1, 
+		lua::assign("count", comp.count));
+
 	lua::connect(gen, 2, 
 		lua::assign("scale_start", TransFloatX100(comp.scale_start)), 
 		lua::assign("scale_end", TransFloatX100(comp.scale_end)));

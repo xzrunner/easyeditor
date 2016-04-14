@@ -73,6 +73,8 @@ p3d_emitter_cfg* Particle3DToSpr::LoadConfig(const erespacker::PackParticle3D* p
 		const erespacker::PackParticle3D::Component& src = p3d->components[i];
 		p3d_symbol& dst = cfg->symbols[i];
 
+		dst.count = cfg->count;
+
 		dst.scale_start = src.scale_start;
 		dst.scale_end = src.scale_end;
 

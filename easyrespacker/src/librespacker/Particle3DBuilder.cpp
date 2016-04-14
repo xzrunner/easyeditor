@@ -98,10 +98,13 @@ void Particle3DBuilder::Load(const eparticle3d::Symbol* symbol, PackParticle3D* 
 	ps->orient_to_movement = cfg->orient_to_movement;
 
 	ps->components.reserve(cfg->symbol_count);
-	for (int i = 0; i < cfg->symbol_count; ++i) {
+	for (int i = 0; i < cfg->symbol_count; ++i) 
+	{
 		const p3d_symbol& p_symbol = cfg->symbols[i];
 
 		PackParticle3D::Component comp;
+
+		comp.count = p_symbol.count;
 
 		comp.scale_start = p_symbol.scale_start;
 		comp.scale_end = p_symbol.scale_end;

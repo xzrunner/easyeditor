@@ -13,6 +13,8 @@ class PackParticle3D : public IPackNode
 public:
 	struct Component
 	{
+		int count;
+
 		float scale_start, scale_end;
 
 		float angle, angle_var;

@@ -128,6 +128,10 @@ void Particle3DFromBin::UnpackComponent(uint8_t** ptr, PackParticle3D* p3d)
 		factory->AddUnassigned(id, &comp.node);
 	}
 
+	uint16_t count;
+	unpack(count, ptr);
+	comp.count = count;
+
 	uint16_t scale_start, scale_end;
 	unpack(scale_start, ptr);
 	unpack(scale_end, ptr);
