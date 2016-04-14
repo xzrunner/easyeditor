@@ -209,7 +209,7 @@ void EditPanelImpl::OnMouseWheelRotation(int x, int y, int direction)
 	{
 		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera());
 		const sm_vec3* pos = cam->GetPos();
-		float dz = direction < 0 ? pos->z * 0.05f : - pos->z * 0.05f;
+		float dz = direction < 0 ? pos->z * 0.1f : - pos->z * 0.1f;
 		cam->Translate(vec3(0, 0, dz));
 	}
 }
