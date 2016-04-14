@@ -146,38 +146,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="sprite"
-			>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_sprite.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_sprite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite.vert"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite_both.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite_color.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite_map.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite_plain.frag"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="shape"
 			>
 			<File
@@ -189,11 +157,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_shape.c"
+				RelativePath="..\..\..\src\shaderlab\ShapeShader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_shape.h"
+				RelativePath="..\..\..\src\shaderlab\ShapeShader.h"
 				>
 			</File>
 		</Filter>
@@ -201,180 +169,72 @@
 			Name="utility"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_buffer.c"
+				RelativePath="..\..\..\src\shaderlab\Buffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_buffer.h"
+				RelativePath="..\..\..\src\shaderlab\Buffer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_typedef.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_utility.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_utility.h"
+				RelativePath="..\..\..\src\shaderlab\Object.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="blend"
+			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\shaderlab\blend.frag"
+				RelativePath="..\..\..\src\shaderlab\RenderBuffer.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\blend.vert"
+				RelativePath="..\..\..\src\shaderlab\RenderBuffer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_blend.c"
+				RelativePath="..\..\..\src\shaderlab\RenderContext.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\sl_blend.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="filter"
-			>
-			<File
-				RelativePath="..\..\..\src\shaderlab\blur.frag"
+				RelativePath="..\..\..\src\shaderlab\RenderContext.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\edge_detect.frag"
+				RelativePath="..\..\..\src\shaderlab\RenderLayout.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\filter.vert"
+				RelativePath="..\..\..\src\shaderlab\RenderLayout.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\gaussian_blur.frag"
+				RelativePath="..\..\..\src\shaderlab\RenderShader.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\shaderlab\gray.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\heat_haze.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\outline.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\relief.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\shock_wave.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_filter.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_filter.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\swirl.frag"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="sprite3"
-			>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_sprite3.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_sprite3.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite3.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sprite3.vert"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="model3"
-			>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_both.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_both.vert"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_normal.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_normal.vert"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_plain.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_plain.vert"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_texture.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\model3_texture.vert"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_model3.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_model3.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="shape3"
-			>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_shape3.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\shaderlab\sl_shape3.h"
+				RelativePath="..\..\..\src\shaderlab\RenderShader.h"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\..\src\shaderlab\sl_shader.c"
+			RelativePath="..\..\..\src\shaderlab\Shader.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\shaderlab\sl_shader.h"
+			RelativePath="..\..\..\src\shaderlab\ShaderMgr.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shaderlab\ShaderMgr.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shaderlab\ShaderType.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shaderlab\Uniform.h"
 			>
 		</File>
 	</Files>
