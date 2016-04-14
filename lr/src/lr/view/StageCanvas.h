@@ -26,9 +26,12 @@ private:
 	void DrawSprite(ee::Sprite* spr, bool draw_edge) const;
 
 	void DrawRegion() const;
+	void DrawPseudo3dBound() const;
 
 private:
 	StagePanel* m_stage;
+
+	mutable std::vector<ee::Vector> m_bound_pseudo3d;
 
 }; // StageCanvas
 

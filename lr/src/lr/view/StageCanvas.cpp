@@ -18,6 +18,8 @@
 #include <ee/CameraMgr.h>
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
+#include <ee/ScreenCache.h>
+#include <ee/cfg_const.h>
 
 #include <easyparticle3d.h>
 #include <easytext.h>
@@ -131,7 +133,33 @@ void StageCanvas::DrawRegion() const
 	ee::RVG::Color(ee::LIGHT_RED);
 	ee::RVG::Rect(ee::Vector(cfg->m_view_dx, cfg->m_view_dy), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f, false);
 
+	DrawPseudo3dBound();
+
 	m_stage->DebugDraw();
+}
+
+void StageCanvas::DrawPseudo3dBound() const
+{
+	if (!ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) 
+	{
+		ee::Camera* cam = static_cast<ee::Camera*>(ee::CameraMgr::Instance()->GetCamera());
+		int w, h;
+		ee::ScreenCache::Instance()->GetSize(w, h);
+//		ee::Vector center_world(0, 0);
+//		ee::Vector center_screen = cam->TransPosProjectToScreen(center_world, w, h);
+		ee::Vector center_screen(w * 0.5f, h * 0.5f);
+
+		m_bound_pseudo3d.clear();
+		m_bound_pseudo3d.push_back(cam->TransPosScreenToProject(center_screen.x - ee::HALF_SCREEN_HEIGHT, center_screen.y - ee::HALF_SCREEN_WIDTH, w, h));
+		m_bound_pseudo3d.push_back(cam->TransPosScreenToProject(center_screen.x - ee::HALF_SCREEN_HEIGHT, center_screen.y + ee::HALF_SCREEN_WIDTH, w, h));
+		m_bound_pseudo3d.push_back(cam->TransPosScreenToProject(center_screen.x + ee::HALF_SCREEN_HEIGHT, center_screen.y + ee::HALF_SCREEN_WIDTH, w, h));
+		m_bound_pseudo3d.push_back(cam->TransPosScreenToProject(center_screen.x + ee::HALF_SCREEN_HEIGHT, center_screen.y - ee::HALF_SCREEN_WIDTH, w, h));
+	}
+
+	if (!m_bound_pseudo3d.empty()) {
+		ee::RVG::Color(ee::LIGHT_GREEN);
+		ee::RVG::Polyline(m_bound_pseudo3d, true);
+	}
 }
 
 }
