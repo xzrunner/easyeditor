@@ -357,6 +357,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="shape3"
+			>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_shape3.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\sl_shape3.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\shaderlab\sl_shader.c"
 			>

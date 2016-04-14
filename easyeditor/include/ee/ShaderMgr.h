@@ -20,6 +20,7 @@ public:
 		BLEND,
 		FILTER,
 		SPRITE3,
+		SHAPE3,
 
 		COUNT,
 	};

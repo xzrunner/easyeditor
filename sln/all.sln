@@ -915,6 +915,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.easynavmesh", "..\easynav
 		{6216B0F5-5B88-4BA8-88F3-02585C4158B4} = {6216B0F5-5B88-4BA8-88F3-02585C4158B4}
 	EndProjectSection
 EndProject
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "1.shaderlab_cpp", "..\shaderlab_cpp\platform\msvc2008\projects\shaderlab_cpp.icproj", "{AE6B3320-7D2F-4CBB-8243-51137256B7EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -1255,6 +1257,12 @@ Global
 		{82182E35-FDC4-43E9-ACA0-78AFAE56E308}.Release|Win32.ActiveCfg = Release|Win32
 		{F12EA6CF-CAC8-49B3-A5DD-9E40CFDA9853}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F12EA6CF-CAC8-49B3-A5DD-9E40CFDA9853}.Release|Win32.ActiveCfg = Release|Win32
+		{AE6B3320-7D2F-4CBB-8243-51137256B7EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AE6B3320-7D2F-4CBB-8243-51137256B7EE}.Debug|Win32.Build.0 = Debug|Win32
+		{AE6B3320-7D2F-4CBB-8243-51137256B7EE}.Release|Win32.ActiveCfg = Release|Win32
+		{AE6B3320-7D2F-4CBB-8243-51137256B7EE}.Release|Win32.Build.0 = Release|Win32
+		{E084E63F-36CD-47B9-97EF-3EE48E9B5B20}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E084E63F-36CD-47B9-97EF-3EE48E9B5B20}.Release|Win32.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

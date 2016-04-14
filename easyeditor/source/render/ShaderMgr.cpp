@@ -3,6 +3,7 @@
 #include "SpriteShader.h"
 #include "BlendShader.h"
 #include "Sprite3Shader.h"
+#include "Shape3Shader.h"
 #include "FilterShader.h"
 #include "ShaderContext.h"
 
@@ -42,6 +43,7 @@ ShaderMgr::ShaderMgr()
 	m_shaders.push_back(new BlendShader);
 	m_shaders.push_back(new FilterShader);
 	m_shaders.push_back(new Sprite3Shader);
+	m_shaders.push_back(new Shape3Shader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -123,7 +125,8 @@ void ShaderMgr::SetModelView(const Vector& offset, float scale)
 
 void ShaderMgr::SetModelView()
 {
-	static_cast<Sprite3Shader*>(m_shaders[SPRITE3])->SetModelView();	
+	static_cast<Sprite3Shader*>(m_shaders[SPRITE3])->SetModelView();
+	static_cast<Shape3Shader*>(m_shaders[SHAPE3])->SetModelView();
 }
 
 }

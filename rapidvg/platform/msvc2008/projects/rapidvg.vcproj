@@ -162,6 +162,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\rapidvg\rvg_render3.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\rapidvg\rvg_render3.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\rapidvg\rvg_style.c"
 			>
 		</File>

@@ -269,6 +269,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\source\render\Shape3Shader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\source\render\Shape3Shader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\source\render\ShapeShader.cpp"
 					>
 				</File>
