@@ -1,12 +1,12 @@
 #include "ImageSymbol.h"
 #include "Texture.h"
 
-#include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
 #include "render/Camera.h"
 #include "render/SpriteShader.h"
 #include "render/Sprite3Shader.h"
 
+#include <shaderlab.h>
 #include <sm.h>
 
 namespace glue
@@ -42,7 +42,6 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 	texcoords[2] = vec2(1, 1);
 	texcoords[3] = vec2(0, 1);
 
-	ShaderMgr* smgr = ShaderMgr::Instance();
 // 	if (smgr->IsBlendShader())
 // 	{
 // 		vec2 vertices_scr[4];
@@ -69,9 +68,10 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 // 	}
 // 	else
 // 	{
-		smgr->SetShader(ShaderMgr::SPRITE);
-		SpriteShader* shader = static_cast<SpriteShader*>(smgr->GetShader(ShaderMgr::SPRITE));
-		shader->Draw(positions, texcoords, texid);
+		sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+		sl_mgr->SetShader(sl::SPRITE);
+		sl::SpriteShader* sl_shader = static_cast<sl::SpriteShader*>(sl_mgr->GetShader(sl::SPRITE));
+		sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
 //	}
 }
 
@@ -114,10 +114,10 @@ void ImageSymbol::Draw25(const sm_mat4& mt) const
 	texcoords.push_back(vec2(1, 1));
 	texcoords.push_back(vec2(0, 1));
 
-	ShaderMgr* smgr = ShaderMgr::Instance();
-	smgr->SetShader(ShaderMgr::SPRITE3);
-	Sprite3Shader* shader = static_cast<Sprite3Shader*>(smgr->GetShader(ShaderMgr::SPRITE3));
-	shader->Draw(positions3, texcoords, texid);
+// 	ShaderMgr* smgr = ShaderMgr::Instance();
+// 	smgr->SetShader(ShaderMgr::SPRITE3);
+// 	Sprite3Shader* shader = static_cast<Sprite3Shader*>(smgr->GetShader(ShaderMgr::SPRITE3));
+// 	shader->Draw(positions3, texcoords, texid);
 }
 
 void ImageSymbol::Load()

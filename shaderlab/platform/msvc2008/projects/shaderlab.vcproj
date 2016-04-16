@@ -168,23 +168,55 @@
 				RelativePath="..\..\..\src\shaderlab\shader\Uniform.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\shader\Utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\shader\Utility.h"
+				>
+			</File>
 			<Filter
 				Name="shape"
 				>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\shape.frag"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\shape.vert"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\shaderlab\shader\ShapeShader.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\shaderlab\shader\ShapeShader.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="msg"
+				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="sprite"
+				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\SpriteShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\SpriteShader.h"
 					>
 				</File>
 			</Filter>
@@ -202,6 +234,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\shaderlab\utility\Object.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\utility\StackAllocator.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\utility\StackAllocator.h"
 				>
 			</File>
 		</Filter>
@@ -381,6 +421,22 @@
 				</Filter>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\shaderlab\c_wrap_sl.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shaderlab\c_wrap_sl.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shaderlab\lua_wrap_sl.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shaderlab\shaderlab.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

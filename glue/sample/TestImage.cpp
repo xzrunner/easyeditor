@@ -1,13 +1,17 @@
 #include "TestImage.h"
 
 #include <rvg_render.h>
+#include <shaderlab.h>
 
 namespace test
 {
 
 void TestImage::Init()
 {
-	glue::ShaderMgr::Instance()->Init();
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->CreateContext(4096);
+	sl::RenderContext* sl_rc = sl_mgr->GetContext();
+	sl_mgr->CreateShader(sl::SPRITE, new sl::SpriteShader(sl_rc));
 
 	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
 	{
@@ -39,7 +43,7 @@ void TestImage::Init()
 
 void TestImage::Resize(int width, int height)
 {
-	glue::ShaderMgr::Instance()->OnSize(width, height);
+	glue::RenderContext::Instance()->OnSize(width, height);
 }
 
 void TestImage::Draw() const
@@ -50,35 +54,34 @@ void TestImage::Draw() const
 // 		spr->GetSymbol().Draw(mt);	
 // 	}
 
-	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
-	glue::SpriteShader* shader = static_cast<glue::SpriteShader*>(
-		mgr->GetShader(glue::ShaderMgr::SPRITE));
-
-	shader->SetColor(0xffff00ff, 0);
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->SetShader(sl::SPRITE);
+	sl::SpriteShader* sl_shader = static_cast<sl::SpriteShader*>(sl_mgr->GetShader());
+	sl_shader->SetColor(0xffff00ff, 0);
 	{
 		glue::Sprite* spr = m_sprites[0];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	shader->SetColor(0xffffffff, 0);
+	sl_shader->SetColor(0xffffffff, 0);
 	{
 		glue::Sprite* spr = m_sprites[1];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	shader->SetColor(0xffffff00, 0);
+	sl_shader->SetColor(0xffffff00, 0);
 	{
 		glue::Sprite* spr = m_sprites[2];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	shader->SetMapColor(0x000000ff, 0x00002288, 0x00ff0000);
+	sl_shader->SetColorMap(0x000000ff, 0x00002288, 0x00ff0000);
 	{
 		glue::Sprite* spr = m_sprites[3];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	shader->SetMapColor(0x000000ff, 0x00880022, 0x00ff0000);
+	sl_shader->SetColorMap(0x000000ff, 0x00880022, 0x00ff0000);
 	{
 		glue::Sprite* spr = m_sprites[4];
 		sm_mat4 mt = spr->GetTransMatrix();

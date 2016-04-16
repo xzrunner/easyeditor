@@ -16,6 +16,7 @@ public:
 	void Init();
 
 	void OnSize(int w, int h);
+	void SetCamera(float x, float y, float sx, float sy);
 
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }

@@ -191,58 +191,6 @@
 				RelativePath="..\..\..\src\render\ShaderMgr.h"
 				>
 			</File>
-			<Filter
-				Name="shader"
-				>
-				<File
-					RelativePath="..\..\..\src\render\BlendShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\BlendShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\FilterShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\FilterShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\LightingShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\LightingShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\ShapeShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\ShapeShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\Sprite3Shader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\Sprite3Shader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\SpriteShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\SpriteShader.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="math"
