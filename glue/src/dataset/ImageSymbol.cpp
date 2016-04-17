@@ -34,6 +34,7 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 		sm_vec2 v;
 		memcpy(&v, &positions[i], sizeof(v));
 		sm_vec2_mul(&v, &mt);
+		memcpy(&positions[i], &v, sizeof(v));
 	}
 
 	vec2 texcoords[4];
