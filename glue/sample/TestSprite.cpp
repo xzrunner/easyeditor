@@ -11,7 +11,7 @@ void TestSprite::Init()
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
-	sl_mgr->CreateShader(sl::SPRITE, new sl::SpriteShader(sl_rc));
+	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
 	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
@@ -56,8 +56,8 @@ void TestSprite::Draw() const
 // 	}
 
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-	sl_mgr->SetShader(sl::SPRITE);
-	sl::SpriteShader* sl_shader = static_cast<sl::SpriteShader*>(sl_mgr->GetShader());
+	sl_mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
 	sl_shader->SetColor(0xffff00ff, 0);
 	{
 		glue::Sprite* spr = m_sprites[0];

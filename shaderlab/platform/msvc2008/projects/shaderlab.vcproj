@@ -207,6 +207,14 @@
 					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="sprite"
@@ -219,6 +227,30 @@
 					RelativePath="..\..\..\src\shaderlab\shader\SpriteShader.h"
 					>
 				</File>
+				<Filter
+					Name="pseudo3d"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Sprite3Shader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Sprite3Shader.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="2d"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Sprite2Shader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Sprite2Shader.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -257,6 +289,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\shaderlab\render\RenderConst.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\shaderlab\render\RenderContext.cpp"
 				>
 			</File>
@@ -278,6 +314,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\shaderlab\render\RenderShader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\render\VertexAttrib.h"
 				>
 			</File>
 		</Filter>

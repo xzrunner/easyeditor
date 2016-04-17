@@ -11,8 +11,9 @@ void TestMulti::Init()
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
-	sl_mgr->CreateShader(sl::SPRITE, new sl::SpriteShader(sl_rc));
+	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
 	sl_mgr->CreateShader(sl::SHAPE, new sl::ShapeShader(sl_rc));
+	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
 	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
 	{

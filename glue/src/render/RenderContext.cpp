@@ -28,13 +28,16 @@ void RenderContext::Init()
 // 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 // 	sl_mgr->CreateContext(4096);
 // 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
-// 	sl_mgr->CreateShader(sl::SPRITE, new sl::SpriteShader(sl_rc));
+// 	sl_mgr->CreateShader(sl::SPRITE, new sl::Sprite2Shader(sl_rc));
 // 	sl_mgr->CreateShader(sl::SHAPE, new sl::ShapeShader(sl_rc));
 }
 
 void RenderContext::OnSize(int w, int h)
 {
 	sl::SubjectMVP2::Instance()->NotifyProjection(w, h);
+
+	ej_cam25_create((float)w / h);
+	sl::SubjectMVP3::Instance()->NotifyProjection(ej_cam25_get_proj_mat());
 }
 
 void RenderContext::SetCamera(float x, float y, float sx, float sy)

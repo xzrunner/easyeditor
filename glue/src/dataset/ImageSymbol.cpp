@@ -70,8 +70,8 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 // 	else
 // 	{
 		sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-		sl_mgr->SetShader(sl::SPRITE);
-		sl::SpriteShader* sl_shader = static_cast<sl::SpriteShader*>(sl_mgr->GetShader(sl::SPRITE));
+		sl_mgr->SetShader(sl::SPRITE2);
+		sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader(sl::SPRITE2));
 		sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
 //	}
 }
@@ -115,10 +115,10 @@ void ImageSymbol::Draw25(const sm_mat4& mt) const
 	texcoords.push_back(vec2(1, 1));
 	texcoords.push_back(vec2(0, 1));
 
-// 	ShaderMgr* smgr = ShaderMgr::Instance();
-// 	smgr->SetShader(ShaderMgr::SPRITE3);
-// 	Sprite3Shader* shader = static_cast<Sprite3Shader*>(smgr->GetShader(ShaderMgr::SPRITE3));
-// 	shader->Draw(positions3, texcoords, texid);
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->SetShader(sl::SPRITE3);
+	sl::Sprite3Shader* sl_shader = static_cast<sl::Sprite3Shader*>(sl_mgr->GetShader());
+	sl_shader->Draw(&positions3[0].x, &texcoords[0].x, texid);
 }
 
 void ImageSymbol::Load()
