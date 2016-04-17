@@ -1,4 +1,4 @@
-#include "TestImage.h"
+#include "TestSprite.h"
 
 #include <rvg_render.h>
 #include <shaderlab.h>
@@ -6,12 +6,13 @@
 namespace test
 {
 
-void TestImage::Init()
+void TestSprite::Init()
 {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
 	sl_mgr->CreateShader(sl::SPRITE, new sl::SpriteShader(sl_rc));
+	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
 	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
 	{
@@ -41,12 +42,12 @@ void TestImage::Init()
 	}
 }
 
-void TestImage::Resize(int width, int height)
+void TestSprite::Resize(int width, int height)
 {
 	glue::RenderContext::Instance()->OnSize(width, height);
 }
 
-void TestImage::Draw() const
+void TestSprite::Draw() const
 {
 // 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 // 		glue::Sprite* spr = m_sprites[i];
@@ -89,7 +90,7 @@ void TestImage::Draw() const
 	}
 }
 
-void TestImage::Update()
+void TestSprite::Update()
 {
 }
 

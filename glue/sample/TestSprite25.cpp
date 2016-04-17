@@ -1,11 +1,11 @@
-//#include "TestImage25.h"
+//#include "TestSprite25.h"
 //
 //#include <rvg.h>
 //
 //namespace test
 //{
 //
-//void TestImage25::Init()
+//void TestSprite25::Init()
 //{
 //	glue::ShaderMgr::Instance()->Init();
 //
@@ -27,12 +27,12 @@
 //	}
 //}
 //
-//void TestImage25::Resize(int width, int height)
+//void TestSprite25::Resize(int width, int height)
 //{
 //	glue::RenderContext::Instance()->OnSize(width, height);
 //}
 //
-//void TestImage25::Draw() const
+//void TestSprite25::Draw() const
 //{
 //	//////////////////////////////////////////////////////////////////////////
 //	
@@ -75,7 +75,7 @@
 //	//////////////////////////////////////////////////////////////////////////
 //}
 //
-//void TestImage25::Update()
+//void TestSprite25::Update()
 //{
 //}
 //

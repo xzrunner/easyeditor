@@ -1,5 +1,5 @@
-//#ifndef _TEST_IMAGE25_H_
-//#define _TEST_IMAGE25_H_
+//#ifndef _TEST_SPRITE25_H_
+//#define _TEST_SPRITE25_H_
 //
 //#include "TestTask.h"
 //
@@ -10,7 +10,7 @@
 //namespace test
 //{
 //
-//class TestImage25 : public TestTask
+//class TestSprite25 : public TestTask
 //{
 //public:
 //	virtual void Init();
@@ -21,8 +21,8 @@
 //private:
 //	std::vector<glue::Sprite*> m_sprites;
 //	
-//}; // TestImage25
+//}; // TestSprite25
 //
 //}
 //
-//#endif // _TEST_IMAGE25_H_
+//#endif // _TEST_SPRITE25_H_
