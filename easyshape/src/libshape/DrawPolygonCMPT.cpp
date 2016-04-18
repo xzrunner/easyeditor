@@ -9,9 +9,12 @@
 #include <ee/EmptyVerifyVisitor.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/RGBColorSettingDlg.h>
+#include <ee/HSLColorSettingDlg.h>
 #include <ee/SymbolMgr.h>
 #include <ee/panel_msg.h>
 #include <ee/ImageSymbol.h>
+#include <ee/Config.h>
+#include <ee/SettingData.h>
 
 namespace eshape
 {
@@ -96,18 +99,20 @@ void DrawPolygonCMPT::OnSetColor(wxCommandEvent& event)
 	switch (m_filling_type_choice->GetSelection()) 
 	{
 	case 0:
-// 		{
-// 			// todo trans between wxColor and ee::Colorf
-// 			ee::Colorf col;
-// 			col.r = m_color.Red() / 255.0f;
-// 			col.g = m_color.Green() / 255.0f;
-// 			col.b = m_color.Blue() / 255.0f;
-// 			ee::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
-// 			if (dlg.ShowModal() == wxID_OK) {
-// 				col = dlg.GetColor();
-// 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
-// 			}
-// 		}
+		if (ee::Config::Instance()->GetSettings().color_setting_dlg_type == ee::CSDT_HSL)
+		{
+ 			// todo trans between wxColor and ee::Colorf
+ 			ee::Colorf col;
+ 			col.r = m_color.Red() / 255.0f;
+ 			col.g = m_color.Green() / 255.0f;
+ 			col.b = m_color.Blue() / 255.0f;
+ 			ee::HSLColorSettingDlg dlg(m_stage_wnd, NULL, col);
+ 			if (dlg.ShowModal() == wxID_OK) {
+ 				col = dlg.GetColor();
+ 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
+ 			}
+		}
+		else
 		{
 			// todo trans between wxColor and ee::Colorf
 			ee::Colorf col;
