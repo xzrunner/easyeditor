@@ -180,6 +180,17 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 		RemoveSelected();
 		break;
 	}
+
+	if (m_selected_spr && GetKeyState(WXK_SHIFT))
+	{
+		int keycode = event.GetKeyCode();
+		if (keycode == 'e' || keycode == 'E') {
+			m_selected_spr->editable = !m_selected_spr->editable;
+		} else if (keycode == 'v' || keycode == 'V') {
+			m_selected_spr->visiable = !m_selected_spr->visiable;
+			SetCanvasDirtySJ::Instance()->SetDirty();
+		}
+	}
 }
 
 int ViewlistList::GetSelectedIndex() const
