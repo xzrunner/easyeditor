@@ -1,9 +1,7 @@
 #include "ImageSymbol.h"
 #include "Texture.h"
-
 #include "render/RenderContext.h"
-#include "render/SpriteShader.h"
-#include "render/Sprite3Shader.h"
+#include "math/Vector.h"
 
 #include <shaderlab.h>
 #include <sm.h>

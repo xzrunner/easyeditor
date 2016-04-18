@@ -152,14 +152,6 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\render\BlendMode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\IShader.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\render\RenderContext.cpp"
 				>
 			</File>
@@ -173,14 +165,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\render\ScreenCache.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\ShaderMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\ShaderMgr.h"
 				>
 			</File>
 			<Filter
