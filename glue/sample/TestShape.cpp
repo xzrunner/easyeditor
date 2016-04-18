@@ -12,7 +12,7 @@ void TestShape::Init()
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(0);
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
-	sl_mgr->CreateShader(sl::SHAPE, new sl::ShapeShader(sl_rc));
+	sl_mgr->CreateShader(sl::SHAPE2, new sl::Shape2Shader(sl_rc));
 	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 }
 
@@ -24,8 +24,8 @@ void TestShape::Resize(int width, int height)
 void TestShape::Draw() const
 {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-	sl_mgr->SetShader(sl::SHAPE);
-	sl::ShapeShader* sl_shader = static_cast<sl::ShapeShader*>(sl_mgr->GetShader());
+	sl_mgr->SetShader(sl::SHAPE2);
+	sl::Shape2Shader* sl_shader = static_cast<sl::Shape2Shader*>(sl_mgr->GetShader());
 
 	//////////////////////////////////////////////////////////////////////////
 

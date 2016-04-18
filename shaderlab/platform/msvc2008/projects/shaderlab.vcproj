@@ -187,6 +187,30 @@
 					RelativePath="..\..\..\src\shaderlab\shader\ShapeShader.h"
 					>
 				</File>
+				<Filter
+					Name="2d"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Shape2Shader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Shape2Shader.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="pseudo3d"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Shape3Shader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\Shape3Shader.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="msg"
@@ -251,6 +275,26 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="filter"
+				>
+			</Filter>
+			<Filter
+				Name="blend"
+				>
+			</Filter>
+			<Filter
+				Name="model3"
+				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\Model3Shader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\Model3Shader.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -363,11 +407,27 @@
 					Name="vert"
 					>
 					<File
+						RelativePath="..\..\..\src\shaderlab\parser\GouraudShading.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\GouraudShading.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\shaderlab\parser\PositionTrans.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\..\..\src\shaderlab\parser\PositionTrans.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\VaryingPass.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\VaryingPass.h"
 						>
 					</File>
 					<File
@@ -400,6 +460,14 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\shaderlab\parser\ColorOne.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\ColorStatic.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\ColorStatic.h"
 						>
 					</File>
 					<File

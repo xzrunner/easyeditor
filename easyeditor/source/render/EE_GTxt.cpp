@@ -1,6 +1,5 @@
 #include "EE_GTxt.h"
 #include "Color.h"
-#include "ShaderMgr.h"
 #include "Vector.h"
 #include "Math2D.h"
 #include "RenderColor.h"
@@ -11,7 +10,7 @@
 #include "Config.h"
 #include "StringHelper.h"
 #include "EE_RVG.h"
-#include "SpriteShader.h"
+#include "trans_color.h"
 
 #include <gtxt.h>
 #include <shaderlab.h>
@@ -30,7 +29,7 @@ GTxt* GTxt::m_instance = NULL;
 
 GTxt::GTxt()
 {
-	ShaderMgr::Instance()->SetShader(ShaderMgr::SPRITE);
+	sl::ShaderMgr::Instance()->SetShader(sl::SPRITE2);
 	Init();
 }
 
@@ -70,11 +69,12 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 		color.add = *rp->add;
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	mgr->SetShader(ShaderMgr::SPRITE);
-	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->SetColor(color);
-	shader->Draw(vertices, texcoords, id);
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
+	sl_shader->SetColor(color2int(color.multi, PT_ABGR), color2int(color.add, PT_ABGR));
+	sl_shader->SetColorMap(color2int(color.r, PT_ABGR), color2int(color.g, PT_ABGR), color2int(color.b, PT_ABGR));
+	sl_shader->Draw(&vertices[0].x, &texcoords[0].x, id);
 }
 
 static void 
@@ -85,9 +85,10 @@ render_decoration(const Matrix& mat, float x, float y, float w, float h, struct 
 		return;
 	}
 
-//	ShaderMgr::Instance()->RVG();
-	sl_shape_color(d->color);
-//	PrimitiveDrawRVG::SetColor(d->color);
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->SetShader(sl::SHAPE);
+	sl::Shape2Shader* sl_shader = static_cast<sl::Shape2Shader*>(sl_mgr->GetShader());
+	sl_shader->SetColor(d->color);
 
 	float hw = w * 0.5f,
 		  hh = h * 0.5f;

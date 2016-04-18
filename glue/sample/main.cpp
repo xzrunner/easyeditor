@@ -19,8 +19,8 @@
 //test::TestTask* task = new test::TestShape;
 //test::TestTask* task = new test::TestSprite;
 //test::TestTask* task = new test::TestMulti;
-test::TestTask* task = new test::TestSprite25;
-//test::TestTask* task = new test::TestLighting;
+//test::TestTask* task = new test::TestSprite25;
+test::TestTask* task = new test::TestLighting;
 
 void 
 display(void) {

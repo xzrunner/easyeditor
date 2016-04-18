@@ -2,7 +2,6 @@
 #include "Vector.h"
 #include "Color.h"
 #include "trans_color.h"
-#include "ShaderMgr.h"
 #include "CameraMgr.h"
 
 #include <rvg.h>
