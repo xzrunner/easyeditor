@@ -146,11 +146,12 @@ bool SelectShapesOP::OnMouseDrag(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
-	if (!m_selection->IsEmpty() && m_move_last_pos.IsValid()) {
-		Vector pos = m_stage->TransPosScrToProj(x, y);
-		m_selection->Traverse(TranslateVisitor(pos - m_move_last_pos));
-		m_move_last_pos = pos;
-	}
+//	// no need to move shape?
+// 	if (!m_selection->IsEmpty() && m_move_last_pos.IsValid()) {
+// 		Vector pos = m_stage->TransPosScrToProj(x, y);
+// 		m_selection->Traverse(TranslateVisitor(pos - m_move_last_pos));
+// 		m_move_last_pos = pos;
+// 	}
 
 	return !m_bDraggable;
 }
