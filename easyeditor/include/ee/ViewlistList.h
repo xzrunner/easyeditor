@@ -34,9 +34,12 @@ protected:
 	//
 	virtual void OnNotify(int sj_id, void* ud);
 
-private:
-	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
 
+	virtual void OnKeyDown(wxKeyEvent& event);
+	virtual void OnMouseEvent(wxMouseEvent& event);
+
+private:
 	int GetSelectedIndex() const;
 
 	void OnSelected(Sprite* spr);

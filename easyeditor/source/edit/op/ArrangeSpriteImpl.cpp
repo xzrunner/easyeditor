@@ -586,6 +586,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			ee::Sprite* spr = sprites[i];
 			spr->editable = editable;
 		}
+		RefreshPanelSJ::Instance()->Refresh();
 	}
 	// visible
 	else if (keycode == 's' || keycode == 'S')
@@ -596,6 +597,7 @@ void ArrangeSpriteImpl::OnSpriteShortcutKey(int keycode)
 			spr->visiable = visible;
 		}
 		SetCanvasDirtySJ::Instance()->SetDirty();
+		RefreshPanelSJ::Instance()->Refresh();
 	}
 	// hori mirror
 	else if (keycode == 'h' || keycode == 'H') 

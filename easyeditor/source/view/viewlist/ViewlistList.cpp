@@ -27,6 +27,7 @@ ViewlistList::ViewlistList(wxWindow* parent)
 	RegistSubject(ClearSpriteSJ::Instance());
 	RegistSubject(QuerySelectedSpriteLayerSJ::Instance());
 	RegistSubject(ClearPanelSJ::Instance());
+	RegistSubject(RefreshPanelSJ::Instance());
 }
 
 ViewlistList::~ViewlistList()
@@ -156,7 +157,25 @@ void ViewlistList::OnNotify(int sj_id, void* ud)
 			*layer = GetSelectedIndex();
 		}
 		break;
+	case MSG_REFRESH_PANEL:
+		Refresh();
+		break;
 	}
+}
+
+void ViewlistList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
+{
+	VerticalImageList::OnDrawItem(dc, rect, n);
+
+	static const int SPACE = 5, EDGE = 20;
+
+	Sprite* spr = m_sprites[n];
+
+	dc.SetBrush(spr->visiable ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
+	dc.DrawRectangle(rect.x + SPACE, rect.y + SPACE, EDGE, EDGE);
+
+	dc.SetBrush(spr->editable ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
+	dc.DrawRectangle(rect.x + rect.width - SPACE - EDGE, rect.y + SPACE, EDGE, EDGE);
 }
 
 void ViewlistList::OnKeyDown(wxKeyEvent& event)
@@ -186,11 +205,23 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 		int keycode = event.GetKeyCode();
 		if (keycode == 'e' || keycode == 'E') {
 			m_selected_spr->editable = !m_selected_spr->editable;
-		} else if (keycode == 'v' || keycode == 'V') {
+			Refresh();
+		} else if (keycode == 's' || keycode == 'S') {
 			m_selected_spr->visiable = !m_selected_spr->visiable;
 			SetCanvasDirtySJ::Instance()->SetDirty();
+			Refresh();
 		}
 	}
+}
+
+void ViewlistList::OnMouseEvent(wxMouseEvent& event)
+{
+	if (!event.LeftDown()) {
+		return;
+	}
+
+	// todo 
+	wxPoint pos = event.GetPosition();
 }
 
 int ViewlistList::GetSelectedIndex() const

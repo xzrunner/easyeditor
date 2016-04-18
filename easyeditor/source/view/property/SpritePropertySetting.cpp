@@ -185,10 +185,12 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	else if (name == wxT("Visiable"))
 	{
 		spr->visiable = wxANY_AS(value, bool);
+		RefreshPanelSJ::Instance()->Refresh();
 	}
 	else if (name == wxT("Editable"))
 	{
 		spr->editable = wxANY_AS(value, bool);
+		RefreshPanelSJ::Instance()->Refresh();
 	}
 	else
 	{
