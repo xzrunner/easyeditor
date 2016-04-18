@@ -213,34 +213,6 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="msg"
-				>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="sprite"
 				>
 				<File
@@ -295,6 +267,46 @@
 					RelativePath="..\..\..\src\shaderlab\shader\Model3Shader.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="utility"
+				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\ShaderProgram.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\ShaderProgram.h"
+					>
+				</File>
+				<Filter
+					Name="msg"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\ObserverMVP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP3.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
