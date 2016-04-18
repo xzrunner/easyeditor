@@ -2,7 +2,6 @@
 #include "Texture.h"
 
 #include "render/RenderContext.h"
-#include "render/Camera.h"
 #include "render/SpriteShader.h"
 #include "render/Sprite3Shader.h"
 
@@ -94,10 +93,10 @@ void ImageSymbol::Draw25(const sm_mat4& mt) const
 	}
 
 	float z[4];
-	z[0] = -4;
-	z[1] = -2;
-	z[2] = -2;
-	z[3] = -4;
+	z[0] = 250;
+	z[1] = 0;
+	z[2] = 0;
+	z[3] = 250;
 
 	std::vector<vec3> positions3;
 	positions3.push_back(vec3(positions[0].x, positions[0].y, z[0]));

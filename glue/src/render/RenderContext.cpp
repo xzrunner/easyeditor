@@ -1,5 +1,6 @@
 #include "RenderContext.h"
-#include "Camera.h"
+#include "OrthoCamera.h"
+#include "Pseudo3DCamera.h"
 
 #include <shaderlab.h>
 #include <render/render.h>
@@ -12,37 +13,36 @@ namespace glue
 SINGLETON_DEFINITION(RenderContext)
 
 RenderContext::RenderContext() 
-	: m_width(0)
+	: m_ortho_cam(new OrthoCamera())
+	, m_p3d_cam(new Pseudo3DCamera())
+	, m_width(0)
 	, m_height(0)
 {
 }
 
 RenderContext::~RenderContext() 
 {
+	delete m_ortho_cam;
+	delete m_p3d_cam;
 }
 
 void RenderContext::Init()
 {
-	m_cam = new Camera();
 
-// 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-// 	sl_mgr->CreateContext(4096);
-// 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
-// 	sl_mgr->CreateShader(sl::SPRITE, new sl::Sprite2Shader(sl_rc));
-// 	sl_mgr->CreateShader(sl::SHAPE, new sl::ShapeShader(sl_rc));
 }
 
 void RenderContext::OnSize(int w, int h)
 {
 	sl::SubjectMVP2::Instance()->NotifyProjection(w, h);
 
-	ej_cam25_create((float)w / h);
-	sl::SubjectMVP3::Instance()->NotifyProjection(ej_cam25_get_proj_mat());
+	m_p3d_cam->OnSize(w, h);
+ 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
 }
 
 void RenderContext::SetCamera(float x, float y, float sx, float sy)
 {
-	sl::SubjectMVP2::Instance()->NotifyModelview(x, y, sx, sy);	
+	sl::SubjectMVP2::Instance()->NotifyModelview(x, y, sx, sy);
+	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
 }
 
 RID RenderContext::CreateTexture(const uint8_t* data, int width, int height, TEXTURE_FORMAT format)

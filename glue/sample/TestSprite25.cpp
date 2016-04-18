@@ -13,7 +13,6 @@ void TestSprite25::Init()
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
 	sl_mgr->CreateShader(sl::SPRITE3, new sl::Sprite3Shader(sl_rc));
 //	sl_mgr->CreateShader(sl::SHAPE, new sl::ShapeShader(sl_rc));
-	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
 	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
 	{
@@ -36,6 +35,7 @@ void TestSprite25::Init()
 void TestSprite25::Resize(int width, int height)
 {
 	glue::RenderContext::Instance()->OnSize(width, height);
+	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 }
 
 void TestSprite25::Draw() const

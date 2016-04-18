@@ -156,14 +156,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\render\Camera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\Camera.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\render\IShader.h"
 				>
 			</File>
@@ -191,6 +183,30 @@
 				RelativePath="..\..\..\src\render\ShaderMgr.h"
 				>
 			</File>
+			<Filter
+				Name="camera"
+				>
+				<File
+					RelativePath="..\..\..\src\render\Camera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\OrthoCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\OrthoCamera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\Pseudo3DCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\render\Pseudo3DCamera.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="math"
