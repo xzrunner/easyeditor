@@ -435,14 +435,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\VaryingPass.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\parser\VaryingPass.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\shaderlab\parser\VertPosition.h"
 						>
 					</File>
@@ -451,11 +443,11 @@
 					Name="frag"
 					>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorAddMulti.cpp"
+						RelativePath="..\..\..\src\shaderlab\parser\ColorAddMul.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorAddMulti.h"
+						RelativePath="..\..\..\src\shaderlab\parser\ColorAddMul.h"
 						>
 					</File>
 					<File
@@ -464,22 +456,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\shaderlab\parser\ColorMap.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorOne.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorOne.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorStatic.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\shaderlab\parser\ColorStatic.h"
 						>
 					</File>
 					<File
@@ -492,6 +468,50 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\shaderlab\parser\TextureMap.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="atomic"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Add1.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Add2.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Assign.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Assign.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\AttributeNode.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\AttributeNode.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Mul1.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Mul2.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\VaryingNode.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\VaryingNode.h"
 						>
 					</File>
 				</Filter>
