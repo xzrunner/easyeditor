@@ -4,6 +4,7 @@
 #include "SettingData.h"
 #include "Exception.h"
 #include "LibpngAdapter.h"
+#include "LibjpegAdapter.h"
 #include "PPMAdapter.h"
 #include "ShaderMgr.h"
 #include "EE_ShaderLab.h"
@@ -37,6 +38,10 @@ uint8_t* ImageLoader::FileToPixels(const std::string& filepath, int& width, int&
 	if (type == "png")
 	{
 		data = LibpngAdapter::Read(filepath.c_str(), width, height, channels, format);
+	}
+	else if (type == "jpg")
+	{
+		data = LibjpegAdapter::Read(filepath.c_str(), width, height, channels, format);
 	}
 	else if (type == "ppm" || type == "pgm")
 	{
