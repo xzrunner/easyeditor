@@ -13,6 +13,7 @@ namespace eanim
 {
 
 void Utility::DrawAnimSymbol(const Symbol* symbol, 
+							 const ee::Sprite* root,
 							 const ee::RenderParams& trans,
 							 int index)
 {
@@ -20,7 +21,7 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 	GetCurrSprites(symbol, index, sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::SpriteRenderer::Instance()->Draw(sprites[i], NULL, trans);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i], root, trans, false);
 	}
 
 	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());

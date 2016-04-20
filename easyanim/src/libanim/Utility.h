@@ -13,6 +13,7 @@ class Utility
 public:
 	static void DrawAnimSymbol(
 		const Symbol* symbol, 
+		const ee::Sprite* root,
 		const ee::RenderParams& trans = ee::RenderParams(),
 		int index = 1);
 
