@@ -1,16 +1,16 @@
-#include "TestSprite.h"
+#include "TestFilter.h"
 
 #include <shaderlab.h>
 
 namespace test
 {
 
-void TestSprite::Init()
+void TestFilter::Init()
 {
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
 	sl_mgr->CreateContext(4096);
 	sl::RenderContext* sl_rc = sl_mgr->GetContext();
-	sl_mgr->CreateShader(sl::SPRITE2, new sl::Sprite2Shader(sl_rc));
+	sl_mgr->CreateShader(sl::FILTER, new sl::FilterShader(sl_rc));
 	glue::RenderContext::Instance()->SetCamera(0, 0, 1, 1);
 
 	glue::Symbol* sym = new glue::ImageSymbol("coin_00.png");
@@ -41,12 +41,12 @@ void TestSprite::Init()
 	}
 }
 
-void TestSprite::Resize(int width, int height)
+void TestFilter::Resize(int width, int height)
 {
 	glue::RenderContext::Instance()->OnSize(width, height);
 }
 
-void TestSprite::Draw() const
+void TestFilter::Draw() const
 {
 // 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 // 		glue::Sprite* spr = m_sprites[i];
@@ -55,33 +55,33 @@ void TestSprite::Draw() const
 // 	}
 
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-	sl_mgr->SetShader(sl::SPRITE2);
-	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
-	sl_shader->SetColor(0xffff00ff, 0);
+	sl_mgr->SetShader(sl::FILTER);
+	sl::FilterShader* sl_shader = static_cast<sl::FilterShader*>(sl_mgr->GetShader());
+	sl_shader->SetMode(sl::FM_GAUSSIAN_BLUR);
 	{
 		glue::Sprite* spr = m_sprites[0];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	sl_shader->SetColor(0xffffffff, 0);
+	sl_shader->SetMode(sl::FM_HEAT_HAZE);
 	{
 		glue::Sprite* spr = m_sprites[1];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	sl_shader->SetColor(0xffffff00, 0);
+	sl_shader->SetMode(sl::FM_SHOCK_WAVE);
 	{
 		glue::Sprite* spr = m_sprites[2];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	sl_shader->SetColorMap(0x000000ff, 0x00002288, 0x00ff0000);
+	sl_shader->SetMode(sl::FM_SWIRL);
 	{
 		glue::Sprite* spr = m_sprites[3];
 		sm_mat4 mt = spr->GetTransMatrix();
 		spr->GetSymbol().Draw(mt);	
 	}
-	sl_shader->SetColorMap(0x000000ff, 0x00880022, 0x00ff0000);
+	sl_shader->SetMode(sl::FM_BLUR);
 	{
 		glue::Sprite* spr = m_sprites[4];
 		sm_mat4 mt = spr->GetTransMatrix();
@@ -89,7 +89,7 @@ void TestSprite::Draw() const
 	}
 }
 
-void TestSprite::Update()
+void TestFilter::Update()
 {
 }
 

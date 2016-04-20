@@ -212,7 +212,37 @@ compile(struct render *R, const char * source, int type) {
 	
 	GLuint shader = glCreateShader(type);
 
-	glShaderSource(shader, 1, &source, NULL);
+	const GLchar* sources[3] = {
+		// Define GLSL version
+#if defined(GL_ES_VERSION_2_0) || defined(__MACOSX)
+		"#version 100\n"
+#else
+		"#version 130\n"
+#endif
+		,
+		// GLES2 precision specifiers
+#if defined(GL_ES_VERSION_2_0) || defined(__MACOSX)
+		// Define default float precision for fragment shaders:
+		(type == GL_FRAGMENT_SHADER) ?
+		"#ifdef GL_FRAGMENT_PRECISION_HIGH\n"
+		"precision highp float;           \n"
+		"#else                            \n"
+		"precision mediump float;         \n"
+		"#endif                           \n"
+		: ""
+		// Note: OpenGL ES automatically defines this:
+		// #define GL_ES
+#else
+		// Ignore GLES 2 precision specifiers:
+		"#define lowp   \n"
+		"#define mediump\n"
+		"#define highp  \n"
+#endif
+		,
+		source
+	};
+
+	glShaderSource(shader, 3, sources, NULL);
 
 	glCompileShader(shader);
 	

@@ -67,9 +67,24 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 // 	else
 // 	{
 		sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-		sl_mgr->SetShader(sl::SPRITE2);
-		sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader(sl::SPRITE2));
-		sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
+		switch (sl_mgr->GetShaderType())
+		{
+		case sl::SPRITE2:
+			{
+				sl_mgr->SetShader(sl::SPRITE2);
+				sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
+				sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
+			}
+			break;
+		case sl::FILTER:
+			{
+				sl_mgr->SetShader(sl::FILTER);
+				sl::FilterShader* sl_shader = static_cast<sl::FilterShader*>(sl_mgr->GetShader());
+				sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
+			}
+			break;
+		}
+
 //	}
 }
 
