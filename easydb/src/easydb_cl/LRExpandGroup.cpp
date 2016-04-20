@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <ee/FileHelper.h>
+#include <ee/Vector.h>
 
 #include <fstream>
 
@@ -79,25 +80,34 @@ void LRExpandGroup::Expand(const Json::Value& src_val, Json::Value& dst_val)
 	int idx = 0;
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) {
-		LoadSprites(spr_val, sprites_val);
+		LoadSprites(spr_val, ee::Vector(0, 0), sprites_val);
 		spr_val = src_val["sprite"][idx++];
 	}
 
 	dst_val["sprite"] = sprites_val;
 }
 
-void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, Json::Value& dst_sprs_val)
+void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const ee::Vector& offset, Json::Value& dst_sprs_val)
 {
 	std::string filepath = src_spr_val["filepath"].asString();
 	if (filepath == "group") {
 		const Json::Value& gval = src_spr_val["group"];
+
+		float gx = src_spr_val["position"]["x"].asDouble(),
+			  gy = src_spr_val["position"]["y"].asDouble();
+		ee::Vector off_new(offset.x + gx, offset.y + gy);
+
 		assert(!gval.isNull());
 		for (int i = 0, n = gval.size(); i < n; ++i) {
-			LoadSprites(gval[i], dst_sprs_val);
+			LoadSprites(gval[i], off_new, dst_sprs_val);
 		}
 	} else {
 		int sz = dst_sprs_val.size();
+		float x = src_spr_val["position"]["x"].asDouble(),
+			  y = src_spr_val["position"]["y"].asDouble();
 		dst_sprs_val[sz] = src_spr_val;
+		dst_sprs_val[sz]["position"]["x"] = x + offset.x;
+		dst_sprs_val[sz]["position"]["y"] = y + offset.y;
 	}
 }
 

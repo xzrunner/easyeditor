@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+namespace ee { class Vector; }
+
 namespace edb
 {
 
@@ -30,7 +32,7 @@ public:
 private:
 	void Expand(const Json::Value& src_val, Json::Value& dst_val);
 
-	void LoadSprites(const Json::Value& src_spr_val, Json::Value& dst_sprs_val);
+	void LoadSprites(const Json::Value& src_spr_val, const ee::Vector& offset, Json::Value& dst_sprs_val);
 
 }; // LRExpandGroup
 
