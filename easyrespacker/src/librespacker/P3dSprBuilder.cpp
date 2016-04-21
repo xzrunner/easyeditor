@@ -50,10 +50,10 @@ void P3dSprBuilder::Create(const eparticle3d::Symbol* sym, const IPackNode* p3d)
 	PackP3dSpr* node = new PackP3dSpr;
 
 	node->p3d = p3d;
-	node->loop = true;
-	node->local = false;
+	node->loop = sym->IsLoop();
+	node->local = sym->IsLocal();
 	node->alone = false;
-	node->reuse = true;
+	node->reuse = false;
 	m_nodes.push_back(node);
 
 	m_export_set.LoadExport(sym, node);
