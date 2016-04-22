@@ -245,6 +245,11 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 				shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 			} else if (mgr->GetShaderType() == sl::SPRITE2) {
 				sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+				shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+					ee::color2int(trans.color.add, ee::PT_ABGR));
+				shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+					ee::color2int(trans.color.g, ee::PT_ABGR),
+					ee::color2int(trans.color.b, ee::PT_ABGR));
 				shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 			}
 		} 
