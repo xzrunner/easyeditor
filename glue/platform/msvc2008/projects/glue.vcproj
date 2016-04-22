@@ -152,22 +152,6 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\render\BlendMode.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\Camera.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\Camera.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\IShader.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\render\RenderContext.cpp"
 				>
 			</File>
@@ -183,63 +167,27 @@
 				RelativePath="..\..\..\src\render\ScreenCache.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\render\ShaderMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\render\ShaderMgr.h"
-				>
-			</File>
 			<Filter
-				Name="shader"
+				Name="camera"
 				>
 				<File
-					RelativePath="..\..\..\src\render\BlendShader.cpp"
+					RelativePath="..\..\..\src\render\Camera.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\render\BlendShader.h"
+					RelativePath="..\..\..\src\render\OrthoCamera.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\render\FilterShader.cpp"
+					RelativePath="..\..\..\src\render\OrthoCamera.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\render\FilterShader.h"
+					RelativePath="..\..\..\src\render\Pseudo3DCamera.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\render\LightingShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\LightingShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\ShapeShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\ShapeShader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\Sprite3Shader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\Sprite3Shader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\SpriteShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\render\SpriteShader.h"
+					RelativePath="..\..\..\src\render\Pseudo3DCamera.h"
 					>
 				</File>
 			</Filter>

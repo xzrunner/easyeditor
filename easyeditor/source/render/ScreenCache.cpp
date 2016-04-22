@@ -5,12 +5,12 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Camera.h"
-#include "ShaderContext.h"
 #include "RenderParams.h"
 
 #include <dtex_cs.h>
 #include <dtex_screen.h>
 #include <dtex_gl.h>
+#include <shaderlab.h>
 
 #include <gl/glew.h>
 
@@ -99,7 +99,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 		spr->GetSymbol().Draw(RenderParams(t));
 	}
 
-	ShaderContext::Flush();
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
 }
 
 void ScreenCache::Draw(const Camera* cam)

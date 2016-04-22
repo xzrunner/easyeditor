@@ -5,7 +5,6 @@
 #include "SliderCtrl.h"
 
 #include <ee/FileHelper.h>
-#include <ee/ShaderMgr.h>
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
 
@@ -48,10 +47,10 @@ Shader* FileIO::LoadShader(const std::string& filepath, ee::StageCanvas* canvas,
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	Shader* shader = LoadShader(dir, value, toolbar, is_2d);
 	if (is_2d) {
-		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::COUNT);
-//		shader_mgr->SetSpriteShader(static_cast<ee::SpriteShader*>(shader->GetShaderImpl()));
-		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
+// 		ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
+// 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::COUNT);
+// //		shader_mgr->SetSpriteShader(static_cast<ee::SpriteShader*>(shader->GetShaderImpl()));
+// 		ee::ShaderMgr::Instance()->SetShader(ee::ShaderMgr::SPRITE);
 	} else {
 		e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
 		shader_mgr->Null();

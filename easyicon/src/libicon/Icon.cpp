@@ -2,8 +2,8 @@
 
 #include <ee/Image.h>
 #include <ee/Math2D.h>
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
+
+#include <shaderlab.h>
 
 namespace eicon
 {
@@ -46,10 +46,10 @@ void Icon::Draw(const ee::Matrix& mt, float process) const
 		scr_coords[i] = ee::Math2D::TransVector(scr_coords[i], mt);
 	}
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	mgr->SetShader(ee::ShaderMgr::SPRITE);
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->Draw(scr_coords, tex_coords, texid);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->Draw(&scr_coords[0].x, &tex_coords[0].x, texid);
 }
 
 ee::Rect Icon::GetRegion(float process) const

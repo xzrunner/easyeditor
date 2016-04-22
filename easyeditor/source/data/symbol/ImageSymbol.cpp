@@ -3,8 +3,6 @@
 #include "Image.h"
 #include "Sprite.h"
 #include "ImageData.h"
-#include "Shader.h"
-#include "ShaderMgr.h"
 #include "EE_RVG.h"
 
 namespace ee

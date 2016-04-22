@@ -3,7 +3,6 @@
 #include "Shader.h"
 
 #include <ee/StringHelper.h>
-#include <ee/ShaderMgr.h>
 #include <ee/panel_msg.h>
 
 namespace eshader

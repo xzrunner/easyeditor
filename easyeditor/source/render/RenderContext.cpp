@@ -1,5 +1,8 @@
 #include "RenderContext.h"
-#include "ShaderMgr.h"
+#include "OrthoCamera.h"
+#include "CameraMgr.h"
+
+#include <shaderlab.h>
 
 namespace ee
 {
@@ -15,7 +18,8 @@ void RenderContext::SetModelView(const Vector& offset, float scale)
 	m_mod_offset = offset;
 	m_mod_scale = scale;
 
-	ShaderMgr::Instance()->SetModelView(offset, scale);
+	sl::SubjectMVP2::Instance()->NotifyModelview(offset.x, offset.y, scale, scale);
+//	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
 }
 
 void RenderContext::SetProjection(int width, int height)
@@ -23,7 +27,10 @@ void RenderContext::SetProjection(int width, int height)
 	m_proj_width = width;
 	m_proj_height = height;
 
-	ShaderMgr::Instance()->SetProjection(width, height);
+	sl::SubjectMVP2::Instance()->NotifyProjection(width, height);
+
+// 	m_p3d_cam->OnSize(width, height);
+// 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
 }
 
 bool RenderContext::GetModelView(Vector& offset, float& scale) const 
@@ -48,5 +55,20 @@ bool RenderContext::GetProjection(int& width, int& height) const
 	}
 }
 
+void RenderContext::OnBind()
+{
+	sl::SubjectMVP2::Instance()->NotifyModelview(m_mod_offset.x, m_mod_offset.y, m_mod_scale, m_mod_scale);
+	//	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
+
+	sl::SubjectMVP2::Instance()->NotifyProjection(m_proj_width, m_proj_height);
+
+	// 	m_p3d_cam->OnSize(width, height);
+	// 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
+
+	// update camera
+	OrthoCamera* cam2 = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::ORTHO));
+	cam2->SetPosition(m_mod_offset);
+	cam2->SetScale(1 / m_mod_scale);
+}
 
 }

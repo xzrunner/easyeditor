@@ -1,6 +1,8 @@
 #ifndef _TEST_MAIN_
 #define _TEST_MAIN_
 
+#include <shaderlab.h>
+
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 
@@ -9,24 +11,25 @@
 #include <iostream>
 
 #include "TestShape.h"
-#include "TestImage.h"
+#include "TestSprite.h"
 #include "TestMulti.h"
-#include "TestImage25.h"
-#include "TestLighting.h"
+#include "TestSprite25.h"
+#include "TestModel3.h"
+#include "TestFilter.h"
 
 //test::TestTask* task = new test::TestShape;
-//test::TestTask* task = new test::TestImage;
+//test::TestTask* task = new test::TestSprite;
 //test::TestTask* task = new test::TestMulti;
-//test::TestTask* task = new test::TestImage25;
-test::TestTask* task = new test::TestLighting;
+//test::TestTask* task = new test::TestSprite25;
+//test::TestTask* task = new test::TestModel3;
+test::TestTask* task = new test::TestFilter;
 
 void 
 display(void) {
-	glue::ShaderMgr* mgr = glue::ShaderMgr::Instance();
-
-	mgr->Clear();
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->GetContext()->Clear(0);
 	task->Draw();
-	mgr->Flush();
+	sl_mgr->GetShader()->Commit();
 
 	glFlush();
 }

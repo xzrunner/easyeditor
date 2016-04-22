@@ -13,7 +13,6 @@
 #include <easytexture.h>
 #include <easyicon.h>
 #include <easyshadow.h>
-#include <easysketch.h>
 #include <easytext.h>
 
 #include <ee/LibraryImagePage.h>
@@ -44,7 +43,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	AddPage(new eejoy2d::LibraryPage(nb));
 	AddPage(new eterrain2d::LibraryPage(nb));
 	AddPage(new eshadow::LibraryPage(nb));
-	AddPage(new esketch::LibraryPage(nb));
+//	AddPage(new esketch::LibraryPage(nb));
 }
 
 } // ecomplex

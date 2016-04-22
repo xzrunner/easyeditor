@@ -2,10 +2,11 @@
 #include "ShadowShader.h"
 
 #include <ee/JsonSerializer.h>
-#include <ee/ShaderMgr.h>
 #include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
 #include <ee/Math2D.h>
+
+#include <shaderlab.h>
 
 #include <assert.h>
 
@@ -50,9 +51,8 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 		InitShader();
 	}
 
-	ee::ShaderMgr* shader_mgr = ee::ShaderMgr::Instance();
-//	shader_mgr->SetShapeShader(m_shader_idx);
-	shader_mgr->SetShader(ee::ShaderMgr::SHAPE);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SHAPE2);
 
 //	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
 //	shader->SetAlpha(alpha);
@@ -65,7 +65,7 @@ void Shadow::Draw(const ee::Matrix& mt, float alpha) const
 // 	ee::RVG::Polyline(mt, m_outer_loop, ee::LIGHT_GREEN, true);
 
 //	shader_mgr->SetShapeShader(0);
-	shader_mgr->SetShader(ee::ShaderMgr::SHAPE);
+	mgr->SetShader(sl::SHAPE2);
 }
 
 void Shadow::BuildFace()
@@ -140,8 +140,8 @@ void Shadow::SetOuterColer(const ee::Colorf& col)
 
 void Shadow::InitShader()
 {
-	ShadowShader* shader = new ShadowShader;
-	shader->Load();
+// 	ShadowShader* shader = new ShadowShader;
+// 	shader->Load();
 //	m_shader_idx = ee::ShaderMgr::Instance()->AddShapeShader(shader);
 }
 

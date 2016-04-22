@@ -1,8 +1,8 @@
 #include "EE_RVG.h"
 #include "Vector.h"
+#include "Vector3D.h"
 #include "Color.h"
 #include "trans_color.h"
-#include "ShaderMgr.h"
 #include "CameraMgr.h"
 
 #include <rvg.h>
@@ -18,10 +18,13 @@ void RVG::Init()
 
 void RVG::Color(const Colorf& color)
 {
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		sl_shape_color(color2int(color, PT_ABGR));
+		sl::Shape2Shader* shader = static_cast<sl::Shape2Shader*>(mgr->GetShader(sl::SHAPE2));
+		shader->SetColor(color2int(color, PT_ABGR));
 	} else {
-		sl_shape3_color(color2int(color, PT_ABGR));
+		sl::Shape3Shader* shader = static_cast<sl::Shape3Shader*>(mgr->GetShader(sl::SHAPE3));
+		shader->SetColor(color2int(color, PT_ABGR));
 	}
 }
 
@@ -38,10 +41,10 @@ void RVG::LineWidth(float width)
 void RVG::Point(const Vector& vertex)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_point(vertex.x, vertex.y);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_point3(vertex.x, vertex.y, 0);
 	}
 }
@@ -49,12 +52,12 @@ void RVG::Point(const Vector& vertex)
 void RVG::Points(const std::vector<Vector>& vertices)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
 			rvg_point(vertices[i].x, vertices[i].y);
 		}
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
 			rvg_point3(vertices[i].x, vertices[i].y, 0);
 		}
@@ -66,10 +69,10 @@ void RVG::Line(const Vector& p0, const Vector& p1)
 	rvg_line_style(LS_DEFAULT);
 
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_line(p0.x, p0.y, p1.x, p1.y);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_line3(p0.x, p0.y, 0, p1.x, p1.y, 0);
 	}
 }
@@ -78,10 +81,10 @@ void RVG::DotLine(const Vector& p0, const Vector& p1)
 {
 	rvg_line_style(LS_DOT);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_line(p0.x, p0.y, p1.x, p1.y);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_line3(p0.x, p0.y, 0, p1.x, p1.y, 0);
 	}
 }
@@ -90,10 +93,10 @@ void RVG::DashLine(const Vector& p0, const Vector& p1)
 {
 	rvg_line_style(LS_DASH);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_line(p0.x, p0.y, p1.x, p1.y);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_line3(p0.x, p0.y, 0, p1.x, p1.y, 0);
 	}
 }
@@ -102,10 +105,10 @@ void RVG::DotDashLine(const Vector& p0, const Vector& p1)
 {
 	rvg_line_style(LS_DOT_DASH);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_line(p0.x, p0.y, p1.x, p1.y);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_line3(p0.x, p0.y, 0, p1.x, p1.y, 0);
 	}
 }
@@ -118,10 +121,10 @@ void RVG::Lines(const std::vector<Vector>& vertices)
 
 	rvg_line_style(LS_DEFAULT);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_lines(&vertices[0].x, vertices.size());
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		std::vector<vec3> vertices3;
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
 			vertices3.push_back(vec3(vertices[i].x, vertices[i].y, 0));
@@ -138,10 +141,10 @@ void RVG::Polyline(const std::vector<Vector>& vertices, bool loop)
 
 	rvg_line_style(LS_DEFAULT);
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_polyline(&vertices[0].x, vertices.size(), loop);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		std::vector<vec3> vertices3;
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
 			vertices3.push_back(vec3(vertices[i].x, vertices[i].y, 0));
@@ -155,10 +158,10 @@ void RVG::Triangles(const std::vector<Vector>& triangles)
 	if (triangles.size() < 3) return;
 
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_triangles(&triangles[0].x, triangles.size());
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		std::vector<vec3> triangles3;
 		for (int i = 0, n = triangles.size(); i < n; ++i) {
 			triangles3.push_back(vec3(triangles[i].x, triangles[i].y, 0));
@@ -177,10 +180,10 @@ void RVG::TriangleStrip(const std::vector<Vector>& triangles)
 	if (triangles.size() < 3) return;
 
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_triangle_strip(&triangles[0].x, triangles.size());
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		std::vector<vec3> triangles3;
 		for (int i = 0, n = triangles.size(); i < n; ++i) {
 			triangles3.push_back(vec3(triangles[i].x, triangles[i].y, 0));
@@ -197,10 +200,10 @@ void RVG::Rect(const Vector& center, float hw, float hh, bool filling)
 void RVG::Rect(const Vector& p0, const Vector& p1, bool filling)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_rect(p0.x, p0.y, p1.x, p1.y, filling);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_rect3(p0.x, p0.y, p1.x, p1.y, 0, filling);
 	}
 }
@@ -208,10 +211,10 @@ void RVG::Rect(const Vector& p0, const Vector& p1, bool filling)
 void RVG::Circle(const Vector& center, float radius, bool filling, int segments)
 {
 	if (ee::CameraMgr::Instance()->IsType(ee::CameraMgr::ORTHO)) {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE2);
 		rvg_circle(center.x, center.y, radius, filling, segments);
 	} else {
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SHAPE3);
+		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
 		rvg_circle3(center.x, center.y, 0, radius, filling, segments);
 	}
 }

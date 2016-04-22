@@ -3,8 +3,6 @@
 
 #include "Shader.h"
 
-#include <ee/SpriteShader.h>
-
 namespace eshader 
 {
 

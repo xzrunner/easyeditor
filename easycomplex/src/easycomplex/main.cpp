@@ -17,7 +17,6 @@
 #include <easyshape.h>
 #include <easyicon.h>
 #include <easyshadow.h>
-#include <easysketch.h>
 #include <easytext.h>
 
 IMPLEMENT_APP(MyApp)
@@ -59,9 +58,6 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(eshadow::FILE_TAG, &eshadow::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(eshadow::FILE_TAG, &eshadow::Sprite::Create);
-
-	ee::SymbolFactory::RegisterCreator(esketch::FILE_TAG, &esketch::Symbol::Create);
-	ee::SpriteFactory::Instance()->RegisterCreator(esketch::FILE_TAG, &esketch::Sprite::Create);
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);

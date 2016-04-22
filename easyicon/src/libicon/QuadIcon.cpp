@@ -2,8 +2,8 @@
 
 #include <ee/Math2D.h>
 #include <ee/Image.h>
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
+
+#include <shaderlab.h>
 
 namespace eicon
 {
@@ -58,10 +58,10 @@ void QuadIcon::Draw(const ee::Matrix& mt, float process) const
 		vertices[i] = ee::Math2D::TransVector(m_screen[i], mt);
 	}
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	mgr->SetShader(ee::ShaderMgr::SPRITE);
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->Draw(vertices, m_src, m_img->GetTexID());
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->Draw(&vertices[0].x, &m_src[0].x, m_img->GetTexID());
 }
 
 ee::Rect QuadIcon::GetRegion(float process) const

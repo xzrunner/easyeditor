@@ -3,7 +3,6 @@
 #include "TransToGif.h"
 #include "check_params.h"
 
-#include <ee/ShaderMgr.h>
 #include <ee/Snapshoot.h>
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>

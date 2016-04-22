@@ -6,9 +6,6 @@
 #include "dataset/ImageSymbol.h"
 
 #include "render/RenderContext.h"
-#include "render/ShaderMgr.h"
-#include "render/SpriteShader.h"
-#include "render/LightingShader.h"
 
 #include "utility/AssimpHelper.h"
 

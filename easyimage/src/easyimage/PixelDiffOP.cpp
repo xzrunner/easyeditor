@@ -5,7 +5,6 @@
 #include <ee/ImageSymbol.h>
 #include <ee/ImageSprite.h>
 #include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
 
 namespace eimage
 {

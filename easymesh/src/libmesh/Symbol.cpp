@@ -5,9 +5,10 @@
 #include "ShapeFactory.h"
 
 #include <ee/Image.h>
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
 #include <ee/RenderParams.h>
+#include <ee/trans_color.h>
+
+#include <shaderlab.h>
 
 namespace emesh
 {
@@ -69,10 +70,14 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		return;
 	}
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	mgr->SetShader(ee::ShaderMgr::SPRITE);
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(trans.color);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+		ee::color2int(trans.color.add, ee::PT_ABGR));
+	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+		ee::color2int(trans.color.g, ee::PT_ABGR),
+		ee::color2int(trans.color.b, ee::PT_ABGR));
 
 	m_shape->DrawTexture(trans);
 	if (!m_pause && spr) 

@@ -4,12 +4,13 @@
 #include <ee/Image.h>
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
-#include <ee/ShaderMgr.h>
 #include <ee/RenderColor.h>
 #include <ee/std_functor.h>
 #include <ee/JsonSerializer.h>
-#include <ee/SpriteShader.h>
 #include <ee/RenderParams.h>
+#include <ee/trans_color.h>
+
+#include <shaderlab.h>
 
 #include <set>
 #include <algorithm>
@@ -138,10 +139,14 @@ void Shape::DrawTexture(const ee::RenderParams& trans) const
 void Shape::DrawTexture(const ee::RenderParams& trans,
 						unsigned int texid) const
 {
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	mgr->SetShader(ee::ShaderMgr::SPRITE);
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(trans.color);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+		ee::color2int(trans.color.add, ee::PT_ABGR));
+	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+		ee::color2int(trans.color.g, ee::PT_ABGR),
+		ee::color2int(trans.color.b, ee::PT_ABGR));
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
@@ -158,7 +163,7 @@ void Shape::DrawTexture(const ee::RenderParams& trans,
 // 			ee::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
 // 				m_tex_filepath, m_texid);
 // 		} else {
-			shader->Draw(vertices, texcoords, m_texid);
+			shader->Draw(&vertices[0].x, &texcoords[0].x, m_texid);
 //		}
 	}
 }

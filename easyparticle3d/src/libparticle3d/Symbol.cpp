@@ -5,12 +5,12 @@
 #include "PSConfigMgr.h"
 #include "PS.h"
 
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
 #include <ee/RenderParams.h>
+#include <ee/trans_color.h>
 
 #include <ps_3d.h>
 #include <ps_3d_sprite.h>
+#include <shaderlab.h>
 
 #include <fstream>
 
@@ -72,9 +72,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		return;
 	}
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(trans.color);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+		ee::color2int(trans.color.add, ee::PT_ABGR));
+	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+		ee::color2int(trans.color.g, ee::PT_ABGR),
+		ee::color2int(trans.color.b, ee::PT_ABGR));
 
 	p3d_spr->Draw(trans.mt);
 }

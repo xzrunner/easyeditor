@@ -5,13 +5,14 @@
 #include "ExceptionDlg.h"
 #include "EditPanelImpl.h"
 #include "KeysState.h"
-#include "ShaderMgr.h"
-#include "ShaderContext.h"
 #include "RenderContext.h"
 #include "RenderContextStack.h"
 #include "subject_id.h"
 #include "GL.h"
 #include "panel_msg.h"
+#include "EE_ShaderLab.h"
+
+#include <shaderlab.h>
 
 namespace ee
 {
@@ -116,17 +117,17 @@ void StageCanvas::Init()
 {
 	SetCurrentCanvas();
 
-	// prepare 2d
-	// todo: move to child, for defferent init (such as 3d ?)
-	ShaderMgr::Instance();
-
 	if (glewInit() != GLEW_OK) {
 		exit(1);
 	}
 
+	// prepare 2d
+	// todo: move to child, for defferent init (such as 3d ?)
+	ShaderLab::Instance()->Init();
+
 	try {
-		ShaderContext::Reload();
-		ShaderContext::Reset();
+// 		ShaderContext::Reload();
+// 		ShaderContext::Reset();
 
 		glEnable(GL_TEXTURE_2D);
 	} catch (Exception& e) {
@@ -143,6 +144,8 @@ void StageCanvas::OnSize(wxSizeEvent& event)
  	m_width = size.GetWidth();
  	m_height = size.GetHeight();
 	OnSize(m_width, m_height);
+
+	sl::ShaderMgr::Instance()->GetContext()->ClearTextureCache();
 }
 
 void StageCanvas::OnPaint(wxPaintEvent& event)
@@ -155,8 +158,12 @@ void StageCanvas::OnPaint(wxPaintEvent& event)
 	m_dirty = false;
 	m_cam_dirty = false;
 
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
+
 	glFlush();
 	SwapBuffers();
+
+	ShaderLab::Instance()->Update(1 / 30.0f);
 
 //	wxPaintDC dc(this);
 //	OnDrawDC();

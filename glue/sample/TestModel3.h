@@ -1,5 +1,5 @@
-#ifndef _TEST_LIGHTING_H_
-#define _TEST_LIGHTING_H_
+#ifndef _TEST_MODEL3_H_
+#define _TEST_MODEL3_H_
 
 #include "TestTask.h"
 
@@ -10,7 +10,7 @@ struct m3_model;
 namespace test
 {
 
-class TestLighting : public TestTask
+class TestModel3 : public TestTask
 {
 public:
 	virtual void Init();
@@ -28,8 +28,8 @@ private:
 	float m_angle;
 	sm_vec3 m_pos;	
 
-}; // TestLighting
+}; // TestModel3
 
 }
 
-#endif // _TEST_LIGHTING_H_
+#endif // _TEST_MODEL3_H_

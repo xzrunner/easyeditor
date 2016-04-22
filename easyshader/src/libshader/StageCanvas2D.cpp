@@ -2,7 +2,6 @@
 #include "StagePanel2D.h"
 #include "Shader2D.h"
 
-#include <ee/ShaderMgr.h>
 #include <ee/EE_RVG.h>
 #include <ee/Sprite.h>
 #include <ee/SpriteRenderer.h>

@@ -1,12 +1,9 @@
 #include "ImageSymbol.h"
 #include "Texture.h"
-
-#include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
-#include "render/Camera.h"
-#include "render/SpriteShader.h"
-#include "render/Sprite3Shader.h"
+#include "math/Vector.h"
 
+#include <shaderlab.h>
 #include <sm.h>
 
 namespace glue
@@ -34,6 +31,7 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 		sm_vec2 v;
 		memcpy(&v, &positions[i], sizeof(v));
 		sm_vec2_mul(&v, &mt);
+		memcpy(&positions[i], &v, sizeof(v));
 	}
 
 	vec2 texcoords[4];
@@ -42,7 +40,6 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 	texcoords[2] = vec2(1, 1);
 	texcoords[3] = vec2(0, 1);
 
-	ShaderMgr* smgr = ShaderMgr::Instance();
 // 	if (smgr->IsBlendShader())
 // 	{
 // 		vec2 vertices_scr[4];
@@ -69,9 +66,25 @@ void ImageSymbol::Draw(const sm_mat4& mt) const
 // 	}
 // 	else
 // 	{
-		smgr->SetShader(ShaderMgr::SPRITE);
-		SpriteShader* shader = static_cast<SpriteShader*>(smgr->GetShader(ShaderMgr::SPRITE));
-		shader->Draw(positions, texcoords, texid);
+		sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+		switch (sl_mgr->GetShaderType())
+		{
+		case sl::SPRITE2:
+			{
+				sl_mgr->SetShader(sl::SPRITE2);
+				sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
+				sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
+			}
+			break;
+		case sl::FILTER:
+			{
+				sl_mgr->SetShader(sl::FILTER);
+				sl::FilterShader* sl_shader = static_cast<sl::FilterShader*>(sl_mgr->GetShader());
+				sl_shader->Draw(&positions[0].x, &texcoords[0].x, texid);
+			}
+			break;
+		}
+
 //	}
 }
 
@@ -93,10 +106,10 @@ void ImageSymbol::Draw25(const sm_mat4& mt) const
 	}
 
 	float z[4];
-	z[0] = -4;
-	z[1] = -2;
-	z[2] = -2;
-	z[3] = -4;
+	z[0] = 250;
+	z[1] = 0;
+	z[2] = 0;
+	z[3] = 250;
 
 	std::vector<vec3> positions3;
 	positions3.push_back(vec3(positions[0].x, positions[0].y, z[0]));
@@ -114,10 +127,10 @@ void ImageSymbol::Draw25(const sm_mat4& mt) const
 	texcoords.push_back(vec2(1, 1));
 	texcoords.push_back(vec2(0, 1));
 
-	ShaderMgr* smgr = ShaderMgr::Instance();
-	smgr->SetShader(ShaderMgr::SPRITE3);
-	Sprite3Shader* shader = static_cast<Sprite3Shader*>(smgr->GetShader(ShaderMgr::SPRITE3));
-	shader->Draw(positions3, texcoords, texid);
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->SetShader(sl::SPRITE3);
+	sl::Sprite3Shader* sl_shader = static_cast<sl::Sprite3Shader*>(sl_mgr->GetShader());
+	sl_shader->Draw(&positions3[0].x, &texcoords[0].x, texid);
 }
 
 void ImageSymbol::Load()

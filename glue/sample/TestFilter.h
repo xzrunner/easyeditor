@@ -1,16 +1,16 @@
-#ifndef _TEST_IMAGE25_H_
-#define _TEST_IMAGE25_H_
+#ifndef _TEST_FILTER_H_
+#define _TEST_FILTER_H_
 
 #include "TestTask.h"
 
-#include <vector>
-
 #include <glue.h>
+
+#include <vector>
 
 namespace test
 {
 
-class TestImage25 : public TestTask
+class TestFilter : public TestTask
 {
 public:
 	virtual void Init();
@@ -20,9 +20,9 @@ public:
 
 private:
 	std::vector<glue::Sprite*> m_sprites;
-	
-}; // TestImage25
+
+}; // TestFilter
 
 }
 
-#endif // _TEST_IMAGE25_H_
+#endif // _TEST_FILTER_H_

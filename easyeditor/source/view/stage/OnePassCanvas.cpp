@@ -1,6 +1,4 @@
 #include "OnePassCanvas.h"
-#include "ShaderContext.h"
-#include "ShaderMgrBase.h"
 
 namespace ee
 {
@@ -17,8 +15,6 @@ void OnePassCanvas::OnDrawWhole() const
  	glClear(GL_COLOR_BUFFER_BIT);
  
  	OnDrawSprites();
- 
-	ShaderContext::Flush();
 }
 
 }

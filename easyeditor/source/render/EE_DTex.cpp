@@ -1,15 +1,12 @@
 #include "EE_DTex.h"
 #include "Image.h"
 #include "RenderColor.h"
-#include "ShaderMgr.h"
 #include "RenderContextStack.h"
-#include "ShaderContext.h"
 #include "EE_ShaderLab.h"
 #include "EE_RVG.h"
-#include "SpriteShader.h"
-#include "ShapeShader.h"
 
 #include <dtex.h>
+#include <shaderlab.h>
 #include <render/render.h>
 
 #include <gl/glew.h>
@@ -28,10 +25,10 @@ static void _program(int n)
 	switch (n) 
 	{
 	case DTEX_PROGRAM_NULL:
-		ShaderMgr::Instance()->SetShader(ShaderMgr::COUNT);
+//		ShaderMgr::Instance()->SetShader(ShaderMgr::COUNT);
 		break;
 	case DTEX_PROGRAM_NORMAL:
-		ShaderMgr::Instance()->SetShader(ShaderMgr::SPRITE);
+		sl::ShaderMgr::Instance()->SetShader(sl::SPRITE2);
 		break;
 	default:
 		assert(0);
@@ -46,22 +43,22 @@ static void _blend(int mode)
 
 static void _set_texture(int id)
 {
-	ShaderMgr::Instance()->SetTexture(id);
+	sl::ShaderMgr::Instance()->GetContext()->SetTexture(id, 0);
 }
 
 static int _get_texture()
 {
-	return ShaderMgr::Instance()->GetTexID();
+	return 	sl::ShaderMgr::Instance()->GetContext()->GetTexture();
 }
 
 static void _set_target(int id)
 {
-	ShaderMgr::Instance()->SetFBO(id);
+	sl::ShaderMgr::Instance()->GetContext()->SetTarget(id);
 }
 
 static int _get_target()
 {
-	return ShaderMgr::Instance()->GetFboID();
+	return sl::ShaderMgr::Instance()->GetContext()->GetTarget();
 }
 
 static Vector LAST_OFFSET;
@@ -78,9 +75,11 @@ static void _draw_begin()
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(2, 2);
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->SetColor(RenderColor());
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl_mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
+	sl_shader->SetColor(0xffffffff, 0);
+	sl_shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
 
 // 	glViewport(0, 0, 2, 2);
 }
@@ -95,14 +94,14 @@ static void _draw(const float vb[16], int texid)
 		texcoords[i].y = vb[i * 4 + 3];
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->Draw(vertices, texcoords, texid);	
+	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
+	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
+	sl_shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 }
 
 static void _draw_end()
 {
-	ShaderMgr::Instance()->Flush();
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
 	RenderContextStack* ctx_stack = RenderContextStack::Instance();
 	ctx_stack->SetModelView(LAST_OFFSET, LAST_SCALE);
@@ -113,7 +112,10 @@ static void _draw_end()
 
 static void _draw_flush()
 {
-	ShaderMgr::Instance()->Flush();
+	sl::Shader* shader = sl::ShaderMgr::Instance()->GetShader();
+	if (shader) {
+		shader->Commit();
+	}
 }
 
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)
@@ -291,7 +293,7 @@ void DTex::OnSize(int w, int h)
 
 void DTex::DebugDraw() const
 {
-	ShaderContext::Flush();
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
 	dtexf_debug_draw();
 }
 

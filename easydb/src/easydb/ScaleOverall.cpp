@@ -3,7 +3,6 @@
 #include "ScaleOverall.h"
 #include "check_params.h"
 
-#include <ee/ShaderMgr.h>
 #include <ee/Snapshoot.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>

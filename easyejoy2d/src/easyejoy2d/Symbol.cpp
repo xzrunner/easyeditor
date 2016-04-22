@@ -5,8 +5,8 @@
 #include "EJShader.h"
 
 #include <ee/FileHelper.h>
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
+
+#include <shaderlab.h>
 
 #include <json/json.h>
 
@@ -120,15 +120,13 @@ void Symbol::DrawFromEJScreen() const
 	vertices[2].x = right, vertices[2].y = up;
 	vertices[3].x = right, vertices[3].y = down;
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 
 	// reset
-	mgr->SetTexture(0);
-	mgr->SetShader(ee::ShaderMgr::COUNT);
-
-	mgr->SetShader(ee::ShaderMgr::SPRITE);
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->Draw(vertices, texcoords, scr->GetTexID());
+	mgr->GetContext()->SetTexture(0, 0);
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
+	shader->Draw(&vertices[0].x, &texcoords[0].x, scr->GetTexID());
 }
 
 }

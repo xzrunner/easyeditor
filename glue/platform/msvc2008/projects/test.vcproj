@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\model3\src\model3;..\..\..\..\ds\src\ds;..\..\..\..\ejoy2d\src"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC;USED_IN_EDITOR"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -124,7 +124,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\src;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\freeglut\include&quot;;..\..\..\..\shaderlab\src\shaderlab;..\..\..\..\rapidvg\src\rapidvg;..\..\..\..\sm\src\sm;..\..\..\..\model3\src\model3;..\..\..\..\ds\src\ds;..\..\..\..\ejoy2d\src"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC;USED_IN_EDITOR"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;FREEGLUT_STATIC;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -186,27 +186,19 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\sample\TestImage.cpp"
+			RelativePath="..\..\..\sample\TestFilter.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\sample\TestImage.h"
+			RelativePath="..\..\..\sample\TestFilter.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\sample\TestImage25.cpp"
+			RelativePath="..\..\..\sample\TestModel3.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\sample\TestImage25.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\sample\TestLighting.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\sample\TestLighting.h"
+			RelativePath="..\..\..\sample\TestModel3.h"
 			>
 		</File>
 		<File
@@ -223,6 +215,22 @@
 		</File>
 		<File
 			RelativePath="..\..\..\sample\TestShape.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestSprite.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestSprite.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestSprite25.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\sample\TestSprite25.h"
 			>
 		</File>
 		<File
