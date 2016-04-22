@@ -252,6 +252,10 @@
 				Name="filter"
 				>
 				<File
+					RelativePath="..\..\..\src\shaderlab\shader\FilterMode.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\shaderlab\shader\FilterProgram.cpp"
 					>
 				</File>
@@ -347,6 +351,10 @@
 			<Filter
 				Name="blend"
 				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\BlendMode.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\shaderlab\shader\BlendShader.cpp"
 					>
@@ -513,10 +521,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\shaderlab\parser\Node.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\shaderlab\parser\NodeType.h"
 					>
 				</File>
 				<Filter
@@ -734,6 +738,22 @@
 							>
 						</File>
 					</Filter>
+				</Filter>
+				<Filter
+					Name="blend"
+					>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Blend.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\blend.frag"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\shaderlab\parser\Blend.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter

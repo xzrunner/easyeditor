@@ -201,9 +201,6 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 		sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
 		shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
 			ee::color2int(trans.color.add, ee::PT_ABGR));
-		shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
-			ee::color2int(trans.color.g, ee::PT_ABGR),
-			ee::color2int(trans.color.b, ee::PT_ABGR));
 
 		assert(spr);
 
