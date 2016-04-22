@@ -34,6 +34,13 @@ void ShaderLab::Init()
 	mgr->CreateShader(sl::MODEL3, new sl::Model3Shader(rc));
 }
 
+void ShaderLab::Update(float dt)
+{
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+	shader->UpdateTime(dt);
+}
+
 int ShaderLab::CreateTexture(const uint8_t* data, int width, int height, EE_TEXTURE_FORMAT format)
 {
 	TEXTURE_FORMAT ej_fmt;

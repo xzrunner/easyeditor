@@ -161,6 +161,8 @@ void StageCanvas::OnPaint(wxPaintEvent& event)
 	glFlush();
 	SwapBuffers();
 
+	ShaderLab::Instance()->Update(1 / 30.0f);
+
 //	wxPaintDC dc(this);
 //	OnDrawDC();
 }
