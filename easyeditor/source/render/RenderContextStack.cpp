@@ -1,7 +1,6 @@
 #include "RenderContextStack.h"
 #include "RenderContext.h"
 #include "ScreenCache.h"
-#include "ShaderMgr.h"
 #include "EE_DTex.h"
 #include "StageCanvas.h"
 
@@ -45,6 +44,8 @@ void RenderContextStack::Pop()
 
 	ctx.canvas->SetCurrentCanvas();
 
+	m_curr_ctx->OnBind();
+
 	int width, height;
 	ctx.render->GetProjection(width, height);
 	DTex::Instance()->OnSize(width, height);
@@ -55,8 +56,6 @@ void RenderContextStack::SetModelView(const Vector& offset, float scale)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetModelView(offset, scale);
-	} else {
-		ShaderMgr::Instance()->SetModelView(offset, scale);
 	}
 }
 
@@ -64,8 +63,6 @@ void RenderContextStack::SetProjection(int width, int height)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetProjection(width, height);
-	} else {
-		ShaderMgr::Instance()->SetProjection(width, height);
 	}
 }
 
@@ -87,6 +84,11 @@ bool RenderContextStack::GetProjection(int& width, int& height) const
 		m_curr_ctx->GetProjection(width, height);
 		return true;
 	}
+}
+
+void RenderContextStack::SetCurrCtx(RenderContext* ctx) 
+{ 
+	m_curr_ctx = ctx; 
 }
 
 }

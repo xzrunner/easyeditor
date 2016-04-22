@@ -1,5 +1,4 @@
 #include "FilterModes.h"
-#include "ShaderMgr.h"
 
 namespace ee
 {

@@ -1,10 +1,10 @@
 #include "Pseudo3DCamera.h"
-#include "ShaderMgr.h"
 #include "panel_msg.h"
 #include "ScreenCache.h"
 
 #include <sm.h>
 #include <c25_camera.h>
+#include <shaderlab.h>
 
 #include <wx/log.h>
 
@@ -80,7 +80,8 @@ Vector Pseudo3DCamera::TransPosProjectToScreen(const vec3& proj, int width, int 
 void Pseudo3DCamera::UpdateModelView() const
 {
 	float angle = c25_cam_get_angle(m_cam);
-	ShaderMgr::Instance()->SetModelView();
+
+	sl::SubjectMVP3::Instance()->NotifyModelview(GetModelViewMat());
 }
 
 float Pseudo3DCamera::GetScale() const

@@ -11,7 +11,6 @@
 #include <ee/Config.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/SpriteRenderer.h>
-#include <ee/ShaderMgr.h>
 #include <ee/EE_GTxt.h>
 #include <ee/SettingData.h>
 #include <ee/Camera.h>

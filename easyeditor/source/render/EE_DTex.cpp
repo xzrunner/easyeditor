@@ -79,7 +79,7 @@ static void _draw_begin()
 	sl_mgr->SetShader(sl::SPRITE2);
 	sl::Sprite2Shader* sl_shader = static_cast<sl::Sprite2Shader*>(sl_mgr->GetShader());
 	sl_shader->SetColor(0xffffffff, 0);
-	sl_shader->SetColorMap(0xff0000ff, 0x00ff00ff, 0x0000ffff);
+	sl_shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
 
 // 	glViewport(0, 0, 2, 2);
 }
@@ -112,7 +112,10 @@ static void _draw_end()
 
 static void _draw_flush()
 {
-	sl::ShaderMgr::Instance()->GetShader()->Commit();
+	sl::Shader* shader = sl::ShaderMgr::Instance()->GetShader();
+	if (shader) {
+		shader->Commit();
+	}
 }
 
 #define IS_POT(x) ((x) > 0 && ((x) & ((x) -1)) == 0)

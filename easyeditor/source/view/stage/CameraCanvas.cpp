@@ -1,6 +1,5 @@
 #include "CameraCanvas.h"
 #include "Camera.h"
-#include "ShaderMgr.h"
 #include "GL.h"
 #include "RenderContextStack.h"
 #include "CameraMgr.h"

@@ -4,11 +4,11 @@
 #include "FileIO.h"
 #include "PSConfigMgr.h"
 
-#include <ps_2d.h>
-
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
 #include <ee/RenderParams.h>
+#include <ee/trans_color.h>
+
+#include <ps_2d.h>
+#include <shaderlab.h>
 
 namespace eparticle2d
 {
@@ -47,9 +47,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 	Sprite* p2d_spr = const_cast<Sprite*>(static_cast<const Sprite*>(spr));
 	p2d_spr->SetMatrix(trans.mt);
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
-	shader->SetColor(trans.color);
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+		ee::color2int(trans.color.add, ee::PT_ABGR));
+	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+		ee::color2int(trans.color.g, ee::PT_ABGR),
+		ee::color2int(trans.color.b, ee::PT_ABGR));
 
 	p2d_spr->Draw(trans.mt);		
 }

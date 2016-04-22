@@ -1,7 +1,6 @@
 #include <gl/glew.h>
 
 #include "SpriteBlend.h"
-#include "ShaderMgr.h"
 #include "SpriteRenderer.h"
 #include "ScreenCache.h"
 #include "RenderContextStack.h"
@@ -9,11 +8,10 @@
 #include "ImageSymbol.h"
 #include "GL.h"
 #include "Math2D.h"
-#include "BlendShader.h"
 #include "EE_ShaderLab.h"
-#include "SpriteShader.h"
 
 #include <dtex_facade.h>
+#include <shaderlab.h>
 
 #include <assert.h>
 
@@ -38,7 +36,7 @@ void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt) const
 {
 	assert(spr->rp->shader.blend != BM_NULL);
 
-	ShaderMgr::Instance()->Flush();
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
 	RenderContextStack* rc = RenderContextStack::Instance();
 
@@ -65,22 +63,21 @@ void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt) const
 
 void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt) const
 {
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
 
 	dtexf_c1_bind();
 	dtexf_c1_clear(0, -2, 2, 0);
 
-	mgr->SetShader(ShaderMgr::BLEND);
+	mgr->SetShader(sl::BLEND);
 	BlendMode mode = spr->rp->shader.blend;
-	shader->SetMode(BlendModes::Instance()->GetNameENFromMode(mode));
+	shader->SetMode(mode);
 
 	const_cast<Sprite*>(spr)->rp->shader.blend = BM_NULL;
 	SpriteRenderer::Instance()->Draw(spr, spr, RenderParams(mt), false);
 	const_cast<Sprite*>(spr)->rp->shader.blend = mode;
 
-	mgr->Commit();
-	ShaderLab::Instance()->Flush();
+	shader->Commit();
 
 	dtexf_c1_unbind();
 }
@@ -110,11 +107,12 @@ void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const
 		texcoords[i].y = texcoords[i].y / edge + 0.5f;
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	mgr->SetShader(ShaderMgr::SPRITE);
-	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->SetColor(RenderColor());
-	shader->Draw(vertices, texcoords, dtexf_c1_get_texture_id());
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	mgr->SetShader(sl::SPRITE2);
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+	shader->SetColor(0xffffffff, 0);
+	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
+	shader->Draw(&vertices[0].x, &texcoords[0].x, dtexf_c1_get_texture_id());
 }
 
 }

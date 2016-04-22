@@ -1,8 +1,6 @@
 #include "Shader2D.h"
 #include "Uniform.h"
 
-#include <ee/ShaderMgr.h>
-
 namespace eshader
 {
 

@@ -86,7 +86,7 @@ render_decoration(const Matrix& mat, float x, float y, float w, float h, struct 
 	}
 
 	sl::ShaderMgr* sl_mgr = sl::ShaderMgr::Instance();
-	sl_mgr->SetShader(sl::SHAPE);
+	sl_mgr->SetShader(sl::SHAPE2);
 	sl::Shape2Shader* sl_shader = static_cast<sl::Shape2Shader*>(sl_mgr->GetShader());
 	sl_shader->SetColor(d->color);
 

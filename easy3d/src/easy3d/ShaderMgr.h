@@ -1,7 +1,6 @@
 #ifndef _EASY3D_SHADER_MGR_H_
 #define _EASY3D_SHADER_MGR_H_
 
-#include <ee/ShaderMgrBase.h>
 #include <ee/Matrix3D.h>
 #include <ee/Color.h>
 

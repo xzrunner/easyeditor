@@ -5,13 +5,14 @@
 #include "ExceptionDlg.h"
 #include "EditPanelImpl.h"
 #include "KeysState.h"
-#include "ShaderMgr.h"
-#include "ShaderContext.h"
 #include "RenderContext.h"
 #include "RenderContextStack.h"
 #include "subject_id.h"
 #include "GL.h"
 #include "panel_msg.h"
+#include "EE_ShaderLab.h"
+
+#include <shaderlab.h>
 
 namespace ee
 {
@@ -116,17 +117,17 @@ void StageCanvas::Init()
 {
 	SetCurrentCanvas();
 
-	// prepare 2d
-	// todo: move to child, for defferent init (such as 3d ?)
-	ShaderMgr::Instance();
-
 	if (glewInit() != GLEW_OK) {
 		exit(1);
 	}
 
+	// prepare 2d
+	// todo: move to child, for defferent init (such as 3d ?)
+	ShaderLab::Instance()->Init();
+
 	try {
-		ShaderContext::Reload();
-		ShaderContext::Reset();
+// 		ShaderContext::Reload();
+// 		ShaderContext::Reset();
 
 		glEnable(GL_TEXTURE_2D);
 	} catch (Exception& e) {
@@ -154,6 +155,8 @@ void StageCanvas::OnPaint(wxPaintEvent& event)
 	OnDrawWhole();
 	m_dirty = false;
 	m_cam_dirty = false;
+
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
 	glFlush();
 	SwapBuffers();

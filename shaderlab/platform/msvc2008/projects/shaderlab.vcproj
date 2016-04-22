@@ -347,6 +347,14 @@
 			<Filter
 				Name="blend"
 				>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\BlendShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\shaderlab\shader\BlendShader.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="model3"
@@ -422,6 +430,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\shaderlab\utility\StackAllocator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\shaderlab\utility\typedef.h"
 				>
 			</File>
 		</Filter>

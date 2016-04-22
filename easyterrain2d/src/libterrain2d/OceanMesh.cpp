@@ -4,9 +4,10 @@
 
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
-#include <ee/ShaderMgr.h>
-#include <ee/SpriteShader.h>
 #include <ee/ImageSymbol.h>
+#include <ee/trans_color.h>
+
+#include <shaderlab.h>
 
 namespace eterrain2d
 {
@@ -114,22 +115,20 @@ void OceanMesh::Update(float dt)
 
 void OceanMesh::Draw(const ee::RenderParams& trans, bool draw_tris) const
 {
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
-	ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+	shader->SetColorMap(0x000000ff, 0x0000ff00, 0x00ff0000);
 	if (m_blend_open && m_image1) {
-		ee::RenderColor color;
-		color.multi = ee::Colorf(1, 1, 1, m_blend_base);
-		shader->SetColor(color);
+		shader->SetColor(ee::color2int(ee::Colorf(1, 1, 1, m_blend_base), ee::PT_ABGR), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(trans, m_image0->GetTexID());
 		}
-		color.multi = ee::Colorf(1, 1, 1, 1 - m_blend_base);
-		shader->SetColor(color);
+		shader->SetColor(ee::color2int(ee::Colorf(1, 1, 1, 1 - m_blend_base), ee::PT_ABGR), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(trans, m_image1->GetTexID());
 		}
 	} else {
-		shader->SetColor(ee::RenderColor());
+		shader->SetColor(0xffffffff, 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
 			m_grids[i]->DrawTexture(trans);
 		}

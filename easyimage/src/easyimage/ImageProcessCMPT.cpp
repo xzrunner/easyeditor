@@ -4,7 +4,6 @@
 
 #include <easyimage.h>
 
-#include <ee/ShaderMgr.h>
 #include <ee/Exception.h>
 #include <ee/ExceptionDlg.h>
 #include <ee/panel_msg.h>

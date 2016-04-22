@@ -22,7 +22,7 @@ public:
 	bool GetModelView(Vector& offset, float& scale) const;
 	bool GetProjection(int& width, int& height) const;
 
-	void SetCurrCtx(RenderContext* ctx) { m_curr_ctx = ctx; }
+	void SetCurrCtx(RenderContext* ctx);
 
 	static RenderContextStack* Instance();
 

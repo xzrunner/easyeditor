@@ -14,9 +14,6 @@
 #include <ee/CameraMgr.h>
 #include <ee/cfg_const.h>
 
-// debug
-#include <ee/ShaderMgr.h>
-
 #include <easyanim.h>
 #include <easytext.h>
 

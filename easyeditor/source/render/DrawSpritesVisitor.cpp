@@ -3,7 +3,6 @@
 #include "Sprite.h"
 #include "Math2D.h"
 #include "SettingData.h"
-#include "ShaderMgr.h"
 #include "Config.h"
 #include "EE_GTxt.h"
 

@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_SINGLETON_H_
 #define _EASYEDITOR_SINGLETON_H_
 
+#include <stddef.h>
+
 namespace ee
 {
 

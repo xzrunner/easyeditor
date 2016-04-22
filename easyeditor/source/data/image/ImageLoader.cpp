@@ -5,7 +5,6 @@
 #include "Exception.h"
 #include "LibpngAdapter.h"
 #include "PPMAdapter.h"
-#include "ShaderMgr.h"
 #include "EE_ShaderLab.h"
 
 #include <dtex_pvr.h>

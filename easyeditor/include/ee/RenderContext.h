@@ -17,6 +17,8 @@ public:
 	bool GetModelView(Vector& offset, float& scale) const;
 	bool GetProjection(int& width, int& height) const;
 
+	void OnBind();
+
 private:
 	Vector m_mod_offset;
 	float m_mod_scale;

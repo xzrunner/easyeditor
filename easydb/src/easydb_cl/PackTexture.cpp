@@ -6,7 +6,6 @@
 #include <ee/FileHelper.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
-#include <ee/ShaderMgr.h>
 
 #include <easytexpacker.h>
 

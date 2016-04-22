@@ -7,12 +7,12 @@
 #include "BoundingBox.h"
 #include "EE_RVG.h"
 #include "color_config.h"
-#include "ShaderMgr.h"
-#include "FilterShader.h"
 #include "CameraMgr.h"
 #include "Camera.h"
 #include "Config.h"
 #include "SettingData.h"
+
+#include <shaderlab.h>
 
 namespace ee
 {
@@ -75,7 +75,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		}
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	if (blend != BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") {
@@ -83,17 +83,17 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		}
 	} else if (filter != FM_NULL) {
 		if (set_shader) {
-			mgr->SetShader(ShaderMgr::FILTER);
+			mgr->SetShader(sl::FILTER);
 		}
-		FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
-		shader->SetMode(FilterModes::Instance()->GetNameENFromMode(filter));
+		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+		shader->SetMode(sl::FILTER_MODE(filter));
 		RenderParams t = trans;
 		t.shader.filter = filter;
 		t.camera = ct;
 		DrawImpl(spr, root, t);
 	} else {
 		if (set_shader) {
-			mgr->SetShader(ShaderMgr::SPRITE);
+			mgr->SetShader(sl::SPRITE2);
 		}
 		RenderParams t = trans;
 		t.camera = ct;

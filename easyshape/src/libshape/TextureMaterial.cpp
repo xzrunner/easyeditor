@@ -2,14 +2,13 @@
 
 #include <ee/ImageSymbol.h>
 #include <ee/FileHelper.h>
-#include <ee/ShaderMgr.h>
 #include <ee/Math2D.h>
 #include <ee/Triangulation.h>
-#include <ee/SpriteShader.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
 #include <ee/Pseudo3DCamera.h>
-#include <ee/Sprite3Shader.h>
+
+#include <shaderlab.h>
 
 namespace eshape
 {
@@ -52,12 +51,12 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) c
 	assert(m_tris.size() == m_tris_texcoord.size()
 		&& m_tris.size() % 3 == 0);
 
-	ee::ShaderMgr* mgr = ee::ShaderMgr::Instance();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	const ee::Camera* cam = ee::CameraMgr::Instance()->GetCamera();
 	if (cam->Type() == "ortho") 
 	{
-		mgr->SetShader(ee::ShaderMgr::SPRITE);
-		ee::SpriteShader* shader = static_cast<ee::SpriteShader*>(mgr->GetShader(ee::ShaderMgr::SPRITE));
+		mgr->SetShader(sl::SPRITE2);
+		sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
 		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 			ee::Vector vertices[4], texcoords[4];
 			for (int j = 0; j < 3; ++j) {
@@ -71,15 +70,15 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) c
 			// 			ee::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
 			// 				m_image->GetFilepath(), m_image->GetTexID());
 			// 		} else {
-			shader->Draw(vertices, texcoords, m_image->GetTexID());
+			shader->Draw(&vertices[0].x, &texcoords[0].x, m_image->GetTexID());
 			//		}
 		}
 	}
 	else
 	{
 		const ee::Pseudo3DCamera* pcam = static_cast<const ee::Pseudo3DCamera*>(cam);
-		mgr->SetShader(ee::ShaderMgr::SPRITE3);
-		ee::Sprite3Shader* shader = static_cast<ee::Sprite3Shader*>(mgr->GetShader(ee::ShaderMgr::SPRITE3));
+		mgr->SetShader(sl::SPRITE3);
+		sl::Sprite3Shader* shader = static_cast<sl::Sprite3Shader*>(mgr->GetShader(sl::SPRITE3));
 		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 			std::vector<ee::vec3> vertices; 
 			vertices.resize(3);
@@ -90,7 +89,7 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) c
 				vertices[j] = ee::vec3(v.x, v.y, 0);
 				texcoords[j] = m_tris_texcoord[i+j];
 			}
-			shader->Draw(vertices, texcoords, m_image->GetTexID());
+			shader->Draw(&vertices[0].x, &texcoords[0].x, m_image->GetTexID());
 		}
 	}
 }

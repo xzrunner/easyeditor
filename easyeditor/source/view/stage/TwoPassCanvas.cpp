@@ -3,15 +3,12 @@
 #include "TwoPassCanvas.h"
 #include "Config.h"
 #include "color_config.h"
-#include "ShaderMgr.h"
-#include "SpriteShader.h"
 #include "SpriteRenderer.h"
-#include "ShaderContext.h"
 #include "EE_DTex.h"
 #include "EE_SP.h"
 #include "ScreenCache.h"
 #include "Camera.h"
-#include "BlendShader.h"
+#include "trans_color.h"
 
 #include <shaderlab.h>
 
@@ -36,8 +33,8 @@ void TwoPassCanvas::OnSize(int w, int h)
 	}
 	ScreenCache::Instance()->SetSize(w, h);
 
-	sl_blend_on_size(w, h);
-	sl_filter_on_size(w, h);
+	sl::ShaderMgr::Instance()->GetShader(sl::FILTER)->BindTexture();
+	sl::ShaderMgr::Instance()->GetShader(sl::BLEND)->BindTexture();
 }
 
 static void
@@ -46,10 +43,13 @@ _before_draw(void* ud) {
 	RenderColor color;
 	color.multi = stype->multi_col;
 	color.add = stype->add_col;
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-	shader->SetColor(color);
-}
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+	shader->SetColor(ee::color2int(color.multi, ee::PT_ABGR),
+		ee::color2int(color.add, ee::PT_ABGR));
+	shader->SetColorMap(ee::color2int(color.r, ee::PT_ABGR),
+		ee::color2int(color.g, ee::PT_ABGR),
+		ee::color2int(color.b, ee::PT_ABGR));}
 
 #ifdef OPEN_SCREEN_CACHE
 

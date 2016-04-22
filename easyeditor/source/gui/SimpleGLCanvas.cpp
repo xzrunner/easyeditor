@@ -1,5 +1,4 @@
 #include "SimpleGLCanvas.h"
-#include "ShaderMgr.h"
 
 #include <wx/dcclient.h>
 

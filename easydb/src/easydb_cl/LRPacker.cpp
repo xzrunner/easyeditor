@@ -13,7 +13,6 @@
 
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
-#include <ee/ShaderMgr.h>
 #include <ee/Config.h>
 
 #include <glfw.h>

@@ -1,5 +1,4 @@
 #include "FBO.h"
-#include "ShaderMgr.h"
 #include "Symbol.h"
 #include "Shape.h"
 #include "Exception.h"
@@ -8,6 +7,8 @@
 #include "RenderContextStack.h"
 #include "GL.h"
 #include "EE_ShaderLab.h"
+
+#include <shaderlab.h>
 
 #include <gl/glew.h>
 
@@ -69,7 +70,7 @@ void FBO::ReadPixels(unsigned char* pixels, int width, int height) const
 {
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 	glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, sl::ShaderMgr::Instance()->GetContext()->GetTarget());
 }
 
 void FBO::CreateFBO(int w, int h)
@@ -98,7 +99,7 @@ void FBO::CreateFBO(int w, int h)
 // 	mgr->SetTexture(0);
 // 	mgr->SetFBO(0);
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, sl::ShaderMgr::Instance()->GetContext()->GetTarget());
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -153,10 +154,10 @@ int FBO::CheckFramebufferStatus(std::string& msg) const
 
 void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 {
-	ShaderMgr* mgr = ShaderMgr::Instance();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
-	mgr->SetFBO(m_fbo);
-	mgr->SetShader(ShaderMgr::SPRITE);
+	mgr->GetContext()->SetTarget(m_fbo);
+	mgr->SetShader(sl::SPRITE2);
 
 	if (whitebg) {
 		glClearColor(1, 1, 1, 1);
@@ -194,13 +195,11 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	SpriteRenderer::Instance()->Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-	mgr->Commit();
-
-	ShaderLab::Instance()->Flush();
+	mgr->GetShader()->Commit();
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-	mgr->SetFBO(0);
-	mgr->SetTexture(0);
+	mgr->GetContext()->SetTarget(0);
+	mgr->GetContext()->SetTexture(0, 0);
 
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
@@ -212,10 +211,10 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height, 
 				  float dx, float dy, float scale)
 {
-	ShaderMgr* mgr = ShaderMgr::Instance();
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	glBindFramebufferEXT(GL_FRAMEBUFFER, m_fbo);
-	mgr->SetFBO(m_fbo);
-	mgr->SetShader(ShaderMgr::SPRITE);
+	mgr->GetContext()->SetTarget(m_fbo);
+	mgr->SetShader(sl::SPRITE2);
 
 	if (clear) {
 		glClearColor(0, 0, 0, 0);
@@ -247,16 +246,12 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	SpriteRenderer::Instance()->Draw(sprite, NULL, RenderParams(mt), false);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-
-	
-
-	mgr->Commit();
-	ShaderLab::Instance()->Flush();
+	mgr->GetShader()->Commit();
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
 
-	mgr->SetFBO(0);
-	mgr->SetTexture(0);
+	mgr->GetContext()->SetTarget(0);
+	mgr->GetContext()->SetTexture(0, 0);
 
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);
@@ -289,7 +284,6 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 		has_context = false;
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
 	ctx_stack->SetModelView(Vector(0, 0), 1);
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
@@ -301,7 +295,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
-	mgr->Commit();
+	sl::ShaderMgr::Instance()->GetShader()->Commit();
 
 	if (has_context) {
 		ctx_stack->SetModelView(last_offset, last_scale);

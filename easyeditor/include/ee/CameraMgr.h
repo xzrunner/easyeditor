@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_CAMERA_MGR_H_
 #define _EASYEDITOR_CAMERA_MGR_H_
 
+#include "singleton.h"
+
 namespace ee
 {
 
@@ -13,26 +15,22 @@ public:
 	{
 		ORTHO = 0,
 		PSEUDO3D,
+
+		MAX_COUNT,
 	};
 
 public:
-	static CameraMgr* Instance();
-
 	void SetCamera(Type t);
 	Camera* GetCamera() const;
+	Camera* GetCamera(Type t) const;
 
 	bool IsType(Type t) const;
 
 private:
-	CameraMgr();
-	~CameraMgr();
+	Camera* m_cameras[MAX_COUNT];
+	Type m_curr_cam;
 
-private:
-	static CameraMgr* m_instance;
-
-private:
-	Type m_curr_type;
-	Camera* m_curr;
+	SINGLETON_DECLARATION(CameraMgr)
 
 }; // CameraMgr
 

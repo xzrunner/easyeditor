@@ -6,11 +6,11 @@
 #include "SpriteShader.vert"
 #include "SpriteShader.frag"
 
-#include <ee/ShaderMgr.h>
 #include <ee/Exception.h>
 
 #include <ejoy2d.h>
 #include <dtex.h>
+#include <shaderlab.h>
 
 #include <assert.h>
 
@@ -73,7 +73,7 @@ void EJScreen::Bind()
 
 void EJScreen::UnBind()
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ee::ShaderMgr::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, sl::ShaderMgr::Instance()->GetContext()->GetTarget());
 
 //	dtex_shader_target(ee::ShaderMgr::Instance()->GetFboID());
 
@@ -150,7 +150,7 @@ void EJScreen::CreateRes()
 		throw ee::Exception("Create FBO error: %d", status);
 	}
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ee::ShaderMgr::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, sl::ShaderMgr::Instance()->GetContext()->GetTarget());
 
 	m_fbo = fbo_id;
 }

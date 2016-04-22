@@ -17,7 +17,6 @@
 #include "FileHelper.h"
 #include "Sprite.h"
 #include "Math2D.h"
-#include "ShaderMgr.h"
 #include "SpriteRenderer.h"
 #include "ScreenCache.h"
 #include "Camera.h"
@@ -25,11 +24,10 @@
 #include "Pseudo3DCamera.h"
 #include "ImageClip.h"
 #include "ImageTrim.h"
-#include "SpriteShader.h"
-#include "FilterShader.h"
-#include "BlendShader.h"
-#include "Sprite3Shader.h"
 #include "RenderParams.h"
+#include "trans_color.h"
+
+#include <shaderlab.h>
 
 namespace ee
 {
@@ -197,11 +195,15 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 		texcoords[3].Set(txmin, tymax);
 	}
 
-	ShaderMgr* mgr = ShaderMgr::Instance();
-	if (mgr->GetShader() == ShaderMgr::BLEND) 
+	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
+	if (mgr->GetShaderType() == sl::BLEND) 
 	{
-		BlendShader* shader = static_cast<BlendShader*>(mgr->GetShader(ShaderMgr::BLEND));
-		shader->SetColor(trans.color);
+		sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
+		shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+			ee::color2int(trans.color.add, ee::PT_ABGR));
+		shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+			ee::color2int(trans.color.g, ee::PT_ABGR),
+			ee::color2int(trans.color.b, ee::PT_ABGR));
 
 		assert(spr);
 
@@ -232,25 +234,26 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 			tex_coords_base[i].x /= w;
 			tex_coords_base[i].y /= h;
 		}
-		shader->Draw(vertices, texcoords, tex_coords_base, texid, ScreenCache::Instance()->GetTexID());
+		shader->Draw(&vertices[0].x, &texcoords[0].x, &tex_coords_base[0].x, texid, ScreenCache::Instance()->GetTexID());
 	}
-	else 
+	else
 	{
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") 
 		{
-			SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-			shader->SetColor(trans.color);
-			if (mgr->GetShader() == ShaderMgr::FILTER) {
-				FilterShader* shader = static_cast<FilterShader*>(mgr->GetShader(ShaderMgr::FILTER));
-				shader->Draw(vertices, texcoords, texid);
-			} else if (mgr->GetShader() == ShaderMgr::SPRITE) {
-				SpriteShader* shader = static_cast<SpriteShader*>(mgr->GetShader(ShaderMgr::SPRITE));
-				shader->Draw(vertices, texcoords, texid);
+// 			sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+// 			shader->SetColor(trans.color);
+			if (mgr->GetShaderType() == sl::FILTER) {
+				sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
+				shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
+			} else if (mgr->GetShaderType() == sl::SPRITE2) {
+				sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader(sl::SPRITE2));
+				shader->Draw(&vertices[0].x, &texcoords[0].x, texid);
 			}
 		} 
 		else
 		{
+			assert(mgr->GetShaderType() == sl::SPRITE3);
 			const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
 			float z[4];
 			trans.camera.CalculateZ(pcam, vertices, z);
@@ -271,10 +274,14 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 			_texcoords.push_back(texcoords[2]);
 			_texcoords.push_back(texcoords[3]);
 
-			mgr->SetShader(ShaderMgr::SPRITE3);
-			Sprite3Shader* shader = static_cast<Sprite3Shader*>(mgr->GetShader(ShaderMgr::SPRITE3));
-			shader->SetColor(trans.color);
-			shader->Draw(_vertices, _texcoords, texid);
+			mgr->SetShader(sl::SPRITE3);
+			sl::Sprite3Shader* shader = static_cast<sl::Sprite3Shader*>(mgr->GetShader(sl::SPRITE3));
+			shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
+				ee::color2int(trans.color.add, ee::PT_ABGR));
+			shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
+				ee::color2int(trans.color.g, ee::PT_ABGR),
+				ee::color2int(trans.color.b, ee::PT_ABGR));
+			shader->Draw(&_vertices[0].x, &_texcoords[0].x, texid);
 		}
 	}
 }
