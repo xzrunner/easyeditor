@@ -1164,3 +1164,8 @@ render_query_tex_glid(struct render *R, int id) {
 	struct texture* tex = (struct texture *)array_ref(&R->texture, id);
 	return tex ? tex->glid : 0;
 }
+
+void 
+render_clear_texture_cache(struct render* R) {
+	memset(R->last.texture, 0, sizeof(R->last.texture));
+}

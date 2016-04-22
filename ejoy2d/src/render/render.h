@@ -168,6 +168,8 @@ void render_draw_arrays(struct render *R, enum DRAW_MODE mode, int fromidx, int 
 int render_query_target();
 int render_query_tex_glid(struct render *R, int tex);
 
+void render_clear_texture_cache(struct render* R);
+
 #endif
 
 #ifdef __cplusplus

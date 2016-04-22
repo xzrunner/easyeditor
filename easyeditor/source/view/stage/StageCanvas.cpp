@@ -144,6 +144,8 @@ void StageCanvas::OnSize(wxSizeEvent& event)
  	m_width = size.GetWidth();
  	m_height = size.GetHeight();
 	OnSize(m_width, m_height);
+
+	sl::ShaderMgr::Instance()->GetContext()->ClearTextureCache();
 }
 
 void StageCanvas::OnPaint(wxPaintEvent& event)

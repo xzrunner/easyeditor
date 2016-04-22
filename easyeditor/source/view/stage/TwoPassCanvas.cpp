@@ -32,9 +32,6 @@ void TwoPassCanvas::OnSize(int w, int h)
 		DTex::Instance();
 	}
 	ScreenCache::Instance()->SetSize(w, h);
-
-	sl::ShaderMgr::Instance()->GetShader(sl::FILTER)->BindTexture();
-	sl::ShaderMgr::Instance()->GetShader(sl::BLEND)->BindTexture();
 }
 
 static void
