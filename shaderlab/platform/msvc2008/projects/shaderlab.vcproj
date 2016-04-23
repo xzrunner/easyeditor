@@ -810,10 +810,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\shaderlab\lua_wrap_sl.c"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\shaderlab\shaderlab.h"
 			>
 		</File>

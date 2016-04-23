@@ -1,6 +1,7 @@
 #include "RenderContext.h"
 #include "OrthoCamera.h"
 #include "CameraMgr.h"
+#include "Pseudo3DCamera.h"
 
 #include <shaderlab.h>
 
@@ -29,8 +30,10 @@ void RenderContext::SetProjection(int width, int height)
 
 	sl::SubjectMVP2::Instance()->NotifyProjection(width, height);
 
-// 	m_p3d_cam->OnSize(width, height);
-// 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
+	Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::PSEUDO3D));
+	if (cam) {
+		sl::SubjectMVP3::Instance()->NotifyProjection(cam->GetProjectMat());
+	}
 }
 
 bool RenderContext::GetModelView(Vector& offset, float& scale) const 
@@ -62,8 +65,10 @@ void RenderContext::OnBind()
 
 	sl::SubjectMVP2::Instance()->NotifyProjection(m_proj_width, m_proj_height);
 
-	// 	m_p3d_cam->OnSize(width, height);
-	// 	sl::SubjectMVP3::Instance()->NotifyProjection(m_p3d_cam->GetProjectMat());
+	Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::PSEUDO3D));
+	if (cam) {
+		sl::SubjectMVP3::Instance()->NotifyProjection(cam->GetProjectMat());
+	}
 
 	// update camera
 	OrthoCamera* cam2 = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::ORTHO));

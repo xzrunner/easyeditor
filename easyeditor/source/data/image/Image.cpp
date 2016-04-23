@@ -255,7 +255,6 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 		} 
 		else
 		{
-			assert(mgr->GetShaderType() == sl::SPRITE3);
 			const Pseudo3DCamera* pcam = static_cast<const Pseudo3DCamera*>(cam);
 			float z[4];
 			trans.camera.CalculateZ(pcam, vertices, z);
