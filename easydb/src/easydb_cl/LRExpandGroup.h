@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <ee/Vector.h>
+
 #include <json/json.h>
 
 namespace ee { class Vector; }
@@ -30,9 +32,20 @@ public:
 	std::string GetOutputFilepath(const std::string& filepath) const;
 
 private:
+	struct Trans
+	{
+		Trans() : translation(0, 0), angle(0), scale(1, 1), xmirror(false), ymirror(false) {}
+
+		ee::Vector translation;
+		float angle;
+		ee::Vector scale;
+		bool xmirror, ymirror;
+	};
+
+private:
 	void Expand(const Json::Value& src_val, Json::Value& dst_val);
 
-	void LoadSprites(const Json::Value& src_spr_val, const ee::Vector& offset, Json::Value& dst_sprs_val);
+	void LoadSprites(const Json::Value& src_spr_val, const Trans& trans, Json::Value& dst_sprs_val);
 
 }; // LRExpandGroup
 

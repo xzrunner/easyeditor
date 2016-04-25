@@ -3,6 +3,7 @@
 
 #include <ee/FileHelper.h>
 #include <ee/Vector.h>
+#include <ee/Math2D.h>
 
 #include <fstream>
 
@@ -80,34 +81,72 @@ void LRExpandGroup::Expand(const Json::Value& src_val, Json::Value& dst_val)
 	int idx = 0;
 	Json::Value spr_val = src_val["sprite"][idx++];
 	while (!spr_val.isNull()) {
-		LoadSprites(spr_val, ee::Vector(0, 0), sprites_val);
+		LoadSprites(spr_val, Trans(), sprites_val);
 		spr_val = src_val["sprite"][idx++];
 	}
 
 	dst_val["sprite"] = sprites_val;
 }
 
-void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const ee::Vector& offset, Json::Value& dst_sprs_val)
+void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& trans, Json::Value& dst_sprs_val)
 {
 	std::string filepath = src_spr_val["filepath"].asString();
-	if (filepath == "group") {
+	if (filepath == "group") 
+	{
 		const Json::Value& gval = src_spr_val["group"];
 
-		float gx = src_spr_val["position"]["x"].asDouble(),
-			  gy = src_spr_val["position"]["y"].asDouble();
-		ee::Vector off_new(offset.x + gx, offset.y + gy);
+		ee::Vector translation;
+		translation.x = src_spr_val["position"]["x"].asDouble();
+		translation.y = src_spr_val["position"]["y"].asDouble();
+		float angle = src_spr_val["angle"].asDouble();
+		ee::Vector scale;
+		scale.x = src_spr_val["x scale"].asDouble();
+		scale.y = src_spr_val["y scale"].asDouble();
+		bool xmirror = src_spr_val["x mirror"].asBool(),
+			 ymirror = src_spr_val["y mirror"].asBool();
+
+		Trans t;
+		t.angle = angle + trans.angle;
+		t.scale.x = scale.x * trans.scale.x;
+		t.scale.y = scale.y * trans.scale.y;
+		t.xmirror = (xmirror && !trans.xmirror) || (!xmirror && trans.xmirror);
+		t.ymirror = (ymirror && !trans.ymirror) || (!ymirror && trans.ymirror);
+
+		float new_x = translation.x * trans.scale.x,
+			  new_y = translation.y * trans.scale.y;
+		t.translation = ee::Math2D::RotateVector(ee::Vector(new_x, new_y), trans.angle);
+		t.translation += trans.translation;
 
 		assert(!gval.isNull());
 		for (int i = 0, n = gval.size(); i < n; ++i) {
-			LoadSprites(gval[i], off_new, dst_sprs_val);
+			LoadSprites(gval[i], t, dst_sprs_val);
 		}
-	} else {
+	} 
+	else 
+	{
+		float old_x = src_spr_val["position"]["x"].asDouble(),
+			  old_y = src_spr_val["position"]["y"].asDouble();
+		float old_angle = src_spr_val["angle"].asDouble();
+		float old_sx = src_spr_val["x scale"].asDouble(),
+			  old_sy = src_spr_val["y scale"].asDouble();
+		bool old_mx = src_spr_val["x mirror"].asBool(),
+			 old_my = src_spr_val["y mirror"].asBool();
+
 		int sz = dst_sprs_val.size();
-		float x = src_spr_val["position"]["x"].asDouble(),
-			  y = src_spr_val["position"]["y"].asDouble();
 		dst_sprs_val[sz] = src_spr_val;
-		dst_sprs_val[sz]["position"]["x"] = x + offset.x;
-		dst_sprs_val[sz]["position"]["y"] = y + offset.y;
+		dst_sprs_val[sz]["angle"] = old_angle + trans.angle;
+		dst_sprs_val[sz]["x scale"] = old_sx * trans.scale.x;
+		dst_sprs_val[sz]["y scale"] = old_sy * trans.scale.y;
+		dst_sprs_val[sz]["x mirror"] = (old_mx && !trans.xmirror) || (!old_mx && trans.xmirror);
+		dst_sprs_val[sz]["y mirror"] = (old_my && !trans.ymirror) || (!old_my && trans.ymirror);
+
+		float new_x = old_x * trans.scale.x,
+			  new_y = old_y * trans.scale.y;
+		ee::Vector new_pos = ee::Math2D::RotateVector(ee::Vector(new_x, new_y), trans.angle);
+		new_pos += trans.translation;
+
+		dst_sprs_val[sz]["position"]["x"] = new_pos.x;
+		dst_sprs_val[sz]["position"]["y"] = new_pos.y;
 	}
 }
 
