@@ -399,6 +399,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\shaderlab\shader\SubjectMVP2.cpp"
 						>
 					</File>
