@@ -21,8 +21,7 @@ class SpriteRenderer
 public:
 	void Draw(const Sprite* sprite, 
 		      const Sprite* root = NULL,
-			  const RenderParams& trans = RenderParams(),
-			  bool set_shader = true) const;
+			  const RenderParams& trans = RenderParams()) const;
 
 	void InvalidRect(const Sprite* sprite, const Matrix& mt = Matrix());
 

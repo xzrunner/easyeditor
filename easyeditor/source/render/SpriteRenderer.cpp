@@ -33,8 +33,7 @@ SpriteRenderer::SpriteRenderer()
 
 void SpriteRenderer::Draw(const Sprite* spr, 
 						  const Sprite* root,
-						  const RenderParams& trans,
-						  bool set_shader) const
+						  const RenderParams& trans) const
 {
 	if (!spr->visiable) {
 		return;
@@ -82,7 +81,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 			SpriteBlend::Instance()->Draw(spr, trans.mt);
 		}
 	} else if (filter != FM_NULL) {
-		if (set_shader) {
+		if (trans.set_shader) {
 			mgr->SetShader(sl::FILTER);
 		}
 		sl::FilterShader* shader = static_cast<sl::FilterShader*>(mgr->GetShader(sl::FILTER));
@@ -92,7 +91,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 		t.camera = ct;
 		DrawImpl(spr, root, t);
 	} else {
-		if (set_shader) {
+		if (trans.set_shader) {
 			mgr->SetShader(sl::SPRITE2);
 		}
 		RenderParams t = trans;

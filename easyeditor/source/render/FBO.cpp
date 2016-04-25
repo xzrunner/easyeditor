@@ -243,7 +243,9 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	Matrix mt;
 	mt.SetScale(scale, -scale);
 	mt.Translate(-dx, -dy);
-	SpriteRenderer::Instance()->Draw(sprite, NULL, RenderParams(mt), false);
+	RenderParams params(mt);
+	params.set_shader = false;
+	SpriteRenderer::Instance()->Draw(sprite, NULL, params);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();

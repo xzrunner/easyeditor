@@ -74,7 +74,9 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt) const
 	shader->SetMode(mode);
 
 	const_cast<Sprite*>(spr)->rp->shader.blend = BM_NULL;
-	SpriteRenderer::Instance()->Draw(spr, spr, RenderParams(mt), false);
+	RenderParams params(mt);
+	params.set_shader = false;
+	SpriteRenderer::Instance()->Draw(spr, spr, params);
 	const_cast<Sprite*>(spr)->rp->shader.blend = mode;
 
 	shader->Commit();

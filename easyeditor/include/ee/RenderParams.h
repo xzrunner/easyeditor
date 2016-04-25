@@ -21,6 +21,8 @@ public:
 	void StoreToFile(Json::Value& val) const;
 
 public:
+	bool set_shader;
+
 	Matrix mt;
 
 	RenderColor color;

@@ -21,7 +21,7 @@ void Utility::DrawAnimSymbol(const Symbol* symbol,
 	GetCurrSprites(symbol, index, sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		ee::SpriteRenderer::Instance()->Draw(sprites[i], root, trans, false);
+		ee::SpriteRenderer::Instance()->Draw(sprites[i], root, trans);
 	}
 
 	for_each(sprites.begin(), sprites.end(), ee::DeletePointerFunctor<ee::Sprite>());

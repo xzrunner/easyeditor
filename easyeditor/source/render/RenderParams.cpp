@@ -4,21 +4,25 @@ namespace ee
 {
 	
 RenderParams::RenderParams() 
+	: set_shader(true)
 {}
 
 RenderParams::RenderParams(const RenderParams& trans)
-	: mt(trans.mt)
+	: set_shader(trans.set_shader)
+	, mt(trans.mt)
 	, color(trans.color)
 	, shader(trans.shader)
 	, camera(trans.camera) 
 {}
 
 RenderParams::RenderParams(const Matrix& mt) 
-	: mt(mt) 
+	: set_shader(true)
+	, mt(mt) 
 {}
 
 RenderParams::RenderParams(const Matrix& mt, const RenderColor& color) 
-	: mt(mt)
+	: set_shader(true)
+	, mt(mt)
 	, color(color)
 {}
 
