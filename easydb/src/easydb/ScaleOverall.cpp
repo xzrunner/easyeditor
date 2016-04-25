@@ -11,6 +11,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/ImageSymbol.h>
 #include <ee/Math2D.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 
@@ -52,7 +53,7 @@ int ScaleOverall::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Snapshoot ss;
 

@@ -13,6 +13,7 @@
 #include <ee/Math2D.h>
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 #include <easyimage.h>
@@ -54,7 +55,7 @@ int RotateImage::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Snapshoot ss;
 

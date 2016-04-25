@@ -4,6 +4,7 @@
 #include "check_params.h"
 
 #include <ee/Config.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 
@@ -55,7 +56,7 @@ int PackEP::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Config::Instance()->EnableRender(true);
 

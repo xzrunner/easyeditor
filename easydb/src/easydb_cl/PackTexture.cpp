@@ -6,6 +6,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SettingData.h>
 #include <ee/Config.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <easytexpacker.h>
 
@@ -48,7 +49,7 @@ int PackTexture::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance();
+	ee::ShaderLab::Instance()->Init();
 
 	if (argc == 3) {
 		RunFromConfig(argv[2]);

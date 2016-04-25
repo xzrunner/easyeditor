@@ -10,12 +10,12 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Exception.h>
 #include <ee/StringHelper.h>
+#include <ee/Math2D.h>
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
 
 #include <easyshape.h>
-#include <easy3d.h>
 
 namespace edb
 {

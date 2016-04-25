@@ -14,6 +14,7 @@
 #include <ee/Image.h>
 #include <ee/Math2D.h>
 #include <ee/MinBoundingBox.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 #include <wx/arrstr.h>
@@ -59,7 +60,7 @@ int RotateTrimImage::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Snapshoot ss;
 

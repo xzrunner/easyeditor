@@ -7,6 +7,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/AnimatedGifSaver.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 
@@ -52,7 +53,7 @@ int TransToGif::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Snapshoot ss;
 

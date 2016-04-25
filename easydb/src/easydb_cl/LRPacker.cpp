@@ -14,6 +14,7 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/Config.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 
@@ -66,7 +67,7 @@ int LRPacker::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Config::Instance()->EnableRender(true);
 

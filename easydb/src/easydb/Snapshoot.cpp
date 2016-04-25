@@ -7,6 +7,7 @@
 #include <ee/FileHelper.h>
 #include <ee/SymbolMgr.h>
 #include <ee/Symbol.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <glfw.h>
 #include <fstream>
@@ -49,7 +50,7 @@ int Snapshoot::Run(int argc, char *argv[])
 		return -2;
 	}
 
-	ee::ShaderMgr::Instance()->reload();
+	ee::ShaderLab::Instance()->Init();
 
 	ee::Snapshoot ss;
 
