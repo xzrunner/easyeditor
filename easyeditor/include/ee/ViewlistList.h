@@ -9,6 +9,7 @@ namespace ee
 
 class Sprite;
 class ViewlistListImpl;
+class SpriteSelection;
 
 class ViewlistList : public VerticalImageList, public Observer
 {
@@ -49,6 +50,7 @@ private:
 	void ReorderSelected(bool up);
 
 	void Select(Sprite* spr, bool clear);
+	void SelectSet(SpriteSelection* set);
 	void Reorder(const Sprite* sprite, bool up);
 	void ReorderMost(const Sprite* sprite, bool up);
 	void Remove(Sprite* sprite);

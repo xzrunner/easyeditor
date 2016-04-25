@@ -4,6 +4,8 @@
 #include "DragTargetNull.h"
 #include "Visitor.h"
 
+#include <set>
+
 namespace ee
 {
 
@@ -24,8 +26,9 @@ END_EVENT_TABLE()
 VerticalImageList::VerticalImageList(wxWindow* parent, 
 									 const std::string& name,
 									 bool draggable /*= true*/,
-									 bool compact/* = false*/)
-	: wxVListBox(parent)
+									 bool compact/* = false*/,
+									 bool multiple/* = false*/)
+	: wxVListBox(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, multiple ? wxLB_MULTIPLE : 0)
 	, m_name(name)
 	, m_compact(compact)
 {
@@ -72,7 +75,16 @@ void VerticalImageList::Insert(ListItem* item, int idx)
 
 void VerticalImageList::Remove()
 {
-	Remove(GetSelection());
+	if (HasMultipleSelection()) {
+		unsigned long cookie;
+		int item = GetFirstSelected(cookie);
+		while (item != wxNOT_FOUND) {
+			Remove(item);
+			item = GetNextSelected(cookie);
+		}
+	} else {
+		Remove(GetSelection());
+	}
 }
 
 void VerticalImageList::Remove(int index)
@@ -109,7 +121,13 @@ void VerticalImageList::Traverse(Visitor& visitor) const
 
 const ListItem* VerticalImageList::GetSelected() const
 {
-	int idx = GetSelection();
+	int idx = -1;
+	if (HasMultipleSelection()) {
+		unsigned long cookie;
+		idx = GetFirstSelected(cookie);
+	} else {
+		idx = GetSelection();
+	}
 	if (idx >= 0 && idx < static_cast<int>(m_items.size())) {
 		return m_items[idx];
 	} else {
@@ -119,7 +137,20 @@ const ListItem* VerticalImageList::GetSelected() const
 
 void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
-	bool is_selected = n == GetSelection();
+	bool is_selected;
+	if (HasMultipleSelection()) {
+		std::set<int> selected;
+		unsigned long cookie;
+		int item = GetFirstSelected(cookie);
+		while (item != wxNOT_FOUND) {
+			selected.insert(item);
+			item = GetNextSelected(cookie);
+		}
+		is_selected = selected.find(n) != selected.end();
+	} else {
+		is_selected = n == GetSelection();
+	}
+
 	if (m_compact) 
 	{
 		// bmp

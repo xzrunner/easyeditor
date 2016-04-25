@@ -18,7 +18,7 @@ class VerticalImageList : public wxVListBox
 {
 public:
 	VerticalImageList(wxWindow* parent, const std::string& name,
-		bool draggable = true, bool compact = false);
+		bool draggable = true, bool compact = false, bool multiple = false);
 	virtual ~VerticalImageList();
 
 	virtual void OnListSelected(wxCommandEvent& event) {}

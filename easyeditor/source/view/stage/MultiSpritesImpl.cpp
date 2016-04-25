@@ -20,6 +20,7 @@ MultiSpritesImpl::MultiSpritesImpl(EditPanelImpl* stage)
 	RegistSubject(InsertSpriteSJ::Instance());
 	RegistSubject(RemoveSpriteSJ::Instance());
 	RegistSubject(ClearSpriteSJ::Instance());
+	RegistSubject(ClearSpriteSelectionSJ::Instance());
 }
 
 MultiSpritesImpl::~MultiSpritesImpl()
@@ -80,6 +81,9 @@ void MultiSpritesImpl::OnNotify(int sj_id, void* ud)
 		m_sprite_selection->Clear();
 		break;
 	case MSG_CLEAR_SPRITE:
+		m_sprite_selection->Clear();
+		break;
+	case MSG_CLEAR_SPRITE_SELECTION:
 		m_sprite_selection->Clear();
 		break;
 	}

@@ -120,9 +120,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				m_selection->Clear();
 				ClearSpriteSelectionSJ::Instance()->Clear();
 				m_selection->Add(selected);
-
-				bool add = m_stage->GetKeyState(WXK_CONTROL);
-				SelectSpriteSJ::Instance()->Select(selected, !add);
+				SelectSpriteSJ::Instance()->Select(selected, true);
 			}
 		}
 		m_left_first_pos.SetInvalid();

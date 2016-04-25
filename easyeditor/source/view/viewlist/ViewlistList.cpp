@@ -7,6 +7,8 @@
 #include "sprite_msg.h"
 #include "Config.h"
 #include "panel_msg.h"
+#include "SpriteSelection.h"
+#include "FetchAllVisitor.h"
 
 #include <algorithm>
 
@@ -14,11 +16,12 @@ namespace ee
 {
 
 ViewlistList::ViewlistList(wxWindow* parent)
-	: VerticalImageList(parent, "viewlist", false, Config::Instance()->GetSettings().img_list_compact)
+	: VerticalImageList(parent, "viewlist", false, Config::Instance()->GetSettings().img_list_compact, true)
 	, m_impl(NULL)
 	, m_selected_spr(NULL)
 {
 	RegistSubject(SelectSpriteSJ::Instance());
+	RegistSubject(SelectSpriteSetSJ::Instance());
 	RegistSubject(ClearSpriteSelectionSJ::Instance());
 	RegistSubject(ReorderSpriteSJ::Instance());
 	RegistSubject(ReorderSpriteMostSJ::Instance());
@@ -41,10 +44,23 @@ ViewlistList::~ViewlistList()
 
 void ViewlistList::OnListSelected(wxCommandEvent& event)
 {
-	if (m_impl) {
-		m_impl->OnSelected(this, event.GetInt());
-	} else {
-		OnSelected(event.GetInt());
+	std::set<int> selected;
+	unsigned long cookie;
+	int item = GetFirstSelected(cookie);
+	while (item != wxNOT_FOUND) {
+		selected.insert(item);
+		item = GetNextSelected(cookie);
+	}
+
+	ClearSpriteSelectionSJ::Instance()->Clear();
+
+	std::set<int>::iterator itr = selected.begin();
+	for ( ; itr != selected.end(); ++itr) {
+ 		if (m_impl) {
+ 			m_impl->OnSelected(this, *itr);
+ 		} else {
+ 			OnSelected(*itr);
+ 		}
 	}
 }
 
@@ -122,6 +138,12 @@ void ViewlistList::OnNotify(int sj_id, void* ud)
 			Select(p->spr, p->clear);
 		}
 		break;
+	case MSG_SELECT_SPRITE_SET:
+		{
+			SpriteSelection* selection = (SpriteSelection*)ud;
+			SelectSet(selection);
+		}
+		break;
 	case MSG_CLEAR_SPRITE_SELECTION:
 		{
 			SetSelection(-1);
@@ -180,7 +202,13 @@ void ViewlistList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 
 void ViewlistList::OnKeyDown(wxKeyEvent& event)
 {
-	int curr_idx = this->GetSelection();
+	int curr_idx;
+	if (HasMultipleSelection()) {
+		unsigned long cookie;
+		curr_idx = GetFirstSelected(cookie);
+	} else {
+		curr_idx = this->GetSelection();
+	}
 	VerticalImageList::OnKeyDown(event);
 
 	switch (event.GetKeyCode())
@@ -226,16 +254,21 @@ void ViewlistList::OnMouseEvent(wxMouseEvent& event)
 
 int ViewlistList::GetSelectedIndex() const
 {
-	return GetItemCount() - 1 - GetSelection();
+	int selected;
+	if (HasMultipleSelection()) {
+		unsigned long cookie;
+		selected = GetFirstSelected(cookie);
+	} else {
+		selected = GetSelection();
+	}
+	return GetItemCount() - 1 - selected;
 }
 
 void ViewlistList::OnSelected(Sprite* spr)
 {
 	m_selected_spr = spr;
 	m_selected_spr->Retain();
-
-	bool add = GetKeyState(WXK_CONTROL);
-	SelectSpriteSJ::Instance()->Select(spr, !add);
+	SelectSpriteSJ::Instance()->Select(spr, false);
 }
 
 int ViewlistList::QuerySprIdx(const Sprite* spr) const
@@ -264,6 +297,17 @@ void ViewlistList::Select(Sprite* spr, bool clear)
 	int idx = QuerySprIdx(spr);
 	if (idx >= 0) {
 		SetSelection(idx);
+	}
+}
+
+void ViewlistList::SelectSet(SpriteSelection* set)
+{
+	SetSelection(-1);
+	std::vector<Sprite*> sprites;
+	set->Traverse(FetchAllVisitor<Sprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		int idx = QuerySprIdx(sprites[i]);
+		VerticalImageList::Select(idx, true);
 	}
 }
 
@@ -342,13 +386,20 @@ void ViewlistList::Remove(Sprite* sprite)
 
 void ViewlistList::RemoveSelected()
 {
-	int idx = GetSelection();
-	VerticalImageList::Remove(idx);
+	int selected;
+	if (HasMultipleSelection()) {
+		unsigned long cookie;
+		selected = GetFirstSelected(cookie);
+	} else {
+		selected = GetSelection();
+	}
 
-	RemoveSpriteSJ::Instance()->Remove(m_sprites[idx], this);
+	VerticalImageList::Remove(selected);
 
-	m_sprites[idx]->Release();
-	m_sprites.erase(m_sprites.begin() + idx);
+	RemoveSpriteSJ::Instance()->Remove(m_sprites[selected], this);
+
+	m_sprites[selected]->Release();
+	m_sprites.erase(m_sprites.begin() + selected);
 }
 
 }
