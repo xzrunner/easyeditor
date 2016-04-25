@@ -39,7 +39,7 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, int x, int y)
 
 void RightPopupMenu::OnRightPopupMenu(int id)
 {
-	if (id >= MENU_UP_LAYER && id <= MENU_VERT_MIRROR) {
+	if (id >= MENU_UP_LAYER && id <= MENU_COMMON_END) {
 		HandleCommonMenu(id);
 	} else if (id == MENU_INSERT_TO_DTEX || id == MENU_REMOVE_FROM_DTEX) {
 		HandleDebugTagMenu(id);
@@ -72,6 +72,12 @@ void RightPopupMenu::CreateCommonMenu(wxMenu& menu)
 	menu.Append(MENU_VERT_MIRROR, "竖直镜像");	
 
 	menu.AppendSeparator();
+
+	if (m_edited_sprs.size() == 1) {
+		m_parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanelImpl::OnRightPopupMenu, m_stage, MENU_SELECT_SAME);
+		menu.Append(MENU_SELECT_SAME, "选择相同");
+		menu.AppendSeparator();
+	}
 }
 
 void RightPopupMenu::CreateSelectMenu(wxMenu& menu)
@@ -109,18 +115,29 @@ void RightPopupMenu::CreateDebugMenu(wxMenu& menu)
 
 void RightPopupMenu::HandleCommonMenu(int id)
 {
-	if (id == MENU_UP_LAYER) {
+	switch (id)
+	{
+	case MENU_UP_LAYER:
 		UpOneLayer();
-	} else if (id == MENU_DOWN_LAYER) {
+		break;
+	case MENU_DOWN_LAYER:
 		DownOneLayer();
-	} else if (id == MENU_UP_MOST) {
+		break;
+	case MENU_UP_MOST:
 		UpLayerMost();
-	} else if (id == MENU_DOWN_MOST) {
+		break;
+	case MENU_DOWN_MOST:
 		DownLayerMost();
-	} else if (id == MENU_HORI_MIRROR) {
+		break;
+	case MENU_HORI_MIRROR:
 		HoriMirror();
-	} else if (id == MENU_VERT_MIRROR) {
+		break;
+	case MENU_VERT_MIRROR:
 		VertMirror();
+		break;
+	case MENU_SELECT_SAME:
+		SelectSame();
+		break;
 	}
 }
 
@@ -211,6 +228,24 @@ void RightPopupMenu::VertMirror()
 	}
 	if (dirty) {
 		SetCanvasDirtySJ::Instance()->SetDirty();
+	}
+}
+
+void RightPopupMenu::SelectSame()
+{
+	std::vector<Sprite*> selected;
+	m_selection->Traverse(FetchAllVisitor<Sprite>(selected));
+	assert(selected.size() == 1);
+ 	std::string filepath = selected[0]->GetSymbol().GetFilepath();
+
+	m_selection->Clear();
+	std::vector<Sprite*> sprites;
+	m_sprites_impl->TraverseSprites(FetchAllVisitor<Sprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		Sprite* spr = sprites[i];
+		if (spr->GetSymbol().GetFilepath() == filepath) {
+			m_selection->Add(spr);
+		}
 	}
 }
 

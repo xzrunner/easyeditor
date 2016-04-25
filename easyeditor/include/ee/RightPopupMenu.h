@@ -40,6 +40,8 @@ private:
 	void HoriMirror();
 	void VertMirror();
 
+	void SelectSame();
+
 	void OnSelected(int x, int y);
 
 private:
@@ -51,6 +53,8 @@ private:
 		MENU_DOWN_MOST,
 		MENU_HORI_MIRROR,
 		MENU_VERT_MIRROR,
+		MENU_SELECT_SAME,
+		MENU_COMMON_END			= 10099,
 
 		MENU_MULTI_SELECTED		= 10100,
 		MENU_MULTI_SELECTED_END	= 10199,
