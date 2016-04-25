@@ -11,6 +11,7 @@
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
 #include <ee/SpriteFactory.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <easyimage.h>
 

@@ -13,6 +13,7 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/Config.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <wx/stdpaths.h>
 

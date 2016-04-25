@@ -12,6 +12,7 @@
 #include <ee/Math2D.h>
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <easyimage.h>
 

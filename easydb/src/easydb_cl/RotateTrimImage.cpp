@@ -13,6 +13,7 @@
 #include <ee/Image.h>
 #include <ee/Math2D.h>
 #include <ee/MinBoundingBox.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <wx/arrstr.h>
 #include <easyimage.h>

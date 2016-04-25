@@ -10,6 +10,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/ImageSymbol.h>
 #include <ee/Math2D.h>
+#include <ee/EE_ShaderLab.h>
 
 #include <fstream>
 
