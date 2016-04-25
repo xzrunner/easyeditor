@@ -11,7 +11,7 @@ namespace lr
 class GroupHelper
 {
 public:
-	static ee::Sprite* Group(const std::vector<ee::Sprite*>& sprites);
+	static ee::Sprite* Group(const std::vector<ee::Sprite*>& sprites, const std::string& name);
 	static void BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites);
 
 }; // GroupHelper

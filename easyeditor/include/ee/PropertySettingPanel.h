@@ -25,6 +25,7 @@ public:
 	PropertySettingPanel(wxWindow* parent);
 	virtual ~PropertySettingPanel();
 
+	void SetDefaultPropertySetting();
 	void SetPropertySetting(PropertySetting* setting);
 
 	wxPropertyGrid* GetPropertyGrid() { return m_pg; }

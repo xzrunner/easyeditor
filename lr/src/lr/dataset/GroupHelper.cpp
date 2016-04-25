@@ -10,11 +10,9 @@
 namespace lr
 {
 
-ee::Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
+ee::Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites,
+							   const std::string& name)
 {
-	static int id = 0;
-	std::string name = "_group" + ee::StringHelper::ToString(id++);
-
 	ecomplex::Symbol* sym = new ecomplex::Symbol();
 	sym->SetFilepath(GROUP_TAG);
 	sym->m_sprites = sprites;
@@ -27,6 +25,7 @@ ee::Sprite* GroupHelper::Group(const std::vector<ee::Sprite*>& sprites)
 	sym->InitBounding();
 
 	sym->name = name;
+	sym->SetName(name);
 	ecomplex::Sprite* spr = new ecomplex::Sprite(sym);
 	spr->Translate(c);
 	spr->name = name;

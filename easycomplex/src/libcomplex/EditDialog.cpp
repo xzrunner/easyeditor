@@ -29,6 +29,8 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol,
 	SetTitle(symbol->GetFilepath());
 	InitLayout(glctx);
 	LoadSymbolInfo();
+
+	m_property->SetDefaultPropertySetting();
 }
 
 void EditDialog::InitLayout(wxGLContext* glctx)

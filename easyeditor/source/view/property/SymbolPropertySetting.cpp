@@ -33,7 +33,10 @@ void SymbolPropertySetting::OnPropertyGridChange(const std::string& name, const 
 	if (name == wxT("Name"))
 	{
 		if (m_symbol) {
-			m_symbol->name = wxANY_AS(value, wxString);
+			std::string name = wxANY_AS(value, wxString);
+			m_symbol->name = name;
+			m_symbol->SetName(name);
+			RefreshPanelSJ::Instance()->Refresh();
 		} else {
 			*m_name = wxANY_AS(value, wxString);
 		}

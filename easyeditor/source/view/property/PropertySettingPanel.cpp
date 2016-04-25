@@ -43,6 +43,11 @@ PropertySettingPanel::~PropertySettingPanel()
 	delete m_setting;
 }
 
+void PropertySettingPanel::SetDefaultPropertySetting()
+{
+	SetPropertySetting(CreateDefaultProperty());
+}
+
 void PropertySettingPanel::SetPropertySetting(PropertySetting* setting)
 {
 	delete m_setting;

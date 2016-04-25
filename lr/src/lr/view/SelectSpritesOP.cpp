@@ -96,7 +96,7 @@ void SelectSpritesOP::GroupSelection()
 	std::vector<ee::Sprite*> sprites;
 	m_selection->Traverse(ee::FetchAllVisitor<ee::Sprite>(sprites));
 
-	ee::Sprite* group = GroupHelper::Group(sprites);
+	ee::Sprite* group = GroupHelper::Group(sprites, "_group");
 	ee::SpriteFactory::Instance()->Insert(group);
 
 	ee::AtomicOP* move_op = new ee::TranslateSpriteAOP(sprites, -group->GetPosition());
