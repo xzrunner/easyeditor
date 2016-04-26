@@ -158,14 +158,21 @@ void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage,
 
 		layer_val = value[idx++];
 	}
+	if (layers.empty()) {
+		return;
+	}
 
-	for (int i = 1, n = layers.size(); i < n; ++i) {
+	for (int i = 0, n = layers.size(); i < n; ++i) {
 		Layer* layer = layers[i];
 		layer->SetEditable(false);
 	}
 
 	stage->SetLayers(layers);
 	library->InitFromLayers(layers);
+
+	LibraryPage* curr_page = static_cast<LibraryPage*>(library->GetCurrPage());
+	curr_page->GetLayer()->SetEditable(true);
+	curr_page->UpdateStatusFromLayer();
 }
 
 void FileIO::StoreLayers(Json::Value& value, const std::vector<Layer*>& layers, const std::string& dir)
