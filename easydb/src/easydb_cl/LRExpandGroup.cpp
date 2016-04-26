@@ -104,6 +104,14 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 		scale.y = src_spr_val["y scale"].asDouble();
 		bool xmirror = src_spr_val["x mirror"].asBool(),
 			 ymirror = src_spr_val["y mirror"].asBool();
+		if (trans.xmirror) {
+			translation.x = -translation.x;
+			angle = -angle;
+		}
+		if (trans.ymirror) {
+			translation.y = -translation.y;
+			angle = -angle;
+		}
 
 		Trans t;
 		t.angle = angle + trans.angle;
@@ -131,6 +139,14 @@ void LRExpandGroup::LoadSprites(const Json::Value& src_spr_val, const Trans& tra
 			  old_sy = src_spr_val["y scale"].asDouble();
 		bool old_mx = src_spr_val["x mirror"].asBool(),
 			 old_my = src_spr_val["y mirror"].asBool();
+		if (trans.xmirror) {
+			old_x = -old_x;
+			old_angle = -old_angle;
+		}
+		if (trans.ymirror) {
+			old_y = -old_y;
+			old_angle = -old_angle;
+		}
 
 		int sz = dst_sprs_val.size();
 		dst_sprs_val[sz] = src_spr_val;
