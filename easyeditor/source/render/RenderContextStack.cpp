@@ -32,6 +32,8 @@ void RenderContextStack::Push(StageCanvas* canvas, RenderContext* render)
 	ctx.canvas = canvas;
 	ctx.render = render;
 	m_stack.push_back(ctx);
+	
+	canvas->SetCurrentCanvas();
 }
 
 void RenderContextStack::Pop()
