@@ -54,12 +54,13 @@ void ViewlistList::OnListSelected(wxCommandEvent& event)
 
 	ClearSpriteSelectionSJ::Instance()->Clear();
 
+	bool clear = selected.size() == 1;
 	std::set<int>::iterator itr = selected.begin();
 	for ( ; itr != selected.end(); ++itr) {
  		if (m_impl) {
- 			m_impl->OnSelected(this, *itr);
+ 			m_impl->OnSelected(this, *itr, clear);
  		} else {
- 			OnSelected(*itr);
+ 			OnSelected(*itr, clear);
  		}
 	}
 }
@@ -69,7 +70,7 @@ void ViewlistList::OnListDoubleClicked(wxCommandEvent& event)
 	if (m_impl) {
 		m_impl->OnDoubleClicked(this, event.GetInt());
 	} else {
-		OnSelected(event.GetInt());
+		OnSelected(event.GetInt(), true);
 	}
 }
 
@@ -81,10 +82,10 @@ void ViewlistList::SetImpl(ViewlistListImpl* impl)
 	m_impl = impl;
 }
 
-void ViewlistList::OnSelected(int idx)
+void ViewlistList::OnSelected(int idx, bool clear)
 {
 	if (Sprite* spr = QuerySprite(idx)) {
-		OnSelected(spr);
+		OnSelected(spr, clear);
 	}
 }
 
@@ -215,12 +216,12 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	{
 	case WXK_PAGEUP:
 		SetSelection(curr_idx);
-		OnSelected(curr_idx);
+		OnSelected(curr_idx, true);
 		ReorderSelected(true);
 		break;
 	case WXK_PAGEDOWN:
 		SetSelection(curr_idx);
-		OnSelected(curr_idx);
+		OnSelected(curr_idx, true);
 		ReorderSelected(false);
 		break;
 	case WXK_DELETE:
@@ -264,11 +265,11 @@ int ViewlistList::GetSelectedIndex() const
 	return GetItemCount() - 1 - selected;
 }
 
-void ViewlistList::OnSelected(Sprite* spr)
+void ViewlistList::OnSelected(Sprite* spr, bool clear)
 {
 	m_selected_spr = spr;
 	m_selected_spr->Retain();
-	SelectSpriteSJ::Instance()->Select(spr, false);
+	SelectSpriteSJ::Instance()->Select(spr, clear);
 }
 
 int ViewlistList::QuerySprIdx(const Sprite* spr) const

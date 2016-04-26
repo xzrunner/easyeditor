@@ -10,7 +10,7 @@ class ViewlistListImpl
 {
 public:
 	virtual ~ViewlistListImpl() {}
-	virtual void OnSelected(ViewlistList* list, int idx) = 0;
+	virtual void OnSelected(ViewlistList* list, int idx, bool clear) = 0;
 	virtual void OnDoubleClicked(ViewlistList* list, int idx) = 0;
 
 }; // ViewlistListImpl

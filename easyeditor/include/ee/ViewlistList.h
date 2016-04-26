@@ -25,7 +25,7 @@ public:
 	void Clear();
 	void Insert(Sprite* sprite, int idx = -1);
 
-	void OnSelected(int idx);
+	void OnSelected(int idx, bool clear);
 
 	Sprite* QuerySprite(int idx);
 
@@ -43,7 +43,7 @@ protected:
 private:
 	int GetSelectedIndex() const;
 
-	void OnSelected(Sprite* spr);
+	void OnSelected(Sprite* spr, bool clear);
 
 	int QuerySprIdx(const Sprite* spr) const;
 

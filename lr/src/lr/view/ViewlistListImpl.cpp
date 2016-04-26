@@ -11,9 +11,9 @@ ViewlistListImpl::ViewlistListImpl(wxWindow* wnd, ee::EditPanelImpl* stage,
 {
 }
 
-void ViewlistListImpl::OnSelected(ee::ViewlistList* list, int idx)
+void ViewlistListImpl::OnSelected(ee::ViewlistList* list, int idx, bool clear)
 {
-	list->OnSelected(idx);
+	list->OnSelected(idx, clear);
 }
 
 void ViewlistListImpl::OnDoubleClicked(ee::ViewlistList* list, int idx)
