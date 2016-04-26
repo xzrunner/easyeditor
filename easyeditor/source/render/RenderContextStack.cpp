@@ -4,6 +4,8 @@
 #include "EE_DTex.h"
 #include "StageCanvas.h"
 
+#include <shaderlab.h>
+
 #include <assert.h>
 
 namespace ee
@@ -56,6 +58,9 @@ void RenderContextStack::SetModelView(const Vector& offset, float scale)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetModelView(offset, scale);
+	} else {
+		sl::SubjectMVP2::Instance()->NotifyModelview(offset.x, offset.y, scale, scale);
+		//	sl::SubjectMVP3::Instance()->NotifyModelview(m_p3d_cam->GetModelViewMat());
 	}
 }
 
@@ -63,6 +68,13 @@ void RenderContextStack::SetProjection(int width, int height)
 {
 	if (m_curr_ctx) {
 		m_curr_ctx->SetProjection(width, height);
+	} else {
+		sl::SubjectMVP2::Instance()->NotifyProjection(width, height);
+
+// 		Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::PSEUDO3D));
+// 		if (cam) {
+// 			sl::SubjectMVP3::Instance()->NotifyProjection(cam->GetProjectMat());
+// 		}
 	}
 }
 

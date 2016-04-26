@@ -1,7 +1,6 @@
-#include <gl/glew.h>
-
 #include "LRPacker.h"
 #include "check_params.h"
+#include "utility.h"
 #include "lr_tools.h"
 
 #include "LRExpandGroup.h"
@@ -14,9 +13,6 @@
 #include <ee/FileHelper.h>
 #include <ee/StringHelper.h>
 #include <ee/Config.h>
-#include <ee/EE_ShaderLab.h>
-
-#include <glfw.h>
 
 #include <wx/stdpaths.h>
 
@@ -55,19 +51,10 @@ int LRPacker::Run(int argc, char *argv[])
 	ee::FileHelper::MkDir(tmp_dir, true);
 	ee::FileHelper::MkDir(out_dir, true);
 
-	// prepare
-	glfwInit();
-	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
-	{
-		glfwTerminate();
-		return -2;
+	int ret = init_gl();
+	if (ret < 0) {
+		return ret;
 	}
-
-	if (glewInit() != GLEW_OK) {
-		return -2;
-	}
-
-	ee::ShaderLab::Instance()->Init();
 
 	ee::Config::Instance()->EnableRender(true);
 

@@ -1,7 +1,6 @@
-#include <gl/glew.h>
-
 #include "RotateImage.h"
 #include "check_params.h"
+#include "utility.h"
 
 #include <ee/Snapshoot.h>
 #include <ee/SettingData.h>
@@ -13,9 +12,7 @@
 #include <ee/Math2D.h>
 #include <ee/Sprite.h>
 #include <ee/StringHelper.h>
-#include <ee/EE_ShaderLab.h>
 
-#include <glfw.h>
 #include <easyimage.h>
 
 namespace edb
@@ -44,18 +41,10 @@ int RotateImage::Run(int argc, char *argv[])
 	if (!check_folder(argv[2])) return -1;
 	if (!check_folder(argv[3])) return -1;
 
-	glfwInit();
-	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
-	{
-		glfwTerminate();
-		return -2;
+	int ret = init_gl();
+	if (ret < 0) {
+		return ret;
 	}
-
-	if (glewInit() != GLEW_OK) {
-		return -2;
-	}
-
-	ee::ShaderLab::Instance()->Init();
 
 	ee::Snapshoot ss;
 

@@ -1,12 +1,8 @@
-#include <gl/glew.h>
-
 #include "PackEP.h"
 #include "check_params.h"
+#include "utility.h"
 
 #include <ee/Config.h>
-#include <ee/EE_ShaderLab.h>
-
-#include <glfw.h>
 
 #include <easyrespacker.h>
 
@@ -44,19 +40,10 @@ int PackEP::Run(int argc, char *argv[])
 		scale = atof(argv[8]);
 	}
 
-	// prepare
-	glfwInit();
-	if(!glfwOpenWindow(100, 100, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
-	{
-		glfwTerminate();
-		return -2;
+	int ret = init_gl();
+	if (ret < 0) {
+		return ret;
 	}
-
-	if (glewInit() != GLEW_OK) {
-		return -2;
-	}
-
-	ee::ShaderLab::Instance()->Init();
 
 	ee::Config::Instance()->EnableRender(true);
 
