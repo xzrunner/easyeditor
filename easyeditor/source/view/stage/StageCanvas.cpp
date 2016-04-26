@@ -46,6 +46,7 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, EditPanelImpl* stage,
 	, m_render_context(new RenderContext)
 	, m_timer(this, TIMER_ID)
 	, m_version(0)
+	, m_draw(true)
 {
 	if (glctx) {
 		m_share_context = true;
@@ -150,6 +151,10 @@ void StageCanvas::OnSize(wxSizeEvent& event)
 
 void StageCanvas::OnPaint(wxPaintEvent& event)
 {
+	if (!m_draw) {
+		return;
+	}
+
 	// Makes the OpenGL state that is represented by the OpenGL rendering 
 	// context context current
 	SetCurrentCanvas();

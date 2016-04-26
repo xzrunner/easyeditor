@@ -35,6 +35,8 @@ public:
 
 	wxGLContext* GetGLContext() const { return m_gl_context; }
 
+	void SetDrawable(bool draw) { m_draw = draw; }
+
 protected:
 	virtual void OnSize(int w, int h) = 0;
 	virtual void OnDrawWhole() const = 0;
@@ -90,6 +92,8 @@ private:
 	wxTimer m_timer;
 
 	int m_version;
+
+	bool m_draw;
 
 	DECLARE_EVENT_TABLE()
 
