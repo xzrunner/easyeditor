@@ -34,7 +34,7 @@ public:
 private:
 	virtual void OnKeyDown(wxKeyEvent& event);
 	virtual void OnKillFocus(wxFocusEvent& event);
-	virtual void OnMouseEvent(wxMouseEvent& event);
+	virtual void OnMouse(wxMouseEvent& event);
 
 	void OnDragInit(wxMouseEvent& event);
 

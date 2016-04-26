@@ -92,10 +92,8 @@ void LibraryList::OnKillFocus(wxFocusEvent& event)
 	m_selection_set.clear();
 }
 
-void LibraryList::OnMouseEvent(wxMouseEvent& event)
+void LibraryList::OnMouse(wxMouseEvent& event)
 {
-	VerticalImageList::OnMouseEvent(event);
-
 	if (!event.Dragging()) {
 		return;
 	}

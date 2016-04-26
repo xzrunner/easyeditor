@@ -38,7 +38,7 @@ protected:
 	virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const;
 
 	virtual void OnKeyDown(wxKeyEvent& event);
-	virtual void OnMouseEvent(wxMouseEvent& event);
+	virtual void OnMouse(wxMouseEvent& event);
 
 private:
 	int GetSelectedIndex() const;

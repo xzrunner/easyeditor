@@ -20,7 +20,7 @@ BEGIN_EVENT_TABLE(VerticalImageList, wxVListBox)
 	EVT_KEY_DOWN(VerticalImageList::OnKeyDown)
 	EVT_KEY_UP(VerticalImageList::OnKeyUp)
 	EVT_KILL_FOCUS(VerticalImageList::OnKillFocus)
-	EVT_MOTION(VerticalImageList::OnMouseEvent)
+	EVT_MOUSE_EVENTS(VerticalImageList::OnMouseWrap)
 END_EVENT_TABLE()
 
 VerticalImageList::VerticalImageList(wxWindow* parent, 
@@ -247,8 +247,15 @@ void VerticalImageList::OnKillFocus(wxFocusEvent& event)
 	m_keys_state.Reset();
 }
 
-void VerticalImageList::OnMouseEvent(wxMouseEvent& event)
+void VerticalImageList::OnMouseWrap(wxMouseEvent& event)
 {
+	OnMouse(event);
+
+	// The handler of this event should normally call event.Skip() to allow the default processing 
+	// to take place as otherwise the window under mouse wouldn't get the focus.
+	if (event.LeftDown()) {
+		event.Skip();
+	}
 }
 
 }

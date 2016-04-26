@@ -15,6 +15,8 @@
 namespace ee
 {
 
+static const int BTN_SPACE = 5, BTN_EDGE = 20;
+
 ViewlistList::ViewlistList(wxWindow* parent)
 	: VerticalImageList(parent, "viewlist", false, Config::Instance()->GetSettings().img_list_compact, true)
 	, m_impl(NULL)
@@ -190,15 +192,13 @@ void ViewlistList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
 	VerticalImageList::OnDrawItem(dc, rect, n);
 
-	static const int SPACE = 5, EDGE = 20;
-
 	Sprite* spr = m_sprites[n];
 
 	dc.SetBrush(spr->visiable ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
-	dc.DrawRectangle(rect.x + SPACE, rect.y + SPACE, EDGE, EDGE);
+	dc.DrawRectangle(rect.x + BTN_SPACE, rect.y + BTN_SPACE, BTN_EDGE, BTN_EDGE);
 
 	dc.SetBrush(spr->editable ? *wxBLACK_BRUSH : *wxWHITE_BRUSH);
-	dc.DrawRectangle(rect.x + rect.width - SPACE - EDGE, rect.y + SPACE, EDGE, EDGE);
+	dc.DrawRectangle(rect.x + rect.width - BTN_SPACE - BTN_EDGE, rect.y + BTN_SPACE, BTN_EDGE, BTN_EDGE);
 }
 
 void ViewlistList::OnKeyDown(wxKeyEvent& event)
@@ -243,14 +243,32 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	}
 }
 
-void ViewlistList::OnMouseEvent(wxMouseEvent& event)
+void ViewlistList::OnMouse(wxMouseEvent& event)
 {
 	if (!event.LeftDown()) {
 		return;
 	}
 
-	// todo 
 	wxPoint pos = event.GetPosition();
+	int w = GetSize().GetWidth();
+	if (pos.x > BTN_SPACE + BTN_EDGE && pos.x < w - 25 - BTN_SPACE - BTN_EDGE) {
+		return;
+	}
+	int curr_pos = HitTest(pos);
+	if (pos.y > BTN_SPACE + BTN_EDGE) {
+		int up_pos = HitTest(pos.x, pos.y - BTN_SPACE - BTN_EDGE);
+		if (curr_pos == up_pos) {
+			return;
+		}
+	}
+
+	Sprite* spr = m_sprites[curr_pos];
+	if (pos.x <= BTN_SPACE + BTN_EDGE) {
+		spr->visiable = !spr->visiable;
+	} else {
+		spr->editable = !spr->editable;
+	}
+	RefreshPanelSJ::Instance()->Refresh();
 }
 
 int ViewlistList::GetSelectedIndex() const

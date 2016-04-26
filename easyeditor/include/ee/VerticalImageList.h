@@ -52,7 +52,10 @@ protected:
 	virtual void OnKeyDown(wxKeyEvent& event);
 	virtual void OnKeyUp(wxKeyEvent& event);
 	virtual void OnKillFocus(wxFocusEvent& event);
-	virtual void OnMouseEvent(wxMouseEvent& event);
+	virtual void OnMouse(wxMouseEvent& event) {}
+
+private:
+	void OnMouseWrap(wxMouseEvent& event);
 
 protected:
 	std::vector<ListItem*> m_items;
