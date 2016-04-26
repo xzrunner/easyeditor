@@ -45,6 +45,7 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 		else
 		{
 			if (!m_selection.IsExist(selected)) {
+				m_selection.Clear();
 				m_selection.Add(selected);
 			}
 		}
