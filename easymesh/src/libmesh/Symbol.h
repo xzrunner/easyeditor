@@ -9,7 +9,7 @@ namespace ee { class Image; }
 namespace emesh
 {
 
-class Shape;
+class Mesh;
 class Symbol : public ee::Symbol
 {
 public:
@@ -33,9 +33,9 @@ public:
 		return m_region;
 	}
 
- 	const Shape* getShape() const { return m_shape; }
- 	Shape* getShape() { return m_shape; }
-	void SetShape(Shape* shape);
+ 	const Mesh* GetMesh() const { return m_mesh; }
+ 	Mesh* GetMesh() { return m_mesh; }
+	void SetMesh(Mesh* mesh);
 
 	const ee::Image* getImage() const { return m_image; }
 	ee::Image* getImage() { return m_image; }
@@ -58,7 +58,7 @@ private:
 private:
 	ee::Image* m_image;
 
-	Shape* m_shape;
+	Mesh* m_mesh;
 
 	bool m_pause;
 

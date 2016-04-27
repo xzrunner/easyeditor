@@ -1,6 +1,6 @@
 #include "Sprite.h"
 #include "FileIO.h"
-#include "Shape.h"
+#include "Mesh.h"
 
 #include <ee/BBFactory.h>
 #include <ee/BoundingBox.h>

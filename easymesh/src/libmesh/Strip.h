@@ -1,7 +1,7 @@
 #ifndef _EASYMESH_STRIP_H_
 #define _EASYMESH_STRIP_H_
 
-#include "EditShape.h"
+#include "EditableMesh.h"
 
 namespace emesh
 {
@@ -9,7 +9,7 @@ namespace emesh
 class Node;
 class Triangle;
 
-class Strip : public EditShape
+class Strip : public EditableMesh
 {
 public:
 	Strip();
@@ -30,17 +30,17 @@ public:
 	virtual void OffsetUV(float dx, float dy);
 
 	//
-	// EditShape interface
+	// EditableMesh interface
 	//
 	virtual void InsertNode(const ee::Vector& p);
 	virtual void RemoveNode(const ee::Vector& p);
 	virtual ee::Vector* FindNode(const ee::Vector& p);
 	virtual void MoveNode(ee::Vector* src, const ee::Vector& dst);
 
-	virtual void TraverseShape(ee::Visitor& visitor) const {}
-	virtual bool RemoveShape(ee::Shape* shape) { return false; }
-	virtual bool InsertShape(ee::Shape* shape) { return false; }
-	virtual bool ClearShape() { return false; }
+	virtual void TraverseMesh(ee::Visitor& visitor) const {}
+	virtual bool RemoveMesh(ee::Shape* shape) { return false; }
+	virtual bool InsertMesh(ee::Shape* shape) { return false; }
+	virtual bool ClearMesh() { return false; }
 
 	virtual void Reset();
 	virtual void Clear();

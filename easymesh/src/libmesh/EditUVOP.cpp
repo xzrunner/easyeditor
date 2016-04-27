@@ -1,6 +1,6 @@
 #include "EditUVOP.h"
 #include "StagePanel.h"
-#include "Shape.h"
+#include "Mesh.h"
 
 #include <ee/Matrix.h>
 #include <ee/RenderParams.h>
@@ -16,10 +16,10 @@ EditUVOP::EditUVOP(StagePanel* stage)
 
 bool EditUVOP::OnDraw() const
 {
-	if (Shape* shape = m_stage->GetShape())
+	if (Mesh* mesh = m_stage->GetMesh())
 	{
-		shape->DrawTexture(ee::RenderParams());
-		shape->DrawInfoXY();
+		mesh->DrawTexture(ee::RenderParams());
+		mesh->DrawInfoXY();
 	}
 
 	return false;

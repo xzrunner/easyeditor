@@ -1,7 +1,7 @@
 #include "FileIO.h"
 #include "Symbol.h"
 #include "Strip.h"
-#include "Mesh.h"
+#include "Network.h"
 
 #include <ee/FileHelper.h>
 #include <ee/panel_msg.h>
@@ -17,9 +17,9 @@ void FileIO::Store(const char* filepath, const Symbol* symbol)
 
 	value["name"] = symbol->name;
 
-	const Shape* shape = symbol->getShape();
-	if (shape) {
-		shape->Store(value);
+	const Mesh* mesh = symbol->GetMesh();
+	if (mesh) {
+		mesh->Store(value);
 	} else {
 		return;
 	}
@@ -60,17 +60,17 @@ void FileIO::Load(const char* filepath, Symbol* symbol)
 	}
 
 	std::string type = value["type"].asString();
-	Shape* shape = NULL;
+	Mesh* mesh = NULL;
 	if (type == Strip::GetType()) {
-		shape = new Strip(*symbol->getImage());
-	} else if (type == Mesh::GetType()) {
-		shape = new Mesh(*symbol->getImage());		
+		mesh = new Strip(*symbol->getImage());
+	} else if (type == Network::GetType()) {
+		mesh = new Network(*symbol->getImage());		
 	}
-	if (shape)
+	if (mesh)
 	{
-		shape->Load(value);
-		symbol->SetShape(shape);
-		shape->Release();
+		mesh->Load(value);
+		symbol->SetMesh(mesh);
+		mesh->Release();
 	}
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();

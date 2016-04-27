@@ -1,7 +1,7 @@
-#include "EditMeshCMPT.h"
-#include "EditMeshOP.h"
+#include "EditNWCMPT.h"
+#include "EditNWOP.h"
 #include "StagePanel.h"
-#include "EditShape.h"
+#include "EditableMesh.h"
 
 #include <ee/DrawRectangleOP.h>
 #include <ee/panel_msg.h>
@@ -9,29 +9,29 @@
 namespace emesh
 {
 
-EditMeshCMPT::EditMeshCMPT(wxWindow* parent, const std::string& name,
+EditNWCMPT::EditNWCMPT(wxWindow* parent, const std::string& name,
 						   StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_editop = new EditMeshOP(stage);
+	m_editop = new EditNWOP(stage);
 }
 
-wxSizer* EditMeshCMPT::InitLayout()
+wxSizer* EditNWCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
 	wxButton* btnReset = new wxButton(this, wxID_ANY, wxT("Reset"));
  	Connect(btnReset->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
- 		wxCommandEventHandler(EditMeshCMPT::onReset));
+ 		wxCommandEventHandler(EditNWCMPT::onReset));
 	sizer->Add(btnReset);
 	return sizer;
 }
 
-void EditMeshCMPT::onReset(wxCommandEvent& event)
+void EditNWCMPT::onReset(wxCommandEvent& event)
 {
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
-		shape->Reset();
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
+		mesh->Reset();
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	m_editop->Clear();

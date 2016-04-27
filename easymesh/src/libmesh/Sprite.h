@@ -32,8 +32,8 @@ public:
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	Shape* getShape() {
-		return m_symbol ? m_symbol->getShape() : NULL; 
+	Mesh* getShape() {
+		return m_symbol ? m_symbol->GetMesh() : NULL; 
 	}
 	const ee::Image* getImage() const {
 		return m_symbol ? m_symbol->getImage() : NULL;

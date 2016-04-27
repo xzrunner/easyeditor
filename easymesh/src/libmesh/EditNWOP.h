@@ -1,5 +1,5 @@
-#ifndef _EASYMESH_EDIT_MESH_OP_H_
-#define _EASYMESH_EDIT_MESH_OP_H_
+#ifndef _EASYMESH_EDIT_NW_OP_H_
+#define _EASYMESH_EDIT_NW_OP_H_
 
 #include "SelectNodesOP.h"
 
@@ -8,10 +8,10 @@ namespace emesh
 
 class Node;
 class StagePanel;
-class EditMeshOP : public SelectNodesOP
+class EditNWOP : public SelectNodesOP
 {
 public:
-	EditMeshOP(StagePanel* stage);
+	EditNWOP(StagePanel* stage);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftUp(int x, int y);
@@ -32,8 +32,8 @@ private:
 
 	bool m_select_center;
 
-}; // EditMeshOP
+}; // EditNWOP
 
 }
 
-#endif // _EASYMESH_EDIT_MESH_OP_H_
+#endif // _EASYMESH_EDIT_NW_OP_H_

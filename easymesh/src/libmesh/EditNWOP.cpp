@@ -1,7 +1,7 @@
-#include "EditMeshOP.h"
+#include "EditNWOP.h"
 #include "StagePanel.h"
 #include "Triangle.h"
-#include "Shape.h"
+#include "Mesh.h"
 
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
@@ -17,7 +17,7 @@ namespace emesh
 static const int CENTER_RADIUS = 3;
 static const int CENTER_EDGE = 10;
 
-EditMeshOP::EditMeshOP(StagePanel* stage)
+EditNWOP::EditNWOP(StagePanel* stage)
 	: SelectNodesOP(stage)
 	, m_right_press(false)
 	, m_select_center(false)
@@ -26,7 +26,7 @@ EditMeshOP::EditMeshOP(StagePanel* stage)
 	m_center.Set(0, 0);
 }
 
-bool EditMeshOP::OnMouseLeftDown(int x, int y)
+bool EditNWOP::OnMouseLeftDown(int x, int y)
 {
 	m_last_pos = m_stage->TransPosScrToProj(x, y);
 	if (ee::Math2D::GetDistance(m_last_pos, m_center) < CENTER_RADIUS)
@@ -43,7 +43,7 @@ bool EditMeshOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::OnMouseLeftUp(int x, int y)
+bool EditNWOP::OnMouseLeftUp(int x, int y)
 {
 	if (SelectNodesOP::OnMouseLeftUp(x, y))
 		return true;
@@ -53,7 +53,7 @@ bool EditMeshOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::OnMouseRightDown(int x, int y)
+bool EditNWOP::OnMouseRightDown(int x, int y)
 {
 	if (SelectNodesOP::OnMouseRightDown(x, y))
 		return true;
@@ -65,7 +65,7 @@ bool EditMeshOP::OnMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::OnMouseDrag(int x, int y)
+bool EditNWOP::OnMouseDrag(int x, int y)
 {
 	if (m_select_center)
 	{
@@ -78,8 +78,8 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 	if (SelectNodesOP::OnMouseDrag(x, y))
 		return true;
 
-	Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape();
-	if (!shape) return false;
+	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
+	if (!mesh) return false;
 
 	if (!m_selection.IsEmpty())
 	{
@@ -95,12 +95,12 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::OnDraw() const
+bool EditNWOP::OnDraw() const
 {
-	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape())
+	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		shape->DrawTexture(ee::RenderParams());
-		shape->DrawInfoXY();
+		mesh->DrawTexture(ee::RenderParams());
+		mesh->DrawInfoXY();
 	}
 
 	ee::RVG::Color(ee::Colorf(0.2f, 0.8f, 0.4f));
@@ -114,7 +114,7 @@ bool EditMeshOP::OnDraw() const
 	return false;
 }
 
-void EditMeshOP::TranslasteNode(const ee::Vector& offset)
+void EditNWOP::TranslasteNode(const ee::Vector& offset)
 {
 	std::vector<Node*> nodes;
 	m_selection.Traverse(ee::FetchAllVisitor<Node>(nodes));
@@ -124,7 +124,7 @@ void EditMeshOP::TranslasteNode(const ee::Vector& offset)
 	}
 }
 
-void EditMeshOP::RotateNode(const ee::Vector& dst)
+void EditNWOP::RotateNode(const ee::Vector& dst)
 {
 	float angle = ee::Math2D::GetAngleInDirection(m_center, m_last_pos, dst);
 	std::vector<Node*> nodes;

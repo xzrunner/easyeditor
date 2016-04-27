@@ -8,7 +8,7 @@
 namespace emesh
 {
 
-class Mesh;
+class Network;
 class StagePanel;
 
 class SelectNodesOP : public ee::DrawRectangleOP

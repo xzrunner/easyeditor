@@ -1,7 +1,7 @@
 #include "EditUVCMPT.h"
 #include "StagePanel.h"
 #include "EditUVOP.h"
-#include "EditShape.h"
+#include "EditableMesh.h"
 
 #include <ee/panel_msg.h>
 
@@ -41,16 +41,16 @@ wxSizer* EditUVCMPT::InitLayout()
 
 void EditUVCMPT::onMove(wxCommandEvent& event)
 {
-	if (Shape* shape = m_stage->GetShape()) {
-		m_stage->GetShape()->OffsetUV(0, SPEED_Y);
+	if (Mesh* mesh = m_stage->GetMesh()) {
+		m_stage->GetMesh()->OffsetUV(0, SPEED_Y);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 }
 
 void EditUVCMPT::onReset(wxCommandEvent& event)
 {
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
-		shape->Reset();
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
+		mesh->Reset();
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 		m_editop->Clear();
 	}

@@ -1,33 +1,33 @@
-#include "CreateMeshCMPT.h"
-#include "CreateMeshOP.h"
+#include "CreateNWCMPT.h"
+#include "CreateNWOP.h"
 #include "CreateStripOP.h"
 #include "StagePanel.h"
 #include "FileIO.h"
-#include "ShapeFactory.h"
-#include "EditShape.h"
+#include "MeshFactory.h"
+#include "EditableMesh.h"
 
 #include <ee/shape_msg.h>
 
 namespace emesh
 {
 
-CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const std::string& name,
+CreateNWCMPT::CreateNWCMPT(wxWindow* parent, const std::string& name,
 							   StagePanel* stage)
 	: ee::EditCMPT(parent, name, stage->GetStageImpl())
 	, m_stage(stage)
 {
-	m_mesh_op = new CreateMeshOP(stage);
+	m_mesh_op = new CreateNWOP(stage);
 	m_strip_op= new CreateStripOP(stage);
 	LoadEditOP(m_mesh_op);
 }
 
-CreateMeshCMPT::~CreateMeshCMPT()
+CreateNWCMPT::~CreateNWCMPT()
 {
 	m_mesh_op->Release();
 	m_strip_op->Release();
 }
 
-wxSizer* CreateMeshCMPT::InitLayout()
+wxSizer* CreateNWCMPT::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(15);
@@ -38,63 +38,63 @@ wxSizer* CreateMeshCMPT::InitLayout()
 		wxRadioBox* typeChoice = new wxRadioBox(this, wxID_ANY, wxT("Type"), 
 			wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_ROWS);
 // 		typeChoice->SetSelection(1);
-// 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+// 		MeshFactory::Instance()->SetShapeType(ST_STRIP);
 		typeChoice->SetSelection(0);
-		ShapeFactory::Instance()->SetShapeType(ST_MESH);
+		MeshFactory::Instance()->SetShapeType(ST_MESH);
  		Connect(typeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
- 			wxCommandEventHandler(CreateMeshCMPT::onChangeType));
+ 			wxCommandEventHandler(CreateNWCMPT::onChangeType));
 		sizer->Add(typeChoice);
 
 		sizer->AddSpacer(5);
 
 		wxCheckBox* regionSet = new wxCheckBox(this, wxID_ANY, wxT("Ê¹ÓÃ±ß½ç"), 
 			wxDefaultPosition, wxDefaultSize, wxCHK_2STATE);
-		bool use_region = ShapeFactory::Instance()->IsUseRegion();
+		bool use_region = MeshFactory::Instance()->IsUseRegion();
 		regionSet->SetValue(use_region);
-		Connect(regionSet->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CreateMeshCMPT::onChangeUseRegion));
+		Connect(regionSet->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CreateNWCMPT::onChangeUseRegion));
 		sizer->Add(regionSet);
 	}
 	sizer->AddSpacer(15);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Copy..."));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CreateMeshCMPT::onCopy));
+			wxCommandEventHandler(CreateNWCMPT::onCopy));
 		sizer->Add(btn);
 	}
 	sizer->AddSpacer(10);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Clear"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CreateMeshCMPT::onClear));
+			wxCommandEventHandler(CreateNWCMPT::onClear));
 		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
+void CreateNWCMPT::onChangeType(wxCommandEvent& event)
 {
 	int idx = event.GetSelection();
 	switch (idx)
 	{
 	case 0:
-		ShapeFactory::Instance()->SetShapeType(ST_MESH);
+		MeshFactory::Instance()->SetShapeType(ST_MESH);
 		LoadEditOP(m_mesh_op);
 		m_stage->CreateShape();
 		break;
 	case 1:
-		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+		MeshFactory::Instance()->SetShapeType(ST_STRIP);
 		LoadEditOP(m_strip_op);
 		m_stage->CreateShape();
 		break;
 	}
 }
 
-void CreateMeshCMPT::onChangeUseRegion(wxCommandEvent& event)
+void CreateNWCMPT::onChangeUseRegion(wxCommandEvent& event)
 {
-	ShapeFactory::Instance()->SetUseRegion(event.IsChecked());
+	MeshFactory::Instance()->SetUseRegion(event.IsChecked());
 }
 
-void CreateMeshCMPT::onCopy(wxCommandEvent& event)
+void CreateNWCMPT::onCopy(wxCommandEvent& event)
 {
 // 	std::string tag = ee::FileType::GetTag(ee::FileType::e_mesh);
 // 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
@@ -106,10 +106,10 @@ void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 // 	}
 }
 
-void CreateMeshCMPT::onClear(wxCommandEvent& event)
+void CreateNWCMPT::onClear(wxCommandEvent& event)
 {
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
-		shape->Clear();
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
+		mesh->Clear();
 	}
 	ee::ClearShapeSJ::Instance()->Clear();
 

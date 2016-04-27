@@ -1,5 +1,5 @@
-#ifndef _EASYMESH_CREATE_MESH_CMPT_H_
-#define _EASYMESH_CREATE_MESH_CMPT_H_
+#ifndef _EASYMESH_CREATE_NW_CMPT_H_
+#define _EASYMESH_CREATE_NW_CMPT_H_
 
 #include <ee/EditCMPT.h>
 
@@ -7,12 +7,12 @@ namespace emesh
 {
 
 class StagePanel;
-class CreateMeshCMPT : public ee::EditCMPT
+class CreateNWCMPT : public ee::EditCMPT
 {
 public:
-	CreateMeshCMPT(wxWindow* parent, const std::string& name,
+	CreateNWCMPT(wxWindow* parent, const std::string& name,
 		StagePanel* stage);
-	virtual ~CreateMeshCMPT();
+	virtual ~CreateNWCMPT();
 
 protected:
 	virtual wxSizer* InitLayout();
@@ -28,8 +28,8 @@ private:
 
 	ee::EditOP *m_mesh_op, *m_strip_op;
 
-}; // CreateMeshCMPT
+}; // CreateNWCMPT
 
 }
 
-#endif // _EASYMESH_CREATE_MESH_CMPT_H_
+#endif // _EASYMESH_CREATE_NW_CMPT_H_

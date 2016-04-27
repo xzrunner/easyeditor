@@ -1,6 +1,6 @@
 #include "CreateStripOP.h"
 #include "StagePanel.h"
-#include "EditShape.h"
+#include "EditableMesh.h"
 #include "Symbol.h"
 
 #include <ee/panel_msg.h>
@@ -24,10 +24,10 @@ bool CreateStripOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y))
 		return true;
 
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		m_selected = shape->FindNode(pos);
+		m_selected = mesh->FindNode(pos);
 	}
 
 	return false;
@@ -42,10 +42,10 @@ bool CreateStripOP::OnMouseLeftUp(int x, int y)
 		return false;
 	}
 
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		shape->InsertNode(pos);
+		mesh->InsertNode(pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -57,10 +57,10 @@ bool CreateStripOP::OnMouseRightDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseRightDown(x, y))
 		return true;
 
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		shape->RemoveNode(pos);
+		mesh->RemoveNode(pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 		m_last_right = pos;
@@ -99,9 +99,9 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
+	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
 	{
-		shape->MoveNode(m_selected, pos);
+		mesh->MoveNode(m_selected, pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -115,9 +115,9 @@ bool CreateStripOP::OnDraw() const
 		image->Draw(ee::RenderParams());
   	}
 
-	if (Shape* shape = m_stage->GetShape())
+	if (Mesh* mesh = m_stage->GetMesh())
 	{
-		shape->DrawInfoUV();
+		mesh->DrawInfoUV();
 	}
 
 	ee::ZoomViewOP::OnDraw();

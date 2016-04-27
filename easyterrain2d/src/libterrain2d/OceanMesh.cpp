@@ -176,7 +176,7 @@ ee::Rect OceanMesh::GetRegion() const
 {
 	ee::Rect ret;
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
-		emesh::Shape* shape = m_grids[i];
+		emesh::Mesh* shape = m_grids[i];
 		ret.Combine(shape->GetRegion());
 	}
 	return ret;

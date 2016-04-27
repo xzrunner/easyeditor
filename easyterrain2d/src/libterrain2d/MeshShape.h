@@ -6,7 +6,7 @@
 namespace eterrain2d
 {
 
-class MeshShape : public emesh::Shape
+class MeshShape : public emesh::Mesh
 {
 public:
 	MeshShape(const ee::Image& image);

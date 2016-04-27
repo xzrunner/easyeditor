@@ -12,7 +12,7 @@ namespace emesh
 {
 
 class Symbol;
-class Shape;
+class Mesh;
 
 class StagePanel : public ee::EditPanel, public ee::MultiShapesImpl
 {
@@ -30,7 +30,7 @@ public:
 	void SetSymbol(Symbol* symbol);
 	const Symbol* GetSymbol() const;
 
- 	Shape* GetShape();
+ 	Mesh* GetMesh();
 // 	Sprite* getSprite() { return m_sprite; }
 
 	// for background

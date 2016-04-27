@@ -19,7 +19,7 @@ Strip::Strip()
 }
 
 Strip::Strip(const Strip& strip)
-	: EditShape(strip)
+	: EditableMesh(strip)
 	, m_left_nodes(strip.m_left_nodes)
 	, m_right_nodes(strip.m_right_nodes)
 {
@@ -28,7 +28,7 @@ Strip::Strip(const Strip& strip)
 }
 
 Strip::Strip(const ee::Image& image)
-	: EditShape(image)
+	: EditableMesh(image)
 {
 	InitBound();
 }

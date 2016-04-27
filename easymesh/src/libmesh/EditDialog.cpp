@@ -4,7 +4,7 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "FileIO.h"
-#include "Shape.h"
+#include "Mesh.h"
 
 #include <ee/ConfirmDialog.h>
 #include <ee/SpriteFactory.h>

@@ -1,12 +1,13 @@
 #ifndef _EASYMESH_MESH_H_
 #define _EASYMESH_MESH_H_
 
-#include "EditShape.h"
+#include <json/json.h>
 
-#include <ee/Rect.h>
-#include <ee/Vector.h>
+#include <ee/Object.h>
+#include <ee/Cloneable.h>
+#include <ee/Color.h>
 
-namespace eshape { class ChainShape; }
+namespace ee { class Image; class Vector; class Rect; class Matrix; class RenderParams; }
 
 namespace emesh
 {
@@ -14,68 +15,56 @@ namespace emesh
 class Node;
 class Triangle;
 
-class Mesh : public EditShape
+class Mesh : public ee::Object, public ee::Cloneable
 {
 public:
-	Mesh(bool use_region = false);
+	Mesh();
 	Mesh(const Mesh& mesh);
-	Mesh(const ee::Image& image, bool initBound = true, bool use_region = false);
+	Mesh(const ee::Image& image);
+	virtual ~Mesh();
 
-	//
-	// Cloneable interface
-	//
-	virtual Mesh* Clone() const;
+ 	//
+ 	// Cloneable interface
+ 	//
+ 	virtual Mesh* Clone() const { return NULL; }
 
-	//
-	// Shape interface
-	//
-	virtual void Load(const Json::Value& value);
-	virtual void Store(Json::Value& value) const;
+	virtual void Load(const Json::Value& value) {}
+	virtual void Store(Json::Value& value) const {}
 
-	virtual void OffsetUV(float dx, float dy);
-	virtual void Refresh();
+	virtual void OffsetUV(float dx, float dy) {}
+	virtual void Update() {}
+	virtual void Refresh() {}
 
-	//
-	// EditShape interface
-	//
-	virtual void InsertNode(const ee::Vector& p) {}
-	virtual void RemoveNode(const ee::Vector& p) {}
-	virtual ee::Vector* FindNode(const ee::Vector& p) { return NULL; }
-	virtual void MoveNode(ee::Vector* src, const ee::Vector& dst) {}
+	Node* PointQueryNode(const ee::Vector& p);
+	void RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes);
 
-	virtual void TraverseShape(ee::Visitor& visitor) const;
-	virtual bool RemoveShape(ee::Shape* shape);
-	virtual bool InsertShape(ee::Shape* shape);
-	virtual bool ClearShape();
+	void DrawInfoUV() const;
+	void DrawInfoXY() const;
+	void DrawTexture(const ee::RenderParams& trans) const;
+	void DrawTexture(const ee::RenderParams& trans, unsigned int texid) const;
 
- 	virtual void Reset();
- 	virtual void Clear();
+	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 
-	static const char* GetType() { return "mesh"; }
+	float GetNodeRegion() const { return m_node_radius; }
 
-private:
-	void RefreshTriangles();
+	ee::Rect GetRegion() const;
 
-	void GetTriangulation(std::vector<ee::Vector>& tris);
-	void LoadFromTriangulation(const std::vector<ee::Vector>& tris);
+	void SetTween(Mesh* begin, Mesh* end, float process);
 
-	void GetRegionBound(std::vector<ee::Vector>& bound) const;
+protected:
+	void ClearTriangles();
 
-//	void getLinesCutByUVBounds(std::vector<ee::Vector>& lines);
+	void StoreTriangles(Json::Value& value) const;
+	void LoadTriangles(const Json::Value& value);
 
-private:
-	struct Region
-	{
-		ee::Rect rect;
-		std::vector<eshape::ChainShape*> loops;
-	};
+protected:
+	int m_texid;
+	float m_width, m_height;
+	std::string m_tex_filepath;		// for dtex
 
-private:
-	bool m_use_region;
+	std::vector<Triangle*> m_tris;
 
-	Region m_region;
-
-	ee::Vector m_uv_offset;
+	float m_node_radius;
 
 }; // Mesh
 

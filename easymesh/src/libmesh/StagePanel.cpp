@@ -1,7 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "Symbol.h"
-#include "EditShape.h"
+#include "EditableMesh.h"
 
 #include <easyshape.h>
 
@@ -48,9 +48,9 @@ StagePanel::~StagePanel()
 void StagePanel::TraverseShapes(ee::Visitor& visitor, 
 								ee::DataTraverseType type/* = ee::DT_ALL*/) const
 {
-	Shape* shape = m_symbol->getShape();
-	if (shape) {
-		static_cast<EditShape*>(shape)->TraverseShape(visitor);
+	Mesh* mesh = m_symbol->GetMesh();
+	if (mesh) {
+		static_cast<EditableMesh*>(mesh)->TraverseMesh(visitor);
 	}
 }
 
@@ -68,9 +68,9 @@ const Symbol* StagePanel::GetSymbol() const
 	return m_symbol;
 }
 
-Shape* StagePanel::GetShape()
+Mesh* StagePanel::GetMesh()
 {
-	return m_symbol->getShape();
+	return m_symbol->GetMesh();
 }
 
 void StagePanel::LoadFromSymbol(const ee::Symbol* symbol)
@@ -79,10 +79,10 @@ void StagePanel::LoadFromSymbol(const ee::Symbol* symbol)
 
 void StagePanel::UpdateSymbol()
 {
-	if (Shape* shape = m_symbol->getShape()) {
+	if (Mesh* mesh = m_symbol->GetMesh()) {
 		std::vector<const eshape::ChainShape*> polylines;
 		TraverseShapes(ee::FetchAllVisitor<const eshape::ChainShape>(polylines));
-		shape->Refresh();
+		mesh->Refresh();
 	}
 }
 
@@ -113,23 +113,23 @@ void StagePanel::OnNotify(int sj_id, void* ud)
 	switch (sj_id) 
 	{
 	case ee::MSG_REMOVE_SHAPE:
-		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->RemoveShape((ee::Shape*)ud)) {
+		if (Mesh* mesh = m_symbol->GetMesh()) {
+			if (static_cast<EditableMesh*>(mesh)->RemoveMesh((ee::Shape*)ud)) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_INSERT_SHAPE:
-		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->InsertShape((ee::Shape*)ud)) {
+		if (Mesh* mesh = m_symbol->GetMesh()) {
+			if (static_cast<EditableMesh*>(mesh)->InsertMesh((ee::Shape*)ud)) {
 				UpdateSymbol();
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}
 		break;
 	case ee::MSG_CLEAR_SHAPE:
-		if (Shape* shape = m_symbol->getShape()) {
-			if (static_cast<EditShape*>(shape)->ClearShape()) {
+		if (Mesh* mesh = m_symbol->GetMesh()) {
+			if (static_cast<EditableMesh*>(mesh)->ClearMesh()) {
 				ee::SetCanvasDirtySJ::Instance()->SetDirty();
 			}
 		}

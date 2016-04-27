@@ -8,7 +8,7 @@ namespace emesh
 
 static const char* FILE_TAG = "mesh";
 
-enum ShapeType
+enum MeshType
 {
 	ST_MESH = 0,
 	ST_STRIP

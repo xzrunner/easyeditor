@@ -1,6 +1,6 @@
 #include "SelectNodesOP.h"
 #include "StagePanel.h"
-#include "Mesh.h"
+#include "Network.h"
 
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
@@ -27,11 +27,11 @@ bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 	if (ee::DrawRectangleOP::OnMouseLeftDown(x, y)) 
 		return true;
 
-	Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape();
-	if (!shape) return false;
+	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
+	if (!mesh) return false;
 
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-	Node* selected = shape->PointQueryNode(pos);
+	Node* selected = mesh->PointQueryNode(pos);
 	if (selected)
 	{
 		if (m_stage->GetKeyState(WXK_CONTROL))
@@ -73,13 +73,13 @@ bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 
 	m_draggable = true;
 
-	Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape();
-	if (m_first_pos.IsValid() && shape)
+	Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh();
+	if (m_first_pos.IsValid() && mesh)
 	{
 		ee::Vector end = m_stage->TransPosScrToProj(x, y);
 		ee::Rect rect(m_first_pos, end);
 		std::vector<Node*> nodes;
-		shape->RectQueryNodes(rect, nodes);
+		mesh->RectQueryNodes(rect, nodes);
 		for (size_t i = 0, n = nodes.size(); i < n; ++i) {
 			m_selection.Add(nodes[i]);
 		}
@@ -116,9 +116,9 @@ bool SelectNodesOP::OnDraw() const
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 		points.push_back(nodes[i]->xy);
 
-	if (Shape* shape = static_cast<StagePanel*>(m_wnd)->GetShape()) {
+	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh()) {
 		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
-		ee::RVG::Circles(points, shape->GetNodeRegion(), true);
+		ee::RVG::Circles(points, mesh->GetNodeRegion(), true);
 	}
 
 	return false;

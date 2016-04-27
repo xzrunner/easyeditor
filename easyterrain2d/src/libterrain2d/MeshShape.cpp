@@ -6,7 +6,7 @@ namespace eterrain2d
 {
 
 MeshShape::MeshShape(const ee::Image& image)
-	: emesh::Shape(image)
+	: emesh::Mesh(image)
 {
 }
 

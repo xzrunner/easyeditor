@@ -1,8 +1,8 @@
 #include "Symbol.h"
-#include "Shape.h"
+#include "Mesh.h"
 #include "FileIO.h"
 #include "Sprite.h"
-#include "ShapeFactory.h"
+#include "MeshFactory.h"
 
 #include <ee/Image.h>
 #include <ee/RenderParams.h>
@@ -15,7 +15,7 @@ namespace emesh
 
 Symbol::Symbol()
 	: m_image(NULL)
-	, m_shape(NULL)
+	, m_mesh(NULL)
 	, m_pause(false)
 {
 }
@@ -26,7 +26,7 @@ Symbol::Symbol(const Symbol& s)
 	s.m_image->Retain();
 	m_image = s.m_image;
 
-	m_shape = s.m_shape->Clone();
+	m_mesh = s.m_mesh->Clone();
 }
 
 Symbol::Symbol(ee::Image* image)
@@ -34,7 +34,7 @@ Symbol::Symbol(ee::Image* image)
 	image->Retain();
 	m_image = image;
 
-	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
+	m_mesh = MeshFactory::Instance()->CreateMesh(*m_image);
 }
 
 Symbol::~Symbol()
@@ -44,10 +44,10 @@ Symbol::~Symbol()
 		m_image->Release();
 		m_image = NULL;
 	}
-	if (m_shape)
+	if (m_mesh)
 	{
-		m_shape->Release();
-		m_shape = NULL;
+		m_mesh->Release();
+		m_mesh = NULL;
 	}
 }
 
@@ -66,7 +66,7 @@ void Symbol::ReloadTexture() const
 void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
-	if (!m_shape) {
+	if (!m_mesh) {
 		return;
 	}
 
@@ -79,13 +79,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		ee::color2int(trans.color.g, ee::PT_ABGR),
 		ee::color2int(trans.color.b, ee::PT_ABGR));
 
-	m_shape->DrawTexture(trans);
+	m_mesh->DrawTexture(trans);
 	if (!m_pause && spr) 
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);
 		ee::Vector spd = s->GetSpeed();
 		if (spd.x != 0 || spd.y != 0) {
-			m_shape->OffsetUV(spd.x, spd.y);
+			m_mesh->OffsetUV(spd.x, spd.y);
 		}
 	}
 }
@@ -95,13 +95,13 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 // //	return m_image->getRegion();
 // }
 
-void Symbol::SetShape(Shape* shape)
+void Symbol::SetMesh(Mesh* mesh)
 {
-	if (m_shape) {
-		m_shape->Release();
+	if (m_mesh) {
+		m_mesh->Release();
 	}
-	shape->Retain();
-	m_shape = shape;
+	mesh->Retain();
+	m_mesh = mesh;
 }
 
 std::string Symbol::GetImagePath() const
@@ -117,10 +117,10 @@ void Symbol::LoadImage(const std::string& filepath)
 
 void Symbol::CreateShape()
 {
-	if (m_shape) {
-		m_shape->Release();
+	if (m_mesh) {
+		m_mesh->Release();
 	}
-	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
+	m_mesh = MeshFactory::Instance()->CreateMesh(*m_image);
 }
 
 void Symbol::LoadResources()
@@ -131,7 +131,7 @@ void Symbol::LoadResources()
 
 void Symbol::InitBounding()
 {
-	m_region = m_shape->GetRegion();
+	m_region = m_mesh->GetRegion();
 }
 
 }

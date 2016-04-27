@@ -217,14 +217,22 @@
 				>
 			</File>
 			<Filter
-				Name="mesh"
+				Name="network"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\Mesh.cpp"
+					RelativePath="..\..\..\src\libmesh\Network.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\Mesh.h"
+					RelativePath="..\..\..\src\libmesh\Network.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\NetworkShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\NetworkShape.h"
 					>
 				</File>
 			</Filter>
@@ -244,27 +252,27 @@
 				Name="base"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditShape.h"
+					RelativePath="..\..\..\src\libmesh\EditableMesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Mesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Mesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\MeshFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\MeshFactory.h"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\libmesh\Node.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\Shape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\Shape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\ShapeFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libmesh\ShapeFactory.h"
 					>
 				</File>
 				<File
@@ -292,19 +300,19 @@
 				Name="create"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.cpp"
+					RelativePath="..\..\..\src\libmesh\CreateNWCMPT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.h"
+					RelativePath="..\..\..\src\libmesh\CreateNWCMPT.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateMeshOP.cpp"
+					RelativePath="..\..\..\src\libmesh\CreateNWOP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\CreateMeshOP.h"
+					RelativePath="..\..\..\src\libmesh\CreateNWOP.h"
 					>
 				</File>
 				<File
@@ -320,19 +328,19 @@
 				Name="edit"
 				>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.cpp"
+					RelativePath="..\..\..\src\libmesh\EditNWCMPT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.h"
+					RelativePath="..\..\..\src\libmesh\EditNWCMPT.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditMeshOP.cpp"
+					RelativePath="..\..\..\src\libmesh\EditNWOP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\EditMeshOP.h"
+					RelativePath="..\..\..\src\libmesh\EditNWOP.h"
 					>
 				</File>
 				<File

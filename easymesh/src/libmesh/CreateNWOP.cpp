@@ -1,7 +1,7 @@
-#include "CreateMeshOP.h"
+#include "CreateNWOP.h"
 #include "StagePanel.h"
 #include "Symbol.h"
-#include "Shape.h"
+#include "Mesh.h"
 
 #include <ee/Matrix.h>
 #include <ee/Image.h>
@@ -10,14 +10,14 @@
 namespace emesh
 {
 
-CreateMeshOP::CreateMeshOP(StagePanel* stage)
+CreateNWOP::CreateNWOP(StagePanel* stage)
 	: eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>(stage, stage->GetStageImpl(), stage, NULL, new ee::OneFloatValueStatic(5), NULL)
 	, m_stage(stage)
 {
 	SetLoop(true);
 }
 
-bool CreateMeshOP::OnKeyDown(int keyCode)
+bool CreateNWOP::OnKeyDown(int keyCode)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnKeyDown(keyCode))
 		return true;
@@ -38,7 +38,7 @@ bool CreateMeshOP::OnKeyDown(int keyCode)
 	return false;
 }
 
-bool CreateMeshOP::OnMouseLeftDown(int x, int y)
+bool CreateNWOP::OnMouseLeftDown(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseLeftDown(x, y))
 		return true;
@@ -51,7 +51,7 @@ bool CreateMeshOP::OnMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::OnMouseLeftUp(int x, int y)
+bool CreateNWOP::OnMouseLeftUp(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseLeftUp(x, y))
 		return true;
@@ -64,7 +64,7 @@ bool CreateMeshOP::OnMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::OnMouseRightDown(int x, int y)
+bool CreateNWOP::OnMouseRightDown(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseRightDown(x, y))
 		return true;
@@ -77,7 +77,7 @@ bool CreateMeshOP::OnMouseRightDown(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::OnMouseRightUp(int x, int y)
+bool CreateNWOP::OnMouseRightUp(int x, int y)
 {
 	if (eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnMouseRightUp(x, y))
 		return true;
@@ -90,7 +90,7 @@ bool CreateMeshOP::OnMouseRightUp(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::OnDraw() const
+bool CreateNWOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw())
 		return true;
@@ -100,9 +100,9 @@ bool CreateMeshOP::OnDraw() const
 		image->Draw(ee::RenderParams());
  	}
 
-	if (Shape* shape = m_stage->GetShape())
+	if (Mesh* mesh = m_stage->GetMesh())
 	{
-		shape->DrawInfoUV();
+		mesh->DrawInfoUV();
 	}
 
 	eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnDraw();

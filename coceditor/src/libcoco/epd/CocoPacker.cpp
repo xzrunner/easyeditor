@@ -1114,7 +1114,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	}
 	std::vector<int> frame_size;
 	ee::Vector speed = sprite->GetSpeed();
-	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->GetSymbol().getShape());
+	emesh::Mesh* shape = const_cast<emesh::Mesh*>(sprite->GetSymbol().GetMesh());
 	// 打包emesh::Strip做的流水
 	if (dynamic_cast<emesh::Strip*>(shape))
 	{
@@ -1178,7 +1178,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 		}
 	}
 	// 打包普通emesh::Mesh
-	else if (dynamic_cast<emesh::Mesh*>(shape))
+	else if (dynamic_cast<emesh::Network*>(shape))
 	{
 		const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
 		frame_size.push_back(tris.size());
