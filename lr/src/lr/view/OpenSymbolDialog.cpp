@@ -45,6 +45,8 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 	stage->EnableObserve(false);
 	stage->GetCanvas()->EnableObserve(false);
 	stage->SetUpdateState(false);
+	stage->GetCanvas()->SetDrawable(false);
+
 	if (static_cast<LibraryPanel*>(stage->GetLibrary())->IsCurrUnitLayer()) 
 	{
 		std::vector<std::string> path_names;
@@ -128,6 +130,7 @@ void OpenSymbolDialog::Open(ee::Sprite* spr)
 
 	stage->SetUpdateState(true);
 	stage->EnableObserve(true);
+	stage->GetCanvas()->SetDrawable(true);
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }

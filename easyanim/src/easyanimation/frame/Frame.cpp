@@ -92,13 +92,14 @@ void Frame::OnPreview(wxCommandEvent& event)
 {
 	StagePanel* stage = ViewMgr::Instance()->stage;
 	stage->EnableObserve(false);
-	stage->GetCanvas()->EnableObserve(false);
+	stage->GetCanvas()->SetDrawable(false);
 	{
 		PreviewDialog dlg(this, stage->GetCanvas()->GetGLContext());
 		dlg.ShowModal();
 	}
 	stage->EnableObserve(true);
 	stage->GetCanvas()->EnableObserve(true);
+	stage->GetCanvas()->SetDrawable(true);
 
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 }
