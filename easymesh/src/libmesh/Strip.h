@@ -22,20 +22,12 @@ public:
 	virtual Strip* Clone() const;
 
 	//
-	// Shape interface
+	// Mesh interface
 	//
 	virtual void Load(const Json::Value& value);
 	virtual void Store(Json::Value& value) const;
 
 	virtual void OffsetUV(float dx, float dy);
-
-	//
-	// EditableMesh interface
-	//
-	virtual void InsertNode(const ee::Vector& p);
-	virtual void RemoveNode(const ee::Vector& p);
-	virtual ee::Vector* FindNode(const ee::Vector& p);
-	virtual void MoveNode(ee::Vector* src, const ee::Vector& dst);
 
 	virtual void TraverseMesh(ee::Visitor& visitor) const {}
 	virtual bool RemoveMesh(ee::Shape* shape) { return false; }
@@ -44,6 +36,11 @@ public:
 
 	virtual void Reset();
 	virtual void Clear();
+
+	void InsertNode(const ee::Vector& p);
+	void RemoveNode(const ee::Vector& p);
+	ee::Vector* FindNode(const ee::Vector& p);
+	void MoveNode(ee::Vector* src, const ee::Vector& dst);
 
 	static const char* GetType() { return "strip"; }
 

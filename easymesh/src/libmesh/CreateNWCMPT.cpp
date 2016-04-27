@@ -33,26 +33,17 @@ wxSizer* CreateNWCMPT::InitLayout()
 	sizer->AddSpacer(15);
 	{
 		wxArrayString choices;
-		choices.Add(wxT("mesh"));
+		choices.Add(wxT("network"));
 		choices.Add(wxT("strip"));
 		wxRadioBox* typeChoice = new wxRadioBox(this, wxID_ANY, wxT("Type"), 
 			wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_ROWS);
 // 		typeChoice->SetSelection(1);
 // 		MeshFactory::Instance()->SetShapeType(ST_STRIP);
 		typeChoice->SetSelection(0);
-		MeshFactory::Instance()->SetShapeType(ST_MESH);
+		MeshFactory::Instance()->SetShapeType(ST_NETWORK);
  		Connect(typeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
  			wxCommandEventHandler(CreateNWCMPT::onChangeType));
 		sizer->Add(typeChoice);
-
-		sizer->AddSpacer(5);
-
-		wxCheckBox* regionSet = new wxCheckBox(this, wxID_ANY, wxT("Ê¹ÓÃ±ß½ç"), 
-			wxDefaultPosition, wxDefaultSize, wxCHK_2STATE);
-		bool use_region = MeshFactory::Instance()->IsUseRegion();
-		regionSet->SetValue(use_region);
-		Connect(regionSet->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CreateNWCMPT::onChangeUseRegion));
-		sizer->Add(regionSet);
 	}
 	sizer->AddSpacer(15);
 	{
@@ -77,7 +68,7 @@ void CreateNWCMPT::onChangeType(wxCommandEvent& event)
 	switch (idx)
 	{
 	case 0:
-		MeshFactory::Instance()->SetShapeType(ST_MESH);
+		MeshFactory::Instance()->SetShapeType(ST_NETWORK);
 		LoadEditOP(m_mesh_op);
 		m_stage->CreateShape();
 		break;
@@ -87,11 +78,6 @@ void CreateNWCMPT::onChangeType(wxCommandEvent& event)
 		m_stage->CreateShape();
 		break;
 	}
-}
-
-void CreateNWCMPT::onChangeUseRegion(wxCommandEvent& event)
-{
-	MeshFactory::Instance()->SetUseRegion(event.IsChecked());
 }
 
 void CreateNWCMPT::onCopy(wxCommandEvent& event)

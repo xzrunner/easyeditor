@@ -37,11 +37,11 @@ public:
  	Mesh* GetMesh() { return m_mesh; }
 	void SetMesh(Mesh* mesh);
 
-	const ee::Image* getImage() const { return m_image; }
-	ee::Image* getImage() { return m_image; }
+	const ee::Image* GetImage() const { return m_image; }
+	ee::Image* GetImage() { return m_image; }
 
 	std::string GetImagePath() const;
-	void LoadImage(const std::string& filepath);
+	void LoadImage2(const std::string& filepath);
 
 	void SetPause(bool pause) { m_pause = pause; }
 

@@ -15,20 +15,39 @@ void JsonSerializer::Store(const std::vector<Vector>& points, Json::Value& value
 
 void JsonSerializer::Load(const Json::Value& value, std::vector<Vector>& points)
 {
-	points.reserve(value["x"].size());
+	if (value.isArray())
+	{
+		int sz = value.size() / 2;
+		points.reserve(sz);
+		int i = 0;
+		Json::Value xval = value[i++],
+			        yval = value[i++];
+		while (!xval.isNull() && !yval.isNull()) {
+			Vector p;
+			p.x = static_cast<float>(xval.asDouble());
+			p.y = static_cast<float>(yval.asDouble());
+			points.push_back(p);
+			xval = value[i++];
+			yval = value[i++];
+		}
+	}
+	else
+	{
+		points.reserve(value["x"].size());
 
-	int i = 0;
-	Json::Value xval = value["x"][i],
-		yval = value["y"][i];
-	++i;
-	while (!xval.isNull() && !yval.isNull()) {
-		Vector p;
-		p.x = static_cast<float>(xval.asDouble());
-		p.y = static_cast<float>(yval.asDouble());
-		points.push_back(p);
-		xval = value["x"][i];
-		yval = value["y"][i];
+		int i = 0;
+		Json::Value xval = value["x"][i],
+			yval = value["y"][i];
 		++i;
+		while (!xval.isNull() && !yval.isNull()) {
+			Vector p;
+			p.x = static_cast<float>(xval.asDouble());
+			p.y = static_cast<float>(yval.asDouble());
+			points.push_back(p);
+			xval = value["x"][i];
+			yval = value["y"][i];
+			++i;
+		}	
 	}
 }
 

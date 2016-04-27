@@ -249,7 +249,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="base"
+				Name="mesh"
 				>
 				<File
 					RelativePath="..\..\..\src\libmesh\EditableMesh.h"
@@ -272,13 +272,25 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\Node.h"
+					RelativePath="..\..\..\src\libmesh\MeshTrans.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libmesh\Triangle.h"
+					RelativePath="..\..\..\src\libmesh\MeshTrans.h"
 					>
 				</File>
+				<Filter
+					Name="base"
+					>
+					<File
+						RelativePath="..\..\..\src\libmesh\Node.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libmesh\Triangle.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -296,6 +308,10 @@
 		<Filter
 			Name="edit"
 			>
+			<File
+				RelativePath="..\..\..\src\libmesh\color_config.h"
+				>
+			</File>
 			<Filter
 				Name="create"
 				>

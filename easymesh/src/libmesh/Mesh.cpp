@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "Triangle.h"
+#include "color_config.h"
 
 #include <ee/Image.h>
 #include <ee/EE_RVG.h>
@@ -101,12 +102,12 @@ void Mesh::DrawInfoUV() const
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
 			unique.insert(tmp[i]);
 		}
-		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f));
+		ee::RVG::Color(RED);
 		ee::RVG::Polyline(tmp, true);
 	}
 	std::vector<ee::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Color(ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::RVG::Color(BLUE);
 	ee::RVG::Circles(nodes, m_node_radius, true);
 }
 
@@ -122,12 +123,12 @@ void Mesh::DrawInfoXY() const
 			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
-		ee::RVG::Color(ee::Colorf(0.8f, 0.2f, 0.4f, 0.5f));
+		ee::RVG::Color(RED);
 		ee::RVG::Polyline(tmp, true);
 	}
 	std::vector<ee::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Color(ee::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	ee::RVG::Color(BLUE);
 	ee::RVG::Circles(nodes, m_node_radius, true);
 }
 
@@ -179,21 +180,6 @@ ee::Rect Mesh::GetRegion() const
 		}
 	}	
 	return r;
-}
-
-void Mesh::SetTween(Mesh* begin, Mesh* end, float process)
-{
-	assert(m_tris.size() == begin->m_tris.size() && m_tris.size() == end->m_tris.size());
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int j = 0; j < 3; ++j)
-		{
-			const ee::Vector& p0 = begin->m_tris[i]->nodes[j]->xy;
-			const ee::Vector& p1 = end->m_tris[i]->nodes[j]->xy;
-			m_tris[i]->nodes[j]->xy = p0 + (p1 - p0) * process;
-		}
-	}
 }
 
 void Mesh::ClearTriangles()

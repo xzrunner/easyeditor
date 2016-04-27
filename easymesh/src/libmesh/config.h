@@ -10,7 +10,7 @@ static const char* FILE_TAG = "mesh";
 
 enum MeshType
 {
-	ST_MESH = 0,
+	ST_NETWORK = 0,
 	ST_STRIP
 };
 

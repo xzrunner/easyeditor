@@ -1,6 +1,8 @@
 #include "Network.h"
 #include "Triangle.h"
 #include "config.h"
+#include "NetworkShape.h"
+#include "MeshTrans.h"
 
 #include <ee/JsonSerializer.h>
 #include <ee/Triangulation.h>
@@ -12,23 +14,27 @@
 namespace emesh
 {
 
-Network::Network(bool use_region)
-	: m_use_region(use_region)
+Network::Network()
+	: m_nw(NULL)
 {
 }
 
-Network::Network(const Network& mesh)
-	: EditableMesh(mesh)
-	, m_region(mesh.m_region)
-	, m_use_region(mesh.m_use_region)
+Network::Network(const Network& nw)
+	: EditableMesh(nw)
 {
+	if (nw.m_nw) {
+		m_nw = nw.m_nw->Clone();
+	} else {
+		m_nw = NULL;
+	}
+
 	RefreshTriangles();
 
 	// copy triangles
-	assert(m_tris.size() == mesh.m_tris.size());
+	assert(m_tris.size() == nw.m_tris.size());
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
-		Triangle* src = mesh.m_tris[i];
+		Triangle* src = nw.m_tris[i];
 		Triangle* dst = m_tris[i];
 		for (int j = 0; j < 3; ++j)
 		{
@@ -37,17 +43,16 @@ Network::Network(const Network& mesh)
 	}
 }
 
-Network::Network(const ee::Image& image, bool initBound, bool use_region)
+Network::Network(const ee::Image& image)
 	: EditableMesh(image)
-	, m_use_region(use_region)
+	, m_nw(NULL)
 {
-	if (initBound)
-	{
-		float hw = m_width * 0.5f,
-			  hh = m_height * 0.5f;
-		m_region.rect.Combine(ee::Vector(hw, hh));
-		m_region.rect.Combine(ee::Vector(-hw, -hh));
-		RefreshTriangles();
+}
+
+Network::~Network()
+{
+	if (m_nw) {
+		delete m_nw;
 	}
 }
 
@@ -58,116 +63,38 @@ Network* Network::Clone() const
 
 void Network::Load(const Json::Value& value)
 {
-	ee::Rect& r = m_region.rect;
-	r.xmin = static_cast<float>(value["bound"]["xmin"].asDouble());
-	r.xmax = static_cast<float>(value["bound"]["xmax"].asDouble());
-	r.ymin = static_cast<float>(value["bound"]["ymin"].asDouble());
-	r.ymax = static_cast<float>(value["bound"]["ymax"].asDouble());
-
-	Json::Value loops_val = value["loops"];
-	int i = 0;
-	Json::Value loop_val = loops_val[i++];
-	while (!loop_val.isNull()) {
-		std::vector<ee::Vector> nodes;
-		ee::JsonSerializer::Load(loop_val, nodes);
-		eshape::ChainShape* mesh = new eshape::ChainShape(nodes, true);
-		m_region.loops.push_back(mesh);
-		loop_val = loops_val[i++];
+	if (m_nw) {
+		delete m_nw;
 	}
+
+	std::vector<ee::Vector> outline;
+	ee::JsonSerializer::Load(value["shape"]["outline"], outline);
+	m_nw = new NetworkShape(new eshape::ChainShape(outline, true), m_node_radius);
+
+	std::vector<ee::Vector> inner;
+	ee::JsonSerializer::Load(value["shape"]["inner"], inner);
+	m_nw->SetInnerVertices(inner);
 
 	RefreshTriangles();
 
-#ifndef OPEN_MESH_INV
-	if (!value["triangles"].isNull()) {
-		LoadTriangles(value["triangles"]);
-	}
-#else
-	if (!value["triangles"].isNull()) {
-		LoadTriangles(value["triangles"]);
-	}
-	// load inverse mesh, need pair each node
-	else if (!value["triangles_new"].isNull()) {
-		std::vector<ee::Vector> transform_ori, transform_new;
-		ee::JsonSerializer::Load(value["triangles"], transform_ori);
-		ee::JsonSerializer::Load(value["triangles_new"], transform_new);
-
-		int itr = 0;
-		for (int i = 0, n = m_tris.size(); i < n; ++i)
-		{
-			Triangle* tri = m_tris[i];
-			for (int i = 0; i < 3; ++i) 
-			{
-				Node* n = tri->nodes[i];
-
-				for (int j = 0, m = transform_new.size(); j < m; ++j) {
-					if (n->ori_xy == transform_new[j]) {
-						n->xy = transform_ori[j];
-						break;
-					}
-				}
-			}
-		}
-	}
-#endif
+	MeshTrans trans;
+	trans.Load(value);
+	trans.StoreToMesh(this);
 }
 
 void Network::Store(Json::Value& value) const
 {
 	value["type"] = GetType();
 
-	value["bound"]["xmin"] = m_region.rect.xmin;
-	value["bound"]["xmax"] = m_region.rect.xmax;
-	value["bound"]["ymin"] = m_region.rect.ymin;
-	value["bound"]["ymax"] = m_region.rect.ymax;
-
-#ifndef OPEN_MESH_INV
-	Json::Value& loops_val = value["loops"];
-	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-		const eshape::ChainShape* loop = m_region.loops[i];
-		ee::JsonSerializer::Store(loop->GetVertices(), loops_val[i]);
+	if (!m_nw) {
+		return;
 	}
 
-	StoreTriangles(value["triangles"]);
-#else
-	Json::Value& loops_val = value["loops"];
-	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-		const eshape::ChainShape* loop = m_region.loops[i];
-		const std::vector<ee::Vector>& src = loop->GetVertices();
-		std::vector<ee::Vector> dst;
-		for (int i = 0, n = src.size(); i < n; ++i) {
-			bool find = false;
-			for (int j = 0, m = m_tris.size(); j < m && !find; ++j) {
-				Triangle* tri = m_tris[j];
-				for (int k = 0; k < 3 && !find; ++k) {
-					Node* n = tri->nodes[k];
-					if (src[i] == n->ori_xy) {
-						dst.push_back(n->xy);
-						find = true;
-					}
-				}
-			}
-		}
-		ee::JsonSerializer::Store(dst, loops_val[i]);
-	}
+	m_nw->StoreToFile(value, "");
 
-	std::vector<ee::Vector> transform;
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int i = 0; i < 3; ++i)
-			transform.push_back(tri->nodes[i]->ori_xy);
-	}
-	ee::JsonSerializer::Store(transform, value["triangles"]);
-
-	std::vector<ee::Vector> transform_new;
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int i = 0; i < 3; ++i)
-			transform_new.push_back(tri->nodes[i]->xy);
-	}
-	ee::JsonSerializer::Store(transform_new, value["triangles_new"]);
-#endif
+	MeshTrans trans;
+	trans.LoadFromMesh(this);
+	trans.Store(value);
 }
 
 void Network::OffsetUV(float dx, float dy)
@@ -312,55 +239,40 @@ void Network::Refresh()
 
 void Network::TraverseMesh(ee::Visitor& visitor) const
 {
-	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
-	{
-		eshape::ChainShape* shape 
-			= const_cast<eshape::ChainShape*>(m_region.loops[i]);
-
+	if (m_nw) {
 		bool has_next;
-		visitor.Visit(shape, has_next);
-		if (!has_next) {
-			break;
-		}
+		visitor.Visit(m_nw, has_next);
 	}
 }
 
 bool Network::RemoveMesh(ee::Shape* mesh)
 {
-	bool ret = false;
-	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
-	{
-		ee::Shape* loop = m_region.loops[i];
-		if (loop == mesh) {
-			loop->Release();
-			m_region.loops.erase(m_region.loops.begin() + i);
-			ret = true;
-			break;
-		}
-	}
-	return ret;
-}
-
-bool Network::InsertMesh(ee::Shape* mesh)
-{
-	eshape::ChainShape* loop = dynamic_cast<eshape::ChainShape*>(mesh);
-	if (loop) {
-		loop->Retain();
-		m_region.loops.push_back(loop);
+	if (mesh == m_nw) {
+		delete m_nw, m_nw = NULL;		
 		return true;
 	} else {
 		return false;
 	}
 }
 
+bool Network::InsertMesh(ee::Shape* mesh)
+{
+	eshape::ChainShape* loop = dynamic_cast<eshape::ChainShape*>(mesh);
+	if (m_nw) {
+		delete m_nw;
+	}
+	m_nw = new NetworkShape(loop, m_node_radius);
+	return true;
+}
+
 bool Network::ClearMesh()
 {
-	bool ret = !m_region.loops.empty();
-	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-		m_region.loops[i]->Release();
+	if (m_nw) {
+		delete m_nw, m_nw = NULL;
+		return true;
+	} else {
+		return false;
 	}
-	m_region.loops.clear();
-	return ret;
 }
 
 void Network::Reset()
@@ -375,6 +287,33 @@ void Network::Clear()
 	ClearTriangles();
 }
 
+bool Network::InsertInner(const ee::Vector& pos)
+{
+	if (!m_nw) {
+		return false;
+	} else {
+		return m_nw->InsertInner(pos);
+	}
+}
+
+bool Network::RemoveInner(const ee::Vector& pos)
+{
+	if (!m_nw) {
+		return false;
+	} else {
+		return m_nw->RemoveInner(pos);
+	}
+}
+
+ee::Vector* Network::QueryInner(const ee::Vector& pos)
+{
+	if (!m_nw) {
+		return NULL;
+	} else {
+		return m_nw->QueryInner(pos);
+	}
+}
+
 void Network::RefreshTriangles()
 {
 	ClearTriangles();
@@ -387,49 +326,8 @@ void Network::RefreshTriangles()
  
 void Network::GetTriangulation(std::vector<ee::Vector>& tris)
 {
-	if (m_use_region)
-	{
-		std::vector<ee::Vector> bound;
-		const ee::Rect& r = m_region.rect;
-		bound.push_back(ee::Vector(r.xmin, r.ymin));
-		bound.push_back(ee::Vector(r.xmin, r.ymax));
-		bound.push_back(ee::Vector(r.xmax, r.ymax));
-		bound.push_back(ee::Vector(r.xmax, r.ymin));
-
-		std::vector<ee::Vector> points;
-		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
-		{
-			const eshape::ChainShape* chain = m_region.loops[i];
-			const std::vector<ee::Vector>& loop = chain->GetVertices();
-			std::copy(loop.begin(), loop.end(), back_inserter(points));
-		}
-		ee::Triangulation::Points(bound, points, tris);
-	}
-	else
-	{
- 		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
- 		{
- 			const eshape::ChainShape* chain = m_region.loops[i];
- 			const std::vector<ee::Vector>& loop = chain->GetVertices();
- 			ee::Triangulation::Normal(loop, tris);
- 		}
-
-// 		for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-// 			const std::vector<ee::Vector>& loop0 = m_region.loops[i]->getVertices();
-// 			for (int j = 0; j < n; ++j) {
-// 				if (i != j) {
-// 					const std::vector<ee::Vector>& loop1 = m_region.loops[j]->getVertices();
-// 					if (ee::Math2D::isPointInArea(loop1[0], loop0)) {
-// 
-// // 						std::vector<std::vector<ee::Vector> > holes;
-// // 						holes.push_back(loop1);
-// // 						ee::Triangulation::Holes(loop0, holes, tris);
-// 
-// 						ee::Triangulation::HolesNew(loop0, loop1, tris);
-// 					}
-// 				}
-// 			}
-// 		}
+	if (m_nw) {
+		ee::Triangulation::Points(m_nw->GetVertices(), m_nw->GetInnerVertices(), tris);
 	}
 }
 

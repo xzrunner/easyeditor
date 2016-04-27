@@ -49,8 +49,6 @@ public:
 
 	ee::Rect GetRegion() const;
 
-	void SetTween(Mesh* begin, Mesh* end, float process);
-
 protected:
 	void ClearTriangles();
 

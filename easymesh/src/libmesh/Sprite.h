@@ -2,6 +2,7 @@
 #define _EASYMESH_SPRITE_H_
 
 #include "Symbol.h"
+#include "MeshTrans.h"
 
 #include <ee/Sprite.h>
 #include <ee/Vector.h>
@@ -32,20 +33,13 @@ public:
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val) const;
 
-	Mesh* getShape() {
-		return m_symbol ? m_symbol->GetMesh() : NULL; 
-	}
-	const ee::Image* getImage() const {
-		return m_symbol ? m_symbol->getImage() : NULL;
-	}
-	ee::Image* getImage() {
-		return m_symbol ? m_symbol->getImage() : NULL;
-	}
-
 	const ee::Vector& GetSpeed() const { return m_speed; }
 	void SetSpeed(const ee::Vector& spd) { m_speed = spd; }
 
 	void SetTween(Sprite* begin, Sprite* end, float process);
+
+	const MeshTrans& GetMeshTrans() const { return m_trans; }
+	MeshTrans& GetMeshTrans() { return m_trans; }
 
 	static ee::Sprite* Create(ee::Symbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
@@ -55,6 +49,8 @@ private:
 	Symbol* m_symbol;
 
 	ee::Vector m_speed;
+
+	mutable MeshTrans m_trans;
 
 }; // Sprite
 

@@ -149,6 +149,18 @@ void Strip::OffsetUV(float dx, float dy)
 	}
 }
 
+void Strip::Reset()
+{
+	m_uv_offset = 0;
+	RefreshTriangles();
+}
+
+void Strip::Clear()
+{
+	InitBound();
+	RefreshTriangles();
+}
+
 void Strip::InsertNode(const ee::Vector& p)
 {
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
@@ -209,18 +221,6 @@ void Strip::MoveNode(ee::Vector* src, const ee::Vector& dst)
 	m_left_nodes.Sort();
 	m_right_nodes.Sort();
 
-	RefreshTriangles();
-}
-
-void Strip::Reset()
-{
-	m_uv_offset = 0;
-	RefreshTriangles();
-}
-
-void Strip::Clear()
-{
-	InitBound();
 	RefreshTriangles();
 }
 

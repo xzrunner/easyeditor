@@ -1,6 +1,7 @@
 #include "SelectNodesOP.h"
 #include "StagePanel.h"
 #include "Network.h"
+#include "color_config.h"
 
 #include <ee/panel_msg.h>
 #include <ee/FetchAllVisitor.h>
@@ -117,7 +118,7 @@ bool SelectNodesOP::OnDraw() const
 		points.push_back(nodes[i]->xy);
 
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh()) {
-		ee::RVG::Color(ee::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
+		ee::RVG::Color(GREEN);
 		ee::RVG::Circles(points, mesh->GetNodeRegion(), true);
 	}
 

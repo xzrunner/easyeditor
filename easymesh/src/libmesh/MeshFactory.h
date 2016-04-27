@@ -17,19 +17,14 @@ public:
 
 	void SetShapeType(MeshType type);
 
-	void SetUseRegion(bool use_region);
-	bool IsUseRegion() const;
-
 public:
 	static MeshFactory* Instance();
 
 private:
-	MeshFactory();
+	MeshFactory() {}
 
 private:
 	MeshType m_type;
-
-	bool m_use_region;
 
 private:
 	static MeshFactory* m_instance;

@@ -1,6 +1,6 @@
 #include "CreateStripOP.h"
 #include "StagePanel.h"
-#include "EditableMesh.h"
+#include "Strip.h"
 #include "Symbol.h"
 
 #include <ee/panel_msg.h>
@@ -24,10 +24,10 @@ bool CreateStripOP::OnMouseLeftDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseLeftDown(x, y))
 		return true;
 
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
+	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		m_selected = mesh->FindNode(pos);
+		m_selected = strip->FindNode(pos);
 	}
 
 	return false;
@@ -42,10 +42,10 @@ bool CreateStripOP::OnMouseLeftUp(int x, int y)
 		return false;
 	}
 
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
+	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		mesh->InsertNode(pos);
+		strip->InsertNode(pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -57,10 +57,10 @@ bool CreateStripOP::OnMouseRightDown(int x, int y)
 	if (ee::ZoomViewOP::OnMouseRightDown(x, y))
 		return true;
 
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
+	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
-		mesh->RemoveNode(pos);
+		strip->RemoveNode(pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 
 		m_last_right = pos;
@@ -99,9 +99,9 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh()))
+	if (Strip* strip = static_cast<Strip*>(m_stage->GetMesh()))
 	{
-		mesh->MoveNode(m_selected, pos);
+		strip->MoveNode(m_selected, pos);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 
@@ -110,7 +110,7 @@ bool CreateStripOP::OnMouseDrag(int x, int y)
 
 bool CreateStripOP::OnDraw() const
 {
- 	if (const ee::Image* image = m_stage->GetSymbol()->getImage())
+ 	if (const ee::Image* image = m_stage->GetSymbol()->GetImage())
   	{
 		image->Draw(ee::RenderParams());
   	}

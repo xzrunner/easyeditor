@@ -32,6 +32,8 @@ private:
 
 	bool m_select_center;
 
+	bool m_dragable;
+
 }; // EditNWOP
 
 }

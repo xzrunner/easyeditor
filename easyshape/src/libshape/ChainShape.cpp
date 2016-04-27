@@ -37,27 +37,34 @@ ChainShape* ChainShape::Clone() const
 
 bool ChainShape::IsContain(const ee::Vector& pos) const
 {
-	ee::Rect rect(m_rect);
-	rect.xmin -= QUERY_ACCURACY;
-	rect.xmax += QUERY_ACCURACY;
-	rect.ymin -= QUERY_ACCURACY;
-	rect.ymax += QUERY_ACCURACY;
-	if (m_vertices.empty() || !ee::Math2D::IsPointInRect(pos, rect))
-		return false;
-
-	size_t index;
-	float dis = ee::Math2D::GetDisPointToMultiPos(pos, m_vertices, &index);
-	if (dis < QUERY_ACCURACY) return true;
-
-	if (m_vertices.size() < 2) return false;
-	for (size_t i = 0, n = m_vertices.size() - 1; i < n; ++i)
+	if (m_loop) 
 	{
-		float dis = ee::Math2D::GetDisPointToSegment(pos, m_vertices[i], m_vertices[i + 1]);
-		if (dis < QUERY_ACCURACY) 
-			return true;
+		return ee::Math2D::IsPointInArea(pos, m_vertices);
 	}
+	else
+	{
+		ee::Rect rect(m_rect);
+		rect.xmin -= QUERY_ACCURACY;
+		rect.xmax += QUERY_ACCURACY;
+		rect.ymin -= QUERY_ACCURACY;
+		rect.ymax += QUERY_ACCURACY;
+		if (m_vertices.empty() || !ee::Math2D::IsPointInRect(pos, rect))
+			return false;
 
-	return false;
+		size_t index;
+		float dis = ee::Math2D::GetDisPointToMultiPos(pos, m_vertices, &index);
+		if (dis < QUERY_ACCURACY) return true;
+
+		if (m_vertices.size() < 2) return false;
+		for (size_t i = 0, n = m_vertices.size() - 1; i < n; ++i)
+		{
+			float dis = ee::Math2D::GetDisPointToSegment(pos, m_vertices[i], m_vertices[i + 1]);
+			if (dis < QUERY_ACCURACY) 
+				return true;
+		}
+
+		return false;
+	}
 }
 
 bool ChainShape::IsIntersect(const ee::Rect& rect) const

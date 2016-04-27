@@ -66,7 +66,7 @@ void Symbol::ReloadTexture() const
 void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
-	if (!m_mesh) {
+	if (!m_mesh || !spr) {
 		return;
 	}
 
@@ -79,8 +79,10 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		ee::color2int(trans.color.g, ee::PT_ABGR),
 		ee::color2int(trans.color.b, ee::PT_ABGR));
 
+	const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();
+	mtrans.StoreToMesh(m_mesh);
 	m_mesh->DrawTexture(trans);
-	if (!m_pause && spr) 
+	if (!m_pause) 
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);
 		ee::Vector spd = s->GetSpeed();
@@ -109,7 +111,7 @@ std::string Symbol::GetImagePath() const
 	return m_image->GetFilepath();
 }
 
-void Symbol::LoadImage(const std::string& filepath)
+void Symbol::LoadImage2(const std::string& filepath)
 {
 //	ee::BitmapMgr::Instance()->GetItem(filepath, &m_bitmap);
 	ee::ImageMgr::Instance()->GetItem(filepath, &m_image);

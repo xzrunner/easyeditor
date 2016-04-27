@@ -19,11 +19,17 @@ public:
 	virtual bool OnMouseLeftUp(int x, int y);
 	virtual bool OnMouseRightDown(int x, int y);
 	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
 	virtual bool OnDraw() const;
 
 private:
+	void RefreshAll();
+
+private:
 	StagePanel* m_stage;
+
+	ee::Vector* m_selected_inner;
 
 }; // CreateNWOP
 

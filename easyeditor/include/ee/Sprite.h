@@ -98,6 +98,9 @@ protected:
 	template<typename T>
 	void SetSymbol(T** dst, Symbol* src);
 
+private:
+	const Sprite& operator = (const Sprite& spr) { return spr; }
+
 public:
 	// info
 	std::string name;

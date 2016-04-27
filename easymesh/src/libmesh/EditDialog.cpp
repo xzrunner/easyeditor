@@ -28,7 +28,6 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* sprite, wxGLContext* glctx)
 	InitLayout(glctx);
 
 	symbol.SetPause(true);
-//	m_symbol->getShape()->RefreshTriangles();
 }
 
 EditDialog::~EditDialog()
@@ -66,16 +65,18 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_YES)
 	{
-		const std::string& filepath = symbol.GetFilepath();
-		FileIO::Store(symbol.GetFilepath().c_str(), &symbol);
-		symbol.RefreshThumbnail(filepath);
+		m_sprite->GetMeshTrans().LoadFromMesh(symbol.GetMesh());
+
+// 		const std::string& filepath = symbol.GetFilepath();
+// 		FileIO::Store(symbol.GetFilepath().c_str(), &symbol);
+// 		symbol.RefreshThumbnail(filepath);
 
 		ee::SpriteFactory::Instance()->UpdateBoundings(symbol);
 		Destroy();
 	}
 	else if (val == wxID_NO)
 	{
-		symbol.LoadFromFile(symbol.GetFilepath());
+//		symbol.LoadFromFile(symbol.GetFilepath());
 		Destroy();
 	}
 }

@@ -19,7 +19,6 @@ protected:
 
 private:
 	void onChangeType(wxCommandEvent& event);
-	void onChangeUseRegion(wxCommandEvent& event);
 	void onCopy(wxCommandEvent& event);
 	void onClear(wxCommandEvent& event);
 

@@ -108,7 +108,7 @@ void TweenUtility::GetTweenSprite(ee::Sprite* start, ee::Sprite* end, ee::Sprite
 		emesh::Sprite* mesh_e = dynamic_cast<emesh::Sprite*>(end);
 		emesh::Sprite* mesh_t = dynamic_cast<emesh::Sprite*>(tween);
 		assert(mesh_e && mesh_t);
-		mesh_t->SetTween(mesh_e, mesh_t, process);
+		mesh_t->SetTween(mesh_s, mesh_e, process);
 	}
 }
 

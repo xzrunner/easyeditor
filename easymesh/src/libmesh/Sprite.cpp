@@ -17,14 +17,18 @@ Sprite::Sprite()
 Sprite::Sprite(const Sprite& s)
 	: ee::Sprite(s)
 	, m_speed(s.m_speed)
+	, m_trans(s.m_trans)
 {
-	m_symbol = s.m_symbol->Clone();
+	m_symbol = s.m_symbol;
+	m_symbol->Retain();
 }
 
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
 //	m_speed.set(0, -0.01f);
+
+	m_trans.LoadFromMesh(symbol->GetMesh());
 
 	m_symbol->Retain();
 	BuildBounding();
@@ -55,27 +59,25 @@ void Sprite::SetSymbol(ee::Symbol* symbol)
 void Sprite::Load(const Json::Value& val)
 {
 	ee::Sprite::Load(val);
-	m_speed.x = static_cast<float>(val["speed"]["x"].asDouble());
-	m_speed.y = static_cast<float>(val["speed"]["y"].asDouble());
-
-// 	// ¼æÈÝÀÏÊý¾Ý
-// 	if (!val["left nodes"].isNull()) {
-// 		m_symbol->getShape()->Load(val);
-// 	}
+	
+	const Json::Value& mesh_val = val["mesh"];
+	m_trans.Load(mesh_val);
+	m_trans.StoreToMesh(m_symbol->GetMesh());
 }
 
 void Sprite::Store(Json::Value& val) const
 {
 	ee::Sprite::Store(val);
-	val["speed"]["x"] = m_speed.x;
-	val["speed"]["y"] = m_speed.y;
 
-//	m_symbol->getShape()->Store(val);
+	Json::Value mesh_val;
+//	m_trans.LoadFromMesh(m_symbol->GetMesh());
+	m_trans.Store(mesh_val);
+	val["mesh"] = mesh_val;
 }
 
 void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
 {
-	getShape()->SetTween(begin->getShape(), end->getShape(), process);
+	GetMeshTrans().SetTween(begin->GetMeshTrans(), end->GetMeshTrans(), process);
 }
 
 }

@@ -21,6 +21,7 @@ EditNWOP::EditNWOP(StagePanel* stage)
 	: SelectNodesOP(stage)
 	, m_right_press(false)
 	, m_select_center(false)
+	, m_dragable(false)
 {
 	m_last_pos.SetInvalid();
 	m_center.Set(0, 0);
@@ -28,6 +29,8 @@ EditNWOP::EditNWOP(StagePanel* stage)
 
 bool EditNWOP::OnMouseLeftDown(int x, int y)
 {
+	m_dragable = true;
+
 	m_last_pos = m_stage->TransPosScrToProj(x, y);
 	if (ee::Math2D::GetDistance(m_last_pos, m_center) < CENTER_RADIUS)
 	{
@@ -45,6 +48,8 @@ bool EditNWOP::OnMouseLeftDown(int x, int y)
 
 bool EditNWOP::OnMouseLeftUp(int x, int y)
 {
+	m_dragable = false;
+
 	if (SelectNodesOP::OnMouseLeftUp(x, y))
 		return true;
 
@@ -67,6 +72,10 @@ bool EditNWOP::OnMouseRightDown(int x, int y)
 
 bool EditNWOP::OnMouseDrag(int x, int y)
 {
+	if (!m_dragable) {
+		return false;
+	}
+
 	if (m_select_center)
 	{
 		ee::Vector pos = m_stage->TransPosScrToProj(x, y);
@@ -90,6 +99,7 @@ bool EditNWOP::OnMouseDrag(int x, int y)
 			TranslasteNode(pos - m_last_pos);
 		m_last_pos = pos;
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
+		ee::SetWndDirtySJ::Instance()->SetDirty();
 	}
 
 	return false;
