@@ -67,7 +67,7 @@ void Symbol::ReloadTexture() const
 void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr, 
 				  const ee::Sprite* root) const
 {
-	if (!m_mesh || !spr) {
+	if (!m_mesh) {
 		return;
 	}
 
@@ -80,10 +80,12 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		ee::color2int(trans.color.g, ee::PT_ABGR),
 		ee::color2int(trans.color.b, ee::PT_ABGR));
 
-	const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();
-	mtrans.StoreToMesh(m_mesh);
+	if (spr) {
+		const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();
+		mtrans.StoreToMesh(m_mesh);
+	}
 	MeshRenderer::DrawTexture(m_mesh, trans);
-	if (!m_pause) 
+	if (!m_pause && spr)
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);
 		ee::Vector spd = s->GetSpeed();
