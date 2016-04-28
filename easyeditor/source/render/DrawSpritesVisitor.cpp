@@ -23,12 +23,10 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 		return;
 	}
 
-	SpriteRenderer* rd = SpriteRenderer::Instance();
-
 	int filter_mode_idx = FilterModes::Instance()->QueryShaderIdx(spr->rp->shader.filter);
 //	ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
-	DrawSprite(rd, spr);
+	DrawSprite(spr);
 
 	SettingData& cfg = Config::Instance()->GetSettings();
 	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
@@ -40,9 +38,9 @@ void DrawSpritesVisitor::Visit(Object* object, bool& next)
 	}
 }
 
-void DrawSpritesVisitor::DrawSprite(SpriteRenderer* rd, Sprite* spr) const
+void DrawSpritesVisitor::DrawSprite(Sprite* spr) const
 {
-	rd->Draw(spr);
+	SpriteRenderer::Draw(spr);
 }
 
 }

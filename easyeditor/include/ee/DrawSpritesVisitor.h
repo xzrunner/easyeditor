@@ -18,7 +18,7 @@ public:
 	virtual void Visit(Object* object, bool& next);
 
 protected:
-	virtual void DrawSprite(SpriteRenderer* rd, Sprite* spr) const;
+	virtual void DrawSprite(Sprite* spr) const;
 
 private:
 	Rect m_screen_region;

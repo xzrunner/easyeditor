@@ -192,7 +192,7 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	float dx = -symbol->GetSize().CenterX();
 	float dy = symbol->GetSize().CenterY();
 	mt.Translate(dx * scale, dy * scale);
-	SpriteRenderer::Instance()->Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
+	SpriteRenderer::Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();
@@ -245,7 +245,7 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	mt.Translate(-dx, -dy);
 	RenderParams params(mt);
 	params.set_shader = false;
-	SpriteRenderer::Instance()->Draw(sprite, NULL, params);
+	SpriteRenderer::Draw(sprite, NULL, params);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	mgr->GetShader()->Commit();

@@ -19,32 +19,26 @@ class FBO;
 class SpriteRenderer
 {
 public:
-	void Draw(const Sprite* sprite, 
-		      const Sprite* root = NULL,
-			  const RenderParams& trans = RenderParams()) const;
+	static void Draw(const Sprite* sprite, 
+		             const Sprite* root = NULL,
+			         const RenderParams& trans = RenderParams());
 
-	void InvalidRect(const Sprite* sprite, const Matrix& mt = Matrix());
+	static void InvalidRect(const Sprite* sprite, 
+		                    const Matrix& mt = Matrix());
 
-	void Draw(const Symbol* symbol, 
-			  const RenderParams& trans = RenderParams(),
-			  const Vector& pos = Vector(0, 0),
-			  float angle = 0.0f, 
-			  float xScale = 1.0f, 
-			  float yScale = 1.0f,
-			  float xShear = 0.0f, 
-			  float yShear = 0.0f) const;
-
-	static SpriteRenderer* Instance();
-
-private:
-	SpriteRenderer();
-
-	void DrawImpl(const Sprite* sprite, 
-		          const Sprite* root,
-  				  const RenderParams& trans) const;
+	static void Draw(const Symbol* symbol, 
+		             const RenderParams& trans = RenderParams(),
+			         const Vector& pos = Vector(0, 0),
+			         float angle = 0.0f, 
+			         float xScale = 1.0f, 
+			         float yScale = 1.0f,
+			         float xShear = 0.0f, 
+			         float yShear = 0.0f);
 
 private:
-	static SpriteRenderer* m_instance;
+	static void DrawImpl(const Sprite* sprite, 
+		                 const Sprite* root,
+  				         const RenderParams& trans);
 	
 }; // SpriteRenderer
 

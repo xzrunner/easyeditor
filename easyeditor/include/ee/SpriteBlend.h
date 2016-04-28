@@ -10,19 +10,11 @@ class Matrix;
 class SpriteBlend
 {
 public:
-	void Draw(const Sprite* sprite, const Matrix& mt) const;
+	static void Draw(const Sprite* sprite, const Matrix& mt);
 	
-	static SpriteBlend* Instance();
-		
 private:
-	SpriteBlend();
-
-private:
-	void DrawSprToTmp(const Sprite* sprite, const Matrix& mt) const;
-	void DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const;
-
-private:
-	static SpriteBlend* m_instance;
+	static void DrawSprToTmp(const Sprite* sprite, const Matrix& mt);
+	static void DrawTmpToScreen(const Sprite* sprite, const Matrix& mt);
 
 }; // SpriteBlend
 

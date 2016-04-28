@@ -17,7 +17,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (const ee::Sprite* s = m_stage->GetImage())
 	{
-		ee::SpriteRenderer::Instance()->Draw(s);
+		ee::SpriteRenderer::Draw(s);
 	}
 
 	ee::RVG::Color(ee::Colorf(1, 0, 0));

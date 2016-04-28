@@ -21,7 +21,7 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 
 void PreviewCanvas::OnDrawSprites() const
 {
-	ee::SpriteRenderer::Instance()->Draw(m_symbol);
+	ee::SpriteRenderer::Draw(m_symbol);
 }
 
 void PreviewCanvas::OnTimer()

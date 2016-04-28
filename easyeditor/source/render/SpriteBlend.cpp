@@ -18,21 +18,7 @@
 namespace ee
 {
 
-SpriteBlend* SpriteBlend::m_instance = NULL;
-
-SpriteBlend* SpriteBlend::Instance()
-{
-	if (!m_instance) {
-		m_instance = new SpriteBlend();
-	}
-	return m_instance;
-}
-
-SpriteBlend::SpriteBlend()
-{
-}
-
-void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt) const
+void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt)
 {
 	assert(spr->rp->shader.blend != BM_NULL);
 
@@ -61,7 +47,7 @@ void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt) const
 	DrawTmpToScreen(spr, mt);
 }
 
-void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt) const
+void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
@@ -76,7 +62,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt) const
 	const_cast<Sprite*>(spr)->rp->shader.blend = BM_NULL;
 	RenderParams params(mt);
 	params.set_shader = false;
-	SpriteRenderer::Instance()->Draw(spr, spr, params);
+	SpriteRenderer::Draw(spr, spr, params);
 	const_cast<Sprite*>(spr)->rp->shader.blend = mode;
 
 	shader->Commit();
@@ -84,7 +70,7 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt) const
 	dtexf_c1_unbind();
 }
 
-void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt) const
+void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt)
 {
 	Matrix t;
 	sprite->GetTransMatrix(t);

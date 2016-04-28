@@ -91,7 +91,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	}
 	trans.mt = mt;
 
-	ee::SpriteRenderer::Instance()->Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
+	ee::SpriteRenderer::Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
 
 	// todo bind
 	// 	if (p->bind_ps) {

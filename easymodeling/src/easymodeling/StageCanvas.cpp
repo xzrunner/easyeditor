@@ -42,7 +42,7 @@ void StageCanvas::DrawSprites() const
 	m_stage_panel->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
+		ee::SpriteRenderer::Draw(sprites[i]);
 		DrawUtils::DrawBody(static_cast<Body*>(sprites[i]->GetUserData()), DrawUtils::e_default);
 	}
 }

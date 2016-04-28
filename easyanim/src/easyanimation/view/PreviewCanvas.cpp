@@ -70,7 +70,7 @@ void PreviewCanvas::DrawStageData() const
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ee::Sprite* spr = sprites[i];
 		spr->Update(0);
-		ee::SpriteRenderer::Instance()->Draw(spr);
+		ee::SpriteRenderer::Draw(spr);
 	}
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {

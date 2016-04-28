@@ -220,7 +220,6 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
  		vertices_scr[3] = Math2D::TransVector(Vector(-img_hw,  img_hh), trans.mt);
 
 		Vector tex_coords_base[4];
-		SpriteRenderer* rd = SpriteRenderer::Instance();
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		assert(cam);
 		int w, h;

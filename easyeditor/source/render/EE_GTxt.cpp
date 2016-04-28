@@ -188,7 +188,7 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 		return;
 	}
 
-	SpriteRenderer::Instance()->Draw((Symbol*)ext_sym, 
+	SpriteRenderer::Draw((Symbol*)ext_sym, 
 		RenderParams(*((Matrix*)ud)), Vector(x, y));
 }
 

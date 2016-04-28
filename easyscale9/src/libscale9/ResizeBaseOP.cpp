@@ -78,7 +78,7 @@ bool ResizeBaseOP::OnDraw() const
 {
 	if (ee::ZoomViewOP::OnDraw()) return true;
 
-	ee::SpriteRenderer::Instance()->Draw(m_symbol);
+	ee::SpriteRenderer::Draw(m_symbol);
 
 	const float hw = m_symbol->GetSize().Width() * 0.5f,
 		hh = m_symbol->GetSize().Height() * 0.5f;

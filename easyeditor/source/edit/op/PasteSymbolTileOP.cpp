@@ -148,11 +148,10 @@ bool PasteSymbolTileOP::OnDraw() const
 	Symbol* symbol = m_library->GetSymbol();
 	if (symbol && m_pos.IsValid())
 	{
-		SpriteRenderer* rd = SpriteRenderer::Instance();
 		if (m_scale) {
-			rd->Draw(symbol, Matrix(), m_pos, m_rotate, *m_scale);
+			SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_rotate, *m_scale);
 		} else {
-			rd->Draw(symbol, Matrix(), m_pos, m_rotate);
+			SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_rotate);
 		}
 	}
 

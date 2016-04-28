@@ -212,7 +212,7 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 
 			Matrix mt;
 			mt.SetTranslation(x, y);
-			SpriteRenderer::Instance()->Draw(m_selected[i], NULL, mt);
+			SpriteRenderer::Draw(m_selected[i], NULL, mt);
 		}
 	}
 }

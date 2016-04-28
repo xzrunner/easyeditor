@@ -100,15 +100,13 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 		}
 	}
 
-	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
-
 	int filter_mode_idx = 0;
 	if (draw_edge) {
 		filter_mode_idx = ee::FilterModes::Instance()->QueryShaderIdx(ee::FilterMode::FM_EDGE_DETECTION);
 	}
 //	ee::ShaderMgr::Instance()->SetSpriteShader(filter_mode_idx);
 
-	rd->Draw(spr);
+	ee::SpriteRenderer::Draw(spr);
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {

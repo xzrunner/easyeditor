@@ -66,7 +66,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	memcpy(&trans.color.multi, mul_col, sizeof(*mul_col));
 	memcpy(&trans.color.add, add_col, sizeof(*add_col));
 
-	ee::SpriteRenderer::Instance()->Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
+	ee::SpriteRenderer::Draw(sym, trans, ee::Vector(x, y), angle, scale, scale, 0, 0);
 }
 
 void PS::Init()

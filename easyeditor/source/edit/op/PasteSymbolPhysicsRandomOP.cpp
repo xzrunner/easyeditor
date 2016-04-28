@@ -74,7 +74,7 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 		symbol = m_library->GetSymbol();
 	}
 	if (symbol && m_pos.IsValid()) {
-		SpriteRenderer::Instance()->Draw(symbol, Matrix(), m_pos, m_random_value.angle, m_random_value.scale);
+		SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_random_value.angle, m_random_value.scale);
 	}
 
 	return false;

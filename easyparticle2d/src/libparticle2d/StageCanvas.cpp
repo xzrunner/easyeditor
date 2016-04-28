@@ -33,7 +33,7 @@ void StageCanvas::OnDrawSprites() const
 		ee::Sprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		ee::SpriteRenderer::Instance()->Draw(sprites[i]);
+		ee::SpriteRenderer::Draw(sprites[i]);
 	}
 
 	if (m_stage->m_ps) {

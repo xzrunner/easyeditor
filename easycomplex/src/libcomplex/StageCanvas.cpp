@@ -137,7 +137,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		ee::SpriteRenderer::Instance()->Draw(m_background);
+		ee::SpriteRenderer::Draw(m_background);
 	}
 
 	if (Settings::bVisibleBGRect) {

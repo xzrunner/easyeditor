@@ -294,7 +294,7 @@ void Sprite::Translate(const Vector& offset)
 #ifdef OPEN_SCREEN_CACHE
 	bool find = SpatialPartition::Instance()->Remove(this);
 	if (find) {
-		SpriteRenderer::Instance()->InvalidRect(this);
+		SpriteRenderer::InvalidRect(this);
 	}
 #endif // OPEN_SCREEN_CACHE
 
@@ -308,7 +308,7 @@ void Sprite::Translate(const Vector& offset)
 
 #ifdef OPEN_SCREEN_CACHE
 	if (find) {
-		SpriteRenderer::Instance()->InvalidRect(this);
+		SpriteRenderer::InvalidRect(this);
 		SpatialPartition::Instance()->Insert(this);
 	}
 #endif // OPEN_SCREEN_CACHE

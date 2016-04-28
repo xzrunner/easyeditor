@@ -59,7 +59,7 @@ void Particle::Draw(const ee::Matrix& mt) const
 	float scale = m_during / m_life * (m_start_scale - m_end_scale) + m_end_scale;
 
 	ee::Vector pos = eparticle3d::TransCoords3To2(m_position);
-	ee::SpriteRenderer::Instance()->Draw(m_symbol, _mt, pos, m_angle, 
+	ee::SpriteRenderer::Draw(m_symbol, _mt, pos, m_angle, 
 		scale, scale/*, 0, 0, multi*/);
 }
 

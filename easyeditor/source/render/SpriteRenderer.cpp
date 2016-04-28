@@ -17,23 +17,9 @@
 namespace ee
 {
 
-SpriteRenderer* SpriteRenderer::m_instance = NULL;
-
-SpriteRenderer* SpriteRenderer::Instance()
-{
-	if (!m_instance) {
-		m_instance = new SpriteRenderer();
-	}
-	return m_instance;
-}
-
-SpriteRenderer::SpriteRenderer()
-{
-}
-
 void SpriteRenderer::Draw(const Sprite* spr, 
 						  const Sprite* root,
-						  const RenderParams& trans) const
+						  const RenderParams& trans)
 {
 	if (!spr->visiable) {
 		return;
@@ -78,7 +64,7 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	if (blend != BM_NULL) {
 		const Camera* cam = CameraMgr::Instance()->GetCamera();
 		if (cam->Type() == "ortho") {
-			SpriteBlend::Instance()->Draw(spr, trans.mt);
+			SpriteBlend::Draw(spr, trans.mt);
 		}
 	} else if (filter != FM_NULL) {
 		if (trans.set_shader) {
@@ -120,7 +106,7 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 						  float xScale/* = 1.0f*/, 
 						  float yScale/* = 1.0f*/, 
 						  float xShear/* = 0.0f*/, 
-						  float yShear/* = 0.0f*/) const
+						  float yShear/* = 0.0f*/)
 {
 	Matrix mt;
 	mt.SetTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
@@ -134,7 +120,7 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 
 void SpriteRenderer::DrawImpl(const Sprite* spr, 
 							  const Sprite* root,
-							  const RenderParams& trans) const
+							  const RenderParams& trans)
 {
 	Matrix t;
 	spr->GetTransMatrix(t);

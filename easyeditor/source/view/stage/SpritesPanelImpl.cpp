@@ -71,7 +71,7 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 			m_container->Insert(p->spr, p->idx);
 #ifdef OPEN_SCREEN_CACHE
 			SpatialPartition::Instance()->Insert(p->spr);
-			SpriteRenderer::Instance()->InvalidRect(p->spr);
+			SpriteRenderer::InvalidRect(p->spr);
 #endif // OPEN_SCREEN_CACHE
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}
@@ -82,7 +82,7 @@ void SpritesPanelImpl::OnNotify(int sj_id, void* ud)
 			m_container->Remove(spr);
 #ifdef OPEN_SCREEN_CACHE
 			SpatialPartition::Instance()->Remove(spr);
-			SpriteRenderer::Instance()->InvalidRect(spr);
+			SpriteRenderer::InvalidRect(spr);
 #endif // OPEN_SCREEN_CACHE
 			SetCanvasDirtySJ::Instance()->SetDirty();
 		}

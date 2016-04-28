@@ -187,7 +187,7 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], root, trans);
 			}
 		}
 		break;
@@ -196,27 +196,27 @@ void Scale9Data::DrawScale9(Scale9Type type, ee::Sprite* const sprites[3][3],
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], root, trans);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[1][i]) continue;
-			ee::SpriteRenderer::Instance()->Draw(sprites[1][i], root, trans);
+			ee::SpriteRenderer::Draw(sprites[1][i], root, trans);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[i][1]) continue;
-			ee::SpriteRenderer::Instance()->Draw(sprites[i][1], root, trans);
+			ee::SpriteRenderer::Draw(sprites[i][1], root, trans);
 		}
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				ee::SpriteRenderer::Instance()->Draw(sprites[i][j], root, trans);
+				ee::SpriteRenderer::Draw(sprites[i][j], root, trans);
 			}
 		}
 		break;

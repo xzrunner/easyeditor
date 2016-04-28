@@ -26,7 +26,7 @@ void StageCanvas::OnDrawSprites() const
 		// 			continue;
 		ee::RenderParams trans;
 		trans.color = spr->rp->color;
-		ee::SpriteRenderer::Instance()->Draw(spr, NULL, trans);
+		ee::SpriteRenderer::Draw(spr, NULL, trans);
 	}
 }
 
