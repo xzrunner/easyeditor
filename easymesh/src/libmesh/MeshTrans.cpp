@@ -90,7 +90,7 @@ void MeshTrans::SetTween(const MeshTrans& s, const MeshTrans& e, float process)
 			= e.m_map.find(itr_s->first);
 		ee::Vector pos;
 		if (itr_e == e.m_map.end()) {
-			pos = itr_s->second - itr_s->second * process;
+			pos = itr_s->second + (itr_s->first - itr_s->second) * process;
 		} else {
 			pos = itr_s->second + (itr_e->second - itr_s->second) * process;
 		}
@@ -102,7 +102,7 @@ void MeshTrans::SetTween(const MeshTrans& s, const MeshTrans& e, float process)
 		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_s
 			= s.m_map.find(itr_e->first);
 		if (itr_s == s.m_map.end()) {
-			ee::Vector pos = itr_e->second * process;
+			ee::Vector pos = itr_e->first + (itr_e->second - itr_e->first) * process;
 			m_map.insert(std::make_pair(itr_e->first, pos));
 		}
 	}
