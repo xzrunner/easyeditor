@@ -277,7 +277,7 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (emesh::Symbol* mesh = dynamic_cast<emesh::Symbol*>(symbol))
 			{
- 				std::string path = mesh->GetImagePath();
+ 				std::string path = mesh->GetMesh()->GetBaseSymbol()->GetFilepath();
  				ee::Symbol* image = ee::SymbolMgr::Instance()->FetchSymbol(path);
 				m_symbol_set.Insert(image);
 				m_symbol_set.Insert(mesh);

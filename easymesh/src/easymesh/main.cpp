@@ -10,6 +10,7 @@
 #include <easyscale9.h>
 #include <easytext.h>
 #include <easyanim.h>
+#include <easyparticle3d.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -29,6 +30,9 @@ static void InitSymbolCreators()
 
 	ee::SymbolFactory::RegisterCreator(etext::FILE_TAG, &etext::Symbol::Create);
 	ee::SpriteFactory::Instance()->RegisterCreator(etext::FILE_TAG, &etext::Sprite::Create);
+
+	ee::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
+	ee::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
 }
 
 bool MyApp::OnInit()

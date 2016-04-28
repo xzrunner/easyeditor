@@ -1088,7 +1088,7 @@ void CocoPacker::CalSrcFromUVFixed(ee::Vector src[4], TPParser::Picture* picture
 
 int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 {
-	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(sprite->GetSymbol().GetImage()->GetFilepath());
+	ee::Symbol* img_symbol = ee::SymbolMgr::Instance()->FetchSymbol(sprite->GetSymbol().GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+sprite->GetSymbol().GetFilepath()+"\""+" not in the texpacker file 3!";
