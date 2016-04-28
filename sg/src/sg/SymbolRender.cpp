@@ -74,7 +74,7 @@ void SymbolRender::DrawGrass(const ee::Symbol& symbol,
 	else
 	{
 		grass->SetTransform(p, 0);
-		ee::SpriteRenderer::Instance()->Draw(grass);
+		ee::SpriteRenderer::Draw(grass);
 	}
 }
 
@@ -112,7 +112,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 				m_grid->SetTransform(pos, m_grid->GetAngle());
 				ee::RenderColor ct;
 				ct.multi = color;
-				ee::SpriteRenderer::Instance()->Draw(m_grid, NULL, ee::RenderParams(ee::Matrix(), ct));
+				ee::SpriteRenderer::Draw(m_grid, NULL, ee::RenderParams(ee::Matrix(), ct));
 			}
 		}
 	}
@@ -127,33 +127,31 @@ void SymbolRender::DrawArrow(const ee::Symbol& symbol,
 	}
 	int r = (info->size >> 1) + 2;
 
-	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
-
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 	// left
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
-		rd->Draw(m_arrow_down, ee::Matrix(), pos, 0, -1);
+		ee::SpriteRenderer::Draw(m_arrow_down, ee::Matrix(), pos, 0, -1);
 	}
 	// right
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
-		rd->Draw(m_arrow_right, ee::Matrix(), pos);
+		ee::SpriteRenderer::Draw(m_arrow_right, ee::Matrix(), pos);
 	}
 	// up
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
-		rd->Draw(m_arrow_right, ee::Matrix(), pos, 0, -1);
+		ee::SpriteRenderer::Draw(m_arrow_right, ee::Matrix(), pos, 0, -1);
 	}
 	// down
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
-		rd->Draw(m_arrow_down, ee::Matrix(), pos);
+		ee::SpriteRenderer::Draw(m_arrow_down, ee::Matrix(), pos);
 	}
 }
 
@@ -171,13 +169,12 @@ void SymbolRender::DrawRegion(const ee::Symbol& symbol, const ee::Vector& pos)
 	}
 
 	float s = (float)(max_reg) / m_region_size;
-	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
 	ee::RenderColor ct;
 	ct.multi = ee::Colorf(1, 0, 0);
-	rd->Draw(m_region, ee::RenderParams(ee::Matrix(), ct), pos, 0, s, s, 0, 0);
+	ee::SpriteRenderer::Draw(m_region, ee::RenderParams(ee::Matrix(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
-		rd->Draw(m_region, ee::Matrix(), pos, 0, s, s);
+		ee::SpriteRenderer::Draw(m_region, ee::Matrix(), pos, 0, s, s);
 	}
 }
 

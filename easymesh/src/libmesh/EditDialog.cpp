@@ -42,7 +42,7 @@ void EditDialog::InitLayout(wxGLContext* glctx)
  
  	StagePanel* stage = new StagePanel(splitter, this, glctx);
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->GetSymbol());
-	stage->SetSymbol(&symbol);
+	stage->SetMeshSymbol(&symbol);
  	m_stage = stage;
  	ee::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
  

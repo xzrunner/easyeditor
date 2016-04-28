@@ -14,7 +14,7 @@ class Strip : public EditableMesh
 public:
 	Strip();
 	Strip(const Strip& strip);
-	Strip(const ee::Image& image);
+	Strip(const ee::Symbol* base);
 
 	//
 	// Cloneable interface

@@ -1,5 +1,3 @@
-#pragma once
-
 #include "libmesh/config.h"
 #include "libmesh/EditDialog.h"
 #include "libmesh/StagePanel.h"
@@ -10,6 +8,7 @@
 #include "libmesh/Symbol.h"
 #include "libmesh/Triangle.h"
 #include "libmesh/FileIO.h"
+#include "libmesh/MeshRenderer.h"
 
 // todo
 #include "libmesh/Strip.h"

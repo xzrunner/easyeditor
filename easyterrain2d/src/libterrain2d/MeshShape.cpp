@@ -5,8 +5,8 @@
 namespace eterrain2d
 {
 
-MeshShape::MeshShape(const ee::Image& image)
-	: emesh::Mesh(image)
+MeshShape::MeshShape(const ee::Symbol* base)
+	: emesh::Mesh(base)
 {
 }
 

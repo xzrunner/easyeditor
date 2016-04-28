@@ -121,22 +121,22 @@ void OceanMesh::Draw(const ee::RenderParams& trans, bool draw_tris) const
 	if (m_blend_open && m_image1) {
 		shader->SetColor(ee::color2int(ee::Colorf(1, 1, 1, m_blend_base), ee::PT_ABGR), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			m_grids[i]->DrawTexture(trans, m_image0->GetTexID());
+			emesh::MeshRenderer::DrawMesh(m_grids[i], trans, m_image0->GetTexID());
 		}
 		shader->SetColor(ee::color2int(ee::Colorf(1, 1, 1, 1 - m_blend_base), ee::PT_ABGR), 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			m_grids[i]->DrawTexture(trans, m_image1->GetTexID());
+			emesh::MeshRenderer::DrawMesh(m_grids[i], trans, m_image1->GetTexID());
 		}
 	} else {
 		shader->SetColor(0xffffffff, 0);
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			m_grids[i]->DrawTexture(trans);
+			emesh::MeshRenderer::DrawTexture(m_grids[i], trans);
 		}
 	}
 
 	if (draw_tris) {
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			m_grids[i]->DrawInfoXY();
+			emesh::MeshRenderer::DrawInfoXY(m_grids[i]);
 		}
 	}
 }
@@ -307,7 +307,7 @@ void OceanMesh::BuildGrids(const ee::Rect& region,
 			iy = (center.y - region.ymin) / img_h;
 		MeshShape** grid = &grids[iy * cx + ix];
 		if (!*grid) {
-			*grid = new MeshShape(*m_image0->GetImage());
+			*grid = new MeshShape(m_image0);
 		}
 		(*grid)->InsertTriangle(&vertices[i], &texcoords[i], bound);
 	}

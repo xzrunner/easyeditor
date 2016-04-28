@@ -20,7 +20,7 @@ class Network : public EditableMesh
 public:
 	Network();
 	Network(const Network& nw);
-	Network(const ee::Image& image);
+	Network(const ee::Symbol* base);
 	virtual ~Network();
 
 	//

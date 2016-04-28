@@ -27,8 +27,8 @@ Strip::Strip(const Strip& strip)
 	CopyTriangles(strip);
 }
 
-Strip::Strip(const ee::Image& image)
-	: EditableMesh(image)
+Strip::Strip(const ee::Symbol* base)
+	: EditableMesh(base)
 {
 	InitBound();
 }

@@ -27,8 +27,8 @@ public:
 	virtual void TraverseShapes(ee::Visitor& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL) const;
 
-	void SetSymbol(Symbol* symbol);
-	const Symbol* GetSymbol() const;
+	void SetMeshSymbol(Symbol* symbol);
+	const Symbol* GetMeshSymbol() const;
 
  	Mesh* GetMesh();
 // 	Sprite* getSprite() { return m_sprite; }

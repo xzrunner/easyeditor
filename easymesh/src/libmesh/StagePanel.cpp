@@ -54,7 +54,7 @@ void StagePanel::TraverseShapes(ee::Visitor& visitor,
 	}
 }
 
-void StagePanel::SetSymbol(Symbol* symbol)
+void StagePanel::SetMeshSymbol(Symbol* symbol)
 {
 	if (m_symbol != symbol) {
 		m_symbol->Release();
@@ -63,7 +63,7 @@ void StagePanel::SetSymbol(Symbol* symbol)
 	}
 }
 
-const Symbol* StagePanel::GetSymbol() const
+const Symbol* StagePanel::GetMeshSymbol() const
 {
 	return m_symbol;
 }
@@ -89,7 +89,7 @@ void StagePanel::UpdateSymbol()
 void StagePanel::CreateShape()
 {
 	if (m_symbol) {
-		m_symbol->CreateShape();
+		m_symbol->CreateMesh();
 	}
 }
 
@@ -155,17 +155,11 @@ StageDropTarget(StagePanel* stage, ee::LibraryPanel* library)
 bool StagePanel::StageDropTarget::
 OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
 {
-	if (ee::ImageSymbol* image = dynamic_cast<ee::ImageSymbol*>(symbol))
-	{
-		Symbol* symbol = new Symbol(image->GetImage());
-		m_stage->m_symbol->Release();
-		m_stage->m_symbol = symbol;
-		ee::SetCanvasDirtySJ::Instance()->SetDirty();
-
-		return true;
-	}
-
-	return false;
+	Symbol* mesh_sym = new Symbol(symbol);
+	m_stage->m_symbol->Release();
+	m_stage->m_symbol = mesh_sym;
+	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	return true;
 }
 
 }

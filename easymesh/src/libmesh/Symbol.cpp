@@ -3,6 +3,7 @@
 #include "FileIO.h"
 #include "Sprite.h"
 #include "MeshFactory.h"
+#include "MeshRenderer.h"
 
 #include <ee/Image.h>
 #include <ee/RenderParams.h>
@@ -14,7 +15,7 @@ namespace emesh
 {
 
 Symbol::Symbol()
-	: m_image(NULL)
+	: m_base(NULL)
 	, m_mesh(NULL)
 	, m_pause(false)
 {
@@ -23,26 +24,26 @@ Symbol::Symbol()
 Symbol::Symbol(const Symbol& s)
 	: ee::Symbol(s)
 {
-	s.m_image->Retain();
-	m_image = s.m_image;
+	m_base = s.m_base;
+	m_base->Retain();
 
 	m_mesh = s.m_mesh->Clone();
 }
 
-Symbol::Symbol(ee::Image* image)
+Symbol::Symbol(ee::Symbol* base)
 {
-	image->Retain();
-	m_image = image;
+	m_base = base;
+	m_base->Retain();
 
-	m_mesh = MeshFactory::Instance()->CreateMesh(*m_image);
+	m_mesh = MeshFactory::Instance()->CreateMesh(m_base);
 }
 
 Symbol::~Symbol()
 {
-	if (m_image)
+	if (m_base)
 	{
-		m_image->Release();
-		m_image = NULL;
+		m_base->Release();
+		m_base = NULL;
 	}
 	if (m_mesh)
 	{
@@ -58,8 +59,8 @@ Symbol* Symbol::Clone() const
 
 void Symbol::ReloadTexture() const
 {
-	if (m_image) {
-		m_image->ReloadTexture();
+	if (m_base) {
+		m_base->ReloadTexture();
 	}
 }
 
@@ -81,7 +82,7 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 
 	const MeshTrans& mtrans = static_cast<const Sprite*>(spr)->GetMeshTrans();
 	mtrans.StoreToMesh(m_mesh);
-	m_mesh->DrawTexture(trans);
+	MeshRenderer::DrawTexture(m_mesh, trans);
 	if (!m_pause) 
 	{
 		const Sprite* s = static_cast<const Sprite*>(spr);
@@ -106,23 +107,12 @@ void Symbol::SetMesh(Mesh* mesh)
 	m_mesh = mesh;
 }
 
-std::string Symbol::GetImagePath() const
-{
-	return m_image->GetFilepath();
-}
-
-void Symbol::LoadImage2(const std::string& filepath)
-{
-//	ee::BitmapMgr::Instance()->GetItem(filepath, &m_bitmap);
-	ee::ImageMgr::Instance()->GetItem(filepath, &m_image);
-}
-
-void Symbol::CreateShape()
+void Symbol::CreateMesh()
 {
 	if (m_mesh) {
 		m_mesh->Release();
 	}
-	m_mesh = MeshFactory::Instance()->CreateMesh(*m_image);
+	m_mesh = MeshFactory::Instance()->CreateMesh(m_base);
 }
 
 void Symbol::LoadResources()

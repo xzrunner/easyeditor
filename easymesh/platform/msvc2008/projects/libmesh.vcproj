@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sm\src\sm;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -107,8 +107,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sm\src\sm;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
+				AdditionalIncludeDirectories="..\..\..\..\easyeditor\include;..\..\..\..\easyshape\src;..\..\..\..\sm\src\sm;..\..\..\..\dtex\src;..\..\..\..\ejoy2d\src;..\..\..\..\particle\src;..\..\..\..\shaderlab\src\shaderlab;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC;USED_IN_EDITOR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -269,6 +269,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libmesh\MeshFactory.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\MeshRenderer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\MeshRenderer.h"
 					>
 				</File>
 				<File

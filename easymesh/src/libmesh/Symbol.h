@@ -15,7 +15,7 @@ class Symbol : public ee::Symbol
 public:
 	Symbol();
 	Symbol(const Symbol& s);
-	Symbol(ee::Image* image);
+	Symbol(ee::Symbol* base);
 	virtual ~Symbol();
 
 	//
@@ -37,15 +37,9 @@ public:
  	Mesh* GetMesh() { return m_mesh; }
 	void SetMesh(Mesh* mesh);
 
-	const ee::Image* GetImage() const { return m_image; }
-	ee::Image* GetImage() { return m_image; }
-
-	std::string GetImagePath() const;
-	void LoadImage2(const std::string& filepath);
-
 	void SetPause(bool pause) { m_pause = pause; }
 
-	void CreateShape();
+	void CreateMesh();
 
 	static ee::Symbol* Create() { return new Symbol(); }
 
@@ -56,7 +50,7 @@ private:
 	void InitBounding();
 
 private:
-	ee::Image* m_image;
+	ee::Symbol* m_base;
 
 	Mesh* m_mesh;
 

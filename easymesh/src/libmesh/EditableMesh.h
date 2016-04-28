@@ -14,8 +14,8 @@ public:
 	EditableMesh() {}
 	EditableMesh(const Mesh& mesh) 
 		: Mesh(mesh) {}
-	EditableMesh(const ee::Image& image) 
-		: Mesh(image) {}
+	EditableMesh(const ee::Symbol* base) 
+		: Mesh(base) {}
 	virtual ~EditableMesh() {}
 
 	virtual void TraverseMesh(ee::Visitor& visitor) const = 0;

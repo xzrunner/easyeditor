@@ -92,7 +92,7 @@ void StageCanvas::OnDrawSprites() const
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		ee::SpriteRenderer::Instance()->Draw(m_background);
+		ee::SpriteRenderer::Draw(m_background);
 	}
 }
 
@@ -154,8 +154,6 @@ void StageCanvas::DrawGrids() const
 
 void StageCanvas::DrawSprites() const
 {
-	ee::SpriteRenderer* rd = ee::SpriteRenderer::Instance();
-
 	std::vector<ee::Sprite*> sprites;
 	m_stage->TraverseSprites(ee::FetchAllVisitor<ee::Sprite>(sprites), ee::DT_VISIBLE);
 	std::sort(sprites.begin(), sprites.end(), ee::SpriteCmp(ee::SpriteCmp::e_y_invert));
@@ -167,20 +165,20 @@ void StageCanvas::DrawSprites() const
 			{
 				if (info->wall_type == 0) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(0, 4);
-					rd->Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
 				} else if (info->wall_type == 1) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(-10, 8);
-					rd->Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
 				} else if (info->wall_type == 2) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(10, 8);
-					rd->Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
 				} else if (info->wall_type == 3) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(0, 6);
-					rd->Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
 				}
 			}
 		} else {
-			rd->Draw(sprite);
+			ee::SpriteRenderer::Draw(sprite);
 		}
 	}
 }

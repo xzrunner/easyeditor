@@ -1,6 +1,7 @@
 #include "EditUVOP.h"
 #include "StagePanel.h"
 #include "Mesh.h"
+#include "MeshRenderer.h"
 
 #include <ee/Matrix.h>
 #include <ee/RenderParams.h>
@@ -18,8 +19,8 @@ bool EditUVOP::OnDraw() const
 {
 	if (Mesh* mesh = m_stage->GetMesh())
 	{
-		mesh->DrawTexture(ee::RenderParams());
-		mesh->DrawInfoXY();
+		MeshRenderer::DrawTexture(mesh, ee::RenderParams());
+		MeshRenderer::DrawInfoXY(mesh);
 	}
 
 	return false;

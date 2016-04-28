@@ -5,6 +5,7 @@
 
 #include <ee/FileHelper.h>
 #include <ee/panel_msg.h>
+#include <ee/SymbolMgr.h>
 
 #include <fstream>
 
@@ -25,7 +26,7 @@ void FileIO::Store(const char* filepath, const Symbol* symbol)
 	}
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath) + "\\";
-	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, symbol->GetImagePath());
+	value["base_symbol"] = ee::FileHelper::GetRelativePath(dir, symbol->GetMesh()->GetBaseSymbol()->GetFilepath());
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -45,14 +46,12 @@ void FileIO::Load(const char* filepath, Symbol* symbol)
 	reader.parse(fin, value);
 	fin.close();
 
+	ee::Symbol* base_symbol = NULL;
 	if (!value["base_symbol"].isNull())
 	{
 		std::string dir = ee::FileHelper::GetFileDir(filepath);
 		std::string path = ee::FileHelper::GetAbsolutePath(dir, value["base_symbol"].asString());
-		// todo Release symbol
-		//symbol = ee::SymbolMgr::Instance()->fetchSymbol(path);
-		symbol->LoadImage2(path);
-// 		symbol->Release();
+		base_symbol = ee::SymbolMgr::Instance()->FetchSymbol(path);
 	}
 	else
 	{
@@ -62,9 +61,9 @@ void FileIO::Load(const char* filepath, Symbol* symbol)
 	std::string type = value["type"].asString();
 	Mesh* mesh = NULL;
 	if (type == Strip::GetType()) {
-		mesh = new Strip(*symbol->GetImage());
+		mesh = new Strip(base_symbol);
 	} else if (type == Network::GetType()) {
-		mesh = new Network(*symbol->GetImage());		
+		mesh = new Network(base_symbol);
 	}
 	if (mesh)
 	{

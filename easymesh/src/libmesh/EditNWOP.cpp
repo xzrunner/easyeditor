@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "Triangle.h"
 #include "Mesh.h"
+#include "MeshRenderer.h"
 
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
@@ -109,8 +110,8 @@ bool EditNWOP::OnDraw() const
 {
 	if (Mesh* mesh = static_cast<StagePanel*>(m_wnd)->GetMesh())
 	{
-		mesh->DrawTexture(ee::RenderParams());
-		mesh->DrawInfoXY();
+		MeshRenderer::DrawTexture(mesh, ee::RenderParams());
+		MeshRenderer::DrawInfoXY(mesh);
 	}
 
 	ee::RVG::Color(ee::Colorf(0.2f, 0.8f, 0.4f));

@@ -3,11 +3,13 @@
 #include "Symbol.h"
 #include "Mesh.h"
 #include "Network.h"
+#include "MeshRenderer.h"
 
 #include <ee/Matrix.h>
 #include <ee/Image.h>
 #include <ee/RenderParams.h>
 #include <ee/panel_msg.h>
+#include <ee/SpriteRenderer.h>
 
 namespace emesh
 {
@@ -45,6 +47,9 @@ bool CreateNWOP::OnMouseLeftDown(int x, int y)
 {
 	ee::Vector pos = m_stage->TransPosScrToProj(x, y);
 	Network* nw = static_cast<Network*>(m_stage->GetMesh());
+	if (!nw) {
+		return false;
+	}
 	ee::Vector* selected = nw->QueryInner(pos);
 	if (selected) {
 		m_selected_inner = selected;
@@ -137,14 +142,9 @@ bool CreateNWOP::OnDraw() const
 	if (ee::ZoomViewOP::OnDraw())
 		return true;
 
-	if (const ee::Image* image = m_stage->GetSymbol()->GetImage())
- 	{
-		image->Draw(ee::RenderParams());
- 	}
-
-	if (Mesh* mesh = m_stage->GetMesh())
-	{
-		mesh->DrawInfoUV();
+	if (Mesh* mesh = m_stage->GetMesh()) {
+		ee::SpriteRenderer::Draw(mesh->GetBaseSymbol());
+		MeshRenderer::DrawInfoUV(mesh);
 	}
 
 	eshape::EditPolylineOP<eshape::DrawLoopOP, eshape::SelectNodesOP>::OnDraw();

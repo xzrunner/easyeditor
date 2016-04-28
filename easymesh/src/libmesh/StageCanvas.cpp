@@ -20,7 +20,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	const ee::Sprite* bg = m_panel->GetBackground();
 	if (bg) {
-		ee::SpriteRenderer::Instance()->Draw(bg);
+		ee::SpriteRenderer::Draw(bg);
 	}
 
 	m_stage->DrawEditOP();

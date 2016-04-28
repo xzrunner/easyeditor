@@ -1,13 +1,14 @@
 #include "Task.h"
 
-#include <easymesh.h>
-
 #include <ee/SymbolMgr.h>
 #include <ee/Bitmap.h>
 #include <ee/FileType.h>
 #include <ee/LibraryPanel.h>
 #include <ee/LibraryImagePage.h>
 #include <ee/PropertySettingPanel.h>
+
+#include <easymesh.h>
+#include <easycomplex.h>
 
 namespace emesh
 {
@@ -34,7 +35,7 @@ void Task::Load(const char* filepath)
 	if (ee::FileType::IsType(filepath, ee::FileType::e_mesh)) {
 		ee::Symbol* symbol = ee::SymbolMgr::Instance()->FetchSymbol(filepath);
 		Symbol* msymbol = static_cast<Symbol*>(symbol);
-		m_stage->SetSymbol(msymbol);
+		m_stage->SetMeshSymbol(msymbol);
 		
 		m_library->LoadFromSymbolMgr(*ee::SymbolMgr::Instance());
 		symbol->Release();
@@ -43,7 +44,7 @@ void Task::Load(const char* filepath)
 
 void Task::Store(const char* filepath) const
 {
-	FileIO::Store(filepath, m_stage->GetSymbol());
+	FileIO::Store(filepath, m_stage->GetMeshSymbol());
 	m_stage->OnSave();
 }
 
@@ -63,6 +64,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 {
 	library = m_library = new ee::LibraryPanel(leftHorizontalSplitter);
 	m_library->AddPage(new ee::LibraryImagePage(m_library->GetNotebook()));
+	m_library->AddPage(new ecomplex::LibraryPage(m_library->GetNotebook()));
 
 	property = m_property = new ee::PropertySettingPanel(leftHorizontalSplitter);
 

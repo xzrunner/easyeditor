@@ -3,7 +3,7 @@
 
 #include "config.h"
 
-namespace ee { class Image; }
+namespace ee { class Symbol; }
 
 namespace emesh
 {
@@ -13,7 +13,7 @@ class Mesh;
 class MeshFactory
 {
 public:
-	Mesh* CreateMesh(const ee::Image& image) const;
+	Mesh* CreateMesh(const ee::Symbol* base) const;
 
 	void SetShapeType(MeshType type);
 

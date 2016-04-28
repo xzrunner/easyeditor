@@ -43,8 +43,8 @@ Network::Network(const Network& nw)
 	}
 }
 
-Network::Network(const ee::Image& image)
-	: EditableMesh(image)
+Network::Network(const ee::Symbol* base)
+	: EditableMesh(base)
 	, m_nw(NULL)
 {
 }

@@ -2,7 +2,7 @@
 #include "Triangle.h"
 #include "color_config.h"
 
-#include <ee/Image.h>
+#include <ee/Symbol.h>
 #include <ee/EE_RVG.h>
 #include <ee/Math2D.h>
 #include <ee/RenderColor.h>
@@ -22,7 +22,7 @@ namespace emesh
 {
 
 Mesh::Mesh()
-	: m_texid(0)
+	: m_base(NULL)
 	, m_width(0)
 	, m_height(0)
 	, m_node_radius(5)
@@ -30,27 +30,32 @@ Mesh::Mesh()
 }
 
 Mesh::Mesh(const Mesh& mesh)
-	: m_texid(mesh.m_texid)
-	, m_tex_filepath(mesh.m_tex_filepath)
-	, m_width(mesh.m_width)
+	: m_width(mesh.m_width)
 	, m_height(mesh.m_height)
 	, m_node_radius(mesh.m_node_radius)
 {
+	m_base = mesh.m_base;
+	m_base->Retain();
 }
 
-Mesh::Mesh(const ee::Image& image)
+Mesh::Mesh(const ee::Symbol* base)
 {
-	m_texid = image.GetTexID();
-	m_tex_filepath = image.GetFilepath();
+	m_base = base;
+	m_base->Retain();
 
-	m_width  = static_cast<float>(image.GetOriginWidth());
-	m_height = static_cast<float>(image.GetOriginHeight());
+	ee::Rect r = m_base->GetSize();
+	m_width = r.Width();
+	m_height = r.Height();
 
 	m_node_radius = std::min(m_width * 0.1f, 5.0f);
 }
 
 Mesh::~Mesh()
 {
+	if (m_base) {
+		m_base->Release();
+	}
+
 	ClearTriangles();
 }
 
@@ -86,86 +91,6 @@ void Mesh::RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes)
 				unique.insert(node);
 			}
 		}
-	}
-}
-
-void Mesh::DrawInfoUV() const
-{
-	std::set<ee::Vector, ee::VectorCmp> unique;
-	std::vector<ee::Vector> tmp(3);
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int i = 0; i < 3; ++i)
-		{
-			tmp[i].x = (tri->nodes[i]->uv.x - 0.5f) * m_width;
-			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
-			unique.insert(tmp[i]);
-		}
-		ee::RVG::Color(RED);
-		ee::RVG::Polyline(tmp, true);
-	}
-	std::vector<ee::Vector> nodes;
-	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Color(BLUE);
-	ee::RVG::Circles(nodes, m_node_radius, true);
-}
-
-void Mesh::DrawInfoXY() const
-{
-	std::set<ee::Vector, ee::VectorCmp> unique;
-	std::vector<ee::Vector> tmp(3);
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int i = 0; i < 3; ++i)
-		{
-			tmp[i] = tri->nodes[i]->xy;
-			unique.insert(tmp[i]);
-		}
-		ee::RVG::Color(RED);
-		ee::RVG::Polyline(tmp, true);
-	}
-	std::vector<ee::Vector> nodes;
-	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	ee::RVG::Color(BLUE);
-	ee::RVG::Circles(nodes, m_node_radius, true);
-}
-
-void Mesh::DrawTexture(const ee::RenderParams& trans) const
-{
-	DrawTexture(trans, m_texid);
-}
-
-void Mesh::DrawTexture(const ee::RenderParams& trans,
-						unsigned int texid) const
-{
-	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
-	mgr->SetShader(sl::SPRITE2);
-	sl::Sprite2Shader* shader = static_cast<sl::Sprite2Shader*>(mgr->GetShader());
-	shader->SetColor(ee::color2int(trans.color.multi, ee::PT_ABGR),
-		ee::color2int(trans.color.add, ee::PT_ABGR));
-	shader->SetColorMap(ee::color2int(trans.color.r, ee::PT_ABGR),
-		ee::color2int(trans.color.g, ee::PT_ABGR),
-		ee::color2int(trans.color.b, ee::PT_ABGR));
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		ee::Vector vertices[4], texcoords[4];
-		for (int i = 0; i < 3; ++i)
-		{
-			vertices[i] = ee::Math2D::TransVector(tri->nodes[i]->xy, trans.mt);
-			texcoords[i] = tri->nodes[i]->uv;
-		}
-		vertices[3] = vertices[2];
-		texcoords[3] = texcoords[2];
-
-// 		if (ee::Config::Instance()->IsUseDTex()) {
-// 			ee::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
-// 				m_tex_filepath, m_texid);
-// 		} else {
-			shader->Draw(&vertices[0].x, &texcoords[0].x, m_texid);
-//		}
 	}
 }
 

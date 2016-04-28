@@ -7,7 +7,7 @@
 #include <ee/Cloneable.h>
 #include <ee/Color.h>
 
-namespace ee { class Image; class Vector; class Rect; class Matrix; class RenderParams; }
+namespace ee { class Symbol; class Vector; class Rect; class Matrix; class RenderParams; }
 
 namespace emesh
 {
@@ -20,7 +20,7 @@ class Mesh : public ee::Object, public ee::Cloneable
 public:
 	Mesh();
 	Mesh(const Mesh& mesh);
-	Mesh(const ee::Image& image);
+	Mesh(const ee::Symbol* base);
 	virtual ~Mesh();
 
  	//
@@ -38,14 +38,14 @@ public:
 	Node* PointQueryNode(const ee::Vector& p);
 	void RectQueryNodes(const ee::Rect& r, std::vector<Node*>& nodes);
 
-	void DrawInfoUV() const;
-	void DrawInfoXY() const;
-	void DrawTexture(const ee::RenderParams& trans) const;
-	void DrawTexture(const ee::RenderParams& trans, unsigned int texid) const;
+	const ee::Symbol* GetBaseSymbol() const { return m_base; }
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 
 	float GetNodeRegion() const { return m_node_radius; }
+
+	float GetWidth() const { return m_width; }
+	float GetHeight() const { return m_height; }
 
 	ee::Rect GetRegion() const;
 
@@ -56,9 +56,11 @@ protected:
 	void LoadTriangles(const Json::Value& value);
 
 protected:
-	int m_texid;
-	float m_width, m_height;
-	std::string m_tex_filepath;		// for dtex
+	//int m_texid;
+	//std::string m_tex_filepath;		// for dtex
+
+	const ee::Symbol* m_base;
+	float m_width, m_height;	
 
 	std::vector<Triangle*> m_tris;
 
