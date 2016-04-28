@@ -61,12 +61,24 @@ bool EditNWOP::OnMouseLeftUp(int x, int y)
 
 bool EditNWOP::OnMouseRightDown(int x, int y)
 {
+	m_dragable = true;
+
 	if (SelectNodesOP::OnMouseRightDown(x, y))
 		return true;
 
 	m_last_pos = m_stage->TransPosScrToProj(x, y);
 
 	m_right_press = true;
+
+	return false;
+}
+
+bool EditNWOP::OnMouseRightUp(int x, int y)
+{
+	m_dragable = false;
+
+	if (SelectNodesOP::OnMouseRightUp(x, y))
+		return true;
 
 	return false;
 }
