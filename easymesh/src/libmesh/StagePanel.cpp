@@ -158,6 +158,7 @@ OnDropSymbol(ee::Symbol* symbol, const ee::Vector& pos)
 	Symbol* mesh_sym = new Symbol(symbol);
 	m_stage->m_symbol->Release();
 	m_stage->m_symbol = mesh_sym;
+	m_stage->GetEditOP()->Clear();
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	return true;
 }
