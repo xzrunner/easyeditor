@@ -72,7 +72,7 @@ void RenderContext::OnBind()
 
 	// update camera
 	OrthoCamera* cam2 = static_cast<OrthoCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::ORTHO));
-	cam2->SetPosition(m_mod_offset);
+	cam2->SetPosition(-m_mod_offset);
 	cam2->SetScale(1 / m_mod_scale);
 }
 
