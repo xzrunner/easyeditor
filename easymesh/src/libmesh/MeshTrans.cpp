@@ -82,16 +82,28 @@ void MeshTrans::StoreToMesh(Mesh* mesh) const
 
 void MeshTrans::SetTween(const MeshTrans& s, const MeshTrans& e, float process)
 {
-	m_map = s.m_map;
+	m_map.clear();
+	std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_s 
+		= s.m_map.begin();
+	for ( ; itr_s != s.m_map.end(); ++itr_s) {
+		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_e
+			= e.m_map.find(itr_s->first);
+		ee::Vector pos;
+		if (itr_e == e.m_map.end()) {
+			pos = itr_s->second - itr_s->second * process;
+		} else {
+			pos = itr_s->second + (itr_e->second - itr_s->second) * process;
+		}
+		m_map.insert(std::make_pair(itr_s->first, pos));
+	}
 	std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_e 
 		= e.m_map.begin();
 	for ( ; itr_e != e.m_map.end(); ++itr_e) {
-		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::iterator itr
-			= m_map.find(itr_e->first);
-		if (itr == m_map.end()) {
-			m_map.insert(std::make_pair(itr_e->first, itr_e->second));
-		} else {
-			itr->second = itr->second + (itr_e->second - itr->second) * process;
+		std::map<ee::Vector, ee::Vector, ee::VectorCmp>::const_iterator itr_s
+			= s.m_map.find(itr_e->first);
+		if (itr_s == s.m_map.end()) {
+			ee::Vector pos = itr_e->second * process;
+			m_map.insert(std::make_pair(itr_e->first, pos));
 		}
 	}
 }
