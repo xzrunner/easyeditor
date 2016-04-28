@@ -3,6 +3,7 @@
 #include "typedef.h"
 
 #include "dataset/Grids.h"
+#include "dataset/Layer.h"
 #include "frame/config.h"
 #include "frame/SettingCfg.h"
 
@@ -87,6 +88,14 @@ void StageCanvas::DrawSprites() const
 	for (int i = 0, n = top_layer.size(); i < n; ++i) {
 		ee::Sprite* spr = top_layer[i];
 		DrawSprite(spr, false);
+	}
+
+	// draw point layer again
+	Layer* point_layer = m_stage->GetLayers()[3];
+	std::vector<ee::Sprite*> redraw_sprites;
+	point_layer->TraverseSprite(ee::FetchAllVisitor<ee::Sprite>(redraw_sprites), ee::DT_VISIBLE);
+	for (int i = 0, n = redraw_sprites.size(); i < n; ++i) {
+		DrawSprite(redraw_sprites[i], false);
 	}
 }
 
