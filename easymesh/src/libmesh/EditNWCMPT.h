@@ -17,7 +17,7 @@ protected:
 	virtual wxSizer* InitLayout();
 
 private:
-	void onReset(wxCommandEvent& event);
+	void OnReset(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;

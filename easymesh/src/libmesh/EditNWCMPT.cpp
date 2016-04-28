@@ -23,17 +23,18 @@ wxSizer* EditNWCMPT::InitLayout()
 	sizer->AddSpacer(20);
 	wxButton* btnReset = new wxButton(this, wxID_ANY, wxT("Reset"));
  	Connect(btnReset->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
- 		wxCommandEventHandler(EditNWCMPT::onReset));
+ 		wxCommandEventHandler(EditNWCMPT::OnReset));
 	sizer->Add(btnReset);
 	return sizer;
 }
 
-void EditNWCMPT::onReset(wxCommandEvent& event)
+void EditNWCMPT::OnReset(wxCommandEvent& event)
 {
 	if (EditableMesh* mesh = static_cast<EditableMesh*>(m_stage->GetMesh())) {
 		mesh->Reset();
 	}
 	ee::SetCanvasDirtySJ::Instance()->SetDirty();
+	ee::SetWndDirtySJ::Instance()->SetDirty();
 	m_editop->Clear();
 }
 
