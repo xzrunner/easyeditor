@@ -215,12 +215,10 @@ void ViewlistList::OnKeyDown(wxKeyEvent& event)
 	switch (event.GetKeyCode())
 	{
 	case WXK_PAGEUP:
-		SetSelection(curr_idx);
 		OnSelected(curr_idx, true);
 		ReorderSelected(true);
 		break;
 	case WXK_PAGEDOWN:
-		SetSelection(curr_idx);
 		OnSelected(curr_idx, true);
 		ReorderSelected(false);
 		break;
@@ -345,6 +343,7 @@ void ViewlistList::Reorder(const Sprite* sprite, bool up)
 		{
 			std::swap(m_sprites[i], m_sprites[pos]);
 			Swap(i, pos);
+			SetSelection(-1);
 			SetSelection(pos);
 		}
 	}
@@ -355,6 +354,7 @@ void ViewlistList::Reorder(const Sprite* sprite, bool up)
 		{
 			std::swap(m_sprites[i], m_sprites[pos]);
 			Swap(i, pos);
+			SetSelection(-1);
 			SetSelection(pos);
 		}
 	}
@@ -376,6 +376,7 @@ void ViewlistList::ReorderMost(const Sprite* sprite, bool up)
 			VerticalImageList::Insert(item, 0);
 			VerticalImageList::Remove(i + 1);
 
+			SetSelection(-1);
 			SetSelection(0);
 		}
 	} else {
@@ -386,6 +387,7 @@ void ViewlistList::ReorderMost(const Sprite* sprite, bool up)
 			VerticalImageList::Remove(i);
 			VerticalImageList::Insert(item);
 
+			SetSelection(-1);
 			SetSelection(m_sprites.size() - 1);
 		}
 	}
