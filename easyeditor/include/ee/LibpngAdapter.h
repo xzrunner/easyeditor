@@ -9,7 +9,7 @@ namespace ee
 class LibpngAdapter
 {
 public:
-	static int Write(const uint8_t* pixels, int width, int height,
+	static int Write(const uint8_t* pixels, int width, int height, int channels,
 		const char* filename, bool reverse = true);
 
 	static uint8_t* Read(const char* filename, int& width, int& height, 

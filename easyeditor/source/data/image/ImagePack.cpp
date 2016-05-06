@@ -211,7 +211,7 @@ void ImagePack::AddImage(const Image* img, int x, int y, int w, int h, bool rota
 
 void ImagePack::OutputToFile(const std::string& filepath) const
 {
-	LibpngAdapter::Write(m_pixels, m_width, m_height, filepath.c_str(), false);
+	LibpngAdapter::Write(m_pixels, m_width, m_height, 4, filepath.c_str(), false);
 }
 
 void ImagePack::CopyPixel(const uint8_t* src, int sw, int sh, bool sbpp4,

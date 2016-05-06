@@ -16,7 +16,7 @@ void ImageSaver::StoreToFile(const uint8_t* pixels, int width, int height,
 	switch (type)
 	{
 	case e_png:
-		LibpngAdapter::Write(pixels, width, height, filename.c_str(), reverse);
+		LibpngAdapter::Write(pixels, width, height, channels, filename.c_str(), reverse);
 		break;
 	case e_ppm:
 		PPMAdapter::Write(pixels, width, height, filename);

@@ -112,7 +112,7 @@ void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
 
 //	std::string filepath = dir + "//" + ee::FileHelper::getFilenameWithExtension(pic.filepath);
 	std::string filepath = pic.filepath;
-	ee::LibpngAdapter::Write(pixels, pic.w, pic.h, filepath.c_str());
+	ee::LibpngAdapter::Write(pixels, pic.w, pic.h, 4, filepath.c_str());
 
 	delete[] pixels;
 }

@@ -12,13 +12,16 @@
 namespace ee
 {
 
-int LibpngAdapter::Write(const uint8_t* pixels, int width, int height, 
+int LibpngAdapter::Write(const uint8_t* pixels, int width, int height, int channels,
 						 const char* filename, bool reverse)
 {
-	unsigned bands_per_pixel = 4;
-
+	unsigned bands_per_pixel = channels;
 	png_byte color_type = 0;
-	color_type = PNG_COLOR_TYPE_RGBA;
+	if (channels == 3) {
+		color_type = PNG_COLOR_TYPE_RGB;
+	} else {
+		color_type = PNG_COLOR_TYPE_RGBA;
+	}
 
 	int bit_depth = 8;
 
