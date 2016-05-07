@@ -1,9 +1,7 @@
 #ifndef _EASY3D_RAY_H_
 #define _EASY3D_RAY_H_
 
-#include <ee/Vector3D.h>
 #include <ee/Matrix.h>
-#include <ee/Quaternion.h>
 
 namespace e3d
 {
@@ -12,19 +10,19 @@ class Ray
 {
 public:
 //	Ray();
-	Ray(const ee::vec3& start, const ee::vec3& dir);
+	Ray(const sm::vec3& start, const sm::vec3& dir);
 
-	void Translate(const ee::vec3& offset);
-//	void Rotate(const ee::mat4& mat);
+	void Translate(const sm::vec3& offset);
+//	void Rotate(const sm::mat4& mat);
 
-	void ChangeCoordSystem(const ee::Quaternion& rot);
+	void ChangeCoordSystem(const sm::Quaternion& rot);
 
-	const ee::vec3& Start() const;
-	ee::vec3 Dir() const;
+	const sm::vec3& Start() const;
+	sm::vec3 Dir() const;
 
 private:
-	ee::vec3 m_start, m_dir_vec;
-	ee::Quaternion m_dir;
+	sm::vec3 m_start, m_dir_vec;
+	sm::Quaternion m_dir;
 
 }; // Ray
 
@@ -34,23 +32,23 @@ private:
 // {
 // }
 
-inline Ray::Ray(const ee::vec3& start, const ee::vec3& dir)
+inline Ray::Ray(const sm::vec3& start, const sm::vec3& dir)
 	: m_start(start)
 	, m_dir_vec(dir)
 {
 }
 
-inline void Ray::Translate(const ee::vec3& offset)
+inline void Ray::Translate(const sm::vec3& offset)
 {
 	m_start += offset;
 }
 
-// inline void Ray::Rotate(const ee::mat4& mat)
+// inline void Ray::Rotate(const sm::mat4& mat)
 // {
 // 	m_dir = mat * m_dir;
 // }
 
-inline const ee::vec3& Ray::Start() const 
+inline const sm::vec3& Ray::Start() const 
 {
 	return m_start;
 }

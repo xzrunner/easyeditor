@@ -20,25 +20,25 @@ public:
 	RotateSpriteState(StagePanel* stage,
 		const ee::SpriteSelection& selection);
 
-	virtual void OnMousePress(const ee::ivec2& pos);
-	virtual void OnMouseRelease(const ee::ivec2& pos);
-	virtual void OnMouseMove(const ee::ivec2& pos);	
+	virtual void OnMousePress(const sm::ivec2& pos);
+	virtual void OnMouseRelease(const sm::ivec2& pos);
+	virtual void OnMouseMove(const sm::ivec2& pos);	
 
 private:
-	void Rotate(const e3d::Camera& cam, const ee::ivec2& start, const ee::ivec2& end);
+	void Rotate(const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end);
 
 private:
 	class Visitor : public ee::Visitor
 	{
 	public:
-		Visitor(StagePanel* stage, const e3d::Camera& cam, const ee::ivec2& start, const ee::ivec2& end) 
+		Visitor(StagePanel* stage, const e3d::Camera& cam, const sm::ivec2& start, const sm::ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
 		virtual void Visit(ee::Object* object, bool& next);
 
 	private:
 		StagePanel* m_stage;
 		const e3d::Camera& m_cam;
-		ee::ivec2 m_start, m_end;
+		sm::ivec2 m_start, m_end;
 
 	}; // Visitor
 
@@ -46,7 +46,7 @@ private:
 	StagePanel* m_stage;
 	const ee::SpriteSelection& m_selection;
 
-	ee::ivec2 m_last_pos;
+	sm::ivec2 m_last_pos;
 
 }; // RotateSpriteState
 

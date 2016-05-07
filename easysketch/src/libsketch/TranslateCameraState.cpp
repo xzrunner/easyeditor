@@ -12,22 +12,22 @@ TranslateCameraState::TranslateCameraState(e3d::StageCanvas* canvas)
 {
 }
 
-void TranslateCameraState::OnMousePress(const ee::ivec2& pos)
+void TranslateCameraState::OnMousePress(const sm::ivec2& pos)
 {
 	m_is_open = true;
 	m_last_pos = pos;
 }
 
-void TranslateCameraState::OnMouseRelease(const ee::ivec2& pos)
+void TranslateCameraState::OnMouseRelease(const sm::ivec2& pos)
 {
 	m_is_open = false;	
 }
 
-void TranslateCameraState::OnMouseMove(const ee::ivec2& pos)
+void TranslateCameraState::OnMouseMove(const sm::ivec2& pos)
 {
 	if (!m_is_open) { return; }
 
-	ee::vec3 offset;
+	sm::vec3 offset;
 	offset.x = (pos.x - m_last_pos.x) * CAM_SPEED;
 	offset.y = -(pos.y - m_last_pos.y) * CAM_SPEED;
 

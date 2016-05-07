@@ -13,6 +13,7 @@
 #include <ee/EditPanelImpl.h>
 #include <ee/CameraMgr.h>
 #include <ee/Pseudo3DCamera.h>
+#include <ee/Math2D.h>
 
 #include <easycomplex.h>
 #include <easyparticle3d.h>

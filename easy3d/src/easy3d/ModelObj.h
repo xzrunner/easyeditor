@@ -35,19 +35,19 @@ private:
 	static void SplitString(const std::string& src, std::vector<std::string>& dst);
 	static void SplitString(const std::string& src, std::vector<std::string>& dst, char delim);
 
-	static ee::vec3 String2Vec3(const std::string& sx, const std::string& sy, const std::string& sz);
+	static sm::vec3 String2Vec3(const std::string& sx, const std::string& sy, const std::string& sz);
 
 private:
 	struct MaterialInfo
 	{
 		std::string name;
-		ee::vec3 ambient;
-		ee::vec3 diffuse;
-		ee::vec3 specular;
+		sm::vec3 ambient;
+		sm::vec3 diffuse;
+		sm::vec3 specular;
 
 		void clear() {
 			name = "";
-			ambient = diffuse = specular = ee::vec3(0, 0, 0);
+			ambient = diffuse = specular = sm::vec3(0, 0, 0);
 		}
 	};
 
@@ -58,9 +58,9 @@ private:
 		bool has_normal;
 
 		std::map<int, int> map_index;
-		std::vector<ee::vec3> vertices;
-		std::vector<ee::vec3> normals;
-		std::vector<ee::ivec3> faces;
+		std::vector<sm::vec3> vertices;
+		std::vector<sm::vec3> normals;
+		std::vector<sm::ivec3> faces;
 
 		void clear() {
 			map_index.clear();
@@ -90,9 +90,9 @@ private:
 private:
 	float _scale;
 
-	std::vector<ee::vec3> _vertices;
-	std::vector<ee::ivec3> _faces;
-	std::vector<ee::vec3> _normals;
+	std::vector<sm::vec3> _vertices;
+	std::vector<sm::ivec3> _faces;
+	std::vector<sm::vec3> _normals;
 //	std::vector<uint16> indices;
 
 	std::vector<MaterialInfo> _materials;

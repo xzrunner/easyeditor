@@ -195,12 +195,12 @@ void ParticleSystem::SetStaticMode(bool is_static)
 
 void ParticleSystem::SetDirection(float x, float y, float z)
 {
-	ee::vec3 start(0, 0, 1), end(x, y, z);
+	sm::vec3 start(0, 0, 1), end(x, y, z);
 	end.Normalize();
-	SetDirection(ee::Quaternion::CreateFromVectors(start, end));
+	SetDirection(sm::Quaternion::CreateFromVectors(start, end));
 }
 
-void ParticleSystem::SetDirection(const ee::Quaternion& dir)
+void ParticleSystem::SetDirection(const sm::Quaternion& dir)
 {
 	// todo
 //	direction = dir.ToMatrix();

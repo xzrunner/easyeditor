@@ -20,11 +20,11 @@ public:
 
 private:
 	// v1 - v2 is the long edge
-	void DrawTriByLevel(const ee::vec3& v0, const ee::vec3& v1, const ee::vec3& v2, int level) const;
+	void DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, const sm::vec3& v2, int level) const;
 
 	void GenTex();
 
-	float GetRandHeight(const ee::vec3& v1, const ee::vec3& v2, int level) const;
+	float GetRandHeight(const sm::vec3& v1, const sm::vec3& v2, int level) const;
 
 private:
 	e3d::Camera& m_cam;

@@ -23,8 +23,8 @@ public:
 	virtual void TraverseSprites(ee::Visitor& visitor, 
 		ee::DataTraverseType type = ee::DT_ALL, bool order = true) const;
 
-	ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj) const;
-	ee::vec3 TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const;
+	sm::ivec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
+	sm::vec3 TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const;
 
 protected:
 	//

@@ -4,8 +4,7 @@
 #include "Shader.h"
 
 #include <easy3d.h>
-
-#include <ee/Matrix3D.h>
+#include <SM_Matrix.h>
 
 namespace eshader 
 {
@@ -26,7 +25,7 @@ private:
 	protected:
 		virtual void LoadShader();
 
-		virtual void SetNormalMatrix(const ee::mat3& noraml_mat);
+		virtual void SetNormalMatrix(const sm::mat3& noraml_mat);
 
 	private:
 		GLuint m_normal_matrix;

@@ -27,7 +27,7 @@ public:
 	}
 
 private:
-	ee::Sprite* SelectByPos(const ee::ivec2& pos) const;
+	ee::Sprite* SelectByPos(const sm::ivec2& pos) const;
 
 protected:
 	StagePanel* m_stage;

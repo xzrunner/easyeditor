@@ -19,19 +19,19 @@ StageCanvas::StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage,
 {
 }
 
-ee::ivec2 StageCanvas::TransPos3ProjectToScreen(const ee::vec3& proj) const
+sm::ivec2 StageCanvas::TransPos3ProjectToScreen(const sm::vec3& proj) const
 {
-	ee::vec3 pos = GetCamera3().GetModelViewMat() * proj;
+	sm::vec3 pos = GetCamera3().GetModelViewMat() * proj;
 	return e3d::ViewFrustum::TransPos3ProjectToScreen(pos, m_screen_width, m_screen_height);
 }
 
-ee::vec3 StageCanvas::TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const
+sm::vec3 StageCanvas::TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const
 {
-	ee::vec3 pos = GetCamera3().GetModelViewMat() * ee::vec3(0, 0, proj_z);
+	sm::vec3 pos = GetCamera3().GetModelViewMat() * sm::vec3(0, 0, proj_z);
 	return e3d::ViewFrustum::TransPos3ScreenToProject(scr, pos.z, m_screen_width, m_screen_height);
 }
 
-ee::vec3 StageCanvas::TransPos3ScreenToDir(const ee::ivec2& screen) const
+sm::vec3 StageCanvas::TransPos3ScreenToDir(const sm::ivec2& screen) const
 {
 	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_screen_width, m_screen_height);
 }
@@ -54,8 +54,8 @@ void StageCanvas::OnDrawSprites() const
 
 void StageCanvas::DrawBackground() const
 {
-	e3d::DrawCross(ee::vec3(0, 0, 0), ee::vec3(10, 10, 10), ee::LIGHT_RED);
-//  	e3d::DrawGrids(ee::vec3(-10, -10, 0), ee::vec3(10, 10, 0), ee::vec3(0.5f, 0.5f, FLT_MAX), 
+	e3d::DrawCross(sm::vec3(0, 0, 0), sm::vec3(10, 10, 10), ee::LIGHT_RED);
+//  	e3d::DrawGrids(sm::vec3(-10, -10, 0), sm::vec3(10, 10, 0), sm::vec3(0.5f, 0.5f, FLT_MAX), 
 //  		ee::LIGHT_RED);
 }
 

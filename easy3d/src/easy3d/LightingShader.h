@@ -17,7 +17,7 @@ public:
 protected:
 	virtual void LoadShader();
 
-	virtual void SetNormalMatrix(const ee::mat3& noraml_mat);
+	virtual void SetNormalMatrix(const sm::mat3& noraml_mat);
 	virtual void SetMaterial(const Material& material);
 
 private:

@@ -20,7 +20,7 @@ DemoOcean::DemoOcean(e3d::Camera& cam)
 
 void DemoOcean::Load()
 {
-	m_cam.SetPosition(ee::vec3(0, -8, 8));
+	m_cam.SetPosition(sm::vec3(0, -8, 8));
 	m_cam.Rotate(0, 40);
 
 	m_image = ee::ImageMgr::Instance()->GetItem("ocean/water2_256.png");
@@ -51,11 +51,11 @@ void DemoOcean::Draw() const
 	Update(dt);
 
 	e3d::AABB aabb;
-	aabb.Combine(ee::vec3(-5, -5, -5));
-	aabb.Combine(ee::vec3(5, 5, 5));
+	aabb.Combine(sm::vec3(-5, -5, -5));
+	aabb.Combine(sm::vec3(5, 5, 5));
 	e3d::DrawCube(aabb, ee::WHITE);
 
-	ee::vec2 uv_left_low;
+	sm::vec2 uv_left_low;
 	uv_left_low.x = m_uv_base.x - 1;
 	uv_left_low.y = m_uv_base.y - 1;
 
@@ -70,11 +70,11 @@ void DemoOcean::Draw() const
 			float tx_min = (float)x / COL, tx_max = (float)(x+1) / COL,
 				  ty_min = (float)y / COL, ty_max = (float)(y+1) / COL;
 			{
-				ee::vec3 vertices[] = {ee::vec3(vx_min, vy_min, h_minmin), ee::vec3(vx_min, vy_max, h_minmax), ee::vec3(vx_max, vy_max, h_maxmax)};
-				ee::vec2 texcoords[] = {ee::vec2(tx_min, ty_min), ee::vec2(tx_min, ty_max), ee::vec2(tx_max, ty_max)};
+				sm::vec3 vertices[] = {sm::vec3(vx_min, vy_min, h_minmin), sm::vec3(vx_min, vy_max, h_minmax), sm::vec3(vx_max, vy_max, h_maxmax)};
+				sm::vec2 texcoords[] = {sm::vec2(tx_min, ty_min), sm::vec2(tx_min, ty_max), sm::vec2(tx_max, ty_max)};
 
-				ee::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
-				ee::vec2 base;
+				sm::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
+				sm::vec2 base;
 				int ix = center.x - uv_left_low.x,
 					iy = center.y - uv_left_low.y;
 				base.x = uv_left_low.x + ix;
@@ -86,11 +86,11 @@ void DemoOcean::Draw() const
 				mgr->DrawTri(vertices, texcoords, m_image->GetTexID());
 			}
 			{
-				ee::vec3 vertices[] = {ee::vec3(vx_max, vy_max, h_maxmax), ee::vec3(vx_max, vy_min, h_maxmin), ee::vec3(vx_min, vy_min, h_minmin)};
-				ee::vec2 texcoords[] = {ee::vec2(tx_max, ty_max), ee::vec2(tx_max, ty_min), ee::vec2(tx_min, ty_min)};
+				sm::vec3 vertices[] = {sm::vec3(vx_max, vy_max, h_maxmax), sm::vec3(vx_max, vy_min, h_maxmin), sm::vec3(vx_min, vy_min, h_minmin)};
+				sm::vec2 texcoords[] = {sm::vec2(tx_max, ty_max), sm::vec2(tx_max, ty_min), sm::vec2(tx_min, ty_min)};
 
-				ee::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
-				ee::vec2 base;
+				sm::vec2 center = (texcoords[0] + texcoords[1] + texcoords[2]) / 3;
+				sm::vec2 base;
 				int ix = center.x - uv_left_low.x,
 					iy = center.y - uv_left_low.y;
 				base.x = uv_left_low.x + ix;
@@ -124,7 +124,7 @@ float DemoOcean::GetHeight(float x, float y) const
 	float h = -5;
 	for (int i = 0, n = m_waves.size(); i < n; ++i) {
 		const Wave& w = m_waves[i];
-		float dis = e3d::Math3::GetDistance(ee::vec3(x, y, 0), ee::vec3(w.pos.x, w.pos.y, 0));
+		float dis = e3d::Math3::GetDistance(sm::vec3(x, y, 0), sm::vec3(w.pos.x, w.pos.y, 0));
 		h += w.len * cos(dis);
 	}
 	return h;

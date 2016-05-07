@@ -33,7 +33,7 @@ LoadShader()
 }
 
 void Shader3D::ShaderImpl::
-SetNormalMatrix(const ee::mat3& noraml_mat)
+SetNormalMatrix(const sm::mat3& noraml_mat)
 {
 	glUniformMatrix3fv(m_normal_matrix, 1, 0, noraml_mat.Pointer());
 }

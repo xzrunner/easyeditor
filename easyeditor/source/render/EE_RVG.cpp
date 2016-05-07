@@ -1,6 +1,5 @@
 #include "EE_RVG.h"
 #include "Vector.h"
-#include "Vector3D.h"
 #include "Color.h"
 #include "trans_color.h"
 #include "CameraMgr.h"
@@ -125,9 +124,9 @@ void RVG::Lines(const std::vector<Vector>& vertices)
 		rvg_lines(&vertices[0].x, vertices.size());
 	} else {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
-		std::vector<vec3> vertices3;
+		std::vector<sm::vec3> vertices3;
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
-			vertices3.push_back(vec3(vertices[i].x, vertices[i].y, 0));
+			vertices3.push_back(sm::vec3(vertices[i].x, vertices[i].y, 0));
 		}
 		rvg_lines(&vertices3[0].x, vertices3.size());
 	}
@@ -145,9 +144,9 @@ void RVG::Polyline(const std::vector<Vector>& vertices, bool loop)
 		rvg_polyline(&vertices[0].x, vertices.size(), loop);
 	} else {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
-		std::vector<vec3> vertices3;
+		std::vector<sm::vec3> vertices3;
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
-			vertices3.push_back(vec3(vertices[i].x, vertices[i].y, 0));
+			vertices3.push_back(sm::vec3(vertices[i].x, vertices[i].y, 0));
 		}
 		rvg_polyline3(&vertices3[0].x, vertices3.size(), loop);
 	}
@@ -162,9 +161,9 @@ void RVG::Triangles(const std::vector<Vector>& triangles)
 		rvg_triangles(&triangles[0].x, triangles.size());
 	} else {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
-		std::vector<vec3> triangles3;
+		std::vector<sm::vec3> triangles3;
 		for (int i = 0, n = triangles.size(); i < n; ++i) {
-			triangles3.push_back(vec3(triangles[i].x, triangles[i].y, 0));
+			triangles3.push_back(sm::vec3(triangles[i].x, triangles[i].y, 0));
 		}
 		rvg_triangles3(&triangles3[0].x, triangles3.size());
 	}
@@ -184,9 +183,9 @@ void RVG::TriangleStrip(const std::vector<Vector>& triangles)
 		rvg_triangle_strip(&triangles[0].x, triangles.size());
 	} else {
 		sl::ShaderMgr::Instance()->SetShader(sl::SHAPE3);
-		std::vector<vec3> triangles3;
+		std::vector<sm::vec3> triangles3;
 		for (int i = 0, n = triangles.size(); i < n; ++i) {
-			triangles3.push_back(vec3(triangles[i].x, triangles[i].y, 0));
+			triangles3.push_back(sm::vec3(triangles[i].x, triangles[i].y, 0));
 		}
 		rvg_triangle_strip3(&triangles3[0].x, triangles3.size());
 	}

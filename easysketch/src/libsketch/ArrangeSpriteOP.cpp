@@ -49,8 +49,8 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 			GetSelection().Traverse(ee::FetchAllVisitor<Sprite>(sprites));
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
 				Sprite* sprite = sprites[i];
-				sprite->SetPos3(ee::vec3(0, 0, 0));
-				sprite->SetOri3(ee::Quaternion());
+				sprite->SetPos3(sm::vec3(0, 0, 0));
+				sprite->SetOri3(sm::Quaternion());
 			}
 
 			e3d::StageCanvas* canvas 
@@ -76,7 +76,7 @@ bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMousePress(ee::ivec2(x, y));
+		m_state->OnMousePress(sm::ivec2(x, y));
 	}
 
 	return false;
@@ -89,7 +89,7 @@ bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMouseRelease(ee::ivec2(x, y));
+		m_state->OnMouseRelease(sm::ivec2(x, y));
 	}
 
 	return false;
@@ -109,7 +109,7 @@ bool ArrangeSpriteOP::OnMouseRightDown(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMousePress(ee::ivec2(x, y));
+		m_state->OnMousePress(sm::ivec2(x, y));
 	}
 
 	return false;
@@ -122,7 +122,7 @@ bool ArrangeSpriteOP::OnMouseRightUp(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMouseRelease(ee::ivec2(x, y));
+		m_state->OnMouseRelease(sm::ivec2(x, y));
 	}
 
 	return false;
@@ -146,7 +146,7 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 	}
 
 	if (m_state) {
-		m_state->OnMouseMove(ee::ivec2(x, y));
+		m_state->OnMouseMove(sm::ivec2(x, y));
 	}
 
 	return false;

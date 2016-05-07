@@ -10,9 +10,9 @@ namespace e3d
 #define LEFT	1
 #define MIDDLE	2
 
-bool Math3::RayAABBIntersection(const AABB& aabb, const Ray& ray, ee::vec3* coord)
+bool Math3::RayAABBIntersection(const AABB& aabb, const Ray& ray, sm::vec3* coord)
 {
-	ee::vec3 cross;
+	sm::vec3 cross;
 
 	char quadrant[3];
 	float candidate_plane[3];
@@ -81,8 +81,8 @@ bool Math3::RayAABBIntersection(const AABB& aabb, const Ray& ray, ee::vec3* coor
 	return true;
 }
 
-bool Math3::RayOBBIntersection(const AABB& aabb, const ee::vec3& pos, const ee::Quaternion& angle, 
-							   const Ray& ray, ee::vec3* coord)
+bool Math3::RayOBBIntersection(const AABB& aabb, const sm::vec3& pos, const sm::Quaternion& angle, 
+							   const Ray& ray, sm::vec3* coord)
 {
 	Ray _ray(ray);
 	_ray.Translate(-pos);
@@ -91,12 +91,12 @@ bool Math3::RayOBBIntersection(const AABB& aabb, const ee::vec3& pos, const ee::
 	return RayAABBIntersection(aabb, _ray, coord);
 }
 
-float Math3::GetDistance(const ee::vec3& a, const ee::vec3& b)
+float Math3::GetDistance(const sm::vec3& a, const sm::vec3& b)
 {
 	return sqrt(GetDistanceSquare(a, b));
 }
 
-float Math3::GetDistanceSquare(const ee::vec3& a, const ee::vec3& b)
+float Math3::GetDistanceSquare(const sm::vec3& a, const sm::vec3& b)
 {
 	float dx = a.x - b.x,
 		dy = a.y - b.y,

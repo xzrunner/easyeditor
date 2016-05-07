@@ -16,10 +16,10 @@ public:
 	StageCanvas(wxWindow* stage_wnd, ee::EditPanelImpl* stage, 
 		ee::MultiSpritesImpl* sprites_impl, ee::LibraryPanel* library);
 
-	ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj) const;
-	ee::vec3 TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const;
+	sm::ivec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
+	sm::vec3 TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const;
 
-	ee::vec3 TransPos3ScreenToDir(const ee::ivec2& screen) const;
+	sm::vec3 TransPos3ScreenToDir(const sm::ivec2& screen) const;
 
 protected:
 	virtual void OnSize(int w, int h);

@@ -7,6 +7,7 @@
 #include <ee/FontBlankSprite.h>
 #include <ee/trans_color.h>
 #include <ee/Exception.h>
+#include <ee/Math2D.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>

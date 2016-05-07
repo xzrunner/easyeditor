@@ -27,7 +27,7 @@ private:
 private:
 	struct Wave
 	{
-		ee::vec2 pos, speed;
+		sm::vec2 pos, speed;
 		float len;
 	};
 
@@ -38,7 +38,7 @@ private:
 
 	mutable std::vector<Wave> m_waves;
 
-	mutable ee::vec2 m_uv_base, m_uv_spd;
+	mutable sm::vec2 m_uv_base, m_uv_spd;
 
 }; // DemoOcean
 

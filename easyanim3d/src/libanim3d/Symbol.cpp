@@ -31,8 +31,8 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 
 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
 
-	ee::mat4 mat = ee::mat4(s->GetOri3().ToMatrix()) * 
-		ee::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
+	sm::mat4 mat = sm::mat4(s->GetOri3().ToMatrix()) * 
+		sm::mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 
 	// 	e3d::DrawCube(mat, m_aabb, ee::BLACK);
 

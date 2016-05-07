@@ -10,7 +10,7 @@ DemoBruteForceTex::DemoBruteForceTex(e3d::Camera& cam)
 
 void DemoBruteForceTex::Load()
 {
-	m_cam.SetPosition(ee::vec3(6, -12, 12));
+	m_cam.SetPosition(sm::vec3(6, -12, 12));
 	m_cam.Rotate(0, 60);
 
 	//load the height map in

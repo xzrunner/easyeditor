@@ -6,7 +6,7 @@
 #include <ee/Object.h>
 #include <ee/Cloneable.h>
 #include <ee/UICallback.h>
-#include <ee/Quaternion.h>
+#include <SM_Quaternion.h>
 
 struct p3d_emitter;
 struct p3d_emitter_cfg;
@@ -47,7 +47,7 @@ public:
 	void SetStaticMode(bool is_static);
 
 	void SetDirection(float x, float y, float z);
-	void SetDirection(const ee::Quaternion& dir);
+	void SetDirection(const sm::Quaternion& dir);
 
 	void Start();
 	void Stop();

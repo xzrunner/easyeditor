@@ -41,13 +41,13 @@ void StagePanel::TraverseSprites(ee::Visitor& visitor, ee::DataTraverseType type
 	}
 }
 
-ee::ivec2 StagePanel::TransPos3ProjectToScreen(const ee::vec3& proj) const
+sm::ivec2 StagePanel::TransPos3ProjectToScreen(const sm::vec3& proj) const
 {
 	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ProjectToScreen(proj);
 }
 
-ee::vec3 StagePanel::TransPos3ScreenToProject(const ee::ivec2& scr, float proj_z) const
+sm::vec3 StagePanel::TransPos3ScreenToProject(const sm::ivec2& scr, float proj_z) const
 {
 	const StageCanvas* canvas = static_cast<const StageCanvas*>(GetCanvas());
 	return canvas->TransPos3ScreenToProject(scr, proj_z);	

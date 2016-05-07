@@ -35,14 +35,14 @@ void ShapeShader::Load()
 {
 	static const char* vs =
 		FLOAT_PRECISION
-		"attribute ee::vec4 position;  \n"
-		"attribute ee::vec4 color;     \n"
+		"attribute sm::vec4 position;  \n"
+		"attribute sm::vec4 color;     \n"
 		"\n"
-		"varying ee::vec4 v_fragmentColor;  \n"
+		"varying sm::vec4 v_fragmentColor;  \n"
 		"\n"
 		"\n"
-		"uniform ee::mat4 u_projection; \n"
-		"uniform ee::mat4 u_modelview; \n"
+		"uniform sm::mat4 u_projection; \n"
+		"uniform sm::mat4 u_modelview; \n"
 		"\n"
 		"void main()  \n"
 		"{  \n"
@@ -53,7 +53,7 @@ void ShapeShader::Load()
 
 	static const char* fs =
 		FLOAT_PRECISION
-		"varying ee::vec4 v_fragmentColor; \n"
+		"varying sm::vec4 v_fragmentColor; \n"
 		"\n"
 		"void main()  \n"
 		"{  \n"  
@@ -113,7 +113,7 @@ void ShapeShader::Unbind()
 void ShapeShader::SetProjection(int width, int height)
 {
 	float hh = 1.0f * height / width;
-	m_mat_projection = ee::mat4::Perspective(-1, 1, -hh, hh, 
+	m_mat_projection = sm::mat4::Perspective(-1, 1, -hh, hh, 
 		Camera::CAM_NEAR, Camera::CAM_FAR);
 }
 
@@ -133,7 +133,7 @@ void ShapeShader::Commit()
 	m_count = 0;
 }
 
-void ShapeShader::SetModelView(const ee::mat4& mat)
+void ShapeShader::SetModelView(const sm::mat4& mat)
 {
 	m_mat_modelview = mat;
 }

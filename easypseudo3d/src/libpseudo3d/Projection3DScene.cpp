@@ -23,13 +23,13 @@ void Projection3DScene::Store(const char* filename) const
 void Projection3DScene::Load(const char* filename)
 {
 	m_images.push_back(ee::ImageMgr::Instance()->GetItem("mmzb/1002_3_lv5.png"));
-	m_positions.push_back(ee::vec2(0, 0));
+	m_positions.push_back(sm::vec2(0, 0));
 
 	m_images.push_back(ee::ImageMgr::Instance()->GetItem("mmzb/1005_3_lv12.png"));
-	m_positions.push_back(ee::vec2(0, 200));
+	m_positions.push_back(sm::vec2(0, 200));
 
 	e3d::Camera& cam = m_canvas->GetCamera3();
-	cam.SetPosition(ee::vec3(3.7414827, 47.854599, 70.245010));
+	cam.SetPosition(sm::vec3(3.7414827, 47.854599, 70.245010));
 	cam.SetRotHeading(6.9000001);
 	cam.SetRotElevation(-128.39999);
 }
@@ -57,22 +57,22 @@ void Projection3DScene::DrawSprite(ee::Image* img, int x, int y) const
 	float w = img->GetClippedWidth() * 0.5f * SCALE,
 		h = img->GetClippedHeight() * 0.5f * SCALE;
 	
-	std::vector<ee::vec3> vertices;
-	std::vector<ee::vec2> texcoords;
+	std::vector<sm::vec3> vertices;
+	std::vector<sm::vec2> texcoords;
 
-	vertices.push_back(ee::vec3(x-w, 0, y-w));
-	texcoords.push_back(ee::vec2(0, 1));
-	vertices.push_back(ee::vec3(x-w, 0, y+w));
-	texcoords.push_back(ee::vec2(0, 0));
-	vertices.push_back(ee::vec3(x+w, 0, y+w));
-	texcoords.push_back(ee::vec2(1, 0));
+	vertices.push_back(sm::vec3(x-w, 0, y-w));
+	texcoords.push_back(sm::vec2(0, 1));
+	vertices.push_back(sm::vec3(x-w, 0, y+w));
+	texcoords.push_back(sm::vec2(0, 0));
+	vertices.push_back(sm::vec3(x+w, 0, y+w));
+	texcoords.push_back(sm::vec2(1, 0));
 
-	vertices.push_back(ee::vec3(x-w, 0, y-w));
-	texcoords.push_back(ee::vec2(0, 1));
-	vertices.push_back(ee::vec3(x+w, 0, y-w));
-	texcoords.push_back(ee::vec2(1, 1));
-	vertices.push_back(ee::vec3(x+w, 0, y+w));
-	texcoords.push_back(ee::vec2(1, 0));
+	vertices.push_back(sm::vec3(x-w, 0, y-w));
+	texcoords.push_back(sm::vec2(0, 1));
+	vertices.push_back(sm::vec3(x+w, 0, y-w));
+	texcoords.push_back(sm::vec2(1, 1));
+	vertices.push_back(sm::vec3(x+w, 0, y+w));
+	texcoords.push_back(sm::vec2(1, 0));
 
 	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
 	mgr->Sprite();

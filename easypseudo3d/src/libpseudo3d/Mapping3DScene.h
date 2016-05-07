@@ -29,8 +29,8 @@ private:
 
 	ee::Image* m_img;
 
-	std::vector<ee::vec3> m_vertices;
-	std::vector<ee::vec2> m_texcoords;
+	std::vector<sm::vec3> m_vertices;
+	std::vector<sm::vec2> m_texcoords;
 
 }; // Mapping3DScene
 

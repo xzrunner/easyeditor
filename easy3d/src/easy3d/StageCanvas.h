@@ -4,7 +4,6 @@
 #include "Camera.h"
 
 #include <ee/OnePassCanvas.h>
-#include <ee/Matrix3D.h>
 #include <ee/Camera.h>
 
 namespace e3d
@@ -20,7 +19,7 @@ public:
 	Camera& GetCamera3() { return m_camera3; }
 	const Camera& GetCamera3() const { return m_camera3; }
 
-	ee::ivec2 TransPos3ProjectToScreen(const ee::vec3& proj) const;
+	sm::ivec2 TransPos3ProjectToScreen(const sm::vec3& proj) const;
 
 protected:
 	virtual void InitGL();
@@ -29,7 +28,7 @@ protected:
 private:
 	Camera m_camera3;
 
-	ee::mat4 m_mat_projection;
+	sm::mat4 m_mat_projection;
 
 }; // StageCanvas
 

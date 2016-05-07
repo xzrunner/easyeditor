@@ -278,26 +278,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<Filter
-			Name="type3d"
-			>
-			<File
-				RelativePath="..\..\..\include\ee\Matrix3D.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Quaternion.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Quaternion.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Vector3D.h"
-				>
-			</File>
-		</Filter>
 		<File
 			RelativePath="..\..\..\source\math\Math2D.cpp"
 			>

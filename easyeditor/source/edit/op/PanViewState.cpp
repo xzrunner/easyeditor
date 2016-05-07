@@ -58,7 +58,7 @@ bool PanViewState::OnMouseDrag(int x, int y)
 		ScreenCache::Instance()->GetSize(w, h);
 		Vector last = cam->TransPosScreenToProject(m_last_pos.x, m_last_pos.y, w, h);
 		Vector curr = cam->TransPosScreenToProject(x, y, w, h);
-		cam->Translate(vec3(curr.x - last.x, curr.y - last.y, 0));
+		cam->Translate(sm::vec3(curr.x - last.x, curr.y - last.y, 0));
 	}
 
 	m_last_pos.Set(x, y);

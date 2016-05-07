@@ -228,10 +228,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\sm\sm.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

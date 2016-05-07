@@ -9,6 +9,7 @@
 #include <ee/SymbolMgr.h>
 #include <ee/Image.h>
 #include <ee/trans_color.h>
+#include <ee/Math2D.h>
 
 #include <easybuilder.h>
 #include <easycomplex.h>

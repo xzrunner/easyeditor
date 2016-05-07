@@ -8,7 +8,7 @@ void ParametricSurface::SetInterval(const ParametricInterval& interval)
 	_divisions = interval.divisions;
 	_upper_bound = interval.upperBound;
 	_texture_count = interval.texture_count;
-	_slices = _divisions - ee::ivec2(1, 1);
+	_slices = _divisions - sm::ivec2(1, 1);
 }
 
 int ParametricSurface::GetVertexCount() const
@@ -21,9 +21,9 @@ int ParametricSurface::GetTriangleIndexCount() const
 	return 6 * _slices.x * _slices.y;
 }
 
-ee::vec2 ParametricSurface::ComputeDomain(float x, float y) const
+sm::vec2 ParametricSurface::ComputeDomain(float x, float y) const
 {
-	return ee::vec2(x * _upper_bound.x / _slices.x, y * _upper_bound.y / _slices.y);
+	return sm::vec2(x * _upper_bound.x / _slices.x, y * _upper_bound.y / _slices.y);
 }
 
 void ParametricSurface::GenerateVertices(std::vector<float>& vertices,
@@ -42,8 +42,8 @@ void ParametricSurface::GenerateVertices(std::vector<float>& vertices,
 		for (int i = 0; i < _divisions.x; i++) {
 
 			// Compute Position
-			ee::vec2 domain = ComputeDomain(i, j);
-			ee::vec3 range = Evaluate(domain);
+			sm::vec2 domain = ComputeDomain(i, j);
+			sm::vec3 range = Evaluate(domain);
 			attribute = range.Write(attribute);
 
 			// Compute Normal
@@ -57,10 +57,10 @@ void ParametricSurface::GenerateVertices(std::vector<float>& vertices,
 				if (j == _divisions.y - 1) t -= 0.01f;
 
 				// Compute the tangents and their cross product.
-				ee::vec3 p = Evaluate(ComputeDomain(s, t));
-				ee::vec3 u = Evaluate(ComputeDomain(s + 0.01f, t)) - p;
-				ee::vec3 v = Evaluate(ComputeDomain(s, t + 0.01f)) - p;
-				ee::vec3 normal = u.Cross(v).Normalized();
+				sm::vec3 p = Evaluate(ComputeDomain(s, t));
+				sm::vec3 u = Evaluate(ComputeDomain(s + 0.01f, t)) - p;
+				sm::vec3 v = Evaluate(ComputeDomain(s, t + 0.01f)) - p;
+				sm::vec3 normal = u.Cross(v).Normalized();
 				if (InvertNormal(domain))
 					normal = -normal;
 				attribute = normal.Write(attribute);
@@ -70,7 +70,7 @@ void ParametricSurface::GenerateVertices(std::vector<float>& vertices,
 			if (flags & VertexFlagsTexCoords) {
 				float s = _texture_count.x * i / _slices.x;
 				float t = _texture_count.y * j / _slices.y;
-				attribute = ee::vec2(s, t).Write(attribute);
+				attribute = sm::vec2(s, t).Write(attribute);
 			}
 		}
 	}

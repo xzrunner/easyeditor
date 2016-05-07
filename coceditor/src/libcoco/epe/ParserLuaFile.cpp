@@ -10,6 +10,7 @@
 #include <ee/ImageSprite.h>
 #include <ee/SpriteFactory.h>
 #include <ee/trans_color.h>
+#include <ee/Math2D.h>
 
 #include <easycomplex.h>
 #include <easyanim.h>

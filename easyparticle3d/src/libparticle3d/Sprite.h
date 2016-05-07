@@ -5,7 +5,8 @@
 #include "PS.h"
 
 #include <ee/Sprite.h>
-#include <ee/Quaternion.h>
+
+#include <SM_Quaternion.h>
 
 namespace eparticle3d
 {
@@ -41,8 +42,8 @@ public:
 
 	void SetMatrix(const ee::Matrix& mat);
 
-	ee::Quaternion& GetDir() { return m_dir; }
-	const ee::Quaternion& GetDir() const { return m_dir; }
+	sm::Quaternion& GetDir() { return m_dir; }
+	const sm::Quaternion& GetDir() const { return m_dir; }
 
 	bool IsLoop() const;
 	void SetLoop(bool loop);
@@ -75,7 +76,7 @@ private:
 
 	ee::Matrix m_mat;
 
-	ee::Quaternion m_dir;
+	sm::Quaternion m_dir;
 
 	bool m_alone;
 	bool m_reuse;

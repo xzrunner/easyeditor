@@ -13,7 +13,7 @@ class ZoomCameraState : public IEditState
 public:
 	ZoomCameraState(e3d::StageCanvas* canvas);
 
-	virtual void OnMouseWheelRotation(const ee::ivec2& pos, int direction);
+	virtual void OnMouseWheelRotation(const sm::ivec2& pos, int direction);
 
 private:
 	e3d::StageCanvas* m_canvas;

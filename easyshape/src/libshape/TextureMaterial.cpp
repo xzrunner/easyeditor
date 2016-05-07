@@ -80,13 +80,13 @@ void TextureMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) c
 		mgr->SetShader(sl::SPRITE3);
 		sl::Sprite3Shader* shader = static_cast<sl::Sprite3Shader*>(mgr->GetShader(sl::SPRITE3));
 		for (int i = 0, n = m_tris.size(); i < n; i += 3) {
-			std::vector<ee::vec3> vertices; 
+			std::vector<sm::vec3> vertices; 
 			vertices.resize(3);
 			std::vector<ee::Vector> texcoords;
 			texcoords.resize(3);
 			for (int j = 0; j < 3; ++j) {
 				ee::Vector v = ee::Math2D::TransVector(m_tris[i+j], mt);
-				vertices[j] = ee::vec3(v.x, v.y, 0);
+				vertices[j] = sm::vec3(v.x, v.y, 0);
 				texcoords[j] = m_tris_texcoord[i+j];
 			}
 			shader->Draw(&vertices[0].x, &texcoords[0].x, m_image->GetTexID());

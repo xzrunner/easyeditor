@@ -8,7 +8,7 @@ ZoomCameraState::ZoomCameraState(e3d::StageCanvas* canvas)
 {
 }
 
-void ZoomCameraState::OnMouseWheelRotation(const ee::ivec2& pos, int direction)
+void ZoomCameraState::OnMouseWheelRotation(const sm::ivec2& pos, int direction)
 {
 	e3d::Camera& cam = m_canvas->GetCamera3();
 	cam.Zoom(direction > 0);

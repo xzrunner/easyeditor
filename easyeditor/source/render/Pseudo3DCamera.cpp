@@ -62,10 +62,10 @@ Vector Pseudo3DCamera::TransPosScreenToProject(int x, int y, int width, int heig
 
 Vector Pseudo3DCamera::TransPosProjectToScreen(const Vector& proj, int width, int height) const
 {
-	return TransPosProjectToScreen(vec3(proj.x, proj.y, 0), width, height);
+	return TransPosProjectToScreen(sm::vec3(proj.x, proj.y, 0), width, height);
 }
 
-Vector Pseudo3DCamera::TransPosProjectToScreen(const vec3& proj, int width, int height) const
+Vector Pseudo3DCamera::TransPosProjectToScreen(const sm::vec3& proj, int width, int height) const
 {
 	sm_vec3 world;
 	world.x = proj.x;
@@ -96,7 +96,7 @@ const Vector& Pseudo3DCamera::GetPosition() const
 	return Vector(0, 0);
 }
 
-void Pseudo3DCamera::Translate(const vec3& offset)
+void Pseudo3DCamera::Translate(const sm::vec3& offset)
 {
 	sm_vec3 vec;
 	vec.x = offset.x;

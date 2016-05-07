@@ -68,7 +68,7 @@ void ShaderMgr::Sprite()
 	Switch(m_sprite_shader);	
 }
 
-void ShaderMgr::DrawModel(const IModel* model, const ee::mat4& m)
+void ShaderMgr::DrawModel(const IModel* model, const sm::mat4& m)
 {
 	m_model_shader->Draw(model, m);
 }
@@ -89,7 +89,7 @@ void ShaderMgr::DrawShape(int type, const float* vertices, int vcount, const ee:
 	m_shape_shader->Draw(type, vertices, vcount, col, indices, icount);
 }
 
-void ShaderMgr::DrawTri(const ee::vec3 vertices[3], const ee::vec2 texcoords[3], int texid)
+void ShaderMgr::DrawTri(const sm::vec3 vertices[3], const sm::vec2 texcoords[3], int texid)
 {
 	m_sprite_shader->DrawTri(vertices, texcoords, texid);
 }
@@ -104,7 +104,7 @@ void ShaderMgr::DrawTriStrip(float* vertices, float* texcoords, int count, int t
 	m_sprite_shader->DrawTriStrip(vertices, texcoords, count, texid);
 }
 
-void ShaderMgr::SetModelView(const ee::mat4& mat)
+void ShaderMgr::SetModelView(const sm::mat4& mat)
 {
 	m_model_shader->SetModelView(mat);
 	m_shape_shader->SetModelView(mat);

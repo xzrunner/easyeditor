@@ -19,7 +19,7 @@ void DemoTriNetwork::Load()
 {
 	IDemo::Load();
 
-	m_cam.SetPosition(ee::vec3(0, -8, 8));
+	m_cam.SetPosition(sm::vec3(0, -8, 8));
 	m_cam.Rotate(0, 40);
 
 	GenTex();
@@ -35,7 +35,7 @@ void DemoTriNetwork::Draw() const
 	IDemo::Draw();
 
 	const float HALF_EDGE = EDGE * 0.5f;
-	ee::vec3 v0(-HALF_EDGE,  HALF_EDGE, 0), 
+	sm::vec3 v0(-HALF_EDGE,  HALF_EDGE, 0), 
 		 v1( HALF_EDGE,  HALF_EDGE, 0),
 		 v2( HALF_EDGE, -HALF_EDGE, 0),
 		 v3(-HALF_EDGE, -HALF_EDGE, 0);
@@ -43,16 +43,16 @@ void DemoTriNetwork::Draw() const
 	DrawTriByLevel(v3, v0, v2, 0);
 }
 
-void DemoTriNetwork::DrawTriByLevel(const ee::vec3& v0, const ee::vec3& v1, const ee::vec3& v2, int level) const
+void DemoTriNetwork::DrawTriByLevel(const sm::vec3& v0, const sm::vec3& v1, const sm::vec3& v2, int level) const
 {
-	ee::vec3 c = (v0 + v1 + v2) / 3;
+	sm::vec3 c = (v0 + v1 + v2) / 3;
 	float dis = e3d::Math3::GetDistanceSquare(c, m_cam.GetPosition());
 	float len = e3d::Math3::GetDistanceSquare(v1, v2);
 //	e3d::LogViewer::Instance()->Add(("dis:"+wxString::FromDouble(dis)).ToStdString());
 
 	if (level < MAX_LEVEL && len > dis * 0.005f)
 	{
-		ee::vec3 new_node = (v1 + v2) * 0.5f;
+		sm::vec3 new_node = (v1 + v2) * 0.5f;
 		new_node.z = GetRandHeight(v1, v2, level);
 		DrawTriByLevel(new_node, v0, v1, level + 1);
 		DrawTriByLevel(new_node, v0, v2, level + 1);
@@ -63,11 +63,11 @@ void DemoTriNetwork::DrawTriByLevel(const ee::vec3& v0, const ee::vec3& v1, cons
 
  	e3d::ShaderMgr* mgr = e3d::ShaderMgr::Instance();
  	mgr->Sprite();
- 	ee::vec3 vertices[] = {v0, v1, v2};
-  	ee::vec2 texcoords[] = {
-		ee::vec2(1, 0),
-  		ee::vec2(0, 0),
-  		ee::vec2(1, 1),
+ 	sm::vec3 vertices[] = {v0, v1, v2};
+  	sm::vec2 texcoords[] = {
+		sm::vec2(1, 0),
+  		sm::vec2(0, 0),
+  		sm::vec2(1, 1),
   	};
  	mgr->DrawTri(vertices, texcoords, m_tex);
 
@@ -123,7 +123,7 @@ void DemoTriNetwork::GenTex()
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, SIZE, SIZE, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 }
 
-float DemoTriNetwork::GetRandHeight(const ee::vec3& v1, const ee::vec3& v2, int level) const
+float DemoTriNetwork::GetRandHeight(const sm::vec3& v1, const sm::vec3& v2, int level) const
 {
 	float rand_height;
 

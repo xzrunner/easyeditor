@@ -128,7 +128,7 @@ void Sprite::Load(const Json::Value& val)
 		  y = d_val["y"].asDouble(),
 		  z = d_val["z"].asDouble(),
 		  w = d_val["w"].asDouble();
-	m_dir = ee::Quaternion(x, y, z, w);
+	m_dir = sm::Quaternion(x, y, z, w);
 
 	if (p_val["alone"].isNull()) {
 		m_alone = false;
@@ -172,7 +172,7 @@ void Sprite::Store(Json::Value& val) const
 
 	Json::Value p_val;
 
-	ee::vec4 dir = m_dir.ToVector();
+	sm::vec4 dir = m_dir.ToVector();
 	Json::Value d_val;
 	d_val["x"] = dir.x;
 	d_val["y"] = dir.y;

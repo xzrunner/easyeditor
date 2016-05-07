@@ -83,15 +83,15 @@ void ModelObj::Import(const char* filename)
 
 void ModelObj::InitNormals()
 {
-	_normals.resize(_vertices.size(), ee::vec3(0, 0, 0));
+	_normals.resize(_vertices.size(), sm::vec3(0, 0, 0));
 	for (size_t faceIndex = 0; faceIndex < _faces.size(); ++faceIndex) {
-		ee::ivec3 face = _faces[faceIndex];
+		sm::ivec3 face = _faces[faceIndex];
 
 		// Compute the facet normal.
-		ee::vec3 a = _vertices[face.x];
-		ee::vec3 b = _vertices[face.y];
-		ee::vec3 c = _vertices[face.z];
-		ee::vec3 facetNormal = (b - a).Cross(c - a);
+		sm::vec3 a = _vertices[face.x];
+		sm::vec3 b = _vertices[face.y];
+		sm::vec3 c = _vertices[face.z];
+		sm::vec3 facetNormal = (b - a).Cross(c - a);
 
 		// Add the facet normal to the lighting normal of each adjoining vertex.
 		_normals[face.x] += facetNormal;
@@ -107,7 +107,7 @@ void ModelObj::InitNormals()
 	for (size_t i = 0, n = _objects.size(); i < n; ++i) {
 		for (size_t j = 0, m = _objects[i].meshes.size(); j < m; ++j) {
 			MeshInfo& mesh = _objects[i].meshes[j];
-			mesh.normals.resize(mesh.vertices.size(), ee::vec3());
+			mesh.normals.resize(mesh.vertices.size(), sm::vec3());
 			std::map<int, int>::iterator itr = mesh.map_index.begin();
 			for ( ; itr != mesh.map_index.end(); ++itr)
 				mesh.normals[itr->second] = _normals[itr->first];
@@ -234,7 +234,7 @@ void ModelObj::HandleMesh()
 
 void ModelObj::HandleVertice(const std::vector<std::string>& tokens)
 {
-	ee::vec3 pos = String2Vec3(tokens[1], tokens[2], tokens[3]);
+	sm::vec3 pos = String2Vec3(tokens[1], tokens[2], tokens[3]);
 	_vertices.push_back(pos * _scale);
 }
 
@@ -323,9 +323,9 @@ void ModelObj::SplitString(const std::string& src, std::vector<std::string>& dst
 	}
 }
 
-ee::vec3 ModelObj::String2Vec3(const std::string& sx, const std::string& sy, const std::string& sz)
+sm::vec3 ModelObj::String2Vec3(const std::string& sx, const std::string& sy, const std::string& sz)
 {
-	ee::vec3 ret;
+	sm::vec3 ret;
 	ret.x = static_cast<float>(atof(sx.c_str()));
 	ret.y = static_cast<float>(atof(sy.c_str()));
 	ret.z = static_cast<float>(atof(sz.c_str()));
@@ -352,8 +352,8 @@ void ModelObj::MeshInfo::
 GenerateVertices(std::vector<float>& floats, unsigned char flags) const
 {
 	struct Vertex {
-		ee::vec3 Position;
-		ee::vec3 Normal;
+		sm::vec3 Position;
+		sm::vec3 Normal;
 	};
 
 	// Read in the vertex positions and initialize lighting normals to (0, 0, 0).
@@ -371,7 +371,7 @@ GenerateTriangleIndices(std::vector<unsigned short>& indices) const
 {
 	indices.resize(GetTriangleIndexCount());
 	std::vector<unsigned short>::iterator index = indices.begin();
-	for (std::vector<ee::ivec3>::const_iterator f = faces.begin(); f != faces.end(); ++f) {
+	for (std::vector<sm::ivec3>::const_iterator f = faces.begin(); f != faces.end(); ++f) {
 		*index++ = f->x;
 		*index++ = f->y;
 		*index++ = f->z;
@@ -385,11 +385,11 @@ AddFace(ModelObj& obj, int i0, int i1, int i2)
 	i1 -= 1;
 	i2 -= 1;
 
-	obj._faces.push_back(ee::ivec3(i0, i1, i2));
+	obj._faces.push_back(sm::ivec3(i0, i1, i2));
 	i0 = AddNode(obj, i0);
 	i1 = AddNode(obj, i1);
 	i2 = AddNode(obj, i2);
-	faces.push_back(ee::ivec3(i0, i1, i2));
+	faces.push_back(sm::ivec3(i0, i1, i2));
 }
 
 int ModelObj::MeshInfo::

@@ -15,7 +15,7 @@ void LightingShader::Bind()
 	ModelShader::Bind();
 
 	// Set the light position.
-	ee::vec4 lightPosition(0.25, 0.25, 1, 0);
+	sm::vec4 lightPosition(0.25, 0.25, 1, 0);
 	glUniform3fv(m_light_position, 1, lightPosition.Pointer());
 
 	//// Set up some default material parameters.
@@ -28,42 +28,42 @@ void LightingShader::LoadShader()
 {
 	static const char* vs =
 		FLOAT_PRECISION
-		"attribute ee::vec4 position;  \n"
-		"attribute ee::vec3 normal;  \n"
-		//		"attribute ee::vec3 diffuse_material;  \n"
-		"uniform ee::vec3 diffuse_material;  \n"
+		"attribute sm::vec4 position;  \n"
+		"attribute sm::vec3 normal;  \n"
+		//		"attribute sm::vec3 diffuse_material;  \n"
+		"uniform sm::vec3 diffuse_material;  \n"
 
-		"varying ee::vec4 v_dest_color;  \n"
+		"varying sm::vec4 v_dest_color;  \n"
 
-		"uniform ee::mat3 u_normal_matrix;  \n"
-		"uniform ee::vec3 u_light_position;  \n"
-		"uniform ee::vec3 u_ambient_material;  \n"
-		"uniform ee::vec3 u_specular_material;  \n"
+		"uniform sm::mat3 u_normal_matrix;  \n"
+		"uniform sm::vec3 u_light_position;  \n"
+		"uniform sm::vec3 u_ambient_material;  \n"
+		"uniform sm::vec3 u_specular_material;  \n"
 		"uniform float u_shininess;  \n"
 
-		"uniform ee::mat4 u_projection;  \n"
-		"uniform ee::mat4 u_modelview;  \n"
+		"uniform sm::mat4 u_projection;  \n"
+		"uniform sm::mat4 u_modelview;  \n"
 
 		"void main(void)  \n"
 		"{  \n"
-		"	ee::vec3 N = u_normal_matrix * normal;  \n"
-		"	ee::vec3 L = normalize(u_light_position);  \n"
-		"	ee::vec3 E = ee::vec3(0, 0, 1);  \n"
-		"	ee::vec3 H = normalize(L + E);  \n"
+		"	sm::vec3 N = u_normal_matrix * normal;  \n"
+		"	sm::vec3 L = normalize(u_light_position);  \n"
+		"	sm::vec3 E = sm::vec3(0, 0, 1);  \n"
+		"	sm::vec3 H = normalize(L + E);  \n"
 
 		"	float df = max(0.0, dot(N, L));  \n"
 		"	float sf = max(0.0, dot(N, H));  \n"
 		"	sf = pow(sf, u_shininess);  \n"
 
-		"	ee::vec3 color = u_ambient_material + df * diffuse_material + sf * u_specular_material;  \n"
-		"	v_dest_color = ee::vec4(color, 1);  \n"
+		"	sm::vec3 color = u_ambient_material + df * diffuse_material + sf * u_specular_material;  \n"
+		"	v_dest_color = sm::vec4(color, 1);  \n"
 		"	gl_Position = u_projection * u_modelview * position;  \n"
 		"}  \n"
 		;
 
 	static const char* fs =
 		FLOAT_PRECISION
-		"varying ee::vec4 v_dest_color;  \n"
+		"varying sm::vec4 v_dest_color;  \n"
 
 		"void main(void)  \n"
 		"{  \n"
@@ -81,7 +81,7 @@ void LightingShader::LoadShader()
 	m_shininess = glGetUniformLocation(m_prog, "u_shininess");
 }
 
-void LightingShader::SetNormalMatrix(const ee::mat3& noraml_mat)
+void LightingShader::SetNormalMatrix(const sm::mat3& noraml_mat)
 {
 	glUniformMatrix3fv(m_normal_matrix, 1, 0, noraml_mat.Pointer());
 }

@@ -26,7 +26,7 @@ Camera::Camera()
 {
 }
 
-void Camera::Translate(const ee::vec3& offset)
+void Camera::Translate(const sm::vec3& offset)
 {
 	m_pos += offset;
 }
@@ -46,33 +46,33 @@ void Camera::Rotate(float dheading, float delevation)
 	m_rot_elevation += delevation;
 }
 
-ee::vec3 Camera::GetLeft() const
+sm::vec3 Camera::GetLeft() const
 {
 	// Step 1: n = <target position - view reference point>
-	ee::vec3 n = GetToward();
+	sm::vec3 n = GetToward();
 	// Step 2: Let v = <0,1,0>
-	ee::vec3 v(0, 1, 0);
+	sm::vec3 v(0, 1, 0);
 	// Step 3: u = (v x n)
-	ee::vec3 u = v.Cross(n);
+	sm::vec3 u = v.Cross(n);
 
 	return u;
 }
 
-ee::vec3 Camera::GetUp() const
+sm::vec3 Camera::GetUp() const
 {
 	// Step 1: n = <target position - view reference point>
-	ee::vec3 n = GetToward();
+	sm::vec3 n = GetToward();
 	// Step 2: Let v = <0,1,0>
-	ee::vec3 v(0, 1, 0);
+	sm::vec3 v(0, 1, 0);
 	// Step 3: u = (v x n)
-	ee::vec3 u = v.Cross(n);
+	sm::vec3 u = v.Cross(n);
 	// Step 4: v = (n x u)
 	v = n.Cross(u);
 	
 	return v;
 }
 
-ee::vec3 Camera::GetToward() const
+sm::vec3 Camera::GetToward() const
 {
 	// reset rot matrix
 	// compute trig functions once
@@ -85,7 +85,7 @@ ee::vec3 Camera::GetToward() const
 	float cos_heading = cos(rad_heading);
 
 	// now compute the target point on a unit sphere x,y,z
-	ee::vec3 target;
+	sm::vec3 target;
 	target.x = -1*sin_elevation*sin_heading;
 	target.y =  1*cos_elevation;
 	target.z =  1*sin_elevation*cos_heading;
@@ -93,10 +93,10 @@ ee::vec3 Camera::GetToward() const
 	return target;
 }
 
-ee::mat4 Camera::GetModelViewMat() const
+sm::mat4 Camera::GetModelViewMat() const
 {
-	ee::mat4 trans = ee::mat4::Translate(-m_pos.x, -m_pos.y, -m_pos.z);
-	ee::mat4 rot = GetModelViewRotMat();
+	sm::mat4 trans = sm::mat4::Translate(-m_pos.x, -m_pos.y, -m_pos.z);
+	sm::mat4 rot = GetModelViewRotMat();
 	return trans * rot;
 }
 
@@ -106,7 +106,7 @@ void Camera::SetScreenSize(int width, int height)
 	m_height = height;
 }
 
-ee::vec3 Camera::MapToSphere(ee::ivec2 touchpoint) const
+sm::vec3 Camera::MapToSphere(sm::ivec2 touchpoint) const
 {
 // 	int viewport[4];
 // 	glGetIntegerv(GL_VIEWPORT, viewport);
@@ -114,9 +114,9 @@ ee::vec3 Camera::MapToSphere(ee::ivec2 touchpoint) const
 // 	int height = viewport[3];
 
 	const float trackball_radius = m_width / 3.0f;
-	const ee::vec2 center_point(m_width*0.5f, m_height*0.5f);
+	const sm::vec2 center_point(m_width*0.5f, m_height*0.5f);
 
-	ee::vec2 p = (ee::vec2)touchpoint - center_point;
+	sm::vec2 p = (sm::vec2)touchpoint - center_point;
 
 	// Flip the Y axis because pixel coords increase towards the bottom.
 	p.y = -p.y;
@@ -131,7 +131,7 @@ ee::vec3 Camera::MapToSphere(ee::ivec2 touchpoint) const
 	}
 
 	float z = sqrt(radius * radius - p.LengthSquared());
-	ee::vec3 mapped = ee::vec3(p.x, p.y, z);
+	sm::vec3 mapped = sm::vec3(p.x, p.y, z);
 	return mapped / radius;
 }
 
@@ -144,14 +144,14 @@ void Camera::Reset()
 	m_rot_elevation = 90;
 }
 
-ee::mat4 Camera::GetModelViewRotMat() const
+sm::mat4 Camera::GetModelViewRotMat() const
 {
 	// Step 1: n = <target position - view reference point>
-	ee::vec3 n = -GetToward();
+	sm::vec3 n = -GetToward();
 	// Step 2: Let v = <0,1,0>
-	ee::vec3 v(0, 1, 0);
+	sm::vec3 v(0, 1, 0);
 	// Step 3: u = (v x n)
-	ee::vec3 u = v.Cross(n);
+	sm::vec3 u = v.Cross(n);
 	// Step 4: v = (n x u)
 	v = n.Cross(u);
 	// Step 5: normalize all vectors
@@ -165,7 +165,7 @@ ee::mat4 Camera::GetModelViewRotMat() const
 		u.z,    v.z,     n.z,     0,
 		0,        0,       0,     1
 	};
-	return ee::mat4(mt);
+	return sm::mat4(mt);
 }
 
 }

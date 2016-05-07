@@ -4,6 +4,7 @@
 
 #include <ee/StringHelper.h>
 #include <ee/Matrix.h>
+#include <ee/Math2D.h>
 
 #include <easycomplex.h>
 

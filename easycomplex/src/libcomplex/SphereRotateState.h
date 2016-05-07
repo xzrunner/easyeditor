@@ -2,8 +2,8 @@
 #define _EASYCOMPLEX_SPHERE_ROTATE_STATE_H_
 
 #include <ee/ArrangeSpriteState.h>
-#include <ee/Vector3D.h>
-#include <ee/Quaternion.h>
+#include <SM_Quaternion.h>
+#include <SM_Vector.h>
 
 namespace ee { class EditPanelImpl; }
 
@@ -14,20 +14,20 @@ class SphereRotateState : public ee::ArrangeSpriteState
 {
 public:
 	SphereRotateState(ee::EditPanelImpl* stage, const ee::Vector& first_pos,
-		ee::Quaternion& dir);
+		sm::Quaternion& dir);
 
 	virtual void OnMouseRelease(const ee::Vector& pos);
 	virtual bool OnMouseDrag(const ee::Vector& pos);
 
 private:
-	ee::vec3 MapToSphere(int x, int y);
+	sm::vec3 MapToSphere(int x, int y);
 
 private:
 	ee::EditPanelImpl* m_stage;
 
-	ee::Quaternion& m_dir;
+	sm::Quaternion& m_dir;
 
-	ee::vec2 m_last_pos;
+	sm::vec2 m_last_pos;
 
 }; // SphereRotateState
 

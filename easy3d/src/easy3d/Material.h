@@ -1,7 +1,6 @@
 #ifndef _EASY3D_MATERIAL_H_
 #define _EASY3D_MATERIAL_H_
 
-#include <ee/Vector3D.h>
 #include <ee/TextureImgData.h>
 
 namespace e3d 
@@ -15,9 +14,9 @@ struct Material
 		, specular(0.4f, 0, 0)
 	{}
 
-	ee::vec3 ambient;
-	ee::vec3 diffuse;
-	ee::vec3 specular;
+	sm::vec3 ambient;
+	sm::vec3 diffuse;
+	sm::vec3 specular;
 
 	ee::TextureImgData m_diffuse_tex;
 };

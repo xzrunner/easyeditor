@@ -11,16 +11,16 @@ RotateCameraState::RotateCameraState(e3d::StageCanvas* canvas)
 {
 }
 
-void RotateCameraState::OnMousePress(const ee::ivec2& pos)
+void RotateCameraState::OnMousePress(const sm::ivec2& pos)
 {
 	m_last_pos = pos;
 }
 
-void RotateCameraState::OnMouseRelease(const ee::ivec2& pos)
+void RotateCameraState::OnMouseRelease(const sm::ivec2& pos)
 {
 }
 
-void RotateCameraState::OnMouseMove(const ee::ivec2& pos)
+void RotateCameraState::OnMouseMove(const sm::ivec2& pos)
 {
 	e3d::Camera& cam = m_canvas->GetCamera3();
 	float dx = (pos.x - m_last_pos.x) * MOUSE_SENSITIVITY,

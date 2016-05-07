@@ -20,6 +20,7 @@
 #include <ee/color_config.h>
 #include <ee/ScreenCache.h>
 #include <ee/cfg_const.h>
+#include <ee/Math2D.h>
 
 #include <easyparticle3d.h>
 #include <easytext.h>

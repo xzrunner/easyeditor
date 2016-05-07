@@ -34,9 +34,9 @@ void Mapping3DScene::Store(const char* filename) const
 	Json::Value value;
 
 	// store vertices
-	ee::ivec2 min(INT_MAX, INT_MAX), max(-INT_MAX, -INT_MAX);
+	sm::ivec2 min(INT_MAX, INT_MAX), max(-INT_MAX, -INT_MAX);
 	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
-		ee::ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
+		sm::ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
 
 		value["vertices"][i]["x"] = v.x;
 		value["vertices"][i]["y"] = v.y;
@@ -77,7 +77,7 @@ void Mapping3DScene::Store(const char* filename) const
 
 	// store camera
 	const e3d::Camera& cam = m_canvas->GetCamera3();
-	const ee::vec3& pos = cam.GetPosition();
+	const sm::vec3& pos = cam.GetPosition();
 	value["cam"]["x"] = pos.x;
 	value["cam"]["y"] = pos.y;
 	value["cam"]["z"] = pos.z;
@@ -95,14 +95,14 @@ void Mapping3DScene::Store(const char* filename) const
 
 void Mapping3DScene::Load(const char* filename)
 {
-	m_vertices.push_back(ee::vec3(5, 5, 5));
-	m_vertices.push_back(ee::vec3(5, 5, -5));
-	m_vertices.push_back(ee::vec3(5, -5, 5));
-	m_vertices.push_back(ee::vec3(5, -5, -5));
-	m_vertices.push_back(ee::vec3(-5, 5, 5));
-	m_vertices.push_back(ee::vec3(-5, 5, -5));
-	m_vertices.push_back(ee::vec3(-5, -5, 5));
-	m_vertices.push_back(ee::vec3(-5, -5, -5));
+	m_vertices.push_back(sm::vec3(5, 5, 5));
+	m_vertices.push_back(sm::vec3(5, 5, -5));
+	m_vertices.push_back(sm::vec3(5, -5, 5));
+	m_vertices.push_back(sm::vec3(5, -5, -5));
+	m_vertices.push_back(sm::vec3(-5, 5, 5));
+	m_vertices.push_back(sm::vec3(-5, 5, -5));
+	m_vertices.push_back(sm::vec3(-5, -5, 5));
+	m_vertices.push_back(sm::vec3(-5, -5, -5));
 
 #ifdef STORE_2D
  	m_img = ee::ImageMgr::Instance()->GetItem("box/crate.jpg");
@@ -137,7 +137,7 @@ void Mapping3DScene::Load(const char* filename)
 	while (!vertex_val.isNull()) {
 		int x = vertex_val["x"].asInt(),
 			y = vertex_val["y"].asInt();
-		ee::vec2 texcoords;
+		sm::vec2 texcoords;
 		texcoords.x = (float)(x - xmin) / w;
 		texcoords.y = 1 - (float)(y - ymin) / h;
 		m_texcoords.push_back(texcoords);
@@ -145,7 +145,7 @@ void Mapping3DScene::Load(const char* filename)
 	}
 
 	e3d::Camera& cam = m_canvas->GetCamera3();
-	ee::vec3 pos;
+	sm::vec3 pos;
 	pos.x = value["cam"]["x"].asDouble();
 	pos.y = value["cam"]["y"].asDouble();
 	pos.z = value["cam"]["z"].asDouble();
@@ -161,14 +161,14 @@ void Mapping3DScene::Draw() const
 	}
 
 #ifdef STORE_2D
- 	e3d::DrawCube(ee::vec3(-5, -5, -5), ee::vec3(5, 5, 5), m_img->GetTexID());
+ 	e3d::DrawCube(sm::vec3(-5, -5, -5), sm::vec3(5, 5, 5), m_img->GetTexID());
  	return;
 
-	//e3d::DrawCube(ee::vec3(-5, -5, -5), ee::vec3(5, 5, 5), ee::WHITE);
+	//e3d::DrawCube(sm::vec3(-5, -5, -5), sm::vec3(5, 5, 5), ee::WHITE);
 #endif // STORE_2D
 
-	std::vector<ee::vec3> vertices;
-	std::vector<ee::vec2> texcoords;
+	std::vector<sm::vec3> vertices;
+	std::vector<sm::vec2> texcoords;
 
 	// front
 	vertices.push_back(m_vertices[7]);
@@ -273,7 +273,7 @@ void Mapping3DScene::DebugDraw() const
 // 	dc.SetPen(*wxWHITE_PEN);
 // 	dc.SetBrush(*wxWHITE_BRUSH);
 // 	for (int i = 0, n= m_vertices.size(); i < n; ++i) {
-// 		ee::ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
+// 		sm::ivec2 v = m_canvas->TransPos3ProjectToScreen(m_vertices[i]);
 // 		dc.DrawRectangle(v.x, v.y, 10, 10);
 // 	}
 }

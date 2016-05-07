@@ -1,6 +1,5 @@
 #include "dev_config.h"
 
-#include "Vector3D.h"
 #include "Image.h"
 #include "TextureImgData.h"
 #include "Exception.h"
@@ -258,13 +257,13 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 			float z[4];
 			trans.camera.CalculateZ(pcam, vertices, z);
 
-			std::vector<vec3> _vertices;
-			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, z[0]));
-			_vertices.push_back(vec3(vertices[1].x, vertices[1].y, z[1]));
-			_vertices.push_back(vec3(vertices[2].x, vertices[2].y, z[2]));
-			_vertices.push_back(vec3(vertices[0].x, vertices[0].y, z[0]));
-			_vertices.push_back(vec3(vertices[2].x, vertices[2].y, z[2]));
-			_vertices.push_back(vec3(vertices[3].x, vertices[3].y, z[3]));
+			std::vector<sm::vec3> _vertices;
+			_vertices.push_back(sm::vec3(vertices[0].x, vertices[0].y, z[0]));
+			_vertices.push_back(sm::vec3(vertices[1].x, vertices[1].y, z[1]));
+			_vertices.push_back(sm::vec3(vertices[2].x, vertices[2].y, z[2]));
+			_vertices.push_back(sm::vec3(vertices[0].x, vertices[0].y, z[0]));
+			_vertices.push_back(sm::vec3(vertices[2].x, vertices[2].y, z[2]));
+			_vertices.push_back(sm::vec3(vertices[3].x, vertices[3].y, z[3]));
 
 			std::vector<Vector> _texcoords;
 			_texcoords.push_back(texcoords[0]);

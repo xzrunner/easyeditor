@@ -65,7 +65,7 @@ void ModelShader::Unbind()
 void ModelShader::SetProjection(int width, int height)
 {
 	float hh = 1.0f * height / width;
-	m_mat_projection = ee::mat4::Perspective(-1, 1, -hh, hh, 
+	m_mat_projection = sm::mat4::Perspective(-1, 1, -hh, hh, 
 		Camera::CAM_NEAR, Camera::CAM_FAR);
 }
 
@@ -86,12 +86,12 @@ void ModelShader::Commit()
 		const Node& node = m_render_list[i];
 
 		// Set the model-view transform.
-		ee::mat4 model_view = node.mat * m_mat_modelview;
+		sm::mat4 model_view = node.mat * m_mat_modelview;
 		glUniformMatrix4fv(m_model_view, 1, 0, model_view.Pointer());
 
 		// Set the normal matrix.
 		// It's orthogonal, so its Inverse-Transpose is itself!
- 	 	ee::mat3 normal_mat = model_view.ToMat3();
+ 	 	sm::mat3 normal_mat = model_view.ToMat3();
 		SetNormalMatrix(normal_mat);
 
 		const std::vector<Mesh>& meshes = node.model->GetAllMeshes();
@@ -116,12 +116,12 @@ void ModelShader::Commit()
 	m_render_list.clear();
 }
 
-void ModelShader::SetModelView(const ee::mat4& mat)
+void ModelShader::SetModelView(const sm::mat4& mat)
 {
 	m_mat_modelview = mat;
 }
 
-void ModelShader::Draw(const IModel* model, const ee::mat4& m)
+void ModelShader::Draw(const IModel* model, const sm::mat4& m)
 {
 	Node n;
 	n.model = model;

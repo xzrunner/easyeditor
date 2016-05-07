@@ -13,16 +13,16 @@ class Cone : public ParametricSurface
 public:
     Cone(float height, float radius) : m_height(height), m_radius(radius)
     {
-        ParametricInterval interval = { ee::ivec2(20, 20), ee::vec2(ee::TWO_PI, 1), ee::vec2(30, 20) };
+        ParametricInterval interval = { sm::ivec2(20, 20), sm::vec2(ee::TWO_PI, 1), sm::vec2(30, 20) };
         SetInterval(interval);
     }
-    ee::vec3 Evaluate(const ee::vec2& domain) const
+    sm::vec3 Evaluate(const sm::vec2& domain) const
     {
         float u = domain.x, v = domain.y;
         float x = m_radius * (1 - v) * cos(u);
         float y = m_height * (v - 0.5f);
         float z = m_radius * (1 - v) * -sin(u);
-        return ee::vec3(x, y, z);
+        return sm::vec3(x, y, z);
     }
 private:
     float m_height;
@@ -33,16 +33,16 @@ class Sphere : public ParametricSurface {
 public:
     Sphere(float radius) : m_radius(radius)
     {
-        ParametricInterval interval = { ee::ivec2(20, 20), ee::vec2(ee::PI, ee::TWO_PI), ee::vec2(20, 35) };
+        ParametricInterval interval = { sm::ivec2(20, 20), sm::vec2(ee::PI, ee::TWO_PI), sm::vec2(20, 35) };
         SetInterval(interval);
     }
-    ee::vec3 Evaluate(const ee::vec2& domain) const
+    sm::vec3 Evaluate(const sm::vec2& domain) const
     {
         float u = domain.x, v = domain.y;
         float x = m_radius * sin(u) * cos(v);
         float y = m_radius * cos(u);
         float z = m_radius * -sin(u) * sin(v);
-        return ee::vec3(x, y, z);
+        return sm::vec3(x, y, z);
     }
 private:
     float m_radius;
@@ -54,10 +54,10 @@ public:
         m_majorRadius(majorRadius),
         m_minorRadius(minorRadius)
     {
-        ParametricInterval interval = { ee::ivec2(20, 20), ee::vec2(ee::TWO_PI, ee::TWO_PI), ee::vec2(40, 10) };
+        ParametricInterval interval = { sm::ivec2(20, 20), sm::vec2(ee::TWO_PI, ee::TWO_PI), sm::vec2(40, 10) };
         SetInterval(interval);
     }
-    ee::vec3 Evaluate(const ee::vec2& domain) const
+    sm::vec3 Evaluate(const sm::vec2& domain) const
     {
         const float major = m_majorRadius;
         const float minor = m_minorRadius;
@@ -65,7 +65,7 @@ public:
         float x = (major + minor * cos(v)) * cos(u);
         float y = (major + minor * cos(v)) * sin(u);
         float z = minor * sin(v);
-        return ee::vec3(x, y, z);
+        return sm::vec3(x, y, z);
     }
 private:
     float m_majorRadius;
@@ -76,10 +76,10 @@ class TrefoilKnot : public ParametricSurface {
 public:
     TrefoilKnot(float scale) : m_scale(scale)
     {
-        ParametricInterval interval = { ee::ivec2(60, 15), ee::vec2(ee::TWO_PI, ee::TWO_PI), ee::vec2(100, 8) };
+        ParametricInterval interval = { sm::ivec2(60, 15), sm::vec2(ee::TWO_PI, ee::TWO_PI), sm::vec2(100, 8) };
         SetInterval(interval);
     }
-    ee::vec3 Evaluate(const ee::vec2& domain) const
+    sm::vec3 Evaluate(const sm::vec2& domain) const
     {
         const float a = 0.5f;
         const float b = 0.3f;
@@ -93,18 +93,18 @@ public:
         float y = r * sin(u);
         float z = c * sin(1.5f * u);
         
-        ee::vec3 dv;
+        sm::vec3 dv;
         dv.x = -1.5f * b * sin(1.5f * u) * cos(u) -
                (a + b * cos(1.5f * u)) * sin(u);
         dv.y = -1.5f * b * sin(1.5f * u) * sin(u) +
                (a + b * cos(1.5f * u)) * cos(u);
         dv.z = 1.5f * c * cos(1.5f * u);
         
-        ee::vec3 q = dv.Normalized();
-        ee::vec3 qvn = ee::vec3(q.y, -q.x, 0).Normalized();
-        ee::vec3 ww = q.Cross(qvn);
+        sm::vec3 q = dv.Normalized();
+        sm::vec3 qvn = sm::vec3(q.y, -q.x, 0).Normalized();
+        sm::vec3 ww = q.Cross(qvn);
         
-        ee::vec3 range;
+        sm::vec3 range;
         range.x = x + d * (qvn.x * cos(v) + ww.x * sin(v));
         range.y = y + d * (qvn.y * cos(v) + ww.y * sin(v));
         range.z = z + d * ww.z * sin(v);
@@ -118,10 +118,10 @@ class MobiusStrip : public ParametricSurface {
 public:
     MobiusStrip(float scale) : m_scale(scale)
     {
-        ParametricInterval interval = { ee::ivec2(40, 20), ee::vec2(ee::TWO_PI, ee::TWO_PI), ee::vec2(40, 15) };
+        ParametricInterval interval = { sm::ivec2(40, 20), sm::vec2(ee::TWO_PI, ee::TWO_PI), sm::vec2(40, 15) };
         SetInterval(interval);
     }
-    ee::vec3 Evaluate(const ee::vec2& domain) const
+    sm::vec3 Evaluate(const sm::vec2& domain) const
     {
         float u = domain.x;
         float t = domain.y;
@@ -136,7 +136,7 @@ public:
         float y = a * cos(t) * sin(phi) + b * sin(t) * cos(phi);
 
         // Sweep the ellipse along a circle, like a torus.
-        ee::vec3 range;
+        sm::vec3 range;
         range.x = (major + x) * cos(u);
         range.y = (major + x) * sin(u);
         range.z = y;
@@ -150,10 +150,10 @@ class KleinBottle : public ParametricSurface {
 public:
     KleinBottle(float scale) : m_scale(scale)
     {
-        ParametricInterval interval = { ee::ivec2(20, 20), ee::vec2(ee::TWO_PI, ee::TWO_PI), ee::vec2(15, 50) };
+        ParametricInterval interval = { sm::ivec2(20, 20), sm::vec2(ee::TWO_PI, ee::TWO_PI), sm::vec2(15, 50) };
         SetInterval(interval);
     }
-    ee::vec3 Evaluate(const ee::vec2& domain) const
+    sm::vec3 Evaluate(const sm::vec2& domain) const
     {
         float v = 1 - domain.x;
         float u = domain.y;
@@ -168,13 +168,13 @@ public:
         
         float y1 = 8 * sin(u);
         
-        ee::vec3 range;
+        sm::vec3 range;
         range.x = u < ee::PI ? x0 : x1;
         range.y = u < ee::PI ? -y0 : -y1;
         range.z = (-2 * (1 - cos(u) / 2)) * sin(v);
         return range * m_scale;
     }
-    bool InvertNormal(const ee::vec2& domain) const
+    bool InvertNormal(const sm::vec2& domain) const
     {
         return domain.y > 3 * ee::PI / 2;
     }

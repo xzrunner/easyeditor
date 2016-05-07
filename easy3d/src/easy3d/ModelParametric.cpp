@@ -60,7 +60,7 @@ ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 	}
 	for (int i = 0, n = vertices.size(); i < n; )
 	{
-		ee::vec3 pos;
+		sm::vec3 pos;
 		pos.x = vertices[i];
 		pos.y = vertices[i+1];
 		pos.z = vertices[i+2];

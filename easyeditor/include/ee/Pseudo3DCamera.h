@@ -2,7 +2,8 @@
 #define _EASYEDITOR_PSEUDO3D_CAMERA_H_
 
 #include "Camera.h"
-#include "Vector3D.h"
+
+#include <SM_Vector.h>
 
 union sm_mat4;
 struct sm_vec3;
@@ -23,14 +24,14 @@ public:
 	virtual Vector TransPosScreenToProject(int x, int y, int width, int height) const;
 	virtual Vector TransPosProjectToScreen(const Vector& proj, int width, int height) const;
 
-	Vector TransPosProjectToScreen(const vec3& proj, int width, int height) const;
+	Vector TransPosProjectToScreen(const sm::vec3& proj, int width, int height) const;
 
 	virtual void UpdateModelView() const;
 
 	virtual float GetScale() const;
 	virtual const Vector& GetPosition() const;
 
-	void Translate(const vec3& offset);
+	void Translate(const sm::vec3& offset);
 	void Rotate(float da);
 
 	float GetAngle() const;
