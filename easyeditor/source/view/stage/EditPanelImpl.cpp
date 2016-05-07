@@ -12,8 +12,6 @@
 #include "OrthoCamera.h"
 #include "Pseudo3DCamera.h"
 
-#include <sm.h>
-
 #include <fstream>
 
 namespace ee

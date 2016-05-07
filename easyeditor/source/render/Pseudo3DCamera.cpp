@@ -19,7 +19,7 @@ static const float ANGLE = -20;
 
 Pseudo3DCamera::Pseudo3DCamera()
 {
-	sm_vec3 pos;
+	sm::vec3 pos;
 	pos.x = pos.y = 0;
 	pos.z = Z;
 
