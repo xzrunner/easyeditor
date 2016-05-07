@@ -148,6 +148,10 @@
 			Name="vector"
 			>
 			<File
+				RelativePath="..\..\..\src\sm\sm_c_vector.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sm\sm_c_vector.h"
 				>
 			</File>
@@ -224,10 +228,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\sm\c_wrap_sm.h"
-			>
-		</File>
 		<File
 			RelativePath="..\..\..\src\sm\sm.h"
 			>

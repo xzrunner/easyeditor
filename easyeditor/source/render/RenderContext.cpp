@@ -32,7 +32,8 @@ void RenderContext::SetProjection(int width, int height)
 
 	Pseudo3DCamera* cam = static_cast<Pseudo3DCamera*>(CameraMgr::Instance()->GetCamera(CameraMgr::PSEUDO3D));
 	if (cam) {
-		sl::SubjectMVP3::Instance()->NotifyProjection(cam->GetProjectMat());
+		const sm_mat4* mat = cam->GetProjectMat();
+		sl::SubjectMVP3::Instance()->NotifyProjection(*(const sm::mat4*)mat);
 	}
 }
 

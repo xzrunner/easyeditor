@@ -2,9 +2,10 @@
 #include "panel_msg.h"
 #include "ScreenCache.h"
 
-#include <sm.h>
 #include <c25_camera.h>
 #include <shaderlab.h>
+//#include <SM_Vector.h>
+#include <sm_c_vector.h>
 
 #include <wx/log.h>
 
@@ -19,7 +20,7 @@ static const float ANGLE = -20;
 
 Pseudo3DCamera::Pseudo3DCamera()
 {
-	sm::vec3 pos;
+	sm_vec3 pos;
 	pos.x = pos.y = 0;
 	pos.z = Z;
 
@@ -81,7 +82,8 @@ void Pseudo3DCamera::UpdateModelView() const
 {
 	float angle = c25_cam_get_angle(m_cam);
 
-	sl::SubjectMVP3::Instance()->NotifyModelview(GetModelViewMat());
+	const sm_mat4* mat = GetModelViewMat();
+	sl::SubjectMVP3::Instance()->NotifyModelview(*(const sm::mat4*)mat);
 }
 
 float Pseudo3DCamera::GetScale() const
