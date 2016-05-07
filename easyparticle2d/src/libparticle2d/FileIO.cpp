@@ -200,8 +200,8 @@ p2d_emitter_cfg* FileIO::LoadPSConfig(const std::string& filepath)
 		const LoadAdapter::Component& src = adapter.components[i];
 		p2d_symbol& dst = cfg->symbols[i];
 
-		dst.angle_start = src.angle_start * ee::TRANS_DEG_TO_RAD;
-		dst.angle_end = src.angle_end * ee::TRANS_DEG_TO_RAD;
+		dst.angle_start = src.angle_start * SM_DEG_TO_RAD;
+		dst.angle_end = src.angle_end * SM_DEG_TO_RAD;
 
 		dst.scale_start = src.scale_start * 0.01f;
 		dst.scale_end = src.scale_end * 0.01f;

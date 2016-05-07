@@ -19,7 +19,7 @@ void CosineSmooth::Do(const std::vector<Vector>& src, float sampling_width,
 			p1 = src[i+1];
 		const size_t samplingCount = static_cast<size_t>(std::floor(std::abs(p1.x - p0.x) / sampling_width));
 		const float dx = (p1.x - p0.x) / samplingCount;
-		const float da = PI / samplingCount;
+		const float da = SM_PI / samplingCount;
 		const float yMid = (p0.y + p1.y) * 0.5f;
 		const float ampl = (p0.y - p1.y) * 0.5f;
 		dst.push_back(p0);

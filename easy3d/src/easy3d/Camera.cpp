@@ -76,11 +76,11 @@ sm::vec3 Camera::GetToward() const
 {
 	// reset rot matrix
 	// compute trig functions once
-	float rad_elevation = m_rot_elevation * ee::TRANS_DEG_TO_RAD;
+	float rad_elevation = m_rot_elevation * SM_DEG_TO_RAD;
 	float sin_elevation = sin(rad_elevation);
 	float cos_elevation = cos(rad_elevation);
 
-	float rad_heading = m_rot_heading * ee::TRANS_DEG_TO_RAD;
+	float rad_heading = m_rot_heading * SM_DEG_TO_RAD;
 	float sin_heading = sin(rad_heading);
 	float cos_heading = cos(rad_heading);
 

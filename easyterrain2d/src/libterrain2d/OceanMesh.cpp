@@ -108,7 +108,7 @@ void OceanMesh::Update(float dt)
 	}
 	m_during += dt;
 
-	if (m_wave_speed * m_during > ee::PI * 2) {
+	if (m_wave_speed * m_during > SM_PI * 2) {
 		m_during = 0;
 	}
 }
@@ -185,7 +185,7 @@ ee::Rect OceanMesh::GetRegion() const
 float OceanMesh::GetTexcoordSpdAngle() const
 {
 	if (m_texcoords_spd.y == 0) {
-		return ee::PI * 0.5f;
+		return SM_PI * 0.5f;
 	} else {
 		return atan(m_texcoords_spd.x / m_texcoords_spd.y);
 	}

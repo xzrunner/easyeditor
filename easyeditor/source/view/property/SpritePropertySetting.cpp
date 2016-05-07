@@ -125,7 +125,7 @@ void SpritePropertySetting::OnPropertyGridChange(const std::string& name, const 
 	// angle
 	else if (name == wxT("Angle"))
 	{
-		m_impl->Rotate(wxANY_AS(value, float) * TRANS_DEG_TO_RAD);
+		m_impl->Rotate(wxANY_AS(value, float) * SM_DEG_TO_RAD);
 	}
 	// scale
 	else if (name == wxT("Scale"))
@@ -249,7 +249,7 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->GetPosition().x);
 	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->GetPosition().y);
 	pg->GetProperty(wxT("Pos"))->SetValue(pg->GetProperty(wxT("Pos"))->GenerateComposedValue());
-	pg->GetProperty(wxT("Angle"))->SetValue(spr->GetAngle() * TRANS_RAD_TO_DEG);
+	pg->GetProperty(wxT("Angle"))->SetValue(spr->GetAngle() * SM_RAD_TO_DEG);
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->GetScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->GetScale().y);
 	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
@@ -369,7 +369,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute(wxT("Pos.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Pos.Y"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, spr->GetAngle() * TRANS_RAD_TO_DEG));
+	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, spr->GetAngle() * SM_RAD_TO_DEG));
 	pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
 	pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
 

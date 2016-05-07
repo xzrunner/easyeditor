@@ -44,8 +44,8 @@
 //		lower = std::min(m_rightAngleSmall, m_rightAngleLarge);
 //		upper = std::max(m_rightAngleSmall, m_rightAngleLarge);
 //	}
-//	lower *= PI;
-//	upper *= PI;
+//	lower *= SM_PI;
+//	upper *= SM_PI;
 //
 //	m_joint->SetLimits(lower, upper);
 //}

@@ -72,7 +72,7 @@ void FileIO::LoadFromEasypackerFile(const char* filename)
 		pos.x = tex.region.left + tex.region.width * 0.5f;
 		pos.y = tex.region.low + tex.region.height * 0.5f;
 		if (tex.bRotate)
-			sprite->SetTransform(pos, ee::PI * 0.5f);
+			sprite->SetTransform(pos, SM_PI * 0.5f);
 		else
 			sprite->SetTransform(pos, 0);
 
@@ -122,7 +122,7 @@ void FileIO::LoadFromTexPackerFile(const char* filename)
 			int top = frame_val["frame"]["y"].asInt() - frame_val["spriteSourceSize"]["x"].asInt();
  			pos.x = left + height * 0.5f;
  			pos.y = context->height - (top + width * 0.5f);
-			angle = -ee::PI*0.5f;
+			angle = -SM_PI*0.5f;
 		}
 		else
 		{

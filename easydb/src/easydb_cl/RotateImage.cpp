@@ -76,7 +76,7 @@ void RotateImage::Rotate(ee::Snapshoot& ss, const std::string& src_dir, const st
 			ee::Sprite* sprite = ee::SpriteFactory::Instance()->Create(symbol);
 			ee::Rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {
-				float rad = deg * ee::TRANS_DEG_TO_RAD;
+				float rad = deg * SM_DEG_TO_RAD;
 				sprite->SetTransform(sprite->GetPosition(), rad);
 				int width = ee::Math2D::RotateVector(ee::Vector(r.xmax, r.ymax), -rad).x * 2;
 				int height = ee::Math2D::RotateVector(ee::Vector(r.xmin, r.ymax), -rad).y * 2;

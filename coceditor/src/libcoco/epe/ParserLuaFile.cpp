@@ -676,7 +676,7 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 	else if (mode == "0321")
 	{
 		yMirror = true;
-		angle = -ee::PI * 0.5f;
+		angle = -SM_PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "1032")
@@ -685,28 +685,28 @@ void ParserLuaFile::Picture::Part::transform(ee::Sprite* sprite) const
 	}
 	else if (mode == "1230")
 	{
-		angle = -ee::PI * 0.5f;
+		angle = -SM_PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "2103")
 	{
 		xMirror = true;
-		angle = -ee::PI * 0.5f;
+		angle = -SM_PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "2301")
 	{
-		angle = ee::PI;
+		angle = SM_PI;
 	}
 	else if (mode == "3012")
 	{
-		angle = ee::PI * 0.5f;
+		angle = SM_PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "3210")
 	{
 		xMirror = true;
-		angle = ee::PI;
+		angle = SM_PI;
 	}
 
 	ee::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
@@ -796,12 +796,12 @@ void ParserLuaFile::Animation::Item::transform(ee::Sprite* spr) const
 			y = mat[5] / 16.0f;
 		float ang1, ang2;
 		if (mat[0] == 0) {
-			ang1 = ee::PI * 0.5f;
+			ang1 = SM_PI * 0.5f;
 		} else {
 			ang1 = atan(-(float)mat[2]/mat[0]);
 		}
 		if (mat[3] == 0) {
-			ang2 = ee::PI * 0.5f;
+			ang2 = SM_PI * 0.5f;
 		} else {
 			ang2 = atan((float)mat[1]/mat[3]);
 		}

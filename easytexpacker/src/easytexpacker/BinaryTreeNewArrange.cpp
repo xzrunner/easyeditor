@@ -109,7 +109,7 @@ Insert(ee::ImageSprite& img) const
 		ee::Vector pos;
 		pos.x = n->GetCenterX();
 		pos.y = n->GetCenterY();
-		float angle = n->IsRotated() ? ee::PI*0.5f : 0;
+		float angle = n->IsRotated() ? SM_PI*0.5f : 0;
 		img.SetTransform(pos, angle);
 		return true;
 	}

@@ -450,7 +450,7 @@ bool Math2D::IsPointInArea(const Vector& pos, const std::vector<Vector>& area)
 
 bool Math2D::IsPointOnPolyline(const Vector& pos, const std::vector<Vector>& poly)
 {
-	Rect r(pos, LARGE_EPSILON, LARGE_EPSILON);
+	Rect r(pos, SM_RAD_TO_DEG, SM_RAD_TO_DEG);
 	return IsPolylineIntersectRect(poly, true, r);
 }
 

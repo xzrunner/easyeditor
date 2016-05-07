@@ -108,7 +108,7 @@ void RectBinArrange::AfterPacking(float xoffset,
 			}
 			else if (r.Width() == rect.height && r.Height() == rect.width)
 			{
-				angle = ee::PI * 0.5f;
+				angle = SM_PI * 0.5f;
 				// 					pos.x = output.x + r.Height() * 0.5f * s + p/* - r.CenterY()*/;
 				// 					pos.y = output.y + r.Width() * 0.5f * s + p /*- r.CenterX()*/;
 

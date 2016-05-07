@@ -55,8 +55,8 @@ void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 		m_et->cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		m_et->cfg->direction = data.val0 * ee::TRANS_DEG_TO_RAD;
-		m_et->cfg->direction_var = data.val1 * ee::TRANS_DEG_TO_RAD;
+		m_et->cfg->direction = data.val0 * SM_DEG_TO_RAD;
+		m_et->cfg->direction_var = data.val1 * SM_DEG_TO_RAD;
 		break;
 
 	case PS_GRAVITY:
@@ -123,8 +123,8 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 		m_et->cfg->position_var.y = data.val1;
 		break;
 	case PS_DIRECTION:
-		data.val0 = m_et->cfg->direction * ee::TRANS_RAD_TO_DEG;
-		data.val1 = m_et->cfg->direction_var * ee::TRANS_RAD_TO_DEG;
+		data.val0 = m_et->cfg->direction * SM_RAD_TO_DEG;
+		data.val1 = m_et->cfg->direction_var * SM_RAD_TO_DEG;
 		break;
 
 	case PS_GRAVITY:

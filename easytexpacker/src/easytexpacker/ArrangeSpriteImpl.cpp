@@ -41,7 +41,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 		const ee::Vector& pos = sprites[0]->GetPosition();
 		float angle = sprites[0]->GetAngle();
 		if (angle == 0)
-			angle = ee::PI * 0.5f;
+			angle = SM_PI * 0.5f;
 		else
 			angle = 0;
 		sprites[0]->SetTransform(pos, angle);

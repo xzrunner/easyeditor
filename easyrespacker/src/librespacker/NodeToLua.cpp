@@ -14,7 +14,7 @@ int NodeToLua::TransTime(float time)
 
 int NodeToLua::TransRadian(float r)
 {
-	return static_cast<int>(floor(r * ee::TRANS_RAD_TO_DEG + 0.5f));
+	return static_cast<int>(floor(r * SM_RAD_TO_DEG + 0.5f));
 }
 
 int NodeToLua::TransFloat(float f)

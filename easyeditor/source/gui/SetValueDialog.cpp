@@ -12,7 +12,7 @@ SetValueDialog::SetValueDialog(wxWindow* parent, const std::string& title, const
 
 std::string SetValueDialog::GetText() const
 {
-	return m_text_ctrl->GetLineText(0);
+	return m_text_ctrl->GetLineText(0).ToStdString();
 }
 
 void SetValueDialog::InitLayout(const std::string& old_val)

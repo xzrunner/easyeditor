@@ -120,11 +120,11 @@ int ArrangeSpriteImpl::RotateSpriteState::
 GetAnglePos(float angle)
 {
 	angle = -angle;
-	angle += ee::PI / 8;
-	angle = angle - ee::PI*2*std::floor(angle/(ee::PI*2));
+	angle += SM_PI / 8;
+	angle = angle - SM_PI*2*std::floor(angle/(SM_PI*2));
 	assert(angle >= 0);
 
-	return std::floor(angle / (ee::PI / 4)) + 1;	
+	return std::floor(angle / (SM_PI / 4)) + 1;	
 }
 
 }

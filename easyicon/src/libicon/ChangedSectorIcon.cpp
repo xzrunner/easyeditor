@@ -9,7 +9,7 @@ namespace eicon
 {
 
 ChangedSectorIcon::ChangedSectorIcon()
-	: m_min(ee::PI * 0.5f)
+	: m_min(SM_PI * 0.5f)
 	, m_max(0)
 {
 }

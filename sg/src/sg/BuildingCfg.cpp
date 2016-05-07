@@ -103,7 +103,7 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 	float angle = value["grid"]["angle"].asInt();
 	float scale = value["grid"]["scale"].asDouble();
 	float alpha = value["grid"]["alpha"].asInt();
-	sprite->SetTransform(ee::Vector(0, 0), angle * ee::TRANS_DEG_TO_RAD);
+	sprite->SetTransform(ee::Vector(0, 0), angle * SM_DEG_TO_RAD);
 	sprite->SetScale(ee::Vector(scale, scale));
 	SymbolRender::Instance()->SetGrid(sprite);
 	symbol->Release();

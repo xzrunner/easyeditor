@@ -591,7 +591,7 @@ void ExtractOutlineFine::InitRotateLUT()
 	m_rotate_lut.reserve(DIR_COUNT);
 	for (int i = 0; i < DIR_COUNT; ++i) 
 	{
-		float angle = 2 * ee::PI * i / DIR_COUNT;
+		float angle = 2 * SM_PI * i / DIR_COUNT;
 		ee::Vector dir(cos(angle), sin(angle));
 		m_rotate_lut.push_back(dir);
 	}

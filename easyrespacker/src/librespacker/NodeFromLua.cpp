@@ -14,7 +14,7 @@ float NodeFromLua::TransTime(int time)
 
 float NodeFromLua::TransDegree(int deg)
 {
-	return deg * ee::TRANS_DEG_TO_RAD;
+	return deg * SM_DEG_TO_RAD;
 }
 
 float NodeFromLua::TransFloatX100(int f)

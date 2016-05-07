@@ -45,7 +45,7 @@ bool PasteSymbolTileOP::OnMouseRightDown(int x, int y)
 {
 	if (PasteSymbolOP::OnMouseRightDown(x, y)) return true;
 
-	m_rotate += PI * 0.5f;
+	m_rotate += SM_PI * 0.5f;
 
 	return false;
 }

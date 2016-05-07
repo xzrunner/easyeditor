@@ -14,7 +14,7 @@ int NodeToBin::TransTime(float time)
 
 int NodeToBin::TransRadian(float r)
 {
-	return static_cast<int>(floor(r * ee::TRANS_RAD_TO_DEG + 0.5f));
+	return static_cast<int>(floor(r * SM_RAD_TO_DEG + 0.5f));
 }
 
 int NodeToBin::TransFloat(float f)

@@ -130,7 +130,7 @@ void StagePanel::InitPosition()
 		{
 			ee::Vector pos;
 			float radius = ee::Random::GetNum0To1() * 4096;
-			float angle = ee::Random::GetNum(0, ee::PI*2);
+			float angle = ee::Random::GetNum(0, SM_PI*2);
 			pos.x = cos(angle)*radius;
 			pos.y = sin(angle)*radius;
 			sprite->SetTransform(pos, 0);
@@ -147,7 +147,7 @@ void StagePanel::InitPosition()
 		if (node)
 		{
 			float radius = 256;
-			float angle = ee::PI*2 / node->out.size();
+			float angle = SM_PI*2 / node->out.size();
 			for (size_t i = 0, n = node->out.size(); i < n; ++i)
 			{
 				ee::Sprite* to = node->out[i];

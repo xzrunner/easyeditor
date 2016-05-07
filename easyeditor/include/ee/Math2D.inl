@@ -4,6 +4,8 @@
 #include "Vector.h"
 #include "Rect.h"
 
+#include <sm_const.h>
+
 namespace ee
 {
 
@@ -126,8 +128,8 @@ int Math2D::GetNextIdxInRing(int sz, int curr, int step)
 inline
 bool Math2D::IsTwoPointsSame(const Vector& p0, const Vector& p1) 
 {
-	return fabs(p0.x - p1.x) < LARGE_EPSILON
-		&& fabs(p0.y - p1.y) < LARGE_EPSILON;
+	return fabs(p0.x - p1.x) < SM_RAD_TO_DEG
+		&& fabs(p0.y - p1.y) < SM_RAD_TO_DEG;
 }
 
 }

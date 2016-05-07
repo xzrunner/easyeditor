@@ -66,8 +66,8 @@ void PasteSymbolRandomWidget::GetRandomValue(RandomValue& val) const
 		scaleMax = m_scale_max_ctrl->GetValue() * 0.01f;
 	val.scale = scaleMin + (scaleMax - scaleMin) * Random::GetNum0To1();
 
-	const float angleMin = m_angle_min_ctrl->GetValue() * TRANS_DEG_TO_RAD,
-		angleMax = m_angle_max_ctrl->GetValue() * TRANS_DEG_TO_RAD;
+	const float angleMin = m_angle_min_ctrl->GetValue() * SM_DEG_TO_RAD,
+		angleMax = m_angle_max_ctrl->GetValue() * SM_DEG_TO_RAD;
 	val.angle = angleMin + (angleMax - angleMin) * Random::GetNum0To1();
 }
 

@@ -80,8 +80,8 @@ void LoadAdapter::Load(const std::string& filepath)
 	position.y			= static_cast<float>(value["position_y"]["center"].asDouble());
 	position_var.y		= static_cast<float>(value["position_y"]["offset"].asDouble());
 
-	direction			= static_cast<float>(value["direction"]["center"].asDouble() * ee::TRANS_DEG_TO_RAD);
-	direction_var		= static_cast<float>(value["direction"]["offset"].asDouble() * ee::TRANS_DEG_TO_RAD);
+	direction			= static_cast<float>(value["direction"]["center"].asDouble() * SM_DEG_TO_RAD);
+	direction_var		= static_cast<float>(value["direction"]["offset"].asDouble() * SM_DEG_TO_RAD);
 
 	std::string dir = ee::FileHelper::GetFileDir(filepath);
 	int idx = 0;

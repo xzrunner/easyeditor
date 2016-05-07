@@ -43,13 +43,13 @@ void LoadAdapter::Load(const std::string& filepath)
 	int min, max;
 	min = value["min_hori"].asInt();
 	max = value["max_hori"].asInt();
-	hori = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
-	hori_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	hori = (min + max) * 0.5f * SM_DEG_TO_RAD;
+	hori_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 
 	min = value["min_vert"].asInt();
 	max = value["max_vert"].asInt();
-	vert = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
-	vert_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	vert = (min + max) * 0.5f * SM_DEG_TO_RAD;
+	vert_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 
 	if (!value["radial_speed"].isNull()) {
 		radial_spd = static_cast<float>(value["radial_speed"]["center"].asInt());
@@ -73,14 +73,14 @@ void LoadAdapter::Load(const std::string& filepath)
 	radial_spd_var *= 0.25f;
 
 	if (!value["angular_speed"].isNull()) {
-		angular_spd = value["angular_speed"]["center"].asInt() * ee::TRANS_DEG_TO_RAD;
-		angular_spd_var = value["angular_speed"]["offset"].asInt() * ee::TRANS_DEG_TO_RAD;
+		angular_spd = value["angular_speed"]["center"].asInt() * SM_DEG_TO_RAD;
+		angular_spd_var = value["angular_speed"]["offset"].asInt() * SM_DEG_TO_RAD;
 	} else {
 		int min, max;
 		min = value["min_angular_spd"].asInt();
 		max = value["max_angular_spd"].asInt();
-		angular_spd = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
-		angular_spd_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
+		angular_spd = (min + max) * 0.5f * SM_DEG_TO_RAD;
+		angular_spd_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 	}
 
 	dis_region = static_cast<float>(value["disturbance_radius"]["center"].asInt());

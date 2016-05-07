@@ -114,7 +114,7 @@ std::vector<int> Grids::IntersectPolyline(const std::vector<ee::Vector>& path) c
 
 ee::Vector Grids::TransToBirdView(float x, float y)
 {
-	ee::Vector ret = ee::Math2D::RotateVector(ee::Vector(x, y), ee::PI / 4);
+	ee::Vector ret = ee::Math2D::RotateVector(ee::Vector(x, y), SM_PI / 4);
 	ret.y *= PROJ_TRANS;
 	return ret;
 }
@@ -123,7 +123,7 @@ ee::Vector Grids::TransToFlatView(float x, float y)
 {
 	ee::Vector ret = ee::Vector(x, y);
 	ret.y /= PROJ_TRANS;
-	ret = ee::Math2D::RotateVector(ret, - ee::PI / 4);
+	ret = ee::Math2D::RotateVector(ret, - SM_PI / 4);
 	return ret;
 }
 

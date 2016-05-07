@@ -83,7 +83,7 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const std::string& name, 
 	}
 	else if (name == wxT("dAngle"))
 	{
-		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
+		float angle = wxANY_AS(value, float) * SM_DEG_TO_RAD;
 		m_impl->OnAngleChange(angle);
 	}
 	else if (name == wxT("dScale"))
@@ -99,7 +99,7 @@ void MultiSpritesPropertySetting::OnPropertyGridChange(const std::string& name, 
 	}
 	else if (name == "Angle")
 	{
-		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
+		float angle = wxANY_AS(value, float) * SM_DEG_TO_RAD;
 		m_impl->SetAngle(m_overall, angle);
 	}
 	else if (name == "Scale")
@@ -268,7 +268,7 @@ void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Overall", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->SetPropertyAttribute("Overall", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_impl->GetAngle() * TRANS_RAD_TO_DEG));
+	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_impl->GetAngle() * SM_RAD_TO_DEG));
 	pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
 	pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
 

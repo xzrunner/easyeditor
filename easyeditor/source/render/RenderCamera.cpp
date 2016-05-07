@@ -23,7 +23,7 @@ void RenderCamera::CalculateZ(const Pseudo3DCamera* cam,
 		return;
 	}
 
-	float zs = sin(cam->GetAngle() * ee::TRANS_DEG_TO_RAD);
+	float zs = sin(cam->GetAngle() * SM_DEG_TO_RAD);
 
 	float ymin = FLT_MAX, ymax = -FLT_MAX;
 	for (int i = 0; i < 4; ++i) {

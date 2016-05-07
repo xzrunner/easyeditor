@@ -69,7 +69,7 @@ void RectCutLoader::LoadJsonAndImg(const std::string& pack_file, const std::stri
 		float angle = 0;
 		if (pic.src.h != pic.dst.h) {
 			assert(pic.src.h == pic.dst.w);
-			angle = -ee::PI * 0.5f;
+			angle = -SM_PI * 0.5f;
 		}
 
 		ee::Vector pos;

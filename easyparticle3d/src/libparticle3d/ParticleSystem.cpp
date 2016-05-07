@@ -70,8 +70,8 @@ void ParticleSystem::SetValue(int key, const ee::UICallback::Data& data)
 		cfg->tangential_spd_var = data.val1;
 		break;
 	case PS_ANGULAR_SPEED:
-		cfg->angular_spd = data.val0 * ee::TRANS_DEG_TO_RAD;
-		cfg->angular_spd_var = data.val1 * ee::TRANS_DEG_TO_RAD;
+		cfg->angular_spd = data.val0 * SM_DEG_TO_RAD;
+		cfg->angular_spd_var = data.val1 * SM_DEG_TO_RAD;
 		break;
 	case PS_DISTURBANCE_RADIUS:
 		cfg->dis_region = data.val0;
@@ -124,8 +124,8 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 		data.val1 = m_spr->et->cfg->tangential_spd_var;
 		break;
 	case PS_ANGULAR_SPEED:
-		data.val0 = m_spr->et->cfg->angular_spd * ee::TRANS_RAD_TO_DEG;
-		data.val1 = m_spr->et->cfg->angular_spd_var * ee::TRANS_RAD_TO_DEG;
+		data.val0 = m_spr->et->cfg->angular_spd * SM_RAD_TO_DEG;
+		data.val1 = m_spr->et->cfg->angular_spd_var * SM_RAD_TO_DEG;
 		break;
 	case PS_DISTURBANCE_RADIUS:
 		data.val0 = m_spr->et->cfg->dis_region;
@@ -311,15 +311,15 @@ void ParticleSystem::RemoveFromInvertRecord(p3d_particle* p)
 void ParticleSystem::SetHori(int min, int max) 
 {
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	cfg->hori = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
-	cfg->hori_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	cfg->hori = (min + max) * 0.5f * SM_DEG_TO_RAD;
+	cfg->hori_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetVert(int min, int max) 
 { 
 	p3d_emitter_cfg* cfg = const_cast<p3d_emitter_cfg*>(m_spr->et->cfg);
-	cfg->vert = (min + max) * 0.5f * ee::TRANS_DEG_TO_RAD;
-	cfg->vert_var = (max - min) * 0.5f * ee::TRANS_DEG_TO_RAD;
+	cfg->vert = (min + max) * 0.5f * SM_DEG_TO_RAD;
+	cfg->vert_var = (max - min) * 0.5f * SM_DEG_TO_RAD;
 }
 
 void ParticleSystem::SetGround(int ground)

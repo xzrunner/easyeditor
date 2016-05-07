@@ -39,7 +39,7 @@ bool ComposeOP::OnMouseRightDown(int x, int y)
 
 	ee::Sprite* selected = SelectByPos(x, y);
 	if (selected) {
-		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + ee::PI*0.5f);
+		selected->SetTransform(selected->GetPosition(), selected->GetAngle() + SM_PI*0.5f);
 		ee::SetCanvasDirtySJ::Instance()->SetDirty();
 	}
 

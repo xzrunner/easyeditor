@@ -129,12 +129,12 @@ void FileIO::Load(const std::string& filepath, ParticleSystem* ps,
 	}
 	toolbar->OnSetStaticMode(static_mode);
 
-	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * ee::TRANS_RAD_TO_DEG);
-	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * ee::TRANS_RAD_TO_DEG);
+	toolbar->m_min_hori->SetValue((adapter.hori - adapter.hori_var) * SM_RAD_TO_DEG);
+	toolbar->m_max_hori->SetValue((adapter.hori + adapter.hori_var) * SM_RAD_TO_DEG);
 	ps->SetHori(toolbar->m_min_hori->GetValue(), toolbar->m_max_hori->GetValue());
 
-	toolbar->m_min_vert->SetValue((adapter.vert - adapter.vert_var) * ee::TRANS_RAD_TO_DEG);
-	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * ee::TRANS_RAD_TO_DEG);
+	toolbar->m_min_vert->SetValue((adapter.vert - adapter.vert_var) * SM_RAD_TO_DEG);
+	toolbar->m_max_vert->SetValue((adapter.vert + adapter.vert_var) * SM_RAD_TO_DEG);
 	ps->SetVert(toolbar->m_min_vert->GetValue(), toolbar->m_max_vert->GetValue());
 
 	toolbar->m_ground->SetSelection(adapter.ground);

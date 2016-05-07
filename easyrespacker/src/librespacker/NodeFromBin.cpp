@@ -12,7 +12,7 @@ float NodeFromBin::TransTime(int time)
 
 float NodeFromBin::TransDegree(int deg)
 {
-	return deg * ee::TRANS_DEG_TO_RAD;
+	return deg * SM_DEG_TO_RAD;
 }
 
 float NodeFromBin::TransFloatX100(int f)

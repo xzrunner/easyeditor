@@ -321,7 +321,7 @@ void Scale9Data::ResizeSprite(ee::Sprite* sprite, const ee::Vector& center,
 	assert(w != 0 && h != 0);
 
 	sprite->SetTransform(center, sprite->GetAngle());
-	const float times = sprite->GetAngle() / ee::PI;
+	const float times = sprite->GetAngle() / SM_PI;
 	if (times - (int)(times + 0.01f) < 0.3f)
 		sprite->SetScale(ee::Vector(width / w, height / h));
 	else

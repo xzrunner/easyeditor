@@ -30,8 +30,8 @@ void ComponentPanel::SetValue(int key, const ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_ANGLE:
-		m_component->angle_start = data.val0 * ee::TRANS_DEG_TO_RAD;
-		m_component->angle_end = data.val1 * ee::TRANS_DEG_TO_RAD;
+		m_component->angle_start = data.val0 * SM_DEG_TO_RAD;
+		m_component->angle_end = data.val1 * SM_DEG_TO_RAD;
 		break;
 	case PS_SCALE:
 		m_component->scale_start = data.val0 * 0.01f;
@@ -49,8 +49,8 @@ void ComponentPanel::GetValue(int key, ee::UICallback::Data& data)
 	switch (key)
 	{
 	case PS_ANGLE:
-		data.val0 = m_component->angle_start * ee::TRANS_RAD_TO_DEG;
-		data.val1 = m_component->angle_end * ee::TRANS_RAD_TO_DEG;
+		data.val0 = m_component->angle_start * SM_RAD_TO_DEG;
+		data.val1 = m_component->angle_end * SM_RAD_TO_DEG;
 		break;
 	case PS_SCALE:
 		data.val0 = m_component->scale_start * 100;
