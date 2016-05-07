@@ -1,6 +1,5 @@
 #include "DrawUtils.h"
 
-#include <ee/Matrix.h>
 #include <ee/Sprite.h>
 
 namespace emodeling
@@ -11,7 +10,7 @@ void DrawUtils::DrawBody(Body* body, DrawType dType)
 	ee::Colorf cFace, cEdge;
 	GetBodyColor(body->m_type, dType, cFace, cEdge);
 
-	ee::Matrix mt;
+	sm::mat4 mt;
 	body->m_sprite->GetTransMatrix(mt);
 	body->Draw(mt, cFace, cEdge);
 }
@@ -25,7 +24,7 @@ void DrawUtils::DrawFixture(Fixture* fixture,
 	else
 		GetBodyColor(fixture->m_body->m_type, dType, cFace, cEdge);
 
-	ee::Matrix mt;
+	sm::mat4 mt;
 	fixture->m_body->m_sprite->GetTransMatrix(mt);
 	fixture->Draw(mt, cFace, cEdge);
 }

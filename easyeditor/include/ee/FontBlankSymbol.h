@@ -33,8 +33,8 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void DrawBackground(const FontBlankSprite* fb, const Matrix& mt) const;
-	void DrawText(const FontBlankSprite* fb, const Matrix& mt) const;
+	void DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const;
+	void DrawText(const FontBlankSprite* fb, const sm::mat4& mt) const;
 
 	// from NeHe's FreeType
 	void print(float x, float y, const char* text) const;

@@ -4,7 +4,6 @@
 #include <ee/color_config.h>
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
-#include <ee/Matrix.h>
 
 #include <easyshape.h>
 
@@ -102,7 +101,7 @@ void PathVisibleSimple::InsertBoundary(const ee::Sprite* spr)
 	// fix
 	std::vector<ee::Vector> fixed;
 	ee::Math2D::RemoveDuplicatePoints(bound, fixed);
-	ee::Matrix mat;
+	sm::mat4 mat;
 	spr->GetTransMatrix(mat);
 	for (int i = 0; i < fixed.size(); ++i) {
 		fixed[i] = ee::Math2D::TransVector(fixed[i], mat);

@@ -165,16 +165,16 @@ void StageCanvas::DrawSprites() const
 			{
 				if (info->wall_type == 0) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(0, 4);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 1) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(-10, 8);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 2) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(10, 8);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				} else if (info->wall_type == 3) {
 					ee::Vector pos = sprite->GetPosition() + ee::Vector(0, 6);
-					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), ee::Matrix(), pos);
+					ee::SpriteRenderer::Draw(&sprite->GetSymbol(), sm::mat4(), pos);
 				}
 			}
 		} else {

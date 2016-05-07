@@ -71,7 +71,7 @@ void PolygonShape::Translate(const ee::Vector& offset)
 	}
 }
 
-void PolygonShape::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
+void PolygonShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	if (m_material) {
 		m_material->Draw(mt, color);

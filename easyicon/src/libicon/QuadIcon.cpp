@@ -47,7 +47,7 @@ void QuadIcon::GetBound(float process, ee::Vector bound[4]) const
 	memcpy(bound, m_src, sizeof(ee::Vector) * 4);
 }
 
-void QuadIcon::Draw(const ee::Matrix& mt, float process) const
+void QuadIcon::Draw(const sm::mat4& mt, float process) const
 {
 	if (!m_img) {
 		return;

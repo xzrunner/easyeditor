@@ -1,10 +1,11 @@
 #ifndef _EASYEDITOR_RENDER_PARAMS_H_
 #define _EASYEDITOR_RENDER_PARAMS_H_
 
-#include "Matrix.h"
 #include "RenderColor.h"
 #include "RenderShader.h"
 #include "RenderCamera.h"
+
+#include <SM_Matrix.h>
 
 namespace ee
 {
@@ -14,8 +15,8 @@ class RenderParams
 public:
 	RenderParams();
 	RenderParams(const RenderParams& trans);
-	RenderParams(const Matrix& mt);
-	RenderParams(const Matrix& mt, const RenderColor& color);
+	RenderParams(const sm::mat4& mt);
+	RenderParams(const sm::mat4& mt, const RenderColor& color);
 
 	void LoadFromFile(const Json::Value& val);
 	void StoreToFile(Json::Value& val) const;
@@ -23,7 +24,7 @@ public:
 public:
 	bool set_shader;
 
-	Matrix mt;
+	sm::mat4 mt;
 
 	RenderColor color;
 

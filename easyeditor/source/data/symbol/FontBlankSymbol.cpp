@@ -106,7 +106,7 @@ void FontBlankSymbol::LoadResources()
 	}
 }
 
-void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const Matrix& mt) const
+void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const sm::mat4& mt) const
 {
 	RVG::Color(ee::Colorf(0.7f, 0.7f, 0.7f, 0.7f));
 
@@ -124,7 +124,7 @@ void FontBlankSymbol::DrawBackground(const FontBlankSprite* fb, const Matrix& mt
 	RVG::Rect(min, max, true);
 }
 
-void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const Matrix& mt) const
+void FontBlankSymbol::DrawText(const FontBlankSprite* fb, const sm::mat4& mt) const
 {
 // 	if (sprite) {
 // 		if (const FontBlankSprite* font = dynamic_cast<const FontBlankSprite*>(sprite)) {

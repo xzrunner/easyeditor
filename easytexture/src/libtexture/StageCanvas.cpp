@@ -5,7 +5,6 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/render_utility.h>
 #include <ee/Sprite.h>
-#include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/EE_RVG.h>
 #include <ee/DrawSpritesVisitor.h>
@@ -43,7 +42,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		sm::mat4 mat(m_edited->GetTransInvMatrix());
 		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
 	}
 

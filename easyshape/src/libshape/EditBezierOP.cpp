@@ -11,7 +11,6 @@
 #include <ee/PropertySettingPanel.h>
 #include <ee/EE_RVG.h>
 #include <ee/panel_msg.h>
-#include <ee/Matrix.h>
 
 namespace eshape
 {
@@ -202,7 +201,7 @@ bool EditBezierOP::OnDraw() const
 		if (m_firstPress.IsValid() && m_curr_pos.IsValid())
 		{
 			BezierShape bezier(m_firstPress, m_curr_pos);
-			bezier.Draw(ee::Matrix());
+			bezier.Draw(sm::mat4());
 		}
 	}
 

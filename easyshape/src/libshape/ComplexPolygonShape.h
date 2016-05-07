@@ -28,7 +28,7 @@ public:
 	virtual bool IsContain(const ee::Vector& pos) const;
 	virtual bool IsIntersect(const ee::Rect& rect) const;
 	virtual void Translate(const ee::Vector& offset);
-	virtual void Draw(const ee::Matrix& mt,
+	virtual void Draw(const sm::mat4& mt,
 		const ee::RenderColor& color = ee::RenderColor()) const;
 
 	const std::vector<std::vector<ee::Vector> >& GetHoles() const { return m_holes; }

@@ -7,7 +7,6 @@
 #include "Sprite.h"
 #include "sprite_msg.h"
 #include "SpriteRenderer.h"
-#include "Matrix.h"
 
 namespace ee
 {
@@ -74,7 +73,7 @@ bool PasteSymbolPhysicsRandomOP::OnDraw() const
 		symbol = m_library->GetSymbol();
 	}
 	if (symbol && m_pos.IsValid()) {
-		SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_random_value.angle, m_random_value.scale);
+		SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, m_random_value.angle, m_random_value.scale);
 	}
 
 	return false;

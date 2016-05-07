@@ -61,7 +61,7 @@ bool PasteSymbolRandomOP::OnDraw() const
 		symbol = m_library->GetSymbol();
 	}
 	if (symbol && m_pos.IsValid()) {
-		SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_random_val.angle, m_random_val.scale);
+		SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, m_random_val.angle, m_random_val.scale);
 	}
 
 	return false;

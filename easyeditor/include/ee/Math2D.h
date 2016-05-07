@@ -1,6 +1,8 @@
 #ifndef _EASYEDITOR_MATH2D_H_
 #define _EASYEDITOR_MATH2D_H_
 
+#include <SM_Matrix.h>
+
 #include <vector>
 
 #include <float.h>
@@ -8,7 +10,6 @@
 namespace ee
 {
 
-class Matrix;
 class Vector;
 class Rect;
 
@@ -160,9 +161,9 @@ public:
 
 	static Vector RotateVectorRightAngle(const Vector& v, bool isTurnLeft);
 
-	static float TransLen(float len, const Matrix& m);
-	static Vector TransVector(const Vector& v, const Matrix& m);
-	static void TransVertices(const Matrix& mt, const std::vector<Vector>& src,
+	static float TransLen(float len, const sm::mat4& m);
+	static Vector TransVector(const Vector& v, const sm::mat4& m);
+	static void TransVertices(const sm::mat4& mt, const std::vector<Vector>& src,
 		std::vector<Vector>& dst);
 
 	static Vector TransCoordsLocalToWorld(const Vector& origin, const Vector& xDir, const Vector& local);

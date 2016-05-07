@@ -37,7 +37,7 @@ void Material::Refresh(const std::vector<ee::Vector>& vertices)
 	BuildEnd();
 }
 
-void Material::DebugDrawTris(const ee::Matrix& mt) const
+void Material::DebugDrawTris(const sm::mat4& mt) const
 {
 	std::vector<ee::Vector> buf;
 	for (size_t i = 0, n = m_tris.size(); i < n; ++i)

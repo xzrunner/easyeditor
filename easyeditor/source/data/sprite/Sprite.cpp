@@ -2,7 +2,6 @@
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Math2D.h"
-#include "Matrix.h"
 #include "Exception.h"
 #include "BBFactory.h"
 #include "BoundingBox.h"
@@ -236,7 +235,7 @@ void Sprite::SetScale(const Vector& scale)
 
 	//////////////////////////////////////////////////////////////////////////
 
-// 	Matrix mat_old, mat_new;
+// 	sm::mat4 mat_old, mat_new;
 // 	mat_old.scale(m_scale.x, m_scale.y);
 // 	mat_new.scale(xScale, yScale);
 // 
@@ -253,7 +252,7 @@ void Sprite::SetScale(const Vector& scale)
 
 void Sprite::SetShear(const Vector& shear)
 {
-	Matrix mat_old, mat_new;
+	sm::mat4 mat_old, mat_new;
 	mat_old.Shear(m_shear.x, m_shear.y);
 	mat_new.Shear(shear.x, shear.y);
 
@@ -371,7 +370,7 @@ Rect Sprite::GetRect() const
 	return rect;
 }
 
-void Sprite::GetTransMatrix(Matrix& mt) const
+void Sprite::GetTransMatrix(sm::mat4& mt) const
 {
 	const float xScale = m_xMirror ? -m_scale.x : m_scale.x,
 		yScale = m_yMirror ? -m_scale.y : m_scale.y;
@@ -381,13 +380,13 @@ void Sprite::GetTransMatrix(Matrix& mt) const
 		xScale, yScale, 0, 0, m_shear.x, m_shear.y);
 }
 
-Matrix Sprite::GetTransInvMatrix() const
+sm::mat4 Sprite::GetTransInvMatrix() const
 {
-	Matrix mat;
-	mat.Rotate(-m_angle);
+	sm::mat4 mat;
+	mat.RotateZ(-m_angle);
 	mat.Shear(-m_shear.x, -m_shear.y);
-	mat.Translate(-m_pos.x/m_scale.x, -m_pos.y/m_scale.y);
-	mat.Scale(1/m_scale.x, 1/m_scale.y);
+	mat.Translate(-m_pos.x/m_scale.x, -m_pos.y/m_scale.y, 0);
+	mat.Scale(1/m_scale.x, 1/m_scale.y, 1);
 	return mat;
 }
 

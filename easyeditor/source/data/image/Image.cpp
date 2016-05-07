@@ -285,7 +285,7 @@ void Image::Draw(const RenderParams& trans, const Sprite* spr,
 	}
 }
 
-void Image::InvalidRect(const Matrix& mt) const
+void Image::InvalidRect(const sm::mat4& mt) const
 {
 #ifdef OPEN_SCREEN_CACHE
 	float hw = m_tex->GetWidth() * 0.5f,

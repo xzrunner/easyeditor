@@ -1,7 +1,6 @@
 #include "EE_SP.h"
 #include "Vector.h"
 #include "Rect.h"
-#include "Matrix.h"
 #include "Sprite.h"
 #include "BoundingBox.h"
 #include "EE_RVG.h"
@@ -22,11 +21,11 @@ SpatialPartition::SpatialPartition()
 	SIDX = sp_null_create();
 }
 
-void SpatialPartition::Insert(const Sprite* spr/*, const Matrix& mt*/)
+void SpatialPartition::Insert(const Sprite* spr/*, const sm::mat4& mt*/)
 {
-// 	Matrix t;
+// 	sm::mat4 t;
 // 	spr->GetTransMatrix(t);
-//	t = mt * t;
+//	t = t * mt;
 
 	std::vector<Vector> bound;
 	spr->GetBounding()->GetBoundPos(bound);

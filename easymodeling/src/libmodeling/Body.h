@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace ee { class Matrix; class Vector; class Rect; class Sprite; }
+namespace ee { class Vector; class Rect; class Sprite; }
 
 namespace emodeling
 {
@@ -30,7 +30,7 @@ public:
 	bool IsContain(const ee::Vector& pos) const;
 	bool IsIntersect(const ee::Rect& rect) const;
 
-	void Draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
+	void Draw(const sm::mat4& mt, const ee::Colorf& cFace, 
 		const ee::Colorf& cEdge) const;
 
 public:

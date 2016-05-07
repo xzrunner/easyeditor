@@ -26,7 +26,7 @@ Icon::~Icon()
 	}
 }
 
-void Icon::Draw(const ee::Matrix& mt, float process) const
+void Icon::Draw(const sm::mat4& mt, float process) const
 {
 	if (!m_img) {
 		return;

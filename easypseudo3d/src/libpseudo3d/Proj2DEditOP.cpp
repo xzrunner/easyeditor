@@ -52,7 +52,7 @@ bool Proj2DEditOP::onDraw() const
 	if (m_player) {
 		ee::Camera* cam = m_stage->GetCamera();
 		const ee::Vector& center = cam->GetPosition();
-		ee::SpriteRenderer::Draw(m_player, ee::Matrix(), center);
+		ee::SpriteRenderer::Draw(m_player, sm::mat4(), center);
 	}
 	return false;
 }

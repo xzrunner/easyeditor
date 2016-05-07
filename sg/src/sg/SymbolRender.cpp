@@ -4,7 +4,6 @@
 
 #include <ee/Sprite.h>
 #include <ee/Symbol.h>
-#include <ee/Matrix.h>
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/SpriteRenderer.h>
@@ -112,7 +111,7 @@ void SymbolRender::DrawGrids(const ee::Symbol& symbol,
 				m_grid->SetTransform(pos, m_grid->GetAngle());
 				ee::RenderColor ct;
 				ct.multi = color;
-				ee::SpriteRenderer::Draw(m_grid, NULL, ee::RenderParams(ee::Matrix(), ct));
+				ee::SpriteRenderer::Draw(m_grid, NULL, ee::RenderParams(sm::mat4(), ct));
 			}
 		}
 	}
@@ -133,25 +132,25 @@ void SymbolRender::DrawArrow(const ee::Symbol& symbol,
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
-		ee::SpriteRenderer::Draw(m_arrow_down, ee::Matrix(), pos, 0, -1);
+		ee::SpriteRenderer::Draw(m_arrow_down, sm::mat4(), pos, 0, -1);
 	}
 	// right
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
-		ee::SpriteRenderer::Draw(m_arrow_right, ee::Matrix(), pos);
+		ee::SpriteRenderer::Draw(m_arrow_right, sm::mat4(), pos);
 	}
 	// up
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
-		ee::SpriteRenderer::Draw(m_arrow_right, ee::Matrix(), pos, 0, -1);
+		ee::SpriteRenderer::Draw(m_arrow_right, sm::mat4(), pos, 0, -1);
 	}
 	// down
 	{
 		ee::Vector pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
-		ee::SpriteRenderer::Draw(m_arrow_down, ee::Matrix(), pos);
+		ee::SpriteRenderer::Draw(m_arrow_down, sm::mat4(), pos);
 	}
 }
 
@@ -171,10 +170,10 @@ void SymbolRender::DrawRegion(const ee::Symbol& symbol, const ee::Vector& pos)
 	float s = (float)(max_reg) / m_region_size;
 	ee::RenderColor ct;
 	ct.multi = ee::Colorf(1, 0, 0);
-	ee::SpriteRenderer::Draw(m_region, ee::RenderParams(ee::Matrix(), ct), pos, 0, s, s, 0, 0);
+	ee::SpriteRenderer::Draw(m_region, ee::RenderParams(sm::mat4(), ct), pos, 0, s, s, 0, 0);
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
-		ee::SpriteRenderer::Draw(m_region, ee::Matrix(), pos, 0, s, s);
+		ee::SpriteRenderer::Draw(m_region, sm::mat4(), pos, 0, s, s);
 	}
 }
 

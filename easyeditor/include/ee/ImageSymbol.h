@@ -27,7 +27,7 @@ public:
 	virtual void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
 		const Sprite* root = NULL) const;
 	virtual Rect GetSize(const Sprite* sprite = NULL) const;
-	virtual void InvalidRect(const Matrix& mt) const;
+	virtual void InvalidRect(const sm::mat4& mt) const;
 
 	unsigned int GetTexID() const;
 

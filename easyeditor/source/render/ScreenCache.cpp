@@ -1,7 +1,6 @@
 #include "ScreenCache.h"
 #include "EE_SP.h"
 #include "Rect.h"
-#include "Matrix.h"
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Camera.h"
@@ -94,7 +93,7 @@ static void _cs_draw(struct dtex_cs_rect* r, void* ud)
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* spr = sprites[i];
 
-		Matrix t;
+		sm::mat4 t;
 		spr->GetTransMatrix(t);
 		spr->GetSymbol().Draw(RenderParams(t));
 	}

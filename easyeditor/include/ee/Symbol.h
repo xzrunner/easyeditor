@@ -6,12 +6,13 @@
 #include "ResourcesMgr.h"
 #include "Rect.h"
 
+#include <SM_Matrix.h>
+
 #include <set>
 
 namespace ee
 {
 
-class Matrix;
 class Sprite;
 class RenderParams;
 
@@ -34,7 +35,7 @@ public:
 	virtual void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
 		const Sprite* root = NULL) const = 0;
 	virtual Rect GetSize(const Sprite* sprite = NULL) const = 0;
-	virtual void InvalidRect(const Matrix& mt) const {}
+	virtual void InvalidRect(const sm::mat4& mt) const {}
 
 	bool LoadFromFile(const std::string& filepath);
 

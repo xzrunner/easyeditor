@@ -106,7 +106,7 @@ ee::PropertySetting* Sprite::CreatePropertySetting(ee::EditPanelImpl* stage)
 	return new PropertySetting(stage, this);
 }
 
-void Sprite::Draw(const ee::Matrix& mt) const
+void Sprite::Draw(const sm::mat4& mt) const
 {
 	m_ps->Draw(mt);
 }

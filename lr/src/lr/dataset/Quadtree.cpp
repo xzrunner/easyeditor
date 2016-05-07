@@ -1,7 +1,6 @@
 #include "Quadtree.h"
 
 #include <ee/EE_RVG.h>
-#include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Math2D.h>
 #include <ee/color_config.h>
@@ -87,7 +86,7 @@ void Quadtree::DebugDraw() const
 		ee::RenderColor color;
 		color.multi = ee::LIGHT_BLUE;
 		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
-			ee::SpriteRenderer::Draw(m_selected->m_sprites[i], NULL, ee::RenderParams(ee::Matrix(), color));
+			ee::SpriteRenderer::Draw(m_selected->m_sprites[i], NULL, ee::RenderParams(sm::mat4(), color));
 		}
 	}
 }
@@ -193,7 +192,7 @@ IsContain(const ee::Sprite* spr) const
 
 	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
 
-	ee::Matrix mt;
+	sm::mat4 mt;
 	spr->GetTransMatrix(mt);
 	std::vector<ee::Vector> bound;
 	ee::Math2D::TransVertices(mt, poly->GetVertices(), bound);
@@ -259,7 +258,7 @@ GetContainArea(const ee::Sprite* spr) const
 
 	eshape::PolygonShape* poly = static_cast<eshape::PolygonShape*>(shapes[0]);
 
-	ee::Matrix mt;
+	sm::mat4 mt;
 	spr->GetTransMatrix(mt);
 	std::vector<ee::Vector> bound;
 	ee::Math2D::TransVertices(mt, poly->GetVertices(), bound);

@@ -120,10 +120,10 @@ void StageCanvas::DrawSprite(ee::Sprite* spr, bool draw_edge) const
 
 	ee::SettingData& cfg = ee::Config::Instance()->GetSettings();
 	if (cfg.visible_node_name && !spr->name.empty() && spr->name[0] != '_') {
-		ee::Matrix t;
+		sm::mat4 t;
 		spr->GetTransMatrix(t);
 		float s = std::max(1.0f, ee::CameraMgr::Instance()->GetCamera()->GetScale()) * cfg.node_name_scale;
-		t.Scale(s, s);
+		t.Scale(s, s, 1);
 		ee::GTxt::Instance()->Draw(t, spr->name);
 	}
 }

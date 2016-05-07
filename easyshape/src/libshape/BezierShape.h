@@ -26,7 +26,7 @@ public:
 	virtual const char* GetShapeDesc() const { return "bezier"; }
 	virtual bool IsContain(const ee::Vector& pos) const;
 	virtual void Translate(const ee::Vector& offset);
-	virtual void Draw(const ee::Matrix& mt,
+	virtual void Draw(const sm::mat4& mt,
 		const ee::RenderColor& color = ee::RenderColor()) const;
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);

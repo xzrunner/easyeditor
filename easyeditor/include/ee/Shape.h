@@ -6,6 +6,8 @@
 #include "Object.h"
 #include "RenderColor.h"
 
+#include <SM_Matrix.h>
+
 #include <json/json.h>
 
 namespace ee
@@ -14,7 +16,6 @@ namespace ee
 class Vector;
 class Rect;
 class PropertySetting;
-class Matrix;
 class EditPanelImpl;
 class RenderColor;
 
@@ -44,7 +45,7 @@ public:
 
 	virtual const Rect& GetRect() const = 0;
 
-	virtual void Draw(const Matrix& mt, 
+	virtual void Draw(const sm::mat4& mt, 
 		const RenderColor& color = RenderColor()) const = 0;
 
 	virtual PropertySetting* CreatePropertySetting(EditPanelImpl* stage) = 0;

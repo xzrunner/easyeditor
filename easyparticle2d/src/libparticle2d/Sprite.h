@@ -4,7 +4,6 @@
 #include "Symbol.h"
 
 #include <ee/Sprite.h>
-#include <ee/Matrix.h>
 
 namespace eparticle2d
 {
@@ -34,9 +33,9 @@ public:
 
 	virtual ee::PropertySetting* CreatePropertySetting(ee::EditPanelImpl* stage);
 
-	void Draw(const ee::Matrix& mt) const;
+	void Draw(const sm::mat4& mt) const;
 
-	void SetMatrix(const ee::Matrix& mat) { m_mat = mat; }
+	void SetMatrix(const sm::mat4& mat) { m_mat = mat; }
 
 	bool GetLoop() const;
 	void SetLoop(bool loop);
@@ -54,7 +53,7 @@ protected:
 private:
 	ParticleSystem* m_ps;
 
-	ee::Matrix m_mat;
+	sm::mat4 m_mat;
 
 }; // Sprite
 

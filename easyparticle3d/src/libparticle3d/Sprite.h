@@ -38,9 +38,9 @@ public:
 
 	void Start();
 
-	void Draw(const ee::Matrix& mt) const;
+	void Draw(const sm::mat4& mt) const;
 
-	void SetMatrix(const ee::Matrix& mat);
+	void SetMatrix(const sm::mat4& mat);
 
 	sm::Quaternion& GetDir() { return m_dir; }
 	const sm::Quaternion& GetDir() const { return m_dir; }
@@ -74,7 +74,7 @@ protected:
 private:
 	p3d_sprite* m_spr;
 
-	ee::Matrix m_mat;
+	sm::mat4 m_mat;
 
 	sm::Quaternion m_dir;
 

@@ -6,12 +6,13 @@
 #include "Object.h"
 #include "RenderColor.h"
 
+#include <SM_Matrix.h>
+
 #include <stdint.h>
 
 namespace ee
 {
 
-class Matrix;
 class Sprite;
 class Texture;
 class ImageData;
@@ -40,7 +41,7 @@ public:
 
 	void Draw(const RenderParams& trans, const Sprite* spr = NULL, 
 		const Sprite* root = NULL) const;
-	void InvalidRect(const Matrix& mt) const;
+	void InvalidRect(const sm::mat4& mt) const;
 
 	const Vector& GetOffset() const { return m_offset; }
 

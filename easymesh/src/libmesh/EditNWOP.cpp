@@ -6,7 +6,6 @@
 
 #include <ee/Math2D.h>
 #include <ee/panel_msg.h>
-#include <ee/Matrix.h>
 #include <ee/EE_RVG.h>
 #include <ee/FetchAllVisitor.h>
 #include <ee/EditPanelImpl.h>

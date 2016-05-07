@@ -40,9 +40,9 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	virtual void Draw(const ee::Matrix& mt, AnimRecorder* recorder = NULL) const;
+	virtual void Draw(const sm::mat4& mt, AnimRecorder* recorder = NULL) const;
 
-	bool Update(const ee::Matrix& mat);
+	bool Update(const sm::mat4& mat);
 	
 	void SetStaticMode(bool is_static);
 

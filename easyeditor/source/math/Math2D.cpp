@@ -1,5 +1,4 @@
 #include "Math2D.h"
-#include "Matrix.h"
 
 #include <assert.h>
 
@@ -864,7 +863,7 @@ Vector Math2D::RotateVectorRightAngle(const Vector& v, bool isTurnLeft)
 	return ret;
 }
 
-float Math2D::TransLen(float len, const Matrix& m)
+float Math2D::TransLen(float len, const sm::mat4& m)
 {
 	Vector pos0(0, 0);
 	pos0 = TransVector(pos0, m);
@@ -875,16 +874,15 @@ float Math2D::TransLen(float len, const Matrix& m)
 	return GetDistance(pos0, pos1);
 }
 
-Vector Math2D::TransVector(const Vector& v, const Matrix& m)
+Vector Math2D::TransVector(const Vector& v, const sm::mat4& m)
 {
 	Vector ret;
-	const float* e = m.GetElements();
-	ret.x = e[0] * v.x + e[4] * v.y + e[12];
-	ret.y = e[1] * v.x + e[5] * v.y + e[13];
+	ret.x = m.x[0] * v.x + m.x[4] * v.y + m.x[12];
+	ret.y = m.x[1] * v.x + m.x[5] * v.y + m.x[13];
 	return ret;
 }
 
-void Math2D::TransVertices(const Matrix& mt, const std::vector<Vector>& src, std::vector<Vector>& dst)
+void Math2D::TransVertices(const sm::mat4& mt, const std::vector<Vector>& src, std::vector<Vector>& dst)
 {
 	dst.clear();
 	dst.reserve(src.size());

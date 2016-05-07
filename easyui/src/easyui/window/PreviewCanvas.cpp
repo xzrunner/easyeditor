@@ -33,10 +33,10 @@ void PreviewCanvas::OnDrawSprites() const
 
 		const ee::Vector& pos = spr->GetPosition();
 
-		ee::Matrix inv_mt = spr->GetTransInvMatrix();
-		ee::Matrix translate_mt;
+		sm::mat4 inv_mt = spr->GetTransInvMatrix();
+		sm::mat4 translate_mt;
 		translate_mt.Translate(pos.x, pos.y);
-		ee::Matrix mt = translate_mt * (m_scale_mt * inv_mt);
+		sm::mat4 mt = translate_mt * (m_scale_mt * inv_mt);
 
 		ee::SpriteRenderer::Draw(spr, NULL, ee::RenderParams(mt, spr->rp->color));
 	}

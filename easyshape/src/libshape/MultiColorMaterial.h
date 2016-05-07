@@ -14,7 +14,7 @@
 //
 //	virtual Json::Value Store(const std::string& dirpath) const;
 //
-//	virtual void Draw(const ee::Matrix& mt) const;
+//	virtual void Draw(const sm::mat4& mt) const;
 //
 //	virtual void ReloadTexture() {}
 //

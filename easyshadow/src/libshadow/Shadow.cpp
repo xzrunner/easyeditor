@@ -45,7 +45,7 @@ void Shadow::LoadFromFile(const Json::Value& value)
 	BuildInnerLine(loop);
 }
 
-void Shadow::Draw(const ee::Matrix& mt, float alpha) const
+void Shadow::Draw(const sm::mat4& mt, float alpha) const
 {
 	if (m_shader_idx == -1) {
 		InitShader();

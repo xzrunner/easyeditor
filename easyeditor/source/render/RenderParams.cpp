@@ -15,12 +15,12 @@ RenderParams::RenderParams(const RenderParams& trans)
 	, camera(trans.camera) 
 {}
 
-RenderParams::RenderParams(const Matrix& mt) 
+RenderParams::RenderParams(const sm::mat4& mt) 
 	: set_shader(true)
 	, mt(mt) 
 {}
 
-RenderParams::RenderParams(const Matrix& mt, const RenderColor& color) 
+RenderParams::RenderParams(const sm::mat4& mt, const RenderColor& color) 
 	: set_shader(true)
 	, mt(mt)
 	, color(color)

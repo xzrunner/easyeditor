@@ -90,14 +90,13 @@ bool Sprite::Update(int version)
 			return false;
 		}
 
-		const float* src = m_mat.GetElements();
 		float mt[6];
-		mt[0] = src[0];
-		mt[1] = src[1];
-		mt[2] = src[4];
-		mt[3] = src[5];
-		mt[4] = src[12];
-		mt[5] = src[13];	
+		mt[0] = m_mat.x[0];
+		mt[1] = m_mat.x[1];
+		mt[2] = m_mat.x[4];
+		mt[3] = m_mat.x[5];
+		mt[4] = m_mat.x[12];
+		mt[5] = m_mat.x[13];	
 
 		float dt = time - et->time;
 		p3d_emitter_update(et, dt, mt);
@@ -206,7 +205,7 @@ void Sprite::Start()
 	}
 }
 
-void Sprite::Draw(const ee::Matrix& mt) const
+void Sprite::Draw(const sm::mat4& mt) const
 {
 	if (!m_alone && m_spr) {
 		m_rp.mat = mt;
@@ -215,18 +214,17 @@ void Sprite::Draw(const ee::Matrix& mt) const
 	}
 }
 
-void Sprite::SetMatrix(const ee::Matrix& mat) 
+void Sprite::SetMatrix(const sm::mat4& mat) 
 { 
 	m_mat = mat;
 	if (m_spr && m_alone) {
-		const float* src = mat.GetElements();
 		float* mt = m_spr->mat;
-		mt[0] = src[0];
-		mt[1] = src[1];
-		mt[2] = src[4];
-		mt[3] = src[5];
-		mt[4] = src[12];
-		mt[5] = src[13];	
+		mt[0] = mat.x[0];
+		mt[1] = mat.x[1];
+		mt[2] = mat.x[4];
+		mt[3] = mat.x[5];
+		mt[4] = mat.x[12];
+		mt[5] = mat.x[13];	
 	}
 }
 

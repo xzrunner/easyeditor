@@ -3,7 +3,7 @@
 
 #include <json/json.h>
 
-namespace ee { class Matrix; class Symbol; }
+namespace ee { class Symbol; }
 
 namespace ep3dinv
 {
@@ -15,7 +15,7 @@ public:
 	~Particle();
 
 	void Update(float dt, float gravity);
-	void Draw(const ee::Matrix& mt) const;
+	void Draw(const sm::mat4& mt) const;
 
 	void LoadFromFile(const Json::Value& val);
 

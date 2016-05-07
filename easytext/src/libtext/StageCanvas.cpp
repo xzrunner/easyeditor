@@ -5,7 +5,6 @@
 
 #include <ee/FetchAllVisitor.h>
 #include <ee/render_utility.h>
-#include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Config.h>
 #include <ee/EE_DTex.h>
@@ -41,7 +40,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		sm::mat4 mat(m_edited->GetTransInvMatrix());
 		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
 	}
 
@@ -68,7 +67,7 @@ void StageCanvas::DrawSprBound() const
 	float hw = w * 0.5f,
 		hh = h * 0.5f;
 
-	ee::Matrix mt;
+	sm::mat4 mt;
 	m_edited->GetTransMatrix(mt);
 	ee::Vector min(-hw, -hh), max(hw, hh);
 	min = ee::Math2D::TransVector(min, mt);

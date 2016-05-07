@@ -3,7 +3,6 @@
 #include "view/typedef.h"
 
 #include <ee/StringHelper.h>
-#include <ee/Matrix.h>
 #include <ee/Math2D.h>
 
 #include <easycomplex.h>
@@ -54,7 +53,7 @@ void GroupHelper::BreakUp(ee::Sprite* group, std::vector<ee::Sprite*>& sprites)
 		float _angle = angle;
 
 		ee::Vector _pos = spr->GetPosition();
-		ee::Matrix mt;
+		sm::mat4 mt;
 		group->GetTransMatrix(mt);
 		_pos = ee::Math2D::TransVector(_pos, mt);
 

@@ -1,7 +1,6 @@
 #include "DrawShapesVisitor.h"
 #include "Shape.h"
 #include "Math2D.h"
-#include "Matrix.h"
 
 namespace ee
 {
@@ -22,7 +21,7 @@ void DrawShapesVisitor::Visit(Object* object, bool& next)
 
 	if (!m_screen_region.IsValid() || 
 		Math2D::IsRectIntersectRect(shape->GetRect(), m_screen_region)) {
-		shape->Draw(Matrix(), m_ct);
+		shape->Draw(sm::mat4(), m_ct);
 	}
 }
 

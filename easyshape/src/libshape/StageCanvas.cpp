@@ -8,7 +8,6 @@
 #include <ee/cfg_const.h>
 #include <ee/color_config.h>
 #include <ee/Sprite.h>
-#include <ee/Matrix.h>
 #include <ee/DrawShapesVisitor.h>
 #include <ee/SpriteRenderer.h>
 #include <ee/Symbol.h>
@@ -54,7 +53,7 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		sm::mat4 mat(m_edited->GetTransInvMatrix());
 		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
 	}
 
@@ -64,7 +63,7 @@ void StageCanvas::OnDrawSprites() const
 
 	if (!m_edited) {
 		const ee::Symbol& symbol = m_stage->GetSymbol();
-		symbol.Draw(ee::Matrix());
+		symbol.Draw(sm::mat4());
 	}
 
 	m_stage->DrawEditOP();

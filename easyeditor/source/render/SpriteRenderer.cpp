@@ -86,15 +86,15 @@ void SpriteRenderer::Draw(const Sprite* spr,
 	}
 }
 
-void SpriteRenderer::InvalidRect(const Sprite* sprite, const Matrix& mt)
+void SpriteRenderer::InvalidRect(const Sprite* sprite, const sm::mat4& mt)
 {
 	if (!sprite->visiable) {
 		return;
 	}
 
-	Matrix t;
+	sm::mat4 t;
 	sprite->GetTransMatrix(t);
-	t = mt * t;
+	t = t * mt;
 	
 	sprite->GetSymbol().InvalidRect(t);
 }
@@ -108,9 +108,9 @@ void SpriteRenderer::Draw(const Symbol* symbol,
 						  float xShear/* = 0.0f*/, 
 						  float yShear/* = 0.0f*/)
 {
-	Matrix mt;
+	sm::mat4 mt;
 	mt.SetTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
-	mt = trans.mt * mt;
+	mt = mt * trans.mt;
 
 	RenderParams t = trans;
 	t.mt = mt;
@@ -122,9 +122,9 @@ void SpriteRenderer::DrawImpl(const Sprite* spr,
 							  const Sprite* root,
 							  const RenderParams& trans)
 {
-	Matrix t;
+	sm::mat4 t;
 	spr->GetTransMatrix(t);
-	t = trans.mt * t;
+	t = t * trans.mt;
 
 	RenderColor col_new;
 

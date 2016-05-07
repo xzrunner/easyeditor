@@ -6,6 +6,8 @@
 #include "Object.h"
 #include "Vector.h"
 
+#include <SM_Matrix.h>
+
 #include <json/json.h>
 
 namespace ee
@@ -15,7 +17,6 @@ class Vector;
 class Rect;
 class Symbol;
 class BoundingBox;
-class Matrix;
 class PropertySetting;
 class EditPanelImpl;
 class SpriteObserver;
@@ -88,8 +89,8 @@ public:
 		m_observer = observer;
 	}
 
-	void GetTransMatrix(Matrix& mt) const;
-	Matrix GetTransInvMatrix() const;
+	void GetTransMatrix(sm::mat4& mt) const;
+	sm::mat4 GetTransInvMatrix() const;
 
 	bool IsAnchor() const { return m_is_anchor; }
 	void SetAnchor(bool anchor) { m_is_anchor = anchor; }

@@ -1,5 +1,4 @@
 #include "ScaleSpriteState.h"
-#include "Matrix.h"
 #include "Symbol.h"
 #include "Sprite.h"
 #include "CombineAOP.h"

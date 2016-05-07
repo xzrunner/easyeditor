@@ -7,7 +7,6 @@
 #include "Symbol.h"
 #include "BoundingBox.h"
 #include "Math.h"
-#include "Matrix.h"
 #include "EditPanelImpl.h"
 #include "MultiSpritesImpl.h"
 #include "PropertySettingPanel.h"

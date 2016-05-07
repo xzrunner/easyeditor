@@ -18,7 +18,7 @@
 namespace ee
 {
 
-void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt)
+void SpriteBlend::Draw(const Sprite* spr, const sm::mat4& mt)
 {
 	assert(spr->rp->shader.blend != BM_NULL);
 
@@ -47,7 +47,7 @@ void SpriteBlend::Draw(const Sprite* spr, const Matrix& mt)
 	DrawTmpToScreen(spr, mt);
 }
 
-void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt)
+void SpriteBlend::DrawSprToTmp(const Sprite* spr, const sm::mat4& mt)
 {
 	sl::ShaderMgr* mgr = sl::ShaderMgr::Instance();
 	sl::BlendShader* shader = static_cast<sl::BlendShader*>(mgr->GetShader(sl::BLEND));
@@ -70,11 +70,11 @@ void SpriteBlend::DrawSprToTmp(const Sprite* spr, const Matrix& mt)
 	dtexf_c1_unbind();
 }
 
-void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const Matrix& mt)
+void SpriteBlend::DrawTmpToScreen(const Sprite* sprite, const sm::mat4& mt)
 {
-	Matrix t;
+	sm::mat4 t;
 	sprite->GetTransMatrix(t);
-	t = mt * t;
+	t = t * mt;
 
 	Rect r = sprite->GetSymbol().GetSize();
 

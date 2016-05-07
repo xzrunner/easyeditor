@@ -55,7 +55,7 @@ void ComplexPolygonShape::Translate(const ee::Vector& offset)
 	}
 }
 
-void ComplexPolygonShape::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
+void ComplexPolygonShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	PolygonShape::Draw(mt, color);
 

@@ -99,7 +99,7 @@ void ChainShape::Translate(const ee::Vector& offset)
 	m_rect.Translate(offset);
 }
 
-void ChainShape::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
+void ChainShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	if (m_vertices.empty()) return;
 

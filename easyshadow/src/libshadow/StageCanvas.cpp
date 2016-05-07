@@ -6,7 +6,6 @@
 #include <ee/FetchAllVisitor.h>
 #include <ee/render_utility.h>
 #include <ee/Sprite.h>
-#include <ee/Matrix.h>
 #include <ee/SpriteRenderer.h>
 
 namespace eshadow
@@ -38,11 +37,11 @@ void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited && m_bg) 
 	{
-		ee::Matrix mat(m_edited->GetTransInvMatrix());
+		sm::mat4 mat(m_edited->GetTransInvMatrix());
 		ee::SpriteRenderer::Draw(m_bg, NULL, mat);
 	}
 
-	m_stage->GetSymbol()->Draw(ee::Matrix());
+	m_stage->GetSymbol()->Draw(sm::mat4());
 	m_stage->DrawEditOP();
 }
 

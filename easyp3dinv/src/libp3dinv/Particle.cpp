@@ -47,13 +47,13 @@ void Particle::Update(float dt, float gravity)
 	m_during += dt;
 }
 
-void Particle::Draw(const ee::Matrix& mt) const
+void Particle::Draw(const sm::mat4& mt) const
 {
 // 	if (m_during > m_life) {
 // 		return;
 // 	}
 
-	ee::Matrix _mt(mt);
+	sm::mat4 _mt(mt);
 	_mt.Translate(0, 0);
 
 	float scale = m_during / m_life * (m_start_scale - m_end_scale) + m_end_scale;

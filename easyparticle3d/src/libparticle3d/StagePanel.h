@@ -3,7 +3,8 @@
 
 #include <ee/EditPanel.h>
 #include <ee/SpritesPanelImpl.h>
-#include <ee/Matrix.h>
+
+#include <SM_Matrix.h>
 
 namespace eparticle3d
 {
@@ -21,7 +22,7 @@ public:
 	virtual bool Update(int version);
 
 	void SetPSMat(const ee::Vector& pos);
-	const ee::Matrix& GetPSMat() const { return m_ps_mat; }
+	const sm::mat4& GetPSMat() const { return m_ps_mat; }
 
 private:
 	void UpdateControl();
@@ -32,7 +33,7 @@ public:
 	float xRot, yRot;
 
 private:
-	ee::Matrix m_ps_mat;
+	sm::mat4 m_ps_mat;
 
 }; // StagePanel
 

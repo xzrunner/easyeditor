@@ -60,9 +60,9 @@ bool PasteSymbolOP::OnDraw() const
 	if (symbol && m_pos.IsValid())
 	{
 		if (m_scale) {
-			SpriteRenderer::Draw(symbol, Matrix(), m_pos, 0.0f, *m_scale);
+			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, 0.0f, *m_scale);
 		} else {
-			SpriteRenderer::Draw(symbol, Matrix(), m_pos);
+			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos);
 		}
 	}
 

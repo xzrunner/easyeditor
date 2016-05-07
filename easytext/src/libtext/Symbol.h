@@ -33,7 +33,7 @@ protected:
 	virtual void LoadResources();
 
 private:
-	void DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) const;
+	void DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const;
 	void DrawText(const ee::Sprite* sprite, const ee::RenderParams& trans) const;
 
 private:

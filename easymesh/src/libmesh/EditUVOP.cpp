@@ -3,7 +3,6 @@
 #include "Mesh.h"
 #include "MeshRenderer.h"
 
-#include <ee/Matrix.h>
 #include <ee/RenderParams.h>
 
 namespace emesh

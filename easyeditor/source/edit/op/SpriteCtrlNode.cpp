@@ -1,6 +1,5 @@
 #include "SpriteCtrlNode.h"
 #include "Rect.h"
-#include "Matrix.h"
 #include "Sprite.h"
 #include "Symbol.h"
 #include "Math2D.h"
@@ -22,7 +21,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const Sprite* sprite, Vector nodes[8])
 		std::swap(r.ymin, r.ymax);
 	}
 
-	Matrix t;
+	sm::mat4 t;
 	t.SetTransformation(sprite->GetPosition().x, sprite->GetPosition().y, sprite->GetAngle(),
 		sprite->GetScale().x, sprite->GetScale().y, 0, 0, sprite->GetShear().x, sprite->GetShear().y);
 	// scale
@@ -57,7 +56,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodesExt(const Sprite* sprite, Vector nodes[4]
 		std::swap(r.ymin, r.ymax);
 	}
 
-	Matrix t;
+	sm::mat4 t;
 	t.SetTransformation(sprite->GetPosition().x, sprite->GetPosition().y, sprite->GetAngle(),
 		sprite->GetScale().x, sprite->GetScale().y, 0, 0, sprite->GetShear().x, sprite->GetShear().y);
 	// perspective

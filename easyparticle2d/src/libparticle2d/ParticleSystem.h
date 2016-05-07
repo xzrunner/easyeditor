@@ -3,8 +3,9 @@
 
 #include <ee/Object.h>
 #include <ee/UICallback.h>
-#include <ee/Matrix.h>
 #include <ee/Vector.h>
+
+#include <SM_Matrix.h>
 
 struct p2d_emitter_cfg;
 struct p2d_emitter;
@@ -29,9 +30,9 @@ public:
 	virtual void SetValue(int key, const ee::UICallback::Data& data);
 	virtual void GetValue(int key, ee::UICallback::Data& data);
 
-	virtual void Draw(const ee::Matrix& mt) const;
+	virtual void Draw(const sm::mat4& mt) const;
 
-	bool Update(const ee::Matrix& mat);
+	bool Update(const sm::mat4& mat);
 
 	void Start();
 	void Stop();

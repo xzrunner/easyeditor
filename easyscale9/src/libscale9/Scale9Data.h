@@ -1,7 +1,7 @@
 #ifndef _EASYSCALE9_SCALE9_DATA_H_
 #define _EASYSCALE9_SCALE9_DATA_H_
 
-namespace ee { class Matrix; class Sprite; class Vector; class RenderParams; }
+namespace ee { class Sprite; class Vector; class RenderParams; }
 
 #include <json/json.h>
 

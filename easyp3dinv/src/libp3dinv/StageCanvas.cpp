@@ -5,7 +5,6 @@
 #include <ee/DrawSpritesVisitor.h>
 #include <ee/Camera.h>
 #include <ee/CameraMgr.h>
-#include <ee/Matrix.h>
 
 namespace ep3dinv
 {
@@ -24,7 +23,7 @@ void StageCanvas::OnDrawSprites() const
 
 	if (m_stage->m_ps) {
 		m_stage->m_ps->Update(1.0f / 30);
-		m_stage->m_ps->Draw(ee::Matrix());
+		m_stage->m_ps->Draw(sm::mat4());
 	}
 
 	m_stage->DrawEditOP();

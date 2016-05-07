@@ -6,7 +6,6 @@
 #include "Config.h"
 #include "SettingData.h"
 #include "ImageSprite.h"
-#include "Matrix.h"
 #include "Image.h"
 #include "color_config.h"
 #include "Math2D.h"
@@ -41,7 +40,7 @@ void DrawSelectedSpriteVisitor::Visit(Object* object, bool& next)
 			float hw = img->GetOriginWidth() * 0.5f,
 				hh = img->GetOriginHeight() * 0.5f;
 
-			Matrix mt;
+			sm::mat4 mt;
 			s->GetTransMatrix(mt);
 			ee::Vector min(-hw, -hh), max(hw, hh);
 			min = ee::Math2D::TransVector(min, mt);

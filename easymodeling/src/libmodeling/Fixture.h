@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace ee { class Shape; class Vector; class Rect; class Matrix; }
+namespace ee { class Shape; class Vector; class Rect; }
 
 namespace emodeling
 {
@@ -21,7 +21,7 @@ public:
 	bool IsContain(const ee::Vector& pos) const;
 	bool IsIntersect(const ee::Rect& rect) const;
 
-	void Draw(const ee::Matrix& mt, const ee::Colorf& cFace, 
+	void Draw(const sm::mat4& mt, const ee::Colorf& cFace, 
 		const ee::Colorf& cEdge) const;
 
 private:

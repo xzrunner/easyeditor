@@ -20,7 +20,7 @@ public:
 
 	virtual void GetBound(float process, ee::Vector bound[4]) const;
 
-	virtual void Draw(const ee::Matrix& mt, float process) const;
+	virtual void Draw(const sm::mat4& mt, float process) const;
 
 	virtual ee::Rect GetRegion(float process) const;
 

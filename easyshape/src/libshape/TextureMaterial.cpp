@@ -43,7 +43,7 @@ void TextureMaterial::Translate(const ee::Vector& offset)
 	}
 }
 
-void TextureMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
+void TextureMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	if (m_tris.empty()) {
 		return;

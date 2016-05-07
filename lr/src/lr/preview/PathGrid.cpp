@@ -4,7 +4,6 @@
 #include <ee/EE_RVG.h>
 #include <ee/color_config.h>
 #include <ee/Math2D.h>
-#include <ee/Matrix.h>
 
 namespace lr
 {

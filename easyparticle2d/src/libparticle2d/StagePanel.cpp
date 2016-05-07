@@ -30,7 +30,7 @@ bool StagePanel::Update(int version)
 
 void StagePanel::SetPSMat(const ee::Vector& pos)
 {
-	m_ps_mat.SetTranslation(pos.x, pos.y);
+	m_ps_mat.Translate(pos.x, pos.y, 0);
 }
 
 }

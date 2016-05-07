@@ -2,7 +2,6 @@
 #define _EASYUI_WINDOW_PREVIEW_CANVAS_H_
 
 #include <ee/CameraCanvas.h>
-#include <ee/Matrix.h>
 
 namespace ee { class PlayControl; class Sprite; }
 
@@ -23,7 +22,7 @@ protected:
 	virtual void OnTimer();
 
 private:
-	ee::Matrix m_scale_mt;
+	sm::mat4 m_scale_mt;
 
 	ee::PlayControl& m_control;
 

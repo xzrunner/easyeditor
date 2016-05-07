@@ -5,7 +5,6 @@
 #include "Network.h"
 #include "MeshRenderer.h"
 
-#include <ee/Matrix.h>
 #include <ee/Image.h>
 #include <ee/RenderParams.h>
 #include <ee/panel_msg.h>

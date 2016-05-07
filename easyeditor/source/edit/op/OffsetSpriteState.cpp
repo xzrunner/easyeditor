@@ -1,5 +1,4 @@
 #include "OffsetSpriteState.h"
-#include "Matrix.h"
 #include "Sprite.h"
 #include "OffsetSpriteAOP.h"
 #include "panel_msg.h"

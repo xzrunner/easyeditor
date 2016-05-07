@@ -20,7 +20,7 @@ namespace ee
 
 struct render_params
 {
-	const Matrix* mt;
+	const sm::mat4* mt;
 	const Colorf* mul;
 	const Colorf* add;
 };
@@ -78,7 +78,7 @@ render_glyph(int id, float* _texcoords, float x, float y, float w, float h, stru
 }
 
 static void 
-render_decoration(const Matrix& mat, float x, float y, float w, float h, struct gtxt_draw_style* ds)
+render_decoration(const sm::mat4& mat, float x, float y, float w, float h, struct gtxt_draw_style* ds)
 {
 	struct gtxt_decoration* d = &ds->decoration;
 	if (d->type == GRDT_NULL) {
@@ -189,10 +189,10 @@ ext_sym_render(void* ext_sym, float x, float y, void* ud) {
 	}
 
 	SpriteRenderer::Draw((Symbol*)ext_sym, 
-		RenderParams(*((Matrix*)ud)), Vector(x, y));
+		RenderParams(*((sm::mat4*)ud)), Vector(x, y));
 }
 
-void GTxt::Draw(const gtxt_label_style& style, const Matrix& mt, const Colorf& mul, 
+void GTxt::Draw(const gtxt_label_style& style, const sm::mat4& mt, const Colorf& mul, 
 				const Colorf& add, const std::string& text, int time) const
 {
 	render_params rp;
@@ -204,7 +204,7 @@ void GTxt::Draw(const gtxt_label_style& style, const Matrix& mt, const Colorf& m
 	gtxt_label_draw_richtext(utf8.c_str(), &style, time, render, (void*)&rp);
 }
 
-void GTxt::Draw(const Matrix& mt, const std::string& str) const
+void GTxt::Draw(const sm::mat4& mt, const std::string& str) const
 {
 	if (str.empty()) {
 		return;

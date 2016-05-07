@@ -2,10 +2,11 @@
 #define _EASYSHADOW_SHADOW_H_
 
 #include <ee/Object.h>
-#include <ee/Matrix.h>
 #include <ee/Vector.h>
 #include <ee/Rect.h>
 #include <ee/Color.h>
+
+#include <SM_Matrix.h>
 
 #include <json/json.h>
 
@@ -21,7 +22,7 @@ public:
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);
 
-	void Draw(const ee::Matrix& mt, float alpha) const;
+	void Draw(const sm::mat4& mt, float alpha) const;
 
 	void BuildFace();
 	void BuildOutterLine();

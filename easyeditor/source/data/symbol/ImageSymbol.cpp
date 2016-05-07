@@ -53,7 +53,7 @@ Rect ImageSymbol::GetSize(const Sprite* sprite/* = NULL*/) const
 	return m_region;
 }
 
-void ImageSymbol::InvalidRect(const Matrix& mt) const
+void ImageSymbol::InvalidRect(const sm::mat4& mt) const
 {
 	m_image->InvalidRect(mt);
 }

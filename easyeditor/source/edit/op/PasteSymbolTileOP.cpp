@@ -149,9 +149,9 @@ bool PasteSymbolTileOP::OnDraw() const
 	if (symbol && m_pos.IsValid())
 	{
 		if (m_scale) {
-			SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_rotate, *m_scale);
+			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, m_rotate, *m_scale);
 		} else {
-			SpriteRenderer::Draw(symbol, Matrix(), m_pos, m_rotate);
+			SpriteRenderer::Draw(symbol, sm::mat4(), m_pos, m_rotate);
 		}
 	}
 

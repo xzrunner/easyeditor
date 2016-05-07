@@ -7,7 +7,7 @@
 #include <ee/Cloneable.h>
 #include <ee/Color.h>
 
-namespace ee { class Symbol; class Vector; class Rect; class Matrix; class RenderParams; }
+namespace ee { class Symbol; class Vector; class Rect; class RenderParams; }
 
 namespace emesh
 {

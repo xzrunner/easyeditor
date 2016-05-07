@@ -79,15 +79,14 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 	trans.color.add = col_add(trans.color.add, rp->ct.add);
 	// todo color trans
 
-	ee::Matrix mt = rp->mat;
+	sm::mat4 mt = rp->mat;
 	if (!rp->p3d->local_mode_draw) {
-		float* src = const_cast<float*>(mt.GetElements());
-		src[0] = mat[0];
-		src[1] = mat[1];
-		src[4] = mat[2];
-		src[5] = mat[3];
-		src[12]= mat[4];
-		src[13]= mat[5];
+		mt.x[0] = mat[0];
+		mt.x[1] = mat[1];
+		mt.x[4] = mat[2];
+		mt.x[5] = mat[3];
+		mt.x[12]= mat[4];
+		mt.x[13]= mat[5];
 	}
 	trans.mt = mt;
 
@@ -95,7 +94,7 @@ render_func(void* symbol, float* mat, float x, float y, float angle, float scale
 
 	// todo bind
 	// 	if (p->bind_ps) {
-	// 		ee::Matrix _mt;
+	// 		sm::mat4 _mt;
 	// 		_mt.translate(p->pos.x, p->pos.y);
 	// 		Draw(p->bind_ps, _mt, recorder);
 	// 	}
@@ -129,8 +128,8 @@ remove_func(p3d_particle* p, void* ud)
 static void
 update_srt_func(void* params, float x, float y, float scale) {
 	RenderParams* rp = static_cast<RenderParams*>(params);
-	rp->mat.Translate(x, y);
-	rp->mat.Scale(scale, scale);
+	rp->mat.Translate(x, y, 0);
+	rp->mat.Scale(scale, scale, 1);
 }
 
 static void

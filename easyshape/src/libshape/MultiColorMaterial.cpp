@@ -17,7 +17,7 @@
 //	return val;
 //}
 //
-//void MultiColorMaterial::Draw(const ee::Matrix& mt) const
+//void MultiColorMaterial::Draw(const sm::mat4& mt) const
 //{
 //	ee::RVG::Triangles(mt, m_tris, m_color);
 //}

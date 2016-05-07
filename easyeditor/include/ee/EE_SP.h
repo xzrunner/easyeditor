@@ -7,7 +7,6 @@ namespace ee
 {
 
 class Sprite;
-class Matrix;
 class Rect;
 
 class SpatialPartition

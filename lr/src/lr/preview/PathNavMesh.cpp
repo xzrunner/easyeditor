@@ -2,7 +2,6 @@
 
 #include <ee/BoundingBox.h>
 #include <ee/Math2D.h>
-#include <ee/Matrix.h>
 #include <ee/color_config.h>
 #include <ee/EE_RVG.h>
 #include <ee/Triangulation.h>
@@ -42,7 +41,7 @@ void PathNavMesh::DisableRegion(const ee::Sprite* spr, bool disable)
 	if (itr == m_bounds.end() && !disable) {
 		std::vector<ee::Vector> fixed;
 		ee::Math2D::RemoveDuplicatePoints(bound, fixed);
-		ee::Matrix mat;
+		sm::mat4 mat;
 		spr->GetTransMatrix(mat);
 		for (int i = 0; i < fixed.size(); ++i) {
 			fixed[i] = ee::Math2D::TransVector(fixed[i], mat);

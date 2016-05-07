@@ -152,18 +152,18 @@ void ParticleSystem::GetValue(int key, ee::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::Draw(const ee::Matrix& mt, AnimRecorder* recorder) const
+void ParticleSystem::Draw(const sm::mat4& mt, AnimRecorder* recorder) const
 {
 //  // todo record
 // 	if (m_anim_recorder) {
 // 		m_anim_recorder->FinishFrame();
 // 	}
 
-	m_rp.mat = const_cast<ee::Matrix&>(mt);
+	m_rp.mat = const_cast<sm::mat4&>(mt);
 	p3d_emitter_draw(m_spr->et, &m_rp);
 }
 
-bool ParticleSystem::Update(const ee::Matrix& mat)
+bool ParticleSystem::Update(const sm::mat4& mat)
 {
 	float time = PS::Instance()->GetTime();
 	assert(m_spr->et->time <= time);
@@ -171,14 +171,13 @@ bool ParticleSystem::Update(const ee::Matrix& mat)
 		return false;
 	}
 
-	const float* src = mat.GetElements();
 	float mt[6];
-	mt[0] = src[0];
-	mt[1] = src[1];
-	mt[2] = src[4];
-	mt[3] = src[5];
-	mt[4] = src[12];
-	mt[5] = src[13];	
+	mt[0] = mat.x[0];
+	mt[1] = mat.x[1];
+	mt[2] = mat.x[4];
+	mt[3] = mat.x[5];
+	mt[4] = mat.x[12];
+	mt[5] = mat.x[13];	
 
 	float dt = time - m_spr->et->time;
 	p3d_emitter_update(m_spr->et, dt, mt);

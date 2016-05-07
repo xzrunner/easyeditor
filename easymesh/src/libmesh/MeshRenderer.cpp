@@ -133,7 +133,7 @@ void MeshRenderer::DrawMeshToTmp(const Mesh* mesh, const ee::RenderParams& param
 	dtexf_c1_clear(0, -2, 2, 0);
 
 	ee::RenderParams _params = params;
-	_params.mt.SetIdentity();
+	_params.mt.Identity();
 	ee::SpriteRenderer::Draw(mesh->GetBaseSymbol(), _params);
 
 	sl::ShaderMgr::Instance()->GetShader()->Commit();

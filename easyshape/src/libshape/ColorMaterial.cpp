@@ -24,7 +24,7 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 	return val;
 }
 
-void ColorMaterial::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
+void ColorMaterial::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	std::vector<ee::Vector> tris;
 	ee::Math2D::TransVertices(mt, m_tris, tris);

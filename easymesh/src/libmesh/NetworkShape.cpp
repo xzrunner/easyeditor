@@ -30,7 +30,7 @@ NetworkShape* NetworkShape::Clone() const
 	return new NetworkShape(*this);
 }
 
-void NetworkShape::Draw(const ee::Matrix& mt, const ee::RenderColor& color) const
+void NetworkShape::Draw(const sm::mat4& mt, const ee::RenderColor& color) const
 {
 	eshape::ChainShape::Draw(mt, color);
 

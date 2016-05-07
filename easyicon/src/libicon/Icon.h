@@ -7,7 +7,9 @@
 #include <ee/Vector.h>
 #include <ee/Rect.h>
 
-namespace ee { class Image; class Matrix; }
+#include <SM_Matrix.h>
+
+namespace ee { class Image; }
 
 namespace eicon
 {
@@ -27,7 +29,7 @@ public:
 	// return [0, 1]
 	virtual void GetBound(float process, ee::Vector bound[4]) const = 0;
 
-	virtual void Draw(const ee::Matrix& mt, float process) const;
+	virtual void Draw(const sm::mat4& mt, float process) const;
 
 	virtual ee::Rect GetRegion(float process) const;
 

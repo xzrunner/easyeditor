@@ -80,7 +80,7 @@ void Symbol::LoadResources()
 	m_align_vert = (VertAlignType)(value["align_vert"].asInt());
 }
 
-void Symbol::DrawBackground(const ee::Sprite* sprite, const ee::Matrix& mt) const
+void Symbol::DrawBackground(const ee::Sprite* sprite, const sm::mat4& mt) const
 {
 	if (!sprite) {
 		return;

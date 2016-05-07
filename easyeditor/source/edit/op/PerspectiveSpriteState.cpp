@@ -1,6 +1,5 @@
 #include "PerspectiveSpriteState.h"
 #include "Math2D.h"
-#include "Matrix.h"
 #include "Sprite.h"
 #include "Symbol.h"
 #include "PerspectiveSpriteAOP.h"
@@ -39,11 +38,11 @@ bool PerspectiveSpriteState::OnMouseDrag(const Vector& pos)
 void PerspectiveSpriteState::Perspective(const Vector& curr)
 {
 	Rect r = m_sprite->GetSymbol().GetSize(m_sprite);
-	Matrix t;
+	sm::mat4 t;
 	t.SetTransformation(m_sprite->GetPosition().x, m_sprite->GetPosition().y, m_sprite->GetAngle(),
 		m_sprite->GetScale().x, m_sprite->GetScale().y, 0, 0, m_sprite->GetShear().x, m_sprite->GetShear().y);
 
-	Vector old = Math2D::TransVector(curr, t.GetInvert());
+	Vector old = Math2D::TransVector(curr, t.Inverted());
 	Vector persp;
 	if (m_ctrl_node.type == SpriteCtrlNode::LEFT_DOWN) {
 		persp.x = r.xmin - old.x;

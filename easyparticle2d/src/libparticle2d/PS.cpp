@@ -46,17 +46,16 @@ static void
 render_func(void* symbol, float* mat, float x, float y, float angle, float scale, 
             struct ps_color4f* mul_col, struct ps_color4f* add_col, const void* ud)
 {
-	ee::Matrix mt;
+	sm::mat4 mt;
 	if (ud) {
-		mt = *(ee::Matrix*)ud;
+		mt = *(sm::mat4*)ud;
 	} else {
-		float* m = (float*)mt.GetElements();
-		m[0] = mat[0];
-		m[1] = mat[1];
-		m[4] = mat[2];
-		m[5] = mat[3];
-		m[12] = mat[4];
-		m[13] = mat[5];		
+		mt.x[0] = mat[0];
+		mt.x[1] = mat[1];
+		mt.x[4] = mat[2];
+		mt.x[5] = mat[3];
+		mt.x[12] = mat[4];
+		mt.x[13] = mat[5];		
 	}
 
 	ee::Symbol* sym = static_cast<ee::Symbol*>(symbol);

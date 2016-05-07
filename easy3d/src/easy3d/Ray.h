@@ -1,8 +1,6 @@
 #ifndef _EASY3D_RAY_H_
 #define _EASY3D_RAY_H_
 
-#include <ee/Matrix.h>
-
 namespace e3d
 {
 

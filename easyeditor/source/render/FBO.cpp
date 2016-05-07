@@ -2,7 +2,6 @@
 #include "Symbol.h"
 #include "Shape.h"
 #include "Exception.h"
-#include "Matrix.h"
 #include "SpriteRenderer.h"
 #include "RenderContextStack.h"
 #include "GL.h"
@@ -188,10 +187,10 @@ void FBO::DrawFBO(const Symbol* symbol, bool whitebg, float scale)
 	ctx_stack->SetProjection(w, h);
 	GL::Viewport(0, 0, w, h);
 
-	Matrix mt;
+	sm::mat4 mt;
 	float dx = -symbol->GetSize().CenterX();
 	float dy = symbol->GetSize().CenterY();
-	mt.Translate(dx * scale, dy * scale);
+	mt.Translate(dx * scale, dy * scale, 0);
 	SpriteRenderer::Draw(symbol, mt, Vector(0, 0), 0.0f, scale, -scale);
 
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
@@ -240,9 +239,9 @@ void FBO::DrawFBO(const Sprite* sprite, bool clear, int width, int height,
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 
-	Matrix mt;
-	mt.SetScale(scale, -scale);
-	mt.Translate(-dx, -dy);
+	sm::mat4 mt;
+	mt.Scale(scale, -scale, 1);
+	mt.Translate(-dx, -dy, 0);
 	RenderParams params(mt);
 	params.set_shader = false;
 	SpriteRenderer::Draw(sprite, NULL, params);
@@ -290,9 +289,7 @@ void FBO::DrawFBO(const Shape* shape, bool clear, int width, int height)
 	ctx_stack->SetProjection(width, height);
 	GL::Viewport(0, 0, width, height);
 
-	Matrix mt;
-	mt.SetScale(1, -1);
-	shape->Draw(mt);
+	shape->Draw(sm::mat4::Scaled(1, -1, 1));
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 

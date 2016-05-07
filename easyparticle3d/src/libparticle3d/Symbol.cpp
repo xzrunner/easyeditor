@@ -62,13 +62,12 @@ void Symbol::Draw(const ee::RenderParams& trans, const ee::Sprite* spr,
 		RenderParams* rp = static_cast<RenderParams*>(p3d->draw_params);
 		rp->mat = trans.mt;
 		rp->ct = trans.color;
-		const float* src = trans.mt.GetElements();
-		p3d->mat[0] = src[0];
-		p3d->mat[1] = src[1];
-		p3d->mat[2] = src[4];
-		p3d->mat[3] = src[5];
-		p3d->mat[4] = src[12];
-		p3d->mat[5] = src[13];	
+		p3d->mat[0] = trans.mt.x[0];
+		p3d->mat[1] = trans.mt.x[1];
+		p3d->mat[2] = trans.mt.x[4];
+		p3d->mat[3] = trans.mt.x[5];
+		p3d->mat[4] = trans.mt.x[12];
+		p3d->mat[5] = trans.mt.x[13];	
 		return;
 	}
 

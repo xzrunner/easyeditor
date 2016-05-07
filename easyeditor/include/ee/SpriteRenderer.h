@@ -2,7 +2,6 @@
 #define _EASYEDITOR_SPRITE_RENDERER_H_
 
 #include "RenderColor.h"
-#include "Matrix.h"
 #include "Vector.h"
 #include "RenderParams.h"
 
@@ -13,7 +12,6 @@ class Sprite;
 class Symbol;
 class SpriteBatch;
 class Vector;
-class Matrix;
 class FBO;
 
 class SpriteRenderer
@@ -24,7 +22,7 @@ public:
 			         const RenderParams& trans = RenderParams());
 
 	static void InvalidRect(const Sprite* sprite, 
-		                    const Matrix& mt = Matrix());
+		                    const sm::mat4& mt = sm::mat4());
 
 	static void Draw(const Symbol* symbol, 
 		             const RenderParams& trans = RenderParams(),
