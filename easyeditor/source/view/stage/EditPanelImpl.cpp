@@ -12,7 +12,7 @@
 #include "OrthoCamera.h"
 #include "Pseudo3DCamera.h"
 
-#include <sm.h>
+#include <sm_c_vector.h>
 
 #include <fstream>
 
