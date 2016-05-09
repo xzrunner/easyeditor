@@ -245,14 +245,6 @@
 				RelativePath="..\..\..\include\ee\Rect.inl"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Vector.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\include\ee\Vector.inl"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="external"
